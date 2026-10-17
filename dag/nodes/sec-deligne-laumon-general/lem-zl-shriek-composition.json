@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-zl-shriek-composition",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Composition of exceptional direct images",
@@ -14,28 +14,110 @@
  },
  "stmt_deps": [
   "def-weil-pbc-qbar-category",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-field-fiber",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-weil-sheaf-complex"
  ],
  "proof": [
   {
-   "text": "This is the composition constraint in the six-operation formalism,\nitem (3) of [prop-functor-package] of the framework chapter.",
+   "text": "Use the global finite-field and coefficient conventions: $k_0=\\mathbf F_q$, $k=\\overline{k_0}$ and $\\ell\\ne\\operatorname{char}(k_0)$. Write $X,Y,Z,f,g$ for the geometric fibers of the given schemes and morphisms. By [lem-pod-separated-finite-type-base-change], these are separated finite-type $k$-schemes and separated finite-type morphisms, so they satisfy the geometric hypotheses of [prop-functor-package]. The composite $gf$ is the geometric fiber of $g_0f_0$, and the composition clause is stated for the pair $f,g$ of such morphisms. The coefficient category is $D^b_c(-,\\overline{\\mathbf Q}_\\ell)=\\mathcal C_{(-)}$, the common-stage category of [def-weil-algebraically-closed-coefficients]: it is the category on which the functors $Rf_!$ of [def-weil-integral-rational-qbar-compact-support] act, the $\\overline{\\mathbf Q}_\\ell$ stage of the package's datum, and the base of the Weil categories of [def-weil-weil-sheaf-complex]. The pair-category notation of [def-weil-pbc-qbar-category] in the statement dependencies is not identified with it anywhere in this proof. On $\\mathcal C_{(-)}$, clause (3) of the package supplies a natural isomorphism $\\beta:R(gf)_!\\xrightarrow{\\sim}Rg_!Rf_!$. Its opening preservation assertion ensures that $Rf_!K$ is again a bounded constructible input for $Rg_!$. This applies the field-stage clause itself; it does not identify discrete non-torsion etale coefficients with the completed and transported coefficient category.",
    "uses": [
-    "prop-functor-package"
+    "lem-pod-separated-finite-type-base-change",
+    "prop-functor-package",
+    "def-weil-algebraically-closed-coefficients"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-composition/lem-zl-shriek-composition.proof.md",
+    "place": "Proof: the composition constraint, item (3) of prop-functor-package; coefficient-domain clarification"
+   }
+  },
+  {
+   "text": "Equip each compact-support image with its canonical Weil structure by [lem-fix-weil-operations]. Its explicit assertion that composition comparisons are equivariant applies to the comparison $\\beta$ from step 1: all morphisms are defined over $k_0$, the coefficient is $\\overline{\\mathbf Q}_\\ell$, and bounded constructibility was checked in step 1. For a Weil complex $(K,\\theta_K)$, write $\\theta_A$ for the resulting structure on $A=R(gf)_!K$ and $\\theta_B$ for the iterated structure on $B=Rg_!Rf_!K$. With $F_Z^*$ denoting geometric-Frobenius pullback, equivariance is $\\beta_K\\theta_A=\\theta_B F_Z^*(\\beta_K)$. This is exactly the morphism condition in [def-weil-weil-sheaf-complex]. Composing that equality with $\\beta_K^{-1}$ on the left and $F_Z^*(\\beta_K^{-1})$ on the right gives $\\beta_K^{-1}\\theta_B=\\theta_A F_Z^*(\\beta_K^{-1})$, so the inverse also is a Weil morphism. Naturality of $\\beta$ restricts to Weil morphisms because the operations act on their underlying maps. Thus $\\beta$ is the required functorial Frobenius-compatible isomorphism.",
+   "uses": [
+    "lem-fix-weil-operations",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-composition/lem-zl-shriek-composition.proof.md",
+    "place": "Proof: composition constraint; equivariance supplied by lem-fix-weil-operations, composition-comparison clause"
+   }
   }
  ],
  "proof_deps": [
-  "prop-functor-package"
+  "lem-pod-separated-finite-type-base-change",
+  "prop-functor-package",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-fix-weil-operations",
+  "def-weil-weil-sheaf-complex"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-l-dl-general-composition/lem-zl-shriek-composition.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-composition/lem-zl-shriek-composition.proof.md",
+  "place": "Proof, expanded using the statements of prop-functor-package clause (3) and lem-fix-weil-operations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lowerShriek|[Cc]ompact[Ss]upport|[Ss]hriek",
+   "results": "25 hits. Mathlib/Dynamics/FixedPoints/Support.lean, Mathlib/Analysis/Normed/Lp/SmoothApprox.lean, Mathlib/Analysis/Normed/Lp/SmoothApprox.lean, Mathlib/Analysis/Normed/Lp/SmoothApprox.lean, Mathlib/Analysis/Normed/Lp/SmoothApprox.lean, Mathlib/Analysis/Normed/Lp/SmoothApprox.lean, Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean, Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of exceptional direct images on bounded constructible l-adic Weil complexes of schemes over a finite field",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.IsProper.comp_iff, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.IsProper.stableUnderComposition, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsOpenImmersion.instHasOfPostcompPropertyScheme, AlgebraicGeometry.instIsLocallyDirectedCompSchemeOverOverTopMorphismPropertyForgetForgetForget Hits concern ordinary structure-sheaf module pushforward/pullback or geometric morphism properties, not derived compact-support functors on l-adic Weil categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, lowerShriek",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry'; malformed identifier query supplied no mathematical evidence; replaced by the later quoted-name query.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For separated finite type morphisms of schemes, the derived compactly supported direct image of a composite is naturally isomorphic to the composite of the derived compactly supported direct images, compatibly with Frobenius",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.comp_app_assoc, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Hom.comp_app_assoc, AlgebraicGeometry.Scheme.Hom.comp_appLE_assoc, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv Hits concern ordinary structure-sheaf module pushforward/pullback or geometric morphism properties, not derived compact-support functors on l-adic Weil categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|[Ss]hriek|[Ee]xceptional|[Cc]ompact[Ss]upport",
+   "results": "0 hits. None.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shriek\"",
+   "results": "0 hits. None.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional pushforward with compact support is a pseudofunctor on schemes and its composition comparison is Frobenius equivariant",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr, AlgebraicGeometry.Scheme.Modules.pseudofunctor, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.pushforward Hits concern ordinary structure-sheaf module pushforward/pullback or geometric morphism properties, not derived compact-support functors on l-adic Weil categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforwardComp|def pullbackComp|def restrictFunctorComp",
+   "results": "3 hits. 231, 241, 478 Read Mathlib/AlgebraicGeometry/Modules/Sheaf.lean lines 229-243 and 476-480: these are structure-sheaf module pushforward/pullback and restriction, not exceptional direct images.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +145,34 @@
   }
  },
  "chapter": "sec-deligne-laumon-general",
- "unit": "sk-l-dl-general-composition"
+ "unit": "sk-l-dl-general-composition",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-zl-shriek-composition",
+  "worker": "stage1",
+  "summary": "Retained the statement and its Qbar coefficient intent. Expanded the imported package citation into a typed geometric-fiber application of its actual composition clause, followed by the independently stated equivariance of composition comparisons and an explicit inverse calculation in the category of Weil pairs. Reused all ingredients; no new node is needed. Mathlib and project searches found no exact finished attachment.",
+  "blueprint": "Realizes the entire one-paragraph proof (composition constraint, item (3) of prop-functor-package); separates the geometric and coefficient hypotheses from Frobenius compatibility.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "Generic six-operation package: uses only bounded constructible preservation and clause (3) at Qbar, exactly as the item blueprint prescribes; the weight-composition unit has no replacement for this coefficient-stage composition theorem."
+   },
+   {
+    "node": "lem-fix-weil-operations",
+    "why": "Generic equivariance theorem for field-coefficient operations and composition comparisons; the weight-composition unit supplies no separate Weil-equivariance theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package",
+  "lem-fix-weil-operations"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-4a5d11516",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-4a5d11516 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the blueprint text in master, main-20261015 and main-20261017 (one sentence: item (3) of prop-functor-package), the unit sk-l-dl-general-composition and its cited unit sk-thm-sf-comp-composition (thm-sf-comp-composition is finite-level A_{E,n} only, so it cannot give the Qbar stage), the full statements of prop-functor-package, lem-fix-weil-operations (including blueprint_update), def-weil-weil-sheaf-complex, the Mathlib leaf lem-pod-separated-finite-type-base-change, every stmt_dep, def-fix-six-functor-datum and the coefficient definitions. Step 1 is sound. X, Y, Z, f, g are separated finite type over k=Fbar_q by the leaf, since f is the base change of f_0 along Y->Y_0. Package clause (3) gives R(gf)_! ~ Rg_!Rf_!, and the package's opening clause makes Rf_! preserve D^b_c. Step 2 is sound. lem-fix-weil-operations explicitly makes composition comparisons equivariant, and beta θ_A = θ_B F^*(beta) is exactly the morphism condition u θ = θ' Lg^*(u) of def-weil-weil-sheaf-complex. I checked the inverse identity, and naturality restricts to Weil morphisms. Small cases f=id, X empty, open-then-proper and point target all hold. There are no new nodes, nothing restates a clause, and nothing is circular. An rg search found no duplicate: the other composition nodes are finite-level, coefficient-change, shift or condensed-framework versions. I accept both tool_uses, prop-functor-package and lem-fix-weil-operations: the unit route has no Qbar composition theorem and no Weil-equivariance theorem. One fault, repaired (E6): stmt_deps name two separately defined Qbar categories, def-weil-pbc-qbar-category (P_T over the pbc integral category with étale-origin witnesses) and C_Y of def-weil-algebraically-closed-coefficients, which the functor and Weil-category deps use. Step 1 had only said 'the category specified in the statement dependencies'. The fix names C_Y in step 1, cites def-weil-algebraically-closed-coefficients, says the pbc notation is not identified with C_Y anywhere in the proof, and notes gf is the fiber of g_0 f_0. proof_deps is again the union of the step uses. Corrected file: fixes/dag/nodes/sec-deligne-laumon-general/lem-zl-shriek-composition.json; full checks in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

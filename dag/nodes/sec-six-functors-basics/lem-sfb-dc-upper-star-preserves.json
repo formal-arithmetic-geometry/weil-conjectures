@@ -51,12 +51,43 @@
    }
   },
   {
-   "text": "Choose a witnessing finite stratification $(i_a:Y_a\\hookrightarrow Y)_a$ and pro-étale covers $u_{ai}:U_{ai}\\to Y_a$ for the finite constant local models in [sk-def-sfb-constructible]. Put $X_a=X\\times_Y Y_a$, with maps $j_a:X_a\\to X$ and $f_a:X_a\\to Y_a$. By [lemma-constructible-pullback-stratification] these maps give a finite stratification of $X$ with images $f^{-1}(|Y_a|)$. The schemes $X,Y$ are of finite type over the field $k$ by [sk-def-sfb-dc-setting]. In particular their topological spaces are Noetherian, and their locally closed strata are constructible by [def-weil-constructible-subset]. Thus this is a stratification of the kind required by [sk-def-sfb-constructible], including its constructible-subset condition. Empty strata may be removed; no reduced scheme structure or equality of scheme-theoretic fibres with set-theoretic preimages is assumed.",
+   "text": "For any scheme map $h:V\\to U$, transport sends the regular $\\Lambda_U$-module to the regular $h^*_{\\Ab}\\Lambda_U$-module: both actions are the transported multiplication, by [def-sfb-modobj-transport]. Set $R=h^*_{\\Ab}\\Lambda_U$ and $S=\\Lambda_V$. In [def-sfb-modobj-extension], $S$ is an $S$-$R$-bimodule with right action $\\mu_S(\\operatorname{id}\\otimes\\alpha_h)$. Apply [lem-sfb-mixed-bimodule-right-unitor] to this mixed bimodule. Together with [def-sfb-module-upper-star] it gives $e_h:h^*\\Lambda_U\\simeq\\Lambda_V$, induced by multiplication. Its two inverse maps and linearity are supplied by the cited statement. Additivity from step 1 sends finite biproducts of this regular module to the same finite biproducts, including the empty biproduct.",
    "uses": [
-    "sk-def-sfb-constructible",
+    "def-sfb-modobj-transport",
+    "def-sfb-modobj-extension",
+    "lem-sfb-mixed-bimodule-right-unitor",
+    "def-sfb-module-upper-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Last sentence: the regular-module comparison, extracted from inherited step 6"
+   }
+  },
+  {
+   "text": "We use exactly the general ring-object constructibility in [sk-def-sfb-bounded-constructible]. By [def-sfb-constructible-module] and [def-sfb-locally-finitely-presented], a constructible $M$ has a finite stratification $i_a:Y_a\\hookrightarrow Y$ and pro-étale covers $u_{ai}:U_{ai}\\to Y_a$ on which its transported restrictions have finite presentations [def-sfb-finitely-presented-module]. These initially use the coefficient ring $u_{ai}^*{}_{\\Ab}i_a^*{}_{\\Ab}\\Lambda_Y$. Relabel along its canonical isomorphism to $\\Lambda_{U_{ai}}$, obtained from [sk-def-sfb-coefficient-morphisms]. This relabelling is extension of scalars and is exact by the argument of step 1 (extension along an isomorphism is inverse restriction). It sends the regular module to the regular module by the mixed-bimodule right unit, just as in step 3 with the sheaf functor the identity. Thus it sends a cokernel of a map between finite sums of the former ring to such a cokernel for $\\Lambda_{U_{ai}}$. The definition [def-sfb-module-upper-star] identifies the relabelled module with $u_{ai}^*i_a^*M$. Hence choose finite presentations $u_{ai}^*i_a^*M\\simeq\\operatorname{coker}(A_{ai}:\\Lambda_{U_{ai}}^{m_{ai}}\\to\\Lambda_{U_{ai}}^{n_{ai}})$. The entries of $A_{ai}$ may be arbitrary sections; no scalar-constant presentation has been assumed.",
+   "uses": [
+    "sk-def-sfb-bounded-constructible",
+    "def-sfb-constructible-module",
+    "def-sfb-locally-finitely-presented",
+    "def-sfb-finitely-presented-module",
+    "sk-def-sfb-coefficient-morphisms",
+    "def-sfb-module-upper-star",
+    "lem-sfb-mixed-bimodule-right-unitor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Choose stratification and cover: distinguish general local finite presentations from scalar-constant presentations"
+   }
+  },
+  {
+   "text": "Put $X_a=X\\times_Y Y_a$, with maps $j_a:X_a\\to X$ and $f_a:X_a\\to Y_a$. By [lemma-constructible-pullback-stratification] these maps give a finite stratification of $X$ with images $f^{-1}(|Y_a|)$. The schemes $X,Y$ are of finite type over the field $k$ by [sk-def-sfb-dc-setting]. Their topological spaces are Noetherian, and their locally closed strata are constructible by [def-weil-constructible-subset]. Thus this is a stratification of the kind required by [def-sfb-constructible-module]. Empty strata may be removed; no reduced scheme structure or equality of scheme-theoretic fibres with set-theoretic preimages is assumed.",
+   "uses": [
     "lemma-constructible-pullback-stratification",
     "sk-def-sfb-dc-setting",
-    "def-weil-constructible-subset"
+    "def-weil-constructible-subset",
+    "def-sfb-constructible-module"
    ],
    "elementary": false,
    "source": {
@@ -78,7 +109,7 @@
    }
   },
   {
-   "text": "Pullback composition [def-sfb-module-upper-star-comp] gives the required comparison on this cover. Indeed $f j_a=i_a f_a$ and $f_a v_{ai}=u_{ai}h_{ai}$, and therefore\n$$v_{ai}^*j_a^*f^*M\\simeq v_{ai}^*f_a^*i_a^*M\\simeq h_{ai}^*u_{ai}^*i_a^*M.$$\nThus it suffices to pull back the finite scalar-matrix presentation of $u_{ai}^*i_a^*M$ along $h_{ai}$. This uses composition of module-object pullbacks, rather than an underived base-change assertion about pushforwards.",
+   "text": "Pullback composition [def-sfb-module-upper-star-comp] gives the required comparison on this cover. Indeed $f j_a=i_a f_a$ and $f_a v_{ai}=u_{ai}h_{ai}$, and therefore\n$$v_{ai}^*j_a^*f^*M\\simeq v_{ai}^*f_a^*i_a^*M\\simeq h_{ai}^*u_{ai}^*i_a^*M.$$\nThus it suffices to pull back the finite presentation of $u_{ai}^*i_a^*M$ along $h_{ai}$. This uses composition of module-object pullbacks, rather than an underived base-change assertion about pushforwards.",
    "uses": [
     "def-sfb-module-upper-star-comp"
    ],
@@ -89,31 +120,27 @@
    }
   },
   {
-   "text": "Write the local model as the cokernel of a finite matrix $A_{ai}$ with entries in $R=\\Lambda(*)$:\n$$u_{ai}^*i_a^*M\\simeq\\operatorname{coker}(A_{ai}:\\Lambda_{U_{ai}}^{m_{ai}}\\to\\Lambda_{U_{ai}}^{n_{ai}}),$$\nas permitted by the scalar-matrix formulation of [sk-def-sfb-constructible]. From the formula in [def-sfb-module-upper-star] and the transport action in [def-sfb-modobj-transport], pullback sends the regular module $\\Lambda_U$ to the regular module $\\Lambda_V$: its first factor sends $\\Lambda_U$ to the regular $h^*_{\\Ab}\\Lambda_U$-module, and extension of scalars identifies the latter with $\\Lambda_V$ by the map $b\\otimes a\\mapsto b\\alpha_h(a)$. Its inverse is $b\\mapsto b\\otimes1$: the unit gives one composite equal to the identity, and the balancing relation $b\\alpha_h(a)\\otimes1=b\\otimes a$ gives the other. These formulas denote the maps induced by multiplication and unit on the relative tensor product. Additivity from step 1 sends its finite direct sums to the same finite direct sums. Moreover a scalar $r\\in\\Lambda(*)$ gives a morphism $r:\\mathbf Z\\to\\Lambda$ of condensed abelian groups. Put $r_U=p_U^*r:\\mathbf1_U\\to\\Lambda_U$ and $r_V=p_V^*r:\\mathbf1_V\\to\\Lambda_V$; its action is $\\mu_U(r_U\\otimes\\mathrm{id})$ [sk-def-sfb-pulled-back-coefficients]. Let $\\beta:h^*_{\\Ab}p_U^*\\xrightarrow{\\sim}p_V^*$ be the monoidal natural isomorphism of [sk-def-sfb-pullback-from-point-comp]. Its component $\\beta_\\Lambda$ is $\\alpha_h$ [sk-def-sfb-coefficient-morphisms], and naturality at the abelian-group morphism $r$ gives $\\alpha_h\\circ h^*_{\\Ab}(r_U)=r_V\\circ\\beta_{\\mathbf Z}$. Monoidality identifies $\\beta_{\\mathbf Z}$ with the unit comparison and identifies the transported multiplication with that of $\\Lambda_V$. Consequently the pulled-back action $\\mu_U(r_U\\otimes\\mathrm{id})$, under the regular-module identification just written, is $\\mu_V(r_V\\otimes\\mathrm{id})$. This uses naturality on abelian sheaves; $r$ is not required to be a morphism of rings. Thus the pulled-back matrix is exactly $A_{ai}$ with the same scalar entries, not an arbitrary matrix over sections on $V_{ai}$. Right exactness from step 1 now gives\n$$h_{ai}^*(u_{ai}^*i_a^*M)\\simeq\\operatorname{coker}(A_{ai}:\\Lambda_{V_{ai}}^{m_{ai}}\\to\\Lambda_{V_{ai}}^{n_{ai}}).$$\nThe ranks are finite and may be zero. Together with step 5 this is a finite constant local model for $(f^*M)|_{X_a}$ on the cover of step 4.",
+   "text": "Apply $h_{ai}^*$ to the chosen presentation of step 4. Exactness from step 1 preserves its cokernel and the regular-module comparison of step 3 identifies the finite free terms. Consequently\n$$h_{ai}^*(u_{ai}^*i_a^*M)\\simeq\\operatorname{coker}(h_{ai}^*A_{ai}:\\Lambda_{V_{ai}}^{m_{ai}}\\to\\Lambda_{V_{ai}}^{n_{ai}}).$$\nBy [def-sfb-finitely-presented-module] this is finitely presented, with the same finite ranks, which may be zero. Step 7 identifies it with $v_{ai}^*j_a^*f^*M$. Relabelling back along the inverse canonical coefficient isomorphisms preserves finite presentations by the argument in step 4. The cover in step 6 therefore witnesses local finite presentation of $\\operatorname{mapMod}(j_a^*{}_{\\Ab})(f^*M)$ over $j_a^*{}_{\\Ab}\\Lambda_X$, precisely [def-sfb-locally-finitely-presented].",
    "uses": [
-    "sk-def-sfb-constructible",
-    "def-sfb-module-upper-star",
-    "def-sfb-modobj-transport",
-    "sk-def-sfb-pulled-back-coefficients",
-    "sk-def-sfb-coefficient-morphisms",
-    "sk-def-sfb-pullback-from-point-comp"
+    "def-sfb-finitely-presented-module",
+    "def-sfb-locally-finitely-presented"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
-    "place": "Last sentences: finite free modules, right exactness, and the scalar entries of the presentations"
+    "place": "Last two sentences: right exactness applied to a finite presentation"
    }
   },
   {
-   "text": "Steps 3–6 give the witnessing finite constructible stratification and finite constant local models for $f^*M$; hence $f^*M$ is constructible by [sk-def-sfb-constructible]. Apply this to every $M=H^q(K)$. The isomorphisms of step 2 show that all $H^q(Lf^*K)$ are constructible, and step 2 already supplies the finite cohomological interval. These are precisely the two conditions of [sk-def-sfb-bounded-constructible]. Therefore $Lf^*K$ is bounded constructible.",
+   "text": "Steps 4–8 give a finite constructible stratification on which the transported restrictions of $f^*M$ are locally finitely presented. Thus $f^*M$ is constructible in the sense of [def-sfb-constructible-module]. Apply this to $M=H^q(K)$ for each $q$. The isomorphisms of step 2 show that every $H^q(Lf^*K)$ is constructible, and step 2 supplies the same finite cohomological interval as for $K$. These are exactly the conditions of [sk-def-sfb-bounded-constructible]. Therefore $Lf^*K$ is bounded constructible.",
    "uses": [
-    "sk-def-sfb-constructible",
+    "def-sfb-constructible-module",
     "sk-def-sfb-bounded-constructible"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
-    "place": "Conclusion: boundedness and constructibility of every cohomology sheaf"
+    "place": "Conclusion: boundedness and constructibility of cohomology"
    }
   }
  ],
@@ -130,22 +157,24 @@
   "sk-def-sfb-module-derived-pushpull",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "sk-def-sfb-bounded-constructible",
-  "sk-def-sfb-constructible",
+  "def-sfb-modobj-extension",
+  "lem-sfb-mixed-bimodule-right-unitor",
+  "def-sfb-constructible-module",
+  "def-sfb-locally-finitely-presented",
+  "def-sfb-finitely-presented-module",
+  "sk-def-sfb-coefficient-morphisms",
   "lemma-constructible-pullback-stratification",
   "sk-def-sfb-dc-setting",
   "def-weil-constructible-subset",
   "def-weil-pbc-proetale-covering",
   "lem-weil-pbc-weakly-etale-composition-base-change",
   "lem-galois-fpqc-covering-base-change",
-  "def-sfb-module-upper-star-comp",
-  "sk-def-sfb-pulled-back-coefficients",
-  "sk-def-sfb-coefficient-morphisms",
-  "sk-def-sfb-pullback-from-point-comp"
+  "def-sfb-module-upper-star-comp"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
-  "place": "Proof, expanded termwise-exactness and stratified scalar-presentation argument"
+  "place": "Whole inherited exactness/stratification/base-changed-cover route; extracted mixed-bimodule right unit, with the general local-finite-presentation definition of constructibility used throughout"
  },
  "mathlib_searches": [
   {
@@ -210,10 +239,45 @@
    "results": "Six hits, all in AlgebraicGeometry/Morphisms/FinitePresentation.lean and RingTheory/Spectrum/Prime/Chevalley.lean: constructible images on prime spectra; none concerns sheaf module objects or derived pullback.",
    "date": "2026-10-16",
    "verdict": "no match: topological constructible images do not state the item"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(pullback|upperStar)|(pullback|upperStar).*constructible",
+   "results": "Hits: . ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary pullback constructions, exactness, bounded derived factorization or topological constructible subsets do not state constructibility preservation for these coefficient module objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image preserves bounded complexes with locally finitely presented cohomology on finite locally closed stratifications",
+   "results": "Hits: CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, DerivedCategory.right_fac_of_isStrictlyLE, AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, AlgebraicGeometry.instLocallyOfFinitePresentationResLE, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat. ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary pullback constructions, exactness, bounded derived factorization or topological constructible subsets do not state constructibility preservation for these coefficient module objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback along a scheme morphism preserves bounded constructible complexes of modules over any commutative condensed coefficient ring",
+   "results": "Hits: SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction. ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary pullback constructions, exactness, bounded derived factorization or topological constructible subsets do not state constructibility preservation for these coefficient module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\"",
+   "results": "Hits: Topology.IsConstructible, Topology.IsLocallyConstructible, Topology.IsConstructible.univ, Topology.IsLocallyConstructible.univ, Topology.IsConstructible.empty, Topology.IsLocallyConstructible.empty, Topology.IsConstructible.isLocallyConstructible, IsRetrocompact.isConstructible. ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary pullback constructions, exactness, bounded derived factorization or topological constructible subsets do not state constructibility preservation for these coefficient module objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image on module objects preserves stratified local finite presentations and bounded derived cohomology",
+   "results": "Hits: ModuleCat.localizedModule_functor_map_exact, LightCondensed.instIsGrothendieckAbelianLightCondMod, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff. ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary pullback constructions, exactness, bounded derived factorization or topological constructible subsets do not state constructibility preservation for these coefficient module objects"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -231,19 +295,29 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-dc-restricted-functors",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-sfb-dc-upper-star-preserves",
   "worker": "stage1",
-  "summary": "Expanded the imported one-paragraph argument into seven steps, reusing existing exact-lift, cohomology, stratification, covering, and coefficient-comparison nodes. Kept the statement unchanged and tracked the stronger scalar-constant local models. No new nodes, no exact Lean attachment, and no Mathlib match for the item. Missing parent-unit imports are bypassed only by their existing component interfaces, without changing the proof route.",
-  "blueprint": "Realizes the entire proof in lem-sfb-dc-upper-star-preserves.proof.md: exact module pullback (step 1), termwise cohomology and boundedness (2), inverse-image stratification (3), base-changed cover (4), composition on restrictions (5), scalar finite presentation (6), and conclusion (7)."
+  "summary": "Repair of Q114 dedicated handoff: extracted the balanced-tensor regular-module comparison as a Mathlib mixed-bimodule right-unit leaf. Kept the statement, Lean audit, exactness/cohomology/stratification/cover route, and inherited searches. Also repaired the inherited proof's assumption of scalar-constant presentations: the current bounded-constructible definition uses general local finite presentations (det-def-sfb-constructible-local-model notes the two notions differ). Steps 4 and 8 prove preservation for that exact definition, so the inherited scalar-entry argument of old step 6 is no longer needed and was removed on maintainer review together with its unneeded new node. No non-elementary step exceeds 2000 characters.",
+  "blueprint": "Entire lem-sfb-dc-upper-star-preserves.proof.md: exactness/cohomology (steps 1–2), preservation of free modules (3, Mathlib right unit), finite presentations/strata (4–5), base-changed covers (6), composition on restrictions (7), right exactness on cokernels (8), and bounded-constructible conclusion (9).",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-module-pullback-exact-lifted",
+    "why": "Generic Lifts of exact functors to module objects are exact interface used in the inherited exactness/stratification proof; the restricted-functor unit supplies no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic $\\alpha_f$ is an isomorphism for every $f$ interface used in the inherited exactness/stratification proof; the restricted-functor unit supplies no replacement for this foundational fact."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q44-bcaa14adb",
-  "group": "Q44",
+  "reviewer": "NT-cc-Q114-ba8595593",
+  "group": "Q114",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-bcaa14adb (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all 23 cited node statements, blueprint chapter/unit route, and Stacks Tags 010N, 094U, 022D, and 005L. The arbitrary condensed coefficient category, exact pullback argument, stratification and cover base change, scalar-matrix transport, hypotheses, edge cases, and Mathlib searches all check. No new nodes or repairs are needed; review.md records accepted generic tool uses."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-ba8595593 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, the blueprint source and proof for lem-sfb-dc-upper-star-preserves (main-20261015), the unit sk-def-sfb-dc-restricted-functors, the Q114 return, and Mathlib Bimod.lean:185-193 and 679-770. The worker's main correction is right and needed. sk-def-sfb-bounded-constructible requires constructibility in the general local-finite-presentation sense of def-sfb-constructible-module, but the inherited proof used the scalar-constant local models of sk-def-sfb-constructible. det-def-sfb-constructible-local-model itself says the converse fails. Steps 4 and 8 now handle arbitrary presentations, relabelled along the ring isomorphisms of sk-def-sfb-coefficient-morphisms, which matches the blueprint proof's coker(Λ^m→Λ^n). The statement is unchanged. Step checks: (1) exactness for arbitrary Λ and f, via lifted exactness with F=id for Res along the inverse; (2) the K-flat formula plus the Mathlib exact-functor cohomology leaf; (3) the extension coequalizer is exactly the mixed-bimodule one, using commutativity μβ=μ; (5) lemma-constructible-pullback-stratification uses def-constructible-stratification, as def-sfb-constructible-module needs; (6) the cover base change is a pro-étale site covering; (7) composition of pullbacks; (8) exactness plus free modules give a cokernel. Edge cases checked: K=0, empty strata, ranks 0, the zero ring, f=id. New Mathlib leaf lem-sfb-mixed-bimodule-right-unitor = Bimod.rightUnitorBimod (line 764; hom 685 is desc of actRight, inv 689, linearities 717/729; HasCoequalizers and the tensor colimit hypotheses match). Tested on S=R, the non-flat Z→Z/2, and P=0. It is not a duplicate: lem-sfb-bimod-monoidal covers only A-A bimodules, and def-sfb-modobj-relative-tensor only a single commutative ring. Accepted. FIX: delivered step 9 was a conditional scalar-constant refinement that the conclusion never uses, and it was the only citer of the new unsplit node lem-sfb-module-pullback-scalar-action. I believe that statement is true, but no node needs it. I deleted step 9 and the sentence referring to it in the final step, recomputed proof_deps (dropping sk-def-sfb-constructible and the scalar node), and updated proof_origin.place and the split_report summary and blueprint text. The corrected item is in fixes/. Accepted tool uses: det-prop-sfb-module-pullback-exact-lifted (the blueprint proof itself cites its unit) and lem-sfb-alpha-iso (generic). The other off-unit statements are Lean-closed or Mathlib leaves. No SGA source.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
@@ -256,5 +330,9 @@
    "decls": [],
    "missing": []
   }
- }
+ },
+ "tool_uses": [
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "lem-sfb-alpha-iso"
+ ]
 }

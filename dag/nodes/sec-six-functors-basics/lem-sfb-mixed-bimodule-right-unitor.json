@@ -1,0 +1,113 @@
+{
+ "id": "lem-sfb-mixed-bimodule-right-unitor",
+ "kind": "statement",
+ "title": "Right unit for relative tensor products of mixed bimodules",
+ "statement": "Let $\\mathcal C$ be a monoidal category with coequalizers, such that $Z\\otimes-$ and $-\\otimes Z$ preserve colimits for every $Z$. Let $S,R$ be monoid objects [sk-def-sfb-ring-object]. An $S$-$R$-bimodule $P$ is an object with a unital associative left $S$-action $\\gamma_P$ and a unital associative right $R$-action $\\rho_P$, commuting with each other; module objects and their morphisms are as in [sk-def-sfb-module-objects]. Bimodule morphisms commute with both actions. Let $R$ also denote its regular $R$-$R$-bimodule, with both actions its multiplication. Write $\\alpha$ for the ambient associator and $\\rho^{\\mathcal C}$ for its right unitor.\n\nThe relative tensor product $P\\otimes_R R$ is the coequalizer of\n$$\n(P\\otimes R)\\otimes R\\mathrel{\\substack{\\xrightarrow{\\rho_P\\otimes R}\\\\[-2pt]\\xrightarrow{(P\\otimes\\mu_R)\\circ\\alpha_{P,R,R}}}}P\\otimes R,\n$$\nwith left action through $P$ and right action through the last $R$; denote the coequalizer map by $q$. There is an isomorphism of $S$-$R$-bimodules\n$$e_P:P\\otimes_R R\\xrightarrow{\\sim}P,\\qquad e_P\\circ q=\\rho_P.$$\nIts inverse is $q\\circ(P\\otimes\\eta_R)\\circ(\\rho^{\\mathcal C}_P)^{-1}$, where $\\eta_R:\\mathbf1\\to R$ is the unit. No equality of $S$ and $R$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+  "place": "Last sentence of the blueprint proof: 'it carries free modules of finite rank to free modules of the same rank'; the balanced-tensor right-unit comparison hidden in inherited step 6."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "regular|mapMod|extendScalars",
+   "results": "Hits: Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean.  Search scope: Mathlib/CategoryTheory/Monoidal.",
+   "date": "2026-10-17",
+   "verdict": "partial notions only: regular modules and bimodules are defined; the targeted right-unitor searches below found the exact theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "rightUnitorBimod|namespace RightUnitorBimod|noncomputable def hom|noncomputable def inv",
+   "results": "Hits: 449, 465, 542, 562, 622.  Search scope: Mathlib/CategoryTheory/Monoidal/Bimod.lean. Single-file grep output parsed line numbers as file fields and displayed only early hom/inv definitions; this is inconclusive. The later directory-scoped grep locates the actual right unitor.",
+   "date": "2026-10-17",
+   "verdict": "inconclusive; superseded by the targeted directory grep and direct read of Bimod.lean:679-770"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightUnitorBimod\"",
+   "results": "Hits: Bimod.RightUnitorBimod.hom, Bimod.RightUnitorBimod.inv, Bimod.rightUnitorBimod, Bimod.RightUnitorBimod.inv_hom_id, Bimod.RightUnitorBimod.hom_inv_id, Bimod.RightUnitorBimod.hom_left_act_hom', Bimod.RightUnitorBimod.hom_right_act_hom'. ",
+   "date": "2026-10-17",
+   "verdict": "match: Bimod.rightUnitorBimod, Mathlib/CategoryTheory/Monoidal/Bimod.lean:764; formulas in RightUnitorBimod.hom:685 and inv:689, read at lines 679-738"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative tensor product of a bimodule P with the regular module R is canonically P by the right unitor",
+   "results": "Hits: SemimoduleCat.MonoidalCategory.rightUnitor, Bimod.RightUnitorBimod.hom, SemimoduleCat.MonoidalCategory.rightUnitor_def, TensorProduct.lid, Bimod.rightUnitorBimod, SemimoduleCat.hom_hom_rightUnitor, ModuleCat.MonoidalCategory.rightUnitor_def, IsLocalization.moduleLid. ",
+   "date": "2026-10-17",
+   "verdict": "match: Bimod.rightUnitorBimod, Mathlib/CategoryTheory/Monoidal/Bimod.lean:764; formulas in RightUnitorBimod.hom:685 and inv:689, read at lines 679-738"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any S R bimodule P in a monoidal category the right unit isomorphism P tensor over R regular R is P induced by its right action",
+   "results": "Hits: Bimod.rightUnitorBimod, Bimod.actRight_one, Bimod.RightUnitorBimod.inv, Bimod.RightUnitorBimod.hom_right_act_hom', Bimod.TensorBimod.actRight_one', Bimod.actRight_one_assoc, Bimod.RightUnitorBimod.hom_inv_id, Bimod.RightUnitorBimod.hom. ",
+   "date": "2026-10-17",
+   "verdict": "match: Bimod.rightUnitorBimod, Mathlib/CategoryTheory/Monoidal/Bimod.lean:764; formulas in RightUnitorBimod.hom:685 and inv:689, read at lines 679-738"
+  },
+  {
+   "tool": "grep",
+   "query": "rightUnitorBimod|namespace RightUnitorBimod",
+   "results": "Hits: Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean.  Search scope: Mathlib/CategoryTheory/Monoidal.",
+   "date": "2026-10-17",
+   "verdict": "match: Bimod.rightUnitorBimod, Mathlib/CategoryTheory/Monoidal/Bimod.lean:764; formulas in RightUnitorBimod.hom:685 and inv:689, read at lines 679-738"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strong monoidal transport and extension of scalars preserve the regular internal module",
+   "results": "Hits: ModuleCat.extendScalars, CategoryTheory.Mod_.scalarRestriction_hom, ModuleCat.ExtendScalars.obj', CommRingCat.moduleCatExtendScalarsPseudofunctor, CategoryTheory.Monoidal.transportStruct, CategoryTheory.Monoidal.instInhabitedTransported, CategoryTheory.Mod_.scalarRestriction, ModuleCat.CoextendScalars.isModule.",
+   "date": "2026-10-17",
+   "verdict": "no exact match in this query: regular internal module definitions or ordinary-module tensor unitors; the subsequent mixed-bimodule phrasing found Bimod.rightUnitorBimod"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod\", \"regular\"",
+   "results": "Hits: Lean.getRegularInitAttrModIdxs, Aesop.RegularRule.indexingMode, Module.IsTorsionFree.isSMulRegular, IsLocalizedModule.isRegular_of_smul_left_injective, IsLocalizedModule.injective_iff_isRegular, IsLocalizedModule.isTorsionFree_of_forall_isRegular, LinearIndependent.of_isLocalizedModule_of_isRegular, IsSMulRegular.of_isLocalizedModule.",
+   "date": "2026-10-17",
+   "verdict": "no exact match in this query: regular internal module definitions or ordinary-module tensor unitors; the subsequent mixed-bimodule phrasing found Bimod.rightUnitorBimod"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport by a strong monoidal functor followed by extension of scalars takes the regular internal module R to the regular module S via multiplication",
+   "results": "Hits: CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_.regular, CategoryTheory.Mod_.comap, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.extendScalarsId_inv_app_apply, CommRingCat.moduleCatExtendScalarsPseudofunctor_map, ModuleCat.extendScalarsId_hom_app_one_tmul, CategoryTheory.Mod_.comap_obj_mod.",
+   "date": "2026-10-17",
+   "verdict": "no exact match in this query: regular internal module definitions or ordinary-module tensor unitors; the subsequent mixed-bimodule phrasing found Bimod.rightUnitorBimod"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an internal commutative ring R and algebra S, the balanced tensor product of S with the regular R module is isomorphic to the regular S module",
+   "results": "Hits: TensorProduct.lid', TensorProduct.lidOfCompatibleSMul, TensorProduct.AlgebraTensorModule.rid, TensorProduct.lid, Algebra.TensorProduct.lidOfCompatibleSMul, TensorProduct.rid, TensorProduct.lid'_apply_tmul, Algebra.TensorProduct.lid_toLinearEquiv.",
+   "date": "2026-10-17",
+   "verdict": "no exact match in this query: regular internal module definitions or ordinary-module tensor unitors; the subsequent mixed-bimodule phrasing found Bimod.rightUnitorBimod"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Bimod.rightUnitorBimod",
+  "file": "Mathlib/CategoryTheory/Monoidal/Bimod.lean",
+  "how": "exact: line 764 for the mixed-bimodule isomorphism; its forward and inverse maps are RightUnitorBimod.hom (685-686) and RightUnitorBimod.inv (689-690), with both linearities at 717-737. The source hypotheses and coequalizer agree verbatim after renaming its two monoids.",
+  "line": 764
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dc-upper-star-preserves",
+  "date": "2026-10-17",
+  "group": "Q114"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-upper-star-preserves",
+   "place": "Last sentence of the blueprint proof: 'it carries free modules of finite rank to free modules of the same rank'; the balanced-tensor right-unit comparison hidden in inherited step 6.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

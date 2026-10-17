@@ -12,9 +12,145 @@
   "def-coef-infinity-fibrations",
   "lem-coef-infinity-mapping-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the degreewise join and fixed-diagram slices of [lem-coef-infinity-slice-right-fibration]. For a diagram $a:K\\to C$, write $C_{/a}$ for the simplicial set whose $m$-simplices extend $a$ to $\\Delta^m\\star K$, and project to $C$ by restriction to $\\Delta^m$. In particular $C_{/s}$ uses $K=\\Delta^1$ and $C_{/x},C_{/y}$ use $K=\\Delta^0$. These projections are right fibrations. Set\n$$Q=E_{/y}\\times_{B_{/p(y)}}B_{/p(s)},\\qquad\n\\phi:E_{/s}\\longrightarrow Q.$$\nThe first coordinate restricts the final edge $s$ to its target $y$, and the second applies $p$. Both coordinates have the same initial $\\Delta^m$ after projection to $B$, so $Q$ projects to $E$ and $\\phi$ is over $E$. Put $T_C(a,z)=C_{/a}\\times_C\\{z\\}$, where $z$ denotes the constant simplicial subset. The slice theorem says that each $T_C(a,z)$ is Kan: pull back its right-fibration projection to the Kan complex $\\{z\\}$ and apply [lem-cbc-right-fibration-space-fiber]. For a vertex $v$, $T_C(v,z)=\\operatorname{Map}_C(z,v)$ exactly, with the entire initial face constant at $z$.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-cbc-right-fibration-space-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, construction of the canonical slice map; Corollary 2.1.2.2 and Lemma 2.1.3.3."
+   }
+  },
+  {
+   "text": "The map $\\phi$ is a right fibration. A right-horn lifting problem of dimension $m\\geq1$, index $0<i\\leq m$, transposes, by the degreewise slice definition, to extension over $B$ across\n$$(\\Lambda_i^m\\star\\Delta^1)\\cup_{\\Lambda_i^m\\star\\{1\\}}(\\Delta^m\\star\\{1\\})\n\\hookrightarrow\\Delta^m\\star\\Delta^1.$$\nHere the first map $\\Lambda_i^m\\hookrightarrow\\Delta^m$ is right anodyne by the definition in [lem-coef-infinity-anodyne-cocones], and $\\{1\\}\\hookrightarrow\\Delta^1$ is a monomorphism. That node's pushout-join assertion makes the displayed map inner anodyne. An inner fibration lifts such a map: it lifts each generating inner horn by definition, successively extends compatible fillers through pushouts and transfinite compositions (taking their union at a limit), and inherits the lift through a retract. The given inner fibration $p$ therefore supplies the required extension. The transposition keeps the whole prescribed image in $B$, not just its vertices.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-anodyne-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, right-fibration assertion; Proposition 2.1.2.1 and Lemma 2.1.2.3, applied directly to slices."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-trivial-kan-fibration], $\\phi$ is trivial Kan precisely when all boundary problems $\\partial\\Delta^m\\hookrightarrow\\Delta^m$, $m\\geq0$, lift. Transposition identifies their domains with\n$$(\\partial\\Delta^m\\star\\Delta^1)\\cup_{\\partial\\Delta^m\\star\\{1\\}}(\\Delta^m\\star\\{1\\})\n\\hookrightarrow\\Delta^m\\star\\Delta^1=\\Delta^{m+2}.$$\nOrder its vertices as $0,\\ldots,m,x,y$. The domain contains the faces omitting $0,\\ldots,m$, and the face omitting $x$; it omits exactly the face omitting $y$. Thus it is $\\Lambda_{m+2}^{m+2}$, with prescribed final edge $\\{m+1,m+2\\}=s$. These are exactly all horn problems defining $p$-Cartesian in [def-coef-infinity-fibrations], with $n=m+2$. This proves $s$ horn-Cartesian if and only if $\\phi$ is trivial Kan. The case $m=0$ is $\\Lambda_2^2$, and includes the needed existence of the triangle filler.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 2.4.1.1, Remark 2.4.1.4, and proof of Proposition 2.4.4.3: explicit boundary/outer-horn correspondence."
+   }
+  },
+  {
+   "text": "For each vertex $z\\in E$, restriction over $z$ gives\n$$\\phi_z:T_E(s,z)\\longrightarrow\n\\operatorname{Map}_E(z,y)\\times_{\\operatorname{Map}_B(p(z),p(y))}\nT_B(p(s),p(z)).$$\nThis is exactly the pullback of $\\phi$ to the displayed target, so it is a right fibration: a lifting problem projects to one for $\\phi$, and the resulting filler pairs with the prescribed target simplex. The two $T$ spaces are Kan by Step 1. By [lem-coef-infinity-inner-mapping-fiber],\n$$\\operatorname{Map}_E(z,y)\\longrightarrow\\operatorname{Map}_B(p(z),p(y))$$\nis a Kan fibration. Its pullback to $T_B(p(s),p(z))$ is a Kan fibration over a Kan complex, so its total space is Kan (fill the base horn, then lift it). Consequently [lem-cbc-right-fibration-space-fiber] makes $\\phi_z$ a Kan fibration. These statements allow empty mapping spaces and empty fibers.",
+   "uses": [
+    "lem-coef-infinity-inner-mapping-fiber",
+    "lem-cbc-right-fibration-space-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, restriction to a source vertex; Lemmas 2.4.4.1 and 2.1.3.3."
+   }
+  },
+  {
+   "text": "The map $\\phi$ is trivial Kan if and only if every $\\phi_z$ is a weak homotopy equivalence. If $\\phi$ is trivial, each pullback $\\phi_z$ lifts all boundaries, and [lem-cbc-kan-fibration-fiber-criterion] makes it a weak equivalence. Conversely assume all $\\phi_z$ are weak equivalences. They are Kan fibrations by Step 4, so the same criterion says every vertex fiber of each $\\phi_z$ is a contractible Kan complex. Every vertex $q\\in Q$ projects to a vertex $z\\in E$, and the fiber of $\\phi$ at $q$ is exactly its fiber as a vertex of the target of $\\phi_z$. Thus all vertex fibers of the right fibration $\\phi$ are contractible. Apply [lem-coef-right-fibration-contractible-fibers] to conclude that $\\phi$ lifts all boundaries, including the empty boundary in dimension zero. This proves both directions without assuming that any other Cartesian lift exists.",
+   "uses": [
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "lem-coef-right-fibration-contractible-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, fiberwise equivalence test; Lemma 2.1.3.4."
+   }
+  },
+  {
+   "text": "For each $z$, consider the strictly commutative square\n$$\\begin{array}{ccc}\nT_E(s,z)&\\xrightarrow{r_y}&\\operatorname{Map}_E(z,y)\\\\\n\\downarrow&&\\downarrow\\\\\nT_B(p(s),p(z))&\\xrightarrow{r_{p(y)}}&\\operatorname{Map}_B(p(z),p(y)).\n\\end{array}$$\nHere $r_y$ restricts to the final vertex of the specified edge, and the vertical maps apply $p$. Its ordinary pullback comparison is $\\phi_z$. Its right vertical map is a Kan fibration by Step 4. The constant-path map from the ordinary pullback to the path homotopy pullback is therefore a weak equivalence by [lem-coef-kan-pullback-path-comparison]. The comparison from $T_E(s,z)$ factors as $\\phi_z$ followed by that map. Two-out-of-three for the induced maps on components and homotopy groups shows that this strict square is a homotopy pullback if and only if $\\phi_z$ is a weak equivalence.",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, final paragraph: the strict pullback computes the homotopy pullback."
+   }
+  },
+  {
+   "text": "Restriction to the source vertex $x$ of $s$ gives\n$$r_x:T_E(s,z)\\longrightarrow\\operatorname{Map}_E(z,x).$$\nThis is a trivial Kan fibration, for the following explicit reason. A boundary lifting problem in degree $m\\geq0$ is extension from\n$$(\\partial\\Delta^m\\star\\Delta^1)\\cup_{\\partial\\Delta^m\\star\\{0\\}}(\\Delta^m\\star\\{0\\})\n\\hookrightarrow\\Delta^m\\star\\Delta^1.$$\nThe domain contains every face except the one omitting $x$, so it is the inner horn $\\Lambda_{m+1}^{m+2}$. The edge $s$ is already in that domain, and so is the whole initial face $\\Delta^m$, fixed constant at $z$. A quasicategory filler therefore retains both restrictions. Apply the identical argument in $B$ to obtain $r_{p(x)}:T_B(p(s),p(z))\\to\\operatorname{Map}_B(p(z),p(x))$. Both maps are homotopy equivalences by [lem-weil-pbc-trivial-kan-homotopy-equivalence], and they commute strictly with $p$. In particular $m=0$ uses the inner horn $\\Lambda_1^2$, not a Cartesian lifting assumption.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 2.4.4.3, interpretation of the source corner; the special case of the dual of Proposition 2.1.2.5 is proved by its single inner-horn calculation."
+   }
+  },
+  {
+   "text": "Identify the composition and its coherence in the strict presentation. For $C=E$ or $B$, let $a:u\\to v$ be respectively $s$ or $p(s)$, and let $w$ be $z$ or $p(z)$. Given $t\\in T_C(a,w)_m$, precompose $t:\\Delta^{m+2}\\to C$ with the monotone map\n$$[m]\\times[2]\\longrightarrow[m+2],\\quad\n(i,0)\\mapsto i,\\quad(i,1)\\mapsto m+1,\\quad(i,2)\\mapsto m+2.$$\nThis gives a simplex of $V(w,u,v)$ in [lem-coef-infinity-mapping-composition]. Its edges $01,12,02$ are respectively $j r_u(t)$, the constant edge $a$, and $j r_v(t)$, where $j$ is the natural right-pinch inclusion of [lem-coef-infinity-pinch-comparison]. These formulas respect all simplicial operators. By the defining composition equation in the composition node, the roof\n$$\\operatorname{Map}_C(w,u)\\xleftarrow{r_u}T_C(a,w)\\xrightarrow{r_v}\\operatorname{Map}_C(w,v)$$\ntherefore represents postcomposition by $a$. The prism also supplies its triangle witness, rather than only an equation of homotopy classes. Applying $p$ to the prism gives exactly the prism for $B$, including every higher simplex. Thus the two roofs with their vertical maps specify the coherent postcomposition square.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, its explicit strict interpretation of the composition square; the right-pinch and triangle formulas are checked against the existing composition construction."
+   }
+  },
+  {
+   "text": "Use the strict roof of Steps 6-8 as the representative of the coherent square in the statement: the two left corners are presented by $T_E(s,z)$ and $T_B(p(s),p(z))$, with the natural homotopy equivalences $r_x,r_{p(x)}$ to the stated left corners. Its horizontal arrows and commutation data are the postcomposition arrows and witnesses of Step 8. This is precisely the slice representative prescribed in HTT, rather than a square supplied with an independently chosen commutation homotopy. To check the same presentation in the arrow-space model, postcompose the horizontal maps and both right corners with the natural pinch maps $j$. This is a strictly commuting map of squares, identity at the two left corners and a homotopy equivalence at the two right corners. Its three-corner cospans meet the exact equations of [lem-coef-kan-homotopy-pullback-invariance], so their path homotopy pullbacks are weakly equivalent and their fourth-corner comparisons commute. Thus this change of model preserves the homotopy-pullback test. Inverting the equivalences in the two left roofs specifies the canonical coherent composition square, whose homotopy-pullback test is computed by this strict representative. The prism construction ensures that this is the coherence stipulated by composition, not merely arrows that agree on components.",
+   "uses": [
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, paragraph beginning with the warning that the homotopy-category square is imprecise, and its displayed strict slice square; explicit natural model comparison."
+   }
+  },
+  {
+   "text": "Combining Steps 3, 5, 6 and 9 gives\n$$s\\text{ is horn-}p\\text{-Cartesian}\n\\iff\\phi\\text{ is trivial Kan}\n\\iff(\\forall z,\\ \\phi_z\\text{ is a weak equivalence})\n\\iff(\\forall z,\\ \\text{the stated postcomposition square is a homotopy pullback}).$$\nEach test vertex is a vertex of $E$, with no restriction on its image in $B$. Every construction involved only the given edge, inner-horn fillers, and the cited fiber and path-space results. Hence no existence of other Cartesian lifts, and no Cartesian-fibration hypothesis on $p$, has entered either implication.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-cbc-right-fibration-space-fiber",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-anodyne-cocones",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-infinity-inner-mapping-fiber",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-coef-right-fibration-contractible-fibers",
+  "lem-coef-kan-pullback-path-comparison",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-kan-homotopy-pullback-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2: mapping-space infrastructure supporting coefficient adjunction. Agent expansion of HTT Proposition 2.4.4.3, read online; archival source WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +179,45 @@
    "results": "CategoryTheory.Functor.IsCartesian.toIsHomLift; CategoryTheory.Functor.IsCartesian.mk; ordinary-category results only",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory",
+   "results": "SSet.Quasicategory, SSet.instQuasicategoryOfKanComplex, SSet.quasicategory_of_hasLiftingProperty, SSet.Quasicategory.hasLiftingProperty, SSet.quasicategory_iff_hasLiftingProperty, SSet.Quasicategory.hornFilling, SSet.Quasicategory.hornFilling', SSet.Quasicategory.mk; quasicategory horn-filling definitions and homotopy-of-edges only, no Cartesian mapping-space criterion",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.*mapping|mapping.*cartesian",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian morphism of an infinity category characterized by mapping spaces forming homotopy pullbacks",
+   "results": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An edge of an inner fibration of quasicategories is Cartesian if and only if postcomposition gives homotopy pullback squares of mapping spaces",
+   "results": "SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration, SSet.modelCategoryQuillen.fibration_iff, SSet.modelCategoryQuillen.fibrations_eq, SSet.modelCategoryQuillen.instCategoryWithFibrations, CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian, HomotopicalAlgebra.FibrantObject.homMk_surjective, HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual, HomotopicalAlgebra.FibrantObject.homMk; ordinary-category fibered morphisms or Quillen fibrations only, not this quasicategorical characterization",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal property of a cartesian edge: mapping into its source is the homotopy fiber product of mapping into its target and the base mapping spaces",
+   "results": "HasFibers.inducedMap, HasFibers.pullbackMap.isCartesian, CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian, CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian, CategoryTheory.Pseudofunctor.CoGrothendieck.cartesianLift, CategoryTheory.IsPreFibered.exists_isCartesian, CategoryTheory.Functor.IsPreFibered.exists_isCartesian', CategoryTheory.Functor.IsCartesian.map; ordinary-category fibered morphisms or Quillen fibrations only, not this quasicategorical characterization",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-arrow-target-cartesian-pullbacks",
@@ -76,5 +247,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cartesian-mapping-criterion",
+  "worker": "stage1",
+  "summary": "Proved the Cartesian mapping criterion by the fixed-edge join slice, its boundary/outer-horn identification, the vertex-fiber test for a right fibration, and a path-pullback comparison. Wrote the prism giving postcomposition and its functorial coherence; used existing nodes only. No statement change and no project attachment found. HTT read online but not archived; proof_origin is agent.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint paragraph 2, derived coefficient adjunction; realizes the mapping-space tool used by the arrow-target Cartesian-fibration branch in blueprint.from.place. No unit-level route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Generic simplicial-set tool turning boundary lifting into a section and simplicial homotopy inverse in Step 7; the current unit has no corresponding standalone statement."
+   },
+   {
+    "node": "lem-cbc-right-fibration-space-fiber",
+    "why": "Steps 1 and 4 take from its statement that a right fibration over a Kan complex lifts all horns and has Kan total space; it is a generic simplicial-set black box of unit sk-prop-sf-cbc, and no node of sk-prop-sf-biduality-general states it (same-unit siblings already use it as a tool)."
+   },
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "Step 5 takes from its statement the equivalence, for a Kan fibration, of weak equivalence, trivial Kan fibration and contractible vertex fibers; it is a generic black box of unit sk-prop-sf-cbc that no node of the current unit states."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-cbc-kan-fibration-fiber-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N4-af1067a23",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-af1067a23 (reviewer sub-agent of L); spot-checked: The proof is correct and complete. I read the item, all 10 steps, the full statements of the 14 cited nodes, the unit route, the blueprint ancestor and the citer lem-coef-arrow-target-cartesian-pullbacks. HTT is not archived under literature/, so I checked the steps against HTT Prop. 2.4.4.3 from my knowledge of the text; the worker records it as WANTED. The statement is unchanged and has exactly HTT's hypotheses (inner fibration, quasicategories, one edge). Its commutation datum is made precise as the slice roof (Steps 8-9), which is canonical because the homotopies between two sections of the trivial fibration r_{p(x)} form a contractible space. Step 2: the pushout-join clause applies with A=Λ^m_i and {1}⊂Δ^1. Step 3: the boundary domain is exactly Λ^{m+2}_{m+2} with final edge s, and m=0 is Λ^2_2. Step 4: φ_z is a Kan fibration, via lem-coef-infinity-inner-mapping-fiber and lem-cbc-right-fibration-space-fiber. Step 5: both directions are right, and contractible-fibers needs no condition on the base. Step 6: the strict comparison is φ_z and the right leg is a Kan fibration. Step 7: the boundary domain is the inner horn Λ^{m+2}_{m+1}. Step 8: the prism edges are j r_u, the constant edge and j r_v, giving postcomposition = [r_v][r_u]^{-1}. Small cases agree: N([1]) over a point, p=id, B=pt. No new nodes, no cycle, no duplicate (the cocartesian criterion is the opposite orientation). Not a target node, so no base-change morphism or coefficient category is involved; no SGA source. FIX (C8): two statements of unit sk-prop-sf-cbc, which is outside the route of sk-prop-sf-biduality-general, are used as generic black boxes but were not declared: lem-cbc-right-fibration-space-fiber (Steps 1 and 4) and lem-cbc-kan-fibration-fiber-criterion (Step 5). The corrected item appends both to split_report.tool_uses, as the sibling nodes already carry them; nothing else changed. Accepted tool uses: these two plus lem-weil-pbc-trivial-kan-homotopy-equivalence, which is actually on the route (sk-prop-h2).; 1 file(s) fixed by the reviewer"
  }
 }

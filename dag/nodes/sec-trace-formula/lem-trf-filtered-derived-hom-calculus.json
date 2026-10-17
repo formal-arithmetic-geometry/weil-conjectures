@@ -46,14 +46,16 @@
    }
   },
   {
-   "text": "Let $P\\to I$ be a filtered-injective resolution in a fixed interval $[a,b]$. Every filtered-injective object is a finite split flag: starting with $F^bI^n=\\operatorname{gr}^bI^n$, split its inclusion into $F^{b-1}I^n$ by injectivity, then repeat; finite sums of injectives are injective since finitely many extension problems can be solved separately. Hence $F^rI$ and $I/F^rI$ are again bounded-below complexes of filtered injectives. Their inclusions and quotients give the cone triangle. Its cone-to-quotient map $(y,x)\\mapsto y\\bmod F^rI$ is a graded quasi-isomorphism: in grade $c<r$ it is the identity on $\\operatorname{gr}^cI$, and in grade $c\\ge r$ its source is the contractible cone of the identity and its target is zero. For the convention $d(y,x)=(dy+x,-dx)$, the contraction is $(y,x)\\mapsto(0,y)$. This proves the asserted distinguished triangle, with the actual inclusion and quotient maps; forgetting gives the ordinary cone/quotient triangle. To prove uniqueness, first note that an object with zero grades below $r$ is isomorphic to its $t_{\\ge r}$ truncation: its natural inclusion is a graded quasi-isomorphism. Likewise an object with zero grades at least $r$ is isomorphic to its $t_{<r}$ truncation. Resolve both in their respective fixed intervals. Every filtered chain map or homotopy from the first kind to the second is zero, since $F^rL=L$ and $F^rR=0$. The model theorem therefore gives $\\operatorname{Hom}(L,R[q])=0$ for every $q$. For two candidate triangles $L\\to P\\to R\\to L[1]$ and $L_1\\to P\\to R_1\\to L_1[1]$, apply [lem-weil-pbc-triangle-morphism-extension] with $g=1_P$. Its condition (a) holds since the composite $L\\to P\\to R_1$ lies in $\\operatorname{Hom}(L,R_1)=0$, so by (1) there is a morphism of triangles $(\\lambda,1_P,\\rho)$. Since $\\operatorname{Hom}(L[1],R_1)=\\operatorname{Hom}(L,R_1[-1])=0$, part (2) makes $\\lambda$ and $\\rho$ unique. Exchanging the triangles gives $(\\mu,1_P,\\sigma)$. Both $(\\mu\\lambda,1_P,\\sigma\\rho)$ and the identity are morphisms of the first triangle to itself extending $1_P$; since $\\operatorname{Hom}(L[1],R)=0$, part (2) gives $\\mu\\lambda=1$ and $\\sigma\\rho=1$, and symmetrically $\\lambda\\mu=1$, $\\rho\\sigma=1$. This proves uniqueness up to unique isomorphism fixing $P$. Inclusions and quotients commute with chain maps, and their descended natural transformations and this uniqueness give functoriality for all localized morphisms.",
+   "text": "For a filtered-injective resolution $P\\to I$, [lem-trf-injective-graded-filtration-splits] identifies each term with its finite split graded flag. Hence $F^rI$ and $I/F^rI$ are again filtered-injective complexes. The cone-to-quotient map $(y,x)\\mapsto y\\bmod F^rI$ is the identity in grades $c<r$; in grades $c\\ge r$ it maps the contractible identity cone to zero. For $d(y,x)=(dy+x,-dx)$, the contraction is $(y,x)\\mapsto(0,y)$. Thus it is a graded quasi-isomorphism and gives the required distinguished triangle with its actual inclusion and quotient; forgetting gives the ordinary cone/quotient triangle.\n\nFor uniqueness use the Hom bijection of [lem-trf-filtered-unbounded-truncation]. If $L$ has no grades below $r$ and $R$ has no grades at least $r$, then $t_{\\ge r}R[q]$ has all grades acyclic, so $0\\to t_{\\ge r}R[q]$ is a graded quasi-isomorphism. That bijection gives $\\operatorname{Hom}(L,R[q])=0$. The fully faithful bounded-below comparison [lem-trf-filtered-bounded-localization-comparison] gives the same vanishing in our category. For two candidate triangles, the composite $L\\to P\\to R_1$ is therefore zero. Parts (1) and (2) of [lem-weil-pbc-triangle-morphism-extension] give a unique triangle morphism $(\\lambda,1_P,\\rho)$, since also $\\operatorname{Hom}(L[1],R_1)=0$. Reverse the roles of the triangles: both composites extend $1_P$, and uniqueness makes them identities. This proves the asserted unique isomorphism. Inclusions and quotients commute with chain maps; their descended natural transformations and this uniqueness give functoriality for every localized morphism.",
    "uses": [
     "lem-trf-filtered-localization-injective-model",
-    "def-sp-injective-resolutions",
+    "lem-trf-injective-graded-filtration-splits",
     "def-sp-filtration",
     "def-sp-filtered-complex-subquotients",
     "def-weil-abstract-derived-category",
     "def-weil-triangulated-category",
+    "lem-trf-filtered-unbounded-truncation",
+    "lem-trf-filtered-bounded-localization-comparison",
     "lem-weil-pbc-triangle-morphism-extension"
    ],
    "elementary": false,
@@ -95,10 +97,10 @@
    }
   },
   {
-   "text": "First the Hom construction respects homotopies in both variables. For filtration-preserving maps $s,t:P'\\to P$ and a filtration-preserving homotopy $h$ with $s-t=d_Ph+h d_{P'}$, put $S(f)=(-1)^nfh$ on degree-$n$ elements of $\\operatorname{Hom}^\\bullet(P,I)$. Substitution in $d(f)=d_If-(-1)^nf d_P$ gives $dS+Sd=s^*-t^*$. For maps $u,v:I\\to J$ and a filtered homotopy $k$ with $u-v=d_Jk+k d_I$, the formula $T(f)=kf$ gives $dT+Td=u_*-v_*$. Both homotopies preserve every $F^r$, since $h,k$ preserve filtration and $f$ shifts it by $r$. Thus composition defines a bifunctor on the relevant homotopy categories. The construction then descends to the localizations as follows. For a graded quasi-isomorphism $s:P'\\to P$ between bounded sources, Step 5 identifies the induced map on grade $r$ of $C$ with the sum of maps $\\operatorname{Hom}^\\bullet(\\operatorname{gr}^aP,\\operatorname{gr}^{a+r}I)\\to\\operatorname{Hom}^\\bullet(\\operatorname{gr}^aP',\\operatorname{gr}^{a+r}I)$. Its degree-$q$ cohomology is precomposition with the invertible morphism $\\operatorname{gr}^as$ in the derived category, by [lem-weil-pbc-kinjective-hom-derived]; therefore it is an isomorphism in every degree. Thus the map of filtered Hom complexes is a graded quasi-isomorphism. In the second variable choose the quasi-inverse to the exact equivalence [lem-trf-filtered-localization-injective-model]. Its maps are filtration-preserving maps between injective representatives, unique up to filtration-preserving homotopy. Postcomposition induces maps of filtered Hom complexes; the formula $T$ above gives the induced Hom-complex homotopy preserving every $F^r$. Two choices of resolutions are inverse up to such homotopy by the same equivalence, so their Hom complexes are filtered homotopy equivalent. The localization universal property is applied one variable at a time. For fixed $I$, part (1) descends $P\\mapsto C(P,I)$ to the opposite of the bounded localization. A homotopy class $I\\to I'$ gives a natural transformation, and part (2) descends it uniquely, compatibly with identities and composition. Composing in the second variable with the embedding into $DF^+(\\mathcal A)$ and the quasi-inverse equivalence gives a well-defined bifunctor on the two bounded filtered localizations, denoted $R\\operatorname{Hom}_F$, and the natural underlying and graded comparisons of Steps 4–5 descend along with it. All output filtrations and lower cochain bounds are those established in Step 4. This constructs the asserted object in $DF^+(\\mathbf{Ab})$ without any assumption of finite injective dimension.",
+   "text": "Apply [lem-trf-filtered-hom-complex-invariance] to the complex $C(P,I)$ of Step 4. Precomposition and postcomposition give compatible maps, respect filtered homotopies, and precomposition inverts graded quasi-isomorphisms between bounded sources after localization. Thus, for each fixed $I$, part (1) of [lem-weil-pbc-localization-universal-property] descends $P\\mapsto C(P,I)$ to the opposite bounded filtered localization. A filtered homotopy class $I\\to J$ gives a natural transformation by postcomposition. Part (2) descends this transformation uniquely, preserving identities and composition. Consequently we obtain a functor from the homotopy category of bounded-below filtered-injective complexes to functors on the opposite bounded localization.\n\nCompose this functor with a quasi-inverse to the exact equivalence [lem-trf-filtered-localization-injective-model], and restrict its second variable to bounded objects. This defines the required bifunctor $R\\operatorname{Hom}_F$. Different injective representatives are inverse up to filtered homotopy by that equivalence, and the invariance lemma makes the resulting Hom complexes filtered homotopy equivalent. The natural underlying and graded comparisons of Steps 4–5 descend by part (2) of the same universal property, one variable at a time. Their descended equalities are unique by part (3). The filtration and lower cochain bounds established in Step 4 put the output in $DF^+(\\mathbf{Ab})$; no finite injective dimension is assumed.",
    "uses": [
+    "lem-trf-filtered-hom-complex-invariance",
     "lem-trf-filtered-localization-injective-model",
-    "lem-weil-pbc-kinjective-hom-derived",
     "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
@@ -130,11 +132,15 @@
   "lem-weil-pbc-localization-universal-property",
   "lem-trf-filtered-localization-injective-model",
   "lem-trf-bounded-filtered-localization-embedding",
-  "def-sp-injective-resolutions",
+  "lem-trf-injective-graded-filtration-splits",
   "def-weil-triangulated-category",
+  "lem-trf-filtered-unbounded-truncation",
+  "lem-trf-filtered-bounded-localization-comparison",
   "lem-weil-pbc-triangle-morphism-extension",
+  "def-sp-injective-resolutions",
   "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-trf-filtered-hom-complex-invariance"
  ],
  "proof_origin": {
   "by": "agent",
@@ -179,7 +185,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-invariant-localization-filtered-lift",
@@ -203,7 +209,7 @@
   "date": "2026-10-17",
   "item": "lem-trf-filtered-derived-hom-calculus",
   "worker": "stage1",
-  "summary": "Six constructive steps prove the truncation triangles and their unique functoriality by filtered-injective models and orthogonality, then construct the filtered Hom complex with its differential, bounds, graded quotient, invariance, H^0 interpretation and precise forgetful and projection maps. The only new node is the strict bounded/bounded-below filtered-localization embedding (Stacks 05S6); the existing localization-injective-model is reused. The statement is unchanged; enough injectives is now also an explicit statement dependency. Second reading makes triangle comparison uniqueness a direct TR3 argument and writes the signed Hom-complex homotopies explicitly; no statement change. Maintainer reader (2026-10-17): a new first step proves by the filtered cylinder that the localization of complexes equals that of the homotopy category; Step 3 (old Step 2) cites lem-weil-pbc-triangle-morphism-extension for the triangle comparison instead of reproving it; Step 6 (old Step 5) states the one-variable-at-a-time descent. The later steps are renumbered by one.",
+  "summary": "Repair of the 2026-10-17 long-step return. The statement, statement dependencies, Lean record, and Steps 1, 2, 4, 5, 7 are unchanged. Step 3 now cites the existing split-flag theorem and independent unbounded truncation/fully faithful comparison nodes for the hidden semiorthogonality argument, then keeps the cone and TR3 uniqueness argument. Step 6 cites the new statement-only filtered-Hom-complex invariance lemma and retains the one-variable-at-a-time descent. All non-elementary steps are shorter than 2000 characters.",
   "blueprint": "Ancestor lem-trf-local-term-locality proof paragraphs (1) and (2), via lem-trf-invariant-localization-filtered-lift: the filtered truncation and RHom calculus of Varshavsky §§5.1.1–5.1.5 underlying the localization-filtration argument.",
   "tool_uses": [
    {
@@ -213,20 +219,35 @@
    {
     "node": "lem-weil-pbc-triangle-morphism-extension",
     "why": "Generic pre-triangulated lemma (existence and uniqueness of the third map of a triangle morphism when Hom(X[1],Z')=0), used as a black box for the uniqueness of the truncation triangle; no node of sk-i-curve-zero states it. The maintainer reader added it in place of the step's inline TR3 reproof."
+   },
+   {
+    "node": "lem-trf-injective-graded-filtration-splits",
+    "why": "Generic finite split-flag lemma used termwise for filtered-injective truncations and the Step 5 lifting calculation; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-trf-filtered-unbounded-truncation",
+    "why": "Only the universal Hom bijection and graded-truncation formula are used to obtain semiorthogonality; this independent generic filtered-complex theorem keeps the original support-vanishing route."
+   },
+   {
+    "node": "lem-trf-filtered-bounded-localization-comparison",
+    "why": "Generic fully faithful bounded-below inclusion in the unbounded filtered localization, used to transfer Hom vanishing; independent of geometry and not supplied by this unit."
    }
   ]
  },
  "tool_uses": [
   "lem-trf-filtered-localization-injective-model",
-  "lem-weil-pbc-triangle-morphism-extension"
+  "lem-weil-pbc-triangle-morphism-extension",
+  "lem-trf-injective-graded-filtration-splits",
+  "lem-trf-filtered-unbounded-truncation",
+  "lem-trf-filtered-bounded-localization-comparison"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q50-a79073a8b",
-  "group": "Q50",
+  "reviewer": "NT-cc-Q22-6dd2d307f",
+  "group": "Q22",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-a79073a8b (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement, Varshavsky pp.39-41 (5.1.1-5.1.5, Lemma 5.1.4 with its proof), Stacks derived.tex 05S2-05S6, the unit sk-i-curve-zero and the parent's use of the item. The statement matches Varshavsky 5.1.5 and 5.1.4(i) in the contravariant case: the index is target minus source, the filtration bounds are c-b and e-a+1, and RHom is kept to bounded P,Q. The reported source error is confirmed: in 5.1.1(c), t>=a is the right adjoint of the embedding, not the left one (k in grade 0 mapping to k in grade 1); the proof never uses that sentence. Every step was checked by hand: the split flag, the cone-to-quotient contraction, orthogonality, the Hom-complex signs (cocycle, boundary, S and T homotopies), the bounds, the graded-quotient kernel and surjectivity by injective extension, and the H^0, forgetful and projection identifications. All correct. The new node is true without enough injectives, by Stacks 05S6(1),(3) and the 05S5 truncation, which keeps the filtration interval. It is not a duplicate: I searched the DAG for 05S5, 05S6 and filtered/bounded/uniqueness terms; lem-trf-filtered-operations-hom is a sheaf-level specialization of the item, not a merge. FIXES: (1) Gap: the statement localizes filtered complexes, the cited nodes localize the homotopy category. A new Step 1 proves they agree with the filtered cylinder, so steps are renumbered. (2) Long step 2 (now Step 3) re-proved inline the existing lem-weil-pbc-triangle-morphism-extension(2). It now cites that node, with the tool use declared, and drops lem-weil-pbc-hom-into-triangle-exact. The rest of the step is one argument. (3) Long step 5 (now Step 6) is one construction and stays; its two-variable descent is now spelled out one variable at a time. (4) The new node's statement now cites def-weil-triangulated-category for 'exact'. Accepted tool uses: lem-trf-filtered-localization-injective-model and lem-weil-pbc-triangle-morphism-extension, both generic homological algebra used as black boxes.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-6dd2d307f (reviewer sub-agent of L); spot-checked: Read the item and the new node lem-trf-filtered-hom-complex-invariance in full, plus the statements of all 15 cited nodes, Varshavsky pp.39-41 (5.1.1-5.1.5, Lemma 5.1.4 and its proof) and Stacks 05TP, 05TY and 070J (labels checked against tags/tags). The item statement is unchanged and matches Varshavsky 5.1.2(c), 5.1.5 and 5.1.4(i) in the contravariant case (target index a+r), with RHom restricted to bounded P,Q; nothing is weakened. The 5.1.1(c) adjoint-direction source error is confirmed by k in grade 0 vs grade 1, and the item never uses that sentence. Checked every step by hand. Step 1: the filtered cylinder squares to zero and its graded kernel is a contractible identity cone. Step 3, repaired: the cone-to-quotient contraction (y,x)->(0,y) works; the vanishing Hom(L,R[q])=0 follows from the unbounded-truncation bijection with M=R[q]; full faithfulness transfers it to the bounded categories; triangle-morphism-extension (1)(c) and (2) with q=0 and q=-1 give uniqueness, and reversing the triangles gives the isomorphism. Step 4: filtration bounds c-b and e-a+1, lower bound w-v and the cocycle/boundary signs are right. Step 5: the kernel is F^{r+1}, and surjectivity by injective extension holds in all three grade cases. Step 6, repaired: it uses exactly the new node's clauses, with one-variable descent by the localization universal property (1)-(3). Step 7: the H^0, forgetful-map and gr^0 identifications hold. New node: the homotopy formulas S(f)=(-1)^n f h and T(f)=k f check out, and the graded quasi-isomorphism clause holds by the termwise split flags, the graded Hom decomposition and 070J K-injectivity, with finite sums because P is bounded. Tested on zero P, a single filtration grade and r outside the support. It is statement-only and self-contained, not a clause of the item, and not a duplicate (the closest is lem-trf-hom-dual-preserves-homotopies, which is unfiltered and covers only homotopies). No cycle: the closure of no cited node reaches the item. Accepted all five declared tool uses as generic homological algebra: injective-model, triangle-morphism-extension, injective-graded-filtration-splits, filtered-unbounded-truncation, filtered-bounded-localization-comparison. Minor, not a fault: the new node has no lean_audit field. Remark only: the DF/DF^+ truncation-triangle uniqueness is also stated by the existing lem-trf-filtered-truncation-triangle. No fixes; review in review.md."
  },
  "reviewed_lean": {
   "date": "2026-10-17",

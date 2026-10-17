@@ -28,10 +28,10 @@
  ],
  "proof": [
   {
-   "text": "Use the size convention of [def-weil-size-convention]. Here is an explicit finite-limit sketch in the sense defined in [lem-coef-finite-limit-sketch-models]. Take sorts $O$ and $A_n$ for every $n\\in\\mathbf Z$, maps $s_n,t_n:A_n\\to O$, and the finite pullback sorts for parallel arrows, composable pairs, and the triples needed in the laws. Include maps $z_n:O\\times O\\to A_n$, scalar multiplications $A_n\\to A_n$ for each $r\\in R$, negation, addition on parallel pairs, identities $O\\to A_0$, compositions $A_q\\times_O A_p\\to A_{p+q}$, and $d_n:A_n\\to A_{n+1}$. Impose the source-target equations, the $R$-module equations in each fiber of $(s_n,t_n)$, associativity, units and bilinearity of composition, linearity of $d$, $d(1)=0$, $d_{n+1}d_n=z_{n+2}(s_n,t_n)$, and the stated signed Leibniz equation on each composable-pair sort. Equations are equalities of maps, hence relations in the indexing category. Every tuple of maps into the vertex of a specified cone that an equation uses (for example $(r\\circ\\mathrm{pr}_1,r\\circ\\mathrm{pr}_2)$ on the parallel-pair sort, or the pairs of $d\\circ\\mathrm{pr}_1,\\mathrm{pr}_2$ and $\\mathrm{pr}_1,d\\circ\\mathrm{pr}_2$ on a composable-pair sort in the Leibniz equation) is included as a generating arrow into that vertex, with the equations prescribing its composites with the cone projections; since a model sends the cone to a limit, such an arrow is sent to the induced pairing, and a dg category determines it uniquely; the only specified limit cones are finite products and pullbacks. The free category on this signature modulo these equations is small: there are only $\\mathcal U$-many sorts, operations, finite strings and equations. A model gives exactly a dg category by setting $\\mathcal C(x,y)^n=(s_n,t_n)^{-1}(x,y)$; the inverse construction takes $A_n$ to the disjoint union of these fibers. Transformations give exactly dg functors, including arbitrary object maps. These two constructions are mutually inverse up to the evident natural identifications.",
+   "text": "For the fixed small ring $R$, take the explicit sketch $S_R$ supplied by [lem-coef-dgcat-finite-limit-sketch-signature], using [def-weil-size-convention]. Its object and homogeneous-arrow sorts, parallel and composable tuple cones, operations and equations are those for strict $R$-linear dg categories. This node supplies both smallness of the indexing category and the required pairing arrows into equation vertices; these are part of the signature, with projection relations, rather than extra unconstrained choices in a model.",
    "uses": [
     "def-weil-size-convention",
-    "lem-coef-finite-limit-sketch-models"
+    "lem-coef-dgcat-finite-limit-sketch-signature"
    ],
    "elementary": false,
    "source": {
@@ -40,7 +40,18 @@
    }
   },
   {
-   "text": "Apply [lem-coef-finite-limit-sketch-models] to this small finite-limit sketch. Its conclusion gives small Hom sets, all small limits and colimits, and a small filtered generating family of finitely presentable objects. The identification in step 1 preserves functors, so these are assertions about ordinary strict $R$-linear dg categories and dg functors; no localization, equivalence of object spaces, or homotopy colimit is being substituted. It also says that the object sort and every homogeneous-arrow sort of a filtered colimit are their colimits of sets.",
+   "text": "A model of the explicit sketch is exactly a small $R$-linear dg category: the fibers of each homogeneous-arrow sort give the morphism modules, the operations give scalar action, composition, units and differential, and the equations give the dg axioms. Conversely, disjoint unions of the fibers reconstruct the sorts and operations. Natural transformations are exactly dg functors, so the two constructions are mutually inverse up to the evident identifications.",
+   "uses": [
+    "lem-coef-dgcat-sketch-model-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Tabuada, Chapter 1, section 1.3.1, Lemma 1.10, printed pp. 28-30; explicit agent generalization and verification, not a locally archived proof."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-finite-limit-sketch-models] to this small finite-limit sketch. Its conclusion gives small Hom sets, all small limits and colimits, and a small filtered generating family of finitely presentable objects. The identification in step 2 preserves functors, so these are assertions about ordinary strict $R$-linear dg categories and dg functors; no localization, equivalence of object spaces, or homotopy colimit is being substituted. It also says that the object sort and every homogeneous-arrow sort of a filtered colimit are their colimits of sets.",
    "uses": [
     "lem-coef-finite-limit-sketch-models"
    ],
@@ -84,7 +95,7 @@
    }
   },
   {
-   "text": "Suppose $V$ is finitely presentable in $\\operatorname{Ch}(R)$ in the sense specified in the statement. A functor $T(V)\\to\\varinjlim_I\\mathcal C_i$ first chooses two objects; represent them at a common stage $i$. By step 3 its chain map has target $\\varinjlim_{i/I}\\mathcal C_j(u s,u t)$. Finite presentability of $V$ factors it through one term. For two functors with equal colimit images, the object equality criterion of [lem-weil-pbc-filtered-colimit-sets-elementwise] first makes their two object images equal at a common stage; finite presentability of $V$ applied to the subsequent $i/I$ diagram makes their chain maps equal after a further transition. This is exactly the injectivity, as well as surjectivity, of the map of Hom sets. Thus $T(V)$ is finitely presentable, including $V=0$. No termwise finite-presentation assumption on an unbounded complex is used.",
+   "text": "Suppose $V$ is finitely presentable in $\\operatorname{Ch}(R)$ in the sense specified in the statement. A functor $T(V)\\to\\varinjlim_I\\mathcal C_i$ first chooses two objects; represent them at a common stage $i$. By step 4 its chain map has target $\\varinjlim_{i/I}\\mathcal C_j(u s,u t)$. Finite presentability of $V$ factors it through one term. For two functors with equal colimit images, the object equality criterion of [lem-weil-pbc-filtered-colimit-sets-elementwise] first makes their two object images equal at a common stage; finite presentability of $V$ applied to the subsequent $i/I$ diagram makes their chain maps equal after a further transition. This is exactly the injectivity, as well as surjectivity, of the map of Hom sets. Thus $T(V)$ is finitely presentable, including $V=0$. No termwise finite-presentation assumption on an unbounded complex is used.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
@@ -150,7 +161,7 @@
    }
   },
   {
-   "text": "For a whole complex $V$, take $E$ to be its underlying graded module in steps 7-8 and prescribe $D(v)=d_V(v)$. The replacement formula of step 9 now preserves every word length. For homogeneous composable words $v,u$, expansion gives $D^2(vu)=D^2(v)u+((-1)^{|v|+1}+(-1)^{|v|})D(v)D(u)+vD^2(u)=D^2(v)u+vD^2(u)$. On each old factor $D^2=d_{\\mathcal C}^2=0$, and on each new factor $D^2=d_V^2=0$; induction on the number of factors and linearity therefore give $D^2=0$ on every word and finite sum. The length-$m$ summand has exactly the tensor differential with $V$ in each new-arrow position. Word evaluation extends a dg functor from $\\mathcal C$ precisely when the chosen map $V\\to\\mathcal D(Fs,Ft)$ is a chain map. Pure-tensor generation and lifting from [def-weil-pbc-module-tensor-product] again give existence and uniqueness, so this direct sum is the free dg adjoining construction, as claimed. For the single-arrow construction, a morphism of attaching data is a dg functor $F:\\mathcal C\\to\\mathcal C^{\\prime}$ taking $s,t,a$ to $s^{\\prime},t^{\\prime},a^{\\prime}$ (with the same degree $n$); send $e$ to the new generator $e^{\\prime}$. For the whole-complex construction it consists of a dg functor $F:\\mathcal C\\to\\mathcal C^{\\prime}$ with $F(s)=s^{\\prime}$ and $F(t)=t^{\\prime}$, together with a chain map $h:V\\to V^{\\prime}$; send each new factor by $h$. In both cases send each old factor by $F$. Evaluation on words shows that these maps respect composition and the differential, preserve word length, and commute with the projections to the associated graded pieces; identities and composites agree on every factor and hence on every word. These are the asserted naturality statements.",
+   "text": "For a whole complex $V$, take $E$ to be its underlying graded module in steps 8-9 and prescribe $D(v)=d_V(v)$. The replacement formula of step 10 now preserves every word length. For homogeneous composable words $v,u$, expansion gives $D^2(vu)=D^2(v)u+((-1)^{|v|+1}+(-1)^{|v|})D(v)D(u)+vD^2(u)=D^2(v)u+vD^2(u)$. On each old factor $D^2=d_{\\mathcal C}^2=0$, and on each new factor $D^2=d_V^2=0$; induction on the number of factors and linearity therefore give $D^2=0$ on every word and finite sum. The length-$m$ summand has exactly the tensor differential with $V$ in each new-arrow position. Word evaluation extends a dg functor from $\\mathcal C$ precisely when the chosen map $V\\to\\mathcal D(Fs,Ft)$ is a chain map. Pure-tensor generation and lifting from [def-weil-pbc-module-tensor-product] again give existence and uniqueness, so this direct sum is the free dg adjoining construction, as claimed. For the single-arrow construction, a morphism of attaching data is a dg functor $F:\\mathcal C\\to\\mathcal C^{\\prime}$ taking $s,t,a$ to $s^{\\prime},t^{\\prime},a^{\\prime}$ (with the same degree $n$); send $e$ to the new generator $e^{\\prime}$. For the whole-complex construction it consists of a dg functor $F:\\mathcal C\\to\\mathcal C^{\\prime}$ with $F(s)=s^{\\prime}$ and $F(t)=t^{\\prime}$, together with a chain map $h:V\\to V^{\\prime}$; send each new factor by $h$. In both cases send each old factor by $F$. Evaluation on words shows that these maps respect composition and the differential, preserve word length, and commute with the projections to the associated graded pieces; identities and composites agree on every factor and hence on every word. These are the asserted naturality statements.",
    "uses": [
     "def-weil-pbc-module-tensor-product"
    ],
@@ -162,10 +173,12 @@
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
   "def-weil-size-convention",
+  "lem-coef-dgcat-finite-limit-sketch-signature",
+  "lem-coef-dgcat-sketch-model-identification",
   "lem-coef-finite-limit-sketch-models",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "def-weil-pbc-module-tensor-product"
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
  ],
  "proof_origin": {
   "by": "agent",
@@ -210,7 +223,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dgcat-model-structure",
   "by": "worker",
@@ -232,20 +245,20 @@
   }
  },
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-coef-dgcat-free-cell-calculus",
   "worker": "stage1",
-  "summary": "Constructed the finite-limit sketch for strict small dg categories, applied one new general sketch-model theorem, proved finite-presentation descent and T(V) directly, and constructed the free word category with its differential, square-zero calculation, filtration and naturality. Reused the existing tensor universal property and filtered-set colimit lemma; no new clause-relabeling nodes. Clarified hom-universe size, the general filtered slice formula and the meaning of finitely presented complex.",
-  "blueprint": "Realizes the free-cell/smallness input of lem-coef-dgcat-model-structure in the mapping-complex adjunction of prop-coef-integral-exceptional-adjoint proof paragraph 2, through the recorded five-node ancestry. Current main-20261015 adjoint proof was read; this is below its unit route.",
+  "summary": "Repaired returned proof step 1 by extracting separate statement-only lemmas for the small explicit signature sketch (including all pairing arrows and projection relations) and its model/dg-category equivalence. Replaced it with two short cited steps. All other arguments, the item statement and its Lean record are retained; cross-references to renumbered steps are adjusted.",
+  "blueprint": "Realizes the free-cell/smallness input of lem-coef-dgcat-model-structure in the mapping-complex adjunction of prop-coef-integral-exceptional-adjoint proof paragraph 2, through the recorded five-node ancestry; the repaired first two steps make the finite-limit sketch construction and its model identification explicit.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q59-ab24a701f",
-  "group": "Q59",
+  "reviewer": "NT-cc-Q99-6830780a4",
+  "group": "Q99",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-ab24a701f (reviewer sub-agent of L); spot-checked: I read the whole item, all 12 steps, the new node lem-coef-finite-limit-sketch-models, every cited statement, the parent dgcat-model-structure and the other citers. I also downloaded and read Tabuada arXiv:0710.4303 myself. Thm 1.8 (p.27), the §1.3.1 smallness remark (p.28) and Lemme 1.10 (pp.28-30) contain both word calculations used here: the whole-disk direct sum of complexes, and the dh=1 adjoining, where the differential lowers word length and gives an exhaustive filtration whose pieces are subcomplexes. The item's generalization to any closed arrow a and any degree is marked as agent-written. Statement correction: the morphism complexes must now consist of U-small modules. I checked the counterexample (Z[x_s] with a non-small set S gives a non-small set of endofunctors), so the original statement was false. The correction does not weaken anything any citer uses. The i/I slice formula and the categorical meaning of a finitely presented complex are clarifications. Steps 2-12 check out against the cited statements: the sketch-model conclusion; filtered-colimit clauses 1-3 with parallel arrows equalized in i/I; finite presentations; elementary T(V); categorical finite presentability of V; tensor lifting and generation; the sign check and D^2=0 using d(a)=0; graded-only splitting with the Koszul quotient; whole-complex naturality. The new node is a true, statement-only general theorem (Adamek-Rosicky 1.51/1.52; small cases: empty sketch, Set). It meets B1-B9 and is not a restatement of a clause of the item. Whole-DAG rg found no duplicate among the presentability nodes. The route uses only definitions and a Mathlib leaf; tool_uses is empty and the unit and chapter are untouched. FIX, one repair: step 1 left implicit the pairing arrows into cone vertices that the module, bilinearity and Leibniz equations need. I made them explicit generators with projection equations, in fixes/dag/nodes/sec-six-functors/lem-coef-dgcat-free-cell-calculus.json. Nothing else changed.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-6830780a4 (reviewer sub-agent of L); spot-checked: The return asked for a re-split of the 2012-character step 1, and the delivery does exactly that. Compared with the side-tree base, only proof, proof_deps, status and split_report changed; the statement, stmt_deps, the Lean record, blueprint, unit and chapter are byte-identical. Old step 1 became steps 1 and 2, which cite the two new nodes. Old steps 2-12 are steps 3-13 with identical texts apart from correct step-number updates (step 3 now cites step 2, step 7 cites step 4, step 13 cites steps 8-9 and 10). The longest step is 1699 characters, proof_deps equals the union of uses, the graph stays acyclic, and both new nodes are in the item's unit, so no tool use is needed. New node lem-coef-dgcat-finite-limit-sketch-signature is true: its sorts, operations and relations (including d^2=0 written as d_{n+1}d_n=z_{n+2}p_n, the Leibniz sign (-1)^q, and pairing arrows with prescribed projections) type-check and are U-small since R is in U. It fits the definition of a sketch in lem-coef-finite-limit-sketch-models. New node lem-coef-dgcat-sketch-model-identification is true: models are equivalent, not isomorphic, to dg categories, and natural transformations correspond to strict dg functors, also for object maps that are not injective, by uniqueness of maps into limits. Neither new node restates a clause of the item; both are statement-only and self-contained. I tested the empty category, R=0, one object, s=t, V=0, characteristic 2 and arbitrary degrees. An rg search over the DAG and the blueprint found no duplicate; the nearest nodes, finite-limit-sketch-models, finite-limit-model-presentability and sorted-simplicial-algebra-model, are general theorems. I reread steps 3-13 against their cited statements. Tabuada arXiv:0710.4303 Lemma 1.10, pp. 28-30, is not archived locally, so I checked the new nodes' mathematics directly; they are correctly marked as constructions written by the agent. No fixes, no dropped nodes, no tool uses."
  },
  "reviewed_lean": {
   "date": "2026-10-16",

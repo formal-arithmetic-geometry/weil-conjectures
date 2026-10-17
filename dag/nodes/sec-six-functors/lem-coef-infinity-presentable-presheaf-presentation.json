@@ -42,21 +42,41 @@
    }
   },
   {
-   "text": "Put $\\mathcal P=\\operatorname{Fun}(D^{\\mathrm{op}},\\mathcal S)$ and $j(d)=\\operatorname{Map}_D(-,d)$. Construct $i$ by composing the coherent Yoneda functor of [lem-coef-infinity-yoneda-presheaf-limits] for $\\mathcal C$ with restriction along $f^{\\mathrm{op}}$. In particular $i(c)(d)=\\operatorname{Map}_{\\mathcal C}(f(d),c)$ is a small space, and full faithfulness of $f$ gives a coherent equivalence $if\\simeq j$. Let $q:I\\to\\mathcal C$ be a small $\\kappa$-filtered diagram with a specified colimiting cocone to $c$. Fix $d\\in D$ and write $H_d(a)=i(q(a))(d)$ and $M_d=i(c)(d)$, including their induced cocone. The current definition [def-coef-presentable-infinity-category] says that this mapping-space cocone, viewed in $\\mathcal S_{\\mathcal U'}$, is colimiting: compactness is defined using the larger-space-valued coherent corepresented functor, not by presupposing a colimit in $\\mathcal S=\\mathcal S_{\\mathcal U}$. To descend it, use [lem-coef-spaces-small-colimits-universe]. It gives a small-space colimit $Q_d=\\operatorname{colim}_I H_d$ and says that the fully faithful universe inclusion $\\iota:\\mathcal S_{\\mathcal U}\\to\\mathcal S_{\\mathcal U'}$ carries its cocone to a colimit cocone. The given cocone to $M_d$ induces a comparison $\\alpha_d:Q_d\\to M_d$. After inclusion both cocones are colimiting, so $\\iota(\\alpha_d)$ is an equivalence: their universal properties give an inverse map of cocones, and each composite is homotopic to the identity since the mapping space out of a colimiting cocone is contractible. This uses the cocone/initial-object clauses of [lem-cbc-enhanced-functor-cone-calculus], with $\\mathcal U'$ as the universe of spaces and a further ambient universe. Full faithfulness of $\\iota$ lifts the inverse and its two inverse homotopies to the small mapping spaces, proving that $\\alpha_d$ itself is an equivalence. Thus the canonical cocone $iq\\to i(c)$ is objectwise colimiting in small spaces. The pointwise colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits], applied with the small parameter $D^{\\mathrm{op}}$, now shows that $i$ preserves these colimits. All colimits in $\\mathcal P$ and in this conclusion retain the original $\\mathcal U$-small meaning.",
+   "text": "Put $\\mathcal P=\\operatorname{Fun}(D^{\\mathrm{op}},\\mathcal S)$ and $j(d)=\\operatorname{Map}_D(-,d)$. Construct $i$ by composing the coherent Yoneda functor of [lem-coef-infinity-yoneda-presheaf-limits] for $\\mathcal C$ with restriction along $f^{\\mathrm{op}}$. In particular $i(c)(d)=\\operatorname{Map}_{\\mathcal C}(f(d),c)$ is a small space, and full faithfulness of $f$ gives a coherent equivalence $if\\simeq j$.",
    "uses": [
-    "lem-coef-infinity-yoneda-presheaf-limits",
-    "def-coef-presentable-infinity-category",
-    "lem-coef-spaces-small-colimits-universe",
-    "lem-cbc-enhanced-functor-cone-calculus"
+    "lem-coef-infinity-yoneda-presheaf-limits"
    ],
    "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "HTT Definition 5.3.4.5 (corepresented functor to larger spaces); Corollary 4.2.4.8 and the universe-change statement of lem-coef-spaces-small-colimits-universe; Propositions 5.1.2.2 and 5.1.3.1. Explicit descent of the compactness cocone to small spaces."
+    "place": "Theorem 5.5.1.1(1) to (5), restricted Yoneda construction; Proposition 5.1.3.1."
    }
   },
   {
-   "text": "Fix $c,c'\\in\\mathcal C$ and use a presentation $c\\simeq\\operatorname{colim}_{a\\in I}f(p(a))$ from step 1. Step 2 gives $ic\\simeq\\operatorname{colim}_{a\\in I}j(p(a))$. The colimit mapping-space test of [lem-coef-infinity-yoneda-presheaf-limits] in $\\mathcal P$ and in $\\mathcal C$, together with [lem-coef-infinity-yoneda-evaluation], gives\n$$\\operatorname{Map}_{\\mathcal P}(ic,ic')\\simeq\\lim_{a\\in I^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal P}(j(p(a)),ic')\\simeq\\lim_{a\\in I^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal C}(f(p(a)),c')\\simeq\\operatorname{Map}_{\\mathcal C}(c,c').$$\nThis identifies the actual map induced by $i$ as an equivalence: at each $p(a)$, evaluation at its identity sends the transformation induced by $u:c\\to c'$ to the composite $f(p(a))\\to c\\xrightarrow{u}c'$. These are exactly the components of the colimit comparison on the right, including their coherent compatibilities. Hence the map on the entire mapping space, rather than just on components, is inverted by the displayed chain. This proves full faithfulness of $i$. Every limit here is indexed by the small $I^{\\mathrm{op}}$.",
+   "text": "Let $q:I\\to\\mathcal C$ be a small $\\kappa$-filtered diagram with a colimiting cocone to $c$. For $d\\in D$ put $H_d(a)=i(q(a))(d)$ and $M_d=i(c)(d)$, with their induced cocone. Each $f(d)$ is $\\kappa$-compact, so [def-coef-presentable-infinity-category] says that this mapping-space cocone is colimiting in $\\mathcal S_{\\mathcal U'}$. Its individual spaces have small representatives because $\\mathcal C$ is locally small.",
+   "uses": [
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 5.3.4.5 and the compactness convention of def-coef-presentable-infinity-category."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-universe-colimit-descent] to $H_d\\to\\Delta_I M_d$. It supplies a colimit $Q_d$ in small spaces and shows that the induced comparison $Q_d\\to M_d$ is an equivalence, so this cocone is colimiting in $\\mathcal S_{\\mathcal U}$. This holds for every $d$. The pointwise criterion in [lem-coef-infinity-yoneda-presheaf-limits], with the small parameter $D^{\\mathrm{op}}$, now shows that $iq\\to i(c)$ is colimiting in $\\mathcal P$. Thus $i$ preserves small $\\kappa$-filtered colimits; small throughout means $\\mathcal U$-small.",
+   "uses": [
+    "lem-coef-infinity-universe-colimit-descent",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent universe-descent argument extracted from original step 2; pointwise colimit criterion of Proposition 5.1.2.2."
+   }
+  },
+  {
+   "text": "Fix $c,c'\\in\\mathcal C$ and use a presentation $c\\simeq\\operatorname{colim}_{a\\in I}f(p(a))$ from step 1. Step 4 gives $ic\\simeq\\operatorname{colim}_{a\\in I}j(p(a))$. The colimit mapping-space test of [lem-coef-infinity-yoneda-presheaf-limits] in $\\mathcal P$ and in $\\mathcal C$, together with [lem-coef-infinity-yoneda-evaluation], gives\n$$\\operatorname{Map}_{\\mathcal P}(ic,ic')\\simeq\\lim_{a\\in I^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal P}(j(p(a)),ic')\\simeq\\lim_{a\\in I^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal C}(f(p(a)),c')\\simeq\\operatorname{Map}_{\\mathcal C}(c,c').$$\nThis identifies the actual map induced by $i$ as an equivalence: at each $p(a)$, evaluation at its identity sends the transformation induced by $u:c\\to c'$ to the composite $f(p(a))\\to c\\xrightarrow{u}c'$. These are exactly the components of the colimit comparison on the right, including their coherent compatibilities. Hence the map on the entire mapping space, rather than just on components, is inverted by the displayed chain. This proves full faithfulness of $i$. Every limit here is indexed by the small $I^{\\mathrm{op}}$.",
    "uses": [
     "lem-coef-infinity-yoneda-presheaf-limits",
     "lem-coef-infinity-yoneda-evaluation"
@@ -79,7 +99,7 @@
    }
   },
   {
-   "text": "For $c\\in\\mathcal C$ compare the contravariant space-valued functors $K_c(X)=\\operatorname{Map}_{\\mathcal C}(LX,c)$ and $R_c(X)=\\operatorname{Map}_{\\mathcal P}(X,ic)$. They take small colimits to limits by step 4 and [lem-coef-infinity-yoneda-presheaf-limits]. On $j(D)$ their restrictions are naturally equivalent: $K_c(jd)\\simeq\\operatorname{Map}_{\\mathcal C}(f(d),c)=ic(d)\\simeq R_c(jd)$ by $Lj\\simeq f$ and [lem-coef-infinity-yoneda-evaluation]. Since $\\mathcal S$ has small limits by [lem-coef-infinity-yoneda-presheaf-limits], its opposite has small colimits. Apply [lem-coef-infinity-presheaf-free-cocompletion] with target $\\mathcal S^{\\mathrm{op}}$ to $K_c^{\\mathrm{op}},R_c^{\\mathrm{op}}:\\mathcal P\\to\\mathcal S^{\\mathrm{op}}$. A quasi-inverse to its restriction equivalence lifts the equivalence just obtained, giving $K_c\\simeq R_c$. This lift is coherent in $c$ as well as $X$: apply that same quasi-inverse to the diagram of restrictions parametrized by $\\mathcal C^{\\mathrm{op}}$, and compose with its two inverse-functor equivalences. Postcomposition by a quasi-inverse is defined on diagrams and all their simplices, so the equivalence is one of mapping-space bifunctors. One may use an additional ambient universe for this parameter functor category without changing $D$, the spaces, or the meaning of small. No limit indexed by the large $\\mathcal P$ or $\\mathcal C$ is used.",
+   "text": "For $c\\in\\mathcal C$ compare the contravariant space-valued functors $K_c(X)=\\operatorname{Map}_{\\mathcal C}(LX,c)$ and $R_c(X)=\\operatorname{Map}_{\\mathcal P}(X,ic)$. They take small colimits to limits by step 6 and [lem-coef-infinity-yoneda-presheaf-limits]. On $j(D)$ their restrictions are naturally equivalent: $K_c(jd)\\simeq\\operatorname{Map}_{\\mathcal C}(f(d),c)=ic(d)\\simeq R_c(jd)$ by $Lj\\simeq f$ and [lem-coef-infinity-yoneda-evaluation]. Since $\\mathcal S$ has small limits by [lem-coef-infinity-yoneda-presheaf-limits], its opposite has small colimits. Apply [lem-coef-infinity-presheaf-free-cocompletion] with target $\\mathcal S^{\\mathrm{op}}$ to $K_c^{\\mathrm{op}},R_c^{\\mathrm{op}}:\\mathcal P\\to\\mathcal S^{\\mathrm{op}}$. A quasi-inverse to its restriction equivalence lifts the equivalence just obtained, giving $K_c\\simeq R_c$. This lift is coherent in $c$ as well as $X$: apply that same quasi-inverse to the diagram of restrictions parametrized by $\\mathcal C^{\\mathrm{op}}$, and compose with its two inverse-functor equivalences. Postcomposition by a quasi-inverse is defined on diagrams and all their simplices, so the equivalence is one of mapping-space bifunctors. One may use an additional ambient universe for this parameter functor category without changing $D$, the spaces, or the meaning of small. No limit indexed by the large $\\mathcal P$ or $\\mathcal C$ is used.",
    "uses": [
     "lem-coef-infinity-yoneda-presheaf-limits",
     "lem-coef-infinity-yoneda-evaluation",
@@ -92,20 +112,31 @@
    }
   },
   {
-   "text": "Step 5 represents, for each $c$, the presheaf $X\\mapsto\\operatorname{Map}_{\\mathcal C}(LX,c)$ by the actual object $ic$. Apply [lem-coef-infinity-pointwise-adjoint-criterion] to obtain a coherent right adjoint $r$ and its representing mapping-space bifunctor equivalence. Composing that equivalence with step 5 gives $\\operatorname{Map}_{\\mathcal P}(-,rc)\\simeq\\operatorname{Map}_{\\mathcal P}(-,ic)$, coherently in $c$. Full faithfulness of the Yoneda functor $j_{\\mathcal P}:\\mathcal P\\to\\operatorname{Fun}(\\mathcal P^{\\mathrm{op}},\\mathcal S)$ in [lem-coef-infinity-yoneda-presheaf-limits] ($\\mathcal P$ has small mapping spaces by step 4) identifies this with a natural equivalence $r\\simeq i$, as follows. The displayed equivalence is an equivalence edge $j_{\\mathcal P}r\\simeq j_{\\mathcal P}i$ in $\\operatorname{Fun}(\\mathcal C,\\operatorname{Fun}(\\mathcal P^{\\mathrm{op}},\\mathcal S))$. Let $\\mathcal Y_0$ be the full subcategory on presheaves equivalent to some $j_{\\mathcal P}(X)$; since a full subcategory contains every simplex whose vertices lie in it, this edge and its inverse witnesses lie in $\\operatorname{Fun}(\\mathcal C,\\mathcal Y_0)$. By [lem-coef-infinity-full-essential-image] the corestriction $J_0:\\mathcal P\\to\\mathcal Y_0$ has a coherent quasi-inverse $K$ with $KJ_0\\simeq1_{\\mathcal P}$. Postcomposition with $K$ is a simplicial map of functor quasicategories and carries equivalence edges with their witnessing $2$-simplices to equivalence edges, so $r\\simeq KJ_0r\\simeq KJ_0i\\simeq i$ in $\\operatorname{Fun}(\\mathcal C,\\mathcal P)$, the outer equivalences being $KJ_0\\simeq1_{\\mathcal P}$ whiskered by $r$ and by $i$. Compose the adjunction equivalence with this identification to write the adjunction as $L\\dashv i$. Its representing equivalence is the one in step 5, and the cited adjoint criterion supplies its unit $\\eta$, counit $\\epsilon$ and coherent triangle identities. Consequently its forward map sends $h:LX\\to c$ to $i(h)\\eta_X$, and its inverse sends $g:X\\to ic$ to $\\epsilon_c L(g)$: these follow by naturality from the images of the identity maps that define the unit and counit.",
+   "text": "Step 7 represents, for each $c$, the presheaf $X\\mapsto\\operatorname{Map}_{\\mathcal C}(LX,c)$ by $ic$. By [lem-coef-infinity-pointwise-adjoint-criterion] there is a coherent right adjoint $r$ to $L$ and its representing mapping-space bifunctor equivalence. Composing it with step 7 gives $\\operatorname{Map}_{\\mathcal P}(-,r(c))\\simeq\\operatorname{Map}_{\\mathcal P}(-,i(c))$, coherently in $c$.",
    "uses": [
-    "lem-coef-infinity-pointwise-adjoint-criterion",
-    "lem-coef-infinity-yoneda-presheaf-limits",
-    "lem-coef-infinity-full-essential-image"
+    "lem-coef-infinity-pointwise-adjoint-criterion"
    ],
    "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "Proposition 5.2.4.2, Definition 5.2.2.7 and Proposition 5.2.2.8; unit and counit of the representing adjunction."
+    "place": "Proposition 5.2.4.2 and Section 5.2, pointwise representability criterion."
    }
   },
   {
-   "text": "For each $c,c'\\in\\mathcal C$, precomposition by $\\epsilon_c:Lic\\to c$ is an equivalence $\\operatorname{Map}_{\\mathcal C}(c,c')\\to\\operatorname{Map}_{\\mathcal C}(Lic,c')$. Indeed, under the adjunction its value at $h$ is $i(h\\epsilon_c)\\eta_{ic}\\simeq i(h)$ by the triangle identity $i(\\epsilon_c)\\eta_{ic}\\simeq1_{ic}$; the map $h\\mapsto i(h)$ is an equivalence by step 3. Taking $c'=Lic$ supplies $t:c\\to Lic$ with $t\\epsilon_c\\simeq1_{Lic}$. The two maps $\\epsilon_ct$ and $1_c$ have homotopic images under precomposition by $\\epsilon_c$; using the same equivalence with $c'=c$ yields $\\epsilon_ct\\simeq1_c$. Thus every counit component is an equivalence, with an explicit two-sided inverse. The counit is already a coherent transformation by step 6. Apply the vertexwise-equivalence clause of [lem-cbc-enhanced-functor-cone-calculus] with $K=\\mathcal C$, using $\\mathcal U\\prime$ as that clause's small universe and one further ambient universe. The parameter and target $\\mathcal C$ fit in $\\mathcal U\\prime$; this application does not change the original meaning of small colimits or spaces. This makes $\\epsilon$ a natural equivalence, as required.",
+   "text": "By [lem-coef-infinity-yoneda-presheaf-limits], the Yoneda functor $j_{\\mathcal P}$ is fully faithful; $\\mathcal P$ has small mapping spaces by step 6. Step 8 gives an equivalence $j_{\\mathcal P}r\\simeq j_{\\mathcal P}i$ in the functor category with parameter $\\mathcal C$. Apply [lem-coef-infinity-yoneda-functor-equivalence-lift], enlarging the ambient universe to contain the presheaf target, to obtain $r\\simeq i$ coherently, inducing that same Yoneda-image equivalence. Transport the adjunction along it to obtain $L\\dashv i$, with the unit, counit and triangle identities supplied by [lem-coef-infinity-pointwise-adjoint-criterion]. Naturality and the images of identity maps give the forward formula $h\\mapsto i(h)\\eta_X$ and inverse formula $g\\mapsto\\epsilon_cL(g)$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-yoneda-functor-equivalence-lift",
+    "lem-coef-infinity-pointwise-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent functor-level Yoneda lifting extracted from original step 6; Section 5.2, units and counits."
+   }
+  },
+  {
+   "text": "For each $c,c'\\in\\mathcal C$, precomposition by $\\epsilon_c:Lic\\to c$ is an equivalence $\\operatorname{Map}_{\\mathcal C}(c,c')\\to\\operatorname{Map}_{\\mathcal C}(Lic,c')$. Indeed, under the adjunction its value at $h$ is $i(h\\epsilon_c)\\eta_{ic}\\simeq i(h)$ by the triangle identity $i(\\epsilon_c)\\eta_{ic}\\simeq1_{ic}$; the map $h\\mapsto i(h)$ is an equivalence by step 5. Taking $c'=Lic$ supplies $t:c\\to Lic$ with $t\\epsilon_c\\simeq1_{Lic}$. The two maps $\\epsilon_ct$ and $1_c$ have homotopic images under precomposition by $\\epsilon_c$; using the same equivalence with $c'=c$ yields $\\epsilon_ct\\simeq1_c$. Thus every counit component is an equivalence, with an explicit two-sided inverse. The counit is already a coherent transformation by step 9. Apply the vertexwise-equivalence clause of [lem-cbc-enhanced-functor-cone-calculus] with $K=\\mathcal C$, using $\\mathcal U\\prime$ as that clause's small universe and one further ambient universe. The parameter and target $\\mathcal C$ fit in $\\mathcal U\\prime$; this application does not change the original meaning of small colimits or spaces. This makes $\\epsilon$ a natural equivalence, as required.",
    "uses": [
     "lem-cbc-enhanced-functor-cone-calculus"
    ],
@@ -116,7 +147,7 @@
    }
   },
   {
-   "text": "The other triangle identity is $\\epsilon_{LX}L(\\eta_X)\\simeq1_{LX}$. Since $\\epsilon_{LX}$ is an equivalence by step 7, $L(\\eta_X)$ is its inverse and is therefore an equivalence. Finally full faithfulness in step 3 and the adjunction in step 6 identify the composite\n$$\\operatorname{Map}_{\\mathcal P}(iLX,ic)\\simeq\\operatorname{Map}_{\\mathcal C}(LX,c)\\simeq\\operatorname{Map}_{\\mathcal P}(X,ic)$$\nwith precomposition by $\\eta_X$: a map $i(h)$ is sent to $i(h)\\eta_X$, and every map on the left is so represented on its full mapping space. This is an equivalence and gives the displayed unit-precomposition assertion. Along with steps 3, 4, 6 and 7 this proves every clause of the item.",
+   "text": "The other triangle identity is $\\epsilon_{LX}L(\\eta_X)\\simeq1_{LX}$. Since $\\epsilon_{LX}$ is an equivalence by step 10, $L(\\eta_X)$ is its inverse and is therefore an equivalence. Finally full faithfulness in step 5 and the adjunction in step 9 identify the composite\n$$\\operatorname{Map}_{\\mathcal P}(iLX,ic)\\simeq\\operatorname{Map}_{\\mathcal C}(LX,c)\\simeq\\operatorname{Map}_{\\mathcal P}(X,ic)$$\nwith precomposition by $\\eta_X$: a map $i(h)$ is sent to $i(h)\\eta_X$, and every map on the left is so represented on its full mapping space. This is an equivalence and gives the displayed unit-precomposition assertion. Along with steps 5, 6, 9 and 10 this proves every clause of the item.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -127,13 +158,13 @@
  ],
  "proof_deps": [
   "def-coef-presentable-infinity-category",
-  "lem-coef-infinity-yoneda-presheaf-limits",
-  "lem-coef-spaces-small-colimits-universe",
   "lem-cbc-enhanced-functor-cone-calculus",
-  "lem-coef-infinity-yoneda-evaluation",
-  "lem-coef-infinity-presheaf-free-cocompletion",
   "lem-coef-infinity-pointwise-adjoint-criterion",
-  "lem-coef-infinity-full-essential-image"
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-infinity-universe-colimit-descent",
+  "lem-coef-infinity-yoneda-evaluation",
+  "lem-coef-infinity-yoneda-functor-equivalence-lift",
+  "lem-coef-infinity-yoneda-presheaf-limits"
  ],
  "proof_origin": {
   "by": "agent",
@@ -241,7 +272,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-continuous-presheaf-representability",
@@ -254,12 +285,12 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-presentable-presheaf-presentation",
   "worker": "stage1",
-  "summary": "Repair of landing refusal at returned head 1b8a7db392: revalidated all cited statements against the current DAG. Step 2 now applies compactness in the larger space category as the revised definition requires, and descends its colimiting cocone through the existing fully faithful, colimit-preserving universe inclusion. Added the existing spaces-small-colimits-universe input and the existing cocone-calculus input to step 2; refreshed every quotation. The eight-step proof, theorem statement and unit/chapter binding are retained, with zero new nodes and zero Mathlib leaves.",
-  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, the finite-coefficient mapping-complex adjunction before the displayed derived inverse limit. Read its current main-20261015 proof, now under sk-thm-sf-package. These steps supply the presheaf-presentation foundation in the existing created.item chain through presentable adjoints and enriched-category calculus, without changing the chapter or unit route.",
+  "summary": "Repair of returned long steps 2 and 6: extracted universe-colimit descent and coherent lifting of functor equivalences as two statement-only nodes. Restored the complete restricted-Yoneda construction dropped in the interrupted repair, retained all other arguments, and updated step numbering, citations, blueprint ancestry and actual search logs. The statement and Lean audit are unchanged.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: the finite-coefficient mapping-complex adjunction before the displayed derived inverse limit. The revised steps realize the compact-generator presentation, universe descent, restricted Yoneda, free cocompletion and coherent adjunction portions of that paragraph.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
-    "why": "Step 2 uses the generic cocone/initial-object clauses to compare the two colimit cocones in larger spaces; step 7 uses the generic vertexwise equivalence criterion after its explicit counit inverse calculation. No node of this unit states those generic quasicategory criteria. These applications do not replace any geometric or coefficient step of the unit."
+    "why": "Step 10 uses the generic vertexwise-equivalence criterion after the explicit counit inverse calculation, in shifted ambient universes. No node of this unit supplies that generic quasicategory criterion; no geometric unit step is replaced."
    }
   ]
  },
@@ -267,12 +298,12 @@
   "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q07-2b0307122",
-  "group": "Q07",
+  "reviewer": "NT-cc-NG-f92f18d2b",
+  "group": "NG",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-2b0307122 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the full statements of all 9 cited nodes. I also read unit sk-prop-sf-biduality-general and the main-20261015 ancestor proof (prop-coef-integral-exceptional-adjoint, paragraph 2). HTT is not archived, and the proof is correctly marked by=agent with a WANTED line. The statement follows from HTT 5.5.1.1 (1)=>(5) and Def 5.2.7.2, without accessibility, and no hypothesis is added. Step 2 now matches the current compactness definition: it applies compactness in S_U', then descends through spaces-small-colimits-universe (small colimit exists, iota fully faithful and colimit-preserving), using initial-cocone contractibility and lifting the inverse homotopies; every clause it uses is in the cited statements. Steps 3-5 check out: colimit-to-limit tests, the evaluation node and free cocompletion with V=C and V=S^op, with variance and smallness of P's mapping spaces verified. Steps 7-8 (two-sided counit inverse via the triangle and step 3; vertexwise criterion in the shifted universe; L(eta) invertible; eta-precomposition) are sound. Fault (C4-type missing citation) in step 6: the bifunctor equivalence j_P r ~ j_P i was turned into a functor-level equivalence r~i by objectwise Yoneda full faithfulness alone. I repaired it in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-presentable-presheaf-presentation.json by citing the existing in-unit node lem-coef-infinity-full-essential-image (quasi-inverse K on the essential image, then whiskering K J_0 ~ 1), and added it to step 6 uses and to proof_deps; the statement is unchanged. Edge cases checked: terminal C, C=S, the empty colimit (preserved by L, not claimed for i), and universe placement in steps 2, 5 and 7. There are no new nodes, no duplicates and no cycle, including with the added dependency. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (generic cocone/initial-object and vertexwise-equivalence clauses). Mathlib searches: no match, which I agree with.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-f92f18d2b (reviewer sub-agent of L); spot-checked: I read the item, its 11 steps and both new nodes in full, plus the full statement of every cited node: complete-algebroid, enhanced-diagrams-cones, presentable-infinity-category, yoneda-presheaf-limits, yoneda-evaluation, presheaf-free-cocompletion, pointwise-adjoint-criterion, enhanced-functor-cone-calculus, spaces-small-colimits-universe and full-essential-image. I also read unit sk-prop-sf-biduality-general and paragraph 2 of the main-20261015 ancestor prop-coef-integral-exceptional-adjoint. The statement is unchanged and matches HTT 5.5.1.1 (1)=>(5) with Def 5.2.7.2. HTT is not archived, so the WANTED line stays and the proof is correctly by=agent. The node is not a target, so no base-change morphism or coefficient category is involved. Step checks: step 2's use of Yoneda needs small mapping spaces; I read this as the same as 'locally small' because def-cbc treats spaces up to equivalence. Step 3 is compactness in S_U'. Step 4 combines the descent node with the objectwise colimit clause, K=D^op small. Step 5 is the colimit-to-limit test plus Yoneda evaluation over the small I^op. Steps 6-7 use free cocompletion with V=C and with V=S^op; S^op has small colimits because S has small limits. Step 8 is the pointwise adjoint criterion. Step 9 applies the lift node with J=j_P in an enlarged universe. Step 10 checks epsilon_c^* = i on mapping spaces via the triangle identity, gives an explicit inverse, and uses the vertexwise criterion. Step 11 follows from the triangle identity and the eta-precomposition composite. Edge cases checked: C=*, C=S, the empty colimit, and universe placement. The descent node is true: ι preserves Q, comparison of colimits, and fully faithful functors reflect equivalences; tested on I empty and I a point. The lift node is true: postcomposition by a fully faithful functor is fully faithful and reflects equivalences; tested on C empty, J identity and J not essentially surjective. Neither restates a clause of the parent. Neither is a duplicate of spaces-small-colimits-universe, full-essential-image, simplicial-fully-faithful-homotopy-image or monoidal-yoneda-embedding. There are no cycles, proof_deps equals the union of the step uses, and B1-B9 are satisfied. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, as a generic vertexwise-equivalence criterion. Minor and left as is: the lift node introduces Y_0 and J_0 without using them in its conclusion. No fixes."
  },
  "lean_audit": {
   "master": {

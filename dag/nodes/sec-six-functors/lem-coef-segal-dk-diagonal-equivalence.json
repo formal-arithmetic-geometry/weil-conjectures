@@ -48,18 +48,54 @@
    }
   },
   {
-   "text": "Apply [lem-coef-rezk-explicit-completion] to $U,V$ to obtain the natural square $i_VG=\\widehat G i_U$. Each vertical map induces weak equivalences on mapping spaces and is essentially surjective. For objects $x,y$ of $U$, the square of mapping spaces and two-out-of-three imply that $\\widehat G$ induces a weak equivalence from $M_{\\widehat U}(i_Ux,i_Uy)$ to $M_{\\widehat V}(i_VGx,i_VGy)$. To extend to arbitrary objects $a,b$ of $\\widehat U$, choose isomorphisms $i_Ux\\cong a$ and $i_Uy\\cong b$ in its homotopy category, represented by arrows with inverse representatives. Write these arrows as $\\alpha:i_Ux\\to a$ and $\\beta:i_Uy\\to b$, with inverse representatives $\\alpha^{-1},\\beta^{-1}$. The comparison from $M_{\\widehat U}(i_Ux,i_Uy)$ to $M_{\\widehat U}(a,b)$ is $k\\mapsto\\beta\\circ k\\circ\\alpha^{-1}$ in the homotopy category of Kan complexes; its inverse is $\\ell\\mapsto\\beta^{-1}\\circ\\ell\\circ\\alpha$. The two composites are homotopic to the identity by associativity, the inverse equations and the unit homotopies. Apply $\\widehat G$ to these same chosen arrows for the target comparison. To spell out associativity here, take homotopy fibers of the degree-three Segal comparison over a fixed list of four objects. By [lem-coef-kan-homotopy-pullback-invariance], that fiber comparison is again a weak equivalence, which can be inverted in the homotopy category of Kan complexes. The two triple composites are restrictions of $d_1d_1$ and $d_1d_2$ on that fiber of $W_3$; these are equal by the simplicial identities, so the composites are homotopic. Likewise the degeneracies inserting an identity, with $d_1s_0=d_1s_1=1$ in the appropriate degrees, give the two unit homotopies. A representative inverse equation is a path in the Kan mapping space; composing that path gives the homotopies for inverse-composition. Thus the conjugation maps really are homotopy equivalences, not just bijections on components. Conjugation commutes with $\\widehat G$ up to those same composition homotopies. Two-out-of-three therefore gives the mapping-space equivalence at $(a,b)$. Given an object $c$ of $\\widehat V$, choose $v\\in V_0$ with $c\\cong i_Vv$; choose $u\\in U_0$ with $v\\cong Gu$. Then $c\\cong\\widehat G(i_Uu)$. Thus $\\widehat G$ is fully faithful on mapping spaces and essentially surjective. The spaces $\\widehat U,\\widehat V$ are complete, so [lem-coef-complete-segal-dk-levelwise] makes every $\\widehat G_n$ a weak equivalence. By [lem-coef-bisimplicial-diagonal-equivalence], $\\operatorname{diag}\\widehat G$ is a weak equivalence.",
+   "text": "Apply [lem-coef-rezk-explicit-completion] to $U,V$. Write $H=\\widehat G$ for the induced map; naturality gives $H i_U=i_VG$. The two completion units induce weak equivalences on mapping spaces. For any vertices $x,y$ of $U_0$, the mapping-space square and two-out-of-three from [lem-coef-kan-quillen-right-proper] therefore make\n$$M_{\\widehat U}(i_Ux,i_Uy)\\longrightarrow M_{\\widehat V}(H i_Ux,H i_Uy)$$\na weak equivalence. The completion theorem also makes $\\widehat U,\\widehat V$ Reedy-fibrant complete Segal spaces, so their mapping spaces may be taken to be strict endpoint fibers.",
+   "uses": [
+    "lem-coef-rezk-explicit-completion",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Section 14, natural completion and assertions (1),(3); mapping-space square at image objects."
+   }
+  },
+  {
+   "text": "We record the elementary naturality calculation needed below. For a map $f:A\\to B$ of Reedy-fibrant Segal spaces and a fixed object triple, use [lem-coef-segal-composition-equivalences] to choose sections $s_A,s_B$ of the triangle comparisons $\\theta_A,\\theta_B$, and put $c_A=d_1s_A$, $c_B=d_1s_B$. That node states $d_1\\simeq c_B\\theta_B$. Precomposing this homotopy with the triangle map $f_2s_A$ gives\n$$f_1c_A=d_1f_2s_A\\simeq c_B\\theta_B f_2s_A=c_B(f_1\\times f_1),$$\nsince $\\theta_B f_2=(f_1\\times f_1)\\theta_A$ and $\\theta_A s_A=1$. Here $f_1$ denotes the appropriate endpoint-fiber map in each occurrence. Thus composition is natural up to a simplicial homotopy, with no compatibility required of the chosen sections.",
+   "uses": [
+    "lem-coef-segal-composition-equivalences"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Sections 5.3 and 11.2; elementary precomposition of the long-edge homotopy stated by the cited composition lemma."
+   }
+  },
+  {
+   "text": "Let $a,b$ be arbitrary objects of $\\widehat U$. Essential surjectivity of $i_U$ in [lem-coef-rezk-explicit-completion] supplies $x,y$ and isomorphism representatives $\\alpha:i_Ux\\to a$, $\\beta:i_Uy\\to b$. Choose a representative $\\bar\\alpha:a\\to i_Ux$ of the inverse class. Using the operations of [lem-coef-segal-composition-equivalences], define\n$$T_U(k)=\\beta\\circ(k\\circ\\bar\\alpha):M_{\\widehat U}(i_Ux,i_Uy)\\longrightarrow M_{\\widehat U}(a,b).$$\nThis is the composite of precomposition by $\\bar\\alpha$ and postcomposition by $\\beta$, hence a weak equivalence by that node and two-out-of-three from [lem-coef-kan-quillen-right-proper]. Define $T_V$ using $H\\bar\\alpha,H\\beta$; these also represent isomorphisms because their inverse triangles are carried by $H$ to inverse triangles. The same cited lemma makes $T_V$ a weak equivalence. Applying step 3 twice compares $H_1T_U$ with $T_VH_1$ by a finite chain of simplicial homotopies. They realize to homotopies by [lem-coef-simplicial-realization-cylinder], and [lem-coef-homotopy-groups-basepoint-change] makes weak-equivalence status invariant under these homotopies. The left vertical map is a weak equivalence by step 2, so two-out-of-three in this square makes the right vertical map $M_{\\widehat U}(a,b)\\to M_{\\widehat V}(Ha,Hb)$ a weak equivalence.",
+   "uses": [
+    "lem-coef-rezk-explicit-completion",
+    "lem-coef-segal-composition-equivalences",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-coef-homotopy-groups-basepoint-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Section 14, completion assertion (3); Sections 5.3-5.5 and 11.2, Proposition 11.3 and Corollary 11.5 for composition by equivalences."
+   }
+  },
+  {
+   "text": "Given an object $c$ of $\\widehat V$, essential surjectivity of $i_V$ from [lem-coef-rezk-explicit-completion] supplies $v\\in V_0$ and $c\\cong i_Vv$. Essential surjectivity of $G$ supplies $u\\in U_0$ and $v\\cong Gu$. Applying $i_V$ and using $i_VG=H i_U$ gives $c\\cong H(i_Uu)$. Thus $H$ is essentially surjective, and step 4 proves its mapping-space equivalences at every pair. Both completions are complete Segal spaces by the completion theorem. Therefore [lem-coef-complete-segal-dk-levelwise] makes every $H_n$ a weak equivalence, and [lem-coef-bisimplicial-diagonal-equivalence] makes $\\operatorname{diag}H$ a weak equivalence.",
    "uses": [
     "lem-coef-rezk-explicit-completion",
     "lem-coef-complete-segal-dk-levelwise",
-    "lem-coef-kan-quillen-right-proper",
-    "lem-coef-kan-homotopy-pullback-invariance",
     "lem-coef-bisimplicial-diagonal-equivalence"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
-    "place": "Section 14, completion assertions (1),(3), Section 5 (composition), and Proposition 7.6."
+    "place": "Section 14, assertions (1),(3); Proposition 7.6; the bisimplicial diagonal theorem."
    }
   },
   {
@@ -76,7 +112,7 @@
    }
   },
   {
-   "text": "Put $D_{m,n}=(W^{E(m)})_{n,n}$. This is a bisimplicial set: the second direction is the diagonal of the outer and inner directions of $W^{E(m)}$. The natural collapses of step 3 give a map from the constant diagram $m\\mapsto\\operatorname{diag}W$ to $D$. Each row map is $\\operatorname{diag}c_m$, a weak equivalence by step 3. Thus [lem-coef-bisimplicial-diagonal-equivalence] gives a weak equivalence from $\\operatorname{diag}W$ to $\\operatorname{diag}D$. In degree $n$, $D_{n,n}=(W^{E(n)})_{n,n}=\\widetilde W_{n,n}$, with the same three simultaneous operators, so $\\operatorname{diag}D=\\operatorname{diag}\\widetilde W$ and this map is the diagonal of the specified raw completion unit. The map $\\widetilde W\\to\\widehat W$ in [lem-coef-rezk-explicit-completion] is levelwise a weak equivalence, so the bisimplicial diagonal theorem applies to it as well. Composition shows that $\\operatorname{diag}i_W$ is a weak equivalence.",
+   "text": "Put $D_{m,n}=(W^{E(m)})_{n,n}$. This is a bisimplicial set: the second direction is the diagonal of the outer and inner directions of $W^{E(m)}$. The natural collapses of step 6 give a map from the constant diagram $m\\mapsto\\operatorname{diag}W$ to $D$. Each row map is $\\operatorname{diag}c_m$, a weak equivalence by step 6. Thus [lem-coef-bisimplicial-diagonal-equivalence] gives a weak equivalence from $\\operatorname{diag}W$ to $\\operatorname{diag}D$. In degree $n$, $D_{n,n}=(W^{E(n)})_{n,n}=\\widetilde W_{n,n}$, with the same three simultaneous operators, so $\\operatorname{diag}D=\\operatorname{diag}\\widetilde W$ and this map is the diagonal of the specified raw completion unit. The map $\\widetilde W\\to\\widehat W$ in [lem-coef-rezk-explicit-completion] is levelwise a weak equivalence, so the bisimplicial diagonal theorem applies to it as well. Composition shows that $\\operatorname{diag}i_W$ is a weak equivalence.",
    "uses": [
     "lem-coef-rezk-explicit-completion",
     "lem-coef-bisimplicial-diagonal-equivalence"
@@ -88,7 +124,7 @@
    }
   },
   {
-   "text": "Apply step 4 to $W=U,V$. In the commuting square of step 2, both vertical diagonals $\\operatorname{diag}i_U,\\operatorname{diag}i_V$ and the bottom diagonal $\\operatorname{diag}\\widehat G$ are weak equivalences. Two-out-of-three from [lem-coef-kan-quillen-right-proper] makes $\\operatorname{diag}G$ a weak equivalence. Apply the same argument to the Reedy replacement square of step 1 to obtain the required weak equivalence $\\operatorname{diag}F$.",
+   "text": "Apply step 7 to $W=U,V$. In the commuting square of step 2, both vertical diagonals $\\operatorname{diag}i_U,\\operatorname{diag}i_V$ and the bottom diagonal $\\operatorname{diag}\\widehat G$ are weak equivalences. Two-out-of-three from [lem-coef-kan-quillen-right-proper] makes $\\operatorname{diag}G$ a weak equivalence. Apply the same argument to the Reedy replacement square of step 1 to obtain the required weak equivalence $\\operatorname{diag}F$.",
    "uses": [
     "lem-coef-kan-quillen-right-proper"
    ],
@@ -105,9 +141,10 @@
   "lem-coef-kan-homotopy-pullback-invariance",
   "lem-coef-bisimplicial-diagonal-equivalence",
   "lem-coef-rezk-explicit-completion",
-  "lem-coef-complete-segal-dk-levelwise",
+  "lem-coef-segal-composition-equivalences",
   "lem-coef-simplicial-realization-cylinder",
-  "lem-coef-homotopy-groups-basepoint-change"
+  "lem-coef-homotopy-groups-basepoint-change",
+  "lem-coef-complete-segal-dk-levelwise"
  ],
  "proof_origin": {
   "by": "agent",
@@ -194,7 +231,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-diagonal-coherent-nerve-comparison",
@@ -207,17 +244,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-segal-dk-diagonal-equivalence",
   "worker": "stage1",
-  "summary": "Preserved the levelwise Kan homotopy-Segal statement, proved reduction by Reedy replacement fixing degree zero, and proved diagonal invariance of the explicit Rezk completion by contracting each equivalence-groupoid exponent and applying the existing bisimplicial diagonal theorem. Added only the genuine Rezk completion theorem and the complete-Segal levelwise criterion as statement-only nodes; audited every citation and both sources. No Lean declaration matching the item or the new results was found.",
+  "summary": "Q122 return repair: kept the statement, Lean record and proof route unchanged. Replaced the returned 2541-character step 2 by four short steps: completion at image objects; the elementary naturality calculation from the existing long-edge homotopy; conjugation using the existing Segal-composition-equivalences theorem; and essential surjectivity followed by the complete-Segal levelwise criterion. All non-elementary composition, associativity, unit and inverse-composition facts now cite the already existing lem-coef-segal-composition-equivalences. No new node or Mathlib leaf was created; creating those lemmas again would duplicate its statement. Other proof steps were retained, with only necessary step-number references updated.",
   "blueprint": "Proof paragraph 2, displayed derived coefficient adjunction: mapping-space foundation via the cosimplicial-frame and cofibrant-inversion chain; diagonal/coherent comparison. Additional Rezk Segal-space infrastructure for the diagonal criterion, not a literal claim of the ancestor paragraph.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q128-c7116f724",
-  "group": "Q128",
+  "reviewer": "NT-cc-Q122-79f65a8af",
+  "group": "Q122",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-c7116f724 (reviewer sub-agent of L); spot-checked: The mathematics is correct and was read in full; the only change is a citation repair to the item's source.place. Rezk is not in literature/, so I fetched the recorded PDF read-only to /tmp and ran pdftotext on it. Sources: Rezk §14 (pp.32-34) defines W~_n=diag([m]->(W^{E(m)})_n) with E(m)=discnerve I[m], and W^ as its functorial Reedy fibrant replacement; this matches W~_{n,q}=(W^{E(q)})_{n,q} in lem-coef-rezk-explicit-completion. Rezk's assertion (1) (W^ is a complete Segal space) and assertion (3) (mapping-space equivalences, pi0 surjective) match that node's clauses. Rezk Prop 7.6 with 7.4 matches lem-coef-complete-segal-dk-levelwise: given fully faithful mapping spaces, essential surjectivity is equivalent to Ho f being an equivalence, and completeness and Reedy fibrancy are both kept. Steps: (1) the Reedy node's prescribed degree-zero clause keeps (RX)_0=X_0; Reedy fibrancy makes the degree-1 endpoint map a fibration; the Kan and pullback-invariance nodes give the Segal and mapping comparisons; the bisimplicial node gives diag r_X. (2) The conjugation extension to all completed objects is written out, then 7.6 gives a levelwise equivalence and the bisimplicial node a diagonal one. (3) I checked the homotopy independently: the functor I[m]x[1]->I[m] exists because I[m] is indiscrete, its two ends are c_m e_m and 1, diag F(1)=Delta^1, and the cylinder and basepoint-change nodes say exactly what is used. (4) diag D=diag W~ with the same simultaneous operators, and the rows are diag c_m. (5) Two-out-of-three, elementary. Small cases: empty U_0, point->discnerve I[1] (shows why 7.6 needs completeness), m=0, and a one-object groupoid (Remark 14.1). No duplicate across the whole DAG: I read complete-segal-quasicategory-comparison, segal-presheaf-localization and the algebroid nodes. There is no blueprint same_as hit in main-20261015 or master. No cycle: none of the 8 proof_deps or 2 stmt_deps reaches the item. All cited statements are in unit sk-prop-sf-biduality-general, tool_uses is empty, and no SGA source is cited. B1-B9 hold for both new nodes. FIX: source.place of the item now names Rezk Sections 4-6, Prop 7.6, Thm 7.7 and Section 14 instead of the unused Section 12 localization route. No other field changed and no node is dropped.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-79f65a8af (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the whole delivery and every cited statement. Scope: the delivery repairs the human's 2026-10-17 return, which said old step 2 (2541 characters) was not elementary. Compared with the base, only proof, proof_deps, split_report and status change. The statement, stmt_deps, source, blueprint and Lean records are the same, and there are no new nodes. Old step 2 becomes steps 2-5. Steps 1 and 6 are identical to old steps 1 and 3; steps 7 and 8 change only their step numbers. Every non-elementary step is under 2000 characters. Step checks: (2) the completion square at image pairs plus 2-of-3 gives the comparison there and nothing more. (3) is elementary from lem-coef-segal-composition-equivalences: that node gives d1≃cθ for every section, and with f1 d1=d1 f2, θ_B f2=(f1×f1)θ_A and θ_A s_A=1 this gives f1 c_A≃c_B(f1×f1). (4) precomposing with ᾱ and postcomposing with β are weak equivalences by the same node. Two uses of step 3 make the square commute up to homotopy, and the cylinder and basepoint-change nodes plus 2-of-3 give the comparison at arbitrary pairs. (5) composing the two isomorphisms gives essential surjectivity, then complete-segal-dk-levelwise (Rezk Prop 7.6, '⇐' direction) and the bisimplicial diagonal node finish. Steps 1 and 6-8 re-checked. Sources read at the cited places: Rezk §5.3-5.5, §7.4, Prop 7.6, §11.2, Prop 11.3, Cor 11.5 and §14, from a read-only pdftotext copy in /tmp. Every cited node is in unit sk-prop-sf-biduality-general, so no tool use is needed; no SGA is cited; there is no cycle. No duplicate: I read segal-categorical-equivalence-dk, cotensor-evaluation-dk, dk-two-out-of-six, rezk-diagonal-sharp, equifibered-bisimplicial-diagonal and reedy-homotopy-segal-comparison in full. Edge cases: point→discnerve I[1]; constant S^1→point, where the hypothesis fails as it should; empty source; m=0. Remarks, not changed: the item's source.place still names Rezk Section 12 and Theorem 7.7, though the steps cite the right places; the earlier Q128 fix to it never took effect in the base, which suggests the merge does not apply that field. The pre-existing unused stmt_dep lem-coef-bousfield-kan-comparison-calculus is outside this delivery. The Rezk PDF is still WANTED in literature/."
  },
  "lean_audit": {
   "master": {

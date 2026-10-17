@@ -61,15 +61,39 @@
    }
   },
   {
-   "text": "Freely adjoin $h:Z\\to Z$ of degree $-1$ to $\\mathcal L_1$ with $dh=1_Z$, obtaining $\\mathcal L_2$, and let $\\mathcal L_3$ be its full subcategory on the objects of $\\mathcal L_0$. We identify $\\mathcal L_3$ with the required pushout $\\mathcal E$. Use the graded maps $\\iota_H,\\pi_H$ of degree zero, $\\iota_c:c\\to Z$ of degree $-1$, and $\\pi_c:Z\\to c$ of degree $1$ from the cone statement; all four are actual homogeneous arrows of $\\mathcal L_1$, so no shift object has to belong to it. Define $g=\\pi_ch\\iota_H$, $r_0=\\pi_ch\\iota_c$, $r_1=-\\pi_Hh\\iota_H$ and $t=-\\pi_Hh\\iota_c$. Their degrees are $0,-1,-1,-2$, respectively, and step 2 gives their differential identities. Their equations give a functor $\\mathcal E\\to\\mathcal L_3$ fixing $\\mathcal C,H,s$. Conversely the presentation of $\\mathcal E$ gives $\\mathcal L_0\\to\\mathcal E$; extend it to cone enlargements using the cited functoriality. In $\\operatorname{Cone}(\\mathcal E)$ the images of $g,r_0,r_1,t$ assemble by step 2 to a contraction of $C_s$. Hence the restricted functor on $\\mathcal L_1$ extends across the free arrow $h$ to $\\mathcal L_2\\to\\operatorname{Cone}(\\mathcal E)$. On $\\mathcal L_3$ it lands in the representables, whose Hom complexes are those of $\\mathcal E$, giving $\\mathcal L_3\\to\\mathcal E$. These maps are inverse: the composite on $\\mathcal E$ fixes each displayed generator; for the other composite expand every morphism incident to $Z$ in its row or column components and use $1_Z=\\iota_H\\pi_H+\\iota_c\\pi_c$ as a graded identity. In particular the exact expansion is $h=-\\iota_Hr_1\\pi_H-\\iota_Ht\\pi_c+\\iota_cg\\pi_H+\\iota_cr_0\\pi_c$. Insert this formula at each occurrence of $h$, and the graded identity at every adjacent cone coefficient, to express every old-to-old word in the four entries and original $\\mathcal L_0$ coefficients; recombination gives the original word. Therefore the composite fixes every word and every old coefficient. This verifies the strict identification on morphism complexes, not just a quasi-equivalence.",
+   "text": "Freely adjoin $h:Z\\to Z$ of degree $-1$ with $dh=1_Z$ to $\\mathcal L_1$, giving $\\mathcal L_2$, and restrict to the labels of $\\mathcal L_0$ to obtain $\\mathcal L_3$. Apply [lem-coef-dgcat-cell-comparison-functors] with $\\mathcal A=\\mathcal L_0$ and $u=s$. Its category $\\mathcal B$ is the pushout $\\mathcal E$: both freely adjoin precisely $g,r_0,r_1,t$ to $\\mathcal L_0$ with the equations in the statement. The free presentations identify them over $\\mathcal L_0$. We obtain dg functors $F:\\mathcal E\\to\\mathcal L_3$ and $G:\\mathcal L_3\\to\\mathcal E$, both fixing $\\mathcal L_0$, with $F(g)=v_h$, $F(r_0)=a_h$, $F(r_1)=b_h$, $F(t)=w_h$ and $G$ taking these four entries back to the respective generators.",
    "uses": [
     "lem-coef-dgcat-free-cell-calculus",
-    "lem-coef-dgcat-formal-cone-enlargement"
+    "lem-coef-dgcat-cell-comparison-functors"
    ],
    "elementary": false,
    "source": {
     "document": "https://arxiv.org/pdf/0710.4303",
-    "place": "Lemma 1.10, printed p. 29: identification M=L_3; inverse maps and the matrix expansion are explicit."
+    "place": "Lemma 1.10, printed p. 29: M=L_3 comparison and inverse verification; extracted into two cited lemmas for the 2026-10-17 repair."
+   }
+  },
+  {
+   "text": "The composite $GF$ fixes every coefficient of $\\mathcal L_0$ and each of $g,r_0,r_1,t$ by the displayed values of the comparison functors. Every arrow of the free presentation of $\\mathcal E$ is a finite linear combination of words in these coefficients and generators. Applying $GF$ termwise therefore fixes it, so $GF=1_{\\mathcal E}$.",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus",
+    "lem-coef-dgcat-cell-comparison-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Lemma 1.10, printed p. 29: M=L_3 comparison and inverse verification; extracted into two cited lemmas for the 2026-10-17 repair."
+   }
+  },
+  {
+   "text": "The composite $FG$ fixes every coefficient of $\\mathcal L_0$ and each of $v_h,a_h,b_h,w_h$. Apply [lem-coef-dgcat-cone-word-normal-form] with $\\mathcal A=\\mathcal L_0$ and $u=s$: its generation and functor-equality conclusion gives $FG=1_{\\mathcal L_3}$. Thus $\\mathcal E$ is strictly isomorphic to $\\mathcal L_3$ over $\\mathcal L_0$, identifying their morphism complexes, not merely their homotopy categories.",
+   "uses": [
+    "lem-coef-dgcat-cell-comparison-functors",
+    "lem-coef-dgcat-cone-word-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Lemma 1.10, printed p. 29: M=L_3 comparison and inverse verification; extracted into two cited lemmas for the 2026-10-17 repair."
    }
   },
   {
@@ -84,7 +108,7 @@
    }
   },
   {
-   "text": "Put $A=\\mathcal C(X,c)$. The cone Hom formula and step 3 identify $\\mathcal L_1(X,Z)$ with the cone of $1_A$, whose differential on $A^n\\oplus A^{n+1}$ is $(a,b)\\mapsto(da+b,-db)$. The degree-$-1$ map $k(a,b)=(0,a)$ satisfies $dk+kd=1$. Consequently each positive-length quotient in step 5 is contractible, even when the other Hom complexes are nonflat: if $T$ denotes all preceding tensor factors, the degree-$-1$ operator on $T\\otimes\\mathcal L_1(X,Z)$ is $q\\otimes v\\mapsto(-1)^{|q|}q\\otimes k(v)$. The tensor differential gives $dK+Kd=1$ by cancelling the two terms involving $dq$.",
+   "text": "Put $A=\\mathcal C(X,c)$. The cone Hom formula and step 3 identify $\\mathcal L_1(X,Z)$ with the cone of $1_A$, whose differential on $A^n\\oplus A^{n+1}$ is $(a,b)\\mapsto(da+b,-db)$. The degree-$-1$ map $k(a,b)=(0,a)$ satisfies $dk+kd=1$. Consequently each positive-length quotient in step 7 is contractible, even when the other Hom complexes are nonflat: if $T$ denotes all preceding tensor factors, the degree-$-1$ operator on $T\\otimes\\mathcal L_1(X,Z)$ is $q\\otimes v\\mapsto(-1)^{|q|}q\\otimes k(v)$. The tensor differential gives $dK+Kd=1$ by cancelling the two terms involving $dq$.",
    "uses": [
     "lem-coef-dgcat-formal-cone-enlargement"
    ],
@@ -95,7 +119,7 @@
    }
   },
   {
-   "text": "Here is the filtration argument without a convergence assumption. In $F_m/F_0$ every cycle has a top-length component. Since $F_m/F_{m-1}$ is contractible for $m>0$, that component is a boundary; subtract the differential of a graded lift of a primitive to reduce its length. Induction on $m$ makes it zero modulo $F_0$, proving $F_m/F_0$ acyclic. Every element of $\\bigcup_m F_m/F_0$ has finite length, so the same finite induction proves the union quotient acyclic. Finally the inclusion $F_0\\to\\bigcup_mF_m$ is a cohomology isomorphism directly: a cycle projects to a boundary in the quotient, so subtract a lifted boundary to obtain a cycle in $F_0$; if a cycle in $F_0$ bounds upstairs, its primitive projects to a cycle in the quotient, and subtracting a lifted primitive there puts that bounding element in $F_0$. All lifts used here exist degreewise. Together with step 4 this proves the old-object quasi-isomorphisms of (b).",
+   "text": "Here is the filtration argument without a convergence assumption. In $F_m/F_0$ every cycle has a top-length component. Since $F_m/F_{m-1}$ is contractible for $m>0$, that component is a boundary; subtract the differential of a graded lift of a primitive to reduce its length. Induction on $m$ makes it zero modulo $F_0$, proving $F_m/F_0$ acyclic. Every element of $\\bigcup_m F_m/F_0$ has finite length, so the same finite induction proves the union quotient acyclic. Finally the inclusion $F_0\\to\\bigcup_mF_m$ is a cohomology isomorphism directly: a cycle projects to a boundary in the quotient, so subtract a lifted boundary to obtain a cycle in $F_0$; if a cycle in $F_0$ bounds upstairs, its primitive projects to a cycle in the quotient, and subtracting a lifted primitive there puts that bounding element in $F_0$. All lifts used here exist degreewise. Together with steps 4–6 this proves the old-object quasi-isomorphisms of (b).",
    "uses": [],
    "elementary": true,
    "source": {
@@ -139,6 +163,8 @@
   }
  ],
  "proof_deps": [
+  "lem-coef-dgcat-cell-comparison-functors",
+  "lem-coef-dgcat-cone-word-normal-form",
   "lem-coef-dgcat-formal-cone-enlargement",
   "lem-coef-dgcat-free-cell-calculus"
  ],
@@ -227,7 +253,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dgcat-model-structure",
   "by": "worker",
@@ -249,19 +275,19 @@
   }
  },
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-coef-dgcat-equivalence-cell-calculus",
   "worker": "stage1",
-  "summary": "Checked every clause against Tabuada Chapter 1. Kept the statement unchanged. Proved realization by an explicit correction, pushout invariance by a cone-word filtration, and the specified simultaneous lift by a kernel correction in the cone endomorphism algebra. Added only a generic strict dg Yoneda/cone enlargement statement, after DAG, blueprint, project Lean and logged Mathlib searches.",
-  "blueprint": "Realizes the coherent-equivalence cell calculus needed by the quasi-equivalence model in the finite mapping-complex adjunction of paragraph 2 of prop-coef-integral-exceptional-adjoint. Steps 1-2 give realization and cone coordinates, 3-8 the pushout, and 9-10 strict prescribed lifting. The ancestor chain and unit route are unchanged."
+  "summary": "Repair of the human re-split return: retained the statement, Lean record, route and all nine other original steps, with only numerical cross-references adjusted. Replaced original step 4 by three short steps citing two new generic statement-only lemmas: comparison-functor construction for a freely contracted cone, and old-object word generation after deleting the cone label. These isolate both hidden arguments of the strict pushout identification; neither states quasi-isomorphism or lifting. Rechecked source, citations, small cases, DAG/blueprint/project searches and actual logged Mathlib searches.",
+  "blueprint": "Same ancestor paragraph 2 finite mapping-complex route as before: steps 1–2 realization and cone coordinates; step 3 sets up L_0,L_1; steps 4–6 strict pushout identification using the extracted comparison and word lemmas; steps 7–10 filtration and object bookkeeping; steps 11–12 prescribed lifting. No ancestor/unit route changed."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NW-2591febfe",
-  "group": "NW",
+  "reviewer": "NT-cc-Q94-d924ba41f",
+  "group": "Q94",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-2591febfe (reviewer sub-agent of L); spot-checked: Read all mathematics and checked all ten steps against Tabuada, pp. 26–32; no mathematical gap, circularity, duplicate or missing hypothesis found. Corrected the §1.3 source location and supplied missing new-node audit/default metadata. Full checks are in review.md; corrected JSON files are under fixes/dag/nodes/sec-six-functors/.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-d924ba41f (reviewer sub-agent of L); spot-checked: I recomputed all 12 steps and both new nodes by hand. Step 1: K_R's differential squares to zero, and for (a) z=ua-bu is closed, b'=b+zv and w=za satisfy the equations. Step 2: the cone matrix differential DH+HD has entries [[-db+uv,-dw+ua-bu],[-dv,vu-da]]. Step 3: for L_0, the free-cell V-adjoining formula gives L_0(H,old)=0 and L_0(X,H)=C(X,c). Steps 4-6: the pushout E is the comparison node's B with A=L_0 and u=s, and GF=1, FG=1 via the word lemma. Steps 7-9: the free-cell filtration applies with s=t=Z, |h|=-1, dh=1_Z; the contraction k(a,b)=(0,a) and K(q⊗v)=(-1)^{|q|}q⊗kv satisfy dK+Kd=1; the finite-length argument is elementary. Step 10: [s] and [g] are inverse in H^0. Steps 11-12: P on End(C_u) is surjective and h=k-h_0e gives dh=1 and P(h)=h_D. Both new nodes are true and generic for any closed arrow, strictly smaller than the item, and not restatements of it. For the comparison node I checked that ι_y and π_x are closed, dι_x=ι_y u and dπ_y=-uπ_x, so F is well defined, and that G recovers v,a,b,w with the right signs. For the word node I checked that 1_Z=ι_yπ_y+ι_xπ_x and the expansion of h hold. The two nodes answer the human's step-4 return. An rg search of the whole DAG found no duplicates and no cycle; every citation stays in the item's unit, there are no SGA citations and no tool_uses. I could not open the source: Tabuada arXiv:0710.4303 is not archived locally and the sandbox blocks network access. I checked K_R against Kontsevich's interval as I know it from Tabuada, and the proof is correctly marked by:agent. FIX: both new nodes lacked lean_audit. I added state none for master and slopmaster2 and moved blueprint to sit after id, in fixes/dag/nodes/sec-six-functors/lem-coef-dgcat-cell-comparison-functors.json and lem-coef-dgcat-cone-word-normal-form.json. No statement or proof changed.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.DgCategoryEquivalenceCellCalculus",
