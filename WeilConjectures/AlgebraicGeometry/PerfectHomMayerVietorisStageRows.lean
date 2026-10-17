@@ -58,7 +58,7 @@ require no continuity. This construction includes empty opens, where the
 local Hom groups are zero. No exactness of the filtered colimit row is used. -/
 theorem perfect_hom_mayerVietoris_stage_rows
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
-    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)
+    (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     (i : I) (X : Scheme.{u}) (s₀ : X ⟶ Spec (R.obj i))
     [LocallyOfFinitePresentation s₀] [QuasiCompact s₀] [QuasiSeparated s₀]
     [∀ Z : Scheme.{u},
@@ -96,7 +96,7 @@ theorem perfect_hom_mayerVietoris_stage_rows
         PerfectHomLocalMap R c i X s₀ U V
           (colimit.desc (S.obj' 4) ⟨B.obj' 4, κ.app ⟨4, by decide⟩⟩) := by
   obtain ⟨S, B, κ, e, b, hS, hB, hstage, hlimit, he, hκ, h0, h1, h3, h4⟩ :=
-    perfect_hom_mayerVietoris_stage_rows_core R c hc i X s₀ U V hU hV Y t ht s hs P Q hP hQ
+    perfect_hom_mayerVietoris_stage_rows_core R c i X s₀ U V hU hV Y t ht s hs P Q hP hQ
   obtain ⟨hexS, hexB⟩ :=
     perfect_hom_triangle_presented_rows_exact S B hS hB hstage hlimit
   exact ⟨S, B, κ, e, b, hexS, hexB, he, hκ, h0, h1, h3, h4⟩

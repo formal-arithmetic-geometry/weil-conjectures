@@ -68,7 +68,7 @@ proves the four locality assertions, without any appeal to continuity. Empty
 opens have zero Hom groups and the same presentation and exactness argument. -/
 theorem perfect_hom_mayerVietoris_local_rows
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
-    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)
+    (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     (i : I) (X : Scheme.{u}) (s₀ : X ⟶ Spec (R.obj i))
     [LocallyOfFinitePresentation s₀] [QuasiCompact s₀] [QuasiSeparated s₀]
     [∀ Z : Scheme.{u},
@@ -108,7 +108,7 @@ theorem perfect_hom_mayerVietoris_local_rows
     obtain ⟨l, hjl, hkl⟩ := exists_ge_ge j.val k.val
     exact ⟨⟨l, j.property.trans hjl⟩, hjl, hkl⟩⟩
   obtain ⟨S, B, κ, e, b, hS, hB, he, hκ, h0, h1, h3, h4⟩ :=
-    perfect_hom_mayerVietoris_stage_rows R c hc i X s₀ U V hU hV
+    perfect_hom_mayerVietoris_stage_rows R c i X s₀ U V hU hV
       Y t ht s hs P Q hP hQ
   have : HasFilteredColimitsOfSize.{u, u} AddCommGrpCat.{max u w} :=
     hasFilteredColimitsOfSize_shrink.{u, u, w, w}

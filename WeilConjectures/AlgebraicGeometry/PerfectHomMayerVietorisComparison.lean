@@ -71,7 +71,7 @@ Proof:
    give zero Hom groups and zero local rows, so the construction includes them. -/
 theorem perfect_hom_mayerVietoris_comparison
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
-    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)
+    (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     (i : I) (X : Scheme.{u}) (s₀ : X ⟶ Spec (R.obj i))
     [LocallyOfFinitePresentation s₀] [QuasiCompact s₀] [QuasiSeparated s₀]
     [∀ Z : Scheme.{u},
@@ -108,7 +108,7 @@ theorem perfect_hom_mayerVietoris_comparison
               perfectLimitMap R c s j.property (ident j f) := by
   obtain ⟨H, d, ⟨hd⟩, ident, htransition⟩ := perfect_hom_stage_colimit R i Y s P Q
   obtain ⟨A, B, φ, a, b, hA, hB, h0, h1, h3, h4, hpin⟩ :=
-    perfect_hom_mayerVietoris_local_rows R c hc i X s₀ U V hU hV
+    perfect_hom_mayerVietoris_local_rows R c i X s₀ U V hU hV
       Y t ht s hs P Q hP hQ H d hd ident htransition
   have hbij {α β : Type (max u w)} {m : α → β}
       (hm : PerfectHomLocalMap R c i X s₀ U V m) : Function.Bijective m :=
