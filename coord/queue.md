@@ -1,6 +1,6 @@
 # Work queue
 
-39 items; claim with `tools/claim.py next <group> [--stage N]`.
+40 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (39)
+## Stage 3: modules to prove (40)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -51,6 +51,7 @@
 | `Sheaf.RingTheory.LciConormalFreeRankCodimension` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IdealPowerQuotientLocalLifting` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation` | 30 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
 
 Also listed above and claimable: 3 modules whose proof uses a node that has no Lean declaration yet.
 
