@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.UpperStarComp
+public import WeilConjectures.WeilSheaf.UpperStarDual
 public import WeilConjectures.WeilSheaf.UpperStarTensor
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
 
@@ -141,8 +142,18 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 theorem WeilSheaf.nonempty_upperStar_dual_iso (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
     (G : WeilSheaf k₀ l Y) (hG : G.IsLisse) :
     Nonempty ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj (G.dual hG).obj ≅
-      (((WeilSheaf.upperStar φ).obj G).dual (ProEtale.IsAdicLisseSheaf.upperStar _ hG)).obj) :=
-  sorry
+      (((WeilSheaf.upperStar φ).obj G).dual (ProEtale.IsAdicLisseSheaf.upperStar _ hG)).obj) := by
+  have h₁ : (G.dual hG).obj =
+      ProEtaleWeilSheaf.ihom k₀ l Y G.obj (ProEtaleWeilSheaf.adicConstant k₀ l Y) := rfl
+  have h₂ : (ProEtaleWeilSheaf.upperStar k₀ l φ).obj G.obj = ((WeilSheaf.upperStar φ).obj G).obj :=
+    rfl
+  have h₃ : ProEtaleWeilSheaf.ihom k₀ l X ((WeilSheaf.upperStar φ).obj G).obj
+      (ProEtaleWeilSheaf.adicConstant k₀ l X) =
+      (((WeilSheaf.upperStar φ).obj G).dual (ProEtale.IsAdicLisseSheaf.upperStar _ hG)).obj := rfl
+  exact ⟨eqToIso (congrArg (ProEtaleWeilSheaf.upperStar k₀ l φ).obj h₁) ≪≫
+    WeilSheaf.upperStarDualIso φ G hG ≪≫
+    eqToIso ((congrArg (fun A ↦ ProEtaleWeilSheaf.ihom k₀ l X A
+      (ProEtaleWeilSheaf.adicConstant k₀ l X)) h₂).trans h₃)⟩
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] [Fact (ringChar k₀ ≠ l)] in

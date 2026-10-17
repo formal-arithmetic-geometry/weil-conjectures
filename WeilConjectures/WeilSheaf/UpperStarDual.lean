@@ -138,6 +138,38 @@ theorem IsAdicLisseSheaf.isIso_of_bijective_stalkFunctor_map {Y : Scheme.{u}}
     exact (h0 a'').trans (h0 b'').symm
   exact isIso_of_mono_of_epi f
 
+attribute [local instance] Sheaf.symmetricCategory in
+/-- **The pullback of the dual of a lisse sheaf is the dual of the pullback**, over a locally
+noetherian scheme: the comparison `g^* 𝓗om(G, ℚ̄_ℓ) ⟶ 𝓗om(g^* G, ℚ̄_ℓ)` is bijective on the stalks
+at every geometric point, where the evaluations induce perfect pairings. -/
+theorem isIso_adicUpperStarDualComparison_of_isLocallyNoetherian {Y Z : Scheme.{u}}
+    [IsLocallyNoetherian Z] (g : Z ⟶ Y) {G : AdicSheaf l Y} (hG : IsAdicLisseSheaf G) :
+    IsIso (adicUpperStarDualComparison l g G) := by
+  have h₁ : IsAdicLisseSheaf ((g)^*ᵃ[l].obj ((AdicSheaf.ihom G).obj (AdicSheaf.unit l Y))) :=
+    (hG.ihom (isAdicLisseSheaf_adicConstantSheaf Y)).upperStar g
+  have h₂ : IsAdicLisseSheaf ((AdicSheaf.ihom ((g)^*ᵃ[l].obj G)).obj (AdicSheaf.unit l Z)) :=
+    (hG.upperStar g).ihom (isAdicLisseSheaf_adicConstantSheaf Z)
+  refine h₁.isIso_of_bijective_stalkFunctor_map h₂ _ fun K _ _ s ↦ ?_
+  have hP₁ := (hG.upperStar g).bijective_evaluationPairing s
+  let τ : stalkFunctor l (s ≫ g) ≅ (g)^*[WeilCoefficients.{u} l] ⋙ stalkFunctor l s :=
+    Functor.isoWhiskerRight (upperStarComp _ s g) _ ≪≫ Functor.associator _ _ _
+  have : NatTrans.IsMonoidal τ.hom := by
+    dsimp only [τ, Iso.trans_hom, Functor.isoWhiskerRight_hom]
+    infer_instance
+  have hP₂ := (Mod.bijective_evaluationPairing_iff_of_iso _ τ G (AdicSheaf.unit l Y)).1
+    (hG.bijective_evaluationPairing (s ≫ g))
+  let u := (stalkFunctor l s).mapIso ((Mod.forget _).mapIso (adicUpperStarUnitIso l g))
+  have hu (y) : u.hom.hom (u.inv.hom y) = y := by
+    rw [← ModuleCat.comp_apply, Iso.inv_hom_id, ModuleCat.id_apply]
+  have hrel := evaluationPairing_adicUpperStarDualComparison g G s
+  refine ⟨fun f f' h ↦ hP₂.1 (LinearMap.ext fun x ↦ u.toLinearEquiv.injective (by
+      have := LinearMap.congr_fun (congrArg (Mod.evaluationPairing (stalkFunctor l s) _ _) h) x
+      rwa [hrel, hrel] at this)), fun w ↦ ?_⟩
+  obtain ⟨f, hf⟩ := hP₂.2 (u.inv.hom ∘ₗ Mod.evaluationPairing (stalkFunctor l s) _ _ w)
+  refine ⟨f, hP₁.1 (LinearMap.ext fun x ↦ ?_)⟩
+  rw [hrel, hf, LinearMap.comp_apply]
+  exact hu _
+
 end ProEtale
 
 namespace ProEtaleWeilSheaf
@@ -296,6 +328,40 @@ lemma adicUpperStarDualComparison_str (G : ProEtaleWeilSheaf k₀ l Y) :
   erw [← hu]
   simp only [Functor.map_comp, Category.assoc]
   rfl
+
+variable [Fact (ringChar k₀ ≠ l)] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- **The pullback of the dual of a lisse Weil sheaf is the dual of its pullback**:
+`φ^*(G^∨) ≅ (φ^* G)^∨` as pro-étale Weil sheaves. -/
+noncomputable def _root_.AlgebraicGeometry.WeilSheaf.upperStarDualIso (G : WeilSheaf k₀ l Y)
+    (hG : G.IsLisse) :
+    (ProEtaleWeilSheaf.upperStar k₀ l φ).obj
+        (ProEtaleWeilSheaf.ihom k₀ l Y G.obj (ProEtaleWeilSheaf.adicConstant k₀ l Y)) ≅
+      ProEtaleWeilSheaf.ihom k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj G.obj)
+        (ProEtaleWeilSheaf.adicConstant k₀ l X) :=
+  have : IsIso (adicUpperStarDualComparison l φ̄ G.obj.carrier) :=
+    isIso_adicUpperStarDualComparison_of_isLocallyNoetherian φ̄ hG
+  have : IsIso (homMk (P := (ProEtaleWeilSheaf.upperStar k₀ l φ).obj
+        (ProEtaleWeilSheaf.ihom k₀ l Y G.obj (ProEtaleWeilSheaf.adicConstant k₀ l Y)))
+      (Q := ProEtaleWeilSheaf.ihom k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj G.obj)
+        (ProEtaleWeilSheaf.adicConstant k₀ l X))
+      (adicUpperStarDualComparison l φ̄ G.obj.carrier)
+      (adicUpperStarDualComparison_str φ G.obj)) :=
+    have : IsIso ((IsoAlgebra.forget _).map (homMk
+        (P := (ProEtaleWeilSheaf.upperStar k₀ l φ).obj
+        (ProEtaleWeilSheaf.ihom k₀ l Y G.obj (ProEtaleWeilSheaf.adicConstant k₀ l Y)))
+        (Q := ProEtaleWeilSheaf.ihom k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj G.obj)
+          (ProEtaleWeilSheaf.adicConstant k₀ l X))
+        (adicUpperStarDualComparison l φ̄ G.obj.carrier)
+        (adicUpperStarDualComparison_str φ G.obj))) :=
+      inferInstanceAs (IsIso (adicUpperStarDualComparison l φ̄ G.obj.carrier))
+    isIso_of_reflects_iso _ (IsoAlgebra.forget _)
+  asIso (homMk (P := (ProEtaleWeilSheaf.upperStar k₀ l φ).obj
+        (ProEtaleWeilSheaf.ihom k₀ l Y G.obj (ProEtaleWeilSheaf.adicConstant k₀ l Y)))
+      (Q := ProEtaleWeilSheaf.ihom k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj G.obj)
+        (ProEtaleWeilSheaf.adicConstant k₀ l X))
+      (adicUpperStarDualComparison l φ̄ G.obj.carrier)
+      (adicUpperStarDualComparison_str φ G.obj))
 
 end ProEtaleWeilSheaf
 
