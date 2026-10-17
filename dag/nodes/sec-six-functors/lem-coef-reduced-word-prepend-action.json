@@ -212,5 +212,34 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-f87fc033e (reviewer sub-agent of L); spot-checked: I read the whole item and its parent; there are no new nodes. The statement is unchanged and gives exactly what the parent's normal-form proof (steps 2–3) uses: P_f maps R(y,z) to R(x,z), P_id=id, and P_f∘P_g=P_{g∘f}. I checked all five steps by hand. They cover well-definedness, the identity inputs, the empty or other-tag word, a surviving head composite (including c=id_x, where e=h), and a deleted head composite (f=h∘(g∘f)=h when c=id). Each uses only the associativity and identity laws of def-nagata-category, a Mathlib leaf, and never infers a two-sided inverse. I wrote my own brute-force check over two tagged copies of maps between sets of size 1 and 2, words of length up to 4: 32,040 instances, all pass. There is no cycle and no restated clause. No duplicate exists in the DAG; Mathlib's CoprodI.summandAction is only the monoid analogue, not a one-line specialization. The unit, chapter and blueprint via chain are consistent, and there are no tool_uses. Dwyer–Kan Prop. 3.2 is not in the local literature (filed as WANTED) and I did not read it. That is acceptable because proof_origin is correctly marked agent and the proof stands on its own. This is not a target node. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-04ffd2f04",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Exact node/module/report audited; identity, endpoint, composition, edge cases, docstrings, dependencies, and non-hollow definitions checked. scompile.py passed sandbox and library layouts."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ReducedWordPrependAction",
+  "declaration": "CategoryTheory.FreeFactorCategoryNormalForm.reduced_word_prepend_action",
+  "declarations": [
+   "CategoryTheory.FreeFactorCategoryNormalForm.ReducedWord",
+   "CategoryTheory.FreeFactorCategoryNormalForm.prependLeftRaw",
+   "CategoryTheory.FreeFactorCategoryNormalForm.prependRightRaw",
+   "CategoryTheory.FreeFactorCategoryNormalForm.prependLeftRaw_reduced",
+   "CategoryTheory.FreeFactorCategoryNormalForm.prependRightRaw_reduced",
+   "CategoryTheory.FreeFactorCategoryNormalForm.prependLeft",
+   "CategoryTheory.FreeFactorCategoryNormalForm.prependRight",
+   "CategoryTheory.FreeFactorCategoryNormalForm.reduced_word_prepend_action"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ReducedWordPrependAction.lean",
+  "statement": "theorem reduced_word_prepend_action {O : Type u} (A B : Category.{v} O) : (∀ (x z : O) (w : ReducedWord A B (x := x) (z := z)), prependLeft (identity A x) w = w) ∧ (∀ (x z : O) (w : ReducedWord A B (x := x) (z := z)), prependRight (identity B x) w = w) ∧ (∀ (x y u z : O) (f : Hom A x y) (g : Hom A y u) (w : ReducedWord A B (x := u) (z := z)), prependLeft f (prependLeft g w) = prependLeft (compose A f g) w) ∧ (∀ (x y u z : O) (f : Hom B x y) (g : Hom B y u) (w : ReducedWord A B (x := u) (z := z)), prependRight f (prependRight g w) = prependRight (compose B f g) w)",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing tagged Word and Word.Reduced declarations from the landed free-factor normal-form module; the prepend maps are the canonical three-case constructions for each factor."
  }
 }

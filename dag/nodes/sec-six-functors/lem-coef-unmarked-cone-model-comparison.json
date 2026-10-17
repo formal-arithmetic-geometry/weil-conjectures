@@ -14,7 +14,8 @@
   "lem-coef-unmarked-straightening-target-change",
   "lem-coef-enriched-diagram-rectification",
   "lem-coef-simplicial-projective-model-calculus",
-  "lem-coef-simplicial-presheaf-projective-model"
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-free-factor-hammock-pushout"
  ],
  "proof": [
   {
@@ -246,5 +247,34 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-af9764282 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement, 7 steps, split_report, 12 searches), the full statements of all 9 cited nodes, all 10 steps of the parent lem-coef-space-valued-straightening, the unit record and the main-20261015 ancestor proof. The delivery adds 0 new nodes and leaves the statement unchanged. HTT is not archived locally, so the cited page numbers could not be opened. Checked against HTT from knowledge, the cited results are the right ones (2.2.1.1 target change, 2.2.1.2 and 2.2.0.1 Quillen equivalence and locally Kan counit, A.3.3.8(1) DK gives a projective Quillen equivalence). The proof uses only DAG statements and proof_origin=agent. Steps verified: (1) C^op is discrete, hence locally Kan (empty homs allowed); N_hc(C^op)=N(C^op)=S by the discrete clause of coherent-nerve-comparison; the rectification counit clause gives eps DK; u=eps^op; the reversal iso gives C[S]^op=C[B]. (2) The presentation node gives all objects cofibrant and T left Quillen, and T(empty)=empty, so P is cofibrant. (3) Target change with D=A, D'=C, phi=id, pi=u gives phi'=eps; L_id(X^op) is literally T_{p^op}; u_!P is naturally iso to L_eps(X^op), the parent's H_C. (4) Opposite preserves Kan (opposite-subdivision node); fibrancy is objectwise in all the projective structures, which agree. (5) The calculus node's cofibrant-source/fibrant-target criterion takes w to f, in the correct direction. (6) The presentation node's T-U_S criterion gives g; covariant over B is defined from contravariant over B^op=S by opposite, and U^cov_B F=(U_S F)^op. (7) Naturality recomputed from the unit formulas; it is elementary. Edge cases checked: C empty; X empty (forces D empty, consistent); C=[0] (Sing_Q/|.|_Q). No cycle (closures of 88-604 nodes). All cited statements are in the item's own unit, so no tool_uses. No SGA. Searches recorded honestly. No duplicates (grep for H_C and the item id). FIX (fixes/dag/nodes/sec-six-functors/lem-coef-unmarked-cone-model-comparison.json): (a) B2 clarification of the statement, same mathematics: it now names p:X->B, defines Kan_U, defines D^op as the valuewise opposite, defines eps as the counit with u=eps^op, and defines H_C(X)=L_eps(X^op) with its pushout formula. These were previously defined only in the parent's step 7 and the item's step 4. If the merge tool does not apply statement edits, the proof is still correct. (b) Step 1 now adds the one-line link from the rectification node's DK (essentially surjective on pi0) to the calculus node's DK (equivalence on pi0): weak equivalences on homs make pi0 fully faithful. The calculus node is added to step 1's uses; proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c0130d1f2",
+  "group": "N7",
+  "result": "pass",
+  "note": "Statement, dependencies, constructions, edge cases, docstrings, gates, and source alignment checked; scompile.py passed sandbox and library compiles with no warnings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.UnmarkedConeModelComparison",
+  "declaration": "SSet.OrdinaryConeModel.unmarked_cone_model_comparison",
+  "declarations": [
+   "SSet.OrdinaryConeModel.Index",
+   "SSet.OrdinaryConeModel.Data",
+   "SSet.OrdinaryConeModel.cone",
+   "SSet.OrdinaryConeModel.firstAdjunct",
+   "SSet.OrdinaryConeModel.secondAdjunct",
+   "SSet.OrdinaryConeModel.covariant",
+   "SSet.OrdinaryConeModel.covariantAdjunct",
+   "SSet.OrdinaryConeModel.unmarked_cone_model_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/UnmarkedConeModelComparison.lean",
+  "statement": "theorem unmarked_cone_model_comparison (C : Cat.{u, u}) : ∃ K : Data C, Bergner.dwyerKanEquivalences K.u ∧ (∀ (X : Over (nerve C)) (Z : Diagram (Index C)) (i : Z ⟶ (cone K).obj X), IsInitial Z → projectiveCof (Index C) i) ∧ (∀ (X : Over (nerve C)) (D : C ⥤ SSet.{u}), (∀ c : C, KanComplex (D.obj c)) → ∀ w : K.change.kan.obj ((cone K).obj X) ⟶ K.strictOp.obj D, projectiveWeak (discreteCategory C) w → projectiveWeak (Index C) (firstAdjunct K X D w) ∧ contravariantWeak (nerve C).op (secondAdjunct K X D w) ∧ contravariantWeak (nerve C).op ((Over.post opFunctor).map (covariantAdjunct K X D w)) ∧ Enhanced.rightFibration ((K.presentation.U (Index C) K.identityTarget).obj ((targetRestriction K.u).obj (K.strictOp.obj D))).hom ∧ Enhanced.leftFibration ((covariant K).obj ((targetRestriction K.u).obj (K.strictOp.obj D))).hom) ∧ (∀ (X Y : Over (nerve C)) (D E : C ⥤ SSet.{u}) (k : X ⟶ Y) (a : D ⟶ E) (w : K.change.kan.obj ((cone K).obj X) ⟶ K.strictOp.obj D) (w' : K.change.kan.obj ((cone K).obj Y) ⟶ K.strictOp.obj E), (∀ c : C, KanComplex (D.obj c)) → (∀ c : C, KanComplex (E.obj c)) → K.change.kan.map ((cone K).map k) ≫ w' = w ≫ K.strictOp.map a → (cone K).map k ≫ firstAdjunct K Y E w' = firstAdjunct K X D w ≫ (targetRestriction K.u).map (K.strictOp.map a) ∧ (Over.post opFunctor).map k ≫ secondAdjunct K Y E w' = secondAdjunct K X D w ≫ (K.presentation.U (Index C) K.identityTarget).map ((targetRestriction K.u).map (K.strictOp.map a)) ∧ k ≫ covariantAdjunct K Y E w' = covariantAdjunct K X D w ≫ (covariant K).map ((targetRestriction K.u).map (K.strictOp.map a)))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The existential Data presents only the specified canonical constructions, normalized on full simplicial actions, counit mapping simplices, input maps and adjunction simplices. No object is selected from the theorem. The general target-change interface supplies the canonical mate isomorphism, including its unit formula and naturality; attaching identifies the changed-target cone with L_epsilon. The three comparison arrows are real definitions given by successive homEquiv maps and the ordinary opposite-slice equivalence."
  }
 }
