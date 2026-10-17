@@ -34,7 +34,7 @@ namespace CategoryTheory.Adjunction
 variable {C D E : Type*} [Category* C] [Category* D] [Category* E]
 
 /-- The unit of an adjunction is invertible at `X` if and only if it is at an isomorphic `Y`. -/
-lemma isIso_unit_app_iff_of_iso {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) {X Y : C} (e : X ≅ Y) :
+lemma isIso_unit_app_iff_of_iso_obj {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) {X Y : C} (e : X ≅ Y) :
     IsIso (adj.unit.app X) ↔ IsIso (adj.unit.app Y) := by
   have h := adj.unit.naturality e.hom
   simp only [Functor.id_map, Functor.comp_map] at h

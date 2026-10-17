@@ -143,7 +143,7 @@ lemma isAffine_of_isDominant [GeometricallyConnected (C ↘ Spec (CommRingCat.of
 omit [Finite k₀] in
 /-- The closed complement of a dense open of a smooth geometrically connected affine curve, as a
 finite `k₀`-scheme. -/
-lemma exists_isClosedImmersion_range_eq_compl
+lemma exists_isClosedImmersion_isFinite_range_eq_compl
     [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))] :
     ∃ (Z : Scheme.{u}) (_ : Z.Over (Spec (CommRingCat.of k₀))) (i : Z ⟶ C)
       (_ : IsClosedImmersion i) (_ : i.IsOver (Spec (CommRingCat.of k₀)))
@@ -251,7 +251,7 @@ theorem nonempty_equiv_compactlySupportedCohomology_directImage_of_two_le
     [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))] {r : ℤ} (hr : 2 ≤ r) :
     Nonempty ((F.compactlySupportedCohomology r).Equiv
       (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology r)) := by
-  obtain ⟨Z, _, i, _, _, _, hij⟩ := exists_isClosedImmersion_range_eq_compl (k₀ := k₀) j
+  obtain ⟨Z, _, i, _, _, _, hij⟩ := exists_isClosedImmersion_isFinite_range_eq_compl (k₀ := k₀) j
   have : IsSeparated (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
   have : LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
   have : QuasiCompact (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance

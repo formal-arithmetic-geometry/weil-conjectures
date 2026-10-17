@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Germ
 public import WeilConjectures.WeilSheaf.ArtinSchreierInertia
 public import WeilConjectures.WeilSheaf.StalkCharpoly
+public import WeilConjectures.WeilSheaf.StalkConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisse
 
@@ -64,14 +65,6 @@ lemma upperStarCongr_hom_app_trans {P Y : Scheme.{u}} {a b c : P ⟶ Y} (p : a =
   subst p q
   simp [upperStarCongr]
 
-/-- The restriction of global sections along equal morphisms. -/
-lemma globalSectionsToUpperStar_app_comp_upperStarCongr {P Y : Scheme.{u}} {a b : P ⟶ Y}
-    (p : a = b) (F : Sheaf (Scheme.ProEt.topology Y) A) :
-    (globalSectionsToUpperStar A a).app F ≫ (Sheaf.Γ _ A).map ((upperStarCongr A p).hom.app F) =
-      (globalSectionsToUpperStar A b).app F := by
-  subst p
-  simp [upperStarCongr]
-
 /-- A germ is the transport along the square `y ≫ w = s ≫ 𝟙` with the trivial base change. -/
 lemma factorGerm_eq_globalSectionsTransport {P W Y : Scheme.{u}} {w : W ⟶ Y} {y : P ⟶ W}
     {s : P ⟶ Y} (h : y ≫ w = s) (h' : y ≫ w = s ≫ 𝟙 Y) (F : Sheaf (Scheme.ProEt.topology Y) A) :
@@ -98,7 +91,7 @@ lemma globalSectionsToUpperStar_app_comp_factorGerm {P Y : Scheme.{u}} {s : P �
     ← Functor.map_comp]
   simp only [upperStarFactor, Iso.trans_inv, NatTrans.comp_app, Iso.hom_inv_id_app_assoc,
     upperStarCongr_inv_app]
-  exact globalSectionsToUpperStar_app_comp_upperStarCongr A _ F
+  exact globalSectionsToUpperStar_app_comp_upperStarCongr (A := A) _ F
 
 end Coherence
 
