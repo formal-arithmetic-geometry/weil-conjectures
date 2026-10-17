@@ -301,38 +301,5 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-b52ac77a0 (reviewer sub-agent of L); spot-checked: I read the whole item, all 8 steps, every cited statement, the parent thm-pur-affine-line-purity (blueprint main-20261015 proof and DAG Step 12) and unit sk-prop-an. The delivery has no new nodes. I re-derived every step. Step 2: unit naturality plus naturality of J gives Psi(C_Y(b) a_G) = h_{f,M} C_X(Jb). Step 3: E P(h) = C_Y(e) a_{RL}, using the witness convention and injectivity. Step 4: I checked the type of every factor. Step 5: the four-line cancellation holds, with kappa_g natural at e and Q = v_L^{-1}. Step 6: the transposes of both sides give w beta^p = C(beta^e) v. Steps 7 and 8 (naturality in L, witness replacement) are correct. The identity square (both sides equal h^{-1}) and the empty or zero cases check out. The normalized Hom chain in the statement is exactly the chain in the proof of thm-sf-ambient-adjoint-class (Step 5 and its blueprint_update). The worker's sign counterexample shows that the theorem's statement alone does not fix this normalization, so the added normalization is a clarification, not a weakening. Faults, all repaired: (C3) Step 4 took B^p as the chart transport T^c C(B^e) (S^c)^{-1}, and a_G = C_{c,G}^{-1}, from the proofs of thm-cbc-finite-level-proetale and lem-sf-class-compact-support-comparison. Neither statement gives them. I checked that they hold: both lemmas build the comparison from the same e_j (lem-cbc-proetale-extension-zero-comparison) and the same b_p (lem-weil-pbc-comparison-direct-image-canonical-mate, the b_u named in lem-weil-pbc-transport-identifies-exchange). (C1) Steps 4 and 5 used that B^e is invertible without citing thm-cbc-finite-torsion. (C3) Step 5 justified the naturality of B^p from a proof. Fixes: the statement now names a_G = C_{c,G}^{-1} and B^p as the chart transport Phi^c of lem-cbc-global-transport-chart-normalization (added to stmt_deps). Steps 4 and 5 now cite that lemma and thm-cbc-finite-torsion. proof_deps is recomputed, and there is no cycle. Accepted tool_uses: thm-sf-ambient-adjoint-class (named in the parent's blueprint proof) and lem-sf-class-compact-support-comparison (the a_G of its Hom chain). The other four declared tool uses are already in the sk-prop-an route. The candidate duplicates det-sp-et-proet-adjunction-transfer, lem-coef-site-closed-counit-transport and lem-coef-fully-faithful-counit-descent were checked and are not the same statement. No SGA source is used.; 1 file(s) fixed by the reviewer"
- },
- "reviewed_lean": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-172601c50",
-  "group": "Q95",
-  "result": "fix",
-  "note": "Reviewed all 21 dependencies, canonical constructions, hypotheses, conclusions, universes and edge cases. Snapshot module compiled cleanly through scompile.py. Replaced the H1/H11 placeholder second reading with a complete report under fixes/; review.md records all checks. No Lean or node changes."
- },
- "lean": {
-  "module": "Sheaf.Paper.ExceptionalMateSiteComparison",
-  "declaration": "AlgebraicGeometry.ProEtale.exceptionalMateSiteComparison",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.exceptionalMateRingFinite",
-   "AlgebraicGeometry.ProEtale.exceptionalMateCoeffFinite",
-   "AlgebraicGeometry.ProEtale.exceptionalMateH",
-   "AlgebraicGeometry.ProEtale.exceptionalMateUnit",
-   "AlgebraicGeometry.ProEtale.exceptionalMateTranspose",
-   "AlgebraicGeometry.ProEtale.exceptionalMateCounit",
-   "AlgebraicGeometry.ProEtale.exceptionalMateEtaleExchange",
-   "AlgebraicGeometry.ProEtale.exceptionalMateProExchange",
-   "AlgebraicGeometry.ProEtale.exceptionalMateEtale",
-   "AlgebraicGeometry.ProEtale.exceptionalMatePro",
-   "AlgebraicGeometry.ProEtale.exceptionalMateV",
-   "AlgebraicGeometry.ProEtale.exceptionalMateW",
-   "AlgebraicGeometry.ProEtale.exceptionalMateSiteComparison"
-  ],
-  "file": "lean/Sheaf/Paper/ExceptionalMateSiteComparison.lean",
-  "statement": "theorem exceptionalMateSiteComparison (D : WeilConjectures.PurityFiniteSetting.{u}) {X X' Y Y' : Scheme.{u}} (aX : X ⟶ Spec (.of D.field.k)) (aY : Y ⟶ Spec (.of D.field.k)) (aY' : Y' ⟶ Spec (.of D.field.k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY'] [LocallyOfFiniteType aY'] [QuasiCompact aY'] {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_hf : f ≫ aY = aX) (_hg : g ≫ aY = aY') (sq : IsPullback g' f' f g) (c : Compactification f) [LocallyOfFiniteType (c.g ≫ aY)] [QuasiCompact (c.g ≫ aY)] [LocallyOfFiniteType ((c.ofIsPullback sq).g ≫ aY')] [QuasiCompact ((c.ofIsPullback sq).g ≫ aY')] (d d' : ℕ) (_hd : topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞)) (_hd' : topologicalKrullDim (c.ofIsPullback sq).Z ≤ (d' : WithBot ℕ∞)) (R : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} D.Coefficient)) ⥤ DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} D.Coefficient))) (R' : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} D.Coefficient)) ⥤ DerivedCategory.Plus (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} D.Coefficient))) (adj : He D.Coefficient c ⊣ R) (adj' : He D.Coefficient (c.ofIsPullback sq) ⊣ R') : (∀ L, exceptionalMatePro D.Coefficient sq c adj adj' ((A D.Coefficient Y).obj L) ≫ (exceptionalMateW D.Coefficient g R' L).hom = (exceptionalMateV D.Coefficient g' R L).hom ≫ (A D.Coefficient X').map (exceptionalMateEtale D.Coefficient sq c adj adj' L)) ∧ (∀ (L M : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} D.Coefficient))) (b : L ⟶ M), (p D.Coefficient g').map ((exceptionalMateH D.Coefficient R).map ((A D.Coefficient Y).map b)) ≫ exceptionalMatePro D.Coefficient sq c adj adj' ((A D.Coefficient Y).obj M) = exceptionalMatePro D.Coefficient sq c adj adj' ((A D.Coefficient Y).obj L) ≫ (exceptionalMateH D.Coefficient R').map ((p D.Coefficient g).map ((A D.Coefficient Y).map b))) ∧ (∀ (L M : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} D.Coefficient))) (b : L ⟶ M), (l D.Coefficient g').map (R.map b) ≫ exceptionalMateEtale D.Coefficient sq c adj adj' M = exceptionalMateEtale D.Coefficient sq c adj adj' L ≫ R'.map ((l D.Coefficient g).map b)) ∧ (∀ (L : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} D.Coefficient))) (N : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} D.Coefficient))) (α : (A D.Coefficient Y).obj L ≅ N), exceptionalMatePro D.Coefficient sq c adj adj' N ≫ (exceptionalMateH D.Coefficient R').map ((p D.Coefficient g).map α.inv) ≫ (exceptionalMateW D.Coefficient g R' L).hom = (p D.Coefficient g').map ((exceptionalMateH D.Coefficient R).map α.inv) ≫ (exceptionalMateV D.Coefficient g' R L).hom ≫ (A D.Coefficient X').map (exceptionalMateEtale D.Coefficient sq c adj adj' L))",
-  "branch": "newtargets-dag",
-  "by": "Q95",
-  "date": "2026-10-17",
-  "existing": false
  }
 }
