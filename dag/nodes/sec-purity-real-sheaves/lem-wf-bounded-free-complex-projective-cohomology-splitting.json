@@ -2,17 +2,111 @@
  "id": "lem-wf-bounded-free-complex-projective-cohomology-splitting",
  "kind": "statement",
  "title": "Splitting a bounded finite-free complex with projective cohomology",
- "statement": "Let $R$ be a commutative ring and let $L^\\bullet$ be a bounded cochain complex of finite free $R$-modules, with cohomology $H^i(L)=\\ker(d^i)/\\operatorname{im}(d^{i-1})$, viewed in the derived category $D(R)$ of [def-weil-abstract-derived-category]. If every $H^i(L)$ is a projective $R$-module, then in $D(R)$ there is an isomorphism\n\n$$L\\simeq\\bigoplus_{i\\in\\mathbf Z}H^i(L)[-i],$$\n\nwhere only finitely many summands are nonzero. More precisely, writing $B^{i}=\\operatorname{im}(d^{i-1})$, the complex $L^\\bullet$ is isomorphic, as a complex, to the direct sum of the complexes $H^i(L)[-i]$ (zero differential) and of the two-term complexes $B^{i+1}\\xrightarrow{\\mathrm{id}}B^{i+1}$ placed in degrees $i,i+1$, and the latter are contractible.",
+ "statement": "Let $R$ be a commutative ring and let $L^\\bullet$ be a bounded cochain complex of finite free $R$-modules (having a finite basis, as in [def-weil-pbc-free-module]), with cohomology $H^i(L)=\\ker(d^i)/\\operatorname{im}(d^{i-1})$, viewed in the derived category $D(R)$ of [def-weil-abstract-derived-category]. If every $H^i(L)$ is a projective $R$-module [def-weil-pbc-projective-module], then in $D(R)$ there is an isomorphism\n\n$$L\\simeq\\bigoplus_{i\\in\\mathbf Z}H^i(L)[-i],$$\n\nwhere only finitely many summands are nonzero. More precisely, writing $B^{i}=\\operatorname{im}(d^{i-1})$, the complex $L^\\bullet$ is isomorphic, as a complex, to the direct sum of the complexes $H^i(L)[-i]$ (zero differential) and of the two-term complexes $B^{i+1}\\xrightarrow{\\mathrm{id}}B^{i+1}$ placed in degrees $i,i+1$, and the latter are contractible, meaning that their identity chain maps have the form $dh+hd$ for degree $-1$ maps $h$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-finite-level-pd.proof.md",
   "place": "paragraph beginning ‘We record the elementary splitting argument needed here’"
  },
  "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose integers $a\\leq b$ with $L^i=0$ outside $[a,b]$. Put $Z^i=\\ker d^i$ and $B^i=\\operatorname{im}d^{i-1}$. Since $d^id^{i-1}=0$, $B^i\\subseteq Z^i$. The corestriction $p_i:L^i\\to B^{i+1}$ of $d^i$ is surjective with kernel $Z^i$, and the quotient $q_i:Z^i\\to H^i(L)$ is surjective with kernel $B^i$. These assertions follow directly from image, kernel, and quotient. In particular $B^{b+1}=0$ and $Z^i=B^i=H^i(L)=0$ for $i$ outside $[a,b]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-finite-level-pd.proof.md",
+    "place": "paragraph beginning ‘We record the elementary splitting argument needed here’"
+   }
+  },
+  {
+   "text": "Use the lifting characterization of projectivity in [def-weil-pbc-projective-module]. Every $L^i$ is projective: its basis gives a free module, which is a direct summand of itself using the identity maps. Zero is projective by the same characterization, using the free module with empty basis. We will also use the following immediate lifting argument. If $j:P\\to M$ and $r:M\\to P$ satisfy $rj=1_P$ and $M$ is projective, then for a surjection $u:U\\to V$ and a map $f:P\\to V$, lift $fr$ to $g:M\\to U$; the map $gj$ lifts $f$. Thus every retract of a projective module is projective. This is the only closure property of projectives used below.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05CE and 05CF, definition-projective and lemma-characterize-projective; direct summands and lifting"
+   }
+  },
+  {
+   "text": "For the descending induction, suppose $B^{i+1}$ is projective. Lift $1_{B^{i+1}}$ along the surjection $p_i:L^i\\to B^{i+1}$ using [def-weil-pbc-projective-module], obtaining $t_i:B^{i+1}\\to L^i$ with $p_it_i=1$. For $x\\in L^i$, $x-t_ip_i(x)$ lies in $Z^i$. The mutually inverse maps\n$$Z^i\\oplus B^{i+1}\\longrightarrow L^i,\\quad(z,c)\\longmapsto z+t_i(c),\\qquad x\\longmapsto(x-t_ip_i(x),p_i(x))$$\ngive a splitting. In particular $Z^i$ is a retract of $L^i$, so is projective by step 2.",
+   "uses": [
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-finite-level-pd.proof.md",
+    "place": "paragraph beginning ‘We record the elementary splitting argument needed here’"
+   }
+  },
+  {
+   "text": "By hypothesis $H^i(L)$ is projective. Lift its identity along $q_i:Z^i\\to H^i(L)$, obtaining $s_i:H^i(L)\\to Z^i$ with $q_is_i=1$. Then\n$$B^i\\oplus H^i(L)\\longrightarrow Z^i,\\quad(u,h)\\longmapsto u+s_i(h)$$\nhas inverse $z\\mapsto(z-s_iq_i(z),q_i(z))$. Therefore $B^i$ is a retract of $Z^i$ and is projective by step 2. The induction starts with the projective module $B^{b+1}=0$; applying step 3 and then this step for $i=b,b-1,\\ldots,a$ gives all the chosen $t_i,s_i$ and proves that all cycles and boundaries are projective. Outside this finite interval all modules in question are zero, and take the unique zero splittings. This establishes the induction without assuming any cycle or boundary is projective before it is obtained.",
+   "uses": [
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-finite-level-pd.proof.md",
+    "place": "paragraph beginning ‘We record the elementary splitting argument needed here’"
+   }
+  },
+  {
+   "text": "Combining the displayed inverses gives an $R$-linear isomorphism\n$$\\alpha_i:B^i\\oplus H^i(L)\\oplus B^{i+1}\\longrightarrow L^i,\\qquad(u,h,c)\\longmapsto u+s_i(h)+t_i(c).$$\nHere $B^i$ and $Z^i$ are included in $L^i$. Its inverse sends $x$ to $(z-s_iq_i(z),q_i(z),p_i(x))$, with $z=x-t_ip_i(x)$. Since $d^i$ kills $B^i$ and $s_i(H^i(L))$, while $d^it_i(c)=c$ as an element of $B^{i+1}\\subseteq L^{i+1}$, we have\n$$\\alpha_{i+1}^{-1}d^i\\alpha_i(u,h,c)=(c,0,0).$$\nThus these degreewise isomorphisms commute with the differentials: they are an isomorphism of complexes from the complex with the displayed coordinates and differential to $L$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-finite-level-pd.proof.md",
+    "place": "paragraph beginning ‘We record the elementary splitting argument needed here’"
+   }
+  },
+  {
+   "text": "Let $S$ be the zero-differential complex with $S^i=H^i(L)$, and let $D_i$ have $B^{i+1}$ in degrees $i,i+1$, identity differential between them, and zero elsewhere. In degree $i$ the direct sum $S\\oplus\\bigoplus_jD_j$ has precisely the coordinates $B^i\\oplus H^i(L)\\oplus B^{i+1}$, coming respectively from $D_{i-1},S,D_i$. Its differential is exactly $(u,h,c)\\mapsto(c,0,0)$. Step 5 therefore proves the asserted complex isomorphism. All these sums are finite: $H^i(L)=0$ outside $[a,b]$ and $B^{i+1}=0$ unless $a\\leq i<b$. Under the shift convention of [def-weil-abstract-derived-category], $H^i(L)[-i]$ is the single-term complex in degree $i$, so $S=\\bigoplus_i H^i(L)[-i]$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-finite-level-pd.proof.md",
+    "place": "paragraph beginning ‘We record the elementary splitting argument needed here’"
+   }
+  },
+  {
+   "text": "For each $D_i$ define the degree $-1$ map $h_i^{i+1}:D_i^{i+1}\\to D_i^i$ to be the identity of $B^{i+1}$ and all its other components to be zero. In degree $i$, $(dh_i+h_id)^i=h_i^{i+1}d^i=1$; in degree $i+1$, $(dh_i+h_id)^{i+1}=d^ih_i^{i+1}=1$; elsewhere both sides are zero. This proves contractibility with the convention stated in the item, including when $B^{i+1}=0$. Taking the finite direct sum of these homotopies contracts the disk summand. No assertion that an arbitrary acyclic complex is contractible is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-finite-level-pd.proof.md",
+    "place": "paragraph beginning ‘We record the elementary splitting argument needed here’"
+   }
+  },
+  {
+   "text": "Projection $S\\oplus\\bigoplus_iD_i\\to S$ is a chain map. In the coordinates of step 5 the cycles in degree $i$ are $(u,h,0)$ and the boundaries are precisely $(u,0,0)$: every $u\\in B^i$ occurs as the third coordinate in degree $i-1$. Projection consequently induces the identity on the quotient $H^i(L)$ in every degree, so it is a quasi-isomorphism. Compose projection with the inverse of the complex isomorphism of step 5. The localization defining $D(R)$ in [def-weil-abstract-derived-category] inverts this quasi-isomorphism, giving $Q(L)\\simeq Q(S)$. Finally $Q$ is an additive functor (the additive structure of $D(R)$ in [def-weil-abstract-derived-category] is the one induced from complexes), so it carries the finite direct sum $S=\\bigoplus_iH^i(L)[-i]$ of complexes to the direct sum $\\bigoplus_iQ(H^i(L)[-i])$ in $D(R)$, and $Q$ commutes with the shifts by the same node, so $Q(H^i(L)[-i])\\simeq Q(H^i(L))[-i]$. This gives $L\\simeq\\bigoplus_iH^i(L)[-i]$ in $D(R)$. Only the finitely many degrees in $[a,b]$ contribute nonzero summands.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-finite-level-pd.proof.md",
+    "place": "paragraph beginning ‘We record the elementary splitting argument needed here’"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-projective-module",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-finite-level-pd.proof.md",
+  "place": "Expanded descending splitting argument; the module lifting characterization is Stacks Tags 05CE/05CF."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,10 +135,59 @@
    "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; Module.instProjectiveDFinsupp; CategoryTheory.instHasProjectiveDimensionLTBiprod; CategoryTheory.projectiveDimension_ne_top_iff; Module.Free.directSum; HomologicalComplex.instHasBinaryBiproduct; Module.Free.dfinsupp; no exact splitting theorem",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(projective.*homology|homology.*projective|cohomology.*split|split.*cohomology|decomposition.*complex|complex.*decomposition)",
+   "results": "{\"t\": \"2026-10-17T18:15:34Z\", \"tool\": \"grep\", \"query\": \"(projective.*homology|homology.*projective|cohomology.*split|split.*cohomology|decomposition.*complex|complex.*decomposition)\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean\"], \"digest\": \"b1a109b2958bf06a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no declaration states the full bounded-complex decomposition; individual projective splittings, resolutions, and K-projectivity require the descending argument and coordinate construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded complex of projective modules with projective homology is isomorphic to its homology plus contractible summands",
+   "results": "{\"t\": \"2026-10-17T18:15:34Z\", \"tool\": \"leansearch\", \"query\": \"Bounded complex of projective modules with projective homology is isomorphic to its homology plus contractible summands\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.quasiIso\", \"CategoryTheory.ProjectiveResolution.iso\", \"HomologicalComplex.pOpcyclesIso.congr_simp\", \"CategoryTheory.ProjectiveResolution.homotopyEquiv\", \"HomologicalComplex.pOpcyclesIso\", \"CategoryTheory.ProjectiveResolution.hasHomology\", \"HomologicalComplex.pOpcyclesIso_hom_inv_id\", \"HomologicalComplex.pOpcyclesIso_hom_inv_id_assoc\"], \"digest\": \"7c684d7086ead109\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no declaration states the full bounded-complex decomposition; individual projective splittings, resolutions, and K-projectivity require the descending argument and coordinate construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, Projective",
+   "results": "{\"t\": \"2026-10-17T18:15:34Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex, Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Projective'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: query rejected with loogle: unknown identifier 'Projective'; corrected qualified query also run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded cochain complex of finite free modules with projective cohomology decomposes as cohomology and contractible two term identity complexes",
+   "results": "{\"t\": \"2026-10-17T18:15:38Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded cochain complex of finite free modules with projective cohomology decomposes as cohomology and contractible two term identity complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKProjective_of_projective\", \"CochainComplex.IsKProjective\", \"CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\", \"CochainComplex.isKProjective_of_iso\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"CochainComplex.isKProjective_iff_of_iso\"], \"digest\": \"02a3fa253ee761e4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no declaration states the full bounded-complex decomposition; individual projective splittings, resolutions, and K-projectivity require the descending argument and coordinate construction"
+  },
+  {
+   "tool": "grep",
+   "query": "(Splitting|splitting|IsSplit|isSplit)",
+   "results": "{\"t\": \"2026-10-17T18:15:45Z\", \"tool\": \"grep\", \"query\": \"(Splitting|splitting|IsSplit|isSplit)\", \"sub\": \"Algebra/Homology/HomologicalComplex\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no declaration states the full bounded-complex decomposition; individual projective splittings, resolutions, and K-projectivity require the descending argument and coordinate construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, CategoryTheory.Projective",
+   "results": "{\"t\": \"2026-10-17T18:15:45Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex, CategoryTheory.Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"HomologicalComplex.instProjectiveXObjSingle\", \"HomologicalComplex.instProjectiveXExtend\", \"CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self\"], \"digest\": \"0e560f8141929603\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no declaration states the full bounded-complex decomposition; individual projective splittings, resolutions, and K-projectivity require the descending argument and coordinate construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above complex of projective objects with projective homology is split as a complex",
+   "results": "{\"t\": \"2026-10-17T18:15:46Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded above complex of projective objects with projective homology is split as a complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.ShortComplex.ShortExact.splittingOfProjective\", \"CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions\", \"CategoryTheory.ProjectiveResolution.ofComplex\", \"CategoryTheory.ProjectiveResolution.of_def\", \"CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex\"], \"digest\": \"1c379474f58ad6f4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no declaration states the full bounded-complex decomposition; individual projective splittings, resolutions, and K-projectivity require the descending argument and coordinate construction"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-wf-curve-finite-level-pd",
@@ -61,5 +204,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-bounded-free-complex-projective-cohomology-splitting",
+  "worker": "stage1",
+  "summary": "Expanded the exact two-sequence descending induction, wrote degreewise inverse maps and their differential matrix, and checked the disk homotopy and the quasi-isomorphism to cohomology. Reused existing Mathlib definition leaves for projectivity, free modules and the derived category; no new nodes. Added notion references without changing hypotheses or conclusions. No closed project declaration or exact Mathlib theorem was found.",
+  "blueprint": "Realizes in full the paragraph beginning “We record the elementary splitting argument needed here” in lem-wf-curve-finite-level-pd.proof.md: split L onto the next boundary, split cycles onto cohomology, descend, and remove the explicitly contractible identity summands."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-1cd02b32c",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-1cd02b32c (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's statement and all 8 steps, the three cited Mathlib-leaf definitions (free module, projective module, abstract derived category), the source paragraph in main-20261015 lem-wf-curve-finite-level-pd.proof.md lines 23-32, and how the parent's steps 2 and 4 use the item. The statement matches the base version apart from added notion references and an explicit definition of contractible; nothing was weakened. The steps follow the source: split L^i onto B^{i+1}, split Z^i onto H^i, and descend from B^{b+1}=0, with the induction set up correctly. I checked the inverse maps alpha_i, that alpha_{i+1}^{-1} d alpha_i sends (u,h,c) to (c,0,0), the shift convention, the disk homotopy and the quasi-isomorphism by projection. Small cases checked: R=Z with Z->Z^2; R=Z/6 with multiplication by 2 (projective but not free summands); Z/4 with multiplication by 2 (correctly excluded by the hypothesis); zero cases. There are no new nodes. The candidate duplicates (lem-trf-field-complex-cohomology-splitting, lem-pc-finite-free-split-top-cancellation, the pod field lemmas) cover different statements. No route problems, tool uses or SGA citations. The fix: step 8 went from Q(L)≅Q(S) to the direct sum in D(R) without saying that Q is additive and commutes with shifts. I added one sentence citing the already-cited def-weil-abstract-derived-category (Mathlib DerivedCategory/Basic.lean:146 and :158). The corrected item is in fixes/dag/nodes/sec-purity-real-sheaves/.; 1 file(s) fixed by the reviewer"
  }
 }
