@@ -243,5 +243,29 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-72969ff5d (reviewer sub-agent of L); spot-checked: HTT is not in literature/, so I fetched the PDF (2017 version, /tmp/q06htt) and read §4.1.1, pp.223-228: Def 4.1.1.1, Prop 4.1.1.3(1)-(4) and its proof, Lemma 4.1.1.5, Prop 4.1.1.7, Prop 4.1.1.8 and its proof, Cor 4.1.1.9-4.1.1.12. The statement is true and unchanged: it is 4.1.1.8 (1)<=>(2) combined with 4.1.1.3(4), specialized to quasicategories, with no fullness or colimit-existence hypothesis. It uses the project's arrow-model cocone categories; Step 2 proves the forward direction directly in that model. Small cases checked: id (including the empty one), the empty set into a point (fails on both sides; discrete two-object E), the horn {1} into Delta^1 (holds), {0} into Delta^1 (fails, with E=[1] and H=id), and the non-full wide subcategory {0->2, 1->2} of [2] (final). Steps: (1) setup with the pinch comparison, correct. (2) Fibres of the cocone category are U_D(H, Delta t); the anodyne-cocones equivalence and pinch naturality give a fibrewise equivalence, and the left fibration plus classification and the componentwise criterion give a functor equivalence (HTT 4.1.1.7/4.1.1.8). (3) Equivalences preserve initial objects (HTT (2)=>(3)). (4) The section-limit cone in S, read as a colimit cocone in S^op, is preserved by Step 3; Yoneda then makes the actual restriction an equivalence. The transport-classification citation is redundant but not wrong, and there is no cycle. (5) Small-object factorization with kappa = aleph_0; N is a quasicategory; exponentiation applied along f, then 2-of-3. (6) Follows HTT 4.1.1.11 word for word: contractible Kan fibres make g a trivial fibration; the boundary-cell lift gives s0; i is a retract of f. (7) Elementary. proof_deps equals the union of step uses; no cycles; no SGA. No new nodes. Duplicate candidates checked: cofinal-mono-right-anodyne (full, one direction), right-anodyne-lifting-characterization, terminal-anodyne, equivalence-section-restriction, cofinal-relative-join-slice-restriction; none is a duplicate and none is a restated parent clause. FIX: (a) Step 5 claimed I-cell maps are right anodyne 'by the definition', but the definition does not close the class under coproducts; I added the one-line argument that a well-ordered coproduct of horns is a transfinite composite of single-horn pushouts. (b) Accepted tool_use lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc, outside the route; used only for its generic mapping-space, componentwise and initial-object criteria), declared in split_report.tool_uses. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-universal-cocone-restriction-right-anodyne.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c76d47627",
+  "group": "Q06",
+  "result": "fix",
+  "note": "Statement matches node and HTT 4.1.1.1/4.1.1.3(4)/4.1.1.8(1)<=>(2): quasicategories A,B in u, degreewise-injective i only, E : SSet.{max u v} with lifted B, actual coconeCategory and literal-precomposition coconeRestriction (= recorded gluingCoconeRestrict), IsFunctorEquivalence, rightAnodyneExtensions; iff and quantifier order correct; no fullness/colimit assumption; lean.statement verbatim; sorry-only; edge cases (empty, id, empty->point, endpoint inclusions, v=0 universe) checked. Delivered and fixed file compile clean via nt_compile.py --json (rc=0, no warnings). Fixes: docstring source 'Definitions 4.1.1.1 and 4.1.1.3(4)' -> 'Definition 4.1.1.1 and Proposition 4.1.1.3(4)' (3 places); added non-public imports of the 9 stated proof_deps modules (rule 7); lean-record.json adds declarations [coconeRestriction, main theorem] with note; report.md garbled 'the project server' restored plus maintainer-fix section. Lead note: add landed lem-coef-infinity-colimit-gluing (owner of imported gluingCoconeRestrict, acyclic) to stmt_deps; stage-2 fix dir cannot carry it."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.UniversalCoconeRestrictionRightAnodyne",
+  "declaration": "SSet.Enhanced.universal_cocone_restriction_right_anodyne",
+  "file": "lean/Sheaf/CategoryTheory/UniversalCoconeRestrictionRightAnodyne.lean",
+  "statement": "theorem universal_cocone_restriction_right_anodyne {A B : SSet.{u}} [Quasicategory A] [Quasicategory B] (i : A ⟶ B) (hi : ∀ n : SimplexCategoryᵒᵖ, Function.Injective (i.app n)) : SSet.rightAnodyneExtensions i ↔ ∀ (E : SSet.{max u v}) [Quasicategory E] (H : SSet.uliftFunctor.{v}.obj B ⟶ E), IsFunctorEquivalence (coconeRestriction i H)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.coconeRestriction",
+   "SSet.Enhanced.universal_cocone_restriction_right_anodyne"
+  ],
+  "note": "The helper SSet.Enhanced.coconeRestriction is literal precomposition of coherent cocones along the lifted index map, defined as the recorded SSet.Enhanced.gluingCoconeRestrict of lem-coef-infinity-colimit-gluing (module Sheaf.CategoryTheory.InfinityColimitGluing); no notion is restated.",
+  "fixed_by": "NT-stage2-cc-c76d47627"
  }
 }
