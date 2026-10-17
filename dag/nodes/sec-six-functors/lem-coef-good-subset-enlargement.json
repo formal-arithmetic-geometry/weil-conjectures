@@ -31,48 +31,109 @@
  "stmt_deps": [
   "lem-coef-weak-saturation-tree-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "leanfinder",
-   "query": "In a compact cellular tree whose total map is in an accessible weak equivalence class, every small set of cells extends to a small good downward closed subset with good intersection",
-   "results": "{\"t\": \"2026-10-16T21:51:48Z\", \"tool\": \"leanfinder\", \"query\": \"In a compact cellular tree whose total map is in an accessible weak equivalence class, every small set of cells extends to a small good downward closed subset with good intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.CWComplex.mkFiniteType_cell\", \"Topology.RelCWComplex.mkFiniteType_cell\", \"Topology.CWComplex.mkFiniteType_map\", \"Topology.CWComplex.mkFinite_map\", \"Topology.CWComplex.finiteType_mkFiniteType\", \"Topology.CWComplex.mkFinite_cell\", \"Topology.RelCWComplex.mkFiniteType_map\", \"Topology.RelCWComplex.mkFinite_map\"], \"digest\": \"78da79ebd103e7fa\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: semantic hits are relative CW-complex constructors, Nobeling good products, and model-category closure under already assumed WFS. Read RelativeCellComplex/Basic.lean:40-130 and SmallObject/IsCardinalForSmallObjectArgument.lean:477-505; neither constructs good subsets using accessibility. Loogle gives pushout-property interfaces; grep has no hit."
+   "text": "First establish the increasing-union rule for good subsets. If $D\\subseteq E$ are good, the relative-tree clause of [lem-coef-weak-saturation-tree-presentation], together with $L\\subseteq C$ and weak saturation of $C$, puts $Y_D\\to Y_E$ in $C$. Both maps from $X$ are in $W$, so two-out-of-three puts this transition in $W$. For an increasing ordinal-indexed family $(D_i)$ of good subsets, set $D_{<j}=\\bigcup_{i<j}D_i$ at limit stages. Colimits of these restricted trees have the union property: a cocone under $X$ over the union is exactly a compatible cocone over each restriction, since every cell and every order relation is already in some restriction. Thus $Y_{D_{<j}}$ is the colimit of the earlier $Y_{D_i}$. Transfinite induction now shows that each $D_{<j}$ is good: at a successor use two-out-of-three as above, and at a limit the continuous composite from $X$ has all its transitions in $C\\cap W$, so weak saturation puts that composite in $C\\cap W$. The empty case starts at $Y_\\varnothing=X$ and $1_X\\in C\\cap W$. Consequently every increasing union of good subsets is good. We will only need countable unions.",
+   "uses": [
+    "lem-coef-weak-saturation-tree-presentation",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.2.6.9, observation (i), p. 822; elementary expansion of continuity using cocones."
+   }
   },
   {
-   "tool": "leanfinder",
-   "query": "Alternating small subtrees preserve weak equivalences and their intersection with a specified good subtree",
-   "results": "{\"t\": \"2026-10-16T21:51:53Z\", \"tool\": \"leanfinder\", \"query\": \"Alternating small subtrees preserve weak equivalences and their intersection with a specified good subtree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts.union_succ\", \"Profinite.NobelingProof.Products.prop_of_isGood_of_contained\", \"Profinite.NobelingProof.Products.isGood_mono\", \"Profinite.NobelingProof.P\", \"Profinite.NobelingProof.CC'₁\", \"Profinite.NobelingProof.Products.prop_of_isGood\", \"Profinite.NobelingProof.swapTrue_mem_C1\", \"Profinite.NobelingProof.C'\"], \"digest\": \"ba4f40ce80d60f44\"}",
+   "text": "We next prove a small-good-enlargement rule inside an arbitrary good downward-closed $G\\subseteq T$. Fix $E\\subseteq G$ with $|E|<\\tau$. Restriction to $G$ is still a $\\tau$-good $L$-tree with root $X$. Apply [lem-coef-cellular-tree-presentable-approximations] to this restricted tree. It supplies a small $\\tau$-filtered poset $P$ and arrows $h_p$ with $\\tau$-presentable endpoints whose arrow colimit is $X\\to Y_G$. Choose $p_0$ whose support contains $E$. This arrow colimit is in $W$ because $G$ is good, so the approximation property assumed in the statement, with prescribed subset $\\{p_0\\}\\subseteq P$, gives a $\\kappa$-filtered $Q\\subseteq P$ with $p_0\\in Q$, $|Q|<\\tau$ and $h_Q=\\operatorname{colim}_{q\\in Q}h_q\\in W$. This is an application of the stated approximation hypothesis, not of closure of $W$ under filtered colimits.",
+   "uses": [
+    "lem-coef-cellular-tree-presentable-approximations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.2.6.9, observation (ii), p. 822: make explicit the presentable-endpoint diagram to which the approximation property applies."
+   }
+  },
+  {
+   "text": "Set $D=S_Q=\\bigcup_{q\\in Q}S_q$. It is downward-closed in $G$, hence in $T$, and contains $E$ through $S_{p_0}$. Regularity of $\\tau$ gives $|D|<\\tau$, since $|Q|<\\tau$ and each support has size less than $\\tau$. As $\\kappa$ is infinite, the $\\kappa$-filtered poset $Q$ is nonempty and filtered. The final clause of [lem-coef-cellular-tree-presentable-approximations] therefore applies: $h_Q$ lies in the weakly saturated closure of $L$, hence in $C$, and its pushout along $M_Q\\to X$ is $X\\to Y_D$. Step 2 gives $h_Q\\in W$, so $h_Q\\in C\\cap W$. Weak saturation of $C\\cap W$ puts its pushout $X\\to Y_D$ in $W$. Thus $D$ is a small good subset with $E\\subseteq D\\subseteq G$. In particular this argument never infers that a filtered colimit of arbitrary $C$-arrows lies in $C$; the cited node gives an actual cellular tree for $h_Q$.",
+   "uses": [
+    "lem-coef-cellular-tree-presentable-approximations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.2.6.9, observation (ii), p. 822: agent expansion for a possibly non-presentable root; push out an arrow of C intersect W."
+   }
+  },
+  {
+   "text": "Define sequences $B_n\\subseteq T$ and $D_n\\subseteq A_0$, initially $B_0$ as in the statement and $D_0=A_0\\cap B_0$. Assuming $B_n,D_n$ have cardinality less than $\\tau$, use the small-good-enlargement rule of Steps 2-3 inside the good set $T$ on $B_n\\cup D_n$ to choose a good $B_{n+1}$ containing that union and of size less than $\\tau$. The set $T$ is good by the whole-tree hypothesis. Use the rule a second time, inside the good set $A_0$, on $A_0\\cap B_{n+1}$ to choose a good $D_{n+1}\\subseteq A_0$ containing that intersection and of size less than $\\tau$. This defines both sequences for every natural number. They are increasing: $B_n\\subseteq B_{n+1}$, and $D_n\\subseteq A_0\\cap B_{n+1}\\subseteq D_{n+1}$. Also $D_n\\subseteq B_{n+1}$ for every $n$. Only the tails starting at index 1 are asserted to be good and downward-closed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.2.6.9, claim (*) and its alternating construction, pp. 822-823; recursion using the rule already proved in Steps 2-3."
+   }
+  },
+  {
+   "text": "Put $B=\\bigcup_{n<\\omega}B_n$. Its good tail $B_1\\subseteq B_2\\subseteq\\cdots$ has the same union, so Step 1 proves $B$ good. The same rule proves $D=\\bigcup_{n<\\omega}D_n$ good. The inclusions of Step 4 identify $D=A_0\\cap B$: each $D_n$ lies in $A_0\\cap B_{n+1}$, while each $A_0\\cap B_n$ lies in $D_n$ for $n\\geq1$ (and this holds at $n=0$ by definition). Since $\\tau$ is uncountable regular, this countable union of sets of size less than $\\tau$ has size less than $\\tau$. It contains the original $B_0$. Therefore $B$ and $B\\cap A_0$ satisfy all the required conclusions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.2.6.9, end of the proof of claim (*), p. 823; equality of unions and the uncountable regular size bound."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-weak-saturation-tree-presentation",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-cellular-tree-presentable-approximations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "A.2.6.9, observations (i)-(ii) and claim (*), printed pp. 822-823. Read online; HTT not archived locally. Alternation follows the source, with the compact-root diagram isolated as an explicit auxiliary statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "good.*(tree|subset)|cellular.*tree|tree.*cell",
+   "results": "{\"t\": \"2026-10-16T22:56:39Z\", \"tool\": \"grep\", \"query\": \"good.*(tree|subset)|cellular.*tree|tree.*cell\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: semantic hits are relative CW-complex constructors, Nobeling good products, and model-category closure under already assumed WFS. Read RelativeCellComplex/Basic.lean:40-130 and SmallObject/IsCardinalForSmallObjectArgument.lean:477-505; neither constructs good subsets using accessibility. Loogle gives pushout-property interfaces; grep has no hit."
+   "verdict": "no match: hits are small-set intersection lemmas, Nobeling products, and RelativeCellComplex/Basic.lean:40-139, which defines linear cellular data but does not enlarge good subsets using an approximation property. The MorphismProperty pushout interfaces supply no good-subset theorem. Second leanfinder phrasing gives small-object factorization and cellular-composition interfaces, not a match."
   },
   {
    "tool": "leansearch",
-   "query": "Small good subsets in a cellular tree, accessible weak equivalences, two out of three and pushout closure",
-   "results": "{\"t\": \"2026-10-16T21:51:42Z\", \"tool\": \"leansearch\", \"query\": \"Small good subsets in a cellular tree, accessible weak equivalences, two out of three and pushout closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.cm2\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"CategoryTheory.SmallObject.hasPushouts\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.casesOn\", \"CategoryTheory.MorphismProperty.llp_rlp_of_hasSmallObjectArgument'\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.recOn\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.hasPushouts\"], \"digest\": \"e251f5191acbc943\"}",
+   "query": "Small good subsets in a cellular tree with weak equivalences and a controlled intersection",
+   "results": "{\"t\": \"2026-10-16T22:56:39Z\", \"tool\": \"leansearch\", \"query\": \"Small good subsets in a cellular tree with weak equivalences and a controlled intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"small_iInter'\", \"CategoryTheory.MorphismProperty.IsSmall.small_toSet\", \"small_inter_of_right\", \"small_sInter'\", \"small_biInter'\", \"small_iInter\", \"small_biInter\", \"small_inter_of_left\"], \"digest\": \"f16d11632f2c4fe6\"}",
    "date": "2026-10-17",
-   "verdict": "no match: semantic hits are relative CW-complex constructors, Nobeling good products, and model-category closure under already assumed WFS. Read RelativeCellComplex/Basic.lean:40-130 and SmallObject/IsCardinalForSmallObjectArgument.lean:477-505; neither constructs good subsets using accessibility. Loogle gives pushout-property interfaces; grep has no hit."
+   "verdict": "no match: hits are small-set intersection lemmas, Nobeling products, and RelativeCellComplex/Basic.lean:40-139, which defines linear cellular data but does not enlarge good subsets using an approximation property. The MorphismProperty pushout interfaces supply no good-subset theorem. Second leanfinder phrasing gives small-object factorization and cellular-composition interfaces, not a match."
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory.MorphismProperty, \"pushouts\"",
-   "results": "{\"t\": \"2026-10-16T21:51:42Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MorphismProperty, \\\"pushouts\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.HasPushouts\", \"CategoryTheory.MorphismProperty.pushouts\", \"CategoryTheory.MorphismProperty.HasPushoutsAgainst\", \"CategoryTheory.MorphismProperty.instHasPushoutsOfHasPushouts\", \"CategoryTheory.MorphismProperty.instIsStableUnderCobaseChangePushouts\", \"CategoryTheory.MorphismProperty.instRespectsIsoPushouts\", \"CategoryTheory.MorphismProperty.HasPushoutsAlong\", \"CategoryTheory.MorphismProperty.instHasPushoutsAgainstOfHasPushouts\"], \"digest\": \"86ae269ffea9e997\"}",
+   "results": "{\"t\": \"2026-10-16T22:56:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MorphismProperty, \\\"pushouts\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.HasPushouts\", \"CategoryTheory.MorphismProperty.pushouts\", \"CategoryTheory.MorphismProperty.HasPushoutsAgainst\", \"CategoryTheory.MorphismProperty.instHasPushoutsOfHasPushouts\", \"CategoryTheory.MorphismProperty.instIsStableUnderCobaseChangePushouts\", \"CategoryTheory.MorphismProperty.instRespectsIsoPushouts\", \"CategoryTheory.MorphismProperty.HasPushoutsAlong\", \"CategoryTheory.MorphismProperty.instHasPushoutsAgainstOfHasPushouts\"], \"digest\": \"86ae269ffea9e997\"}",
    "date": "2026-10-17",
-   "verdict": "no match: semantic hits are relative CW-complex constructors, Nobeling good products, and model-category closure under already assumed WFS. Read RelativeCellComplex/Basic.lean:40-130 and SmallObject/IsCardinalForSmallObjectArgument.lean:477-505; neither constructs good subsets using accessibility. Loogle gives pushout-property interfaces; grep has no hit."
+   "verdict": "no match: hits are small-set intersection lemmas, Nobeling products, and RelativeCellComplex/Basic.lean:40-139, which defines linear cellular data but does not enlarge good subsets using an approximation property. The MorphismProperty pushout interfaces supply no good-subset theorem. Second leanfinder phrasing gives small-object factorization and cellular-composition interfaces, not a match."
   },
   {
-   "tool": "grep",
-   "query": "good.*(tree|subset)|cellular.*tree|tree.*cell",
-   "results": "{\"t\": \"2026-10-16T21:51:41Z\", \"tool\": \"grep\", \"query\": \"good.*(tree|subset)|cellular.*tree|tree.*cell\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "tool": "leanfinder",
+   "query": "A small subset of a good cellular tree extends to a small downward closed weak equivalence subtree whose intersection with a given good subtree is a weak equivalence",
+   "results": "{\"t\": \"2026-10-16T22:56:41Z\", \"tool\": \"leanfinder\", \"query\": \"A small subset of a good cellular tree extends to a small downward closed weak equivalence subtree whose intersection with a given good subtree is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts.range_equiv_smaller_toFun\", \"Profinite.NobelingProof.Products.prop_of_isGood_of_contained\", \"Profinite.NobelingProof.GoodProducts.smaller\", \"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"Profinite.NobelingProof.Products.prop_of_isGood\", \"Profinite.NobelingProof.GoodProducts.union\", \"Profinite.NobelingProof.CC'₁\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\"], \"digest\": \"224da013270e1149\"}",
    "date": "2026-10-17",
-   "verdict": "no match: semantic hits are relative CW-complex constructors, Nobeling good products, and model-category closure under already assumed WFS. Read RelativeCellComplex/Basic.lean:40-130 and SmallObject/IsCardinalForSmallObjectArgument.lean:477-505; neither constructs good subsets using accessibility. Loogle gives pushout-property interfaces; grep has no hit."
+   "verdict": "no match: hits are small-set intersection lemmas, Nobeling products, and RelativeCellComplex/Basic.lean:40-139, which defines linear cellular data but does not enlarge good subsets using an approximation property. The MorphismProperty pushout interfaces supply no good-subset theorem. Second leanfinder phrasing gives small-object factorization and cellular-composition interfaces, not a match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a locally presentable category cellular trees admit bounded good subtrees by alternating weak equivalence enlargements and transfinite composition",
+   "results": "{\"t\": \"2026-10-16T22:57:22Z\", \"tool\": \"leanfinder\", \"query\": \"In a locally presentable category cellular trees admit bounded good subtrees by alternating weak equivalence enlargements and transfinite composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.hj\", \"CategoryTheory.SmallObject.transfiniteCompositionsOfShape_ιObj\", \"HomotopicalAlgebra.RelativeCellComplex.toTransfiniteCompositionOfShape\", \"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"CategoryTheory.SmallObject.llp_rlp_of_isCardinalForSmallObjectArgument'\", \"HomotopicalAlgebra.RelativeCellComplex\", \"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.exists_transfiniteCompositionOfShape\"], \"digest\": \"6fe3f42d3c8ab987\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are small-set intersection lemmas, Nobeling products, and RelativeCellComplex/Basic.lean:40-139, which defines linear cellular data but does not enlarge good subsets using an approximation property. The MorphismProperty pushout interfaces supply no good-subset theorem. Second leanfinder phrasing gives small-object factorization and cellular-composition interfaces, not a match."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-intersection-generators",
@@ -80,5 +141,20 @@
   "group": "Q119"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-good-subset-enlargement",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded HTT observation (ii) using one W-independent compact-root cellular approximation node, then proved the small-good-enlargement rule using the assumed arrow approximation and pushout closure of C intersect W. Proved increasing-union closure by continuous transfinite composition and carried the alternating construction and intersection equality in the item. No assumption that the root is presentable or that W is filtered-colimit-closed.",
+  "blueprint": "Retains the inherited generic-model-recognition ancestry under the derived coefficient adjunction paragraph of prop-coef-integral-exceptional-adjoint. That ancestor has no explicit cellular-tree argument. This split expands the existing good-block helper via HTT A.2.6.9 observations (i)-(ii) and claim (*), without changing the unit route or coefficient categories."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-e3e95a65f",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-e3e95a65f (reviewer sub-agent of L); spot-checked: The item's statement is byte-identical to the live side DAG (still unsplit there), so nothing was weakened. Step 1 (good subsets are closed under increasing unions): this follows from the relative-tree clause of lem-coef-weak-saturation-tree-presentation (with L in C and C weakly saturated), two-out-of-three, the cocone union property from def-weil-pbc-category-colimit, and continuous transfinite composition in C∩W; the empty case is 1_X. Steps 2-3: applied to the downward-closed G, the new node gives τ-filtered h_p with τ-presentable endpoints and colimit X→Y_G in W. The item's own approximation hypothesis with {p_0} then gives a κ-filtered Q with h_Q in W. The filtered-restriction clause (κ infinite, so Q is nonempty and filtered) gives h_Q in the closure of L, hence in C, with pushout X→Y_{S_Q}. Pushout closure of C∩W makes S_Q good, and regularity gives |S_Q|<τ. No filtered-colimit closure of C or W is assumed, and X is never assumed presentable. Steps 4-5 follow the alternating B_n/D_n recursion. I checked D_n ⊆ A_0∩B_{n+1} ⊆ D_{n+1}, the equality ∪D_n = A_0∩∪B_n including n=0, and the countable size bound. The parent's Step 6 uses the item correctly (κ:=λ). New node lem-coef-cellular-tree-presentable-approximations: statement-only, self-contained, three kinds of Mathlib search, blueprint from/via correct. I tested it on T empty, one cell, chains (downward closure of a set of size <τ stays <τ) and presentability of N_p. The filtered-restriction clause holds because the colimit over the cofinal upward-closed set of q with t in S_q keeps P_t and Q_t fixed, and colimits of pushouts are pushouts. It is not a duplicate of small-cellular-tree-descent (which needs |T|<τ), weak-saturation-tree-presentation, accessible-subdiagram-criterion or the Smith nodes, and it does not restate a clause of the item (it has no W). All dependencies are in the same unit or are the colimit definition, so there are no tool_uses and no cycle. No fixes were needed. HTT is not archived and network access is blocked, so I could not read A.2.6.9 or A.1.5.11 myself. Both nodes are marked as agent proofs and the WANTED line stands; I checked the mathematics independently in full."
+ }
 }

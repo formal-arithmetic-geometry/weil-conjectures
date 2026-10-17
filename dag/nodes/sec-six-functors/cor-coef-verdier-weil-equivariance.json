@@ -3,58 +3,216 @@
  "blueprint": {
   "is": "cor-coef-verdier-weil-equivariance",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Weil equivariance of the completed coefficient duality",
- "statement": "For a scheme over $\\mathbf F_q$, duality at $E$ and\n$\\Qlb$ preserves the category of Weil complexes on its\ngeometric fiber. Evaluation, biduality, the exceptional adjunction\ndata, and the finite scalar-extension comparisons are Weil\nequivariant. This assertion does not require a\nFrobenius-stable integral lattice for a rational Weil complex.",
+ "statement": "Use the finite-field and coefficient conventions of [def-fix-six-functor-datum]: $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k_0$, and a finite coefficient field $E/\\mathbf Q_\\ell$ inside the fixed algebraic closure $\\Qlb$. Let $X_0$ be a separated finite-type $k_0$-scheme, put $X=X_0\\times_{k_0}k$, and let $g_X$ be its geometric-Frobenius automorphism. For $\\Lambda=E$ or $\\Qlb$, use the bounded constructible pro-etale coefficient categories and Weil pairs $(K,\\theta_K:Lg_X^*K\\xrightarrow{\\sim}K)$ of [def-weil-weil-sheaf-complex]. Put $\\omega_{X,\\Lambda}=Ra_X^!\\Lambda$ and $D_{X,\\Lambda}=R\\mathcal Hom_\\Lambda(-,\\omega_{X,\\Lambda})$, using the constructible exceptional adjoint and coefficient-passage operations of [def-fix-six-functor-datum, def-weil-derived-pullback-tensor-hom].\n\nDuality sends Weil complexes contravariantly to Weil complexes. Its evaluation $K\\otimes^L_\\Lambda D_{X,\\Lambda}K\\to\\omega_{X,\\Lambda}$ and canonical biduality isomorphism $\\delta_K:K\\xrightarrow{\\sim}D_{X,\\Lambda}D_{X,\\Lambda}K$ are Weil equivariant. For every separated finite-type $f_0:X_0\\to Y_0$ between separated finite-type $k_0$-schemes, the constructible adjunction $Rf_!\\dashv Rf^!$ on the geometric fibers lifts to Weil pairs, with equivariant unit and counit. For each finite coefficient-field extension $E\\subset L\\subset\\Qlb$, the canonical dualizing and duality comparisons\n$$\n\\omega_{X,E}\\otimes_E L\\xrightarrow{\\sim}\\omega_{X,L},\\qquad\n(D_{X,E}K)\\otimes_E L\\xrightarrow{\\sim}D_{X,L}(K\\otimes_E L)\n$$\nare Weil equivariant, as are their evaluation, biduality and exceptional-adjunction compatibility diagrams; their images in the common-stage $\\Qlb$ category have the same property. These assertions use the rational Frobenius isomorphism itself and require no Frobenius-stable integral lattice.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.md",
   "place": "node cor-coef-verdier-weil-equivariance, order 2241"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
  "proof": [
   {
-   "text": "The underlying operations now preserve the relevant constructible\ncategories by [thm-coef-rational-verdier], [lem-coef-rational-operations], [thm-coef-qbar-verdier].\nConsequently the equivariance construction of\n[lem-fix-weil-operations] applies, including to the\ndualizing object supplied by the exceptional adjoint. Write\n$g$ for geometric Frobenius and\n$\\theta_K:g^*K\\xrightarrow{\\sim}K$ for a Weil structure in\n[def-weil-weil-sheaf-complex]. The dual Weil structure is\nthe composite\n\n$$\ng^*DK\\xrightarrow{\\sim}D(g^*K)\n\\xrightarrow{D(\\theta_K^{-1})}DK.\n$$",
+   "text": "Work first at a finite coefficient field $E$. Write $\\mathcal C_T=D^b_c(T,E)$ for a geometric fiber $T$, $P_T=Lg_T^*$, $F_f=Rf_!$, and $G_f=Rf^!$. By [thm-coef-rational-verdier], $D_T$ is an anti-equivalence of the actual rationalized constructible category, with its actual evaluation and invertible double-dual map. By [lem-coef-rational-operations], $D_T=R\\mathcal Hom_E(-,\\omega_T)$, $\\omega_T=G_{a_T}E$, and $F_f\\dashv G_f$ is an adjunction on these categories. In particular every internal Hom of the form $R\\mathcal Hom_E(K,\\omega_T)$ used below is bounded constructible. This supplies the preservation hypotheses needed to apply the internal-Hom and evaluation assertions of [lem-fix-weil-operations]; it does not assert an ambient exceptional right adjoint.",
    "uses": [
     "thm-coef-rational-verdier",
     "lem-coef-rational-operations",
-    "thm-coef-qbar-verdier",
-    "lem-fix-weil-operations",
-    "def-weil-weil-sheaf-complex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The first map is the internal-Hom comparison for the equivalence\n$g^*$, using the dualizing Weil structure. Naturality of\nevaluation proves its equivariance, and transposition gives the\nsame conclusion for $\\delta$. This works with a rational\n$\\theta_K$ itself; it is unnecessary to reduce that\nautomorphism on a chosen integral lattice. At $\\Qlb$ the\nfinite diagram representing $K$, $\\theta_K$, and its\ninverse is realized at one common finite coefficient field.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "The comparisons in [lem-coef-integral-finite-extension]\nare built from scalar tensor, the dualizing counit, and evaluation.\nTheir finite-level comparisons commute with the Frobenius\nautomorphism square, and normalized tower transport preserves\nthat equality. Their rationalizations and common-stage images\ntherefore commute with the displayed dual Weil structure. The\nsame units and counits as in [lem-fix-weil-operations]\ngive the exceptional-adjunction assertion.",
-   "uses": [
-    "lem-coef-integral-finite-extension",
     "lem-fix-weil-operations"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Proof paragraph 1, first two sentences: actual constructible domains"
+   }
+  },
+  {
+   "text": "The inverse of geometric Frobenius is again a scheme automorphism. The exact inverse-image equivalence of [lem-weil-proetale-isomorphism-inverse-image] and the identification with derived pullback on integral constructible objects in [lem-weil-isomorphism-derived-pullback] give mutually inverse pullback functors for $g_T$ and $g_T^{-1}$. Their inverse identities rationalize by the morphism formulas of [def-weil-derived-pullback-tensor-hom], so $P_T$ is an equivalence on $\\mathcal C_T$. This uses geometric, not absolute scheme, Frobenius. For a morphism $f$ descended from $k_0$, its Frobenius square, with horizontal arrows $g_X,g_Y$ and vertical arrows $f$, is Cartesian because both horizontal arrows are isomorphisms. Give the two source corners the $k$-structures $a_Xg_X$ and $a_Yg_Y$; then all four arrows are separated finite-type $k$-morphisms of finite-type $k$-schemes, and the pro-etale coefficient categories do not depend on the $k$-structure. So [fix-lem-exchanges] gives the compact-support exchange $a_f=\\operatorname{Ex}_{g}:P_YF_f\\to F_fP_X$, $g=g_Y$, natural in the input by its clause 1. Its clause 2, applied to horizontal pasting with the square of $h=g_Y^{-1}$ (upper arrow $h'=g_X^{-1}$) in both orders, where the pasted square is the identity square with identity exchange, gives $(\\operatorname{Ex}_h\\,Lg_X^*)\\circ(Lh^*\\operatorname{Ex}_g)=1$ and $(\\operatorname{Ex}_g\\,Lh'^*)\\circ(Lg_Y^*\\operatorname{Ex}_h)=1$ under the pullback-composition identifications. As $Lh^*$ is fully faithful, the first equation makes every component of $\\operatorname{Ex}_g$ a split monomorphism; the second makes its components at the objects $Lh'^*K$, which exhaust $\\mathcal C_X$ up to isomorphism, split epimorphisms, hence by naturality all components. Thus $a_f$ is a natural isomorphism on all of $\\mathcal C_X$, not only on Weil pairs. The tensor comparison $\\mu:P_T(A\\otimes B)\\xrightarrow{\\sim}P_TA\\otimes P_TB$ preserves symmetry, associators and units by [lem-pur-derived-pullback-tensor-iso]. These facts hold for the semilinear scheme automorphisms: neither inverse-image lemma requires a $k$-linear isomorphism.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-isomorphism-derived-pullback",
+    "def-weil-derived-pullback-tensor-hom",
+    "fix-lem-exchanges",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Proof paragraph 1: Frobenius comparison and its inverse; paragraph 2: internal Hom for an equivalence"
+   }
+  },
+  {
+   "text": "Construct the exceptional comparison for the actual constructible adjunction, rather than invoking the ambient-admissible clause of [lem-fix-weil-operations]. Put $S=P_X$, $T=P_Y$, $F=F_f$, $G=G_f$, and let $\\eta,\\varepsilon$ be the unit and counit of [lem-coef-rational-operations]. With $a=a_f:TF\\to FS$, take the mate of $a^{-1}$:\n$$b:SG\\xrightarrow{\\eta SG}GFSG\\xrightarrow{G a^{-1}G}GTFG\\xrightarrow{GT\\varepsilon}GT.$$\nThis is the mate defined in [def-weil-pbc-adjunction-mate]. Apply [lem-weil-mate-iso-along-equivalences] with both adjunctions equal to $F\\dashv G$, with its $G=S$, its $G'=T$, and its $\\theta=a^{-1}$. Step 2 supplies both equivalences, so $b$ is invertible. Define $\\theta_{GM}=G(\\theta_M)b_M$. Naturality of $b$ gives the Weil-morphism equation for $G(u)$. Expanding the displayed mate and using the two triangle identities gives\n$$(Ga)(bF)(S\\eta)=\\eta S,\\qquad (\\varepsilon T)(Fb)(aG)=T\\varepsilon.$$\nMultiplication by $GF(\\theta_K)$ in the first and by $\\theta_M$ in the second, followed by naturality of $\\eta,\\varepsilon$, gives exactly equivariance of $K\\to GFK$ and $FGM\\to M$. In particular apply this construction to $a_X:X\\to\\operatorname{Spec}k$, the geometric fiber of $X_0\\to\\operatorname{Spec}k_0$. The constant coefficient object has its canonical pullback identification, so this gives the Weil isomorphism $\\theta_\\omega:P_X\\omega_X\\to\\omega_X$. No ambient admissibility is imposed.",
+   "uses": [
+    "lem-coef-rational-operations",
+    "lem-fix-weil-operations",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-mate-iso-along-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Proof paragraph 1: dualizing Weil structure; paragraph 3, last sentence: exceptional units and counits"
+   }
+  },
+  {
+   "text": "Let $(K,\\theta_K)$ be a Weil pair in the sense of [def-weil-weil-sheaf-complex]. Apply the canonical internal-Hom Weil structure and equivariant evaluation of [lem-fix-weil-operations] to the pair $(K,\\omega_X)$, whose Hom lies in the constructible category by Step 1. If $h:P_XR\\mathcal Hom(K,\\omega_X)\\to R\\mathcal Hom(P_XK,P_X\\omega_X)$ is the comparison, this gives\n$$\\theta_{DK}=R\\mathcal Hom(\\theta_K^{-1},\\theta_\\omega)h\n=D(\\theta_K^{-1})c_K:P_XDK\\xrightarrow{\\sim}DK,$$\nwhere $c_K=R\\mathcal Hom(1,\\theta_\\omega)h:P_XDK\\to D(P_XK)$. For a Weil morphism $u:K\\to L$, the equation $u\\theta_K=\\theta_LP_Xu$ rearranges to $P_Xu\\,\\theta_K^{-1}=\\theta_L^{-1}u$. Contravariant functoriality of internal Hom and naturality of $h$ then give $D(u)\\theta_{DL}=\\theta_{DK}P_XD(u)$. Thus $D$ is a contravariant functor on Weil pairs. Write $e_K:K\\otimes DK\\to\\omega_X$. The evaluation clause of [lem-fix-weil-operations] gives the explicit equation\n$$e_K(\\theta_K\\otimes\\theta_{DK})\\mu_{K,DK}=\\theta_\\omega P_X(e_K).$$\nHere precomposition by $\\theta_K^{-1}$ cancels evaluation on $\\theta_K$; all Frobenius maps have degree zero, so the usual signed tensor symmetry is respected.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "lem-fix-weil-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Proof paragraph 1, displayed dual Weil structure, and paragraph 2: evaluation and rational Frobenius"
+   }
+  },
+  {
+   "text": "First the transpose bijection used here and in Step 7. Let $P,L,Q$ be integral bounded constructible objects on $X$ whose internal Hom $H(P,Q)=R\\mathcal Hom_{\\widehat R_X}(P,Q)$ is again constructible. The global-sections identification of [lem-pur-rhom-global-sections] and the currying isomorphism of [lem-weil-pbc-ringed-internal-hom-exact-restriction] give $\\operatorname{Hom}(L,H(P,Q))\\cong\\operatorname{Hom}(P\\otimes^L_{\\widehat R_X}L,Q)$ for the ordinary ambient tensor, with evaluation as counit. The completed tensor of [def-weil-derived-pullback-tensor-hom, def-pur-integral-derived-operations] is the derived limit of the reductions of this ordinary tensor (balancing on K-flat representatives, compatibly with the quotient transitions); by [lem-weil-pbc-constant-completion-equivalence], for the Noetherian ring $\\mathcal O_E$ and the ideal $(\\varpi_E)$, this limit with its unit is the Koszul completion of [lem-weil-pbc-ringed-koszul-completion-reflector], and the derived-complete object $Q$ of [def-weil-derived-complete-integral-detailed] satisfies that lemma's local completeness condition. Its mapping property gives $\\operatorname{Hom}(P\\widehat\\otimes L,Q)\\cong\\operatorname{Hom}(P\\otimes^LL,Q)$. Hence $\\varphi\\mapsto e\\circ(1_P\\widehat\\otimes\\varphi)$ is an $\\mathcal O_E$-linear bijection $\\operatorname{Hom}(L,H(P,Q))\\to\\operatorname{Hom}(P\\widehat\\otimes L,Q)$. By [def-weil-rationalization-karoubi] rational Hom groups are these groups tensored with $E$, and the rational tensor, internal Hom and evaluation are the integral ones extended linearly [def-weil-derived-pullback-tensor-hom, thm-coef-rational-verdier]; tensoring the bijection with $E$ gives the rational transpose bijection. Step 1 makes it applicable with $Q=\\omega_X$ and $P=K$ or $DK$. By [thm-coef-integral-verdier], the actual integral double-dual map is evaluation-defined. Its rationalization in [thm-coef-rational-verdier], identified with internal-Hom biduality by [lem-coef-rational-operations], is therefore characterized by\n$$e_{DK}(1_{DK}\\otimes\\delta_K)=e_K\\tau_{DK,K},$$\nwhere $\\tau$ is tensor symmetry. We check $\\delta_K\\theta_K=\\theta_{DDK}P_X\\delta_K$ by taking both tensor-Hom transposes and precomposing with the invertible map $\\theta_{DK}\\otimes1_{P_XK}$. The transpose of the left side becomes\n$$e_K(\\theta_K\\otimes\\theta_{DK})\\tau_{P_XDK,P_XK}\n=\\theta_\\omega P_X(e_K)\\mu_{K,DK}^{-1}\\tau_{P_XDK,P_XK}.$$\nThe transpose of the right side becomes\n$$e_{DK}(\\theta_{DK}\\otimes\\theta_{DDK})(1\\otimes P_X\\delta_K)\n=\\theta_\\omega P_X\\bigl(e_{DK}(1\\otimes\\delta_K)\\bigr)\\mu_{DK,K}^{-1}.$$\nStep 4 applied to $K$ and $DK$ gives these equalities; symmetry compatibility of [lem-pur-derived-pullback-tensor-iso] and the characterizing equation identify their right sides. By the transpose bijection just proved, the original arrows are equal. The underlying $\\delta_K$ is invertible by [thm-coef-rational-verdier]; its inverse is equivariant by rearranging this equation. This proves equivariance of the actual biduality map.",
+   "uses": [
+    "lem-pur-rhom-global-sections",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pur-integral-derived-operations",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-rationalization-karoubi",
+    "thm-coef-integral-verdier",
+    "thm-coef-rational-verdier",
+    "lem-coef-rational-operations",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Proof paragraph 2: expanded transposition argument for biduality"
+   }
+  },
+  {
+   "text": "We next check the coefficient comparisons on which the passage to $\\Qlb$ depends. Let $E\\subset L$ be finite, $R=\\mathcal O_E$, $S=\\mathcal O_L$, and $e=e(L/E)$. At the cofinal quotient levels $A_n=R/\\varpi_E^n$, $B_n=S/\\varpi_E^nS=S/\\varpi_L^{en}$, [lem-coef-finite-free-extension] states that the scalar comparisons are natural under scheme isomorphisms, in particular geometric Frobenius with its base automorphism, and explicitly defines their maps by scalar tensor, evaluation and adjunction counits. Thus their Frobenius squares commute as maps of the coefficient diagrams, before a Weil isomorphism on an input is chosen. The inputs supplied by integral representatives and the integral dualizing object are in the finite-Tor domains: [lem-coef-integral-residue-tor] supplies the uniform Tor condition, and [prop-coef-integral-dualizing] supplies both the integral dualizing object and its finite reductions. To pass these identities through completion use the simultaneous enhanced section models of [lem-coef-semilinear-derived-sections], whose statement includes pullback, coefficient tensor, evaluation, mates and their coherence, and says that taking transposes preserves these constructions. Inverse image for a scheme isomorphism is exact and preserves products and limits by [lem-weil-proetale-isomorphism-inverse-image]; hence it commutes with the differentials and $1-s$ in the shifted product-cone construction of [def-pur-integral-derived-operations]. Applying this functor to the coherent coefficient diagrams therefore preserves their commuting squares, and then rationalization preserves them. The cofinal exponents are $en$, not $n$ at both coefficient fields. This proves Frobenius compatibility of the scalar tensor and compact-support coefficient comparisons used to transpose adjunction data; it does not infer equality of integral maps merely from equality of unrelated finite reductions.",
+   "uses": [
+    "lem-coef-finite-free-extension",
+    "lem-coef-integral-residue-tor",
+    "prop-coef-integral-dualizing",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Proof paragraph 3, first three sentences: coherent coefficient comparisons and normalized tower passage"
+   }
+  },
+  {
+   "text": "The scalar-compatible identifications of [lem-coef-rational-operations] preserve the actual adjunction units and counits. Its dualizing comparison $u:T_{L/E}\\omega_{X,E}\\to\\omega_{X,L}$ is consequently characterized by the scalar-extended compact-support counit. Taking its adjunction transpose after Frobenius in the two orders gives the same counit composite: Step 6 supplies compatibility of scalar tensor and compact support with the Frobenius square, and Step 3 supplies equivariance of the counit. Uniqueness of transpose therefore gives\n$$u\\,\\theta_{T\\omega_E}=\\theta_{\\omega_L}P_X(u).$$\nThe integral comparisons of [lem-coef-integral-finite-extension], rationalized in [thm-coef-rational-verdier], give $\\beta_K:T_{L/E}D_EK\\to D_L(T_{L/E}K)$. Their evaluation compatibility characterizes $\\beta_K$ by\n$$e^L_{TK}(1\\otimes\\beta_K)=u\\,T(e^E_K)\\,t_{K,D_EK}^{-1},$$\nwhere $t:T(K\\otimes D_EK)\\to TK\\otimes TD_EK$ is the scalar tensor comparison. Apply $P_X$ to this equation. In the two resulting routes use Step 4 for $e^E_K,e^L_{TK}$, the equation just proved for $u$, and Step 6 for $t$. Both routes transpose to the same equivariant pairing, so the transpose bijection of Step 5, at the field $L$, gives\n$$\\beta_K\\theta_{TD_EK}=\\theta_{D_L(TK)}P_X(\\beta_K).$$\nThe comparison between $P_XT$ and $TP_X$ is the pullback scalar isomorphism of [lem-pur-integral-operations-scalar-extension] followed by rationalization. Its formation is the same coefficient tensor construction of Step 6. Naturality of $\\beta$ applies to arbitrary rational $\\theta_K^{-1}$, not just integral morphisms. The evaluation, biduality and adjunction compatibility diagrams of [thm-coef-rational-verdier, lem-coef-rational-operations] now have equivariant edges; their existing equalities are therefore equalities in the faithful pair categories. Inverses, identities and composites of equivariant arrows are equivariant by substitution in the defining equation.",
+   "uses": [
+    "lem-coef-rational-operations",
+    "lem-coef-integral-finite-extension",
+    "thm-coef-rational-verdier",
+    "lem-pur-integral-operations-scalar-extension",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Proof paragraph 3: rationalized dualizing, evaluation, biduality and adjunction comparisons"
+   }
+  },
+  {
+   "text": "Finally use the precise common-stage category of [def-weil-algebraically-closed-coefficients]. If a $\\Qlb$-Weil object has underlying pair $(E,K)$, its structure map and inverse each have a representative over some finite field. Choose a common overfield for those representatives; since each of the two inverse equations holds in the colimit Hom group, enlarge once for each equation. Over the resulting finite field both equations hold, so the representative is an actual isomorphism $P_XK_L\\to K_L$. The same finite procedure represents any Weil morphism and its equivariance equation. The functor formulas of [def-weil-derived-pullback-tensor-hom] identify the pullbacks, tensors and internal Homs of these representatives. Apply Steps 1–7 at that field. Their compatibility under enlargement (Step 7) makes all the resulting structures and maps independent of the representative. The underlying descended duality and exceptional adjunction, with the same evaluation and biduality, are exactly [thm-coef-qbar-verdier]. A finite collection of maps and equations, including any scalar-extension compatibility diagram, is handled by the same common-field construction. Thus every assertion holds at $\\Qlb$. Throughout, $\\theta_K$ and its inverse were used as morphisms in the rational category. For example at a point multiplication by $\\varpi_E$ on $E$ is a valid Weil isomorphism, despite not preserving any lattice isomorphically; the construction gives multiplication by $\\varpi_E^{-1}$ on its dual. No Frobenius-stable integral lattice has been used.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "thm-coef-qbar-verdier",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Proof paragraph 2, last two sentences: one common finite field and no integral Weil lattice"
+   }
   }
  ],
  "proof_deps": [
   "thm-coef-rational-verdier",
   "lem-coef-rational-operations",
-  "thm-coef-qbar-verdier",
   "lem-fix-weil-operations",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-isomorphism-derived-pullback",
+  "def-weil-derived-pullback-tensor-hom",
+  "fix-lem-exchanges",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-mate-iso-along-equivalences",
   "def-weil-weil-sheaf-complex",
-  "lem-coef-integral-finite-extension"
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-pur-integral-derived-operations",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "thm-coef-integral-verdier",
+  "lem-coef-finite-free-extension",
+  "lem-coef-integral-residue-tor",
+  "prop-coef-integral-dualizing",
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-integral-finite-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "thm-coef-qbar-verdier"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Proof paragraphs 1–3, expanded with explicit mates, evaluation transposes and coherent coefficient passage"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Verdier\"",
+   "results": "CategoryTheory.ObjectProperty.IsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.IsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingOppositeOpOfIsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingOppositeOpOfIsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.isVerdierLeftLocalizing_op_iff, CategoryTheory.ObjectProperty.isVerdierRightLocalizing_op_iff, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingUnopOfIsVerdierRightLocalizingOpposite, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingUnopOfIsVerdierLeftLocalizingOpposite",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state constructible l-adic Weil duality, its actual exceptional adjunction and all coefficient compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|WeilComplex|WeilSheaf",
+   "results": "Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Presentable/Directed.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state constructible l-adic Weil duality, its actual exceptional adjunction and all coefficient compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality on rational l-adic Weil complexes preserves Frobenius structures and evaluation and biduality are Frobenius equivariant",
+   "results": "WittVector.IsocrystalEquiv.frob_equivariant, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.Isocrystal.frob, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.Isocrystal.frobenius, WittVector.IsocrystalEquiv.toLinearEquiv, WittVector.instModuleFractionRingStandardOneDimIsocrystal, WittVector.IsocrystalEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state constructible l-adic Weil duality, its actual exceptional adjunction and all coefficient compatibilities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius equivariant Verdier duality for constructible l-adic complexes",
+   "results": "WittVector.IsocrystalEquiv.frob_equivariant, CategoryTheory.frobeniusMorphism, Isocrystal.term_≃ᶠˡ[_,_]_, CategoryTheory.frobeniusMorphism_mate, coe_frobenius_comp_coe_frobeniusEquiv_symm, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, BddLat.dualEquiv_inverse, Module.Dual.congr_symm_apply_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state constructible l-adic Weil duality, its actual exceptional adjunction and all coefficient compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dualizing object with automorphism gives contragredient automorphism on internal Hom and equivariant evaluation and double dual map",
+   "results": "Rep.ihom_obj_ρ, Rep.ihom_obj_ρ_apply, Rep.ihom_obj_ρ_def, Rep.homEquiv_symm_apply_hom, Rep.homEquiv_def, Rep.homEquiv, Action.leftDual_ρ, Rep.ihom_coev_app_hom",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state constructible l-adic Weil duality, its actual exceptional adjunction and all coefficient compatibilities"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -84,5 +242,20 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-package"
+ "unit": "sk-thm-sf-package",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "cor-coef-verdier-weil-equivariance",
+  "worker": "stage1",
+  "summary": "Restored the fixed separated finite-type coefficient context; expanded the dual Frobenius, evaluation, biduality, actual constructible adjunction, and scalar-extension arguments. Reused existing support nodes; no new nodes. Distinguished constructible right adjoints from optional ambient admissibility and coherent tower equalities from equality of evaluated maps.",
+  "blueprint": "main-20261015 proof paragraph 1 is realized in steps 1–4, paragraph 2 in steps 4–5 and 8, and paragraph 3 in steps 3 and 6–7."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-1e0e7049f",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-1e0e7049f (reviewer sub-agent of L); spot-checked: I read the item, the blueprint source in both snapshots (main-20261015 and master have the same text), all 20 original dependency statements, the unit route and the only citer, fix-prop-coherence. The delivery has no new nodes. The statement only spells out the blueprint's own setting (separated finite-type X_0; constructible exceptional adjunction; the E to L comparisons for omega and D). That is not a weakening, because Weil complexes and the duality the proof relies on exist only in that setting. All cited units are on the route of sk-thm-sf-package, so no tool_uses are needed. No SGA is cited. I recomputed the step 3 mate (S is an equivalence and T is fully faithful, as the lemma needs), the step 4 rearrangement and the step 5 transposes. Edge cases checked: empty X; a point with theta = varpi_E, which gives a dual structure of varpi_E^-1 and preserves no lattice; L=E; ramified L/E with level en. I repaired two faults. (1) C3, step 2: the natural isomorphism a_f: P_Y Rf_! to Rf_! P_X was taken from lem-fix-weil-operations, whose statement only gives Weil structures on Weil objects, while the step 3 mate lemma needs a_f on all objects. a_f is now Ex_! from fix-lem-exchanges. Give the source corners of the Frobenius square the k-structures a_X g_X and a_Y g_Y. Clause 1 gives naturality, and clause 2 (pasting with the inverse square in both orders) shows each component is split mono and split epi, so a_f is invertible. (2) C1, steps 5 and 7: the tensor-Hom transpose bijection for the completed or rational tensor was used without any node stating it. Step 5 now proves it from lem-pur-rhom-global-sections, lem-weil-pbc-ringed-internal-hom-exact-restriction, lem-weil-pbc-constant-completion-equivalence, lem-weil-pbc-ringed-koszul-completion-reflector, def-weil-rationalization-karoubi and def-weil-derived-pullback-tensor-hom; step 7 uses it at L. proof_deps is again exactly the union of the step uses (27 ids). No dependency leads back to the item. Only proof and proof_deps changed, in fixes/dag/nodes/sec-six-functors/cor-coef-verdier-weil-equivariance.json. Duplicates: none; prop-pod-dual-tate-data-compatibility is about perfect K and its coefficient dual.; 1 file(s) fixed by the reviewer"
+ }
 }
