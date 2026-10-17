@@ -212,5 +212,28 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-7e218e4f2 (reviewer sub-agent of L); spot-checked: Read the item JSON in full, the report and all nine cited node statements (three definitions plus the anodyne-cocone, terminal-anodyne, relative-cone-equivalence (4), constant-test, Kan pullback-invariance and fibration nodes). The statement is the exact specialization of Kerodon 02XT/02XQ to the inclusion of the initial objects, which is left cofinal by the opposite of 02J5: it assumes only an inner fibration, fixes the boundary and base exactly, and allows an empty or infinite index set. Kerodon is not archived in literature/ and is correctly listed as WANTED; the proof does not depend on it, because it is complete from DAG statements. Step 1: in J_i^op the incoming mapping spaces of t_i are contractible, so {t_i} into J_i^op is right anodyne; orientation correct. Step 2: the coproduct is right anodyne by successive pushouts with unions at limit stages; the empty case is the identity. Step 3: the constant test on C^op and the restriction equivalence from anodyne-cocones (correct variance, diagram to constant) form strict spans once composition choices are restricted; pullback invariance with b=id and two-out-of-three give the particular-cone iff. Step 4: the pushout-join with k from the empty set to the point gives A^▷ ⊔_A C into C^▷, which is inner (checked on Λ^2_1 in Δ^2); opposites keep horns inner; the inner-horn lift preserves the boundary, base and q_0 exactly. Step 5: the converse is elementary and the empty case is handled correctly. Small cases checked: I empty, D empty over B a point, Δ^1 with initial vertex 0, singleton components, p the identity. No new nodes; rg over the snapshot DAG for 02XT/02XQ/02J5 and initial-object/relative-limit wording found no duplicate. The graph is acyclic over 162 nodes, all proof_deps are in unit sk-prop-sf-biduality-general, the blueprint ancestor place matches paragraph 2 of the main-20261015 proof of prop-coef-integral-exceptional-adjoint, and no SGA is used. No changes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeLimitInitialComponents",
+  "declaration": "SSet.Enhanced.relative_limit_initial_components",
+  "declarations": [
+   "SSet.Enhanced.initialComponentsInclusion",
+   "SSet.Enhanced.relative_limit_initial_components"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeLimitInitialComponents.lean",
+  "statement": "theorem relative_limit_initial_components {I : Type u} (J : I → SSet.{u}) [∀ i : I, Quasicategory (J i)] (t : ∀ i : I, (J i) _⦋0⦌) (ht : ∀ i : I, IsInitial (J i) (t i)) {D B : SSet.{u}} [Quasicategory D] [Quasicategory B] (p : D ⟶ B) [InnerFibration p] (f : (∐ J) ⟶ D) (g : leftJoinCone (∐ J) ⟶ B) (hg : leftJoinConeInclusion (∐ J) ≫ g = f ≫ p) : ((∃ q : leftJoinCone (∐ J) ⟶ D, leftJoinConeInclusion (∐ J) ≫ q = f ∧ q ≫ p = g ∧ IsRelativeLimitDiagram p q) ↔ (∃ q₀ : leftJoinCone (∐ fun _ : I ↦ (Δ[0] : SSet.{u})) ⟶ D, leftJoinConeInclusion (∐ fun _ : I ↦ (Δ[0] : SSet.{u})) ≫ q₀ = initialComponentsInclusion J t ≫ f ∧ q₀ ≫ p = orderedJoinFunctor.map (𝟙 Δ[0], initialComponentsInclusion J t) ≫ g ∧ IsRelativeLimitDiagram p q₀)) ∧ (∀ q : leftJoinCone (∐ J) ⟶ D, IsRelativeLimitDiagram p q ↔ IsRelativeLimitDiagram p (orderedJoinFunctor.map (𝟙 Δ[0], initialComponentsInclusion J t) ≫ q))",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing initial-object, inner-fibration and relative-limit predicates. The canonical selection map is the coproduct of the constant maps at the specified vertices. No statement or dependency correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1ebc15a1",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Clause-by-clause match of the node to SSet.Enhanced.relative_limit_initial_components: universe u, I : Type u possibly empty, J : I → SSet with quasicategory instances, coproduct ∐ J; IsInitial uses the outgoing mapping space; initialComponentsInclusion is a canonical Sigma.desc of constant maps (real data); inner fibration only; exact boundary and base equalities; existence ↔ and per-cone ↔ via orderedJoinFunctor.map (𝟙 Δ[0], e). Dependency declarations read in the side clone. Edge cases (empty I, empty D, infinite I, Δ[1]) correct. Docstrings carry source and blueprint id; the only sorry is the theorem proof; lean.statement verbatim; no statement change; both report sections present. nt_compile.py --json compile exit 0, no errors or warnings. No findings."
  }
 }
