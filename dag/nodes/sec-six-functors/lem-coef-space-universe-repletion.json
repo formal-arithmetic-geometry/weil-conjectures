@@ -116,7 +116,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-coherent-nerve-comparison",
-  "lem-coef-simplicial-model-nerve-localization"
+  "lem-coef-simplicial-model-nerve-localization",
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-kan-weak-equivalence-space-edge"
  ],
  "mathlib_searches": [
   {
@@ -237,5 +239,34 @@
   "group": "Q132",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-aef5448d1 (reviewer sub-agent of L); spot-checked: I read the item and all seven steps in full, plus the full statement of every cited node: def-cbc-enhanced-diagrams-cones, lem-cbc-kan-functor-space-kan, lem-cbc-simplicial-homotopy-equivalence-weak, lem-coef-coherent-nerve-comparison, lem-coef-infinity-full-essential-image, lem-coef-infinity-mapping-composition, lem-coef-kan-quillen-right-proper, lem-coef-kan-weak-equivalence-space-edge and lem-coef-simplicial-model-nerve-localization. I also read def-coef-infinity-category-of-spaces: its Kan_W, with n-simplices Hom(SxDelta^n,T), matches the item's convention. Statement unchanged and true. Small cases tested: the empty complex, maps from empty to nonempty, disconnected complexes, a large contractible complex (included) and a discrete set too large for U (excluded), so the subcategory is the repletion. Step 1: the mapping sets are literally equal, and Fun(X,Y) is Kan by the Mathlib leaf (Y Kan, X any simplicial set in V). Step 2: the weak-edge node with W=V. For a zigzag, the functorial factorization plus naturality and two-out-of-three, then invertible classes, which mapping-composition identifies with equivalence edges. Step 3: I checked that C[Delta^2](0,2) is the nerve of {02} inside {012}, which is Delta^1, with endpoints 1_X and gf. The homotopy-equivalence lemma allows either endpoint order and has no Kan hypothesis. Steps 4 and 5 are genuinely elementary: the Dwyer-Kan conditions using fullness, and the degreewise factorization through the full subcategory. Step 6 identifies the object classes. Step 7: naturality of the mapping-space comparison gives full faithfulness, and full-essential-image is applied in a containing universe. The off-unit lem-cbc-simplicial-homotopy-equivalence-weak is declared in tool_uses. It is a generic black-box fact and no node of the own unit supplies it, so the tool use is accepted. Every step's uses are in proof_deps and proof_deps equals their union. The four search kinds are recorded with verdicts. No SGA. HTT and Kerodon are not in literature: WANTED is filed and proof_origin.by is agent. No duplicate found by grep. Dependency traversal reaches 501 nodes and never returns to the item. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-04c164bbf",
+  "group": "N1",
+  "result": "fix",
+  "note": "Mathematics, universes, dependency interfaces, edge cases and verbatim signature checked; per-file compilation reproduced cleanly. review.md records all findings. fixes/lem-coef-space-universe-repletion.report.md supplies the complete report replacement, correcting garbled citations and adding the independent second reading. No Lean or node changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpaceUniverseRepletion",
+  "declaration": "SSet.Enhanced.universe_repletion",
+  "declarations": [
+   "SSet.Enhanced.SmallKan",
+   "SSet.Enhanced.RepleteKan",
+   "SSet.Enhanced.liftedKanCategory",
+   "SSet.Enhanced.repleteKanCategory",
+   "SSet.Enhanced.liftedKanNerve",
+   "SSet.Enhanced.repleteKanNerve",
+   "SSet.Enhanced.repleteSpaceSubcomplex",
+   "SSet.Enhanced.universe_repletion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SpaceUniverseRepletion.lean",
+  "statement": "theorem universe_repletion : ∃ (i : EnrichedFunctor SSet.{max (u + 1) v} (liftedKanCategory.{u, max (u + 1) v}) (repleteKanCategory.{u, max (u + 1) v})) (j : EnrichedFunctor SSet.{max (u + 1) v} (repleteKanCategory.{u, max (u + 1) v}) (Spaces.Kan.{max (u + 1) v})), (∀ X : liftedKanCategory.{u, max (u + 1) v}, (i.obj X).obj = X.obj) ∧ (∀ (X Y : liftedKanCategory.{u, max (u + 1) v}) (n : SimplexCategoryᵒᵖ) (f : (sHom X Y).obj n), HEq ((i.map X Y).app n f) f) ∧ (∀ X : repleteKanCategory.{u, max (u + 1) v}, (j.obj X).obj = X.obj) ∧ (∀ (X Y : repleteKanCategory.{u, max (u + 1) v}) (n : SimplexCategoryᵒᵖ) (f : (sHom X Y).obj n), HEq ((j.map X Y).app n f) f) ∧ DwyerKanEquivalence i ∧ IsFunctorEquivalence (CategoryTheory.hammockCoherentNerveMap i) ∧ (∃ r : SSet.uliftFunctor.{max (u + 1) v + 1, u + 1}.obj Spaces.infinityCategory.{u} ⟶ liftedKanNerve.{u, max (u + 1) v}, IsFunctorEquivalence r ∧ r ≫ CategoryTheory.hammockCoherentNerveMap (i.comp SSet.{max (u + 1) v} j) = Spaces.spaceUniverseInclusion.{u, max (u + 1) v} ∧ IsFunctorEquivalence (r ≫ CategoryTheory.hammockCoherentNerveMap i)) ∧ (∃ e : repleteKanNerve.{u, max (u + 1) v} ≅ (repleteSpaceSubcomplex.{u, max (u + 1) v}).toSSet, e.hom ≫ (repleteSpaceSubcomplex.{u, max (u + 1) v}).ι = CategoryTheory.hammockCoherentNerveMap j) ∧ (∀ x : Spaces.infinityCategory.{max (u + 1) v} _⦋0⦌, RepleteKan.{u, max (u + 1) v} (x.obj (.mk (ULift.up (0 : Fin 1)))).obj ↔ ∃ (y : (SSet.uliftFunctor.{max (u + 1) v + 1, u + 1}.obj Spaces.infinityCategory.{u}) _⦋0⦌) (e : Spaces.infinityCategory.{max (u + 1) v} _⦋1⦌), Spaces.infinityCategory.δ 1 e = x ∧ Spaces.infinityCategory.δ 0 e = Spaces.spaceUniverseInclusion.{u, max (u + 1) v}.app _ y ∧ IsEquivalenceEdge Spaces.infinityCategory.{max (u + 1) v} e) ∧ (∀ e : Spaces.infinityCategory.{max (u + 1) v} _⦋1⦌, IsEquivalenceEdge Spaces.infinityCategory.{max (u + 1) v} e → (RepleteKan.{u, max (u + 1) v} ((Spaces.infinityCategory.δ 1 e).obj (.mk (ULift.up (0 : Fin 1)))).obj ↔ RepleteKan.{u, max (u + 1) v} ((Spaces.infinityCategory.δ 0 e).obj (.mk (ULift.up (0 : Fin 1)))).obj))",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repairs returned head e73390fc9923: pin all coefficient universes; use ambient value universe max (u+1) v; reuse Spaces.Kan and Spaces.infinityCategory; compare the degreewise-small presentation to the actual small-space nerve by a factorization of spaceUniverseInclusion; specify enriched inclusion maps in every degree; identify the entire replete nerve with fullSubcomplex and characterize its vertices and repleteness by ambient equivalence edges."
  }
 }
