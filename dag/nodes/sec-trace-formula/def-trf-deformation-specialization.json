@@ -2,16 +2,40 @@
  "id": "def-trf-deformation-specialization",
  "kind": "definition",
  "title": "Specialization datum and specialization of a correspondence",
- "statement": "Use the finite coefficient and scheme conventions of [def-trf-coefficient-conventions], with $A=A_{E,n}$, $k$ algebraically closed and $\\ell\\ne\\operatorname{char}k$. Set $R=k[t]_{(t)}$, $D=\\operatorname{Spec}R$, with closed point $0$, generic point $\\eta$ and a chosen geometric generic point $\\bar\\eta$. A lift of a separated finite-type $k$-scheme $T$ is a separated finite-type $D$-scheme $\\widetilde T$ with $\\rho:\\widetilde T\\to T\\times_kD$ whose generic fibre is an isomorphism. Write $T_0=\\widetilde T\\times_D0$. For an etale complex $M$, define\n$$\\operatorname{sp}_{\\widetilde T}M=R\\Psi_{\\widetilde T}(\\rho_\\eta^*M_\\eta).$$\nHere $R\\Psi$ means $i^*Rj_*M_{\\bar\\eta}$ after passage to the strict henselization of $D$, where $j:\\widetilde T_{\\bar\\eta}\\to\\widetilde T_{D^{\\rm sh}}$ and $i:T_0\\to\\widetilde T_{D^{\\rm sh}}$ are the natural maps. The project pro-etale version is the pullback by the etale/pro-etale comparison of this construction on the etale representative; [lem-sf-proetale-constructible-origin] specifies that representative on bounded constructible objects. Write $\\omega_T=Ra_T^!A$ as in [def-trf-dualizing-complex]. The specialization map on Borel--Moore sections is the map\n$$\\operatorname{sp}_{\\widetilde T}:\\operatorname{Hom}(A_T,\\omega_T)\\longrightarrow\\operatorname{Hom}(A_{T_0},\\omega_{T_0})$$\nobtained by specializing sections and applying the nearby-cycle unit on $A$ and the exceptional base-change map on $\\omega$.\n\nIf a correspondence $c=(c_1,c_2):C\\to X\\times_kX$ of [def-trf-correspondence] has a lift $\\widetilde c:\\widetilde C\\to\\widetilde X\\times_D\\widetilde X$, write $b=(b_1,b_2)=\\widetilde c_0$. For the exceptional adjoint $\\widehat u:Rc_{1!}c_2^*K\\to K$ of $u:c_2^*K\\to c_1^!K$, define its specialized coefficient morphism by the exceptional adjoint of\n$$Rb_{1!}b_2^*\\operatorname{sp}_{\\widetilde X}K\\xrightarrow{\\mathrm{BC}^*}Rb_{1!}\\operatorname{sp}_{\\widetilde C}c_2^*K\\xrightarrow{\\mathrm{BC}_!}\\operatorname{sp}_{\\widetilde X}Rc_{1!}c_2^*K\\xrightarrow{\\operatorname{sp}(\\widehat u)}\\operatorname{sp}_{\\widetilde X}K.$$\nThe base-change maps here are those induced from the usual ordinary and exceptional adjunctions through the displayed nearby-cycle construction. This defines $\\operatorname{sp}_{\\widetilde c}u:b_2^*\\operatorname{sp}K\\to b_1^!\\operatorname{sp}K$.",
+ "statement": "Use the finite coefficient and scheme conventions of [def-trf-coefficient-conventions], with $A=A_{E,n}$, $k$ algebraically closed and $\\ell\\ne\\operatorname{char}k$. Set $s=\\operatorname{Spec}k$, $R=k[t]_{(t)}$, $D=\\operatorname{Spec}R$, with closed point $0$, generic point $\\eta$ and a chosen geometric generic point $\\bar\\eta$. A lift of a separated finite-type $k$-scheme $T$ is a separated finite-type $D$-scheme $\\widetilde T$ with $\\rho_T:\\widetilde T\\to T\\times_kD$ whose generic fibre is an isomorphism. Write $T_0=\\widetilde T\\times_D0$. Choose the geometric specialization compatibly with the strict henselization $D^{\\rm sh}$ at its geometric closed point [def-weil-pbc-strict-henselization-limit], so that the maps\n$$j_T:\\widetilde T_{\\bar\\eta}\\longrightarrow\\widetilde T_{D^{\\rm sh}},\\qquad i_T:T_0\\longrightarrow\\widetilde T_{D^{\\rm sh}}$$\nare defined over $D$. On the small etale sites [def-weil-pbc-etale-site], use bounded-below constant-$A$ module derived categories [def-weil-pbc-derived-categories], exact inverse image [def-weil-pbc-derived-inverse-image], and derived direct image [def-weil-pbc-direct-image]. For $N\\in D^+((\\widetilde T_\\eta)_{\\mathrm{et}},A)$ and $M\\in D^+(T_{\\mathrm{et}},A)$ define\n$$R\\Psi_{\\widetilde T}N=i_T^*Rj_{T*}N_{\\bar\\eta},\\qquad \\operatorname{sp}_{\\widetilde T}M=R\\Psi_{\\widetilde T}(\\rho_{T,\\eta}^*M_\\eta).$$\nHere the subscript $\\bar\\eta$ means geometric generic pullback. These are bounded-below constructions; bounded constructible finite-Tor output is not part of the definition of $\\operatorname{sp}$.\n\nFor any separated finite-type map $h:V\\to W$ between quasi-compact quasi-separated schemes occurring below, including maps over $D^{\\rm sh}$ and $\\bar\\eta$, choose a compactification $V\\xrightarrow{e}\\overline V\\xrightarrow{p}W$ (quasi-compact open $e$, proper $p$), available by [thm-nagata-compactification]. On bounded-below etale $A$-complexes use\n$$Rh_!^{\\mathrm{et}}=Rp_*e_!$$\nof [def-weil-pbc-projection-compactification]. This notation is independent of the compactification through the canonical comparisons of [lem-weil-pbc-etale-shriek-compactification-independence]. Compact-support base change for arbitrary quasi-compact quasi-separated base change is the isomorphism of [lem-weil-pbc-etale-compact-support-base-change-qcqs]. All schemes obtained here from finite-type schemes by passage to $D^{\\rm sh}$ or a geometric generic fibre are quasi-compact and quasi-separated; all maps to which this notation is applied are separated and finite type.\n\nThe pro-etale realization is the comparison pullback $\\nu_{T_0}^*$ of the etale construction on an etale representative. Bounded constructible pro-etale inputs admit such representatives by [lem-sf-proetale-constructible-origin]; full faithfulness on $D^+$ [thm-weil-pbc-site-comparison] identifies their morphisms and makes the construction independent of the representative up to the canonical isomorphism. The finite-Tor categories on the two sites are identified by [lem-sf-comparison-tor-amplitude]. When passing between etale formulas and project pro-etale operations on finite-type $k$-schemes, use\n$$\\nu_V^*h_{\\mathrm{et}}^*\\cong h_{\\mathrm{proet}}^*\\nu_W^*,\\qquad Rh_!^{\\mathrm{proet}}\\nu_V^*\\cong\\nu_W^*Rh_!^{\\mathrm{et}},$$\nfrom [lem-weil-pbc-comparison-pullback] (termwise on constant-module complexes) and [lem-sf-class-compact-support-comparison] respectively. The second comparison applies to every bounded-below etale input, including nearby-cycle outputs; it does not require these to be constructible. Operations over $D^{\\rm sh}$ and $\\bar\\eta$ in the construction remain etale operations. For ordinary direct images over $k$, use the comparison of [prop-weil-pbc-comparison-direct-image].\n\nA morphism $\\widetilde f:\\widetilde T\\to\\widetilde U$ lifts $f:T\\to U$ when $\\rho_U\\widetilde f=(f\\times\\operatorname{id}_D)\\rho_T$; write $f_0=\\widetilde f_0$. For such a lifted morphism define on bounded-below etale complexes\n$$\\mathrm{BC}^*:f_0^*\\operatorname{sp}_{\\widetilde U}\\longrightarrow\\operatorname{sp}_{\\widetilde T}f^*,\\qquad \\mathrm{BC}_*:\\operatorname{sp}_{\\widetilde U}Rf_*\\longrightarrow Rf_{0*}\\operatorname{sp}_{\\widetilde T},$$\n$$\\mathrm{BC}_!:Rf_{0!}\\operatorname{sp}_{\\widetilde T}\\longrightarrow\\operatorname{sp}_{\\widetilde U}Rf_!.$$\nThe first is $i_T^*$ applied to the ordinary exchange $\\widetilde f_{D^{\\rm sh}}^*Rj_{U*}\\to Rj_{T*}\\widetilde f_{\\bar\\eta}^*$ of [def-weil-pbc-derived-exchange], in constant-module coefficients as in [lem-weil-pbc-exchange-forget-coefficients], followed by pullback composition. The third is the composite\n$$Rf_{0!}i_T^*Rj_{T*}\\xrightarrow{\\sim}i_U^*R\\widetilde f_{D^{\\rm sh}!}Rj_{T*}\\longrightarrow i_U^*Rj_{U*}R\\widetilde f_{\\bar\\eta!},$$\nwhere the first arrow is the inverse compact-support base-change isomorphism along $i_U$. The second is $i_U^*$ of the morphism adjoint under $j_U^*\\dashv Rj_{U*}$ to\n$$j_U^*R\\widetilde f_{D^{\\rm sh}!}Rj_{T*}\\xrightarrow{\\sim}R\\widetilde f_{\\bar\\eta!}j_T^*Rj_{T*}\\xrightarrow{R\\widetilde f_{\\bar\\eta!}(\\varepsilon_{j_T})}R\\widetilde f_{\\bar\\eta!}.$$\nThe isomorphism in this formula is compact-support base change along $j_U$. In the right-hand side of $\\mathrm{BC}_!$, identify $R\\widetilde f_{\\bar\\eta!}$ on the generic input with $(Rf_!(-))_{\\bar\\eta}$ using the lift isomorphisms and compact-support base change along $U_{\\bar\\eta}\\to U$. All three base-change isomorphisms are supplied by [lem-weil-pbc-etale-compact-support-base-change-qcqs], with the compactification comparisons above. Define $\\mathrm{BC}_*$ as the mate of $\\mathrm{BC}^*$ under ordinary derived adjunctions, with mate as in [def-weil-pbc-adjunction-mate]; the derived adjunction is [prop-weil-pbc-derived-inverse-image-adjunction], in constant modules as in [lem-weil-pbc-exchange-forget-coefficients].\n\nUse $Rf^!$ and $Rf_!\\dashv Rf^!$ on $D^b_{ctf}$ as specified by [def-trf-admissibility]. At an input $L\\in D^b_{ctf}(U,A)$ for which both $\\operatorname{sp}_{\\widetilde U}L$ and $\\operatorname{sp}_{\\widetilde T}Rf^!L$ lie in the corresponding $D^b_{ctf}$ categories, define\n$$\\mathrm{BC}^!_L:\\operatorname{sp}_{\\widetilde T}Rf^!L\\longrightarrow Rf_0^!\\operatorname{sp}_{\\widetilde U}L$$\nas the exceptional adjoint of\n$$Rf_{0!}\\operatorname{sp}_{\\widetilde T}Rf^!L\\xrightarrow{\\mathrm{BC}_!}\\operatorname{sp}_{\\widetilde U}Rf_!Rf^!L\\xrightarrow{\\operatorname{sp}_{\\widetilde U}(\\varepsilon_f)}\\operatorname{sp}_{\\widetilde U}L.$$\nOn subcategories where the specialization functors land in $D^b_{ctf}$ this is the mate of $\\mathrm{BC}_!$. No such finiteness hypothesis is used to define $\\mathrm{BC}^*$, $\\mathrm{BC}_*$ or $\\mathrm{BC}_!$.\n\nPut $\\omega_T=Ra_T^!A_s$ as in [def-trf-dualizing-complex], and use the Borel--Moore sections $\\alpha:A_T\\to\\omega_T$ of [def-trf-borel-moore-pushforward]. Let $\\operatorname{can}_T:A_{T_0}\\to\\operatorname{sp}_{\\widetilde T}A_T$ be $i_T^*$ applied to the unit $A_{\\widetilde T_{D^{\\rm sh}}}\\to Rj_{T*}j_T^*A_{\\widetilde T_{D^{\\rm sh}}}$. For the constant lift $D$ of $s$ the map $\\operatorname{can}_s:A_s\\to\\operatorname{sp}_DA_s$ is invertible: $D^{\\rm sh}$ is strictly henselian by [lem-weil-pbc-strict-henselization-local-structure], the germ map at its closed point identifies sections with the stalk by [lem-weil-pbc-strictly-henselian-sections-stalk], and [lem-kun-0ezp] applied to $j_s:\\bar\\eta\\to D^{\\rm sh}$ gives $R^qj_{s*}A=0$ for $q>0$. Consequently\n$$i_s^*Rj_{s*}A=\\Gamma(D^{\\rm sh},j_{s*}A)=\\Gamma(\\bar\\eta,A)=A,$$\nconcentrated in degree zero: the last equality follows because $\\bar\\eta$ is a separably closed point and a constant sheaf there has sections $A$. Under these identifications the unit sends each $a\\in A$ to $a$, so $\\operatorname{can}_s$ is the identity on $A$.\n\nDefine the Borel--Moore specialization of $\\alpha$ to be the adjoint under $Ra_{T_0!}\\dashv Ra_{T_0}^!$ of the following morphism from $Ra_{T_0!}A_{T_0}$ to $A_s$:\n$$\\begin{aligned}\nRa_{T_0!}A_{T_0}&\\xrightarrow{Ra_{T_0!}(\\operatorname{can}_T)}Ra_{T_0!}\\operatorname{sp}_{\\widetilde T}A_T\\\\\n&\\xrightarrow{Ra_{T_0!}\\operatorname{sp}_{\\widetilde T}(\\alpha)}Ra_{T_0!}\\operatorname{sp}_{\\widetilde T}\\omega_T\\\\\n&\\xrightarrow{\\mathrm{BC}_!}\\operatorname{sp}_DRa_{T!}\\omega_T\\xrightarrow{\\operatorname{sp}_D(\\varepsilon_{a_T})}\\operatorname{sp}_DA_s\\xrightarrow{\\operatorname{can}_s^{-1}}A_s.\n\\end{aligned}$$\nThe $\\mathrm{BC}_!$ here belongs to the lifted structure morphism $\\widetilde T\\to D$, and $\\varepsilon_{a_T}:Ra_{T!}\\omega_T\\to A_s$ is its original-fibre exceptional counit. This defines\n$$\\operatorname{sp}_{\\widetilde T}:\\operatorname{Hom}(A_T,\\omega_T)\\longrightarrow\\operatorname{Hom}(A_{T_0},\\omega_{T_0})$$\nfor every lift: intermediate nearby cycles are used only with bounded-below compact support, while the final exceptional adjunction has the $D^b_{ctf}$ input $A_{T_0}$ and target $A_s$.\n\nIf $c=(c_1,c_2):C\\to X\\times_kX$ of [def-trf-correspondence] has a lift $\\widetilde c:\\widetilde C\\to\\widetilde X\\times_D\\widetilde X$, write $b=(b_1,b_2)=\\widetilde c_0$. Let $K\\in D^b_{ctf}(X,A)$, $u:c_2^*K\\to c_1^!K$, and $\\widehat u:Rc_{1!}c_2^*K\\to K$ its exceptional adjoint. When $\\operatorname{sp}_{\\widetilde X}K\\in D^b_{ctf}(X_0,A)$, define the specialized coefficient morphism to be the exceptional adjoint of\n$$Rb_{1!}b_2^*\\operatorname{sp}_{\\widetilde X}K\\xrightarrow{Rb_{1!}\\mathrm{BC}^*}Rb_{1!}\\operatorname{sp}_{\\widetilde C}c_2^*K\\xrightarrow{\\mathrm{BC}_!}\\operatorname{sp}_{\\widetilde X}Rc_{1!}c_2^*K\\xrightarrow{\\operatorname{sp}_{\\widetilde X}(\\widehat u)}\\operatorname{sp}_{\\widetilde X}K.$$\nIndeed $b_2^*\\operatorname{sp}_{\\widetilde X}K$ is in $D^b_{ctf}$ by [lem-sf-pullback-tor-amplitude], so the exceptional adjunction for $b_1$ applies to the endpoints. The middle terms remain in the bounded-below etale-origin categories and need no constructibility assertion. This defines\n$$\\operatorname{sp}_{\\widetilde c}u:b_2^*\\operatorname{sp}_{\\widetilde X}K\\longrightarrow b_1^!\\operatorname{sp}_{\\widetilde X}K$$\nunder the stated finite-Tor constructibility condition.",
  "source": {
   "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
   "place": "§§1.3.1--1.3.4, especially 1.3.2 and 1.3.3(b), with the two legs interchanged"
  },
  "stmt_deps": [
   "def-trf-coefficient-conventions",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "thm-nagata-compactification",
+  "def-weil-pbc-projection-compactification",
+  "lem-weil-pbc-etale-shriek-compactification-independence",
+  "lem-weil-pbc-etale-compact-support-base-change-qcqs",
   "lem-sf-proetale-constructible-origin",
+  "thm-weil-pbc-site-comparison",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-sf-class-compact-support-comparison",
+  "prop-weil-pbc-comparison-direct-image",
+  "def-weil-pbc-derived-exchange",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "def-weil-pbc-adjunction-mate",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-trf-admissibility",
   "def-trf-dualizing-complex",
-  "def-trf-correspondence"
+  "def-trf-borel-moore-pushforward",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-kun-0ezp",
+  "def-trf-correspondence",
+  "lem-sf-pullback-tor-amplitude"
  ],
  "proof": [],
  "proof_deps": [],
@@ -44,10 +68,94 @@
    "results": "8 hits: IsLocalRing.specializes_closedPoint, TopCat.Presheaf.stalkSpecializes, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.Scheme.range_fromSpecStalk, specializes_iff_forall_closed, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk, PrimeSpectrum.stableUnderSpecialization_range_iff, AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf",
    "date": "2026-10-17",
    "verdict": "no match: hits concern topological specialization of points and structure-sheaf stalks, not nearby cycles or a cohomological-correspondence specialization datum"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Specialization datum and specialization of an etale complex by nearby cycles over a trait",
+   "results": "8 hits: AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk_assoc, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk_assoc, AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap_apply, AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern point specialization, ordinary scheme morphisms, or sheaf stalks, not the nearby-cycle specialization construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "nearbyCycles RΨ",
+   "results": "0 hits: none; loogle: Unknown identifier `nearbyCycles`",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern point specialization, ordinary scheme morphisms, or sheaf stalks, not the nearby-cycle specialization construction"
+  },
+  {
+   "tool": "grep",
+   "query": "nearbyCycles|nearby_cycles|RΨ|specialization",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "unavailable: the command searched the nonexistent Mathlib/Mathlib subdirectory and therefore supplied no valid evidence; corrected by the subsequent Mathlib-root grep"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nearby cycles of etale sheaves over a trait and specialization of cohomological correspondences",
+   "results": "8 hits: AlgebraicGeometry.PresheafedSpace.stalkMap.stalkSpecializes_stalkMap, AlgebraicGeometry.LocallyRingedSpace.stalkSpecializes_stalkMap_apply, TopCat.Presheaf.stalkSpecializes, AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap, AlgebraicGeometry.LocallyRingedSpace.stalkSpecializes_stalkMap, AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap, AlgebraicGeometry.PresheafedSpace.stalkMap.stalkSpecializes_stalkMap_assoc, TopCat.Presheaf.stalkSpecializes.congr_simp",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern point specialization, ordinary scheme morphisms, or sheaf stalks, not the nearby-cycle specialization construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image from a geometric generic fibre followed by closed fibre inverse image defines nearby cycles of etale sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.Scheme.Hom.asFiber, AlgebraicGeometry.opensDiagram, AlgebraicGeometry.opensDiagram_map, CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber_comp, CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber, TopCat.Presheaf.stalkPushforward",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern point specialization, ordinary scheme morphisms, or sheaf stalks, not the nearby-cycle specialization construction"
+  },
+  {
+   "tool": "grep",
+   "query": "nearby.cycle|vanishing.cycle|geometric.generic",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match: no nearby-cycle or geometric-generic-fibre terminology in AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "nearby|vanishingCycles|specializationMap",
+   "results": "{\"t\": \"2026-10-17T03:38:14Z\", \"tool\": \"grep\", \"query\": \"nearby|vanishingCycles|specializationMap\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: signatures are generic site pullbacks or point fibres, normed-ring units, or no source hits; none defines nearby cycles or specializes correspondences"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nearby\"",
+   "results": "{\"t\": \"2026-10-17T03:38:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"nearby\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Units.ofNearby\", \"Units.val_ofNearby\"], \"digest\": \"bee6463c6c16739d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: signatures are generic site pullbacks or point fibres, normed-ring units, or no source hits; none defines nearby cycles or specializes correspondences"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nearby cycle functor for sheaves on the etale site defined by inverse image of derived direct image along the geometric generic fibre inclusion",
+   "results": "{\"t\": \"2026-10-17T03:38:14Z\", \"tool\": \"leanfinder\", \"query\": \"Nearby cycle functor for sheaves on the etale site defined by inverse image of derived direct image along the geometric generic fibre inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.sheafFiber\", \"CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"CategoryTheory.Functor.IsCoverDense.Types.pushforwardFamily\", \"CategoryTheory.GrothendieckTopology.overPullback\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"CategoryTheory.GrothendieckTopology.overMapPullback\"], \"digest\": \"667099adf03a47a5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: signatures are generic site pullbacks or point fibres, normed-ring units, or no source hits; none defines nearby cycles or specializes correspondences"
+  },
+  {
+   "tool": "grep",
+   "query": "nearby.cycle|borel.moore|specializationFunctor",
+   "results": "{\"t\": \"2026-10-17T03:55:11Z\", \"tool\": \"grep\", \"query\": \"nearby.cycle|borel.moore|specializationFunctor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits concern ordinary presheaf stalk specialization, the Loogle hits concern units in normed rings, and the AlgebraicGeometry grep has no nearby-cycle or Borel--Moore terminology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nearby\"",
+   "results": "{\"t\": \"2026-10-17T03:55:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"nearby\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Units.ofNearby\", \"Units.val_ofNearby\"], \"digest\": \"bee6463c6c16739d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits concern ordinary presheaf stalk specialization, the Loogle hits concern units in normed rings, and the AlgebraicGeometry grep has no nearby-cycle or Borel--Moore terminology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel Moore specialization defined by nearby cycles, compact support base change, and the dualizing counit without assuming constructibility of nearby cycles",
+   "results": "{\"t\": \"2026-10-17T03:55:11Z\", \"tool\": \"leanfinder\", \"query\": \"Borel Moore specialization defined by nearby cycles, compact support base change, and the dualizing counit without assuming constructibility of nearby cycles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.stalkSpecializes_stalkPushforward_apply\", \"TopCat.Presheaf.stalkSpecializes_stalkPushforward\", \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_assoc\", \"TopCat.Presheaf.stalkSpecializes_stalkFunctor_map\", \"TopCat.Presheaf.stalkSpecializes_stalkFunctor_map_apply\", \"TopCat.Presheaf.stalkSpecializes\", \"TopCat.Presheaf.stalkSpecializes_comp\", \"TopCat.Presheaf.stalkSpecializes_comp_apply\"], \"digest\": \"fab14d7ec339bd6b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits concern ordinary presheaf stalk specialization, the Loogle hits concern units in normed rings, and the AlgebraicGeometry grep has no nearby-cycle or Borel--Moore terminology"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-term-locality",
@@ -59,10 +167,25 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof paragraph (1) and (2): specialization to the normal cone, §§1.3--1.4",
+   "place": "Proof paragraph (1) and (2): Varshavsky specialization to the normal cone, §§1.3–1.4, supplying the specialization functor and its correspondence base-change maps.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-trf-deformation-specialization",
+  "worker": "stage1",
+  "summary": "Repaired the returned E1/E5 finiteness/type error: nearby cycles and the three ordinary/compact-support exchanges are defined on bounded-below etale complexes; BC^! is conditional on its relevant specialization values lying in D^b_ctf, and specialization of a correspondence is conditional on sp_X K lying there. Borel--Moore specialization for every lift is instead the adjoint of the compact-support/unit/BC_!/counit/point-normalization composite, so no exceptional adjoint is applied to an arbitrary nearby-cycle value. Added existing nodes defining compact-support etale functors on qcqs schemes and proving compactification independence and arbitrary qcqs base change, explicitly for i_U, j_U and geometric generic pullback. Added the actual pullback/direct-image/compact-support etale--proetale comparison statements, full faithfulness and Tor comparison. Normalization at the point is justified by the existing strict-henselian sections--stalk theorem and the separably closed field direct-image vanishing, with the degree-zero unit calculated. All earlier Mathlib searches are retained; the changed finiteness/compact-support formulation was searched again and no match found. No new nodes, no Lean work, no prohibited source, and no unit-route change.",
+  "blueprint": "Realizes the specialization datum used in the proof of lem-trf-local-term-locality: Varshavsky §§1.3.1–1.3.4 define lifts, nearby-cycle specialization, Borel–Moore specialization, base-change maps, and specialization of correspondence morphisms."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-25e6e78cd",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-25e6e78cd (reviewer sub-agent of L); spot-checked: PASS: the repair is correct and matches Varshavsky. I read the item in full (no new nodes), all 28 cited statements, all 7 citers, the ancestor lem-trf-local-term-locality, unit sk-i-curve-zero, and Varshavsky arXiv math/0505564 §§1.3.1–1.3.4 and Prop 1.3.5 (pp. 10–13). (1) Nearby cycles i^*Rj_* from the geometric generic fibre to T̃_{D^sh}, and sp = RΨ(ρ_η^*M_η), match 1.3.1(e) and 1.3.2(a); the larger D^+ domain weakens nothing. (2) BC^* has the right orientation as the exchange for the cartesian square (j_U, j_T). (3) BC_! is the source's composite with its mate written out. Its three compact-support base changes (along i_U, j_U and U_η̄→U) meet the hypotheses of lem-weil-pbc-etale-compact-support-base-change-qcqs: separated finite-type maps, qcqs bases, finite A. (4) BC^! is defined only where both endpoints are in D^b_ctf, the domain of the restricted adjunction in def-trf-admissibility. (5) The Borel–Moore specialisation is the transpose of Varshavsky 1.3.3(b) BC^!∘BC_*; they agree because the exchange is compatible with units (BC^*∘can_D = can_T) and BC^! is the mate of BC_!. Its only exceptional adjunction has the ctf endpoints A_{T0} and A_s. (6) can_s is the identity on A, by strict henselianity, the sections–stalk lemma and lem-kun-0ezp (R^q j_*=0); there is no cycle through the zero-section lemma. (7) The correspondence coefficient is 1.3.4 with the legs swapped; b_2^*spK is ctf by lem-sf-pullback-tor-amplitude; no properness or invertibility of u is added. (8) The étale/pro-étale comparisons are applied only over finite-type k-schemes, and full faithfulness on D^+ needs no constructibility. All 7 citers stay well-typed: those using sp_c u assume or prove sp K ctf. The report counted only 3 citers; this is a reporting slip only. No dependency cycle, no duplicate node or blueprint node, three kinds of Mathlib search recorded, no SGA. Edge cases checked: M=0, empty special fibre, constant point lift, n=1, non-proper lifts. Minor: the item has no lean_audit field, inherited from the base node. No fixes made."
  }
 }
