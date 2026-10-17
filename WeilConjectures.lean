@@ -3685,6 +3685,7 @@ public import WeilConjectures.RingTheory.Etale.DepthTwo.Spreading
 public import WeilConjectures.RingTheory.Etale.IntegralClosureSpreading
 public import WeilConjectures.RingTheory.Etale.IntegrallyClosed
 public import WeilConjectures.RingTheory.Etale.TraitSection
+public import WeilConjectures.RingTheory.Etale.TraitSection.Rigidity
 public import WeilConjectures.RingTheory.EtaleAlgebraLift
 public import WeilConjectures.RingTheory.EtaleAlgebraLiftEtaleFP
 public import WeilConjectures.RingTheory.EtaleAlgebraLiftReduction
