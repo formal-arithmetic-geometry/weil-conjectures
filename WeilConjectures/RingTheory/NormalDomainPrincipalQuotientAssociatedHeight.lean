@@ -61,7 +61,8 @@ theorem height_eq_one_of_mem_associatedPrimes_quotient_span
     (hp : p ∈ associatedPrimes A (A ⧸ Ideal.span {a})) :
     p.height = 1 := by
   let : p.IsPrime := hp.isPrime
-  have hS : Ring.IsSerreS A 2 := (Ring.serreCriterionNormal A).mp (by
+  have hS : Ring.IsSerreS A 2 :=
+    (Ring.forall_isIntegrallyClosed_localization_iff_isSerreR_and_isSerreS A).mp (by
     intro q hq
     exact ⟨inferInstance,
       isIntegrallyClosed_of_isLocalization (Localization.AtPrime q) q.primeCompl

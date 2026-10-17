@@ -63,7 +63,7 @@ theorem finiteEtaleDescent_essSurj {Y Y' : Scheme.{v}} (g : Y' ⟶ Y)
     [Surjective g] [Etale g]
     (F : Y.FiniteEtale ⥤ AlgebraicGeometry.FiniteEtaleDescentData g)
     (q : ∀ P : Y.FiniteEtale, (F.obj P).obj.V.left ⟶ P.obj.left)
-    (h : finiteEtaleDescentCompatible F q) : F.EssSurj := by
+    (h : FiniteEtaleDescentCompatible F q) : F.EssSurj := by
   have hg : Presieve.singleton g ∈ Scheme.fpqcPrecoverage Y :=
     Scheme.fppfPrecoverage_le_fpqcPrecoverage _ g.singleton_mem_fppfPrecoverage
   have hg' : Presieve.ofArrows (fun _ : PUnit.{1} ↦ Y') (fun _ ↦ g) ∈

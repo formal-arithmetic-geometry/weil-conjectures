@@ -79,7 +79,7 @@ Tag 07PE. Its value on c is the image of a nonzero element of M, hence is a unit
 Characteristic p implies D(s^p) = 0. Thus D(i(a)) = i(s)^(-p) D(i(c)),
 which is a unit. Transport the derivation along the ring equivalence with R.
 If R is zero, zero is a unit, and the same identities still apply. -/
-theorem FormalFiberDegreePDerivation
+theorem exists_derivation_isUnit_tmul_formalFiber
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (n m : ℕ)
     (q : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))) [q.IsPrime]
     (L : Type u) [Field L]

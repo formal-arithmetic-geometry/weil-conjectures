@@ -152,7 +152,7 @@ private theorem analyticallyUnramified_normalization_descent (n : ℕ)
     integralClosure.isIntegrallyClosedOfFiniteExtension (FractionRing A)
   have hS : IsNagataRing S := (finite_over_nagata_is_nagata A S hA).1
   have hdimS : ringKrullDim S ≤ ringKrullDim A :=
-    (RingHom.integralExtensionDimension (algebraMap A S)
+    (RingHom.IsIntegral.ringKrullDim_le_and_isMaximal_comap (algebraMap A S)
       (Algebra.IsIntegral.isIntegral (R := A) (A := S))).1
   apply analyticallyUnramified_finite_descent A S (FaithfulSMul.algebraMap_injective A S)
   intro p
