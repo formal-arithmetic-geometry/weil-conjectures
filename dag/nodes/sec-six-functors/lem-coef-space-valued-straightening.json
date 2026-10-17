@@ -33,15 +33,12 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-coef-space-transport-classification] and [lem-coef-coherent-nerve-comparison] for the stated locally Kan left-fibration model, the space model and their mapping-space conventions. Fix the following normalization of the equivalence, rather than trying to recognize its values by edge transport. By [lem-coef-simplicial-right-fibration-presentation], the ordinary covariant unstraightening $U_B^{\\mathrm{cov}}F=(U_{B^{\\mathrm{op}}}F)^{\\mathrm{op}}$ is the right adjoint in a Quillen equivalence with the projective category of enriched diagrams on $A=\\mathfrak C[B]$. Applying [lem-coef-model-infinity-derived-adjunction] gives its derived adjunction. The Quillen-equivalence criterion makes its derived unit and counit equivalences: the unit is adjoint to the weak equivalence from a straightened cofibrant object to its fibrant replacement, and for a fibrant diagram $F$, choose a cofibrant replacement $Q(UF)\\to UF$, and its ordinary adjoint $LQ(UF)\\to F$ is a weak equivalence by the same criterion. These are the replacement formulas for the derived unit and counit. The pointwise criterion of [lem-cbc-enhanced-functor-cone-calculus] makes these coherent transformations equivalences. The localization comparison [lem-coef-simplicial-model-nerve-localization] identifies the covariant slice localization with $N_{\\mathrm{hc}}(\\mathsf L_B)$, since every slice object is cofibrant and its fibrant objects are exactly the left fibrations. The Kan model is combinatorial simplicial by [lem-coef-simplicial-presheaf-projective-model]; apply [lem-coef-enriched-diagram-rectification] with $K=B$, index $A$, and $u=1$ to identify its enriched diagram localization with $\\operatorname{Fun}(B,\\mathcal S)$. Define $\\operatorname{St}_B$ by composing the inverse of the derived $U_B^{\\mathrm{cov}}$ with this enriched-evaluation equivalence. Thus an equivalence $X\\simeq U_B^{\\mathrm{cov}}F$ for an objectwise Kan enriched diagram gives $\\operatorname{St}_B(X)\\simeq\\mathrm{ev}_B(F)$, including all coherences. An objectwise Kan diagram may first be replaced by a projectively cofibrant one via a trivial fibration; it remains fibrant and does not change its unstraightening or its localized evaluation. The presentation's actual base-change isomorphism for $U^{\\mathrm{cov}}$ and rectification's evaluation comparison commute with restriction. Replacing restricted diagrams as just described yields pullback/precomposition compatibility of this normalized equivalence; these are comparisons of derived functors, not an assertion that taking opposites is simplicially enriched. The original classification's universe restriction gives the fixed small-space version.",
+   "text": "Use [lem-coef-space-transport-classification] and [lem-coef-coherent-nerve-comparison] for the locally Kan model and space conventions. The replacement formulas and pullback compatibility supplied by [lem-coef-covariant-derived-replacement-base-change], together with the localization comparison of [lem-coef-simplicial-model-nerve-localization], define the normalized derived equivalence. The enriched evaluation comparison of [lem-coef-enriched-diagram-rectification] identifies its value on an objectwise Kan diagram with the coherent nerve of that diagram, including all coherences. For objectwise Kan input, its trivial-fibration cofibrant replacement remains fibrant and has the same localized enriched evaluation by that replacement lemma.",
    "uses": [
     "lem-coef-space-transport-classification",
     "lem-coef-coherent-nerve-comparison",
-    "lem-coef-simplicial-right-fibration-presentation",
-    "lem-coef-model-infinity-derived-adjunction",
-    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-covariant-derived-replacement-base-change",
     "lem-coef-simplicial-model-nerve-localization",
-    "lem-coef-simplicial-presheaf-projective-model",
     "lem-coef-enriched-diagram-rectification"
    ],
    "elementary": false,
@@ -105,7 +102,7 @@
    }
   },
   {
-   "text": "For $p:X\\to N(C)$ set $B=N(C)$ and $S=B^{\\mathrm{op}}$. Let $\\phi:\\mathfrak C[S]\\to C^{\\mathrm{op}}$ be the counit and put $H_C(X)=L_\\phi(X^{\\mathrm{op}})$, using exactly the ordered-cone pushout of [lem-coef-unmarked-straightening-quillen]. The new technical input [lem-coef-unmarked-relative-nerve-cone-comparison] gives the natural objectwise weak homotopy equivalence $\\alpha_{C,X}:H_C(X)\\to F_C(X)^{\\mathrm{op}}$, with $F_C(X)(c)=X\\times_{N(C)}N(C/c)$. This is the same $L_C(X)$ calculated in step 2, not a new classifying-functor assertion. Its map on the universal simplex is induced by the nerve of $J\\mapsto\\min J$ on the subset cube, descending through the cone-pushout relations into the opposite ordered interval; left Kan extension and simplex colimits specify it on every input. In particular it applies to a left fibration $X$ without imposing any additional cofibrancy condition.",
+   "text": "For $p:X\\to N(C)$ set $B=N(C)$ and $S=B^{\\mathrm{op}}$. Let $\\phi:\\mathfrak C[S]\\to C^{\\mathrm{op}}$ be the counit and put $H_C(X)=L_\\phi(X^{\\mathrm{op}})$, using exactly the ordered-cone pushout of [lem-coef-unmarked-straightening-quillen]. The existing concrete-construction comparison [lem-coef-unmarked-relative-nerve-cone-comparison] gives the natural objectwise weak homotopy equivalence $\\alpha_{C,X}:H_C(X)\\to F_C(X)^{\\mathrm{op}}$, with $F_C(X)(c)=X\\times_{N(C)}N(C/c)$. This is the same $L_C(X)$ calculated in step 2, not a new classifying-functor assertion. Its map on the universal simplex is induced by the nerve of $J\\mapsto\\min J$ on the subset cube, descending through the cone-pushout relations into the opposite ordered interval; left Kan extension and simplex colimits specify it on every input. In particular it applies to a left fibration $X$ without imposing any additional cofibrancy condition.",
    "uses": [
     "lem-coef-unmarked-straightening-quillen",
     "lem-coef-unmarked-relative-nerve-cone-comparison"
@@ -117,16 +114,12 @@
    }
   },
   {
-   "text": "Let $v:L_C(X)\\to D$ be the given objectwise weak homotopy equivalence into a strict Kan-valued diagram. Opposites preserve weak homotopy equivalences: the quotient realization formula gives a natural homeomorphism $\\rho_K:|K^{\\mathrm{op}}|\\to|K|$, $[x,(t_0,\\ldots,t_n)]\\mapsto[x,(t_n,\\ldots,t_0)]$. For a monotone $\\theta:[m]\\to[n]$ its reversed operator is $i\\mapsto n-\\theta(m-i)$; inserting it into the quotient formula verifies the gluing relation, and reversing twice is the identity. Thus $w=v^{\\mathrm{op}}\\alpha_{C,X}:H_C(X)\\to D^{\\mathrm{op}}$ is objectwise a weak equivalence. To identify this map with the normalized derived straightening, put $A=\\mathfrak C[S]^{\\mathrm{op}}\\cong\\mathfrak C[B]$ and let $u:A\\to C$ be the opposite counit. The counit is a Dwyer--Kan equivalence by [lem-coef-enriched-diagram-rectification], since the discrete simplicial category $C$ is locally Kan. Let $P=T_S(X^{\\mathrm{op}})$ be the cone diagram of [lem-coef-simplicial-right-fibration-presentation]. It is projectively cofibrant: all objects of the contravariant slice are cofibrant and its cone functor is left Quillen. Apply [lem-coef-unmarked-straightening-target-change] with its source simplicial category $A$ (so that $A^{\\mathrm{op}}=\\mathfrak C[S]$), $\\phi=\\mathrm{id}_{\\mathfrak C[S]}$, target $C$ and $\\pi=u$: here $L_{\\mathrm{id}}(X^{\\mathrm{op}})$ is the same ordered-cone pushout $\\mathfrak C[X^{\\mathrm{op}}\\star\\Delta^0]\\amalg_{\\mathfrak C[X^{\\mathrm{op}}]}\\mathfrak C[S]$ evaluated into the cone point, that is $P$, and $u^{\\mathrm{op}}\\circ\\mathrm{id}$ is the counit $\\mathfrak C[S]\\to C^{\\mathrm{op}}$ of step 7. Hence $u_!P\\cong H_C(X)$, naturally in $X$. The Kan model is a combinatorial simplicial model category by [lem-coef-simplicial-presheaf-projective-model] (one-object index), so the enriched Kan-extension Quillen equivalence of [lem-coef-simplicial-projective-model-calculus] takes $w:u_!P\\to D^{\\mathrm{op}}$ to an objectwise weak equivalence $P\\to u^*D^{\\mathrm{op}}$, since $P$ is cofibrant and $D^{\\mathrm{op}}$ is fibrant. Explicitly, reversing the ordered vertices changes a horn $\\Lambda_i^n$ into $\\Lambda_{n-i}^n$; the Kan filler in $D(c)$ therefore reverses to a filler in $D(c)^{\\mathrm{op}}$. The cone Quillen-equivalence criterion in the presentation now makes its adjoint $X^{\\mathrm{op}}\\to U_S(u^*D^{\\mathrm{op}})$ a contravariant weak equivalence. Taking opposite total spaces gives a covariant weak equivalence $X\\to U_B^{\\mathrm{cov}}(u^*D^{\\mathrm{op}})$. Hence step 1 identifies $\\operatorname{St}_B(X)$ with enriched evaluation of $u^*D^{\\mathrm{op}}$. Rectification's comparison is induced by enriched evaluation and $u$: on every thickened simplex $Q_r$, this is the composite $Q_r\\to\\mathfrak C[B]\\xrightarrow{u}C\\xrightarrow{D^{\\mathrm{op}}}\\mathsf{Kan}$. It is precisely $N_{\\mathrm{hc}}(D^{\\mathrm{op}})$, including all arrows and coherent compositions. For a projectively fibrant diagram rather than a bifibrant one, replace it by a projectively cofibrant trivial fibration, whose total source is still fibrant; the evaluation comparison and its pointwise equivalences give the same localized coherent diagram. This explains both replacements and the normalization; no identification is inferred merely from vertex values.",
+   "text": "Apply [lem-coef-unmarked-cone-model-comparison] to the given $v:L_C(X)\\to D$. Its hypotheses give the Dwyer--Kan counit, cofibrancy of the ordered-cone diagram, the natural identification $u_!P\\cong H_C(X)$, and the weak equivalence of the enriched Kan-extension adjoint. The explicit comparison map $\\alpha_{C,X}$ is the one in [lem-coef-unmarked-relative-nerve-cone-comparison]; since opposite preserves weak homotopy equivalences by [lem-coef-infinity-opposite-subdivision-kan-zigzag] (natural homeomorphism $|T^{\\mathrm{op}}|\\cong|T|$), $v^{\\mathrm{op}}$ and hence $w=v^{\\mathrm{op}}\\alpha_{C,X}$ are objectwise weak; $D^{\\mathrm{op}}$ is objectwise Kan by the same node. The cone criterion then identifies $\\operatorname{St}_{N(C)}(X)$ with enriched evaluation on $u^*D^{\\mathrm{op}}$, and [lem-coef-enriched-diagram-rectification] identifies this evaluation on every $Q_r$ with $N_{\\mathrm{hc}}(D^{\\mathrm{op}})$.",
    "uses": [
-    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-unmarked-cone-model-comparison",
+    "lem-coef-unmarked-relative-nerve-cone-comparison",
     "lem-coef-enriched-diagram-rectification",
-    "lem-coef-simplicial-right-fibration-presentation",
-    "lem-coef-simplicial-projective-model-calculus",
-    "lem-coef-unmarked-straightening-quillen",
-    "lem-cbc-enhanced-functor-cone-calculus",
-    "lem-coef-unmarked-straightening-target-change",
-    "lem-coef-simplicial-presheaf-projective-model"
+    "lem-coef-infinity-opposite-subdivision-kan-zigzag"
    ],
    "elementary": false,
    "source": {
@@ -135,17 +128,16 @@
    }
   },
   {
-   "text": "Remove the valuewise opposite by an actual natural zigzag of strict Kan diagrams. For a simplicial set $K$ let $Z(K)=\\operatorname{Sing}|K|$. The unit $K\\to Z(K)$ is a weak homotopy equivalence by [lem-cbc-realization-singular-unit-weak]. The map $K^{\\mathrm{op}}\\to Z(K)$ obtained by composing $K^{\\mathrm{op}}\\to\\operatorname{Sing}|K^{\\mathrm{op}}|$ with $\\operatorname{Sing}(\\rho_K)$ is also a weak equivalence: the first map is the same cited unit and the second is an isomorphism induced by the homeomorphism $\\rho_K$ of step 8. Both maps commute with every simplicial map $K\\to K'$. Every $Z(K)$ is Kan: the realization/singular adjunction and realized-horn retraction of [lem-coef-realization-finite-limits] extend any map $|\\Lambda_i^n|\\to|K|$ over $|\\Delta^n|$, giving the required horn filler. Thus for the ordinary strict diagram $D$ these maps give natural transformations of strict Kan-valued diagrams $D^{\\mathrm{op}}\\to Z(D)\\leftarrow D$, each objectwise a weak equivalence. The model localization comparison [lem-coef-simplicial-model-nerve-localization] makes their vertex maps equivalences in $\\mathcal S$, and the pointwise criterion [lem-cbc-enhanced-functor-cone-calculus] makes their coherent nerves equivalences in $\\operatorname{Fun}(N(C),\\mathcal S)$. Combining with step 8 gives $\\operatorname{St}_{N(C)}(X)\\simeq N_{\\mathrm{hc}}(D)$ as required. This zigzag uses an ordinary indexing category; it does not assert that valuewise opposite is a simplicial functor on arbitrary enriched diagrams. Singular complexes may be formed in a larger ambient universe. This does not change the small-space conclusion: the inclusion of small Kan complexes into the larger Kan category is full on simplicial mapping sets, since its maps in degree $n$ are exactly the same maps $K\\times\\Delta^n\\to L$. By the displayed $Q_r$ definition its coherent nerve is the full simplicial subset on those objects. The induced inclusion of functor simplicial sets is likewise full: a simplex lands in that full subset exactly when all its vertices do. Consequently an equivalence between the two small-valued endpoint functors obtained in the larger universe lies already in the original small-space functor category.",
+   "text": "Apply [lem-coef-infinity-opposite-subdivision-kan-zigzag] to every value $T=D(c)$. Its zigzag $T\\to ET\\leftarrow E\\operatorname{Sd}T\\to E(T^{\\mathrm{op}})\\leftarrow T^{\\mathrm{op}}$ consists of Kan complexes and weak homotopy equivalences and is natural in $T$, so it commutes with every strict map $D(c\\to c')$ and gives a strict zigzag of objectwise weak equivalences of strict Kan-valued $C$-diagrams $D\\to ED\\leftarrow E\\operatorname{Sd}D\\to E(D^{\\mathrm{op}})\\leftarrow D^{\\mathrm{op}}$, natural in $D$. $\\operatorname{Sd}$ and $E=\\operatorname{Ex}^\\infty$ keep $\\mathcal U$-small inputs $\\mathcal U$-small, so every term lies in $\\mathsf{Kan}_{\\mathcal U}$. A strict transformation is a simplicial functor $C\\times[1]\\to\\mathsf{Kan}_{\\mathcal U}$, and its coherent nerve is a transformation $N(C)\\times\\Delta^1\\to\\mathcal S_{\\mathcal U}$ whose component at $c$ is the edge given by the weak equivalence at $c$. A weak homotopy equivalence of Kan complexes, a weak equivalence between bifibrant objects of the Kan model structure, is an equivalence in $\\mathcal S_{\\mathcal U}$ by [lem-coef-simplicial-model-nerve-localization]. The pointwise criterion of [lem-cbc-enhanced-functor-cone-calculus] makes each of the four transformations an equivalence in $\\operatorname{Fun}(N(C),\\mathcal S_{\\mathcal U})$. Hence $N_{\\mathrm{hc}}(D^{\\mathrm{op}})\\simeq N_{\\mathrm{hc}}(D)$, naturally in $D$; composing with step 8 removes the valuewise opposite and gives $\\operatorname{St}_{N(C)}(p)\\simeq N_{\\mathrm{hc}}(D)$.",
    "uses": [
-    "lem-cbc-realization-singular-unit-weak",
-    "lem-coef-realization-finite-limits",
+    "lem-coef-infinity-opposite-subdivision-kan-zigzag",
     "lem-coef-simplicial-model-nerve-localization",
     "lem-cbc-enhanced-functor-cone-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "Opposite normalization of the space-valued comparison; realization/singular unit and barycentric reversal make the coherent diagram equivalence explicit."
+    "place": "Opposite normalization of the space-valued comparison (HTT Lemma 3.2.5.17(1) yields the valuewise opposite); natural Kan zigzag between a Kan complex and its opposite, and the pointwise equivalence criterion."
    }
   },
   {
@@ -164,29 +156,27 @@
   }
  ],
  "proof_deps": [
-  "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations",
-  "lem-cbc-enhanced-functor-cone-calculus",
-  "lem-cbc-realization-singular-unit-weak",
-  "lem-cbc-realization-weak-equivalence",
-  "lem-coef-coherent-nerve-comparison",
-  "lem-coef-enriched-diagram-rectification",
-  "lem-coef-left-fibration-relative-cylinder-lifting",
-  "lem-coef-model-infinity-derived-adjunction",
-  "lem-coef-realization-finite-limits",
-  "lem-coef-simplicial-model-nerve-localization",
-  "lem-coef-simplicial-presheaf-projective-model",
-  "lem-coef-simplicial-projective-model-calculus",
-  "lem-coef-simplicial-right-fibration-presentation",
   "lem-coef-space-transport-classification",
-  "lem-coef-unmarked-relative-nerve-cone-comparison",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-covariant-derived-replacement-base-change",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-enriched-diagram-rectification",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-realization-weak-equivalence",
+  "lem-coef-left-fibration-relative-cylinder-lifting",
+  "def-coef-infinity-fibrations",
   "lem-coef-unmarked-straightening-quillen",
-  "lem-coef-unmarked-straightening-target-change"
+  "lem-coef-unmarked-relative-nerve-cone-comparison",
+  "lem-coef-unmarked-cone-model-comparison",
+  "lem-coef-infinity-opposite-subdivision-kan-zigzag",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-simplicial-right-fibration-presentation",
+  "lem-coef-model-infinity-derived-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-  "place": "Agent-written explicit quotient, adjunction, contraction, horn, derived Kan-extension and enriched-evaluation calculation; HTT Remark 3.2.5.10 and Lemma 3.2.5.17(1) supplied as a strictly technical unsplit input. The source PDF retained in the sandbox was read; literature archive WANTED."
+  "place": "Agent-written explicit quotient, adjunction, contraction, horn, normalized derived Kan-extension and enriched-evaluation calculation. The existing concrete cone-comparison and target-change statements supply the technical inputs. Q42 read HTT online, Sections 2.2.1 and 3.2.5 and Proposition 4.2.4.4; no retained PDF is present in this sandbox. Archival literature WANTED."
  },
  "mathlib_searches": [
   {
@@ -303,7 +293,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-kan-relative-nerve-left-fibration",
@@ -329,7 +319,7 @@
   "date": "2026-10-17",
   "item": "lem-coef-space-valued-straightening",
   "worker": "stage1",
-  "summary": "Retained the checked quotient, adjunction, counit, relative-cylinder and horn calculations. Removed the invalid inference from fibers/strict transport to the classifying functor. Added the unmarked cone-to-comma comparison for every simplicial input, then used enriched Kan extension, the normalized derived cone adjunction, enriched evaluation and an explicit natural realization/singular zigzag to identify the coherent functor. Full prerequisite closures of all used constructions were checked not to return to this item. Maintainer reader (2026-10-17): step 8's inline identification $u_!P\\cong H_C(X)$ (HTT Proposition 2.2.1.1(2), unmarked) is now cited from the statement-only node lem-coef-unmarked-straightening-target-change; step 8 also cites the combinatorial Kan model.",
+  "summary": "Q42 repaired the returned long-step defect by creating three statement-only technical nodes for the covariant derived replacement/base-change formulas, the ordinary-base cone model comparison after target change, and (in the delivery) a strict opposite-realization zigzag. Steps 1, 8 and 9 were replaced by concise arguments citing those nodes; the statement and all other quotient, adjunction, counit, cylinder, horn and cone-comparison steps are unchanged. All cited statements and source hypotheses were reread and fresh Mathlib searches were logged. Maintainer reader FIX: the delivered opposite-realization zigzag node duplicated the existing lem-coef-infinity-opposite-subdivision-kan-zigzag of this unit and was dropped; steps 8 and 9 cite that node, the localization comparison and the pointwise criterion instead.",
   "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the finite-coefficient mapping-complex adjunction before taking the derived inverse limit; foundational notions for the operadic enrichment used by lem-coef-enriched-category-tensor-calculus. Defines the complete operadic enriched categories and their coefficients used by that mapping-complex construction. The Kan-valued relative-nerve construction justifies the object-space indexing left fibration used to define algebroids. Ordinary-base adjoint comparison identifies the classifying functor of the explicit relative-nerve indexing construction after its left-fibration property has been proved. Steps 1 and 7–10 supply the coherent straightening normalization and ordinary-base construction comparison; steps 2–6 retain the explicit adjunction and weak-equivalence calculations.",
   "tool_uses": [
    {
@@ -337,12 +327,8 @@
     "why": "Steps 4-5 take only its Kan-target testing criterion for weak homotopy equivalences (generic simplicial homotopy tool of sk-prop-sf-cbc); no node of sk-prop-sf-biduality-general states it."
    },
    {
-    "node": "lem-cbc-realization-singular-unit-weak",
-    "why": "Step 9 takes only the weak equivalence K -> Sing|K| (generic realization tool); no node of this unit states it."
-   },
-   {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
-    "why": "Steps 1, 8, 9 take only the pointwise criterion for equivalences in functor quasicategories (generic quasicategory tool, used the same way by many nodes of this unit)."
+    "why": "Step 9 takes only the pointwise criterion for equivalences in functor quasicategories (generic quasicategory tool of sk-prop-sf-cbc, used the same way by many nodes of this unit)."
    }
   ]
  },
@@ -354,10 +340,10 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q60-1b3fb0386",
-  "group": "Q60",
+  "reviewer": "NT-cc-Q42-a82b217bf",
+  "group": "Q42",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-1b3fb0386 (reviewer sub-agent of L); spot-checked: I read all ten steps of the item, both delivered nodes, every cited statement, and HTT Cor. 2.1.2.7, §2.2.1/Prop. 2.2.1.1 and §3.2.5 (3.2.5.2–3.2.5.10, 3.2.5.16–3.2.5.18) in the sandbox copy. The statement is unchanged and no target is weakened. Steps 2–7, 9 and 10 check out. I re-derived the identification L_C(X)(c)=X×_{NC}N(C/c), the adjunction, the counit deformation retraction (true for arbitrary G), the terminal-fibre contraction through the relative cylinder, the left-horn fillers (including r=1, i=0), and the D^op→Sing|D|←D zigzag. Step 1 is one normalization argument built from cited statements, and step 9 is one construction; both are long but can stay. Step 8 hid a lemma (letter D5 / mechanical long-step check): the identification u_!P≅H_C(X) is HTT Prop. 2.2.1.1(2) in the unmarked case, which HTT calls 'obvious', and step 8 proved it inline in two sentences. No DAG node states it: the marked version in lem-coef-marked-cone-straightening-quillen needs a locally Kan target and does not apply to C[S]. FIX: I added the statement-only node lem-coef-unmarked-straightening-target-change (pi_!L_phi≅L_{pi^op phi}, equivalently U_{pi^op phi}G≅U_phi(pi^*G)), checked by pasting pushouts and the cone-object coend formula. I rewrote step 8 to cite it and to cite simplicial-presheaf-projective-model, updated proof_deps, and declared split_report.tool_uses for the generic realization-weak-equivalence, realization-singular-unit-weak and enhanced-functor-cone-calculus tools. LeanSearch, Loogle and LeanFinder are not reachable from this sandbox, so the new node records Mathlib grep searches only and marks the semantic searches unavailable; they still need to be run. The cylinder node is true: HTT 2.1.2.7 with {0}⊂Δ^1, tested with A=∅, A=K, K=∅ and K=Δ^0. The cone-comparison node is true: Remark 3.2.5.10 and Lemma 3.2.5.17(1). Its quotient description is right, and HTT 3.2.5.10(3)'s identification with the full subset cube is wrong on vertices (for C=[2], {0,2}~{0,1,2}; i+1 vertices versus 2^i). That source error is recorded in review.md for coord/HUMAN.md. Neither new node restates the item, and the marked 3.2.5.17(2) node is not a one-line duplicate. The dependency closure has 432 nodes and no cycle, and proof_deps equals the union of uses.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-a82b217bf (reviewer sub-agent of L); spot-checked: I read the item in full (statement, all ten steps, the Q60 lead_note), all three new nodes and the statement of every cited node. Steps 2-7 and 10 are correct: I re-derived the comma-pullback formula for L_C(X), the adjunction, the counit homotopy (valid for any G), the fibre retraction via the cylinder lemma, the left-horn filler (including r=1, i=0) and the cone comparison alpha. In step 8 the variance and target change check out: P=T_{p^op}, pi=u=phi^op, so u_!P is H_C(X). New node A (covariant derived replacement and base change) is true: it follows from the presentation node's Quillen equivalence and model-infinity-derived-adjunction. New node B (cone model comparison) is true: the counit is a Dwyer-Kan equivalence (rectification), P is cofibrant, then target change, the Quillen equivalence for Dwyer-Kan maps (projective-model-calculus, HTT A.3.3.8) and the cone Quillen criterion. Neither node restates a clause of the item and neither creates a cycle (prerequisite closures checked). HTT is not under literature/, so the WANTED line stands; the cited places (2.2.1.2, 3.2.5.10, 3.2.5.17(1), 3.2.5.18(1), 4.2.4.4, A.3.3.8) agree with the statements. This is not a target node and no SGA source is used. Fix 1 (C5 duplicate): new node lem-coef-strict-opposite-realization-zigzag duplicates the existing reviewed node lem-coef-infinity-opposite-subdivision-kan-zigzag in the same unit. That node gives the homeomorphism |T^op|=|T|, that opposite preserves weak homotopy equivalences, and a Kan zigzag T->Ex^inf T<-Ex^inf Sd T->Ex^inf(T^op)<-T^op natural in T; its closure does not contain the item. I dropped the duplicate. Step 8 now cites the existing node, and step 9 is rewritten to apply it valuewise, with simplicial-model-nerve-localization (weak equivalences of Kan complexes are equivalences in S_U) and the pointwise criterion of cbc-enhanced-functor-cone-calculus. proof_deps and split_report.tool_uses are updated. Fix 2 (B3 citation): node A cited simplicial-presheaf-projective-model (presheaves on ordinary categories) for enriched C[B]-diagrams; it now cites simplicial-projective-model-calculus. Accepted tool_uses: lem-cbc-realization-weak-equivalence (steps 4-5) and lem-cbc-enhanced-functor-cone-calculus (step 9). The maintainer-owned top-level tool_uses still lists realization-singular-unit-weak, which no step uses now; I left it for the maintainer to prune. The corrected files are under fixes/dag/nodes/sec-six-functors/ and the full checks are in review.md.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
