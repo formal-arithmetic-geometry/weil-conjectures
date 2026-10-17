@@ -56,16 +56,12 @@
    }
   },
   {
-   "text": "For each integer $n$ put $Y_n=\\bigcup_{n_\\alpha=n}\\operatorname{im}(u_\\alpha)$. These subsets are open by [lem-weil-pbc-etale-morphism-open-map]. If a point $y$ lies in two such images, choose a geometric point over $y$. The more precise assertion of [lem-weil-pbc-etale-cover-geometric-point-lift], applied to a point over $y$ in each member, gives lifts with the same geometric-point field to both etale neighbourhoods. Stalks of the restrictions of $\\mathcal H^r(C)$ are the same stalk at this geometric point: in the colimit of [def-weil-proetale-geometric-stalk], the pointed neighbourhoods admitting the chosen lift are cofinal, since one refines any neighbourhood by its fibre product with that etale neighbourhood. Exactness of this stalk functor is [lem-cbc-proetale-classical-stalk]. The preceding local description of $C$ then gives a nonzero free rank-one $A$-module in degree $-n_\\alpha$ and zero in all other degrees; $A\\ne0$ because the exponent of $\\varpi_E$ in its coefficient datum is at least $1$. Hence two indices whose images meet have the same shift. The $Y_n$ are consequently disjoint and cover $Y$, and each is closed as the complement of the union of the others. Only finitely many are nonempty: $C$ has only finitely many nonzero cohomology sheaves by [def-weil-finite-torsion-constructibility], and a nonempty $Y_n$ forces $\\mathcal H^{-n}(C)\\ne0$. Empty covering members can be discarded. The inverse images $X_n=a^{-1}Y_n=\\mathbf A^1_{Y_n}$ give a finite clopen partition of $X$. Every $Y_n$ is separated and finite type over $k$: choose a finite affine cover $\\operatorname{Spec}R_j$ of $Y$ with $R_j$ finitely generated over $k$, as in [def-weil-finite-type-morphism]. By [lem-weil-pbc-spec-clopen-idempotent], its intersection with $Y_n$ is $D(e_j)$ for an idempotent $e_j$, with ring $R_j[e_j^{-1}]=R_j/(1-e_j)$, again finitely generated. These finitely many affines cover $Y_n$. Its diagonal is the restriction of the closed diagonal of $Y$, so it is separated by [def-weil-proper-morphism]. The corresponding charts $R_j[e_j^{-1}][t]$ show that $X_n$ is finite type; its diagonal is closed since the diagonal of $Y_n$ is closed and equality of the two polynomial coordinates is cut out by $t_1-t_2$.",
+   "text": "The finite coefficient ring $A=\\mathcal O_E/\\varpi_E^e$ of [def-pur-conventions] is nonzero: $e\\geq1$, so $(\\varpi_E^e)$ is contained in the proper maximal ideal $(\\varpi_E)$. Apply [lem-pur-etale-local-shift-partition] with $K=C$, the original etale cover, and the presentations $C|_{Y_\\alpha}\\cong i_1^*L'_\\alpha[n_\\alpha]$ of Step 2. These sheaves are locally free of rank one; boundedness is exactly the finite-cohomology clause of [def-weil-finite-torsion-constructibility]. It follows that $Y_n=\\bigcup_{n_\\alpha=n}\\operatorname{im}(u_\\alpha)$ is a finite clopen partition after empty pieces are removed, and every nonempty member over $Y_n$ has shift $n$. Put $X_n=a^{-1}Y_n=\\mathbf A^1_{Y_n}$; inverse image preserves the finite clopen partition. By [lem-pur-clopen-affine-line-finite-type] with $U=Y_n$ and $r=1$, both $Y_n$ and $X_n$ are separated finite type over $k$.",
    "uses": [
-    "lem-weil-pbc-etale-morphism-open-map",
-    "def-weil-proetale-geometric-stalk",
-    "lem-cbc-proetale-classical-stalk",
+    "def-pur-conventions",
+    "lem-pur-etale-local-shift-partition",
     "def-weil-finite-torsion-constructibility",
-    "lem-weil-pbc-etale-cover-geometric-point-lift",
-    "lem-weil-pbc-spec-clopen-idempotent",
-    "def-weil-finite-type-morphism",
-    "def-weil-proper-morphism"
+    "lem-pur-clopen-affine-line-finite-type"
    ],
    "elementary": false,
    "source": {
@@ -174,13 +170,9 @@
   "lem-weil-pbc-proetale-derived-pullback-composition",
   "lem-pur-twist-sheaf-locally-free",
   "def-coefficient-twists-detailed",
-  "def-weil-proetale-geometric-stalk",
-  "lem-cbc-proetale-classical-stalk",
+  "lem-pur-etale-local-shift-partition",
   "def-weil-finite-torsion-constructibility",
-  "lem-weil-pbc-etale-cover-geometric-point-lift",
-  "lem-weil-pbc-spec-clopen-idempotent",
-  "def-weil-finite-type-morphism",
-  "def-weil-proper-morphism",
+  "lem-pur-clopen-affine-line-finite-type",
   "lem-weil-proetale-weakly-etale-localization",
   "lem-weil-pbc-localization-universal-property",
   "def-weil-finite-tor-amplitude",
@@ -189,6 +181,8 @@
   "lem-pur-concentrated-complex-shift",
   "lem-weil-pbc-derived-single-fully-faithful",
   "lem-pur-lisse-uniqueness",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
   "lem-pur-sheaf-hom-cover-gluing"
  ],
  "proof_origin": {
@@ -255,7 +249,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -288,10 +282,10 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-inv",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "prop-pur-a1-invariance",
   "worker": "stage1",
-  "summary": "Read the original blueprint and the Lean AffineLine file. No exact attachment: Lean explicitly lacks gluing and its uniqueness uses an invertibility hypothesis. Kept the statement. Replaced unsupported definition-only citations with the existing cover, stalk exactness, concentration, single full faithfulness and module-map gluing statements. Wrote out the finite clopen decomposition and its derived localization to handle varying shifts, absorbed twists locally, and supplied inverse gluing, normalization and the final fibre formula. No new nodes. All non-elementary tools are existing nodes and verbatim citation quotes are provided. Second reading supplied the geometric-point lift and affine clopen-idempotent citations, wrote the finite-type affine calculations, and checked preservation of the Dctf hypotheses on clopen pieces using componentwise tensor products.",
+  "summary": "Read the original blueprint and the Lean AffineLine file. No exact attachment: Lean explicitly lacks gluing and its uniqueness uses an invertibility hypothesis. Kept the statement. Replaced unsupported definition-only citations with the existing cover, stalk exactness, concentration, single full faithfulness and module-map gluing statements. Wrote out the finite clopen decomposition and its derived localization to handle varying shifts, absorbed twists locally, and supplied inverse gluing, normalization and the final fibre formula. No new nodes. All non-elementary tools are existing nodes and verbatim citation quotes are provided. Second reading supplied the geometric-point lift and affine clopen-idempotent citations, wrote the finite-type affine calculations, and checked preservation of the Dctf hypotheses on clopen pieces using componentwise tensor products. NS repair of the human return: extracted the non-elementary shift-locus argument and the clopen/affine-space scheme permanence argument from original step 3 as two statement-only nodes, and reused the existing pro-etale inverse-image stalk comparison instead of its inline cofinality proof. Other steps, the statement and the complete Lean record are unchanged.",
   "blueprint": "The preliminary paragraph is step 1; original Step 1 is steps 2-5 (partition by shift rather than by connected components); original Step 2 is step 6; original Step 3 is step 7; original Step 4 is step 8; original Step 5 is steps 9-10. This realizes unit sk-prop-a1-inv Proof (ii), with its lisse uniqueness input (i) unchanged.",
   "tool_uses": [
    {
@@ -305,10 +299,6 @@
    {
     "node": "lem-pur-twist-sheaf-locally-free",
     "why": "The finite-level twist is a sheaf locally free of rank one, needed before treating a twist-shift as a single sheaf; the unit conventions define twists but do not prove this."
-   },
-   {
-    "node": "lem-cbc-proetale-classical-stalk",
-    "why": "Exactness of the specified pro-etale geometric stalk, used only on the locally rank-one cohomology sheaves to compare shifts; no assertion of conservativity on arbitrary pro-etale sheaves is used."
    },
    {
     "node": "lem-weil-proetale-weakly-etale-localization",
@@ -325,6 +315,10 @@
    {
     "node": "lem-pur-sheaf-hom-cover-gluing",
     "why": "Gluing actual module-sheaf maps on a cover, including uniqueness. This expands exactly the unit's ordinary sheaf axiom step and does not replace its lisse uniqueness route."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-stalk",
+    "why": "Canonical pro-etale geometric stalk comparison replaces the cofinality argument hidden in original step 3; it is the generic comparison theorem needed to compare the two local shift descriptions."
    }
   ]
  },
@@ -336,15 +330,16 @@
   "lem-weil-proetale-weakly-etale-localization",
   "lem-cbc-proetale-stalk-conservative",
   "lem-pur-concentrated-complex-shift",
-  "lem-pur-sheaf-hom-cover-gluing"
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-pur-proetale-inverse-image-stalk"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q29-1a2c658e1",
-  "group": "Q29",
+  "reviewer": "NT-cc-NS-9733afa57",
+  "group": "NS",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-1a2c658e1 (reviewer sub-agent of L); spot-checked: Read the full item, unit, cited DAG statements, blueprint sources, and supporting literature. The statement and coefficient conventions match the master source; all ten proof steps have appropriate cited dependencies, valid clopen shift reduction, sheaf-map gluing, overlap compatibility, normalization, and fibre identification. Edge cases and delivery-errors A–F checks pass. Review written to review.md; no repairs needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-9733afa57 (reviewer sub-agent of L); spot-checked: Read the item and the ten steps of this repair delivery, both new nodes, every cited node's statement, the unit sk-prop-a1-inv, and the blueprint statement and proof. The master proof is identical to the main-20261015 and main-20261017 .proof.md files, apart from the TOML header. Only Step 3 changed; the statement, the Lean record and the other steps are unchanged. lem-pur-etale-local-shift-partition is true: if two images meet, the fibre product W is nonempty, and a rank-one sheaf on W is nonzero because A is nonzero, so the shifts agree. The Y_n are open (images of etale maps), pairwise disjoint and cover Y, so each is clopen. Boundedness gives finitely many. Tested on: empty Y, two points with shifts 0 and 1, A=Z/4, and the excluded cases A=0, unbounded K and a non-surjective family. lem-pur-clopen-affine-line-finite-type is true: an open immersion is separated and locally of finite type, a closed subset of a quasi-compact space is quasi-compact, and A^r_U is affine of finite type over U. Tested on U empty, U=Y and r=0. It is close to elementary, but kept because the human's return asked for these hidden facts to become nodes. Neither new node restates a clause of the item. DAG searches found no duplicate: lem-weil-pbc-qc-open-immersion-finite-type and the clopen and shift nodes differ. Every hypothesis of the shift lemma holds at Step 3: C is bounded by def-weil-finite-torsion-constructibility, A=O_E/varpi^e with e>=1 is nonzero, the cover is jointly surjective etale, and the rank-one presentations come from Step 2. FIX (C4): Step 3 cited lem-pur-proetale-inverse-image-stalk and said a stalk comparison was needed for the application, but the application needs none. I removed the sentence and dropped the node from Step 3 uses and proof_deps; the corrected item file is in fixes/. Two notes for the maintainer: the maintainer-owned tool_uses still lists lem-cbc-proetale-classical-stalk, which no step cites; and the new node lem-pur-finite-clopen-derived-decomposition (Q40) states the finite-clopen equivalence that Steps 4-5 prove inline. No new off-unit tool use.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.AffineLineInvariance",
