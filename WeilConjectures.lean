@@ -3744,6 +3744,7 @@ public import WeilConjectures.RingTheory.IndSmoothFinitePresentationFactorizatio
 public import WeilConjectures.RingTheory.IndStandardSmooth
 public import WeilConjectures.RingTheory.InertiaUnramifiedPoint
 public import WeilConjectures.RingTheory.IntegralClosure.EtaleBaseChange
+public import WeilConjectures.RingTheory.IntegralClosure.NoetherianApproximation
 public import WeilConjectures.RingTheory.IntegralIdempotentAnnihilatingPolynomial
 public import WeilConjectures.RingTheory.IntegrallyClosed.DepthTwo
 public import WeilConjectures.RingTheory.JacobianPresentationLift
@@ -4667,6 +4668,7 @@ public import WeilConjectures.WeilSheaf.UpperStarComp
 public import WeilConjectures.WeilSheaf.UpperStarExact
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 public import WeilConjectures.WeilSheaf.UpperStarPointwise
+public import WeilConjectures.ZZAudit
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaFunction.BettiNumbers
 public import WeilConjectures.ZetaFunction.BettiSymmetry
