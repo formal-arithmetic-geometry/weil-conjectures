@@ -21,50 +21,35 @@
  ],
  "proof": [
   {
-   "text": "Let $F$ be any abelian sheaf on $\\operatorname{Spec}K$, not necessarily torsion. Take $K^{\\rm sep}=K$ and an algebraic closure $\\Omega$ of $K$. The group $G=\\operatorname{Gal}(K/K)$ is trivial. Apply [lem-exc-abelian-sheaves-gmodules] to identify abelian etale sheaves with discrete $G$-modules, hence with abelian groups. The equivalence is additive by the cited statement, so it preserves kernels and cokernels (their universal properties), and is exact.",
+   "text": "Apply [lem-sf-separably-closed-sections-preserve-epi] to terminal sections on Spec K. Transfer preservation of epimorphisms to Sheaf.Γ along Sheaf.ΓNatIsoSheafSections, using isTerminalEtalePoint.",
    "uses": [
-    "lem-exc-abelian-sheaves-gmodules"
+    "lem-sf-separably-closed-sections-preserve-epi"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04JQ, Lemma lemma-equivalence-abelian-sheaves-point"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-exc-field-sections-stalk-invariants] to the underlying sheaf of sets with $L=K$. It identifies $F(\\operatorname{Spec}K)$ naturally with $F_{\\bar s}^G=F_{\\bar s}$. The map is restriction to a geometric germ, so it preserves addition and zero, and is an isomorphism of abelian groups. Thus global sections is naturally the additive equivalence of step 1, and is exact. No coefficient ring or uniform annihilator has been imposed.",
-   "uses": [
-    "lem-exc-field-sections-stalk-invariants"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04JM, Lemma lemma-global-sections-point, with L=K and G trivial"
-   }
+   "text": "Global sections is additive and is a right adjoint, so it preserves kernels. Mathlib Functor.preservesHomology_of_preservesEpis_and_kernels gives preservation of homology, and Functor.preservesFiniteColimits_of_preservesHomology gives exactness. The proved source-library comparison Functor.singleFunctorCompRightDerivedFunctorIso identifies RΓ applied to F in degree zero with Γ(F) in degree zero.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Use the resolution formula of [def-weil-pbc-etale-cohomology]. For a K-injective resolution $F\\to I^\\bullet$, exactness of global sections implies that the cycles and boundaries of $\\Gamma(I^\\bullet)$ are the sections of the cycles and boundaries of $I^\\bullet$: kernels are preserved, and images are preserved as kernels of cokernels. Therefore $\\mathcal H^q(\\Gamma(I^\\bullet))=\\Gamma(\\mathcal H^q(I^\\bullet))=0$ for $q>0$, since $I^\\bullet$ is quasi-isomorphic to $F$ in degree zero. In particular this holds for every locally torsion abelian sheaf, with no bound on its annihilators. By [def-sc-etale-torsion-cd] this is $\\operatorname{cd}_{\\rm tor}(K)\\leq0$.",
+   "text": "Unfold [def-weil-pbc-etale-cohomology]. Apply the degree-q homology functor to the comparison in step 2. For q>0, DerivedCategory.isZero_of_isLE shows that the target is zero, since a degree-zero single object is IsLE 0. Transport zero across the homology isomorphism and use AddCommGrpCat.isZero_iff_subsingleton. Since this works for every abelian sheaf, it implies the torsion bound [def-sc-etale-torsion-cd].",
    "uses": [
     "def-weil-pbc-etale-cohomology",
     "def-sc-etale-torsion-cd"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04JQ equivalence and Tag 04JM sections formula; explicit exact-resolution argument"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-exc-abelian-sheaves-gmodules",
-  "lem-exc-field-sections-stalk-invariants",
+  "lem-sf-separably-closed-sections-preserve-epi",
   "def-weil-pbc-etale-cohomology",
   "def-sc-etale-torsion-cd"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/lem-sf-separably-closed-torsion-cd.md",
-  "place": "Proof paragraph, via Stacks Tags 04JQ and 04JM and the explicit resolution calculation"
+  "by": "agent F1, complete Lean proof",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QO exactness and higher vanishing, using the existing split-cover proof in PointCohomology and the existing exact-functor derived comparison."
  },
  "mathlib_searches": [
   {
@@ -165,10 +150,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-exc-abelian-sheaves-gmodules",
-  "lem-exc-field-sections-stalk-invariants"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -194,5 +176,15 @@
   "group": "NG",
   "result": "pass",
   "note": "Wrote review.md. Immutable files match the commit; statement, dependencies, sources, docstrings, universes, edge cases, and report sections checked. Server-only per-file compilation reproduced successfully. No delivery errors or corrections required."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261017T041407-L-2535375",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

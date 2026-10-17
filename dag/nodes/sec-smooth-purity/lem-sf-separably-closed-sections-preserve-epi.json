@@ -1,0 +1,100 @@
+{
+ "id": "lem-sf-separably-closed-sections-preserve-epi",
+ "kind": "statement",
+ "title": "Terminal sections preserve epimorphisms over a separably closed field",
+ "statement": "Let $K$ be a separably closed field [def-kun-separably-closed]. Write $S=\\operatorname{Spec}K$ and $T=(\\operatorname{id}_S:S\\to S)$ for the terminal object of its small etale site [def-weil-pbc-etale-site]. The functor $F\\mapsto F(T)$ from abelian etale sheaves [def-weil-pbc-etale-sheaves] to abelian groups preserves epimorphisms: every epimorphism $F\\to G$ induces a surjection $F(T)\\to G(T)$. This holds for all abelian sheaves, without a torsion or finite-generation hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QO, Lemma lemma-vanishing-etale-cohomology-strictly-henselian, proof of exactness, specialized to a separably closed field; the existing source-library proof uses split etale coverings directly."
+ },
+ "stmt_deps": [
+  "def-kun-separably-closed",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "This is the already proved library instance AlgebraicGeometry.Scheme.preservesEpimorphisms_sheafSections_of_isSepClosed in WeilConjectures.AlgebraicGeometry.Sites.PointCohomology. Its proof first shows that every covering sieve of the terminal object contains the identity: choose a nonempty covering member, then lift the unique point of Spec K along its etale map, using that K is separably closed. A sieve is downward closed, so this section puts the identity in the sieve. An epimorphism of abelian sheaves is locally surjective. Apply the identity-in-cover assertion to the image sieve of any terminal section to obtain its global lift. Surjectivity of an abelian-group homomorphism is equivalent to its being an epimorphism. The existing source declaration is used unchanged; no new Lean statement or open proof is introduced.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QO, Lemma lemma-vanishing-etale-cohomology-strictly-henselian, proof of exactness, specialized to a separably closed field; the existing source-library proof uses split etale coverings directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher etale cohomology of a separably closed field is zero, global sections is an exact functor",
+   "results": "Algebra.FormallyEtale.of_isSeparable_aux; Algebra.FormallyEtale.of_isSeparable; Algebra.FormallyEtale.iff_exists_algEquiv_prod; Algebra.FormallyEtale.subsingleton_h1Cotangent; Algebra.Etale.iff_exists_algEquiv_prod; Algebra.FormallyEtale.iff_isSeparable; Algebra.Etale.formallyEtale; Algebra.formallyEtale_iff",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFiniteColimits.*[Ee]pi|[Ii]so.*rightDerivedFunctor|rightDerivedFunctor.*[Ii]so",
+   "results": "Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On the etale site of a separably closed field, sections over the terminal object preserve epimorphisms",
+   "results": "CategoryTheory.PreGaloisCategory.FiberFunctor.preservesEpis; CategoryTheory.SplitEpi.map_section_; CategoryTheory.hasGlobalSectionsFunctor_of_hasTerminal; CategoryTheory.PresheafIsGeneratedBy.of_epi; SheafOfModules.GeneratingSections.ofEpi_I; AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective; CategoryTheory.Sheaf.epi_of_isLocallySurjective; CategoryTheory.Sheaf.epi_of_isLocallySurjective'",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Sites.SeparablyClosedTorsionCohomologicalDimension",
+  "date": "2026-10-17",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-separably-closed-torsion-cd",
+   "place": "Proof paragraph: exactness of global sections before higher-derived-functor vanishing.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-fullcd-etale-origin",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.PointCohomology",
+  "declaration": "AlgebraicGeometry.Scheme.preservesEpimorphisms_sheafSections_of_isSepClosed",
+  "statement": "instance preservesEpimorphisms_sheafSections_of_isSepClosed :\n    ((sheafSections (Spec (.of k)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n      (op (etalePoint k))).PreservesEpimorphisms",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-17",
+  "note": "Existing proved instance, with section parameters (k : Type u) [Field k] [IsSepClosed k]. Read at lines 170-173 of the unchanged source module; used directly, not restated."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261017T041407-L-2535375",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261017T041407-L-2535375",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

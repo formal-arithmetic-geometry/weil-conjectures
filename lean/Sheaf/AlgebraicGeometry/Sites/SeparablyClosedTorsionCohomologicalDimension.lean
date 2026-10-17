@@ -7,15 +7,13 @@ module
 
 public import Sheaf.AlgebraicGeometry.Sites.CohomologicalDimension
 public import Mathlib.FieldTheory.IsSepClosed
-import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 
 /-!
 # Torsion cohomological dimension of a separably closed field
 
 Source: blueprint, sec-smooth-purity/sk-prop-sf-fullcd-etale-origin,
-lemma lem-sf-separably-closed-torsion-cd; Stacks Project, Tags 04JQ and 04JM
+lemma lem-sf-separably-closed-torsion-cd; Stacks Project, Tags 03QO, 04JQ and 04JM
 (blueprint: lem-sf-separably-closed-torsion-cd).
 -/
 
@@ -27,27 +25,37 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A separably closed field has torsion étale cohomological dimension at most zero.
 Source: blueprint, sec-smooth-purity/sk-prop-sf-fullcd-etale-origin,
-lemma lem-sf-separably-closed-torsion-cd; Stacks Project, Tags 04JQ and 04JM
+lemma lem-sf-separably-closed-torsion-cd; Stacks Project, Tags 03QO, 04JQ and 04JM
 (blueprint: lem-sf-separably-closed-torsion-cd).
 
 Proof:
-1. Take the separable closure to be `K` and an algebraic closure `Ω` of `K`.
-The Galois group is trivial. By `lem-exc-abelian-sheaves-gmodules` (Tag 04JQ),
-abelian étale sheaves are additively equivalent to abelian groups. The equivalence
-preserves kernels and cokernels, hence is exact.
-2. By `lem-exc-field-sections-stalk-invariants` (Tag 04JM), with `L = K`, global
-sections are naturally the geometric stalk with invariants under the trivial group.
-The restriction map preserves addition and zero, identifying global sections with
-the exact additive equivalence in step 1. No uniform annihilator is required.
-3. Compute ordinary derived sections using `def-weil-pbc-etale-cohomology`:
-for a K-injective resolution of a sheaf in degree zero, exact global sections
-preserve kernels, cokernels, and thus images. Consequently cohomology commutes
-with global sections and is zero in every positive degree. This applies in
-particular to every locally torsion abelian sheaf, giving the bound defined by
-`def-sc-etale-torsion-cd`. -/
+1. Evaluation at the terminal object preserves epimorphisms by
+`preservesEpimorphisms_sheafSections_of_isSepClosed`: every covering of the spectrum
+has a section, so local lifts of sections give global lifts. The natural isomorphism
+`CategoryTheory.Sheaf.ΓNatIsoSheafSections` transfers this property to global sections.
+2. Global sections is additive and preserves limits as a right adjoint. Preserving
+kernels and epimorphisms implies that it preserves homology, hence finite colimits.
+3. The total right derived functor of this exact functor commutes with the
+single-degree embedding. Its value on a sheaf in degree zero is thus the group of
+global sections placed in degree zero, whose positive-degree homology vanishes.
+This applies to all abelian sheaves, including every locally torsion sheaf. -/
 theorem hasTorsionEtaleCohomologicalDimensionLE_zero_of_isSepClosed
     (K : Type u) [Field K] [IsSepClosed K] :
     HasTorsionEtaleCohomologicalDimensionLE (Spec (.of K)) 0 := by
-  sorry
+  let Γ := CategoryTheory.Sheaf.Γ (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}
+  have : Γ.PreservesEpimorphisms :=
+    CategoryTheory.Functor.PreservesEpimorphisms.of_iso
+      (CategoryTheory.Sheaf.ΓNatIsoSheafSections _ _ (isTerminalEtalePoint (k := K))).symm
+  have := CategoryTheory.Functor.preservesHomology_of_preservesEpis_and_kernels Γ
+  have : CategoryTheory.Limits.PreservesFiniteColimits Γ :=
+    CategoryTheory.Functor.preservesFiniteColimits_of_preservesHomology Γ
+  intro F _ q hq
+  let e :=
+    (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} (q : ℤ)).mapIso
+    (Γ.singleFunctorCompRightDerivedFunctorIso.app F)
+  have hz := DerivedCategory.isZero_of_isLE
+    ((DerivedCategory.singleFunctor AddCommGrpCat.{u + 1} 0).obj (Γ.obj F))
+    0 (q : ℤ) (by omega)
+  exact AddCommGrpCat.isZero_iff_subsingleton.mp (hz.of_iso e)
 
 end AlgebraicGeometry.Scheme
