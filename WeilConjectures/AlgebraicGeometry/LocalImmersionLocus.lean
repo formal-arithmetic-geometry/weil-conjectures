@@ -89,7 +89,7 @@ theorem exists_localImmersionLocus (S : Scheme.{u})
     intro i k T a b hab
     rw [hrep i a, hrep k b, hab]
   obtain ⟨Z, q, hcharts⟩ :=
-    exists_gluedCompatibleImmersionCharts S U hs W j hj hcompat
+    exists_gluedCompatibleImmersionCharts S U W j hj hcompat
   choose e hp using hcharts
   let 𝒰 : S.OpenCover := {
     I₀ := S

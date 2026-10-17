@@ -69,7 +69,7 @@ Proof, following the four steps of the node:
    to `X` is zero. Tensor pullback is additive and preserves composition.
    Since `Xi` is quasi-compact, choose a finite affine cover. At any later stage
    its inverse images are affine and cover; a sheaf map vanishes if it vanishes
-   on these opens. Noetherianity is retained from the node but is unused here.
+   on these opens.
 3. By `lem-weil-pbc-spec-colimit-limit`, the limit ring is the directed colimit
    of the stage rings. On each affine of `Xi`, tensoring its coordinate ring
    with these rings gives the affine coordinate rings of the base changes,
@@ -87,7 +87,7 @@ Proof, following the four steps of the node:
    affine cover then shows that every specified equality holds on `X_j'`. -/
 theorem finiteRelation_module_map_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
-    (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]
+    (R : I ⥤ CommRingCat.{u})
     (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]
     (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))
     [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]

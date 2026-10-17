@@ -39,7 +39,9 @@ private theorem tensor_map_comp_left
     (Algebra.TensorProduct.map_comp v u (AlgHom.id R B) (AlgHom.id R B)).symm x
 
 /-- The algebra part of a finitely presented tensor model descends to a compatible
-family of pushout squares on a tail. This statement involves no modules.
+family of pushout squares on a tail. The `P`-structure at the first stage `k` maps to
+the given `P`-structure on the limit, and at every later stage it is the one induced by
+the transition map. This statement involves no modules.
 
 Source: Stacks Project, Algebra, Tag 02JO (3), final paragraph; Tags 00QO and 05N9.
 (blueprint: lem-pc-tensor-model-algebra-descent)
@@ -103,22 +105,38 @@ theorem exists_tensor_model_algebra_tail
               (F.map_comp (homOfLE (hik.trans hkj)) (homOfLE hjl)) s).symm }
         (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) B)).toRingHom.comp
           (q j hkj) = q l hkl) ∧
-      (∀ (j : I) (hkj : k ≤ j),
-        letI := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra
-        let D := (F.obj j : Type v) ⊗[F.obj i] A
-        let E := (F.obj j : Type v) ⊗[F.obj i] B
-        let d : D →+* E :=
-          (Algebra.TensorProduct.map (AlgHom.id (F.obj j) (F.obj j)) f).toRingHom
-        letI : Algebra D E := d.toAlgebra
-        letI : Algebra Q E := (q j hkj).toAlgebra
-        ∃ aPj : Algebra P D,
-          letI := aPj
+      (letI := (F.map (homOfLE hik)).hom.toAlgebra
+       ∃ aPk : Algebra P ((F.obj k : Type v) ⊗[F.obj i] A),
+        (letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra
+         let t : F.obj k →ₐ[F.obj i] c.pt :=
+           { (c.ι.app k).hom with
+             commutes' := fun s ↦ ConcreteCategory.congr_hom (c.w (homOfLE hik)) s }
+         letI := aPk
+         letI := aP
+         (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) A)).toRingHom.comp
+             (algebraMap P ((F.obj k : Type v) ⊗[F.obj i] A)) =
+           algebraMap P ((c.pt : Type v) ⊗[F.obj i] A)) ∧
+        ∀ (j : I) (hkj : k ≤ j),
+          letI := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra
+          let t : F.obj k →ₐ[F.obj i] F.obj j :=
+            { (F.map (homOfLE hkj)).hom with
+              commutes' := fun s ↦ (ConcreteCategory.congr_hom
+                (F.map_comp (homOfLE hik) (homOfLE hkj)) s).symm }
+          let D := (F.obj j : Type v) ⊗[F.obj i] A
+          let E := (F.obj j : Type v) ⊗[F.obj i] B
+          let d : D →+* E :=
+            (Algebra.TensorProduct.map (AlgHom.id (F.obj j) (F.obj j)) f).toRingHom
+          letI : Algebra D E := d.toAlgebra
+          letI : Algebra Q E := (q j hkj).toAlgebra
+          letI : Algebra P D :=
+            ((Algebra.TensorProduct.map t (AlgHom.id (F.obj i) A)).toRingHom.comp
+              (@algebraMap P ((F.obj k : Type v) ⊗[F.obj i] A) _ _ aPk)).toAlgebra
           letI : Algebra P E := (d.comp (algebraMap P D)).toAlgebra
           letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl
           ∃ hPQ : IsScalarTower P Q E,
             letI := hPQ
             Algebra.IsPushout P D Q E) := by
-  obtain ⟨k, hik, qk, hlimit, hpush⟩ :=
+  obtain ⟨k, hik, qk, hlimit, aPk, hcompat, hpush⟩ :=
     exists_tensor_model_algebra_stage F c hc f P Q aP e he
   let := (F.map (homOfLE hik)).hom.toAlgebra
   let : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra
@@ -135,7 +153,7 @@ theorem exists_tensor_model_algebra_tail
     let := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra
     exact (Algebra.TensorProduct.map (t j hkj)
       (AlgHom.id (F.obj i) B)).toRingHom.comp qk
-  refine ⟨k, hik, q, ?_, ?_, ?_⟩
+  refine ⟨k, hik, q, ?_, ?_, aPk, hcompat, ?_⟩
   · intro j hkj
     let := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra
     let cj : F.obj j →ₐ[F.obj i] c.pt :=
@@ -171,6 +189,6 @@ theorem exists_tensor_model_algebra_tail
   · intro j hkj
     let := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra
     exact tensor_model_pushout_base_change (F.obj i) (F.obj k) (F.obj j)
-      A B P Q (t j hkj) f qk hpush
+      A B P Q (t j hkj) f qk aPk hpush
 
 end AlgebraicGeometry

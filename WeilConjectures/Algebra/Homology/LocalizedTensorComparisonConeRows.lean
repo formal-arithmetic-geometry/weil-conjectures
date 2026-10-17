@@ -41,8 +41,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.unusedVariables false in
-/-- The two cohomology rows for a K-flat chain map and its actual mapping cone
+/-- The two cohomology rows for a chain map and its actual mapping cone
 have an exact source row, and the coefficient comparison commutes with all
 four row arrows.
 The first, second and fourth target arrows are the homology maps of the chain
@@ -74,13 +73,7 @@ Zero rings, zero maps, split cones and unbounded complexes require no changes.
 (blueprint: lem-pc-localized-tensor-comparison-cone-rows). -/
 theorem exists_localizedTensorComparison_cone_rows
     (hC : Module.Flat (A ⊗[R] B) C)
-    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
-      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)
     (P₁ P₂ : CochainComplex (ModuleCat.{u} A) ℤ) (f : P₁ ⟶ P₂)
-    (hK₁ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
-      (CochainComplex.mapBifunctor V P₁ (curriedTensor _)).Acyclic)
-    (hK₂ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
-      (CochainComplex.mapBifunctor V P₂ (curriedTensor _)).Acyclic)
     (m₁ : BaseDerivedTensorCohomologyModel R A B (P₁ ⊗ Q) C)
     (m₂ : BaseDerivedTensorCohomologyModel R A B (P₂ ⊗ Q) C)
     (m₃ : BaseDerivedTensorCohomologyModel R A B (CochainComplex.mappingCone f ⊗ Q) C)
@@ -109,7 +102,6 @@ theorem exists_localizedTensorComparison_cone_rows
       s₁ ≫ cmp P₃ m₃ i = cmp P₂ m₂ i ≫ d₁ ∧
       s₂ ≫ cmp P₁ m₁ (i + 1) = cmp P₃ m₃ i ≫ d₂ ∧
       s₃ ≫ cmp P₂ m₂ (i + 1) = cmp P₁ m₁ (i + 1) ≫ d₃ := by
-  clear hQ hK₁ hK₂
   dsimp only
   let ρ := (algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B))
   let F := (extendScalars ρ).mapHomologicalComplex (.up ℤ)

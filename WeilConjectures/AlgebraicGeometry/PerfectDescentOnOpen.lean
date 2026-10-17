@@ -32,7 +32,7 @@ Source: Stacks Project, Tag 09RF, induction on quasi-compact opens
 (blueprint: def-pc-perfect-descent-on-open). -/
 def PerfectDescentOnOpen
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
-    (R : I ⥤ CommRingCat.{u}) [∀ i : I, IsNoetherianRing (R.obj i)]
+    (R : I ⥤ CommRingCat.{u})
     (c : Cocone R) (i : I) (Xi : Scheme.{u}) (s : Xi ⟶ Spec (R.obj i))
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

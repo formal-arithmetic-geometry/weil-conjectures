@@ -70,10 +70,10 @@ r₀, not a new choice of maps. Composition of the canonical tensor comparisons 
 ordinary pullback composition transports the original recovery equations to the
 last equation. The pulled-back cover remains finite and affine because the stage
 transition is affine. Empty intersections impose no equations; the empty family
-and zero modules use k itself. Noetherianity is unnecessary. -/
+and zero modules use k itself. -/
 theorem finitePresentation_local_maps_eventually_compatible
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
-    (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]
+    (R : I ⥤ CommRingCat.{u})
     (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]
     (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))
     [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] :
