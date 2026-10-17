@@ -31,7 +31,7 @@ maximal ideals, and all maximal prime chains have this common finite length.
 Source: Stacks Project, Algebra, Lemma Tag 00OS (label lemma-dimension-spell-it-out,
 line 27763) (blueprint: lem-weil-pbc-finite-type-domain-dimension-local-ring).
 
-Proof, following the six steps of the DAG:
+Proof, following the six steps of the blueprint:
 1. By `def-weil-pbc-finite-type-algebra`, choose a surjection from
    P = k[x₁, ..., xₙ] (`def-weil-pbc-mv-polynomial-ring`) to S with prime kernel a.
    Ideal correspondence identifies primes and maximal ideals of S with those of P

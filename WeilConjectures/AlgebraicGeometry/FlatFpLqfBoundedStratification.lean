@@ -112,7 +112,7 @@ private theorem isClosed_fiber_degree_le (n : ℕ) {X S : Scheme.{u}} (f : X ⟶
 bounded fibres are finite locally free on a finite stratification (Stacks, Tag 07RY;
 (blueprint: lem-weil-pbc-flat-fp-lqf-bounded-stratification).
 
-Proof (Stacks Tag 07RY, following the ten steps of the DAG node):
+Proof (Stacks Tag 07RY, following the ten steps of the blueprint node):
 1. Choose a bound on fibre degrees. Base change preserves flatness, local finite presentation,
    separatedness and local quasi-finiteness, and preserves each fibre degree
    (`lem-weil-pbc-flat-morphism-base-change`, `lem-weil-pbc-qcqs-morphism-permanence`,
