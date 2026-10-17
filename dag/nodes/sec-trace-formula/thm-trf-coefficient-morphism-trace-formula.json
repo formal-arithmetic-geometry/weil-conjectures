@@ -1,247 +1,425 @@
 {
-  "id": "thm-trf-coefficient-morphism-trace-formula",
-  "blueprint": {
-    "is": "thm-trf-coefficient-morphism-trace-formula",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Trace formula for Frobenius coefficient morphisms over a finite ring",
-  "statement": "Fix the global finite-field datum $p,a,q,k_0,k$, where $q=p^a$, and\nthe coefficient conventions, $A=A_{E,n}$. Let $X_0$ be a separated\nfinite-type $k_0$-scheme, put $X=X_0\\times_{k_0}k$, let\n$K\\in D^b_{ctf}(X,A)$ have an explicit etale-origin witness, and let\n$\\psi:L\\Phi^*K\\to K$ be a Frobenius coefficient morphism of\n[def-trf-frobenius-coefficient-morphism], with iterates $\\psi_m$ and\nglobal operators $F_{c,m}(\\psi)$; no invertibility of $\\psi$ is\nassumed. Assume the exceptional-adjoint admissibility hypotheses of\n[def-trf-admissibility] for the graph correspondences and fixed-point\nbase changes on a chosen compactification defined over $k_0$, as in\nthe Grothendieck–Lefschetz formula over a finite ring below (at the\nfinite stage these hold automatically, and the proof does not use\nthem). For\n$y\\in X_0(\\mathbf F_{q^m})$ with geometric point $\\bar y$ one has\n$\\Phi^m\\bar y=\\bar y$ (the fixed points of\n[thm-trf-frobenius-fixed-points]), and $\\psi_m$ induces a stalk\nendomorphism\n$\\psi_{m,\\bar y}:K_{\\bar y}\\cong(L\\Phi^{m*}K)_{\\bar y}\\to K_{\\bar y}$.\nThen for every $m\\geq1$\n\n$$\n\\boxed{\n\\operatorname{tr}_A\\bigl(F_{c,m}(\\psi)\\mid R\\Gamma_c(X,K)\\bigr)\n=\\sum_{y\\in X_0(\\mathbf F_{q^m})}\n\\operatorname{tr}_A\\bigl(\\psi_{m,\\bar y}\\mid K_{\\bar y}\\bigr)\n}\n$$\n\nin $A$, both sides being categorical traces of endomorphisms of\nperfect complexes. This is the coefficient-morphism variant of the\nfinite-coefficient trace formula; for the scheme-Frobenius map\n$\\psi=u_1$ of a strict Weil complex it gives the\nGrothendieck–Lefschetz formula over a finite ring, which is deduced from\nit below. It is the form needed\nwhen an integral lift of a field-stage Weil isomorphism is not itself\ninvertible.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-coefficient-morphism-trace-formula.md",
-    "place": "node thm-trf-coefficient-morphism-trace-formula, order 2379",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0FMG"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0B2P"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-trf-frobenius-coefficient-morphism",
-    "def-trf-admissibility",
-    "thm-trf-frobenius-fixed-points"
-  ],
-  "proof": [
-    {
-      "text": "The traces are defined: $R\\Gamma_c(X,K)$ is perfect and\n$F_{c,m}(\\psi)$ is a morphism of $D^b_{\\mathrm{fin}}(A)$ by\n[lem-trf-global-operator-perfect], and the stalks are perfect by\n[fix-lem-finite-tor-perfect].\n\nThe proof reduces to curves, as in the sketch: closed subschemes of\nthe affine line first, then affine schemes by fibring over an affine\nspace with the Weil $!$-pushforward, then general schemes by\nlocalization. No compactification of $X_0$ is used, and the\nadmissibility hypothesis of the statement is not needed.",
-      "uses": [
-        "lem-trf-global-operator-perfect",
-        "fix-lem-finite-tor-perfect"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 0: conventions.* For $r\\geq1$ the finite-field datum\n$(p,a,q,k_0,k)$ may be replaced by $(p,ar,q^r,\\mathbf F_{q^r},k)$\n([def-weil-finite-field-fiber]); every result cited below is stated for\nan arbitrary datum. For a finite field $F$ of characteristic $p$, a\nseparated finite-type $F$-scheme $S_0$ with $S=S_0\\times_Fk$, a complex\n$K\\in D^b_{ctf}(S,A)$ and a Frobenius coefficient morphism $\\psi$ on\n$K$ for the $|F|$-power scheme Frobenius $\\Phi_S$, and $m\\geq1$, write\n$\\mathrm{TF}(S_0,K,\\psi,m)$ for the identity\n$$\n\\operatorname{tr}_A\\bigl(F_{c,m}(\\psi)\\mid R\\Gamma_c(S,K)\\bigr)\n=\\sum_{s\\in S_0(F_m)}\\operatorname{tr}_A\\bigl(\\psi_{m,\\bar s}\\mid K_{\\bar s}\\bigr),\n$$\nwhere $F_m\\subseteq k$ is the extension of degree $m$ of $F$. Every\ncomplex in $D^b_{ctf}$ has an explicit étale-origin witness\n([lem-sf-proetale-constructible-origin]), and every separated\nfinite-type morphism between separated finite-type $k$-schemes is\nexceptionally admissible at the finite stage\n([rem-ptr-trf-admissibility-12], [thm-sf-preservation-class]). We prove\n$\\mathrm{TF}$ for all such data; the theorem is the case\n$(F,S_0)=(k_0,X_0)$.",
-      "uses": [
-        "def-weil-finite-field-fiber",
-        "lem-sf-proetale-constructible-origin",
-        "thm-sf-preservation-class"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 1: finite schemes.* Let $S_0$ be finite over $F$. Then $S$ is\nfinite over $k$, hence a finite disjoint union\n$S=\\coprod_{\\bar s\\in S(k)}S_{\\bar s}$ of spectra of local Artinian\n$k$-algebras with residue field $k$. The inclusion\n$\\iota_{\\bar s}:\\operatorname{Spec}k\\to S_{\\bar s}$ is a finite\nuniversal homeomorphism, so by [i-topology]\n$K|_{S_{\\bar s}}\\simeq R\\iota_{\\bar s*}K_{\\bar s}$ and\n$R\\Gamma_c(S,K)=R\\Gamma(S,K)\\simeq\\bigoplus_{\\bar s}K_{\\bar s}$, a finite\nsum of perfect complexes ([fix-lem-finite-tor-perfect]). Put\n$\\Phi=\\Phi_S^m$; it is a universal homeomorphism, so it permutes the\npoints $\\bar s$, and $(L\\Phi^*K)_{\\bar s}=K_{\\Phi(\\bar s)}$. By\n[prop-trf-graph-operator],\n$F_{c,m}(\\psi)=R\\Gamma(S,\\psi_m)\\circ\\Phi^\\sharp$, where $\\Phi^\\sharp$ is\ninduced by the unit of $L\\Phi^*\\dashv R\\Phi_*$; on these decompositions\n$\\Phi^\\sharp$ maps the summand $K_{\\Phi(\\bar s)}$ identically onto the\nsummand $(L\\Phi^*K)_{\\bar s}$, and $R\\Gamma(S,\\psi_m)$ is the sum of\nthe stalk maps. Hence $F_{c,m}(\\psi)$ is the block matrix whose only\nnonzero blocks are $\\psi_{m,\\bar s}:K_{\\Phi(\\bar s)}\\to K_{\\bar s}$. Choosing\nbounded complexes of finite projective $A$-modules for the $K_{\\bar s}$\nand chain representatives of the blocks, the chain-level supertrace of\n[lem-trf-chain-supertrace] only sees the diagonal blocks, those with\n$\\Phi(\\bar s)=\\bar s$. By [thm-trf-frobenius-fixed-points] these are the\ngeometric points of $S_0(F_m)$, and there the block is the stalk map\n$\\psi_{m,\\bar s}$. This is $\\mathrm{TF}(S_0,K,\\psi,m)$.",
-      "uses": [
-        "i-topology",
-        "fix-lem-finite-tor-perfect",
-        "prop-trf-graph-operator",
-        "lem-trf-chain-supertrace",
-        "thm-trf-frobenius-fixed-points"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 2: the affine line.* Let $S_0=\\mathbf A^1_F$ and let\n$j_0:\\mathbf A^1_F\\hookrightarrow\\mathbf P^1_F$ be the compactification of\n[d-lines], proper ([Stacks, Tag 0FMG](https://stacks.math.columbia.edu/tag/0FMG))\nand smooth of pure dimension one\n([Stacks, Tag 0B2P](https://stacks.math.columbia.edu/tag/0B2P)), with complement\nthe rational point $\\infty$. Let $\\bar\\psi$ be the extension of $\\psi$ to\n$j_!K$ of [lem-trf-compactification-graph-operator], with iterates\n$\\bar\\psi_m=\\overline{\\psi_m}$ (item (1)). By item (3) of that lemma the\nisomorphism $C_{j,K}$ of [lem-trf-compactification-cohomology] conjugates\n$F_{c,m}(\\psi)$ into $T_{\\bar c}(\\bar\\psi_m)$ on\n$R\\Gamma(\\mathbf P^1,j_!K)$, where $\\bar c=(\\operatorname{id},\\bar\\Phi^m)$ is the\ngraph on $\\mathbf P^1$, so the traces agree by conjugacy invariance\n([prop-trf-trace-formal-laws], item (1)). On the proper curve\n$\\mathbf P^1$ the ordinary leg $\\bar\\Phi^m$ is finite and, by\n[thm-trf-frobenius-fixed-points], the fixed scheme is finite over $k$\nwith one reduced point component for each point of\n$\\mathbf P^1_F(F_m)$. The Lefschetz–Verdier comparison\n[thm-trf-lefschetz-verdier], which assembles the proper global\ncomparison and the decomposition into local terms, gives\n$$\n\\operatorname{tr}_A\\bigl(T_{\\bar c}(\\bar\\psi_m)\\mid R\\Gamma(\\mathbf P^1,j_!K)\\bigr)\n=\\sum_{y\\in\\mathbf P^1_F(F_m)}\\operatorname{LT}_y(\\bar\\psi_m).\n$$\nBy the coefficient-morphism form of [thm-trf-frobenius-local-term] on the\nsmooth curve $\\mathbf P^1$ (proved there through the curve pieces),\n$\\operatorname{LT}_y(\\bar\\psi_m)=\\operatorname{tr}_A(\\bar\\psi_{m,\\bar y}\\mid(j_!K)_{\\bar y})$.\nBy [lem-trf-compactification-graph-operator], item (2), the stalk at\n$\\infty$ is zero, so its local term is zero, and for\n$y\\in\\mathbf A^1_F(F_m)$ one has $(j_!K)_{\\bar y}=K_{\\bar y}$ and\n$\\bar\\psi_{m,\\bar y}=\\psi_{m,\\bar y}$. This is\n$\\mathrm{TF}(\\mathbf A^1_F,K,\\psi,m)$.",
-      "uses": [
-        "lem-trf-compactification-graph-operator",
-        "lem-trf-compactification-cohomology",
-        "prop-trf-trace-formal-laws",
-        "thm-trf-frobenius-fixed-points",
-        "thm-trf-lefschetz-verdier",
-        "thm-trf-frobenius-local-term"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 3: closed subschemes of the affine line.* A closed subscheme of\n$\\mathbf A^1_F$ is $\\operatorname{Spec}F[t]/I$. If $I=0$ it is the line,\nStep 2. Otherwise a nonzero polynomial in $I$ makes $F[t]/I$\nfinite-dimensional over $F$, and Step 1 applies. This includes\nnonreduced schemes.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Step 4: affine schemes.* We prove $\\mathrm{TF}$ for all closed\nsubschemes $S_0\\subseteq\\mathbf A^d_F$, by induction on $d$,\nsimultaneously for all finite fields $F$, all $K$, all $\\psi$ and all\n$m$. The cases $d\\leq1$ are Steps 1 and 3. Let $d\\geq2$ and let\n$f_0:S_0\\to Y_0=\\mathbf A^{d-1}_F$ forget the last coordinate, a\nseparated morphism. Let $(L,\\psi')=(Rf_!K,Rf_!\\psi\\circ\\theta_{f,1})$\nbe the Weil $!$-pushforward of [def-trf-weil-shriek-pushforward]; its\ncomparison $\\theta_{f,1}$ is built from the relative Frobenius\nfactorization [d-relative-frob] and is invertible because $r_1$ is a\nfinite universal homeomorphism ([i-relative-frob], [i-topology]), and\n$L\\in D^b_{ctf}(Y,A)$. By [lem-trf-weil-shriek-operator-fibres],\nitem (1), the compact global operator $F_{c,m}(\\psi')$ is conjugate to\n$F_{c,m}(\\psi)$, and the induction hypothesis for $Y_0$ gives\n$$\n\\operatorname{tr}_A\\bigl(F_{c,m}(\\psi)\\mid R\\Gamma_c(S,K)\\bigr)\n=\\sum_{y\\in Y_0(F_m)}\\operatorname{tr}_A\\bigl(\\psi'_{m,\\bar y}\\mid L_{\\bar y}\\bigr).\n$$\nBy item (2) of that lemma, $\\psi'_{m,\\bar y}$ is conjugate to the\ndegree-one compact Frobenius operator $F_{c,1}(\\psi_m|_{\\bar y})$ of the\nfibre $S_{0,y}$, considered over $F_m$ with the one-step coefficient\nmorphism $\\psi_m|_{\\bar y}$. The fibre is a closed subscheme of\n$\\mathbf A^1_{F_m}$, so Step 3 over $F_m$ gives\n$$\n\\operatorname{tr}_A\\bigl(\\psi'_{m,\\bar y}\\mid L_{\\bar y}\\bigr)\n=\\sum_{s\\in S_{0,y}(F_m)}\\operatorname{tr}_A\\bigl(\\psi_{m,\\bar s}\\mid K_{\\bar s}\\bigr),\n$$\nusing item (3) for the stalk maps. Summing over $y$ and using the\ndisjoint union of item (3) gives $\\mathrm{TF}(S_0,K,\\psi,m)$.",
-      "uses": [
-        "def-trf-weil-shriek-pushforward",
-        "d-relative-frob",
-        "i-relative-frob",
-        "i-topology",
-        "lem-trf-weil-shriek-operator-fibres"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 5: general schemes.* Let $S_0$ be separated of finite type over\n$F$, choose a finite affine open cover $U_1,\\ldots,U_N$, and put\n$W_i=U_1\\cup\\cdots\\cup U_i$, $V_i=W_i\\setminus W_{i-1}$. Each $V_i$ is\nclosed in the affine $U_i$, hence affine of finite type and a closed\nsubscheme of some $\\mathbf A^d_F$, and $V_i$ is the closed complement of\nthe open $W_{i-1}$ in $W_i$. By item (3) of\n[prop-trf-trace-additivity-open-closed], applied to\n$W_{i-1}\\subseteq W_i$ with the restricted coefficient morphisms, whose\niterates and stalk maps are the restrictions of those of $\\psi$,\n$$\n\\operatorname{tr}_A\\bigl(F_{c,m}\\mid R\\Gamma_c(W_i)\\bigr)\n=\\operatorname{tr}_A\\bigl(F_{c,m}\\mid R\\Gamma_c(W_{i-1})\\bigr)\n+\\operatorname{tr}_A\\bigl(F_{c,m}\\mid R\\Gamma_c(V_i)\\bigr).\n$$\nBy induction on $i$ and Step 4 for the $V_i$, the trace on\n$R\\Gamma_c(S,K)$ is the sum over $i$ of the point sums over\n$V_i(F_m)$. These sets partition $S_0(F_m)$, which gives\n$\\mathrm{TF}(S_0,K,\\psi,m)$ and proves the theorem.",
-      "uses": [
-        "prop-trf-trace-additivity-open-closed"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "thm-trf-coefficient-morphism-trace-formula",
+ "blueprint": {
+  "is": "thm-trf-coefficient-morphism-trace-formula",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Trace formula for Frobenius coefficient morphisms over a finite ring",
+ "statement": "Fix the global finite-field datum $p,a,q,k_0,k$, where $q=p^a$, and\nthe coefficient conventions, $A=A_{E,n}$. Let $X_0$ be a separated\nfinite-type $k_0$-scheme, put $X=X_0\\times_{k_0}k$, let\n$K\\in D^b_{ctf}(X,A)$ have an explicit etale-origin witness, and let\n$\\psi:L\\Phi^*K\\to K$ be a Frobenius coefficient morphism of\n[def-trf-frobenius-coefficient-morphism], with iterates $\\psi_m$ and\nglobal operators $F_{c,m}(\\psi)$; no invertibility of $\\psi$ is\nassumed. Assume the exceptional-adjoint admissibility hypotheses of\n[def-trf-admissibility] for the graph correspondences and fixed-point\nbase changes on a chosen compactification defined over $k_0$, as in\nthe Grothendieck–Lefschetz formula over a finite ring below (at the\nfinite stage these hold automatically, and the proof does not use\nthem). For\n$y\\in X_0(\\mathbf F_{q^m})$ with geometric point $\\bar y$ one has\n$\\Phi^m\\bar y=\\bar y$ (the fixed points of\n[thm-trf-frobenius-fixed-points]), and $\\psi_m$ induces a stalk\nendomorphism\n$\\psi_{m,\\bar y}:K_{\\bar y}\\cong(L\\Phi^{m*}K)_{\\bar y}\\to K_{\\bar y}$.\nThen for every $m\\geq1$\n\n$$\n\\boxed{\n\\operatorname{tr}_A\\bigl(F_{c,m}(\\psi)\\mid R\\Gamma_c(X,K)\\bigr)\n=\\sum_{y\\in X_0(\\mathbf F_{q^m})}\n\\operatorname{tr}_A\\bigl(\\psi_{m,\\bar y}\\mid K_{\\bar y}\\bigr)\n}\n$$\n\nin $A$, both sides being categorical traces of endomorphisms of\nperfect complexes. This is the coefficient-morphism variant of the\nfinite-coefficient trace formula; for the scheme-Frobenius map\n$\\psi=u_1$ of a strict Weil complex it gives the\nGrothendieck–Lefschetz formula over a finite ring, which is deduced from\nit below. It is the form needed\nwhen an integral lift of a field-stage Weil isomorphism is not itself\ninvertible.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-coefficient-morphism-trace-formula.md",
+  "place": "node thm-trf-coefficient-morphism-trace-formula, order 2379",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0FMG"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0B2P"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-trf-frobenius-coefficient-morphism",
+  "def-trf-admissibility",
+  "thm-trf-frobenius-fixed-points",
+  "def-weil-finite-field-fiber",
+  "def-trf-coefficient-conventions",
+  "def-weil-pbc-etale-origin-witness",
+  "def-trf-categorical-trace"
+ ],
+ "proof": [
+  {
+   "text": "By [def-trf-frobenius-coefficient-morphism], $F_{c,m}(\\psi)$ is the graph operator with proper ordinary leg $\\Phi^m$. The traces are defined: $R\\Gamma_c(X,K)$ is perfect and\n$F_{c,m}(\\psi)$ is a morphism of $D^b_{\\mathrm{fin}}(A)$ by\n[lem-trf-global-operator-perfect], and the stalks are perfect by\n[fix-lem-finite-tor-perfect].\n\nThe proof reduces to curves, as in the sketch: closed subschemes of\nthe affine line first, then affine schemes by fibring over an affine\nspace with the Weil $!$-pushforward, then general schemes by\nlocalization. No compactification of $X_0$ is used, and the\nadmissibility assumption adds no restriction: the constructible datum is available as stated in [def-trf-admissibility], including for the graph and fixed-point maps on the projective line used below.",
+   "uses": [
     "lem-trf-global-operator-perfect",
     "fix-lem-finite-tor-perfect",
+    "def-trf-admissibility",
+    "def-trf-frobenius-coefficient-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-coefficient-morphism-trace-formula.proof.md",
+    "place": "opening perfectness paragraph"
+   }
+  },
+  {
+   "text": "*Step 0: conventions.* For $r\\geq1$ the finite-field datum\n$(p,a,q,k_0,k)$ may be replaced by $(p,ar,q^r,\\mathbf F_{q^r},k)$\n([def-weil-finite-field-fiber]); every result cited below is stated for\nan arbitrary datum. For a finite field $F$ of characteristic $p$, a\nseparated finite-type $F$-scheme $S_0$ with $S=S_0\\times_Fk$, a complex\n$K\\in D^b_{ctf}(S,A)$ and a Frobenius coefficient morphism $\\psi$ on\n$K$ for the $|F|$-power scheme Frobenius $\\Phi_S$, and $m\\geq1$, write\n$\\mathrm{TF}(S_0,K,\\psi,m)$ for the identity\n$$\n\\operatorname{tr}_A\\bigl(F_{c,m}(\\psi)\\mid R\\Gamma_c(S,K)\\bigr)\n=\\sum_{s\\in S_0(F_m)}\\operatorname{tr}_A\\bigl(\\psi_{m,\\bar s}\\mid K_{\\bar s}\\bigr),\n$$\nwhere $F_m\\subseteq k$ is the extension of degree $m$ of $F$. Every\ncomplex in $D^b_{ctf}$ has an explicit étale-origin witness\n([lem-sf-proetale-constructible-origin]). We prove\n$\\mathrm{TF}$ for all such data; the theorem is the case\n$(F,S_0)=(k_0,X_0)$.",
+   "uses": [
     "def-weil-finite-field-fiber",
-    "lem-sf-proetale-constructible-origin",
-    "thm-sf-preservation-class",
-    "i-topology",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-coefficient-morphism-trace-formula.proof.md",
+    "place": "Step 0: conventions"
+   }
+  },
+  {
+   "text": "*Step 1: finite schemes.* Let $S_0$ be finite over $F$. Then $S=\\operatorname{Spec}B$ for a finite-dimensional $k$-algebra $B$. It is Noetherian because every ascending chain of ideals is an ascending chain of finite-dimensional vector subspaces. Every prime quotient is a finite-dimensional domain over $k$, hence a field (multiplication by a nonzero element is injective, hence surjective); thus $\\dim S\\leq0$. Each residue field is a finite extension of the algebraically closed field $k$, hence equals $k$: the minimal polynomial of every residue element splits over $k$ and is irreducible, so has degree one. Thus the scheme points are indexed by $S(k)$. Its underlying space is finite discrete by [lem-sc-zero-dim-noetherian-finite-discrete]. Its structure map is proper by [lem-weil-pbc-finite-proper], and [prop-weil-proper-compact-coincidence] gives $R\\Gamma_c(S,K)\\cong R\\Gamma(S,K)$.\n\nTo compute sections, choose the bounded constructible etale-origin witness of [lem-sf-proetale-constructible-origin]. The natural comparison of [lem-weil-pbc-comparison-global-cohomology] identifies its etale and pro-etale derived sections. The etale and pro-etale stalks of the witness agree by [lem-cbc-proetale-comparison-stalk]. For an etale $A$-module sheaf $M$, [lem-weil-pbc-zero-dimensional-cohomology] gives $\\Gamma(S,M)=\\prod_{\\bar s}M_{\\bar s}$ and vanishing of higher sections; this is an exact functor by [prop-weil-pbc-geometric-stalks-exact], since the product is finite. Applying this exact identity termwise to the witness gives the natural derived decomposition\n$$R\\Gamma_c(S,K)\\cong\\bigoplus_{\\bar s\\in S(k)}K_{\\bar s}.$$\nThe decomposition is the restriction-to-germs map, and is $A$-linear: restriction commutes with addition and each scalar operation. The summands are perfect by [fix-lem-finite-tor-perfect]. Put $\\Phi=\\Phi_S^m$. The underlying map of $\\Phi$ permutes $S(k)$: its inverse permutation is induced by the inverse of the $|F|^m$-power automorphism of $k$ on the maps from the finite $F$-algebra defining $S_0$ to $k$. Also $(L\\Phi^*K)_{\\bar s}=K_{\\Phi(\\bar s)}$ by the inverse-image stalk identification [lem-pur-proetale-inverse-image-stalk], applied termwise: for constant coefficient ring $A$, module pullback is the exact inverse-image functor, and the displayed additive stalk comparison commutes with each scalar operation by naturality. Consequently this termwise comparison also computes derived pullback. By\n[prop-trf-graph-operator],\n$F_{c,m}(\\psi)=R\\Gamma(S,\\psi_m)\\circ\\Phi^\\sharp$, where $\\Phi^\\sharp$ is\ninduced by the unit of $L\\Phi^*\\dashv R\\Phi_*$; on these decompositions\n$\\Phi^\\sharp$ maps the summand $K_{\\Phi(\\bar s)}$ identically onto the\nsummand $(L\\Phi^*K)_{\\bar s}$, and $R\\Gamma(S,\\psi_m)$ is the sum of\nthe stalk maps. Hence $F_{c,m}(\\psi)$ is the block matrix whose only\nnonzero blocks are $\\psi_{m,\\bar s}:K_{\\Phi(\\bar s)}\\to K_{\\bar s}$. Choosing\nbounded complexes of finite projective $A$-modules for the $K_{\\bar s}$\nand chain representatives of the blocks by [lem-pc-ring-derived-map-representative], the chain-level supertrace of\n[lem-trf-chain-supertrace] only sees the diagonal blocks, those with\n$\\Phi(\\bar s)=\\bar s$. By [thm-trf-frobenius-fixed-points] these are the\ngeometric points of $S_0(F_m)$, and there the block is the stalk map\n$\\psi_{m,\\bar s}$. This is $\\mathrm{TF}(S_0,K,\\psi,m)$.",
+   "uses": [
+    "prop-weil-proper-compact-coincidence",
+    "fix-lem-finite-tor-perfect",
     "prop-trf-graph-operator",
     "lem-trf-chain-supertrace",
     "thm-trf-frobenius-fixed-points",
+    "lem-sc-zero-dim-noetherian-finite-discrete",
+    "lem-weil-pbc-finite-proper",
+    "lem-sf-proetale-constructible-origin",
+    "lem-weil-pbc-comparison-global-cohomology",
+    "lem-weil-pbc-zero-dimensional-cohomology",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-pc-ring-derived-map-representative",
+    "lem-pur-proetale-inverse-image-stalk",
+    "lem-cbc-proetale-comparison-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-coefficient-morphism-trace-formula.proof.md",
+    "place": "Step 1: finite schemes (with explicit sections computation)"
+   }
+  },
+  {
+   "text": "*Step 2: the affine line.* Let $S_0=\\mathbf A^1_F$ and let\n$j_0:\\mathbf A^1_F\\hookrightarrow\\mathbf P^1_F$ be the compactification of\n[d-lines], with complement the rational point $\\infty$. The standard charts $D_+(T_0)=\\operatorname{Spec}F[T_1/T_0]$ and $D_+(T_1)=\\operatorname{Spec}F[T_0/T_1]$, glued along $D_+(T_0T_1)=\\operatorname{Spec}F[t,t^{-1}]$ with $t=T_1/T_0$ and $z=t^{-1}$, identify $\\mathbf P(\\{0,1\\};\\operatorname{Spec}F)$ with the glued line of [d-lines], so $\\mathbf P^1_F\\to\\operatorname{Spec}F$ is proper by [lemma-nagata-projective-space-base-change-proper]. Thus $j_0$, the open first chart of the separated finite-type $F$-scheme $\\mathbf A^1_F$, is a compactification over $F$, as [lem-trf-compactification-graph-operator] requires. Its geometric base change $\\mathbf P^1_k$ is a smooth proper curve by [lem-asd-projective-line-genus-zero]. Let $\\bar\\psi$ be the extension of $\\psi$ to\n$j_!K$ of [lem-trf-compactification-graph-operator], with iterates\n$\\bar\\psi_m=\\overline{\\psi_m}$ (item (1)). By item (3) of that lemma the\nisomorphism $C_{j,K}$ of [lem-trf-compactification-cohomology] conjugates\n$F_{c,m}(\\psi)$ into $T_{\\bar c}(\\bar\\psi_m)$ on\n$R\\Gamma(\\mathbf P^1,j_!K)$, where $\\bar c=(\\operatorname{id},\\bar\\Phi^m)$ is the\ngraph on $\\mathbf P^1$, so the traces agree by conjugacy invariance\n([prop-trf-trace-formal-laws], item (1)). On the proper curve\n$\\mathbf P^1_k$ the ordinary leg $\\bar\\Phi^m$ is finite: [lem-trf-scheme-frobenius-finite-radicial] gives finiteness of $\\bar\\Phi$, and [lem-weil-pbc-finite-composition] gives finiteness of every positive iterate. Hence it is proper by [lem-weil-pbc-finite-proper], and, by\n[thm-trf-frobenius-fixed-points], the fixed scheme is finite over $k$\nwith one reduced point component for each point of\n$\\mathbf P^1_F(F_m)$. On $\\mathbf P^1_k$, [prop-weil-proper-compact-coincidence] canonically identifies $R\\Gamma_c(\\mathbf P^1,j_!K)$ with $R\\Gamma(\\mathbf P^1,j_!K)$, naturally in the coefficient maps. The Lefschetz–Verdier comparison\n[thm-trf-lefschetz-verdier], which assembles the proper global\ncomparison and the decomposition into local terms, gives\n$$\n\\operatorname{tr}_A\\bigl(T_{\\bar c}(\\bar\\psi_m)\\mid R\\Gamma(\\mathbf P^1,j_!K)\\bigr)\n=\\sum_{y\\in\\mathbf P^1_F(F_m)}\\operatorname{LT}_y(\\bar\\psi_m).\n$$\nBy the coefficient-morphism form of [thm-trf-frobenius-local-term] on the\nsmooth curve $\\mathbf P^1$ (proved there through the curve pieces),\n$\\operatorname{LT}_y(\\bar\\psi_m)=\\operatorname{tr}_A(\\bar\\psi_{m,\\bar y}\\mid(j_!K)_{\\bar y})$.\nBy [lem-trf-compactification-graph-operator], item (2), the stalk at\n$\\infty$ is zero, so its local term is zero, and for\n$y\\in\\mathbf A^1_F(F_m)$ one has $(j_!K)_{\\bar y}=K_{\\bar y}$ and\n$\\bar\\psi_{m,\\bar y}=\\psi_{m,\\bar y}$. This is\n$\\mathrm{TF}(\\mathbf A^1_F,K,\\psi,m)$.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-trf-scheme-frobenius-finite-radicial",
+    "lem-weil-pbc-finite-composition",
+    "d-lines",
     "lem-trf-compactification-graph-operator",
     "lem-trf-compactification-cohomology",
     "prop-trf-trace-formal-laws",
+    "thm-trf-frobenius-fixed-points",
     "thm-trf-lefschetz-verdier",
     "thm-trf-frobenius-local-term",
-    "def-trf-weil-shriek-pushforward",
-    "d-relative-frob",
-    "i-relative-frob",
-    "lem-trf-weil-shriek-operator-fibres",
-    "prop-trf-trace-additivity-open-closed"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-coefficient-morphism-trace-formula.md",
-    "place": "## Proof"
+    "lem-asd-projective-line-genus-zero",
+    "lem-weil-pbc-finite-proper",
+    "prop-weil-proper-compact-coincidence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-coefficient-morphism-trace-formula.proof.md",
+    "place": "Step 2: affine line"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "padded_uses",
-    "cites_remark",
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2379,
-  "blueprint_uses": [
-    "d-lines",
-    "d-relative-frob",
-    "def-trf-admissibility",
-    "def-trf-categorical-trace",
-    "def-trf-coefficient-conventions",
-    "def-trf-frobenius-coefficient-morphism",
+  {
+   "text": "*Step 3: closed subschemes of the affine line.* A closed subscheme of\n$\\mathbf A^1_F$ is $\\operatorname{Spec}F[t]/I$. If $I=0$ it is the line, by Step 2. Otherwise choose a nonzero polynomial $g\\in I$ of degree $d$. Dividing by its nonzero leading coefficient makes $g$ monic. Polynomial division shows that the classes of $1,t,\\ldots,t^{d-1}$ span $F[t]/(g)$ and hence its quotient $F[t]/I$. If $d=0$, the quotient is zero and the scheme is empty. Thus the quotient is finite-dimensional over $F$, and Step 1 applies. This includes\nnonreduced schemes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-coefficient-morphism-trace-formula.proof.md",
+    "place": "Step 3: closed subschemes of the affine line"
+   }
+  },
+  {
+   "text": "*Step 4: affine schemes.* We prove $\\mathrm{TF}$ for all closed\nsubschemes $S_0\\subseteq\\mathbf A^d_F$, by induction on $d$,\nsimultaneously for all finite fields $F$, all $K$, all $\\psi$ and all\n$m$. The cases $d\\leq1$ are Steps 1 and 3. Let $d\\geq2$ and let\n$f_0:S_0\\to Y_0=\\mathbf A^{d-1}_F$ forget the last coordinate, a\nseparated morphism. Let $(L,\\psi')=(Rf_!K,Rf_!\\psi\\circ\\theta_{f,1})$\nbe the Weil $!$-pushforward of [def-trf-weil-shriek-pushforward]; its\ncomparison $\\theta_{f,1}$ is built from the relative Frobenius\nfactorization [d-relative-frob] and is invertible because $r_1$ is a\nfinite universal homeomorphism ([i-relative-frob], [i-topology]), and\n$L\\in D^b_{ctf}(Y,A)$ by clause (iv) of\n[thm-sf-ctf-stability]. By\n[lem-trf-weil-shriek-operator-fibres],\nitem (1), the compact global operator $F_{c,m}(\\psi')$ is conjugate to\n$F_{c,m}(\\psi)$, so conjugacy invariance of [prop-trf-trace-formal-laws] and the induction hypothesis for $Y_0$ give\n$$\n\\operatorname{tr}_A\\bigl(F_{c,m}(\\psi)\\mid R\\Gamma_c(S,K)\\bigr)\n=\\sum_{y\\in Y_0(F_m)}\\operatorname{tr}_A\\bigl(\\psi'_{m,\\bar y}\\mid L_{\\bar y}\\bigr).\n$$\nBy item (2) of that lemma, $\\psi'_{m,\\bar y}$ is conjugate to the\ndegree-one compact Frobenius operator $F_{c,1}(\\psi_m|_{\\bar y})$ of the\nfibre $S_{0,y}$, considered over $F_m$ with the one-step coefficient\nmorphism $\\psi_m|_{\\bar y}$. The fibre is a closed subscheme of\n$\\mathbf A^1_{F_m}$. Its geometric fibre inclusion $i_{\\bar y}:S_{\\bar y}\\to S$ is separated of finite type between separated finite-type $k$-schemes: $\\bar y$ is a $k$-rational closed point of $Y$, and the inclusion is its base change. Thus $Li_{\\bar y}^*K\\in D^b_{ctf}(S_{\\bar y},A)$ by clause (i) of [thm-sf-ctf-stability]. Step 3 over $F_m$ therefore gives\n$$\n\\operatorname{tr}_A\\bigl(\\psi'_{m,\\bar y}\\mid L_{\\bar y}\\bigr)\n=\\sum_{s\\in S_{0,y}(F_m)}\\operatorname{tr}_A\\bigl(\\psi_{m,\\bar s}\\mid K_{\\bar s}\\bigr),\n$$\nusing item (3) for the stalk maps. Summing over $y$ and using the\ndisjoint union of item (3) gives $\\mathrm{TF}(S_0,K,\\psi,m)$.",
+   "uses": [
     "def-trf-weil-shriek-pushforward",
-    "def-weil-finite-field-fiber",
-    "def-weil-pbc-etale-origin-witness",
-    "def-weil-scheme-morphism-properties",
-    "fix-lem-finite-tor-perfect",
+    "d-relative-frob",
     "i-relative-frob",
     "i-topology",
-    "lem-sf-proetale-constructible-origin",
-    "lem-trf-chain-supertrace",
-    "lem-trf-compactification-cohomology",
-    "lem-trf-compactification-graph-operator",
-    "lem-trf-global-operator-perfect",
     "lem-trf-weil-shriek-operator-fibres",
-    "prop-trf-graph-operator",
-    "prop-trf-trace-additivity-open-closed",
-    "prop-trf-trace-formal-laws",
-    "rem-ptr-trf-admissibility-12",
-    "thm-sf-preservation-class",
-    "thm-trf-frobenius-fixed-points",
-    "thm-trf-frobenius-local-term",
-    "thm-trf-lefschetz-verdier"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "thm-sf-ctf-stability",
+    "prop-trf-trace-formal-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-coefficient-morphism-trace-formula.proof.md",
+    "place": "Step 4: affine induction"
+   }
   },
-  "chapter": "sec-trace-formula",
-  "unit": "sk-thm-trace-formula",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Fix the global finite-field datum $p,a,q,k_0,k$, where $q=p^a$, and\nthe coefficient conventions, $A=A_{E,n}$. Let $X_0$ be a separated\nfinite-type $k_0$-scheme, put $X=X_0\\times_{k_0}k$, let\n$K\\in D^b_{ctf}(X,A)$ have an explicit etale-origin witness, and let\n$\\psi:L\\Phi^*K\\to K$ be a Frobenius coefficient morphism of\n[def-trf-frobenius-coefficient-morphism], with iterates $\\psi_m$ and\nglobal operators $F_{c,m}(\\psi)$; no invertibility of $\\psi$ is\nassumed. Assume the exceptional-adjoint admissibility hypotheses of\n[def-trf-admissibility] for the graph correspondences and fixed-point\nbase changes on a chosen compactification defined over $k_0$, as in\nthe Grothendieck–Lefschetz formula over a finite ring below (at the\nfinite stage these hold automatically, and the proof does not use\nthem). For\n$y\\in X_0(\\mathbf F_{q^m})$ with geometric point $\\bar y$ one has\n$\\Phi^m\\bar y=\\bar y$ (the fixed points of\n[thm-trf-frobenius-fixed-points]), and $\\psi_m$ induces a stalk\nendomorphism\n$\\psi_{m,\\bar y}:K_{\\bar y}\\cong(L\\Phi^{m*}K)_{\\bar y}\\to K_{\\bar y}$.\nThen for every $m\\geq1$\n\n$$\n\\boxed{\n\\operatorname{tr}_A\\bigl(F_{c,m}(\\psi)\\mid R\\Gamma_c(X,K)\\bigr)\n=\\sum_{y\\in X_0(\\mathbf F_{q^m})}\n\\operatorname{tr}_A\\bigl(\\psi_{m,\\bar y}\\mid K_{\\bar y}\\bigr)\n}\n$$\n\nin $A$, both sides being categorical traces of endomorphisms of\nperfect complexes. This is the coefficient-morphism variant of the\nfinite-coefficient trace formula; for the scheme-Frobenius map\n$\\psi=u_1$ of a strict Weil complex it gives the\nGrothendieck–Lefschetz formula over a finite ring.",
-    "proof": [
-      {
-        "text": "The traces are defined: $R\\Gamma_c(X,K)$ is perfect and\n$F_{c,m}(\\psi)$ is a morphism of $D^b_{\\mathrm{fin}}(A)$ by\n[lem-trf-global-operator-perfect], and the stalks are perfect by\n[fix-lem-finite-tor-perfect].\n\nThe proof reduces to curves, as in the sketch: closed subschemes of\nthe affine line first, then affine schemes by fibring over an affine\nspace with the Weil $!$-pushforward, then general schemes by\nlocalization. No compactification of $X_0$ is used, and the\nadmissibility hypothesis of the statement is not needed.",
-        "uses": [
-          "lem-trf-global-operator-perfect",
-          "fix-lem-finite-tor-perfect"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 0: conventions.* For $r\\geq1$ the finite-field datum\n$(p,a,q,k_0,k)$ may be replaced by $(p,ar,q^r,\\mathbf F_{q^r},k)$\n([def-weil-finite-field-fiber]); every result cited below is stated for\nan arbitrary datum. For a finite field $F$ of characteristic $p$, a\nseparated finite-type $F$-scheme $S_0$ with $S=S_0\\times_Fk$, a complex\n$K\\in D^b_{ctf}(S,A)$ and a Frobenius coefficient morphism $\\psi$ on\n$K$ for the $|F|$-power scheme Frobenius $\\Phi_S$, and $m\\geq1$, write\n$\\mathrm{TF}(S_0,K,\\psi,m)$ for the identity\n$$\n\\operatorname{tr}_A\\bigl(F_{c,m}(\\psi)\\mid R\\Gamma_c(S,K)\\bigr)\n=\\sum_{s\\in S_0(F_m)}\\operatorname{tr}_A\\bigl(\\psi_{m,\\bar s}\\mid K_{\\bar s}\\bigr),\n$$\nwhere $F_m\\subseteq k$ is the extension of degree $m$ of $F$. Every\ncomplex in $D^b_{ctf}$ has an explicit étale-origin witness\n([lem-sf-proetale-constructible-origin]), and every separated\nfinite-type morphism between separated finite-type $k$-schemes is\nexceptionally admissible at the finite stage\n([rem-ptr-trf-admissibility-12], [thm-sf-preservation-class]). We prove\n$\\mathrm{TF}$ for all such data; the theorem is the case\n$(F,S_0)=(k_0,X_0)$.",
-        "uses": [
-          "def-weil-finite-field-fiber",
-          "lem-sf-proetale-constructible-origin",
-          "thm-sf-preservation-class"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 1: finite schemes.* Let $S_0$ be finite over $F$. Then $S$ is\nfinite over $k$, hence a finite disjoint union\n$S=\\coprod_{\\bar s\\in S(k)}S_{\\bar s}$ of spectra of local Artinian\n$k$-algebras with residue field $k$. The inclusion\n$\\iota_{\\bar s}:\\operatorname{Spec}k\\to S_{\\bar s}$ is a finite\nuniversal homeomorphism, so by [i-topology]\n$K|_{S_{\\bar s}}\\simeq R\\iota_{\\bar s*}K_{\\bar s}$ and\n$R\\Gamma_c(S,K)=R\\Gamma(S,K)\\simeq\\bigoplus_{\\bar s}K_{\\bar s}$, a finite\nsum of perfect complexes ([fix-lem-finite-tor-perfect]). Put\n$\\Phi=\\Phi_S^m$; it is a universal homeomorphism, so it permutes the\npoints $\\bar s$, and $(L\\Phi^*K)_{\\bar s}=K_{\\Phi(\\bar s)}$. By\n[prop-trf-graph-operator],\n$F_{c,m}(\\psi)=R\\Gamma(S,\\psi_m)\\circ\\Phi^\\sharp$, where $\\Phi^\\sharp$ is\ninduced by the unit of $L\\Phi^*\\dashv R\\Phi_*$; on these decompositions\n$\\Phi^\\sharp$ maps the summand $K_{\\Phi(\\bar s)}$ identically onto the\nsummand $(L\\Phi^*K)_{\\bar s}$, and $R\\Gamma(S,\\psi_m)$ is the sum of\nthe stalk maps. Hence $F_{c,m}(\\psi)$ is the block matrix whose only\nnonzero blocks are $\\psi_{m,\\bar s}:K_{\\Phi(\\bar s)}\\to K_{\\bar s}$. Choosing\nbounded complexes of finite projective $A$-modules for the $K_{\\bar s}$\nand chain representatives of the blocks, the chain-level supertrace of\n[lem-trf-chain-supertrace] only sees the diagonal blocks, those with\n$\\Phi(\\bar s)=\\bar s$. By [thm-trf-frobenius-fixed-points] these are the\ngeometric points of $S_0(F_m)$, and there the block is the stalk map\n$\\psi_{m,\\bar s}$. This is $\\mathrm{TF}(S_0,K,\\psi,m)$.",
-        "uses": [
-          "i-topology",
-          "fix-lem-finite-tor-perfect",
-          "prop-trf-graph-operator",
-          "lem-trf-chain-supertrace",
-          "thm-trf-frobenius-fixed-points"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 2: the affine line.* Let $S_0=\\mathbf A^1_F$ and let\n$j_0:\\mathbf A^1_F\\hookrightarrow\\mathbf P^1_F$ be the compactification of\n[d-lines], proper ([Stacks, Tag 0FMG](https://stacks.math.columbia.edu/tag/0FMG))\nand smooth of pure dimension one\n([Stacks, Tag 0B2P](https://stacks.math.columbia.edu/tag/0B2P)), with complement\nthe rational point $\\infty$. Let $\\bar\\psi$ be the extension of $\\psi$ to\n$j_!K$ of [lem-trf-compactification-graph-operator], with iterates\n$\\bar\\psi_m=\\overline{\\psi_m}$ (item (1)). By item (3) of that lemma the\nisomorphism $C_{j,K}$ of [lem-trf-compactification-cohomology] conjugates\n$F_{c,m}(\\psi)$ into $T_{\\bar c}(\\bar\\psi_m)$ on\n$R\\Gamma(\\mathbf P^1,j_!K)$, where $\\bar c=(\\operatorname{id},\\bar\\Phi^m)$ is the\ngraph on $\\mathbf P^1$, so the traces agree by conjugacy invariance\n([prop-trf-trace-formal-laws], item (1)). On the proper curve\n$\\mathbf P^1$ the ordinary leg $\\bar\\Phi^m$ is finite and, by\n[thm-trf-frobenius-fixed-points], the fixed scheme is finite over $k$\nwith one reduced point component for each point of\n$\\mathbf P^1_F(F_m)$. The Lefschetz–Verdier comparison\n[thm-trf-lefschetz-verdier], which assembles the proper global\ncomparison and the decomposition into local terms, gives\n$$\n\\operatorname{tr}_A\\bigl(T_{\\bar c}(\\bar\\psi_m)\\mid R\\Gamma(\\mathbf P^1,j_!K)\\bigr)\n=\\sum_{y\\in\\mathbf P^1_F(F_m)}\\operatorname{LT}_y(\\bar\\psi_m).\n$$\nBy the coefficient-morphism form of [thm-trf-frobenius-local-term] on the\nsmooth curve $\\mathbf P^1$ (proved there through the curve pieces),\n$\\operatorname{LT}_y(\\bar\\psi_m)=\\operatorname{tr}_A(\\bar\\psi_{m,\\bar y}\\mid(j_!K)_{\\bar y})$.\nBy [lem-trf-compactification-graph-operator], item (2), the stalk at\n$\\infty$ is zero, so its local term is zero, and for\n$y\\in\\mathbf A^1_F(F_m)$ one has $(j_!K)_{\\bar y}=K_{\\bar y}$ and\n$\\bar\\psi_{m,\\bar y}=\\psi_{m,\\bar y}$. This is\n$\\mathrm{TF}(\\mathbf A^1_F,K,\\psi,m)$.",
-        "uses": [
-          "d-lines",
-          "lem-trf-compactification-graph-operator",
-          "lem-trf-compactification-cohomology",
-          "prop-trf-trace-formal-laws",
-          "thm-trf-frobenius-fixed-points",
-          "thm-trf-lefschetz-verdier",
-          "thm-trf-frobenius-local-term"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 3: closed subschemes of the affine line.* A closed subscheme of\n$\\mathbf A^1_F$ is $\\operatorname{Spec}F[t]/I$. If $I=0$ it is the line,\nStep 2. Otherwise a nonzero polynomial in $I$ makes $F[t]/I$\nfinite-dimensional over $F$, and Step 1 applies. This includes\nnonreduced schemes.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*Step 4: affine schemes.* We prove $\\mathrm{TF}$ for all closed\nsubschemes $S_0\\subseteq\\mathbf A^d_F$, by induction on $d$,\nsimultaneously for all finite fields $F$, all $K$, all $\\psi$ and all\n$m$. The cases $d\\leq1$ are Steps 1 and 3. Let $d\\geq2$ and let\n$f_0:S_0\\to Y_0=\\mathbf A^{d-1}_F$ forget the last coordinate, a\nseparated morphism. Let $(L,\\psi')=(Rf_!K,Rf_!\\psi\\circ\\theta_{f,1})$\nbe the Weil $!$-pushforward of [def-trf-weil-shriek-pushforward]; its\ncomparison $\\theta_{f,1}$ is built from the relative Frobenius\nfactorization [d-relative-frob] and is invertible because $r_1$ is a\nfinite universal homeomorphism ([i-relative-frob], [i-topology]), and\n$L\\in D^b_{ctf}(Y,A)$. By [lem-trf-weil-shriek-operator-fibres],\nitem (1), the compact global operator $F_{c,m}(\\psi')$ is conjugate to\n$F_{c,m}(\\psi)$, and the induction hypothesis for $Y_0$ gives\n$$\n\\operatorname{tr}_A\\bigl(F_{c,m}(\\psi)\\mid R\\Gamma_c(S,K)\\bigr)\n=\\sum_{y\\in Y_0(F_m)}\\operatorname{tr}_A\\bigl(\\psi'_{m,\\bar y}\\mid L_{\\bar y}\\bigr).\n$$\nBy item (2) of that lemma, $\\psi'_{m,\\bar y}$ is conjugate to the\ndegree-one compact Frobenius operator $F_{c,1}(\\psi_m|_{\\bar y})$ of the\nfibre $S_{0,y}$, considered over $F_m$ with the one-step coefficient\nmorphism $\\psi_m|_{\\bar y}$. The fibre is a closed subscheme of\n$\\mathbf A^1_{F_m}$, so Step 3 over $F_m$ gives\n$$\n\\operatorname{tr}_A\\bigl(\\psi'_{m,\\bar y}\\mid L_{\\bar y}\\bigr)\n=\\sum_{s\\in S_{0,y}(F_m)}\\operatorname{tr}_A\\bigl(\\psi_{m,\\bar s}\\mid K_{\\bar s}\\bigr),\n$$\nusing item (3) for the stalk maps. Summing over $y$ and using the\ndisjoint union of item (3) gives $\\mathrm{TF}(S_0,K,\\psi,m)$.",
-        "uses": [
-          "def-trf-weil-shriek-pushforward",
-          "d-relative-frob",
-          "i-relative-frob",
-          "i-topology",
-          "lem-trf-weil-shriek-operator-fibres"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 5: general schemes.* Let $S_0$ be separated of finite type over\n$F$, choose a finite affine open cover $U_1,\\ldots,U_N$, and put\n$W_i=U_1\\cup\\cdots\\cup U_i$, $V_i=W_i\\setminus W_{i-1}$. Each $V_i$ is\nclosed in the affine $U_i$, hence affine of finite type and a closed\nsubscheme of some $\\mathbf A^d_F$, and $V_i$ is the closed complement of\nthe open $W_{i-1}$ in $W_i$. By item (3) of\n[prop-trf-trace-additivity-open-closed], applied to\n$W_{i-1}\\subseteq W_i$ with the restricted coefficient morphisms, whose\niterates and stalk maps are the restrictions of those of $\\psi$,\n$$\n\\operatorname{tr}_A\\bigl(F_{c,m}\\mid R\\Gamma_c(W_i)\\bigr)\n=\\operatorname{tr}_A\\bigl(F_{c,m}\\mid R\\Gamma_c(W_{i-1})\\bigr)\n+\\operatorname{tr}_A\\bigl(F_{c,m}\\mid R\\Gamma_c(V_i)\\bigr).\n$$\nBy induction on $i$ and Step 4 for the $V_i$, the trace on\n$R\\Gamma_c(S,K)$ is the sum over $i$ of the point sums over\n$V_i(F_m)$. These sets partition $S_0(F_m)$, which gives\n$\\mathrm{TF}(S_0,K,\\psi,m)$ and proves the theorem.",
-        "uses": [
-          "prop-trf-trace-additivity-open-closed"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "*Step 5: general schemes.* Let $S_0$ be separated of finite type over\n$F$. For the empty scheme the cohomology and the point sum are zero. Otherwise choose a finite affine open cover $U_1,\\ldots,U_N$, and put\n$W_i=U_1\\cup\\cdots\\cup U_i$, $V_i=W_i\\setminus W_{i-1}$, with the reduced induced closed structure on each complement. Each $V_i$ is\nclosed in the affine $U_i$, hence affine of finite type and a closed\nsubscheme of some $\\mathbf A^d_F$, and $V_i$ is the closed complement of\nthe open $W_{i-1}$ in $W_i$. By item (3) of\n[prop-trf-trace-additivity-open-closed], applied to\n$W_{i-1}\\subseteq W_i$ with $W_0=\\varnothing$ and with the restricted complexes, which remain in $D^b_{ctf}$ by [lem-sf-pullback-tor-amplitude], and coefficient morphisms, whose\niterates and stalk maps are the restrictions of those of $\\psi$,\n$$\n\\operatorname{tr}_A\\bigl(F_{c,m}\\mid R\\Gamma_c(W_i)\\bigr)\n=\\operatorname{tr}_A\\bigl(F_{c,m}\\mid R\\Gamma_c(W_{i-1})\\bigr)\n+\\operatorname{tr}_A\\bigl(F_{c,m}\\mid R\\Gamma_c(V_i)\\bigr).\n$$\nBy induction on $i$ and Step 4 for the $V_i$, the trace on\n$R\\Gamma_c(S,K)$ is the sum over $i$ of the point sums over\n$V_i(F_m)$. These sets partition $S_0(F_m)$, which gives\n$\\mathrm{TF}(S_0,K,\\psi,m)$ and proves the theorem.",
+   "uses": [
+    "prop-trf-trace-additivity-open-closed",
+    "lem-sf-pullback-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-coefficient-morphism-trace-formula.proof.md",
+    "place": "Step 5: localization"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-trf-global-operator-perfect",
+  "fix-lem-finite-tor-perfect",
+  "def-trf-admissibility",
+  "def-trf-frobenius-coefficient-morphism",
+  "def-weil-finite-field-fiber",
+  "lem-sf-proetale-constructible-origin",
+  "prop-weil-proper-compact-coincidence",
+  "prop-trf-graph-operator",
+  "lem-trf-chain-supertrace",
+  "thm-trf-frobenius-fixed-points",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-comparison-global-cohomology",
+  "lem-weil-pbc-zero-dimensional-cohomology",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-pc-ring-derived-map-representative",
+  "lem-pur-proetale-inverse-image-stalk",
+  "lem-cbc-proetale-comparison-stalk",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-trf-scheme-frobenius-finite-radicial",
+  "lem-weil-pbc-finite-composition",
+  "d-lines",
+  "lem-trf-compactification-graph-operator",
+  "lem-trf-compactification-cohomology",
+  "prop-trf-trace-formal-laws",
+  "thm-trf-lefschetz-verdier",
+  "thm-trf-frobenius-local-term",
+  "lem-asd-projective-line-genus-zero",
+  "def-trf-weil-shriek-pushforward",
+  "d-relative-frob",
+  "i-relative-frob",
+  "i-topology",
+  "lem-trf-weil-shriek-operator-fibres",
+  "thm-sf-ctf-stability",
+  "prop-trf-trace-additivity-open-closed",
+  "lem-sf-pullback-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-coefficient-morphism-trace-formula.proof.md",
+  "place": "Opening paragraph and Steps 0–5; expanded finite-scheme cohomology calculation follows the cited existing zero-dimensional and comparison statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Lefschetz trace formula for arbitrary Frobenius morphisms on perfect constructible sheaf complexes",
+   "results": "WittVector.StandardOneDimIsocrystal.frobenius_apply, frobeniusEquiv_apply, iterateFrobeniusEquiv_add, WittVector.IsocrystalEquiv.frob_equivariant, frobenius_comp_frobeniusEquiv_symm, Perfection.coeff_iterate_frobenius, Perfection.lift_apply_apply_coe, Perfection.coeff_frobenius; none states the sheaf-cohomology Frobenius trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lefschetz trace formula for constructible sheaves over finite fields",
+   "results": "CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstant.functor_map_val, AlgebraicGeometry.Scheme.Hom.isConstructible_image, CompHausLike.LocallyConstantModule.functor_map_val, CompHausLike.LocallyConstantModule.functor_obj_val, CompHausLike.LocallyConstant.incl_comap, CompHausLike.LocallyConstant.functor, FiniteField.algebraMap_trace_eq_sum_pow; none states the sheaf-cohomology Frobenius trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "trace of Frobenius coefficient morphism on compactly supported cohomology equals sum of stalk traces",
+   "results": "FiniteField.algebraMap_trace_eq_sum_pow, Algebra.trace_quotient_mk, trace_quotient_eq_trace_localization_quotient, trace_eq_sum_automorphisms, LieModule.trace_comp_toEnd_genWeightSpace_eq, SlashInvariantForm.coe_trace, Algebra.trace_comp_trace, Algebra.trace_localization; none states the sheaf-cohomology Frobenius trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace",
+   "results": "LinearMap.trace, LinearMap.trace_id, LinearMap.trace_one, LinearMap.trace_lie, LinearMap.isNilpotent_trace_of_isNilpotent, LinearMap.trace_smulRight, LinearMap.trace_mul_comm, Matrix.trace_toLin_eq; none states the sheaf-cohomology Frobenius trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Lefschetz|stalkFrobenius|globalOperator",
+   "results": "Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/FieldTheory/AxGrothendieck.lean; none states the sheaf-cohomology Frobenius trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "categorical trace compact support derived category etale sheaf finite field",
+   "results": "DerivedCategory.IsGE, DerivedCategory.IsLE, Condensed.finFree, DerivedCategory.TStructure.t, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; none states a compact-support sheaf trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck Lefschetz formula trace endomorphism etale cohomology finite ring",
+   "results": "FiniteField.trace_pow_card; FiniteField.algebraMap_trace_eq_sum_pow; Algebra.traceMatrix_localizationLocalization; Algebra.trace_localization; trace_quotient_eq_trace_localization_quotient; LieModule.trace_comp_toEnd_genWeightSpace_eq; FiniteField.trace_to_zmod_nondegenerate; groupCohomology.exists_mul_galRestrict_of_norm_eq_one. These concern matrix/algebra traces or Hilbert 90, not the compact-support sheaf trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "padded_uses",
+  "cites_remark",
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2379,
+ "blueprint_uses": [
+  "d-lines",
+  "d-relative-frob",
+  "def-trf-admissibility",
+  "def-trf-categorical-trace",
+  "def-trf-coefficient-conventions",
+  "def-trf-frobenius-coefficient-morphism",
+  "def-trf-weil-shriek-pushforward",
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-scheme-morphism-properties",
+  "fix-lem-finite-tor-perfect",
+  "i-relative-frob",
+  "i-topology",
+  "lem-sf-proetale-constructible-origin",
+  "lem-trf-chain-supertrace",
+  "lem-trf-compactification-cohomology",
+  "lem-trf-compactification-graph-operator",
+  "lem-trf-global-operator-perfect",
+  "lem-trf-weil-shriek-operator-fibres",
+  "prop-trf-graph-operator",
+  "prop-trf-trace-additivity-open-closed",
+  "prop-trf-trace-formal-laws",
+  "rem-ptr-trf-admissibility-12",
+  "thm-sf-preservation-class",
+  "thm-trf-frobenius-fixed-points",
+  "thm-trf-frobenius-local-term",
+  "thm-trf-lefschetz-verdier"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-formula",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Fix the global finite-field datum $p,a,q,k_0,k$, where $q=p^a$, and\nthe coefficient conventions, $A=A_{E,n}$. Let $X_0$ be a separated\nfinite-type $k_0$-scheme, put $X=X_0\\times_{k_0}k$, let\n$K\\in D^b_{ctf}(X,A)$ have an explicit etale-origin witness, and let\n$\\psi:L\\Phi^*K\\to K$ be a Frobenius coefficient morphism of\n[def-trf-frobenius-coefficient-morphism], with iterates $\\psi_m$ and\nglobal operators $F_{c,m}(\\psi)$; no invertibility of $\\psi$ is\nassumed. Assume the exceptional-adjoint admissibility hypotheses of\n[def-trf-admissibility] for the graph correspondences and fixed-point\nbase changes on a chosen compactification defined over $k_0$, as in\nthe Grothendieck–Lefschetz formula over a finite ring below (at the\nfinite stage these hold automatically, and the proof does not use\nthem). For\n$y\\in X_0(\\mathbf F_{q^m})$ with geometric point $\\bar y$ one has\n$\\Phi^m\\bar y=\\bar y$ (the fixed points of\n[thm-trf-frobenius-fixed-points]), and $\\psi_m$ induces a stalk\nendomorphism\n$\\psi_{m,\\bar y}:K_{\\bar y}\\cong(L\\Phi^{m*}K)_{\\bar y}\\to K_{\\bar y}$.\nThen for every $m\\geq1$\n\n$$\n\\boxed{\n\\operatorname{tr}_A\\bigl(F_{c,m}(\\psi)\\mid R\\Gamma_c(X,K)\\bigr)\n=\\sum_{y\\in X_0(\\mathbf F_{q^m})}\n\\operatorname{tr}_A\\bigl(\\psi_{m,\\bar y}\\mid K_{\\bar y}\\bigr)\n}\n$$\n\nin $A$, both sides being categorical traces of endomorphisms of\nperfect complexes. This is the coefficient-morphism variant of the\nfinite-coefficient trace formula; for the scheme-Frobenius map\n$\\psi=u_1$ of a strict Weil complex it gives the\nGrothendieck–Lefschetz formula over a finite ring.",
+  "proof": [
+   {
+    "text": "The traces are defined: $R\\Gamma_c(X,K)$ is perfect and\n$F_{c,m}(\\psi)$ is a morphism of $D^b_{\\mathrm{fin}}(A)$ by\n[lem-trf-global-operator-perfect], and the stalks are perfect by\n[fix-lem-finite-tor-perfect].\n\nThe proof reduces to curves, as in the sketch: closed subschemes of\nthe affine line first, then affine schemes by fibring over an affine\nspace with the Weil $!$-pushforward, then general schemes by\nlocalization. No compactification of $X_0$ is used, and the\nadmissibility hypothesis of the statement is not needed.",
+    "uses": [
+     "lem-trf-global-operator-perfect",
+     "fix-lem-finite-tor-perfect"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 0: conventions.* For $r\\geq1$ the finite-field datum\n$(p,a,q,k_0,k)$ may be replaced by $(p,ar,q^r,\\mathbf F_{q^r},k)$\n([def-weil-finite-field-fiber]); every result cited below is stated for\nan arbitrary datum. For a finite field $F$ of characteristic $p$, a\nseparated finite-type $F$-scheme $S_0$ with $S=S_0\\times_Fk$, a complex\n$K\\in D^b_{ctf}(S,A)$ and a Frobenius coefficient morphism $\\psi$ on\n$K$ for the $|F|$-power scheme Frobenius $\\Phi_S$, and $m\\geq1$, write\n$\\mathrm{TF}(S_0,K,\\psi,m)$ for the identity\n$$\n\\operatorname{tr}_A\\bigl(F_{c,m}(\\psi)\\mid R\\Gamma_c(S,K)\\bigr)\n=\\sum_{s\\in S_0(F_m)}\\operatorname{tr}_A\\bigl(\\psi_{m,\\bar s}\\mid K_{\\bar s}\\bigr),\n$$\nwhere $F_m\\subseteq k$ is the extension of degree $m$ of $F$. Every\ncomplex in $D^b_{ctf}$ has an explicit étale-origin witness\n([lem-sf-proetale-constructible-origin]), and every separated\nfinite-type morphism between separated finite-type $k$-schemes is\nexceptionally admissible at the finite stage\n([rem-ptr-trf-admissibility-12], [thm-sf-preservation-class]). We prove\n$\\mathrm{TF}$ for all such data; the theorem is the case\n$(F,S_0)=(k_0,X_0)$.",
+    "uses": [
+     "def-weil-finite-field-fiber",
+     "lem-sf-proetale-constructible-origin",
+     "thm-sf-preservation-class"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 1: finite schemes.* Let $S_0$ be finite over $F$. Then $S$ is\nfinite over $k$, hence a finite disjoint union\n$S=\\coprod_{\\bar s\\in S(k)}S_{\\bar s}$ of spectra of local Artinian\n$k$-algebras with residue field $k$. The inclusion\n$\\iota_{\\bar s}:\\operatorname{Spec}k\\to S_{\\bar s}$ is a finite\nuniversal homeomorphism, so by [i-topology]\n$K|_{S_{\\bar s}}\\simeq R\\iota_{\\bar s*}K_{\\bar s}$ and\n$R\\Gamma_c(S,K)=R\\Gamma(S,K)\\simeq\\bigoplus_{\\bar s}K_{\\bar s}$, a finite\nsum of perfect complexes ([fix-lem-finite-tor-perfect]). Put\n$\\Phi=\\Phi_S^m$; it is a universal homeomorphism, so it permutes the\npoints $\\bar s$, and $(L\\Phi^*K)_{\\bar s}=K_{\\Phi(\\bar s)}$. By\n[prop-trf-graph-operator],\n$F_{c,m}(\\psi)=R\\Gamma(S,\\psi_m)\\circ\\Phi^\\sharp$, where $\\Phi^\\sharp$ is\ninduced by the unit of $L\\Phi^*\\dashv R\\Phi_*$; on these decompositions\n$\\Phi^\\sharp$ maps the summand $K_{\\Phi(\\bar s)}$ identically onto the\nsummand $(L\\Phi^*K)_{\\bar s}$, and $R\\Gamma(S,\\psi_m)$ is the sum of\nthe stalk maps. Hence $F_{c,m}(\\psi)$ is the block matrix whose only\nnonzero blocks are $\\psi_{m,\\bar s}:K_{\\Phi(\\bar s)}\\to K_{\\bar s}$. Choosing\nbounded complexes of finite projective $A$-modules for the $K_{\\bar s}$\nand chain representatives of the blocks, the chain-level supertrace of\n[lem-trf-chain-supertrace] only sees the diagonal blocks, those with\n$\\Phi(\\bar s)=\\bar s$. By [thm-trf-frobenius-fixed-points] these are the\ngeometric points of $S_0(F_m)$, and there the block is the stalk map\n$\\psi_{m,\\bar s}$. This is $\\mathrm{TF}(S_0,K,\\psi,m)$.",
+    "uses": [
+     "i-topology",
+     "fix-lem-finite-tor-perfect",
+     "prop-trf-graph-operator",
+     "lem-trf-chain-supertrace",
+     "thm-trf-frobenius-fixed-points"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 2: the affine line.* Let $S_0=\\mathbf A^1_F$ and let\n$j_0:\\mathbf A^1_F\\hookrightarrow\\mathbf P^1_F$ be the compactification of\n[d-lines], proper ([Stacks, Tag 0FMG](https://stacks.math.columbia.edu/tag/0FMG))\nand smooth of pure dimension one\n([Stacks, Tag 0B2P](https://stacks.math.columbia.edu/tag/0B2P)), with complement\nthe rational point $\\infty$. Let $\\bar\\psi$ be the extension of $\\psi$ to\n$j_!K$ of [lem-trf-compactification-graph-operator], with iterates\n$\\bar\\psi_m=\\overline{\\psi_m}$ (item (1)). By item (3) of that lemma the\nisomorphism $C_{j,K}$ of [lem-trf-compactification-cohomology] conjugates\n$F_{c,m}(\\psi)$ into $T_{\\bar c}(\\bar\\psi_m)$ on\n$R\\Gamma(\\mathbf P^1,j_!K)$, where $\\bar c=(\\operatorname{id},\\bar\\Phi^m)$ is the\ngraph on $\\mathbf P^1$, so the traces agree by conjugacy invariance\n([prop-trf-trace-formal-laws], item (1)). On the proper curve\n$\\mathbf P^1$ the ordinary leg $\\bar\\Phi^m$ is finite and, by\n[thm-trf-frobenius-fixed-points], the fixed scheme is finite over $k$\nwith one reduced point component for each point of\n$\\mathbf P^1_F(F_m)$. The Lefschetz–Verdier comparison\n[thm-trf-lefschetz-verdier], which assembles the proper global\ncomparison and the decomposition into local terms, gives\n$$\n\\operatorname{tr}_A\\bigl(T_{\\bar c}(\\bar\\psi_m)\\mid R\\Gamma(\\mathbf P^1,j_!K)\\bigr)\n=\\sum_{y\\in\\mathbf P^1_F(F_m)}\\operatorname{LT}_y(\\bar\\psi_m).\n$$\nBy the coefficient-morphism form of [thm-trf-frobenius-local-term] on the\nsmooth curve $\\mathbf P^1$ (proved there through the curve pieces),\n$\\operatorname{LT}_y(\\bar\\psi_m)=\\operatorname{tr}_A(\\bar\\psi_{m,\\bar y}\\mid(j_!K)_{\\bar y})$.\nBy [lem-trf-compactification-graph-operator], item (2), the stalk at\n$\\infty$ is zero, so its local term is zero, and for\n$y\\in\\mathbf A^1_F(F_m)$ one has $(j_!K)_{\\bar y}=K_{\\bar y}$ and\n$\\bar\\psi_{m,\\bar y}=\\psi_{m,\\bar y}$. This is\n$\\mathrm{TF}(\\mathbf A^1_F,K,\\psi,m)$.",
+    "uses": [
+     "d-lines",
+     "lem-trf-compactification-graph-operator",
+     "lem-trf-compactification-cohomology",
+     "prop-trf-trace-formal-laws",
+     "thm-trf-frobenius-fixed-points",
+     "thm-trf-lefschetz-verdier",
+     "thm-trf-frobenius-local-term"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 3: closed subschemes of the affine line.* A closed subscheme of\n$\\mathbf A^1_F$ is $\\operatorname{Spec}F[t]/I$. If $I=0$ it is the line,\nStep 2. Otherwise a nonzero polynomial in $I$ makes $F[t]/I$\nfinite-dimensional over $F$, and Step 1 applies. This includes\nnonreduced schemes.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 4: affine schemes.* We prove $\\mathrm{TF}$ for all closed\nsubschemes $S_0\\subseteq\\mathbf A^d_F$, by induction on $d$,\nsimultaneously for all finite fields $F$, all $K$, all $\\psi$ and all\n$m$. The cases $d\\leq1$ are Steps 1 and 3. Let $d\\geq2$ and let\n$f_0:S_0\\to Y_0=\\mathbf A^{d-1}_F$ forget the last coordinate, a\nseparated morphism. Let $(L,\\psi')=(Rf_!K,Rf_!\\psi\\circ\\theta_{f,1})$\nbe the Weil $!$-pushforward of [def-trf-weil-shriek-pushforward]; its\ncomparison $\\theta_{f,1}$ is built from the relative Frobenius\nfactorization [d-relative-frob] and is invertible because $r_1$ is a\nfinite universal homeomorphism ([i-relative-frob], [i-topology]), and\n$L\\in D^b_{ctf}(Y,A)$. By [lem-trf-weil-shriek-operator-fibres],\nitem (1), the compact global operator $F_{c,m}(\\psi')$ is conjugate to\n$F_{c,m}(\\psi)$, and the induction hypothesis for $Y_0$ gives\n$$\n\\operatorname{tr}_A\\bigl(F_{c,m}(\\psi)\\mid R\\Gamma_c(S,K)\\bigr)\n=\\sum_{y\\in Y_0(F_m)}\\operatorname{tr}_A\\bigl(\\psi'_{m,\\bar y}\\mid L_{\\bar y}\\bigr).\n$$\nBy item (2) of that lemma, $\\psi'_{m,\\bar y}$ is conjugate to the\ndegree-one compact Frobenius operator $F_{c,1}(\\psi_m|_{\\bar y})$ of the\nfibre $S_{0,y}$, considered over $F_m$ with the one-step coefficient\nmorphism $\\psi_m|_{\\bar y}$. The fibre is a closed subscheme of\n$\\mathbf A^1_{F_m}$, so Step 3 over $F_m$ gives\n$$\n\\operatorname{tr}_A\\bigl(\\psi'_{m,\\bar y}\\mid L_{\\bar y}\\bigr)\n=\\sum_{s\\in S_{0,y}(F_m)}\\operatorname{tr}_A\\bigl(\\psi_{m,\\bar s}\\mid K_{\\bar s}\\bigr),\n$$\nusing item (3) for the stalk maps. Summing over $y$ and using the\ndisjoint union of item (3) gives $\\mathrm{TF}(S_0,K,\\psi,m)$.",
+    "uses": [
+     "def-trf-weil-shriek-pushforward",
+     "d-relative-frob",
+     "i-relative-frob",
+     "i-topology",
+     "lem-trf-weil-shriek-operator-fibres"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 5: general schemes.* Let $S_0$ be separated of finite type over\n$F$, choose a finite affine open cover $U_1,\\ldots,U_N$, and put\n$W_i=U_1\\cup\\cdots\\cup U_i$, $V_i=W_i\\setminus W_{i-1}$. Each $V_i$ is\nclosed in the affine $U_i$, hence affine of finite type and a closed\nsubscheme of some $\\mathbf A^d_F$, and $V_i$ is the closed complement of\nthe open $W_{i-1}$ in $W_i$. By item (3) of\n[prop-trf-trace-additivity-open-closed], applied to\n$W_{i-1}\\subseteq W_i$ with the restricted coefficient morphisms, whose\niterates and stalk maps are the restrictions of those of $\\psi$,\n$$\n\\operatorname{tr}_A\\bigl(F_{c,m}\\mid R\\Gamma_c(W_i)\\bigr)\n=\\operatorname{tr}_A\\bigl(F_{c,m}\\mid R\\Gamma_c(W_{i-1})\\bigr)\n+\\operatorname{tr}_A\\bigl(F_{c,m}\\mid R\\Gamma_c(V_i)\\bigr).\n$$\nBy induction on $i$ and Step 4 for the $V_i$, the trace on\n$R\\Gamma_c(S,K)$ is the sum over $i$ of the point sums over\n$V_i(F_m)$. These sets partition $S_0(F_m)$, which gives\n$\\mathrm{TF}(S_0,K,\\psi,m)$ and proves the theorem.",
+    "uses": [
+     "prop-trf-trace-additivity-open-closed"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-trf-coefficient-morphism-trace-formula",
+  "worker": "stage1",
+  "summary": "Retained the main-20261015 route and all hypotheses. Completed the finite-scheme computation using existing zero-dimensional cohomology, comparison and chain-representative statements; removed the false claim that scheme Frobenius fixes the underlying geometric spectrum; replaced the irrelevant exceptional-pullback preservation citation by compact-support preservation. Added precise sources and recorded searches. No new nodes. Second reading: made residue fields, exact constant-coefficient pullback and proper cohomology comparison explicit; removed the unused reduction detour and expanded polynomial division. Current independent second reading: cite the finiteness theorem and finite composition directly in Step 4; verify the finite-Tor domain of the geometric-fibre restriction explicitly in Step 6. Maintainer reading: Step 4 now cites properness of the projective line over the finite field F (lemma-nagata-projective-space-base-change-proper), which the compactification lemma needs for j_0 over F; previously only the base change to k was cited.",
+  "blueprint": "thm-trf-coefficient-morphism-trace-formula proof: opening trace/perfectness paragraph, Steps 0–5 (finite schemes, affine line, closed subschemes, affine induction, localization).",
+  "tool_uses": [
+   {
+    "node": "lem-asd-projective-line-genus-zero",
+    "why": "Its statement supplies that the base-changed projective line over the algebraically closed field is smooth, proper, and one-dimensional, which is the geometric input for the affine-line compactification."
+   },
+   {
+    "node": "prop-weil-proper-compact-coincidence",
+    "why": "Its statement gives compact-support and ordinary cohomology coincidence for the finite (hence proper) finite-scheme case."
+   },
+   {
+    "node": "lem-sc-zero-dim-noetherian-finite-discrete",
+    "why": "Finite discreteness of the finite geometric scheme; elementary finite-dimensional-algebra arguments verify its hypotheses. This is a generic tool; it does not replace the finite-scheme, affine-line, fibre-induction or localization route of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-global-cohomology",
+    "why": "Naturality of the etale-origin comparison identifies derived sections before using the etale zero-dimensional cohomology formula. This is a generic tool; it does not replace the finite-scheme, affine-line, fibre-induction or localization route of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-zero-dimensional-cohomology",
+    "why": "Computes ordinary etale sections and their higher vanishing on a zero-dimensional scheme, enabling the explicit finite-scheme block computation. This is a generic tool; it does not replace the finite-scheme, affine-line, fibre-induction or localization route of the unit."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Clause (iv) gives the actual compact-support finite-Tor preservation theorem for the affine induction, rather than invoking exceptional-pullback preservation. This is a generic tool; it does not replace the finite-scheme, affine-line, fibre-induction or localization route of the unit."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Keeps the restricted complexes in the induction domain for the localization filtration. This is a generic tool; it does not replace the finite-scheme, affine-line, fibre-induction or localization route of the unit."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Its statement gives properness of P({0,1};Spec F) over Spec F, needed for the compactification A^1_F -> P^1_F over the finite field. lem-trf-compactification-graph-operator requires this hypothesis. No node of the trace-formula unit states it, and the unit sketch cites it only as Stacks 0FMG."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-projective-line-genus-zero",
+  "prop-weil-proper-compact-coincidence",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-weil-pbc-comparison-global-cohomology",
+  "lem-weil-pbc-zero-dimensional-cohomology",
+  "thm-sf-ctf-stability",
+  "lem-sf-pullback-tor-amplitude",
+  "lemma-nagata-projective-space-base-change-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-452d81b08",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-452d81b08 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, all 7 steps, all 35 proof_deps and 7 stmt_deps, the main-20261015 and master blueprint statement and proof, and the unit sketch. The delivery has no new nodes. The statement matches master word for word; main-20261015 only drops two trailing explanatory sentences, so no hypothesis is weakened. A DAG walk shows no cycle: the item is not reachable from its dependencies. Step 1: admissibility comes from def-trf-admissibility's availability clause, Phi^m is finite hence proper, and the stalks are perfect. Step 2 (Step 0): the subfield datum and the etale-origin witness come from lem-sf-proetale-constructible-origin(ii). Step 3 (finite schemes): I checked the zero-dimensional cohomology, the etale/pro-etale comparisons, the inverse-image stalks, the graph operator, and the chain supertrace's diagonal blocks. Frobenius permutes S(k) by s -> Frob o s, so its fixed points are S_0(F_m). Small cases: empty, Spec F, Spec F_{q^2} at m=1 (swapped points, trace 0) and m=2, nonreduced F[t]/t^2, psi=0. Step 4 (affine line) had one missing citation, error C4/E1: lem-trf-compactification-graph-operator requires A^1_F -> P^1_F to be a compactification over the finite field F, but only properness of P^1_k over the algebraic closure was cited, and the blueprint's Stacks 0FMG had been dropped. FIX: Step 4 now identifies P({0,1};Spec F) with the glued line of d-lines through the standard charts and cites the existing lemma-nagata-projective-space-base-change-proper. That node is added to proof_deps and declared in split_report.tool_uses. The rest of Step 4 meets every Lefschetz-Verdier hypothesis (proper X, c2 finite hence proper, Fix finite with reduced point components) and uses the arbitrary-v clause of thm-trf-frobenius-local-term, with zero stalk at infinity. Step 5 is elementary polynomial division, including I=0 and d=0. Step 6: thm-sf-ctf-stability (iv) puts L in D^b_ctf and (i) does the same for the fibre restriction. Operator-fibres items (1)-(3) give the conjugacies and the point partition, and the fibres over F_m are closed in A^1. Step 7: additivity clause (3) for coefficient morphisms, reduced V_i closed in the affine U_i, an empty base case, and a partition of the points. I accept all the tool_uses (generic black boxes, not a different route). The fix file is fixes/dag/nodes/sec-trace-formula/thm-trf-coefficient-morphism-trace-formula.json; only proof, proof_deps and split_report change. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

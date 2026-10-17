@@ -23,17 +23,160 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "title": "Existence and relative boundary lifting for operadic Kan extensions",
- "statement": "Use the universes, operadic correspondences, category $\\mathcal E_{\\mathcal M}(\\mathcal V)$, active diagrams, and operadic left Kan extensions of [def-coef-operadic-correspondence]. Let $\\pi:\\mathcal M\\to\\Delta^{\\mathrm{op}}\\times\\Delta^1$ be a small correspondence constant over $[0]$, with space zero-fibers, source $\\mathcal A$ and target $\\mathcal B$. Let $\\mathcal V^\\otimes\\to\\Delta^{\\mathrm{op}}$ be any monoidal infinity category; presentability is not assumed.\n\nIf an $\\mathcal A$-algebra $X$ has the property that for every $b\\in\\mathcal B_{[1]}$ the active diagram $J_b\\to\\mathcal A\\xrightarrow{X}\\mathcal V^\\otimes$ admits an operadically colimiting cocone over the base cocone with apex $[1]$, then there is an inert-preserving map $H:\\mathcal M\\to\\mathcal V^\\otimes$ restricting to $X$ which is an operadic left Kan extension.\n\nThe following relative boundary lifting assertion also holds. For every integer $m>0$ and every functor over $\\Delta^{\\mathrm{op}}$\n$$h_0:(\\mathcal A\\times\\Delta^m)\\amalg_{\\mathcal A\\times\\partial\\Delta^m}(\\mathcal M\\times\\partial\\Delta^m)\\longrightarrow\\mathcal V^\\otimes,$$\nassume its restriction to $\\mathcal A\\times\\Delta^m$ and to $\\mathcal M\\times\\sigma$ for each face $\\sigma\\subseteq\\partial\\Delta^m$ are simplices in the corresponding algebra functor categories, and its restriction to $\\mathcal M\\times\\{0\\}$ is an operadic left Kan extension. Then $h_0$ extends, with exactly its prescribed restriction, to a simplex $h:\\mathcal M\\times\\Delta^m\\to\\mathcal V^\\otimes$ of $\\mathcal E_{\\mathcal M}(\\mathcal V)$. Here $\\partial\\Delta^m$ is the union of the proper faces of the standard simplex. No colimits other than the indicated active cocones are assumed.",
+ "statement": "Use the universes, operadic correspondences, category $\\mathcal E_{\\mathcal M}(\\mathcal V)$, active diagrams, and operadic left Kan extensions of [def-coef-operadic-correspondence], monoidal infinity categories of [def-coef-monoidal-infinity-category], and cocartesian edges of [def-coef-infinity-fibrations]. Let $\\pi:\\mathcal M\\to\\Delta^{\\mathrm{op}}\\times\\Delta^1$ be a small correspondence constant over $[0]$, with space zero-fibers, source $\\mathcal A$ and target $\\mathcal B$. Let $\\mathcal V^\\otimes\\to\\Delta^{\\mathrm{op}}$ be any monoidal infinity category; presentability is not assumed. Here the inert-lift requirement for a family has its source meaning: a lift over $(\\alpha,\\operatorname{id}_s)$, with $\\alpha$ inert, is $\\pi$-cocartesian in the whole family $\\mathcal M$, and lies in $\\mathcal M_s$. Merely being cocartesian for $\\mathcal M_s\\to\\Delta^{\\mathrm{op}}$ is not the family inert-lift requirement. This specifies the family convention in this statement wherever [def-coef-operadic-correspondence] is used.\n\nIf an $\\mathcal A$-algebra $X$ has the property that for every $b\\in\\mathcal B_{[1]}$ the active diagram $J_b\\to\\mathcal A\\xrightarrow{X}\\mathcal V^\\otimes$ admits an operadically colimiting cocone over the base cocone with apex $[1]$, then there is an inert-preserving map $H:\\mathcal M\\to\\mathcal V^\\otimes$ restricting to $X$ which is an operadic left Kan extension.\n\nThe following relative boundary lifting assertion also holds. For every integer $m>0$ and every functor over $\\Delta^{\\mathrm{op}}$\n$$h_0:(\\mathcal A\\times\\Delta^m)\\amalg_{\\mathcal A\\times\\partial\\Delta^m}(\\mathcal M\\times\\partial\\Delta^m)\\longrightarrow\\mathcal V^\\otimes,$$\nassume its restriction to $\\mathcal A\\times\\Delta^m$ and to $\\mathcal M\\times\\sigma$ for each face $\\sigma\\subseteq\\partial\\Delta^m$ are simplices in the corresponding algebra functor categories, and its restriction to $\\mathcal M\\times\\{0\\}$ is an operadic left Kan extension. Then $h_0$ extends, with exactly its prescribed restriction, to a simplex $h:\\mathcal M\\times\\Delta^m\\to\\mathcal V^\\otimes$ of $\\mathcal E_{\\mathcal M}(\\mathcal V)$. Here $\\partial\\Delta^m$ is the union of the proper faces of the standard simplex. No colimits other than the indicated active cocones are assumed.",
  "source": {
   "document": "https://arxiv.org/html/1312.3178v4",
   "place": "Theorem A.3.4(1) (existence, with the color criterion of Definition A.3.3 and Proposition A.4.4); Theorem A.3.4(2) (horn extension), and the nonsymmetric version of the prism consequence in Higher Algebra, Lemma 3.1.3.16, printed pp. 347–348, https://www.math.ias.edu/~lurie/papers/HA.pdf. Read online; not archived in literature/. No Stacks tag states this operadic extension theorem."
  },
  "stmt_deps": [
-  "def-coef-operadic-correspondence"
+  "def-coef-operadic-correspondence",
+  "def-coef-monoidal-infinity-category",
+  "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We prove existence together with the auxiliary outer-horn assertion needed below: if $n>1$, $\\mathcal P\\to\\Delta^{\\mathrm{op}}\\times\\Delta^n$ is a family with constant space zero-fibers on every edge, and an inert-preserving map on $\\mathcal P^-=\\mathcal P|_{\\Lambda_0^n}$ is an operadic left Kan extension on the edge $\\{0,1\\}$, then it extends over $\\mathcal P$. Use the globally $\\pi$-cocartesian stationary inert lifts specified in the statement. For $n=1$, take $\\mathcal P=\\mathcal M$, $\\mathcal P^-=\\mathcal A$, and the local cocones in the question. Apply [lem-coef-operadic-family-cell-presentation] in both cases. Inductively construct a functor over the base on its successive subsets, with exact agreement on the earlier subsets; at limits use the union. Besides the chosen color colimit cones and inert incidence cones, retain every mixed source-to-tuple simplex constructed by the type-(c) cells. Their indexing simplex $\\tau$ ranges over the whole family, with arbitrary initial $\\mathcal A$ block, not only $\\mathcal P^+$. The order first fixes a tuple and its projections and then fills all its source-prefix cells before a later active cell uses that tuple's entire source cone. Thus no source cone at a tuple is assumed merely from having chosen its vertex. Each boundary in the induction is present by the stated order, and a simplex and its operators remain fixed at all subsequent stages. The target color fiber is an infinity-category, not assumed to be a space.",
+   "uses": [
+    "lem-coef-operadic-family-cell-presentation",
+    "def-coef-operadic-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, induction setup and the relative source presentation, printed pp. 334–335; GH A.3.4 generalized hypotheses."
+   }
+  },
+  {
+   "text": "Handle a zero-dimensional active cell with apex a color $b$. This case occurs only when $n=1$. Its active part is exactly $J_b^{\\triangleright}$, with source diagram $X|_{J_b}$, so choose one of the operadically colimiting cocones assumed in the statement. Clause (iii) of [lem-coef-operadic-active-incidence-comparison] extends this active cone to the whole comma-source cone of the attaching cell with its given base and source restriction. Its trivial Kan fibration lifts the dimension-zero boundary, so this is an actual choice with exact restrictions, even if $J_b$ is empty. No relative $p$-colimit in $\\mathcal V^\\otimes$ is claimed. The whole source cone, not just its apex, is now fixed for subsequent cells.",
+   "uses": [
+    "lem-coef-operadic-active-incidence-comparison",
+    "def-coef-operadic-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, step (1), zero-dimensional active cells, printed p. 336."
+   }
+  },
+  {
+   "text": "For a type-(a) cell of dimension $d>0$, put $b=\\sigma(0)$. Its last vertex is a color, as required by [lem-coef-operadic-active-cone-boundary]. The whole cone at $b$ is already defined by the ordering assertion of [lem-coef-operadic-family-cell-presentation]: at a tuple this includes the mixed type-(c) cells filled in Step 5 at an earlier tail stage, not only the tuple vertex and its projections. This cone is operadically colimiting. Indeed, if $b$ is a color and $n=1$, it was fixed in Step 2; if $n>1$, $b$ lies at parameter $1$ and this is the stipulated left Kan extension on $\\{0,1\\}$. If $b$ is a tuple over $[r]$, clause (i) of [lem-coef-operadic-active-incidence-comparison] identifies its active source cone with concatenation of the $r$ color cones, because their inert incidence projections have already been defined. [lem-coef-operadic-concatenation-colimits] makes this cone operadically colimiting, including $r=0$. Clause (ii) identifies the active comma source $X_\\sigma^{\\mathrm a}$ with $J_b$ by a trivial Kan fibration, preserving its base and source diagram; the precomposition equivalence in [lem-coef-joyal-functor-equivalence-test] and its mapping-space consequence in [lem-cbc-enhanced-functor-cone-calculus] preserve the coherent active cocone spaces, hence the universal property of that same cone, under this restriction. Thus the active join-boundary criterion fills $X_\\sigma^{\\mathrm a}\\star\\partial\\Delta^d\\subseteq X_\\sigma^{\\mathrm a}\\star\\Delta^d$ with its exact boundary and base. Clause (iii), now lifting the $d$-simplex of coslices with its prescribed entire boundary, extends it over $X_\\sigma\\star\\Delta^d$. This constructs all higher operations and their coherences; it does not require a cocartesian fibration $b\\mapsto J_b$.",
+   "uses": [
+    "lem-coef-operadic-active-cone-boundary",
+    "lem-coef-operadic-concatenation-colimits",
+    "lem-coef-operadic-active-incidence-comparison",
+    "lem-coef-joyal-functor-equivalence-test",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-operadic-family-cell-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, step (1), active positive-dimensional cells and the reduction to the first vertex and inert outputs, printed pp. 336–337; GH A.2.4."
+   }
+  },
+  {
+   "text": "For a type-(b) cell its final vertex maps to an object $z$ over $[0]$. The monoidal incidence axiom says that for every $y$ and every base arrow $p(y)\\to[0]$ the mapping fiber to $z$ is contractible (the empty product). Thus $z$ is $p$-final in the precise sense of [lem-coef-infinity-relative-initial-boundary]. Fill $X_\\sigma\\star\\partial\\Delta^d\\subseteq X_\\sigma\\star\\Delta^d$ by the relative skeletal cells of [lem-coef-infinity-monomorphism-boundary-cells]. Any simplex outside this subcomplex contains all $d+1$ vertices of the last factor: otherwise it factors through a proper face. Its final vertex is therefore the specified $z$. Every positive-dimensional attaching boundary has that final vertex, so the final-vertex boundary criterion gives its filler over the prescribed base. For $d=0$, first choose the apex in the nonempty contractible fiber $\\mathcal V^\\otimes_{[0]}\\simeq *$; all subsequent missing simplices again end at $z$. Glue the chosen fillers at each skeletal stage and take the union. This treats the zero-output cells without imposing any initial-object property on a colimit over an empty active slice.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-relative-initial-boundary",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, step (2), zero-output cells, printed pp. 337–338; monoidal Segal axiom at arity zero."
+   }
+  },
+  {
+   "text": "For a type-(c) cell let $\\tau:\\Delta^d\\to\\mathcal P$ be its full indexing simplex. It can start with any number of vertices in $\\mathcal A$ and end at a tuple in a positive-parameter fiber; $\\tau$ itself may still be missing. Restrict its boundary on $L_\\tau$ to the distinguished incidence diagram $i:N(I_r)\\to L_\\tau$ of [lem-coef-operadic-family-cell-presentation]. If $d=0$ and $r>0$, the Segal equivalence of [def-coef-monoidal-infinity-category] gives a tuple object $x$ in the fiber over $[r]$ and component equivalences from its inert color restrictions to the $r$ prescribed color values. Choose cocartesian inert projections from $x$ and compose them with those equivalences, using inner horn fillers to obtain actual edges with the prescribed color targets. Their mapping squares are homotopy pullbacks: composing a cocartesian mapping square with a vertical equivalence preserves that property, so [lem-coef-infinity-cocartesian-mapping-criterion] makes these edges cocartesian. To add the prescribed endpoint vertices and triangles, use the argument of Step 4: each missing simplex ends at its specified endpoint over $[0]$, whose mapping fibers over each base arrow are contractible. The relative-final boundary criterion fixes its previously prescribed edges, including both edges into a shared endpoint. For $r=0$, take $x$ to be the prescribed endpoint value itself and use its identity as the incidence leg. Thus the incidence cone has exactly the specified diagram and base. It is a relative $p$-limit: maps to the $[0]$ vertices and their endpoint compatibilities have contractible fibers, while its remaining color components are exactly the mapping-space product in the monoidal incidence axiom. If $d>0$, the cone at the final vertex of $\\partial\\Delta^d$ has already been chosen as this relative limit. Apply [lem-coef-infinity-relative-limit-join-boundary] to that fixed diagram and final cone. It fills the actual join $\\partial\\Delta^d\\star N(I_r)\\subseteq\\Delta^d\\star N(I_r)$ with its whole boundary and prescribed base. The type-(c) cone-restriction trivial Kan fibration of [lem-coef-operadic-family-cell-presentation] then lifts that $d$-simplex with its prescribed boundary and base to a map on $\\Delta^d\\star L_\\tau$. The filler includes the face $\\Delta^d$ itself, so it defines $H$ on $\\tau$ with the previously prescribed boundary as well as on all its incidence composites. In particular when $d=1$, $\\tau=(a\\to b)$ with $a\\in\\mathcal A$ and $b$ a tuple, its boundary consists of the two incidence cones $\\{a,b\\}\\star L_\\tau$; the relative-limit join filler supplies the edge $H(a)\\to H(b)$ over the original base arrow. It does not insert a factorization through a color. Increasing $d$ then supplies every longer source prefix and its coherences, since all faces have been filled earlier. After completing this tail stage, these fillers give the entire source cone at each tuple; the preserved color projections identify its active part with the concatenated color cones used at the later stage in Step 3. This handles every tuple arity and its higher incidence simplices, including the missing mixed faces singled out in the return. The distinguished inert legs are cocartesian by construction.",
+   "uses": [
+    "lem-coef-operadic-family-cell-presentation",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-relative-initial-boundary",
+    "lem-coef-infinity-relative-limit-join-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, step (3), inert incidence-cone cells, printed pp. 340–341; GH A.3.1 includes the endpoint incidence diagram."
+   }
+  },
+  {
+   "text": "After each attaching map in Steps 2–5 has been filled, the relative categorical-trivial-cofibration comparisons and successor comparisons of [lem-coef-operadic-family-cell-presentation] are filled using the Joyal lifting property. This applies to $p:\\mathcal V^\\otimes\\to\\Delta^{\\mathrm{op}}$: it is inner, and every equivalence of the base is an identity and lifts to an identity, so [lem-coef-joyal-quasicategory-characterizations] makes it a Joyal fibration. [lem-coef-joyal-model-structure] gives lifts with exact equality on the entire previous subset. Thus the induction extends over all cells and its union is a functor over $\\Delta^{\\mathrm{op}}$. For any fiberwise inert edge $e:x\\to y$, every composite with a chosen target projection $y\\to y_i$ is an inert leg into a color, hence its image and the images of the target projections are cocartesian by Step 5 and the last assertion of the cell presentation. Factor the image of $e$ through a cocartesian lift of its inert base map. Write this factorization as $H(e)=v\\ell$, with $\\ell:H(x)\\to x^{\\prime}$ cocartesian and $v:x^{\\prime}\\to H(y)$ vertical. For each target color projection $t_i:H(y)\\to H(y_i)$, both $t_i v\\ell$ and $\\ell$ are cocartesian; the homotopy pullback squares in [lem-coef-infinity-cocartesian-mapping-criterion], pasted and cancelled along $\\ell$, make $t_i v$ cocartesian. Compare it with $t_i$, which is cocartesian over the same inert base arrow. Transporting along that arrow identifies its vertical comparison with the $i$th color component of $v$; its precomposition maps into every color are equivalences by the same mapping squares. Such a component is an equivalence: apply these mapping equivalences to the identity of its source to obtain a left inverse, and use injectivity on components with target its target to obtain the right inverse. Hence every color component of $v$ is an equivalence. The monoidal Segal equivalence makes that vertical arrow an equivalence, so the image of $e$ is cocartesian too. This verifies inert preservation for all inert arrows, including those with a non-color target; for target $[0]$ the component test is the empty product. In the case $n=1$, the color cones fixed in Step 2 are unchanged, so [def-coef-operadic-correspondence] says the resulting $H$ is an operadic left Kan extension of $X$. For $n>1$ the same induction proves the auxiliary outer-horn assertion with its prescribed horn restriction.",
+   "uses": [
+    "lem-coef-operadic-family-cell-presentation",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-coef-monoidal-infinity-category",
+    "def-coef-operadic-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, conclusion of the filtration and inert preservation, printed pp. 335–341; the nonsymmetric version is GH A.3.4."
+   }
+  },
+  {
+   "text": "Now fix the boundary data of the question, with $m>0$. In $\\Delta^m\\times\\Delta^1$, where the second coordinate is the source/target parameter of $\\mathcal M$, set $K_0=(\\Delta^m\\times\\{0\\})\\cup(\\partial\\Delta^m\\times\\Delta^1)$. Its pullback along $\\mathcal M\\to\\Delta^1$ is exactly the domain of $h_0$, with product coordinates interchanged. For $i=0,\\ldots,m$ adjoin the simplex $s_i:\\Delta^{m+1}\\to\\Delta^m\\times\\Delta^1$ defined by $s_i(j)=(j,0)$ for $j\\leq m-i$ and $s_i(j)=(j-1,1)$ for $j>m-i$. These are all maximal simplices of the prism, and its intersection with the previously adjoined simplices is $\\Lambda_{m-i}^{m+1}$. The vertex formula checks this directly: all faces except the one omitting $m-i$ lie in the old domain; that remaining face is new. Thus their pullbacks are the exact successive extension domains and they exhaust $\\mathcal M\\times\\Delta^m$.",
+   "uses": [
+    "def-coef-operadic-correspondence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 3.1.3.16, explicit prism filtration, printed p. 347."
+   }
+  },
+  {
+   "text": "For $i<m$ put $k=m-i$, so $0<k<m+1$. The pulled-back family $\\mathcal C_i=\\mathcal M\\times_{\\Delta^1}\\Delta^{m+1}$ over the second-coordinate map of $s_i$ has cocartesian lifts over $k-1\\to k$: both endpoints still have second coordinate $0$, so for every source object the constant identity in $\\mathcal A$ supplies such a lift in the product family. [lem-coef-infinity-cocartesian-inner-horn-comparison] makes the horn pullback inclusion into $\\mathcal C_i$ a categorical trivial cofibration. Fill it against the Joyal fibration $p$ as in Step 6. Every parameter vertex of the new simplex belongs to its horn, hence its entire operad fiber and its inert edges were already prescribed; inert preservation is a vertexwise condition on a family map. Therefore this filler remains a simplex in the algebra functor category, and fixes every previously prescribed face. This deals with all prism cells except the last.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-inner-horn-comparison",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-joyal-model-structure",
+    "def-coef-operadic-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 3.1.3.16, the $i<m$ cells; Lemma 2.4.4.6, printed pp. 307 and 347."
+   }
+  },
+  {
+   "text": "For $i=m$ the missing horn is $\\Lambda_0^{m+1}$. Since $m+1>1$, apply the auxiliary outer-horn assertion proved in Steps 1–6 to $\\mathcal C_m=\\mathcal M\\times_{\\Delta^1}\\Delta^{m+1}$. Its zero-fibers are the original space zero-fibers, and its edge restrictions are either constant families or the given correspondence, so they are constant over $[0]$. The edge $\\{0,1\\}$ maps under $s_m$ to $(0,0)\\to(0,1)$; its pulled-back map is exactly $h_0|_{\\mathcal M\\times\\{0\\}}$, which is the operadic left Kan extension assumed in the question. Thus the required outer-horn hypothesis is available, with no condition on any other vertex. Its filler completes the prism. The successive exact restrictions prove that its union $h$ agrees with $h_0$ on both $\\mathcal A\\times\\Delta^m$ and $\\mathcal M\\times\\partial\\Delta^m$. Its fibers preserve inert edges by the preceding induction, so it is a simplex of $\\mathcal E_{\\mathcal M}(\\mathcal V)$. When $m=1$ the last cell is already the $2$-dimensional outer-horn case, so no dimension-zero or missing initial-vertex case has been excluded. The only colimit cocones used in this argument are those in the statement and their finite concatenations.",
+   "uses": [
+    "def-coef-operadic-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 3.1.3.16, final cell and conclusion, printed p. 347; GH A.3.4(ii)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-monoidal-infinity-category",
+  "def-coef-operadic-correspondence",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-cocartesian-inner-horn-comparison",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-infinity-relative-limit-join-boundary",
+  "lem-coef-joyal-functor-equivalence-test",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-operadic-active-cone-boundary",
+  "lem-coef-operadic-active-incidence-comparison",
+  "lem-coef-operadic-concatenation-colimits",
+  "lem-coef-operadic-family-cell-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Generalized nonsymmetric reconstruction of the source-cell proof of Theorem 3.1.2.3, printed pp. 334–341, as specified by GH A.3.4; explicit prism argument of Lemma 3.1.3.16, printed p. 347. Sources read online; full shared archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -93,7 +236,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-free-cocone-characterization",
@@ -111,5 +254,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-correspondence-kan-filling",
+  "worker": "stage1",
+  "summary": "Existence and auxiliary outer-horn lifting follow a source-cell induction with active color cones, zero-output cells, and full-family inert incidence cells including arbitrary initial source blocks. The tuple stage constructs every mixed source-to-tuple simplex and its incidence composites before later active cells use its source cone. Relative-limit join-boundary lifting supplies these mixed cells. The prism filtration then gives exact boundary lifting. Six new statement-only prerequisites, zero Mathlib leaves. The source family convention is made explicit: stationary inert lifts are pi-cocartesian for the whole family; the report flags the imported fiberwise-only definition for upstream correction.",
+  "blueprint": "Proof paragraph 2, derived coefficient mapping-complex adjunction before R lim; operadic free extension in the fixed-object rectification chain: the operadic Kan-extension existence and parameter extension used to make the derived adjunction coherent.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 3 uses only the general fact that a functor equivalence induces equivalences on mapping spaces, to transport the active cone universal property along the active-slice equivalence. The unit has a functor-equivalence test but no statement of this mapping-space consequence; no coefficient or purity result of the other unit is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-0949d5ea7",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-0949d5ea7 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 9 steps, all 6 new nodes, every cited statement and both citers (free-cocone-characterization steps 3 and 5, free-cocone-criterion steps 3 and 4). The GH arXiv:1312.3178v4 PDF was fetched read-only, and App. A.2-A.4 was checked: Def A.2.1, Props A.2.4/A.2.8/A.2.10, Defs A.3.1-A.3.3, Thm A.3.4, Rem A.4.2, Prop A.4.4. HA and HTT are not archived and were judged on the mathematics (WANTED). Statement: the existence clause is A.3.4(i) with O=V^⊗; the boundary clause is the HA 3.1.3.16 prism. The delivery adds that stationary inert lifts must be pi-cocartesian in the whole family. This is faithful to GH A.3.1(i) and HA 2.3.2.10, and it is needed for the cofinality behind incidence (iii). The change is named under STATEMENT-DISPUTED. For the maintainer: the two citers apply the item to the collage M_u without stating this check, which is two lines from collage-comparison's mapping formula and u inert-preserving; and def-coef-operadic-correspondence should get the source convention. Step checks: Step 3 active-in-V_act cancellation in Δ^op and the trivial fibration in the Joyal model; Step 4 p-final from the empty product; Step 5 N(I_r) initial in L_τ (edge and cospan cases); Step 6 Joyal fibration since N(Δ^op) has only identity equivalences; Step 7 prism faces checked for i=0 and i=m; Step 8 inner-horn comparison checked at N=2,i=1 with a two-arrow counterexample showing the cocartesian hypothesis is needed; Step 9 edge 01 is h_0 and m=1 is covered. New nodes: all statement-only, with correct created/blueprint fields, three kinds of search, no duplicates and no item clause restated; family-cell-presentation is wordy but true in the form used. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, for mapping-space equivalence only. FIX (B3): the item statement now cites def-coef-monoidal-infinity-category and def-coef-infinity-fibrations, and both are added to stmt_deps; nothing else changed. No SGA.; 1 file(s) fixed by the reviewer"
  }
 }
