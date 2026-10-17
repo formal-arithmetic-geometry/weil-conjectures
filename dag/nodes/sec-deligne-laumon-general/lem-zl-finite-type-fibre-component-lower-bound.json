@@ -301,22 +301,21 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-fb2fc2024 (reviewer sub-agent of L); spot-checked: Pass: no fixes needed and no new nodes; the item's statement is unchanged against the side DAG (only proof, proof_deps, proof_origin, status, split_report and added searches changed). The item is a correct affine special case of Stacks 0B2L(2)(a) (varieties.tex l.3953): a component W of the rational closed fibre has dim W = dim_x of the fibre at W's generic point, because minimality leaves only W through that point. The seven steps follow the source proof and each cited node's statement says what the step uses. Steps 1-2: P is prime, and the 00P0 node plus the 030H tower give d = trdeg_K L >= 0. Step 3: kappa(P) = Frac(B/P); the generic-fibre localization node gives F = S^{-1}C, a domain of finite type over K. Step 4: the 00P1 node at (0) gives dim_(0) Spec F = d, and Q' = 0 because F embeds in L. Step 5: C tensor_B k = C/J. Step 6: the 00ES nodes and the 00OT node give dim_{q-bar} Spec H = dim W, carried to the fibre point by the homeomorphism. Step 7: the 00QH node gives an open V containing q, and (0) lies in V by irreducibility, so d <= dim W. Small cases checked: xy over k[t]; a non-dominant k[s,t] -> k[x] (both a nonempty fibre and an empty one, where the claim is vacuous); B = k. The dependency closure has no cycle. Searching snapshot/dag/nodes for 0B2L/02FZ/00QK and fibre-dimension wording found no duplicate; the nearby pbc and fin nodes are upper bounds or openness results. No SGA is used. I accept the four declared sk-thm-p1 tool uses (00P0, 00P1, 00OT, 00QH nodes): they are generic algebra used as black boxes, exactly the inputs of 0B2L's proof. Minor: Step 4 does not cite the transport of local dimension along the fibre isomorphism; it is elementary and Step 6 makes the same argument explicitly. review.md written."
  },
  "lean": {
+  "module": "Sheaf.RingTheory.FiniteTypeFibreComponentLowerBound",
+  "declaration": "Algebra.finiteType_fibre_component_lower_bound",
+  "file": "lean/Sheaf/RingTheory/FiniteTypeFibreComponentLowerBound.lean",
+  "statement": "theorem finiteType_fibre_component_lower_bound (k : Type u) [Field k] (B : Type v) [CommRing B] [Algebra k B] [Algebra.FiniteType k B] (C : Type w) [CommRing C] [Algebra k C] [Algebra.FiniteType k C] [IsDomain C] (φ : B →ₐ[k] C) (m : Ideal B) (hm : m.IsMaximal) (hmk : Function.Bijective (algebraMap k (B ⧸ m))) : ∃ dC dA : ℕ, ringKrullDim C = (dC : WithBot ℕ∞) ∧ ringKrullDim (B ⧸ RingHom.ker φ.toRingHom) = (dA : WithBot ℕ∞) ∧ ∀ W : Set (PrimeSpectrum (C ⧸ Ideal.map φ.toRingHom m)), W ∈ irreducibleComponents (PrimeSpectrum (C ⧸ Ideal.map φ.toRingHom m)) → ((dC - dA : ℕ) : WithBot ℕ∞) ≤ topologicalKrullDim W",
+  "by": "Q66",
+  "date": "2026-10-17",
   "existing": false,
-  "module": "Sheaf.DeligneLaumon.FiniteTypeFibreComponentLowerBound",
-  "file": "lean/Sheaf/DeligneLaumon/FiniteTypeFibreComponentLowerBound.lean",
-  "declaration": "finiteTypeFibreComponentLowerBound",
-  "statement": "theorem finiteTypeFibreComponentLowerBound {k : Type u} [Field k] {B : Type v} [CommRing B] [Algebra k B] {C : Type w} [CommRing C] [Algebra k C] [Algebra.FiniteType k B] [Algebra.FiniteType k C] [IsDomain C] (φ : B →ₐ[k] C) (m : Ideal B) [m.IsMaximal] (hm : Function.Bijective ((Ideal.Quotient.mk m).comp (algebraMap k B))) : ∃ d e : ℕ, ringKrullDim C = (d : WithBot ℕ∞) ∧ ringKrullDim (B ⧸ RingHom.ker φ.toRingHom) = (e : WithBot ℕ∞) ∧ ∀ W : Set (PrimeSpectrum (C ⧸ Ideal.span (φ '' (m : Set B)))), W ∈ irreducibleComponents (PrimeSpectrum (C ⧸ Ideal.span (φ '' (m : Set B)))) → (d : WithBot ℕ∞) ≤ topologicalKrullDim W + (e : WithBot ℕ∞)",
-  "branch": "newtargets-dag",
-  "by": "Q141",
-  "date": "2026-10-18",
-  "fixed_by": "NT-stage2-cc-9329ca310"
+  "branch": "newtargets-dag"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-9329ca310",
-  "group": "Q141",
+  "reviewer": "NT-stage2-Codex-58a2d4ec2",
+  "group": "Q66",
   "result": "fix",
-  "note": "H3: the delivered conclusion added e ≤ d (dim(B/P) ≤ dim C), which the node does not state (it comes from proof step 2). (d - e : WithBot ℕ∞) was the cast of a natural-number subtraction (WithBot ℕ∞ has no Sub). fixes/FiniteTypeFibreComponentLowerBound.lean drops e ≤ d and states (d : WithBot ℕ∞) ≤ topologicalKrullDim W + (e : WithBot ℕ∞), exactly dim W ≥ dim C - dim(B/P); the docstring now gives node proof steps 1-7 (H8). fixes/<item>.report.md adds a review-correction section. All hypotheses and objects match the node and Stacks 0B2L(2)(a) (k-rational m via a bijective structure map, J = span φ''m, irreducibleComponents of PrimeSpectrum (C/J), topologicalKrullDim of the subspace, ringKrullDim). Universes are independent; edge cases C/J = 0, dim 0 and B = k are covered. Proof is sorry only (axioms incl. sorryAx); docstrings present; no duplicate found. nt_compile: delivered clean 3.3 s, fixed clean 2.1 s."
+  "note": "Mathematics, hypotheses, universes, dependency declarations, verbatim signature, and per-file compilation pass. Complete replacement report in fixes supplies the substantive second reading missing under H1/H11. Findings and compiler evidence recorded in review.md; no repository changes."
  }
 }

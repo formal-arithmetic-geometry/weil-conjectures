@@ -205,5 +205,33 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-084ff8725 (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited statement, unit sk-prop-an and the source sentence in prop-sf-pf-coherence.proof.md ('Independence of the compactification ... refinement comparisons with the counits and with j_!, together with naturality'). The statement is correct and not weakened. Hypotheses match the cited definitions: l != p gives l invertible; the compactification schemes are Noetherian; the refinement equations come from def-weil-compactifications-refinements; the witnesses on K and on K⊗Lf^*L are needed because theta_v depends on the witness. Checked cases: v=id, f proper with c_1=(id,f), X empty, and a common refinement with one leg the identity. Not a duplicate: lem-fix-projection-compactification-comparison is the constructible/finite-Tor special case, and the item is more general at finite level. I redid the Step 2/3 calculation (naturality of c, the pasted-counit composition law for pi_{p2 v}, naturality of pi_{p2} through beta) and it holds. Step 4's common-refinement algebra is correct. Fault fixed (C4): Step 1 claimed that lem-sf-proper-open-comparison-site-normalization identifies the projection mate with Gamma_v, but that node's statement has no mate; it only relates alpha^p to nu^*(alpha^e). I added lem-cbc-proper-open-interchange-coherence (refinement case gives alpha_u of def-weil-pbc-proper-open-comparison) and lem-cbc-strict-tower-proper-open-calculus (the clopen-projection mate evaluates to the pro-etale transport of that finite comparison), the same pair the reviewed lem-fix-projection step 2 uses, plus explicit citations of the pro-etale/etale proper-open nodes. The naturality argument along the witness is now written out, and quasi-compactness of j_i is recorded. Fault fixed: the off-unit site-normalization lemma was undeclared and is now added to split_report.tool_uses; the mate-lemma tool use is accepted. Batch-5: lem-sf-proper-open-comparison-site-normalization is a proper-base-change site normalization, not a step of the trace formula or of Poincare duality. The flagged chain ends in lem-pod-lisse-module-sheaves-as-module-objects, a general lisse-sheaf/FLC fact (sk-lem-finite) that is not part of the Poincare duality proof. The item's existing statement dependencies (def-sf-refinement-comparison-isomorphism, prop-compactification-coherence-detailed, def-exchange-projection) already reach it. The added citations bring no new closure nodes and no cycle. No SGA citation. The corrected item is in fixes/dag/nodes/sec-smooth-purity/lem-pur-pf-refinement-compatibility.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-28f4c19c4",
+  "group": "Q76",
+  "result": "fix",
+  "note": "Mathematics, signatures, dependencies, universes and edge cases check out; scompile passed. Replaced the H11 second-reading placeholder with a complete report in fixes/lem-pur-pf-refinement-compatibility.report.md. Full findings in review.md. No repository mutations performed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PfRefinementCompatibility",
+  "declaration": "AlgebraicGeometry.ProEtale.pf_refinement_compatibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.pfRefinementCoefficientFinite",
+   "AlgebraicGeometry.ProEtale.PfRefinementOrigin",
+   "AlgebraicGeometry.ProEtale.pfRefinementObject",
+   "AlgebraicGeometry.ProEtale.pfRefinementComparison",
+   "AlgebraicGeometry.ProEtale.pfRefinementTensor",
+   "AlgebraicGeometry.ProEtale.PfRefinementSquare",
+   "AlgebraicGeometry.ProEtale.pf_refinement_compatibility"
+  ],
+  "file": "lean/Sheaf/Paper/PfRefinementCompatibility.lean",
+  "statement": "theorem pf_refinement_compatibility (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [IsSeparated (Y ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c₁ c₂ : Compactification f) (O_K : PfRefinementOrigin P X) (O_L : PfRefinementOrigin P Y) (O_T : PfRefinementOrigin P X) (hT : pfRefinementTensor P f O_K O_L ≅ pfRefinementObject P X O_T) : (∀ r : c₁ ⟶ c₂, PfRefinementSquare P c₁ c₂ O_K O_L O_T hT (pfRefinementComparison P r O_K) (pfRefinementComparison P r O_T)) ∧ (∀ (d : Compactification f) (r₁ : d ⟶ c₁) (r₂ : d ⟶ c₂), PfRefinementSquare P c₁ c₂ O_K O_L O_T hT ((pfRefinementComparison P r₁ O_K).symm ≪≫ pfRefinementComparison P r₂ O_K) ((pfRefinementComparison P r₁ O_T).symm ≪≫ pfRefinementComparison P r₂ O_T))",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Exact specialization to PurityFiniteSetting. Helper abbreviations reuse the retained origin category, canonical fixed-scalar realization, and normalized refinement comparison. PfRefinementSquare is the displayed equality expanded from the canonical counit-defined projection maps; the theorem instantiates it for each refinement and every common refinement, without added flatness, constructibility, or Tor-amplitude assumptions."
  }
 }
