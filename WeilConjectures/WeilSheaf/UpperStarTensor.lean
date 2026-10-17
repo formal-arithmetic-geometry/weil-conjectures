@@ -274,6 +274,21 @@ noncomputable def tensorFunctorCompUpperStarIso (M : ProEtaleWeilSheaf k₀ l Y)
         tensorFunctorCompUpperStarIsoApp_hom_hom_f]
       exact (adicUpperStarTensorLeftIso l φ̄ M.carrier).hom.naturality f.hom.f))
 
+variable (k₀ l) in
+/-- **The projection formula for the internal hom of pro-étale Weil sheaves**:
+`φ_*[φ^* A, N] ≅ [A, φ_* N]`, naturally in `N`. It is the conjugate, under the adjunctions
+`φ^* ⊣ φ_*` and `- ⊗ A ⊣ [A, -]`, of the isomorphism `φ^*(P ⊗ A) ≅ φ^* P ⊗ φ^* A`
+(`AlgebraicGeometry.ProEtaleWeilSheaf.tensorFunctorCompUpperStarIso`). -/
+noncomputable def lowerStarCompIhomFunctorIso (A : ProEtaleWeilSheaf k₀ l Y) :
+    ProEtaleWeilSheaf.lowerStar k₀ l φ ⋙ ProEtaleWeilSheaf.ihomFunctor k₀ l Y A ≅
+      ProEtaleWeilSheaf.ihomFunctor k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj A) ⋙
+        ProEtaleWeilSheaf.lowerStar k₀ l φ :=
+  conjugateIsoEquiv
+    ((tensorIhomAdjunction k₀ l Y A).comp (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l φ))
+    ((ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l φ).comp
+      (tensorIhomAdjunction k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj A)))
+    (tensorFunctorCompUpperStarIso k₀ l φ A).symm
+
 end Tensor
 
 end ProEtaleWeilSheaf
