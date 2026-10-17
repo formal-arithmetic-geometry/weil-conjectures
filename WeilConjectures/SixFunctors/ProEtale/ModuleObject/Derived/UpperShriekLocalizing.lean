@@ -167,15 +167,26 @@ theorem compactlyGenerates_continuousMapRingObj (E : Type) [NormedField E]
 
 /-- Blueprint `det-sf-comp-coherence-single`: Compact support along one compactification on the
 localizing category, for the coefficient ring `E` of a finite extension `E` of `ℚ_ℓ` and a
-separated finite-type `k`-scheme `Y`: for a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`,
-`Rp_* ∘ j_!` maps `Loc(Dctf(X, E))` into `Loc(Dctf(Y, E))` and `Dctf(X, E)` into `Dctf(Y, E)`,
-and preserves direct sums on `Loc(Dctf(X, E))`. -/
+quasi-compact quasi-separated `k`-scheme `Y`: for a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)`
+of `f`, `Rp_* ∘ j_!` maps `Loc(Dctf(X, E))` into `Loc(Dctf(Y, E))` and `Dctf(X, E)` into
+`Dctf(Y, E)`, and preserves direct sums on `Loc(Dctf(X, E))`. -/
 theorem lowerShriek_continuousMapRingObj (E : Type) [NormedField E]
+    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] {X Y : Scheme.{u}}
+    (aY : Y ⟶ Spec (.of k)) [CompactSpace Y] [QuasiSeparatedSpace Y]
+    {f : X ⟶ Y} (c : Compactification f) :
+    LowerShriekLocalizingHypotheses (Profinite.continuousMapRingObj.{u} E) c :=
+  sorry
+
+/-- `lowerShriek_continuousMapRingObj` for a separated finite-type `k`-scheme `Y`, which is
+quasi-compact and quasi-separated. -/
+theorem lowerShriek_continuousMapRingObj_of_finiteType (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
     {f : X ⟶ Y} (c : Compactification f) :
     LowerShriekLocalizingHypotheses (Profinite.continuousMapRingObj.{u} E) c :=
-  sorry
+  have := QuasiCompact.compactSpace_of_compactSpace aY
+  have := quasiSeparatedSpace_of_quasiSeparated aY
+  lowerShriek_continuousMapRingObj ℓ E aY c
 
 /-- Blueprint `sk-lem-brown-hypotheses`: Hypotheses of Brown representability, for the
 coefficient ring `𝒪_E` of the ring of integers of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`
@@ -194,15 +205,27 @@ theorem compactlyGenerates_padicIntegersRingObj (E : Type) [Field E] [Algebra E 
 
 /-- Blueprint `det-sf-comp-coherence-single`: Compact support along one compactification on the
 localizing category, for the coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`
-and a separated finite-type `k`-scheme `Y`: for a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of
-`f`, `Rp_* ∘ j_!` maps `Loc(Dctf(X, 𝒪_E))` into `Loc(Dctf(Y, 𝒪_E))` and `Dctf(X, 𝒪_E)` into
-`Dctf(Y, 𝒪_E)`, and preserves direct sums on `Loc(Dctf(X, 𝒪_E))`. -/
+and a quasi-compact quasi-separated `k`-scheme `Y`: for a compactification
+`c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`, `Rp_* ∘ j_!` maps `Loc(Dctf(X, 𝒪_E))` into `Loc(Dctf(Y, 𝒪_E))`
+and `Dctf(X, 𝒪_E)` into `Dctf(Y, 𝒪_E)`, and preserves direct sums on `Loc(Dctf(X, 𝒪_E))`. -/
 theorem lowerShriek_padicIntegersRingObj (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
     [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
-    {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
-    [IsSeparated aY] {f : X ⟶ Y} (c : Compactification f) :
+    {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [CompactSpace Y] [QuasiSeparatedSpace Y]
+    {f : X ⟶ Y} (c : Compactification f) :
     LowerShriekLocalizingHypotheses (Profinite.padicIntegersRingObj.{u} ℓ E) c :=
   sorry
+
+/-- `lowerShriek_padicIntegersRingObj` for a separated finite-type `k`-scheme `Y`, which is
+quasi-compact and quasi-separated. -/
+theorem lowerShriek_padicIntegersRingObj_of_finiteType (E : Type) [Field E]
+    [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
+    [FiniteDimensional ℚ_[ℓ] E] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] {f : X ⟶ Y}
+    (c : Compactification f) :
+    LowerShriekLocalizingHypotheses (Profinite.padicIntegersRingObj.{u} ℓ E) c :=
+  have := QuasiCompact.compactSpace_of_compactSpace aY
+  have := quasiSeparatedSpace_of_quasiSeparated aY
+  lowerShriek_padicIntegersRingObj ℓ E aY c
 
 /-- Blueprint `sk-lem-brown-hypotheses`: Hypotheses of Brown representability, for the
 coefficient ring `ℚ̄_ℓ` and a separated finite-type `k`-scheme `X`: `Loc(Dᵇc(X)⟦ℚ̄_ℓ⟧)` has split
@@ -216,15 +239,24 @@ theorem compactlyGenerates_padicAlgClRingObj {X : Scheme.{u}} (aX : X ⟶ Spec (
   sorry
 
 /-- Blueprint `det-sf-comp-coherence-single`: Compact support along one compactification on the
-localizing category, for the coefficient ring `ℚ̄_ℓ` and a separated finite-type `k`-scheme `Y`:
-for a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`, `Rp_* ∘ j_!` maps `Loc(Dctf(X, ℚ̄_ℓ))`
-into `Loc(Dctf(Y, ℚ̄_ℓ))` and `Dctf(X, ℚ̄_ℓ)` into `Dctf(Y, ℚ̄_ℓ)`, and preserves direct sums on
-`Loc(Dctf(X, ℚ̄_ℓ))`. -/
+localizing category, for the coefficient ring `ℚ̄_ℓ` and a quasi-compact quasi-separated
+`k`-scheme `Y`: for a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`, `Rp_* ∘ j_!` maps
+`Loc(Dctf(X, ℚ̄_ℓ))` into `Loc(Dctf(Y, ℚ̄_ℓ))` and `Dctf(X, ℚ̄_ℓ)` into `Dctf(Y, ℚ̄_ℓ)`, and
+preserves direct sums on `Loc(Dctf(X, ℚ̄_ℓ))`. -/
 theorem lowerShriek_padicAlgClRingObj {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
+    [CompactSpace Y] [QuasiSeparatedSpace Y] {f : X ⟶ Y} (c : Compactification f) :
+    LowerShriekLocalizingHypotheses (Profinite.padicAlgClRingObj.{u} ℓ) c :=
+  sorry
+
+/-- `lowerShriek_padicAlgClRingObj` for a separated finite-type `k`-scheme `Y`, which is
+quasi-compact and quasi-separated. -/
+theorem lowerShriek_padicAlgClRingObj_of_finiteType {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] {f : X ⟶ Y}
     (c : Compactification f) :
     LowerShriekLocalizingHypotheses (Profinite.padicAlgClRingObj.{u} ℓ) c :=
-  sorry
+  have := QuasiCompact.compactSpace_of_compactSpace aY
+  have := quasiSeparatedSpace_of_quasiSeparated aY
+  lowerShriek_padicAlgClRingObj ℓ aY c
 
 variable {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
   [IsSeparated aX] (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
@@ -242,15 +274,15 @@ theorem exists_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingO
     ∃ (G : LocalizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) Y ⥤
         LocalizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) X)
       (adj : rightDerivedLowerShriekLocalizing
-        (lowerShriek_continuousMapRingObj ℓ E aY c) ⊣ G) (_ : G.CommShift ℤ),
+        (lowerShriek_continuousMapRingObj_of_finiteType ℓ E aY c) ⊣ G) (_ : G.CommShift ℤ),
       adj.CommShift ℤ ∧ G.IsTriangulated ∧
       (∀ J : Type (u + 1), PreservesColimitsOfShape (Discrete J) G) ∧
       ∀ (G' : LocalizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) Y ⥤
           LocalizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) X)
         (adj' : rightDerivedLowerShriekLocalizing
-          (lowerShriek_continuousMapRingObj ℓ E aY c) ⊣ G'),
+          (lowerShriek_continuousMapRingObj_of_finiteType ℓ E aY c) ⊣ G'),
         ∃! e : G ≅ G', ∀ N, (rightDerivedLowerShriekLocalizing
-          (lowerShriek_continuousMapRingObj ℓ E aY c)).map (e.hom.app N) ≫
+          (lowerShriek_continuousMapRingObj_of_finiteType ℓ E aY c)).map (e.hom.app N) ≫
             adj'.counit.app N = adj.counit.app N :=
   exists_rightAdjoint_rightDerivedLowerShriekLocalizing _
     (compactlyGenerates_continuousMapRingObj ℓ E aX).1
@@ -269,15 +301,15 @@ theorem exists_rightAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingO
     ∃ (G : LocalizingBoundedConstructible (Profinite.padicIntegersRingObj.{u} ℓ E) Y ⥤
         LocalizingBoundedConstructible (Profinite.padicIntegersRingObj.{u} ℓ E) X)
       (adj : rightDerivedLowerShriekLocalizing
-        (lowerShriek_padicIntegersRingObj ℓ E aY c) ⊣ G) (_ : G.CommShift ℤ),
+        (lowerShriek_padicIntegersRingObj_of_finiteType ℓ E aY c) ⊣ G) (_ : G.CommShift ℤ),
       adj.CommShift ℤ ∧ G.IsTriangulated ∧
       (∀ J : Type (u + 1), PreservesColimitsOfShape (Discrete J) G) ∧
       ∀ (G' : LocalizingBoundedConstructible (Profinite.padicIntegersRingObj.{u} ℓ E) Y ⥤
           LocalizingBoundedConstructible (Profinite.padicIntegersRingObj.{u} ℓ E) X)
         (adj' : rightDerivedLowerShriekLocalizing
-          (lowerShriek_padicIntegersRingObj ℓ E aY c) ⊣ G'),
+          (lowerShriek_padicIntegersRingObj_of_finiteType ℓ E aY c) ⊣ G'),
         ∃! e : G ≅ G', ∀ N, (rightDerivedLowerShriekLocalizing
-          (lowerShriek_padicIntegersRingObj ℓ E aY c)).map (e.hom.app N) ≫
+          (lowerShriek_padicIntegersRingObj_of_finiteType ℓ E aY c)).map (e.hom.app N) ≫
             adj'.counit.app N = adj.counit.app N :=
   exists_rightAdjoint_rightDerivedLowerShriekLocalizing _
     (compactlyGenerates_padicIntegersRingObj ℓ E aX).1
@@ -294,15 +326,15 @@ theorem exists_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj 
     ∃ (G : LocalizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) Y ⥤
         LocalizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) X)
       (adj : rightDerivedLowerShriekLocalizing
-        (lowerShriek_padicAlgClRingObj ℓ aY c) ⊣ G) (_ : G.CommShift ℤ),
+        (lowerShriek_padicAlgClRingObj_of_finiteType ℓ aY c) ⊣ G) (_ : G.CommShift ℤ),
       adj.CommShift ℤ ∧ G.IsTriangulated ∧
       (∀ J : Type (u + 1), PreservesColimitsOfShape (Discrete J) G) ∧
       ∀ (G' : LocalizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) Y ⥤
           LocalizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) X)
         (adj' : rightDerivedLowerShriekLocalizing
-          (lowerShriek_padicAlgClRingObj ℓ aY c) ⊣ G'),
+          (lowerShriek_padicAlgClRingObj_of_finiteType ℓ aY c) ⊣ G'),
         ∃! e : G ≅ G', ∀ N, (rightDerivedLowerShriekLocalizing
-          (lowerShriek_padicAlgClRingObj ℓ aY c)).map (e.hom.app N) ≫
+          (lowerShriek_padicAlgClRingObj_of_finiteType ℓ aY c)).map (e.hom.app N) ≫
             adj'.counit.app N = adj.counit.app N :=
   exists_rightAdjoint_rightDerivedLowerShriekLocalizing _
     (compactlyGenerates_padicAlgClRingObj ℓ aX).1 (compactlyGenerates_padicAlgClRingObj ℓ aY).1
