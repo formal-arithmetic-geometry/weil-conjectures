@@ -108,35 +108,53 @@
    }
   },
   {
-   "text": "Construct the sum projection map at sheaf level by (s,m)\\otimes k\\mapsto(s,m\\otimes s^*k). Balancing and additivity hold on each summand and restriction sends s to the restricted lift, so this defines a morphism after tensor sheafification and sum sheafification. The sum-stalk formula, the inverse-image stalk formula and the tensor-stalk formula identify it at a geometric point \\bar t with the map (\\bigoplus_{\\bar v\\mapsto\\bar t}M_{\\bar v})\\otimes_A K_{\\bar t}\\to\\bigoplus_{\\bar v\\mapsto\\bar t}(M_{\\bar v}\\otimes_AK_{\\bar t}) sending m\\otimes k in a summand to m\\otimes k in that summand. Its inverse sends each summand tensor to the tensor with the corresponding sum inclusion; the tensor universal property proves that these are inverses. Stalk conservativity therefore makes the sheaf map an isomorphism. To derive it on the full unbounded categories, use flat-term K-flat representatives P,Q. Sum extension preserves flatness: tensoring e_{\\Sigma!}P^n with a short exact sequence is, by the just-proved sheaf identity, e_{\\Sigma!} of tensoring P^n with its exact inverse image. It also preserves K-flatness, since for every acyclic complex H on T the same degreewise identity gives e_{\\Sigma!}P\\otimes H=e_{\\Sigma!}(P\\otimes e^*H), an acyclic complex by exactness of e^* and e_{\\Sigma!}. The identity commutes with the direct-sum totalization: sum extension preserves direct sums, directly from its sheafified-sum definition (a map out of either iterated sum is exactly a family of maps out of its summands). Inverse image preserves flat K-flat representatives by the derived tensor-pullback theorem. The tensor descent theorem thus gives exactly the natural isomorphism p^\\Sigma in the statement. This also covers an empty fibre and the zero ring: all maps there are the unique maps between zero modules. The two input sites need not coincide: use the flat K-flat localization equivalence separately for V and T, then apply uniqueness of localization of natural transformations first in the V-variable and then in the T-variable. This yields the required natural bifunctor and comparison on D(V) times D(T).",
+   "text": "The underived sheaf projection map is the specific generator map of [lem-pur-etale-sheaf-projection-map]. Its hypotheses hold for the separated etale finite-type morphism $e$, and the node states that this map is an isomorphism, including its stalkwise direct-sum formula and compatibility with the lift-indexed summands. Thus the map used in the later totalization is the canonical $p^0_{M,N}$, not an unspecified isomorphism.",
    "uses": [
-    "def-weil-pbc-etale-sum-extension",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-amb-etale-sum-stalks",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-pod-etale-stalk-tensor-scalar",
-    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-pur-etale-sheaf-projection-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKF (lemma-f-shriek-projection), tensor-generator and stalk calculation; sites-cohomology.tex Tag 0GL1, expanded on unbounded complexes"
+   }
+  },
+  {
+   "text": "For unbounded complexes $P$ on $V$ and $Q$ on $T$, apply [lem-pur-etale-sum-tensor-totalization] to the separated etale finite-type map $e$. Its isomorphism $\\Psi_{P,Q}$ is precisely the totalization of the sheaf maps in Step 5, with the stated generator formula and the signed differential. Choose flat-term K-flat representatives by [lem-pc-kflat-resolution]. By [lem-pur-etale-sum-flat-kflat], $e_{\\Sigma!}P$ is also K-flat with flat terms. By the tensor-pullback theorem $e^*Q$ has those properties as well. Consequently tensor descent computes both total tensors by the derived tensors of the stated inputs. Exactness of sum extension identifies its termwise application on the right with $S_e$.",
+   "uses": [
+    "lem-pur-etale-sum-tensor-totalization",
+    "lem-pur-etale-sum-flat-kflat",
     "lem-pc-kflat-resolution",
-    "lem-amb-etale-adjoint-locality",
-    "prop-weil-pbc-inverse-image-modules-exact",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKF (lemma-f-shriek-projection), tensor-generator and stalk calculation; sites-cohomology.tex Tag 0GL1, expanded on unbounded complexes"
+   }
+  },
+  {
+   "text": "The localized flat-term K-flat homotopy category presents $D(V_{\\mathrm{et}},A)$, and separately the analogous category presents $D(T_{\\mathrm{et}},A)$, by tensor descent. For each fixed flat K-flat $Q$ on $T$, Step 6 gives a natural isomorphism in $P$ between the restrictions of $S_e(-)\\otimes_A^L Q$ and $S_e(-\\otimes_A^Le^*Q)$. Localization, clause (2), extends it uniquely in the $V$ variable. The naturality square for every map between such $Q$ holds before localization and hence afterwards by clause (3), so the extension is natural in $Q$. Localize this natural family in the $T$ variable by clause (2) again. Invert the family in the same way; uniqueness and preservation of composition show that its two composites are identities. This gives the natural isomorphism $p^\\Sigma$ on $D(V_{\\mathrm{et}},A)\\times D(T_{\\mathrm{et}},A)$, with exactly the tensor-representative formula in the statement. The two sites were localized separately; they are never identified.",
+   "uses": [
     "lem-weil-pbc-site-derived-tensor-descent",
     "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF (lemma-f-shriek-projection), its tensor-generator and stalk proof; derived passage as in Tag 0GL5"
+    "place": "Tag 0GKF (lemma-f-shriek-projection), tensor-generator and stalk calculation; sites-cohomology.tex Tag 0GL1, expanded on unbounded complexes"
    }
   },
   {
-   "text": "For the sheaf maps of Steps 1, 2 and 5, the following evaluation identity holds after pullback tensor comparison: gamma_j\\circ(d^0_M\\otimes1)=d^0_{M\\otimes e^*K}\\circ r^*p^\\Sigma_{M,K}. Check it on a local pullback of the tensor generator (s,m)\\otimes k. On the graph of s the left side evaluates m and then tensors with the restriction of k, yielding m\\otimes s^*k; off the graph it is zero. The right side first forms the generator (s,m\\otimes s^*k) and then zero-extends and evaluates it, giving those same two restrictions. Equality follows by the sheaf axiom on the disjoint graph/complement cover, by linearity on finite sums, and by the universal properties of inverse image and sheafification. For flat K-flat P,Q the computation is a degreewise equality of maps of total tensor complexes: all maps have degree zero and preserve tensor-factor order, so each differential d_P\\otimes1+(-1)^p1\\otimes d_Q is respected with the same sign on both sides. Step 5 makes S_eP K-flat; the same K-flatness argument for open extension, or its case in the open-tensor theorem, applies to j_!P. The derived tensor-pullback and open-tensor theorems identify these chain maps with the specified derived gamma_j and pullback tensor comparison. Tensor descent and Step 2 therefore give the derived equality gamma_j\\circ(d_M\\otimes1)=d_{M\\otimes^Le^*K}\\circ r^*p^\\Sigma_{M,K} for arbitrary M,K. More explicitly, equality on flat K-flat models extends first in the V-variable and then in the T-variable, using the resolving-class equivalence and localization uniqueness in each variable; no identification of the two sites is required.",
+   "text": "For the sheaf maps of Steps 1, 2 and 5–7, the following evaluation identity holds after pullback tensor comparison: gamma_j\\circ(d^0_M\\otimes1)=d^0_{M\\otimes e^*K}\\circ r^*p^\\Sigma_{M,K}. Check it on a local pullback of the tensor generator (s,m)\\otimes k. On the graph of s the left side evaluates m and then tensors with the restriction of k, yielding m\\otimes s^*k; off the graph it is zero. The right side first forms the generator (s,m\\otimes s^*k) and then zero-extends and evaluates it, giving those same two restrictions. Equality follows by the sheaf axiom on the disjoint graph/complement cover, by linearity on finite sums, and by the universal properties of inverse image and sheafification. For flat K-flat P,Q the computation is a degreewise equality of maps of total tensor complexes: all maps have degree zero and preserve tensor-factor order, so each differential d_P\\otimes1+(-1)^p1\\otimes d_Q is respected with the same sign on both sides. Step 6 makes S_eP K-flat; the same K-flatness argument for open extension, or its case in the open-tensor theorem, applies to j_!P. The derived tensor-pullback and open-tensor theorems identify these chain maps with the specified derived gamma_j and pullback tensor comparison. Tensor descent and Step 2 therefore give the derived equality gamma_j\\circ(d_M\\otimes1)=d_{M\\otimes^Le^*K}\\circ r^*p^\\Sigma_{M,K} for arbitrary M,K. More explicitly, equality on flat K-flat models extends first in the V-variable and then in the T-variable, using the resolving-class equivalence and localization uniqueness in each variable; no identification of the two sites is required.",
    "uses": [
     "lem-pur-etale-open-derived-tensor",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "lem-weil-pbc-site-derived-tensor-descent",
     "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-localization-universal-property"
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pur-etale-sum-flat-kflat"
    ],
    "elementary": false,
    "source": {
@@ -145,7 +163,7 @@
    }
   },
   {
-   "text": "Precompose the proposed projection identity with t_M\\otimes1_K. It is equivalent to P^c_{e,M,K}\\circ(t_M\\otimes1_K)=t_{M\\otimes^Le^*K}\\circ p^\\Sigma_{e,M,K}. Transpose under r^*\\dashv Rr_*. The projection-map definition gives the transpose of the left side as gamma_j\\circ((\\varepsilon_{r,Dj_!M}\\circ r^*t_M)\\otimes1)=gamma_j\\circ(d_M\\otimes1), using naturality of the pullback tensor comparison. The transpose of the right side is d_{M\\otimes^Le^*K}\\circ r^*p^\\Sigma. These are equal by Step 6. The adjunction bijection proves the equivalent identity, and cancellation of the isomorphism t proves (2). This is the counit-defined projection morphism, with precisely the order of factors in the statement; there is no choice of a projection isomorphism by abstract endpoints.",
+   "text": "Precompose the proposed projection identity with t_M\\otimes1_K. It is equivalent to P^c_{e,M,K}\\circ(t_M\\otimes1_K)=t_{M\\otimes^Le^*K}\\circ p^\\Sigma_{e,M,K}. Transpose under r^*\\dashv Rr_*. The projection-map definition gives the transpose of the left side as gamma_j\\circ((\\varepsilon_{r,Dj_!M}\\circ r^*t_M)\\otimes1)=gamma_j\\circ(d_M\\otimes1), using naturality of the pullback tensor comparison. The transpose of the right side is d_{M\\otimes^Le^*K}\\circ r^*p^\\Sigma. These are equal by Step 8. The adjunction bijection proves the equivalent identity, and cancellation of the isomorphism t proves (2). This is the counit-defined projection morphism, with precisely the order of factors in the statement; there is no choice of a projection isomorphism by abstract endpoints.",
    "uses": [
     "def-kun-projection-formula-map",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
@@ -157,7 +175,7 @@
    }
   },
   {
-   "text": "Every previous calculation was performed for the given compactification c, with no use of r being finite. Under a proper-refinement comparison rho:F_e^c\\to F_e^d, the quasi-finite comparison theorem says c_e^d\\circ rho=c_e^c, hence rho\\circ t^c=t^d. Step 4 writes each compactification exchange as t'\\circ b_e\\circ g^*c_e, and Step 7 writes each projection as t\\circ p^\\Sigma\\circ(c_e\\otimes1). Substituting rho\\circ t^c=t^d and its base-changed version into these two expressions proves refinement compatibility by associativity of composition. Naturality in M,K holds because a,d,b,p and the adjunction bijections used above are natural; the identities thus hold as identities of derived natural transformations. This proves the final clause as well as both numbered clauses.",
+   "text": "Every previous calculation was performed for the given compactification c, with no use of r being finite. Under a proper-refinement comparison rho:F_e^c\\to F_e^d, the quasi-finite comparison theorem says c_e^d\\circ rho=c_e^c, hence rho\\circ t^c=t^d. Step 4 writes each compactification exchange as t'\\circ b_e\\circ g^*c_e, and Step 9 writes each projection as t\\circ p^\\Sigma\\circ(c_e\\otimes1). Substituting rho\\circ t^c=t^d and its base-changed version into these two expressions proves refinement compatibility by associativity of composition. Naturality in M,K holds because a,d,b,p and the adjunction bijections used above are natural; the identities thus hold as identities of derived natural transformations. This proves the final clause as well as both numbered clauses.",
    "uses": [
     "lem-sfb-quasifinite-compact-support-exact"
    ],
@@ -177,12 +195,13 @@
   "def-weil-pbc-inverse-image",
   "def-weil-presheaf-modules-sheafification",
   "lem-amb-etale-adjoint-locality",
-  "lem-amb-etale-sum-stalks",
   "lem-cbc-proper-support-sheaf-composition",
   "lem-pc-kflat-resolution",
-  "lem-pod-etale-stalk-tensor-scalar",
   "lem-pod-separated-finite-type-base-change",
   "lem-pur-etale-open-derived-tensor",
+  "lem-pur-etale-sheaf-projection-map",
+  "lem-pur-etale-sum-flat-kflat",
+  "lem-pur-etale-sum-tensor-totalization",
   "lem-sfb-quasifinite-compact-support-exact",
   "lem-weil-pbc-etale-base-change-finite-limits",
   "lem-weil-pbc-etale-inverse-image-restriction",
@@ -191,7 +210,6 @@
   "lem-weil-pbc-etale-underived-exchange-restriction",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-inverse-image-stalk-germ",
   "lem-weil-pbc-kinjective-hom-derived",
   "lem-weil-pbc-localization-universal-property",
   "lem-weil-pbc-mate-pasting",
@@ -202,7 +220,6 @@
   "lem-weil-pbc-separated-base-change",
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lemma-weil-pbc-geometric-stalk-conservative",
   "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "proof_origin": {
@@ -360,7 +377,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-co-smooth-etale-locality",
@@ -372,9 +389,9 @@
  "split_report": {
   "date": "2026-10-17",
   "item": "lem-pur-etale-support-map-compatibility",
-  "worker": "stage1",
-  "summary": "Expanded the canonical support comparison into graph evaluation, proved exchange and projection compatibilities by their actual adjunction transposes on unbounded complexes, and obtained arbitrary-compactification refinement compatibility by conjugation. Reused existing statements throughout; no new nodes, no SGA, no change to the statement.",
-  "blueprint": "lem-pur-co-smooth-etale-locality.proof.md Step 1 (base-change-stable etale normalization) is realized by Steps 1–4 and 8; Step 3 (the actual counit-defined tensor map) by Steps 2 and 5–8.",
+  "worker": "Q144",
+  "summary": "Repair of the human return: preserve the statement, Lean record, route and all other original arguments; replace original Step 5 by a short citation of the extracted etale sheaf projection formula, while retaining the unbounded tensor-totalization and flat/K-flat nodes. Verify two-site descent by successive localization. No SGA sources or Lean work.",
+  "blueprint": "Parent lem-pur-co-smooth-etale-locality proof Step 1 is realized by Steps 1–4 and 10; parent Step 3 by Steps 2 and 5–10. Original item Step 5 is carried by the new etale sheaf projection node, and the original totalization and flat/K-flat arguments remain as Steps 6–7.",
   "tool_uses": [
    {
     "node": "def-amb-etale-compact-support",
@@ -409,20 +426,12 @@
     "why": "Generic Etale localization of the ambient adjoint used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
    },
    {
-    "node": "lem-amb-etale-sum-stalks",
-    "why": "Generic Geometric stalks of etale sum extension used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
-   },
-   {
     "node": "lem-cbc-proper-support-sheaf-composition",
     "why": "Generic Composition and pullback of the underived sheaf of sections with proper support used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
    },
    {
     "node": "lem-pc-kflat-resolution",
     "why": "Generic Existence of K-flat resolutions on a ringed site used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
-   },
-   {
-    "node": "lem-pod-etale-stalk-tensor-scalar",
-    "why": "Generic Geometric stalks commute with tensor products and scalar extension on the etale site used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
    },
    {
     "node": "lem-pod-separated-finite-type-base-change",
@@ -465,10 +474,6 @@
     "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
    },
    {
-    "node": "lem-weil-pbc-inverse-image-stalk-germ",
-    "why": "Generic Stalk of an inverse image, compatible with germs of pulled-back sections used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
-   },
-   {
     "node": "lem-weil-pbc-kinjective-hom-derived",
     "why": "Generic Morphisms into a K-injective complex are computed in the homotopy category used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
    },
@@ -507,10 +512,6 @@
    {
     "node": "lem-weil-pbc-termwise-adjunction-homotopy",
     "why": "Generic An adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
-   },
-   {
-    "node": "lemma-weil-pbc-geometric-stalk-conservative",
-    "why": "Generic Conservativity of geometric stalks used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
    },
    {
     "node": "prop-weil-pbc-inverse-image-modules-exact",
@@ -556,12 +557,12 @@
   "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q38-b4651a2bd",
-  "group": "Q38",
+  "reviewer": "NT-cc-Q144-5653d807f",
+  "group": "Q144",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-b4651a2bd (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item and its 8 steps, all 35 proof-dep and 18 stmt-dep statements, the parent lem-pur-co-smooth-etale-locality (its Steps 2, 4 and 6 cite this item), the blueprint proof of lem-pur-co-smooth-etale-locality, the sk-prop-cohsm unit and its route, the full proof of lem-sfb-quasifinite-compact-support-exact, and Stacks 0F4L, 0F4Y, 0GKM, 0F7L, 0GKF, 0GL5 and 03S6. The hypotheses (A finite, e separated etale of finite type, Noetherian schemes, T' Noetherian) match lem-sfb. I checked the types and directions of C=Rr'_*(b_j)Ex_r, b=beta^{-1}, P=Rr_*(gamma)pi and p^Sigma, and they agree with how the parent uses (1) and (2). Step 1: the graph is clopen in Vbar_W because it is a section of the separated map r_W, so no finiteness of r is needed, and its zero extension lies in r_*j_!=e^supp_!. Step 2: I recomputed the counit transpose. Step 3: I checked beta on generators through the conjugate formula. Step 4: I recomputed the mate transpose. Steps 5-6: sum extension preserves flat K-flat complexes, and descent is done one variable at a time across the two sites. Step 7: I recomputed the projection transpose. Step 8: refinement independence follows by substitution. Cases tested: e=id, the fold map T+T->T, an open immersion, a nonfinite compactification of Spec k, V empty, A=0. No SGA is cited and there are no new nodes. The only off-route statements are lem-sfb-quasifinite-compact-support-exact and lem-pod-etale-stalk-tensor-scalar; I accepted both as tool uses, and the other declared tool uses are on route, definitions or leaves. Observations, not faults: (1) lem-sfb's statement says only 'canonical'. That its maps are the derived unit and the 0F4L graph map is in its proof (Steps 3 and 7), so I recommend sharpening its statement. (2) Clause (1) overlaps the SGA-sourced lem-asd-etale-compact-support-normalization. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-5653d807f (reviewer sub-agent of L); spot-checked: I read the whole delivery against the side-project base, which is the returned 8-step version. Only proof, proof_deps, split_report and status changed; the statement and Lean record are identical. Old Step 5 (2116 characters) is now Steps 5-7, carried by three new statement-only nodes. Step 5 cites the sheaf projection map for e. Step 6 uses the totalization isomorphism, the flat/K-flat node for e_Sigma!P, K-flat resolutions, tensor pullback for e^*Q, and tensor descent. Step 7 extends the comparison by localization clauses (2) and (3), first in the V-variable and then in the T-variable, without identifying the two sites. Step 8 also needs the flat/K-flat node for j_!; this holds because j is separated, etale, of finite type and quasi-compact (V Noetherian), and j_Sigma! = j_!. I rechecked Steps 1-4 and 8-10 against the cited statements: the graph is closed because r_W is separated, and the counit, mate and projection transposes and the refinement substitution are correct. Every step is under 2000 characters and proof_deps equals the union of the uses. Sources read: more-etale 0GKF lines 1808-1897 (pure-tensor rule and stalk square) and sites-modules 0E8I (an abstract Yoneda isomorphism only). All three new statements are true. I tested id, the fold map, an open immersion, an empty source, A=0 and unbounded complexes: the stalk map (sum M_v)(x)N_t -> sum(M_v(x)N_t) needs no flatness, the signed totalization agrees by naturality, and K-flatness follows from Tot(H(x)u_!P) = u_!Tot(P(x)u^*H). None duplicates an existing node: 0E8I and lem-weil-pbc-ringed-slice-extension-tensor lack the generator map that Step 8 evaluates, 03EV covers only u_!A_U, and the pur713 nodes are pro-etale. None restates a clause of the item. FIX to lem-pur-etale-sheaf-projection-map: the statement now introduces n in N(W) and defines s^*n as the unit followed by restriction along the graph (B2); it cites lem-weil-pbc-inverse-image-stalk-germ for (e^*N)_v = N_t, added to stmt_deps (C4); source.place now says the construction is adapted from 0GKF's f_{p!} model through the 0F4L graph identification, not specialized from it (B5). Observation, not a fault here and already noted by the 10-16 reviewer: lem-sfb's statement says only that the sum-extension identification is canonical, so that node should state the 0F4L graph map when it is split. I accept the declared tool uses. No SGA source is used.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
