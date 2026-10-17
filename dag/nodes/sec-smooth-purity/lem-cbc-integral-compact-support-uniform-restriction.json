@@ -49,15 +49,10 @@
  ],
  "proof": [
   {
-   "text": "First check the ambient scheme of the chosen compactification. Properness makes $p$ finite type by [def-weil-proper-morphism], so $\\overline X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Choose a finite Noetherian affine cover $Y=\\bigcup_i\\operatorname{Spec}R_i$. By [def-weil-finite-type-morphism], each inverse image has a finite affine cover $\\operatorname{Spec}B_{ij}$ with a surjection $R_i[t_1,\\ldots,t_{r_{ij}}]\\twoheadrightarrow B_{ij}$. The affine-cover dimension formula [lem-pc-dimension-affine-open-cover] and [lem-pc-scheme-dimension-local-rings] give $\\dim R_i\\leq D$ for some finite $D\\geq0$. By [lem-sf-noetherian-polynomial-dimension], $\\dim R_i[t_1,\\ldots,t_{r_{ij}}]\\leq D+r_{ij}$. Under a surjection of rings a strict chain of primes in the quotient pulls back to a strict chain of primes, so $\\dim B_{ij}\\leq D+r_{ij}$. Applying the same affine-cover formulas to $\\overline X$ proves that it has finite dimension. These arguments apply to nonempty schemes; an empty scheme already has dimension $-\\infty$.\nThere is also a uniform bound $e=\\max(\\{0\\}\\cup\\{r_{ij}\\})$ on all geometric fibres of $p$. Indeed, for a geometric point $\\operatorname{Spec}\\Omega\\to Y$, choose a chart containing its image. By [lem-weil-pbc-fibre-product-affine-spectra], the pullbacks of its source charts are the spectra of $B_{ij}\\otimes_{R_i}\\Omega$. They cover that fibre and are quotients of $\\Omega[t_1,\\ldots,t_{r_{ij}}]$: the images of the chosen generators still generate, since every pure tensor is a polynomial in them with coefficients in $\\Omega$. A field has only the primes $(0)$ and only the ideals $(0),(1)$, so its dimension is zero and it is Noetherian. The polynomial-dimension theorem, the quotient-chain argument and the affine-cover dimension formulas give dimension at most $e$ for the geometric fibre. Empty charts or fibres contribute $-\\infty$ and cause no exception; if $Y$ is empty all three schemes are empty and take $e=0$. Finally $\\ell$ is invertible on $\\overline X$: at any point the local ring map from $Y$ carries an inverse of $\\ell$ to an inverse.",
+   "text": "Properness implies that $p$ is finite type by [def-weil-proper-morphism]. Apply [lem-cbc-compactification-geometry-fibre-bound] with $T=\\overline X$ and the given $Y$. It supplies the Noetherian finite-dimensional ambient scheme, a common bound $e\\geq0$ on all geometric fibres of $p$, and invertibility of $\\ell$ on $\\overline X$. In particular the completed uniform category on $\\overline X$ and the proper-preservation theorem below are defined under these scheme hypotheses.",
    "uses": [
     "def-weil-proper-morphism",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "def-weil-finite-type-morphism",
-    "lem-pc-dimension-affine-open-cover",
-    "lem-pc-scheme-dimension-local-rings",
-    "lem-sf-noetherian-polynomial-dimension",
-    "lem-weil-pbc-fibre-product-affine-spectra"
+    "lem-cbc-compactification-geometry-fibre-bound"
    ],
    "elementary": false,
    "source": {
@@ -66,19 +61,25 @@
    }
   },
   {
-   "text": "The coefficient facts used below hold for this finite extension: [lem-weil-l-adic-extension-integers-dvr] makes $A$ a subring of $E$ and a principal ideal domain with maximal ideal $I$. The extending absolute value is nonarchimedean: after interchanging $x,y$ suppose $|x|_E\\leq|y|_E$; if $y\\neq0$, then $x/y\\in A$ and $1+x/y\\in A$, so $|x+y|_E=|y|_E\\,|1+x/y|_E\\leq|y|_E$, while $y=0$ forces $x=0$. Thus every hypothesis of [lem-weil-valued-dvr-finite-quotients] holds and it makes every $A/I^n$ finite. In particular $A$ is Noetherian, since each ideal has one generator. Also $\\ell\\in I$: the extending absolute value satisfies $|\\ell|_E=\\ell^{-1}<1$, so the maximal-ideal description in the first cited statement applies. Fix $K\\in\\mathcal C_X$ and put $J=j_!K$ in the completed-coefficient derived category of $\\overline X$. Apply (i)$\\Rightarrow$(ii) of [lem-weil-pbc-integral-stratified-perfect-characterization] on $X$: choose its finite stratification and perfect $A$-complex local models. The closed subset $Z=\\overline X\\setminus j(X)$ has a closed subscheme structure by [lem-weil-pbc-closed-subset-closed-subscheme]; write $i:Z\\hookrightarrow\\overline X$. Regard each input stratum as a locally closed subscheme of $\\overline X$ and add $Z$. For its scheme structure, [def-weil-closed-immersion] factors its immersion into $X$ as a closed immersion followed by an open immersion into $X$. The latter followed by $j$ is open: its image is open in the open $j(X)$ and hence in $\\overline X$, and the two structure-sheaf restriction isomorphisms compose, exactly as in [def-weil-open-immersion]. Thus the same closed factor followed by this open factor is an immersion into $\\overline X$. This is a finite stratification in [def-constructible-stratification]: the strata remain disjoint and cover the open, and $Z$ is their complementary closed stratum.\nUse [lem-weil-proetale-weakly-etale-localization] to identify the open site with the localized site in the statement. The completed coefficient identifications on these strata and on their covering objects are the canonical ones of [lem-weil-pbc-profinite-coefficient-inverse-image], applied to $Q_n=A/I^n$; they respect composition. The exact ringed open-closed identities of [lem-weil-pbc-proetale-ringed-open-closed] give $j^{-1}J\\simeq K$ and $i^{-1}J=0$ on complexes as well: the inverse images are exact by [lem-weil-pbc-proetale-immersion-limit-preservation] and $j_!$ is exact by the same open-closed node. Thus on the old strata $J$ has precisely the original perfect local models, and on $Z$ it has the zero perfect $A$-complex as a model. The coefficient identifications carry $A_X\\otimes_A^LP$ to the corresponding model over the restricted $A_{\\overline X}$, because restriction here is exact and the bounded finite-projective model is computed termwise. Apply (ii)$\\Rightarrow$(i) of [lem-weil-pbc-integral-stratified-perfect-characterization] on $\\overline X$, whose scheme hypotheses were checked in step 1. It follows that $J\\in\\mathcal C_{\\overline X}$ in the exact sense of [def-weil-pbc-bounded-constructible-complete], including common normalized local models and compatible etale-origin witnesses. This argument uses the characterization's stated equivalence, not data from its proof.",
+   "text": "The coefficient facts used below hold for this finite extension: [lem-weil-l-adic-extension-integers-dvr] makes $A$ a subring of $E$ and a principal ideal domain with maximal ideal $I$. The extending absolute value is nonarchimedean: after interchanging $x,y$ suppose $|x|_E\\leq|y|_E$; if $y\\neq0$, then $x/y\\in A$ and $1+x/y\\in A$, so $|x+y|_E=|y|_E\\,|1+x/y|_E\\leq|y|_E$, while $y=0$ forces $x=0$. Thus every hypothesis of [lem-weil-valued-dvr-finite-quotients] holds and it makes every $A/I^n$ finite. In particular $A$ is Noetherian, since each ideal has one generator. Also $\\ell\\in I$: the extending absolute value satisfies $|\\ell|_E=\\ell^{-1}<1$, so the maximal-ideal description in the first cited statement applies. Fix $K\\in\\mathcal C_X$. The implication (i)$\\Rightarrow$(ii) of [lem-weil-pbc-integral-stratified-perfect-characterization] supplies a finite stratification and the perfect $A$-complex models needed for extension by zero.",
    "uses": [
     "lem-weil-l-adic-extension-integers-dvr",
     "lem-weil-valued-dvr-finite-quotients",
-    "def-weil-closed-immersion",
-    "def-weil-open-immersion",
-    "def-constructible-stratification",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11 and Lemma 6.1.12, used through the cited compatible-uniform characterization and arbitrary-ringed open-closed statements; Stacks Tags 01J3, 09AA, 09BN, 09AH, 03DI and 03DJ."
+   }
+  },
+  {
+   "text": "Put $J=j_!K$. Identify the open site with the localized site by [lem-weil-proetale-weakly-etale-localization]. Apply [lem-cbc-extension-zero-stratified-perfect] to the models of step 2. A closed subscheme with the complementary support exists by [lem-weil-pbc-closed-subset-closed-subscheme]; the lemma gives the old perfect models and the zero model on that complement. Thus condition (ii) of [lem-weil-pbc-integral-stratified-perfect-characterization] holds on $\\overline X$. The implication (ii)$\\Rightarrow$(i), with the scheme hypotheses of step 1, gives $J\\in\\mathcal C_{\\overline X}$, including the common normalized models and compatible etale-origin witnesses of [def-weil-pbc-bounded-constructible-complete].",
+   "uses": [
+    "lem-cbc-extension-zero-stratified-perfect",
     "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
     "def-weil-pbc-bounded-constructible-complete"
    ],
    "elementary": false,
@@ -102,7 +103,7 @@
    }
   },
   {
-   "text": "Apply [prop-weil-pbc-preservation-constructible] to the identity base-change square for $p:\\overline X\\to Y$: both vertical maps are $p$, and the horizontal maps are the identities of $\\overline X$ and $Y$. The square is cartesian, and both vertical maps are proper. All four scheme entries are Noetherian and finite-dimensional by step 1 and the hypotheses. Take its integer $N=\\ell$: it is positive, kills $A/I$, and is invertible on $Y$ and $\\overline X$. The common geometric-fibre bound is the $e$ of step 1. The input $J$ belongs to the exact compatible uniform category by step 2, and its reductions have the common interval $[u-1,v]$ by step 3. Thus the first conclusion of that preservation theorem gives $Rp_*J\\in\\mathcal C_Y$ (indeed its reductions have cohomology in $[u-1,v+2e]$). This is membership in [def-weil-pbc-bounded-constructible-complete], including compatible etale-origin witnesses; it is not just levelwise constructibility. Since $J=j_!K$, [def-weil-pbc-projection-compactification] identifies this object with precisely the chosen candidate $Rf_!^cK$.",
+   "text": "Apply [prop-weil-pbc-preservation-constructible] to the identity base-change square for $p:\\overline X\\to Y$: both vertical maps are $p$, and the horizontal maps are the identities of $\\overline X$ and $Y$. The square is cartesian, and both vertical maps are proper. All four scheme entries are Noetherian and finite-dimensional by step 1 and the hypotheses. Take its integer $N=\\ell$: it is positive, kills $A/I$, and is invertible on $Y$ and $\\overline X$. The common geometric-fibre bound is the $e$ of step 1. The input $J$ belongs to the exact compatible uniform category by step 3, and its reductions have the common interval $[u-1,v]$ by step 4. Thus the first conclusion of that preservation theorem gives $Rp_*J\\in\\mathcal C_Y$ (indeed its reductions have cohomology in $[u-1,v+2e]$). This is membership in [def-weil-pbc-bounded-constructible-complete], including compatible etale-origin witnesses; it is not just levelwise constructibility. Since $J=j_!K$, [def-weil-pbc-projection-compactification] identifies this object with precisely the chosen candidate $Rf_!^cK$.",
    "uses": [
     "prop-weil-pbc-preservation-constructible",
     "def-weil-pbc-bounded-constructible-complete",
@@ -115,20 +116,27 @@
    }
   },
   {
-   "text": "It remains to check functors and exactness, rather than only objects. Exact additive module extension by zero on the localized ringed site is [lem-pur-site-restriction-module-adjunction-exact]; [lem-sf-exact-functor-derived-triangulated] makes its termwise derived functor triangulated. For the direct-image part, the canonical coefficient identification of step 2 gives the ring-sheaf isomorphism required by [def-weil-pbc-proetale-operations], with $u=p$, $R_V=A_Y$ and $R_U=A_{\\overline X}$. That definition constructs the unbounded derived module direct image by functorial K-injective resolutions in the full module-sheaf category and states that its resolution construction is triangulated, as in [lem-pc-right-derived-functor-triangulated]. The completeness and reduction comparisons of [prop-weil-pbc-direct-image-limits] refer to this module direct image; they do not replace its construction. Therefore their composite commutes with shifts and preserves distinguished triangles. Its module direct-image part is additive and $A$-linear on complete objects by [lem-sbc-completed-operations-linear-natural-exchange], applied to $p$ and the complete object $J$ of step 2.\nExtension by zero is $A$-linear as well. For a module-sheaf morphism $t:F\\to G$ and a scalar $a\\in A$, the functorial direct-sum formula of [def-weil-extension-by-zero-presheaf] gives $P_{a t}(V)=aP_t(V)$: on the summand indexed by $\\varphi:V\\to X$ both sides send $s$ to $a\\,t_{(V,\\varphi)}(s)$. This also covers a zero presheaf value. Write $\\eta_F:P_F\\to P_F^\\#$ and $\\eta_G:P_G\\to P_G^\\#$ for the module sheafification units. By [def-weil-presheaf-modules-sheafification], both $(P_{a t})^\\#$ and $a(P_t)^\\#$ have precomposite $\\eta_G\\circ P_{a t}=a(\\eta_G\\circ P_t)$ with $\\eta_F$, since the units are module maps. Uniqueness in that universal property gives $j_!(a t)=a j_!(t)$. Applying this degreewise preserves the equation on cochain maps. The localization functor is $A$-linear by [lem-weil-linear-abelian-derived-category]. The equation descends to derived morphisms: scalar multiplication on a localized arrow $w^{-1}t$ is $w^{-1}(a t)$, and its image is $(j_!w)^{-1}(a j_!t)=a((j_!w)^{-1}j_!t)$; equivalently use the same identity on composites of chain maps and formal inverses of quasi-isomorphisms. Thus the composite is additive and $A$-linear.\nSteps 2 and 4 put its objects in the required full subcategories. Fullness restricts its maps without any choices. By [lem-weil-pbc-uniform-complete-triangulated], their shifts and distinguished triangles are inherited from the ambient categories. The preceding shift comparison therefore restricts, and an input distinguished triangle is sent to an ambient distinguished triangle with all three vertices in $\\mathcal C_Y$, hence to a distinguished triangle there. This gives the asserted exact $A$-linear functor for the fixed compactification, with no compactification-independence claim needed.",
+   "text": "The coefficient identification [lem-weil-pbc-profinite-coefficient-inverse-image], applied to the finite rings $A/I^n$ from step 2, makes the direct image the module functor of [def-weil-pbc-proetale-operations]. Its K-injective construction is triangulated by [lem-pc-right-derived-functor-triangulated]; these are exactly the operations used by [prop-weil-pbc-direct-image-limits]. For extension by zero apply [lem-cbc-localized-extension-zero-linear-derived] to $\\overline X_{\\mathrm{proet}}$ and $A\\to A_{\\overline X}$: it gives the additive $A$-linear termwise functor with its shifts and triangles. The direct-image functor is additive and $A$-linear on the complete inputs $J$ of step 3 by [lem-sbc-completed-operations-linear-natural-exchange]. Their composite therefore commutes with shifts, preserves triangles, and preserves sums and scalar multiples of morphisms between the inputs under consideration.",
    "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-sf-exact-functor-derived-triangulated",
-    "prop-weil-pbc-direct-image-limits",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-sbc-completed-operations-linear-natural-exchange",
-    "lem-weil-linear-abelian-derived-category",
-    "lem-weil-pbc-uniform-complete-triangulated",
+    "lem-cbc-localized-extension-zero-linear-derived",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
     "def-weil-pbc-proetale-operations",
-    "def-weil-extension-by-zero-presheaf"
+    "lem-pc-right-derived-functor-triangulated",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-sbc-completed-operations-linear-natural-exchange"
    ],
    "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); sites-modules.tex Tags 03DI/03DJ; proetale.tex Tag 099N for the completed direct image; the existing generic derived-functor triangulation and linear-derived-category nodes supply the categorical facts."
+   }
+  },
+  {
+   "text": "Steps 3 and 5 put the objects of the composite in the required full subcategories. Fullness restricts all its maps with no choices. By [lem-weil-pbc-uniform-complete-triangulated], the two subcategories inherit their shifts and distinguished triangles from the ambient categories. The shift comparison of step 6 therefore restricts. An input distinguished triangle is sent to an ambient distinguished triangle with all three vertices in $\\mathcal C_Y$, hence to a distinguished triangle there. Together with the additive and scalar equations in step 6 this gives the exact $A$-linear functor $Rf_!^c=Rp_*j_!$ for this fixed compactification.",
+   "uses": [
+    "lem-weil-pbc-uniform-complete-triangulated"
+   ],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
     "place": "Tag 015F (lemma-right-derived-exact-functor); sites-modules.tex Tags 03DI/03DJ; proetale.tex Tag 099N for the completed direct image; the existing generic derived-functor triangulation and linear-derived-category nodes supply the categorical facts."
@@ -137,39 +145,26 @@
  ],
  "proof_deps": [
   "def-weil-proper-morphism",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "def-weil-finite-type-morphism",
-  "lem-pc-dimension-affine-open-cover",
-  "lem-pc-scheme-dimension-local-rings",
-  "lem-sf-noetherian-polynomial-dimension",
-  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-cbc-compactification-geometry-fibre-bound",
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-valued-dvr-finite-quotients",
-  "def-weil-closed-immersion",
-  "def-weil-open-immersion",
-  "def-constructible-stratification",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-cbc-extension-zero-stratified-perfect",
   "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
   "def-weil-pbc-bounded-constructible-complete",
   "lem-weil-pbc-standard-quotients-perfect",
   "lem-weil-pbc-completed-constant-sheaf-reduction",
   "lem-sf-derived-homology-long-exact",
   "prop-weil-pbc-preservation-constructible",
   "def-weil-pbc-projection-compactification",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "prop-weil-pbc-direct-image-limits",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-sbc-completed-operations-linear-natural-exchange",
-  "lem-weil-linear-abelian-derived-category",
-  "lem-weil-pbc-uniform-complete-triangulated",
+  "lem-cbc-localized-extension-zero-linear-derived",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
   "def-weil-pbc-proetale-operations",
-  "def-weil-extension-by-zero-presheaf"
+  "lem-pc-right-derived-functor-triangulated",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "lem-weil-pbc-uniform-complete-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
@@ -177,7 +172,7 @@
   "place": "Proof, sole paragraph: integral constructible functors and constructible landing; expanded via stratified perfect open extension and the existing precise proper-image preservation interface."
  },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "created": {
@@ -307,20 +302,12 @@
   }
  ],
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-cbc-integral-compact-support-uniform-restriction",
   "worker": "stage1",
-  "summary": "Kept the statement and all original statement dependencies. Gave the missing uniform-category argument without new nodes: check the compactification ambient geometry and geometric fibre bound; extend stratified perfect models by the zero model on the complement; use the existing exact compatible-uniform characterization; establish a common canonical-reduction interval; apply precise proper-image preservation; restrict the triangulated A-linear composite. No Lean attachment matches the completed coefficient and witness hypotheses. Second reading supplied the nonarchimedean hypothesis of the finite-quotient tool, cited the actual K-injective module direct-image definition and extension-by-zero presheaf definition, and wrote the scalar calculation on morphisms and its sheafification explicitly.",
-  "blueprint": "Realizes thm-cbc-finite-extension, Proof sole paragraph, “is an isomorphism of O_E-linear functors on the integral constructible categories” and “the constructible landing is the finite-level condition of the statement”. The unit continues to pass through completed integral operations followed by rationalization.",
+  "summary": "Repaired precisely the three long arguments in returned steps 1, 2 and 5 by extracting statement-only finite-type geometry, stratified local-model extension, and localized extension-by-zero linear derived-functor lemmas. Kept the statement, statement dependencies and Lean record unchanged. Retained the coefficient verification, two-term reduction bound, identity-square proper-preservation argument, K-injective direct-image construction, and final full triangulated-subcategory restriction in short steps on the same compactification route.",
+  "blueprint": "Realizes thm-cbc-finite-extension, Proof sole paragraph: the integral constructible functor and its finite-level constructible landing, with the three extracted arguments serving respectively the compactification geometry, extension-by-zero local models, and exact A-linear functoriality.",
   "tool_uses": [
-   {
-    "node": "lem-pc-dimension-affine-open-cover",
-    "why": "Generic the dimension of a scheme is the supremum of the dimensions of the rings of an affine open cover used as a tool to implement the fixed compactification argument; no node of this unit states this general interface."
-   },
-   {
-    "node": "lem-pc-scheme-dimension-local-rings",
-    "why": "Generic dimension of a scheme is the supremum of the dimensions of its local rings used as a tool to implement the fixed compactification argument; no node of this unit states this general interface."
-   },
    {
     "node": "lem-weil-l-adic-extension-integers-dvr",
     "why": "Generic the valuation ring of a finite extension of $\\mathbf q_\\ell$ is a discrete valuation ring with finite residue field used as a tool to implement the fixed compactification argument; no node of this unit states this general interface."
@@ -338,14 +325,6 @@
     "why": "Generic compatible inverse image of profinite coefficient sheaves used as a tool to implement the fixed compactification argument; no node of this unit states this general interface."
    },
    {
-    "node": "lem-weil-pbc-proetale-ringed-open-closed",
-    "why": "Generic ringed pro-etale open-closed localization used as a tool to implement the fixed compactification argument; no node of this unit states this general interface."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "why": "Generic inverse images along immersions preserve pro-etale limits used as a tool to implement the fixed compactification argument; no node of this unit states this general interface."
-   },
-   {
     "node": "lem-weil-pbc-standard-quotients-perfect",
     "why": "Generic perfectness of the standard quotients used as a tool to implement the fixed compactification argument; no node of this unit states this general interface."
    },
@@ -356,10 +335,6 @@
    {
     "node": "prop-weil-pbc-preservation-constructible",
     "why": "Generic proper-image preservation for the precise compatible uniform completed category, applied only to the proper part of this unit’s prescribed compactification route."
-   },
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Generic restriction and extension by zero for modules on a localized site used as a tool to implement the fixed compactification argument; no node of this unit states this general interface."
    },
    {
     "node": "prop-weil-pbc-direct-image-limits",
@@ -398,12 +373,12 @@
   "lem-weil-pbc-uniform-complete-triangulated"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q36-079bcebcf",
-  "group": "Q36",
+  "reviewer": "NT-cc-N5-9a81aaedd",
+  "group": "N5",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q36-079bcebcf (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, unit/chapter route, report, and cited source passages. All five proof steps check against their hypotheses, including compatible uniform witnesses, canonical reduction bounds, and exact A-linearity. Edge cases and whole-DAG duplicate/cycle checks found no fault. All sixteen declared tool uses accepted. Detailed review written to review.md; no fixes required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-9a81aaedd (reviewer sub-agent of L); spot-checked: Read the item and all three new nodes in full, every cited statement, and the sources: Bhatt–Scholze Lemma 6.1.12, Proposition 6.6.11, Lemma 6.7.2, Definition 6.7.6/Lemma 6.7.7; Stacks 0A3V, 01T6, 03DI/03DJ, 09AA/09BN; the blueprint thm-cbc-finite-extension, identical in master and main-20261015. The repair fixes the return: the steps are now 478–1115 characters and each extracted argument is a genuine smaller lemma, not a restated clause. Steps 1–7 check: the geometry lemma gives Noetherian finite-dimensional X̄, the geometric-fibre bound e and ℓ invertible. The DVR facts give the finite quotients A/I^n and ℓ in I. The characterization's (i)⇒(ii) on X, the model lemma, then (ii)⇒(i) on X̄ give J in C_X̄ with its witnesses. The cone of ϖ^n gives the uniform interval [u-1,v]. Preservation applied to the identity square (N=ℓ, fibre bound e) gives Rp_*J in C_Y. Linearity comes from the new extension-by-zero lemma plus lem-sbc-completed-operations-linear-natural-exchange on complete objects, and step 7 restricts to full triangulated subcategories. The coefficient category is the completed A_T throughout; no constant-coefficient comparison and no SGA source is used. All 11 declared tool uses are accepted. No missing or merged ids, no cycles, citers unaffected. New-node checks: the geometry lemma is true and not a duplicate (lem-fin-finite-type-fibre-dimension-bound covers only ordinary fibres); the stratified-model lemma is true, since the stratification definition needs only a disjoint locally closed cover, j^{-1}j_! is the identity and i^{-1}j_! is zero; the linear extension-by-zero lemma is true, and Mathlib's derived-linearity instance assumes linearity rather than proving it, so it is not a leaf. Edge cases tested: empty schemes, U empty or U=T, K=0, A=0. FIX: added Bhatt–Scholze Lemma 6.1.12 to the source.place of lem-cbc-extension-zero-stratified-perfect (fixes/dag/nodes/sec-smooth-purity/). Details in review.md.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",
