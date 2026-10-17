@@ -15834,3 +15834,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:00 L: batch 20261017T125156 dependency take-out
 
 - 21:19 L: batch 20261017T131005 dependency take-out
+- 13:33 L: merged deliver/G1/WeilConjectures.SmoothPurity.Defs (stage 3; reviewer PASS; first push; landing 20261017T133353-L-2578124 (proof); batch 20261017T133349; modules 1; new nodes 0; change records: coord/changes/smoothPurityIso.md)
