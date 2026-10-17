@@ -183,10 +183,10 @@ theorem exists_artinSchreier_frobenius_exact_rows
   let : C.Over (Spec (.of k)) := ⟨f⟩
   let bk := Spec.map (CommRingCat.ofHom (algebraMap k k'))
   have hcurve := (baseChange_curve (k' := k') f).1
-  have : IsCurve (pullback.snd f bk) := hcurve
+  have : IsCurve (Limits.pullback.snd f bk) := hcurve
   have hdim : topologicalKrullDim C' ≤ 1 := by
     rw [IsHomeomorph.topologicalKrullDim_eq _ (Scheme.homeoOfIso h.isoPullback).isHomeomorph]
-    exact IsCurve.krullDim_le_one (f := pullback.snd f bk)
+    exact IsCurve.krullDim_le_one (f := Limits.pullback.snd f bk)
   have : IsSeparated f' := IsSeparated.isStableUnderBaseChange.of_isPullback h inferInstance
   have : LocallyOfFiniteType f' :=
     locallyOfFiniteType_isStableUnderBaseChange.of_isPullback h inferInstance

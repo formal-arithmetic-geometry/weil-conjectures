@@ -89,7 +89,7 @@ theorem grothendieckDevissage_secondAdicSystem
           (cokernel (δ.hom.app (op e))))) := by
   obtain ⟨θ, hθ⟩ := grothendieckDevissage_secondAdicSystem_comparison I K H.obj
   obtain ⟨N, δ, σ, hsquare, htorsionδ⟩ :=
-    grothendieckDevissage_secondAdicSystem_core I K M hthick H α htorsion θ hθ
+    grothendieckDevissage_secondAdicSystem_core I K M hthick H α htorsion θ
   exact ⟨N, δ, σ, θ, hθ, hsquare, htorsionδ⟩
 
 end AlgebraicGeometry

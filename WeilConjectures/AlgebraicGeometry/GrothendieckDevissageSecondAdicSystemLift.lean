@@ -70,13 +70,7 @@ theorem grothendieckDevissage_secondAdicSystem_lift
           (@completion ((K ^ e).subscheme) hZ (I.comap (K ^ e).subschemeι)))
     (H : CoherentModules X) (α : M ⟶ (completion X I).obj H)
     (θ : formalCompletionSystem K H.obj ⋙ formalCompletionFunctor I ≅
-      (formalCompletionSystem I H.obj ⋙ formalCompletionFunctor K).flip)
-    (hθ : ∀ e n : ℕ,
-        formalModuleQuotientπ K (e + 1) H.obj ≫
-          formalModuleQuotientπ I (n + 1) (formalModuleQuotient K (e + 1) H.obj) ≫
-          (θ.hom.app (op e)).app (op n) =
-        formalModuleQuotientπ I (n + 1) H.obj ≫
-          formalModuleQuotientπ K (e + 1) (formalModuleQuotient I (n + 1) H.obj)) :
+      (formalCompletionSystem I H.obj ⋙ formalCompletionFunctor K).flip) :
     ∃ (N : CoherentFormalModule X K) (δ : N ⟶ (completion X K).obj H)
       (σ : N.obj ⋙ formalCompletionFunctor I ≅
         (M.obj ⋙ formalCompletionFunctor K).flip),
@@ -85,10 +79,6 @@ theorem grothendieckDevissage_secondAdicSystem_lift
           formalModuleQuotientMap K (α.hom.app (op n)) (Nat.le_refl (e + 1)) =
         formalModuleQuotientMap I (δ.hom.app (op e)) (Nat.le_refl (n + 1)) ≫
           (θ.hom.app (op e)).app (op n) := by
-  obtain ⟨N, _, σ, _⟩ :=
-    grothendieckDevissage_secondAdicSystem_lift_data I K M hthick H α θ hθ
-  obtain ⟨δ, hδ⟩ :=
-    grothendieckDevissage_secondAdicSystem_lift_compatibility I K M hthick H α θ σ
-  exact ⟨N, δ, σ, hδ⟩
+  exact grothendieckDevissage_secondAdicSystem_lift_data I K M hthick H α θ
 
 end AlgebraicGeometry
