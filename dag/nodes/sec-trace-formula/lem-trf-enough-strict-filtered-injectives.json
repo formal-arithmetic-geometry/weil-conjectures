@@ -12,9 +12,80 @@
   "def-sp-filtration",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose bounds $c\\le d$ for the finite filtration on the target $I$. Apply [lem-trf-injective-graded-filtration-splits] to obtain a filtered isomorphism $\\theta:I\\cong\\bigoplus_{n=c}^d J_n$, with $J_n$ injective and $F^pI$ identified with the summands indexed by $n\\ge p$. Write $f_n:X\\to J_n$ for the components of $\\theta f$. The summand projection to $J_n$ vanishes on $F^{n+1}I$, so $f_n$ vanishes on $F^{n+1}X$.",
+   "uses": [
+    "lem-trf-injective-graded-filtration-splits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TP, lemma-filtered-injective; preparation for Tag 05TR"
+   }
+  },
+  {
+   "text": "For $c\\le n\\le d$ let $\\bar u_n:X/F^{n+1}X\\to Y/F^{n+1}Y$ be induced by $u$. Its kernel is zero: the inverse image of $F^{n+1}Y$ under $u$ is $F^{n+1}X$, precisely the strictness equality after identifying $X$ with $u(X)$. Equivalently, the kernel of $X\\xrightarrow{u}Y\\to Y/F^{n+1}Y$ is $F^{n+1}X$, so passage to its quotient gives a monomorphism $\\bar u_n$. This is the kernel/quotient universal-property calculation in the abelian category [def-sp-abelian], using the subobject and quotient conventions of [def-sp-filtration]. The vanishing from Step 1 factors $f_n$ through a map $\\bar f_n:X/F^{n+1}X\\to J_n$.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TR, lemma-injective-property-filtered-injective; elementary quotient form of strictness"
+   }
+  },
+  {
+   "text": "By the defining extension property [def-sp-injective-resolutions], extend $\\bar f_n$ across the monomorphism $\\bar u_n$ to $h_n:Y/F^{n+1}Y\\to J_n$. Set $g_n=h_nq_n$, where $q_n:Y\\to Y/F^{n+1}Y$, and use the finite biproduct [def-sp-abelian] to assemble $g=\\theta^{-1}(g_c,\\ldots,g_d):Y\\to I$. Each component satisfies $g_nu=f_n$, hence $gu=f$. For any $p$, every component with $n<p$ vanishes on $F^pY$, because $F^pY\\subseteq F^{n+1}Y$ [def-sp-filtration]. Thus $g(F^pY)$ lies in the summands with $n\\ge p$, which Step 1 identifies with $F^pI$. This proves the extension assertion without assuming enough injectives in $\\mathcal A$.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TR, lemma-injective-property-filtered-injective, proved componentwise using 05TP instead of its pushout proof"
+   }
+  },
+  {
+   "text": "Now assume enough injectives and fix any bounds $a\\le b$ with $F^aX=X$, $F^{b+1}X=0$; such bounds exist for every finite filtration [def-sp-filtration], enlarging the interval if necessary. For each $a\\le n\\le b$ choose a monomorphism $e_n:X/F^{n+1}X\\hookrightarrow E_n$ into an injective object, exactly as allowed by the enough-injectives hypothesis. Form the finite biproduct $E=\\bigoplus_{n=a}^b E_n$ [def-sp-abelian] and give it the filtration $F^pE=\\bigoplus_{n\\ge p}E_n$, restricting indices to $[a,b]$. Define $v:X\\to E$ by components $v_n=e_nq_n$. If $n<p$, then $q_n$ vanishes on $F^pX$, so $v$ preserves filtration. Direct projection onto the $p$th summand identifies $F^pE/F^{p+1}E$ with $E_p$ for $a\\le p\\le b$; outside the interval that quotient is zero. Zero is injective because all maps into it are the unique zero map [def-sp-injective-resolutions]. Thus $E$ is filtered injective, and by construction $F^aE=E$ and $F^{b+1}E=0$.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-abelian",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TS, lemma-strict-monomorphism-into-filtered-injective, finite direct-sum construction"
+   }
+  },
+  {
+   "text": "The last coordinate $v_b=e_bq_b=e_b$ is monic since $F^{b+1}X=0$, so $v$ is monic. For $a<p\\le b+1$, projection from $E$ to its summands with $n<p$ has kernel $F^pE$. Its composite with $v$ has kernel $F^pX$: the coordinate $n=p-1$ has exactly that kernel, since $e_{p-1}$ is monic, and all coordinates $n<p$ vanish on $F^pX$. Therefore $v^{-1}(F^pE)=F^pX$, equivalently $v(X)\\cap F^pE=v(F^pX)$ as $v$ is monic. For $p\\le a$, both filtrations are the whole object, so the same equality holds; for $p>b+1$, both steps are zero and monicity again gives it. These kernel and finite-projection computations use [def-sp-abelian] and [def-sp-filtration] only. Thus $v$ is strict and retains the prescribed bounds, proving the remaining assertions. If $a=b$, $v$ is just $e_a:X\\hookrightarrow E_a$ in a single filtration degree. The zero object may be embedded into zero throughout.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TS, lemma-strict-monomorphism-into-filtered-injective; verification of strictness and fixed bounds"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-injective-graded-filtration-splits",
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Componentwise extension proof using Tag 05TP instead of the pushout proof of Tag 05TR; embedding and bounds follow Tag 05TS with explicit kernel checks"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +107,45 @@
    "results": "0 hits: ",
    "date": "2026-10-17",
    "verdict": "no match: ordinary unfiltered exactness, injectivity and triangulated localization APIs do not supply this finite filtered-object statement or identify its graded quasi-isomorphism class"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite filtered objects in an abelian category have injective extensions across strict monomorphisms and strict embeddings into filtered objects with injective graded pieces",
+   "results": "8 hits: CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity, CategoryTheory.IsGrothendieckAbelian.instInjectiveZMonomorphismsRlpMonoMapFactorizationDataRlpOfNatHom, CategoryTheory.IsGrothendieckAbelian.enoughInjectives, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.epi_f, CategoryTheory.Abelian.Ext.postcomp_mk₀_injective_of_mono, CategoryTheory.HasInjectiveDimensionLT, CategoryTheory.HasInjectiveDimensionLE",
+   "date": "2026-10-17",
+   "verdict": "no match: retrieved results concern ordinary injectives, filtered indexing categories or module filtrations; none states the strict filtered extension/embedding assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective, CategoryTheory.Filtration",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: retrieved results concern ordinary injectives, filtered indexing categories or module filtrations; none states the strict filtered extension/embedding assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.{0,30}injective|injective.{0,30}filtered",
+   "results": "7 hits: Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean, Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean, Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean, Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean, Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/CategoryTheory/Filtered/Small.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: retrieved results concern ordinary injectives, filtered indexing categories or module filtrations; none states the strict filtered extension/embedding assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite filtered objects with injective associated graded pieces are injective with respect to strict monomorphisms",
+   "results": "8 hits: CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.epi_f, CategoryTheory.IsGrothendieckAbelian.instInjectiveZMonomorphismsRlpMonoMapFactorizationDataRlpOfNatHom, Ideal.Filtration.mk.inj, IsModuleFiltration.toIsFiltration, CategoryTheory.IsGrothendieckAbelian.enoughInjectives, CategoryTheory.Injective.ι_mono, CategoryTheory.Limits.IsColimit.mono_ι_app_of_isFiltered, CategoryTheory.Functor.eventually_injective",
+   "date": "2026-10-17",
+   "verdict": "no match: retrieved results concern ordinary injectives, filtered indexing categories or module filtrations; none states the strict filtered extension/embedding assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "Filtration|FilteredObject|filtered.?injective|split.*filtration",
+   "results": "0 hits in Mathlib/CategoryTheory: ",
+   "date": "2026-10-17",
+   "verdict": "no match: retrieved results concern ordinary injectives, filtered indexing categories or module filtrations; none states the strict filtered extension/embedding assertions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-filtered-localization-injective-model",
@@ -59,5 +165,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-enough-strict-filtered-injectives",
+  "worker": "stage1",
+  "summary": "Read Stacks 05TP, 05TR and 05TS and supplied a five-step proof, using the split finite-filtration description as the only new lemma. The extension is constructed on quotient components, and the enough-injectives embedding is checked to be monic, strict and in the same prescribed interval. Item statement unchanged. No Lean attachment or exact Mathlib match found.",
+  "blueprint": "Realizes the filtered-injective infrastructure of prop-trf-trace-additivity-open-closed Step 3 via lem-trf-filtered-derived-operation-lifts and lem-trf-filtered-localization-injective-model. The unit route remains compact cohomology of a common filtered origin."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-cf05e8516",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-cf05e8516 (reviewer sub-agent of L); spot-checked: I read the item and its one new node in full against Stacks derived.tex lines 7820-7930 (05TP lemma-filtered-injective, 05TQ, 05TR lemma-injective-property-filtered-injective, 05TS lemma-strict-monomorphism-into-filtered-injective), checked the tags in tags/tags, and read the three cited definition nodes (def-sp-abelian, def-sp-filtration, def-sp-injective-resolutions). The item statement matches 05TR/05TS hypothesis by hypothesis. Enough injectives is assumed only for the embedding, and the same-interval clause is the 05TS construction, which parent Step 12 needs; nothing is weakened. Step 1 takes only what the new node's statement gives (theta identifying F^p with the summands n>=p, so f_n vanishes on F^{n+1}X). Step 2 is correct: strictness gives u^{-1}(F^{n+1}Y)=F^{n+1}X, so the induced quotient map is monic. Step 3 is correct: the componentwise extension satisfies g_n u=f_n, and components n<p kill F^pY. This replaces the 05TR pushout argument and is recorded as by=agent. In Steps 4-5 I recomputed that v is filtered, that gr^pE=E_p, that v is monic because v_b=e_b, and that the kernel of v followed by projection to summands n<p is the intersection of F^{n+1}X, which is F^pX; p<=a and p>b+1 hold as well. The new node lem-trf-injective-graded-filtration-splits is the forward half of 05TP (proof 'details omitted') on a fixed interval. I proved it true by descending induction using the existing leaf lem-weil-pbc-ses-injective-kernel-splits, and tested a=b, zero objects and zero graded pieces. It is statement-only, self-contained, sourced by tag and label, with LeanSearch/LeanFinder/Loogle/grep searches recorded; created.item is this item and its blueprint from/via are right. It is not a clause of the item and has no cycle. No duplicate: a DAG-wide rg for 05TP-05TS and a scan of statements with gr plus injective/split found only the two parent nodes and unrelated notions (filtered colimits, lem-sp-finite-filtration-induction, lem-trf-finite-filtered-graded-exactness); a grep of the main-20261015 blueprint found nothing. I checked the strictness counterexample (Z in Q with F^1Q=Q). No SGA and no off-unit statements, so no tool_uses. Remark: the report claims the item's created fields were changed to Q24, but the file keeps the correct Q53 creator; no change. No fixes."
  }
 }
