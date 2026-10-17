@@ -10,9 +10,49 @@
  "stmt_deps": [
   "def-nagata-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $j$, the recursively chosen leg $q_j$ belongs to $U$: this holds for $j=0$ by hypothesis and passes from $q_{j-1}$ to $q_j$ by the output condition on $S$. Thus every object-level span completion in the statement is defined, and $q_j\\in W$ since $U\\subseteq W$. At stage zero the given $e_0$ satisfies $e_0q_0=q_0$. Applying the assumed two-out-of-three property to $q_0$, $e_0$ and $e_0q_0=q_0$ shows $e_0\\in W$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 8.2(i) and following Proofs paragraph, printed p.29 (PDF p.13); explicit elementary expansion of the fixed-anchor induction."
+   }
+  },
+  {
+   "text": "Inductively suppose $e_{j-1}:D_{j-1}\\to D_{j-1}$ has been specified and $e_{j-1}q_{j-1}=q_{j-1}$, where $1\\leq j\\leq n$. The triple $(e_{j-1},1_{B_{j-1}},1_{B_j})$ is a map from the $j$th input span to itself: its first square commutes because $e_{j-1}q_{j-1}=q_{j-1}1_{B_{j-1}}$, and its second because $1_{B_j}h_j=h_j1_{B_{j-1}}$. Define $e_j:D_j\\to D_j$ to be the output-vertex map assigned to this triple by the given rule $S$. The two output squares supplied by that rule are exactly $e_jk_j=k_je_{j-1}$ and $e_jq_j=q_j1_{B_j}=q_j$. This proves the inductive invariant and specifies the next term without any further choice.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 8.2(i) and following Proofs paragraph, printed p.29 (PDF p.13); explicit elementary expansion of the fixed-anchor induction."
+   }
+  },
+  {
+   "text": "For each newly constructed stage $j$, use $q_j\\in W$ from Step 1 and $e_jq_j=q_j$ from Step 2. The arrow $q_j$ and the composite $e_jq_j$ both lie in $W$, so the assumed two-out-of-three property gives $e_j\\in W$. Finite induction through $j=n$ therefore supplies all specified terms, all input-span endomorphisms and both asserted equations. When $n=0$ no successor step is required; the given $e_0$ and Step 1 already give the entire conclusion.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 8.2(i) and following Proofs paragraph, printed p.29 (PDF p.13); explicit elementary expansion of the fixed-anchor induction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Proposition 8.2(i), printed p.29, following Proofs paragraph; online source read 2026-10-17, not archived. Explicit finite induction from the assumptions, rather than a separately stated source lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +95,45 @@
    "results": "{\"t\": \"2026-10-17T08:16:09Z\", \"tool\": \"leanfinder\", \"query\": \"A natural endomorphism of the initial replacement object fixing its anchor extends by induction along functorial cobase change squares, commuting with all transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Initial.induction\", \"CategoryTheory.WithInitial.liftStar_lift_map\", \"CategoryTheory.WithInitial.lift_map\", \"CategoryTheory.WithInitial.map₂\", \"CategoryTheory.WithInitial.lift\", \"CategoryTheory.SmallObject.SuccStruct.ιIterationFunctor\", \"CategoryTheory.SmallObject.SuccStruct.ιIteration\", \"CategoryTheory.Functor.Initial.exists_eq\"], \"digest\": \"89b238790cba87bd\"}",
    "date": "2026-10-17",
    "verdict": "no match: spanHomMk_app and spanCompIso concern individual span diagrams, not recursive completion rules with a fixed-anchor endomorphism and W-membership at every stage. SqStruct.map restricts a chosen lift along a transfinite diagram and has no such completion endomorphisms. WithInitial/Initial hits concern initial objects. Read Cospan.lean:412-420,297ff and TransfiniteCompositionLifting.lean:94-138."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An endomorphism fixing the leg of a span extends along iterated functorial commutative square completions",
+   "results": "{\"t\": \"2026-10-17T10:35:05Z\", \"tool\": \"leansearch\", \"query\": \"An endomorphism fixing the leg of a span extends along iterated functorial commutative square completions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CatCommSq.ctorIdx\", \"CategoryTheory.CatCommSq.mk.noConfusion\", \"CategoryTheory.CatCommSq.iso\", \"CategoryTheory.CommSq.map\", \"CategoryTheory.CatCommSq.casesOn\", \"CategoryTheory.CatCommSq.recOn\", \"CategoryTheory.Limits.spanExt_hom_app_right\", \"CategoryTheory.CatCommSq.ext\"], \"digest\": \"9f8291c3242af661\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits give commutative squares, individual span maps, weak-equivalence cancellation, the small-object argument and relative cell complexes. Read CommSq.lean:structure CommSq and map, Cospan.lean:spanHomMk (lines 409-420), ModelCategory/Instances.lean:HasTwoOutOfThreeProperty, and SmallObject/Construction.lean:functorObj and its maps. These do not specify the finite recursive sequence for an arbitrary completion rule S; cancellation alone is only the final clause. Loogle has zero hits; grep hits concern linear spans, not categorical spans."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spanHomMk\", \"Functor\"",
+   "results": "{\"t\": \"2026-10-17T10:35:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"spanHomMk\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits give commutative squares, individual span maps, weak-equivalence cancellation, the small-object argument and relative cell complexes. Read CommSq.lean:structure CommSq and map, Cospan.lean:spanHomMk (lines 409-420), ModelCategory/Instances.lean:HasTwoOutOfThreeProperty, and SmallObject/Construction.lean:functorObj and its maps. These do not specify the finite recursive sequence for an arbitrary completion rule S; cancellation alone is only the final clause. Loogle has zero hits; grep hits concern linear spans, not categorical spans."
+  },
+  {
+   "tool": "grep",
+   "query": "span.*endomorph|endomorph.*span|completion.*endomorph|endomorph.*completion",
+   "results": "{\"t\": \"2026-10-17T10:35:11Z\", \"tool\": \"grep\", \"query\": \"span.*endomorph|endomorph.*span|completion.*endomorph|endomorph.*completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Pi.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\"], \"digest\": \"fae941ca44700867\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits give commutative squares, individual span maps, weak-equivalence cancellation, the small-object argument and relative cell complexes. Read CommSq.lean:structure CommSq and map, Cospan.lean:spanHomMk (lines 409-420), ModelCategory/Instances.lean:HasTwoOutOfThreeProperty, and SmallObject/Construction.lean:functorObj and its maps. These do not specify the finite recursive sequence for an arbitrary completion rule S; cancellation alone is only the final clause. Loogle has zero hits; grep hits concern linear spans, not categorical spans."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed anchor endomorphisms propagate inductively through functorial span square completions and remain weak equivalences by two out of three",
+   "results": "{\"t\": \"2026-10-17T10:35:13Z\", \"tool\": \"leanfinder\", \"query\": \"Fixed anchor endomorphisms propagate inductively through functorial span square completions and remain weak equivalences by two out of three\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"CategoryTheory.TwoSquare.GuitartExact\", \"HomotopicalAlgebra.weakEquivalence_of_precomp_of_fac\", \"HomotopicalAlgebra.weakEquivalence_of_precomp\", \"HomotopicalAlgebra.weakEquivalence_of_postcomp_of_fac\", \"CategoryTheory.OrthogonalReflection.D₂.condition\", \"CategoryTheory.TwoSquare.guitartExact_id\"], \"digest\": \"713c464ba6ef67d3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits give commutative squares, individual span maps, weak-equivalence cancellation, the small-object argument and relative cell complexes. Read CommSq.lean:structure CommSq and map, Cospan.lean:spanHomMk (lines 409-420), ModelCategory/Instances.lean:HasTwoOutOfThreeProperty, and SmallObject/Construction.lean:functorObj and its maps. These do not specify the finite recursive sequence for an arbitrary completion rule S; cancellation alone is only the final clause. Loogle has zero hits; grep hits concern linear spans, not categorical spans."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recursion on a finite chain of chosen pushout squares extends an endomorphism fixing the anchor, without assuming any square is a categorical pushout",
+   "results": "{\"t\": \"2026-10-17T10:36:54Z\", \"tool\": \"leanfinder\", \"query\": \"Recursion on a finite chain of chosen pushout squares extends an endomorphism fixing the anchor, without assuming any square is a categorical pushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.ιFunctorObj_extension'\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"HomotopicalAlgebra.RelativeCellComplex\", \"CategoryTheory.SmallObject.ιFunctorObj_extension\", \"CategoryTheory.SmallObject.succStruct\", \"HomotopicalAlgebra.RelativeCellComplex.transfiniteCompositionOfShape\", \"CategoryTheory.Limits.WidePushoutShape.Hom.ctorElimType\", \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\"], \"digest\": \"d07dd69f45a49502\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits give commutative squares, individual span maps, weak-equivalence cancellation, the small-object argument and relative cell complexes. Read CommSq.lean:structure CommSq and map, Cospan.lean:spanHomMk (lines 409-420), ModelCategory/Instances.lean:HasTwoOutOfThreeProperty, and SmallObject/Construction.lean:functorObj and its maps. These do not specify the finite recursive sequence for an arbitrary completion rule S; cancellation alone is only the final clause. Loogle has zero hits; grep hits concern linear spans, not categorical spans."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-homotopy-fractions-square-criterion",
@@ -84,5 +159,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-iterated-span-fixed-endomorphism",
+  "worker": "stage1",
+  "summary": "Unchanged statement; explicit three-step elementary induction establishes all span maps, both equations and W-membership, including e_0. No new nodes or Mathlib leaves and no Lean attachment. Retained existing provenance, citations and search records; fresh searches found no exact match.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, derived coefficient adjunction and displayed R Hom / R lim calculation, through the inherited special-hammock and square-criterion chain. Realizes the square-criterion fixed-anchor induction extracted from its former step 5, without asserting the separate naturality lemma or replacing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NU-fa6f881b3",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-fa6f881b3 (reviewer sub-agent of L); spot-checked: I read the item, its parent lem-coef-homotopy-fractions-square-criterion (steps 6-8 use it), the sibling lem-coef-iterated-span-endomorphism-naturality, def-nagata-category, the unit sk-prop-sf-biduality-general and the chapter sec-six-functors. Compared with the side DAG, the delivery leaves the statement, stmt_deps, blueprint, unit and chapter unchanged. It only adds proof, proof_deps, proof_origin and split_report, sets status to split, and appends searches. There are no new nodes, and the delivery is one commit with the item and the report. The statement is true and self-contained: on the map (e_{j-1},1,1), the output-square conditions of S give exactly e_j k_j = k_j e_{j-1} and e_j q_j = q_j. Step 1: q_j is in U by induction and so in W, and two-out-of-three with q_0 and e_0q_0 = q_0 gives e_0 in W. Step 2: an induction with a stated invariant; the triple is an input-span endomorphism, and the rule S gives both equations. Step 3: two-out-of-three gives e_j in W; n = 0 is covered. All three steps are honestly elementary and cite only the category definition, so there is no route or tool_use issue and no cycle. Edge cases checked: n = 0; U = identities; a non-invertible retraction e_0 in Set. The parent's use (e_0 = uv, q_0 = u) matches the conclusion exactly. Searching the DAG with rg found no duplicate; the naturality node is a different two-chain assertion. Mathlib: three kinds of search recorded, no match. Dwyer-Kan Prop. 8.2 is not in literature/; the report has a WANTED line and proof_origin is agent, which is correct. No SGA source is used. Not a target node, so no base-change or coefficient check applies. No fixes."
  }
 }
