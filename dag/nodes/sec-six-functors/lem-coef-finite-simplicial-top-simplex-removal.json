@@ -198,5 +198,23 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-28725405e (reviewer sub-agent of L); spot-checked: Read the whole item and its four steps, both cited nodes (def-weil-pbc-simplicial-set and lem-weil-pbc-simplicial-set-nondegenerate-decomposition, both Mathlib leaves; the Mathlib lines checked are Degenerate.lean 36/42/114/217/225/233), Stacks 018S lemma-add-simplices (simplicial.tex l.3129-3155) and 017R l.1796, and the parent step 6 that cites the item plus lem-weil-pbc-simplicial-set-glue-simplex. The statement is unchanged against the live and side copies, and the live node is still unsplit. Step 1 (closure): the factorization through q and i, the decomposition of A(i)y, and uniqueness force d=l<=k<=e<=d, so i, gamma are identities and y=sigma, giving a contradiction. All of this is valid, and maximality is used exactly at e<=d. Step 2: the least-element-of-fibre section is monotone with beta s=id, so step 1 puts y in U_e, and e<m would make t degenerate in U. Correct. Steps 3 and 4 are genuinely elementary. Small cases checked: Delta^1, Delta^d (U is the boundary), Delta^0 (U empty), S^1, a discrete set, and an edge of Delta^2 to show maximality is needed. The last three clauses match hypotheses (1)-(3) of glue-simplex as used in the parent. Not a duplicate of add-simplices, and an rg over the DAG found no other node stating this. No new nodes. Blueprint place correctly updated from step 5 to step 6; the via chain reaches prop-coef-integral-exceptional-adjoint; same_as [] confirmed. Searches are recorded, with the failed Loogle marked unavailable. The declared tool_use of the decomposition node is unnecessary because it is a Mathlib leaf, but harmless and accepted. No target, base-change or coefficient issue applies. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FiniteSimplicialTopSimplexRemoval",
+  "declaration": "SSet.finite_simplicial_top_simplex_removal",
+  "file": "lean/Sheaf/AlgebraicTopology/FiniteSimplicialTopSimplexRemoval.lean",
+  "statement": "theorem finite_simplicial_top_simplex_removal (A : SSet.{u}) [A.Finite] (d : ℕ) [A.HasDimensionLE d] (σ : A _⦋d⦌) (hσ : σ ∈ A.nonDegenerate d) : ∃ (U : A.Subcomplex), (∀ (m : ℕ) (x : A _⦋m⦌), x ∈ Set.range (U.ι.app (op ⦋m⦌)) ↔ ∀ (α : ⦋m⦌ ⟶ ⦋d⦌) [Epi α], A.map α.op σ ≠ x) ∧ (∀ (m : ℕ) (y : (U : SSet).nonDegenerate m), y.1.1 ∈ A.nonDegenerate m) ∧ (∀ (m : ℕ) (y : (U : SSet).nonDegenerate m), ¬(m = d ∧ HEq y.1.1 σ)) ∧ (∀ (m : ℕ) (x : A _⦋m⦌), x ∈ A.nonDegenerate m → (m = d ∧ HEq x σ ∨ ∃ y : (U : SSet).nonDegenerate m, y.1.1 = x)) ∧ (∀ (m : ℕ), m < d → Set.range (U.ι.app (op ⦋m⦌)) = Set.univ) ∧ (∀ (x : A _⦋d⦌), x ∈ Set.range (U.ι.app (op ⦋d⦌)) ↔ x ≠ σ) ∧ (SSet.Finite (U : SSet)) ∧ (SSet.HasDimensionLE (U : SSet) d) ∧ (∀ (m : ℕ) (x : A _⦋m⦌), d < m → x ∉ Set.range (U.ι.app (op ⦋m⦌)) → x ∈ A.degenerate m)",
+  "by": "Q107",
+  "date": "2026-10-17",
+  "branch": "newtargets-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f5cdc271",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node. A.Finite and HasDimensionLE d (checked in Mathlib Dimension.lean:30-34) are exact; clause 1 pins U down by the surjection characterization; clauses 2-4 give nondeg(U) = nondeg(A) minus sigma; the degree-below-d, A_d = U_d + {sigma}, finiteness, dimension and higher-degeneracy clauses are all present. The 'one fewer nondegenerate d-simplex' clause has no separate conjunct but follows from clauses 2-4 (noted, no change needed). d=0 / U empty and the Delta^d boundary case are covered. No extra hypotheses and no universe restriction. Uses the dependency's recorded Mathlib declarations; no duplicate declaration found in Mathlib or the project. Node changed only in its lean field; the record is complete and its statement is verbatim from the file. Proof is sorry only; source and blueprint docstrings present. The report has a Worker report and the standard 2026-10-17 second-reading placeholder. nt_compile.py --json is clean (1.6 s, no warnings), and a control run with a deliberate error confirmed the compiler reports messages."
  }
 }
