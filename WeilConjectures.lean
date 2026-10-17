@@ -1580,6 +1580,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.FromPi1
 public import WeilConjectures.AlgebraicGeometry.ProEtale.LocalProperties
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Proetale.Basic
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Proetale.Sheafification
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProfiniteCoefficientCohomology
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SequentialLimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SigmaCover
@@ -4350,6 +4351,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.BaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedSupport
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafTransport
@@ -4661,6 +4663,7 @@ public import WeilConjectures.WeilSheaf.BoundaryStalk
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.CohomologicalRange
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.CohomologyAdicConstant
 public import WeilConjectures.WeilSheaf.CohomologyDegreeZero
 public import WeilConjectures.WeilSheaf.CohomologyExact
 public import WeilConjectures.WeilSheaf.CohomologyNonneg

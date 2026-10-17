@@ -88,7 +88,7 @@ lemma preservesMonomorphisms_extendScalarsAddCommGrp [IsAddTorsionFree Λ] :
       have hflat (inst : Module ℤ Λ) : Module.Flat ℤ Λ := by
         obtain rfl := Subsingleton.elim inst (AddCommGroup.toIntModule Λ)
         infer_instance
-      letI : Module ℤ Λ := Module.compHom Λ (Int.castRingHom Λ)
+      let : Module ℤ Λ := Module.compHom Λ (Int.castRingHom Λ)
       have := hflat this
       exact Module.Flat.lTensor_preserves_injective_linearMap (M := Λ) f.hom hf⟩
   unfold ModuleCat.extendScalarsAddCommGrp
