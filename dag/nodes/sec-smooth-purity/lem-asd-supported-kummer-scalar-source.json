@@ -1,0 +1,82 @@
+{
+ "id": "lem-asd-supported-kummer-scalar-source",
+ "kind": "statement",
+ "title": "Derived scalar extension of a closed supported constant sheaf",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], let $i:D\\hookrightarrow T$ be a closed immersion [def-weil-closed-immersion], let $N\\geq1$ be an integer, put $\\Lambda=(\\mathbf Z/N\\mathbf Z)$, and let $A$ be a finite commutative ring with $NA=0$. In the ordinary small etale module derived categories [def-weil-pbc-derived-categories], the canonical comparison, adjoint to the coefficient unit $\\Lambda_D\\to A_D$, for the derived change-of-rings functor [lem-pur-derived-change-of-rings] along $\\Lambda_T\\to A_T$ identifies $Ri_*\\Lambda_D\\otimes_{\\Lambda_T}^{\\mathbf L}A_T$ with $Ri_*A_D$, where direct image is [def-weil-pbc-direct-image], inverse image and constant sheaves are as in [def-weil-pbc-inverse-image, def-weil-pbc-constant-sheaf], and derived tensor is [def-kun-derived-tensor]. Under this identification the map induced from $\\Lambda_T\\to i_*\\Lambda_D$ is the unit $A_T\\to Ri_*A_D$. The identification is valid without flatness of $A$ over $\\Lambda$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QP, proposition-finite-higher-direct-image-zero, together with Tag 03Q1, lemma-stalk-pullback, and sites-cohomology derived change of rings"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-kun-derived-tensor",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of a closed pushforward constant etale sheaf identifies it with the closed pushforward constant sheaf over the new coefficient ring without flatness",
+   "results": "SheafOfModules.pushforwardSections_unitHomEquiv; AlgebraicGeometry.Scheme.Modules.pushforward; no exact derived etale statement",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern generic sheaf pushforward and formally etale maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient extension of a closed pushforward constant etale sheaf",
+   "results": "TopCat.Sheaf.pushforward; SheafOfModules.pushforward; no exact derived etale statement",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheaf pushforward only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"closed\", \"tensor\"",
+   "results": "CategoryTheory.tensorClosed; MonoidalClosed.id_tensor_pre_app_comp_ev; algebraic-group isCommMonObj; no supported-sheaf theorem",
+   "date": "2026-10-17",
+   "verdict": "no match: generic monoidal tensor declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*(tensor|scalar)|tensor.*closed|supportedConstant",
+   "results": "Mathlib/AlgebraicGeometry/Group/Abelian.lean:40,141 (unrelated tensorObj proper-group statements)",
+   "date": "2026-10-17",
+   "verdict": "no match: unrelated algebraic-group results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant sheaf supported on a closed subscheme is flat over the constant coefficient ring and its derived tensor with a new coefficient ring is the new supported constant sheaf",
+   "results": "AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.Scheme.Hom.flat_appLE; Module.Flat.of_flat_tensorProduct; Module.Flat.iff_flat_tensorProduct; Module.flat_of_isLocalized_span; Module.Flat.iff_lift_lsmul_comp_subtype_injective; Module.FaithfullyFlat; Module.flat_of_localized_span",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern other objects, not the canonical etale comparison stated here"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-asd-ordinary-supported-kummer",
+  "date": "2026-10-17",
+  "group": "NL"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Proof second and third paragraphs (supported diagonal Kummer class supplying the projective-line adjunction unit), through the Cartier Kummer map lem-amb-cartier-kummer-map whose proof the item follows; there, last paragraph: “Finally apply derived scalar extension from Z/n to A. Its source is i_*A_D, as seen on stalks”.",
+   "via": [
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

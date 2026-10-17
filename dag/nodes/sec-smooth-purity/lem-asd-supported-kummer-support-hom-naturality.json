@@ -1,0 +1,84 @@
+{
+ "id": "lem-asd-supported-kummer-support-hom-naturality",
+ "kind": "statement",
+ "title": "Naturality of the supported Hom identification under base change",
+ "statement": "Let $A$ be a commutative ring, $h:T'\\to T$ a morphism of schemes [def-pc-scheme], $i:D\\hookrightarrow T$ a closed immersion [def-weil-closed-immersion], and $i':D'=T'\\times_TD\\hookrightarrow T'$ its scheme-theoretic pullback [def-pc-fibre-product]. Put $V=T-D$ and $V'=T'-D'$. Work in ordinary small etale module derived categories [def-weil-pbc-derived-categories], using inverse and direct image [def-weil-pbc-inverse-image, def-weil-pbc-direct-image] and constant sheaves [def-weil-pbc-constant-sheaf]. The canonical closed-immersion exchange $e:h^{-1}i_*A_D\\to i'_*A_{D'}$ is an isomorphism. For every bounded-below complex $K$ of $A_T$-module sheaves and integer $q$, in the abstract derived category [def-weil-abstract-derived-category] put\n$$H^q(T,V;K)=H^q(\\operatorname{Cone}(R\\Gamma(T,K)\\to R\\Gamma(V,K|_V))[-1]),$$\nwith etale cohomology [def-weil-pbc-etale-cohomology]. Use the canonical supported-Hom identification [lem-amb-closed-support-hom] $\\Phi_{T,D,K}^q:H^q(T,V;K)\\cong\\operatorname{Hom}_{D(T_{\\mathrm{et}},A)}(i_*A_D,K[q])$. Then pullback $P_h$ on the relative section complexes satisfies\n$$\\Phi_{T',D',h^{-1}K}^q(P_h x)=(h^{-1}\\Phi_{T,D,K}^q(x))\\circ e^{-1}.$$\nHere $P_h$ is induced by the canonical derived section pullback maps on $T$ and $V$, with their restriction-compatible comparison. The same identifications make forgetting support equal to precomposition by the constant unit $A_T\\to i_*A_D$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A45, lemma-cohomology-with-support-triangle; agent refinement of the natural support-Hom interface in blueprint lem-amb-closed-support-hom and the penultimate paragraph of lem-amb-cartier-kummer-map (ordinary etale pullback of the relative section complex)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-etale-cohomology",
+  "lem-amb-closed-support-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived Hom identification of cohomology with support with Hom from the closed pushforward constant sheaf is natural under a base change square",
+   "results": "CategoryTheory.Sheaf.ΓHomEquiv_naturality_left/right; SheafOfModules.pullbackObjFreeIso_hom_naturality; no exact etale support theorem",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheaf Hom naturality only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of cohomology with support and the Hom identification under a morphism of schemes",
+   "results": "AlgebraicGeometry.Scheme.Hom.naturality; CategoryTheory.ShortComplex homology naturality; no exact theorem",
+   "date": "2026-10-17",
+   "verdict": "no match: generic naturality declarations only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"support\", \"Hom\"",
+   "results": "HomologicalComplex.IsSupported; no etale supported-Hom declaration",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyWithSupport|supported.*Hom|support.*pullback",
+   "results": "No hits in Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative cohomology as the fibre of restriction to an open complement is naturally compatible with inverse image of supported derived morphisms",
+   "results": "groupCohomology.resNatTrans; groupCohomology.resNatTrans_app; TopCat.Presheaf.map_restrict; CategoryTheory.Sheaf.ΓRes_map; AlgebraicGeometry.Γ_map_morphismRestrict; TopCat.Presheaf.pullbackObjObjOfImageOpen; TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst; AlgebraicGeometry.morphismRestrict_app",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern other objects, not the canonical etale comparison stated here"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-asd-ordinary-supported-kummer",
+  "date": "2026-10-17",
+  "group": "NL"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Proof second and third paragraphs (supported diagonal Kummer class supplying the projective-line adjunction unit), through the Cartier Kummer map lem-amb-cartier-kummer-map whose proof the item follows; there, last paragraph: “The support triangle in [lem-amb-closed-support-hom] identifies H_D^2(T,μ_n)=Hom(i_*Z/n,μ_n[2]) ... All the cone maps and Kummer boundaries commute with pullback of the pair”.",
+   "via": [
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

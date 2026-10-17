@@ -19,162 +19,264 @@
  ],
  "proof": [
   {
-   "text": "Work first with A=A_{E,n}. First work on separated finite-type schemes over the fixed algebraically closed field, with inputs in $D^b_{ctf}$. Step 5 below extends $\\alpha$ to the possibly nonseparated finite-type schemes allowed by the map definition, and Step 7 does the same for $\\beta$. The preservation assertions of [thm-sf-ctf-stability](i)-(v) justify pullback, tensor, internal Hom, both direct images and exceptional inverse image on this category. In particular ordinary direct images used below remain bounded and finite Tor. Use the actual constructible adjoints [sk-def-sf-operations](vi), not an unrestricted ambient pro-etale exceptional adjoint. Write P_f=Rf_! and G_f=Rf^!. Compact-support composition [thm-sf-comp-composition] and the adjunctions identify G_{gf} with G_f G_g: both represent Hom(P_g P_f(-),K). By [def-weil-pbc-adjunction-conjugate] the comparison is an isomorphism, and its counit is epsilon_g composed with P_g(epsilon_f). This last formula follows by transposing the identity through the two adjunctions, or [lem-weil-pbc-mate-pasting](2). The same calculation gives identity comparisons and fixes their normalization. Thus no existence or admissibility hypothesis has been added. For later use of [prop-sf-dualizable-hom], the finite operations here do give the datum [def-sf-datum] on separated finite-type schemes, rather than assuming its axioms: (A1) is [fix-prop-adjunctions](1) for ordinary adjoints and [sk-def-sf-operations](vi) for constructible exceptional adjoints, with the pasted counits just calculated; (A2) for compact support is [thm-cbc-finite-level-proetale], applicable since [lem-sf-proetale-constructible-origin] supplies an etale-origin witness for every input. For proper maps the compactification with identity open gives $Rf_!=Rf_*$, so this also proves the proper ordinary case; the smooth ordinary case is [fix-lem-exchanges](3). (A3) is [fix-prop-projection-formula]; (A4) is the composition theorem and the same identity-open compactification. (A5) on these finite-Tor domains is [thm-sf-ctf-stability](vii), with the map/coherence assertions of [lem-fix-operation-reduction] and [fix-lem-exchanges](1),(2),(4). (A6) is [thm-sf-ctf-stability](vi). Thus the datum hypotheses of that evaluation lemma have been verified by separate statements. No datum of ambient exceptional-adjoint admissibility is involved.",
+   "text": "Work first with A=A_{E,n} and separated finite-type k-schemes. All inputs and intermediate values lie in D^b_ctf by [thm-sf-ctf-stability](i)-(v). Write P_f=Rf_! and G_f=Rf^! for the actual constructible adjoints of [sk-def-sf-operations](vi). Compact-support composition [thm-sf-comp-composition] and conjugacy [def-weil-pbc-adjunction-conjugate] identify G_{gf}=G_f G_g. The composite counit is epsilon_g composed with P_g(epsilon_f), by [lem-weil-pbc-mate-pasting](2); the same statement supplies identity normalization. These are actual exceptional adjoints, with no ambient admissibility assumption. Open restriction below extends the argument to nonseparated finite-type corners.",
    "uses": [
     "thm-sf-ctf-stability",
     "sk-def-sf-operations",
     "thm-sf-comp-composition",
     "def-weil-pbc-adjunction-conjugate",
-    "lem-weil-pbc-mate-pasting",
-    "def-sf-datum",
-    "fix-prop-adjunctions",
-    "thm-cbc-finite-level-proetale",
-    "lem-sf-proetale-constructible-origin",
-    "fix-lem-exchanges",
-    "fix-prop-projection-formula",
-    "lem-fix-operation-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
-    "place": "alpha: the constructible adjunctions and composition comparisons"
-   }
-  },
-  {
-   "text": "We record the composition check for alpha, rather than treating a general square mate as invertible. Ku_! is the product comparison specified in [sk-def-sf-kv-maps](i); its factors are compact-support base change and projection formula. Substitute these factors for two composable pairs (f_1,f_2) and (g_1,g_2). The horizontal and vertical exchange identities [fix-lem-exchanges](2),(4) combine the two base changes into that for (g_1 f_1,g_2 f_2), and the composition assertion of [fix-prop-projection-formula] combines their two projection maps. Tensor associativity and symmetry merely rebracket the four factors. Consequently the two product comparisons for P_{g_1}P_{f_1} and P_{g_2}P_{f_2} equal the product comparison for the composites under P_g P_f=P_{gf}. Now transpose the composite of the two alpha maps: substitute their defining transposes Ku_! followed by epsilon_1 boxtimes epsilon_2. Its transpose is Ku_! for the composite followed in each factor by epsilon_{g_i} P_{g_i}(epsilon_{f_i}), the composite counit of Step 1. This is exactly the defining transpose of alpha for the composite. The Hom bijection proves equality, not just isomorphism of the two endpoints. For an identity pair, the identity exchange and projection comparisons reduce $\\mathrm{Ku}_!$ to the tensor-unit comparison; the identity counits reduce its transpose to the identity of $L_1\\boxtimes L_2$, so alpha is the identity. For interchange of the factors, apply tensor symmetry to the defining transpose: naturality of symmetry sends $\\varepsilon_1\\boxtimes\\varepsilon_2$ to $\\varepsilon_2\\boxtimes\\varepsilon_1$, and substitution of the exchange/projection factors in $\\mathrm{Ku}_!$ interchanges those two factors with their signed tensor symmetry. The resulting transpose is precisely the definition of alpha for $(f_2,f_1)$ under the product-swap isomorphisms. Injectivity of transposition gives the asserted interchange equality. We may therefore compose identity-factor comparisons to obtain alpha for a general pair.",
-   "uses": [
-    "sk-def-sf-kv-maps",
-    "fix-lem-exchanges",
-    "fix-prop-projection-formula",
     "lem-weil-pbc-mate-pasting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
-    "place": "alpha: the composition/counit coherence implicit in the affine factorization argument"
+    "place": "alpha: actual adjunctions and composition"
    }
   },
   {
-   "text": "Let $f:X\\to Y$ be smooth of pure relative dimension $d$, let $F=f\\times\\mathrm{id}_Z$, and write $r:X\\times Z\\to X$, $s:Y\\times Z\\to Y$. Put $\\omega_f=G_fA_Y$. By [thm-pur-cohomological-smoothness](1),(3), its canonical tensor map $\\theta_{f,K}:f^*K\\otimes^L\\omega_f\\xrightarrow{\\sim}G_fK$ is invertible and the canonical base-change map $b:r^*\\omega_f\\xrightarrow{\\sim}\\omega_F$ is invertible. Their precise counit transposes are given in [def-pur-co-smoothness](2),(3): $\\theta$ transposes to inverse projection formula followed by the coefficient counit, and $b$ transposes to $s^*\\varepsilon_{f,A}\\circ\\operatorname{Ex}_!^{-1}$. For arbitrary $K\\in D^b_{ctf}(Y,A)$ and $Q\\in D^b_{ctf}(Z,A)$, form\n$$\nG_fK\\boxtimes Q\\xrightarrow{\\theta_{f,K}^{-1}\\boxtimes1}\nF^*(K\\boxtimes Q)\\otimes^L r^*\\omega_f\n\\xrightarrow{1\\otimes b}F^*(K\\boxtimes Q)\\otimes^L\\omega_F\n\\xrightarrow{\\theta_{F,K\\boxtimes Q}}G_F(K\\boxtimes Q).\n$$\nThe reassociation here uses [lem-pur-derived-pullback-tensor-iso]. Every arrow is an isomorphism. This composite is the specified $\\alpha_{f,\\mathrm{id}}$: transpose it under $P_F\\dashv G_F$ and substitute the two displayed transposes from the definition of cohomological smoothness. Naturality of the projection map moves the $K,Q$ factors past the coefficient counit. Its base-change square commutes: using the compactification definition [def-exchange-projection], the proper-factor square is [lemma-weil-pbc-projection-formula-base-change-naturality]; for the open factor both orders are the same tensor map on the open and zero off the open, by the extension-by-zero definition. Thus the result of the substitution is exactly $\\mathrm{Ku}_!$ followed by $\\varepsilon_{f,K}\\boxtimes1_Q$, the transpose in [sk-def-sf-kv-maps](ii). This proves equality of the specified maps by injectivity of transposition. The purity orientation used in the unit route is the diagonal/DNC one: [thm-pur-finite-coefficient-smooth-purity] identifies $G_fK$ with $f^*K(d)[2d]$ through [def-pur-smooth-purity-map], whose tensor map is precisely this $\\theta$. The argument therefore proves the smooth step of that route for arbitrary coefficients without mistaking a purity-defined exchange for an adjunction mate. Pure relative dimensions may be treated separately on the open-and-closed components of a smooth map.",
+   "text": "Verify the finite datum [def-sf-datum] needed for site-perfect evaluation. A1: ordinary adjunction is [fix-prop-adjunctions](1), exceptional adjunction is [sk-def-sf-operations](vi), and the composite counits are those of Step 1. A2: [lem-sf-proetale-constructible-origin] gives an etale-origin witness for every input, so [thm-cbc-finite-level-proetale] supplies compact-support base change. For proper f the identity-open compactification identifies Rf_! with Rf_*, giving proper ordinary base change as well; smooth ordinary base change is [fix-lem-exchanges](3). A3 is precisely [fix-prop-projection-formula].",
    "uses": [
-    "thm-pur-cohomological-smoothness",
-    "def-pur-co-smoothness",
-    "lem-pur-derived-pullback-tensor-iso",
-    "def-exchange-projection",
-    "lemma-weil-pbc-projection-formula-base-change-naturality",
-    "thm-pur-finite-coefficient-smooth-purity",
-    "def-pur-smooth-purity-map",
-    "sk-def-sf-kv-maps",
-    "fix-prop-projection-formula"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
-    "place": "alpha: smooth purity and its base-change compatibility, strengthened to arbitrary auxiliary coefficients"
-   }
-  },
-  {
-   "text": "Next let i:C\\toY be closed with complement j:U\\toY, put I=i times id_Z and J=j times id_Z, and take arbitrary K,Q as above. Apply [prop-sf-localization-all-stages] to K and to K boxtimes Q. Tensor the first distinguished triangle externally with Q. By [sk-lem-sf-kunneth-star] for i and j its terms identify with\n R I_*(i^!K boxtimes Q) \\to K boxtimes Q \\to R J_*(j^*K boxtimes Q) \\to [1].\nThe second localization triangle is\n R I_* I^!(K boxtimes Q) \\to K boxtimes Q \\to R J_* J^*(K boxtimes Q) \\to [1].\nThe last terms agree since J^*(K boxtimes Q)=j^*K boxtimes Q; the middle comparison is the identity. The first comparison is R I_*(alpha_{i,id}). To verify this rather than choose a triangle completion, transpose under I_* dashv I^!: its counit square is exactly the external tensor of i_*i^!K\\toK. For a closed immersion P_i=Ri_* and the proper projection/base-change maps in Ku_! are the ordinary ones, so this transpose is the definition in [sk-def-sf-kv-maps](ii). The second square is the equality of the adjunction units defining the canonical ordinary product comparison (transpose both maps under J^* dashv RJ_*; both are the pullback of K boxtimes Q). Here is the missing connecting-square check. Rotate both triangles and use (TR3) of [def-weil-triangulated-category] on the identity middle comparison and the identified last comparison to obtain a triangle morphism with some first arrow $a_0$. Let $a=RI_*(\\alpha_{i,\\mathrm{id}})$. The counit square just checked says $(a-a_0)$ becomes zero after composition into the middle vertex. Exactness of Hom into the second triangle, [lem-weil-pbc-hom-into-triangle-exact], factors $a-a_0$ through its last vertex shifted by $[-1]$. This factorization is zero: by the ordinary adjunction [fix-prop-adjunctions](1), $\\operatorname{Hom}(RI_*T,RJ_*B[-1])=\\operatorname{Hom}(J^*RI_*T,B[-1])=0$. Indeed $J^*RI_*T=0$: restriction to the complementary open removes the entire closed support, as one sees directly from closed direct image on sheaves. Thus $a=a_0$, and the specified first arrow does form a morphism of distinguished triangles. By [lem-sf-triangle-morphism-iso] the first comparison is an isomorphism. Finally the unit T\\toI^! I_*T is an isomorphism by [prop-sf-closed-unit-all-stages], so I_* reflects isomorphisms: apply I^! and these units. Thus alpha_{i,id}(K,Q) is an isomorphism, with no regularity hypothesis on i. In the regular smooth pairs explicitly mentioned in the unit, [sk-thm-regular](c) supplies the class-normalized isomorphism $Ri^!A=A_C(-c)[-2c]$, and (d) identifies the product class with the exterior product of the two classes. The just-verified counit square is the defining transpose for the class-normalized product map as well. Hence in this case the localization comparison is the fundamental-class product comparison required by the unit. This normalization uses regularity only in this regular special case; the preceding localization proof covers arbitrary closed immersions. For clarity, the tensor transport just used is monoidal: apply the general ringed-topos tensor-pullback isomorphism [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the comparison morphism $\\nu$ with the constant coefficient ring. Its inverse image is exact by [lem-sf-comparison-pullback-exact], so the constructible equivalence from etale origin is an exact monoidal equivalence on the objects under consideration.",
-   "uses": [
-    "prop-sf-localization-all-stages",
-    "sk-lem-sf-kunneth-star",
-    "sk-def-sf-kv-maps",
-    "fix-prop-projection-formula",
-    "lem-sf-triangle-morphism-iso",
-    "prop-sf-closed-unit-all-stages",
-    "sk-thm-regular",
-    "lem-kun-derived-tensor-triangulated",
-    "lem-sf-proetale-constructible-origin",
-    "lem-sf-comparison-tor-amplitude",
-    "def-weil-triangulated-category",
-    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-sf-datum",
     "fix-prop-adjunctions",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sf-comparison-pullback-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
-    "place": "alpha: supported localization and the closed-immersion unit; explicit triangle argument"
-   }
-  },
-  {
-   "text": "The comparisons are local on source and target in the Zariski topology. Indeed for an open immersion u, purity in relative dimension zero identifies G_u=u^*. For a Cartesian square with open horizontal maps u:X'\\toX and v:Y'\\toY, the composition comparisons of Step 1 applied to fu=vf' give u^*G_f=G_{f'}v^*. Applied to the defining transpose of alpha, the same composition calculation in Step 2 gives its restriction. This is a consequence of composition with open exceptional pullbacks; it does not assert that an arbitrary square mate is invertible. Isomorphy can be tested on these opens: the cohomology sheaves of the cone restrict to zero, hence are zero on an open cover. Choose affine opens V in Y and W in f^{-1}V covering X. For W=Spec B and V=Spec R, finite type supplies finitely many algebra generators b_1,...,b_r of B over R. The surjection R[t_1,...,t_r]\\toB defines a closed immersion W\\toA^r_V whose composite with the smooth projection to V is f|_W. Steps 3 and 4, and the composition identity of Step 2, prove alpha_{f,id} on this chart for arbitrary restrictions of K,Q. Local detection proves it globally. Applying this result to (f_1,id_{Y_2}) and (id_{X_1},f_2), and composing, proves alpha_{f_1,f_2} for arbitrary L_1,L_2. This uses exactly the blueprint's closed-immersion/smooth-projection factorization, with the stronger arbitrary-coefficient localization calculation, so no support-dimension induction is necessary. There is no extra separatedness hypothesis on $X_i,Y_i$ hidden here. For a possibly nonseparated finite-type scheme, take affine opens in each $Y_i$, affine opens in their inverse images in $X_i$, and affine opens in the auxiliary scheme $Z$. On the ordinary etale site, [lem-amb-etale-adjoint-locality] says that a separated etale $u$ has exact $u_!\\dashv u^*$ on the whole derived category and $u^*f^\\times=(fu)^\\times$. Applied also to $v$, uniqueness of the right adjoint to the equality $fu=vf'$ gives $u^*f^\\times=f'^\\times v^*$. The finite functor in [sk-def-sf-operations](vi) is the transport of this ordinary etale functor; [lem-sf-proetale-constructible-origin] and [lem-sf-comparison-tor-amplitude] identify the constructible finite-Tor objects on the two sites. Thus the open restrictions just used are available even before any separated-scheme preservation theorem is applied. Compact-support pasting [fix-lem-exchanges](2) and the counit definition of $\\alpha$ identify the restricted map with the map on these affine charts. All geometric operations needed for its invertibility now occur on separated schemes, the case already proved. The resulting opens cover the product, and one may choose a finite subcover: every finite-type scheme here is Noetherian and quasi-compact, as justified below. Preservation on these separated charts also supplies preservation on the original corners, rather than merely isomorphism detection. On each chart the restricted exceptional values have bounded constructible cohomology and a finite Tor interval by [thm-sf-ctf-stability](v). Take the minimum lower bound and maximum upper bound over the finite cover. Cohomology and tensor with an arbitrary module sheaf restrict to the same chart constructions, so these bounds hold globally. Constructibility is local for this finite cover: the finitely many constructible strata on its opens form a finite constructible partition after common refinement, with the same local models. Thus the exceptional values are in $D^b_{ctf}$ on the nonseparated corners as well. A cone zero on the product opens has every cohomology sheaf zero, by the sheaf axiom, and is zero. This proves $\\alpha$ on the full domain in the item. Source error (STATEMENT-DISPUTED, proof inference only): the imported sentence taking a closed immersion $g_i:Z_i=\\operatorname{supp}L_i\\hookrightarrow Y_i$ is invalid when support means nonzero stalks. For $j:\\mathbf G_m\\hookrightarrow\\mathbf A^1$ and $L=j_!A$, that support is $\\mathbf G_m$, not a closed subscheme. If support instead means its closure, the equality needs to be stated and justified with that closure. We use the same smooth/closed/affine route with the arbitrary-coefficient localization calculation above; it proves the conclusion directly before this invalid support induction, so the theorem statement is unchanged. The locality lemma's Noetherian/compactifiability hypotheses are justified as follows: a field is Noetherian because its only ideals are zero and the whole field; [lem-weil-pbc-finite-type-over-noetherian] then makes every finite-type scheme here Noetherian. Such a scheme is quasi-compact and quasi-separated (intersections of its affine opens are opens in a Noetherian space, hence quasi-compact). [sk-thm-nagata-compactification] supplies compactifications for the separated finite-type maps $f$, $fu$, and $f'$. Thus the ordinary-etale locality theorem is applied on its stated domain.",
-   "uses": [
-    "thm-pur-finite-coefficient-smooth-purity",
-    "sk-def-sf-kv-maps",
-    "lem-weil-pbc-mate-pasting",
-    "lem-amb-etale-adjoint-locality",
     "sk-def-sf-operations",
     "lem-sf-proetale-constructible-origin",
-    "lem-sf-comparison-tor-amplitude",
+    "thm-cbc-finite-level-proetale",
     "fix-lem-exchanges",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "sk-thm-nagata-compactification",
-    "thm-sf-ctf-stability"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
-    "place": "alpha: affine factorization and etale/open localization; elementary affine-algebra construction spelled out"
-   }
-  },
-  {
-   "text": "For beta remain at the finite ring A. Both its source and target are contravariant exact in each $E_i$: internal Hom is exact with its signed shifts by [lem-weil-pbc-ringed-internal-hom-exact-restriction] (Stacks Tags 08J9, 08JB, 08JC); external tensor is exact by [lem-kun-derived-tensor-triangulated], transported from etale to pro-etale finite-Tor objects using [lem-sf-proetale-constructible-origin] and [lem-sf-comparison-tor-amplitude]. The evaluation-defined transformation respects these signs because it is the tensor-Hom transpose in [sk-def-sf-kv-maps](iii). Its isomorphism locus in either E_i is therefore triangulated by [lem-sf-triangle-two-out-of-three], and closed under retracts since a retract of an isomorphism is an isomorphism (retract its inverse). The finite-ring generation assertion of [sk-lem-sf-flat-model] now reduces successively in E_1 and E_2 to E_i=Rh_{i!}F_i, where h_i is a locally closed immersion and F_i is lisse with finite projective stalks. These generators are in D^b_ctf by that assertion. Put F_i^vee=Hom_A(F_i,A), in degree zero. The finite datum was verified in Step 1, so [prop-sf-dualizable-hom] applies to these degree-zero site-perfect $F_i$ and gives the canonical evaluation isomorphism. Concretely, locally $F_i$ is a direct summand of $A^{r_i}$; for a free module evaluation identifies Hom(A^{r_i},T) with T^{r_i}, including the complexes and their differentials. The same identity on the two complementary idempotent summands gives RHom(F_i,T)=F_i^vee tensor^L T for every T, and F_i^vee is flat constructible. This also proves (F_1 boxtimes F_2)^vee=F_1^vee boxtimes F_2^vee. These local identities are identities for the evaluation maps and glue. No assertion that every constructible finite-Tor object is site-perfect, or that every adic lisse sheaf has a finite trivializing cover, is used. For clarity, the tensor transport just used is monoidal: apply the general ringed-topos tensor-pullback isomorphism [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the comparison morphism $\\nu$ with the constant coefficient ring. Its inverse image is exact by [lem-sf-comparison-pullback-exact], so the constructible equivalence from etale origin is an exact monoidal equivalence on the objects under consideration.",
-   "uses": [
-    "sk-def-sf-kv-maps",
-    "lem-sf-triangle-two-out-of-three",
-    "sk-lem-sf-flat-model",
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-kun-derived-tensor-triangulated",
-    "lem-sf-proetale-constructible-origin",
-    "lem-sf-comparison-tor-amplitude",
-    "prop-sf-dualizable-hom",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sf-comparison-pullback-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
-    "place": "beta: devissage in the first variables and the finite-projective evaluation calculation"
-   }
-  },
-  {
-   "text": "Write h=h_1 times h_2, F=F_1 boxtimes F_2 and L=L_1 boxtimes L_2. The natural tensor-Hom comparison [sk-thm-sf-tensor-hom] and Step 6 identify RHom(E_i,L_i) with Rh_{i*}(F_i^vee tensor^L h_i^!L_i). Put $T_i=F_i^\\vee\\otimes^Lh_i^!L_i$, so $T_i\\in D^b_{ctf}(S_i,A)$, where $h_i:S_i\\to Y_i$, and $Rh_{i*}T_i\\in D^b_{ctf}(Y_i,A)$ by Step 1. The first application of [sk-lem-sf-kunneth-star], with $f=h_1$ and auxiliary coefficient $Rh_{2*}T_2$ on $Y_2$, gives\n$$\nRh_{1*}T_1\\boxtimes Rh_{2*}T_2\\xrightarrow{\\sim}\nR(h_1\\times\\mathrm{id}_{Y_2})_*(T_1\\boxtimes Rh_{2*}T_2).\n$$\nThe second application, with $f=h_2$ and auxiliary coefficient $T_1$ on $S_1$, followed by product symmetry, gives\n$$\nT_1\\boxtimes Rh_{2*}T_2\\xrightarrow{\\sim}\nR(\\mathrm{id}_{S_1}\\times h_2)_*(T_1\\boxtimes T_2).\n$$\nApply $R(h_1\\times\\mathrm{id}_{Y_2})_*$ to this arrow and use the ordinary composition comparison of [fix-prop-adjunctions](3). The composite morphism is $h_1\\times h_2$, and $T_1\\boxtimes T_2=F^\\vee\\otimes^L(h_1^!L_1\\boxtimes h_2^!L_2)$ by the monoidal pullback comparison and tensor symmetry. These are the two ordinary Kunneth arrows in the following chain. This gives\n RHom(E_1,L_1) boxtimes RHom(E_2,L_2)\n \\to Rh_*((F_1^vee boxtimes F_2^vee) tensor^L (h_1^!L_1 boxtimes h_2^!L_2))\n \\to Rh_*(F^vee tensor^L h^!L)\n = Rh_*RHom(F,h^!L)\n = RHom(Rh_!F,L)\n = RHom(E_1 boxtimes E_2,L).\nThe second arrow is Rh_*(1 tensor alpha), invertible by Step 5; the final equality uses Ku_! of [sk-def-sf-kv-maps](i). Every arrow is an isomorphism. These inputs satisfy the domains of the cited nodes by Step 1. Check that this chain is the canonical beta, as follows. Put $B=\\RHom(E_1,L_1)\\boxtimes\\RHom(E_2,L_2)$. The bijections actually used are\n$$\n\\operatorname{Hom}(B,Rh_*\\RHom(F,h^!L))\n\\cong\\operatorname{Hom}(h^*B\\otimes^LF,h^!L)\n\\cong\\operatorname{Hom}(Rh_!(h^*B\\otimes^LF),L)\n\\cong\\operatorname{Hom}(B\\otimes^LRh_!F,L).\n$$\nThey are ordinary adjunction plus tensor-Hom, exceptional adjunction, and the projection isomorphism [fix-prop-projection-formula], respectively. With $Rh_!F=E_1\\boxtimes E_2$, compare the image of the displayed composite under this bijection with the evaluation transpose defining $\\beta$. This is a comparison under bijections, not detection of equality by pullback. The tensor-Hom comparison sends evaluation on Rh_!F_i to the composite Rh_{i!}(F_i tensor RHom(F_i,h_i^!L_i))\\toRh_{i!}h_i^!L_i\\toL_i. The ordinary product comparisons transpose to the ordinary counits. Finally alpha transposes, by definition, to Ku_! followed by epsilon_{h_1} boxtimes epsilon_{h_2}. Thus the composite transpose is the external tensor of the two preceding evaluation composites, with precisely the symmetry interchanging F_2 and its neighboring Hom factor. This is the defining transpose of beta. The triangle identities cancel the inserted units and counits; [lem-weil-pbc-mate-pasting](1),(2) permits the successive transposes with these composite adjunctions. Injectivity of the adjunction Hom bijections proves equality of the morphisms. Hence beta is invertible on the generators, and Step 6 proves it for all E_i. For possibly nonseparated $Y_i$, restrict $\\beta$ to products of affine opens. The slice-restriction assertion of [lem-weil-pbc-ringed-internal-hom-exact-restriction] and the monoidal restriction of [lem-pur-derived-pullback-tensor-iso] identify the restrictions of both endpoints and of their evaluation transpose with $\\beta$ on those separated charts. Its cone therefore has zero cohomology on a covering, hence zero cohomology everywhere. This proves $\\beta$ on the full finite-coefficient domain without applying separated-scheme preservation to a nonseparated scheme.",
-   "uses": [
-    "sk-thm-sf-tensor-hom",
-    "sk-lem-sf-kunneth-star",
-    "sk-def-sf-kv-maps",
-    "lem-weil-pbc-mate-pasting",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-derived-pullback-tensor-iso",
-    "fix-prop-adjunctions",
     "fix-prop-projection-formula"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
-    "place": "beta: the displayed two ordinary Kunneth maps followed by alpha; explicit evaluation/counit check"
+    "place": "finite concrete datum: axioms A1-A3"
    }
   },
   {
-   "text": "Pass from finite coefficients to integral and field coefficients only after the preceding proof. At O_E, [thm-sf-ctf-stability](vii) supplies constructible finite-Tor values and canonical finite reductions for general internal Hom and exceptional inverse image, preserving evaluation and adjunction maps. Pullback, tensor and the compact-support maps commute with integral reduction by [lem-fix-operation-reduction]; [fix-lem-exchanges] and [fix-prop-projection-formula] give the corresponding reductions of the constituent Ku_! maps. Thus the reductions of the specified alpha and beta, not merely of their endpoints, are the finite-level alpha and beta. The cone of either integral comparison belongs to the derived-complete constructible category by [lem-weil-integral-constructible-triangulated] and has zero finite reductions. Its Roos triangle in [def-weil-derived-complete] is therefore C\\to0\\to0\\toC[1], which forces C=0. Both integral comparisons are isomorphisms. At E the operations and maps are their scalar localizations by [lem-fix-operation-reduction] and [def-weil-derived-pullback-tensor-hom]; localize their inverses to obtain inverses. At Qbar choose one finite extension containing the finitely many coefficient fields of the inputs and represent all maps there; the common-stage formulas of [def-weil-derived-pullback-tensor-hom] and the operation/evaluation transports of [thm-sf-ctf-stability](vii) and [lem-fix-operation-reduction] identify the comparison with the one already proved over this field. Its inverse represents an inverse over Qbar as well. The assertions also survive retracts if an idempotent-completed coefficient presentation is used, by restricting the inverse to the same idempotents. No reduction of a rational object modulo varpi is asserted. For a possibly nonseparated corner, first restrict to the affine charts of Steps 5 and 7. Reduction and the completed pullback/tensor constructions are restrictions of the same coefficient towers, and internal Hom restricts by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Exceptional restriction is the finite open-adjunction comparison of Step 5 level by level in the construction of [sk-def-sf-operations](vi). Hence on each such chart the reductions of the specified comparisons are those just proved invertible. Apply the complete-cone argument on those charts, then use vanishing of the cohomology sheaves of the global cone on the resulting covering. The field and common-stage construction has the same restriction property. Thus the use of the separated-chart stability theorem has not strengthened the theorem's hypotheses.",
+   "text": "A4 of [def-sf-datum] is [thm-sf-comp-composition] with its pentagon and the identity-open compactification for proper maps. A5 follows on the stated finite-Tor domains from [thm-sf-ctf-stability](vii), [lem-fix-operation-reduction] and [fix-lem-exchanges](1),(2),(4): these state compatibility of the operations, evaluations and adjunction maps with the coefficient constructions. A6 is the geometric exact biduality of [thm-sf-ctf-stability](vi). Thus all six required clauses of the finite datum have been checked, rather than treating its defining axioms as theorems.",
+   "uses": [
+    "def-sf-datum",
+    "thm-sf-comp-composition",
+    "thm-sf-ctf-stability",
+    "lem-fix-operation-reduction",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "finite concrete datum: axioms A4-A6"
+   }
+  },
+  {
+   "text": "Use [lem-sf-kv-alpha-transpose-coherence] to compose the specified alpha maps under G_{gf}=G_f G_g, and to interchange the two factors. In particular a proof for (f,id) gives the corresponding proof for (id,f); composing these proves the general pair. The lemma asserts equality of the counit-defined maps, so this step never assumes invertibility of an arbitrary square mate.",
+   "uses": [
+    "lem-sf-kv-alpha-transpose-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: composition and factor symmetry"
+   }
+  },
+  {
+   "text": "For smooth f:X→Y and F=f×id_Z, put omega_f=G_f A_Y and let r:X×Z→X. The tensor isomorphisms theta and dualizing base-change isomorphism b of [thm-pur-cohomological-smoothness](1),(3) give\nG_f K⊠Q → F^*(K⊠Q)⊗r^*omega_f → F^*(K⊠Q)⊗omega_F → G_F(K⊠Q).\nAll three arrows are isomorphisms. By [lem-sf-kv-smooth-transpose] their composite equals the specified alpha_{f,id}; hence that map is invertible for arbitrary K,Q. Treat pure relative dimensions on the open-and-closed components separately. The orientation is the diagonal/DNC one: [thm-pur-finite-coefficient-smooth-purity] and [def-pur-smooth-purity-map] identify this same tensor map with the smooth twist/shift purity map.",
+   "uses": [
+    "thm-pur-cohomological-smoothness",
+    "lem-sf-kv-smooth-transpose",
+    "thm-pur-finite-coefficient-smooth-purity",
+    "def-pur-smooth-purity-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: smooth purity and the specified transpose"
+   }
+  },
+  {
+   "text": "The finite etale/pro-etale transport used for triangles is exact monoidal. Indeed [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives the monoidal comparison for the site morphism nu and the constant coefficient ring; [lem-sf-comparison-pullback-exact] makes its inverse image exact. [lem-sf-proetale-constructible-origin] and [lem-sf-comparison-tor-amplitude] identify the finite constructible finite-Tor objects on the two sites. Thus the etale tensor exactness [lem-kun-derived-tensor-triangulated] applies to the exterior tensor operations here.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-comparison-pullback-exact",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-kun-derived-tensor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha and beta: exact monoidal site transport"
+   }
+  },
+  {
+   "text": "Let i:C→Y be closed, j its open complement, and I=i×id_Z, J=j×id_Z. [prop-sf-localization-all-stages] gives the two supported triangles, one for K and one for K⊠Q. Externally tensor the first with Q; it stays distinguished by Step 6. At A=A_{E,n} on separated schemes the operations of [lem-sf-supported-external-triangle-comparison] (those of def-trf-admissibility, i.e. the exceptional inverse image of def-weil-exceptional-inverse-image) are the finite-level operations of sk-def-sf-operations (vi), and its alpha is the same counit-defined transpose. That lemma gives a morphism of triangles, connecting square included, with components RI_*(alpha_{i,id})∘c_i, the identity, and c_j. The ordinary product maps c_i, c_j are isomorphisms by [lem-trf-ordinary-kunneth]. Hence [lem-sf-triangle-morphism-iso] makes the first component invertible, so RI_*(alpha_{i,id}) is invertible. The unit T→I^!I_*T is invertible by [prop-sf-closed-unit-all-stages]. Consequently I_* reflects isomorphisms: apply I^! to an inverse and conjugate by these units. Therefore alpha_{i,id} is invertible.",
+   "uses": [
+    "prop-sf-localization-all-stages",
+    "lem-sf-supported-external-triangle-comparison",
+    "lem-trf-ordinary-kunneth",
+    "lem-sf-triangle-morphism-iso",
+    "prop-sf-closed-unit-all-stages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: closed immersions by a genuine morphism of localization triangles"
+   }
+  },
+  {
+   "text": "In the regular smooth pairs singled out by the unit, [sk-thm-regular](c) supplies Ri^!A=A_C(-c)[-2c], and (d) identifies the class of the product regular immersion with the exterior product of the two classes. The first comparison in [lem-sf-supported-external-triangle-comparison] is the specified counit transpose, so under these class normalizations it is the fundamental-class product comparison. Here both the smooth ambient and regular closed schemes required by sk-thm-regular are imposed. Regularity is used only for this normalization, not for the general closed-immersion argument in Step 7.",
+   "uses": [
+    "sk-thm-regular",
+    "lem-sf-supported-external-triangle-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: fundamental-class normalization in the regular case"
+   }
+  },
+  {
+   "text": "For a possibly nonseparated finite-type corner choose affine V⊂Y and affine W⊂f^{-1}V; also cover Z by affine opens. [lem-sf-kv-affine-locality] identifies the restriction of the specified alpha with that of f|_W:W→V on these charts. For W=Spec B, V=Spec R, B is a finitely generated R-algebra by [lem-weil-pbc-lft-affine-pairs]; choose generators. The surjection R[t_1,...,t_r]→B makes W→A^r_V a closed immersion by the affine characterization in [def-weil-closed-immersion]. Its composite with the projection A^r_V→V, smooth of pure relative dimension r by [sbc-lem-affine-space-smooth], is f|_W. The smooth and closed cases, and [lem-sf-kv-alpha-transpose-coherence], make alpha invertible on every such product chart. The cone has zero cohomology sheaves on a covering, hence each cohomology sheaf is zero by the sheaf axiom; the cone is zero. Composition and factor symmetry now give alpha for every pair (f_1,f_2).",
+   "uses": [
+    "lem-sf-kv-affine-locality",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-closed-immersion",
+    "sbc-lem-affine-space-smooth",
+    "lem-sf-kv-alpha-transpose-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: affine factorization and open detection"
+   }
+  },
+  {
+   "text": "The locality statement is used on its Noetherian, compactifiable domain: a field is Noetherian, and [lem-weil-pbc-finite-type-over-noetherian] makes every finite-type corner Noetherian. Such a space is quasi-compact, and intersections of affine opens are quasi-compact because every open in a Noetherian space is quasi-compact. [sk-thm-nagata-compactification] therefore supplies compactifications of f and all its restricted maps. A finite subcover of the product charts exists. On these separated charts [thm-sf-ctf-stability](v) gives bounded constructible exceptional values with finite Tor intervals. The finite-cover clause of [lem-sf-kv-affine-locality] gives their global preservation, with the minimum lower and maximum upper bounds. Thus no separatedness of the original corners was added.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "sk-thm-nagata-compactification",
+    "thm-sf-ctf-stability",
+    "lem-sf-kv-affine-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: hypotheses for nonseparated corners and finite-cover preservation"
+   }
+  },
+  {
+   "text": "Source error (STATEMENT-DISPUTED, proof inference only): the imported reduction takes a closed immersion with source supp L. For j:G_m→A^1 and L=j_!A, the nonzero-stalk support is G_m, which is not closed. Taking its closure would require saying so. Steps 5-10 instead use the same smooth/closed/affine route, with arbitrary auxiliary coefficients already in the localization calculation. They establish alpha before the invalid support reduction is needed. The theorem statement is unchanged.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: documented correction of the invalid support inference"
+   }
+  },
+  {
+   "text": "For beta at finite A, [lem-weil-pbc-ringed-internal-hom-exact-restriction] gives exactness with the signed shifts in each source variable E_i. Exterior tensor is exact by Step 6. The evaluation transpose [sk-def-sf-kv-maps](iii) respects these exact structures. Hence the isomorphism locus in each E_i is triangulated by [lem-sf-triangle-two-out-of-three], and stable under retracts by retracting the inverse. Apply [sk-lem-sf-flat-model] successively in the two variables: it suffices to prove beta for E_i=Rh_{i!}F_i with h_i locally closed and F_i lisse with finite-projective local models. These generators are in D^b_ctf.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "sk-def-sf-kv-maps",
+    "lem-sf-triangle-two-out-of-three",
+    "sk-lem-sf-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "beta: exactness and finite-ring generation"
+   }
+  },
+  {
+   "text": "Each such F_i, in degree zero, is site-perfect: locally it is a direct summand of a finite sum of coefficient units. The finite datum was verified in Steps 2-3, so [prop-sf-dualizable-hom] gives the canonical evaluation isomorphism RHom(F_i,T)=F_i^vee tensor^L T. For the exterior-dual identity one may check on a cover where each F_i is an idempotent summand of A^{r_i}: Hom(A^r,T)=T^r respects the differential; taking the two idempotent summands gives (F_1⊠F_2)^vee=F_1^vee⊠F_2^vee. These are evaluation identities, hence agree on overlaps and glue. No general constructible object is assumed site-perfect, and no finite trivializing cover for an adic lisse object is used.",
+   "uses": [
+    "prop-sf-dualizable-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "beta: site-perfect finite-projective evaluation"
+   }
+  },
+  {
+   "text": "Set T_i=F_i^vee⊗^Lh_i^!L_i. By [sk-thm-sf-tensor-hom] and Step 13, RHom(E_i,L_i)=Rh_{i*}T_i. These objects are finite-Tor constructible by [thm-sf-ctf-stability]. Apply [sk-lem-sf-kunneth-star] first with f=h_1, auxiliary Rh_{2*}T_2 on Y_2:\nRh_{1*}T_1⊠Rh_{2*}T_2 → R(h_1×id)_*(T_1⊠Rh_{2*}T_2).\nApply it a second time with f=h_2, auxiliary T_1 on S_1, and factor symmetry:\nT_1⊠Rh_{2*}T_2 → R(id×h_2)_*(T_1⊠T_2).\nBoth arrows are isomorphisms. Applying R(h_1×id)_* to the second and using [fix-prop-adjunctions](3) identifies the result with Rh_*(T_1⊠T_2), h=h_1×h_2.",
+   "uses": [
+    "sk-thm-sf-tensor-hom",
+    "thm-sf-ctf-stability",
+    "sk-lem-sf-kunneth-star",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "beta: two separately typed ordinary Kunneth arrows"
+   }
+  },
+  {
+   "text": "Put F=F_1⊠F_2 and L=L_1⊠L_2. The monoidal pullback comparison [lem-pur-derived-pullback-tensor-iso] and the exterior-dual identity identify T_1⊠T_2 with F^vee⊗^L(h_1^!L_1⊠h_2^!L_2). Apply Rh_*(1⊗alpha), which is invertible by Step 9, then finite-projective evaluation and [sk-thm-sf-tensor-hom] to reach RHom(Rh_!F,L). Ku_! in [sk-def-sf-kv-maps](i) identifies Rh_!F with E_1⊠E_2. Every arrow is invertible. [lem-sf-kv-beta-kunneth-evaluation] says this composite equals the specified evaluation-defined beta. Thus beta is invertible on the generators; Step 12 proves it for all E_i on separated schemes.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "sk-thm-sf-tensor-hom",
+    "sk-def-sf-kv-maps",
+    "lem-sf-kv-beta-kunneth-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "beta: invertible generator chain and equality with the specified map"
+   }
+  },
+  {
+   "text": "On products of affine opens in possibly nonseparated Y_i, the slice-restriction isomorphism of [lem-weil-pbc-ringed-internal-hom-exact-restriction] and monoidal restriction [lem-pur-derived-pullback-tensor-iso] identify both endpoints and the evaluation transpose with beta on the separated charts. Its cone has zero cohomology on a covering, hence globally by the sheaf axiom. This proves beta on the full finite-coefficient domain.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "beta: nonseparated corners by slice restriction"
+   }
+  },
+  {
+   "text": "At integral coefficients, [thm-sf-ctf-stability](vii) gives finite reductions of internal Hom and exceptional inverse image preserving evaluation and adjunction maps. [lem-fix-operation-reduction], [fix-lem-exchanges] and [fix-prop-projection-formula] give reductions of pullback, tensor and the constituent compact-support product maps. Substituting into the definitions [sk-def-sf-kv-maps] shows that the reductions of the specified alpha and beta are the finite-level alpha and beta. Their cones are derived-complete constructible by [lem-weil-integral-constructible-triangulated]. Since all finite reductions vanish, the defining Roos triangle of [def-weil-derived-complete] has the form C→0→0→C[1]; hence C=0. Both integral maps are invertible.",
    "uses": [
     "thm-sf-ctf-stability",
     "lem-fix-operation-reduction",
     "fix-lem-exchanges",
     "fix-prop-projection-formula",
+    "sk-def-sf-kv-maps",
     "lem-weil-integral-constructible-triangulated",
-    "def-weil-derived-complete",
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "sk-def-sf-operations"
+    "def-weil-derived-complete"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
-    "place": "all three maps: coefficient passage; finite proof followed by derived-complete conservativity and scalar localization"
+    "place": "coefficient passage: canonical reductions and complete cones"
+   }
+  },
+  {
+   "text": "At E the operations and their maps are scalar localizations by [lem-fix-operation-reduction] and [def-weil-derived-pullback-tensor-hom]; localizing each integral inverse gives an inverse. At Qbar choose a common finite coefficient field containing the finitely many input fields; the common-stage construction in [def-weil-derived-pullback-tensor-hom] and the map transports in [thm-sf-ctf-stability](vii) and [lem-fix-operation-reduction] represent the comparisons and their inverse there. They define inverse pairs over Qbar. In an idempotent completion restrict the inverse to the same idempotent summands. No rational object is reduced modulo a uniformizer.",
+   "uses": [
+    "lem-fix-operation-reduction",
+    "def-weil-derived-pullback-tensor-hom",
+    "thm-sf-ctf-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "coefficient passage: localization, common finite stages and retracts"
+   }
+  },
+  {
+   "text": "For a nonseparated corner apply the coefficient arguments on the finite affine covers already used. The normalized-system construction of [sk-def-sf-operations](vi) defines exceptional restriction levelwise by the finite open-adjoint comparisons of [lem-sf-kv-affine-locality]; its finite-cover clause gives uniform bounds. Pullback and tensor restriction are the same coefficient-tower constructions [def-weil-derived-pullback-tensor-hom], and internal Hom restricts by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Thus the chart maps reduce to those already proved. Their complete cones vanish on the charts, then globally since their cohomology sheaves vanish on a cover. Localization and common-stage scalar extension preserve these inverse pairs.",
+   "uses": [
+    "sk-def-sf-operations",
+    "lem-sf-kv-affine-locality",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "coefficient passage: open restriction at all stages"
    }
   },
   {
@@ -190,48 +292,51 @@
   }
  ],
  "proof_deps": [
-  "def-exchange-projection",
-  "def-pur-co-smoothness",
-  "def-pur-smooth-purity-map",
-  "def-sf-datum",
-  "def-weil-derived-complete",
-  "def-weil-derived-pullback-tensor-hom",
+  "thm-sf-ctf-stability",
+  "sk-def-sf-operations",
+  "thm-sf-comp-composition",
   "def-weil-pbc-adjunction-conjugate",
-  "def-weil-triangulated-category",
-  "fix-lem-exchanges",
+  "lem-weil-pbc-mate-pasting",
+  "def-sf-datum",
   "fix-prop-adjunctions",
+  "lem-sf-proetale-constructible-origin",
+  "thm-cbc-finite-level-proetale",
+  "fix-lem-exchanges",
   "fix-prop-projection-formula",
-  "lem-amb-etale-adjoint-locality",
   "lem-fix-operation-reduction",
-  "lem-kun-derived-tensor-triangulated",
-  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-kv-alpha-transpose-coherence",
+  "thm-pur-cohomological-smoothness",
+  "lem-sf-kv-smooth-transpose",
+  "thm-pur-finite-coefficient-smooth-purity",
+  "def-pur-smooth-purity-map",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-sf-comparison-pullback-exact",
   "lem-sf-comparison-tor-amplitude",
-  "lem-sf-proetale-constructible-origin",
-  "lem-sf-triangle-morphism-iso",
-  "lem-sf-triangle-two-out-of-three",
-  "lem-weil-integral-constructible-triangulated",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-hom-into-triangle-exact",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lemma-weil-pbc-projection-formula-base-change-naturality",
-  "prop-sf-closed-unit-all-stages",
-  "prop-sf-dualizable-hom",
+  "lem-kun-derived-tensor-triangulated",
   "prop-sf-localization-all-stages",
-  "sk-def-sf-kv-maps",
-  "sk-def-sf-operations",
-  "sk-lem-sf-flat-model",
-  "sk-lem-sf-kunneth-star",
-  "sk-thm-nagata-compactification",
+  "lem-sf-supported-external-triangle-comparison",
+  "lem-trf-ordinary-kunneth",
+  "lem-sf-triangle-morphism-iso",
+  "prop-sf-closed-unit-all-stages",
   "sk-thm-regular",
+  "lem-sf-kv-affine-locality",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-closed-immersion",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sk-thm-nagata-compactification",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "sk-def-sf-kv-maps",
+  "lem-sf-triangle-two-out-of-three",
+  "sk-lem-sf-flat-model",
+  "prop-sf-dualizable-hom",
   "sk-thm-sf-tensor-hom",
-  "thm-cbc-finite-level-proetale",
-  "thm-pur-cohomological-smoothness",
-  "thm-pur-finite-coefficient-smooth-purity",
-  "thm-sf-comp-composition",
-  "thm-sf-ctf-stability"
+  "sk-lem-sf-kunneth-star",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-kv-beta-kunneth-evaluation",
+  "lem-weil-integral-constructible-triangulated",
+  "def-weil-derived-complete",
+  "def-weil-derived-pullback-tensor-hom"
  ],
  "proof_origin": {
   "by": "agent",
@@ -325,7 +430,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -394,13 +499,9 @@
   "date": "2026-10-17",
   "item": "sk-thm-sf-kunneth-verdier",
   "worker": "stage1",
-  "summary": "Repaired the earlier nine-step attempt against each cited statement. Canonical smooth alpha now uses counit-defined cohomological smoothness, closed localization is an explicit morphism of triangles, regular fundamental-class normalization is retained, and site-perfect evaluation is applied only after verifying the finite concrete datum. Open restrictions cover nonseparated finite-type schemes. The false support-as-a-closed-subscheme inference is disputed explicitly; no theorem statement is changed. No new nodes or Mathlib leaves. Second reading expands identity/symmetry transposes and both ordinary Kunneth applications, and supplies finite-cover constructibility and amplitude bounds on nonseparated corners.",
-  "blueprint": "Steps 1-5 realize the first unit step (smooth purity, supported localization, regular fundamental-class normalization, affine factorization). Step 5 bypasses only the erroneous support reduction, as explained in the source-error paragraph of that step and report. Steps 6-7 realize the beta step, using the unit dualizable-Hom input; Step 8 supplies the higher coefficient stages; Step 9 realizes kappa.",
+  "summary": "Repaired the human re-split return on old steps 1-8. Extracted five (four after the maintainer reader's fix) precise canonical-map comparison/locality lemmas as unsplit statement-only nodes; none asserts the theorem or its alpha/beta invertibility clauses. Reused the existing adjunction, generation and coefficient-completeness inputs instead of creating elementary duplicate nodes. The item carries smooth/closed/affine invertibility, beta generation and its invertible chain, all coefficient stages and kappa. Statement and Lean record unchanged. Maintainer-reader fix (2026-10-17): the new localization-comparison node duplicated the existing lem-sf-supported-external-triangle-comparison (same unit, same finite-stage operations and alpha); it is dropped and Steps 7-8 cite the existing node, with lem-trf-ordinary-kunneth for the ordinary product isomorphisms. Step 9 now cites lem-weil-pbc-lft-affine-pairs, def-weil-closed-immersion and sbc-lem-affine-space-smooth for the affine factorization.",
+  "blueprint": "Steps 1-11 realize unit alpha using the same smooth/closed/affine route and the previously documented support-inference correction. Steps 12-16 realize beta by finite-projective generation, tensor-Hom and two ordinary Kunneth maps. Steps 17-19 give coefficient passage. Step 20 realizes kappa. Four new nodes, and the existing supported-triangle comparison, carry only the hidden comparison identities and open-locality/descent claims.",
   "tool_uses": [
-   {
-    "node": "def-exchange-projection",
-    "why": "Actual compactification formula for the projection map used to check its product base-change diagram."
-   },
    {
     "node": "def-pur-co-smoothness",
     "why": "Precise counit transposes of the smooth tensor map and dualizing base-change map."
@@ -436,10 +537,6 @@
    {
     "node": "fix-prop-projection-formula",
     "why": "Projection comparison composition and proper normalization needed for the specified Ku_! maps."
-   },
-   {
-    "node": "lem-amb-etale-adjoint-locality",
-    "why": "Open/etale adjunction and source locality of the actual ordinary etale exceptional adjoint; covers nonseparated schemes."
    },
    {
     "node": "lem-fix-operation-reduction",
@@ -482,10 +579,6 @@
     "why": "General site internal-Hom exactness, signed shifts, and slice restriction (Stacks 08J9/08JB/08JC)."
    },
    {
-    "node": "lemma-weil-pbc-projection-formula-base-change-naturality",
-    "why": "Base-change square for the actual ordinary projection map, applied to the proper compactification factor."
-   },
-   {
     "node": "prop-sf-closed-unit-all-stages",
     "why": "Existing fully faithful closed image and right-adjoint unit implementing the unit closed-unit input."
    },
@@ -526,14 +619,6 @@
     "why": "Preservation and coherent coefficient reduction on actual constructible domains, not an ambient admissibility axiom."
    },
    {
-    "node": "def-weil-triangulated-category",
-    "why": "TR3 supplies the triangle completion; the subsequent Hom-vanishing argument identifies its first arrow with the specified alpha."
-   },
-   {
-    "node": "lem-weil-pbc-hom-into-triangle-exact",
-    "why": "Uniqueness of the first comparison of localization triangles, from Hom exactness and closed/open orthogonality."
-   },
-   {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
     "why": "Noetherian hypotheses for ordinary-etale open locality on all finite-type corners."
    },
@@ -548,6 +633,10 @@
    {
     "node": "lem-sf-comparison-pullback-exact",
     "why": "Exact comparison inverse image makes the finite constructible monoidal transport exact."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Smoothness and pure relative dimension of the projection A^r_V→V in the affine factorization; a generic smoothness fact no node of this unit states."
    }
   ]
  },
@@ -589,14 +678,15 @@
   "lem-weil-pbc-finite-type-over-noetherian",
   "sk-thm-nagata-compactification",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sf-comparison-pullback-exact"
+  "lem-sf-comparison-pullback-exact",
+  "sbc-lem-affine-space-smooth"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q113-b41e923c3",
-  "group": "Q113",
+  "reviewer": "NT-cc-Q86-76657d830",
+  "group": "Q86",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-b41e923c3 (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery and made no repairs (fixes/ is empty). It adds no new nodes. The item statement is verbatim the main-20261015 _section.md statement and is not weakened. The uses union equals proof_deps. The 13387-node dependency closure does not contain the item, so there is no cycle. No SGA source is cited. Unit realized: statement and steps alpha/beta/kappa all point to the item. Source checks per step: (1) G_gf=G_f G_g comes from conjugating thm-sf-comp-composition, and the def-sf-datum axioms are each verified by a named node. (2) The alpha composition, identity and interchange identities are proved by transposes, not by claiming an arbitrary mate is invertible. (3) The smooth case uses thm-pur-cohomological-smoothness (1),(3) with the transposes in def-pur-co-smoothness (2),(3) for arbitrary K and Q; the square XxZ->X over YxZ->Y is Cartesian, and the step ties into the diagonal/DNC purity map. (4) The closed case uses the localization triangle and sk-lem-sf-kunneth-star, whose statement allows any f and any Q, applied to j. The TR3 completion is shown equal to the specified arrow because Hom(RI_*T,RJ_*B[-1])=Hom(J^*RI_*T,B[-1])=0, and the closed unit makes I_* reflect isomorphisms. Regularity is used only for the optional class normalization (sk-thm-regular (c),(d), both hypotheses checked). (5) Affine charts factor as a closed immersion into A^r_V followed by the projection. Zariski locality uses lem-amb-etale-adjoint-locality, whose hypotheses I checked: the schemes are Noetherian and Nagata needs only a qcqs base. Nonseparated corners are handled by finite covers, so no hypothesis is added to the theorem. The blueprint sentence 'closed immersion onto supp L' is false as literally written (j_!A on G_m in A^1); taking the closure would repair it. The delivery does not need that repair, because Steps 3-4 already prove the cases for arbitrary coefficients, and it keeps every alpha ingredient the unit names. I accept this as a documented strengthening; the maintainer should carry the source error to HUMAN.md. (6)-(7) beta: devissage by sk-lem-sf-flat-model generators; RHom/tensor exactness; prop-sf-dualizable-hom only on site-perfect generators; tensor-hom; Kunneth-star applied twice to locally closed immersions; Rh_*(1 tensor alpha); Ku_!. Identification with beta uses three explicit Hom bijections; affine-product charts handle nonseparated Y_i. (8) Coefficient stages: the cone is derived complete with zero reductions, so the Roos triangle forces it to vanish; E by localization, Qbar by a common finite stage. (9) kappa is elementary from sk-def-sf-kv-maps (iv). Overlap with prop-trf-exceptional-kunneth, prop-trf-external-hom and thm-trf-kunneth-verdier (separated plus admissibility clauses of this item) is not same_as. I accept the declared tool_uses."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-76657d830 (reviewer sub-agent of L); spot-checked: Read the delivery in full: the item's 20 steps, all 5 new nodes, the statements of all 41 cited nodes, the main-20261015 unit statement and proof, and the companion prop-trf-* proofs. The item statement is verbatim the blueprint statement and is not weakened: alpha and beta allow nonseparated finite-type schemes, kappa is for separated X,Y, and no admissibility datum is assumed. The coefficient category and functor match: at A_{E,n}, sk-def-sf-operations(vi) is def-weil-exceptional-inverse-image, the same functor as in def-trf-admissibility and def-sf-kv-maps, so alpha is the same counit transpose. No SGA is cited, and smooth purity is the diagonal/DNC route. Steps: smooth case via cohomological smoothness (1),(3) on the Cartesian square X×Z→X; closed case via a morphism of supported triangles, then triangle-morphism-iso and the closed unit; affine factorization with coherence; beta by flat-model dévissage, site-perfect evaluation, tensor-Hom and two Kunneth-star arrows (auxiliaries Rh2*T2 and T1, both ctf); integral stage via the Roos triangle, E by localization, Qbar by common stage; kappa from its definition. All are correct. The support counterexample (j_!A on G_m in A^1) is right. The four retained new nodes are statement-only equalities of maps, true on edge cases (identity, Spec k, f=id), with no invertibility claim (no D1), and not duplicates. FIX (C5): lem-sf-kv-localization-comparison duplicates the existing lem-sf-supported-external-triangle-comparison (Q82, same unit, same morphism (I_*α∘c_i, 1, c_j) of supported triangles, same operations); it is dropped, Steps 7-8 now cite the existing node, and Step 7 adds lem-trf-ordinary-kunneth for c_i,c_j. FIX (C1): Step 9 now cites lem-weil-pbc-lft-affine-pairs, def-weil-closed-immersion and sbc-lem-affine-space-smooth, the last added to split_report.tool_uses. proof_deps recomputed; no cycle; all steps at most 1084 characters. Declared tool uses accepted.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -32,17 +32,10 @@
    }
   },
   {
-   "text": "First suppose $f,g$ proper, and identify $!$ with $*$ using (A4). Their product $t$ and the projections are proper by [lem-weil-pbc-proper-fp-permanence]. The identification $Rf_!\\cong Rf_*$ for proper $f$ is the one for the compactification $(\\mathrm{id},f)$ in [def-fix-six-functor-datum]; for that compactification the formula of [def-exchange-projection] gives $\\operatorname{Ex}_!=Rf'_*(\\beta)\\circ\\operatorname{Ex}_*$ with $\\beta$ the open base change along the identity open immersion, which is the identity, so $\\operatorname{Ex}_!=\\operatorname{Ex}_*$; by clause (4) of [fix-lem-exchanges] the compact-support exchange is independent of the compactification and commutes with the refinement comparisons, so this holds for the exchange of the datum. Thus the proper exchanges are the counit-defined mates of [def-exchange-projection], and the proper projection maps are the counit-defined maps there, with their proper normalization in [prop-sf-pf-coherence]. Put $F=Rf_*K$, $G=Rg_*L$. The transpose under $Lq^*\\dashv Rq_*$ of\n$$Lg^*F\\otimes L\\xrightarrow{\\operatorname{Ex}_{f,g}\\otimes1}Rq_*Lp^*K\\otimes L\\xrightarrow{\\operatorname{PF}_q}Rq_*D$$\nis, through the monoidal and composition comparisons of [lem-pur-derived-pullback-tensor-iso],\n$$Lq^*Lg^*F\\otimes Lq^*L\\cong Lp^*Lf^*F\\otimes Lq^*L\\xrightarrow{Lp^*\\varepsilon_f\\otimes1}D.$$\nIndeed the projection transpose is $(\\varepsilon_q\\otimes1)\\mu_q$; naturality of $\\varepsilon_q$ moves $Lq^*(\\operatorname{Ex}_{f,g})$ next to it, and the defining exchange-transpose equation replaces $\\varepsilon_q\\circ Lq^*\\operatorname{Ex}_{f,g}$ by $Lp^*\\varepsilon_f$. Transpose the formula of step 1 also under $Lg^*\\dashv Rg_*$ and use the pasted ordinary counit of [fix-prop-adjunctions], clause (3). Naturality moves the $g$-counit past $Rg_!$ of the displayed map; the transpose of $\\Psi_g$ is $1\\otimes\\varepsilon_g$. Thus the transpose of $\\lambda_{f,g}$ under $Lt^*\\dashv Rt_*$ is precisely\n$$c_{f,g}:Lt^*(F\\otimes G)\\cong Lp^*Lf^*F\\otimes Lq^*Lg^*G\\xrightarrow{Lp^*\\varepsilon_f\\otimes Lq^*\\varepsilon_g}D.$$\nThe general pasting identity needed here is [lem-weil-pbc-mate-pasting], not the exceptional-composition assertion of lem-sf-mate.",
+   "text": "Suppose $f,g$ proper; their product $t$ and both projections are proper by [lem-weil-pbc-proper-fp-permanence]. Apply [lem-sf-proper-product-counit-transpose] to the precise formula of step 1, with $F=Rf_*K$, $G=Rg_*L$. It identifies its transpose under $Lt^*\\dashv Rt_*$ with\n$$c_{f,g}:Lt^*(F\\otimes G)\\cong Lp^*Lf^*F\\otimes Lq^*Lg^*G\\xrightarrow{Lp^*\\varepsilon_f\\otimes Lq^*\\varepsilon_g}D.$$\nThe same lemma supplies the intermediate $q$-transpose and the canonical proper normalization; thus this computation applies to the specified $\\lambda$, with its completed and field interpretations, rather than an arbitrary isomorphism.",
    "uses": [
-    "def-sf-datum",
     "lem-weil-pbc-proper-fp-permanence",
-    "def-exchange-projection",
-    "prop-sf-pf-coherence",
-    "lem-pur-derived-pullback-tensor-iso",
-    "fix-prop-adjunctions",
-    "lem-weil-pbc-mate-pasting",
-    "def-fix-six-functor-datum",
-    "fix-lem-exchanges"
+    "lem-sf-proper-product-counit-transpose"
    ],
    "elementary": false,
    "source": {
@@ -76,15 +69,12 @@
    }
   },
   {
-   "text": "We make the compactification reduction explicit, first at finite coefficients. Clause (ii) of [lem-sf-proetale-constructible-origin] supplies bounded etale-origin witnesses for the bounded constructible inputs, as required by [fix-lem-exchanges]; no compatibility of witnesses between different coefficients is required for this finite calculation. Use compactifications $f=aj$, $g=bk$ supplied in the operation datum [def-sf-datum], with $j:X\\hookrightarrow\\overline X$, $k:Y\\hookrightarrow\\overline Y$ open and $a,b$ proper. Put $\\overline T=\\overline X\\times_B\\overline Y$, $u=j\\times_Bk:T\\hookrightarrow\\overline T$, $c:\\overline T\\to B$. All the finite-type $k$-schemes in this compactification diagram are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied over $\\operatorname{Spec}k$ (a field has only the zero and unit ideals, so its affine spectrum is Noetherian). The product $u$ is open since its image is the intersection of the inverse images of the two opens; $c$ is proper by [lem-weil-pbc-proper-fp-permanence]. There is a specified comparison\n$$e_{j,k}:(j_!K)\\boxtimes(k_!L)\\xrightarrow{\\sim}u_!(K\\boxtimes L).$$\nWrite $\\bar p:\\overline T\\to\\overline X$ and $\\bar q:\\overline T\\to\\overline Y$ for the projections. Factor $u=j_1k_1$ with $j_1:X\\times_B\\overline Y\\hookrightarrow\\overline T$ and $k_1:T\\hookrightarrow X\\times_B\\overline Y$; let $r:X\\times_B\\overline Y\\to X$ and $v:X\\times_B\\overline Y\\to\\overline Y$ be the projections. The equalities $\\bar p j_1=jr$ and $\\bar qj_1=v$ identify the pullbacks in the two open Cartesian squares. Open base change [fix-lem-exchanges] identifies $L\\bar p^*j_!K$ with $j_{1!}Lr^*K$ and $Lj_1^*L\\bar q^*k_!L$ with $k_{1!}Lq^*L$. Apply the open projection formula [lem-cbc-extension-zero-projection-formula] first for $j_1$ and then, after a symmetry, for $k_1$, and compose the two extensions. The second application uses $Lk_1^*Lr^*K=Lp^*K$ and the symmetry to put $k_{1!}Lq^*L$ first. Every comparison restricts on $T$ to the identity of $K\\boxtimes L$. The fully faithful derived extension and its normalized composition in [lem-sfb-locally-closed-extension-coherence] show that this comparison is symmetric and associative: the two maps for a swap, or for three opens, are between extensions of the same objects and restrict respectively to the same symmetry or associator. No geometric-stalk conservativity is used.",
+   "text": "Work first at finite coefficients. The bounded constructible inputs have bounded etale-origin witnesses by clause (ii) of [lem-sf-proetale-constructible-origin], as required for the exchanges. Choose the supplied compactifications $f=aj$, $g=bk$ of [def-sf-datum], put $\\bar T=\\bar X\\times_B\\bar Y$, $u=j\\times_Bk$, and let $c:\\bar T\\to B$. The product $u$ is open: its image is the intersection of the two inverse-image opens; $c$ is proper by [lem-weil-pbc-proper-fp-permanence]. Apply [lem-sf-open-external-tensor-normalization] to obtain the specific comparison\n$$e_{j,k}:(j_!K)\\boxtimes(k_!L)\\xrightarrow{\\sim}u_!(K\\boxtimes L).$$\nIt restricts to the identity and satisfies both signed symmetry and three-factor associativity. This is the open tensor comparison used below; its construction and normalization have been extracted as a separate statement rather than inferred from compactification independence.",
    "uses": [
+    "lem-sf-proetale-constructible-origin",
     "def-sf-datum",
     "lem-weil-pbc-proper-fp-permanence",
-    "fix-lem-exchanges",
-    "lem-cbc-extension-zero-projection-formula",
-    "lem-sfb-locally-closed-extension-coherence",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-sf-proetale-constructible-origin"
+    "lem-sf-open-external-tensor-normalization"
    ],
    "elementary": false,
    "source": {
@@ -93,13 +83,9 @@
    }
   },
   {
-   "text": "For these compactifications the exact reduction identity is\n$$\\lambda_{aj,bk}(K,L)=Rc_*(e_{j,k})\\circ\\lambda_{a,b}(j_!K,k_!L),$$\nwith source identifications $Rf_!K=Ra_*j_!K$, $Rg_!L=Rb_*k_!L$ and target $Rt_!D=Rc_*u_!D$. To check it, expand step 1 for $aj,bk$. Replace $\\alpha$ by its pasted composition using (A4) of [def-sf-datum]. Replace the exchange for $aj$ by the vertical pasting of the $a$-square and the open $j$-square, and its pullback along $bk$ by horizontal pasting, using clause (2) of [fix-lem-exchanges]. Replace $\\operatorname{PF}_{bk}$ and the projection formula of the product projection by the composable-morphism pentagon of [prop-sf-pf-coherence]. Move an open-square exchange past the neighboring projection map using its displayed base-change square. The composition comparisons on the intermediate Cartesian rectangles are exactly those inserted in the horizontal and vertical pasting equations of [fix-lem-exchanges], clause (2); their rebracketing agrees by the pentagon of (A4). For clarity, the exchange expansion has an explicit intermediate scheme $S=\\overline X\\times_BY$. Write $d:S\\to Y$, $z:S\\to\\overline X$, $v:S\\hookrightarrow\\overline T$ for $1\\times k$, and $w:T\\hookrightarrow S$ for $j\\times1$. Then $q=dw$, $u=vw$, and the two pasting equations give, under composition comparisons,\n$$\\operatorname{Ex}_{aj,bk}(K)=Rd_*\\beta_{j,bk}(K)\\circ\\operatorname{Ex}_{\\bar q,k}(L\\bar p^*j_!K)\\circ Lk^*\\operatorname{Ex}_{a,b}(j_!K),$$\nwhere $\\beta_{j,bk}:Lz^*j_!K\\to w_!Lp^*K$ is the open base-change map; the middle factor has target $Rd_*Lv^*L\\bar p^*j_!K=Rd_*Lz^*j_!K$. Also, for any composable $x,y$, the PF composition clause reads\n$$\\operatorname{PF}_{yx,A,N}=Ry_!\\bigl(\\operatorname{PF}_{x,A,Ly^*N}\\bigr)\\circ\\operatorname{PF}_{y,Rx_!A,N},$$\nwith $R(yx)_!=Ry_!Rx_!$. Apply this equation to $(k,b)$ and $(w,d)$. The PF base-change square for $\\bar q$ along $k$ commutes its PF past $\\operatorname{Ex}_{\\bar q,k}$ in the displayed exchange expansion. The resulting proper part is the typed chain\n$$Ra_*j_!K\\otimes Rb_*k_!L\\xrightarrow{\\Psi_b}Rb_*(Lb^*Ra_*j_!K\\otimes k_!L)\\xrightarrow{Rb_*(\\operatorname{Ex}_{a,b}\\otimes1)}Rb_*(R\\bar q_*L\\bar p^*j_!K\\otimes k_!L)\\xrightarrow{Rb_*\\operatorname{PF}_{\\bar q}}Rc_*\\bigl(L\\bar p^*j_!K\\otimes L\\bar q^*k_!L\\bigr).$$\nThe two open maps left after that chain are the open base-change and PF maps from step 5, followed by open composition; they give $Rc_*e_{j,k}$. In the factorization $u=vw$ their restriction is the identity on $D$, and the normalized open composition of step 5 identifies them with the construction using $u=j_1k_1$. This proves the displayed identity as an equality of the specified composites. The refinement independence of PF and of exchange in [prop-sf-pf-coherence] and [fix-lem-exchanges] makes this calculation independent of which supplied compactifications are used.",
+   "text": "For these finite-coefficient compactifications, [lem-sf-product-compactification-identity] gives the equality of specified composites\n$$\\lambda_{aj,bk}(K,L)=Rc_*(e_{j,k})\\circ\\lambda_{a,b}(j_!K,k_!L).$$\nRead its source as $Rf_!K\\otimes Rg_!L=Ra_*j_!K\\otimes Rb_*k_!L$, and its target as $Rt_!D=Rc_*u_!D$. Its $\\lambda$ is exactly the formula of step 1. Its $e$ is the normalized map of step 5, and the equality respects refinement comparisons. Thus it permits reducing the actual canonical map, including its open factors, to the proper map.",
    "uses": [
-    "def-sf-datum",
-    "fix-lem-exchanges",
-    "prop-sf-pf-coherence",
-    "def-exchange-projection",
-    "lem-sfb-locally-closed-extension-coherence"
+    "lem-sf-product-compactification-identity"
    ],
    "elementary": false,
    "source": {
@@ -119,19 +105,14 @@
    }
   },
   {
-   "text": "The open calculations used in steps 5--7 have the same meaning at integral and field stages, with the following precise interpretation. At the integral stage set $A=\\mathcal O_E$ and $I=(\\varpi_E)$. The ring $A$ is a principal ideal domain with finite residue field by [lem-weil-l-adic-extension-integers-dvr], and $A/I^m$ is finite for every $m\\geq1$ by [lem-weil-valued-dvr-finite-quotients]. Every ideal of a principal ideal domain has one generator, so $A$ is Noetherian. The schemes are Noetherian by step 5. The finite reductions are bounded constructible by the coefficient categories of [def-sf-datum]; clause (ii) of [lem-sf-proetale-constructible-origin] supplies a bounded etale-origin witness for each. The tower already has its strict transitions, and [lem-sp-proper-open-tower-comparison] requires no transitions between the chosen etale witnesses; hence the strict-tower tool below applies with these $A,I$. Perform the open calculation on the actual inverse diagrams of finite reductions, before applying derived inverse limit. The diagram extension functors $J_j$ and restrictions $G_j$ have the exact adjunction with identity $G_jJ_j\\cong1$ stated in [lem-sp-proper-open-tower-comparison]; hence maps between $J_u$-extensions in the diagram derived category are determined by restriction. The open base-change and tensor maps are the natural sheaf maps of [def-exchange-projection], applied to diagrams with their quotient-ring actions; their restrictions are identities. Thus the two open composites are equal as diagram morphisms by that adjunction, not merely after evaluating at each integer. The proper/open interchanges likewise use the actual diagram comparison $\\Gamma_Q$ of [lem-sp-proper-open-tower-comparison]. Apply the functor $R\\lim$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] to these equal diagram morphisms. The completed open normalization $J_j^c=CJ_j$ and the completed/transported pasting in [fix-lem-exchanges], together with the supplied coefficient comparisons of [def-exchange-projection] and the composition and compactification clauses of [prop-sf-pf-coherence], identify the resulting equations with steps 5 and 6 for completed operations. The proper calculation in steps 2--4 itself applies to the completed adjunctions of [fix-prop-adjunctions] and the completed monoidal comparisons of [lem-pur-derived-pullback-tensor-iso]. Hence (i),(ii) hold integrally. Rationalization takes these equal composites to equal composites; for algebraically closed coefficients represent all three inputs and maps over one common finite coefficient field and apply scalar extension. Those are precisely the coefficient-passage conventions of [def-exchange-projection], so the equalities hold for every allowed $\\Lambda$. This argument uses functorial diagrams and never infers equality of integral morphisms from equality of their finite reductions.",
+   "text": "At integral coefficients set $A=\\mathcal O_E$, $I=(\\varpi_E)$. The ring is a principal ideal domain with finite residue field by [lem-weil-l-adic-extension-integers-dvr]; hence it is Noetherian since every ideal has one generator. Every $A/I^m$ is finite by [lem-weil-valued-dvr-finite-quotients]. All schemes in the compactification diagrams are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] over the Noetherian field $k$. The datum [def-sf-datum] supplies bounded constructible finite reductions, with bounded etale-origin witnesses by [lem-sf-proetale-constructible-origin] (ii). These check the hypotheses of [lem-sf-integral-open-product-diagram-normalization]. That lemma gives the completed open comparison, its symmetry and associativity, and precisely the compactification identity used in steps 5--7, by equalities in the strict diagram category before functorial derived inverse limit. The proper transpose calculation of step 2 already applies to completed operations by its cited lemma; therefore steps 3,4,7 prove (i),(ii) integrally. The same normalization lemma gives the rationalized and common-finite-field versions of the open comparisons and compactification identity. Applying the same proper and compactification arguments proves (i),(ii) for $E$ and $\\overline{\\mathbf Q}_\\ell$. Equality of integral morphisms is never inferred merely from equality of their finite reductions.",
    "uses": [
-    "lem-sp-proper-open-tower-comparison",
-    "def-exchange-projection",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "fix-lem-exchanges",
-    "prop-sf-pf-coherence",
-    "fix-prop-adjunctions",
-    "lem-pur-derived-pullback-tensor-iso",
-    "def-sf-datum",
     "lem-weil-l-adic-extension-integers-dvr",
     "lem-weil-valued-dvr-finite-quotients",
-    "lem-sf-proetale-constructible-origin"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-sf-datum",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-integral-open-product-diagram-normalization"
    ],
    "elementary": false,
    "source": {
@@ -182,22 +163,20 @@
   }
  ],
  "proof_deps": [
-  "def-exchange-projection",
-  "def-fix-six-functor-datum",
   "def-sf-datum",
   "def-sf-pf",
   "fix-lem-exchanges",
   "fix-prop-adjunctions",
-  "lem-cbc-extension-zero-projection-formula",
   "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-integral-open-product-diagram-normalization",
+  "lem-sf-open-external-tensor-normalization",
+  "lem-sf-product-compactification-identity",
   "lem-sf-proetale-constructible-origin",
-  "lem-sfb-locally-closed-extension-coherence",
-  "lem-sp-proper-open-tower-comparison",
+  "lem-sf-proper-product-counit-transpose",
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-mate-pasting",
   "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-weil-valued-dvr-finite-quotients",
   "prop-sf-pf-coherence",
   "thm-sf-comp-composition",
@@ -267,7 +246,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -301,8 +280,8 @@
   "date": "2026-10-17",
   "item": "lem-sf-kunneth-coherence",
   "worker": "stage1",
-  "summary": "Expanded the context and each of the four compatibility diagrams without changing the inherited mathematical scope. Replaced the incorrect use of the exceptional-only lem-sf-mate by existing general ordinary-adjunction and mate-pasting statements. Computed the proper two- and three-counit transposes, wrote the open external-tensor comparison and the actual compactification-reduction identity, and treated integral open identities as equalities of diagram morphisms before functorial derived inverse limit. Base change and identity/PF are checked arrow by arrow. No new nodes: all non-elementary inputs already exist; no attachment covers the item and Mathlib searches find no match. Independent second reading expanded the second triple transpose and the compactification exchange/PF computation, named the open projection maps, and checked the strict-tower coefficient hypotheses with existing nodes.",
-  "blueprint": "Steps 1--4 realize the canonical-composite opening and the final two-counit sentence, with the three-counit computation supplying clause (ii). Steps 5--8 supply the argument hidden by \"after reduction to proper f,g\". Step 9 spells out clause (iii), step 10 clause (iv), and step 11 the concluding n-fold and closed-subscheme assertion. The original unit route through PF coherence, compact-support composition, base change and mate calculus is retained.",
+  "summary": "Repair of the human return: extracted four genuine intermediate comparison arguments from steps 2,5,6,8 into four searched statement-only nodes. Kept the item statement, Lean audit, proof route and the other seven steps unchanged. The new nodes state the proper counit transpose, finite open tensor normalization, finite product compactification identity and integral strict-diagram normalization; none asserts an item coherence clause.",
+  "blueprint": "Steps 1--4 realize the canonical-composite opening and the final two-counit sentence, with the three-counit computation supplying clause (ii). Steps 5--8 supply the argument hidden by \"after reduction to proper f,g\". Step 9 spells out clause (iii), step 10 clause (iv), and step 11 the concluding n-fold and closed-subscheme assertion. The original unit route through PF coherence, compact-support composition, base change and mate calculus is retained. Returned long steps 2,5,6,8 now cite statement-only intermediate lemmas for their hidden comparisons; all non-elementary steps are below 2000 characters.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-proper-fp-permanence",
@@ -311,18 +290,6 @@
    {
     "node": "lem-pur-derived-pullback-tensor-iso",
     "why": "The canonical monoidal pullback comparisons, including symmetry, composition and completed coefficients, are the generic tensor tool used throughout the unit."
-   },
-   {
-    "node": "lem-sfb-locally-closed-extension-coherence",
-    "why": "Fully faithful ordinary derived extension by zero detects the open tensor identities by restriction; this is a generic open-localization tool, not an alternative Kunneth theorem."
-   },
-   {
-    "node": "lem-sp-proper-open-tower-comparison",
-    "why": "The actual strict diagram open adjunction and proper/open interchange normalize the integral version of the same compactification proof."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Functorial derived inverse limit sends equal diagram morphisms to equal morphisms; this prevents a false appeal to faithfulness of finite reductions."
    },
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
@@ -339,11 +306,11 @@
   "lem-weil-pbc-finite-type-over-noetherian"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q78-12ae74015",
-  "group": "Q78",
+  "reviewer": "NT-cc-Q69-6a1ec6901",
+  "group": "Q69",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-12ae74015 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement and all 11 steps, against the main-20261015 blueprint lemma, the unit section and the parent statement, plus every statement of the 18 cited nodes. Statement: clauses (i)-(iv) and the n-fold/closed-subscheme consequence are all kept. The setting and coefficient categories are those of def-sf-datum/def-fix-six-functor-datum, and kappa is exactly the parent's composite (I reversed it arrow by arrow in step 1). Nothing is weakened. Proper case: I recomputed that lambda transposes to p*eps_f (x) q*eps_g, using the mate formula of def-exchange-projection and the composite counit of fix-prop-adjunctions (3). Open comparison e_{j,k}: I checked p-bar^{-1}(X)=X x_B Y-bar, the two open projection formulas and j1!k1!=u!; equality by restriction uses lem-sfb on Noetherian schemes. Reduction identity (step 6): I type-checked Ex_{aj,bk} = Rd_*beta o Ex_{qbar,k} o Lk*Ex_{a,b} with S = Xbar x_B Y; this is the Tag 0F7J pattern. Integral stage: lem-sp-proper-open-tower-comparison applies, since O_E is a PID with finite quotients and the witnesses come from constructible-origin (ii); full faithfulness of J then Rlim, with no faithfulness of finite reduction used. Stacks tags 07A7/0B56/0E48/03DI/03DJ/0F7J/0F7F/07A4 match their labels. No SGA citation. No cycle. Edge cases tested: identities, empty/zero, open/open, proper/proper, shifts with sign (-1)^{ij}, n=1. Route: only lem-pur-derived-pullback-tensor-iso and lem-sfb-locally-closed-extension-coherence leave the route; both are declared and I accept them as generic tool uses. No new nodes. Repaired two C1 citation gaps in fixes/dag/nodes/sec-six-functors/lem-sf-kunneth-coherence.json. Step 2 identified the compact-support Ex_! of a proper map with the counit-defined Ex_* without a citation; it now cites def-fix-six-functor-datum (Rf_!=Rf_* via the compactification (id,f)), the def-exchange-projection formula with identity beta, and fix-lem-exchanges (4) for compactification independence. Step 10 took alpha_{id,f}=id from (A4), which does not state unitality; it now cites thm-sf-comp-composition, which is on the unit route and is the node the blueprint cites for this, and the step is set elementary=false. proof_deps is updated to the union of the step uses. Details are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-6a1ec6901 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps and the four new nodes in full. I checked them against the main-20261015 blueprint lemma proof and the unit sk-thm-sf-kunneth-relative, and read the statement of every cited node. The Stacks tags in the report match their labels (07A7, 0B56, 0E48, 03DI/03DJ: sites-modules l.2057/2160, 0F7F, 0F7J: more-etale l.3159). There is no SGA citation. The item statement is unchanged and nothing is weakened. Step 1's lambda is the exact inverse of the parent's composite. Proper transpose: I recomputed it by hand. The q-transpose of PF_q(Ex x 1) is (Lp*eps_f theta) x 1 and the t-transpose of lambda is Lp*eps_f x Lq*eps_g, following from the mate and counit definitions in def-exchange-projection and fix-prop-adjunctions (3). Open normalization: the factorization through X x_B Ybar is well typed. Independence, signed symmetry and associativity follow from restriction to the identity, because j_! -| restriction is fully faithful. Compactification identity: tested with identity j,k and with identity a,b (open f,g); it is the statement hidden in the blueprint's 'reduction to proper f,g'. Integral node: its hypotheses match lem-sp-proper-open-tower-comparison (Noetherian O_E with finite quotients, Noetherian schemes, levelwise etale witnesses, no transitions), and it uses equalities in the diagram category before Rlim, never faithfulness of finite reduction. None of the new nodes restates clauses (i)-(iv), and there is no cycle. proof_deps equals the union of the step uses. Route: only lem-pur-derived-pullback-tensor-iso is off route, and I accept it as a generic tool use. FIX: I removed three stale split_report.tool_uses entries (lem-sfb-locally-closed-extension-coherence, lem-sp-proper-open-tower-comparison, lem-weil-pbc-ringed-strict-tower-homotopy-limit); no step of the item cites them after the repair. For the maintainer: (1) the existing node lem-trf-relative-kunneth-counit (Q72, 2026-10-17) is the finite-coefficient special case of lem-sf-proper-product-counit-transpose. Keep the new node, since step 8 needs the integral and field cases, and later merge or repoint the trf node. (2) Reduce the item's maintainer-owned top-level tool_uses the same way.; 1 file(s) fixed by the reviewer"
  }
 }
