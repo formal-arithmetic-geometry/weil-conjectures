@@ -19,6 +19,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ClosedImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 
 /-!
 
@@ -113,8 +114,25 @@ theorem nonempty_iso_externalProduct_rightDerivedLowerStar (Λ : Type (u + 1)) [
     Nonempty (externalProduct (ModuleCat.{u + 1} Λ) b c
         ((R((f)_*[ModuleCat.{u + 1} Λ])).obj M) Q ≅
       (R((pullback.mapOverBaseRight f b c)_*[ModuleCat.{u + 1} Λ])).obj
-        (externalProduct (ModuleCat.{u + 1} Λ) (f ≫ b) c M Q)) :=
-  sorry
+        (externalProduct (ModuleCat.{u + 1} Λ) (f ≫ b) c M Q)) := by
+  have sq₁ : IsPullback (pullback.snd b c) (pullback.fst b c) c b :=
+    (IsPullback.of_hasPullback b c).flip
+  have sq₂ : IsPullback (pullback.mapOverBaseRight f b c) (pullback.fst (f ≫ b) c)
+      (pullback.fst b c) f := (isPullback_pullbackMapLeft b c f).flip
+  have := isIso_tensorBaseChangeMap Λ c b (f ≫ b) (pullback.snd b c) (pullback.fst b c)
+    (pullback.mapOverBaseRight f b c) (pullback.fst (f ≫ b) c) f rfl sq₁ sq₂ Q M
+  obtain ⟨β₁⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) (pullback b c)
+  obtain ⟨β₂⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) (pullback (f ≫ b) c)
+  let e : (L((pullback.mapOverBaseRight f b c)^*[ModuleCat.{u + 1} Λ])).obj
+      ((L((pullback.snd b c)^*[ModuleCat.{u + 1} Λ])).obj Q) ≅
+      (L((pullback.snd (f ≫ b) c)^*[ModuleCat.{u + 1} Λ])).obj Q :=
+    ((leftDerivedUpperStarComp _ (pullback.mapOverBaseRight f b c) (pullback.snd b c)
+      (pullback.snd (f ≫ b) c) (by simp)).app Q).symm
+  exact ⟨(β₁.app _).app _ ≪≫ asIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ)
+      (pullback.mapOverBaseRight f b c) (pullback.fst (f ≫ b) c) (pullback.fst b c) f sq₂.w
+      ((L((pullback.snd b c)^*[ModuleCat.{u + 1} Λ])).obj Q) M) ≪≫
+    (R((pullback.mapOverBaseRight f b c)_*[ModuleCat.{u + 1} Λ])).mapIso
+      (((derivedTensor _ _).mapIso e).app _ ≪≫ (β₂.app _).app _)⟩
 
 /-- Blueprint `sk-thm-sf-kunneth-relative`: Relative product theorem.
 

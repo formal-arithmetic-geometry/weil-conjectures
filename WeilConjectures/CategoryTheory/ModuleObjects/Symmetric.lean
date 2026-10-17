@@ -81,6 +81,38 @@ lemma tensorObjπ_associator_inv (M N P : Mod C R) :
   rw [← comp_hom', Iso.hom_inv_id, id_hom', Category.comp_id] at this
   rw [this, Iso.inv_hom_id_assoc]
 
+/-- The left unitor of the relative tensor product is induced by the action. -/
+@[reassoc]
+lemma tensorObjπ_leftUnitor_hom (M : Mod C R) :
+    tensorObjπ (𝟙_ (Mod C R)) M ≫ (λ_ M).hom.hom = γ[R, M.X] := by
+  change tensorObjπ (𝟙_ (Mod C R)) M ≫
+    (Bimod.whiskerRight toBimodRegularIso.hom ((toBimod R).obj M)).hom ≫
+      (Bimod.LeftUnitorBimod.hom _) = _
+  dsimp only [tensorObjπ]
+  rw [Bimod.whiskerRight_hom]
+  erw [ι_colimMap_assoc]
+  simp only [parallelPairHom_app_one]
+  erw [toBimodRegularIso_hom_hom, id_whiskerRight, Category.id_comp]
+  dsimp only [Bimod.LeftUnitorBimod.hom]
+  erw [coequalizer.π_desc]
+  rfl
+
+/-- The right unitor of the relative tensor product is induced by the right action. -/
+@[reassoc]
+lemma tensorObjπ_rightUnitor_hom (M : Mod C R) :
+    tensorObjπ M (𝟙_ (Mod C R)) ≫ (ρ_ M).hom.hom = (β_ M.X R).hom ≫ γ[R, M.X] := by
+  change tensorObjπ M (𝟙_ (Mod C R)) ≫
+    (Bimod.whiskerLeft ((toBimod R).obj M) toBimodRegularIso.hom).hom ≫
+      (Bimod.RightUnitorBimod.hom _) = _
+  dsimp only [tensorObjπ]
+  rw [Bimod.whiskerLeft_hom]
+  erw [ι_colimMap_assoc]
+  simp only [parallelPairHom_app_one]
+  erw [toBimodRegularIso_hom_hom, MonoidalCategory.whiskerLeft_id, Category.id_comp]
+  dsimp only [Bimod.RightUnitorBimod.hom]
+  erw [coequalizer.π_desc]
+  rfl
+
 @[reassoc]
 lemma whiskerLeft_smul_tensorπ (M N : Mod C R) :
     M.X ◁ γ[R,N.X] ≫ tensorObjπ M N =

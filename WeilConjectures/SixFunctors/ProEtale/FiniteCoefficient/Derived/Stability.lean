@@ -15,6 +15,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Upp
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
+public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageCohomologicalDimension
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import WeilConjectures.CategoryTheory.Sites.NsmulSheaf
 
@@ -265,6 +266,58 @@ theorem torAmplitudeIn_rightDerivedLowerStar (d : ℕ)
     hta).2
 
 end Finite
+
+section OpenImmersion
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U X : Scheme.{u}} (j : U ⟶ X)
+  [IsOpenImmersion j] [QuasiCompact j]
+
+/-- Blueprint `det-cor-sf-direct-image-ctf-open-tor`: Scalar projection formula and the Tor
+bound for an open immersion.
+
+Let `Λ` be a finite ring and `j : U ⟶ X` a quasi-compact open immersion whose higher direct
+images `Rᵠj_* F` of étale sheaves of `Λ`-modules vanish for `q > d`, that is
+`d ≥ cd(j)`; for schemes of finite type over a separably closed field this holds for some `d`
+(`lem-kun-0f10`, `AlgebraicGeometry.Etale.hasFiniteCohomologicalDimensionMorphism`). Let
+`K ∈ D(U_ét, Λ)` have Tor amplitude in `[a, b]`. Then:
+
+1. for every `Λ`-module `M`, the projection map `Rj_* K ⊗ᴸ M_X ⟶ Rj_*(K ⊗ᴸ Lj^* M_X)` is an
+   isomorphism
+   (`Etale.isIso_rightDerivedLowerStarProjectionMap_constantSingle_of_cohomologicalDimension`,
+   by generation of `D(Λ)` by `Λ` and commutation of
+   `Rj_*` with direct sums, `lem-kun-0f11`, instead of computing sections with `lem-kun-0f12`);
+2. `Rj_* K` has Tor amplitude in `[a, b + d]` on `X_ét`
+   (`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_cohomologicalDimension`, by
+   the residue test applied to (1));
+3. `Rj_{proét,*} ν_U^* K ≅ ν_X^* Rj_* K` has Tor amplitude in `[a, b + d]` against every
+   module sheaf on `X_proét` (`prop-weil-pbc-comparison-direct-image` and
+   `lem-exc-comparison-tor-interval`). -/
+theorem projection_torAmplitudeIn_rightDerivedLowerStar_of_isOpenImmersion (d : ℕ)
+    (hd : ∀ (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ), d < q →
+      IsZero (((Etale.lowerStar (ModuleCat.{u + 1} Λ) j).rightDerived q).obj F)) (a b : ℤ)
+    {K : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hta : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) U a b K) :
+    (∀ M : ModuleCat.{u + 1} Λ,
+      IsIso (((Etale.rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) j).app K).app
+        (Etale.constantSingle (ModuleCat.{u + 1} Λ) X M))) ∧
+    Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a (b + d)
+      ((R(Etale.lowerStar (ModuleCat.{u + 1} Λ) j)).obj K) ∧
+    Nonempty ((R(ProEtale.lowerStar (ModuleCat.{u + 1} Λ) j)).obj
+        (D(ν^*(U)[ModuleCat.{u + 1} Λ]).obj K) ≅
+      D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj ((R(Etale.lowerStar (ModuleCat.{u + 1} Λ) j)).obj K)) ∧
+    DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a (b + d)
+      ((R(ProEtale.lowerStar (ModuleCat.{u + 1} Λ) j)).obj
+        (D(ν^*(U)[ModuleCat.{u + 1} Λ]).obj K)) := by
+  have h₂ := Etale.torAmplitudeIn_rightDerivedLowerStar_of_cohomologicalDimension Λ j d hd a b hta
+  let e := rightDerivedLowerStarMapDerivedCategoryObjIso (ModuleCat.{u + 1} Λ) j K
+    ⟨a, (_root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta).1⟩
+  have h₁ := Etale.isIso_rightDerivedLowerStarProjectionMap_constantSingle_of_cohomologicalDimension
+    Λ j d hd K
+  exact ⟨h₁, h₂, ⟨e⟩,
+    (DerivedCategory.torAmplitudeIn _ X a (b + d)).prop_of_iso e.symm
+      ((DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff _ _ _).2 h₂)⟩
+
+end OpenImmersion
 
 end DirectImage
 

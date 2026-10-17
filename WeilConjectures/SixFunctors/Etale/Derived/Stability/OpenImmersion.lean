@@ -132,11 +132,31 @@ noncomputable def rightDerivedLowerShriekIsoOfIsOpenImmersion :
         Functor.mapDerivedCategoryIdIso _) ≪≫
     Functor.rightUnitor _
 
+omit [Finite Λ] [HasCompactification j] [QuasiCompact j] in
+/-- Blueprint `lem-trf-open-tensor`: Tensoring an extension by zero.
+
+For an open immersion `j : U ⟶ Y` there is an isomorphism `j_!K ⊗ᴸ M ≅ j_!(K ⊗ᴸ Lj^*M)`,
+natural in `K ∈ D(U_ét, Λ)` and `M ∈ D(Y_ét, Λ)`, where `j_!` is the exact extension by zero:
+an isomorphism between the bifunctors `(K, M) ↦ j_!K ⊗ᴸ M` and `(K, M) ↦ j_!(K ⊗ᴸ Lj^*M)`. It is
+the inverse of the projection isomorphism
+`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso`, which is checked after
+`Lj^*`, where it comes from the unit of `j_! ⊣ j^*`, and after the pullback to the closed
+complement, where both sides vanish. -/
+theorem nonempty_iso_derivedTensor_openImmersionLowerShriek :
+    Nonempty (derivedTensorWhiskeringLeftOpenImmersionLowerShriek (ModuleCat.{u + 1} Λ) j ≅
+      (Functor.postcompose₂.obj D((j)_!open[ModuleCat.{u + 1} Λ])).obj
+        (derivedTensorWhiskeringRightLeftDerivedUpperStar (ModuleCat.{u + 1} Λ) j)) :=
+  ⟨(derivedOpenImmersionLowerShriekProjectionIso (ModuleCat.{u + 1} Λ) j).symm⟩
+
 omit [Finite Λ] [HasCompactification j] in
-/-- Extension by zero along a quasi-compact open immersion `j` preserves membership in
+/-- Blueprint `lem-trf-open-ctf`: Extension by zero preserves constructibility and Tor
+amplitude.
+
+Extension by zero along a quasi-compact open immersion `j` preserves membership in
 `D_c^[a, b]` with Tor amplitude in `[a, b]`: `j_!` is exact, the extension by zero of a
-constructible sheaf is constructible, and `j_!K ⊗ᴸ F ≅ j_!(K ⊗ᴸ j^*F)` by the projection
-formula. -/
+constructible sheaf is constructible (a stratification of `U` together with the closed
+complement of `U` stratifies `Y`), and `j_!K ⊗ᴸ F ≅ j_!(K ⊗ᴸ j^*F)` by the projection formula
+(`lem-trf-open-tensor`), so that the Tor bound is tested on `U`. -/
 theorem constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) U a b K) :
