@@ -3,55 +3,167 @@
  "blueprint": {
   "is": "thm-sf-fullcd-etale-origin",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "FullCD for coefficients of étale origin",
- "statement": "Fix the global finite-field datum, a prime $\\ell\\ne p$, an integer\n$n\\geq1$, $A=A_{E,n}$, the algebraically closed field\n$k=\\overline{\\mathbf F}_q$, finite-type $k$-schemes $Y$ and\n$\\overline X$ with $\\dim\\overline X\\leq d$, and a\nproper finite-type morphism\n$p:\\overline X\\to Y$. Let $\\mathcal F$ be a sheaf of $A$-modules on\n$\\overline X_{\\Proet}$ that is of étale origin:\n$\\mathcal F\\cong\\nu_{\\overline X}^*\\mathcal G$ for a sheaf\n$\\mathcal G$ of $A$-modules on $\\overline X_{\\Et}$. Then the vanishing\nrequired by [def-weil-full-cohomological-dimension] holds for\n$\\mathcal F$ with the bound $2d$: for every $r>2d$ one has\n$\\mathcal H^r(Rp_*\\mathcal F)=0$, and the same holds for every base change\n$V\\to Y$ whose source has dimension at most $d$, in particular for\nevery base change by an étale $Y$-scheme.",
+ "statement": "Fix the global finite-field datum with $k=\\overline{\\mathbf F}_q$ of characteristic $p_0$ [def-weil-finite-field-fiber]. Fix a prime $\\ell\\ne p_0$, a finite extension $E/\\mathbf Q_\\ell$, a uniformizer $\\varpi_E$ of its valuation ring, and an integer $n\\geq1$, and put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. Let $d\\in\\mathbf N$, let $Y$ and $\\overline X$ be finite-type $k$-schemes [def-weil-finite-type-morphism] with $\\dim\\overline X\\leq d$ [def-kun-topological-krull-dimension], and let $p:\\overline X\\to Y$ be a proper finite-type morphism of $k$-schemes [def-weil-proper-morphism]. Work with modules over the constant sheaves of rings with value $A$ on the small étale and pro-étale sites [def-weil-pbc-etale-sheaves, def-weil-pbc-proetale-site]. Let $\\mathcal F$ be a sheaf on $\\overline X_{\\mathrm{proet}}$ equipped with an isomorphism $\\mathcal F\\cong\\nu_{\\overline X}^*\\mathcal G$ for an étale sheaf $\\mathcal G$ of $A$-modules, where $\\nu$ is the comparison morphism [def-weil-pbc-site-comparison-morphism]. Then, for every integer $r$, putting sheaves in degree zero and using finite-level derived direct image [def-weil-derived-direct-image] and cohomology sheaves [def-weil-derived-cohomology-sheaves],\n$$\\mathcal H^r(Rp_*\\mathcal F)=0\\qquad(r>2d).$$\nFor every morphism of schemes $v:V\\to Y$, form $\\overline X_V=\\overline X\\times_YV$ with projections $g_V:\\overline X_V\\to\\overline X$ and $p_V:\\overline X_V\\to V$ [def-pc-fibre-product]. With $g_V^*\\mathcal F$ the constant-coefficient module pullback [def-weil-proetale-inverse-image], one has\n$$\\mathcal H^r\\bigl(R(p_V)_*(g_V^*\\mathcal F)\\bigr)=0\\qquad(r>2d).$$\nThere is no finite-type or dimension hypothesis on $V$. In particular, this gives both vanishing clauses of [def-weil-full-cohomological-dimension] restricted to original-source sheaves of étale origin, for every object $V\\to Y$ of $Y_{\\mathrm{proet}}$ (and for every étale $Y$-scheme). It does not assert those clauses for arbitrary pro-étale sheaves.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-etale-origin.md",
   "place": "node thm-sf-fullcd-etale-origin, order 1791"
  },
  "stmt_deps": [
-  "def-weil-full-cohomological-dimension",
-  "def-weil-pbc-direct-image",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-proper-morphism",
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-site-comparison-morphism",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-derived-direct-image",
+  "def-weil-derived-cohomology-sheaves",
+  "def-pc-fibre-product",
+  "def-weil-proetale-inverse-image",
+  "def-weil-full-cohomological-dimension"
  ],
  "proof": [
   {
-   "text": "The morphism $p$ is proper and of finite type, in particular quasi-compact\nand quasi-separated, and $\\mathcal G$ lies in\n$D^+(\\overline X_{\\Et},A)$, so the comparison direct image of\n[prop-weil-pbc-comparison-direct-image] gives\n\n$$\nRp_*\\nu_{\\overline X}^*\\mathcal G\\cong\\nu_Y^*Rp_{\\Et,*}\\mathcal G .\n$$",
+   "text": "The coefficient datum makes $A$ a finite commutative ring. The absolute value on $E$ extends the $\\ell$-adic one, so $|\\ell|_E=\\ell^{-1}<1$ and $\\ell\\in\\mathfrak m_E=\\varpi_E\\mathcal O_E$. Thus $\\ell^n\\in\\varpi_E^n\\mathcal O_E$ and $\\ell^nA=0$. Since $\\ell\\ne p_0$, $\\ell^n$ is invertible in $k$: its image is nonzero in this field. Every section of every $A$-module sheaf is consequently killed by $\\ell^n$. Properness of $p$ includes separatedness and finite type; finite type includes quasi-compactness, and the separated-to-quasi-separated lemma gives quasi-separatedness. These verify exactly the coefficient and qcqs hypotheses needed below.",
    "uses": [
-    "prop-weil-pbc-comparison-direct-image"
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-l-adic-numbers",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-fullcd-etale-origin/sk-prop-sf-fullcd-etale-origin.proof.md",
+    "place": "First sentence (torsion coefficients); qcqs hypothesis in the comparison sentence; Stacks 01T1 (definition-finite-type) and schemes.tex, 01KH after 01KK, using 01K7 (lemma-closed-immersion-quasi-compact)."
+   }
   },
   {
-   "text": "By [lem-sf-etale-direct-image-vanishing] the higher direct images of\n$p$ on the étale sites vanish above $2d$ for *every* sheaf of\n$A$-modules, because $k$ is algebraically closed and\n$\\dim\\overline X\\leq d$; that lemma needs no separatedness and no\nproperness. Hence $\\mathcal H^r(Rp_*\\mathcal F)=0$ for $r>2d$, which is\nthe absolute clause of [def-weil-full-cohomological-dimension].\nFor a base change $V\\to Y$ whose source has dimension at most $d$, the\nobject $V$ of $Y_{\\Proet}$ is a weakly étale $Y$-scheme, hence a\nscheme, and $p_V:\\overline X\\times_YV\\to V$ is again proper of finite type;\nmoreover the restriction of $\\mathcal F$ to $\\overline X\\times_YV$ is\nthe pullback of the étale sheaf\n$\\mathcal G|_{\\overline X\\times_YV}$ along the comparison morphism of\n$\\overline X\\times_YV$, by the compatibility of the comparison pullback\nwith scheme pullback, [lem-weil-pbc-comparison-pullback]. The same\ncomputation therefore applies to $p_V$, with the same bound $2d$, which\nis the relative clause.",
+   "text": "Apply [lem-sf-etale-direct-image-vanishing] to the original finite-type schemes $\\overline X,Y$, the finite-type morphism $p$, the finite commutative ring $A$ killed by the invertible integer $\\ell^n$, and the arbitrary étale $A$-module sheaf $\\mathcal G$. All these hypotheses were given or checked in step 1; the dimension bound is the original $\\dim\\overline X\\leq d$. Therefore $\\mathcal H^r(Rp_{\\mathrm{et},*}\\mathcal G)=0$ for $r>2d$. Put $L=\\mathcal G[0]$. It is bounded below. The comparison direct-image isomorphism for qcqs $p$ gives\n$$Rp_{\\mathrm{proet},*}(\\nu_{\\overline X}^*L)\\cong\\nu_Y^*Rp_{\\mathrm{et},*}L.$$\nThe comparison pullback lemma states exactness on constant-$A$ modules and its cohomology isomorphism, so\n$$\\mathcal H^r(Rp_*\\mathcal F)\\cong\\nu_Y^*\\mathcal H^r(Rp_{\\mathrm{et},*}L)=0.$$\nHere the given isomorphism $\\mathcal F\\cong\\nu_{\\overline X}^*\\mathcal G$ and exactness identify its degree-zero complex with $\\nu_{\\overline X}^*L$. No constructibility assumption has been used.",
    "uses": [
     "lem-sf-etale-direct-image-vanishing",
-    "def-weil-full-cohomological-dimension",
-    "lem-weil-pbc-comparison-pullback"
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-sf-comparison-pullback-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-etale-origin.proof.md",
+    "place": "First paragraph and absolute vanishing in the second paragraph; exactness spelled out using sites-modules.tex, Tag 04JC (lemma-flat-pullback-exact)."
+   }
+  },
+  {
+   "text": "Let $v:V\\to Y$ be arbitrary and write $g=g_V$, $p'=p_V$. The comparison-pullback isomorphism identifies\n$$g^*\\mathcal F\\cong\\nu_{\\overline X_V}^*g_{\\mathrm{et}}^{-1}\\mathcal G.$$\nAll coefficients are the same finite constant ring $A$; on pro-étale module sheaves the constant-coefficient inverse image is module pullback and is exact by [prop-weil-pbc-proetale-constant-exact]. Apply [thm-weil-pbc-finite-level-proetale] to $K=\\mathcal F[0]$, the proper morphism $p$, this cartesian square, and the witness $(L,\\alpha)$ of [def-weil-pbc-etale-origin-witness], where $L=\\mathcal G[0]$ and $\\alpha:\\nu^*L\\xrightarrow{\\sim}\\mathcal F[0]$ is the inverse of the given isomorphism in degree zero. Step 2 gives $L\\in D^+$. It yields\n$$v^*Rp_*\\mathcal F\\xrightarrow{\\sim}R(p')_*g^*\\mathcal F.$$\nThe cited base-change theorem has arbitrary $v$; it imposes no finite-type or dimension hypothesis on $V$. Apply degree-$r$ cohomology. Exactness of $v^*$ and the exact-functor cohomology lemma give\n$$\\mathcal H^r(R(p')_*g^*\\mathcal F)\\cong v^*\\mathcal H^r(Rp_*\\mathcal F)=v^*0=0\\qquad(r>2d),$$\nby step 2. In particular this argument never applies the finite-type dimension theorem to $\\overline X_V$.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "prop-weil-pbc-proetale-constant-exact",
+    "thm-weil-pbc-finite-level-proetale",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-etale-origin-witness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-etale-origin.proof.md",
+    "place": "Relative clause, repaired: use proper base change (Stacks 095T, etale-cohomology.tex, theorem-proper-base-change; proetale.tex, 09C8, section-proper-base-change) instead of the unjustified assertion that the base-changed source retains the original dimension. Exactness uses 04JC; passage to cohomology uses homology.tex, 010N (lemma-exact-functor)."
+   }
+  },
+  {
+   "text": "For the identity base change, step 2 is the first defining vanishing clause of [def-weil-full-cohomological-dimension] for the given $\\mathcal F$. For any object $V\\to Y$ of $Y_{\\mathrm{proet}}$, the second clause uses precisely the original-source sheaf pulled back as $g_V^*\\mathcal F$; step 3 gives its vanishing with the same bound $2d$. The proof works for each choice of an original-source étale-origin witness, hence for every such $\\mathcal F$. It does not replace this restricted quantifier by the definition's quantifier over every pro-étale sheaf.",
+   "uses": [
+    "def-weil-full-cohomological-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-etale-origin.md",
+    "place": "Conclusion interpreted as the restriction of the two FullCD clauses to the specified coefficient sheaves."
+   }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-comparison-direct-image",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-l-adic-numbers",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
   "lem-sf-etale-direct-image-vanishing",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-proetale-constant-exact",
+  "thm-weil-pbc-finite-level-proetale",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
   "def-weil-full-cohomological-dimension",
-  "lem-weil-pbc-comparison-pullback"
+  "def-weil-pbc-etale-origin-witness"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-etale-origin.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-etale-origin.proof.md",
+  "place": "Absolute vanishing follows the blueprint; relative vanishing repairs its dimension gap using the existing finite-level proper-base-change theorem."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of pro-etale module sheaves of etale origin under a proper finite type morphism vanish above twice the dimension of the source, uniformly after base change.",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.instForallOfFinite, Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-17",
+   "verdict": "no match: returned algebraic or scheme-morphism properties do not state pro-etale higher-direct-image vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "FullCD|HasUniformCohomologicalDimensionLE|isZero_homology_rightDerivedLowerStar_comparisonUpperStar|cohomologicalDimension",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match: returned algebraic or scheme-morphism properties do not state pro-etale higher-direct-image vanishing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of etale-origin pro-etale sheaves under a proper morphism vanish above twice the dimension of the original source after base change.",
+   "results": "8 hits: AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.isProper_eq, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsProper.instCompScheme, Algebra.IsEtaleAt.comp",
+   "date": "2026-10-17",
+   "verdict": "no match: returned algebraic or scheme-morphism properties do not state pro-etale higher-direct-image vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"IsZero\"",
+   "results": "1 hits: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
+   "date": "2026-10-17",
+   "verdict": "no match: injective-input vanishing does not give a uniform sheaf bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper scheme morphism has uniformly bounded higher direct images on the essential image of pullback from the etale to the proetale site, using a bound on etale cohomological dimension.",
+   "results": "8 hits: AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-17",
+   "verdict": "no match: returned algebraic or scheme-morphism properties do not state pro-etale higher-direct-image vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "pro[Ee]tale.*[Vv]anish|[Vv]anish.*pro[Ee]tale|higherDirectImage|cohomological.?dimension",
+   "results": "0 hits: none. Search restricted to Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: returned algebraic or scheme-morphism properties do not state pro-etale higher-direct-image vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "CohomologicalDimension|cohomological_dimension|etale.*homology|homology.*etale",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match: returned site definitions and morphism properties do not give the required derived-direct-image bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact inverse image from the etale site to the proetale site carries the cohomological dimension bound for a proper direct image to sheaves pulled back from the etale site.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology, AlgebraicGeometry.Scheme.etalePretopology, Condensed.lanSheafProfinite, Condensed.ofSheafForgetProfinite",
+   "date": "2026-10-17",
+   "verdict": "no match: returned site definitions and morphism properties do not give the required derived-direct-image bound"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -88,5 +200,59 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-fullcd-etale-origin"
+ "unit": "sk-prop-sf-fullcd-etale-origin",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-sf-fullcd-etale-origin",
+  "worker": "stage1",
+  "summary": "No new nodes. Verified the original-source etale vanishing and qcqs comparison hypotheses, made constant coefficient exactness explicit, and repaired the relative argument using existing finite-level proper base change. Bound variables E and d explicitly. Replaced the imported inconsistent dimension-restricted base-change phrase by vanishing for the pullback of the original sheaf along every scheme morphism, which in particular supplies all pro-etale site objects. No assertion for all pro-etale sheaves or all sheaves on the base-changed source is made. The upstream candidate contains sorry, so no attachment is claimed.",
+  "blueprint": "Steps 1–2 realize the coefficient, dimension-vanishing, and comparison sentences of the unit proof. Step 3 realizes its uniformity sentence after correcting the false claim that arbitrary base changes do not increase total dimension. Step 4 identifies exactly the restricted FullCD clauses of the node.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Separated-to-quasi-separated geometry tool used only to check the comparison hypothesis; no same-unit node states it."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Exact constant-coefficient comparison inverse image and its cohomology isomorphism; supplies the explicit exactness already required by the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Canonical comparison of scheme pullback with etale-origin pullback; generic comparison tool in the imported relative argument."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "The qcqs comparison direct-image isomorphism explicitly used by the unit comparison step."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Exactness of arbitrary scheme inverse image for finite constant-ring module sheaves; required to take cohomology after proper base change."
+   },
+   {
+    "node": "thm-weil-pbc-finite-level-proetale",
+    "why": "Existing proper-base-change theorem on etale-origin inputs repairs the explicit false dimension inference in the node proof; retains the unit torsion-vanishing and comparison route for the absolute bound."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic exact-functor cohomology tool, applied to constant-coefficient inverse image; no same-unit node states this arbitrary-scheme pullback assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-separated-quasi-separated",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-comparison-direct-image",
+  "prop-weil-pbc-proetale-constant-exact",
+  "thm-weil-pbc-finite-level-proetale",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-da066023e",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-da066023e (reviewer sub-agent of L); spot-checked: I read every step, every cited statement and the sources; I made no fixes and there are no new nodes. Statement: the source's phrase about base changes 'with source dim<=d, in particular every etale Y-scheme' is wrong: for d=0, X=Spec k -> Y=A^1 and V=Y (identity, etale), dim V=1>d. The corrected statement covers the pullback of the original etale-origin F along every scheme map V->Y. That is stronger than the source on V and keeps the same sheaf quantifier, so nothing is weakened. All three citers stay consistent; thm-sf-fullcd-used-class uses only the absolute clause. Step 1: in E the absolute value of ell is 1/ell<1, so ell lies in (varpi) and ell^n kills A; ell^n is invertible in k; proper means separated and finite type, and lem-pc-separated-quasi-separated gives qcqs. Step 2: every hypothesis of lem-sf-etale-direct-image-vanishing holds on the original finite-type X and Y (k algebraically closed, d in N, any A-module sheaf G). prop-weil-pbc-comparison-direct-image needs qcqs p and G[0] in D^+; its pro-etale Ru_* is the functor of def-weil-pbc-proetale-operations, the same one def-weil-derived-direct-image uses. Clauses 2-3 of lem-sf-comparison-pullback-exact give exactness and the cohomology isomorphism. Step 3: thm-weil-pbc-finite-level-proetale needs a finite commutative Lambda, proper f, an arbitrary g in a cartesian square, and K=F[0] with witness (G[0],alpha); alpha points the right way. This matches Stacks 0F0C (etale-cohomology lemma-proper-base-change-mod-n), which I read. prop-weil-pbc-proetale-constant-exact and lem-weil-pbc-exact-functor-complex-cohomology (010N) then give the vanishing of H^r for r>2d. Using proper base change repairs an established error: the source applied the finite-type dimension bound to X x_Y V, and the unit's claim that base change keeps the dimension fails (X=Y=Spec k, V=A^1). The 09C8 completed-coefficient theorem is correctly not used. Step 4 is an elementary substitution into both clauses of def-weil-full-cohomological-dimension, restricted to etale-origin F. Edge cases checked: empty X, d=0, n=1, zero sheaf, non-constructible G, V=Y, P^1 over A^1, V not of finite type. No cycle: about 10.2k nodes in the closure, none of them thm-sf-fullcd-*. No duplicate: thm-sf-fullcd-class and thm-sf-fullcd-used-class are different packagings that cite this item. No SGA source. The upstream Lean candidate (ExceptionalAdjoint.lean:210) is sorry and states a stronger quantifier, so it is not an attachment. I accept all 7 declared tool_uses: lem-pc-separated-quasi-separated, lem-sf-comparison-pullback-exact, lem-weil-pbc-comparison-pullback, prop-weil-pbc-comparison-direct-image, prop-weil-pbc-proetale-constant-exact, thm-weil-pbc-finite-level-proetale, lem-weil-pbc-exact-functor-complex-cohomology. Open note, not a fault: the current main-20261015 unit statement quantifies over all etale sheaves on X'' and is still not realized by any node."
+ }
 }
