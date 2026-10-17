@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-pinched-cube-latching"
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-unstraightening-simplex-pointwise"
  ],
  "proof": [
   {
@@ -209,5 +210,24 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-6515a58e9 (reviewer sub-agent of L); spot-checked: I read the whole item and the full statements of def-cbc-enhanced-diagrams-cones and lem-coef-pinched-cube-latching, including the latching node's quotient normal form and its direct-image step. The item uses only that node's statement: Q^n is the subcube quotient of N(P_n), monotone maps act by direct image, the max map descends, and Q^0=Delta^0. The statement is true, and I checked it by hand for n=0, for n=1 (where {0,1}~{1} and Q^1 is Delta^1) and for degenerate chains with repeated entries. Step 1 holds: [I]=[{max I}] by one generating relation at k=max I. Step 2 holds: naturality along iota_k:[0]->[n], together with b_0 being forced, gives b_n({k})=k. Step 3 holds: a quotient simplex has a representative chain, and a simplex of Delta^n is a function determined by its vertex values, so b_n=mu_n. All three steps are genuinely elementary and proof_deps equals the union of the uses. The delivery has no new nodes and is not a relabelling. There is no cycle: the latching node and def-cbc do not depend on the item. I searched for duplicates with rg over the snapshot DAG (pinched, and nodes mentioning both max and Q^n). I read the five candidates: marked-cone-generator-calculations, unstraightening-simplex-pointwise, coherent-prism-pinch-identity, rigidification-identity-action and diagonal-coherent-nerve-comparison. None states this uniqueness, so same_as=[] stands. The declared tool use of lem-coef-pinched-cube-latching, which belongs to unit sk-prop-sf-biduality-general, is accepted: only its statement is used, as a combinatorial description of Q, and the item's unit sk-prop-sf-cbc offers no substitute. The Mathlib searches of all three kinds are recorded and none matches. HTT is not in the local literature, so I did not open it; the WANTED entry is in the report. The proof is agent-written, uses no SGA, and nothing in it depends on HTT. The item is not a target node, so there is no base-change morphism or coefficient category to check. I made no fixes, and review.md is written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f99f2b9b5",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause: Q/FaceRel quotient, direct-image qFunctor, every cosimplicial b : qFunctor ⟶ stdSimplex equals pinchedProjection (the existing canonical descended maximum, fixed by the surjective quotient normalization), single unrestricted universe u. Statement checked true by hand (n=0, singleton vertices, degenerate chains). Node diff is only stmt_deps (+ the owner of pinchedProjection, no cycle) and lean; statement verbatim. sorry only, docstrings and source place present, no new definitions. nt_compile overlay: 73 modules, exit 0, no errors or warnings. Non-blocking: the Second-reading section is a direct-delivery stub; cosmetic sanitizer text in the report."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.PinchedCubeAugmentationUniqueness",
+  "declaration": "SSet.PinchedCube.augmentation_unique",
+  "file": "lean/Sheaf/AlgebraicTopology/PinchedCubeAugmentationUniqueness.lean",
+  "statement": "theorem augmentation_unique (b : qFunctor.{u} ⟶ SSet.stdSimplex.{u}) : b = SSet.ConePresheaf.pinchedProjection.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing normalized maximum projection SSet.ConePresheaf.pinchedProjection. Its already-landed owning node lem-coef-unstraightening-simplex-pointwise is added to stmt_deps only to reuse this construction; no unstraightening theorem is used. The projection is characterized by quotientMap n ≫ π.app ⦋n⦌ = maximumMap n in pinched_cube_latching. The original mathematical statement is unchanged."
  }
 }
