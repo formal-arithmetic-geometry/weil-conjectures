@@ -19,6 +19,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Detection
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.DualizableLocal
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnitPerfect
 
 /-!
 
@@ -450,8 +452,12 @@ finite projective `Λ_X`-modules is perfect, that is dualizable (`sk-def-perfect
 Tag 0FPP). -/
 theorem isDualizable_of_isLocallyPerfect
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
-    (hK : IsLocallyPerfect Λ K) : IsDualizable K :=
-  sorry
+    (hK : IsLocallyPerfect Λ K) : IsDualizable K := by
+  obtain ⟨ι, W, g, hg, hP⟩ := hK
+  have (i : ι) : WeaklyEtale (g i) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hg (.mk i)
+  exact isDualizable_of_cover g hg fun i ↦ (_root_.DerivedCategory.finProjComplex.isDualizable
+    (hP i))
 
 omit [Finite Λ] in
 /-- Blueprint `sk-def-perfect`: Perfectness at the point and on `X`.
