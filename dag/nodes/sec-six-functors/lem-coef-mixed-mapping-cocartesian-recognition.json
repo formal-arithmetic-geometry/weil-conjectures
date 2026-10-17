@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "lem-coef-infinity-mapping-composition"
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pointwise-adjoint-criterion",
+  "lem-coef-infinity-right-fibration-fibers"
  ],
  "proof": [
   {
@@ -278,5 +280,33 @@
   "group": "Q132",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-77380d9b6 (reviewer sub-agent of L); spot-checked: I read the whole item, all seven steps, and the full statements of the six cited nodes. The delivery creates no new nodes and leaves the statement and stmt_deps unchanged. Step 1: the right-pinched mapping spaces of Delta^1 are Map(0,0)=Map(0,1)=Map(1,1)=Delta^0 and Map(1,0) is empty, so the homotopy fibre is the whole Map_E(x,z). Step 2: this is lem-coef-infinity-cocartesian-mapping-criterion, the dual of HTT 2.4.4.3. For z in C both sides of the test are empty; for z in D the test becomes 'e^* is a weak equivalence'. It assumes no other lifts, so there is no circularity. Step 3: the item's own coherent-naturality hypothesis, restricted to e, gives eps∘e^* ≃ a^* with a=eps(e); two-out-of-three then applies. Step 4: associativity, units and component dependence give the two homotopies on the correct domains, and the declared tool lem-cbc-simplicial-homotopy-equivalence-weak needs no nonemptiness. Step 5: surjectivity at z=T_x and injectivity at z=y give the two-sided inverse. Step 6: an identity-component edge lambda_x exists with target exactly T_x; the text says 'Steps 4–5' where Step 4 is meant, which is wording only. Step 7: degenerate edges are cocartesian by the initiality node, and the three edges of Delta^1 are all covered. Edge cases: id on Delta^1, empty mixed maps (the hypothesis fails, as it must), C or D empty, and ordinary nerves. Duplicate scan: discrete-base recognition, interval-equivalence, bicartesian-interval adjunction and edge-pullback mapping fibre all state different things. There is no cycle and no SGA. HTT is not archived, so 'by agent' with a WANTED line is correct. I accept the tool use of lem-cbc-simplicial-homotopy-equivalence-weak. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MixedMappingCocartesianRecognition",
+  "declaration": "SSet.Enhanced.mixed_mapping_cocartesian_recognition",
+  "declarations": [
+   "SSet.Enhanced.mixedMappingFamily",
+   "SSet.Enhanced.mixedMappingProjection",
+   "SSet.Enhanced.representedMixedFamily",
+   "SSet.Enhanced.representedMixedProjection",
+   "SSet.Enhanced.MixedMappingRepresentation",
+   "SSet.Enhanced.MixedMappingRepresentation.fiberMap",
+   "SSet.Enhanced.mixed_mapping_cocartesian_recognition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/MixedMappingCocartesianRecognition.lean",
+  "statement": "theorem mixed_mapping_cocartesian_recognition (E : SSet.{u}) [Quasicategory E] (p : E ⟶ Δ[1]) (_hp : InnerFibration p) (R : MixedMappingRepresentation p) : cocartesianFibrationOver p ∧ (∀ (x : (fiber p (stdSimplex.obj₀Equiv.symm 0)) _⦋0⦌) (s : (mixedMappingFamily p x) _⦋0⦌), IsCocartesianEdge p (Functor.natTransEquiv ((unitHomEquiv _).symm s.1.2)) ↔ IsEquivalenceEdge (fiber p (stdSimplex.obj₀Equiv.symm 1)) (SSet.yonedaEquiv (Functor.natTransEquiv ((unitHomEquiv _).symm ((R.equivalence x).app _ s).1.2)))) ∧ (∀ x : (fiber p (stdSimplex.obj₀Equiv.symm 0)) _⦋0⦌, ∃ (s : (fiber (mixedMappingProjection p x) (R.target x)) _⦋0⦌) (i : (fiber (representedMixedProjection p (R.target x)) (R.target x)) _⦋0⦌), ((pullback.snd _ (representedMixedProjection p (R.target x))).app _ i).1.2 = diagramVertex (SSet.const (X := Δ[1]) (R.target x)) ∧ SSet.mapπ₀ (R.fiberMap x (R.target x)) (π₀.mk s) = π₀.mk i ∧ IsCocartesianEdge p (Functor.natTransEquiv ((unitHomEquiv _).symm ((pullback.snd _ (mixedMappingProjection p x)).app _ s).1.2)))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The specified coherent epsilon is presented as an equivalence over the whole target fiber between the existing comma left-fibration models. Canonical pinch equivalences identify the fibers with the stipulated right-pinched mapping spaces; over the interval the mixed homotopy fiber is the whole mapping space. Recognition uses the actual image of each mixed edge. The identity-component equation is in the fiber over the exact representing vertex. The two added, already landed statement dependencies own the reused comma projection and canonical fiber map; no notion is redeclared and no statement correction is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-352bed547",
+  "group": "NI",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, all statement dependencies, exact declarations, hypotheses, conclusions, edge cases, and docstrings. Signature matches verbatim; per-file scompile.py reproduction passed cleanly. No defects found; branch and project files unchanged."
  }
 }

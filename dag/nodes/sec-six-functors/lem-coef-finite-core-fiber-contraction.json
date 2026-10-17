@@ -8,7 +8,10 @@
   "place": "Lemma 7.6.7 and its proof, printed pp. 387-388, specialized to invertible weak equivalences and actual finite coherent limits; agent expansion from finite poset nerves to finite simplicial shapes using their assumed limits; read online 2026-10-17, not archived in literature/. No Stacks tag states this quasicategorical result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-finite-limits-square-cones",
+  "lem-coef-infinity-limits-products-pullbacks",
+  "lem-coef-infinity-isofibration-pullback-limit"
  ],
  "proof": [
   {
@@ -227,5 +230,24 @@
   "group": "Q139",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-ecde042f5 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the parent's step 1 and the duplicate candidates in full. The Cisinski and Kerodon sources are not archived (WANTED is filed), so I checked each statement directly on its mathematics; full checks are in review.md. The item's 7-step proof is correct: limit creation for the finite K; right approximation gives w:c'->c; a horn filler gives H; the triangles of the square give [G(t_k)][e]=[e_k], so conservativity makes each t_k an equivalence; 2-out-of-3 places H in Q_b; reversal and Kan concatenation bring it back to P_b. K empty gives nonemptiness. Every hypothesis is used where stated, and there is no cycle (DFS over 140 nodes). The path-reversal node is true and is not a duplicate. Fault (C5): clauses 1 and 3 of lem-coef-relative-undercategory-limit-creation (C_b is a quasicategory; the mapping-space hofib formula) are the C=Delta^0 case of the existing lem-coef-infinity-comma-mapping-pullback (same unit, in the base), which the report missed. Fix: the new node now keeps only preserved-limit creation, identifies C_b with the comma E (that node is added to stmt_deps), and drops the unused conservativity clause. Item steps 2-4 now cite the comma node for the quasicategory and mapping-fiber facts, and proof_deps are recomputed; the item statement is unchanged. I accepted the two declared sk-prop-sf-cbc tool uses (generic quasicategory and Kan foundations).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteCoreFiberContraction",
+  "declaration": "SSet.Enhanced.finite_core_fiber_contraction",
+  "file": "lean/Sheaf/CategoryTheory/FiniteCoreFiberContraction.lean",
+  "statement": "theorem finite_core_fiber_contraction (A B : SSet.{u}) [Quasicategory A] [Quasicategory B] (hA : SuspensionComparison.HasFiniteLimits A) (hB : SuspensionComparison.HasFiniteLimits B) (G : A ⟶ B) (hG : ∀ (K : SSet.{u}), K.Finite → PreservesLimitsOfShape G K) (hReflects : ∀ (v : A _⦋1⦌), IsEquivalenceEdge B (G.app _ v) → IsEquivalenceEdge A v) (hApprox : ∀ (a : A _⦋0⦌) (b : B _⦋0⦌) (ψ : (mappingSpace B b (G.app _ a)) _⦋0⦌), ∃ (a' : A _⦋0⦌) (v : (mappingSpace A a' a) _⦋0⦌) (e : (mappingSpace B b (G.app _ a')) _⦋0⦌) (w : (mappingSpace B b (G.app _ a)) _⦋0⦌) (t : B _⦋2⦌), IsEquivalenceEdge B e.val ∧ B.δ 2 t = e.val ∧ B.δ 0 t = G.app _ v.val ∧ B.δ 1 t = w.val ∧ π₀.mk w = π₀.mk ψ) : ∀ (b : (core B).toSSet _⦋0⦌), Nonempty ((homotopyFiber (coreMap G) b) _⦋0⦌) ∧ ∀ (K : SSet.{u}) [K.Finite] (f : K ⟶ homotopyFiber (coreMap G) b), ∃ p : (homotopyFiber (coreMap G) b) _⦋0⦌, Nonempty (SSet.Homotopy (SSet.const p) f)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses existing finite coherent limits, actual cone preservation and coreMap. Right approximation is equality in pi_0 of the specified mapping space; a two-simplex witnesses composition without requiring a strict triangle to the given psi."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-cf8f9c9f8",
+  "group": "Q31",
+  "result": "fix",
+  "note": "Wrote review.md and a complete replacement report under fixes/, repairing H11’s placeholder second-reading section. Statement, dependencies, source, universes, edge cases, and pilot gates checked; immutable module compiled successfully in sandbox and library modes through scompile.py. No Lean changes needed."
  }
 }
