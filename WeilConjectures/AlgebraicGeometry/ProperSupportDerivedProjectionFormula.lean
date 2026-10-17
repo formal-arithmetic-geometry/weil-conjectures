@@ -183,7 +183,8 @@ theorem nonempty_properSupport_derivedProjection_iso
     have hq := ((Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp
       (hcoherent n)).1
     have := hq
-    exact SheafOfModules.isQuasicoherent_over _ U
+    exact SheafOfModules.isQuasicoherent_over ((DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj E) U
   obtain ⟨eProjection⟩ := nonempty_qcqs_derivedProjection_iso_universes
     (U.ι ≫ f) _ hEU K (qc_single S F hF)
   exact ⟨tensorIso eE (Iso.refl K) ≪≫ eProjection ≪≫ eTensor.symm⟩
