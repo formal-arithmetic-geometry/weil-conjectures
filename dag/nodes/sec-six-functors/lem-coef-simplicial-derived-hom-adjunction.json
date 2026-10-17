@@ -13,9 +13,104 @@
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-simplicial-mapping-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $c_X:QX\\to X$ and $r_Y:Y\\to RY$ for the functorial replacements, $q_{\\mathcal M},q_{\\mathcal N}$ for localization, and $\\eta,\\epsilon$ for the original adjunction maps. The model conventions are [lem-coef-simplicial-boundary-collapse-test]. Since $L$ is a left adjoint, it preserves the initial object: maps out of its image are uniquely identified by adjunction with maps out of the initial object. Thus preservation of cofibrations makes $LP$ cofibrant whenever $P$ is. The two forms of the Quillen hypothesis agree: by the adjunction, lifting problems of $L(i)$ against $p$ correspond bijectively to lifting problems of $i$ against $U(p)$, and in each weak factorization system each class is exactly the maps with the lifting property against the other. Hence $L$ preserves cofibrations (respectively trivial cofibrations) if and only if $U$ preserves trivial fibrations (respectively fibrations). Dually $UY$ is fibrant whenever $Y$ is fibrant. These observations check the object hypotheses needed for the mapping-component comparisons below.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, ordinary coefficient-adjunction prerequisite: cofibrant and fibrant hypotheses"
+   }
+  },
+  {
+   "text": "For a weak equivalence $f:X\\to X'$ between cofibrant objects, [lem-coef-brown-split-factorizations] gives $f=pi$ with $i,s$ cofibrations, $p$ a trivial fibration, and $ps=1$. Two-out-of-three applied to $pi=f$ and $ps=1$ makes $i,s$ trivial cofibrations. Hence $L(i),L(s)$ are weak; $L(p)L(s)=1$ makes $L(p)$ weak, so $L(f)$ is weak. Dually for a weak equivalence between fibrant objects the same node gives $f=pi$, $i$ trivial, $p,r$ fibrations and $ri=1$. Two-out-of-three makes $p,r$ trivial fibrations. Thus $U(p),U(r)$ are weak, $U(r)U(i)=1$ makes $U(i)$ weak, and $U(f)$ is weak.",
+   "uses": [
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, ordinary prerequisite: Brown preservation"
+   }
+  },
+  {
+   "text": "For a weak equivalence $f:X\\to X'$, $c_{X'}Qf=fc_X$ implies by two-out-of-three that $Qf$ is weak. Dually $Rf$ is weak. Step 2 therefore makes $LQf$ and $URf$ weak. Define $F(q_{\\mathcal M}X)=q_{\\mathcal N}LQX$ and $G(q_{\\mathcal N}Y)=q_{\\mathcal M}URY$; on ordinary arrows use $q_{\\mathcal N}LQf$ and $q_{\\mathcal M}URg$, and on a formal inverse use the inverse of this image. Identities, compositions and the two inverse relations are preserved, so evaluation of finite strings gives well-defined ordinary functors $F,G$ on the given localizations.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, ordinary prerequisite: finite-string descent"
+   }
+  },
+  {
+   "text": "For cofibrant $P$ and fibrant $Y$, Step 1 makes $LP$ cofibrant and $UY$ fibrant. The statement [lem-coef-simplicial-mapping-localization] and the given enriched adjunction yield the bijection\n$$B_{P,Y}:\\operatorname{Hom}(q_{\\mathcal N}LP,q_{\\mathcal N}Y)\\ \\cong\\ \\pi_0\\operatorname{Map}_{\\mathcal N}(LP,Y)\\ \\cong\\ \\pi_0\\operatorname{Map}_{\\mathcal M}(P,UY)\\ \\cong\\ \\operatorname{Hom}(q_{\\mathcal M}P,q_{\\mathcal M}UY).$$\nThe cited node states that the outside maps are induced by actual localization and natural for actual arrows between cofibrant sources and fibrant targets. The middle isomorphism is enriched natural by hypothesis. Hence $B$ is natural for these arrows and sends $q(f)$ to $q(f^\\sharp)$ for every actual $f:LP\\to Y$.",
+   "uses": [
+    "lem-coef-simplicial-mapping-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, ordinary prerequisite: natural component Hom bijections"
+   }
+  },
+  {
+   "text": "For arbitrary $X,Y$, define the bijection $\\Phi_{X,Y}:\\operatorname{Hom}(FX,q_{\\mathcal N}Y)\\to\\operatorname{Hom}(q_{\\mathcal M}X,GY)$ by\n$$\\Phi_{X,Y}(a)=B_{QX,RY}(q_{\\mathcal N}(r_Y)\\circ a)\\circ q_{\\mathcal M}(c_X)^{-1}.$$\nBoth replacements are weak, so the composition maps here are bijective, and Step 4 applies to $QX,RY$. For an actual $f:X'\\to X$, naturality of $B$ for $Qf$ and $c_XQf=fc_{X'}$ give\n$$\\Phi_{X',Y}(a\\circ F(qf))=\\Phi_{X,Y}(a)\\circ qf.$$\nFor actual $g:Y\\to Y'$, use $Rg\\,r_Y=r_{Y'}g$ and naturality of $B$ for $Rg$ to get\n$$\\Phi_{X,Y'}(qg\\circ a)=G(qg)\\circ\\Phi_{X,Y}(a).$$\nFor a weak $f$ or $g$ these equalities also hold for its formal inverse, by multiplying the equality on the relevant side by the inverse images (which Step 3 made invertible). Induction on the length of a composable string proves both naturality laws for every localization arrow. This does not require a stronger bifibrant comparison. Apply [lem-weil-pbc-adjunction-of-natural-bijection] to $\\Phi$ to obtain $F\\dashv G$, with unit $\\Phi(1)$, counit $\\Phi^{-1}(1)$, naturality and triangle identities.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, ordinary prerequisite: Hom bijections descend through finite strings"
+   }
+  },
+  {
+   "text": "For cofibrant $P$, $c_P:QP\\to P$ is a weak equivalence between cofibrant objects, so Step 2 makes $L(c_P)$ weak. For fibrant $Y$, $r_Y:Y\\to RY$ is weak between fibrant objects, so $U(r_Y)$ is weak. These give the identifications $FP\\cong qLP$ and $GY\\cong qUY$. For $a:qLP\\to qY$, naturality of $B$ gives\n$$\\Phi_{P,Y}(a\\circ qL(c_P))=qU(r_Y)\\circ B_{P,Y}(a).$$\nIndeed its defining expression is $B_{QP,RY}(qr_Y\\circ a\\circ qL(c_P))\\circ qc_P^{-1}$; naturality first moves $c_P$ and $r_Y$ outside $B$, and $qc_P\\circ qc_P^{-1}=1$ cancels. Thus under precisely these replacement identifications the adjunction bijection is the composite asserted in the statement, including its value on actual maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, ordinary prerequisite: comparison on cofibrant-fibrant objects"
+   }
+  },
+  {
+   "text": "Compute the unit by applying Step 5 to $a=1_{qLQX}$, with target $LQX$. By Step 4 the actual map $r_{LQX}:LQX\\to RLQX$ has adjunct $U(r_{LQX})\\eta_{QX}$. Hence the unit is\n$$qX\\xrightarrow{qc_X^{-1}}qQX\\xrightarrow{q\\eta_{QX}}qULQX\\xrightarrow{qU(r_{LQX})}qURLQX.$$\nHere the arrow $ULQX\\to URLQX$ is $U$ of the replacement in $\\mathcal N$. For the counit, use $X=URY$ in Step 5 and solve $\\Phi(a)=1_{qURY}$. The equation is $B_{QURY,RY}(qr_Y\\circ a)=qc_{URY}$. The actual adjunct of $c_{URY}:QURY\\to URY$ is $\\epsilon_{RY}\\circ L(c_{URY})$, so\n$$a=(qr_Y)^{-1}\\circ q\\epsilon_{RY}\\circ qL(c_{URY}):qLQURY\\to qY.$$\nThese are exactly the unit and counit words claimed. Since they were computed as $\\Phi(1)$ and $\\Phi^{-1}(1)$, Step 5 and [lem-weil-pbc-adjunction-of-natural-bijection] give their naturality and both triangle identities, without assuming replacement maps commute with $L$ or $U$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, ordinary prerequisite: replacement unit/counit and triangle identities"
+   }
+  },
+  {
+   "text": "If $L$ preserves all weak equivalences, define its direct localization $\\overline L$ by evaluation on strings as in Step 3. The arrows $qL(c_X):FX\\to\\overline L(qX)$ are invertible and natural for ordinary arrows by naturality of $c$. The same equations for formal inverses follow by cancellation, and for strings by composition. They therefore give a natural isomorphism $F\\cong\\overline L$. Dually, if $U$ preserves all weak equivalences, $qU(r_Y):\\overline U(qY)\\to GY$ gives a natural isomorphism from its direct localization to $G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, ordinary prerequisite: agreement with direct localization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-simplicial-mapping-localization",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, second paragraph: Brown preservation and natural component Hom bijections descend through finite strings to the ordinary derived adjunction, with replacement unit and counit."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +139,66 @@
    "results": "{\"t\": \"2026-10-17T08:20:40Z\", \"tool\": \"leansearch\", \"query\": \"A left Quillen functor and right Quillen functor induce adjoint functors on model homotopy categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Functor.mapHomotopyCategory\", \"HomotopicalAlgebra.RightHomotopyRel.leftHomotopyRel\", \"CategoryTheory.Functor.leftDerivedToHomotopyCategory\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq\"], \"digest\": \"ad507f39fcf33288\"}",
    "date": "2026-10-17",
    "verdict": "no match: CategoryTheory.Adjunction.derived in CategoryTheory/Functor/Derived/Adjunction.lean:144 assumes absolute derived-functor/Kan-extension hypotheses. Establishing these for the replacement functors is not a one-line specialization. Read that file:14-25,39-62,137-153. ModelCategory search has no Quillen derived-adjunction declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "Quillen|derived.*adjunction",
+   "results": "{\"t\": \"2026-10-17T09:07:34Z\", \"tool\": \"grep\", \"query\": \"Quillen|derived.*adjunction\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\"], \"digest\": \"65c8aa51fb2ed38a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib CategoryTheory/Localization/Adjunction.lean:40-43,98-107 (requires both original functors to descend), and Functor/Derived/Adjunction.lean:137-149 (requires absolute derived Kan extensions); neither establishes the Quillen replacement hypotheses or the simplicial mapping-component formula. Other hits concern chain-complex homotopy categories or simplicial-set categorification. Loogle identifier error is not evidence of absence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total derived functors of a Quillen pair are adjoint on homotopy categories",
+   "results": "{\"t\": \"2026-10-17T09:07:34Z\", \"tool\": \"leansearch\", \"query\": \"The total derived functors of a Quillen pair are adjoint on homotopy categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.totalLeftDerived\", \"CategoryTheory.Functor.totalRightDerived\", \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Functor.leftDerivedToHomotopyCategory\", \"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\"], \"digest\": \"29eb4187dcd04aae\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib CategoryTheory/Localization/Adjunction.lean:40-43,98-107 (requires both original functors to descend), and Functor/Derived/Adjunction.lean:137-149 (requires absolute derived Kan extensions); neither establishes the Quillen replacement hypotheses or the simplicial mapping-component formula. Other hits concern chain-complex homotopy categories or simplicial-set categorification. Loogle identifier error is not evidence of absence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quillen\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-17T09:07:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quillen\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib CategoryTheory/Localization/Adjunction.lean:40-43,98-107 (requires both original functors to descend), and Functor/Derived/Adjunction.lean:137-149 (requires absolute derived Kan extensions); neither establishes the Quillen replacement hypotheses or the simplicial mapping-component formula. Other hits concern chain-complex homotopy categories or simplicial-set categorification. Loogle identifier error is not evidence of absence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial Quillen adjunction induces an adjunction between ordinary localizations using cofibrant and fibrant replacements",
+   "results": "{\"t\": \"2026-10-17T09:07:38Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial Quillen adjunction induces an adjunction between ordinary localizations using cofibrant and fibrant replacements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.localization\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Adjunction.localization_counit_app\", \"CategoryTheory.Adjunction.Localization.\\u03b5\", \"CategoryTheory.Adjunction.localization_unit_app\", \"CategoryTheory.Adjunction.Localization.\\u03b7\", \"CategoryTheory.Adjunction.Localization.\\u03b7_app\", \"CategoryTheory.Adjunction.Localization.\\u03b5_app\"], \"digest\": \"9545942cebc4467d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib CategoryTheory/Localization/Adjunction.lean:40-43,98-107 (requires both original functors to descend), and Functor/Derived/Adjunction.lean:137-149 (requires absolute derived Kan extensions); neither establishes the Quillen replacement hypotheses or the simplicial mapping-component formula. Other hits concern chain-complex homotopy categories or simplicial-set categorification. Loogle identifier error is not evidence of absence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial Quillen adjunction induces an adjunction between ordinary localizations using cofibrant and fibrant replacements",
+   "results": "{\"t\": \"2026-10-17T09:13:20Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial Quillen adjunction induces an adjunction between ordinary localizations using cofibrant and fibrant replacements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.localization\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Adjunction.localization_counit_app\", \"CategoryTheory.Adjunction.Localization.\\u03b5\", \"CategoryTheory.Adjunction.localization_unit_app\", \"CategoryTheory.Adjunction.Localization.\\u03b7\", \"CategoryTheory.Adjunction.Localization.\\u03b7_app\", \"CategoryTheory.Adjunction.Localization.\\u03b5_app\"], \"digest\": \"9545942cebc4467d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib CategoryTheory/Localization/Adjunction.lean:40-43,98-107 (requires both original functors to descend), and Functor/Derived/Adjunction.lean:137-149 (requires absolute derived Kan extensions); neither establishes the Quillen replacement hypotheses or the simplicial mapping-component formula. Other hits concern chain-complex homotopy categories or simplicial-set categorification. Loogle identifier error is not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "localization|Adjunction",
+   "results": "{\"t\": \"2026-10-17T09:33:07Z\", \"tool\": \"grep\", \"query\": \"localization|Adjunction\", \"sub\": \"CategoryTheory/Localization\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/Construction.lean\", \"Mathlib/CategoryTheory/Localization/Construction.lean\", \"Mathlib/CategoryTheory/Localization/Construction.lean\"], \"digest\": \"21552178c651a0c6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib CategoryTheory/Localization/Adjunction.lean:40-43,98-107 (requires both original functors to descend), and Functor/Derived/Adjunction.lean:137-149 (requires absolute derived Kan extensions); neither establishes the Quillen replacement hypotheses or the simplicial mapping-component formula. Other hits concern chain-complex homotopy categories or simplicial-set categorification. Loogle identifier error is not evidence of absence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Quillen pair induces functors on homotopy categories and an adjunction via mapping spaces",
+   "results": "{\"t\": \"2026-10-17T09:33:07Z\", \"tool\": \"leansearch\", \"query\": \"A Quillen pair induces functors on homotopy categories and an adjunction via mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapHomotopyCategory\", \"CategoryTheory.Functor.mapHomotopyCategory_obj\", \"SSet.Truncated.mapHomotopyCategory\", \"HomotopicalAlgebra.CofibrantObject.toHoCat\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq\", \"HomotopyCategory.homologyFunctorFactors\", \"DerivedCategory.Qh\"], \"digest\": \"b417bf3284658344\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib CategoryTheory/Localization/Adjunction.lean:40-43,98-107 (requires both original functors to descend), and Functor/Derived/Adjunction.lean:137-149 (requires absolute derived Kan extensions); neither establishes the Quillen replacement hypotheses or the simplicial mapping-component formula. Other hits concern chain-complex homotopy categories or simplicial-set categorification. Loogle identifier error is not evidence of absence."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.localization",
+   "results": "{\"t\": \"2026-10-17T09:33:08Z\", \"tool\": \"loogle\", \"query\": \"Adjunction.localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Adjunction.localization'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib CategoryTheory/Localization/Adjunction.lean:40-43,98-107 (requires both original functors to descend), and Functor/Derived/Adjunction.lean:137-149 (requires absolute derived Kan extensions); neither establishes the Quillen replacement hypotheses or the simplicial mapping-component formula. Other hits concern chain-complex homotopy categories or simplicial-set categorification. Loogle identifier error is not evidence of absence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-projective-model-calculus",
@@ -59,7 +210,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2: coherent derived coefficient adjunction before the displayed R Hom / R lim calculation; Rigidification and coherent enriched-diagram comparison. Supporting Projective simplicial diagram models and change of index. Extracted prerequisite for original projective-model proof Step 15: Second paragraph: Brown preservation and the natural component Hom bijections descend through finite strings to the ordinary derived adjunction, with replacement unit and counit.",
+   "place": "Proof paragraph 2, second paragraph: Brown preservation and the natural component Hom bijections descend through finite strings to the ordinary derived adjunction, with replacement unit and counit.",
    "via": [
     "lem-coef-simplicial-projective-model-calculus",
     "lem-coef-enriched-diagram-rectification",
@@ -74,5 +225,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-derived-hom-adjunction",
+  "worker": "stage1",
+  "summary": "Proved the ordinary derived adjunction in eight steps using existing Brown factorizations, the assumed actual mapping-component comparison, and the Mathlib natural-Hom-bijection adjunction criterion. Naturality is checked on ordinary arrows, formal inverses and finite strings; unit/counit are computed from identity adjuncts. No new nodes or statement changes.",
+  "blueprint": "Paragraph 2: the derived coefficient adjunction used before the displayed derived-limit calculation. The agent-supplied ordinary prerequisite is proved by Brown preservation, mapping-component bijections and finite-string naturality; identity adjuncts supply its replacement unit/counit and triangles."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NU-a329fe60d",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-a329fe60d (reviewer sub-agent of L); spot-checked: I read every step of the item and the statements of all six cited nodes. I checked them against Mathlib Adjunction/Basic.lean:351-365,436-456 (mkOfHomEquiv) and BrownLemma.lean:48-53,97-102, against the blueprint prop-coef-integral-exceptional-adjoint.proof.md paragraph 2 ('derived coefficient adjunction'), and against the only citer, lem-coef-simplicial-projective-model-calculus Step 15. I recomputed the types and naturality of Phi=B(qr_Y o a) o qc_X^{-1}: source naturality via c_X Qf=f c_X', target naturality via Rg r_Y=r_Y' g, formal inverses by cancellation. I also recomputed the Step 6 comparison, the Step 7 unit q(U(r_{LQX}) eta_{QX}) o qc_X^{-1} and the counit (qr_Y)^{-1} o q(eps_{RY} L(c_{URY})) with source LQURY, and the Step 2 Ken Brown argument; all are correct. Small cases checked: the identity Quillen pair, bifibrant objects, and one side preserving all weak equivalences. All cited statements are on the unit or are Mathlib leaves, so no tool_uses are needed. There is no cycle (none of the 193 nodes reachable from the item's dependencies is the item). There are no new nodes. lem-coef-model-infinity-derived-adjunction is the infinity-categorical version, but it is not a one-line specialization of the item: it lacks the pi0 Map composite and the comparison with the finite-string localization. One repair: the statement asserts 'L preserves (trivial) cofibrations, equivalently U preserves (trivial) fibrations', and Steps 1-2 use the U-form without proof (gap of type E5/C2). I added the elementary lifting-transposition argument to Step 1 in fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-derived-hom-adjunction.json; no other field changed.; 1 file(s) fixed by the reviewer"
  }
 }
