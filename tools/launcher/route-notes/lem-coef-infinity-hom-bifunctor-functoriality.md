@@ -1,0 +1,5 @@
+# Independent resplit required, 2026-10-17
+
+The split uses space-valued-straightening in steps 2 and 3, as well as twisted-arrow-graph-cofinality and kan-relative-nerve-left-fibration, which also depend on it. In the supported Q60 candidate the reverse path is straightening -> coherent-nerve-comparison -> rigidification-equivalence-detection -> infinity-full-essential-image -> infinity-local-adjoint-criterion -> infinity-bicartesian-interval-adjunction -> infinity-adjunction-mapping-equivalence -> this node. Rebuild this foundational split without that classification closure, or repair the foundational caller with independent tools.
+
+The complete previous record is in `coord/maintenance/Q60-straightening-1792207711/lem-coef-infinity-hom-bifunctor-functoriality.json`. Preserve the theorem statement and any landed Lean interface. The old mathematical review is history, not acceptance of a circular split. Check both statement and proof dependency closures against the supported Q60 candidate before delivery.
