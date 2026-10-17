@@ -145,7 +145,7 @@ noncomputable def dualizingComplexComp (f : X ⟶ Y) :
     (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
         (dualizingComplex ℓ (toPoint Y)) ≅ dualizingComplex ℓ (toPoint X) :=
   ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f (toPoint Y)).app (𝟙_ _)).symm ≪≫
-    eqToIso (by rw [comp_toPoint])
+    eqToIso (by rw [comp_toPoint]; rfl)
 
 /-- The Tate twist `ℚ̄_ℓ,X(0)`, placed in degree `0`, is the unit of `D(Mod_{ℚ̄_ℓ,X})`. -/
 noncomputable def tateTwistDerivedZeroIso (T : Scheme.{u}) :
