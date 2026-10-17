@@ -88,20 +88,20 @@ theorem perfect_affine_cone_model (X : Scheme.{u})
     (A B : CochainComplex
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
     (hA : IsStrictlyPerfect X U A) (hB : IsStrictlyPerfect X U B)
-    (eA : Nonempty ((SheafOfModules.overFunctor
+    (eA : Nonempty ((SheafOfModules.overFunctor.{u}
           (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj T.obj₁ ≅ DerivedCategory.Q.obj A))
-    (eB : Nonempty ((SheafOfModules.overFunctor
+    (eB : Nonempty ((SheafOfModules.overFunctor.{u}
           (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj T.obj₂ ≅
         DerivedCategory.Q.obj B)) :
     ∃ K : CochainComplex
         (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ,
       IsStrictlyPerfect X U K ∧
-      Nonempty ((SheafOfModules.overFunctor
+      Nonempty ((SheafOfModules.overFunctor.{u}
           (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj T.obj₃ ≅
         DerivedCategory.Q.obj K) := by
   obtain ⟨eA⟩ := eA
   obtain ⟨eB⟩ := eB
-  let F := (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).mapDerivedCategory
+  let F := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory
   let S := F.mapTriangle.obj T
   have hS : S ∈ distTriang _ := F.map_distinguished T hT
   obtain ⟨α, hα⟩ := perfect_affine_map_representative X U hU A B
