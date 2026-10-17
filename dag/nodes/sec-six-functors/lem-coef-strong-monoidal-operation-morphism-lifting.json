@@ -2,7 +2,7 @@
  "id": "lem-coef-strong-monoidal-operation-morphism-lifting",
  "kind": "statement",
  "title": "Relative lifting and classification of strong monoidal operation morphisms",
- "statement": "Use the monoidal infinity-category convention of [def-coef-monoidal-infinity-category] and the projection-pullback and planar-operation data of [lem-coef-monoidal-block-projection-coherence]. For two monoidal infinity categories with underlying unital planar operation systems $(A,t_r)$ and $(B,u_r)$, let $\\operatorname{OpMor}(A,B)$ be the infinity category whose objects are a coherent functor $f:A\\to B$ and equivalences $f t_r\\simeq u_r f^r$ for every $r\\geq0$, compatible with all planar substitution, unit, and higher tree simplices, and whose morphisms are transformations with these same coherences. The construction sending a strong monoidal functor over $N(\\Delta^{\\mathrm{op}})$ to its underlying functor and operation comparisons is an equivalence\n$$\\operatorname{Fun}^{\\otimes}_{\\mathrm{str}}(A^\\otimes,B^\\otimes)\\simeq\\operatorname{OpMor}(A,B).$$\nMoreover, let $j:C\\to T$ and $k:D\\to Z$ be relative cocompletions with restriction equivalences for all finite arities as in [lem-coef-relative-planar-operation-extension], and suppose a relation-preserving coherent $b:C\\to D$ with a planar operation morphism to the operation system on $D$ is given. The unary restriction equivalence extends $b$ to a colimit-preserving $\\bar b:T\\to Z$; the finite-arity restriction equivalences lift all operation comparisons, inverses, transformations, and higher compatibility simplices to a unique (contractible-choice) object of $\\operatorname{OpMor}(T,Z)$. Under the displayed equivalence this object is exactly a strong monoidal $\\bar b$, and restriction gives an equivalence on the full infinity categories of such strong monoidal functors, including all mapping spaces.",
+ "statement": "Use the nonsymmetric monoidal infinity-category convention of [def-coef-monoidal-infinity-category] and the unital planar operation systems and reduced external input lists of [lem-coef-monoidal-block-projection-coherence], in fixed containing universes. For monoidal infinity categories with underlying operation systems $(A,t_r)$ and $(B,u_r)$, let $\\operatorname{OpMor}(A,B)$ have objects coherent functors $f:A\\to B$ with natural equivalences $ft_r\\simeq u_rf^r$ for every $r\\geq0$, compatible with all planar substitution, unit and higher tree simplices; its transformations have the corresponding operation-naturality and higher compatibility data, and need not be invertible. Restriction to the underlying functor and these comparisons is an equivalence of infinity categories\n$$\\operatorname{Fun}^{\\otimes}_{\\mathrm{str}}(A^\\otimes,B^\\otimes)\\simeq\\operatorname{OpMor}(A,B).$$\nHere transformations on the left are coherent transformations over the identity of $N(\\Delta^{\\mathrm{op}})$.\n\nFor the relative assertion, let $C$ have operations $t_r$, let $T,Z$ be cocomplete monoidal infinity categories with separately cocontinuous operations $M_r,N_r$, and let $j:C\\to T$ be equipped with coherent strong monoidal comparisons $M_rj^r\\simeq jt_r$. Let $R$ be specified small cocones in $C$ sent by $j$ to colimiting cocones. Suppose, as in [lem-coef-infinity-relative-colimit-completion], that for every finite $r\\geq0$ restriction is an equivalence of full coherent functor categories\n$$E_r:\\operatorname{Fun}_{\\mathrm{sep}}(T^r,Z)\\xrightarrow{(j^r)^*}\\operatorname{Fun}_R(C^r,Z).$$\nThe left side consists of functors preserving small colimits separately, and the right side of functors sending $R$ to colimiting cocones in each variable. At $r=0$ both sides are $Z$ and $E_0$ is the identity. All colimits refer to the fixed smaller universe. Then restriction gives an equivalence\n$$j^*:\\operatorname{Fun}^{\\otimes}_{\\mathrm{colim},\\mathrm{str}}(T,Z)\\simeq\\operatorname{Fun}^{\\otimes}_{R,\\mathrm{str}}(C,Z),$$\nincluding all mapping spaces and noninvertible monoidal transformations. Thus every relation-preserving planar operation morphism $g:C\\to Z$ extends, with its specified identification on $C$, to a colimit-preserving strong monoidal $\\bar g:T\\to Z$ in a contractible space of choices. In particular, if $D$ is monoidal, $k:D\\to Z$ is strong monoidal (for example a relative cocompletion with the coherences of [lem-coef-relative-planar-operation-extension]), and $b:C\\to D$ is strong monoidal with $kb$ relation-preserving, apply this assertion to $g=kb$ to obtain $\\bar b j\\simeq kb$. The universal property has target $C\\to Z$, even when the chosen $g$ factors through $D$.",
  "source": {
   "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
   "place": "Higher Algebra §§2.4.1-2.4.2 and §§4.1.2-4.1.3 (strong monoidal functors as coherent planar-operation morphisms); §4.8.1 relative extension of structured functors. Online source, not archived in literature/."
@@ -10,43 +10,262 @@
  "stmt_deps": [
   "def-coef-monoidal-infinity-category",
   "lem-coef-monoidal-block-projection-coherence",
+  "lem-coef-infinity-relative-colimit-completion",
   "lem-coef-relative-planar-operation-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=N(\\Delta^{\\mathrm{op}})$. By [lem-coef-cocartesian-straightening], a cocartesian-edge-preserving $F:A^\\otimes\\to B^\\otimes$ corresponds to a morphism $\\eta:H_A\\to H_B$ of classifying diagrams, including the mapping space of such morphisms. Use the specified normal forms of [lem-coef-monoidal-block-projection-coherence], with $H_A([n])=A^n$ and $H_B([n])=B^n$, and put $f=\\eta_{[1]}$. Naturality on the inert projections gives $\\operatorname{pr}_i\\eta_{[n]}\\simeq f\\operatorname{pr}_i$. The universal property of the product supplies the coherent equivalence $\\eta_{[n]}\\simeq f^n$, including the unique empty-product component. Naturality on the active endpoint map $[r]\\to[1]$ now gives $ft_r\\simeq u_rf^r$, including $r=0$. These are extracted from $F$ and the straightening equivalence, rather than asserted by the converse clause of the block lemma.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-monoidal-block-projection-coherence",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA Definition 4.1.2.5; cocartesian classification and active/inert extraction; online source inspected, not archived; explicit argument by the worker."
+   }
+  },
+  {
+   "text": "To retain the entire tree data, apply [lem-coef-cartesian-associative-segal-comparison] to $\\mathcal C=\\operatorname{Cat}_\\infty$, whose finite products are part of [lem-coef-cocartesian-straightening]. It identifies $H_A,H_B$ and their morphisms with associative algebra sections in the cartesian envelope. Apply [lem-coef-colored-operation-section-reconstruction] directly to the pullback of that envelope over the ordinary one-color operad $\\mathsf{Ass}$: the fibers over tuples are products, and its operation transports are ordered products by [lem-coef-cartesian-operadic-envelope]. Its transformation clause extracts from the section map the color functor $f$, operation-naturality simplices and every substitution compatibility. In $\\operatorname{Cat}_\\infty$ these simplices between functors are natural equivalences. On a standard ordered corolla these are precisely the comparisons of Step 1, by the active-operation clause of the comparison theorem. Other input orders merely reindex factors; substitution concatenates their ordered lists, so their tree data are the same planar data after that reindexing. This justifies extraction and all equivalence-valued families of morphisms, not yet arbitrary noninvertible transformations between the functors $f$.",
+   "uses": [
+    "lem-coef-cartesian-associative-segal-comparison",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-coef-cartesian-operadic-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA Proposition 4.1.2.10 and cartesian algebra-section description, sections 2.4.1-2.4.2; online source inspected, not archived; explicit argument by the worker."
+   }
+  },
+  {
+   "text": "Conversely, given $(f,\\phi_r)$ with its full planar compatibilities, reconstruct the normal-form diagram map using [lem-coef-monoidal-block-projection-coherence]. For $\\alpha:[n]\\to[m]$, write $a=\\alpha^{\\mathrm{op}}$ and $I_i=(a(i-1),a(i)]$. The $i$th naturality comparison is exactly $\\phi_{|I_i|}$ precomposed with $\\operatorname{pr}_{I_i}:A^n\\to A^{|I_i|}$. For a chain of arrows it is the supplied morphism-of-systems simplex on the output tree, precomposed with its external-input projection; an empty list uses $\\phi_0$. The stated compatibility with faces and grafting makes this a coherent diagram map with components $f^n$. Unstraightening gives a cocartesian-edge-preserving functor, which is strong monoidal by [def-coef-monoidal-infinity-category].",
+   "uses": [
+    "lem-coef-monoidal-block-projection-coherence",
+    "lem-coef-cocartesian-straightening",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA Construction 4.1.2.9; reconstruction in the normal form; online source inspected, not archived; explicit argument by the worker."
+   }
+  },
+  {
+   "text": "Check both composites with their identifications. Starting with operation data, reconstruction followed by restriction returns $f$ at $[1]$ and $\\phi_r$ on the active corolla because its input projection is the identity. On a labeled tree it returns its supplied simplex, again before adding unused inputs. Thus the extraction/reconstruction counit of [lem-coef-colored-operation-section-reconstruction] identifies all these data, naturally in parameters. Starting with $F$, its diagram map $\\eta$ corresponds under [lem-coef-cartesian-associative-segal-comparison] to a section map. Reconstruct the section map from its extracted color and operation data: the reconstruction theorem gives an equivalence to the original section map, with its identification with those data, in a contractible space. The comparison theorem carries this back to an equivalence of diagram maps; its degree-$n$ component is the product comparison $\\eta_{[n]}\\simeq f^n$ from Step 1. Finally the unit/counit of straightening carry it to an equivalence with the original $F$ over $S$. Since all three equivalences are natural, these are coherent round trips on the whole spaces of functors and their invertible transformations.",
+   "uses": [
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-coef-cartesian-associative-segal-comparison",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA Proposition 4.1.2.10; explicit two round trips using the cited equivalences; online source inspected, not archived; explicit argument by the worker."
+   }
+  },
+  {
+   "text": "For a small simplicial parameter $K$, give $B_K=\\operatorname{Fun}(K,B)$ pointwise operations: $(u_r)_K(h_1,\\ldots,h_r)(k)=u_r(h_1(k),\\ldots,h_r(k))$, with pointwise tree simplices. The product/exponential identification is supplied by [lem-coef-cat-infinity-colimits-cartesian-closure]; the block lemma reconstructs its monoidal fibration. More explicitly, pull back $\\operatorname{Fun}(K,B^\\otimes)\\to\\operatorname{Fun}(K,S)$ along the constant-diagram functor $S\\to\\operatorname{Fun}(K,S)$. By [lem-coef-infinity-pointwise-cocartesian-transport], this is a cocartesian fibration whose fiber at $[n]$ is $\\operatorname{Fun}(K,B^n)\\simeq B_K^n$ and whose transport and cocartesian edges are pointwise. Thus it is the reconstructed fibration. Exponential adjunction identifies strong functors $A^\\otimes\\to B_K^\\otimes$ with $K$-diagrams of strong functors $A^\\otimes\\to B^\\otimes$ over $S$. On operation data the same adjunction identifies $A\\to B_K$ and its comparisons with $K$-diagrams of operation morphisms. At $K=\\Delta^1$ these include genuinely noninvertible transformations.",
+   "uses": [
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-monoidal-block-projection-coherence",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA cartesian/functor-category interpretation of monoidal natural transformations; online source inspected, not archived; explicit argument by the worker."
+   }
+  },
+  {
+   "text": "Apply Steps 1-4 to $B_K$. Their constructions and unit/counit identifications commute with restriction in $K$: the operations are pointwise, the associative--Segal comparison identifies entire infinity categories and higher families, and reconstruction explicitly has the arbitrary-parameter and parameter-restriction clauses. In particular, for every $K=\\Delta^n$ this reconstructs the coherent $n$-simplices on both sides and their face and degeneracy maps. The same natural round trips give quasi-inverse functors on the full coherent categories, not just on their cores. Equivalently, fix the endpoints of a parameterized transformation; the construction identifies its entire mapping space, with its higher simplices. This proves the first displayed equivalence with noninvertible transformations included.",
+   "uses": [
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-coef-cartesian-associative-segal-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA sections 2.4.1-2.4.2; parameter argument written explicitly; online source inspected, not archived; explicit argument by the worker."
+   }
+  },
+  {
+   "text": "For the relative assertion let $g:C\\to Z$ be relation-preserving and strong monoidal. The assumed unary equivalence $E_1$ supplies $h:T\\to Z$ preserving colimits and a specified equivalence $hj\\simeq g$. This is a homotopy fiber of an equivalence of infinity categories, so the choice, with its identification on $C$, is contractible. This is the unary universal property in the hypothesis, not an application of a theorem about extending one operation system to two different targets.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA section 4.8.1; direct use of the assumed unary equivalence; online source inspected, not archived; explicit argument by the worker."
+   }
+  },
+  {
+   "text": "For every $r$, put $P_r=hM_r$ and $Q_r=N_rh^r$. Both lie in $\\operatorname{Fun}_{\\mathrm{sep}}(T^r,Z)$: for a fixed external variable all other entries are constant, and both functors are composites of colimit-preserving functors in that variable. Under $E_r$, the given $M_rj^r\\simeq jt_r$ and $hj\\simeq g$ identify their restrictions with $gt_r$ and $N_rg^r$. Full faithfulness gives an equivalence of whole mapping spaces\n$$\\operatorname{Map}(P_r,Q_r)\\simeq\\operatorname{Map}(gt_r,N_rg^r).$$\nThe specified comparison for $g$ therefore lifts. Lift its inverse too; full faithfulness lifts the two inverse homotopies, so the lift is an equivalence. This also handles $r=0$, where $E_0$ is the identity on $Z$, and $r=1$, with the specified identity comparisons. The finite-arity equivalences used here are assumptions of this item; the conclusion of [lem-coef-relative-planar-operation-extension] is not being used for morphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA section 4.8.1; explicit application of the assumed finite-arity equivalences; online source inspected, not archived; explicit argument by the worker."
+   }
+  },
+  {
+   "text": "Spell out the first compatibility to be lifted. For $r=\\sum_i r_i$, the two paths from $hM_k(M_{r_1},\\ldots,M_{r_k})$ to $N_rh^r$ are: first use $h$ of the source substitution and then the comparison $\\phi_r$; or use $\\phi_k$, then $N_k$ applied to the $\\phi_{r_i}$, then target substitution. Every functor in these paths is separately cocontinuous on $T^r$, because the ordered external variables occur in disjoint blocks exactly once. Restriction is compatible with these compositions, and the coherent monoidal identification for $j$ and $hj\\simeq g$ identify the restricted paths with the corresponding paths for $g$. Full faithfulness of $E_r$ lifts the specified homotopy between them, including its fixed boundary. Unary and nullary vertices obey the identical argument on their reduced external list. No assertion about fully faithful pullback along a coordinate projection is needed.",
+   "uses": [
+    "lem-coef-monoidal-block-projection-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA sections 4.1.2-4.1.3 and 4.8.1; explicit substitution square; online source inspected, not archived; explicit argument by the worker."
+   }
+  },
+  {
+   "text": "Impose all tree compatibilities together. Keep each finite planar tree on its reduced ordered external list, and include flags of contractions, grafting and unary insertions, with their faces and degeneracies. For a tree with $r$ leaves the vertices of its compatibility data are composite functors $T^r\\to Z$; its paths and higher cells lie in their mapping spaces. A compatible choice of all cells is their coherent limit: equivalently it is the space of maps on all these simplices agreeing on their common faces, with prescribed corollas and boundary data imposed by homotopy fibers. This description retains the homotopies on overlaps, rather than taking an inverse limit of sets of components. There are a small set of finite trees and flags in a containing universe. All required limits of spaces exist by [lem-coef-infinity-yoneda-presheaf-limits]. Restriction gives a coherent map of these entire compatibility diagrams, since $E_r$ is precomposition and the identifications for $j$ are coherent. Each mapping-space map is an equivalence by full faithfulness of $E_r$, on every external list. Boundary and parameter conditions are preserved as well. Consequently the map on the coherent limits is an equivalence: an objectwise equivalence of diagrams is an equivalence in their functor category by [lem-cbc-enhanced-functor-cone-calculus], and applying the limit functor preserves its inverse and inverse homotopies. Its homotopy fiber over the supplied complete tree data is contractible by [lem-coef-space-contractible-fiber-equivalence]. Thus the lifted comparisons form one coherent operation morphism $h:T\\to Z$, with contractible choice of the whole structure.",
+   "uses": [
+    "lem-coef-monoidal-block-projection-coherence",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-space-contractible-fiber-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA sections 4.1.2-4.1.3; coherent limit argument for all tree constraints; online source inspected, not archived; explicit argument by the worker."
+   }
+  },
+  {
+   "text": "For two lifts $h,h'$, the mapping space of monoidal transformations is obtained by the same tree compatibility construction, now with a variable unary transformation $h\\to h'$ and with its operation-naturality squares. Unary full faithfulness identifies its space of possible underlying transformations with that of $g\\to g'$. At arity $r$, every side of each square and higher cell is a transformation between separately cocontinuous composite functors $T^r\\to Z$, and $E_r$ identifies the whole mapping spaces with their restrictions. Thus the map of coherent compatibility diagrams is again objectwise an equivalence, including the unary component and fixed endpoints. Taking the coherent limits, by the same limit and functor-category statements as Step 10, gives an equivalence of mapping spaces. The argument includes every higher simplex and the noninvertible unary transformations. Steps 7-10 give essential surjectivity with contractible fibers over the specified restriction data. Apply the classification of Steps 1-6 to obtain the claimed equivalence on full infinity categories of strong monoidal functors.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-space-contractible-fiber-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA section 4.8.1, especially Proposition 4.8.1.10(4); mapping-space limit argument; online source inspected, not archived; explicit argument by the worker."
+   }
+  },
+  {
+   "text": "In the factorization case, compose the specified operation comparisons for $b$ and $k$:\n$$kbt_r\\simeq ku_r b^r\\simeq N_r(kb)^r.$$\nTheir substitution and tree coherences are those of the composite morphism of systems. By hypothesis $kb$ sends $R$ to colimiting cocones, so Steps 7-11 apply to $g=kb$. Restricting the resulting $\\bar b:T\\to Z$ gives $\\bar b j\\simeq kb:C\\to Z$. Conversely restriction of any colimit-preserving strong monoidal $h:T\\to Z$ is relation-preserving and strong monoidal, since $j$ sends $R$ to colimiting cocones and has the given strong comparisons. These are precisely the two sides of the corrected universal property. No factorization through $D$, and no lift of transformations through $k$, is part of that equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA section 4.8.1; identify the restriction target and the factorization special case; online source inspected, not archived; explicit argument by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-monoidal-block-projection-coherence",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-cartesian-associative-segal-comparison",
+  "lem-coef-colored-operation-section-reconstruction",
+  "lem-coef-cartesian-operadic-envelope",
+  "lem-coef-cat-infinity-colimits-cartesian-closure",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-space-contractible-fiber-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "HA Proposition 4.1.2.10, sections 2.4.1-2.4.2 and Proposition 4.8.1.10(4), inspected online but not archived. Explicit proof using the cited DAG statements, with round trips, parameter categories, and the limit of tree compatibility mapping spaces."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "lifting morphisms of unital planar operation systems through relative restriction equivalences",
-   "results": "ComplexShape.Embedding.homRestrict_hasLift; Mathlib.Tactic.Coherence.LiftHom; no infinity-categorical result",
-   "date": "2026-10-18",
+   "query": "strong monoidal functor equivalent to coherent morphism of unital planar operation systems",
+   "results": "CategoryTheory.Functor.Monoidal.ofBifunctor, CategoryTheory.Functor.CoreMonoidal, CategoryTheory.Functor.LaxMonoidal.ofTensorHom, CategoryTheory.Functor.Monoidal, CategoryTheory.Functor.Monoidal.instIsIsoμ, CategoryTheory.Functor.Monoidal.μIso, CategoryTheory.Functor.instIsMonHomε, CategoryTheory.Functor.Monoidal.μ_δ",
+   "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "strong monoidal functors equivalent to morphisms of planar operation systems",
-   "results": "0 hits; parser rejected input after strong monoidal functors",
-   "date": "2026-10-18",
+   "query": "CategoryTheory.Functor.Monoidal, CategoryTheory.Functor.LaxMonoidal",
+   "results": "CategoryTheory.Functor.Monoidal.toLaxMonoidal, CategoryTheory.Functor.Monoidal.toLaxMonoidal_injective, CategoryTheory.Functor.Monoidal.ofLaxMonoidal, CategoryTheory.Functor.Monoidal.mk, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.Adjunction.mapAddMon, CategoryTheory.Adjunction.mapMon",
+   "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "\"Monoidal\" \"Functor\" \"PreservesColimits\"",
-   "results": "0 hits in Mathlib source search",
-   "date": "2026-10-18",
+   "query": "Monoidal|LaxMonoidal|strong monoidal",
+   "results": "Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean",
+   "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "strong monoidal operation system morphism coherence",
-   "results": "CategoryTheory.Functor.Monoidal.mk; CategoryTheory.Functor.Monoidal.ofBifunctor; no infinity-categorical result",
-   "date": "2026-10-18",
+   "query": "coherent morphisms of planar operation systems and strong monoidal functors",
+   "results": "CategoryTheory.Functor.Monoidal.ofBifunctor, CategoryTheory.Functor.Monoidal.mk, CategoryTheory.Functor.CoreMonoidal.toMonoidal, CategoryTheory.Functor.Monoidal, CategoryTheory.Functor.Monoidal.η_ε_assoc, CategoryTheory.Functor.CoreMonoidal.mk, CategoryTheory.Functor.LaxMonoidal.μ, CategoryTheory.Functor.CoreMonoidal",
+   "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism between coherent nonsymmetric operads induced by a strong monoidal infinity functor",
+   "results": "CategoryTheory.Functor.OplaxMonoidal.ofBifunctor, CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal, CategoryTheory.Functor.Monoidal.ofOplaxMonoidal, CategoryTheory.Monoidal.InducingFunctorData, CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal, CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_μIso, CategoryTheory.Functor.OplaxMonoidal, CategoryTheory.Functor.mapMonFunctor",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.Monoidal.mk, Functor.Monoidal.ofLaxMonoidal",
+   "results": "loogle: unknown identifier 'Functor.Monoidal.mk'",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Monoidal.*Functor|Functor.*Monoidal",
+   "results": "Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "strong monoidal functor preserves cocartesian edges over Delta opposite",
+   "results": "CategoryTheory.Functor.Monoidal.ofBifunctor, CategoryTheory.Functor.IsStronglyCocartesian, CategoryTheory.Functor.IsStronglyCocartesian.of_comp, CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian, CategoryTheory.Functor.Monoidal.instPreservesFiniteProducts, CategoryTheory.MonoidalClosedFunctor, CategoryTheory.Functor.Monoidal.mk, CategoryTheory.Functor.Monoidal.ofChosenFiniteProducts.congr_simp",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cocompletion|planar|strong monoidal",
+   "results": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Limits/Presheaf.lean; Mathlib/CategoryTheory/Limits/Presheaf.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical monoidal/localization or cocompletion results do not state the quasicategorical finite-arity and tree-coherent assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "monoidal natural transformations extend uniquely along free cocompletion with all higher coherence",
+   "results": "CategoryTheory.MonoidalCategory.DayFunctor.tensor_hom_ext; CategoryTheory.LaxMonoidalFunctor.Hom.mk; CategoryTheory.MonoidalCategory.DayFunctor.unit_hom_ext; CategoryTheory.MonoidalCategory.DayFunctor.Hom.noConfusion; CategoryTheory.NatTrans.IsMonoidal.of_cartesianMonoidalCategory; CategoryTheory.LaxMonoidalFunctor.homMk; CategoryTheory.MonoidalCategory.DayFunctor.Hom.mk.noConfusion; CategoryTheory.NatTrans.IsMonoidal.mk",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical monoidal/localization or cocompletion results do not state the quasicategorical finite-arity and tree-coherent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction from a relative cocompletion induces an equivalence on strong monoidal infinity functors into a fixed cocomplete target",
+   "results": "CategoryTheory.Equivalence.monoidalOfPostcompInverse; CategoryTheory.Equivalence.monoidalOfPrecompFunctor; CategoryTheory.Equivalence.monoidalOfPostcompFunctor; CategoryTheory.Equivalence.monoidalOfPrecompInverse; CategoryTheory.Localization.Construction.whiskeringLeftEquivalence; CategoryTheory.Localization.functorEquivalence; CategoryTheory.Localization.instIsEquivalenceFunctorFunctorsInvertingWhiskeringLeftFunctor; CategoryTheory.Limits.Cocones.functorialityEquivalence_functor",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical monoidal/localization or cocompletion results do not state the quasicategorical finite-arity and tree-coherent assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal",
+   "results": "CategoryTheory.Functor.Monoidal.instId; CategoryTheory.Functor.Monoidal; CategoryTheory.Equivalence.instMonoidalFunctorRefl; CategoryTheory.Equivalence.instMonoidalInverseRefl; CategoryTheory.Functor.instMonoidalProdDiag; CategoryTheory.Functor.CoreMonoidal.toMonoidal; CategoryTheory.Functor.Monoidal.toLaxMonoidal; CategoryTheory.Functor.Monoidal.toOplaxMonoidal",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical monoidal/localization or cocompletion results do not state the quasicategorical finite-arity and tree-coherent assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cocomplete-monoidal-tensor",
@@ -58,7 +277,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent finite-coefficient tensor operations and their morphisms in the cocomplete tensor construction; the relative extension and strong-monoidal lifting lemmas made explicit from the returned proof steps.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent finite-coefficient tensor operations and their morphisms in the cocomplete tensor construction; the strong-monoidal operation classification and relative extension/lifting argument made explicit.",
    "via": [
     "lem-coef-cocomplete-monoidal-tensor",
     "lem-coef-algebroid-bilinear-colimits",
@@ -71,5 +290,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-strong-monoidal-operation-morphism-lifting",
+  "worker": "stage1",
+  "summary": "Repair of all five numbered return points. Added direct straightening, associative--Segal comparison and colored reconstruction citations; wrote both round trips and the pointwise-parameter argument for noninvertible transformations. Replaced the invalid use of single-system extension by a coherent limit of the full tree compatibility mapping spaces. Corrected the relative assertion to restriction into C→Z, with kb as a special case and explicit separate cocontinuity hypotheses. No new nodes.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent finite-coefficient tensor operations and their morphisms in the cocomplete tensor construction; the present steps realize the operation classification, relative aritywise lifting, and full mapping-space statement.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic pointwise detection of equivalences in a coherent functor category, used only to take a limit of objectwise mapping-space equivalences; the coefficient unit supplies no separate version of this basic calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NH-e31a3c71c",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-e31a3c71c (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 12 steps and the 12 searches. I read the full statement of each of its 14 dependencies, and the statement and step 5 of the only citer, cocomplete-monoidal-tensor. I also read the unit record, the master blueprint ancestor prop-coef-integral-exceptional-adjoint (in main-20261015 that file moved to sk-thm-sf-package, a maintainer binding note), and the previous RETURN by run 2b16392bae0a. HA is not archived: a WANTED line is recorded and proof_origin is agent, and the proof rests only on DAG statements. All five points of the previous return are repaired. Steps 1-2 now cite straightening and the associative-Segal comparison directly. Step 4 writes both round trips. Steps 5-6 use the pointwise-cocartesian and cartesian-closure statements and the K-parameter clauses of reconstruction, so non-invertible transformations are included. Steps 8-11 lift through the item's own E_r hypotheses. For separate cocontinuity, hM_r and N_r h^r are composites of colimit-preserving functors in each variable. Coherence is a limit of tree-compatibility mapping spaces, using the cone-calculus, space-limit and contractible-fibre statements. The statement correction to C→Z is right and is not a weakening. I checked the graded-spaces counterexample h(X)=X_0 in degree 0: it is colimit-preserving and strong monoidal because positive degrees vanish, and hj(1)=∅ is not representable. The citer's step 5 uses this exact form. Requiring E_r only for the fixed Z makes the statement stronger. Edge cases checked: r=0 with E_0=id, r=1, nullary vertices, K=∅ and K=Δ^1, and R=∅ with T=P(C), which is consistent with operadic-day-convolution. There are no new nodes and no cycle (DFS over 1125 nodes), and proof_deps equals the union of the uses. The searches cover all three kinds. The rg duplicate search found nothing that states this result: monoidal-yoneda-embedding, operadic-day-convolution, planar-multilinear-extension and day-model-yoneda say other things. No SGA source is used. I accept the declared tool_use lem-cbc-enhanced-functor-cone-calculus (pointwise equivalence detection, already accepted 272 times in this unit). No changes made."
  }
 }

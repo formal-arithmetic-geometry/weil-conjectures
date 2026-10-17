@@ -2,7 +2,7 @@
  "id": "lem-trf-closed-dominant-dimension",
  "kind": "statement",
  "title": "Dimension formula for a closed dominant morphism",
- "statement": "Let $f:V\\to U$ be a dominant morphism locally of finite type between integral schemes, and assume $U$ is locally Noetherian. Write $k(U)$ and $k(V)$ for the residue fields of their generic points (their function fields), with the injection $k(U)\\hookrightarrow k(V)$ induced by $f$, and let $r=\\operatorname{trdeg}_{k(U)}k(V)$. Then $\\dim V\\leq\\dim U+r$. If the underlying continuous map of $f$ is closed, then $\\dim V=\\dim U+r$. Dimension is topological Krull dimension, allowing infinity. In particular, for a proper such $f$ inducing a finite extension of function fields, $\\dim V=\\dim U$.\n\nThe notions use [def-pc-integral-scheme], [def-weil-finite-type-morphism], [pqf-def-locnoeth], [def-sc-function-field], [def-kun-transcendence-degree], [def-kun-topological-krull-dimension] and [def-weil-proper-morphism]; a closed map sends every closed subset to a closed subset.",
+ "statement": "Let $f:V\\to U$ be a dominant morphism locally of finite type between integral schemes, and assume $U$ is locally Noetherian. Write $\\eta_U$ and $\\eta_V$ for the generic points and set $k(U)=\\mathcal O_{U,\\eta_U}$ and $k(V)=\\mathcal O_{V,\\eta_V}$ (their function fields) [def-sc-generic-point, def-weil-pbc-module-stalk], with the injection $k(U)\\hookrightarrow k(V)$ induced by $f$, and let $r=\\operatorname{trdeg}_{k(U)}k(V)$. Then $\\dim V\\leq\\dim U+r$. If the underlying continuous map of $f$ is closed, then $\\dim V=\\dim U+r$. Dimension is topological Krull dimension, allowing infinity. In particular, for a proper such $f$ inducing a finite extension of function fields, $\\dim V=\\dim U$.\n\nThe notions use [def-pc-integral-scheme], [def-weil-finite-type-morphism], [pqf-def-locnoeth], [def-sc-generic-point], [def-weil-pbc-module-stalk], [def-kun-transcendence-degree], [def-kun-topological-krull-dimension] and [def-weil-proper-morphism]; a closed map sends every closed subset to a closed subset.",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Tag 02JX, lemma-alteration-dimension; the final specialization uses that proper maps are closed and a finite field extension has transcendence degree zero."
@@ -11,14 +11,83 @@
   "def-pc-integral-scheme",
   "def-weil-finite-type-morphism",
   "pqf-def-locnoeth",
-  "def-sc-function-field",
+  "def-sc-generic-point",
+  "def-weil-pbc-module-stalk",
   "def-kun-transcendence-degree",
   "def-kun-topological-krull-dimension",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\xi_0\\leadsto\\cdots\\leadsto\\xi_e$ be any chain of specializations in $V$, put $x=\\xi_e$ and $y=f(x)$. By [lem-sc-scheme-stalk-dimension-generalization-chains], the chain lies in the local scheme at $x$, so $e\\leq\\dim(\\mathcal O_{V,x})$. Apply [lem-trf-local-dimension-formula] to obtain $\\dim(\\mathcal O_{V,x})\\leq\\dim(\\mathcal O_{U,y})+r-\\operatorname{trdeg}_{\\kappa(y)}\\kappa(x)$, and drop the final nonnegative term. Since $\\dim(\\mathcal O_{U,y})\\leq\\dim U$, every chain in $V$ has length at most $\\dim U+r$; taking the supremum gives $\\dim V\\leq\\dim U+r$.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "lem-trf-local-dimension-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JX, lemma-alteration-dimension, first paragraph of proof"
+   }
+  },
+  {
+   "text": "For the reverse inequality assume that the underlying map of $f$ is closed. Let $\\eta$ be the generic point of $U$ and let $d$ be the length of a chain $\\eta=\\overline\\xi_0\\leadsto\\overline\\xi_1\\leadsto\\cdots\\leadsto\\overline\\xi_d$ in $U$. Put $K=k(U)$ and $V_\\eta=V\\times_U\\operatorname{Spec}K$. To check the properties used below, choose affine neighbourhoods $U_0=\\operatorname{Spec}A$ of $\\eta$ and $V_0=\\operatorname{Spec}B$ of the generic point of $V$ with $f(V_0)\\subseteq U_0$. Dominance makes $A\\to B$ injective; for $S=A\\setminus\\{0\\}$, the chart of $V_\\eta$ is $\\operatorname{Spec}(S^{-1}B)$, a nonzero domain, and localization preserves finite type. Every nonempty affine chart of the fibre contains the generic point and is obtained in the same way, so $V_\\eta$ is nonempty, integral, and locally of finite type over $K$. Its generic point is the generic point of $V$, its function field is $k(V)$ because $\\operatorname{Frac}(S^{-1}B)=\\operatorname{Frac}(B)$, and the fibre projection identifies its points and specialization chains with points and chains in $V$ over $\\eta$. The statement [lem-trf-generic-fibre-closed-chain] therefore supplies a closed point $\\xi_0$ over $\\eta$ and a chain of $r$ specializations ending at $\\xi_0$, with finite residue extension over $k(U)$.",
+   "uses": [
+    "lem-trf-generic-fibre-closed-chain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JX, equality proof: generic fibre and Jacobson closed point paragraph"
+   }
+  },
+  {
+   "text": "Lift the base chain successively. Since $f$ is a closed map, [lem-trf-closed-map-specializing] gives, from a point over $\\overline\\xi_i$, a specialization to a point over $\\overline\\xi_{i+1}$. Starting with $\\xi_0$ and iterating produces $\\xi_0\\leadsto\\xi_1\\leadsto\\cdots\\leadsto\\xi_d$ with $f(\\xi_i)=\\overline\\xi_i$.",
+   "uses": [
+    "lem-trf-closed-map-specializing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JX, equality proof, sentence “as f is closed specializations lift along f”"
+   }
+  },
+  {
+   "text": "Concatenate the generic-fibre chain of length $r$ with the lifted base chain of length $d$. This is a chain in $V$ of length $r+d$, so $\\dim V\\geq r+d$. Taking the supremum over chains beginning at the generic point of the integral scheme $U$ gives $\\dim V\\geq\\dim U+r$, proving equality. Empty schemes do not occur because integrality makes both schemes nonempty.",
+   "uses": [
+    "lem-trf-generic-fibre-closed-chain",
+    "lem-trf-closed-map-specializing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JX, equality proof, concatenation of specialization chains"
+   }
+  },
+  {
+   "text": "If $f$ is proper, [pqf-lem-proper-closed-map] makes its underlying map closed. If in addition $k(U)\\subset k(V)$ is finite, then its transcendence degree is zero by the definition of transcendence degree for algebraic extensions. Substituting $r=0$ in the equality gives $\\dim V=\\dim U$.",
+   "uses": [
+    "pqf-lem-proper-closed-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JX, parenthetical proper case and finite generic extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-trf-closed-map-specializing",
+  "lem-trf-generic-fibre-closed-chain",
+  "lem-trf-local-dimension-formula",
+  "pqf-lem-proper-closed-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02JX, lemma-alteration-dimension and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +119,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-plurinodal-proper-hypercover",
@@ -62,7 +131,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), normal-cone specialization: Orgogozo modification input, Proposition 3.3.1 / Lemma 3.3.2; preservation of base dimension under the finite normalization and subsequent integral alterations, and finiteness of dimensions of component models.",
+   "place": "Proof (1)--(2), normal-cone specialization: preservation of base dimension under the finite normalization and subsequent integral alterations.",
    "via": [
     "lem-trf-plurinodal-proper-hypercover",
     "lem-trf-orgogozo-good-modification",
@@ -73,5 +142,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-closed-dominant-dimension",
+  "worker": "stage1",
+  "summary": "Split Tag 02JX into the local dimension inequality, the generic-fibre closed-point chain, successive specialization lifting under a closed map, and the concatenation argument. The proper finite-function-field specialization is then immediate from the existing proper-closed-map node and transcendence degree zero for finite extensions. No Lean declaration with this statement was found.",
+  "blueprint": "Realizes the ancestor proof clause “preservation of base dimension under the finite normalization and subsequent integral alterations” by the five steps above.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-c958ca1af",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-c958ca1af (reviewer sub-agent of L); spot-checked: I read all of it: the item, the three new nodes, every cited node's statement, unit sk-i-curve-zero, Stacks morphisms.tex Tag 02JX (lemma-alteration-dimension, the whole proof) and Tag 02JU (lemma-dimension-formula), topology.tex Tag 0066, and Mathlib Inseparable.lean lines 354 and 400. The item matches the four 02JX hypotheses exactly, gives equality only for a closed f, and adds the proper, finite-extension case; it is not weakened. Small cases tested: P^1_Z over Spec Z gives 2=1+1; Spec Q over Spec Z_(p) gives a strict inequality (that map is not closed); r=0. Step 1 is 02JX paragraph 1, using the Mathlib-leaf stalk/chain node and the 02JU node. Step 2 writes out the generic-fibre check: A->B is injective by dominance, and S^{-1}B is a nonzero domain of finite type with the same fraction field. Step 3 is 0066(1). Step 4 is an elementary concatenation, and the points are distinct because they lie over distinct base points. Step 5 uses pqf-lem-proper-closed-map, whose Lean is closed in slopmaster2, so it counts as a tool rather than a route; there are no tool_uses. Duplicate search (rg over dag/nodes for dimension formula, 02IJ/02JU/00O*, and specialization lifting): the closest node, lem-exc-dimension-formula-universally-catenary-finite-type-domain, is the equality for a universally catenary ring, so no duplicate. No new node restates a clause of the item. Fixes made: (1) lem-trf-closed-map-specializing had an unclosed $ and \\prime in its TeX, cited source morphisms.tex instead of topology.tex for 0066, and cited a Krull-dimension definition for 'topological space' (B3/B4/B5). I fixed the statement, set stmt_deps to [], and pointed source and proof_origin to topology.tex 0066(1). The Mathlib match IsClosedMap.specializingMap at Inseparable.lean:400 is exact. (2) lem-trf-generic-fibre-closed-chain now states that the chain has distinct points, which step 4 needs to count its length; the statement is still true (Jacobson closed point, Nullstellensatz, 00OS). The item is unchanged.; 2 file(s) fixed by the reviewer"
  }
 }

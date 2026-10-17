@@ -2,7 +2,7 @@
  "id": "lem-trf-point-family-conservative",
  "kind": "statement",
  "title": "Section separation characterizes a conservative family of points",
- "statement": "Let $\\mathcal C$ be a site and let $\\{p_i:\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C)\\}_{i\\in I}$ be a family of points [def-trf-geometric-morphism]. For each $i$, let $u_i:\\mathcal C\\to\\mathbf{Set}$ be the functor $u_i(U)=p_i^{-1}(h_U^\\#)$, where $h_U=\\operatorname{Hom}_{\\mathcal C}(-,U)$ and $(-)^\\#$ is sheafification [def-weil-pbc-sheafification], and identify $p_i^{-1}\\mathcal F$ with its stalk $\\mathcal F_{p_i}=\\varinjlim_{(U,x)}\\mathcal F(U)$; write $[U,x,t]_{p_i}$ for the class represented by $x\\in u_i(U)$ and $t\\in\\mathcal F(U)$. If for every sheaf of sets $\\mathcal F$, every object $U$ of $\\mathcal C$, and every pair $s\\ne s'$ in $\\mathcal F(U)$ there are $i\\in I$ and $x\\in u_i(U)$ with $[U,x,s]_{p_i}\\ne[U,x,s']_{p_i}$, then the inverse-image functors $p_i^{-1}$ jointly reflect isomorphisms of sheaves: whenever every $p_i^{-1}(a)$ is a bijection, a morphism $a$ is an isomorphism.",
+ "statement": "Let $\\mathcal C$ be a site and let $\\{p_i:\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C)\\}_{i\\in I}$ be a family of points [def-trf-geometric-morphism]. For each $i$, let $u_i:\\mathcal C\\to\\mathbf{Set}$ be the functor $u_i(U)=p_i^{-1}(h_U^\\#)$, where $h_U=\\operatorname{Hom}_{\\mathcal C}(-,U)$ and $(-)^\\#$ is sheafification [def-weil-pbc-sheafification]. For a sheaf of sets $\\mathcal F$, an object $U$, a section $t\\in\\mathcal F(U)$ and $x\\in u_i(U)$, let $\\tilde t:h_U^\\#\\to\\mathcal F$ be the morphism corresponding to $t$ (the Yoneda map $h_U\\to\\mathcal F$, $\\phi\\mapsto\\mathcal F(\\phi)(t)$, extended through the sheafification), and write $[U,x,t]_{p_i}=p_i^{-1}(\\tilde t)(x)\\in p_i^{-1}\\mathcal F$; this is the image of the class of the triple $(U,x,t)$ in the stalk $\\varinjlim_{(U,x)}\\mathcal F(U)$ [def-weil-pbc-category-colimit] under the canonical comparison map to $p_i^{-1}\\mathcal F$. If for every sheaf of sets $\\mathcal F$, every object $U$ of $\\mathcal C$, and every pair $s\\ne s'$ in $\\mathcal F(U)$ there are $i\\in I$ and $x\\in u_i(U)$ with $[U,x,s]_{p_i}\\ne[U,x,s']_{p_i}$, then the inverse-image functors $p_i^{-1}$ jointly reflect isomorphisms of sheaves: whenever every $p_i^{-1}(a)$ is a bijection, a morphism $a$ is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/sites.tex",
   "place": "Tags 00YK (Definition definition-enough-points) and 00YM (Lemma lemma-enough), using the stalk identifications of Tags 00Y6 and 00Y8."
@@ -13,9 +13,67 @@
   "def-weil-pbc-sheafification",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $a:\\mathcal F\\to\\mathcal G$ be a morphism whose inverse image under every $p_i$ is a bijection. For $t\\in\\mathcal F(U)$ one has $a\\circ\\tilde t=\\widetilde{a_U(t)}$: both restrict along $h_U\\to h_U^\\#$ to the Yoneda map of $a_U(t)$ (naturality of $a$), so they agree by the uniqueness in the universal property of sheafification [def-weil-pbc-sheafification]. Hence $p_i^{-1}(a)([U,x,t]_{p_i})=p_i^{-1}(a\\circ\\tilde t)(x)=[U,x,a_U(t)]_{p_i}$. If sections $s,s'\\in\\mathcal F(U)$ satisfy $a_U(s)=a_U(s')$, then they cannot be distinct: if they were, the section-separation hypothesis would give an index $i$ and $x\\in u_i(U)$ with $[U,x,s]_{p_i}\\ne[U,x,s']_{p_i}$, while $p_i^{-1}(a)$ sends both to $[U,x,a_U(s)]_{p_i}=[U,x,a_U(s')]_{p_i}$, contradicting injectivity of $p_i^{-1}(a)$. Thus $a_U$ is injective for every $U$; since morphisms of sheaves are natural transformations, a morphism with injective components is a monomorphism of $\\operatorname{Sh}(\\mathcal C)$.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YM (lemma-enough), converse proof: injectivity is an immediate consequence of the section-separation condition"
+   }
+  },
+  {
+   "text": "Form the pushout $P=\\mathcal G\\amalg_{\\mathcal F}\\mathcal G$ in $\\operatorname{Sh}(\\mathcal C)$, with coprojections $j_1,j_2:\\mathcal G\\rightrightarrows P$: take the sectionwise pushout of presheaves of sets and sheafify; since sheafification is left adjoint to the inclusion [def-weil-pbc-sheafification], maps from the sheafification to a sheaf are the same as compatible pairs of maps from $\\mathcal G$, so this is a pushout in sheaves. Each $p_i^{-1}$ is a left adjoint in the geometric-morphism datum [def-trf-geometric-morphism], so it carries this pushout to a pushout $p_i^{-1}P$ of $p_i^{-1}(a)$ along itself with coprojections $p_i^{-1}(j_1),p_i^{-1}(j_2)$ [lem-weil-pbc-left-adjoint-preserves-colimits]. A bijection is an epimorphism of sets, so by the cokernel-pair criterion [lem-galois-epi-iff-cokernel-pair] $p_i^{-1}(j_1)=p_i^{-1}(j_2)$ for every $i$. If $j_1\\ne j_2$, there would be an object $U$ and $g\\in\\mathcal G(U)$ with $j_{1,U}(g)\\ne j_{2,U}(g)$ in $P(U)$. The section-separation hypothesis applied to $P$ gives $i$ and $x\\in u_i(U)$ with $[U,x,j_{1,U}(g)]_{p_i}\\ne[U,x,j_{2,U}(g)]_{p_i}$; but as in Step 1, $[U,x,j_{k,U}(g)]_{p_i}=p_i^{-1}(j_k)([U,x,g]_{p_i})$ for $k=1,2$, and these agree. Therefore $j_1=j_2$.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-trf-geometric-morphism",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-galois-epi-iff-cokernel-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YM (lemma-enough), converse proof: use the pushout $\\mathcal G\\amalg_{\\mathcal F}\\mathcal G$ and stalkwise equality of its two maps to $\\mathcal G$"
+   }
+  },
+  {
+   "text": "The cokernel-pair characterization of epimorphisms says that a morphism is an epimorphism exactly when the two coprojections into its pushout with itself are equal. Applying it to $a$ and the pushout above, the equality $j_1=j_2$ proves that $a$ is an epimorphism.",
+   "uses": [
+    "lem-galois-epi-iff-cokernel-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YM (lemma-enough), converse proof, citing Categories Lemma 08LR (lemma-characterize-mono-epi)"
+   }
+  },
+  {
+   "text": "We have shown that $a$ is both monic and epic. A monomorphism and epimorphism of sheaves of sets is an isomorphism by the balancedness statement for $\\operatorname{Sh}(\\mathcal C)$, namely [lem-weil-pbc-sheaf-sets-mono-epi-iso]. Thus every morphism whose inverse images under all $p_i$ are bijections is an isomorphism, which is exactly joint reflection of isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-sheaf-sets-mono-epi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YM (lemma-enough), final step using Sites Lemma 00WN (lemma-mono-epi-sheaves)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "def-trf-geometric-morphism",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-galois-epi-iff-cokernel-pair",
+  "lem-weil-pbc-sheaf-sets-mono-epi-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YM (lemma-enough), converse proof from the section-separation criterion through the pushout/cokernel-pair test and mono-plus-epi criterion"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +102,66 @@
    "results": "8 hits including TopCat.Presheaf.Sheafify.isGerm, stalkToFiber_injective and germ lemmas; none states the arbitrary-site criterion",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a family of points of a site is conservative when distinct sheaf sections are separated in a stalk",
+   "results": "8 hits: CoversTop.sections_ext, Presieve.IsSeparated, Presheaf.IsSeparated, isSeparated_of_isSheaf, Plus.meqOfSep, Sheaf.isSeparated and related sheafification lemmas; no arbitrary-site point criterion",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SheafOfTypes.balanced, CategoryTheory.epi_iff_inl_eq_inr",
+   "results": "no hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma-enough|conservative.*stalk|epi_iff_inl_eq_inr (Mathlib/CategoryTheory/Sites)",
+   "results": "no hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a family of points of a site is conservative when distinct sheaf sections are separated in a stalk",
+   "results": "8 hits: TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective, section_ext, mono_iff_stalk_mono and separated-sheaf lemmas; no arbitrary-site criterion",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "site points jointly conservative iff stalk germs separate unequal sections",
+   "results": "8 hits including Presheaf.IsSeparated, stalk_hom_ext and stalk injectivity lemmas; no arbitrary-site criterion",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SheafOfTypes.balanced",
+   "results": "CategoryTheory.SheafOfTypes.balanced in Mathlib/CategoryTheory/Sites/LeftExact; generic balancedness only",
+   "date": "2026-10-18",
+   "verdict": "generalization: balanced sheaf category, not point-family criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "balanced|epi_iff_inl_eq_inr|jointly.*reflect (Mathlib/CategoryTheory)",
+   "results": "25 hits including SheafOfTypes.balanced and JointlyReflectIsomorphisms infrastructure; no arbitrary-site section criterion",
+   "date": "2026-10-18",
+   "verdict": "generalization: generic balancedness/conservativity infrastructure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "site points jointly conservative iff stalk germs separate unequal sections",
+   "results": "8 hits including TopCat.Presheaf germ and stalk-hom-ext lemmas; no arbitrary-site criterion",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finitary-site-enough-points",
@@ -71,5 +185,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-point-family-conservative",
+  "worker": "stage1",
+  "summary": "Split the section-separation criterion into four steps: section separation forces injectivity on every object, the pushout coprojections are equal after using preservation of pushouts by each inverse-image left adjoint and the same separation test, the cokernel-pair criterion gives epimorphy, and the sheaf mono-plus-epi criterion gives an isomorphism. No new nodes or attachments were needed; the existing stalk-colimit identification is part of the item statement.",
+  "blueprint": "The steps realize the historical pointwise-conservativity route in the ancestor lem-trf-local-term-locality: Tags 00YK/00YM define conservative point families and prove the section-separation converse, while the stalk identifications are supplied in the item statement."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-475e089ae",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-475e089ae (reviewer sub-agent of L); spot-checked: FIX: I read the whole item and its source, and repaired two small faults in the item; no new or dropped nodes. Source checks: Stacks sites.tex 00Y6, 00Y8, 00YA (including the comparison map c in its proof of (2)), 00YK, lemma-exactness-stalks, and both directions of 00YM. The item is the 00YM converse for topos points with u_i(U)=p_i^{-1}(h_U^#), as in 00YA(2). No hypothesis was added, nothing is weakened, there is no base-change morphism or coefficient category, and no SGA source is cited. Steps: 1 (injectivity) and 2 (cokernel-pair coprojections equal, using separation applied to P) follow 00YM; 3 uses lem-galois-epi-iff-cokernel-pair (Categories 08LR); 4 uses lem-weil-pbc-sheaf-sets-mono-epi-iso (Sites 00WN). Fault 1 (B2/C1): the statement said 'identify p^{-1}F with its stalk colim F(U)', which assumes the 00YA bijection for an arbitrary site with no node behind it (lem-trf-site-point-reconstruction-sets needs finite limits) and never fixes which identification is meant. I now define [U,x,t]_{p_i} := p_i^{-1}(t~)(x), the image of the stalk triple under the canonical comparison map; the source place records that 00YA makes it bijective, so this is literally the 00YM condition. The proof never needs bijectivity, and the parent lem-trf-finitary-site-enough-points step 3 still applies, since it gets distinctness through the same canonical identification. Step 1 now writes out naturality (a∘t~ is the extension of a_U(t), by uniqueness in sheafification) and uses def-weil-pbc-sheafification. Fault 2 (C1): step 2 used 'left adjoints preserve pushouts' with no node; it now cites the Mathlib leaf lem-weil-pbc-left-adjoint-preserves-colimits, cites lem-galois-epi-iff-cokernel-pair for the equal coprojections in Set, and builds the sheaf pushout by sheafification. proof_deps is updated and there is no cycle. Edge cases: empty I forces Sh(C) to be trivial, so the claim holds; the identity and one-object site are immediate. Route: only definitions and Mathlib leaves, so no tool_uses. An rg search for duplicates (00YM/00YK/00YA, site-point nodes) found none. The worker's Mathlib searches could not be rerun because this machine has no search tools.; 1 file(s) fixed by the reviewer"
  }
 }

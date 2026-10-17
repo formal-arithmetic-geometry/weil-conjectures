@@ -10,11 +10,111 @@
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-size-convention",
-  "def-trf-geometric-morphism"
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the universes of [def-weil-size-convention] for all index sets and colimits. For any directed diagram of sets $(A_i)$, its colimit [def-weil-pbc-category-colimit] can be constructed from pairs $(i,a)$, $a\\in A_i$, by the relation $(i,a)\\sim(j,b)$ if their images agree at some $k\\geq i,j$. This is an equivalence relation: symmetry and reflexivity are immediate, and transitivity follows by moving the two witnessing equalities to a common upper bound. A map out of this quotient is exactly a family of maps $A_i\\to E$ compatible with transitions, proving its colimit universal property. Thus every colimit class has a representative, and equality is witnessed at a common later index. These observations apply to both $\\operatorname{Hom}(U_i,W)$, with precomposition transitions, and $\\mathcal F(U_i)$, with restriction transitions.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX (section-directed-colimits); the quotient construction and universal property of directed colimits of sets"
+   }
+  },
+  {
+   "text": "For $h:W\\to W'$, define $u(h)([i,a])=[i,h\\circ a]$. Composition and identities follow on representatives, and postcomposition commutes with the precomposition transitions, so this is a functor. If $D$ is a finite diagram in $\\mathcal C$, the limit universal property gives $\\operatorname{Hom}(U_i,\\lim D)\\cong\\lim_j\\operatorname{Hom}(U_i,D_j)$, naturally in $i$. By [lem-weil-pbc-filtered-colimits-commute-finite-limits], taking the colimit over the nonempty directed poset $I$ gives\n$$u(\\lim D)\\cong\\varinjlim_i\\lim_j\\operatorname{Hom}(U_i,D_j)\\cong\\lim_j u(D_j).$$\nThese are the canonical comparison maps. Hence $u$ preserves finite limits, including the terminal object and all fibre products.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002W (lemma-directed-commutes); applied to the representable finite-limit comparison used in Sites Tag 00YC"
+   }
+  },
+  {
+   "text": "For a sheaf of sets $\\mathcal F$, put $S(\\mathcal F)=\\varinjlim_i\\mathcal F(U_i)$, and for a sheaf morphism $a:\\mathcal F\\to\\mathcal G$ put $S(a)([i,t])=[i,a_{U_i}(t)]$. Naturality of $a$ respects transitions, so $S$ is a functor. For a finite diagram $(\\mathcal F_j)$, [lem-weil-pbc-presheaf-finite-limits-objectwise], clauses (1) and (2), identify $(\\lim_j\\mathcal F_j)(U_i)$ with $\\lim_j\\mathcal F_j(U_i)$. Apply [lem-weil-pbc-filtered-colimits-commute-finite-limits] to obtain\n$$S(\\lim_j\\mathcal F_j)\\cong\\varinjlim_i\\lim_j\\mathcal F_j(U_i)\\cong\\lim_j S(\\mathcal F_j).$$\nThus $S$ preserves finite limits.",
+   "uses": [
+    "lem-weil-pbc-presheaf-finite-limits-objectwise",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00W2 (lemma-limit-sheaf) and 00YC (proposition-point-limits), with Categories Tag 002W"
+   }
+  },
+  {
+   "text": "For a covering $\\{W_k\\to W\\}_{k\\in K}$, the stated hypothesis says that each $x\\in u(W)$ is the image of some $y\\in u(W_k)$. This is precisely joint surjectivity, and the maps are those given by postcomposition in Step 2. If the covering is empty, the hypothesis forces $u(W)=\\varnothing$, so it also gives the required empty jointly surjective family. Step 2 additionally gives the pullback bijections $u(W_k\\times_W V)\\cong u(W_k)\\times_{u(W)}u(V)$ for every $V\\to W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YC (proposition-point-limits), conditions (1) and (2), and Tag 00Y5 (definition-point), conditions (1) and (2)"
+   }
+  },
+  {
+   "text": "Define the neighbourhood category $\\mathcal N_u$ to have objects $(W,x)$ with $x\\in u(W)$ and arrows $h:(V,y)\\to(W,x)$ with $u(h)(y)=x$. Its stalk colimit $T(\\mathcal F)=\\varinjlim_{\\mathcal N_u^{\\mathrm{op}}}\\mathcal F(W)$ [def-weil-pbc-category-colimit] consists of triples $(W,x,t)$ with relations $(W,x,t)\\sim(V,y,\\mathcal F(h)(t))$. Define\n$$\\alpha:T(\\mathcal F)\\to S(\\mathcal F),\\qquad [W,x,t]\\mapsto[i,\\mathcal F(a)(t)],\\quad x=[i,a:U_i\\to W].$$\nIf $a$ and $a'$ represent the same $x$, Step 1 gives a common $j$ with $a f_{ji}=a'f_{ji'}$; applying $\\mathcal F$ makes the two output classes equal. For a pointed arrow $h:(V,y)\\to(W,x)$, represent $y$ by $b:U_i\\to V$; then $x=[i,hb]$ and $\\mathcal F(b)\\mathcal F(h)=\\mathcal F(hb)$ verifies the stalk relation. In the other direction set $\\beta([i,t])=[U_i,[i,\\mathrm{id}_{U_i}],t]$. For $j\\geq i$, the arrow $f_{ji}$ is pointed because $[j,f_{ji}]=[i,\\mathrm{id}]$, so $\\beta$ respects transitions. We have $\\alpha\\beta=1$; the pointed arrow $a:(U_i,[i,\\mathrm{id}])\\to(W,x)$ gives $\\beta\\alpha[W,x,t]=[W,x,t]$. Both formulas commute with sheaf morphisms. This proves the canonical natural isomorphism $T\\cong S$ without a cofinality theorem.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "The neighbourhood category and equation-stalk immediately before Tag 00Y5 (definition-point); explicit comparison for the inverse system in the proof of Tag 00YQ (proposition-criterion-points)"
+   }
+  },
+  {
+   "text": "The three clauses defining a site point (Tag 00Y5, definition-point) are now verified: joint surjectivity over coverings is Step 4; the covering pullback comparisons are bijections by Steps 2 and 4; and the associated stalk functor $T$ preserves finite limits by Steps 3 and 5. This is the point whose existence is expressed by Tag 00YC. We next construct its geometric morphism explicitly, rather than using a further point-construction lemma.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00Y5 (definition-point) and 00YC (proposition-point-limits), converse implication"
+   }
+  },
+  {
+   "text": "For a set $E$, put $R(E)(W)=\\operatorname{Map}(u(W),E)$, with restriction along $h:V\\to W$ given by precomposition with $u(h)$, and with a set map $E\\to E'$ acting by postcomposition. We verify the sheaf equalizer condition [def-weil-pbc-sites-and-cohomology]. Given compatible functions $q_k:u(W_k)\\to E$ on a covering, choose, for $x\\in u(W)$, a lift $y\\in u(W_k)$ using Step 4 and assign $q(x)=q_k(y)$. If $y'\\in u(W_l)$ is another lift, Step 2 lifts $(y,y')$ to $u(W_k\\times_W W_l)$; compatibility of the functions there gives $q_k(y)=q_l(y')$. Thus the value is independent of the lift and defines a function whose restrictions are the $q_k$. It is unique by joint surjectivity. For an empty cover, $u(W)=\\varnothing$ and there is exactly one function. Hence $R(E)$ is a sheaf, and $R$ is a functor $\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C)$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y8 (lemma-point-pushforward-sheaf), proof of (1), with its sheaf gluing written out"
+   }
+  },
+  {
+   "text": "A function $\\phi:T(\\mathcal F)\\to E$ is, by the colimit universal property [def-weil-pbc-category-colimit], precisely a family $\\phi_{W,x}:\\mathcal F(W)\\to E$ satisfying $\\phi_{V,y}(\\mathcal F(h)(t))=\\phi_{W,x}(t)$ for each pointed arrow $h:(V,y)\\to(W,x)$. Curry this family to $\\tau_W(t)(x)=\\phi_{W,x}(t)$. For any arrow $h:V\\to W$ and $y\\in u(V)$, the pointed arrow to $(W,u(h)y)$ makes that identity exactly\n$$\\tau_V(\\mathcal F(h)t)(y)=\\tau_W(t)(u(h)y),$$\nwhich is naturality of $\\tau:\\mathcal F\\to R(E)$. Evaluation at $x$ reverses currying, so these are inverse bijections. Precomposing a sheaf morphism changes $t$ by its section map in both formulas, and postcomposing $E\\to E'$ changes their output in the same way. Thus they are natural in both variables and give $T\\dashv R$, and Step 5 gives $S\\dashv R$. With Step 3, this is a geometric-morphism datum [def-trf-geometric-morphism] from $\\mathbf{Set}$ to $\\operatorname{Sh}(\\mathcal C)$, with $p^{-1}=S$ and $p_*=R$. Its inverse image therefore has the claimed canonical formula $p^{-1}\\mathcal F=\\varinjlim_i\\mathcal F(U_i)$. Since $T$ is the stalk and $R(E)(W)=\\operatorname{Map}(u(W),E)$, this is exactly the point-to-topos construction of Tag 00YA(1).",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00Y7 (lemma-adjoint-point-push-stalk), 00Y8 (lemma-point-pushforward-sheaf), and 00YA (lemma-point-site-topos), part (1); currying and its naturality written explicitly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-presheaf-finite-limits-objectwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00Y5, 00Y7, 00Y8, 00YA(1), 00YC and the inverse-system colimits preceding 00YQ; Categories 002W and 04AX. The quotient, comparison, gluing and adjunction computations are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,10 +143,59 @@
    "results": "8 hits including CategoryTheory.GrothendieckTopology.Point, Point.toPresheafFiber_jointly_surjective and Point.isCofiltered; no exact criterion with the inverse-system construction",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "construct a site point from a directed inverse system of objects whose colimit Hom functor lifts every covering element",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.Point, CategoryTheory.GrothendieckTopology.liftToDiagramLimitObj, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_jointly_surjective, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_jointly_surjective₂, CategoryTheory.GrothendieckTopology.Point.isCofiltered, CategoryTheory.GrothendieckTopology.Point.instHasColimitsOfShapeOppositeElementsFiber, CategoryTheory.GrothendieckTopology.Point.presheafFiber, CategoryTheory.GrothendieckTopology.plusObj",
+   "date": "2026-10-17",
+   "verdict": "candidate only: intrinsic Point constructors and fibre functors; no one-line match for the full lifting hypothesis, finite-limit assertion and Stacks geometric-morphism construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.ofIsCofiltered, Point.presheafFiberOfIsCofilteredCocone",
+   "results": "0 hits; ; loogle: unknown identifier 'Point.presheafFiberOfIsCofilteredCocone'",
+   "date": "2026-10-17",
+   "verdict": "candidate only: intrinsic Point constructors and fibre functors; no one-line match for the full lifting hypothesis, finite-limit assertion and Stacks geometric-morphism construction"
+  },
+  {
+   "tool": "grep",
+   "query": "ofIsCofiltered|presheafFiberOfIsCofilteredCocone|colimitLimitToLimitColimit_isIso",
+   "results": "0 hits; ; subdirectory: Mathlib/CategoryTheory/Sites/Point",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: the subdirectory argument incorrectly repeated Mathlib/; the corrected grep is recorded separately"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a directed inverse system in a site gives a point whose sheaf fibre is the colimit of sections",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.Point.mk, CategoryTheory.GrothendieckTopology.Point.sheafFiber, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber, CategoryTheory.GrothendieckTopology.Point.presheafFiber, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeFunctorOppositePresheafFiber, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, CategoryTheory.Sheaf.createsColimitOfIsSheaf, TopCat.isSheaf_of_isLimit",
+   "date": "2026-10-17",
+   "verdict": "candidate only: intrinsic Point constructors and fibre functors; no one-line match for the full lifting hypothesis, finite-limit assertion and Stacks geometric-morphism construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cofiltered diagram of objects construction of site point ofIsCofiltered sheaf fibre colimit sections",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.Point.isCofiltered, CategoryTheory.GrothendieckTopology.Point.sheafFiber, CategoryTheory.GrothendieckTopology.Point.presheafFiber, CategoryTheory.GrothendieckTopology.Point.presheafFiberDesc, CategoryTheory.GrothendieckTopology.Point.fiber, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w_apply, CategoryTheory.GrothendieckTopology.Point.mk.inj, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_eq_iff'",
+   "date": "2026-10-17",
+   "verdict": "candidate only: intrinsic Point constructors and fibre functors; no one-line match for the full lifting hypothesis, finite-limit assertion and Stacks geometric-morphism construction"
+  },
+  {
+   "tool": "grep",
+   "query": "ofIsCofiltered|presheafFiberOfIsCofilteredCocone|sheafFiberAdjunction",
+   "results": "10 hits; Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/Map.lean, Mathlib/CategoryTheory/Sites/Point/Map.lean, Mathlib/CategoryTheory/Sites/Point/Map.lean; subdirectory: CategoryTheory/Sites/Point",
+   "date": "2026-10-17",
+   "verdict": "candidate only: intrinsic Point constructors and fibre functors; no one-line match for the full lifting hypothesis, finite-limit assertion and Stacks geometric-morphism construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ofIsCofiltered\"",
+   "results": "12 hits; CategoryTheory.instIsCofilteredCostructuredArrowProdDiagOfIsCofilteredOrEmpty, CategoryTheory.GrothendieckTopology.Point.ofIsCofiltered.instHasColimitsOfShapeOppositeType, CategoryTheory.GrothendieckTopology.Point.ofIsCofiltered.fiber, CategoryTheory.GrothendieckTopology.Point.ofIsCofiltered.functor, CategoryTheory.GrothendieckTopology.Point.ofIsCofiltered.instInitiallySmallElementsFiberOfIsCofiltered, CategoryTheory.GrothendieckTopology.Point.ofIsCofiltered.instIsCofilteredElementsFiber, CategoryTheory.GrothendieckTopology.Point.ofIsCofiltered.fiberMk, CategoryTheory.GrothendieckTopology.Point.ofIsCofiltered.instInitialElementsFiberFunctorOfIsCofiltered",
+   "date": "2026-10-17",
+   "verdict": "candidate only: intrinsic Point constructors and fibre functors; no one-line match for the full lifting hypothesis, finite-limit assertion and Stacks geometric-morphism construction"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finitary-site-enough-points",
@@ -58,7 +207,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The historical proof route for pointwise conservativity: the finite-limit and finite-refinement criterion for enough points in the point-construction part of the local-term argument.",
+   "place": "Current main-20261015 lem-trf-local-term-locality.proof.md, paragraph (1) and (2): \"proved by specialization to the normal cone of Z (his §§1.3–1.4 and 2.1)\"; via the recorded oriented-nearby-cycle ancestry, this node supplies the inverse-system point construction in step 2 of lem-trf-finitary-site-enough-points (Stacks 00YC/00YA, within 00YQ).",
    "via": [
     "lem-trf-finitary-site-enough-points",
     "lem-trf-oriented-product-points-conservative",
@@ -70,5 +219,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-inverse-system-site-point",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim. Wrote the directed-colimit quotient and the canonical inverse maps between the inverse-system colimit and the neighbourhood stalk; applied the two existing Mathlib leaves for filtered-colimit/finite-limit interchange and sectionwise finite limits; proved the skyscraper sheaf condition by explicit lifting and gluing, and constructed the natural stalk/skyscraper adjunction by currying. No new nodes, no source theorem cited in lieu of proving the point construction, and no reconstruction citation with a different fibre functor.",
+  "blueprint": "The historical pointwise-conservativity branch of the current main-20261015 normal-cone argument: the inverse-system point construction invoked by step 2 of lem-trf-finitary-site-enough-points, including 00YC, 00YA(1), and its canonical I-colimit stalk comparison.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-f818aa912",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-f818aa912 (reviewer sub-agent of L); spot-checked: I read the whole item and all 8 steps against Stacks sites.tex: 00Y5 definition-point, 00YA lemma-point-site-topos, 00YC proposition-point-limits with remark 00YD, the opening of section 00YN (u(V)=colim Hom(U_i,V), F_p=colim F(U_i)) and 00YQ. I also read the full statements of all six cited nodes. The statement keeps every hypothesis of the source (small site with finite limits, nonempty directed inverse system, lifting for every covering) and is not weakened. It has no base-change morphism or coefficient category. Step checks: (1) the directed-colimit quotient is correct. (2) Hom into a limit plus the filtered-colimit Mathlib leaf, used over the filtered index (I,<=), shows u preserves finite limits, including the terminal object because I is nonempty. (3) The objectwise finite-limit leaf (1),(2) plus the same leaf shows S preserves finite limits. (4) Joint surjectivity is the hypothesis; an empty cover forces u(W) empty. (5) I checked the explicit inverse maps between the neighbourhood stalk and colim F(U_i): independence of representatives, pointed arrows, f_ji pointed, a:(U_i,[i,id])->(W,x) pointed; both composites are identities. (6) All three clauses of 00Y5 hold. (7) Map(u(-),E) is a sheaf by lifting pairs through u(W_k x_W W_l); empty covers work. (8) Currying gives stalk -| R, so with step 3 this is the def-trf-geometric-morphism datum, matching 00YA(1). Edge cases tested: one-element I, a terminal one-object site, empty covers, transition maps that are not monomorphisms. No new nodes, nothing restated or circular. Duplicate search by rg (00YC/00YA/skyscraper/point of the site): the reconstruction and fibre nodes start from a given point, and the geometric-stalk nodes are étale-specific; none is a duplicate. Mathlib Point.ofIsCofiltered is a candidate only (stagewise sieve hypothesis, Mathlib's own Point structure, no Stacks geometric morphism), not a one-line leaf. All cited nodes are definitions or Mathlib leaves, so the route stays in sk-i-curve-zero and tool_uses is empty. No SGA source cited. One cosmetic remark, not repaired: the title says finite-cover lifting while the hypothesis covers all coverings. No fixes written."
  }
 }
