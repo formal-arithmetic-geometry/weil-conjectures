@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-final-rationality",
-   "place": "Current main-20261015 theorem and unit sk-thm-weil1: the normalized integral polynomial presentation for every finite-type scheme; this comparator wrapper drops the Euler-product clause.",
+   "place": "Current main-20261015 sk-thm-weil1, first conclusion: A,B in Z[T], B(0)=1, B(T) Z(X_0,T)=A(T) for every finite-type scheme; comparator wrapper retaining this conclusion.",
    "via": []
   },
   "same_as": [
@@ -15,7 +15,7 @@
  },
  "kind": "statement",
  "title": "WeilConjectures.zetaSeries_rational (Dwork rationality)",
- "statement": "Let k be a finite field and f:X->Spec k a morphism of schemes that is locally of finite type and quasi-compact [def-weil-finite-type-morphism, def-weil-scheme-morphism-properties]. For a finite field k with q=#k elements, a scheme X and a morphism f:X->Spec k, the zeta series Z(X,t)=f.zetaSeries in Q[[t]] [sk-def-zeta] is Z(X,t)=exp(sum_{n>=1} N_n t^n/n), substituted into the formal exponential series, where N_n=f.pointCount n is the number of k-morphisms Spec F_{q^n} -> X (morphisms g with g followed by f equal to the map induced by k -> F_{q^n}), F_{q^n} being the model FiniteField.galoisExtension k n = the splitting field over k of X^{q^n}-X, and N_n=0 (junk value) if this set is infinite. A polynomial with integer coefficients is viewed in Q[[t]] through its coefficientwise image in Q[t] [def-weil-coefficientwise-ring-hom-map, def-weil-polynomial-as-power-series]. Then there are polynomials P,Q in Z[t] [def-weil-polynomial-ring] with constant coefficient Q(0)=1 [def-weil-polynomial-coefficient] such that Z(X,t)*Q = P in Q[[t]] [def-weil-formal-power-series]. No smoothness, properness or separatedness is assumed.",
+ "statement": "Let $k$ be a finite field with $q=\\#k$ elements, let $X$ be a scheme, and let $f:X\\to\\operatorname{Spec}k$ be locally of finite type and quasi-compact [def-weil-finite-type-morphism, def-weil-scheme-morphism-properties]. For $n\\geq1$, let $F_{q^n}=\\operatorname{FiniteField.galoisExtension}(k,n)$ be the splitting field over $k$ of $U^{q^n}-U$. Let $N_n=f.\\mathrm{pointCount}(n)$ be the number of $k$-morphisms $\\operatorname{Spec}F_{q^n}\\to X$, namely morphisms whose composite with $f$ is the map induced by $k\\to F_{q^n}$, with value $0$ if this set is infinite. Define $Z(X,t)=f.\\mathrm{zetaSeries}=\\exp(\\sum_{n\\geq1}N_nt^n/n)\\in\\mathbf Q[[t]]$ using substitution into the formal exponential [sk-def-zeta, def-weil-formal-power-series]. An integral polynomial is viewed in $\\mathbf Q[[t]]$ by first mapping its coefficients to $\\mathbf Q[t]$ and then taking its power series with the same coefficients [def-weil-coefficientwise-ring-hom-map, def-weil-polynomial-as-power-series]. Then there are $P,Q\\in\\mathbf Z[t]$ [def-weil-polynomial-ring] with $Q(0)=1$ [def-weil-polynomial-coefficient] such that $Z(X,t)Q(t)=P(t)$ in $\\mathbf Q[[t]]$. No smoothness, properness or separatedness is assumed.",
  "source": {
   "document": "lean/Comparator/Weil/Challenge.lean",
   "place": "WeilConjectures.zetaSeries_rational"
@@ -30,8 +30,40 @@
   "def-weil-coefficientwise-ring-hom-map",
   "def-weil-polynomial-as-power-series"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "By [def-weil-finite-type-morphism], the hypotheses on $f:X\\to\\operatorname{Spec}k$ say exactly that $X$ is of finite type over $k$. Use $k_0=k$ and $q=\\#k$ in [sk-def-zeta], taking its stated splitting-field model of $\\mathbf F_{q^n}$. Its point set consists of the $k$-morphisms $\\operatorname{Spec}\\mathbf F_{q^n}\\to X$, with count zero when that set is infinite, exactly as in the definition of $f.\\mathrm{pointCount}$. Its series is the formal exponential of $\\sum_{n\\geq1}N_nT^n/n$. The comparator substitutes into the same exponential the series with coefficient $0$ at degree $0$ and $N_n/n$ at degree $n\\geq1$. Thus $Z(X,T)$ in the theorem below is precisely $f.\\mathrm{zetaSeries}$; the unused degree-zero splitting-field value contributes no term.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "sk-def-zeta"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-def-zeta/_section.md",
+    "place": "Splitting-field model, point-count display and exponential display; checked against lean/Comparator/Weil/Definitions.lean:67-103 and the hypotheses of Challenge.lean:80-84."
+   }
+  },
+  {
+   "text": "Apply [sk-thm-weil1] to this finite-type $k$-scheme. Its first clause gives $A,B\\in\\mathbf Z[T]$, $B(0)=1$, and $B(T)Z(X,T)=A(T)$ in $\\mathbf Q[[T]]$. Set $P=A$ and $Q=B$. By [def-weil-coefficientwise-ring-hom-map], the integral polynomials in that identity are mapped to $\\mathbf Q[T]$ along $\\mathbf Z\\to\\mathbf Q$, $c\\mapsto c\\cdot1$. By [def-weil-polynomial-as-power-series] they are then regarded as power series with the same coefficients, and $B(0)$ is their constant coefficient. Consequently the asserted equation is $f.\\mathrm{zetaSeries}\\cdot(Q.\\mathrm{map}(\\operatorname{Int.castRingHom}\\mathbf Q))=P.\\mathrm{map}(\\operatorname{Int.castRingHom}\\mathbf Q)$ in $\\mathbf Q[[T]]$, after commuting the two factors on the left. Also $Q.\\mathrm{coeff}(0)=B(0)=1$. These witnesses prove every clause of the item.",
+   "uses": [
+    "sk-thm-weil1",
+    "def-weil-coefficientwise-ring-hom-map",
+    "def-weil-polynomial-as-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-weil1/_section.md",
+    "place": "First conclusion: A,B in Z[T], B(0)=1 and B(T) Z(X_0,T)=A(T); the comparator wrapper does not require the additional Euler-product conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "sk-def-zeta",
+  "sk-thm-weil1",
+  "def-weil-coefficientwise-ring-hom-map",
+  "def-weil-polynomial-as-power-series"
+ ],
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -88,10 +120,59 @@
    "results": "25 unrelated hits from the Mathlib root; no scheme zeta rationality declaration",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "zetaSeries|Dwork|Hasse.Weil",
+   "results": "Returned: . ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The zeta function of a scheme of finite type over a finite field is a quotient of integer polynomials with denominator constant coefficient one",
+   "results": "Returned: ArithmeticFunction.zeta, NumberField.dedekindZeta, ArithmeticFunction.zetaUnit, ArithmeticFunction.zeta.termζ, ArithmeticFunction.isMultiplicative_zeta, ArithmeticFunction.zeta_mul_comm, ArithmeticFunction.coe_zeta_mul_comm, ArithmeticFunction.instInvertibleNatToArithmeticFunctionZeta. ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, PowerSeries",
+   "results": "Returned: . ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dwork rationality of the point count zeta series of any finite type scheme over a finite field",
+   "results": "Returned: Polynomial.cardPowDegreeIsAdmissible, FunctionField, FunctionField.instInhabitedFqtInfty, Polynomial.existsUnique_hilbertPoly, LSeries.term, LaurentSeries.exists_ratFunc_val_lt, LSeries.term_def, NumberField.dedekindZeta. ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointCount|rational.*zeta|zeta.*rational|scheme.*zeta",
+   "results": "Returned: Mathlib/Combinatorics/Configuration.lean, Mathlib/Combinatorics/Configuration.lean, Mathlib/Combinatorics/Configuration.lean, Mathlib/Combinatorics/Configuration.lean, Mathlib/Combinatorics/Configuration.lean. ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"zetaSeries\"",
+   "results": "Returned: . ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The formal exponential generating series of rational point counts of a finite type scheme admits integer polynomial numerator and denominator with constant term one",
+   "results": "Returned: ChevalleyThm.MvPolynomialC.numBound, Polynomial.existsUnique_hilbertPoly, DenomsClearable, ChevalleyThm.MvPolynomialC.numBound_succ, Polynomial.hilbertPoly, wittStructureInt, Polynomial.coeff_mul_invOneSubPow_eq_hilbertPoly_eval, PowerSeries.exp_pow_sum. ",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "launcher",
@@ -109,35 +190,23 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-weil1/_section.md",
-  "place": "Comparator wrapper of the existing current-blueprint theorem sk-thm-weil1, using the exact point-count definition sk-def-zeta."
+  "place": "Specialization of the existing first conclusion to the comparator notation, using sk-def-zeta for the exact series convention."
  },
  "split_report": {
   "date": "2026-10-17",
   "item": "nt-target-zeta-rational",
   "worker": "stage1",
-  "summary": "Replaced the inherited five-step split and its unnecessary new l-adic rationality node with the existing arbitrary-finite-type theorem sk-thm-weil1, which was found by searching the current blueprint. The old thm-weil-final-rationality statement is smooth proper, but its main-20261015 update and the current unit node already have the comparator generality. Two steps match the exact splitting-field zeta convention and specialize the existing normalized integral presentation. No new nodes, no Mathlib leaves, no target hypothesis or conclusion changed. Corrected the coefficientwise-map citation, since def-weil-coefficientwise-extension only defines Z[T] to Q_l[T].",
-  "blueprint": "Current sk-thm-weil1 statement and proof, normalized integral presentation; sk-def-zeta definition. This wrapper reuses the full unit statement and does not replace its downstream trace/determinant/Hankel route. The ancestry helper prints None for this launcher-created seed, while the inherited binding is thm-weil-final-rationality; that binding is retained and the discrepancy is reported.",
+  "summary": "Restored a two-step wrapper using existing sk-thm-weil1 in the same unit. Checked the exact comparator hypotheses, splitting-field point-count convention, degree-zero exponential coefficient, normalized integral witnesses and both coefficient maps. The supplied source declaration has sorry; the conditional trace-datum theorem has extra data and cannot attach. Reused every existing notion dependency, including def-weil-scheme-morphism-properties. No statement change, new nodes, or Mathlib leaves. Appended only searches actually run by Q61; historical searches and maintainer metadata retained. Dry-run repair: replaced a context-dependent phrase in step 1 and rendered the inherited statement in TeX, without changing its mathematical content.",
+  "blueprint": "Step 1 matches current sk-def-zeta, the notion used by sk-thm-weil1. Step 2 realizes the first normalized integral presentation in current sk-thm-weil1. This is reuse of a stronger existing blueprint statement, not a new restatement node. The original thm-weil-final-rationality ancestry is retained; blueprint_refs ancestor prints None because this is a launcher seed with prose created.item, as already reported in the inherited record.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q100-0ec31a4d9",
-  "group": "Q100",
+  "reviewer": "NT-Codex-Q61-7896ef6fc",
+  "group": "Q61",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-0ec31a4d9 (reviewer sub-agent of L); spot-checked: I read the item, every cited node, the comparator source and the blueprint sources in full. The delivery has no new nodes. The item's statement matches WeilConjectures.zetaSeries_rational (Comparator/Weil/Challenge.lean, identical to live) and the definitions of galoisExtension, fieldPoints, pointCount and zetaSeries in Definitions.lean, hypothesis by hypothesis: finite field, LocallyOfFiniteType and QuasiCompact, nothing more. Changing the citations to sk-def-zeta (splitting-field model, 0 for an infinite set, exponent starting at n>=1) and to def-weil-coefficientwise-ring-hom-map (Z->Q coefficient map) is correct and does not weaken the target. Step 1 is elementary: it only matches def-weil-finite-type-morphism and sk-def-zeta against the Lean definitions. Step 2 uses only the statement of sk-thm-weil1, which is checked verbatim against main-20261015 sk-thm-weil1/_section.md: A,B in Z[T], B(0)=1, BZ=A for any finite-type X_0. It then applies the polynomial-to-power-series map and commutativity. This reuses an existing stronger node under B9/C5, so it is not a D1 relabelling. The cited node is in the item's own unit, so the route holds and no tool use is needed. Reachability shows no cycle. No SGA source is used. Edge cases checked: the empty scheme, Spec k, Spec k[e]/e^2, and the affine line with doubled origin (N_n=q^n+1, Z=1/((1-qT)(1-T))). The Mathlib searches are complete: LeanSearch, LeanFinder, Loogle and grep. FIX: the statement cites def-weil-scheme-morphism-properties, but the delivery had dropped it from stmt_deps; it is restored in fixes/dag/nodes/sec-zeta-weil/nt-target-zeta-rational.json. Downstream issue for the maintainer, not a fault here: the current blueprint proof of sk-thm-rationality (any finite type) cites sk-thm-tracetodeterminant, which only covers smooth proper X_0. Its own split must stratify into separated affine pieces or follow Dwork's proof.; 1 file(s) fixed by the reviewer"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q61-7896ef6fc (reviewer sub-agent of L); spot-checked: Reviewed item, all cited nodes and source places, unit/chapter route, hypotheses, coefficient maps, edge cases, searches, and delivery rules. The two-step wrapper correctly applies sk-thm-weil1; no new nodes, duplicates, circularity, missing dependencies, SGA citations, or mathematical faults found. Review written to review.md."
  },
  "lean": {
   "module": "WeilConjectures.Statement",
@@ -156,5 +225,17 @@
   "group": "Q42",
   "result": "pass",
   "note": "Existing-binding delivery: only the lean field is added (WeilConjectures.Statement, AlgebraicGeometry.Scheme.zetaSeries_rational, slopmaster2, existing). lean.statement is verbatim Statement.lean:80. An lcompile probe against the live build proves by rfl that its type equals the comparator WeilConjectures.zetaSeries_rational (exit 0; axioms propext/sorryAx/choice/Quot.sound). All clauses match the node and sk-def-zeta (#print of zetaSeries/pointCount/fieldPoints/galoisExtension): splitting-field model, Nat.card count of 0 for infinite sets, n=0 term 0, LocallyOfFiniteType+QuasiCompact only, Polynomial.map Int.castRingHom with the power-series coercion, Q.coeff 0 = 1. One shared universe u. Edge cases checked: empty scheme, Spec k, nonreduced, nonseparated, characteristic. No duplicate (Sheaf/Paper/WeilOne is the stronger sk-thm-weil1 conjunction). Same convention as the landed nt-target-weil-conjectures. Report has Worker report and Second reading by Q42. No new Lean, so the hollow/proof/docstring/pro-etale gates are not triggered. No findings."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

@@ -16,9 +16,109 @@
   "def-pc-reduced-scheme",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $X=\\operatorname{Spec}A$. By the affine characterization of closed immersions, write $C_j=\\operatorname{Spec}(A/I_j)$ over $X$, and let $Z_j=V(I_j)$. For $e\\in\\{0,1\\}^r$, set $J_e=\\sum_{e_j=1}I_j$, $D_e=\\operatorname{Spec}(A/J_e)$, and $U_e=X\\setminus\\bigcup_{e_j=0}Z_j$. Use $J_e=0$ for an empty sum and $U_e=X$ for an empty union. Set $Y_e=D_e\\times_X U_e$. The projection $Y_e\\to U_e$ is a closed immersion by closed-immersion base change, and $U_e\\to X$ is an open immersion, so $Y_e\\to X$ is an immersion. Its image is $B_e=\\bigcap_{e_j=1}Z_j\\cap\\bigcap_{e_j=0}(X\\setminus Z_j)$ by the base-change image formula. These subsets are locally closed, pairwise disjoint, and cover $X$, since each point has a unique membership vector. Keep the resulting scheme structure on $Y_e$; no reduction is taken at this stage.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-locally-closed-subset",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095K, proof of lemma-decompose-quasi-finite-morphism, final Noetherian partition paragraph: partition by the finitely many T_i and their pairwise intersections"
+   }
+  },
+  {
+   "text": "By [pqf-lem-affine-open-locnoeth], applied to the affine open $X$ of the locally Noetherian scheme $X$ itself, $A$ is Noetherian. Each $A/J_e$ is Noetherian: for an ideal $K\\subset A/J_e$, its inverse image in $A$ has finitely many generators by [def-weil-pbc-noetherian-ring], whose images generate $K$. Thus $D_e=\\operatorname{Spec}(A/J_e)$ is locally Noetherian by [pqf-def-locnoeth] (the single affine cover), and quasi-compact because it is a closed subspace of the quasi-compact space $X$; given an open cover of that closed subspace, extend the opens to $X$ and add its open complement to obtain a finite subcover. Hence $D_e$ is Noetherian. The scheme $Y_e$ is its open subscheme over $U_e$, so [lem-weil-pbc-noetherian-open-subscheme-noetherian] makes $Y_e$ Noetherian. Discard the empty atoms.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-locnoeth",
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095K, proof of lemma-decompose-quasi-finite-morphism, final Noetherian partition paragraph; affine refinement of the Noetherian partition"
+   }
+  },
+  {
+   "text": "Apply the finite affine partition lemma to each nonempty Y_e. It gives a finite partition of Y_e by locally closed reduced affine subschemes R_{e,a}. Composing each immersion R_{e,a} -> Y_e with the immersion Y_e -> X gives an immersion into X, by composition stability of immersions. Since the Y_e are pairwise disjoint and cover X, the resulting finite family has pairwise disjoint images and covers X; every source is affine and reduced.",
+   "uses": [
+    "lem-zl-affine-partition",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095K, proof of lemma-decompose-quasi-finite-morphism, final paragraph: refine the finite partition to affine strata"
+   }
+  },
+  {
+   "text": "Fix a resulting piece R_{e,a}. Its image is contained in B_e. Therefore, for every j, the image is either contained in Z_j (when e_j=1) or disjoint from Z_j (when e_j=0), by the definition of the Boolean atom. This is exactly the required set-theoretic compatibility before passing to the scheme-theoretic pullback.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095K, proof of lemma-decompose-quasi-finite-morphism, final paragraph: partition so each T_i is either present or absent on a stratum"
+   }
+  },
+  {
+   "text": "For each j, form the pullback P_{e,a,j}=C_j x_X R_{e,a} -> R_{e,a}. The projection is a closed immersion by stability of closed immersions under base change. Its underlying image is the inverse image in R_{e,a} of the underlying image Z_j of C_j, by the image-of-a-base-change formula. By the preceding step that inverse image is either all of R_{e,a} or empty. Since a closed immersion identifies its source with its image, the underlying space of P_{e,a,j} is respectively all of R_{e,a} or empty.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-base-change-image",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095K, proof of lemma-decompose-quasi-finite-morphism, final Noetherian partition paragraph: each X_j x_X T_i is set-theoretically a union of strata"
+   }
+  },
+  {
+   "text": "There are finitely many bit vectors and each affine partition is finite, so the resulting family is finite. If X is empty, take the empty family; if r=0, take any finite reduced affine partition from the same construction. All required clauses follow.",
+   "uses": [
+    "lem-zl-affine-partition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095K, final Noetherian partition paragraph, including finite affine refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-locally-closed-subset",
+  "def-weil-open-immersion",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-base-change-image",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-zl-affine-partition",
+  "pqf-def-locnoeth",
+  "pqf-lem-affine-open-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095K (lemma-decompose-quasi-finite-morphism), proof: final Noetherian partition paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,7 +157,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-quasifinite-affine-etale-thickening-decomposition",
@@ -80,5 +180,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-noetherian-boolean-affine-refinement",
+  "worker": "stage1",
+  "summary": "Boolean atoms are formed as open restrictions of explicit closed affine quotient schemes, without reducing the intermediate atoms. Their Noetherianness follows from the existing affine-open lemma, the explicit ideal argument for quotients, and open-subscheme permanence. The closed affine-partition theorem then supplies reduced affine strata. Closed-immersion base change and the base-change image identity prove the required pullback-space condition. No new nodes or statement changes.",
+  "blueprint": "Realizes the ancestor thm-weil-pbc-direct-image-finiteness-proper proof input at the 095K final Noetherian partition paragraph: refine finitely many T_i and their pairwise intersections into reduced affine locally closed strata.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-affine-partition",
+    "why": "This closed generic theorem supplies the finite reduced affine partition of each Boolean atom; the proper-base-change unit has no separate affine-partition node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-affine-partition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q30-a124179f9",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-a124179f9 (reviewer sub-agent of L); spot-checked: Read the item, cited statements, sources, and route in full. Repaired C1/C2 and E4 issues: intermediate reduced atoms were incorrectly treated as open subschemes, and Noetherianness lacked supporting citations. Corrected JSON and review.md written; statement unchanged, no new nodes. Verified dependencies and 5,058 finite-set cases. Accepted affine-partition tool use.; 1 file(s) fixed by the reviewer"
  }
 }

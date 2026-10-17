@@ -16,9 +16,71 @@
   "lem-kun-inverse-image-monoidal",
   "lem-kun-tensor-sym"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check explicitly that the canonical comparison respects symmetry:\n$$c_{V,U}\\circ f^{-1}(\\sigma_{U,V})=\\sigma_{f^{-1}U,f^{-1}V}\\circ c_{U,V}.$$\nUse K-flat flat-term representatives of $U,V$. For the induced constant-coefficient ringed topoi, [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] ensures that their pullbacks are K-flat flat-term representatives and that total tensors compute the derived comparison. The canonical comparison of [lem-kun-inverse-image-monoidal] is the degreewise pullback tensor comparison on these models. The sign symmetry in [def-kun-derived-tensor], giving the canonical symmetry of [lem-kun-tensor-sym], sends a tensor in bidegree $(p,q)$ to its switched tensor times $(-1)^{pq}$. Both routes in the displayed equation therefore send the inverse image of $x\\otimes y$ to $(-1)^{pq}(f^{-1}y\\otimes f^{-1}x)$; bilinearity gives equality on each tensor summand and hence on the total complexes. The uniqueness of extension from K-flat flat-term models in [lem-weil-pbc-site-derived-tensor-descent] gives the displayed equality for all derived objects.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-kun-inverse-image-monoidal",
+    "def-kun-derived-tensor",
+    "lem-kun-tensor-sym",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, total-complex comparison in its proof; Tag 06YU, definition-derived-tor and following sign symmetry; elementary sign calculation"
+   }
+  },
+  {
+   "text": "Write $F=f^{-1}$, $R=Rf_*$ and omit tensor subscripts. By [def-kun-projection-formula-map], $\\mathrm{PF}_f(E,K)$ has adjoint $(\\varepsilon_E\\otimes1)\\circ c_{RE,K}$ under the specified derived adjunction. Naturality of its Hom bijection in both arguments gives\n$$\\pi_f(K,E)^\\flat=\\sigma_{E,FK}\\circ(\\varepsilon_E\\otimes1)\\circ c_{RE,K}\\circ F(\\sigma_{K,RE}).$$\nThe symmetry equation from step 1 replaces the last two factors by $\\sigma_{FK,FRE}\\circ c_{K,RE}$. Naturality of tensor symmetry [lem-kun-tensor-sym] then gives\n$$\\sigma_{E,FK}\\circ(\\varepsilon_E\\otimes1)\\circ\\sigma_{FK,FRE}=1_{FK}\\otimes\\varepsilon_E.$$\nIndeed naturality moves $\\varepsilon_E$ through the second symmetry, and the two opposite switches cancel (on bidegree $(p,q)$ their sign is $(-1)^{2pq}=1$). Thus $\\pi_f(K,E)^\\flat=(1_{FK}\\otimes\\varepsilon_E)\\circ c_{K,RE}$.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+    "place": "Proof final sentence: tensor the decomposition and use the proper projection formula; the retained step 1 component calculation; agent-written categorical interface for the retained proof"
+   }
+  },
+  {
+   "text": "Let $h=\\pi_f(K,E)\\circ(1_K\\otimes a)$. With the derived adjunction of [def-kun-projection-formula-map], its adjoint is $\\pi_f(K,E)^\\flat\\circ F(1_K\\otimes a)$. Explicitly this follows by expanding the adjoint as $\\varepsilon\\circ Fh$ and using functoriality of $F$. Bifunctoriality of the comparison in [lem-kun-inverse-image-monoidal] gives\n$$c_{K,RE}\\circ F(1_K\\otimes a)=(1_{FK}\\otimes Fa)\\circ c_{K,M}.$$\nFor the inverse comparison this naturality square follows by multiplying the square for the forward comparison by its inverse components. Substituting step 2, the adjoint is therefore\n$$(1_{FK}\\otimes\\varepsilon_E)\\circ(1_{FK}\\otimes Fa)\\circ c_{K,M}.$$",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-kun-inverse-image-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+    "place": "Proof final sentence: tensor the decomposition and use the proper projection formula; the retained step 1 component calculation; agent-written categorical interface for the retained proof"
+   }
+  },
+  {
+   "text": "The derived tensor is a bifunctor on all derived morphisms by [lem-weil-pbc-site-derived-tensor-descent]. Its composition law rewrites the first two factors of step 3 as $1_{FK}\\otimes(\\varepsilon_E\\circ Fa)$. The composite in parentheses is exactly $a^\\flat$ by the definition of $a^\\flat$ in the statement. Hence $h^\\flat=(1_{FK}\\otimes a^\\flat)\\circ c_{K,M}$, with the asserted source and target. Only the defining derived adjunction, canonical tensor comparison and bifunctor laws were used, so no projection-isomorphism, properness, boundedness or coefficient restriction is needed.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+    "place": "Proof final sentence: tensor the decomposition and use the proper projection formula; the retained step 1 component calculation; agent-written categorical interface for the retained proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "def-kun-projection-formula-map",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-tensor-sym",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Categorical mate calculation expanding the blueprint's final tensor/projection-formula sentence"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,10 +130,31 @@
    "results": "8 hits: CategoryTheory.Adjunction.mapMon_counit, CategoryTheory.leftAdjointMate, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.FreeMonoidalCategory.instMonoidalProject, CategoryTheory.frobeniusMorphism, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.ihom.coev, CategoryTheory.monoidalOfHasFiniteProducts.leftUnitor_hom. no match",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor projection formula adjunct morphism",
+   "results": "CategoryTheory.tensorLeftAdjunction; CategoryTheory.tensorRightAdjunction; CategoryTheory.tensorRightHomEquiv; CategoryTheory.tensorLeftHomEquiv; CategoryTheory.instIsLeftAdjointTensorLeft; CategoryTheory.MonoidalClosed.compTranspose; CategoryTheory.Types.tensorProductAdjunction; CategoryTheory.tensorLeftHomEquiv_tensor",
+   "date": "2026-10-17",
+   "verdict": "no match: generic tensor adjunction results do not give this symmetrized derived projection identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory tensor projection formula adjunction",
+   "results": "No hits; loogle: Unknown identifier `CategoryTheory`",
+   "date": "2026-10-17",
+   "verdict": "no match: query rejected with unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*tensor|tensor.*projection",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no matching result"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-amb-p1-decomposition",
@@ -88,5 +171,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-amb-tensor-projection-adjunct",
+  "worker": "stage1",
+  "summary": "Retained the existing statement and mate-calculation proof, repairing its citation gaps. An explicit K-flat sign calculation first checks compatibility of the canonical comparison with symmetry; the next steps compute the symmetrized mate, use comparison naturality for a, and combine tensor factors by the cited derived tensor bifunctor. No new nodes are required.",
+  "blueprint": "Realizes the proof final sentence of thm-amb-p1-decomposition: tensoring and applying the projection formula, with the retained component calculation expressed as the displayed mate identity.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic K-flat pullback preservation and tensor-model computation for step 1; no geometric base-change or purity route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic tensor bifunctor and uniqueness of extension from K-flat models, used to justify the explicit sign calculation and tensor composition law."
+   },
+   {
+    "node": "lem-kun-inverse-image-monoidal",
+    "why": "Canonical comparison and its bifunctoriality, already part of the item; a categorical tool for this projection mate calculation."
+   },
+   {
+    "node": "lem-kun-tensor-sym",
+    "why": "Natural derived tensor symmetry already part of the item, used solely in the categorical mate calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-tensor-sym"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q79-74cf6535e",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q79-74cf6535e (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. All four steps correctly establish the mate identity; Stacks 07A4, 03EL and 06YU support the tensor comparison and sign calculation. No extra hypotheses, circularity, duplicate nodes or coefficient-category identification found. Accepted all four declared generic tool uses. Detailed checks and inherited unit-binding mismatch recorded in review.md; no repairs needed."
  }
 }

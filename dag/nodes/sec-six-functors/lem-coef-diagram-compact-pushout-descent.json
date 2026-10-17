@@ -10,9 +10,101 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the small $\\kappa$-filtered presentation of $F$ by pointwise $\\kappa$-presentable diagrams assumed in the statement. Apply [lem-coef-cardinal-filtered-poset-reindex] to its indexing category and obtain $F=\\varinjlim_{t\\in T}F_t$ with $T$ a small $\\kappa$-filtered poset. This is also a pointwise colimit: form the colimit of the values at each $d$; an arrow of $D$ induces a map of these colimits by [def-weil-pbc-category-colimit]. Uniqueness makes those maps preserve identities and composition. A cocone to any diagram is then exactly its compatible component cocones, so this pointwise construction has the functor-category colimit universal property and identifies with the specified $F$. Write $v_{st}:F_s\\to F_t$ and $x_t:F_t\\to F$ for the transition and cocone maps.",
+   "uses": [
+    "lem-coef-cardinal-filtered-poset-reindex",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.3.17, first paragraph, with the poset-reindexing input made explicit"
+   }
+  },
+  {
+   "text": "The compactness arguments below have the following explicit meaning. For a $\\kappa$-presentable $K$ and a small $\\kappa$-filtered diagram $Z_t$ with colimit $Z$, the definition in the statement identifies $\\operatorname{Hom}(K,Z)$ with $\\varinjlim_t\\operatorname{Hom}(K,Z_t)$. Clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise] therefore lifts a map $K\\to Z$ to a stage, and clause (3) makes two stage maps with the same composite to $Z$ equal after a transition. Fewer than $\\kappa$ such choices can be made simultaneously: choose their individual stages and then an upper bound in $T$. Every tail $T_{\\geq s}$ has the same filteredness and colimits: a cocone on the tail extends at $t$ using any upper bound of $s,t$, independently of that choice by a further upper bound.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.3.17, compactness arguments; Stacks Tag 04AX, categories.tex, section-directed-colimits, elementwise description"
+   }
+  },
+  {
+   "text": "Apply Step 2 to the maps $a_d:P_d\\to F(d)$, obtaining one $s\\in T$ and maps $a_{s,d}:P_d\\to F_s(d)$ with $x_s(d)a_{s,d}=a_d$. There are fewer than $\\kappa$ objects because their identity arrows are distinct. For $t\\geq s$ put $a_{t,d}=v_{st}(d)a_{s,d}$ and $H_t(d)=F_t(d)\\amalg_{P_d}Q_d$, with legs $i_{t,d}:F_t(d)\\to H_t(d)$ and $j_{t,d}:Q_d\\to H_t(d)$. The pushout universal property [def-weil-pbc-category-colimit] defines transitions $w_{tu,d}$ induced by $v_{tu}(d)$ and $1_{Q_d}$. It also gives $G(d)=\\varinjlim_{t\\geq s}H_t(d)$ with cocone maps $b_{t,d}$: a compatible family of maps $H_t(d)\\to M$ is exactly a map $F(d)\\to M$ and a map $Q_d\\to M$ agreeing on $P_d$. Each $H_t(d)$ is $\\kappa$-presentable, by [lem-coef-ordinary-small-colimit-presentable] for the finite pushout diagram (also an explicit hypothesis of the item). At this point $H_t(d)$ are only separate objectwise presentations, not diagrams in $d$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-ordinary-small-colimit-presentable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.3.17, first compactness argument and the displayed objectwise pushout colimit"
+   }
+  },
+  {
+   "text": "For each $d$ put $R_d=\\coprod_{\\alpha:e\\to d}Q_e$. It is $\\kappa$-presentable by [lem-coef-ordinary-small-colimit-presentable], since there are fewer than $\\kappa$ arrows of $D$. Map its $\\alpha$-summand to $G(d)$ by $Q_e\\to G(e)\\xrightarrow{G(\\alpha)}G(d)$. Step 2 and the presentations of Step 3 give a common $r\\geq s$ and factorizations $q_\\alpha:Q_e\\to H_r(d)$ of these maps. For $t\\geq r$ set $q^t_\\alpha=w_{rt,d}q_\\alpha$. The maps $q_\\alpha u_e$ and $i_{r,d}F_r(\\alpha)a_{r,e}$ from $P_e$ to $H_r(d)$ agree in $G(d)$: both equal $G(\\alpha)f(e)a_e=f(d)F(\\alpha)a_e$. Apply Step 2 to each such equality. One upper bound $r_1\\geq r$ makes $q^t_\\alpha u_e=i_{t,d}F_t(\\alpha)a_{t,e}$ for every arrow and every $t\\geq r_1$. This uses presentability of $P_e$ and clause (3) of [lem-weil-pbc-filtered-colimit-sets-elementwise].",
+   "uses": [
+    "lem-coef-ordinary-small-colimit-presentable",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.3.17, second compactness argument and the first compatibility square, printed pp.883-884"
+   }
+  },
+  {
+   "text": "For $t\\geq r_1$ the equality in Step 4 defines a unique map $A_t(\\alpha):H_t(e)\\to H_t(d)$ whose restrictions to the pushout legs are $i_{t,d}F_t(\\alpha)$ and $q^t_\\alpha$. Use [def-weil-pbc-category-colimit] twice to compare restrictions to these legs. First, for $t\\leq u$ it gives $w_{tu,d}A_t(\\alpha)=A_u(\\alpha)w_{tu,e}$: on $F_t(e)$ this is naturality of $v_{tu}$, and on $Q_e$ it is $w_{tu,d}q^t_\\alpha=q^u_\\alpha$. Second, $b_{t,d}A_t(\\alpha)=G(\\alpha)b_{t,e}$: the $F_t(e)$ restriction is naturality of $f$ and $x_t$, and the $Q_e$ restriction is the chosen factorization of Step 4. These statements hold before imposing any functor laws on $A_t$. In particular all these prospective structure maps extend compatibly when the stage is enlarged.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.3.17, construction of prospective structure maps from the first compatibility square"
+   }
+  },
+  {
+   "text": "At stage $r_1$ compare $A_{r_1}(1_e)j_{r_1,e}$ with $j_{r_1,e}$, and, for every composable $\\alpha:e\\to d$, $\\beta:d\\to c$, compare $A_{r_1}(\\beta)A_{r_1}(\\alpha)j_{r_1,e}$ with $A_{r_1}(\\beta\\alpha)j_{r_1,e}$. Step 5 and the functor laws in $G$ make each pair equal in the corresponding $G(e)$ or $G(c)$. Their common source $Q_e$ is $\\kappa$-presentable. Clause (3) of [lem-weil-pbc-filtered-colimit-sets-elementwise] and Step 2 give a stage $r_2\\geq r_1$ where all these equalities hold. There are fewer than $\\kappa$ equations, since the set of composable pairs is a subset of $\\operatorname{Mor}(D)^2$. Step 5 identifies the transitioned pairs with exactly the analogous pairs for $A_{r_2}$. On the other pushout leg $F_{r_2}(e)$ the same equalities already hold, since $A_{r_2}(\\alpha)i_{r_2,e}=i_{r_2,d}F_{r_2}(\\alpha)$ and $F_{r_2}$ is a functor. Pushout uniqueness [def-weil-pbc-category-colimit] now gives the identity and composition laws on all of $H_{r_2}(e)$. Thus $G_0(d)=H_{r_2}(d)$ and $G_0(\\alpha)=A_{r_2}(\\alpha)$ define a functor.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.3.17, final compactness argument and the second compatibility square, printed p.884; identities made explicit"
+   }
+  },
+  {
+   "text": "Set $F_0=F_{r_2}$ and $h(d)=i_{r_2,d}$. The restriction formula in Step 5 makes $h:F_0\\to G_0$ natural, and the maps $b_{r_2,d}$ form a natural map $b:G_0\\to G$. Each $h(d)$ is the pushout of the specified $u_d$ along $a_{r_2,d}$, whose composite with $x_{r_2}(d)$ is $a_d$. The square $(h,x_{r_2},b,f)$ is a pushout pointwise: its iterated pushout is $(F_{r_2}(d)\\amalg_{P_d}Q_d)\\amalg_{F_{r_2}(d)}F(d)=Q_d\\amalg_{P_d}F(d)=G(d)$, with all identifications fixed by their legs. It is a pushout of diagrams as well: for natural maps from $F$ and $G_0$ to a diagram $M$ agreeing on $F_0$, the component pushout properties give unique maps $G(d)\\to M(d)$. Their naturality follows by checking on the two pushout legs and applying uniqueness [def-weil-pbc-category-colimit]. Finally $F_0$ is pointwise $\\kappa$-presentable by its choice, and $G_0$ is so by Step 3. This proves every clause without canceling any morphism.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.3.17, final pushout diagram, printed p.884"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cardinal-filtered-poset-reindex",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-coef-ordinary-small-colimit-presentable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemma A.3.3.17, printed pp.883-884; ordinary-category specialization and explicit common-stage argument"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -48,10 +140,73 @@
    "results": "{\"t\": \"2026-10-17T08:48:14Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of pointwise pushout squares to a single small natural transformation using compactness and filtered presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.functorObj_isPushout\", \"CategoryTheory.SmallObject.ρFunctorObj\", \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj\", \"CategoryTheory.SmallObject.functorMap\", \"CategoryTheory.SmallObject.πFunctorObj\", \"CategoryTheory.SmallObject.functorObj\", \"CategoryTheory.MorphismProperty.PreIndSpreads.exists_isPushout\"], \"digest\": \"aea1a8e63c99060e\"}",
    "date": "2026-10-17",
    "verdict": "no match: pushoutObjIso only computes existing pushouts pointwise; isCardinalPresentable_of_isColimit only closes presentability under small colimits. PreIndSpreads.exists_isPushout assumes the very descent property for its arrow class, and does not establish simultaneous naturality. Read Presentable/Limits.lean:173-195, SmallObject/Construction.lean:13-130, MorphismProperty/Ind.lean:165-189."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural transformation pointwise pushout kappa presentable diagrams compact descent",
+   "results": "{\"t\": \"2026-10-17T12:54:11Z\", \"tool\": \"leanfinder\", \"query\": \"natural transformation pointwise pushout kappa presentable diagrams compact descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"CategoryTheory.Limits.pushoutObjIso\", \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.hasPushouts\", \"CategoryTheory.SmallObject.functorMap\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.preservesColimit\", \"CategoryTheory.SmallObject.preservesColimit\", \"CategoryTheory.SmallObject.hasPushouts\"], \"digest\": \"ecc003a285a8678e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the listed candidates; filtered Hom factorization and equality are auxiliary facts, and pointwise pushout construction does not give simultaneous descent."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPushout.*presentable|presentable.*IsPushout",
+   "results": "{\"t\": \"2026-10-17T12:55:12Z\", \"tool\": \"grep\", \"query\": \"IsPushout.*presentable|presentable.*IsPushout\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the listed candidates; filtered Hom factorization and equality are auxiliary facts, and pointwise pushout construction does not give simultaneous descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsPushout, CategoryTheory.IsCardinalPresentable, Functor",
+   "results": "{\"t\": \"2026-10-17T12:55:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.IsPushout, CategoryTheory.IsCardinalPresentable, Functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Limits.IsPushout'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: Loogle reported the unknown identifier CategoryTheory.Limits.IsPushout; no absence conclusion drawn from this query. Other recorded searches use the valid names."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "κ-filtered colimit pointwise κ-presentable functor category pushout natural transformation",
+   "results": "{\"t\": \"2026-10-17T12:55:16Z\", \"tool\": \"leanfinder\", \"query\": \"κ-filtered colimit pointwise κ-presentable functor category pushout natural transformation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit\", \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit'\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CategoryTheory.isCardinalPresentable_of_isColimit\", \"CategoryTheory.isCardinalPresentable_of_isColimit'\", \"CategoryTheory.Limits.ColimitPresentation.bind_diag_obj\", \"CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable\"], \"digest\": \"64bfaf48fc9c3ef9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the listed candidates; filtered Hom factorization and equality are auxiliary facts, and pointwise pushout construction does not give simultaneous descent."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCardinalPresentable|κ-presentable|kappa-presentable",
+   "results": "{\"t\": \"2026-10-17T13:01:49Z\", \"tool\": \"grep\", \"query\": \"IsCardinalPresentable|κ-presentable|kappa-presentable\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\"], \"digest\": \"6ce935ed8ebbdda2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the listed candidates; filtered Hom factorization and equality are auxiliary facts, and pointwise pushout construction does not give simultaneous descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "simultaneous factorization of fewer than kappa maps from kappa-presentable objects through one stage of a filtered colimit",
+   "results": "{\"t\": \"2026-10-17T13:02:13Z\", \"tool\": \"leansearch\", \"query\": \"simultaneous factorization of fewer than kappa maps from kappa-presentable objects through one stage of a filtered colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasCardinalFilteredColimits.mk\", \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit\", \"CategoryTheory.HasCardinalFilteredColimits\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"CategoryTheory.SmallObject.hasFunctorialFactorization\", \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under\", \"CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable\"], \"digest\": \"2574ad5eaaa6168a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the listed candidates; filtered Hom factorization and equality are auxiliary facts, and pointwise pushout construction does not give simultaneous descent."
+  },
+  {
+   "tool": "grep",
+   "query": "pushoutObjIso|isCardinalPresentable_of_isColimit",
+   "results": "{\"t\": \"2026-10-17T13:04:40Z\", \"tool\": \"grep\", \"query\": \"pushoutObjIso|isCardinalPresentable_of_isColimit\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/CardinalFilteredPresentation.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\"], \"digest\": \"c88c62b444d154fa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the listed candidates; filtered Hom factorization and equality are auxiliary facts, and pointwise pushout construction does not give simultaneous descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pushoutObjIso, CategoryTheory.IsCardinalPresentable, CategoryTheory.IsCardinalFiltered",
+   "results": "{\"t\": \"2026-10-17T13:04:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.pushoutObjIso, CategoryTheory.IsCardinalPresentable, CategoryTheory.IsCardinalFiltered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the listed candidates; filtered Hom factorization and equality are auxiliary facts, and pointwise pushout construction does not give simultaneous descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "a natural transformation in a functor category that is componentwise a pushout of compact maps is a pushout of a map between pointwise compact diagrams",
+   "results": "{\"t\": \"2026-10-17T13:04:40Z\", \"tool\": \"leansearch\", \"query\": \"a natural transformation in a functor category that is componentwise a pushout of compact maps is a pushout of a map between pointwise compact diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.PushoutObjObj.ofHasPushout\", \"CategoryTheory.Functor.PushoutObjObj.ofHasPushout_pt\", \"CategoryTheory.Limits.pushoutObjIso\", \"CategoryTheory.Functor.PushoutObjObj.mk\", \"CategoryTheory.SmallObject.functorObj\", \"CategoryTheory.Limits.inr_comp_pushoutObjIso_inv_assoc\", \"CategoryTheory.MorphismProperty.instIsStableUnderCobaseChangeFunctorFunctorCategoryOfHasPushouts\", \"CategoryTheory.Limits.inl_comp_pushoutObjIso_hom\"], \"digest\": \"850fc0d4fc3699d3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the listed candidates; filtered Hom factorization and equality are auxiliary facts, and pointwise pushout construction does not give simultaneous descent."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-scat-injective-universe-generators",
@@ -85,5 +240,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-diagram-compact-pushout-descent",
+  "worker": "stage1",
+  "summary": "Retained the imported statement and original Q01 creation ancestry. Expanded HTT A.3.3.17 into explicit poset reindexing, Hom-set compactness, objectwise pushout presentations, arrow-map lifting, compatibility under stage enlargement, functor-law stabilization, and the diagram pushout universal property. Replaced the inappropriate canonical-density citations by the existing cardinal-filtered poset and filtered-set leaves. No new nodes.",
+  "blueprint": "Realizes the inherited auxiliary input HTT A.3.3.17 to proof paragraph 2 of prop-coef-integral-exceptional-adjoint through the recorded ancestry: component-map factorization, second compactness argument, two compatibility squares, and final pushout. The unit and chapter route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q16-8228ed9c5",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-8228ed9c5 (reviewer sub-agent of L); spot-checked: Read the full item, report, unit/chapter route, cited DAG nodes, Mathlib matches, delivery-error rules, and HTT Lemma A.3.3.17. Verified all seven proof steps, hypotheses, filtered-colimit and pushout arguments, functor-law stabilization, edge cases, citations, ancestry, searches, and absence of duplicates or forbidden SGA sources. Wrote review.md; no repairs or tool_uses required."
  }
 }

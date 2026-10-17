@@ -12,9 +12,98 @@
   "def-coef-symmetric-operadic-family",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $h:x\\to z$ lie over $(\\sigma,\\alpha)$, with $\\alpha:\\langle k\\rangle\\to\\langle l\\rangle$. Put $D=\\{u\\ne *:\\alpha(u)\\ne *\\}$ and $D_+=D\\amalg\\{*\\}$. Define $r:\\langle k\\rangle\\to D_+$ to fix $D$ and send all other inputs to $*$; define $s:D_+\\to\\langle l\\rangle$ to agree with $\\alpha$ on $D$. Each non-basepoint of $D_+$ has exactly one preimage under $r$, and only $*$ maps to $*$ under $s$. Thus $r$ is inert, $s$ is active, and $sr=\\alpha$, by the pointed-map definitions in [lem-coef-operadic-approximation-restriction].",
+   "uses": [
+    "lem-coef-operadic-approximation-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, Remark 2.1.2.2 and Proposition 2.1.2.5, printed pp.178-179; relative version supporting Theorem 3.1.2.3 proof step (1), printed pp.336-337"
+   }
+  },
+  {
+   "text": "The family condition supplies a $\\pi$-cocartesian lift $i:x\\to x_D$ of $(1,r)$ within the parameter fiber of $x$. Its parameter edge is an identity, so it is stationary inert. In $S\\times N(\\mathrm{Fin}_*)$ take the $2$-simplex whose $S$-coordinate is the degeneracy of $\\sigma$ with repeated source and whose pointed-set edges are $r,s,\\alpha=sr$. Its edges $01$ and $02$ lift to $i$ and $h$, respectively, defining a horn $\\Lambda^2_0$. The cocartesian outer-horn condition in [def-coef-infinity-fibrations] fills this horn over that base simplex. The remaining edge is $a:x_D\\to z$ over $(\\sigma,s)$, and the filler is the specified composition triangle from $ai$ to $h$. By the definition of the active subcategory in [def-coef-symmetric-operadic-family], $a$ is active.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, Remark 2.1.2.2 and Proposition 2.1.2.5, printed pp.178-179; relative version supporting Theorem 3.1.2.3 proof step (1), printed pp.336-337"
+   }
+  },
+  {
+   "text": "For the orthogonality assertion fix $i:x\\to y$ stationary inert and $a:u\\to v$ active. Write $\\bar i:I\\to J$ and $\\bar a:U\\to V$ for their pointed maps. Given pointed maps $b:I\\to U$ and $c:J\\to V$ with $\\bar a b=c\\bar i$, define $t(*)=*$ and $t(j)=b(d_j)$ for $j\\ne *$, where $d_j$ is the unique preimage of $j$ under $\\bar i$. This gives $\\bar a t=c$. If $\\bar i(d)=*$, the square equation gives $\\bar a b(d)=*$, hence $b(d)=*$ by activity. Thus $t\\bar i=b$, and these equations determine $t$ uniquely. This proves the Hom-set pullback directly from the pointed-map definitions. The right-pinched mapping space of an ordinary nerve is the constant simplicial set on its Hom set: the initial face is constant, and a functor $[n+1]\\to C$ with that face is determined by its last edge. Hence this is also the mapping-space homotopy pullback in $N(\\mathrm{Fin}_*)$. Set $B=S\\times N(\\mathrm{Fin}_*)$. Its mapping spaces are products degreewise. The analogous square in $S$ has identity horizontal maps since $\\pi_S(i)$ is an identity. Pairing the inverse of that identity-square comparison with the pointed-set inverse $t$ gives the base homotopy-pullback square for $\\pi(i),\\pi(a)$; the path-space formula is coordinatewise in a product.",
+   "uses": [
+    "lem-coef-operadic-approximation-restriction",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, Remark 2.1.2.2 and Proposition 2.1.2.5, printed pp.178-179; relative version supporting Theorem 3.1.2.3 proof step (1), printed pp.336-337"
+   }
+  },
+  {
+   "text": "Write $M(p,q)=\\operatorname{Map}_{M^\\otimes}(p,q)$ and $B(p,q)=\\operatorname{Map}_{B}(\\pi p,\\pi q)$. The family projection is a categorical fibration. By [lem-coef-joyal-model-structure] it lifts inner horns, since these are trivial cofibrations; hence it is an inner fibration. Thus so the cocartesian mapping criterion applied to $i$ with targets $u$ and $v$ gives $M(y,w)\\simeq M(x,w)\\times^h_{B(x,w)}B(y,w)$ for $w=u,v$. The base square proved in Step 3 gives $B(y,u)\\simeq B(x,u)\\times^h_{B(x,v)}B(y,v)$. Pasting these pullbacks, with the specified commutation homotopies, gives\n$$M(y,u)\\simeq M(x,u)\\times^h_{B(x,v)}B(y,v).$$\nOn the other hand the target of the asserted comparison is\n$$M(x,u)\\times^h_{M(x,v)}M(y,v)\\simeq M(x,u)\\times^h_{M(x,v)}\\bigl(M(x,v)\\times^h_{B(x,v)}B(y,v)\\bigr)\\simeq M(x,u)\\times^h_{B(x,v)}B(y,v).$$\nThese are exactly the two applications of homotopy-pullback pasting/cancellation, so the square induced by precomposition with $i$ and postcomposition with $a$ is a homotopy pullback.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, Remark 2.1.2.2 and Proposition 2.1.2.5, printed pp.178-179; relative version supporting Theorem 3.1.2.3 proof step (1), printed pp.336-337"
+   }
+  },
+  {
+   "text": "The comparison of this square takes $f:y\\to u$ to $(fi,af)$ and the associativity homotopy between $a(fi)$ and $(af)i$. This path comes from composition for the triple $(i,f,a)$, not from the unrelated factorization triangle of Step 2. The face and degeneracy coherence in [lem-cbc-simplicial-composition-spine] supplies that homotopy in all simplicial degrees, naturally in functors and square data; [lem-coef-infinity-mapping-composition] identifies its precomposition and postcomposition maps with the right-pinched mapping-space convention used here. The specified-homotopy clause of [lem-coef-infinity-homotopy-pullback-pasting] identifies the comparisons in Step 4 using precisely these paths. Consequently Step 4 proves that the displayed composition comparison itself is an equivalence of spaces, retaining every higher simplex, and the comparison is natural.",
+   "uses": [
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-homotopy-pullback-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, Remark 2.1.2.2 and Proposition 2.1.2.5, printed pp.178-179; relative version supporting Theorem 3.1.2.3 proof step (1), printed pp.336-337"
+   }
+  },
+  {
+   "text": "When $D=\\varnothing$, $r$ is the unique map to $\\langle0\\rangle$ and $s$ is the unique pointed map from it, which is active. If $l=0$, then necessarily $D=\\varnothing$. The family axiom supplies the same inert lift and the same horn argument applies. In Step 3 an empty $J\\setminus\\{*\\}$ leaves only $t(*)=*$; the square equation and activity still force $b$ to be the constant basepoint map. Thus the mapping pullback calculation also applies at zero arity. All empty products have the point value specified in the family definition.",
+   "uses": [
+    "def-coef-symmetric-operadic-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra, Remark 2.1.2.2 and Proposition 2.1.2.5, printed pp.178-179; relative version supporting Theorem 3.1.2.3 proof step (1), printed pp.336-337"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-symmetric-operadic-family",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-operadic-approximation-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Higher Algebra, Remark 2.1.2.2 and Proposition 2.1.2.5, printed pp.178-179; relative version supporting Theorem 3.1.2.3 proof step (1), printed pp.336-337; explicit agent-written pointed-set calculation and relative mapping-pullback proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +153,52 @@
    "results": "{\"t\": \"2026-10-17T08:49:36Z\", \"tool\": \"leanfinder\", \"query\": \"Stationary inert arrows in a parameterized symmetric infinity operad are left orthogonal to all active arrows, including mapping spaces of coherent squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.OrthogonalReflection.D₂.condition\", \"CategoryTheory.OrthogonalReflection.toSucc_injectivity\", \"SimplexCategoryGenRel.P_σ\", \"AlgebraicTopology.DoldKan.degeneracy_comp_PInfty\", \"CategoryTheory.OrthogonalReflection.succStruct\", \"CategoryTheory.OrthogonalReflection.toSucc\", \"AlgebraicTopology.DoldKan.PInfty_comp_map_mono_eq_zero\", \"CategoryTheory.OrthogonalReflection.succ\"], \"digest\": \"e35b6d3c34e72bd9\"}",
    "date": "2026-10-17",
    "verdict": "No match: ordinary-category orthogonal reflection and simplicial generators do not state family-relative orthogonality; whole-Mathlib grep is incidental and Loogle has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative inert-active factorization and mapping-space orthogonality in an S-family of symmetric infinity operads",
+   "results": "{\"t\": \"2026-10-17T10:21:28Z\", \"tool\": \"leanfinder\", \"query\": \"Relative inert-active factorization and mapping-space orthogonality in an S-family of symmetric infinity operads\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.instHasFactorizationP_σP_δ\", \"SimplexCategoryGenRel.exists_P_σ_P_δ_factorization\", \"SimplexCategoryGenRel.P_σ\", \"SimplexCategory.factor_δ_spec\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀'\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand'\"], \"digest\": \"afa6fec83338d2e9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary cocartesian functors, simplicial generators or general factorization systems, not symmetric infinity-operadic families over a parameter quasicategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsCocartesian, CategoryTheory.OrthogonalReflection",
+   "results": "{\"t\": \"2026-10-17T10:21:29Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsCocartesian, CategoryTheory.OrthogonalReflection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.OrthogonalReflection'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "Query rejected by Loogle (unknown identifier); not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCocartesian|active.*inert|inert.*active",
+   "results": "{\"t\": \"2026-10-17T10:21:29Z\", \"tool\": \"grep\", \"query\": \"IsCocartesian|active.*inert|inert.*active\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\"], \"digest\": \"ee6504c40cc5326f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary cocartesian functors, simplicial generators or general factorization systems, not symmetric infinity-operadic families over a parameter quasicategory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative inert-active factorization and mapping-space orthogonality in an S-family of symmetric infinity operads",
+   "results": "{\"t\": \"2026-10-17T10:21:29Z\", \"tool\": \"leansearch\", \"query\": \"Relative inert-active factorization and mapping-space orthogonality in an S-family of symmetric infinity operads\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instHasFactorizationOverCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.instHasFactorizationOppositeCofibrationsTrivialFibrationsOfTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.instHasFactorizationOverTrivialCofibrationsFibrations\", \"CategoryTheory.HomOrthogonal\", \"SimplexCategoryGenRel.instHasFactorizationP_σP_δ\", \"CategoryTheory.HomOrthogonal.matrixDecomposition\", \"CategoryTheory.MorphismProperty.instHasFunctorialFactorizationLlpRlp\", \"OrthogonalFamily\"], \"digest\": \"7488e16991a972bc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary cocartesian functors, simplicial generators or general factorization systems, not symmetric infinity-operadic families over a parameter quasicategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCocartesian\"",
+   "results": "{\"t\": \"2026-10-17T10:36:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCocartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map_self\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.of_comp_iso\"], \"digest\": \"60646e309b2723ac\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary cocartesian functors, simplicial generators or general factorization systems, not symmetric infinity-operadic families over a parameter quasicategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a quasicategory over S times finite pointed sets, a cocartesian inert arrow over an identity of S is left orthogonal to every arrow whose pointed map is active",
+   "results": "{\"t\": \"2026-10-17T10:36:53Z\", \"tool\": \"leanfinder\", \"query\": \"In a quasicategory over S times finite pointed sets, a cocartesian inert arrow over an identity of S is left orthogonal to every arrow whose pointed map is active\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"SSet.Quasicategory\", \"SSet.quasicategory_of_filler\"], \"digest\": \"f5a55e1411a58d61\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary cocartesian functors, simplicial generators or general factorization systems, not symmetric infinity-operadic families over a parameter quasicategory."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-family-active-slice-calculus",
@@ -79,7 +210,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit, through the coherent free-module criterion: the symmetric operadic zeroth-horn argument, HA Theorem 3.1.2.3(B), proof step (1), printed pp.336-337.",
+   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit, through the coherent free-module criterion: the symmetric operadic zeroth-horn argument, HA Theorem 3.1.2.3(B), proof step (1), printed pp.336-337; stationary inert restriction and active mapping-space orthogonality.",
    "via": [
     "lem-coef-symmetric-family-active-slice-calculus",
     "lem-coef-symmetric-operadic-left-horn-filling",
@@ -95,5 +226,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-symmetric-family-inert-active-orthogonality",
+  "worker": "stage1",
+  "summary": "Retained the prior split and repaired stale citations against the current DAG. Gave an explicit elementwise pointed-set orthogonality calculation instead of an unchecked specialization of the generic operad theorem. Wrote both pullback-pasting expressions, corrected the comparison path to the associativity homotopy for (i,f,a), and cited the existing simplicial composition coherence statement. No new nodes; mathematical statement unchanged, with TeX escaping normalized.",
+  "blueprint": "Realizes the ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 middle comparison, specifically the HA Theorem 3.1.2.3(B) proof step (1) relative cocartesian factorization and blockwise mapping-space comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Step 5 uses its coherent face/degeneracy compatibility and naturality of composition, a general quasicategorical tool; no statement of this operadic-family unit provides that full coherence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-composition-spine"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q121-e45dd307b",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q121-e45dd307b (reviewer sub-agent of L); spot-checked: Reviewed mathematics, route, dependencies, sources, edge cases, searches, and delivery repairs. No false statements, missing hypotheses, duplicate nodes, circularity, or route violations found; review.md written."
  }
 }

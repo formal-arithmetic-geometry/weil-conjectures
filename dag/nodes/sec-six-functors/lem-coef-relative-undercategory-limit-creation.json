@@ -11,9 +11,105 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-comma-mapping-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A_K=\\operatorname{Fun}(K,A)$, $B_K=\\operatorname{Fun}(K,B)$ and $D=Ud$. Uncurrying the arrow coordinate of $d$ gives a coherent transformation $\\beta:\\Delta_K b\\to GD$. More generally there is an exact simplicial identification\n$$\\operatorname{Fun}(K,C_b)=\\{\\Delta_Kb\\}\\times_{B_K,\\mathrm{ev}_0}\\operatorname{Fun}(\\Delta^1,B_K)\\times_{\\mathrm{ev}_1,B_K,G_K}A_K.$$\nIndeed, in degree $n$ both sides consist of a map $K\\times\\Delta^n\\to A$ and a map $K\\times\\Delta^n\\times\\Delta^1\\to B$, with the same two endpoint equations. Swapping the last two factors identifies their coordinates, and restriction in $\\Delta^n$ identifies every simplicial operator. This argument also identifies the constant diagram at $(a,\\alpha)$ with $(\\Delta_Ka,\\Delta_K\\alpha)$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02KB",
+    "place": "Proposition 7.1.4.26 motivates limit creation; the following is an agent proof for the relative arrow model using the cited general mapping-space statements, not a quotation of that proposition."
+   }
+  },
+  {
+   "text": "The comma statement makes $C_b$ a quasicategory, and the functor calculus makes $A_K,B_K,\\operatorname{Fun}(K,C_b)$ quasicategories with Kan mapping spaces. Apply the comma mapping formula both to $C_b$ and to the presentation in step 1. For $x=(a,\\alpha:b\\to Ga)$ and an arbitrary $c=(L,\\eta:b\\to GL)$ it gives\n$$\\operatorname{Map}_{C_b}(x,c)\\simeq\\operatorname{Map}_A(a,L)\\times^h_{\\operatorname{Map}_B(b,GL)}\\{\\eta\\},$$\n$$N_x:=\\operatorname{Map}_{\\operatorname{Fun}(K,C_b)}(\\Delta_Kx,d)\\simeq T_a\\times^h_Z\\{\\beta\\},$$\nwhere $T_a=\\operatorname{Map}_{A_K}(\\Delta_Ka,D)$ and $Z=\\operatorname{Map}_{B_K}(\\Delta_Kb,GD)$. The first maps to the bases are $f\\mapsto G(f)\\alpha$ and $t\\mapsto G_K(t)\\Delta_K\\alpha$, respectively. The missing source-endpoint factor in each formula is $\\operatorname{Map}_{\\Delta^0}(*,*)=\\Delta^0$. These equivalences respect the actual projections to $\\operatorname{Map}_A(a,L)$ and $T_a$, and respect composition by pasting coherent squares, as specified in the comma statement.",
+   "uses": [
+    "lem-coef-infinity-comma-mapping-pullback",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02KB",
+    "place": "Proposition 7.1.4.26 motivates limit creation; the following is an agent proof for the relative arrow model using the cited general mapping-space statements, not a quotation of that proposition."
+   }
+  },
+  {
+   "text": "Write the given limiting cone as $\\lambda:\\Delta_K L\\to D$. Since $G\\lambda$ is limiting, the mapping-space criterion for a limit, applied in $B$ at the test object $b$, says that\n$$q:\\operatorname{Map}_B(b,GL)\\longrightarrow Z,\\qquad \\eta\\longmapsto(G\\lambda)\\Delta_K\\eta$$\nis a weak homotopy equivalence. The fiber criterion says that its homotopy fiber over the vertex $\\beta$ is contractible, hence has a vertex. Choose its data $\\eta:b\\to GL$ and a path $\\theta:q(\\eta)\\simeq\\beta$. These are coherent mapping-space data, not a strictly commuting triangle. This supplies the candidate apex $c=(L,\\eta)$ in $C_b$. All mapping spaces here are Kan by the functor calculus.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-kan-fibration-fiber-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02KB",
+    "place": "Proposition 7.1.4.26 motivates limit creation; the following is an agent proof for the relative arrow model using the cited general mapping-space statements, not a quotation of that proposition."
+   }
+  },
+  {
+   "text": "For $x=c$, the point of $T_L\\times^h_Z\\{\\beta\\}$ given by $(\\lambda,\\theta)$ has a preimage on components under the second equivalence in step 2. Choose a vertex in that component of $N_c$; its edge is an actual coherent cone $h:\\Delta_Kc\\to d$. Compatibility with the projection to $T_L$ gives a path from $\\mu:=Uh$ to $\\lambda$ in $T_L$. To see why a single path can be used, a component equality gives a finite edge zigzag; reverse edges and compose adjacent edges by two-dimensional Kan horn fillers. Postcomposition by $\\mu$ and by $\\lambda$ on every $\\operatorname{Map}_A(a,L)$ is therefore homotopic: apply coherent composition to this path and the constant-diagram map. The same applies to $G\\mu,G\\lambda$ in $B_K$. By the composition lemma and the limit mapping criterion, $\\mu$ and $G\\mu$ are limiting cones. This verifies limit preservation for the actual cone just chosen, without demanding that a comparison equivalence lift a specified vertex strictly.",
+   "uses": [
+    "lem-coef-infinity-comma-mapping-pullback",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02KB",
+    "place": "Proposition 7.1.4.26 motivates limit creation; the following is an agent proof for the relative arrow model using the cited general mapping-space statements, not a quotation of that proposition."
+   }
+  },
+  {
+   "text": "Fix any $x=(a,\\alpha)$ as in step 2. Postcomposition by $\\mu$ gives a weak equivalence $r_a:\\operatorname{Map}_A(a,L)\\to T_a$, and postcomposition by $G\\mu$ gives a weak equivalence $s:\\operatorname{Map}_B(b,GL)\\to Z$, by the two limit criteria of step 4. The square of the maps $f\\mapsto G(f)\\alpha$ and $t\\mapsto G_K(t)\\Delta_K\\alpha$ commutes up to the coherent associativity homotopy. The cone $h$ supplies the other side homotopy $s(\\eta)\\simeq\\beta$. Thus $r_a,s$ and the identity of the point compare the two homotopy-pullback spans of step 2. Apply the homotopy-coherent cube invariance statement to these spans (its auxiliary square domains may both be empty, so the cube coherence condition there is vacuous). It makes the induced map between their path homotopy pullbacks an equivalence. Under the natural comma formulas this is precisely postcomposition\n$$\\operatorname{Map}_{C_b}(x,c)\\longrightarrow N_x,\\qquad v\\longmapsto h\\Delta_Kv.$$\nIndeed its first coordinate is $\\mu\\Delta_K(Uv)$; its path coordinate pastes the comma square of $v$ with that of $h$. This is the pasting compatibility asserted in the comma node, including all higher simplices. Coherent composition provides the displayed associativity homotopy. Consequently the actual postcomposition map is a weak equivalence, not merely a bijection on components.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-comma-mapping-pullback",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-kan-homotopy-coherent-cube-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02KB",
+    "place": "Proposition 7.1.4.26 motivates limit creation; the following is an agent proof for the relative arrow model using the cited general mapping-space statements, not a quotation of that proposition."
+   }
+  },
+  {
+   "text": "The functor-cone mapping criterion in the quasicategory $C_b$ now says that $h$ is limiting, since step 5 applies to every vertex $x$ of $C_b$. Its image is the limiting cone $\\mu$ on the fixed diagram $D$. The given $\\lambda$ and $\\mu$ are terminal objects in the same coherent cone category $(\\Delta_K\\downarrow D)$. The functor calculus says that its full subcategory of terminal objects is a contractible Kan complex. They are therefore equivalent as cones on this fixed diagram. This proves exactly the asserted comparison with the originally supplied cone.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02KB",
+    "place": "Proposition 7.1.4.26 motivates limit creation; the following is an agent proof for the relative arrow model using the cited general mapping-space statements, not a quotation of that proposition."
+   }
+  },
+  {
+   "text": "For $K=\\varnothing$, both $A_K$ and $B_K$ are the one-point simplicial set by the internal-functor definition. Thus $T_a=Z=\\Delta^0$, while the hypothesis says that $L$ and $GL$ are terminal in $A$ and $B$. In particular the same map $q$ of step 3 is an equivalence to a point and supplies $\\eta$; step 5 has contractible target $N_x=\\Delta^0$ and proves that $c$ is terminal. All coordinate identifications and mapping-space arguments above remain valid. No nonemptiness of $K$, reflection of equivalences, approximation property or fibration property of $G$ entered the proof.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02KB",
+    "place": "Proposition 7.1.4.26 motivates limit creation; the following is an agent proof for the relative arrow model using the cited general mapping-space statements, not a quotation of that proposition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-comma-mapping-pullback",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-kan-homotopy-coherent-cube-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02KB",
+  "place": "Relative arrow-model extension proved by natural comma mapping spaces and the mapping-space limit criterion; Kerodon Proposition 7.1.4.26 is the motivating absolute coslice result. Archival source WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +154,54 @@
    "date": "2026-10-17",
    "verdict": "no match: LeanFinder and LeanSearch return ordinary CategoryTheory.StructuredArrow and Under limits; read Limits/Comma.lean:262-277, especially hasLimit:270. These use ordinary categories, not quasicategories, arbitrary simplicial shapes or coherent mapping fibers. Loogle has zero hits; grep in AlgebraicTopology has only monomorphism colimit stability. The second semantic phrasing also returns ordinary comma/over limits.",
    "sub": "CategoryTheory/Limits/Comma.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "coslice|comma|createsLimit|limiting.cone",
+   "results": "{\"t\": \"2026-10-17T13:04:20Z\", \"tool\": \"grep\", \"query\": \"coslice|comma|createsLimit|limiting.cone\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned only ordinary category comma/Under limit declarations, or no quasicategorical cone declaration; read Mathlib/CategoryTheory/Limits/Comma.lean:262-277, notably hasLimit:270. Ordinary category shapes and strict Hom sets do not give arbitrary simplicial shapes and coherent mapping fibers.",
+   "sub": "AlgebraicTopology/Quasicategory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent undercategories have limits computed on underlying objects when the functor preserves the given limit, including the empty limit",
+   "results": "{\"t\": \"2026-10-17T13:04:21Z\", \"tool\": \"leansearch\", \"query\": \"Coherent undercategories have limits computed on underlying objects when the functor preserves the given limit, including the empty limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Under.instHasLimits\", \"CategoryTheory.Under.hasLimit_of_hasLimit_comp_forget\", \"CategoryTheory.Under.instHasLimitsOfShape\", \"CategoryTheory.Limits.limit.isLimitToOver\", \"CategoryTheory.preservesLimits_of_createsLimits_and_hasLimits\", \"CategoryTheory.Limits.isColimitOfPreserves\", \"CategoryTheory.Cat.instPreservesLimitsObjects\", \"CategoryTheory.Limits.PreservesLimit.mk\"], \"digest\": \"d146507a57f011c5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned only ordinary category comma/Under limit declarations, or no quasicategorical cone declaration; read Mathlib/CategoryTheory/Limits/Comma.lean:262-277, notably hasLimit:270. Ordinary category shapes and strict Hom sets do not give arbitrary simplicial shapes and coherent mapping fibers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"limit\"",
+   "results": "{\"t\": \"2026-10-17T13:04:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"limit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned only ordinary category comma/Under limit declarations, or no quasicategorical cone declaration; read Mathlib/CategoryTheory/Limits/Comma.lean:262-277, notably hasLimit:270. Ordinary category shapes and strict Hom sets do not give arbitrary simplicial shapes and coherent mapping fibers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor of quasicategories creates a limit in the relative coslice b under G whenever its underlying cone and its G image are limiting",
+   "results": "{\"t\": \"2026-10-17T13:04:25Z\", \"tool\": \"leanfinder\", \"query\": \"A functor of quasicategories creates a limit in the relative coslice b under G whenever its underlying cone and its G image are limiting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.StructuredArrow.createsLimit\", \"CategoryTheory.compCreatesLimit\", \"CategoryTheory.StructuredArrow.createsLimitsOfShape\", \"CategoryTheory.liftedLimitIsLimit\", \"CategoryTheory.liftsToLimitOfCreates\", \"CategoryTheory.compCreatesLimitsOfShape\", \"CategoryTheory.liftLimit\", \"CategoryTheory.Functor.Initial.createsLimitOfComp\"], \"digest\": \"7a0080a1161c525b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned only ordinary category comma/Under limit declarations, or no quasicategorical cone declaration; read Mathlib/CategoryTheory/Limits/Comma.lean:262-277, notably hasLimit:270. Ordinary category shapes and strict Hom sets do not give arbitrary simplicial shapes and coherent mapping fibers."
+  },
+  {
+   "tool": "grep",
+   "query": "StructuredArrow|createsLimit",
+   "results": "{\"t\": \"2026-10-17T13:05:16Z\", \"tool\": \"grep\", \"query\": \"StructuredArrow|createsLimit\", \"sub\": \"CategoryTheory/Limits/Comma.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"262\", \"264\", \"266\", \"267\", \"277\"], \"digest\": \"3aa3b110b097110c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned only ordinary category comma/Under limit declarations, or no quasicategorical cone declaration; read Mathlib/CategoryTheory/Limits/Comma.lean:262-277, notably hasLimit:270. Ordinary category shapes and strict Hom sets do not give arbitrary simplicial shapes and coherent mapping fibers.",
+   "sub": "CategoryTheory/Limits/Comma.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping spaces of coherent cones in an infinity categorical comma category are homotopy fibers, so preserved limits lift to the comma category",
+   "results": "{\"t\": \"2026-10-17T13:05:18Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping spaces of coherent cones in an infinity categorical comma category are homotopy fibers, so preserved limits lift to the comma category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comma.coneOfPreservesIsLimit\", \"CategoryTheory.Comma.coneOfPreserves\", \"CategoryTheory.Comma.coneOfPreserves_pt_hom\", \"CategoryTheory.CategoryOfElements.CreatesLimitsAux.map_lift_mapCone\", \"CategoryTheory.Comma.limitAuxiliaryCone\", \"CategoryTheory.Comma.hasLimitsOfShape\", \"CategoryTheory.Comma.hasLimit\", \"CategoryTheory.StructuredArrow.createsLimit\"], \"digest\": \"50700f84e4eee75c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned only ordinary category comma/Under limit declarations, or no quasicategorical cone declaration; read Mathlib/CategoryTheory/Limits/Comma.lean:262-277, notably hasLimit:270. Ordinary category shapes and strict Hom sets do not give arbitrary simplicial shapes and coherent mapping fibers."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-finite-core-fiber-contraction",
@@ -93,5 +233,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-undercategory-limit-creation",
+  "worker": "stage1",
+  "summary": "Q31 gave an explicit mapping-space proof for the arbitrary relative arrow model, retaining the statement and both its empty-shape and given-cone clauses. The proof uses existing comma, cone and coherent-span invariance nodes; no new nodes. Logged fresh searches found only ordinary categorical analogues.",
+  "blueprint": "Realizes the inverse-limit/coherent-cone foundation below paragraph 2 of prop-coef-integral-exceptional-adjoint, through the existing finite-core-fiber-contraction ancestry; the unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "General quasicategory and coherent cone mapping-space criterion, used as a black box; this coefficient-unit foundation has no separate local version."
+   },
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "General Kan mapping-path fiber criterion used to choose coherent lift data; not a replacement of a coefficient-unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-fibration-fiber-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q31-a1829233c",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q31-a1829233c (reviewer sub-agent of L); spot-checked: Read the item, route, sources, cited nodes, delivery rules, and edge cases. The arbitrary-functor relative undercategory proof is complete, hypotheses are preserved, citations match, no duplicates or repairs are needed. Review written to review.md."
  }
 }

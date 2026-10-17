@@ -1,0 +1,73 @@
+{
+ "id": "lem-coef-monoidal-square-hom-transport",
+ "kind": "statement",
+ "title": "Transport of evaluation comparisons through a monoidal square",
+ "statement": "Let $\\mathcal C_A,\\mathcal C_B,\\mathcal D_A,\\mathcal D_B$ be symmetric monoidal closed categories: each has a tensor, coherent unit, associativity and symmetry isomorphisms, and natural adjunction bijections $\\operatorname{Hom}(T,H(K,M))\\cong\\operatorname{Hom}(T\\otimes K,M)$, whose counits are denoted $\\mathrm{ev}$. Let $F:\\mathcal C_A\\to\\mathcal C_B$, $G:\\mathcal D_A\\to\\mathcal D_B$, $U_A:\\mathcal C_A\\to\\mathcal D_A$, $U_B:\\mathcal C_B\\to\\mathcal D_B$ be strong symmetric monoidal functors (their natural tensor and unit comparisons are isomorphisms satisfying the associativity, unit and symmetry axioms), and let $h:U_BF\\xrightarrow{\\sim}GU_A$ be a monoidal natural isomorphism (its components commute with those tensor and unit comparisons). For any such functor $V$, let $v_V:VH(K,M)\\to H(VK,VM)$ be the transpose of $V\\mathrm{ev}$ under its tensor comparison. Put $\\beta_A=v_{U_A}$ and $\\beta_B=v_{U_B}$.\n\nFor all $K,M\\in\\mathcal C_A$, after identifying $U_BFK$ and $GU_AK$, and the corresponding second variables, by $h$, one has\n$$v_G\\circ G(\\beta_A)\\circ h_{H_{\\mathcal C_A}(K,M)}=\\beta_B\\circ U_B(v_F).$$\nIf $\\beta_A,\\beta_B$ are invertible at the pairs in question, this gives\n$$v_G=\\beta_B\\circ U_B(v_F)\\circ h_{H_{\\mathcal C_A}(K,M)}^{-1}\\circ G(\\beta_A^{-1}).$$\nThe formula carries naturality in both variables, evaluation identities, preservation of tensor–Hom transposes, and preservation of internal-Hom composition for $v_F$ to those for $v_G$ on these pairs. For a third coefficient index $C$, suppose analogous functors, evaluation comparisons and monoidal squares are given for $A\\to B\\to C$, and that the square isomorphisms respect the specified monoidal composite identifications $F_{A,C}\\cong F_{B,C}F_{A,B}$ and $G_{A,C}\\cong G_{B,C}G_{A,B}$. If the evaluation comparisons $\\beta$ at all required pairs are invertible, the identity and composition equations for $v_F$ imply the corresponding equations for $v_G$, including\n$$v_{G_{A,C}}=v_{G_{B,C}}\\circ G_{B,C}(v_{G_{A,B}}).$$\nHere internal-Hom composition is the transpose of two successive evaluations. Invertibility of $v_F$ is an input if invertibility of $v_G$ is desired; no sheaf-theoretic comparison or essential surjectivity is asserted.\n\nNotation and categorical conventions are those of [def-nagata-category], [def-sfb-monoidal-category].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "Proof final sentence, site-comparison transport of the specified internal-Hom comparison; extracted returned step 14, conjugation and coherent successive coefficient changes"
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a commutative square of strong monoidal functors internal Hom comparison maps defined by evaluation commute and their composition coherences transport",
+   "results": "CategoryTheory.expComparison; CategoryTheory.expComparison_whiskerLeft; CategoryTheory.expComparison_ev; CategoryTheory.MonoidalClosedFunctor.comparison_iso; CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_three; CategoryTheory.coev_expComparison; CategoryTheory.Adjunction.homEquiv_naturality_right_square; CategoryTheory.Adjunction.homEquiv_naturality_left_square. Closest expComparison and comparison_iso require CartesianMonoidalCategory, unlike tensor module categories; generic Hom-equivalence naturality is an ingredient only.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A strong monoidal natural isomorphism between composite functors intertwines their evaluation defined internal Hom comparison maps",
+   "results": "CategoryTheory.LaxMonoidalFunctor.isoOfComponents; CategoryTheory.Functor.homObjEquiv; CategoryTheory.Functor.Monoidal.μNatIso; CategoryTheory.Functor.Monoidal.tensorObjComp; CategoryTheory.Functor.mapGrpCompIso; CategoryTheory.Functor.Monoidal.ofBifunctor; CategoryTheory.CartesianMonoidalCategory.prodComparisonBifunctorNatIso_hom; CategoryTheory.Functor.Monoidal.coreMonoidalTransport. Monoidal structures and their transport do not state this internal-Hom square identity or successive-comparison coherence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"comparison\"",
+   "results": "CategoryTheory.MonoidalClosedFunctor.comparison_iso. comparison_iso is in the Cartesian-monoidal exponential comparison file, not a result for these general symmetric tensor categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"map\"",
+   "results": "AddActionSemiHomClass.map_vaddₛₗ; MulActionSemiHomClass.map_smulₛₗ; SemilinearMapClass.distribMulActionSemiHomClass; SemilinearMapClass.toMulActionSemiHomClass; NonUnitalAlgHomClass.instSemilinearMapClassOfNonUnitalAlgSemiHomClassOfClassRingHom; CategoryTheory.MonoidalClosed.curry'_ihom_map; CategoryTheory.MonoidalClosed.uncurry_ihom_map; CategoryTheory.MonoidalClosed.pre_comm_ihom_map. Read the generic curry/uncurry naturality statements: these are single adjunction identities, not transport through a square or its composite coherence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "expComparison|internalHom.*[Cc]omp|[Cc]omp.*internalHom",
+   "results": "Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean. Read Closed/Functor.lean:42–105. Cartesian product hypotheses prevent a one-line specialization to derived tensor categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "thm-coef-finite-hom",
+  "date": "2026-10-17",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof final sentence, site-comparison transport of the specified internal-Hom comparison; extracted returned step 14, conjugation and coherent successive coefficient changes",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,10 +1,108 @@
 {
  "chapter": "sec-six-functors",
  "unit": "sk-rem-sf-pf-done",
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Fix an arbitrary object $U\\to V$ and set $E=K_1|_U$, $\\mathcal O=k_U$. Restriction to the slice is exact by [lem-pur-site-restriction-module-adjunction-exact]. Applied to kernels and images in the cohomology formula [def-weil-derived-cohomology-sheaves], this gives $H^q(E)=H^q(K_1)|_U$. Hence $H^q(E)=0$ outside $[a,b]$. The definition [def-weil-proetale-locally-constant-sheaf] supplies local constant finite-dimensional models for the remaining sheaves. The same models restrict to $\\mathcal C/U$: a covering sieve pulls back to a covering sieve, and restriction is sectionwise on the localized site [def-pur-localized-ringed-site]. In particular no exactness of evaluation on $U$ is assumed.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-proetale-locally-constant-sheaf",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DJ (lemma-extension-by-zero-exact), exact restriction to a slice; the sectionwise cohomology calculation."
+   }
+  },
+  {
+   "text": "Put $F_q=H^q(E)$. On each trivializing slice a basis of its finite-dimensional model identifies $F_q$ with $\\mathcal O^{\\oplus r}$, so tensoring there sends a module $G$ to $G^{\\oplus r}$ (the coordinate maps are $e_j\\otimes g\\mapsto (0,\\ldots,g,\\ldots,0)$). For a short exact sequence, restriction remains exact by [lem-pur-site-restriction-module-adjunction-exact], and tensor commutes with restriction by [lem-sfb-localized-site-tensor-restriction]. Its tensor sequence is therefore exact on these slices, being a finite direct sum of the restricted sequence. This implies exactness globally: kernels are sectionwise, and a section in the kernel is locally in the image precisely when its class in the sheafified cokernel is locally zero; the sheaf axiom then makes that class zero [def-weil-sheaf-of-modules-category]. Thus $F_q$ is flat in the tensor-exact sense of [def-pc-flat-sheaf-modules]. This local finite-basis argument is an elementary step, not a separate node.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sfb-localized-site-tensor-restriction",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03ER (definition-flat), 03DJ (lemma-extension-by-zero-exact), and 03EL (lemma-tensor-product-pullback), applied to the localization of Tag 03DH; finite-free tensor and local exactness from sectionwise kernels and sheafified cokernels."
+   }
+  },
+  {
+   "text": "Choose a representing complex of $E$ and put $T_q=\\tau_{\\le q}E$. The canonical truncation triangles [lem-weil-pbc-truncation-triangle] are $T_{q-1}\\to T_q\\to F_q[-q]\\to T_{q-1}[1]$. From the explicit truncation in that statement, $H^i(T_q)=H^i(E)$ for $i\\le q$ and is zero for $i>q$: in degree $q$ the last term is $\\ker d^q$, and the other degrees are unchanged or zero. Thus $T_{a-1}$ is acyclic and the inclusion $T_b\\to E$ is a quasi-isomorphism. Localization at quasi-isomorphisms [def-weil-abstract-derived-category] identifies $T_{a-1}$ with zero and $T_b$ with $E$.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), second displayed triangle, with its index a=q-1."
+   }
+  },
+  {
+   "text": "Let $L$ be any $\\mathcal O$-module sheaf, placed in degree zero. By [lem-pc-kflat-resolution], choose a quasi-isomorphism $P\\to L[0]$ with $P$ K-flat and all terms flat. These are sheaves of modules over the commutative ring sheaf $\\mathcal O$; their tensor is additive and symmetric by [lem-pc-sheaf-modules-tensor-closed], with direct-sum total complexes [def-pc-tensor-complex-sheaves]. The resolution and the resolving-class equivalence in [lem-weil-pbc-site-derived-tensor-descent] supply the K-flat left-derivability hypotheses of [lem-sc-source-kflat-tensor-left-triangulated]. Consequently $QL\\otimes^{\\mathbf L}-$, where $QL=Q(P)=L[0]$, preserves distinguished triangles and shifts. Symmetry identifies this with $\\Phi(-)=(-)\\otimes^{\\mathbf L}_{\\mathcal O}L[0]$: on homogeneous terms of degrees $r,s$ the comparison is $x\\otimes y\\mapsto(-1)^{rs}y\\otimes x$; the total differential gives a chain map, whose inverse is the same interchange. Descent along the K-flat equivalence gives this comparison for derived objects. Thus $\\Phi$ is exact and shift-compatible, and sends zero to zero.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sc-source-kflat-tensor-left-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor and the preceding exact-functor construction), and the signed symmetry immediately following 06YU."
+   }
+  },
+  {
+   "text": "The single complex $F_q[-q]$ is bounded above and termwise flat by Step 2, hence K-flat by [lem-pc-bounded-above-flat-kflat-site]. Both it and $P$ are therefore flat-term K-flat complexes, so [lem-weil-pbc-site-derived-tensor-descent] represents $\\Phi(F_q[-q])$ by $\\operatorname{Tot}(F_q[-q]\\otimes_{\\mathcal O}P)$. By [def-pc-tensor-complex-sheaves] its degree-$i$ term is $F_q\\otimes P^{i-q}$ and its differential is $(-1)^q(1\\otimes d_P)$. Tensoring with $F_q$ is exact, so it preserves kernels, images and their quotients; the cohomology formula [def-weil-derived-cohomology-sheaves] yields $H^i\\Phi(F_q[-q])\\cong F_q\\otimes H^{i-q}(P)$. Since $P\\to L[0]$ is a quasi-isomorphism, this vanishes unless $i=q$. This calculation uses no boundedness or flatness assumption on the arbitrary test sheaf $L$.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat), applied to the single flat sheaf; Tag 06YU for computation on K-flat complexes."
+   }
+  },
+  {
+   "text": "Induct on the finite integer interval $a-1\\le q\\le b$. The claim is that $H^i\\Phi(T_q)=0$ for $i<a$ or $i>q$; the base $q=a-1$ holds because $T_{a-1}=0$. For $a\\le q\\le b$, Step 4 sends the truncation triangle of Step 3 to a distinguished triangle. The long exact cohomology sequence [lem-sf-derived-homology-long-exact] contains $H^i\\Phi(T_{q-1})\\to H^i\\Phi(T_q)\\to H^i\\Phi(F_q[-q])$. If $i<a$ or $i>q$, the outer terms are zero by the induction hypothesis and Step 5, hence the middle term is zero by exactness. At $q=b$, $T_b\\simeq E=K_1|_U$, giving the required vanishing outside $[a,b]$. Both $U$ and $L$ were arbitrary. The other hypotheses of the item specify its intended residue object; no step needs to strengthen them.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), finite Postnikov induction; the cohomological long exact sequence of distinguished triangles."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-kflat-resolution",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sc-source-kflat-tensor-left-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-truncation-triangle"
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "id": "lem-fix-constructible-flat-cohomology-tor-bound",
  "kind": "statement",
  "title": "Flat bounded cohomology gives finite Tor amplitude",
@@ -111,6 +209,22 @@
    "results": "; 8 hits: CochainComplex.isZero_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, CochainComplex.IsStrictlyGE, Algebra.FormallyEtale.instTensorProduct, HomologicalComplex.instHasFiniteLimits, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
    "date": "2026-10-17",
    "verdict": "no match: cohomological-support bounds and ordinary flat-module exactness do not state the sheaf residue Tor-amplitude bound on every slice"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex with flat cohomology in degrees a to b has Tor amplitude in a to b",
+   "subdirectory": "",
+   "results": "; 8 hits: Module.Flat.rTensor_shortComplex_exact, CochainComplex.isZero_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, Module.Flat.lTensor_shortComplex_exact, HomologicalComplex.instHasFiniteLimits, Module.Flat.iff_rTensor_exact, Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give ordinary-module tensor exactness or cohomological support, not the stated sheaf Tor-amplitude bound on every slice"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex with flat cohomology in degrees a to b has Tor amplitude in a to b",
+   "subdirectory": "",
+   "results": "; 8 hits: CochainComplex.IsKProjective, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.IsGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.IsLE",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give ordinary-module tensor exactness or cohomological support, not the stated sheaf Tor-amplitude bound on every slice"
   }
  ],
  "created": {
@@ -119,16 +233,84 @@
   "date": "2026-10-17",
   "group": "Q113"
  },
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 08J5 finite truncation-filtration argument, with Modules on Sites Tags 03ER, 03DJ, 03EL and Cohomology on Sites Tags 06YQ, 06YS, 06YU. This proves the finite residue Tor-amplitude input used before Tag 09C3; it is not an extra assertion of 09C3."
+ },
  "blueprint": {
   "from": {
    "node": "lem-fix-weil-operations",
-   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\": bounded locally constant residue cohomology gives the finite Tor-amplitude hypothesis needed for the local projective-model lemma.",
+   "place": "Proof paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": via lem-fix-constructible-tensor-completion, the bounded locally constant residue complex has the slice-wise finite Tor amplitude needed for its local projective model.",
    "via": [
     "lem-fix-constructible-tensor-completion"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-fix-constructible-flat-cohomology-tor-bound",
+  "worker": "stage1",
+  "summary": "Retained the earlier finite truncation-filtration proof and audited it on arbitrary localized sites. Folded its proposed locally constant residue flatness node into the elementary local finite-basis argument. Added exact restriction, tensor restriction, the K-flat resolution theorem, and the long exact cohomology theorem where required. All cohomology and tensor computations are in sheaves, without evaluating on U. The statement is unchanged. No new nodes remain.",
+  "blueprint": "Realizes the residue Tor-amplitude input of lem-fix-constructible-tensor-completion, which supports the ordinary-to-completed tensor comparison for evaluation in the exceptional-adjoint paragraph of lem-fix-weil-operations. Historical ancestry is retained; the current blueprint does not itself assert the residue lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "The single flat cohomology sheaf is K-flat; no geometry or other-unit proof route is substituted."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Resolves the arbitrary test sheaf by a flat-term K-flat complex on a small ringed site."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Supplies the additive symmetric sheaf tensor structure for the generic K-flat exactness theorem."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact restriction computes cohomology on every slice; no such site-theoretic theorem is supplied by the projection-formula unit."
+   },
+   {
+    "node": "lem-sc-source-kflat-tensor-left-triangulated",
+    "why": "Exactness and shift compatibility for tensor with a K-flat homotopy object are generic derived-category tools."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Transfers support bounds across the distinguished truncation triangles; this is a generic homological-algebra tool."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Restriction of ordinary sheaf tensor is needed to check local finite-free tensor exactness; this is a generic site tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Supplies the resolving-class equivalence and comparison with total tensor of two flat-term K-flat complexes."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "The finite Postnikov filtration is a general derived-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-kflat-resolution",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sc-source-kflat-tensor-left-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q81-1be9d49ca",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q81-1be9d49ca (reviewer sub-agent of L); spot-checked: The proof and statement pass the mathematical checks, but the source field incorrectly presents Tag 09C3 as asserting the slice-wise Tor bound. Corrected DAG JSON records the actual assembled route through Tags 08J5, 03ER, 03DJ, 03EL, 06YQ, 06YS, and 06YU. Full review: review.md.; 1 file(s) fixed by the reviewer"
  }
 }

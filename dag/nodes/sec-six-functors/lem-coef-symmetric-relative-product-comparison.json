@@ -12,41 +12,106 @@
   "def-coef-infinity-fibrations",
   "def-coef-infinity-relative-cone"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the defining relative-limit square of [def-coef-infinity-relative-cone] for the target cone $\\mu$, taking the test diagram $t=\\lambda$. The limit convention has mapping spaces $\\operatorname{Map}(t,\\mu)$, so this is exactly the square inducing the displayed map. The equal-boundary and equal-base hypotheses specify its target point as the two identities with the constant path between their common restrictions. By [lem-cbc-enhanced-functor-cone-calculus] the four corner mapping spaces are Kan. Its path-pullback target is Kan as well: apply [lem-coef-space-path-fibration-replacement] to the upper-right to lower-right map and pull its endpoint fibration back along the lower-left to lower-right map. Pullbacks of Kan fibrations are Kan fibrations directly by the horn lifting definition, and a Kan fibration over a Kan complex has Kan total space by two successive horn lifts. The relative-limit definition says that the canonical map to this path pullback is a weak equivalence. Thus [lem-coef-space-contractible-fiber-equivalence] makes its homotopy fibre at the specified identity point contractible.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-space-contractible-fiber-equivalence",
+    "lem-coef-space-path-fibration-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02X1",
+    "place": "Proposition 7.1.6.19(2), with target cone mu and test cone lambda; path model and fibre criterion expanded using the cited DAG statements. Application: Higher Algebra Theorem 2.3.3.23(1), pp. 267-268."
+   }
+  },
+  {
+   "text": "Let $a$ be any point of the identity homotopy fibre, retaining its path data. The reversed application (target $\\lambda$, test $\\mu$) gives a nonempty contractible reverse fibre; choose $b$ there. Here is why the composite comparisons still carry identity-fibre data. In the composition formula of [lem-coef-infinity-mapping-composition], the maps $\\theta$ and $\\ell$ restrict a family of triangles to its edges. Restriction to $K$ and postcomposition by $q$ commute strictly with these restrictions. The pinch comparison $j$ is natural by [lem-coef-infinity-pinch-comparison]. Thus the same triangle families compute composition in all four corner mapping spaces, compatibly with their square. Whisker the boundary/base paths belonging to $a,b$ by these compositions and concatenate them; their compatibility paths in the lower-right mapping space are whiskered in the same triangle family. The resulting path in the path-pullback target ends at the composite of the identity pairs, identified with the identity pair by the unital homotopies of the composition lemma. It therefore supplies points over $ba$ and $ab$ in the self-comparison identity fibres. Those fibres are contractible by Step 1, applied with both cones equal. They also contain the degenerate identities with constant path data. Projecting paths in these fibres to the original mapping spaces shows $[b][a]=[1_\\lambda]$ and $[a][b]=[1_\\mu]$. The invertible-component criterion of [lem-coef-infinity-mapping-composition] makes the edge underlying $a$ an equivalence in $\\operatorname{Fun}(K^{\\triangleleft},D)$. The component criterion of [lem-cbc-enhanced-functor-cone-calculus] gives an equivalence at the cone vertex.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-mapping-composition",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Construction 4.6.8.9, Propositions 4.6.8.11-12 and Remark 4.6.8.14; natural pinch comparison 4.6.5.10. Agent expansion of the relative-product comparison used in Higher Algebra Theorem 2.3.3.23(1), p.268."
+   }
+  },
+  {
+   "text": "The relative-product-cone conclusion is the specialization of Step 2 to the indexing simplicial set and boundary defining a relative product. The join and relative-limit definitions in [def-coef-infinity-relative-cone] identify its comparison space and its boundary/base maps with those in the displayed fibre, so the apex map is an equivalence. No nonemptiness of the boundary was used; when $K=\\varnothing$, the boundary mapping spaces are terminal points and the same identity-fibre argument applies.",
+   "uses": [
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra (2017), Theorem 2.3.3.23(1), printed pp. 267-268; relative-product specialization and arity-zero case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-space-contractible-fiber-equivalence",
+  "lem-coef-space-path-fibration-replacement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, finite-coefficient derived mapping-complex comparison; explicit expansion of Higher Algebra Theorem 2.3.3.23(1), pp. 266-268, read online (not archived)."
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "Two relative limit cones of an inner fibration of quasicategories with the same boundary and base are equivalent over their boundary.",
-   "results": "{\"t\": \"2026-10-17T09:26:34Z\", \"tool\": \"leanfinder\", \"query\": \"Two relative limit cones of an inner fibration of quasicategories with the same boundary and base are equivalent over their boundary.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.quasicategory_of_filler\", \"SSet.RelativeMorphism.Homotopy.ofEq_h\", \"SSet.horn.hom_ext\", \"SSet.Quasicategory.hornFilling\"], \"digest\": \"3e5efdfef0a5d6b0\"}",
+   "tool": "grep",
+   "query": "conePointUniqueUpToIso|relative.*[Ll]imit|[Ll]imit.*relative",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/Limits/FullSubcategory.lean\", \"Mathlib/CategoryTheory/Limits/FullSubcategory.lean\", \"Mathlib/CategoryTheory/Limits/Lattice.lean\", \"Mathlib/CategoryTheory/Limits/Lattice.lean\", \"Mathlib/CategoryTheory/Limits/Lattice.lean\", \"Mathlib/CategoryTheory/Limits/Lattice.lean\", \"Mathlib/CategoryTheory/Limits/Lattice.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\"], \"n_hits\": 25, \"note\": \"\"}",
    "date": "2026-10-17",
-   "verdict": "no match: ordinary-category cone uniqueness and strict Segal fillers do not state relative limits of quasicategories"
+   "verdict": "no match: Mathlib results concern ordinary-category limits or strict quasicategory fillers and do not state relative limits of quasicategories with fixed boundary and base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of limits relative to a functor of infinity categories with a fixed diagram and base cone",
+   "results": "{\"top\": [\"CategoryTheory.Limits.IsLimit.subsingleton\", \"CategoryTheory.Limits.IsLimit.mk.injEq\", \"CategoryTheory.Limits.IsLimit.mk.noConfusion\", \"CategoryTheory.Limits.IsLimit.uniq_cone_morphism\", \"CategoryTheory.Limits.IsLimit.liftConeMorphism\", \"CategoryTheory.Limits.limit.conePointUniqueUpToIso_inv_comp_assoc\", \"CategoryTheory.Limits.IsLimit.recOn\", \"CategoryTheory.CreatesLimit.mk.noConfusion\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib results concern ordinary-category limits or strict quasicategory fillers and do not state relative limits of quasicategories with fixed boundary and base."
   },
   {
    "tool": "loogle",
    "query": "\"conePointUniqueUpToIso\"",
-   "results": "{\"t\": \"2026-10-17T09:26:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"conePointUniqueUpToIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.coconePointUniqueUpToIso\", \"CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso\", \"CategoryTheory.Limits.IsColimit.coconePointUniqueUpToIso_hom_desc\", \"CategoryTheory.Limits.IsColimit.coconePointUniqueUpToIso_inv_desc\", \"CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_hom\", \"CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_inv\", \"CategoryTheory.Limits.IsColimit.coconePointUniqueUpToIso_hom_desc_assoc\", \"CategoryTheory.Limits.IsColimit.coconePointUniqueUpToIso_inv_desc_assoc\"], \"digest\": \"3b1f8d9342ec2d6d\"}",
+   "results": "{\"top\": [\"CategoryTheory.Limits.IsColimit.coconePointUniqueUpToIso\", \"CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso\", \"CategoryTheory.Limits.IsColimit.coconePointUniqueUpToIso_hom_desc\", \"CategoryTheory.Limits.IsColimit.coconePointUniqueUpToIso_inv_desc\", \"CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_hom\", \"CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_inv\", \"CategoryTheory.Limits.IsColimit.coconePointUniqueUpToIso_hom_desc_assoc\", \"CategoryTheory.Limits.IsColimit.coconePointUniqueUpToIso_inv_desc_assoc\"], \"n_hits\": 12, \"note\": \"\"}",
    "date": "2026-10-17",
-   "verdict": "no match: ordinary-category cone uniqueness and strict Segal fillers do not state relative limits of quasicategories"
+   "verdict": "no match: Mathlib results concern ordinary-category limits or strict quasicategory fillers and do not state relative limits of quasicategories with fixed boundary and base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two relative limit cones of quasicategories with fixed boundary and base have a contractible space of comparisons and equivalent vertices",
+   "results": "{\"top\": [\"CategoryTheory.Limits.LimitCone.mk.inj\", \"SSet.hasLimits\", \"CategoryTheory.Limits.Cone.mk.inj\", \"CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso\", \"CategoryTheory.Limits.IsLimit.mk.inj\", \"CategoryTheory.Limits.Wedge.IsLimit.hom_ext\", \"CategoryTheory.Limits.IsLimit.uniq_cone_morphism\", \"CategoryTheory.Limits.IsLimit.uniqueUpToIso\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib results concern ordinary-category limits or strict quasicategory fillers and do not state relative limits of quasicategories with fixed boundary and base."
   },
   {
    "tool": "grep",
-   "query": "conePointUniqueUpToIso|relative.*[Ll]imit|[Ll]imit.*relative (Mathlib/CategoryTheory/Limits)",
-   "results": "{\"t\": \"2026-10-17T09:26:21Z\", \"tool\": \"grep\", \"query\": \"conePointUniqueUpToIso|relative.*[Ll]imit|[Ll]imit.*relative\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/FullSubcategory.lean\", \"Mathlib/CategoryTheory/Limits/FullSubcategory.lean\", \"Mathlib/CategoryTheory/Limits/Lattice.lean\", \"Mathlib/CategoryTheory/Limits/Lattice.lean\", \"Mathlib/CategoryTheory/Limits/Lattice.lean\", \"Mathlib/CategoryTheory/Limits/Lattice.lean\", \"Mathlib/CategoryTheory/Limits/Lattice.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Equalizers.lean\"], \"digest\": \"fa0e799ed0a4739f\"}",
+   "query": "relative.*limit|limit.*relative|homotopy.*[Ff]ib",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\"}",
    "date": "2026-10-17",
-   "verdict": "no match: ordinary-category cone uniqueness and strict Segal fillers do not state relative limits of quasicategories"
+   "verdict": "no match: Mathlib results concern ordinary-category limits or strict quasicategory fillers and do not state relative limits of quasicategories with fixed boundary and base."
   },
   {
-   "tool": "leansearch",
-   "query": "Uniqueness up to equivalence of a limit relative to a functor of infinity categories",
-   "results": "{\"t\": \"2026-10-17T09:26:22Z\", \"tool\": \"leansearch\", \"query\": \"Uniqueness up to equivalence of a limit relative to a functor of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit.mk.injEq\", \"CategoryTheory.Limits.IsLimit.uniqueUpToIso_hom\", \"CategoryTheory.Limits.IsLimit.uniqueUpToIso\", \"CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso\", \"CategoryTheory.Limits.IsLimit.mk.noConfusion\", \"CategoryTheory.Limits.reflectsLimit_subsingleton\", \"CategoryTheory.LiftsToLimit.noConfusion\", \"CategoryTheory.Limits.IsLimit.whiskerEquivalenceEquiv\"], \"digest\": \"89f9baff3a8b2f28\"}",
+   "tool": "leanfinder",
+   "query": "An equivalence between infinity categorical limiting cones is determined by the universal property using inverse maps in contractible mapping fibres",
+   "results": "{\"top\": [\"CategoryTheory.Limits.IsLimit.ofConeEquiv_symm_apply_desc\", \"CategoryTheory.Limits.IsLimit.conePointsIsoOfEquivalence\", \"CategoryTheory.Limits.IsLimit.ofConeEquiv\", \"CategoryTheory.Limits.IsLimit.ofConeEquiv_apply_desc\", \"CategoryTheory.Limits.IsLimit.conePointsIsoOfEquivalence_inv\", \"CategoryTheory.Limits.IsLimit.mapConeEquiv\", \"CategoryTheory.Limits.IsLimit.conePointsIsoOfEquivalence_hom\", \"CategoryTheory.Limits.isLimitEmptyConeEquiv\"], \"n_hits\": 8, \"note\": \"\"}",
    "date": "2026-10-17",
-   "verdict": "no match: ordinary-category cone uniqueness and strict Segal fillers do not state relative limits of quasicategories"
+   "verdict": "no match: Mathlib results concern ordinary-category limits or strict quasicategory fillers and do not state relative limits of quasicategories with fixed boundary and base."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-weak-approximation-algebras",
@@ -74,5 +139,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-symmetric-relative-product-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the relative-limit universal-property argument: the q-limit square identifies the displayed mapping-space map and its identity homotopy fibre is contractible; a reverse comparison and contractible identity fibres supply inverse homotopies, so the cone-vertex component is an equivalence. The relative product and empty-boundary clauses are direct specializations. No new nodes were needed because the only non-elementary inputs are existing relative-cone, Kan mapping-space, contractible-fibre, and mapping-composition statements.",
+  "blueprint": "Realizes the ancestor proof place “Converse condition (ii): comparison of the two relative product cones on the local unary projections” in prop-coef-integral-exceptional-adjoint: the first two steps expand the relative universal mapping-space and inverse-comparison argument, and the third handles the relative-product and empty-boundary specialization.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Only its generic functor-quasicategory, Kan mapping-space and componentwise-equivalence clauses are used; the biduality unit has no such foundational result. This does not replace any geometric or coefficient-transport step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q77-2eeb35ed4",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-2eeb35ed4 (reviewer sub-agent of L); spot-checked: Corrected Step 1’s reversed universal-property application, added existing path/pinch citations and explicit coherence details, and declared the accepted cone-calculus tool use. Statement unchanged; empty-boundary checks passed. Full review and corrected DAG JSON saved.; 1 file(s) fixed by the reviewer"
  }
 }

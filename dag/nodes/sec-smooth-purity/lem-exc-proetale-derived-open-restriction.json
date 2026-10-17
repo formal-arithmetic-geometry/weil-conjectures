@@ -2,7 +2,7 @@
  "id": "lem-exc-proetale-derived-open-restriction",
  "kind": "statement",
  "title": "Unbounded pro-etale direct image commutes with open restriction",
- "statement": "Let $A$ be a finite commutative ring and $p:V\\to T$ a morphism of schemes [def-pc-scheme]. Let $i:W\\hookrightarrow T$ be an arbitrary open immersion [def-weil-open-immersion], and set $U=V\\times_TW$, with projections $k:U\\hookrightarrow V$ and $r:U\\to W$ [def-pc-fibre-product]. Use ordinary constant-$A$ module sheaves on the small pro-etale sites [def-weil-pbc-proetale-site, def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category] and the uncompleted unbounded derived operations [def-weil-pbc-proetale-operations]. For every $L\\in D(V_{\\mathrm{proet}},A)$ the canonical restriction map\n$$\\rho_L:i^*Rp_*L\\longrightarrow Rr_*k^*L$$\nis an isomorphism, natural in $L$. Its normalization is the termwise equality $i^*p_*I=r_*k^*I$ on a K-injective representative $I$; on $Q\\to W$ both sides evaluate on $V\\times_TQ=U\\times_WQ$, with the same restrictions and $A$-actions. Open restriction $k^*$ preserves K-injectives, using $k_!\\dashv k^*$ [lem-weil-extension-by-zero-adjunction] and exact $k_!$ [lem-weil-extension-by-zero-exact]. With exact extension by zero [def-weil-extension-by-zero] and its open unit, this gives the natural isomorphism\n$$\\lambda_M:i^*Rp_*k_!M\\xrightarrow{\\rho}Rr_*k^*k_!M\\xrightarrow{\\sim}Rr_*M$$\nfor every $M\\in D(U_{\\mathrm{proet}},A)$. No properness, cohomological-dimension bound, boundedness or etale-origin hypothesis is imposed.",
+ "statement": "Let $A$ be a finite commutative ring and $p:V\\to T$ a morphism of schemes [def-pc-scheme]. Let $i:W\\hookrightarrow T$ be an arbitrary open immersion [def-weil-open-immersion], and set $U=V\\times_TW$, with projections $k:U\\hookrightarrow V$ and $r:U\\to W$ [def-pc-fibre-product]. Use ordinary constant-$A$ module sheaves on the small pro-etale sites [def-weil-pbc-proetale-site, def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category] and the uncompleted unbounded derived operations [def-weil-pbc-proetale-operations]. For every $L\\in D(V_{\\mathrm{proet}},A)$ the canonical restriction map\n$$\\rho_L:i^*Rp_*L\\longrightarrow Rr_*k^*L$$\nis an isomorphism, natural in $L$. Its normalization is the termwise equality $i^*p_*I=r_*k^*I$ on a K-injective representative $I$ [def-pur-kinjective-complex]; on $Q\\to W$ both sides evaluate on $V\\times_TQ=U\\times_WQ$, with the same restrictions and $A$-actions. Open restriction $k^*$ preserves K-injectives, using $k_!\\dashv k^*$ [lem-weil-extension-by-zero-adjunction] and exact $k_!$ [lem-weil-extension-by-zero-exact]. With exact extension by zero [def-weil-extension-by-zero] and its open unit [lem-exc-proetale-open-unit], this gives the natural isomorphism\n$$\\lambda_M:i^*Rp_*k_!M\\xrightarrow{\\rho}Rr_*k^*k_!M\\xrightarrow{\\sim}Rr_*M$$\nfor every $M\\in D(U_{\\mathrm{proet}},A)$. No properness, cohomological-dimension bound, boundedness or etale-origin hypothesis is imposed.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
   "place": "Step 3 of the retained repaired proof: deriving the open-restriction isomorphism independently of finite CD; Stacks derived.tex Tag 08BJ (lemma-adjoint-preserve-K-injectives), proetale.tex Tag 09BN (lemma-open-immersion); agent-extracted obligation from the retained repaired proof, not an assertion that the etale Stacks source states a pro-etale theorem"
@@ -17,11 +17,96 @@
   "def-weil-pbc-proetale-operations",
   "lem-weil-extension-by-zero-adjunction",
   "lem-weil-extension-by-zero-exact",
-  "def-weil-extension-by-zero"
+  "def-weil-extension-by-zero",
+  "def-pur-kinjective-complex",
+  "lem-exc-proetale-open-unit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-open-immersion-base-change], the projection $k:U\\hookrightarrow V$ is an open immersion. For a module sheaf $F$ on $V_{\\mathrm{proet}}$, identify open inverse image with restriction using [lem-weil-proetale-weakly-etale-localization] (including the identifications of constant ring sheaves). For every object $Q\\to W$, the direct-image formula of [def-weil-pbc-proetale-operations] gives\n$$(i^*p_*F)(Q)=F(V\\times_TQ),\\qquad(r_*k^*F)(Q)=F(U\\times_WQ).$$\nThe Cartesian identity $U=V\\times_TW$ [def-pc-fibre-product] identifies these objects over $V$. A morphism $Q'\\to Q$ induces the same morphism between their fibre products, so the identifications commute with restrictions and with maps of $F$. Both module actions come from the same map $Q\\to T$ on constant ring sheaves, hence this is an $A_W$-linear natural isomorphism $\\alpha_F:i^*p_*F\\simeq r_*k^*F$. This is the open-restriction map: its component sends a section on $V\\times_TQ$ to that same section on $U\\times_WQ$. Applying it in every degree commutes with differentials and gives $\\alpha_I$ for any complex $I$.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-proetale-operations",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "lemma-morphism-big-small, pushforward formula; elementary Cartesian calculation; localization as in Definition 09AE (definition-extension-zero); schemes.tex Tag 01JY (lemma-base-change-immersion), open-immersion case"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-extension-by-zero-adjunction] to $k:U\\hookrightarrow V$: $k_!\\dashv k^*$. The coefficient ring is finite commutative, and $k$ is an open immersion, so [lem-weil-extension-by-zero-exact] makes $k_!$ exact. Both functors are additive between the abelian module-sheaf categories. Thus [lem-weil-pbc-right-adjoint-preserves-kinjective], with $u=k^*$ and $v=k_!$, shows that $k^*I$ is K-injective whenever $I$ is. These are exactly its hypotheses; neither properness nor a bound on the degrees of $I$ is used.",
+   "uses": [
+    "lem-weil-extension-by-zero-adjunction",
+    "lem-weil-extension-by-zero-exact",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives); sites-cohomology.tex Tag 08FI (lemma-restrict-K-injective-to-open); sites-modules.tex Tag 03DJ (lemma-extension-by-zero-exact)"
+   }
+  },
+  {
+   "text": "Represent $L$ by a complex $C$ and choose $C\\to I$ by [prop-pur-kinjective-resolutions-exist]. Its small-site hypothesis holds by the skeleton/universe convention of [def-weil-pbc-proetale-site], and its ring is $A_V$. In the uncompleted operations of [def-weil-pbc-proetale-operations], $Rp_*L$ is represented by $p_*I$. Exactness of $i^*$ and $k^*$ gives representatives $i^*p_*I$ for $i^*Rp_*L$ and $k^*I$ for $k^*L$. Step 2 says $k^*I$ is K-injective. By [lem-weil-pbc-kinjective-total-derived] it therefore computes $Rr_*k^*L$ as $r_*k^*I$, whether or not it is the chosen functorial resolution. Here the functor on the homotopy category is the termwise additive $r_*$ followed by localization; it preserves shifts and cone triangles since these use finite direct sums. The comparison is consequently represented by $\\alpha_I$ from step 1, a degreewise isomorphism of complexes. This proves that $\\rho_L$ is an isomorphism with the stated normalization.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K (lemma-enough-K-injectives-implies) and 070Y (lemma-K-injective-defined); injectives.tex Tag 079P (theorem-K-injective-embedding-grothendieck)"
+   }
+  },
+  {
+   "text": "To check naturality and independence, represent two objects by K-injective complexes $I,J$. By [lem-weil-pbc-kinjective-hom-derived], each derived morphism between them is represented by a chain map $h:I\\to J$, unique up to homotopy. The square formed by $i^*p_*h$, $r_*k^*h$, $\\alpha_I$, and $\\alpha_J$ commutes: on $Q\\to W$ both paths are the map of sections induced by $h$ on the same fibre product, in every degree. Additive termwise functors take a chain homotopy to a chain homotopy by applying the functor to $h^n$ in the identity $f-g=dh+hd$, so the square depends only on the derived morphism. The same cited lemma makes a quasi-isomorphism between K-injectives a homotopy equivalence; applying these functors preserves its inverse and homotopies. Changing the K-injective representative therefore gives the same transformation under the derived comparison identifications. Thus $\\rho$ is natural on the entire unbounded derived category.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), equivalence with maps in the derived category; elementary sectionwise naturality"
+   }
+  },
+  {
+   "text": "Finally [lem-weil-extension-by-zero-exact] makes the termwise $k_!$ a functor on the derived category: an exact additive functor preserves the kernels and images defining cohomology, hence sends acyclic complexes and quasi-isomorphisms to such complexes and maps. Exactness of $k^*$ is part of [def-weil-pbc-proetale-operations]. The natural open unit of [lem-exc-proetale-open-unit] is an isomorphism in each degree of every complex representing $M$, and commutes with differentials by naturality. It induces $\\eta_M:M\\xrightarrow{\\sim}k^*k_!M$. Apply step 3 to $L=k_!M$ and then apply $Rr_*$ to $\\eta_M^{-1}$. Their composite\n$$i^*Rp_*k_!M\\xrightarrow{\\rho_{k_!M}}Rr_*k^*k_!M\\xrightarrow{Rr_*(\\eta_M^{-1})}Rr_*M$$\nis precisely $\\lambda_M$ and is a natural isomorphism. No claim that $k_!$ preserves K-injectives is used: step 3 resolves $k_!M$ on $V$. All arguments apply for arbitrary opens and arbitrary unbounded complexes.",
+   "uses": [
+    "lem-weil-extension-by-zero-exact",
+    "def-weil-pbc-proetale-operations",
+    "lem-exc-proetale-open-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BN (lemma-open-immersion); sites-modules.tex Tag 03DJ (lemma-extension-by-zero-exact)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-proetale-operations",
+  "def-pc-fibre-product",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-exc-proetale-open-unit",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
+  "place": "Retained repaired proof step 3, expanded via Stacks Tags 08BJ, 070K, 070Y, 070I, 079P, 03DJ, 09BN; direct sectionwise calculation on the small pro-etale sites."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +142,45 @@
    "results": "{\"t\": \"2026-10-17T08:17:07Z\", \"tool\": \"grep\", \"query\": \"open.*base.?change|base.?change.*open|derived.*restrict\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected results concern structure-sheaf modules, generic derived functors or abstract mates; they do not state this fixed-coefficient small-site comparison or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "open.*base.?change|base.?change.*open|derived.*restrict",
+   "results": "{\"t\": \"2026-10-17T13:14:10Z\", \"tool\": \"grep\", \"query\": \"open.*base.?change|base.?change.*open|derived.*restrict\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source inspection finds structure-sheaf modules on Zariski opens, local injectivity of presheaf maps, or generic K-injective morphism computations; none gives the stated unbounded small-pro-etale comparison and extension-by-zero normalization in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of sheaves commutes with restriction to an open subset",
+   "results": "{\"t\": \"2026-10-17T13:14:10Z\", \"tool\": \"leansearch\", \"query\": \"Derived direct image of sheaves commutes with restriction to an open subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"ModuleCat.Tilde.toOpen_res\", \"AlgebraicGeometry.Scheme.Opens.ι_app\", \"CategoryTheory.Sheaf.ΓRes\", \"AlgebraicGeometry.morphismRestrictRestrict\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_hom_c_app\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\"], \"digest\": \"21d9ed6ab1fcd804\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source inspection finds structure-sheaf modules on Zariski opens, local injectivity of presheaf maps, or generic K-injective morphism computations; none gives the stated unbounded small-pro-etale comparison and extension-by-zero normalization in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KInjective\", \"map\"",
+   "results": "{\"t\": \"2026-10-17T13:14:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"KInjective\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CochainComplex.IsKInjective.Qh_map_bijective\", \"DerivedCategory.Plus.Qh_map_bijective_of_isKInjective\", \"CochainComplex.Plus.instIsKInjectiveObjHomologicalComplexIntInjectiveObjectUpMapHomologicalComplexιObjPlus\"], \"digest\": \"9284900a69f76eec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source inspection finds structure-sheaf modules on Zariski opens, local injectivity of presheaf maps, or generic K-injective morphism computations; none gives the stated unbounded small-pro-etale comparison and extension-by-zero normalization in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived pushforward of proetale module sheaves commutes with restriction to an open subscheme",
+   "results": "{\"t\": \"2026-10-17T13:14:11Z\", \"tool\": \"leanfinder\", \"query\": \"Unbounded derived pushforward of proetale module sheaves commutes with restriction to an open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\"], \"digest\": \"5ba488725441d776\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source inspection finds structure-sheaf modules on Zariski opens, local injectivity of presheaf maps, or generic K-injective morphism computations; none gives the stated unbounded small-pro-etale comparison and extension-by-zero normalization in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image base change along localization of a site preserving K injectives",
+   "results": "{\"t\": \"2026-10-17T13:14:13Z\", \"tool\": \"leanfinder\", \"query\": \"Derived direct image base change along localization of a site preserving K injectives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isLocallyInjective_whisker\", \"CategoryTheory.Presheaf.isLocallyInjective_of_whisker\", \"CategoryTheory.Presheaf.isLocallyInjective_whisker_iff\", \"CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective_fac\", \"CategoryTheory.GrothendieckTopology.PreservesSheafification.transport\", \"CategoryTheory.Presheaf.comp_isLocallyInjective_iff\", \"CategoryTheory.Presheaf.isLocallyInjective_iff_of_fac\", \"CategoryTheory.Presheaf.isLocallyInjective_comp_iff\"], \"digest\": \"2fa019a0de44bf27\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source inspection finds structure-sheaf modules on Zariski opens, local injectivity of presheaf maps, or generic K-injective morphism computations; none gives the stated unbounded small-pro-etale comparison and extension-by-zero normalization in one line"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-exc-base-change-proper",
@@ -77,5 +197,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-proetale-derived-open-restriction",
+  "worker": "stage1",
+  "summary": "Q129 proves the unbounded open restriction map by a sectionwise comparison, exact-left-adjoint preservation of K-injectives, computation on the restricted K-injective, and explicit naturality; then composes with the open unit for extension by zero. Reuses existing nodes only, with no extra geometric or boundedness hypotheses.",
+  "blueprint": "Realizes the open-restriction obligation extracted from step 3 of the retained repaired prop-exc-base-change-proper proof; keeps its existing sk-prop-sf-existence binding. The currently stored main-20261015 proof has a different dual-base-change sketch, so the retained repaired ancestor DAG is the precise provenance.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of the small pro-etale site of an open with a slice, including constant ring sheaves, needed for the section formula; no exceptional-adjoint theorem is substituted. The item unit contains no statement of this generic tool."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-adjunction",
+    "why": "Generic open extension-by-zero adjunction, needed to apply the exact-left-adjoint criterion for K-injectives. The item unit contains no statement of this generic tool."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-exact",
+    "why": "Generic exactness of open extension by zero, needed for K-injective preservation and its termwise derived functor. The item unit contains no statement of this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "General homological-algebra criterion for a right adjoint to an exact functor; applied to restriction, without changing the unit route. The item unit contains no statement of this generic tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "General existence of functorial K-injective resolutions on a small ringed site, to define the unbounded representative. The item unit contains no statement of this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "General theorem that any K-injective computes the right derived functor; needed for the restricted resolution rather than a new chosen one. The item unit contains no statement of this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "General computation of derived morphisms into K-injectives, to check naturality and independence. The item unit contains no statement of this generic tool."
+   },
+   {
+    "node": "lem-exc-proetale-open-unit",
+    "why": "Generic open unit isomorphism for extension by zero, used only after proving the unrestricted comparison. The item unit contains no statement of this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-exc-proetale-open-unit"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q129-32ebf9837",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q129-32ebf9837 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, unit/chapter route and cited literature. All five proof steps hold for ordinary constant finite coefficients and unbounded complexes. Repaired one C1 omission by citing the existing open-immersion base-change lemma. Corrected JSON and detailed checks are in fixes/ and review.md. No statement changes, new nodes or target weakening.; 1 file(s) fixed by the reviewer"
  }
 }

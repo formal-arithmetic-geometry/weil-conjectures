@@ -18,9 +18,68 @@
   "thm-cbc-finite-level-proetale",
   "thm-sf-ambient-adjoint-class"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=Rf_!$, $F'=Rf'_!$, $U=Lb^*$, $V=La^*$ and $u:U A_S\\xrightarrow{\\sim}A_{S'}$ for the unit comparison. All compositions below are in the stated finite constant-$A$ categories. Use the actual natural Hom bijections of [thm-sf-ambient-adjoint-class], restricted to the bounded constructible inputs of the statement as in [def-weil-exceptional-inverse-image]. In particular, this uses the constructible adjoints, not an exceptional adjunction on all pro-etale objects. By [lem-weil-pbc-adjunct-counit-identity], the inverse transpose sends $h:M\\to Rf^!A_S$ to $\\varepsilon_{f,A_S}\\circ F(h)$. Abbreviate these counits by $\\varepsilon$ and $\\varepsilon'$. Since $P$ transposes $t$, and $B$ transposes the composite specified in [def-pur-co-smoothness], we have\n$$\\varepsilon\\circ F(P)=t,\\qquad \\varepsilon'\\circ F'(B)=u\\circ U(\\varepsilon)\\circ C_{\\omega_f}^{-1}.$$\nThe same counit characterization holds for the transpose of $t'$ under the $f'$ bijection.",
+   "uses": [
+    "thm-sf-ambient-adjoint-class",
+    "def-weil-exceptional-inverse-image",
+    "lem-weil-pbc-adjunct-counit-identity",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), the equivalence of corresponding morphisms with the counit formula, immediately after the definition; applied to the trace and to the defined dualizing base-change map."
+   }
+  },
+  {
+   "text": "The transformation $C$ is natural in its input. Indeed, [def-cbc-exchange-map] writes compact-support exchange as a composite of the unit, the square isomorphism, the counit, and the extension-by-zero comparison, all natural transformations. Whiskering and composing their naturality squares gives naturality of the composite. The map used here is that exchange transported to the pro-etale etale-origin class, as specified in [thm-cbc-finite-level-proetale]; composing with the natural comparison isomorphisms still gives a natural transformation. Its components at $L$ and $\\omega_f$ are invertible on the domain stipulated in the statement by the same theorem. Apply its naturality square to $P:L\\to\\omega_f$:\n$$C_{\\omega_f}\\circ U(F(P))=F'(V(P))\\circ C_L.$$\nPrecompose by $C_L^{-1}$ and postcompose by $C_{\\omega_f}^{-1}$ to obtain\n$$C_{\\omega_f}^{-1}\\circ F'(V(P))=U(F(P))\\circ C_L^{-1}.$$",
+   "uses": [
+    "def-cbc-exchange-map",
+    "thm-cbc-finite-level-proetale"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/def-cbc-exchange-map.md",
+    "place": "Compact-support exchange composite; naturality in the input, applied to P, and then cancellation of the invertible components."
+   }
+  },
+  {
+   "text": "Put $Q=B\\circ V(P)$. Using functoriality and the two equations of Step 1, followed by the naturality equation of Step 2, compute its inverse transpose:\n$$\\begin{aligned}\n\\varepsilon'\\circ F'(Q)\n&=\\varepsilon'\\circ F'(B)\\circ F'(V(P))\\\\\n&=u\\circ U(\\varepsilon)\\circ C_{\\omega_f}^{-1}\\circ F'(V(P))\\\\\n&=u\\circ U(\\varepsilon)\\circ U(F(P))\\circ C_L^{-1}\\\\\n&=u\\circ U(\\varepsilon\\circ F(P))\\circ C_L^{-1}\\\\\n&=u\\circ U(t)\\circ C_L^{-1}\\\\\n&=t'.\n\\end{aligned}$$\nThe last equality follows from the assumed trace equation $t'\\circ C_L=u\\circ U(t)$ by composition with $C_L^{-1}$. Thus both $Q$ and the transpose $P'$ of $t'$ have inverse transpose $t'$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), counit formula after the definition; explicit substitution using the exchange naturality square."
+   }
+  },
+  {
+   "text": "Apply the injectivity of the inverse Hom bijection of [thm-sf-ambient-adjoint-class] for $f'$, source $La^*L$ and target $A_{S'}$. By the counit characterization [lem-weil-pbc-adjunct-counit-identity], Step 3 identifies the inverse images of $Q$ and $P'$. Hence $P'=Q=B\\circ La^*P$, as claimed. The calculation never inverts $B$ and never uses a Tate identification of either dualizing object.",
+   "uses": [
+    "thm-sf-ambient-adjoint-class",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), the equivalence of corresponding morphisms with the counit formula, immediately after the definition; applied to the trace and to the defined dualizing base-change map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-exchange-map",
+  "def-pur-co-smoothness",
+  "def-weil-exceptional-inverse-image",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "thm-cbc-finite-level-proetale",
+  "thm-sf-ambient-adjoint-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0037 (definition-adjoint), counit characterization of adjunction transposes; formal naturality calculation expanding the parent blueprint proof comparison J = B composed with pullback of P."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +115,31 @@
    "results": "[leansearch] OK 8 hit(s); map_equiv_traceDual; IsBaseChange.dual; IsBaseChange.toDual; IsBaseChange.toDual_apply; LinearMap.toMatrix_adjoint; LinearMap.trace_transpose'; LinearMap.trace_transpose; Matrix.trace_conjTranspose",
    "date": "2026-10-17",
    "verdict": "no match: Ordinary homEquiv naturality and traces of linear maps do not state the square comparing two exceptional adjunctions and compact-support exchange."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A trace compatible with compact support base change has adjoint transpose compatible with the counit-defined dualizing base change map",
+   "results": "[leansearch] OK 8 hit(s); IsBaseChange.toDual_apply; LinearMap.trace_baseChange; IsBaseChange.toDualBaseChange; Module.Dual.baseChange; Module.Dual.transpose; LinearMap.trace_transpose'; Algebra.trace_eq_of_equiv_equiv; Algebra.trace_comp_trace_of_basis",
+   "date": "2026-10-17",
+   "verdict": "no match: Read Adjunction/Basic.lean (homEquiv, naturality, eq_unit_comp_map_iff) and Adjunction/Mates.lean (mateEquiv and mateEquiv_counit). These supply the formal identities, but do not state this geometric comparison with its specified finite-level constructible Hom bijections and transported exchange; the proof needs their naturality calculation and the trace hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of adjoint transposes under a natural base change isomorphism and the counit-defined mate",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Adjunction.homEquiv_naturality_right_square; CategoryTheory.mateEquiv_counit; CategoryTheory.Adjunction.homEquiv_naturality_right_square_assoc; CategoryTheory.Adjunction.homEquiv_naturality_left_square_assoc; CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_one; CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_one_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: Read Adjunction/Basic.lean (homEquiv, naturality, eq_unit_comp_map_iff) and Adjunction/Mates.lean (mateEquiv and mateEquiv_counit). These supply the formal identities, but do not state this geometric comparison with its specified finite-level constructible Hom bijections and transported exchange; the proof needs their naturality calculation and the trace hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mate compatibility with a morphism into a right adjoint object, evaluated using counits and a natural transformation",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.mateEquiv_counit; CategoryTheory.rightAdjointMate_comp_evaluation; CategoryTheory.conjugateEquiv_counit; CategoryTheory.mateEquiv_apply; CategoryTheory.conjugateEquiv_apply_app; CategoryTheory.conjugateEquiv_counit_symm; CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit_symm",
+   "date": "2026-10-17",
+   "verdict": "no match: Read Adjunction/Basic.lean (homEquiv, naturality, eq_unit_comp_map_iff) and Adjunction/Mates.lean (mateEquiv and mateEquiv_counit). These supply the formal identities, but do not state this geometric comparison with its specified finite-level constructible Hom bijections and transported exchange; the proof needs their naturality calculation and the trace hypothesis."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-projection-purity-agreement",
@@ -76,5 +156,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-trace-transpose-base-change",
+  "worker": "stage1",
+  "summary": "Checked the finite-coefficient pro-etale domains and the specified counit-defined base-change map. Expanded the trace-transpose comparison into its two counit identities, exchange naturality, an explicit six-line computation and injectivity of the actual Hom bijection. Reused existing nodes, including the Mathlib adjunct-counit identity; created no nodes. No statement change.",
+  "blueprint": "Realizes the parent lem-pur-projection-purity-agreement expanded comparison step (currently Step 5): J = B composed with Lp_2^*P follows from the trace base-change equation. The current blueprint proof is the comparison of the diagonal/DNC orientation with the integration orientation.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Supplies the actual natural Hom bijections for the bounded constructible etale-origin class, required to define and detect the transposes; this is generic exceptional-adjunction infrastructure, not a replacement of the purity route."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Supplies invertibility and the transported finite compact-support exchange used in the hypothesis and formal naturality calculation; it makes no smooth-purity assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sf-ambient-adjoint-class",
+  "thm-cbc-finite-level-proetale"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q16-c8cc032ee",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-c8cc032ee (reviewer sub-agent of L); spot-checked: Reviewed the item, all four proof steps, every cited node statement, the unit/chapter route, current and master blueprint sources, exchange/adjunction definitions, and Stacks Tags 0037–0038. The counit-defined base-change morphism, finite constant coefficient category, exchange naturality, composition order, and Hom-bijection uniqueness all check. Identity, zero, empty-source, and noninvertible-B cases reduce correctly. No new nodes, duplicates, circularity, weakened hypotheses, or SGA citations; review.md records the detailed checks and tool uses."
  }
 }

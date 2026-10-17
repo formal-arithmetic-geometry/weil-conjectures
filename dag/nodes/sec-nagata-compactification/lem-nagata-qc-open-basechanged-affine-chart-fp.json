@@ -18,9 +18,89 @@
   "def-sbc-locally-finite-presentation",
   "def-weil-quasi-separated-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $a:X\\to V$, $j:V\\hookrightarrow S$, $p:X_T\\to T$ and $i:W\\hookrightarrow X_T$ for the given maps. Both $j$ and $i$ are locally of finite presentation, by the following elementary argument for an open immersion $h:U\\hookrightarrow Y$. By [def-weil-open-immersion], identify $U$ with its open image. For any $u\\in U$, [lem-weil-pbc-affine-opens-basis] gives an affine open $D\\subseteq Y$ containing $h(u)$ and contained in that image. Its inverse image in $U$ is the same affine open subscheme, and the restricted map is the identity on $D$. The induced ring map $R\\to R$ has the presentation $R=R[x_1,\\ldots,x_0]/(0)$, with no variables and no relations, as in [def-weil-pbc-finitely-presented-algebra]. These affine neighbourhoods witness finite presentation at every point in [def-sbc-locally-finite-presentation].",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TT (lemma-open-immersion-locally-finite-presentation), proof: an open immersion is a local isomorphism; affine neighbourhoods from Schemes Tag 01IT (lemma-basis-affine-opens)."
+   }
+  },
+  {
+   "text": "The schemes $X=\\operatorname{Spec}B$ and $V=\\operatorname{Spec}A$ are quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. The structure map $a$ is locally of finite presentation directly from [def-sbc-locally-finite-presentation]: at every point take all of $X$ and all of $V$ as the affine neighbourhoods. Their global section rings and induced map are $B$, $A$ and the given algebra structure, respectively, by [def-weil-affine-spectrum], and $B$ has the required finite presentation by hypothesis. Clause (1) of [lem-weil-pbc-qcqs-morphism-permanence], with affine source $X$ and quasi-separated target $V$, now makes $a$ of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Definition Tag 01TP (definition-finite-presentation), pointwise affine definition; Schemes Tags 00E8/01KN for affine qcqs and 03GI/01KV for morphism permanence."
+   }
+  },
+  {
+   "text": "Step 2 makes $V$ quasi-compact and quasi-separated, while $S$ is quasi-separated by hypothesis. Clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] therefore makes $j$ quasi-compact and quasi-separated. Together with Step 1, this says that $j$ is of finite presentation. By clause (d) of [lem-weil-pbc-proper-fp-permanence], the composite $f=j\\circ a:X\\to S$ is of finite presentation. The map $p:X_T\\to T$ is its base change along $t$, so clause (3) of [lem-weil-pbc-qcqs-morphism-permanence] makes $p$ of finite presentation. In particular $p$ is quasi-separated; since $T$ is quasi-separated, clause (2) of that same node makes $X_T$ quasi-separated.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TR (lemma-composition-finite-presentation), 01TS (lemma-base-change-finite-presentation); Schemes Tags 03GI, 01KV and 01KU(2)."
+   }
+  },
+  {
+   "text": "The open immersion $i:W\\hookrightarrow X_T$ is separated by clause (a) of [lem-weil-pbc-separated-cancellation], hence quasi-separated by [lem-pc-separated-quasi-separated]. Its source $W$ is quasi-compact by hypothesis and its target $X_T$ is quasi-separated by Step 3. Clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] consequently makes $i$ quasi-compact. Step 1 already gives local finite presentation of $i$, so it is of finite presentation. This distinguishes quasi-compactness of the space $W$ from quasi-compactness of the immersion; the latter uses the established quasi-separatedness of its target.",
+   "uses": [
+    "lem-weil-pbc-separated-cancellation",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TU (lemma-quasi-compact-open-immersion-finite-presentation), proof; Schemes Tag 01L7 (lemma-immersions-monomorphisms), paragraph after Definition 01KK, and Tag 03GI (lemma-quasi-compact-permanence)."
+   }
+  },
+  {
+   "text": "Steps 3 and 4 give finite presentation of both $p$ and $i$. Apply clause (d) of [lem-weil-pbc-proper-fp-permanence] to obtain finite presentation of $p\\circ i:W\\to T$. Its three properties are exactly local finite presentation, quasi-compactness and quasi-separatedness, as specified in the statement.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TR (lemma-composition-finite-presentation), finite-presentation clause; Definition Tag 01TP."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-pc-separated-quasi-separated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01TP, 01TT, 01TR, 01TS, 01TU; affine and qcqs permanence supplied by the cited Schemes lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +143,66 @@
    "results": "8 hits: AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange. Read FinitePresentation.lean:62-100, QuasiCompact.lean:35-149 and QuasiSeparated.lean:50-180. The hits give local finite presentation, its base-change/composition instances, or affine-ring consequences; none alone gives the stated arbitrary compact open with all three finite-presentation conditions.",
    "date": "2026-10-17",
    "verdict": "no exact or one-line match; local finite presentation hits require separate quasi-compactness and quasi-separatedness arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-compact open subscheme of the base change of Spec B, for B finitely presented over an affine open of a qcqs scheme S, is of finite presentation over any qcqs S-scheme T",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.locallyOfFinitePresentation_iff",
+   "date": "2026-10-17",
+   "verdict": "No exact match for the whole base-changed affine-chart assertion. Hits give local finite presentation or generic permanence; the proof must also establish the quasi-separated target of the compact-open inclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.QuasiSeparated",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "No exact match for the whole base-changed affine-chart assertion. Hits give local finite presentation or generic permanence; the proof must also establish the quasi-separated target of the compact-open inclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiCompact_of_compactSpace|of_quasiSeparatedSpace|locallyOfFinitePresentation_of_isOpenImmersion|SpecMap_iff",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean",
+   "date": "2026-10-17",
+   "verdict": "No exact match for the whole base-changed affine-chart assertion. Hits give local finite presentation or generic permanence; the proof must also establish the quasi-separated target of the compact-open inclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact open in a base changed finitely presented affine chart over a quasi-separated scheme has a finitely presented structure morphism",
+   "results": "8 hits: AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion",
+   "date": "2026-10-17",
+   "verdict": "No exact match for the whole base-changed affine-chart assertion. Hits give local finite presentation or generic permanence; the proof must also establish the quasi-separated target of the compact-open inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation is stable under restricting the source to a quasi-compact open, after base change over a quasi-separated base",
+   "results": "8 hits: AlgebraicGeometry.instLocallyOfFinitePresentationResLE, AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation",
+   "date": "2026-10-17",
+   "verdict": "No exact match for the whole base-changed affine-chart assertion. Hits give local finite presentation or generic permanence; the proof must also establish the quasi-separated target of the compact-open inclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiCompact_of_compactSpace|of_quasiSeparatedSpace|locallyOfFinitePresentation_of_isOpenImmersion|SpecMap_iff",
+   "results": "2 hits: 62, 71; the wrapper parsed single-file rg line prefixes as file names; the actual source was separately read at FinitePresentation.lean:62-100 and QuasiSeparated.lean:155-168,233-258.",
+   "date": "2026-10-17",
+   "verdict": "No exact match for the whole base-changed affine-chart assertion. Hits give local finite presentation or generic permanence; the proof must also establish the quasi-separated target of the compact-open inclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiCompact_of_compactSpace|of_quasiSeparatedSpace|quasiSeparatedSpace_of_quasiSeparated",
+   "results": "5 hits: 155, 165, 226, 233, 241; the wrapper parsed single-file rg line prefixes as file names; the actual source was separately read at FinitePresentation.lean:62-100 and QuasiSeparated.lean:155-168,233-258.",
+   "date": "2026-10-17",
+   "verdict": "No exact match for the whole base-changed affine-chart assertion. Hits give local finite presentation or generic permanence; the proof must also establish the quasi-separated target of the compact-open inclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyOfFinitePresentation_of_isOpenImmersion|quasiCompact_of_compactSpace|QuasiSeparated.of_quasiSeparatedSpace",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+   "date": "2026-10-17",
+   "verdict": "No exact match for the whole base-changed affine-chart assertion. Hits give local finite presentation or generic permanence; the proof must also establish the quasi-separated target of the compact-open inclusion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lemma-nagata-relative-gluing-datum-descends",
@@ -83,5 +219,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-nagata-qc-open-basechanged-affine-chart-fp",
+  "worker": "stage1",
+  "summary": "Q34 checked the finite-presentation claim against Stacks, wrote out the open-immersion local-isomorphism argument, and reused existing affine-qcqs, morphism-permanence and separatedness nodes. No new nodes or changes to the statement. The proof explicitly establishes quasi-separatedness of the base-changed chart before deducing quasi-compactness of its compact-open inclusion.",
+  "blueprint": "Realizes the finite-presentation input to the proof of lemma-nagata-relative-gluing-datum-descends: applying morphism descent to the transported quasi-compact overlap opens. This is the item isolated from Step 7 of the ancestor split (formerly Step 5), under the unit step descending finitely many overlap maps."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q34-9323d4b9b",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-9323d4b9b (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, current blueprint route, and Stacks sources. All five steps hold, including quasi-separatedness of X_T before proving the open inclusion quasi-compact. Checked base-change projections, empty/non-affine/non-Noetherian cases, duplicates, and cycles. No new nodes, repairs, or additional tool_uses needed. Detailed checks written to review.md."
  }
 }

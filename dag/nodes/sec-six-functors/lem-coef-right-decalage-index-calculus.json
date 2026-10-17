@@ -10,9 +10,59 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Write $J^+=J\\sqcup\\{\\infty_J\\}$, ordered with every element of $J$ below $\\infty_J$. Identity maps and composites of monotone maps fixing the distinguished last element again fix it; their category laws are the laws of function composition. For a monotone $h:J\\to K$, its extension $h^+$ sends $x\\in J$ to $h(x)\\in K$ and sends $\\infty_J$ to $\\infty_K$. It is monotone: the only additional inequalities to check have upper endpoint $\\infty_J$, and their images are below $\\infty_K$. Extensions preserve identities and composition pointwise, proving that $j$ and its restriction $i$ are functors. Each $J^+$ is nonempty, and forgetting the distinguished-point condition preserves identities and composition, so $U$ is a functor to $\\Delta$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 6.1.3.16, printed p.553: definition of the ordinal category; Lemma 6.1.3.17, printed p.554: adjoining the last element. Agent verification of the category and functor laws."
+   }
+  },
+  {
+   "text": "For $A\\in\\Delta$ and $J\\in D$, restrict $f:A^+\\to J^+$ to $A$ to obtain $\\Phi_{A,J}(f):A\\to J^+$. Conversely, for any monotone $g:A\\to J^+$ define $\\widehat g:A^+\\to J^+$ by $\\widehat g|_A=g$ and $\\widehat g(\\infty_A)=\\infty_J$. The extension is monotone, since $g(a)\\leq\\infty_J$ for every $a\\in A$, and it fixes the last element. Restricting $\\widehat g$ gives $g$; extending the restriction of $f$ gives $f$, including at $\\infty_A$ since $f$ fixes it. Thus $\\Phi_{A,J}$ is the asserted bijection. The values of $g$ are allowed to equal $\\infty_J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 6.1.3.16, printed p.553, last-point-preserving maps: agent restriction-and-extension calculation."
+   }
+  },
+  {
+   "text": "For a monotone $a:A\\prime\\to A$ in $\\Delta$ and an arrow $b:J\\to K$ in $D$, and for $f:iA\\to J$, restriction gives the equality $\\Phi_{A\\prime,K}(b\\circ f\\circ i(a))=U(b)\\circ\\Phi_{A,J}(f)\\circ a$: evaluation at $x\\in A\\prime$ gives $b(f(a(x)))$ on both sides. This also holds when $b$ sends an ordinary element to $\\infty_K$. Taking either $a$ or $b$ to be an identity proves naturality separately in both variables. Hence these are natural Hom-set bijections for $i\\dashv U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 6.1.3.16, printed p.553, same explicit ordinal maps: agent verification of both naturality variables."
+   }
+  },
+  {
+   "text": "The unit is $\\eta_A:A\\to UiA=A^+$, $a\\mapsto a$. The counit $\\varepsilon_J:iUJ\\to J$ has underlying map $(J^+)^+\\to J^+$ that fixes every element of the original $J^+$ and sends the newly added outer last element to $\\infty_J$. It is monotone and last-point-preserving. The unit is natural because extensions agree with the original maps on original elements; the counit is natural because for $b:J\\to K$, $b\\circ\\varepsilon_J=\\varepsilon_K\\circ iU(b)$, both sides being $b(x)$ on $x\\in J^+$ and $\\infty_K$ on the outer last element. The composite $\\varepsilon_{iA}\\circ i(\\eta_A)$ fixes $a\\in A$ and the added last element, hence is $1_{iA}$. The composite $U(\\varepsilon_J)\\circ\\eta_{UJ}$ fixes every $x\\in J^+$, hence is $1_{UJ}$. These give the adjunction explicitly with both triangle identities; its Hom bijection sends $f$ to $U(f)\\circ\\eta_A$, exactly restriction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemmas 6.1.3.16–17, printed pp.553–554, same ordinal category and shift: agent unit, counit and triangle calculation."
+   }
+  },
+  {
+   "text": "A morphism $\\varnothing\\to J$ in $D$ is a monotone map $\\{\\infty_\\varnothing\\}\\to J^+$ fixing the distinguished last element. Its only possible value is $\\infty_J$, and this map is monotone. Thus there is exactly one such arrow for every $J$, including $J=\\varnothing$, which is precisely initiality in the ordinary category $D$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 6.1.3.16, printed p.553, definition of the ordinal category: agent singleton calculation."
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit finite-ordinal calculation from the definition in HTT Lemma 6.1.3.16, printed p.553, and shift in Lemma 6.1.3.17, printed p.554. The adjunction and triangle identities are expanded here, not quoted as a theorem of HTT; an archived literature copy is WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +105,52 @@
    "results": "{\"t\": \"2026-10-17T08:05:41Z\", \"tool\": \"leanfinder\", \"query\": \"The simplex category embeds into finite ordinals with a fixed greatest element as a left adjoint to forgetting the distinguished last element; the right shifted simplicial object has a split last vertex augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Augmented.stdSimplex\", \"AugmentedSimplexCategory.inclusion\", \"SSet.Augmented.stdSimplex_obj_hom_app\", \"CategoryTheory.SimplicialObject.augment\", \"SSet.Augmented.stdSimplex_obj_right\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"CategoryTheory.SimplicialObject.cechNerveAdjunction\", \"CategoryTheory.SimplicialObject.Augmented\"], \"digest\": \"cad95d4ee7c2ab1e\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary augmented-simplex and pointed-category APIs do not state this adjunction for the category of monotone maps fixing an added greatest element; read Augmented/Basic.lean and Augmented/Monoidal.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "decalage|décalage|last.*[Aa]djunction|[Aa]djunction.*last|fixed.*greatest|homEquivFunctor",
+   "results": "{\"t\": \"2026-10-17T13:18:52Z\", \"tool\": \"grep\", \"query\": \"decalage|décalage|last.*[Aa]djunction|[Aa]djunction.*last|fixed.*greatest|homEquivFunctor\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplexCategory/Defs.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean\"], \"digest\": \"4a766d5ed728a6f4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: homEquivFunctor identifies ordinary simplex homs with functors between orders, and TopCat adjunctions concern topological spaces. No last-point ordinal indexing adjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The simplex category embeds as a left adjoint into finite totally ordered sets with top preserving monotone maps, by freely adjoining a greatest element.",
+   "results": "{\"t\": \"2026-10-17T13:18:52Z\", \"tool\": \"leansearch\", \"query\": \"The simplex category embeds as a left adjoint into finite totally ordered sets with top preserving monotone maps, by freely adjoining a greatest element.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategory.SkeletalFunctor.isEquivalence\", \"SimplexCategory.skeletalFunctor\", \"SimplexCategory.Hom.mk\", \"SimplexCategory.isSkeletonOf\", \"AugmentedSimplexCategory.inclusion_obj\", \"SimplexCategory.instConcreteCategoryOrderHomFinHAddNatLenOfNat\", \"AugmentedSimplexCategory.inclusion\", \"sSetTopAdj\"], \"digest\": \"05dbe0e25c26f533\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: skeletalFunctor, homs of the ordinary simplex category, and augmented-simplex inclusion do not state this adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplexCategory, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-17T13:18:52Z\", \"tool\": \"loogle\", \"query\": \"SimplexCategory, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.coskAdj\", \"CategoryTheory.SimplicialObject.skAdj\", \"SSet.coskAdj\", \"SSet.skAdj\", \"SSet.chainComplexFunctorAdjunction\", \"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.nerve₂Adj\", \"SSet.sdExAdjunction\"], \"digest\": \"5293f8737924c871\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: truncation/skeleton/coskeleton, nerve and topological-realization adjunctions have different functors and categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite ordinals let D have maps fixing an added greatest element. Extending maps embeds the simplex category into D as a left adjoint to forgetting the distinguished point. The empty ordinal is initial in D.",
+   "results": "{\"t\": \"2026-10-17T13:18:53Z\", \"tool\": \"leanfinder\", \"query\": \"For finite ordinals let D have maps fixing an added greatest element. Extending maps embeds the simplex category into D as a left adjoint to forgetting the distinguished point. The empty ordinal is initial in D.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AugmentedSimplexCategory.inclusion\", \"AugmentedSimplexCategory.instHasInitial\", \"AugmentedSimplexCategory\", \"AugmentedSimplexCategory.inclusion_obj\", \"SimplexCategory.Truncated.initial_inclusion\", \"SSet.Augmented.stdSimplex\", \"SimplexCategory.skeletalFunctor\", \"SimplexCategory.Truncated.initial_incl\"], \"digest\": \"887b17df68ab563c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give the augmented-simplex inclusion/initial object, finite-order skeleton, or WithTop order maps. None states the natural Hom bijection for D and its adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to the original elements gives a natural bijection between monotone maps fixing a newly adjoined top and all monotone maps into the ordinal with top. This is the free top adjunction for finite ordinals.",
+   "results": "{\"t\": \"2026-10-17T13:19:18Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction to the original elements gives a natural bijection between monotone maps fixing a newly adjoined top and all monotone maps into the ordinal with top. This is the free top adjunction for finite ordinals.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WithTop.subtypeOrderIso\", \"WithTop.subtypeOrderIso_apply_coe\", \"WithTop.coeOrderHom_apply\", \"WithTop.subtypeOrderIso_symm_apply\", \"OrderIso.withTopCongr_refl\", \"WithTop.coeOrderHom\", \"OrderHom.withTopMap_coe\", \"OrderIso.withTopCongr_apply\"], \"digest\": \"07ddf9e3139a3a1d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give the augmented-simplex inclusion/initial object, finite-order skeleton, or WithTop order maps. None states the natural Hom bijection for D and its adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "decalage|DeltaInfty|WithTop.*[Aa]djun|[Aa]djun.*WithTop|TopCat.*[Aa]djun",
+   "results": "{\"t\": \"2026-10-17T13:20:01Z\", \"tool\": \"grep\", \"query\": \"decalage|DeltaInfty|WithTop.*[Aa]djun|[Aa]djun.*WithTop|TopCat.*[Aa]djun\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"Mathlib/Condensed/Light/Functors.lean\", \"Mathlib/Condensed/Light/Functors.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\"], \"digest\": \"042a54d65a3c4367\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: homEquivFunctor identifies ordinary simplex homs with functors between orders, and TopCat adjunctions concern topological spaces. No last-point ordinal indexing adjunction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-geometric-descent",
@@ -83,5 +175,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-right-decalage-index-calculus",
+  "worker": "stage1",
+  "summary": "Zero new nodes: all five steps are elementary pointwise calculations from the categories defined in the unchanged statement. Checked the project sources for an exact attachment, read the enhanced-conventions dependency, the chapter/unit and current blueprint ancestor, and online HTT 6.1.3.16–17. Wrote restriction/extension inverses, two-variable naturality, explicit unit/counit with triangles and the singleton initiality argument. Preserved inherited searches and appended six actually logged Q52 searches; no full Mathlib match. Checked empty targets, maps hitting the last element, and finite examples. The proof is agent-origin, and the missing archived HTT source is requested in the report.",
+  "blueprint": "The current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, second paragraph, constructs the finite-coefficient mapping-complex adjunction before the derived limit. This item supplies the elementary last-point indexing adjunction supporting the right-shift part of geometric descent along the existing blueprint.from.via chain. Its five steps verify the ordinal indexing only; the chapter and unit route and realized fields are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q52-2dc7dcfbb",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q52-2dc7dcfbb (reviewer sub-agent of L); spot-checked: Read the complete item and all five proof steps; no new nodes. HTT 6.1.3.16–17 definitions agree. Restriction/extension, naturality, both triangles and empty-object initiality check out; finite enumeration passed. No duplicate, missing non-elementary citation, circularity or target weakening found. Detailed checks are in review.md; no repairs or tool_uses."
  }
 }
