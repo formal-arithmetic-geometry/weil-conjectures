@@ -221,5 +221,23 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-c6f9a7524 (reviewer sub-agent of L); spot-checked: PASS for Q33/lem-pur-etale-iso-descent. The statement is unchanged and matches both blueprint snapshots exactly. Coefficients are A=A_{E,n} on X_proet (scope from def-pur-conventions), D^b_c is the full subcategory from def-weil-finite-torsion-constructibility, and Lu^* is the finite-level pullback from def-weil-derived-pullback-tensor-hom. The stmt_deps changes are justified: smooth morphisms are dropped, and separated comes from def-weil-proper-morphism. The delivery has no new nodes, proof_deps equals the union of the step uses, and the graph is acyclic. Step 1: étale implies weakly étale (det-pe (1), Stacks 094X(4)) and the map is open (UniversallyOpen.of_flat, 01UA); with quasi-compactness of V this is exactly the condition in Stacks 0989 (proetale.tex:2126). Step 2: I checked that the graph pair (W,γ) is initial in I_W, because pr_U∘φ is the structure map, so the colimit is F(W). Inverse image is therefore restriction, and that restriction is exact by lem-pur-site-restriction-module-adjunction-exact. Step 3: termwise representability is stated in the pullback definition, and homologyFunctorIso gives the natural comparison. Step 4 is an elementary sheaf-axiom gluing argument, complete and covering X=∅. Step 5: DerivedCategory.isIso_iff (HomologySequence.lean:88) plus fullness of D^b_c. The proof departs from the blueprint's geometric-stalk argument, and the departure is justified: lem-cbc-proetale-stalk-conservative (4) shows stalk non-conservativity, and its cover-locality clause (1) is a generalization only in the different Λ_{T,Proet} category, so it is not cited and same_as stays []. I accept the three declared tool uses: det-pe-morphisms-etale-comparison, lem-weil-proetale-weakly-etale-localization and lem-pur-site-restriction-module-adjunction-exact. No SGA source is cited. No fixes were needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79fea873b",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Lean signature matches the node clause by clause: PurityFiniteSetting (A=A_{E,n}, n>=1), U and X over Spec k separated and finite type (LOFT+QC), f over k with Surjective and Etale, M and N in intrinsicFiniteTorsionConstructible (finite support plus constructible, no Tor condition), hypothesis IsIso of the canonical derived pullback applied to phi, conclusion IsIso phi in the full subcategory. sfIntrinsicDerivedPullback at P.Ring is the identical functor that the abbrev finiteDerivedPullback wraps, so there is one definition per notion. No extra hypotheses or universe restrictions; edge cases (empty, n=1, zero and shifted complexes, identity) are covered. lean.statement is verbatim; only the lean field changed; one theorem with proof sorry; source/blueprint docstrings and the 5-step proof are present; Worker report and Second reading sections are real. nt_compile.py on the local side overlay: EtaleIsoDescent.lean 3.2 s, exit 0, no diagnostics."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleIsoDescent",
+  "declaration": "WeilConjectures.isIso_of_surjective_etale_pullback",
+  "file": "lean/Sheaf/Paper/EtaleIsoDescent.lean",
+  "statement": "theorem isIso_of_surjective_etale_pullback (P : PurityFiniteSetting.{u}) (U X : Over (Spec (CommRingCat.of P.field.k))) [IsSeparated U.hom] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (f : U ⟶ X) [Surjective f.left] [Etale f.left] (M N : (intrinsicFiniteTorsionConstructible P.coefficients.l P.extension P.level P.level_pos X.left).FullSubcategory) (φ : M ⟶ N) (hφ : IsIso ((@sfIntrinsicDerivedPullback P.Ring _ (Padic.finite_coefficientExtensionRing P.coefficients.l P.extension P.level P.level_pos) U.left X.left f.left).map φ.hom)) : IsIso φ",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
