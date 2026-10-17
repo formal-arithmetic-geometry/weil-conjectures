@@ -96,7 +96,7 @@ theorem Etale.affine_closed_etale_neighborhood_comparison
   let kk := e.hom ≫ k
   have hi' : i = kk ≫ t := by rw [hi, Category.assoc]
   let s : ∀ a, Z ⟶ Spec (R.obj a) := fun a ↦ kk ≫ Spec.map (c.ι.app a)
-  have hs (a : I) : i = s a ≫ v a := by rw [hi', wt a, Category.assoc]
+  have hs (a : I) : i = s a ≫ v a := by simp only [hi', wt a, s, kk, Category.assoc]
   have hiso {W : Scheme.{u}} {F F' : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}}
       (α : F ≅ F') : Function.Bijective (Sheaf.H.map α.hom q) :=
     Function.bijective_iff_has_inverse.mpr ⟨Sheaf.H.map α.inv q,
@@ -114,7 +114,8 @@ theorem Etale.affine_closed_etale_neighborhood_comparison
           ⇑(Sheaf.H.map ef.inv q) := by
       funext x
       simp only [Function.comp_apply]
-      rw [← cohomologyMap_map, ← Sheaf.H.map_comp_apply, ef.inv_hom_id]
+      erw [← cohomologyMap_map k q ef.hom (Sheaf.H.map ef.inv q x), ← Sheaf.H.map_comp_apply,
+        ef.inv_hom_id]
       simp
     rw [heq]
     exact (hiso (((k)^*[AddCommGrpCat.{u + 1}]).mapIso ef)).comp (hgab.comp (hiso ef.symm))
@@ -127,7 +128,8 @@ theorem Etale.affine_closed_etale_neighborhood_comparison
       simp only [Function.comp_apply]
       rw [(cohomologyPullbackFunctorial e.hom k tG q).2.1 x, ← Sheaf.H.map_comp_apply,
         Iso.hom_inv_id_app]
-      simp
+      simp only [Sheaf.H.map_id, AddMonoidHom.id_apply]
+      rfl
     rw [heq]
     exact (hiso ((upperStarComp AddCommGrpCat.{u + 1} e.hom k).app tG).symm).comp
       ((cohomologyMap_bijective e.hom _ q).comp hk)
@@ -149,11 +151,12 @@ theorem Etale.affine_closed_etale_neighborhood_comparison
     ext x
     simp only [AddCommGrpCat.hom_comp, AddCommGrpCat.hom_ofHom, AddMonoidHom.coe_comp,
       Function.comp_apply, φ]
-    rw [cohomologyMap_map, (cohomologyPullbackFunctorial kk (Spec.map (c.ι.app a))
-      (((v a)^*[AddCommGrpCat.{u + 1}]).obj G) q).2.1, ← Sheaf.H.map_comp_apply,
-      ← Sheaf.H.map_comp_apply]
+    rw [cohomologyMap_map]
+    erw [(cohomologyPullbackFunctorial kk (Spec.map (c.ι.app a))
+      (((v a)^*[AddCommGrpCat.{u + 1}]).obj G) q).2.1]
+    rw [← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply]
     congr 2
-    rw [Etale.upperStarComp_hom_app_map_upperStarComp_inv_app_assoc AddCommGrpCat.{u + 1}
+    erw [Etale.upperStarComp_hom_app_map_upperStarComp_inv_app_assoc AddCommGrpCat.{u + 1}
       kk (Spec.map (c.ι.app a)) (v a) (s a) t i rfl (wt a) (hs a) G, Iso.hom_inv_id_app,
       Category.comp_id]
 
