@@ -453,7 +453,39 @@ lemma shriekBaseChange_refinementComparison {c d : Compactification f}
     congr 1
     erw [(F.adj r'.hom).counit_naturality_assoc,
       (F.adj r'.hom).left_triangle_components_assoc]
-  sorry
+  ext K
+  have h1 := F.refinementComparison_app_eq r hr K
+  have h2 := F.refinementComparison_app_eq r' hr' ((F.pb g').obj K)
+  have hp := congr_app (F.pfBaseChange_paste_vert hc hd g r'.hom r.hom d'.g d.g c'.g c.g hcomm
+    hdp.w r'.hom_g r.hom_g hcp.w) ((F.sh c.i).obj K)
+  have hk := congr_arg (F.pf d'.g).map (hcore K)
+  have hn := (F.pfBaseChange hd d'.g d.g g hdp.w).natTrans.naturality
+    ((F.adj r.hom).unit.app ((F.sh d.i).obj K) ≫ (F.pf r.hom).map
+      (inv ((F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans.app K) ≫
+        (F.sh c.i).map ((F.pbId X).hom.app K)))
+  have hn2 := (F.pfComp' r'.hom d'.g c'.g r'.hom_g).inv.naturality
+    (inv ((F.baseChange g' c'.i c.i hc hci.w).natTrans.app K))
+  have hcan : (F.pb g).map ((F.pfComp' r.hom d.g c.g r.hom_g).inv.app ((F.sh c.i).obj K)) ≫
+      (F.pb g).map ((F.pfComp' r.hom d.g c.g r.hom_g).hom.app ((F.sh c.i).obj K)) = 𝟙 _ := by
+    rw [← Functor.map_comp, Iso.inv_hom_id_app]
+    exact CategoryTheory.Functor.map_id _ _
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+  rw [h1, h2]
+  simp only [TwoSquare.hComp, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
+    NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+    Functor.comp_obj, Category.assoc] at hp
+  simp only [Functor.comp_map, Functor.map_comp, Category.assoc] at hn hn2 hk
+  simp only [shriekBaseChange, TwoSquare.hComp, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id, Functor.comp_obj, Functor.map_comp,
+    Category.assoc, hp]
+  erw [Category.id_comp, Category.id_comp, reassoc_of% hcan, reassoc_of% hn]
+  congr 1
+  dsimp only [TwoSquare.mk, TwoSquare.natTrans] at hn2 ⊢
+  simp only [NatIso.isIso_inv_app] at hn2 hk ⊢
+  erw [← hn2, reassoc_of% hk]
+  rfl
 
 end ShriekBaseChange
 

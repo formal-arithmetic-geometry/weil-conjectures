@@ -96,29 +96,39 @@ lemma restrictSemilinear_apply {U V : X.Opens} (i : V ⟶ U) (m : Γ(M, U)) :
     M.restrictSemilinear i m = M.presheaf.map i.op m :=
   rfl
 
+/-- The ring map `Sym_{Γ(X, U)} Γ(M, U) → Sym_{Γ(X, V)} Γ(M, V)` induced by restriction. -/
+noncomputable def symmetricAlgebraMap {U V : X.Opens} (i : V ⟶ U) :
+    SymmetricAlgebra Γ(X, U) Γ(M, U) →+* SymmetricAlgebra Γ(X, V) Γ(M, V) :=
+  SymmetricAlgebra.mapSemilinear (M.restrictSemilinear i)
+
+lemma symmetricAlgebraMap_id (U : X.Opens) : M.symmetricAlgebraMap (𝟙 U) = RingHom.id _ :=
+  SymmetricAlgebra.ringHom_ext (fun r ↦ by simp [symmetricAlgebraMap])
+    fun m ↦ by
+      simp only [symmetricAlgebraMap, SymmetricAlgebra.mapSemilinear_ι, RingHom.id_apply]
+      change SymmetricAlgebra.ι Γ(X, U) Γ(M, U) (M.presheaf.map (𝟙 U).op m) = _
+      simp
+
+lemma symmetricAlgebraMap_comp {U V W : X.Opens} (i : V ⟶ U) (j : W ⟶ V) :
+    M.symmetricAlgebraMap (j ≫ i) = (M.symmetricAlgebraMap j).comp (M.symmetricAlgebraMap i) :=
+  SymmetricAlgebra.ringHom_ext (fun r ↦ by simp [symmetricAlgebraMap])
+    fun m ↦ by
+      simp only [symmetricAlgebraMap, SymmetricAlgebra.mapSemilinear_ι, RingHom.comp_apply]
+      change SymmetricAlgebra.ι Γ(X, W) Γ(M, W) (M.presheaf.map (j ≫ i).op m) =
+        SymmetricAlgebra.ι Γ(X, W) Γ(M, W) (M.presheaf.map j.op (M.presheaf.map i.op m))
+      simp
+
 /-- The symmetric algebra `Sym_{𝒪_X}(M)` of an `𝒪_X`-module, on the affine opens of `X`. -/
 @[simps obj]
 noncomputable def symmetricAlgebraPresheaf : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u} where
   obj U := .of (SymmetricAlgebra Γ(X, U.unop.toOpens) Γ(M, U.unop.toOpens))
-  map {U V} i := CommRingCat.ofHom
-    (SymmetricAlgebra.mapSemilinear (M.restrictSemilinear ((toOpensFunctor X).map i.unop)))
+  map {U V} i := CommRingCat.ofHom (M.symmetricAlgebraMap ((toOpensFunctor X).map i.unop))
   map_id U := by
     ext1
-    refine SymmetricAlgebra.ringHom_ext (fun r ↦ ?_) fun m ↦ ?_
-    · simp
-    · change SymmetricAlgebra.ι _ _ (M.presheaf.map (𝟙 _) m) = _
-      simp
+    exact M.symmetricAlgebraMap_id U.unop.toOpens
   map_comp {U V W} i j := by
     ext1
-    refine SymmetricAlgebra.ringHom_ext (fun r ↦ ?_) fun m ↦ ?_
-    · simp <;> rfl
-    · simp only [CommRingCat.hom_comp, CommRingCat.hom_ofHom, RingHom.coe_comp,
-        Function.comp_apply, SymmetricAlgebra.mapSemilinear_ι]
-      change SymmetricAlgebra.ι _ _
-          (M.presheaf.map ((toOpensFunctor X).map (j.unop ≫ i.unop)).op m) =
-        SymmetricAlgebra.ι _ _ (M.presheaf.map ((toOpensFunctor X).map j.unop).op
-          (M.presheaf.map ((toOpensFunctor X).map i.unop).op m))
-      rw [Functor.map_comp, op_comp, Functor.map_comp, ConcreteCategory.comp_apply]
+    exact M.symmetricAlgebraMap_comp ((toOpensFunctor X).map i.unop)
+      ((toOpensFunctor X).map j.unop)
 
 /-- The structure map `𝒪_X ⟶ Sym_{𝒪_X}(M)`. -/
 @[simps]

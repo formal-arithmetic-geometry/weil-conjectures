@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Detection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Complement
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedSiteLift
 
 /-!
 # The pushforward along a closed immersion on pro-étale sheaves of modules
@@ -64,8 +65,12 @@ variable (R : Type (u + 1)) [Ring R] {Z U X : Scheme.{u}}
 `i^* i_* G ⟶ G` of the pro-étale adjunction `i^* ⊣ i_*` is an isomorphism on all pro-étale
 sheaves of modules; so `i_*` is fully faithful, without a constructibility hypothesis. -/
 theorem isIso_upperStarLowerStarAdjunction_counit (i : Z ⟶ X) [IsClosedImmersion i] :
-    IsIso (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).counit :=
-  sorry
+    IsIso (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).counit := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro G
+  exact Functor.isIso_sheafAdjunctionContinuous_counit_app _ (Scheme.ProEt.topology X)
+    (Scheme.ProEt.topology Z) (fun V ↦ Scheme.ProEt.generate_exists_iso_mem_topology i V)
+    (fun ψ ↦ Scheme.ProEt.generate_liftPresieve_mem_topology i ψ) G
 
 attribute [instance] isIso_upperStarLowerStarAdjunction_counit
 
