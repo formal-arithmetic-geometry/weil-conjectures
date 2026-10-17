@@ -1,0 +1,115 @@
+{
+ "id": "def-trf-formal-local-presentation",
+ "kind": "definition",
+ "title": "Formal local presentations with a specified coefficient section",
+ "status": "split",
+ "statement": "Let $k$ be a field, $A$ a commutative local $k$-algebra with maximal ideal $\\mathfrak m$ and residue field $F=A/\\mathfrak m$ (the residue-field construction of [def-weil-pbc-localization-at-prime]), and $C=\\widehat A=\\varprojlim_r A/\\mathfrak m^r$ [def-weil-pbc-adic-completion]. A formal local presentation consists of integers $n\\ge2$, $s\\ge0$, a $k$-algebra map $\\sigma:F\\to C$ whose composite with the canonical reduction $C\\to A/\\mathfrak m=F$ is the identity, and a surjective $k$-algebra map $\\Phi:F[[t_1,\\ldots,t_n]]\\to C$ [def-weil-pbc-multivariate-power-series] with $\\Phi(c)=\\sigma(c)$ for constants $c\\in F$, together with $s$ specified power series $f_j$ generating $\\ker\\Phi$, such that $\\ker\\Phi\\subseteq(t_1,\\ldots,t_n)$. Require $\\Phi$ to be continuous for the $(t_1,\\ldots,t_n)$-adic and $\\mathfrak mC$-adic topologies: for every $r\\ge0$ there exists $N\\ge0$ with $\\Phi((t_1,\\ldots,t_n)^N)C\\subseteq(\\mathfrak mC)^r$. The equality on constants makes $\\Phi$ an $F$-algebra map for the $F$-action through $\\sigma$. This defines presentation data and makes no existence assertion.",
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "varieties.tex, Tag 0C52, coefficient section and power series surjection; dummy-variable convention of lem-trf-separable-closed-point-formal-presentation"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A coefficient field section and continuous power series surjection with chosen kernel generators define a formal local presentation",
+   "results": "{\"t\": \"2026-10-17T19:50:04Z\", \"tool\": \"leansearch\", \"query\": \"A coefficient field section and continuous power series surjection with chosen kernel generators define a formal local presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFPowerSeriesAt\", \"ContinuousLinearMap.fpowerSeries\", \"HasFPowerSeriesWithinAt\", \"PowerSeries.WithPiTopology.continuous_coeff\", \"PowerSeries.map_surjective\", \"PowerSeries.WithPiTopology.continuous_constantCoeff\", \"PowerSeries.constantCoeff_surj\", \"PowerSeries.isNoetherianRing\"], \"digest\": \"c66b426335cbd3cf\"}",
+   "date": "2026-10-17",
+   "verdict": "No matching notion: the hits concern analytic series, polynomial presentations, or general completion maps, not these specified formal presentation data and canonical completed differential maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coefficient field section and continuous power series surjection with chosen kernel generators define a formal local presentation",
+   "results": "{\"t\": \"2026-10-17T19:50:08Z\", \"tool\": \"leanfinder\", \"query\": \"A coefficient field section and continuous power series surjection with chosen kernel generators define a formal local presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.IsWeierstrassFactorization\", \"PowerSeries.IsWeierstrassDivisor\", \"PowerSeries.IsWeierstrassFactorizationAt\", \"PowerSeries.IsWeierstrassDivisorAt\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.weierstrassDistinguished\"], \"digest\": \"208a5a55b84ba37f\"}",
+   "date": "2026-10-17",
+   "verdict": "No matching notion: the hits concern analytic series, polynomial presentations, or general completion maps, not these specified formal presentation data and canonical completed differential maps."
+  },
+  {
+   "tool": "grep",
+   "query": "FormalLocalPresentation|coefficient.*section.*surject|continuous.*[Dd]erivation.*[Cc]omplet|completed.*[Jj]acobian",
+   "results": "{\"t\": \"2026-10-17T19:53:00Z\", \"tool\": \"grep\", \"query\": \"FormalLocalPresentation|coefficient.*section.*surject|continuous.*[Dd]erivation.*[Cc]omplet|completed.*[Jj]acobian\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No matching notion: the hits concern analytic series, polynomial presentations, or general completion maps, not these specified formal presentation data and canonical completed differential maps."
+  },
+  {
+   "tool": "grep",
+   "query": "rg FormalLocalPresentation|HasCompletedJacobianPresentation|coefficient.*section.*surject|completed.*[Jj]acobian in WeilConjectures and lean/Sheaf; blueprint_refs.py search formal presentation",
+   "results": "No matching declaration or definition node. The source-library search and side-library search found no match; blueprint search returned 0 nodes. The item and its theorem prerequisites describe the results, but do not define these data.",
+   "date": "2026-10-17",
+   "verdict": "New notion needed; existing Mathlib constructions are reused for all component rings and modules."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-separable-closed-point-formal-presentation",
+  "date": "2026-10-17",
+  "group": "Q134"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Formal presentation and completed differential comparison in the separable closed-point ingredient.",
+   "via": [
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalLocalPresentation",
+  "declaration": "Algebra.FormalLocalPresentation",
+  "declarations": [
+   "Algebra.LocalCompletion",
+   "Algebra.FormalLocalPresentation"
+  ],
+  "file": "lean/Sheaf/RingTheory/FormalLocalPresentation.lean",
+  "statement": "structure FormalLocalPresentation (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A] [IsLocalRing A]",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-71d804933",
+  "group": "Q134",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-71d804933",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, definitions, source citations, report sections, edge cases, route-pivot compliance, and exact declarations; all three Lean files compiled successfully via scompile.py."
+ }
+}

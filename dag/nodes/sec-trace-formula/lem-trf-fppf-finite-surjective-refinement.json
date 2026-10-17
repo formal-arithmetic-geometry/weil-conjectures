@@ -259,5 +259,23 @@
   "group": "Q149",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-7cc05cce6 (reviewer sub-agent of L); spot-checked: I read the whole delivery against more-morphisms.tex 0CP0 and 0CNZ (lemma-dominate-fppf-finite and lemma-dominate-fppf-integral, about lines 13700-13791). The item statement matches 0CP0 hypothesis by hypothesis, with no weakening. The new statement-only node lem-trf-fppf-integral-surjective-refinement matches 0CNZ exactly: any base scheme, an integral surjection with open local lifts. Small cases (empty X with empty or nonempty I, an identity cover, k to k^{1/p}) all hold. It is not a restated clause of the item and has no duplicate in the DAG (searched for 0CNZ, 0CP0, 05WN, dominate-fppf, integral surjective, fppf refine). No Lean declaration exists in slopmaster2 to attach. Step checks: step 2 gets Y qcqs from integral => affine => qc and separated, plus qcqs permanence (2). Step 3 uses the limit-of-finite node (09YZ, Lean-closed), whose hypotheses hold and which gives p_l o pi_l = q. Step 4 uses clauses (1) and (3) of pqf-lem-limit-qc-open-descends on qcqs stages with affine transitions, keeps quasi-compactness at the common stage through the preimage-qc-open node, and does not claim the descended opens are affine. Step 5 applies clause (2) with i=i' to the finite union and the whole stage, so the cover persists at later stages. Step 6 checked against Mathlib AffineTransitionLimit.lean:1232-1237: it needs only the targets X_i to be locally of finite presentation over X. Step 7 gets surjectivity pointwise from p_l(pi_l(y)) = q(y). Step 8 handles the empty case. All off-unit dependencies are Mathlib leaves or Lean-closed, so no tool_uses are needed. One fault, repaired: step 4's quasi-separatedness argument needs the open V_{l,j} to be covered by its affine opens, but step 4 did not cite lem-weil-pbc-affine-opens-basis. I added that citation to step 4 (the id was already in proof_deps). The corrected item is at fixes/dag/nodes/sec-trace-formula/lem-trf-fppf-finite-surjective-refinement.json; the statement and the other steps are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfFiniteSurjectiveRefinement",
+  "declaration": "AlgebraicGeometry.exists_finite_surjective_fppf_refinement",
+  "statement": "theorem exists_finite_surjective_fppf_refinement {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {I : Type u} (Xi : I → Scheme.{u}) (f : (i : I) → Xi i ⟶ X) [hflat : ∀ i, Flat (f i)] [hlfp : ∀ i, LocallyOfFinitePresentation (f i)] (hjoint : ∀ x : X, ∃ i y, f i y = x) : ∃ (X' : Scheme.{u}) (p : X' ⟶ X), IsFinite p ∧ LocallyOfFinitePresentation p ∧ QuasiCompact p ∧ QuasiSeparated p ∧ Surjective p ∧ ∃ (A : Type u) (U : A → Scheme.{u}) (j : (a : A) → U a ⟶ X'), (∀ a, IsOpenImmersion (j a)) ∧ (∀ a, ∃ (i : I) (g : U a ⟶ Xi i), g ≫ f i = j a ≫ p) ∧ (∀ x : X', ∃ a y, j a y = x)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfFiniteSurjectiveRefinement.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9b982b74b",
+  "group": "ND",
+  "result": "pass",
+  "note": "Independent audit completed; source and Lean statement match, dependencies and edge cases checked, and per-file scompile.py compilation passed."
  }
 }

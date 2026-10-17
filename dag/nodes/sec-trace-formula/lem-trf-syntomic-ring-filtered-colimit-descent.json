@@ -368,5 +368,33 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-ca174ff33 (reviewer sub-agent of L); spot-checked: Pass, no fixes written; I read the item and all 24 cited node statements in full. Statement: it matches Stacks 0C33 (algebra.tex 47706) in the syntomic case, with syntomic spelled out from 00SL (line 36437) as flat, finitely presented, and every fibre ring a local complete intersection. No hypothesis is weakened; the extra 'phi finitely presented' assumption is redundant but harmless. Steps 1-10 checked against their cited statements. Step 1 needs no finite-presentation hypothesis in the colimit node, the tail is cofinal, and finite presentation comes from base change (05G5). Step 2 meets all three hypotheses of the 00SY node, with g=1. Steps 3-4: quasi-compactness gives a finite cover, and the unit-ideal relation lifts to a stage. Step 5: the 00SU subring P_a is finitely presented over Z because Z[t] is Noetherian; 00SS(a) gives the B-algebra isomorphism. Step 6: the localization presentation and its base change are correct. Step 7: every hypothesis of the existing model-stage node holds with i0:=j, and its compatibility clause makes the stage isomorphism B_k-linear; 00SS(b) then gives a relative global complete intersection. This replaces Stacks' 00QO/0C32 argument with an existing node. Step 8: base change to a common upper bound is correct. Step 9: flatness via 00SW, 00HT(6) and localization-of-localization; I checked that U equals C_i minus q. Step 10: the fibre charts become relative global complete intersections over a field, hence global complete intersections, hence the fibre is a local complete intersection. Edge cases: C=0 / empty cover, a one-element index set, non-injective transition maps, B_0 and C_0 not finitely generated. No new nodes and no duplicates (grep over the DAG for 0C33, syntomic, and colimit plus complete intersection). No SGA. Not a target node, so the base-change-morphism and coefficient-category checks do not apply. All 15 declared tool uses are generic commutative algebra and accepted. No unit or chapter change."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SyntomicRingFilteredColimitDescent",
+  "declarations": [
+   "Algebra.tensorBaseChange",
+   "Algebra.tensorBaseChangeMap",
+   "Algebra.residueFiber",
+   "Algebra.residueFiberIsLocalCompleteIntersection",
+   "Algebra.stageSyntomic",
+   "Algebra.colimitBaseChangeMap",
+   "Algebra.exists_syntomic_ring_filtered_colimit_stage"
+  ],
+  "declaration": "Algebra.exists_syntomic_ring_filtered_colimit_stage",
+  "file": "lean/Sheaf/RingTheory/SyntomicRingFilteredColimitDescent.lean",
+  "statement": "theorem exists_syntomic_ring_filtered_colimit_stage {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{u}) [HasColimit F] (i₀ : I) (B₀ C₀ : Type u) [CommRing B₀] [CommRing C₀] [Algebra (F.obj i₀) B₀] [Algebra (F.obj i₀) C₀] (φ₀ : B₀ →ₐ[F.obj i₀] C₀) (hφ₀ : RingHom.FinitePresentation φ₀.toRingHom) (hφ : RingHom.FinitePresentation (colimitBaseChangeMap F i₀ B₀ C₀ φ₀)) (hflat : RingHom.Flat (colimitBaseChangeMap F i₀ B₀ C₀ φ₀)) (hfibre : ∀ (p : Ideal (tensorBaseChange (F.obj i₀) ((colimit F : CommRingCat.{u}) : Type u) B₀ (colimit.ι F i₀).hom)) [p.IsPrime], residueFiberIsLocalCompleteIntersection (tensorBaseChange (F.obj i₀) ((colimit F : CommRingCat.{u}) : Type u) B₀ (colimit.ι F i₀).hom) (tensorBaseChange (F.obj i₀) ((colimit F : CommRingCat.{u}) : Type u) C₀ (colimit.ι F i₀).hom) (colimitBaseChangeMap F i₀ B₀ C₀ φ₀) p) : ∃ (i : I) (h : i₀ ≤ i), stageSyntomic F i₀ i h B₀ C₀ φ₀",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-b91c68107"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b91c68107",
+  "group": "Q135",
+  "result": "fix",
+  "note": "Added hφ₀, required source/blueprint docstrings, and updated lean record; replacement compiles via scompile.py."
  }
 }

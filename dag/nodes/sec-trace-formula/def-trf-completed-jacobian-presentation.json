@@ -1,0 +1,116 @@
+{
+ "id": "def-trf-completed-jacobian-presentation",
+ "kind": "definition",
+ "title": "Canonical completed Jacobian presentation",
+ "status": "split",
+ "statement": "Let $k,F$ be fields and $A$ a commutative local $k$-algebra with maximal ideal $\\mathfrak m$, completion $C=\\widehat A$ as in [def-trf-formal-local-presentation], and $M=C\\otimes_A\\Omega_{A/k}$, using [def-weil-pbc-module-tensor-product] and [def-weil-pbc-kahler-differentials]. Given integers $n,s\\ge0$, a ring map $\\Phi:F[[t_1,\\ldots,t_n]]\\to C$ [def-weil-pbc-multivariate-power-series], and equations $f_1,\\ldots,f_s$, say these give the canonical completed Jacobian presentation if there is a continuous $k$-derivation $D:C\\to M$ extending $a\\mapsto1\\otimes da$, and a surjective $C$-linear map $\\pi:C^n\\to M$ with $\\pi(e_i)=D(\\Phi(t_i))$ and kernel the $C$-span of the columns $(\\Phi(\\partial f_j/\\partial t_i))_{i=1}^n$ for $j=1,\\ldots,s$. Continuity of $D$ means that for every $r\\ge0$ some $N\\ge0$ satisfies $D((\\mathfrak mC)^N)\\subseteq(\\mathfrak mC)^rM$. Thus $M$ is the cokernel of the displayed Jacobian matrix with its specified differential map; tensor symmetry identifies $M$ with $\\Omega_{A/k}\\otimes_A C$. This is a predicate, not an existence theorem.",
+ "stmt_deps": [
+  "def-trf-formal-local-presentation",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "curves.tex, Tag 0C4D, differential presentation in the algebraically closed proof and completion passage; continuous differentials as discussed before lemma-fitting-ideal"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The continuous extension of the universal derivation to a completed local ring gives the cokernel of the formal Jacobian matrix",
+   "results": "{\"t\": \"2026-10-17T19:52:37Z\", \"tool\": \"leansearch\", \"query\": \"The continuous extension of the universal derivation to a completed local ring gives the cokernel of the formal Jacobian matrix\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousLinearMap.completion\", \"TopModuleCat.isColimitCoker\", \"UniformSpace.Completion.extensionHom\", \"TopModuleCat.coker\", \"UniformSpace.Completion.extensionHom_coe\", \"KaehlerDifferential.derivationQuotKerTotal\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"ModuleCat.Derivation.desc\"], \"digest\": \"77eedbfbbdf9821a\"}",
+   "date": "2026-10-17",
+   "verdict": "No matching notion: the hits concern analytic series, polynomial presentations, or general completion maps, not these specified formal presentation data and canonical completed differential maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The continuous extension of the universal derivation to a completed local ring gives the cokernel of the formal Jacobian matrix",
+   "results": "{\"t\": \"2026-10-17T19:52:39Z\", \"tool\": \"leanfinder\", \"query\": \"The continuous extension of the universal derivation to a completed local ring gives the cokernel of the formal Jacobian matrix\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.derivationQuotKerTotal\", \"Algebra.Generators.cotangentCompAwaySec\", \"Algebra.Presentation.differentials.comm₂₃\", \"Algebra.Extension.CotangentSpace\", \"Algebra.Extension.cotangentComplex\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"Algebra.Generators.cMulXSubOneCotangent\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv\"], \"digest\": \"13d9c8d4f50ea489\"}",
+   "date": "2026-10-17",
+   "verdict": "No matching notion: the hits concern analytic series, polynomial presentations, or general completion maps, not these specified formal presentation data and canonical completed differential maps."
+  },
+  {
+   "tool": "grep",
+   "query": "FormalLocalPresentation|coefficient.*section.*surject|continuous.*[Dd]erivation.*[Cc]omplet|completed.*[Jj]acobian",
+   "results": "{\"t\": \"2026-10-17T19:53:00Z\", \"tool\": \"grep\", \"query\": \"FormalLocalPresentation|coefficient.*section.*surject|continuous.*[Dd]erivation.*[Cc]omplet|completed.*[Jj]acobian\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No matching notion: the hits concern analytic series, polynomial presentations, or general completion maps, not these specified formal presentation data and canonical completed differential maps."
+  },
+  {
+   "tool": "grep",
+   "query": "rg FormalLocalPresentation|HasCompletedJacobianPresentation|coefficient.*section.*surject|completed.*[Jj]acobian in WeilConjectures and lean/Sheaf; blueprint_refs.py search completed Jacobian",
+   "results": "No matching declaration or definition node. The source-library search and side-library search found no match; blueprint search returned 0 nodes. The item and its theorem prerequisites describe the results, but do not define these data.",
+   "date": "2026-10-17",
+   "verdict": "New notion needed; existing Mathlib constructions are reused for all component rings and modules."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-separable-closed-point-formal-presentation",
+  "date": "2026-10-17",
+  "group": "Q134"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Formal presentation and completed differential comparison in the separable closed-point ingredient.",
+   "via": [
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletedJacobianPresentation",
+  "declaration": "Algebra.HasCompletedJacobianPresentation",
+  "declarations": [
+   "Algebra.CompletedDifferentials",
+   "Algebra.HasCompletedJacobianPresentation"
+  ],
+  "file": "lean/Sheaf/RingTheory/CompletedJacobianPresentation.lean",
+  "statement": "def HasCompletedJacobianPresentation (k : Type u) (A : Type v) (F : Type w) [Field k] [CommRing A] [Algebra k A] [IsLocalRing A] [Field F] (n s : ℕ) (φ : MvPowerSeries (Fin n) F →+* LocalCompletion A) (f : Fin s → MvPowerSeries (Fin n) F) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-71d804933",
+  "group": "Q134",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-71d804933",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, definitions, source citations, report sections, edge cases, route-pivot compliance, and exact declarations; all three Lean files compiled successfully via scompile.py."
+ }
+}

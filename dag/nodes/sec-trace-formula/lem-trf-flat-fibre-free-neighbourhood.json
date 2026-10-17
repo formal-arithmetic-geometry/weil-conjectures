@@ -261,10 +261,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-34746d392",
-  "group": "N4",
-  "result": "fix",
-  "note": "The Lean hypothesis hflat : F.IsFlatOver f is global flatness over S on all affine opens, stronger than the node's and Stacks 080Q's flatness of F_x over O_{S,f x} at x only; it also could not serve the citer lem-trf-generic-free-blowup. Fixed by hflat : moduleFlatAt f F x, the already-landed stalkwise predicate from Sheaf.TraceFormula.FlatAssociatedEquidimensional; that module replaces the unused DirectImage.Basic import; module docstring and step-by-step proof docstring added; report gets a correction section. Other clauses match: fp = lfp+qc+qs per conventions (Stacks 01TP), F.IsFinitePresentation, canonical fibre f.fiber (f x) with point f.asFiber x, tensorPullback, fibre stalk flatness, exists W containing x and r with F|_W iso free on ULift (Fin r), r=0 covered, single universe u. Only sorry, no definitions, nothing pro-etale, statement field verbatim, no existing 080Q declaration found. nt_compile: delivered file clean (5.3 s), fixed file clean (4.1 s); the tool was checked to report errors. Not confirmed: whether FlatAssociatedEquidimensional is in the delivery's base commit (git merge-base was blocked); it is on the side clone, landed in batch 05b876bbde."
+  "reviewer": "NT-stage2-Codex-1db05ea10",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Statement, dependencies, source proof, edge cases, docstrings, route constraints, report sections, and per-file compile evidence all verified."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.FlatFibreFreeNeighbourhood",
@@ -272,9 +272,8 @@
   "file": "lean/Sheaf/TraceFormula/FlatFibreFreeNeighbourhood.lean",
   "statement": "theorem exists_free_neighbourhood {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (F : X.Modules) [F.IsFinitePresentation] (x : X) (hflat : moduleFlatAt f F x) (hfibre : Module.Flat ((f.fiber (f x)).toRingedSpace.presheaf.stalk (f.asFiber x)) ((AlgebraicGeometry.RingedSpace.moduleStalkFunctor (f.fiber (f x)).toRingedSpace (f.asFiber x)).obj ((AlgebraicGeometry.Scheme.Modules.tensorPullback (f.fiberι (f x))).obj F))) : ∃ (W : X.Opens) (r : ℕ), x ∈ W ∧ Nonempty (((restrictFunctor W.ι).obj F) ≅ (restrictFunctor W.ι).obj (SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin r))))",
   "branch": "newtargets-dag",
-  "by": "N4",
-  "date": "2026-10-18",
-  "existing": false,
-  "fixed_by": "NT-stage2-cc-34746d392"
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

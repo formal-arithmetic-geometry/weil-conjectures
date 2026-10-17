@@ -119,5 +119,23 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-a63055d0e (reviewer sub-agent of L); spot-checked: I read all of the item and the one new node, and I checked both against the Stacks source (more-algebra.tex): the det construction at 36228-36255, 0AFX lemma-det at 36463-36475 with the K_0 recall at 36458-36461, 0B8I lemma-invertible at 36117-36181 including the Pic paragraph, and 0AFZ at 36779-36797. The item is the last sentence of 0AFZ. Its hypotheses (f.g. projective, every L_q free of rank one) are the same as 'finite locally free of rank 1' (= invertible, 0B8I). The statement is unchanged and is exactly what step 5 of lem-trf-regular-local-pic-zero uses. Step 1: the K_0 of def-trf-k0-group (set-sized projective quotients, direct-sum relations) is the group the new lemma uses. L and S both satisfy its rank-one clause, so det[L]=[L] and det[S]=1. Step 2: the homomorphism law gives det(n[S])=1 for every integer n, and equal Pic classes mean L≅S. It uses no kernel or cancellation claim. The new node lem-trf-k0-determinant-map is 0AFX specialized to rank one, as a homomorphism on all of K_0 for any commutative ring. It is true because det(M) is defined for every finite projective through the rank decomposition and lemma-det-ses handles the relations. It is statement-only, with Pic defined inline and every notion cited, and it is strictly more general than the item, so it restates no clause and creates no cycle. Small cases: zero ring, field, k×k, n≤0, Dedekind with a nontrivial class (consistent), and the counterexample S^2 when the rank-one hypothesis is dropped. I searched the DAG with rg for K_0, 0AFX, determinant, Pic/Picard, invertible module and exterior power. lem-trf-invertible-module-k0-class, def-sc-picard-group (curves), def-sc-invertible-module (schemes) and lem-pur-pid-invertible-module-trivial (PIDs) are not duplicates. The blueprint from/via chain is consistent and same_as=[] is right. The route stays inside sk-i-curve-zero, there are no tool_uses, no SGA, and no target is involved. Delivery-errors A-F are clean. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.K0ClassTrivialInvertible",
+  "declaration": "Module.FiniteProjectiveK0.class_trivial_invertible",
+  "file": "lean/Sheaf/RingTheory/K0ClassTrivialInvertible.lean",
+  "statement": "theorem class_trivial_invertible (S : Type u) [CommRing S] (L : Type v) [AddCommGroup L] [Module S L] [Module.Finite S L] [Module.Projective S L] (hlocal : ∀ q : PrimeSpectrum S, Module.Free (Localization.AtPrime q.asIdeal) (LocalizedModule q.asIdeal.primeCompl L) ∧ Module.rank (Localization.AtPrime q.asIdeal) (LocalizedModule q.asIdeal.primeCompl L) = 1) (n : ℤ) (hclass : FiniteProjectiveK0.mk S L = n • FiniteProjectiveK0.mk S S) : Nonempty (L ≃ₗ[S] S)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-041a66613",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, report sections, route constraints, and scompile evidence all pass; no corrections needed."
  }
 }

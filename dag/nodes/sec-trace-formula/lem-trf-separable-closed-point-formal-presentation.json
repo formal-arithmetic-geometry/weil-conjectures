@@ -16,7 +16,9 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-pbc-kahler-differentials",
   "def-weil-pbc-faithfully-flat-ring-map",
-  "def-weil-pbc-module-tensor-product"
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-formal-local-presentation",
+  "def-trf-completed-jacobian-presentation"
  ],
  "proof": [
   {
@@ -207,5 +209,29 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-edfe157d9 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited node's statement and the Stacks sources: More Algebra 0C34 (lemma-lift-residue-field), Varieties 0C4Y, 0C50, 0C52 and 0C54, and the Jacobian passage of Curves 0C4D. The unit route reaches sk-thm-p1, so no tool use is needed. No SGA source is cited. All four statements are true. I tested them on k[x] at (x), on k[[u,v]]/(uv), on R[x] at (x^2+1) with base change to C, and on the inseparable case F_p(a)[x]/(x^p-a), which shows the separability hypothesis is needed. The 0C54 node does not need Stacks' dimension hypothesis, because the point it uses forces the fibre ring to be K. None of the new nodes duplicates an existing node. Steps 4 and 6 each cite a new node that is one clause of the item; I accept this because the item bundles independent sourced facts and the Jacobian node is used twice (over k and over K). I repaired three citation faults by rewriting the item file in fixes/: (1) step 1, C1: 'the completion of A is Noetherian' had no citation; now it cites adic-completion-noetherian, plus finite-type-algebra-noetherian, flat-local-ring-maps and adic-completion-mod-ideal (completeness). (2) step 2, C4/E5: the Cohen nodes give an unrelated coefficient ring and no F-algebra surjection through the section; the step is now the 0C52 argument, with power-series-universal-property-complete, power-series-field-cohen-regular-complete and complete-source-surjective-mod-ideal (Tag 0315), and an elementary check that the kernel lies in (t). (3) step 5, C1/E5: the separability input (the tensor product of F and K over k is reduced) and the Noetherianity of the tensor product of S and K were missing; it now cites finite-separable-tensor-field-reduced (Tag 030U) and finite-type-algebra-noetherian and writes out the 0C50 argument. No statement was changed and no node is dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SeparableClosedPointFormalPresentation",
+  "declaration": "Algebra.separable_closed_point_formal_presentation",
+  "declarations": [
+   "Algebra.closedPointTensorEvaluation",
+   "Algebra.ClosedPointBaseChangeLocalRing",
+   "Algebra.closedPointBaseChangeLocalRingAlgebra",
+   "Algebra.separable_closed_point_formal_presentation"
+  ],
+  "file": "lean/Sheaf/RingTheory/SeparableClosedPointFormalPresentation.lean",
+  "statement": "theorem separable_closed_point_formal_presentation {k : Type u} {S : Type v} [Field k] [CommRing S] [Algebra k S] [Algebra.FiniteType k S] (p : Ideal S) [p.IsMaximal] [FiniteDimensional k p.ResidueField] [Algebra.IsSeparable k p.ResidueField] : IsNoetherianRing (Localization.AtPrime p) ∧ ∃ (_ : IsNoetherianRing (LocalCompletion (Localization.AtPrime p))) (_ : IsLocalRing (LocalCompletion (Localization.AtPrime p))), IsLocalRing.maximalIdeal (LocalCompletion (Localization.AtPrime p)) = (IsLocalRing.maximalIdeal (Localization.AtPrime p)).map (algebraMap (Localization.AtPrime p) (LocalCompletion (Localization.AtPrime p))) ∧ IsAdicComplete (IsLocalRing.maximalIdeal (LocalCompletion (Localization.AtPrime p))) (LocalCompletion (Localization.AtPrime p)) ∧ (∃ e : IsLocalRing.ResidueField (LocalCompletion (Localization.AtPrime p)) ≃ₐ[k] p.ResidueField, ∀ z : LocalCompletion (Localization.AtPrime p), e (IsLocalRing.residue _ z) = AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal (Localization.AtPrime p)) z) ∧ Nonempty (FormalLocalPresentation k (Localization.AtPrime p)) ∧ (∀ P : FormalLocalPresentation k (Localization.AtPrime p), HasCompletedJacobianPresentation k (Localization.AtPrime p) p.ResidueField P.n P.s P.map.toRingHom P.relation ∧ ∀ (K : Type (max u v w)) [Field K] [Algebra k K] (ι : p.ResidueField →ₐ[k] K), IsNoetherianRing (ClosedPointBaseChangeLocalRing p ι) ∧ ∃ g : Localization.AtPrime p →+* ClosedPointBaseChangeLocalRing p ι, (∀ a : S, g (algebraMap S (Localization.AtPrime p) a) = algebraMap (S ⊗[k] K) (ClosedPointBaseChangeLocalRing p ι) (a ⊗ₜ[k] (1 : K))) ∧ g.FaithfullyFlat ∧ IsLocalHom g ∧ (IsLocalRing.maximalIdeal (Localization.AtPrime p)).map g = IsLocalRing.maximalIdeal (ClosedPointBaseChangeLocalRing p ι) ∧ (∃ e : IsLocalRing.ResidueField (ClosedPointBaseChangeLocalRing p ι) ≃ₐ[K] K, ∀ a : S, ∀ c : K, e (IsLocalRing.residue _ (algebraMap (S ⊗[k] K) (ClosedPointBaseChangeLocalRing p ι) (a ⊗ₜ[k] c))) = ι (algebraMap S p.ResidueField a) * c) ∧ ∃ (_ : IsNoetherianRing (LocalCompletion (ClosedPointBaseChangeLocalRing p ι))) (_ : IsLocalRing (LocalCompletion (ClosedPointBaseChangeLocalRing p ι))), IsAdicComplete (IsLocalRing.maximalIdeal (LocalCompletion (ClosedPointBaseChangeLocalRing p ι))) (LocalCompletion (ClosedPointBaseChangeLocalRing p ι)) ∧ ∃ h : LocalCompletion (Localization.AtPrime p) →+* LocalCompletion (ClosedPointBaseChangeLocalRing p ι), (∀ (r : ℕ) (z : LocalCompletion (Localization.AtPrime p)) (a : Localization.AtPrime p), AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (Localization.AtPrime p)) r z = Ideal.Quotient.mk ((IsLocalRing.maximalIdeal (Localization.AtPrime p)) ^ r) a → AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (ClosedPointBaseChangeLocalRing p ι)) r (h z) = Ideal.Quotient.mk ((IsLocalRing.maximalIdeal (ClosedPointBaseChangeLocalRing p ι)) ^ r) (g a)) ∧ ∃ φ : MvPowerSeries (Fin P.n) K →ₐ[K] LocalCompletion (ClosedPointBaseChangeLocalRing p ι), (∀ f : MvPowerSeries (Fin P.n) p.ResidueField, φ (MvPowerSeries.map ι.toRingHom f) = h (P.map f)) ∧ (∃ e : (MvPowerSeries (Fin P.n) K ⧸ Ideal.span (Set.range (fun j : Fin P.s ↦ MvPowerSeries.map ι.toRingHom (P.relation j)))) ≃ₐ[K] LocalCompletion (ClosedPointBaseChangeLocalRing p ι), IsLocalHom e.toRingHom ∧ ∀ f : MvPowerSeries (Fin P.n) K, e (Ideal.Quotient.mk _ f) = φ f) ∧ HasCompletedJacobianPresentation K (ClosedPointBaseChangeLocalRing p ι) K P.n P.s φ.toRingHom (fun j : Fin P.s ↦ MvPowerSeries.map ι.toRingHom (P.relation j)))",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-71d804933",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, definitions, source citations, report sections, edge cases, route-pivot compliance, and exact declarations; all three Lean files compiled successfully via scompile.py."
  }
 }

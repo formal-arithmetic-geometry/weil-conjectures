@@ -252,5 +252,29 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-0c6c446fe (reviewer sub-agent of L); spot-checked: Read in full: the item, all six steps, and the statement of every cited node; there are no new nodes. Statement: matches Stacks Tag 04CA (etale-cohomology.tex, proposition-closed-immersion-pushforward), part (1) and its final left-inverse sentence, for sheaves of sets. No hypothesis is added or dropped and nothing is weakened. Step 1: G(empty) is a singleton because the empty family covers the empty open (open-immersion leaf). Step 2: uses only the initiality clause of lemma-openclosed-stalk-lowerstar, turned into a bijection of set-valued stalks through the Hom(G(W),A) limit (initial-functor-limit leaf plus the colimit universal property). This is the same argument as the blueprint's prop-openclosed-lowerstar-fully-faithful proof. Step 3: the triangle identity gives eps(i^*b)=b, so the counit stalk equals r composed with c, and stalk detection on Z finishes. Step 4: standard adjunction algebra. Step 5: neighbourhoods refined by V x_X U miss Z, so stalks over U are singletons. Step 6: c composed with r composed with the unit is the identity on germs; stalks over U are singletons on both sides; the closed-immersion affine clause gives the dichotomy of geometric points. Edge cases checked: X, Z or U empty, non-reduced Z, empty stalks on Z. Duplicates: lem-kun-04ca is the abelian version, prop-openclosed-lowerstar-fully-faithful is the counit clause only, and no set-valued 04CA node exists. Accepted tool_uses: lemma-openclosed-stalk-lowerstar and the two set-sheaf inverse-image nodes, all Lean-closed generic tools. No SGA source. No fixes made."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.EtaleClosedComplementSets",
+  "file": "lean/Sheaf/TraceFormula/EtaleClosedComplementSets.lean",
+  "declaration": "AlgebraicGeometry.etaleClosedComplementSets",
+  "declarations": [
+   "AlgebraicGeometry.etaleSetDirectImage",
+   "AlgebraicGeometry.etaleSetInverseImage",
+   "AlgebraicGeometry.etaleSetAdjunction",
+   "AlgebraicGeometry.etaleClosedComplementSets"
+  ],
+  "statement": "theorem etaleClosedComplementSets {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] : (etaleSetDirectImage i).Full ∧ (etaleSetDirectImage i).Faithful ∧ (∀ F : Sheaf X.smallEtaleTopology (Type (u + 1)), (etaleSetDirectImage i).essImage F ↔ Nonempty (IsTerminal ((etaleSetInverseImage (i.openComplement.ι)).obj F))) ∧ (∀ G : Sheaf Z.smallEtaleTopology (Type (u + 1)), IsIso ((etaleSetAdjunction i).counit.app G))",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-17"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-38a5eae43",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Reviewed packet, source Tag 04CA, all dependencies, Lean declarations, report sections, edge cases, route-pivot status, and scompile evidence; no findings."
  }
 }
