@@ -92,7 +92,7 @@ lemma completionSwap_completionSwap (τ : R ≃+* R) (hτ : ∀ r, τ (τ r) = r
     (hτμ : ∀ r, algebraMap R O (τ r) = algebraMap R O r)
     (x : AdicCompletion (RingHom.ker (algebraMap R O)) R) :
     completionSwap τ hτ hτμ (completionSwap τ hτ hτμ x) = x :=
-  adicCompletionMap_adicCompletionMap _ hτ x
+  adicCompletionMap_adicCompletionMap (le_comap_ker_algebraMap hτμ) hτ x
 end Swap
 
 variable {O R : Type*} [CommRing O] [CommRing R] [Algebra O R] [Algebra R O]
@@ -180,5 +180,78 @@ lemma isAdicComplete_tensor (T : Type*) [CommRing T] [Algebra O T] [Module.Finit
   have : IsAdicComplete (I.map (algebraMap R Rh)) (Rh ⊗[O] T) :=
     finite_module_complete_over_complete_noetherian Rh _ _
   exact (IsAdicComplete.map_algebraMap_iff _ _).2 this
+
+omit [IsNoetherianRing O] [IsLocalRing R] [Module.Flat O R] in
+/-- **The two pullbacks of `T` agree over the completion along the diagonal.** There is a ring
+automorphism of `R^ ⊗_{p₂} T` which is semilinear with respect to the involution of `R^` induced
+by `τ`; equivalently, an `R^`-algebra isomorphism `R^ ⊗_{p₁} T ≅ R^ ⊗_{p₂} T`. -/
+theorem exists_semilinear_ringEquiv (τ : R ≃+* R) (hτ : ∀ r, τ (τ r) = r)
+    (hτμ : ∀ r, algebraMap R O (τ r) = algebraMap R O r)
+    {T : Type*} [CommRing T] [Algebra O T] [Module.Finite O T] {a b : O}
+    (ha : τ (algebraMap O R a) = algebraMap O R a) (hT : IsRegularPair a b T)
+    [Algebra.Etale (Localization.Away a) (Localization.Away a ⊗[O] T)]
+    [Algebra.Etale (Localization.Away b) (Localization.Away b ⊗[O] T)] :
+    ∃ σ : AdicCompletion (RingHom.ker (algebraMap R O)) R ⊗[O] T ≃+*
+        AdicCompletion (RingHom.ker (algebraMap R O)) R ⊗[O] T,
+      ∀ x, σ (algebraMap _ _ x) = algebraMap _ _ (completionSwap τ hτ hτμ x) := by
+  set I := RingHom.ker (algebraMap R O)
+  set Rh := AdicCompletion I R
+  set D := Rh ⊗[O] T
+  set f := algebraMap Rh D
+  set Ih := I.map (algebraMap R Rh)
+  set J := Ih.map f
+  set θ := completionSwap τ hτ hτμ
+  let p₁ : O →+* Rh := (algebraMap R Rh).comp (τ.toRingHom.comp (algebraMap O R))
+  have hθ (x : O) : θ (algebraMap O Rh x) = p₁ x := by
+    rw [IsScalarTower.algebraMap_apply O R Rh, completionSwap_algebraMap]
+    rfl
+  have : IsAdicComplete J D := isAdicComplete_tensor T
+  have : Algebra.FormallyEtale O (Localization.Away a) := .of_isLocalization (Submonoid.powers a)
+  have : Algebra.FormallyEtale O (Localization.Away b) := .of_isLocalization (Submonoid.powers b)
+  have : Algebra.FormallyEtale O (Localization.Away a ⊗[O] T) := .comp O (Localization.Away a) _
+  have : Algebra.FormallyEtale O (Localization.Away b ⊗[O] T) := .comp O (Localization.Away b) _
+  have hJ (x : Rh) : Ideal.Quotient.mk J (f (θ x)) = Ideal.Quotient.mk J (f x) := by
+    rw [Ideal.Quotient.eq, ← map_sub]
+    exact Ideal.mem_map_of_mem _ (completionSwap_sub_mem τ hτ hτμ x)
+  let iT : T →+* D := (Algebra.TensorProduct.includeRight : T →ₐ[O] D).toRingHom
+  have hiT (t : T) : iT t = 1 ⊗ₜ t := rfl
+  let φ₀ : T →+* D ⧸ J := (Ideal.Quotient.mk J).comp iT
+  obtain ⟨ψ, hψ, hψφ⟩ := exists_ringHom_lift_of_isAdicComplete (f.comp p₁) J a b
+    (fun n ↦ isRegularPair_quotient_pow hτμ ha hT n) φ₀ (by
+      refine RingHom.ext fun x ↦ ?_
+      have hx : iT (algebraMap O T x) = algebraMap O D x :=
+        Algebra.TensorProduct.includeRight.commutes x
+      simp only [φ₀, RingHom.comp_apply]
+      rw [hx, ← hθ, hJ, ← IsScalarTower.algebraMap_apply])
+  let σ₀ : D →+* D := tensorLift (f.comp θ.toRingHom) ψ fun x ↦ by
+    rw [RingHom.comp_apply, RingEquiv.toRingHom_eq_coe, RingEquiv.coe_toRingHom, hθ,
+      ← RingHom.comp_apply ψ, hψ]
+    rfl
+  have hσ₀f (r : Rh) : σ₀ (f r) = f (θ r) := by
+    rw [Algebra.TensorProduct.algebraMap_apply, Algebra.algebraMap_self, RingHom.id_apply,
+      tensorLift_tmul, map_one, mul_one]
+    rfl
+  have hσ₀J : (Ideal.Quotient.mk J).comp σ₀ = Ideal.Quotient.mk J := by
+    refine ringHom_ext_tmul fun r t ↦ ?_
+    rw [RingHom.comp_apply, tensorLift_tmul, map_mul, RingHom.comp_apply,
+      RingEquiv.toRingHom_eq_coe, RingEquiv.coe_toRingHom, hJ,
+      ← RingHom.comp_apply (Ideal.Quotient.mk J) ψ, hψφ, RingHom.comp_apply, ← map_mul, hiT,
+      Algebra.TensorProduct.algebraMap_apply, Algebra.algebraMap_self, RingHom.id_apply,
+      Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
+  let g : D →ₗ[Rh] D :=
+    { toFun := fun x ↦ σ₀ (σ₀ x)
+      map_add' := fun x y ↦ by rw [map_add, map_add]
+      map_smul' := fun r x ↦ by
+        rw [Algebra.smul_def, Algebra.smul_def, map_mul, map_mul, RingHom.id_apply, hσ₀f, hσ₀f,
+          completionSwap_completionSwap] }
+  have hg (x : D) : x - g x ∈ Ih • (⊤ : Submodule Rh D) := by
+    rw [Ideal.smul_top_eq_map, Submodule.restrictScalars_mem, ← Ideal.Quotient.eq]
+    exact ((RingHom.congr_fun hσ₀J (σ₀ x)).trans (RingHom.congr_fun hσ₀J x)).symm
+  have := AdicCompletion.isAdicComplete_self I (IsNoetherian.noetherian I)
+  have hbij := bijective_of_sub_mem_smul_top (IsAdicComplete.le_jacobson_bot Ih) g hg
+  have hσ₀ : Function.Bijective σ₀ :=
+    ⟨fun x y h ↦ hbij.1 (by simp only [g, LinearMap.coe_mk, AddHom.coe_mk, h]),
+      fun y ↦ ⟨σ₀ (hbij.2 y).choose, (hbij.2 y).choose_spec⟩⟩
+  exact ⟨RingEquiv.ofBijective σ₀ hσ₀, hσ₀f⟩
 
 end RingTheory.DepthTwo
