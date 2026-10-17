@@ -25,14 +25,14 @@ namespace AlgebraicGeometry.Scheme
 /-- Transport finite local constancy along a set-sheaf isomorphism. -/
 private theorem finiteLisse_of_iso {X : Scheme.{u}}
     {F G : Sheaf X.smallEtaleTopology (Type (u + 1))} (e : F ≅ G)
-    (hF : IsFiniteLocallyConstantEtaleSheafOfSets F) :
-    IsFiniteLocallyConstantEtaleSheafOfSets G := by
-  obtain ⟨⟨𝒰, h𝒰⟩, hf⟩ := hF
-  refine ⟨⟨𝒰, fun i ↦ ?_⟩, ?_⟩
+    (hF : IsFiniteLocallyConstantSheafOfTypes F) :
+    IsFiniteLocallyConstantSheafOfTypes G := by
+  obtain ⟨𝒰, h𝒰⟩ := hF.1
+  refine isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber ⟨𝒰, fun i ↦ ?_⟩ ?_
   · have := h𝒰 i
     exact Sheaf.isConstant_congr _ ((X.smallEtaleTopology.overPullback _ _).mapIso e)
   · intro Ω _ _ s
-    have := hf Ω s
+    have := hF.finite_sheafFiber Ω s
     exact Finite.of_equiv _ (((pointSmallEtale s).sheafFiber.mapIso e).toEquiv)
 
 /-- Lissity of an abelian restriction depends only on containment in an immersed image. -/
@@ -40,10 +40,10 @@ private theorem finiteLisse_of_range_subset {X Y Z : Scheme.{u}}
     (a : Y ⟶ X) (b : Z ⟶ X) [IsImmersion b]
     (hr : Set.range a ⊆ Set.range b)
     (E : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
-    (hb : IsFiniteLocallyConstantEtaleSheafOfSets
+    (hb : IsFiniteLocallyConstantSheafOfTypes
       ((sheafCompose Z.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
         ((Etale.upperStar AddCommGrpCat.{u + 1} b).obj E))) :
-    IsFiniteLocallyConstantEtaleSheafOfSets
+    IsFiniteLocallyConstantSheafOfTypes
       ((sheafCompose Y.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
         ((Etale.upperStar AddCommGrpCat.{u + 1} a).obj E)) := by
   have : Surjective (Limits.pullback.fst a b) :=
@@ -102,7 +102,7 @@ is vacuous. -/
 theorem lisse_on_stratum_interiors
     {Z : Scheme.{u}} (E : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1})
     (T : Stratification Z)
-    (hT : ∀ i : Fin T.n, IsFiniteLocallyConstantEtaleSheafOfSets
+    (hT : ∀ i : Fin T.n, IsFiniteLocallyConstantSheafOfTypes
       ((etaleSetPullback (T.immersion i)).obj
         ((sheafCompose Z.smallEtaleTopology
           (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj E))) :
@@ -111,7 +111,7 @@ theorem lisse_on_stratum_interiors
         (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
           ((Etale.upperStar AddCommGrpCat.{u + 1} T.interiorUnion.ι).obj E)) := by
   classical
-  have hstratum (i : Fin T.n) : IsFiniteLocallyConstantEtaleSheafOfSets
+  have hstratum (i : Fin T.n) : IsFiniteLocallyConstantSheafOfTypes
       ((sheafCompose (T.domain i).smallEtaleTopology
         (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
           ((Etale.upperStar AddCommGrpCat.{u + 1} (T.immersion i)).obj E)) := by
@@ -119,11 +119,11 @@ theorem lisse_on_stratum_interiors
       (T.domain i) Z (T.immersion i)).2.choose
     exact finiteLisse_of_iso (e.app E).symm (hT i)
   let G := (Etale.upperStar AddCommGrpCat.{u + 1} T.interiorUnion.ι).obj E
-  have hcover (i : ULift.{u} (Fin T.n)) : IsFiniteLocallyConstantEtaleSheafOfSets
+  have hcover (i : ULift.{u} (Fin T.n)) : IsFiniteLocallyConstantSheafOfTypes
       ((sheafCompose (T.interiorOpens i.down).toScheme.smallEtaleTopology
         (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
           ((Etale.upperStar AddCommGrpCat.{u + 1} (T.interiorUnionCover.f i)).obj G)) := by
-    have hi : IsFiniteLocallyConstantEtaleSheafOfSets
+    have hi : IsFiniteLocallyConstantSheafOfTypes
         ((sheafCompose (T.interiorOpens i.down).toScheme.smallEtaleTopology
           (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
             ((Etale.upperStar AddCommGrpCat.{u + 1} (T.interiorOpens i.down).ι).obj E)) := by

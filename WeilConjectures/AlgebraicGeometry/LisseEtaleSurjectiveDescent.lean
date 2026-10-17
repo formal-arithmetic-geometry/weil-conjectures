@@ -72,7 +72,7 @@ this follows from the equivalence between the localized small etale site and
 the small etale site of the member. Transport each constant trivialization
 through this equivalence. This proves local constancy of F. For any geometric
 point s over Y, surjectivity supplies a point of T above its image. Because p is
-etale and the field of s is algebraically closed, s lifts to a geometric point t
+etale and the field of s is separably closed, s lifts to a geometric point t
 of T with t followed by p equal to s. The inverse-image stalk isomorphism
 identifies the stalk of F at s with the stalk of p inverse image F at t, which
 is finite by hypothesis. Thus F has finite geometric stalks. For an empty base
@@ -104,7 +104,7 @@ theorem isLisseEtaleSheafOfSets_of_etale_surjective_pullback
       obtain ⟨i, a, ha⟩ := 𝒰.exists_eq t
       exact ⟨i, a, by simpa [Scheme.Hom.comp_apply, ha] using ht⟩)
       (fun i ↦ by have := 𝒰.map_prop i; infer_instance)
-  refine ⟨⟨𝒱, ?_⟩, ?_⟩
+  refine isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber ⟨𝒱, ?_⟩ ?_
   · intro i
     rw [isConstant_over_iff_setRestriction]
     have hconst := (isConstant_over_iff_setRestriction
@@ -130,7 +130,7 @@ theorem isLisseEtaleSheafOfSets_of_etale_surjective_pullback
     obtain ⟨a, ha, _⟩ := exists_fac_of_etale_of_isSepClosed p s t ht
     obtain ⟨c, hc, _⟩ := AlgebraicGeometry.etaleSetInverseImageStalkGerm Y T p F Ω a
     have : Finite ((pointSmallEtale a).sheafFiber.obj ((etaleSetPullback p).obj F)) :=
-      hF.2 Ω a
+      hF.finite_sheafFiber Ω a
     have hfinite : Finite ((pointSmallEtale (a ≫ p)).sheafFiber.obj F) :=
       Finite.of_surjective c hc.2
     simpa only [ha] using hfinite
