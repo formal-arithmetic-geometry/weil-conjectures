@@ -2728,7 +2728,6 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RankOne
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RealizationNatural
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Restriction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Semicontinuity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafBoundaryPurity
@@ -3646,6 +3645,7 @@ public import WeilConjectures.RepresentationTheory.GroupCohomology.CupNonvanishi
 public import WeilConjectures.RepresentationTheory.IntegralModel
 public import WeilConjectures.RepresentationTheory.InvariantFlagCategoricalFiltration
 public import WeilConjectures.RepresentationTheory.PiTensorProduct
+public import WeilConjectures.RepresentationTheory.RepFunctors
 public import WeilConjectures.RepresentationTheory.SylowModuleFiltration
 public import WeilConjectures.RepresentationTheory.TensorPower
 public import WeilConjectures.RingTheory.AdicCompletionNoetherian

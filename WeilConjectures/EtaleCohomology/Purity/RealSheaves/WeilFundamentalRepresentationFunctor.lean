@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LisseWeilSheafTensor
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RealizationNatural
+public import WeilConjectures.RepresentationTheory.RepFunctors
 
 /-!
 # The Weil fundamental representation as a tensor functor
@@ -131,66 +131,13 @@ lemma fundamentalRepFunctor_map_hom_apply {X Y : LisseWeilSheaf K l C} (f : X �
     ((fundamentalRepFunctor M D).map f).hom v = stalkMap f.hom X.property Y.property v :=
   rfl
 
-/-- The Weil fundamental representation of the dual `ℱ^∨` is the contragredient of that of `ℱ`,
-through the evaluation pairing of the stalks at the base point
-(`AlgebraicGeometry.WeilGroup.nonempty_equiv_fundamentalRep_dual`). -/
-noncomputable def fundamentalRepDualEquiv (F : WeilSheaf K l C) (hF : F.IsLisse) :
-    (fundamentalRep M D (F.dual hF) hF.dual).Equiv (fundamentalRep M D F hF).dual :=
-  Representation.Equiv.mk (LinearEquiv.ofBijective _ (bijective_dualStalkLinearMap F hF))
-    fun w ↦ LinearMap.ext fun d ↦ by
-      change dualStalkLinearMap B F hF (fundamentalRep M D _ _ w d) =
-        (fundamentalRep M D F hF).dual w (dualStalkLinearMap B F hF d)
-      refine intertwines_of_geometric_frobLift D _ _ (dualStalkLinearMap B F hF)
-        (fun u hu d ↦ ?_) (fun d ↦ ?_) w d
-      · refine apply_eq_dual_of_invariant _ _ _ _ (fun d v ↦ ?_) d
-        rw [fundamentalRep_geometric M D _ _ ⟨u, hu⟩, fundamentalRep_geometric M D F hF ⟨u, hu⟩]
-        exact dualStalkLinearMap_rep M F hF _ d v
-      · refine apply_eq_dual_of_invariant _ _ _ _ (fun d v ↦ ?_) d
-        rw [fundamentalRep_frobLift, fundamentalRep_frobLift]
-        exact dualStalkLinearMap_frobStalk M F hF d v
-
-lemma fundamentalRepDualEquiv_apply (F : WeilSheaf K l C) (hF : F.IsLisse) (d) :
-    fundamentalRepDualEquiv M D F hF d = dualStalkLinearMap B F hF d :=
-  rfl
-
-/-- The Weil fundamental representation of `ℱ ⊗ 𝒢` is the representation on
-`Hom((ℱ^∨)_t, 𝒢_t)`, through the evaluation pairing of the stalks at the base point
-(`AlgebraicGeometry.WeilGroup.nonempty_equiv_fundamentalRep_tensorObj_linHom`). -/
-noncomputable def fundamentalRepTensorObjLinHomEquiv (F G : WeilSheaf K l C) (hF : F.IsLisse)
-    (hG : G.IsLisse) :
-    (fundamentalRep M D (F.tensorObj G hF) (hF.tensorObj hG)).Equiv
-      (Representation.linHom (fundamentalRep M D (F.dual hF) hF.dual)
-        (fundamentalRep M D G hG)) :=
-  Representation.Equiv.mk
-    (LinearEquiv.ofBijective _ (bijective_tensorStalkLinearMap F G hF hG))
-    fun w ↦ LinearMap.ext fun d ↦ by
-      change tensorStalkLinearMap B F G hF hG (fundamentalRep M D _ _ w d) =
-        Representation.linHom _ _ w (tensorStalkLinearMap B F G hF hG d)
-      refine intertwines_of_geometric_frobLift D _ _ (tensorStalkLinearMap B F G hF hG)
-        (fun u hu d ↦ ?_) (fun d ↦ ?_) w d
-      · refine apply_eq_linHom_of_equivariant _ _ _ _ _ (fun d v ↦ ?_) d
-        rw [fundamentalRep_geometric M D _ _ ⟨u, hu⟩, fundamentalRep_geometric M D _ _ ⟨u, hu⟩,
-          fundamentalRep_geometric M D G hG ⟨u, hu⟩]
-        exact tensorStalkLinearMap_rep M F G hF hG _ d v
-      · refine apply_eq_linHom_of_equivariant _ _ _ _ _ (fun d v ↦ ?_) d
-        rw [fundamentalRep_frobLift, fundamentalRep_frobLift, fundamentalRep_frobLift]
-        exact tensorStalkLinearMap_frobStalk M F G hF hG d v
-
-lemma fundamentalRepTensorObjLinHomEquiv_apply (F G : WeilSheaf K l C) (hF : F.IsLisse)
-    (hG : G.IsLisse) (z) :
-    fundamentalRepTensorObjLinHomEquiv M D F G hF hG z = tensorStalkLinearMap B F G hF hG z :=
-  rfl
-
-/-- The identification `(ℱ ⊗ 𝒢)_t ≅ ℱ_t ⊗ 𝒢_t` of Weil fundamental representations
-(`AlgebraicGeometry.WeilGroup.nonempty_equiv_fundamentalRep_tensorObj`): the composite of
-`(ℱ ⊗ 𝒢)_t ≅ Hom((ℱ^∨)_t, 𝒢_t)` and `ℱ_t ⊗ 𝒢_t ≅ Hom((ℱ^∨)_t, 𝒢_t)`, `(ℱ^∨)_t ≅ (ℱ_t)^∨`. -/
+/-- The identification `(ℱ ⊗ 𝒢)_t ≅ ℱ_t ⊗ 𝒢_t` of Weil fundamental representations of lisse Weil
+sheaves (`AlgebraicGeometry.WeilGroup.fundamentalRepTensorObjEquiv`). -/
 noncomputable def fundamentalRepTensorEquiv (X Y : LisseWeilSheaf K l C) :
     (fundamentalRep M D (X.obj.tensorObj Y.obj X.property)
         (X.property.tensorObj Y.property)).Equiv
       ((fundamentalRep M D X.obj X.property).tprod (fundamentalRep M D Y.obj Y.property)) :=
-  (fundamentalRepTensorObjLinHomEquiv M D X.obj Y.obj X.property Y.property).trans
-    (Representation.Equiv.tprodEquivLinHomOfDual
-      (fundamentalRepDualEquiv M D X.obj X.property)).symm
+  fundamentalRepTensorObjEquiv M D X.obj Y.obj X.property Y.property
 
 /-- The identification `(ℱ ⊗ 𝒢)_t ≅ ℱ_t ⊗ 𝒢_t` is natural in `ℱ` and `𝒢`. -/
 lemma fundamentalRepTensorEquiv_naturality {X X' Y Y' : LisseWeilSheaf K l C} (f : X ⟶ X')
@@ -206,8 +153,8 @@ lemma fundamentalRepTensorEquiv_naturality {X X' Y Y' : LisseWeilSheaf K l C} (f
       Representation.Equiv.tprodEquivLinHomOfDual (σ := fundamentalRep M D Y.obj Y.property)
           (fundamentalRepDualEquiv M D X.obj X.property) (fundamentalRepTensorEquiv M D X Y z) =
         tensorStalkLinearMap B X.obj Y.obj X.property Y.property z := by
-    rw [fundamentalRepTensorEquiv, Representation.Equiv.trans_apply,
-      Representation.Equiv.apply_symm_apply]
+    rw [fundamentalRepTensorEquiv, fundamentalRepTensorObjEquiv,
+      Representation.Equiv.trans_apply, Representation.Equiv.apply_symm_apply]
     rfl
   apply EquivLike.injective (Representation.Equiv.tprodEquivLinHomOfDual
     (σ := fundamentalRep M D Y'.obj Y'.property) (fundamentalRepDualEquiv M D X'.obj X'.property))

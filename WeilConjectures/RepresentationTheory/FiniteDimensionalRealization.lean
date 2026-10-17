@@ -120,14 +120,15 @@ noncomputable def basisEquiv (X : A) : V X ≃ₗ[k] Model k V X :=
 end Realization
 
 open Realization in
-/-- **Small model of a realization.** Let `A` be a category, realized by finite-dimensional
-representations `ρ X` of `G` on vector spaces `V X : Type (u + 1)`, continuous along
-`ι : H →* G`. Suppose the realization is faithful, full (on intertwining maps) and essentially
-surjective onto finite-dimensional representations in `Type (u + 1)` that are continuous along
-`ι`. Then `A` is equivalent to the full subcategory `Q` of `Rep.{u} k G` on finite-dimensional
-representations continuous along `ι`, and the equivalence is compatible with the realization up
-to intertwining linear equivalences. -/
-theorem exists_equivalence_of_realization
+/-- **Natural small model of a realization.** Let `A` be a category, realized by
+finite-dimensional representations `ρ X` of `G` on vector spaces `V X : Type (u + 1)`, continuous
+along `ι : H →* G`. Suppose the realization is faithful, full (on intertwining maps) and
+essentially surjective onto finite-dimensional representations in `Type (u + 1)` that are
+continuous along `ι`. Then `A` is equivalent to the full subcategory `Q` of `Rep.{u} k G` on
+finite-dimensional representations continuous along `ι`, and the equivalence comes with
+identifications `f X` of the underlying spaces with `V X` which intertwine the representations
+and are natural in `X`. -/
+theorem exists_equivalence_of_realization_natural
     {k : Type} [Field k] [TopologicalSpace k] {G : Type u} [Group G] {H : Type*} [Group H]
     [TopologicalSpace H] (ι : H →* G) {A : Type*} [Category A]
     (V : A → Type (u + 1)) [∀ X, AddCommGroup (V X)] [∀ X, Module k (V X)]
@@ -145,8 +146,9 @@ theorem exists_equivalence_of_realization
         ∃ (X : A) (e : V X ≃ₗ[k] V'), ∀ g v, e (ρ X g v) = ρ' g (e v))
     (Q : ObjectProperty (Rep.{u} k G))
     (hQ : ∀ X : Rep.{u} k G, Q X ↔ FiniteDimensional k X.V ∧ X.ρ.IsContinuousOn ι) :
-    ∃ e : A ≌ Q.FullSubcategory, ∀ X : A, ∃ f : (e.functor.obj X).obj.V ≃ₗ[k] V X,
-      ∀ g v, f ((e.functor.obj X).obj.ρ g v) = ρ X g (f v) := by
+    ∃ (e : A ≌ Q.FullSubcategory) (f : ∀ X : A, (e.functor.obj X).obj.V ≃ₗ[k] V X),
+      (∀ X g v, f X ((e.functor.obj X).obj.ρ g v) = ρ X g (f X v)) ∧
+      ∀ {X Y : A} (φ : X ⟶ Y) v, f Y ((e.functor.map φ).hom.hom v) = map φ (f X v) := by
   let b := basisEquiv k V
   let F : A ⥤ Q.FullSubcategory :=
     { obj X := ⟨Rep.of ((ρ X).transport (b X)),
@@ -188,7 +190,40 @@ theorem exists_equivalence_of_realization
             simp only [ρ', transport_apply] at this
             simp [this]
         exact ⟨X, ⟨ObjectProperty.isoMk _ (Rep.mkIso e')⟩⟩⟩ }
-  refine ⟨F.asEquivalence, fun X ↦ ⟨(b X).symm, fun g v ↦ ?_⟩⟩
-  exact (b X).symm_apply_apply _
+  refine ⟨F.asEquivalence, fun X ↦ (b X).symm, fun X g v ↦ (b X).symm_apply_apply _,
+    fun {X Y} φ v ↦ ?_⟩
+  exact (b Y).symm_apply_apply _
+
+/-- **Small model of a realization.** Let `A` be a category, realized by finite-dimensional
+representations `ρ X` of `G` on vector spaces `V X : Type (u + 1)`, continuous along
+`ι : H →* G`. Suppose the realization is faithful, full (on intertwining maps) and essentially
+surjective onto finite-dimensional representations in `Type (u + 1)` that are continuous along
+`ι`. Then `A` is equivalent to the full subcategory `Q` of `Rep.{u} k G` on finite-dimensional
+representations continuous along `ι`, and the equivalence is compatible with the realization up
+to intertwining linear equivalences (forgetting the naturality in
+`Representation.exists_equivalence_of_realization_natural`). -/
+theorem exists_equivalence_of_realization
+    {k : Type} [Field k] [TopologicalSpace k] {G : Type u} [Group G] {H : Type*} [Group H]
+    [TopologicalSpace H] (ι : H →* G) {A : Type*} [Category A]
+    (V : A → Type (u + 1)) [∀ X, AddCommGroup (V X)] [∀ X, Module k (V X)]
+    [∀ X, FiniteDimensional k (V X)]
+    (ρ : ∀ X, Representation k G (V X)) (hρ : ∀ X, (ρ X).IsContinuousOn ι)
+    (map : ∀ {X Y : A}, (X ⟶ Y) → (V X →ₗ[k] V Y))
+    (map_id : ∀ X, map (𝟙 X) = LinearMap.id)
+    (map_comp : ∀ {X Y Z : A} (f : X ⟶ Y) (g : Y ⟶ Z), map (f ≫ g) = map g ∘ₗ map f)
+    (map_comm : ∀ {X Y : A} (f : X ⟶ Y) (g : G) (v : V X), map f (ρ X g v) = ρ Y g (map f v))
+    (faithful : ∀ {X Y : A} (f f' : X ⟶ Y), map f = map f' → f = f')
+    (full : ∀ {X Y : A} (φ : V X →ₗ[k] V Y), (∀ g v, φ (ρ X g v) = ρ Y g (φ v)) →
+      ∃ f : X ⟶ Y, map f = φ)
+    (essSurj : ∀ (V' : Type (u + 1)) [AddCommGroup V'] [Module k V'] [FiniteDimensional k V']
+      (ρ' : Representation k G V'), ρ'.IsContinuousOn ι →
+        ∃ (X : A) (e : V X ≃ₗ[k] V'), ∀ g v, e (ρ X g v) = ρ' g (e v))
+    (Q : ObjectProperty (Rep.{u} k G))
+    (hQ : ∀ X : Rep.{u} k G, Q X ↔ FiniteDimensional k X.V ∧ X.ρ.IsContinuousOn ι) :
+    ∃ e : A ≌ Q.FullSubcategory, ∀ X : A, ∃ f : (e.functor.obj X).obj.V ≃ₗ[k] V X,
+      ∀ g v, f ((e.functor.obj X).obj.ρ g v) = ρ X g (f v) := by
+  obtain ⟨e, f, hf, -⟩ := exists_equivalence_of_realization_natural ι V ρ hρ map map_id map_comp
+    map_comm faithful full essSurj Q hQ
+  exact ⟨e, fun X ↦ ⟨f X, hf X⟩⟩
 
 end Representation

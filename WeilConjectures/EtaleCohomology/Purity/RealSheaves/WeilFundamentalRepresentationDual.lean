@@ -261,22 +261,35 @@ lemma dualStalkLinearMap_frobStalk (F : WeilSheaf K l C) (hF : F.IsLisse)
 
 variable {M} (D : WeilMonodromyData B)
 
+variable (M) in
+/-- The Weil fundamental representation of the dual `ℱ^∨` is the contragredient of that of `ℱ`,
+through the evaluation pairing of the stalks at the base point. -/
+noncomputable def fundamentalRepDualEquiv (F : WeilSheaf K l C) (hF : F.IsLisse) :
+    (fundamentalRep M D (F.dual hF) hF.dual).Equiv (fundamentalRep M D F hF).dual :=
+  Representation.Equiv.mk (LinearEquiv.ofBijective _ (bijective_dualStalkLinearMap F hF))
+    fun w ↦ LinearMap.ext fun d ↦ by
+      change dualStalkLinearMap B F hF (fundamentalRep M D _ _ w d) =
+        (fundamentalRep M D F hF).dual w (dualStalkLinearMap B F hF d)
+      refine intertwines_of_geometric_frobLift D _ _ (dualStalkLinearMap B F hF)
+        (fun u hu d ↦ ?_) (fun d ↦ ?_) w d
+      · refine apply_eq_dual_of_invariant _ _ _ _ (fun d v ↦ ?_) d
+        rw [fundamentalRep_geometric M D _ _ ⟨u, hu⟩, fundamentalRep_geometric M D F hF ⟨u, hu⟩]
+        exact dualStalkLinearMap_rep M F hF _ d v
+      · refine apply_eq_dual_of_invariant _ _ _ _ (fun d v ↦ ?_) d
+        rw [fundamentalRep_frobLift, fundamentalRep_frobLift]
+        exact dualStalkLinearMap_frobStalk M F hF d v
+
+variable (M) in
+lemma fundamentalRepDualEquiv_apply (F : WeilSheaf K l C) (hF : F.IsLisse) (d) :
+    fundamentalRepDualEquiv M D F hF d = dualStalkLinearMap B F hF d :=
+  rfl
+
 /-- **The Weil fundamental representation of the dual is the contragredient**: the evaluation
 pairing of the stalks at the base point identifies the Weil fundamental representation of the
-dual `ℱ^∨` of a lisse Weil sheaf with the dual of that of `ℱ`. -/
+dual `ℱ^∨` of a lisse Weil sheaf with the dual of that of `ℱ`
+(`AlgebraicGeometry.WeilGroup.fundamentalRepDualEquiv`). -/
 theorem nonempty_equiv_fundamentalRep_dual (F : WeilSheaf K l C) (hF : F.IsLisse) :
-    Nonempty ((fundamentalRep M D (F.dual hF) hF.dual).Equiv (fundamentalRep M D F hF).dual) := by
-  refine ⟨Representation.Equiv.mk (LinearEquiv.ofBijective _ (bijective_dualStalkLinearMap F hF))
-    fun w ↦ LinearMap.ext fun d ↦ ?_⟩
-  change dualStalkLinearMap B F hF (fundamentalRep M D _ _ w d) =
-    (fundamentalRep M D F hF).dual w (dualStalkLinearMap B F hF d)
-  refine intertwines_of_geometric_frobLift D _ _ (dualStalkLinearMap B F hF)
-    (fun u hu d ↦ ?_) (fun d ↦ ?_) w d
-  · refine apply_eq_dual_of_invariant _ _ _ _ (fun d v ↦ ?_) d
-    rw [fundamentalRep_geometric M D _ _ ⟨u, hu⟩, fundamentalRep_geometric M D F hF ⟨u, hu⟩]
-    exact dualStalkLinearMap_rep M F hF _ d v
-  · refine apply_eq_dual_of_invariant _ _ _ _ (fun d v ↦ ?_) d
-    rw [fundamentalRep_frobLift, fundamentalRep_frobLift]
-    exact dualStalkLinearMap_frobStalk M F hF d v
+    Nonempty ((fundamentalRep M D (F.dual hF) hF.dual).Equiv (fundamentalRep M D F hF).dual) :=
+  ⟨fundamentalRepDualEquiv M D F hF⟩
 
 end AlgebraicGeometry.WeilGroup
