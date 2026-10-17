@@ -1,0 +1,75 @@
+{
+ "id": "lem-trf-log-regular-divisorial-structure",
+ "kind": "statement",
+ "title": "Normality and divisorial description of a log regular structure",
+ "statement": "Let $(Y,N,\\alpha)$ be a locally Noetherian log regular fs log scheme [def-trf-fs-log-blowup, pqf-def-locnoeth]. Let $V$ be the locus where the characteristic monoid $N/\\mathcal O_Y^\\times$ is zero, and write $j:V\\hookrightarrow Y$. Then $V$ is open dense, every local ring of $Y$ is a normal domain [def-weil-pbc-normal-ring], and the structural map identifies $N$ with the subsheaf $\\mathcal O_Y\\cap j_*\\mathcal O_V^\\times$ of the multiplicative sheaf $\\mathcal O_Y$. In particular every section of $N$ restricts to a unit on $V$. On an integral affine open $\\operatorname{Spec}C\\subset Y$, $C$ is integrally closed in its fraction field.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI, 1.4, printed p. 69 (dense triviality locus and divisorial equality); Expose VIII, 3.4.1, printed p. 110, and 3.5, printed pp. 114--115 (fs log regular schemes are normal)."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A log regular fine saturated log scheme has dense triviality locus and its log structure is the regular functions invertible on that locus.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [inst : AlgebraicGeometry.IsIntegral X] → Field ↑X.functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mem_basicOpen_top\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (f : ↑(X.presheaf.obj (Opposite.op ⊤))) (x : ↥X),\\n  x ∈ X.basicOpen f ↔ IsUnit ((CategoryTheory.ConcreteCategory.hom (X.presheaf.germ ⊤ x trivial)) f)\", \"doc\": \"For a scheme $X$, a global section $f \\\\in \\\\Gamma(X, \\\\mathcal{O}_X)$, and a point $x \\\\in X$, the point $x$ lies in the basic open set $X_f$ if and only if the germ $f_x$ is a unit in the stalk $\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mem_basicOpen'\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens} (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↥U),\\n  ↑x ∈ X.basicOpen f ↔ IsUnit ((CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U ↑x ⋯)) f)\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a point $x \\\\in U$, the point $x$ lies in the basic open set $X.\\\\text{basicOpen}(U,f\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_ne_zero_iff_mem_basicOpen\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) (x : ↑X.toTopCat) (f : ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  (CategoryTheory.ConcreteCategory.hom (X.Γevaluation x)) f ≠ 0 ↔ x ∈ X.toRingedSpace.basicOpen f\", \"doc\": \"For a locally ringed space $X$, a point $x \\\\in X$, and a global section $f$ of the structure sheaf, the evaluation of $f$ at $x$ in the residue field of $X$ at $x$ is non-zero if and only if $x$ belon\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mem_basicOpen''\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens} (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↥X),\\n  x ∈ X.basicOpen f ↔ ∃ (m : x ∈ U), IsUnit ((CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U x m)) f)\", \"doc\": \"For a scheme $X$, an open subset $U$, a section $f$ of the structure sheaf over $U$, and a point $x$ in $X$, the point $x$ lies in the basic open set $\\\\text{basicOpen}(U, f)$ if and only if the germ o\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] {U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)}\\n  (f : (x : ↥U) → AlgebraicGeometry.StructureSheaf.Localizations R ↑x),\\n  (AlgebraicGeometry.StructureSheaf.isLocallyFraction R).pred f =\\n    ∀ (x : ↥U),\\n      ∃ V,\\n        ∃ (_ : ↑x ∈ V),\\n      \", \"doc\": \"For any open subset $U$ of the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, and for any function $f$ defined on $U$ with values in the localization rings of $R$, the predicate $\\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mem_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens} (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↥X) (hx : x ∈ U),\\n  x ∈ X.basicOpen f ↔ IsUnit ((CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U x hx)) f)\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$, and a section $f$ of the structure sheaf over $U$, a point $x \\\\in U$ belongs to the basic open set $\\\\text{basicOpen}(U, f)$ if and only if the germ of\"}\nNo logarithmic structures, log regular chart hypothesis, or monoidal blowup assertion in the hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Log regular log schemes have divisorial logarithmic structure with dense open trivial locus.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{U : X.Opens} (hU : Dense (X := X) U) : IsDominant U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, if $U$ is dense in $X$, then the canonical inclusion morphism $\\\\iota: U \\\\to X$ is dominant, meaning its image is dense in $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianXScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{U : X.OpenCover} (i) [IsLocallyNoetherian X] : IsLocallyNoetherian (U.X i)\", \"doc\": \"If a scheme $ X $ is locally Noetherian, then each open subscheme in an open cover of $ X $ is also locally Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.toLocallyRingedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.LocallyRingedSpace\", \"doc\": \"The function mapping a scheme to its underlying locally ringed space structure, which consists of a topological space equipped with a sheaf of commutative rings where every stalk is a local ring.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{U V : X.Opens} (hU : Dense (X := X) U) (hU' : U ≤ V) : IsDominant (X.homOfLE hU')\", \"doc\": \"Given a scheme $X$ and open subsets $U \\\\subseteq V$ of its underlying topological space, if $U$ is dense in $X$, then the inclusion-induced morphism $X|_U \\\\to X|_V$ is dominant. This means the image o\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  autoParam (Nonempty ↥X) AlgebraicGeometry.IsIntegral.nonempty._autoParam →\\n    autoParam (∀ (U : X.Opens) [Nonempty ↥↑U], IsDomain ↑(X.presheaf.obj (Opposite.op U)))\\n        AlgebraicGeometry.IsIntegral.component_integral._autoParam →\\n      AlgebraicGeometry.IsInt\", \"doc\": \"A scheme $ X $ is integral if it is non-empty and for every non-empty open subset $ U $ of $ X $, the ring of sections over $ U $ is an integral domain.\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.FunctionField\", \"type\": \"{X : Scheme} [IsIntegral X] {U : X.Opens} [Nonempty U] : IsIntegral U\", \"doc\": \"Every non-empty open subset $ U $ of an integral scheme $ X $ is itself an integral scheme.\"}\nNo logarithmic structures, log regular chart hypothesis, or monoidal blowup assertion in the hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\"",
+   "results": "[loogle] OK 0 hit(s)\nNo logarithmic structures, log regular chart hypothesis, or monoidal blowup assertion in the hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogRegular|log_regular|divisorialLog|logStructure",
+   "results": "[grep] OK 0 hit(s)\nNo logarithmic structures, log regular chart hypothesis, or monoidal blowup assertion in the hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-blowup-normalization",
+  "date": "2026-10-18",
+  "group": "Q110"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), nearby-duality alteration reduction: the regular modification of each log regular nodal pair, used in Expose X, proof of Lemma 2.2, through the existing nearby-duality/alteration ancestry. Expose VIII, 3.4.1--3.4.6(i), printed pp. 110--111 (monoidal ideals and normalized-blowup comparison); 3.3.8--3.3.11, printed pp. 107--108, and Expose VI, 1.8, printed p. 70 (log regularity preserved). The triviality-locus assertion is the universal property over U and the local homomorphism on local rings outside U. Input: Expose VI, 1.4, printed p. 69 (dense triviality locus and divisorial equality); Expose VIII, 3.4.1, printed p. 110, and 3.5, printed pp. 114--115 (fs log regular schemes are normal).",
+   "via": [
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
