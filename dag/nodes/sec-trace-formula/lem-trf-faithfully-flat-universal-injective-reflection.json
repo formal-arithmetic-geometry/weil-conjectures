@@ -11,9 +11,58 @@
   "def-weil-pbc-faithfully-flat-ring-map",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume first that u is universally injective over R, and let T be any S-module. Restrict scalars along R→S, so T is an R-module. Universal injectivity of u makes the R-linear map T tensor_R u injective. The cancellation isomorphism of [lem-trf-scalar-tensor-cancel-base-change] identifies T tensor_S (S tensor_R u) with T tensor_R u; on pure tensors this intertwining sends t tensor (s tensor p) to (s • t) tensor u(p). Conjugating by this isomorphism shows T tensor_S (S tensor_R u) is injective. Since T was arbitrary, S tensor_R u is universally injective over S.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-trf-scalar-tensor-cancel-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A5 proof, final faithfully-flat reflection argument with scalar-extension cancellation"
+   }
+  },
+  {
+   "text": "Conversely, assume S tensor_R u is universally injective over S, and fix an arbitrary R-module L. Apply the hypothesis to the S-module S tensor_R L; thus (S tensor_R L) tensor_S (S tensor_R u) is injective. The distributivity isomorphism of [lem-trf-scalar-tensor-distrib-base-change] identifies this map, by its pure-tensor formula and the same formula for induced tensor maps, with S tensor_R (L tensor_R u). Hence the left tensor of L tensor_R u by the faithfully flat R-module S is injective. The reflection theorem [lem-trf-faithfully-flat-ltensor-injective-reflection] gives that L tensor_R u itself is injective. As L was arbitrary, u is universally injective over R.",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "def-weil-pbc-module-tensor-product",
+    "lem-trf-scalar-tensor-distrib-base-change",
+    "lem-trf-faithfully-flat-ltensor-injective-reflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A5 proof, final sentence: faithfully flatness reflects universal injectivity after tensoring"
+   }
+  },
+  {
+   "text": "The two implications establish the stated equivalence. All tensor products use the first-factor scalar action specified in [def-weil-pbc-module-tensor-product], and the faithfully flat hypothesis is exactly [def-weil-pbc-faithfully-flat-ring-map].",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A5 proof, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-faithfully-flat-ltensor-injective-reflection",
+  "lem-trf-scalar-tensor-cancel-base-change",
+  "lem-trf-scalar-tensor-distrib-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05A5 proof, final faithfully-flat reflection sentence, with Tag 05CK/Mathlib tensor reflection and scalar-tensor cancellation"
+ },
  "mathlib_searches": [
   {
    "date": "2026-10-18",
@@ -45,7 +94,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-mittag-leffler-faithfully-flat-descent",
@@ -78,5 +127,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-faithfully-flat-universal-injective-reflection",
+  "worker": "stage1",
+  "summary": "The item is split into the two implications. The forward implication uses scalar-tensor cancellation; the reverse implication tensors by S, uses scalar-tensor distributivity, and reflects injectivity along the faithfully flat R-module S. These are recorded as three exact Mathlib leaves. The statement and hypotheses are unchanged.",
+  "blueprint": "The three proof steps realize the faithfully-flat reflection sentence in the inherited lem-trf-local-term-locality blueprint ancestry, specifically the Tag 05A5 input used by the item."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q79-aeb64a778",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q79-aeb64a778 (reviewer sub-agent of L); spot-checked: Mathematics and sources check out, including all three Mathlib leaves, hypotheses, tensor conventions, edge cases, route, and duplicate checks. The item’s created.item incorrectly names lem-trf-mittag-leffler-faithfully-flat-descent; corrected full JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-faithfully-flat-universal-injective-reflection.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
  }
 }
