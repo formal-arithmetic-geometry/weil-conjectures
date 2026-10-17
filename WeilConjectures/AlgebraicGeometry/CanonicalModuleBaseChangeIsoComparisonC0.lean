@@ -28,7 +28,7 @@ Source: Stacks Project, Tag 08HY, counit construction; Tag 0D5T, derived composi
 Tag 08IB, first proof paragraph, coordinate transport.
 (blueprint: stage3-canonicalModuleBaseChange_iso_comparison_c0).
 
-Proof: Apply exists_derivedPullback to the first projection of the chosen
+Proof: Apply derivedPullback_spec to the first projection of the chosen
 pullback. The specification of the chosen derived functor supplies an additive
 underived functor E, identified on objects and maps with tensorPullback, and a
 left-derived counit epsilon. Functor extensionality identifies E with the
@@ -64,7 +64,7 @@ theorem canonicalModuleBaseChange_iso_comparison_c0
   let p := pullback.fst (f ≫ eS.hom) (eT.inv ≫ g ≫ eS.hom)
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hε, htri, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback p)
+    derivedPullback_spec p
   have h : E = Scheme.Modules.tensorPullback p :=
     CategoryTheory.Functor.ext hE (fun M N a ↦ hEmap a)
   subst E
