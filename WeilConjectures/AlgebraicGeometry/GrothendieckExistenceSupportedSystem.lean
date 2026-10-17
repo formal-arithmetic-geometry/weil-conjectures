@@ -55,7 +55,9 @@ j(Z). This subset is proper over A by the proper-closed-subset properties. Thus 
 proper support over A.
 4. The dictionary's isomorphism correspondence turns the completion isomorphism into
 isomorphisms ψ_n on the thickenings. Its naturality and composition comparison give
-exactly the displayed compatibility with φ_n and the specified c_n. -/
+exactly the displayed compatibility with φ_n and the comparison c_n that the
+dictionary attaches to the adjunctions ai, aj (its unit equation is part of the
+conclusion). -/
 theorem grothendieckExistence_supported_system
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]
@@ -70,13 +72,11 @@ theorem grothendieckExistence_supported_system
       + 1 + 1))))) = pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n +
       1))))) ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I :=
       I) (Nat.le_succ (n + 1))))))
-    (c : ∀ n : ℕ, Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
-      (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) ⋙ Scheme.Modules.tensorPullback (i n) ≅
-      Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
-      (Ideal.Quotient.mk (I ^ (n + 1)))))))
-    (hc : ∀ n : ℕ, c n = (Classical.choice (Scheme.Modules.nonempty_tensorPullbackComp (i n)
-      (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 +
-      1)))))))).symm ≪≫ eqToIso (congrArg Scheme.Modules.tensorPullback (hi n)))
+    (ai : ∀ n : ℕ, Scheme.Modules.tensorPullback (i n) ⊣ Scheme.Modules.pushforward (i n))
+    (aj : ∀ n : ℕ, Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
+        (Ideal.Quotient.mk (I ^ (n + 1)))))) ⊣
+      Scheme.Modules.pushforward (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk
+          (I ^ (n + 1)))))))
     (F : ∀ n : ℕ, (pullback f (Spec.map (CommRingCat.ofHom
       (Ideal.Quotient.mk (I ^ (n + 1)))))).Modules)
     (φ : ∀ n : ℕ, (Scheme.Modules.tensorPullback (i n)).obj (F (n + 1)) ≅ F n)
@@ -88,6 +88,30 @@ theorem grothendieckExistence_supported_system
         ∀ t : Γ((Scheme.Modules.pushforward (pullback.fst f
           (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).obj (F n), V),
           a • t = 0) :
+    ∃ c : ∀ n : ℕ, Scheme.Modules.tensorPullback (pullback.fst f (Spec.map
+        (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) ⋙
+        Scheme.Modules.tensorPullback (i n) ≅
+      Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
+        (Ideal.Quotient.mk (I ^ (n + 1)))))),
+    (∀ (G : X.Modules) (n : ℕ),
+      (aj (n + 1)).unit.app G ≫
+        (Scheme.Modules.pushforward (pullback.fst f (Spec.map (CommRingCat.ofHom
+            (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))).map
+          ((ai n).unit.app
+            ((Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
+                (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))).obj G)) ≫
+        (Scheme.Modules.pushforwardComp (i n) (pullback.fst f (Spec.map (CommRingCat.ofHom
+            (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))).hom.app
+          ((Scheme.Modules.tensorPullback (i n)).obj
+            ((Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
+                (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))).obj G)) ≫
+        (Scheme.Modules.pushforwardCongr (hi n)).hom.app
+          ((Scheme.Modules.tensorPullback (i n)).obj
+            ((Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
+                (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))).obj G)) ≫
+        (Scheme.Modules.pushforward (pullback.fst f (Spec.map (CommRingCat.ofHom
+            (Ideal.Quotient.mk (I ^ (n + 1))))))).map ((c n).hom.app G) =
+      (aj n).unit.app G) ∧
     ∃ G : X.Modules, RingedSpace.IsCoherent X.toRingedSpace G ∧
     Scheme.Modules.HasSupportProperOver f G ∧
     ∃ ψ : ∀ n : ℕ, (Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
@@ -95,8 +119,8 @@ theorem grothendieckExistence_supported_system
     ∀ n : ℕ, (Scheme.Modules.tensorPullback (i n)).map (ψ (n + 1)).hom ≫ (φ n).hom = (c
       n).hom.app G ≫ (ψ n).hom := by
   classical
-  obtain ⟨hX, M, hM, hψ⟩ :=
-    supportedThickening_dictionary A I f i hi hp c hc F φ hF Z j hkill
+  obtain ⟨hX, M, hM, -, c, hcu, hψ⟩ :=
+    supportedThickening_dictionary A I f i hi hp ai aj F φ hF Z j hkill
   let := hX
   let : IsNoetherian Z := isNoetherian_of_locallyOfFiniteType j
   let K : X.IdealSheafData :=
@@ -123,6 +147,6 @@ theorem grothendieckExistence_supported_system
       inferInstance, inferInstance, ⟨Iso.refl _⟩⟩
     exact (Scheme.Modules.closedImmersion_pushforward_annihilated j).1 GZ.obj |>.2
   obtain ⟨ψ, hcompat⟩ := hψ G e
-  exact ⟨G.obj, G.property, hproper, ψ, hcompat⟩
+  exact ⟨c, hcu, G.obj, G.property, hproper, ψ, hcompat⟩
 
 end AlgebraicGeometry
