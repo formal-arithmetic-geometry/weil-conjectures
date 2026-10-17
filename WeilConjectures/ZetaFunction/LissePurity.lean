@@ -38,10 +38,13 @@ attribute [local instance 1100] CategoryTheory.instOverClass
 namespace AlgebraicGeometry.WeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-  {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-  [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] {ι : PadicAlgCl l →+* ℂ}
+
+section
+
+variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {ι : PadicAlgCl l →+* ℂ}
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- The Deligne–Laumon estimate for compactly supported cohomology: for a separated `k₀`-scheme
 `X₀` of finite type and a Weil sheaf `F` mixed of weights at most `w`, `H_c^i(X₀ ⊗ k̄, F)` has
@@ -65,8 +68,8 @@ theorem two_mul_logb_norm_cyclotomicUnit_pow_eq (d : ℕ) :
     norm_inv, Complex.norm_natCast, Real.logb_pow, Real.logb_inv, Real.logb_self_eq_one hq]
   ring
 
--- the section variables `IsSeparated`, `LocallyOfFiniteType` are implied by `IsProper`
-set_option linter.overlappingInstances false in
+end
+
 /-- **Purity for lisse coefficients** (the absolute case of
 `prop-zl-smooth-proper-relative-purity`): for `X₀` smooth and proper of pure dimension `d` over
 `k₀` and `F` a lisse Weil sheaf on `X₀`, punctually `ι`-pure of weight `w`, the Frobenius module
