@@ -14,9 +14,89 @@
   "def-trf-oriented-nearby-cycles",
   "def-trf-geometric-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a point $p$ of $V_f$, compose with the two projections. By [lem-trf-etale-topos-points-geometric] these two points are represented by geometric points $\\bar x$ of $X$ and $\\bar t$ of $S$. The structural $2$-morphism, conjugated by these identifications, is $u:\\bar t\\Rightarrow f\\bar x$. The universal property in [lem-trf-oriented-product-universal] identifies $p$ with the triple $(\\bar x,\\bar t,u)$. Write $t$ for its second underlying scheme point. If $q\\Rightarrow p$, evaluate the inverse-image natural transformation on $p_2^{-1}U$ for each open $U\\subseteq S$. Its values are empty or singleton, so every open containing $t(p)$ contains $t(q)$. Thus $t(p)\\in\\overline{\\{t(q)\\}}$.",
+   "uses": [
+    "lem-trf-etale-topos-points-geometric",
+    "lem-trf-oriented-product-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Section 1, point-triple description; Section 8.3, order definition immediately before Lemma 8.3.2."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-noetherian-finitely-many-components], [lem-sc-irreducible-components-cover] and [lem-weil-pbc-scheme-sober], choose the finitely many component generic points $\\eta_1,\\ldots,\\eta_r$ of $S$; every $t\\in S$ is a specialization of some $\\eta_i$. For $p=(\\bar x,\\bar t,u)$ choose such an $i$ and a geometric point $\\bar\\eta_i$. Apply [lem-weil-pbc-geometric-specialization-strict-local-lift] to $\\eta_i\\leadsto t$ to lift $\\bar\\eta_i$ into $S_{(\\bar t)}$. Each pointed etale neighbourhood of $\\bar t$ consequently has a compatible lift of $\\bar\\eta_i$; taking germs gives a natural transformation of set-valued stalks $\\bar t^{-1}\\to\\bar\\eta_i^{-1}$, hence a $2$-morphism $\\gamma:\\bar\\eta_i\\Rightarrow\\bar t$. Put $p'=(\\bar x,\\bar\\eta_i,u\\gamma)$. The fibre formula in [lem-trf-oriented-product-universal] constructs $p'\\Rightarrow p$: on a triple generator its inverse-image mate sends $(a,b)$ to $(a,\\gamma^{-1}(b))$, where $\\gamma^{-1}$ denotes the inverse-image mate, not an inverse map. The fibre-product equation is preserved by naturality. This construction is compatible with all arrows of triples and hence defines the natural transformation on sheaves. Thus every point is below one whose second support is one of the $\\eta_i$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-irreducible-components-cover",
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-geometric-specialization-strict-local-lift",
+    "lem-trf-oriented-product-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "First sentence of the proof of Lemma 8.3.2; lifting is Stacks etale-cohomology.tex Tag 0GJ5, remark-can-lift."
+   }
+  },
+  {
+   "text": "For any $s\\in S$, form $Y_s=X\\times_SN_s$ as in [lem-trf-oriented-point-normalized-stratum]. That statement identifies isomorphism classes with second support $s$, with the relation induced from the whole $V_f$, with the Zariski generization order on $Y_s$. In particular it asserts antisymmetry on this stratum. If $p\\leq q$ and $q\\leq p$ in $V_f$, Step 1 gives equal closures of their second supports. Schemes are sober by [lem-weil-pbc-scheme-sober], so these supports coincide, say at $s$. The antisymmetry just cited then gives $[p]=[q]$. Identities and composition give reflexivity and transitivity. Hence the relation in the statement really is a partial order on point isomorphism classes, not merely a preorder.",
+   "uses": [
+    "lem-trf-oriented-point-normalized-stratum",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Order definition before Lemma 8.3.2 and its proof, identification with the Zariski order after normalization."
+   }
+  },
+  {
+   "text": "Finite presentation of $f$ in [def-weil-pbc-scheme-conventions] implies finite type: each finitely presented affine coordinate algebra is finitely generated, and quasi-compactness is already part of finite presentation. For each $\\eta_i$, [lem-trf-normalized-base-change-noetherian-topology] therefore makes $|Y_{\\eta_i}|$ a Noetherian topological space; it does not assert that $N_{\\eta_i}$ has Noetherian local rings. By [lem-sc-noetherian-finite-irreducible-components] this space has finitely many irreducible components. By [lem-sc-irreducible-components-cover] they cover it, and by [lem-weil-pbc-scheme-sober] each has a generic point. Every point of $Y_{\\eta_i}$ is consequently a specialization of one of those finitely many generic points. Under [lem-trf-oriented-point-normalized-stratum], their classes form a finite subset $C_i$ of the point classes of $V_f$ that dominates every class with second support $\\eta_i$. Empty $Y_{\\eta_i}$ simply contributes $C_i=\\varnothing$.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "lem-trf-normalized-base-change-noetherian-topology",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-sc-irreducible-components-cover",
+    "lem-weil-pbc-scheme-sober",
+    "lem-trf-oriented-point-normalized-stratum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proof of Lemma 8.3.2, normalization and final finite-type alternative, followed by its Zariski-order identification."
+   }
+  },
+  {
+   "text": "Let $C=\\bigcup_{i=1}^r C_i$, removing any repeated isomorphism classes. It is finite. Step 2 puts an arbitrary class $[p]$ below a class in some $\\eta_i$-stratum, and Step 4 puts that class below an element of $C$. Composition shows that $C$ dominates every point class. For each $c\\in C$ choose a maximal element $m$ of the finite ordered subset $\\{d\\in C:c\\leq d\\}$. Such an $m$ exists by successively moving to a strictly larger element; finiteness prevents continuing or repeating a class. It is maximal in the entire point order: if $m\\leq z$, choose $d\\in C$ with $z\\leq d$ by the domination property. Then $c\\leq m\\leq d$, so maximality in that finite subset gives $d=m$, and antisymmetry gives $z=m$. Thus every point is below a maximal class. Conversely a maximal class $z$ is below some $d\\in C$, and hence equals $d$. All maximal classes therefore lie in the finite set $C$. Each inequality is witnessed by a $2$-morphism, and their composites give the required morphism from a maximal representative to $p$. This also treats the empty topos: the empty $C$ then has no classes to dominate.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Conclusion of Lemma 8.3.2; explicit finite-cofinal-poset argument for both assertions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-etale-topos-points-geometric",
+  "lem-trf-oriented-product-universal",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-irreducible-components-cover",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-geometric-specialization-strict-local-lift",
+  "lem-trf-oriented-point-normalized-stratum",
+  "def-weil-pbc-scheme-conventions",
+  "lem-trf-normalized-base-change-noetherian-topology",
+  "lem-sc-noetherian-finite-irreducible-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+  "place": "Author draft, Lemma 8.3.2 and the preceding point-order definition, printed p. 18; Section 1 and Lemma 8.3.1 for the normalized point-stratum description. The first lifting sentence is expanded with Stacks Tag 0GJ5. The author PDF was read online but is not archived in literature; by brief-stage1 Section 4 this expanded proof is marked agent pending archival."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +132,38 @@
    "results": "{\"t\": \"2026-10-17T18:44:45Z\", \"tool\": \"leanfinder\", \"query\": \"Vanishing topos points ordered by specialization has finite maximal elements for finite type morphism over Noetherian base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsArtinianScheme.finite\", \"AlgebraicGeometry.IsNoetherian.toCompactSpace\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsNoetherian\"], \"digest\": \"c82d62e88d0f2562\"}",
    "date": "2026-10-18",
    "verdict": "no match: read the returned signatures; these do not state the indicated theorem about Grothendieck topoi or oriented etale products."
+  },
+  {
+   "tool": "grep",
+   "query": "vanishing.?topos|oriented.?product|maximal.*topos",
+   "results": "{\"t\": \"2026-10-17T19:08:16Z\", \"tool\": \"grep\", \"query\": \"vanishing.?topos|oriented.?product|maximal.*topos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: genericPoints and scheme finiteness theorems concern ordinary topological spaces, not point classes of the oriented etale product; no vanishing-topos declaration occurs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely many generic point classes of the left oriented product of etale topoi",
+   "results": "{\"t\": \"2026-10-17T19:08:16Z\", \"tool\": \"leansearch\", \"query\": \"Finitely many generic point classes of the left oriented product of etale topoi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"genericPoints\", \"IsGenericPoint\", \"genericPoints.ofComponent\", \"genericPoints_eq_singleton\", \"genericPoints.isGenericPoint\", \"isGenericPoint_def\", \"genericPoints.finite\", \"isGenericPoint_iff_specializes\"], \"digest\": \"232745dc2f0594fb\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: genericPoints and scheme finiteness theorems concern ordinary topological spaces, not point classes of the oriented etale product; no vanishing-topos declaration occurs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Topos\", \"Point\"",
+   "results": "{\"t\": \"2026-10-17T19:08:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Topos\\\", \\\"Point\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: genericPoints and scheme finiteness theorems concern ordinary topological spaces, not point classes of the oriented etale product; no vanishing-topos declaration occurs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The vanishing topos of a finite presentation scheme morphism over a Noetherian base has finitely many maximal isomorphism classes of points dominating every point",
+   "results": "{\"t\": \"2026-10-17T19:08:22Z\", \"tool\": \"leanfinder\", \"query\": \"The vanishing topos of a finite presentation scheme morphism over a Noetherian base has finitely many maximal isomorphism classes of points dominating every point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.IsArtinianScheme.finite\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\"], \"digest\": \"4eed828bfb7c1fdc\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: genericPoints and scheme finiteness theorems concern ordinary topological spaces, not point classes of the oriented etale product; no vanishing-topos declaration occurs."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-constructible-subquotients",
@@ -79,5 +187,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-oriented-maximal-point-finiteness",
+  "worker": "stage1",
+  "summary": "Retained the complete imported statement without excellence or added hypotheses. Expanded Orgogozo 8.3.2 into geometric triple lifting, normalization-based point strata, a finite dominating family from topological Noetherianity, and an explicit finite-order maximality argument. Created only two strictly geometric statement-only inputs, with real Mathlib searches; reused existing scheme topology and strict-local lifting nodes. In particular no Noetherian normalization ring or finite normalization is assumed.",
+  "blueprint": "Current main-20261015 lem-trf-local-term-locality.proof.md, (1) and (2), specialization to the normal cone; follows the existing ancestry through oriented constructible subquotients and the maximal-point input to Orgogozo 8.3.3. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-geometric-specialization-strict-local-lift",
+    "why": "General geometric specialization lifting (Stacks 0GJ5), used to expand the first sentence of Orgogozo 8.3.2; this unit has no strict-local lifting replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-geometric-specialization-strict-local-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NP-b3141440e",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-b3141440e (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited node statement, and the parent's use of the item (lem-trf-oriented-constructible-subquotients steps 1-3). The item statement is unchanged, with no added hypotheses. Step 1 is checked: the subterminal p_2^{-1}U gives t(p) in cl{t(q)}, and the 2-morphism direction (f=>g means f_*->g_*, mate g^{-1}->f^{-1}) is consistent from def-trf-geometric-morphism through to the parent. Step 2 is checked: the 0GJ5 lift gives gamma, and (a,b)->(a,gamma(b)) on the fibre formula of lem-trf-oriented-product-universal gives p' => p. Step 3 (antisymmetry via sober plus the stratum node), Step 4 (topological Noetherian route that avoids the Noetherian-scheme lemma) and Step 5 (finite-order maximality) are correct. lem-trf-oriented-point-normalized-stratum is true: I verified the bijection with |X x_S N_s| through Stacks lemma-geometric-branches (0C2C, valid without Noetherian or Japanese hypotheses), with ind-etale generic fibres and Galois orbits, and tested it on S a field, a nodal curve and the empty case. lem-trf-normalized-base-change-noetherian-topology is true: ACC on primes follows from incomparability, Heinzer gives finitely many minimal primes, Ohm-Pendleton (existing node lem-sfb-finite-type-noetherian-spectrum) gives finite-type passage, and N_s->Z_s is integral hence quasi-compact; no excellence or finite normalization is assumed. Neither new node restates the item or duplicates an existing node (rg over dag/nodes). Searches cover all three kinds. The blueprint from/via/same_as fields are correct, and the route is unchanged (main-20261015 lem-trf-local-term-locality (1),(2)). The tool_use lem-weil-pbc-geometric-specialization-strict-local-lift is accepted as a generic tool with no unit equivalent. No SGA is cited. Caveat: the Orgogozo author PDF is not under literature and reviewer network access is blocked, so the source itself was not read at the cited place; every step was verified independently, and proof_origin is correctly agent pending archival (WANTED recorded). No fixes."
  }
 }
