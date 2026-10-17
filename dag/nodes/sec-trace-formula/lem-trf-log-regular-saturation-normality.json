@@ -228,5 +228,31 @@
   "group": "Q48",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-4b9340775 (reviewer sub-agent of L); spot-checked: I read the whole delivery and every step holds. Source: ILO Exposé VI 1.6 (p.70) gives exactly the models k[[P]][[t]] and C[[P]][[t]]/(f) with f≡p mod (P−{0}, t). The item's statement is word for word the model clause of lem-trf-log-regular-completed-chart, nothing is weakened, and normality is correctly marked agent-proved with Kato 1994 WANTED. Step 1: Q=λ(P)×N^n=(λ(G)×Z^n)∩N^{r+n}, and the completion ideal maps onto J. Step 2: both coefficient rings are complete local with finitely generated maximal ideal (0 or pC), so the projection lemma applies. Step 3: Θ has constant coefficient exactly p, while every element of 𝔫² has constant coefficient in p²C and p∉p²C, so the hypersurface criterion applies; r+n=0 gives C/p. Step 4: T∩ΘA=θT follows from the T-linearity of ρ, so R embeds in S with an R-linear retraction. Step 5: regular local ⇒ regular ⇒ normal, and S≅S_m. Step 6: the retraction argument correctly descends integral closure. Both new nodes are true and statement-only, and neither restates the item. Orthant embedding: G is torsion-free, the kernel of the facet map is trivial by sharpness, and it fails without saturation (⟨2,3⟩) or without sharpness. Support projection: the filtrations are cofinal, the image is the closure A_Q, π(ab)=aπ(b) because e∈Q iff f∈Q, and π is not multiplicative for the diagonal M. Duplicate search over orthant, toric, monoid algebra, saturated+normal and supported series found only distinct nodes (fine-monoid-finite-saturation, toric-refinement, completed-chart, complete-toric-monomial-factors). I accept the four declared tool uses, all generic commutative-algebra results from sec-proper-base-change: power-series regularity, the hypersurface criterion, regular local⇒regular, regular⇒normal. No cycle, no SGA, no changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5dc843f34",
+  "group": "NB",
+  "result": "pass",
+  "note": "Reviewed packet, node, dependencies, source, Lean module, report, edge cases, docstrings, searches, route-pivot status, and scompile evidence; no substantive or mechanical defects found."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LogRegularSaturationNormality",
+  "declaration": "AddMonoidAlgebra.completedLocalModel_normal",
+  "declarations": [
+   "AddMonoidAlgebra.localModelBoundaryIdeal",
+   "AddMonoidAlgebra.localModelCompletionIdeal",
+   "AddMonoidAlgebra.CompletedLocalModel",
+   "AddMonoidAlgebra.completedLocalModelBoundaryIdeal",
+   "AddMonoidAlgebra.completedLocalModel_normal"
+  ],
+  "file": "lean/Sheaf/RingTheory/LogRegularSaturationNormality.lean",
+  "statement": "theorem completedLocalModel_normal (P : Type v) [AddCommMonoid P] (hfs : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative P)) (hsharp : ∀ a b : P, a + b = 0 → a = 0 ∧ b = 0) (n : ℕ) : (∀ (k : Type u) [Field k], IsDomain (CompletedLocalModel k P n) ∧ IsIntegrallyClosed (CompletedLocalModel k P n)) ∧ (∀ (C : Type u) [CommRing C] [IsLocalRing C] (p : ℕ), IsCohenRing p C → ∀ θ : CompletedLocalModel C P n, θ - (p : CompletedLocalModel C P n) ∈ completedLocalModelBoundaryIdeal C P n → IsDomain (CompletedLocalModel C P n ⧸ Ideal.span {θ}) ∧ IsIntegrallyClosed (CompletedLocalModel C P n ⧸ Ideal.span {θ}))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The four construction helpers implement the polynomial ring ideals and completion explicitly introduced in this node; no separate independent notion is introduced. The theorem states both coefficient cases as a conjunction."
  }
 }

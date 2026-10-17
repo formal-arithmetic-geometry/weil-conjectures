@@ -17,7 +17,10 @@
   "def-weil-field",
   "def-weil-finite-integral-morphism",
   "def-weil-flat-morphism",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-trf-modification",
+  "def-weil-pure-dimension",
+  "def-pc-scheme-fibre"
  ],
  "proof": [
   {
@@ -260,5 +263,23 @@
   "group": "Q78",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q78-cbf83919d (reviewer sub-agent of L); spot-checked: Reviewed the item, auxiliary node, cited statements, sources, unit route, hypotheses, edge cases, dependency citations, blueprint metadata, and route restrictions. The repaired proof is coherent; no SGA 4, dropped route machinery, target weakening, duplicate split, or long hidden step found. Temkin’s PDF is unavailable and is correctly recorded as WANTED with agent reconstruction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f3ac25ebb",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, docstrings, edge cases, route restrictions, report sections, and scompile.py evidence all pass; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ValuationComponentFactorization",
+  "declaration": "AlgebraicGeometry.valuation_component_factorization",
+  "file": "lean/Sheaf/TraceFormula/ValuationComponentFactorization.lean",
+  "statement": "theorem valuation_component_factorization (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] (C X Y W : Scheme.{u}) (cC : C ⟶ Spec (CommRingCat.of V)) (cX : X ⟶ Spec (CommRingCat.of V)) (cY : Y ⟶ Spec (CommRingCat.of V)) (cW : W ⟶ Spec (CommRingCat.of V)) (hC : Flat cC ∧ LocallyOfFinitePresentation cC ∧ QuasiCompact cC ∧ QuasiSeparated cC ∧ IsReduced C ∧ ∀ s : Spec (CommRingCat.of V), (cC.fiber s).IsPureDimension 1) (hX : Flat cX ∧ LocallyOfFinitePresentation cX ∧ QuasiCompact cX ∧ QuasiSeparated cX ∧ IsReduced X ∧ ∀ s : Spec (CommRingCat.of V), (cX.fiber s).IsPureDimension 1) (hY : Flat cY ∧ LocallyOfFinitePresentation cY ∧ QuasiCompact cY ∧ QuasiSeparated cY ∧ IsReduced Y ∧ ∀ s : Spec (CommRingCat.of V), (cY.fiber s).IsPureDimension 1) (hW : Flat cW ∧ LocallyOfFinitePresentation cW ∧ QuasiCompact cW ∧ QuasiSeparated cW ∧ IsReduced W ∧ ∀ s : Spec (CommRingCat.of V), (cW.fiber s).IsPureDimension 1) (hCη : Smooth (pullback.snd cC (Spec.map (CommRingCat.ofHom V.toSubring.subtype)))) (hXη : Smooth (pullback.snd cX (Spec.map (CommRingCat.ofHom V.toSubring.subtype)))) (hYη : Smooth (pullback.snd cY (Spec.map (CommRingCat.ofHom V.toSubring.subtype)))) (hWη : Smooth (pullback.snd cW (Spec.map (CommRingCat.ofHom V.toSubring.subtype)))) (f : X ⟶ C) (g : Y ⟶ C) (a : W ⟶ X) (b : W ⟶ Y) (hfc : f ≫ cC = cX) (hgc : g ≫ cC = cY) (hac : a ≫ cX = cW) (hbc : b ≫ cY = cW) (hfa : a ≫ f = b ≫ g) (hf : EtaModification (Spec.map (CommRingCat.ofHom V.toSubring.subtype)) f cC) (hg : EtaModification (Spec.map (CommRingCat.ofHom V.toSubring.subtype)) g cC) (ha : EtaModification (Spec.map (CommRingCat.ofHom V.toSubring.subtype)) a cX) (hb : EtaModification (Spec.map (CommRingCat.ofHom V.toSubring.subtype)) b cY) (hYn : ∀ (Z : Scheme.{u}) (p : Z ⟶ Y), IsFinite p → EtaModification (Spec.map (CommRingCat.ofHom V.toSubring.subtype)) p cY → IsIso p) (hcontract : ∀ (s : Spec (CommRingCat.of V)) (Z : Set (cW.fiber s)), Z ∈ irreducibleComponents (cW.fiber s) → Set.Subsingleton ((fun w : cW.fiber s ↦ b (cW.fiberι s w)) '' Z) → Set.Subsingleton ((fun w : cW.fiber s ↦ a (cW.fiberι s w)) '' Z)) : ∃! h : Y ⟶ X, b ≫ h = a ∧ h ≫ f = g",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
