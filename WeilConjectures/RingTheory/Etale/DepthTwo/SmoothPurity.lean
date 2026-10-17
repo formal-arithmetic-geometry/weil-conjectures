@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Diagonal
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Global
+public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPuritySpread
 
 /-!
 # Purity for normal covers of a smooth algebra over a normal base
@@ -24,7 +25,10 @@ The proof is an induction on the primes between the minimal primes of `qB` and `
 étale over `D(a) ∪ D(β)` for `0 ≠ a ∈ q` and a suitable `β ∈ P` such that `(a, β)` is a regular
 pair on `T_P`; the diagonal local ring `R = (B ⊗_{R₀} B)_{Δ(P)}` with its two projections and the
 swap involution satisfies the hypotheses of `RingTheory.DepthTwo.etale_of_diagonal`, whose prime
-`Q` comes from the generic point of the fibre of the second projection through `Δ(P)`.
+`Q` comes from the generic point of the fibre of the second projection through `Δ(P)`. The
+induction is on the height of `P`; the step at `P` is
+`RingTheory.DepthTwo.etale_finite_localization_of_smooth` (finite étaleness of `T_P`) followed by
+`RingTheory.DepthTwo.exists_etale_finite_away_of_localization` (spreading out to `D(h)`).
 
 This is the commutative algebra of purity for normal covers of a scheme smooth over a normal
 Noetherian base (`AlgebraicGeometry.Scheme.Hom.mem_etaleLocus_fromNormalization_of_smooth`,
@@ -55,6 +59,29 @@ theorem exists_etale_integralClosure_of_smooth (q : Ideal R₀) [q.IsPrime] (hq 
         Module.Finite (Localization.Away h) (Localization.Away h ⊗[B] integralClosure B M)) :
     ∃ h ∉ P, Algebra.Etale (Localization.Away h) (Localization.Away h ⊗[B] integralClosure B M) ∧
       Module.Finite (Localization.Away h) (Localization.Away h ⊗[B] integralClosure B M) := by
-  sorry
+  have : IsNoetherianRing B := Algebra.FiniteType.isNoetherianRing R₀ B
+  -- induction on the height of the primes `P' ⊆ P` over `q`
+  have key (n : ℕ) : ∀ P' : Ideal B, P'.IsPrime → P' ≤ P → P'.comap (algebraMap R₀ B) = q →
+      P'.height = n → ∃ h ∉ P', Algebra.Etale (Localization.Away h)
+        (Localization.Away h ⊗[B] integralClosure B M) ∧
+        Module.Finite (Localization.Away h) (Localization.Away h ⊗[B] integralClosure B M) := by
+    induction n using Nat.strong_induction_on with
+    | _ n ih =>
+      intro P' hP' hP'P hP'q hn
+      by_cases hmin : P' ∈ (q.map (algebraMap R₀ B)).minimalPrimes
+      · exact H P' hP' hP'P (Or.inr hmin)
+      have H' (Q : Ideal B) (hQ : Q.IsPrime) (hQP' : Q < P') : ∃ h ∉ Q, Algebra.Etale
+          (Localization.Away h) (Localization.Away h ⊗[B] integralClosure B M) ∧
+          Module.Finite (Localization.Away h) (Localization.Away h ⊗[B] integralClosure B M) := by
+        by_cases hQq : Q.comap (algebraMap R₀ B) = q
+        · have hm : ((Q.height.toNat : ℕ) : ℕ∞) = Q.height :=
+            ENat.natCast_toNat Ideal.height_ne_top_of_isPrime
+          have hlt : Q.height < P'.height := Ideal.height_strict_mono_of_isPrime hQP'
+          rw [hn, ← hm, Nat.cast_lt] at hlt
+          exact ih _ hlt Q hQ (hQP'.le.trans hP'P) hQq hm.symm
+        · exact H Q hQ (hQP'.le.trans hP'P) (Or.inl hQq)
+      obtain ⟨hE, hF⟩ := etale_finite_localization_of_smooth q hq hunit P' hP'q.symm hmin H'
+      exact exists_etale_finite_away_of_localization hunit P' (by rwa [hP'q]) H'
+  exact key _ P inferInstance le_rfl hP (ENat.natCast_toNat Ideal.height_ne_top_of_isPrime).symm
 
 end RingTheory.DepthTwo
