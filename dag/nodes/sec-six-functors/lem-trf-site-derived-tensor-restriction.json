@@ -1,0 +1,87 @@
+{
+ "id": "lem-trf-site-derived-tensor-restriction",
+ "kind": "statement",
+ "title": "Derived tensor with a scalar-restricted sheaf on a ringed site",
+ "statement": "Let $\\mathcal C$ be a site small relative to the universe of module sheaves [def-weil-size-convention], and let $\\varphi:\\mathcal R\\to\\mathcal S$ be a morphism of sheaves of commutative rings. Use module sheaves [def-weil-sheaf-of-modules-category], their unbounded derived categories [def-weil-abstract-derived-category], sheaf tensor and extension of scalars [def-pur-sheaf-tensor-product], termwise restriction of scalars $\\operatorname{Res}_\\varphi$ [def-pc-sheaf-restrict-scalars], and derived tensor as obtained by the K-flat localization [lem-weil-pbc-site-derived-tensor-descent]. For every $H\\in D(\\mathcal R)$ and every sheaf $N$ of $\\mathcal S$-modules placed in degree zero, there is an isomorphism in $D(\\mathcal R)$, natural in both $H$ and $N$,\n$$H\\otimes_{\\mathcal R}^{\\mathbf L}\\operatorname{Res}_\\varphi N\\xrightarrow{\\sim}\\operatorname{Res}_\\varphi\\bigl((H\\otimes_{\\mathcal R}^{\\mathbf L}\\mathcal S)\\otimes_{\\mathcal S}^{\\mathbf L}N\\bigr).$$\nHere the inner extension is valued in $D(\\mathcal S)$ as in [lem-pur-derived-change-of-rings]. For any K-flat flat-term representative $P\\to H$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules], the displayed isomorphism is represented by the balanced chain isomorphism\n$$P\\otimes_{\\mathcal R}\\operatorname{Res}_\\varphi N\\longrightarrow\\operatorname{Res}_\\varphi((P\\otimes_{\\mathcal R}\\mathcal S)\\otimes_{\\mathcal S}N),\\qquad x\\otimes n\\longmapsto(x\\otimes1)\\otimes n,$$\nwhose inverse sends $(x\\otimes s)\\otimes n$ to $x\\otimes sn$. These representatives compute both derived objects and give the same natural isomorphism independently of the chosen representative. No flatness of $\\mathcal S$ over $\\mathcal R$, boundedness of $H$, or finite Tor amplitude of $N$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.proof.md",
+  "place": "Step 2, sentence “For such Q, P tensor_A Q = (P tensor_A kappa) tensor_kappa Q”: the ringed-site K-flat balanced tensor identity"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site derived tensor with restriction of a B-module satisfies H tensor_A Res N is Res ((H tensor_A B) tensor_B N) for a sheaf of ring homomorphisms A to B",
+   "results": "PresheafOfModules.Monoidal.tensorObjMap; SheafOfModules.restrictScalars; PresheafOfModules.Monoidal.tensorObj; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars_map_val; PresheafOfModules.Monoidal.tensorObj_map_tmul; PresheafOfModules.monoidalCategory; PresheafOfModules.monoidalCategoryStruct",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern underived presheaf tensor/restriction only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor projection formula for restriction and extension of scalar sheaves of modules on a site",
+   "results": "ModuleCat.RestrictScalars.obj'; RestrictScalars; SheafOfModules.restrictScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; PresheafOfModules.restrictScalars; Derivation.restrictScalars.congr_simp; PresheafOfModules.restrictScalarsObj; ModuleCat.restrictCoextendScalarsAdj",
+   "date": "2026-10-17",
+   "verdict": "no match: hits define restriction or ordinary module adjunctions, not derived site tensor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"restrictScalars\", \"DerivedCategory\"",
+   "results": "",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(restrictScalars|change.*[Rr]ing)|restrictScalars.*derived|tensor.*[Rr]estrict",
+   "results": "",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits in CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection formula for scalar extension and restriction: for ringed sites R to S, (H derived tensor_R S) derived tensor_S N equals H derived tensor_R N",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; PresheafOfModules.Monoidal.tensorObjMap; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.extendScalarsComp_hom_app_one_tmul; PresheafOfModules.Monoidal.tensorObj; PresheafOfModules.Monoidal.tensorObj_map_tmul",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary ModuleCat extension formulas and presheaf tensor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat derived tensor with restriction of scalars is canonically the restriction of derived tensor after scalar extension",
+   "results": "TensorProduct.AlgebraTensorModule.restrictScalars_rTensor; RestrictScalars; Algebra.FormallyUnramified.flat_of_restrictScalars; PresheafOfModules.restrictScalarsObj; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.restrictScalars; ModuleCat.RestrictScalars.obj'; ModuleCat.ExtendRestrictScalarsAdj.Unit.map",
+   "date": "2026-10-17",
+   "verdict": "no match: no derived ringed-site formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ordinary-kunneth",
+  "date": "2026-10-17",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sf-kunneth-star",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-ordinary-kunneth",
+   "place": "Step 2, sentence “For such Q, P tensor_A Q = (P tensor_A kappa) tensor_kappa Q”: the ringed-site K-flat balanced tensor identity",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

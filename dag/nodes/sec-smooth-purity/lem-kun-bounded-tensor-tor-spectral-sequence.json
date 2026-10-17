@@ -101,20 +101,37 @@
    }
   },
   {
-   "text": "We verify descent and naturality, including the abutment maps. A chain map of bounded representatives preserves every canonical truncation step, and a quasi-isomorphism induces a quasi-isomorphism of their graded complexes by Step 1. By [lem-kun-finite-filtered-kflat-replacement], filtered replacements give maps and equalities in the localization of good filtered complexes. By [lem-kun-filtered-tensor-graded-comparison], convolution tensoring respects these localizations and, after forgetting the filtration, gives the ordinary derived tensor on morphisms. Convolution tensoring also respects filtered homotopies: if $u-u\\prime=d h+h d$, a homotopy from $u\\otimes v$ to $u\\prime\\otimes v$ is $x\\otimes y\\mapsto h(x)\\otimes v(y)$; if $v-v\\prime=d k+k d$, use $x\\otimes y\\mapsto(-1)^r u(x)\\otimes k(y)$ for $x\\in P^r$. The total differential gives these homotopy equations, with the mixed terms cancelling. Since $h$ and $k$ preserve filtration steps, both formulas preserve the convolution filtration. By [lem-sp-bounded-filtered-page-core], a filtered map induces the maps of spectral sequences whose first-page components are the cohomology of its graded maps. A filtered quasi-isomorphism therefore induces first-page isomorphisms and hence all later page isomorphisms by successive homology; it also induces isomorphisms on each filtration step and on the total cohomology. The latter assertion follows by finite induction from $0\\to F^{a+1}\\to F^a\\to\\operatorname{gr}^a\\to0$, beginning at the zero upper tail. These isomorphisms identify the images $G^aH^n$ and their quotients. Filtered homotopic maps have equal first-page maps, hence equal later-page maps; their underlying homotopic maps induce equal cohomology maps and equal restrictions to image filtrations. Thus the spectral sequence with its abutment and filtration descends through the localizations.\nAll derived maps between bounded objects are covered here: the right calculus of fractions in [lem-pc-quasi-isomorphisms-multiplicative-system] and [lem-pc-right-fraction-representation] represent a map by a roof $K\\leftarrow V\\to K'$ of complexes. Choose common term bounds for the bounded targets and truncate $V$ to those bounds as in Step 1. The maps factor through the lower quotient since the targets are zero below the lower bound, and restrict through the upper cycles since the targets are zero above the upper bound. This gives a roof of bounded complexes, with left arrow still a quasi-isomorphism. Equal roofs have a common refinement by [lem-pc-right-fraction-common-refinement]. Truncate that finite diagram to a common interval $[c,d]$, chosen to contain the termwise supports of all its already bounded vertices. Chain maps preserve cycles at the upper endpoint and boundaries at the lower endpoint, so they induce maps on the truncated diagram. For a homotopy $h^r:V^r\\to W^{r-1}$, at the upper endpoint restrict $h^d$ to $\\ker d_V^d$; at the lower endpoint compose $h^{c+1}$ with $W^c\\to W^c/\\operatorname{im}d_W^{c-1}$, set its degree-$c$ component to zero, and keep the intervening components. The identity $f-g=dh+hd$ remains valid: the removed upper term vanishes on cycles and the removed lower term is a boundary. This homotopy preserves every canonical truncation step, since it lowers cochain degree. Thus the truncated diagram has the required commutations in the homotopy category; this construction also applies to a diagram composing roofs. Thus equality and composition are respected. Hence the construction is independent of representatives and applies to every $u:C\\to C'$ and $v:D\\to D'$.\nOn $E_2$, Step 1 gives $H^i(u),H^j(v)$ on the two graded factors, and Step 4 identifies their tensor-homology map with $\\operatorname{Tor}_{-p}^R(H^i(u),H^j(v))$. On the total object the map is $u\\otimes_R^{\\mathbf L}v$, so on its degree-$n$ cohomology it is $H^n(u\\otimes_R^{\\mathbf L}v)$. The image-filtration inclusions commute with this map by the defining square of each filtered map. Finally, the graded abutment identifications commute as well: in a sufficiently large old page $t$, the image description in the cited page-core theorem uses the map $G^aT\\to T/G^{a+1}T$; the induced image is canonically $G^aH^n(T)/G^{a+1}H^n(T)$. Both maps send a cohomology class represented from $G^aT$ to its class modulo $G^{a+1}$, so the square commutes with every filtered map and every inverted filtered quasi-isomorphism. Steps 5 and 6 merely relabel these maps. This proves all of the requested functoriality, with no finite-generation assumption.",
+   "text": "The canonical filtrations of Step 1 extend to all bounded derived morphisms by [lem-kun-derived-canonical-filtration]. Apply its functor separately to $C$ and $D$, and compose with the localized convolution tensor of [lem-kun-filtered-tensor-localization]. For the chosen bounded representatives and good replacements of Steps 1--3 this composite is represented by $(T,G)$. Thus a pair $u:C\\to C'$, $v:D\\to D'$ gives a morphism of finite filtered localized complexes; its underlying derived morphism is $u\\otimes_R^{\\mathbf L}v$, and its degree-$a$ graded map is the sum of the derived tensors of $H^{-i}(u)[i]$ and $H^{-j}(v)[j]$, $i+j=a$. Both cited results are functorial in all localized morphisms, so identities, composition and interchange already hold.",
    "uses": [
-    "lem-kun-finite-filtered-kflat-replacement",
-    "lem-kun-filtered-tensor-graded-comparison",
-    "lem-sp-bounded-filtered-page-core",
-    "def-weil-abstract-derived-category",
-    "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "lem-pc-right-fraction-representation",
-    "lem-pc-right-fraction-common-refinement"
+    "lem-kun-derived-canonical-filtration",
+    "lem-kun-filtered-tensor-localization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H7Y, proposition-kunneth-filtered, filtered resolution construction; Tag 0H7Z, canonical truncation construction; Homology Tag 012K, functoriality and quotient-image description. Derived Categories Tag 05S2, filtered localization"
+    "place": "Tags 0H7X/0H7Y/0H7Z: canonical truncation filtration, convolution tensor, and localization; extracted descent interfaces replace the first two paragraphs of returned Step 7."
+   }
+  },
+  {
+   "text": "Apply [lem-kun-filtered-page-localization] to the morphism of Step 7. It supplies compatible old page maps, the cohomology map $H^n(u\\otimes_R^{\\mathbf L}v)$, maps preserving every image-filtration step $G^aH^n$, and natural isomorphisms from the stationary old pages to the quotients $G^aH^n/G^{a+1}H^n$. Take these image-normalized comparisons as the canonical identifications $F^pH^n/F^{p+1}H^n\\cong E_\\infty^{p,n-p}$ of Step 6 (after the relabelling of Step 9); Step 3 is used only for the existence of the stationary pages and of the finite image filtration, not for a second choice of identification. Their compatibility with the successor-page maps ensures that choosing a later stationary page leaves the identifications compatible. All these maps satisfy functor laws because the cited result factors the entire construction through the filtered localization.",
+   "uses": [
+    "lem-kun-filtered-page-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 012M/012O/012P/012W: descent, filtered abutment and stationary comparison naturality extracted from returned Step 7."
+   }
+  },
+  {
+   "text": "The Tor-resolution identifications and the natural signed shift map in Step 4 identify the page-one maps of Step 8 with the direct sums of the induced Tor maps. Indeed the graded morphisms are the cohomology maps shifted by $i,j$ by Step 7; after the sign isomorphism their tensor-homology maps are exactly the two resolution formulas of [lem-weil-pbc-tor-map-via-resolution-lift]. Relabel these maps by Step 5, so at page two they are $\\bigoplus_{I+J=q}\\operatorname{Tor}_{-p}^R(H^I(u),H^J(v))$. Finally relabel the filtration maps and stationary quotient comparisons by $a=p-n$ as in Step 6. The underlying abutment map remains $H^n(u\\otimes_R^{\\mathbf L}v)$ and the graded map is at $(p,n-p)$. These substitutions preserve the commuting squares from Step 8. This proves all functoriality clauses of the unchanged statement.",
+   "uses": [
+    "lem-weil-pbc-tor-map-via-resolution-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H7Z, final reindexing; Algebra Tag 00LZ, Tor morphisms, combined with the natural comparisons extracted from returned Step 7."
    }
   }
  ],
@@ -131,9 +148,9 @@
   "def-pc-tensor-complex-sheaves",
   "def-sp-spectral-sequence",
   "def-sp-filtration",
-  "lem-pc-quasi-isomorphisms-multiplicative-system",
-  "lem-pc-right-fraction-representation",
-  "lem-pc-right-fraction-common-refinement"
+  "lem-kun-derived-canonical-filtration",
+  "lem-kun-filtered-tensor-localization",
+  "lem-kun-filtered-page-localization"
  ],
  "proof_origin": {
   "by": "document",
@@ -231,10 +248,38 @@
    "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.SpectralSequence.pageFunctor\", \"module\": \"Mathlib.Algebra.Homology.SpectralSequence.Basic\", \"type\": \" (C : Type u_1) [CategoryTheory.Category.{u_3, u_1} C] [CategoryTheory.Abelian C] {κ : Type u_2} (c : ℤ → ComplexShape κ) (r₀ r : ℤ) (hr : r₀ ≤ r := by lia) : CategoryTheory.Functor (CategoryTheory.SpectralSequence C c r₀) (HomologicalComplex C (c r))\", \"doc\": \"The functor `SpectralSequence C c r₀ ⥤ HomologicalComplex C (c r)` which\\nsends a spectral sequence to its `r`th page. \"}\n  {\"name\": \"CategoryTheory.SpectralSequence.pageFunctor_obj\", \"module\": \"Mathlib.Algebra.Homology.SpectralSequence.Basic\", \"type\": \" (C : Type u_1) [CategoryTheory.Category.{u_3, u_1} C] [CategoryTheory.Abelian C] {κ : Type u_2} (c : ℤ → ComplexShape κ) (r₀ r : ℤ) (hr : r₀ ≤ r := by lia) (E : CategoryTheory.SpectralSequence C c r₀) : (CategoryTheory.SpectralSequence.pageFunctor C c r₀ r hr).obj E = E.page r ⋯\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.SpectralSequence.pageFunctor_map\", \"module\": \"Mathlib.Algebra.Homology.SpectralSequence.Basic\", \"type\": \" (C : Type u_1) [CategoryTheory.Category.{u_3, u_1} C] [CategoryTheory.Abelian C] {κ : Type u_2} (c : ℤ → ComplexShape κ) (r₀ r : ℤ) (hr : r₀ ≤ r := by lia) {X✝ Y✝ : CategoryTheory.SpectralSequence C c r₀} (f : X✝ ⟶ Y✝) : (CategoryTheory.SpectralSequence.pageFunctor C c r₀ r hr).map f = f.hom r ⋯\", \"doc\": \"\"}",
    "date": "2026-10-16",
    "verdict": "no match: Tor functors and generic spectral-sequence page functors do not construct this spectral sequence; read Monoidal/Tor.lean and SpectralSequence/Basic.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"Tor\"",
+   "results": "3 hits: CategoryTheory.SpectralSequence.pageFunctor, CategoryTheory.SpectralSequence.pageFunctor_obj, CategoryTheory.SpectralSequence.pageFunctor_map. ",
+   "date": "2026-10-17",
+   "verdict": "no match: read Tor.lean and SpectralSequence/Basic.lean; individual Tor or tensor/spectral-object infrastructure does not state the bounded derived-tensor spectral sequence."
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|hyper.?tor|Tor.*SpectralSequence|SpectralSequence.*Tor",
+   "results": "1 hits: Mathlib/Algebra/Homology/SpectralSequence/Basic.lean. ",
+   "date": "2026-10-17",
+   "verdict": "no match: read Tor.lean and SpectralSequence/Basic.lean; individual Tor or tensor/spectral-object infrastructure does not state the bounded derived-tensor spectral sequence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kunneth Tor spectral sequence of two bounded derived complexes",
+   "results": "8 hits: CategoryTheory.Tor'_obj_obj, HomologicalComplex.ιTensorObj, HomotopyCategory.spectralObjectMappingCone, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplex.tensorObj, HomologicalComplex₂.total, CochainComplex.ιMapBifunctor.congr_simp, HomologicalComplex.HasTensor. ",
+   "date": "2026-10-17",
+   "verdict": "no match: read Tor.lean and SpectralSequence/Basic.lean; individual Tor or tensor/spectral-object infrastructure does not state the bounded derived-tensor spectral sequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kunneth hyper Tor spectral sequence with E2 Tor of cohomology of bounded complexes converging to derived tensor cohomology",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, Rep.torIso, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, CochainComplex.mappingCone.homologySequenceδ_triangleh, CochainComplex.homologySequenceδ_quotient_mapTriangle_obj, groupHomologyIsoTor, Rep.isZero_Tor_succ_of_projective, groupCohomology.map_cochainsFunctor_shortExact. ",
+   "date": "2026-10-17",
+   "verdict": "no match: read Tor.lean and SpectralSequence/Basic.lean; individual Tor or tensor/spectral-object infrastructure does not state the bounded derived-tensor spectral sequence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-integral-bounded-kunneth-exact",
   "by": "worker",
@@ -243,10 +288,10 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-kunneth-ordinary",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-kun-bounded-tensor-tor-spectral-sequence",
   "worker": "stage1",
-  "summary": "Statement unchanged. Split the canonical truncation-filtered Kunneth construction using two statement-only generic filtered-complex tools and the existing finite filtered page-core theorem. Wrote the Tor-from-resolution and signed shift calculation, page/differential reindexing, the degree-dependent filtration shift, and descent/naturality through roofs. Searched project, full DAG, blueprint and Mathlib; no exact attachment or Mathlib match found. Read the cached Stacks sources and each cited node statement. Second reading made the universal page-core input explicit and supplied signed tensor homotopies and endpoint formulas for truncated roof homotopies. Repair of merge-lock return: reread all existing dependency statements against the current live DAG (no interface changes); supplied explicit convolution-filtration bounds and a uniform page-stabilization bound, and rebuilt the delivery on the current base.",
+  "summary": "Repair of returned Step 7. Kept the statement, stmt_deps, Lean record and original first six proof steps unchanged. Extracted three statement-only auxiliary interfaces for localized convolution tensor, filtered pages/image-abutment descent with stationary naturality, and the canonical filtration functor on Db. Replaced the 4541-character paragraph by three short applications and the original Tor/reindexing map calculation. Reused existing bounded filtered localization instead of creating roof duplicates. Searched all new nodes by two phrasings and the required services and checked their sources, all cited interfaces and edge cases.",
   "blueprint": "Realizes lem-kun-0f0f, preliminary paragraph beginning \"Since Z has global dimension 1\", through the bounded Tor spectral-sequence input to lem-kun-integral-bounded-kunneth-exact. The unit has no additional proof steps; its specified integral projection-formula route and all chapter data are unchanged.",
   "tool_uses": [
    {
@@ -269,12 +314,12 @@
   "lem-pc-derived-tensor-second-factor-functor"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q07-16bfa12d1",
-  "group": "Q07",
+  "reviewer": "NT-cc-Q95-16b8f1518",
+  "group": "Q95",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q07-16bfa12d1 (reviewer sub-agent of L); spot-checked: Read all mathematics and cited interfaces; checked Stacks 0H7X–0H7Z, reindexing, finite convergence, derived functoriality, edge cases and duplicates. Repaired incomplete metadata in both new-node JSON files under fixes/. Statements and proofs unchanged; detailed checks and accepted tool_uses are in review.md.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-16b8f1518 (reviewer sub-agent of L); spot-checked: I read the full repair of the returned step 7. Steps 1-6, the statement, stmt_deps and the Lean record are byte-identical to the live side copy; the live node is unsplit, so this delivery is admissible. Steps 7-9 cite the three new statement-only nodes and the Mathlib leaf lem-weil-pbc-tor-map-via-resolution-lift, and each step uses exactly what those statements say. I re-checked the index arithmetic: E'_1 Tor index -2a-b = -p, the d_s bidegree (s,1-s), and F^p = G^{p-n}. The Z/2 (x) Z/2 case gives the expected E_2 terms. I checked the sources at Stacks more-algebra.tex lines 15645-15835 (0H7X, 0H7Y, 0H7Z) and the tags 0H7W, 0118, 05RW, 05S1, 05S2, 05S6, 012M, 012O, 012P, 012W; tags and labels agree. The coefficient category is ordinary R-modules with the K-flat derived tensor, the same as the unchanged statement; no base-change morphism is involved, and no SGA source is used. All three new nodes are true and none restates a clause of the item. (1) derived-canonical-filtration: tau-filtrations of bounded complexes are finite, chain homotopies preserve them, and quasi-isomorphisms become graded quasi-isomorphisms (gr^i = H^{-i}[i]), so the functor factors through K^b[qis^-1] = D^b(R). (2) filtered-tensor-localization: convolution of good complexes is good and preserves graded quasi-isomorphisms (by the graded-comparison node); the two explicit homotopy formulas are filtered; transport is along the K-flat replacement equivalence. (3) filtered-page-localization: by finite induction a graded quasi-isomorphism is one on every step; for t >= B-A the page equals im(H^n(F^a) -> H^n(U/F^{a+1})), which is isomorphic to I^a/I^{a+1} by the kernel computation, with the stated normalization. I tested the zero ring, one-step filtrations, M[0], an acyclic two-step complex and Z/2. The rg duplicate sweep found nothing that states these interfaces for an arbitrary commutative R with unbounded cochain degrees; the closest candidates were lem-trf-filtered-operations-hom (etale, finite-Tor), lem-trf-finite-filtered-flat-resolution (bounded above, acyclicity only), lem-trf-filtered-bounded-localization-comparison, lem-trf-filtered-unbounded-truncation, lem-trf-filtered-bifunctor-graded-comparison, def-sp-filtered-complex-decalage and lem-sp-bounded-filtered-page-core. Each new node carries five searches, a correct blueprint from/via, and created.item set to the item. Tool uses accepted again: lem-sp-bounded-filtered-page-core, lem-pc-module-bounded-flat-kflat and lem-pc-derived-tensor-second-factor-functor, all unchanged and no new off-unit citation. Fix: in Step 8, the sentence 'These are the same image-normalized comparisons used in Step 3' claimed an equality that no cited statement gives. It now declares the image-normalized comparisons to be the canonical identifications of Step 6, and Step 3 is used only for existence. The corrected item is in fixes/dag/nodes/sec-smooth-purity/lem-kun-bounded-tensor-tor-spectral-sequence.json; the statement is unchanged.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",

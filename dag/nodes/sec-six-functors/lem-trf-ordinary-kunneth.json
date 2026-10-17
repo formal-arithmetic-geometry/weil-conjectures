@@ -100,12 +100,9 @@
    }
   },
   {
-   "text": "For fixed $L$, consider the two functors in $Q$ on the bounded-below étale derived category, with values in the ambient unbounded derived category, given by the source and target of $\\alpha_A$. The source tensor need not a priori be bounded below; the target tensor is bounded below because it is computed with the bounded flat model $p_X^*P$. They are exact triangulated functors: inverse image is exact by [prop-weil-pbc-inverse-image-modules-exact] and induces a triangulated functor by [lem-sf-exact-functor-derived-triangulated]; derived tensor is triangulated by [lem-kun-derived-tensor-triangulated]; bounded-below derived direct image is triangulated by [lem-weil-pbc-derived-direct-image-triangulated]. For the direct image, apply its bounded-below triangulated statement to those target tensors, then include its values in the ambient derived category. The natural transformation in step 3 respects these triangles: the counit and tensor maps commute with shifts; on a cone $\\operatorname{Cone}(u)=Q_2\\oplus Q_1[1]$, tensoring uses the total differential $d(x\\otimes y)=dx\\otimes y+(-1)^{\\deg x}x\\otimes dy$. The diagonal blocks are the maps for $Q_2,Q_1[1]$ and the off-diagonal block commutes by naturality for $u$. Thus the resulting three maps form a morphism of triangles. By [lem-sf-triangle-morphism-iso], its isomorphism locus is closed under distinguished triangles and shifts. The successive truncation triangles of [lem-weil-pbc-truncation-triangle] therefore reduce a bounded $Q$ to its finitely many cohomology sheaves $H^j(Q)[-j]$. For a single sheaf $M$, the finite filtration $M\\supset\\varpi_E M\\supset\\cdots\\supset\\varpi_E^nM=0$ has successive quotients $M_i=\\varpi_E^iM/\\varpi_E^{i+1}M$ annihilated by $\\varpi_E$, hence sheaves of $\\kappa$-modules. The short exact sequences $0\\to\\varpi_E^{i+1}M\\to\\varpi_E^iM\\to M_i\\to0$ give distinguished triangles by [lem-weil-pbc-complex-ses-triangle]. Starting at the zero sheaf and descending from $i=n-1$ to $0$, it suffices to prove $\\alpha_A(L,M_i)$ invertible. No finite-Tor assumption on the individual $M_i$ is needed.",
+   "text": "For fixed $L$, [lem-trf-external-comparison-triangles] applies to the bounded flat model from step 2. It supplies exact functors in $Q$, compatible shifts, and a morphism of distinguished triangles for the comparison of step 3. By [lem-sf-triangle-morphism-iso], its isomorphism locus is closed under distinguished triangles and shifts. The truncation triangles of [lem-weil-pbc-truncation-triangle] reduce a bounded $Q$ to its finitely many cohomology sheaves $H^j(Q)[-j]$. For a sheaf $M$, the finite filtration $M\\supset\\varpi_E M\\supset\\cdots\\supset\\varpi_E^nM=0$ has quotients $M_i=\\varpi_E^iM/\\varpi_E^{i+1}M$ annihilated by $\\varpi_E$, hence sheaves of $\\kappa$-modules. The short exact sequences give distinguished triangles by [lem-weil-pbc-complex-ses-triangle]. Starting with the zero sheaf and descending from $i=n-1$ to $0$ reduces to each $M_i$. No finite-Tor hypothesis on $M_i$ is imposed.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-kun-derived-tensor-triangulated",
-    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-trf-external-comparison-triangles",
     "lem-sf-triangle-morphism-iso",
     "lem-weil-pbc-truncation-triangle",
     "lem-weil-pbc-complex-ses-triangle"
@@ -117,17 +114,36 @@
    }
   },
   {
-   "text": "Let $M$ be any degree-zero $\\kappa$-module sheaf on $Z$. Put $L_\\kappa=L\\otimes_A^L\\kappa$. By [lem-pur-derived-change-of-rings] and [lem-pur-kflat-change-of-rings], $P\\otimes_A\\kappa$ computes $L_\\kappa$ as a bounded flat $\\kappa$-complex. Use [lem-coef-finite-direct-image] with the finite $A$-algebra $B=\\kappa$ to identify $(Rf_{*,A}L)\\otimes_A^L\\kappa$ with $Rf_{*,\\kappa}L_\\kappa$ by its specified counit-defined isomorphism. Its hypotheses hold: $f$ is separated finite type and $L$ is bounded constructible of finite Tor amplitude. For any $A$-complex $H$, a K-flat flat-term resolution $P_H$ from [lem-pc-kflat-resolution], followed by [lem-pur-kflat-change-of-rings], computes the canonical identity\n$$H\\otimes_A^L\\operatorname{Res}M\\simeq\\operatorname{Res}((H\\otimes_A^L\\kappa)\\otimes_\\kappa^LM).$$\nIndeed the termwise balanced isomorphism sends $x\\otimes m$ to $(x\\otimes1)\\otimes m$, with inverse $(x\\otimes a)\\otimes m\\mapsto x\\otimes am$; these mutually inverse maps are sheaf maps, commute with differentials and extend to total tensors. To justify computing with the unresolved sheaf $M$, choose a K-flat resolution $T\\to M$ by [lem-pc-kflat-resolution]. The cone is acyclic, so [def-pc-kflat-complex] makes $P_H\\otimes_A\\operatorname{Cone}(T\\to M)$ acyclic. Hence $P_H\\otimes_A T\\to P_H\\otimes_A M$ is a quasi-isomorphism; [lem-weil-pbc-site-derived-tensor-descent] identifies its source with the derived tensor. The identical argument over $\\kappa$, using the K-flat flat-term complex $P_H\\otimes_A\\kappa$ supplied by [lem-pur-kflat-change-of-rings], computes the right-hand side with $M$. Pullback commutes with the coefficient tensor by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the two factorizations of the same ringed-topos pullback; alternatively these same pure-tensor maps on pulled-back K-flat models give the identification. Apply this first to $H=p_Y^*Rf_*L$, then to $H=p_X^*L$. Together with the coefficient direct-image isomorphism and [lem-sbc-canonical-restrict-scalars-functor-comparisons] for $h$, it identifies the two sides of $\\alpha_A(L,M)$ with the restrictions of the two sides of $\\alpha_\\kappa(L_\\kappa,M)$. The arrow is also identified: transpose under $h^*\\dashv Rh_*$, use the counit normalization of [lem-coef-finite-direct-image] and [lem-sbc-restrict-scalars-derived-adjunction-identities], and both composites are the balanced tensor of the $\\kappa$-counit with $1_M$, by step 3. Thus it is invertible by step 5. Step 6 now proves the étale assertion for the original bounded $Q$.",
+   "text": "Let $M$ be a degree-zero $\\kappa$-module sheaf on $Z$ and put $L_\\kappa=L\\otimes_A^L\\kappa$. The change-of-rings statements [lem-pur-derived-change-of-rings] and [lem-pur-kflat-change-of-rings] make $P\\otimes_A\\kappa$ a bounded flat $\\kappa$-model of $L_\\kappa$. The coefficient projection [lem-coef-finite-direct-image] gives the counit-defined isomorphism $(Rf_{*,A}L)\\otimes_A^L\\kappa\\simeq Rf_{*,\\kappa}L_\\kappa$; its hypotheses hold because $f$ is separated finite type and $L$ is bounded constructible of finite Tor amplitude.",
    "uses": [
     "lem-pur-derived-change-of-rings",
     "lem-pur-kflat-change-of-rings",
-    "lem-coef-finite-direct-image",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-coef-finite-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.proof.md",
+    "place": "Step 2: coefficient transport to A; missing direct-image coefficient comparison made explicit"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-site-derived-tensor-restriction] on $(Y\\times_kZ)_{\\mathrm{et}}$ and $(X\\times_kZ)_{\\mathrm{et}}$, with the constant ring map $A\\to\\kappa$, $H=p_Y^*Rf_*L$ and $H=p_X^*L$, and the respective pullbacks of the sheaf $M$. It gives\n$$H\\otimes_A^L\\operatorname{Res}N\\simeq\\operatorname{Res}((H\\otimes_A^L\\kappa)\\otimes_\\kappa^LN).$$\nPullback commutes with scalar extension by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the two factorizations of the same ringed-topos pullback. Combining this with the coefficient isomorphism of step 7 and the canonical restriction/direct-image comparison of [lem-sbc-canonical-restrict-scalars-functor-comparisons] for $h$ identifies the two sides of $\\alpha_A(L,M)$ with the restrictions of the two sides of $\\alpha_\\kappa(L_\\kappa,M)$. Its inner tensor is bounded below because $P\\otimes_A\\kappa$ is bounded flat and $M$ is a sheaf; thus the cited bounded-below direct-image comparison applies.",
+   "uses": [
+    "lem-trf-site-derived-tensor-restriction",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-    "lem-sbc-restrict-scalars-derived-adjunction-identities",
-    "def-pc-kflat-complex"
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.proof.md",
+    "place": "Step 2: coefficient transport to A; missing direct-image coefficient comparison made explicit"
+   }
+  },
+  {
+   "text": "Under the identifications of the preceding step, the transpose of $\\alpha_A(L,M)$ is the balanced tensor of the $\\kappa$-counit with $1_M$: this follows from the counit normalization in [lem-coef-finite-direct-image], the restriction adjunction identities [lem-sbc-restrict-scalars-derived-adjunction-identities], and the explicit transpose in step 3. Hence it is the restriction of $\\alpha_\\kappa(L_\\kappa,M)$, which is invertible by step 5; restriction of scalars is conservative on the underlying cohomology groups. Step 6 now proves the étale assertion for the original bounded $Q$.",
+   "uses": [
+    "lem-coef-finite-direct-image",
+    "lem-sbc-restrict-scalars-derived-adjunction-identities"
    ],
    "elementary": false,
    "source": {
@@ -169,20 +185,15 @@
   "lem-sbc-canonical-restrict-scalars-functor-comparisons",
   "lem-sbc-restrict-scalars-derived-adjunction-identities",
   "lem-pur-finite-field-derived-tensor-summand",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-kun-derived-tensor-triangulated",
-  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-trf-external-comparison-triangles",
   "lem-sf-triangle-morphism-iso",
   "lem-weil-pbc-truncation-triangle",
   "lem-weil-pbc-complex-ses-triangle",
   "lem-pur-derived-change-of-rings",
   "lem-pur-kflat-change-of-rings",
   "lem-coef-finite-direct-image",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-trf-site-derived-tensor-restriction",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-pc-kflat-complex",
   "lem-sf-comparison-pullback-exact",
   "lem-weil-pbc-comparison-pullback",
   "lem-weil-pbc-comparison-direct-image-canonical-mate"
@@ -324,7 +335,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -363,8 +374,8 @@
   "date": "2026-10-17",
   "item": "lem-trf-ordinary-kunneth",
   "worker": "stage1",
-  "summary": "Replaced the inherited broad coefficient-transport paragraph by an explicit prime-field theorem specialization, residue-field diagonal projector, exactness/finite-filtration reduction, normalized coefficient direct-image comparison, and normalized site transport. Reused existing DAG statements throughout; no new nodes or Mathlib leaves. Preserved the statement and all import/maintainer metadata. The source Lean theorem still contains sorry. Second reading makes the ambient category and the K-flat computations explicit without changing the statement or adding nodes.",
-  "blueprint": "Step 1 checks the opening product/coefficient setting; step 2 realizes the flat-model and site-comparison inputs; step 3 realizes the opening canonical comparison; step 4 realizes blueprint Step 1; steps 5–7 realize blueprint Step 2 (including its finite-field direct-summand alternative); step 8 realizes naturality and the unit’s pro-étale transport sentence.",
+  "summary": "Repair of the 2026-10-17 long-step return. Preserved the item statement, Lean record, proof route, and old steps 1–5 and 8 verbatim. Extracted the triangle/shift compatibility argument and ringed-site derived scalar-tensor identity as two statement-only helper nodes; replaced old steps 6–7 by four short steps citing those helpers and the existing coefficient-counit comparisons. No Mathlib match was found.",
+  "blueprint": "Steps 1–5 realize the opening setup, canonical comparison, prime-field theorem and finite-field summand; steps 6–9 realize Step 2 exactness, finite uniformizer filtration, scalar tensor identity, and normalized coefficient transport; step 10 realizes site transport and naturality.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-separated-cancellation",
@@ -518,9 +529,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q55-c1963d065",
-  "group": "Q55",
+  "reviewer": "NT-cc-Q101-4acc22548",
+  "group": "Q101",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-c1963d065 (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote review.md; no fix files. Shape: one commit, three files (item, unit realized/realized_by, report), no new nodes. The item statement is word for word the same as in main-20261015 and the master snapshot. All 35 cited nodes exist and are unmerged, the dependency closure has no cycle, and no existing node duplicates this f×id Künneth. No SGA source is used. Source check: I compared Stacks 0F1N (etale-cohomology.tex l.20878-20937) with the step 4 substitution: X:=Z, S':=Y, X':=Z×Y, T:=X, g:=f, so p=p'_Z, f'=p_Y, h=id×f, e=p_X, with n=ℓ invertible in k. This gives α_{F_ℓ} up to symmetry, for unbounded complexes. Steps: (1) coefficient conventions give ℓ≠p and A=O_E/ϖ^n local with residue field κ of characteristic ℓ; f and h are separated, finite type and qcqs. (2) constructible-origin(ii) and comparison-tor-amplitude(ii) give étale representatives (bounded below, as required); flat-model gives a bounded flat P, which is K-flat. (3) α is exchange then PF_h, the blueprint's arrow, and its transpose is p_X*ε_f⊗1. (5) the separability idempotent from finite-field-derived-tensor-summand, restriction comparisons on D⁺ (valid because tensors over a field are underived) and conservativity of restriction pass from F_ℓ to κ. (6) the triangulated dévissage uses the finite ϖ-filtration; no Tor condition is put on the quotients. (7) lem-coef-finite-direct-image with B=κ gives Rf_*L⊗κ≅Rf_{*,κ}L_κ with counit normalisation. This fills a gap the blueprint passes over silently; the balanced identity is proved from K-flat resolutions. (8) comparison-direct-image-canonical-mate (qcqs maps, D⁺ inputs) and the pullback comparisons carry the named arrow to the pro-étale site. The coefficient category is pro-étale D^b_ctf(A_{E,n}) throughout, with no silent identification of categories. Edge cases: f=id, empty or zero inputs, n=1, A=Z/ℓ², [κ:F_ℓ] divisible by ℓ, Z=Spec k. I accept the declared off-route tools (sbc restriction comparisons, finite-field tensor summand, coef-finite-direct-image, pbc triangulated/K-flat/site-comparison nodes, change of rings) as generic black boxes; the extra declarations of route nodes are harmless. Minor: the report lists citations.json, which is not among the committed files."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-4acc22548 (reviewer sub-agent of L); spot-checked: FIX with one statement-precision repair; I read the whole delivery. The item statement is unchanged and matches main-20261015 word for word. Old steps 1-5 and old step 8 are verbatim new steps 1-5 and new step 10. The old over-long steps 6 (2092 chars) and 7 (2554 chars) became steps 6-9, the longest 960 chars, so the human's long-step return is answered. Step 4: I checked the substitution into 0F1N (etale-cohomology.tex l.20878-20937): X:=Z, S':=Y, T:=X, g:=f, n=ell, which gives alpha_{F_ell} up to symmetry for unbounded complexes. Steps 6-9: the new triangle helper applies to the bounded flat model P. triangle-morphism-iso, truncation-triangle and complex-ses-triangle carry the reduction down the varpi-filtration, with no Tor condition on the quotients. coef-finite-direct-image applies with B=kappa. The new site helper applies with H=p_Y^*Rf_*L or p_X^*L and N the pullbacks of M. The sbc restriction comparisons get D+ inputs. The transpose normalization plus step 5 give the kappa case. New nodes: lem-trf-external-comparison-triangles is true; F needs the ambient category because A/ell tensor^L A/ell is unbounded below over Z/ell^2. It is not a duplicate of ringed-projection-mate-exact (PF only) or of sf-finite-exchange-projection-commshift (Rf_!). lem-trf-site-derived-tensor-restriction is true by K-flat P with P tensor_R S K-flat; I tested identity and nonflat quotient rings, unbounded H, N=0 and the one-point site. It is not a duplicate of kun-change-of-rings-tensor (modules only) or the scalar adjunction nodes. Both new nodes are statement-only and assert less than the item. FIX: the triangle helper composed exchange tensor 1 with PF_h, whose target contains h^{-1}p_Z'^{-1}Q, while G is written with p_Z^*Q. I made the composition isomorphism explicit, citing lem-weil-pbc-inverse-image-composition-module-linear (added to stmt_deps). Six entries in split_report.tool_uses are no longer cited by any step; they are stale and not accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }
