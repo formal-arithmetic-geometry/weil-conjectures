@@ -33,9 +33,131 @@
   "lem-coef-twisted-arrow-left-fibration",
   "lem-coef-space-valued-straightening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T_B=\\operatorname{Tw}(\\mathcal B)$ and $T_A=\\operatorname{Tw}(\\mathcal A)$. The two projections $\\lambda_B$ and $\\lambda_A$ are left fibrations by [lem-coef-twisted-arrow-left-fibration]. Form $W_f$ degreewise as in the statement. A horn lifting problem for its projection to $\\mathcal B^{\\mathrm{op}}\\times\\mathcal A$ projects to one for $\\lambda_B$; a lift there, paired with the prescribed base simplex, is a lift in the pullback. Thus this projection is a left fibration. Opposites of quasicategories fill inner horns by reversing their indices; products fill them coordinatewise. A left fibration over such a base has a quasicategorical total space: fill the base inner horn and then lift it. This verifies the quasicategory hypotheses for both total spaces used below.",
+   "uses": [
+    "lem-coef-twisted-arrow-left-fibration",
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 5.6.2 and diagram (5.6.8.2); pullback lifting argument"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-space-valued-straightening] to $\\lambda_B$ over the $\\mathcal V$-small base $\\mathcal B^{\\mathrm{op}}\\times\\mathcal B$. Its classifier is a coherent functor $H_B$ into $\\mathcal V$-small spaces, constructed in a containing universe. Here is its mapping-space identification, rather than an inference from a mere agreement of vertex sets. For each target $y$, the natural second-block-collapse equivalence of [lem-coef-twisted-arrow-left-fibration] identifies the target-fixed part of $T_B$ with $(\\mathcal B_{/y})^{\\mathrm{op}}$ over $\\mathcal B^{\\mathrm{op}}$. The transport comparison in [lem-coef-right-fibration-section-limit] identifies the right-fibration transport of $\\mathcal B_{/y}$ with $x\\mapsto\\operatorname{Map}_{\\mathcal B}(x,y)$, coherently in $x$, with precomposition as its action. Taking opposites gives precisely the left-fibration transport over $\\mathcal B^{\\mathrm{op}}$. For the remaining variable, a simplex of $T_B$ is a map on $[n]^{\\mathrm{op}}\\star[n]$. Restricting it to the ordered vertices $\\bar 1,\\bar 0,0,1$ gives the commuting square taking an arrow $u:x\\to y$ to $\\beta u\\alpha:x'\\to y'$ over $(\\alpha:x'\\to x,\\beta:y\\to y')$. Every higher compatibility is restriction of the same join simplex; these restrictions commute with every $\\theta^{\\mathrm{op}}\\star\\theta$. Thus the classifier supplies the coherent precomposition/postcomposition mapping functor, not only separate bijections on components. Its value at $(x,y)$ is the right-pinched mapping space as a space, by the displayed slice transport comparison. Finally naturality of straightening under base pullback identifies the classifier of $W_f$ with $H_B(1\\times f)$, namely $(x,a)\\mapsto\\operatorname{Map}_{\\mathcal B}(x,f(a))$.",
+   "uses": [
+    "lem-coef-space-valued-straightening",
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-coef-right-fibration-section-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Propositions 5.6.5, 5.6.13, Corollary 5.6.14 and Remark 5.6.15; classification and its base-pullback compatibility"
+   }
+  },
+  {
+   "text": "For $\\sigma:N([n]^{\\mathrm{op}}\\star[n])\\to\\mathcal A$, write $\\sigma_-$ and $\\sigma_+$ for its first- and second-block restrictions. Send it to the pullback simplex $((f\\sigma_-,\\sigma_+),f\\sigma)$. Its two images in $\\mathcal B^{\\mathrm{op}}\\times\\mathcal B$ are both $(f\\sigma_-,f\\sigma_+)$, so it lies in $W_f$. Restriction to a join operator commutes with postcomposition by $f$, hence this formula defines the simplicial map $\\kappa_f$. At $n=0$ it gives exactly $(f(a),a',f(a\\to a'))$.",
+   "uses": [
+    "lem-coef-twisted-arrow-left-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Diagram (5.6.8.2), explicit formula for its canonical map"
+   }
+  },
+  {
+   "text": "To apply fiberwise coinitiality, swap the two base factors. Take $Z=\\mathcal A$, $C=\\mathcal A^{\\mathrm{op}}$, $D=\\mathcal B^{\\mathrm{op}}$, $g=f^{\\mathrm{op}}$, $X=T_A$, $Y=W_f$. Their maps to $Z\\times C$ and $Z\\times D$ are the left fibrations of Step 1 followed by the coordinate-swap isomorphisms. The formula of Step 3 gives $qh=(1_Z\\times g)p$ for $h=\\kappa_f$. At a vertex $a\\in Z$, the fibers are $X_a=T_A\\times_{\\mathcal A}\\{a\\}$ and $Y_a=T_B\\times_{\\mathcal B}\\{f(a)\\}$. The latter equality follows degreewise: the second coordinate of a simplex in $\\{a\\}$ is constant at $a$, so its image under $f$ is constant at $f(a)$. These fibers are quasicategories since they are pullbacks of left fibrations to $\\mathcal A^{\\mathrm{op}}$ and $\\mathcal B^{\\mathrm{op}}$.",
+   "uses": [
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proof of Proposition 5.6.9, second square, and Lemma 5.6.7 after interchanging product factors"
+   }
+  },
+  {
+   "text": "The target-fixed equivalences of [lem-coef-twisted-arrow-left-fibration] give, after taking opposites, equivalences $\\mathcal A_{/a}\\simeq X_a^{\\mathrm{op}}$ and $\\mathcal B_{/f(a)}\\simeq Y_a^{\\mathrm{op}}$. By their naturality these intertwine $f$ on join slices with $h_a^{\\mathrm{op}}$. They take the identity arrows to the identity-arrow vertices. Each identity edge is an equivalence (its inverse and both inverse triangles are degenerate), so [lem-coef-infinity-slice-equivalence-final] makes it final in the corresponding join slice. Equivalences preserve these final objects: a quasi-inverse supplies a preimage of every test object, and the mapping-space equivalences of [lem-cbc-enhanced-functor-cone-calculus] identify the relevant spaces with the contractible slice mapping spaces. Thus $X_a^{\\mathrm{op}}$ and $Y_a^{\\mathrm{op}}$ have final objects $t_a,t'_a$ given by the identity-arrow vertices, and $h_a^{\\mathrm{op}}(t_a)=t'_a$ exactly. Taking opposites of a functor equivalence here is legitimate directly from its quasi-inverse and the two inverse natural equivalences.",
+   "uses": [
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-coef-infinity-slice-equivalence-final",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proof of Proposition 5.6.9: preservation of initial objects in the second square; Proposition 4.3.3; use opposites to keep the final-object convention"
+   }
+  },
+  {
+   "text": "Fix any target quasicategory $E$, diagram $F:Y_a^{\\mathrm{op}}\\to E$ and object $e$. By [lem-coef-infinity-final-index-colimit], $F(t'_a)$ is a colimit of $F$, with a cocone whose component at $t'_a$ is the identity; likewise $F(h_a^{\\mathrm{op}}(t_a))=F(t'_a)$ is a colimit of $Fh_a^{\\mathrm{op}}$ with identity component at $t_a$. The dual mapping-space criterion of [lem-cbc-enhanced-functor-cone-calculus] therefore says that evaluation at these vertices identifies both cocone spaces with $\\operatorname{Map}_E(F(t'_a),e)$. Explicitly, the universal comparison sends $v:F(t'_a)\\to e$ to its composite with the normalized colimit cocone, and evaluation sends it back to $v$; hence evaluation is its inverse equivalence. Restriction along $h_a^{\\mathrm{op}}$ commutes with evaluation because $h_a^{\\mathrm{op}}(t_a)=t'_a$. Its induced comparison is consequently an equivalence. This proves the fiber hypothesis for every target and every diagram, without any completeness assumption on $E$.",
+   "uses": [
+    "lem-coef-infinity-final-index-colimit",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 4.3.3 / Corollary 6.4.6, normalized final-object colimits and their cocone-space characterization"
+   }
+  },
+  {
+   "text": "All the hypotheses of [lem-coef-left-fibration-fiberwise-coinitiality] are now verified: Step 4 gives the required left fibrations over products and the strictly commuting square; Step 6 proves its fiber hypothesis. Apply it to $h=\\kappa_f$. Its conclusion is exactly the restriction equivalence displayed in the item for arbitrary $p:W_f^{\\mathrm{op}}\\to\\mathcal E$ and $e\\in\\mathcal E$. This proves finality of $\\kappa_f^{\\mathrm{op}}$ in the required strong sense. The fixed size universe for this application is $\\mathcal V$, not the potentially smaller universe in which $\\mathcal A$ alone is small; any chosen target fits in a further containing universe.",
+   "uses": [
+    "lem-coef-left-fibration-fiberwise-coinitiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 5.6.7 applied in the proof of Proposition 5.6.9, second canonical map; cocone-space formulation of finality"
+   }
+  },
+  {
+   "text": "For a specified cocone $c:p\\to\\Delta L$ and every test object $e$, form the square whose upper row is $\\operatorname{Map}_{\\mathcal E}(L,e)\\to\\operatorname{Map}_{\\operatorname{Fun}(W_f^{\\mathrm{op}},\\mathcal E)}(p,\\Delta e)$ induced by $c$ and whose lower row is the analogous map induced by its restriction. The left vertical map is the identity and the right vertical map is the restriction equivalence of Step 7; the square commutes by composition of coherent transformations. Thus one horizontal map is an equivalence if and only if the other is. The cocone criterion in [lem-cbc-enhanced-functor-cone-calculus] proves that $c$ is colimiting if and only if its restriction is, with exactly the same vertex $L$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 6.4.5, specified-cocone consequence via the mapping-space criterion"
+   }
+  },
+  {
+   "text": "For a strictly commutative square $vf=f'u$ with $u:\\mathcal A\\to\\mathcal A'$ and $v:\\mathcal B\\to\\mathcal B'$, the pullback map sends $((x,a),\\tau)$ to $((v(x),u(a)),v\\tau)$. The defining equalities for its image follow from $vf=f'u$. On a join simplex $\\sigma$ the two composites with the graph maps are both $((vf\\sigma_-,u\\sigma_+),vf\\sigma)$, so naturality of $\\kappa$ is strict. The map of left fibrations factors through the pullback of $W_{f\\prime}$ along $v^{\\mathrm{op}}\\times u$. Straightening takes this map over the common base to a coherent transformation, and its naturality under base pullback identifies the target classifier with the restriction of the classifier of $W_{f\\prime}$. The block-collapse maps commute with postcomposition, so this transformation is the mapping-space map induced by $v$, including its higher coherences. Finally, if $\\mathcal A$ is $\\mathcal U$-small, then in each degree $\\operatorname{Tw}(\\mathcal A)_n$ is identified with $\\mathcal A_{2n+1}$ by the order isomorphism $[n]^{\\mathrm{op}}\\star[n]\\cong[2n+1]$. Thus it is $\\mathcal U$-small; the opposite changes only its simplicial operators, not its degreewise sets. No size bound on $\\mathcal B$ in $\\mathcal U$ was used.",
+   "uses": [
+    "lem-coef-space-valued-straightening",
+    "lem-coef-twisted-arrow-left-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Paragraph 5.6.8, functoriality of the canonical maps, and definition (5.6.1.3), degreewise size"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-final-index-colimit",
+  "lem-coef-infinity-slice-equivalence-final",
+  "lem-coef-left-fibration-fiberwise-coinitiality",
+  "lem-coef-right-fibration-section-limit",
+  "lem-coef-space-valued-straightening",
+  "lem-coef-twisted-arrow-left-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Expanded proof of Proposition 5.6.9, second map (5.6.8.2), using Lemma 5.6.7; classification and slice comparisons in Section 5.6. Online source read; archival copy absent from literature/. Normalized-cocone and size arguments expanded by Q105."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -120,10 +242,38 @@
    "results": "{\"t\": \"2026-10-16T21:55:38Z\", \"tool\": \"leansearch\", \"query\": \"For any functor of quasicategories the edgewise subdivision maps initially to the category of elements of the Hom classifier\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.categoryOfElements\", \"CategoryTheory.Functor.elementsFunctor\", \"CategoryTheory.Functor.elementsFunctor_obj\", \"CategoryTheory.CategoryOfElements.π\", \"SSet.Truncated.mapHomotopyCategory_homMk\", \"SSet.hoFunctor.unitHomEquiv\", \"CategoryTheory.Functor.elementsFunctor_map\", \"CategoryTheory.CategoryOfElements.instLocallySmallElements\"], \"digest\": \"3d3518472c500932\"}",
    "date": "2026-10-16",
    "verdict": "No match. Second-reader search: Elements.lean:42-82 defines categories of elements of ordinary Type-valued functors. The semantic results concern ordinary graded objects, nerves and truncated-simplex inclusions; the grep hits in Subdivision.lean:35-75 concern subdivision via ordinary Kan extension. None states the graph comparison for arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "twisted.?arrow|edgewise",
+   "results": "{\"t\": \"2026-10-17T02:35:17Z\", \"tool\": \"grep\", \"query\": \"twisted.?arrow|edgewise\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and inspected Mathlib/CategoryTheory/Limits/Final.lean:120-165, CategoryTheory/Elements.lean:40-85, and AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-80. These concern ordinary categories or Kan-Quillen fibrations, not arbitrary quasicategorical twisted-arrow graph maps; the TwistedArrow Loogle and edgewise source grep have zero hits. Inherited searches already try alternative phrasings of this same item and are retained."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TwistedArrow\"",
+   "results": "{\"t\": \"2026-10-17T02:35:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"TwistedArrow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and inspected Mathlib/CategoryTheory/Limits/Final.lean:120-165, CategoryTheory/Elements.lean:40-85, and AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-80. These concern ordinary categories or Kan-Quillen fibrations, not arbitrary quasicategorical twisted-arrow graph maps; the TwistedArrow Loogle and edgewise source grep have zero hits. Inherited searches already try alternative phrasings of this same item and are retained."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The opposite of the twisted arrow category of A maps finally into the opposite graph pullback for a functor A to B",
+   "results": "{\"t\": \"2026-10-17T02:35:28Z\", \"tool\": \"leansearch\", \"query\": \"The opposite of the twisted arrow category of A maps finally into the opposite graph pullback for a functor A to B\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullbackIsoOpPushout_hom_inr_assoc\", \"CategoryTheory.CostructuredArrow.toStructuredArrow_map\", \"CategoryTheory.Limits.pullbackIsoOpPushout\", \"CategoryTheory.Arrow.opEquiv\", \"CategoryTheory.StructuredArrow.toCostructuredArrow_obj\", \"CategoryTheory.TwoSquare.structuredArrowRightwardsOpEquivalence.functor_obj_left_right\", \"CategoryTheory.TwoSquare.structuredArrowRightwardsOpEquivalence_functor\", \"CategoryTheory.Square.IsPushout.op\"], \"digest\": \"c80e735614dc936b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and inspected Mathlib/CategoryTheory/Limits/Final.lean:120-165, CategoryTheory/Elements.lean:40-85, and AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-80. These concern ordinary categories or Kan-Quillen fibrations, not arbitrary quasicategorical twisted-arrow graph maps; the TwistedArrow Loogle and edgewise source grep have zero hits. Inherited searches already try alternative phrasings of this same item and are retained."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every functor of quasicategories the twisted arrow graph comparison into the mapping left fibration is coinitial",
+   "results": "{\"t\": \"2026-10-17T02:35:28Z\", \"tool\": \"leanfinder\", \"query\": \"For every functor of quasicategories the twisted arrow graph comparison into the mapping left fibration is coinitial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.initial_pre\", \"CategoryTheory.CostructuredArrow.initial_map₂_id\", \"CategoryTheory.CostructuredArrow.initial_post\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.CostructuredArrow.initial_proj_of_isCofiltered\", \"CategoryTheory.TwoSquare.instFinalCostructuredArrowObjCostructuredArrowRightwardsOfGuitartExact\"], \"digest\": \"7aa7b586357f72ef\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and inspected Mathlib/CategoryTheory/Limits/Final.lean:120-165, CategoryTheory/Elements.lean:40-85, and AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-80. These concern ordinary categories or Kan-Quillen fibrations, not arbitrary quasicategorical twisted-arrow graph maps; the TwistedArrow Loogle and edgewise source grep have zero hits. Inherited searches already try alternative phrasings of this same item and are retained."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-diagram-coyoneda",
@@ -143,5 +293,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-twisted-arrow-graph-cofinality",
+  "worker": "stage1",
+  "summary": "Expanded the second map of Cisinski Proposition 5.6.9: construct and classify the graph pullback, identify its fixed-target fibers with opposite slices, prove the fiber restriction equivalences using normalized final-object colimits, and apply one new generic fiberwise coinitiality theorem. Retained the full statement, all inherited searches and provenance; checked variance, naturality, universe bounds, edge cases, every citation, and avoided dependent cofinality lemmas that would close cycles.",
+  "blueprint": "Nearest ancestor prop-coef-integral-exceptional-adjoint, historical proof paragraph 2 (derived adjunction and inverse-limit calculation): foundations for its coherent-diagram rectification and co-Yoneda comparison. Current main-20261015 node order 2493 states the same adjunction and does not contain a separate twisted-arrow theorem. Steps 1-9 supply the graph-cofinality foundation without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent functor/cocone mapping-space calculus used to detect final objects and colimiting cocones; the present unit has no replacement for this foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-f888e37a0",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-f888e37a0 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-left-fibration-fiberwise-coinitiality, all nine cited statements, unit sk-prop-sf-biduality-general and the item's citer lem-coef-infinity-hom-bifunctor-functoriality. Cisinski (Prop 5.6.9, Lemma 5.6.7, Def 4.4.13) and HTT 4.1.1.8 are not archived; they are correctly listed as WANTED and the proof is marked agent. No SGA is cited. The item statement is unchanged. Variance tests: for A=pt, B=[1], f=1, kappa picks the initial id_1 in W_f, so kappa^op is final (kappa itself would not be). For A=[1], B=pt, kappa(a->a')=a' and both comma categories are contractible, so kappa is initial. A empty and f=id are trivial cases. Size holds because Tw(A)_n=A_{2n+1}. Steps 1, 3 and 4 are elementary and correct, including the pullback left fibration, the formula ((f s_-, s_+), f s) and the swapped square qh=(1 x f^op)p with fibers Tw(A)x_A{a} and Tw(B)x_B{f a}. Step 2 obtains the classifier from straightening, the block collapse and slice transport; the two-variable coherence is brief but sufficient, since the citer uses only the classifier value and action. Step 5 uses that identity edges are final in slices and that equivalences preserve final objects, so h_a^op(t_a)=t'_a exactly. Step 6 shows evaluation at the final vertex inverts the normalized colimit comparison, and restriction commutes with evaluation; no completeness assumption on E. Steps 7 and 8 apply the new lemma and the cone criterion. Step 9 shows strict naturality and factorization through the base pullback. The new lemma is true: in the ordinary case, cocartesian pushforward along (alpha,id) gives the fiber comma inclusion a left adjoint, so fiberwise initial implies initial, with matching variance. The node is self-contained and statement-only. It is not a duplicate of the local-fiber relative colimit test, the Grothendieck limits/colimits lemma, aspherical base change, the cartesian twisted resolution or the two cofinality criteria; the last two reach the item, so citing them would be cyclic. The graph is acyclic. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, the generic cone/mapping-space calculus, already used as a tool by other nodes in this unit. No fixes."
  }
 }
