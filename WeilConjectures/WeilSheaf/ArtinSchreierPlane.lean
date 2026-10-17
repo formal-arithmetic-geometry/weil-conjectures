@@ -65,7 +65,8 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀]
 
 local notation "S₀" => Spec (CommRingCat.of k₀)
 
-local notation "φ₀" => (Scheme.ΓSpecIso (CommRingCat.of k₀)).inv.hom
+local notation "φ₀" => CommRingCat.Hom.hom (Iso.inv (Scheme.ΓSpecIso (CommRingCat.of k₀)))
+
 
 section AffineSpace
 
@@ -193,8 +194,7 @@ lemma affineLine.linearForm_comp_artinSchreierMap (c : planeIndex → k₀) :
     appTop_appTop_of_comp_eq _ _ _ (AffineSpace.artinSchreierMap_over _ _ _) _
   rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, Scheme.Hom.comp_appTop,
     CommRingCat.comp_apply, affineLine.artinSchreierMap, AffineSpace.artinSchreierMap_appTop_coord,
-    map_sub, map_pow, affineLine.linearForm_appTop_coord, affineLine.linearForm_appTop_coord,
-    map_sum]
+    map_sub, map_pow, affineLine.linearForm_appTop_coord, map_sum]
   simp only [map_mul, hAS]
   rw [planeArtinSchreierMap]
   simp only [AffineSpace.artinSchreierMap_appTop_coord]
@@ -226,9 +226,11 @@ omit [Finite k₀] in
 lemma planeTranslation_add (a b : planeIndex → k₀) :
     (planeTranslation k₀ (a + b)).hom =
       (planeTranslation k₀ a).hom ≫ (planeTranslation k₀ b).hom := by
+  change AffineSpace.translation _ = AffineSpace.translation _ ≫ AffineSpace.translation _
   rw [← AffineSpace.translation_add]
-  simp only [planeTranslation, Pi.add_apply, map_add]
-  rfl
+  congr 1
+  ext i
+  simp
 
 /-- The translations by `k₀²` leave the Artin–Schreier map of the plane invariant. -/
 @[reassoc (attr := simp)]
@@ -264,8 +266,9 @@ lemma planeTranslation_comp_linearForm (a c : planeIndex → k₀) :
     CommRingCat.comp_apply, affineLine.linearForm_appTop_coord, affineLine.translation,
     AffineSpace.translation_appTop_coord, map_add, hL, affineLine.linearForm_appTop_coord,
     map_sum]
-  simp only [map_mul, hT, planeTranslation, AffineSpace.translation_appTop_coord, map_sum,
-    mul_add, Finset.sum_add_distrib]
+  simp only [map_mul, hT]
+  simp only [planeTranslation, AffineSpace.translation_appTop_coord, map_sum, map_mul, mul_add,
+    Finset.sum_add_distrib]
 
 /-- The Artin–Schreier map of the affine plane over `k₀` is a `k₀²`-torsor: the map
 `∐_{a ∈ k₀²} 𝔸² ⟶ 𝔸² ×_{AS} 𝔸²`, `(𝟙, x ↦ x + a)` on the summand indexed by `a`, is an
@@ -280,7 +283,9 @@ end Plane
 
 section Cover
 
-variable {k₀} {X : Scheme.{u}} [X.Over S₀]
+variable {k₀}
+
+variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 variable (k₀) in
 /-- The morphism `X ⟶ 𝔸²` over `k₀` defined by two global functions `f₁, f₂` on `X`. -/
@@ -304,7 +309,8 @@ lemma planeSection_comp_linearForm (f : planeIndex → Γ(X, ⊤)) (c : planeInd
     appTop_appTop_of_comp_eq _ _ _ (AffineSpace.homOfVector_over _ _) _
   rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, affineLine.linearForm_appTop_coord,
     affineLine.homOfSection, AffineSpace.homOfVector_appTop_coord, map_sum]
-  simp only [map_mul, hP, planeSection, AffineSpace.homOfVector_appTop_coord]
+  simp only [map_mul, hP]
+  simp only [planeSection, AffineSpace.homOfVector_appTop_coord]
 
 variable (k₀) in
 /-- The Artin–Schreier covering of `X` defined by two global functions `f₁, f₂`: the pullback
@@ -385,12 +391,13 @@ lemma artinSchreierPlaneCover.translation_add (f : planeIndex → Γ(X, ⊤))
   · change _ ≫ artinSchreierPlaneCover.coord f = _ ≫ artinSchreierPlaneCover.coord f
     simp [planeTranslation_add]
 
+variable (k₀) in
 /-- The Artin–Schreier covering `π : X' ⟶ X` is a `k₀²`-torsor, as a base change of the
 Artin–Schreier map of the plane (`AlgebraicGeometry.isTorsorSplit_planeArtinSchreierMap`). -/
 lemma isTorsorSplit_artinSchreierPlaneCover (f : planeIndex → Γ(X, ⊤)) :
-    ProEtale.IsTorsorSplit (artinSchreierPlaneCover.π f)
-      (artinSchreierPlaneCover.translation f)
-      (artinSchreierPlaneCover.translation_comp_π f) :=
+    ProEtale.IsTorsorSplit (artinSchreierPlaneCover.π (k₀ := k₀) f)
+      (artinSchreierPlaneCover.translation (k₀ := k₀) f)
+      (artinSchreierPlaneCover.translation_comp_π (k₀ := k₀) f) :=
   (isTorsorSplit_planeArtinSchreierMap k₀).of_isPullback'
     (IsPullback.of_hasPullback (planeSection k₀ f) (planeArtinSchreierMap k₀)).flip _ _
     (artinSchreierPlaneCover.translation_comp_coord f)

@@ -154,7 +154,22 @@ lemma ihomStr_evaluation {Z : Scheme.{u}} (b : Z ≅ Z) {A B : AdicSheaf l Z}
     ((ihomStr l b sA sB).hom.hom ⊗ₘ sA.hom.hom) ≫ Mod.evaluation A B =
       μ (b.inv)_*[WeilCoefficients.{u} l] ((AdicSheaf.ihom A).obj B).X A.X ≫
         (b.inv)_*[WeilCoefficients.{u} l].map (Mod.evaluation A B) ≫ sB.hom.hom := by
-  sorry
+  have : (Mod.mapModComap (G := (b.inv)_*[WeilCoefficients.{u} l])
+      (adicConstantSheafToLowerStar l b.inv)).IsEquivalence := isEquivalence_adicLowerStar l _
+  have h := Mod.μ_comp_map_evaluation (adicConstantSheafToLowerStar l b.inv)
+    (fun _ _ ↦ Functor.LaxBraided.braided _ _) A B
+  have hstr : (ihomStr l b sA sB).hom.hom =
+      ((adicLowerStarCompIhomIso l b.inv A).inv.app B).hom ≫
+      ((Mod.ihomMap sA.inv).app _).hom ≫ ((AdicSheaf.ihom A).map sB.hom).hom := rfl
+  have hφ : sA.hom.hom ≫ sA.inv.hom = 𝟙 _ := by
+    rw [← Mod.comp_hom', Iso.hom_inv_id, Mod.id_hom']
+  rw [hstr, tensorHom_def', comp_whiskerRight, comp_whiskerRight]
+  simp only [Category.assoc]
+  rw [Mod.evaluation_naturality A sB.hom, Mod.evaluation_ihomMap_assoc sA.inv]
+  erw [← whisker_exchange_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc, hφ,
+    MonoidalCategory.whiskerLeft_id, Category.id_comp]
+  erw [reassoc_of% h]
+  rfl
 
 variable (l c) in
 /-- The structure isomorphism `(a⁻¹)_* j^* M ≅ j^* M` induced by `(b⁻¹)_* M ≅ M` along the
@@ -168,7 +183,8 @@ lemma upperStarStr_hom_hom {M : AdicSheaf l Y} (sM : (b.inv)_*ᵃ[l].obj M ≅ M
     (upperStarStr l c sM).hom.hom =
       (upperStarExchangeIso (WeilCoefficients.{u} l) j a b c).hom.app M.X ≫
         (j)^*[WeilCoefficients.{u} l].map sM.hom.hom := by
-  sorry
+  rw [Iso.trans_hom, Mod.comp_hom', Iso.app_hom, adicUpperStarExchangeIso_hom_app_hom,
+    Functor.mapIso_hom, adicUpperStar_map_hom]
 
 /-- **Pullbacks of compatible pairings are compatible.** -/
 theorem upperStarStr_pairing {P Q R : AdicSheaf l Y} (sP : (b.inv)_*ᵃ[l].obj P ≅ P)
@@ -181,6 +197,36 @@ theorem upperStarStr_pairing {P Q R : AdicSheaf l Y} (sP : (b.inv)_*ᵃ[l].obj P
       μ (a.inv)_*[WeilCoefficients.{u} l] ((j)^*[_].obj P.X) ((j)^*[_].obj Q.X) ≫
         (a.inv)_*[_].map (μ (j)^*[WeilCoefficients.{u} l] P.X Q.X ≫ (j)^*[_].map e) ≫
           (upperStarStr l c sR).hom.hom := by
-  sorry
+  have hψ := NatTrans.IsMonoidal.tensor
+    (τ := (upperStarExchangeIso (WeilCoefficients.{u} l) j a b c).hom) P.X Q.X
+  have nψ := (upperStarExchangeIso (WeilCoefficients.{u} l) j a b c).hom.naturality e
+  simp only [Functor.LaxMonoidal.comp_μ, Functor.comp_map, Functor.comp_obj] at hψ nψ
+  rw [upperStarStr_hom_hom, upperStarStr_hom_hom, upperStarStr_hom_hom,
+    ← tensorHom_comp_tensorHom_assoc, μ_natural_assoc, ← Functor.map_comp, h]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← reassoc_of% hψ, reassoc_of% nψ]
+
+/-- **The comparison `j^* 𝓗om(A, B) ⟶ 𝓗om(j^* A, j^* B)` is compatible with the structure
+isomorphisms** induced by `(b⁻¹)_* A ≅ A` and `(b⁻¹)_* B ≅ B`. -/
+theorem adicUpperStarIhomComparison_str {A B : AdicSheaf l Y} (sA : (b.inv)_*ᵃ[l].obj A ≅ A)
+    (sB : (b.inv)_*ᵃ[l].obj B ≅ B) :
+    (a.inv)_*ᵃ[l].map (adicUpperStarIhomComparison l j A B) ≫
+        (ihomStr l a (upperStarStr l c sA) (upperStarStr l c sB)).hom =
+      (upperStarStr l c (ihomStr l b sA sB)).hom ≫ adicUpperStarIhomComparison l j A B := by
+  apply Mod.hom_ext
+  rw [Mod.comp_hom', Mod.comp_hom', adicLowerStar_map_hom]
+  apply Mod.hom_ext_of_evaluation
+  have : IsIso (upperStarStr l c sA).hom.hom :=
+    inferInstanceAs (IsIso ((Mod.forget _).map (upperStarStr l c sA).hom))
+  rw [← cancel_epi (_ ◁ (upperStarStr l c sA).hom.hom)]
+  have h1 := ihomStr_evaluation a (upperStarStr l c sA) (upperStarStr l c sB)
+  have h2 := upperStarStr_pairing (c := c) (ihomStr l b sA sB) sA sB (Mod.evaluation A B)
+    (ihomStr_evaluation b sA sB)
+  have h3 := uncurryHom_adicUpperStarIhomComparison j A B
+  rw [Mod.uncurryHom] at h3
+  rw [comp_whiskerRight, comp_whiskerRight, Category.assoc]
+  erw [← whisker_exchange_assoc, ← tensorHom_def'_assoc, h1, ← tensorHom_def'_assoc]
+  erw [μ_natural_left_assoc, ← Functor.map_comp, h3, h3]
+  exact h2.symm
 
 end AlgebraicGeometry.ProEtale

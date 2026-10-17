@@ -6,6 +6,11 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.Fourier
+public import WeilConjectures.WeilSheaf.LowerStarComp
+public import WeilConjectures.WeilSheaf.LowerStarId
+public import WeilConjectures.WeilSheaf.UpperStarId
+public import WeilConjectures.WeilSheaf.UpperStarExact
+public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 
 /-!
 # The Artin–Schreier sheaf of the inverse character
@@ -47,11 +52,11 @@ noncomputable def lowerStarDeckAction {X Y : Scheme.{u}} (g : X ⟶ Y) (σ : X �
     (lowerStarCongr _ hσ).hom.app (adicConstantSheaf l X)
 
 /-- A variant of `AlgebraicGeometry.ProEtale.lowerStar_map_deckAction_comp_lowerStarExchange`:
-if `σ ≫ a = a ≫ σ'`, the exchange morphism of `(a, b)` intertwines the actions of `σ` and `σ'`.
+if `a ≫ σ = σ' ≫ a`, the exchange morphism of `(a, b)` intertwines the actions of `σ` and `σ'`.
 -/
 lemma lowerStar_map_lowerStarDeckAction_comp_lowerStarExchangeStr {X Y : Scheme.{u}}
     (g : X ⟶ Y) (a : X ≅ X) (b : Y ≅ Y) (σ σ' : X ≅ X) (hg : g ≫ b.inv = a.inv ≫ g)
-    (hσ : σ.hom ≫ g = g) (hσ' : σ'.hom ≫ g = g) (hσa : σ.hom ≫ a.hom = a.hom ≫ σ'.hom) :
+    (hσ : σ.hom ≫ g = g) (hσ' : σ'.hom ≫ g = g) (hσa : a.hom ≫ σ.hom = σ'.hom ≫ a.hom) :
     (b.inv)_*[WeilCoefficients.{u} l].map (lowerStarDeckAction (l := l) g σ hσ) ≫
         lowerStarExchangeStr g a b hg =
       lowerStarExchangeStr g a b hg ≫ lowerStarDeckAction g σ' hσ' := by
@@ -78,7 +83,7 @@ lemma lowerStar_map_lowerStarDeckAction_comp_lowerStarExchangeStr {X Y : Scheme.
       simp only [pullback.lift_fst]
       exact Category.id_comp _
     · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
-        MorphismProperty.Over.mk, reassoc_of% hσa, hσ]
+        MorphismProperty.Over.mk, ← reassoc_of% hσa, hσ]
   · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
       MorphismProperty.Over.mk, hσa]
 
@@ -166,14 +171,6 @@ lemma affineLine.smul_comp_artinSchreierMap (c : k₀) :
   ring
 
 omit [Finite k₀] in
-/-- Base change to `k̄` of equal morphisms over `k₀`. -/
-lemma affineLine.geometricFiberMap_congr {φ ψ : affineLine k₀ ⟶ affineLine k₀}
-    (h : φ = ψ) (hφ : φ ≫ (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) = _)
-    (hψ : ψ ≫ (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) = _) :
-    Scheme.Hom.geometricFiberMap φ hφ = Scheme.Hom.geometricFiberMap ψ hψ := by
-  subst h
-  rfl
-
 /-- The reflection `x ↦ -x` of the geometric affine line, an involution. -/
 noncomputable def affineLine.geometricNegIso :
     (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅
@@ -181,14 +178,15 @@ noncomputable def affineLine.geometricNegIso :
   hom := Scheme.Hom.geometricFiberMap (affineLine.smul k₀ (-1)) (comp_over _ _)
   inv := Scheme.Hom.geometricFiberMap (affineLine.smul k₀ (-1)) (comp_over _ _)
   hom_inv_id := by
-    rw [← Scheme.Hom.geometricFiberMap_comp,
-      affineLine.geometricFiberMap_congr k₀ (affineLine.smul_neg_one_comp_smul_neg_one k₀) _
-        (Category.id_comp _), Scheme.Hom.geometricFiberMap_id]
+    rw [← Scheme.Hom.geometricFiberMap_comp, ← Scheme.Hom.geometricFiberMap_id]
+    congr 1
+    exact affineLine.smul_neg_one_comp_smul_neg_one k₀
   inv_hom_id := by
-    rw [← Scheme.Hom.geometricFiberMap_comp,
-      affineLine.geometricFiberMap_congr k₀ (affineLine.smul_neg_one_comp_smul_neg_one k₀) _
-        (Category.id_comp _), Scheme.Hom.geometricFiberMap_id]
+    rw [← Scheme.Hom.geometricFiberMap_comp, ← Scheme.Hom.geometricFiberMap_id]
+    congr 1
+    exact affineLine.smul_neg_one_comp_smul_neg_one k₀
 
+omit [Finite k₀] in
 lemma affineLine.geometricNegIso_inv :
     (affineLine.geometricNegIso k₀).inv = (affineLine.geometricNegIso k₀).hom :=
   rfl
@@ -199,17 +197,18 @@ lemma affineLine.geometricArtinSchreierMap_comp_geometricNegIso :
       (affineLine.geometricNegIso k₀).inv ≫ affineLine.geometricArtinSchreierMap k₀ := by
   simp only [affineLine.geometricNegIso, affineLine.geometricArtinSchreierMap]
   rw [← Scheme.Hom.geometricFiberMap_comp, ← Scheme.Hom.geometricFiberMap_comp]
-  exact affineLine.geometricFiberMap_congr k₀
-    (affineLine.smul_comp_artinSchreierMap k₀ (-1)).symm _ _
+  congr 1
+  exact (affineLine.smul_comp_artinSchreierMap k₀ (-1)).symm
 
-/-- The base change of `σ_c ≫ [-1] = [-1] ≫ σ_{-c}`. -/
-lemma affineLine.geometricTranslationIso_comp_geometricNegIso (c : k₀) :
-    (affineLine.geometricTranslationIso k₀ c).hom ≫ (affineLine.geometricNegIso k₀).hom =
-      (affineLine.geometricNegIso k₀).hom ≫ (affineLine.geometricTranslationIso k₀ (-c)).hom := by
+omit [Finite k₀] in
+/-- The base change of `[-1] ≫ σ_c = σ_{-c} ≫ [-1]`. -/
+lemma affineLine.geometricNegIso_comp_geometricTranslationIso (c : k₀) :
+    (affineLine.geometricNegIso k₀).hom ≫ (affineLine.geometricTranslationIso k₀ c).hom =
+      (affineLine.geometricTranslationIso k₀ (-c)).hom ≫ (affineLine.geometricNegIso k₀).hom := by
   simp only [affineLine.geometricNegIso, affineLine.geometricTranslationIso]
   rw [← Scheme.Hom.geometricFiberMap_comp, ← Scheme.Hom.geometricFiberMap_comp]
-  refine affineLine.geometricFiberMap_congr k₀ ?_ _ _
-  rw [affineLine.translation_comp_smul, neg_one_mul]
+  congr 1
+  rw [affineLine.translation_comp_smul, neg_one_mul, neg_neg]
 
 /-- The reflection of the geometric affine line commutes with the geometric Frobenius. -/
 lemma affineLine.geometricNegIso_inv_comp_frobenius_inv :
@@ -264,5 +263,188 @@ instance : IsIso (affineLine.artinSchreierNegModHom k₀ l) := by
   infer_instance
 
 end Neg
+
+end AlgebraicGeometry
+
+namespace AlgebraicGeometry
+
+open scoped ProEtale
+
+section NegWeil
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+
+local notation "ĀS" => affineLine.geometricArtinSchreierMap k₀
+
+example : QuasiCompact (affineLine.smul k₀ (-1)) := inferInstance
+example : QuasiSeparated (affineLine.smul k₀ (-1)) := inferInstance
+example : LocallyOfFiniteType (affineLine.smul k₀ (-1)) := inferInstance
+
+omit [Fact (ringChar k₀ ≠ l)] in
+lemma affineLine.artinSchreierPushforward_str_hom_hom_eq :
+    (WeilSheaf.artinSchreierPushforward k₀ l).obj.obj.str.hom =
+      ProEtale.lowerStarExchangeStr ĀS
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+        (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) :=
+  artinSchreierPushforward_str_hom_hom
+
+variable (k₀ l) in
+/-- The action of the reflection `x ↦ -x` on `AS_* ℚ̄_ℓ`, as a morphism of Weil sheaves
+`[-1]_* AS_* ℚ̄_ℓ ⟶ AS_* ℚ̄_ℓ`: it commutes with the Weil structures, the reflection being
+defined over `k₀`. -/
+noncomputable def WeilSheaf.artinSchreierNegHom :
+    (WeilSheaf.lowerStar (affineLine.smul k₀ (-1))).obj
+        (WeilSheaf.artinSchreierPushforward k₀ l) ⟶ WeilSheaf.artinSchreierPushforward k₀ l :=
+  ObjectProperty.homMk (ObjectProperty.homMk ⟨affineLine.artinSchreierNegModHom k₀ l, by
+    refine Mod.hom_ext _ _ ?_
+    rw [Mod.comp_hom', Mod.comp_hom', ProEtale.adicLowerStar_map_hom,
+      affineLine.artinSchreierNegModHom_hom, affineLine.artinSchreierPushforward_str_hom_hom_eq,
+      ← Endofunctor.IsoAlgebra.str_hom, WeilSheaf.lowerStar_obj_obj_str, Iso.trans_hom,
+      Mod.comp_hom', Functor.mapIso_hom, ProEtale.adicLowerStar_map_hom,
+      Endofunctor.IsoAlgebra.str_hom, affineLine.artinSchreierPushforward_str_hom_hom_eq,
+      ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso, Iso.app_hom, Iso.trans_hom,
+      Iso.trans_hom, NatTrans.comp_app, NatTrans.comp_app, Mod.comp_hom', Mod.comp_hom',
+      ProEtale.adicLowerStarComp_hom_app_hom, ProEtale.adicLowerStarCongr_hom_app_hom,
+      Iso.symm_hom, ProEtale.adicLowerStarComp_inv_app_hom]
+    have h := ProEtale.lowerStarExchangeStr_comm (l := l) ĀS (affineLine.geometricNegIso k₀)
+      (affineLine.geometricNegIso k₀)
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+      (affineLine.geometricArtinSchreierMap_comp_geometricNegIso k₀)
+      (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _)
+      (affineLine.geometricNegIso_inv_comp_frobenius_inv k₀)
+      (affineLine.geometricNegIso_inv_comp_frobenius_inv k₀)
+    simp only [Iso.trans_hom, Iso.app_hom, NatTrans.comp_app, Iso.symm_hom,
+      Category.assoc] at h ⊢
+    exact h⟩)
+
+end NegWeil
+
+end AlgebraicGeometry
+
+namespace CategoryTheory
+
+/-- The images of two endomorphisms conjugate under an isomorphism are isomorphic. -/
+theorem nonempty_iso_image_of_comp_eq {C : Type*} [Category* C] [Abelian C] {A B : C}
+    (e : A ≅ B) (f : A ⟶ A) (g : B ⟶ B) (h : f ≫ e.hom = e.hom ≫ g) :
+    Nonempty (Limits.image f ≅ Limits.image g) := by
+  have hg : (e.inv ≫ Limits.factorThruImage f) ≫ (Limits.image.ι f ≫ e.hom) = g := by
+    rw [Category.assoc, Limits.image.fac_assoc, h, Iso.inv_hom_id_assoc]
+  have : StrongEpi (e.inv ≫ Limits.factorThruImage f) := strongEpi_of_epi _
+  exact ⟨Limits.image.isoStrongEpiMono _ _ hg⟩
+
+end CategoryTheory
+
+namespace AlgebraicGeometry
+
+open scoped ProEtale
+
+section NegWeil2
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+
+local notation "ĀS" => affineLine.geometricArtinSchreierMap k₀
+
+/-- Morphisms of Weil sheaves agree if their underlying morphisms of sheaves of modules do. -/
+lemma WeilSheaf.hom_ext_of_hom_hom_f {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+    {F G : WeilSheaf k₀ l X} {f g : F ⟶ G} (h : f.hom.hom.f = g.hom.hom.f) : f = g :=
+  ObjectProperty.hom_ext _ (ObjectProperty.hom_ext _ (Endofunctor.Algebra.Hom.ext h))
+
+/-- The reflection conjugates the translation `σ_c` into `σ_{-c}`. -/
+lemma WeilSheaf.lowerStar_map_artinSchreierTranslationAction_comp_artinSchreierNegHom (c : k₀) :
+    (WeilSheaf.lowerStar (affineLine.smul k₀ (-1))).map
+        (WeilSheaf.artinSchreierTranslationAction l c) ≫ WeilSheaf.artinSchreierNegHom k₀ l =
+      WeilSheaf.artinSchreierNegHom k₀ l ≫ WeilSheaf.artinSchreierTranslationAction l (-c) := by
+  refine WeilSheaf.hom_ext_of_hom_hom_f (Mod.hom_ext _ _ ?_)
+  exact ProEtale.lowerStar_map_lowerStarDeckAction_comp_lowerStarExchangeStr ĀS
+    (affineLine.geometricNegIso k₀) (affineLine.geometricNegIso k₀)
+    (affineLine.geometricTranslationIso k₀ c) (affineLine.geometricTranslationIso k₀ (-c))
+    (affineLine.geometricArtinSchreierMap_comp_geometricNegIso k₀)
+    (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c)
+    (affineLine.geometricTranslation_comp_artinSchreierMap k₀ (-c))
+    (affineLine.geometricNegIso_comp_geometricTranslationIso k₀ c)
+
+/-- The reflection commutes with the multiplication by scalars. -/
+lemma WeilSheaf.lowerStar_map_smulEnd_comp_artinSchreierNegHom (b : PadicAlgCl l) :
+    (WeilSheaf.lowerStar (affineLine.smul k₀ (-1))).map
+        (WeilSheaf.smulEnd b (WeilSheaf.artinSchreierPushforward k₀ l)) ≫
+        WeilSheaf.artinSchreierNegHom k₀ l =
+      WeilSheaf.artinSchreierNegHom k₀ l ≫
+        WeilSheaf.smulEnd b (WeilSheaf.artinSchreierPushforward k₀ l) := by
+  refine WeilSheaf.hom_ext_of_hom_hom_f ?_
+  exact (congrArg (· ≫ affineLine.artinSchreierNegModHom k₀ l)
+    (ProEtale.AdicSheaf.adicLowerStar_map_smul _ _ _)).trans (ProEtale.AdicSheaf.smul_comp _ _)
+
+/-- The reflection carries the projector `e_ψ` to `e_{ψ⁻¹}`. -/
+lemma WeilSheaf.lowerStar_map_artinSchreierIdempotent_comp_artinSchreierNegHom
+    (ψ : AddChar k₀ (PadicAlgCl l)) :
+    (WeilSheaf.lowerStar (affineLine.smul k₀ (-1))).map (WeilSheaf.artinSchreierIdempotent ψ) ≫
+        WeilSheaf.artinSchreierNegHom k₀ l =
+      WeilSheaf.artinSchreierNegHom k₀ l ≫ WeilSheaf.artinSchreierIdempotent ψ⁻¹ := by
+  let := Fintype.ofFinite k₀
+  simp only [WeilSheaf.artinSchreierIdempotent, Functor.map_sum, Functor.map_comp,
+    Preadditive.sum_comp, Preadditive.comp_sum, Category.assoc,
+    WeilSheaf.lowerStar_map_artinSchreierTranslationAction_comp_artinSchreierNegHom,
+    reassoc_of% WeilSheaf.lowerStar_map_smulEnd_comp_artinSchreierNegHom]
+  refine Fintype.sum_equiv (Equiv.neg k₀) _ _ fun c ↦ ?_
+  rw [Equiv.neg_apply, neg_neg, AddChar.inv_apply]
+
+instance : IsIso (WeilSheaf.artinSchreierNegHom k₀ l) := by
+  have : IsIso (WeilSheaf.artinSchreierNegHom k₀ l).hom.hom.f :=
+    inferInstanceAs (IsIso (affineLine.artinSchreierNegModHom k₀ l))
+  exact WeilSheaf.isIso_of_isIso_hom_hom_f _
+
+/-- The pushforward of pro-étale Weil sheaves along equal morphisms. -/
+noncomputable def ProEtaleWeilSheaf.lowerStarIsoOfEq {X Y : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] {φ φ' : X ⟶ Y}
+    [φ.IsOver (Spec (CommRingCat.of k₀))] [φ'.IsOver (Spec (CommRingCat.of k₀))] (h : φ = φ') :
+    ProEtaleWeilSheaf.lowerStar k₀ l φ ≅ ProEtaleWeilSheaf.lowerStar k₀ l φ' := by
+  subst h
+  exact Iso.refl _
+
+variable (k₀ l) in
+/-- The pushforward along the reflection `x ↦ -x` is an involution. -/
+noncomputable def WeilSheaf.lowerStarNegCompIso :
+    WeilSheaf.lowerStar (k₀ := k₀) (l := l) (affineLine.smul k₀ (-1)) ⋙
+      WeilSheaf.lowerStar (affineLine.smul k₀ (-1)) ≅ 𝟭 _ :=
+  ((WeilSheaf.objectProperty k₀ l (affineLine k₀)).fullyFaithfulι.whiskeringRight _).preimageIso
+    (Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _) _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (ProEtaleWeilSheaf.lowerStarCompIso k₀ l _ _ ≪≫
+        ProEtaleWeilSheaf.lowerStarIsoOfEq (affineLine.smul_neg_one_comp_smul_neg_one k₀) ≪≫
+        ProEtaleWeilSheaf.lowerStarIdIso k₀ l (affineLine k₀)) ≪≫
+      Functor.rightUnitor _ ≪≫ (Functor.leftUnitor _).symm)
+
+variable (k₀ l) in
+/-- The pullback along the reflection `x ↦ -x` is the pushforward along it, the reflection being
+an involution. -/
+noncomputable def WeilSheaf.upperStarNegIsoLowerStarNeg :
+    WeilSheaf.upperStar (k₀ := k₀) (l := l) (affineLine.smul k₀ (-1)) ≅
+      WeilSheaf.lowerStar (affineLine.smul k₀ (-1)) :=
+  (WeilSheaf.upperStarLowerStarAdjunction (affineLine.smul k₀ (-1))).leftAdjointUniq
+    (Equivalence.mk _ _ (WeilSheaf.lowerStarNegCompIso k₀ l).symm
+      (WeilSheaf.lowerStarNegCompIso k₀ l)).toAdjunction
+
+/-- Blueprint `lem-fd-as-characters`: the pullback of `ℒ_ψ` along the reflection `x ↦ -x` is
+`ℒ_{ψ⁻¹}`, i.e. `ℒ_{ψ⁻¹} ≅ ℒ_{ψ(-x)}`. -/
+theorem nonempty_iso_artinSchreier_inv_one (ψ : AddChar k₀ (PadicAlgCl l)) :
+    Nonempty (artinSchreier ψ⁻¹ 1 ≅ artinSchreier ψ (-1)) := by
+  obtain ⟨i₁⟩ := nonempty_iso_image_of_comp_eq
+    ((WeilSheaf.upperStarNegIsoLowerStarNeg k₀ l).app _)
+    ((WeilSheaf.upperStar (affineLine.smul k₀ (-1))).map (WeilSheaf.artinSchreierIdempotent ψ))
+    _ ((WeilSheaf.upperStarNegIsoLowerStarNeg k₀ l).hom.naturality _)
+  obtain ⟨i₂⟩ := nonempty_iso_image_of_comp_eq (asIso (WeilSheaf.artinSchreierNegHom k₀ l)) _ _
+    (WeilSheaf.lowerStar_map_artinSchreierIdempotent_comp_artinSchreierNegHom ψ)
+  let Φ := WeilSheaf.upperStar (k₀ := k₀) (l := l) (affineLine.smul k₀ (-1))
+  exact ⟨(WeilSheaf.upperStarCongrIso (affineLine.smul_one k₀)).app _ ≪≫
+    (WeilSheaf.upperStarIdIso _).app _ ≪≫ i₂.symm ≪≫ i₁.symm ≪≫
+    (Φ.mapIso (Abelian.imageIsoImage _).symm ≪≫ Abelian.PreservesImage.iso Φ _ ≪≫
+      Abelian.imageIsoImage _).symm⟩
+
+end NegWeil2
 
 end AlgebraicGeometry
