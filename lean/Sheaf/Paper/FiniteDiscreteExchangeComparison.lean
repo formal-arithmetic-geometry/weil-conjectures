@@ -137,6 +137,8 @@ theorem finiteDiscreteExchange_comparison
     (sq : CommSq g' f' f g)
     (N : ProEtale.BoundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj.{u} B) X)) :
+    haveI : IsFinitenessCoefficient ℓ (Profinite.continuousMapRingObj.{u} B) :=
+      .torsion B 1 (by rw [pow_one]; exact hB)
     ∃ (F : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology
           (ModuleCat.{u + 1} (ULift.{u + 1} B))) ⥤
         DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y') Ab.{u + 1})
@@ -146,6 +148,8 @@ theorem finiteDiscreteExchange_comparison
       Nonempty (Arrow.mk ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj.{u} B) ℓ (sq.asOver (Spec (.of k)))).app N).hom ≅
         Arrow.mk (F.map ((Etale.baseChange
           (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq).app L))) := by
+  have : IsFinitenessCoefficient ℓ (Profinite.continuousMapRingObj.{u} B) :=
+    .torsion B 1 (by rw [pow_one]; exact hB)
   obtain ⟨F0, cs, hfull, htri, hsingle, F1, hsteps⟩ :=
     finiteDiscreteExchange_stepRealization B ℓ k hB sq (fun T ↦ by
       have : ((Scheme.ProEt.topology T).W (A := Ab.{u + 1})).IsMonoidal :=

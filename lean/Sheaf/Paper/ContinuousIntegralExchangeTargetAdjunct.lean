@@ -160,6 +160,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+  [FiniteDimensional ℚ_[ℓ] E]
   (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
@@ -178,7 +179,7 @@ variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))
 
 private lemma bounded_counit_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ]
+    [MonObj Λ] [IsCommMonObj Λ] [IsFinitenessCoefficient ℓ Λ]
     {T U : Scheme.{u}} [T.Over (Spec (.of k))] [U.Over (Spec (.of k))]
     [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
     [IsSeparated (T ↘ Spec (.of k))]
@@ -239,6 +240,7 @@ private lemma integralPull_counit
         (derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) h)
         (derivedComapLowerStarIso (integralScalarMap ℓ E) h) K.obj
 
+omit [FiniteDimensional ℚ_[ℓ] E] in
 private lemma integralPull_naturality
     {T U : Scheme.{u}} [T.Over (Spec (.of k))] [U.Over (Spec (.of k))]
     [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
@@ -255,6 +257,7 @@ private lemma integralPull_naturality
   apply ObjectProperty.hom_ext
   exact (derivedPullIso (integralScalarMap ℓ E) h).hom.naturality v.hom
 
+omit [FiniteDimensional ℚ_[ℓ] E] in
 private lemma integralPull_inv_naturality
     {T U : Scheme.{u}} [T.Over (Spec (.of k))] [U.Over (Spec (.of k))]
     [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
@@ -271,6 +274,7 @@ private lemma integralPull_inv_naturality
   apply ObjectProperty.hom_ext
   exact (derivedPullIso (integralScalarMap ℓ E) h).inv.naturality v.hom
 
+omit [FiniteDimensional ℚ_[ℓ] E] in
 private lemma integralPull_eq
     {T U : Scheme.{u}} [T.Over (Spec (.of k))] [U.Over (Spec (.of k))]
     [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
@@ -299,6 +303,7 @@ attribute [local irreducible] integralScalarConstructible
   integralConstructiblePullIso
   boundedConstructibleUpperStar boundedConstructibleLowerStar
 
+omit [FiniteDimensional ℚ_[ℓ] E] in
 private lemma integralPull_square_cube_iso
     (sq : CommSq g' f' f g) (M : integralConstructible ℓ E Y) :
     (integralScalarConstructible ℓ E X').mapIso
@@ -333,6 +338,7 @@ private lemma integralPull_square_cube_iso
       _ _ _ _ _ _ h₁ h₂ he
 
 
+omit [FiniteDimensional ℚ_[ℓ] E] in
 private lemma integralPull_square_cube
     (sq : CommSq g' f' f g) (M : integralConstructible ℓ E Y) :
     scalarMap (integralScalarConstructible ℓ E X')
@@ -351,6 +357,7 @@ private lemma integralPull_square_cube
     integralConstructiblePullHom, scalarMap] using
     congrArg Iso.hom (integralPull_square_cube_iso ℓ E k f g f' g' sq M)
 
+omit [FiniteDimensional ℚ_[ℓ] E] in
 private lemma integralPull_square
     (sq : CommSq g' f' f g) (M : integralConstructible ℓ E Y) :
     (integralConstructiblePullIso ℓ E k f'
@@ -380,7 +387,7 @@ attribute [local irreducible] Adjunction.homEquiv
   boundedConstructibleUpperStarLowerStarAdjunction
 private lemma boundedBaseChange_adjunct
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ]
+    [MonObj Λ] [IsCommMonObj Λ] [IsFinitenessCoefficient ℓ Λ]
     (sq : CommSq g' f' f g)
     (K : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :
     ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (f'.asOver (Spec (.of k)))).homEquiv

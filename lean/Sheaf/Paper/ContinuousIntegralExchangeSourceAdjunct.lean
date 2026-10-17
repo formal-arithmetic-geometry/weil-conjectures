@@ -65,6 +65,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+  [FiniteDimensional ℚ_[ℓ] E]
   (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
@@ -82,7 +83,7 @@ variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))
   [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
 private lemma baseChange_adjunct
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] [IsFinitenessCoefficient ℓ Λ]
     (sq : CommSq g' f' f g) (N : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :
     (boundedConstructibleUpperStar Λ ℓ (f'.asOver (Spec (.of k)))).map
         ((boundedConstructibleBaseChange Λ ℓ (sq.asOver (Spec (.of k)))).app N) ≫
@@ -95,7 +96,7 @@ private lemma baseChange_adjunct
   exact boundedConstructibleBaseChange_adjunct Λ ℓ (sq.asOver (Spec (.of k))) N
 
 private lemma bounded_counit_hom
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] [IsFinitenessCoefficient ℓ Λ]
     (K : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :
     ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (f.asOver (Spec (.of k)))).counit.app K).hom =
       (derivedUpperStarLowerStarAdjunction Λ f).counit.app K.obj := by

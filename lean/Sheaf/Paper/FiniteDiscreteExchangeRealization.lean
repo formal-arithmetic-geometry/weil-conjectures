@@ -72,6 +72,8 @@ theorem finiteDiscreteExchange_stepRealization [DiscreteTopology B] [Finite B]
             (Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
               ((Functor.const T.ProEtᵒᵖ).obj
               (RingCat.of (ULift.{u + 1} B) : RingCat.{u + 1}))))) :
+    haveI : IsFinitenessCoefficient ℓ (Profinite.continuousMapRingObj.{u} B) :=
+      .torsion B 1 (by rw [pow_one]; exact hB)
     ∃ F0 : FiniteDiscreteEtalePlus B X ⥤
         DerivedCategory (FiniteDiscreteInternalModules B X),
     ∃ cs : F0.CommShift ℤ,

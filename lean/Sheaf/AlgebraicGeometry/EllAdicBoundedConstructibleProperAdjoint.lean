@@ -49,6 +49,7 @@ so the functor in each case has the canonical coefficient multiplication require
 This theorem uses those inputs; it does not claim to prove their remaining geometric holes.
 -/
 theorem ellAdic_isLeftAdjoint_boundedConstructibleLowerStar [IsProper g.left]
+    [IsFinitenessCoefficient ℓ Λ]
     (hΛ : IsEllAdicCoefficient ℓ Λ inferInstance) :
     (boundedConstructibleLowerStar Λ ℓ g).IsLeftAdjoint := by
   cases hΛ with

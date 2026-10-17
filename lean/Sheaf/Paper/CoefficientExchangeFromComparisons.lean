@@ -64,7 +64,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 private lemma restricted_unit_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ]
+    [MonObj Λ] [IsCommMonObj Λ] [IsFinitenessCoefficient ℓ Λ]
     {T U : Scheme.{u}} [T.Over (Spec (.of k))] [U.Over (Spec (.of k))]
     [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
     [IsSeparated (T ↘ Spec (.of k))]
@@ -152,7 +152,7 @@ private lemma restricted_square_hom
 
 private lemma unit_step_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ]
+    [MonObj Λ] [IsCommMonObj Λ] [IsFinitenessCoefficient ℓ Λ]
     (K : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :
     ((coefficientExchangeUnitStep Λ ℓ
       (f.asOver (Spec (.of k))) (g.asOver (Spec (.of k)))
@@ -170,7 +170,7 @@ private lemma unit_step_hom
 
 private lemma square_step_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] (sq : CommSq g' f' f g)
+    [MonObj Λ] [IsCommMonObj Λ] [IsFinitenessCoefficient ℓ Λ] (sq : CommSq g' f' f g)
     (K : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :
     ((coefficientExchangeSquareStep Λ ℓ (sq.asOver (Spec (.of k)))).hom.app K).hom =
       (coefficientDerivedLowerStar Λ f').map
@@ -188,7 +188,7 @@ private lemma square_step_hom
 
 private lemma counit_step_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ]
+    [MonObj Λ] [IsCommMonObj Λ] [IsFinitenessCoefficient ℓ Λ]
     (K : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :
     ((coefficientExchangeCounitStep Λ ℓ
       (f.asOver (Spec (.of k))) (f'.asOver (Spec (.of k)))
@@ -255,8 +255,12 @@ theorem coefficientComparisonData_exchangeSteps [DiscreteTopology B] [Finite B]
     (F : ∀ T : Scheme.{u}, FiniteDiscreteEtalePlus B T ⥤
       DerivedCategory (FiniteDiscreteInternalModules B T))
     (P : CoefficientComparisonData B (Profinite.continuousMapRingObj B) F) :
+    haveI : IsFinitenessCoefficient ℓ (Profinite.continuousMapRingObj.{u} B) :=
+      .torsion B 1 (by rw [pow_one]; exact hB)
     finiteDiscreteExchangeSteps B ℓ k sq (F X) (F Y') := by
   have _hB := hB
+  have : IsFinitenessCoefficient ℓ (Profinite.continuousMapRingObj.{u} B) :=
+    .torsion B 1 (by rw [pow_one]; exact hB)
   intro L hL
   let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
   let : CompactSpace X' := QuasiCompact.compactSpace_of_compactSpace (X' ↘ Spec (.of k))

@@ -110,7 +110,7 @@ variable {X Y X' Y' : Over (Spec (.of k))}
 
 include ℓ k
 
-variable (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
+variable [IsFinitenessCoefficient ℓ Λ] (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
 
 /-- The *unit insertion* step of the base-change morphism on bounded constructible complexes:
 the natural transformation `Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lf'^* ∘ Lg^* ∘ Rf_*` obtained by inserting the
@@ -288,7 +288,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 /-- Compatibility with the three specified exchange steps for a pair of realization
 functors. Keeping the shared diagram in one definition fixes its coefficient and
 subcategory instances once for both the construction and its application. -/
-def finiteDiscreteExchangeSteps (sq : CommSq g' f' f g)
+def finiteDiscreteExchangeSteps [IsFinitenessCoefficient ℓ (Profinite.continuousMapRingObj.{u} B)]
+    (sq : CommSq g' f' f g)
     (F0 : FiniteDiscreteEtalePlus B X ⥤ DerivedCategory (FiniteDiscreteInternalModules B X))
     (F1 : FiniteDiscreteEtalePlus B Y' ⥤ DerivedCategory (FiniteDiscreteInternalModules B Y')) :
     Prop :=

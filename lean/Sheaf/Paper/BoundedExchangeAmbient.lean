@@ -72,7 +72,7 @@ theorem residueExchangeBaseChange_counit (sq : CommSq g' f' f g)
     (residueExchangeAdjunction Λ f')
     (TwoSquare.mk _ _ _ _ (residueExchangeSquare Λ sq).hom) K
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] [IsFinitenessCoefficient ℓ Λ] (k : Type u) [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
   [X'.Over (Spec (.of k))] [Y'.Over (Spec (.of k))]
@@ -106,6 +106,7 @@ private theorem bounded_counit_hom (K : ProEtale.BoundedConstructible
   simpa only [Category.id_comp] using h
 
 
+omit [IsFinitenessCoefficient ℓ Λ] in
 private theorem bounded_comp_hom {Z : Scheme.{u}} [Z.Over (Spec (.of k))]
     [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))]
     [IsSeparated (Z ↘ Spec (.of k))] (h : Y ⟶ Z) [h.IsOver (Spec (.of k))]
@@ -133,6 +134,7 @@ private theorem subcat_iso_inv {C : Type*} [Category C] {P : ObjectProperty C}
   rw [← h]
   exact ObjectProperty.isoHom_inv_id_hom e
 
+omit [IsFinitenessCoefficient ℓ Λ] in
 private theorem bounded_comp_inv_hom {Z : Scheme.{u}} [Z.Over (Spec (.of k))]
     [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))]
     [IsSeparated (Z ↘ Spec (.of k))] (h : Y ⟶ Z) [h.IsOver (Spec (.of k))]
@@ -142,6 +144,7 @@ private theorem bounded_comp_inv_hom {Z : Scheme.{u}} [Z.Over (Spec (.of k))]
   exact subcat_iso_inv ((boundedConstructibleUpperStarComp Λ ℓ (f.asOver (Spec (.of k))) (h.asOver (Spec (.of k)))).app K)
     ((residueExchangeUpperStarComp Λ f h).app K.obj) (bounded_comp_hom Λ ℓ k h K)
 
+omit [IsFinitenessCoefficient ℓ Λ] in
 private theorem bounded_transport_obj_hom
     (h i : X' ⟶ Y) [h.IsOver (Spec (.of k))] [i.IsOver (Spec (.of k))]
     (w : h = i)
@@ -154,6 +157,7 @@ private theorem bounded_transport_obj_hom
   cases w
   rfl
 
+omit [IsFinitenessCoefficient ℓ Λ] in
 private theorem bounded_square_hom (sq : CommSq g' f' f g)
     (K : ProEtale.BoundedConstructible (condensedRingObj Λ Y)) :
     ((boundedConstructiblePullbackSquareComparison Λ ℓ (sq.asOver (Spec (.of k)))).hom.app K).hom =

@@ -147,7 +147,7 @@
   "module": "Sheaf.Paper.CoefficientExchangeFromComparisons",
   "file": "lean/Sheaf/Paper/CoefficientExchangeFromComparisons.lean",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.coefficientComparisonData_exchangeSteps",
-  "statement": "theorem coefficientComparisonData_exchangeSteps [DiscreteTopology B] [Finite B]\n    (hB : (ℓ : B) = 0) (sq : CommSq g' f' f g)\n    (F : ∀ T : Scheme.{u}, FiniteDiscreteEtalePlus B T ⥤\n      DerivedCategory (FiniteDiscreteInternalModules B T))\n    (P : CoefficientComparisonData B (Profinite.continuousMapRingObj B) F) :\n    finiteDiscreteExchangeSteps B ℓ k sq (F X) (F Y')",
+  "statement": "theorem coefficientComparisonData_exchangeSteps [DiscreteTopology B] [Finite B]\n    (hB : (ℓ : B) = 0) (sq : CommSq g' f' f g)\n    (F : ∀ T : Scheme.{u}, FiniteDiscreteEtalePlus B T ⥤\n      DerivedCategory (FiniteDiscreteInternalModules B T))\n    (P : CoefficientComparisonData B (Profinite.continuousMapRingObj B) F) :\n    haveI : IsFinitenessCoefficient ℓ (Profinite.continuousMapRingObj.{u} B) :=\n      .torsion B 1 (by rw [pow_one]; exact hB)\n    finiteDiscreteExchangeSteps B ℓ k sq (F X) (F Y')",
   "branch": "sheaf-dag",
   "by": "H2",
   "date": "2026-10-16"

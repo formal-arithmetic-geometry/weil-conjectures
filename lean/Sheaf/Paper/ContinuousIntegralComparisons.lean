@@ -76,7 +76,7 @@ noncomputable def integralConstructiblePullHom (K : integralConstructible ℓ E 
 Source: ChangeOfCoefficients.lean, `derivedPushHom`, the mate of restriction/pushforward;
 Bhatt--Scholze, Remark 6.8.15
 (blueprint: def-weil-pbc-continuous-integral-comparisons). -/
-noncomputable def integralConstructiblePushHom (K : integralConstructible ℓ E T) :
+noncomputable def integralConstructiblePushHom [FiniteDimensional ℚ_[ℓ] E] (K : integralConstructible ℓ E T) :
     (integralScalarConstructible ℓ E U).obj
         ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (h.asOver (Spec (.of k)))).obj K) ⟶
       (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k)))).obj
@@ -105,7 +105,7 @@ variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))
 /-- The specified source comparison `S_K`: first the pull comparison for `g`, then the
 pullback of the push comparison for `f`. Source: Bhatt--Scholze, Remark 6.8.15
 (blueprint: def-weil-pbc-continuous-integral-comparisons). -/
-noncomputable def integralConstructibleSourceHom (K : integralConstructible ℓ E X) :
+noncomputable def integralConstructibleSourceHom [FiniteDimensional ℚ_[ℓ] E] (K : integralConstructible ℓ E X) :
     (integralScalarConstructible ℓ E Y').obj
         ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
           ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)) ⟶
@@ -120,7 +120,7 @@ noncomputable def integralConstructibleSourceHom (K : integralConstructible ℓ 
 /-- The specified target comparison `U_K`: first the push comparison for `f'`, then the
 pushforward of the pull comparison for `g'`. Source: Bhatt--Scholze, Remark 6.8.15
 (blueprint: def-weil-pbc-continuous-integral-comparisons). -/
-noncomputable def integralConstructibleTargetHom (K : integralConstructible ℓ E X) :
+noncomputable def integralConstructibleTargetHom [FiniteDimensional ℚ_[ℓ] E] (K : integralConstructible ℓ E X) :
     (integralScalarConstructible ℓ E Y').obj
         ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f'.asOver (Spec (.of k)))).obj
           ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj K)) ⟶

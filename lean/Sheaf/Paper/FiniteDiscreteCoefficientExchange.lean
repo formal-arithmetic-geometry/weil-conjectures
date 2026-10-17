@@ -109,6 +109,8 @@ theorem finiteDiscreteExchange_coefficientRealization [DiscreteTopology B] [Fini
             (Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
               ((Functor.const T.ProEtᵒᵖ).obj
               (RingCat.of (ULift.{u + 1} B) : RingCat.{u + 1}))))) :
+    haveI : IsFinitenessCoefficient ℓ (Profinite.continuousMapRingObj.{u} B) :=
+      .torsion B 1 (by rw [pow_one]; exact hB)
     ∃ (E0 : FiniteDiscreteProEtaleSheaves B X ≌ FiniteDiscreteInternalModules B X)
       (E1 : FiniteDiscreteProEtaleSheaves B Y' ≌ FiniteDiscreteInternalModules B Y'),
       (∀ M : FiniteDiscreteInternalModules B X,

@@ -20,7 +20,8 @@ theorem with its node, change records):
      (a stage-3 delivery claims proof progress);
   4. in the adopted source library (lean/WeilConjectures/): a changed statement, attributes or public imports, a removed or
      new public declaration, and a changed body of a non-theorem declaration (def, instance, ...) unless its upstream body
-     is exactly `sorry` (launcher, 2026-10-17: filling an upstream `sorry` body with the signature unchanged is allowed).
+     is exactly `sorry` (launcher, 2026-10-17: filling an upstream `sorry` body with the signature unchanged is allowed);
+     the corrections of false upstream statements listed in coord/upstream-statement-exceptions.tsv are allowed.
 The global build (tools/build.py) then enforces compile, the axiom probe (only propext, Classical.choice, Quot.sound;
 no sorryAx outside the declarations the landing may leave with sorry) and 60 s per file; a red build takes the
 delivery at fault out again (tools/batch_land.py triage).
@@ -35,6 +36,24 @@ import stage3_delivery as s3  # noqa: E402
 ROOT = s3.ROOT
 WIDE = int(os.environ.get("SHEAF_GATE_WIDE", "3"))      # modules using a changed declaration: a reader from this many
 _DMAP = {}
+EXCEPTIONS = pathlib.Path(ROOT) / "coord" / "upstream-statement-exceptions.tsv"
+
+
+def upstream_exceptions() -> dict[str, set[str]]:
+    """module -> the entries of coord/upstream-statement-exceptions.tsv for it (columns: module, entry, reason; an entry
+    is a declaration as the module writes it, `import <Module>` for a public import, or `(new module)`). These are the
+    corrections of false upstream statements that we make ourselves and send upstream as their own PR (the human,
+    2026-10-17); rule 4 below does not refuse them, and no reader is asked for them."""
+    out: dict[str, set[str]] = collections.defaultdict(set)
+    try:
+        lines = EXCEPTIONS.read_text(encoding="utf-8").splitlines()
+    except OSError:
+        return out
+    for line in lines:
+        f = line.split("\t")
+        if line.strip() and not line.startswith("#") and len(f) >= 2:
+            out[f[0].strip()].add(f[1].strip())
+    return out
 
 
 def declaration_map(base: str) -> dict[str, str]:
@@ -82,14 +101,19 @@ def gate(D: dict, group: str, item: str, graph=None, cycle_check: bool = True) -
     # the human, 2026-10-17 (upstream sync e47efb5a5): statements in the adopted source library stay verbatim; a
     # delivery may fill proof bodies of existing theorems there and add private helpers, nothing else
     UPNOTE = "upstream statements are verbatim; prove it or state the needed variant in a `Sheaf` module"
+    exc = upstream_exceptions()
     for m in D["modules"]:
         if not m["file"].startswith("lean/WeilConjectures/"):
             continue
         d = m["diff"]
+        ok = exc.get(m["module"], set())
         if m["role"] == "new" or m.get("old") is None:
-            refuse.append(f"{m['module']}: new module in the source library tree ({UPNOTE})"); continue
+            if "(new module)" not in ok:
+                refuse.append(f"{m['module']}: new module in the source library tree ({UPNOTE})")
+            continue
         bad = []
-        if d["statement_changed"]: bad.append("changes the statement of " + short(d["statement_changed"]))
+        changed = [k for k in d["statement_changed"] if k not in ok]
+        if changed: bad.append("changes the statement of " + short(changed))
         if d["removed"]: bad.append("removes " + short(d["removed"]))
         if d["public_added"]: bad.append("adds public declaration(s) " + short(d["public_added"]))
         # launcher, 2026-10-17: filling a body that is `sorry` upstream is allowed for any declaration (instance, def,
@@ -102,7 +126,8 @@ def gate(D: dict, group: str, item: str, graph=None, cycle_check: bool = True) -
         if attrs: bad.append("changes attributes of " + short(attrs))
         # a private `import Sheaf.*` is allowed: proofs of upstream sorries use our lemmas, and the integration agent sends
         # the imported modules upstream with the closer (human, 2026-10-17); public import changes stay refused below
-        if d["public_imports_changed"]: bad.append("changes public imports " + short(d["public_imports_changed"]))
+        imports = [i for i in d["public_imports_changed"] if f"import {i}" not in ok]
+        if imports: bad.append("changes public imports " + short(imports))
         if bad:
             refuse.append(f"{m['module']}: " + "; ".join(bad) + f" ({UPNOTE})")
     if new_sorry and not proved and after >= before:
@@ -120,7 +145,8 @@ def gate(D: dict, group: str, item: str, graph=None, cycle_check: bool = True) -
         if m["role"] == "new":
             continue
         d = m["diff"]
-        touched = [k for k in d["statement_changed"] + d["removed"] if not d["old"].get(k, {}).get("private")]
+        touched = [k for k in d["statement_changed"] + d["removed"] if not d["old"].get(k, {}).get("private")
+                   and k not in exc.get(m["module"], set())]
         if not touched:
             continue
         if dmap is None:
