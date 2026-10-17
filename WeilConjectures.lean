@@ -3743,6 +3743,7 @@ public import WeilConjectures.RingTheory.Flat.ShortExact
 public import WeilConjectures.RingTheory.FrobeniusForm
 public import WeilConjectures.RingTheory.GabberIntegralSectionFactor
 public import WeilConjectures.RingTheory.GenericConnectedness
+public import WeilConjectures.RingTheory.GenericEtale
 public import WeilConjectures.RingTheory.GenericIrreducibility
 public import WeilConjectures.RingTheory.GradedAlgebra.LinearPair
 public import WeilConjectures.RingTheory.GradedAlgebra.PowersAlgebra
