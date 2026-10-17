@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Specialize the proved generic derived_pull_comp calculation in ContinuousIntegralPullComposition to the flat condensed coefficient map E → PadicAlgCl ℓ. That calculation derives restriction/pushforward composition and conjugates through the scalar and geometric adjunctions, so it applies to this coefficient map independently of the integral specialization in that module. Apply Iso.ext and ObjectProperty.hom_ext. The private projection equations identify restricted scalar-extension and pullback maps and objects with their ambient derived counterparts. Use the proved bounded_comp_hom calculation to identify the bounded composition constraints. Evaluate the generic natural-transformation equality at K.obj, normalize the restricted functor projections, and use congruence to obtain qbarPullIso_comp.",
+   "text": "Specialize the proved generic derived_pull_comp calculation in ContinuousIntegralPullComposition to the flat condensed ring map E → PadicAlgCl ℓ. Apply Iso.ext and ObjectProperty.hom_ext, reduce restricted functor projections, and use the existing bounded_comp_hom equation for both coefficient rings. Evaluate derived_pull_comp at K.obj, simplify the identity associators, and normalize the scalar-functor and over-category projections. This proves qbarPullIso_comp with no new statement or hypothesis.",
    "uses": [
     "lem-weil-pbc-continuous-integral-pull-composition",
     "def-weil-pbc-qbar-condensed-comparisons",
@@ -29,14 +29,14 @@
    "elementary": true
   },
   {
-   "text": "Apply qbarPullIso_comp to g′ followed by f and to f′ followed by g. Use qbarPull_eq for sq.w.symm. Expand only the component API of boundedConstructiblePullbackSquareComparison into inverse composition, equality transport, and forward composition. Paste the three isomorphism equalities with the elementary mapped_iso_rectangle calculation already proved in ContinuousIntegralExchangeTargetAdjunct. This yields qbarPull_square_cube_iso.",
+   "text": "Apply qbarPullIso_comp to (g′,f) and (f′,g), and qbarPull_eq to sq.w.symm. The existing proved private mapped_iso_rectangle calculation, reused through import all of ContinuousIntegralExchangeTargetAdjunct, pastes these three equalities. Instantiate the existing boundedConstructiblePullbackSquareComparison_app API at E and Ω. Apply congrArg to these component equations under the two paths of the square, and compose the resulting equalities with the pasted rectangle equation. Using these explicit equalities avoids unfolding the full derived square construction during kernel comparison. This proves qbarPull_square_cube_iso.",
    "uses": [
     "def-weil-pbc-condensed-e-module-category"
    ],
    "elementary": true
   },
   {
-   "text": "Take hom components of the isomorphism equality. Cancel the isomorphism α_f′ on the left and the image of α_f on the right using the elementary inverse_mapped_square calculation, obtaining exactly the stated inverse-α_f′ orientation. This uses no exchange morphism, push comparison, properness, or Cartesianity.",
+   "text": "The elementary generic coefficientCube_of_iso lemma takes hom components of the pasted isomorphism equality and cancels the invertible α_f′ on the left and the image of α_f on the right using the existing proved private inverse_mapped_square from ContinuousIntegralExchangeTargetAdjunct. Its conclusion is the generic coefficientPullbackCube predicate, preserving that abstraction during the concrete specialization. Apply it to qbarPull_square_cube_iso to prove the original public statement without unfolding concrete category instances. The original hom-component helper qbarPull_square_cube is also proved. No exchange morphism, push comparison, properness or Cartesianity is used.",
    "uses": [],
    "elementary": true
   }
@@ -50,7 +50,7 @@
   "by": "agent",
   "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/ChangeOfCoefficients.lean",
   "place": "Geometric composition coherence in parent exchange proof, isolated before taking mates",
-  "note": "D4: the original composition-and-cancellation route is fully implemented. Reuse the existing generic ambient coherence and bounded projection proofs through proof-only import all; all new private helpers are proved and no sorry is added."
+  "note": "E1 repair: all five original holes are proved. Reuse the generic composition and bounded-projection calculations from ContinuousIntegralPullComposition and the existing elementary mapped_iso_rectangle and inverse_mapped_square from ContinuousIntegralExchangeTargetAdjunct, both via import all. The only new generic diagram helper is coefficientCube_of_iso. No duplicate diagram statements remain. The original public statement is unchanged; no imported module, definition, instance, new node, or sorry is added or modified."
  },
  "mathlib_searches": [
   {
@@ -149,7 +149,7 @@
   "module": "Sheaf.Paper.CondensedQbarPullbackCube",
   "file": "lean/Sheaf/Paper/CondensedQbarPullbackCube.lean",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.constructibleToQbar_pullback_cube",
-  "statement": "theorem constructibleToQbar_pullback_cube\n    (sq : CommSq g' f' f g) (V : PadicSubfieldConstructible Y ℓ E) :\n    (constructibleToQbarPullIso ℓ k E f'\n      ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g).obj V)).inv ≫\n      (constructibleToPadicAlgCl X' ℓ E).map\n        ((boundedConstructiblePullbackSquareComparison\n          (Profinite.continuousMapRingObj E) ℓ k sq).hom.app V) ≫\n      (constructibleToQbarPullIso ℓ k E g'\n        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k f).obj V)).hom =\n    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k f').map\n      (constructibleToQbarPullIso ℓ k E g V).hom ≫\n      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ)\n        ℓ k sq).hom.app ((constructibleToPadicAlgCl Y ℓ E).obj V) ≫\n      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g').map\n        (constructibleToQbarPullIso ℓ k E f V).inv",
+  "statement": "theorem constructibleToQbar_pullback_cube\n    (sq : CommSq g' f' f g) (V : PadicSubfieldConstructible Y ℓ E) :\n    coefficientPullbackCube\n    (A := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj\n      (Profinite.continuousMapRingObj E) (X.asOver (Spec (.of k))).left))\n    (B := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj\n      (Profinite.continuousMapRingObj E) (Y.asOver (Spec (.of k))).left))\n    (C := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj\n      (Profinite.continuousMapRingObj E) (X'.asOver (Spec (.of k))).left))\n    (D := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj\n      (Profinite.continuousMapRingObj E) (Y'.asOver (Spec (.of k))).left))\n    (A' := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj\n      (Profinite.padicAlgClRingObj ℓ) (X.asOver (Spec (.of k))).left))\n    (B' := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj\n      (Profinite.padicAlgClRingObj ℓ) (Y.asOver (Spec (.of k))).left))\n    (C' := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj\n      (Profinite.padicAlgClRingObj ℓ) (X'.asOver (Spec (.of k))).left))\n    (D' := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj\n      (Profinite.padicAlgClRingObj ℓ) (Y'.asOver (Spec (.of k))).left))\n    (lf := boundedConstructibleUpperStar (k := k)\n      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))\n        (Profinite.continuousMapRingObj E) ℓ\n      (f.asOver (Spec (.of k))))\n    (lg := boundedConstructibleUpperStar (k := k)\n      (X := Y'.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))\n        (Profinite.continuousMapRingObj E) ℓ\n      (g.asOver (Spec (.of k))))\n    (lp := boundedConstructibleUpperStar (k := k)\n      (X := X'.asOver (Spec (.of k))) (Y := Y'.asOver (Spec (.of k)))\n        (Profinite.continuousMapRingObj E) ℓ\n      (f'.asOver (Spec (.of k))))\n    (gp := boundedConstructibleUpperStar (k := k)\n      (X := X'.asOver (Spec (.of k))) (Y := X.asOver (Spec (.of k)))\n        (Profinite.continuousMapRingObj E) ℓ\n      (g'.asOver (Spec (.of k))))\n    (Lf := boundedConstructibleUpperStar (k := k)\n      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))\n        (Profinite.padicAlgClRingObj ℓ) ℓ\n      (f.asOver (Spec (.of k))))\n    (Lg := boundedConstructibleUpperStar (k := k)\n      (X := Y'.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))\n        (Profinite.padicAlgClRingObj ℓ) ℓ\n      (g.asOver (Spec (.of k))))\n    (Lp := boundedConstructibleUpperStar (k := k)\n      (X := X'.asOver (Spec (.of k))) (Y := Y'.asOver (Spec (.of k)))\n        (Profinite.padicAlgClRingObj ℓ) ℓ\n      (f'.asOver (Spec (.of k))))\n    (Gp := boundedConstructibleUpperStar (k := k)\n      (X := X'.asOver (Spec (.of k))) (Y := X.asOver (Spec (.of k)))\n        (Profinite.padicAlgClRingObj ℓ) ℓ\n      (g'.asOver (Spec (.of k))))\n    (tA := constructibleToPadicAlgCl X ℓ E)\n    (tB := constructibleToPadicAlgCl Y ℓ E)\n    (tC := constructibleToPadicAlgCl X' ℓ E)\n    (tD := constructibleToPadicAlgCl Y' ℓ E)\n    (fun V ↦ constructibleToQbarPullIso ℓ k E f V)\n    (fun V ↦ constructibleToQbarPullIso ℓ k E g V)\n    (fun V ↦ constructibleToQbarPullIso ℓ k E f' V)\n    (fun V ↦ constructibleToQbarPullIso ℓ k E g' V)\n    (boundedConstructiblePullbackSquareComparison (k := k)\n      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))\n      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))\n      (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k)))).hom\n    (boundedConstructiblePullbackSquareComparison (k := k)\n      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))\n      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))\n      (Profinite.padicAlgClRingObj ℓ) ℓ (sq.asOver (Spec (.of k)))).hom\n    V",
   "branch": "sheaf-dag",
   "by": "XR0d56945a24047e2a",
   "date": "2026-10-16"
@@ -165,14 +165,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "X-956ce",
-  "group": "D4",
+  "reviewer": "COMPILER",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261016T104121-L-2376737",
+  "landing": "20261017T024327-L-1173448",
   "kind": "interface",
-  "note": "independent Codex review: Delivered module, node statement, change record, and recorded downstream compile results matched against the review brief and repository baseline; delivered files compiled successfully."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {
