@@ -82,7 +82,9 @@ theorem exists_isWeaklyRegular_pair_of_not_le (h : 2 ≤ ringKrullDim A) {a : A}
   have hb𝔭 : b ∉ 𝔭 := fun h ↦ hbnot (Set.mem_biUnion (Finset.mem_insert_self _ _) h)
   have hQ : Nontrivial Q := by
     refine Submodule.Quotient.nontrivial_iff.2 fun htop ↦ ?_
-    have h1 : (1 : A) ∈ a • (⊤ : Submodule A A) := htop ▸ Submodule.mem_top
+    have h1 : (1 : A) ∈ a • (⊤ : Submodule A A) := by
+      rw [htop]
+      exact Submodule.mem_top
     obtain ⟨z, -, hz⟩ := Submodule.mem_smul_pointwise_iff_exists _ _ _ |>.1 h1
     exact (IsLocalRing.mem_maximalIdeal _).1 ha (IsUnit.of_mul_eq_one (b := z) (by
       rw [← hz, smul_eq_mul]))
@@ -91,7 +93,9 @@ theorem exists_isWeaklyRegular_pair_of_not_le (h : 2 ≤ ringKrullDim A) {a : A}
     by_contra hne
     have hz : b ∈ ⋃ p ∈ associatedPrimes A Q, p := by
       rw [biUnion_associatedPrimes_eq_zero_divisors]
-      exact ⟨q₁ - q₂, sub_ne_zero.2 hne, by rw [smul_sub, sub_eq_zero, hq]⟩
+      refine ⟨q₁ - q₂, sub_ne_zero.2 hne, ?_⟩
+      rw [smul_sub, sub_eq_zero]
+      exact hq
     obtain ⟨p, hp, hbp⟩ := Set.mem_iUnion₂.1 hz
     exact hbnot (Set.mem_biUnion (Finset.mem_insert_of_mem ((Set.Finite.mem_toFinset _).2 hp))
       hbp)
