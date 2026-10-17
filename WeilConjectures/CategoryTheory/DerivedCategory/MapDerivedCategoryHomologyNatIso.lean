@@ -39,11 +39,14 @@ isomorphism `ShortComplex.mapHomologyIso` of the short complex `K.sc i`. -/
 lemma mapHomologicalComplexHomologyIso_hom_app_eq (F : C ⥤ D) [F.Additive]
     [F.PreservesHomology] (K : HomologicalComplex C c) :
     (F.mapHomologicalComplexHomologyIso c i).hom.app K = ((K.sc i).mapHomologyIso F).hom := by
-  simp [mapHomologicalComplexHomologyIso, mapHomologicalComplexCompShortComplexFunctorIso,
-    ShortComplex.homologyFunctorIso]
-  erw [Category.id_comp, Functor.map_id, Category.comp_id, isoWhiskerRight_hom,
-    whiskerRight_app, Iso.refl_hom, NatTrans.id_app, Functor.map_id, Category.id_comp]
-  rfl
+  simp only [mapHomologicalComplexHomologyIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    isoWhiskerLeft_hom, isoWhiskerRight_hom, whiskerLeft_app, whiskerRight_app,
+    associator_hom_app, associator_inv_app, HomologicalComplex.homologyFunctorIso,
+    Iso.refl_hom, Iso.refl_inv, NatTrans.id_app, mapHomologicalComplexCompShortComplexFunctorIso,
+    ShortComplex.homologyFunctorIso, NatIso.ofComponents_hom_app, Functor.map_id,
+    Category.id_comp]
+  exact (Category.id_comp _).trans ((Category.id_comp _).trans
+    ((congrArg (fun g => _ ≫ g) (F.map_id _)).trans (Category.comp_id _)))
 
 /-- The isomorphism `Functor.mapHomologicalComplexHomologyIso` is natural in the functor. -/
 @[reassoc]
@@ -55,7 +58,8 @@ lemma mapHomologicalComplexHomologyIso_hom_app_naturality
       (F.mapHomologicalComplexHomologyIso c i).hom.app K ≫
         τ.app ((HomologicalComplex.homologyFunctor C c i).obj K) := by
   rw [mapHomologicalComplexHomologyIso_hom_app_eq, mapHomologicalComplexHomologyIso_hom_app_eq]
-  erw [NatTrans.app_homology τ (K.sc i), Iso.hom_inv_id_assoc]
+  refine (congrArg (· ≫ _) (ShortComplex.homologyMap_mapNatTrans (K.sc i) τ)).trans ?_
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
   rfl
 
 end
@@ -105,10 +109,11 @@ lemma mapDerivedCategoryHomologyFunctorIso_hom_app_naturality {F G : C ⥤ D}
         mapHomologicalComplexHomologyIso_hom_app_naturality,
         Iso.inv_hom_id_app_assoc]
       exact (Category.comp_id _).symm
-    rw [← Functor.map_comp_assoc (DerivedCategory.homologyFunctor D n), Iso.inv_hom_id_app]
-    erw [Functor.map_id, Category.id_comp,
-      ← (DerivedCategory.homologyFunctorFactors D n).inv.naturality_assoc]
-    rw [reassoc_of% h₂, ← e.hom.naturality_assoc]
+    rw [← Iso.app_inv F.mapDerivedCategoryFactors L,
+      ← Iso.app_hom F.mapDerivedCategoryFactors L,
+      Iso.map_inv_hom_id_assoc, ← Functor.comp_map DerivedCategory.Q,
+      ← (DerivedCategory.homologyFunctorFactors D n).inv.naturality_assoc,
+      reassoc_of% h₂, ← e.hom.naturality_assoc]
   exact congr_app h K
 
 end

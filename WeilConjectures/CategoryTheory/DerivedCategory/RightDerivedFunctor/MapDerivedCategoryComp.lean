@@ -174,6 +174,24 @@ lemma mapDerivedCategoryFactorsh_inv_app_mapDerivedCategoryCompIso_hom_app (F : 
   simp only [Category.assoc]
   simp [← Functor.map_comp_assoc, ← Functor.map_comp]
 
+@[reassoc]
+lemma mapDerivedCategoryFactorsh_inv_app_mapDerivedCategoryCompIso_inv_app (F : C ⥤ D)
+    (G : D ⥤ E) [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (X : HomotopyCategory C (ComplexShape.up ℤ)) :
+    G.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj X) ≫
+        G.mapDerivedCategory.map (F.mapDerivedCategoryFactorsh.inv.app X) ≫
+        (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Qh.obj X) =
+      DerivedCategory.Qh.map
+          ((mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (ComplexShape.up ℤ)).hom.app X) ≫
+        (F ⋙ G).mapDerivedCategoryFactorsh.inv.app X := by
+  have H := mapDerivedCategoryFactorsh_inv_app_mapDerivedCategoryCompIso_hom_app F G X
+  rw [← cancel_mono ((mapDerivedCategoryCompIso F G).hom.app _)]
+  simp only [Category.assoc, Iso.inv_hom_id_app, H]
+  rw [← DerivedCategory.Qh.map_comp_assoc, Iso.hom_inv_id_app, DerivedCategory.Qh.map_id,
+    Category.id_comp]
+  erw [Category.comp_id]
+
 end Factorsh
 
 section Comp
