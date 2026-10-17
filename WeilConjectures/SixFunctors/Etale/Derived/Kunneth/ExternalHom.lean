@@ -76,6 +76,30 @@ noncomputable def leftDerivedUpperStarBraidedFunctor {Z Y : Scheme.{u}} (g : Z �
   { leftDerivedUpperStarMonoidal A g with
     braided := leftDerivedUpperStar_μ_map_braiding_hom A g }
 
+attribute [local instance] leftDerivedUpperStarBraidedFunctor in
+/-- The composition isomorphism `L(g₁ ≫ g₂)^* ≅ Lg₂^* ⋙ Lg₁^*` is monoidal: its inverse is
+compatible with the tensor structures. -/
+lemma μ_comp_map_μ_comp_leftDerivedUpperStarComp_inv_app {T S R : Scheme.{u}} (g₁ : T ⟶ S)
+    (g₂ : S ⟶ R) (K M : _root_.DerivedCategory (Sheaf R.smallEtaleTopology A)) :
+    μ L((g₁)^*[A]) (L((g₂)^*[A]).obj K) (L((g₂)^*[A]).obj M) ≫ L((g₁)^*[A]).map (μ _ K M) ≫
+        (leftDerivedUpperStarComp A g₁ g₂ (g₁ ≫ g₂) rfl).inv.app (K ⊗ M) =
+      ((leftDerivedUpperStarComp A g₁ g₂ (g₁ ≫ g₂) rfl).inv.app K ⊗ₘ
+        (leftDerivedUpperStarComp A g₁ g₂ (g₁ ≫ g₂) rfl).inv.app M) ≫ μ L((g₁ ≫ g₂)^*[A]) K M := by
+  have h : δ L((g₁ ≫ g₂)^*[A]) K M ≫
+      ((leftDerivedUpperStarComp A g₁ g₂ (g₁ ≫ g₂) rfl).hom.app K ⊗ₘ
+        (leftDerivedUpperStarComp A g₁ g₂ (g₁ ≫ g₂) rfl).hom.app M) =
+      (leftDerivedUpperStarComp A g₁ g₂ (g₁ ≫ g₂) rfl).hom.app (K ⊗ M) ≫
+        L((g₁)^*[A]).map (δ L((g₂)^*[A]) K M) ≫ δ L((g₁)^*[A]) _ _ :=
+    leftDerivedUpperStarTensorComparison_comp A g₁ g₂ (g₁ ≫ g₂) rfl K M
+  rw [← cancel_epi (δ L((g₁ ≫ g₂)^*[A]) K M ≫
+    ((leftDerivedUpperStarComp A g₁ g₂ (g₁ ≫ g₂) rfl).hom.app K ⊗ₘ
+      (leftDerivedUpperStarComp A g₁ g₂ (g₁ ≫ g₂) rfl).hom.app M))]
+  simp only [Category.assoc]
+  rw [tensorHom_comp_tensorHom_assoc, Iso.hom_inv_id_app, Iso.hom_inv_id_app, id_tensorHom_id,
+    Category.id_comp, reassoc_of% h, Functor.Monoidal.δ_μ_assoc, ← Functor.map_comp_assoc,
+    Functor.Monoidal.δ_μ, CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app,
+    Functor.Monoidal.δ_μ]
+
 end Braided
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (k : Type u) [Field k]
@@ -96,6 +120,8 @@ section Devissage
 
 variable [HasInvertibleExponent Λ (Spec (.of k))]
 
+-- The kernel check of the identification of the projection formula hypotheses is slow.
+set_option maxHeartbeats 400000 in
 /-- **`β` under the exceptional inverse image along a stratum.** Let `P = Z₁ ×_k Z₂` with
 projections `p₁`, `p₂`, let `g₁ : Z₁' ⟶ Z₁` be quasi-compact and compactifiable, and let
 `g : P' ⟶ P` be its base change along `p₁`, with `p₁' : P' ⟶ Z₁'`. Then `Rg^!` of the external
@@ -116,8 +142,21 @@ theorem isIso_map_externalIhomMap_iff_of_isPullback {Z₁ Z₂ P Z₁' P' : Sche
         ((R(g₁)^![ModuleCat.{u + 1} Λ]).obj L₁) E₂ L₂) := by
   obtain ⟨hBC, hτ⟩ := isExceptionalKunneth Λ k g₁ c₁ c₁ c₂ sqP sq
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
-  have hlib := projectionMap_rightDerivedLowerShriekBaseChangeMap Λ sq
-  simp only [← leftDerivedUpperStarTensorIso_hom] at hlib
+  have hlib : ∀ (M : _root_.DerivedCategory (Sheaf Z₁'.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+      (N : _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      (L((p₁)^*[ModuleCat.{u + 1} Λ])).map (((projectionMap _ g₁).app M).app N) ≫
+        (rightDerivedLowerShriekBaseChangeMap Λ sq).app
+          (M ⊗ (L((g₁)^*[ModuleCat.{u + 1} Λ])).obj N) ≫
+        (R(g)_![ModuleCat.{u + 1} Λ]).map
+          (δ L((p₁')^*[ModuleCat.{u + 1} Λ]) M ((L((g₁)^*[ModuleCat.{u + 1} Λ])).obj N)) ≫
+        (R(g)_![ModuleCat.{u + 1} Λ]).map ((L((p₁')^*[ModuleCat.{u + 1} Λ])).obj M ◁
+          derivedSquareUpperStarIsoInvApp _ sq.toCommSq N) =
+      δ L((p₁)^*[ModuleCat.{u + 1} Λ]) ((R(g₁)_![ModuleCat.{u + 1} Λ]).obj M) N ≫
+        (rightDerivedLowerShriekBaseChangeMap Λ sq).app M ▷
+          (L((p₁)^*[ModuleCat.{u + 1} Λ])).obj N ≫
+        ((projectionMap _ g).app ((L((p₁')^*[ModuleCat.{u + 1} Λ])).obj M)).app
+          ((L((p₁)^*[ModuleCat.{u + 1} Λ])).obj N) :=
+    fun M N ↦ projectionMap_rightDerivedLowerShriekBaseChangeMap Λ sq M N
   have : ∀ N, IsIso (derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} Λ) sq.toCommSq N) :=
     fun N ↦ by
       unfold derivedSquareUpperStarIsoInvApp
@@ -141,15 +180,7 @@ theorem isIso_map_externalIhomMap_iff_of_isPullback {Z₁ Z₂ P Z₁' P' : Sche
     (fun N ↦ derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} Λ) sq.toCommSq N) hlib
     (projectionMap_app_app_naturality_right g) (projectionMapAssociativity Λ g).assoc
     (leftDerivedUpperStarComp _ g p₂ (g ≫ p₂) rfl).symm (fun X Y ↦ ?_) E₁ L₁ E₂ L₂
-  have h := leftDerivedUpperStarTensorComparison_comp (ModuleCat.{u + 1} Λ) g p₂ (g ≫ p₂) rfl X Y
-  simp only [Iso.symm_hom]
-  rw [← cancel_epi (((leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} Λ) (g ≫ p₂)).app
-    X).app Y ≫ ((leftDerivedUpperStarComp _ g p₂ (g ≫ p₂) rfl).hom.app X ⊗ₘ
-      (leftDerivedUpperStarComp _ g p₂ (g ≫ p₂) rfl).hom.app Y)), Category.assoc,
-    tensorHom_comp_tensorHom_assoc, Iso.hom_inv_id_app, Iso.hom_inv_id_app, id_tensorHom_id,
-    Category.id_comp, reassoc_of% h]
-  erw [Functor.Monoidal.δ_μ, Functor.Monoidal.δ_μ_assoc, ← Functor.map_comp_assoc,
-    Functor.Monoidal.δ_μ, Functor.map_id, Category.id_comp, Iso.hom_inv_id_app]
+  exact μ_comp_map_μ_comp_leftDerivedUpperStarComp_inv_app _ g p₂ X Y
 
 /-- The ranges of the base changes, along a morphism `q`, of complementary open and closed
 immersions are complementary. -/
@@ -168,8 +199,10 @@ lemma range_eq_compl_range_of_isPullback {Y Q Z U ZQ UQ : Scheme.{u}} {i : Z ⟶
 complementary open immersion `j`, a morphism `f` of `D(X_ét, Λ)` is an isomorphism as soon as
 `Rj^! f` and `Ri^! f` are: by the supported localization triangle
 `Ri_! Ri^! ⟶ 𝟭 ⟶ Rj_* Lj^* ⟶`, and `Rj^! ≅ Lj^*`. -/
-theorem isIso_of_isIso_rightDerivedUpperShriek_map_of_range_eq_compl {Z X U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
+theorem isIso_of_isIso_rightDerivedUpperShriek_map_of_range_eq_compl {Z X U : Scheme.{u}}
+    (i : Z ⟶ X) (j : U ⟶ X)
     [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j] [HasCompactification j]
+    [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     {M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (f : M ⟶ N)
     (hj : IsIso ((R(j)^![ModuleCat.{u + 1} Λ]).map f))
@@ -185,7 +218,7 @@ theorem isIso_of_isIso_rightDerivedUpperShriek_map_of_range_eq_compl {Z X U : Sc
   have := Pretriangulated.isIso₂_of_isIso₁₃ τ hM hN (by rw [h₁]; infer_instance)
     (by rw [h₃]; infer_instance)
   rwa [h₂] at this
-
+omit [Finite Λ] in
 /-- Every morphism between objects of `D(X_ét, Λ)` on an empty scheme is an isomorphism. -/
 lemma isIso_of_isEmpty {X : Scheme.{u}} [IsEmpty X]
     {M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -246,13 +279,15 @@ theorem isIso_externalIhomMap_of_forall_exactPairing {Z₂ : Scheme.{u}} (c₂ :
   have sqC := IsPullback.of_hasPullback V.closedComplement q₁
   have : HasCompactification (pullback.snd V.ι q₁) := .of_isPullback sqV
   have : HasCompactification (pullback.snd V.closedComplement q₁) := .of_isPullback sqC
-  have : QuasiCompact (pullback.snd V.ι q₁) := MorphismProperty.of_isPullback sqV ‹_›
-  have : QuasiCompact (pullback.snd V.closedComplement q₁) := MorphismProperty.of_isPullback sqC ‹_›
-  have : IsOpenImmersion (pullback.snd V.ι q₁) := MorphismProperty.of_isPullback sqV ‹_›
+  have : QuasiCompact (pullback.snd V.ι q₁) := MorphismProperty.of_isPullback sqV inferInstance
+  have : QuasiCompact (pullback.snd V.closedComplement q₁) :=
+    MorphismProperty.of_isPullback sqC inferInstance
+  have : IsOpenImmersion (pullback.snd V.ι q₁) := MorphismProperty.of_isPullback sqV inferInstance
   have : IsClosedImmersion (pullback.snd V.closedComplement q₁) :=
-    MorphismProperty.of_isPullback sqC ‹_›
+    MorphismProperty.of_isPullback sqC inferInstance
   have : LocallyOfFiniteType (ι ≫ c₁) := inferInstance
-  refine isIso_of_isIso_rightDerivedUpperShriek_map_of_range_eq_compl Λ (pullback.snd V.closedComplement q₁)
+  refine isIso_of_isIso_rightDerivedUpperShriek_map_of_range_eq_compl Λ
+    (pullback.snd V.closedComplement q₁)
     (pullback.snd V.ι q₁) (range_eq_compl_range_of_isPullback (by simp) sqC sqV) _ ?_ ?_
   · -- the open part: `E` has a left dual on `V`
     rw [isIso_map_externalIhomMap_iff_of_isPullback Λ k (ι ≫ c₁) c₂ sqQ V.ι sqV]
@@ -300,8 +335,8 @@ theorem isIso_externalHomMap [HasInvertibleExponent Λ (Spec (.of k))] {Z₁ Z�
     {E₂ N₂ : _root_.DerivedCategory (Sheaf Z₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hE₁ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z₁ E₁)
     (hE₂ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z₂ E₂)
-    (hN₁ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z₁ N₁)
-    (hN₂ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z₂ N₂) :
+    (_hN₁ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z₁ N₁)
+    (_hN₂ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z₂ N₂) :
     IsIso (externalHomMap (ModuleCat.{u + 1} Λ) c₁ c₂ E₁ N₁ E₂ N₂) := by
   refine isIso_externalIhomMap_of_forall_exactPairing Λ k c₂ E₂ N₂ ?_ c₁
     (IsPullback.of_hasPullback c₁ c₂) hE₁ N₁
