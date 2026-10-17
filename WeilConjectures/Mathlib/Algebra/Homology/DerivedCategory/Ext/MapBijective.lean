@@ -240,3 +240,84 @@ noncomputable def extAddEquiv [R.Additive] [PreservesFiniteLimits R]
   AddEquiv.ofBijective (adj.mapExtCounit A G n) (adj.mapExtCounit_bijective A G n)
 
 end CategoryTheory.Adjunction
+
+namespace CategoryTheory.Functor
+
+open Limits Abelian
+
+variable {C : Type u} [Category.{v} C] [Abelian C] {D : Type u'} [Category.{v'} D] [Abelian D]
+  [HasExt.{w} C] [HasExt.{w'} D]
+  (G : C ⥤ D) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  {A : C} {A' : D} (u : A' ⟶ G.obj A)
+
+/-- The map `Ext A B n ⟶ Ext A' (G B) n` for an exact functor `G` and `u : A' ⟶ G A`: push
+forward along `G`, then precompose with `u`. -/
+noncomputable def mapExtPrecomp (B : C) (n : ℕ) : Ext A B n →+ Ext A' (G.obj B) n :=
+  ((Ext.mk₀ u).precomp _ (zero_add n)).comp (G.mapExtAddHom A B n)
+
+lemma mapExtPrecomp_apply (B : C) (n : ℕ) (x : Ext A B n) :
+    G.mapExtPrecomp u B n x = (Ext.mk₀ u).comp (x.mapExactFunctor G) (zero_add n) :=
+  rfl
+
+/-- The map `CategoryTheory.Functor.mapExtPrecomp` is natural in `B`. -/
+lemma mapExtPrecomp_comp_mk₀ {B B' : C} (g : B ⟶ B') {n : ℕ} (x : Ext A B n) :
+    G.mapExtPrecomp u B' n (x.comp (Ext.mk₀ g) (add_zero n)) =
+      (G.mapExtPrecomp u B n x).comp (Ext.mk₀ (G.map g)) (add_zero n) := by
+  simp only [mapExtPrecomp_apply, Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀]
+  rw [Ext.comp_assoc_of_third_deg_zero]
+
+/-- The map `CategoryTheory.Functor.mapExtPrecomp` commutes with connecting maps. -/
+lemma mapExtPrecomp_comp_extClass {S : ShortComplex C} (hS : S.ShortExact) {n : ℕ}
+    (y : Ext A S.X₃ n) :
+    G.mapExtPrecomp u S.X₁ (n + 1) (y.comp hS.extClass rfl) =
+      (G.mapExtPrecomp u S.X₃ n y).comp (hS.map_of_exact G).extClass rfl := by
+  simp only [mapExtPrecomp_apply, Ext.mapExactFunctor_comp, Ext.mapExactFunctor_extClass]
+  exact (Ext.comp_assoc _ _ _ (zero_add n) rfl (by omega)).symm
+
+/-- In degree `0`, the map `CategoryTheory.Functor.mapExtPrecomp` is `φ ↦ u ≫ G φ`. -/
+lemma mapExtPrecomp_mk₀ (B : C) (φ : A ⟶ B) :
+    G.mapExtPrecomp u B 0 (Ext.mk₀ φ) = Ext.mk₀ (u ≫ G.map φ) := by
+  rw [mapExtPrecomp_apply, Ext.mapExactFunctor_mk₀, Ext.mk₀_comp_mk₀]
+
+/-- **Dimension shifting.** Let `G` be an exact functor which preserves injective objects and let
+`u : A' ⟶ G A` be such that `φ ↦ u ≫ G φ` is a bijection `(A ⟶ B) ≃ (A' ⟶ G B)` for every `B`.
+Then pushing forward along `G` and precomposing with `u` is a bijection
+`Ext A B n ≃ Ext A' (G B) n` in every degree. -/
+theorem mapExtPrecomp_bijective [EnoughInjectives C]
+    (hG : ∀ I : C, Injective I → Injective (G.obj I))
+    (hu : ∀ B : C, Function.Bijective (fun φ : A ⟶ B ↦ u ≫ G.map φ)) (B : C) (n : ℕ) :
+    Function.Bijective (G.mapExtPrecomp u B n) := by
+  induction n generalizing B with
+  | zero =>
+    refine ⟨fun x y hxy ↦ ?_, fun z ↦ ?_⟩
+    · obtain ⟨x, rfl⟩ := (Ext.mk₀_bijective _ _).2 x
+      obtain ⟨y, rfl⟩ := (Ext.mk₀_bijective _ _).2 y
+      rw [mapExtPrecomp_mk₀, mapExtPrecomp_mk₀] at hxy
+      rw [(hu B).1 ((Ext.mk₀_bijective _ _).1 hxy)]
+    · obtain ⟨z, rfl⟩ := (Ext.mk₀_bijective _ _).2 z
+      obtain ⟨φ, rfl⟩ := (hu B).2 z
+      exact ⟨Ext.mk₀ φ, mapExtPrecomp_mk₀ G u B φ⟩
+  | succ n hn =>
+    let I : InjectivePresentation B := Classical.arbitrary _
+    have := I.injective
+    let T := ShortComplex.mk I.f (cokernel.π I.f) (cokernel.condition I.f)
+    have hT : T.ShortExact := { exact := ShortComplex.exact_cokernel I.f }
+    have hS : (T.map G).ShortExact := hT.map_of_exact G
+    have : Injective (G.obj I.J) := hG I.J I.injective
+    exact AddMonoidHom.bijective_of_surjective_of_bijective_of_right_exact
+      ((Ext.mk₀ T.g).postcomp A (add_zero n)) (hT.extClass.postcomp A rfl)
+      ((Ext.mk₀ (G.map T.g)).postcomp A' (add_zero n)) (hS.extClass.postcomp A' rfl)
+      (G.mapExtPrecomp u I.J n) (G.mapExtPrecomp u T.X₃ n) (G.mapExtPrecomp u B (n + 1))
+      (AddMonoidHom.ext fun x ↦ (G.mapExtPrecomp_comp_mk₀ u T.g x).symm)
+      (AddMonoidHom.ext fun y ↦ (G.mapExtPrecomp_comp_extClass u hT y).symm)
+      ((ShortComplex.ab_exact_iff_function_exact _).mp
+        (Ext.covariant_sequence_exact₃' A hT n (n + 1) rfl))
+      ((ShortComplex.ab_exact_iff_function_exact _).mp
+        (Ext.covariant_sequence_exact₃' A' hS n (n + 1) rfl))
+      (hn I.J).2 (hn T.X₃)
+      (fun x ↦ Ext.covariant_sequence_exact₁ _ hT x
+        (Ext.eq_zero_of_injective (I := I.J) _) rfl)
+      (fun y ↦ Ext.covariant_sequence_exact₁ _ hS y
+        (Ext.eq_zero_of_injective (I := G.obj I.J) _) rfl)
+
+end CategoryTheory.Functor
