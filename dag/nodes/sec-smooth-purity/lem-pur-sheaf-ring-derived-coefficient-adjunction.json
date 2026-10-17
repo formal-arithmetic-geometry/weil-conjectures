@@ -29,20 +29,170 @@
   "def-pc-flat-sheaf-modules",
   "lem-pc-kflat-resolution"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=\\mathcal O$, $S=\\mathcal O'$ and let the topos of sheaves on $\\mathcal C$ be the same on both sides. Applying the ringed-topos module adjunction to the identity geometric morphism and the ring map $\\varphi:R\\to S$ gives an underived adjunction $G\\dashv F$, where $G(N)=N\\otimes_R S$ and $F=\\operatorname{Res}_\\varphi$. The Hom maps are the balanced formulas $v\\mapsto(x\\mapsto v(x\\otimes1))$ and $w\\mapsto(x\\otimes a\\mapsto a\\,w(x))$; they commute with restrictions and sheafification, and the triangle identities hold on pure tensors.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules; tensor/restriction formulas in lemma-adjointness-tensor-restrict"
+   }
+  },
+  {
+   "text": "Restriction of scalars leaves the underlying sheaf of abelian groups and all morphisms unchanged. Kernels in the module-sheaf category are sectionwise, while cokernels are sheafifications of sectionwise cokernels; restricting the scalar action therefore preserves both kernels and cokernels. Hence $F$ is exact, with no flatness assumption on $\\varphi$.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian"
+   }
+  },
+  {
+   "text": "The exact-functor derived factorization and derived-functor theorem apply to $F$: its termwise functor preserves quasi-isomorphisms and identifies the everywhere-defined right derived functor with termwise restriction. Thus the derived functor is the stated $\\operatorname{Res}_\\varphi$ on unbounded derived categories. By the derived-change-of-rings node, the tensor functor has an everywhere-defined left derived functor $LG=-\\otimes_R^{\\mathbf L}S$, and a K-flat resolution $P\\to K$ computes it as $Q(P\\otimes_R S)$; such flat-term K-flat resolutions exist by the cited resolution theorem. The canonical comparison $c_P$ is independent of the chosen resolution.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; sites-cohomology.tex Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change), using derived.tex Tag 06XN (lemma-find-existence-computes)"
+   }
+  },
+  {
+   "text": "Apply the general derived-adjoint-functors theorem to the underived pair $G\\dashv F$ of Step 1. Step 2 makes $RF$ everywhere defined, and Step 3 makes $LG$ everywhere defined, so the theorem supplies a canonical bifunctorial bijection $\\operatorname{Hom}_{D(S)}(LG(K),H)\\cong\\operatorname{Hom}_{D(R)}(K,RF(H))$. Substituting the identifications from Step 3 gives exactly the displayed bijection with $RF=\\operatorname{Res}_\\varphi$ and $LG=-\\otimes_R^{\\mathbf L}S$.",
+   "uses": [
+    "lem-pc-derived-adjoint-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors"
+   }
+  },
+  {
+   "text": "Let $P$ be a flat-term K-flat complex of $R$-modules. In the explicit pre-derived Hom formula take $M=P$, target complex $K=G(P)$, $s=\\mathrm{id}_{G(P)}$, $t=\\mathrm{id}_P$, and $f=\\eta_P:P\\to F G(P)$, $x\\mapsto x\\otimes1$. Since $F$ is exact, the right-derived comparison $p_s$ is the identity after the identification of Step 3; since $P$ computes $LG$, the left-derived comparison $u_t$ is $c_P$. The homotopy adjunct $a_h(f)$ is $\\mathrm{id}_{G(P)}$ by the termwise adjunction. Thus the formula sends $Q(\\eta_P)$ to $c_P:LG(QP)\\to QG(P)$. Equivalently, under the identification $c_P$ the identity of $LG(QP)$ corresponds to $Q(\\eta_P)$, which is exactly the asserted unit.",
+   "uses": [
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0FND and 09T5; sites-cohomology.tex Tag 07A6"
+   }
+  },
+  {
+   "text": "Let $g:P\\to F(H)$ be a chain map as in the statement. Its termwise adjunct is $\\widetilde g:P\\otimes_R S\\to H$, $x\\otimes a\\mapsto a\\,g(x)$: $R$-balancedness makes this well defined on the presheaf tensor and hence on its sheafification, and $d_H(a\\,g(x))=a\\,g(d_Px)$ makes it a chain map. Apply the cited fraction formula with $M=P$, $K=H$, $s=\\mathrm{id}_H$, $t=\\mathrm{id}_P$, and $f=g$. Its two comparison maps are again $p_s=\\mathrm{id}$ and $u_t=c_P$, so the derived adjunct is $Q(\\widetilde g)\\circ c_P$. If $g$ is a quasi-isomorphism, write $q=Q(g):QP\\xrightarrow{\\sim}F(QH)$. Naturality of the adjunction in its first variable gives $\\varepsilon_{QH}\\circ LG(q)=Q(\\widetilde g)\\circ c_P$, since $\\varepsilon_{QH}$ is the adjunct of $\\mathrm{id}_{F(QH)}$. The functor $LG$ carries the isomorphism $q$ to an isomorphism; composing with its inverse gives $\\varepsilon_{QH}=Q(\\widetilde g)\\circ c_P\\circ LG(q)^{-1}$, the claimed counit formula. No flatness of the ring map or boundedness has been used.",
+   "uses": [
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND, lemma-pre-derived-adjoint-functors-general; Tag 09T5; sites-cohomology.tex Tag 07A6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-kflat-resolution",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6 (lemma-adjoint), with derived.tex Tags 0FND and 09T5 and sites-modules.tex Tag 03DA"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "rg 'extendRestrictScalarsAdj|pullbackPushforwardAdjunction' and rg 'Adjunction|⊣' in Mathlib/CategoryTheory/Functor/Derived (Mathlib under ~/weil-conjectures-sheaf/lean/.lake/packages/mathlib)",
-   "results": "ModuleCat/ChangeOfRings.lean extendRestrictScalarsAdj (modules over a ring, underived); Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:60 pullbackPushforwardAdjunction (underived sheaf modules); Sheaf/ChangeOfRings.lean:36 restrictScalars; CategoryTheory/Functor/Derived/Adjunction.lean:39-151 Adjunction.derived (generic derived adjunction given localized functors and compatibilities)",
+   "query": "restrictScalars|pullbackPushforwardAdjunction",
+   "results": "Logged 20 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; source subdirectory Mathlib/Algebra/Category/ModuleCat/Sheaf",
    "date": "2026-10-17",
-   "verdict": "no match: no derived scalar extension/restriction adjunction for sheaves of modules on a site; Adjunction.derived is a generic tool, not this statement with its K-flat normalization"
+   "verdict": "no match: inspected sheaf change-of-rings and pullback sources supply underived restriction/adjunction only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product of sheaves of modules is left adjoint to restriction of scalars",
+   "results": "Logged 8 hits: PresheafOfModules.restrictScalarsObj, ModuleCat.instIsLeftAdjointRestrictScalars, ModuleCat.restrictCoextendScalarsAdj, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.PullbackConstruction.adjunction, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, SheafOfModules.restrictScalars, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern underived sheaf/module adjunctions or ordinary modules, not this unbounded sheaf derived adjunction with K-flat normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "Logged 3 hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-adjunction construction requires supplied derived functors and comparison hypotheses; it does not construct unbounded sheaf change of rings or its K-flat comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction between additive functors induces an adjunction between total left and right derived functors with unit computed on resolutions",
+   "results": "Logged 8 hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-adjunction construction requires supplied derived functors and comparison hypotheses; it does not construct unbounded sheaf change of rings or its K-flat comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars along a morphism of sheaves of rings is left adjoint to exact restriction of scalars on unbounded derived categories",
+   "results": "Logged 8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsRightAdjointPushforwardIdSheafRingCat, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern underived sheaf/module adjunctions or ordinary modules, not this unbounded sheaf derived adjunction with K-flat normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*adjunction|extendRestrictScalarsAdj|restrictScalars",
+   "results": "Logged 10 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; source subdirectory Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected sheaf change-of-rings and pullback sources supply underived restriction/adjunction only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a site, the derived tensor product along a sheaf ring morphism is left adjoint to exact restriction of scalars on unbounded derived categories, with unit x maps to x tensor 1 and transpose x tensor a maps to a g x",
+   "results": "Logged 8 hits: ModuleCat.instIsLeftAdjointRestrictScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, CategoryTheory.Adjunction.derived_unit, SheafOfModules.PullbackConstruction.adjunction, ModuleCat.ExtendRestrictScalarsAdj.unit",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern underived sheaf/module adjunctions or ordinary modules, not this unbounded sheaf derived adjunction with K-flat normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived, SheafOfModules.restrictScalars, ModuleCat.extendRestrictScalarsAdj",
+   "results": "Logged 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the combined name pattern returned no declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived change of rings for sheaves of modules along a morphism of sheaves of commutative rings is left adjoint to restriction of scalars, with K-flat unit and tensor transpose",
+   "results": "Logged 8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj, PresheafOfModules.sheafificationAdjunction, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern underived sheaf/module adjunctions or ordinary modules, not this unbounded sheaf derived adjunction with K-flat normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +209,59 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "worker": "stage1",
+  "summary": "Preserved the imported statement. Split the argument into the underived tensor-restriction adjunction, exactness of restriction, existence and computation of both derived functors, the canonical derived Hom bijection, and the normalized unit, transpose, and counit on K-flat representatives. Reused all existing DAG lemmas; no new nodes or attachments. Resumed the retained split; repaired non-verbatim citation quotes, actual search-log metadata and source paths, and expanded the canonical unit/transpose/counit calculation.",
+  "blueprint": "Nearest ancestor def-weil-exceptional-inverse-image, adic-stage paragraph: compatible finite-level functors and the derived reduction-of-coefficients adjunction used for transition maps. Steps 1–3 realize the finite-level change-of-rings construction; steps 4–6 realize its derived adjunction and normalized maps.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic ringed-topos tensor/restriction adjunction supplies the underived scalar Hom bijection; this unit has no separate module-adjunction theorem."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact-functor localization identifies termwise restriction with its derived functor."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor derived theorem supplies the everywhere-defined right derived restriction."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Generic unbounded derived-adjunction theorem supplies the Hom bijection once both derived functors exist."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic fraction-transpose formula fixes the canonical unit, transpose and counit normalization."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic passage of an additive adjunction to complexes and homotopy categories supplies the termwise transpose."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat resolution existence supplies representatives for the unbounded tensor construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-a3713d85b",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-a3713d85b (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the statements of all 14 cited nodes in full, plus Stacks derived.tex 0FND/0DVC (line 9517, including the proof's six-equality chain) and sites-cohomology.tex 07A6 (line 3990), the blueprint ancestor def-weil-exceptional-inverse-image (with its main-20261015 update) and unit sk-def-sf-operations. The delivery adds no new nodes and creates no relabelling, and the statement is unchanged and not weakened. It is the specialization of 07A6 to the identity topos with ring map phi. Step 1 is the ringed-topos adjunction with u=id and c=phi, which gives S⊗_R M and Res_phi; the explicit unit/counit is checked on pure tensors and through sheafification. Step 2 (exactness of Res) is correctly marked elementary: kernels are sectionwise, cokernels are sheafified, and the abelian sheaf is unchanged. Step 3 gives termwise RF from the exact-functor nodes. Their Kan-extension form implies the essentially-constant sense (initial object id_K, all transition maps are isomorphisms), a two-line step. L phi* is everywhere defined by lem-pur-derived-change-of-rings (2), with resolutions from lem-pc-kflat-resolution. Step 4's hypotheses all hold. Step 5: with s=t=id, p_id=id, u_id=c_P and a_h(eta_P)=id, so e(Q eta_P)=c_P; naturality then gives RF(c_P)∘unit=Q(eta_P), which is clause (1). Step 6: a_h(g)=x⊗a↦a g(x), and first-variable naturality gives eps∘LG(q)=Q(g~)∘c_P; I checked the types of all three factors. Small cases all agree: phi=id; point site with Z→Z/2 (H=Z/2 and Z/2[1], both sides Z/2; counit at Z/2 is the projection Z/2⊕Z/2[1]→Z/2); zero ring; unbounded complexes. Duplicate search: lem-weil-derived-scalar-extension-restriction-adjunction is a pro-etale specialization; sk-def-sfb-derived-extension-of-scalars is a ring-object version without normalization; neither replaces the item. There is no SGA citation and no cycle. I accept the seven listed tool uses as generic tools the unit lacks. No fixes were written; review.md has the details."
  }
 }
