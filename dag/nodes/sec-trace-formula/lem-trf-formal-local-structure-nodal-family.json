@@ -17,7 +17,8 @@
   "def-weil-residue-field",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fs-adic-completion-map-local"
  ],
  "proof": [
   {
@@ -420,5 +421,35 @@
   "group": "Q61",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-027d29561 (reviewer sub-agent of L); spot-checked: I read the full item and its 14 steps against curves.tex Tag 0CBX (statement and full proof), definition-split-node and lemma-split-node (0CBW), and the third paragraph of the first proof of 0CBY (the Y_sigma completed-model clause). The statement is byte-identical to the side DAG copy. Its spelled-out split-node hypothesis (closed point, kappa(t)=kappa(s), completed fibre ring isomorphic to k[[u,v]]/(uv)) drops the source's 1-dimensional fibre assumption, so it is at least as general as the source, never weaker. The source display prints 'x -> v-bar' where 'y -> v-bar' is meant; this is a typo that the worker noted. I checked the statement of each of the 25 cited nodes against each use and every hypothesis in force. Flat-completion and complete-local-quotient get Noetherian complete local inputs. Flat-mod-injective is applied with R=A, S=N=C and M=B, which is A-flat. Finite-after-completion gets finitely generated maximal ideals and B/a_C B=k. I recomputed the induction step (u'v'-h' = sum f_i eps_i + product, which lies in m^{n+1}B because n>=1). The lifts survive the limit because mB is closed: B/mB is a separated complete local quotient. Step 13's polynomial-to-power-series comparison holds through the combined-ideal criterion plus the fact that denominators become units mod q^r. Edge cases checked: A0=k, the family xy=t over k[[t]], characteristic 2, h zero or nilpotent, S not locally Noetherian, mixed characteristic. There are no new nodes and no duplicates: only the two citers mention 0CBX or uv-h. All 10 declared tool_uses are accepted as generic commutative-algebra black boxes, and they are exactly the split, non-closed off-unit dependencies. No SGA source is used, and this is not a target node. Fixes, in fixes/dag/nodes/sec-trace-formula/lem-trf-formal-local-structure-nodal-family.json: (1) step 9 now says why the chosen step-3 isomorphism agrees with the reduction of phi at every truncation (it is a local k-algebra isomorphism, so it sends (x,y)^N into the N-th power of the maximal ideal); (2) step 13 'elementary' changed from true to false (C2), since it cites two lemmas and is a multi-line comparison. Citations and proof_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FormalLocalStructureNodalFamily",
+  "declaration": "AlgebraicGeometry.formalLocalStructureNodalFamily",
+  "declarations": [
+   "AlgebraicGeometry.formalNodalCompletedStalk",
+   "AlgebraicGeometry.formalNodalCoefficientMap",
+   "AlgebraicGeometry.formalNodalFiberCompletionAlgebra",
+   "AlgebraicGeometry.formalNodalCompletedStalkAlgebra",
+   "AlgebraicGeometry.formalNodalPowerSeriesQuotient",
+   "AlgebraicGeometry.formalNodalModelRing",
+   "AlgebraicGeometry.formalNodalModel",
+   "AlgebraicGeometry.formalNodalOriginIdeal",
+   "AlgebraicGeometry.formalNodalModelCompletionAlgebra",
+   "AlgebraicGeometry.formalLocalStructureNodalFamily"
+  ],
+  "file": "lean/Sheaf/TraceFormula/FormalLocalStructureNodalFamily.lean",
+  "statement": "theorem formalLocalStructureNodalFamily (X Y : Scheme.{u}) (f : X ⟶ Y) (t : X) [IsNoetherianRing (Y.presheaf.stalk (f t))] [LocallyOfFiniteType f] (hflat : (f.stalkMap t).hom.Flat) (ht : f.asFiber t ∈ closedPoints (f.fiber (f t))) (hκ : Function.Bijective (f.residueFieldMap t).hom) (hspecial : Nonempty (@AlgEquiv (Y.residueField (f t)) (formalNodalCompletedStalk (f.fiber (f t)) (f.asFiber t)) (formalNodalPowerSeriesQuotient (Y.residueField (f t)) 0) _ _ _ (formalNodalFiberCompletionAlgebra f t) inferInstance)) : ∃ h : formalNodalCompletedStalk Y (f t), h ∈ Ideal.map (algebraMap (Y.presheaf.stalk (f t)) (formalNodalCompletedStalk Y (f t))) (IsLocalRing.maximalIdeal (Y.presheaf.stalk (f t))) ∧ Nonempty (@AlgEquiv (formalNodalCompletedStalk Y (f t)) (formalNodalCompletedStalk X t) (formalNodalPowerSeriesQuotient (formalNodalCompletedStalk Y (f t)) h) _ _ _ (formalNodalCompletedStalkAlgebra f t) inferInstance) ∧ ∃ o : formalNodalModel (formalNodalCompletedStalk Y (f t)) h, o.asIdeal = formalNodalOriginIdeal (Y.presheaf.stalk (f t)) h ∧ Nonempty (@AlgEquiv (formalNodalCompletedStalk Y (f t)) (formalNodalCompletedStalk X t) (formalNodalCompletedStalk (formalNodalModel (formalNodalCompletedStalk Y (f t)) h) o) _ _ _ (formalNodalCompletedStalkAlgebra f t) (formalNodalModelCompletionAlgebra (formalNodalCompletedStalk Y (f t)) h o)) ∧ Nonempty ((formalNodalModel (formalNodalCompletedStalk Y (f t)) h).residueField o ≃+* (Y.presheaf.stalk (f t)) ⧸ IsLocalRing.maximalIdeal (Y.presheaf.stalk (f t)))",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-382d630c2",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Immutable delivery matches the node and source; helpers are canonical and documented; dependencies and edge cases checked; scompile.py sandbox and library compiles passed; no route-pivot or pro-etale issues."
  }
 }

@@ -8,7 +8,8 @@
  },
  "stmt_deps": [
   "def-weil-affine-spectrum",
-  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-trf-affine-etale-cover-component-criterion"
  ],
  "kind": "statement",
  "proof": [
@@ -209,5 +210,24 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-da0486767 (reviewer sub-agent of L); spot-checked: I read all 7 steps in full against the statements of the 8 cited nodes, against Stacks Tag 00EG (algebra.tex l.4008, whose proof is 005F plus 00EE, the same as steps 1-2) and against Tag 005F (topology.tex l.1816; its hypotheses match the node and are checked in step 1 via 01KO(2) on the one-member affine cover and qcqs implies spectral). Step 4: idempotents of I_j map into I_Z because the projection of Z lies in Z_j; pushout clauses (2)/(3) give r, q and rq=p, and q and r are surjective. Step 5: ker r = q(I_Z), without lifting arbitrary idempotents. Step 6: maximality of W comes from injectivity of Spec q. Step 7: K = I_W, using uniqueness in 00EE (D(r(a)) is empty, so r(a)=0), and the compatibilities with D_j and B_j are written out. The statement is unchanged; its I_Z convention agrees with 00EG, and it matches what parent lem-trf-artin-henselian-tensor-residue-dichotomy step 2 uses. Cases tested: k, k×k over k, L⊗_K L for quadratic Galois L/K (E disconnected), k[ε]/ε² (no reduction), infinite products of fields (non-open components). No new nodes; the rg duplicate search found nothing equivalent. No SGA source. Accepted tool_use: lem-weil-pbc-quasicompact-components-clopen-intersection, the generic Topology 005F fact, Lean closed in slopmaster2. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TensorComponentFromFactorComponents",
+  "declaration": "AlgebraicGeometry.tensor_component_from_factor_components",
+  "file": "lean/Sheaf/RingTheory/TensorComponentFromFactorComponents.lean",
+  "statement": "theorem tensor_component_from_factor_components (A : Type u) (B₁ : Type v) (B₂ : Type w) [CommRing A] [CommRing B₁] [CommRing B₂] [Algebra A B₁] [Algebra A B₂] (z : PrimeSpectrum (B₁ ⊗[A] B₂)) : ∃ (z₁ : PrimeSpectrum B₁) (z₂ : PrimeSpectrum B₂), (PrimeSpectrum.comap (Algebra.TensorProduct.includeLeft : B₁ →ₐ[A] B₁ ⊗[A] B₂).toRingHom) '' connectedComponent z ⊆ connectedComponent z₁ ∧ (PrimeSpectrum.comap (Algebra.TensorProduct.includeRight : B₂ →ₐ[A] B₁ ⊗[A] B₂).toRingHom) '' connectedComponent z ⊆ connectedComponent z₂ ∧ Function.Surjective (Algebra.TensorProduct.map (Ideal.Quotient.mkₐ A (componentIdeal B₁ z₁)) (Ideal.Quotient.mkₐ A (componentIdeal B₂ z₂))) ∧ ∃ r : ((B₁ ⧸ componentIdeal B₁ z₁) ⊗[A] (B₂ ⧸ componentIdeal B₂ z₂)) →ₐ[A] ((B₁ ⊗[A] B₂) ⧸ componentIdeal (B₁ ⊗[A] B₂) z), Function.Surjective r ∧ r.comp (Algebra.TensorProduct.map (Ideal.Quotient.mkₐ A (componentIdeal B₁ z₁)) (Ideal.Quotient.mkₐ A (componentIdeal B₂ z₂))) = Ideal.Quotient.mkₐ A (componentIdeal (B₁ ⊗[A] B₂) z) ∧ ∃ (y : PrimeSpectrum ((B₁ ⧸ componentIdeal B₁ z₁) ⊗[A] (B₂ ⧸ componentIdeal B₂ z₂))) (e : (((B₁ ⧸ componentIdeal B₁ z₁) ⊗[A] (B₂ ⧸ componentIdeal B₂ z₂)) ⧸ componentIdeal ((B₁ ⧸ componentIdeal B₁ z₁) ⊗[A] (B₂ ⧸ componentIdeal B₂ z₂)) y) ≃ₐ[A] ((B₁ ⊗[A] B₂) ⧸ componentIdeal (B₁ ⊗[A] B₂) z)), e.toAlgHom.comp (Ideal.Quotient.mkₐ A (componentIdeal ((B₁ ⧸ componentIdeal B₁ z₁) ⊗[A] (B₂ ⧸ componentIdeal B₂ z₂)) y)) = r",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already landed componentIdeal from lem-trf-affine-etale-cover-component-criterion. Quotient carriers are written explicitly (definitionally componentRing) to expose Mathlib quotient-algebra instances; no second component-ring construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fa7a08318",
+  "group": "Q136",
+  "result": "pass",
+  "note": "Statement, dependencies, source, docstrings, edge cases, route-pivot compliance, report sections, and exact declarations checked; scompile.py per-file compilation passed."
  }
 }

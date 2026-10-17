@@ -246,5 +246,24 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-710440e4b (reviewer sub-agent of L); spot-checked: I read the whole item, the report, every cited node's statement, and the sources: Stacks curves.tex 0C4D in full (the descent over an arbitrary field), 0C4C, 0C49, and algebra.tex 0337. The statement is unchanged and true, and matches 0C4D (3)=>(2) when the residue field is F. Small cases checked: uv over any field, u^2+v^2 over R (discriminant -4), u^2+uv+v^2 over F_2 (polar matrix invertible in characteristic 2); the cusp and the double line fail the hypothesis. It is not a duplicate: lem-trf-nodal-point-local-criterion assumes equidimensionality and concludes something else. There is no cycle; the transitive closure of the dependencies (136 nodes) does not contain the item. Steps 2-6 check against the cited statements. Step 2: the Kahler base-change and localization lemmas plus Fitting clause (2) give J_B=J_A B. Step 3: the formal Jacobian criterion is used from (c) to (a), and its clause (c) needs only the ring isomorphism the item assumes, with a=c=0, b=1; the minors equal the Fitting ideal by multilinearity. Step 4: faithful flatness lets ideal equality be pulled back twice, giving J_B=n and J_A=m. Step 5: the flat local depth formula is applied three times, each closed fibre a field of depth 0. Step 6: the criterion from (a) to (b), using the structural coefficient section. FIX (C4): step 1 credited Noetherianity, maximal ideal and residue field of B-hat to the first application of lem-trf-separable-closed-point-formal-presentation, whose statement does not give them; they come from the second application in step 3. I reworded step 1 in fixes/dag/nodes/sec-trace-formula/lem-trf-rational-node-quadratic-completion.json and changed nothing else. I accept the declared tool use lem-weil-pbc-flat-local-depth-formula (sk-thm-p1, Stacks 0337), a generic algebra result used as a black box. No new nodes, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalNodeQuadraticCompletion",
+  "declaration": "AlgebraicGeometry.rational_node_quadratic_completion",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalNodeQuadraticCompletion.lean",
+  "statement": "theorem rational_node_quadratic_completion {F : Type u} [Field F] {X : Scheme.{u}} (f : X ⟶ Spec (.of F)) [LocallyOfFiniteType f] (hdim : topologicalKrullDim X = (1 : WithBot ℕ∞)) (z : X) (hz : z ∈ closedPoints X) (hrat : Function.Bijective (f.residueFieldAlgebraMap z)) (Ω : Type u) [Field Ω] [Algebra F Ω] [IsAlgClosure F Ω] (zbar : pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap F Ω)))) (hzbar : pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap F Ω))) zbar = z) (hgeom : Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap F Ω)))).presheaf.stalk zbar)) ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap F Ω)))).presheaf.stalk zbar) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * MvPowerSeries.X 1}))) : ∃ (a b c : F), b ^ 2 - 4 * a * c ≠ 0 ∧ Nonempty (@AlgEquiv F (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk z)) (X.presheaf.stalk z)) (MvPowerSeries (Fin 2) F ⧸ Ideal.span ({MvPowerSeries.C a * (MvPowerSeries.X 0) ^ 2 + MvPowerSeries.C b * (MvPowerSeries.X 0 * MvPowerSeries.X 1) + MvPowerSeries.C c * (MvPowerSeries.X 1) ^ 2} : Set (MvPowerSeries (Fin 2) F))) inferInstance inferInstance inferInstance (((algebraMap (X.presheaf.stalk z) (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk z)) (X.presheaf.stalk z))).comp (((Scheme.ΓSpecIso (.of F)).inv ≫ f.appTop ≫ X.presheaf.Γgerm z).hom)).toAlgebra) inferInstance)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The geometric hypothesis is a ring equivalence. The conclusion is AlgEquiv over F with the algebra structure explicitly induced by the structural global-sections map, germ map, and completion map. The geometric point is specified by its projection to the rational point; it is unique. Proof steps, including Q82 C4 in step 1, are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-765b35610",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Reviewed the immutable node, dependencies, source Tags 0C4D/0C49, Lean module, report sections, edge cases, route-pivot status, and scompile.py output. Compilation passed with only the expected sorry."
  }
 }
