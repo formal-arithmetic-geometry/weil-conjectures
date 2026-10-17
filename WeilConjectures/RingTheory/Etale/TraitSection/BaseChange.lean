@@ -59,10 +59,10 @@ variable {B B₁ L : Type*} [CommRing B] [CommRing B₁] [Algebra B B₁] [CommR
 noncomputable def rightTensorAlgAut : G →* (B₁ ⊗[B] L ≃ₐ[B₁] B₁ ⊗[B] L) where
   toFun g := Algebra.TensorProduct.congr AlgEquiv.refl (MulSemiringAction.toAlgEquiv B L g)
   map_one' := by
-    refine AlgEquiv.coe_algHom_injective (Algebra.TensorProduct.ext' fun a m ↦ ?_)
+    refine AlgEquiv.coe_toAlgHom_injective (Algebra.TensorProduct.ext' fun a m ↦ ?_)
     simp
   map_mul' g h := by
-    refine AlgEquiv.coe_algHom_injective (Algebra.TensorProduct.ext' fun a m ↦ ?_)
+    refine AlgEquiv.coe_toAlgHom_injective (Algebra.TensorProduct.ext' fun a m ↦ ?_)
     simp [mul_smul]
 
 /-- The action of `G` on `B₁ ⊗[B] L` through the second factor. -/
@@ -78,7 +78,7 @@ lemma rightTensorAction_smul_tmul (g : G) (a : B₁) (l : L) :
 lemma rightTensorAction_smul_eq (g : G) (x : B₁ ⊗[B] L) :
     letI := rightTensorAction (B := B) (B₁ := B₁) (L := L) G
     g • x = Algebra.TensorProduct.map (AlgHom.id B₁ B₁) (MulSemiringAction.toAlgHom B L g) x := by
-  letI := rightTensorAction (B := B) (B₁ := B₁) (L := L) G
+  let := rightTensorAction (B := B) (B₁ := B₁) (L := L) G
   induction x with
   | zero => simp
   | add x y hx hy => rw [smul_add, hx, hy, map_add]
@@ -89,5 +89,77 @@ lemma smulCommClass_rightTensorAction :
     SMulCommClass G B₁ (B₁ ⊗[B] L) :=
   letI := rightTensorAction (B := B) (B₁ := B₁) (L := L) G
   ⟨fun g b x ↦ map_smul (rightTensorAlgAut (B := B) (B₁ := B₁) (L := L) G g) b x⟩
+
+section Cover
+
+attribute [local instance] Algebra.TensorProduct.rightAlgebra
+
+variable {B B₁ Bk L : Type*} [CommRing B] [CommRing B₁] [Algebra B B₁] [CommRing Bk]
+  [Algebra B Bk] [CommRing L] [Algebra Bk L] [Algebra B L] [IsScalarTower B Bk L]
+
+/-- The map `B₁ ⊗[B] B_K → B₁ ⊗[B] L`. -/
+noncomputable abbrev coverMap : B₁ ⊗[B] Bk →ₐ[B₁] B₁ ⊗[B] L :=
+  Algebra.TensorProduct.map (AlgHom.id B₁ B₁) (IsScalarTower.toAlgHom B Bk L)
+
+set_option linter.flexible false in
+-- The final `simp` unfolds the local definitions of the two inverse maps.
+/-- `B₁ ⊗[B] L` is the base change of `L` along `B_K → B₁ ⊗[B] B_K`. -/
+noncomputable def coverEquiv :
+    letI := (coverMap (B := B) (B₁ := B₁) (Bk := Bk) (L := L)).toRingHom.toAlgebra
+    (B₁ ⊗[B] Bk) ⊗[Bk] L ≃ₐ[B₁ ⊗[B] Bk] B₁ ⊗[B] L :=
+  letI := (coverMap (B := B) (B₁ := B₁) (Bk := Bk) (L := L)).toRingHom.toAlgebra
+  letI : Algebra Bk (B₁ ⊗[B] L) :=
+    ((algebraMap (B₁ ⊗[B] Bk) (B₁ ⊗[B] L)).comp (algebraMap Bk (B₁ ⊗[B] Bk))).toAlgebra
+  haveI : IsScalarTower Bk (B₁ ⊗[B] Bk) (B₁ ⊗[B] L) := .of_algebraMap_eq' rfl
+  let g : L →ₐ[Bk] B₁ ⊗[B] L :=
+    { (Algebra.TensorProduct.includeRight : L →ₐ[B] B₁ ⊗[B] L) with
+      commutes' := fun c ↦ rfl }
+  let F : (B₁ ⊗[B] Bk) ⊗[Bk] L →ₐ[B₁ ⊗[B] Bk] B₁ ⊗[B] L :=
+    Algebra.TensorProduct.lift (Algebra.ofId _ _) g fun _ _ ↦ Commute.all _ _
+  let Hl : B₁ →ₐ[B] (B₁ ⊗[B] Bk) ⊗[Bk] L :=
+    (Algebra.TensorProduct.includeLeft (S := B) :
+      B₁ ⊗[B] Bk →ₐ[B] (B₁ ⊗[B] Bk) ⊗[Bk] L).comp
+      (Algebra.TensorProduct.includeLeft : B₁ →ₐ[B] B₁ ⊗[B] Bk)
+  let Hr : L →ₐ[B] (B₁ ⊗[B] Bk) ⊗[Bk] L :=
+    (Algebra.TensorProduct.includeRight : L →ₐ[Bk] (B₁ ⊗[B] Bk) ⊗[Bk] L).restrictScalars B
+  let H : B₁ ⊗[B] L →ₐ[B] (B₁ ⊗[B] Bk) ⊗[Bk] L :=
+    Algebra.TensorProduct.lift Hl Hr fun _ _ ↦ Commute.all _ _
+  let H' : B₁ ⊗[B] L →ₐ[B₁ ⊗[B] Bk] (B₁ ⊗[B] Bk) ⊗[Bk] L :=
+    { H.toRingHom with
+      commutes' := fun x ↦ by
+        induction x using TensorProduct.induction_on with
+        | zero => simp
+        | add x y hx hy =>
+          rw [map_add, map_add]
+          exact (map_add H.toRingHom _ _).trans (congrArg₂ (· + ·) hx hy)
+        | tmul b c => simp [H, Hl, Hr, RingHom.algebraMap_toAlgebra] }
+  AlgEquiv.ofAlgHom F H'
+    (AlgHom.ext fun x ↦ by
+      induction x using TensorProduct.induction_on with
+      | zero => simp
+      | add x y hx hy =>
+        simp only [map_add, AlgHom.comp_apply, AlgHom.id_apply] at hx hy ⊢
+        rw [hx, hy]
+      | tmul b x => simp [F, H', H, Hl, Hr, g, RingHom.algebraMap_toAlgebra])
+    (AlgHom.ext fun x ↦ by
+      induction x using TensorProduct.induction_on with
+      | zero => simp
+      | add x y hx hy =>
+        simp only [map_add, AlgHom.comp_apply, AlgHom.id_apply] at hx hy ⊢
+        rw [hx, hy]
+      | tmul a x =>
+        induction a using TensorProduct.induction_on with
+        | zero => simp
+        | add a a' ha ha' =>
+          simp only [TensorProduct.add_tmul, map_add, AlgHom.comp_apply, AlgHom.id_apply]
+            at ha ha' ⊢
+          rw [ha, ha']
+        | tmul b c =>
+          simp [F, H', H, Hl, Hr, g, RingHom.algebraMap_toAlgebra]
+          rw [← Algebra.smul_def, ← TensorProduct.smul_tmul, Algebra.smul_def,
+            Algebra.TensorProduct.right_algebraMap_apply, Algebra.TensorProduct.tmul_mul_tmul,
+            mul_one, one_mul])
+
+end Cover
 
 end Algebra.TraitSection
