@@ -1,0 +1,90 @@
+{
+ "id": "lem-pur-system-tensor-transpose-composition",
+ "kind": "statement",
+ "title": "Composition of the counit-defined tensor transposes on systems",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $\\varpi$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Put $A_n=R/\\varpi^n$, $n\\ge1$. Let $X\\xrightarrow fY\\xrightarrow gZ$ be separated finite-type morphisms of separated finite-type $k$-schemes [def-weil-scheme-morphism-properties]. On their small pro-etale sites [def-weil-pbc-proetale-site] let $\\mathscr N_W$ be the category of normalized strict semilinear derived $((A_n)_W)_n$-systems with finite-Tor constructible levels as in [lem-coef-finite-adjunction-diagram-realization]. Use the simultaneous pullback, tensor and adjunction models of [lem-coef-semilinear-derived-sections]. For $h=f,g,gf$ let $F_h\\dashv G_h$ be the section adjunctions of [lem-coef-cartesian-section-adjoint-mates], choosing the specified finite realizations of [lem-coef-finite-adjunction-diagram-realization]. Write $\\epsilon_h$ for their counits, $\\alpha:F_gF_f\\simeq F_{gf}$ for the compact-support comparison [thm-sf-comp-composition], and $c:G_{gf}\\simeq G_fG_g$ for its adjunction conjugate [lem-weil-pbc-mate-pasting]. All tensor and projection maps below are the specified system maps [def-exchange-projection, lem-pur-system-level-projection-formula-coherence], not separately chosen lifts of finite-level maps. Assume their projection maps are invertible on the displayed inputs. All objects below are assumed to lie in these categories.\n\nSet $\\Omega_h=G_h\\mathbf1$, where $\\mathbf1_W=((A_n)_W)_n$ is the coefficient unit on $W$. Define $\\theta_{h,L}:h^*L\\otimes\\Omega_h\\to G_hL$ to be the adjoint transpose of\n$$\\sigma_{h,L}:F_h(h^*L\\otimes\\Omega_h)\\xrightarrow{\\mathrm{sym}}F_h(\\Omega_h\\otimes h^*L)\\xrightarrow{\\mathrm{PF}_{h,\\Omega_h,L}^{-1}}F_h\\Omega_h\\otimes L\\xrightarrow{\\epsilon_{h,\\mathbf1}\\otimes1}L,$$\nincluding unit identifications, as in [def-pur-co-smoothness]. Assume $\\rho=\\theta_{f,\\Omega_g}$ is invertible, set $W=f^*\\Omega_g\\otimes\\Omega_f$, and put $\\mu=\\rho^{-1}c_{\\mathbf1}:\\Omega_{gf}\\simeq W$. For every $K\\in\\mathscr N_Z$, the following maps from $(gf)^*K\\otimes W$ to $G_fG_gK$ are equal:\n$$A_K=c_K\\circ\\theta_{gf,K}\\circ(1\\otimes\\mu^{-1}),\\qquad B_K=\\theta_{f,G_gK}\\circ(f^*\\theta_{g,K}\\otimes1_{\\Omega_f}),$$\nwhere $B_K$ includes the pullback/tensor reassociation $(gf)^*K\\otimes W\\simeq f^*(g^*K\\otimes\\Omega_g)\\otimes\\Omega_f$.\n\nMore precisely both have, under $F_gF_f\\dashv G_fG_g$, the same transpose\n$$F_gF_f((gf)^*K\\otimes W)\\xrightarrow{\\mathrm{sym},\\,\\mathrm{PF}_{\\mathrm{comp}}^{-1}}F_gF_fW\\otimes K\\xrightarrow{t\\otimes1}\\mathbf1_Z\\otimes K\\xrightarrow{\\sim}K,$$\nwhere $t=\\epsilon_{g,\\mathbf1}\\circ F_g(\\sigma_{f,\\Omega_g})$ and\n$$\\mathrm{PF}_{\\mathrm{comp}}=F_g(\\mathrm{PF}_{f,W,g^*K})\\circ\\mathrm{PF}_{g,F_fW,K}.$$\nAll associators, pullback composition and unit identifications are the canonical ones of the same simultaneous models. The equality holds in the derived strict-system category before total inverse limit; no orientation by a twist, smoothness, or faithfulness of general derived evaluation is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+  "place": "sole proof paragraph, counit reconstruction and compatible composition; agent-extracted intermediate lemma from returned proof Steps 4–5, not an assertion quoted from the blueprint"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "lem-coef-finite-adjunction-diagram-realization",
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-cartesian-section-adjoint-mates",
+  "thm-sf-comp-composition",
+  "lem-weil-pbc-mate-pasting",
+  "def-exchange-projection",
+  "lem-pur-system-level-projection-formula-coherence",
+  "def-pur-co-smoothness"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|ProjectionFormula",
+   "results": "0 hits:  [Mathlib/CategoryTheory]",
+   "date": "2026-10-17",
+   "verdict": "no match: MonoidalClosed.compTranspose is composition of internal-Hom evaluations; frobeniusMorphism assumes Cartesian tensor; isMonoidal_comp composes monoidal adjunctions. None states the specified exceptional-system tensor transpose identity for compact supports, which need not be monoidal."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical tensor map pullback K tensor right adjoint unit to right adjoint K is compatible with composition of adjunctions and projection formulas",
+   "results": "8 hits: TensorProduct.AlgebraTensorModule.map_comp, LinearMap.map_rTensor, IsTensorProduct.map_comp, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, LinearMap.rTensor_comp_lTensor, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_unit_app, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, TensorProduct.AlgebraTensorModule.rTensor_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: MonoidalClosed.compTranspose is composition of internal-Hom evaluations; frobeniusMorphism assumes Cartesian tensor; isMonoidal_comp composes monoidal adjunctions. None states the specified exceptional-system tensor transpose identity for compact supports, which need not be monoidal."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε",
+   "date": "2026-10-17",
+   "verdict": "no match: MonoidalClosed.compTranspose is composition of internal-Hom evaluations; frobeniusMorphism assumes Cartesian tensor; isMonoidal_comp composes monoidal adjunctions. None states the specified exceptional-system tensor transpose identity for compact supports, which need not be monoidal."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of projection-formula tensor maps for right adjoints agrees with the tensor map for the composite adjunction",
+   "results": "8 hits: CategoryTheory.tensorRightAdjunction, CategoryTheory.tensorLeftAdjunction, CategoryTheory.MonoidalClosed.compTranspose, CategoryTheory.MonoidalClosed.compTranspose_eq, CategoryTheory.frobeniusMorphism, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.MonoidalClosed.coev_app_comp_pre_app, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: MonoidalClosed.compTranspose is composition of internal-Hom evaluations; frobeniusMorphism assumes Cartesian tensor; isMonoidal_comp composes monoidal adjunctions. None states the specified exceptional-system tensor transpose identity for compact supports, which need not be monoidal."
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusMorphism|compTranspose|isMonoidal_comp",
+   "results": "11 hits: Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean [Mathlib/CategoryTheory/Monoidal]",
+   "date": "2026-10-17",
+   "verdict": "no match: MonoidalClosed.compTranspose is composition of internal-Hom evaluations; frobeniusMorphism assumes Cartesian tensor; isMonoidal_comp composes monoidal adjunctions. None states the specified exceptional-system tensor transpose identity for compact supports, which need not be monoidal."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a cohomologically smooth map the tensor description of exceptional inverse image composes by transposing projection formula and counits",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, LightCondensed.ihomPoints_symm_comp, CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse, CategoryTheory.Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse, rTensor.inverse_of_rightInverse_comp_rTensor",
+   "date": "2026-10-17",
+   "verdict": "no match: MonoidalClosed.compTranspose is composition of internal-Hom evaluations; frobeniusMorphism assumes Cartesian tensor; isMonoidal_comp composes monoidal adjunctions. None states the specified exceptional-system tensor transpose identity for compact supports, which need not be monoidal."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "prop-pur-adic-reconstruction-trace-coherence",
+  "date": "2026-10-17",
+  "group": "Q80"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "sole proof paragraph: “coherence statements are the compatible systems of the finite-level coherence statements”; returned Step 5, equality of the two general-input tensor-map transposes",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

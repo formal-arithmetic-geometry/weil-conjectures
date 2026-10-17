@@ -1,0 +1,107 @@
+{
+ "id": "lem-pur-normalized-reconstruction-adjunction-calculus",
+ "kind": "statement",
+ "title": "Normalized reconstruction and transported adjunction transposes",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $\\varpi$, and a scheme $W$ on which $\\ell$ is invertible [def-weil-l-adic-coefficient-extension, def-pc-scheme]. On a fixed small skeleton of its pro-etale site [def-weil-pbc-proetale-site, def-weil-size-convention], put $B_{n,W}=(R/\\varpi^n)_W$ and $\\widehat R_W=\\varprojlim_n B_{n,W}$ [def-weil-completed-integral-coefficients]. Let $\\mathscr S_W$ be the abelian category of strict semilinear $B_{n,W}$-module systems, with componentwise morphisms, of [lem-coef-derived-system-evaluation-calculus], and use its unbounded derived category. Write $\\mathscr N_W$ for the full subcategory with all transition adjoints $N_m\\otimes^L_{B_{m,W}}B_{n,W}\\to N_n$ invertible for $m\\ge n$, and $\\mathscr C_W\\subset D(\\widehat R_W)$ for the full subcategory of derived-complete complexes [def-coef-normalized-dvr-tower, def-weil-derived-complete]. No cohomological bound, constructibility, uniform Tor interval or equipped local model is assumed.\n\nLet $\\mathcal R_W\\dashv\\mathcal L_W$ be the specified reduction/total-limit adjunction of [lem-coef-derived-system-evaluation-calculus], with unit $u$ and counit $e$; thus $\\mathcal L_W=R\\lim\\circ U_W$, where $U_W$ restricts each coefficient sheaf to $\\widehat R_W$. It restricts to an adjoint equivalence $\\mathscr C_W\\rightleftarrows\\mathscr N_W$. Its actual unit $u_K:K\\to\\mathcal L_W\\mathcal R_WK$ and actual counit $e_N:\\mathcal R_W\\mathcal L_WN\\to N$ are natural isomorphisms on these subcategories. In particular the coefficient comparisons are the scalar-extension adjoints of the specified total-limit projections.\n\nFor schemes $X,Y$ with these same coefficient data, suppose $F:\\mathscr N_X\\rightleftarrows\\mathscr N_Y:G$ is an adjunction with counit $\\epsilon$. Then $\\bar F=\\mathcal L_YF\\mathcal R_X$ is left adjoint to $\\bar G=\\mathcal L_XG\\mathcal R_Y$, with counit at $K\\in\\mathscr C_Y$ equal to\n$$\\bar\\epsilon_K=u_K^{-1}\\circ\\mathcal L_Y(\\epsilon_{\\mathcal R_YK})\\circ\\mathcal L_YF(e_{G\\mathcal R_YK}).$$\nFor any $N\\in\\mathscr N_Y$ and system map $a:P\\to GN$, $P\\in\\mathscr N_X$, put $\\bar a=\\mathcal L_X(a)$. Under the natural identifications $\\bar F\\mathcal L_XP\\cong\\mathcal L_YFP$ and $\\bar G\\mathcal L_YN\\cong\\mathcal L_XGN$ induced by $e$, its adjoint transpose is exactly $\\mathcal L_Y(\\epsilon_N\\circ F(a))$. These identifications are natural for system maps. For composable system functors $F:\\mathscr N_X\\to\\mathscr N_Y$ and $H:\\mathscr N_Y\\to\\mathscr N_Z$, the comparison between $\\bar H\\bar F$ and $\\mathcal L_ZHF\\mathcal R_X$ is $\\mathcal L_ZH(e_{F\\mathcal R_X(-)})$, with the corresponding naturality for transformations. More generally, all these assertions hold with $\\mathscr N_X,\\mathscr N_Y,\\mathscr N_Z$ replaced by full subcategories $\\mathscr N'_W\\subset\\mathscr N_W$ closed under isomorphism, $\\mathscr C_W$ replaced by the full subcategory $\\mathscr C'_W$ of those $K\\in\\mathscr C_W$ with $\\mathcal R_WK\\in\\mathscr N'_W$, and $F,G,H$ functors (resp. an adjunction $F\\dashv G$) defined only between these subcategories; $\\mathcal R_W\\dashv\\mathcal L_W$ restricts to an adjoint equivalence $\\mathscr C'_W\\rightleftarrows\\mathscr N'_W$ since $\\mathcal R_W\\mathcal L_WN\\cong N$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+  "place": "sole proof paragraph, counit reconstruction and compatible composition; agent-extracted intermediate lemma from returned proof Steps 4–5, not an assertion quoted from the blueprint"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-completed-integral-coefficients",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-derived-complete"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ofEquiv|equiv.*[Aa]djun|[Aa]djun.*equiv",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Evaluation.lean, Mathlib/CategoryTheory/Adjunction/Evaluation.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean [Mathlib/CategoryTheory/Adjunction]",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module AdicCompletion and general adjunction transport do not give the unbounded derived sheaf-system equivalence with these actual projection counits. Equivalence/Adjunction basic operations cover only the categorical part, after the reconstruction equivalence is proved."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Equivalence",
+   "results": "6 hits: CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Equivalence.toAdjunction', CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Equivalence.transportSheafificationAdjunction, CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module AdicCompletion and general adjunction transport do not give the unbounded derived sheaf-system equivalence with these actual projection counits. Equivalence/Adjunction basic operations cover only the categorical part, after the reconstruction equivalence is proved."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjunction is transported along equivalences and its counit is the composite of the transported counit and equivalence counits",
+   "results": "8 hits: CategoryTheory.Adjunction.adjunctionOfEquivRight, CategoryTheory.Equivalence.toAdjunction_counit, CategoryTheory.Equivalence.toAdjunction_unit, CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Functor.adjunction, CategoryTheory.Adjunction.ofNatIsoRight, CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module AdicCompletion and general adjunction transport do not give the unbounded derived sheaf-system equivalence with these actual projection counits. Equivalence/Adjunction basic operations cover only the categorical part, after the reconstruction equivalence is proved."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transfer an adjunction F left adjoint G along equivalences of categories with specified units and counits",
+   "results": "8 hits: CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Adjunction.isEquivalence_left_of_isEquivalence_right, CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Adjunction.ofNatIsoLeft, CategoryTheory.Adjunction.isEquivalence_right_of_isEquivalence_left, CategoryTheory.Adjunction.ofNatIsoRight, CategoryTheory.Adjunction.toEquivalence_functor",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module AdicCompletion and general adjunction transport do not give the unbounded derived sheaf-system equivalence with these actual projection counits. Equivalence/Adjunction basic operations cover only the categorical part, after the reconstruction equivalence is proved."
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*[Ss]ystem|derived[Cc]omplete.*equivalence|[Ee]quivalence.*adic",
+   "results": "14 hits: Mathlib/NumberTheory/Padics/RingHoms.lean, Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/Topology/Algebra/Nonarchimedean/AdicTopology.lean, Mathlib/Topology/Category/Compactum.lean, Mathlib/RingTheory/AdicCompletion/Functoriality.lean, Mathlib/RingTheory/WittVector/Compare.lean, Mathlib/RingTheory/LaurentSeries.lean, Mathlib/RingTheory/LaurentSeries.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module AdicCompletion and general adjunction transport do not give the unbounded derived sheaf-system equivalence with these actual projection counits. Equivalence/Adjunction basic operations cover only the categorical part, after the reconstruction equivalence is proved."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived complete complex is equivalent to its normalized inverse system of derived reductions modulo all powers of a uniformizer",
+   "results": "8 hits: AdicCompletion.congr_symm_apply, AdicCompletion.ofLinearEquiv_symm_of, IsAdic.isPrecomplete_iff, AdicCompletion, AdicCompletion.submodule, AdicCompletion.of_ofLinearEquiv_symm, AdicCompletion.sumInv_comp_sum, AdicCompletion.ofAlgEquiv_symm_of",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module AdicCompletion and general adjunction transport do not give the unbounded derived sheaf-system equivalence with these actual projection counits. Equivalence/Adjunction basic operations cover only the categorical part, after the reconstruction equivalence is proved."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, CategoryTheory.Adjunction",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module AdicCompletion and general adjunction transport do not give the unbounded derived sheaf-system equivalence with these actual projection counits. Equivalence/Adjunction basic operations cover only the categorical part, after the reconstruction equivalence is proved."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction to all powers of a uniformizer and total derived inverse limit give an equivalence between derived complete sheaf module complexes and normalized strict semilinear systems, with no boundedness",
+   "results": "8 hits: IsAdicComplete.StrictMono.lift, IsAdicComplete.StrictMono.of_lift, IsAdicComplete.StrictMono.of_comp_lift, isPrecomplete_iff, AdicCompletion, AdicCompletion.ofLinearEquiv_apply, IsAdicComplete.StrictMono.extend, AdicCompletion.ofLinearEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module AdicCompletion and general adjunction transport do not give the unbounded derived sheaf-system equivalence with these actual projection counits. Equivalence/Adjunction basic operations cover only the categorical part, after the reconstruction equivalence is proved."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a proetale site total derived limit inverts normalized varying coefficient towers and its natural counit transports adjunctions",
+   "results": "8 hits: Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, Condensed.profiniteSolidCounit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedε_fac_app, LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module AdicCompletion and general adjunction transport do not give the unbounded derived sheaf-system equivalence with these actual projection counits. Equivalence/Adjunction basic operations cover only the categorical part, after the reconstruction equivalence is proved."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "prop-pur-adic-reconstruction-trace-coherence",
+  "date": "2026-10-17",
+  "group": "Q80"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "sole proof paragraph: “counit of the realized adjunction and its transport is included in the same reconstruction”; returned Step 4, reduction/limit unit, counit and naturality comparisons",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

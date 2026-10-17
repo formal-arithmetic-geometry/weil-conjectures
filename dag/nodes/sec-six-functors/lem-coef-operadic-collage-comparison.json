@@ -61,16 +61,13 @@
    }
   },
   {
-   "text": "Check the remaining family axiom using the dual constant-source test of [lem-coef-infinity-relative-cone-constant-test]. Choose the inert incidence cone of an object $x$ in either endpoint fiber, with boundary shape $K$. Its inert edges exist within that fiber. For a test object $z$, the test square compares $\\operatorname{Map}_{\\mathcal M}(z,x)$ with $\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal M)}(\\Delta_Kz,f)$ and their images under $\\pi$, where $f$ is the incidence boundary. If $z$ and $x$ have the same interval coordinate, these are the endpoint operad's relative Segal-limit test square. That square is a homotopy pullback by the incidence-diagram axiom (iii) of [lem-coef-inert-operad-color-reconstruction], read as follows. The shape $K=N(I_r)$ is one-dimensional: every nonidentity arrow of $I_r$ goes from an edge object over $[1]$ to a vertex object over $[0]$, so no two nonidentity arrows compose. Hence $\\operatorname{Fun}(K,-)$ is the strict pullback of the vertex and edge functor categories over the endpoint evaluations; these evaluations are isofibrations and their fixed-endpoint arrow-space maps are Kan fibrations by [lem-coef-infinity-isofibration-exponentiation], so by [lem-coef-kan-pullback-path-comparison] and [lem-coef-infinity-pinch-comparison] the mapping space $\\operatorname{Map}_{\\operatorname{Fun}(K,-)}(\\Delta_Kz,f)$ is the homotopy limit over $I_r$ of the mapping spaces into the $f_\\alpha$. The base mapping spaces in $\\Delta^{\\mathrm{op}}$ are discrete sets, so the square is a homotopy pullback exactly when, over each base arrow $\\phi$, the induced map of homotopy fibers $\\operatorname{Map}^{\\phi}(z,x)\\to\\lim_{\\alpha\\in I_r}\\operatorname{Map}^{\\alpha\\phi}(z,x_\\alpha)$ is an equivalence, which is axiom (iii). If $z\\in\\mathcal C$ and $x\\in\\mathcal D$, use Step 2 on the apex mapping space. For the boundary mapping space apply [lem-coef-infinity-pointwise-cocartesian-transport] to $q:\\mathcal M\\to\\Delta^1$ and $K$: the constant transformation $\\Delta_K e_z$ is cocartesian because each component is $e_z$. Its mapping-space fiber formula identifies maps $\\Delta_Kz\\to f$ over the unique constant transformation $0\\to1$ with maps $\\Delta_Kuz\\to f$ in $\\operatorname{Fun}(K,\\mathcal D)$. Thus the entire coherent incidence square, including its base map, is the target endpoint's relative Segal-limit square, which is a homotopy pullback. If $z\\in\\mathcal D$ and $x\\in\\mathcal C$, both source-to-apex and source-to-incidence mapping spaces in the interval base are empty, as are their total-space counterparts. The test square is therefore a homotopy pullback of empty spaces. These are all cases; the incidence shape is nonempty also at $[0]$, where it is the single vertex. The constant-source criterion proves the relative $\\pi$-limit assertion, so $\\mathcal M$ is a correspondence in the exact sense of [def-coef-operadic-correspondence].",
+   "text": "Check the remaining family axiom by the dual constant-source test [lem-coef-infinity-relative-cone-constant-test]. For an endpoint object $x$ over $[r]$, take its inert incidence cone $x\\to f$ on $K=N(I_r)$. Apply [lem-coef-operadic-collage-segal-mapping-bridge]: $I_r$ has only edge-to-vertex nonidentity arrows, and the operadic base has discrete mapping spaces. If $z,x$ are in the same endpoint, the required fiber comparisons are exactly the relative-limit axiom of [lem-coef-inert-operad-color-reconstruction]. If $z\\in\\mathcal C$, $x\\in\\mathcal D$, Step 2 identifies the apex mapping space with $\\operatorname{Map}_{\\mathcal D}(uz,x)$. On the boundary, [lem-coef-infinity-pointwise-cocartesian-transport] applied to $q$ and $K$ makes $\\Delta_K e_z$ cocartesian and identifies maps $\\Delta_Kz\\to f$ with maps $\\Delta_Kuz\\to f$ in $\\operatorname{Fun}(K,\\mathcal D)$, compatibly over the operadic base. Thus the same endpoint test applies. If $z\\in\\mathcal D$, $x\\in\\mathcal C$, both total mapping spaces and their interval-base counterparts are empty. The incidence shape is nonempty even for $r=0$ (one vertex), so no empty-diagram exception occurs. The test proves the relative-limit condition of [def-coef-operadic-correspondence].",
    "uses": [
     "def-coef-operadic-correspondence",
-    "def-coef-infinity-relative-cone",
     "lem-coef-infinity-relative-cone-constant-test",
     "lem-coef-infinity-pointwise-cocartesian-transport",
     "lem-coef-inert-operad-color-reconstruction",
-    "lem-coef-infinity-isofibration-exponentiation",
-    "lem-coef-kan-pullback-path-comparison",
-    "lem-coef-infinity-pinch-comparison"
+    "lem-coef-operadic-collage-segal-mapping-bridge"
    ],
    "elementary": false,
    "source": {
@@ -94,18 +91,12 @@
    }
   },
   {
-   "text": "Let $P=(\\mathcal C\\times\\Delta^1)\\amalg_{\\mathcal C\\times\\{1\\}}\\mathcal D$, with its map to $S$. In degree $k$, its simplices are a simplex of $\\mathcal C$ and a base simplex $\\alpha:[k]\\to[1]$ with $\\alpha(0)=0$, or a simplex of $\\mathcal D$ over the constant base simplex $1$. When an operator removes all initial $0$-vertices it applies $u$. Thus $P=G_{[1]}(D)$ of [def-cbc-enhanced-cartesian-fibration]. The map $i_D:P\\to\\mathcal M$ of [lem-cbc-strict-presentation-transport-representation] is identity on both vertex fibers and carries marked transition edges to the $e_c$. Apply the cocartesian opposite of [lem-cbc-cartesian-mapping-simplex-comparison] with $n=1$, $K=\\Delta^1$, and $E$ consisting only of degenerate base edges. Its source marking is precisely $P^\\flat$; its target marking is precisely $\\mathcal M^\\natural$, since Step 1's relative-nerve theorem identifies the cocartesian edges over identities with equivalences in the endpoint fibers, and every equivalence in $\\mathcal M$ lies in an endpoint fiber. Hence $i_D:P^\\flat\\to\\mathcal M^\\natural$ is an absolute marked weak equivalence. Here is the full, unmarked functor-category consequence, without forgetting arbitrary markings. For any quasicategory $Z$ put $W_M=\\operatorname{Fun}(\\mathcal M,Z)$ and $W_P=\\operatorname{Fun}(P,Z)$. Testing the marked weak equivalence against $Z^\\natural$, using [lem-coef-marked-point-cartesian-model], gives a weak equivalence $W_M^\\simeq\\to W_P^\\simeq$: the markings on $\\mathcal M$ are equivalences, which every functor preserves, and those on $P$ are degenerate. Repeat the same test with the quasicategory $\\operatorname{Arr}(Z)$; currying identifies the resulting map with $\\operatorname{Arr}(W_M)^\\simeq\\to\\operatorname{Arr}(W_P)^\\simeq$. These maps commute strictly with joint endpoint evaluation to $W_M^\\simeq\\times W_M^\\simeq$ and $W_P^\\simeq\\times W_P^\\simeq$. Both endpoint maps are Kan fibrations: they are the sharp mapping-object restriction along $(\\partial\\Delta^1)^\\flat\\hookrightarrow(\\Delta^1)^\\flat$ into $W_M^\\natural$ or $W_P^\\natural$, by [lem-coef-marked-anodyne-lifting-calculus]. Their strict fibers at $(F,G)$ are exactly $U_{W_M}(F,G)$ or $U_{W_P}(Fi_D,Gi_D)$; transformations with constant endpoints have equivalence components, so taking the core adds no restriction to these fibers. [lem-coef-kan-pullback-path-comparison] and [lem-coef-kan-homotopy-pullback-invariance] give weak equivalences of these fibers. By [lem-coef-infinity-pinch-comparison], restriction is therefore fully faithful on the right-pinched mapping spaces as well. The first core weak equivalence gives essential surjectivity, so [lem-coef-infinity-full-essential-image] gives an equivalence $W_M\\to W_P$. The quasicategory and pointwise equivalence facts here are [lem-cbc-enhanced-functor-cone-calculus]. In particular $i_D$ is a categorical equivalence by [lem-coef-joyal-functor-equivalence-test]. Finally a map $P\\times\\Delta^k\\to Z$ is exactly a map from $\\mathcal D\\times\\Delta^k$, a map from $\\mathcal C\\times\\Delta^1\\times\\Delta^k$, and equality on $\\mathcal C\\times\\{1\\}\\times\\Delta^k$. This is the claimed coherent transformation description in every parameter degree.",
+   "text": "Let $P=(\\mathcal C\\times\\Delta^1)\\amalg_{\\mathcal C\\times\\{1\\}}\\mathcal D$. Its degree-$k$ simplices are pairs $(c,\\alpha)$ with $\\alpha:[k]\\to[1]$, $\\alpha(0)=0$, or simplices of $\\mathcal D$ over constant $1$; operators removing all $0$-vertices apply $u$. Hence $P=G_{[1]}(D)$ of [def-cbc-enhanced-cartesian-fibration]. The map $i_D:P\\to\\mathcal M$ of [lem-cbc-strict-presentation-transport-representation] is identity on endpoint fibers. Apply the cocartesian opposite of [lem-cbc-cartesian-mapping-simplex-comparison] with $n=1$, $K=\\Delta^1$, and only degenerate base edges marked. Its source marking is $P^\\flat$, and its target marking consists of equivalences: cocartesian edges over identities are endpoint equivalences, and every equivalence of $\\mathcal M$ lies in an endpoint. Thus $P^\\flat\\to\\mathcal M^\\natural$ is an absolute marked weak equivalence. By [lem-coef-marked-flat-categorical-equivalence-test], $i_D$ is a categorical equivalence, and [lem-coef-joyal-functor-equivalence-test] gives the specified equivalence $\\operatorname{Fun}(\\mathcal M,Z)\\to\\operatorname{Fun}(P,Z)$. Degreewise, a map $P\\times\\Delta^k\\to Z$ is precisely a map from $\\mathcal D\\times\\Delta^k$ and one from $\\mathcal C\\times\\Delta^1\\times\\Delta^k$ agreeing on $\\mathcal C\\times\\{1\\}\\times\\Delta^k$. This supplies the claimed transformation description in every parameter degree.",
    "uses": [
     "def-cbc-enhanced-cartesian-fibration",
     "lem-cbc-strict-presentation-transport-representation",
     "lem-cbc-cartesian-mapping-simplex-comparison",
-    "lem-coef-marked-point-cartesian-model",
-    "lem-coef-marked-anodyne-lifting-calculus",
-    "lem-coef-kan-pullback-path-comparison",
-    "lem-coef-kan-homotopy-pullback-invariance",
-    "lem-coef-infinity-pinch-comparison",
-    "lem-coef-infinity-full-essential-image",
-    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-marked-flat-categorical-equivalence-test",
     "lem-coef-joyal-functor-equivalence-test"
    ],
    "elementary": false,
@@ -115,16 +106,10 @@
    }
   },
   {
-   "text": "The equivalence of Step 5 also holds for functors over $S$ with target $p:\\mathcal V^\\otimes\\to S$. Let $s_P:P\\to S$ and $s_M:\\mathcal M\\to S$ be the structure maps, with $s_P=s_Mi_D$. Applying [lem-coef-joyal-functor-equivalence-test] to $i_D$ with target $S$ gives a coherent equivalence $\\operatorname{Fun}(\\mathcal M,S)\\to\\operatorname{Fun}(P,S)$. Every equivalence edge in either base functor category is an identity: its vertex components are identities since $S$ is an ordinary nerve with no nonidentity isomorphisms; the naturality squares force equality on edges, and a simplex in an ordinary nerve is uniquely determined by its successive edges. The pointwise equivalence test and induced mapping-space equivalences used here are [lem-cbc-enhanced-functor-cone-calculus]. Given $h:P\\to\\mathcal V^\\otimes$ over $s_P$, Step 5 supplies $K:\\mathcal M\\to\\mathcal V^\\otimes$ and an equivalence $Ki_D\\simeq h$. Its base is an equivalence $(pK)i_D\\simeq s_P$. Full faithfulness of base restriction lifts it up to homotopy to an equivalence $pK\\simeq s_M$. Since base equivalences are identities, $pK=s_M$ exactly, and the original equivalence $Ki_D\\simeq h$ is over $s_P$. This proves essential surjectivity on strict fibers. For full faithfulness, $p$ is an inner fibration lifting the only equivalences of $S$, so it is an isofibration. [lem-coef-infinity-isofibration-exponentiation] makes both functor projections to their base functor categories isofibrations, and their fixed-endpoint arrow-space maps Kan fibrations. By [lem-coef-infinity-pinch-comparison] and [lem-coef-kan-pullback-path-comparison], the strict relative mapping spaces therefore compute the homotopy fibers over the identity base transformations. Step 5 gives equivalences on total mapping spaces and the base restriction gives equivalences on base mapping spaces. [lem-coef-kan-homotopy-pullback-invariance] now gives equivalences on the relative mapping spaces. Full faithfulness and essential surjectivity yield the relative coherent equivalence by [lem-coef-infinity-full-essential-image].",
+   "text": "Apply [lem-coef-operadic-collage-relative-overbase-equivalence] to the categorical equivalence $i_D$ of Step 5, over $S=N(\\Delta^{\\mathrm{op}})$ with structure maps $s_P=s_M i_D$. The base has only identity equivalences. By [def-coef-monoidal-infinity-category], $p:\\mathcal V^\\otimes\\to S$ is a cocartesian fibration, hence an inner fibration; it lifts the only base equivalences by identity edges and is therefore an isofibration. The cited lemma identifies the strict over-$S$ functor quasicategories and their relative mapping spaces, naturally under restriction and in transformation parameters. This gives the required over-base version of Step 5.",
    "uses": [
     "def-coef-monoidal-infinity-category",
-    "lem-coef-infinity-isofibration-exponentiation",
-    "lem-coef-joyal-functor-equivalence-test",
-    "lem-coef-infinity-pinch-comparison",
-    "lem-coef-kan-pullback-path-comparison",
-    "lem-coef-kan-homotopy-pullback-invariance",
-    "lem-coef-infinity-full-essential-image",
-    "lem-cbc-enhanced-functor-cone-calculus"
+    "lem-coef-operadic-collage-relative-overbase-equivalence"
    ],
    "elementary": false,
    "source": {
@@ -176,31 +161,30 @@
   }
  ],
  "proof_deps": [
-  "def-coef-operadic-correspondence",
-  "lem-cbc-strict-presentation-transport-representation",
-  "lem-coef-joyal-quasicategory-characterizations",
-  "lem-coef-cocartesian-straightening",
-  "def-coef-infinity-relative-cone",
-  "lem-coef-infinity-relative-cone-constant-test",
-  "lem-coef-infinity-pointwise-cocartesian-transport",
-  "lem-coef-infinity-arrow-target-right-fibration",
-  "lem-coef-infinity-slice-arrow-equivalence",
-  "lem-coef-space-valued-straightening",
-  "lem-cbc-enhanced-functor-cone-calculus",
   "def-cbc-enhanced-cartesian-fibration",
-  "lem-cbc-cartesian-mapping-simplex-comparison",
-  "lem-coef-marked-point-cartesian-model",
-  "lem-coef-marked-anodyne-lifting-calculus",
-  "lem-coef-kan-pullback-path-comparison",
-  "lem-coef-kan-homotopy-pullback-invariance",
-  "lem-coef-infinity-pinch-comparison",
-  "lem-coef-infinity-full-essential-image",
-  "lem-coef-joyal-functor-equivalence-test",
-  "def-coef-monoidal-infinity-category",
-  "lem-coef-infinity-isofibration-exponentiation",
-  "lem-coef-infinity-arrow-morphism-square",
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-inert-operad-color-reconstruction"
+  "def-coef-monoidal-infinity-category",
+  "def-coef-operadic-correspondence",
+  "lem-cbc-cartesian-mapping-simplex-comparison",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-strict-presentation-transport-representation",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-inert-operad-color-reconstruction",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-relative-cone-constant-test",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-joyal-functor-equivalence-test",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-marked-flat-categorical-equivalence-test",
+  "lem-coef-operadic-collage-relative-overbase-equivalence",
+  "lem-coef-operadic-collage-segal-mapping-bridge",
+  "lem-coef-space-valued-straightening"
  ],
  "proof_origin": {
   "by": "agent",
@@ -301,7 +285,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-free-cocone-characterization",
@@ -324,7 +308,7 @@
   "date": "2026-10-17",
   "item": "lem-coef-operadic-collage-comparison",
   "worker": "stage1",
-  "summary": "Nine-step proof with statement unchanged and no new nodes after second reading. The interval relative-nerve fibration is proved by a direct mixed inner-horn filler. The coherent Segal check cites the existing constant-source test and pointwise cocartesian theorem. The existing marked mapping-simplex comparison, with only degenerate base edges marked, gives an absolute marked equivalence; tests against Z and Arr(Z), followed by mapping-fiber comparison, give the full functor-category equivalence. The strict over-base proof uses the existing Joyal functor-category test and the absence of nonidentity base equivalences. Active slices, algebra conditions, comma mapping spaces and naturality are explicit. No Mathlib leaf or project attachment.",
+  "summary": "Repair of the long-step return: statement and Lean record unchanged; all other steps retained. Step 3 cites the extracted incidence mapping-space bridge; step 5 uses the existing marked-flat categorical-equivalence test and Joyal functor test; step 6 cites the extracted strict relative-functor comparison. Two new unsplit supporting statements, no Mathlib leaves.",
   "blueprint": "The historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, needs coherent coefficient adjunction diagrams before R lim. Through the recorded free-algebra/rectification ancestry, this item supplies only the cylinder comparison in Remark A.4.2 used by lem-coef-operadic-free-cocone-characterization. The current main-20261015 proof still contains that derived coefficient-adjunction calculation. This is below the unit route; no chapter, unit, target or coefficient category has changed.",
   "tool_uses": [
    {
@@ -342,6 +326,10 @@
    {
     "node": "lem-cbc-cartesian-mapping-simplex-comparison",
     "why": "Only its general mapping-simplex comparison with n=1, full base simplex, and degenerate base edges marked is used. This yields an absolute marked equivalence with equivalence-only target marking; the full unmarked functor comparison is proved in Step 5. No geometric route of the other unit is imported."
+   },
+   {
+    "node": "lem-coef-marked-flat-categorical-equivalence-test",
+    "why": "General marked-flat to categorical-equivalence criterion, applied to the interval comparison; it does not replace the operadic route."
    }
   ]
  },
@@ -349,14 +337,15 @@
   "lem-cbc-strict-presentation-transport-representation",
   "def-cbc-enhanced-cartesian-fibration",
   "lem-cbc-enhanced-functor-cone-calculus",
-  "lem-cbc-cartesian-mapping-simplex-comparison"
+  "lem-cbc-cartesian-mapping-simplex-comparison",
+  "lem-coef-marked-flat-categorical-equivalence-test"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q16-daece133a",
-  "group": "Q16",
+  "reviewer": "NT-cc-Q113-1c6dd0c73",
+  "group": "Q113",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-daece133a (reviewer sub-agent of L); spot-checked: FIX: the mathematics is correct and I read all nine steps, but two small faults needed repair; the corrected item is in fixes/dag/nodes/sec-six-functors/lem-coef-operadic-collage-comparison.json. The delivery is the item alone: the report's file list is stale and still names two new nodes, which the second reading removed and which are absent from the snapshot. Statement unchanged. No cycle: none of the 517 transitive dependencies reaches the item. proof_deps equals the union of step uses. The blueprint ancestry is kept. Sources: Gepner–Haugseng A.3.1–A.3.3 and A.4.1, plus the cylinder Remark A.4.2; they are not in literature/, are listed as WANTED, and proof_origin is agent. Checks by step: (1) the relative nerve over [1] is pairs (a,b) with b|_Z = u a; the initial block Z lies in the d_n face, which is in the horn since i<n, so the target horn fills over S; the base has only identity equivalences. (2) Mapping spaces into the target fibre are strict; cocartesian e_c^* with point base spaces is inverted by r; the hypotheses on u_[0] and the zero fibres are used here. (3) All endpoint cases checked; the empty reverse case needs a nonempty incidence shape, which holds even at [0]. (4) The active subcategories are quasicategories, the slices compare fibrewise by r, and straightening gives the equivalence. (5) P = G_[1](D) checked degreewise; mapping-simplex comparison with n=1 and degenerate marking gives P^flat to M^natural; tests against Z and Arr(Z), Kan fibre comparison, full-essential-image and the Joyal test give a categorical equivalence. (6) Base functor categories over Delta-op have only identity equivalences. (7) The full subcategory restriction gives exactly the comma pullback with eta: X to u^*F. (8) The arrow-square orientation runs from theta a to (u^*b) eta. (9) The cocone arrow is F(alpha) eta_c. Small cases checked: u = id, empty operads (C empty forces D empty), r = 0, terminal V. Fix 1 (C1/C3, Step 3): the same-endpoint case assumed the relative-cone form of the Segal condition, but operad axiom (iii) of lem-coef-operadic-algebra-presentability is a mapping-space limit over I_n and no node bridged the two. Added the bridge (I_n is one-dimensional, so Fun(K,-) is a pullback along isofibrations and its mapping spaces are the homotopy limit; discrete base) and cited presentability, isofibration-exponentiation, kan-pullback-path-comparison and pinch-comparison; same unit, no cycle. Fix 2 (C1, Step 8): the transfer along the Step 7 equivalence needs mapping-space invariance from lem-cbc-enhanced-functor-cone-calculus; added to the text and uses. Accepted tool_uses, generic quasicategory tools (the unit does not cite sk-prop-sf-cbc): lem-cbc-strict-presentation-transport-representation, lem-cbc-enhanced-functor-cone-calculus, lem-cbc-cartesian-mapping-simplex-comparison, and def-cbc-enhanced-cartesian-fibration (a definition, harmless).; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-1c6dd0c73 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement in full. This delivery repairs the long-step return of the Q16-reviewed split. Compared with the Q16 fixed copy, the statement and steps 1, 2, 4, 7, 8 and 9 are unchanged; steps 3, 5 and 6 are now at most 1375 characters. proof_deps equals the union of uses, and the item does not occur among its 625 transitive dependencies, so there is no cycle. Step 3: I_r is exactly the inert category I_n of lem-coef-inert-operad-color-reconstruction. Over the ordinary base Δ^op×[1], the bridge's fiber test reduces the same-endpoint case to the reconstruction relative-limit axiom and the C→D case, through Step 2 and pointwise-cocartesian-transport, to the axiom in D. The D→C case is vacuous because there is no base arrow 1→0. Step 5: P=G_[1](D) checked degreewise; the dual mapping-simplex comparison with n=1 and degenerate E gives P^♭→M^♮, and the marked-flat test and the Joyal (i)⇒(ii) test then give the functor equivalence. Step 6: Δ^op has only identity isomorphisms, and V^⊗→S is an isofibration. Steps 7 and 8 have the correct comma orientation (θa and (u^*b)η). New bridge node: true (end/limit formula; discrete base mapping spaces give the fiberwise criterion); tested at r=0, r=1, empty fibers and no base arrow. It is not a duplicate of mapping-excision or the relative-cone tests. New overbase node: true (isofibration fibers are homotopy fibers; Joyal test on total and base). It had two B2 faults, both repaired in fixes/: it required V small although Step 6 applies it to a possibly large V^⊗, and it referred to nonexistent 'endpoint restrictions'. The statement now allows large V and says compatibility with restriction along i. No weakening and no drop. Accepted tool_uses: lem-cbc-strict-presentation-transport-representation, lem-cbc-cartesian-mapping-simplex-comparison, lem-cbc-enhanced-functor-cone-calculus, def-cbc-enhanced-cartesian-fibration. Gepner–Haugseng A.3–A.4 is not archived: WANTED, proof_origin agent, and I could not read it at the cited place. Not a target node; no coefficient category or base-change morphism involved; no SGA.; 1 file(s) fixed by the reviewer"
  }
 }
