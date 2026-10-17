@@ -57,16 +57,14 @@
    }
   },
   {
-   "text": "For the base case $N=2,i=1$, apply the cocartesian-arrow projection to $p$. The fixed base edge $0\\to1$ defines a simplicial map $\\mathcal C_0\\to Z$: every vertex belongs to $Z$ by the lift hypothesis and $Z$ is full. Its pullback is a trivial Kan fibration; choose vertices and then lift successive boundaries to obtain a section, hence $h:\\Delta^1\\times\\mathcal C_0\\to\\mathcal C$ with source the inclusion and every vertical edge cocartesian. Put $D=\\mathcal C_{12}$, $A=(\\Delta^1\\times\\mathcal C_0)\\amalg_{\\{1\\}\\times\\mathcal C_0}\\mathcal C_1$, and $B=(\\Delta^1\\times\\mathcal C_0)\\amalg_{\\{1\\}\\times\\mathcal C_0}D$. To obtain the two comparisons without a new lemma, first regard $\\mathcal C_{01}$ over $\\Delta^1$ and then regard $\\mathcal C$ over $\\Delta^1$ by the collapse $0\\mapsto0,1,2\\mapsto1$. Both maps are cocartesian fibrations. For the latter, an outer-horn problem with first edge $h(x):x\\to F(x)$ projects to an ordered simplex in $\\Delta^2$: in dimension two its last index is at least $1$, and in higher dimensions the adjacent edges are already specified. Thus its original $p$-cocartesian filler solves this problem. These give all nonidentity base-edge lifts, and identity edges supply the degenerate lifts: they are equivalences by degenerate triangle witnesses, so the equivalence outer-horn lemma fills their absolute outer horns; the filler projects to the required simplex since the simplex base is determined by its vertices. After taking opposites and reversing the order of the two base vertices, these are cartesian fibrations, with terminal fiber $\\mathcal C_0^{\\mathrm{op}}$. By the explicit mapping-simplex formula, $A^{\\mathrm{op}}$ and $B^{\\mathrm{op}}$ are the $n=1$ mapping simplices of the chains $\\mathcal C_1^{\\mathrm{op}}\\leftarrow\\mathcal C_0^{\\mathrm{op}}$ and $D^{\\mathrm{op}}\\leftarrow\\mathcal C_0^{\\mathrm{op}}$ respectively, with transition $F=h|_{\\{1\\}}$ followed by inclusion. The maps induced by $h$ are identities on both vertex fibers and carry the distinguished marked edges to the cartesian opposites of $h(x)$. The universal mapping-simplex theorem, with $T=\\Delta^1$, therefore gives categorical equivalences $A^{\\mathrm{op}}\\to\\mathcal C_{01}^{\\mathrm{op}}$ and $B^{\\mathrm{op}}\\to\\mathcal C^{\\mathrm{op}}$. Taking opposites preserves categorical equivalences directly from the testing definition: $\\operatorname{Fun}(K^{\\mathrm{op}},Q)\\cong\\operatorname{Fun}(K,Q^{\\mathrm{op}})^{\\mathrm{op}}$, and $Q$ ranges over all quasicategories. Hence $A\\to\\mathcal C_{01}$ and $B\\to\\mathcal C$ are categorical equivalences. The map $A\\to B$ is a monomorphism, being the pushout of $\\mathcal C_1\\hookrightarrow D$. Pushing out $A\\to\\mathcal C_{01}$ along it gives $B\\to\\mathcal C_{01}\\amalg_{\\mathcal C_1}D=H_1$, a categorical equivalence by left properness. Its composite with $H_1\\to\\mathcal C$ is $B\\to\\mathcal C$, so two-out-of-three proves the base case.",
+   "text": "For the base case $N=2,i=1$, apply the cocartesian-arrow projection to $p$. The fixed edge $0\\to1$ defines $\\mathcal C_0\\to Z$: every vertex belongs to $Z$ by the lift hypothesis and $Z$ is full. Its pullback is a trivial Kan fibration; choose vertices and lift successive boundaries to obtain a section. This gives $h:\\Delta^1\\times\\mathcal C_0\\to\\mathcal C$ starting at the inclusion, over $0\\to1$, with every vertical edge cocartesian. Apply the prism-comparison lemma to this $p,h$. With $D=\\mathcal C_{12}$ and its pushouts $A,B$ as stated there, it gives categorical equivalences $A\\to\\mathcal C_{01}$ and $B\\to\\mathcal C$. The map $A\\to B$ is a monomorphism: it is the pushout of the degreewise inclusion $\\mathcal C_1\\hookrightarrow D$. Left properness therefore makes $B\\to\\mathcal C_{01}\\amalg_{\\mathcal C_1}D$ a categorical equivalence. Degreewise union and intersection identify this last pushout with $H_1$: the base horn is the union of edges $01,12$ with intersection vertex $1$. Its composite with $H_1\\to\\mathcal C$ is the prism map $B\\to\\mathcal C$, since both restrict to $h$ and the inclusion of $D$. Two-out-of-three proves the base case.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "def-coef-infinity-fibrations",
-    "lem-coef-infinity-cocartesian-arrow-projection",
     "lem-coef-joyal-model-structure",
-    "lem-coef-all-cofibrant-left-proper",
-    "lem-coef-cartesian-mapping-simplex-presentation",
-    "lem-cbc-mapping-simplex-universal-equivalence",
-    "lem-cbc-equivalence-outer-horn-filling"
+    "lem-coef-infinity-cocartesian-arrow-projection",
+    "lem-coef-infinity-cocartesian-prism-comparison",
+    "lem-coef-all-cofibrant-left-proper"
    ],
    "elementary": false,
    "source": {
@@ -75,11 +73,12 @@
    }
   },
   {
-   "text": "For $i>1$, use strong induction on $N\\geq3$, with $N=3,i=2$ proved in Steps 6–7. For $N>3$, let $c:\\Delta^N\\to\\Delta^3$ send indices below $i-1$ to $0$, $i-1$ to $1$, $i$ to $2$, and indices above $i$ to $3$. Order the nondegenerate simplices on which $c$ is surjective in nonincreasing dimension, with $\\sigma_1=\\Delta^N$, and remove successively each $\\sigma_j$ and its face $\\sigma_j^0$ omitting $i$, including degeneracies, to form $K_j$, $0\\leq j\\leq m$. This corrects the source's inconsistent word 'nondecreasing'. Every proper coface of a removed $\\sigma_k$ belongs to the same surjective family and has already been removed. A proper coface of its partner omitting $i$ is either a coface of $\\sigma_k$ or the partner of a larger surjective simplex. Thus $K_j$ is a simplicial subset. Among the codimension-one faces of $\\sigma_j$, the face omitting $i$ is removed. A different face which is surjective belongs to the family in smaller dimension and is not yet removed; a different face which is not surjective still contains $i$ and cannot be a removed partner. All proper faces of the omitted face lie in these retained faces. Therefore $K_j\\cap\\sigma_j=\\Lambda_{p_j}^{n_j}$, where $p_j$ is the position of $i$ in $\\sigma_j$, and $K_{j-1}=K_j\\cup\\sigma_j$. Degreewise inverse image makes this union/intersection square a pushout. Surjectivity forces a vertex below $i-1$ and one above $i$, so $1<p_j<n_j$ and the preceding vertex is exactly $i-1$. For $j>1$, $n_j<N$, and the original cocartesian lifts restrict to the indicated pair in this face. Induction and left properness therefore give $p^{-1}K_m\\to p^{-1}K_1=H_i$ a categorical equivalence. A remaining simplex is precisely one whose $c$-image omits some vertex other than $2$; hence $K_m=c^{-1}\\Lambda^3_2$. To check that an edge over $i-1\\to i$ is $cp$-cocartesian, consider any prescribed outer-horn lifting problem with this first edge. In dimension two the last original vertex index is at least $i$, because its $c$-image is at least $2$ and $c^{-1}(2)=\\{i\\}$. In higher dimensions the horn already contains every adjacent edge, so its projected original vertex indices are ordered. They determine a unique simplex of $\\Delta^N$, whose restriction is the original projected horn. The original $p$-cocartesian lifting property supplies a filler over it; composing its base with $c$ gives exactly the prescribed $\\Delta^3$ simplex, since these have the same vertices. Also $cp$ is inner. Apply Steps 6–7 to $cp$, and two-out-of-three gives $H_i\\to\\mathcal C$.",
+   "text": "For $i>1$, use strong induction on $N\\geq3$, with $N=3,i=2$ proved in Steps 6–7. For $N>3$, use the collapse $c:\\Delta^N\\to\\Delta^3$ and filtration $K_m\\subseteq\\cdots\\subseteq K_0$ of the collapse-filtration lemma. For $j>1$ its attaching face has dimension $n_j<N$, with distinguished position $1<p_j<n_j$ and preceding vertex exactly $i-1$. The stipulated cocartesian lifts restrict to that face by Step 1. Degreewise inverse image takes its union/intersection square to a pushout square. Induction on the restricted map and left properness show that each $p^{-1}K_j\\to p^{-1}K_{j-1}$ for $j>1$ is a categorical equivalence; their composite gives $p^{-1}K_m\\to p^{-1}K_1=H_i$. The lemma identifies $K_m=c^{-1}\\Lambda^3_2$. For an outer-horn lifting problem for $cp$ whose first edge is a chosen lift over $i-1\\to i$, in dimension two the last original vertex index is at least $i$: its $c$-image is at least $2$, and $c^{-1}(2)=\\{i\\}$. In higher dimensions the horn already contains every adjacent edge, so the projected original indices are ordered. In either case they determine a unique simplex of $\\Delta^N$ extending the projected horn. The $p$-cocartesian lifting property gives a filler over it, and its composite under $c$ is the prescribed simplex, since standard simplices are determined by their vertices. Thus the chosen edges are $cp$-cocartesian. Also $cp$ is inner by Step 1. Apply Steps 6–7 to $cp$ and use two-out-of-three with $p^{-1}K_m\\to H_i$ to prove $H_i\\to\\mathcal C$.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "def-coef-infinity-fibrations",
     "lem-coef-joyal-model-structure",
+    "lem-coef-infinity-inner-horn-collapse-filtration",
     "lem-coef-all-cofibrant-left-proper"
    ],
    "elementary": false,
@@ -121,12 +120,11 @@
  "proof_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "lem-cbc-equivalence-outer-horn-filling",
-  "lem-cbc-mapping-simplex-universal-equivalence",
   "lem-coef-all-cofibrant-left-proper",
-  "lem-coef-cartesian-mapping-simplex-presentation",
   "lem-coef-infinity-cocartesian-arrow-projection",
+  "lem-coef-infinity-cocartesian-prism-comparison",
   "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-inner-horn-collapse-filtration",
   "lem-coef-infinity-relative-joyal-factorization",
   "lem-coef-joyal-model-structure",
   "lem-coef-joyal-quasicategory-characterizations"
@@ -188,7 +186,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-correspondence-kan-filling",
@@ -219,18 +217,9 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-cocartesian-inner-horn-comparison",
   "worker": "stage1",
-  "summary": "Retained the original item statement, provenance and searches. Repaired both descending filtrations, terminal indices, and cocartesian preservation under collapse. Replaced the duplicate prism prerequisite by existing mapping-simplex comparison, specialized explicitly after a collapse and taking opposites. Corrected the false relative factorization to HA Lemma 3.1.2.4 with its actual hypotheses. Cited existing left-properness and functor-equivalence characterizations, and computed right mapping spaces degreewise in the last step. One statement-only auxiliary node remains. Second reading expands the coface-closure and second attaching-horn checks, the collapse lifting problem, and the mapping-space inverse and operators.",
-  "blueprint": "Realizes the inherited ancestor operadic-extension chain via HA Lemma 2.4.4.6: Steps 2–4 handle i=1 and its prism base case, Step 5 handles i>1, and Steps 6–7 handle the horn-preserving completion and right mapping-space comparison. Unit/chapter bindings are retained.",
-  "tool_uses": [
-   {
-    "node": "lem-cbc-mapping-simplex-universal-equivalence",
-    "why": "The generic universal mapping-simplex theorem gives the two n=1 transport comparisons in HA Lemma 2.4.4.6 after the explicit collapse and taking opposites. It is in the compact-support unit, but supplies a general quasicategorical tool, not a replacement for this unit route; the same-unit presentation node does not assert the underlying categorical equivalence."
-   },
-   {
-    "node": "lem-cbc-equivalence-outer-horn-filling",
-    "why": "The generic equivalence outer-horn filler makes identity edges cocartesian over a simplex in the mapping-cylinder specialization. The base simplex is determined by vertices, so its absolute filler is also the required relative filler."
-   }
-  ]
+  "summary": "Retained the original item statement, provenance and searches. Repaired both descending filtrations, terminal indices, and cocartesian preservation under collapse. Replaced the duplicate prism prerequisite by existing mapping-simplex comparison, specialized explicitly after a collapse and taking opposites. Corrected the false relative factorization to HA Lemma 3.1.2.4 with its actual hypotheses. Cited existing left-properness and functor-equivalence characterizations, and computed right mapping spaces degreewise in the last step. One statement-only auxiliary node remains. Second reading expands the coface-closure and second attaching-horn checks, the collapse lifting problem, and the mapping-space inverse and operators. Repair Q88 (2026-10-17): extracted the non-elementary prism comparisons from Step 4 and the combinatorial four-block collapse filtration from Step 5 into two statement-only nodes; retained the two pushout/induction applications and the cocartesian-collapse verification in short proof steps. Statement, Lean record, all other proof steps and inherited provenance are unchanged.",
+  "blueprint": "Realizes the inherited ancestor operadic-extension chain via HA Lemma 2.4.4.6: Steps 2–4 handle i=1 and its prism base case, Step 5 handles i>1, and Steps 6–7 handle the horn-preserving completion and right mapping-space comparison. Unit/chapter bindings are retained. Q88 extracts precisely the prism comparisons and second-filtration subarguments without changing that route.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-cbc-mapping-simplex-universal-equivalence",
@@ -239,10 +228,10 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q15-d3d83f977",
-  "group": "Q15",
+  "reviewer": "NT-cc-Q88-90d593d00",
+  "group": "Q88",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-d3d83f977 (reviewer sub-agent of L); spot-checked: Read in full against a local text copy of the official HA PDF on this machine (/tmp/ha_txt; HA is not in literature/, WANTED recorded): Lemma 2.4.4.6, printed pp. 307-309, and Lemma 3.1.2.4, pp. 330-332. Item statement: same as HA 2.4.4.6; a map from a quasicategory to Delta^N is automatically inner, and the hypothesis is the same. Steps 1-7 checked one by one. Both filtrations are closed under cofaces and give intersections Lambda^{n_j}_1 and Lambda^{n_j}_{p_j} with 1<p_j<n_j; K_1 is the horn; K_m=c^{-1}Lambda^2_1 and c^{-1}Lambda^3_2. Edges stay cocartesian after the collapse by the ordered-vertex argument. The N=2 case: the arrow-projection section h, then the n=1 mapping simplex after opposites, matched to M(A)=(Delta^1 x A_1) glued at {0} x A_1 to A_0, with marked edges, fiber identities and left properness checked. (3,2) case: Joyal-fibration criterion (1), lift against a, right-pinched mapping spaces lie inside the horn preimage, full-essential-image and criterion (2). HA's 'nondecreasing' at p. 308 is a typo, correctly repaired. New node lem-coef-infinity-relative-joyal-factorization is exactly HA 3.1.2.4, statement only, tested on empty E and on the identity of Lambda^3_2. It is neither a restated clause nor a duplicate (DAG grep for 3.1.2.4, Lambda^3_2, joyal/horn/cocartesian/prism candidates). Accepted tool_uses: lem-cbc-mapping-simplex-universal-equivalence and lem-cbc-equivalence-outer-horn-filling, both generic quasicategory tools. Minor: the new node has no lean_audit key (default none/none); not fixed. No changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-90d593d00 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement and Lean record unchanged, matching HA Lemma 2.4.4.6, pp. 307–309, checked against a local text copy of the official PDF), all 7 steps, both new nodes and every cited statement. Checked HTT 3.2.2.3/3.2.2.5–3.2.2.7, pp. 179–181. Step 4 (base case N=2, i=1): the arrow-projection node gives the coherent h. The new prism node gives A→C_01 and B→C. A→B is a monomorphism, C_01 ⊔_A B = H_1, and left properness plus two-out-of-three finish the case. Step 5 (case i>1): the new filtration node, the induction on lower-dimensional faces with 1<p_j<n_j and predecessor i-1, left properness, the cocartesian check after the collapse (c^{-1}(2)={i}), then Steps 6–7. Prism node: true via collapse to Δ^1, opposites and the n=1 mapping simplex (the HTT formula was checked), then HTT 3.2.2.7(2) with T=Δ^1. Tested with C_0 empty (both maps are isomorphisms) and with p=id_{Δ^2} (gives Λ^2_1→Δ^2). It does not restate the parent and is more than a one-line specialization of lem-cbc-mapping-simplex-universal-equivalence. Filtration node: checked by hand, and by my own enumeration for 3≤N≤8, 1<i<N (closure, attaching horns, unions, positions, n_j<N, K_1=Λ^N_i, K_m=c^{-1}Λ^3_2): 0 failures. HA's 'nondecreasing' on p. 308 is a typo and is correctly read as nonincreasing. Duplicate search over the DAG found no duplicate. Three kinds of Mathlib search are recorded on each new node; provenance and via lists are correct; no SGA. Minor, not fixed: the new nodes lack a lean_audit key (default none), and the item's maintainer-owned tool_uses still lists the two mapping-simplex and outer-horn tools that the proof no longer cites. No fixes; no tool_uses accepted."
  },
  "reviewed_lean": {
   "date": "2026-10-17",

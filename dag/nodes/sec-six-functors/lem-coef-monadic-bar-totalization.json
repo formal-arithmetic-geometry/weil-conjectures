@@ -12,9 +12,110 @@
   "def-weil-abstract-derived-category",
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Forget enrichment temporarily. The enriched adjunction gives an adjunction of underlying enhanced categories. The hypotheses on realizations, preservation and reflection are precisely those of [lem-coef-infinity-monadic-bar]. Apply its bar-realization assertion, not just its comparison assertion: the coherent augmented diagram $P_rX=L T^r A$ has colimit $X$. Faces contract adjacent $LU$ by the counit, degeneracies insert $L\\eta U$, and the augmentation is the iterated counit. These are natural in $X$. Thus the simplicial object used below is an actual coherent bar, including all higher simplices.",
+   "uses": [
+    "lem-coef-infinity-monadic-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: middle derived coefficient adjunction; agent expansion by the enriched counit bar (steps below), not an argument supplied by this blueprint paragraph."
+   }
+  },
+  {
+   "text": "For each $r$, the assumed enriched adjunction gives $\\Psi_r:\\mathcal D(LT^rA,Y)\\simeq\\mathcal C(T^rA,B)$, with $\\Psi_r(h)=U(h)\\eta_{T^rA}$ and inverse $f\\mapsto\\epsilon_Y L(f)$. The two composites reduce to identities by naturality of $\\eta,\\epsilon$ and the two adjunction triangles. These formulas are morphisms of mapping objects: use enriched composition and the coherent tensor comparisons in the hypotheses. Apply this natural equivalence to the whole diagram $\\mathcal D(P_\\bullet X,Y)$ from step 1. Naturality on every simplex, rather than only on faces in the homotopy category, supplies a coherent cosimplicial diagram $H^r(A,B)=\\mathcal C(T^rA,B)$.",
+   "uses": [
+    "lem-coef-infinity-monadic-bar",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: middle derived coefficient adjunction; agent expansion by the enriched counit bar (steps below), not an argument supplied by this blueprint paragraph."
+   }
+  },
+  {
+   "text": "Here are all its generating operators. For $f:T^rA\\to B$, the cofaces into degree $r+1$ are $d^0f=bT(f)$, $d^if=f\\,T^{i-1}(\\mu_{T^{r-i}A})$ for $1\\leq i\\leq r$, and $d^{r+1}f=f\\,T^r(a)$. For $r\\geq1$, its codegeneracies are $s^if=f\\,T^i(\\eta_{T^{r-i-1}A})$ for $0\\leq i<r$. Indeed, conjugate each counit contraction or unit insertion in step 1 by $\\Psi$. The outermost counit becomes $U\\epsilon_Y=b$, an interior counit becomes $U\\epsilon L=\\mu$, and the last counit becomes $U\\epsilon_X=a$. Unit insertions become $\\eta$. Since this is conjugation of the coherent diagram of step 2, the formulas carry its specified coherence homotopies; no claim that strict simplicial identities alone construct those homotopies is needed.",
+   "uses": [
+    "lem-coef-infinity-monadic-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: middle derived coefficient adjunction; agent expansion by the enriched counit bar (steps below), not an argument supplied by this blueprint paragraph."
+   }
+  },
+  {
+   "text": "By the mapping-out-of-realization hypothesis, the augmentation induces an equivalence $\\mathcal D(X,Y)\\simeq\\lim_{[r]\\in\\Delta}\\mathcal D(P_rX,Y)$ in $\\mathcal V$. Apply the natural termwise equivalences of step 2 to this limiting cone. They and their inverse give inverse equivalences of cone categories, so preserve terminal cones. The result is $\\alpha_{X,Y}:\\mathcal D(X,Y)\\simeq\\operatorname{Tot}^{\\mathbf R}H^\\bullet(A,B)$. It is natural in $X,Y$, since both the augmentation and the adjunction are natural. This uses precisely the coherent limiting-cone meaning of totalization and does not replace it by an equalizer or an underived total complex.",
+   "uses": [
+    "lem-coef-infinity-monadic-bar",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: middle derived coefficient adjunction; agent expansion by the enriched counit bar (steps below), not an argument supplied by this blueprint paragraph."
+   }
+  },
+  {
+   "text": "Write $a^{[0]}=1_A$ and $a^{[r+1]}=a\\,T(a^{[r]}):T^{r+1}A\\to A$; define $b^{[r]}$ similarly. The module associativity and unit coherences are obtained by applying $U$ to counit naturality and the adjunction triangles. In particular $a^{[q]}T^q(a^{[p]})\\simeq a^{[p+q]}$, with all iterated versions. The $r$-th component of the augmentation equivalence applied to $F:X\\to Y$ is $\\alpha_r(F)=U(F)a^{[r]}$. To check this, the degree-$r$ augmentation has underlying map $a^{[r+1]}$; taking its adjoint precomposes with $\\eta_{T^rA}$ and cancels the first action by the unit law. The same calculation is valid with a parameter $M\\in\\mathcal V$: a map $M\\to\\mathcal D(X,Y)$ is evaluation $F:M\\otimes X\\to Y$, and its component is $U(F)(1_M\\otimes a^{[r]})$, using $U(M\\otimes X)\\simeq M\\otimes A$.",
+   "uses": [
+    "lem-coef-infinity-monadic-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: middle derived coefficient adjunction; agent expansion by the enriched counit bar (steps below), not an argument supplied by this blueprint paragraph."
+   }
+  },
+  {
+   "text": "Check the claimed word splitting on mapping objects, including parameters. Put $E=\\mathcal D(X,Y)$, $F=\\mathcal D(Y,Z)$, and $C=UZ$. Let $u:E\\otimes A\\to B$ and $v:F\\otimes B\\to C$ be the images under $U$ of the universal evaluation maps. Counit naturality, also for these parameterized evaluations, gives $b^{[q]}T^q(u)\\simeq u(1_E\\otimes a^{[q]})$, with the tensor comparison understood. The $p$- and $q$-components from step 5 are $u_p=u(1_E\\otimes a^{[p]})$ and $v_q=v(1_F\\otimes b^{[q]})$. Their proposed split-word composite is the map\n$$F\\otimes E\\otimes T^{p+q}A\\longrightarrow F\\otimes T^q(E\\otimes T^pA)\\xrightarrow{1_F\\otimes T^q(u_p)}F\\otimes T^qB\\xrightarrow{v_q}C.$$\nThe first arrow is the inverse tensor comparison. Substitute the displayed action compatibility and then $a^{[q]}T^q(a^{[p]})\\simeq a^{[p+q]}$. The result is $v(1_F\\otimes u)(1_F\\otimes1_E\\otimes a^{[p+q]})$, exactly the $(p+q)$-component of $\\alpha_{X,Z}$ of enriched composition. Universal evaluation and currying make this an equality with specified homotopy of morphisms in $\\mathcal V$, not just a check on degree-zero elements. The action compatibilities used here are the given naturality homotopies and their higher simplices.",
+   "uses": [
+    "lem-coef-infinity-monadic-bar",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: middle derived coefficient adjunction; agent expansion by the enriched counit bar (steps below), not an argument supplied by this blueprint paragraph."
+   }
+  },
+  {
+   "text": "For clarity, existence and coherence of the operation on totalizations do not follow from a bare list of component formulas. Denote their objects by $Q_{XY}$ and choose inverse equivalences $\\beta_{XY}$ of $\\alpha_{XY}$. Define\n$$m_Q=\\alpha_{XZ}\\,m_{\\mathcal D}(\\beta_{YZ}\\otimes\\beta_{XY}):Q_{YZ}\\otimes Q_{XY}\\to Q_{XZ}.$$\nStep 6 computes every consecutive-word cut of this actual morphism: after precomposing by the equivalence $\\alpha_{YZ}\\otimes\\alpha_{XY}$, the cut $(p,q)$ is $g\\,T^q(f)$. Precomposition by that equivalence has inverse precomposition by $\\beta_{YZ}\\otimes\\beta_{XY}$, so this calculation determines the morphism and the compatible homotopies on the whole parameter space. Varying a cut contracts adjacent letters by $\\mu$ or an endpoint action; their compatibility is exactly the action naturality in step 6. Inserting a unit uses the same unit homotopy. Consequently $m_Q$ realizes the bar-diagonal operation on coherent totalizations: consecutive subwords, including empty ones, give its components and homotopies. This specifies the operation intrinsically via the augmentation and verifies the stated formula, rather than assuming an independent existence theorem for a diagonal on an ordinary total complex.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: middle derived coefficient adjunction; agent expansion by the enriched counit bar (steps below), not an argument supplied by this blueprint paragraph."
+   }
+  },
+  {
+   "text": "The unit is $e_{Q,X}=\\alpha_{XX}(1_X)$, whose degree-$r$ component is $a^{[r]}$. For three word components $f:T^pA\\to B$, $g:T^qB\\to C$, $h:T^rC\\to D$, both successive splittings give $h\\,T^r(g)\\,T^{r+q}(f)$. Functoriality of $T$, the associative composition in the given enrichment, and its coherent tensor comparisons provide the comparison, including parameters. For arbitrarily many factors apply the same evaluation to the consecutive blocks of the word; refinement of a partition is functorial substitution, and empty blocks use the identity and the module unit coherence. Equivalently these are the higher associativity and unit simplices of $m_{\\mathcal D}$ in the explicit formula of step 7, with each adjacent $\\beta\\alpha$ canceled by its inverse-equivalence homotopy. Thus every higher compatibility, not only the binary formula, is retained. These formulas show that $\\alpha$ preserves coherent composition and units. No convergence, boundedness or sum/product interchange is used at any point.",
+   "uses": [
+    "lem-coef-infinity-monadic-bar",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: middle derived coefficient adjunction; agent expansion by the enriched counit bar (steps below), not an argument supplied by this blueprint paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-monadic-bar",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-enriched-category-tensor-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2 derived mapping adjunction; explicit enriched mapping and parameterized bar-diagonal argument supplied by Q82, using the existing coherent monadic-bar theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,10 +151,45 @@
    "results": "{\"t\": \"2026-10-17T08:17:22Z\", \"tool\": \"leanfinder\", \"query\": \"Derived mapping complexes of coherent monad algebras are totalizations of cobar mapping objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.DoldKan.Γ_map_app\", \"AlgebraicTopology.alternatingCofaceMapComplex\", \"AlgebraicTopology.DoldKan.Γ₀_map_app\", \"AlgebraicTopology.DoldKan.Γ₀.map\", \"AlgebraicTopology.AlternatingCofaceMapComplex.obj\", \"AlgebraicTopology.alternatingCofaceMapComplex_obj\", \"AlgebraicTopology.DoldKan.Γ₀\", \"AlgebraicTopology.DoldKan.Γ₀.obj\"], \"digest\": \"c27181321fbd1871\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary monadic adjunctions and derived adjunctions concern ordinary categories; Enriched/FunctorCategory.lean:47-78 is an ordinary enriched end. AlternatingFaceMapComplex.lean constructs an alternating coface complex, not the coherent counit-bar derived totalization with composition."
+  },
+  {
+   "tool": "grep",
+   "query": "Alexander.?Whitney|bar.*diagonal|monadic.*total|counit.*bar",
+   "results": "{\"t\": \"2026-10-17T09:03:57Z\", \"tool\": \"grep\", \"query\": \"Alexander.?Whitney|bar.*diagonal|monadic.*total|counit.*bar\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary derived adjunctions, ordinary enriched ends, simplicial enrichment or Dold-Kan; none gives coherent D(Z)-enriched counit-bar totalization and its composition. Read Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:47-78; its enrichedHom is an ordinary end."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Monad, CategoryTheory.CosimplicialObject",
+   "results": "{\"t\": \"2026-10-17T09:03:58Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Monad, CategoryTheory.CosimplicialObject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary derived adjunctions, ordinary enriched ends, simplicial enrichment or Dold-Kan; none gives coherent D(Z)-enriched counit-bar totalization and its composition. Read Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:47-78; its enrichedHom is an ordinary end."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a tensor enriched adjunction a counit bar resolution computes mapping objects by derived totalization and composition splits monad words",
+   "results": "{\"t\": \"2026-10-17T09:03:59Z\", \"tool\": \"leanfinder\", \"query\": \"For a tensor enriched adjunction a counit bar resolution computes mapping objects by derived totalization and composition splits monad words\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.mapMon_counit\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction\", \"CategoryTheory.FunctorToTypes.adj\", \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε\", \"CategoryTheory.SimplicialObject.cechNerveAdjunction\"], \"digest\": \"37a9b843add04563\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary derived adjunctions, ordinary enriched ends, simplicial enrichment or Dold-Kan; none gives coherent D(Z)-enriched counit-bar totalization and its composition. Read Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:47-78; its enrichedHom is an ordinary end."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Enriched mapping objects from a monadic bar resolution are the homotopy limit of cosimplicial morphism objects",
+   "results": "{\"t\": \"2026-10-17T09:07:01Z\", \"tool\": \"leansearch\", \"query\": \"Enriched mapping objects from a monadic bar resolution are the homotopy limit of cosimplicial morphism objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.enrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom.fac\", \"CategoryTheory.CosimplicialObject.instHasLimits\", \"CategoryTheory.Enriched.FunctorCategory.functorHomEquiv.congr_simp\", \"CategoryTheory.Enriched.FunctorCategory.functorHomEquiv\", \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom\", \"CategoryTheory.comp_comparison_hasLimit\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap\"], \"digest\": \"a08602a2c9b0eff4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary derived adjunctions, ordinary enriched ends, simplicial enrichment or Dold-Kan; none gives coherent D(Z)-enriched counit-bar totalization and its composition. Read Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:47-78; its enrichedHom is an ordinary end."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The enriched adjunction identifies each term of a simplicial bar mapping object and preserves composition by splitting words into consecutive blocks",
+   "results": "{\"t\": \"2026-10-17T09:07:02Z\", \"tool\": \"leanfinder\", \"query\": \"The enriched adjunction identifies each term of a simplicial bar mapping object and preserves composition by splitting words into consecutive blocks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialCategory.sHomComp\", \"AlgebraicTopology.DoldKan.Γ₀'\", \"CategoryTheory.SimplicialThickening.functor\", \"SimplicialObject.Splitting.ι\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.comp\", \"CategoryTheory.SimplicialNerve\", \"AlgebraicTopology.DoldKan.Γ₀'_obj\"], \"digest\": \"5a0a45aa898447b9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary derived adjunctions, ordinary enriched ends, simplicial enrichment or Dold-Kan; none gives coherent D(Z)-enriched counit-bar totalization and its composition. Read Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:47-78; its enrichedHom is an ordinary end."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-quillen-section-rectification",
@@ -74,5 +210,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-monadic-bar-totalization",
+  "worker": "stage1",
+  "summary": "No project attachment exists. Reused the existing coherent monadic-bar realization, derived enrichment calculus and cone definition. Wrote the cosimplicial operators, derived-limit equivalence, parameterized word formula, and explicit coherent composition/units without creating redundant clause nodes. Statement unchanged.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint.proof.md paragraph 2: middle derived coefficient adjunction before the inverse limit; supplies the enriched mapping calculation required by the intervening section-rectification chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-13ddc9d23",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-13ddc9d23 (reviewer sub-agent of L); spot-checked: I read the whole split: the statement, all 8 steps, the full statements of all four cited nodes (lem-coef-infinity-monadic-bar, lem-coef-enriched-category-tensor-calculus, def-cbc-enhanced-diagrams-cones, def-coef-complete-algebroid), the citing step of the parent lem-coef-quillen-section-rectification, and paragraph 2 of the blueprint proof main-20261015 prop-coef-integral-exceptional-adjoint. That paragraph does not prove the bar theorem, so proof_origin by=agent is correct. The delivery creates no new nodes, cites no SGA and has empty tool_uses. Every proof dependency is in unit sk-prop-sf-biduality-general or is a definition, and there is no cycle. I redid the computations by hand. The cofaces are d^0 f = b T(f) (using the triangle identity Uε_Z η_{UZ} = 1), interior d^i f = f T^{i-1}μ, and last d^{r+1} f = f T^r(a). The r codegeneracies from degree r to r-1 are s^i f = f T^i η. The augmentation component is α_r(F) = U(F) a^[r], via a^[r+1] η = a^[r]. The split-word composite reduces to v(1⊗u)(1⊗1⊗a^[p+q]): this uses counit naturality together with the hypothesis that the counit respects the tensor comparison. As an independent check, U(G) b^[q] T^q(U(F) a^[p]) = U(G) U(F) a^[p+q] because U(F) is a T-module map. Step 7's conjugated m_Q is a real morphism with pr_{p+q} m_Q ≃ c_{p,q}(pr_q⊗pr_p). Associativity holds: h T^r(g) T^{r+q}(f) for both bracketings. Edge cases checked: T = id gives a constant cosimplicial object; p = q = 0 gives ordinary composition; the unit at r = 0 is 1_A. The steps use no hypothesis outside the statement. A DAG search found no duplicate; linear-monad-tensor-enrichment, dg-model-homotopy-colimits and infinity-free-module-bar state other facts. FIX (C1): step 2 makes D(-,Y) a coherent V-valued diagram and Ψ a coherent enriched equivalence, which needs the coherence of enriched composition and evaluation, but the step did not cite it. I added lem-coef-enriched-category-tensor-calculus to step 2's uses; the node was already in proof_deps. Remark only: the inherited statement uses 'enriched adjunction' and 'tensored' without a definition node, which many coef nodes share project-wide. The statement is unchanged and not weakened.; 1 file(s) fixed by the reviewer"
  }
 }

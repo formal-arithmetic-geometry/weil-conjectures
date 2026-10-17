@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-direct-image-finiteness-proper",
-   "place": "Since the finite ring $\\Lambda=P_n$ is annihilated by an integer, $F_{\\Et}$ is a torsion abelian sheaf, so the classical input of the source note (Th. 1.1 of SGA 4 1/2 and [Tag 095U](https://stacks.math.columbia.edu/tag/095U)) applies to $f_{\\Et}$: the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$.; classical constructibility input expanded using proof of 0GL0, first paragraph: induction principle and relative Mayer Vietoris reduce to affine X; relative Mayer Vietoris (Tag 0GKN) through its cited Tag 0GKK: the open-cover short exact sequence of extensions by zero",
+   "place": "Classical constructibility input expanded via Stacks Tag 0GL0, first paragraph (relative Mayer–Vietoris reduction), Tag 0GKN (relative Mayer–Vietoris) and Tag 0GKK, lemma-mayer-vietoris-shriek, proof: the open-cover short exact sequence is checked on stalks.",
    "via": [
     "lem-weil-pbc-etale-shriek-relative-mayer-vietoris",
     "lem-weil-pbc-etale-compactification-constructibility",
@@ -15,7 +15,7 @@
  },
  "kind": "statement",
  "title": "Open-cover short exact sequence of etale extensions by zero",
- "statement": "Let $\\Lambda$ be a commutative ring and $X$ a scheme [def-pc-scheme] with small etale site $X_{\\Et}$ [def-weil-pbc-etale-site]. Let $U,V\\subseteq X$ be open subschemes with $X=U\\cup V$, put $W=U\\cap V$, and for $T=U,V,W$ let $k_T:T\\hookrightarrow X$ be the inclusion, an open immersion [def-weil-open-immersion]. For a sheaf $F$ of $\\Lambda$-modules on $X_{\\Et}$ in the sense of [def-weil-pbc-extension-by-zero] write $F|_T$ for its restriction, the sheaf of $\\Lambda$-modules $(E\\to T)\\mapsto F(E\\to T\\xrightarrow{k_T}X)$ on $T_{\\Et}$ (the inverse image $k_T^{-1}F$ [def-weil-pbc-inverse-image], up to the canonical identification for an open immersion), and $k_{T!}$ for extension by zero [def-weil-pbc-extension-by-zero]. For $T=U,V$ let $\\iota_T:k_{W!}(F|_W)\\to k_{T!}(F|_T)$ be the morphism induced, by the universal property of sheafification [def-weil-pbc-sheafification], by the presheaf map that is the identity of $F(E)$ on every etale $E\\to X$ factoring through $W$ (such an $E$ factors through $T$) and zero on the others, and let $\\varepsilon_T:k_{T!}(F|_T)\\to F$ be the morphism induced in the same way by the identity of $F(E)$ on every etale $E\\to X$ factoring through $T$ (the counit of extension by zero). Then the sequence of sheaves of $\\Lambda$-modules\n$$0\\to k_{W!}(F|_W)\\xrightarrow{(\\iota_U,-\\iota_V)}k_{U!}(F|_U)\\oplus k_{V!}(F|_V)\\xrightarrow{\\varepsilon_U+\\varepsilon_V}F\\to0$$\nis exact, and its maps are natural in $F$.",
+ "statement": "Let $\\Lambda$ be a commutative ring and $X$ a scheme [def-pc-scheme] with small etale site $X_{\\Et}$ [def-weil-pbc-etale-site]. Let $U,V\\subseteq X$ be open subschemes with $X=U\\cup V$, put $W=U\\cap V$, and for $T=U,V,W$ let $k_T:T\\hookrightarrow X$ be the inclusion, an open immersion [def-weil-open-immersion]. For a sheaf $F$ of $\\Lambda$-modules on $X_{\\Et}$ in the sense of [def-weil-pbc-extension-by-zero] write $F|_T$ for its restriction, the sheaf of $\\Lambda$-modules $(E\\to T)\\mapsto F(E\\to T\\xrightarrow{k_T}X)$ on $T_{\\Et}$ (the inverse image $k_T^{-1}F$ [def-weil-pbc-inverse-image], up to the canonical identification for an open immersion), and $k_{T!}$ for extension by zero [def-weil-pbc-extension-by-zero]. For $T=U,V$ let $\\iota_T:k_{W!}(F|_W)\\to k_{T!}(F|_T)$ be the morphism induced, by the universal property of sheafification [def-weil-pbc-sheafification], by the presheaf map that is the identity of $F(E)$ on every etale $E\\to X$ factoring through $W$ (such an $E$ factors through $T$) and zero on the others, and let $\\varepsilon_T:k_{T!}(F|_T)\\to F$ be the morphism induced in the same way by the identity of $F(E)$ on every etale $E\\to X$ factoring through $T$ (the counit of extension by zero). Then the sequence of sheaves of $\\Lambda$-modules\n$$0\\to k_{W!}(F|_W)\\xrightarrow{(\\iota_U,-\\iota_V)}k_{U!}(F|_U)\\oplus k_{V!}(F|_V)\\xrightarrow{\\varepsilon_U+\\varepsilon_V}F\\to0$$\nis exact [def-weil-pbc-exact-sequence], and its maps are natural in $F$.",
  "source": {
   "document": "literature/stacks-project/more-etale.tex",
   "place": "Tag 0GKK, label lemma-mayer-vietoris-shriek, proof: the short exact sequence 'can be seen by looking at stalks'"
@@ -26,11 +26,106 @@
   "def-weil-open-immersion",
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-extension-by-zero",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the presheaves $P_T=k_{T,p!}(F|_T)$ of [def-weil-pbc-extension-by-zero]. The maps $P_W\\to P_T$ and $P_T\\to F$ in the statement commute with restrictions: when the larger object factors through the relevant open, both composites are the restriction map of $F$; otherwise their source is zero. Composing $P_W\\to P_T$ with $P_T\\to F$ gives the same map for $T=U,V$, namely the identity on $F(E)$ for $E$ factoring through $W$ and zero otherwise. Their sheafified composites are therefore equal, by uniqueness in [def-weil-pbc-sheafification]. Thus $(\\varepsilon_U+\\varepsilon_V)(\\iota_U,-\\iota_V)=0$, so the displayed arrows form a complex [def-weil-pbc-exact-sequence]. This argument also covers the empty object: every sheaf has zero sections on it.",
+   "uses": [
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKK, label lemma-mayer-vietoris-shriek, proof: the short exact sequence checked on stalks; expanded as below"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar x$ of $X$ and put $A=F_{\\bar x}$, using [def-weil-pbc-geometric-stalks]. If $\\bar x$ lies in an open $T$, neighbourhoods factoring through $T$ suffice for computing this stalk. Indeed $T\\to X$ is etale by [lem-weil-pbc-open-immersion-etale], and for every pointed etale $E\\to X$ the pointed fibre product $E\\times_XT$ is another object of $X_{\\Et}$, by clause 2 of [lem-weil-pbc-etale-base-change-finite-limits], mapping to $E$ and factoring through $T$. Refining any representative or any equality of germs this way proves directly that $(F|_T)_{\\bar x_T}\\to F_{\\bar x}$, sending a section germ to the same germ over $X$, is bijective. By [lem-weil-pbc-extension-by-zero-stalks], $(k_{T!}(F|_T))_{\\bar x}$ is therefore $A$ if $\\bar x\\in T$, and zero otherwise. Its specified isomorphism sends the germ of a section $s\\in F(E)$ to the germ of that same section. It follows from the presheaf maps in step 1 that $\\varepsilon_T$ induces the identity of $A$ when $\\bar x\\in T$, and that $\\iota_T$ induces the identity when $\\bar x\\in W$; all maps whose source stalk is zero are zero. This identifies the actual maps, rather than only the objects.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-extension-by-zero-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S5, proposition-describe-jshriek and its explicit germ formula; Tag 02GP (morphisms-lemma-open-immersion-etale); Tag 021D (topologies-lemma-fibre-products-etale)"
+   }
+  },
+  {
+   "text": "The geometric stalk of the binary sum is the binary sum of the stalks: the stalk functor is exact by [prop-weil-pbc-geometric-stalks-exact], hence preserves this finite biproduct. There are three cases because $X=U\\cup V$. On $W$ the stalk sequence is $0\\to A\\xrightarrow{a\\mapsto(a,-a)}A\\oplus A\\xrightarrow{(b,c)\\mapsto b+c}A\\to0$: the first map is injective, the last is surjective via $a\\mapsto(a,0)$, and $b+c=0$ means $(b,c)=(b,-b)$. On $U\\setminus V$ it is $0\\to0\\to A\\oplus0\\xrightarrow{(a,0)\\mapsto a}A\\to0$, whose nonzero arrow is an isomorphism. On $V\\setminus U$ it is $0\\to0\\to0\\oplus A\\xrightarrow{(0,a)\\mapsto a}A\\to0$, again exact. Thus every geometric stalk sequence of underlying abelian groups is short exact.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKK, label lemma-mayer-vietoris-shriek, proof: the short exact sequence checked on stalks; expanded as below"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-jointly-reflect-short-exact] to the complex of underlying abelian sheaves. The geometric stalk functors are exact by [prop-weil-pbc-geometric-stalks-exact]; they jointly reflect isomorphisms by [lemma-weil-pbc-geometric-stalk-conservative]. These are precisely the hypotheses of the categorical criterion, and step 3 supplies its stalkwise conclusion. The underlying abelian sequence is consequently short exact. No quasi-compactness, Noetherian hypothesis, or finiteness of $\\Lambda$ is used.",
+   "uses": [
+    "lem-weil-pbc-jointly-reflect-short-exact",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03PT (lemma-stalk-exact) and 03PU (theorem-exactness-stalks), applied to the stalk computation in Tag 0GKK; Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean:81"
+   }
+  },
+  {
+   "text": "To interpret this as exactness of the stated module sequence, use [lem-weil-pbc-etale-constant-ring-module-equivalence]: sheaves valued in $\\Lambda$-modules identify with modules over the constant ring sheaf, without changing their underlying abelian presheaves. The forgetful functor preserves kernels and cokernels and all finite limits and colimits by clauses (1) and (3) of [lem-weil-pbc-module-sheaves-colimits-forgetful]. It reflects isomorphisms: an inverse to a bijective linear sheaf map is linear, since for $y=\\alpha(x)$ one has $\\alpha^{-1}(\\lambda y)=\\alpha^{-1}(\\alpha(\\lambda x))=\\lambda x$, and it commutes with restrictions by the same uniqueness of inverse. Apply [lem-weil-pbc-jointly-reflect-short-exact] to this single exact functor. Step 4 says its image sequence is short exact, so the sequence of $\\Lambda$-module sheaves is short exact as asserted.",
+   "uses": [
+    "lem-weil-pbc-etale-constant-ring-module-equivalence",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-jointly-reflect-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian, and Tag 03DB, lemma-limits-colimits; constant-scalar equivalence as in lem-weil-pbc-etale-constant-ring-module-equivalence"
+   }
+  },
+  {
+   "text": "For a morphism $\\alpha:F\\to G$, all squares formed by the presheaf inclusions and counits commute: on an object factoring through the relevant open both routes are $\\alpha_E$, and otherwise the source is zero. Sheafification [def-weil-pbc-sheafification] carries these commutative squares to commutative squares of the prescribed sheaf maps. Taking a pair with the minus sign and taking the sum also commute with $\\alpha$. Thus both arrows in the sequence are natural in $F$.",
+   "uses": [
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKK, label lemma-mayer-vietoris-shriek, proof: the short exact sequence checked on stalks; expanded as below"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-jointly-reflect-short-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-etale-constant-ring-module-equivalence",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKK, label lemma-mayer-vietoris-shriek, proof: the short exact sequence checked on stalks; expanded as below"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -45,10 +140,38 @@
    "results": "Mathlib/Topology/Sheaves/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean (GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, lines 231-266: Z[X1] -> Z[X2] (+) Z[X3] -> Z[X4] short exact for free abelian sheaves), Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean (long exact cohomology sequence); read: only the case F = Z of free abelian sheaves, the passage to an arbitrary module sheaf F (j_!(F|_U) as Z[U] tensor F) is itself a theorem",
    "date": "2026-10-17",
    "verdict": "no match (candidate: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:265, case F = Z only)"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|shortComplex_shortExact|extendByZero",
+   "results": "Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; read Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:231–266.",
+   "date": "2026-10-17",
+   "verdict": "no match: only free abelian representable sheaves, not arbitrary module sheaf F"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mayer Vietoris short exact sequence extension by zero sheaves modules open cover",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex; Opens.mayerVietorisSquare; Opens.mayerVietorisSquare'; read Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:231–266.",
+   "date": "2026-10-17",
+   "verdict": "no match: only free abelian representable sheaves, not arbitrary module sheaf F"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sequenceIso; read Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:231–266.",
+   "date": "2026-10-17",
+   "verdict": "no match: only free abelian representable sheaves, not arbitrary module sheaf F"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of modules on the small etale site and a cover by two open subschemes, extensions by zero from the intersection and the opens give a natural short exact sequence",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g; SheafOfModules.instAbelian; read Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:231–266.",
+   "date": "2026-10-17",
+   "verdict": "no match: only free abelian representable sheaves, not arbitrary module sheaf F"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +188,49 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-etale-open-cover-shriek-ses",
+  "worker": "stage1",
+  "summary": "Kept all hypotheses and the two specified sheafified maps. Expanded the stalk proof of Stacks 0GKK into germ computations, the three open-cover cases, a Mathlib categorical detection criterion, coefficient-forgetting and naturality. Reused existing stalk, site and module nodes; one new general Mathlib leaf. No Lean writing or compilation.",
+  "blueprint": "Classical constructibility input expanded via Stacks Tag 0GL0, first paragraph (relative Mayer–Vietoris reduction), Tag 0GKN (relative Mayer–Vietoris) and Tag 0GKK, lemma-mayer-vietoris-shriek, proof: the open-cover short exact sequence is checked on stalks.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic stalk computation of extension by zero, not a replacement of the unit route."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Exactness of geometric stalks used as a generic tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic conservativity of geometric stalks for abelian etale sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic exact coefficient-forgetting; the unit has no alternate coefficient-category argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-constant-ring-module-equivalence",
+    "why": "Generic equivalence of the two constant-coefficient module categories, preserving the underlying abelian presheaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-etale-constant-ring-module-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-c48ba812d",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-c48ba812d (reviewer sub-agent of L); spot-checked: I read the full split. The item restates Stacks more-etale.tex 0GKK (lemma-mayer-vietoris-shriek) unchanged: an arbitrary scheme, a commutative ring Λ, X=U∪V, explicit sheafified maps with the sign on the second component, and naturality. Step 1: both composites into F sheafify the same presheaf map, so the sequence is a complex. Step 2: computes the maps on stalks using the statement of extension-by-zero-stalks. It also writes out the cofinal fibre-product comparison, using clause 2 of etale-base-change-finite-limits and open-immersion-etale. Step 3: I checked the three stalk cases and characteristic 2. Step 4: stalk exactness plus geometric-stalk-conservative gives the hypotheses of the new leaf. The conservative node's blueprint_update takes one geometric point per point of X, so the index family is a set. Step 5: handles the change of coefficient category explicitly, through constant-ring-module-equivalence, forgetful clauses (1) and (3), and a written proof that forgetting reflects isomorphisms, then applies the leaf with one functor. Step 6: naturality is checked on presheaves. I also tested U empty, U=V=X, W empty, X empty, F=0 and Λ=0. The new leaf lem-weil-pbc-jointly-reflect-short-exact matches Mathlib CategoryTheory.JointlyReflectIsomorphisms.shortExact_iff, which I read at Exact.lean:81 with its hypotheses at lines 37–42 and 78–79. The node's extra zero-morphism hypothesis follows from the others. The leaf does not restate the item, and no existing DAG node states it. The only other open-cover sequence in the DAG is lem-sc-derived-open-mayer-vietoris-ses, for O_X-modules on ringed spaces, so it is not a duplicate. Tool use accepted: lemma-weil-pbc-geometric-stalk-conservative (unit sk-prop-cd), used as a black box. The other declared tool uses are on the route (sk-thm-p1, sk-thm-reduction) or are Mathlib leaves. No SGA source is used. Fixes made: (B3) added def-weil-pbc-exact-sequence to the item's stmt_deps and cited it inline after 'is exact'; (B6) corrected the leaf's hypothesis lines from 38–43 to 37–42 in source.place and mathlib_match.how, and the how text now says zero-morphism preservation is implied, not a hypothesis of the lemma.; 2 file(s) fixed by the reviewer"
  }
 }
