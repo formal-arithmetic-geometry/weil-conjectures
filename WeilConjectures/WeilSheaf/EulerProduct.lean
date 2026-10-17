@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.Analysis.Analytic.ConvergenceRadius
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.Curve
 public import WeilConjectures.WeilSheaf.LSeries
 public import WeilConjectures.WeilSheaf.StalkTensorTrace
 
@@ -26,8 +27,8 @@ tensor square `G ⊗ G` have nonnegative coefficients.
 - `AlgebraicGeometry.WeilSheaf.IsReal.hasNonnegCoeffs_lFactor_tensorObj`: the local factors of
   `L(U₀, G ⊗ G, t)` have nonnegative coefficients.
 - `AlgebraicGeometry.WeilSheaf.lSeries_mul_localPolynomial_compactlySupportedCohomology_two`: the
-  Euler product of the `L`-series, stated with `sorry`; it is the curve case of the
-  Grothendieck–Lefschetz trace formula.
+  Euler product of the `L`-series, the image under `ι` of
+  `AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_eq`.
 -/
 
 @[expose] public section
@@ -36,7 +37,7 @@ universe u
 
 open CategoryTheory PowerSeries
 
-open scoped ComplexOrder
+open scoped ComplexOrder PowerSeries.WithPiTopology
 
 namespace AlgebraicGeometry
 
@@ -107,7 +108,29 @@ theorem lSeries_mul_localPolynomial_compactlySupportedCohomology_two (ι : Padic
     G.lSeries ι *
         (((G.compactlySupportedCohomology 2).localPolynomial.map ι : Polynomial ℂ) : ℂ⟦X⟧) =
       (((G.compactlySupportedCohomology 1).localPolynomial.map ι : Polynomial ℂ) : ℂ⟦X⟧) := by
-  sorry
+  have hfin := (U ↘ Spec (CommRingCat.of k₀)).finite_setOf_degreeOver_le
+  -- the local factors multiply to `ι (det (1 - F T ∣ H_c¹) / det (1 - F T ∣ H_c²))`
+  have hprod : HasProd (G.lFactor ι) (PowerSeries.map ι
+      (((G.compactlySupportedCohomology 1).localPolynomial : (PadicAlgCl l)⟦X⟧) *
+        ((G.compactlySupportedCohomology 2).localPolynomial : (PadicAlgCl l)⟦X⟧)⁻¹)) := by
+    rw [HasProd, WithPiTopology.tendsto_iff_coeff_tendsto]
+    intro n
+    refine tendsto_nhds_of_eventually_eq ?_
+    filter_upwards [Filter.eventually_ge_atTop (hfin n).toFinset] with s hs
+    rw [PowerSeries.coeff_map, ← coeff_prod_inv_localPolynomial_stalk_eq G hG n s
+      fun x hx ↦ hs ((hfin n).mem_toFinset.2 hx), ← PowerSeries.coeff_map,
+      map_prod (PowerSeries.map ι)]
+    refine congrArg (coeff n) (Finset.prod_congr rfl fun x _ ↦ ?_)
+    rw [lFactor, PowerSeries.map_inv, ← Polynomial.polynomial_map_coe, Polynomial.map_comp,
+      Polynomial.map_pow, Polynomial.map_X]
+  have h₀ : constantCoeff
+      ((G.compactlySupportedCohomology 2).localPolynomial : (PadicAlgCl l)⟦X⟧) ≠ 0 := by
+    rw [← coeff_zero_eq_constantCoeff_apply, Polynomial.coeff_coe,
+      FrobeniusModule.localPolynomial, LinearMap.coeff_zero_charpolyRev]
+    exact one_ne_zero
+  rw [lSeries_eq_tprod, hprod.tprod_eq, Polynomial.polynomial_map_coe,
+    Polynomial.polynomial_map_coe, ← map_mul, mul_assoc, PowerSeries.inv_mul_cancel _ h₀,
+    mul_one]
 
 end EulerProduct
 
