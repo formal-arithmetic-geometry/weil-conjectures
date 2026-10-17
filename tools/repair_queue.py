@@ -98,9 +98,14 @@ def result(ident, outcome, note, head='', attempts=0):
             if not active(j): raise RuntimeError('repair claim moved')
             note_data = dict(j, state='released', note=note)
             write(NOTES / (j['item']+'.json'), note_data)
+            # 2026-10-17: record the state before giving the claim back. active() re-takes the claim of a job still
+            # `pending`/`running` on disk, and the job used to be written only after the queue refresh below, so any
+            # reader in that window (autoland3's REPAIR statistics) claimed the item again for the released job.
+            prev = j.get('state'); j['state'] = 'released'; write(p, j)
             rc = subprocess.run([sys.executable, 'tools/claim.py', 'release', j['group'], j['item'],
                                  'abandon: dedicated repair failed; '+j['reason']+'; tried: '+note], cwd=ROOT).returncode
-            if rc: raise RuntimeError('claim release failed')
+            if rc:
+                j['state'] = prev; write(p, j); raise RuntimeError('claim release failed')
             ref = 'refs/heads/deliver/'+j['group']+'/'+j['item']
             subprocess.run(['git', 'update-ref', '-d', ref], cwd=ROOT, check=True)
             bl.marker(j['group'], j['item']).unlink(missing_ok=True)
