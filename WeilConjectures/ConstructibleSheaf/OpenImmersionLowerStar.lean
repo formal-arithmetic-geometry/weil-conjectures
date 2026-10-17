@@ -69,7 +69,7 @@ lemma _root_.CategoryTheory.Abelian.prop_of_isLimit_kernelFork {C : Type*} [Cate
     P X := by
   let S := ShortComplex.mk (kernel.ι φ) (Abelian.coimage.π φ) (cokernel.condition _)
   have hS : S.ShortExact := { exact := ShortComplex.exact_cokernel (kernel.ι φ) }
-  exact hext S hS (hiso (hc.conePointUniqueUpToIso (kernelIsKernel φ)) hK)
+  exact hext S hS (hiso (hc.conePointUniqueUpToIso (limit.isLimit _)) hK)
     (hmono (Abelian.factorThruCoimage φ) hY)
 
 /-- **A normal open piece.** Let `Z` be of finite type over a field and `O` a nonempty open of `Z`
@@ -154,7 +154,8 @@ theorem exists_isConstructibleSheaf_lowerStar_opens {k : Type u} [Field k] {Z : 
       ((lowerStarComp (ModuleCat.{u + 1} Λ) fst ι).app _).symm
   exact IsConstructibleSheaf.of_iso e.symm
 
-/-- The induction behind `AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isOpenImmersion`:
+/-- The induction behind
+`AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isOpenImmersion`:
 Noetherian induction on the closed subset `T` of `X₀` containing the image of a closed subscheme
 `Z` of `X₀`. -/
 theorem isConstructibleSheaf_lowerStar_of_isOpenImmersion_aux {k : Type u} [Field k]
@@ -177,12 +178,14 @@ theorem isConstructibleSheaf_lowerStar_of_isOpenImmersion_aux {k : Type u} [Fiel
   have : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace (j ≫ aZ)
   have : IsNoetherian U := {}
   rcases isEmpty_or_nonempty U with hU | hU
-  · exact IsConstructibleSheaf.of_isZero (Functor.map_isZero _ (Scheme.Etale.isZero_sheaf_of_isEmpty F))
+  · exact IsConstructibleSheaf.of_isZero
+      (Functor.map_isZero _ (Scheme.Etale.isZero_sheaf_of_isEmpty F))
   -- a nonempty irreducible open `O₀` of `U` on which `F` is finite locally constant
   obtain ⟨U₀, hU₀d, hU₀⟩ := IsConstructibleSheaf.exists_dense_open F
   obtain ⟨c, hc, -⟩ := exists_mem_irreducibleComponents_subset_of_isIrreducible {hU.some}
     isIrreducible_singleton
-  obtain ⟨o, ho, hon, hoc⟩ := NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent c hc
+  obtain ⟨o, ho, hon, hoc⟩ :=
+    NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent c hc
   obtain ⟨x, hxo, hxU₀⟩ := hU₀d.inter_open_nonempty o ho hon
   let O₀ : U.Opens := ⟨o, ho⟩ ⊓ U₀
   have hO₀ : IsIrreducible (O₀ : Set U) :=
@@ -253,20 +256,23 @@ theorem isConstructibleSheaf_lowerStar_of_isOpenImmersion_aux {k : Type u} [Fiel
     exact le_rfl) jW G
   have hiWjW := (isConstructibleSheaf_lowerStar_of_isClosedImmersion iW
     ((jW)_*[ModuleCat.{u + 1} Λ].obj G)).1
-  let eK : (j)_*[ModuleCat.{u + 1} Λ].obj (kernel η) ≅ (iW)_*[ModuleCat.{u + 1} Λ].obj ((jW)_*[ModuleCat.{u + 1} Λ].obj G) :=
-    (j)_*[ModuleCat.{u + 1} Λ].mapIso (asIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i').unit.app (kernel η))) ≪≫
+  let eK : (j)_*[ModuleCat.{u + 1} Λ].obj (kernel η) ≅
+      (iW)_*[ModuleCat.{u + 1} Λ].obj ((jW)_*[ModuleCat.{u + 1} Λ].obj G) :=
+    (j)_*[ModuleCat.{u + 1} Λ].mapIso (asIso
+      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i').unit.app (kernel η))) ≪≫
       (lowerStarComp (ModuleCat.{u + 1} Λ) i' j (jW ≫ iW) pullback.condition).app G ≪≫
       ((lowerStarComp (ModuleCat.{u + 1} Λ) jW iW).app G).symm
-  have : IsConstructibleSheaf ((j)_*[ModuleCat.{u + 1} Λ].obj (kernel η)) := IsConstructibleSheaf.of_iso eK.symm
+  have : IsConstructibleSheaf ((j)_*[ModuleCat.{u + 1} Λ].obj (kernel η)) :=
+    IsConstructibleSheaf.of_iso eK.symm
   -- the exact sequence `0 ⟶ j_* K ⟶ j_* F ⟶ I ⟶ 0` with `I ⊆ (j h)_* h^* F`
   have : IsConstructibleSheaf ((j)_*[ModuleCat.{u + 1} Λ].obj
       (((h)^*[ModuleCat.{u + 1} Λ] ⋙ (h)_*[ModuleCat.{u + 1} Λ]).obj F)) :=
     IsConstructibleSheaf.of_iso
       ((lowerStarComp (ModuleCat.{u + 1} Λ) h j V.ι hh.symm).app _).symm
   exact Abelian.prop_of_isLimit_kernelFork (fun G ↦ IsConstructibleSheaf G)
-    (fun e hG ↦ by haveI := hG; exact IsConstructibleSheaf.of_iso e)
-    (fun f _ hG ↦ by haveI := hG; exact Scheme.IsConstructibleSheaf.of_mono f)
-    (fun S hS h₁ h₃ ↦ by haveI := h₁; haveI := h₃; exact IsConstructibleSheaf.of_shortExact hS)
+    (fun e hG ↦ by have := hG; exact IsConstructibleSheaf.of_iso e)
+    (fun f _ hG ↦ by have := hG; exact Scheme.IsConstructibleSheaf.of_mono f)
+    (fun S hS h₁ h₃ ↦ by have := h₁; have := h₃; exact IsConstructibleSheaf.of_shortExact hS)
     (KernelFork.mapIsLimit _ (kernelIsKernel η) (j)_*[ModuleCat.{u + 1} Λ]) ‹_› ‹_›
 
 /-- Blueprint `thm-fin-open-degree-zero`: Constructibility of the degree-zero open direct image.

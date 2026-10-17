@@ -260,9 +260,8 @@ omit [IsAlgClosed (ResidueField R)] [IsDomain R] [IsDiscreteValuationRing R]
 /-- `H⁰(Gal(Ω/F), M)` is finite for finite `M`. -/
 theorem finite_H_zero_galois (M : DiscreteModule.{w} Gal(Ω/F)) [Finite M.obj.V] :
     Finite (DiscreteModule.H Gal(Ω/F) M 0) :=
-  have : Finite ((DiscreteModule.invariants Gal(Ω/F)).obj M) :=
-    (Subtype.finite : Finite (DiscreteModule.invariantsSubgroup M))
-  Finite.of_equiv _ (DiscreteModule.H_zero_addEquiv M).symm.toEquiv
+  Finite.of_injective (fun x ↦ (DiscreteModule.H_zero_addEquiv M x).1)
+    (Subtype.val_injective.comp (DiscreteModule.H_zero_addEquiv M).injective)
 
 variable (R) in
 /-- `H¹(Gal(Ω/F), M)` is finite for finite `ℓ`-primary `M`, for a prime `ℓ` invertible in the

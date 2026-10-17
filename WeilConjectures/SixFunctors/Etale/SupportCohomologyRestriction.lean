@@ -107,26 +107,127 @@ end UpperShriek
 
 section Triangle
 
+variable [HasSmallSiteSheafify A]
+
+/-- `Ri^!` of a zero object is zero. -/
+lemma isZero_rightDerivedUpperShriek_obj {Z X : Scheme.{u}} (i : Z ⟶ X) [HasCompactification i]
+    [(R(i)_![A]).IsLeftAdjoint] {Y : DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hY : IsZero Y) : IsZero ((R(i)^![A]).obj Y) := by
+  rw [IsZero.iff_id_eq_zero]
+  apply ((rightDerivedUpperShriekAdjunction A i).homEquiv _ _).symm.injective
+  exact hY.eq_of_tgt _ _
+
 variable {T B C D : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T) (d : D ⟶ T)
   [IsClosedImmersion b] [IsClosedImmersion c] [IsClosedImmersion d]
   (hd : Set.range d.base = Set.range b.base ∩ Set.range c.base)
 
-/-- `Ri_! Ri^! L` vanishes on any open immersion whose range misses the range of `i`. -/
-lemma isZero_leftDerivedUpperStar_supported_of_subset {W Z : Scheme.{u}} (i : Z ⟶ T)
-    [IsClosedImmersion i] (h : W ⟶ T) [IsOpenImmersion h]
-    (hh : Disjoint (Set.range i.base) (Set.range h.base))
-    (L : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
-    IsZero ((L((h)^*[A])).obj ((R(i)_![A]).obj ((R(i)^![A]).obj L))) :=
-  isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A i h hh h subset_rfl _
+lemma disjoint_range_openComplement_ι_of_subset {Z Z' : Scheme.{u}} (i : Z ⟶ T) (i' : Z' ⟶ T)
+    [IsClosedImmersion i'] (h : Set.range i.base ⊆ Set.range i'.base) :
+    Disjoint (Set.range i.base) (Set.range i'.openComplement.ι.base) := by
+  refine Set.disjoint_of_subset_left h ?_
+  rw [i'.range_eq_compl_range_openComplement_ι]
+  exact disjoint_compl_left
 
-omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] in
-/-- A subset of the range of a closed immersion is disjoint from its open complement. -/
-lemma disjoint_range_openComplement_of_subset {Z : Scheme.{u}} {i : Z ⟶ T} [IsClosedImmersion i]
-    {S : Set T} (h : S ⊆ Set.range i.base) :
-    Disjoint S (Set.range i.openComplement.ι.base) := by
-  rw [← compl_compl (Set.range i.openComplement.ι.base), ← i.range_eq_compl_range_openComplement_ι]
-  exact Set.disjoint_compl_right_iff_subset.mpr h
+include hd in
+/-- The supported term of `D` is supported on `B`. -/
+lemma isZero_leftDerivedUpperStar_openComplement_supported_of_inter
+    (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
+    IsZero ((L((b.openComplement.ι)^*[A])).obj ((R(d)_![A]).obj ((R(d)^![A]).obj F))) :=
+  isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A d _
+    (disjoint_range_openComplement_ι_of_subset d b (by rw [hd]; exact Set.inter_subset_left))
+    _ subset_rfl _
+
+/-- The map `Rd_! Rd^! F ⟶ Rb_! Rb^! F` of supported terms for `D ⊆ B`: the unique lift of the
+counit of `d` through the counit of `b`. It is *defined* as `Classical.choose`. -/
+noncomputable def supportedInclusion (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
+    (R(d)_![A]).obj ((R(d)^![A]).obj F) ⟶ (R(b)_![A]).obj ((R(b)^![A]).obj F) :=
+  (existsUnique_comp_counit_of_isZero A b b.openComplement.ι
+    b.range_eq_compl_range_openComplement_ι
+    (isZero_leftDerivedUpperStar_openComplement_supported_of_inter A b c d hd F)
+    ((rightDerivedUpperShriekAdjunction A d).counit.app F)).exists.choose
+
+@[reassoc (attr := simp)]
+lemma supportedInclusion_comp_counit (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
+    supportedInclusion A b c d hd F ≫ (rightDerivedUpperShriekAdjunction A b).counit.app F =
+      (rightDerivedUpperShriekAdjunction A d).counit.app F :=
+  (existsUnique_comp_counit_of_isZero A b b.openComplement.ι
+    b.range_eq_compl_range_openComplement_ι
+    (isZero_leftDerivedUpperStar_openComplement_supported_of_inter A b c d hd F)
+    ((rightDerivedUpperShriekAdjunction A d).counit.app F)).exists.choose_spec
+
+include hd in
+/-- `Rc_! Rc^! (Rb_! Rb^! F)` is supported on `D = B ∩ C`: on the open complement `W` of `D`,
+it vanishes on the complement of `C` and, restriction to an open commuting with supports, on the
+complement of `B`; these two opens cover `W`. -/
+lemma isZero_leftDerivedUpperStar_openComplement_supported_supported
+    (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
+    IsZero ((L((d.openComplement.ι)^*[A])).obj ((R(c)_![A]).obj ((R(c)^![A]).obj
+      ((R(b)_![A]).obj ((R(b)^![A]).obj F))))) := by
+  set ud := d.openComplement.ι
+  have hcd : Disjoint (Set.range (pullback.snd c ud).base)
+      (Set.range (pullback.snd b ud).base) := by
+    rw [Scheme.Pullback.range_snd, Scheme.Pullback.range_snd, Set.disjoint_left]
+    intro x hx₁ hx₂
+    have : ud.base x ∈ Set.range d.base := by rw [hd]; exact ⟨hx₂, hx₁⟩
+    exact Set.disjoint_left.mp (disjoint_range_openComplement_ι_of_subset d d subset_rfl) this
+      ⟨x, rfl⟩
+  refine isZero_of_isZero_leftDerivedUpperStar_of_disjoint A (pullback.snd c ud)
+    (pullback.snd b ud) _ _ (Scheme.Hom.range_eq_compl_range_openComplement_ι _)
+    (Scheme.Hom.range_eq_compl_range_openComplement_ι _) hcd ?_ ?_
+  · exact (isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek A c ud
+      _).of_iso ((leftDerivedUpperStarComp A _ ud).app _).symm
+  · set o := (pullback.snd b ud).openComplement.ι ≫ ud
+    have hE : IsZero ((L((o)^*[A])).obj ((R(b)_![A]).obj ((R(b)^![A]).obj F))) :=
+      isZero_leftDerivedUpperStar_openComplement_comp_obj_rightDerivedLowerShriek A b ud _
+    have := isIso_supportedRestriction_of_isOpenImmersion A o c (pullback.snd c o)
+      (pullback.fst c o) (IsPullback.of_hasPullback c o)
+      ((R(b)_![A]).obj ((R(b)^![A]).obj F)) _ (Iso.refl _)
+    refine IsZero.of_iso ?_ ((leftDerivedUpperStarComp A _ ud).app _).symm
+    exact ((R(pullback.snd c o)_![A]).map_isZero
+      (isZero_rightDerivedUpperShriek_obj A _ hE)).of_iso (asIso (supportedRestriction A o c
+        (pullback.snd c o) (pullback.fst c o) (IsPullback.of_hasPullback c o) _ _
+          (Iso.refl _)))
+
+/-- `Rd_! Rd^! F ≅ Rc_! Rc^! (Rb_! Rb^! F)` over `Rb_! Rb^! F`: both are supported on `D` and
+the maps to `F` lift uniquely. -/
+theorem exists_iso_supported_supported (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
+    ∃ e : (R(d)_![A]).obj ((R(d)^![A]).obj F) ≅
+        (R(c)_![A]).obj ((R(c)^![A]).obj ((R(b)_![A]).obj ((R(b)^![A]).obj F))),
+      e.hom ≫ (rightDerivedUpperShriekAdjunction A c).counit.app _ =
+        supportedInclusion A b c d hd F := by
+  set E := (R(b)_![A]).obj ((R(b)^![A]).obj F)
+  set εb := (rightDerivedUpperShriekAdjunction A b).counit.app F
+  set εc := (rightDerivedUpperShriekAdjunction A c).counit.app E
+  set εd := (rightDerivedUpperShriekAdjunction A d).counit.app F
+  have hDC : IsZero ((L((c.openComplement.ι)^*[A])).obj ((R(d)_![A]).obj ((R(d)^![A]).obj F))) :=
+    isZero_leftDerivedUpperStar_openComplement_supported_of_inter A c b d
+      (hd.trans (Set.inter_comm _ _)) F
+  have hX := isZero_leftDerivedUpperStar_openComplement_supported_supported A b c d hd F
+  have hXc : IsZero ((L((c.openComplement.ι)^*[A])).obj ((R(c)_![A]).obj ((R(c)^![A]).obj E))) :=
+    isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A c _
+      (disjoint_range_openComplement_ι_of_subset c c subset_rfl) _ subset_rfl _
+  have hXb : IsZero ((L((b.openComplement.ι)^*[A])).obj ((R(c)_![A]).obj ((R(c)^![A]).obj E))) :=
+    sorry
+  have hDd : IsZero ((L((d.openComplement.ι)^*[A])).obj ((R(d)_![A]).obj ((R(d)^![A]).obj F))) :=
+    isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A d _
+      (disjoint_range_openComplement_ι_of_subset d d subset_rfl) _ subset_rfl _
+  obtain ⟨ψ, hψ, -⟩ := existsUnique_comp_counit_of_isZero A c c.openComplement.ι
+    c.range_eq_compl_range_openComplement_ι hDC (supportedInclusion A b c d hd F)
+  obtain ⟨φ, hφ, -⟩ := existsUnique_comp_counit_of_isZero A d d.openComplement.ι
+    d.range_eq_compl_range_openComplement_ι hX (εc ≫ εb)
+  have h₁ : ψ ≫ φ = 𝟙 _ :=
+    (existsUnique_comp_counit_of_isZero A d d.openComplement.ι
+      d.range_eq_compl_range_openComplement_ι hDd εd).unique
+      (by rw [assoc, hφ, reassoc_of% hψ, supportedInclusion_comp_counit]) (id_comp _)
+  have h₂ : φ ≫ supportedInclusion A b c d hd F = εc :=
+    (existsUnique_comp_counit_of_isZero A b b.openComplement.ι
+      b.range_eq_compl_range_openComplement_ι hXb (εc ≫ εb)).unique
+      (by rw [assoc, supportedInclusion_comp_counit, hφ]) rfl
+  have h₃ : φ ≫ ψ = 𝟙 _ :=
+    (existsUnique_comp_counit_of_isZero A c c.openComplement.ι
+      c.range_eq_compl_range_openComplement_ι hXc εc).unique
+      (by rw [assoc, hψ, h₂]) (id_comp _)
+  exact ⟨⟨ψ, φ, h₁, h₃⟩, hψ⟩
 
 end Triangle
 

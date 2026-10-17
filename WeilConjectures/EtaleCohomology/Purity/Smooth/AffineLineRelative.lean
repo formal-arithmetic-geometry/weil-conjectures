@@ -205,7 +205,9 @@ isomorphic to `F` and the geometric stalks of `F` are finite: each stalk map is 
 injective map between finite sets of the same cardinality. -/
 theorem isIso_of_isSplitMono_of_iso {X : Scheme.{u}}
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : F ⟶ G) [IsSplitMono φ]
-    (e : G ≅ F) (hF : ∀ x : X, Finite ↑(((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F)) :
+    (e : G ≅ F)
+    (hF : ∀ x : X, Finite ↑(((X.uliftPointSmallEtale x).sheafFiber
+      (A := ModuleCat.{u + 1} Λ)).obj F)) :
     IsIso φ := by
   refine isIso_of_isIso_sheafFiber_map φ fun x ↦ ?_
   let Φ := (X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)
@@ -382,7 +384,6 @@ noncomputable def localizationTriangleLowerStarObj₃Iso :
       (R((j ≫ p)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L) :=
   (rightDerivedLowerStarComp _ j p).app _
 
-include hij in
 include hij in
 /-- In the direct image along `p` of the localization triangle of `(i, j)`, if `Hⁿ(Rp_* L)` and
 `Hⁿ⁺¹(Rp_* L)` vanish, the boundary is an isomorphism

@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.MvPolynomial.Equiv
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Regular sequences are quasi-regular
@@ -38,13 +39,14 @@ variable {R : Type*} [CommRing R]
 
 section Homogeneous
 
-variable {σ : Type*} [Fintype σ] {a : σ → R}
+variable {σ : Type*} [Finite σ] {a : σ → R}
 
 /-- The value at `a` of a homogeneous polynomial of degree `d` with coefficients in `K` lies in
 `K (a)^d`. -/
 lemma IsHomogeneous.eval_mem_mul_pow {K : Ideal R} {G : MvPolynomial σ R} {d : ℕ}
     (hG : G.IsHomogeneous d) (hK : ∀ m, G.coeff m ∈ K) :
     eval a G ∈ K * Ideal.span (Set.range a) ^ d := by
+  have := Fintype.ofFinite σ
   rw [eval_eq]
   refine Ideal.sum_mem _ fun m hm ↦ Ideal.mul_mem_mul (hK m) ?_
   have hdeg : ∑ i, m i = d := by
@@ -52,7 +54,7 @@ lemma IsHomogeneous.eval_mem_mul_pow {K : Ideal R} {G : MvPolynomial σ R} {d : 
     exact (Finset.sum_subset (Finset.subset_univ _)
       fun i _ hi ↦ Finsupp.notMem_support_iff.1 hi).symm
   rw [← hdeg, ← Finset.prod_pow_eq_pow_sum]
-  exact Ideal.prod_mem_prod fun i _ ↦ Ideal.pow_mem_pow (Ideal.subset_span ⟨i, rfl⟩) _
+  exact Ideal.prod_mem_prod fun i _ ↦ Ideal.pow_mem_pow (Ideal.subset_span (Set.mem_range_self i)) _
 
 /-- The value at `a` of a homogeneous polynomial of degree `d` lies in `(a)^d`. -/
 lemma IsHomogeneous.eval_mem_pow {G : MvPolynomial σ R} {d : ℕ} (hG : G.IsHomogeneous d) :
@@ -62,6 +64,7 @@ lemma IsHomogeneous.eval_mem_pow {G : MvPolynomial σ R} {d : ℕ} (hG : G.IsHom
 /-- Every element of `(a)^d` is the value at `a` of a homogeneous polynomial of degree `d`. -/
 lemma exists_isHomogeneous_eval_eq {d : ℕ} {x : R} (hx : x ∈ Ideal.span (Set.range a) ^ d) :
     ∃ G : MvPolynomial σ R, G.IsHomogeneous d ∧ eval a G = x := by
+  have := Fintype.ofFinite σ
   induction d generalizing x with
   | zero => exact ⟨C x, isHomogeneous_C _ _, eval_C _⟩
   | succ d ih =>
@@ -105,7 +108,8 @@ lemma coeff_mem_of_eval_mem_pow_succ_of_eval_eq_zero {n : ℕ} {a : Fin n → R}
     obtain ⟨H, hH, rfl⟩ := exists_isHomogeneous_eval_eq hy
     obtain ⟨c, rfl⟩ := (Ideal.mem_span_range_iff_exists_fun).1 hz
     exact ⟨fun i ↦ C (c i) * H, fun i ↦ hH.C_mul _, by
-      simp [Finset.mul_sum, mul_comm, mul_left_comm]⟩
+      rw [Finset.sum_mul]
+      exact Finset.sum_congr rfl fun i _ ↦ by simp only [map_mul, eval_C]; ring⟩
   obtain ⟨G, hG, hFG⟩ := key _ (by rwa [← pow_succ])
   have hF' : (F - ∑ i, C (a i) * G i).IsHomogeneous d :=
     hF.sub (IsHomogeneous.sum _ _ _ fun i _ ↦ (hG i).C_mul _)
@@ -192,7 +196,8 @@ theorem coeff_mem_of_eval_mem_pow_succ : ∀ {n : ℕ} {a : Fin n → R}, IsRevR
         have hm'' := hm'
         rw [← Finsupp.cons_tail m', hcoeffG] at hm''
         have h1 := hF hm''
-        have h2 : (weight 1) m' = (weight 1) (Finsupp.cons (m' 0) (Finsupp.tail m')) := by
+        have h2 : (Finsupp.weight (1 : Fin (n + 1) → ℕ)) m' =
+            (Finsupp.weight (1 : Fin (n + 1) → ℕ)) (Finsupp.cons (m' 0) (Finsupp.tail m')) := by
           rw [Finsupp.cons_tail]
         simp only [weight_apply, Pi.one_apply, smul_eq_mul, mul_one, Finsupp.sum_cons] at h1 h2 ⊢
         omega
@@ -200,7 +205,7 @@ theorem coeff_mem_of_eval_mem_pow_succ : ∀ {n : ℕ} {a : Fin n → R}, IsRevR
         have e1 := eval_eq_eval_mv_eval' a' (a 0) F
         have e2 := eval_eq_eval_mv_eval' a' (a 0) G
         rw [ha', Fin.cons_self_tail] at e1 e2
-        rw [e1, e2, hPG]
+        rw [e1, e2, hPG, ← hP]
         conv_lhs => rw [← Polynomial.X_mul_divX_add P]
         simp
       have hQ0J : eval a' (P.coeff 0) ∈ J ^ (d + 1) := hQ0.eval_mem_pow
