@@ -84,11 +84,11 @@ theorem exists_normal_family_generic_limit {S C : Scheme.{u}} [CompactSpace S]
     (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ) :
     ∃ (I : Type u) (hcat : SmallCategory I),
       letI : SmallCategory I := hcat
-      ∃ (hco : IsCofiltered I) (D K : I ⥤ Scheme.{u})
+      ∃ (_ : IsCofiltered I) (D K : I ⥤ Scheme.{u})
         (κ : (Functor.const I).obj Cη ⟶ D)
         (b : (Functor.const I).obj (Spec S.functionField) ⟶ K) (s : K ⟶ D),
-        ∃ (hκ : IsLimit (Cone.mk Cη κ))
-          (hb : IsLimit (Cone.mk (Spec S.functionField) b)),
+        ∃ (_ : IsLimit (Cone.mk Cη κ))
+          (_ : IsLimit (Cone.mk (Spec S.functionField) b)),
         (∀ i, CompactSpace (D.obj i)) ∧ (∀ i, QuasiSeparatedSpace (D.obj i)) ∧
         (∀ i, CompactSpace (K.obj i)) ∧ (∀ i, QuasiSeparatedSpace (K.obj i)) ∧
         (∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)) ∧

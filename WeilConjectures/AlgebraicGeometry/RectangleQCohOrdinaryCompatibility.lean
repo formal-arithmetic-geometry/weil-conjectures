@@ -142,7 +142,7 @@ theorem rectangle_qcoh_ordinary_compatibility
       ((a (pullback.snd f (h ≫ g))).comp (a k))
       (c k (pullback.snd f (h ≫ g)) ≪≫
         eqToIso (congrArg (fun r ↦ derivedPullback.{u, w} r) hk₂))
-    ∀ (s : U ⋙ L ≅ V) (hL : L.IsEquivalence) (hs : ∀ E : schemeDerivedQCohCategory X,
+    ∀ (s : U ⋙ L ≅ V) (_ : L.IsEquivalence) (_ : ∀ E : schemeDerivedQCohCategory X,
       (schemeDerivedQCohProperty (pullback (pullback.snd f g) h)).ι.map (s.hom.app E) =
         (let comp := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec
           (Classical.choose_spec exists_derivedPullbackComposition)))

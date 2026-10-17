@@ -88,7 +88,7 @@ theorem rectangle_ordinary_geometric_direct
       @qcInverseBaseChange _ (pullback f g) S T _
         (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _
         (pullback.snd f g) _ _ h hβI
-    ∀ (s : U ⋙ L ≅ V) (hL : L.IsEquivalence) (hs : ∀ E : schemeDerivedQCohCategory X,
+    ∀ (s : U ⋙ L ≅ V) (_ : L.IsEquivalence) (_ : ∀ E : schemeDerivedQCohCategory X,
       (schemeDerivedQCohProperty (pullback (pullback.snd f g) h)).ι.map (s.hom.app E) =
         (let comp := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec
           (Classical.choose_spec exists_derivedPullbackComposition)))

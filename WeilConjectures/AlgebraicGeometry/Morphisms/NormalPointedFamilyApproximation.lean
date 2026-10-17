@@ -64,10 +64,10 @@ theorem exists_normal_pointed_family_approximation {S C : Scheme.{u}} [CompactSp
     (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S) (n : ℕ) (hn : IsUnit (n : Γ(S, ⊤))) :
     ∃ (I : Type u) (hcat : SmallCategory I),
       letI : SmallCategory I := hcat
-      ∃ (hco : IsCofiltered I) (X Y : I ⥤ Scheme.{u})
+      ∃ (_ : IsCofiltered I) (X Y : I ⥤ Scheme.{u})
         (α : (Functor.const I).obj S ⟶ X) (γ : (Functor.const I).obj C ⟶ Y)
-        (hα : IsLimit (Cone.mk S α)) (hγ : IsLimit (Cone.mk C γ))
-        (p : Y ⟶ X) (τ : X ⟶ Y) (hI : ∀ i, IsIntegral (X.obj i)),
+        (_ : IsLimit (Cone.mk S α)) (_ : IsLimit (Cone.mk C γ))
+        (p : Y ⟶ X) (τ : X ⟶ Y) (_ : ∀ i, IsIntegral (X.obj i)),
         (∀ {i j : I} (f : i ⟶ j), IsAffineHom (X.map f)) ∧
         (∀ i, IsDominant (α.app i)) ∧
         (∀ i, IsPullback c (γ.app i) (α.app i) (p.app i)) ∧
