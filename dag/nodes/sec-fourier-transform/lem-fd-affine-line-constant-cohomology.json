@@ -3,44 +3,129 @@
  "blueprint": {
   "is": "lem-fd-affine-line-constant-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constant cohomology of the affine line",
- "statement": "For $k$ finite or algebraically closed,\n\n$$\nH^q(\\mathbf A^1_{\\bar k},\\overline{\\mathbf Q}_\\ell)=\\begin{cases}\\overline{\\mathbf Q}_\\ell,&q=0,\\\\0,&q>0.\\end{cases}\n$$",
+ "statement": "Let $k$ be a finite or an algebraically closed field, let $\\ell$ be a prime invertible in $k$, and let $\\bar k$ be an algebraic closure. Use the affine line [def-sbc-affine-space] and ordinary adic constant-coefficient cohomology in the common finite-stage coefficient category [def-weil-pbc-qbar-category]. Then, for every $q\\geq0$,\n$$\nH^q(\\mathbf A^1_{\\bar k},\\overline{\\mathbf Q}_\\ell)\\cong\\begin{cases}\\overline{\\mathbf Q}_\\ell,&q=0,\\\\0,&q>0.\\end{cases}\n$$\nThe degree-zero isomorphism is induced by constant sections.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-affine-line-constant-cohomology.md",
   "place": "node lem-fd-affine-line-constant-cohomology, order 2684"
  },
  "stmt_deps": [
-  "def-fd-additive-character"
+  "def-sbc-affine-space",
+  "def-weil-pbc-qbar-category"
  ],
  "proof": [
   {
-   "text": "The affine line is irreducible, hence connected, so $H^0=\\overline{\\mathbf Q}_\\ell$. For $q>0$ the $\\overline{\\mathbf Q}_\\ell$-cohomology is computed from the compatible finite-level cohomologies of the constant sheaves $\\mathbf Z/\\ell^n$ by [def-weil-pbc-qbar-category], and $H^q(\\mathbf A^1_{\\bar k},\\mathbf Z/\\ell^n)=0$ for every $q>0$: the vanishing for $q>1$ is the cohomological dimension of an affine curve of [sbc-thm-cohomological-dimension-of-an-affine-curve], and $H^1(\\mathbf A^1_{\\bar k},\\mathbf Z/\\ell^n)\\cong\\operatorname{Pic}(\\mathbf A^1_{\\bar k})[\\ell^n]=0$ by [thm-sc-affine-cohomology], the Picard group being trivial by [lem-sc-pic-affine] (the compactification is $\\mathbf P^1$ of genus $0$, whose Jacobian is trivial, so the quotient of [lem-sc-pic-affine] is $\\operatorname{Pic}(\\mathbf A^1)=0$).",
+   "text": "Put $K=\\bar k$ and $X=\\mathbf A^1_K=\\operatorname{Spec}K[t]$ [def-sbc-affine-space]. The zero ideal of $K[t]$ is prime, since the leading coefficient of a product of nonzero polynomials is nonzero; it belongs to every nonempty basic open, so $X$ is nonempty and irreducible, hence connected. The polynomial dimension theorem [lem-sc-p1-polynomial-dimension-one] gives dimension one. The projection is smooth of relative dimension one by [sbc-lem-affine-space-smooth]. Thus $X$ is a smooth affine connected curve. It is separated and of finite type (one polynomial generator), and $\\ell^n$ is prime to $\\operatorname{char}K$ for every $n\\geq1$.",
    "uses": [
-    "def-weil-pbc-qbar-category",
-    "sbc-thm-cohomological-dimension-of-an-affine-curve",
-    "thm-sc-affine-cohomology",
-    "lem-sc-pic-affine"
+    "def-sbc-affine-space",
+    "lem-sc-p1-polynomial-dimension-one",
+    "sbc-lem-affine-space-smooth"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-affine-line-constant-cohomology.proof.md",
+    "place": "Opening assertion that the affine line is irreducible and connected; hypotheses for the affine-curve calculations."
+   }
+  },
+  {
+   "text": "For every $n\\geq1$, apply [sbc-thm-cohomological-dimension-of-an-affine-curve] to $X$ and $d=\\ell^n$. It gives $H^0(X_{\\mathrm{et}},\\underline{\\mathbf Z/\\ell^n\\mathbf Z})\\cong\\mathbf Z/\\ell^n\\mathbf Z$ via constant sections, and $H^q(X_{\\mathrm{et}},\\underline{\\mathbf Z/\\ell^n\\mathbf Z})=0$ for every $q>1$. In particular these groups are finite.",
+   "uses": [
+    "sbc-thm-cohomological-dimension-of-an-affine-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-affine-line-constant-cohomology.proof.md",
+    "place": "Finite-level degree zero and higher-degree vanishing."
+   }
+  },
+  {
+   "text": "By [lem-sc-primitive-root], choose a primitive $\\ell^n$-th root of unity over $K$ at each $n$. Its trivialization allows application of the Kummer short exact sequence in [thm-sc-affine-cohomology]. That statement gives the unit quotient, $H^1(X,\\underline{\\mathbf Z/\\ell^n\\mathbf Z})$, and $\\operatorname{Pic}(X)[\\ell^n]$ as its three terms; it explicitly says the unit term vanishes for $X=\\mathbf A^1$. The statement of [lem-pur-affine-punctured-line-algebra] gives $\\operatorname{Pic}(\\mathbf A^1_K)=0$. Both outside terms of the sequence are therefore zero, forcing $H^1(X,\\underline{\\mathbf Z/\\ell^n\\mathbf Z})=0$. No compatibility between the choices of roots of unity is needed: this proves that the actual constant-sheaf groups vanish. Together with Step 2, every finite-level cohomology group in nonnegative degree is finite.",
+   "uses": [
+    "lem-sc-primitive-root",
+    "thm-sc-affine-cohomology",
+    "lem-pur-affine-punctured-line-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-affine-line-constant-cohomology.proof.md",
+    "place": "Kummer computation and the Picard vanishing for the affine line."
+   }
+  },
+  {
+   "text": "Apply [lem-fd-qbar-cohomology-finite-level-comparison] to $X$. Step 1 verifies its geometric and characteristic hypotheses, and Steps 2 and 3 verify finiteness in every nonnegative degree at every level. For each $q\\geq0$ it identifies the desired adic cohomology with $(\\varprojlim_n H^q(X_{\\mathrm{et}},\\mathbf Z/\\ell^n\\mathbf Z))\\otimes_{\\mathbf Z_\\ell}\\overline{\\mathbf Q}_\\ell$. For $q>0$ all factors in that inverse limit are zero, so the inverse limit and its tensor product are zero.",
+   "uses": [
+    "lem-fd-qbar-cohomology-finite-level-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-affine-line-constant-cohomology.proof.md",
+    "place": "Passage from compatible finite coefficients to adic algebraically closed coefficients, including its finiteness hypothesis."
+   }
+  },
+  {
+   "text": "For $q=0$, the isomorphisms in Step 2 commute with the quotient transitions: reducing the constant section $a$ gives the constant section $a\\bmod\\ell^n$. Consequently their inverse limit is $\\varprojlim_n\\mathbf Z/\\ell^n\\mathbf Z$. By [lem-exc-padic-residue-universal-property], applied to the ring of compatible tuples with its residue projections, the canonical map $\\mathbf Z_\\ell\\to\\varprojlim_n\\mathbf Z/\\ell^n\\mathbf Z$ is an isomorphism: the unique lift of the projections is its inverse, since the two composites agree on every residue projection. The tensor product of this free rank-one $\\mathbf Z_\\ell$-module with $\\overline{\\mathbf Q}_\\ell$ is $\\overline{\\mathbf Q}_\\ell$, via $z\\otimes a\\mapsto za$ with inverse $a\\mapsto1\\otimes a$. The constant-section compatibility in [lem-fd-qbar-cohomology-finite-level-comparison] makes this precisely the asserted degree-zero identification.",
+   "uses": [
+    "lem-exc-padic-residue-universal-property",
+    "lem-fd-qbar-cohomology-finite-level-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-affine-line-constant-cohomology.proof.md",
+    "place": "Constant-section degree-zero identification after the inverse limit and scalar extension."
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-qbar-category",
+  "def-sbc-affine-space",
+  "lem-sc-p1-polynomial-dimension-one",
+  "sbc-lem-affine-space-smooth",
   "sbc-thm-cohomological-dimension-of-an-affine-curve",
+  "lem-sc-primitive-root",
   "thm-sc-affine-cohomology",
-  "lem-sc-pic-affine"
+  "lem-pur-affine-punctured-line-algebra",
+  "lem-fd-qbar-cohomology-finite-level-comparison",
+  "lem-exc-padic-residue-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-affine-line-constant-cohomology.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-affine-line-constant-cohomology.proof.md",
+  "place": "Complete current-blueprint proof paragraph; geometry and finite-level Kummer route retained, inverse-limit comparison and degree-zero compatibility made explicit."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "affineLine.*cohom|cohom.*affineLine|affine.*cohomology|etale.*cohomology",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of affine line over an algebraically closed field with l-adic constant coefficients is Qbar_l in degree zero and vanishes in positive degrees",
+   "results": "AlgebraicGeometry.AffineSpace; Algebra.FormallyEtale.subsingleton_h1Cotangent; Algebra.Etale.iff_exists_algEquiv_prod; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; Algebra.etaleLocus_eq_compl_support; Algebra.formallyEtale_iff; Algebra.IsStandardSmooth.subsingleton_h1Cotangent. Affine geometry or unrelated cohomology infrastructure, no exact adic cohomology computation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant l-adic cohomology of the affine line is zero in positive degrees and one-dimensional in degree zero over an algebraically closed field",
+   "results": "ChainComplex.alternatingConstHomologyZero; groupCohomology.H0Iso; ContinuousCohomology.MultiInd.d_zero; CochainComplex.HomComplex.CohomologyClass.mk_zero; groupCohomology.H0IsoOfIsTrivial; CochainComplex.HomComplex.CohomologyClass.mk_eq_zero_iff; groupCohomology.H1ofAutOnUnitsUnique; groupCohomology.cocyclesIso₀. Affine geometry or unrelated cohomology infrastructure, no exact adic cohomology computation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AffineSpace\"",
+   "results": "Affine.termAffineSpace; AlgebraicGeometry.AffineSpace; AlgebraicGeometry.AffineSpace.over; AlgebraicGeometry.AffineSpace.instIsAffine; AlgebraicGeometry.AffineSpace.instIsIntegral; AlgebraicGeometry.AffineSpace.instIsReduced; AlgebraicGeometry.AffineSpace.functor; AlgebraicGeometry.AffineSpace.reindex. Affine geometry or unrelated cohomology infrastructure, no exact adic cohomology computation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -117,5 +202,44 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-fd-affine-line-constant-cohomology",
+  "worker": "stage1",
+  "summary": "Preserved the affine-curve/Kummer route, made the implicit prime-to-characteristic adic setting explicit (STATEMENT-DISPUTED typing repair), and expanded the proof into geometry, finite-level calculation, Kummer vanishing, precise finite-level comparison, and degree-zero inverse-limit computation. One new statement-only generic coefficient-comparison node states an explicit inverse-limit formula under finiteness, accounting for the Milnor correction. Reused the existing exact Picard vanishing and residue universal-property statements. The available Lean declaration is sorried and uses finite coefficients.",
+  "blueprint": "Realizes the complete current-blueprint proof paragraph in five steps: geometric hypotheses and connectedness; finite-level degree zero and q>1; Kummer/Picard q=1; finite-level coefficient passage with its precise finiteness hypothesis; the degree-zero inverse limit and its natural unit section.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-affine-punctured-line-algebra",
+    "why": "Its explicit units and Picard computation supplies Pic(A^1_K)=0, a generic algebraic input for the unit Kummer argument."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "The affine-space projection supplies the smooth relative-dimension-one hypothesis of the curve calculation; no Fourier-unit node gives that geometric fact."
+   },
+   {
+    "node": "lem-sc-p1-polynomial-dimension-one",
+    "why": "The polynomial dimension theorem checks that the line is a connected curve of dimension one, without replacing the unit cohomology route."
+   },
+   {
+    "node": "lem-sc-primitive-root",
+    "why": "Supplies the primitive roots required for the finite-level Kummer trivializations over the algebraically closed geometric field; only their existence is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-affine-punctured-line-algebra",
+  "sbc-lem-affine-space-smooth",
+  "lem-sc-p1-polynomial-dimension-one",
+  "lem-sc-primitive-root"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-8396a6701",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-8396a6701 (reviewer sub-agent of L); spot-checked: Read the item, the new node, the blueprint text (main-20261015 and master, statement and proof), the unit and chapter records, and every cited node's statement. Statement: the delivery makes ℓ invertible in k explicit. This is necessary, since for ℓ=p the group H^1(A^1,Z/p) is infinite from Artin–Schreier classes, and the adic Qbar category needs ℓ invertible. All three citers already assume ℓ≠p, so nothing is weakened. Step 1: A^1_K is a connected curve as def-sc-curves requires (irreducible, dimension 1 by the Mathlib leaf, smooth by sbc-lem-affine-space-smooth, affine and of finite type). Step 2: sbc-thm-cohomological-dimension-of-an-affine-curve with d=ℓ^n gives H^q=0 for q>1, and H^0=Z/ℓ^n via constant sections on a nonempty connected curve. Step 3: the Kummer sequence of thm-sc-affine-cohomology, with the unit term zero for A^1 and Pic(A^1_K)=0 from lem-pur-affine-punctured-line-algebra, gives H^1=0. Using a direct Pic(A^1)=0 statement in place of the blueprint's uncited genus-0 Jacobian claim is a legitimate correction. Steps 4–5: the inverse limit is zero for q>0; for q=0 I checked the Z_ℓ≅lim Z/ℓ^n argument from the residue universal property in both directions. New node lem-fd-qbar-cohomology-finite-level-comparison: true by RΓ commuting with Rlim (Stacks 0A07, Bhatt–Scholze 6.5.9) and the Milnor sequence (Stacks 07KY, label read), where R^1lim vanishes for finite groups, followed by rationalization and the colimit over finite stages. Its right side is Milne LEC §19 p.123 (read). Tested on the empty scheme, a point, G_m (H^1=Qbar) and P^1 (H^2=Qbar), so it is not a restatement of the item. Searched the DAG and read the candidates (lem-fd-finite-etale-adic-cohomology, d-real-cohom, def-weil-ordinary-compact-cohomology, lem-weil-constant-coefficient-objects-constructible, lem-pur-coefficient-system-derived-comparison, lem-zl-affine-curve-range): none states this comparison, so it is not a duplicate. No SGA is cited. Accepted tool_uses: sbc-thm-cohomological-dimension-of-an-affine-curve and thm-sc-affine-cohomology (both cited by the blueprint proof itself but not declared), lem-pur-affine-punctured-line-algebra, sbc-lem-affine-space-smooth, lem-sc-primitive-root, lem-sc-p1-polynomial-dimension-one. No fixes."
  }
 }

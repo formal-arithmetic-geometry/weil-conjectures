@@ -3,67 +3,108 @@
  "blueprint": {
   "is": "det-chow-projective-qcqs-chow",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Chow's lemma over a qcqs base",
- "statement": "Let $S$ be quasi-compact and quasi-separated and let $f:X\\to S$ be separated\nand of finite type. Then there are a finite set $N$, a scheme $\\widetilde X$,\na proper surjective morphism $\\pi:\\widetilde X\\to X$ and an immersion\n$i_S:\\widetilde X\\to\\mathbf P^N_S$ such that $q_S\\circ i_S=f\\circ\\pi$, where\n$q_S:\\mathbf P^N_S\\to S$ is the projection.",
+ "statement": "Let $S$ be a quasi-compact scheme [def-weil-pbc-quasi-compact-scheme] which is quasi-separated [def-weil-quasi-separated-morphism], and let $f:X\\to S$ be a separated [def-weil-proper-morphism] morphism of finite type [def-weil-finite-type-morphism] of schemes [def-pc-scheme]. Then there are a finite set $N$, a scheme $\\widetilde X$, a proper [def-weil-proper-morphism] surjective [def-weil-surjective-morphism] morphism $\\pi:\\widetilde X\\to X$ and an immersion [def-weil-closed-immersion] $i_S:\\widetilde X\\to\\mathbf P^N_S$ such that $q_S\\circ i_S=f\\circ\\pi$, where $\\mathbf P^N_S$ is projective space with homogeneous coordinates indexed by $N$ [def-nagata-projective-space-base-change] and $q_S:\\mathbf P^N_S\\to S$ is its projection.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-thm-chow-projective/det-chow-projective-qcqs-chow.md",
   "place": "node det-chow-projective-qcqs-chow, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change"
+ ],
  "proof": [
   {
-   "text": "*Step 1: envelope.* By [prop-nagata-finite-type-closed-in-fp] there is a\nclosed immersion $e:X\\hookrightarrow X_0$ over $S$ with $f_0:X_0\\to S$\nseparated and of finite presentation.",
+   "text": "Apply [lem-weil-pbc-chow-finite-type] to $f$. Its hypotheses are exactly ours: $S$ quasi-compact and quasi-separated, $f$ separated and of finite type. It gives an integer $n\\ge0$, a scheme $X'$, a proper surjective morphism $\\pi:X'\\to X$ and an immersion $j:X'\\to\\mathbf P^n_S=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ with $p\\circ j=f\\circ\\pi$, where $p$ is the projection. By [def-nagata-projective-space-base-change], the classical $\\mathbf P^n_S$ is $\\mathbf P(\\{0,\\dots,n\\};S)$, with the first projection as structure morphism. Put $N=\\{0,\\dots,n\\}$, a finite set, $\\widetilde X=X'$, $i_S=j$ and $q_S=p$. Then $\\pi$ is proper and surjective, $i_S$ is an immersion into the projective space with homogeneous coordinates indexed by $N$, and $q_S\\circ i_S=f\\circ\\pi$. These are all the requested data. The cited node proves Stacks 0202 along this unit's paragraph-3 route: envelope 01ZJ, Noetherian approximation 01ZA, separated finitely presented descent 01ZM/01ZQ, Noetherian Chow 0200, base change back to $S$ and pullback to $X$.",
    "uses": [
-    "prop-nagata-finite-type-closed-in-fp"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 2: Noetherian model.* By [prop-nagata-noetherian-inverse-system],\n$S=\\varprojlim_\\lambda S_\\lambda$ for a cofiltered system of schemes of finite\ntype over $\\mathbf Z$ (hence Noetherian) with affine transition maps. By\n[lemma-nagata-separated-eventually] there are an index $\\lambda$ and a\nseparated morphism of finite presentation $f_\\lambda:X_\\lambda\\to S_\\lambda$\nwith $X_0\\cong X_\\lambda\\times_{S_\\lambda}S$ over $S$. Since $S_\\lambda$ is\nNoetherian, $f_\\lambda$ is separated of finite type over a Noetherian base.",
-   "uses": [
-    "prop-nagata-noetherian-inverse-system",
-    "lemma-nagata-separated-eventually"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 3: Noetherian Chow.* By [thm-chow-lemma] applied to $f_\\lambda$, there\nare a finite set $N$, a proper surjective\n$\\pi_\\lambda:\\widetilde X_\\lambda\\to X_\\lambda$ and an immersion\n$i_\\lambda:\\widetilde X_\\lambda\\to\\mathbf P^N_{S_\\lambda}$ with\n$q_{S_\\lambda}i_\\lambda=f_\\lambda\\pi_\\lambda$.",
-   "uses": [
-    "thm-chow-lemma"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 4: base change to $S$.* Put\n$\\widetilde X_0=\\widetilde X_\\lambda\\times_{S_\\lambda}S$. The base change\n$\\pi_0:\\widetilde X_0\\to X_\\lambda\\times_{S_\\lambda}S\\cong X_0$ of\n$\\pi_\\lambda$ is proper and surjective, these properties being stable under\nbase change. The base change $i_0:\\widetilde X_0\\to\n\\mathbf P^N_{S_\\lambda}\\times_{S_\\lambda}S=\\mathbf P^N_S$\n([def-nagata-projective-space-base-change]) of $i_\\lambda$ is an immersion,\nand $q_Si_0=f_0\\pi_0$.",
-   "uses": [
+    "lem-weil-pbc-chow-finite-type",
     "def-nagata-projective-space-base-change"
    ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 5: restriction to $X$.* Put $\\widetilde X=\\widetilde X_0\\times_{X_0}X$\nwith projections $\\pi:\\widetilde X\\to X$ and $e':\\widetilde X\\to\n\\widetilde X_0$. Then $\\pi$ is the base change of $\\pi_0$ along $e$, hence\nproper and surjective, and $e'$ is the base change of the closed immersion\n$e$, hence a closed immersion. The composite $i_S=i_0\\circ e'$ is a closed\nimmersion followed by an immersion, hence an immersion, and\n$q_Si_S=q_Si_0e'=f_0\\pi_0e'=f_0e\\pi=f\\pi$.",
-   "uses": [],
-   "elementary": null
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 0202 (lemma-chow-finite-type, line 3071), statement; its proof is carried by the existing node lem-weil-pbc-chow-finite-type"
+   }
   }
  ],
  "proof_deps": [
-  "prop-nagata-finite-type-closed-in-fp",
-  "prop-nagata-noetherian-inverse-system",
-  "lemma-nagata-separated-eventually",
-  "thm-chow-lemma",
+  "lem-weil-pbc-chow-finite-type",
   "def-nagata-projective-space-base-change"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-thm-chow-projective/det-chow-projective-qcqs-chow.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0202, lemma-chow-finite-type; the proof is the existing DAG node lem-weil-pbc-chow-finite-type (Lean: AlgebraicGeometry.exists_chow_finite_type, sorry-free)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Chow lemma for separated finite type schemes over a quasi compact quasi separated base gives a proper surjection from a quasi projective scheme",
+   "results": "AlgebraicGeometry.IsProper.of_valuativeCriterion; AlgebraicGeometry.isProper_iff; AlgebraicGeometry.isProper_eq; AlgebraicGeometry.IsProper; AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization; AlgebraicGeometry.instIsProperOfIsFinite; AlgebraicGeometry.IsProper.instOfIsFinite",
+   "date": "2026-10-18",
+   "verdict": "no match: none states the item; properness definitions, scheme Noetherianity and valuative criteria do not construct the required domination."
+  },
+  {
+   "tool": "grep",
+   "query": "chow|exists.*[Pp]roper.*[Ii]mmersion",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: none states the item; properness definitions, scheme Noetherianity and valuative criteria do not construct the required domination."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated finite type scheme over a quasi compact quasi separated scheme admits a proper surjective morphism from a scheme immersed in projective space",
+   "results": "AlgebraicGeometry.IsSeparated.instQuasiSeparated; AlgebraicGeometry.IsProper; AlgebraicGeometry.isProper_eq; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; AlgebraicGeometry.isProper_iff; AlgebraicGeometry.IsProper.mk; AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated; AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace",
+   "date": "2026-10-18",
+   "verdict": "no match: none states the item; properness definitions, scheme Noetherianity and valuative criteria do not construct the required domination."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsImmersion",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: none states the item; properness definitions, scheme Noetherianity and valuative criteria do not construct the required domination."
+  },
+  {
+   "tool": "grep",
+   "query": "Chow|chow|quasiProjective|quasi_projective",
+   "results": "Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Restrict.lean; Mathlib/Topology/Algebra/Module/ContinuousLinearMap/PiProd.lean; Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Basic.lean; Mathlib/Topology/Algebra/Module/Basic.lean; Mathlib/Topology/Algebra/Module/Equiv.lean; Mathlib/Topology/Algebra/Module/Determinant.lean; Mathlib/Topology/MetricSpace/Sequences.lean; Mathlib/Topology/MetricSpace/Sequences.lean The 25 hits are author names Salchow, not Chow lemmas; repeated a word-boundary search restricted to AlgebraicGeometry with no hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: none states the item; properness definitions, scheme Noetherianity and valuative criteria do not construct the required domination."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every scheme of finite type over the integers is Noetherian and quasi compact quasi separated",
+   "results": "AlgebraicGeometry.IsNoetherian; AlgebraicGeometry.IsLocallyNoetherian; AlgebraicGeometry.isNoetherian_iff; AlgebraicGeometry.IsArtinianScheme.isNoetherianScheme; AlgebraicGeometry.IsNoetherian.toCompactSpace; AlgebraicGeometry.quasiCompact_of_noetherianSpace_source; AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier; AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing",
+   "date": "2026-10-18",
+   "verdict": "no match: none states the item; properness definitions, scheme Noetherianity and valuative criteria do not construct the required domination."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chow lemma proper surjective quasi projective finite type morphism",
+   "results": "AlgebraicGeometry.IsProper.instOfIsFinite; AlgebraicGeometry.instIsProperOfIsFinite; AlgebraicGeometry.Surjective; AlgebraicGeometry.IsProper.mk; AlgebraicGeometry.IsProper; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; AlgebraicGeometry.isProper_eq; AlgebraicGeometry.isProper_iff",
+   "date": "2026-10-18",
+   "verdict": "no match: none states the item; properness definitions, scheme Noetherianity and valuative criteria do not construct the required domination."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bChow\\b|\\bchow\\b|quasiProjective|quasi_projective",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: none states the item; properness definitions, scheme Noetherianity and valuative criteria do not construct the required domination."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -92,5 +133,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "det-chow-projective-qcqs-chow",
+  "worker": "stage1",
+  "summary": "Statement kept: it agrees with Stacks 0202 and the blueprint text, with homogeneous coordinates indexed by a finite set N. Maintainer reader's repair: the existing reviewed, split node lem-weil-pbc-chow-finite-type (sec-proper-base-change, Stacks 0202, Lean-closed via AlgebraicGeometry.exists_chow_finite_type) states the same theorem with N={0,...,n}. The worker's eight-step re-derivation of 0202 was correct but duplicated that node. Following stages/1-dag.md §3.4 and C5, the proof now cites it in one step. No new nodes. A maintainer merge of the two nodes is recommended.",
+  "blueprint": "The single step realizes the whole blueprint statement. The unit sk-thm-chow-projective proof paragraph 3 (envelope, Noetherian approximation, descent, Noetherian Chow, base change and pullback) is the proof of the cited node lem-weil-pbc-chow-finite-type, step for step. Paragraph 1 of the unit then uses this item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-chow-finite-type",
+    "why": "States Stacks 0202 exactly (n-indexed coordinates) and is Lean-closed (exists_chow_finite_type); no node of unit sk-thm-chow-projective states it, and citing it avoids a second copy of the same theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-chow-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-6e4f0f5e1",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-6e4f0f5e1 (reviewer sub-agent of L); spot-checked: I read all the cited material and checked every step. The item's statement agrees with Stacks 0202 (limits.tex l.3071) and with the blueprint. Its hypotheses are S qcqs and f separated of finite type. Its conclusion is a finite N, a proper surjective π and an immersion i_S with q_S i_S = fπ. The finite-N form is equivalent to Stacks' n ≥ 0 form: an empty N forces X to be empty. All 8 delivered steps are correct. I checked each one against the current blueprint_update statements and against the closed Lean behind them: 01ZJ envelope (AffineTransitionLimit.lean:4606), 01ZA approximation (l.2146), 01ZQ descent with qcqs stages (l.3511, stages qcqs via 01OY), and Noetherian Chow through ChowModification.Data in ChowLemma.lean, which states the full 0200 result. The remaining steps use base change of proper, surjective, immersion and closed-immersion maps, the projective-space pasting, and closed-immersion composition. One fault (C5 / stages §3.4): the item duplicates the existing node lem-weil-pbc-chow-finite-type. That node states Stacks 0202 with N={0..n}, is split and reviewed (pass), and is Lean-closed by the sorry-free AlgebraicGeometry.exists_chow_finite_type in ChowFiniteType.lean. The worker's report missed it. Fix written to fixes/dag/nodes/sec-nagata-compactification/det-chow-projective-qcqs-chow.json: the proof is now one step citing lem-weil-pbc-chow-finite-type plus def-nagata-projective-space-base-change for N={0,...,n}. proof_deps equals the step's uses, and I checked that this creates no cycle. I accepted lem-weil-pbc-chow-finite-type as a tool use: it is Lean-closed and its proof is exactly unit paragraph 3. I removed the worker's three tool_uses, which are no longer cited. Statement and stmt_deps are unchanged. I recommend the maintainer merge the two nodes.; 1 file(s) fixed by the reviewer"
  }
 }
