@@ -53,7 +53,7 @@ private theorem nonempty_derivedPullback_flat_single_iso
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T'.toRingedSpace))]
     (M : SheafOfModules.{u} (moduleRings T.toRingedSpace)) (n : ℤ)
     (hM : SheafOfModules.IsFlat M) :
-    Nonempty ((derivedPullback g).obj
+    Nonempty ((AlgebraicGeometry.derivedPullback g).obj
       ((DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings T.toRingedSpace)) n).obj M) ≅
       (DerivedCategory.singleFunctor
@@ -84,7 +84,7 @@ private theorem nonempty_derivedPullback_flat_single_iso
     eqToIso (hF M) ≪≫
       ((Modules.nonempty_tensorPullbackAdjunction g).some.leftAdjointUniq
         (Modules.pullbackPushforwardAdjunction g)).app M
-  refine ⟨(derivedPullback g).mapIso
+  refine ⟨(AlgebraicGeometry.derivedPullback g).mapIso
     ((DerivedCategory.singleFunctorIsoCompQ A n).app M ≪≫
       ((DerivedCategory.quotientCompQhIso A).app K).symm) ≪≫ e.symm ≪≫
     DerivedCategory.Qh.mapIso ((F.mapHomotopyCategoryFactors (ComplexShape.up ℤ)).app K) ≪≫
@@ -127,7 +127,7 @@ theorem nonempty_homology_derivedPullback_iso_of_locally_single
             (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q).obj E)) i r) :
     Nonempty ((DerivedCategory.homologyFunctor
       (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) i).obj
-        ((derivedPullback g).obj E) ≅ (Modules.pullback g).obj
+        ((AlgebraicGeometry.derivedPullback g).obj E) ≅ (Modules.pullback g).obj
           ((DerivedCategory.homologyFunctor
             (SheafOfModules.{u} (moduleRings T.toRingedSpace)) i).obj E)) := by
   obtain ⟨W, hW, hflat, ⟨eW⟩⟩ :=
@@ -139,8 +139,8 @@ theorem nonempty_homology_derivedPullback_iso_of_locally_single
   let H := DerivedCategory.homologyFunctor
     (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) (i : ℤ)
   refine ⟨H.mapIso
-    ((eqToIso (congrArg (fun k ↦ (derivedPullback k).obj E) hfac)).symm ≪≫
-      ((c f W.ι).app E).symm ≪≫ (derivedPullback f).mapIso eW ≪≫ eS) ≪≫
+    ((eqToIso (congrArg (fun k ↦ (AlgebraicGeometry.derivedPullback k).obj E) hfac)).symm ≪≫
+      ((c f W.ι).app E).symm ≪≫ (AlgebraicGeometry.derivedPullback f).mapIso eW ≪≫ eS) ≪≫
     (DerivedCategory.singleFunctorCompHomologyFunctorIso _ (i : ℤ)).app _ ≪≫
     (Modules.pullback f).mapIso ((Modules.restrictFunctorIsoPullback W.ι).app _) ≪≫
     (Modules.pullbackComp f W.ι).app _ ≪≫ ?_⟩

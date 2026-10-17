@@ -40,7 +40,7 @@ unique comparison of the two left adjoints to module pushforward.
 Source: Stacks, Tags 06YJ and 08HY
 (blueprint: lem-pc-canonical-single-pullback-comparison). -/
 def canonicalSinglePullbackMap {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modules) :
-    (derivedPullback f).obj ((DerivedCategory.singleFunctor
+    (AlgebraicGeometry.derivedPullback f).obj ((DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj M) ⟶
     (DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj ((pullback f).obj M) := by

@@ -45,7 +45,7 @@ theorem exists_isDerivedModulePullbackComparison
       IsDerivedModulePullbackComparison a G c := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hε, htri, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback a)
+    derivedPullback_spec a
   have h : E = Scheme.Modules.tensorPullback a :=
     CategoryTheory.Functor.ext hE (fun _ _ φ ↦ hEmap φ)
   subst E

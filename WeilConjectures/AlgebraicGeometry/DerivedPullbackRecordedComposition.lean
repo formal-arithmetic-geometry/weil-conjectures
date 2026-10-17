@@ -62,7 +62,7 @@ Source: Stacks Project, Tag 06YJ (blueprint: lem-pc-recorded-pullback-compositio
 @[irreducible] noncomputable def recordedPullbackData {X Y : Scheme.{u}} (f : X ⟶ Y) :
     RecordedPullbackData f := by
   classical
-  choose I hI hImap hIa hprops using Classical.choose_spec (exists_derivedPullback f)
+  choose I hI hImap hIa hprops using derivedPullback_spec f
   choose E hE hEmap hEa ε hε using hprops.2.2.2
   exact ⟨E, hE, hEmap, hEa, ε, hε.1, hε.2.2⟩
 
