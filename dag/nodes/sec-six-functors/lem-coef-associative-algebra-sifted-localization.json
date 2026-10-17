@@ -39,7 +39,8 @@
   "lem-coef-associative-algebra-model-transfer",
   "lem-coef-infinity-sifted-colimit-calculus",
   "def-coef-coherent-localization-interface",
-  "def-coef-infinity-category-of-spaces"
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-space-valued-straightening"
  ],
  "proof": [
   {
@@ -199,20 +200,19 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-814d45512",
-  "group": "Q27",
+  "reviewer": "NT-stage2-Codex-37dec0874",
+  "group": "Q38",
   "result": "pass",
-  "note": "Statement, dependencies, source alignment, universes, edge cases, docstrings, report sections, and compiler evidence checked; no substantive or mechanical issues found."
+  "note": "Reviewed statement, dependencies, source, docstrings, universes, edge cases, and existing declaration; dependency recompilation succeeded via scompile.py with no errors.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.AssociativeAlgebraSiftedLocalization",
   "declaration": "HomotopicalAlgebra.associativeAlgebraSiftedLocalization",
-  "file": "lean/Sheaf/CategoryTheory/AssociativeAlgebraSiftedLocalization.lean",
-  "statement": "theorem associativeAlgebraSiftedLocalization {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [MonoidalCategory M] (_hM : CombinatorialModelCategory.{u, v, v} M) (_leftAdj : ∀ X : M, ((tensoringLeft M).obj X).IsLeftAdjoint) (_rightAdj : ∀ X : M, ((tensoringRight M).obj X).IsLeftAdjoint) (_unit : IsCofibrant (𝟙_ M)) (_pushoutProduct : ∀ (f g : Arrow M), Cofibration f.hom → Cofibration g.hom → Cofibration ((MonoidalCategory.Arrow.pushoutProduct.obj f).obj g).hom ∧ (WeakEquivalence f.hom ∨ WeakEquivalence g.hom → WeakEquivalence ((MonoidalCategory.Arrow.pushoutProduct.obj f).obj g).hom)) (_monoidAxiom : NonsymmetricMonoidAxiom M) (W : AssociativeWordFiltration.Construction M) (_transfer : AssociativeAlgebraTransfer W) (_leftProper : (weakEquivalences M).IsStableUnderCobaseChangeAgainst (cofibrations M)) (_tractable : ∃ (J : Type v) (j : J → Arrow M), (MorphismProperty.ofHoms (fun s ↦ (j s).hom)).rlp = trivialFibrations M ∧ ∀ s : J, IsCofibrant (j s).left ∧ IsCofibrant (j s).right) (A C : SSet.{max u v t}) (qA : FiniteReedy.largeNerve.{max u v, v, max u v t} (Mon M) ⟶ A) (qM : FiniteReedy.largeNerve.{u, v, max u v t} M ⟶ C) (_hqA : FiniteReedy.IsLocalization.{max u v, v, max u v t} ((weakEquivalences M).inverseImage (Mon.forget M)) qA) (_hqM : FiniteReedy.IsLocalization.{u, v, max u v t} (weakEquivalences M) qM) : ∃ U : A ⟶ C, AreNaturallyEquivalent (qA ≫ U) (frameLargeNerveMap.{max u v, v, max u v t, u, v} (Mon.forget M) ≫ qM) ∧ (∀ (I : Type v) [SmallCategory I], IsInfinitySifted (nerve I) → ∀ (F : FiniteReedy.largeNerve.{v, v, max u v t} I ⟶ A) (c : (coconeCategory F) _⦋0⦌), IsColimiting F c → IsColimiting (F ≫ U) (Spaces.mappedCocone U F c)) ∧ IsInfinitySifted (nerve SimplexCategoryᵒᵖ) ∧ (∀ (F : SSet.uliftFunctor.{max u v t}.obj (nerve SimplexCategoryᵒᵖ) ⟶ A) (c : (coconeCategory F) _⦋0⦌), IsColimiting F c → IsColimiting (F ≫ U) (Spaces.mappedCocone U F c))",
+  "statement": "theorem associativeAlgebraSiftedLocalization\n    {M : Type u} [Category.{v} M] [ModelCategory M]\n    [HasLimits M] [HasColimits M] [MonoidalCategory M]\n    (_hM : CombinatorialModelCategory.{u, v, v} M)\n    (_leftAdj : ∀ X : M, ((tensoringLeft M).obj X).IsLeftAdjoint)\n    (_rightAdj : ∀ X : M, ((tensoringRight M).obj X).IsLeftAdjoint)\n    (_unit : IsCofibrant (𝟙_ M))\n    (_pushoutProduct : ∀ (f g : Arrow M), Cofibration f.hom → Cofibration g.hom →\n      Cofibration ((MonoidalCategory.Arrow.pushoutProduct.obj f).obj g).hom ∧\n      (WeakEquivalence f.hom ∨ WeakEquivalence g.hom →\n        WeakEquivalence ((MonoidalCategory.Arrow.pushoutProduct.obj f).obj g).hom))\n    (_monoidAxiom : NonsymmetricMonoidAxiom M)\n    (W : AssociativeWordFiltration.Construction M)\n    (_transfer : AssociativeAlgebraTransfer W)\n    (_leftProper :\n      (weakEquivalences M).IsStableUnderCobaseChangeAgainst (cofibrations M))\n    (_tractable : ∃ (J : Type v) (j : J → Arrow M),\n      (MorphismProperty.ofHoms (fun s ↦ (j s).hom)).rlp = trivialFibrations M ∧\n        ∀ s : J, IsCofibrant (j s).left ∧ IsCofibrant (j s).right)\n    (A C : SSet.{max u v t})\n    (qA : FiniteReedy.largeNerve.{max u v, v, max u v t} (Mon M) ⟶ A)\n    (qM : FiniteReedy.largeNerve.{u, v, max u v t} M ⟶ C)\n    (_hqA : FiniteReedy.IsLocalization.{max u v, v, max u v t}\n      ((weakEquivalences M).inverseImage (Mon.forget M)) qA)\n    (_hqM : FiniteReedy.IsLocalization.{u, v, max u v t} (weakEquivalences M) qM) :\n    ∃ U : A ⟶ C,\n      AreNaturallyEquivalent (qA ≫ U)\n        (frameLargeNerveMap.{max u v, v, max u v t, u, v} (Mon.forget M) ≫ qM) ∧\n      (∀ (I : Type v) [SmallCategory I], IsInfinitySifted (nerve I) →\n        ∀ (F : FiniteReedy.largeNerve.{v, v, max u v t} I ⟶ A)\n          (c : (coconeCategory F) _⦋0⦌),\n          IsColimiting F c → IsColimiting (F ≫ U) (Spaces.mappedCocone U F c)) ∧\n      IsInfinitySifted (nerve SimplexCategoryᵒᵖ) ∧\n      (∀ (F : SSet.uliftFunctor.{max u v t}.obj (nerve SimplexCategoryᵒᵖ) ⟶ A)\n        (c : (coconeCategory F) _⦋0⦌),\n        IsColimiting F c → IsColimiting (F ≫ U) (Spaces.mappedCocone U F c))",
   "branch": "newtargets-dag",
-  "by": "Q27",
+  "by": "Q38",
   "date": "2026-10-17",
-  "existing": false,
-  "note": "Arbitrary coherent localization presentations; the induced forgetful functor is pinned by its full nerve comparison. Uses homotopy siftedness and the actual mapped coherent cocone. Tractability is expanded as a small generating cofibration family with cofibrant endpoints. Three already-landed interface nodes are added to stmt_deps. No statement correction."
+  "existing": true,
+  "note": "Exact declaration already present in the published side library (Q27); confirmed using scompile.py --source. It includes arbitrary coherent localization presentations, the full forgetful-functor comparison, every small ordinary sifted-nerve shape and coherent geometric realizations. Reuses that declaration without adding a duplicate module."
  }
 }

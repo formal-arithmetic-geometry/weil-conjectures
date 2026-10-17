@@ -181,5 +181,32 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-ef769ba5f (reviewer sub-agent of L); spot-checked: Read the whole item and its parent (step 9 uses the item with M=j_!^A K). Read every cited statement and the source at sites-cohomology.tex lines 4032–4113 (remark-base-change, and 0E46/0E47, the remarks on composing base change maps). The statement is true: take S_T = L h_T^* for (T,B)→(T,A); then chi_u is the Stacks base-change map, and the claim is 0E47 applied twice plus the coefficient/pullback cube. Checked the types of both sides, the mate instantiations for chi and Ex, and the cube on generators: both composites send f'^{-1}g^{-1}(q⊗b) to h^{-1}f^{-1}q⊗b. Edge cases checked: A=B, identity square, M=0, non-flat Z/4→Z/2, unbounded M. No duplicate found: the étale kun cubes, the single-coefficient pasting lemmas and the exceptional coefficient comparison all differ. There are no new nodes. Two faults, both repaired in fixes/dag/nodes/sec-smooth-purity/lem-fix-direct-image-scalar-exchange.json. (1) C1: step 1 used the K-flat form of the derived-pullback composition isomorphisms (which build theta) and the existence of flat-term K-flat resolutions without citing them; it now cites lem-weil-pbc-proetale-derived-pullback-composition, lem-pc-kflat-resolution and def-weil-pbc-ambient-ringed-exchange. (2) E5: step 3 said only 'apply mates-pasting' and 'the only inserted maps are naturality components'. It now instantiates clause 1 of lem-weil-pbc-mate-pasting twice with all of L1, L2, L3, G, H, G2, H2, alpha, beta, and states the whiskering rule: the mate of (σL1)α(L2τ) is (R2σ)α♭(τR1), with σ=λ_h and τ=λ_g. Step 4 now says equal squares have equal mates, and gives naturality in M. proof_deps is the union of the step uses. Statement, stmt_deps and blueprint are unchanged; nothing was weakened. Tool uses accepted: lem-pur-derived-change-of-rings, lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-mate-pasting (a mathlib leaf), and two I added: lem-weil-pbc-proetale-derived-pullback-composition and lem-pc-kflat-resolution.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.DirectImageScalarExchange",
+  "file": "lean/Sheaf/SecSmoothPurity/DirectImageScalarExchange.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.directImageScalarExchange",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.directImageScalarExtension",
+   "AlgebraicGeometry.ProEtale.directImageConstantPush",
+   "AlgebraicGeometry.ProEtale.directImageScalarPullbackIso",
+   "AlgebraicGeometry.ProEtale.directImageScalarComparison",
+   "AlgebraicGeometry.ProEtale.directImageConstantExchange",
+   "AlgebraicGeometry.ProEtale.directImageScalarExchange"
+  ],
+  "statement": "theorem directImageScalarExchange {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X' X Y' Y : Scheme.{u}} (h : X' ⟶ X) (f' : X' ⟶ Y') (f : X ⟶ Y) (g : Y' ⟶ Y) (sq : ChosenCartesianSquare h f' f g) (M : Scheme.proEtaleDerivedCategory X A) : (Scheme.proEtaleConstantRingDerivedPullback B g).map ((directImageScalarComparison φ f).app M) ≫ (directImageConstantExchange B sq).app ((directImageScalarExtension φ X).obj M) ≫ (directImageConstantPush B f').map ((directImageScalarPullbackIso φ h).hom.app M) = (directImageScalarPullbackIso φ g).hom.app ((directImageConstantPush A f).obj M) ≫ (directImageScalarExtension φ Y').map ((directImageConstantExchange A sq).app M) ≫ (directImageScalarComparison φ f').app ((Scheme.proEtaleConstantRingDerivedPullback A h).obj M)",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-17",
+  "note": "Repair of returned head 17ef11a3b244: removes every arbitrary functor, adjunction and comparison binder. The constant ring map comes from φ; scalar extension is the existing universal derived ring-sheaf extension; lambda is the canonical reduction/pullback isomorphism with its tensor-unit normalization; chi is its canonical geometric-adjunction mate; Ex is the existing ambient ringed exchange applied to sq and the canonical constant coefficient identifications. Only the main theorem is postponed. Helpers are real specializations of published constructions, listed in declarations, and have source/blueprint docstrings. The theorem docstring carries all four proof steps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-75bdb1c42",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical constructions, docstrings, edge cases, and report sections checked; per-file scompile passed cleanly."
  }
 }

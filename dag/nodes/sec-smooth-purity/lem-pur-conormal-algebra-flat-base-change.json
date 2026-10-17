@@ -303,5 +303,28 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-9f2b94b9f (reviewer sub-agent of L); spot-checked: I read all 9 steps of the item and the statement of each of the 19 nodes it cites. The delivery has no new nodes and makes no changes (nothing under fixes/). Source check: Stacks divisors.tex 4330-4470 (0633, 0634, 0635). The statement matches 0634+0635 for closed immersions in a Cartesian square: the canonical map is given on affine charts by [a]⊗r -> [g^#(a)r] with I=I'R, it is surjective for any g, and it is an isomorphism when g is flat. This is what the parent det-sp-orientation-charts uses in its step 3 (flat, via étale; identity in degree 0; conormal map in degree 1). Small cases checked: identity base change; J=0; J=A; the flat extension A->A[t]; the nonreduced ideal (x^2). The case A=k[x], J=(x), B=k shows flatness is needed for injectivity (degree 1 is k -> 0). Step checks: (1) the ideal-image node plus clause (1) of module-pullback-ideal-quotient give I=I'R, and f(W) lies in W' because i'f=gi. (2) The affine-sections lemma on f|_W, and M⊗_{A/J}B/K = M⊗_A B since JM=0. (3) K^n=J^nB and the chart map is well defined. (4) The tilde adjunction (counit iso), a principal-localization overlap check and cover-gluing build the sheaf map; no intersection is assumed affine. (5) Products and unit checked on pure tensors; pullback commutes with the direct sum because it is a left adjoint. (6) Degree 0 is the structure-sheaf identification; degree 1 uses the stated characterization in conormal-functorial. (7) Explicit local preimages; surjectivity is in the Zariski sheaf sense. (8) Flat criterion, flat-tensor-exact on J^n/J^{n+1} into A/J^{n+1}, and tensor-quotient base change with J^{n+1}B=K^{n+1}, so c_n composed with an inclusion is injective. (9) Local inverses glue and are multiplicative because c is injective. Route: every cited non-Mathlib statement (owned by sk-def-purity-conv, sk-def-sf-admissible, sk-thm-p1, sk-thm-picard-hilb-curves) is in the transitive uses of sk-prop-sp-orientation. I accept the 9 declared tool_uses as generic module and sheaf tools. No SGA citation. Duplicate grep found no existing node stating this graded comparison; lem-weil-pbc-closed-immersion-conormal-flat-base-change covers degree 1 only. Minor observation, not a fault: the algebra structure on the pullback f^*G' is used in its canonical tensor form, while the statement cites only def-pc-module-pullback; it follows from the tensor-sheaf definition. proof_deps equals the union of the step uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConormalAlgebraFlatBaseChange",
+  "declaration": "AlgebraicGeometry.ConormalGradedAlgebra.existsUnique_baseChangeMap",
+  "declarations": [
+   "AlgebraicGeometry.ConormalGradedAlgebra.adjointPiece",
+   "AlgebraicGeometry.ConormalGradedAlgebra.IsBaseChangeMap",
+   "AlgebraicGeometry.ConormalGradedAlgebra.existsUnique_baseChangeMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConormalAlgebraFlatBaseChange.lean",
+  "statement": "theorem existsUnique_baseChangeMap (hc : IsLimit (PullbackCone.mk i f h)) (A : Presentation i) (A' : Presentation i') : (∀ (U : X.affineOpens) (U' : X'.affineOpens) (H : U.1 ≤ g ⁻¹ᵁ U'.1), i.ker.ideal U = Ideal.map (g.appLE U'.1 U.1 H).hom (i'.ker.ideal U')) ∧ (∃! c : (tensorPullback f).obj A'.algebra.toModule ⟶ A.algebra.toModule, IsBaseChangeMap i i' g f h A A' c) ∧ ∀ c : (tensorPullback f).obj A'.algebra.toModule ⟶ A.algebra.toModule, IsBaseChangeMap i i' g f h A A' c → Epi c ∧ (Flat g → IsIso c)",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c21bb7d90",
+  "group": "Q131",
+  "result": "pass",
+  "note": "Checked node, dependencies, Stacks Tags 0634–0635, Lean declarations, docstrings, edge cases, and compiler evidence; no findings."
  }
 }

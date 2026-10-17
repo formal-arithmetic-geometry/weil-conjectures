@@ -227,5 +227,29 @@
   "group": "Q62",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q62-79722e361 (reviewer sub-agent of L); spot-checked: Read the mathematics in full; verified all five steps against cited statements and Kerodon sources, checked edge cases and dependency cycles. No new nodes or repairs. Accepted the declared generic cone-calculus tool use. Detailed findings are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FinalIndexCoconeCriterion",
+  "declaration": "SSet.Enhanced.final_index_cocone_criterion",
+  "declarations": [
+   "SSet.Enhanced.finalIndexEvaluationMap",
+   "SSet.Enhanced.finalIndexCoconeComponent",
+   "SSet.Enhanced.final_index_cocone_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FinalIndexCoconeCriterion.lean",
+  "branch": "newtargets-dag",
+  "statement": "theorem final_index_cocone_criterion {J C : SSet.{u}} [Quasicategory J] [Quasicategory C] (t : J _⦋0⦌) (ht : IsTerminal J t) (d : J ⟶ C) : (∀ w : C _⦋0⦌, IsWeakHomotopyEquivalence (finalIndexEvaluationMap t d w)) ∧ (∀ l : C _⦋0⦌, ∀ (μ : (coconeCategory d) _⦋0⦌), μ.1.1 = l → (IsColimiting d μ ↔ IsEquivalenceEdge C (finalIndexCoconeComponent d μ t)))",
+  "by": "Q61",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper maps evaluation to the literal diagram value and extracts the specified cocone component; both use the canonical constructions of EnhancedDiagramsCones. The theorem states the weak-equivalence and equivalence-edge criteria exactly."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-77b0132fd",
+  "group": "Q61",
+  "result": "fix",
+  "note": "Lean module compiles cleanly; statement and dependencies match. Replaced the hollow disclaimer with a complete second-reading report in fixes/lem-coef-infinity-final-index-cocone-criterion.report.md."
  }
 }
