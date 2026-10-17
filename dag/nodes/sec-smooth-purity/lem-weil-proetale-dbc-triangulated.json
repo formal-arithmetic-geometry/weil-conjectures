@@ -37,44 +37,88 @@
    }
   },
   {
-   "text": "For two objects $F,G\\in\\mathcal B$, choose their finite stratifications and take the common finite stratification of pairwise fibre products given by [lem-weil-pbc-constructible-stratification-intersection]. The restrictions of $F$ and $G$ to each refined stratum are locally constant with finite module stalks. Here is the inverse-image check needed for the refinement. The pro-etale base-change functor carries covering families to covering families. First check the coefficient ring without assuming its identification: by the sheafification universal property, for any ring sheaf $R$ on the target, $\\operatorname{Hom}(f^{-1}\\Lambda_Y,R)=\\operatorname{Hom}(\\Lambda_Y,f_*R)=\\operatorname{Hom}_{\\mathrm{Ring}}(\\Lambda,\\Gamma(f_*R))=\\operatorname{Hom}_{\\mathrm{Ring}}(\\Lambda,\\Gamma(R))=\\operatorname{Hom}(\\Lambda_X,R)$. The middle equality evaluates the displayed direct-image formula at the final object. These natural bijections identify $f^{-1}\\Lambda_Y$ with $\\Lambda_X$; the identification is the canonical structure map of [def-weil-proetale-inverse-image], because its adjoint sends each scalar to its constant section. Now [def-weil-pbc-proetale-operations] applies. An inverse image sends the constant module sheaf $\\underline M$ to $\\underline M$: for any target module sheaf $N$, the module adjunction and the universal property of the constant sheaf identify both Hom sets with $\\operatorname{Hom}_\\Lambda(M,\\Gamma(N))$, since direct image evaluated at the final object is $\\Gamma(N)$. For composable scheme maps $f$ and $g$, the direct-image formula identifies $(fg)_*$ with $f_*g_*$ via the associativity of fibre products. Composing the two inverse-image adjunction bijections gives $\\operatorname{Hom}(g^*f^*F,N)=\\operatorname{Hom}(F,f_*g_*N)=\\operatorname{Hom}((fg)^*F,N)$; hence the left adjoints are naturally isomorphic. In particular, restriction to a refined stratum through either projection is the restriction from $Y$. For a weakly etale object $j:U_j\\to Y$, [lem-weil-proetale-weakly-etale-localization] identifies $Y_{\\mathrm{proet}}/U_j$ with $(U_j)_{\\mathrm{proet}}$ and identifies the restricted constant ring with $\\Lambda_{U_j}$. Under this identification restriction is the scheme inverse image $j^*$: the right adjoint to restriction sends a sheaf $H$ to $V\\mapsto H(V\\times_YU_j)$. Indeed a map $F\\to(V\\mapsto H(V\\times_YU_j))$ gives $F(W)\\to H(W)$ for $W\\to U_j$ by restriction along the graph $W\\to W\\times_YU_j$; conversely a map $F|_{U_j}\\to H$ gives its component at $V$ by $F(V)\\to F(V\\times_YU_j)\\to H(V\\times_YU_j)$. Naturality makes these constructions inverse. This is the direct image of $j$ in [def-weil-proetale-inverse-image], so uniqueness of left adjoints identifies restriction with $j^*$. Put $U'_j=X\\times_YU_j$, with projections $j':U'_j\\to X$ and $f_j:U'_j\\to U_j$. The equality $fj'=jf_j$ and the already established composition isomorphisms now give $j'^*f^*F\\cong f_j^*j^*F$. This is the required compatibility of inverse image with the localized restriction. Thus pulling back a trivializing covering gives constant modules with the same values $M$ on its base change. On a nonempty trivializing member choose a point and an algebraic closure of its residue field, giving a geometric point of that member and of its stratum. Pointed neighbourhoods factoring through the member are cofinal: refine any neighbourhood by its fibre product with that member, using the chosen two lifts. Consequently its restricted stalk is the stalk of the original sheaf at that geometric point. By [lem-weil-proetale-weakly-etale-localization] the constant local model on this localized site is the constant module sheaf on the member's own small pro-etale site. Its stalk is canonically $M$ by [lem-weil-proetale-constant-sheaf-stalk], with no finiteness assumption on $M$. Hence finite stalks make each such $M$ finite; empty members can be omitted. The pulled-back local models are therefore finite too. The ring identification and the module inverse image here are exactly those used by the definition of constructible sheaf.",
+   "text": "For every scheme map $f:X\\to Y$, [prop-weil-pbc-proetale-constant-ring-map] identifies the specified $c^f_\\Lambda$ with an isomorphism. Thus [def-weil-pbc-proetale-operations] supplies the exact module inverse image; after forgetting the module action it is the abelian inverse image. For a weakly etale $j:U\\to X$, [lem-sfb-proetale-object-inverse-image-restriction] identifies $j^*$ with localized restriction. Applying [lem-pur-proetale-inverse-image-stalk] to the underlying abelian sheaf gives\n$$(F|_U)_{\\bar u}\\cong F_{j\\bar u}.$$\nThis stalk isomorphism is used below only for finiteness of underlying sets, so no scalar comparison beyond these identifications is required.",
    "uses": [
-    "lem-weil-pbc-constructible-stratification-intersection",
-    "def-weil-proetale-inverse-image",
+    "prop-weil-pbc-proetale-constant-ring-map",
     "def-weil-pbc-proetale-operations",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-proetale-locally-constant-sheaf",
-    "def-weil-proetale-geometric-stalk",
-    "def-weil-proetale-constructible-sheaf",
-    "def-weil-pbc-sheafification",
-    "def-pur-localized-ringed-site",
-    "def-weil-geometric-point",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-proetale-constant-sheaf-stalk"
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "lem-pur-proetale-inverse-image-stalk"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Proof of Tag 03RZ, label lemma-constructible-abelian: common finite partition; the refinement argument works globally for the given finite partitions. The inverse-image constant-sheaf check is the elementary adjunction calculation, also used in proetale.tex Tag 09AK."
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CE (lemma-localize-given-products), 05V1 (lemma-point-morphism-sites), specialized to the pro-etale site; coefficient map as in proetale.tex 09A5."
    }
   },
   {
-   "text": "For a morphism $u:F\\to G$ with $F,G\\in\\mathcal B$, restrict to the common strata of step 2. The module inverse image is exact (including kernels and cokernels), by [def-weil-pbc-proetale-operations]. Apply [lem-weil-pbc-locally-constant-derived-serre] on the small pro-etale site of each stratum, with $B=\\Lambda$, which is Noetherian by step 1. That lemma says the kernel and cokernel of the restricted morphism are locally constant of finite type. By [lem-weil-proetale-weakly-etale-localization] and [lem-weil-proetale-constant-sheaf-stalk], stalks of each constant local model are its module values. Since a finite-type module over the finite ring $\\Lambda$ is finite as a set, their stalks are finite. The same finite stratification thus witnesses constructibility of $\\ker u$ and $\\operatorname{coker}u$. For $0\\to F\\to E\\to G\\to0$, use exactly the same common stratification of the two outside terms. Exact inverse image restricts this to a short exact sequence on each stratum, and the extension clause of the same lemma makes the restricted $E$ locally constant of finite type, hence with finite stalks. That finite stratification witnesses $E\\in\\mathcal B$. Together with step 1 this gives every weak-Serre hypothesis, for the global definition rather than an affine-local substitute.",
+   "text": "Every geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$ lifts to a member of any pro-etale covering $\\{U_j\\to X\\}$. Indeed, base change along $\\bar x$ gives a covering $\\{U_j\\times_X\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\Omega\\}$ by the covering-preserving base-change functor of [def-weil-proetale-inverse-image]. Joint surjectivity in [def-weil-pbc-proetale-site] gives a point $v$ of some fibre. This fibre is weakly etale over $\\Omega$ by [lem-weil-pbc-weakly-etale-composition-base-change]. Restricting to an affine neighbourhood of $v$ preserves weakly etaleness by [lem-weil-pbc-weakly-etale-source-locality]. There, [lem-weil-pbc-weak-etale-field] makes $\\kappa(v)/\\Omega$ separable algebraic. Since $\\Omega$ is algebraically closed this extension is $\\Omega$ itself. Its point map gives a lift $\\operatorname{Spec}\\Omega\\to U_j$ over $X$. The same argument applies to coverings of every stratum.",
    "uses": [
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-locally-constant-derived-serre",
-    "def-weil-proetale-constructible-sheaf",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-proetale-constant-sheaf-stalk"
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-weil-pbc-weak-etale-field",
+    "lem-weil-pbc-weakly-etale-source-locality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Definition of covering families; more-algebra.tex Tag 092Q (lemma-absolutely-flat-over-field) for the fibre residue fields."
+   }
+  },
+  {
+   "text": "On any scheme $T$, a locally constant sheaf $F$ has finite geometric stalks if and only if it admits finite constant local models. By [lem-weil-pbc-site-constant-restriction] and [lem-weil-proetale-weakly-etale-localization], the localized constant module models in the definition are constant module sheaves on the members’ own pro-etale sites. Use the covering and module models $M_j$ of [def-weil-proetale-locally-constant-sheaf]. If $U_j$ is nonempty, choose a point and an algebraic closure of its residue field, obtaining a geometric point $\\bar u$ as in [def-weil-geometric-point]. Step 2 and [lem-weil-proetale-constant-sheaf-stalk] identify $M_j\\cong(F|_{U_j})_{\\bar u}\\cong F_{j\\bar u}$, so finite stalks imply $M_j$ is finite. Empty members may be discarded. Conversely, for an arbitrary geometric point $\\bar t$ of $T$, step 3 gives a lift to some $U_j$. The same two stalk isomorphisms identify $F_{\\bar t}$ with that finite $M_j$. This proves finiteness at every geometric point, rather than just at a chosen point of each member.",
+   "uses": [
+    "def-weil-proetale-locally-constant-sheaf",
+    "def-weil-geometric-point",
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "lem-weil-pbc-site-constant-restriction",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y (lemma-compare-locally-constant): constant local models; geometric stalk comparison as in Tag 0993 (lemma-classical-point)."
+   }
+  },
+  {
+   "text": "For any scheme map $f:X\\to T$, inverse image preserves locally constant sheaves with finite stalks. Choose finite local models $M_j$ for $F$ by step 4. The hypotheses of [lem-exc-proetale-pullback-locally-constant] hold: the ring is finite, the pullback uses its specified canonical constant-ring map, and the local models are finite modules. Its displayed comparison gives finite constant models for $f^*F$ on the base-changed covering $\\{X\\times_TU_j\\to X\\}$. Step 4 then gives finite stalks at every geometric point of $X$. In particular this uses preservation of the same finite module values, rather than only preservation of local constancy.",
+   "uses": [
+    "lem-exc-proetale-pullback-locally-constant"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093U, label lemma-kernel-finite-locally-constant, applied stratumwise; this supplies the global finite-partition variant of proetale.tex Tag 09B5, label lemma-constructible-serre."
+    "place": "Tag 03D8 (lemma-push-pull-composition-modules); constant-model specialization of Tags 093I and 093R, with localization from sites.tex Tag 03CE."
    }
   },
   {
-   "text": "Apply [lem-sbc-cohomology-in-weak-serre-subcategory] to $\\mathcal A$ and $\\mathcal B$. Step 1 supplies the abelian category and its derived cohomology, and steps 1 and 3 supply every closure hypothesis. The bounded version of that lemma gives a strictly full triangulated subcategory $D_{\\mathcal B}(\\mathcal A)\\cap D^b(\\mathcal A)$ of $D(\\mathcal A)$ with its inherited shifts and distinguished triangles.",
+   "text": "For $F,G\\in\\mathcal B$, choose the two finite stratifications in [def-weil-proetale-constructible-sheaf]. Apply [lem-weil-pbc-constructible-stratification-intersection] to obtain their common finite stratification by fibre products. Each refined stratum maps to an old stratum through the corresponding projection. Composition of module inverse images [lem-pur-proetale-module-pullback-composition] identifies restriction from $Y$ with this successive pullback. Step 5 therefore shows that both restricted sheaves are locally constant with finite stalks on every refined stratum.",
+   "uses": [
+    "def-weil-proetale-constructible-sheaf",
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "lem-pur-proetale-module-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RZ (lemma-constructible-abelian), common finite partition argument, carried out on the given global partitions."
+   }
+  },
+  {
+   "text": "For a morphism $u:F\\to G$ in $\\mathcal B$, use the common stratification from step 6. By step 4 its two restricted sheaves have finite constant models, whose finite underlying sets generate them as $\\Lambda$-modules. Thus they are locally constant of finite type. The module inverse image is exact by [def-weil-pbc-proetale-operations], so restriction of $\\ker u$ and $\\operatorname{coker}u$ is the kernel and cokernel of the restricted morphism. Apply [lem-weil-pbc-locally-constant-derived-serre] on the small pro-etale site of each stratum, with $B=\\Lambda$, Noetherian by step 1. The two resulting sheaves are locally constant of finite type. Each finitely generated local model is a quotient of $\\Lambda^r$ for some finite $r$, hence finite as a set. Step 4 gives finite stalks at every geometric point. The same finite stratification therefore witnesses constructibility of both sheaves. For $0\\to F\\to E\\to G\\to0$, use the common finite stratification of the outside terms; exact restriction and the extension clause of the same lemma give locally constant finite-type restrictions of $E$. Their models and all geometric stalks are finite by the preceding argument. Thus $E$ is constructible. Together with step 1, this supplies all weak-Serre hypotheses for the global finite-stratification convention [def-weil-proetale-constructible-sheaf].",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-locally-constant-derived-serre",
+    "def-weil-proetale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093U, lemma-kernel-finite-locally-constant (3), stratumwise; global finite-partition form of proetale.tex Tag 09B5, lemma-constructible-serre."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-cohomology-in-weak-serre-subcategory] to $\\mathcal A$ and $\\mathcal B$. Step 1 supplies the abelian category and its derived cohomology, and steps 1 and 7 supply every closure hypothesis. The bounded version of that lemma gives a strictly full triangulated subcategory $D_{\\mathcal B}(\\mathcal A)\\cap D^b(\\mathcal A)$ of $D(\\mathcal A)$ with its inherited shifts and distinguished triangles.",
    "uses": [
     "lem-sbc-cohomology-in-weak-serre-subcategory"
    ],
@@ -85,7 +129,7 @@
    }
   },
   {
-   "text": "By the definition of $D^b(\\mathcal A)$, membership means that only finitely many $H^i$ are nonzero. By the identification in step 1, membership in $D_{\\mathcal B}(\\mathcal A)$ means exactly that every $\\mathcal H^i$ is constructible. Thus the property of the subcategory in step 4 is exactly $P$. Strict fullness gives invariance under isomorphisms; the inherited triangulated structure gives zero, all shifts, and closure of the middle vertex of a distinguished triangle whose outside vertices satisfy $P$. Applying shift closure first to $[n]$ and then to $[-n]$, whose composite is isomorphic to the identity, gives the claimed if and only if for shifts.",
+   "text": "By the definition of $D^b(\\mathcal A)$, membership means that only finitely many $H^i$ are nonzero. By the identification in step 1, membership in $D_{\\mathcal B}(\\mathcal A)$ means exactly that every $\\mathcal H^i$ is constructible. Thus the property of the subcategory in step 8 is exactly $P$. Strict fullness gives invariance under isomorphisms; the inherited triangulated structure gives zero, all shifts, and closure of the middle vertex of a distinguished triangle whose outside vertices satisfy $P$. Applying shift closure first to $[n]$ and then to $[-n]$, whose composite is isomorphic to the identity, gives the claimed if and only if for shifts.",
    "uses": [
     "def-weil-pbc-bounded-derived-subcategories",
     "def-weil-triangulated-subcategory",
@@ -102,17 +146,23 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-derived-cohomology-sheaves",
   "def-weil-proetale-constructible-sheaf",
-  "lem-weil-pbc-constructible-stratification-intersection",
-  "def-weil-proetale-inverse-image",
+  "prop-weil-pbc-proetale-constant-ring-map",
   "def-weil-pbc-proetale-operations",
-  "def-weil-pbc-constant-sheaf",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-pur-proetale-inverse-image-stalk",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-weakly-etale-source-locality",
   "def-weil-proetale-locally-constant-sheaf",
-  "def-weil-proetale-geometric-stalk",
-  "def-weil-pbc-sheafification",
-  "def-pur-localized-ringed-site",
   "def-weil-geometric-point",
-  "lem-weil-proetale-weakly-etale-localization",
   "lem-weil-proetale-constant-sheaf-stalk",
+  "lem-weil-pbc-site-constant-restriction",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-exc-proetale-pullback-locally-constant",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lem-pur-proetale-module-pullback-composition",
   "lem-weil-pbc-locally-constant-derived-serre",
   "lem-sbc-cohomology-in-weak-serre-subcategory",
   "def-weil-pbc-bounded-derived-subcategories",
@@ -166,10 +216,269 @@
    "results": "DerivedCategory.TStructure.t; DerivedCategory.IsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.IsLE; DerivedCategory.instIsTriangulated; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.isGE_Q_obj_iff",
    "date": "2026-10-14",
    "verdict": "no match: results give ambient derived-category structure, finite-type module sheaves, condensed sheaves, or constructible subsets; none gives the asserted closure of globally stratified constructible pro-etale sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible pro-etale complexes form a triangulated subcategory",
+   "results": "HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic; DerivedCategory.TStructure.t; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; DerivedCategory.instIsTriangulated; CategoryTheory.Functor.instIsTriangulatedHomologicalKernel; DerivedCategory.instPretriangulated; CategoryTheory.Triangulated.TStructure.IsLE; DerivedCategory.mem_distTriang_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: ambient derived-category triangulation only; no pro-etale constructible closure"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory IsTriangulated constructible",
+   "results": "0 hits; loogle reported Unknown identifier `IsTriangulated`",
+   "date": "2026-10-17",
+   "verdict": "no match: query rejected by service (not evidence of absence)"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTriangulated|weak Serre|constructible [Mathlib/CategoryTheory]",
+   "results": "Historical wrapper result: zero hits on a nonexistent doubled Mathlib path because the argument began with Mathlib/. Unusable as absence evidence; valid relative-directory searches are retained separately.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map (Functor.comp _ _)",
+   "results": "LawfulMonadAttach.canReturn_map_imp; LawfulMonadAttach.mk; WeaklyLawfulMonadAttach.map_attach; WeaklyLawfulMonadAttach.mk; Option.sequence_some; Option.mapM_some; Functor.map_unit; id_map'; 12 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of constant sheaf under scheme morphism is constant; composition of inverse image functors; stalk restriction along pro-etale localization",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.Scheme.restrictFunctorΓ; AlgebraicGeometry.Scheme.Hom.resLEStalkMap; AlgebraicGeometry.morphismRestrictStalkMap; AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app; AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app; AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp; smoothSheafCommRing.ι_forgetStalk_inv_apply; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*sheaf|inverse.*image [Mathlib/CategoryTheory/Sites]",
+   "results": "Historical wrapper result: zero hits on a nonexistent doubled Mathlib path because the argument began with Mathlib/. Unusable as absence evidence; valid relative-directory searches are retained separately.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso (f⁻¹ (constant _))",
+   "results": "No hits; loogle: Unknown identifier `IsIso`; 0 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no match: query rejected by service (not evidence of absence)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of constant ring sheaf under a morphism of schemes is canonically constant",
+   "results": "AlgebraicGeometry.StructureSheaf.comap_const; AlgebraicGeometry.Scheme.Hom.appTop; AlgebraicGeometry.StructureSheaf.res_const; AlgebraicGeometry.StructureSheaf.toOpen_eq_const; AlgebraicGeometry.StructureSheaf.res_const'; AlgebraicGeometry.Spec.map_app; AlgebraicGeometry.Spec.map_appLE; AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTriangulated|weak Serre|constructible [CategoryTheory]",
+   "results": "25 hits, including Mathlib/CategoryTheory/Localization/Triangulated.lean:208 and Mathlib/CategoryTheory/Triangulated/Subcategory.lean:18,63,69,75; ambient triangulated-category definitions and closure instances, not the constructible pro-etale theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match: actual positive hits inspected; no intrinsic pro-etale constructibility result"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(pullback|Pullback)|pullback.*constantSheaf [CategoryTheory]",
+   "results": "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; 1 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pullback.*comp|comp.*pullback [CategoryTheory/Sites]",
+   "results": "Mathlib/CategoryTheory/Sites/Precoverage.lean; Mathlib/CategoryTheory/Sites/EqualizerSheafCondition.lean; Mathlib/CategoryTheory/Sites/EqualizerSheafCondition.lean; Mathlib/CategoryTheory/Sites/EqualizerSheafCondition.lean; Mathlib/CategoryTheory/Sites/EqualizerSheafCondition.lean; Mathlib/CategoryTheory/Sites/EqualizerSheafCondition.lean; Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean; Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean; 25 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*[Oo]ver|[Oo]ver.*sheafPullback|restrict.*[Pp]ullback [CategoryTheory/Sites]",
+   "results": "Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean; Mathlib/CategoryTheory/Sites/IsSheafFor.lean; 2 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of constant module sheaves along a morphism of small pro-etale sites is constant",
+   "results": "CategoryTheory.Sheaf.isConstant_of_iso; SheafOfModules.pullback; CategoryTheory.Sheaf.isConstant_congr; CategoryTheory.Sheaf.isConstant_iff_mem_essImage; CategoryTheory.Sheaf.IsConstant.mem_essImage; CategoryTheory.Sheaf.IsConstant.rec; CategoryTheory.Sheaf.IsConstant.mk; CategoryTheory.Sheaf.mem_essImage_of_isConstant; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\", \"over\"",
+   "results": "No hits; 0 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"sheafPullback\"",
+   "results": "No hits; 0 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible complexes of pro-etale module sheaves form a triangulated subcategory",
+   "results": "CategoryTheory.Triangulated.Subcategory; DerivedCategory.instIsTriangulated; CategoryTheory.ObjectProperty.IsTriangulated; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated; CategoryTheory.ObjectProperty.IsTriangulated.mk; CategoryTheory.ObjectProperty.instIsTriangulatedIsoClosure; CategoryTheory.IsTriangulated.mk; CategoryTheory.Functor.instIsTriangulatedHomologicalKernel; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Module inverse images of morphisms of ringed topoi compose canonically",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.inv_app; Submodule.comap_comp; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply; SheafOfModules.pushforwardComp; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weakly etale inverse image on pro-etale sheaves equals localization restriction",
+   "results": "Algebra.Etale.of_isLocalization_Away; Algebra.FormallyEtale.of_isLocalization; Algebra.FormallyEtale.localization_base; RingHom.Etale.propertyIsLocal; AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ; AlgebraicGeometry.Γ_restrict_isLocalization; Algebra.FormallyEtale.localization_map; ModuleCat.Tilde.stalkIso; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"comp\", \"Sheaf\"",
+   "results": "PresheafOfModules.pullbackComp; PresheafOfModules.pullback_comp_id; PresheafOfModules.pullback_id_comp; CategoryTheory.Presieve.IsSheafFor.comp_iff_of_preservesPairwisePullbacks; CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility; SheafOfModules.pullbackComp; SheafOfModules.pullback_comp_id; SheafOfModules.pullback_id_comp; 12 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric inverse image commutes with the constant sheaf functor for modules over a constant ring",
+   "results": "SheafOfModules.pullbackObjFreeIso; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.ιFree_mapFree_inv; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any morphism of schemes the pullback of a constant module sheaf on the pro-etale site is the constant module sheaf",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.pullbackId; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l; SheafOfModules.pullbackObjUnitToUnit; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullbackIso; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of module pullbacks along scheme morphisms on small pro-etale sites with canonical constant coefficients",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl; SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor formula inverse image of module sheaves is compatible with composition of ringed topoi",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; PresheafOfModules.Monoidal.tensorObjMap; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a weakly etale map of schemes pullback on the small pro-etale site is restriction to the localized site",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.isPullback_morphismRestrict; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.instFullEtaleOverForget; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves to a site object equals slice site restriction",
+   "results": "CategoryTheory.GrothendieckTopology.overPullback; CategoryTheory.Sheaf.over; CategoryTheory.GrothendieckTopology.overMapPullback; CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_inverse; CategoryTheory.GrothendieckTopology.overMapPullbackId_inv_app_val_app; CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_obj; CategoryTheory.GrothendieckTopology.overMapPullbackComp_inv_app_val_app; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a scheme morphism inverse image of constant module sheaf on the small pro-etale site equals constant module sheaf with the same module",
+   "results": "CategoryTheory.constantSheaf; CategoryTheory.Sheaf.IsConstant.mk; CategoryTheory.Sheaf.isConstant_of_iso; CategoryTheory.Sheaf.IsConstant.rec; CategoryTheory.Sheaf.mem_essImage_of_isConstant; CategoryTheory.Sheaf.IsConstant.casesOn; CategoryTheory.Sheaf.IsConstant.mem_essImage; CategoryTheory.Sheaf.IsConstant.recOn; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical composition of inverse images of module sheaves on small pro-etale sites using constant coefficient rings",
+   "results": "SheafOfModules.Presentation.map_π_eq; SheafOfModules.unitHomEquiv_symm_comp; ModuleCat.Tilde.toOpen_res; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr; LightCondensed.ihomPoints_symm_comp; LightCondensed.forget_obj_val_map; SheafOfModules.unitHomEquiv_comp_apply; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a weakly etale scheme morphism the inverse image of a sheaf on the small pro-etale site is restriction to the slice site",
+   "results": "AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.restrictFunctorΓ; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|sheafPullbackComp [Algebra/Category]",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; 10 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "grep",
+   "query": "overPullback|def over |overMapPullback [CategoryTheory/Sites]",
+   "results": "Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean; Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean; Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean; Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean; Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean; Mathlib/CategoryTheory/Sites/SheafHom.lean; Mathlib/CategoryTheory/Sites/SheafHom.lean; Mathlib/CategoryTheory/Sites/SheafHom.lean; 17 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullbackComp\"",
+   "results": "PresheafOfModules.pullbackComp; SheafOfModules.pullbackComp; 2 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"overPullback\"",
+   "results": "CategoryTheory.IsPullback.isoOverPullback; CategoryTheory.IsPullback.isoOverPullback_hom_left_comp_snd; CategoryTheory.IsPullback.isoOverPullback_hom_left_comp_snd_assoc; CategoryTheory.MorphismProperty.overPullbackMap; CategoryTheory.GrothendieckTopology.coverPreserving_overPullback; CategoryTheory.GrothendieckTopology.instIsContinuousOverPullbackOver; CategoryTheory.GrothendieckTopology.overPullback; CategoryTheory.Sheaf.toPushforwardOverPullback; 12 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The module pullback for a composite of morphisms of ringed topoi is the composite of the module pullback functors",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.pullbackComp; PresheafOfModules.pullback_comp_id; SheafOfModules.pullback; CategoryTheory.Over.pullbackComp; PresheafOfModules.pullbackComp; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a sheaf to the localization of a site agrees with the inverse image induced by the functor sending an object to its product with the localized object",
+   "results": "CategoryTheory.Sheaf.ΓRes; TopCat.Presheaf.SheafConditionEqualizerProducts.res_π_apply; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd; CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW; AlgebraicGeometry.LocallyRingedSpace.restrict_presheaf_obj; ModuleCat.Tilde.openToLocalization; ModuleCat.Tilde.toOpen; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a geometric morphism preserves the sheafification of a constant module presheaf with unchanged module value",
+   "results": "SheafOfModules.sheafificationCompPullback; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pullbackComp; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules along composition of geometric morphisms with constant ring coefficients is naturally isomorphic to successive inverse images",
+   "results": "SheafOfModules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pushforwardComp_inv_app_val_app; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; SheafOfModules.pushforwardNatIso_inv; SheafOfModules.pushforwardComp; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf inverse image under localization at a site object is the restriction functor, left adjoint to sections on products with that object",
+   "results": "CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW; CategoryTheory.Sheaf.adjunction; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_inverse; CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq; CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val; CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv; CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -191,19 +500,19 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-weil-proetale-dbc-triangulated",
   "worker": "stage1",
-  "summary": "Kept the statement and global finite-stratification convention unchanged. Proved sheaf weak Serre closure using existing common-refinement and any-site locally-constant closure nodes and the exact pro-etale module inverse image. Applied the existing abstract weak-Serre bounded derived-category theorem and identified its objects with P. A proposed new global closure node was removed because this argument belongs in the proof. No new nodes, Lean or builds.",
-  "blueprint": "Justifies the final paragraph of def-weil-finite-torsion-constructibility, which calls the finite constructible cohomology class a full triangulated subcategory; the sheaf input serves its second paragraph. No unit or chapter route changed."
+  "summary": "Repair of return points 1-3: replaced the five inline comparisons by cited canonical constant-ring, stalk, localization and finite-model pullback statements, and one new underived module-composition statement. Wrote geometric-point lifting along coverings using weakly etale fibres over algebraically closed fields, and the finite-model/finite-stalk equivalence in both directions. Retained logged searches and corrected the invalid grep-path interpretation. Current-DAG duplicate diagnostics resolved by reusing the newer existing finite-model pullback and localization nodes. Statement and coefficient category unchanged.",
+  "blueprint": "Realizes the second paragraph of def-weil-finite-torsion-constructibility (finite local models and restrictions to common strata) and its final paragraph (bounded constructible complexes form a full triangulated category), following 09B5 + 06UQ. The one new node supplies the underived module-composition comparison needed by the common-refinement argument."
  },
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NV-2e57e04e0",
-  "group": "NV",
+  "reviewer": "NT-cc-Q26-6c4209c02",
+  "group": "Q26",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-2e57e04e0 (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked Stacks 09B5, 09AL, 093U, and 06UQ against the global finite-stratification predicate. Repaired two missing existing citations: weakly étale localization and constant-sheaf stalks; expanded restriction compatibility. Statement unchanged; dependency checks found no cycle. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-6c4209c02 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, the unit, the chapter, the main-20261015 ancestor def-weil-finite-torsion-constructibility, and Stacks 09B5, 09AL, 06UQ, 03D8 and 093U at their labels. Statement and coefficients: the item's statement is unchanged. It generalizes A_{E,n} to any finite commutative ring, keeps Mod(Λ_Y) with the constant ring sheaf and D(Mod(Λ_Y)), and proves the global finite-stratification predicate directly instead of identifying it with Stacks' local convention. Proof: the route is 09B5 then 06UQ, as in 09AL. Step 3 lifts any geometric point through any covering: base change to Spec Ω, joint surjectivity, then weakly etale over an algebraically closed field forces κ(v)=Ω. Step 4 proves finite stalks iff finite models in both directions. Step 5 matches the hypotheses of lem-exc-proetale-pullback-locally-constant exactly. Step 6 uses the fibre-product strata with μ=ι∘pr1=κ∘pr2, which avoids the E3 error. Step 7 applies lem-weil-pbc-locally-constant-derived-serre on each stratum site with Λ Noetherian. Steps 8-9 use the bounded clause of the weak-Serre lemma and read off P exactly. I tested the empty scheme, Λ=0, empty covering members and strata, zero complexes and shifts in both directions. New node lem-pur-proetale-module-pullback-composition: it is the 03D8 instance with the canonical constant-section maps. It is true, needed by step 6, statement-only, searched with three kinds of search, and not a restatement of the item. It duplicates no existing node: the étale versions are not on the pro-etale site, the pro-etale derived composition has the underived comparison only in its proof, and def-sfb-module-upper-star-comp uses condensed module objects. Route: unit sk-def-sf-operations has no uses and no steps, so no route restriction applies; the off-unit citations are generic tools and no tool_uses are needed. Fixes in the new node: blueprint.from.via changed from [] to [lem-weil-proetale-dbc-triangulated], because the item is not a blueprint node (brief §7.2); same_as now holds def-sfb-module-upper-star-comp, the same isomorphism in the condensed-coefficient form. No other changes.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated",

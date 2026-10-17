@@ -1,0 +1,85 @@
+{
+ "id": "lem-pur-proetale-module-pullback-composition",
+ "kind": "statement",
+ "title": "Composition of pro-etale module inverse images with canonical constant coefficients",
+ "statement": "Let $g:Z\\to X$ and $f:X\\to Y$ be morphisms of schemes [def-pc-scheme], and let $\\Lambda$ be a finite commutative ring. Use the small pro-etale sites and universe conventions of [def-weil-pbc-proetale-site], with constant ring sheaves $\\Lambda_T$ [def-weil-pbc-constant-sheaf] and their module categories [def-weil-sheaf-of-modules-category]. For $h=f,g,f\\circ g$ let $h^*$ and $h_*$ be the module inverse image and direct image of [def-weil-proetale-inverse-image], using precisely its canonical constant-section map $c^h_\\Lambda$. There is a natural isomorphism of functors\n$$(f\\circ g)^*\\xrightarrow{\\sim}g^*f^*:\\operatorname{Mod}(\\Lambda_Y)\\longrightarrow\\operatorname{Mod}(\\Lambda_Z).$$\nIt is the canonical comparison of left adjoints to the direct-image identification $(f\\circ g)_*\\cong f_*g_*$ induced on each object $V\\to Y$ by $Z\\times_X(X\\times_YV)\\cong Z\\times_YV$, with the module actions given by the specified constant-section maps.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D8, lemma-push-pull-composition-modules"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The module pullback for a composite of morphisms of ringed topoi is the composite of the module pullback functors",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.pullbackComp; PresheafOfModules.pullback_comp_id; SheafOfModules.pullback; CategoryTheory.Over.pullbackComp; PresheafOfModules.pullbackComp; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical composition of inverse images of module sheaves on small pro-etale sites using constant coefficient rings",
+   "results": "SheafOfModules.Presentation.map_π_eq; SheafOfModules.unitHomEquiv_symm_comp; ModuleCat.Tilde.toOpen_res; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr; LightCondensed.ihomPoints_symm_comp; LightCondensed.forget_obj_val_map; SheafOfModules.unitHomEquiv_comp_apply; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullbackComp\"",
+   "results": "PresheafOfModules.pullbackComp; SheafOfModules.pullbackComp; 2 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|sheafPullbackComp [Algebra/Category]",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; 10 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: see candidate comparison in report"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules along composition of geometric morphisms with constant ring coefficients is naturally isomorphic to successive inverse images",
+   "results": "SheafOfModules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pushforwardComp_inv_app_val_app; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; SheafOfModules.pushforwardNatIso_inv; SheafOfModules.pushforwardComp",
+   "date": "2026-10-17",
+   "verdict": "no exact match: general sheaf-site ingredients; the canonical scheme/coefficient identification remains to prove"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-proetale-dbc-triangulated",
+  "date": "2026-10-17",
+  "group": "Q26"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "mathlib_candidate": {
+  "declaration": "SheafOfModules.pullbackComp",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+  "how": "Lines 155-174 read. General composition for continuous site functors and composed ring maps; the separate composite scheme base-change functor and the prescribed constant-section coefficient map require comparison, so not a one-line specialization."
+ },
+ "blueprint": {
+  "from": {
+   "node": "def-weil-finite-torsion-constructibility",
+   "place": "Second paragraph: restriction to each stratum, and final paragraph: constructible cohomology; iterated restrictions to a common refinement must equal direct restriction.",
+   "via": [
+    "lem-weil-proetale-dbc-triangulated"
+   ]
+  },
+  "same_as": [
+   "def-sfb-module-upper-star-comp"
+  ],
+  "is": null
+ }
+}

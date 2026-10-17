@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-wf-euler-product-middle-extension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Graded Euler-product identity for a middle extension",
@@ -20,33 +20,122 @@
  ],
  "proof": [
   {
-   "text": "This is the curve case of the Euler-product form of the trace formula\n[thm-trf-l-function-euler-product], applied with $\\Lambda=\\Qlb$ in\nthe coefficient category [def-weil-pbc-qbar-category], to the curve\n$X_0$ (separated of finite type, of dimension one) and the\nconstructible sheaf $K=j_*\\mathcal F$ placed in degree zero, under the\nhypotheses of [thm-trf-grothendieck-lefschetz-qbar] with which the\ntrace formula is applied to it. Its $L(X_0,j_*\\mathcal F,t)$ is the\nleft-hand side (the local factor at $x$ being\n$\\det(1-F_xt^{d(x)}\\mid(j_*\\mathcal F)_{\\bar x})$, with $e_x=d(x)$),\nand its items (2) and (3) give\n\n$$\nL(X_0,j_*\\mathcal F,t)=\n\\frac{\\det(1-Ft,H_c^1(X,j_*\\mathcal F))}\n{\\det(1-Ft,H_c^0(X,j_*\\mathcal F))\\,\\det(1-Ft,H_c^2(X,j_*\\mathcal F))}.\n$$",
+   "text": "Put $K=j_*\\mathcal F$, the constructible sheaf in the statement, viewed in degree zero. In the finite-stage pair category [def-weil-pbc-qbar-category], choose a representative $(E,K_E)$ and an integral lattice of $K_E$. Its reductions $K_n$ are bounded constructible, with a common cohomological interval, by [def-weil-derived-complete-integral-detailed]. Clause (ii) of [lem-sf-proetale-constructible-origin] gives an etale complex and a comparison isomorphism for each $K_n$; choose and retain these as the explicit etale-origin witnesses. The compactification and graph maps appearing in the trace formula are separated finite-type maps between finite-type $k$-schemes. The class-relative adjunction and compactification comparisons of [thm-sf-ambient-adjoint-class], together with the finite-Tor preservation and uniform bounds of [thm-sf-preservation-class], supply their constructible exceptional-adjoint datum as specified in [def-trf-admissibility]. All targets here are separated (compactifications, products and closed fixed loci of a separated curve), so the separated-target hypothesis of the preservation theorem holds. Thus the finite-level hypotheses of the Qbar trace theorem hold. We use only the constructible adjunction; no unrestricted pro-etale right adjoint or integral Weil isomorphism is assumed.",
+   "uses": [
+    "def-weil-pbc-qbar-category",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-sf-proetale-constructible-origin",
+    "thm-sf-ambient-adjoint-class",
+    "thm-sf-preservation-class",
+    "def-trf-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-wf-euler-product-middle-extension.proof.md",
+    "place": "first paragraph: under the hypotheses of thm-trf-grothendieck-lefschetz-qbar; expanded using the cited finite-level results"
+   }
+  },
+  {
+   "text": "This is the curve case of the Euler-product form of the trace formula\n[thm-trf-l-function-euler-product], applied with $\\Lambda=\\Qlb$ in\nthe coefficient category [def-weil-pbc-qbar-category], to the curve\n$X_0$ (separated of finite type, of dimension one) and the\nconstructible sheaf $K=j_*\\mathcal F$ placed in degree zero, with the finite-level hypotheses of [thm-trf-grothendieck-lefschetz-qbar] verified in Step 1. Its $L(X_0,j_*\\mathcal F,t)$ is the\nleft-hand side (the local factor at $x$ being\n$\\det(1-F_xt^{d(x)}\\mid(j_*\\mathcal F)_{\\bar x})$, with $e_x=d(x)$),\nand its items (2) and (3) give\n\n$$\nL(X_0,j_*\\mathcal F,t)=\n\\frac{\\det(1-Ft,H_c^1(X,j_*\\mathcal F))}\n{\\det(1-Ft,H_c^0(X,j_*\\mathcal F))\\,\\det(1-Ft,H_c^2(X,j_*\\mathcal F))}.\n$$",
    "uses": [
     "thm-trf-l-function-euler-product",
     "def-weil-pbc-qbar-category",
     "thm-trf-grothendieck-lefschetz-qbar"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-wf-euler-product-middle-extension.proof.md",
+    "place": "first paragraph, application of the Euler-product trace formula"
+   }
   },
   {
-   "text": "It remains to see that the degree-zero factor is $1$, i.e.\n$H_c^0(X,j_*\\mathcal F)=0$: a compactly supported global section of\n$j_*\\mathcal F$ vanishes in a neighborhood of every boundary point,\nhence restricts to zero on the complement of its finite support in the\nconnected open curve, and by lissity it is zero.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply the degree-zero clause of [lem-a1-middle-extension-endpoints] with $C_0=X_0$ and the given $j$ and $\\mathcal F$. Its hypotheses are exactly a dense open immersion into a smooth geometrically connected affine curve over $k_0$, and a lisse Weil sheaf on that open. Its generic representation is the one associated with $\\mathcal F$; no purity hypothesis is required for this clause. It gives $H_c^0(X,j_*\\mathcal F)=0$. This is the support argument in the source: a section of the ordinary direct image is determined on $U$; a nonzero lisse section there cannot vanish on a nonempty open, so cannot have proper support on the affine curve. Consequently its degree-zero determinant is the determinant of the identity on the zero vector space, namely $1$. Substituting this into Step 2 proves the displayed identity.",
+   "uses": [
+    "lem-a1-middle-extension-endpoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-wf-euler-product-middle-extension.proof.md",
+    "place": "second paragraph: removing the degree-zero factor"
+   }
   }
  ],
  "proof_deps": [
-  "thm-trf-l-function-euler-product",
   "def-weil-pbc-qbar-category",
-  "thm-trf-grothendieck-lefschetz-qbar"
+  "def-weil-derived-complete-integral-detailed",
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-preservation-class",
+  "def-trf-admissibility",
+  "thm-trf-l-function-euler-product",
+  "thm-trf-grothendieck-lefschetz-qbar",
+  "lem-a1-middle-extension-endpoints"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-wf-euler-product-middle-extension.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-wf-euler-product-middle-extension.proof.md",
+  "place": "two blueprint paragraphs, with explicit finite-level discharge and degree-zero endpoint citation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "graded Euler product identity for a middle extension of a lisse sheaf on a smooth geometrically connected affine curve",
+   "results": "; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.AffineSpace.comp_homOfVector, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: returned hits do not state the sheaf-cohomological Euler-product identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "Euler product trace formula compact support cohomology determinant",
+   "results": "loogle: Unknown identifier `Euler`",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query rejected by Loogle; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "Euler.product|l-function-euler-product|compactlySupportedCohomology",
+   "results": "; Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean, Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean, Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean, Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean, Mathlib/NumberTheory/EulerProduct/ExpLog.lean, Mathlib/NumberTheory/EulerProduct/ExpLog.lean, Mathlib/NumberTheory/EulerProduct/ExpLog.lean, Mathlib/NumberTheory/EulerProduct/DirichletLSeries.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: returned hits do not state the sheaf-cohomological Euler-product identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler product identity for a middle extension sheaf on an affine curve",
+   "results": "; ArithmeticFunction.IsMultiplicative.eulerProduct_tprod, EulerProduct.prod_filter_prime_geometric_eq_tsum_factoredNumbers, riemannZeta_eulerProduct, EulerProduct.eulerProduct_completely_multiplicative_tprod, DirichletCharacter.LSeries_eulerProduct, riemannZeta_eulerProduct_tprod, riemannZeta_eulerProduct_hasProd, EulerProduct.eulerProduct_completely_multiplicative_hasProd",
+   "date": "2026-10-17",
+   "verdict": "no match: returned hits do not state the sheaf-cohomological Euler-product identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck Lefschetz trace formula determinant compactly supported cohomology closed point Euler factors",
+   "results": "; NumberField.dedekindZeta_residue_def, NumberField.dedekindZeta_residue, NumberField.Units.finrank_mul_regOfFamily_eq_det, NumberField.dedekindZeta, groupCohomology.Hilbert90.aux, NumberField.Units.finrank_mul_regulator_eq_det, groupCohomology.Hilbert90.aux_ne_zero, FiniteField.algebraMap_trace_eq_sum_pow",
+   "date": "2026-10-17",
+   "verdict": "no match: returned hits do not state the sheaf-cohomological Euler-product identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "|‑ ∏' x, (1 - F x * T ^ degree x)⁻¹ = det",
+   "results": "loogle: <input>:1:1: expected token",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query rejected by Loogle; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.Lefschetz|compactly supported cohomology",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: returned hits do not state the sheaf-cohomological Euler-product identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.det, PowerSeries",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: returned hits do not state the sheaf-cohomological Euler-product identity"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -76,5 +165,29 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-semi"
+ "unit": "sk-p-real-semi",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-euler-product-middle-extension",
+  "worker": "stage1",
+  "summary": "Continued the earlier sandbox split. Verified the source and the absence of an exact completed Lean declaration. Made finite-level etale-origin and constructible admissibility explicit before the Euler-product specialization; cited the existing middle-extension endpoint theorem for the degree-zero vanishing instead of treating the entire support argument as elementary. Recorded all logged Mathlib searches and filled blueprint.same_as. No new nodes or statement changes.",
+  "blueprint": "Step 1 discharges the finite-level hypotheses named in the first blueprint paragraph; Step 2 specializes that paragraph to the curve; Step 3 realizes the second paragraph via the existing degree-zero endpoint clause, retaining the source support explanation.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-middle-extension-endpoints",
+    "why": "Uses only its H_c^0(C,j_*F)=0 clause as the generic middle-extension endpoint tool; this is exactly the support vanishing required by the unit route and avoids creating a duplicate clause node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-middle-extension-endpoints"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-12d48e0d6",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-12d48e0d6 (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote review.md; I made no fixes. The statement matches the main-20261015 and master blueprint text word for word, and there is no blueprint_update to follow. It creates no new nodes, so the rules for new nodes (B, D1-D2) do not apply. Step 1 meets the finite-level hypotheses of thm-trf-grothendieck-lefschetz-qbar, which are those of thm-trf-trace-formula-e for each K_n. Clause (ii) of lem-sf-proetale-constructible-origin gives the etale-origin witness (L, alpha) of def-weil-pbc-etale-origin-witness for the intrinsic D^b_c of def-weil-finite-torsion-constructibility. Admissibility is a theorem by def-trf-admissibility, thm-sf-ambient-adjoint-class and thm-sf-preservation-class; the graph and fixed-locus targets are separated. Step 2 is clause (3) of thm-trf-l-function-euler-product (dim <= 1, a sheaf in degree 0, e_x = d(x)). Step 3 takes the H_c^0 = 0 clause of lem-a1-middle-extension-endpoints, whose hypotheses match: dense open in a smooth geometrically connected affine curve, lisse Weil F, U connected, and the purity clause unused. It is the unit's own step-2 fact, so I accept the declared tool use. proof_deps equals the union of the uses. There is no cycle: I checked the transitive closures of all 13 cited ids. The only off-route unit is sk-l-dl-a1-endpoints, which is declared. cor-rp-euler-product is the special case j = id, not a duplicate. No SGA source is used. Small cases agree: A^1 with constant Qlb gives 1/(1-qt); a nontrivial Kummer sheaf j_*L_chi gives 1 = 1; j = id works; a proper curve is excluded by the affine hypothesis. One point for the maintainer, not counted against this delivery: that j_*F is a constructible Weil object in the Qlb category is assumed in the statement and in def-wf-middle-extension. At finite level it is covered by thm-fin-open-degree-zero and lem-sf-integral-direct-image-constructible, but no node states it at Qlb level."
+ }
 }

@@ -11,9 +11,111 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First identify the two coherent comma models degree by degree. An $n$-simplex of $Q_D$ is an apex simplex $a:\\Delta^n\\to\\mathcal C$ with vertices in $D$, together with a map $b:K\\times\\Delta^n\\times\\Delta^1\\to\\mathcal C$ whose two endpoint restrictions are $jp$ (constant in the $\\Delta^n$ direction) and the constant-in-$K$ diagram $a$. Every vertex in the domain of $b$ lies at one of the two interval endpoints. Its image therefore lies in $D$: at the first endpoint by the hypothesis on $p$, at the second by the apex condition. Fullness means that every simplex whose vertices lie in $D$ belongs to $D$. Hence both $a$ and $b$ factor uniquely through $D$. Conversely such a simplex in $D_{p/}$ gives a simplex of $Q_D$. These inverse assignments commute with every simplicial operator. Thus the induced functor $D_{p/}\\to Q_D$ is actually an isomorphism of the specified simplicial models.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent argument from the full-subcategory and coherent comma definitions; compare the apex pullback in Proposition 5.4.5.15, proof, first paragraph."
+   }
+  },
+  {
+   "text": "Work with the smaller universe $\\mathcal U$ and containing universe $\\mathcal U'$ of the size definition. For vertices $x,y$ of $D$, every simplex of the specified right-pinched mapping space in $\\mathcal C$ has all vertices in $D$. Thus $\\operatorname{Map}_D(x,y)=\\operatorname{Map}_{\\mathcal C}(x,y)$ in this model, so $D$ is locally $\\mathcal U$-small. Apply the local-smallness clause of the spine/tower mapping-descent lemma to the small simplicial set $K$. It gives that $H=\\operatorname{Fun}(K,D)$ is locally $\\mathcal U$-small. This uses only local smallness and smallness of $K$; in particular it applies to infinite $K$ and uses no compactness assumption.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-functor-spine-tower-mapping-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent size argument; Proposition 5.4.1.7 and the local-smallness argument following it, with arbitrary-small-shape mapping descent supplied by the cited node."
+   }
+  },
+  {
+   "text": "Let $J_p$ denote the join coslice: its $n$-simplices are maps $K\\star\\Delta^n\\to D$ extending $p$, and let $r:J_p\\to D$ restrict to the last block. Apply the relative-coslice left-fibration theorem with $q:D\\to\\Delta^0$ and $K_0=\\varnothing$. The map $q$ is an inner fibration because $D$ is a quasicategory, and the target of the resulting restriction map is $D$. Consequently $r$ is a left fibration and $J_p$ is a quasicategory. The join-slice comparison gives an equivalence $c:J_p\\to D_{p/}$ over $D$. For each vertex $d\\in D$, it also identifies the strict fiber $(J_p)_d$, up to equivalence, with $\\operatorname{Map}_{H}(p,\\Delta_Kd)$. Step 2 makes this space essentially $\\mathcal U$-small. Thus $r$ has essentially $\\mathcal U$-small Kan fibers; the statement about total categories alone would not suffice to infer this strict-fiber assertion.",
+   "uses": [
+    "lem-cbc-relative-coslice-left-fibration",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.1.2.2; Proposition 4.2.1.5 and Corollaries 4.2.1.7-4.2.1.8. The relative specialization is also Kerodon 01BZ."
+   }
+  },
+  {
+   "text": "Essential smallness of $D$ supplies a $\\mathcal U$-small quasicategory $E$ and a coherent functor equivalence $e:E\\to D$. Set $L=E\\times_DJ_p$ using the degreewise pullback. Every left-horn lifting problem for $L\\to E$ is a lifting problem for $r$ with the specified base simplex composed with $e$, so the filler in $J_p$ pairs with that simplex to give a filler in $L$. Thus $L\\to E$ is a left fibration, $L$ is a quasicategory, and its fiber at $x\\in E$ is exactly $(J_p)_{e(x)}$, which is essentially $\\mathcal U$-small. Also $r$ is a cocartesian fibration directly from the horn definitions: its lifts against $\\Lambda_0^1\\hookrightarrow\\Delta^1$ supply lifts of all base edges with prescribed source, and its lifts against $\\Lambda_0^n\\hookrightarrow\\Delta^n$, $n\\geq2$, make every edge cocartesian.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent argument from the definitions of essential smallness and left/cocartesian fibrations; construction preceding the application of the dual of Proposition 3.3.1.3."
+   }
+  },
+  {
+   "text": "Regard the simplicial sets just constructed in the common containing universe $\\mathcal U'$. The quasicategory characterizations identify the specified coherent equivalence $e:E\\to D$ with a categorical equivalence. Apply categorical base change for cocartesian fibrations to $S=D$, $Z=J_p$, $r:Z\\to S$, $B=D$ with its identity map, and $u=e:A=E\\to B$. Its conclusion is that the actual projection $L\\to J_p$ is a categorical equivalence. Both sides are quasicategories by steps 3 and 4, so the same characterization makes this projection a coherent functor equivalence. This use of base change is along a cocartesian fibration, rather than an unsupported claim that arbitrary simplicial pullbacks preserve categorical equivalences.",
+   "uses": [
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-cocartesian-categorical-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Dual of Proposition 3.3.1.3; coherent/categorical equivalence comparison in Proposition 2.2.5.7 and the Joyal model structure. Base-change assertion also Kerodon 029H."
+   }
+  },
+  {
+   "text": "Apply space-valued transport classification to the left fibration $L\\to E$. Its fibers are essentially $\\mathcal U$-small by step 4. It corresponds to a coherent $F:E\\to\\mathcal S_{\\mathcal U}$. Since the base $E$ is $\\mathcal U$-small, the cited small-representative clause supplies a representative $M\\to E$ with $\\mathcal U$-small total simplicial set. The classification and its mapping-space identification, compatible with composition, give maps $u:M\\to L$ and $v:L\\to M$ over $E$ with their composites joined to the identities by paths in the Kan complexes of maps over $E$. Such paths are coherent transformations of underlying functors. Every vertex component of either transformation projects to an identity in $E$; the left-fibration equivalence-reflection lemma therefore makes that component an equivalence. The pointwise-equivalence criterion makes the transformations coherent natural equivalences. Thus $u,v$ exhibit $M\\simeq L$ as quasicategories, not just an equivalence of homotopy categories. The total set $M$ is a quasicategory because it is a left fibration over the quasicategory $E$.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-cbc-left-fibration-equivalence-lift",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.1.2 and its covariant dual, with Proposition 4.2.4.4 for coherent classification; small-universe representative and mapping-space clauses of the cited transport theorem."
+   }
+  },
+  {
+   "text": "Compose the equivalences from steps 5 and 6, the comparison of step 3, and the isomorphism of step 1 to obtain $M\\simeq L\\simeq J_p\\simeq D_{p/}\\cong Q_D$. The first category is $\\mathcal U$-small, so this is precisely essential smallness of $Q_D$. For $K=\\varnothing$, the comma model is $D$ itself and the join coslice is also $D$; all the preceding constructions still apply. If $D=\\varnothing$ and $p$ exists, then $K=\\varnothing$, so both cocone categories are empty and are small. For nonempty $D$, an empty cocone category is allowed as well: the fiberwise classification includes empty Kan fibers. No step chooses a colimit, or invokes accessibility or compactness.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Conclusion of the agent argument supplying the essential-smallness assertion in the first paragraph of Proposition 5.4.5.15, with empty cases checked from the specified models."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-functor-spine-tower-mapping-descent",
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-coef-join-slice-cocone-comparison",
+  "def-coef-infinity-fibrations",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-cocartesian-categorical-base-change",
+  "lem-coef-space-transport-classification",
+  "lem-cbc-left-fibration-equivalence-lift",
+  "lem-coef-infinity-pointwise-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent expansion of the size assertion in Proposition 5.4.5.15, proof, first paragraph; coherent left-fibration proof using Corollary 2.1.2.2, Theorem 2.2.1.2, the dual of Proposition 3.3.1.3, and the comparison of Section 4.2.1. Read online, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +158,52 @@
    "results": "{\"t\": \"2026-10-17T08:34:40Z\", \"tool\": \"grep\", \"query\": \"essentiallySmall\", \"sub\": \"CategoryTheory/Comma/StructuredArrow\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean\"], \"digest\": \"8e30bb7bf04043f6\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits read; ordinary CategoryTheory categories have Hom sets, whereas this statement concerns coherent transformations and mapping spaces in arbitrary quasicategories. Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:32-43 supplies only the quasicategory horn-filling class. No exact theorem or one-line specialization. StructuredArrow.essentiallySmall at Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean:49 and CostructuredArrow.essentiallySmall:78 require ordinary categories; they do not state coherent cocone smallness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of coherent cocones on a small simplicial diagram in an essentially small quasicategory is essentially small",
+   "results": "{\"t\": \"2026-10-17T10:12:16Z\", \"tool\": \"leanfinder\", \"query\": \"The category of coherent cocones on a small simplicial diagram in an essentially small quasicategory is essentially small\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instEssentiallySmallLightDiagram\", \"instEssentiallySmallLightProfinite\", \"CategoryTheory.Equivalence.instPrecoherentSmallModel\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.CostructuredArrow.essentiallySmall\", \"CategoryTheory.Limits.HasColimitsOfShape.of_essentiallySmall\", \"CategoryTheory.Limits.hasColimitsOfShape_of_essentiallySmall\", \"CategoryTheory.smallCategoryFinalModel\"], \"digest\": \"826074674255f900\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: inspected the hits. Mathlib CategoryTheory.CostructuredArrow.essentiallySmall and StructuredArrow.essentiallySmall (Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean:78 and :49) concern ordinary categories. Cocone.functorialityEquivalence (generated by to_dual from Mathlib/CategoryTheory/Limits/Cones.lean:527) likewise uses ordinary functors. Quasicategory/Basic.lean:39 defines horn filling and StrictBicategory.lean:51 defines the ordinary category QCat of quasicategories, without the required coherent cocone smallness theorem. None states the item or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, \"equivalence\"",
+   "results": "{\"t\": \"2026-10-17T10:12:17Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, \\\"equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: inspected the hits. Mathlib CategoryTheory.CostructuredArrow.essentiallySmall and StructuredArrow.essentiallySmall (Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean:78 and :49) concern ordinary categories. Cocone.functorialityEquivalence (generated by to_dual from Mathlib/CategoryTheory/Limits/Cones.lean:527) likewise uses ordinary functors. Quasicategory/Basic.lean:39 defines horn filling and StrictBicategory.lean:51 defines the ordinary category QCat of quasicategories, without the required coherent cocone smallness theorem. None states the item or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "essentiallySmall|cocone|equivalence",
+   "results": "{\"t\": \"2026-10-17T10:12:17Z\", \"tool\": \"grep\", \"query\": \"essentiallySmall|cocone|equivalence\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"809bb2fc10ad2aaa\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: inspected the hits. Mathlib CategoryTheory.CostructuredArrow.essentiallySmall and StructuredArrow.essentiallySmall (Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean:78 and :49) concern ordinary categories. Cocone.functorialityEquivalence (generated by to_dual from Mathlib/CategoryTheory/Limits/Cones.lean:527) likewise uses ordinary functors. Quasicategory/Basic.lean:39 defines horn filling and StrictBicategory.lean:51 defines the ordinary category QCat of quasicategories, without the required coherent cocone smallness theorem. None states the item or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent cocones on a fixed small simplicial diagram in an essentially small infinity category form an essentially small infinity category",
+   "results": "{\"t\": \"2026-10-17T10:12:17Z\", \"tool\": \"leansearch\", \"query\": \"Coherent cocones on a fixed small simplicial diagram in an essentially small infinity category form an essentially small infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cocone.category\", \"CategoryTheory.Limits.Cocone\", \"CategoryTheory.Limits.ColimitCocone\", \"CategoryTheory.Limits.CofanTypes\", \"CategoryTheory.Limits.DiagramOfCocones\", \"CategoryTheory.Limits.DiagramOfCocones.mk\", \"CategoryTheory.Limits.CoconeMorphism\", \"CategoryTheory.Limits.IsColimit.OfNatIso.colimitCocone\"], \"digest\": \"dcffe739fe37adcb\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: inspected the hits. Mathlib CategoryTheory.CostructuredArrow.essentiallySmall and StructuredArrow.essentiallySmall (Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean:78 and :49) concern ordinary categories. Cocone.functorialityEquivalence (generated by to_dual from Mathlib/CategoryTheory/Limits/Cones.lean:527) likewise uses ordinary functors. Quasicategory/Basic.lean:39 defines horn filling and StrictBicategory.lean:51 defines the ordinary category QCat of quasicategories, without the required coherent cocone smallness theorem. None states the item or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of infinity categories induces equivalence of coherent undercategories and preserves fixed boundary cocones",
+   "results": "{\"t\": \"2026-10-17T10:14:58Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalence of infinity categories induces equivalence of coherent undercategories and preserves fixed boundary cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cocones.functorialityEquivalence\", \"CategoryTheory.Limits.Cocones.functorialityEquivalence_functor\", \"CategoryTheory.Limits.Cocones.whiskeringEquivalence\", \"CategoryTheory.Limits.Cocones.whiskeringEquivalence_functor\", \"CategoryTheory.WithInitial.coconeEquiv\", \"CategoryTheory.Limits.Cocones.precomposeEquivalence\", \"CategoryTheory.Functor.mapCoconeInv\", \"CategoryTheory.Functor.Final.coconesEquiv\"], \"digest\": \"d3721f5671184f7d\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: inspected the hits. Mathlib CategoryTheory.CostructuredArrow.essentiallySmall and StructuredArrow.essentiallySmall (Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean:78 and :49) concern ordinary categories. Cocone.functorialityEquivalence (generated by to_dual from Mathlib/CategoryTheory/Limits/Cones.lean:527) likewise uses ordinary functors. Quasicategory/Basic.lean:39 defines horn filling and StrictBicategory.lean:51 defines the ordinary category QCat of quasicategories, without the required coherent cocone smallness theorem. None states the item or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "Cocones.functorialityEquivalence|def functorialityEquivalence|def precomposeEquivalence",
+   "results": "{\"t\": \"2026-10-17T10:16:43Z\", \"tool\": \"grep\", \"query\": \"Cocones.functorialityEquivalence|def functorialityEquivalence|def precomposeEquivalence\", \"sub\": \"CategoryTheory/Limits/Cones.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"527\"], \"digest\": \"8b1011eaedd93e05\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: inspected the hits. Mathlib CategoryTheory.CostructuredArrow.essentiallySmall and StructuredArrow.essentiallySmall (Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean:78 and :49) concern ordinary categories. Cocone.functorialityEquivalence (generated by to_dual from Mathlib/CategoryTheory/Limits/Cones.lean:527) likewise uses ordinary functors. Quasicategory/Basic.lean:39 defines horn filling and StrictBicategory.lean:51 defines the ordinary category QCat of quasicategories, without the required coherent cocone smallness theorem. None states the item or specializes to it in one line."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-compact-cocones",
@@ -86,5 +230,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-essentially-small-cocones",
+  "worker": "stage1",
+  "summary": "Proved the unchanged statement in seven steps using existing nodes only: degreewise full-subcategory identification; local smallness of the coherent diagram category; essentially small fibers of the join cocone left fibration; pullback to a small equivalent base; categorical base-change invariance; a small total-space representative from space-valued transport; composition and empty cases. No new nodes or Mathlib leaves. The proof explicitly retains fixed boundaries and coherent transformations, and distinguishes strict fibers from equivalence of total categories.",
+  "blueprint": "Supplies the fixed-boundary essential-smallness argument in returned step 6 of lem-coef-accessible-compact-cocones, through the retained blueprint.from chain to prop-coef-integral-exceptional-adjoint, proof paragraph 2 (mapping-complex adjunction infrastructure). The current main-20261015 ancestor is under sk-thm-sf-package and states the same constructible adjoint; no maintainer-owned ancestry or unit binding is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-relative-coslice-left-fibration",
+    "why": "Generic coherent coslice projection theorem supplies the join cocone left fibration; the item unit contains no replacement for this foundational horn-calculus tool."
+   },
+   {
+    "node": "lem-cbc-left-fibration-equivalence-lift",
+    "why": "Generic reflection of equivalence edges by left fibrations turns the over-base inverse homotopies into pointwise equivalences; this is independent of the coefficient route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-cbc-left-fibration-equivalence-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-a91b505bb",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-a91b505bb (reviewer sub-agent of L); spot-checked: Read in full: the item, all 11 cited statements, def-weil-size-convention, the unit record and the citer (lem-coef-accessible-compact-cocones step 6). Shape: one commit, item and report only, no new nodes. proof_deps equals the union of the step uses. The dependency closure (636 nodes) does not reach the item, so there is no cycle. Statement, unit and ancestry are unchanged and not weakened. Step 1: fullness of D makes a and b factor uniquely through D, since every vertex of K×Δ^n×Δ^1 maps to p(k) or a(i); this is a true simplicial isomorphism. Step 2: Map_D = Map_C by fullness, and the final clause of the spine-tower lemma gives local smallness of Fun(K,D) for any small K. Step 3: relative-coslice lemma with q:D→Δ^0 and K_0=∅ reduces to r:J_p→D, a left fibration. The join-slice comparison explicitly gives strict fibers ≃ Map(p,Δ_K d), essentially small by step 2. Step 4: pullback stability of left fibrations; r is cocartesian via the Λ^1_0 lift and the Λ^n_0 lifts for n≥2. Step 5: Joyal characterization (2) plus cocartesian base change with S=B=D, b=id, Z=J_p, u=e makes L→J_p an equivalence. Step 6: transport classification over the U-small base E gives a U-small representative M. The Fun_{/E} mapping-space formula gives u, v and paths whose components lie over identities. Equivalence reflection plus the pointwise criterion make these coherent equivalences. Step 7: M≃L≃J_p≃D_{p/}≅Q_D. Tested K=∅, D=∅, a two-object discrete D with no cocone, and a one-object groupoid. The cbc lemmas say 'small' relative to V of def-weil-size-convention and are universe-agnostic horn combinatorics, so applying them at U' is fine. Accepted tool_uses: lem-cbc-relative-coslice-left-fibration and lem-cbc-left-fibration-equivalence-lift, generic tools that replace no unit step. No duplicate found (relative-slice-sections, small-full-subcategory, size-calculus, compact-slice-density, compact-approximation compared). No SGA. HTT is WANTED and the proof is marked agent-written. No fixes."
  }
 }
