@@ -111,20 +111,22 @@ derived functors on module objects need.
   coherences `ProEtale.unitCompUpperStarComp_id` and `ProEtale.unitCompUpperStarComp_comp` of
   `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence`.
 
-## Sorried input
+## The inputs
 
 * `AddCommGrpCat.hasFunctorialFlatResolution`: abelian groups admit functorial flat resolutions,
-  by free abelian groups; it is what makes the derived functors with values in `Ab` available.
+  the unit `ℤ` being a flat separator; it is what makes the derived functors with values in
+  `Ab` available.
 * `AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme`: `Spec LC(S, ℤ) ⟶ Spec ℤ`
-  is weakly étale, `LC(S, ℤ)` being ind-Zariski over `ℤ` (the filtered colimit of the finite
-  products `ℤ^{S_i}`), and ind-Zariski algebras being weakly étale.
+  is weakly étale (`LocallyConstant.weaklyEtale`: the multiplication map of `LC(S, ℤ)` is a
+  localization).
 * `AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt` and
   `AlgebraicGeometry.ProEtale.coverPreserving_profiniteToProEt`: the functor
   `S ↦ Spec LC(S, ℤ)` preserves finite limits (`LC(-, ℤ)` sends a fibre product of profinite
   sets to the tensor product, and the point to `ℤ`), and sends a finite jointly surjective
   family to a pro-étale covering (the map on underlying spaces of `Spec LC(S, ℤ)` is the
   projection `S × Spec ℤ → S`, so surjectivity is preserved, and the morphisms are weakly
-  étale and affine). This is Lemma 4.2 of the notes.
+  étale and affine). This is Lemma 4.2 of the notes. The fibre products are handled by
+  `Profinite.isPushout_locallyConstant`.
 * `AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_profiniteToProEt`: the left Kan
   extensions along the opposite of `S ↦ Spec LC(S, ℤ)` exist, both sites being essentially
   small in `u + 1` and `Ab.{u + 1}` being cocomplete for `u + 1`-small diagrams, exactly as
@@ -135,7 +137,7 @@ derived functors on module objects need.
   commutes with the objectwise tensor product (as for `ProEtale.isIso_δ_upperStar`).
 * `AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp`: the comparison
   `f^* ∘ p_Y^* ≅ p_X^*` is a monoidal natural isomorphism. It is the mate of the composition
-  isomorphism of pushforwards, which is monoidal by `ProEtale.isMonoidal_lowerStarComp`.
+  isomorphism of pushforwards, which is monoidal (`isMonoidal_lowerStarComp_hom_ab`).
 
 -/
 
@@ -145,8 +147,7 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory Opposite Functor.LaxMonoidal Functor.OplaxMonoidal
 
-/-- Abelian groups admit functorial flat resolutions, by free abelian groups: the free abelian
-group on the underlying set of `M` is flat, and surjects functorially onto `M`. -/
+/-- Abelian groups admit functorial flat resolutions: the unit `ℤ` is a flat separator. -/
 instance AddCommGrpCat.hasFunctorialFlatResolution :
     Abelian.HasFunctorialFlatResolution Ab.{u} :=
   Abelian.hasFunctorialFlatResolution_of_flat_separator _

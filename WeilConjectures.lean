@@ -3984,12 +3984,15 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDim
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalSmooth
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Formal
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OrdinaryCompactSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OrdinaryProper
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Verdier
 public import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationBaseChange
@@ -4040,6 +4043,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.OrientationDatum
 public import WeilConjectures.SixFunctors.Etale.Derived.Package
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.FiniteProjective
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Pullback
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
@@ -4124,6 +4128,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplex
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexInternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexTensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
+public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobeniusTransport
 public import WeilConjectures.SixFunctors.Etale.Gabber
 public import WeilConjectures.SixFunctors.Etale.GeometricFrobenius
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.BaseChange

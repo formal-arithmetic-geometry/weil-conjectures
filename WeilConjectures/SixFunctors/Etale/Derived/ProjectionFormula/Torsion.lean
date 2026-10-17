@@ -84,8 +84,15 @@ lemma isTorsionModuleSheaf_homology_of_nsmul_id_eq_zero {X : Scheme.{u}} {M : �
   rw [isTorsionModuleSheaf_iff_isTorsion]
   refine Sheaf.IsTorsion.of_forall_isAddTorsion fun U s ↦ ?_
   refine isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨N, Nat.pos_of_ne_zero hN, ?_⟩
-  have := congr_arg (fun φ : H ⟶ H ↦ (φ.hom.app U).hom s) hH
-  simpa using this
+  have h2 : ∀ n : ℕ, (n • 𝟙 H).hom.app U = n • 𝟙 (H.obj.obj U) := by
+    intro n
+    induction n with
+    | zero => rw [zero_smul, zero_smul]; rfl
+    | succ n ih => rw [succ_nsmul, Sheaf.Hom.add_app, ih, succ_nsmul]; rfl
+  have h3 := congr_arg (fun φ : H ⟶ H ↦ (φ.hom.app U).hom s) hH
+  simp only [h2, ModuleCat.hom_nsmul, ModuleCat.hom_id, LinearMap.smul_apply, LinearMap.id_coe,
+    id_eq] at h3
+  exact h3
 
 /-- **Proper base change for torsion objects**: the unbounded derived base change map of a
 cartesian square with `f` proper is invertible at a bounded below object killed by a nonzero
@@ -134,7 +141,9 @@ theorem hasProjectionFormulaOfCompactification_of_forall_algClosurePoint {X Y : 
       (c.ofIsPullback sq)).app
         ((L((pullback.fst f (Y.algClosurePoint y))^*[ModuleCat.{u + 1} Λ])).obj K)).app
         ((L((Y.algClosurePoint y)^*[ModuleCat.{u + 1} Λ])).obj L)) := h₃ y
-  have hR : IsIso (_ ≫ _ ≫ _) := key ▸ (inferInstance : IsIso (_ ≫ _ ≫ _))
+  have hR : IsIso (L((Y.algClosurePoint y)^*[ModuleCat.{u + 1} Λ]).map
+      (((projectionMapOfCompactification (ModuleCat.{u + 1} Λ) c).app K).app L) ≫ _) := by
+    rw [key]; infer_instance
   exact IsIso.of_isIso_comp_right _ _
 
 /-! ### Separably closed fields -/

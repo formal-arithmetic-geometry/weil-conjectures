@@ -83,24 +83,29 @@ section PartialSum
 
 variable [Preadditive C] [HasFiniteBiproducts C] (F : ℕ ⥤ C)
 
+/-- The family `(Fᵢ)_{i ≤ m}`. -/
+abbrev partialFamily (m : ℕ) : Fin (m + 1) → C := fun i ↦ F.obj i
+
 /-- The finite biproduct `⨁_{i ≤ N + k} Fᵢ`. -/
-noncomputable abbrev partialSum (k N : ℕ) : C := ⨁ fun i : Fin (N + k + 1) ↦ F.obj i
+noncomputable abbrev partialSum (k N : ℕ) : C := ⨁ partialFamily F (N + k)
 
 /-- The inclusion `⨁_{i ≤ N + k} Fᵢ ⟶ ⨁_{i ≤ N + 1 + k} Fᵢ`. -/
 noncomputable def partialSumStep (k N : ℕ) : partialSum F k N ⟶ partialSum F k (N + 1) :=
-  biproduct.desc fun i ↦
-    biproduct.ι (fun i : Fin (N + 1 + k + 1) ↦ F.obj i) ⟨i, by omega⟩
+  biproduct.desc fun i ↦ biproduct.ι (partialFamily F (N + 1 + k)) ⟨i, by omega⟩
 
 /-- The sequence `N ↦ ⨁_{i ≤ N + k} Fᵢ` of finite partial sums. -/
 noncomputable def partialSumFunctor (k : ℕ) : ℕ ⥤ C :=
   Functor.ofSequence (partialSumStep F k)
 
 lemma ι_partialSumFunctor_map (k : ℕ) {N M : ℕ} (h : N ≤ M) (i : ℕ) (hi : i < N + k + 1) :
-    biproduct.ι (fun i : Fin (N + k + 1) ↦ F.obj i) ⟨i, hi⟩ ≫
+    biproduct.ι (partialFamily F (N + k)) ⟨i, hi⟩ ≫
         (partialSumFunctor F k).map (homOfLE h) =
-      biproduct.ι (fun i : Fin (M + k + 1) ↦ F.obj i) ⟨i, by omega⟩ := by
+      biproduct.ι (partialFamily F (M + k)) ⟨i, by omega⟩ := by
   induction M, h using Nat.le_induction with
-  | base => simp
+  | base =>
+    have : homOfLE (le_refl N) = 𝟙 N := rfl
+    rw [this, Functor.map_id]
+    exact Category.comp_id _
   | succ M hNM ih =>
     have : homOfLE (hNM.trans M.le_succ) = homOfLE hNM ≫ homOfLE M.le_succ := rfl
     rw [this, Functor.map_comp, reassoc_of% ih]
@@ -108,39 +113,43 @@ lemma ι_partialSumFunctor_map (k : ℕ) {N M : ℕ} (h : N ≤ M) (i : ℕ) (hi
 
 variable {P : Cofan fun n : ℕ ↦ F.obj n} (hP : IsColimit P)
 
+/-- The map `⨁_{i ≤ m} Fᵢ ⟶ ∐ₙ Fₙ`. -/
+noncomputable abbrev partialSumToCoproduct (m : ℕ) : (⨁ partialFamily F m) ⟶ P.pt :=
+  biproduct.desc fun i ↦ P.inj (i : ℕ)
+
 /-- The cocone of the finite partial sums `⨁_{i ≤ N + k} Fᵢ` with point `∐ₙ Fₙ`. -/
 @[simps pt]
 noncomputable def partialSumCocone (k : ℕ) : Cocone (partialSumFunctor F k) where
   pt := P.pt
-  ι := NatTrans.ofSequence (fun N ↦ biproduct.desc fun i ↦ P.inj (i : ℕ)) (fun N ↦ by
+  ι := NatTrans.ofSequence (fun N ↦ partialSumToCoproduct F (P := P) (N + k)) (fun N ↦ by
     refine biproduct.hom_ext' _ _ fun i ↦ ?_
     simp [partialSumFunctor, partialSumStep])
 
 @[simp]
 lemma partialSumCocone_ι_app (k N : ℕ) :
-    (partialSumCocone F k (P := P)).ι.app N = biproduct.desc fun i ↦ P.inj (i : ℕ) := rfl
+    (partialSumCocone F k (P := P)).ι.app N = partialSumToCoproduct F (P := P) (N + k) := rfl
 
 /-- `∐ₙ Fₙ` is the colimit of the finite partial sums `⨁_{i ≤ N + k} Fᵢ`. -/
-noncomputable def isColimitPartialSumCocone (k : ℕ) : IsColimit (partialSumCocone F k (P := P)) where
+noncomputable def isColimitPartialSumCocone (k : ℕ) :
+    IsColimit (partialSumCocone F k (P := P)) where
   desc s := Cofan.IsColimit.desc hP fun n ↦
-    biproduct.ι (fun i : Fin (n + k + 1) ↦ F.obj i) ⟨n, by omega⟩ ≫ s.ι.app n
+    biproduct.ι (partialFamily F (n + k)) ⟨n, by omega⟩ ≫ s.ι.app n
   fac s N := by
     refine biproduct.hom_ext' _ _ fun i ↦ ?_
     obtain ⟨i, hi⟩ := i
     have h₁ := s.w (homOfLE (le_max_left i N))
     have h₂ := s.w (homOfLE (le_max_right i N))
-    simp only [partialSumCocone_ι_app, biproduct.ι_desc_assoc, Cofan.IsColimit.fac]
-    rw [← h₁, ← h₂, ι_partialSumFunctor_map_assoc, ι_partialSumFunctor_map_assoc]
+    rw [partialSumCocone_ι_app, biproduct.ι_desc_assoc, Cofan.IsColimit.fac, ← h₁, ← h₂,
+      ι_partialSumFunctor_map_assoc, ι_partialSumFunctor_map_assoc]
   uniq s m hm := Cofan.IsColimit.hom_ext hP _ _ fun n ↦ by
     rw [Cofan.IsColimit.fac, ← hm, partialSumCocone_ι_app, biproduct.ι_desc_assoc]
 
 /-- The map `⨁_{i ≤ N} Fᵢ ⟶ ⨁_{i ≤ N + 1} Fᵢ` induced by `1 - t`. -/
 noncomputable def partialSumSubShift (N : ℕ) :
-    (partialSumFunctor F 0).obj N ⟶ (partialSumFunctor F 1).obj N :=
+    (⨁ partialFamily F (N + 0)) ⟶ (⨁ partialFamily F (N + 1)) :=
   biproduct.desc fun i ↦
-    biproduct.ι (fun i : Fin (N + 1 + 1) ↦ F.obj i) ⟨i, by omega⟩ -
-      F.map (homOfLE (i : ℕ).le_succ) ≫
-        biproduct.ι (fun i : Fin (N + 1 + 1) ↦ F.obj i) ⟨i + 1, by omega⟩
+    biproduct.ι (partialFamily F (N + 1)) ⟨i, by omega⟩ -
+      F.map (homOfLE (i : ℕ).le_succ) ≫ biproduct.ι (partialFamily F (N + 1)) ⟨i + 1, by omega⟩
 
 /-- The natural transformation `(⨁_{i ≤ N} Fᵢ)_N ⟶ (⨁_{i ≤ N + 1} Fᵢ)_N` induced by `1 - t`. -/
 noncomputable def partialSumSubShiftNatTrans : partialSumFunctor F 0 ⟶ partialSumFunctor F 1 :=
@@ -149,39 +158,27 @@ noncomputable def partialSumSubShiftNatTrans : partialSumFunctor F 0 ⟶ partial
     simp [partialSumFunctor, partialSumStep, partialSumSubShift, Preadditive.sub_comp])
 
 lemma partialSumSubShift_π_zero (N : ℕ) :
-    partialSumSubShift F N ≫ biproduct.π (fun i : Fin (N + 1 + 1) ↦ F.obj i) ⟨0, by omega⟩ =
-      biproduct.π (fun i : Fin (N + 0 + 1) ↦ F.obj i) ⟨0, by omega⟩ := by
+    partialSumSubShift F N ≫ biproduct.π (partialFamily F (N + 1)) ⟨0, by omega⟩ =
+      biproduct.π (partialFamily F (N + 0)) ⟨0, by omega⟩ := by
   refine biproduct.hom_ext' _ _ fun i ↦ ?_
   obtain ⟨i, hi⟩ := i
-  rw [partialSumSubShift, biproduct.ι_desc_assoc, Preadditive.sub_comp, assoc,
-    biproduct.ι_π_ne _ (j := ⟨i + 1, _⟩) (by simp [Fin.ext_iff]), comp_zero, sub_zero]
-  rcases eq_or_ne i 0 with rfl | h
-  · simp only [biproduct.ι_π_self]
-  · rw [biproduct.ι_π_ne _ (by simp [Fin.ext_iff, h]),
-      biproduct.ι_π_ne _ (by simp [Fin.ext_iff, h])]
+  rcases i with _ | i
+  · simp [partialSumSubShift, biproduct.ι_π, Preadditive.sub_comp]
+  · simp [partialSumSubShift, biproduct.ι_π, Preadditive.sub_comp]
 
-lemma partialSumSubShift_π_succ (N j : ℕ) (hj : j + 1 < N + 1) :
-    partialSumSubShift F N ≫ biproduct.π (fun i : Fin (N + 1 + 1) ↦ F.obj i) ⟨j + 1, by omega⟩ =
-      biproduct.π (fun i : Fin (N + 0 + 1) ↦ F.obj i) ⟨j + 1, hj⟩ -
-        biproduct.π (fun i : Fin (N + 0 + 1) ↦ F.obj i) ⟨j, by omega⟩ ≫
-          F.map (homOfLE j.le_succ) := by
+lemma partialSumSubShift_π_succ (N j : ℕ) (hj : j + 1 < N + 0 + 1) :
+    partialSumSubShift F N ≫ biproduct.π (partialFamily F (N + 1)) ⟨j + 1, by omega⟩ =
+      biproduct.π (partialFamily F (N + 0)) ⟨j + 1, hj⟩ -
+        biproduct.π (partialFamily F (N + 0)) ⟨j, by omega⟩ ≫ F.map (homOfLE j.le_succ) := by
   refine biproduct.hom_ext' _ _ fun i ↦ ?_
   obtain ⟨i, hi⟩ := i
-  rw [partialSumSubShift, biproduct.ι_desc_assoc, Preadditive.sub_comp, assoc,
-    Preadditive.comp_sub]
-  rcases eq_or_ne i (j + 1) with rfl | h₁
-  · rw [biproduct.ι_π_self, biproduct.ι_π_self,
-      biproduct.ι_π_ne_assoc _ (by simp [Fin.ext_iff]),
-      biproduct.ι_π_ne _ (j' := (⟨j + 1, _⟩ : Fin (N + 1 + 1))) (by simp [Fin.ext_iff]),
-      zero_comp, comp_zero, sub_zero, sub_zero]
-  · rw [biproduct.ι_π_ne _ (by simp [Fin.ext_iff, h₁]),
-      biproduct.ι_π_ne _ (by simp [Fin.ext_iff, h₁]), zero_sub, zero_sub]
-    rcases eq_or_ne i j with rfl | h₂
-    · simp only [biproduct.ι_π_self, id_comp]
-      rfl
-    · rw [biproduct.ι_π_ne _ (j' := (⟨j + 1, _⟩ : Fin (N + 1 + 1)))
-        (by simp [Fin.ext_iff]; omega), biproduct.ι_π_ne_assoc _ (by simp [Fin.ext_iff, h₂]),
-        comp_zero, zero_comp]
+  by_cases h₁ : i = j + 1
+  · subst h₁
+    simp [partialSumSubShift, biproduct.ι_π, Preadditive.sub_comp]
+  · by_cases h₂ : i = j
+    · subst h₂
+      simp [partialSumSubShift, biproduct.ι_π, Preadditive.sub_comp]
+    · simp [partialSumSubShift, biproduct.ι_π, Preadditive.sub_comp, h₁, h₂]
 
 instance mono_partialSumSubShift (N : ℕ) : Mono (partialSumSubShift F N) where
   right_cancellation {T} g₁ g₂ hg := by
@@ -189,7 +186,7 @@ instance mono_partialSumSubShift (N : ℕ) : Mono (partialSumSubShift F N) where
     rw [← sub_eq_zero]
     set g := g₁ - g₂
     have key : ∀ (j : ℕ) (hj : j < N + 0 + 1),
-        g ≫ biproduct.π (fun i : Fin (N + 0 + 1) ↦ F.obj i) ⟨j, hj⟩ = 0 := by
+        g ≫ biproduct.π (partialFamily F (N + 0)) ⟨j, hj⟩ = 0 := by
       intro j
       induction j with
       | zero =>
@@ -197,8 +194,8 @@ instance mono_partialSumSubShift (N : ℕ) : Mono (partialSumSubShift F N) where
         rw [← partialSumSubShift_π_zero, reassoc_of% hg, zero_comp]
       | succ j ih =>
         intro hj
-        have := hg =≫ biproduct.π (fun i : Fin (N + 1 + 1) ↦ F.obj i) ⟨j + 1, by omega⟩
-        rw [assoc, partialSumSubShift_π_succ F N j (by omega), Preadditive.comp_sub,
+        have := hg =≫ biproduct.π (partialFamily F (N + 1)) ⟨j + 1, by omega⟩
+        rw [Category.assoc, partialSumSubShift_π_succ F N j hj, Preadditive.comp_sub,
           reassoc_of% (ih (by omega)), zero_comp, sub_zero, zero_comp] at this
         exact this
     exact biproduct.hom_ext _ _ fun j ↦ by
@@ -227,6 +224,7 @@ lemma mono_id_sub_sequenceShift [HasColimitsOfShape ℕ C] [HasExactColimitsOfSh
 
 variable {c : Cocone F} (hc : IsColimit c)
 
+include hc in
 /-- In an abelian category with exact colimits of shape `ℕ`, a sequence `F` gives a short exact
 sequence `0 ⟶ ∐ₙ Fₙ ──1 - t──▶ ∐ₙ Fₙ ⟶ colim F ⟶ 0`. -/
 lemma shortExact_sequenceShift [HasColimitsOfShape ℕ C] [HasExactColimitsOfShape ℕ C] :

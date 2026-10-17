@@ -87,6 +87,7 @@ lemma sum_const_mul_fiberCharFn [CompactSpace T] (c : LocallyConstant T V) (F : 
     fiberCharFn_apply, mul_ite, mul_one, mul_zero, map_apply]
   rw [Finset.sum_ite_eq, if_pos (c.range_finite.mem_toFinset.2 (Set.mem_range_self t))]
   rfl
+  rfl
 
 /-- On a compact space, the characteristic functions of the fibres of a locally constant
 function sum to `1`. -/
