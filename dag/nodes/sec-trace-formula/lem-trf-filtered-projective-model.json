@@ -19,7 +19,8 @@
   "def-sp-filtration",
   "def-sp-filtered-complex-subquotients",
   "def-weil-finitely-generated-module",
-  "def-weil-pbc-projective-module"
+  "def-weil-pbc-projective-module",
+  "def-trf-two-step-filtered-module-derived"
  ],
  "proof": [
   {
@@ -289,5 +290,23 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-d42414cc8 (reviewer sub-agent of L); spot-checked: I read the item, its six steps, the new node lem-trf-filtered-projective-comparison, every cited statement, the parent prop-trf-trace-formal-laws (step 3 and clause 2), unit sk-p-trace, chapter sec-trace-formula, Stacks trace.tex 03TB (lemma-filtered-derived-category, l.664) and 03TJ (section-filtrations-perfect, l.885), the tags 014E/014F/0121/012K, and main-20261015 clause (2). The item statement is a faithful version of blueprint clause (2) in the parent's two-step localization DF_2. It is not weakened, and 'strict' is read as filtration-preserving. Checks by step. Step 1 (truncation): the degree-N surjectivity uses H^{N+1}(K')=0; for injectivity, x=k'+dt makes k' a cycle; in degree N-1, dx is already in ker d. Correct and elementary. Step 2: the block d_Q^2 equation gives the chain-map condition for eta into Q'[1], since d_{Q'[1]}=-d. Step 3: the leaf Qh_map_bijective allows arbitrary targets, and the homotopy sign works out as alpha'xi-eta alpha''=dh-hd with h=-k. Step 4: d_M^2=0, and the top-right entry of d_Q B = B d_M is exactly the step 3 identity, so B is a filtered qis; finite generation and boundedness hold. Steps 5-6: the two-step unrestricted Hom bijection gives the representative; restriction and quotient factor through DF_2. New node: true. I proved filtered K-projectivity myself by descending induction, lifting into the cycles of each acyclic F^qE through the projective gr^q summands. It is not a restatement of the item or the parent, and it is in-unit, so no tool uses are needed. Small cases tested: zero ring, K'=0, K''=0, eta=0, and Ferrand's Z/4 example (xi=2, M=K, filtered map restricts to 2 on K'). One fault, repaired: the new node redefined the finitely filtered homotopy category inline although def-kun-finite-filtered-module-homotopy already defines exactly that category (finite filtrations, unbounded degrees, filtered homotopies). The fix file now names KF(A) and cites that node, which is also added to stmt_deps. Other duplicate candidates were read and are not duplicates: lem-kun-finite-filtered-kflat-replacement gives unbounded free resolutions but no Hom bijection; lem-kun-filtered-quasi-isomorphism-fractions gives fractions only; def-trf-bounded-filtered-derived-category, lem-trf-filtered-derived-operation-lifts and lem-trf-filtered-trace-additivity concern sheaves or DF^+. No cycle, no SGA, no tool_uses, no nodes dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredProjectiveModel",
+  "declaration": "CochainComplex.exists_filteredProjectiveModel",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredProjectiveModel.lean",
+  "statement": "theorem exists_filteredProjectiveModel {A : Type u} [CommRing A] [HasDerivedCategory.{w} (ModuleCat.{u} A)] (P : TwoStepModuleDerived A) (hP : ∀ c : Bool, DerivedCategory.IsPerfectRingComplex ((twoStepGraded A c).obj P)) (uP : P ⟶ P) : ∃ M : TwoStepModuleComplex A, (∃ a b : ℤ, M.obj.right.IsStrictlyGE a ∧ M.obj.right.IsStrictlyLE b ∧ ∀ c : Bool, ((twoStepGradedComplex A c).obj M).IsStrictlyGE a ∧ ((twoStepGradedComplex A c).obj M).IsStrictlyLE b) ∧ (∀ n : ℤ, (Module.Finite A (M.obj.right.X n) ∧ Module.Projective A (M.obj.right.X n)) ∧ ∀ c : Bool, Module.Finite A (((twoStepGradedComplex A c).obj M).X n) ∧ Module.Projective A (((twoStepGradedComplex A c).obj M).X n)) ∧ (ShortComplex.mk M.obj.hom (cokernel.π M.obj.hom) (cokernel.condition M.obj.hom)).ShortExact ∧ (∀ n : ℤ, ∃ s : (cokernel M.obj.hom).X n ⟶ M.obj.right.X n, s ≫ (cokernel.π M.obj.hom).f n = 𝟙 _) ∧ ∃ j : (twoStepModuleQ A).obj M ≅ P, ∃ ū : M ⟶ M, (twoStepModuleQ A).map ū ≫ j.hom = j.hom ≫ uP ∧ ∀ c : Bool, DerivedCategory.Q.map ((twoStepGradedComplex A c).map ū) ≫ (twoStepGraded A c).map j.hom = (twoStepGraded A c).map j.hom ≫ (twoStepGraded A c).map uP",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e84161910",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Read item node, all 7 stmt deps, new def node def-trf-two-step-filtered-module-derived, both snapshot modules, report (Worker report / New nodes / Second reading by Q110 present), Stacks trace.tex def before 03TB and 03TB. Clause-by-clause match: arbitrary CommRing A, independent HasDerivedCategory.{w}, IsPerfectRingComplex on both graded pieces after localization, arbitrary uP, bounded (common a b) f.g. projective total/sub/quotient terms, ShortExact plus degreewise sections, j : Q.obj M ≅ P with Q.map ū ≫ j.hom = j.hom ≫ uP, graded conjugacy identities for c : Bool, no strictness predicate. The DF2 construction is non-hollow (mono arrows, filtered Homotopy relation, Quotient, graded-qis MorphismProperty, Localization, canonical lifts) with 2 sorry well-definedness theorems documented in the node statement. No duplicate DF2 found in the side DAG or Lean. lean.statement verbatim; stmt_deps updated; only lean/stmt_deps differ from the current node. Both files compile cleanly as siblings via nt_compile.py --json (rc 0; an injected-error control was reported). No universe restriction, no extra hypotheses, no pro-etale, no proofs beyond sorry. No findings."
  }
 }

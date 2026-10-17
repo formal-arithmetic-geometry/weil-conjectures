@@ -1,0 +1,125 @@
+{
+ "id": "def-trf-two-step-filtered-module-derived",
+ "kind": "definition",
+ "title": "Two-step filtered module homotopy and derived categories",
+ "status": "split",
+ "statement": "Let $R$ be a commutative ring. A two-step filtered module complex is a monomorphism $i:K^\\prime\\to K$ of integer cochain complexes of $R$-modules [def-weil-abstract-derived-category], representing the filtration $0\\subset K^\\prime\\subset K$ [def-sp-filtration]. Morphisms are commutative squares of chain maps. Its two graded complexes are $K^\\prime$ and $\\operatorname{coker}(i)=K/K^\\prime$ [def-sp-filtered-complex-subquotients]. A filtered homotopy from $f$ to $g$ is a chain homotopy on the total complexes satisfying $f-g=dh+hd$ whose components factor through the subcomplex inclusions. Let $KF_2(R)$ be the quotient by these homotopies, with canonical quotient functor $q$. Let $W_2$ be the homotopy classes having a chain-map representative that induces quasi-isomorphisms on both graded complexes. Define $DF_2(R)=KF_2(R)[W_2^{-1}]$, with functors $Q_h:KF_2(R)\\to DF_2(R)$ and $Q=qQ_h$ from pairs of complexes. There is no cochain-degree bound. Restriction to the subcomplex and passage to the cokernel, followed by ordinary derived localization, send filtered homotopic maps to equal maps in $D(R)$; the resulting functors on $KF_2(R)$ invert $W_2$. The canonical graded functors $\\operatorname{gr}^1,\\operatorname{gr}^0:DF_2(R)\\to D(R)$ are their localization lifts. Here $\\operatorname{gr}^1$ is the subcomplex functor and $\\operatorname{gr}^0$ the quotient functor, with their canonical chain-map normalization.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/prop-trf-trace-formal-laws.proof.md",
+  "place": "Clause (2), first paragraph; localization and filtered homotopy as in Stacks trace.tex Tags 03TB/03TJ, specialized throughout to two-step pairs."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homotopy category of subcomplex inclusions localized at quasi isomorphisms on subcomplex and quotient",
+   "results": "[leansearch] OK 8 hit(s): HasDerivedCategory.standard; HomotopyCategory; instIsLocalizationHomologicalComplexIntUpHomotopyCategoryQuotientHomotopyEquivalences; HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso; HomologicalComplexUpToQuasiIso; HomologicalComplexUpToQuasiIso.Q; ComplexShape.quotient_isLocalization; DerivedCategory.Q",
+   "date": "2026-10-17",
+   "verdict": "No exact match: ordinary complex homotopy and derived localizations do not define the category of subcomplex inclusions with filtered homotopies and graded quasi-isomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two step filtered derived category localization of pairs of complexes at graded quasi isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s): DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp; DerivedCategory.Qh; HasDerivedCategory; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso; DerivedCategory.Q; DerivedCategory; HasDerivedCategory.standard; DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+   "date": "2026-10-17",
+   "verdict": "No exact match: all returned declarations concern ordinary complexes and ordinary quasi-isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Filtered\", \"Projective\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "FilteredComplex|filtered.*projective|projective.*filtered (Mathlib Algebra/Homology, through msearch.py)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "No two-step filtered homotopy/localization construction."
+  },
+  {
+   "tool": "grep",
+   "query": "two.step|DF_2|TwoStep|twoStep in dag/nodes, lean/Sheaf, lean/WeilConjectures; TwoStepModule|twoStepModule|exists_filteredProjectiveModel|lem-trf-filtered-projective-model in source WeilConjectures and dag/lean_names_upstream.json; blueprint_refs.py search two-step filtered",
+   "results": "DAG hits include the item and lem-trf-filtered-projective-comparison, which define DF_2 inline but have no Lean declaration; filtered sheaf nodes concern a different coefficient category. The general finite filtered homotopy category is def-kun-finite-filtered-module-homotopy and its module was read. It does not construct the homotopy category or localization restricted throughout to two-step pairs. No two-step module declaration in either Lean source; blueprint_refs.py: 0 blueprint nodes match two-step filtered.",
+   "date": "2026-10-17",
+   "verdict": "No existing DAG definition or Lean declaration supplies the exact two-step localization. Reuse Arrow, full subcategories, Homotopy, Quotient, cokernel and MorphismProperty.Localization."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-filtered-projective-model",
+  "date": "2026-10-17",
+  "group": "Q110"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-trace-formal-laws",
+   "place": "Clause (2): the two-step filtered object, its localized endomorphism, and its two induced graded endomorphisms.",
+   "via": [
+    "lem-trf-filtered-projective-model"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-p-trace",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.TwoStepFilteredModuleDerived",
+  "declaration": "CochainComplex.TwoStepModuleDerived",
+  "file": "lean/Sheaf/Algebra/Homology/TwoStepFilteredModuleDerived.lean",
+  "statement": "abbrev TwoStepModuleDerived",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CochainComplex.TwoStepModuleComplex",
+   "CochainComplex.twoStepGradedComplex",
+   "CochainComplex.twoStepModuleHomotopyRel",
+   "CochainComplex.TwoStepModuleHomotopy",
+   "CochainComplex.twoStepModuleHomotopyQuotient",
+   "CochainComplex.twoStepModuleQuasiIso",
+   "CochainComplex.TwoStepModuleDerived",
+   "CochainComplex.twoStepModuleQh",
+   "CochainComplex.twoStepModuleQ",
+   "CochainComplex.twoStepGraded_homotopy",
+   "CochainComplex.twoStepGradedHomotopy",
+   "CochainComplex.twoStepGraded_inverts",
+   "CochainComplex.twoStepGraded"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e84161910",
+  "group": "Q110",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e84161910",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Read item node, all 7 stmt deps, new def node def-trf-two-step-filtered-module-derived, both snapshot modules, report (Worker report / New nodes / Second reading by Q110 present), Stacks trace.tex def before 03TB and 03TB. Clause-by-clause match: arbitrary CommRing A, independent HasDerivedCategory.{w}, IsPerfectRingComplex on both graded pieces after localization, arbitrary uP, bounded (common a b) f.g. projective total/sub/quotient terms, ShortExact plus degreewise sections, j : Q.obj M ≅ P with Q.map ū ≫ j.hom = j.hom ≫ uP, graded conjugacy identities for c : Bool, no strictness predicate. The DF2 construction is non-hollow (mono arrows, filtered Homotopy relation, Quotient, graded-qis MorphismProperty, Localization, canonical lifts) with 2 sorry well-definedness theorems documented in the node statement. No duplicate DF2 found in the side DAG or Lean. lean.statement verbatim; stmt_deps updated; only lean/stmt_deps differ from the current node. Both files compile cleanly as siblings via nt_compile.py --json (rc 0; an injected-error control was reported). No universe restriction, no extra hypotheses, no pro-etale, no proofs beyond sorry. No findings."
+ }
+}
