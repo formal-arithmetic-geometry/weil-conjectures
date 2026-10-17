@@ -140,5 +140,24 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-6cea3d6d9 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the three new nodes, Stacks flat.tex Tags 05FT and 05FS (lemma-fibres-irreducible-flat-projective) with their proofs, more-morphisms 05FE/05FG/05FH/05FL, and Mathlib Projective.lean l.242. The item matches 05FT hypothesis by hypothesis. The three steps follow the source proof (Noetherian approximation, then the Noetherian lemma, then 05A3(4) scalar extension). No new node is false, circular or a restated clause. The Mathlib leaf Module.Projective.tensorProduct specializes correctly with M=R. I fixed three faults. C1: step 2 used 'finite type over Z implies Noetherian' without a citation; it now cites the Mathlib leaf lem-weil-pbc-finite-type-algebra-noetherian, and step 3's 'transporting' is written out. B3: lem-trf-local-noetherian-fibres-projective now cites def-weil-pbc-finite-type-algebra. B9: blueprint.from.place on the three new nodes gave Stacks/Mathlib places; it now gives the place in the lem-trf-local-term-locality proof. I also added the 05FE/05FG/05FH/05FL tags to the approximation node's source. No tool_uses are involved. For the maintainer: the existing unsplit node lem-trf-affine-geometrically-integral-projective (Q35, same day, same unit) states the same 05FT fact as the item. It should be merged into the item and its citer lem-trf-affine-generic-rank-blowup repointed.; 4 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AffineGeometricallyIntegralProjective",
+  "declaration": "Algebra.projective_of_geometricallyIntegral_fibres",
+  "statement": "theorem projective_of_geometricallyIntegral_fibres\n    (R : Type u) (B : Type v) [CommRing R] [CommRing B] [Algebra R B]\n    [Algebra.FinitePresentation R B] (hflat : RingHom.Flat (algebraMap R B))\n    (hfibres : ∀ (p : Spec (.of R)) (K : Type (max u v w)) [Field K] [Algebra R K]\n      (ι : (Spec (.of R)).residueField p →+* K),\n      algebraMap R K =\n        ι.comp (((Scheme.ΓSpecIso (.of R)).inv ≫ (Spec (.of R)).Γevaluation p).hom) →\n      IsDomain (B ⊗[R] K)) :\n    Module.Projective R B",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "H4 repair by independent maintainer review: Tag 05FT already has a landed declaration on the immutable base. The domain-after-every-residue-field-extension hypothesis is equivalent to geometric integrality of the affine fibre spectrum, via affine tensor pullback and Spec of a domain. K ranges over max u v w, including w=0; R and B retain independent universes. Reuse that declaration and omit the delivered duplicate module. The local node retains its three-step noncircular source proof plan; the existing declaration docstring refers to this node, not to a second Lean theorem that must be introduced.",
+  "fixed_by": "NT-stage2-Codex-de470637f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-de470637f",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Reviewed the immutable delivery and reproduced both per-file compiles cleanly. Fixed H4 by reusing the already-landed equivalent Tag 05FT declaration, and H11 with a complete independent second-reading report. Complete fixes are under fixes/; findings and evidence are in review.md.; left out new module(s) lean/Sheaf/RingTheory/GeometricallyIntegralFibersProjective.lean (--drop-files, or a record fixed to existing: true)"
  }
 }

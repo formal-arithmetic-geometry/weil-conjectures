@@ -153,5 +153,33 @@
   "group": "Q92",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-02c48e980 (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement in full: component-restriction (09WG generalized), geometric-morphism, simplicial-object, injective-resolutions, sites-and-cohomology and size-convention. I also read Stacks spaces-simplicial Tag 0D78 and Tag 0D79 (statement and proof; tags confirmed in tags/tags). The statement is the injective case of 0D79 with the maps written out, plus naturality in I, which the citer lem-trf-site-augmentation-spectral-sequence step 2 needs. No hypothesis is weakened or added. Coefficients are abelian sheaves as in 0D79, and no base change is involved. Step 1: I checked the 0D78 resolution through the component lemma's formula, its exactness and its conservativity, and the extra degeneracy h(alpha)=(0,alpha) gives dh+hd=1-eta eps (I checked degree 0). Step 2: tracing the adjunctions, precomposition with d_i becomes I(delta_i) composed with u_i^{-1}phi, which is the item's d_i, and the p=-1 case gives e_I. Step 3 is the injective extension property and is correct. Step 4 is Yoneda detection of exactness and is genuinely elementary. I tested a constant point site (cosimplicial groups, Moore complex), a constant cosimplicial A and an empty site. The DAG search found no duplicate. No new nodes, no SGA, no tool_uses, all three kinds of Mathlib search recorded, and proof_deps equals the union of the uses. One repair: step 1 relied on 'the alternating face maps' on E_p without defining the d_i: E_{p+1}->E_p, which step 2 needs. I added that definition, following 0D78, and also changed I\\prime to I' in step 4. The corrected item is in fixes/dag/nodes/sec-trace-formula/; statement and dependencies are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.TotalSiteInjectiveAugmentationExactness",
+  "declaration": "CategoryTheory.totalSite_injective_augmentation_exact",
+  "file": "lean/Sheaf/TraceFormula/TotalSiteInjectiveAugmentationExactness.lean",
+  "statement": "theorem totalSite_injective_augmentation_exact {A : SimplexCategoryᵒᵖ → Type v} [∀ i, Category.{w} (A i)] [∀ i, Abelian (A i)] {T : Type u} [Category.{w} T] [Abelian T] {D : Type x} [Category.{y} D] [Abelian D] (S : TotalSiteAugmentationData A T D) (I : T) [Injective I] : (∃ h₀ : S.augmentation I ≫ S.differential I 0 = 0, Mono (S.augmentation I) ∧ (ShortComplex.mk (S.augmentation I) (S.differential I 0) h₀).Exact) ∧ (∀ p : ℕ, ∃ hₚ : S.differential I p ≫ S.differential I (p + 1) = 0, (ShortComplex.mk (S.differential I p) (S.differential I (p + 1)) hₚ).Exact) ∧ ∀ {I' : T} [Injective I'] (f : I ⟶ I'), S.total.direct.map f ≫ S.augmentation I' = S.augmentation I ≫ (S.a (Opposite.op (SimplexCategory.mk 0))).direct.map ((S.system.component (Opposite.op (SimplexCategory.mk 0))).map f) ∧ ∀ p : ℕ, (S.a (Opposite.op (SimplexCategory.mk p))).direct.map ((S.system.component (Opposite.op (SimplexCategory.mk p))).map f) ≫ S.differential I' p = S.differential I p ≫ (S.a (Opposite.op (SimplexCategory.mk (p + 1)))).direct.map ((S.system.component (Opposite.op (SimplexCategory.mk (p + 1)))).map f)",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.augmentationDirectIdIso",
+   "CategoryTheory.augmentationDirectCompIso",
+   "CategoryTheory.TotalSiteAugmentationData",
+   "CategoryTheory.TotalSiteAugmentationData.faceMap",
+   "CategoryTheory.TotalSiteAugmentationData.differential",
+   "CategoryTheory.TotalSiteAugmentationData.augmentation",
+   "CategoryTheory.totalSite_injective_augmentation_exact"
+  ],
+  "fixed_by": "NT-stage2-Codex-485511103"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-485511103",
+  "group": "Q44",
+  "result": "fix",
+  "note": "Reviewed immutable delivery and wrote review.md. Mathematics, dependencies, universes, canonical maps, exactness, and naturality are correct. Complete replacement module and report under fixes repair three H8 docstring omissions. Original and replacement compiled cleanly through scompile.py; branch unchanged."
  }
 }
