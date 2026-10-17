@@ -71,5 +71,23 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-thm-dl-a1-upper"
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.FrobeniusPunctualBoundMixed",
+  "declaration": "FrobeniusModule.isMixedOfWeightsAtMost_of_forall_hasEigenvalue",
+  "file": "lean/Sheaf/LinearAlgebra/FrobeniusPunctualBoundMixed.lean",
+  "statement": "theorem isMixedOfWeightsAtMost_of_forall_hasEigenvalue (p a ell : ℕ) [Fact (Nat.Prime p)] (ha : 1 ≤ a) [Fact (Nat.Prime ell)] (hellp : ell ≠ p) (Qlb : Type v) [Field Qlb] [Algebra (ℚ_[ell]) Qlb] (hQ : IsAlgClosure (ℚ_[ell]) Qlb) (iota : Qlb ≃+* ℂ) (M : FrobeniusModule.{u, v} Qlb) (w : ℝ) (h : ∀ α : Qlb, M.frobeniusEnd.HasEigenvalue α → ‖iota α‖ ≤ ((p ^ a : ℕ) : ℝ) ^ (w / 2)) : IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota M w",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9642994d2",
+  "group": "Q43",
+  "result": "fix",
+  "note": "Statement matches node and blueprint source (order 2788) clause by clause: coefficients p,a>=1,ell!=p, Qlb with IsAlgClosure, iota ring iso, M : FrobeniusModule.{u,v} with independent universes, w real, the eigenvalue bound via frobeniusEnd.HasEigenvalue with the same q=p^a cast as IsPureOfWeight, conclusion is the dependency's FrobeniusModule.IsMixedOfWeightsAtMost; no extra assumptions; edge cases V=0, scalar, Jordan block, mixed moduli and negative w all checked. No existing equivalent (the upstream hasWeightsAtMost_of_forall_hasEigenvalue only restates the eigenvalue bound). No new definitions, proof is only sorry, docstrings give source and blueprint tag, lean.statement is verbatim the file signature, node changed only in lean. nt_compile.py: clean, exit 0, about 2.7 s; a negative control was rejected. Only finding is H11: the second-reading section was a placeholder; fixes/lem-a1-punctual-bound-module-mixed.report.md keeps the worker report and adds a real second reading. Lean and node need no change."
+ }
 }
