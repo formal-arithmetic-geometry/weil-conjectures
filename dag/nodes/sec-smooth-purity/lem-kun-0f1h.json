@@ -26,7 +26,8 @@
   "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-geometric-stalks",
   "def-kun-torsion-invertible",
-  "def-kun-unbounded-exchange"
+  "def-kun-unbounded-exchange",
+  "lem-kun-0f1h-sep-reduction"
  ],
  "proof": [
   {
@@ -614,5 +615,24 @@
   "group": "Q08",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-829e60cb4 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item lem-kun-0f1h with all 10 steps, the main-20261015 blueprint_update, Stacks 0F1H (etale-cohomology.tex l.20402-20590), the source lemmas 0F09, 0EZT, 0F0U, 0F1C, 0F1G and 0F14, and the statements of all 52 cited nodes. The statement is unchanged and faithful to 0F1H: any field K, abelian coefficients, the unbounded exchange of def-kun-unbounded-exchange, no common annihilator. Step 1: qcqs of j and h from the Noetherian lemmas and permanence clauses (1) and (3); D+ agreement; degreewise maps via lem-kun-bc-map-on-cohomology. Step 2: degreewise filtered-colimit reduction over I_K; F[n] are torsion, so the colimit lemma applies to j and h. Step 3: simultaneous induction over all fields and all n; empty factors, U empty and n=1 checked; for dim X=0, U is clopen, j_* and h_* are exact by the clopen-product node, and degree 0 comes from lem-kun-base-change-open-closed with g=q. Step 4: I mapped clause (2) of lem-kun-bc-base-change exactly as (f,f',g,g')=(j,h,q,p) with w=X_0->X, and clause (1) for Y_0. Step 5: the 0F09 hypotheses hold for j and for h (smooth, qcqs, affine transitions, n a unit), and the j-not-q correction is right. Step 6: U' is quasi-compact and lifts to U_i; the coefficient reconstruction G=j'_*F' on affine X' needs no affineness of U'; the 0EZT corners match its statement with g_i=j_i. Step 7: the two clause-(1) factorizations are correct, lem-kun-0f1c-exchange is applied to j, and 0EZT runs with constant bottom systems. Step 8: compactification, sep-reduction, and Step 7 re-applied over K^sep. Steps 9-10: the A-linear exchange is related to the abelian one through the endpoint equation; 0F14b on (Y,X) and (Y,U); the kunneth-compat equation; a bounded-below cone; the module-underlying comparison; 0F1G. There are no new nodes, no cycle (closure checked), and no SGA source. The off-unit generic tools lem-pc-projective-base-change, lem-weil-pbc-derived-module-underlying-comparison, lem-weil-pbc-etale-sheaf-clopen-product and lem-weil-pbc-etale-smooth-zero-dimensional-fibres are declared in split_report.tool_uses, and I accept them as black-box tools. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bff88abf8",
+  "group": "N9",
+  "result": "pass",
+  "note": "Read node, 9 stmt deps, Stacks 0F1H (etale-cohomology.tex lemma-kunneth-localize-on-X), module, report, and the exact declarations openProductExchange/exactDerivedBaseChangeMap/IsTorsionOfInvertibleOrder. Every hypothesis and conclusion clause matches (arbitrary field, IsOpenImmersion, LocallyOfFiniteType+QuasiCompact for U,X,Y, abelian sheaf AddCommGrpCat.{u+1}, elementwise invertible-order torsion, IsIso of the canonical degree-zero unbounded exchange); same hypotheses as landed sep-reduction lemma. Edge cases (empty schemes, zero sheaf, char 0/p, universes) fine. stmt_deps gains only the landed lem-kun-0f1h-sep-reduction (permitted, acyclic); lean.statement verbatim; imports complete; proof sorry only; docstrings with source, blueprint and 10 steps; report has both sections. nt_compile.py --json: exit 0, clean. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenProductExchange",
+  "declaration": "AlgebraicGeometry.Etale.isIso_openProductExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenProductExchange.lean",
+  "statement": "theorem isIso_openProductExchange (K : Type u) [Field K] (U X Y : Over (Spec (.of K))) (j : U ⟶ X) [IsOpenImmersion j.left] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (F : Sheaf U.left.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : IsTorsionOfInvertibleOrder K U F) : IsIso (openProductExchange j Y F)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the canonical openProductExchange already defined by lem-kun-0f1h-sep-reduction, now also a statement dependency; no duplicate map definition. Full Stacks 0F1H for abelian sheaves in degree zero and the recorded elementwise invertible torsion orders."
  }
 }

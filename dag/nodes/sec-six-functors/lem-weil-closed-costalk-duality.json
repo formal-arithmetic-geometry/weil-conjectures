@@ -1,236 +1,265 @@
 {
-  "id": "lem-weil-closed-costalk-duality",
-  "blueprint": {
-    "is": "lem-weil-closed-costalk-duality",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Exceptional restriction of a Verdier dual",
-  "statement": "Let $i:Z\\hookrightarrow T$ be a closed immersion of schemes\n[def-weil-closed-immersion], with complementary open immersion $j:U\\hookrightarrow T$.\nChoose the small etale sites or the small pro-etale sites\n[def-weil-pbc-etale-site, def-weil-pbc-proetale-site]; in the pro-etale case\nassume that $j$ is quasi-compact, meaning that the inverse image of each\nquasi-compact open is quasi-compact. Let $\\Lambda_T$ be a sheaf of commutative\nrings on the chosen site of $T$, and use $\\Lambda_Z=i^{-1}\\Lambda_T$ and\n$\\Lambda_U=j^{-1}\\Lambda_T$ as coefficient sheaves. Write\n$\\mathcal D(W)=D(\\operatorname{Mod}(\\Lambda_W))$ for the ordinary unbounded\nderived category of module sheaves\n[def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category].\nUse the exact inverse images $i^*=i^{-1}$, $j^*=j^{-1}$ and the closed direct\nimage $Ri_*=i_*$, applied termwise to complexes. Suppose that $i_*$ has a\nright adjoint $Ri^!:\\mathcal D(T)\\to\\mathcal D(Z)$, that is, natural bijections\n$\\operatorname{Hom}_T(i_*N,L)\\cong\\operatorname{Hom}_Z(N,Ri^!L)$\nfor all $N\\in\\mathcal D(Z)$ and $L\\in\\mathcal D(T)$.\n\nFor any $\\omega_T\\in\\mathcal D(T)$ fix\n$\\omega_Z=Ri^!\\omega_T$, and put\n$D_TK=R\\mathcal Hom_{\\Lambda_T}(K,\\omega_T)$ and\n$D_ZM=R\\mathcal Hom_{\\Lambda_Z}(M,\\omega_Z)$, using the derived internal Hom\n[def-pur-derived-internal-hom]. Then for every $K\\in\\mathcal D(T)$ there is\na natural isomorphism\n$$\n\\alpha_K:Ri^!D_TK\\xrightarrow{\\sim}D_Zi^*K.\n$$\nThis assertion does not use biduality or require boundedness,\nconstructibility, or finite Tor amplitude of $K$ or $\\omega_T$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.md",
-    "place": "node lem-weil-closed-costalk-duality, order 2125"
-  },
-  "stmt_deps": [
-    "def-weil-closed-immersion",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-proetale-site",
-    "def-weil-abstract-derived-category",
-    "def-weil-sheaf-of-modules-category",
-    "def-pur-derived-internal-hom"
-  ],
-  "proof": [
-    {
-      "text": "First establish the closed-support facts on module sheaves. On the pro-etale\nsite [lem-weil-pbc-proetale-ringed-open-closed] applies to the sheaf of rings\n$\\Lambda_T$ and the quasi-compact $j$: $i_*$ is exact, its counit\n$i^{-1}i_*\\to\\operatorname{id}$ is invertible, $j^{-1}i_*=0$, and\n$0\\to j_!j^{-1}F\\to F\\to i_*i^{-1}F\\to0$ is exact. The last sequence shows\nthat $i^{-1}F=j^{-1}F=0$ implies $F=0$.\nOn the etale site [lemma-openclosed-stalk-lowerstar] identifies the stalk\nof $i_*G$ at a point of $Z$ with the stalk of $G$. At a point of $U$ it is\nzero: an etale neighbourhood inside $U$ has empty closed fibre, and the\nmodule sheaf has zero sections on the empty scheme. Exactness and\nconservativity of geometric stalks\n[prop-weil-pbc-geometric-stalks-exact, lemma-weil-pbc-geometric-stalk-conservative]\ntherefore imply exactness of $i_*$. The closed counit and supported essential\nimage are [lem-kun-04ca]; they give $j^{-1}i_*=0$ and joint detection by\n$i^{-1},j^{-1}$. Indeed if $j^{-1}F=0$, its support is in $Z$, so\n$F\\cong i_*G$ and $i^{-1}F\\cong G$; if the latter is zero, so is $F$.\nThese abelian-sheaf assertions apply to module sheaves: the canonical maps\nrespect the induced coefficient actions, and forgetting those actions\nreflects exactness and isomorphisms.",
-      "uses": [
-        "lem-weil-pbc-proetale-ringed-open-closed",
-        "lemma-openclosed-stalk-lowerstar",
-        "prop-weil-pbc-geometric-stalks-exact",
-        "lemma-weil-pbc-geometric-stalk-conservative",
-        "lem-kun-04ca"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open); etale-cohomology.tex Tag 04CA (proposition-closed-immersion-pushforward)"
-      }
-    },
-    {
-      "text": "The inverse-image functors on abelian sheaves are exact by\n[lem-weil-pbc-site-pullback-abelian-exact]. For the identified coefficient\nsheaves, module pullback is inverse image: the tensor formula in\n[lem-weil-pbc-ringed-topoi-module-adjunction] has inverse maps\n$m\\otimes a\\mapsto am$ and $m\\mapsto m\\otimes1$. Thus module inverse image\nis exact as well. Exactness of both $i^{-1}$ and $i_*$ lets their termwise\nfunctors, unit, and counit descend through the localization at\nquasi-isomorphisms [def-weil-abstract-derived-category]; the homotopy\nadjunction and its triangle identities are\n[lem-weil-pbc-termwise-adjunction-homotopy]. Hence\n$i^{-1}\\dashv Ri_*=i_*$ on the ordinary derived categories, and the closed\ncounit stays invertible. Since exact inverse image commutes with cohomology,\nthe joint detection in step 1 also detects acyclic complexes, by applying it\nto every cohomology sheaf.\nFor $t=i,j$, [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives\n$t^{-1}(P\\otimes^L Q)\\cong t^{-1}P\\otimes^Lt^{-1}Q$ for arbitrary complexes,\nwith the relevant inverse-image coefficient rings; no Tor bound is used.",
-      "uses": [
-        "lem-weil-pbc-site-pullback-abelian-exact",
-        "lem-weil-pbc-ringed-topoi-module-adjunction",
-        "def-weil-abstract-derived-category",
-        "lem-weil-pbc-termwise-adjunction-homotopy",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 07A4 (lemma-pullback-tensor-product); sites-modules.tex Tags 03D7 (lemma-adjoint-pullback-pushforward-modules), 04JC (lemma-flat-pullback-exact)"
-      }
-    },
-    {
-      "text": "For arbitrary $N\\in\\mathcal D(Z)$ and $K\\in\\mathcal D(T)$, form the\nprojection morphism\n$$c_{N,K}:i_*N\\otimes^L K\\longrightarrow i_*(N\\otimes^Li^{-1}K)$$\nas the adjoint, under step 2, of\n$i^{-1}(i_*N\\otimes^LK)\\cong i^{-1}i_*N\\otimes^Li^{-1}K\n\\xrightarrow{\\varepsilon_N\\otimes1}N\\otimes^Li^{-1}K$.\nApplying $i^{-1}$ to $c_{N,K}$ gives this isomorphism followed by the inverse\nclosed counit, so is invertible. Applying $j^{-1}$ gives the map between\nzero objects, since $j^{-1}i_*=0$ and inverse image commutes with derived\ntensor. Exact inverse image preserves mapping cones, since the termwise additive\nfunctor preserves their direct sums and differential matrices. The cone of\n$c_{N,K}$ therefore has both inverse images acyclic and is acyclic by\nstep 2. The morphism from the zero object to this cone induces an\nisomorphism on every cohomology sheaf, hence is an isomorphism by\n[lem-weil-pbc-unbounded-derived-iso-cohomology]. The cone is a zero object,\nso [lem-kun-distinguished-cone-zero] makes $c_{N,K}$ an isomorphism.\nThe construction is natural in $N,K$.",
-      "uses": [
-        "lem-weil-pbc-unbounded-derived-iso-cohomology",
-        "lem-kun-distinguished-cone-zero"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.md",
-        "place": "Proof, middle projection identity; expanded by closed counit and open-closed detection instead of pro-etale geometric stalks"
-      }
-    },
-    {
-      "text": "On either chosen ringed site, the currying isomorphism of\n[lem-weil-pbc-ringed-internal-hom-exact-restriction] gives\n$$R\\mathcal Hom(P,R\\mathcal Hom(Q,L))\\cong R\\mathcal Hom(P\\otimes^LQ,L).$$\nTaking $H^0$ of derived global sections and using\n[lem-pur-rhom-global-sections] on both sides gives the natural bijection\n$$\\operatorname{Hom}(P,R\\mathcal Hom(Q,L))\\cong\n\\operatorname{Hom}(P\\otimes^LQ,L).$$\nBoth cited results apply to arbitrary objects of the ordinary unbounded\nderived category of any small ringed site.",
-      "uses": [
-        "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-        "lem-pur-rhom-global-sections"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 08J9 (lemma-internal-hom), 08JA (lemma-section-RHom-over-U)"
-      }
-    },
-    {
-      "text": "For every $N\\in\\mathcal D(Z)$, compose the assumed ambient exceptional\nadjunction, step 4 on $T$, the inverse of step 3 inside Hom, the assumed\nexceptional adjunction again, and step 4 on $Z$:\n$$\n\\begin{aligned}\n\\operatorname{Hom}_Z(N,Ri^!D_TK)\n&\\cong\\operatorname{Hom}_T(i_*N,D_TK)\\\\\n&\\cong\\operatorname{Hom}_T(i_*N\\otimes^LK,\\omega_T)\\\\\n&\\cong\\operatorname{Hom}_T(i_*(N\\otimes^Li^*K),\\omega_T)\\\\\n&\\cong\\operatorname{Hom}_Z(N\\otimes^Li^*K,Ri^!\\omega_T)\\\\\n&=\\operatorname{Hom}_Z(N\\otimes^Li^*K,\\omega_Z)\\\\\n&\\cong\\operatorname{Hom}_Z(N,D_Zi^*K).\n\\end{aligned}\n$$\nThis is a bijection natural in the arbitrary test object $N$, and\ncontravariantly natural in $K$. All its objects lie in their specified\nambient categories; neither a constructible adjunction nor a finite-Tor\nprojection formula is being substituted for an ambient one.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.md",
-        "place": "Proof, displayed Hom chain; all arrows separated and justified by steps 2-4 and the stated ambient adjunction"
-      }
-    },
-    {
-      "text": "Write $B=Ri^!D_TK$, $C=D_Zi^*K$, and let\n$\\theta_N:\\operatorname{Hom}(N,B)\\cong\\operatorname{Hom}(N,C)$ be step 5.\nSet $\\alpha_K=\\theta_B(1_B)$ and $\\gamma_K=\\theta_C^{-1}(1_C)$.\nNaturality in $N$ gives $\\theta_N(f)=\\alpha_Kf$ and\n$\\theta_N^{-1}(g)=\\gamma_Kg$; the inverse composites give\n$\\gamma_K\\alpha_K=1_B$ and $\\alpha_K\\gamma_K=1_C$.\nNaturality of $\\theta$ in $K$ gives naturality of $\\alpha$.\nThe tensor-Hom transposes use evaluation and the exceptional transposes use\nthe adjunction counit, so this is the canonical evaluation-defined\ncomparison in the source. Yoneda is applied directly to the two objects in\n$\\mathcal D(Z)$; no localization to etale test objects and no biduality is\nneeded.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.md",
-        "place": "Proof, final Yoneda and naturality sentences, with the inverse maps written explicitly"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-weil-closed-costalk-duality",
+ "blueprint": {
+  "is": "lem-weil-closed-costalk-duality",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exceptional restriction of a Verdier dual",
+ "statement": "Let $i:Z\\hookrightarrow T$ be a closed immersion of schemes\n[def-weil-closed-immersion], with complementary open immersion $j:U\\hookrightarrow T$.\nChoose the small etale sites or the small pro-etale sites\n[def-weil-pbc-etale-site, def-weil-pbc-proetale-site]; in the pro-etale case\nassume that $j$ is quasi-compact, meaning that the inverse image of each\nquasi-compact open is quasi-compact. Let $\\Lambda_T$ be a sheaf of commutative\nrings on the chosen site of $T$, and use $\\Lambda_Z=i^{-1}\\Lambda_T$ and\n$\\Lambda_U=j^{-1}\\Lambda_T$ as coefficient sheaves. Write\n$\\mathcal D(W)=D(\\operatorname{Mod}(\\Lambda_W))$ for the ordinary unbounded\nderived category of module sheaves\n[def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category].\nUse the exact inverse images $i^*=i^{-1}$, $j^*=j^{-1}$ and the closed direct\nimage $Ri_*=i_*$, applied termwise to complexes. Suppose that $i_*$ has a\nright adjoint $Ri^!:\\mathcal D(T)\\to\\mathcal D(Z)$, that is, natural bijections\n$\\operatorname{Hom}_T(i_*N,L)\\cong\\operatorname{Hom}_Z(N,Ri^!L)$\nfor all $N\\in\\mathcal D(Z)$ and $L\\in\\mathcal D(T)$.\n\nFor any $\\omega_T\\in\\mathcal D(T)$ fix\n$\\omega_Z=Ri^!\\omega_T$, and put\n$D_TK=R\\mathcal Hom_{\\Lambda_T}(K,\\omega_T)$ and\n$D_ZM=R\\mathcal Hom_{\\Lambda_Z}(M,\\omega_Z)$, using the derived internal Hom\n[def-pur-derived-internal-hom]. Then for every $K\\in\\mathcal D(T)$ there is\na natural isomorphism\n$$\n\\alpha_K:Ri^!D_TK\\xrightarrow{\\sim}D_Zi^*K.\n$$\nThis assertion does not use biduality or require boundedness,\nconstructibility, or finite Tor amplitude of $K$ or $\\omega_T$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.md",
+  "place": "node lem-weil-closed-costalk-duality, order 2125"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "First establish the closed-support facts on module sheaves. On the pro-etale\nsite [lem-weil-pbc-proetale-ringed-open-closed] applies to the sheaf of rings\n$\\Lambda_T$ and the quasi-compact $j$: $i_*$ is exact, its counit\n$i^{-1}i_*\\to\\operatorname{id}$ is invertible, $j^{-1}i_*=0$, and\n$0\\to j_!j^{-1}F\\to F\\to i_*i^{-1}F\\to0$ is exact. The last sequence shows\nthat $i^{-1}F=j^{-1}F=0$ implies $F=0$.\nOn the etale site [lemma-openclosed-stalk-lowerstar] identifies the stalk\nof $i_*G$ at a point of $Z$ with the stalk of $G$. At a point of $U$ it is\nzero: an etale neighbourhood inside $U$ has empty closed fibre, and the\nmodule sheaf has zero sections on the empty scheme. Exactness and\nconservativity of geometric stalks\n[prop-weil-pbc-geometric-stalks-exact, lemma-weil-pbc-geometric-stalk-conservative]\ntherefore imply exactness of $i_*$. The closed counit and supported essential\nimage are [lem-kun-04ca]; they give $j^{-1}i_*=0$ and joint detection by\n$i^{-1},j^{-1}$. Indeed if $j^{-1}F=0$, its support is in $Z$, so\n$F\\cong i_*G$ and $i^{-1}F\\cong G$; if the latter is zero, so is $F$.\nThese abelian-sheaf assertions apply to module sheaves: the canonical maps\nrespect the induced coefficient actions, and forgetting those actions\nreflects exactness and isomorphisms.",
+   "uses": [
     "lem-weil-pbc-proetale-ringed-open-closed",
     "lemma-openclosed-stalk-lowerstar",
     "prop-weil-pbc-geometric-stalks-exact",
     "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-kun-04ca",
+    "lem-kun-04ca"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open); etale-cohomology.tex Tag 04CA (proposition-closed-immersion-pushforward)"
+   }
+  },
+  {
+   "text": "The inverse-image functors on abelian sheaves are exact by\n[lem-weil-pbc-site-pullback-abelian-exact]. For the identified coefficient\nsheaves, module pullback is inverse image: the tensor formula in\n[lem-weil-pbc-ringed-topoi-module-adjunction] has inverse maps\n$m\\otimes a\\mapsto am$ and $m\\mapsto m\\otimes1$. Thus module inverse image\nis exact as well. Exactness of both $i^{-1}$ and $i_*$ lets their termwise\nfunctors, unit, and counit descend through the localization at\nquasi-isomorphisms [def-weil-abstract-derived-category]; the homotopy\nadjunction and its triangle identities are\n[lem-weil-pbc-termwise-adjunction-homotopy]. Hence\n$i^{-1}\\dashv Ri_*=i_*$ on the ordinary derived categories, and the closed\ncounit stays invertible. Since exact inverse image commutes with cohomology,\nthe joint detection in step 1 also detects acyclic complexes, by applying it\nto every cohomology sheaf.\nFor $t=i,j$, [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives\n$t^{-1}(P\\otimes^L Q)\\cong t^{-1}P\\otimes^Lt^{-1}Q$ for arbitrary complexes,\nwith the relevant inverse-image coefficient rings; no Tor bound is used.",
+   "uses": [
     "lem-weil-pbc-site-pullback-abelian-exact",
     "lem-weil-pbc-ringed-topoi-module-adjunction",
     "def-weil-abstract-derived-category",
     "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product); sites-modules.tex Tags 03D7 (lemma-adjoint-pullback-pushforward-modules), 04JC (lemma-flat-pullback-exact)"
+   }
+  },
+  {
+   "text": "For arbitrary $N\\in\\mathcal D(Z)$ and $K\\in\\mathcal D(T)$, form the\nprojection morphism\n$$c_{N,K}:i_*N\\otimes^L K\\longrightarrow i_*(N\\otimes^Li^{-1}K)$$\nas the adjoint, under step 2, of\n$i^{-1}(i_*N\\otimes^LK)\\cong i^{-1}i_*N\\otimes^Li^{-1}K\n\\xrightarrow{\\varepsilon_N\\otimes1}N\\otimes^Li^{-1}K$.\nApplying $i^{-1}$ to $c_{N,K}$ gives this isomorphism followed by the inverse\nclosed counit, so is invertible. Applying $j^{-1}$ gives the map between\nzero objects, since $j^{-1}i_*=0$ and inverse image commutes with derived\ntensor. Exact inverse image preserves mapping cones, since the termwise additive\nfunctor preserves their direct sums and differential matrices. The cone of\n$c_{N,K}$ therefore has both inverse images acyclic and is acyclic by\nstep 2. The morphism from the zero object to this cone induces an\nisomorphism on every cohomology sheaf, hence is an isomorphism by\n[lem-weil-pbc-unbounded-derived-iso-cohomology]. The cone is a zero object,\nso [lem-kun-distinguished-cone-zero] makes $c_{N,K}$ an isomorphism.\nThe construction is natural in $N,K$.",
+   "uses": [
     "lem-weil-pbc-unbounded-derived-iso-cohomology",
-    "lem-kun-distinguished-cone-zero",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.md",
+    "place": "Proof, middle projection identity; expanded by closed counit and open-closed detection instead of pro-etale geometric stalks"
+   }
+  },
+  {
+   "text": "On either chosen ringed site, the currying isomorphism of\n[lem-weil-pbc-ringed-internal-hom-exact-restriction] gives\n$$R\\mathcal Hom(P,R\\mathcal Hom(Q,L))\\cong R\\mathcal Hom(P\\otimes^LQ,L).$$\nTaking $H^0$ of derived global sections and using\n[lem-pur-rhom-global-sections] on both sides gives the natural bijection\n$$\\operatorname{Hom}(P,R\\mathcal Hom(Q,L))\\cong\n\\operatorname{Hom}(P\\otimes^LQ,L).$$\nBoth cited results apply to arbitrary objects of the ordinary unbounded\nderived category of any small ringed site.",
+   "uses": [
     "lem-weil-pbc-ringed-internal-hom-exact-restriction",
     "lem-pur-rhom-global-sections"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 (lemma-internal-hom), 08JA (lemma-section-RHom-over-U)"
+   }
+  },
+  {
+   "text": "For every $N\\in\\mathcal D(Z)$, compose the assumed ambient exceptional\nadjunction, step 4 on $T$, the inverse of step 3 inside Hom, the assumed\nexceptional adjunction again, and step 4 on $Z$:\n$$\n\\begin{aligned}\n\\operatorname{Hom}_Z(N,Ri^!D_TK)\n&\\cong\\operatorname{Hom}_T(i_*N,D_TK)\\\\\n&\\cong\\operatorname{Hom}_T(i_*N\\otimes^LK,\\omega_T)\\\\\n&\\cong\\operatorname{Hom}_T(i_*(N\\otimes^Li^*K),\\omega_T)\\\\\n&\\cong\\operatorname{Hom}_Z(N\\otimes^Li^*K,Ri^!\\omega_T)\\\\\n&=\\operatorname{Hom}_Z(N\\otimes^Li^*K,\\omega_Z)\\\\\n&\\cong\\operatorname{Hom}_Z(N,D_Zi^*K).\n\\end{aligned}\n$$\nThis is a bijection natural in the arbitrary test object $N$, and\ncontravariantly natural in $K$. All its objects lie in their specified\nambient categories; neither a constructible adjunction nor a finite-Tor\nprojection formula is being substituted for an ambient one.",
+   "uses": [],
+   "elementary": true,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.md",
-    "place": "## Proof"
+    "place": "Proof, displayed Hom chain; all arrows separated and justified by steps 2-4 and the stated ambient adjunction"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "natural isomorphism exceptional inverse image Verdier dual closed immersion",
-      "results": "Eight generic scheme/module restriction declarations, starting with AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, restrictFunctorComp and restrictFunctorIsoPullback; no exceptional inverse image or Verdier dual comparison.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction",
-      "results": "12 generic adjunction hits, including CategoryTheory.Adjunction.id, Equivalence.toAdjunction, Equivalence.toAdjunction' and Adjunction.mk'; no derived Verdier-duality or closed-support theorem.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep 'Verdier|exceptional inverse image|internal Hom' Mathlib",
-      "results": "0 hits in Mathlib source.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "exceptional restriction of Verdier dual for a closed immersion",
-      "results": "service unavailable (Internal Server Error).",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "right adjoint of tensor product internal hom monoidal closed category",
-      "results": "Eight generic monoidal closed declarations, including CategoryTheory.ihom.adjunction and MonoidalClosed.internalHomAdjunction₂. Read Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean lines 78-84: this supplies a tensor-Hom adjunction only after a Closed structure is provided, not a derived closed-support comparison.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.ihom.adjunction",
-      "results": "Eight hits: generic internal-Hom adjunction, unit/counit normalization, currying, and Frobenius mate. CategoryTheory.frobeniusMorphism_mate is Cartesian-monoidal infrastructure (read Closed/Functor.lean lines 137 onward), not a sheaf-derived closed-immersion statement.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "internalHomAdjunction|ihom.adjunction|closed.*[Pp]rojection",
-      "results": "25 displayed hits, capped by wrapper. Generic monoidal closed adjunction and Cartesian Frobenius infrastructure, plus unrelated projection terminology; no derived sheaf closed-costalk duality.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2125,
-  "blueprint_uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-exceptional-inverse-image",
-    "def-weil-open-closed-recollement"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-six-functors",
-  "unit": "sk-prop-sf-biduality-general",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-weil-closed-costalk-duality",
-    "worker": "stage1",
-    "summary": "Second reading replaced the misapplied constructible fix-node citations by ambient ringed-site facts. Explicitly bound sites, inverse-image coefficient rings, all ambient complexes and the exceptional adjunction; restored the missing quasi-compact-complement hypothesis on the pro-etale side. Proved the closed projection identity by inverse-image counit and open-closed detection, derived the tensor-Hom bijection from the existing ringed-site currying and global-Hom theorems, and wrote the Hom chain and Yoneda inverse in six steps. No new nodes.",
-    "blueprint": "Realizes the sole proof paragraph of the original blueprint item: steps 1-3 justify its middle projection identity, step 4 justifies its two tensor-Hom arrows, step 5 gives its Hom chain, and step 6 expands Yoneda and naturality. Retains the conditional ambient route without biduality. The unit is finite-stage geometric biduality; the explicit pro-etale complement condition holds for its finite-type schemes.",
-    "off_unit_tools": "The ringed-site tensor pullback, internal-Hom calculus, global-Hom, exact inverse image and termwise adjunction statements are generic tools. The etale closed-support and geometric-stalk statements and the ringed pro-etale open-closed statement supply the exact closed-site infrastructure. These are used as black boxes with exactly their stated domains; no tool_uses maintainer field is set.",
-    "tool_uses": [
-      {
-        "node": "lem-kun-04ca",
-        "why": "Step 1 uses only the generic small-etale closed-immersion fully faithful pushforward, its inverse-image counit, and its supported essential image. These are ringed-site infrastructure for the formal closed-costalk comparison; no theorem in this unit supplies them, and this use does not replace its geometric biduality route."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-kun-04ca"
-  ],
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-Q43-3820e3ede",
-    "group": "Q43",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q43-3820e3ede (reviewer sub-agent of L); spot-checked: Read the full mathematics; all six steps check against Stacks 09AA/09BM/09AH, 04CA, 07A4, 08J9/08JA and the cited DAG statements. Unbounded coefficient domains, projection-map direction, Yoneda inverses and edge cases pass. Added the missing lem-kun-04ca tool declaration in fixes; review.md records checks and coefficient-category limits. No new nodes.; 1 file(s) fixed by the reviewer"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $i:Z\\hookrightarrow T$ be a closed immersion and suppose the\nambient exceptional adjoints are defined, with\n$\\omega_Z=Ri^!\\omega_T$. Put\n$D_T=R\\mathcal Hom_T(-,\\omega_T)$ and\n$D_Z=R\\mathcal Hom_Z(-,\\omega_Z)$. Then there is a natural\nisomorphism\n\n$$\n\\alpha_K:Ri^!D_TK\\xrightarrow{\\sim}D_Zi^*K.\n$$",
-    "proof": [
-      {
-        "text": "For any test complex $N$ on $Z$, the tensor adjunction of\n[def-weil-derived-pullback-tensor-hom] and the closed exceptional\nadjunction of [def-weil-exceptional-inverse-image] give\n\n$$\n\\begin{aligned}\n\\operatorname{Hom}_Z(N,Ri^!D_TK)\n&\\cong\\operatorname{Hom}_T(i_*N\\otimes^L K,\\omega_T)\\\\\n&\\cong\\operatorname{Hom}_T(i_*(N\\otimes^L i^*K),\\omega_T)\\\\\n&\\cong\\operatorname{Hom}_Z(N\\otimes^L i^*K,\\omega_Z)\\\\\n&\\cong\\operatorname{Hom}_Z(N,D_Zi^*K).\n\\end{aligned}\n$$\n\nThe middle projection identity holds for a closed immersion in the\nrecollement of [def-weil-open-closed-recollement] because\n$i_*$ is exact and fully faithful, and its stalkwise extension by\nzero commutes with tensor product; flat resolutions give the derived\nidentity. The calculation localizes on every etale test object, so it\nidentifies the internal Hom objects. Yoneda proves the isomorphism.\nEvery arrow is defined by adjunction and evaluation, giving naturality.",
-        "uses": [
-          "def-weil-derived-pullback-tensor-hom",
-          "def-weil-exceptional-inverse-image",
-          "def-weil-open-closed-recollement"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Write $B=Ri^!D_TK$, $C=D_Zi^*K$, and let\n$\\theta_N:\\operatorname{Hom}(N,B)\\cong\\operatorname{Hom}(N,C)$ be step 5.\nSet $\\alpha_K=\\theta_B(1_B)$ and $\\gamma_K=\\theta_C^{-1}(1_C)$.\nNaturality in $N$ gives $\\theta_N(f)=\\alpha_Kf$ and\n$\\theta_N^{-1}(g)=\\gamma_Kg$; the inverse composites give\n$\\gamma_K\\alpha_K=1_B$ and $\\alpha_K\\gamma_K=1_C$.\nNaturality of $\\theta$ in $K$ gives naturality of $\\alpha$.\nThe tensor-Hom transposes use evaluation and the exceptional transposes use\nthe adjunction counit, so this is the canonical evaluation-defined\ncomparison in the source. Yoneda is applied directly to the two objects in\n$\\mathcal D(Z)$; no localization to etale test objects and no biduality is\nneeded.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.md",
+    "place": "Proof, final Yoneda and naturality sentences, with the inverse maps written explicitly"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lemma-openclosed-stalk-lowerstar",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-kun-04ca",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-kun-distinguished-cone-zero",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism exceptional inverse image Verdier dual closed immersion",
+   "results": "Eight generic scheme/module restriction declarations, starting with AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, restrictFunctorComp and restrictFunctorIsoPullback; no exceptional inverse image or Verdier dual comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "12 generic adjunction hits, including CategoryTheory.Adjunction.id, Equivalence.toAdjunction, Equivalence.toAdjunction' and Adjunction.mk'; no derived Verdier-duality or closed-support theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep 'Verdier|exceptional inverse image|internal Hom' Mathlib",
+   "results": "0 hits in Mathlib source.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exceptional restriction of Verdier dual for a closed immersion",
+   "results": "service unavailable (Internal Server Error).",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint of tensor product internal hom monoidal closed category",
+   "results": "Eight generic monoidal closed declarations, including CategoryTheory.ihom.adjunction and MonoidalClosed.internalHomAdjunction₂. Read Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean lines 78-84: this supplies a tensor-Hom adjunction only after a Closed structure is provided, not a derived closed-support comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ihom.adjunction",
+   "results": "Eight hits: generic internal-Hom adjunction, unit/counit normalization, currying, and Frobenius mate. CategoryTheory.frobeniusMorphism_mate is Cartesian-monoidal infrastructure (read Closed/Functor.lean lines 137 onward), not a sheaf-derived closed-immersion statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHomAdjunction|ihom.adjunction|closed.*[Pp]rojection",
+   "results": "25 displayed hits, capped by wrapper. Generic monoidal closed adjunction and Cartesian Frobenius infrastructure, plus unrelated projection terminology; no derived sheaf closed-costalk duality.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2125,
+ "blueprint_uses": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-open-closed-recollement"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-closed-costalk-duality",
+  "worker": "stage1",
+  "summary": "Second reading replaced the misapplied constructible fix-node citations by ambient ringed-site facts. Explicitly bound sites, inverse-image coefficient rings, all ambient complexes and the exceptional adjunction; restored the missing quasi-compact-complement hypothesis on the pro-etale side. Proved the closed projection identity by inverse-image counit and open-closed detection, derived the tensor-Hom bijection from the existing ringed-site currying and global-Hom theorems, and wrote the Hom chain and Yoneda inverse in six steps. No new nodes.",
+  "blueprint": "Realizes the sole proof paragraph of the original blueprint item: steps 1-3 justify its middle projection identity, step 4 justifies its two tensor-Hom arrows, step 5 gives its Hom chain, and step 6 expands Yoneda and naturality. Retains the conditional ambient route without biduality. The unit is finite-stage geometric biduality; the explicit pro-etale complement condition holds for its finite-type schemes.",
+  "off_unit_tools": "The ringed-site tensor pullback, internal-Hom calculus, global-Hom, exact inverse image and termwise adjunction statements are generic tools. The etale closed-support and geometric-stalk statements and the ringed pro-etale open-closed statement supply the exact closed-site infrastructure. These are used as black boxes with exactly their stated domains; no tool_uses maintainer field is set.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-04ca",
+    "why": "Step 1 uses only the generic small-etale closed-immersion fully faithful pushforward, its inverse-image counit, and its supported essential image. These are ringed-site infrastructure for the formal closed-costalk comparison; no theorem in this unit supplies them, and this use does not replace its geometric biduality route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-04ca"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q43-3820e3ede",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q43-3820e3ede (reviewer sub-agent of L); spot-checked: Read the full mathematics; all six steps check against Stacks 09AA/09BM/09AH, 04CA, 07A4, 08J9/08JA and the cited DAG statements. Unbounded coefficient domains, projection-map direction, Yoneda inverses and edge cases pass. Added the missing lem-kun-04ca tool declaration in fixes; review.md records checks and coefficient-category limits. No new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $i:Z\\hookrightarrow T$ be a closed immersion and suppose the\nambient exceptional adjoints are defined, with\n$\\omega_Z=Ri^!\\omega_T$. Put\n$D_T=R\\mathcal Hom_T(-,\\omega_T)$ and\n$D_Z=R\\mathcal Hom_Z(-,\\omega_Z)$. Then there is a natural\nisomorphism\n\n$$\n\\alpha_K:Ri^!D_TK\\xrightarrow{\\sim}D_Zi^*K.\n$$",
+  "proof": [
+   {
+    "text": "For any test complex $N$ on $Z$, the tensor adjunction of\n[def-weil-derived-pullback-tensor-hom] and the closed exceptional\nadjunction of [def-weil-exceptional-inverse-image] give\n\n$$\n\\begin{aligned}\n\\operatorname{Hom}_Z(N,Ri^!D_TK)\n&\\cong\\operatorname{Hom}_T(i_*N\\otimes^L K,\\omega_T)\\\\\n&\\cong\\operatorname{Hom}_T(i_*(N\\otimes^L i^*K),\\omega_T)\\\\\n&\\cong\\operatorname{Hom}_Z(N\\otimes^L i^*K,\\omega_Z)\\\\\n&\\cong\\operatorname{Hom}_Z(N,D_Zi^*K).\n\\end{aligned}\n$$\n\nThe middle projection identity holds for a closed immersion in the\nrecollement of [def-weil-open-closed-recollement] because\n$i_*$ is exact and fully faithful, and its stalkwise extension by\nzero commutes with tensor product; flat resolutions give the derived\nidentity. The calculation localizes on every etale test object, so it\nidentifies the internal Hom objects. Yoneda proves the isomorphism.\nEvery arrow is defined by adjunction and evaluation, giving naturality.",
+    "uses": [
+     "def-weil-derived-pullback-tensor-hom",
+     "def-weil-exceptional-inverse-image",
+     "def-weil-open-closed-recollement"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ff4c1dc7",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Checked every clause of the node against both theorems. Closed immersion, complementary open (range complement) and QuasiCompact j only in the pro-etale theorem. Arbitrary R : Sheaf _ CommRingCat.{u+1}, with the actual inverse image as Lambda_Z and a let for Lambda_U. Unbounded DerivedCategory of ringedSiteModules. Etale side: inverse image pinned by its adjunction to the actual module pushforward, derived functors fixed by termwise Q-factorization isos, so no arbitrary functors. Pro-etale side: recorded proEtaleRingDerivedPullback and proEtaleRingDerivedDirectImage. The assumed adjunction iPush ⊣ riExcl, omegaZ = riExcl.obj omegaT, and the duals via the recorded derivedInternalHomOfUniverses.{u+1,u,0,u+2} with no universe equality forced. Conclusion: Nonempty natural iso of functors on D(T)op. No biduality, boundedness or Tor assumptions. Edge cases (empty Z or U, zero objects, any characteristic, universes) pass. The new etale helpers are real Mathlib specializations; my own search found no recorded duplicate. Only the node's lean field changed; lean.statement is verbatim; docstrings carry source, blueprint id and proof steps; lines <=100; sorry-only proofs; both report sections present. nt_compile.py: clean, rc 0, 3 s; error reporting confirmed with a planted error. Only observation: a redundant public import of ConcreteCoefficients (cosmetic)."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ClosedCostalkDuality",
+  "declaration": "AlgebraicGeometry.Scheme.exceptionalRestrictionVerdierDuality",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.closedCostalkEtaleModules",
+   "AlgebraicGeometry.Scheme.closedCostalkEtaleModules_hasDerivedCategory",
+   "AlgebraicGeometry.Scheme.closedCostalkEtaleRingPullback",
+   "AlgebraicGeometry.Scheme.closedCostalkEtaleRingAdjunction",
+   "AlgebraicGeometry.Scheme.closedCostalkEtaleModulePush",
+   "AlgebraicGeometry.Scheme.closedCostalkEtaleModulePush_additive",
+   "AlgebraicGeometry.Scheme.exceptionalRestrictionVerdierDuality_etale",
+   "AlgebraicGeometry.Scheme.exceptionalRestrictionVerdierDuality"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ClosedCostalkDuality.lean",
+  "statement": "theorem exceptionalRestrictionVerdierDuality {T Z U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i] (j : U ⟶ T) [IsOpenImmersion j] [QuasiCompact j] (_hij : Set.range j.base = (Set.range i.base)ᶜ) (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (riExcl : DerivedCategory (proEtaleRingModules T R) ⥤ DerivedCategory (proEtaleRingModules Z ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R))) (_adj : proEtaleRingDerivedDirectImage i R ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R) (Iso.refl _) ⊣ riExcl) (ωT : DerivedCategory (proEtaleRingModules T R)) : let ΛU := (proEtaleSheafInverseImage j CommRingCat.{u + 1}).obj R Nonempty ((((𝟭 (DerivedCategory (proEtaleRingModules T R))ᵒᵖ).prod' ((Functor.const _).obj ωT)) ⋙ derivedInternalHomOfUniverses.{u + 1, u, 0, u + 2} (ProEt.topology T) R) ⋙ riExcl ≅ (proEtaleRingDerivedPullback i R ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R) (Iso.refl _)).op ⋙ ((𝟭 _).prod' ((Functor.const _).obj (riExcl.obj ωT))) ⋙ derivedInternalHomOfUniverses.{u + 1, u, 0, u + 2} (ProEt.topology Z) ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R))",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The two theorem declarations jointly cover the etale and pro-etale alternatives. The duals are the recorded derivedInternalHomOfUniverses specialized at omegaT and Ri!omegaT. The pro-etale functors are the recorded actual ringed operations. In the etale statement the inverse image is fixed up to unique adjoint isomorphism by its adjunction to the explicitly constructed module pushforward, and both derived functors are fixed by natural termwise-localization comparisons; they are not unrelated functor parameters. The item statement, its dependencies and its six-step proof are unchanged."
+ }
 }
