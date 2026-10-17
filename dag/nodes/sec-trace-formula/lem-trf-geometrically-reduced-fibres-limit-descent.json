@@ -169,5 +169,23 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-67aa18931 (reviewer sub-agent of L); spot-checked: Read all three nodes and cited mathematics in full. Stacks 0579, 0576 and 05F4 support every step, including arbitrary base change and all later stages. Checked geometric-fibre conventions, edge cases, duplicate candidates, unit route and dropped-node closure. No repairs needed; detailed checks and accepted tool use are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.GeometricallyReducedFibresLimitDescent",
+  "declaration": "AlgebraicGeometry.exists_eventually_geometricallyReduced_fibres",
+  "file": "lean/Sheaf/TraceFormula/GeometricallyReducedFibresLimitDescent.lean",
+  "statement": "theorem exists_eventually_geometricallyReduced_fibres {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ j : Iᵒᵖ, CompactSpace (D.obj j)] [∀ j : Iᵒᵖ, QuasiSeparatedSpace (D.obj j)] [∀ {j k : Iᵒᵖ} (f : j ⟶ k), IsAffineHom (D.map f)] (c : Cone D) (hc : IsLimit c) (a : I) {Y : Scheme.{u}} (q : Y ⟶ D.obj (op a)) [LocallyOfFinitePresentation q] [QuasiCompact q] [QuasiSeparated q] (hred : ∀ s : c.pt, GeometricallyReduced ((pullback.snd q (c.π.app (op a))).fiberToSpecResidueField s)) : ∃ b : I, ∃ hab : a ≤ b, ∀ (i : I) (hbi : b ≤ i) (s : D.obj (op i)), GeometricallyReduced ((pullback.snd q (D.map (homOfLE (hab.trans hbi)).op)).fiberToSpecResidueField s)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0938ecb51",
+  "group": "N5",
+  "result": "pass",
+  "note": "Statement, dependencies, source proof plan, edge cases, docstrings, route compliance, and immutable per-file scompile all checked successfully; no fixes needed."
  }
 }
