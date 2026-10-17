@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Over
 public import WeilConjectures.AlgebraicGeometry.Sites.LimitSystem.Sections
 public import WeilConjectures.CategoryTheory.Sites.CechComplexTransport
 public import WeilConjectures.CategoryTheory.Sites.CechCriterionGood
@@ -88,8 +89,7 @@ lemma injective_stageSheaf (hE : ∀ i, Injective (S.F i)) {i₀ j : I} (f : i�
     Injective (S.stageSheaf f) := by
   have := Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
     (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (D.map f.op))
-  have := hE j
-  exact (lowerStar AddCommGrpCat.{u + 1} (D.map f.op)).injective_obj_of_injective
+  exact (lowerStar AddCommGrpCat.{u + 1} (D.map f.op)).injective_obj_of_injective (hE j)
 
 include hc in
 /-- **Čech complexes of the colimit of a system of injective sheaves.** For a finite family `U₀`
@@ -170,6 +170,8 @@ lemma exactAt_cechComplex_of_isStageFamily (hE : ∀ i, Injective (S.F i)) {V : 
   obtain ⟨k, V₀, _, _, e, U₀, hU₀, ⟨ι⟩⟩ := hU
   have : PreservesFiniteProducts (Over.map e.hom) :=
     inferInstanceAs (PreservesFiniteProducts (Over.mapIso e).functor)
+  have : PreservesFiniteLimits (Over.post (c.π.app (op k)).Etale) := inferInstance
+  have : PreservesFiniteProducts (Over.post (c.π.app (op k)).Etale) := inferInstance
   refine exactAt_cechComplex_of_preservesFiniteProducts
     (Over.post (c.π.app (op k)).Etale ⋙ Over.map e.hom) U₀ U ι
     ((lowerStar AddCommGrpCat.{u + 1} (c.π.app (op k))).obj S.L.pt).obj S.L.pt.obj (Iso.refl _)

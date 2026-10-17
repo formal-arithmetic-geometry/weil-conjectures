@@ -10,6 +10,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductAppend
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassCup
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsEtale
 
 /-!
@@ -43,7 +44,9 @@ Thom classes are transported along étale maps
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits
+
+open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
@@ -57,7 +60,7 @@ def sumConsEquiv (c : ℕ) : ULift.{u} (Fin c) ⊕ ULift.{u} (Fin 1) ≃ ULift.{
   toFun := Sum.elim (fun a ↦ ULift.up a.down.succ) fun _ ↦ ULift.up 0
   invFun x := Fin.cases (Sum.inr (ULift.up 0)) (fun a ↦ Sum.inl (ULift.up a)) x.down
   left_inv := by
-    rintro (⟨a⟩ | ⟨a⟩)
+    rintro (⟨a⟩ | ⟨⟨a⟩⟩)
     · simp
     · simp [Fin.fin_one_eq_zero a]
   right_inv := by
@@ -93,22 +96,23 @@ section Transport
 
 variable {X U Z Z' : Scheme.{u}}
 
+omit [HasKummerClass Λ] in
 /-- Restriction of supports along an étale map preserves Thom classes: if the adjoint
 `Λ_Z ⟶ Ri^! L` of a class `γ` supported on `Z` is an isomorphism, so is the adjoint of its
 restriction along an étale `e : U ⟶ X`. -/
 theorem isIso_supportedClassMap_restrictSupportedClass_of_etale (e : U ⟶ X)
     [AlgebraicGeometry.Etale e] (i : Z ⟶ X) (i' : Z' ⟶ U) [IsClosedImmersion i]
     [IsClosedImmersion i'] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
-    {L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    {L' : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
+    {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {M' : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj M ≅ M')
     (γ : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj L))
+      ((R(i)^![ModuleCat.{u + 1} Λ]).obj M))
     (hγ : IsIso (supportedClassMap Λ i γ)) :
     IsIso (supportedClassMap Λ i' (restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
       (leftDerivedUpperStarConstantComplexIso Λ e).inv τ γ)) :=
-  (isIso_supportedClassMap_restrictSupportedClass_iff Λ e i i' g hg L L' τ γ
-    (isIso_supportedRestriction_of_etale Λ e i i' g hg L L' τ)).2 inferInstance
+  (isIso_supportedClassMap_restrictSupportedClass_iff Λ e i i' g hg M M' τ γ
+    (isIso_supportedRestriction_of_etale Λ e i i' g hg M M' τ)).2 inferInstance
 
 /-- Products of Kummer boundaries which are Thom classes pull back to Thom classes along étale
 maps: if `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_n)` is a Thom class of `V(f) ⊂ U`, then for an étale `e : U' ⟶ U`,
@@ -142,6 +146,7 @@ lemma isIso_supportedClassMap_comp_eqToHom {U Z : Scheme.{u}} [HasInvertibleExpo
   subst hm
   simp
 
+omit [HasKummerClass Λ] in
 /-- A class supported everywhere which lifts an isomorphism `Λ_U ≅ L` through the counit is a
 Thom class. -/
 lemma isIso_supportedClassMap_liftCounitOfRangeEqUniv {U Z : Scheme.{u}} (i : Z ⟶ U)
@@ -209,7 +214,7 @@ theorem isIso_supportedClassMap_kummerBoundaryProduct_cons_coord {k : Type u} [F
   set i := A.zeroLocusSubschemeι (Set.range (Fin.cons t s' : Fin (c + 1) → Γ(A, ⊤)))
   have : HasInvertibleExponent Λ (A.zeroLocusSubscheme {t}) := .of_hom i₁
   have hrange : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base := by
-    rw [Fin.range_cons, range_zeroLocusSubschemeι_insert]
+    simp only [i, i₁, i₂, range_zeroLocusSubschemeι, Fin.range_cons, Scheme.zeroLocus_insert]
   rw [kummerBoundaryProduct_cons Λ t s']
   refine (isIso_supportedClassMap_comp_eqToHom Λ i (by push_cast; ring) _ _).2 ?_
   rw [cupWithSupportsTateObject, supportedClassMap_eq_supportedTranspose, supportedTranspose_comp]
@@ -231,7 +236,8 @@ theorem isIso_supportedClassMap_kummerBoundaryProduct_cons_coord {k : Type u} [F
   refine isIso_supportedTranspose_cupWithSupports Λ i₁ i₂ i hrange b₁
     (Scheme.Hom.liftZeroLocusSubscheme_zeroLocusSubschemeι _ _) b₂
     (Scheme.Hom.liftZeroLocusSubscheme_zeroLocusSubschemeι _ _) _ _ hg
-    ((isInvertible_tateObject Λ A c).shift _) (leftDerivedUpperStarTateShiftIso Λ i₁ c)
+    (DerivedCategory.isInvertible.shift (isInvertible_tateObject Λ A c) _)
+    (leftDerivedUpperStarTateShiftIso Λ i₁ c)
     (constantComplexDiagonal Λ A) _ _ ?_ ?_
   · exact HasKummerClass.IsNormalized.isIso_supportedClassMap_kummerBoundary_coord B aB
   · rw [restrictSupportedClass_kummerBoundaryProduct Λ i₁ s' s'' (fun _ ↦ rfl) _ hg]
@@ -288,7 +294,7 @@ For a closed immersion `s : Y ⟶ X` (in the blueprint, the zero section of `�
 
 By `AlgebraicGeometry.Etale.supportedClassMap_bijective` it is also
 `Hom(Λ_X, Rs_! Rs^! K[q])`, the classes with supports in `s(Y)`. -/
-abbrev SupportedCohomology {X Y : Scheme.{u}} (s : Y ⟶ X)
+abbrev SupportedCohomology {X Y : Scheme.{u}} (s : Y ⟶ X) [IsClosedImmersion s]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (q : ℤ) :
     Type (u + 1) :=
   constantComplex Λ Y ⟶ (R(s)^![ModuleCat.{u + 1} Λ]).obj (K⟦q⟧)

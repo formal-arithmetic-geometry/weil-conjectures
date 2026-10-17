@@ -83,9 +83,9 @@ theorem exists_functor_descent {C : Type*} [Category* C] [Finite C]
       (Over.pullback (c.π.app k₁)).map (φ ⟨y.1, y.2.2.1, y.2.2.2.1 ≫ y.2.2.2.2⟩) =
         (Over.pullback (c.π.app k₁)).map (φ ⟨y.1, y.2.1, y.2.2.2.1⟩ ≫
           φ ⟨y.2.1, y.2.2.1, y.2.2.2.2⟩) := fun y ↦ by
-    rw [← cancel_mono (eV₁ y.2.2.1).hom, hφ' ⟨y.1, y.2.2.1, _⟩, Functor.map_comp,
-      Category.assoc, hφ' ⟨y.2.1, y.2.2.1, _⟩, reassoc_of% (hφ' ⟨y.1, y.2.1, _⟩)]
-    simp
+    rw [← cancel_mono (eV₁ y.2.2.1).hom, hφ' ⟨y.1, y.2.2.1, _⟩,
+      (Over.pullback (c.π.app k₁)).map_comp,
+      Category.assoc, hφ' ⟨y.2.1, y.2.2.1, _⟩, reassoc_of% (hφ' ⟨y.1, y.2.1, _⟩), F.map_comp]
   obtain ⟨k₂, g, hg₁, hg₂⟩ := ((StageEventually.finite_forall fun a : C ↦ by
       obtain ⟨_, _, _, _⟩ := hV₁ a
       exact stageEventually_overPullback_map_eq D hc _ _ _ _ (hid a)).and
@@ -105,6 +105,7 @@ theorem exists_functor_descent {C : Type*} [Category* C] [Finite C]
   simp only [Functor.comp_map] at n
   simp only [Functor.comp_map, Iso.trans_hom, Iso.app_hom, G]
   rw [reassoc_of% n, hφ' ⟨a, b, f⟩]
+  exact (Category.assoc _ _ _).symm
 
 include hc in
 /-- A morphism between qcqs étale schemes over a stage whose base change to the limit is an
@@ -116,16 +117,17 @@ theorem stageEventually_isIso {i : I} {A B : Over (D.obj i)} (hA : IsQcqsEtale A
   obtain ⟨_, _, _, _⟩ := hB
   obtain ⟨j₁, h₁, φ, hφ⟩ := (stageEventually_exists_overPullback_hom D hc B A
     (inv ((Over.pullback (c.π.app i)).map w))).exists_hom
-  let S := overPullbackStageIso D c h₁
-  have nw := S.hom.naturality w
+  have nw := (overPullbackStageIso D c h₁).hom.naturality w
   simp only [Functor.comp_map] at nw
   have e₁ : (Over.pullback (c.π.app j₁)).map ((Over.pullback (D.map h₁)).map w ≫ φ) =
       (Over.pullback (c.π.app j₁)).map (𝟙 _) := by
-    rw [← cancel_mono (S.hom.app A), Functor.map_comp, Category.assoc, hφ, reassoc_of% nw]
+    rw [← cancel_mono ((overPullbackStageIso D c h₁).hom.app A),
+      Functor.map_comp, Category.assoc, hφ, reassoc_of% nw]
     simp
   have e₂ : (Over.pullback (c.π.app j₁)).map (φ ≫ (Over.pullback (D.map h₁)).map w) =
       (Over.pullback (c.π.app j₁)).map (𝟙 _) := by
-    rw [← cancel_mono (S.hom.app B), Functor.map_comp, Category.assoc, nw, reassoc_of% hφ]
+    rw [← cancel_mono ((overPullbackStageIso D c h₁).hom.app B),
+      Functor.map_comp, Category.assoc, nw, reassoc_of% hφ]
     simp
   have hA₁ := (show IsQcqsEtale A from ⟨‹_›, ‹_›, ‹_›, ‹_›⟩).overPullback (D.map h₁)
   have hB₁ := (show IsQcqsEtale B from ⟨‹_›, ‹_›, ‹_›, ‹_›⟩).overPullback (D.map h₁)
@@ -135,7 +137,8 @@ theorem stageEventually_isIso {i : I} {A B : Over (D.obj i)} (hA : IsQcqsEtale A
     (stageEventually_overPullback_map_eq D hc _ _ _ _ e₂)
   refine ⟨j₂, g₀ ≫ h₁, fun k g ↦ ?_⟩
   obtain ⟨H₁, H₂⟩ := H g
-  rw [Functor.map_comp, CategoryTheory.Functor.map_id] at H₁ H₂
+  rw [(Over.pullback (D.map (g ≫ g₀))).map_comp,
+    (Over.pullback (D.map (g ≫ g₀))).map_id] at H₁ H₂
   have : IsIso ((Over.pullback (D.map (g ≫ g₀))).map ((Over.pullback (D.map h₁)).map w)) :=
     ⟨_, H₁, H₂⟩
   rw [← Category.assoc]

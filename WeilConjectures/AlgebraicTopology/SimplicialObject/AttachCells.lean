@@ -237,7 +237,7 @@ lemma BoundaryCone.desc_comp_eq (c : BoundaryCone W n N) {Y : SimplicialObject C
     (g : W ⟶ Y) (f : N ⟶ Y _⦋n⦌) (h : c.postcomp g = BoundaryCone.ofSimplex f) :
     c.desc ≫ g = bdryIncl N n ≫ copowStdDesc f := by
   ext Δ : 2
-  refine Sigma.hom_ext _ _ (fun s ↦ ?_)
+  rename_i s
   simp only [NatTrans.comp_app, ι_desc_app_assoc, ι_bdryIncl_app_assoc, ι_copowStdDesc_app]
   rw [← BoundaryCone.descApp_ofSimplex, ← h, descApp_postcomp]
 
@@ -277,6 +277,7 @@ lemma hasPushout_sigmaMap'_subtype {A : Type} [Finite A] (p : A → Prop) (N : C
     simp [this]
 
 /-- In a pushout square whose right leg `g` is an isomorphism, the left leg is one too. -/
+omit [HasFiniteCoproducts C] in
 lemma isIso_inl_of_isColimit {W X Y Z : C} {f : W ⟶ X} {g : W ⟶ Y} {inl : X ⟶ Z}
     {inr : Y ⟶ Z} {w : f ≫ inl = g ≫ inr} (h : IsColimit (PushoutCocone.mk inl inr w))
     [IsIso g] : IsIso inl := by
@@ -287,14 +288,16 @@ lemma isIso_inl_of_isColimit {W X Y Z : C} {f : W ⟶ X} {g : W ⟶ Y} {inl : X 
     rw [reassoc_of% h₁, Category.comp_id]
   · have h₂ : inr ≫ d = inv g ≫ f := PushoutCocone.IsColimit.inr_desc h _ _ _
     change inr ≫ d ≫ inl = inr ≫ 𝟙 Z
-    rw [reassoc_of% h₂, Category.comp_id, Category.assoc, w, IsIso.inv_hom_id_assoc]
+    rw [reassoc_of% h₂, Category.comp_id, w, IsIso.inv_hom_id_assoc]
 
 variable {W : SimplicialObject C} {n : ℕ} {N : C} (c : BoundaryCone W n N)
 
 instance (k : SimplexCategoryᵒᵖ) :
     HasColimit ((span c.desc (bdryIncl N n)).flip.obj k) := by
-  have : HasPushout (c.desc.app k) ((bdryIncl N n).app k) :=
+  have h : HasPushout (c.desc.app k) ((bdryIncl N n).app k) :=
     hasPushout_sigmaMap'_subtype (fun s : k.unop ⟶ ⦋n⦌ ↦ ¬ Epi s) N _
+  have : HasColimit (span (((span c.desc (bdryIncl N n)).flip.obj k).map WalkingSpan.Hom.fst)
+      (((span c.desc (bdryIncl N n)).flip.obj k).map WalkingSpan.Hom.snd)) := h
   exact hasColimit_of_iso (diagramIsoSpan _)
 
 namespace BoundaryCone
@@ -340,7 +343,7 @@ lemma attachι_map {Δ : SimplexCategory} (θ : Δ ⟶ ⦋n⦌) (hθ : ¬ Epi θ
   rw [← ι_attachInr_app]
   have := Sigma.ι (fun _ : {s : Δ ⟶ ⦋n⦌ // ¬ Epi s} ↦ N) ⟨θ, hθ⟩ ≫=
     c.attach_condition_app (op Δ)
-  simp only [ι_desc_app_assoc, ι_bdryIncl_app_assoc] at this
+  rw [c.ι_desc_app_assoc (op Δ) ⟨θ, hθ⟩, ι_bdryIncl_app_assoc N n (op Δ) ⟨θ, hθ⟩] at this
   exact this.symm
 
 lemma postcomp_attachInl_eq :
@@ -375,7 +378,7 @@ lemma attach_hom_ext {Y : SimplicialObject C} {a b : c.attach ⟶ Y}
     a = b := by
   refine pushout.hom_ext h₁ ?_
   ext k : 2
-  refine Sigma.hom_ext _ _ (fun s ↦ ?_)
+  rename_i s
   change Sigma.ι (fun _ : k.unop ⟶ ⦋n⦌ ↦ N) s ≫ c.attachInr.app k ≫ a.app k =
     Sigma.ι (fun _ : k.unop ⟶ ⦋n⦌ ↦ N) s ≫ c.attachInr.app k ≫ b.app k
   rw [ι_attachInr_app_assoc, ι_attachInr_app_assoc, a.naturality, b.naturality,

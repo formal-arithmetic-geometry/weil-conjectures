@@ -70,7 +70,7 @@ noncomputable def cechCosimplicialObjectIsoOfPreservesFiniteProducts :
     have h₁ : β.hom.app (op (cechNerveObj U₀ y))
         (P.map (cechNerveMap U₀ y θ.toOrderHom).left.op (c (y ∘ θ.toOrderHom))) =
         P'.map (G.map (cechNerveMap U₀ y θ.toOrderHom)).left.op
-          (β.hom.app _ (c (y ∘ θ.toOrderHom))) :=
+          (β.hom.app (op (cechNerveObj U₀ (y ∘ θ.toOrderHom))) (c (y ∘ θ.toOrderHom))) :=
       ConcreteCategory.congr_hom (β.hom.naturality (cechNerveMap U₀ y θ.toOrderHom).op)
         (c (y ∘ θ.toOrderHom))
     change P'.map (cechNerveObjIso G U₀ U e y).hom.left.op
@@ -90,6 +90,8 @@ noncomputable def cechComplexIsoOfPreservesFiniteProducts :
   (AlgebraicTopology.alternatingCofaceMapComplex _).mapIso
     (cechCosimplicialObjectIsoOfPreservesFiniteProducts G U₀ U e P P' β)
 
+include G e β in
+/-- Exactness of Čech complexes transfers along `CategoryTheory.Presheaf.cechComplexIsoOfPreservesFiniteProducts`. -/
 lemma exactAt_cechComplex_of_preservesFiniteProducts (q : ℕ)
     (h : ((cechComplex U₀).obj P).ExactAt q) : ((cechComplex U).obj P').ExactAt q :=
   h.of_iso (cechComplexIsoOfPreservesFiniteProducts G U₀ U e P P' β)

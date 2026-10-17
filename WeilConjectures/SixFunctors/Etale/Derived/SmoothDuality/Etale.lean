@@ -232,19 +232,39 @@ lemma isInvertible_dualizingComplex_of_isOpenImmersion {U X : Scheme.{u}} (j : U
   .of_iso (nonempty_dualizingComplex_iso_of_isOpenImmersion j).some.symm
     (DerivedCategory.isInvertible_unit Λ U)
 
+/-- The diagonal `V ⟶ V ×_W V` of `e : V ⟶ W`, with its target written as the pullback (this
+keeps the target of `pullback.diagonal e`, the definition `pullback.diagonalObj e`, from being
+unfolded inside the derived categories). -/
+noncomputable def diagonalToPullback {V W : Scheme.{u}} (e : V ⟶ W) : V ⟶ pullback e e :=
+  pullback.diagonal e
+
+@[reassoc (attr := simp)]
+lemma diagonalToPullback_fst {V W : Scheme.{u}} (e : V ⟶ W) :
+    diagonalToPullback e ≫ pullback.fst e e = 𝟙 V :=
+  pullback.diagonal_fst e
+
+@[reassoc (attr := simp)]
+lemma diagonalToPullback_snd {V W : Scheme.{u}} (e : V ⟶ W) :
+    diagonalToPullback e ≫ pullback.snd e e = 𝟙 V :=
+  pullback.diagonal_snd e
+
+instance {V W : Scheme.{u}} (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] :
+    IsOpenImmersion (diagonalToPullback e) :=
+  inferInstanceAs (IsOpenImmersion (pullback.diagonal e))
+
 theorem isIso_rightDerivedUpperShriek_diagonal_map_dualizingComplexTensorMap_snd_aux
     {V W : Scheme.{u}} (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] [QuasiCompact e]
-    [HasCompactification e] [HasCompactification (pullback.diagonal e)]
+    [HasCompactification e] [HasCompactification (diagonalToPullback e)]
     (P : _root_.DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hΔ : ∀ Q, IsIso (dualizingComplexTensorMap Λ (pullback.diagonal e) Q))
+    (hΔ : ∀ Q, IsIso (dualizingComplexTensorMap Λ (diagonalToPullback e) Q))
     (hid : IsIso (dualizingComplexTensorMap Λ (𝟙 V) P)) :
-    IsIso ((R(pullback.diagonal e)^![ModuleCat.{u + 1} Λ]).map
+    IsIso ((R(diagonalToPullback e)^![ModuleCat.{u + 1} Λ]).map
       (dualizingComplexTensorMap Λ (pullback.snd e e) P)) := by
-  obtain ⟨E, hPF, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
-  exact isIso_map_dualizingComplexTensorMapOfIsIso_of_comp (pullback.diagonal e)
-    (pullback.snd e e) (𝟙 V) (pullback.diagonal_snd e) (E _ _ _ (pullback.diagonal_snd e))
-    (hPF _ _ _ (pullback.diagonal_snd e))
-    (projectionMapAssociativity Λ (pullback.diagonal e)) hΔ P hid
+  have : HasCompactification (diagonalToPullback e ≫ pullback.snd e e) :=
+    ((HasCompactification.compactification _).precomp (diagonalToPullback e)).hasCompactification
+  exact isIso_rightDerivedUpperShriek_map_dualizingComplexTensorMap_of_comp Λ (diagonalToPullback e)
+    (pullback.snd e e) _ rfl hΔ P
+    ((isIso_dualizingComplexTensorMap_iff_of_eq Λ (diagonalToPullback_snd e) P).2 hid)
 
 /-- The diagonal step of smooth duality for étale morphisms, before pullback: for a
 quasi-compact étale `e : V ⟶ W`, with the exponent of `Λ` invertible on `V`, the tensor maps of
@@ -252,12 +272,12 @@ the second projection `pr₂ : V ×_W V ⟶ V` become isomorphisms after `RΔ^!`
 `Δ`, an open immersion with `Δ ≫ pr₂ = 𝟙_V`. -/
 theorem isIso_rightDerivedUpperShriek_diagonal_map_dualizingComplexTensorMap_snd
     {V W : Scheme.{u}} (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] [QuasiCompact e]
-    [HasCompactification e] [HasCompactification (pullback.diagonal e)]
+    [HasCompactification e] [HasCompactification (diagonalToPullback e)]
     [HasInvertibleExponent Λ V]
     (P : _root_.DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso ((R(pullback.diagonal e)^![ModuleCat.{u + 1} Λ]).map
+    IsIso ((R(diagonalToPullback e)^![ModuleCat.{u + 1} Λ]).map
       (dualizingComplexTensorMap Λ (pullback.snd e e) P)) := by
-  have hΔ := isIso_dualizingComplexTensorMap_of_isOpenImmersion (Λ := Λ) (pullback.diagonal e)
+  have hΔ := isIso_dualizingComplexTensorMap_of_isOpenImmersion (Λ := Λ) (diagonalToPullback e)
   have hid := isIso_dualizingComplexTensorMap_id Λ V P
   exact isIso_rightDerivedUpperShriek_diagonal_map_dualizingComplexTensorMap_snd_aux e P hΔ hid
 
@@ -269,14 +289,14 @@ theorem isIso_leftDerivedUpperStar_diagonal_map_dualizingComplexTensorMap_snd {V
     (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] [QuasiCompact e] [HasCompactification e]
     [HasInvertibleExponent Λ V]
     (P : _root_.DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso ((L((pullback.diagonal e)^*[ModuleCat.{u + 1} Λ])).map
+    IsIso ((L((diagonalToPullback e)^*[ModuleCat.{u + 1} Λ])).map
       (dualizingComplexTensorMap Λ (pullback.snd e e) P)) := by
-  have : HasCompactification (pullback.diagonal e) :=
+  have : HasCompactification (diagonalToPullback e) :=
     (Compactification.ofIsOpenImmersion _).hasCompactification
   exact isIso_leftDerivedUpperStar_map_of_isIso_rightDerivedUpperShriek_map
-    (pullback.diagonal e) (isIso_dualizingComplexTensorMap_of_isOpenImmersion (pullback.diagonal e))
+    (diagonalToPullback e) (isIso_dualizingComplexTensorMap_of_isOpenImmersion (diagonalToPullback e))
     ((isInvertible_iff_exists_derivedTensor _).2
-      (isInvertible_dualizingComplex_of_isOpenImmersion (pullback.diagonal e))) _
+      (isInvertible_dualizingComplex_of_isOpenImmersion (diagonalToPullback e))) _
     (isIso_rightDerivedUpperShriek_diagonal_map_dualizingComplexTensorMap_snd e P)
 
 /-- **Smooth duality for étale morphisms.** For a quasi-compact étale morphism `e : V ⟶ W`
@@ -297,11 +317,11 @@ theorem isIso_dualizingComplexTensorMap_of_etale {V W : Scheme.{u}} (e : V ⟶ W
   have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ e 0 sq
   -- the object `Le^* K` is left to unification, so that it is the one of the base change lemma
   have h₃ := isIso_map_leftDerivedUpperStar_map_dualizingComplexTensorMap_of_isPullback sq
-    (L((pullback.diagonal e)^*[ModuleCat.{u + 1} Λ])) K
+    (L((diagonalToPullback e)^*[ModuleCat.{u + 1} Λ])) K
     (isIso_leftDerivedUpperStar_diagonal_map_dualizingComplexTensorMap_snd e _)
   exact (NatIso.isIso_map_iff ((leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) V).symm ≪≫
-    leftDerivedUpperStarComp _ (pullback.diagonal e) (pullback.fst e e) (𝟙 V)
-      (pullback.diagonal_fst e).symm) _).2 h₃
+    leftDerivedUpperStarComp _ (diagonalToPullback e) (pullback.fst e e) (𝟙 V)
+      (diagonalToPullback_fst e).symm) _).2 h₃
 
 /-- For an étale morphism `e : V ⟶ W` admitting a compactification, with the exponent of `Λ`
 invertible on `V`, the dualizing complex is trivial:
@@ -312,16 +332,16 @@ theorem nonempty_dualizingComplex_iso_of_etale {V W : Scheme.{u}} (e : V ⟶ W)
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) e ≅ 𝟙_ _) := by
   have sq := IsPullback.of_hasPullback e e
   obtain ⟨b⟩ := nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar Λ e 0 sq
-  have : HasCompactification (pullback.diagonal e) :=
+  have : HasCompactification (diagonalToPullback e) :=
     (Compactification.ofIsOpenImmersion _).hasCompactification
-  obtain ⟨c⟩ := nonempty_dualizingComplex_comp_iso_leftDerivedUpperStar Λ (pullback.diagonal e)
-    (pullback.snd e e) (𝟙 V) (pullback.diagonal_snd e)
+  obtain ⟨c⟩ := nonempty_dualizingComplex_comp_iso_leftDerivedUpperStar Λ (diagonalToPullback e)
+    (pullback.snd e e) (𝟙 V) (diagonalToPullback_snd e)
     (isIso_dualizingComplexTensorMap_of_isOpenImmersion _ _)
     (nonempty_dualizingComplex_iso_of_isOpenImmersion _)
   exact ⟨(leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) V).symm.app _ ≪≫
-    (leftDerivedUpperStarComp _ (pullback.diagonal e) (pullback.fst e e) (𝟙 V)
-      (pullback.diagonal_fst e).symm).app _ ≪≫
-    (L((pullback.diagonal e)^*[ModuleCat.{u + 1} Λ])).mapIso (b.app (𝟙_ _) ≪≫
+    (leftDerivedUpperStarComp _ (diagonalToPullback e) (pullback.fst e e) (𝟙 V)
+      (diagonalToPullback_fst e).symm).app _ ≪≫
+    (L((diagonalToPullback e)^*[ModuleCat.{u + 1} Λ])).mapIso (b.app (𝟙_ _) ≪≫
       (R(pullback.snd e e)^![ModuleCat.{u + 1} Λ]).mapIso
         (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ) e)) ≪≫
     c.symm ≪≫ (nonempty_dualizingComplex_id_iso Λ V).some⟩

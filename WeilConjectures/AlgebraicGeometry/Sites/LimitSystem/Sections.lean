@@ -385,11 +385,11 @@ include hc in
 /-- **Sections of the colimit of a system, injectivity.** A section `t` of `Fⱼ` over
 `U ×_{D_{i₀}} Dⱼ` whose image in the sections of `L` over `U ×_{D_{i₀}} X` vanishes is killed by
 a compatible transition to a later stage. -/
-lemma exists_stageTransition_app_eq_zero {i₀ j : I} (U : (D.obj (op i₀)).Etale)
+lemma exists_stageTransition_stageTransition_app_eq_zero {i₀ j : I} (U : (D.obj (op i₀)).Etale)
     [CompactSpace U.left] [QuasiSeparatedSpace U.left] (f : i₀ ⟶ j)
     (t : (S.stageSheaf f).obj.obj (op U)) (ht : (S.stageMap f).hom.app (op U) t = 0) :
-    ∃ (l : I) (f' : i₀ ⟶ l) (ψ : S.stageSheaf f ⟶ S.stageSheaf f'),
-      ψ ≫ S.stageMap f' = S.stageMap f ∧ ψ.hom.app (op U) t = 0 := by
+    ∃ (k : I) (a : j ⟶ k) (l : I) (b : k ⟶ l), (S.stageTransition (f ≫ a) b).hom.app (op U)
+      ((S.stageTransition f a).hom.app (op U) t) = 0 := by
   have := isAffineHom_π_app D c hc
   obtain ⟨_, _⟩ := compactSpace_and_quasiSeparatedSpace_pullback_left (c.π.app (op i₀)) U
   let n₀ := (((lowerStar AddCommGrpCat.{u + 1} (D.map f.op)).map
@@ -416,11 +416,23 @@ lemma exists_stageTransition_app_eq_zero {i₀ j : I} (U : (D.obj (op i₀)).Eta
   obtain ⟨_, _⟩ := compactSpace_and_quasiSeparatedSpace_pullback_left (D.map (f ≫ a).op) U
   obtain ⟨l, b, hb⟩ := exists_unit_app_eq_zero_of_isLimit hc k (S.F k)
     ((MorphismProperty.Over.pullback @Etale ⊤ (D.map (f ≫ a).op)).obj U) x hx
-  refine ⟨l, (f ≫ a) ≫ b, S.stageTransition f a ≫ S.stageTransition (f ≫ a) b, ?_, ?_⟩
-  · rw [Category.assoc, S.stageTransition_stageMap, S.stageTransition_stageMap]
-  · have := congrArg ((S.pushTransition (f ≫ a) b).hom.app (op U)) hb
-    rw [map_zero] at this
-    exact this
+  refine ⟨k, a, l, b, ?_⟩
+  have := congrArg ((S.pushTransition (f ≫ a) b).hom.app (op U)) hb
+  rw [map_zero] at this
+  exact this
+
+include hc in
+/-- **Sections of the colimit of a system, injectivity.** A section `t` of `Fⱼ` over
+`U ×_{D_{i₀}} Dⱼ` whose image in the sections of `L` over `U ×_{D_{i₀}} X` vanishes is killed by
+a compatible transition to a later stage. -/
+lemma exists_stageTransition_app_eq_zero {i₀ j : I} (U : (D.obj (op i₀)).Etale)
+    [CompactSpace U.left] [QuasiSeparatedSpace U.left] (f : i₀ ⟶ j)
+    (t : (S.stageSheaf f).obj.obj (op U)) (ht : (S.stageMap f).hom.app (op U) t = 0) :
+    ∃ (l : I) (f' : i₀ ⟶ l) (ψ : S.stageSheaf f ⟶ S.stageSheaf f'),
+      ψ ≫ S.stageMap f' = S.stageMap f ∧ ψ.hom.app (op U) t = 0 := by
+  obtain ⟨k, a, l, b, h⟩ := S.exists_stageTransition_stageTransition_app_eq_zero hc U f t ht
+  refine ⟨l, (f ≫ a) ≫ b, S.stageTransition f a ≫ S.stageTransition (f ≫ a) b, ?_, h⟩
+  rw [Category.assoc, S.stageTransition_stageMap, S.stageTransition_stageMap]
 
 end SystemData
 

@@ -59,13 +59,6 @@ variable {𝒳 𝒵 𝒱 : Type*} [Category 𝒳] [Category 𝒵] [Category 𝒱
 
 section Sheaves
 
-include adjI in
-/-- An exact functor sends the kernel of a morphism `u` to the kernel of its image; if the image
-of `u` is a monomorphism, the image of `kernel u` is zero. -/
-lemma isZero_obj_kernel_of_mono {F : 𝒳 ⥤ 𝒵} [F.Additive] [PreservesFiniteLimits F] {M N : 𝒳}
-    (u : M ⟶ N) [Mono (F.map u)] : IsZero (F.obj (kernel u)) :=
-  (isZero_kernel_of_mono (F.map u)).of_iso (PreservesKernel.iso F u)
-
 /-- If the counit of `j^* ⊣ j_*` is invertible, `j^*` inverts the unit `M ⟶ j_* j^* M`. -/
 lemma isIso_map_unit_app (M : 𝒳) : IsIso (jUp.map (adjJ.unit.app M)) := by
   have : IsIso (jUp.map (adjJ.unit.app M) ≫ adjJ.counit.app (jUp.obj M)) := by
