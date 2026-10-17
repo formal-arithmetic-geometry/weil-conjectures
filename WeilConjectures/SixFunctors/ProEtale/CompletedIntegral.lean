@@ -10,8 +10,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.OfSequence
+public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 
 /-!
@@ -31,12 +31,11 @@ On the pro-étale site the constant sheaf of rings with value a discrete ring `A
 continuous (that is, locally constant) functions `U ↦ C(U, A)` (Bhatt–Scholze, Lemma 4.2.12);
 on the small étale site this is `AlgebraicGeometry.Scheme.Etale.constantSheafIsoContinuousMapSheaf`.
 We take this as the definition of `(A_{E,n})_Y` as a sheaf of rings
-(`AlgebraicGeometry.ProEtale.reductionRingSheaf`).
+(`AlgebraicGeometry.ProEtale.reductionRingSheaf`), using the sheaf of rings
+`AlgebraicGeometry.ProEtale.continuousMapRingSheaf` of continuous maps into a topological ring.
 
 ## Main definitions
 
-- `AlgebraicGeometry.ProEtale.continuousFunctionRingSheaf`: the sheaf of rings `U ↦ C(U, T)` on
-  `Y_proét` for a topological ring `T`.
 - `AlgebraicGeometry.ProEtale.reductionRingSheaf`: the sheaf of rings `(Λ ⧸ Iⁿ)_Y`.
 - `AlgebraicGeometry.ProEtale.reductionRingSheafMap`: the reduction `(Λ ⧸ Iⁿ⁺¹)_Y ⟶ (Λ ⧸ Iⁿ)_Y`.
 - `AlgebraicGeometry.ProEtale.completedIntegralSheaf`: `𝒪̂_{E,Y} = lim_n (Λ ⧸ Iⁿ)_Y`.
@@ -61,38 +60,7 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-variable (Y : Scheme.{u})
-
-section ContinuousMap
-
-variable (T : Type (u + 1)) [TopologicalSpace T] [Ring T] [IsTopologicalRing T]
-
-/-- The sheaf of rings `U ↦ C(U, T)` of continuous functions with values in a topological ring
-`T` on the small pro-étale site of `Y`: the restriction of the fpqc sheaf
-`AlgebraicGeometry.continuousMapPresheafRing`. -/
-noncomputable def continuousFunctionRingSheaf : Sheaf (Scheme.ProEt.topology Y) RingCat.{u + 1} :=
-  ((Scheme.ProEt.forget Y ⋙ Over.forget _).sheafPushforwardContinuous _ _
-    Scheme.proetaleTopology).obj
-    ⟨continuousMapPresheafRing T, .of_le Scheme.proetaleTopology_le_fpqcTopology
-      (isSheaf_fpqcTopology_continuousMapPresheafRing T)⟩
-
-/-- The sections of `C(-, T)` over `U` are the continuous functions `U → T`. -/
-lemma continuousFunctionRingSheaf_obj_obj (U : Y.ProEt) :
-    (continuousFunctionRingSheaf Y T).obj.obj (op U) = RingCat.of C(U.left, T) :=
-  rfl
-
-variable {T} {T' : Type (u + 1)} [TopologicalSpace T'] [Ring T'] [IsTopologicalRing T']
-
-/-- The morphism of sheaves of rings `C(-, T) ⟶ C(-, T')` induced by a continuous ring
-homomorphism. -/
-noncomputable def continuousFunctionRingSheafMap (φ : T →+* T') (hφ : Continuous φ) :
-    continuousFunctionRingSheaf Y T ⟶ continuousFunctionRingSheaf Y T' :=
-  ((Scheme.ProEt.forget Y ⋙ Over.forget _).sheafPushforwardContinuous _ _
-    Scheme.proetaleTopology).map ⟨continuousMapPresheafRingMap φ hφ⟩
-
-end ContinuousMap
-
-variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ)
+variable (Y : Scheme.{u}) {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ)
 
 /-- The discrete topology on `Λ ⧸ Iⁿ`. -/
 abbrev reductionTopology (n : ℕ) : TopologicalSpace (Λ ⧸ I ^ n) := ⊥
@@ -106,7 +74,7 @@ lemma discreteTopology_reductionTopology (n : ℕ) :
 `def-weil-finite-torsion-constructibility`): the sheaf of locally constant functions
 `U ↦ C(U, Λ ⧸ Iⁿ)` for the discrete topology. -/
 noncomputable def reductionRingSheaf (n : ℕ) : Sheaf (Scheme.ProEt.topology Y) RingCat.{u + 1} :=
-  @continuousFunctionRingSheaf Y (Λ ⧸ I ^ n) (reductionTopology I n) _
+  @continuousMapRingSheaf Y (Λ ⧸ I ^ n) (reductionTopology I n) _
     (@DiscreteTopology.topologicalRing _ (reductionTopology I n) _
       (discreteTopology_reductionTopology I n))
 
@@ -114,7 +82,7 @@ noncomputable def reductionRingSheaf (n : ℕ) : Sheaf (Scheme.ProEt.topology Y)
 `Λ ⧸ Iⁿ⁺¹ ↠ Λ ⧸ Iⁿ`. -/
 noncomputable def reductionRingSheafMap (n : ℕ) :
     reductionRingSheaf Y I (n + 1) ⟶ reductionRingSheaf Y I n :=
-  @continuousFunctionRingSheafMap Y (Λ ⧸ I ^ (n + 1)) (reductionTopology I (n + 1)) _
+  @continuousMapRingSheafMap Y (Λ ⧸ I ^ (n + 1)) (reductionTopology I (n + 1)) _
     (@DiscreteTopology.topologicalRing _ (reductionTopology I (n + 1)) _
       (discreteTopology_reductionTopology I (n + 1)))
     (Λ ⧸ I ^ n) (reductionTopology I n) _

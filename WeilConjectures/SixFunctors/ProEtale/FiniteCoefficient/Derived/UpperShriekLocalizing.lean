@@ -17,9 +17,10 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tor
 /-!
 # The exceptional inverse image on `Loc(Dctf)`, finite coefficients
 
-Let `Λ` be a finite commutative ring and `k` a field. For a scheme `X` the localizing closure
-`Loc(Dctf(X, Λ))` (blueprint `sk-def-localizing-closure`) is the smallest triangulated
-subcategory of `D(X_proét, Λ)` containing `Dctf(X, Λ)` and closed under direct sums
+Let `Λ` be a finite commutative ring and `k` a field which is finite or separably closed, so
+that `cd_ℓ(k)` is finite (the standing base field of the blueprint). For a scheme `X` the
+localizing closure `Loc(Dctf(X, Λ))` (blueprint `sk-def-localizing-closure`) is the smallest
+triangulated subcategory of `D(X_proét, Λ)` containing `Dctf(X, Λ)` and closed under direct sums
 (`AlgebraicGeometry.ProEtale.DerivedCategory.localizingConstructibleFiniteTor`). It is
 pretriangulated and has direct sums, computed in `D(X_proét, Λ)`.
 
@@ -254,7 +255,8 @@ instance (J : Type (u + 1)) :
 
 include hk aX in
 /-- Blueprint `sk-prop-sf-existence`: Existence of the exceptional inverse image, for a finite
-coefficient ring `Λ` whose exponent is invertible on separated finite-type `k`-schemes `X`, `Y`.
+coefficient ring `Λ` whose exponent is invertible on separated finite-type `k`-schemes `X`, `Y`,
+over a field `k` which is finite or separably closed.
 For a compactification `c` of `f : X ⟶ Y`, the coproduct-preserving functor
 `Rf_! : Loc(Dctf(X, Λ)) ⥤ Loc(Dctf(Y, Λ))` has a right adjoint `f^!`, which commutes with
 shifts compatibly with the adjunction, is exact (triangulated), preserves direct sums and is
@@ -270,7 +272,8 @@ theorem exists_rightAdjoint_rightDerivedLowerShriekLocalizing :
           adj'.counit.app N = adj.counit.app N :=
   ⟨_, rightDerivedUpperShriekLocalizingAdjunction Λ hk aX aY c, inferInstance, inferInstance,
     inferInstance, fun _ ↦ inferInstance,
-    fun _ ↦ (rightDerivedUpperShriekLocalizingAdjunction Λ hk aX aY c).existsUnique_iso_comp_counit⟩
+    fun _ ↦
+      (rightDerivedUpperShriekLocalizingAdjunction Λ hk aX aY c).existsUnique_iso_comp_counit⟩
 
 end UpperShriek
 

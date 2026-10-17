@@ -5,11 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FiniteCohomologicalDimension
+public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimensionAmplitude
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.CoproductTriangle
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedSupportTriangle
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
+public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegral
 
 /-!
 # The exceptional inverse image along a closed immersion commutes with coproducts
@@ -45,22 +46,6 @@ namespace Etale
 variable {Λ : Type (u + 1)} [CommRing Λ] {Z U X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
   [HasCompactification i] (j : U ⟶ X) [IsOpenImmersion j]
   (hij : Set.range i.base = (Set.range j.base)ᶜ)
-
-omit [HasCompactification i] in
-/-- The direct image along a closed immersion is fully faithful on the unbounded derived
-categories of étale sheaves of modules. -/
-instance full_rightDerivedFunctor_lowerStar_of_isClosedImmersion :
-    ((i)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctor.Full :=
-  have : ((i)_*[ModuleCat.{u + 1} Λ]).PreservesKInjectiveComplexes :=
-    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).preservesKInjectiveComplexes
-  inferInstance
-
-omit [HasCompactification i] in
-instance faithful_rightDerivedFunctor_lowerStar_of_isClosedImmersion :
-    ((i)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctor.Faithful :=
-  have : ((i)_*[ModuleCat.{u + 1} Λ]).PreservesKInjectiveComplexes :=
-    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).preservesKInjectiveComplexes
-  inferInstance
 
 variable [QuasiCompact j]
 
@@ -111,8 +96,7 @@ theorem isIso_sigmaComparison_rightDerivedFunctor_closedUpperShriek
   have hzero (N : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
       (Y : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
       (h : F.obj N ⟶ (R.obj Y)⟦(-1 : ℤ)⟧) : h = 0 := by
-    have hz := isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_of_disjoint
-      (ModuleCat.{u + 1} Λ) j i hgi N
+    have hz := isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj (Λ := Λ) i j hgi.symm N
     have h1 : h ≫ (R.commShiftIso (-1 : ℤ)).inv.app Y = 0 := by
       rw [← (adj'.homEquiv _ _).apply_symm_apply (h ≫ _),
         hz.eq_of_src ((adj'.homEquiv _ _).symm _) 0]
@@ -159,8 +143,8 @@ theorem exists_isLE_rightDerivedFunctor_closedUpperShriek
       (n : ℤ), K.IsLE n →
         ((closedUpperShriek (ModuleCat.{u + 1} Λ) i j).rightDerivedFunctor.obj K).IsLE (n + c) := by
   obtain ⟨d, hd⟩ := hj
-  have hcd : (Etale.lowerStar (ModuleCat.{u + 1} Λ) j).HasRightCohomologicalDimensionLE
-      d.toNat := fun q F hq ↦
+  have hcd : ∀ (F : Sheaf _ (ModuleCat.{u + 1} Λ)) (q : ℕ), d.toNat < q →
+      IsZero (((Etale.lowerStar (ModuleCat.{u + 1} Λ) j).rightDerived q).obj F) := fun F q hq ↦
     Functor.isZero_rightDerived_of_isZero_homology _ F q (hd F q (by lia))
   refine ⟨d.toNat + 1, fun K n hK ↦ ?_⟩
   let F := ((i)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctor
@@ -171,7 +155,8 @@ theorem exists_isLE_rightDerivedFunctor_closedUpperShriek
   have hL : ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K).IsLE n :=
     DerivedCategory.TStructure.t.isLE_of_iso
       ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j).app K).symm n
-  have hB := hcd.isLE_rightDerivedFunctor_obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K) n
+  have hB := Functor.isLE_rightDerivedFunctor_obj _ d.toNat hcd
+    ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K) n
   have hB' : (((R((j)_*[ModuleCat.{u + 1} Λ])).obj
       ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K))⟦(-1 : ℤ)⟧).IsLE (n + (d.toNat + 1)) :=
     DerivedCategory.TStructure.t.isLE_shift _ (n + d.toNat) (-1) _ (by lia)

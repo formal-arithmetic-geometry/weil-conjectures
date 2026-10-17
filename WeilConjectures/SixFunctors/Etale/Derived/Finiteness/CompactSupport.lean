@@ -27,14 +27,14 @@ stalks of such a complex (`sk-prop-sf-trace-perfectness`, `prop-trf-compact-supp
 
 `sk-prop-sf-trace-perfectness` concludes that `RΓ_c(X, K)` is *perfect*: bounded, with finite
 cohomology modules, and of finite Tor amplitude. The three are proved separately below, finite
-Tor amplitude in the sense of `DerivedCategory.finiteTorAmplitude` for `D(ModuleCat Λ)`, and
-assembled into perfectness by `DerivedCategory.isPerfect_of_finiteTorAmplitude`. The geometric
+Tor amplitude in the sense of `DerivedCategory.finiteTorAmplitude` for `D(ModuleCat Λ)`; they
+are assembled into perfectness in `WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect`
+(`AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections`). The geometric
 stalk `RΓ(Spec Ω, Lx̄^* K)` is perfect because `Lx̄^*` preserves `Dctf` and `RΓ` on a separably
 closed point carries `Dctf` into perfect complexes.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_of_isSepClosed`
 - `AlgebraicGeometry.Etale.isPerfect_geometricStalk`
 - `AlgebraicGeometry.Etale.isZero_compactlySupportedCohomology_of_lt`
 - `AlgebraicGeometry.Etale.finite_compactlySupportedCohomology`
@@ -216,29 +216,6 @@ theorem finiteTorAmplitude_compactlySupportedGlobalSections
       (by lia)
   exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_iso e.symm a,
     _root_.DerivedCategory.TStructure.t.isLE_of_iso e.symm (b + 2 * d)⟩
-
-omit [IsSeparated aX] in
-/-- Blueprint `prop-trf-compact-support-perfectness`: Compact-support perfectness (compactly
-supported cohomology).
-
-Also blueprint `sk-prop-sf-trace-perfectness`: Perfectness of compact cohomology and of
-geometric stalks.
-
-Let `Λ` be a finite coefficient ring whose exponent is invertible on `X` (for instance
-`Λ = A_{E,n}`), `k` separably closed, `X` separated of finite type over `k` with structure
-morphism `a_X`, and `K ∈ D^b_{ctf}(X, Λ)`. Then `RΓ_c(X, K)` is a perfect complex of
-`Λ`-modules: it is bounded, has finite cohomology modules and finite Tor amplitude. -/
-theorem isPerfect_compactlySupportedGlobalSections_of_isSepClosed
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) :
-    ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K).IsPerfect := by
-  obtain ⟨a, b, hab⟩ := isZero_compactlySupportedCohomology_of_lt Λ aX K hK
-  refine _root_.DerivedCategory.isPerfect_of_finiteTorAmplitude
-    ((_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1
-      ⟨a, b, (_root_.DerivedCategory.isGE_iff _ a).2 fun q hq ↦ hab q (.inl hq),
-        (_root_.DerivedCategory.isLE_iff _ b).2 fun q hq ↦ hab q (.inr hq)⟩)
-    (finite_compactlySupportedCohomology Λ aX K hK)
-    (finiteTorAmplitude_compactlySupportedGlobalSections Λ aX K hK)
 
 end Perfectness
 

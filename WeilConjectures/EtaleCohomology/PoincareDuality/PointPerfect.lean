@@ -104,6 +104,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [I
 
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
 
+Also blueprint `prop-trf-compact-support-perfectness`: Compact-support perfectness (compactly
+supported cohomology).
+
 **`RΓ_c(X, K)` is perfect.** Let `Λ` be a finite ring whose exponent is invertible in the
 separably closed field `k`, `X` separated of finite type over `k` and `K ∈ Dctf(X, Λ)`. Then
 `RΓ_c(X, K)` is a perfect complex of `Λ`-modules: it is bounded with finite cohomology modules

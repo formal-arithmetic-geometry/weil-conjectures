@@ -35,7 +35,6 @@ constructibility is needed, and the main statement does not assume them.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.torAmplitudeIn_iff_homologyConcentratedIn_tensor_residueField`
-- `AlgebraicGeometry.Etale.torAmplitudeIn_iff_of_boundedConstructible`
 -/
 
 @[expose] public section
@@ -149,21 +148,6 @@ theorem torAmplitudeIn_iff_homologyConcentratedIn_tensor_residueField {a b : ℤ
     _root_.DerivedCategory.homologyConcentratedIn_tensor_iff_exactAt hPk e]
   exact ⟨fun h ↦ h _, fun h F q hq ↦
     exactAt_tensorRight_of_exactAt_tensorRight_residueFieldSheaf P hP q (h q hq) F⟩
-
-/-- Blueprint `lem-exc-residue-tor-test`: Testing finite Tor amplitude at the residue field.
-
-The statement of the blueprint: for an Artinian local ring `Λ` with residue field `κ` (for
-instance `A = 𝒪_E/ϖⁿ`) and a bounded complex `K` with constructible cohomology on `X_ét`, `K` has
-Tor amplitude in `[a, b]` if and only if `K ⊗ᴸ κ_X` has cohomology in `[a, b]`. It is the case of
-`AlgebraicGeometry.Etale.torAmplitudeIn_iff_homologyConcentratedIn_tensor_residueField`, which
-does not use the hypothesis on `K`. -/
-theorem torAmplitudeIn_iff_of_boundedConstructible {a b : ℤ}
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (_hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
-    DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K ↔
-      _root_.DerivedCategory.homologyConcentratedIn a b
-        (K ⊗ (_root_.DerivedCategory.singleFunctor _ 0).obj (residueFieldSheaf X)) :=
-  torAmplitudeIn_iff_homologyConcentratedIn_tensor_residueField K
 
 end Etale
 

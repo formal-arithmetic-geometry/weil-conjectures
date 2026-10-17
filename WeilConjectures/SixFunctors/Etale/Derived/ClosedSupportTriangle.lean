@@ -19,23 +19,18 @@ modules (`AlgebraicGeometry.Etale.derivedLowerStarClosedUpperShriekAdjunction`, 
 * the closed-support triangle `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (i_* Ri^! K)[1]` for every `K`
   (blueprint `lem-exc-closed-support-triangle`), deduced from the supported localization
   triangle `AlgebraicGeometry.Etale.existsUnique_distTriang_supportedLocalization` along
-  `Ri_! ≅ Ri_*` and the uniqueness of right adjoints;
-* for an open immersion `g`, the counit `Lg^* Rg_* ⟶ 𝟭` is an isomorphism, and
-  `Lg^* Ri_* = 0` for a morphism `i` with range disjoint from that of `g` (blueprint
-  `lem-exc-open-fully-faithful`).
+  `Ri_! ≅ Ri_*` and the uniqueness of right adjoints.
 
 No constructibility is used anywhere.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.exists_distTriang_closedSupport`
-- `AlgebraicGeometry.Etale.isIso_counit_derivedUpperStarLowerStarAdjunction_of_isOpenImmersion`
-- `AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_of_disjoint`
 -/
 
 @[expose] public section
 
-universe u' u
+universe u
 
 open CategoryTheory Limits Pretriangulated
 
@@ -76,54 +71,6 @@ namespace AlgebraicGeometry
 namespace Etale
 
 open Scheme
-
-section OpenImmersion
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A]
-
-/-- Blueprint `lem-exc-open-fully-faithful`, first half: for an open immersion `g : V ⟶ T`, the
-counit `Lg^* Rg_* ⟶ 𝟭` of the derived adjunction `Lg^* ⊣ Rg_*` on the unbounded derived
-categories of étale sheaves is an isomorphism, i.e. `Lg^* Rg_* ≅ id`.
-
-The levelwise pullback `D(g^*)` has the exact left adjoint `D(g_!)` with invertible unit
-(`AlgebraicGeometry.Etale.isIso_derivedOpenImmersionLowerShriekUpperStarAdjunction_unit`), so in
-the adjoint triple `D(g_!) ⊣ D(g^*) ⊣ Rg_*` the counit of the second adjunction is invertible
-too; and `Lg^* ≅ D(g^*)`. -/
-instance isIso_counit_derivedUpperStarLowerStarAdjunction_of_isOpenImmersion {V T : Scheme.{u}}
-    (g : V ⟶ T) [IsOpenImmersion g] : IsIso (derivedUpperStarLowerStarAdjunction A g).counit := by
-  have : IsIso (mapDerivedUpperStarLowerStarAdjunction A g).counit :=
-    (Adjunction.Triple.mk (derivedOpenImmersionLowerShriekUpperStarAdjunction A g)
-      (mapDerivedUpperStarLowerStarAdjunction A g)).isIso_unit_iff_isIso_counit.1
-      inferInstance
-  have hff := (mapDerivedUpperStarLowerStarAdjunction A g).fullyFaithfulROfIsIsoCounit
-  have := hff.full
-  have := hff.faithful
-  exact (derivedUpperStarLowerStarAdjunction A g).counit_isIso_of_R_fully_faithful
-
-/-- Blueprint `lem-exc-open-fully-faithful`, first half, as an isomorphism of functors:
-`Lg^* Rg_* ≅ 𝟭` for an open immersion `g`, the counit of `Lg^* ⊣ Rg_*`. -/
-noncomputable def rightDerivedLowerStarCompLeftDerivedUpperStarIso {V T : Scheme.{u}}
-    (g : V ⟶ T) [IsOpenImmersion g] : R((g)_*[A]) ⋙ L((g)^*[A]) ≅ 𝟭 _ :=
-  asIso (derivedUpperStarLowerStarAdjunction A g).counit
-
-/-- Blueprint `lem-exc-open-fully-faithful`, second half: `Lg^* Ri_* = 0` for an open immersion
-`g` and a morphism `i` whose range is disjoint from that of `g`, for instance the closed
-complement of `g`. At the sheaf level `g^* i_* = 0`
-(`AlgebraicGeometry.Etale.isZero_upperStar_lowerStar_of_disjoint_range`), and this passes to
-derived categories through K-injective resolutions
-(`isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerStar_of_disjoint_range`)
-and `Lg^* ≅ D(g^*)`. -/
-lemma isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_of_disjoint {V Z T : Scheme.{u}}
-    (g : V ⟶ T) [IsOpenImmersion g] (i : Z ⟶ T)
-    (hgi : Disjoint (Set.range g.base) (Set.range i.base))
-    (N : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
-    IsZero ((L((g)^*[A])).obj (R((i)_*[A]).obj N)) :=
-  (isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerStar_of_disjoint_range A g i hgi
-    N).of_iso ((leftDerivedUpperStarIsoMapDerivedCategory A g).app _)
-
-end OpenImmersion
 
 section Triangle
 

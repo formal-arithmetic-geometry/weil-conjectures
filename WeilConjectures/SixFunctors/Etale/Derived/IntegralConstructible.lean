@@ -44,9 +44,6 @@ converse is the residue-field argument of the blueprint's remark in
 
 - `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral_le`: the working
   definition is contained in the blueprint's.
-- `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegralOfSupport_isTriangulated`:
-  it is a triangulated subcategory, given that constructible sheaves of `Λ`-modules are closed
-  under kernels, cokernels and extensions (blueprint `thm:constructible-serre`).
 -/
 
 @[expose] public section

@@ -80,15 +80,15 @@ lemma compactBoundedHom_singleFunctor_constantSheaf (X : Scheme.{u}) [CompactSpa
       (Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).rightDerivedFunctor :=
     preservesCoproducts_rightDerivedGlobalSections Λ X hX
   obtain ⟨d, hd⟩ := hX
-  have hcd :
-      (Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).HasRightCohomologicalDimensionLE
-        d.toNat := fun q F hq ↦
+  have hcd : ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ), d.toNat < q →
+      IsZero (((Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).rightDerived q).obj F) :=
+    fun F q hq ↦
     Functor.isZero_rightDerived_of_isZero_homology _ F q (hd F q (by lia))
   exact (compactBoundedHom _).prop_of_iso
     (((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapDerivedCategorySingleFunctor
       0).app (ModuleCat.of Λ Λ))
     (compactBoundedHom_of_adjunction adj d.toNat
-      (fun Y n _ ↦ hcd.isLE_rightDerivedFunctor_obj Y n)
+      (fun Y n _ ↦ Functor.isLE_rightDerivedFunctor_obj _ d.toNat hcd Y n)
       (compactBoundedHom_singleFunctor_self Λ))
 
 /-- At a field of finite cohomological dimension, the unit `Λ` of `D((Spec k)_ét, Λ)` is compact
@@ -113,12 +113,14 @@ lemma compactBoundedHom_unit_of_finiteType (hΛ : IsAddTorsion Λ) {k : Type u} 
   have hcd' := hasFiniteCohomologicalDimensionMorphism Λ hΛ aS (𝟙 _) aS (Category.comp_id _)
   have := preservesCoproducts_rightDerivedLowerStar Λ aS hcd'
   obtain ⟨d, hd⟩ := hcd'
-  have hcd : (Etale.lowerStar (ModuleCat.{u + 1} Λ) aS).HasRightCohomologicalDimensionLE
-      d.toNat := fun q F hq ↦
+  have hcd : ∀ (F : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ), d.toNat < q →
+      IsZero (((Etale.lowerStar (ModuleCat.{u + 1} Λ) aS).rightDerived q).obj F) :=
+    fun F q hq ↦
     Functor.isZero_rightDerived_of_isZero_homology _ F q (hd F q (by lia))
   exact (compactBoundedHom _).prop_of_iso (leftDerivedUpperStarUnitIso _ aS)
     (compactBoundedHom_of_adjunction (derivedUpperStarLowerStarAdjunction _ aS) d.toNat
-      (fun Y n _ ↦ hcd.isLE_rightDerivedFunctor_obj Y n) (compactBoundedHom_unit_spec Λ hk))
+      (fun Y n _ ↦ Functor.isLE_rightDerivedFunctor_obj _ d.toNat hcd Y n)
+      (compactBoundedHom_unit_spec Λ hk))
 
 /-- A finite locally constant flat sheaf is dualizable. -/
 lemma isDualizable_of_isFiniteLocallyConstantSheaf [Finite Λ] {S : Scheme.{u}}

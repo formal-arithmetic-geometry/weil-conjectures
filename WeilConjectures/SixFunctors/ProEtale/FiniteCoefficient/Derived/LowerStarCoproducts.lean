@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 public import WeilConjectures.CategoryTheory.DerivedCategory.CoproductsOfFiniteAmplitude
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftComplete
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FiniteCohomologicalDimension
+public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimensionAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
@@ -65,8 +65,8 @@ theorem exists_isLE_rightDerivedLowerStar_of_etaleOriginHomology {Z Y : Scheme.{
       ((ProEtale.lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctor.obj K).IsLE (b + e) := by
   have hΛ : IsAddTorsion Λ := isAddTorsion_of_finite
   obtain ⟨d, hd⟩ := Etale.hasFiniteCohomologicalDimensionMorphism Λ hΛ aZ aY p hp
-  have hcd : (Etale.lowerStar (ModuleCat.{u + 1} Λ) p).HasRightCohomologicalDimensionLE
-      d.toNat := fun q F hq ↦
+  have hcd : ∀ (F : Sheaf _ (ModuleCat.{u + 1} Λ)) (q : ℕ), d.toNat < q →
+      IsZero (((Etale.lowerStar (ModuleCat.{u + 1} Λ) p).rightDerived q).obj F) := fun F q hq ↦
     Functor.isZero_rightDerived_of_isZero_homology _ F q (hd F q (by lia))
   -- the bounded case
   have hbdd (T : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ)))
@@ -77,7 +77,7 @@ theorem exists_isLE_rightDerivedLowerStar_of_etaleOriginHomology {Z Y : Scheme.{
     obtain ⟨G, hG, ⟨e⟩⟩ := DerivedCategory.plusEtaleOrigin_of_etaleOriginHomology Λ Z hT hTb
     have : G.IsLE b := isLE_of_isLE_mapDerivedCategory_comparisonUpperStar
       (t.isLE_of_iso e.symm b)
-    have := hcd.isLE_rightDerivedFunctor_obj G b
+    have := Functor.isLE_rightDerivedFunctor_obj _ d.toNat hcd G b
     have : ((DerivedCategory.Plus.ι ⋙
         (Etale.lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctor ⋙
           D(ν^*(Y)[ModuleCat.{u + 1} Λ])).obj ⟨G, hG⟩).IsLE (b + d.toNat) :=
