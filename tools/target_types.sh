@@ -29,24 +29,31 @@ for side in Challenge TargetsCheck; do
 import Lean
 $IMPORTS
 open Lean in
-#eval show CoreM Unit from do
+#eval show Meta.MetaM Unit from do
   let env ← getEnv
   for n in [$LIST] do
     match env.find? n with
     | some c =>
         -- Lean caches proof terms under their first declaration, so names can differ between
         -- an exact standalone copy and the library. Proof constants have no computational data.
-        let body := (c.value? (allowOpaque := true)).map fun v ↦ v.replace fun e ↦
+        let pi : Expr → Expr := fun v ↦ v.replace fun e ↦
           match e with
           | .const k _ =>
             if (env.find? k).any (·.isTheorem) then
               some (.const \`_proofIrrelevance [])
             else none
           | _ => none
+        let body := (c.value? (allowOpaque := true)).map pi
+        -- 2026-10-17 (upstream sync e47efb5a5): a statement can contain a proof argument, abstracted into an auxiliary
+        -- theorem whose name depends on the module (..._proof_1); compare types modulo proof irrelevance too.
+        -- proofs inside a statement (instances of Prop-valued classes included) are compared modulo proof irrelevance
+        let ty ← Meta.transform c.type (pre := fun e => do
+          if !e.hasLooseBVars && (← Meta.isProof e) then return .done (.const \`_proofIrrelevance []) else return .continue)
+        let ty ← instantiateMVars ty
         if c.isTheorem then
-          IO.println s!"TYPE {n} {hash c.type} {c.levelParams}"
+          IO.println s!"TYPE {n} {hash (pi ty)} {c.levelParams}"
         else
-          IO.println s!"TYPE {n} {hash c.type} {c.levelParams} BODY {hash body}"
+          IO.println s!"TYPE {n} {hash (pi ty)} {c.levelParams} BODY {hash body}"
     | none => IO.println s!"TYPE {n} MISSING"
 LEAN
 done
