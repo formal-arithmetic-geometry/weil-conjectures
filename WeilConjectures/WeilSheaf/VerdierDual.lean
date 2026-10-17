@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
+public import WeilConjectures.WeilSheaf.Bidual
 public import WeilConjectures.WeilSheaf.DerivedHom
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.TateTwist
@@ -218,6 +219,18 @@ section Lisse
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- For a lisse Weil sheaf `P`, the tensor product `P^∨ ⊗ N` with its dual is the right derived
+functor of the internal hom `𝓗om(P, -)` evaluated at `N`: `P^∨ ⊗ -` is by definition
+`R𝓗om(P^∨∨, -)` (`AlgebraicGeometry.WeilComplex.tensorLisse`), and `P ≅ P^∨∨`
+(`AlgebraicGeometry.WeilSheaf.nonempty_iso_dual_dual`). -/
+theorem nonempty_tensorLisse_dual_iso_rightDerivedFunctor_ihomFunctor (P : WeilSheaf k₀ l X)
+    (hP : P.IsLisse) (N : WeilComplex k₀ l X) :
+    Nonempty (((tensorLisse (P.dual hP) hP.dual).obj N).obj ≅
+      (ProEtaleWeilSheaf.ihomFunctor k₀ l X P.obj).rightDerivedFunctor.obj N.obj) := by
+  obtain ⟨e⟩ := WeilSheaf.nonempty_iso_dual_dual P hP
+  exact ⟨(Functor.rightDerivedFunctorNatIso ((ProEtaleWeilSheaf.ihomBifunctor k₀ l X).mapIso
+    ((ObjectProperty.ι _).mapIso e).op)).app N.obj⟩
 
 /-- **The internal hom out of a lisse sheaf** (blueprint: `lem-sf-hom-finite-projective`): for
 a lisse Weil sheaf `P`, a locally free `ℚ̄_ℓ,X̄`-module of finite rank, and a Weil complex `N`,
