@@ -128,5 +128,23 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-c1fe0da0e (reviewer sub-agent of L); spot-checked: Read the item in full; the delivery has no new nodes. Checked against Stacks algebra.tex:20041, Tag 058P lemma-ui-flat-domain. The statement agrees with the source's M3 clause, which is the clause the citer lem-trf-local-generic-basis-universal-injective step 3 uses (Stacks flat.tex 05I3 (1)=>(2), line 2404). It is unchanged and not weakened, and universal exactness is defined inline. Small cases: a split sequence gives a flat M3; 0->Z->Z->Z/2->0 is not universally exact and Z/2 is not flat, so the hypothesis is needed. The only dependency is def-weil-pbc-flat-ring-map (Mathlib-leaf definition, 00HB). It is used correctly in each step, and since it is a notion, no tool_uses are needed. rg for 058P / 'universally exact' over dag/nodes finds no duplicate. FIX (2 faults): (E3/E5) step 3's closing inference cited injectivity of M1⊗N->M1⊗N', but the chase needs middle-row exactness, injectivity of the bottom row, left-column exactness at M1⊗N' and middle-column injectivity; I rewrote it as the full chase, and also wrote step 2 out explicitly. (B9) blueprint.from.place and split_report.blueprint attributed the sentence 'We conclude that Coker(α)_q is R-flat by Algebra Lemma 058P' to lem-trf-local-term-locality, but it is Stacks flat.tex 05I3 reached through the parent; I corrected the attribution. The corrected item is in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LocalUIFlatCokernel",
+  "declaration": "Module.flat_of_universally_exact",
+  "statement": "theorem flat_of_universally_exact {R : Type u} [CommRing R] {M₁ : Type v} [AddCommGroup M₁] [Module R M₁] {M₂ : Type w} [AddCommGroup M₂] [Module R M₂] {M₃ : Type z} [AddCommGroup M₃] [Module R M₃] (f : M₁ →ₗ[R] M₂) (g : M₂ →ₗ[R] M₃) (h_exact : ∀ (N : Type (max u t)) [AddCommGroup N] [Module R N], Function.Injective (f.rTensor N) ∧ Function.Exact (f.rTensor N) (g.rTensor N) ∧ Function.Surjective (g.rTensor N)) [Module.Flat R M₂] : Module.Flat R M₃",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/LocalUIFlatCokernel.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ddf7dd6eb",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Immutable files verified; source, dependencies, exact signature, universes, edge cases, docstrings and route-pivot checks passed. Compilation reproduced through scompile.py; no delivery faults found."
  }
 }
