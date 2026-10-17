@@ -248,22 +248,22 @@
  },
  "lead_note": "2026-10-10 L (R-dsf1845): Stale parenthetical in lem-sp-finite-filtration-induction ('finite filtrations of [def-sp-filtration], with F^0A=A and F^NA=0') now describes the old wording; harmless, its hypothesis is self-stated.",
  "lean": {
-  "module": "WeilConjectures.CategoryTheory.Abelian.Filtration",
-  "declaration": "CategoryTheory.DecreasingFiltration",
-  "file": "lean/WeilConjectures/CategoryTheory/Abelian/Filtration.lean",
+  "module": "WeilConjectures.CategoryTheory.PBCFiltration",
+  "declaration": "CategoryTheory.PBCDecreasingFiltration",
+  "statement": "structure PBCDecreasingFiltration (A : C)",
   "branch": "slopmaster2",
+  "by": "NA",
+  "date": "2026-10-17",
   "existing": true,
-  "date": "2026-10-13",
-  "by": "upstream-sync",
-  "note": "Canonical upstream filtration and image constructor replace the duplicate SHEAF definitions at ffb7b9060; SHEAF retains only extension API and legacy accessors."
+  "note": "The recorded DecreasingFiltration interface uses fields F and F_succ_le, whereas the published exact-couple convergence interface uses the existing PBCDecreasingFiltration (step and antitone_step). This existing upstream declaration states exactly the same notion on the representation used by ConvergesTo; no construction is duplicated."
  },
  "reviewed_lean": {
-  "date": "2026-10-11",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "R-flt0608",
-  "group": "E1",
+  "reviewer": "NT-stage2-cc-7546638d1",
+  "group": "NA",
   "result": "pass",
-  "note": "Clauses (1)-(9) of Stacks 0121 matched: ℤ→Subobject A antitone; pair (obj,filtration); Hom factorization = φ(F^iA)⊆F^iB; Category Fil(C) Type v; induced = pullback X.arrow; quotient = Subobject.exists π with Epi; IsFinite independent n,m; HasIntersection/HasUnion; IsSeparated/IsExhaustive equivalent to extremal subobject =⊥/⊤; gr^n = cokernel ofLE. No Mathlib/source/project duplicate (grep CategoryTheory, Algebra/Homology, WeilConjectures, deliver/*)."
+  "note": "Spec theorem is word-for-word the R-hcf-reviewed, proved live statement except the square, now the recorded ChosenCartesianSquare g' f' f g. Changes otherwise: retired Sheaf.* imports moved to WeilConjectures.*, DecreasingFiltration became PBCDecreasingFiltration, ofShifted replaced by a direct BigradedExactCouple instance. Checked every hypothesis and conclusion clause of (1) Rf_*, (2) g^-1 Rf_*, (3) Rf'_* g'^-1 against the node: E2 terms, IsFinite and range a<=q<=n, ConvergesTo, image filtration, bridgeIso equations, canonical delta/phi/c comparisons, termwise g'^-1 truncation. Lean-only repoints of def-sp-filtration and def-sp-image-filtration to the existing upstream PBCDecreasingFiltration(.image) are consistent: def-sp-convergence and thm-sp-truncation-e2 already use PBC and no new-targets citer uses the generic DecreasingFiltration; existing:true without file as stage2_delivery.py requires. Definitions have real data; only three named Prop theorems are sorry; docstrings carry source and blueprint tags; universes explicit (Scheme.{u}, AddCommGrpCat.{u+1}); lean.statement verbatim. nt_compile.py: clean, exit 0, no non-sorry warnings; a negative control confirmed errors are reported. Edge cases n<a, p=0, any a, empty schemes OK. Cosmetic only: inner ∃ hT shadows the unused torsion hypothesis hT."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",

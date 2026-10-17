@@ -281,14 +281,41 @@
   "result": "pass",
   "note": "lem-sp-couple-morphism (sk-prop-av-pqf-finite) accepted as a tool use; the three sequences and the choice \"after g^{-1}\" match Step 4 of the target"
  },
- "lean": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HypercohomologyFiltrations",
+  "declaration": "AlgebraicGeometry.Etale.hypercohomologyFiltrations",
+  "declarations": [
+   "CategoryTheory.hypercohomologyD",
+   "CategoryTheory.hypercohomologyE",
+   "CategoryTheory.hypercohomologyAlpha",
+   "CategoryTheory.hypercohomologyG",
+   "CategoryTheory.hypercohomologyBoundary",
+   "CategoryTheory.hypercohomology_maps_exact",
+   "CategoryTheory.hypercohomologyCouple",
+   "CategoryTheory.hypercohomologyAbutmentMap",
+   "CategoryTheory.hypercohomology_images_antitone",
+   "CategoryTheory.hypercohomologyFiltration",
+   "AlgebraicGeometry.Etale.hypercohomologyFirstFunctor",
+   "AlgebraicGeometry.Etale.hypercohomologyBaseChangeFunctor",
+   "AlgebraicGeometry.Etale.hypercohomologySecondFunctor",
+   "AlgebraicGeometry.Etale.hypercohomologyFiltrations",
+   "AlgebraicGeometry.Etale.hypercohomologyFiltrations_spec"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/HypercohomologyFiltrations.lean",
+  "statement": "def hypercohomologyFiltrations (n : ℤ) : PBCDecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologyFirstFunctor f).obj (DerivedCategory.Q.obj K.obj))) × PBCDecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologyBaseChangeFunctor f g).obj (DerivedCategory.Q.obj K.obj))) × PBCDecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologySecondFunctor f' g').obj (DerivedCategory.Q.obj K.obj)))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Restates the withdrawn specification against the published BigradedExactCouple and PBCDecreasingFiltration interfaces; uses ChosenCartesianSquare as recorded by the square dependency. All three actual image filtrations, convergence clauses, bridge equations and canonical inverse-image comparisons are retained."
+ },
  "reviewed_lean": {
-  "date": "2026-10-11",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "R-hcf",
-  "group": "C1",
-  "result": "fix",
-  "note": "three filtrations = node's image filtrations F^p H^n = im(H^n(Phi tau<=n-p K) -> H^n(Phi K)) for Phi = Rf_*, g^-1 Rf_*, Rf'_* g'^-1; couples D,E,alpha,f,g match node displays; spec: E2 terms, bounds a<=q<=n, finiteness, ConvergesTo tied to abutment maps, termwise g'^-1 truncation, g^-1 comparison of all pages and filtration; fixed: CartesianSquare structure (H13, re-recorded existing node) -> IsPullback per STATE, reverted node and dropped module; added bridgeIso clauses tying couple (1) to recorded TruncationCouple.alpha/f/g; reverted the delivery's change of existing node(s) def-weil-pbc-cartesian-square (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/AlgebraicGeometry/EtaleCartesianSquare.lean (--drop-files, or a record fixed to existing: true)"
+  "reviewer": "NT-stage2-cc-7546638d1",
+  "group": "NA",
+  "result": "pass",
+  "note": "Spec theorem is word-for-word the R-hcf-reviewed, proved live statement except the square, now the recorded ChosenCartesianSquare g' f' f g. Changes otherwise: retired Sheaf.* imports moved to WeilConjectures.*, DecreasingFiltration became PBCDecreasingFiltration, ofShifted replaced by a direct BigradedExactCouple instance. Checked every hypothesis and conclusion clause of (1) Rf_*, (2) g^-1 Rf_*, (3) Rf'_* g'^-1 against the node: E2 terms, IsFinite and range a<=q<=n, ConvergesTo, image filtration, bridgeIso equations, canonical delta/phi/c comparisons, termwise g'^-1 truncation. Lean-only repoints of def-sp-filtration and def-sp-image-filtration to the existing upstream PBCDecreasingFiltration(.image) are consistent: def-sp-convergence and thm-sp-truncation-e2 already use PBC and no new-targets citer uses the generic DecreasingFiltration; existing:true without file as stage2_delivery.py requires. Definitions have real data; only three named Prop theorems are sorry; docstrings carry source and blueprint tags; universes explicit (Scheme.{u}, AddCommGrpCat.{u+1}); lean.statement verbatim. nt_compile.py: clean, exit 0, no non-sorry warnings; a negative control confirmed errors are reported. Edge cases n<a, p=0, any a, empty schemes OK. Cosmetic only: inner ∃ hT shadows the unused torsion hypothesis hT."
  },
  "reviewed_proof": {
   "date": "2026-10-15",

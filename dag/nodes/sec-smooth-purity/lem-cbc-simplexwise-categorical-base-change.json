@@ -190,5 +190,23 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-be2a74140 (reviewer sub-agent of L); spot-checked: I read HTT Prop. 3.2.2.8 and its proof (printed p.181) from a local copy another review had left in /tmp, since there is no network here; the archival-copy WANTED note stands. The item's statement matches the source exactly with Z=S and is not weakened. It adds no fibrancy, injectivity or finiteness hypothesis and allows empty sets. I tested T empty, S=Delta^0, r=0, degenerate sigma and non-injective characteristic maps; all are covered. Step 1 (specialisation) is correct. Step 2 is correct: the finite simplicial subsets of T form a filtered union, pullback is degreewise reindexing, and lem-coef-joyal-filtered-equivalences states exactly the closure used. Step 3 was marked elementary, had loose wording ('closure as Delta^r') and gave no citation or explicit inductive claim for the one-cell pushout. Repaired: it now cites the Mathlib leaf lem-coef-infinity-monomorphism-boundary-cells, states the lexicographic induction, and notes the non-injective maps. Step 4 took a cube comparison that the cited left-proper statement does not give: replacing the B vertex would need a pushout along a non-cofibration (C3/C4, E5). It also named the wrong injective leg. Repaired: it now cites lem-coef-model-cofibrant-colimit-comparison (b), the cube lemma, using that all objects are cofibrant in the Joyal structure and that the legs X_{dDelta^r}->X_{Delta^r} are pullbacks of a monomorphism. The left-proper citation is dropped, and proof_deps and split_report.tool_uses are updated. The four cited nodes create no cycle. There are no new nodes. I found no duplicate: the three other 3.2.2.8-based nodes state different marked or base-invariance results. The accepted tool_uses are the joyal-filtered-equivalences, joyal-model-structure and model-cofibrant-colimit-comparison nodes. The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-cbc-simplexwise-categorical-base-change.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9df702c86",
+  "group": "N9",
+  "result": "pass",
+  "note": "Statement matches node and HTT Prop 3.2.2.8: X Y S : SSet.{u}, f, p with no extra hypotheses; f_T = pullback.map (f≫p) t p t f (𝟙 T) (𝟙 S) with identity-law squares; categorical equivalence written out exactly as the second conjunct of SSet.exists_joyal_model_structure (C : SSet.{max u v}, Quasicategory, hoFunctor of MonoidalClosed.pre of uliftFunctor.{v,u}); (i) over every T,t and (ii) over every r and σ : Δ[r] ⟶ S joined by ↔. Edge cases (empty T/S/X/Y, r=0, degenerate σ, universes u,v free and explicitly bound) covered. No definitions, proof only sorry, source/blueprint docstrings with the node's five proof steps, node differs only in lean, lean.statement verbatim in the file, report has Worker report and Second reading by N9, no duplicate found. nt_compile.py --json on the snapshot module exited 0 with no errors or warnings. Only cosmetic report text artefacts."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplexwiseCategoricalBaseChange",
+  "declaration": "SSet.universal_categorical_equivalence_iff_simplexwise",
+  "file": "lean/Sheaf/AlgebraicTopology/SimplexwiseCategoricalBaseChange.lean",
+  "statement": "theorem universal_categorical_equivalence_iff_simplexwise {X Y S : SSet.{u}} (f : X ⟶ Y) (p : Y ⟶ S) : (∀ (T : SSet.{u}) (t : T ⟶ S) (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map (pullback.map (f ≫ p) t p t f (𝟙 T) (𝟙 S) (Category.comp_id (f ≫ p)) ((Category.comp_id t).trans (Category.id_comp t).symm) ))).app C)).toFunctor).IsEquivalence) ↔ (∀ (r : ℕ) (σ : Δ[r] ⟶ S) (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map (pullback.map (f ≫ p) σ p σ f (𝟙 Δ[r]) (𝟙 S) (Category.comp_id (f ≫ p)) ((Category.comp_id σ).trans (Category.id_comp σ).symm) ))).app C)).toFunctor).IsEquivalence)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -281,5 +281,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1a09ee86",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Read node, blueprint source, Stacks 099X, all six stmt deps (original-site proEtaleSiteComparison retained via Q17 small-model module; IsClassical on the same site and universe), module, report. Every clause matches: Grp internal group G0; pullback = sheafPullback(toProEt X) with canonical Monoidal.ofChosenFiniteProducts (synth confirms Functor.monObjObj); action laws incl. left associativity; IsIso of lift a snd; Epi toUnit; existential affine etale surjection V, torsor T0 with section on V, equivariant iso e via LaxMonoidal.mu; IsClassical T; section of T on V. No extra assumptions; universe u/u+1 per convention; edge cases empty X, trivial group, noncommutative ok. Helpers canonical with docstrings; proof only sorry; statement verbatim; lines <=100. nt_compile.py --json on side overlay rc=0, no errors/warnings; axioms include sorryAx only as expected. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleTorsorComparisonAffine",
+  "declaration": "AlgebraicGeometry.ProEtale.torsor_comparison_affine",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.torsorComparisonPullback",
+   "AlgebraicGeometry.ProEtale.torsorComparisonPullback_monoidal",
+   "AlgebraicGeometry.ProEtale.torsor_comparison_affine"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleTorsorComparisonAffine.lean",
+  "statement": "theorem torsor_comparison_affine (X : Scheme.{u}) [IsAffine X] (G₀ : Grp (Sheaf X.smallEtaleTopology (Type (u + 1)))) (T : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))) (a : (torsorComparisonPullback X).obj G₀.X ⊗ T ⟶ T) (h_one : (MonObj.one (X := (torsorComparisonPullback X).obj G₀.X) ▷ T) ≫ a = (λ_ T).hom) (h_mul : (MonObj.mul (X := (torsorComparisonPullback X).obj G₀.X) ▷ T) ≫ a = (α_ _ _ T).hom ≫ ((torsorComparisonPullback X).obj G₀.X ◁ a) ≫ a) (h_iso : IsIso (lift a (snd ((torsorComparisonPullback X).obj G₀.X) T))) (h_epi : Epi (toUnit T)) : ∃ (V : X.Etale), IsAffine V.left ∧ Surjective V.hom ∧ ∃ (T₀ : Sheaf X.smallEtaleTopology (Type (u + 1))) (a₀ : G₀.X ⊗ T₀ ⟶ T₀), (MonObj.one (X := G₀.X) ▷ T₀) ≫ a₀ = (λ_ T₀).hom ∧ (MonObj.mul (X := G₀.X) ▷ T₀) ≫ a₀ = (α_ G₀.X G₀.X T₀).hom ≫ (G₀.X ◁ a₀) ≫ a₀ ∧ IsIso (lift a₀ (snd G₀.X T₀)) ∧ Epi (toUnit T₀) ∧ Nonempty (T₀.obj.obj (op V)) ∧ ∃ e : (torsorComparisonPullback X).obj T₀ ≅ T, Functor.LaxMonoidal.μ (torsorComparisonPullback X) G₀.X T₀ ≫ (torsorComparisonPullback X).map a₀ ≫ e.hom = ((torsorComparisonPullback X).obj G₀.X ◁ e.hom) ≫ a ∧ IsClassical T ∧ Nonempty (T.obj.obj (op ((Scheme.toProEt X).obj V)))",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Group sheaves are Mathlib internal group objects in set sheaves; all torsor action laws, the pair-map isomorphism and the terminal-map epimorphism are explicit. The comparison abbreviation unfolds to the publicly retained original-site inverse image, and its monoidal structure is the canonical one supplied by finite-product preservation. No new torsor notion or arbitrary comparison map is introduced. Nonempty sections on the stated cover express triviality using the torsor pair-map isomorphism."
  }
 }
