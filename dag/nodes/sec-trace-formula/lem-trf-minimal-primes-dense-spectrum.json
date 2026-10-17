@@ -1,9 +1,29 @@
 {
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $U\\subseteq\\operatorname{Spec}A$ be a nonempty open subset and choose a prime point $\\mathfrak p\\in U$. By the basic-open basis for affine spectra, there is an element $f\\in A$ with $f\notin\\mathfrak p$ and $\\mathfrak p\\in D(f)\\subseteq U$. Apply the prime-containing-minimal-prime lemma to the ideal $(0)\\subseteq\\mathfrak p$ to obtain a minimal prime $\\mathfrak q$ of $A$ with $\\mathfrak q\\subseteq\\mathfrak p$. Since $f\notin\\mathfrak p$ and $\\mathfrak q\\subseteq\\mathfrak p$, also $f\notin\\mathfrak q$, so the point $\\mathfrak q$ lies in $D(f)\\subseteq U$. Thus every nonempty open contains a minimal-prime point, which is exactly density.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RG proof, final sentence (minimal-prime density), using Tag 00E0 parts (11) and (14) for the basic-open basis and the standard minimal-prime argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-spec-localization-away-basic-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00RG proof, final sentence; the explicit basic-open and minimal-prime argument uses Tags 00E0 and 00FL"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-generic-cm-locus-field",
@@ -25,29 +45,29 @@
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "minimal primes are dense in the spectrum of a ring",
-   "results": "Hits PrimeSpectrum.denseRange_comap_iff_minimalPrimes, PrimeSpectrum.zeroLocus_minimalPrimes, PrimeSpectrum.isMin_iff, Ideal.exists_minimalPrimes_le; no theorem directly stating the set of minimal-prime points is dense.",
+   "query": "minimal primes are dense in the spectrum of a finite type algebra over a field",
+   "results": "PrimeSpectrum.denseRange_comap_iff_minimalPrimes; PrimeSpectrum.zeroLocus_minimalPrimes; PrimeSpectrum.quasiSober; no direct theorem for the stated density of minimal-prime points.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "minimal primes are dense in the spectrum of a ring",
-   "results": "0 hits; natural-language query rejected because Loogle expected a Lean pattern.",
-   "date": "2026-10-18",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "grep",
-   "query": "minimal primes are dense in the spectrum of a ring [Mathlib/RingTheory/]",
-   "results": "0 hits for a direct density theorem; source contains only minimal-prime and dense-range criteria.",
+   "query": "PrimeSpectrum.isTopologicalBasis_basic_opens, Ideal.exists_minimalPrimes_le",
+   "results": "0 hits.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
+   "tool": "grep",
+   "query": "minimalPrimes|isTopologicalBasis_basic_opens|exists_minimalPrimes_le [Mathlib/RingTheory/Spectrum]",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean:562 isTopologicalBasis_basic_opens; Mathlib/RingTheory/Spectrum/Prime/Topology.lean:77 and related references; Ideal.exists_minimalPrimes_le appears in Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean:107. No single theorem states the item.",
+   "date": "2026-10-18",
+   "verdict": "generalization: the cited declarations provide the ingredients, not the exact density statement"
+  },
+  {
    "tool": "leansearch",
-   "query": "minimal primes are dense in the spectrum of a ring",
-   "results": "Hits PrimeSpectrum.denseRange_comap_iff_minimalPrimes, minimalPrimes, PrimeSpectrum.isMin_iff, Ring.KrullDimLE.minimalPrimes_eq_setOf_isMaximal; no direct density theorem.",
+   "query": "every nonempty open subset of Spec A contains a minimal prime ideal",
+   "results": "minimalPrimes; Ideal.nonempty_minimalPrimes; Ideal.minimalPrimes_isPrime; PrimeSpectrum.isMin_iff; no direct theorem for density of minimal-prime points.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
@@ -57,7 +77,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "In the proof of the 055W spreading lemma, the choice of a closed point where h is Cohen–Macaulay, using the fibrewise density assertion of 045U. This auxiliary algebraic assertion is the field-fibre input behind that density step.",
+   "place": "In the proof of the 055W spreading lemma, the choice of a closed point where h is Cohen–Macaulay, using the fibrewise density assertion of 045U; this node supplies the minimal-prime density argument for the field-fibre input.",
    "via": [
     "lem-trf-generic-cm-locus-field",
     "lem-trf-flat-lfp-cm-locus-fibre-dense",
@@ -78,5 +98,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-minimal-primes-dense-spectrum",
+  "worker": "stage1",
+  "summary": "Split the minimal-prime density assertion with one explicit proof step. For a nonempty open, choose a basic principal open inside it, then place a minimal prime below a point of that principal open using the existing prime-containing-minimal-prime leaf; containment preserves avoidance of the chosen element. No new DAG nodes were needed.",
+  "blueprint": "Realizes the minimal-prime density argument used in the field-fibre Cohen–Macaulay locus proof of the 055W spreading lemma, specifically the final density sentence of the Tag 00RG route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q84-b8d735c39",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q84-b8d735c39 (reviewer sub-agent of L); spot-checked: Read the required instructions, packet/report, item, unit/chapter route, cited nodes, and Stacks sources. The density proof is correct: basic-open basis plus a minimal prime below any chosen prime, with containment preserving avoidance of f. Hypotheses and edge cases were checked; cited nodes are accepted Mathlib leaves, no duplicates, hidden lemmas, route-pivot machinery, SGA, or batch-5 violations. Review written to review.md."
  }
 }
