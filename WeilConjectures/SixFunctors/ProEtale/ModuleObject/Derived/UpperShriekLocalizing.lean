@@ -15,6 +15,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureGener
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 
 /-!
@@ -88,11 +89,16 @@ the closed point, which is not a constructible subset of `Y`.
   `sk-prop-int-compactness`): constructible sheaves are compact in `Loc(Dᵇc(X)⟦Λ⟧)`; by
   dévissage, so are all bounded constructible complexes
   (`isCompactObj_of_isCompactObj_singleLocalizingBoundedConstructible`).
-- `properLowerStarHypotheses_continuousMapRingObj`, `properLowerStarHypotheses_padicAlgClRingObj`
-  and `properLowerStarHypotheses_padicIntegersRingObj` (blueprints
-  `sk-thm-sfb-proper-base-change`, `sk-prop-proper-image-localizing`,
-  `sk-prop-int-compactness`): for `p` proper, `Rp_*` preserves `Dᵇc` and direct sums on
-  `Loc(Dᵇc)`.
+- The inputs of `properLowerStarHypotheses_continuousMapRingObj`,
+  `properLowerStarHypotheses_padicAlgClRingObj` and
+  `properLowerStarHypotheses_padicIntegersRingObj` (for `p` proper, `Rp_*` preserves `Dᵇc` and
+  direct sums on `Loc(Dᵇc)`): that `Rp_*` preserves `Dᵇc` (blueprint
+  `sk-thm-sfb-proper-base-change`) and has finite amplitude and commutes with direct sums on the
+  ind-constructible heart (blueprints `sk-lem-proper-heart-bound`,
+  `det-prop-int-compactness-direct-sums` (1)), see
+  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic`. The
+  commutation with direct sums on `Loc(Dᵇc)` follows by dévissage and left completeness
+  (`ProperLowerStarHeartHypotheses.preservesColimitsOfShape`).
 -/
 
 @[expose] public section
@@ -447,7 +453,8 @@ theorem properLowerStarHypotheses_continuousMapRingObj (E : Type) [NormedField E
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] {Z Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y] (p : Z ⟶ Y) [IsProper p] :
     ProperLowerStarHypotheses (Profinite.continuousMapRingObj.{u} E) p :=
-  sorry
+  ⟨boundedConstructible_rightDerivedLowerStar_obj_of_isProper_continuousMapRingObj ℓ E aY p,
+    (properLowerStarHeartHypotheses_continuousMapRingObj ℓ E aY p).preservesColimitsOfShape⟩
 
 /-- Blueprint `det-sf-comp-coherence-single`: Compact support along one compactification on the
 localizing category, for the coefficient ring `E` of a finite extension `E` of `ℚ_ℓ` and a
@@ -530,7 +537,8 @@ theorem properLowerStarHypotheses_padicIntegersRingObj (E : Type) [Field E]
     [FiniteDimensional ℚ_[ℓ] E] {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y]
     (p : Z ⟶ Y) [IsProper p] :
     ProperLowerStarHypotheses (Profinite.padicIntegersRingObj.{u} ℓ E) p :=
-  sorry
+  ⟨boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicIntegersRingObj ℓ E aY p,
+    (properLowerStarHeartHypotheses_padicIntegersRingObj ℓ E aY p).preservesColimitsOfShape⟩
 
 /-- Blueprint `det-sf-comp-coherence-single`: Compact support along one compactification on the
 localizing category, for the coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`
@@ -602,7 +610,8 @@ coefficient ring `ℚ̄_ℓ` and a proper morphism `p : Z ⟶ Y` to a noetherian
 theorem properLowerStarHypotheses_padicAlgClRingObj {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
     [IsNoetherian Y] (p : Z ⟶ Y) [IsProper p] :
     ProperLowerStarHypotheses (Profinite.padicAlgClRingObj.{u} ℓ) p :=
-  sorry
+  ⟨boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicAlgClRingObj ℓ aY p,
+    (properLowerStarHeartHypotheses_padicAlgClRingObj ℓ aY p).preservesColimitsOfShape⟩
 
 /-- Blueprint `det-sf-comp-coherence-single`: Compact support along one compactification on the
 localizing category, for the coefficient ring `ℚ̄_ℓ` and a noetherian `k`-scheme `Y`: for a
