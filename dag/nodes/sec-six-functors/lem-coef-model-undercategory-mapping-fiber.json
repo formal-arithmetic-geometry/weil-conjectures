@@ -11,9 +11,143 @@
   "lem-coef-cosimplicial-frame-mapping",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal U=O\\downarrow\\mathcal M$. Limits in $\\mathcal U$ are computed by taking the limit of the underlying diagram in $\\mathcal M$ and using the compatible maps from $O$; a cone under $O$ is then exactly a cone to that limit. Colimits are computed by taking the colimit $T$ of the underlying objects and pushing out the induced map from the colimit of the constant $O$-diagram along its canonical map to $O$. The universal property of this pushout identifies maps under $O$ with the required cocones, including the empty diagram. Thus $\\mathcal U$ is complete and cocomplete, with initial object $1_O:O\\to O$ and terminal object $O\\to 1$.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey Proposition 1.1.8, proof, printed p.5"
+   }
+  },
+  {
+   "text": "Declare a morphism in $\\mathcal U$ to be a weak equivalence, cofibration or fibration exactly when its underlying morphism in $\\mathcal M$ is one. Two-out-of-three and retract closure are inherited. Factor an underlying arrow functorially in either of the two weak factorization systems of $\\mathcal M$ and give the middle object the composite map from $O$; both factors then commute with the structure maps. Any lifting problem in $\\mathcal U$ is the same underlying lifting problem in $\\mathcal M$, and a ground-category filler automatically commutes with $O$. Conversely, if an under-arrow lifts against every map in the opposite class, lifting against its chosen factorization exhibits it as an arrow retract of the corresponding factor, so the lifting classes are exact. Hence these classes form the two functorial weak factorization systems and give the asserted model structure.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey Proposition 1.1.8, proof, printed p.5"
+   }
+  },
+  {
+   "text": "The initial map of $i$ in $\\mathcal U$ is the underlying cofibration $i:O\\to C$, and the terminal map of $f$ is $Y\\to1$. Thus $i$ is cofibrant in $\\mathcal U$ and $f$ is fibrant there. Also $C$ is cofibrant in $\\mathcal M$: its initial map is the composite $0\\to O\\to C$ of cofibrations. These are distinct cofibrancy assertions; no assertion is made that forgetting a $\\mathcal U$-frame yields a frame in $\\mathcal M$.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 1.1.8; definitions of cofibrant and fibrant objects"
+   }
+  },
+  {
+   "text": "Choose a frame $A^\\bullet\\xrightarrow{a}\\operatorname{const}O$ in $\\mathcal M$, with $A^0=O$ and $a^0=1_O$. Apply the Reedy factorization-extension theorem to $i a:A^\\bullet\\to\\operatorname{const}C$, keeping its degree-zero factorization $O\\xrightarrow{i}C\\xrightarrow{1_C}C$. It gives $A^\\bullet\\xrightarrow{u}B^\\bullet\\xrightarrow{b}\\operatorname{const}C$, where $u$ is a Reedy cofibration, $b$ a Reedy trivial fibration, $u^0=i$, and $b^0=1_C$. The starting factorization is in the required two classes because $i$ is a cofibration and $1_C$ is a trivial fibration. Since $A^\\bullet$ is Reedy cofibrant, composition of cofibrations in the Reedy model category makes $B^\\bullet$ Reedy cofibrant. Since $b$ is objectwise a weak equivalence, $B^\\bullet$ is a frame on $C$ in $\\mathcal M$. Functorial degree extensions can be used with the frame on $O$ fixed.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 5.2.5, Remark 5.2.3 and the fixed-degree-zero construction in Theorem 5.2.8; compatible source-frame construction"
+   }
+  },
+  {
+   "text": "Form the cosimplicial object $D^n=B^n\\amalg_{A^n}O$ under $O$, using $u^n$ and $a^n$; its augmentation $d:D^\\bullet\\to\\operatorname{const}(i)$ comes from $b$ and $i$. At degree zero $D^0=C\\amalg_O O\\cong C$, with $d^0=1_C$. To check latching cofibrancy in $\\mathcal U$, put $P_n=A^n\\amalg_{L_nA}L_nB$. The universal property of colimits and pushouts gives the underlying object of $L_n^{\\mathcal U}D$ as $O\\amalg_{L_nA}L_nB$. Its map to $D^n$ is the pushout of the relative latching cofibration $P_n\\to B^n$ along $P_n\\to O\\amalg_{L_nA}L_nB$. Hence it is a cofibration. This formula also holds for $n=0$, where it is $O\\to C$. It uses colimits in $\\mathcal U$, rather than the latching objects of the underlying $D^\\bullet$ in $\\mathcal M$.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 5.2.7; relative latching and pushout universal properties; agent expansion for the undercategory"
+   }
+  },
+  {
+   "text": "For each $n$, all of $A^n,B^n,O$ are cofibrant, and $u^n:A^n\\to B^n$ is a cofibration, by the objectwise consequences of the Reedy theorem. Apply clause (b) of the cofibrant-colimit gluing lemma to the map of spans $(A^n\\leftarrow A^n\\xrightarrow{u^n}B^n)\\to(O\\xleftarrow{a^n}A^n\\xrightarrow{u^n}B^n)$ with components $(a^n,1,1)$. Both right-hand span maps are $u^n$, so the gluing hypotheses hold without left properness. The induced map $B^n\\to D^n$ is a weak equivalence. Its composite with $d^n$ is $b^n$, also a weak equivalence; two-out-of-three gives $d^n$ a weak equivalence. Together with the preceding latching calculation and $d^0=1_C$, this proves that $D^\\bullet$ is a frame on $i$ in $\\mathcal U$.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-model-cofibrant-colimit-comparison",
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 5.2.6 (cube lemma), applied to the displayed cofibrant spans; Definition 5.2.7 in the undercategory"
+   }
+  },
+  {
+   "text": "Let $E=H(B^\\bullet,Y)$ and $K=H(A^\\bullet,Y)$, with restriction $p:E\\to K$. The actual map $f:O\\to Y$ defines a vertex of $K$ because $A^0=O$; its degenerate $n$-simplex is the map $f a^n:A^n\\to Y$. By the pushout universal property, a map $D^n\\to Y$ under $O$ is exactly a map $h:B^n\\to Y$ satisfying $h u^n=f a^n$. Therefore $$H_{\\mathcal U}(D^\\bullet,f)\\cong E\\times_{K}\\{f\\}.$$ The bijections commute with every simplex operator because all maps come from the same cosimplicial pushout. In particular the required equation is over $A^n$ with right-hand side $f a^n$, not an equation over an unspecified constant base frame.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Section 5.4 function complexes; degreewise pushout universal property, agent relative-frame calculation"
+   }
+  },
+  {
+   "text": "The source-restriction lemma applies to the Reedy cofibration $u:A^\\bullet\\to B^\\bullet$ of frames on the cofibrant objects $O,C$ and the fibrant target $Y$. Thus $p:E\\to K$ is a Kan fibration of Kan complexes. The strict-pullback clause of the frame-mapping theorem identifies $E\\times_K\\{f\\}$ with the homotopy pullback, hence with $\\operatorname{hofib}_f(p)$. In the explicit path model the comparison sends a strict fiber simplex to itself together with the constant path at the corresponding simplex of $f$; this comparison is an equivalence, rather than a claim that every homotopy-fiber path is literally constant.",
+   "uses": [
+    "lem-coef-frame-source-kan-fibration",
+    "lem-coef-cosimplicial-frame-mapping",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.4.3, adjointed against Y→1; strict-pullback comparison as cited in lem-coef-cosimplicial-frame-mapping"
+   }
+  },
+  {
+   "text": "Apply the frame mapping-space theorem in $\\mathcal M$ to $B^\\bullet,C,Y$ and to $A^\\bullet,O,Y$, and separately in $\\mathcal U$ to $D^\\bullet,i,f$. It identifies $E,K,H_{\\mathcal U}(D^\\bullet,f)$ with the three required derived mapping spaces. The augmented map $u$ covers $i$ and the vertex of $K$ is the actual map $f$; naturality of the frame identifications therefore makes $p$ represent $i^*$. The forgetful functor $\\mathcal U\\to\\mathcal M$ is not left Quillen, so it is handled through its left adjoint $F(X)=(O\\to O\\amalg X)$: $F(g)$ is a pushout of $g$, so $F$ preserves cofibrations and trivial cofibrations, and the forgetful functor preserves all weak equivalences. The derived adjunction gives $\\operatorname{Map}^h_{\\mathcal U}(FC,f)\\simeq\\operatorname{Map}^h_{\\mathcal M}(C,Y)$; by the triangle identity, precomposition with the counit $\\varepsilon=(i,1_C):FC\\to i$ followed by it is the forgetful map. By the left-Quillen clause of the frame theorem, $FB^\\bullet$ is a $\\mathcal U$-frame on $FC$ and $H_{\\mathcal U}(FB^\\bullet,f)=E$ degreewise realizes that equivalence. The maps $O\\amalg B^n\\to D^n$ (structure map and $B^n\\to D^n$) form a map of $\\mathcal U$-frames $FB^\\bullet\\to D^\\bullet$ with degree-zero component $\\varepsilon$, compatible with the augmentations since $d^n$ restricts to $i$ and $b^n$. Frame naturality in $\\mathcal U$ thus makes restriction along $B^n\\to D^n$ represent the forgetful map: this is forgetting the under-map and its specified equality. Combining the strict-fiber isomorphism and the homotopy-pullback equivalence proves the displayed equivalence, retaining the full homotopy fiber with all higher simplices.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 5.4.4 and Proposition 5.4.7, with the localization comparison already stated in lem-coef-cosimplicial-frame-mapping"
+   }
+  },
+  {
+   "text": "Use the fixed $A^\\bullet$ and the functorial relative factorization of Step 4 for every cofibration $O\\to C$. A map $g:C\\to C^{\\prime}$ under $O$ induces $B^\\bullet\\to B^{\\prime\\bullet}$ over $g$ and the identity of $A^\\bullet$, hence a map $D^\\bullet\\to D^{\\prime\\bullet}$. Postcomposition by a map $Y\\to Y^{\\prime}$ under $O$ sends $f a^n$ to $f^{\\prime}a^n$. Thus the strict-fiber isomorphisms and the comparisons to path fibers are natural maps of simplicial sets, with composition and identities inherited from the functorial choices. The naturality in the homotopy theory of both inputs supplied by the frame theorem identifies these transformations with precomposition and postcomposition on derived mapping spaces, including their coherent simplices. This proves the stated coherent naturality. None of these steps imposes enrichment, properness or combinatoriality.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 5.2.8, functorial relative Reedy extensions; Sections 5.4 and 5.6, through the naturality interface of the cited frame-mapping theorem"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-frame-source-kan-fibration",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-model-cofibrant-colimit-comparison",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-reedy-model-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Proposition 1.1.8, Remark 5.2.3, Theorems 5.2.5 and 5.2.8, Lemma 5.2.6 and Proposition 5.4.3; compatible-frame pushout argument repaired after return a793c736af."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +186,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-relative-cut-nerve-diagrams",
@@ -64,7 +198,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, middle derived mapping-complex comparison of prop-coef-integral-exceptional-adjoint: supporting the reconstruction of ordered operations; convert fixing vertex representatives in a model undercategory to retaining their identifications in an absolute derived mapping space.",
+   "place": "Proof paragraph 2, middle derived mapping-complex comparison: fix source structure maps through the undercategory, modeled by compatible absolute frames and their pushout along the base augmentation.",
    "via": [
     "lem-coef-relative-cut-nerve-diagrams",
     "lem-coef-colored-operation-section-reconstruction",
@@ -79,5 +213,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-model-undercategory-mapping-fiber",
+  "worker": "stage1",
+  "summary": "Repaired E3, E4/E5 and C4 of the returned delivery: constructed absolute frames A→B by relative Reedy factorization with degree zero fixed, used the existing cofibrant-span gluing lemma and an explicit undercategory latching calculation for D=B⊔_A O, added one statement-only lemma for arbitrary source-frame restriction, and identified the strict equation hu=f a before comparing with the homotopy fiber. Statement and original Mathlib searches retained; existing generic gluing theorem reused rather than duplicated.",
+  "blueprint": "Nearest ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, middle derived mapping-complex comparison: strict under-map equations are compared to a homotopy fiber via absolute compatible frames and their relative pushout."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NM-392469c1f",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-392469c1f (reviewer sub-agent of L); spot-checked: I read the whole item (10 steps), the new node lem-coef-frame-source-kan-fibration, the statements of all six cited nodes, the duplicate candidates (lem-cbc-framed-horn-criterion, the reedy-left/simplicial-frame comparisons, reedy-colimit-comparison, cofibration-local-mapping-test, kan-fibration-tower-limit), the citer relative-cut-nerve step 8, and the unit and ancestor. Hovey is not archived, so I checked the steps against the cited DAG statements and the standard content of Hovey 1.1.8, 5.2 and 5.4; the WANTED line stands. No SGA source is used. The item statement is unchanged and true; I tested i=1_O, O=0, Y=1 and empty fibers. Step 4: in Delta M_0=1 and L_0=0, so the fixed degree-0 factorization O->C->C is legitimate, and B is a frame on C. Step 5: I recomputed the U-latching object L_nB amalg_{L_nA} O, including n=1 (C amalg_O C, since the latching category there is disconnected) and n=0; it is a pushout of the relative latching cofibration. Step 6: gluing clause (b) applies, with all six objects cofibrant, both span maps u^n, and components (a^n,1,1). Step 7: A([n]->[0])=a^n, so the strict fiber is exactly {h : h u^n = f a^n}. Step 8: the new lemma's hypotheses hold, and the frame node's strict-pullback clause applies. The new node is true (Hovey 5.4.1/5.4.3 trivial corner, adjointed against Y->1). It is statement-only and self-contained, has the right blueprint from/via, and is not a duplicate: the framed-horn-criterion states its Kan-fibration conclusion only for resolutions it chooses existentially, without A^0=A, and lies in another unit. One gap (C4/E5), repaired: Step 9 said restriction along B->D 'is exactly' the forgetful map, but the frame node is natural only inside one model category and compatible only with left Quillen functors, and the forgetful functor is neither. I rewrote Step 9 to go through the left Quillen F=O amalg - and the derived adjunction: F B is a U-frame on FC with H_U(FB,f)=E, the map FB->D covers the counit (i,1_C), and the triangle identity finishes. I added lem-coef-model-infinity-derived-adjunction to the step's uses; it was already in proof_deps. Same unit throughout, so no tool_uses are needed. There is no cycle, the item is not a target, and no node is dropped.; 1 file(s) fixed by the reviewer"
  }
 }
