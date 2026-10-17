@@ -12,7 +12,8 @@
   "def-weil-pbc-proetale-modules",
   "def-weil-pbc-etale-origin-witness",
   "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-witness-compatibility"
  ],
  "proof": [
   {
@@ -233,5 +234,33 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-8c2a24c3e (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, with no fixes written. Every cited statement checked out: adic datum (P_n finite, A commutative Noetherian), proetale-modules (constant coefficient sheaves, exact termwise nu^*), etale-origin-witness, lem-pur-derived-change-of-rings, ringed-topoi derived tensor pullback (genuinely unbounded, with u^*P K-flat for flat-term K-flat P; here nu^{-1}(P_m)_et = (P_m)_proet, so u^* is the fixed-Lambda inverse image), prop-weil-pbc-site-comparison-finite-level (exactness and unit, both used in Step 3), and thm-weil-pbc-site-comparison (fully faithful on D^+, used in Steps 4-6). The source sentence is in blueprint main-20261015 prop-weil-pbc-preservation-constructible.proof.md lines 15-20 ('compatible etale-origin witnesses are carried to compatible witnesses'). Stacks 09B1 (proetale.tex lemma-compare-derived (2)) gives only the D^+ comparison, so proof_origin 'by agent' is correct. Step 3 gets the D^+ bound before full faithfulness is used: exactness gives F_n H^i(C) = H^i(M_n) = 0 for i < a_n, and the unit reflects this to H^i(C) = 0, so there is no circularity. Steps 4-5 lift the isomorphism and its inverse, with uniqueness and beta_{n,n} = 1 from faithfulness. I expanded the Step 6 cocycle myself: naturality of c, the level-(k,m) equation, tensor associativity and the rho cocycle give alpha_n F_n beta_{k,n}, and the source C_{k,n} is in D^+. Small cases tested: m = n, zero objects, empty scheme, k = m, I = 0, zero ring. The M_n in D^+ hypothesis is needed (Z/l over Z/l^2 has unbounded Tor), and nothing is weakened. The parent's normalizations from the adic datum match the rho hypotheses. No new nodes; the grep for duplicates turned up only definitions and statements about geometric functors. I accept the declared tool_use of lem-pur-derived-change-of-rings as generic coefficient calculus. No SGA source is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e987e887a",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node: T, adic datum, P_n reindexed n+1 with no level lost, M_n in D+ via the canonical realization, retained EtaleOriginWitness pairs, rho for all m>=n with canonical unit and cocycle; conclusion gives D+ etale reductions, existence plus pairwise uniqueness of beta via the same compatibility equation as landed PbcWitnessedTower (c = pbcComparisonReduction mate, directions checked), beta_nn = unit, full cocycle. Node diff: only lean plus landed stmt_dep def-weil-pbc-witness-compatibility (allowed, no cycle); statement verbatim. Helpers are real canonical constructions (no sorryAx in restriction unit), docstrings carry source and blueprint tags, single sorry, no extra assumptions; A : Type (u+1) follows the landed coefficient convention. nt_compile.py rc=0 in 2.5 s with no diagnostics; probe confirms all universes bound. Second reading is disclosed as the worker's own pass but is substantive."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedEtaleOriginWitnesses",
+  "declaration": "AlgebraicGeometry.ProEtale.normalizedEtaleOriginWitnesses",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.normalizedOriginRestrictionUnit",
+   "AlgebraicGeometry.ProEtale.normalizedOriginScalarUnit",
+   "AlgebraicGeometry.ProEtale.normalizedOriginQuotientUnit",
+   "AlgebraicGeometry.ProEtale.normalizedOriginQuotientComp",
+   "AlgebraicGeometry.ProEtale.normalizedOriginReduction",
+   "AlgebraicGeometry.ProEtale.NormalizedOriginCompatibility",
+   "AlgebraicGeometry.ProEtale.normalizedEtaleOriginWitnesses"
+  ],
+  "file": "lean/Sheaf/Paper/NormalizedEtaleOriginWitnesses.lean",
+  "statement": "theorem normalizedEtaleOriginWitnesses (rho_id : ∀ n : ℕ, (rho n n (le_refl n)).hom = (normalizedOriginQuotientUnit (Scheme.ProEt.topology T) d n).hom.app (M n)) (rho_comp : ∀ (k m n : ℕ) (hnm : n ≤ m) (hmk : m ≤ k), (normalizedOriginReduction (Scheme.ProEt.topology T) d m n hnm).map (rho k m hmk).hom ≫ (rho m n hnm).hom = (normalizedOriginQuotientComp (Scheme.ProEt.topology T) d k m n hnm hmk).hom.app (M k) ≫ (rho k n (hnm.trans hmk)).hom) : (∀ (m n : ℕ) (h : n ≤ m), DerivedCategory.TStructure.t.plus ((normalizedOriginReduction T.smallEtaleTopology d m n h).obj (W m).L.obj)) ∧ ∃ beta : ∀ (m n : ℕ) (h : n ≤ m), (normalizedOriginReduction T.smallEtaleTopology d m n h).obj (W m).L.obj ≅ (W n).L.obj, (∀ (m n : ℕ) (h : n ≤ m), NormalizedOriginCompatibility T d M hM W rho m n h (beta m n h)) ∧ (∀ (m n : ℕ) (h : n ≤ m) (beta' : (normalizedOriginReduction T.smallEtaleTopology d m n h).obj (W m).L.obj ≅ (W n).L.obj), NormalizedOriginCompatibility T d M hM W rho m n h beta' → beta' = beta m n h) ∧ (∀ n : ℕ, (beta n n (le_refl n)).hom = (normalizedOriginQuotientUnit T.smallEtaleTopology d n).hom.app (W n).L.obj) ∧ (∀ (k m n : ℕ) (hnm : n ≤ m) (hmk : m ≤ k), (normalizedOriginReduction T.smallEtaleTopology d m n hnm).map (beta k m hmk).hom ≫ (beta m n hnm).hom = (normalizedOriginQuotientComp T.smallEtaleTopology d k m n hnm hmk).hom.app (W k).L.obj ≫ (beta k n (hnm.trans hmk)).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the canonical fixed-ring presentation through finiteCoefficientRealization and the retained Scheme.EtaleOriginWitness pair. Index n denotes exponent n+1. The added landed definition dependency supplies canonical scalar-extension adjoints, their comparison mate and the chosen-origin isomorphism; no statement is corrected. Helpers expose the actual self-extension unit, all-pairs reassociation, and the compatibility equation. Every pair has an independently unique lift; the conclusion also states the unit and full three-level cocycle."
  }
 }

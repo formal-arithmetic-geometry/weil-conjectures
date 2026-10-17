@@ -237,5 +237,23 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-b77895c70 (reviewer sub-agent of L); spot-checked: PASS with no changes; review.md has the full checks. Item: a categorical generalization of Stacks 0GSL (derived.tex:1497), flagged as such in source.place. The Stacks proof uses only the right axioms RMS1-3 (categories.tex:3930-3944) and the density of denominators from the subcategory, not saturation or the triangulated structure. Axiom directions match Mathlib HasRightCalculusOfFractions. The only user is step 9 of lem-trf-finite-filtered-flat-resolution, which applies the item within its hypotheses. Small cases checked: B=C; W=identities; W=isos; B empty with C nonempty (density fails); C empty. Steps 1-2: the Ore square and cancellation refine correctly through r:B_T->T in W; f need not be in W; elementary. Step 3: clause (1) of lem-weil-pbc-localization-universal-property gives F and a natural iso to Q_C i; the roof formula is verified through naturality at a and s. Step 4: lem-pc-right-fraction-representation (generic, matching exists_rightFraction) plus refinement gives surjectivity. Step 5: in common-refinement only the common composite s1b1=s2b2 must be in W (Mathlib RightFractionRel at CalculusOfFractions.lean:894-898); composing with r puts the witness in W_B, so the reverse implication in B applies once steps 1-2 hold. No two-out-of-three is used. Steps 6-7: conjugation by the e_A isomorphisms and the composite alpha_B, Q_C(s), iso are correct. proof_deps equals the union of the uses. New leaves are exact Mathlib facts and not duplicates: lem-trf-localization-essentially-surjective is Localization.essSurj (Predicate.lean:201-206, holds for any IsLocalization W); lem-trf-fully-faithful-ess-surj-equivalence is IsEquivalence (Equivalence.lean:606-609) and asEquivalence (642, tagged stacks 02C3). Both are statement-only, with searches of three kinds recorded. The DAG duplicate search (derivability structure, multivariable derived calculus, nattrans-from-resolving-class, fibrant-subcategory infinity localization, D+ localization, all 02C3/asEquivalence citers) found no duplicate. Mathlib's isLocalizedEquivalence_of_functorial_right_resolutions needs functorial resolutions, so the item is not a Mathlib leaf. All cited proof nodes are Mathlib leaves, so tool_uses is empty and none is needed. The blueprint from/via fields are correct. No SGA is cited. Not a target node, so the base-change and coefficient checks do not apply."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e8e9a09c5",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Lean matches node clause by clause. HasRightCalculusOfFractions (IsMultiplicative + exists_rightFraction with only s in W + ext) matches the node's axioms and directions; P.FullSubcategory with W.inverseImage P.ι is W_B; hP gives B→X in W (same direction as Stacks 0GSL derived.tex), no functorial choice; arbitrary IsLocalization presentations per the dependency lem-weil-pbc-localization-universal-property; conclusion has both clauses, and the iso QB⋙F≅P.ι⋙Q pins F to the induced functor; six independent universes, all bound. Edge cases B=C, B empty, W=id/isos covered. No duplicate (functorial-resolutions criterion is stronger). Gates: no defs, sorry only, source/blueprint docstrings with all 7 proof steps, statement verbatim, both report sections present. nt_compile.py refused the snapshot path (outside the side lean tree); its --json mode compiled the file with no error in 0.8 s; no sorry warning printed, and an injected false example was flagged as an error. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightFractionDenseSubcategory",
+  "declaration": "CategoryTheory.rightFractionDenseSubcategory",
+  "file": "lean/Sheaf/CategoryTheory/RightFractionDenseSubcategory.lean",
+  "statement": "theorem rightFractionDenseSubcategory {C : Type u₁} [Category.{v₁} C] (W : MorphismProperty C) (hW : W.HasRightCalculusOfFractions) (P : ObjectProperty C) (hP : ∀ X : C, ∃ (B : P.FullSubcategory) (s : P.ι.obj B ⟶ X), W s) {D : Type u₂} [Category.{v₂} D] (Q : C ⥤ D) [Q.IsLocalization W] {E : Type u₃} [Category.{v₃} E] (QB : P.FullSubcategory ⥤ E) [QB.IsLocalization (W.inverseImage P.ι)] : (W.inverseImage P.ι).HasRightCalculusOfFractions ∧ ∃ (F : E ⥤ D), F.IsEquivalence ∧ Nonempty (QB ⋙ F ≅ P.ι ⋙ Q)",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
