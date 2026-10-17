@@ -11,9 +11,89 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a subset T of A with cardinality less than κ. Since H preserves all small colimits, the cocone Hq over A is colimiting with apex H(x); it is equivalent to the given colimit cocone for r over J. Apply the common-refinement lemma to the two κ-filtered posets A and J, the compact-valued diagrams H∘q and r, and the subsets T and the empty subset. It supplies filtered subsets b⊂A and c⊂J of cardinality less than κ, with T⊂b, and an equivalence between colim_{N(b)} Hq|_{N(b)} and colim_{N(c)} r|_{N(c)}.",
+   "uses": [
+    "lem-coef-filtered-presentation-common-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.14 proof, printed p. 481: apply Lemma 5.5.4.13 to the presentation of H(x) and the prescribed P-presentation."
+   }
+  },
+  {
+   "text": "The chosen cocone on q|_{N(b)} has apex x_b, and H preserves this colimit, so H(x_b) is equivalent to colim_{N(b)} Hq|_{N(b)}. Composing with the equivalence from the preceding step identifies H(x_b) with colim_{N(c)} r|_{N(c)}. This is a κ-small colimit: the nondegenerate simplices of N(c) are finite strict chains in c, so there are at most max(ℵ₀,|c|)<κ, using the uncountability of κ. Every value of r lies in P, and P is closed under κ-small colimits computed in F and under equivalence; hence H(x_b) belongs to P. Thus b is in B, and every T of cardinality less than κ is contained in an element of B.",
+   "uses": [
+    "lem-coef-filtered-presentation-common-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.14 proof, printed p. 481: the good partial colimit has image in the closed compact subcategory."
+   }
+  },
+  {
+   "text": "The collection of subsets of the small set A is small, so its subcollection B is small. Taking T to be the empty subset in the preceding construction shows that B is nonempty. This also records the required empty-subset convention for filteredness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.14 proof, printed p. 481: smallness and the initial good partial colimit."
+   }
+  },
+  {
+   "text": "Let (b_i)_{i∈I} be any family in B indexed by a set I of cardinality less than κ. Regularity of κ gives |⋃_{i∈I}b_i|<κ. Applying the containment property of Step 2 to T=⋃_{i∈I}b_i gives b∈B with ⋃_{i∈I}b_i⊂b, hence an upper bound for the family. For I empty this is the nonemptiness already proved. Therefore B is κ-filtered as a partially ordered set. Equivalently, any diagram from a κ-small simplicial set into N(B) uses fewer than κ vertices of B. An upper bound for those vertices extends the diagram to a cocone, since the order uniquely supplies all simplices involving the new final vertex. Thus N(B) satisfies the quasicategorical filteredness convention as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.14 proof, printed p. 481: regularity gives filteredness of the good-subset poset."
+   }
+  },
+  {
+   "text": "For b∈B, the nondegenerate simplices of N(b) are finite strict chains in b. Their number is at most max(ℵ₀,|b|)<κ because κ is uncountable, so N(b) is κ-small. The diagram q|_{N(b)} has κ-compact values by hypothesis, E is locally small and admits all small κ-filtered colimits, and its chosen colimiting cocone has apex x_b. The compact-small-colimits lemma therefore shows that x_b is κ-compact.",
+   "uses": [
+    "lem-coef-compact-small-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.14 proof, printed p. 481: compactness of each good partial colimit."
+   }
+  },
+  {
+   "text": "Regard N(b) as a simplicial subset of N(A). For each simplex of N(A), its finite set of vertices is contained in some b∈B by Step 2, and the whole simplex then lies in N(b), since b has its inherited order. Hence the subsets N(b) cover N(A), and inclusion b⊂b′ induces inclusion N(b)⊂N(b′). The index B is small, nonempty and directed by Steps 3 and 4. Apply the directed-cover colimit-assembly lemma to this cover, the diagram q, and the chosen colimiting cocones with apices x_b. It produces a coherent diagram q′:N(B)→E with q′(b)=x_b and a compatible colimiting cocone from q′ to x whose components are induced by the original cocone on q.",
+   "uses": [
+    "lem-coef-directed-cover-colimit-assembly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.14 proof, printed p. 481, using Proposition 4.2.3.4 and Corollary 4.2.3.10 for the coherent partial-colimit assembly."
+   }
+  },
+  {
+   "text": "By Step 5 every object q′(b)=x_b is κ-compact, and by the definition of B every H(q′(b))=H(x_b) lies in P. Together with the coherent assembly and colimiting cocone from Step 6, these are all the asserted properties.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.14 proof, printed p. 481: final verification of the refined presentation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-compact-small-colimits",
+  "lem-coef-directed-cover-colimit-assembly",
+  "lem-coef-filtered-presentation-common-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent-written generic-functor elaboration of the good partial-colimit construction in HTT Lemma 5.5.4.14, printed p. 481. Source read online, not archived in literature/; marked agent under the missing-archive rule."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +129,24 @@
    "results": "{\"t\": \"2026-10-17T07:24:35Z\", \"tool\": \"leanfinder\", \"query\": \"Regroup a kappa filtered diagram of compact objects into small filtered partial colimits whose images lie in the compact generators of an Ind subcategory of a quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalFilteredGenerator.of_isDense\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.exists_colimitsOfShape\", \"CategoryTheory.Limits.IndObjectPresentation.hI\", \"CategoryTheory.instHasFilteredColimitsInd\", \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"CategoryTheory.Ind\", \"CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone\", \"CategoryTheory.ObjectProperty.isCardinalFiltered_costructuredArrow_colimitsCardinalClosure_ι\"], \"digest\": \"ae0046a4096421f8\"}",
    "date": "2026-10-17",
    "verdict": "no match: semantic and Loogle hits use ordinary Category instances, set-valued Hom functors, or ordinary Ind categories. Presentable/Basic.lean:39-77 confirms that scope. The pinned Quasicategory/Basic.lean:34-43 defines inner-horn fillers; the grep hits are tactic refine, not coherent compact-presentation regrouping. No one-line specialization gives this infinity-categorical statement."
+  },
+  {
+   "tool": "grep",
+   "query": "compact|presentab|filtered|colimit",
+   "results": "{\"t\": \"2026-10-17T08:43:32Z\", \"tool\": \"grep\", \"query\": \"compact|presentab|filtered|colimit\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary-category presentability and colimit-presentation candidates; their Category and set-valued Hom hypotheses do not specialize to the coherent quasicategory assertion. The Quasicategory source supplies horn-filling definitions, not this regrouping theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regroup a kappa filtered compact presentation along a colimit preserving functor in an infinity category so partial colimits land in a closed full subcategory",
+   "results": "{\"t\": \"2026-10-17T08:43:44Z\", \"tool\": \"leanfinder\", \"query\": \"Regroup a kappa filtered compact presentation along a colimit preserving functor in an infinity category so partial colimits land in a closed full subcategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitPresentation.bind_diag_obj\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit'\", \"CategoryTheory.isCardinalPresentable_of_isColimit\", \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal\", \"CategoryTheory.isClosedUnderColimitsOfShape_isCardinalPresentable\"], \"digest\": \"f79f636826aed42f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary-category presentability and colimit-presentation candidates; their Category and set-valued Hom hypotheses do not specialize to the coherent quasicategory assertion. The Quasicategory source supplies horn-filling definitions, not this regrouping theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-small-saturated-arrow-accessibility",
@@ -78,5 +172,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-compact-presentation-functor-refinement",
+  "worker": "stage1",
+  "summary": "Split the good-partial-colimit refinement into common refinement, P-closure, smallness and filteredness, compactness, and coherent assembly. Reused three existing lemmas and created no nodes. Made the uncountable-cardinal nerve-size bound, empty-family case and simplexwise nerve cover explicit. Retained the statement and prior search records, added saved NS search results, and marked the proof agent-written because HTT is not archived locally, although its relevant passages were read online.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint (finite-coefficient mapping-complex adjunction), reached through the lower-level presentability infrastructure in blueprint.from.via: the steps realize the construction in the proof of HTT Lemma 5.5.4.14 (printed p. 481) of the good partial-colimit poset B and the replacement of A by B.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NS-c8d1da073",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-c8d1da073 (reviewer sub-agent of L); spot-checked: I read the item, the three proof deps (lem-coef-filtered-presentation-common-refinement, lem-coef-compact-small-colimits, lem-coef-directed-cover-colimit-assembly), both stmt defs (def-coef-presentable-infinity-category, def-cbc-enhanced-diagrams-cones), the consuming parent step (lem-coef-small-saturated-arrow-accessibility step 4) and the blueprint node prop-coef-integral-exceptional-adjoint. The statement is byte-identical to the base and live DAG, so nothing is weakened. The delivery creates no new nodes. Step 1: every hypothesis of common refinement holds in F. H(q(a)) and r(j) are kappa-compact, colim Hq ~ H(x) ~ colim r, and the subsets are T and the empty set. Step 2: N(c) is kappa-small (at most max(aleph0,|c|) chains, below kappa since kappa is uncountable), and P is replete and closed under kappa-small colimits, so H(x_b) is in P. Step 3: B is small and nonempty (take T empty). Step 4: regularity gives kappa-filteredness, and the quasicategorical convention also holds because N(poset) cocones are determined by vertices. Step 5: compact-small-colimits applies (E locally small, kappa-small nerve, compact vertices). Step 6: directed-cover assembly applies (B small, nonempty, finitely directed; the N(b) monotone and covering N(A) chain by chain). Step 7 just collects the results. Every hypothesis of the item is used. Small cases (singleton A, P = initial objects, T empty) are consistent. There is no duplicate (grep for 5.5.4.13/14, partial colimit, regroup), the route stays inside sk-prop-sf-biduality-general with no tool use, the item is not reachable from its own deps (705-node closure), and no SGA is cited. HTT is not archived and is cited by URL like 168 other nodes; WANTED is recorded and proof_origin agent is correct. I did not re-read HTT itself. FIX: the delivery had rewritten the inherited blueprint.from.place to say that proof paragraph 2 of prop-coef-integral-exceptional-adjoint is the HTT construction. That paragraph is the RHom adjunction calculation. I restored the inherited place (mapping-complex adjunction, lower-level presentability infrastructure) and reworded split_report.blueprint to match; the statement and proof are unchanged. The full corrected item is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  }
 }
