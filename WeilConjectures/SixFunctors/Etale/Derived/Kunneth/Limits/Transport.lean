@@ -104,7 +104,9 @@ lemma transition_comapB {α β : LimitStage B W} (φ : Hom α β)
   simp only [Functor.comp_map, Functor.map_comp, Category.assoc] at n
   simp only [transition_app, comapBIso, Iso.symm_hom, Iso.app_inv, Functor.map_comp,
     Category.assoc]
-  rw [n, reassoc_of% hA']
+  rw [n]
+  simp only [Functor.comp_obj]
+  rw [reassoc_of% hA']
 
 end LimitStage
 
@@ -142,7 +144,8 @@ lemma isStalkColimit_comapB [IsCofiltered I] (𝒮 : LimitStageSystem B W I)
     have n := (((b)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q).hom.naturality
       ((LimitStage.transition Λ φ).app K)
     simp only [Functor.comp_map] at n
-    simp only [e, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc]
+    simp only [e, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc,
+      LimitStage.functor_obj]
     rw [reassoc_of% n, ← Functor.map_comp, LimitStage.transition_comapB, Functor.map_comp]
   have he' {α β : LimitStage B W} (φ : LimitStage.Hom α β) :
       (e β).inv ≫ ((b)^*[ModuleCat.{u + 1} Λ]).map ((DerivedCategory.Plus.homologyFunctor _ q).map

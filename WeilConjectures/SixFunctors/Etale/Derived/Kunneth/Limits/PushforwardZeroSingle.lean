@@ -119,17 +119,7 @@ lemma homotopyTransition_quotient {α β : LimitStage B W} (φ : Hom α β)
           (Y := ((sheafFunctor Λ α).mapCochainComplexPlus).obj K)
           ((NatTrans.mapHomologicalComplex (sheafTransition Λ φ) (.up ℤ)).app K.obj)) := by
   apply (HomotopyCategory.Plus.ι _).map_injective
-  simp only [homotopyTransition, Functor.map_comp, NatTrans.ι_map_mapHomotopyCategoryPlus_app,
-    NatTrans.mapHomotopyCategory_app]
-  change (HomotopyCategory.quotient _ _).map _ ≫
-    (((α.π)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategory _).map
-      ((HomotopyCategory.quotient _ _).map _ ≫
-        (((α.g)_*[ModuleCat.{u + 1} Λ]).mapHomotopyCategory _).map
-          ((HomotopyCategory.quotient _ _).map _)) = (HomotopyCategory.quotient _ _).map _
-  simp only [Functor.mapHomotopyCategory_map, ← Functor.map_comp]
-  congr 1
-  ext n
-  simp [sheafTransition]
+  rfl
 
 /-- **`H⁰` of the transition maps of stages**: under the identifications
 `AlgebraicGeometry.Etale.LimitStage.homologyZeroIso`, `H⁰` of the transition map of a morphism

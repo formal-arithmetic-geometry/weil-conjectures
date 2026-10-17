@@ -65,6 +65,7 @@ lemma descentTransition_eq_upperStarComp :
   rw [← reassoc_of% n3,
     reassoc_of% ((upperStarLowerStarAdjunction A g).right_triangle_components
       ((q)_*[A].obj F)), descentTransitionAux]
+  rfl
 
 /-- Morphisms to `q_* F` are determined by their transposes `q^* M ⟶ F`. -/
 lemma eq_of_upperStar_map_comp_counit {M : Sheaf Y.smallEtaleTopology A}
@@ -120,13 +121,14 @@ lemma sheafTransition_pushforwardStage_proj (q : X ⟶ Y) :
         (((f₀)_*[ModuleCat.{u + 1} Λ]).obj J) := by
   have h1 : (Etale.upperStarComp (ModuleCat.{u + 1} Λ) (𝟙 X) q q (by simp)).hom.app
       (((f₀ ≫ q)_*[ModuleCat.{u + 1} Λ]).obj (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J)) =
-      (Etale.upperStarId (ModuleCat.{u + 1} Λ) X).inv.app _ := by
+      (Etale.upperStarId (ModuleCat.{u + 1} Λ) X).inv.app (((q)^*[ModuleCat.{u + 1} Λ]).obj
+        (((f₀ ≫ q)_*[ModuleCat.{u + 1} Λ]).obj (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J))) := by
     rw [Etale.upperStarComp_id_left]
-    simp
+    simp <;> rfl
   have h2 : (Etale.upperStarComp (ModuleCat.{u + 1} Λ) (𝟙 Z) (𝟙 Z) (𝟙 Z) (by simp)).inv.app J =
-      (Etale.upperStarId (ModuleCat.{u + 1} Λ) Z).hom.app _ := by
+      (Etale.upperStarId (ModuleCat.{u + 1} Λ) Z).hom.app (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J) := by
     rw [Etale.upperStarComp_id_left]
-    simp
+    simp <;> rfl
   have n := (Etale.upperStarId (ModuleCat.{u + 1} Λ) X).hom.naturality
     ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ)
         (⟨by simp⟩ : CommSq (𝟙 Z) f₀ (f₀ ≫ q) q)).app (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J) ≫
@@ -224,7 +226,7 @@ lemma pushforwardStageIso_descentTransition (q : X ⟶ Y) {Y' : Scheme.{u}} (g :
   apply eq_of_upperStar_map_comp_counit
   rw [← cancel_epi ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) q g r hr).hom.app
     (((f₀ ≫ r)_*[ModuleCat.{u + 1} Λ]).obj (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J)))]
-  rw [← reassoc_of% hL, ← reassoc_of% hR, Category.assoc, descentTransition_counit, ← hr',
+  rw [← reassoc_of% hL, ← reassoc_of% hR, descentTransition_counit, ← hr',
     hq, ← reassoc_of% hc]
 
 end Pushforward

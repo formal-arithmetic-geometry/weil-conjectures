@@ -64,10 +64,7 @@ lemma higherDirectImageOverMap_id (g : T ⟶ S)
   have h := Etale.homologyFunctor_map_overLowerStarTransition Λ g G q (𝟙 U)
   rw [overLowerStarTransition_id Λ g U.hom _ (Over.id_left U), CategoryTheory.Functor.map_id,
     Category.id_comp] at h
-  rw [← cancel_epi ((DerivedCategory.Plus.homologyFunctor _ q).map
-    (R+((U.hom ≫ g)_*[ModuleCat.{u + 1} Λ]).map
-      ((((U.hom)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app G))),
-    ← h, Category.comp_id]
+  exact (cancel_epi _).1 (h.symm.trans (Category.comp_id _).symm)
 
 end Identity
 
@@ -158,6 +155,14 @@ noncomputable def fixedBaseSystem : LimitStageSystem X W I where
   π i := fixedBaseHom k p (c.π.app i)
   w f := LimitStage.Hom.ext (by simp [← Over.comp_left]) (by simp)
 
+lemma fixedBaseSystem_π_eq (i : I) :
+    (fixedBaseSystem (k := k) (p := p) (D := D) (c := c)).π i = fixedBaseHom k p (c.π.app i) :=
+  rfl
+
+lemma fixedBaseSystem_map_eq {i j : I} (f : i ⟶ j) :
+    (fixedBaseSystem (k := k) (p := p) (D := D) (c := c)).map f = fixedBaseHom k p (D.map f) :=
+  rfl
+
 /-- **The fixed-base limit theorem, pulled back along `p : X ⟶ S`, as a system of stages.** -/
 theorem isStalkColimit_fixedBaseSystem [IsCofiltered I]
     [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left]
@@ -174,11 +179,11 @@ theorem isStalkColimit_fixedBaseSystem [IsCofiltered I]
       (Etale.sourceStageIso Λ p k G q (D.obj i)))
     ((X.uliftPointSmallEtale x).sheafFiber.mapIso (Etale.sourceStageIso Λ p k G q c.pt))
     (fun i ↦ ?_) (fun f ↦ ?_) (isElementwiseColimit_sheafFiber_of_isColimit hcol x)
-  · simp only [Functor.mapIso_hom, fixedBaseSystem_π, fixedBaseSystem_obj, fixedBaseSystem_pt,
+  · simp only [Functor.mapIso_hom, fixedBaseSystem_π_eq,
       stalkHomology, Functor.comp_map, transition_fixedBaseHom, Functor.mapCocone_ι_app,
       fixedBaseCocone_ι_app, fixedBaseDiagram_map, Quiver.Hom.unop_op]
     exact (Etale.sheafFiber_map_sourceStageIso_naturality Λ p k G q (c.π.app i) x).symm
-  · simp only [Functor.mapIso_hom, fixedBaseSystem_map, fixedBaseSystem_obj, stalkHomology,
+  · simp only [Functor.mapIso_hom, fixedBaseSystem_map_eq, stalkHomology,
       Functor.comp_map, transition_fixedBaseHom, Functor.mapCocone_ι_app,
       fixedBaseCocone_ι_app, fixedBaseDiagram_map, Quiver.Hom.unop_op]
     exact (Etale.sheafFiber_map_sourceStageIso_naturality Λ p k G q (D.map f) x).symm

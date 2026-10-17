@@ -125,11 +125,13 @@ noncomputable def sheafTransition {α β : LimitStage B W} (φ : Hom α β) :
     sheafFunctor Λ β ⟶ sheafFunctor Λ α :=
   Functor.whiskerLeft ((β.w)^*[ModuleCat.{u + 1} Λ] ⋙ (β.g)_*[ModuleCat.{u + 1} Λ])
       (Etale.upperStarComp (ModuleCat.{u + 1} Λ) α.π φ.s β.π φ.wπ.symm).hom ≫
-    Functor.whiskerLeft (β.w)^*[ModuleCat.{u + 1} Λ]
-      (Functor.whiskerRight (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) ⟨φ.wg⟩)
-        (α.π)^*[ModuleCat.{u + 1} Λ]) ≫
-    Functor.whiskerRight (Etale.upperStarComp (ModuleCat.{u + 1} Λ) φ.t β.w α.w φ.ww.symm).inv
-      ((α.g)_*[ModuleCat.{u + 1} Λ] ⋙ (α.π)^*[ModuleCat.{u + 1} Λ])
+    Functor.whiskerRight
+      (Functor.whiskerLeft (β.w)^*[ModuleCat.{u + 1} Λ]
+          (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) ⟨φ.wg⟩) ≫
+        Functor.whiskerRight
+          (Etale.upperStarComp (ModuleCat.{u + 1} Λ) φ.t β.w α.w φ.ww.symm).inv
+          (α.g)_*[ModuleCat.{u + 1} Λ])
+      (α.π)^*[ModuleCat.{u + 1} Λ]
 
 lemma sheafTransition_app {α β : LimitStage B W} (φ : Hom α β)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -141,7 +143,7 @@ lemma sheafTransition_app {α β : LimitStage B W} (φ : Hom α β)
               (((β.w)^*[ModuleCat.{u + 1} Λ]).obj G) ≫
             ((α.g)_*[ModuleCat.{u + 1} Λ]).map
               ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) φ.t β.w α.w φ.ww.symm).inv.app G)) := by
-  simp [sheafTransition]
+  rfl
 
 /-- The levelwise underived transition map on the bounded below homotopy categories. -/
 noncomputable def homotopyTransition {α β : LimitStage B W} (φ : Hom α β)

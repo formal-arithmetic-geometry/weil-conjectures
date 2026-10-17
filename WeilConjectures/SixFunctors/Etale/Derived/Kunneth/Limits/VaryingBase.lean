@@ -64,7 +64,7 @@ lemma isStalkColimit_varyingBaseFixedSystem [IsCofiltered I] (hS : IsLimit cS)
     [∀ {i j : I} (f : i ⟶ j), IsAffineHom (S.map f)]
     [∀ {i j : I} (f : i ⟶ j), IsAffineHom (T.map f)] [QuasiCompact g₀] [QuasiSeparated g₀]
     (j : I) (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) :
-    (varyingBaseFixedSystem g w j).IsStalkColimit Λ
+    (varyingBaseFixedSystem (cS := cS) (cT := cT) g w j).IsStalkColimit Λ
       ((DerivedCategory.Plus.singleFunctor _ 0).obj G) q := by
   have : ∀ {U V : Over j} (φ : U ⟶ V), IsAffineHom ((Over.post (X := j) T).map φ).left :=
     fun φ ↦ (inferInstance : IsAffineHom (T.map φ.left))
@@ -85,7 +85,8 @@ lemma isStalkColimit_varyingBaseFixedSystem [IsCofiltered I] (hS : IsLimit cS)
     (Functor.Initial.isLimitWhiskerEquiv (Over.forget j) cT).symm hT
   exact LimitStageSystem.isStalkColimit_mapW (w.app j) _ (LimitStageSystem.isStalkColimit_of_iso _
     ((((w.app j)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app G)
-    (isStalkColimit_fixedBaseSystem Λ (k := g.app j) (q := q) (p := cS.π.app j) (hc := hc)))
+    (isStalkColimit_fixedBaseSystem Λ (g.app j) (((w.app j)^*[ModuleCat.{u + 1} Λ]).obj G) q
+      (Over.post (X := j) T) (cT.overPost j) (cS.π.app j) hc))
 
 /-- The `[*]`-system `(T, Sⱼ, g₀ ≫ πⱼ, πⱼ, 𝟙 ≫ w₀)`. -/
 noncomputable abbrev varyingBaseStarSystem : LimitStageSystem cS.pt W I :=
@@ -119,7 +120,7 @@ theorem isStalkColimit_varyingBaseSystem [IsCofiltered I] (hS : IsLimit cS) (hT 
     (ModuleCat.{u + 1} Λ)) 0).obj G
   let 𝒜 := varyingBaseSystem g hg₀ w w₀ hw₀
   let ℰ := varyingBaseStarSystem (g₀ := g₀) w₀
-  let 𝒟 (j : I) := varyingBaseFixedSystem g w j
+  let 𝒟 (j : I) := varyingBaseFixedSystem (cS := cS) (cT := cT) g w j
   let θ {α β : LimitStage cS.pt W} (φ : LimitStage.Hom α β) :=
     ((stalkHomology Λ q x).map ((LimitStage.transition Λ φ).app K)).hom
   have tc' {α β γ : LimitStage cS.pt W} (φ : LimitStage.Hom α β) (ψ : LimitStage.Hom β γ) (y) :

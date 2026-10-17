@@ -62,8 +62,12 @@ lemma isZero_pushforwardStageSystem_of_injective
         ((DerivedCategory.Plus.singleFunctor _ 0).obj J))) := by
   have : Injective (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J) :=
     Injective.of_iso ((Etale.upperStarId (ModuleCat.{u + 1} Λ) Z).app J).symm inferInstance
-  exact ⟨fun i ↦ LimitStage.isZero_homology_functor_obj_single_of_injective Λ _ J hq,
-    LimitStage.isZero_homology_functor_obj_single_of_injective Λ _ J hq⟩
+  refine ⟨fun i ↦ ?_, ?_⟩
+  · have : Injective ((((pushforwardStageSystem c f₀).obj i).w)^*[ModuleCat.{u + 1} Λ].obj J) :=
+      this
+    exact LimitStage.isZero_homology_functor_obj_single_of_injective Λ _ J hq
+  · have : Injective (((pushforwardStageSystem c f₀).pt.w)^*[ModuleCat.{u + 1} Λ].obj J) := this
+    exact LimitStage.isZero_homology_functor_obj_single_of_injective Λ _ J hq
 
 variable [IsCofiltered I] (hc : IsLimit c) [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
   [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)]

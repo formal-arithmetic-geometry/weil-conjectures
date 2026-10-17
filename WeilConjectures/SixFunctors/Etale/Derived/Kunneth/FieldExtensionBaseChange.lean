@@ -126,7 +126,87 @@ theorem Etale.isIso_baseChangeHomologyMap_of_fieldExtension {K L : Type u} [Fiel
     {e : T' ⟶ T} {h : T' ⟶ S'} (sq : IsPullback e h g p) (q : ℤ)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of K)) F] :
-    IsIso (Etale.baseChangeHomologyMap Λ sq q F) :=
-  sorry
+    IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
+  -- the perfect closures `K'` of `K` and `L'` of `L` inside an algebraic closure of `L`
+  let K' := perfectClosure K (AlgebraicClosure L)
+  let L' := perfectClosure L (AlgebraicClosure L)
+  letI : Algebra K' L' := (perfectClosureAlgebraicClosureHom K L).toRingHom.toAlgebra
+  have hsep : Algebra.IsSeparableExtension K' L' :=
+    Algebra.isSeparableExtension_of_perfectField K' L'
+  let πK : Spec (.of K') ⟶ Spec (.of K) := Spec.map (CommRingCat.ofHom (algebraMap K K'))
+  let πL : Spec (.of L') ⟶ Spec (.of L) := Spec.map (CommRingCat.ofHom (algebraMap L L'))
+  let ι : Spec (.of L') ⟶ Spec (.of K') := Spec.map (CommRingCat.ofHom (algebraMap K' L'))
+  have : IsUniversalHomeomorphism πK :=
+    Algebra.IsUniversalHomeomorphism.isUniversalHomeomorphism
+  have : IsUniversalHomeomorphism πL :=
+    Algebra.IsUniversalHomeomorphism.isUniversalHomeomorphism
+  have hcomm : πL ≫ Spec.map (CommRingCat.ofHom (algebraMap K L)) = ι ≫ πK := by
+    simp only [πL, πK, ι, ← Spec.map_comp]
+    congr 1
+    ext x
+    exact Subtype.ext ((IsScalarTower.algebraMap_apply K L (AlgebraicClosure L) x).symm.trans
+      (IsScalarTower.algebraMap_apply K K' (AlgebraicClosure L) x))
+  -- the base changes `S₁ = S_{K'}` and `S₂ = S'_{L'}`
+  let p₁ := pullback.fst σ πK
+  let σ₁ := pullback.snd σ πK
+  let p₂ := pullback.fst σ' πL
+  let σ₂ := pullback.snd σ' πL
+  have : IsUniversalHomeomorphism p₁ :=
+    MorphismProperty.of_isPullback (IsPullback.of_hasPullback σ πK) inferInstance
+  have : IsUniversalHomeomorphism p₂ :=
+    MorphismProperty.of_isPullback (IsPullback.of_hasPullback σ' πL) inferInstance
+  let r : pullback σ' πL ⟶ pullback σ πK := pullback.lift (p₂ ≫ p) (σ₂ ≫ ι) (by
+    rw [Category.assoc, hS.w, ← Category.assoc, pullback.condition, Category.assoc, hcomm,
+      Category.assoc])
+  have hr₁ : r ≫ p₁ = p₂ ≫ p := pullback.lift_fst _ _ _
+  have hS₁ : IsPullback r σ₂ σ₁ ι := by
+    have big := (IsPullback.of_hasPullback σ' πL).paste_horiz hS
+    rw [hcomm, ← hr₁] at big
+    exact IsPullback.of_right big (pullback.lift_snd _ _ _) (IsPullback.of_hasPullback σ πK)
+  -- the base changes of `g`
+  let e₁ := pullback.fst g p₁
+  let g₁ := pullback.snd g p₁
+  have sq₁ : IsPullback e₁ g₁ g p₁ := IsPullback.of_hasPullback g p₁
+  have : QuasiCompact g₁ := MorphismProperty.of_isPullback sq₁.flip inferInstance
+  have : QuasiSeparated g₁ := MorphismProperty.of_isPullback sq₁.flip inferInstance
+  let a₂ := pullback.fst h p₂
+  let b₂ := pullback.snd h p₂
+  have sq₃ : IsPullback a₂ b₂ h p₂ := IsPullback.of_hasPullback h p₂
+  have sqC : IsPullback (a₂ ≫ e) b₂ g (p₂ ≫ p) := sq₃.paste_horiz sq
+  let c₂ : pullback h p₂ ⟶ pullback g p₁ := pullback.lift (a₂ ≫ e) (b₂ ≫ r) (by
+    rw [sqC.w, Category.assoc, hr₁])
+  have sq₂ : IsPullback c₂ b₂ g₁ r := by
+    refine IsPullback.of_right ?_ (pullback.lift_snd _ _ _) sq₁
+    rw [pullback.lift_fst, hr₁]
+    exact sqC
+  -- the composite square over `p₂ ≫ p = r ≫ p₁` has an invertible base-change map
+  have : Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of K'))
+      (((e₁)^*[ModuleCat.{u + 1} Λ]).obj F) :=
+    Scheme.IsTorsionSheafOfInvertibleOrder.upperStar Λ πK e₁ F
+  have hC : IsIso (Etale.baseChangeHomologyMap Λ sqC q F) :=
+    Etale.isIso_baseChangeHomologyMap_of_paste_horiz Λ sq₁ sq₂ sqC (pullback.lift_fst _ _ _)
+      hr₁ q F (Etale.baseChangeProperty_of_isUniversalHomeomorphism Λ p₁ q g e₁ g₁ sq₁ F)
+      (Etale.isIso_baseChangeHomologyMap_of_isSeparableExtension Λ hsep σ₁ g₁ r σ₂ hS₁ sq₂ q _)
+  -- cancel the base change along the universal homeomorphism `p₂`
+  rw [Etale.isIso_baseChangeHomologyMap_iff] at hC ⊢
+  rw [Etale.baseChange_app_paste_horiz Λ sq.toCommSq sq₃.toCommSq sqC.toCommSq] at hC
+  simp only [Functor.map_comp] at hC
+  have h₁ : IsIso ((DerivedCategory.Plus.homologyFunctor _ q).map
+      ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq₃.toCommSq).app
+        (((e)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))) := by
+    rw [Etale.baseChange_eq_derivedBaseChangeMapPlus]
+    have := Etale.isIso_derivedBaseChangeMapPlus_of_isUniversalHomeomorphism
+      (ModuleCat.{u + 1} Λ) sq₃
+    infer_instance
+  rw [isIso_comp_left_iff, isIso_comp_right_iff] at hC
+  have h₅ : IsIso (((p₂)^*[ModuleCat.{u + 1} Λ]).map
+      ((DerivedCategory.Plus.homologyFunctor _ q).map
+        ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))) :=
+    (NatIso.isIso_map_iff (((p₂)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso
+      q) _).2 hC
+  have := Etale.isEquivalence_upperStar (ModuleCat.{u + 1} Λ) p₂
+  exact isIso_of_reflects_iso _ ((p₂)^*[ModuleCat.{u + 1} Λ])
 
 end AlgebraicGeometry
