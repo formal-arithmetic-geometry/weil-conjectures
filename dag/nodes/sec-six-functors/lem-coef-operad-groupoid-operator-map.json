@@ -13,9 +13,129 @@
   "lem-coef-simplicial-operator-nerve",
   "lem-coef-operadic-algebra-presentability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each ordered list of pair-colors use the displayed finite product of mapping simplicial sets of G. The object set and these products are small in the fixed universe. Each factor is Kan by fibrancy of G. A horn into a finite product gives one horn in every coordinate; choose a filler in each coordinate and assemble them. Thus every operation space is Kan, including the nullary space G(y_0,x_0). Empty mapping sets cause no exception: a horn into such a product does not exist.",
+   "uses": [
+    "lem-coef-simplicial-groupoid-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition 4.2.4, fibrancy assertion"
+   }
+  },
+  {
+   "text": "For positive arity r, write input colors as (a_j,b_j), output as (a,b), and an operation as the arrows f_0:a→a_1, f_j:b_j→a_{j+1} (0<j<r), f_r:b_r→b. Regard this as an ordered path from a to b with r formal holes a_j→b_j. To substitute an operation into the jth input, replace that hole by its path with its own holes. Compose each maximal consecutive run of actual arrows between the remaining holes. A nullary inserted operation is one actual arrow a_j→b_j, so the rule also specifies all empty blocks. At outer arity zero the path is just one actual arrow a→b, with no holes. Both parenthesizations of iterated substitution flatten to the same ordered path of actual arrows and remaining holes. Associativity of composition in each degree of G makes their factors equal. The path (id_a, one hole, id_b) is the unary unit, since substitution only inserts identities. Composition in G is simplicial, so all substitution maps are simplicial. These are precisely the data and axioms of a simplicial multicategory in the operator-category node.",
+   "uses": [
+    "lem-coef-simplicial-groupoid-models",
+    "lem-coef-simplicial-operator-nerve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition 4.2.4, explicit expansion of composition"
+   }
+  },
+  {
+   "text": "Send (z_0,…,z_n) to ((z_0,z_1),…,(z_{n-1},z_n)). For a mapping simplex u over φ:[m]→[n], the operator-category formula requires one operation on the consecutive input block from φ(i-1)+1 through φ(i). If its length is positive, the first factor must go from w_{i-1} to z_{φ(i-1)}, so use u_{i-1}^{-1}; the last must go from z_{φ(i)} to w_i, so use u_i. Every internal factor is the identity of the corresponding z_j. If the length is zero, the required single factor goes from w_{i-1} to w_i and is u_i u_{i-1}^{-1}. If m=0 the product of output operations is empty and hence terminal. This defines the prescribed map on every mapping simplicial set over its unchanged base label.",
+   "uses": [
+    "lem-coef-simplicial-groupoid-models",
+    "lem-coef-simplicial-operator-nerve"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition 4.2.6, endpoint and empty-block typing"
+   }
+  },
+  {
+   "text": "A simplicial operator θ acts on G by a functor that fixes objects, so θ*(uv)=θ*(u)θ*(v), θ*(id)=id and θ*(u^{-1})=(θ*u)^{-1}. Apply these three equations to every factor of Step 3, including θ*(u_i u_{i-1}^{-1}). The base label φ is discrete and unchanged. Hence Step 3 commutes with all faces and degeneracies. No assumption that a face is composition of arrows is made: arbitrary simplicial groupoids are allowed.",
+   "uses": [
+    "lem-coef-simplicial-groupoid-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Remark 4.2.5 and Definition 4.2.6, simpliciality"
+   }
+  },
+  {
+   "text": "Take u:z→w over φ:[m]→[n] and v:w→t over ψ:[ℓ]→[m]. Composition in D(G) has base φψ and components s_j=v_j u_{ψ(j)}. Fix an output j and put a=ψ(j-1), b=ψ(j). If φ(b)>φ(a), substitute the images of u_{a+1},…,u_b into the image operation of v for this block. A junction at a noncollapsed interior index k has composite u_k^{-1} id_{w_k} u_k=id_{z_{φ(k)}}. Any run of collapsed inner blocks at the same z has factors u_k u_{k-1}^{-1}; their ordered composite telescopes to u_q u_p^{-1} for the run p<k≤q. This gives the same junction cancellation with the adjacent noncollapsed blocks. The first remaining factor is u_a^{-1}v_{j-1}^{-1}=s_{j-1}^{-1}, the last is v_j u_b=s_j, and all internal factors are identities. These are the factors assigned directly to the composite. This calculation is degreewise and therefore proves equality of simplicial composition maps.",
+   "uses": [
+    "lem-coef-simplicial-groupoid-models",
+    "lem-coef-simplicial-operator-nerve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition 4.2.6, expanded functoriality check for positive composite blocks"
+   }
+  },
+  {
+   "text": "If a<b but φ(a)=φ(b), monotonicity makes every inner block nullary. The substituted operation is v_j(u_b u_a^{-1})v_{j-1}^{-1}=s_j s_{j-1}^{-1}, by the same telescoping product. If a=b, the outer operation is already nullary and no inputs are substituted; it is v_j v_{j-1}^{-1}=v_j u_a u_a^{-1}v_{j-1}^{-1}=s_j s_{j-1}^{-1}. For ℓ=0 both sides are the unique empty product. Finally the identity base map has length-one blocks and all endpoint components identity, so it maps to a list of unary units; the length-zero object maps to the empty list and its identity to the unique empty operator. Thus the formulas preserve all compositions and identities, defining a simplicial functor Φ_G over Δ^op.",
+   "uses": [
+    "lem-coef-simplicial-groupoid-models",
+    "lem-coef-simplicial-operator-nerve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition 4.2.6, repeated indices, outer nullary blocks and identities"
+   }
+  },
+  {
+   "text": "The operator-nerve node applies to the small locally Kan multicategory constructed in Steps 1–2, giving an ordinary nonsymmetric infinity operad N_hc O_G^⊗→Δ^op. Its mapping simplicial sets are coproducts of finite products of Kan sets and hence Kan: a horn stays in one discrete base-label summand and is filled coordinatewise. The same argument applies to D(G), using the mapping-set formula in that node. Its coherent nerve is the left fibration stated there because G is a simplicial groupoid. Apply the coherent-nerve functor to Φ_G. Naturality gives a functor over the ordinary nerve of Δ^op, and the coherent-nerve comparison identifies its mapping spaces and composition with the enriched ones. It remains to check inert preservation; no claim that an arbitrary nerve functor preserves cocartesian edges is needed.",
+   "uses": [
+    "lem-coef-simplicial-groupoid-models",
+    "lem-coef-simplicial-operator-nerve",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition 4.2.4 and Definitions 4.2.2–4.2.6; generic coherent-nerve comparison"
+   }
+  },
+  {
+   "text": "Let φ(i)=h+i be an inert base map and let u_i:z_{h+i}→w_i be any edge over it. Put A=Φ_G(z), B=Φ_G(w), e=Φ_G(u). For any target list T and any β:[q]→[m], compute precomposition with e from the β-labeled mapping set O_G^⊗(B,T) to the φβ-labeled mapping set O_G^⊗(A,T). For an output block c=β(j-1)<d=β(j), of length L=d-c, its first factor a_0 is sent to u_c^{-1}a_0, each internal factor a_i:w_{c+i}→w_{c+i} (0<i<L) to u_{c+i}^{-1}a_i u_{c+i}, and its last factor a_L to a_L u_d. These formulas follow by the path substitution of Step 2, since e has the unary component (u_{k-1}^{-1},u_k) at the hole k. They are simplicial isomorphisms, with inverses a'_0↦u_c a'_0, a'_i↦u_{c+i} a'_i u_{c+i}^{-1}, a'_L↦a'_L u_d^{-1}. For c=d no input is substituted, so its nullary factor is unchanged. Take the product over outputs. This proves the required isomorphism for every β, also q=0 and m=0, where the respective products are empty or entirely nullary.",
+   "uses": [
+    "lem-coef-simplicial-groupoid-models",
+    "lem-coef-simplicial-operator-nerve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition 4.2.6, explicit inert precomposition calculation"
+   }
+  },
+  {
+   "text": "Apply the cocartesian mapping-space criterion to p:N_hc O_G^⊗→N(Δ^op) and e. Its hypotheses hold by Step 7: p is an inner fibration between quasicategories. The coherent-nerve comparison is natural for p and respects precomposition, so Step 8 computes the homotopy fibers of its mapping square. The base mapping spaces are discrete monotone-map sets. Over each β, that square's comparison with the homotopy pullback is exactly the isomorphism in Step 8; taking the coproduct over β proves that the whole square is a homotopy pullback. The criterion makes e cocartesian. Every edge of N_hc D(G) is a vertex of its enriched mapping set, as follows directly from the definition of N_hc on the two-object category C[Δ^1]; thus every edge over an inert base map has been covered. In particular all inert edges in the domain have cocartesian image over that same inert base map, which is inert in the sense of the operadic definition. This proves the final clause.",
+   "uses": [
+    "lem-coef-simplicial-operator-nerve",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-operadic-algebra-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition 4.2.6, inertness check via HTT Proposition 2.4.4.3 (cocartesian dual)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-simplicial-groupoid-models",
+  "lem-coef-simplicial-operator-nerve"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Definitions 4.2.4 and 4.2.6 and Remark 4.2.5, expanded path-substitution and endpoint computations; inertness tested by the existing cocartesian mapping-space criterion (HTT Proposition 2.4.4.3, opposite dual). Online source not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +174,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-many-object-operad-accessibility",
@@ -66,7 +186,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim: Proposition 4.3.5 and Remark 4.3.4; graph/operadic algebra construction of section 4.3, with limits as in Higher Algebra section 3.2.2; supporting general theorem: Proposition 4.1.7; Corollary 3.2.14 (ordinary operadic replacement); Remark 4.3.2; Corollary 4.2.8 and Definition 4.3.3 (colors). Extracted supporting argument: Definitions 4.2.4 and 4.2.6, with Remark 4.2.5: the omitted functoriality and inert-preservation check for the explicit inversion-and-identity formula.",
+   "place": "Proof paragraph 2, supporting argument: Definitions 4.2.4 and 4.2.6 with Remark 4.2.5, spelling out the omitted functoriality and inert-preservation check for the inversion-and-identity formula.",
    "via": [
     "lem-coef-many-object-operad-accessibility",
     "lem-coef-algebroid-presentability",
@@ -79,5 +199,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operad-groupoid-operator-map",
+  "worker": "stage1",
+  "summary": "Resumed the saved split after its required successful dry run. Kept its statement, ancestry and inherited Mathlib search records; repaired the general simplicial-operator argument, indexed composition by both base maps, wrote all nullary cancellations, and replaced the unsupported inert-lift assertion with an explicit precomposition isomorphism and the existing cocartesian mapping-space criterion. Nine steps, no new nodes.",
+  "blueprint": "Supports the derived coefficient adjunction in paragraph 2 of prop-coef-integral-exceptional-adjoint through the existing created.item chain. The ancestor does not literally state this operadic construction. Steps 1–2 expand Gepner–Haugseng Definition 4.2.4; Steps 3–6 expand Definition 4.2.6 and the strict inverse convention in Remark 4.2.5; Steps 7–9 use existing coherent-nerve and cocartesian-criterion nodes to verify the inert-preserving map. No change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-aed012aa3",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-aed012aa3 (reviewer sub-agent of L); spot-checked: I read the item, its nine steps, the six cited nodes (all in the item's own unit sk-prop-sf-biduality-general, so no tool_uses) and Gepner–Haugseng arXiv:1312.3178v4 §4.2, which I fetched to /tmp. Def. 4.2.4 states O_C((x_0,y_1),…;(y_0,x_n)) = ∏C(y_i,x_i), which matches the item exactly. Def. 4.2.6 / Rem. 4.2.5 say to invert the first factor and insert identities, with strict involutive inverses in a simplicial groupoid; the item's endpoint types (u_{i-1}^{-1}, identities, u_i) and the nullary block u_i u_{i-1}^{-1} are the only well-typed completion. The D(G) convention agrees with the proof of GH Thm 4.2.7. I recomputed the multicategory axioms (Step 2), simpliciality (Step 4), composition with telescoping collapsed runs and the cases a=b and ℓ=0 (Steps 5–6), and the inert precomposition isomorphisms (Step 8). For Step 9, the base mapping sets are discrete and β↦φβ is injective, so the homotopy pullback is the coproduct of the fibres over φβ and the criterion applies. Every inert edge is covered because N_hc D(G) is a left fibration. I checked the empty G, one-object S_3, two isomorphic objects, and the cases m=0, n=0 and ℓ=0. The rg duplicate search found no node stating O_G or Φ_G and no cycle. Fix: in Step 8 the internal conjugation was written u_i^{-1} a_i u_i with the index inside the block; it is corrected to the global index u_{c+i}^{-1} a_i u_{c+i}, and the inverses likewise. The corrected item is in fixes/dag/nodes/sec-six-functors/. No new nodes and no SGA.; 1 file(s) fixed by the reviewer"
  }
 }
