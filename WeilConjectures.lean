@@ -3741,6 +3741,7 @@ public import WeilConjectures.RingTheory.ImprovePresentationSmoothConormalFree
 public import WeilConjectures.RingTheory.IndSmoothFinitePresentationFactorization
 public import WeilConjectures.RingTheory.IndStandardSmooth
 public import WeilConjectures.RingTheory.InertiaUnramifiedPoint
+public import WeilConjectures.RingTheory.IntegralClosure.EtaleBaseChange
 public import WeilConjectures.RingTheory.IntegralIdempotentAnnihilatingPolynomial
 public import WeilConjectures.RingTheory.IntegrallyClosed.DepthTwo
 public import WeilConjectures.RingTheory.JacobianPresentationLift
