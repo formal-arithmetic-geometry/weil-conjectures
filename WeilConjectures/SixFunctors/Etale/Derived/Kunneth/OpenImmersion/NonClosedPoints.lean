@@ -152,7 +152,8 @@ theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_of_not_isClosed_fst {K : Ty
     have : ∀ i, LocallyOfFiniteType (qN.app i) := hqlft
     have : ∀ i, IsAffine (D.obj i) := hDaff
     have : ∀ {a b : I} (f : a ⟶ b), IsAffineHom (D.map f) := fun f ↦ hDmap f
-    have : CompactSpace (pullback j t) := QuasiCompact.compactSpace_of_compactSpace j'
+    have : CompactSpace (pullback j t : Scheme.{u}) :=
+      QuasiCompact.compactSpace_of_compactSpace j'
     have hn' : IsUnit (n : L) := by simpa using hn.map (algebraMap K L)
     refine Etale.isIso_baseChangeHomologyMap_of_isLimit_fst Λ aYL hπ qN ℓ hπq j' hWL sq' n hn'
       hΛ IH (fun k ↦ ?_) i _
@@ -257,7 +258,8 @@ closed if and only if both of its images are closed (blueprint `lem-kun-closed-p
 so the two previous steps give the isomorphism on the geometric stalks at all non-closed points,
 as soon as `lem-kun-0f1h` holds for all data with smaller `dim X + dim Y`. -/
 theorem Etale.openImmersionBaseChangeAtNonClosed_of_below {N : WithBot ℕ∞}
-    (H : Etale.OpenImmersionBaseChangeBelow Λ N) : Etale.OpenImmersionBaseChangeAtNonClosed Λ N := by
+    (H : Etale.OpenImmersionBaseChangeBelow Λ N) :
+    Etale.OpenImmersionBaseChangeAtNonClosed Λ N := by
   intro K _ X U Y W V aX aY _ _ _ _ j _ q₁ q₂ hW e h sq n hn hΛ hdim z hz i F
   have IH := H.mono hdim
   by_cases h₁ : IsClosed ({q₁.base z} : Set X)

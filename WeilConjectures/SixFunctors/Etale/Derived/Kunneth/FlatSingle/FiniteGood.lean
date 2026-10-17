@@ -93,6 +93,7 @@ lemma isIso_tensorBaseChangeMap_degenerate_iff_kunnethMap {X' Y : Scheme.{u}} (h
   have := isIso_rightDerivedLowerStarProjectionMap_of_isProper Λ isAddTorsion_of_finite (𝟙 X')
   rw [kunnethMap_eq, isIso_comp_left_iff, isIso_comp_right_iff,
     NatIso.isIso_map_iff (rightDerivedLowerStarIdIso Λ X')]
+  exact Iff.rfl
 
 /-- **Finite pushforwards of the unit.** For a commutative square `h ≫ f' = e ≫ g` and a finite
 morphism `π' : X'ᵢ ⟶ X'` with base change `ρ : Yᵢ ⟶ Y` along `h`, the base change map
@@ -108,7 +109,7 @@ theorem isIso_tensorBaseChangeMap_rightDerivedLowerStar_unit {X' S' T Y X'ᵢ Y�
     IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g w
       (R((π')_*[ModuleCat.{u + 1} Λ]).obj (𝟙_ _)) F) := by
   have hΛ : IsAddTorsion Λ := isAddTorsion_of_finite
-  have : IsFinite ρ := MorphismProperty.of_isPullback sq.flip inferInstance
+  have : IsFinite ρ := MorphismProperty.of_isPullback sq inferInstance
   have := isIso_rightDerivedLowerStarProjectionMap_of_isProper Λ hΛ π'
   have := isIso_rightDerivedLowerStarProjectionMap_of_isProper Λ hΛ ρ
   have := isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring Λ hΛ sq
