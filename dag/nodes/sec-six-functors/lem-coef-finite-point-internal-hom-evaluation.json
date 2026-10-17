@@ -275,5 +275,32 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-9e8a37ec4 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item, its parent lem-coef-finite-mapping-adjunction, the statement of every cited node, the proofs of the three main tool lemmas, the blueprint sources lem-pod-point-dualizing-complex.proof.md (whole paragraph) and prop-coef-integral-dualizing.proof.md (second paragraph), and the unit and chapter. The statement is unchanged and the delivery creates no new nodes. The normalization is correct and is checked against def-weil-exceptional-inverse-image (nu^* f^x Rnu_*, the main-20261015 form): with the identity compactification f^x = id, B = nu^*G by lem-sf-comparison-pullback-exact, and the triangle identity makes the counit eps_B the inverse of nu^*eta_G, with eta_G invertible by thm-weil-pbc-site-comparison. Steps 2, 3 and 5 meet the exact hypotheses of the reconstruction and Hom-evaluation lemmas: L and Gamma are exact, and Gamma(B)=A by clause (1) of the connected constant-H0 lemma for Y=s. I recomputed Step 4's evaluation identity and the sign (-1)^{ij}. Small cases checked: C=0, C=B, C=B[-r], and [A -varpi-> A]. Two repairable faults, both fixed in fixes/: (1) E1/C1: the finite-quotient leaf needs a nonarchimedean absolute value, so Step 1 now also cites the leaf lem-weil-l-adic-extension-absolute-value. (2) E1: Step 4 applied lem-sf-point-fibre-derived-tensor, which is stated only for D^b_ctf inputs, to RHom(C,omega) without showing that object is ctf. Step 4 now proves it with the same-unit node cor-weil-finite-constructible-hom (X=s, d=0, L=B with Tor amplitude [0,0], transported by alpha); that node has no cycle back to the item, and the step is no longer marked elementary. I accept the eleven declared tool_uses as generic black boxes; the unit has no realized steps. No SGA source is used and the target is not weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13743c6db",
+  "group": "NN",
+  "result": "pass",
+  "note": "Read the node, all 11 dependency records and their declarations in the side clone (PointFiniteTensorData/Canonical/SourceConstraints, sfFiniteExceptionalAt, sfIntrinsicDerivedEquivalence, finiteIntrinsicDerivedInternalHom/Evaluation, pointFiniteFibre, perfectTraceEvaluation), and the source paragraph of lem-pod-point-dualizing-complex.proof.md. Delivery diff: 3 files; the node statement is unchanged. Every clause matches the node: ell != p, E finite, A_{n+1}, ctf category, Fib_s, omega = nu^*Rnu_*B (the node's own identity-adjoint formula), normalization = derivedComparisonAdjunction counit with IsIso, kappa = curry of the braided evaluation pairing into the derived dual, IsIso for all C, contravariant naturality for all derived maps, Hom-first evaluation equation. No added hypotheses; universes u+1/u kept; statement verbatim; declarations list exact; no hollow helpers; only the theorem body is sorry; docstrings have the source and five proof steps; report has the Worker report and Second reading sections. nt_compile --json: rc 0, 27 s, clean. Non-blocking: the existential S is pinned by the canonical predicates (same pattern as the accepted dependency); sorryAx in the definitions comes from upstream dependencies; the record cites the main-20261015 path, and only the main-20261017 copy is here."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FinitePointInternalHomEvaluation",
+  "declaration": "WeilConjectures.finitePointInternalHomEvaluation",
+  "declarations": [
+   "WeilConjectures.finitePointCoefficientUnit",
+   "WeilConjectures.finitePointComparisonOmega",
+   "WeilConjectures.finitePointComparisonNormalization",
+   "WeilConjectures.finitePointSheafDual",
+   "WeilConjectures.finitePointDualPairing",
+   "WeilConjectures.finitePointInternalHomKappa",
+   "WeilConjectures.finitePointInternalHomEvaluation"
+  ],
+  "file": "lean/Sheaf/Paper/FinitePointInternalHomEvaluation.lean",
+  "statement": "theorem finitePointInternalHomEvaluation (hl : l ≠ D.p) : IsIso (finitePointComparisonNormalization D l E n) ∧ ∃ S : PointFiniteTensorData D l E n, PointFiniteSourceConstraints D l E n S ∧ PointFiniteTensorCanonical D l E n S ∧ ∃ h : ∀ C : finiteTorConstructibleCategory l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) (Spec (.of D.k)), finiteTorConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) (Spec (.of D.k)) (finitePointSheafDual D l E n C.obj), (∀ C, IsIso (finitePointInternalHomKappa D l E n S C (h C))) ∧ (∀ (C C' : finiteTorConstructibleCategory l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) (Spec (.of D.k))) (f : C ⟶ C'), (pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategory.map ((finiteIntrinsicDerivedInternalHom l E (Spec (.of D.k)) n).map (Prod.mkHom f.hom.op (𝟙 (finitePointComparisonOmega D l E n)))) ≫ finitePointInternalHomKappa D l E n S C (h C) = finitePointInternalHomKappa D l E n S C' (h C') ≫ (MonoidalClosed.pre ((finitePointFibreTensorSource D l E n).map f)).app (𝟙_ _)) ∧ (∀ C, (finitePointInternalHomKappa D l E n S C (h C) ▷ (finitePointFibreTensorSource D l E n).obj C) ≫ DerivedCategory.perfectTraceEvaluation ((finitePointFibreTensorSource D l E n).obj C) = finitePointDualPairing D l E n S C (h C))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
