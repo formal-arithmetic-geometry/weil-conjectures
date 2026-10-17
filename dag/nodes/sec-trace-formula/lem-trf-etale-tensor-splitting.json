@@ -14,9 +14,75 @@
   "def-weil-etale-morphism",
   "lem-weil-pbc-algebra-tensor-pushout-universal-property"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\lambda:C\\to B$ for localization and $i:C\\to T$, $j:B\\to T$ for $c\\mapsto c\\otimes1$, $b\\mapsto1\\otimes b$. The tensor pushout universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property](2) applied to $\\lambda$ and $\\mathrm{id}_B$ gives $\\mu(c\\otimes b)=\\lambda(c)b$. It gives $\\mu i=\\lambda$ and $\\mu j=\\mathrm{id}_B$. In particular $\\mu$ is surjective, and it is a $B$-algebra map for the second-factor structure $j$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0812 (lemma-trick-fitting-ideal), proof: the multiplication map is a section; tensor formulas expanded"
+   }
+  },
+  {
+   "text": "Base change the assumed etale map $A\\to B$ along $A\\to C$. By [lem-weil-pbc-etale-ring-base-change], $\\operatorname{Spec}T\\to\\operatorname{Spec}C$ induced by $i$ is etale. By [lem-weil-pbc-principal-localization-open-immersion], $\\operatorname{Spec}B\\to\\operatorname{Spec}C$ induced by $\\lambda$ is an open immersion, hence etale by [lem-weil-pbc-etale-composition-cancellation](1). For $f=\\operatorname{Spec}\\mu$ and $g=\\operatorname{Spec}i$, the identity $\\mu i=\\lambda$ of Step 1 gives $g\\circ f=\\operatorname{Spec}\\lambda$. Since $g$ and $g\\circ f$ are etale, clause (3) of the same cancellation node implies that $f$ is etale. Thus $\\mu:T\\to B$ is a surjective ring map whose spectrum morphism is etale. This concerns $\\mu$, not a claim that $T$ is etale as a $B$-algebra.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0812 proof, etaleness of the multiplication map; Algebra Tag 00U7 (lemma-map-between-etale), with base change 00U2 and principal localization 01I3"
+   }
+  },
+  {
+   "text": "Put $I=\\ker\\mu$. Steps 1-2 verify precisely the surjectivity and spectrum-etaleness assumptions of [lem-weil-pbc-surjective-etale-kernel-idempotent-fg], so $I^2=I$ and $I$ is finitely generated as an ideal of $T$. Apply [lem-weil-pbc-fg-idempotent-ideal-idempotent-generator](1) in the commutative ring $T$ to choose $e\\in T$ with $e^2=e$ and $I=eT$. Since $e\\in I$, $\\mu(e)=0$. Set $q=1-e$; then $q^2=q$, $eq=0$, $q+e=1$, and $\\mu(q)=1$.",
+   "uses": [
+    "lem-weil-pbc-surjective-etale-kernel-idempotent-fg",
+    "lem-weil-pbc-fg-idempotent-ideal-idempotent-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U8 (lemma-surjective-flat-finitely-presented), first proof; Tag 00EH (lemma-ideal-is-squared-union-connected), part (1)"
+   }
+  },
+  {
+   "text": "Define $D=eT=\\{et:t\\in T\\}$, with inherited addition and multiplication and identity $e$. It is a commutative ring: $e(et)=et$ and $(et)(eu)=e(tu)$, so these operations close in $D$. Give it the $B$-algebra structure $b\\mapsto ej(b)$; this map preserves $1$ because the identity of $D$ is $e$. The map $\\theta:T\\to B\\times D$, $t\\mapsto(\\mu(t),et)$, preserves addition and multiplication, since $e^2=e$, and preserves the identity $(1,e)$. It is a $B$-algebra map since $\\theta(j(b))=(b,ej(b))$. Its first projection is $\\mu$ by the displayed formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0812 proof, product splitting from 00U8; elementary complementary-idempotent product map written out"
+   }
+  },
+  {
+   "text": "For $(b,d)\\in B\\times D$, regarded with $d\\in T$, set $\\psi(b,d)=qj(b)+d$. Since $d\\in eT=\\ker\\mu$, one has $\\mu(d)=0$ and $ed=d$. Hence $\\theta(\\psi(b,d))=(b,d)$ using $\\mu(q)=1$, $\\mu j=\\mathrm{id}_B$, and $eq=0$. Conversely, for $t\\in T$ the element $t-j\\mu(t)$ lies in $\\ker\\mu=eT$, so $q(t-j\\mu(t))=0$. Therefore $qj\\mu(t)=qt$ and $\\psi(\\theta(t))=qt+et=t$. These two identities show that $\\theta$ is bijective, so the $B$-algebra map of Step 4 is the required $B$-algebra isomorphism, with $\\operatorname{pr}_1\\theta=\\mu$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0812 proof, product decomposition; inverse and the specified first projection expanded"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-surjective-etale-kernel-idempotent-fg",
+  "lem-weil-pbc-fg-idempotent-ideal-idempotent-generator"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0812 (lemma-trick-fitting-ideal), proof, multiplication-map decomposition; Algebra Tags 00U7, 00U8 first proof and 00EH(1), with complementary-idempotent maps expanded"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +118,66 @@
    "results": "{\"t\": \"2026-10-17T19:44:04Z\", \"tool\": \"leansearch\", \"query\": \"For a finite free algebra etale after inverting h the multiplication map from C tensor_A C_h onto C_h is a direct product projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.TensorProduct.lmul'\", \"Algebra.TensorProduct.lmul''\", \"Algebra.FormallyEtale.instTensorProduct\", \"Subalgebra.LinearDisjoint.mulMapLeftOfSupEqTop\", \"Algebra.TensorProduct.productMap_eq_comp_map\", \"Algebra.TensorProduct.mul\", \"Pi.comul_comp_proj\", \"Algebra.FormallyUnramified.finite_of_free_aux\"], \"digest\": \"3a57f517b98a4836\"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For commutative rings A and C with C finite free over A and C_h etale over A, the B-algebra C tensor_A C_h splits with multiplication projection",
+   "results": "{\"t\": \"2026-10-17T20:31:52Z\", \"tool\": \"leanfinder\", \"query\": \"For commutative rings A and C with C finite free over A and C_h etale over A, the B-algebra C tensor_A C_h splits with multiplication projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Etale.baseChange\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.FormallyEtale.instTensorProduct\", \"Algebra.FormallyUnramified.elem\", \"Algebra.FormallyUnramified.iff_exists_tensorProduct\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\"], \"digest\": \"d19fd7870d4e2956\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits supply etale base change, localization or a self-tensor diagonal splitting, not C tensor_A C_h with its specified multiplication projection under only the localization-etale hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale.baseChange, Algebra.Etale.exists_algEquiv_prod_of_algHom, Algebra.TensorProduct",
+   "results": "{\"t\": \"2026-10-17T20:31:52Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale.baseChange, Algebra.Etale.exists_algEquiv_prod_of_algHom, Algebra.TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Algebra.Etale.exists_algEquiv_prod_of_algHom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the named section-splitting theorem is a project declaration, absent from Mathlib (unknown identifier), and requires etaleness of the whole algebra over the base, not etaleness of the surjective map used here."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_algEquiv_prod|baseChange|productQuotientOfIsIdempotentElem",
+   "results": "{\"t\": \"2026-10-17T20:31:52Z\", \"tool\": \"grep\", \"query\": \"exists_algEquiv_prod|baseChange|productQuotientOfIsIdempotentElem\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\"], \"digest\": \"fe3791b269b7998e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: hits are base change, field decompositions and kernel/idempotent ingredients, not this finite-free/localization decomposition. Existing DAG Mathlib leaves cover the ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A B-algebra T that is etale over B and has a B-algebra retraction mu to B is isomorphic to B times a complementary etale B-algebra",
+   "results": "{\"t\": \"2026-10-17T20:32:06Z\", \"tool\": \"leanfinder\", \"query\": \"A B-algebra T that is etale over B and has a B-algebra retraction mu to B is isomorphic to B times a complementary etale B-algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"StandardEtalePair.homEquiv_symm_apply\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"StandardEtalePair.homEquiv\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"StandardEtalePair.homEquiv_apply_coe\", \"StandardEtalePresentation.lift_bijective\", \"Algebra.Etale.exists_subalgebra_fg\"], \"digest\": \"089c759973cf4876\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: this search tests the stronger global-etale hypothesis of the project Section.lean theorem; that hypothesis is not available. Hits are standard etale presentations and field decompositions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale.exists_algEquiv_prod_of_algHom",
+   "results": "{\"t\": \"2026-10-17T20:32:07Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale.exists_algEquiv_prod_of_algHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Algebra.Etale.exists_algEquiv_prod_of_algHom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the named section-splitting theorem is a project declaration, absent from Mathlib (unknown identifier), and requires etaleness of the whole algebra over the base, not etaleness of the surjective map used here."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_algEquiv_prod_of_algHom",
+   "results": "{\"t\": \"2026-10-17T20:32:07Z\", \"tool\": \"grep\", \"query\": \"exists_algEquiv_prod_of_algHom\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: hits are base change, field decompositions and kernel/idempotent ingredients, not this finite-free/localization decomposition. Existing DAG Mathlib leaves cover the ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite free algebra C whose localization C_h is etale over A has C tensor_A C_h isomorphic to C_h times a complementary algebra, with multiplication the first projection",
+   "results": "{\"t\": \"2026-10-17T20:32:54Z\", \"tool\": \"leansearch\", \"query\": \"A finite free algebra C whose localization C_h is etale over A has C tensor_A C_h isomorphic to C_h times a complementary algebra, with multiplication the first projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.instTensorProduct\", \"Algebra.Etale.baseChange\", \"IsLocalization.Away.tensorRightEquiv\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.Etale.finitePresentation\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"IsLocalization.tensor\", \"Algebra.Etale.of_isLocalization_Away\"], \"digest\": \"8c480ccc9d3912c1\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits supply etale base change, localization or a self-tensor diagonal splitting, not C tensor_A C_h with its specified multiplication projection under only the localization-etale hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_algEquiv_prod|iff_of_surjective|ker_fG_of_surjective|isIdempotentElem_iff_of_fg",
+   "results": "{\"t\": \"2026-10-17T20:32:54Z\", \"tool\": \"grep\", \"query\": \"exists_algEquiv_prod|iff_of_surjective|ker_fG_of_surjective|isIdempotentElem_iff_of_fg\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Finiteness/Descent.lean\", \"Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean\", \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation.lean\", \"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"Mathlib/RingTheory/FinitePresentation.lean\", \"Mathlib/RingTheory/FinitePresentation.lean\", \"Mathlib/RingTheory/Extension/Generators.lean\"], \"digest\": \"cfeff8da49d06d3c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: hits are base change, field decompositions and kernel/idempotent ingredients, not this finite-free/localization decomposition. Existing DAG Mathlib leaves cover the ingredients."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-fitting-trick",
@@ -85,5 +207,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-tensor-splitting",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and expanded Stacks 0812 into five steps: construct the multiplication retraction, prove its etaleness by base change and cancellation over C, obtain an idempotent generator for its finitely generated kernel using existing Mathlib leaves, construct the complementary corner algebra, and check both inverse identities and the first projection. No new nodes; no exact project attachment or Mathlib specialization. The finite-free assumption is retained although this splitting argument does not need it.",
+  "blueprint": "Realizes the inherited ancestor branch through lem-trf-etale-fitting-trick: Stacks Tag 0812 middle paragraph, from the multiplication section through 00U7/00U8 to the tensor product decomposition. The current main-20261015 ancestor proof is the contracting-correspondence specialization route; this is a commutative-algebra tool below that already recorded branch, with chapter/unit/ancestry retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N0-1ab3aeb9d",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N0-1ab3aeb9d (reviewer sub-agent of L); spot-checked: Reviewed item, unit/chapter route, all six cited DAG statements, Stacks Tags 0812/00U7/00U8/00EH, blueprint ancestry, searches, edge cases, base-change direction, and product inverse calculations. No mathematical, route, duplicate, circularity, or long-step defects found. Review written to review.md."
  }
 }

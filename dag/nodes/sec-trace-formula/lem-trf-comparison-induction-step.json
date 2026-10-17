@@ -2,7 +2,7 @@
  "id": "lem-trf-comparison-induction-step",
  "kind": "statement",
  "title": "Induction step for topology-comparison vanishing",
- "statement": "Let $\\mathcal C$ be a category with two Grothendieck topologies $\\tau$ and $\\tau'$ with every $\\tau'$-covering also a $\\tau$-covering, a class $\\mathcal P$ of morphisms, and weak Serre subcategories $\\mathcal A'_X$ of abelian $\tau'$-sheaves satisfying: (i) $\\mathcal P$ is stable under base change; (ii) relocalization inverse images preserve the $\\mathcal A'_X$; (iii) every object of $\\mathcal A'_X$ is a $\tau$-sheaf; (iv) every higher direct image along a morphism in $\\mathcal P$ of an object of $\\mathcal A'_X$ remains in the corresponding weak Serre subcategory; and (v) every $\tau$-cover has a refinement by a $\tau'$-cover, a singleton $\tau$-cover in $\\mathcal P$, and a final $\tau'$-cover. Let $\\epsilon_X$ be the comparison morphism of slice topoi and let $\\mathcal A_X$ be the inverse-image class. For $r\\ge0$, write $(V_r)$ for the assertion that $R^i\\epsilon_{X,*}H=0$ for every $X$, every $H\\in\\mathcal A_X$, and $1\\le i\\le r$. Then $(V_r)$ implies $(V_{r+1})$. The category-size convention, the two slice sites and their derived cohomology, the comparison geometric morphism, and its sheafification are those of [def-weil-size-convention], [def-weil-pbc-sites-and-cohomology], [def-trf-geometric-morphism], and [def-weil-pbc-sheafification].",
+ "statement": "Let $\\mathcal C$ be a category small in a universe containing the sites and coefficients [def-weil-size-convention], endowed with two site structures $\\tau$ and $\\tau'$ [def-weil-pbc-sites-and-cohomology] such that every $\\tau'$-covering is a $\\tau$-covering. For $X\\in\\mathcal C$, let $\\mathcal C_\\tau/X$ and $\\mathcal C_{\\tau'}/X$ be the slice sites: their objects are arrows $U\\to X$, their morphisms are commutative triangles, and their coverings are those whose underlying families cover $U$ in the respective topology. Let $\\epsilon_X:\\mathrm{Sh}(\\mathcal C_\\tau/X)\\to\\mathrm{Sh}(\\mathcal C_{\\tau'}/X)$ be the comparison geometric morphism [def-trf-geometric-morphism] with direct image the identity on underlying presheaves and inverse image $\\tau$ sheafification [def-weil-pbc-sheafification]. For $f:X\\to Y$ write $f_{\\tau'}$ for the relocalization morphism of slice topoi whose inverse image sends $H$ to $(U\\to X)\\mapsto H(U\\to X\\to Y)$. Higher direct images below mean the ordinary right derived functors on abelian sheaves, computed using injective resolutions. Suppose that a class $\\mathcal P$ of morphisms and full subcategories $\\mathcal A'_X\\subset\\mathrm{Ab}(\\mathcal C_{\\tau'}/X)$ have the following properties. Each $\\mathcal A'_X$ contains zero and is closed under isomorphisms, kernels and cokernels of morphisms between its objects, and extensions (the weak Serre condition). Assume in addition:\n\n(1) For $f:X\\to Y$ in $\\mathcal P$ and any $Y'\\to Y$, the fibre product $X\\times_Y Y'$ exists and $X\\times_Y Y'\\to Y'$ lies in $\\mathcal P$.\n\n(2) For every $f:X\\to Y$, one has $f_{\\tau'}^{-1}(\\mathcal A'_Y)\\subset\\mathcal A'_X$.\n\n(3) Every $H'\\in\\mathcal A'_X$ already satisfies the $\\tau$ sheaf condition on $\\mathcal C/X$.\n\n(4) For $f:X\\to Y$ in $\\mathcal P$, $H'\\in\\mathcal A'_X$ and every $i\\geq0$, one has $R^if_{\\tau',*}H'\\in\\mathcal A'_Y$.\n\n(5) Every $\\tau$-covering $\\{U_i\\to U\\}_{i\\in I}$ has a refinement $\\{W_{jk}\\to U\\}_{j\\in J,k\\in K_j}$ obtained by composing a $\\tau'$-covering $\\{V_j\\to U\\}_{j\\in J}$, singleton $\\tau$-coverings $\\{W_j\\to V_j\\}$ with morphisms in $\\mathcal P$, and $\\tau'$-coverings $\\{W_{jk}\\to W_j\\}_{k\\in K_j}$. Refinement means that every composite factors through some $U_i\\to U$.\n\nFor each $X$, let $\\mathcal A_X$ be the full subcategory of $\\mathrm{Ab}(\\mathcal C_\\tau/X)$ consisting of sheaves isomorphic to $\\epsilon_X^{-1}H'$ for $H'\\in\\mathcal A'_X$. For $r\\geq0$, let $(V_r)$ mean $R^i\\epsilon_{X,*}H=0$ for every $X$, $H\\in\\mathcal A_X$ and $1\\leq i\\leq r$. Then $(V_r)$ implies $(V_{r+1})$.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0EZE, lemma-induction-step-V-C-general."
@@ -13,9 +13,205 @@
   "def-trf-geometric-morphism",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $r\\geq0$ and assume $(V_r)$. If $F\\in\\mathcal A_Y$, choose $F'\\in\\mathcal A'_Y$ with $F=\\epsilon_Y^{-1}F'$. Since $F'$ already is a $\\tau$-sheaf, sheafification fixes it and $\\epsilon_{Y,*}F=F'$. For $g:Z\\to Y$, the presheaf underlying $g_{\\tau'}^{-1}F'$ is its sectionwise restriction. By assumption (2) this restriction is in $\\mathcal A'_Z$, hence already a $\\tau$-sheaf by (3). Consequently $g_\\tau^{-1}F=\\epsilon_Z^{-1}g_{\\tau'}^{-1}F'\\in\\mathcal A_Z$ and $\\epsilon_{Z,*}g_\\tau^{-1}F=g_{\\tau'}^{-1}\\epsilon_{Y,*}F$. The comparison inverse image is exact because it is abelian sheafification.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZ9, lemma-A, its proof; section-compare-general, equation-commutative-epsilon."
+   }
+  },
+  {
+   "text": "For $F\\in\\mathcal A_Y$, the sheaf $R^{r+1}\\epsilon_{Y,*}F$ is the $\\tau'$-sheafification of $U\\mapsto H^{r+1}_\\tau(U,F)$. The localization isomorphism identifies this with cohomology on the slice over $U$ with coefficient $F|_U\\in\\mathcal A_U$ from Step 1. Thus it suffices to show that every such class becomes zero on a $\\tau'$-cover of $U$: any map from a locally zero presheaf to a sheaf is zero by sheaf separation; the sheafification adjunction then forces its sheafification to be zero. We may rename $U$ as $Y$ and $F|_U$ as $F$; further $\\tau'$-cover replacements can be composed.",
+   "uses": [
+    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "lem-weil-pbc-cohomology-over-object-localization",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZE, first paragraph; Tag 072W, lemma-higher-direct-images; Tag 03F3, lemma-cohomology-of-open."
+   }
+  },
+  {
+   "text": "Every positive-degree cohomology class on either slice site is locally zero. Indeed, represent it by a cocycle $s\\in I^q(U)$ in an injective resolution of its sheaf, $q>0$. Exactness of the resolution makes $I^{q-1}\\to\\ker(d^q)$ an epimorphism. Kernels are sectionwise; local surjectivity supplies a covering and sections $t_i$ with $d t_i=s|_{U_i}$, so the restricted classes vanish. Apply this with $q=r+1$ to $\\xi\\in H^{r+1}_\\tau(Y,F)$, obtaining a $\\tau$-cover killing $\\xi$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 01FW, lemma-kill-cohomology-class-on-covering, proof; used in Tag 0EZE, second paragraph."
+   }
+  },
+  {
+   "text": "Refine that cover as in assumption (5): $V_j\\to Y$ is a $\\tau'$-cover, $f_j:W_j\\to V_j$ lies in $\\mathcal P$ and is a singleton $\\tau$-cover, and $W_{jk}\\to W_j$ is a $\\tau'$-cover. Each composite $W_{jk}\\to Y$ factors through an original member, so $\\xi|_{W_{jk}}=0$. By Step 2 it is enough to work over one $V_j$. Rename it $Y$, rename $W_j$ as $T$, and write $f:T\\to Y$. The resulting problem has $F\\in\\mathcal A_Y$, $f\\in\\mathcal P$ a singleton $\\tau$-cover, and $\\xi|_T$ killed by a $\\tau'$-cover of $T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZE, refinement paragraph and first reduced problem."
+   }
+  },
+  {
+   "text": "The next-degree comparison gives a unique $\\theta\\in H^{r+1}_{\\tau'}(T,\\epsilon_{T,*}f_\\tau^{-1}F)$ mapping to $\\xi|_T$. On $T\\times_YT$, the images of the two pullbacks of $\\theta$ are equal: both are the pullback of $\\xi$ along the same composite to $Y$. Restriction naturality and injectivity of that same comparison on $T\\times_YT$ therefore give $\\operatorname{pr}_1^*\\theta=\\operatorname{pr}_2^*\\theta$. This fibre product exists by (1), and its restricted coefficient lies in the required class by Step 1.",
+   "uses": [
+    "lem-trf-comparison-next-degree-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZE, paragraph applying Tag 0EZC, lemma-V-implies-cohomology-extra-general."
+   }
+  },
+  {
+   "text": "Put $F'=\\epsilon_{Y,*}F\\in\\mathcal A'_Y$; Step 1 identifies the coefficient of $\\theta$ with $F'|_T$. The equalizer-class lemma, with $q=r+1\\geq1$, supplies a $\\tau'$-cover $Y_a\\to Y$ on which $\\theta$ becomes zero on $T\\times_YY_a$. Its comparison image is the restriction of $\\xi$ there. The base changed $f$ remains in $\\mathcal P$ by (1) and remains a singleton $\\tau$-cover by the site axiom. After this allowed replacement we have reduced to $\\xi|_T=0$.",
+   "uses": [
+    "lem-trf-comparison-equalizer-class-killing",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZE, end of the theta paragraph; Tag 0EZD, lemma-make-class-zero-general."
+   }
+  },
+  {
+   "text": "Let $E=f_\\tau^{-1}F$ and $D=Rf_{\\tau,*}E$. Derived composition gives $R\\Gamma_\\tau(Y,D)=R\\Gamma_\\tau(T,E)$ and identifies the map induced by the adjunction unit $F\\to D$ with cohomology restriction along $f$. Indeed at the underived level both maps send a section to its restriction to the slice over $T$, and the canonical resolution comparison in the composition theorem derives that same map. Thus $\\xi$ maps to zero in $H^{r+1}_\\tau(Y,D)$. Here abelian sheaves are constant-$\\mathbb Z$ modules with their unique integer action; apply the ringed-topos composition theorem with these constant ring sheaves and the map to the punctual topos.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZE, paragraph beginning with the map to Rf_*; Tag 0D6H, lemma-Leray-unbounded."
+   }
+  },
+  {
+   "text": "Set $D_{\\leq r}=\\tau_{\\leq r}D$ and $Q=\\tau_{\\geq r+1}D$. The standard truncation triangle is $D_{\\leq r}\\to D\\to Q\\to$. Represent $Q$ by a complex zero below $r+1$, resolve it by injectives zero below the same bound, and compute derived sections on that resolution. The resulting section complex is zero below $r+1$, so $H^r_\\tau(Y,Q)=0$. The long exact sequence of the truncation triangle therefore makes $H^{r+1}_\\tau(Y,D_{\\leq r})\\to H^{r+1}_\\tau(Y,D)$ injective. The unit $F\\to D$ factors through $D_{\\leq r}$ by t-structure orthogonality, since $F$ is in degree zero and $r\\geq0$. Consequently $\\xi$ maps to zero already in $H^{r+1}_\\tau(Y,D_{\\leq r})$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sf-derived-truncation-triangle",
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-sp-long-exact-of-triangle",
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-t-structure",
+    "lem-weil-pbc-site-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZE, “simple argument” with the truncation triangle; Derived Categories Tag 08J5, remark-truncation-distinguished-triangle."
+   }
+  },
+  {
+   "text": "Put $D'=Rf_{\\tau',*}f_{\\tau'}^{-1}F'$ and $K=\\tau_{\\leq r}D'$. By Step 1, $f_{\\tau'}^{-1}F'=\\epsilon_{T,*}E$. Use the adjoint comparison $b_E:\\epsilon_Y^{-1}D'\\to D$ specified by the truncated-direct-image lemma. Exactness of $\\epsilon_Y^{-1}$ makes its cohomology map in degree $i\\leq r$ the $\\tau$-sheafification of that lemma's canonical isomorphism $R^if_{\\tau',*}\\epsilon_{T,*}E\\to\\epsilon_{Y,*}R^if_{\\tau,*}E$. Sheafification of the right-hand side is $R^if_{\\tau,*}E$. Hence truncating $b_E$ gives an isomorphism $\\beta:\\epsilon_Y^{-1}K\\xrightarrow{\\sim}D_{\\leq r}$, including negative degrees, where both sides vanish.",
+   "uses": [
+    "lem-trf-comparison-truncated-direct-images",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZE, comparison of truncated derived direct images, applying Tag 0EZA."
+   }
+  },
+  {
+   "text": "The augmentation $u':F'\\to K$ is the factorization through $\\tau_{\\leq r}$ of the derived unit for $f_{\\tau'}$. Under $\\epsilon_Y^{-1}F'=F$, the composite $\\beta\\circ\\epsilon_Y^{-1}u'$ is the factored unit $F\\to D_{\\leq r}$ of Step 8. To check the map, before truncating compose $F'\\to Rf_{\\tau',*}f_{\\tau'}^{-1}F'$ with $a_E$ from the comparison lemma. The composite is $F'\\to R\\epsilon_{Y,*}F\\to R\\epsilon_{Y,*}D$: both are the unit for the composite adjunction, since $\\epsilon_{T,*}f_\\tau^{-1}F=f_{\\tau'}^{-1}\\epsilon_{Y,*}F$. Taking the $\\epsilon_Y$ adjoint cancels its unit and counit and yields the unit for $f_\\tau$. Functorial truncation preserves this equality.",
+   "uses": [
+    "lem-trf-comparison-truncated-direct-images",
+    "def-trf-geometric-morphism",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-t-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZE, comparison map induced by adjunction and the two augmented triangles."
+   }
+  },
+  {
+   "text": "Choose the cone triangle $F'\\xrightarrow{u'}K\\to L\\to F'[1]$. The degree-zero map is $F'\\to f_{\\tau',*}f_{\\tau'}^{-1}F'$, which on an object $U\\to Y$ is restriction $F'(U)\\to F'(U\\times_YT)$. It is injective since $F'$ is a $\\tau$-sheaf and $U\\times_YT\\to U$ is a singleton $\\tau$-cover. From the triangle's cohomology sequence, $L$ has cohomology only in $[0,r]$, with $\\mathcal H^0(L)=\\operatorname{coker}(F'\\to f_{\\tau',*}f_{\\tau'}^{-1}F')$ and $\\mathcal H^i(L)=R^if_{\\tau',*}f_{\\tau'}^{-1}F'$ for $1\\leq i\\leq r$. Assumptions (2),(4) and weak Serre closure under cokernels put all these sheaves in $\\mathcal A'_Y$. This includes $r=0$.",
+   "uses": [
+    "lem-sp-long-exact-of-triangle",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZE, cone L and its cohomology sheaves; assumptions of Tag 0EZ3."
+   }
+  },
+  {
+   "text": "Pull back the cone triangle by exact $\\epsilon_Y^{-1}$, using $\\beta$ and the augmentation equality in Step 10. This gives $F\\to D_{\\leq r}\\to\\epsilon_Y^{-1}L\\to F[1]$. Derived sections preserve distinguished triangles, so exactness and Step 8 provide $\\xi'\\in H^r_\\tau(Y,\\epsilon_Y^{-1}L)$ whose boundary is $\\xi$. The truncated-cohomology comparison applies to $L$ by Step 11, and lifts $\\xi'$ to $\\eta\\in H^r_{\\tau'}(Y,L)$.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-sp-long-exact-of-triangle",
+    "lem-trf-comparison-truncated-cohomology",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZE, pullback triangle and lift of xi prime using Tag 0EZB."
+   }
+  },
+  {
+   "text": "Let $\\zeta=\\partial\\eta\\in H^{r+1}_{\\tau'}(Y,F')$. Naturality of the long exact sequence, for the comparison from the original cone triangle to its pulled-back triangle followed by derived sections, gives $\\epsilon_Y^*(\\partial\\eta)=\\partial(\\epsilon_Y^*\\eta)=\\partial\\xi'=\\xi$. This uses the actual canonical comparison from Step 12; an arbitrary isomorphism of groups would not suffice. By the positive-degree local-vanishing argument in Step 3, $\\zeta$ is killed by a $\\tau'$-cover. Restricting its comparison image shows that $\\xi$ is killed by the same cover. Composing all earlier $\\tau'$-covers proves the local assertion in Step 2. Thus $R^{r+1}\\epsilon_{Y,*}F=0$; together with $(V_r)$ this is $(V_{r+1})$.",
+   "uses": [
+    "lem-sp-long-exact-of-triangle",
+    "lem-trf-comparison-truncated-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZE, final boundary and locality paragraph; Tag 01FW."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-trf-comparison-next-degree-image",
+  "lem-trf-comparison-equalizer-class-killing",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sf-derived-truncation-triangle",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-sp-long-exact-of-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-t-structure",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-trf-comparison-truncated-direct-images",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-trf-geometric-morphism",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-trf-comparison-truncated-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0EZE, lemma-induction-step-V-C-general, entire proof; elementary truncation and unit-compatibility arguments expanded."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +240,52 @@
    "results": "{\"t\": \"2026-10-17T19:06:52Z\", \"tool\": \"leansearch\", \"query\": \"Induction step for vanishing higher direct images under comparison of sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.HigherFacesVanish.induction\", \"CategoryTheory.GrothendieckTopology.OneHypercover.IsPreservedBy\", \"CategoryTheory.GrothendieckTopology.OneHypercover.IsPreservedBy.rec\", \"CategoryTheory.GrothendieckTopology.OneHypercover.IsPreservedBy.mk\", \"CategoryTheory.GrothendieckTopology.OneHypercover.IsPreservedBy.recOn\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.of_succ\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\"], \"digest\": \"7e6c739ae1447c07\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits concern Dold–Kan induction and right-derived comparisons, not this topology comparison lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image vanishing through degree n implies comparison of the higher direct images for a morphism between slice sites with two topologies",
+   "results": "{\"t\": \"2026-10-17T20:29:01Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct image vanishing through degree n implies comparison of the higher direct images for a morphism between slice sites with two topologies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map\", \"CategoryTheory.Presheaf.isLocallyInjective_of_whisker\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac\", \"CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι\", \"CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι_assoc\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc\"], \"digest\": \"6c7a56b995b4a239\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only underived site, topology, t-structure or refinement declarations; none states the induction step."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"GrothendieckTopology\"",
+   "results": "{\"t\": \"2026-10-17T20:29:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"GrothendieckTopology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only underived site, topology, t-structure or refinement declarations; none states the induction step."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*[Tt]opolog|[Tt]opolog.*comparison|higherDirectImage",
+   "results": "{\"t\": \"2026-10-17T20:29:01Z\", \"tool\": \"grep\", \"query\": \"comparison.*[Tt]opolog|[Tt]opolog.*comparison|higherDirectImage\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: this initial grep used an invalid Mathlib/ prefix; the corrected grep of CategoryTheory is also logged."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing higher direct images of a comparison of topologies by induction and cover refinements",
+   "results": "{\"t\": \"2026-10-17T20:29:02Z\", \"tool\": \"leansearch\", \"query\": \"Vanishing higher direct images of a comparison of topologies by induction and cover refinements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presieve.isSheaf_of_le\", \"ShrinkingLemma.PartialRefinement\", \"ShrinkingLemma.PartialRefinement.apply_eq_of_chain\", \"CategoryTheory.Functor.inducedTopology_isCocontinuous\", \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\", \"ShrinkingLemma.PartialRefinement.rec\", \"ShrinkingLemma.PartialRefinement.recOn\", \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\"], \"digest\": \"869a439e82a4a563\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only underived site, topology, t-structure or refinement declarations; none states the induction step."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*[Tt]opolog|[Tt]opolog.*comparison|higherDirectImage",
+   "results": "{\"t\": \"2026-10-17T20:29:24Z\", \"tool\": \"grep\", \"query\": \"comparison.*[Tt]opolog|[Tt]opolog.*comparison|higherDirectImage\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean\"], \"digest\": \"1662870adf6e60d2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only underived site, topology, t-structure or refinement declarations; none states the induction step."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two topologies and weak Serre subcategories stable under direct image: compare cohomology up to a vanishing bound and advance the bound by one",
+   "results": "{\"t\": \"2026-10-17T20:29:25Z\", \"tool\": \"leanfinder\", \"query\": \"Two topologies and weak Serre subcategories stable under direct image: compare cohomology up to a vanishing bound and advance the bound by one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsLE\", \"DerivedCategory.IsGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\"], \"digest\": \"bb9e5a5fb6a8fa8c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only underived site, topology, t-structure or refinement declarations; none states the induction step."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-refined-topology-comparison-vanishing",
@@ -74,5 +312,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-comparison-induction-step",
+  "worker": "stage1",
+  "summary": "Expanded the Tag 0EZE induction proof in thirteen steps, keeping all five source hypotheses and making the classes, slice sites and refinement precise. Reused existing general-site and derived-category tools. Added four statement-only lemmas for Tags 0EZA--0EZD after DAG, blueprint, Lean and logged Mathlib searches. Wrote out the local-cocycle argument, truncation injection, augmentation equality, cone cohomology including r=0, and naturality of the final boundary. No statement dispute or route change.",
+  "blueprint": "The comparison-vanishing induction branch beneath lem-trf-local-term-locality, as specified by the inherited from.place and via chain; source Tag 0EZE is expanded rather than replaced. The ancestor blueprint uses specialization in its (1)--(2) proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "why": "General-site sheafified cohomology formula used to test comparison direct-image vanishing; no such formula belongs to the curve-local-term unit."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-over-object-localization",
+    "why": "General-site localization identifies cohomology on a slice with cohomology over its final object, needed in the source reduction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Canonical general ringed-topos Leray/composition identification, specialized to integer modules, identifies the unit map with cohomology restriction."
+   },
+   {
+    "node": "lem-weil-pbc-complex-injective-resolution-mono",
+    "why": "The explicit lower-bound-preserving injective resolution proves the short connective hypercohomology vanishing used by the truncation argument."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "General derived-functor preservation of triangles, applied to the sections functor in the source triangle argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-derived-direct-image-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N7-b9d110bd5",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-b9d110bd5 (reviewer sub-agent of L); spot-checked: Read the complete item, all four new nodes, cited DAG statements, unit/chapter route, delivery report, and master sources Tags 0EZA–0EZE. Verified hypotheses, canonical comparison maps, coefficient categories, base-change morphisms, all 13 proof steps, edge cases including r=0, duplicate/generalization absence, route lock, and no dropped machinery. Review written to review.md."
  }
 }

@@ -18,9 +18,135 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $f$ is proper, it is of finite type by the definition of properness. The geometric fibre over $x\\to X$ is the base change along $\\operatorname{Spec}\\overline{\\kappa(x)}\\to X$. Properness is preserved by this base change [lem-pc-proper-base-change](1), so it is also of finite type by the definition of properness. Since an algebraically closed field is Noetherian, [lem-weil-pbc-finite-type-over-noetherian] makes the geometric fibre a Noetherian scheme; it is therefore a proper Noetherian scheme. The assumed dimension bound applies to this fibre, and reduction has the same one-dimensional irreducible components appearing in the degree hypothesis.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-geometric-fibre",
+    "def-kun-topological-krull-dimension",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0D2S and 0B5Y, hypotheses on proper Noetherian fibres"
+   }
+  },
+  {
+   "text": "Fix a geometric point $x\\to X$, with residue field extension $\\kappa(x)\\subset\\overline{\\kappa(x)}$. The degree hypothesis is exactly positivity on every one-dimensional irreducible component of the reduced geometric fibre, after normalization. Applying [lem-trf-fibre-degree-ample-criterion] to the proper Noetherian geometric fibre gives that $\\mathcal L$ is ample there. The geometric fibre is of finite type over $\\overline{\\kappa(x)}$ by Step 1, so [lem-pc-very-ample-descends] applied to the faithfully flat field extension $\\overline{\\kappa(x)}/\\kappa(x)$ descends this ampleness to the ordinary fibre $Y_{\\kappa(x)}$. Thus the fibre ampleness required by [lem-trf-ample-neighbourhood] holds over the residue field. The zero-dimensional case is vacuous and gives the same conclusion.",
+   "uses": [
+    "lem-trf-fibre-degree-ample-criterion",
+    "def-weil-geometric-fibre",
+    "def-sc-invertible-module",
+    "def-pc-degree-line-bundle",
+    "def-sc-normalization",
+    "lem-pc-very-ample-descends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5Y, lemma-ampleness-in-terms-of-degrees-components"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-ample-neighbourhood] at each point $x$ to the ordinary fibre ampleness established in Step 2. It gives an open neighbourhood $U_x$ on which $\\mathcal L$ is relatively ample. Since $X$ is quasi-compact, choose a finite affine open cover $X=\\bigcup_{i=1}^r U_i$ refining these neighbourhoods. On each inverse image $Y_i=f^{-1}(U_i)$, the restricted line bundle is ample over the affine base $U_i$. Apply [lem-trf-algebraic-space-ample-local] to these open immersions $U_i\\to X$, viewed as an etale covering of the scheme $X$. The inverse images are schemes, and the neighbourhood theorem gives ampleness on every inverse image of an affine open in each $U_i$. Its last clause gives ampleness over every affine open of $X$. Thus $\\mathcal L$ is $f$-ample; $f$ is quasi-compact because it is proper.",
+   "uses": [
+    "lem-trf-ample-neighbourhood",
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-weil-pbc-ample-invertible-module",
+    "def-weil-proper-morphism",
+    "lem-trf-algebraic-space-ample-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D2S, lemma-ample-in-neighbourhood; relative ampleness is local on the base: Morphisms Tag 01VJ (lemma-characterize-relatively-ample), and the scheme specialization of Spaces Divisors Tag 0D36."
+   }
+  },
+  {
+   "text": "The morphism $f$ is finite type, $X$ is quasi-compact, and Step 3 has established $f$-ampleness. Apply [lem-trf-relative-ample-very-ample] (Tag 01VU) to obtain $n\\ge1$ such that $\\mathcal N=\\mathcal L^{\\otimes n}$ is relatively very ample over $X$. The evaluation clause of the same node (Tag 01VR) says that $\\mathcal E=f_*\\mathcal N$ is quasi-coherent, the evaluation map $f^*\\mathcal E\\to\\mathcal N$ is surjective, and its associated canonical morphism $i:Y\\to\\mathbf P_X(\\mathcal E)$ is an immersion with $i^*\\mathcal O(1)\\cong\\mathcal N$. Finite type of $\\mathcal E$ and closedness of $i$ are verified next.",
+   "uses": [
+    "lem-trf-relative-ample-very-ample",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VU, lemma-finite-type-ample-very-ample (via Tag 01VR, lemma-relatively-very-ample)"
+   }
+  },
+  {
+   "text": "The sheaf $\\mathcal N=\\mathcal L^{\\otimes n}$ is locally free of rank one. On a Noetherian affine trivializing open, the kernel of any map $\\mathcal O^{\\oplus r}\\to\\mathcal N$ is the sheaf of the kernel of a matrix $A^r\\to A$; this kernel is finite by [lem-weil-pbc-noetherian-submodule-finite]. Thus $\\mathcal N$ is coherent locally, hence globally by [lem-weil-pbc-coherent-module-local-on-open-cover] and the definition [pqf-def-coherent]. Proper coherent pushforward [lem-pc-coherent-hi], with $X$ locally Noetherian, makes $\\mathcal E=f_*\\mathcal N$ coherent, in particular finite type and quasi-coherent. The immersion $i$ of Step 4 has separated ambient morphism by [lem-trf-projective-bundle-separated]. Since $f$ is proper, [lem-weil-pbc-proper-to-separated] makes $i$ proper, and [lem-weil-pbc-proper-immersion-closed] makes $i$ a closed immersion. Its pullback of $\\mathcal O(1)$ is $\\mathcal L^{\\otimes n}$, proving projectivity in the sense of [def-trf-projective-bundle-morphism].",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "lem-trf-relative-ample-very-ample",
+    "def-trf-projective-bundle-morphism",
+    "def-weil-proper-morphism",
+    "def-sc-invertible-module",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-weil-pbc-proper-immersion-closed",
+    "lem-trf-projective-bundle-separated",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02O5, Proposition proper-pushforward-coherent; Tag 01VR, lemma-relatively-very-ample, clause (4), and Tag 01OD, projective-bundle separatedness; Algebra Tag 00IK (lemma-Noetherian-basic) and Modules Definition 01BV (definition-coherent)."
+   }
+  },
+  {
+   "text": "Step 3 proves the asserted ampleness on every affine base open. Steps 4 and 5 supply the positive integer $n$, the finite-type quasi-coherent module $\\mathcal E$, and the required closed immersion with its specified pullback of $\\mathcal O(1)$. These are exactly the asserted conclusions.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "def-trf-projective-bundle-morphism",
+    "lem-trf-relative-ample-very-ample"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VU, local characterization of relative ampleness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-degree-line-bundle",
+  "def-sc-invertible-module",
+  "def-sc-normalization",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-geometric-fibre",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-proper-morphism",
+  "lem-pc-coherent-hi",
+  "lem-pc-proper-base-change",
+  "lem-pc-very-ample-descends",
+  "lem-trf-algebraic-space-ample-local",
+  "lem-trf-ample-neighbourhood",
+  "lem-trf-fibre-degree-ample-criterion",
+  "lem-trf-projective-bundle-separated",
+  "lem-trf-relative-ample-very-ample",
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-proper-to-separated",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0B5Y and 0D2S, together with Morphisms Tag 01VU and Coherent Tag 02O5"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +178,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-temkin-stable-modification",
@@ -64,7 +190,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Positive fibre degrees give a projective-bundle embedding.",
+   "place": "Proof of the fibrewise ampleness-to-projectivity step: positivity on geometric fibres, openness of relative ampleness, and the relative very-ample projective-bundle construction.",
    "via": [
     "lem-trf-temkin-stable-modification",
     "lem-trf-stable-modification-flat-curve-pair",
@@ -78,5 +204,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-proper-fibrewise-ample-projective",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by making the Noetherianity of each geometric fibre explicit via finite type over the Noetherian algebraically closed residue field, and by writing the faithfully flat descent from geometric-fibre ampleness to the ordinary residue-field fibre using lem-pc-very-ample-descends. Replaced the misapplied affine projective-space separatedness citation with the new statement-only relative projective-bundle separatedness node (Stacks 01OD). Corrected the relative very-ampleness/evaluation source to Tags 01VR and 01VU, and updated all proof dependencies and citations.",
+  "blueprint": "Steps 1--6 realize the fibrewise ampleness, neighbourhood, relative very-ampleness, and projective-bundle construction used in the parent proof; the auxiliary descent citation supplies the passage from geometric to ordinary fibres.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Step 1 uses stability of properness under the geometric-fibre base change; this generic scheme lemma belongs to the proper-base-change unit."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Step 5 uses proper coherent pushforward to make f_* L^n finite type; this generic cohomology lemma belongs to the proper-base-change unit."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "why": "Coherence is local on an open cover; used only to pass from the explicit Noetherian affine rank-one kernel calculation to coherence of L^n. This generic sheaf fact does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-pc-coherent-hi",
+  "lem-weil-pbc-coherent-module-local-on-open-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q85-47567836e",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q85-47567836e (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, cited statements, and source passages. Repaired ampleness locality and coherence citations, clarified the canonical evaluation immersion, and completed new-node metadata. Stacks 0B5Y/0AYZ, 0D2S, 01VU/01VR, 02O5, and 01OD support the mathematics. review.md and five corrected JSON files are written; no statements weakened or nodes dropped.; 5 file(s) fixed by the reviewer"
  }
 }
