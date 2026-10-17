@@ -2,18 +2,74 @@
  "id": "lem-trf-formal-power-series-continuous-differentials",
  "kind": "statement",
  "title": "Continuous differentials of a formal power-series quotient",
- "statement": "Let $F$ be a field, $n\\ge0$, $D=F[[t_1,\\ldots,t_n]]$ [def-weil-pbc-multivariate-power-series], $\\mathfrak n=(t_1,\\ldots,t_n)\\subset D$, and $I=(f_1,\\ldots,f_s)$ with each $f_j\\in\\mathfrak n$. Let $R=D/I$ and $\\mathfrak n_R=\\mathfrak nR$. Define the module of continuous $F$-differentials of $R$ as $\\widehat\\Omega_{R/F}=\\varprojlim_r\\Omega_{(R/\\mathfrak n_R^r)/F}$ (Kähler differentials [def-weil-pbc-kahler-differentials], transition maps induced by the quotient maps), with the $F$-derivation $\\widehat{\\mathrm d}:R\\to\\widehat\\Omega_{R/F}$, $x\\mapsto(\\mathrm d(x\\bmod\\mathfrak n_R^r))_r$. Then the $R$-linear map from the cokernel of $R^{\\oplus s}\\to R^{\\oplus n}$, whose $j$-th column is $(\\partial f_j/\\partial t_i\\bmod I)_i$, to $\\widehat\\Omega_{R/F}$ sending the class of the $i$-th basis vector $e_i$ to $\\widehat{\\mathrm d}(t_i\\bmod I)$ is well defined and is an isomorphism.",
+ "statement": "Let $F$ be a field, $n\\ge0$, $D=F[[t_1,\\ldots,t_n]]$ [def-weil-pbc-multivariate-power-series], $\\mathfrak n=(t_1,\\ldots,t_n)\\subset D$, and $I=(f_1,\\ldots,f_s)$ with each $f_j\\in\\mathfrak n$. Let $R=D/I$ and $\\mathfrak n_R=\\mathfrak nR$. Define the module of continuous $F$-differentials of $R$ as $\\widehat\\Omega_{R/F}=\\varprojlim_r\\Omega_{(R/\\mathfrak n_R^r)/F}$ (Kähler differentials [def-weil-pbc-kahler-differentials], transition maps induced by the quotient maps), with the $F$-derivation $\\widehat{\\mathrm d}:R\\to\\widehat\\Omega_{R/F}$, $x\\mapsto(\\mathrm d(x\\bmod\\mathfrak n_R^r))_r$. Then the $R$-linear map from the cokernel of $R^{\\oplus s}\\to R^{\\oplus n}$, whose $j$-th column is $(\\partial f_j/\\partial t_i\\bmod I)_i$, where $\\partial/\\partial t_i$ is the termwise formal partial derivative [def-trf-formal-power-series-partial-derivative], to $\\widehat\\Omega_{R/F}$ sending the class of the $i$-th basis vector $e_i$ to $\\widehat{\\mathrm d}(t_i\\bmod I)$ is well defined and is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/curves.tex",
   "place": "Tag 0C4D, algebraically closed proof paragraph: the power-series Jacobian presentation of continuous differentials; Algebra Tags 00RS, 00RU and 00RX for the quotient and polynomial analogues."
  },
  "stmt_deps": [
   "def-weil-pbc-multivariate-power-series",
-  "def-weil-pbc-kahler-differentials"
+  "def-weil-pbc-kahler-differentials",
+  "def-trf-formal-power-series-partial-derivative"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-formal-power-series-continuous-free] to $D=F[[t_1,\\ldots,t_n]]$. It identifies the continuous differential module $\\widehat\\Omega_{D/F}$ with the free $D$-module on the coordinate differentials $\\widehat{\\mathrm d}(t_i)$ and gives the termwise derivative formula for every $h\\in D$.",
+   "uses": [
+    "lem-trf-formal-power-series-continuous-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Tag 00RX (lemma-differentials-polynomial-ring) and Tag 02HQ (lemma-differential-mod-power-ideal), via the continuous free-module statement cited in this step."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-formal-power-series-continuous-conormal] to $I=(f_1,\\ldots,f_s)$. Its exact sequence identifies $\\widehat\\Omega_{R/F}$ as the cokernel of the map $R^{\\oplus s}\\to\\widehat\\Omega_{D/F}\\otimes_D R$ sending the $j$-th basis vector to the image of $\\widehat{\\mathrm d}(f_j)$.",
+   "uses": [
+    "lem-trf-formal-power-series-continuous-conormal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Tag 00RU (lemma-differential-seq) and Tag 02HQ (lemma-differential-mod-power-ideal), via the continuous conormal statement cited in this step; 00RS is the transitivity sequence, not the quotient conormal sequence."
+   }
+  },
+  {
+   "text": "By the formula in [lem-trf-formal-power-series-continuous-free], for each relation $f_j$ one has $\\widehat{\\mathrm d}(f_j)=\\sum_i(\\partial f_j/\\partial t_i)\\widehat{\\mathrm d}(t_i)$. After tensoring with $R$, the first map in the preceding exact sequence is therefore represented in the free basis $\\widehat{\\mathrm d}(t_i)$ by the matrix whose $j$-th column is $(\\partial f_j/\\partial t_i\\bmod I)_i$; the derivative is the formal one of [def-trf-formal-power-series-partial-derivative].",
+   "uses": [
+    "lem-trf-formal-power-series-continuous-free",
+    "def-trf-formal-power-series-partial-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Matrix identification from the cited continuous free-module formula and the formal derivative definition; compare the polynomial Jacobian presentation in Curves Tag 0C4D (lemma-nodal), first proof paragraph."
+   }
+  },
+  {
+   "text": "The cokernel of that matrix map is, by Step 2 and the basis isomorphism of Step 1, canonically isomorphic to $\\widehat\\Omega_{R/F}$. The induced map sends the class of the $i$-th standard basis vector to $\\widehat{\\mathrm d}(t_i\\bmod I)$, exactly as in the statement, so it is well defined and an isomorphism.",
+   "uses": [
+    "lem-trf-formal-power-series-continuous-free",
+    "lem-trf-formal-power-series-continuous-conormal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Cokernel identification from the two cited continuous statements; compare the polynomial presentation in Curves Tag 0C4D (lemma-nodal), first proof paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-formal-power-series-partial-derivative",
+  "lem-trf-formal-power-series-continuous-conormal",
+  "lem-trf-formal-power-series-continuous-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Auxiliary continuous version motivated by Tag 0C4D (lemma-nodal), first proof paragraph. The four-step composition of the continuous free and conormal statements is agent-written; 0C4D itself gives the polynomial presentation. Finite-level ingredients: Algebra Tags 00RX, 00RU, 02HQ."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +98,31 @@
    "results": "{\"t\": \"2026-10-17T19:51:27Z\", \"tool\": \"leansearch\", \"query\": \"formal power series quotient Jacobian differential cokernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.cokernelIsoRangeQuotient\", \"CategoryTheory.ProjectiveResolution.cokernelCofork\", \"ModuleCat.cokernelIsColimit\", \"ModuleCat.range_mkQ_cokernelIsoRangeQuotient_inv\", \"PowerSeries.weierstrassDiv\", \"Algebra.PreSubmersivePresentation.jacobian\", \"Algebra.Extension.Cotangent.ker_mk\", \"PowerSeries.IsWeierstrassDivisorAt.div\"], \"digest\": \"aad4a4e109e08be6\"}",
    "date": "2026-10-18",
    "verdict": "generalization: Mathlib has ordinary presentation and formal derivative APIs, but no continuous power-series quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous differentials of a formal power series quotient are the cokernel of the Jacobian",
+   "results": "Mathlib hits ordinary presentation and formal derivative APIs (including Algebra.PreSubmersivePresentation.cotangentComplexAux_apply), but no continuous power-series quotient theorem.",
+   "date": "2026-10-18",
+   "verdict": "generalization: ordinary presentation/derivative APIs only"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries KaehlerDifferential quotient",
+   "results": "0 hits; query parser reports an application type mismatch for KaehlerDifferential.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "continuous|formal.*differential|MvPowerSeries (Mathlib/RingTheory)",
+   "results": "FormalGroup and MvPowerSeries files plus unrelated topology; no continuous differential quotient theorem.",
+   "date": "2026-10-18",
+   "verdict": "generalization: no exact theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-completed-jacobian-differentials",
@@ -73,5 +150,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-formal-power-series-continuous-differentials",
+  "worker": "stage1",
+  "summary": "Split the continuous Jacobian presentation into a Mathlib formal partial-derivative definition, a statement that continuous differentials of the ambient formal power-series ring are free on coordinate differentials, and a statement giving the continuous conormal exact sequence for a quotient. The item proof composes these ingredients and identifies the resulting map with the Jacobian cokernel. I checked the finite-level truncation route against Stacks Tags 00RS, 00RX and 02HQ and found no exact Mathlib theorem for the continuous assertions.",
+  "blueprint": "Realizes the Jacobian-cokernel/differential comparison in the first proof paragraph of Curves Tag 0C4D.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-0a46c3ae7",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-0a46c3ae7 (reviewer sub-agent of L); spot-checked: Read all mathematics and cited sources; checked every step, new node, dependency and edge case, including positive characteristic. Corrected source attribution (00RU versus 00RS; 0C4D gives a polynomial presentation), missing search records, and conormal derivation notation. Four corrected JSON files are under fixes/; concrete checks are in review.md. No target weakened.; 4 file(s) fixed by the reviewer"
  }
 }

@@ -11,9 +11,41 @@
   "def-weil-pbc-adically-complete-ring",
   "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The separability hypothesis is used in the separable algebraic sense specified by the statement’s definition; no finiteness of the extension is needed. Take the zero ideal $\\mathfrak n=(0)$ of the field $\\kappa$. The cited separable-algebraic square-zero lifting theorem says that for every commutative $k$-algebra $D$, square-zero ideal $J\\subseteq D$, quotient map $D\\to D/J$, and $k$-algebra map $\\kappa\\to D/J$, a lift $\\kappa\\to D$ exists. Since every power of the zero ideal is zero, this is exactly the lifting condition in [def-weil-pbc-formally-smooth-adic] for $\\kappa$ to be formally smooth over $k$ for the $\\mathfrak n$-adic topology.",
+   "uses": [
+    "lem-exc-separable-algebraic-square-zero-lifting",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0C34, proof: first paragraph, citing Algebra Proposition 0322 and Lemma 07EC."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fs-adic-lift-into-complete] with source ring $k$, source algebra $S=\\kappa$, source ideal $\\mathfrak n=(0)$, target algebra $A=R$, and both target ideals $I=J=\\mathfrak m$. The target is $I$-adically complete by hypothesis; $J^1\\subseteq I$ and $J=\\bigcap_{r\\ge1}(J+I^r)$ are immediate because $I=J$; and the residue map $g:\\kappa\\to R/\\mathfrak m=\\kappa$ is the identity, so $g(\\mathfrak n^1)=0\\subseteq q(I)=0$, where $q:R\\to R/\\mathfrak m$ is the quotient map. The theorem therefore gives a $k$-algebra map $\\sigma:\\kappa\\to R$ with quotient composite equal to $g$. Under the identified residue field, this says $\\kappa\\xrightarrow{\\sigma}R\\to R/\\mathfrak m=\\kappa$ is the identity, as required.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-lift-into-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0C34, proof: second paragraph, applying Lemma 07NJ (lift-continuous) to the complete local algebra."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-separable-algebraic-square-zero-lifting",
+  "def-weil-pbc-formally-smooth-adic",
+  "lem-weil-pbc-fs-adic-lift-into-complete"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0C34, lemma-lift-residue-field proof, via formal smoothness and Tag 07NJ."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,7 +77,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-separable-closed-point-formal-presentation",
@@ -72,5 +104,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-separable-residue-coefficient-section",
+  "worker": "stage1",
+  "summary": "Split Tag 0C34 into the formal-smoothness reduction for the zero ideal and the application of the existing adic formal-smooth lifting theorem to the maximal ideal of the complete local algebra. No new nodes were needed; the separable-algebraic square-zero result is an existing Mathlib leaf. This proves the separable algebraic specialization of Tag 0C34 encoded by the statement’s cited definition; Tag 0C34 itself allows general separable extensions. In step 2 the required containment concerns the image of the zero source ideal, not the image of the whole source field.",
+  "blueprint": "Realizes the coefficient-field section supplied by the separable-residue formal presentation in the Curves 0C4D route, as cited by the formal-presentation ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fs-adic-lift-into-complete",
+    "why": "This generic complete-target lifting theorem is the DAG form of Stacks Tag 07NJ used by Tag 0C34; the trace-formula unit has no replacement for this general lifting tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fs-adic-lift-into-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q90-d43b7b645",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q90-d43b7b645 (reviewer sub-agent of L); spot-checked: Read both proof steps, all cited statements, and Stacks 0C34/0322/07EC/07NJ. Corrected step 2 to g(n)=0⊆q(I)=0 and clarified that the item proves the separable algebraic specialization of 0C34. No statement changes or new nodes. Review and corrected JSON written under the review directory.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -24,9 +24,133 @@
   "def-weil-proper-morphism",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take the marking empty in [lem-trf-valuation-horizontal-curve-models]. It applies to every reduced modification in the statement, so its source is again a flat finitely presented $T$-curve with one-dimensional fibres, and the generic-fibre map is an isomorphism. For a centred valuation of a component, its fraction-field point therefore lifts to that component of the modification. The proper and separated extension theorem [lemma-nagata-proper-separated-valuation-extension] extends this to a unique map from the whole valuation spectrum. Hence all centres used below are centres of the specified, uniquely lifted morphisms.",
+   "uses": [
+    "lem-trf-valuation-horizontal-curve-models",
+    "lemma-nagata-proper-separated-valuation-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Section 4.2, opening paragraph and valuative interpretation"
+   }
+  },
+  {
+   "text": "Use the common valuation spaces and sets $\\Gamma$ of [lem-trf-modification-fibre-centre-finite], and set $F=\\Gamma_0(W)$. That node asserts its finiteness and residual transcendence degree one; closedness of its centres on $C$ is part of the definition of $\\Gamma_0$. Thus this is a finite set of the valuations required in the statement, rather than a set of points on two different models.",
+   "uses": [
+    "lem-trf-modification-fibre-centre-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.2.2 and definitions preceding Lemma 4.2.1"
+   }
+  },
+  {
+   "text": "Suppose that $p:C'\\to C$ satisfies the hypothesis. In the common valuation space this is precisely $F\\subseteq\\Gamma(C')$. Generalization-stability of $\\Gamma(C')$ and the formula of [lem-trf-modification-fibre-centre-finite] give $\\Gamma(W)=\\operatorname{gen}(F)\\cup\\Gamma(C)\\subseteq\\Gamma(C')$, since that formula also includes $\\Gamma(C)\\subseteq\\Gamma(C')$. This step uses actual inclusions of centred valuations, not an inclusion between the underlying point sets of $W$ and $C'$.",
+   "uses": [
+    "lem-trf-modification-fibre-centre-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Proposition 4.2.3, first sentence"
+   }
+  },
+  {
+   "text": "Let $U$ be the intersection of the isomorphism opens for $p$ and $q$, and take the schematic closure $Z$ of its diagonal copy in $W\\times_C C'$. The opens may be taken quasi-compact since the schemes here are quasi-compact quasi-separated. The closure theorem [sk-lem-nagata-sketch-closure] makes $U$ a schematically dense open of $Z$. On affine opens the closure ideal is a kernel into sections on the reduced scheme $U$, so $Z$ is reduced. Each projection $a:Z\\to W$, $b:Z\\to C'$ is proper: the ambient projection is a proper base change by [lem-weil-pbc-proper-base-change], and a closed subscheme of its source remains proper by [lem-weil-pbc-closed-immersion-proper]. Over $U$ both projections are isomorphisms. Thus these are reduced modifications and, by [lem-trf-valuation-horizontal-curve-models], $Z$ is a $T$-curve.",
+   "uses": [
+    "sk-lem-nagata-sketch-closure",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-trf-valuation-horizontal-curve-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Proposition 4.2.3, schematic graph construction"
+   }
+  },
+  {
+   "text": "If $\\nu\\in\\Gamma(Z)\\setminus\\Gamma(C')$, the inclusion in step 3 implies $\\nu\\notin\\Gamma(W)$. Its centres $w,c'$ on the two models are therefore nongeneric points of the same one-dimensional fibre, hence closed in those fibres. Let $z$ be its centre on $Z$. The image of $z$ in $W_s\\times_{\\kappa(s)}C'_s$ is closed by [lem-kun-closed-points-of-product]. The natural map $Z_s\\to W_s\\times_{\\kappa(s)}C'_s$ is a monomorphism, hence injective on points: it factors through the fibre product over $C_s$ and the closed immersion defining $Z$. The inverse image of that closed singleton is therefore $\\{z\\}$, so $z$ is closed in $Z_s$. But $\\nu\\in\\Gamma(Z)$ makes $z$ the generic point of a one-dimensional component, a contradiction. Consequently $\\Gamma(Z)\\subseteq\\Gamma(C')$.",
+   "uses": [
+    "lem-kun-closed-points-of-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Proposition 4.2.3, final paragraph"
+   }
+  },
+  {
+   "text": "No irreducible component of a $T$-fibre of $Z$ can be contracted by $b$: [lem-trf-modification-fibre-centre-finite] supplies a valuation centred at its generic point, and step 5 makes its image fibre-generic. A fibre of $b_s$ over a closed point is closed in the one-dimensional scheme $Z_s$; if positive-dimensional it contains a whole component, contradicting noncontraction. A fibre over a generic point contains only generic points of $Z_s$: a nongeneric point is closed in $Z_s$, has finite residue field over $\\kappa(s)$, and therefore has closed image by [lem-kun-closed-point-field]. There are only finitely many such generic points. Thus all fibres of $b$ are zero-dimensional. Properness gives local finite type, so [lem-trf-locally-quasi-finite-relative-dimension-zero] makes $b$ locally quasi-finite, and [pqf-lem-proper-lqf-finite] makes it finite.",
+   "uses": [
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-locally-quasi-finite-relative-dimension-zero",
+    "pqf-lem-proper-lqf-finite",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Proposition 4.2.3, finite-fibre argument"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-birational-normal-iso] componentwise to $b:Z\\to C'$. A normal scheme with finitely many irreducible components has disjoint open-and-closed components: a point on two components would give two minimal primes in its local domain. On each component $b$ is finite and birational, its source is integral by the reduced schematic-closure construction, and the target is normal by hypothesis. Hence $b$ is an isomorphism. Define $h=a b^{-1}$. It is a modification, since $a$ is proper and an isomorphism on the schematically dense open $U$. Any other $C$-map agrees with $h$ on $p^{-1}(U)$; separatedness of $W\\to C$ and the dense-open uniqueness clause of [sk-lem-nagata-sketch-closure] give equality.",
+   "uses": [
+    "lem-trf-finite-birational-normal-iso",
+    "sk-lem-nagata-sketch-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Proposition 4.2.3, normality and uniqueness"
+   }
+  },
+  {
+   "text": "Let $c$ be a closed original centre and $y$ its lifted centre on a reduced modification $Y$. Put $s$ for their common image in $T$. If $y$ is nongeneric in the one-dimensional fibre $Y_s$, it is closed in that fibre. By [lem-kun-closed-point-field], $\\kappa(y)$ is finite over $\\kappa(s)$, and consequently finite over its intermediate subfield $\\kappa(c)$. The same lemma applied to the finite-type $\\kappa(c)$-scheme $Y_c$ shows that $y$ is closed in $Y_c$. Since $\\{c\\}$ is closed in $C$, $Y_c$ is a closed subspace of $Y$, so $y$ is closed in $Y$. This proves the dichotomy without assuming that $s$ is closed in $T$.",
+   "uses": [
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Section 4.2 and Proposition 4.3.1 proof, nongeneric-centre alternative"
+   }
+  },
+  {
+   "text": "Apply the modification-locus assertion of [lem-trf-modification-fibre-centre-finite] with normal base curve $B$ and reduced modification $r:B'\\to B$. Its modification locus $L$ is closed and quasi-finite over $T$. It cannot contain a generic point $x$ of a fibre component of $B$: closedness would force all of that one-dimensional component into $L$, whereas a quasi-finite morphism has finite, zero-dimensional fibres. Therefore $x$ belongs to the open $B\\setminus L$ over which $r$ is an isomorphism. Its inverse takes $x$ to a fibre-generic point. The unique valuation lift of step 1 must use that point as its centre, which proves persistence.",
+   "uses": [
+    "lem-trf-modification-fibre-centre-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.2.1(ii), modification-locus consequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-closed-point-field",
+  "lem-kun-closed-points-of-product",
+  "lem-trf-finite-birational-normal-iso",
+  "lem-trf-locally-quasi-finite-relative-dimension-zero",
+  "lem-trf-modification-fibre-centre-finite",
+  "lem-trf-valuation-horizontal-curve-models",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-proper-base-change",
+  "lemma-nagata-proper-separated-valuation-extension",
+  "pqf-lem-proper-lqf-finite",
+  "sk-lem-nagata-sketch-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Lemmas 4.2.1--4.2.2 and Proposition 4.2.3, pp. 26--27; finite-test reduction in Proposition 4.3.1, first paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,7 +189,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-strict-semistable-cofinality",
@@ -93,5 +217,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-fibre-valuation-domination",
+  "worker": "stage1",
+  "summary": "Split Temkin's finite-test reduction by constructing F=Gamma_0(W), expanding the schematic graph and noncontraction argument proving domination, applying proper quasi-finite finiteness and finite birational normality, and proving the centre dichotomy and persistence directly. One new statement node packages the finite valuation-set/generation and modification-locus facts of Lemmas 4.2.1--4.2.2; no new node restates a conclusion clause.",
+  "blueprint": "Temkin §4.2 Lemmas 4.2.1--4.2.2 and Proposition 4.2.3, with the finite-test reduction in Proposition 4.3.1, first paragraph.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q83-03b5d57c2",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q83-03b5d57c2 (reviewer sub-agent of L); spot-checked: Read the full packet, item, new node, cited statements, Temkin §4.2 source, and route documents. All nine proof steps check against their cited hypotheses and sources; the new support node is distinct, correctly scoped, and searched. Edge cases, reduced/normal distinctions, graph closure, valuation lifts, finiteness, and modification-locus arguments checked. Review written to review.md."
  }
 }

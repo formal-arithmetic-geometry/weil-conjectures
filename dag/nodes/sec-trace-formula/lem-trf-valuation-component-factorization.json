@@ -19,9 +19,145 @@
   "def-weil-flat-morphism",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The generic point is open in $S$. If $V$ is a field take $t=1$; otherwise choose a nonzero $t$ in the least nonzero prime of its finite prime chain. Every nonzero prime contains $t$, so $D(t)=\\eta$ and $V[1/t]=K$. For $Z=W,Y$ and every affine open $A\\subseteq Z$, apply [lem-sc-flat-invertible-sections-torsion-free] to the flat scheme $A$ and its invertible module $\\mathcal O_A$. Every nonzero element of $V$ acts injectively on $\\Gamma(A,\\mathcal O_A)$; hence this ring injects into its localization at $t$. Thus $Z_\\eta$ is schematically dense in $Z$.",
+   "uses": [
+    "lem-sc-flat-invertible-sections-torsion-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent reconstruction: finite-height valuation generic open and flat generic schematic density, using the cited torsion-free-sections statement."
+   }
+  },
+  {
+   "text": "Put $P=X\\times_CY$ and let $q:P\\to X$, $p_0:P\\to Y$ be the projections. Since $f_\\eta,g_\\eta$ are isomorphisms, $U=P_\\eta\\cong Y_\\eta$ is exactly the common generic graph. Its inclusion is a quasi-compact open immersion: on each affine open $\\operatorname{Spec}A\\subset P$ it is $D(t)$. Form its scheme-theoretic closure $i:\\Gamma\\hookrightarrow P$ by [def-nagata-scheme-theoretic-closure]. Explicitly, on this affine chart its ideal is $I=\\ker(A\\to A[1/t])$. These ideals commute with localization, so give the closed subscheme; $I[1/t]=0$ and $(A/I)[1/t]=A[1/t]$. Moreover $A/I\\to A[1/t]$ is injective. Thus $\\Gamma_\\eta=U$ and $U$ is schematically dense in $\\Gamma$. Any ideal defining a closed subscheme containing $U$ has zero localization and is contained in $I$; this identifies the constructed subscheme with the smallest closure of [lemma-nagata-scheme-theoretic-closure-minimal].",
+   "uses": [
+    "def-nagata-scheme-theoretic-closure",
+    "lemma-nagata-scheme-theoretic-closure-minimal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent affine calculation following example-scheme-theoretic-closure; quasi-compact immersion closure and its minimality."
+   }
+  },
+  {
+   "text": "The compatible maps give $c=(a,b):W\\to P$. A local section of the ideal of $\\Gamma$ vanishes on $U$, so its pullback under $c$ vanishes on $W_\\eta$. By the injectivity proved in step 1 it is zero on $W$. Thus the pulled-back defining ideal is zero and $c$ factors uniquely as $i\\circ r$ for $r:W\\to\\Gamma$. Write $p=p_0i$ and $q_\\Gamma=qi$. Then $pr=b$ and $q_\\Gamma r=a$, and $r_\\eta$ is an isomorphism onto $U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent reconstruction: scheme-theoretic factorization through the generic graph closure by the vanishing of its defining ideal."
+   }
+  },
+  {
+   "text": "The projection $p_0:P\\to Y$ is the base change of the proper map $f:X\\to C$, hence proper by [lem-weil-pbc-proper-fp-permanence](b). The closure inclusion $i$ is closed, hence proper by its clause (c), so $p=p_0i$ is proper by clause (a). In particular $p$ is separated and of finite type by [def-weil-proper-morphism]. Since $Y\\to S$ is of finite presentation, it is of finite type; the composite $\\Gamma\\to S$ is locally of finite type by clause (e). It is also quasi-compact: over a quasi-compact open in $S$, cover its inverse image in $Y$ by finitely many affine opens and then use quasi-compactness of $p$ on each. Thus the composite is of finite type. Consequently each $\\Gamma_s$ is of finite type over $\\kappa(s)$: affine charts are obtained by tensoring finitely generated coordinate algebras with $\\kappa(s)$.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W3, 01W4, 01W5; properness and finite-type permanence for the graph projection."
+   }
+  },
+  {
+   "text": "Regard $r$ as a $Y$-morphism, since $pr=b$. Its source is proper over $Y$ via $b$, and its target is separated over $Y$ via $p$ by step 4. Therefore [lem-weil-pbc-proper-to-separated] gives that $r$ is proper. Its image is closed by [def-weil-proper-morphism] and contains $U$ by step 3. Schematic density of $U$ in $\\Gamma$ implies topological density: a nonempty open disjoint from $U$ would have its structure sheaf inject into zero. Hence the closed image of $r$ is all of $\\Gamma$, so $r$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-proper-to-separated",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W6, lemma-image-proper-scheme-closed; closed image of the common model and generic schematic density."
+   }
+  },
+  {
+   "text": "Fix $s\\in S$ and put $k=\\kappa(s)$. The maps $r_s:W_s\\to\\Gamma_s$ and $p_s:\\Gamma_s\\to Y_s$ are proper by [lem-weil-pbc-proper-fp-permanence](b); $r_s$ is surjective by [lem-weil-pbc-surjective-base-change]. These are finite-type $k$-schemes, and every component of $W_s$ has dimension one by the item. If a fibre $(\\Gamma_s)_y$ had positive dimension, [lem-trf-proper-curve-image-positive-fibre-component] would give a closed $y\\in Y_s$ and a component $Z\\subset W_s$ with $b_s(Z)=\\{y\\}$ and $\\dim r_s(Z)=1$. The item hypothesis gives $a_s(Z)=\\{x\\}$ for a point $x\\in X_s$. This point is closed: $Z$ is closed and $a_s$ is proper, again by proper base change and [def-weil-proper-morphism].",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-trf-proper-curve-image-positive-fibre-component",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2L, component/dimension count on the fibre of the graph closure; application of the new statement with T=W_s, G=Gamma_s and Y=Y_s."
+   }
+  },
+  {
+   "text": "The closed points $x,y$ have residue fields finite over $k$: in affine charts their residue fields are quotients of finite-type $k$-algebras by maximal ideals, hence [lem-weil-pbc-zariski-lemma] applies. By [lem-trf-closed-point-residue-immersion] they define closed subschemes $\\operatorname{Spec}\\kappa(x)\\subset X_s$ and $\\operatorname{Spec}\\kappa(y)\\subset Y_s$. Their fibre product over $C_s$ is a closed subscheme $F\\subset P_s$ by closed-immersion base change and composition in [lem-weil-pbc-proper-fp-permanence](b),(e). Put $z=f_s(x)=g_s(y)$. Explicitly $F=\\operatorname{Spec}(\\kappa(x)\\otimes_{\\kappa(z)}\\kappa(y))$; its ring is a quotient of $\\kappa(x)\\otimes_k\\kappa(y)$ and so finite-dimensional over $k$. Each prime quotient of a finite-dimensional algebra is a finite-dimensional domain; multiplication by a nonzero element is injective, hence surjective, so that quotient is a field. Thus every prime is maximal and $F$ has dimension zero. The image $i_s r_s(Z)$ lies in $|F|$, since its two projections are $x,y$. Closed immersions preserve subspace topologies, so $\\dim r_s(Z)\\leq0$, contradicting step 6. Therefore every fibre of every $p_s$ has dimension at most zero.",
+   "uses": [
+    "lem-weil-pbc-zariski-lemma",
+    "lem-trf-closed-point-residue-immersion",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Agent calculation for a graph image whose two projections are closed points; finite residue extensions by the cited Zariski lemma, then finite-dimensional tensor algebra."
+   }
+  },
+  {
+   "text": "For $y\\in Y$ over $s\\in S$, the fibre $\\Gamma_y$ is canonically $(\\Gamma_s)_y$, by associativity of fibre products and the residue-field map $\\kappa(s)\\to\\kappa(y)$ [def-pc-scheme-fibre]. Step 7 shows its dimension is at most zero. At each point of a nonempty such fibre the local topological dimension is exactly zero: it is nonnegative, and every subspace of a space with no strict specialization chain has dimension at most zero. Since $p$ is of finite type by step 4, [lem-trf-locally-quasi-finite-relative-dimension-zero] makes it locally quasi-finite. It is proper by step 4, so [pqf-lem-proper-lqf-finite] makes it finite. Also $p_\\eta$ is an isomorphism by step 2; the generic opens in both $Y$ and $\\Gamma$ are schematically dense by steps 1--2. Thus $p$ is a finite $\\eta$-modification, with no Noetherian-base hypothesis.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-trf-locally-quasi-finite-relative-dimension-zero",
+    "pqf-lem-proper-lqf-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0397, lemma-locally-quasi-finite-rel-dimension-0; More on Morphisms Tag 02LS, proper locally quasi-finite implies finite."
+   }
+  },
+  {
+   "text": "By the stated $\\eta$-normality of $Y$, the finite $\\eta$-modification $p$ is an isomorphism. Define $h=q_\\Gamma p^{-1}:Y\\to X$. From $pr=b$ and $q_\\Gamma r=a$ we get $hb=a$. The two projections of $P$ satisfy $fq=gp_0$, hence $fh=g$. Thus $h$ is a $C$-morphism, and on the generic fibre $h_\\eta=f_\\eta^{-1}g_\\eta$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Agent reconstruction of the eta-normality step of the common-model factorization; Temkin Proposition 4.2.3 remains WANTED locally."
+   }
+  },
+  {
+   "text": "If $h_1,h_2:Y\\to X$ are $C$-morphisms with $h_ib=a$, then the generic-fibre isomorphism $b_\\eta$ gives $(h_1)_\\eta=(h_2)_\\eta$. Since $f$ is proper, its diagonal is a closed immersion by [def-weil-proper-morphism]; their equalizer is its pullback, hence a closed subscheme of $Y$ by [lem-weil-pbc-proper-fp-permanence](b). Its defining ideal restricts to zero on $Y_\\eta$. On each affine open of $Y$, step 1 proved that the coordinate ring injects into its generic localization, so this ideal is zero. The equalizer is all of $Y$, proving $h_1=h_2$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent uniqueness argument: closed equalizer and flat schematic density of the generic fibre."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-scheme-theoretic-closure",
+  "def-pc-scheme-fibre",
+  "def-weil-proper-morphism",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-trf-closed-point-residue-immersion",
+  "lem-trf-locally-quasi-finite-relative-dimension-zero",
+  "lem-trf-proper-curve-image-positive-fibre-component",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-zariski-lemma",
+  "lemma-nagata-scheme-theoretic-closure-minimal",
+  "pqf-lem-proper-lqf-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Agent reconstruction of the returned graph argument: schematic density and closure, proper surjective common-model map, proper graph projection, field-level component/dimension count (0B2L), zero-dimensional fibres (0397), proper quasi-finite finiteness (02LS), eta-normality and uniqueness. Temkin Proposition 4.2.3 is not locally available."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +186,38 @@
    "results": "hits=1; top=['Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean']; note=; digest=f4e58e59faf6e743. The rational-map hits give only representatives on open subsets; the valuation-factor hit factors a local ring map through a valuation subring. None gives a global factorization from fibre-component data. Grep only found an elliptic L-function comment.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "factorization of modifications of a relative curve over a finite height valuation ring through an eta-normal modification",
+   "results": "hits=8; top=[AlgebraicGeometry.ValuativeCriterion.eq, AlgebraicGeometry.ValuativeCriterion.Existence, AlgebraicGeometry.ValuativeCriterion.Uniqueness, AlgebraicGeometry.ValuativeCriterion, AlgebraicGeometry.ValuativeCriterion.existence, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.ValuativeCriterion.Existence.eq, AlgebraicGeometry.ValuativeCriterion.uniqueness]; none states curve factorization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite AlgebraicGeometry.IsProper AlgebraicGeometry.Scheme",
+   "results": "0 hits; query parser error: Function expected at AlgebraicGeometry.IsFinite ?m.5 but this term has type Prop. No candidate states curve factorization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "component.?factor|contracted.*component|eta.?normal|modification.*curve [Mathlib/AlgebraicGeometry]",
+   "results": "1 unrelated hit in Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ.lean:70; no declaration states curve factorization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper birational modifications of relative curves factor through a normal target",
+   "results": "hits=8; top=[AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.ker_toNormalization]; none states relative-curve factorization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-semistable-dominates-stable",
@@ -81,5 +245,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-component-factorization",
+  "worker": "stage1",
+  "summary": "Repair of D2/D1/D5 and C8: removed the rejected graph-finiteness helper and wrote the existence argument in the item, including generic schematic density, ideal-theoretic graph factorization, proper surjectivity of the common-model map, properness of the graph projection, the contracted-component contradiction giving zero-dimensional fibres, and proper-plus-locally-quasi-finite finiteness. One smaller statement-only input isolates the field-level lifting of positive-dimensional fibres to curve components. The item statement is unchanged; proof_origin is agent because the Temkin PDF is missing. Removed split_report.tool_uses as the return requests.",
+  "blueprint": "Retains the historical lem-trf-local-term-locality ancestry of the imported semistable-alteration branch. The ten steps realize the five parts explicitly required by the return, then eta-normality and uniqueness; no unit or chapter record is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q78-cbf83919d",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q78-cbf83919d (reviewer sub-agent of L); spot-checked: Reviewed the item, auxiliary node, cited statements, sources, unit route, hypotheses, edge cases, dependency citations, blueprint metadata, and route restrictions. The repaired proof is coherent; no SGA 4, dropped route machinery, target weakening, duplicate split, or long hidden step found. Temkin’s PDF is unavailable and is correctly recorded as WANTED with agent reconstruction."
  }
 }

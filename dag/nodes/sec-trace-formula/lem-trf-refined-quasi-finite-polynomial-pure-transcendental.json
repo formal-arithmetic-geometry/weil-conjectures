@@ -16,9 +16,165 @@
   "def-kun-dimension",
   "def-sbc-affine-space"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $S=\\operatorname{Spec}R$, $Z=\\operatorname{Spec}A$, and $R\\to A$ for the finite-type ring map. Let $\\mathfrak q_A$ represent $z$ and $\\mathfrak p=\\mathfrak q_A\\cap R$ represent $s$; put $k=\\kappa(\\mathfrak p)$. By [lem-weil-pbc-fibre-product-affine-spectra], $Z_s\\cong\\operatorname{Spec}(A\\otimes_R k)$, with projection induced by $a\\mapsto a\\otimes1$. The prime over $z$ is the one specified by [lem-weil-pbc-fibre-ring-primes-residue-fields]. Under this scheme isomorphism, open neighbourhoods and chains of irreducible closed subsets correspond, so [def-kun-topological-dimension-at-point] identifies $n=\\dim_z(Z_s)$ with the dimension at that fibre prime. Thus [lem-weil-pbc-quasi-finite-over-polynomial-algebra] gives $g\\notin\\mathfrak q_A$ and a finite-type map $\\alpha:R[t_1,\\ldots,t_n]\\to B=A_g$ quasi-finite at every prime. Let $\\mathfrak q_B=\\mathfrak q_A B$, which contracts to $\\mathfrak q_A$ by [lem-weil-pbc-localization-prime-residue-field-iso].",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, first paragraph; Tag 00QE; Tags 01I4/01JQ, 00E6 and 0055 for the affine fibre and topological dimension"
+   }
+  },
+  {
+   "text": "Put $\\mathfrak q'=\\alpha^{-1}(\\mathfrak q_B)$. Its contraction to $R$ is $\\mathfrak p$. The polynomial scalar-extension isomorphism [lem-weil-pbc-polynomial-scalar-extension] identifies $R[t]\\otimes_Rk$ with $k[t]$. Let $Q\\subset k[t]$ be the prime corresponding to $\\mathfrak q'$. By [lem-weil-pbc-fibre-ring-primes-residue-fields], $\\kappa(Q)\\cong\\kappa(\\mathfrak q')$ over $k$; this is the residue field of the image in the original polynomial chart, rather than $\\kappa(\\mathfrak q_B)$. Set $r=\\operatorname{trdeg}_k\\kappa(Q)$. Apply [lem-trf-refined-noether-normalization-prime] to get a finite $k$-algebra map $\\bar\\psi:k[x_1,\\ldots,x_n]\\to k[t_1,\\ldots,t_n]$ with $\\bar\\psi^{-1}(Q)=I=(x_{r+1},\\ldots,x_n)$. Write $\\bar h_i=\\bar\\psi(x_i)$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "lem-trf-refined-noether-normalization-prime",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, second paragraph; Tag 051P and the fibre-prime residue-field comparison"
+   }
+  },
+  {
+   "text": "Each of the finitely many coefficients in the polynomials $\\bar h_i$ is the image of a fraction $a/b$ with $a\\in R$ and $b\\notin\\mathfrak p$. Taking $f$ to be the product of these denominators (or $1$ if there are none) gives $f\\notin\\mathfrak p$ and lifts $h_i\\in R_f[t]$. The polynomial universal property defines $\\psi:C=R_f[x]\\to D=R_f[t]$, $x_i\\mapsto h_i$, whose scalar extension to $k$ is $\\bar\\psi$. The ring $D$ is finite type over $C$: the $t_j$ generate it as a $C$-algebra. Let $\\mathfrak q_D=\\mathfrak q'D$ and $P=\\psi^{-1}(\\mathfrak q_D)$. By [lem-weil-pbc-localization-prime-residue-field-iso], $\\mathfrak q_D$ contracts to $\\mathfrak q'$; therefore $P\\cap R_f=\\mathfrak pR_f$. The fibre-prime correspondence in [lem-weil-pbc-fibre-ring-primes-residue-fields] applied to $R_f\\to C,D$ shows that the prime of $C\\otimes_{R_f}k=k[x]$ corresponding to $P$ is $I$. Indeed, for $c\\in C$, $\\psi(c)\\in\\mathfrak q_D$ iff $\\bar\\psi(\\bar c)\\in Q$ iff $\\bar c\\in I$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-weil-pbc-fibre-ring-primes-residue-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, lifting the normalized coordinates after inverting f"
+   }
+  },
+  {
+   "text": "The residue-field comparison gives $\\kappa(P)\\cong\\kappa(I)$ as $C$-algebras. Consequently the fibre of $\\psi$ over $P$ is explicitly\n$$D\\otimes_C\\kappa(P)\\cong k[t]\\otimes_{k[x]}\\kappa(I).$$\nThe forward map sends $d\\otimes a$ to $\\bar d\\otimes a$, using the residue-field comparison on $a$; its inverse sends $(d\\otimes b)\\otimes a$ to $d\\otimes ba$, using the induced $k$-action on $\\kappa(P)$. These maps respect the tensor relations and are inverse on pure tensors. They identify the primes belonging to $\\mathfrak q_D$ and $Q$, since contracting either prime to $D$ gives $\\mathfrak q_D$ and the fibre-prime correspondence is unique. A finite set of module generators for the finite map $\\bar\\psi$ tensors to generators of the right-hand side over $\\kappa(I)$. By [lem-weil-pbc-finite-ring-map-quasi-finite], this finite algebra over the field has every spectrum point isolated: its only base fibre is itself. Thus the displayed fibre has its chosen prime isolated, which by [def-weil-pbc-ring-map-quasi-finite-at-prime] says that $\\psi$ is quasi-finite at $\\mathfrak q_D$. Now [lem-weil-pbc-ring-quasi-finite-locus-open] gives $h\\in D\\setminus\\mathfrak q_D$ such that $C\\to D_h$ is finite type and quasi-finite at every prime.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "lem-weil-pbc-finite-ring-map-quasi-finite",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "lem-weil-pbc-ring-quasi-finite-locus-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, finite special-fibre map implies quasi-finiteness at the prime; Tag 00QA supplies h"
+   }
+  },
+  {
+   "text": "First invert $f$ in both $R[t]$ and $B$, obtaining $D=R_f[t]\\to B_f$. Next invert $h\\in D$ in the source and its image $\\alpha_f(h)$ in $B_f$, obtaining $D_h\\to T=B_f[1/\\alpha_f(h)]$. Apply [lem-weil-pbc-quasi-finite-at-prime-principal-localization] twice: first with base element $f$ and target element $1$, then with base element $h$ and target element $1$. Every prime of $T$ contracts at each stage to a prime avoiding the inverted element, by [lem-weil-pbc-localization-prime-residue-field-iso], and the original map $\\alpha$ is quasi-finite at each such prime. Therefore $D_h\\to T$ is finite type and quasi-finite at every prime. Composition with $C\\to D_h$ has the same properties by [lem-trf-quasi-finite-composition], the statement of Stacks 00PO. In particular $T$ inverts the image of $f$; it is the iterated localization customarily denoted $A_{gfh}$. More precisely write $\\alpha_f(h)=a/(gf)^N$ in $A_{gf}$ with $a\\in A$. Since $h\\notin\\mathfrak q_D$ and $\\alpha_f^{-1}(\\mathfrak q_B B_f)=\\mathfrak q_D$, one has $a\\notin\\mathfrak q_A$. Then $T\\cong A_{gfa}$, since $gf$ is already a unit and inverting $a/(gf)^N$ is equivalent to inverting $a$. Thus $Z_0=\\operatorname{Spec}T$ and $S_0=\\operatorname{Spec}R_f$ are principal affine opens containing $z,s$, and $Z_0\\subseteq p^{-1}(S_0)$, by [lem-weil-pbc-principal-localization-open-immersion].",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-trf-quasi-finite-composition",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, last paragraph; Tag 077H for localization and Tag 00PO for composition"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q_T=\\mathfrak q_A T$ represent $z$ in $Z_0$. Extension-contraction under localization [lem-weil-pbc-localization-prime-residue-field-iso] gives $\\alpha_f^{-1}(\\mathfrak q_B B_f)=\\mathfrak q_D$ and contracts the prime of $T$ back to $\\mathfrak q_B B_f$. Therefore the contraction of $\\mathfrak q_T$ to $C$ is precisely $P=\\psi^{-1}(\\mathfrak q_D)$. Compute this ideal, rather than asserting it is unchanged. For every $F\\in R_f[x]$, the fibre-prime correspondence gives\n$$F\\in P\\ \\Longleftrightarrow\\ \\bar\\psi(\\bar F)\\in Q\\ \\Longleftrightarrow\\ \\bar F\\in(x_{r+1},\\ldots,x_n)\\subset k[x].$$\nThe last condition says that all coefficients of $F(x_1,\\ldots,x_r,0,\\ldots,0)$ map to zero in $k$. The kernel of $R_f\\to k$ is $\\mathfrak pR_f$, so it is equivalent to $F\\in(\\mathfrak pR_f,x_{r+1},\\ldots,x_n)$. Thus\n$$P=(\\mathfrak pR_f,x_{r+1},\\ldots,x_n).$$\nThis proves the required prime contraction using the normalization statement, the lifted-coordinate square, and [lem-weil-pbc-fibre-ring-primes-residue-fields].",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "lem-trf-refined-noether-normalization-prime",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, prescribed inverse-image prime; Tags 00E6/0H9M and 00E3 for the fibre and localization prime correspondences"
+   }
+  },
+  {
+   "text": "The map $C\\to T$ induces an $S_0$-morphism $q:Z_0\\to\\mathbf A^n_{S_0}$. It is locally quasi-finite by [pqf-def-quasifinite], since the same pair of affine charts works at every prime. The finite-type ring map gives a locally finite-type affine morphism. Its quasi-compactness can be checked on basic opens of $\\operatorname{Spec}C$: the inverse image of $D(c)$ is $\\operatorname{Spec}T_c$, which is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]; an affine open in the target is quasi-compact and therefore is a finite union of such basic opens. Thus [pqf-lem-qf-locqf-qc] makes $q$ quasi-finite. Equivalently its fibres are finite by [pqf-lem-qf-finitefibres]. The affine fibre formula [lem-weil-pbc-fibre-product-affine-spectra] and the pointwise ring condition show that every singleton in each fibre is open, hence the finite fibres are discrete. This verifies the precise scheme formulation in the item.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-weil-finite-type-morphism",
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "pqf-lem-qf-locqf-qc",
+    "pqf-lem-qf-finitefibres",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 052E, first paragraph: translate the affine chart to a quasi-finite scheme morphism; Tags 01TD, 02NH"
+   }
+  },
+  {
+   "text": "The image $t=q(z)$ is the point $P$ of $\\operatorname{Spec}C$ computed in Step 6. Applied to $R_f\\to C$ and its fibre prime $I$, [lem-weil-pbc-fibre-ring-primes-residue-fields] identifies $\\kappa(t)=\\kappa(P)$ with $\\kappa(I)$ over $k$. Since $k[x]/I=k[x_1,\\ldots,x_r]$, the residue field at $I$ is the fraction field $k(x_1,\\ldots,x_r)$: localizing the quotient at its zero prime inverts exactly its nonzero elements. This equality follows directly from [def-weil-pbc-localization-at-prime]. The base residue field $\\kappa(s)$ is $k$ even after replacing $R$ by $R_f$, by the residue-field clause of [lem-weil-pbc-localization-prime-residue-field-iso]. The number $r$ is nonnegative and at most $n$, since $\\kappa(Q)$ is generated as a field by the images of the $n$ variables over $k$, so a transcendence basis has at most $n$ elements [def-kun-transcendence-degree]. Therefore $\\kappa(t)/\\kappa(s)$ is purely transcendental as required. No identification of the final $\\kappa(t)$ with $\\kappa(Q)$ or with the source $\\kappa(z)$ occurs.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "def-kun-transcendence-degree",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, coordinate-prime residue field; Tag 052E, purely transcendental image field"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-dimension-at-point",
+  "def-kun-transcendence-degree",
+  "def-sbc-affine-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "def-weil-residue-field",
+  "def-weil-ring-localization-away",
+  "lem-trf-quasi-finite-composition",
+  "lem-trf-refined-noether-normalization-prime",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-finite-ring-map-quasi-finite",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
+  "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
+  "lem-weil-pbc-ring-quasi-finite-locus-open",
+  "pqf-def-quasifinite",
+  "pqf-lem-qf-finitefibres",
+  "pqf-lem-qf-locqf-qc"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0520 (lemma-refined-quasi-finite-over-polynomial-algebra), proof; scheme translation Morphisms Tag 052E, first paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,7 +213,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-finite-smooth-local-structure",
@@ -69,7 +225,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The affine elementary-etale finite-over-smooth ingredient (Stacks 057K--057L) of the 057S flatification route used for the horizontal curve reduction in the proof of lem-trf-local-term-locality; specifically: Refined quasi-finite affine-space chart with purely transcendental image residue field.",
+   "place": "the refined quasi-finite affine-space chart with purely transcendental image residue field in the affine elementary-etale finite-over-smooth ingredient (Stacks 0520 and 052E)",
    "via": [
     "lem-trf-etale-finite-smooth-local-structure",
     "lem-trf-elementary-module-devissage",
@@ -86,5 +242,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-refined-quasi-finite-polynomial-pure-transcendental",
+  "worker": "stage1",
+  "summary": "Repaired all five returned faults without changing the item statement. Added a statement-only Stacks 00PO composition node; cited scheme/ring and fibre-dimension bridges; included f in the target localization; distinguished the original polynomial-fibre residue field from the final image field; and proved the final contraction by testing polynomial coefficients. Eight proof steps spell out the special-fibre tensor comparison, finite generation, and source localization. The prior 051P child, citations, and search records are retained.",
+  "blueprint": "The refined quasi-finite affine-space chart clause in the affine elementary-etale finite-over-smooth ingredient of the 052E route, with the 0520 algebra proof and 052E scheme translation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
+    "why": "The 00QE affine chart supplies the initial polynomial factorization in the 0520 route; this unit has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Identifies scheme fibres with the ring fibres used in 00QE and verifies finite discrete fibres."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "why": "Identifies fibre primes and their residue fields, including the image prime rather than the source prime."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-scalar-extension",
+    "why": "Identifies polynomial-ring fibres with polynomial rings over the residue field."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Supplies extension-contraction and unchanged residue fields at primes avoiding the inverted elements."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-map-quasi-finite",
+    "why": "Applies to the finite special-fibre algebra to isolate its prime."
+   },
+   {
+    "node": "lem-weil-pbc-ring-quasi-finite-locus-open",
+    "why": "Shrinks the lifted map to a principal neighbourhood on which it is quasi-finite everywhere."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
+    "why": "Localizes the original map first at f, then at h, while inverting the same elements in the target."
+   },
+   {
+    "node": "lem-weil-pbc-principal-localization-open-immersion",
+    "why": "Realizes the two chosen localizations as affine open neighbourhoods."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Proves quasi-compactness of inverse images of basic opens for the final affine morphism."
+   },
+   {
+    "node": "pqf-lem-qf-locqf-qc",
+    "why": "Converts local quasi-finiteness and quasi-compactness to scheme quasi-finiteness."
+   },
+   {
+    "node": "pqf-lem-qf-finitefibres",
+    "why": "Gives the finite-fibre formulation required by the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-finite-ring-map-quasi-finite",
+  "lem-weil-pbc-ring-quasi-finite-locus-open",
+  "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "pqf-lem-qf-locqf-qc",
+  "pqf-lem-qf-finitefibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q69-376d103ab",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q69-376d103ab (reviewer sub-agent of L); spot-checked: Mathematics and citations pass review. The item’s created metadata incorrectly names item lem-trf-etale-finite-smooth-local-structure and group Q29; corrected full JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-refined-quasi-finite-polynomial-pure-transcendental.json. Detailed review is in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -12,34 +12,112 @@
   "def-weil-finitely-generated-module",
   "def-sc-finitely-presented-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By finite generation [def-weil-finitely-generated-module], choose generators $n_1,\\ldots,n_r$ and let $p:B^r\\to N$ send the standard basis to them. Put $K=\\ker p$. Index by the set $I$ of finite subsets $S\\subset K$, ordered by inclusion; it is nonempty and directed because $S\\cup T$ bounds $S,T$. Write $K_S=\\langle S\\rangle_B$ and $N_S=B^r/K_S$. The generators in $S$ give an exact sequence $B^{|S|}\\to B^r\\to N_S\\to0$, so $N_S$ is finitely presented by [def-sc-finitely-presented-module]. For $S\\subset T$ use the canonical quotient map $N_S\\to N_T$, which is surjective.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG (lemma-mod-injective-valuation-ring), finite-module approximation paragraph, lines 5067--5083"
+   }
+  },
+  {
+   "text": "The maps $N_S\\to N$ have colimit $N$: given a compatible family $N_S\\to X$, compose with $B^r\\to N_S$. The resulting maps $B^r\\to X$ are all equal, by compatibility with a common upper bound, and kill each $k\\in K$ by using the stage $S=\\{k\\}$. Thus their common map factors uniquely through $B^r/K=N$. Conversely any map $N\\to X$ gives that family. This is the colimit universal property, and the factorization is $B$-linear because all maps used are $B$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG (lemma-mod-injective-valuation-ring), finite-module approximation paragraph, lines 5067--5083"
+   }
+  },
+  {
+   "text": "Put $J=\\mathfrak m_A B$ and $R=B/J$. By [lem-trf-valuation-closed-fibre-noetherian], $R$ is Noetherian.",
+   "uses": [
+    "lem-trf-valuation-closed-fibre-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG (lemma-mod-injective-valuation-ring), finite-module approximation paragraph, lines 5067--5083"
+   }
+  },
+  {
+   "text": "The induced surjection $\\bar p:R^r\\to N/JN$ is a map between finite $R$-modules: the standard basis generates $R^r$ and its images generate $N/JN$. Since $R$ is Noetherian by Step 3, [lem-pc-noetherian-finite-kernels-cokernels] shows that $L=\\ker\\bar p$ is a finite $R$-module.",
+   "uses": [
+    "lem-pc-noetherian-finite-kernels-cokernels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG (lemma-mod-injective-valuation-ring), finite-module approximation paragraph, lines 5067--5083"
+   }
+  },
+  {
+   "text": "The submodule $L$ is exactly the image of $K$ in $R^r$. One inclusion follows from $p(K)=0$. For the other, lift $x\\in L$ to $v\\in B^r$. Then $p(v)\\in JN$, so $p(v)=\\sum_a j_a y_a$ with $j_a\\in J$ and $y_a\\in N$. Choose lifts $w_a\\in B^r$ of the finitely many $y_a$. The vector $v-\\sum_a j_a w_a$ lies in $K$ and reduces to $x$. Choose finitely many generators $\\ell_1,\\ldots,\\ell_t$ of $L$ and lifts $k_1,\\ldots,k_t\\in K$, and set $S_0=\\{k_1,\\ldots,k_t\\}$. For every $S\\supset S_0$, the image of $K_S$ in $R^r$ equals $L$: it contains the generators $\\ell_a$ and is contained in the image of $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG (lemma-mod-injective-valuation-ring), finite-module approximation paragraph, lines 5067--5083"
+   }
+  },
+  {
+   "text": "For every finite $S\\subset K$, both $(B^r/K_S)/J(B^r/K_S)$ and $R^r/\\operatorname{im}(K_S\\to R^r)$ are the quotient of $B^r$ by $K_S+JB^r$: in each case two vectors represent the same element precisely when their difference lies in this sum. Likewise $N/JN$ is the quotient of $B^r$ by $K+JB^r$, hence is $R^r/L$. If $S\\supset S_0$, Step 5 identifies the two relation submodules in $R^r$, so the canonical map $N_S/JN_S\\to N/JN$ is an isomorphism. Since $JN_S=\\mathfrak m_A N_S$ and $JN=\\mathfrak m_A N$ by the definition of the extended ideal $J$, this is the required eventual closed-fibre isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG (lemma-mod-injective-valuation-ring), finite-module approximation paragraph, lines 5067--5083"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-sc-finitely-presented-module",
+  "lem-trf-valuation-closed-fibre-noetherian",
+  "lem-pc-noetherian-finite-kernels-cokernels"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GSG, proof, second paragraph, using Algebra Tag 00HA"
+ },
  "mathlib_searches": [
   {
+   "tool": "leansearch",
+   "query": "A finite module over an essentially finite type local algebra over a valuation ring is a filtered colimit of finitely presented modules with surjective transition maps and eventually stable quotient by the maximal ideal",
+   "results": "ModuleCat.FilteredColimits.colimitModule, ModuleCat.FilteredColimits.M, ModuleCat.FilteredColimits.M.mk, ModuleCat.FilteredColimits.colimit, FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂, Module.FinitePresentation.mk, Module.finitePresentation_of_finite, Module.FinitePresentation; no statement of this approximation",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
    "tool": "leanfinder",
-   "query": "A finite module over an essentially finite type algebra over a valuation ring is a filtered colimit of finitely presented modules with eventually identical closed fibre",
-   "results": "8 hits (RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit; Module.Finite.of_isLocalized_maximal; Module.finitePresentation_of_finite; no statement of this approximation)",
-   "date": "2026-10-18",
+   "query": "A finite module over an essentially finite type local algebra over a valuation ring is a filtered colimit of finitely presented modules with surjective transition maps and eventually stable quotient by the maximal ideal",
+   "results": "Module.Finite.of_isLocalized_maximal, Submodule.fg_of_isLocalized_maximal, Module.Finite.of_localized_maximal, AdicCompletion.ofTensorProduct_surjective_of_finite, IsLocalRing.finite_quotient_iff, IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit; no exact statement",
+   "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Module.Finite Module.FinitePresentation",
-   "results": "0 hits; the pattern was rejected with an application type mismatch",
-   "date": "2026-10-18",
+   "query": "Module.Finite Module.FinitePresentation filtered colimit surjective",
+   "results": "0 hits; application type mismatch for Module.FinitePresentation",
+   "date": "2026-10-17",
    "verdict": "unavailable"
   },
   {
    "tool": "grep",
-   "query": "FinitePresentation|finitely presented in Mathlib/RingTheory",
-   "results": "many general finite-presentation declarations, but no valuation-ring filtered-colimit closed-fibre approximation",
-   "date": "2026-10-18",
-   "verdict": "no match"
+   "query": "FinitePresentation|filtered.*colimit|surjective.*transition",
+   "results": "Mathlib/RingTheory/LocalProperties/Projective.lean; Mathlib/RingTheory/Finiteness/Descent.lean; Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean; no exact approximation theorem",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-finite-module-injectivity",
@@ -51,7 +129,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The second paragraph of the proof of Tag 0GSG: express a finite module N as a filtered colimit of finitely presented modules with surjective transitions, and stabilize the closed fibre.",
+   "place": "The second paragraph of Tag 0GSG: express a finite module N as a filtered colimit of finitely presented modules with surjective transitions, and stabilize the closed fibre.",
    "via": [
     "lem-trf-valuation-finite-module-injectivity",
     "lem-trf-flat-relative-associated-specialization",
@@ -69,5 +147,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-finite-module-fp-reduction",
+  "worker": "stage1",
+  "summary": "Construct the finitely presented quotient system directly from finite subsets of a relation module, verify its colimit by the universal property, and show closed-fibre stabilization by choosing lifts of generators of the kernel over the Noetherian closed fibre. Reuse the existing Mathlib leaf lem-pc-noetherian-finite-kernels-cokernels. One new statement-only node records Noetherianity and finite presentation on the closed fibre.",
+  "blueprint": "Realizes the second paragraph of Tag 0GSG cited by the blueprint ancestor lem-trf-local-term-locality: finite-module approximation, Noetherian closed fibre, and eventual closed-fibre isomorphism.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q107-7f3f881d0",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q107-7f3f881d0 (reviewer sub-agent of L); spot-checked: Mathematics and sources pass. Corrected item metadata: created.item and created.group incorrectly named lem-trf-valuation-finite-module-injectivity/Q147; fixed JSON written under fixes/dag/nodes/sec-trace-formula/lem-trf-valuation-finite-module-fp-reduction.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
  }
 }
