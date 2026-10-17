@@ -2,24 +2,144 @@
  "id": "lem-trf-nearby-proper-source-exchange",
  "kind": "statement",
  "title": "Proper source direct image identifies nearby-cycle comparison defects",
- "statement": "Let $X\\xrightarrow{h}Y\\xrightarrow{g}S$ be finite-type morphisms with $h$ proper, and put $f=gh$ [def-weil-finite-type-morphism, def-weil-proper-morphism]. Let $\\Lambda$ be finite, killed by an integer invertible on $S$, and let $L\\in D^b(X_{\\mathrm{Et}},\\Lambda)$. For $T\\to S$ and a geometric specialization $b\\to a$ in $S$ lifted to $b_T\\to a_T$ in $T$, write $\\Psi^f_{a,b}L=i_a^*Rj_{b,*}L$ on $X_a$, where the maps are formed after strict localization at $a$ [def-weil-pbc-strict-henselization-limit]. Write $C^f_T(L)$ for the cone on $X_{a_T}$ of $\\Psi^f_{a,b}L|_{X_{a_T}}\\to\\Psi^{f_T}_{a_T,b_T}L_T$, using the ordinary comparison [def-trf-oriented-nearby-cycles]. Define $C^g_T$ similarly on $Y_{a_T}$. Proper base change identifies $L'_T=(Rh_*L)|_{Y_T}$ with $Rh_{T,*}L_T$ and gives a canonical identification\n$$Rh_{a_T,*}C^f_T(L)\\simeq C^g_T(Rh_*L).$$\nIt respects further base changes and is the comparison obtained from the ordinary counit-defined maps. For $h$ finite, exactness and the finite geometric-stalk product formula imply: $P_r(f,L)$ implies $P_r(g,Rh_*L)$ for every $r$ [def-trf-orgogozo-induction-data].",
+ "statement": "Let $X\\xrightarrow{h}Y\\xrightarrow{g}S$ be finite-type morphisms with $h$ proper, and put $f=gh$ [def-weil-finite-type-morphism, def-weil-proper-morphism]. Let $\\Lambda$ be a finite commutative ring killed by an integer invertible on $S$, and let $L\\in D^b(X_{\\mathrm{Et}},\\Lambda)$ [def-weil-pbc-derived-categories]. For a geometric specialization $b\\to a$, use the associated map $S_{(b)}\\to S_{(a)}$ of strict localizations [def-weil-geometric-point, def-weil-pbc-strict-henselization-limit]. Put $X_{(a)}=X\\times_SS_{(a)}$, $X_{(b)}=X\\times_SS_{(b)}$ and $X_a=X\\times_Sa$, and write $i_a:X_a\\to X_{(a)}$, $j_b:X_{(b)}\\to X_{(a)}$ [def-pc-fibre-product]. Define\n$$\\Psi^f_{a,b}L=i_a^*Rj_{b,*}(L|_{X_{(b)}}).$$\nFor $T\\to S$ and a specialization $b_T\\to a_T$ over $b\\to a$, let $C^f_T(L)$ be any cone on $X_{a_T}$ of the ordinary comparison $\\Psi^f_{a,b}L|_{X_{a_T}}\\to\\Psi^{f_T}_{a_T,b_T}L_T$. The comparison is the sliced form of the counit-defined map [def-trf-oriented-nearby-cycles, lem-trf-nearby-specialization-slice]. Define $\\Psi^g$ and $C^g$ similarly for bounded-below coefficients on $Y$. Proper base change identifies $L'_T=(Rh_*L)|_{Y_T}$ with $Rh_{T,*}L_T$. There is a canonical, natural identification of the comparison arrow defining $C^g_T(Rh_*L)$ with $Rh_{a_T,*}$ applied to the arrow defining $C^f_T(L)$. This arrow identification respects further base changes and uses the ordinary counit-defined comparisons. Consequently there is an isomorphism of distinguished triangles extending it, in particular\n$$Rh_{a_T,*}C^f_T(L)\\simeq C^g_T(Rh_*L).$$\nFor arbitrary chosen triangulated cones the extending cone isomorphism is not asserted to be unique; the canonical compatibility assertion is about the comparison arrows. For $h$ finite [def-weil-finite-integral-morphism], $Rh_*L\\in D^b(Y_{\\mathrm{Et}},\\Lambda)$ and $P_r(f,L)$ implies $P_r(g,Rh_*L)$ for every $r\\in\\mathbf Z$ [def-trf-orgogozo-induction-data].",
  "source": {
   "document": "literature/orgogozo-modifications-cycles-proches.pdf",
   "place": "§3.4 finite-source calculation, pp. 10--11; §4.1, p. 11, proper direct image of the sliced comparison cone. Local archival PDF WANTED; author PDF read online.",
   "url": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf"
  },
  "stmt_deps": [
-  "def-trf-orgogozo-induction-data",
-  "def-trf-oriented-nearby-cycles",
   "def-weil-finite-type-morphism",
   "def-weil-proper-morphism",
-  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-derived-categories",
   "def-weil-geometric-point",
-  "def-weil-pbc-direct-image"
+  "def-weil-pbc-strict-henselization-limit",
+  "def-pc-fibre-product",
+  "def-trf-oriented-nearby-cycles",
+  "lem-trf-nearby-specialization-slice",
+  "def-trf-orgogozo-induction-data",
+  "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $h_{(a)},h_{(b)},h_a$ for the base changes of $h$ to $S_{(a)},S_{(b)},a$. They are proper by [lem-weil-pbc-proper-base-change]. Use the bounded-below direct-image functors in [det-properbasechange-modules]; inverse images are exact by [prop-weil-pbc-inverse-image-modules-exact]. The underlying cohomology of every coefficient complex is torsion, since the same integer killing $\\Lambda$ kills every sheaf of $\\Lambda$-modules. Thus [det-properbasechange-modules] applies, including to arbitrary strict-localization maps, and gives $L'_T\\simeq Rh_{T,*}L_T$, $(Rh_*L)|_{Y_{(a)}}\\simeq Rh_{(a),*}L_{(a)}$, and $(Rh_*L)|_{Y_{(b)}}\\simeq Rh_{(b),*}L_{(b)}$. No constructibility, finite Tor dimension, or finite-type assumption on $T\\to S$ is used.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "det-properbasechange-modules",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Sections 3.4 and 4.1, pp. 10--11; author PDF read online, local archival PDF WANTED."
+   }
+  },
+  {
+   "text": "Apply proper base change to the Cartesian square with vertical map $h_{(a)}$ and bottom $i_a^Y:Y_a\\to Y_{(a)}$. Use the direct-image composition isomorphism for $h_{(a)}j_b^X=j_b^Yh_{(b)}$, and then the coefficient identification from step 1. This gives\n$$\\theta_{a,b}:Rh_{a,*}i_a^{X,*}Rj^X_{b,*}L_{(b)}\\xrightarrow{\\sim}i_a^{Y,*}Rh_{(a),*}Rj^X_{b,*}L_{(b)}\\xrightarrow{\\sim}i_a^{Y,*}Rj^Y_{b,*}Rh_{(b),*}L_{(b)}\\xrightarrow{\\sim}\\Psi^g_{a,b}(Rh_*L).$$\nHere the first arrow is the inverse of proper exchange; the middle arrow identifies both composites with $R(h_{(a)}j_b^X)_*$. The composition theorem [lem-sfb-derived-composition-adjunction-normalization] applies to the exact constant-coefficient inverse images and their direct-image right adjoints. Their composition is the module-linear one in [lem-weil-pbc-inverse-image-composition-module-linear]. This pins $\\theta$ to the composite counits, rather than to an arbitrary isomorphism of the endpoints. The same construction over $T$ gives $\\theta_{a_T,b_T}$.",
+   "uses": [
+    "det-properbasechange-modules",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Sections 3.4 and 4.1, pp. 10--11; author PDF read online, local archival PDF WANTED."
+   }
+  },
+  {
+   "text": "Let $q:X_{a_T}\\to X_a$ and $p:Y_{a_T}\\to Y_a$. Let $\\beta_f:q^*\\Psi^f_{a,b}L\\to\\Psi^{f_T}_{a_T,b_T}L_T$ and $\\beta_g:p^*\\Psi^g_{a,b}Rh_*L\\to\\Psi^{g_T}_{a_T,b_T}(L'_T)$ be the ordinary sliced comparisons. The left endpoint isomorphism is\n$$A:Rh_{a_T,*}q^*\\Psi^f_{a,b}L\\xrightarrow{\\mathrm{Ex}_h^{-1}}p^*Rh_{a,*}\\Psi^f_{a,b}L\\xrightarrow{p^*\\theta_{a,b}}p^*\\Psi^g_{a,b}Rh_*L;$$\nthe right endpoint isomorphism is $B=\\theta_{a_T,b_T}$, using $L'_T\\simeq Rh_{T,*}L_T$. They satisfy $B\\circ Rh_{a_T,*}(\\beta_f)=\\beta_g\\circ A$. Indeed, the slice lemma identifies each $\\beta$ with the mate of the inverse-image square followed by the pulled-back $j$-counit. Paste this square with the $h$-squares defining $A$ and $B$. In both orders the inverse-image transformations are the same associativity identification coming from $h_{(a)}j_b^X=j_b^Yh_{(b)}$ and its pullback. Parts 1 and 2 of [lem-weil-pbc-mate-pasting] identify their mates; part 3 permits replacing the composite adjunctions by those of the actual composite maps, precisely with the normalization cited in step 2. This proves the displayed equality for the ordinary comparisons, not just an isomorphism of the source and target objects.",
+   "uses": [
+    "lem-trf-nearby-specialization-slice",
+    "det-properbasechange-modules",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Sections 3.4 and 4.1, pp. 10--11; author PDF read online, local archival PDF WANTED."
+   }
+  },
+  {
+   "text": "Apply $Rh_{a_T,*}$ to a distinguished cone triangle of $\\beta_f$. It remains distinguished by [lem-pc-right-derived-functor-triangulated]. Step 3 supplies a commuting square between its first arrow and $\\beta_g$ with both vertical arrows invertible. Axiom TR3 of [def-weil-triangulated-category] extends this square to a morphism into any chosen cone triangle of $\\beta_g$, and [lem-sf-triangle-morphism-iso] makes its third arrow an isomorphism. This proves $Rh_{a_T,*}C^f_T(L)\\simeq C^g_T(Rh_*L)$. This step asserts existence, not uniqueness, of the third arrow, as required for arbitrary triangulated cones.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Sections 3.4 and 4.1, pp. 10--11; author PDF read online, local archival PDF WANTED."
+   }
+  },
+  {
+   "text": "For a further map $U\\to T$, repeat the arrow calculation in step 3. Parts 1 and 2 of [lem-weil-pbc-mate-pasting] say that the mate of the pasted inverse-image square is the composite of its two exchange mates. Composition and units of the module inverse images are those specified in [lem-weil-pbc-inverse-image-composition-module-linear], and the derived right-adjoint comparisons have the normalization of [lem-sfb-derived-composition-adjunction-normalization]. Consequently the identifications $A,B$ for $U\\to S$ agree with those obtained by first using $T\\to S$ and then $U\\to T$. Thus the arrow comparison, and hence the isomorphism class of the cone triangle, respects further base changes. This statement does not select compatible third arrows for independently chosen cones.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Sections 3.4 and 4.1, pp. 10--11; author PDF read online, local archival PDF WANTED."
+   }
+  },
+  {
+   "text": "Now suppose $h$ is finite. Every base change is finite: over an affine target its source algebra is finite, and after any ring base change the images of a finite set of module generators still generate. This applies to $h_T$ and $h_{a_T}$ [def-weil-finite-integral-morphism]. The abelian direct image is exact by [lemma-weil-pbc-finite-direct-image-exact]. On constant-$\\Lambda$ module sheaves the underlying direct image is that same abelian functor; exactness and kernels and images are detected after forgetting the action. The canonical derived comparison in [lem-kun-unbounded-abelian-exchange-comparison] therefore identifies underlying $Rh_*L$ with $h_*\\operatorname{For}(L)$ and similarly for $h_{a_T}$. In particular $Rh_*L$ is bounded. The finite-stalk formula [lemma-weil-pbc-finite-stalk-formula] yields, for any bounded-below module complex $D$ on $X_{a_T}$,\n$$\\bigl(\\mathcal H^i(Rh_{a_T,*}D)\\bigr)_{\\bar y}\\simeq\\prod_{\\bar x\\in|X_{\\bar y}|}\\mathcal H^i(D)_{\\bar x}.$$\nTo see this degreewise, apply the exact finite direct image to $\\ker d/\\operatorname{im}d$; the stalk formula identifies the result with the finite product, whose kernels and images are componentwise. Thus $\\mathcal H^{\\le r}(D)=0$ implies $\\mathcal H^{\\le r}(Rh_{a_T,*}D)=0$, including empty fibres.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-kun-unbounded-abelian-exchange-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Sections 3.4 and 4.1, pp. 10--11; author PDF read online, local archival PDF WANTED."
+   }
+  },
+  {
+   "text": "Assume $P_r(f,L)$. By step 6, $Rh_*L$ is bounded, so it lies in the domain of the current definition [def-trf-orgogozo-induction-data]. That definition quantifies over every preliminary $T\\to S$ and every further $T'\\to T$, with vanishing of the comparison cone in every degree $i\\le r$. Fix such $T,T'$. Applied to $(f_T,L_T)$, the hypothesis gives that vanishing for its oriented comparison cone. The exact slice inverse images of [lem-trf-nearby-specialization-slice] identify its restrictions with the sliced cones for all geometric specializations in $T'$ and their images in $T$; thus each sliced cone has the same vanishing. Apply steps 1--4 over $T$ to the base change $T'\\to T$. Proper exchange identifies the coefficient on $Y_T$ with $Rh_{T,*}L_T$. Finiteness of $h$ persists over $T$ and on its geometric fibres by step 6, so that step preserves the vanishing under the proper-source cone identification. Every slice of the comparison cone for $(g_T,(Rh_*L)|_{Y_T})$ therefore vanishes in degrees $i\\le r$. The detection clause of the slice lemma gives that vanishing for the oriented cone itself. Since both $T$ and $T'$ were arbitrary, the current definition yields $P_r(g,Rh_*L)$ with the same integer $r$.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "lem-trf-nearby-specialization-slice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Sections 3.4 and 4.1, pp. 10--11; author PDF read online, local archival PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-orgogozo-induction-data",
+  "def-weil-finite-integral-morphism",
+  "def-weil-triangulated-category",
+  "det-properbasechange-modules",
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-triangle-morphism-iso",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-trf-nearby-specialization-slice",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-proper-base-change",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XI sections 1--2 and 4; explicit mate-and-proper-exchange proof of Orgogozo sections 3.4 and 4.1, whose local archival PDF is WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +175,45 @@
    "results": "{\"t\": \"2026-10-17T15:50:11Z\", \"tool\": \"leansearch\", \"query\": \"Proper source pushforward commutes with sliced oriented nearby cycles and identifies base change comparison cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"TopCat.Sheaf.pushforward_forget\", \"SheafOfModules.pushforward_assoc\", \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"TopCat.Presheaf.stalkSpecializes_stalkPushforward\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"SheafOfModules.pushforwardComp\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\"], \"digest\": \"7ecc8f2a1f470111\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned signatures in work/lem-trf-nearby-proper-source-exchange.leansearch.txt; the hits concern ordinary scheme properties, normed-ring units, simplicial objects or homological cycles, and do not state this nearby-cycle/alteration assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper source direct image commutes with nearby cycles and identifies base change comparison cones",
+   "results": "{\"t\": \"2026-10-17T16:19:09Z\", \"tool\": \"leanfinder\", \"query\": \"Proper source direct image commutes with nearby cycles and identifies base change comparison cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app\"], \"digest\": \"f72485a9b30dae9d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; ordinary sheaf composition, topological stalk specialization, homological cycles, or normed-ring units do not give oriented nearby-cycle slice or proper-source comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "nearby.?cycle|vanishing.?topos|oriented.?product",
+   "results": "{\"t\": \"2026-10-17T16:19:09Z\", \"tool\": \"grep\", \"query\": \"nearby.?cycle|vanishing.?topos|oriented.?product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; ordinary sheaf composition, topological stalk specialization, homological cycles, or normed-ring units do not give oriented nearby-cycle slice or proper-source comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nearby\"",
+   "results": "{\"t\": \"2026-10-17T16:19:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"nearby\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Units.ofNearby\", \"Units.val_ofNearby\"], \"digest\": \"bee6463c6c16739d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; ordinary sheaf composition, topological stalk specialization, homological cycles, or normed-ring units do not give oriented nearby-cycle slice or proper-source comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward commutes with sliced nearby cycles and finite pushforward preserves truncated base change",
+   "results": "{\"t\": \"2026-10-17T16:19:18Z\", \"tool\": \"leansearch\", \"query\": \"Proper pushforward commutes with sliced nearby cycles and finite pushforward preserves truncated base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"TopCat.Sheaf.pushforward_forget\", \"TopCat.Sheaf.pushforwardForgetIso\", \"SheafOfModules.pushforwardNatTrans_comp\", \"SheafOfModules.pushforwardComp\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"SheafOfModules.pushforward_assoc\"], \"digest\": \"4088f182cd5fc10f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; ordinary sheaf composition, topological stalk specialization, homological cycles, or normed-ring units do not give oriented nearby-cycle slice or proper-source comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For proper h, R h on special fibres commutes with i inverse image R j pushforward and the ordinary base change comparison",
+   "results": "{\"t\": \"2026-10-17T16:20:36Z\", \"tool\": \"leanfinder\", \"query\": \"For proper h, R h on special fibres commutes with i inverse image R j pushforward and the ordinary base change comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc\"], \"digest\": \"1e721eb5735463cc\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; ordinary sheaf composition, topological stalk specialization, homological cycles, or normed-ring units do not give oriented nearby-cycle slice or proper-source comparisons."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-orgogozo-good-modification",
@@ -80,5 +235,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nearby-proper-source-exchange",
+  "worker": "stage1",
+  "summary": "Expanded proper-source sliced exchange into proper base change, normalized derived composition, a mate-pasting equality of comparison arrows, cone triangles, and finite-stalk truncation transfer. Added one arbitrary-specialization slice bridge, rather than applying the existing trait-only lemma outside its hypotheses. Corrected the unsupported canonical-choice claim for arbitrary triangulated cones; canonical naturality is stated at the arrow level and cones are isomorphic as in Orgogozo section 4.1. Strict-localization maps and bounded-below scope are explicit. Repair after landing refusal: re-read the current induction-data definition, restricted its citation evidence to the unchanged P_r paragraph, and expanded step 7 to verify boundedness, both universal base-change quantifiers and the identical truncation degree.",
+  "blueprint": "Realizes the normal-cone specialization input in lem-trf-local-term-locality, through trace-specialization, external product, trait nearby base change and Orgogozo modification: proper-source and finite-source calculations of Orgogozo sections 4.1 and 3.4.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Stability of properness for the strict-localization and geometric-fibre squares."
+   },
+   {
+    "node": "det-properbasechange-modules",
+    "why": "Ordinary torsion etale module proper exchange on arbitrary scheme bases; the trace unit supplies no such general theorem."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact constant-coefficient inverse image and its right adjoint, without geometric standing hypotheses."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "General exact-adjoint composition and its counit normalization; no coefficient restriction or standing field is imported."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Module-linear inverse-image composition normalized by composite adjunctions."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "General derived functor preservation of distinguished triangles."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Grothendieck module categories and K-injective resolutions on small etale sites for the composition and triangulated-functor tools."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Exactness of finite etale direct image for the final truncation calculation."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-stalk-formula",
+    "why": "Finite geometric-fibre stalk product for the final truncation calculation."
+   },
+   {
+    "node": "lem-kun-unbounded-abelian-exchange-comparison",
+    "why": "Exact conservative scalar forgetting, its cohomology comparison and direct-image comparison; no unsupported claim that forgetting preserves injectives."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-base-change",
+  "det-properbasechange-modules",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-pc-right-derived-functor-triangulated",
+  "prop-pur-kinjective-resolutions-exist",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lem-kun-unbounded-abelian-exchange-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-90e3a156c",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-90e3a156c (reviewer sub-agent of L); spot-checked: PASS, no fixes written; full review in review.md. Read the item, the new node, all 16 cited statements, the parent's steps 5 and 10, the smooth-source user and the unit sk-i-curve-zero. Steps: (1) proper base change (det-properbasechange-modules) works for any base change, including strict localizations, with torsion supplied by mΛ=0. (2) theta is proper exchange for h_(a) along i_a, plus derived composition normalized by composite counits, plus the step-1 identification; I checked every domain and codomain. (3) The square X_{a_T}->X_a over Y_{a_T}->Y_a is Cartesian, so A is defined; B∘Rh(beta_f)=beta_g∘A follows by mate pasting, using parts 1-3 of lem-weil-pbc-mate-pasting. (4) Rh preserves triangles, and TR3 plus the 2-of-3 isomorphism lemma give a cone isomorphism; only existence is claimed. (5) Further base changes by the same pasting. (6) Finite base change; the abelian exactness and stalk-product results transfer to Λ-modules through the scalar-forgetting comparison (exact, conservative, commutes with H^i), so Rh_*L is bounded and vanishing of H^{<=r} is preserved. (7) Both quantifiers of P_r (T->S and T'->T): the slice compatibility applied over base T, the item applied to (X_T->Y_T->T, L_T), then the detection clause; the degree r is unchanged. Statement correction: I verified the counterexample (zero map k->k[1], automorphisms [[1,t],[0,1]] of the cone k[1]+k[1]), so the cone map is not unique. The citers use only cone isomorphism and the ordinary arrows, so this is not a weakening they notice. New node lem-trf-nearby-specialization-slice is true: it agrees stalkwise with the Milnor-tube formula RΓ(X_(x) x_{S_(a)} S_(b), K) (j_b affine, K in D^+), and detection holds because every point (x,b',c') factors through e_{f(x),b'}, with points conservativity. Tested on f=id, a=b and X empty. It strictly generalizes the DVR-only lem-trf-nearby-geometric-slice and differs from the strict-local, point-cohomology and affine-slice nodes, so it is not a duplicate or restatement. No cycles, no SGA, blueprint fields present. Accepted tool uses: det-properbasechange-modules, prop-weil-pbc-inverse-image-modules-exact, lem-sfb-derived-composition-adjunction-normalization, lem-weil-pbc-inverse-image-composition-module-linear, lem-pc-right-derived-functor-triangulated, prop-pur-kinjective-resolutions-exist, lemma-weil-pbc-finite-direct-image-exact, lemma-weil-pbc-finite-stalk-formula, lem-kun-unbounded-abelian-exchange-comparison, lem-weil-pbc-proper-base-change. Sources: ILO Exposé XI §4 (4.4/4.5) read in the local PDF. The Orgogozo PDF is not in literature/ and stays WANTED (proof_origin agent), so I could not check Orgogozo §4.1 myself."
  }
 }
