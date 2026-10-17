@@ -17,9 +17,108 @@
   "def-weil-abstract-derived-category",
   "lem-pc-sheaf-modules-tensor-closed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the inverse-image proposition, $F$ is additive and is canonically the ringed-topos module pullback for $A_X\\to A_{X'}$. Hence applying $F$ to each differential gives a complex: $F(d^{p+1})F(d^p)=F(0)=0$. Additivity gives $F((-1)^m d)=(-1)^mF(d)$ for every integer $m$, so termwise pullback identifies $F(E[m])$ with $(FE)[m]$, including the differentials. In the following, $[U,V]$ denotes sheaf Hom and $[a,b]$ its map given by precomposition with $a$ and postcomposition with $b$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-abstract-derived-category",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact); additive specialization and the cohomological shift convention"
+   }
+  },
+  {
+   "text": "For module sheaves $U,V$, define $q_{U,V}:F[U,V]\\to[FU,FV]$ by transposing $F[U,V]\\otimes FU\\xrightarrow{\\sim}F([U,V]\\otimes U)\\xrightarrow{F(\\mathrm{ev})}FV$. The inverse tensor comparison supplies the first arrow; the closed adjunction and symmetry supply the transpose. These are morphisms of module sheaves. For $a:U'\\to U$ and $b:V\\to V'$, naturality of the tensor comparison and adjunction gives\n$$[Fa,Fb]q_{U,V}=q_{U',V'}F[a,b].$$\nExplicitly, after tensoring with $FU'$ and evaluating, both sides are $F$ of the map $[U,V]\\otimes U'\\to V'$ sending $(h,u')$ to $b(h(a(u')))$. The adjunction is injective on morphisms, so the two arrows agree. Evaluation also identifies the transpose of a sum or negative with the sum or negative of the transposes, since $(h+k)(u)=h(u)+k(u)$ and $(-h)(u)=-h(u)$. These are direct consequences of the cited adjunction, not an additional pullback-Hom theorem.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), constructed by evaluation using Tags 03EL (lemma-tensor-product-pullback) and 03EO (lemma-internal-hom-adjoint-tensor)"
+   }
+  },
+  {
+   "text": "Put $P^n=H(E,I)^n$ and write $\\pi_{n,p}:P^n\\to[E^p,I^{p+n}]$ for its product projections. Define\n$$t_{n,p}=q_{E^p,I^{p+n}}F(\\pi_{n,p}):FP^n\\to[FE^p,FI^{p+n}].$$\nThe product universal property gives a unique $c^n:FP^n\\to H'(FE,FI)^n$ with these components. Its $p$-component has exactly the evaluation transpose in the statement: moving $F(\\pi_{n,p})$ across the tensor comparison gives $F$ of projection followed by evaluation, namely $F(\\mathrm{ev}_{n,p})$. The products exist sectionwise by the Hom-complex definition, with the universe bound already fixed in the statement. This constructs an arrow into the target product and never identifies $F$ of a product with a product.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), termwise product definition; evaluation construction from sites-modules Tag 0GMX"
+   }
+  },
+  {
+   "text": "To check the chain-map equation, test against every target product projection. The defining differential gives\n$$\\pi_{n+1,p}d_H=[1,d_I^{p+n}]\\pi_{n,p}-(-1)^n[d_E^p,1]\\pi_{n,p+1}.$$\nUsing the naturality identity of step 2 on these two summands, and additivity of $F$, gives\n$$\\pi'_{n+1,p}d_{H'}c^n=[1,Fd_I^{p+n}]t_{n,p}-(-1)^n[Fd_E^p,1]t_{n,p+1}\n=q_{E^p,I^{p+n+1}}F(\\pi_{n+1,p}d_H)=\\pi'_{n+1,p}c^{n+1}F(d_H).$$\nThe product projections determine a map, so $d_{H'}c^n=c^{n+1}F(d_H)$ in every degree. Each equality only involves two summands; no exactness of products is used.",
+   "uses": [
+    "def-pur-hom-complex",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), differential formula"
+   }
+  },
+  {
+   "text": "For chain maps $a:E'\\to E$ and $b:I\\to I'$, the degree-$n$, $p$-component of $H(a,b)$ is $[a^p,b^{p+n}]\\pi_{n,p}$. Consequently both sides of\n$$H'(Fa,Fb)c_{E,I}=c_{E',I'}F(H(a,b))$$\nhave component $q_{E'^p,I'^{p+n}}F([a^p,b^{p+n}]\\pi_{n,p})$, by step 2. Equality follows from the product universal property. The Hom-complex definition says these componentwise composition maps are chain maps; step 4 says the same for $c$. This proves the asserted naturality in both variables.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), functoriality by composition"
+   }
+  },
+  {
+   "text": "Verify also that the stated signed reindexing really is a chain isomorphism. For a degree-$n$ family $f$ in $H(E[m],I)$, put $(s^nf)^p=(-1)^{mn}f^{p-m}$. The component has source $E^p$ and target $I^{p+n-m}$, so belongs to $H(E,I)^{n-m}$. The inverse in degree $n$ sends a family $h$ to $f^r=(-1)^{mn}h^{r+m}$; its two composites are identities. Using $d_{E[m]}=(-1)^m d_E$ and $d_{H(E,I)[-m]}=(-1)^m d_{H(E,I)}$, both $s^{n+1}d(f)$ and $d(s^nf)$ have $p$-component\n$$(-1)^{m(n+1)}d_I^{p+n-m}f^{p-m}-(-1)^{mn+n}f^{p+1-m}d_E^p.$$\nThus $s$ is a chain isomorphism. The same computation defines $s'$ on $X'$. These formulas hold for all integers, since only parity is used.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), differential; agent signed source-shift computation"
+   }
+  },
+  {
+   "text": "Finally take degree $n$ and project the proposed compatibility equality to $[FE^p,FI^{p+n-m}]$. On the left the resulting arrow is\n$$(-1)^{mn}q_{E^p,I^{p+n-m}}F(\\pi^{E[m],I}_{n,p-m}).$$\nOn the right it is\n$$q_{E^p,I^{p+n-m}}F\\bigl((-1)^{mn}\\pi^{E[m],I}_{n,p-m}\\bigr).$$\nThey agree by additivity of $F$ and of composition. Here the shifted map $c_{E,I}[-m]$ has component $c_{E,I}^{n-m}$, without an extra sign; the differential sign has already been included in step 6. Product projections give the asserted equality of chain maps. The construction used arbitrary terms of $E,I$, so applies to unbounded complexes without flatness or injectivity assumptions.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes); agent compatibility with signed source reindexing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X (section-hom-complexes), with sites-modules Tag 0GMX (remark-pullback-internal-hom), Tags 03EL and 03EO; agent componentwise chain and signed shift verification"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +154,52 @@
    "results": "{\"t\": \"2026-10-17T15:09:32Z\", \"tool\": \"leanfinder\", \"query\": \"Strong monoidal additive functor induces a comparison on internal Hom complexes preserving the source shift signs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShiftedHom.map\", \"CategoryTheory.Functor.commShiftMapCochainComplex\", \"CategoryTheory.Functor.commShiftIso_map₂CochainComplex_hom_app\", \"CategoryTheory.Functor.mapCochainComplexShiftIso\", \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\", \"CategoryTheory.Functor.mapHomologicalComplex_commShiftIso_eq\", \"CochainComplex.shiftFunctorAdd_eq\", \"CategoryTheory.Functor.mapHomologicalComplex_commShiftIso_hom_app_f\"], \"digest\": \"037efd0f18f8401b\"}",
    "date": "2026-10-17",
    "verdict": "no match: generic shift, cochain, Ext, or sheaf pullback infrastructure; no ordinary sheaf-Hom-complex pullback comparison with signed source-shift compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*(pullback|inverseImage)|(pullback|inverseImage).*homComplex",
+   "results": "{\"t\": \"2026-10-17T15:35:23Z\", \"tool\": \"grep\", \"query\": \"homComplex.*(pullback|inverseImage)|(pullback|inverseImage).*homComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: module pullback, pointwise internal Homs, or Day convolution infrastructure, not this ordinary sheaf-Hom-complex comparison with shift compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homComplex\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-17T15:35:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"homComplex\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: module pullback, pointwise internal Homs, or Day convolution infrastructure, not this ordinary sheaf-Hom-complex comparison with shift compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive strong monoidal functor induces a natural comparison on internal Hom cochain complexes commuting with shifts",
+   "results": "{\"t\": \"2026-10-17T15:35:23Z\", \"tool\": \"leansearch\", \"query\": \"An additive strong monoidal functor induces a natural comparison on internal Hom cochain complexes commuting with shifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.commShiftMapCochainComplex\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\", \"CochainComplex.HomComplex.Cochain.leftShiftAddEquiv\", \"CategoryTheory.Functor.mapCochainComplexShiftIso\", \"CochainComplex.HomComplex.Cochain.rightShiftAddEquiv\", \"CategoryTheory.NatTrans.CommShift\", \"CategoryTheory.Functor.CommShift.ofInduced\"], \"digest\": \"5942fece5389de17\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Hom groups of complexes and termwise functor-shift infrastructure, not an internal sheaf Hom-complex comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of an internal sheaf Hom complex has a canonical natural comparison with the Hom complex of pullbacks compatible with signed source shifts",
+   "results": "{\"t\": \"2026-10-17T15:35:31Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of an internal sheaf Hom complex has a canonical natural comparison with the Hom complex of pullbacks compatible with signed source shifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\"], \"digest\": \"158d5705c44f48a8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: module pullback, pointwise internal Homs, or Day convolution infrastructure, not this ordinary sheaf-Hom-complex comparison with shift compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive tensor preserving functor gives a map from the image of a product of internal Homs to the product of internal Homs of its images",
+   "results": "{\"t\": \"2026-10-17T15:35:33Z\", \"tool\": \"leanfinder\", \"query\": \"An additive tensor preserving functor gives a map from the image of a product of internal Homs to the product of internal Homs of its images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pi.ihom_map\", \"CategoryTheory.MonoidalCategory.dayConvolutionInternalHomDiagramFunctor_obj_obj_obj_map\", \"CategoryTheory.Pi.closedUnit\", \"CategoryTheory.MonoidalCategory.dayConvolutionInternalHomDiagramFunctor_obj_obj_map_app\", \"CategoryTheory.Pi.ihom\", \"CategoryTheory.MonoidalCategory.dayConvolutionInternalHomDiagramFunctor_obj_map_app_app\", \"CategoryTheory.MonoidalCategory.dayConvolutionInternalHomDiagramFunctor_obj_obj_obj_obj\", \"CategoryTheory.MonoidalCategory.dayConvolutionInternalHomDiagramFunctor\"], \"digest\": \"2e1c9efbf6f05531\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: module pullback, pointwise internal Homs, or Day convolution infrastructure, not this ordinary sheaf-Hom-complex comparison with shift compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "def leftShiftAddEquiv|def mapCochainComplexShiftIso|def commShiftMapCochainComplex|def ihom|def dayConvolutionInternalHomDiagramFunctor",
+   "results": "{\"t\": \"2026-10-17T15:35:41Z\", \"tool\": \"grep\", \"query\": \"def leftShiftAddEquiv|def mapCochainComplexShiftIso|def commShiftMapCochainComplex|def ihom|def dayConvolutionInternalHomDiagramFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean\", \"Mathlib/CategoryTheory/Pi/Monoidal.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\"], \"digest\": \"de1d8e5bff5184a3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: module pullback, pointwise internal Homs, or Day convolution infrastructure, not this ordinary sheaf-Hom-complex comparison with shift compatibility"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-etale-generic-hom-triangle",
@@ -78,5 +219,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-etale-hom-complex-pullback",
+  "worker": "stage1",
+  "summary": "Constructed the comparison by evaluation and target product projections, proved its chain equation and naturality componentwise, and verified the signed source-shift isomorphism and its compatibility. All ingredients are existing nodes; no new lemma or product-preservation assertion is needed. Statement retained.",
+  "blueprint": "thm-weil-etale-geometric-biduality, proof paragraph 4: the induction using lem-weil-geometric-generic-duality; ordinary Hom-complex comparison and source-shift compatibility underlying the devissage triangle comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Natural ordinary tensor comparison for module pullback; a generic ringed-topos tool not supplied by the biduality unit."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Symmetric closed tensor-Hom adjunction for sheaves of modules used to transpose evaluation; generic algebraic infrastructure not supplied by the biduality unit."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Additive exact constant-coefficient etale inverse image identifies module pullback and controls differential signs; generic inverse-image tool not supplied by the biduality unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-c88db89a6",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-c88db89a6 (reviewer sub-agent of L); spot-checked: I read all seven steps, the full statement of each of the eight cited nodes, the parent lem-sf-etale-generic-hom-triangle (its steps 1-4 use exactly the component formula, the naturality in E and the shift square stated here), the unit sk-prop-sf-biduality-general and the chapter sec-six-functors. Stacks sources checked: sites-modules 0GMX remark-pullback-internal-hom (it only constructs the map, so the item rightly claims no isomorphism), 03EL, 03EO and 04JC, and sites-cohomology 0A8X (differential d_M f-(-1)^n f d_L). I re-derived the step-2 naturality [Fa,Fb]q=qF[a,b] by transposing both sides. I recomputed both sides of the step-6 source-shift chain-map identity; both equal (-1)^{m(n+1)} d_I f^{p-m} - (-1)^{mn+n} f^{p+1-m} d_E^p. The step-7 compatibility comes down to (-1)^{mn} q F(pi^{E[m],I}_{n,p-m}) on both sides. Small cases tested: m=0, m=+-1, E=I=A[0], g=id, zero complexes and characteristic 2. Hypotheses checked: the tensor-pullback lemma's topos, ring-map and size conditions are supplied by prop-weil-pbc-inverse-image-modules-exact (1)-(3) and def-weil-size-convention. Product existence comes from the statement of def-pur-hom-complex, and F is never moved through a product. There are no new nodes. The duplicate candidates (lem-pur-isomorphism-inverse-image-tensor-hom, lem-pur-ringed-site-finite-free-dual-pullback, def-sf-evaluation-hom-site-comparison, lem-sfb-ringed-site-duality-maps, lem-weil-pbc-ringed-internal-hom-exact-restriction, lem-sf-etale-generic-perfect-hom) all state something different. I accept the three tool_uses as generic infrastructure: lem-weil-pbc-ringed-topoi-module-pullback-tensor, lem-pc-sheaf-modules-tensor-closed and prop-weil-pbc-inverse-image-modules-exact. No SGA is cited, the blueprint fields are consistent, and the statement is retained without weakening. Only cosmetic notes, so no fixes."
  }
 }

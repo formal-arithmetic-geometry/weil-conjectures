@@ -14,9 +14,174 @@
   "lem-coef-twisted-arrow-left-fibration",
   "lem-coef-enriched-simplicial-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the limit comparisons needed below. The free-enrichment adjunction in [lem-coef-enriched-category-tensor-calculus] makes $U$ preserve small limits: applying its mapping-space adjunction to a test category $K$ identifies maps $K\\to U\\lim E_i$ with $\\lim_i\\operatorname{Map}(K,UE_i)$. The representable criterion of [lem-coef-infinity-yoneda-presheaf-limits] identifies this with $\\lim_iUE_i$. The same argument with a test enriched category $T$ and the tensor-Hom adjunction gives $\\operatorname{Fun}_{\\mathcal V}(B,\\lim E_i)\\simeq\\lim_i\\operatorname{Fun}_{\\mathcal V}(B,E_i)$ as complete enriched categories: both sides represent $T\\mapsto\\lim_i\\operatorname{Map}(T\\otimes B,E_i)$. Thus the comparison concerns internal functor categories, not only their cores. The cotensor clause of the tensor calculus gives $U(E^S)\\simeq\\operatorname{Fun}(S,UE)$ and $\\operatorname{Fun}_{\\mathcal V}(B,E^S)\\simeq\\operatorname{Fun}_{\\mathcal V}(B,E)^S$. These equivalences are the evaluation comparisons.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Sections 5.1.1-5.1.8 and 5.2.2-5.2.7; agent enriched refinement using the cited tensor calculus and algebroid limit statements."
+   }
+  },
+  {
+   "text": "For any strict simplicial diagram $A:J\\to\\mathsf{qCat}$ put $C_W(A)_r=\\operatorname{Nat}_J(W\\times\\Delta^r,A)$. A map $J(j,-)\\times S\\times\\Delta^r\\to A$ restricts at $1_j$ to $S\\times\\Delta^r\\to A(j)$; its inverse sends $(\\alpha,s,t)$ to $A(\\alpha)(s,t)$. Naturality and the identity law make these inverse in every degree. Hence $C_{J(j,-)\\times S}(A)=A(j)^S$. A natural map out of a pushout of weights is exactly a pair of maps agreeing on its common subweight; this statement holds after multiplying by every $\\Delta^r$, since products of simplicial sets preserve colimits degreewise. Thus weight pushouts become simplicial pullbacks, coproducts become products, and continuous unions become inverse limits. This is the explicit weight calculation; it makes no claim that arbitrary strict pullbacks are homotopy pullbacks.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Sections 5.1.1-5.1.8 and 5.2.2-5.2.7; agent enriched refinement using the cited tensor calculus and algebroid limit statements."
+   }
+  },
+  {
+   "text": "Fix the small cellular filtration $(W_\\alpha)_{\\alpha\\le\\lambda}$. By transfinite induction construct complete $\\mathcal V$-categories $L_\\alpha$ with transition functors and prove the invariant $I_\\alpha$: for every complete $\\mathcal V$-category $B$, in a presentation obtained by [lem-coef-presentation-enlargement-retains-diagram] (applied once or twice) containing $B$, $L_\\alpha$, the completed enriched tensor unit $I$, the required internal functor categories and cotensors, and retaining the original strict $F$ literally, put $A_B(j)=\\mathscr P(B,F(j))$; there is a comparison\n$$\\Phi^\\alpha_B:U\\operatorname{Fun}_{\\mathcal V}(B,L_\\alpha)\\simeq C_{W_\\alpha}(A_B),$$\nnatural in $B$ under precomposition with enriched functors $B'\\to B$ (computed in an enlargement containing both). Its evaluation cone is $e_\\alpha=\\Phi^\\alpha_{L_\\alpha}(\\mathrm{id})\\in C_{W_\\alpha}(A_{L_\\alpha})$; by naturality $\\Phi^\\alpha_B(g)$ is $e_\\alpha$ composed with $g$. Carry these comparisons together with the specified hom-quasicategory and cotensor identifications of [lem-coef-enriched-simplicial-presentation], including evaluation maps, so the induction concerns whole diagrams and boundary families. Each $B$ is fixed before enlarging; no one presentation contains every $B$. Also run the induction on the strict map $A_I\\to U_{\\mathscr P}F$ obtained by evaluating the strict forgetting functor at a chosen object of $U_{\\mathscr P}I\\simeq UI$ (which need not be contractible: for $\\mathcal V=\\mathbf D(\\mathbf Z)$ its endomorphism monoid is $\\mathbf Z$). It is strictly natural; its components correspond to $U\\operatorname{Fun}_{\\mathcal V}(I,F(j))\\simeq UF(j)$, the unit equivalence of the closed symmetric monoidal tensor calculus, hence are equivalences. For the empty weight take the terminal enriched category; all cone simplicial sets are terminal, so $I_0$ holds.",
+   "uses": [
+    "lem-coef-presentation-enlargement-retains-diagram",
+    "lem-coef-enriched-simplicial-presentation",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Sections 5.1.1-5.1.8 and 5.2.2-5.2.7; agent enriched refinement using the cited tensor calculus and algebroid limit statements."
+   }
+  },
+  {
+   "text": "For each small family of attaching cells, the strict products of the quasicategories appearing in step 2 compute products in $\\mathrm{Cat}_\\infty$. Indeed, well-order the family, start at $Q_0=*$, put $Q_{\\gamma+1}=Q_\\gamma\\times_*D_\\gamma$, and take the degreewise inverse limit at every nonzero limit ordinal. The successor projection is an isofibration: lift each inner horn and each equivalence in its new $D_\\gamma$ coordinate. By [lem-coef-infinity-isofibration-pullback-limit] the successor square is a categorical pullback, and by [lem-coef-transfinite-isofibration-limit] each continuous tower limit is a categorical limit. This identifies the final degreewise product with the categorical product, including the empty family. A product of the boundary restrictions $A(j)^{\\Delta^n}\\to A(j)^{\\partial\\Delta^n}$ is an isofibration: the factor restrictions are isofibrations by [lem-coef-infinity-isofibration-exponentiation], and their horn and equivalence lifts can be chosen coordinatewise. This argument applies to every diagram model used in the induction. Step 1 identifies the corresponding enriched products after applying $U\\operatorname{Fun}_{\\mathcal V}(B,-)$.",
+   "uses": [
+    "lem-coef-transfinite-isofibration-limit",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Sections 5.1.1-5.1.8 and 5.2.2-5.2.7; agent enriched refinement using the cited tensor calculus and algebroid limit statements."
+   }
+  },
+  {
+   "text": "Suppose the next cells have labels $(j_a,n_a)$. Restricting the evaluation cone $e_\\alpha$ of step 3 along their attaching maps and applying the cotensor adjunction gives\n$$L_\\alpha\\longrightarrow\\prod_a F(j_a)^{\\partial\\Delta^{n_a}}.$$\nForm in $\\operatorname{Cat}_{\\mathcal V}$ the pullback\n$$L_{\\alpha+1}=L_\\alpha\\mathop{\\times}^{h}_{\\prod_aF(j_a)^{\\partial\\Delta^{n_a}}}\\prod_aF(j_a)^{\\Delta^{n_a}}.$$\nStep 1 computes its image under $U\\operatorname{Fun}_{\\mathcal V}(B,-)$ as the corresponding categorical pullback. On the strict cone side step 2 gives the degreewise pullback, whose boundary-restriction leg is an isofibration by step 4. Hence [lem-coef-infinity-isofibration-pullback-limit] identifies that pullback with the categorical pullback. The hom-quasicategory, cotensor and evaluation identifications in [lem-coef-enriched-simplicial-presentation], together with $\\Phi^\\alpha_B$, identify these cospans including the attaching maps: by the naturality in $I_\\alpha$, $\\Phi^\\alpha_B$ carries postcomposition with the attaching functor, which is the restriction of $e_\\alpha$, to restriction along the specified maps into $W_\\alpha$. Applying the pullback universal property gives $\\Phi^{\\alpha+1}_B$, natural in $B$ because every map used is postcomposition or restriction; this gives $I_{\\alpha+1}$. For the strict map $A_I\\to U_{\\mathscr P}F$, its equivalences give equivalences on the two cotensor products; the same cospan argument gives an equivalence on the next cone categories. The comparisons retain every simplex because all these operations occur in whole quasicategories. This is the successor step of the simultaneous induction, including $n_a=0$ with empty boundary.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enriched-simplicial-presentation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Sections 5.1.1-5.1.8 and 5.2.2-5.2.7; agent enriched refinement using the cited tensor calculus and algebroid limit statements."
+   }
+  },
+  {
+   "text": "At a nonzero limit ordinal $\\beta$ put $L_\\beta=\\lim_{\\alpha<\\beta}L_\\alpha$. Step 1 computes $U\\operatorname{Fun}_{\\mathcal V}(B,L_\\beta)$ as the categorical limit of its earlier values. For each strict diagram $A$ in the induction, step 2 gives $C_{W_\\beta}(A)=\\lim_{\\alpha<\\beta}C_{W_\\alpha}(A)$ degreewise. Successor restrictions are pullbacks of the isofibrations of step 4, and limit stages are exactly continuous by this equality. Thus [lem-coef-transfinite-isofibration-limit] identifies each strict tower limit with its categorical limit. The preceding comparisons commute coherently with every projection, since they were constructed from evaluation and its restrictions at successor stages. Taking their limits gives the comparisons at $\\beta$, including the comparison between the $A_I$ and $U_{\\mathscr P}F$ towers. To see that these limit comparisons are equivalences, take the limit of their inverse equivalences and inverse homotopies; the projection identities give both inverse identities. This uses only the definition of equivalence and functoriality of the limit universal property, not a rectification or cellular-transfer theorem. Induction gives $L=L_\\lambda$ and\n$$UL\\simeq U\\operatorname{Fun}_{\\mathcal V}(I,L)\\simeq C_W(A_I)\\simeq C_W(U_{\\mathscr P}F).$$\nThe last diagram is the retained strict representative of $UF$. Every ordinal, family and limit is small in the stipulated universe.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-transfinite-isofibration-limit",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-enriched-simplicial-presentation",
+    "lem-coef-presentation-enlargement-retains-diagram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Sections 5.1.1-5.1.8 and 5.2.2-5.2.7; agent enriched refinement using the cited tensor calculus and algebroid limit statements."
+   }
+  },
+  {
+   "text": "For any complete $B$, step 1 identifies the cellular construction after applying $\\operatorname{Fun}_{\\mathcal V}(B,-)$ with the same enriched construction on $j\\mapsto\\operatorname{Fun}_{\\mathcal V}(B,F(j))$: this holds on generating cotensors and on every product, pullback and inverse limit. The simultaneous induction of steps 3--6 identifies its underlying category with $C_W(A_B)$, using the presentation's specified whole hom-quasicategory comparisons for $U\\operatorname{Fun}_{\\mathcal V}(B,F(-))$. In particular their attaching maps agree under those comparisons as checked in step 5; no separate transfer from a merely objectwise equivalent diagram is invoked. At each cell the comparison is evaluation followed by currying, and at attachments and limits its projections are those maps. It is therefore the equivalence induced by the evaluation cone. Coherent currying and evaluation in [lem-coef-enriched-category-tensor-calculus] give compatibility with composition in $B$. Restricting a cone along $W'\\to W$ gives a cone over $W'$ with vertex $L$; the established comparison for $B=L$ produces $L\\to L'$. Restrictions compose as restrictions, so the maps and higher simplices commute with evaluation and changes of weight. A strict enriched cone with vertex $B$ is an object of the right-hand cone category and thus yields the required enriched functor. The enlargement lemma ensures that $F$ and all its old simplices remain the given strict representatives throughout this calculation.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enriched-simplicial-presentation",
+    "lem-coef-presentation-enlargement-retains-diagram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Sections 5.1.1-5.1.8 and 5.2.2-5.2.7; agent enriched refinement using the cited tensor calculus and algebroid limit statements."
+   }
+  },
+  {
+   "text": "For any small coherent diagram of complete enriched categories, [lem-coef-algebroid-presentability] computes its limit in algebroids with object space the limit of object spaces and mapping objects $\\lim_iE_i(x_i,y_i)$ at compatible objects. By [lem-coef-algebroid-completion], complete objects are the local objects for its single map; [lem-coef-presentable-infinity-adjoints] says that the inclusion of this local subcategory computes its limits in the ambient category. This is consequently also the complete-enriched-category limit. Its composition is the unique map whose projection to each factor is that factor's composition after the two projections; identities and every higher operation are induced by the same projections. The operadic equations follow after these projections, by the universal property of the limit. This proves the mapping-object claim for all the products, pullbacks and inverse limits used above.",
+   "uses": [
+    "lem-coef-algebroid-presentability",
+    "lem-coef-algebroid-completion",
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Sections 5.1.1-5.1.8 and 5.2.2-5.2.7; agent enriched refinement using the cited tensor calculus and algebroid limit statements."
+   }
+  },
+  {
+   "text": "Fix $v\\in\\mathcal V$. The crossing lemma [lem-coef-collage-crossing-transformations] supplies the coherent mapping-object functor $\\mathcal E(-,-):(U\\mathcal E)^{\\mathrm{op}}\\times U\\mathcal E\\to\\mathcal V$ induced by enriched composition and units; composing it with the coherent Hom bifunctor [lem-coef-infinity-hom-bifunctor-functoriality] of $\\mathcal V$ at $v$ gives\n$$H_v(x,y)=\\operatorname{Map}_{\\mathcal V}(v,\\mathcal E(x,y))$$\nas a coherent space-valued functor on $(U\\mathcal E)^{\\mathrm{op}}\\times U\\mathcal E$; its actions are precomposition and postcomposition with all unit and composition simplices. Form its ordinary infinity-categorical collage $C_v$ by [lem-coef-space-bimodule-collage]. The fixed-end crossing lemma [lem-coef-collage-crossing-transformations] identifies the space of coefficient-parametrized enriched transformations with\n$$\\operatorname{Map}_{\\operatorname{Fun}(S,C_v)}(P_0,Q_1)\\simeq\\operatorname{Map}_{\\mathcal V}(v,\\mathcal E^S(P,Q)).$$\nThe coefficient probe is the free algebroid on one $v$-labeled edge, supplied by [lem-coef-algebroid-presentability], with endpoints fixed. Complete this probe using [lem-coef-algebroid-completion], whose localization unit supplies the completed object; tensoring that completed probe with $S_{\\mathcal V}$ uses the tensor/cotensor adjunction. The forward map records the crossing label for each mixed string and the inverse glues those compatible labels. Faces at the crossing are exactly the two actions of $H_v$; the other faces and degeneracies are the diagram operations. The crossing lemma includes all parameter simplices, so this is natural in $v$ and endpoint diagrams without testing only tensor-unit sections.",
+   "uses": [
+    "lem-coef-space-bimodule-collage",
+    "lem-coef-collage-crossing-transformations",
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-algebroid-presentability",
+    "lem-coef-algebroid-completion",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Sections 5.1.1-5.1.8 and 5.2.2-5.2.7; agent enriched refinement using the cited tensor calculus and algebroid limit statements."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-coherent-end-twisted-arrow-formula] to the two diagrams $P_0,Q_1:S\\to C_v$. Their mixed mapping spaces are $H_v(Ps,Qt)$ by the collage statement used in step 9. Consequently step 9 gives\n$$\\operatorname{Map}_{\\mathcal V}(v,E^S(P,Q))\\simeq\\lim_{(s\\to t)\\in\\operatorname{Tw}(S)}\\operatorname{Map}_{\\mathcal V}(v,E(Ps,Qt)).$$\nThe index and its source-target functor are exactly [lem-coef-twisted-arrow-left-fibration]. Presentability gives the small limit of $E(Ps,Qt)$ in $\\mathcal V$. Representables preserve this limit and the Yoneda criterion in [lem-coef-infinity-yoneda-presheaf-limits] now gives the asserted equivalence of objects of $\\mathcal V$, since the comparison above holds naturally for every $v$. Evaluation at $1_s$ is the component projection by the coherent-end theorem. Composing two transformations is componentwise composition; projecting the two descriptions to each mixed mapping object gives the same composite. The same argument for identities and higher composition simplices proves their compatibility. Its parameter naturality is already present in the collage, cotensor and coherent-end comparisons. For a simplicial shape use its freely generated infinity-category, as stipulated by the tensor calculus.",
+   "uses": [
+    "lem-coef-coherent-end-twisted-arrow-formula",
+    "lem-coef-space-bimodule-collage",
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03P7",
+    "place": "Example 8.3.4.22, applied to the ordinary collage of the coefficient probe; agent Yoneda argument recovering the V-valued object."
+   }
+  },
+  {
+   "text": "Finally closedness gives $\\operatorname{Map}_{\\mathcal V}(a,[v,\\lim_iM_i])\\simeq\\operatorname{Map}_{\\mathcal V}(a\\otimes v,\\lim_iM_i)\\simeq\\lim_i\\operatorname{Map}_{\\mathcal V}(a\\otimes v,M_i)\\simeq\\lim_i\\operatorname{Map}_{\\mathcal V}(a,[v,M_i])$. The representable limit and Yoneda criterion of [lem-coef-infinity-yoneda-presheaf-limits] identify this with $[v,\\lim_iM_i]\\simeq\\lim_i[v,M_i]$. This includes empty limits. Every probe and tensor product in this proof belongs to the coefficient category or to the tensor product of enriched categories; at no point was an object tensor in $F(j)$ required.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Sections 5.1.1-5.1.8 and 5.2.2-5.2.7; agent enriched refinement using the cited tensor calculus and algebroid limit statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-algebroid-completion",
+  "lem-coef-algebroid-presentability",
+  "lem-coef-coherent-end-twisted-arrow-formula",
+  "lem-coef-collage-crossing-transformations",
+  "lem-coef-enriched-category-tensor-calculus",
+  "lem-coef-enriched-simplicial-presentation",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-presentable-infinity-adjoints",
+  "lem-coef-presentation-enlargement-retains-diagram",
+  "lem-coef-space-bimodule-collage",
+  "lem-coef-transfinite-isofibration-limit",
+  "lem-coef-twisted-arrow-left-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+  "place": "Sections 5.1.1-5.1.8 and 5.2.2-5.2.7; agent enriched refinement using the cited tensor calculus and algebroid limit statements."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -87,10 +252,38 @@
    "results": "{\"t\": \"2026-10-17T12:08:06Z\", \"tool\": \"leanfinder\", \"query\": \"The enriched functor category into a cellular weighted limit is the weighted limit of enriched functor categories with all natural transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom.fac\", \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom.lift\", \"CategoryTheory.Enriched.HasConicalLimit\", \"CategoryTheory.Enriched.HasConicalLimits\", \"CategoryTheory.Enriched.HasConicalLimitsOfShape\", \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom\", \"CategoryTheory.Enriched.HasConicalProduct\"], \"digest\": \"857347538d88203c\"}",
    "date": "2026-10-17",
    "verdict": "no match: Weighted/HasWeightedLimit.lean:35-46 treats ordinary Type-valued weights; Enriched/FunctorCategory.lean gives ordinary enriched ends and conical-limit statements; Limits/Yoneda.lean gives Type-valued representables. None supplies this enriched infinity-categorical weighted-limit functor-category equivalence. These are additional searches for the repaired universal-property clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cellular simplicial weighted limits of enriched infinity categories with all transformation simplices and coherent end mapping objects",
+   "results": "{\"t\": \"2026-10-17T12:49:55Z\", \"tool\": \"leanfinder\", \"query\": \"Cellular simplicial weighted limits of enriched infinity categories with all transformation simplices and coherent end mapping objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.HasConicalLimit\", \"CategoryTheory.Enriched.HasConicalLimitsOfShape\", \"CategoryTheory.Enriched.HasConicalLimits\", \"CategoryTheory.Enriched.HasConicalLimitsOfSize\", \"CategoryTheory.Enriched.HasConicalLimitsOfShape.hasLimitsOfShape\", \"CategoryTheory.Enriched.HasConicalProduct\", \"SSet.hasLimits\", \"CategoryTheory.Enriched.HasConicalLimitsOfSize.hasLimitsOfSize\"], \"digest\": \"cdecf70f3d5a4c90\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary enriched conical limits and ordinary functor-category ends, and Type-valued weighted limits; these do not state the complete enriched infinity-categorical result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EnrichedFunctor, CategoryTheory.Limits.HasWeightedLimit",
+   "results": "{\"t\": \"2026-10-17T12:50:38Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.EnrichedFunctor, CategoryTheory.Limits.HasWeightedLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary enriched conical limits and ordinary functor-category ends, and Type-valued weighted limits; these do not state the complete enriched infinity-categorical result."
+  },
+  {
+   "tool": "grep",
+   "query": "weightedLimit|HasWeightedLimit|cotensor|twisted.*arrow",
+   "results": "{\"t\": \"2026-10-17T12:50:39Z\", \"tool\": \"grep\", \"query\": \"weightedLimit|HasWeightedLimit|cotensor|twisted.*arrow\", \"sub\": \"CategoryTheory/Enriched\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary enriched conical limits and ordinary functor-category ends, and Type-valued weighted limits; these do not state the complete enriched infinity-categorical result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cellular weighted limits in enriched infinity categories computed by cotensors products and fibrational pullbacks",
+   "results": "{\"t\": \"2026-10-17T12:58:35Z\", \"tool\": \"leansearch\", \"query\": \"Cellular weighted limits in enriched infinity categories computed by cotensors products and fibrational pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.HasConicalLimitsOfShape.hasConicalLimit\", \"CategoryTheory.Enriched.HasConicalLimit.toHasLimit\", \"CategoryTheory.Enriched.HasConicalLimitsOfShape.casesOn\", \"CategoryTheory.Enriched.HasConicalLimit.of_equiv_comp\", \"CategoryTheory.Enriched.HasConicalLimit.recOn\", \"CategoryTheory.Enriched.HasConicalLimit.casesOn\", \"CategoryTheory.Enriched.HasConicalLimitsOfSize.hasLimitsOfSize\", \"CategoryTheory.Limits.instLaxMonoidalFunctorLim\"], \"digest\": \"80cf5eb3f8efcc0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary enriched conical limits and ordinary functor-category ends, and Type-valued weighted limits; these do not state the complete enriched infinity-categorical result."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-linear-monad-tensor-enrichment",
@@ -112,5 +305,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-flexible-weight-enriched-lift",
+  "worker": "stage1",
+  "summary": "Repaired the returned two-node cycle by removing both uses of cellular-weight coherent transfer. The presentation, tensor-unit and internal-functor comparisons are now maintained within the cellular induction itself, with explicit successor cospan and continuous-limit comparisons. Retained the four statement-only infrastructure nodes, source records and logged searches; repaired damaged TeX escapes. No Lean writing or compiling.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, middle mapping-complex adjunction before R lim: this item supplies coherent enriched cone and end calculus beneath the existing finite-adjunction route. The blueprint itself does not state the general enriched theorem.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NL-df9b77318",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-df9b77318 (reviewer sub-agent of L); spot-checked: Verdict FIX: I read the item and all four new nodes in full, plus every cited statement. The graph has no cycle (the old cellular-weight-coherent-transfer cycle is gone), every cited node exists, and all proof citations stay in unit sk-prop-sf-biduality-general apart from a definition, so no tool uses are accepted. No SGA source is used. Kerodon 03HT (Example 7.6.5.10, towers of isofibrations) agrees with how the tower node uses it. The four new nodes are true; I tested small cases (empty and singleton families, lambda=1, omega, empty bimodule, C=D=point, S empty, S a point, S=[1]). The rg search of the DAG found no duplicates. The crossing node is equivalent to the item's end clause only together with the existing ordinary end formula; its own content (enriched maps out of T_v tensor S_V are ordinary transformations into a collage) is strictly smaller than the item, so I accept it. I corrected three faults plus one citation clean-up under fixes/. (C) The item's stmt_deps listed the crossing and enlargement nodes, which its statement never uses; both removed (they stay in proof_deps). (E2/E3) Step 3 claimed U_P I is contractible, which is false: for V=D(Z) the endomorphism monoid of the unit is Z. The comparison A_I -> U_P F is still an equivalence through Fun_V(I,E)=E; text corrected. (D4/E5) Steps 3 and 5 fixed one B, then needed an evaluation cone of L_alpha in a presentation that need not contain L_alpha, and a matching of attaching maps that depends on naturality in B. I rewrote the invariant to quantify over every B, each in its own enlargement holding B and L_alpha with F kept literally. The comparison is natural under precomposition and the cone is defined as the comparison at B=L_alpha applied to the identity; step 5 now uses it. (C4) Step 9 used the V-valued mapping-object functor E(-,-) on (UE)^op x UE, which no node states. It is now an explicit clause of lem-coef-collage-crossing-transformations, and step 9 cites it there. The report says the new nodes carry lean_audit; they do not, which preflight check 9 requires, so that is not a fault. The sources (Riehl-Verity, HTT, Haugseng) are still not archived, so the WANTED lines and agent origin remain. Full step-by-step checks are in review.md.; 2 file(s) fixed by the reviewer"
  }
 }

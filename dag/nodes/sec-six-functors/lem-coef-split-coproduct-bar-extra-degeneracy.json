@@ -12,9 +12,90 @@
   "def-weil-pbc-simplicial-set",
   "lem-coef-extra-degeneracy-contraction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the word-quotient construction in the statement. A family of functors from its factors into a category on $O$, all fixing $O$, sends a composable word to the composite of its letter images. A relation composing two letters from the same factor is preserved because the corresponding factor map is a functor; an identity relation is preserved for the same reason. Thus the map descends to the quotient and preserves identities and composition [def-nagata-category]. It is unique because every arrow is a word in factor arrows. In particular two such functors are equal if their restrictions to every factor agree. The quotient is small: finite composable words in the small sets of factor arrows form a set, as does their quotient. These observations require neither free factors nor a unique reduced-word expression.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 8.2, proof, printed p.279: agent expansion of the split ordinary coproduct bar; the source leaves the contraction implicit."
+   }
+  },
+  {
+   "text": "Construct all simplicial operators at once, using the contravariant convention of [def-weil-pbc-simplicial-set]. For an order-preserving map $\\alpha:[m]\\to[n]$ and $0\\leq k\\leq n$, put $t_\\alpha(k)=\\min\\{j\\in[m]:k\\leq\\alpha(j)\\}$, or $\\infty$ if this set is empty. Define $T_\\alpha:R_n\\to R_m$ to fix $F,V$ and to send $A_k$ identically into $A_{t_\\alpha(k)}$ when finite, and into $V$ by $v$ otherwise. Step 1 makes this a functor. For $\\beta:[l]\\to[m]$, extend $t_\\beta(\\infty)=\\infty$. If $t_\\alpha(k)=r<\\infty$, monotonicity gives $k\\leq\\alpha(\\beta(j))$ exactly when $r\\leq\\beta(j)$; if $t_\\alpha(k)=\\infty$, neither condition can hold. Taking the least such $j$ gives $t_{\\alpha\\beta}(k)=t_\\beta(t_\\alpha(k))$. Therefore $T_\\beta T_\\alpha=T_{\\alpha\\beta}$ on each $A_k$: either both preserve its arrow and reach the same labelled copy, or both apply $v$ once and reach $V$. They also agree on $F,V$. The identity ordinal map has $t(k)=k$, so $T_1=1$. These are the functor laws, without invoking a separate presentation theorem for the simplex category.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 8.2, proof, printed p.279: agent expansion of the split ordinary coproduct bar; the source leaves the contraction implicit."
+   }
+  },
+  {
+   "text": "Identify the operators of step 2. For the injection $\\delta_i:[n-1]\\to[n]$ omitting $i<n$, the values of $t_{\\delta_i}(k)$ are $k$ for $k<i$, $i$ for $k=i,i+1$, and $k-1$ for $k>i+1$. For $i=n$ they are $k$ for $k<n$ and $\\infty$ for $k=n$. Thus $T_{\\delta_i}$ is exactly the stated $d_i$. For the surjection $\\sigma_i:[n+1]\\to[n]$ repeating $i$, the values are $k$ for $k\\leq i$ and $k+1$ for $k>i$, giving exactly $s_i$ [def-weil-pbc-simplicial-set]. Each composite $\\varepsilon_mT_\\alpha$ fixes $F,V$ and sends each $A_k$ into $V$ by $v$, whether or not $T_\\alpha$ has already sent it there. Hence $\\varepsilon_mT_\\alpha=\\varepsilon_n$ by step 1. This proves that the prescribed operators give a simplicial category and that the displayed augmentations are natural to the constant category $F*V$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 8.2, proof, printed p.279: agent expansion of the split ordinary coproduct bar; the source leaves the contraction implicit."
+   }
+  },
+  {
+   "text": "The maps $h_{-1}$ and $h_n$ are functors by step 1: their restrictions are the inclusions of $F,V$, and for $h_n$ the identity functor from each old $A_k$ into $A_{k+1}$. The composite $\\varepsilon_0h_{-1}$ fixes both factors of $F*V$, so it is the identity. For $d_0h_n$, each old $A_0$ first reaches $A_1$ and then the fold reaches $A_0$; an old $A_k$ with $k>0$ first reaches $A_{k+1}$ and is then reindexed back to $A_k$. Both functors fix $F,V$, so $d_0h_n=1$. Finally $h_0$ sends the sole old $A_0$ into $A_1$ of $R_1$, and $d_1$ then applies $v$ into $V$. This agrees with $h_{-1}\\varepsilon_0$ on $A_0$ and on $F,V$, proving $d_1h_0=h_{-1}\\varepsilon_0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 8.2, proof, printed p.279: agent expansion of the split ordinary coproduct bar; the source leaves the contraction implicit."
+   }
+  },
+  {
+   "text": "Check $d_{i+1}h_{n+1}=h_nd_i$ on $R_{n+1}$. Both sides fix $F,V$. If $0\\leq i\\leq n$, each side sends an old $A_k$ identically to $A_{k+1}$ for $k<i$, to $A_{i+1}$ for $k=i$ or $k=i+1$, and to $A_k$ for $k>i+1$: on the left shift first and fold at $i+1$; on the right fold at $i$ and shift. For the remaining index $i=n+1$, the left shifts $A_{n+1}$ to the last factor $A_{n+2}$ and then applies $v$, whereas the right applies $v$ immediately and then fixes $V$. Every $A_k$ with $k\\leq n$ reaches $A_{k+1}$ on both sides. Step 1 now proves the functor equality in all the required indices, including this last-face case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 8.2, proof, printed p.279: agent expansion of the split ordinary coproduct bar; the source leaves the contraction implicit."
+   }
+  },
+  {
+   "text": "For $0\\leq i\\leq n$, both $s_{i+1}h_n$ and $h_{n+1}s_i$ fix $F,V$ and send an old $A_k$ identically to $A_{k+1}$ when $k\\leq i$ and to $A_{k+2}$ when $k>i$. Indeed on the left $k$ first becomes $k+1$, and insertion after position $i+1$ shifts it again precisely when $k>i$; on the right insertion after $i$ shifts precisely those same $k$, followed by the initial shift. Equality on factors gives $s_{i+1}h_n=h_{n+1}s_i$ by step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 8.2, proof, printed p.279: agent expansion of the split ordinary coproduct bar; the source leaves the contraction implicit."
+   }
+  },
+  {
+   "text": "Fix $x,y\\in O$. Every functor constructed above fixes objects, so it restricts to a function on the indicated hom-sets. Restriction preserves identities and compositions of these functors, hence step 2 gives a simplicial set $X_n=R_n(x,y)$ in the sense of [def-weil-pbc-simplicial-set], and step 3 gives its augmentation to the constant set $S=(F*V)(x,y)$. The restricted $h_{-1},h_n$ satisfy all five displayed families of equations by steps 4--6. These are exactly the hypotheses called extra-degeneracy data in [lem-coef-extra-degeneracy-contraction], so they give the asserted extra degeneracy. Only this node's stated criterion is needed here; no homotopy-equivalence or Kan theorem is being used. Empty hom-sets are allowed throughout.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-coef-extra-degeneracy-contraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+    "place": "ExtraDegeneracy structure, lines 72-83; the five defining fields, restricted to Type."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category",
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-extra-degeneracy-contraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Expansion below proof paragraph 2 through the existing coherent-localization ancestry: explicit word and index calculation for the split coproduct bar of Dwyer--Kan Proposition 8.2."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +145,45 @@
    "results": "{\"t\": \"2026-10-17T08:45:12Z\", \"tool\": \"leanfinder\", \"query\": \"The two sided bar for the coproduct monoid A in categories with fixed objects has a left extra degeneracy when its left module is F coproduct A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"AugmentedSimplexCategory.inl_comp_tensorHom\", \"AugmentedSimplexCategory.inl_comp_tensorHom_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.mapMono_on_summand_id_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀'_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand'_assoc\", \"AugmentedSimplexCategory.inr_comp_tensorHom\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\"], \"digest\": \"a5108e77f2a6f59f\"}",
    "date": "2026-10-17",
    "verdict": "no match: generic ExtraDegeneracy data and contractions are available, and split-epimorphism Cech nerves have extra degeneracies; none identifies this coproduct bar or supplies these factor-insertion functors and their identities. The Cech construction uses pullback powers, not the displayed coproduct powers; identifying a construction would require an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct.*bar|bar.*coproduct|extraDegeneracyCech|structure ExtraDegeneracy",
+   "results": "{\"t\": \"2026-10-17T15:03:03Z\", \"tool\": \"grep\", \"query\": \"coproduct.*bar|bar.*coproduct|extraDegeneracyCech|structure ExtraDegeneracy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\"], \"digest\": \"e68531b827d3b04d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits provide generic extra-degeneracy data or a Cech nerve, not the fixed-object coproduct-bar factor maps and their identities; source candidates were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmented coproduct bar of a split coproduct of categories has an extra degeneracy by inserting the first factor",
+   "results": "{\"t\": \"2026-10-17T15:03:04Z\", \"tool\": \"leansearch\", \"query\": \"The augmented coproduct bar of a split coproduct of categories has an extra degeneracy by inserting the first factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.mk\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.recOn\", \"CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy\", \"CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_π_0\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.casesOn\"], \"digest\": \"d0b9bde7bd0f689a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits provide generic extra-degeneracy data or a Cech nerve, not the fixed-object coproduct-bar factor maps and their identities; source candidates were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coproduct bar of categories on a fixed object set F coproduct A repeated n plus one times coproduct V admits an extra degeneracy inserting an unused initial A factor",
+   "results": "{\"t\": \"2026-10-17T15:03:07Z\", \"tool\": \"leanfinder\", \"query\": \"The coproduct bar of categories on a fixed object set F coproduct A repeated n plus one times coproduct V admits an extra degeneracy inserting an unused initial A factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\", \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"SimplicialObject.Splitting.summand\", \"AlgebraicTopology.DoldKan.Γ₀.obj\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\"], \"digest\": \"200c9d2661674dc1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits provide generic extra-degeneracy data or a Cech nerve, not the fixed-object coproduct-bar factor maps and their identities; source candidates were read."
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct.*bar|bar.*coproduct|cobar|cocartesian.*bar",
+   "results": "{\"t\": \"2026-10-17T15:03:34Z\", \"tool\": \"grep\", \"query\": \"coproduct.*bar|bar.*coproduct|cobar|cocartesian.*bar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no source hit for this coproduct-bar construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A two sided bar construction in the cocartesian monoidal category of categories with fixed objects is contracted by shifting all labelled factors one position to the right",
+   "results": "{\"t\": \"2026-10-17T15:03:36Z\", \"tool\": \"leanfinder\", \"query\": \"A two sided bar construction in the cocartesian monoidal category of categories with fixed objects is contracted by shifting all labelled factors one position to the right\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.term_▷_\", \"CategoryTheory.MonoidalCategory.term_≪⊗≫_\", \"CategoryTheory.MonoidalCategory.term_⊗≫_\", \"AugmentedSimplexCategory.tensorHom\", \"AugmentedSimplexCategory.tensorObj\", \"AugmentedSimplexCategory.inr'\", \"AugmentedSimplexCategory.inr_comp_tensorHom\", \"AugmentedSimplexCategory.tensorHomOf\"], \"digest\": \"5dac3a530455d235\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits provide generic extra-degeneracy data or a Cech nerve, not the fixed-object coproduct-bar factor maps and their identities; source candidates were read."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-fixed-object-scat-left-proper",
@@ -95,5 +211,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-split-coproduct-bar-extra-degeneracy",
+  "worker": "stage1",
+  "summary": "Q123: retained the exact statement and inherited sources/searches; no project attachment or exact Mathlib match was found. Gave the complete word-quotient and factor-index proof, including a direct construction of every ordinal operator, augmentation naturality, all boundary identities, and the mapping-set restriction. All calculations are elementary and no new nodes are introduced.",
+  "blueprint": "Realizes the fixed-object split-bar contraction in the existing ancestry beneath prop-coef-integral-exceptional-adjoint, proof paragraph 2 (derived coefficient adjunction and coherent naturality): the insertion assertion used in step 6 of lem-coef-fixed-object-scat-left-proper. The current main-20261015 ancestor has the same statement but omits its proof; historical paragraph location retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-56b495916",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-56b495916 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full. The mathematics is correct, but steps 2-7 had corrupted TeX (fault B4). I repaired them in fixes/dag/nodes/sec-six-functors/lem-coef-split-coproduct-bar-extra-degeneracy.json; nothing else in the node changed. Checks: (1) The delivery is one commit with no new nodes. The statement is unchanged, which is right because it is true and needs no freeness hypothesis. (2) Cited statements: def-nagata-category (category laws), def-weil-pbc-simplicial-set (contravariant functor; delta_i omits i, sigma_i repeats i) and lem-coef-extra-degeneracy-contraction. That node's five equation families match Mathlib ExtraDegeneracy.lean:72-83 (s'_comp_ε, s₀_comp_δ₁, s_comp_δ₀, s_comp_δ with i:Fin(n+2), s_comp_σ with i:Fin(n+1)). Each step takes only what these statements say. (3) The route stays inside unit sk-prop-sf-biduality-general: the only statement used is a Mathlib leaf of the same unit, so no tool_uses. Parent lem-coef-fixed-object-scat-left-proper step 6 uses exactly this statement. The item is the parent's extracted lemma, not a restatement of a parent clause. (4) By hand I checked t_alpha(k)=min{j: k<=alpha(j)}: it composes contravariantly because the set is upward closed, and V absorbs. The faces fold at i<n and the last face applies v; the degeneracies insert after A_i; augmentation is natural. d_0h_n=1, d_1h_0=h_{-1}eps_0, d_{i+1}h_{n+1}=h_n d_i (0<=i<=n+1) and s_{i+1}h_n=h_{n+1}s_i (0<=i<=n) all hold. A script confirmed these label identities over 520729 composition cases in degrees up to 5. Step 1's word-quotient universal property reduces functor equality to these factor labels, so marking the steps elementary is justified. (5) Edge cases: empty O, empty hom-sets, one-object categories with relations, a collapsing v, n=0. (6) Duplicate search: rg over dag/nodes found no duplicate. Mathlib's ExtraDegeneracy is generic and its Cech instances use pullback powers, so 'no match' is correct. (7) Dwyer-Kan Prop 8.2 is absent from literature/; the report has a WANTED line and the proof is correctly marked by:agent. No SGA source is used. This is not a target node, so the base-change morphism check does not apply. Fix applied: in steps 2-7, backslash escapes were swallowed (\\to became a tab, \\beta a backspace, \\varepsilon a vertical tab; \\alpha, \\leq, \\infty, \\min, \\{\\}, \\in, \\delta, \\sigma lost their backslashes), leaving 19 control characters. I rewrote those step texts with the same words and correct TeX; uses, proof_deps and every other field are unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

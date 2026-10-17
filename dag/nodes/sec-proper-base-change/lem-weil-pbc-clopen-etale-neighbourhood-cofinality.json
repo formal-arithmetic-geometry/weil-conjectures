@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-clopen-etale-neighbourhood-cofinality",
  "kind": "statement",
  "title": "Clopen refinements are cofinal among pointed etale neighbourhoods",
- "statement": "Let $K$ be a separably closed field [def-pc-separably-closed], let $C$ be a commutative $K$-algebra, and put $E=\\operatorname{Spec}C$ [def-weil-affine-spectrum]. Assume that for every prime $z\\subset C$ the structural map $K\\to C_z$ is an isomorphism, where $C_z$ denotes localization at the complement of $z$. Assume also that clopen subsets form a basis of $E$: for every open $U\\subseteq E$ and $z\\in U$ there is an open and closed $W$ with $z\\in W\\subseteq U$. Fix any geometric point $\\bar z:\\operatorname{Spec}\\Omega\\to E$ [def-weil-geometric-point] lying over $z$. For every pointed etale neighbourhood $(V,\\bar v)$ of $\\bar z$ [def-weil-pbc-pointed-etale-neighbourhoods], there are a clopen neighbourhood $W\\subseteq E$ of $z$ and an $E$-morphism $b:W\\to V$ satisfying $b\\circ\\bar z_W=\\bar v$, where $\\bar z_W$ is the unique factorization of $\\bar z$ through $W$. Given two clopen neighbourhoods $W_1,W_2$ of $z$ and pointed $E$-morphisms $b_i:W_i\\to V$, there is a clopen neighbourhood $W_3\\subseteq W_1\\cap W_2$ of $z$ on which $b_1$ and $b_2$ agree. Thus the clopen pointed neighbourhoods form an initial subsystem of the pointed etale neighbourhoods. Each clopen $W$ is $D(e)=\\operatorname{Spec}C_e$ for an idempotent $e\\in C$, with its open-subscheme structure, where $C_e$ is localization at $e$.",
+ "statement": "Let $K$ be a separably closed field [def-pc-separably-closed], let $C$ be a commutative $K$-algebra, and put $E=\\operatorname{Spec}C$ [def-weil-affine-spectrum]. Assume that for every prime $z\\subset C$ the structural map $K\\to C_z$ is an isomorphism, where $C_z$ denotes localization at the complement of $z$. Assume also that clopen subsets form a basis of $E$: for every open $U\\subseteq E$ and $z\\in U$ there is an open and closed $W$ with $z\\in W\\subseteq U$. Fix any geometric point $\\bar z:\\operatorname{Spec}\\Omega\\to E$ [def-weil-geometric-point] lying over $z$. For every pointed etale neighbourhood $(V,\\bar v)$ of $\\bar z$ [def-weil-pbc-pointed-etale-neighbourhoods], there are a clopen neighbourhood $W\\subseteq E$ of $z$ and an $E$-morphism $b:W\\to V$ satisfying $b\\circ\\bar z_W=\\bar v$, where $\\bar z_W$ is the unique factorization of $\\bar z$ through $W$. Given two clopen neighbourhoods $W_1,W_2$ of $z$ and pointed $E$-morphisms $b_i:W_i\\to V$, there is a clopen neighbourhood $W_3\\subseteq W_1\\cap W_2$ of $z$ on which $b_1$ and $b_2$ agree. Thus the clopen pointed neighbourhoods form an initial subsystem [lem-weil-pbc-initial-functor-limit] of the pointed etale neighbourhoods. Each clopen $W$ is $D(e)=\\operatorname{Spec}C_e$ for an idempotent $e\\in C$, with its open-subscheme structure, where $C_e$ is localization at $e$.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 0EZV, lemma-check-stalks-better, finite-product presentation; Tag 09AY, lemma-affine-only-closed-points; Tag 03PN, section-stalks. Agent-written finite-presentation/clopen refinement for the corrected proof, not an assertion quoted verbatim from these sources."
@@ -11,11 +11,137 @@
   "def-pc-separably-closed",
   "def-weil-affine-spectrum",
   "def-weil-geometric-point",
-  "def-weil-pbc-pointed-etale-neighbourhoods"
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "lem-weil-pbc-initial-functor-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any clopen $W\\subseteq E$, [lem-weil-pbc-spec-clopen-idempotent] gives an idempotent $e\\in C$ with $W=D(e)$. By [lem-weil-pbc-affine-open-section-vanishing-prime], this open subscheme is canonically $\\operatorname{Spec}C_e$. This proves the final assertion, including $W=\\varnothing$ with $e=0$ and $W=E$ with $e=1$. By [lem-weil-pbc-open-immersion-etale], each such open neighbourhood of $z$, pointed by the factorization of $\\bar z$, is a pointed etale neighbourhood.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EE, lemma-disjoint-decomposition; schemes.tex Tags 01I3 and 01HV; morphisms.tex Tag 02GP"
+   }
+  },
+  {
+   "text": "Write $\\lambda:C\\to C_z$ for localization. The ring map $a:C\\to\\Omega$ defining $\\bar z$ has kernel $z$, so $a(s)\\ne0$ and hence is a unit for every $s\\notin z$. By [lem-weil-pbc-ring-localization-universal-property], it extends uniquely to $\\gamma:C_z\\to\\Omega$. The structural isomorphism $\\alpha:K\\xrightarrow{\\sim}C_z$ in the hypothesis gives a field embedding $\\beta=\\gamma\\alpha:K\\to\\Omega$. With $t=\\operatorname{Spec}(\\alpha^{-1}\\lambda):\\operatorname{Spec}K\\to E$, contravariance of the spectrum [def-weil-affine-spectrum] gives $\\bar z=t\\circ\\operatorname{Spec}\\beta$. In particular $\\gamma$ is injective, since $C_z$ is the field $K$.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP, proposition-universal-property-localization; schemes.tex Tag 01I1, lemma-morphism-into-affine"
+   }
+  },
+  {
+   "text": "Let $p:V\\to E$ and $\\bar v$ be the given pointed etale neighbourhood. Apply [lem-exc-etale-lift-separably-closed-factorization] with $L=K$, $\\beta$ and $t$ from step 2: there is $y:\\operatorname{Spec}K\\to V$ with $p y=t$ and $y\\circ\\operatorname{Spec}\\beta=\\bar v$. By [lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink], choose an affine open etale refinement $j:A=\\operatorname{Spec}B\\to V$ containing the image of $\\bar v$. The one-point source of $y$ has that same image, so $y$ restricts to $y_A:\\operatorname{Spec}K\\to A$; its map on structure sheaves is just the restriction of that of $y$ [def-weil-open-immersion]. Thus $j y_A=y$ and $y_A\\circ\\operatorname{Spec}\\beta=\\bar v_A$. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], $B$ is finitely presented over $C$. The affine correspondence gives a $C$-algebra map $h:B\\to C_z$ for $y_A\\circ\\operatorname{Spec}\\alpha:\\operatorname{Spec}C_z\\to A$ (its composite to $E$ is $t\\circ\\operatorname{Spec}\\alpha=\\operatorname{Spec}\\lambda$).",
+   "uses": [
+    "lem-exc-etale-lift-separably-closed-factorization",
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Agent argument for Tag 0EZV, lemma-check-stalks-better: local field factorization; proved project theorem exists_SpecMap_comp_eq_of_isSepClosed (GeometricLifts.lean:54-88); affine shrinking as in Tag 04HX"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-colimit-principal-localizations] with $P=C$ and $S=C\\setminus z$. This is a small filtered diagram (the index is a subset of the set $C$), with objects $C_s$, colimit $C_z$, and $C$-algebra transition and cocone maps. Apply [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] to the finitely presented $C$-algebra $B$ and $h$. It supplies $s\\notin z$ and a $C$-algebra map $h_s:B\\to C_s$ whose composite to $C_z$ is $h$. By [def-weil-affine-spectrum] and [lem-weil-pbc-affine-open-section-vanishing-prime], this is an $E$-morphism $d:D(s)\\to A$. Its composite with the factorization of $\\bar z$ through $D(s)$ equals $\\bar v_A$: both ring maps $B\\to\\Omega$ are $B\\xrightarrow{h}C_z\\xrightarrow{\\gamma}\\Omega$.",
+   "uses": [
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CR, lemma-localization-colimit; Tag 00QO, lemma-characterize-finite-presentation, (1) implies (3)"
+   }
+  },
+  {
+   "text": "Since $s\\notin z$, $z\\in D(s)$. The assumed clopen basis supplies $z\\in W\\subseteq D(s)$ with $W$ clopen. Define $b$ as the restriction of $j\\circ d$ to $W$. Open-subscheme restriction [def-weil-open-immersion] means restriction of the underlying continuous map and of its structure sheaf maps, so it preserves the base equation and the marked-point equation of step 4. Therefore $b:W\\to V$ has $b\\circ\\bar z_W=\\bar v$. This proves the existence assertion.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Agent clopen refinement of the finite-presentation argument for Tag 0EZV, lemma-check-stalks-better"
+   }
+  },
+  {
+   "text": "For equalization, let $b_i:W_i\\to V$ be the two pointed maps. Their values at $z$ are the common image $v$ of $\\bar v$. Choose an affine open etale refinement $A=\\operatorname{Spec}B\\subseteq V$ containing $v$ using [lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink]. The intersection $O=W_1\\cap W_2\\cap b_1^{-1}(A)\\cap b_2^{-1}(A)$ is open in $E$ and contains $z$ (the inverse images are first open in $W_i$, which are open in $E$). Choose a clopen $z\\in W_0\\subseteq O$. By step 1 write $W_0=D(e)=\\operatorname{Spec}C_e$. Restricting maps and sheaf maps [def-weil-open-immersion] gives two $E$-maps $W_0\\to A$, hence $C$-algebra maps $u_1,u_2:B\\to C_e$ [def-weil-affine-spectrum]. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], choose a finite presentation of $B$ over $C$, and denote its algebra generators by $x_1,\\ldots,x_n$.",
+   "uses": [
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QO, lemma-characterize-finite-presentation, finite-generator argument; morphisms.tex Tag 02GJ, lemma-etale-characterize"
+   }
+  },
+  {
+   "text": "For each generator put $\\delta_j=u_1(x_j)-u_2(x_j)=a_j/e^{r_j}$ in $C_e$. Pointedness says its image in $\\Omega$ is zero. Since $e\\notin z$, $C_e\\to\\Omega$ factors as $C_e\\to C_z\\xrightarrow{\\gamma}\\Omega$, and $\\gamma$ is injective by step 2. Hence $a_j$ maps to zero in $C_z$. The fraction equality in [def-weil-pbc-localization-at-prime] gives $t_j\\notin z$ with $t_j a_j=0$ in $C$. Put $t=\\prod_{j=1}^n t_j$ (the empty product is $1$). Then $t\\notin z$ and $ta_j=0$ for every $j$. Choose a clopen $z\\in W_3\\subseteq W_0\\cap D(t)$, and write $W_3=D(f)$ by step 1. By [lem-weil-pbc-affine-open-section-vanishing-prime], the restriction maps $C_e=\\mathcal O_E(D(e))\\to\\mathcal O_E(W_3)=C_f$ and $C_t=\\mathcal O_E(D(t))\\to C_f$ carry $e^{-1}$ and $t^{-1}$ to inverses of $e$ and $t$. Thus every $\\delta_j$ restricts to zero. The two $C$-algebra maps $B\\to C_f$ agree on $C$ and on all the $x_j$, hence on every polynomial in these generators and therefore on $B$. The affine correspondence [def-weil-affine-spectrum] shows $b_1|_{W_3}=b_2|_{W_3}$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO, definition-localization, fraction equality; Tag 00QO, lemma-characterize-finite-presentation, generator argument; schemes.tex Tag 01HV, lemma-spec-sheaves"
+   }
+  },
+  {
+   "text": "Let $\\mathcal C_z$ be the category of clopen neighbourhoods of $z$, with arrows the inclusions, and send it to $\\mathcal N_{\\bar z}$ using the inherited marked points [def-weil-pbc-pointed-etale-neighbourhoods]. These objects and arrows are etale-site objects and arrows by [lem-weil-pbc-open-immersion-etale]. For each $(V,\\bar v)$ the category of pairs $(W,b:W\\to V)$ is nonempty by step 5. For any two such pairs, step 7 supplies inclusions $W_1\\leftarrow W_3\\to W_2$ commuting with their maps to $V$. Thus any two objects of this category are joined by a zigzag, so it is connected. These are exactly conditions (1) and (2) of initiality in [lem-weil-pbc-initial-functor-limit]: every such comma category is nonempty and connected. The explicit existence, equalization and idempotent assertions have all been established.",
+   "uses": [
+    "def-weil-pbc-pointed-etale-neighbourhoods",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-initial-functor-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PN, section-stalks; agent verification of the nonempty-connected comma-category definition of initiality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-affine-spectrum",
+  "lem-exc-etale-lift-separably-closed-factorization",
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "lem-weil-pbc-initial-functor-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EZV, lemma-check-stalks-better, finite-product presentation; explicit clopen finite-presentation refinement using Algebra Tags 00CR, 00QO and 00EE"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +177,45 @@
    "results": "[loogle] OK 0 hit(s)",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*etale|etale.*clopen|pointed.*neighborhood|pointed.*neighbourhood",
+   "results": "No hits; searched AlgebraicGeometry under Mathlib/",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale neighbourhood of a point on an affine scheme with separably closed field local rings admits a clopen section, and two pointed sections agree locally",
+   "results": "Hits: AlgebraicGeometry.Scheme.OpenCover.ext_elem, AlgebraicGeometry.StructureSheaf.exists_const, AlgebraicGeometry.Scheme.local_affine, AlgebraicGeometry.exists_of_res_eq_of_qcqs, RingHom.Etale.propertyIsLocal, Algebra.isOpen_etaleLocus, PrimeSpectrum.mulZeroAddOneEquivClopens, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"IsClopen\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine scheme all of whose local rings equal a separably closed base field, clopen neighbourhoods are initial among pointed etale neighbourhoods",
+   "results": "Hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.instT0SpaceCarrierCarrierCommRingCat, Algebra.isOpen_etaleLocus, Algebra.etaleLocus, Algebra.QuasiFiniteAt.isClopen_singleton, AlgebraicGeometry.IsEtale, Algebra.mem_etaleLocus_iff, Algebra.etaleLocus_eq_univ_iff",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale map admits a section near a point with separably closed field local ring; two sections through the same geometric point agree after restricting to an open neighbourhood",
+   "results": "Hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, RingHom.Etale.propertyIsLocal, Algebra.Etale.formallyEtale, Algebra.IsEtaleAt, Algebra.exists_etale_of_isEtaleAt, Algebra.mem_etaleLocus_iff, Algebra.etaleLocus, StandardEtalePair.homEquiv_symm_apply",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-strict-local-geometric-fibre-test",
@@ -91,5 +252,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-clopen-etale-neighbourhood-cofinality",
+  "worker": "stage1",
+  "summary": "Proved clopen refinement and equalization by descent of the marked lift to K, finite-presentation factorization over principal localizations, and explicit annihilation of finitely many generator differences. Reused existing DAG nodes only; statement unchanged, no new nodes. Audited arbitrary geometric-point field, nonseparated etale objects and empty-generator cases.",
+  "blueprint": "Realizes the inherited from.place: finite-presentation/clopen refinement after the finite-product presentation in Tag 0EZV, under the ancestor thm-weil-pbc-direct-image-finiteness-proper; the current main-20261015 ancestor has only its finiteness statement, so this supplies the intermediate argument recorded in the created-node ancestry.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-4e3dd8485",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-4e3dd8485 (reviewer sub-agent of L); spot-checked: I read the whole item: all 8 steps, the statements of all 17 cited nodes, the parent step that uses it (lem-weil-pbc-strict-local-geometric-fibre-test), unit sk-thm-properbasechange, and the Stacks places 0EZV (etale-cohomology.tex l.16532-16579) and 09AY (l.14280). I checked the 12 algebra/schemes/morphisms tags cited in the step sources against the tags file. The statement is true and matches what the parent uses. I tested it on C=0 (vacuous), C=K, C=K^n, locally constant K-valued functions on a profinite set (no point open, so the clopen basis and finite presentation are needed), imperfect separably closed K and non-separated V. Step checks: the kernel of C->Omega is exactly z; gamma is injective because C_z = K is a field; the field-lift lemma applies with L=K, any Omega and p v = t Spec(beta); the affine-shrink uniqueness gives y_A Spec(beta) = v_A; the etale ring map C->B is finitely presented; the localization colimit over C minus z is a small filtered diagram of C-algebras, which the filtered-colimit factorization needs; I checked the point equation on ring maps (both sides are gamma h); equalization takes annihilators t_j outside z, their product t is outside z because z is prime, and e and t are units on D(f); the comma categories are nonempty and connected through the zigzag W1<-W3->W2. Route: every use is a definition, a Mathlib leaf, a sk-thm-p1 node (the unit cites sk-thm-p1) or the Lean-closed field-lift node. No tool_uses accepted. No cycle and no SGA. Duplicate search found nothing that states this lemma (checked lem-sbc-integral-pointed-clopen-refinement, lem-weil-pbc-finite-split-neighbourhoods-cofinal, lem-sbc-finite-pointed-piece-refinement and the sibling lem-weil-pbc-clopen-stalk-global-sections-detection). There are no new nodes. I repaired two faults in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-clopen-etale-neighbourhood-cofinality.json: (1) step 3 defined h from y_A composed with Spec(alpha^-1), which does not typecheck; it should be y_A composed with Spec(alpha), whose composite to E is Spec(lambda). (2) B3: the notion 'initial' in the statement and in step 8 cited no definition node; it now cites the Mathlib leaf lem-weil-pbc-initial-functor-limit in the statement, stmt_deps, step 8 uses and proof_deps. The meaning of the statement is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

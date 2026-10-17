@@ -19,9 +19,88 @@
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-closed-subset-proper-over-base"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an etale $U\\to Y$, put $U'=U\\times_Y Y'$, $T_U=X\\times_Y U$, and $T'_U=X'\\times_{Y'}U'$. The universal property of the fibre product gives $T'_U\\cong T_U\\times_X X'\\cong T_U\\times_U U'$; write $q_U:T'_U\\to T_U$ for the projection. The constant-coefficient module adjunction for $a$ has a $\\Lambda$-linear unit $\\eta_{a,F}:F\\to a_*a^{-1}F$, with underlying abelian unit the usual one. Evaluate it on the etale object $T_U\\to X$. The direct-image formula identifies its target with $(a^{-1}F)(T'_U)$, giving the canonical linear map $t_U(s)=\\eta_{a,F}(T_U)(s)$. This construction is defined on all of $F(T_U)$ before imposing support conditions.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-direct-image",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F55 (lemma-base-change-f-shriek-separated), ordinary pullback map; etale-cohomology.tex equation-pullback and definition-pullback"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar z':\\operatorname{Spec}\\Omega\\to T'_U$. Let $\\bar z=q_U\\bar z'$ and let $\\bar x'$ be its image in $X'$. Apply the inverse-image stalk-and-germ comparison to $a:X'\\to X$, the point $\\bar x'$, the underlying abelian sheaf of $F$, and the pointed etale neighbourhood $(T_U,\\bar z)$ of $a\\bar x'$. The induced pointed neighbourhood in $X'$ is $(T_U\\times_X X',\\bar z')$. Its germ formula gives $c_{a,\\bar x',F}((t_U(s))_{\\bar z'})=s_{\\bar z}$. Since $c$ is a group isomorphism, the left germ is nonzero if and only if the right germ is nonzero. The zero-open criterion says these tests depend only on the underlying points of $T'_U$ and $T_U$. Therefore $\\operatorname{Supp}(t_U(s))=q_U^{-1}(\\operatorname{Supp}(s))$. The module comparison in Step 1 ensures that this is the germ of the very section constructed there.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-sc-etale-section-zero-open",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1 (lemma-stalk-pullback) (3), direct proof and equation-pullback; Tag 04FR (lemma-zero-over-image) (3)"
+   }
+  },
+  {
+   "text": "If $s\\in G(U)$, its closed support $C\\subseteq T_U$ is proper over $U$ by hypothesis. The map $T_U\\to U$ is locally of finite type, since it is the base change of $f$. Apply clause (1) of the closed-proper-support locality lemma to this map, $C$, and $U'\\to U$. It says that $q_U^{-1}(C)$ is a closed subset proper over $U'$. By Step 2 this is exactly the support of $t_U(s)$, so the given section description of $H$ places $t_U(s)$ in $H(U')=(b_*H)(U)$. Thus $t_U$ restricts to a linear map $\\alpha_U:G(U)\\to(b_*H)(U)$.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "lem-cbc-closed-proper-support-locality",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0CYP (lemma-base-change-closed-proper-over-base); morphisms.tex Tag 01T4 (lemma-base-change-finite-type)"
+   }
+  },
+  {
+   "text": "For an arrow $r:V\\to U$ over $Y$, the induced arrows $T_V\\to T_U$ and $T'_V\\to T'_U$ are base changes of $r$. Since $\\eta_{a,F}$ is a morphism of sheaves, its components satisfy $t_V(s|_{T_V})=t_U(s)|_{T'_V}$. The restriction maps of $G$ and $H$ are the restrictions of their ambient direct images, since they are subsheaves. Both sides belong to $H(V\\times_Y Y')$ by Step 3, so the equality in the ambient module is the equality $\\alpha_V(s|_V)=\\alpha_U(s)|_{V\\times_Y Y'}$. Consequently the components $\\alpha_U$ define a $\\Lambda$-linear sheaf morphism $\\alpha:G\\to b_*H$. Its component formula fixes it uniquely, which also proves its canonicity.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F55 (lemma-base-change-f-shriek-separated), maps given by pulling back local sections"
+   }
+  },
+  {
+   "text": "For a module-sheaf morphism $\\varphi:F\\to\\widetilde F$, geometric germs give $\\operatorname{Supp}(\\varphi(s))\\subseteq\\operatorname{Supp}(s)$, because $\\varphi_{\\bar z}(0)=0$. The zero-open criterion makes the first support closed. Clause (2) of the closed-subset properness properties then makes it proper whenever the second support is proper. Thus $\\varphi$ induces the expected maps $G\\to\\widetilde G$. The same argument for $a^{-1}\\varphi$ gives $H\\to\\widetilde H$; the required local finite type hypothesis for $f'$ and its etale base changes follows from local finite type base change. Naturality of the adjunction unit gives $(a^{-1}\\varphi)_{T'_U}(t_U(s))=\\widetilde t_U(\\varphi_{T_U}(s))$. Restricting this equality to the proper-support submodules proves the naturality square for $\\alpha$. This proves all clauses, including the exact support formula of Step 2.",
+   "uses": [
+    "lem-sc-etale-section-zero-open",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "lem-weil-pbc-lft-base-change",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04FR (lemma-zero-over-image); Tag 04FT (lemma-support-section-closed) (3); coherent.tex Tag 0CYN (lemma-closed-closed-proper-over-base)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-direct-image",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-sc-etale-section-zero-open",
+  "lem-weil-pbc-lft-base-change",
+  "lem-cbc-closed-proper-support-locality",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F55 (lemma-base-change-f-shriek-separated), sectionwise restriction of the ordinary pullback map; support equality made explicit using etale-cohomology.tex Tags 03Q1 and 04FR and coherent.tex Tag 0CYP"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +143,45 @@
    "results": "0 hit(s); none; directory Mathlib/AlgebraicGeometry",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "properSupport|proper_support|fShriek|lowerShriek",
+   "results": "0 hit(s): ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern ordinary sheaf adjunctions or structure-sheaf modules, not arbitrary etale sections with proper support"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of an etale sheaf section preserves its support and defines a map on sections with proper support",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, AlgebraicGeometry.LocallyRingedSpace.preimage_basicOpen, CategoryTheory.fullyFaithfulSheafToPresheaf_preimage_val, AlgebraicGeometry.Scheme.Hom.appLE, AlgebraicGeometry.Scheme.Modules.inv_app, AlgebraicGeometry.Scheme.Hom.appIso_inv_app, CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern ordinary sheaf adjunctions or structure-sheaf modules, not arbitrary etale sections with proper support"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Adjunction",
+   "results": "12 hit(s): CategoryTheory.plusPlusAdjunction, CategoryTheory.sheafificationAdjunction, CategoryTheory.HasSheafify.mk', CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction, CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction, CategoryTheory.GrothendieckTopology.W_adj_unit_app, CategoryTheory.sheafComposeNatIso, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern ordinary sheaf adjunctions or structure-sheaf modules, not arbitrary etale sections with proper support"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical sheaf morphism pulling sections with proper support through an arbitrary Cartesian base change of schemes",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Hom.app, AlgebraicGeometry.Scheme.Hom.appLE, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Hom.map_appLE, AlgebraicGeometry.Scheme.Modules.pushforward",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern ordinary sheaf adjunctions or structure-sheaf modules, not arbitrary etale sections with proper support"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction unit on etale module sheaves restricts to a natural linear map on sections whose closed support is proper over the base",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.kerAdjunction_unit_app, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, AlgebraicGeometry.Scheme.kerAdjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern ordinary sheaf adjunctions or structure-sheaf modules, not arbitrary etale sections with proper support"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-proper-support-sheaf-composition",
@@ -79,7 +193,7 @@
  "blueprint": {
   "from": {
    "node": "thm-cbc-finite-torsion",
-   "place": "Proof, refinement comparison paragraph: the proper-support pullback comparison and its geometric-stalk verification",
+   "place": "Proof of thm-cbc-finite-torsion, refinement paragraph: 'both factors of Ex_! are compatible with the refinement maps'; the underived proper-support pullback map used by the proper-open interchange comparison",
    "via": [
     "lem-cbc-proper-support-sheaf-composition",
     "lem-cbc-proper-open-interchange-coherence"
@@ -87,5 +201,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-proper-support-pullback-section-map",
+  "worker": "stage1",
+  "summary": "Constructed the unit pullback on each etale object, checked its geometric germs, used existing closed-proper-support base change, and wrote restriction and coefficient-sheaf naturality equations. No statement change and no new node. Checked the source and all cited statements; no exact closed project declaration was found.",
+  "blueprint": {
+   "steps": [
+    "Refinement paragraph of thm-cbc-finite-torsion: the proper-support pullback section map underlying the compatibility of the two exchange factors with refinement maps."
+   ],
+   "same_as_search": "Whole DAG and blueprint searched for support pullback, proper support, proper-support, stalk pullback, and pullback section; no equivalent blueprint statement."
+  },
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic germ-compatible stalk formula for arbitrary inverse image, needed to identify the nonzero germs of the unit section; no unit node gives this formula."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic constant-coefficient module adjunction with underlying abelian unit; supplies linearity and the precise unit, not a replacement compact-support argument."
+   },
+   {
+    "node": "lem-weil-pbc-lft-base-change",
+    "why": "Generic stability of local finite type under base change checks the hypotheses of closed-subset properness at each etale test object."
+   },
+   {
+    "node": "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "why": "Generic inheritance of properness by closed subsets, used only for functoriality under a map of coefficient sheaves; the unit locality node concerns base change instead."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-71bccff4d",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-71bccff4d (reviewer sub-agent of L); spot-checked: I read the item and its five steps in full, plus the full statement of every node they cite: the fibre-product and direct-image definitions, the module inverse-image proposition (clauses 2 and 3), the stalk-germ lemma, the zero-open lemma, local-finite-type base change, clause (1) of the closed-proper-support locality lemma and clause (2) of the closed-subset properness properties. Sources checked: Stacks more-etale.tex Tag 0F55 (lemma-base-change-f-shriek-separated). Its proof restricts the general pullback map, and the item is the adjoint form G->b_*H of that map with an explicit support formula. I also checked lines 34-42 of the refinement paragraph in blueprint main-20261015 thm-cbc-finite-torsion.proof.md, which from.place cites. This is not a target node, and no comparison isomorphism is claimed. Step 1: the identification T'_U = T_U x_X X' = T_U x_U U' holds over X', and the unit is Lambda-linear by prop (3). Step 2: the germ lemma applies with f=a, the neighbourhood (T_U, q z') and the lift condition from the commuting square; with the zero-open lemma this gives Supp t(s) = q^{-1} Supp s. Step 3: T_U->U is locally of finite type, locality (1) applies along U'->U, and U'->Y' is etale, so the section lies in H(U') = (b_*H)(U). Steps 4 and 5 are elementary naturality of the unit plus Supp phi(s) contained in Supp s, which is closed by the zero-open lemma and proper by clause (2). Small cases tested: F=0, empty X or Y', b=id, a non-flat closed-point base change and an open immersion f. No new nodes. Duplicate search found def-cbc-etale-section-proper-support, the parent composition lemma (its step 8 cites this item), the unsplit fibre-restriction citer, lem-cbc-base-change-mate-stalk and the coherent lem-pc-proper-support-* nodes; none states this map. The statement is not weakened, and separatedness is kept although unused. I accept all four declared tool_uses: stalk-germ, modules-exact, lft-base-change and closed-subset-properties (2). The report mentions a citations.json that is not in the commit; this has no effect on the DAG. No fixes."
  }
 }

@@ -18,9 +18,79 @@
   "lem-cbc-extension-zero-composition",
   "lem-weil-pbc-extension-by-zero-exact"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P_\\nu=Rp_{\\nu,*}$, $S_\\nu=Rp_{Y,\\nu,*}$, $Q_\\nu=Rq_{\\nu,*}$, $U=Ru_*$, $V=Rv_*$ and $W=Rw_*$. The compatible-tower statement gives that $b_\\nu,c_\\nu$ are open and $p_{Y,\\nu}$ proper. Throughout the calculation insert the direct-image compositors of [lem-cbc-etale-derived-direct-image-coherence] and the open-extension compositors of [lem-cbc-extension-zero-composition]. The latter act degreewise on $D^+$ by [lem-weil-pbc-extension-by-zero-exact]. We suppress these specified identifications in formulas; in particular $S_2W=S_1$, $P_2V=UP_1$, $Q_2U=Q_1$ and $b_{\\nu!}c_{\\nu!}=a_{\\nu!}$. The stated triple and identity equations ensure that every reassociation below uses the same compositor. All transformations remain in ordinary small-etale constant-$\\Lambda$ module categories.",
+   "uses": [
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-cbc-etale-derived-direct-image-coherence",
+    "lem-cbc-extension-zero-composition",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C and 0F7D, conventions preceding the two composition formulas"
+   }
+  },
+  {
+   "text": "Let $R$ be the square with top open $b_1:U_1\\to\\bar X_1$, bottom open $b_2:U_2\\to\\bar X_2$, and proper verticals $w,v$. Its commutativity is $vb_1=b_2w$. By [lem-cbc-proper-open-interchange-coherence] it has the normalized natural comparison $\\delta=\\gamma_R:b_{2!}W\\to Vb_{1!}$, without requiring the square to be cartesian. Place to its left the refinement square with top $c_1$, bottom $c_2$, and verticals $\\mathrm{id}_X,w$. The horizontal composite has top $a_1$, bottom $a_2$, and verticals $\\mathrm{id}_X,v$. The refinement normalization of the cited node identifies the comparisons for these two refinement squares with $\\alpha_w$ and $\\alpha_v$. Its horizontal composition equation therefore gives\n$$\\alpha_v=(\\delta c_{1!})\\circ(b_{2!}\\alpha_w):a_{2!}\\longrightarrow V a_{1!}.$$\nHere the open-extension identifications are precisely those fixed in step 1.",
+   "uses": [
+    "lem-cbc-proper-open-interchange-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7D, label lemma-shriek-proper-and-open-compose-horizontal; Tag 0F7B refinement specialization"
+   }
+  },
+  {
+   "text": "Paste $R$ vertically above the second tower square $(b_2,i_2,p_{Y,2},p_2)$. Its outer rectangle has top $b_1$, bottom $i_2$, left $p_{Y,2}w=p_{Y,1}$ and right $p_2v=up_1$. The same rectangle is obtained by placing the first tower square $(b_1,i_1,p_{Y,1},p_1)$ above the refinement square $(i_1,i_2,\\mathrm{id}_Y,u)$. The vertical composition equation and refinement normalization of [lem-cbc-proper-open-interchange-coherence], applied to these two decompositions of this identical rectangle, give\n$$(P_2\\delta)\\circ(\\gamma_2 W)=(U\\gamma_1)\\circ(\\alpha_u S_1):i_{2!}S_1\\longrightarrow UP_1b_{1!}.$$\nThe first decomposition uses only proper verticals $w,v,p_{Y,2},p_2$; the second uses $p_{Y,1},p_1,\\mathrm{id}_Y,u$. All are supplied by the hypotheses or step 1. Thus neither decomposition invokes a base-change theorem for a noncartesian square.",
+   "uses": [
+    "lem-cbc-proper-open-interchange-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C, label lemma-shriek-proper-and-open-compose, applied twice"
+   }
+  },
+  {
+   "text": "For $K\\in D^+(X_{\\mathrm{et}},\\Lambda)$ apply naturality of $\\gamma_2:i_{2!}S_2\\to P_2b_{2!}$ from [lem-cbc-proper-open-interchange-coherence] to the morphism $\\alpha_{w,K}:c_{2!}K\\to Wc_{1!}K$. It says exactly\n$$(P_2b_{2!}\\alpha_w)\\circ(\\gamma_2c_{2!})=(\\gamma_2Wc_{1!})\\circ(i_{2!}S_2\\alpha_w).$$\nBoth sides map $i_{2!}S_2c_{2!}$ to $P_2b_{2!}Wc_{1!}$. This is the ordinary component naturality equation, for every $K$; no further geometric comparison is used.",
+   "uses": [
+    "lem-cbc-proper-open-interchange-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, naturality of the normalized interchange"
+   }
+  },
+  {
+   "text": "Expand $C_{hf}\\mu_2$ and use step 2, then step 4, then step 3 whiskered by $c_{1!}$. Functoriality of $Q_2,P_2$ gives the chain\n$$\\begin{aligned}\nC_{hf}\\mu_2\n&=Q_2\\big((P_2\\alpha_v)\\circ(\\gamma_2c_{2!})\\big)\\\\\n&=Q_2\\big((P_2\\delta c_{1!})\\circ(P_2b_{2!}\\alpha_w)\\circ(\\gamma_2c_{2!})\\big)\\\\\n&=Q_2\\big((P_2\\delta c_{1!})\\circ(\\gamma_2Wc_{1!})\\circ(i_{2!}S_2\\alpha_w)\\big)\\\\\n&=Q_2\\big((U\\gamma_1c_{1!})\\circ(\\alpha_u S_1c_{1!})\\circ(i_{2!}S_2\\alpha_w)\\big)\\\\\n&=\\mu_1\\circ(C_hF_1)\\circ(H_2C_f).\n\\end{aligned}$$\nFor the last equality substitute $F_1=S_1c_{1!}$, $C_f=S_2\\alpha_w$, $C_h=Q_2\\alpha_u$, $Q_2U=Q_1$ and $\\mu_1=Q_1\\gamma_1c_{1!}$ with the terminal compositors. The first equality uses $R(q_2p_2)_*=Q_2P_2$; its target uses $Q_2P_2V=Q_2UP_1=Q_1P_1$. The equality of these triple-composition identifications is exactly [lem-cbc-etale-derived-direct-image-coherence]. The open identifications use [lem-cbc-extension-zero-composition] degreewise as justified in step 1. Hence the displayed chain proves the required equality of natural transformations, with all canonical identifications restored.",
+   "uses": [
+    "lem-cbc-etale-derived-direct-image-coherence",
+    "lem-cbc-extension-zero-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C and 0F7D, formal assembly of the two pasting identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-etale-derived-direct-image-coherence",
+  "lem-cbc-extension-zero-composition",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-proper-open-interchange-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C/0F7D: explicit pasting consequence for refining compatible towers; current blueprint thm-cbc-finite-torsion final pasting assertion"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +126,45 @@
    "results": "Profinite.NobelingProof.projRestricts_eq_comp; LightProfinite.proj_comp_transitionMap'; Profinite.NobelingProof.GoodProducts.smaller_factorization; LightProfinite.proj_comp_transitionMap; LightProfinite.transitionMapLE; LightProfinite.proj_comp_transitionMapLE'; Profinite.IndexFunctor.map_comp_π_app; LightProfinite.proj_comp_transitionMapLE",
    "date": "2026-10-17",
    "verdict": "no match for the stated proper/open tower compatibility; hits concern other functors or structural scheme maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of compact support direct images in compatible compactification towers commutes with proper refinement maps",
+   "results": "CompactlySupportedContinuousMap.comp_assoc; TopologicalSpace.Compacts.map_comp; CompactlySupportedContinuousMap.comp; OnePoint.map_comp; CompactlySupportedContinuousMap.coe_comp_to_continuous_fun; CompactlySupportedContinuousMap.compLeft; TopologicalSpace.PositiveCompacts.map_comp; TopologicalSpace.NonemptyCompacts.map_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern topological compactifications, scheme structure modules or ordinary sheaf pushforwards, not normalized derived etale proper/open tower refinements"
+  },
+  {
+   "tool": "grep",
+   "query": "properOpen|lowerShriek|compactification.*[Cc]omp|[Tt]ower.*[Rr]efinement",
+   "results": "Mathlib/Topology/Compactification/OnePoint/Basic.lean; Mathlib/Topology/Compactification/OnePoint/Basic.lean; Mathlib/Topology/Compactification/OnePoint/Basic.lean; Mathlib/Topology/Compactification/OnePoint/Basic.lean; Mathlib/Topology/Category/CompHaus/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern topological compactifications, scheme structure modules or ordinary sheaf pushforwards, not normalized derived etale proper/open tower refinements"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper open interchange and refinement compatibility for composition of derived etale compact support pushforwards",
+   "results": "CategoryTheory.ExponentiableMorphism.comp_pushforward; CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app; CategoryTheory.Functor.sheafPushforwardContinuousComp; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE; CategoryTheory.Functor.sheafPushforwardContinuousComp'",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern topological compactifications, scheme structure modules or ordinary sheaf pushforwards, not normalized derived etale proper/open tower refinements"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.Functor.whiskerLeft",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern topological compactifications, scheme structure modules or ordinary sheaf pushforwards, not normalized derived etale proper/open tower refinements"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The proper open interchange isomorphism for derived etale sheaves satisfies the horizontal and vertical pasting laws for noncartesian compactification refinement squares",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map; CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι; AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map_assoc; AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app'; AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app; AlgebraicGeometry.PresheafedSpace.GlueData.f_invApp_f_app",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern topological compactifications, scheme structure modules or ordinary sheaf pushforwards, not normalized derived etale proper/open tower refinements"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-cbc-finite-torsion",
@@ -76,5 +181,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-tower-composition-refinement",
+  "worker": "stage1",
+  "summary": "Preserved the statement and supplied a five-step proof: coherent notation, horizontal factorization of alpha_v, two vertical decompositions of the same rectangle, component naturality for alpha_w, and the explicit final substitution. The general noncartesian interchange theorem already supplies every non-elementary input; no new nodes. Read Stacks 0F7B/C/D and all cited statements; no exact source-project attachment found.",
+  "blueprint": "thm-cbc-finite-torsion current main-20261015 proof, refinement paragraph and final pasting assertion: independence of the compatible-tower composition map under proper refinements.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exactness of open extension is a generic sheaf tool used only to pass the existing open compositors degreewise to D^+; this unit does not replace that exactness theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-extension-by-zero-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-16bd14b84",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-16bd14b84 (reviewer sub-agent of L); spot-checked: I read the whole item, unchanged statement plus a 5-step proof, with no new nodes. I checked it against the full statements of all 6 cited nodes, Stacks more-etale 0F7B/0F7C/0F7D (l.2460ff, 2617ff, 2676ff; 0F7B needs only a commutative square, not a cartesian one), the main-20261015 thm-cbc-finite-torsion proof (l.33-43) and the citer's step 11. Step 2: the horizontal formula of lem-cbc-proper-open-interchange-coherence applied to squares (c1,c2,id,w) and R=(b1,b2,w,v), with the refinement normalization, gives alpha_v=(delta c1!)(b2! alpha_w); the types check. Step 3: the two vertical decompositions (R over tower 2, and tower 1 over (i1,i2,id,u)) have the same outer square because p_{Y,2}w=p_{Y,1} and p2 v=u p1. All verticals are proper and all horizontals open. Step 4 is the naturality of gamma_2 at alpha_w. Step 5: I recomputed each line; the compositor identifications follow from the direct-image coherence node, with q2 p2 v=q2 u p1=q1 p1. Coefficients are ordinary small-etale D^+ with Lambda finite (hence torsion), never identified with the pro-etale or adic categories. Edge cases checked: Lambda=0, X empty, identity refinement, and the noncartesian fold example. The tool use of lem-weil-pbc-extension-by-zero-exact is accepted as a generic exactness tool. There is no SGA citation and no cycle. lem-sp-compactification-refinement-coherence and the unbounded and pro-etale composition nodes are not duplicates: they are abstract, carry extra hypotheses, or use other categories. Minor, not changed: proper/open-immersion definitions reach the statement only through the compatible-tower node. No fixes."
  }
 }

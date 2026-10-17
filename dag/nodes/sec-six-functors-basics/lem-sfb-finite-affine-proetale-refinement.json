@@ -7,7 +7,7 @@
   "date": "2026-10-17",
   "group": "Q123"
  },
- "status": "unsplit",
+ "status": "split",
  "id": "lem-sfb-finite-affine-proetale-refinement",
  "kind": "statement",
  "title": "Finite affine refinement of a pro-etale cover",
@@ -25,9 +25,82 @@
   "sk-def-pe-morphisms",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $\\alpha$, regard the affine open $U_\\alpha\\to S$ as an object of the small pro-étale site. Applying the covering clause of [sk-def-pe-site] to the given covering family $\\{W_i\\to S\\}$ and the affine open $U_\\alpha$ gives finitely many indices $i(\\alpha,j)$ and affine opens $V_{\\alpha j}\\subset W_{i(\\alpha,j)}\\times_S U_\\alpha$ whose images cover $U_\\alpha$. This is exactly the asserted local finite refinement.",
+   "uses": [
+    "sk-def-pe-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "Step (2), Local models: finite affine refinement needed"
+   }
+  },
+  {
+   "text": "Each $W_i\\to S$ is weakly étale by the object clause of [sk-def-pe-site]. Base change along $U_\\alpha\\to S$ preserves weak étaleness by [sk-lem-pe-weakly-etale-stability], so $W_i\\times_S U_\\alpha\\to U_\\alpha$ is weakly étale. Restricting its source to the affine open $V_{\\alpha j}$ remains weakly étale by the locality-on-the-source clause of that node (apply it to the open cover $\\{V_{\\alpha j},W_i\\times_SU_\\alpha\\}$). The open immersion $U_\\alpha\\to S$ is weakly étale by the same clause, as the restriction of $\\mathrm{id}_S$ (flat with isomorphic diagonal, hence weakly étale by [sk-def-pe-morphisms]) to the open $U_\\alpha$; so composing with $U_\\alpha\\to S$ is weakly étale by the composition clause. The fibre-product universal property [def-pc-fibre-product] identifies this composite with the displayed map $V_{\\alpha j}\\to S$.",
+   "uses": [
+    "sk-def-pe-site",
+    "sk-lem-pe-weakly-etale-stability",
+    "def-pc-fibre-product",
+    "sk-def-pe-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "Step (2), verification that the finite family is a pro-etale cover"
+   }
+  },
+  {
+   "text": "Let $W\\subset S$ be any affine open. Since $S$ is quasi-separated, each intersection $W\\cap U_\\alpha$ is quasi-compact by [lem-weil-pbc-quasi-separated-affine-cover-criterion](1). The finite-affine-cover statement [lem-weil-pbc-qcqs-finite-affine-open-cover] gives finitely many affine opens $A_{\\alpha k}$ covering each $W\\cap U_\\alpha$. As the $U_\\alpha$ cover $S$, the finitely many $A_{\\alpha k}$ cover $W$.",
+   "uses": [
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "Step (2), finite affine refinement over an arbitrary affine open of S"
+   }
+  },
+  {
+   "text": "For each $A_{\\alpha k}$ and each selected $V_{\\alpha j}$, form $V_{\\alpha j}\\times_{U_\\alpha}A_{\\alpha k}$. The fibre product of affine schemes over the affine scheme $U_\\alpha$ is affine by [lem-weil-pbc-fibre-product-affine-spectra]. Since $A_{\\alpha k}\\subset W\\cap U_\\alpha$ and $U_\\alpha\\to S$ is an open immersion, the universal property [def-pc-fibre-product] identifies $V_{\\alpha j}\\times_{U_\\alpha}A_{\\alpha k}$ with $V_{\\alpha j}\\times_S A_{\\alpha k}$, which is the open subscheme of $V_{\\alpha j}\\times_S W$ over the open $A_{\\alpha k}\\subset W$ (base change of the open immersion $A_{\\alpha k}\\to W$). Its image in $A_{\\alpha k}$ is the intersection of the image of $V_{\\alpha j}$ with $A_{\\alpha k}$; hence, as $j$ varies, these finitely many affine opens have images covering $A_{\\alpha k}$, because the images of the $V_{\\alpha j}$ cover $U_\\alpha\\supset A_{\\alpha k}$. Taking the finite union over $\\alpha,k,j$ gives finitely many members $V_{\\alpha j}$ of the new family and affine opens $V_{\\alpha j}\\times_SA_{\\alpha k}\\subset V_{\\alpha j}\\times_SW$ whose images cover $W$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "Step (2), finite affine refinement over every affine open of S"
+   }
+  },
+  {
+   "text": "The covering condition in [sk-def-pe-site], applied to the family $\\{V_{\\alpha j}\\to S\\}$ (so with the fibre products $V_{\\alpha j}\\times_SW$), is precisely the requirement verified in Step 4 for every affine open $W\\subset S$, while Step 2 verifies weak étaleness of every member. Therefore the finite family $\\{V_{\\alpha j}\\to S\\}$ is a covering family in the small pro-étale site. Its index set is finite because both the affine cover and each local refinement are finite.",
+   "uses": [
+    "sk-def-pe-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "Step (2), verification that the finite family is a pro-etale cover"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "sk-def-pe-morphisms",
+  "sk-def-pe-site",
+  "sk-lem-pe-weakly-etale-stability"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+  "place": "Step (2), Local models: finite affine refinement and verification that the finite family is a pro-etale cover"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,10 +149,25 @@
  "blueprint": {
   "from": {
    "node": "det-prop-scalar-six-ctf",
-   "place": "(2) Local models: a locally perfect complex Q lies in Dctf(S); finite refinement needed to obtain uniform cohomological and Tor bounds",
+   "place": "Step (2), Local models: finite affine refinement and verification that the finite family is a pro-etale cover",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-finite-affine-proetale-refinement",
+  "worker": "stage1",
+  "summary": "Split the finite affine refinement argument into five steps. The given pro-etale covering condition supplies finite affine refinements over each affine U_alpha; weak etale stability gives the maps to S; quasi-separated affine intersections and finite affine covers reduce an arbitrary affine W to finitely many affine pieces; affine fibre products then provide the required finite refinement over W. No new nodes were needed: all non-elementary inputs are existing DAG leaves or the existing weak-etale stability statement.",
+  "blueprint": "All five steps realize Step (2) of det-prop-scalar-six-ctf.proof.md: the local finite refinement paragraph and the subsequent verification that the finite family is a pro-etale cover."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-83fafe5a2",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-83fafe5a2 (reviewer sub-agent of L); spot-checked: Read the item, the parent det-prop-scalar-six-ctf (statement and the step citing this item), the unit sk-prop-scalar-six, the source main-20261015 det-prop-scalar-six-ctf.proof.md step (2) 'Local models', and every cited statement (sk-def-pe-site, sk-lem-pe-weakly-etale-stability, sk-def-pe-morphisms, def-pc-fibre-product, def-pc-scheme, def-weil-quasi-separated-morphism, lem-weil-pbc-quasi-separated-affine-cover-criterion(1), lem-weil-pbc-qcqs-finite-affine-open-cover, lem-weil-pbc-fibre-product-affine-spectra). The statement is true and unchanged; Noetherian already gives quasi-separated, so that hypothesis is redundant but harmless. No new nodes. Edge cases checked: empty S, the trivial cover, repeated indices, W inside U_alpha, empty pieces. Route: sk-lem-pe-weakly-etale-stability is in the unit's transitive route, so no tool use is needed. Duplicate search over dag/nodes found nothing. Two faults, both fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-affine-proetale-refinement.json. E4 (wrong object): step 4 put V x_{U_alpha} A inside W_i x_S W, but the covering condition for the new family {V_alpha_j -> S} needs opens of V_alpha_j x_S W; rewritten to V x_S A_alpha_k as an open of V x_S W, and step 5 made explicit. Step 2 never justified that U_alpha -> S is weakly etale; it now does so as the restriction of id_S to an open (local-on-source clause), with sk-def-pe-morphisms added to uses and proof_deps. Review in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
