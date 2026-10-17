@@ -384,7 +384,7 @@ theorem finite_structure_product_exists_core
     infer_instance
   have hvd := compatible_family_change (i := i) j hj d c G (G ⊗ G) hG hGG v hv
   obtain ⟨mu, hmu, _⟩ :=
-    (grothendieck_existence A I f i hi hp d (fun _ ↦ rfl)).1
+    (grothendieck_existence_fullyFaithful A I f i hi hp d)
       G (G ⊗ G) hG hGG hproper hpGG v hvd
   exact ⟨mu, hformula mu hmu⟩
 

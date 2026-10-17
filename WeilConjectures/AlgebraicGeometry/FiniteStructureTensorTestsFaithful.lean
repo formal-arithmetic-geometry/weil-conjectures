@@ -193,7 +193,7 @@ theorem finite_structure_tensor_tests_faithful
     (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))
   let c := fun n ↦ (Classical.choice (nonempty_tensorPullbackComp (i n) (j (n + 1)))).symm
     ≪≫ eqToIso (congrArg tensorPullback (hi n))
-  have hfull := (grothendieck_existence A I f i hi hp c (fun _ ↦ rfl)).1
+  have hfull := (grothendieck_existence_fullyFaithful A I f i hi hp c)
   have faithful (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)
       (hpF : HasSupportProperOver f F) (v w : F ⟶ G)
       (h : ∀ n, (tensorPullback (j n)).map v = (tensorPullback (j n)).map w) : v = w := by
