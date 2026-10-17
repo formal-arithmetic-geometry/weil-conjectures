@@ -10,6 +10,9 @@ public import WeilConjectures.WeilSheaf.StalkCharpoly
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.LisseFiltration
 public import WeilConjectures.AlgebraicGeometry.Regular
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseIrreducible
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyIrreducible
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExists
 
 /-!
 # The Frobenius twist of subsheaves of a Weil sheaf
@@ -68,7 +71,7 @@ theorem frobeniusTwist_mk {A : AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).ge
     (u : A ⟶ F.obj.carrier) [Mono u] :
     F.frobeniusTwist (Subobject.mk u) =
       Subobject.mk ((frobeniusPullback k₀ l X).map u ≫ F.obj.str.hom) := by
-  sorry
+  exact Subobject.map_mk ((frobeniusPullback k₀ l X).map u) F.obj.str.hom
 
 /-- The `n`-th iterate of the Frobenius twist of the subobject given by `u : A ⟶ F̄` is given by
 the monomorphism `φ_n ∘ (Frⁿ)^* u`, for the iterated Weil structure `φ_n`
@@ -79,20 +82,45 @@ theorem frobeniusTwist_iterate_mk {A : AdicSheaf l (X ↘ Spec (CommRingCat.of k
       Subobject.mk
         ((((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).inv)_*ᵃ[l].map u ≫
           (F.frobeniusPowIso n).hom) := by
-  sorry
+  induction n with
+  | zero =>
+    refine (Subobject.mk_eq_mk_of_comm _ u
+      ((adicLowerStarCongr l (by rw [pow_zero]; rfl)).app A ≪≫ (adicLowerStarId l _).app A)
+      ?_).symm
+    simp [frobeniusPowIso]
+  | succ n ih =>
+    rw [Function.iterate_succ_apply', ih, frobeniusTwist_mk]
+    refine Subobject.mk_eq_mk_of_comm _ _ ((adicLowerStarComp l
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).inv
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).app A ≪≫
+      (adicLowerStarCongr l (by rw [pow_succ]; rfl)).symm.app A) ?_
+    simp [frobeniusPowIso]
+
+/-- The underlying sheaf of the `n`-th iterate of the Frobenius twist of `P` is the `n`-th
+Frobenius pullback `(Frⁿ)^* P = (Fr⁻ⁿ)_* P` of the underlying sheaf of `P`. -/
+noncomputable def underlyingFrobeniusTwistIterateIso (P : Subobject F.obj.carrier) (n : ℕ) :
+    Subobject.underlying.obj ((⇑F.frobeniusTwist)^[n] P) ≅
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).inv)_*ᵃ[l].obj
+        (Subobject.underlying.obj P) :=
+  Subobject.isoOfEq _ _ ((congrArg (⇑F.frobeniusTwist)^[n] (Subobject.mk_arrow P)).symm.trans
+    (F.frobeniusTwist_iterate_mk P.arrow n)) ≪≫ Subobject.underlyingIso _
 
 /-- The Frobenius twist of a subsheaf which is an irreducible local system is an irreducible
 local system: it is isomorphic to the pullback along the automorphism `Fr`. -/
 theorem isIrreducibleAdicLocalSystem_frobeniusTwist_iterate {P : Subobject F.obj.carrier}
     (hP : IsIrreducibleAdicLocalSystem (Subobject.underlying.obj P)) (n : ℕ) :
-    IsIrreducibleAdicLocalSystem (Subobject.underlying.obj ((⇑F.frobeniusTwist)^[n] P)) := by
-  sorry
+    IsIrreducibleAdicLocalSystem (Subobject.underlying.obj ((⇑F.frobeniusTwist)^[n] P)) :=
+  (hP.adicLowerStar_of_iso
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).symm).of_iso
+      (F.underlyingFrobeniusTwistIterateIso P n).symm
 
 /-- The Frobenius twist of a lisse subsheaf is lisse. -/
 theorem isAdicLisseSheaf_frobeniusTwist_iterate {P : Subobject F.obj.carrier}
     (hP : IsAdicLisseSheaf (Subobject.underlying.obj P)) (n : ℕ) :
-    IsAdicLisseSheaf (Subobject.underlying.obj ((⇑F.frobeniusTwist)^[n] P)) := by
-  sorry
+    IsAdicLisseSheaf (Subobject.underlying.obj ((⇑F.frobeniusTwist)^[n] P)) :=
+  (hP.adicLowerStar_of_iso
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).symm).of_iso
+      (F.underlyingFrobeniusTwistIterateIso P n).symm
 
 end Twist
 
@@ -123,7 +151,7 @@ noncomputable def stableIsoAlgebraι {N : ℕ} (P : Subobject F.obj.carrier)
     (hP : (⇑F.frobeniusTwist)^[N] P = P) :
     F.stableIsoAlgebra P hP ⟶ F.powIsoAlgebra N :=
   ObjectProperty.homMk ⟨P.arrow, by
-    sorry⟩
+    simp [stableIsoAlgebra, powIsoAlgebra]⟩
 
 @[simp]
 lemma stableIsoAlgebraι_hom_f {N : ℕ} (P : Subobject F.obj.carrier)

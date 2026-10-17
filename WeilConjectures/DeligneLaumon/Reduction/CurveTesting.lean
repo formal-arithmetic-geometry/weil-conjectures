@@ -102,11 +102,12 @@ theorem Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperSt
   choose U hU hUirr using hU
   -- a pointed Galois cover `(T, a)` whose stabilizer is contained in all the `U j`
   obtain ⟨A, -, hA⟩ :=
-    (nhds_one_has_basis_stabilizers (fiber s₀)).mem_iff.1 (Filter.iInter_mem.2 hU)
+    (nhds_one_has_basis_stabilizers (Scheme.FiniteEtale.fiber s₀)).mem_iff.1
+      (Filter.iInter_mem.2 hU)
   have := A.isGalois
   have : ConnectedSpace A.obj.obj.left := connectedSpace_of_isConnected A.obj
   have : IsFinite A.obj.obj.hom := A.obj.property
-  have : Etale A.obj.obj.hom := A.obj.obj.prop
+  have : AlgebraicGeometry.Etale A.obj.obj.hom := A.obj.obj.prop
   -- Bertini
   obtain ⟨C, i, hi, hCaff, hCsm, hCconn, hSC, hTC, m, hm, φ, hφ⟩ :=
     Scheme.Hom.exists_isClosedImmersion_connectedSpace_pullback f (d := d) (by omega)
@@ -117,15 +118,16 @@ theorem Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperSt
   have := IsRegular.of_smooth (i ≫ f.geometricFiberToAlgebraicClosure)
   have := LocallyOfFiniteType.isLocallyNoetherian (i ≫ f.geometricFiberToAlgebraicClosure)
   obtain ⟨M', hM', hcompat⟩ := hpull C i
-  have : ConnectedSpace ((pullback i).obj A.obj).obj.left := hTC
-  have : IsConnected ((pullback i).obj A.obj) := isConnected_of_connectedSpace _
+  have : ConnectedSpace ((Scheme.FiniteEtale.pullback i).obj A.obj).obj.left := hTC
+  have : IsConnected ((Scheme.FiniteEtale.pullback i).obj A.obj) :=
+    isConnected_of_connectedSpace _
   -- the image of `π₁(C, c) → π₁(X, i c)` meets every coset of the stabilizer of `a`
-  have hΓ (g : Aut (fiber (c ≫ i))) :
+  have hΓ (g : Aut (Scheme.FiniteEtale.fiber (c ≫ i))) :
       ∃ γ ∈ (pullbackPathHom i c).range, g⁻¹ * γ ∈ ⋂ j, U j := by
     obtain ⟨h, hh⟩ := exists_pullbackPathHom_apply_eq i c A.obj A.pt (g • A.pt)
     refine ⟨_, ⟨h, rfl⟩, hA ?_⟩
-    rw [MulAction.mem_stabilizer_iff, mul_smul, mulAction_def (pullbackPathHom i c h), hh,
-      inv_smul_smul]
+    rw [SetLike.mem_coe, MulAction.mem_stabilizer_iff, mul_smul]
+    exact (congrArg (g⁻¹ • ·) hh).trans (inv_smul_smul g _)
   -- the monodromy of `i^* Fⱼ` at `c` is that of `Fⱼ` at `i c`, restricted to `π₁(C, c)`
   refine ((hM' c).isIrreducibleAdicLocalSystem_iff ((G j).upperStar l i)).2 ?_
   refine Representation.IsIrreducible.of_comp_range (pullbackPathHom i c)
