@@ -166,6 +166,7 @@ public import WeilConjectures.Algebra.LimitFinitePresentation
 public import WeilConjectures.Algebra.LimitFinitePresentation.Colimits
 public import WeilConjectures.Algebra.LimitFinitePresentation.Core
 public import WeilConjectures.Algebra.Module.AdicCompletionStableRanges
+public import WeilConjectures.Algebra.Module.AdicPairingLimit
 public import WeilConjectures.Algebra.Module.InverseLimitFinite
 public import WeilConjectures.Algebra.Module.QuotientPrimaryComponentNoTorsion
 public import WeilConjectures.Algebra.Module.RationalPerfectPairing
@@ -2202,6 +2203,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompExact
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompExactAcyclic
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
@@ -4246,6 +4248,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexInternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexTensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilDual
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
+public import WeilConjectures.SixFunctors.Etale.ForgetModuleCohomology
 public import WeilConjectures.SixFunctors.Etale.Gabber
 public import WeilConjectures.SixFunctors.Etale.GeometricFrobenius
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.BaseChange
