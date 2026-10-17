@@ -216,7 +216,9 @@ integral, this is the normalization of `X` in the function field `k(P)`, a finit
 
 The hypothesis `QuasiCompact kV` (needed to form the normalization) is automatic: `X` is
 locally Noetherian (`LocallyOfFiniteType.isLocallyNoetherian q`), and open immersions into
-locally Noetherian schemes are quasi-compact. -/
+locally Noetherian schemes are quasi-compact. The same statement for the normalization
+`X^{k(P)}` of `X` in the function field of `P` (`def-fin-normalization-extension`) is
+`AlgebraicGeometry.Scheme.normalizationIn_extends_cover`. -/
 theorem Scheme.normalization_comp_of_finite_etale {k : Type u} [Field k] {P V X : Scheme.{u}}
     (q : X ⟶ Spec (.of k)) [LocallyOfFiniteType q] [IsIntegral X]
     (kV : V ⟶ X) [IsOpenImmersion kV] [QuasiCompact kV] [Nonempty V]

@@ -60,7 +60,10 @@ The subsheaf `𝒢_Z M = ker (M ⟶ j_* j^* M)` of sections of `M` supported on 
 complement `Z` of the open immersion `j : U ⟶ X`: the kernel of the unit of `j^* ⊣ j_*`.
 
 The blueprint node is stated on the pro-étale site; it is formalised here on the small étale
-site only. -/
+site, the site of the purity chapter (`def-pur-conventions`); the pro-étale forms are
+`AlgebraicGeometry.ProEtale.sectionsWithSupport`, `AlgebraicGeometry.ProEtale.closedUpperShriek`
+(with `AlgebraicGeometry.ProEtale.closedUpperShriekCompLowerStarIso`) and
+`AlgebraicGeometry.ProEtale.IsFlasqueFor`. -/
 @[simps]
 noncomputable def supportedSections :
     Sheaf X.smallEtaleTopology A ⥤ Sheaf X.smallEtaleTopology A where
@@ -222,7 +225,8 @@ lemma lowerStarClosedUpperShriekAdjunction_counit_app
 
 A sheaf `I` on `X` is *flasque for the pair* `(Z, U)` if the restriction `I ⟶ j_* j^* I` to the
 open part is an epimorphism; then `0 ⟶ 𝒢_Z I ⟶ I ⟶ j_* j^* I ⟶ 0` is exact. As for
-`AlgebraicGeometry.Etale.supportedSections`, this is the étale (not pro-étale) version. -/
+`AlgebraicGeometry.Etale.supportedSections`, this is the étale version; the pro-étale version is
+`AlgebraicGeometry.ProEtale.IsFlasqueFor`. -/
 def IsFlasqueFor (I : Sheaf X.smallEtaleTopology A) : Prop :=
   Epi ((upperStarLowerStarAdjunction A j).unit.app I)
 

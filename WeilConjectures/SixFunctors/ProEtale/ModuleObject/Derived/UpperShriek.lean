@@ -146,7 +146,13 @@ variable [(boundedConstructibleLowerStar Λ ℓ (compactificationOverField f).ov
 
 /-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible
 complexes: the functor `boundedConstructibleUpperShriekOfCompactification` attached to the chosen
-compactification `compactificationOverField f`. -/
+compactification `compactificationOverField f`.
+
+For the `ℓ`-adic coefficients `Λ ∈ {𝒪_E, E, ℚ̄_ℓ}` this is the functor `Rf^!` of blueprint
+`def-weil-exceptional-inverse-image`, which the blueprint characterizes by the adjunction
+`Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)` on bounded constructible complexes
+(`ProEtale.CondensedRing.boundedConstructibleUpperShriekAdjunction`); the blueprint builds it
+from the finite stages by derived inverse limits, a construction not formalised here. -/
 noncomputable def boundedConstructibleUpperShriek : Dᵇc(Y.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ :=
   boundedConstructibleUpperShriekOfCompactification Λ ℓ (compactificationOverField f)
 

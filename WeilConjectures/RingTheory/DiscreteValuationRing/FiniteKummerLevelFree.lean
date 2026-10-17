@@ -5,202 +5,185 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Algebra.ZMod
+public import Mathlib.FieldTheory.Finiteness
+public import Mathlib.LinearAlgebra.Dimension.Constructions
 public import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 public import Mathlib.NumberTheory.Padics.RingHoms
-public import Mathlib.NumberTheory.RamificationInertia.Ramification
-public import Mathlib.RingTheory.RamificationInertia.Basic
-public import Mathlib.RingTheory.Regular.Free
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Mathlib.RingTheory.Ideal.Norm.AbsNorm
 public import WeilConjectures.RingTheory.DiscreteValuationRing.FiniteKummerLevel
 
 /-!
-# `𝒪_E / ϖ^n` is free over `ℤ / ℓ^N`
+# `𝒪_E / ϖ^n` is free over `ℤ/ℓ^N`
 
 Let `R` be a discrete valuation ring which is a finite `ℤ_ℓ`-algebra (for instance the valuation
-ring `𝒪_E` of a finite extension `E` of `ℚ_ℓ`), with uniformizer `ϖ`, and let `ℓ = (unit) · ϖ^e`
-with `e ≥ 1`. We show:
+ring `𝒪_E` of a finite extension `E` of `ℚ_ℓ`), with uniformizer `ϖ` and ramification index `e`,
+`ℓ = (unit) · ϖ^e`, and let `n = e N`. Then `A = R / ϖ^n` is a free `ℤ/ℓ^N`-module of rank
+`[R : ℤ_ℓ] = e f`, `f` being the residue degree `[R/ϖ : 𝔽_ℓ]`
+(`IsDiscreteValuationRing.free_quotient_span_pow`): `A ≅ (ℤ/ℓ^N)^{ef}`. This is the freeness
+clause of blueprint `lem-pur-finite-kummer-level`.
 
-* `R` is free over `ℤ_ℓ` of rank `e f`, where `e` is the ramification index and `f` the inertia
-  degree of `R` over `ℤ_ℓ` (`IsDiscreteValuationRing.finrank_padicInt_eq`);
-* for every `N ≥ 1`, `A = R / ϖ^{e N} = R / ℓ^N` is free of rank `e f` over `ℤ / ℓ^N`
-  (`IsDiscreteValuationRing.free_zmod_quotient_span_pow`).
-
-This is the freeness clause of blueprint `lem-pur-finite-kummer-level`.
+Indeed `R` is a free `ℤ_ℓ`-module of finite rank (finitely generated and torsion free over a
+principal ideal domain), `A = R / ℓ^N R ≅ ℤ/ℓ^N ⊗_{ℤ_ℓ} R` is free of the same rank over `ℤ/ℓ^N`,
+and counting elements, `ℓ^{N · rank} = #A = #(R/ϖ)^{eN} = ℓ^{f e N}`.
 -/
 
 @[expose] public section
 
-open IsLocalRing
-open scoped Pointwise
+open TensorProduct
 
 namespace IsDiscreteValuationRing
 
-variable {ℓ : ℕ} {R : Type*} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] {ϖ : R}
-  (hϖ : Irreducible ϖ) {e : ℕ} (he : 0 < e) (hℓe : Associated (ℓ : R) (ϖ ^ e))
+variable {R : Type*} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] {ϖ : R}
+  (hϖ : Irreducible ϖ) {ℓ : ℕ} [hℓ : Fact ℓ.Prime] {e : ℕ} (he : 0 < e)
+  (hℓe : Associated (ℓ : R) (ϖ ^ e)) [Algebra ℤ_[ℓ] R] (N : ℕ)
 
 omit [IsDiscreteValuationRing R] in
 include hϖ hℓe in
+/-- `ℓ` is nonzero in `R`. -/
 lemma natCast_ne_zero_of_associated : (ℓ : R) ≠ 0 := by
   obtain ⟨v, hv⟩ := hℓe
   intro h
   rw [h, zero_mul] at hv
-  exact pow_ne_zero _ hϖ.ne_zero hv.symm
+  exact pow_ne_zero e hϖ.ne_zero hv.symm
+
+omit [IsDiscreteValuationRing R] in
+include hϖ hℓe in
+/-- `R` is a torsion free `ℤ_ℓ`-module: a nonzero `a ∈ ℤ_ℓ` is a unit times a power of `ℓ`, and
+`ℓ` is nonzero in the domain `R`. -/
+lemma injective_algebraMap_padicInt : Function.Injective (algebraMap ℤ_[ℓ] R) := by
+  refine (injective_iff_map_eq_zero _).2 fun a ha ↦ ?_
+  by_contra ha0
+  obtain ⟨u, k, rfl⟩ : ∃ (u : ℤ_[ℓ]ˣ) (k : ℕ), u * (ℓ : ℤ_[ℓ]) ^ k = a := by
+    exact ⟨PadicInt.unitCoeff ha0, a.valuation, (PadicInt.unitCoeff_spec ha0).symm⟩
+  rw [map_mul, map_pow, map_natCast] at ha
+  exact pow_ne_zero k (natCast_ne_zero_of_associated hϖ hℓe)
+    ((u.isUnit.map (algebraMap ℤ_[ℓ] R)).mul_right_eq_zero.1 ha)
+
+/-- `ℤ/ℓ^N` as a `ℤ_ℓ`-algebra, through `PadicInt.toZModPow`. -/
+noncomputable local instance algebraPadicIntZModPow : Algebra ℤ_[ℓ] (ZMod (ℓ ^ N)) :=
+  (PadicInt.toZModPow N).toAlgebra
+
+/-- `ℤ/ℓ^N ≅ ℤ_ℓ / ℓ^N` as `ℤ_ℓ`-modules. -/
+noncomputable def zmodPowLinearEquiv :
+    (ℤ_[ℓ] ⧸ Ideal.span {(ℓ : ℤ_[ℓ]) ^ N}) ≃ₗ[ℤ_[ℓ]] ZMod (ℓ ^ N) :=
+  ((Ideal.quotientEquivAlgOfEq ℤ_[ℓ] (PadicInt.ker_toZModPow N).symm).toLinearEquiv ≪≫ₗ
+    (Ideal.quotientKerAlgEquivOfSurjective (f := Algebra.ofId ℤ_[ℓ] (ZMod (ℓ ^ N)))
+      (ZMod.ringHom_surjective _)).toLinearEquiv)
+
+include hℓe in
+omit [IsDiscreteValuationRing R] in
+/-- `ℓ^N R`, as a `ℤ_ℓ`-submodule, is `ϖ^{eN} R`. -/
+lemma span_smul_top_eq_restrictScalars :
+    Ideal.span {(ℓ : ℤ_[ℓ]) ^ N} • (⊤ : Submodule ℤ_[ℓ] R) =
+      (Ideal.span {ϖ ^ (e * N)}).restrictScalars ℤ_[ℓ] := by
+  rw [Submodule.ideal_span_singleton_smul, span_pow_mul_eq_span_natCast_pow hℓe]
+  ext x
+  simp only [Submodule.mem_smul_pointwise_iff_exists, Submodule.mem_top, true_and,
+    Submodule.restrictScalars_mem, Ideal.mem_span_singleton']
+  constructor
+  · rintro ⟨y, rfl⟩
+    exact ⟨y, by rw [Algebra.smul_def, map_pow, map_natCast, mul_comm]⟩
+  · rintro ⟨y, rfl⟩
+    exact ⟨y, by rw [Algebra.smul_def, map_pow, map_natCast, mul_comm]⟩
+
+include hℓe in
+omit [IsDiscreteValuationRing R] in
+/-- `R / ϖ^{eN} ≅ ℤ/ℓ^N ⊗_{ℤ_ℓ} R` as `ℤ_ℓ`-modules. -/
+noncomputable def quotientLinearEquivTensor :
+    (R ⧸ Ideal.span {ϖ ^ (e * N)}) ≃ₗ[ℤ_[ℓ]] ZMod (ℓ ^ N) ⊗[ℤ_[ℓ]] R :=
+  (Submodule.Quotient.restrictScalarsEquiv ℤ_[ℓ] (Ideal.span {ϖ ^ (e * N)})).symm ≪≫ₗ
+    Submodule.quotEquivOfEq _ _ (span_smul_top_eq_restrictScalars hℓe N).symm ≪≫ₗ
+    (quotTensorEquivQuotSMul R (Ideal.span {(ℓ : ℤ_[ℓ]) ^ N})).symm ≪≫ₗ
+    TensorProduct.congr (zmodPowLinearEquiv N) (LinearEquiv.refl _ _)
+
+variable [Module.Finite ℤ_[ℓ] R]
 
 include hϖ he hℓe in
-lemma natCast_mem_maximalIdeal_of_associated : (ℓ : R) ∈ maximalIdeal R := by
+/-- The residue field `R/ϖ` has characteristic `ℓ`. -/
+lemma charP_quotient_span : CharP (R ⧸ Ideal.span {ϖ}) ℓ := by
+  have : (Ideal.span {ϖ}).IsMaximal :=
+    PrincipalIdealRing.isMaximal_of_irreducible hϖ
+  have : Nontrivial (R ⧸ Ideal.span {ϖ}) := Ideal.Quotient.nontrivial_iff.2 this.ne_top
+  refine (CharP.charP_iff_prime_eq_zero hℓ.out).2 ?_
+  rw [← map_natCast (Ideal.Quotient.mk _), Ideal.Quotient.eq_zero_iff_mem,
+    Ideal.mem_span_singleton]
   obtain ⟨v, hv⟩ := hℓe
-  have hℓv : (ℓ : R) = ϖ ^ e * ↑v⁻¹ := by rw [← hv, mul_assoc, Units.mul_inv, mul_one]
-  rw [hℓv]
-  exact Ideal.mul_mem_right _ _ (Ideal.pow_mem_of_mem _ hϖ.not_isUnit e he)
-
-variable [hℓ : Fact ℓ.Prime] [Algebra ℤ_[ℓ] R]
-
-include hϖ hℓe in
-/-- The structure map `ℤ_ℓ → R` is injective. -/
-lemma algebraMap_padicInt_injective : Function.Injective (algebraMap ℤ_[ℓ] R) := by
-  rw [injective_iff_map_eq_zero]
-  intro x hx
-  by_contra h0
-  obtain ⟨n, u, rfl⟩ := eq_unit_mul_pow_irreducible h0 PadicInt.irreducible_p
-  rw [map_mul, map_pow, map_natCast] at hx
-  exact mul_ne_zero (u.isUnit.map _).ne_zero
-    (pow_ne_zero _ (natCast_ne_zero_of_associated hϖ hℓe)) hx
-
-include hϖ hℓe in
-/-- A discrete valuation ring which is a finite `ℤ_ℓ`-algebra (with `ℓ ≠ 0` in it) is free. -/
-lemma free_padicInt [Module.Finite ℤ_[ℓ] R] : Module.Free ℤ_[ℓ] R := by
-  have : Module.IsTorsionFree ℤ_[ℓ] R :=
-    Module.isTorsionFree_iff_algebraMap_injective.2 (algebraMap_padicInt_injective hϖ hℓe)
-  infer_instance
-
-include hϖ he hℓe in
-lemma liesOver_maximalIdeal_padicInt : (maximalIdeal R).LiesOver (maximalIdeal ℤ_[ℓ]) := by
-  refine ⟨(maximalIdeal.isMaximal ℤ_[ℓ]).eq_of_le
-    (Ideal.comap_ne_top _ (maximalIdeal.isMaximal R).ne_top) ?_⟩
-  rw [PadicInt.maximalIdeal_eq_span_p, Ideal.span_le, Set.singleton_subset_iff]
-  change (ℓ : ℤ_[ℓ]) ∈ Ideal.comap (algebraMap ℤ_[ℓ] R) (maximalIdeal R)
-  rw [Ideal.mem_comap, map_natCast]
-  exact natCast_mem_maximalIdeal_of_associated hϖ he hℓe
-
-include hϖ hℓe in
-/-- The only prime of `R` over the maximal ideal of `ℤ_ℓ` is the maximal ideal of `R`. -/
-lemma eq_maximalIdeal_of_mem_primesOver {q : Ideal R}
-    (hq : q ∈ (maximalIdeal ℤ_[ℓ]).primesOver R) : q = maximalIdeal R := by
-  obtain ⟨hqp, hqo⟩ := hq
-  have hmem : (ℓ : ℤ_[ℓ]) ∈ q.under ℤ_[ℓ] := by
-    rw [← hqo.over, PadicInt.maximalIdeal_eq_span_p]
-    exact Ideal.subset_span rfl
-  rw [Ideal.under_def, Ideal.mem_comap, map_natCast] at hmem
-  have hne : q ≠ ⊥ := fun h ↦ natCast_ne_zero_of_associated hϖ hℓe (by simpa [h] using hmem)
-  exact eq_maximalIdeal (hqp.isMaximal hne)
-
-include hϖ hℓe in
-lemma map_maximalIdeal_padicInt :
-    (maximalIdeal ℤ_[ℓ]).map (algebraMap ℤ_[ℓ] R) = maximalIdeal R ^ e := by
-  rw [PadicInt.maximalIdeal_eq_span_p, Ideal.map_span, Set.image_singleton, map_natCast,
-    hϖ.maximalIdeal_eq, Ideal.span_singleton_pow, Ideal.span_singleton_eq_span_singleton]
-  exact hℓe
-
-include hϖ he hℓe in
-/-- The ramification index of `R` over `ℤ_ℓ` is `e`. -/
-theorem ramificationIdx_maximalIdeal_padicInt : (maximalIdeal R).ramificationIdx ℤ_[ℓ] = e := by
-  have := liesOver_maximalIdeal_padicInt hϖ he hℓe
-  have hmap := map_maximalIdeal_padicInt hϖ hℓe
-  have hpS : (maximalIdeal ℤ_[ℓ]).map (algebraMap ℤ_[ℓ] R) ≠ ⊥ := by
-    rw [hmap, hϖ.maximalIdeal_eq, Ideal.span_singleton_pow, Ne, Ideal.span_singleton_eq_bot]
-    exact pow_ne_zero _ hϖ.ne_zero
-  rw [← Ideal.ramificationIdx'_eq_ramificationIdx' (maximalIdeal ℤ_[ℓ]) (maximalIdeal R) hpS]
-  refine Ideal.ramificationIdx'_spec hmap.le fun h ↦ ?_
-  rw [hmap, hϖ.maximalIdeal_eq, Ideal.span_singleton_pow, Ideal.span_singleton_pow,
-    Ideal.span_singleton_le_span_singleton, pow_dvd_pow_iff hϖ.ne_zero hϖ.not_isUnit] at h
-  omega
-
-include hϖ he hℓe in
-/-- The fundamental identity for `R / ℤ_ℓ`: `R` has rank `e f` over `ℤ_ℓ`, where `e` is the
-ramification index and `f` the inertia degree of `R` over `ℤ_ℓ`. -/
-theorem finrank_padicInt_eq [Module.Finite ℤ_[ℓ] R] :
-    Module.finrank ℤ_[ℓ] R = e * (maximalIdeal R).inertiaDeg ℤ_[ℓ] := by
-  have := free_padicInt hϖ hℓe
-  have := liesOver_maximalIdeal_padicInt hϖ he hℓe
-  have : Subsingleton ((maximalIdeal ℤ_[ℓ]).primesOver R) :=
-    ⟨fun q q' ↦ Subtype.ext <| (eq_maximalIdeal_of_mem_primesOver hϖ hℓe q.2).trans
-      (eq_maximalIdeal_of_mem_primesOver hϖ hℓe q'.2).symm⟩
-  let : Fintype ((maximalIdeal ℤ_[ℓ]).primesOver R) := Fintype.ofFinite _
-  have h := Ideal.sum_ramification_inertia_eq_finrank (maximalIdeal ℤ_[ℓ]) R
-  rw [Fintype.sum_subsingleton _ ⟨maximalIdeal R, inferInstance, inferInstance⟩] at h
-  rw [← h, ramificationIdx_maximalIdeal_padicInt hϖ he hℓe]
-
-/-- `ℤ_ℓ / ℓ^N ≃ ℤ / ℓ^N`. -/
-noncomputable def padicIntQuotientEquivZMod (N : ℕ) :
-    ℤ_[ℓ] ⧸ Ideal.span {(ℓ : ℤ_[ℓ]) ^ N} ≃+* ZMod (ℓ ^ N) :=
-  (Ideal.quotEquivOfEq (PadicInt.ker_toZModPow N).symm).trans
-    (RingHom.quotientKerEquivOfSurjective (ZMod.ringHom_surjective _))
-
-lemma padicIntQuotientEquivZMod_mk (N : ℕ) (c : ℤ_[ℓ]) :
-    padicIntQuotientEquivZMod N (Ideal.Quotient.mk _ c) = PadicInt.toZModPow N c :=
-  rfl
-
-/-- On an additive group killed by `ℓ^N`, the actions of `c : ℤ_ℓ` and of its image in
-`ℤ / ℓ^N` agree. -/
-lemma padicInt_smul_eq_toZModPow_smul {N : ℕ} {M : Type*} [AddCommGroup M] [Module ℤ_[ℓ] M]
-    [Module (ZMod (ℓ ^ N)) M] (hM : ∀ m : M, (ℓ ^ N) • m = 0) (c : ℤ_[ℓ]) (m : M) :
-    c • m = PadicInt.toZModPow N c • m := by
-  set k := (PadicInt.toZModPow N c).val
-  have hk : PadicInt.toZModPow N c = (k : ZMod (ℓ ^ N)) := (ZMod.natCast_zmod_val _).symm
-  have hck : c - k ∈ Ideal.span {(ℓ : ℤ_[ℓ]) ^ N} := by
-    rw [← PadicInt.ker_toZModPow, RingHom.mem_ker, map_sub, map_natCast, hk, sub_self]
-  obtain ⟨d, hd⟩ := Ideal.mem_span_singleton'.1 hck
-  rw [hk, Nat.cast_smul_eq_nsmul, show c = d * (ℓ : ℤ_[ℓ]) ^ N + k by rw [hd]; ring, add_smul,
-    mul_smul, ← Nat.cast_pow, Nat.cast_smul_eq_nsmul, hM, smul_zero, zero_add,
-    Nat.cast_smul_eq_nsmul]
+  have h : ϖ ∣ (ℓ : R) * v := hv ▸ dvd_pow_self ϖ he.ne'
+  exact Units.dvd_mul_right.1 h
 
 include hϖ he hℓe in
 /-- Blueprint `lem-pur-finite-kummer-level`: Finite Kummer level of the Tate twist
 
-The freeness clause: let `R = 𝒪_E` be a discrete valuation ring finite over `ℤ_ℓ`, with
-uniformizer `ϖ` and `ℓ = (unit) · ϖ^e`, `e ≥ 1`, and let `N ≥ 1`. Then `A = R / ϖ^{e N}`
-(which equals `R / ℓ^N`, `span_pow_mul_eq_span_natCast_pow`) is a free `ℤ / ℓ^N`-module of
-rank `e f`, where `f` is the residue degree of `R` over `ℤ_ℓ`. The `ℤ / ℓ^N`-module structure on
-`A` is arbitrary (it is unique, `A` having characteristic `ℓ^N`, `charP_quotient_span_pow`). -/
-theorem free_zmod_quotient_span_pow [Module.Finite ℤ_[ℓ] R] {N : ℕ} (hN : 0 < N)
-    [Module (ZMod (ℓ ^ N)) (R ⧸ Ideal.span {ϖ ^ (e * N)})] :
+The freeness clause: let `R` (for instance `𝒪_E`) be a discrete valuation ring which is a finite
+`ℤ_ℓ`-algebra, with uniformizer `ϖ` and ramification index `e ≥ 1` (`ℓ = (unit) · ϖ^e`), and let
+`n = e N` with `N ≥ 1`. Then `A = R / ϖ^n` is a free module of finite rank over `ℤ/ℓ^N` (with
+the module structure of a ring of characteristic `ℓ^N`,
+`IsDiscreteValuationRing.charP_quotient_span_pow`), of rank `e f`, where `f = [R/ϖ : 𝔽_ℓ]` is
+the residue degree: `A ≅ (ℤ/ℓ^N)^{ef}`. Its rank is also the rank `[R : ℤ_ℓ]` of `R` over
+`ℤ_ℓ`. -/
+theorem free_quotient_span_pow (hN : 0 < N) :
+    haveI := charP_quotient_span_pow hϖ hℓ.out he hℓe N
+    letI := ZMod.algebra (R ⧸ Ideal.span {ϖ ^ (e * N)}) (ℓ ^ N)
+    haveI := charP_quotient_span hϖ he hℓe
+    letI := ZMod.algebra (R ⧸ Ideal.span {ϖ}) ℓ
     Module.Free (ZMod (ℓ ^ N)) (R ⧸ Ideal.span {ϖ ^ (e * N)}) ∧
       Module.finrank (ZMod (ℓ ^ N)) (R ⧸ Ideal.span {ϖ ^ (e * N)}) =
-        e * (maximalIdeal R).inertiaDeg ℤ_[ℓ] := by
-  have := free_padicInt hϖ hℓe
-  have := charP_quotient_span_pow hϖ hℓ.out he hℓe N
-  set A := R ⧸ Ideal.span {ϖ ^ (e * N)}
-  set x : ℤ_[ℓ] := (ℓ : ℤ_[ℓ]) ^ N
-  set T := ℤ_[ℓ] ⧸ Ideal.span {x}
-  have hI : x • (⊤ : Submodule ℤ_[ℓ] R) =
-      (Ideal.span {ϖ ^ (e * N)}).restrictScalars ℤ_[ℓ] := by
-    rw [← Submodule.ideal_span_singleton_smul, Ideal.smul_top_eq_map, Ideal.map_span,
-      Set.image_singleton, map_pow, map_natCast, span_pow_mul_eq_span_natCast_pow hℓe]
-  let j : QuotSMulTop x R ≃ₗ[ℤ_[ℓ]] A := Submodule.quotEquivOfEq _ _ hI ≪≫ₗ
-    Submodule.Quotient.restrictScalarsEquiv ℤ_[ℓ] (Ideal.span {ϖ ^ (e * N)})
-  let iT : T ≃+* ZMod (ℓ ^ N) := padicIntQuotientEquivZMod N
+        Module.finrank ℤ_[ℓ] R ∧
+      Module.finrank (ZMod (ℓ ^ N)) (R ⧸ Ideal.span {ϖ ^ (e * N)}) =
+        e * Module.finrank (ZMod ℓ) (R ⧸ Ideal.span {ϖ}) := by
+  haveI := charP_quotient_span_pow hϖ hℓ.out he hℓe N
+  letI := ZMod.algebra (R ⧸ Ideal.span {ϖ ^ (e * N)}) (ℓ ^ N)
+  haveI := charP_quotient_span hϖ he hℓe
+  letI := ZMod.algebra (R ⧸ Ideal.span {ϖ}) ℓ
+  have hfree : Module.IsTorsionFree ℤ_[ℓ] R :=
+    (Module.isTorsionFree_iff_algebraMap_injective).2 (injective_algebraMap_padicInt hϖ hℓe)
+  have : Module.Free ℤ_[ℓ] R := Module.free_of_finite_type_torsion_free'
+  -- `A ≅ ℤ/ℓ^N ⊗_{ℤ_ℓ} R` as `ℤ/ℓ^N`-modules
+  let e₀ := (quotientLinearEquivTensor hℓe N).toAddEquiv
+  let eZ : (R ⧸ Ideal.span {ϖ ^ (e * N)}) ≃ₗ[ZMod (ℓ ^ N)] ZMod (ℓ ^ N) ⊗[ℤ_[ℓ]] R :=
+    { e₀.toAddMonoidHom.toZModLinearMap (ℓ ^ N) with
+      invFun := e₀.symm
+      left_inv := e₀.left_inv
+      right_inv := e₀.right_inv }
+  have hF : Module.Free (ZMod (ℓ ^ N)) (R ⧸ Ideal.span {ϖ ^ (e * N)}) :=
+    Module.Free.of_equiv eZ.symm
   have : Fact (1 < ℓ ^ N) := ⟨Nat.one_lt_pow hN.ne' hℓ.out.one_lt⟩
-  have : Nontrivial T := iT.toEquiv.nontrivial
-  have hA : ∀ a : A, (ℓ ^ N) • a = 0 := fun a ↦ by
-    rw [nsmul_eq_mul, Nat.cast_pow, ← Nat.cast_pow, CharP.cast_eq_zero, zero_mul]
-  have hc : ∀ (t : T) (m : QuotSMulTop x R), j (t • m) = iT t • j m := by
-    intro t m
-    obtain ⟨c, rfl⟩ := Ideal.Quotient.mk_surjective t
-    obtain ⟨r, rfl⟩ := Submodule.Quotient.mk_surjective _ m
-    change j (c • Submodule.Quotient.mk r) = _
-    rw [map_smul, padicIntQuotientEquivZMod_mk]
-    exact padicInt_smul_eq_toZModPow_smul hA c _
-  -- `R / ℓ^N R` is free of rank `finrank ℤ_ℓ R` over `ℤ_ℓ / ℓ^N`
-  have hfr : Module.finrank T (QuotSMulTop x R) = Module.finrank ℤ_[ℓ] R :=
-    (((QuotSMulTop.equivQuotTensor x R).extendScalarsOfSurjective
-      Ideal.Quotient.mk_surjective).finrank_eq).trans (Module.finrank_baseChange)
-  refine ⟨?_, ?_⟩
-  · have := RingHomInvPair.of_ringEquiv iT
-    have := RingHomInvPair.symm (iT : T →+* ZMod (ℓ ^ N)) (iT.symm : ZMod (ℓ ^ N) →+* T)
-    let e₂ : QuotSMulTop x R ≃ₛₗ[(iT : T →+* ZMod (ℓ ^ N))] A :=
-      { j.toAddEquiv with map_smul' := hc }
-    exact Module.Free.of_equiv e₂
-  · rw [← finrank_padicInt_eq hϖ he hℓe, ← hfr]
-    exact congrArg Cardinal.toNat
-      (rank_eq_of_equiv_equiv iT j.toAddEquiv iT.bijective hc).symm
+  have hr : Module.finrank (ZMod (ℓ ^ N)) (R ⧸ Ideal.span {ϖ ^ (e * N)}) =
+      Module.finrank ℤ_[ℓ] R :=
+    eZ.finrank_eq.trans Module.finrank_baseChange
+  refine ⟨hF, hr, ?_⟩
+  -- counting: `ℓ^{N r} = #A = #(R/ϖ)^{eN} = ℓ^{f e N}`
+  have : Module.Finite (ZMod (ℓ ^ N)) (R ⧸ Ideal.span {ϖ ^ (e * N)}) :=
+    Module.Finite.equiv eZ.symm
+  have : NeZero (ℓ ^ N) := ⟨pow_ne_zero _ hℓ.out.ne_zero⟩
+  set r := Module.finrank (ZMod (ℓ ^ N)) (R ⧸ Ideal.span {ϖ ^ (e * N)})
+  have hcardA : Nat.card (R ⧸ Ideal.span {ϖ ^ (e * N)}) = (ℓ ^ N) ^ r := by
+    rw [Nat.card_congr (Module.finBasis (ZMod (ℓ ^ N))
+      (R ⧸ Ideal.span {ϖ ^ (e * N)})).equivFun.toEquiv, Nat.card_fun, Nat.card_zmod,
+      Nat.card_eq_fintype_card (α := Fin _), Fintype.card_fin]
+  have hfinA : Finite (R ⧸ Ideal.span {ϖ ^ (e * N)}) :=
+    Nat.finite_of_card_ne_zero (by rw [hcardA]; exact pow_ne_zero _ (NeZero.ne _))
+  have hle : Ideal.span {ϖ ^ (e * N)} ≤ Ideal.span {ϖ} :=
+    Ideal.span_singleton_le_span_singleton.2 (dvd_pow_self ϖ (Nat.mul_pos he hN).ne')
+  have hfinK : Finite (R ⧸ Ideal.span {ϖ}) :=
+    Finite.of_surjective _ (Ideal.Quotient.factor_surjective hle)
+  have : (Ideal.span {ϖ}).IsPrime :=
+    (PrincipalIdealRing.isMaximal_of_irreducible hϖ).isPrime
+  have hcardA' : Nat.card (R ⧸ Ideal.span {ϖ ^ (e * N)}) =
+      Nat.card (R ⧸ Ideal.span {ϖ}) ^ (e * N) := by
+    rw [← Ideal.span_singleton_pow, ← Submodule.cardQuot_apply, ← Submodule.cardQuot_apply,
+      cardQuot_pow_of_prime (by simpa using hϖ.ne_zero)]
+  have : Fintype (R ⧸ Ideal.span {ϖ}) := Fintype.ofFinite _
+  have hcardK : Nat.card (R ⧸ Ideal.span {ϖ}) =
+      ℓ ^ Module.finrank (ZMod ℓ) (R ⧸ Ideal.span {ϖ}) := by
+    rw [Nat.card_eq_fintype_card, Module.card_eq_pow_finrank (K := ZMod ℓ), ZMod.card]
+  rw [hcardA', hcardK, ← pow_mul, ← pow_mul] at hcardA
+  have h := Nat.pow_right_injective hℓ.out.two_le hcardA
+  have : N * r = N * (e * Module.finrank (ZMod ℓ) (R ⧸ Ideal.span {ϖ})) := by
+    rw [← h]; ring
+  exact Nat.eq_of_mul_eq_mul_left hN this
 
 end IsDiscreteValuationRing

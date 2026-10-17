@@ -200,7 +200,11 @@ bounded below complex of injective sheaves gives the support-localization triang
 `s_* s^! I ⟶ I ⟶ j_* j^* I ⟶ (s_* s^! I)[1]`, which is distinguished
 (`AlgebraicGeometry.Etale.supportLocalizationTriangle_distinguished`) and is isomorphic to the
 supported localization triangle `s_* Rs^! K ⟶ K ⟶ Rj_* j^* K ⟶ (s_* Rs^! K)[1]`, compatibly with
-the identification `I ≅ K`. -/
+the identification `I ≅ K`. As throughout the purity chapter (`def-pur-conventions`) this is
+the étale form; on the pro-étale site the triangle is
+`AlgebraicGeometry.ProEtale.exists_distTriang_derivedLowerStarClosedUpperShriekAdjunction_counit`,
+with the sequence of supported sections
+`AlgebraicGeometry.ProEtale.shortExact_supportsShortComplex`. -/
 theorem exists_supportLocalizationTriangle_iso_of_isGE
     (hjs : Set.range s.base = (Set.range j.base)ᶜ)
     [HasCompactification s] [(R(s)_![A]).IsLeftAdjoint]

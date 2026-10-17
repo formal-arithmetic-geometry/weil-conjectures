@@ -264,8 +264,9 @@ Its compatibility with the derived tensor product is
 change is `AlgebraicGeometry.Etale.upperStar_map_tateSheafIso_hom`
 (`WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevelBaseChange`).
 
-The blueprint clause that `A` is free of rank `ef` over `ℤ/ℓ^N`, `A ≅ (ℤ/ℓ^N)^{ef}`, is not
-formalised. -/
+The blueprint clause that `A` is free of rank `ef` over `ℤ/ℓ^N`, `A ≅ (ℤ/ℓ^N)^{ef}`, is
+`IsDiscreteValuationRing.free_quotient_span_pow`
+(`WeilConjectures.RingTheory.DiscreteValuationRing.FiniteKummerLevelFree`). -/
 noncomputable def tateTwistSheafOneIsoQuotientSpanPow (T : Scheme.{u})
     [HasInvertibleExponent (R ⧸ Ideal.span {ϖ ^ (e * N)}) T] :
     haveI := IsDiscreteValuationRing.charP_quotient_span_pow hϖ hℓ he hℓe N

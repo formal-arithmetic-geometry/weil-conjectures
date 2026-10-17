@@ -55,9 +55,12 @@ transported along the identification of the zero section with `V(t)`.
 
 Two clauses of the blueprint are stated only in part, and are TODOs.
 
-* `sk-prop-a1-kummer` is recorded as what the cohomology sheaves *are* rather than as a
-  statement about the generator `κ(t)` of `R¹π_*Λ(1)`. Here `sk-prop-a1` records that
-  `Rs^!Λ(1)[2] ≅ Λ_Y`; that the boundary `∂κ(t)` of the Kummer class
+* `sk-prop-a1-kummer` is recorded here as what the cohomology sheaves *are* rather than as a
+  statement about the generator `κ(t)` of `R¹π_*Λ(1)`; for the twist `Λ(1) = μₙ ⊗ Λ` the
+  generator, the unit `p^*` in degree zero and the compatibility with base change on `Y` are in
+  `WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer`
+  (`AlgebraicGeometry.Etale.isIso_homology_zero_kummerClassAdjoint` and its neighbours).
+  Here `sk-prop-a1` records that `Rs^!Λ(1)[2] ≅ Λ_Y`; that the boundary `∂κ(t)` of the Kummer class
   (`AlgebraicGeometry.Etale.kummerBoundary`) is this isomorphism is the orientation
   `AlgebraicGeometry.Etale.affineLineOrientation` of
   `WeilConjectures.EtaleCohomology.Purity.Smooth.Orientation`.

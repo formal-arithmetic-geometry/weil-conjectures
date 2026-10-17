@@ -359,7 +359,9 @@ supports as maps `Λ_U ⟶ Ri_! Ri^!(M[a])`. The blueprint reads a class as a ma
 (`lem-pur-supported-hom`), which corresponds to its adjoint, and multiplies through
 `i_* Λ_{Z₁ ∩ Z₂} ≅ i₁_* Λ_{Z₁} ⊗^L i₂_* Λ_{Z₂}`; the product of supports
 `AlgebraicGeometry.Etale.supportedProduct` is the derived counterpart of this identification,
-characterised by its compatibility with the counits. -/
+characterised by its compatibility with the counits. The blueprint's construction itself, through
+`h_* Λ_{Z₁ ∩ Z₂} ≅ i₁_* Λ_{Z₁} ⊗ᴸ i₂_* Λ_{Z₂}`, is
+`AlgebraicGeometry.Etale.cupSupportCohomology`. -/
 noncomputable def cupWithSupports (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
     [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
     [(R(i₁)_![A]).IsLeftAdjoint] [(R(i₂)_![A]).IsLeftAdjoint] [(R(i)_![A]).IsLeftAdjoint]

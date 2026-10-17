@@ -275,7 +275,14 @@ complex of `a : Y ⟶ Spec k` is `ω_{Y,Λ} = Ra^! Λ` (`AlgebraicGeometry.Etale
 The normalization of geometric Frobenius on the twists (`q^{-m}` on `Λ(m)`) is
 `def-weil-frobenius-coefficient-twists` (`WeilConjectures.WeilSheaf.FrobeniusTwist`), and the
 other coefficient stages `𝒪_E, E, ℚ̄_ℓ` are the transports of
-`WeilConjectures.EtaleCohomology.Purity.Smooth.Transport`. -/
+`WeilConjectures.EtaleCohomology.Purity.Smooth.Transport`.
+
+The blueprint states the conventions on the small pro-étale site; the purity chapter is
+formalised on the small étale site, the pro-étale comparison
+(`WeilConjectures.SixFunctors.ProEtale.Comparison`: `ν^*` is fully faithful on bounded below
+complexes, and the pro-étale `Rf^!` is `ν_X^* ∘ Rf^! ∘ Rν_{Y,*}`,
+`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`) transporting every statement on the
+constructible categories. -/
 noncomputable def tateTwist (m : ℤ) :
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=

@@ -83,7 +83,8 @@ include aY in
 
 The unit `Λ_Y(1) ⟶ Rp_* Lp^* Λ_Y(1) = Rp_* Λ_{𝔸¹_Y}(1)` of the projection `p : 𝔸¹_Y ⟶ Y` is an
 isomorphism; with `AlgebraicGeometry.Etale.isIso_unit_constantComplex_affineLine` for the
-untwisted unit. -/
+untwisted unit. With the latter this is clause (a) of the subsection statement
+`sk-prop-a1-kummer`. -/
 theorem isIso_unit_tateObject_affineLine :
     IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
       (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).unit.app (tateObject Λ Y 1)) := by
@@ -101,7 +102,9 @@ include aY hj in
 (clause (2), degree zero).
 
 For the complement `j : G ⟶ 𝔸¹_Y` of the zero section and `π = j ≫ p`, the unit
-`Λ_Y(1) ⟶ Rπ_* Lπ^* Λ_Y(1)` is an isomorphism on `H⁰`: `R⁰π_* Λ(1) = Λ_Y(1)`. -/
+`Λ_Y(1) ⟶ Rπ_* Lπ^* Λ_Y(1)` is an isomorphism on `H⁰`: `R⁰π_* Λ(1) = Λ_Y(1)`. This is the
+first half of clause (b) of the subsection statement `sk-prop-a1-kummer`: `R⁰π_* Λ(1) ≅ Λ_Y(1)`,
+the pullback `p^*` followed by restriction along `j` being an isomorphism onto it. -/
 theorem isIso_homology_zero_unit_tateObject_multiplicativeGroup :
     IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).map
       ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
@@ -123,7 +126,7 @@ include aY in
 
 `R¹π_* Λ(1)` is free of rank one on the Kummer class `κ(t)` of the coordinate: the morphism
 `Λ_Y ⟶ R¹π_* Λ(1) = H⁰(Rπ_*(Λ(1)[1]))` adjoint to `κ(t) : Λ_G ⟶ Λ_G(1)[1]` is an
-isomorphism. -/
+isomorphism. This is the second half of clause (b) of `sk-prop-a1-kummer`. -/
 theorem isIso_homology_zero_kummerClassAdjoint [HasInvertibleExponent Λ G] :
     IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).map
       ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
@@ -143,7 +146,8 @@ include aY hj in
 /-- Blueprint `prop-pur-gm-relative-kummer`: The affine line and the punctured line over a base
 (clause (3)).
 
-`R^m π_* Λ(1) = 0` for `m ∉ {0, 1}`; in particular for `m ≥ 2`. -/
+`R^m π_* Λ(1) = 0` for `m ∉ {0, 1}`; in particular for `m ≥ 2`. This is clause (c) of
+`sk-prop-a1-kummer` for the twist `Λ(1) = μₙ ⊗ Λ`. -/
 theorem isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup
     [HasInvertibleExponent Λ G] (m : ℤ) (h₀ : m ≠ 0) (h₁ : m ≠ 1) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ m).obj
@@ -444,7 +448,8 @@ omit [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))] [IsSeparated aY]
 
 For `g : Y' ⟶ Y` with base change `g' : 𝔾_{m,Y'} ⟶ 𝔾_{m,Y}`, the pullback of the Kummer class
 of the coordinate is the Kummer class of the coordinate: `Lg'^* κ(t) = κ(t')`, through
-`Lg'^* Λ ≅ Λ` and `Lg'^* Λ(1) ≅ Λ(1)`. -/
+`Lg'^* Λ ≅ Λ` and `Lg'^* Λ(1) ≅ Λ(1)`. This is the compatibility of `κ(t)` with base change on
+`Y` asserted in `sk-prop-a1-kummer`. -/
 theorem leftDerivedUpperStar_map_kummerClass_coord [HasInvertibleExponent Λ G]
     [HasInvertibleExponent Λ G'] :
     (L((AffineSpace.complementMap g j j' hj hj')^*[ModuleCat.{u + 1} Λ])).map
@@ -463,7 +468,9 @@ include aY aY' in
 (clause (4), the affine line).
 
 For `g : Y' ⟶ Y`, the derived base change map `Lg^* Rp_* Λ(1) ⟶ Rp'_* Λ(1)` of the projections
-`p : 𝔸¹_Y ⟶ Y` and `p' : 𝔸¹_{Y'} ⟶ Y'` is an isomorphism. -/
+`p : 𝔸¹_Y ⟶ Y` and `p' : 𝔸¹_{Y'} ⟶ Y'` is an isomorphism. With
+`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_app_constantComplex_affineLine` this is the
+base change compatibility of clause (a) of `sk-prop-a1-kummer`. -/
 theorem isIso_derivedBaseChangeMap_app_tateObject_affineLine :
     IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
       (AffineSpace.isPullback_map (n := ULift.{u} (Fin 1)) g).toCommSq).app
@@ -471,6 +478,45 @@ theorem isIso_derivedBaseChangeMap_app_tateObject_affineLine :
   isIso_derivedBaseChangeMap_app_tateObject_affineLine_of_cohomology Λ aY aY' g
     (isZero_cohomology_affineLine Λ (k := k))
     (nonempty_iso_cohomology_zero_affineLine Λ (k := k)).some
+
+omit [HasInvertibleExponent Λ Y] [HasInvertibleExponent Λ Y'] in
+include aY aY' in
+/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients (base change
+of clause (a), untwisted).
+
+For `g : Y' ⟶ Y`, the derived base change map `Lg^* Rp_* Λ ⟶ Rp'_* Λ` of the projections
+`p : 𝔸¹_Y ⟶ Y` and `p' : 𝔸¹_{Y'} ⟶ Y'` is an isomorphism: it is compatible with the units
+`Λ_Y ⟶ Rp_* Λ` and `Λ_{Y'} ⟶ Rp'_* Λ`, which are isomorphisms
+(`AlgebraicGeometry.Etale.isIso_unit_constantComplex_affineLine`). -/
+theorem isIso_derivedBaseChangeMap_app_constantComplex_affineLine :
+    IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
+      (AffineSpace.isPullback_map (n := ULift.{u} (Fin 1)) g).toCommSq).app
+        (constantComplex Λ 𝔸(ULift.{u} (Fin 1); Y))) := by
+  let p := 𝔸(ULift.{u} (Fin 1); Y) ↘ Y
+  let p' := 𝔸(ULift.{u} (Fin 1); Y') ↘ Y'
+  let sq := (AffineSpace.isPullback_map (n := ULift.{u} (Fin 1)) g).toCommSq
+  let BC := derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq
+  let M := constantComplex Λ Y
+  have hp : IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).unit.app M) :=
+    isIso_unit_affineLine_of_cohomology Λ aY (isZero_cohomology_affineLine Λ (k := k))
+      (cohomologyZeroConstantComplexIso Λ _) (constructibleFiniteTor_constantComplex Λ Y)
+      (constantComplexIsoSingleFunctor Λ Y) (nonempty_sheafFiber_unit_iso Λ)
+  have hp' : IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p').unit.app
+      ((L((g)^*[ModuleCat.{u + 1} Λ])).obj M)) :=
+    (NatTrans.isIso_app_iff_of_iso _ (leftDerivedUpperStarConstantComplexIso Λ g)).2
+      (isIso_unit_affineLine_of_cohomology Λ aY' (isZero_cohomology_affineLine Λ (k := k))
+        (cohomologyZeroConstantComplexIso Λ _) (constructibleFiniteTor_constantComplex Λ Y')
+        (constantComplexIsoSingleFunctor Λ Y') (nonempty_sheafFiber_unit_iso Λ))
+  have hmate := map_unit_derivedBaseChangeMap_app (ModuleCat.{u + 1} Λ) sq M
+  have h₁ : IsIso (BC.app ((L((p)^*[ModuleCat.{u + 1} Λ])).obj M)) := by
+    have : IsIso ((L((g)^*[ModuleCat.{u + 1} Λ])).map
+        ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).unit.app M) ≫
+          BC.app ((L((p)^*[ModuleCat.{u + 1} Λ])).obj M)) := by
+      rw [hmate]
+      infer_instance
+    exact IsIso.of_isIso_comp_left ((L((g)^*[ModuleCat.{u + 1} Λ])).map
+      ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).unit.app M)) _
+  exact (NatTrans.isIso_app_iff_of_iso BC (leftDerivedUpperStarConstantComplexIso Λ p)).1 h₁
 
 set_option maxRecDepth 20000 in
 set_option maxHeartbeats 1000000 in
@@ -482,7 +528,8 @@ include aY aY' in
 For `g : Y' ⟶ Y` with base change `g' : 𝔾_{m,Y'} ⟶ 𝔾_{m,Y}`, the derived base change map
 `Lg^* Rπ_* Λ(1) ⟶ Rπ'_* Lg'^* Λ(1)` is an isomorphism: both sides have cohomology only in degrees
 zero and one, where the base change map is compatible with the units and with the Kummer
-classes, which generate. -/
+classes, which generate. This is the base change compatibility of clauses (b) and (c) of
+`sk-prop-a1-kummer`. -/
 theorem isIso_derivedBaseChangeMap_app_tateObject_multiplicativeGroup [HasInvertibleExponent Λ G]
     [HasInvertibleExponent Λ G'] :
     IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ)

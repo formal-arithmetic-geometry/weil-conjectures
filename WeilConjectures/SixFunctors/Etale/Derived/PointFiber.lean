@@ -180,8 +180,13 @@ of the equivalence `D(Γ) : D(s_ét, Λ) ≌ D(Λ)` induced by the exact equival
 between étale sheaves of `Λ`-modules on `s` and `Λ`-modules, a sheaf on `s` being constructible
 if and only if its global sections are finitely generated.
 
-Only the finite coefficient stage of the blueprint node is formalised: the analogous
-equivalences with coefficients `𝒪_E`, `E` and `ℚ̄_ℓ` are not. -/
+The other coefficient stages of the blueprint node are
+`AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence` (`𝒪_E`),
+`AlgebraicGeometry.Etale.pointFiberFieldEquivalence` (`E`) and
+`AlgebraicGeometry.Etale.pointFiberCocone_isFilteredTwoColimit` (`ℚ̄_ℓ`). As in the rest of the
+repository the categories are those of the small étale site; the pro-étale comparison
+(`WeilConjectures.SixFunctors.ProEtale.Comparison`) identifies them with the pro-étale
+categories of the blueprint on bounded below objects of étale origin. -/
 noncomputable def pointFiberEquivalence :
     DerivedCategoryBoundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) ≌
       DerivedCategory.BoundedFiniteCohomology Λ :=

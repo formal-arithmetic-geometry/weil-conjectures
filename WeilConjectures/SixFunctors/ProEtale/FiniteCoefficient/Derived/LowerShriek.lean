@@ -225,7 +225,10 @@ namespace ProEtale
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
-/-- The compactly supported derived global sections along a morphism `f : X ⟶ Y`
+/-- Blueprint `def-trf-coefficient-conventions` (on the small pro-étale site; the étale model is
+`AlgebraicGeometry.Etale.compactlySupportedGlobalSections`).
+
+The compactly supported derived global sections along a morphism `f : X ⟶ Y`
 admitting a compactification, *defined* as the composite
 
 `RΓc(X/Y, -) := RΓ(Y, Rf_! -) : D(X_proét) ⥤ D(A)`.
