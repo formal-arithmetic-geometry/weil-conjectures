@@ -290,5 +290,44 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-a04e60cef (reviewer sub-agent of L); spot-checked: I read the whole item: all 10 steps, all 12 cited statements, and the citing parent's steps 7-8. Source: Stacks sites.tex 00X9, the punctual-topos paragraph after 00XA. That site has one object, the identity, and only {id} as a covering, which is the item's site with the maximal sieve as its only covering sieve. Every step tag exists with the label the step names: 03DA, 03EK, 03CY, 03CZ, 03ER, 0112, 0115, 012Z, 05RN, 05RU, 015F, 0FND, 09T5, 06YN, 06YS, 06YT, 06YY, 07A6. No SGA source is used. Steps 1-6 are elementary and correct: every presheaf is a sheaf; kernels, cokernels and direct sums are computed at *; the presheaf tensor is already a sheaf; the extension/restriction transposes u(m⊗1) and m⊗s↦s v(m) are written out; homotopies and cohomology carry over. Step 7 applies the unbounded Mathlib-leaf derived factorization, and the isomorphisms descend because whiskering by the localization Q is fully faithful. Step 8 checks K-flatness in both directions with the (-1)^p total tensor, and termwise flatness. Steps 9 and 10 use only the stated clauses of the derived change-of-rings lemma, the K-flat resolution lemma, and the normalized derived adjunction (small site, commutative rings, flat terms). The naturality formula η_QK = Res(Lφ*q)∘η_QP∘q^-1 is correct. Edge cases checked: R=0, and Z→Z/2, where a resolution is needed because extension of scalars is not exact. Searches of the DAG and the blueprint (punctual, singleton, one-object site, Sh(pt), 00X9) found no duplicate. The existing one-object-site convention nodes never state this comparison. There are no new nodes. I accept three tool uses as declared: lem-pur-derived-change-of-rings, lem-pc-kflat-resolution and lem-pur-sheaf-ring-derived-coefficient-adjunction, all generic homological algebra that replaces no step of the proper-base-change route. Minor point, not changed: the statement leaves S's commutativity implicit (Stacks convention, and the cited nodes require it); the only citer uses commutative A→A_n. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-37e27c4b2",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Reviewed the packet, source, all dependencies, declarations, edge cases, docstrings, report sections, and immutable Lean module; scompile.py local side-overlay and server confirmation both passed with no findings."
+ },
+ "lean": {
+  "module": "Sheaf.ProperBaseChange.SingletonSiteModuleComparison",
+  "declaration": "CategoryTheory.singleton_site_module_comparison",
+  "declarations": [
+   "CategoryTheory.singletonSite",
+   "CategoryTheory.singletonTopology",
+   "CategoryTheory.singletonRingSheaf",
+   "CategoryTheory.singletonRingValue",
+   "CategoryTheory.singletonModuleCategory",
+   "CategoryTheory.singletonEvaluation",
+   "CategoryTheory.singletonEvaluationPreservesZeroMorphisms",
+   "CategoryTheory.singletonEvaluationAdditive",
+   "CategoryTheory.singletonRingMap",
+   "CategoryTheory.singletonConstantModuleSheaf",
+   "CategoryTheory.singletonSheafExtensionObj",
+   "CategoryTheory.singletonSheafExtensionMap",
+   "CategoryTheory.singletonSheafRestriction",
+   "CategoryTheory.singletonOrdinaryUnitMap",
+   "CategoryTheory.singletonOrdinaryUnitFormula",
+   "CategoryTheory.singletonDerivedLocalizationCompatible",
+   "CategoryTheory.singletonDerivedChangeOfRingsWitness",
+   "CategoryTheory.singletonKFlatChangeOfRingsComputation",
+   "CategoryTheory.singleton_site_module_comparison"
+  ],
+  "statement": "theorem singleton_site_module_comparison (R : Type u) [CommRing R] : ∃ (e : singletonModuleCategory R ≌ ModuleCat.{u} R), e.functor = singletonEvaluation R ∧ e.inverse = singletonConstantModuleSheaf (R := R) ∧ (∀ (S : ShortComplex (singletonModuleCategory R)), S.ShortExact → (S.map e.functor).ShortExact) ∧ (∀ (M N : singletonModuleCategory R), Nonempty (e.functor.obj ((SheafOfModules.siteSheafTensorRight N).obj M) ≅ MonoidalCategory.tensorObj (e.functor.obj M) (e.functor.obj N))) ∧ (∀ (S : Type u) [CommRing S] (φ : R →+* S), ∃ (E : singletonModuleCategory R ⥤ singletonModuleCategory S) (hobj : ∀ M, E.obj M = singletonSheafExtensionObj φ M) (hmap : ∀ {M N} (f : M ⟶ N), E.map f = eqToHom (hobj M) ≫ singletonSheafExtensionMap φ f ≫ eqToHom (hobj N).symm) (eS : singletonModuleCategory S ≌ ModuleCat.{u} S), eS.functor = singletonEvaluation S ∧ eS.inverse = singletonConstantModuleSheaf (R := S) ∧ Nonempty (E ⋙ eS.functor ≅ e.functor ⋙ ModuleCat.extendScalars φ) ∧ Nonempty (singletonSheafRestriction φ ⋙ e.functor ≅ eS.functor ⋙ ModuleCat.restrictScalars φ) ∧ singletonOrdinaryUnitFormula φ) ∧ (∃ (E : CochainComplex (singletonModuleCategory R) ℤ ≌ CochainComplex (ModuleCat.{u} R) ℤ), E.functor = (singletonEvaluation R).mapHomologicalComplex (ComplexShape.up ℤ)) ∧ (∃ (E : HomotopyCategory (singletonModuleCategory R) (ComplexShape.up ℤ) ≌ HomotopyCategory (ModuleCat.{u} R) (ComplexShape.up ℤ)), E.functor = (singletonEvaluation R).mapHomotopyCategory (ComplexShape.up ℤ)) ∧ (∀ {K L : CochainComplex (singletonModuleCategory R) ℤ} (f : K ⟶ L), QuasiIso f → QuasiIso (((singletonEvaluation R).mapHomologicalComplex (ComplexShape.up ℤ)).map f)) ∧ (∃ (hR : HasDerivedCategory (singletonModuleCategory R)) (hM : HasDerivedCategory (ModuleCat.{u} R)), singletonDerivedLocalizationCompatible R hR hM) ∧ (∀ (K : CochainComplex (singletonModuleCategory R) ℤ), CochainComplex.IsKFlatIndependentCoefficients (J := singletonTopology) (R := singletonRingSheaf R) K ↔ (HomologicalComplex.quasiIso (ModuleCat.{u} R) (ComplexShape.up ℤ)).kFlat (((singletonEvaluation R).mapHomologicalComplex (ComplexShape.up ℤ)).obj K)) ∧ (∀ (S : Type u) [CommRing S] (φ : R →+* S) (K : CochainComplex (singletonModuleCategory R) ℤ), singletonKFlatChangeOfRingsComputation R φ K)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/ProperBaseChange/SingletonSiteModuleComparison.lean"
  }
 }
