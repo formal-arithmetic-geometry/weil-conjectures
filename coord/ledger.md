@@ -15807,3 +15807,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:12 L: merged deliver/D4/Sheaf.Paper.IntegralResiduePullFlatModel (stage 3; reviewer PASS; first push; landing 20261017T051253-L-3360999 (interface); batch 20261017T051249; modules 2; new nodes 1; change records: coord/changes/integral-residue-pull-flat-model-interface.md)
 
 - 13:23 L: batch 20261017T051249 dependency take-out
+- 05:32 L: merged deliver/B4/Sheaf.AlgebraicGeometry.NoetherianProperBoundedCoherentImage (stage 3; reviewer PASS; first push; landing 20261017T053257-L-3672653 (proof); batch 20261017T053254; modules 1; new nodes 0)
