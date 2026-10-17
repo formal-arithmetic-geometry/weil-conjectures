@@ -19,6 +19,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # Constructibility from finite geometric stalk cardinalities

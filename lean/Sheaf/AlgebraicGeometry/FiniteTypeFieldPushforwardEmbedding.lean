@@ -28,6 +28,7 @@ import WeilConjectures.SixFunctors.Finite.Stalk
 import Sheaf.AlgebraicGeometry.ConstructibleFiniteSelection
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # Finite-pushforward embeddings over a field

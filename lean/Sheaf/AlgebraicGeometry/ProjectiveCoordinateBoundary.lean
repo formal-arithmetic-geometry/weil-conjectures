@@ -15,6 +15,7 @@ import Sheaf.AlgebraicGeometry.ProjectiveFiniteGeometricFibres
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
 import Mathlib.RingTheory.Localization.Away.Basic
 import Mathlib.RingTheory.QuasiFinite.Basic
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # Finiteness of a projective coordinate boundary after shrinking

@@ -22,6 +22,7 @@ import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
 import Sheaf.AlgebraicGeometry.OpenImmersionExtensionZeroBaseChange
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.SixFunctors.BaseChange.Square
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # Geometric stalks of a proper-support subsheaf
 

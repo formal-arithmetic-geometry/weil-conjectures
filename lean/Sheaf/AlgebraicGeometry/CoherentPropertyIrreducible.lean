@@ -17,6 +17,7 @@ import Sheaf.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes
 import Sheaf.AlgebraicGeometry.CoherentGenericPointIdealInclusion
 import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # Property devissage on an irreducible closed support
 

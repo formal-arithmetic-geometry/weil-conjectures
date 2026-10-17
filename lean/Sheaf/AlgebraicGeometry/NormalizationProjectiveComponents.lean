@@ -16,6 +16,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import Sheaf.AlgebraicGeometry.FiniteOverProjective
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # Normalizations of the components of a projective scheme

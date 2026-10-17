@@ -33,6 +33,7 @@ import Sheaf.AlgebraicGeometry.ConstructibleStratificationAssembly
 import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # Constructible compact support for constant finite coefficients on affine smooth curves
