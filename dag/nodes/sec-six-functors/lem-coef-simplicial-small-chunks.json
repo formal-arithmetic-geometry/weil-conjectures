@@ -254,5 +254,35 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d2acbb42",
+  "group": "Q37",
+  "result": "pass",
+  "note": "All 12 statement clauses match node lem-coef-simplicial-small-chunks (HTT A.3.4.1/A.3.4.9/A.3.4.15): product chunk factorization (trivial cofibration X->Z, fibration Pi.lift to the product, Z in U) and the coproduct dual; enriched functoriality via EnrichedFunctor on the full subcategory of finite families with enrichedOrdinaryCategory ends and enrichedHomπ naturality squares; Fin 0 empty families; cf = carrier ⊓ bifibrantObjects; IsIChunk uses P.toModelCategory (confirmed by an rfl probe) and carrier = all values in U; first clause gives univ as an I-chunk for every small I; second clause gives one small U ⊇ V, an I_α-chunk for all α (Bergner cofibrancy from the characterized BergnerModelData), with U.carrier.map Q = V.map Q. ∃E P matches the dependency's ∃E Nonempty P convention and is invariant under the choice. Universes u,w independent and all bound. Edge cases checked: empty family of indices, empty V, empty index category, n=0. Gates: no hollow definitions, docstrings with source and blueprint on all 10 declarations, theorem docstring follows all 8 proof steps, only sorry, lean.statement verbatim, no duplicate chunk notion, dependency nodes unchanged, no statement_change. nt_compile.py clean (2.3s/2.5s, no errors or warnings); #print axioms gives propext, sorryAx, Classical.choice, Quot.sound. No findings requiring repair."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialSmallChunks",
+  "declaration": "CategoryTheory.simplicial_small_chunks",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialSmallChunks.lean",
+  "statement": "theorem simplicial_small_chunks {A : Type w} [Category.{u} A] [ModelCategory A] [SimplicialCategory A] (T : SimplicialTensorCotensor A) (hC : CombinatorialModelCategory.{w, u, u} A) (hSM7 : SimplicialModelLocalization.SatisfiesSM7 A) (B : BergnerModelData.{u}) : (∀ (I : Type u) [Category.{u} I] [SimplicialCategory I], ∃ U : SimplicialChunk A, U.carrier = Set.univ ∧ ∃ (E : SimplicialDiagramEnrichment I A) (P : ProjectiveSimplicialModelStructure T E), IsIChunk U T I E P) ∧ (∀ (J : Type u) (I : J → CoherentNerve.SCat.{u}), (∀ α : J, @IsCofibrant _ _ B.model.categoryWithCofibrations (B.model.cm1b.out (Discrete PEmpty)) (I α)) → ∀ (V : ObjectProperty A), ObjectProperty.Small.{u} V → ∃ U : SimplicialChunk A, ObjectProperty.Small.{u} U.carrier ∧ V ≤ U.carrier ∧ (∀ α : J, ∃ (E : SimplicialDiagramEnrichment (CoherentNerve.underlying (I α)) A) (P : ProjectiveSimplicialModelStructure T E), IsIChunk U T (CoherentNerve.underlying (I α)) E P) ∧ U.carrier.map (MorphismProperty.Q (weakEquivalences A)) = V.map (MorphismProperty.Q (weakEquivalences A)))",
+  "branch": "newtargets-dag",
+  "declarations": [
+   "CategoryTheory.simplicialChunkWideSpan",
+   "CategoryTheory.simplicialChunkWideCospan",
+   "CategoryTheory.SimplicialChunk.productFamilies",
+   "CategoryTheory.SimplicialChunk.coproductFamilies",
+   "CategoryTheory.SimplicialChunkProductFactorization",
+   "CategoryTheory.SimplicialChunkCoproductFactorization",
+   "CategoryTheory.SimplicialChunk",
+   "CategoryTheory.SimplicialChunk.cf",
+   "CategoryTheory.IsIChunk",
+   "CategoryTheory.simplicial_small_chunks"
+  ],
+  "existing": false,
+  "by": "Q37",
+  "date": "2026-10-17"
  }
 }

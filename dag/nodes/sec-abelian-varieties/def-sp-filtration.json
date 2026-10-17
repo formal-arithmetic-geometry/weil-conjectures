@@ -248,22 +248,22 @@
  },
  "lead_note": "2026-10-10 L (R-dsf1845): Stale parenthetical in lem-sp-finite-filtration-induction ('finite filtrations of [def-sp-filtration], with F^0A=A and F^NA=0') now describes the old wording; harmless, its hypothesis is self-stated.",
  "lean": {
-  "module": "WeilConjectures.CategoryTheory.PBCFiltration",
-  "declaration": "CategoryTheory.PBCDecreasingFiltration",
-  "statement": "structure PBCDecreasingFiltration (A : C)",
+  "module": "WeilConjectures.CategoryTheory.Abelian.Filtration",
+  "declaration": "CategoryTheory.DecreasingFiltration",
+  "statement": "structure DecreasingFiltration where",
   "branch": "slopmaster2",
-  "by": "NA",
+  "by": "Q01",
   "date": "2026-10-17",
   "existing": true,
-  "note": "The recorded DecreasingFiltration interface uses fields F and F_succ_le, whereas the published exact-couple convergence interface uses the existing PBCDecreasingFiltration (step and antitone_step). This existing upstream declaration states exactly the same notion on the representation used by ConvergesTo; no construction is duplicated."
+  "note": "The recorded PBCDecreasingFiltration is an equivalent but distinct representation that cannot be passed to the recorded filtered-complex and homotopy APIs. The upstream CategoryTheory.DecreasingFiltration (parameter A bound in the preceding variable declaration; fields F and F_succ_le) supplies the same decreasing subobject filtration used by those APIs. This is an existing-interface repair, with no new filtration construction."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-7546638d1",
-  "group": "NA",
+  "reviewer": "NT-stage2-cc-2caaf4b9e",
+  "group": "Q01",
   "result": "pass",
-  "note": "Spec theorem is word-for-word the R-hcf-reviewed, proved live statement except the square, now the recorded ChosenCartesianSquare g' f' f g. Changes otherwise: retired Sheaf.* imports moved to WeilConjectures.*, DecreasingFiltration became PBCDecreasingFiltration, ofShifted replaced by a direct BigradedExactCouple instance. Checked every hypothesis and conclusion clause of (1) Rf_*, (2) g^-1 Rf_*, (3) Rf'_* g'^-1 against the node: E2 terms, IsFinite and range a<=q<=n, ConvergesTo, image filtration, bridgeIso equations, canonical delta/phi/c comparisons, termwise g'^-1 truncation. Lean-only repoints of def-sp-filtration and def-sp-image-filtration to the existing upstream PBCDecreasingFiltration(.image) are consistent: def-sp-convergence and thm-sp-truncation-e2 already use PBC and no new-targets citer uses the generic DecreasingFiltration; existing:true without file as stage2_delivery.py requires. Definitions have real data; only three named Prop theorems are sorry; docstrings carry source and blueprint tags; universes explicit (Scheme.{u}, AddCommGrpCat.{u+1}); lean.statement verbatim. nt_compile.py: clean, exit 0, no non-sorry warnings; a negative control confirmed errors are reported. Edge cases n<a, p=0, any a, empty schemes OK. Cosmetic only: inner ∃ hT shadows the unused torsion hypothesis hT."
+  "note": "Every node clause matches the Lean exactly (conjuncts 1-7): projective equivalence, replacement, Hom bijection with unbounded target, the two-step versions on the recorded TwoStepModuleHomotopy (tested on K' and K/K'), and the canonical two-step-to-global localization lift. Normalized embedding is ⊤ for p<=0, K' at p=1, ⊥ for p>=2. No hollow data; the 5 sorry helper theorems are named, documented and true; main theorem is sorry. The 9 node steps are verbatim in the docstring. lean.statement matches the file up to whitespace; all 29 declarations are listed. nt_compile.py: rc 0, no messages; an injected-error control was caught. The gained stmt_dep def-trf-two-step is landed and cited correctly. Minor, non-blocking: the def-sp-filtration record goes back to DecreasingFiltration (justified by every API used, but NA's PBCDecreasingFiltration and def-sp-image-filtration remain; maintainer should list both representations). Docstrings name the wrong chapter for Tag 03TB. Parts of the worker report are stale; the second reading explains the change."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",

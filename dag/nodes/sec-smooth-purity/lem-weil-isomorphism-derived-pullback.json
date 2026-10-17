@@ -27,7 +27,8 @@
   "lem-weil-proetale-isomorphism-inverse-image",
   "def-weil-finite-torsion-constructibility",
   "def-weil-derived-complete-integral-detailed",
-  "def-weil-derived-pullback-tensor-hom"
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-constant-coefficient-objects-constructible"
  ],
  "proof": [
   {
@@ -345,5 +346,37 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-be31f82b0 (reviewer sub-agent of L); spot-checked: Read the complete item, report, all cited node statements, unit/chapter route, and cited source passages. All eight steps check, including the specified strict completion map, cone signs, transition compatibility, and uniform constructibility bounds. No cycles or duplicate new nodes; six declared tool uses accepted. Exact master target categories remain distinct and unchanged. Detailed findings recorded in review.md; no repairs required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d71671da",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Read node, report (real Worker report and Second reading by Q115), module and all recorded dependency declarations in the side clone (finiteDerivedPullback=sfIntrinsicDerivedPullback at n+1, constructibleIntegralPullback/integralDerivedPullback, proEtaleModuleInverseImage, proEtaleIsoConstantRingComparison, completed ring sheaf and projections, intrinsicFiniteTorsionConstructible, sfIntegralConstructible, constant coefficient objects). Every clause matches: n+1 covers n>=1; IsIso g; ell invertible on both schemes (recorded binders, redundant for an iso); termwise inverse image with scalars restricted along c.inv; constructibility preservation witness; natural iso of lifted full-subcategory functors; degree-0 specialization. Integral c_OE is the unique iso characterized by all projection equations (named sorry'd exists-unique theorem, H5-compliant, canonical not arbitrary). Universes forced by the recorded interfaces, not introduced here. stmt_deps gained the landed node lem-weil-constant-coefficient-objects-constructible (already a proof dep, allowed). Docstrings with source, blueprint tag and step-by-step proofs; sorry-only; imports per rule 7; lines <=100. nt_compile.py on the local side overlay: module compiled in 5.4 s, exit 0, no errors or warnings in the output. No findings requiring fix or return."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IsomorphismDerivedPullback",
+  "declaration": "WeilConjectures.isomorphismIntegralDerivedPullback_termwise",
+  "declarations": [
+   "WeilConjectures.isomorphismCompletedCoefficientComparison_existsUnique",
+   "WeilConjectures.isomorphismCompletedCoefficientComparison",
+   "WeilConjectures.isomorphismTermwiseModuleInverseImage",
+   "WeilConjectures.isomorphismTermwiseModuleInverseImage_exact",
+   "WeilConjectures.isomorphismTermwiseModuleInverseImage_additive",
+   "WeilConjectures.isomorphismTermwiseModuleInverseImage_preservesFiniteLimits",
+   "WeilConjectures.isomorphismTermwiseModuleInverseImage_preservesFiniteColimits",
+   "WeilConjectures.isomorphismFiniteTermwiseInverseImage",
+   "WeilConjectures.isomorphismIntegralTermwiseInverseImage",
+   "WeilConjectures.isomorphismFiniteDerivedPullback_termwise",
+   "WeilConjectures.isomorphismIntegralDerivedPullback_termwise"
+  ],
+  "file": "lean/Sheaf/Paper/IsomorphismDerivedPullback.lean",
+  "statement": "theorem isomorphismIntegralDerivedPullback_termwise {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] : ∃ h : ∀ K : DerivedCategory (scalarReductionSource l E Y), sfIntegralConstructible l E Y K → sfIntegralConstructible l E X ((isomorphismIntegralTermwiseInverseImage l E g).obj K), Nonempty (constructibleIntegralPullback l E g ≅ (sfIntegralConstructible l E X).lift ((sfIntegralConstructible l E Y).ι ⋙ isomorphismIntegralTermwiseInverseImage l E g) (fun K ↦ h K.obj K.property)) ∧ Nonempty ((integralDerivedPullback l E g).obj (integralConstantCoefficientObject l E Y) ≅ (isomorphismIntegralTermwiseInverseImage l E g).obj (integralConstantCoefficientObject l E Y))",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "States both finite and completed integral cases, with natural isomorphisms inside the recorded full constructible categories and the degree-zero coefficient specializations. Canonical scalar transport uses the existing module inverse image; the completed coefficient isomorphism is uniquely normalized by all quotient projections. The added statement dependency already supplies the coefficient objects named in the explicit specializations."
  }
 }
