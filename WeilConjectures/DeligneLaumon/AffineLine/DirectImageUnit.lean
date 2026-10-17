@@ -16,24 +16,21 @@ public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunctionWeil
 
 Let `j : U₀ ↪ 𝔸¹` be a dense open immersion. For a Weil sheaf `G` on the affine line, the unit
 `G ⟶ j_* j^* G` becomes an isomorphism on `U₀`, so its kernel and cokernel are punctual. These
-facts, and the restriction of a lisse sheaf to a smaller dense open, are the sheaf-theoretic
-input of the description of the simple curve perverse sheaves (blueprint
+facts, and the restriction of an irreducible lisse sheaf to a smaller dense open, are the
+sheaf-theoretic input of the description of the simple curve perverse sheaves (blueprint
 `prop-a1-curve-perverse-simples`).
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.mono_unit_app`: the unit `G ⟶ j_* j^* G` is a
+- `AlgebraicGeometry.WeilSheaf.mono_unit_app`: the unit `G ⟶ j_* j^* G` is a
   monomorphism when `G` has no nonzero punctual subsheaf, and its cokernel is punctual
-  (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.support_finite_cokernel_unit_app`).
+  (`AlgebraicGeometry.WeilSheaf.support_finite_cokernel_unit_app`).
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_mono_directImage`: a Weil sheaf without
   punctual subsheaf embeds into the direct image of its restriction to a dense lisse open, with
   punctual cokernel.
-- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_restrict_isLisse`: an irreducible lisse
-  datum can be restricted to a smaller dense open, on which two given sheaves are lisse, without
-  changing its direct image.
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isZero_or_isZero_of_exact`: an exact sequence
   `A ↪ j_*N ⟶ B ↠ C` with `N` irreducible lisse, `C` punctual and `B` without punctual subsheaf,
-  in which `A` and `C` are lisse on `U₀`, has `A = C = 0` or `B = 0`.
+  has `A = C = 0` or `B = 0`.
 
 ## Implementation notes
 
@@ -121,6 +118,7 @@ theorem eq_zero_of_support_finite_lowerStar [IsDominant j] {N : WeilSheaf k₀ l
     (i : G ⟶ (lowerStar j).obj N) : i = 0 :=
   (⟨U, j, N, hN⟩ : LisseOnDenseOpen k₀ l).eq_zero_of_support_finite hG i
 
+omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] in
 /-- A punctual Weil sheaf `G` on the affine line whose restriction to a dense open
 `j : U₀ ↪ 𝔸¹` is lisse vanishes on `U₀`: the unit `G ⟶ j_* j^* G` is a morphism from a punctual
 sheaf to the direct image of a lisse sheaf, hence zero, and its restriction to `U₀` is
@@ -177,6 +175,66 @@ theorem isZero_of_mono_cokernel_lowerStar_map {N' : WeilSheaf k₀ l D.U} (i : N
   rw [zero_comp]
   exact eq_zero_of_support_finite_lowerStar D.j (hN'.kernel_cokernel D.lisse i).2 hG _
 
+/-- A Weil sheaf on `U₀` vanishing on a nonempty open `V ⊆ U₀` is punctual: its support lies
+over the finitely many closed points of the affine line outside `V`. -/
+theorem support_finite_of_isZero_upperStar_opensι (V : D.U.Opens) [Nonempty V]
+    (H : WeilSheaf k₀ l D.U) (h : IsZero ((upperStar V.ι).obj H)) : H.support.Finite := by
+  let f : D.U.finitePoints → (affineLine k₀).finitePoints :=
+    fun y ↦ ⟨D.j.base y.1, Scheme.Hom.map_mem_finitePoints D.j y.2⟩
+  have hf : Function.Injective f := fun y y' hyy' ↦
+    Subtype.ext (D.j.isOpenEmbedding.injective (congrArg Subtype.val hyy'))
+  refine ((affineLine.finite_setOf_notMem (V.ι ≫ D.j).isOpenEmbedding.isOpen_range
+    (Set.range_nonempty _)).preimage hf.injOn).subset fun y hy hVy ↦ ?_
+  obtain ⟨z, hz⟩ := hVy
+  have hz' : V.ι.base z = y.1 :=
+    D.j.isOpenEmbedding.injective (by rw [← Scheme.Hom.comp_apply, hz])
+  have hzf : z ∈ (V : Scheme).finitePoints :=
+    Scheme.Hom.mem_finitePoints_of_isOpenImmersion V.ι (hz' ▸ y.2)
+  have hmem := (mem_support_upperStar_iff V.ι H ⟨z, hzf⟩).2 (by convert hy)
+  rw [support_eq_empty_of_isZero h] at hmem
+  exact hmem
+
+/-- Given finitely many closed points `S` of the affine line, the points of `U₀` lying over `S`
+form a closed subset with dense complement. -/
+theorem exists_dense_forall_notMem (S : Set (affineLine k₀).finitePoints) (hS : S.Finite) :
+    ∃ W : D.U.Opens, Dense (W : Set D.U) ∧ ∀ y : D.U.finitePoints, y.1 ∈ W →
+      (⟨D.j.base y.1, Scheme.Hom.map_mem_finitePoints D.j y.2⟩ :
+        (affineLine k₀).finitePoints) ∉ S := by
+  let f : D.U.finitePoints → (affineLine k₀).finitePoints :=
+    fun y ↦ ⟨D.j.base y.1, Scheme.Hom.map_mem_finitePoints D.j y.2⟩
+  have hf : Function.Injective f := fun y y' hyy' ↦
+    Subtype.ext (D.j.isOpenEmbedding.injective (congrArg Subtype.val hyy'))
+  set Z : Set D.U := ⋃ y ∈ f ⁻¹' S, {y.1}
+  have hZ : IsClosed Z := (hS.preimage hf.injOn).isClosed_biUnion fun y _ ↦
+    D.U.isClosed_singleton_of_mem_finitePoints y.2
+  refine ⟨⟨Zᶜ, hZ.isOpen_compl⟩, hZ.isOpen_compl.dense ?_, fun y hy hyS ↦
+    hy (Set.mem_biUnion (x := y) hyS rfl)⟩
+  -- otherwise `U₀` is a single closed point, and so is the affine line
+  by_contra hcon
+  rw [Set.not_nonempty_iff_eq_empty, Set.compl_empty_iff] at hcon
+  set η := genericPoint D.U
+  have hηZ : η ∈ Z := hcon ▸ Set.mem_univ η
+  obtain ⟨y, -, hy⟩ := Set.mem_iUnion₂.1 hηZ
+  rw [Set.mem_singleton_iff] at hy
+  have hη (z : D.U) : z = η := by
+    have hz : z ∈ closure ({η} : Set D.U) := by
+      rw [(genericPoint_spec D.U).def]
+      exact Set.mem_univ z
+    rwa [(D.U.isClosed_singleton_of_mem_finitePoints (hy ▸ y.2)).closure_eq] at hz
+  have hcl : IsClosed ({D.j.base η} : Set (affineLine k₀)) :=
+    (affineLine k₀).isClosed_singleton_of_mem_finitePoints
+      (hy ▸ Scheme.Hom.map_mem_finitePoints D.j y.2)
+  have hx (x : affineLine k₀) : x = D.j.base η := by
+    have hx : x ∈ closure (Set.range D.j.base) := by
+      rw [D.j.denseRange.closure_eq]
+      exact Set.mem_univ x
+    refine Set.mem_singleton_iff.1 ((closure_minimal ?_ hcl) hx)
+    rintro _ ⟨z, rfl⟩
+    rw [hη z]
+    exact rfl
+  obtain ⟨a, b, hab⟩ := affineLine.nontrivial k₀
+  exact hab ((hx a).trans (hx b).symm)
+
 /-- **Simplicity of a middle extension, sheaf part** (`prop-a1-curve-perverse-simples`). Let
 `A ↪ M ⟶ B ↠ C` be an exact sequence of Weil sheaves on the affine line with `M ≅ j_*N` for an
 irreducible lisse `N`, `C` punctual and `B` without nonzero punctual subsheaf. Then `A = C = 0`
@@ -200,15 +258,15 @@ theorem isZero_or_isZero_of_exact (hD : D.sheaf.IsIrreducibleLisse)
     (IsZero A ∧ IsZero C) ∨ IsZero B := by
   let eM' : M ≅ (lowerStar D.j).obj D.sheaf :=
     eM ≪≫ (Iso.refl D.directImage : D.directImage ≅ (lowerStar D.j).obj D.sheaf)
-  -- a dense open `V ⊆ U₀` on which `A` and `C` are lisse
+  -- a dense open `V ⊆ U₀` on which `A` is lisse and `C` vanishes
   obtain ⟨VA, hVA, hA⟩ := exists_dense_isLisse_upperStar ((upperStar D.j).obj A)
-  obtain ⟨VC, hVC, hCl⟩ := exists_dense_isLisse_upperStar ((upperStar D.j).obj C)
+  obtain ⟨VC, hVC, hCV⟩ := D.exists_dense_forall_notMem C.support hC
   set V : D.U.Opens := VA ⊓ VC
   have hV : Dense (V : Set D.U) := by
     rw [TopologicalSpace.Opens.coe_inf]
     exact hVA.inter_of_isOpen_left hVC VA.isOpen
   have : IsDominant V.ι := ⟨by rwa [DenseRange, Scheme.Opens.range_ι]⟩
-  have : Nonempty V := nonempty_of_isDominant (V.ι ≫ D.j)
+  have : Nonempty V := hV.nonempty.to_subtype
   have hlisse (W : D.U.Opens) (hVW : V ≤ W) (G : WeilSheaf k₀ l D.U)
       (hG : ((upperStar W.ι).obj G).IsLisse) : ((upperStar V.ι).obj G).IsLisse := by
     have : (D.U.homOfLE hVW).IsOver (Spec (CommRingCat.of k₀)) :=
@@ -222,10 +280,13 @@ theorem isZero_or_isZero_of_exact (hD : D.sheaf.IsIrreducibleLisse)
     eqToIso (Functor.comp_obj _ _ G)
   -- a sheaf vanishing on `V` is punctual
   have hpunct (G : WeilSheaf k₀ l (affineLine k₀)) (h : IsZero (ρ.obj G)) : G.support.Finite :=
-    support_finite_of_isZero_upperStar (V.ι ≫ D.j) G (h.of_iso ((upperStarCompIso V.ι D.j).app G))
-  have hC0 : IsZero (ρ.obj C) :=
-    (isZero_upperStar_of_isLisse (V.ι ≫ D.j) hC ((isLisse_upperStar_comp_iff V.ι D.j C).2
-      (hlisse VC inf_le_right _ hCl))).of_iso ((upperStarCompIso V.ι D.j).app C).symm
+    have := D.nonempty_U
+    support_finite_of_support_upperStar_finite D.j G
+      (D.support_finite_of_isZero_upperStar_opensι V _ (h.of_iso (eρ G).symm))
+  have hC0 : IsZero (ρ.obj C) := by
+    refine (isZero_upperStar_of_forall_notMem_support V.ι _ fun y hy ↦ ?_).of_iso (eρ C)
+    rw [mem_support_upperStar_iff] at hy
+    exact hCV ⟨_, _⟩ y.1.2.2 hy
   -- `s` is an epimorphism on `V`, its cokernel `C` vanishing there
   have : Epi t := inferInstance
   have eC : cokernel s ≅ C :=

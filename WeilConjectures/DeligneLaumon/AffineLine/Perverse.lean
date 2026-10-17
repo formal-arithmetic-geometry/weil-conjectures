@@ -643,16 +643,30 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 abbrev curvePerverse : ObjectProperty (WeilComplex k₀ l (affineLine k₀)) :=
   IsCurvePerverse
 
+/-- A curve perverse object `X` maps to a simple `P` either by an isomorphism or from zero, when
+the map is a monomorphism. -/
+theorem isZero_or_isIso_of_mono_of_simple
+    {X P : (curvePerverse (k₀ := k₀) (l := l)).FullSubcategory} [Simple P] (f : X ⟶ P) [Mono f] :
+    IsZero X ∨ IsIso f := by
+  by_cases h0 : f = 0
+  · exact .inl (IsZero.of_mono_eq_zero f h0)
+  · exact .inr ((Simple.mono_isIso_iff_nonzero f).2 h0)
+
+/-- A morphism of curve perverse objects which is an isomorphism of the heart is an isomorphism of
+Weil complexes. -/
+theorem isIso_hom_of_isIso {X P : (curvePerverse (k₀ := k₀) (l := l)).FullSubcategory}
+    (f : X ⟶ P) [IsIso f] : IsIso f.hom :=
+  inferInstanceAs (IsIso ((ObjectProperty.ι _).map f))
+
 /-- A subobject `f : Q ⟶ P` of the middle extension `P ≅ (j_*N)[1]` of an irreducible lisse `N`
-is `0` or all of `P`, provided `𝓗⁻¹Q` and `𝓗⁰Q` are lisse on `U₀`. The long exact sequence of
-the triangle `Q ⟶ P ⟶ R ⟶` of the heart is `0 ⟶ 𝓗⁻¹Q ⟶ j_*N ⟶ 𝓗⁻¹R ⟶ 𝓗⁰Q ⟶ 0`, to which
-`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isZero_or_isZero_of_exact` applies.
+is `0` or all of `P`. The long exact sequence of the triangle `Q ⟶ P ⟶ R ⟶` of the heart is
+`0 ⟶ 𝓗⁻¹Q ⟶ j_*N ⟶ 𝓗⁻¹R ⟶ 𝓗⁰Q ⟶ 0`, to which
+`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isZero_or_isZero_of_exact` applies: either
+`𝓗⁻¹Q = 𝓗⁰Q = 0` and `Q = 0`, or `𝓗⁻¹R = 0` and `R = 0`.
 (blueprint: `prop-a1-curve-perverse-simples`) -/
 theorem eq_zero_or_isIso_of_mono_middleExtension (D : WeilSheaf.LisseOnDenseOpen k₀ l)
     (hD : D.sheaf.IsIrreducibleLisse) {Q P : (curvePerverse (k₀ := k₀) (l := l)).FullSubcategory}
-    (eP : P.obj ≅ D.middleExtension) (f : Q ⟶ P) [Mono f]
-    (hA : ((WeilSheaf.upperStar D.j).obj ((homologySheaf (-1 : ℤ)).obj Q.obj)).IsLisse)
-    (hC : ((WeilSheaf.upperStar D.j).obj ((homologySheaf (0 : ℤ)).obj Q.obj)).IsLisse) :
+    (eP : P.obj ≅ D.middleExtension) (f : Q ⟶ P) [Mono f] :
     f = 0 ∨ IsIso f := by
   have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
     simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
@@ -660,20 +674,23 @@ theorem eq_zero_or_isIso_of_mono_middleExtension (D : WeilSheaf.LisseOnDenseOpen
   have hR := isCurvePerverse_of_mono f g h hT
   set T := Pretriangulated.Triangle.mk f.hom g h
   have hQ := Q.property
+  let eP' : P.obj ≅ (WeilSheaf.toComplex.obj D.directImage)⟦(1 : ℤ)⟧ :=
+    eP ≪≫ (Iso.refl D.middleExtension :
+      D.middleExtension ≅ (WeilSheaf.toComplex.obj D.directImage)⟦(1 : ℤ)⟧)
   have hP0 : IsZero ((homologySheaf (0 : ℤ)).obj P.obj) :=
     (isZero_homologySheaf_shift_one_toComplex D.directImage (by norm_num)).of_iso
-      ((homologySheaf (0 : ℤ)).mapIso eP)
+      ((homologySheaf (0 : ℤ)).mapIso eP')
   let eM : (homologySheaf (-1 : ℤ)).obj P.obj ≅ D.directImage :=
-    (homologySheaf (-1 : ℤ)).mapIso eP ≪≫
+    (homologySheaf (-1 : ℤ)).mapIso eP' ≪≫
       homologySheafShiftToComplexIso D.directImage 1 (-1) (by norm_num)
-  have : Mono ((homologySheaf (-1 : ℤ)).map f.hom) :=
+  have : Mono ((homologySheaf (-1 : ℤ)).map T.mor₁) :=
     (homologySheaf_exact₁ T (-2) (-1) hT (by norm_num)).mono_g
       ((hR.2.1 (-2) (by norm_num)).eq_of_src _ _)
   have : Epi (homologySheafδ T (-1) 0 (by norm_num)) :=
     (homologySheaf_exact₁ T (-1) 0 hT (by norm_num)).epi_f (hP0.eq_of_tgt _ _)
   obtain ⟨hA0, hC0⟩ | hB0 := D.isZero_or_isZero_of_exact hD eM _ _ _ _ _
-    (homologySheaf_exact₂ T (-1) hT) (homologySheaf_exact₃ T (-1) 0 hT (by norm_num)) hA
-    hQ.1.2 hC hR.2.2
+    (homologySheaf_exact₂ T (-1) hT) (homologySheaf_exact₃ T (-1) 0 hT (neg_add_cancel 1))
+    hQ.1.2 hR.2.2
   · left
     refine ObjectProperty.hom_ext _ (IsZero.eq_of_src ?_ _ _)
     refine isZero_of_forall_isZero_homologySheaf fun a ↦ ?_
@@ -697,37 +714,45 @@ theorem eq_zero_or_isIso_of_mono_middleExtension (D : WeilSheaf.LisseOnDenseOpen
     exact isIso_of_fully_faithful (ObjectProperty.ι _) f
 
 /-- **Middle extensions are simple** (`prop-a1-curve-perverse-simples`): a curve perverse object
-isomorphic to the middle extension `(j_*N)[1]` of an irreducible lisse `N` is simple. Given a
-subobject `Q`, shrink `U₀` so that `𝓗⁻¹Q` and `𝓗⁰Q` become lisse on it, which does not change
-`j_*N` (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_restrict_isLisse`), and apply
-`AlgebraicGeometry.WeilComplex.eq_zero_or_isIso_of_mono_middleExtension`. -/
+isomorphic to the middle extension `(j_*N)[1]` of an irreducible lisse `N` is simple
+(`AlgebraicGeometry.WeilComplex.eq_zero_or_isIso_of_mono_middleExtension`); it is nonzero since
+`N = j^* j_* N` is. -/
 theorem simple_of_iso_middleExtension (D : WeilSheaf.LisseOnDenseOpen k₀ l)
     (hD : D.sheaf.IsIrreducibleLisse) (P : (curvePerverse (k₀ := k₀) (l := l)).FullSubcategory)
     (eP : P.obj ≅ D.middleExtension) : Simple P := by
-  refine simple_of_forall_mono (fun hz ↦ hD.2.1 ?_) fun {Q} f _ ↦ ?_
-  · have h1 : IsZero D.directImage :=
-      ((homologySheaf (-1 : ℤ)).map_isZero ((ObjectProperty.ι _).map_isZero hz)).of_iso
-        ((homologySheaf (-1 : ℤ)).mapIso eP ≪≫
-          homologySheafShiftToComplexIso D.directImage 1 (-1) (by norm_num)).symm
-    exact ((WeilSheaf.upperStar D.j).map_isZero h1).of_iso
-      (asIso ((WeilSheaf.upperStarLowerStarAdjunction D.j).counit.app D.sheaf)).symm
-  · obtain ⟨D', hD', ⟨e⟩, hA, hC⟩ := D.exists_restrict_isLisse hD
-      ((homologySheaf (-1 : ℤ)).obj Q.obj) ((homologySheaf (0 : ℤ)).obj Q.obj)
-    exact eq_zero_or_isIso_of_mono_middleExtension D' hD'
-      (eP ≪≫ (shiftFunctor _ (1 : ℤ)).mapIso (WeilSheaf.toComplex.mapIso e.symm)) f hA hC
+  refine simple_of_forall_mono (fun hz ↦ hD.2.1 (D.isZero_of_isZero_lowerStar ?_))
+    fun {Q} f _ ↦ eq_zero_or_isIso_of_mono_middleExtension D hD eP f
+  let eP' : P.obj ≅ (WeilSheaf.toComplex.obj D.directImage)⟦(1 : ℤ)⟧ :=
+    eP ≪≫ (Iso.refl D.middleExtension :
+      D.middleExtension ≅ (WeilSheaf.toComplex.obj D.directImage)⟦(1 : ℤ)⟧)
+  have h1 : IsZero D.directImage :=
+    ((homologySheaf (-1 : ℤ)).map_isZero ((ObjectProperty.ι _).map_isZero hz)).of_iso
+      ((homologySheaf (-1 : ℤ)).mapIso eP' ≪≫
+        homologySheafShiftToComplexIso D.directImage 1 (-1) (by norm_num)).symm
+  exact h1.of_iso (Iso.refl _ : (WeilSheaf.lowerStar D.j).obj D.sheaf ≅ D.directImage)
+
+/-- A Weil sheaf `G` placed in degree `-1` vanishes if and only if `G` does. -/
+theorem isZero_of_isZero_shift_one_toComplex {G : WeilSheaf k₀ l (affineLine k₀)}
+    (h : IsZero ((WeilSheaf.toComplex.obj G)⟦(1 : ℤ)⟧)) : IsZero G :=
+  ((homologySheaf (-1 : ℤ)).map_isZero h).of_iso
+    (homologySheafShiftToComplexIso G 1 (-1) (by norm_num)).symm
 
 /-- **Simple objects without `𝓗⁰` are middle extensions** (`prop-a1-curve-perverse-simples`). Let
 `P` be simple with `𝓗⁰P = 0`, so `P ≅ F[1]` for `F = 𝓗⁻¹P` without punctual subsheaf. On a
 dense open `j : U₀ ↪ 𝔸¹` where `F` is lisse, the unit `F ⟶ j_*j^*F` is injective with punctual
-cokernel `Q`, and the triangle `Q[0] ⟶ F[1] ⟶ (j_*j^*F)[1] ⟶` exhibits `Q[0]` as a subobject of
-`P`, so `Q = 0` and `P ≅ (j_*N)[1]`, `N = j^*F`. A proper nonzero lisse subsheaf `N' ⊂ N` would
-give the subobject `(j_*N')[1]` of `P`, with quotient `C[1]`, `C = coker(j_*N' ⟶ j_*N)` being a
-subsheaf of `j_*(N/N')`. -/
+cokernel `Q` (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_mono_directImage`), and the
+triangle `Q[0] ⟶ F[1] ⟶ (j_*j^*F)[1] ⟶` exhibits `Q[0]` as a subobject of `P`, so `Q = 0` and
+`P ≅ (j_*N)[1]`, `N = j^*F`. A lisse subsheaf `N' ⊆ N` gives the subobject `(j_*N')[1]` of `P`,
+with quotient `C[1]`, `C = coker(j_*N' ⟶ j_*N)` having no punctual subsheaf
+(`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isZero_of_mono_cokernel_lowerStar_map`); so
+`N' = 0` or `N' = N`. -/
 theorem exists_middleExtension_of_simple
     (P : (curvePerverse (k₀ := k₀) (l := l)).FullSubcategory) [Simple P]
     (h : IsZero ((homologySheaf (0 : ℤ)).obj P.obj)) :
     ∃ D : WeilSheaf.LisseOnDenseOpen k₀ l, D.sheaf.IsIrreducibleLisse ∧
       Nonempty (P.obj ≅ D.middleExtension) := by
+  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
   have hP := P.property
   set F := (homologySheaf (-1 : ℤ)).obj P.obj
   have hF : ∀ (G : WeilSheaf k₀ l (affineLine k₀)) (i : G ⟶ F), Mono i → G.support.Finite →
@@ -744,25 +769,63 @@ theorem exists_middleExtension_of_simple
   let P' : (curvePerverse (k₀ := k₀) (l := l)).FullSubcategory :=
     ⟨(WeilSheaf.toComplex.obj F)⟦(1 : ℤ)⟧, isCurvePerverse_shift_one_toComplex F hF⟩
   have : Simple P' := Simple.of_iso (ObjectProperty.isoMk _ eF).symm
-  have hP'0 : ¬ IsZero F := fun hz ↦ Simple.not_isZero P'
+  have hF0 : ¬ IsZero F := fun hz ↦ Simple.not_isZero P'
     (IsZero.of_full_of_faithful_of_isZero (ObjectProperty.ι _) P'
       ((shiftFunctor _ (1 : ℤ)).map_isZero (WeilSheaf.toComplex.map_isZero hz)))
-  -- the lisse locus of `F`
-  obtain ⟨U, hU, hUl⟩ := WeilSheaf.exists_dense_isLisse_upperStar F
-  have : IsDominant U.ι := ⟨by rwa [DenseRange, Scheme.Opens.range_ι]⟩
-  let D : WeilSheaf.LisseOnDenseOpen k₀ l :=
-    { U := U, j := U.ι, sheaf := (WeilSheaf.upperStar U.ι).obj F, lisse := hUl }
-  let η : F ⟶ D.directImage :=
-    (WeilSheaf.upperStarLowerStarAdjunction (k₀ := k₀) (l := l) D.j).unit.app F
-  have : Mono η := D.mono_unit_app hF
+  -- the unit `F ⟶ j_* j^* F`
+  obtain ⟨D, η, hη, hc⟩ := WeilSheaf.LisseOnDenseOpen.exists_mono_directImage hF
   have hS : (ShortComplex.mk η (cokernel.π η) (cokernel.condition η)).ShortExact :=
     { exact := ShortComplex.exact_cokernel η }
-  have hc := D.support_finite_cokernel_unit_app F
-  have hT := rot_of_distTriang _ (rot_of_distTriang _
+  have hT := Pretriangulated.rot_of_distTriang _ (Pretriangulated.rot_of_distTriang _
     (WeilSheaf.singleTriangle_distinguished hS))
   have hm := mono_homMk_of_distinguished (Q := punctualObj _ hc) (P := P') _ _ _ hT
     D.isCurvePerverse_middleExtension.2
-  sorry
+  obtain hz | hiso := @isZero_or_isIso_of_mono_of_simple _ _ _ _ _ _ _ _ _ _ hm
+  swap
+  · -- the cokernel of `F ⟶ j_*N` vanishes, else `j_*N = 0`
+    have h3 := (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hT).2
+      (@isIso_hom_of_isIso _ _ _ _ _ _ _ _ _ hiso)
+    exact absurd (IsZero.of_mono η (isZero_of_isZero_shift_one_toComplex h3)) hF0
+  have hcz : IsZero (cokernel η) :=
+    ((homologySheaf (0 : ℤ)).map_isZero ((ObjectProperty.ι _).map_isZero hz)).of_iso
+      (WeilSheaf.toComplexCompHomologySheafIso.app _).symm
+  have : Epi η := Preadditive.epi_of_isZero_cokernel η hcz
+  have : IsIso η := isIso_of_mono_of_epi η
+  let e : P.obj ≅ (WeilSheaf.toComplex.obj D.directImage)⟦(1 : ℤ)⟧ :=
+    eF ≪≫ (shiftFunctor _ (1 : ℤ)).mapIso (WeilSheaf.toComplex.mapIso (asIso η))
+  refine ⟨D, ⟨D.lisse, fun hN ↦ hF0 (IsZero.of_mono η ?_), fun N' i _ hN' ↦ ?_⟩,
+    ⟨e ≪≫ (Iso.refl _ : (WeilSheaf.toComplex.obj D.directImage)⟦(1 : ℤ)⟧ ≅ D.middleExtension)⟩⟩
+  · exact ((WeilSheaf.lowerStar D.j).map_isZero hN).of_iso
+      (Iso.refl _ : D.directImage ≅ (WeilSheaf.lowerStar D.j).obj D.sheaf)
+  -- a lisse subsheaf `N' ⊆ N` gives the subobject `(j_*N')[1]` of `P`
+  let ji := (WeilSheaf.lowerStar D.j).map i
+  have : Mono ji := (WeilSheaf.lowerStar D.j).map_mono i
+  have hS₂ : (ShortComplex.mk ji (cokernel.π ji) (cokernel.condition ji)).ShortExact :=
+    { exact := ShortComplex.exact_cokernel ji }
+  have hT₂ := Pretriangulated.rot_of_distTriang _ (Pretriangulated.rot_of_distTriang _
+    (Pretriangulated.rot_of_distTriang _
+    (WeilSheaf.singleTriangle_distinguished hS₂)))
+  let Q₂ : (curvePerverse (k₀ := k₀) (l := l)).FullSubcategory :=
+    ⟨(WeilSheaf.toComplex.obj ((WeilSheaf.lowerStar D.j).obj N'))⟦(1 : ℤ)⟧,
+      isCurvePerverse_shift_one_toComplex _ fun G g _ hG ↦
+        IsZero.of_mono_eq_zero g (WeilSheaf.eq_zero_of_support_finite_lowerStar D.j hN' hG g)⟩
+  let P₂ : (curvePerverse (k₀ := k₀) (l := l)).FullSubcategory :=
+    ⟨(WeilSheaf.toComplex.obj ((WeilSheaf.lowerStar D.j).obj D.sheaf))⟦(1 : ℤ)⟧,
+      isCurvePerverse_shift_one_toComplex _ fun G g _ hG ↦
+        IsZero.of_mono_eq_zero g (WeilSheaf.eq_zero_of_support_finite_lowerStar D.j D.lisse hG g)⟩
+  have : Simple P₂ := Simple.of_iso (ObjectProperty.isoMk _ (e ≪≫ (Iso.refl _ :
+    (WeilSheaf.toComplex.obj D.directImage)⟦(1 : ℤ)⟧ ≅ P₂.obj))).symm
+  have hm₂ := mono_homMk_of_distinguished (Q := Q₂) (P := P₂) _ _ _ hT₂
+    (isCurvePerverse_shift_one_toComplex _ fun G g _ hG ↦
+      D.isZero_of_mono_cokernel_lowerStar_map i hN' G g hG).2
+  obtain hz₂ | hiso₂ := @isZero_or_isIso_of_mono_of_simple _ _ _ _ _ _ _ _ _ _ hm₂
+  · exact .inl (D.isZero_of_isZero_lowerStar (isZero_of_isZero_shift_one_toComplex
+      ((ObjectProperty.ι _).map_isZero hz₂)))
+  · have h3 := (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hT₂).2
+      (@isIso_hom_of_isIso _ _ _ _ _ _ _ _ _ hiso₂)
+    have : Epi ji := Preadditive.epi_of_isZero_cokernel ji
+      (isZero_of_isZero_shift_one_toComplex h3)
+    exact .inr (D.isIso_of_isIso_lowerStar_map i (isIso_of_mono_of_epi ji))
 
 /-- **Simple perverse sheaves on the affine line**: a curve perverse Weil complex is simple in
 `Perv(A₀)` exactly when it is either a simple Weil sheaf of finite support placed in degree
@@ -774,9 +837,18 @@ theorem simple_iff (P : (curvePerverse (k₀ := k₀) (l := l)).FullSubcategory)
       (∃ G : WeilSheaf k₀ l (affineLine k₀), Simple G ∧ G.support.Finite ∧
         Nonempty (P.obj ≅ WeilSheaf.toComplex.obj G)) ∨
       ∃ D : WeilSheaf.LisseOnDenseOpen k₀ l, D.sheaf.IsIrreducibleLisse ∧
-        Nonempty (P.obj ≅ D.middleExtension) :=
-  -- TODO(adic): the exact sequences of the heart and the surjectivity of `π₁(U') → π₁(U)`
-  sorry
+        Nonempty (P.obj ≅ D.middleExtension) := by
+  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
+  constructor
+  · intro
+    obtain h | h := isZero_homologySheaf_neg_one_or_zero_of_simple P
+    · exact .inl (exists_simple_of_simple_of_isZero_homologySheaf_neg_one P h)
+    · exact .inr (exists_middleExtension_of_simple P h)
+  · rintro (⟨G, hG, hGf, ⟨e⟩⟩ | ⟨D, hD, ⟨e⟩⟩)
+    · have := (simple_punctualObj_iff G hGf).2 hG
+      exact Simple.of_iso (ObjectProperty.isoMk _ e : P ≅ punctualObj G hGf)
+    · exact simple_of_iso_middleExtension D hD P e
 
 end WeilComplex
 
