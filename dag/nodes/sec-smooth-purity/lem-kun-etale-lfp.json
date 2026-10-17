@@ -15,24 +15,20 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "By [def-weil-pbc-scheme-conventions], an étale morphism $U\\to X$ is locally of finite presentation, hence locally of finite type (over affine opens a finitely presented algebra is finitely generated). Since $X$ is of finite type over $K$, the structure morphism $X\\to\\operatorname{Spec}K$ is quasi-compact and locally of finite type by the finite-type clause of [def-weil-pbc-scheme-conventions]. The composite $U\\to X\\to\\operatorname{Spec}K$ is quasi-compact, because a composite of quasi-compact morphisms is quasi-compact (the preimage of an affine open is quasi-compact, hence a finite union of affine opens, each with quasi-compact preimage; Mathlib AlgebraicGeometry.quasiCompact_comp, Morphisms/QuasiCompact.lean:69), and it is locally of finite type, because a composite of morphisms locally of finite type is locally of finite type (on affine opens, a finitely generated algebra over a finitely generated algebra is finitely generated; Mathlib AlgebraicGeometry.locallyOfFiniteType_comp, Morphisms/FiniteType.lean:68). Therefore the composite is of finite type by the clause of [def-weil-pbc-scheme-conventions] identifying finite type with quasi-compact and locally of finite type.",
-   "uses": [
-    "def-weil-pbc-scheme-conventions"
-   ],
+   "text": "Mathlib supplies Smooth f from Etale f and LocallyOfFinitePresentation f from Smooth f, proving the first conjunct. LocallyOfFinitePresentation f also supplies LocallyOfFiniteType f. For the second conjunct, install the explicit quasi-compactness of f and the quasi-compactness and locally finite type hypotheses on g as local instances. The Mathlib instances quasiCompact_comp and locallyOfFiniteType_comp give the two properties of f ≫ g.",
+   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-etale-lfp.md",
-    "place": "## Proof"
+    "document": "Mathlib.AlgebraicGeometry.Morphisms.Etale, Mathlib.AlgebraicGeometry.Morphisms.Smooth, Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation, Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact, Mathlib.AlgebraicGeometry.Morphisms.FiniteType",
+    "place": "Etale.lean:114 (Etale to Smooth); Smooth.lean:241 (Smooth to LocallyOfFinitePresentation); FinitePresentation.lean:108 (LocallyOfFinitePresentation to LocallyOfFiniteType); quasiCompact_comp; locallyOfFiniteType_comp"
    }
   }
  ],
- "proof_deps": [
-  "def-weil-pbc-scheme-conventions"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-etale-lfp.md",
-  "place": "## Proof"
+  "by": "worker F4",
+  "document": "Mathlib.AlgebraicGeometry.Morphisms.Etale, Mathlib.AlgebraicGeometry.Morphisms.Smooth, Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation, Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact, Mathlib.AlgebraicGeometry.Morphisms.FiniteType",
+  "place": "direct typeclass proof"
  },
  "mathlib_searches": [
   {
@@ -135,5 +131,15 @@
   "group": "H1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261017T041408-L-2535697",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
