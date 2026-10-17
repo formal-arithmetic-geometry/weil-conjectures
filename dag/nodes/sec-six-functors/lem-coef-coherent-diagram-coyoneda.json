@@ -30,12 +30,165 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "For every $\\mathcal U$-small simplicial shape $L$, existence of its colimits in $\\mathcal B$ says exactly that each diagram has a universal arrow to the constant-diagram functor $\\Delta_L:\\mathcal B\\to\\operatorname{Fun}(L,\\mathcal B)$. The opposite form of [lem-coef-parametric-universal-arrows] assembles these arrows into $\\operatorname{colim}_L\\dashv\\Delta_L$, with its adjunction on functor categories with any simplicial parameters. Apply this parametrized adjunction with parameter $N(I)$ and use the canonical currying isomorphism (interchanging the two parameter factors) $\\operatorname{Fun}(L,\\operatorname{Fun}(N(I),\\mathcal B))\\cong\\operatorname{Fun}(N(I),\\operatorname{Fun}(L,\\mathcal B))$. The left adjoint to the constant-$L$ functor on $\\mathcal P$ is therefore postcomposition with $\\operatorname{colim}_L$; its unit evaluated at $j$ is the original colimit unit in $\\mathcal B$. This constructs the pointwise colimit cocones. The cocone criterion and componentwise equivalence detection of [lem-cbc-enhanced-functor-cone-calculus] show that a specified cocone is colimiting exactly when all its evaluations are: compare it to the constructed cocone and test the resulting map componentwise. In particular, evaluations preserve these colimits. For any further simplicial parameter $M$, apply the cited parametrized adjunction to $M\\times N(I)$: the degreewise product permutation and currying identify its unit at $(m,j)$ with the original colimit unit in $\\mathcal B$. Restriction along $M^\\prime\\to M$ commutes with that product permutation and unit. Thus the pointwise cocones and their comparisons retain all simplicial parameters, in any containing universe.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 6.2.10, printed p. 279, dualized; its parametrized-adjunction input is Theorem 6.1.22."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-ordinary-pointwise-kan-extension] to the ordinary functor $\\{*\\}\\to I$ with value $i$ (it need not be full when $i$ has endomorphisms). Its comma category over $j$ is the discrete set $\\operatorname{Hom}_I(i,j)$. The pointwise formula gives $i!x(j)=\\coprod_{i\\to j}x$, with composition structure maps and the coherent adjunction $\\operatorname{Map}_{\\mathcal P}(i!x,F)\\simeq\\operatorname{Map}_{\\mathcal B}(x,F(i))$. For $v:i\\to i'$, the comma-map clause gives $i'!x\\to i!x$ by sending the summand $w:i'\\to j$ to $wv:i\\to j$. Its coherent compatibility with composition makes $Q:N(I)^{\\mathrm{op}}\\times\\mathcal B\\to\\mathcal P$, $Q(i,x)=i!x$, a functor, including all higher parameters. The adjunction is natural in all three variables, and its counit sends the $w$ summand by $F(w)$. Each $i!$ preserves $\\mathcal U$-small colimits: the parametrized adjunction identifies cocones from $i!$ of a diagram with cocones from that diagram after evaluation, so the colimit universal arrow is preserved.",
+   "uses": [
+    "lem-coef-infinity-ordinary-pointwise-kan-extension",
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Relative Yoneda formula (6.7.1.1); the ordinary comma-category specialization of Proposition 6.4.9."
+   }
+  },
+  {
+   "text": "Put $A=N(I)$, $D=A^{\\mathrm{op}}\\times\\mathcal B$ and $R_F=D\\times_{\\mathcal P}\\mathcal P_{/F}$, with $Q(i,x)=i!x$. Its projection to $D$ is a right fibration by [lem-coef-infinity-slice-right-fibration]; hence the composite $p:R_F\\to A^{\\mathrm{op}}$ is an inner fibration (fill an inner horn first in the product $D$, then in the right fibration). First use the opposite fixed-target comparison of [lem-coef-infinity-join-cone-calculus], with one-point boundary and varying source, to compare the join slices with the coherent arrow slices. Its base-change clause permits pullback along $Q(i,-)$. The parametrized adjunction of step 2 then gives an equivalence of the fibre over $i$ with $\\mathcal B_{/F(i)}$: it sends the coherent arrow data $Q(i,x)\\to F$ to $x\\to F(i)$, with the same operations on parameter simplices. The unit and counit give inverse equivalences on these slice data by their triangle identities. This is a coherent equivalence of slices, rather than an assertion that their distinct simplicial models are equal. More generally an arrow over $v^{\\mathrm{op}}:j\\to i$ is a map $h:x\\to y$ with the coherent triangle $a=F(v)bh$, where $a:x\\to F(j)$ and $b:y\\to F(i)$. The same mate operation on parameter simplices gives this description with all higher triangle data. There is a lift with target $(i,y,b)$ and source $(j,y,F(v)b)$, given by $h=1_y$. Take a test object $(l,z,c:z\\to F(l))$ and a base arrow $w^{\\mathrm{op}}:l\\to j$, where $w:j\\to l$ in $I$. By the slice mapping-space fibre formula of [lem-cbc-enhanced-functor-cone-calculus] and the mate equivalence above, maps from this test object to the source of the lift over $w^{\\mathrm{op}}$ form the homotopy fibre over $c$ of $\\operatorname{Map}_{\\mathcal B}(z,y)\\to\\operatorname{Map}_{\\mathcal B}(z,F(l))$, $h\\mapsto F(w)F(v)bh$. Maps to its target over $(wv)^{\\mathrm{op}}$ form the homotopy fibre of $h\\mapsto F(wv)bh$ over the same $c$. Postcomposition with the lift is the identity on $h$, and the composition simplex of $F$ identifies these two maps and their homotopy fibres, including all parameter simplices. The base mapping spaces are discrete Hom sets, since the base is an ordinary nerve; testing these fibres for every $w$ therefore proves that the entire mapping-space square is a homotopy pullback. Apply the opposite form of [lem-coef-infinity-cocartesian-mapping-criterion] to see that this lift is cartesian. Consequently $p$ is a cartesian fibration, with transport $\\mathcal B_{/F(i)}\\to\\mathcal B_{/F(j)}$ given by postcomposition with $F(v)$. No classification theorem for fibrations is used. The identity $F(i)\\to F(i)$ is terminal in its slice by [lem-coef-infinity-slice-equivalence-final], so all fibres have the required terminal objects.\n\nApply [lem-coef-cartesian-terminal-twisted-resolution]. It gives a final map $k_F:K\\to R_F$ with $K=N(\\operatorname{Tw}(I)^{\\mathrm{op}})$. At $u:a\\to b$, its object is $(b,F(a),F(u):F(a)\\to F(b))$. For $(f:a\\to a',g:b'\\to b)$ with $u=gu'f$, the map in $\\mathcal B$ is $F(f)$, and its coherent triangle is the composition simplex of $F$ on $u=gu'f$. Indeed the map from transport of the identity of $F(a)$ to the terminal identity of $F(a')$ is precisely $F(f)$. The associated free-diagram cocone therefore has leg adjoint to $F(u)$; this also constructs it naturally in $F$ by evaluation and the counit of step 2. Since $I$ is $\\mathcal U$-small, $K$ is $\\mathcal U$-small. The strong finality clause of the cited resolution lemma holds in every containing target universe, exactly as required by the item, independently of the sizes of the fibres or mapping spaces.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-ordinary-pointwise-kan-extension",
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-slice-equivalence-final",
+    "lem-coef-cartesian-terminal-twisted-resolution",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 6.7.5 and the interpretation after (7.9.8.10); agent replacement of the classification step by the given cartesian fibration and its terminal-fibre resolution."
+   }
+  },
+  {
+   "text": "We will flatten coproducts by the following calculation, rather than assume an interchange theorem for varying sets. For a $\\mathcal U$-small ordinary category $C_0$ and functor $S:C_0\\to\\mathrm{Set}_{\\mathcal U}$, let $E_S$ have objects $(c,s\\in S(c))$ and arrows $r:c\\to c'$ with $S(r)s=s'$, and let $p:E_S\\to C_0$ be projection. In $(p\\downarrow c)$, the full subcategory consisting of $((c,s),1_c)$ is discrete and its inclusion is right adjoint to $((b,t),r)\\mapsto S(r)t$: there is exactly one map to $((c,s),1_c)$ when $S(r)t=s$. By [lem-coef-infinity-right-adjoint-reindexing] this inclusion does not change colimit cocones. The pointwise Kan formula consequently gives $(p_!V)(c)=\\coprod_{s\\in S(c)}V(c,s)$ for every coherent $V:N(E_S)\\to\\mathcal B$. Composing the adjunctions $p_!\\dashv p^*$ and $\\operatorname{colim}_{C_0}\\dashv\\Delta_{C_0}$ identifies $\\operatorname{colim}_{C_0}p_!V$ with $\\operatorname{colim}_{E_S}V$: both have the same mapping-space adjunction to $\\Delta_{E_S}$. The identifications use the specified colimit legs and are coherent with arbitrary parameters by the parametrized adjunctions. This calculation applies with $\\mathcal E$ in place of $\\mathcal B$ as well.",
+   "uses": [
+    "lem-coef-infinity-ordinary-pointwise-kan-extension",
+    "lem-coef-infinity-right-adjoint-reindexing",
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent comma-category calculation from Proposition 6.4.9; used to compute the relative Yoneda cocone of Lemma 6.7.7."
+   }
+  },
+  {
+   "text": "Evaluate the cocone of step 3 at $j\\in I$. Step 4 identifies its source colimit with the colimit of $F(a)$ on the ordinary category $L_j$ of pairs $(u:a\\to b,w:b\\to j)$; an arrow to $(u':a'\\to b',w')$ is $(f:a\\to a',g:b'\\to b)$ with $u=gu'f$ and $w'=wg$. Define $p_j:L_j\\to I_{/j}$ by $(u,w)\\mapsto wu$, and define $s_j:I_{/j}\\to L_j$ by $t:a\\to j\\mapsto(t,1_j)$. There are natural bijections $\\operatorname{Hom}_{L_j}(s_j(t),(u,w))=\\{f\\mid t=wuf\\}=\\operatorname{Hom}_{I_{/j}}(t,p_j(u,w))$; thus $s_j\\dashv p_j$. The diagram $F(a)$ factors through $p_j$, which is final by right-adjoint reindexing. The category $I_{/j}$ has terminal object $1_j$, so its colimit is $F(j)$ by [lem-coef-infinity-final-index-colimit]. The resulting leg on $(u,w)$ is precisely $F(wu)$, the evaluation of the cocone already specified in step 3. Consequently that specified cocone is pointwise colimiting, hence is colimiting in $\\mathcal P$ by step 1. Together with finality in step 3 this proves the asserted large-relative-slice presentation.",
+   "uses": [
+    "lem-coef-infinity-right-adjoint-reindexing",
+    "lem-coef-infinity-final-index-colimit",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 6.7.7, with the density calculation expanded by ordinary slice adjunctions."
+   }
+  },
+  {
+   "text": "Let $\\mathcal T$ be the full functor subcategory in the statement. Define a coherent diagram depending on $(T,F)\\in\\mathcal T\\times\\mathcal P$ by $u:a\\to b\\mapsto T(b,F(a))$, using the same fixed projection from $K$ as in step 3 and the evaluation functors for $T$ and $F$. Compose its curried functor with $\\operatorname{colim}_K:\\operatorname{Fun}(K,\\mathcal E)\\to\\mathcal E$ to obtain $S(T)=H_T$. This is a functor on $\\mathcal T$, including transformations and higher simplices, because it is a composite of coherent evaluation, currying and the colimit functor, rather than an assembly of independently chosen objects. Each $F\\mapsto T(b,F(a))$ preserves $\\mathcal U$-small colimits by step 1 and the hypothesis on $T(b,-)$. The colimit functor $\\operatorname{colim}_K$ preserves these colimits: it is a left adjoint by step 1, and the parametrized adjunction carries a pointwise colimit cocone to the universal cocone for its image. Equivalently, for any $\\mathcal U$-small shape $L$, the two iterated colimit functors on $\\operatorname{Fun}(L\\times K,\\mathcal E)$ are left adjoint to the same doubly constant functor. Their universal-arrow equivalence identifies their cocone legs, giving the required interchange. Hence $H_T$ preserves all $\\mathcal U$-small colimits. Restriction $R(H)=HQ$ lands in $\\mathcal T$ since each $i!$ preserves these colimits by step 2.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-ordinary-pointwise-kan-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction in Theorem 6.7.2 and Lemma 6.7.7; pointwise-colimit argument of Proposition 6.3.12."
+   }
+  },
+  {
+   "text": "For a free diagram $i!x$, the formula for $S$ gives $S(T)(i!x)=\\operatorname{colim}_{u:a\\to b}\\,T(b,\\coprod_{v:i\\to a}x)$. Since $T(b,-)$ preserves coproducts, this is $\\operatorname{colim}_{u}\\coprod_{v:i\\to a}T(b,x)$. The comparison is canonical: it is induced by the coproduct injections under $T(b,-)$, so it is coherent also in $b$ and $T$. Step 4 flattens it to the category $J_i$ of pairs $(u:a\\to b,v:i\\to a)$, with arrows $(f:a\\to a',g:b'\\to b)$ satisfying $u=gu'f$ and $v'=fv$. Define $p_i:J_i\\to(i/I)^{\\mathrm{op}}$ by $(u,v)\\mapsto uv:i\\to b$ and $s_i:(i/I)^{\\mathrm{op}}\\to J_i$ by $w:i\\to c\\mapsto(w,1_i)$. A map $s_i(w)\\to(u,v)$ has its $f$ forced to be $v$, and its remaining datum is $g:b\\to c$ with $w=guv$. These are exactly the maps $w\\to uv$ in $(i/I)^{\\mathrm{op}}$, proving $s_i\\dashv p_i$. The diagram on $J_i$ is the pullback of $w:i\\to b\\mapsto T(b,x)$, and $p_i$ is final by right-adjoint reindexing. Since $1_i$ is terminal in $(i/I)^{\\mathrm{op}}$, its colimit is $T(i,x)$. The resulting equivalence $S(T)(i!x)\\to T(i,x)$ uses $T(uv):T(b,x)\\to T(i,x)$ on each summand. For $h:i'\\to i$, precomposing $v$ by $h$ changes this leg to $T(uvh)=T(h)T(uv)$, with the composition coherences supplied by $T$ itself. A map or higher simplex in $x$ or $T$ is sent through the same evaluation and colimit functors. Thus these comparisons define the coherent natural equivalence $RS\\simeq1_{\\mathcal T}$, including all parameters.",
+   "uses": [
+    "lem-coef-infinity-right-adjoint-reindexing",
+    "lem-coef-infinity-final-index-colimit",
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Free-diagram calculation for Theorem 6.7.2; two explicit slice adjunctions replace an appeal to abstract relative completion."
+   }
+  },
+  {
+   "text": "For every colimit-preserving $H:\\mathcal P\\to\\mathcal E$, the density cocone of step 5 induces a comparison $S(R(H))(F)=\\operatorname{colim}_{u:a\\to b}H(b!F(a))\\to H(F)$. It is an equivalence because $K$ is $\\mathcal U$-small and $H$ preserves its colimit. The density cocone was defined by the adjunction counit and the evaluation functor on all $(u,F)$ in step 3. Applying evaluation on $(H,F)$ and then the colimit functor therefore gives this comparison as a coherent natural transformation on the entire functor subcategory, including every higher simplex. Componentwise equivalence detection makes it a natural equivalence $SR\\simeq1$. Along with $RS\\simeq1$ from step 7, these are quasi-inverse functors between the two full quasicategories in the statement. This proves the equivalence on entire functor categories, so in particular the restriction on spaces of transformations is an equivalence.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 6.7.2, inverse equivalences constructed directly from the density cocone."
+   }
+  },
+  {
+   "text": "For the quasicategory $K=N(\\operatorname{Tw}(I)^{\\mathrm{op}})$ and a diagram $V:K\\to\\mathcal P$ and $G\\in\\mathcal P$, pull back $\\mathcal P_{/G}\\to\\mathcal P$ along $V$. By [lem-coef-infinity-slice-right-fibration] this gives a right fibration $q:E_V\\to K$ whose fibre at $k$ is exactly the Kan space $\\operatorname{Map}_{\\mathcal P}(V(k),G)$. The concrete-slice clause of [lem-coef-right-fibration-section-limit] identifies its whole fibre-transport functor with $m(k)=\\operatorname{Map}_{\\mathcal P}(V(k),G)$, with edge maps given by precomposition. That same node proves that its section Kan complex is the limit of $m$. A section of this pullback is a map over $\\mathcal P$ from $K$ to the join slice, hence, by the defining join adjunction, a join cocone on $V$ with fixed vertex $G$; the parameter version uses $K\\times\\Delta^n$ and fixes the projection to $K$. The opposite fixed-boundary, fixed-vertex comparison of [lem-coef-infinity-join-cone-calculus] identifies this space with the coherent cocone mapping space $\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal P)}(V,\\Delta_KG)$. The cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] now identifies mapping out of a colimit with this section space, and hence with $\\lim_{K^{\\mathrm{op}}}m$. Each comparison is evaluation or precomposition by the specified cocone. Applying this to the cocone of step 5 proves the asserted mapping-out formula as an equivalence of whole spaces, not of components. Enlarge the ambient universe to contain $\\mathcal P,G,E_V$ and their mapping spaces; this uses no additional colimits in $\\mathcal B$ or $\\mathcal E$. For the full relative slice, the strong finality of step 3 identifies its cocone space with the small-index cocone space, so the same argument applies in a universe containing that slice.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-right-fibration-section-limit",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.3.3.4 and Remark 3.3.3.5, opposite form; join-slice cocone identification applied to the small density index."
+   }
+  },
+  {
+   "text": "If $I$ is empty, $K$ is empty and $\\mathcal P$ is terminal. A colimit-preserving functor from it selects an initial object of $\\mathcal E$, whose space of choices is contractible by the cone criterion; $\\mathcal T=\\operatorname{Fun}(\\varnothing,\\mathcal E)$ is terminal, as required. If $I=*$, $K=*$ and the formulas are $Q(*,x)=x$ and $H_T(F)=T(*,F)$. For discrete $I$, $K$ is discrete and $H_T(F)=\\coprod_iT(i,F(i))$. For $I=[1]$, $K$ is the span $1_0\\leftarrow(0\\to1)\\to1_1$, and the formula is the pushout $T(0,F(0))\\amalg_{T(1,F(0))}T(1,F(1))$ with the first map coming from contravariance in $I$. Empty coproducts and an initial $x$ give initial free diagrams and initial extension values, since the functors preserve the empty colimit. These checks require no nonzero objects or field hypotheses.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent edge-case and variance checks of the formulas; no claim of compatibility with arbitrary change of I is used."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-parametric-universal-arrows",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-ordinary-pointwise-kan-extension",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-slice-equivalence-final",
+  "lem-coef-cartesian-terminal-twisted-resolution",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-right-adjoint-reindexing",
+  "lem-coef-infinity-final-index-colimit",
+  "lem-coef-right-fibration-section-limit"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
-  "place": "Section 6.7, Theorem 6.7.2 and Lemmas 6.7.5, 6.7.7; restriction and small-index interpretation from Theorem 7.9.8."
+  "place": "Section 6.7 with the density and free-extension computations expanded; finality is proved through terminal-fibre resolution of the concrete relative slice, and mapping-out uses the section/limit formula of HTT 3.3.3.4, without any straightening or model-rectification input."
  },
  "mathlib_searches": [
   {
@@ -55,8 +208,8 @@
   {
    "tool": "loogle",
    "query": "\"coyoneda\", \"colimit\"",
-   "results": "{\"t\": \"2026-10-16T19:35:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"coyoneda\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Coyoneda.colimitCocone\", \"CategoryTheory.Coyoneda.instHasColimitObjOppositeFunctorTypeCoyoneda\", \"CategoryTheory.Coyoneda.colimitCoconeIsColimit\", \"CategoryTheory.Coyoneda.colimitCocone_pt\", \"CategoryTheory.Coyoneda.colimitCoyonedaIso\", \"CategoryTheory.Coyoneda.colimitCocone_ι_app\", \"CategoryTheory.Coyoneda.colimitCoconeIsColimit_desc\", \"CategoryTheory.Functor.final_of_colimit_comp_coyoneda_iso_pUnit\"], \"digest\": \"bc9b9ebe5a773ecb\"}",
-   "date": "2026-10-16",
+   "results": "{\"t\": \"2026-10-17T00:38:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"coyoneda\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Coyoneda.colimitCocone\", \"CategoryTheory.Coyoneda.instHasColimitObjOppositeFunctorTypeCoyoneda\", \"CategoryTheory.Coyoneda.colimitCoconeIsColimit\", \"CategoryTheory.Coyoneda.colimitCocone_pt\", \"CategoryTheory.Coyoneda.colimitCoyonedaIso\", \"CategoryTheory.Coyoneda.colimitCocone_ι_app\", \"CategoryTheory.Coyoneda.colimitCoconeIsColimit_desc\", \"CategoryTheory.Functor.final_of_colimit_comp_coyoneda_iso_pUnit\"], \"digest\": \"9bbd6cf27c5665b0\"}",
+   "date": "2026-10-17",
    "verdict": "No match. Loogle coyoneda/colimit hits are ordinary Hom-set colimit formulas; semantic hits include ordinary IsDense/DenseAt, Presheaf.colimitOfRepresentable and ordinary presheaf adjunctions. Read Functor/KanExtension/DenseAt.lean:20-80 and Limits/Yoneda.lean:35-100: these do not treat arbitrary cocomplete infinity-category valued diagrams, coherent mapping spaces or their cocontinuous extension equivalence. Second relative-Yoneda phrasing also gave only ordinary sheaf/Yoneda adjunctions."
   },
   {
@@ -135,10 +288,52 @@
    "results": "{\"t\": \"2026-10-16T21:40:21Z\", \"tool\": \"leansearch\", \"query\": \"Relative co Yoneda extension for diagrams valued in any cocomplete infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cocone.extensions\", \"CategoryTheory.Limits.Cocone.extensions_app\", \"CategoryTheory.Functor.corepresentableByCompCoyonedaObjOfIsColimit\", \"CategoryTheory.curriedYonedaLemma\", \"CategoryTheory.Presheaf.isExtensionAlongYoneda\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap\", \"CategoryTheory.Limits.limYoneda\", \"CategoryTheory.Coyoneda.ext\"], \"digest\": \"a0cb32c38041208b\"}",
    "date": "2026-10-16",
    "verdict": "No match. The returned Coyoneda.colimitCocone and colimitCoyonedaIso are ordinary Hom-set results (Mathlib/CategoryTheory/Limits/Yoneda.lean), and evaluationLeftAdjoint/evaluationAdjunctionRight (Mathlib/CategoryTheory/Adjunction/Evaluation.lean:38-74, read) are ordinary functor-category adjunctions. Cocontinuous-site hits concern covering sieves. The second semantic phrasing returned ordinary Cocone.extensions, curriedYonedaLemma and Presheaf.isExtensionAlongYoneda. None gives coherent mapping-space adjunctions, relative density or the extension equivalence for arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent relative co-Yoneda density and cocontinuous extension for Fun(N(I), B)",
+   "results": "{\"t\": \"2026-10-17T00:38:33Z\", \"tool\": \"leanfinder\", \"query\": \"coherent relative co-Yoneda density and cocontinuous extension for Fun(N(I), B)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.RanIsSheafOfIsCocontinuous.lift\", \"CategoryTheory.Presheaf.uniqueExtensionAlongYoneda\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac\", \"CategoryTheory.Functor.IsCoverDense.sheafCoyonedaHom\", \"CategoryTheory.coherentTopology.instIsCoverDense\", \"CategoryTheory.Functor.DenseAt\", \"CategoryTheory.Functor.IsCoverDense.sheafCoyonedaHom_app\"], \"digest\": \"9b684a2e3cd130f5\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Yoneda.lean:35-88 and Functor/KanExtension/Pointwise.lean:35-105. Returned presheaf-extension and coyoneda facts are ordinary Category statements; strict homotopy-category facts do not encode coherent mapping-space density or the full quasicategory extension equivalence. The first Loogle query has an unknown-identifier diagnostic; the corrected coyoneda query returned the ordinary formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Coyoneda, CategoryTheory.Functor.Final, CategoryTheory.Limits.functorCategoryHasColimit",
+   "results": "{\"t\": \"2026-10-16T23:28:21Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Coyoneda, CategoryTheory.Functor.Final, CategoryTheory.Limits.functorCategoryHasColimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Coyoneda'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Yoneda.lean:35-88 and Functor/KanExtension/Pointwise.lean:35-105. Returned presheaf-extension and coyoneda facts are ordinary Category statements; strict homotopy-category facts do not encode coherent mapping-space density or the full quasicategory extension equivalence. The first Loogle query has an unknown-identifier diagnostic; the corrected coyoneda query returned the ordinary formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "co.?Yoneda|relative.Yoneda|cocontinuous.*extension",
+   "results": "{\"t\": \"2026-10-17T00:38:27Z\", \"tool\": \"grep\", \"query\": \"co.?Yoneda|relative.Yoneda|cocontinuous.*extension\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Generator/HomologicalComplex.lean\", \"Mathlib/CategoryTheory/Generator/HomologicalComplex.lean\", \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"Mathlib/CategoryTheory/Generator/Preadditive.lean\"], \"digest\": \"df6d665a9efc2871\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Yoneda.lean:35-88 and Functor/KanExtension/Pointwise.lean:35-105. Returned presheaf-extension and coyoneda facts are ordinary Category statements; strict homotopy-category facts do not encode coherent mapping-space density or the full quasicategory extension equivalence. The first Loogle query has an unknown-identifier diagnostic; the corrected coyoneda query returned the ordinary formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent co-Yoneda density and extension of functors between infinity categories",
+   "results": "{\"t\": \"2026-10-17T00:38:27Z\", \"tool\": \"leansearch\", \"query\": \"coherent co-Yoneda density and extension of functors between infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cocone.extensions_app\", \"CategoryTheory.Functor.IsDenseSubsite.isIso_ranCounit_app_of_isDenseSubsite\", \"CategoryTheory.Functor.isDense_iff_fullyFaithful_restrictedULiftYoneda\", \"CategoryTheory.Presheaf.isExtensionAlongYoneda\", \"CategoryTheory.Functor.IsDense.isDenseAt\", \"CategoryTheory.Limits.Cocone.extensions\", \"CategoryTheory.Functor.corepresentableByCompCoyonedaObjOfIsColimit\", \"CategoryTheory.Functor.isDenseAt\"], \"digest\": \"8baaa9ea836773e7\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Yoneda.lean:35-88 and Functor/KanExtension/Pointwise.lean:35-105. Returned presheaf-extension and coyoneda facts are ordinary Category statements; strict homotopy-category facts do not encode coherent mapping-space density or the full quasicategory extension equivalence. The first Loogle query has an unknown-identifier diagnostic; the corrected coyoneda query returned the ordinary formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "colimit preserving functors out of a functor quasicategory are determined by free evaluation diagrams",
+   "results": "{\"t\": \"2026-10-17T00:38:55Z\", \"tool\": \"leanfinder\", \"query\": \"colimit preserving functors out of a functor quasicategory are determined by free evaluation diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.lift_unique'\", \"SSet.Truncated.HomotopyCategory.functor_ext\", \"CategoryTheory.toNerve₂.ext\", \"SSet.OneTruncation₂.nerve_hom_ext\", \"SSet.Truncated.HomotopyCategory₂.mk.inj\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.LiftsToColimit.mk.inj\", \"SSet.Truncated.HomotopyCategory.functorEquiv\"], \"digest\": \"3c01788a36887712\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Yoneda.lean:35-88 and Functor/KanExtension/Pointwise.lean:35-105. Returned presheaf-extension and coyoneda facts are ordinary Category statements; strict homotopy-category facts do not encode coherent mapping-space density or the full quasicategory extension equivalence. The first Loogle query has an unknown-identifier diagnostic; the corrected coyoneda query returned the ordinary formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coyoneda\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-17T00:38:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"coyoneda\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Coyoneda.colimitCocone\", \"CategoryTheory.Coyoneda.instHasColimitObjOppositeFunctorTypeCoyoneda\", \"CategoryTheory.Coyoneda.colimitCoconeIsColimit\", \"CategoryTheory.Coyoneda.colimitCocone_pt\", \"CategoryTheory.Coyoneda.colimitCoyonedaIso\", \"CategoryTheory.Coyoneda.colimitCocone_ι_app\", \"CategoryTheory.Coyoneda.colimitCoconeIsColimit_desc\", \"CategoryTheory.Functor.final_of_colimit_comp_coyoneda_iso_pUnit\"], \"digest\": \"9bbd6cf27c5665b0\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Yoneda.lean:35-88 and Functor/KanExtension/Pointwise.lean:35-105. Returned presheaf-extension and coyoneda facts are ordinary Category statements; strict homotopy-category facts do not encode coherent mapping-space density or the full quasicategory extension equivalence. The first Loogle query has an unknown-identifier diagnostic; the corrected coyoneda query returned the ordinary formulas."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-small-diagram-model-rectification",
@@ -162,5 +357,26 @@
    "missing": []
   }
  },
- "lead_note": "2026-10-17 Q60 maintenance: the previous split was circular when lem-coef-space-valued-straightening is expanded through coherent-nerve, model-colimit-localization-comparison and small-diagram-model-rectification. Its steps 3 and 9 and the new twisted-arrow-graph-cofinality node require that classification theorem. Statement retained; previous split is backed up in .bak-maint-Q60-foundation-conventions. Split again using independent density/cofinality tools; do not cite space-valued-straightening or space-transport-classification, or another node whose closure reaches this node."
+ "lead_note": "2026-10-17 Q60 maintenance: the previous split was circular when lem-coef-space-valued-straightening is expanded through coherent-nerve, model-colimit-localization-comparison and small-diagram-model-rectification. Its steps 3 and 9 and the new twisted-arrow-graph-cofinality node require that classification theorem. Statement retained; previous split is backed up in .bak-maint-Q60-foundation-conventions. Split again using independent density/cofinality tools; do not cite space-valued-straightening or space-transport-classification, or another node whose closure reaches this node.",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-coherent-diagram-coyoneda",
+  "worker": "stage1",
+  "summary": "Replaced the rejected circular steps with a given cartesian-fibration terminal resolution and a right-fibration section/limit theorem, both statement-only foundational tools. Retained the explicit pointwise-colimit, free-diagram, slice-adjunction density and coherent extension computations; unchanged statement, ten steps, two new nodes, no Mathlib leaves. Audited the full dependency closures to exclude co-Yoneda and the banned classification nodes.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2, derived coefficient adjunction and inverse-limit formula, as in the existing ancestry: independent coherent free-diagram extension for small-diagram rectification. No chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent functor categories, componentwise equivalence detection, mapping-space cone criterion and initial-object contractibility; this unit has no replacement, and the existing maintainer-approved tool_uses already includes it."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NE-651a4d683",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-651a4d683 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, and checked each step mathematically. The item's statement and stmt_deps are byte-identical to the base and live versions; only split-owned fields changed. A BFS over stmt_deps and proof_deps from every cited node finds no path back to the item, and neither space-transport-classification nor space-valued-straightening is cited. Every cited node is in unit sk-prop-sf-biduality-general except lem-cbc-enhanced-functor-cone-calculus, which is already in the item's tool_uses and is accepted as a generic cone criterion. Steps: step 3 checks the variance of the relative slice (arrow condition a=F(v)bh), shows the h=1 lift is cartesian by the dual mapping criterion with discrete base Hom sets, and gets terminal objects from the fibre identities; its resolution object (b,F(a),F(u)) with arrow F(f) matches the new node's component formula. The slice adjunctions in step 5 (Hom(s_j t,(u,w))={f: t=wuf}, terminal object 1_j, leg F(wu)) and step 7 (f=v and w=guv, initial object 1_i, leg T(uv)) both check, as does the step 4 flattening adjunction. The edge cases in step 10 are right; for I=[1], K is the span id_0<-u->id_1 and the formula is the pushout T(0,F0) over T(1,F0) with T(1,F1). New node terminal-twisted-resolution: its statement is true. For A=[1] and r in R_1 the comma category is the cone on Map(r,u^*t_0), which is contractible, without assuming transport preserves terminal objects; the general comma contraction through wu is valid in Tw(A)^op. It is not a duplicate: graph-cofinality would need a large index and straightening. New node right-fibration-section-limit: the opposite HTT section/limit theorem; its small cases and the slice-transport clause are correct. It is a corollary of space-transport-classification, which cannot be cited because that node reaches the item, so creating it is justified. Its later split must build the transport functor into N_hc(Kan) without the item; I flagged this in review.md. Mathlib searches of all kinds are recorded with no match. lean_audit is absent on both new nodes, but it is a maintainer field filled by tools, so not a fault. Limitation: Cisinski CatLR and HTT are not archived (WANTED recorded) and network access is blocked here, so I could not open the printed places. The item's proof_origin is agent and the mathematics was verified directly. No fixes, no drops."
+ }
 }
