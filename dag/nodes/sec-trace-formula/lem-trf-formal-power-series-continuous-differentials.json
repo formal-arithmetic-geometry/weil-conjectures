@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-weil-pbc-multivariate-power-series",
   "def-weil-pbc-kahler-differentials",
-  "def-trf-formal-power-series-partial-derivative"
+  "def-trf-formal-power-series-partial-derivative",
+  "def-trf-adic-continuous-differentials"
  ],
  "proof": [
   {
@@ -166,5 +167,29 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-0a46c3ae7 (reviewer sub-agent of L); spot-checked: Read all mathematics and cited sources; checked every step, new node, dependency and edge case, including positive characteristic. Corrected source attribution (00RU versus 00RS; 0C4D gives a polynomial presentation), missing search records, and conormal derivation notation. Four corrected JSON files are under fixes/; concrete checks are in review.md. No target weakened.; 4 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-acd089351",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Read the brief, packet, item and dependency nodes, source-linked report, and both immutable Lean modules. Verified statement clauses, hypotheses, definitions, docstrings, edge cases, route-pivot compliance, and required report sections. Reproduced both per-file compiles via scompile.py with server confirmation; exit code 0, no errors or warnings. Wrote review.md; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalPowerSeriesContinuousDifferentials",
+  "declaration": "MvPowerSeries.exists_quotientJacobian_equiv_adicContinuousDifferentials",
+  "declarations": [
+   "MvPowerSeries.coordinateIdeal",
+   "MvPowerSeries.relationIdeal",
+   "MvPowerSeries.quotientJacobian",
+   "MvPowerSeries.exists_quotientJacobian_equiv_adicContinuousDifferentials"
+  ],
+  "file": "lean/Sheaf/RingTheory/FormalPowerSeriesContinuousDifferentials.lean",
+  "statement": "theorem exists_quotientJacobian_equiv_adicContinuousDifferentials (F : Type u) [Field F] (n s : ℕ) (f : Fin s → MvPowerSeries (Fin n) F) (hf : ∀ j : Fin s, f j ∈ coordinateIdeal F n) : ∃ d : Derivation F (MvPowerSeries (Fin n) F ⧸ relationIdeal F f) (KaehlerDifferential.adicContinuousDifferentials F (MvPowerSeries (Fin n) F ⧸ relationIdeal F f) ((coordinateIdeal F n).map (Ideal.Quotient.mk (relationIdeal F f)))), (∀ (x : MvPowerSeries (Fin n) F ⧸ relationIdeal F f) (r : ℕ), (d x).val r = KaehlerDifferential.D F _ (Ideal.Quotient.mk (((coordinateIdeal F n).map (Ideal.Quotient.mk (relationIdeal F f))) ^ r) x)) ∧ ∃ e : ((Fin n →₀ MvPowerSeries (Fin n) F ⧸ relationIdeal F f) ⧸ LinearMap.range (quotientJacobian F f)) ≃ₗ[ MvPowerSeries (Fin n) F ⧸ relationIdeal F f] KaehlerDifferential.adicContinuousDifferentials F (MvPowerSeries (Fin n) F ⧸ relationIdeal F f) ((coordinateIdeal F n).map (Ideal.Quotient.mk (relationIdeal F f))), ∀ i : Fin n, e (Submodule.Quotient.mk (Finsupp.single i 1)) = d (Ideal.Quotient.mk (relationIdeal F f) (MvPowerSeries.X i))",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

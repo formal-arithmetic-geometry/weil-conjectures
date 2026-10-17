@@ -13,7 +13,8 @@
   "def-weil-size-convention",
   "def-pc-fibre-product",
   "def-pd-descent-datum",
-  "def-weil-pbc-sites-and-cohomology"
+  "def-weil-pbc-sites-and-cohomology",
+  "def-trf-scheme-cover-descent-datum"
  ],
  "proof": [
   {
@@ -395,5 +396,23 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q03-65c9f1ad3 (reviewer sub-agent of L); spot-checked: Reviewed the item, all cited DAG statements, Stacks Tags 02W5, 04TR, 04TQ, 022C, and 021P, plus unit/chapter context. All nine proof steps are mathematically supported; edge cases and hypotheses checked. No new nodes, repairs, SGA citations, route-pivot machinery, or coefficient/base-change issues. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-be1d640cb",
+  "group": "Q04",
+  "result": "pass",
+  "note": "All statements, dependencies, source clauses, universes, edge cases, docstrings, route-pivot constraints, and per-file compiler evidence checked; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfSheafRepresentabilityDescentData",
+  "declaration": "AlgebraicGeometry.fppfSheafRepresentabilityDescentData",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfSheafRepresentabilityDescentData.lean",
+  "statement": "theorem fppfSheafRepresentabilityDescentData {I : Type (u + 1)} (T : Scheme.{u}) (U : I → Scheme.{u}) (f : ∀ i, U i ⟶ T) (hcov : Presieve.ofArrows U f ∈ Scheme.fppfPrecoverage T) : ∃ e : SchemeCoverDescent f ≌ (IsLocallyRepresentableFppfSheaf f).FullSubcategory, Nonempty (e.functor ⋙ (IsLocallyRepresentableFppfSheaf f).ι ⋙ (Scheme.fppfTopology.pseudofunctorOver (Type (u + 1))).toDescentData f ≅ schemeCoverDescentForget f) ∧ (∀ (D : SchemeCoverDescent f) (i : I), Nonempty ((Limits.prod (uliftYoneda.{u + 1}.obj (Over.mk (f i))) (e.functor.obj D).obj.obj).RepresentableBy ((Over.map (f i)).obj (D.localScheme i)))) ∧ (∀ D : SchemeCoverDescent f, (e.functor.obj D).obj.obj.IsRepresentable ↔ D.IsEffective)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

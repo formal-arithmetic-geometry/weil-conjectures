@@ -1,0 +1,132 @@
+{
+ "id": "def-trf-scheme-cover-descent-datum",
+ "kind": "definition",
+ "title": "Scheme descent data and local representability on a covering family",
+ "status": "split",
+ "statement": "Let $T$ and $U_i$ be schemes [def-pc-scheme] and let $f_i:U_i\\to T$ be a set-indexed family, in the universes of [def-weil-size-convention]. Use the big fppf slice sites [def-pc-fppf-site] and their sheaves of sets [def-weil-pbc-sites-and-cohomology]. A family scheme descent datum is a family of schemes $X_i/U_i$ and overlap isomorphisms over $U_i\\times_T U_j$ satisfying the triple-overlap cocycle, with fibre products as in [def-pc-fibre-product]. Encode it through Yoneda by local sheaves $F_i$, specified natural representing bijections $\\operatorname{Mor}_{U_i}(-,X_i)\\cong F_i$, and Mathlib's natural descent transitions between their slice restrictions, with identity and cocycle. The category has compatible local sheaf maps as morphisms, which by Yoneda are exactly the compatible local scheme maps; its forgetful functor remembers the sheaf descent datum. In the covering-family form of [def-pd-descent-datum], define effectivity geometrically: there exist $X/T$ and maps $q_i:X_i\\to X$ such that each square $(q_i,X_i\\to U_i,X\\to T,f_i)$ is Cartesian and transport on all overlap test points preserves the composite to $X$. Define the full-subcategory predicate of locally representable fppf sheaves $H$ by requiring each restriction $H|_{U_i}$ to be representable; equivalently, each $h_{U_i}\\times H$ is representable.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02W5, lemma-descent-data-sheaves and the following remark; Tag 023V for geometric effectivity"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Category of schemes with descent datum over a covering family and effective datum",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.EffectiveEpiFamily.desc\", \"module\": \"Mathlib.CategoryTheory.EffectiveEpi.Basic\", \"type\": \"{B W : C} {α : Type*} (X : α → C) (π : (a : α) → (X a ⟶ B)) [EffectiveEpiFamily X π] (e : (a : α) → (X a ⟶ W))\\n  (h : ∀ {Z : C} (a₁ a₂ : α) (g₁ : Z ⟶ X a₁) (g₂ : Z ⟶ X a₂), g₁ ≫ π _ = g₂ ≫ π _ → g₁ ≫ e _ = g₂ ≫ e _) : B ⟶ W\", \"doc\": \"Given an effective epimorphic family $\\\\{X_\\\\alpha \\\\to B\\\\}$ in a category $\\\\mathcal{C}$ and a compatible family of morphisms $e_\\\\alpha: X_\\\\alpha \\\\to W$ satisfying the condition that any two morphisms $g\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.instCategory\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \": Category (F.DescentData f)\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"[F.IsStack J] {ι : Type t} {S : C} {X : ι → C} (f : ∀ i, X i ⟶ S) (hf : Sieve.ofArrows _ f ∈ J S) :\\n  (F.toDescentData f).IsEquivalence\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ be a pseudofunctor satisfying the stack conditi\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat →\\n      {ι : Type t} → {S : C} → {X : ι → C} → ((i : ι) → X i ⟶ S) → Type (max (max (max (max t u) u') v) v')\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n  {\"name\": \"CategoryTheory.EffectiveEpiFamilyStruct.mk\", \"module\": \"Mathlib.CategoryTheory.EffectiveEpi.Basic\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {B : C} →\\n      {α : Type u_2} →\\n        {X : α → C} →\\n          {π : (a : α) → X a ⟶ B} →\\n            (desc :\\n                {W : C} →\\n                  (e : (a : α) → X a ⟶ W) →\\n                    (∀ {Z : C} (a₁ a₂ : α) (g₁ :\", \"doc\": \"Given a category $\\\\mathcal{C}$, an object $B$, an index type $\\\\alpha$, a family of objects $X_\\\\alpha$, and morphisms $\\\\pi_\\\\alpha: X_\\\\alpha \\\\to B$, this constructor defines an effective epimorphic fami\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.mk\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} →\\n      {ι : Type t} →\\n        {S : C} →\\n          {X : ι → C} →\\n            {f : (i : ι) → X i ⟶ S} →\\n              (obj : (i : ι) → ↑(F.obj { \", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n  {\"name\": \"AlgebraicGeometry.instCategoryAffineScheme\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"CategoryTheory.Category.{u_1, u_1 + 1} AlgebraicGeometry.AffineScheme\", \"doc\": \"The category whose objects are affine schemes (schemes isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$) and whose morphisms are morphisms of schemes between them. T\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData\", \"module\": \"Mathlib.AlgebraicGeometry.RelativeGluing\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  (𝒰 : S.OpenCover) →\\n    [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀] →\\n      [AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] → Type (max (max (u + 1) u_1) u_2)\", \"doc\": \"Given a scheme $S$, an open cover $\\\\mathcal{U}$ of $S$, a category structure on the zeroth component $\\\\mathcal{U}_0$, and a locally directed cover structure on $\\\\mathcal{U}$, this defines the type of \"}\n",
+   "date": "2026-10-17",
+   "verdict": "No exact family scheme-descent category, geometric family effectivity, or locally representable fppf-sheaf predicate. The candidates are generic descent or Zariski open representability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schemes with descent data on an fppf covering are equivalent to locally representable sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {ι : Type t} {S : C} {X : ι → C} (f : (i : ι) → X i ⟶ S),\\n  CategoryTheory.Sieve.ofArrows \", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ be a pseudofunctor satisfying the stack conditi\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor_iff\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {S : C}\\n  (R : CategoryTheory.Presieve S), F.IsStackFor R ↔ (F.toDescentData fun f => f.obj.hom).IsEquivalence\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a presieve $R$ on $S$, the pseudofunct\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, F.IsStackFor R → (F.toDescentData fun f => f.obj.hom).IsEquivalence\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a presieve $R$ on $S$, if $\\\\mathcal{F}\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {ι : Type t} {S : C}\\n  {X : ι → C} (f : (i : ι) → X i ⟶ S),\\n  F.IsStackFor (CategoryTheory.Presieve.ofArrows X f) ↔ (F.toDescentData f).IsEquivalence\", \"doc\": \"A pseudofunctor $ F $ satisfies the stack condition for the presieve generated by a family of morphisms $ f_i: X_i \\to S $ if and only if the induced functor from $ F(\\text{op}(S)) $ to the category of \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) →\\n      {ι : Type t} →\\n        {S : C} →\\n          {X : ι → C} →\\n            (f : (i : ι) → X i ⟶ S) →\\n              {J : CategoryTheory.Grothen\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ satisfying the prestack condition, an object $S \\\\\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.isEquivalence_toDescentData_iff_of_sieve_eq\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {ι : Type t} {S : C}\\n  {X : ι → C} (f : (i : ι) → X i ⟶ S) {ι' : Type t'} {X' : ι' → C} (f' : (i' : ι') → X' i' ⟶ S),\\n  CategoryTheory.Sieve.ofArrows \", \"doc\": \"Given a pseudofunctor $ F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat} $, an object $ S \\\\in \\\\mathcal{C} $, and two families of morphisms $ f_i: X_i \\\\to S $ and $ f'_j: X'_j \\\\to S \"}\n",
+   "date": "2026-10-17",
+   "verdict": "No exact family scheme-descent category, geometric family effectivity, or locally representable fppf-sheaf predicate. The candidates are generic descent or Zariski open representability."
+  },
+  {
+   "tool": "grep",
+   "query": "SchemeCoverDescent|LocallyRepresentableFppf|representable.*descent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "No exact family scheme-descent category, geometric family effectivity, or locally representable fppf-sheaf predicate. The candidates are generic descent or Zariski open representability."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n SchemeCoverDescent|LocallyRepresentableFppf|representable.*descent /home/ubuntu/weil-src-slopmaster2/WeilConjectures /home/ubuntu/weil-newtargets-shared/lean/Sheaf",
+   "results": "No named family interface. Nearby hits: SupportedCup, FpqcMorphismsDescend, EtaleRepresentableDescentGlue, FpqcRepresentabilityDescent (single morphism); inspected the last signature. None supplies the family category or predicate.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l locally representable|scheme descent datum|scheme descent data|descent data of schemes dag/nodes; python3 tools/blueprint_refs.py search descent",
+   "results": "Found def-pd-descent-datum and def-galois-scheme-descent-data-category: both concern one morphism a:X→S. The former is used; neither has a covering-family interface. Blueprint search: 82 nodes, no covering-family scheme category definition; exact search scheme descent had 0 blueprint hits.",
+   "date": "2026-10-17",
+   "verdict": "new family interface needed; not a duplicate of the single-morphism datum or category"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fppf-sheaf-representability-descent-data",
+  "date": "2026-10-17",
+  "group": "Q04"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 02W5 family scheme-descent category and local representability used to state the sheaf equivalence in the quotient-presentation support.",
+   "via": [
+    "lem-trf-fppf-sheaf-representability-descent-data",
+    "lem-trf-etale-affine-quotient-representable",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeCoverDescentDatum",
+  "declaration": "AlgebraicGeometry.SchemeCoverDescentDatum",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeCoverDescentDatum.lean",
+  "statement": "structure SchemeCoverDescentDatum {I : Type (u + 1)} {T : Scheme.{u}} {U : I → Scheme.{u}} (f : ∀ i, U i ⟶ T)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.SchemeCoverDescentDatum",
+   "AlgebraicGeometry.SchemeCoverDescent",
+   "AlgebraicGeometry.schemeCoverDescentForget",
+   "AlgebraicGeometry.SchemeCoverDescentDatum.IsEffective",
+   "AlgebraicGeometry.IsLocallyRepresentableFppfSheaf"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-be1d640cb",
+  "group": "Q04",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-be1d640cb",
+  "group": "Q04",
+  "result": "pass",
+  "note": "All statements, dependencies, source clauses, universes, edge cases, docstrings, route-pivot constraints, and per-file compiler evidence checked; no fixes required."
+ }
+}

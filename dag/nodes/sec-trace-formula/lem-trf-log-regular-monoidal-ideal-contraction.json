@@ -149,5 +149,28 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-353097cbe (reviewer sub-agent of L); spot-checked: Read the delivery in full against ILO Exposé VIII 3.4.1–3.4.3 (pp. 110–111). The item's statement is right as the stalk form of 3.4.3, checked against the chart definition and the sharp-chart lemma; I tested it on P=0, N, N^2 and the empty J. The new statement-only node lem-trf-kato-tor-independence-chart is the stalk specialization of Kato 6.1(ii) as ILO quotes it (Kato himself is WANTED). It is true on small cases, has no duplicate in the DAG (rg for Kato/Tor/monoid ideal) and is not a restatement of the item. Steps 1, 2 and 4 are correct. Step 3 as delivered was false (E3): it claims the class of a 'minimal' p in K\\J is killed by every nonzero monomial, which fails for J empty, K=P, the case the delivery says it covers, and for P=N^2, J=(x), K=P. It was also marked elementary although it needs Noetherianity. FIX: the corrected item in fixes/ rewrites step 3 as the source's quotient sentence written out. Z[P] is Noetherian (lem-weil-pbc-finite-type-algebra-noetherian, a Mathlib leaf), so K has finitely many monomial generators. Sharpness and integrality give a minimal generator p not in J and not in K+P^+. The functional e_p -> 1 is then an R-linear surjection onto R/m_P R = Z, and right exactness passes it to A/m_P A. proof_deps is now the union of the step uses. No change to the statement or the new node, no tool_uses, unit route intact, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4a7f1b9ab",
+  "group": "ND",
+  "result": "pass",
+  "note": "Statement, dependencies, edge cases, docstrings, route-pivot constraints, and canonical constructions checked; scompile.py passed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogRegularMonoidalIdealContraction",
+  "declaration": "AlgebraicGeometry.FineSaturatedLogScheme.monoidalIdeal_contraction",
+  "declarations": [
+   "AlgebraicGeometry.strictLocalRingIsoStrictHenselization",
+   "AlgebraicGeometry.EtaleLogStructure.chartStrictHenselizationMap",
+   "AlgebraicGeometry.FineSaturatedLogScheme.monoidalIdeal_contraction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LogRegularMonoidalIdealContraction.lean",
+  "statement": "theorem FineSaturatedLogScheme.monoidalIdeal_contraction (X : FineSaturatedLogScheme.{u}) (hregular : X.IsLogRegular) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X.scheme) {P : Type u} [AddCommMonoid P] (W : X.scheme.Etale) (w : (Scheme.pointSmallEtale x).fiber.obj W) (c : Multiplicative P →* X.logStructure.monoidSheaf.obj.obj (op W)) (hc : X.logStructure.IsChart W c) (hsharp : Function.Bijective (fun p : P ↦ (Associates.mk (X.logStructure.toEtalePrelogStructure.germ x W w (c (Multiplicative.ofAdd p))) : X.logStructure.characteristic x))) (J : Set P) (hJ : ∀ j ∈ J, ∀ p : P, j + p ∈ J) : (fun p : P ↦ X.logStructure.chartStrictHenselizationMap x W w c (Multiplicative.ofAdd p)) ⁻¹' (Ideal.span ((fun p : P ↦ X.logStructure.chartStrictHenselizationMap x W w c (Multiplicative.ofAdd p)) '' J) : Set (Scheme.strictHenselizationRing x)) = J",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

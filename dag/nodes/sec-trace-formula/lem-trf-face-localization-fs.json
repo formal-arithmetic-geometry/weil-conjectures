@@ -127,5 +127,28 @@
   "group": "Q120",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-22037ac2a (reviewer sub-agent of L); spot-checked: I read the whole item, the new node lem-trf-face-fg, the cited node def-trf-fs-log-blowup (it defines fine saturated as finitely generated + injective into gp + saturated), the only citer lem-trf-fs-face-sharpening (it uses exactly 'Q_F fs and Q_F^gp = Q^gp'), and the siblings lem-trf-face-localization-units and lem-trf-face-subgroup-saturated (different statements). I checked the source at ILO VIII 3.1.1-3.1.2, printed p. 98 (M_S = M[S^-1] in M^gp for integral M; for fine M a localization is at one element), and at XVI 3.6.5 footnote xi, printed p. 253 (a face is of finite type). The statement is true and unweakened. Edge cases tested: F={0}, F=Q (Q_F=Q^gp), N^2 with a coordinate face, Z/2, and the even-sum submonoid of N^2. Fault 1 (C1 exception): lem-trf-face-fg is a two-line fact. In f=sum n_i q_i in F, each q_i with n_i>0 lies in F by the face property. I folded it into step 1 and drop the node; it is not a duplicate of anything in the DAG. Fault 2: the saturation step took x in Q^gp before Q_F^gp = Q^gp had been proved, so I reordered the steps (isomorphism, then saturation for g in Q_F^gp). Fault 3: proof_origin claimed 'document', but ILO gives no proof of saturation or of the isomorphism, so I set it to agent with ILO cited. The corrected item has three elementary steps, all citing only def-trf-fs-log-blowup, with proof_deps updated and no remaining citation of the dropped node. No SGA citation, no tool_uses, no cycle; there is no base change or coefficient category involved.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-71fbf70f9",
+  "group": "Q83",
+  "result": "fix",
+  "note": "Statement, canonical constructions, dependencies, source passages, universes and edge cases checked; per-file compilation passed. Replaced the H11 placeholder reading with a complete independent report in fixes/lem-trf-face-localization-fs.report.md. Full findings are in review.md; no Lean or node changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FaceLocalizationFs",
+  "declaration": "AlgebraicGeometry.faceLocalization_fineSaturated",
+  "declarations": [
+   "Algebra.faceLocalization",
+   "Algebra.faceLocalizationGroupMap",
+   "AlgebraicGeometry.faceLocalization_fineSaturated"
+  ],
+  "file": "lean/Sheaf/TraceFormula/FaceLocalizationFs.lean",
+  "statement": "theorem faceLocalization_fineSaturated {Q : Type u} [CommMonoid Q] (hQ : IsFineSaturatedMonoid Q) (F : Submonoid Q) (hF : ∀ a b : Q, a * b ∈ F → a ∈ F ∧ b ∈ F) : IsFineSaturatedMonoid (Algebra.faceLocalization Q F) ∧ Function.Bijective (Algebra.faceLocalizationGroupMap F)",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
