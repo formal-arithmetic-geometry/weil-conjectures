@@ -254,5 +254,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocallySmallInfinitySizeCalculus",
+  "file": "lean/Sheaf/CategoryTheory/LocallySmallInfinitySizeCalculus.lean",
+  "declaration": "SSet.Presentability.locallySmall_infinity_size_calculus",
+  "declarations": [
+   "SSet.Presentability.IsBoundedColimitApex",
+   "SSet.Presentability.IsHomotopyRetract",
+   "SSet.Presentability.locallySmall_infinity_size_calculus"
+  ],
+  "statement": "theorem locallySmall_infinity_size_calculus (E : SSet.{max (u + 1) v}) [SSet.Quasicategory E] (hE : IsLocallySmall.{u, max (u + 1) v} E) (G : E _⦋0⦌ → Prop) (hG : IsEssentiallySmall.{u, max (u + 1) v} (SSet.Enhanced.fullSubcomplex E G).toSSet) (β : Cardinal.{u}) (hβ : β.IsRegular) : IsEssentiallySmall.{u, max (u + 1) v} (SSet.Enhanced.fullSubcomplex E (IsBoundedColimitApex (SSet.Enhanced.fullSubcomplex E G) β)).toSSet ∧ IsEssentiallySmall.{u, max (u + 1) v} (SSet.Enhanced.fullSubcomplex E (IsHomotopyRetract (SSet.Enhanced.fullSubcomplex E G))).toSSet",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b705d295",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: locally small quasicategory E : SSet.{max (u+1) v} (project U∈U' convention), essentially small fullSubcomplex G, β : Cardinal.{u} regular (includes infinite); IsBoundedColimitApex uses IsKappaSmall shapes, q : K ⟶ G, IsColimiting cocone, equivalence edge to apex t.1.1 (same projection as recorded colimitApex; cocone orientation checked); IsHomotopyRetract uses 2-simplex with δ2=i, δ0=r and π₀ equality in mappingSpace E x x with σ0 x (vertex = edge x→x checked). No colimit-existence or idempotent-splitting assumption; edge cases (E/G empty, K=∅, β=ω, non-split idempotent) covered. Node changed only by lean record; lean.statement equals signature; declarations listed; docstrings with source/blueprint; sorry-only; imports per rule 7; no line >100; no duplicates found. nt_compile.py --json: clean, 1.7 s, no warnings. Cosmetic only: no Main definitions list in module docstring."
  }
 }
