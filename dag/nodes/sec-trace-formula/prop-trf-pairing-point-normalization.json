@@ -37,13 +37,14 @@
    }
   },
   {
-   "text": "The class bijection is [lem-trf-correspondence-class]. For identity support it is tensor–Hom adjunction. In [def-sf-kv-maps] (ii)–(iv), all exceptional counits at the point are identity maps, and the transpose of $\\kappa_{Q,P}$ is $Q\\otimes P^\\vee\\otimes P\\xrightarrow{1\\otimes\\operatorname{ev}_P}Q$. Its invertibility is [thm-trf-kunneth-verdier]. Choose finite dual frames $(e_{i,a},\\epsilon_{i,a})$ of $B^i$ and $(f_{j,b},\\phi_{j,b})$ of $T^j$ as in [def-trf-categorical-trace], so $x=\\sum_a\\epsilon_{i,a}(x)e_{i,a}$ and $y=\\sum_b\\phi_{j,b}(y)f_{j,b}$. The inverse Künneth–Verdier classes before swapping are\n$$\n\\widetilde u(1)=\\sum_{i,a}U(e_{i,a})\\otimes\\epsilon_{i,a},\\qquad\n\\widetilde v'(1)=\\sum_{j,b}V(f_{j,b})\\otimes\\phi_{j,b}.\n$$\nIndeed tensor–Hom transposition of the first sends $x\\in B^i$ to $\\sum_a\\epsilon_{i,a}(x)U(e_{i,a})=U(x)$, and transposition of the second sends $y\\in T^j$ to $\\sum_b\\phi_{j,b}(y)V(f_{j,b})=V(y)$. These tensors are genuine chain maps, not merely graded tensors: for either $W=B$ or $W=T$, write $(g_{i,a},\\gamma_{i,a})$ for its chosen degreewise dual frame. Expanding $dg_{i,a}$ in the frame of $W^{i+1}$ and using the dual-frame identity in $W^i$ gives\n$$\n\\sum_a dg_{i,a}\\otimes\\gamma_{i,a}\n=\\sum_b g_{i+1,b}\\otimes(\\gamma_{i+1,b}\\circ d).\n$$\nIn the differential of $\\sum_{i,a}g_{i,a}\\otimes\\gamma_{i,a}$, the differential on the first factor is the left side, while the differential on the second factor in the adjacent degree is the negative of the right side, since $(-1)^{i+1}(-1)^{-i}=-1$. Thus coevaluation is closed. Evaluation is a chain map as well: for $\\varphi$ of degree $-i$ and $x\\in W^{i-1}$ its value on $d(\\varphi\\otimes x)$ is $((-1)^{1-i}+(-1)^{-i})\\varphi(dx)=0$; on every other total degree it is zero by degree. Composing coevaluation with the chain maps $U\\otimes1$ or $V\\otimes1$ therefore gives the displayed classes. Together with their computed transposes, these are exactly the classes of $u,v$. The factor-exchange in Step 1 of [def-trf-supported-pairing] gives\n$$\n\\widetilde v(1)=\\sum_{j,b}(-1)^j\\phi_{j,b}\\otimes V(f_{j,b}),\n$$\nbecause $|\\phi_{j,b}|=-j$ and $|V(f_{j,b})|=j$.",
+   "text": "The class bijection is [lem-trf-correspondence-class]. For identity support it is tensor–Hom adjunction. In [def-sf-kv-maps] (ii)–(iv), all exceptional counits at the point are identity maps, and the transpose of $\\kappa_{Q,P}$ is $Q\\otimes P^\\vee\\otimes P\\xrightarrow{1\\otimes\\operatorname{ev}_P}Q$. Its invertibility is [thm-trf-kunneth-verdier]. Choose finite dual frames $(e_{i,a},\\epsilon_{i,a})$ of $B^i$ and $(f_{j,b},\\phi_{j,b})$ of $T^j$ as in [def-trf-categorical-trace], so $x=\\sum_a\\epsilon_{i,a}(x)e_{i,a}$ and $y=\\sum_b\\phi_{j,b}(y)f_{j,b}$. The inverse Künneth–Verdier classes before swapping are\n$$\n\\widetilde u(1)=\\sum_{i,a}U(e_{i,a})\\otimes\\epsilon_{i,a},\\qquad\n\\widetilde v'(1)=\\sum_{j,b}V(f_{j,b})\\otimes\\phi_{j,b}.\n$$\nIndeed tensor–Hom transposition of the first sends $x\\in B^i$ to $\\sum_a\\epsilon_{i,a}(x)U(e_{i,a})=U(x)$, and transposition of the second sends $y\\in T^j$ to $\\sum_b\\phi_{j,b}(y)V(f_{j,b})=V(y)$. Apply [lem-trf-chain-supertrace] (a) to $B,T$: the displayed evaluation and finite-dual-frame coevaluation are degree-zero chain maps, with these exact signed conventions, for bounded finite-projective complexes with arbitrary differentials. Hence their composites with $U\\otimes1$ and $V\\otimes1$ are chain maps. Together with their computed transposes, these are exactly the classes of $u,v$. The factor-exchange in Step 1 of [def-trf-supported-pairing] gives\n$$\n\\widetilde v(1)=\\sum_{j,b}(-1)^j\\phi_{j,b}\\otimes V(f_{j,b}),\n$$\nbecause $|\\phi_{j,b}|=-j$ and $|V(f_{j,b})|=j$.",
    "uses": [
     "lem-trf-correspondence-class",
     "def-sf-kv-maps",
     "thm-trf-kunneth-verdier",
     "def-trf-categorical-trace",
-    "def-trf-supported-pairing"
+    "def-trf-supported-pairing",
+    "lem-trf-chain-supertrace"
    ],
    "elementary": false,
    "source": {
@@ -90,6 +91,7 @@
   "def-sf-kv-maps",
   "thm-trf-kunneth-verdier",
   "def-trf-supported-pairing",
+  "lem-trf-chain-supertrace",
   "prop-trf-trace-formal-laws",
   "lem-trf-trace-class-diagonal-pairing"
  ],
@@ -238,10 +240,52 @@
    "results": "8 hits: LinearMap.trace_eq_contract_apply, LinearMap.trace_eq_contract', LinearMap.trace_eq_contract, LinearMap.trace_comp_comm, LinearMap.trace_eq_contract_of_basis, LinearMap.trace_eq_contract_of_basis', LinearMap.trace_comp_cycle', LinearMap.trace_comp_cycle. These ordinary finite-free module contraction formulas and generic adjunction identities do not state the supported Lefschetz–Verdier pairing for complexes on the coefficient site.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedPairing|Lefschetz.*Verdier|trace_eq_contract",
+   "results": "{\"t\": \"2026-10-17T08:07:45Z\", \"tool\": \"grep\", \"query\": \"supportedPairing|Lefschetz.*Verdier|trace_eq_contract\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Trace.lean\", \"Mathlib/LinearAlgebra/Trace.lean\", \"Mathlib/LinearAlgebra/Trace.lean\", \"Mathlib/LinearAlgebra/Trace.lean\", \"Mathlib/LinearAlgebra/Trace.lean\"], \"digest\": \"565cad55706ac4aa\"}; Read the hits. The trace_eq_contract declarations in Mathlib/LinearAlgebra/Trace.lean:147,173,177 concern ordinary finite-free modules, not supported pairings on perfect complexes; other hits are general derived-category or pairing results.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "supported pairing of perfect complexes at a point equals trace of composite",
+   "results": "{\"t\": \"2026-10-17T08:07:45Z\", \"tool\": \"leansearch\", \"query\": \"supported pairing of perfect complexes at a point equals trace of composite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.trace_eq_contract\", \"LinearMap.toPerfPair_apply\", \"LinearMap.apply_symm_toPerfPair_self\", \"RootPairing.GeckConstruction.trace_h_eq_zero\", \"RootPairing.toPerfPair_comp_root\", \"LinearMap.toContPerfPair_apply\", \"LinearMap.toPerfPair.congr_simp\", \"LinearMap.IsPerfectCompl.isCompl_right\"], \"digest\": \"a4fd191be4c58a3b\"}; Read the hits. The trace_eq_contract declarations in Mathlib/LinearAlgebra/Trace.lean:147,173,177 concern ordinary finite-free modules, not supported pairings on perfect complexes; other hits are general derived-category or pairing results.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"coevaluation\"",
+   "results": "{\"t\": \"2026-10-17T08:07:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"trace\\\", \\\"coevaluation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits. The trace_eq_contract declarations in Mathlib/LinearAlgebra/Trace.lean:147,173,177 concern ordinary finite-free modules, not supported pairings on perfect complexes; other hits are general derived-category or pairing results.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lefschetz Verdier supported pairing of opposite morphisms of perfect complexes equals categorical trace of composition",
+   "results": "{\"t\": \"2026-10-17T08:07:50Z\", \"tool\": \"leanfinder\", \"query\": \"Lefschetz Verdier supported pairing of opposite morphisms of perfect complexes equals categorical trace of composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_distinguished_op_exact\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\", \"CategoryTheory.Pretriangulated.preadditiveCoyoneda_homologySequenceδ_apply\", \"CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.Functor.mem_homologicalKernel_W_iff\", \"DerivedCategory.right_fac_of_isStrictlyLE\"], \"digest\": \"12c3056982f1864b\"}; Read the hits. The trace_eq_contract declarations in Mathlib/LinearAlgebra/Trace.lean:147,173,177 concern ordinary finite-free modules, not supported pairings on perfect complexes; other hits are general derived-category or pairing results.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"contract\"",
+   "results": "{\"t\": \"2026-10-17T08:11:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"trace\\\", \\\"contract\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"LinearMap.trace_eq_contract_of_basis\", \"LinearMap.trace_eq_contract\", \"LinearMap.trace_eq_contract_of_basis'\", \"LinearMap.trace_eq_contract'\", \"LinearMap.trace_eq_contract_apply\"], \"digest\": \"f4dbb6044d63a0cf\"}; Read the hits. The trace_eq_contract declarations in Mathlib/LinearAlgebra/Trace.lean:147,173,177 concern ordinary finite-free modules, not supported pairings on perfect complexes; other hits are general derived-category or pairing results.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "contraction of two opposite maps between dualizable complexes is trace of their composite",
+   "results": "{\"t\": \"2026-10-17T08:11:39Z\", \"tool\": \"leanfinder\", \"query\": \"contraction of two opposite maps between dualizable complexes is trace of their composite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.trace_eq_contract_apply\", \"LinearMap.trace_eq_contract\", \"LinearMap.trace_eq_contract'\", \"LinearMap.trace_eq_contract_of_basis\", \"LinearMap.trace_comp_cycle\", \"LinearMap.trace_comp_cycle'\", \"LinearMap.trace_comp_comm\", \"LinearMap.trace_transpose'\"], \"digest\": \"5e067489c98b3d34\"}; Read the hits. The trace_eq_contract declarations in Mathlib/LinearAlgebra/Trace.lean:147,173,177 concern ordinary finite-free modules, not supported pairings on perfect complexes; other hits are general derived-category or pairing results.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -277,7 +321,7 @@
   "date": "2026-10-17",
   "item": "prop-trf-pairing-point-normalization",
   "worker": "stage1",
-  "summary": "Rechecked the existing sandbox against the current blueprint and all cited statements. Retained the explicit opposite-pair dual-frame calculation, point-model comparison, and signed contraction, and the source diagonal consequence under the existing lemma's full hypotheses. All 18 statement quotes match the current DAG. Repeated Mathlib searches with actual logged outputs; no new nodes or Mathlib leaves, and the sorried Lean special case is not an attachment. Second reading supplies the differential cancellation establishing that the finite-dual-frame coevaluation and evaluation used in Step 2 are chain maps, as the definition itself explicitly postpones these assertions. No new node is required for this elementary calculation.",
+  "summary": "Repair of Q76 dedicated re-split handoff: the 2146-character Step 2 hid the evaluation/coevaluation chain-map assertion. The existing current statement lem-trf-chain-supertrace (a) already gives exactly that assertion for bounded finite-projective complexes, finite dual frames, and arbitrary differentials. Cite it instead of repeating its differential-cancellation proof. Retain the class-adjunction calculation, explicit tensors and signed swap, and keep Steps 1, 3 and 4, the statement, and Lean records unchanged. No new node duplicates that lemma; the repaired Step 2 is under 2000 characters. All citations were checked against their current statements and searches were run and logged in the Q76 sandbox.",
   "blueprint": "Steps 1–3 realize the first paragraph of prop-trf-pairing-point-normalization.proof.md (point models, class adjunction, and explicit contraction); Step 4 realizes its second and third paragraphs (diagonal dictionary).",
   "tool_uses": [
    {
@@ -297,9 +341,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NQ-e9fc28798",
-  "group": "NQ",
+  "reviewer": "NT-cc-Q76-c11229c3b",
+  "group": "Q76",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-e9fc28798 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 4 steps and the full statements of all 13 cited nodes. The item statement is word-for-word the main-20261015 blueprint statement (order 2664; same as master 2320) and is not weakened. Step 1: the opposite pair with identity legs on s is a valid instance of def-trf-correspondence-between-pairs, and omega_s=A_s. Equality of morphisms is detected through the fibre equivalence (exact and fully faithful only; it is not used as monoidal). The tensor and evaluation formulas are taken on finite sums of A_s, which I accept as an elementary computation at the final object. The Mathlib representative leaf applies because the complexes are bounded projective. Step 2: the transpose of kappa is 1⊗ev with no Koszul sign, checked against def-sf-kv-maps (iii). I re-derived the coevaluation and evaluation chain-map calculation from the d^vee sign of def-trf-categorical-trace and confirmed the swap sign (-1)^j. Avoiding the basis-based lem-trf-chain-supertrace is right. Step 3: the move sign is +1, i=j is forced, and the frame collapse gives sum (-1)^i eps(VU e), which is the trace composite; only the conjugacy clause of prop-trf-trace-formal-laws is used. Step 4 restates the statement of lem-trf-trace-class-diagonal-pairing under its full hypotheses (source paragraphs 2–3, unit step 2). Small cases checked: A[0], A[1], unequal ranks A^2 vs A, Hom=0, zero objects, n=1 and n>1, empty Fix. proof_deps equals the union of the step uses. There is no cycle and no duplicate in the DAG, no new nodes and no SGA source. All cited statements lie on the unit route (sk-def-sf-admissible is reached through sk-thm-sf-package), so the two declared tool_uses are redundant and harmless. The unit's realized fields are rightly left empty, because the new blueprint states the unit as its own sk-p-pairing node. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-c11229c3b (reviewer sub-agent of L); spot-checked: I read the mathematics in full: the item, all 4 steps, the full statements of all 14 cited nodes, the blueprint_update fields of the 4 cited definitions that have one, the unit sk-p-pairing, and main-20261015 prop-trf-pairing-point-normalization .md/.proof.md and lem-trf-chain-supertrace.md. Statement: it matches main-20261015 order 2664 word for word and is not weakened. Change: the only change is in Step 2, which now cites lem-trf-chain-supertrace (a) instead of its inline chain-map argument. The lemma now uses finite dual frames, a commutative ring, bounded finitely generated projective terms and arbitrary differentials, with the same d^vee=(-1)^{j+1}phi d convention and eps in degree -i as def-trf-categorical-trace; that definition's splitting-package frames are a special case. Its unit sk-p-trace is in the uses list of sk-p-pairing, and its dependency closure does not contain the item, so there is no cycle. Signs: kappa transposes to 1⊗ev with no sign (def-sf-kv-maps iii/iv); the swap sign is (-1)^j; the Step 3 permutation sign is (-1)^{(-j)(0)}=1; evaluation forces i=j; the frame collapse gives sum (-1)^i eps(VUe), which equals the def-trf-categorical-trace composite (sym sign (-1)^i); only the conjugacy clause of prop-trf-trace-formal-laws is used. Step 1: identity legs make a valid opposite pair for P≠Q, omega_s=A_s, the representative leaf applies to bounded projective complexes, and the fibre equivalence is used only to detect morphisms. Step 4 states lem-trf-trace-class-diagonal-pairing under its full hypotheses. Small cases: zero complexes, A[0] with A^2 vs A, degree 1, and Z/4 with differential 2 (d(coev)=0 checked by hand). No new nodes, no duplicates, no SGA. The two tool_uses are accepted. No fixes."
  }
 }
