@@ -466,8 +466,7 @@ noncomputable def boundedConstructibleTensorObjCompatibility
     {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] (K : Dᵇc(X.left)⟦Λ⟧) :
     (boundedConstructibleTensor Λ X).obj K ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ (-⊗ᴸ-(X.left)⟦Λ⟧).obj K.obj :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
-    simp [boundedConstructibleTensor, derivedTensor]
+  Iso.refl _
 
 /-- For a fixed `K ∈ Dᵇc(X)⟦Λ⟧`, the restricted functor `RHom(K, -)` is compatible with the
 inclusions. -/
@@ -475,9 +474,7 @@ noncomputable def boundedConstructibleHomObjCompatibility
     {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] (K : Dᵇc(X.left)⟦Λ⟧) :
     (boundedConstructibleHom Λ X).obj (op K) ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ (RHom(X.left)⟦Λ⟧).obj (op K.obj) :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
-    simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
-    rfl
+  Iso.refl _
 
 /-- The adjunction with a parameter `- ⊗ᴸ - ⊣₂ RHom(-, -)` on bounded constructible complexes:
 the tensor-hom adjunction of the monoidal closed structure on `Dᵇc(X)⟦Λ⟧`. -/
