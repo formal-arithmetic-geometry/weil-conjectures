@@ -182,7 +182,8 @@ theorem perfectRestriction_classes_small (X : Scheme.{u}) (W : X.Opens)
         ((R ⋙ e.functor).mapDerivedCategory.obj E.obj) :=
       (schemeDerivedQCoh_openRestriction_iff Y A E.obj).2 (fun n ↦ by
         have := E.property n
-        exact SheafOfModules.isQuasicoherent_over _ A)
+        exact SheafOfModules.isQuasicoherent_over ((DerivedCategory.homologyFunctor
+          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj E.obj) A)
     have hp := perfect_exactOpenRestriction Y A (R ⋙ e.functor) rfl E.obj hE
     constructor
     · intro n

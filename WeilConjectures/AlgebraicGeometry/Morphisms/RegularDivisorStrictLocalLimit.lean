@@ -55,7 +55,7 @@ theorem regular_divisor_strict_local_limit
     (y : Spec R) (hy : g ∈ y.asIdeal) :
     ∃ (H : CommRingCat.{u}) (ι : R →+* H),
       ι.IndEtale ∧
-      ∃ (hH : IsStrictlyHenselianLocalRing H),
+      ∃ (_ : IsStrictlyHenselianLocalRing H),
         IsRegularLocalRing H ∧ IsRegularLocalRing (H ⧸ Ideal.span {ι g}) ∧
         IsSMulRegular H (ι g) ∧
         ι g ∈ IsLocalRing.maximalIdeal H ∧

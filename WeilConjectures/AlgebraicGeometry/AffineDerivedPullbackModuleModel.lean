@@ -82,8 +82,9 @@ theorem exists_affine_derivedPullback_module_model {X Y : Scheme.{u}} (f : X ⟶
                 (@id (ModuleCat.{u} Γ(X, ⊤) ⥤
                   SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace))
                   (tilde.functor Γ(X, ⊤))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj
-                  (((ModuleCat.extendScalars f.appTop.hom).mapHomologicalComplex
-                    (.up ℤ)).obj P)))) := by
+                  ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
+                    (ModuleCat.extendScalars f.appTop.hom)
+                    (Functor.preservesZeroMorphisms_of_isLeftAdjoint _) (.up ℤ)).obj P)))) := by
   classical
   obtain ⟨M, ⟨e⟩⟩ := exists_affine_module_complex_representative Y E hE
   let Λ := (Classical.choice (inferInstance :
