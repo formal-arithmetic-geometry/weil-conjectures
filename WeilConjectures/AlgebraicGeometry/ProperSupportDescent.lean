@@ -60,7 +60,7 @@ Proof:
    support by lem-weil-pbc-closed-subset-proper-over-base-properties(1). -/
 theorem exists_hasSupportProperOver_baseChange_of_isLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
-    (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]
+    (R : I ⥤ CommRingCat.{u})
     (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]
     (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))
     [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]

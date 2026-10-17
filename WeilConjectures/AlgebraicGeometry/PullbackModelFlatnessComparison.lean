@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.IsFlatOver
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Relative flatness is independent of a chosen pullback
@@ -43,26 +44,13 @@ private theorem flatOver_restrict
       Category.comp_id]
   exact congrArg (fun t : Γ(T, V.1) ⟶ Γ(Q, U'.1) ↦ (M.smul (t.hom r)).hom m) hring
 
-/-- Relative flatness transfers along an isomorphism of modules. -/
-theorem flatOver_of_iso
-    {X S : Scheme.{u}} (f : X ⟶ S) {M N : X.Modules} (eMN : M ≅ N)
-    (hflat : N.IsFlatOver f) : M.IsFlatOver f := by
-  intro V U e
-  let φ := (f.appLE V.1 U.1 e).hom
-  let : Module Γ(S, V.1) Γ(M, U.1) := Module.compHom _ φ
-  let : Module Γ(S, V.1) Γ(N, U.1) := Module.compHom _ φ
-  have : Module.Flat Γ(S, V.1) Γ(N, U.1) := hflat V U e
-  let E := (ModuleCat.restrictScalars φ).mapIso
-    ((SheafOfModules.evaluation (R := X.ringCatSheaf) (op U.1)).mapIso eMN)
-  exact (Module.Flat.equiv_iff E.toLinearEquiv).mpr (hflat V U e)
-
 private theorem flatOver_tensorPullback_iso
     {P Q T : Scheme.{u}} (e : P ≅ Q) (b : Q ⟶ T) (M : Q.Modules)
     (hflat : M.IsFlatOver b) :
     ((Scheme.Modules.tensorPullback e.hom).obj M).IsFlatOver (e.hom ≫ b) := by
   obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction e.hom
   let δ := adj.leftAdjointUniq (Scheme.Modules.restrictAdjunction e.hom)
-  exact flatOver_of_iso _ (δ.app M) (flatOver_restrict e.hom b M hflat)
+  exact (flatOver_restrict e.hom b M hflat).of_iso (δ.app M).symm
 
 private theorem flatOver_of_cartesian_model
     {P Q X S T : Scheme.{u}} {f : X ⟶ S} {g : T ⟶ S}
@@ -83,7 +71,7 @@ private theorem flatOver_of_cartesian_model
     eqToIso (congrArg (fun k ↦ Scheme.Modules.tensorPullback k) ha.symm) ≪≫ δ
   have hP := flatOver_tensorPullback_iso e b'
     ((Scheme.Modules.tensorPullback a').obj M) hflat
-  apply flatOver_of_iso b (δ'.app M)
+  refine Scheme.Modules.IsFlatOver.of_iso (δ'.app M).symm ?_
   simpa only [Functor.comp_obj, hb] using hP
 
 /-- Two cartesian models of the same base change give equivalent relative-flatness tests.

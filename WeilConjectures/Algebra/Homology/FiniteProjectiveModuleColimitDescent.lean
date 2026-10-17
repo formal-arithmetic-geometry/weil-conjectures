@@ -81,8 +81,11 @@ theorem exists_finite_projective_module_model_of_directed_colimit
     rw [← Category.assoc (ModuleCat.ofHom s) (ModuleCat.ofHom r), hlin]
     simp
   have hN : Module.FinitePresentation (F.obj i) N := inferInstance
-  obtain ⟨j, hij, s', r', hsplit, ⟨e⟩⟩ :=
+  obtain ⟨j, hij, s', r', hsplit, -, -⟩ :=
     exists_retraction_model_of_directed_colimit F i M N hM hN sA rA hsrA
+  let e := (eqToIso (congrArg (fun r ↦ (extendScalars r).obj M)
+      (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE hij)).symm)) ≪≫
+    (extendScalarsComp (F.map (homOfLE hij)).hom (colimit.ι F j).hom).app M).symm
   let rij := (F.map (homOfLE hij)).hom
   let : Algebra (F.obj i) (F.obj j) := rij.toAlgebra
   let b' := (Pi.basisFun (F.obj i) (Fin n)).baseChange (F.obj j)

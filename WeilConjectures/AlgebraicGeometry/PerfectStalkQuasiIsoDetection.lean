@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkChainMapLift
+import WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
 import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkInverseHomotopiesSpread
 
 /-! # Detecting a quasi-isomorphism of strictly perfect complexes near a point
@@ -50,7 +51,7 @@ private theorem perfect_stalk_isKProjective
     (fun n hn ↦ S.map_isZero (hab n (Or.inr hn)))
   exact CochainComplex.isKProjective_of_projective L b
 
-/-- A fixed chain map of strictly perfect complexes on an affine open which is a
+/-- A fixed chain map of strictly perfect complexes on an open which is a
 quasi-isomorphism at one stalk becomes a quasi-isomorphism on a smaller affine open.
 
 Source: Stacks Project, Tags 09RE, 0BC7 (2), and 00CR.
@@ -68,7 +69,7 @@ its forward map is a quasi-isomorphism. This avoids derived sheaf equivalences,
 cones and a derived Hom colimit diagram. Zero complexes, disjoint bounds and
 non-Noetherian rings are handled by the same finite-component descent. -/
 theorem exists_affine_restriction_quasiIso_of_perfect_stalk_quasiIso
-    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U) (hU : IsAffineOpen U)
+    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)
     (P Q : CochainComplex
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
     (hP : IsStrictlyPerfect X U P) (hQ : IsStrictlyPerfect X U Q) (f : P ⟶ Q)
@@ -83,8 +84,10 @@ theorem exists_affine_restriction_quasiIso_of_perfect_stalk_quasiIso
   have : CochainComplex.IsKProjective (T.obj Q) :=
     perfect_stalk_isKProjective X U x hxU Q hQ
   obtain ⟨e, he⟩ := (CochainComplex.IsKProjective.quasiIso_iff (T.map f)).1 hf
-  obtain ⟨V, hxV, hV, hVU, c, g, hg⟩ :=
-    exists_affine_perfect_open_stalk_chainMap_lift X U x hxU hU Q P hQ hP e.inv
+  obtain ⟨V, hxV, -, hVU, g, hg⟩ :=
+    exists_affine_perfect_open_stalk_chainMap_lift X U x hxU Q P hQ e.inv
+  let c := Functor.mapHomologicalComplexCompIso
+    (openModuleStalkRestrictionComparison X U V hVU x hxU hxV) (.up ℤ)
   let R := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
     (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)
   let S := (openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)
@@ -108,7 +111,7 @@ theorem exists_affine_restriction_quasiIso_of_perfect_stalk_quasiIso
     convert! h using 1
   obtain ⟨W, hxW, hW, hWU, gW, ⟨hfgW⟩, ⟨hgfW⟩⟩ :=
     exists_affine_perfect_open_stalk_inverse_homotopies_spread
-      X U x hxU hU P Q hP hQ f V hxV hV hVU g hfg hgf
+      X U x P Q hP hQ f V hxV hVU g hfg hgf
   exact ⟨W, hxW, hW, hWU,
     (show HomotopyEquiv _ _ from
       ⟨_, gW, hfgW, hgfW⟩).quasiIso_hom⟩

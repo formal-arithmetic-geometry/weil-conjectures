@@ -97,7 +97,9 @@ theorem exists_open_stalk_free_map_one_lift
   let L := SheafOfModules.unit ((moduleRings X.toRingedSpace).over U)
   let T := openModuleStalkFunctor X U ⟨x, hxU⟩
   let ti (i : I) : T.obj L ⟶ T.obj N := T.map (SheafOfModules.ιFree i) ≫ t
-  obtain ⟨e, he⟩ := exists_openStalk_restriction_transport X U x hxU
+  have he := exists_openStalk_restriction_transport X U x hxU
+  let e := fun (W : X.Opens) (hxW : x ∈ W) (hWU : W ≤ U) ↦
+    openModuleStalkRestrictionComparison X U W hWU x hxU hxW
   choose D hxD hDU a k hk using fun i : I ↦
     exists_open_stalk_unit_map_one_lift X U x hxU N (ti i)
   let V : X.Opens := U ⊓ ⨅ i : I, D i
@@ -112,11 +114,14 @@ theorem exists_open_stalk_free_map_one_lift
   let E : R ⋙ S ≅ T := e V hxV hVU
   have hi (i : I) : ∃ g : R.obj L ⟶ R.obj N,
       S.map g = E.hom.app L ≫ ti i ≫ E.inv.app N := by
-    obtain ⟨c, d, hc⟩ := he (D i) (hxD i) (hDU i) (a i) V hxV (hVD i) hVU
+    obtain ⟨d, hd⟩ := he (D i) (hxD i) (hDU i) (a i) V hxV (hVD i) hVU
+    let Rᵢ := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (hDU i))
     let Q := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
       (homOfLE (hVD i))
+    let c : Rᵢ ⋙ Q ≅ R := NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)
     refine ⟨c.inv.app L ≫ Q.map (k i) ≫ c.hom.app N, ?_⟩
-    exact restriction_lift_stalk c d (a i) E hc (ti i) (k i) (hk i)
+    exact restriction_lift_stalk c d (a i) E (fun M ↦ by simpa [c] using hd M)
+      (ti i) (k i) (hk i)
   choose g hg using hi
   let K : R.obj F ⟶ R.obj N := ∑ i : I, R.map (SheafOfModules.freeπ i) ≫ g i
   refine ⟨V, hxV, hVU, E, K, ?_⟩

@@ -127,7 +127,7 @@ theorem exists_localizedTensorComparison_derived_arrow
   let T := CochainComplex.ιKFlat (ModuleCat.{u} A) ⋙ F ⋙ tensorRight N ⋙
     HomologicalComplex.homologyFunctor (ModuleCat.{u} C) (.up ℤ) i
   obtain ⟨S, η, hS, he⟩ :=
-    exists_kFlatLocalizedTensorComparison_natural R A B C Q N t hC hQ i
+    exists_kFlatLocalizedTensorComparison_natural R A B C Q N t hQ i
   change S ⟶ T at η
   have hT : W.WKFlat.IsInvertedBy T := by
     intro U V a ha

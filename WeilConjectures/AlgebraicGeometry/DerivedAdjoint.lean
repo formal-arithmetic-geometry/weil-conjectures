@@ -39,7 +39,7 @@ variable {X Y : Scheme.{u}}
 Proof:
 1. The tensor pullback/direct image adjunction of Stacks Tag 0096 induces an
    adjunction on homotopy categories. The object and map clauses of
-   `exists_derivedPullback` identify its underived functor with tensor pullback.
+   `derivedPullback_spec` identify its underived functor with tensor pullback.
 2. The recorded sheaf tensor structure and functorial flat resolutions give the
    K-flat left derivability structure. Its categorical K-flat objects satisfy the
    sheaf definition: tensoring an acyclic complex remains acyclic, as checked after
@@ -78,7 +78,7 @@ theorem nonempty_derivedPullbackAdjunction (f : X ⟶ Y) :
     set_option synthInstance.maxSize 512 in infer_instance
   let G : A ⥤ B := Scheme.Modules.tensorPullback f
   obtain ⟨_, _, _, _, _, _, _, E, hE, hEmap, hEadd, ε, hε, _, hK⟩ :=
-      Classical.choose_spec (exists_derivedPullback f)
+      derivedPullback_spec f
   have h : E = G := CategoryTheory.Functor.ext hE (fun M N a ↦ hEmap a)
   subst E
   have : G.Additive := hEadd

@@ -470,7 +470,7 @@ theorem overlap_pair_square_chart_transport
     {Y Y' Z : Scheme.{u}} (V : Y.OpenCover.{u}) (V' : Y'.OpenCover.{u})
     (α : V'.I₀ → V.I₀) (r : Y' ⟶ Y) (ρ : ∀ d, V'.X d ⟶ V.X (α d))
     (hr : ∀ d, ρ d ≫ V.f (α d) = V'.f d ≫ r)
-    (p : Z ⟶ Y) (p' : Z ⟶ Y') (hp : p' ≫ r = p)
+    (p : Z ⟶ Y) (p' : Z ⟶ Y')
     (A : (d : V.I₀) → (V.X d).Modules)
     (A' : (d : V'.I₀) → (V'.X d).Modules) (M : Z.Modules)
     (c : ∀ d, (Scheme.Modules.pullback (ρ d)).obj (A (α d)) ≅ A' d)
@@ -505,7 +505,6 @@ theorem overlap_pair_square_chart_transport
           (V.f (α a)) (V.f (α b)) r (ρ a) (ρ b) (V'.f a) (V'.f b)
           (hr a) (hr b) (A (α a)) (A (α b)) φ ≫
         (Scheme.Modules.pullback (pullback.snd (V'.f a) (V'.f b))).map (c b).hom) := by
-  have _ := hp
   refine Pseudofunctor.chart_transport
     (C := Scheme.{u}) (ι := V.I₀) (ι' := V'.I₀) (X := V.X) (X' := V'.X)
     (W := (V.pullback₁ p).X) (W' := (V'.pullback₁ p').X)

@@ -41,7 +41,7 @@ private theorem exists_affine_compact_isoLocus_neighbourhood {W : Scheme.{u}}
     restrictCompIso N UN.ι (W.homOfLE hUN) U.ι (W.homOfLE_ι hUN) ≪≫
       (restrictFunctor (W.homOfLE hUN)).mapIso (overIsoFreeEquiv N UN J eN) ≪≫
         restrictFreeIso (W.homOfLE hUN) J
-  obtain ⟨f, hf⟩ := moduleMapIsoLocus_inter_eq_basicOpen_of_free φ U hU frameM frameN
+  obtain ⟨f, hf⟩ := moduleMapIsoLocus_inter_eq_basicOpen_of_free φ U frameM frameN
   refine ⟨U, hU, fun y hy ↦ (hUV hy).1.1, hxU, ?_⟩
   rw [hf]
   exact (hU.basicOpen f).isCompact
