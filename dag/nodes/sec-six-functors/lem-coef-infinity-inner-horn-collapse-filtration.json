@@ -12,9 +12,60 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Using the cited description of a simplex as a weakly increasing map, its image is a nonempty vertex set T. It factors uniquely as the surjection onto T followed by the increasing enumeration of T; thus it is a degeneracy of the nondegenerate face on T. Let S be the finite family of vertex sets mapping onto all four blocks under c. Order its members S_1,...,S_m by nonincreasing cardinality, breaking ties arbitrarily. The full set is its unique largest member, so m is positive and S_1={0,...,N}. Every S_k contains i. Put P_k=S_k\\{i}; the P_k are distinct, omit i, and are disjoint from the family S. Define K_j degreewise to consist of maps whose image is neither S_k nor P_k for any k<=j; define K_0=Delta^N. This is cumulative deletion of precisely those pairs and their degeneracies. The degreewise subsets decrease with j; their closure under the operators is checked next.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA Lemma 2.4.4.6, proof for i>1, p. 308: definition of the surjective-simplex family, ordering, paired faces, and K_j."
+   }
+  },
+  {
+   "text": "The deleted vertex sets are upward closed. A proper superset U of S_k is surjective under c and has larger cardinality, hence is S_l with l<k. For U containing P_k, if i belongs to U then U contains S_k; if i does not belong to U, then U=P_l for the surjective set S_l=U union {i}, with l<=k. Thus a surviving image has only surviving nonempty subsets. Precomposition can only shrink the image, proving that K_j is a simplicial subset. The two new deleted sets S_j,P_j survived in K_{j-1}: the S_k and P_k are pairwise distinct. Every facet F=S_j\\{v} with v!=i survives in K_j: it contains i, so is not any P_k, and if it is surjective its smaller cardinality places it after j. All subsets of these facets survive by closure. Conversely every proper subset of S_j except P_j lies in such a facet: it omits some v!=i. Therefore the only images in sigma_j absent from K_j are S_j and P_j, exactly the two images excluded by the cited definition of Lambda_{p_j}^{n_j}. This proves the intersection formula. Restoring sigma_j restores exactly the two newly deleted images, so K_{j-1}=K_j union sigma_j.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA Lemma 2.4.4.6, proof for i>1, p. 308: coface closure and the horn pushout calculation."
+   }
+  },
+  {
+   "text": "Surjectivity of S_j under c forces a vertex in each of the four blocks. Blocks 1 and 2 are the singletons {i-1} and {i}; a vertex in block 0 precedes i-1, and a vertex in block 3 follows i. Hence S_j has at least four vertices, the zero-based position p_j of i satisfies 1<p_j<|S_j|-1=n_j, and the immediately preceding vertex is i-1 because no integer lies between them. Every S_j lies in {0,...,N}, so n_j<=N. The full set is the only subset of size N+1; consequently n_j<N for j>1. The increasing enumeration identifies the vertex i with position p_j, as used in the intersection calculation.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA Lemma 2.4.4.6, proof for i>1, p. 308: the inequalities and consecutive distinguished vertices."
+   }
+  },
+  {
+   "text": "For j=1, the only deleted images are the full vertex set and that set minus i. A map has any other image exactly when it omits a vertex other than i; by the cited horn definition, K_1=Lambda_i^N. At j=m, an image T is deleted exactly when c(T) contains {0,1,3}: if it also contains 2 it is a surjective S_k, while if it does not contain 2 then i is absent and T=P_k for the surjective set T union {i}. Conversely each S_k and P_k meets blocks 0,1,3. Therefore a surviving simplex is exactly a map whose c-image omits a vertex other than 2. By the horn definition its composite with c belongs to Lambda_2^3. Since the cited pullback is degreewise, this is precisely K_m=Delta^N times_{Delta^3} Lambda_2^3, as a simplicial subset in every degree.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "HA Lemma 2.4.4.6, proof for i>1, pp. 308-309: identification of K_1 and K_m with the two horns and the collapse inverse image."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Lemma 2.4.4.6, proof for i>1, printed pp. 308-309; online source read, archival copy WANTED. Explicit degreewise argument supplied by the worker."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +108,45 @@
    "results": "{\"t\": \"2026-10-17T08:47:35Z\", \"tool\": \"loogle\", \"query\": \"SSet.horn, SSet.stdSimplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.horn\", \"SSet.instHasDimensionLTToSSetHorn\", \"SSet.horn.face\", \"SSet.horn.const\", \"SSet.horn.edge₃\", \"SSet.horn.ι\", \"SSet.horn_obj_eq_univ\", \"SSet.op_horn\"], \"digest\": \"e9c8c4942a1e429c\"}",
    "date": "2026-10-17",
    "verdict": "no match: SSet.horn, horn_eq_iSup, horn.isColimit and horn.multicoequalizerDiagram give a single horn and its face presentation, not this filtration or its endpoints. skeletonOfMono_succ attaches boundaries and does not specify this pairing. RelativeCellComplex.Cell.preimage_filtration_map (Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean:337) assumes an already supplied proper pairing/rank function; constructing this pairing is not a one-line specialization. The Loogle pattern containing Subcomplex was unresolved (unknown identifier); the retained valid SSet.horn, SSet.stdSimplex query returned horn declarations only."
+  },
+  {
+   "tool": "grep",
+   "query": "horn.*filtration|preimage.*horn|collapse.*horn",
+   "results": "{\"t\": \"2026-10-17T10:34:45Z\", \"tool\": \"grep\", \"query\": \"horn.*filtration|preimage.*horn|collapse.*horn\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\"], \"digest\": \"b1d82029f3fc98b1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the recorded hits. Horn.lean:32-70 defines a single horn, its face union and membership criterion; the horn_3_1 and horn_3_2 descent lemmas are fixed-dimensional horn gluing. RelativeCellComplex.lean:337 assumes a proper pairing and rank function; supplying the four-block pairing and proving the endpoints is the present argument, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial subset of a standard simplex obtained by removing a maximal simplex and its face is the corresponding horn",
+   "results": "{\"t\": \"2026-10-17T10:34:50Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial subset of a standard simplex obtained by removing a maximal simplex and its face is the corresponding horn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn_obj\", \"SSet.horn\", \"SSet.horn_eq_iSup\", \"SSet.stdSimplex.face\", \"SSet.stdSimplex.face_obj\", \"SSet.boundary\", \"SSet.horn.faceι_ι\", \"SSet.horn.primitiveTriangle\"], \"digest\": \"307533ebdec89d5f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the recorded hits. Horn.lean:32-70 defines a single horn, its face union and membership criterion; the horn_3_1 and horn_3_2 descent lemmas are fixed-dimensional horn gluing. RelativeCellComplex.lean:337 assumes a proper pairing and rank function; supplying the four-block pairing and proving the endpoints is the present argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A four block ordinal collapse has inverse image of an inner horn obtained by removing simplex and distinguished face pairs in decreasing dimension",
+   "results": "{\"t\": \"2026-10-17T10:34:51Z\", \"tool\": \"leanfinder\", \"query\": \"A four block ordinal collapse has inverse image of an inner horn obtained by removing simplex and distinguished face pairs in decreasing dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.primitiveTriangle\", \"SSet.horn₃₁.ι₀_desc\", \"SSet.horn₃₁.ι₃_desc\", \"SSet.horn₃₂.ι₀_desc\", \"SSet.horn₃₂.ι₃_desc\", \"SSet.horn.face\", \"SSet.horn.faceSingletonComplIso_inv_ι\", \"SSet.horn₃₁.exists_desc\"], \"digest\": \"a9a9fab2a0019c4c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the recorded hits. Horn.lean:32-70 defines a single horn, its face union and membership criterion; the horn_3_1 and horn_3_2 descent lemmas are fixed-dimensional horn gluing. RelativeCellComplex.lean:337 assumes a proper pairing and rank function; supplying the four-block pairing and proving the endpoints is the present argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite ordered vertex subsets with a distinguished vertex give a simplicial horn collapse by deleting paired maximal faces",
+   "results": "{\"t\": \"2026-10-17T10:37:06Z\", \"tool\": \"leanfinder\", \"query\": \"Finite ordered vertex subsets with a distinguished vertex give a simplicial horn collapse by deleting paired maximal faces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn\", \"SSet.horn_eq_iSup\", \"SSet.horn.multicoequalizerDiagram\", \"SSet.horn.faceι\", \"SSet.horn.ι\", \"SSet.face_le_horn\", \"SSet.horn.face\", \"SSet.horn_obj\"], \"digest\": \"6f195e8498e06573\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the recorded hits. Horn.lean:32-70 defines a single horn, its face union and membership criterion; the horn_3_1 and horn_3_2 descent lemmas are fixed-dimensional horn gluing. RelativeCellComplex.lean:337 assumes a proper pairing and rank function; supplying the four-block pairing and proving the endpoints is the present argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_desc|primitiveTriangle",
+   "results": "{\"t\": \"2026-10-17T12:11:13Z\", \"tool\": \"grep\", \"query\": \"exists_desc|primitiveTriangle\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Horn.lean\"], \"digest\": \"b5dffc03b0471a48\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HornColimits.lean:229 glues a compatible family into a single horn; lines 332 and 420 glue dimension-three horns. Horn.lean:247 defines a triangle in a horn. No ordered four-block collapse filtration or endpoints."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-cocartesian-inner-horn-comparison",
@@ -70,7 +156,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "HA Lemma 2.4.4.6, proof for i>1, printed pp. 308–309: the surjective-simplex family, pairs obtained by omitting i, attaching horns and terminal inverse horn. This serves the combinatorial subargument in Step 5 of the inner-horn comparison in the inherited operadic-extension branch of prop-coef-integral-exceptional-adjoint. Read nonincreasing in the inconsistent ordering sentence, as required by sigma_1 = Delta^N.",
+   "place": "HA Lemma 2.4.4.6, proof for i>1: surjective-simplex family, paired face deletion and terminal inverse-horn collapse.",
    "via": [
     "lem-coef-infinity-cocartesian-inner-horn-comparison",
     "lem-coef-operadic-correspondence-kan-filling",
@@ -87,5 +173,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-inner-horn-collapse-filtration",
+  "worker": "stage1",
+  "summary": "Checked the finite face-pair construction in Higher Algebra Lemma 2.4.4.6 against the stated four-block collapse. The proof now gives the ordered surjective family, coface closure, horn intersections, dimension/position inequalities, and both endpoint identifications. The source prints an ordering typo (nondecreasing although the full simplex is first); the node's nonincreasing order is the mathematically consistent reading. Continuation review corrected the previous proof: deletion is cumulative; the horn-intersection argument concerns facets and their subsets; the terminal criterion is omission of block 0, 1 or 3 (not omission of an arbitrary block). The statement is unchanged. All steps are below 2000 characters; no non-elementary fact is hidden in a long step.",
+  "blueprint": "Realizes the inherited prop-coef-integral-exceptional-adjoint proof clause for the i>1 inner-horn comparison: the surjective-simplex family, paired face deletion, inner-horn attachments, and terminal inverse-horn collapse."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-05c3e066a",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-05c3e066a (reviewer sub-agent of L); spot-checked: I read in full: the item, the cited def-cbc-enhanced-diagrams-cones (simplices as weakly increasing maps, the horn defined by omitting a vertex other than i, degreewise pullbacks), Step 5 of the parent inner-horn-comparison, and the unit record. I also read HA Lemma 2.4.4.6, pp. 307-309, in a local text copy of the official PDF. Its i>1 paragraph matches the statement hypothesis by hypothesis: the same collapse q to Delta^3, the same family S of surjective faces with sigma' = sigma minus vertex i, pushouts of Lambda^{n_j}_p with 1<p<n_j, K_1 = p^{-1}Lambda^n_i and K_m = q^{-1}Lambda^3_2. HA's 'nondecreasing' contradicts sigma_1 = Delta^n and is a typo; the node's nonincreasing order is correct and the report records it under Source error. I re-proved every step. Step 1: unique factorization through the image face. Step 2: the deleted family is upward closed, both for supersets of S_k (larger, so earlier in the order) and for supersets of P_k (case on whether i is present). Facets omitting v other than i survive, which gives K_j meet sigma_j = Lambda^{n_j}_{p_j} and K_{j-1} = K_j union sigma_j. Step 3 is genuinely elementary: blocks 0 and 3 are nonempty, so p_j>=2, p_j<n_j and n_j>=3; the predecessor of i is i-1; n_j<N for j>1. Step 4: a set T is deleted exactly when c(T) contains {0,1,3}, so K_m = c^{-1}Lambda^3_2, and K_1 = Lambda^N_i. Edge cases: N=3, i=2 gives m=1; N=4, i=2 gives dimensions 4,3,3. My own enumeration for 3<=N<=9, 1<i<N with several tie-breaks checked every clause: 0 failures. There are no new nodes, proof_deps equals the union of uses, and there is no cycle. The rg search over the DAG found no duplicate. The 11 Mathlib searches are credible no-matches. The blueprint fields are in place and no SGA is used. No target is involved, so no base-change or coefficient question arises, and the statement is unchanged. Minor, not repaired: the report lists a citations.json that is not in the commit, and the node has no lean_audit key. No fixes; no tool_uses."
  }
 }
