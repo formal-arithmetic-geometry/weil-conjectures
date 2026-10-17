@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "lem-coef-kan-quillen-model-right-proper-core",
-  "lem-coef-sharp-pullback-calculus"
+  "lem-coef-sharp-pullback-calculus",
+  "lem-coef-cofibrant-subset-colimit-decomposition"
  ],
  "proof": [
   {
@@ -329,5 +330,23 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-879568f0e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node statement, the citer lem-coef-rezk-diagonal-sharp, the unit record and the main-20261015 blueprint ancestor. I could not check the cited places in Rezk: the paper is not under literature/ and fetching it from here failed. The delivery already marks the proof as agent-written and requests the paper with a WANTED line, so I checked every step against the cited DAG statements instead. The item statement, stmt_deps and source are identical to the base, so no target is weakened. All ten steps hold. (1) Pullback commutes with degreewise colimits, and a surjective cover gives a local sharpness test through criterion (iii). (2)-(3) The punctured-cube decomposition and weak-equivalence invariance by induction on |S|, with the mono legs feeding the cited pushout and filtered gluing clauses. (4) The relative clause follows from P_i=V_i x_H E. The latching map of P is a base change of the latching map of V, so P is cofibrant. (5) Case (1) via the tails W_m, the union identification and the local test. (6) The attachment argument, both alternatives checked. (7)-(9) The three pushout reductions, with the degreewise preimage and complement calculations redone. (10) The finite induction never uses the object at S itself. proof_deps is the union of the uses, there is no cycle, everything stays on the unit's route and no tool_uses are needed. lem-coef-sharp-simplex-criterion is the standard simplex test for sharp maps: true, strictly smaller than the item, not a duplicate. lem-coef-cofibrant-subset-colimit-decomposition I proved independently: the colimit over two down-closed pieces is a pushout, and B's cofibrancy and the monos follow from the latching maps. It is true, has no homotopy content and duplicates no existing node. Both new nodes record all three kinds of Mathlib search. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SharpSpecialColimitGluing",
+  "declaration": "SSet.sharp_special_colimit_gluing",
+  "file": "lean/Sheaf/AlgebraicTopology/SharpSpecialColimitGluing.lean",
+  "statement": "theorem sharp_special_colimit_gluing : (∀ (U V : ℕ ⥤ SSet.{u}) (p : U ⟶ V), (∀ n : ℕ, IsSharp (p.app n)) ∧ (∀ (n m : ℕ) (f : n ⟶ m), IsHomotopyCartesian (U.map f) (p.app n) (p.app m) (V.map f)) ∧ (∀ n : ℕ, Mono (U.map (homOfLE (Nat.le_succ n))) ∧ Mono (V.map (homOfLE (Nat.le_succ n)))) → IsSharp (colimMap p) ∧ (∀ n : ℕ, IsHomotopyCartesian (colimit.ι U n) (p.app n) (colimMap p) (colimit.ι V n)) ∧ (∀ (E H : SSet.{u}) (e : E ⟶ H) (u₀ : U ⟶ (Functor.const ℕ).obj E) (v₀ : V ⟶ (Functor.const ℕ).obj H), u₀ ≫ (Functor.const ℕ).map e = p ≫ v₀ → IsSharp e → (∀ n : ℕ, IsHomotopyCartesian (u₀.app n) (p.app n) e (v₀.app n)) → IsHomotopyCartesian (colimit.desc U (Cocone.mk E u₀)) (colimMap p) e (colimit.desc V (Cocone.mk H v₀)))) ∧ (∀ (U V : WalkingSpan ⥤ SSet.{u}) (p : U ⟶ V), (∀ i : WalkingSpan, IsSharp (p.app i)) ∧ (∀ (i j : WalkingSpan) (f : i ⟶ j), IsHomotopyCartesian (U.map f) (p.app i) (p.app j) (V.map f)) ∧ Mono (U.map WalkingSpan.Hom.snd) ∧ Mono (V.map WalkingSpan.Hom.snd) → IsSharp (colimMap p) ∧ (∀ i : WalkingSpan, IsHomotopyCartesian (colimit.ι U i) (p.app i) (colimMap p) (colimit.ι V i)) ∧ (∀ (E H : SSet.{u}) (e : E ⟶ H) (u₀ : U ⟶ (Functor.const WalkingSpan).obj E) (v₀ : V ⟶ (Functor.const WalkingSpan).obj H), u₀ ≫ (Functor.const WalkingSpan).map e = p ≫ v₀ → IsSharp e → (∀ i : WalkingSpan, IsHomotopyCartesian (u₀.app i) (p.app i) e (v₀.app i)) → IsHomotopyCartesian (colimit.desc U (Cocone.mk E u₀)) (colimMap p) e (colimit.desc V (Cocone.mk H v₀)))) ∧ (∀ {ι : Type u} (S : Finset ι) (U V : Set.Iio S ⥤ SSet.{u}) (p : U ⟶ V), (∀ (T : Set.Iio S) (n : ℕ), Function.Injective ((SSet.ProperSubsetDiagram.latchingMap U T).app (.op ⦋n⦌))) → (∀ (T : Set.Iio S) (n : ℕ), Function.Injective ((SSet.ProperSubsetDiagram.latchingMap V T).app (.op ⦋n⦌))) → (∀ T : Set.Iio S, IsSharp (p.app T)) → (∀ (T T' : Set.Iio S) (f : T ⟶ T'), IsHomotopyCartesian (U.map f) (p.app T) (p.app T') (V.map f)) → IsSharp (colimMap p) ∧ (∀ T : Set.Iio S, IsHomotopyCartesian (colimit.ι U T) (p.app T) (colimMap p) (colimit.ι V T)) ∧ (∀ (E H : SSet.{u}) (e : E ⟶ H) (u₀ : U ⟶ (Functor.const (Set.Iio S)).obj E) (v₀ : V ⟶ (Functor.const (Set.Iio S)).obj H), u₀ ≫ (Functor.const (Set.Iio S)).map e = p ≫ v₀ → IsSharp e → (∀ T : Set.Iio S, IsHomotopyCartesian (u₀.app T) (p.app T) e (v₀.app T)) → IsHomotopyCartesian (colimit.desc U (Cocone.mk E u₀)) (colimMap p) e (colimit.desc V (Cocone.mk H v₀))))",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f2ec5166",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Read node, base node, stmt_deps' Lean (IsHomotopyCartesian/IsSharp in SharpPullbackCalculus.lean, latchingMap in CofibrantSubsetColimitDecomposition.lean), module, report (Worker report + Second reading by Q84 present). All three shapes match node clause by clause: square orientation consistent with IsHomotopyCartesian a b f g; case (1) successive monos via homOfLE (Nat.le_succ n); case (2) WalkingSpan with only Hom.snd (0→2) mono; case (3) Set.Iio S with degreewise-injective latching maps, S=∅ and |S|=1 included; sharp colimMap, component squares and relative-cocone clause in every case; no extra Kan/Reedy/nonempty hypotheses. ι : Type u matches the dependency and loses no generality for finite S. Only the item node changed: lean record complete and verbatim; stmt_deps gained landed lem-coef-cofibrant-subset-colimit-decomposition (allowed: STMT_DEPS MAY GAIN LANDED NODES; needed for latchingMap). No duplicate declaration found. Only sorry; source/blueprint docstrings and ten-step proof present. nt_compile.py --json on the snapshot module: rc 0, no errors/warnings (live lakefile sets warn.sorry=false). Rezk's paper not archived in literature/: checked against node text and landed dependency declarations. No findings."
  }
 }

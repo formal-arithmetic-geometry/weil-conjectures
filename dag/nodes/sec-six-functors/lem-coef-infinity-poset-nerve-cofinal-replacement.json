@@ -280,5 +280,29 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-92ff1e6ae (reviewer sub-agent of L); spot-checked: I read all eight steps of the item, the four new nodes and the statement of every cited node. The item statement is unchanged and is exactly what lem-coef-filtered-poset-cone-test uses. HTT is not in literature/, so the WANTED line and proof_origin=agent are correct; I checked each claim mathematically. Step 2: B_X is a poset; the initial object (σ̄,s_σ) of the comma follows from the uniqueness clause of the Mathlib-leaf decomposition lemma; contractibility uses a non-invertible natural transformation, which the cited nerve lemma allows; strict and homotopy comma agree by the isofibration pullback lemma; the comma-criterion hypotheses hold for nerves. Steps 3-5: the composite a∘b∘c∘d∘e composes correctly, and I checked the direction of the first-vertex functor and that it is a functor on the opposite. Step 4: the embedded-simplex argument holds, since injective self-maps of [n] are identities. Step 6: the count μ=max(ℵ0,λ)<κ is right for uncountable κ. Step 7: the finite route goes through the finite resolution and B=B_Q is finite. Small-case tests of the new nodes: the last-vertex node at Δ^0 and N([1]); the first-vertex node, whose comma is S(N(c/C))^op and contractible; the injective-simplex node, whose comma is the semi-simplicial simplex category of Δ^n (this is HTT 6.5.3.7); the finite-resolution node, e.g. Sd²X, plus the empty cases. All four are true, statement-only and strictly smaller than the item. I found no duplicates after reading the subdivision, cofinal, cofinality-space-test, anodyne-cocone, colimit-subdiagram and decomposition nodes, and there is no cycle. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus: only its generic statement that Fun(K,E) has Kan mapping spaces is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityPosetNerveCofinalReplacement",
+  "declaration": "SSet.Presentability.infinity_poset_nerve_cofinal_replacement",
+  "declarations": [
+   "SSet.Presentability.restrictionOnCoconeMappingSpace",
+   "SSet.Presentability.IsJoinedToRestriction",
+   "SSet.Presentability.infinity_poset_nerve_cofinal_replacement"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityPosetNerveCofinalReplacement.lean",
+  "statement": "theorem infinity_poset_nerve_cofinal_replacement (κ : Cardinal.{u}) (hκ : κ.IsRegular) (K : SSet.{max (u + 1) v}) (hK : IsKappaSmall κ K) : ∃ (B : Type (max (u + 1) v)) (_ : PartialOrder B), HasCardinalLT B κ ∧ ∃ (φ : nerve B ⟶ K), ∀ (E : SSet.{max (u + 1) v}) [Quasicategory E] (p : K ⟶ E) (T : E _⦋0⦌), KanComplex (Enhanced.mappingSpace ((ihom K).obj E) (Enhanced.diagramVertex p) (((Enhanced.constantDiagrams K E).app _) T)) ∧ KanComplex (Enhanced.mappingSpace ((ihom (nerve B)).obj E) (((MonoidalClosed.pre φ).app E).app _ (Enhanced.diagramVertex p)) (((MonoidalClosed.pre φ).app E).app _ (((Enhanced.constantDiagrams K E).app _) T))) ∧ Enhanced.IsWeakHomotopyEquivalence (restrictionOnCoconeMappingSpace φ p T) ∧ ∀ (c : (Enhanced.mappingSpace ((ihom (nerve B)).obj E) (((MonoidalClosed.pre φ).app E).app _ (Enhanced.diagramVertex p)) (((MonoidalClosed.pre φ).app E).app _ (((Enhanced.constantDiagrams K E).app _) T))) _⦋0⦌), IsJoinedToRestriction (restrictionOnCoconeMappingSpace φ p T) c",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper declarations make the canonical precomposition map and the path-on-components clause explicit; the theorem is statement-only."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-56616f8a2",
+  "group": "Q32",
+  "result": "fix",
+  "note": "Statement matches node and HTT 4.2.3.15/16 clause by clause: regular kappa, IsKappaSmall K with no quasicategory instance, exists poset B with HasCardinalLT B kappa and phi : nerve B -> K, for all E [Quasicategory E] p T: both right-pinched cocone mapping spaces Kan, restriction (mappingSpaceMap of pre phi) IsWeakHomotopyEquivalence, path-on-components clause; restricted constant endpoint equals constantDiagrams (nerve B) by curry_pre_app; edge cases K=empty, kappa=aleph0, empty E ok; universes follow dependency convention; lean.statement verbatim; sorry-only; docstrings and blueprint tags present; no hollow helpers, no duplicates. Fault: proof dep lem-coef-injective-simplex-cocone-restriction already had a module (Sheaf.CategoryTheory.InjectiveSimplexCoconeRestriction, landed 695363e898, an ancestor of the delivery) but was not imported (stage-2 rule 7). fixes/InfinityPosetNerveCofinalReplacement.lean adds that import only. nt_compile.py: delivered and fixed files both exit 0 with no errors or warnings."
  }
 }

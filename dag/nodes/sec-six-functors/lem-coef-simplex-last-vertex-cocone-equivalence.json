@@ -8,7 +8,8 @@
   "place": "HTT Proposition 4.2.3.14 and its last-vertex construction in Lemma 4.2.3.13, printed pp. 254-255; Proposition 4.1.1.7, printed p. 226, for the fiberwise cocone assertion; compare the natural join/cocone equivalence of lem-coef-join-slice-cocone-comparison. Online primary source read 2026-10-17; archival copy WANTED in report.md. No Stacks tag is asserted."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-simplex-category-last-vertex"
  ],
  "proof": [
   {
@@ -241,5 +242,24 @@
   "group": "Q54",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-ea679654b (reviewer sub-agent of L); spot-checked: I read the whole item and the new node, and checked every step by direct calculation; no fixes were made and no tool_uses are declared. HTT is not archived and network access is blocked, so I checked against my knowledge of HTT 4.2.3, not the open PDF. The report's WANTED line stands and proof_origin.by=agent is correct. Item statement (HTT 4.2.3.14 in fixed-apex form): S(X) includes degenerate simplices, l_X is monotone, there is no hypothesis on X or on colimits in E, X empty is included, and it matches what lem-coef-infinity-poset-nerve-cofinal-replacement uses. Step 2: I checked r is simplicial myself, using cv'=v theta and tau_{theta(s)}=tau_r Delta(c), plus the case with no upper vertex retained; r b=id and r a=l_X hold exactly, and r iota_tau repeats the last vertex. Step 3: the standard-simplex clause of lem-coef-infinity-final-index-colimit gives the local colimits that lem-coef-decomposition-local-colimit-cocones needs. Step 4: b*r*=id strictly, so r* is an equivalence. Step 5: (id,z) is initial in I_z. Step 6: the image retraction is J -| R with RJ=id and j_s giving JR=>id; I checked the induced arrow and the beta identities. Step 7: the Eilenberg-Zilber terminal object (t, nondegenerate z) lies in B_z because d<n. Steps 8-9: lem-coef-infinity-anodyne-cocones applies, and l_X*=a*r*. New node lem-coef-decomposition-simplex-lift-right-anodyne: it is the general HTT 4.2.3.8, statement only, self-contained, with LeanSearch, Loogle, LeanFinder and grep searches recorded. It does not restate a clause of the item. lem-coef-directed-decomposition-right-anodyne is its directed-cover special case, not a duplicate. I tested it on K=Delta^0 with K_a a point (gives the horn {1} in Delta^1), on two points over a point and on Delta^1 over a point (the hypotheses fail, as they must), and on nondegenerate z, where D_z is empty. All cited statements are in unit sk-prop-sf-biduality-general apart from a Mathlib leaf and a definition, so the route is respected; no SGA is used."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplexLastVertexCoconeEquivalence",
+  "declaration": "SSet.Enhanced.simplex_last_vertex_cocone_equivalence",
+  "file": "lean/Sheaf/CategoryTheory/SimplexLastVertexCoconeEquivalence.lean",
+  "statement": "theorem simplex_last_vertex_cocone_equivalence (X E : SSet.{u}) [Quasicategory E] (p : X ⟶ E) (T : E _⦋0⦌) : KanComplex (mappingSpace ((ihom X).obj E) (diagramVertex p) ((constantDiagrams X E).app _ T)) ∧ KanComplex (mappingSpace ((ihom (nerve (simplexCategory X))).obj E) (diagramVertex (simplexCategoryLastVertex X ≫ p)) ((constantDiagrams (nerve (simplexCategory X)) E).app _ T)) ∧ IsWeakHomotopyEquivalence (mappingSpaceMap ((MonoidalClosed.pre (simplexCategoryLastVertex X)).app E) (diagramVertex p) ((constantDiagrams X E).app _ T))",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already landed full simplex category and explicit last-vertex map, cited by adding lem-coef-simplex-category-last-vertex to stmt_deps. The two Kan assertions and the weak-equivalence assertion concern the actual internal-hom precomposition map. No new definitions or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f3cae7f67",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Clause-by-clause match against node and HTT 4.2.3.14/4.2.3.13/4.1.1.7. S(X)=X.Elementsᵒᵖ (all simplices, correct arrow direction) and the last-vertex map come from the landed lem-coef-simplex-category-last-vertex; it is the same notion, and the added stmt_dep creates no cycle. Only [Quasicategory E] is assumed; no condition on X, no colimit or inhabitedness assumption, so X=∅ is covered; one common universe u, which the node allows. Conclusion: two KanComplex conjuncts plus IsWeakHomotopyEquivalence of mappingSpaceMap ((pre ℓ).app E), the actual restriction map. Endpoint check: pre sends diagramVertex p to diagramVertex (ℓ≫p) by rfl, and constantDiagrams X E ≫ pre ℓ = constantDiagrams N E via curry_pre_app (both compiled). Node copy differs from the side clone only in lean and stmt_deps; lean.statement is verbatim in the file; docstrings carry source, blueprint tag and all nine steps; proof is sorry; no new definitions. nt_compile --json side-overlay compile rc=0, no errors. Cosmetic only: report.md shows HTT numbers as 'the project server' (apparently a text filter); node and docstrings are correct."
  }
 }
