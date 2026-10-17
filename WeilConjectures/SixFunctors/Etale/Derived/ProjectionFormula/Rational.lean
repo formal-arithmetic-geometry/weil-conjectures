@@ -85,7 +85,7 @@ theorem isIso_fromIntegral_map_projectionMap (f : X ⟶ Y) [HasCompactification 
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌)) :
     IsIso ((DerivedCategoryDerivedCompleteRational.fromIntegral Y.smallEtaleTopology l E).map
       ((DerivedCategoryDerivedCompleteIntegral.completion Y.smallEtaleTopology l E).map
-        (((projectionMap 𝐌 f).app K).app L))) :=
+        (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L))) :=
   @Functor.map_isIso _ _ _ _ _ _ _ _ (isIso_completion_map_projectionMap l E f K L)
 
 /-- Blueprint `thm-sf-pf-field`: Rational and algebraically closed stages; the compatibility
@@ -101,7 +101,7 @@ theorem isIso_reductionModIdeal_pow_map_projectionMap (f : X ⟶ Y) [HasCompacti
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌)) (n : ℕ) :
     IsIso ((reductionModIdeal _ Y (PadicAlgCl.maximalIdealShrink l E ^ n)).map
-      (((projectionMap 𝐌 f).app K).app L)) :=
+      (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L)) :=
   isIso_reductionModIdeal_maximalIdealShrink_pow_map_projectionMap l E f K L n
 
 /-- **The projection formula at the rational stage of the étale model** (the étale-site form of
@@ -123,9 +123,9 @@ theorem hasProjectionFormula_field (f : X ⟶ Y) [HasCompactification f]
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌)) :
     IsIso ((DerivedCategoryDerivedCompleteRational.fromIntegral Y.smallEtaleTopology l E).map
       ((DerivedCategoryDerivedCompleteIntegral.completion Y.smallEtaleTopology l E).map
-        (((projectionMap 𝐌 f).app K).app L))) ∧
+        (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L))) ∧
     ∀ n : ℕ, IsIso ((reductionModIdeal _ Y (PadicAlgCl.maximalIdealShrink l E ^ n)).map
-      (((projectionMap 𝐌 f).app K).app L)) :=
+      (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L)) :=
   ⟨isIso_fromIntegral_map_projectionMap l E f K L,
     isIso_reductionModIdeal_pow_map_projectionMap l E f K L⟩
 

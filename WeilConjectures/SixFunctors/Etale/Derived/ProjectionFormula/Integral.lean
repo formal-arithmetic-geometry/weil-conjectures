@@ -111,13 +111,20 @@ theorem hasProjectionFormula_of_isIso_reductionModIdeal_map (f : X ⟶ Y) [HasCo
     (ht : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
       ((R(f)_![𝐌]).obj (((derivedTensor 𝐌 X).obj K).obj ((L((f)^*[𝐌])).obj L))))
     (hρ : IsIso ((reductionModIdeal _ Y (PadicAlgCl.maximalIdealShrink l E)).map
-      (((projectionMap 𝐌 f).app K).app L))) :
+      (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L))) :
     HasProjectionFormula 𝐌 f K L := by
   obtain ⟨ϖ, hϖ, hI⟩ :=
     PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
   change _root_.DerivedCategory.derivedComplete _ (PadicAlgCl.maximalIdealShrink l E) _ at hs ht
   rw [hI] at hs ht hρ
   exact isIso_of_derivedComplete_of_isIso_reductionModIdeal hϖ _ hs ht hρ
+
+/-- The quotients `𝒪_E ⧸ 𝔪_Eⁿ` are finite. -/
+lemma finite_quotient_maximalIdealShrink_pow (n : ℕ) :
+    Finite (Shrink.{u + 1} (PadicAlgCl.integers l E) ⧸ PadicAlgCl.maximalIdealShrink l E ^ n) :=
+  .of_equiv _ (Ideal.quotientEquiv (IsLocalRing.maximalIdeal (PadicAlgCl.integers l E) ^ n) _
+    (PadicAlgCl.shrinkRingEquiv l E)
+    (by rw [PadicAlgCl.maximalIdealShrink, Ideal.map_pow])).toEquiv
 
 /-- Steps 1 and 2 of blueprint `sk-thm-sf-pf-adic`: the reduction of the projection map modulo
 `𝔪_E` is an isomorphism.
@@ -141,13 +148,12 @@ theorem isIso_reductionModIdeal_map_projectionMap_of_derivedCompleteIntegral (f 
     (_hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L)
     (_hLt : DerivedCategory.finiteTorAmplitude 𝐌 Y L) :
     IsIso ((reductionModIdeal _ Y (PadicAlgCl.maximalIdealShrink l E)).map
-      (((projectionMap 𝐌 f).app K).app L)) := by
+      (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L)) := by
   obtain ⟨ϖ, hϖ, hI⟩ :=
     PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
   have : Finite (Shrink.{u + 1} (PadicAlgCl.integers l E) ⧸ Ideal.span {ϖ} ^ 1) := by
     rw [← hI]
-    exact .of_equiv _ (Ideal.quotientEquiv _ _ (PadicAlgCl.shrinkRingEquiv l E)
-      (by rw [PadicAlgCl.maximalIdealShrink, Ideal.map_pow])).toEquiv
+    exact finite_quotient_maximalIdealShrink_pow l E _
   have h := isIso_reductionModIdeal_map_projectionMap_of_finite hϖ 1 f K L
   rwa [pow_one, ← hI] at h
 
@@ -165,13 +171,12 @@ theorem isIso_reductionModIdeal_maximalIdealShrink_pow_map_projectionMap (f : X 
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌)) (n : ℕ) :
     IsIso ((reductionModIdeal _ Y (PadicAlgCl.maximalIdealShrink l E ^ n)).map
-      (((projectionMap 𝐌 f).app K).app L)) := by
+      (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L)) := by
   obtain ⟨ϖ, hϖ, hI⟩ :=
     PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
   have : Finite (Shrink.{u + 1} (PadicAlgCl.integers l E) ⧸ Ideal.span {ϖ} ^ n) := by
     rw [← hI]
-    exact .of_equiv _ (Ideal.quotientEquiv _ _ (PadicAlgCl.shrinkRingEquiv l E)
-      (by rw [PadicAlgCl.maximalIdealShrink, Ideal.map_pow])).toEquiv
+    exact finite_quotient_maximalIdealShrink_pow l E _
   have h := isIso_reductionModIdeal_map_projectionMap_of_finite hϖ n f K L
   rwa [← hI] at h
 
@@ -222,7 +227,7 @@ theorem isIso_completion_map_projectionMap (f : X ⟶ Y) [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌)) :
     IsIso ((DerivedCategoryDerivedCompleteIntegral.completion Y.smallEtaleTopology l E).map
-      (((projectionMap 𝐌 f).app K).app L)) := by
+      (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L)) := by
   refine isIso_completion_map_of_isIso_reductionModIdeal l E _ ?_
   have h := isIso_reductionModIdeal_maximalIdealShrink_pow_map_projectionMap l E f K L 1
   rwa [pow_one] at h
@@ -250,9 +255,9 @@ theorem isIso_completion_map_projectionMap_of_derivedCompleteIntegral (f : X ⟶
     (_hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L)
     (_hLt : DerivedCategory.finiteTorAmplitude 𝐌 Y L) :
     IsIso ((DerivedCategoryDerivedCompleteIntegral.completion Y.smallEtaleTopology l E).map
-        (((projectionMap 𝐌 f).app K).app L)) ∧
+        (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L)) ∧
       ∀ n : ℕ, IsIso ((reductionModIdeal _ Y (PadicAlgCl.maximalIdealShrink l E ^ n)).map
-        (((projectionMap 𝐌 f).app K).app L)) :=
+        (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L)) :=
   ⟨isIso_completion_map_projectionMap l E f K L,
     isIso_reductionModIdeal_maximalIdealShrink_pow_map_projectionMap l E f K L⟩
 

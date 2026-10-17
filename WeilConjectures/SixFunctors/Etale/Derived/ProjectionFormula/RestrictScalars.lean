@@ -104,7 +104,7 @@ theorem exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap
       (η' : L ⟶ (derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) Y).obj Ln),
       IsDerivedBaseChange η ∧ IsDerivedBaseChange η' ∧
         Nonempty (Arrow.mk ((reductionModIdeal Λ Y (Ideal.span {ϖ} ^ n)).map
-            (((projectionMap (ModuleCat.{u + 1} Λ) f).app K).app L)) ≅
+            (projectionMapApp Λ f K L)) ≅
           Arrow.mk ((derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) Y).map
             (projectionMapApp (Λ ⧸ Ideal.span {ϖ} ^ n) f Kn Ln))) :=
   sorry
@@ -121,7 +121,7 @@ theorem isIso_reductionModIdeal_map_projectionMap_of_finite (hϖ : ϖ ∈ nonZer
     (n : ℕ) [Finite (Λ ⧸ Ideal.span {ϖ} ^ n)] (f : X ⟶ Y) [HasCompactification f]
     (K : 𝐃(X, Λ)) (L : 𝐃(Y, Λ)) :
     IsIso ((reductionModIdeal Λ Y (Ideal.span {ϖ} ^ n)).map
-      (((projectionMap (ModuleCat.{u + 1} Λ) f).app K).app L)) := by
+      (projectionMapApp Λ f K L)) := by
   obtain ⟨Kn, -, Ln, -, -, -, ⟨e⟩⟩ :=
     exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap hϖ n f K L
   exact ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff e).2

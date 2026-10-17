@@ -32,7 +32,7 @@ operation `F`, are `𝒪_E`-linear triangulated functors between the integral st
 
 ## Main statements
 
-- `AlgebraicGeometry.ProEtale.isIso_rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap_app`
+- `isIso_rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap_app`
   (`thm-cbc-finite-extension`).
 - `AlgebraicGeometry.ProEtale.nonempty_iso_fromIntegral_integralRightDerivedLowerShriek`
   (`lem-weil-compact-support-representative-independence`).
@@ -201,7 +201,7 @@ transformation of functors on the rational stage
 (`AlgebraicGeometry.ProEtale.rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap`).
 
 The isomorphism is transported from the integral one, `thm-cbc-complete-proetale`
-(`AlgebraicGeometry.ProEtale.isIso_completedRightDerivedLowerShriekOfCompactificationBaseChangeMap_app`),
+(`isIso_completedRightDerivedLowerShriekOfCompactificationBaseChangeMap_app`),
 along the rationalization (`prop-weil-pbc-rational-transport`). -/
 theorem isIso_rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap_app
     (sq : IsPullback g' f' f g) (c : Compactification f) (K : 𝐃𝐜(X))

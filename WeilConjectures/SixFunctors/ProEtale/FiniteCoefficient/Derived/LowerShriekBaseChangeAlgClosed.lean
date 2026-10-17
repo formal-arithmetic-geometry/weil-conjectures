@@ -99,7 +99,7 @@ the descended exchange transformation `Lg^* Rf_! K ⟶ Rf'_! Lg'^* K` on the `�
 isomorphism at every object `K` represented at a finite stage `E_i` by (the rationalization of)
 an integral lattice `K_i ∈ D_comp(X_proét, 𝒪_{E_i})` whose reductions are of étale origin: there
 it is represented by the `E_i`-coefficient isomorphism of `thm-cbc-finite-extension`
-(`AlgebraicGeometry.ProEtale.isIso_rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap_app`).
+(`isIso_rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap_app`).
 It is independent of the finite stage and of the representative, being the component of a
 natural transformation of functors on the pair category. -/
 theorem isIso_descNatTrans_app_rationalExchange {F G : S.Morphism S'} (τ : F.Hom G)

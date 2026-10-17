@@ -2081,6 +2081,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.BrownRepresentabili
 public import WeilConjectures.CategoryTheory.DerivedCategory.BrownRepresentability.ModuleCat
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.AdicTower
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Completion
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.CompletionTriangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTower
@@ -2088,6 +2089,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Principal
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.QuotPowTriangle
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Reduction
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.ReductionCone
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.SmulInvertible
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.TensorQuotPow
@@ -4377,6 +4379,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Loc
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizeConstructible
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChangeAlgClosed
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChangeComplete
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChangeRational
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekProjection
