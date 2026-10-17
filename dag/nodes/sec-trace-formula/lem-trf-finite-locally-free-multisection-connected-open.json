@@ -20,9 +20,139 @@
   "def-weil-pbc-quasi-compact-scheme",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Base change (f) and (sigma) along (p:Z\\to B). Put (Y=X_Z=X\\times_B Z), with its section (s:Z\\to Y) induced by (sigma), and let (C=Y^0) be the union of the fibre connected components containing (s). Flatness and finite presentation pass to this base change by [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3); geometric reducedness of fibres is preserved by the iterated field extension in the definition of geometric reducedness. Thus the new open-section-component lemma [lem-trf-flat-reduced-section-component-open] applies and (C) is open in (Y).",
+   "uses": [
+    "def-pc-base-change",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-pbc-scheme-conventions",
+    "def-pc-geometrically-irreducible",
+    "lem-trf-flat-reduced-section-component-open",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057I proof, formation of X_Z and application of lemma-connected-along-section-open"
+   }
+  },
+  {
+   "text": "Over (Z\\times_B Z), the two pullbacks of (C) along the two projections are the component loci attached to the two induced sections. This is exactly the base-change compatibility of section-component loci [lem-sbc-section-component-cartesian]. For every point of the fibre ((Z\\times_B Z)_{b_0}), the two sections lie in the whole fibre (X_{b_0}), because that fibre is geometrically connected and the designated fibre of (Z) is nonempty. Since (p) is finite locally free, this fibre product fibre is finite; openness of the two component loci therefore gives an open neighbourhood (W) of ((Z\\times_B Z)_{b_0}) on which each section image lies in the other component locus.",
+   "uses": [
+    "lem-sbc-section-component-cartesian",
+    "def-pc-geometrically-irreducible",
+    "def-weil-connected-scheme",
+    "def-pc-finite-locally-free",
+    "lem-trf-flat-reduced-section-component-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057I proof, paragraph beginning Let (Z ×_Y Z)_y = {z_1, …, z_n}"
+   }
+  },
+  {
+   "text": "The morphism (Z\\times_B Z\\to B) is finite locally free: each projection is a base change of (p), hence finite by [lem-weil-pbc-finite-morphism-permanence](a), flat by [lem-weil-pbc-flat-morphism-base-change], and locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3), and their composite is finite locally free by [lem-trf-finite-locally-free-composition]. Its underlying map is open by [lem-weil-pbc-flat-lfp-open] and closed by [lem-weil-pbc-finite-closed-map-finite-fibres], so it is open and closed. Shrink to an affine open neighbourhood (V) of (b_0) whose inverse image is contained in (W). The image of (Z\\to B) is also open and closed by the same two leaves, and so we shrink (V) further inside that image. Then (Z_V\\to V) is finite locally free and surjective, hence an fpqc covering.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-finite-locally-free",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-trf-finite-locally-free-composition",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057I proof, paragraph using finite locally free hence open and closed"
+   }
+  },
+  {
+   "text": "On (Z_V\\times_V Z_V), the two pullbacks of (C) are equal: the two inclusions established in (W) imply equality directly from the construction of the section component locus. The induced cover (X_{Z_V}\\to X_V) is finite locally free by base-change permanence [lem-weil-pbc-finite-morphism-permanence](a), [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3), so it is fpqc. Apply fpqc descent of compatible open subschemes [lem-weil-pbc-open-subscheme-fpqc-descent] to this cover. It gives a unique open (X^0\\subseteq X_V) whose pullback to (X_{Z_V}) is (C|_{Z_V}).",
+   "uses": [
+    "lem-trf-flat-reduced-section-component-open",
+    "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "def-weil-pbc-fpqc-covering",
+    "lem-trf-finite-locally-free-composition",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057I proof, paragraph beginning After we do this we see that X_Z^0 …"
+   }
+  },
+  {
+   "text": "The component locus (C) is quasi-compact after the affine base shrink by [lem-trf-section-component-quasi-compact]. Since (X_{Z_V}\\to X_V) is finite (base change of the finite map (Z_V\\to V)), the descended open (X^0), whose inverse image is (C), is quasi-compact: its underlying image is the continuous image of the quasi-compact space (C), and the fpqc descent equality identifies that image with (X^0).",
+   "uses": [
+    "lem-trf-section-component-quasi-compact",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-pc-base-change",
+    "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057I proof, final paragraph on quasi-compactness"
+   }
+  },
+  {
+   "text": "At (b_0), the pullback of (C) is the whole (X_{Z_{b_0}}), since (X_{b_0}) is geometrically connected. Faithfully flat base change along the nonempty fibre (Z_{b_0}\\to\\operatorname{Spec}\\kappa(b_0)) therefore gives (X^0_{b_0}=X_{b_0}). For any (b\\in V), after a field extension to a point of (Z_b), the fibre of (X^0) is a connected component containing the section point; [lem-sbc-connected-rational-point-geometrically-connected] makes it geometrically connected. The converse direction of [lem-weil-geometrically-connected-check-after-extension] descends geometric connectedness from that field extension to the residue field of b. Thus every nonempty fibre of (X^0\\to V) is geometrically connected. Viewing (X_V) as an open subscheme of (X) proves the claimed open (X^0\\subseteq X).",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "def-weil-connected-scheme",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "def-weil-open-immersion",
+    "def-weil-residue-field",
+    "lem-weil-geometrically-connected-check-after-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057I proof, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-finite-locally-free",
+  "def-pc-geometrically-irreducible",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-connected-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-residue-field",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sbc-section-component-cartesian",
+  "lem-trf-finite-locally-free-composition",
+  "lem-trf-flat-reduced-section-component-open",
+  "lem-trf-section-component-quasi-compact",
+  "lem-weil-geometrically-connected-check-after-extension",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057I, label lemma-descent-connected-fibres, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,7 +191,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-geometrically-connected-fibre-open-spreading",
@@ -73,7 +203,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The elementary-etale finite-over-smooth ingredient (Stacks 057K) in the 057S flatification route for the horizontal curve reduction of lem-trf-local-term-locality: in the application of 057J to the smooth intermediate scheme, the preliminary spreading of the specified fibre open with geometrically connected fibres (055W). In the proof of 055W: the application of 057I to the finite locally free Z-prime mapping to the base-changed Y; this produces the open before removing its empty fibres.",
+   "place": "Tag 057I proof: application of connected-along-section-open after base change to Z, comparison over Z×_B Z, finite-locally-free shrinking, fpqc descent of the open, and quasi-compactness.",
    "via": [
     "lem-trf-geometrically-connected-fibre-open-spreading",
     "lem-trf-geometrically-integral-fibre-neighbourhood",
@@ -92,5 +222,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-locally-free-multisection-connected-open",
+  "worker": "stage1",
+  "summary": "Repaired the Tag 057I split by citing flat and finite-presentation base-change stability, finite-locally-free base-change and composition permanence, and geometric-connectedness descent. Removed the redundant finite-locally-free topology node: openness and closedness now use existing Mathlib leaves. Added the finite-locally-free composition Mathlib leaf and completed new-node metadata and dependencies; the statement and Stacks route are unchanged.",
+  "blueprint": "Realizes the Tag 057I multisection descent paragraph in the 057S/055W route below lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-section-component-cartesian",
+    "why": "generic base-change compatibility of section component loci used in the 057I descent argument"
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "generic criterion that a connected component containing a rational section point is geometrically connected"
+   },
+   {
+    "node": "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "why": "generic fpqc descent of a compatible open, not supplied by the trace-formula unit"
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "generic finite base-change and quasi-compact image facts used to finish the descended open"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-section-component-cartesian",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-weil-pbc-finite-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q20-0563836f6",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q20-0563836f6 (reviewer sub-agent of L); spot-checked: Read the full item, all three new nodes, cited DAG statements, unit/chapter route, and Stacks Tag 057I source. Verified hypotheses, base changes, fpqc descent, quasi-compactness, geometric-connectedness reflection, Mathlib composition leaf, searches, edge cases, tool uses, and route-pivot compliance. Wrote review.md; no repairs needed."
  }
 }

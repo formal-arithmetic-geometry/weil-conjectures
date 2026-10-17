@@ -15,9 +15,98 @@
   "def-weil-surjective-morphism",
   "def-pc-fppf-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $S=\\varnothing$, take the empty etale family and empty finite locally free maps; all conditions are vacuous. If the original indexing family is empty, joint surjectivity in [def-pc-fppf-site] forces $S=\\varnothing$. Hence assume below that $S$ is nonempty, and keep all index choices inside the fixed universes of [def-weil-size-convention].",
+   "uses": [
+    "def-pc-fppf-site",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0DET proof, initial reduction; Tag 05WN statement, empty cases"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-fppf-local-qf-refinement] to obtain a small jointly surjective family $g_j:T_j\\to S$ that is flat, locally of finite presentation, and locally quasi-finite, together with maps $T_j\\to S_{i(j)}$ over $S$. For every $s\\in S$, choose $j$ and $x\\in T_j$ with $g_j(x)=s$; local quasi-finiteness means that $g_j$ is quasi-finite at $x$, so $x$ is isolated in the fibre by [lem-weil-pbc-quasi-finite-at-point-isolated].",
+   "uses": [
+    "lem-trf-fppf-local-qf-refinement",
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-quasi-finite-at-point-isolated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0DET proof, first paragraph; Tag 0572"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-local-finite-at-point-elementary] to $g_j:T_j\\to S$, the point $s$ and the point $x$. It supplies an etale neighbourhood $(U,u)\\to(S,s)$ and an open subscheme $V\\subseteq T_j\\times_SU$ such that $V\\to U$ is finite and has a unique point over $u$ mapping to $x$. The base-change square gives the canonical equality of the composite $V\\to T_j\\to S$ with $V\\to U\\to S$, and the map $T_j\\to S_{i(j)}$ restricts to the required refinement map from $V$ to $S_{i(j)}$.",
+   "uses": [
+    "lem-weil-pbc-etale-local-finite-at-point-elementary",
+    "def-pc-fibre-product",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0DET proof, second paragraph; Tag 02LK (lemma-etale-makes-quasi-finite-finite-at-point)"
+   }
+  },
+  {
+   "text": "The morphism $V\\to U$ is also flat and locally of finite presentation: these properties hold for $T_j\\to S$ by Step 2, pass to the base change $T_j\\times_SU\\to U$ by [lem-weil-pbc-flat-morphism-base-change] and clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], and pass to the open subscheme $V$. Finiteness is retained under the subsequent base change by [lem-weil-pbc-finite-morphism-permanence]. Thus $V\\to U$ is finite locally free by [def-pc-finite-locally-free] (finite, flat, and locally of finite presentation). Since flat locally finitely presented maps are open [lem-weil-pbc-flat-lfp-open], the image of $V\\to U$ is an open neighbourhood of $u$. Replace $U$ by this image and $V$ by its inverse image; then $V\\to U$ is surjective finite locally free, while the etale map to $S$ and the factorization through $S_{i(j)}$ remain unchanged after restriction.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-flat-lfp-open",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0DET proof, third paragraph; Morphisms Tags 01U9, 01TS, 01WL, 01UA and 053N"
+   }
+  },
+  {
+   "text": "Repeat the construction for every $s\\in S$ and retain one resulting $(U_s,u_s,V_s)$ for each choice. The family of etale maps $U_s\\to S$ is jointly surjective because $s$ lies in the image of $U_s$; it is small by [def-weil-size-convention]. The maps $V_s\\to S$ are surjective finite locally free after Step 4 and factor through the original member $S_{i(j)}\\to S$, so they form the required refinement. Empty indexing families remain allowed, and no quasi-compactness, separatedness, or finiteness hypothesis on $S$ was introduced.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-surjective-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0DET proof, final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "def-pc-fppf-site",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "def-weil-size-convention",
+  "def-weil-surjective-morphism",
+  "lem-trf-fppf-local-qf-refinement",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-etale-local-finite-at-point-elementary"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0DET, lemma-dominate-fppf-etale-locally, proof; Tag 0572 supplies the locally quasi-finite refinement"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,7 +145,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-fppf-local-finite-free-refinement",
@@ -87,5 +176,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-fppf-etale-finite-free-refinement",
+  "worker": "stage1",
+  "summary": "Audited Tag 0DET. Added the missing locally quasi-finite fppf refinement node (Tag 0572), then followed the pointwise etale-local finite construction, base-change and open-map permanence, shrinking to a surjective finite locally free map, and the small jointly-surjective family. The statement and hypotheses are unchanged, including empty cases.",
+  "blueprint": "Realizes the Tag 05WN opening input cited under the ancestor lem-trf-local-term-locality: Tag 0DET is the first paragraph of the finite-locally-free refinement route, with Tag 0572 as its preliminary reduction."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q41-a32496d57",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-a32496d57 (reviewer sub-agent of L); spot-checked: Step 3 cited the wrong theorem: `lem-weil-pbc-etale-local-finite-multiple-points` (Tag 02LM) does not provide the claimed unique lift. I wrote a corrected DAG JSON under fixes/dag/nodes/sec-trace-formula/lem-trf-fppf-etale-finite-free-refinement.json citing the exact Tag 02LK node, with the proof wording and proof_deps updated. Full review and source checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
