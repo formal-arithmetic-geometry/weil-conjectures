@@ -16,7 +16,8 @@
   "def-pc-base-change",
   "def-sbc-smooth-morphisms",
   "def-kun-topological-krull-dimension",
-  "def-weil-pbc-morphism-to-projective-space-by-sections"
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
  ],
  "proof": [
   {
@@ -240,26 +241,26 @@
   "module": "Sheaf.AlgebraicGeometry.BertiniSingularLocusDimension",
   "declaration": "AlgebraicGeometry.bertini_singularLocus_dimension_lt",
   "declarations": [
-   "AlgebraicGeometry.bertiniParameterMap",
    "AlgebraicGeometry.bertiniUniversalSection",
    "AlgebraicGeometry.bertiniUniversalIdeal",
    "AlgebraicGeometry.bertiniUniversalProjection",
+   "AlgebraicGeometry.bertiniUniversalSingularLocus",
    "AlgebraicGeometry.bertini_singularLocus_dimension_lt"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/BertiniSingularLocusDimension.lean",
-  "statement": "theorem bertini_singularLocus_dimension_lt {k : Type u} [Field k] {Y : Scheme.{u}} (f : Y ⟶ Spec (CommRingCat.of k)) [Smooth f] (L : Y.Modules) [L.IsInvertible] {V : Type u} [AddCommGroup V] [Module k V] {I : Type u} [Fintype I] (b : Module.Basis I k V) (ψ : V →+ Γ(L, ⊤)) (_hlinear : ∀ (c : k) (v : V), ψ (c • v) = f.appTop ((Scheme.ΓSpecIso (CommRingCat.of k)).inv c) • ψ v) (hgen : Epi (L.freeHomEquiv.symm (fun i ↦ (SheafOfModules.unitHomEquiv L) (Scheme.Modules.homOfGlobalSection L (ψ (b i)))))) [IsImmersion (ProjectiveSpace.homOfGeneratingSections I f L (fun i ↦ (SheafOfModules.unitHomEquiv L) (Scheme.Modules.homOfGlobalSection L (ψ (b i)))) hgen)] : topologicalKrullDim {h : (bertiniUniversalIdeal f L (fun i ↦ ψ (b i))).subscheme | ¬ ∃ U : (bertiniUniversalIdeal f L (fun i ↦ ψ (b i))).subscheme.Opens, h ∈ U ∧ Smooth (U.ι ≫ bertiniUniversalProjection f L (fun i ↦ ψ (b i)))} < (Fintype.card I : WithBot ℕ∞) ∧ ∃ B : Set (Spec (CommRingCat.of (MvPolynomial I k))), IsClosed B ∧ B ≠ Set.univ ∧ (bertiniUniversalProjection f L (fun i ↦ ψ (b i))) '' {h | ¬ ∃ U : (bertiniUniversalIdeal f L (fun i ↦ ψ (b i))).subscheme.Opens, h ∈ U ∧ Smooth (U.ι ≫ bertiniUniversalProjection f L (fun i ↦ ψ (b i)))} ⊆ B",
+  "statement": "theorem bertini_singularLocus_dimension_lt {k : Type u} [Field k] {Y : Scheme.{u}} (f : Y ⟶ Spec (CommRingCat.of k)) [Smooth f] (L : Y.Modules) [L.IsInvertible] {V : Type v} [AddCommGroup V] [Module k V] (r : ℕ) (b : Module.Basis (ULift.{u} (Fin r)) k V) (ψ : V →+ Γ(L, ⊤)) (_hlinear : ∀ (c : k) (v : V), ψ (c • v) = f.appTop ((Scheme.ΓSpecIso (CommRingCat.of k)).inv c) • ψ v) (hgen : Epi (L.freeHomEquiv.symm (fun i : ULift.{u} (Fin r) ↦ (SheafOfModules.unitHomEquiv L) (Scheme.Modules.homOfGlobalSection L (ψ (b i)))))) [IsImmersion (ProjectiveSpace.homOfGeneratingSections (ULift.{u} (Fin r)) f L (fun i ↦ (SheafOfModules.unitHomEquiv L) (Scheme.Modules.homOfGlobalSection L (ψ (b i)))) hgen)] : topologicalKrullDim (bertiniUniversalSingularLocus f L (fun i ↦ ψ (b i))) < (r : WithBot ℕ∞) ∧ ∃ B : Set (Spec (CommRingCat.of (MvPolynomial (ULift.{u} (Fin r)) k))), IsClosed B ∧ B ≠ Set.univ ∧ (bertiniUniversalProjection f L (fun i ↦ ψ (b i))) '' bertiniUniversalSingularLocus f L (fun i ↦ ψ (b i)) ⊆ B",
   "branch": "newtargets-dag",
-  "by": "Q139",
+  "by": "Q38",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The helpers construct the coefficient structure map, the actual universal sum of pulled-back sections, its recorded zero-scheme ideal and its projection. Sigma is expressed literally by the absence of an open neighbourhood with smooth restricted projection. A finite basis indexed by I gives r = Fintype.card I; the scalar law spells out k-linearity on top-open sections without selecting a second scalar structure."
+  "note": "The four helpers construct the universal section, its zero-scheme ideal, projection, and non-smooth subset introduced by this very statement. The field action on global sections is written explicitly as an additive map with its canonical scalar law. The basis ULift (Fin r) allows projective coordinates in the scheme universe, including r=0; V has an independent universe. Added the landed owner of tensorSectionsUnit to stmt_deps to reuse its canonical section pullback. No statement correction."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-72d1110fc",
-  "group": "Q139",
+  "reviewer": "NT-stage2-Codex-dd6526ff7",
+  "group": "Q38",
   "result": "pass",
-  "note": "I read the node, all 9 statement-dependency records, the exact declarations (homOfGeneratingSections, Hom.zeroLocus, homOfGlobalSection, tensorSectionsUnit, Smooth, topologicalKrullDim) and Stacks varieties.tex lemma-bertini 0FD6 with the family-of-divisors Situation. Every hypothesis and both conclusion clauses match the node with no extra assumptions: k-linear psi via an additive map plus the scalar law through f.appTop; generation by the recorded Epi form; IsImmersion of the canonical morphism; A^r = Spec MvPolynomial I k; the universal section is sum x_i pr^*psi(b_i); H_univ is the recorded zero scheme; Sigma is literally the set of points with no open neighbourhood where q is smooth; dim Sigma < card I; a closed proper B contains q(Sigma). The Classical.choose unit of tensorSectionsUnit only changes s_univ by an O-linear automorphism, so the zero scheme and Sigma are canonical. Edge cases (empty Y, r=0, r=1 non-flat point) and universes checked. No duplicate notion (BertiniSmoothMember has no universal family; the inline section family avoids a cyclic import). The four helpers have real data and source/blueprint docstrings, the proof is only sorry, the lean.statement is verbatim and all declarations exist. The delivery changes only the new module and the node's lean field. The report has a Worker report and the standard Second reading section. nt_compile.py: clean, 3.9 s; axioms propext/sorryAx/Classical.choice/Quot.sound; a control copy with an injected error showed the error. No findings."
+  "note": "Statement, definitions, dependencies, source correspondence, edge cases, docstrings, report sections, route-pivot constraints, and reproducible scompile evidence all checked; no findings."
  }
 }

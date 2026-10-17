@@ -356,5 +356,41 @@
   "group": "Q87",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-771bcc399 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node statement, the four citers, unit sk-i-curve-zero, and Temkin v3 (fetched from arXiv to /tmp; the archive copy is still WANTED) at §2.1 pp. 7-8, Cor. 2.1.3(i), §3.2 pp. 15-17 (Prop. 3.2.1 to Cor. 3.2.7) and the proof of Thm 1.5 on p. 36. All twelve steps are correct and use only the statements of the nodes they cite. Steps 3-7 follow Temkin's route (schematic image, the limit, the graph of Lemma 3.2.3, domination as in Cor. 3.2.5). Step 4 replaces the constructible-topology proof of Prop. 3.2.1 with the existing spectral-limit node (0A2Z). Steps 9-12 replace Prop. 3.2.6 with Nagata compactification, the reduced closure in a product, and uniqueness of proper lifts. Step 6 builds its map in Mathlib Proj P^1_Z, not inside P(n;S). Both new nodes are true, self-contained and statement-only. Algebraic-height invariance holds because Gamma_E/Gamma_K is torsion, which makes convex subgroups correspond. The Abhyankar bound is Cor. 2.1.3(i) specialized to fields finitely generated over the prime field; Q(x) shows the bound is sharp. I checked small cases. Neither node restates a clause of the item. rg found no duplicate; lem-trf-birational-quasi-modification-common-cover is a different statement (birational refinement, not generically finite). The 17 declared generic tool_uses (lem-weil-pbc-* and Nagata-chapter nodes) are accepted. Two fixes: (1) the item's L-model clause was ambiguous; it now says the factorization is of the generic map and its first arrow sends the point to the generic point of T_i. This is Temkin's schematic dominance and the reading every step uses; the other reading makes the 'finite separable function fields' sentence and Step 5 false. (2) The source place of lem-trf-valuation-algebraic-height now puts the fundamental inequality at the foot of p. 7, not p. 8. No nodes dropped.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-417f4f83e",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, source, dependency declarations, every statement clause, edge cases, universes, docstrings, and route-pivot compliance. Signature matches verbatim; scompile.py reproduced a clean per-file compile. No corrections required; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RiemannZariskiFiniteRefinement",
+  "declaration": "AlgebraicGeometry.RiemannZariski.finite_refinement",
+  "declarations": [
+   "AlgebraicGeometry.RiemannZariski.GenericScheme",
+   "AlgebraicGeometry.RiemannZariski.Model",
+   "AlgebraicGeometry.RiemannZariski.QuasiModel",
+   "AlgebraicGeometry.RiemannZariski.Model.toQuasiModel",
+   "AlgebraicGeometry.RiemannZariski.ModelHom",
+   "AlgebraicGeometry.RiemannZariski.Point",
+   "AlgebraicGeometry.RiemannZariski.pointTopologicalSpace",
+   "AlgebraicGeometry.RiemannZariski.GenericScheme.fieldEmbedding",
+   "AlgebraicGeometry.RiemannZariski.GenericScheme.IsFiniteSeparableOver",
+   "AlgebraicGeometry.RiemannZariski.ValuationPoint",
+   "AlgebraicGeometry.RiemannZariski.Corresponds",
+   "AlgebraicGeometry.RiemannZariski.ValuationPoint.LiftsTo",
+   "AlgebraicGeometry.RiemannZariski.ValuationPoint.push",
+   "AlgebraicGeometry.RiemannZariski.FiniteRefinement",
+   "AlgebraicGeometry.RiemannZariski.finite_refinement"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RiemannZariskiFiniteRefinement.lean",
+  "statement": "theorem finite_refinement (T : Scheme.{u}) [IsIntegral T] (t : T ⟶ Spec (.of (ULift.{u} ℤ))) [LocallyOfFiniteType t] [QuasiCompact t] (L : Type u) [Field L] [Algebra T.functionField L] [IsSepClosure T.functionField L] : (∀ U : QuasiModel T L (Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T)), U.toGenericScheme.IsFiniteSeparableOver (algebraMap T.functionField L)) ∧ CompactSpace (Point T L (Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T))) ∧ ∃ e : Point T L (Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T)) ≃ ValuationPoint T L (Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T)), (∀ x, Corresponds x (e x)) ∧ (∀ v : ValuationPoint T L (Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T)), ∃ N : ℕ, ∀ (n : ℕ) (p : Fin (n + 1) → PrimeSpectrum v.V), StrictMono p → n ≤ N) ∧ ∃ (eU : ∀ U : QuasiModel T L (Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T)), Point U.X L U.generic ≃ ValuationPoint U.X L U.generic) (j : ∀ U : QuasiModel T L (Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T)), Point U.X L U.generic → Point T L (Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T))), (∀ U x, Corresponds x (eU U x)) ∧ (∀ U, IsOpenEmbedding (j U)) ∧ (∀ U x, e (j U x) = ValuationPoint.push U (eU U x)) ∧ (∀ U x, x ∈ Set.range (j U) ↔ (e x).LiftsTo U) ∧ (∀ (I : Type w) (U : I → QuasiModel T L (Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T))), (∀ v, ∃ i : I, ValuationPoint.LiftsTo v (U i)) → ∀ x, ∃ i : I, x ∈ Set.range (j (U i))) ∧ (∀ (I : Type w) [Finite I] (U : I → QuasiModel T L (Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T))), ∃ r : FiniteRefinement U, (∀ x, ∃ i : I, x ∈ Set.range (j (U i))) → ∀ y : r.model.X, ∃ i : I, y ∈ r.W i)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "All auxiliary definitions unpack notions introduced explicitly in this node: generic factorizations, proper models, quasi-models, their compatible point families and limit topology, canonical function-field inclusions, valuation centres and lifts, and finite refinements. Point is indexed by every proper model. The equivalences are characterized by proper valuative lifts, and the open injections by composition of the same valuation centre. No new independent notion or dependency repair; no statement change. The finite-family index has no nonemptiness restriction."
  }
 }

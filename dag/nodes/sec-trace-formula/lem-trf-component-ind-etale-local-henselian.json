@@ -9,7 +9,8 @@
  "stmt_deps": [
   "def-weil-affine-spectrum",
   "def-weil-pbc-ind-etale-algebra",
-  "def-weil-pbc-henselian-terminology"
+  "def-weil-pbc-henselian-terminology",
+  "lem-trf-affine-etale-cover-component-criterion"
  ],
  "kind": "statement",
  "proof": [
@@ -214,5 +215,24 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-8605dfad6 (reviewer sub-agent of L); spot-checked: Read the item, all 8 cited nodes, the parent and Stacks 00EG (l.4008), 00EH (l.3922), 097I and 097K (proetale l.1160/1181). The statement is unchanged and true; I checked T=0, a connected T, k×k, the non-open ultrafilter point of ∏F_2 and a nilpotent example. Step 1: J_F=(d_F) by hand. Step 2: 00EH(2) node with exact kernel (1-u_F)T, giving a T-algebra isomorphism. Step 3: the open-immersion, étale and finite-presentation nodes say what is used, and the étale notion matches scheme-conventions. Step 4: correct direct colimit universal property, since I_Z is the directed union of the J_F. Step 5: exactly def-weil-pbc-ind-etale-algebra. Step 6: ind-etale-stability composition is already on the parent's route. Step 7: instantiation of the hypothesis. No new nodes, no duplicates in the DAG or the blueprint, no SGA, no tool_uses. Only a cosmetic loose source place in step 1, which I did not fix."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-13ab61253",
+  "group": "Q130",
+  "result": "fix",
+  "note": "Mathematics and verbatim Lean signature checked; per-file compilation reproduced cleanly. review.md records all checks. fixes/ contains a complete report replacement repairing the H11 placeholder second reading. No Lean changes or branch mutations."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ComponentQuotientIndEtale",
+  "declaration": "AlgebraicGeometry.componentQuotient_indEtale",
+  "file": "lean/Sheaf/TraceFormula/ComponentQuotientIndEtale.lean",
+  "statement": "theorem componentQuotient_indEtale (T : Type u) [CommRing T] (x : PrimeSpectrum T) : (Ideal.Quotient.mk (componentIdeal T x)).IndEtale ∧ (∀ (A : Type u) [CommRing A] (f : A →+* T), f.IndEtale → ((Ideal.Quotient.mk (componentIdeal T x)).comp f).IndEtale) ∧ ((∀ y : PrimeSpectrum T, HenselianLocalRing (componentRing T y)) → HenselianLocalRing (componentRing T x))",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing componentIdeal/componentRing from lem-trf-affine-etale-cover-component-criterion, added to stmt_deps solely to name the canonical construction. A point x indexes connectedComponent x; quantifying over all points covers exactly all nonempty connected components. RingHom.IndEtale fixes the canonical quotient map and, in the second conjunct, the composite A → T → T/I_Z."
  }
 }

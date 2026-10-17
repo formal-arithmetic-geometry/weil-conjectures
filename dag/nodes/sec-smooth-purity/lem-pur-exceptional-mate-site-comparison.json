@@ -300,5 +300,39 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-a956909b4 (reviewer sub-agent of L); spot-checked: I read all 8 steps, every cited statement, unit sk-prop-an, the parent thm-pur-affine-line-purity and its main-20261015 blueprint proof, and the repair note. Route pivot: lem-cbc-global-transport-chart-normalization is gone from stmt_deps, proof_deps, the statement and the steps; the only mentions left are in historical review and report text. The statement now defines B^p as the transported compactification exchange T^c C(B^e)(S^c)^{-1} of the restated thm-cbc-finite-level-proetale, and steps 3 and 4 cite that theorem and thm-cbc-finite-torsion directly, as the note asks. The 6 unchanged steps (0,1,2,5,6,7) are accepted: the note itself puts the machinery only in steps 3 and 4 and says 'the rest keeps its route'; they cite only keep_children and use only the ordinary Brown-representability adjoint, the site comparison and ordinary mates. Checks: the hypotheses of thm-sf-ambient-adjoint-class (for c and c'), lem-sf-class-compact-support-comparison, thm-cbc-finite-level-proetale (compactification given, finite Lambda) and thm-cbc-finite-torsion (j quasi-compact) all hold. a_G is the comparison of lem-sf-class-compact-support-comparison, and both cited proofs build the same C_c = Rp_*(e_j) b_p. I type-checked S^c, T^c and the Hom chain, re-derived steps 2-6, and checked the identity, zero and empty cases. No new nodes, no duplicate found, no SGA source. Fixed one fault (C3): step 4 claimed the naturality of B^p was 'supplied directly' by thm-cbc-finite-level-proetale, whose statement does not say so; it is now derived from that theorem's witness-conjugation clause. Step 6 now derives the naturality of B^e and B^p from thm-cbc-finite-torsion, lem-sf-class-compact-support-comparison and full faithfulness, and cites both nodes (already in proof_deps). The corrected file is in fixes/dag/nodes/sec-smooth-purity/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5734aac5d",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Recorded review.md. Immutable module matches the node signature verbatim; normalized mates, naturality, witnesses, universes and route-pivot repair checked. scompile.py reproduced both per-file compiles successfully. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExceptionalMateSiteComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.exceptionalMateSiteComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.exceptionalMateRingFinite",
+   "AlgebraicGeometry.ProEtale.exceptionalMateCoeffFinite",
+   "AlgebraicGeometry.ProEtale.exceptionalMateH",
+   "AlgebraicGeometry.ProEtale.exceptionalMateUnit",
+   "AlgebraicGeometry.ProEtale.exceptionalMateTranspose",
+   "AlgebraicGeometry.ProEtale.exceptionalMateCounit",
+   "AlgebraicGeometry.ProEtale.exceptionalMateEtaleExchange",
+   "AlgebraicGeometry.ProEtale.exceptionalMateProExchange",
+   "AlgebraicGeometry.ProEtale.exceptionalMateEtale",
+   "AlgebraicGeometry.ProEtale.exceptionalMatePro",
+   "AlgebraicGeometry.ProEtale.exceptionalMateV",
+   "AlgebraicGeometry.ProEtale.exceptionalMateW",
+   "AlgebraicGeometry.ProEtale.exceptionalMateSiteComparison"
+  ],
+  "file": "lean/Sheaf/Paper/ExceptionalMateSiteComparison.lean",
+  "statement": "theorem exceptionalMateSiteComparison (D : WeilConjectures.PurityFiniteSetting.{u}) {X X' Y Y' : Scheme.{u}} (aX : X ⟶ Spec (.of D.field.k)) (aY : Y ⟶ Spec (.of D.field.k)) (aY' : Y' ⟶ Spec (.of D.field.k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY'] [LocallyOfFiniteType aY'] [QuasiCompact aY'] {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_hf : f ≫ aY = aX) (_hg : g ≫ aY = aY') (sq : IsPullback g' f' f g) (c : Compactification f) [LocallyOfFiniteType (c.g ≫ aY)] [QuasiCompact (c.g ≫ aY)] [LocallyOfFiniteType ((c.ofIsPullback sq).g ≫ aY')] [QuasiCompact ((c.ofIsPullback sq).g ≫ aY')] (d d' : ℕ) (_hd : topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞)) (_hd' : topologicalKrullDim (c.ofIsPullback sq).Z ≤ (d' : WithBot ℕ∞)) (R : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} D.Coefficient)) ⥤ DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} D.Coefficient))) (R' : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} D.Coefficient)) ⥤ DerivedCategory.Plus (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} D.Coefficient))) (adj : (Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} D.Coefficient) c) ⊣ R) (adj' : (Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} D.Coefficient) (c.ofIsPullback sq)) ⊣ R') : (∀ L, exceptionalMatePro D.Coefficient sq c adj adj' ((siteComparisonDerivedPullbackPlus Y D.Coefficient).obj L) ≫ (exceptionalMateW D.Coefficient g R' L).hom = (exceptionalMateV D.Coefficient g' R L).hom ≫ (siteComparisonDerivedPullbackPlus X' D.Coefficient).map (exceptionalMateEtale D.Coefficient sq c adj adj' L)) ∧ (∀ (L M : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} D.Coefficient))) (b : L ⟶ M), (upperStar (ModuleCat.{u + 1} D.Coefficient) g').mapDerivedCategoryPlus.map ((exceptionalMateH D.Coefficient R).map ((siteComparisonDerivedPullbackPlus Y D.Coefficient).map b)) ≫ exceptionalMatePro D.Coefficient sq c adj adj' ((siteComparisonDerivedPullbackPlus Y D.Coefficient).obj M) = exceptionalMatePro D.Coefficient sq c adj adj' ((siteComparisonDerivedPullbackPlus Y D.Coefficient).obj L) ≫ (exceptionalMateH D.Coefficient R').map ((upperStar (ModuleCat.{u + 1} D.Coefficient) g).mapDerivedCategoryPlus.map ((siteComparisonDerivedPullbackPlus Y D.Coefficient).map b))) ∧ (∀ (L M : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} D.Coefficient))) (b : L ⟶ M), (Etale.upperStar (ModuleCat.{u + 1} D.Coefficient) g').mapDerivedCategoryPlus.map (R.map b) ≫ exceptionalMateEtale D.Coefficient sq c adj adj' M = exceptionalMateEtale D.Coefficient sq c adj adj' L ≫ R'.map ((Etale.upperStar (ModuleCat.{u + 1} D.Coefficient) g).mapDerivedCategoryPlus.map b)) ∧ (∀ (L : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} D.Coefficient))) (N : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} D.Coefficient))) (α : (siteComparisonDerivedPullbackPlus Y D.Coefficient).obj L ≅ N), exceptionalMatePro D.Coefficient sq c adj adj' N ≫ (exceptionalMateH D.Coefficient R').map ((upperStar (ModuleCat.{u + 1} D.Coefficient) g).mapDerivedCategoryPlus.map α.inv) ≫ (exceptionalMateW D.Coefficient g R' L).hom = (upperStar (ModuleCat.{u + 1} D.Coefficient) g').mapDerivedCategoryPlus.map ((exceptionalMateH D.Coefficient R).map α.inv) ≫ (exceptionalMateV D.Coefficient g' R L).hom ≫ (siteComparisonDerivedPullbackPlus X' D.Coefficient).map (exceptionalMateEtale D.Coefficient sq c adj adj' L))",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Rework of the withdrawn Q95 binding recorded in coord/repair-notes/lem-pur-exceptional-mate-site-comparison.json. Removes GlobalTransportChartNormalization and its aliases entirely. Uses the ordinary compactification route: compactSupportSiteComparisonPlus, cbcGlobalSource, cbcGlobalTarget and cbcGlobalPullbackComparison from the restated finite-level theorem. The normalized Hom chain, chosen ordinary adjunctions on their bounded-below domains, counit-transpose mates, naturality, and all witnessed replacement endpoints are retained."
  }
 }
