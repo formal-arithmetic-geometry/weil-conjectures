@@ -21,9 +21,155 @@
   "lem-coef-semilinear-derived-sections",
   "thm-sf-comp-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on the diagram site $\\mathcal D_W=J^{\\mathrm{op}}\\times W_{\\mathrm{proet}}$, $J=\\mathbf N_{\\ge1}^{\\mathrm{op}}$, with coverings in the site direction as in [lem-weil-pbc-diagram-site-realization]. On it use the varying ring sheaf $\\mathcal B_W(n,U)=B_{n,W}(U)$ with its quotient maps. The sheaf condition is checked for each $n$; giving a module action on a sheaf on $\\mathcal D_W$ is exactly giving the component $B_{n,W}$-actions and semilinear transitions, because the action's naturality in $J$ is precisely that semilinearity equation. This identifies $\\operatorname{Mod}(\\mathcal B_W)$ exactly and additively with $\\mathscr S_W$, not with towers tensored over the constant ring $\\mathcal O_E$. Apply the simultaneous-model clause of [lem-coef-semilinear-derived-sections]: inverse image, derived direct image, tensor, open extension, and the specified units, counits and mates are realized together on these ringed diagram sites. These are the same constructions used to define $\\mathcal F_h$ in [lem-coef-finite-adjunction-diagram-realization] and $\\operatorname{PF}^{\\mathrm{sys}}$ in the statement. For a geometric map $u$ write $P_u=u^*$ and $R_u=Ru_*$ on the diagram sites. By [def-exchange-projection] and [lem-weil-pbc-ringed-projection-mate-exact], its direct-image projection map $\\pi_{u;H,Q}$ is the $P_u\\dashv R_u$ transpose of $(\\varepsilon_{u,H}\\otimes1)\\mu_u$, where $\\mu_u$ is the tensor-pullback comparison. This construction is natural in both inputs; composing it with the natural open tensor map proves the required naturality of $\\operatorname{PF}^{\\mathrm{sys}}$.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization",
+    "def-exchange-projection",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map); agent application on the ringed diagram site to the specified simultaneous constructions"
+   }
+  },
+  {
+   "text": "First calculate for two direct images on these diagram sites. Under the canonical derived compositor of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], prove\n$$\\pi_{vu;H,Q}=R_v(\\pi_{u;H,P_vQ})\\,\\pi_{v;R_uH,Q}.$$\nTranspose both sides under $P_uP_v\\dashv R_vR_u$. The composite counit is $\\varepsilon_u\\circ P_u\\varepsilon_vR_u$ by [lem-weil-pbc-mate-pasting]. Expanding the defining transposes, both become\n$$P_uP_v(R_vR_uH\\otimes Q)\\longrightarrow P_uP_vR_vR_uH\\otimes P_uP_vQ\\xrightarrow{P_u\\varepsilon_{v,R_uH}\\otimes1}P_uR_uH\\otimes P_uP_vQ\\xrightarrow{\\varepsilon_{u,H}\\otimes1}H\\otimes P_uP_vQ.$$\nHere naturality of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] moves the intermediate counit through the tensor comparison. The iterated tensor comparisons coincide on flat-term K-flat representatives supplied by [lem-pc-kflat-resolution]: both send each local pure tensor to that same pure tensor, with the identical total-complex signs. Thus these are equal transposes, and the adjunction bijection gives the displayed equality in the derived category of systems itself. This argument does not require a Tor bound or invertibility of $\\pi_u$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); agent transpose calculation, as in the existing DAG proof of fix-prop-projection-formula, Step 7"
+   }
+  },
+  {
+   "text": "Next let $k:A\\hookrightarrow B$, $i:C\\hookrightarrow D$ be quasi-compact opens, $r:A\\to C$, $p:B\\to D$ proper, and $pk=ir$. Use the geometric normalization of [lem-cbc-strict-tower-proper-open-calculus]: put $B_C=B\\times_D C$, let $s:A\\hookrightarrow B_C$ be its clopen component, and form $a:P_pi_!\\to k_!P_r$ by open base change followed by the projection which is identity on $s(A)$ and zero on the complement. On the varying-ring diagram sites these maps exist by [lem-coef-semilinear-derived-sections] and exact open extension [lem-pur-site-restriction-module-adjunction-exact]; all are $\\mathcal B$-linear since restriction and component projection preserve the scalar action. Define their proper-adjunction mate\n$$\\gamma=R_p(k_!\\varepsilon_r)\\,R_p(aR_r)\\,\\eta_pi_!R_r:i_!R_r\\longrightarrow R_pk_!.$$\nThis uses the formula and geometric clopen description of the cited tower lemma, not an application of its constant-ring tensor product to varying-ring modules. Write $\\delta_j:j_!H\\otimes Q\\to j_!(H\\otimes P_jQ)$ for the open tensor comparison obtained from [lem-weil-pbc-ringed-slice-extension-tensor] and K-flat resolutions [lem-pc-kflat-resolution]. The identity needed is\n$$\\gamma_{H\\otimes P_rP_iQ}\\,i_!(\\pi_{r;H,P_iQ})\\,\\delta_i\n=R_p(\\delta_k)\\,\\pi_{p;k_!H,Q}\\,(\\gamma_H\\otimes1).$$\nTranspose both sides under $P_p\\dashv R_p$. Expanding $\\gamma$ and $\\pi$, naturality of the counits and the triangle identities in [lem-weil-pbc-mate-pasting] reduce each transpose to the following one composite:\n$$P_p(i_!R_rH\\otimes Q)\\xrightarrow{\\mu_p}P_pi_!R_rH\\otimes P_pQ\\xrightarrow{a_{R_rH}\\otimes1}k_!P_rR_rH\\otimes P_pQ\\xrightarrow{\\delta_k}k_!(P_rR_rH\\otimes P_kP_pQ)\\xrightarrow{k_!(\\varepsilon_{r,H}\\otimes1)}k_!(H\\otimes P_rP_iQ).$$\nThe tensor compatibility of $a$ used here is checked before deriving: open base change preserves a section and its pure tensor, while the clopen projection acts by identity on the chosen component and by zero on its complement; tensor before or after either action gives exactly those same maps. This is an equality of sheaf maps on the diagram site, so it already includes every quotient transition. K-flat resolutions and the tensor-pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] give the displayed derived identity. The adjunction bijection proves the desired proper/open equality before evaluation. For the bounded constructible inputs used below, [lem-sf-proetale-constructible-origin] supplies the finite etale-origin witnesses. At each $n$ apply [lem-cbc-strict-tower-proper-open-calculus] to a constant tower with $B=A_n$: the evaluated proper/open map is an isomorphism. Preservation of the specified mate construction by [lem-coef-semilinear-derived-sections] identifies this with the evaluation of $\\gamma$ on varying-ring systems. Evaluations detect isomorphisms by that same section theorem, so $\\gamma$ is an isomorphism on these inputs. This uses isomorphism detection only, and requires no common lower bound in $n$.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), open case; agent tensor/mate calculation on the varying-ring diagram site, using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  },
+  {
+   "text": "Choose compatible compactifications. The schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] over the field $k$, hence qcqs by [lem-weil-pbc-locally-noetherian-quasi-separated]. Choose $g=si$ and apply [lem-weil-pbc-compatible-compactification-triangle] to obtain $f=qj$ and $gf=(sp)(bj)$, with $i:Y\\hookrightarrow\\overline Y$, $j:X\\hookrightarrow V$, $b:V\\hookrightarrow\\overline X$ open, $s:\\overline Y\\to Z$, $p:\\overline X\\to\\overline Y$, $q:V\\to Y$ proper, and $pb=iq$ Cartesian. Proper compactifications are again finite type over $k$, so all opens involved are quasi-compact. In the fixed simultaneous models the geometric composition comparison is\n$$R_si_!R_qj_!\\xrightarrow{R_s\\gamma j_!}R_sR_pb_!j_!\\xrightarrow{\\sim}R_{sp}(bj)_!.$$\nThe last arrow uses the derived direct-image compositor of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and open composition [lem-cbc-extension-zero-composition], realized together by [lem-coef-semilinear-derived-sections]. The proper/open map has exactly the mate normalization in Step 3; its finite normalization is specified by [lem-cbc-strict-tower-proper-open-calculus] and [thm-sf-comp-composition]. This is the geometric $\\alpha_{g,f}$ assumed in the statement, constructed in the same section models; it is not identified with that map merely by matching finite evaluations.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-compatible-compactification-triangle",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-cbc-extension-zero-composition",
+    "lem-coef-semilinear-derived-sections",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), first paragraph and displayed compactification diagram; strict-system realization is the agent application of the specified models"
+   }
+  },
+  {
+   "text": "Expand $\\operatorname{PF}^{\\mathrm{sys}}$ through these compactifications using [def-exchange-projection]. Put $T=M\\otimes P_fP_gN$. The left side of the asserted identity first applies the following four maps, then $\\alpha_{g,f,T}$:\n$$R_si_!R_qj_!M\\otimes N\\xrightarrow{\\pi_s}R_s(i_!R_qj_!M\\otimes P_sN)\\xrightarrow{R_s\\delta_i}R_si_!(R_qj_!M\\otimes P_iP_sN)\\xrightarrow{R_si_!\\pi_q}R_si_!R_q(j_!M\\otimes P_qP_iP_sN)\\xrightarrow{R_si_!R_q\\delta_j}R_si_!R_qj_!T.$$\nInsert the formula for $\\alpha$ from Step 4. Move its proper/open factor $R_s\\gamma$ to the left of $R_s\\delta_i$ and $R_si_!\\pi_q$ by the equality of Step 3 with $(r,p,k,i)=(q,p,b,i)$ and $Q=P_sN$; its movement past $\\delta_j$ is the naturality of $\\gamma$ in its input. Move it past $\\pi_s$ by naturality of $\\pi_s$. The two proper projection maps now combine to $\\pi_{sp}$ by Step 2. The remaining two open tensor maps combine to $\\delta_{bj}$: under the canonical open composition of [lem-cbc-extension-zero-composition], both are the identity on a local tensor supported on $X$ and zero off $X$, using the extension/tensor map of [lem-weil-pbc-ringed-slice-extension-tensor]. Their derived versions follow on the same K-flat models [lem-pc-kflat-resolution]. The resulting composite is precisely $\\operatorname{PF}^{\\mathrm{sys}}_{gf,M,N}(\\alpha_{g,f,M}\\otimes1_N)$, with pullback identifications $P_jP_qP_iP_s=P_{gf}$. Thus the required equality holds in $D(\\mathscr S_Z)$ for these compactifications.\n\nFor other chosen compactifications use the actual refinement comparison $\\theta_u=R_{p_2}(\\gamma_u^{-1})c_{p_2,u}$ of [def-sf-refinement-comparison-isomorphism], formed in the simultaneous models. Step 3 with $r=\\mathrm{id}$, $k=j_1$, $i=j_2$, $p=u$ proves tensor/projection compatibility for $\\gamma_u$, and hence for its inverse by multiplying that equality by the inverse on both sides. Step 2 proves it for $c_{p_2,u}$. Substitution yields $\\theta_{u,T}\\operatorname{PF}^{c_1}=\\operatorname{PF}^{c_2}(\\theta_{u,M}\\otimes1)$. Common refinements and their cocycle [prop-compactification-coherence-detailed], with the simultaneous geometric comparisons of [lem-coef-semilinear-derived-sections], identify this equation with the one for the specified models of $f,g,gf$. This is conjugation of an already proved system equation by the specified system comparisons, not a faithfulness claim about evaluation.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-cbc-extension-zero-composition",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-pc-kflat-resolution",
+    "def-sf-refinement-comparison-isomorphism",
+    "prop-compactification-coherence-detailed",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), compactification composite and independence-of-choices argument; explicit projection substitution is agent-written"
+   }
+  },
+  {
+   "text": "Check domains and finite evaluations. Open extensions of the finite-Tor constructible levels remain finite-Tor constructible, with the same cohomological range, by [lem-trf-open-ctf]. Thus the proper/open comparisons used on $j_!M$ and in refinements have bounded constructible levels. The realization [lem-coef-finite-adjunction-diagram-realization] carries $M$ to $\\mathcal F_fM\\in\\mathscr N_Y$. Pullback preserves each bounded constructible finite-Tor level by [lem-sf-pullback-tor-amplitude], and tensor preserves it by [lem-sf-tensor-ctf](ii), adding the two finite Tor intervals separately at each $n$. Normalization of pullbacks follows from the simultaneous tensor/pullback comparisons of [lem-coef-semilinear-derived-sections]. For tensor products, on a common flat-term K-flat system resolution [lem-pc-kflat-resolution], associativity identifies\n$$(P_m\\otimes^L_{B_m}Q_m)\\otimes^L_{B_m}B_n\\cong(P_m\\otimes^L_{B_m}B_n)\\otimes^L_{B_n}(Q_m\\otimes^L_{B_m}B_n)\\cong P_n\\otimes^L_{B_n}Q_n;$$\nthe maps are precisely the transition-adjoint maps, so the tensor systems are normalized too. These operations use derived scalar extension [lem-pur-derived-change-of-rings], with no flatness assumption on $B_m\\to B_n$ and no bound uniform in $n$. Hence every occurrence of $\\mathcal F_h$ in the desired identity has the domain required in the statement. At each $n\\ge1$, evaluation preserves the actual units, counits, tensor comparisons and mates by [lem-coef-semilinear-derived-sections]. Therefore it takes the system equality of Step 5 to the composition identity for the specified finite maps of [def-exchange-projection] and the finite compositor of [thm-sf-comp-composition]. The constructible levels have etale-origin witnesses by [lem-sf-proetale-constructible-origin], so the proper/open and compactification comparisons have their stated witnessed domains. The finite maps in particular agree with the pro-etale realization in [lem-weil-finite-compact-projection-formula]. This checks which finite identity has been obtained; it is not used to infer the system equality.",
+   "uses": [
+    "lem-coef-finite-adjunction-diagram-realization",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-coef-semilinear-derived-sections",
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "def-exchange-projection",
+    "thm-sf-comp-composition",
+    "lem-sf-proetale-constructible-origin",
+    "lem-weil-finite-compact-projection-formula",
+    "lem-trf-open-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution) and 07A4 (lemma-pullback-tensor-product); finite evaluations of the preceding agent calculation"
+   }
+  },
+  {
+   "text": "Finally apply the functor $\\mathcal L_Z=R\\lim\\circ U_Z$ to the equality in $D(\\mathscr S_Z)$. The evaluation calculus [lem-coef-derived-system-evaluation-calculus] defines $U_Z$ termwise and $\\mathcal L_Z$ as a derived functor. Functoriality sends the established equality of the two composites to equality of their total-limit images, as asserted.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "The sentence that every step compares the same projection map; the application of the total-limit functor to an established system equation is elementary"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-sf-refinement-comparison-isomorphism",
+  "lem-cbc-extension-zero-composition",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-finite-adjunction-diagram-realization",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-trf-open-ctf",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-compactification-coherence-detailed",
+  "thm-sf-comp-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J (lemma-shriek-composition), with sites-cohomology.tex Tags 07A4 and 0B56 and sites-modules.tex Tag 0E8I; explicit ringed-diagram-site projection calculation required by the current blueprint, not a quoted strict-system theorem"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +219,31 @@
    "results": "12 hits: CategoryTheory.Adjunction.comp; CategoryTheory.Equivalence.trans_toAdjunction; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.comp_counit_app; CategoryTheory.Adjunction.comp_unit_app; CategoryTheory.Adjunction.comp_counit_app_assoc; CategoryTheory.Adjunction.comp_unit_app_assoc; CategoryTheory.Adjunction.comp_counit",
    "date": "2026-10-17",
    "verdict": "no match: generic monoidal-adjunction and mate identities do not state the geometric strict-system compact-support projection composition identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projection morphism compatibility with composite monoidal adjunction counits",
+   "results": "8 hits: CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.Adjunction.ε_comp_map_ε; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit; CategoryTheory.Adjunction.ε_comp_map_ε_assoc; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc; CategoryTheory.Adjunction.map_η_comp_η_assoc; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ",
+   "date": "2026-10-17",
+   "verdict": "no exact match: generic monoidal counit or mate-pasting lemmas do not state the geometric compact-support composition identity on varying-coefficient derived systems"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "1 hits: CategoryTheory.mateEquiv_hcomp",
+   "date": "2026-10-17",
+   "verdict": "no exact match: generic monoidal counit or mate-pasting lemmas do not state the geometric compact-support composition identity on varying-coefficient derived systems"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|ProjectionFormula|mateEquiv_hcomp",
+   "results": "7 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; subdirectory CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no exact match: generic monoidal counit or mate-pasting lemmas do not state the geometric compact-support composition identity on varying-coefficient derived systems"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-pur-adic-reconstruction-trace-coherence",
@@ -93,5 +260,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-system-level-projection-formula-coherence",
+  "worker": "stage1",
+  "summary": "Seven-step proof on the varying-ring diagram site: direct-image counit calculation, proper/open tensor-mate calculation, compatible compactifications, explicit projection substitution and refinement, domain and finite-evaluation checks, then functorial total limit. No new nodes; statement unchanged. Equal finite evaluations are never used to detect equality of system morphisms.",
+  "blueprint": "Realizes the main-20261015 fix-prop-projection-formula proof sentences about composition/coherence and the same specified projection map, for the additional strict-system obligation recorded in the item source; the actual system argument is agent-written following Stacks 0F7J, 07A4, 0B56 and 0E8I. There is no strict-system realization paragraph in that blueprint file."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-ba7cc81da",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-ba7cc81da (reviewer sub-agent of L); spot-checked: Read the item and all 26 cited statements in full; checked Stacks 0F7J, 0F7B, 0B56 and 0E8I and the main-20261015 fix-prop-projection-formula proof. The statement is unchanged against the base and keeps the varying-ring strict-system category, not O_E-towers. Step 1: the diagram-site extension to the varying ring is correct. Step 2: I recomputed the transposes under P_uP_v ⊣ R_vR_u and both sides agree. Step 3: the clopen normalization is right, and I recomputed both P_p-transposes; they agree by naturality of δ_k and the stated sheaf-level tensor compatibility of the map a. γ is shown invertible levelwise through evaluation and witnesses, then by isomorphism detection only. Step 4: the compatible-triangle notation matches the lemma and agrees with 0F7J and with Step 7 of thm-sf-comp-composition. Step 5: I checked the four-factor substitution and it gives PF_gf(α⊗1); the refinement step is conjugation by θ_u, which is how α itself is built. Steps 6 and 7 check each level's domain with no uniform bound; Step 7 is elementary. Edge cases M=0, N=0, f=id, g=id, n=1 and Spec k all hold. No new nodes and no duplicates: prop-sf-pf-coherence and lem-sf-integral-compactification-system-realization state different things. No SGA source. Accepted tool_uses: lem-coef-semilinear-derived-sections, lem-coef-finite-adjunction-diagram-realization, lem-coef-derived-system-evaluation-calculus, lem-weil-finite-compact-projection-formula, lem-trf-open-ctf, lem-sf-pullback-tor-amplitude, lem-sf-tensor-ctf. No fixes."
  }
 }
