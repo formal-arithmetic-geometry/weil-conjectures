@@ -2,18 +2,62 @@
  "id": "lem-trf-total-site-simplex-free-resolution",
  "kind": "statement",
  "title": "Exact augmented free simplex module complex at each component",
- "statement": "Let $m\\ge 0$ and let $\\Lambda$ be a commutative ring. For an ordinary $\\Lambda$-module $M$ (viewed, when tensored with a sheaf, through the constant coefficient module construction [def-weil-sheaf-of-modules-category]), form the augmented chain complex indexed by the simplex category [def-weil-pbc-simplicial-object] whose degree-$p$ term is $C_p(m,M)=\\bigoplus_{\\alpha:[p]\\to[m]}M$, whose differential is the alternating sum of the maps carrying the $\\alpha$ summand to the $\\alpha\\delta_i$ summand, and whose augmentation $C_0(m,M)\\to M$ folds all summands by the identity. Then this augmented complex $\\cdots\\to C_2(m,M)\\to C_1(m,M)\\to C_0(m,M)\\to M\\to0$ is exact.",
+ "statement": "Let $m\\ge 0$ and let $\\Lambda$ be a commutative ring. For an ordinary $\\Lambda$-module $M$, form the augmented chain complex indexed by the simplex category [def-weil-pbc-simplicial-object] whose degree-$p$ term is $C_p(m,M)=\\bigoplus_{\\alpha:[p]\\to[m]}M$, whose differential is the alternating sum of the maps carrying the $\\alpha$ summand to the $\\alpha\\delta_i$ summand, and whose augmentation $C_0(m,M)\\to M$ folds all summands by the identity. Then this augmented complex $\\cdots\\to C_2(m,M)\\to C_1(m,M)\\to C_0(m,M)\\to M\\to0$ is exact.",
  "source": {
   "document": "literature/stacks-project/spaces-simplicial.tex",
   "place": "Tag 0D7C (lemma-simplicial-resolution-augmentation-modules), componentwise complex and its vertex-zero extra-degeneracy contraction; compare Tag 0D72 for the direct-sum component formula."
  },
  "stmt_deps": [
-  "def-weil-pbc-simplicial-object",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-pbc-simplicial-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $e_\\alpha(x)$ for $x\\in M$ in the summand indexed by $\\alpha:[p]\\to[m]$, and put $C_{-1}=M$ and $d_0=\\epsilon$; for $p\\ge1$ write $d_p e_\\alpha(x)=\\sum_{i=0}^p(-1)^i e_{\\alpha\\delta_i}(x)$. The face injections of [def-weil-pbc-simplicial-object] delete entries of the nondecreasing tuple $(\\alpha(0),\\ldots,\\alpha(p))$. For $p\\ge2$, each double deletion with original positions $i<j$ occurs in $d_{p-1}d_p$ twice: deleting $j$ then $i$ has sign $(-1)^{j+i}$, and deleting $i$ then position $j-1$ has sign $(-1)^{i+j-1}$. The terms cancel, even when tuples coincide. Also $\\epsilon d_1e_\\alpha(x)=x-x=0$. Thus these maps form the asserted augmented complex.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7C (lemma-simplicial-resolution-augmentation-modules), last sentence, via Tag 0D78 (lemma-simplicial-resolution-augmentation), component simplex complex; explicit elementary contraction supplied here."
+   }
+  },
+  {
+   "text": "For $p\\ge0$ define $\\widehat\\alpha:[p+1]\\to[m]$ by $\\widehat\\alpha(0)=0$ and $\\widehat\\alpha(j+1)=\\alpha(j)$. It is nondecreasing since $0\\le\\alpha(0)$ and $\\alpha$ is nondecreasing; the vertex $0$ exists because $m\\ge0$. Define $h_p:C_p\\to C_{p+1}$ by $h_pe_\\alpha(x)=e_{\\widehat\\alpha}(x)$ and $h_{-1}:M\\to C_0$ by $h_{-1}(x)=e_{(0)}(x)$. Each formula is linear on each summand and sends a finitely supported sum to a finitely supported sum, so it defines a $\\Lambda$-linear map. In particular $\\epsilon h_{-1}=\\mathrm{id}_M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7C (lemma-simplicial-resolution-augmentation-modules), last sentence, via Tag 0D78 (lemma-simplicial-resolution-augmentation), component simplex complex; explicit elementary contraction supplied here."
+   }
+  },
+  {
+   "text": "For $p\\ge1$, deleting position $0$ of $\\widehat\\alpha$ gives $\\alpha$, and deleting position $i+1$ gives $\\widehat{\\alpha\\delta_i}$. Consequently $d_{p+1}h_pe_\\alpha(x)=e_\\alpha(x)+\\sum_{i=0}^p(-1)^{i+1}e_{\\widehat{\\alpha\\delta_i}}(x)=e_\\alpha(x)-h_{p-1}d_pe_\\alpha(x)$. For $p=0$, the boundary of the edge $(0,\\alpha(0))$ gives $d_1h_0e_\\alpha(x)=e_\\alpha(x)-e_{(0)}(x)=e_\\alpha(x)-h_{-1}\\epsilon e_\\alpha(x)$. Linearity extends these equalities to all elements. Thus $d_{p+1}h_p+h_{p-1}d_p=\\mathrm{id}_{C_p}$ in every degree $p\\ge0$, with $d_0=\\epsilon$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7C (lemma-simplicial-resolution-augmentation-modules), last sentence, via Tag 0D78 (lemma-simplicial-resolution-augmentation), component simplex complex; explicit elementary contraction supplied here."
+   }
+  },
+  {
+   "text": "If $z\\in C_p$ and $d_pz=0$ ($p\\ge0$, taking $d_0=\\epsilon$), the identity in step 3 gives $z=d_{p+1}(h_pz)$. Hence $\\ker d_p\\subseteq\\operatorname{im}d_{p+1}$; step 1 gives the reverse inclusion. At $M$, every $x$ equals $\\epsilon h_{-1}(x)$ by step 2, so the augmentation is surjective. The map $M\\to0$ has kernel $M$, and exactness at the final zero is automatic. This proves exactness at every term, with no flatness, freeness or finiteness condition on $M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7C (lemma-simplicial-resolution-augmentation-modules), last sentence, via Tag 0D78 (lemma-simplicial-resolution-augmentation), component simplex complex; explicit elementary contraction supplied here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0D7C (lemma-simplicial-resolution-augmentation-modules), last sentence, via Tag 0D78 (lemma-simplicial-resolution-augmentation), component simplex complex; explicit elementary contraction supplied here. The source invokes standard-simplex homotopy equivalence; this split writes the vertex-zero calculation rather than citing that theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -35,10 +79,59 @@
    "results": "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean lines 31-36, 275-315, 368-415; Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean lines 20-29, 128-133; these provide generic extra-degeneracy APIs but not this indexed complex.",
    "date": "2026-10-18",
    "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "StandardSimplex|extraDegeneracy|homotopyEquiv",
+   "results": "Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean; Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean; Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean; Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean; Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean; Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean; Mathlib/AlgebraicTopology/SingularHomology/HomologyZero.lean; Mathlib/AlgebraicTopology/ExtraDegeneracy.lean; inspected ExtraDegeneracy.lean:238-315,396-438 and SimplicialSet/Homology/Basic.lean:37-100. These are component APIs; identifying the indexed module object and deriving augmented exactness still requires the displayed contraction argument.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmented chain complex of the standard simplex with arbitrary module coefficients is contractible and exact",
+   "results": "ChainComplex.augment; ChainComplex.toSingle₀AsComplex; HomologicalComplex.Acyclic; HomologicalComplex.acyclic_iff; ChainComplex.augment_d_succ_succ; ChainComplex.augment_X_zero; CochainComplex.fromSingle₀AsComplex; SSet.Augmented.stdSimplex",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ExtraDegeneracy.homotopyEquiv",
+   "results": "loogle: unknown identifier 'ExtraDegeneracy.homotopyEquiv'",
+   "date": "2026-10-18",
+   "verdict": "no match: unqualified name rejected; retried with full namespace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmented chain complex of a standard simplex with coefficients in any module is exact, by prepending vertex zero to monotone simplices",
+   "results": "Profinite.NobelingProof.succ_exact; AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace; ChainComplex.alternatingConst_exactAt; ChainComplex.exactAt_succ_single_obj; AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id; AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_succ; AlgebraicTopology.DoldKan.HigherFacesVanish; AlgebraicTopology.DoldKan.HigherFacesVanish.inclusionOfMooreComplexMap",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv",
+   "results": "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv; read ExtraDegeneracy.lean:415-438: requires an augmented simplicial object with extra degeneracy, and concludes unaugmented homotopy equivalence, not exactness of this explicit complex.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exact|acyclic|homotopyEquiv|chainComplex",
+   "results": "38; 139; 193; 266; 415; inspected ExtraDegeneracy.lean:238-315,396-438 and SimplicialSet/Homology/Basic.lean:37-100. These are component APIs; identifying the indexed module object and deriving augmented exactness still requires the displayed contraction argument.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A contracting chain homotopy for the direct sum of copies of a module indexed by order preserving maps to a finite ordinal proves the augmented alternating face complex exact",
+   "results": "AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id; AlgebraicTopology.DoldKan.Hσ; AlgebraicTopology.DoldKan.PInfty_f_comp_QInfty_f_assoc; AlgebraicTopology.DoldKan.QInfty_f_comp_PInfty_f_assoc; AlgebraicTopology.DoldKan.PInfty; AlgebraicTopology.DoldKan.PInfty_comp_QInfty_assoc; AlgebraicTopology.DoldKan.QInfty_comp_PInfty_assoc; AlgebraicTopology.DoldKan.σ_comp_PInfty_assoc",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-total-site-free-module-resolution",
@@ -65,5 +158,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-total-site-simplex-free-resolution",
+  "worker": "stage1",
+  "summary": "Expanded the component simplex exactness argument into the double-deletion cancellation, vertex-zero linear homotopy, signed contraction identity including degree zero, and explicit image/kernel equality. No new nodes: each calculation is elementary on summands. Preserved the statement and inherited searches; repeated Mathlib searches are logged and appended.",
+  "blueprint": "Supplies the componentwise free simplex resolution in the inherited lem-trf-local-term-locality ancestry, through lem-trf-total-site-free-module-resolution. The current main-20261015 ancestor proof no longer mentions this resolution; its historical ancestry is retained, while the precise immediate parent and Stacks 0D7C route determine this item.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q26-6c5525eb2",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-6c5525eb2 (reviewer sub-agent of L); spot-checked: The simplex contraction and exactness proof are correct, including m=0, m=1, repeated vertices, torsion, and zero coefficients. The statement incorrectly cites def-weil-sheaf-of-modules-category for an unsupported constant-coefficient construction; that node only defines sheaves of modules. I wrote the corrected full DAG JSON under fixes/dag/nodes/sec-trace-formula/lem-trf-total-site-simplex-free-resolution.json, removing the parenthetical and unused dependency. Full review is in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

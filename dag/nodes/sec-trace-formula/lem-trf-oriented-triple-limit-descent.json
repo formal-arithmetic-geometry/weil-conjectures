@@ -16,9 +16,190 @@
   "lem-weil-pbc-colimit-of-sites",
   "def-weil-pbc-etale-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record how to apply directed descent without changing the given index category. For any $i\\in I$, the forgetful $r:I/i\\to I$ is initial by [lem-weil-pbc-initial-functor-cofiltered-criterion]: a common predecessor of $i,k$ gives an object mapping to $k$, and parallel maps to $k$ can be equalized by further precomposition, retaining the map to $i$. The same lemma gives cofilteredness of $I/i$ and preservation of limits (apply its colimit assertion in the opposite category). Apply [lem-weil-pbc-filtered-category-directed-cofinal] to $(I/i)^{\\mathrm{op}}$. Its single directed replacement works for all three component diagrams simultaneously. Thus directed descent applied to this replacement gives descent after a morphism $j\\to i$ of the original $I$. This also applies to data already defined at $i$ and to eventual equalities. For descent with no initial stage, choose any $i$, possible because $I$ is cofiltered and nonempty.",
+   "uses": [
+    "lem-weil-pbc-initial-functor-cofiltered-criterion",
+    "lem-weil-pbc-filtered-category-directed-cofinal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 002R, 04E7 and 0032 (lemma-directed-category-system), applied to the slices I/i."
+   }
+  },
+  {
+   "text": "Use the directed replacement of step 1. By [lem-weil-pbc-limit-affine-transition] each component limit has an affine projection to any selected stage. By [lem-weil-pbc-affine-morphism-permanence] this projection is quasi-compact and quasi-separated. Clause (2) of [lem-weil-pbc-qcqs-morphism-permanence] therefore makes $X,S,Y$ quasi-compact and quasi-separated, since the stage schemes are so. Clause (1) makes their structural arrows $X\\to S$, $Y\\to S$ quasi-compact and quasi-separated. The same clause applies to every stage structural arrow. Consequently [lem-trf-qcqs-oriented-triple-presentation] applies at every stage and at the limit, providing the stated finite-cover triple sites and their finite limits.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-qcqs-oriented-triple-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI 2.5; ordinary scheme input: Stacks Tags 01YX, 01S7, 03GI and 01KV."
+   }
+  },
+  {
+   "text": "For a finite list of limit triples, descend their $U,V,W$ components by clause (1) of [lem-weil-pbc-etale-finite-data-descent], applied separately to the three component systems via step 1. Move the finitely many models to a common stage. They are etale of finite presentation. Apply [lem-weil-pbc-descend-separated] to each model's structure morphism, which becomes separated at the limit, and enlarge the stage once more. Its hypotheses hold: base, source and target are qcqs, the source by clause (2) of [lem-weil-pbc-qcqs-morphism-permanence], since its structure morphism is of finite presentation, hence qcqs. Subsequent base changes preserve membership in $E(X_i),E(S_i),E(Y_i)$ by the base-change clause of that node. This supplies the separated etale finite-presentation components, with prescribed identifications at the limit.",
+   "uses": [
+    "lem-weil-pbc-etale-finite-data-descent",
+    "lem-weil-pbc-descend-separated",
+    "lem-trf-qcqs-etale-finitary-site",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZM, 07RP (through finite-data descent) and 01ZQ (lemma-descend-separated-finite-presentation)."
+   }
+  },
+  {
+   "text": "Descend a triple's left structural arrow as follows. A map $U\\to V$ over $X\\to S$ is exactly an $X$-map $U\\to X\\times_S V$. Once $V_i$ is chosen, $X_i\\times_{S_i}V_i$ belongs to $E(X_i)$ by [lem-trf-qcqs-etale-finitary-site]; its pullback to $X$ is $X\\times_S V$ by the fibre-product universal property [def-pc-fibre-product]. Both source and target are therefore etale of finite presentation over $X_i$, and clause (2) of [lem-weil-pbc-etale-finite-data-descent] descends this $X$-map. Apply the same argument to $W\\to Y\\times_S V$ over $Y$. Composing with the projection to $V_i$ gives the stage triple's structural arrows. This argument does not require $X_i$ or $Y_i$ to be of finite presentation over $S_i$.",
+   "uses": [
+    "lem-trf-qcqs-etale-finitary-site",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-finite-data-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI 1.1, interpreted over schemes; Stacks Tag 01ZM (2)."
+   }
+  },
+  {
+   "text": "For finitely many arrows of triples, descend the three component maps using clause (2) of [lem-weil-pbc-etale-finite-data-descent]. Their commutativity with the structural arrows is a finite collection of equalities: for the left side, compare the two $X$-maps to $X\\times_S V'$ (with $V'$ the target middle component); for the right side compare the two $Y$-maps to $Y\\times_S V'$. Clause (3) makes all these equalities hold at a common later stage. The same clause, on each component, imposes all specified path relations among triple arrows. It also proves eventual equality for two arrows from a fixed stage whose limit arrows agree. Isomorphisms descend with their inverse and the two inverse relations. Finiteness permits a single common refinement in each case by step 1. This proves all finite-diagram and equality assertions in (1).",
+   "uses": [
+    "lem-weil-pbc-etale-finite-data-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI finite triple data; Stacks Tag 01ZM (2),(3), as formulated in the finite-data-descent node."
+   }
+  },
+  {
+   "text": "For covers of type (a), clause (5) of [lem-weil-pbc-etale-finite-data-descent] makes the descended finite family of left-component maps jointly surjective at a later stage. The other two components are kept fixed. Type (b) is the same argument on the right component. For type (c), descend $V'\\to V$ and the lift of $U\\to X\\times_S V$ to $X\\times_S V'$ by steps 3--5, including their compatibility equality. At the stage DEFINE the right source component to be $W\\times_{Y\\times_S V}(Y\\times_S V')$. This belongs to $E(Y_i)$ by [lem-trf-qcqs-etale-finitary-site] and pulls back to the specified limit component, by [def-pc-fibre-product]. The resulting singleton is precisely a type-(c) cover of [lem-trf-oriented-product-universal]. A finite-composition cover has a finite tree of these generators. Descend its vertices, arrows and identifications by steps 3--5, then its finitely many generating covers by this argument and compose at that stage. If the original family was presented only up to isomorphism, descend the isomorphisms and their inverses too. This proves the cover assertion in (1).",
+   "uses": [
+    "lem-weil-pbc-etale-finite-data-descent",
+    "lem-trf-qcqs-etale-finitary-site",
+    "def-pc-fibre-product",
+    "lem-trf-oriented-product-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI 1.1 (a)--(c) and proof of 2.5 (finite composition); covering descent is clause (5) of the cited finite-data theorem."
+   }
+  },
+  {
+   "text": "Choose small models of all triple categories using [def-weil-size-convention]. Componentwise base change gives a normalized covariant pseudofunctor $B$ on $I^{\\mathrm{op}}$: identities can be chosen to be identity functors, and the composition isomorphisms are the canonical fibre-product reassociations. Their cocycle holds since either composite has the same three projection maps, so the fibre-product uniqueness in [def-pc-fibre-product] equates them. Adjoin a terminal object $\\infty$ to $I^{\\mathrm{op}}$ and set $B(\\infty)=\\mathcal T$; projection base change and the same reassociations extend $B$ to this enlarged category. Apply [lem-coef-pseudofunctor-split-family-strictification] (with its auxiliary $H$ the constant empty category). It gives small categories $\\mathcal C_i$, a category $\\mathcal C_\\infty$, equivalences $E_i:\\mathcal C_i\\to\\mathcal T_i$, $E_\\infty:\\mathcal C_\\infty\\to\\mathcal T$, and strictly composing transition functors and a strict cocone $w_i:\\mathcal C_i\\to\\mathcal C_\\infty$. Its coherent comparisons $B(a)E_i\\cong E_jv_a$ and $B(i\\to\\infty)E_i\\cong E_\\infty w_i$ are retained. No equality $E_jv_a=B(a)E_i$ is imposed.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-pc-fibre-product",
+    "lem-coef-pseudofunctor-split-family-strictification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Stacks Tag 004A (lemma-fibred-strict), using the existing split-family formulation; the terminal-index extension incorporates the limit pseudocone."
+   }
+  },
+  {
+   "text": "Give each $\\mathcal C_i$ the finite pretopology transported by $E_i$. For a transition, the comparison $B(a)E_i\\cong E_jv_a$ shows that $v_a$ preserves finite limits and covers: $B(a)$ preserves the component finite limits by [lem-trf-qcqs-etale-finitary-site]; it preserves types (a),(b), and preserves type (c) because both iterated right-component fibre products have the same universal property [def-pc-fibre-product]. It therefore preserves their finite composites. The finite limits on each triple category come from [lem-trf-qcqs-oriented-triple-presentation]. Transport by the equivalences preserves these properties. By [lem-weil-pbc-left-exact-site-inverse-image-tensor] each $v_a$ is continuous and induces a geometric morphism. Now [lem-weil-pbc-colimit-of-sites] constructs the site $\\mathcal C$ as the filtered colimit of the $\\mathcal C_i$, with object and arrow set colimits and finite coverings exactly the images of stage covers. Write $v_i:\\mathcal C_i\\to\\mathcal C$ for its strict canonical cocone. The strict cocone $w_i$ induces $W:\\mathcal C\\to\\mathcal C_\\infty$, with $Wv_i=w_i$.",
+   "uses": [
+    "lem-trf-qcqs-etale-finitary-site",
+    "def-pc-fibre-product",
+    "lem-trf-qcqs-oriented-triple-presentation",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-weil-pbc-colimit-of-sites"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI 2.5, finite pretopology; Stacks Tags 00X6, 0A34, 09YL and 0A35."
+   }
+  },
+  {
+   "text": "The functor $E_\\infty W:\\mathcal C\\to\\mathcal T$ is an equivalence. Essential surjectivity is step 3--4 and the equivalences $E_i$. For full faithfulness, represent two objects of $\\mathcal C$ at a common stage. By clause (3) of [lem-weil-pbc-filtered-colimit-categories] their Hom set is the filtered colimit of stage Hom sets. Steps 4--5 say precisely that every map between the two limit triples comes from one of these Hom sets, and that two representatives with the same limit map agree after refinement. The coherent comparisons in step 7 identify the maps into $\\mathcal T$ with these canonical base-change maps; hence this Hom-set map is bijective. Covers correspond as well: images of stage covers are covers by step 8; for the converse use step 6, then descend the source and target isomorphisms to the fixed stage representatives, including their inverses and all finitely many arrow equations by step 5. At a further stage this is an isomorphic covering family. Thus a finite family of $\\mathcal C$ covers exactly when its image covers in $\\mathcal T$. The equivalence is consequently an equivalence of sites, by transporting the sheaf equalizer conditions.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 09YL (filtered category construction and covering descent) and 01ZM; the specific triple descent was proved in steps 3--6."
+   }
+  },
+  {
+   "text": "The canonical $v_i$ preserve finite limits. Their composites $E_\\infty Wv_i$ are isomorphic, by step 7, to componentwise projection base change followed by $E_i$, which preserves finite limits by [lem-trf-qcqs-etale-finitary-site] and [lem-trf-qcqs-oriented-triple-presentation]. Since $E_\\infty W$ is an equivalence, a cone is limiting if and only if its image is: the Hom-set bijections carry its universal property in both directions. This proves both the existence of finite limits in $\\mathcal C$ and their preservation by $v_i$. They preserve covers by construction in step 8, so [lem-weil-pbc-left-exact-site-inverse-image-tensor] supplies continuity and left-exact inverse images. The equalities $v_jv_a=v_i$ and the transition identity and composition equalities are those of the actual filtered category colimit, not chosen isomorphisms. All assertions in (2) follow.",
+   "uses": [
+    "lem-trf-qcqs-etale-finitary-site",
+    "lem-trf-qcqs-oriented-triple-presentation",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI 2.5; Stacks Tags 09YL, 0A35 and 00X6."
+   }
+  },
+  {
+   "text": "It remains to identify the geometric morphisms, rather than merely their topoi. Work first on the triple sites. For any one of the componentwise diagram maps, let $B$ be its triple base-change functor and $u$ its universal oriented-product geometric morphism. The base-change clause of [lem-trf-qcqs-oriented-triple-presentation] gives $u^{-1}H_Z\\cong H_{BZ}$ naturally in triples and their arrows. For every target sheaf $F$, adjunction, [def-weil-pbc-sheafification] and [lem-galois-yoneda-hom-bijection] give\n$$ (u_*F)(Z)=\\operatorname{Hom}(H_Z,u_*F)\\cong\\operatorname{Hom}(u^{-1}H_Z,F)\\cong\\operatorname{Hom}(H_{BZ},F)=F(BZ). $$\nThese bijections are natural in $Z,F$. Thus $u_*$ is canonically precomposition by $B$. The site morphism's direct image is the same precomposition by [lem-weil-pbc-left-exact-site-inverse-image-tensor]. Uniqueness of a left adjoint identifies their inverse images as well. Apply this to every transition diagram and every projection diagram, transporting via $E_i$ and $E_\\infty W$ with the comparisons retained in step 7. It identifies their site morphisms with the stated $u_a$ and $u_i$, proving the geometric-morphism assertion of (3).",
+   "uses": [
+    "lem-trf-qcqs-oriented-triple-presentation",
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI 1.6 (inverse-image formula), 1.9 (functoriality), 2.5; Stacks Tag 00X6 (site adjunction)."
+   }
+  },
+  {
+   "text": "Finally fix the normalization of these identifications. The generator base-change isomorphisms used in step 11 are the canonical ones: in [lem-trf-oriented-product-universal] the generator is the displayed fibre product of the two projection inverse images over the middle inverse image. On its three factors [lem-weil-pbc-sets-etale-inverse-image-composition-units] identifies successive scheme inverse images with the composite, sends successive units to the composite unit, and gives associativity. The same statements for the generator fibre product follow by its universal property, since the two comparison maps have equal component projections. The split-family comparisons of step 7 were exactly these fibre-product reassociations. Taking adjunction mates of the direct-image identification in step 11 therefore gives the unique left-adjoint comparison compatible with the units: under $\\operatorname{Hom}(L A,F)\\cong\\operatorname{Hom}(A,R F)$ it corresponds to the identity of $R$. For identities and for two or three composable diagram maps, both proposed comparisons correspond to that same identity after the canonical direct-image reassociation. The bijection is injective, so the comparisons agree. This proves compatibility with identity, composition and adjunction units in (3).",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI 1.6 and 1.9; ordinary inverse-image unit and associativity formulas: Stacks Tag 03CB, in the cited composition-units node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-initial-functor-cofiltered-criterion",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-trf-qcqs-oriented-triple-presentation",
+  "lem-weil-pbc-etale-finite-data-descent",
+  "lem-weil-pbc-descend-separated",
+  "lem-trf-qcqs-etale-finitary-site",
+  "def-pc-fibre-product",
+  "lem-trf-oriented-product-universal",
+  "def-weil-size-convention",
+  "lem-coef-pseudofunctor-split-family-strictification",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-filtered-colimit-categories",
+  "def-weil-pbc-sheafification",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XI 1.1, 1.6, 1.9, proof of 2.5 and the inverse-limit localization (2.c) in 2.7; concrete affine-transition descent and strict colimit-site details supplied here using Stacks Tags 01YX, 01ZM, 01ZQ, 004A, 09YL and 0A35."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,10 +242,45 @@
    "results": "{\"t\": \"2026-10-17T19:41:17Z\", \"tool\": \"leanfinder\", \"query\": \"finite cover triple site of a limit is the colimit of finite cover triple sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.preserveFiniteLimits_plusFunctor\", \"LightProfinite.instWEqualsLocallyBijectiveCoherentTopology\", \"CategoryTheory.Pretopology.ofArrows_mem_finite\", \"CategoryTheory.Pretopology.finite_toPrecoverage\", \"TopCat.Presheaf.isLimitOpensLeEquivGenerate₂\", \"CategoryTheory.extensiveTopology\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfShapeOppositeElementsFiberForget\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize\"], \"digest\": \"806b4d3255ab2da9\"}",
    "date": "2026-10-18",
    "verdict": "no match: the returned declarations concern ordinary finite-presentation scheme descent, generic sheaf/pretopology constructions or finite inverse systems; none states descent and the colimit-site presentation of oriented etale triples."
+  },
+  {
+   "tool": "grep",
+   "query": "oriented.?product|triple.?site|pseudofunctor.*strict",
+   "results": "{\"t\": \"2026-10-17T20:32:47Z\", \"tool\": \"grep\", \"query\": \"oriented.?product|triple.?site|pseudofunctor.*strict\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Bicategory/Strict/Pseudofunctor.lean\", \"Mathlib/CategoryTheory/Bicategory/Strict/Pseudofunctor.lean\", \"Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean\", \"Mathlib/CategoryTheory/Bicategory/Functor/StrictlyUnitary.lean\", \"Mathlib/CategoryTheory/Bicategory/Functor/StrictPseudofunctor.lean\", \"Mathlib/CategoryTheory/Bicategory/Functor/StrictPseudofunctor.lean\", \"Mathlib/CategoryTheory/Bicategory/Functor/StrictPseudofunctor.lean\", \"Mathlib/CategoryTheory/Bicategory/Functor/StrictPseudofunctor.lean\"], \"digest\": \"3c4a50572a8966a3\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary etale schemes, global-section descent, generic filtered colimits, or definitions of strict pseudofunctors, not the oriented triple-site descent and its strict site models."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor, CategoryTheory.Limits.colimit, AlgebraicGeometry.Etale",
+   "results": "{\"t\": \"2026-10-17T20:32:47Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Pseudofunctor, CategoryTheory.Limits.colimit, AlgebraicGeometry.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary etale schemes, global-section descent, generic filtered colimits, or definitions of strict pseudofunctors, not the oriented triple-site descent and its strict site models."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite etale triple site over a scheme inverse limit is the filtered colimit of the stage sites",
+   "results": "{\"t\": \"2026-10-17T20:32:47Z\", \"tool\": \"leansearch\", \"query\": \"finite etale triple site over a scheme inverse limit is the filtered colimit of the stage sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitLimitIso\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.instHasColimitOverScheme\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup\", \"CategoryTheory.hasColimitsEssentiallySmallSite\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits_of_types\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"bc4981c0f1981b1d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary etale schemes, global-section descent, generic filtered colimits, or definitions of strict pseudofunctors, not the oriented triple-site descent and its strict site models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite presentation etale triples over componentwise affine inverse limits descend to a finite stage and the triple site is a filtered colimit",
+   "results": "{\"t\": \"2026-10-17T20:32:54Z\", \"tool\": \"leanfinder\", \"query\": \"finite presentation etale triples over componentwise affine inverse limits descend to a finite stage and the triple site is a filtered colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.finitePresentation\", \"Algebra.FormallyEtale.instForallOfFinite\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.isOpen_etaleLocus\", \"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"ebcce1639891f8cd\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary etale schemes, global-section descent, generic filtered colimits, or definitions of strict pseudofunctors, not the oriented triple-site descent and its strict site models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "oriented product of etale topoi continuity along cofiltered inverse limits of quasi compact quasi separated schemes with affine transition maps",
+   "results": "{\"t\": \"2026-10-17T20:33:01Z\", \"tool\": \"leanfinder\", \"query\": \"oriented product of etale topoi continuity along cofiltered inverse limits of quasi compact quasi separated schemes with affine transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\"], \"digest\": \"79bba7d9fd01cd8e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary etale schemes, global-section descent, generic filtered colimits, or definitions of strict pseudofunctors, not the oriented triple-site descent and its strict site models."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-derived-cohomology-continuity",
@@ -90,5 +306,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-oriented-triple-limit-descent",
+  "worker": "stage1",
+  "summary": "Proved finite triple descent using etale finite-data descent on the component bases, separatedness descent, and the pullback-target encoding of cross arrows. Descended generating covers including the type-(c) lift and its explicitly defined right pullback. Used existing split-family pseudofunctor strictification with an adjoined limit index, formed the actual filtered colimit, and checked equivalence of sites and canonical geometric morphisms with adjunction-unit normalization. No statement change and no new nodes.",
+  "blueprint": "Realizes the inverse-limit localization input under lem-trf-local-term-locality, Proof (1),(2), specialization-to-the-normal-cone paragraph, through its oriented proper-image and cohomology-continuity descendants. Steps 1--6 supply finite triple data, steps 7--10 the strict finite-cover colimit presentation, and steps 11--12 its canonical base-change identification; this is a tool refinement below the unit route, not a replacement for it.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-filtered-category-directed-cofinal",
+    "why": "Generic site, category, size or adjunction tool used with exactly its stated hypotheses; sk-i-curve-zero contains no replacement interface for this auxiliary descent construction."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic scheme inverse-limit/etale finite-data descent tool used with exactly its stated hypotheses; sk-i-curve-zero contains no replacement interface for this auxiliary descent construction."
+   },
+   {
+    "node": "lem-weil-pbc-etale-finite-data-descent",
+    "why": "Generic scheme inverse-limit/etale finite-data descent tool used with exactly its stated hypotheses; sk-i-curve-zero contains no replacement interface for this auxiliary descent construction."
+   },
+   {
+    "node": "lem-weil-pbc-descend-separated",
+    "why": "Generic scheme inverse-limit/etale finite-data descent tool used with exactly its stated hypotheses; sk-i-curve-zero contains no replacement interface for this auxiliary descent construction."
+   },
+   {
+    "node": "def-weil-size-convention",
+    "why": "Generic site, category, size or adjunction tool used with exactly its stated hypotheses; sk-i-curve-zero contains no replacement interface for this auxiliary descent construction."
+   },
+   {
+    "node": "lem-coef-pseudofunctor-split-family-strictification",
+    "why": "Generic site, category, size or adjunction tool used with exactly its stated hypotheses; sk-i-curve-zero contains no replacement interface for this auxiliary descent construction."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic site, category, size or adjunction tool used with exactly its stated hypotheses; sk-i-curve-zero contains no replacement interface for this auxiliary descent construction."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-of-sites",
+    "why": "Generic site, category, size or adjunction tool used with exactly its stated hypotheses; sk-i-curve-zero contains no replacement interface for this auxiliary descent construction."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-categories",
+    "why": "Generic site, category, size or adjunction tool used with exactly its stated hypotheses; sk-i-curve-zero contains no replacement interface for this auxiliary descent construction."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Generic site, category, size or adjunction tool used with exactly its stated hypotheses; sk-i-curve-zero contains no replacement interface for this auxiliary descent construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-etale-finite-data-descent",
+  "lem-weil-pbc-descend-separated",
+  "def-weil-size-convention",
+  "lem-coef-pseudofunctor-split-family-strictification",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-filtered-colimit-categories",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q15-be88524aa",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q15-be88524aa (reviewer sub-agent of L); spot-checked: Full mathematical review completed; review.md written with source checks, all 12 proof steps, hypotheses, edge cases, searches, route checks, and tool uses. No faults found."
  }
 }

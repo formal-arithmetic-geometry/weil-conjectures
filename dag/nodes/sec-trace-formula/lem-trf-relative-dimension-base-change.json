@@ -12,41 +12,107 @@
   "def-weil-pure-dimension",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $g:S\\prime\\to S$ be the chosen base-change morphism and write $f\\prime:X\\times_S S\\prime\\to S\\prime$ for the second projection. The locally-finite-type base-change lemma gives that $f\\prime$ is locally of finite type. For any $s\\prime\\in S\\prime$, put $s=g(s\\prime)$. The fibre-dimension-after-base-change lemma identifies $(X\\times_S S\\prime)_{s\\prime}$ with the residue-field base change of $X_s$ and, for every $x\\prime$ over $x$, gives $\\dim_{x\\prime}((X\\times_S S\\prime)_{s\\prime})=\\dim_x(X_s)$.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T4 and 02FY, used in the proof of Tag 02NK"
+   }
+  },
+  {
+   "text": "Fix $s\\in S$ with nonempty fibre $X_s$. Applying the locally-finite-type base-change lemma to $f$ and $\\operatorname{Spec}\\kappa(s)\\to S$ makes $X_s\\to\\operatorname{Spec}\\kappa(s)$ locally of finite type. The hypothesis and the definition of pure dimension say that every irreducible component of $X_s$ has dimension $d$. The locally-algebraic equidimensional-open lemma, with $Y=O=X_s$ and $n=d$, therefore gives $\\dim_x(X_s)=d$ for every $x\\in X_s$. (Here the integer $d\\ge0$ is viewed as a natural number.)",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "def-weil-pure-dimension",
+    "lem-sbc-equidimensional-open-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NK proof, via Tag 02FY and the definition of relative dimension (02NJ)"
+   }
+  },
+  {
+   "text": "For $s\\prime\\in S\\prime$ and $x\\prime\\in (X\\times_S S\\prime)_{s\\prime}$, let $x$ be its image in $X$. Then $x\\in X_s$ for $s=g(s\\prime)$, so this fibre is nonempty and Step 2 applies. Step 1 consequently gives $\\dim_{x\\prime}((X\\times_S S\\prime)_{s\\prime})=\\dim_x(X_s)=d$.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "lem-sbc-equidimensional-open-local-dimension",
+    "def-weil-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NK proof: the assertion is immediate from Tag 02FY"
+   }
+  },
+  {
+   "text": "For each $s\\prime$, the structure morphism $(X\\times_S S\\prime)_{s\\prime}\\to\\operatorname{Spec}\\kappa(s\\prime)$ is locally of finite type by the same base-change lemma. Since a field is locally Noetherian, the locally-finite-type-over-locally-Noetherian lemma makes this fibre locally Noetherian. Apply the constant-local-dimension-components lemma to this fibre as $Y=O$ and $n=d$, using Step 3: every irreducible component has topological Krull dimension $d$. Thus every nonempty fibre of $f\\prime$ is pure of dimension $d$; empty fibres satisfy the condition vacuously.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "pqf-lem-locnoeth-lft",
+    "lem-sbc-constant-local-dimension-components",
+    "def-weil-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NK proof, using Tag 02FY and the definition of relative dimension (02NJ)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-weil-pure-dimension",
+  "lem-sbc-constant-local-dimension-components",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-lft-base-change",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02NK, lemma-base-change-relative-dimension-d, proof (immediate from Tag 02FY)"
+ },
  "mathlib_searches": [
   {
+   "tool": "grep",
+   "query": "relativeDimension|pure.*dimension|dimension.*base.change",
+   "results": "0 hits in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
    "tool": "leansearch",
-   "query": "A base change of a locally finite type morphism with all nonempty fibres pure dimension d still has all nonempty fibres pure dimension d",
-   "results": "locallyOfFiniteType_isStableUnderBaseChange; locallyOfFinitePresentation_isStableUnderBaseChange; no pure-fibre-dimension theorem",
+   "query": "a locally finite type morphism whose nonempty fibres are equidimensional of dimension d remains so after arbitrary base change",
+   "results": "AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; smooth relative-dimension stability; no pure-fibre-dimension theorem",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "relativeDimension, Scheme, fibre dimension",
-   "results": "0 hits; unknown identifier relativeDimension",
+   "query": "relative dimension, pure dimension, base change",
+   "results": "0 hits; unknown identifier relative",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "pure relative dimension is preserved by arbitrary base change",
-   "results": "isSmoothOfRelativeDimension_isStableUnderBaseChange and related smooth results, but no general pure-fibre-dimension result",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "limit.*dimension|dimension.*fibre|relativeDimension|relative dimension in Mathlib/AlgebraicGeometry",
-   "results": "Etale/Smooth relative-dimension declarations only; no general fibre-purity base-change theorem",
+   "query": "pure relative dimension is preserved by arbitrary base change of a locally finite type scheme morphism",
+   "results": "smooth relative-dimension and locally-finite-type stability declarations; no general pure-fibre-dimension theorem",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-pure-relative-dimension-finite-stage",
@@ -58,7 +124,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: finite-stage descent of the relative-dimension condition.",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: persistence of pure relative dimension under arbitrary base change (Tag 02NK/02FY).",
    "via": [
     "lem-trf-pure-relative-dimension-finite-stage",
     "lem-trf-marked-curve-finite-type-model",
@@ -74,5 +140,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-relative-dimension-base-change",
+  "worker": "stage1",
+  "summary": "Audited the imported Tag 02NK statement against the Stacks proof and split its “immediate from Tag 02FY” argument into four explicit steps. The existing fibre-dimension-after-base-change node supplies the residue-field fibre identification and equality of local dimensions; existing locally algebraic and locally Noetherian component lemmas convert the pointwise equality into pure dimension on every base-changed fibre. No new nodes were needed, and the empty-fibre and d=0 cases are vacuous or covered by the natural-number interpretation.",
+  "blueprint": "The stored ancestry points to lem-trf-local-term-locality; this split realizes its finite-stage relative-dimension persistence input by the Tag 02NK/02FY base-change argument.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Step 1 takes the residue-field fibre identification and equality of local dimensions from Tag 02FY, which is the generic base-change input for this item."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Step 2 converts pure component dimension on a locally finite-type fibre into constant local dimension; this is a generic dimension tool from the smooth-base-change unit."
+   },
+   {
+    "node": "lem-sbc-constant-local-dimension-components",
+    "why": "Step 4 converts constant local dimension on the locally Noetherian base-changed fibre into component dimension; this is a generic dimension tool from the smooth-base-change unit."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Step 4 uses local Noetherianity of a locally finite-type scheme over a field to apply the component-dimension tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sbc-constant-local-dimension-components",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-61a260940",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-61a260940 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, unit/chapter route, and Stacks 02NK, 02FY, 0A21 and supporting sources. All four steps preserve the hypotheses and correct base-change projection; dimension meanings agree. No new nodes, duplicates, circularity, long steps, or forbidden proof dependencies found. Generic tool uses accepted. Concrete checks and snapshot audit limits recorded in review.md."
  }
 }
