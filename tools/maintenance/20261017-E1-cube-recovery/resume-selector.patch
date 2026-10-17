@@ -1,0 +1,10 @@
+--- a/codex_retry.py
++++ b/codex_retry.py
+@@ -31,6 +31,7 @@
+ def resume_session(args):
+     """Only an explicit session UUID can identify a dispatched resume safely."""
+     if (len(args) >= 4 and args[:2] == ["exec", "resume"]
++            and args[-1] == "-" and "--last" not in args
+             and re.fullmatch(r"[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}",
+                              args[-2])):
+         return args[-2]
