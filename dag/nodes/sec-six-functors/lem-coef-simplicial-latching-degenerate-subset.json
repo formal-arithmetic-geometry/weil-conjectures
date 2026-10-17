@@ -11,9 +11,90 @@
   "def-weil-pbc-simplicial-set",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The indexing category is finite: there are finitely many $k<n$ and finitely many order-preserving maps between any two of these finite ordinals. Identities and composition are those of the indicated surjections, with the direction specified in the statement. Functoriality of $T$ [def-weil-pbc-simplicial-set] gives the diagram and a cocone $j_\\sigma:T_k\\to D_nT$, $j_\\sigma(y)=T(\\sigma)y$: these values are degenerate since $k<n$. For an arrow $\\sigma\\to\\sigma'$ represented by $\\rho$ with $\\sigma=\\rho\\circ\\sigma'$, one has $j_{\\sigma'}T(\\rho)=T(\\sigma')T(\\rho)=T(\\sigma)=j_\\sigma$. We will verify the universal property [def-weil-pbc-category-colimit] of this cocone directly, thus also proving existence of the set colimit without appealing to a separate colimit-existence theorem.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R (lemma-splitting-simplicial-sets), agent expansion to the proper-surjection cocone; colimit means Stacks Tag 002F (categories.tex, definition-colimit)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] to every simplex: its normal form is $x=T(\\tau)z$ with $\\tau:[n]\\twoheadrightarrow[r]$ and $z\\in T_r$ nondegenerate, and the entire triple $(r,\\tau,z)$ is unique. If $x\\in D_nT$, this normal form has $r<n$. Indeed, by [def-weil-pbc-simplicial-set], write $x=T(f)y$ with $f:[n]\\to[m]$, $m<n$. List the nonempty image of $f$ increasingly as the image of $i:[a]\\hookrightarrow[m]$, and let $e:[n]\\twoheadrightarrow[a]$ send an element to the index of its image; then $f=i\\circ e$ and $a\\le m<n$. Apply the same decomposition theorem to $T(i)y\\in T_a$, writing it as $T(\\eta)z'$ for a surjection $\\eta:[a]\\twoheadrightarrow[b]$. Since $b\\le a$, the expression $x=T(\\eta\\circ e)z'$ has $b<n$; uniqueness identifies it with $(r,\\tau,z)$. Conversely, a normal form with $r<n$ is degenerate by definition. Thus for every element of $D_nT$ its unique normal-form surjection is an object of $\\mathcal L_n$.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R (lemma-splitting-simplicial-sets), existence and uniqueness of the splitting; image enumeration and the dimension bound written out by the agent."
+   }
+  },
+  {
+   "text": "Let $(M,(c_\\sigma))$ be any cocone on the diagram, so $c_{\\sigma'}T(\\rho)=c_\\sigma$ for the arrows in the statement [def-weil-pbc-category-colimit]. For $x\\in D_nT$ with the unique normal form $(r,\\tau,z)$ of step 2, define $h(x)=c_\\tau(z)$; uniqueness makes this unambiguous. To prove its factorization equation on the whole of each $T_k$, take $\\sigma:[n]\\twoheadrightarrow[k]$, $k<n$, and arbitrary $y\\in T_k$. By [lem-weil-pbc-simplicial-set-nondegenerate-decomposition], write $y=T(\\rho)z$ with $\\rho:[k]\\twoheadrightarrow[r]$ and $z$ nondegenerate. Then $r\\le k<n$ and $j_\\sigma(y)=T(\\rho\\circ\\sigma)z$. Uniqueness identifies this as its normal form. Put $\\tau=\\rho\\circ\\sigma$; the map $\\rho$ is an arrow $\\tau\\to\\sigma$ of $\\mathcal L_n$. Therefore\n$$h(j_\\sigma(y))=c_\\tau(z)=c_\\sigma(T(\\rho)z)=c_\\sigma(y).$$\nThis includes $\\rho=\\mathrm{id}$ when $y$ is already nondegenerate.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R (lemma-splitting-simplicial-sets), agent construction of descent using unique normal forms; Tag 002F (categories.tex, definition-colimit), cocone equation."
+   }
+  },
+  {
+   "text": "The factorization in step 3 is unique. If $h':D_nT\\to M$ also satisfies $h'j_\\sigma=c_\\sigma$ for every $\\sigma$, take the normal form $x=T(\\tau)z$ from step 2. Since $\\tau$ is an object of $\\mathcal L_n$, $h'(x)=h'(j_\\tau(z))=c_\\tau(z)=h(x)$. Hence $(D_nT,(j_\\sigma))$ is a colimit by [def-weil-pbc-category-colimit]. When $n=0$ there are no $k<0$ and no degenerate simplices [def-weil-pbc-simplicial-set]; the same universal property is the uniqueness of the function from the empty set to $M$. This proves the empty-degree case as well.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R (lemma-splitting-simplicial-sets), agent uniqueness argument; Tag 002F (categories.tex, definition-colimit), including the empty diagram."
+   }
+  },
+  {
+   "text": "Compare this colimit with any chosen $L_nT$ [def-weil-pbc-category-colimit]. Let $\\iota_\\sigma:T_k\\to L_nT$ be its structure maps. The two universal properties give maps $a_T:L_nT\\to D_nT$ and $b_T:D_nT\\to L_nT$ with $a_T\\iota_\\sigma=j_\\sigma$ and $b_Tj_\\sigma=\\iota_\\sigma$. Their composites have the same composites with all structure maps as the corresponding identities, so uniqueness in each universal property gives $b_Ta_T=\\mathrm{id}$ and $a_Tb_T=\\mathrm{id}$. If $u_T:D_nT\\hookrightarrow T_n$ is the subset inclusion, then $u_Ta_T\\iota_\\sigma=T(\\sigma)$, so $u_Ta_T=\\lambda_n$ by uniqueness. Since $a_T$ is bijective and $u_T$ is injective, $\\lambda_n$ is injective and its image is exactly $D_nT$. The equation $a_T\\iota_\\sigma=j_\\sigma$ gives precisely the requested structure maps.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R (lemma-splitting-simplicial-sets), agent comparison of the two colimit cocones; Tag 002F (categories.tex, definition-colimit), uniqueness up to unique isomorphism."
+   }
+  },
+  {
+   "text": "For any simplicial map $\\phi:T\\to T'$, naturality [def-weil-pbc-simplicial-set] gives\n$$\\phi_n(T(\\sigma)y)=T'(\\sigma)(\\phi_k(y)).$$\nThis is degenerate whenever $k<n$, so by step 2 $\\phi_n$ restricts to a map $d_\\phi:D_nT\\to D_nT'$, and $d_\\phi j_\\sigma=j'_\\sigma\\phi_k$. The same naturality equation makes the $\\phi_k$ a map of the latching diagrams; its induced map $L_n\\phi$ satisfies $L_n\\phi\\,\\iota_\\sigma=\\iota'_\\sigma\\phi_k$ [def-weil-pbc-category-colimit]. Consequently $a_{T'}L_n\\phi$ and $d_\\phi a_T$ agree after every $\\iota_\\sigma$, both with value $j'_\\sigma\\phi_k$, and the colimit uniqueness gives $a_{T'}L_n\\phi=d_\\phi a_T$. Restrictions of identity maps and composites are identities and composites, so this is naturality under all simplicial maps, also for the empty sets in degree zero.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R (lemma-splitting-simplicial-sets), agent naturality check for the degenerate subset; the paragraph after 017R warns that the full nondegenerate splitting itself is not functorial."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 017R (lemma-splitting-simplicial-sets): explicit universal-property consequence, using the colimit definition of Tag 002F (categories.tex, definition-colimit)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +144,80 @@
    "results": "20 hits: Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean, Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean, Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean, Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean, Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean, Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean, Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean, Mathlib/AlgebraicTopology/SimplicialSet/ProdStdSimplex.lean",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "latching|degenerate.*[Cc]olimit|[Cc]olimit.*degenerate|isColimit",
+   "results": "{\"t\": \"2026-10-17T10:21:33Z\", \"tool\": \"grep\", \"query\": \"latching|degenerate.*[Cc]olimit|[Cc]olimit.*degenerate|isColimit\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/FiniteColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/FiniteColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/FiniteColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/FiniteColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/FiniteColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesColimit.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesColimit.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesColimit.lean\"], \"digest\": \"7f462722cf699a46\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: NonDegenerateSimplicesColimit.lean describes a different diagram of monogenous subcomplexes; HornColimits.lean describes horn unions. Read NonDegenerateSimplicesColimit.lean lines 27-110 and Degenerate.lean lines 34-129 and 217-260."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The latching map of a simplicial set is injective and identifies the latching object with the degenerate simplices naturally",
+   "results": "{\"t\": \"2026-10-17T10:21:34Z\", \"tool\": \"leansearch\", \"query\": \"The latching map of a simplicial set is injective and identifies the latching object with the degenerate simplices naturally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.degenerate\", \"SSet.degenerate_zero\", \"SimplexCategory.σ_injective\", \"SSet.N.mk'.injEq\", \"SSet.N.subcomplex_injective\", \"SSet.degenerate_app_apply\", \"SSet.σ_mem_degenerate\", \"SSet.N.mk'.inj\"], \"digest\": \"6600bc935adcad4e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: SSet.degenerate_app_apply proves preservation of degeneracy, degenerate_zero proves the degree-zero clause; the remaining hits do not identify the latching colimit."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialObject.Splitting.isColimit",
+   "results": "{\"t\": \"2026-10-17T10:21:34Z\", \"tool\": \"loogle\", \"query\": \"SimplicialObject.Splitting.isColimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SimplicialObject.Splitting.isColimit'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match returned: Loogle reported an unknown identifier, so this failed name query is not evidence of absence. The second Loogle query, semantic searches and pinned source inspection supply the audit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The colimit over proper surjections out of the ordinal n of the lower simplices of a simplicial set is its subset of degenerate n simplices",
+   "results": "{\"t\": \"2026-10-17T10:21:35Z\", \"tool\": \"leanfinder\", \"query\": \"The colimit over proper surjections out of the ordinal n of the lower simplices of a simplicial set is its subset of degenerate n simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.degenerate\", \"SSet.degenerate_eq_iUnion_range_σ\", \"SSet.skeleton\", \"SSet.horn.isColimit\", \"SSet.N.mk_surjective\", \"SSet.exists_nonDegenerate\", \"SSet.S.mk_surjective\", \"SSet.sk\"], \"digest\": \"38ca7a9c7c048461\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits include SSet.degenerate, degenerate_eq_iUnion_range_σ, exists_nonDegenerate and horn.isColimit. These describe degeneracy, normal forms or horn colimits, not this proper-surjection colimit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"latching\"",
+   "results": "{\"t\": \"2026-10-17T10:21:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"latching\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A splitting of a simplicial object gives a colimit cocone over nonidentity epimorphisms onto lower degrees, equal to the degeneracy part",
+   "results": "{\"t\": \"2026-10-17T10:21:57Z\", \"tool\": \"leanfinder\", \"query\": \"A splitting of a simplicial object gives a colimit cocone over nonidentity epimorphisms onto lower degrees, equal to the degeneracy part\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.Splitting.isColimit'\", \"SimplicialObject.Splitting.isColimit\", \"SimplicialObject.Splitting.desc\", \"SimplicialObject.Splitting.cofan\", \"SimplicialObject.Splitting.ι\", \"SimplicialObject.Splitting.cofan'\", \"SimplicialObject.Splitting.cofan_inj_eq\", \"AlgebraicTopology.DoldKan.Γ₀.splitting\"], \"digest\": \"783daef753f55205\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Splitting.isColimit and isColimit' give the discrete coproduct of nondegenerate summands, not the diagram of the full lower-degree sets with proper-surjection transition maps. Read Split.lean lines 190-233."
+  },
+  {
+   "tool": "grep",
+   "query": "latching|isColimit|def cofan|structure Splitting",
+   "results": "{\"t\": \"2026-10-17T10:22:49Z\", \"tool\": \"grep\", \"query\": \"latching|isColimit|def cofan|structure Splitting\", \"sub\": \"AlgebraicTopology/SimplicialObject/Split.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"212\", \"219\", \"221\", \"229\", \"233\"], \"digest\": \"4cf2e7994e93c83a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source-file grep output has malformed file/line fields because rg was given a single file; read Split.lean lines 190-233 directly and repeated with a directory argument. The declarations are the coproduct splitting, not the latching colimit."
+  },
+  {
+   "tool": "grep",
+   "query": "latching|structure Splitting|def cofan|def isColimit",
+   "results": "{\"t\": \"2026-10-17T10:23:14Z\", \"tool\": \"grep\", \"query\": \"latching|structure Splitting|def cofan|def isColimit\", \"sub\": \"AlgebraicTopology/SimplicialObject\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Split.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Split.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Split.lean\"], \"digest\": \"6365955bf972b0db\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Split.lean:212 Splitting, :229 cofan and :233 isColimit concern a coproduct indexed discretely by all surjections of nondegenerate summands. The present diagram instead has objects full T_k for proper surjections and nontrivial transition maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper surjection latching colimit degenerate simplices",
+   "results": "{\"t\": \"2026-10-17T10:45:04Z\", \"tool\": \"leanfinder\", \"query\": \"proper surjection latching colimit degenerate simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.exists_nonDegenerate\", \"SSet.N.mk_surjective\", \"SSet.horn.isColimit\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.instIsRegularEpiCategory\", \"SSet.hasColimits\"], \"digest\": \"050057fd72f13b0d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the recorded hits; none states the proper-surjection latching colimit. SSet.exists_nonDegenerate supplies only normal forms, and SSet.hasColimits supplies only existence."
+  },
+  {
+   "tool": "grep",
+   "query": "latching|degenerate",
+   "results": "{\"t\": \"2026-10-17T10:45:05Z\", \"tool\": \"grep\", \"query\": \"latching|degenerate\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/FiniteProd.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/FiniteProd.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean\"], \"digest\": \"b0cac9504d2d09d3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source hits concern degeneracy, not the proper-surjection colimit identification."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-bisimplicial-reedy-division-calculus",
@@ -93,5 +244,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-latching-degenerate-subset",
+  "worker": "stage1",
+  "summary": "Q103 supplied the six-step universal-property proof of the proper-surjection colimit using the existing Mathlib leaf for unique nondegenerate decomposition. The statement and its hypotheses are unchanged. Checked arbitrary-map degeneracy versus proper-surjection representatives, the direction of every indexing arrow, degree zero and naturality under maps that collapse nondegenerate simplices. No new nodes or Lean files. Logged two semantic phrasings, LeanSearch, Loogle and source searches; coproduct splitting is not the latching colimit.",
+  "blueprint": "Realizes the proper-surjection latching calculation in step 3 of lem-coef-bisimplicial-reedy-division-calculus, supporting proof paragraph 2 of prop-coef-integral-exceptional-adjoint via the recorded enrichment-change chain. The unit and chapter are retained; this is the auxiliary combinatorial calculation below that route, not a replacement of a unit step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-75dca58f9",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-75dca58f9 (reviewer sub-agent of L); spot-checked: I read the item in full, the full statements of all three cited nodes, Stacks simplicial.tex lines 1790-1830 (017R lemma-splitting-simplicial-sets and the paragraph after it on non-functoriality), parent lem-coef-bisimplicial-reedy-division-calculus step 3, the unit record, and Mathlib Degenerate.lean (lines 36, 114, 217/225/233). The delivery has no new nodes, and the statement is unchanged and correct. L_n is the Reedy latching category of Delta^op at [n], with arrows rho: sigma -> sigma' when sigma = rho sigma', and the diagram is covariant. Degeneracy uses the arbitrary-map definition (SSet.degenerate). Step 2 correctly reduces this to a proper-surjection normal form by factoring f into a surjection and an injection and using uniqueness. Step 3's descent uses the arrow tau = rho sigma -> sigma in the right direction. Steps 4 and 5 give the colimit on D_nT and identify the induced map with the canonical lambda_n. Step 6 proves naturality without assuming nondegenerate simplices are preserved. Cases tested: n=0 (both sides empty), n=1 (lambda_1 = s_0 is injective), T=Delta^0 and Delta^1 at n=2 (counts agree), and the collapse Delta^1 -> Delta^0. All cited nodes are definitions or Mathlib leaves, so there is no route or tool-use issue. Only Stacks and Mathlib are used, no SGA. Searches over the DAG (latching+degenerate, 017R) and Mathlib (no 'latching' anywhere) found no duplicate. Searches recorded cover LeanSearch, Loogle, LeanFinder and grep, and proof_deps equals the union of the step uses. No coefficient category or base-change morphism is involved. No fixes."
  }
 }

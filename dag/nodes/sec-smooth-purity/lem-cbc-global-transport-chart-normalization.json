@@ -23,53 +23,172 @@
   "lem-cbc-proetale-extension-zero",
   "def-cbc-exchange-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the constant-module categories and bounded-below derived categories of [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules]. The exact comparison $A_T$ induces a functor on these categories, and [thm-weil-pbc-site-comparison] supplies the natural isomorphism $\\eta_T:\\mathrm{id}\\cong B_TA_T$. Thus $C_{f,L}=A_YH_f(\\eta_{X,L})$ is a natural isomorphism: its inverse is $A_YH_f(\\eta_{X,L}^{-1})$. The same applies to $f'$. In particular the functors $F_f,F_{f'}$ and these comparisons are defined on the stated etale-origin objects. No compactification is chosen in this step.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-proetale-modules",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Transport paragraph: the fully faithful comparison"
+   }
+  },
+  {
+   "text": "The isomorphism $a_u$ is natural by [lem-weil-pbc-comparison-pullback]. Functors preserve inverses, so the displayed $S,T$ are natural isomorphisms; explicitly $S_L^{-1}=a_{g,H_fL}^{-1}\\circ p_g(C_{f,L}^{-1})$ and $T_L^{-1}=C_{f',l_{g'}L}^{-1}\\circ F_{f'}(a_{g',L}^{-1})$. This also shows $p_{g'}A_XL$ is of etale origin, since $a_{g',L}$ identifies it with $A_{X'}l_{g'}L$, so every evaluation of $F_{f'}$ is in its domain.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Transport paragraph: pullback endpoint comparisons"
+   }
+  },
+  {
+   "text": "The supplied exchange $E:l_gH_f\\to H_{f'}l_{g'}$ is natural by [lem-cbc-etale-local-compact-support-extension]. For a morphism $t:L\\to L_1$, its naturality is $H_{f'}l_{g'}(t)\\circ E_L=E_{L_1}\\circ l_gH_f(t)$. Apply $A_{Y'}$ and substitute the naturality equations for $S^{-1}$ and $T$. The resulting equation is $F_{f'}p_{g'}A_X(t)\\circ\\Phi_L=\\Phi_{L_1}\\circ p_gF_fA_X(t)$, proving the asserted natural transformation without inverting $E$.",
+   "uses": [
+    "lem-cbc-etale-local-compact-support-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Transport paragraph: functoriality of the transported map"
+   }
+  },
+  {
+   "text": "Now assume a chart $c=(j,p)$ as in the statement, on the global square or on any specified open restriction; its pullback $c'$ is a chart by [def-cbc-compact-support-square]. The proper maps $p,p'$ are quasi-compact and quasi-separated: proper means separated and finite type, finite type includes quasi-compactness, and a separated morphism is quasi-separated [lem-pc-separated-quasi-separated], with the conventions of [def-weil-pbc-scheme-conventions]. Thus [prop-weil-pbc-comparison-direct-image] applies to these maps. Use its normalized $b_p$ as specified in [lem-weil-pbc-transport-identifies-exchange]. The comparison $e_j$ of [lem-cbc-proetale-extension-zero-comparison] extends degreewise: the comparison inverse image is exact, and the two extensions by zero preserve quasi-isomorphisms by [lem-weil-pbc-extension-by-zero-exact, lem-cbc-proetale-extension-zero]. Consequently $C_{c,N}=Rp_*^p(e_{j,N})\\circ b_{p,j_!^eN}$ is a natural isomorphism, as is $C_{c',M}$. Their composites with $a_g,a_{g'}$ give natural isomorphisms $S^c,T^c$.",
+   "uses": [
+    "def-cbc-compact-support-square",
+    "def-weil-pbc-scheme-conventions",
+    "lem-pc-separated-quasi-separated",
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-weil-pbc-transport-identifies-exchange",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-cbc-proetale-extension-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Transport paragraph: direct-image and extension-by-zero comparisons"
+   }
+  },
+  {
+   "text": "Put $q=q^f_c$, $q'=q^{f'}_{c'}$, and $M=l_{g'}L$. These are natural isomorphisms by [lem-cbc-etale-local-compact-support-extension]. Naturality of $a_g$ in [lem-weil-pbc-comparison-pullback] gives\n$$S^c_L A_{Y'}(l_gq_L)=p_g(C_{c,L})p_g(A_Yq_L)a_{g,H_fL}=p_g(D_{c,L})S_L.$$\nThe extension interface's chart normalization says precisely\n$$q'_M E_L=E^c_L(l_gq_L),$$\nwhere $E^c$ is the compactification formula of [def-cbc-exchange-map]. Here $q'_M:H_{f'}M\\to H_{c'}^eM$ already lives over $Y'$; there is no further pullback of $q'_M$.",
+   "uses": [
+    "lem-cbc-etale-local-compact-support-extension",
+    "lem-weil-pbc-comparison-pullback",
+    "def-cbc-exchange-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Transport paragraph: global-to-chart identification"
+   }
+  },
+  {
+   "text": "Expand $J,T,D_{c',M}$ and cancel adjacent inverse comparisons. This gives\n$$J_LT_L=H_{c'}^p(a_{g',L})C_{c',M}A_{Y'}(q'_M)=T^c_L A_{Y'}(q'_M).$$\nUsing the preceding two equations, associativity, and functorial preservation of composition and inverses,\n$$\\begin{aligned}J_L\\Phi_Lp_g(D_{c,L})^{-1}\n&=T^c_L A_{Y'}(q'_M E_L)S_L^{-1}p_g(D_{c,L})^{-1}\\\\\n&=T^c_L A_{Y'}(E^c_L)A_{Y'}(l_gq_L)S_L^{-1}p_g(D_{c,L})^{-1}\\\\\n&=T^c_L A_{Y'}(E^c_L)(S^c_L)^{-1}=\\Phi^c_L.\n\\end{aligned}$$\nThis is an algebraic cancellation of isomorphisms already established; neither $E$ nor $\\Phi$ is cancelled.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Transport paragraph: explicit endpoint conjugation calculation"
+   }
+  },
+  {
+   "text": "For restriction write $i:V\\hookrightarrow Y$, $i':V'=g^{-1}V\\hookrightarrow Y'$, $i_X:X_V\\hookrightarrow X$, $N=l_{i_X}L$, and let $\\square_V$ denote the restricted square. Write $\\bar E=l_{i'}E_L$. Under canonical composite-pullback identifications, the restriction law in [lem-cbc-etale-local-compact-support-extension] states\n$$\\tau\\bar E=E^V_N\\sigma,\\qquad\\sigma=l_{g_V}(r^f_{V,L}),\\quad\\tau=r^{f'}_{V',l_{g'}L}.$$\nFor $A=A_{V'}$ define the two endpoint isomorphisms\n$$K_s=p_{i'}(S_L)a_{i',l_gH_fL},\\qquad K_t=p_{i'}(T_L)a_{i',H_{f'}l_{g'}L}.$$\nNaturality of $a_{i'}$ [lem-weil-pbc-comparison-pullback] and the definition of $\\Phi$ give $p_{i'}(\\Phi_L)=K_tA(\\bar E)K_s^{-1}$. The endpoint identifications to the restricted formulas are therefore\n$$U=S^V_N A(\\sigma)K_s^{-1},\\qquad W=T^V_N A(\\tau)K_t^{-1}.$$\nThey use exactly $r,a,C_f,C_{f'}$. Cancelling $K_s,K_t$ now gives\n$$W p_{i'}(\\Phi_L)U^{-1}=T^V_N A(\\tau\\bar E\\sigma^{-1})(S^V_N)^{-1}=\\Phi^V_N.$$\nApplying steps 4--6 to $\\square_V$ proves the chart normalization after inserting these endpoint identifications.",
+   "uses": [
+    "lem-cbc-etale-local-compact-support-extension",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Transport paragraph: explicit open-restriction endpoints"
+   }
+  },
+  {
+   "text": "For two successive open restrictions, substitute the formulas for $U$ and $W$ of step 7. In the composite endpoint, the intermediate $S^V$ (respectively $T^V$) and its inverse cancel. The remaining two $A(\\sigma)$ factors multiply to the single $A(\\sigma)$ for the composite restriction, and likewise for $A(\\tau)$, by the iterated-restriction law for $r$ in [lem-cbc-etale-local-compact-support-extension]. The remaining $a$ factors are those for the composite by [lem-weil-pbc-comparison-pullback]. Thus the endpoints for successive restrictions equal the endpoints for their composite. Identity restrictions give identities. On each restricted square, use its own specified chart comparisons $q,C_c,D,J$ in steps 4--6; step 7 inserts the coherent endpoints $U,W$ into that chart equation. This proves all asserted restriction coherence without requiring that an arbitrary open restriction itself be quasi-compact.",
+   "uses": [
+    "lem-cbc-etale-local-compact-support-extension",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Transport paragraph: iterated restriction and chart compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-compact-support-square",
+  "def-cbc-exchange-map",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-scheme-conventions",
+  "lem-cbc-etale-local-compact-support-extension",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "prop-weil-pbc-comparison-direct-image",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "The blueprint's transport paragraph, expanded by the formal global-to-chart diagram chase using the existing extension interface."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Transport a Zariski local etale compactly supported direct image to etale origin proetale complexes by the site comparison adjunction; the conjugated exchange agrees with its compactification chart formulas",
+   "query": "global compact support transport chart normalization natural transformation pro-etale etale comparison",
    "subdirectory": "",
-   "results": "8 hits; AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Scheme.Hom.normalizationOpenCover f).f U)\\n      (AlgebraicGeometry.Scheme.Hom.fromNo\", \"doc\": \"For an affine open subset $U$ of $Y$, the composition of the open cover morphism $f.\\\\text{normalizationOpenCover}.f(U)$ with the normalization morphism $f.\\\\text{fromNormalization}$ equals the composit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  let this := (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ↑U)).toAlgebra;\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the application of the normalization morphism $f$ to the preimage of $U$ under the normalization map is equal to a composition of maps involving the inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\\n    ((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n      (AlgebraicGeometry.Scheme.Hom.no\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}",
    "date": "2026-10-17",
-   "verdict": "no match: the hits concern sites, sheafification, or compact support of functions; none states this simultaneous derived compact-support transport and chart-normalization interface"
+   "verdict": "no match: Mathlib hits do not state the simultaneous derived compact-support transport and chart-normalization interface"
   },
   {
    "tool": "loogle",
-   "query": "\"compactSupport\"",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.Functor.mapIso, CategoryTheory.Iso.trans",
    "subdirectory": "",
-   "results": "12 hits; HasCompactSupport, HasCompactSupport.addSubmonoid, HasCompactSupport.of_compactSpace, HasCompactSupport.isCompact, HasCompactSupport.zero, hasCompactSupport_def, HasCompactSupport.isCompact_range, HasCompactSupport.is_zero_at_infty",
+   "results": "[loogle] OK 0 hit(s)",
    "date": "2026-10-17",
-   "verdict": "no match: the hits concern sites, sheafification, or compact support of functions; none states this simultaneous derived compact-support transport and chart-normalization interface"
+   "verdict": "no match: Mathlib hits do not state the simultaneous derived compact-support transport and chart-normalization interface"
   },
   {
    "tool": "grep",
-   "query": "compactSupport|lowerShriek|proetale",
+   "query": "compactSupport|proetale|extension.*zero",
    "subdirectory": "AlgebraicGeometry/Sites",
-   "results": "10 hits; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.AlgebraicGeometry.Sites.Proetale\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"39\", \"text\": \"- [Bhatt, Bhargav and Scholze, Peter, The pro-étale topology for schemes][proetale2015]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"61\", \"text\": \"[Definition 6.8.1.][proetale2015]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"65\", \"text\": \"  ((ProEt.forget X ⋙ Over.forget _).sheafPushforwardContinuous _ _ proetaleTopology).obj\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"66\", \"text\": \"    ⟨continuousMapPresheafAb (ℤ_[ℓ]), .of_le proetaleTopology_le_fpqcTopology <|\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"34\", \"text\": \"- [Bhatt, Bhargav and Scholze, Peter, The pro-étale topology for schemes][proetale2015]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"50\", \"text\": \"[Definition 4.1.1][proetale2015]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"52\", \"text\": \"def proetalePrecoverage : Precoverage Scheme.{u} :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"57\", \"text\": \"lemma proetalePrecoverage_le_precoverage_weaklyEtale :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"58\", \"text\": \"    proetalePrecoverage ≤ MorphismProperty.precoverage @WeaklyEtale :=\"}",
    "date": "2026-10-17",
-   "verdict": "no match: the hits concern sites, sheafification, or compact support of functions; none states this simultaneous derived compact-support transport and chart-normalization interface"
+   "verdict": "no match: Mathlib hits do not state the simultaneous derived compact-support transport and chart-normalization interface"
   },
   {
    "tool": "leansearch",
-   "query": "The proetale compact support exchange obtained by transport from the etale site agrees with its local compactification formulas",
+   "query": "natural transformation transported from etale compact support exchange to proetale agrees with compactification chart normalization",
    "subdirectory": "",
-   "results": "8 hits; CategoryTheory.Equivalence.transportSheafificationAdjunction, HasCompactSupport.comp_isClosedEmbedding, HasCompactSupport.comp_homeomorph, AlgebraicGeometry.Scheme.smallEtaleTopology, RingHom.Etale.propertyIsLocal, CategoryTheory.Equivalence.transportAndSheafify, AlgebraicGeometry.Scheme.etaleTopology, CompHausLike.LocallyConstant.counit_app_val",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpa\", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, there exists a morphism from $ X $ to the normalization of $ f $, constructed by gluing local integral closure maps over an\"}\n  {\"name\": \"SheafOfModules.pushforwardNatTrans\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"(α : F ⟶ G) : pushforward.{v} φ ⟶ pushforward.{v} (φ ≫ (Functor.sheafPushforwardContinuousNatTrans α _ _ _).app S)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural transformation $\\\\alpha: F \\\\Rightarrow G$, a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": f.normalization ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardContinuousNatTrans\", \"module\": \"Mathlib.CategoryTheory.Sites.Continuous\", \"type\": \"[IsContinuous.{t} F' J K] : sheafPushforwardContinuous F' A J K ⟶ sheafPushforwardContinuous F A J K\", \"doc\": \"Given continuous functors $ F, F' : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, and a natural transformation $ \\\\tau : F \\\\Rightarrow F' $, this natural tra\"}\n  {\"name\": \"CategoryTheory.NatTrans.onPresheaf\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace\", \"type\": \"{F G : C ⥤ D} (α : F ⟶ G) : G.mapPresheaf ⟶ F.mapPresheaf\", \"doc\": \"For functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, this defines a natural transformation between the induced functors on presheafed spaces. \"}\n  {\"name\": \"Condensed.lanPresheafNatIso\", \"module\": \"Mathlib.Condensed.Discrete.Colimit\", \"type\": \"(hF : ∀ S : Profinite, IsColimit <| F.mapCocone S.asLimitCone.op) : lanPresheaf F ≅ F\", \"doc\": \"Given a presheaf $ F : \\\\text{Profinite}^{\\\\text{op}} \\\\to \\\\text{Type} $ satisfying colimit conditions on discrete quotients, the canonical isomorphism between the left Kan extension of $ F $ and $ F $ i\"}",
    "date": "2026-10-17",
-   "verdict": "no match: the hits concern sites, sheafification, or compact support of functions; none states this simultaneous derived compact-support transport and chart-normalization interface"
+   "verdict": "no match: Mathlib hits do not state the simultaneous derived compact-support transport and chart-normalization interface"
   },
   {
    "tool": "leanfinder",
-   "query": "Global to local compatibility of a natural transformation transported across fully faithful site comparison functors with right adjoints, after replacing global functors by chartwise comparison isomorphisms",
+   "query": "Conjugation of a natural transformation by natural isomorphisms is compatible with changing the source and target functors by natural isomorphisms",
    "subdirectory": "",
-   "results": "8 hits; CategoryTheory.sheafComposeNatTrans, CategoryTheory.sheafComposeNatTrans_fac, CategoryTheory.sheafComposeNatTrans_app_uniq, CategoryTheory.Functor.IsCoverDense.Types.appHom_valid_glue, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map', CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom, CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq",
+   "results": "8 hits: CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_comp, CategoryTheory.conjugateEquiv_whiskerLeft, CategoryTheory.conjugateEquiv_symm_comp, CategoryTheory.conjugateEquiv_whiskerRight, CategoryTheory.conjugateEquiv_symm_comp_assoc, CategoryTheory.conjugateEquiv_comp_assoc",
    "date": "2026-10-17",
-   "verdict": "no match: the hits concern sites, sheafification, or compact support of functions; none states this simultaneous derived compact-support transport and chart-normalization interface"
+   "verdict": "no match: these results concern conjugate adjunction mates, not the specified site-comparison compactification and restriction endpoint formulas"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-cbc-finite-level-proetale",
@@ -86,5 +205,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-global-transport-chart-normalization",
+  "worker": "stage1",
+  "summary": "Expanded the transport paragraph into eight steps, using only existing nodes. Corrected the earlier sandbox proof typing error qprime_M (no l_gprime), removed an unjustified global compactification choice and an arbitrary-map direct-image comparison, and wrote the chart conjugation and restriction endpoints explicitly. No statement changes or new nodes.",
+  "blueprint": "The steps realize the proof paragraph from 'Transporting it to the pro-etale site' through 'the transported composite is the pro-etale map', with the hidden global-to-chart calculation made explicit using the existing extension interface.",
+  "tool_uses": [
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "step 1 takes the natural isomorphism id -> R nu_* nu^* on D^+ from its statement; the unit sk-prop-sf-cbc has no site-comparison node, and the parent blueprint proof names it (accepted tool use of thm-cbc-finite-level-proetale)"
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "steps 2,5,7,8 take naturality and composite-coherence of a_u:nu^*u^{-1} ~ u^{-1}nu^*; no node of the unit gives it (accepted tool use of the parent)"
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "step 4 takes the direct-image comparison b_p for the proper p, p'; named by the parent blueprint proof, no node of the unit gives it (accepted tool use of the parent)"
+   },
+   {
+    "node": "lem-weil-pbc-transport-identifies-exchange",
+    "why": "step 4 takes from it only the normalization of b_p (canonical counit mate); named by the parent blueprint proof (accepted tool use of the parent)"
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "step 4 takes exactness of etale j_! so that e_j descends degreewise to D^+; generic tool, also used by def-cbc-exchange-map (accepted tool use of the parent)"
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-weil-pbc-extension-by-zero-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-820d84b26",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-820d84b26 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 8 steps, the source paragraph of main-20261015 thm-cbc-finite-level-proetale.proof.md ('Transporting it to the pro-etale site' through 'the transported composite is the pro-etale map'), the unit sk-prop-sf-cbc, every cited node's statement, and parent steps 1 and 7-10. The delivery has no new nodes. Every map in the statement is well typed: C_f, S, T, Phi, C_c, D_c, J, Phi^c. Coefficients are the constant-module categories with finite commutative Lambda throughout, the same as the parent and the transport node. Step 1: eta is an isomorphism on all of D^+, so C_f is an isomorphism. Step 2: S and T are isomorphisms, and F_{f'} is only applied to objects of etale origin. Step 3: naturality of Phi is checked without inverting E. Step 4: p and p' are proper, hence qcqs, so comparison-direct-image applies; b_p is the counit mate; e_j descends to D^+ because nu^* and both j_! are exact; c' is quasi-compact as a base change of quasi-compact j. Step 5: q'_M E_L = E^c_L l_g(q_L) is exactly the extension node's chart clause, and I recomputed S^c A(l_g q) = p_g(D_c) S. Step 6: I recomputed J T = T^c A(q'_M) and the cancellation to Phi^c. Step 7: I checked p_{i'}(Phi) = K_t A(Ebar) K_s^{-1} and W p_{i'}(Phi) U^{-1} = Phi^V from the restriction law tau Ebar = E^V sigma. Step 8: I wrote out the composite endpoints; they agree with the composite restriction by the r-iteration law and the a-coherence. Small cases checked: L=0, g=id, V empty, proper f with j=id, E not invertible. rg over dag/nodes found no duplicate. Fix file: (1) step 4 now cites the Mathlib leaf lem-pc-separated-quasi-separated for separated implies quasi-separated, and proof_deps was recomputed; (2) split_report.tool_uses now declares the five off-unit tools thm-weil-pbc-site-comparison, lem-weil-pbc-comparison-pullback, prop-weil-pbc-comparison-direct-image, lem-weil-pbc-transport-identifies-exchange and lem-weil-pbc-extension-by-zero-exact. All five are already accepted tool_uses of the parent and are named by its blueprint proof; I accept them. Statement unchanged; no target weakened; no SGA source.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -12,9 +12,126 @@
   "lem-coef-marked-point-cartesian-model",
   "lem-coef-marked-cone-generator-calculations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First construct the asserted marked Kan extension for any marked enriched diagram $G:I\\to\\mathrm{sSet}^+$. Form the degreewise coequalizer $P(j)=\\int^i J(v(i),j)^\\sharp\\times G(i)$, with relation $[g\\circ v(f),z]=[g,G(f)z]$, using the coend definition and the marked product convention. Colimit markings are the images of marked edges of the summands. Postcomposition on $g$ defines the enriched $J$-action; it preserves markings because the mapping factor is sharp. Given an enriched marked map $b:P\\to F$, put $c_i(z)=b_{v(i)}[1_{v(i)},z]$. Conversely, from $c:G\\to v^*F$ put $b_j[g,z]=F(g)c_i(z)$. Enriched naturality makes this respect the relation, and the unit and action equations show the two formulas are inverse. Both preserve markings: the first inserts a degenerate identity edge, and the second applies the marked enriched action of $F$. This proves $v_!\\dashv v^*$ and the displayed coend formula, without a Dwyer--Kan hypothesis.",
+   "uses": [
+    "def-coef-enriched-coend",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Appendix A.3.3, restriction and enriched left adjoint; direct coequalizer and inverse formulas for the ordinary marked adjunction."
+   }
+  },
+  {
+   "text": "Forget markings in Step 1. The underlying coequalizer is the ordinary simplicial coend and its same two inverse formulas give the unmarked Kan adjunction. Apply the canonical isomorphism of [lem-coef-unmarked-straightening-target-change] with $D=I$, $D'=J$, $\\phi=u$, $\\pi=v$. It gives the underlying isomorphism $v_!L_uX\\to L_{v^{\\mathrm{op}}u}X$ induced by the cone pushout. It also preserves and reflects markings. Indeed, a marked coend representative has the form $[g,h^*\\widetilde e]$, with $e$ marked in $X$, or with the second entry degenerate; its image is the translate of $\\widetilde e$ by the composite of $v(h)$ and $g$, hence marked. In the degenerate case use the marked enriched action on a degenerate edge. Conversely, each generator $k^*\\widetilde e$ in the target is the image of $[k,\\widetilde e]$, taking $i=u(x)$ when $e$ starts at $x$. Degenerate target edges are also images of degenerate edges under the underlying isomorphism. Thus this is an isomorphism of marked enriched diagrams, natural in $X$.",
+   "uses": [
+    "lem-coef-unmarked-straightening-target-change",
+    "lem-coef-marked-cone-generator-calculations",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.2.1.2, Remark 3.2.1.3 and Proposition 3.2.1.4(3); underlying pushout comparison from the existing unmarked target-change lemma, markings checked on their generators."
+   }
+  },
+  {
+   "text": "For a marked enriched $I$-diagram $F$, start with the unmarked $U_u$ of [lem-coef-unmarked-straightening-quillen] applied to the underlying diagram. For a flat input all marked cone generators come from degenerate input edges. Their cone edges are degenerate (by the collapse $\\Delta^1\\to\\Delta^0$), and their translates have marked image under every enriched map into $F$, because its action uses sharp mapping sets. Consequently every enriched map $L_u((\\Delta^n)^\\flat_\\sigma)\\to F$ is marked. The underlying $U_u$ therefore has exactly the asserted set of $n$-simplices, with the asserted restriction operators. Mark an edge when its associated map preserves the extra markings of $L_u((\\Delta^1)^\\sharp_\\sigma)$, equivalently when it extends along the flat-to-sharp map (which changes only markings). Degenerate edges satisfy this condition by factoring through $L_u((\\Delta^0)^\\flat)$ via the collapse of the sharp edge. Postcomposition with an enriched marked map of diagrams preserves this condition, so this defines a functor to marked simplicial sets over $S$.",
+   "uses": [
+    "lem-coef-unmarked-straightening-quillen",
+    "lem-coef-marked-cone-generator-calculations",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.2.1.5, explicit construction left to the reader; ordinary simplexwise right adjoint from Section 2.2.1 and marked extension criterion from Definition 3.2.1.2."
+   }
+  },
+  {
+   "text": "Under the underlying adjunction of Step 3, $h:L_uX\\to F$ corresponds to the map sending a simplex $x:\\Delta^n\\to X$ to $h\\circ L_u(x)$. For a marked edge $e$ of $X$, its image in $U_uF$ is marked precisely when $h\\circ L_u(e)$ preserves the sharp-edge cone marking. By the cone-generator description this is precisely that $h$ sends $\\widetilde e$ and all its translates to marked edges. Requiring this for every marked $e$ is precisely that $h$ is a marked map. Thus the unmarked bijection restricts to the desired marked adjunction, naturally in $X,F$. It implies preservation of small colimits: maps from $L_u(\\operatorname{colim}X_a)$ to $F$ are compatible families of maps from $X_a$ to $U_uF$, hence compatible families of maps from $L_uX_a$ to $F$. Small colimits exist degreewise in marked sets over $S$ and objectwise in marked diagrams, with markings generated by summand markings; the enriched action descends by its compatibility with the colimit maps.",
+   "uses": [
+    "lem-coef-unmarked-straightening-quillen",
+    "lem-coef-marked-cone-generator-calculations",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.2.1.2, Proposition 3.2.1.4(1), Corollary 3.2.1.5; restriction of the ordinary adjunction to marking-preserving maps, and the maps-out proof of colimit preservation."
+   }
+  },
+  {
+   "text": "For $a:A\\to B$, the construction $L_B(a_!X)$ and the construction with $S=A$, $I=\\mathfrak C[B]^{\\mathrm{op}}$, $u=\\mathfrak C[a]$ have literally the same pushout: their attaching map is $\\mathfrak C[X]\\to\\mathfrak C[A]\\to\\mathfrak C[B]$. Their marked cone generators also agree, since the marked edges of $X$ have not changed. Apply Step 2 with $u=\\mathrm{id}_{\\mathfrak C[A]}$ and $v=\\mathfrak C[a]^{\\mathrm{op}}$ to identify this construction with $(\\mathfrak C[a]^{\\mathrm{op}})_!L_AX$. This gives the claimed base-substitution isomorphism on marked objects and on their maps.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-cone-generator-calculations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.4(2)-(3); equality of the attaching maps followed by the already proved marked target-substitution comparison."
+   }
+  },
+  {
+   "text": "Apply the adjunctions of Steps 1 and 4 to the marked isomorphism of Step 2. For every $X$ the natural bijections are $\\operatorname{Hom}(X,U_{v^{\\mathrm{op}}u}F)=\\operatorname{Hom}(L_{v^{\\mathrm{op}}u}X,F)\\cong\\operatorname{Hom}(v_!L_uX,F)\\cong\\operatorname{Hom}(X,U_uv^*F)$. Evaluating on flat simplices gives the right-adjoint comparison and evaluating on sharp edges shows that it preserves and reflects markings. Coherence can be checked before adjunction. For a second substitution $w:J\\to K$, the composite coend comparison sends $[k,[g,z]]$ to $[k\\circ w(g),z]$; its inverse sends $[h,z]$ to $[h,[1,z]]$. The action relations give both inverse identities, and these formulas preserve markings. For an identity substitution the formula is $[g,z]\\mapsto G(g)z$. Both successive cone-pushout comparisons send an original cone generator to the same generator and old morphisms by the same composite functor; their equality follows from the pushout universal property. All formulas commute with maps of $X$. Their adjoints consequently have the same identity, composition, and naturality compatibilities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.4(2)-(3); explicit coend associator, unit, and uniqueness on cone-pushout factors."
+   }
+  },
+  {
+   "text": "Fix a vertex $s$ and put $I=\\mathfrak C[S]^{\\mathrm{op}}$. Let $i_!K$ be the marked set $K$ over the constant vertex $s$, and let $j:*\\to I$ select $s$. Steps 2 and 5 give $L_Si_!K\\cong j_!TK$, with $T$ the terminal-index cone functor of the generator node. Step 1 gives $(j_!H)(t)=I(s,t)^\\sharp\\times H$. A marked enriched map $j_!H\\to F$ is determined by $q:H\\to F(s)$: its components are $(g,z)\\mapsto F(g)q(z)$, with inverse evaluation on $1_s$. Hence the adjunction of Step 4 identifies maps $K\\to(U_SF)_s$ with maps $TK\\to F(s)$, and then with maps $K\\to U_0F(s)$. Here maps $i_!K\\to U_SF$ are exactly maps to the marked fiber, by the definition of pullback markings. On flat simplices these mutually inverse formulas give a simplicial isomorphism, and on sharp edges they identify the markings. This proves the claimed natural marked fiber isomorphism for every $F$, even when $s$ has nontrivial endomorphisms in $I$.",
+   "uses": [
+    "lem-coef-marked-cone-generator-calculations",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Lemma 3.2.3.2, printed pp.188-189, the adjunction identifications before using any fibrancy or equivalence argument."
+   }
+  },
+  {
+   "text": "Let $h:L_SX\\to F$ have adjoint $f:X\\to U_SF$. Apply the correspondence of Step 7 to the restriction $X_s\\to(U_SF)_s$. Naturality of the adjunction says its adjoint is $j_!T(X_s)\\cong L_S(i_!X_s)\\to L_SX\\xrightarrow h F$. Evaluation at $1_s$ in the explicit inverse formula of Step 7 makes this exactly $T(X_s)\\to L_SX(s)\\xrightarrow{h_s}F(s)$. The first arrow uses the fiber inclusion and the identity of $s$; it preserves markings by functoriality of the cone generator construction. Thus this is an equality of the specified adjoint maps, including their marking condition, and is natural in both $X$ and $F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation before Lemma 3.2.3.3, printed p.189, and the adjunction identification in the proof of Lemma 3.2.3.2."
+   }
+  },
+  {
+   "text": "For $a:\\Delta^{n-1}\\hookrightarrow\\Delta^n$ omitting the last vertex, let $I=\\mathfrak C[\\Delta^{n-1}]^{\\mathrm{op}}$, $J=\\mathfrak C[\\Delta^n]^{\\mathrm{op}}$, and $v=\\mathfrak C[a]^{\\mathrm{op}}$. The subset-poset formula for coherent simplices identifies $I$ with the full simplicial subcategory of $J$ on $0,\\ldots,n-1$. For $i<n$, Step 1's coend is $\\int^k I(k,i)^\\sharp\\times G(k)$. Its map to $G(i)$ is $[g,z]\\mapsto G(g)z$, with inverse $z\\mapsto[1_i,z]$. The action relation gives both inverse identities, and the marked action and degenerate identity show they are marked maps. For $i=n$, every mapping set $J(v(k),n)=\\mathfrak C[\\Delta^n](n,k)$ is empty since $k<n$; every coend summand is therefore empty. This proves the stated values, naturally in $G$. The argument includes $n=1$ and needs no local Kan or model-structure hypothesis.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.4(3), applied to the initial-face inclusion; direct subset-poset and coend calculation of its values."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-enriched-coend",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-marked-cone-generator-calculations",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-unmarked-straightening-quillen",
+  "lem-coef-unmarked-straightening-target-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit marking and coequalizer arguments expanding HTT Definition 3.2.1.2, Proposition 3.2.1.4, Corollary 3.2.1.5 and the adjunction calculation before Lemma 3.2.3.3; online source read, archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +174,38 @@
    "results": "{\"t\": \"2026-10-17T08:32:42Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsLeftKanExtension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isLeftKanExtensionId\", \"CategoryTheory.Functor.instIsLeftKanExtensionLeftKanExtensionLeftKanExtensionUnit\", \"CategoryTheory.Functor.IsLeftKanExtension\", \"CategoryTheory.Functor.HasLeftKanExtension.mk\", \"CategoryTheory.Functor.coconeOfIsLeftKanExtension\", \"CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence\", \"CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence'\", \"CategoryTheory.Functor.colimitIsoOfIsLeftKanExtension\"], \"digest\": \"5d5828425caf3a04\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned ordinary Kan extensions, ordinary adjunctions on cone categories and StrictSegal coskeleta; none constructs the marked coherent cone or its marked simplexwise right adjoint. Source grep has no cone-straightening implementation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Marked simplicial cone adjunction compatible with change of base, enriched Kan extension and vertex fibers",
+   "results": "{\"t\": \"2026-10-17T10:17:50Z\", \"tool\": \"leansearch\", \"query\": \"Marked simplicial cone adjunction compatible with change of base, enriched Kan extension and vertex fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"sSetTopAdj\", \"CategoryTheory.Adjunction.conesIso\", \"CategoryTheory.Functor.isLimitConeOfIsRightKanExtension\", \"CategoryTheory.Adjunction.conesIsoComponentHom\", \"CategoryTheory.Adjunction.functorialityAdjunction'\", \"CategoryTheory.Functor.RightExtension.coneAtWhiskerRightIso\", \"CategoryTheory.Limits.coneOfAdj\", \"CategoryTheory.Functor.coneOfIsRightKanExtension\"], \"digest\": \"c7cd8954b402645b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic enriched functors, ordinary nerve/realization or cone adjunctions and coskeleta do not state the marked coherent cone adjunction and substitution theorem; whole-Mathlib grep found no marked cone or straightening implementation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EnrichedFunctor",
+   "results": "{\"t\": \"2026-10-17T10:17:50Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.EnrichedFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.EnrichedFunctor\", \"CategoryTheory.EnrichedFunctor.id\", \"CategoryTheory.EnrichedFunctor.instInhabited\", \"CategoryTheory.EnrichedFunctor.category\", \"CategoryTheory.EnrichedFunctor.obj\", \"CategoryTheory.EnrichedNatTrans\", \"CategoryTheory.GradedNatTrans\", \"CategoryTheory.enrichedNatTransYoneda\"], \"digest\": \"a0646d2f18e7eff5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic enriched functors, ordinary nerve/realization or cone adjunctions and coskeleta do not state the marked coherent cone adjunction and substitution theorem; whole-Mathlib grep found no marked cone or straightening implementation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction between marked simplicial sets over a base and enriched diagrams, defined by the homotopy coherent realization of a cone",
+   "results": "{\"t\": \"2026-10-17T10:17:52Z\", \"tool\": \"leanfinder\", \"query\": \"Adjunction between marked simplicial sets over a base and enriched diagrams, defined by the homotopy coherent realization of a cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveAdjunction\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.Truncated.nerve₂Adj\", \"sSetTopAdj\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.SimplicialObject.cechNerveAdjunction\", \"SSet.coskAdj\", \"CategoryTheory.CosimplicialObject.cechConerveAdjunction\"], \"digest\": \"1aab3339e6593f2e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic enriched functors, ordinary nerve/realization or cone adjunctions and coskeleta do not state the marked coherent cone adjunction and substitution theorem; whole-Mathlib grep found no marked cone or straightening implementation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked coherent cone straightening has a simplexwise right adjoint and commutes with enriched left Kan extension of marked simplicial diagrams",
+   "results": "{\"t\": \"2026-10-17T10:17:53Z\", \"tool\": \"leanfinder\", \"query\": \"Marked coherent cone straightening has a simplexwise right adjoint and commutes with enriched left Kan extension of marked simplicial diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"CategoryTheory.Adjunction.functorialityLeftAdjoint\", \"CategoryTheory.nerveAdjunction\"], \"digest\": \"c6c27e9d79eac56f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic enriched functors, ordinary nerve/realization or cone adjunctions and coskeleta do not state the marked coherent cone adjunction and substitution theorem; whole-Mathlib grep found no marked cone or straightening implementation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-cone-fiber-comparison",
@@ -72,7 +217,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed finite-coefficient derived mapping-complex adjunction preceding the derived inverse limit; relative marked simplicial foundations below lem-coef-algebroid-external-product: Cartesian base-equivalence invariance and extension. Technical input: the canonical fiber-to-cone comparison for a naturally marked Cartesian fibration, before deriving base extension. Extracted prerequisite: returned proof Step 12, Marked cone adjunction and substitution before deriving straightening.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed finite-coefficient derived mapping-complex adjunction before the derived inverse limit: technical marked cone adjunction, index substitution and vertex-fiber adjoint compatibility required by the existing marked Cartesian cone ancestry.",
    "via": [
     "lem-coef-cartesian-cone-fiber-comparison",
     "lem-coef-cartesian-base-equivalence-invariance",
@@ -89,5 +234,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-marked-cone-adjunction-substitution",
+  "worker": "stage1",
+  "summary": "Expanded the saved split into nine complete steps. Reused the existing general unmarked adjunction and target-substitution statements, constructed the marked Kan coend by inverse maps-out formulas, checked all marking generators, and derived base substitution, right-adjoint coherence, vertex fibers, the specified fiber adjoint map and initial-face values. Corrected five stale/nonverbatim citation quotations and removed the inadequate use of the single-vertex coend lemma for arbitrary Kan extension. No new nodes and no statement change.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph 2, the finite-coefficient derived mapping-complex adjunction before the inverse limit: technical marked cone adjunction and substitution foundation along the existing ancestry. No unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-7b42afd97",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-7b42afd97 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement is unchanged and all 9 steps were rewritten. The delivery adds no new nodes. I read the full statements of all six cited nodes (def-coef-enriched-coend, coherent-nerve-comparison, marked-point-cartesian-model, marked-cone-generator-calculations, unmarked-straightening-quillen, unmarked-straightening-target-change), the parent cartesian-cone-fiber-comparison, and the main-20261015 prop-coef-integral-exceptional-adjoint, proof paragraph 2. Variance checks out: L_u is covariant on I, the cone edge is x~ -> u(e)^*y~, the coend is v_!G(j) = coend over i of J(vi,j)^sharp x G(i), and L_B a_! = (C[a]^op)_! L_A. Step 1: the coend inverse formulas and the markings check out, and every degenerate edge of the quotient is the image of a marked edge. Step 2: the target-change node applies with D=I, D'=J, phi=u, pi=v. Markings are preserved and reflected on generators, including g acting on a degenerate edge, since every vertex is k^*x~ and the cone edge of s0x is degenerate. Step 3: flat inputs have only degenerate-generated markings. The degenerate-edge check through (Delta^1)^sharp -> (Delta^0)^flat holds. Step 4: preserving markings under the adjunction is equivalent to h being a marked map, and colimit preservation follows by maps-out. Step 5: the two pushouts and their generators are literally equal. Step 6: the coend coherence formulas hold. Step 7: j_! is left adjoint to j^* without full faithfulness. Step 8: evaluation at 1_s gives the stated map. Step 9: C[Delta^{n-1}] is full in C[Delta^n], and the mapping sets C[Delta^n](n,k) are empty for k<n. I tested the n=1 case. The proof_deps equal the union of the step uses. All dependencies are in the item's own unit, so no tool_uses are needed. There is no cycle (the closure has 478 nodes). There is no duplicate: marked-cone-straightening-quillen proves only the locally-Kan adjunction clause. HTT is not in literature/, so the worker recorded it as WANTED with proof_origin.by=agent, which is correct. No fixes were made."
  }
 }

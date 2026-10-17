@@ -20,9 +20,114 @@
   "def-weil-pbc-extension-by-zero",
   "def-weil-extension-by-zero"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work throughout with the fixed constant finite ring $A$. The inverse images $u_{\\mathrm{et}}^{-1}$ and $\\nu_T^*$ are exact on abelian sheaves: use [prop-weil-pbc-inverse-image-exact] for the former and [lem-weil-pbc-site-pullback-abelian-exact] for the latter, since [def-weil-pbc-site-comparison-morphism] makes $\\nu_T$ a geometric morphism. These inverse images act on fixed-$A$ module sheaves by transporting the scalar endomorphisms. Their exactness on modules follows from the sectionwise kernel and sheafified cokernel description of [def-weil-sheaf-of-modules-category]: the underlying abelian sheaves of these kernels and cokernels are the corresponding abelian kernels and cokernels, with the induced $A$-action. Thus preserving those underlying kernels and cokernels preserves the module ones. For $u$ on the pro-etale site, [def-weil-pbc-proetale-operations] gives the exact module inverse image $u^*$; the specified identification $u^{-1}A_X\\cong A_U$ makes its scalar extension transport along a ring isomorphism. In particular it is the fixed-$A$ inverse image $u_{\\mathrm{proet}}^{-1}$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04JC (lemma-flat-pullback-exact, first assertion) and 03DA (lemma-abelian); fixed-coefficient inverse images"
+   }
+  },
+  {
+   "text": "For each of the given open immersions $e=i,j$, [lem-weil-pbc-extension-by-zero-exact] makes $e_!^{\\mathrm{et}}$ exact on $A$-module sheaves, and [lem-weil-extension-by-zero-exact] makes $e_!^{\\mathrm{proet}}$ exact on the constant-$A$ pro-etale module sheaves. The coefficient hypothesis of the latter is satisfied because $A=A_{E,n}$ is a finite commutative ring. These are the two extension functors used in the statement.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DJ (lemma-extension-by-zero-exact), for the two small sites"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to the exact functors in steps 1 and 2. Their termwise functors carry quasi-isomorphisms to quasi-isomorphisms and induce functors on the derived categories, with the stated natural identifications on representing complexes. By [def-weil-pbc-proetale-operations], the induced functor for $u^*$ is precisely the $Lu^*$ in the statement. Apply [lem-weil-pbc-exact-functor-bounded-below] to every one of these exact functors: $\\mathcal H^r(F_D B)\\cong F(\\mathcal H^rB)$. Hence, whenever $\\mathcal H^r(B)=0$ for $r<N$, the same is true after any of these operations and their composites. They therefore restrict to the indicated $D^+$ categories. This uses cohomological boundedness, so an arbitrary representative of $B$ need not itself vanish in low degrees.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); termwise localization and its cohomology comparison"
+   }
+  },
+  {
+   "text": "Let $C$ be a complex of etale $A$-module sheaves on $X$. Apply the natural sheaf isomorphism $c_u$ of [lem-weil-pbc-comparison-pullback] in every degree. Each component $c_{u,C^r}$ is $A$-linear: both composites act on fixed-$A$ module sheaves by applying the functors to each scalar endomorphism $\\lambda_a$ ($a\\in A$) as in step 1, and naturality of $c_u$ for the sheaf maps $\\lambda_a$ says exactly that $c_{u,C^r}$ commutes with them. Its naturality for $d_C^r$ says $u_{\\mathrm{proet}}^{-1}\\nu_X^*(d_C^r)\\,c_{u,C^r}=c_{u,C^{r+1}}\\,\\nu_U^*u_{\\mathrm{et}}^{-1}(d_C^r)$, so these components define a chain map. The inverse sheaf comparisons form its chain inverse. Naturality for each component of a chain map gives naturality on complexes. After localization these are isomorphisms between the two composites of step 3. Part (2) of [lem-weil-pbc-localization-universal-property] lifts this natural isomorphism uniquely through the localization of the source complexes, using the factorization isomorphisms of step 3. This is $\\kappa_u$, with the pro-etale inverse image identified with $Lu^*$ as above. The lift evaluated on $QC$ is exactly the localized termwise comparison under those factorization isomorphisms. The uniqueness assertion and part (3) of the same lemma show that the construction is independent of the representing complex.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-graph-operator.proof.md",
+    "place": "Proof *(3)*, first sentence; explicit derived refinement using the existing sheaf comparison and localization universal property"
+   }
+  },
+  {
+   "text": "Fix $e:S\\hookrightarrow T$ equal to $i$ or $j$. Let $C$ be a complex of etale $A$-module sheaves on $S$. Apply [lem-cbc-proetale-extension-zero-comparison] in each degree, obtaining $a_C^r:\\nu_T^*e_!^{\\mathrm{et}}C^r\\xrightarrow{\\sim}e_!^{\\mathrm{proet}}\\nu_S^*C^r$. Naturality of that sheaf comparison gives $(e_!^{\\mathrm{proet}}\\nu_S^*d_C^r)a_C^r=a_C^{r+1}(\\nu_T^*e_!^{\\mathrm{et}}d_C^r)$. Thus $a_C$ and its componentwise inverse are inverse chain maps, natural in chain maps. The two composites invert quasi-isomorphisms by steps 1--3. Part (2) of [lem-weil-pbc-localization-universal-property] therefore gives a natural isomorphism $\\delta_e$ on the derived categories whose component on $QC$ is the image of $a_C$ under localization, with the factorization identifications. Uniqueness and part (3) of that lemma show independence from the representative. Restrict to $D^+$ by step 3. This constructs both displayed $\\delta$ maps with precisely their prescribed normalization.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-graph-operator.proof.md",
+    "place": "Proof *(3)*, first sentence, open-extension refinement; degreewise comparison and its unique descent"
+   }
+  },
+  {
+   "text": "Put $L_u=u_{\\mathrm{et}}^{-1}L$ and $M=Lu^*K$. Step 4 gives $\\kappa_{u,L}:\\nu_U^*L_u\\xrightarrow{\\sim}Lu^*\\nu_X^*L$. Applying the functor $Lu^*$ to the given isomorphism $\\alpha$ gives an isomorphism $Lu^*\\alpha:Lu^*\\nu_X^*L\\xrightarrow{\\sim}M$, whose inverse is $Lu^*(\\alpha^{-1})$. Their composite is $\\alpha_u=(Lu^*\\alpha)\\circ\\kappa_{u,L}$, with inverse $\\kappa_{u,L}^{-1}\\circ Lu^*(\\alpha^{-1})$. This has source $\\nu_U^*L_u$ and target $M$, so $(L_u,\\alpha_u)$ is the witness of [def-weil-pbc-etale-origin-witness]. Both objects are bounded below by step 3.",
+   "uses": [
+    "def-weil-pbc-etale-origin-witness"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-graph-operator.proof.md",
+    "place": "Proof *(3)*, sentence M=LΦ^{m*}K again carries an explicit etale-origin witness"
+   }
+  },
+  {
+   "text": "For any witness $(B,\\beta:\\nu_S^*B\\xrightarrow{\\sim}N)$ just considered, step 5 gives $\\delta_{e,B}:\\nu_T^*e_!^{\\mathrm{et}}B\\xrightarrow{\\sim}e_!^{\\mathrm{proet}}\\nu_S^*B$. Composing with $e_!^{\\mathrm{proet}}\\beta$ gives an isomorphism to $e_!^{\\mathrm{proet}}N$; its inverse is $\\delta_{e,B}^{-1}\\circ e_!^{\\mathrm{proet}}(\\beta^{-1})$. This is exactly the data required by [def-weil-pbc-etale-origin-witness]. Substituting $(e,B,N,\\beta)=(j,L,K,\\alpha)$ gives the second displayed pair. Substituting $(e,B,N,\\beta)=(i,L_u,M,\\alpha_u)$ gives the third. Choose an integer $N_0$ below the cohomology of both original objects $L,K$ (take the smaller of their two lower bounds). Step 3 shows that $L_u,M,j_!^{\\mathrm{et}}L,j_!K,i_!^{\\mathrm{et}}L_u,i_!M$ and all comparison sources belong to $D^{\\ge N_0}$. Thus all three pairs are bounded below witnesses, with the exact formulas asserted.",
+   "uses": [
+    "def-weil-pbc-etale-origin-witness"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-graph-operator.proof.md",
+    "place": "Proof *(3)*, explicit witness transport for the two open extensions used by compactification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "def-weil-pbc-etale-origin-witness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-graph-operator.proof.md",
+  "place": "Proof *(3)*, first sentence: expanded sheaf-comparison localization and bounded-below witness transport; exactness from Stacks 04JC, 03DJ, 015F and existing nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,10 +170,45 @@
    "results": "{\"t\": \"2026-10-17T08:39:28Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans\", \"CategoryTheory.NatTrans.id\", \"CategoryTheory.NatTrans.instInhabited\", \"CategoryTheory.NatTrans.vcomp\", \"CategoryTheory.NatTrans.app\", \"CategoryTheory.NatTrans.ext\", \"CategoryTheory.NatTrans.ext_iff\", \"CategoryTheory.congr_app\"], \"digest\": \"012688791a841a27\"}",
    "date": "2026-10-17",
    "verdict": "no match: the hits concern standard-etale algebras, complex-shape extension, generic natural transformations, or sheaf pullback composition; none states derived etale-origin witness transport through both operations"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleOrigin|etale_origin|proetale.*extension|extension.*proetale",
+   "results": "{\"t\": \"2026-10-17T10:12:31Z\", \"tool\": \"grep\", \"query\": \"etaleOrigin|etale_origin|proetale.*extension|extension.*proetale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no Mathlib etale-origin/pro-etale extension statement found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphisms comparing etale and pro etale inverse image and extension by zero induce natural isomorphisms on derived categories",
+   "results": "{\"t\": \"2026-10-17T10:12:32Z\", \"tool\": \"leansearch\", \"query\": \"Natural isomorphisms comparing etale and pro etale inverse image and extension by zero induce natural isomorphisms on derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftDerivedNatIso\", \"SheafOfModules.pushforwardNatIso\", \"CategoryTheory.Functor.rightDerivedNatIso\", \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"Condensed.lanPresheafNatIso\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pushforwardCongr\"], \"digest\": \"032cc2a8d9b8fafd\"}",
+   "date": "2026-10-17",
+   "verdict": "general derived natural-isomorphism and sheaf pullback tools only; no theorem supplies both site comparisons and the explicit witnesses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "{\"t\": \"2026-10-17T10:12:32Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization.liftNatIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.liftNatIso\", \"CategoryTheory.Localization.liftNatIso_hom\", \"CategoryTheory.Localization.liftNatIso_inv\"], \"digest\": \"be9e318bf29986e7\"}",
+   "date": "2026-10-17",
+   "verdict": "general tool only: Localization.liftNatIso supplies descent, already carried by lem-weil-pbc-localization-universal-property; it does not state the site comparisons or witness formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded below complexes of constant finite ring sheaves from the etale site retain an explicit etale origin witness after pullback and open extension by zero",
+   "results": "{\"t\": \"2026-10-17T10:12:40Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded below complexes of constant finite ring sheaves from the etale site retain an explicit etale origin witness after pullback and open extension by zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.Scheme.etalePretopology\"], \"digest\": \"45a55eb21e42ffb6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are scheme etale-site definitions or generic sheaf pullback comparisons; none states the full witness transport"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a specified inverse image isomorphism nu pullback L isomorphic to K through derived pullback and extension by zero",
+   "results": "{\"t\": \"2026-10-17T10:12:41Z\", \"tool\": \"leanfinder\", \"query\": \"Transport a specified inverse image isomorphism nu pullback L isomorphic to K through derived pullback and extension by zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullbackIso\", \"TopCat.Sheaf.pullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\"], \"digest\": \"f40551c456f5c250\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are scheme etale-site definitions or generic sheaf pullback comparisons; none states the full witness transport"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-compactification-graph-operator",
@@ -80,10 +220,64 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-compactification-graph-operator",
-   "place": "Proof *(3)*, sentence introducing M=LΦ^{m*}K with an explicit etale-origin witness; expanded derived witness transport for K, j_!K and j_!M.",
+   "place": "Proof *(3)*, first sentence introducing M=LΦ^{m*}K with an explicit etale-origin witness, together with its open extensions in the compactification comparison.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-witnessed-open-pullback",
+  "worker": "stage1",
+  "summary": "Kept the complete statement and all three explicit witness formulas. Derived both sheaf comparisons by their degreewise chain maps and unique localization lifts, justified constant-coefficient exactness and common cohomological lower bounds, and wrote the witness composites and their inverses. Reused existing DAG nodes throughout; no new nodes.",
+  "blueprint": "Realizes the first sentence of proof *(3)* of lem-trf-compactification-graph-operator, retaining its comparison-pullback route, and expands the open-extension witness refinements needed for j_!K and i_!M. The unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Exactness of etale inverse image is the generic sheaf-theoretic input to deriving the unit's pullback; the trace-formula unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Exactness of a site inverse image is used for the comparison geometric morphism, a generic tool not proved by the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exactness of etale open extension is needed for termwise localization; the trace-formula unit does not prove this sheaf theorem."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-exact",
+    "why": "Exactness of pro-etale open extension is needed for termwise localization; this is the fixed finite-coefficient operation, not a replacement trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "The cohomology comparison for any exact functor proves the lower bounds; it is generic homological algebra absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "The prescribed sheaf comparison is the input explicitly cited in blueprint proof *(3)*, not a different geometric route."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "The prescribed sheaf-level open-extension comparison supplies the degreewise maps; the trace-formula unit has no alternative statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-cbc-proetale-extension-zero-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-327740f5c",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-327740f5c (reviewer sub-agent of L); spot-checked: Read the item in full (statement byte-identical to the base, 7 steps), the statements of all cited nodes, the blueprint lem-trf-compactification-graph-operator proof (3) first sentence, the parent's DAG step (3a) (u=Phi^m, i=j, all three witnesses used), and Stacks 04JC/03DA/03DJ/015F at their labels. Coefficient category checked: the constant finite A_{E,n} module derived category on X_proet with Lu^* from def-weil-pbc-proetale-operations, the same category and functor as the parent's D^b_ctf(X,A) at finite level. Steps 1-3 (exactness, termwise derived functors, D^{>=n} preservation by cohomology) and steps 5-7 (delta_e via the Lambda-linear natural sheaf comparison and localization clauses (2)/(3); witness composites with sources, targets and inverses checked) are correct. Small cases checked: zero objects, u=id, empty or identity opens, nonflat u, distinct lower bounds. No new nodes. No duplicate: def-weil-pbc-fixed-derived-comparisons only records kappa as a Lean definition, and the adic witness nodes state different things. The 7 tool_uses are accepted. One repair: step 4 applied c_u to A-module sheaves without justifying A-linearity, which the cited statement does not give. I added the one-line naturality argument for the scalar endomorphisms lambda_a (fixes/dag/nodes/sec-trace-formula/lem-trf-witnessed-open-pullback.json, step text 1344 characters).; 1 file(s) fixed by the reviewer"
  }
 }

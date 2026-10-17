@@ -13,9 +13,109 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $K\\otimes T$ for the chosen tensor. Its enriched adjunction [def-coef-simplicial-tensor-cotensor] identifies lifting squares from $K\\otimes T\\to L\\otimes T$ against $p:E\\to D$ with lifting squares from $K\\to L$ against $\\operatorname{Map}(T,E)\\to\\operatorname{Map}(T,D)$. Indeed the two horizontal maps transpose to $K\\to\\operatorname{Map}(T,E)$ and $L\\to\\operatorname{Map}(T,D)$; their equality and the two filler equations transpose as well. The simplicial model axiom with $0\\to T$ makes this mapping map a Kan fibration, trivial if $p$ is trivial. Here $\\operatorname{Map}(0,E)$ is terminal: its $n$-simplices are maps $\\Delta^n\\otimes0\\to E$, and $\\Delta^n\\otimes0$ is initial by the cotensor adjunction. Consequently, for a monomorphism $K\\hookrightarrow L$, its tensor with $T$ lifts against every trivial fibration and is a cofibration. For an endpoint $\\Delta^0\\hookrightarrow\\Delta^1$ it lifts against every fibration, since this is a one-dimensional horn. Thus either endpoint tensor is a trivial cofibration. These conclusions use precisely the two lifting-class characterizations in [lem-coef-simplicial-boundary-collapse-test] and the boundary/horn criteria in [lem-coef-kan-quillen-right-proper].",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor",
+    "lem-coef-simplicial-boundary-collapse-test",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, foundational simplicial mapping calculus: tensor lifting squares (agent-written expansion; HTT A.3.1 not archived)."
+   }
+  },
+  {
+   "text": "For each $T$, put $C_T=\\Delta^1\\otimes T$, with endpoints $e_0,e_1:T\\to C_T$ and collapse $c_T:C_T\\to T$. Tensor preserves the coproduct $\\partial\\Delta^1=\\Delta^0\\amalg\\Delta^0$, as follows immediately by applying its adjunction to maps out of that coproduct. Step 1 makes $(e_0,e_1):T\\amalg T\\to C_T$ a cofibration and $e_0$ a weak equivalence. Since $c_Te_0=1_T$, two-out-of-three gives $c_T\\in W$. Thus $C_T$ is a good cylinder, although its collapse need not be a fibration. For fibrant $Z$, the same simplicial model axiom on $0\\to T$ and $Z\\to1$ makes $\\operatorname{Map}(T,Z)$ Kan. No fibrancy of $T$ has been used.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor",
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, foundational simplicial mapping calculus: the explicit simplicial cylinder (agent-written expansion; HTT A.3.1 not archived)."
+   }
+  },
+  {
+   "text": "Suppose $f\\in W$. Factor it, using [lem-coef-simplicial-boundary-collapse-test], as $X\\xrightarrow{i}E\\xrightarrow{p}Y$ with $i$ a trivial cofibration and $p$ a fibration. Two-out-of-three makes $p$ trivial. The simplicial model axiom on $i$ and $Z\\to1$ gives a trivial Kan fibration $i^*:\\operatorname{Map}(E,Z)\\to\\operatorname{Map}(X,Z)$; the mapping sets into $1$ are terminal by the tensor adjunction. Because $Y$ is cofibrant, lift its initial map against $p$ to obtain $s:Y\\to E$ with $ps=1_Y$. On the boundary of $C_E$, prescribe $sp$ at endpoint 0 and $1_E$ at endpoint 1. Both composites with $p$ equal $p$. The square with left map $E\\amalg E\\to C_E$, right map the trivial fibration $p$, top map $(sp,1_E)$ and bottom map $pc_E$ therefore has a lift $H:C_E\\to E$. Its endpoints are $sp,1_E$, and $pH=pc_E$.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, foundational simplicial mapping calculus: factorization and explicit lifting homotopy (agent-written expansion; HTT A.3.1 not archived)."
+   }
+  },
+  {
+   "text": "Transpose $H$ by [def-coef-simplicial-tensor-cotensor] to a simplicial path $\\Delta^1\\to\\operatorname{Map}(E,E)$. Enriched composition with this path gives a simplicial homotopy $\\operatorname{Map}(E,Z)\\times\\Delta^1\\to\\operatorname{Map}(E,Z)$ from $(sp)^*=p^*s^*$ to the identity; at $(a,t)$ its value is $a\\circ H_t$. The other composite is $s^*p^*=(ps)^*=1$, with its constant homotopy. Apply [lem-cbc-simplicial-homotopy-equivalence-weak] to conclude that $p^*$ is a weak homotopy equivalence. The trivial Kan fibration $i^*$ is weak by [lem-coef-kan-quillen-right-proper]; two-out-of-three (in particular closure under composition) there gives $f^*=i^*p^*$ weak. This proves the forward implication for every fibrant $Z$.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, foundational simplicial mapping calculus: the two simplicial inverse identities (agent-written expansion; HTT A.3.1 not archived)."
+   }
+  },
+  {
+   "text": "We record explicitly how components are computed, using the quotient realization of [def-cbc-enhanced-diagrams-cones]. For any simplicial set $K$, let $S$ be its vertices modulo the equivalence relation generated by endpoint pairs of edges, and give $S$ the discrete topology. All vertices of each simplex have the same class, so the maps constant at that class on each geometric simplex descend to a continuous map $|K|\\to S$ by the defining quotient topology. Every point of a geometric simplex is joined by a straight path to a vertex. Vertices in a common class are joined by the finite edge zigzag defining that class. Thus each fiber is path connected, and a path cannot change its image in discrete $S$. Hence $S=\\pi_0|K|$, naturally in simplicial maps; this includes empty $K$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, foundational simplicial mapping calculus: components of quotient realization (agent-written expansion; HTT A.3.1 not archived)."
+   }
+  },
+  {
+   "text": "Choose very good cylinders $T\\amalg T\\to I_T\\twoheadrightarrow T$ for $T=X,Y$ using [lem-coef-simplicial-boundary-collapse-test], and the sets $h_I(T,Z)$ of [lem-coef-fixed-cylinder-fibrant-target-detection]. Compare them with $\\pi_0\\operatorname{Map}(T,Z)$. In a larger universe form an ordinary localization $\\gamma:\\mathcal M\\to\\mathcal H$ by finite strings of arrows and formal inverses of $W$, modulo composition, identity and inverse relations. This construction has the required localization universal property, including natural transformations by applying their naturality to those strings. For fibrant $Z$ choose a good path object by factoring its diagonal into a trivial cofibration and fibration. The criterion of [lem-coef-localized-good-homotopy-test] applies both to the good cylinder $C_T$ of Step 2 and to $I_T$: maps $a,b:T\\to Z$ have equal localization images exactly when a homotopy with either prescribed cylinder exists. By the tensor adjunction [def-coef-simplicial-tensor-cotensor], a $C_T$-homotopy is exactly an edge of $\\operatorname{Map}(T,Z)$ with vertices $a,b$. The two cylinder relations therefore coincide; they are equivalence relations since both equal equality after $\\gamma$. Taking their generated relations, Step 5 gives a bijection $h_I(T,Z)\\cong\\pi_0\\operatorname{Map}(T,Z)$ sending $[a]$ to its component. Since this bijection keeps the representative $a$, the functions induced by precomposition with $f$ correspond exactly.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test",
+    "lem-coef-fixed-cylinder-fibrant-target-detection",
+    "lem-coef-localized-good-homotopy-test",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, foundational simplicial mapping calculus: comparison with fixed-cylinder homotopy classes (agent-written expansion; HTT A.3.1 not archived)."
+   }
+  },
+  {
+   "text": "Conversely suppose every $f^*$ in the statement is a weak homotopy equivalence. By the definition in [lem-coef-kan-quillen-right-proper] it induces a bijection on path components for each fibrant $Z$. Step 6 identifies that function with $h_I(Y,Z)\\to h_I(X,Z)$. Both $X$ and $Y$ are cofibrant by hypothesis, and the cylinders just chosen have cofibration boundary and trivial-fibration collapse, exactly as required by [lem-coef-fixed-cylinder-fibrant-target-detection]. Its converse therefore yields $f\\in W$. The constructions take place in the containing universes allowed in the statement. Empty mapping sets cause no exception: the component sets and quotient sets are both empty, and all bijections and lifting arguments above retain their stated meanings.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-fixed-cylinder-fibrant-target-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, foundational simplicial mapping calculus: fibrant-target detection and empty cases (agent-written expansion; HTT A.3.1 not archived)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-simplicial-tensor-cotensor",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-fixed-cylinder-fibrant-target-detection",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-localized-good-homotopy-test",
+  "lem-coef-simplicial-boundary-collapse-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2: derived coefficient adjunction and coherent naturality, via the existing simplicial-presentation ancestry. Agent proof of the SM7 mapping-space detection lemma, using existing fixed-cylinder and localized-homotopy nodes; HTT A.3.1 unavailable locally."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -79,10 +179,66 @@
    "results": "{\"t\": \"2026-10-17T08:40:25Z\", \"tool\": \"grep\", \"query\": \"isWeakEquivalence.*(iff|mapping)|mapping.*[Ww]eak[Ee]quivalence|[Cc]osimplicial.*[Rr]esolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "weak equivalence detected by mapping spaces into all fibrant objects in an all cofibrant simplicial model category",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T09:50:02Z\", \"tool\": \"leanfinder\", \"query\": \"weak equivalence detected by mapping spaces into all fibrant objects in an all cofibrant simplicial model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.WeakEquivalence\", \"HomotopicalAlgebra.weakEquivalences\"], \"digest\": \"c8db5fb6d5a31133\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned model-category signatures; Homotopy.lean:200-213 gives bijections of right homotopy classes, not weak homotopy equivalences of enriched simplicial mapping sets. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModelCategory weak equivalence mapping fibrant",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T09:50:03Z\", \"tool\": \"loogle\", \"query\": \"ModelCategory weak equivalence mapping fibrant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `ModelCategory`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: invalid identifier query; valid fully qualified query was subsequently run"
+  },
+  {
+   "tool": "grep",
+   "query": "weak equivalence.*mapping|mapping.*fibrant",
+   "sub": "Mathlib/AlgebraicTopology/ModelCategory",
+   "results": "{\"t\": \"2026-10-17T09:50:03Z\", \"tool\": \"grep\", \"query\": \"weak equivalence.*mapping|mapping.*fibrant\", \"sub\": \"Mathlib/AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no reliable negative verdict: directory included a redundant Mathlib prefix; corrected grep subsequently run"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simplicial model category weak equivalence induces weak homotopy equivalence of mapping spaces into fibrant targets",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T10:08:38Z\", \"tool\": \"leansearch\", \"query\": \"Simplicial model category weak equivalence induces weak homotopy equivalence of mapping spaces into fibrant targets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.WeakEquivalence\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.weakEquivalences_over_def\"], \"digest\": \"cfae6f45adfea7b8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned model-category signatures; Homotopy.lean:200-213 gives bijections of right homotopy classes, not weak homotopy equivalences of enriched simplicial mapping sets. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial enriched mapping spaces into fibrant objects detect weak equivalences between cofibrant objects",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T10:08:40Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial enriched mapping spaces into fibrant objects detect weak equivalences between cofibrant objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_cofibration_of_weakEquivalence\"], \"digest\": \"1c4fcca6a74a5da6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned model-category signatures; Homotopy.lean:200-213 gives bijections of right homotopy classes, not weak homotopy equivalences of enriched simplicial mapping sets. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T10:08:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\"], \"digest\": \"8ba94d6ec8606a0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned model-category signatures; Homotopy.lean:200-213 gives bijections of right homotopy classes, not weak homotopy equivalences of enriched simplicial mapping sets. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "precomp_bijective_of_weakEquivalence|SimplicialModel|simplicial.*model",
+   "sub": "AlgebraicTopology",
+   "results": "{\"t\": \"2026-10-17T10:08:41Z\", \"tool\": \"grep\", \"query\": \"precomp_bijective_of_weakEquivalence|SimplicialModel|simplicial.*model\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\"], \"digest\": \"8513eff07657ff9f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned model-category signatures; Homotopy.lean:200-213 gives bijections of right homotopy classes, not weak homotopy equivalences of enriched simplicial mapping sets. No exact match or one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-right-fibration-presentation",
@@ -117,5 +273,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-all-cofibrant-mapping-detection",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven steps prove tensor lifting, the good simplicial cylinder, mapping invariance by a lifted inverse, and detection by comparing mapping components with the existing fixed-cylinder criterion. No new nodes; all non-elementary facts cited by their statements. Mathlib and source searches found no attachment or enriched mapping-space leaf.",
+  "blueprint": "Realizes the mapping-space test required by the inherited prop-coef-integral-exceptional-adjoint paragraph 2 ancestry, specifically the simplicial-right-fibration-presentation returned Step 4. No change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic simplicial-set tool converting the explicit inverse homotopies to a weak homotopy equivalence. No node of this unit provides this elementary realization/homotopy-group implication as its statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-1793a9ca8",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-1793a9ca8 (reviewer sub-agent of L); spot-checked: I read the item, all 7 cited statements, the parent's Step 4, the unit record and blueprint paragraph 2 in full. The statement is true (simplicial model category with every object cofibrant; f is a weak equivalence iff Map(f,Z) is a weak homotopy equivalence for every fibrant Z; no properness assumed). It matches what the parent takes from it. HTT A.3.1 is not archived and proof_origin is agent with a WANTED line, which is correct. Steps 1–7 check: in Step 1 the tensor transposition and SM7 on 0->T give the lifting classes, Map(0,E) is terminal via the cotensor, and {0}->Delta^1 is the horn Lambda^1_0. In Step 2 C_T is a good cylinder: e0 is in W and c is in W by two-out-of-three. In Step 3 Y and E are cofibrant and the lift square commutes (p.sp = p = p.c_E.e_k). In Step 4 (sp)^* = p^*s^* and s^*p^* = id, simplicial-homotopy-equivalence-weak allows either orientation, and f^* = i^*p^* with i^* a trivial Kan fibration. Step 5 computes pi_0 elementarily, including empty K. In Step 6 localized-good-homotopy-test applies to both C_T and I_T, so both cylinder relations equal equality after the localization; edges of Map(T,Z) are exactly C_T-homotopies, which gives h_I(T,Z) = pi_0 Map(T,Z) compatibly with f^*. In Step 7 the converse is in the statement of fixed-cylinder-detection itself. No cycle. No duplicate in the DAG: I compared simplicial-model-target-test, all-cofibrant-simplicial-recognition, cofibration-local-mapping-test, simplicial-mapping-localization, model-cylinder-whitehead, and others. No new nodes. Mathlib has no simplicial model categories. Accepted tool use: lem-cbc-simplicial-homotopy-equivalence-weak, a generic simplicial-homotopy fact that replaces no unit step. Fix: Step 2 had an empty uses list although it relies on the tensor adjunction and the model axioms; I added def-coef-simplicial-tensor-cotensor and lem-coef-simplicial-boundary-collapse-test. Both were already in proof_deps, which still equals the union of the step uses.; 1 file(s) fixed by the reviewer"
  }
 }

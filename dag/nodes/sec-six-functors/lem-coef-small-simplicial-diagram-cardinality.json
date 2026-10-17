@@ -12,9 +12,101 @@
   "def-coef-infinity-relative-cone",
   "def-coef-presentable-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $N(B_v)$ for all nondegenerate simplices of $B_v$, in all degrees, with the degree retained. By the smallness convention in [def-coef-presentable-infinity-category], each has size less than $\\kappa$. Put $W=\\coprod_{v\\in V}N(B_v)$. Regularity of $\\kappa$ means that a union of fewer than $\\kappa$ sets, each of size less than $\\kappa$, still has size less than $\\kappa$; hence $|W|<\\kappa$. Let $T=\\coprod_{v\\in V,n\\geq0}(B_v)_n$, retaining both tags. By [lem-weil-pbc-simplicial-set-nondegenerate-decomposition], an element of $T$ is specified uniquely by its tagged nondegenerate ancestor and its surjective finite ordinal map. Encode that map by the natural number $n$ and its finite list of values. These data inject $T$ into finite lists on $\\mathbf N\\amalg W$. Thus [lem-weil-pbc-finite-list-cardinality] gives $|T|\\leq\\max(\\aleph_0,|\\mathbf N\\amalg W|)<\\kappa$, using uncountability and regularity of $\\kappa$.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.4.2, printed p. 433: the cardinal estimate for the successor-stage representative set S and its cone coproduct. Agent expansion using Stacks Tag 017R, lemma-splitting-simplicial-sets, and the existing finite-list cardinal bound; HTT read online, not archived."
+   }
+  },
+  {
+   "text": "Fix a cardinal $\\nu<\\lambda$, and label the nondegenerate simplices of a shape $A$ bijectively by the initial ordinal $I=\\nu$; write them $a_i$ of dimension $d_i$. For every $i$ record $d_i$ and, for every injective ordinal map $\\delta:[m]\\hookrightarrow[d_i]$ (including the identity), the unique expression $A(\\delta)(a_i)=A(\\eta)(a_j)$ with $\\eta:[m]\\twoheadrightarrow[d_j]$ furnished by [lem-weil-pbc-simplicial-set-nondegenerate-decomposition]. There are only finitely many such injections into a fixed $[d_i]$: each is determined by its nonempty image subset. Order these injections by the finite lists of their values. Each record is a finite list of natural numbers and labels in $I$, using lengths as delimiters. Finally record the tagged simplex $\\phi(a_i)\\in T$. This produces one finite word $c_i$ on the disjoint alphabet $X_\\nu=\\mathbf N\\amalg I\\amalg T$ per label. The records contain actual target simplices, which may be degenerate; no nondegeneracy of $\\phi(a_i)$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.4.2, printed p. 433: the cardinal estimate for the successor-stage representative set S and its cone coproduct. Agent expansion using Stacks Tag 017R, lemma-splitting-simplicial-sets, and the existing finite-list cardinal bound; HTT read online, not archived."
+   }
+  },
+  {
+   "text": "The records determine the triple up to the required isomorphism. Indeed, [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] identifies $A_n$ with the pairs $(i,\\sigma)$ where $\\sigma:[n]\\twoheadrightarrow[d_i]$, by $(i,\\sigma)\\mapsto A(\\sigma)(a_i)$. For $\\alpha:[p]\\to[n]$, factor $\\sigma\\alpha=\\delta\\tau$ by listing its image in increasing order, with $\\tau:[p]\\twoheadrightarrow[m]$ and $\\delta:[m]\\hookrightarrow[d_i]$. If the recorded entry for $(i,\\delta)$ is $(j,\\eta)$, then $A(\\alpha)$ sends $(i,\\sigma)$ to $(j,\\eta\\tau)$, directly by functoriality. Thus identical records give degreewise bijections commuting with every simplicial operator. Moreover $\\phi(i,\\sigma)=B_v(\\sigma)(\\phi(a_i))$, so the same bijections commute with the maps to $B_v$. This proves the assertion for each fixed $v$. It also constructs a canonical set-sized model for every realized record, on these pairs, with exactly the displayed operators and map; the simplicial identities hold because the formula agrees with a realization. No selection from a proper class of shapes is needed.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.4.2, printed p. 433: the cardinal estimate for the successor-stage representative set S and its cone coproduct. Agent expansion using Stacks Tag 017R, lemma-splitting-simplicial-sets, and the existing finite-list cardinal bound; HTT read online, not archived."
+   }
+  },
+  {
+   "text": "For a fixed $(v,\\nu)$ the words of Step 2 lie in $\\operatorname{List}(X_\\nu)^I$. By [lem-weil-pbc-finite-list-cardinality], $|\\operatorname{List}(X_\\nu)|\\leq\\mu_\\nu=\\max(\\aleph_0,|X_\\nu|)<\\kappa$, since $\\nu<\\lambda<\\kappa$ and Step 1 bounds $T$. By the stated exponent hypothesis there are at most $\\mu_\\nu^\\nu<\\kappa$ such records. Restricting to realized records cannot increase this bound. The collection of cardinals $\\nu<\\lambda$ is a set of size at most $\\lambda<\\kappa$ (represent each by its initial ordinal below $\\lambda$). Take the union of the realized canonical models of Step 3 over these $\\nu$ and over $v\\in V$. Two applications of regularity give a set of models of cardinality less than $\\kappa$. Every triple occurs up to isomorphism in that set. Quotient this set by the stipulated isomorphism relation and choose one element per class, giving the desired set $R$ with $|R|<\\kappa$.",
+   "uses": [
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.4.2, printed p. 433: the cardinal estimate for the successor-stage representative set S and its cone coproduct. Agent expansion using Stacks Tag 017R, lemma-splitting-simplicial-sets, and the existing finite-list cardinal bound; HTT read online, not archived."
+   }
+  },
+  {
+   "text": "For $\\nu=0$ the record is the unique empty function and its model is the empty simplicial set, with the unique map to each fixed $B_v$. If $V=\\varnothing$, the resulting model set and $R$ are empty. For $\\lambda=\\aleph_0$, each $\\nu<\\lambda$ is finite: each generator has a finite record even when its dimension is large. The estimate uses $\\mu_\\nu^\\nu$, never $\\mu_\\nu^{\\aleph_0}$, so it imposes no continuum bound absent from the hypotheses. Empty targets cause no exception: no nonempty source has a simplicial map to the empty target, and such records are simply not realized.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.4.2, printed p. 433: the cardinal estimate for the successor-stage representative set S and its cone coproduct. Agent expansion using Stacks Tag 017R, lemma-splitting-simplicial-sets, and the existing finite-list cardinal bound; HTT read online, not archived."
+   }
+  },
+  {
+   "text": "It remains to bound the cones. Use the explicit join and its blockwise simplicial operators in [def-coef-infinity-relative-cone]. In $A\\star\\Delta^0$, a simplex in a mixed summand $A_i\\times(\\Delta^0)_j$ with $i\\geq0$ and $j\\geq1$ is degenerate: repeat two adjacent vertices in its final block. If $j=0$ but its $A_i$ component is degenerate, it is again degenerate by repeating the corresponding vertices of the initial block. The pure $\\Delta^0$ summand is degenerate in every positive degree, leaving its single vertex. A pure $A$ simplex that is degenerate remains so under the pure-factor inclusion. Consequently every nondegenerate cone simplex is among the pure nondegenerate simplices of $A$, the cone vertex, or the mixed pair $(a,*)$ with $a$ nondegenerate and final block of length one. There are therefore at most two copies of $N(A)$ and one additional element; their union has size less than $\\kappa$. In particular the cone of the empty shape is exactly $\\Delta^0$.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.4.2, printed p. 433: the cardinal estimate for the successor-stage representative set S and its cone coproduct. Agent expansion using Stacks Tag 017R, lemma-splitting-simplicial-sets, and the existing finite-list cardinal bound; HTT read online, not archived."
+   }
+  },
+  {
+   "text": "In a degreewise coproduct the simplicial operators preserve the summand label. By the definition of degeneracy in [def-weil-pbc-simplicial-set], a simplex is degenerate in that coproduct exactly when it is degenerate in its own summand: a degeneracy witness must have the same label, and conversely a witness in a summand remains one in the coproduct. Hence the nondegenerate simplices are precisely the disjoint union of the summands' nondegenerate simplices. Each $A_r$ has fewer than $\\lambda<\\kappa$ such simplices, and Step 6 bounds each $A_r^{\\triangleright}$ by $\\kappa$. Since $|R|<\\kappa$, regularity bounds both disjoint unions strictly below $\\kappa$. By [def-coef-presentable-infinity-category], both coproducts are $\\kappa$-small, as required; this includes the empty coproduct.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.4.2, printed p. 433: the cardinal estimate for the successor-stage representative set S and its cone coproduct. Agent expansion using Stacks Tag 017R, lemma-splitting-simplicial-sets, and the existing finite-list cardinal bound; HTT read online, not archived."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "lem-weil-pbc-finite-list-cardinality",
+  "def-weil-pbc-simplicial-set",
+  "def-coef-infinity-relative-cone"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemma 5.4.4.2, printed p. 433: the cardinal estimate for the successor-stage representative set S and its cone coproduct. Agent expansion using Stacks Tag 017R, lemma-splitting-simplicial-sets, and the existing finite-list cardinal bound; HTT read online, not archived. The finite-record argument is written out by Q156, not asserted to be a proof reproduced in HTT."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +149,52 @@
    "results": "{\"t\": \"2026-10-17T08:45:02Z\", \"tool\": \"grep\", \"query\": \"small.*simplicial.*diagram|simplicial.*diagram.*cardinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: SimplicialSet/Presentable.lean:37-60 gives finite presentability of one finite simplicial set, not a strict cardinal bound on representatives of all small shapes and maps. SmallRepresentatives.lean concerns ordinary categories with Hom sets. Directed.lean controls cardinality of one ordinary diagram, not the family of simplicial shapes. The exponent hypothesis and simplicial shape count still require a separate argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cardinal bound on isomorphism classes of small simplicial sets mapping into a simplicial set using nondegenerate simplices",
+   "results": "{\"t\": \"2026-10-17T10:05:16Z\", \"tool\": \"leanfinder\", \"query\": \"Cardinal bound on isomorphism classes of small simplicial sets mapping into a simplicial set using nondegenerate simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.finite_of_hasDimensionLT\", \"SSet.HasDimensionLE\", \"SSet.Finite.finite\", \"SSet.instFiniteElemObjOppositeSimplexCategoryOpMkNonDegenerateOfFinite\", \"SSet.Finite\", \"SSet.HasDimensionLT\", \"SSet.hasDimensionLT_of_finite\", \"SSet.S.dim\"], \"digest\": \"8287ada42ba4ecda\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: read SimplicialSet/Presentable.lean:30-60 (finite presentability of individual finite simplicial sets), Finite.lean:41-80 (finite nondegenerate sets), and the definitions of SSet.N/nonDegenerate. These do not bound the family of all small shapes and maps. CategoryTheory.Presentable.Directed controls one ordinary diagram, not simplicial shapes. Reused the existing normal-form and finite-list cardinality leaves instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Cardinal\"",
+   "results": "{\"t\": \"2026-10-17T10:05:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Cardinal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"SSet.Finite.exists_epi_from_isCardinalPresentable\", \"SSet.instIsCardinalForSmallObjectArgumentJAleph0\", \"SSet.instIsCardinalForSmallObjectArgumentInnerHornInclusionsAleph0\"], \"digest\": \"1fd2e3aa570ddd97\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: read SimplicialSet/Presentable.lean:30-60 (finite presentability of individual finite simplicial sets), Finite.lean:41-80 (finite nondegenerate sets), and the definitions of SSet.N/nonDegenerate. These do not bound the family of all small shapes and maps. CategoryTheory.Presentable.Directed controls one ordinary diagram, not simplicial shapes. Reused the existing normal-form and finite-list cardinality leaves instead."
+  },
+  {
+   "tool": "grep",
+   "query": "cardinal|cardinality|HasCardinalLT",
+   "results": "{\"t\": \"2026-10-17T10:05:37Z\", \"tool\": \"grep\", \"query\": \"cardinal|cardinality|HasCardinalLT\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Horn.lean\"], \"digest\": \"8a6387ffd8776e8a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: read SimplicialSet/Presentable.lean:30-60 (finite presentability of individual finite simplicial sets), Finite.lean:41-80 (finite nondegenerate sets), and the definitions of SSet.N/nonDegenerate. These do not bound the family of all small shapes and maps. CategoryTheory.Presentable.Directed controls one ordinary diagram, not simplicial shapes. Reused the existing normal-form and finite-list cardinality leaves instead."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The number of isomorphism classes of lambda small simplicial diagrams into a kappa small simplicial set is less than kappa",
+   "results": "{\"t\": \"2026-10-17T10:05:51Z\", \"tool\": \"leansearch\", \"query\": \"The number of isomorphism classes of lambda small simplicial diagrams into a kappa small simplicial set is less than kappa\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.hP\", \"CategoryTheory.instIsClosedUnderIsomorphismsIsCardinalPresentable\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.locallySmall\", \"CategoryTheory.MorphismProperty.hasCardinalLT_ofHoms\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.hW\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.mk.sizeOf_spec\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.mk.inj\", \"CategoryTheory.MorphismProperty.HasCardinalLT\"], \"digest\": \"e9c7874998387a44\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: read SimplicialSet/Presentable.lean:30-60 (finite presentability of individual finite simplicial sets), Finite.lean:41-80 (finite nondegenerate sets), and the definitions of SSet.N/nonDegenerate. These do not bound the family of all small shapes and maps. CategoryTheory.Presentable.Directed controls one ordinary diagram, not simplicial shapes. Reused the existing normal-form and finite-list cardinality leaves instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Count simplicial sets up to isomorphism by encoding dimensions and faces of nondegenerate generators as finite lists",
+   "results": "{\"t\": \"2026-10-17T10:08:34Z\", \"tool\": \"leanfinder\", \"query\": \"Count simplicial sets up to isomorphism by encoding dimensions and faces of nondegenerate generators as finite lists\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.N\", \"SSet.Finite\", \"SSet.S\", \"SSet.S.toN\", \"SSet.N.mk\", \"SSet\", \"SSet.nonDegenerate\", \"SSet.S.dim\"], \"digest\": \"694715dd89ff2448\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: read SimplicialSet/Presentable.lean:30-60 (finite presentability of individual finite simplicial sets), Finite.lean:41-80 (finite nondegenerate sets), and the definitions of SSet.N/nonDegenerate. These do not bound the family of all small shapes and maps. CategoryTheory.Presentable.Directed controls one ordinary diagram, not simplicial shapes. Reused the existing normal-form and finite-list cardinality leaves instead."
+  },
+  {
+   "tool": "grep",
+   "query": "mk_list_le_max|exists_nonDegenerate|unique_nonDegenerate_dim|unique_nonDegenerate_simplex|unique_nonDegenerate_map",
+   "results": "{\"t\": \"2026-10-17T10:11:45Z\", \"tool\": \"grep\", \"query\": \"mk_list_le_max|exists_nonDegenerate|unique_nonDegenerate_dim|unique_nonDegenerate_simplex|unique_nonDegenerate_map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/FreeAlgebra.lean\", \"Mathlib/ModelTheory/Encoding.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Splitting.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Splitting.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Splitting.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Splitting.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\"], \"digest\": \"3a3cc398e6fd3e1c\"}",
+   "date": "2026-10-17",
+   "verdict": "partial matches only: read Degenerate.lean:114-125,217-240 and Arithmetic.lean:746-750. These are the existing nondegenerate-decomposition and finite-list leaves, reused in the proof; neither states the item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-filtered-cocartesian-section-cofinality",
@@ -88,5 +222,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-small-simplicial-diagram-cardinality",
+  "worker": "stage1",
+  "summary": "Expanded the HTT successor-stage cardinal estimate by labelling nondegenerate generators and recording all their finitely many faces and map values. Proved reconstruction by the explicit epi-mono formula and bounded finite-record functions by the stated exponent hypothesis, including lambda=aleph0. Checked join cones directly. Reused two existing Mathlib leaves; no new nodes or statement change.",
+  "blueprint": "The existing blueprint.from ancestry reaches prop-coef-integral-exceptional-adjoint, proof paragraph 2 (mapping-complex adjunction infrastructure). This is the subordinate general cardinal tool in lem-coef-filtered-cocartesian-section-cofinality, Step 4, expanding the representative set S and its cone coproduct in HTT 5.4.4.2, printed p.433. The ancestor and via chain are retained. No blueprint node states this cardinal estimate; searches for simplicial cardinal, nondegenerate, and regular cardinal found no duplicate.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-df9d56a62",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-df9d56a62 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, which is unchanged, and all 7 steps. I also read every cited statement. Two are definitions in this unit: def-coef-presentable-infinity-category (kappa-small means fewer than kappa nondegenerate simplices) and def-coef-infinity-relative-cone (the join defined degree by degree, with operators acting block by block). Three are Mathlib leaves: the simplicial-set definition, the Eilenberg-Zilber normal form with uniqueness, and Cardinal.mk_list_le_max. Because every citation is a definition or a Mathlib leaf, there is no route problem and no tool_uses entry is needed. Step 1: by regularity there are fewer than kappa tagged nondegenerate simplices. Every simplex of the targets injects into List(N + W), so |T| < kappa. Steps 2-3: I rederived the reconstruction formula A(alpha)(i,sigma) = (j, eta tau) from the factorization sigma alpha = delta tau and the recorded normal form of A(delta)(a_i). The map to B_v is fixed by naturality, so equal records give isomorphic triples. Step 4: for each pair (v,nu) there are at most mu_nu^nu < kappa records, using the exponent hypothesis only for nu < lambda. Taking the union over fewer than kappa values of nu and of v and applying regularity twice gives |R| < kappa. Step 5: I checked the empty shape, empty V, lambda = aleph_0 and empty targets myself. Step 6: the cone's nondegenerate simplices are at most N(A) + N(A)x{*} + the cone point. I tested this on A = empty (giving Delta^0), Delta^0 (giving Delta^1) and Delta^1 (giving Delta^2, which attains the bound 2*3+1 exactly). Step 7: degeneracy in a coproduct taken degree by degree is decided summand by summand, so regularity bounds both coproducts. Searching the DAG with rg found no duplicate statement; the parent's Step 4 uses exactly what the statement gives. HTT 5.4.4.2 is not archived in literature/, so I could not check the proof against it. The worker filed a WANTED line for it and correctly records proof_origin as written by an agent; I checked the proof independently. No SGA is used. I made no fixes."
  }
 }

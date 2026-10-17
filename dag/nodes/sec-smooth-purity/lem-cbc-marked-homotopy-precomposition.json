@@ -11,9 +11,84 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-marked-point-cartesian-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First the displayed mapping sets have the specified simplicial operators. For $\\alpha:[m]\\to[k]$, restriction sends $a:P\\times(\\Delta^k)^\\epsilon\\to Q$ to $a\\circ(\\mathrm{id}_P\\times\\Delta(\\alpha))$. A simplicial map carries a degenerate edge to a degenerate edge; thus $\\Delta(\\alpha)$ preserves the flat markings, and it preserves the sharp markings because every target edge is marked. Coordinatewise product markings make this restriction marked, and its base map still ignores the parameter. Restriction along identities and composites is respectively identity and iterated restriction, by equality of the composites. This verifies the simplicial-set structure for both values of $\\epsilon$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, marked internal Hom setup immediately before Remark 3.1.3.1; agent-written coordinate verification: restriction operators"
+   }
+  },
+  {
+   "text": "Fix $k$, $a$ and $\\tau$ as in the statement. Define $b_{a,\\tau}$ degree by degree: for $u\\in U_r$ and $v\\in(\\Delta^k)_r$, put $b_{a,\\tau,r}(u,v)=a_r(H_r(u,\\tau_r(v)),v)$. For any $\\beta:[t]\\to[r]$, naturality of $a,H,\\tau$ gives $$W(\\beta)b_{a,\\tau,r}(u,v)=a_t(H_t(U(\\beta)u,\\tau_t(\\Delta^k(\\beta)v)),\\Delta^k(\\beta)v)=b_{a,\\tau,t}(U(\\beta)u,\\Delta^k(\\beta)v).$$ Products and operators are degreewise by [def-cbc-enhanced-diagrams-cones], so this is precisely the condition that $b_{a,\\tau}:U\\times\\Delta^k\\to W$ is a simplicial map.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, marked internal Hom setup immediately before Remark 3.1.3.1; agent-written coordinate verification: simpliciality in the source degree"
+   }
+  },
+  {
+   "text": "A marked edge of $U\\times(\\Delta^k)^\\flat$ is a pair $(e,d)$ with $e$ marked in $U$ and $d$ degenerate. Since $\\tau$ is simplicial, $\\tau(d)$ is degenerate. Consequently $(e,\\tau(d))$ is marked in $U\\times(\\Delta^1)^\\flat$, so $H(e,\\tau(d))$ is marked in $V$. The pair $(H(e,\\tau(d)),d)$ is then marked in $V\\times(\\Delta^k)^\\flat$, and $a$ takes it to a marked edge of $W$. Thus $b_{a,\\tau}$ is marked. Write $q_U,q_V,q_W$ for the given base maps. In every degree, $$q_W b_{a,\\tau}(u,v)=q_V H(u,\\tau(v))=q_U(u).$$ Hence $b_{a,\\tau}$ lies in $\\operatorname{Map}^{\\flat}_S(U,W)_k$.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, marked internal Hom setup immediately before Remark 3.1.3.1; agent-written coordinate verification: flat marking and relative base condition"
+   }
+  },
+  {
+   "text": "For a parameter operator $\\alpha:[m]\\to[k]$, put $a_\\alpha=a\\circ(\\mathrm{id}_V\\times\\Delta(\\alpha))$ and $\\tau_\\alpha=\\tau\\circ\\Delta(\\alpha)$. For every degree and every pair $(u,w)$ in $U\\times\\Delta^m$, $$b_{a_\\alpha,\\tau_\\alpha}(u,w)=a(H(u,\\tau(\\Delta(\\alpha)w)),\\Delta(\\alpha)w)=b_{a,\\tau}(u,\\Delta(\\alpha)w).$$ The right side is the restriction of $b_{a,\\tau}$, and the left side is the formula applied to the restriction of $(a,\\tau)$. Since all simplicial operators are restrictions, the maps $(a,\\tau)\\mapsto b_{a,\\tau}$ commute with all of them. Together with Steps 2-3 this constructs the asserted simplicial map $\\Phi_H$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, marked internal Hom setup immediately before Remark 3.1.3.1; agent-written coordinate verification: simpliciality in the parameter degree"
+   }
+  },
+  {
+   "text": "At endpoint $i\\in\\{0,1\\}$ the $k$-simplex of $\\Delta^1$ is the constant map with value $i$. The formula becomes $b_{a,i}(u,v)=a(h_i(u),v)$, which is the stated precomposition map $h_i^*$ in each degree. At a fixed vertex $a:V\\to W$ of the mapping object, its degenerate $1$-simplex is $a\\circ\\operatorname{pr}_V:V\\times\\Delta^1\\to W$, because mapping operators restrict the parameter. Evaluating $\\Phi_H$ at this simplex and $\\mathrm{id}_{\\Delta^1}$ gives $(u,t)\\mapsto a(H(u,t))$. Thus the edge obtained by restricting $\\Phi_H$ to $\\{a\\}\\times\\Delta^1$ is represented by $a\\circ H$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, marked internal Hom setup immediately before Remark 3.1.3.1; agent-written coordinate verification: endpoints and vertex components"
+   }
+  },
+  {
+   "text": "Assume now that $H$ also preserves the markings of $U\\times(\\Delta^1)^\\sharp$. A marked edge there is any pair $(e,d)$ with $e$ marked in $U$ and $d$ any edge of $\\Delta^1$. By the extra hypothesis $H(e,d)$ is marked in $V$, and the marked vertex map $a:V\\to W$ carries it to a marked edge of $W$. Therefore $a\\circ H$ is marked with sharp parameter. It is over $S$ by the same base equality as Step 3, so it represents an element of $\\operatorname{Map}^{\\sharp}_S(U,W)_1$. Every construction and verification used only the given maps and marking definitions; no fibrancy or invertibility condition on the parameter edges of $a$ enters.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, marked internal Hom setup immediately before Remark 3.1.3.1; agent-written coordinate verification: sharp component condition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-marked-point-cartesian-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Opening compactification choice; elementary marked-homotopy precomposition construction in the descendant strict-presentation foundation. HTT Section 3.1.3 supplies conventions, not this exact statement."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +138,52 @@
    "results": "{\"t\": \"2026-10-17T08:52:59Z\", \"tool\": \"grep\", \"query\": \"marked|precomp|postcomp\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\"], \"digest\": \"d8d504ffd2f3af63\"}",
    "date": "2026-10-17",
    "verdict": "no match: RelativeMorphism.Homotopy.precomp/postcomp at RelativeMorphism.lean:140-159 concern individual unmarked maps relative to subcomplexes. The other hits are ordinary functor postcomposition on homology and closure properties of anodyne extension classes, not transformations of relative flat marked mapping objects."
+  },
+  {
+   "tool": "grep",
+   "query": "marked|Homotopy.precomp|Homotopy.postcomp",
+   "results": "{\"t\": \"2026-10-17T10:12:16Z\", \"tool\": \"grep\", \"query\": \"marked|Homotopy.precomp|Homotopy.postcomp\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\"], \"digest\": \"d9a31f18ffa4e017\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: read RelativeMorphism.lean:133-159 (unmarked maps relative to subcomplexes), SimplicialCategory/Basic.lean:58-61 (composition assumes a supplied enrichment), and SimplicialSet/Monoidal.lean:39-67 (underlying product-coordinate identities). These do not supply marked relative flat mapping objects or the sharp-component assertion; constructing that marking-dependent interface is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of maps of marked simplicial sets gives a parameterized map on relative internal hom simplicial sets",
+   "results": "{\"t\": \"2026-10-17T10:12:17Z\", \"tool\": \"leansearch\", \"query\": \"Composition of maps of marked simplicial sets gives a parameterized map on relative internal hom simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHomComp\", \"SSet.comp_app\", \"SSet.RelativeMorphism.comp\", \"SSet.instMonoidalClosed\", \"SSet.RelativeMorphism.map\", \"SSet.RelativeMorphism.comm_assoc\", \"SSet.comp_app_assoc\", \"SSet.RelativeMorphism.comp_map\"], \"digest\": \"4a27d99166782f9f\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: read RelativeMorphism.lean:133-159 (unmarked maps relative to subcomplexes), SimplicialCategory/Basic.lean:58-61 (composition assumes a supplied enrichment), and SimplicialSet/Monoidal.lean:39-67 (underlying product-coordinate identities). These do not supply marked relative flat mapping objects or the sharp-component assertion; constructing that marking-dependent interface is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"precomp\"",
+   "results": "{\"t\": \"2026-10-17T10:12:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"precomp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"SSet.RelativeMorphism.HomotopyClass.precomp\", \"SSet.RelativeMorphism.precomp_homotopyClass\", \"SSet.RelativeMorphism.Homotopy.precomp\", \"SSet.RelativeMorphism.Homotopy.precomp_h\"], \"digest\": \"62e18643e3c7842c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: read RelativeMorphism.lean:133-159 (unmarked maps relative to subcomplexes), SimplicialCategory/Basic.lean:58-61 (composition assumes a supplied enrichment), and SimplicialSet/Monoidal.lean:39-67 (underlying product-coordinate identities). These do not supply marked relative flat mapping objects or the sharp-component assertion; constructing that marking-dependent interface is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A marked simplicial homotopy over a base induces a simplicial homotopy between precomposition maps on relative flat marked mapping objects",
+   "results": "{\"t\": \"2026-10-17T10:12:18Z\", \"tool\": \"leanfinder\", \"query\": \"A marked simplicial homotopy over a base induces a simplicial homotopy between precomposition maps on relative flat marked mapping objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.RelativeMorphism.Homotopy.precomp\", \"SSet.RelativeMorphism.Homotopy.precomp_h\", \"SSet.RelativeMorphism.Homotopy.postcomp\", \"SSet.RelativeMorphism.HomotopyClass.precomp\", \"SSet.RelativeMorphism.Homotopy.h\", \"SSet.RelativeMorphism.precomp_homotopyClass\", \"SSet.RelativeMorphism.Homotopy.rel\", \"SSet.RelativeMorphism.Homotopy.rel_assoc\"], \"digest\": \"31883c8cfd5019ae\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: read RelativeMorphism.lean:133-159 (unmarked maps relative to subcomplexes), SimplicialCategory/Basic.lean:58-61 (composition assumes a supplied enrichment), and SimplicialSet/Monoidal.lean:39-67 (underlying product-coordinate identities). These do not supply marked relative flat mapping objects or the sharp-component assertion; constructing that marking-dependent interface is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Whiskering a simplicial interval family with all maps in the internal hom yields a map of internal homs times the interval, respecting edge markings and a fixed base",
+   "results": "{\"t\": \"2026-10-17T10:13:04Z\", \"tool\": \"leanfinder\", \"query\": \"Whiskering a simplicial interval family with all maps in the internal hom yields a map of internal homs times the interval, respecting edge markings and a fixed base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.whiskerRight_app_apply\", \"SSet.whiskerLeft_app_apply\", \"SSet.Truncated.Edge.map_whiskerRight\", \"CategoryTheory.SimplicialObject.whiskering\", \"CategoryTheory.SimplicialCategory.sHomComp\", \"AugmentedSimplexCategory.tensorHomOf\", \"AugmentedSimplexCategory.tensorHom\", \"SSet.Truncated.Edge.map_whiskerLeft\"], \"digest\": \"a3803dffa4308ae9\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: read RelativeMorphism.lean:133-159 (unmarked maps relative to subcomplexes), SimplicialCategory/Basic.lean:58-61 (composition assumes a supplied enrichment), and SimplicialSet/Monoidal.lean:39-67 (underlying product-coordinate identities). These do not supply marked relative flat mapping objects or the sharp-component assertion; constructing that marking-dependent interface is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "MarkedSSet|MarkedSimplicial|marked simplicial|MapFlat|mapFlat",
+   "results": "{\"t\": \"2026-10-17T10:13:51Z\", \"tool\": \"grep\", \"query\": \"MarkedSSet|MarkedSimplicial|marked simplicial|MapFlat|mapFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the complete Mathlib source has no MarkedSSet, MarkedSimplicial, marked simplicial, MapFlat or mapFlat hit; no marked relative flat internal-Hom interface is present."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-marked-mapping-simplex-descent",
@@ -89,5 +206,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-marked-homotopy-precomposition",
+  "worker": "stage1",
+  "summary": "Verified the unchanged statement directly from degreewise simplicial products and the flat/sharp product markings. Six elementary steps give restriction operators, underlying simpliciality, marked relative well-definedness, parameter naturality, endpoints and components, and the sharp-component condition. No new nodes or Mathlib leaves; no completed project declaration matches.",
+  "blueprint": "Realizes the marked-mapping-simplex-descent Steps 8-10 auxiliary construction beneath the opening compactification choice of thm-cbc-finite-level-proetale, through the recorded ancestry; retains every parameter simplex.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-marked-point-cartesian-model",
+    "why": "Only its definitions of marked maps, coordinatewise product markings, and flat/sharp markings are used. No model-structure conclusion is invoked, and this unit has no separate node defining those notions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-marked-point-cartesian-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-8865c0c08",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-8865c0c08 (reviewer sub-agent of L); spot-checked: Read the item in full: its statement, all six steps, the split_report and the report. The statement and stmt_deps are byte-identical to the live and side copies, where the node is still unsplit. Only the proof fields changed, and there are no new nodes. I read both cited statements in full. def-cbc-enhanced-diagrams-cones supplies the degreewise products, Delta^n operators and parameter-restriction convention used in Steps 1, 2, 4 and 5. lem-coef-marked-point-cartesian-model is used only for its definitions of marked sets, marked maps, coordinatewise product marking and flat/sharp markings, in Steps 1, 3 and 6. I accept its declared tool_use because the statement already cited it and no node of unit sk-prop-sf-cbc defines marked simplicial sets. I checked the source in a local HTT copy at section 3.1.3, printed p.154, just before Remark 3.1.3.1. Its Map^flat_S and Map^sharp_S conventions match the item's definitions. The Phi_H construction is correctly marked as agent-written. I verified every step: restriction keeps flat and sharp markings; b(u,v)=a(H(u,tau v),v) is simplicial; for a marked edge (e,d), tau(d) is degenerate, so the image is marked and the map lies over S; parameter naturality holds; the endpoints are h_i^* and the component at a is a∘H via (s_0 a, id); with a sharp H, a∘H lies in Map^sharp_S(U,W)_1. Small cases checked: k=0, a constant H, empty U or W, and the flat-vs-sharp example V=W=(Delta^1)^flat with H=id, where the sharp clause is correctly not claimed. The parent lem-cbc-marked-mapping-simplex-descent uses the lemma in Steps 8-10 exactly as stated, since F_S(X,Z) there equals Map^flat_S(X,Z^natural). Closest possible duplicate: lem-coef-infinity-homotopy-precomp-equivalence. It is unmarked, not relative to S, and has a different hypothesis and conclusion, so it is not a duplicate. There is no SGA citation and this is not a target node. No fixes were needed."
  }
 }

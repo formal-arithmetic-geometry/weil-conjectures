@@ -11,9 +11,80 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the mapping-simplex construction of [def-coef-mapping-simplex-functor], which is exactly the formula in the statement. In each degree put $U_r=\\{(\\alpha,a):\\alpha(r)<n\\}$ and $V_r=\\{(\\alpha,a):\\alpha(r)=n\\}$ inside $M(A)_r$. Monotonicity says that $\\alpha(r)<n$ is equivalent to every value of $\\alpha$ lying in $\\{0,\\ldots,n-1\\}$. Consequently $U_r=(M_-)_r$, and $V_r$ is the disjoint union of copies of $(A_n)_r$ indexed by the remaining $\\alpha$. The operators preserve $U$, since $\\alpha\\theta(s)\\leq\\alpha(r)<n$, so the indicated inclusion $j:M_-\\to M(A)$ is simplicial.",
+   "uses": [
+    "def-coef-mapping-simplex-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.2.2, mapping-simplex definition, printed p.179; the decomposition in Proposition 3.2.2.10, p.183."
+   }
+  },
+  {
+   "text": "Products and standard-simplex operators are degreewise by [def-cbc-enhanced-diagrams-cones]. Write $k:A_n\\times T\\hookrightarrow A_n\\times\\Delta^n$ for the inclusion. For $\\theta:[s]\\to[r]$, write $i=\\alpha(r)$ and $l=\\alpha\\theta(s)$. Applying the operator after $h_r$ gives $(\\alpha\\theta,t_{i,l}\\theta^*(t_{n,i}a))=(\\alpha\\theta,t_{n,l}\\theta^*a)$, since transitions are simplicial and $t_{i,l}t_{n,i}=t_{n,l}$. This equals $h_s(\\theta^*a,\\alpha\\theta)$. If $\\alpha$ lies in $T$, then so does $\\alpha\\theta$; the same calculation proves that $g$ is simplicial. Both composites $jg$ and $hk$ send $(a,\\alpha)$ to $(\\alpha,t_{n,\\alpha(r)}a)$, so the square commutes.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.2.2 definition and Remarks 3.2.2.1–3.2.2.2, p.179; Proposition 3.2.2.10 proof, p.183."
+   }
+  },
+  {
+   "text": "Let $Z$ be any small simplicial set and let $p:M_-\\to Z$ and $q:A_n\\times\\Delta^n\\to Z$ be simplicial maps satisfying $pg=qk$. Define a function $F_r:M(A)_r\\to Z_r$ by $F_r(\\alpha,a)=p_r(\\alpha,a)$ if $\\alpha(r)<n$, and $F_r(\\alpha,a)=q_r(a,\\alpha)$ if $\\alpha(r)=n$. This has $Fj=p$. For $i=\\alpha(r)<n$, compatibility gives $F_rh_r(a,\\alpha)=p_rg_r(a,\\alpha)=q_r(a,\\alpha)$; for $i=n$, it gives $F_rh_r(a,\\alpha)=q_r(a,\\alpha)$ because $t_{n,n}=1$. Thus $Fh=q$ in every degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.2.10 proof, p.183: explicit universal-property expansion of its displayed mapping-simplex pushout."
+   }
+  },
+  {
+   "text": "We check that $F$ commutes with every operator $\\theta:[s]\\to[r]$. If $i=\\alpha(r)<n$, both sides are computed using $p$ and agree by its simpliciality. If $i=n$ and $l=\\alpha\\theta(s)=n$, both sides are computed using $q$ and agree by its simpliciality. In the remaining case $i=n$ and $l<n$, applying $F_s$ after the operator gives $p_s(\\alpha\\theta,t_{n,l}\\theta^*a)=p_sg_s(\\theta^*a,\\alpha\\theta)=q_s(\\theta^*a,\\alpha\\theta)$, by $pg=qk$. This is $\\theta^*q_r(a,\\alpha)=\\theta^*F_r(\\alpha,a)$. These exhaust the cases, including faces that lose the final vertex; hence $F$ is a simplicial map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.2.10 proof, p.183: explicit check across the attaching face from the operator formula on p.179."
+   }
+  },
+  {
+   "text": "Every simplex of $U_r$ is in the image of $j_r$, and every simplex $(\\alpha,a)$ of $V_r$ equals $h_r(a,\\alpha)$. Therefore any simplicial map with composites $p,q$ is forced to equal the map $F$ just constructed. This proves the pushout universal property of [def-weil-pbc-category-colimit] for the square of Step 2, with vertex $M(A)$. In particular this constructs a small pushout without appealing to a general colimit-existence theorem: the finite coproduct formula is small in every degree. For any chosen pushout $P$, its universal map $P\\to M(A)$ and the universal map $M(A)\\to P$ induced by its legs are inverse, since each composite agrees with the identity on both legs and uniqueness applies. This is exactly the canonical isomorphism in the statement.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.2.10 proof, p.183: universal property and canonical-isomorphism conclusion."
+   }
+  },
+  {
+   "text": "The projections from $M_-$ and $A_n\\times\\Delta^n$ to $\\Delta^n$ both send a simplex with label $\\alpha$ to $\\alpha$. They agree on $A_n\\times T$, and $j,h$ preserve this label, so the canonical isomorphism is over $\\Delta^n$. For a commuting ladder $f_i:A_i\\to B_i$, [def-coef-mapping-simplex-functor] gives $M(f)(\\alpha,a)=(\\alpha,f_{\\alpha(r)}a)$. The identity $f_i t^A_{n,i}=t^B_{n,i}f_n$ makes the squares for $g$ and $h$ commute degreewise; the square for $j$ is restriction of the same formula. The two maps from the source pushout to $M(B)$ therefore agree on both legs, hence agree by Step 5. This proves naturality of the canonical isomorphism. No step used injectivity of a transition, a horn filler, or nonemptiness of any $A_i$.",
+   "uses": [
+    "def-coef-mapping-simplex-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remarks 3.2.2.1 and 3.2.2.5, pp.179–180; naturality of the decomposition in Proposition 3.2.2.10, p.183."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-mapping-simplex-functor",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit universal-property proof from the mapping-simplex formula in HTT §3.2.2, p.179, of the decomposition stated in the proof of Proposition 3.2.2.10, p.183, read online 2026-10-17. HTT is absent from literature/; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +120,45 @@
    "results": "{\"t\": \"2026-10-17T09:01:44Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial replacement of a finite chain decomposes as a pushout attaching the final fibre cross the simplex along its initial face\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.multicoequalizerDiagram\", \"SimplicialObject.Splitting.summand\", \"SSet.prodStdSimplex.objEquiv_δ_apply\", \"SSet.StrictSegalCore.concat\", \"CategoryTheory.cechNerveTerminalFrom\", \"CategoryTheory.Arrow.cechConerve_obj\", \"CategoryTheory.Arrow.cechConerve_map\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\"], \"digest\": \"55853da0a111f014\"}",
    "date": "2026-10-17",
    "verdict": "no match: the hits state ordinary horns as pushouts, pushouts of subcomplex unions, and Cech/split simplicial constructions. They do not identify this finite-chain mapping simplex, especially for noninjective transitions. Read SubcomplexColimits.lean:84-104; its subcomplex inclusions cannot replace the possibly noninjective g."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"pushout\"",
+   "results": "{\"t\": \"2026-10-17T11:23:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.horn₂₀.isPushout\", \"SSet.horn₂₁.isPushout\", \"SSet.horn₂₂.isPushout\", \"SSet.relativeCellComplexOfMono.isPushout\", \"SSet.relativeCellComplexOfMono.isPushout_aux\", \"SSet.Subcomplex.unionProd.isPushout\", \"SSet.Subcomplex.Pairing.RankFunction.isPushout\"], \"digest\": \"e28108e7d1bcc292\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the hits. SubcomplexColimits.lean:84–104 concerns inclusions of subcomplexes, not the possibly noninjective attaching map g; CechNerve.lean:185–225 constructs a cosimplicial Cech conerve, not a finite contravariant-chain mapping simplex; StdSimplex.lean:65–145 supplies only standard-simplex formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "mapping.?[Ss]implex|mappingSimplex|MappingSimplex",
+   "results": "{\"t\": \"2026-10-17T11:23:42Z\", \"tool\": \"grep\", \"query\": \"mapping.?[Ss]implex|mappingSimplex|MappingSimplex\", \"sub\": \"AlgebraicTopology/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the hits. SubcomplexColimits.lean:84–104 concerns inclusions of subcomplexes, not the possibly noninjective attaching map g; CechNerve.lean:185–225 constructs a cosimplicial Cech conerve, not a finite contravariant-chain mapping simplex; StdSimplex.lean:65–145 supplies only standard-simplex formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial mapping simplex is a pushout attaching the final fiber times a standard simplex along the initial face",
+   "results": "{\"t\": \"2026-10-17T11:23:44Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial mapping simplex is a pushout attaching the final fiber times a standard simplex along the initial face\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex\", \"SimplexCategory.toTop\", \"StdSimplex.map\", \"SSet.instInhabited\", \"SSet.S.map\", \"CategoryTheory.SimplicialObject.δ\", \"SSet.S.mk\", \"SSet.Augmented.stdSimplex\"], \"digest\": \"247588cec4f6af83\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the hits. SubcomplexColimits.lean:84–104 concerns inclusions of subcomplexes, not the possibly noninjective attaching map g; CechNerve.lean:185–225 constructs a cosimplicial Cech conerve, not a finite contravariant-chain mapping simplex; StdSimplex.lean:65–145 supplies only standard-simplex formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mapping simplex of a contravariant finite chain of simplicial sets is a pushout of the truncated mapping simplex and the last fiber times the full simplex along the last fiber times its initial face",
+   "results": "{\"t\": \"2026-10-17T11:23:50Z\", \"tool\": \"leanfinder\", \"query\": \"The mapping simplex of a contravariant finite chain of simplicial sets is a pushout of the truncated mapping simplex and the last fiber times the full simplex along the last fiber times its initial face\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₂₂.isPushout\", \"SSet.horn₂₁.isPushout\", \"SSet.horn₂₀.isPushout\", \"SSet.horn.multicoequalizerDiagram\", \"SSet.horn.isColimit\", \"SSet.modelCategoryQuillen.J\", \"CategoryTheory.Arrow.cechConerve_map\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\"], \"digest\": \"e538472a9ccc2801\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the hits. SubcomplexColimits.lean:84–104 concerns inclusions of subcomplexes, not the possibly noninjective attaching map g; CechNerve.lean:185–225 constructs a cosimplicial Cech conerve, not a finite contravariant-chain mapping simplex; StdSimplex.lean:65–145 supplies only standard-simplex formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial replacement of a finite diagram as an ordinary pushout adding the final object cross a simplex along its opposite face",
+   "results": "{\"t\": \"2026-10-17T11:24:18Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial replacement of a finite diagram as an ordinary pushout adding the final object cross a simplex along its opposite face\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Arrow.cechConerve_obj\", \"CategoryTheory.Arrow.mapCechConerve_app\", \"CategoryTheory.Arrow.cechConerve_map\", \"CategoryTheory.Arrow.augmentedCechConerve_hom_app\", \"SSet.horn₂₂.isPushout\", \"CategoryTheory.CosimplicialObject.augmentedCechConerve_obj\", \"CategoryTheory.CosimplicialObject.cechConerve_obj\", \"CategoryTheory.Arrow.cechConerve\"], \"digest\": \"c1af7dba9d4bd2c5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the hits. SubcomplexColimits.lean:84–104 concerns inclusions of subcomplexes, not the possibly noninjective attaching map g; CechNerve.lean:185–225 constructs a cosimplicial Cech conerve, not a finite contravariant-chain mapping simplex; StdSimplex.lean:65–145 supplies only standard-simplex formulas."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-mapping-simplex-final-edge",
@@ -81,5 +187,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-mapping-simplex-last-fiber-pushout",
+  "worker": "stage1",
+  "summary": "Q25 supplies the complete elementary universal-property proof of the last-fiber pushout, preserving the statement. The six steps identify the two degreewise regions, check the attaching maps, construct the universal extension, check its operators across the final face, prove uniqueness and the canonical isomorphism, and verify base compatibility and ladder naturality. Reuses three existing definition nodes; no new nodes or Mathlib leaves. Searches and source review recorded in report.md.",
+  "blueprint": "Realizes the mapping-simplex pushout input in the historical ancestry of prop-coef-integral-exceptional-adjoint paragraph 2, through lem-coef-mapping-simplex-final-edge Step 4. HTT 3.2.2.9 first pushout and 3.2.2.10 proof supply the precise local source; no unit or chapter route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-b7550d235",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-b7550d235 (reviewer sub-agent of L); spot-checked: Read the item, all three cited definition statements (def-coef-mapping-simplex-functor, def-cbc-enhanced-diagrams-cones, def-weil-pbc-category-colimit), the parent final-edge Step 4 and the unit record. Compared with the base copy: the statement, stmt_deps, source and blueprint are unchanged; only the proof fields, searches and split_report were added. Statement check: k is injective in each degree, and its complement in A_n x Delta^n is exactly V_r = {alpha(r)=n}, so the degreewise pushout is M(A). I tested n=1 (mapping cylinder), A_n empty, a constant chain and a noninjective transition; the statement is true with no injectivity or fibrancy hypothesis. Steps: 1 (U/V split, U stable, U=M_-), 2 (g and h are simplicial, square commutes), 3 (Fj=p, Fh=q using pg=qk and t_{n,n}=1) and 4 (the case alpha(r)=n, alpha theta(s)<n follows from pg=qk) are correct. Step 5 gets uniqueness from j and h being jointly surjective in each degree and matches the colimit node's universal property; Step 6 gets naturality and compatibility with Delta^n from the M(f) formula of def-coef-mapping-simplex-functor plus uniqueness. All steps are honestly elementary from cited statements, and proof_deps is the union of the uses. There are no new nodes. termwise-equivalence, cbc-initial-horn-pushout (marked, Lambda^n_0) and final-face-edge-horn-filtration are not duplicates; final-edge depends on the item, so citing it would make a cycle. All citations are definitions or a Mathlib leaf, so there is no route issue and no tool_uses. No SGA. Ten Mathlib searches of four kinds have a plausible no-match verdict. HTT §3.2.2 / Prop 3.2.2.10 p.183 is not in literature, so I could not check the source page; the WANTED line and proof_origin agent are correct, and I checked the combinatorics directly. Minor: the naturality clause of the statement uses M(f) without stmt_dep def-coef-mapping-simplex-functor, which is cosmetic and not split-owned. No fixes."
  }
 }

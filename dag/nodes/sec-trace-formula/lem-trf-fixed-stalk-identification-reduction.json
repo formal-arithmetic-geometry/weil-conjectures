@@ -19,9 +19,81 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "thm-sf-ctf-stability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P_R=L\\bar y_R^*$, $H_R=Lh_R^*$, and let $r_T$ denote derived change of rings on a scheme $T$ (with $r$ for ordinary coefficient complexes). For $f:U\\to V$ write $\\lambda_{f,M}:r_U(Lf_A^*M)\\xrightarrow{\\sim}Lf_B^*(r_VM)$ for the canonical coefficient/pullback comparison; thus $\\lambda_{h,K}=\\mu_{h,K}$. It is the inverse tensor/pullback comparison with the constant $A$-module sheaf $B$, interpreted as a $B$-linear comparison by derived change of rings. The finite-level definitions identify pullbacks with exact termwise inverse image, so $P_A M$ is bounded above when $M$ is bounded above. The composition theorem gives $d_{R,M}=c_{\\bar y,h,R,M}:P_R M\\to P_RH_RM$ after using $h\\bar y=\\bar y$. Applying exact sections gives precisely $\\iota_{h,R,M}=\\Gamma(t,d_{R,M})$.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-derived-change-of-rings",
+    "lem-fix-operation-reduction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+    "place": "Proof (3), last sentence: iota_K is built from composition isomorphisms for Phi^m composed with the geometric point equal to that point, and geometric-point pullback is monoidal; hence the stalk operators reduce."
+   }
+  },
+  {
+   "text": "Apply the composition compatibility of [lem-pur-derived-pullback-tensor-iso] with $f=h$, the second map $\\bar y$, and tensor arguments $K$ and the constant coefficient sheaf $B$. Use the canonical identifications of each pullback of $B$ with the constant sheaf $B$. With $\\eta_M=\\lambda_{\\bar y,M}:r_tP_AM\\to P_B(r_XM)$, that compatibility reads\n$$\n P_B(\\mu_{h,K})\\circ\\eta_{H_AK}\\circ r_t(d_{A,K})\n =d_{B,r_XK}\\circ\\eta_K.\n$$\nIndeed the composite-map comparison $\\lambda_{h\\bar y,K}$ becomes $\\lambda_{\\bar y,K}=\\eta_K$ under $h\\bar y=\\bar y$, and the target composition comparison is $d_{B,r_XK}$. This uses the tensor lemma's explicit composition clause, rather than attributing a composition clause to [lem-fix-operation-reduction]. All maps here are the canonical derived change-of-rings maps: on the tensor representatives they preserve the $B$ action, and the tensor-composition identity is an identity of these $B$-linear maps before localization. Hence the displayed equation is in $D(t_{\\mathrm{proet}},B)$, not merely after forgetting coefficients.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pur-derived-change-of-rings",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+    "place": "Proof (3), last sentence: iota_K is built from composition isomorphisms for Phi^m composed with the geometric point equal to that point, and geometric-point pullback is monoidal; hence the stalk operators reduce."
+   }
+  },
+  {
+   "text": "For a bounded-above point complex $Q$ let $\\tau_Q:r\\Gamma(t,Q)\\xrightarrow{\\sim}\\Gamma(t,r_tQ)$ be the natural comparison of [lem-trf-point-sections-finite-reduction]. Apply its naturality to the point-complex map $d_{A,K}:P_AK\\to P_AH_AK$:\n$$\n \\Gamma(t,r_t(d_{A,K}))\\circ\\tau_{P_AK}\n =\\tau_{P_AH_AK}\\circ r\\Gamma(t,d_{A,K}).\n$$\nBoth inputs are bounded above because $K$ is bounded and the two finite-coefficient pullbacks are exact. By definition $\\sigma_M=\\Gamma(t,\\eta_M)\\circ\\tau_{P_AM}$. Apply $\\Gamma(t,-)$ to the equation of step 2, precompose with $\\tau_{P_AK}$, and use the displayed naturality equation. The result is\n$$\n S_B(\\mu_{h,K})\\circ\\sigma_{H_AK}\\circ r(\\iota_{h,A,K})\n =\\iota_{h,B,rK}\\circ\\sigma_K\n$$\nin $D(B)$. This uses naturality of $\\tau$ on point complexes, not an assertion that $d_{A,K}$ is the pullback of a morphism on $X$.",
+   "uses": [
+    "lem-trf-point-sections-finite-reduction",
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+    "place": "Proof (3), last sentence: iota_K is built from composition isomorphisms for Phi^m composed with the geometric point equal to that point, and geometric-point pullback is monoidal; hence the stalk operators reduce."
+   }
+  },
+  {
+   "text": "The morphism $h$ is separated and finite type: a $k$-map between separated finite-type $k$-schemes has closed graph, so it factors as its graph followed by the finite-type separated projection $X\\times_kX\\to X$. Clause (i) of [thm-sf-ctf-stability] therefore gives $H_AK\\in D^b_{ctf}(X,A)$, as required by the notation $\\sigma_{H_AK}$ in the statement. Substitute $\\widetilde\\sigma_K=S_B(\\mu_{h,K})\\circ\\sigma_{H_AK}$ in step 3. Each map used there is natural in $K$ (the composition isomorphism, the tensor/pullback comparisons, and $\\tau$); thus the identity is natural in $K$. The argument used only the equality $h\\bar y=\\bar y$ and the stated coefficient and domain hypotheses, with no Weil structure, coefficient endomorphism, or properness of $h$.",
+   "uses": [
+    "thm-sf-ctf-stability",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-trf-point-sections-finite-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+    "place": "Proof (3), last sentence: iota_K is built from composition isomorphisms for Phi^m composed with the geometric point equal to that point, and geometric-point pullback is monoidal; hence the stalk operators reduce."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-fix-operation-reduction",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-trf-point-sections-finite-reduction",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-point-proetale-sections-exact",
+  "thm-sf-ctf-stability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+  "place": "Proof (3), last sentence; expanded into the fixed-point pullback-composition square and its coefficient-reduction coherence."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,7 +139,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -93,5 +165,79 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-fixed-stalk-identification-reduction",
+  "worker": "stage1",
+  "summary": "Retained the imported statement and all inherited Mathlib searches; created no nodes. Constructed the sheaf-level fixed-point map, used the existing tensor/pullback composition-coherence lemma to obtain its coefficient-reduction identity, and applied the explicitly written naturality equation for point-sections reduction. Checked bounded-above point inputs and finite-Tor stability before substituting the named comparison.",
+  "blueprint": "prop-trf-adic-coefficient-morphism-systems.proof.md, Proof (3), last sentence: iota_K is built from composition isomorphisms for Phi^m composed with the geometric point equal to that point, and geometric-point pullback is monoidal; hence the stalk operators reduce.",
+  "tool_uses": [
+   {
+    "node": "def-trf-coefficient-conventions",
+    "why": "The coefficient rings, finite-Tor domain, and constant-coefficient setting are generic framework data used in the item statement."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Derived scalar restriction identifies the coefficient reduction in the required derived coefficient category."
+   },
+   {
+    "node": "def-weil-derived-pullback-tensor-hom",
+    "why": "Defines the derived pullback and its monoidal coefficient action used in the fixed-point comparison."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Provides the finite coefficient/pullback comparison mu; composition coherence is supplied separately by lem-pur-derived-pullback-tensor-iso."
+   },
+   {
+    "node": "def-weil-geometric-point",
+    "why": "Provides the algebraically closed geometric point used to form the sections functor."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Makes point sections an exact derived functor, so it carries the pullback-composition isomorphisms and reduction maps."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Supplies the canonical composition isomorphism from which the fixed-point section maps are formed."
+   },
+   {
+    "node": "lem-trf-point-sections-finite-reduction",
+    "why": "Supplies the natural finite-coefficient reduction comparison for sections at the geometric point."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Supplies the natural tensor/pullback comparison needed to identify reduced point pullbacks."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Checks the only extra domain hypothesis, that Lh_A^*K remains bounded constructible finite-Tor."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Its explicit compatibility of the canonical tensor comparison with pullback composition supplies the sheaf-level coefficient identity; the adic-realization unit does not prove this generic monoidal tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-coefficient-conventions",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-fix-operation-reduction",
+  "def-weil-geometric-point",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-point-sections-finite-reduction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "thm-sf-ctf-stability",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-4a1731b43",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-4a1731b43 (reviewer sub-agent of L); spot-checked: I read the whole item against its source, main-20261015 prop-trf-adic-coefficient-morphism-systems.proof.md, Proof (3), last sentence. I also read the parent's step 8, every cited node's statement, and Stacks sites-cohomology 07A4 (line 3684), 0D6D (line 3658) and lemma-pullback-K-flat. The statement is well typed in D(B), and both sides go from rS_A(K) to S_B(H_B rK). The hypotheses match the parent: N>=j, an arbitrary k-endomorphism h with no properness, K in D^b_ctf, and a geometric point with h∘ȳ=ȳ. ℓ is invertible in Ω because char Ω = p. Nothing is weakened. mu from lem-fix-operation-reduction is the termwise canonical f^{-1}P⊗B≅f^{-1}(P⊗B), according to its source proof and the finite-level exact pullback; this agrees with the parent's monoidality mu_n. Step 2 applies the composition clause of lem-pur-derived-pullback-tensor-iso with f=h, the second map ȳ and N=B. The lemma gives the equation in D(t,A); the upgrade to D(t,B) holds because on a K-flat model with flat terms every map is a termwise canonical B-linear sheaf isomorphism, so the identity holds strictly. I recomposed step 3 from the naturality of tau on bounded point complexes, and it gives iota_B∘sigma_K. Step 4 is elementary: the graph factorization makes h separated and of finite type, and thm-sf-ctf-stability (i) gives H_A K in D^b_ctf. Small cases checked: K=0, h=id, N=j, a residue extension Ω larger than k, and non-flat B. There are no new nodes, no cycle and no SGA citation, and proof_deps equals the union of the step uses. I accept three off-route tool uses: lem-pur-derived-pullback-tensor-iso, lem-fix-operation-reduction and lem-trf-point-sections-finite-reduction. No fixes were made."
  }
 }

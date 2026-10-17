@@ -70,21 +70,53 @@
    }
   },
   {
-   "text": "Choose a simplicial quasi-inverse $d:B\\to A$ to $e$, and coherent natural equivalences $de\\simeq\\mathrm{id}_A$ and $ed\\simeq\\mathrm{id}_B$, as specified in [def-cbc-enhanced-diagrams-cones]. For $C=E,B$, restriction gives maps $R_C:\\operatorname{Fun}(B,C)^\\simeq\\to\\operatorname{Fun}(A,C)^\\simeq$ and $D_C$ in the reverse direction by $d$. Simplicial maps preserve equivalence edges by applying them to inverse-triangle witnesses, so these restrictions preserve cores. Whiskering the two chosen equivalences with a variable diagram supplies simplicial homotopies between $D_CR_C$ and the identity, and between $R_CD_C$ and the identity. Explicitly, if $\\eta:B\\times\\Delta^1\\to B$ is the chosen equivalence between $ed$ and the identity, the first homotopy before restriction to cores is the map $(F,t)\\mapsto F\\circ\\eta_t$, defined in all degrees by evaluation and the exponential formula; use the analogous map for $A$. These maps do land in the cores: their edges at a fixed $F$ are pointwise images of the equivalence components of $\\eta$, hence equivalences by [lem-coef-infinity-pointwise-equivalences]. Their edges at a fixed endpoint are restrictions of edges already in the source core. For a mixed edge $(\\alpha,0\\to1)$ in the product of a source core with $\\Delta^1$, use the explicit product $2$-simplex with vertices $(F_0,0),(F_1,0),(F_1,1)$: its first coordinate is the degeneracy of $\\alpha$ that repeats $F_1$, and its second coordinate is the monotone string $(0,0,1)$. The homotopy sends its two consecutive edges to a fixed-endpoint restriction edge and a fixed-diagram edge, and its long edge to the mixed edge. To check that its third side is invertible, use [lem-coef-homotopy-category-triangle-calculus]: an edge is an equivalence if and only if its class in the edge-and-triangle category is invertible, because inverse classes can be represented by edges and the two inverse equations can be represented by triangles. The naturality triangle makes the mixed-edge class the product of the other two invertible classes, so it is invertible too. Thus the homotopies restrict in all degrees, since cores consist of simplices whose edges are equivalences. Apply [lem-cbc-simplicial-homotopy-equivalence-weak] to conclude that both $R_E$ and $R_B$ are weak homotopy equivalences. No reversal map $\\Delta^1\\to\\Delta^1$ is asserted or needed: the chosen endpoint orientations are allowed.",
+   "text": "Choose a simplicial quasi-inverse $d:B\\to A$ and coherent natural equivalences $de\\simeq\\mathrm{id}_A$ and $ed\\simeq\\mathrm{id}_B$ from the functor-equivalence hypothesis. For $C=E,B$, let $R_C$ be restriction along $e$ and $D_C$ restriction along $d$.",
    "uses": [
-    "def-cbc-enhanced-diagrams-cones",
-    "lem-coef-infinity-pointwise-equivalences",
-    "lem-cbc-simplicial-homotopy-equivalence-weak",
-    "lem-coef-homotopy-category-triangle-calculus"
+    "def-cbc-enhanced-diagrams-cones"
    ],
    "elementary": false,
    "source": {
     "document": "https://kerodon.net/tag/00UB",
-    "place": "Proposition 3.1.7.13, forward implication; inverse-equivalence whiskering and Theorem 4.4.4.4 (01DK) These are Kerodon identifiers, not Stacks tags; online text read, archival copy WANTED."
+    "place": "Functor-equivalence definition and coherent natural equivalences; archival source WANTED."
    }
   },
   {
-   "text": "There is a strictly commutative square of Kan complexes with top map $R_E:\\mathcal D_B^\\simeq\\to\\mathcal D_A^\\simeq$, bottom map $R_B:\\mathcal C_B^\\simeq\\to\\mathcal C_A^\\simeq$, and vertical maps $r_B,r_A$. Its commutativity is the equality $q\\circ(F\\circ e)=(q\\circ F)\\circ e$ in every simplicial degree. Both horizontal maps are weak homotopy equivalences by Step 4, and $R_B$ takes the vertex $\\mathrm{id}_B$ to the vertex $e$. Apply [lem-coef-spaces-homotopy-fiber-detection] to this square, with its constant commutativity homotopy. The forward direction of its equivalence yields a weak homotopy equivalence\n$$\\phi:\\operatorname{hofib}_{\\mathrm{id}_B}(r_B)\\longrightarrow\\operatorname{hofib}_e(r_A).$$\nIn the path-space models its map is exactly $(x,\\gamma)\\mapsto(R_E(x),R_B\\circ\\gamma)$.",
+   "text": "The coherent equivalence $ed\\simeq\\mathrm{id}_B$ supplies the whiskering cylinder between $D_CR_C$ and $\\mathrm{id}$, and the analogous equivalence on $A$ supplies the cylinder between $R_CD_C$ and $\\mathrm{id}$, by [lem-coef-infinity-precomposition-cylinder].",
+   "uses": [
+    "lem-coef-infinity-precomposition-cylinder",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UB",
+    "place": "Proposition 3.1.7.13 forward implication; Kerodon source archival copy WANTED."
+   }
+  },
+  {
+   "text": "These cylinders restrict to the cores by [lem-coef-infinity-core-cylinder-restriction]. Its hypotheses hold because the components of the chosen coherent natural equivalences are equivalence edges, and the pointwise criterion identifies equivalences in each internal functor simplicial set.",
+   "uses": [
+    "lem-coef-infinity-core-cylinder-restriction",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4 and the edge-and-triangle calculation; archival source WANTED."
+   }
+  },
+  {
+   "text": "Thus $D_CR_C$ and $R_CD_C$ are simplicially homotopic to the respective identities on cores. Applying [lem-cbc-simplicial-homotopy-equivalence-weak] shows that both $R_E$ and $R_B$ are weak homotopy equivalences. Either endpoint orientation is permitted.",
+   "uses": [
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UB",
+    "place": "Proposition 3.1.7.13 forward implication; Kerodon source archival copy WANTED."
+   }
+  },
+  {
+   "text": "There is a strictly commutative square of Kan complexes with top map $R_E:\\mathcal D_B^\\simeq\\to\\mathcal D_A^\\simeq$, bottom map $R_B:\\mathcal C_B^\\simeq\\to\\mathcal C_A^\\simeq$, and vertical maps $r_B,r_A$. Its commutativity is the equality $q\\circ(F\\circ e)=(q\\circ F)\\circ e$ in every simplicial degree. Both horizontal maps are weak homotopy equivalences by Step 7, and $R_B$ takes the vertex $\\mathrm{id}_B$ to the vertex $e$. Apply [lem-coef-spaces-homotopy-fiber-detection] to this square, with its constant commutativity homotopy. The forward direction of its equivalence yields a weak homotopy equivalence\n$$\\phi:\\operatorname{hofib}_{\\mathrm{id}_B}(r_B)\\longrightarrow\\operatorname{hofib}_e(r_A).$$\nIn the path-space models its map is exactly $(x,\\gamma)\\mapsto(R_E(x),R_B\\circ\\gamma)$.",
    "uses": [
     "lem-coef-spaces-homotopy-fiber-detection"
    ],
@@ -107,7 +139,7 @@
    }
   },
   {
-   "text": "Now [lem-cbc-kan-whitehead-inverse] applies directly to $e^*$: Step 3 proved its source and target Kan, and Step 6 proved precisely the realized component and based-homotopy-group conditions in that node's statement. It gives a simplicial map $c:\\Gamma_e(q)\\to\\Gamma_{\\mathrm{id}_B}(q)$ and homotopies on product with $\\Delta^1$ from $ce^*$ and $e^*c$ to the respective identities. This is the claimed simplicial homotopy equivalence. The theorem explicitly permits empty Kan complexes. Every earlier fiber comparison also permits empty fibers, so the argument has made no nonemptiness assumption.",
+   "text": "Now [lem-cbc-kan-whitehead-inverse] applies directly to $e^*$: Step 3 proved its source and target Kan, and Step 9 proved precisely the realized component and based-homotopy-group conditions in that node's statement. It gives a simplicial map $c:\\Gamma_e(q)\\to\\Gamma_{\\mathrm{id}_B}(q)$ and homotopies on product with $\\Delta^1$ from $ce^*$ and $e^*c$ to the respective identities. This is the claimed simplicial homotopy equivalence. The theorem explicitly permits empty Kan complexes. Every earlier fiber comparison also permits empty fibers, so the argument has made no nonemptiness assumption.",
    "uses": [
     "lem-cbc-kan-whitehead-inverse"
    ],
@@ -124,10 +156,11 @@
   "lem-cbc-kan-whitehead-inverse",
   "lem-cbc-left-fibration-equivalence-lift",
   "lem-cbc-simplicial-homotopy-equivalence-weak",
-  "lem-coef-homotopy-category-triangle-calculus",
+  "lem-coef-infinity-core-cylinder-restriction",
   "lem-coef-infinity-core-kan-fibration",
   "lem-coef-infinity-isofibration-exponentiation",
   "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-precomposition-cylinder",
   "lem-coef-kan-pullback-path-comparison",
   "lem-coef-spaces-homotopy-fiber-detection"
  ],
@@ -293,7 +326,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-equivalence-anodyne-factorization",
@@ -318,8 +351,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-equivalence-section-restriction",
   "worker": "stage1",
-  "summary": "Revalidated the existing seven-step acyclic sandbox proof against the current shared DAG and Kerodon source statements, and made the product 2-simplex controlling mixed homotopy edges explicit. Right-fibration conservativity identifies strict sections with fibers on cores; inverse whiskering compares the ambient cores; natural constant-path comparison identifies the specified restriction map as a weak equivalence; Kan Whitehead supplies a simplicial inverse. Statement and provenance are preserved. Repeated logged Mathlib searches found no attachment or Mathlib match. No new nodes or Mathlib leaves.",
-  "blueprint": "Realizes the auxiliary equivalence-invariance of strict section spaces in the local cone-filling infrastructure below paragraph 2 (derived coefficient adjunction) of prop-coef-integral-exceptional-adjoint. The current main-20261015 proof has the same derived coefficient adjunction paragraph. This is below the fixed unit route, and introduces no coefficient-category identification.",
+  "summary": "Repaired the returned split by extracting the two hidden arguments in the former 2405-character whiskering step into the statement-only nodes lem-coef-infinity-precomposition-cylinder and lem-coef-infinity-core-cylinder-restriction. The item now has ten short proof steps: the new nodes state the evaluation cylinder and its core restriction, while the remaining steps preserve the established section-fiber and homotopy-fiber route.",
+  "blueprint": "Realizes the auxiliary equivalence-invariance of strict section spaces in the local cone-filling infrastructure below paragraph 2 (derived coefficient adjunction) of prop-coef-integral-exceptional-adjoint. The two new nodes make explicit the whiskering and core-restriction arguments formerly inline in Step 4.",
   "tool_uses": [
    {
     "node": "lem-cbc-left-fibration-equivalence-lift",
@@ -343,10 +376,10 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-N1-c302fb94a",
-  "group": "N1",
+  "reviewer": "NT-cc-Q94-1065694e0",
+  "group": "Q94",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-c302fb94a (reviewer sub-agent of L); spot-checked: I read the item and all 11 cited statements in full, plus the unit record and the one citer (lem-coef-infinity-equivalence-anodyne-factorization). There are no new nodes. The statement is Kerodon 02NC with Def. 7.2.1.1: Gamma_id and Gamma_e are exactly Fun_{/B}(B,E) and Fun_{/B}(A,E), defined by the Fun formula of def-cbc. Kerodon is not archived in literature/, so I checked the statement from my own knowledge of the source; it is marked agent-written and WANTED. I tested it on these cases: e=id; A=B empty; E empty over a nonempty B; a point mapped into the two-object contractible groupoid. It is true, not weakened, and no coefficient category or base change is involved. Step 1: E is a quasicategory, and under op q becomes a left fibration. The reflection clause and the prescribed-target clause then give conservativity and an isofibration with prescribed source. Step 2: exponentiation along the empty inclusion gives the isofibration p_K; the core of p_K is a Kan fibration and the cores are Kan, using C->Delta^0. Step 3: each strict fiber is Gamma_a, and every edge in it is an equivalence by reflection plus the pointwise criterion, so the fiber lies in the core and is Kan. Step 4: I checked F.eta_t edge by edge, including the mixed edge through the product 2-simplex and the triangle calculus; homotopy implies weak equivalence. Step 5: the fiber-detection forward direction applies, and the path direction matches the hofib model in def-cbc. Step 6: constant-path comparison plus 2-out-of-3 makes e^* a weak equivalence. The claim that phi is exactly R_B.gamma depends on reading 'compose with the constant homotopy' as the identity; if that composite were only defined up to a chosen filler, commutation up to homotopy still suffices, so this is not a gap. Step 7: Kan Whitehead gives the inverse, and empty cases are allowed. proof_deps equals the union of the step uses. There is no cycle: 137 nodes are reachable from the item and none leads back to it. Possible duplicates I read and rejected: cofinal-colimit-restriction, cofinality-space-test, final-index-colimit, anodyne-cocones, left-fibration-section-homotopy-pullback. Accepted tool_uses (sk-prop-sf-cbc is not on the route): lem-cbc-left-fibration-equivalence-lift, lem-cbc-simplicial-homotopy-equivalence-weak, lem-cbc-kan-whitehead-inverse. No SGA is cited and no changes were made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-1065694e0 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and all 12 proof_deps statements in full (plus triangle-calculus), and the unit record. No coefficient category or base-change morphism is involved: this is an auxiliary simplicial lemma under prop-coef-integral-exceptional-adjoint, paragraph 2. Kerodon sources are not archived; checked against 02NC and 01DK from my own knowledge, with the proof marked agent-written and the tags WANTED. Steps 1-3: (1) a right fibration is conservative and lifts equivalences with prescribed source, via the opposite and the prescribed-target clause of the left-fibration lemma; (2) exponentiation along the empty inclusion gives the isofibration p_K, its core map is a Kan fibration, and the cores are Kan via C->Delta^0; (3) the strict fibers equal Gamma_a and lie in the core, so they are Kan. Steps 4-7: choosing d and eta, the whiskering cylinders with K=B (ed≃id) and K=A (de≃id) have the right endpoints; the track hypothesis follows from the pointwise criterion; homotopy then gives weak equivalence with no Kan condition needed. Steps 8-10: the strict square with Kan corners gives phi by hofiber detection; j_A e* = phi j_B checked on n-simplices (both give (h∘e, const_e)); Kan Whitehead gives the inverse, empty cases allowed. The step-use union equals proof_deps, every step is under 1000 characters, and the three CBC tool_uses are generic simplicial tools, accepted. New node precomposition-cylinder: formula (x,s)↦F(eta(x,t(s)),s), simplicial with endpoints u*,v*; true; near-elementary but extracted at the return's request; not a duplicate of homotopy-precomp-equivalence, whose statement needs degenerate tracks. New node core-cylinder-restriction: the mixed edge (alpha,01) is the long edge of a product 2-simplex whose short edges are F0(track) and alpha_{v(k)}, so triangle calculus and the pointwise criterion make it an equivalence; true, and the hypothesis is necessary (N[1] counterexample); not a clause of the item; the statement contains no proof. Small cases e=id, empty A=B, empty E, and a point into the contractible two-object groupoid all hold. Duplicate searches over the DAG found nothing. No fixes; review.md written."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.InfinityEquivalenceSectionRestriction",

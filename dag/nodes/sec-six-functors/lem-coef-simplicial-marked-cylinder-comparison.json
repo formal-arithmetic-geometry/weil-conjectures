@@ -11,9 +11,83 @@
   "lem-coef-simplicial-inversion-universal-property",
   "lem-coef-simplicial-inversion-product-parameter"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First identify the interval localization under $[1]$. Put $i:[1]\\to\\mathbb J$. For each small target $T$, the walking-groupoid statement identifies restriction $\\operatorname{Map}^h(\\mathbb J,T)\\to\\operatorname{Map}^h([1],T)$ with a weak equivalence onto the union of the invertible-arrow components. Taking path components and using the natural bijection with morphisms in $h\\mathrm{sCat}$ from the framed-mapping statement, $i^*$ is injective with image precisely the classes inverting $t$. The characterization clause of the inversion universal property therefore identifies $L_{\\{t\\}}[1]$ with $\\mathbb J$ under $[1]$. In particular the identification carries the localization unit to $i$.",
+   "uses": [
+    "lem-coef-simplicial-walking-groupoid-components",
+    "lem-coef-simplicial-derived-pushout-mapping",
+    "lem-coef-simplicial-inversion-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.5.1, Lemma A.3.5.3 and Proposition A.3.5.5, printed pp.891-893; taking components of the cited walking-groupoid function-complex comparison."
+   }
+  },
+  {
+   "text": "Write $B=A\\times[1]$, $H=\\{(1_a,t):a\\in\\operatorname{Ob}A\\}$, $R=\\{(v,1_e):v\\in V,\\ e=0,1\\}$, and $s=1_A\\times i:B\\to A\\times\\mathbb J$. Apply product-parameter with $C=[1]$, $D=A$, $W=\\{t\\}$ and interchange the two factors. Its specified marked set is exactly $H$. Cartesian product with $A$ preserves Dwyer--Kan equivalences: by [lem-coef-realization-finite-limits] realization of a product of mapping simplicial sets is the k-space product, whose path components and homotopy groups are products, so a weak homotopy equivalence stays one after product with $A(a,a')$; and $\\pi_0(C\\times A)=\\pi_0C\\times\\pi_0A$, where the product of an equivalence with an identity is an equivalence. Hence $-\\times A$ descends to $h\\mathrm{sCat}$ and carries the isomorphism of Step 1 under $[1]$ to an isomorphism $L_{\\{t\\}}[1]\\times A\\cong\\mathbb J\\times A$ under $[1]\\times A$; the same functoriality makes the products $q\\times i$, $q\\times1_{\\mathbb J}$ used below classes in $h\\mathrm{sCat}$. Together with Step 1, its comparison identifies $L_HB$ with $A\\times\\mathbb J$ under $B$, with structure map $s$. Consequently, for every $T$, restriction $s^*$ is injective and its image is exactly the homotopy classes $B\\to T$ inverting $H$, by the inversion universal property. Both endpoint inclusions are carried to the corresponding endpoint inclusions because these comparisons are under $B$.",
+   "uses": [
+    "lem-coef-simplicial-inversion-product-parameter",
+    "lem-coef-simplicial-inversion-universal-property",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.5.14, printed p.896, and Proposition A.3.5.5, printed p.893; first product comparison."
+   }
+  },
+  {
+   "text": "Put $R_J=\\{(v,1_j):v\\in V,\\ j\\in\\operatorname{Ob}\\mathbb J\\}$ and $r=q\\times1_{\\mathbb J}:A\\times\\mathbb J\\to (L_VA)\\times\\mathbb J$. Apply product-parameter with $C=A$, $D=\\mathbb J$, $W=V$. It identifies $L_{R_J}(A\\times\\mathbb J)$ with $(L_VA)\\times\\mathbb J$ under $A\\times\\mathbb J$. The inversion universal property now says that $r^*$ is injective on morphisms to every $T$, with image exactly those classes inverting $R_J$. Notice that $s$ takes $R$ onto $R_J$: $[1]$ and $\\mathbb J$ have exactly the same two objects, and $s(v,1_e)=(v,1_e)$.",
+   "uses": [
+    "lem-coef-simplicial-inversion-product-parameter",
+    "lem-coef-simplicial-inversion-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.5.14, printed p.896, and Proposition A.3.5.5; second product comparison."
+   }
+  },
+  {
+   "text": "For a target $T$ and a class $f:B\\to T$, Step 2 gives a unique class $g:A\\times\\mathbb J\\to T$ with $gs=f$ if and only if $f$ inverts $H$. For this $g$, the equality $\\pi_0g\\,\\pi_0s\\cong\\pi_0f$ and the explicit formula $s(v,1_e)=(v,1_e)$ show that $g$ inverts $R_J$ if and only if $f$ inverts $R$. Thus Step 3 extends $g$ uniquely across $r$ precisely when $f$ inverts both $H$ and $R$. Composition of these two injective restriction maps is therefore injective, with image exactly the $U=H\\cup R$ inverting classes. By the characterization in the inversion universal property, $( (L_VA)\\times\\mathbb J,rs)$ is isomorphic under $B$ to $(L_UB,u)$, where $u:B\\to L_UB$ is the localization unit. Explicitly the property supplies maps each way under $B$; the two composites restrict to the respective identity maps on $B$, so injectivity makes both composites identities. This gives $\\Phi$ with $\\Phi u=rs=q\\times i$, and proves that it is the induced comparison claimed in the statement.",
+   "uses": [
+    "lem-coef-simplicial-inversion-universal-property",
+    "lem-coef-simplicial-derived-pushout-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.5.5, printed p.893; explicit composition of the two mapping properties, applied to the interval-inclusion argument of Lemma A.3.6.17, printed p.904."
+   }
+  },
+  {
+   "text": "Let $j_e:A\\to B$ denote the endpoint inclusion. The functoriality clause of the inversion universal property induces $k_e$ with $k_eq=uj_e$, since $j_e$ takes $V$ into $U$. Hence $(\\Phi k_e)q=\\Phi uj_e=(q\\times i)j_e=\\iota_eq$. Restriction along $q$ is injective for the target $(L_VA)\\times\\mathbb J$, so $\\Phi k_e=\\iota_e$, for $e=0,1$. All targets and products used above are small in the stipulated universe. The product comparison explicitly allows arbitrary mapping simplicial sets and unsaturated markings; the walking-groupoid statement uses a replacement of the target, imposing no fibrancy assumption on $A$. The extra essential-surjectivity hypothesis on $\\pi_0q$ is retained, although this argument does not need it.",
+   "uses": [
+    "lem-coef-simplicial-inversion-universal-property",
+    "lem-coef-simplicial-inversion-product-parameter",
+    "lem-coef-simplicial-walking-groupoid-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.5.5 functoriality and injectivity; Lemma A.3.6.17, printed p.904, final endpoint argument, with Lemma A.3.5.14."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-realization-finite-limits",
+  "lem-coef-simplicial-derived-pushout-mapping",
+  "lem-coef-simplicial-inversion-product-parameter",
+  "lem-coef-simplicial-inversion-universal-property",
+  "lem-coef-simplicial-walking-groupoid-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent-written two-stage mapping-property argument using HTT Proposition A.3.5.5 and Lemma A.3.5.14, expanding the final interval argument of A.3.6.17. Online text read 2026-10-17; archival HTT WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +123,38 @@
    "results": "2 hits; Mathlib/CategoryTheory/Localization/OfQuotient.lean, Mathlib/CategoryTheory/Localization/OfQuotient.lean",
    "date": "2026-10-17",
    "verdict": "no match: ordinary Functor.IsLocalization.prod (Prod.lean:139, read) is a product of ordinary categorical localizations, not a Bergner derived-pushout comparison with selected horizontal and vertical vertex arrows. Model-category Cylinder results supply cylinder objects but not this enriched marked localization; OfQuotient.lean:78 concerns ordinary full quotient functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The walking groupoid is the homotopy localization of the walking arrow, and enriched localization commutes with cartesian product",
+   "results": "Logged 8 hits; top results: CategoryTheory.Functor.IsLocalization.prod, CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q', CategoryTheory.Functor.IsLocalization.pi, CategoryTheory.Localization.instPreservesFiniteProductsLocalizationQ, CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prodLift, CategoryTheory.Localization.hasProductsOfShape, CategoryTheory.Localization.isGroupoid, CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prod",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical localization, simplicial-set homotopy categories, and model-category homotopy relations do not state localization of a simplicial category in the Bergner homotopy category. The ordinary localization product declaration at Mathlib/CategoryTheory/Localization/Prod.lean:139 was read and has ordinary-category hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a simplicial category times the walking arrow at vertical arrows and marked horizontal arrows gives its simplicial localization times the walking isomorphism",
+   "results": "Logged 8 hits; top results: CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf, HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization, HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization, HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso, CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve, CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prod_fac, CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk', HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical localization, simplicial-set homotopy categories, and model-category homotopy relations do not state localization of a simplicial category in the Bergner homotopy category. The ordinary localization product declaration at Mathlib/CategoryTheory/Localization/Prod.lean:139 was read and has ordinary-category hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bergner simplicial category marked localization preserves products and converts the interval into a contractible groupoid",
+   "results": "Logged 8 hits; top results: CategoryTheory.hoFunctor.preservesFiniteProducts, CategoryTheory.hoFunctor.preservesBinaryProduct, CategoryTheory.hoFunctor.preservesBinaryProducts, SSet.hoFunctor, CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex, SSet.QCat, CategoryTheory.hoFunctor.isIso_prodComparison, SSet.Truncated.HomotopyCategory.BinaryProduct.functor_obj",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical localization, simplicial-set homotopy categories, and model-category homotopy relations do not state localization of a simplicial category in the Bergner homotopy category. The ordinary localization product declaration at Mathlib/CategoryTheory/Localization/Prod.lean:139 was read and has ordinary-category hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem prod|instance.*prod|IsLocalization.prod",
+   "results": "Logged 2 hits; top results: 19, 139",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical localization, simplicial-set homotopy categories, and model-category homotopy relations do not state localization of a simplicial category in the Bergner homotopy category. The ordinary localization product declaration at Mathlib/CategoryTheory/Localization/Prod.lean:139 was read and has ordinary-category hypotheses."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-localization-comparison-calculus",
@@ -83,5 +185,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-marked-cylinder-comparison",
+  "worker": "stage1",
+  "summary": "Retained the statement and earlier two-stage localization route. Repaired the unchecked identification of the interval localization by citing the existing walking-groupoid function-complex and framed-mapping statements. Replaced informal transport of markings by two injective restriction maps whose images are computed explicitly; their composition inverts exactly U. Endpoint identities follow by restriction injectivity. Refreshed citations against the current DAG; no new nodes. Maintainer reader: step 2 now states and justifies that product with A preserves Dwyer--Kan equivalences, citing lem-coef-realization-finite-limits.",
+  "blueprint": "The inherited ancestry serves paragraph 2 (derived coefficient adjunction) of prop-coef-integral-exceptional-adjoint through its comparison-calculus chain. This item supplies the final interval-inclusion argument of HTT A.3.6.17 using A.3.5.5 and A.3.5.14; it changes no unit or chapter route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-31f172fd9",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-31f172fd9 (reviewer sub-agent of L); spot-checked: I read the item, its report and every cited statement in full: inversion-universal-property, inversion-product-parameter, walking-groupoid-components, derived-pushout-mapping and realization-finite-limits. The statement is unchanged and introduces its own objects. The essential-surjectivity hypothesis is extra but harmless, and it holds by lem-coef-simplicial-localization-essential-image. Small cases checked: A empty; A a point with V empty (gives 𝕁); V empty; A=[1] with V its arrow (gives 𝕁×𝕁); markings with identities or repeated arrows. Step-by-step results. Step 1: taking π0 of the walking-groupoid weak equivalence onto the union of invertible-arrow components gives the mapping property of (𝕁,i), and the characterization clause then gives 𝕁 ≅ L_{t}[1]. Step 2 had a C3 gap: it multiplied the Step 1 isomorphism in hsCat by A, which needs products to preserve Dwyer–Kan equivalences. That fact appears only in the proof of product-parameter, not in its statement. I fixed it in fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-marked-cylinder-comparison.json by adding the two-line argument and citing lem-coef-realization-finite-limits (same unit, no cycle), and recomputed proof_deps. Step 3: the marked set is exactly R_J, and s(R)=R_J because s(v,1_e)=(v,1_e). Step 4: both directions of the image criterion hold, rs=q×i inverts H and R, and injectivity yields Φ under B. Step 5: k_e q=u j_e, then (q×i)j_e=ι_e q, and injectivity of q^* gives Φk_e=ι_e. Route and duplicates: all citations are in the unit sk-prop-sf-biduality-general, so there are no tool_uses. There is no cycle; the only citer is comparison-calculus step 4, which uses exactly these clauses. There are no new nodes, and no duplicate exists in the DAG. Source: HTT A.3.5.5, A.3.5.14 and A.3.6.17 are not archived under literature/, so they were not checked against the source. proof_origin.by=agent and the WANTED line are correct. No SGA is used.; 1 file(s) fixed by the reviewer"
  }
 }
