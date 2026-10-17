@@ -68,3 +68,42 @@ theorem exists_etale_away_tensor_of_isLocalization {A A' X : Type u} [CommRing A
   exact Algebra.Etale.of_restrictScalars A (Localization.Away s) Y
 
 end Algebra
+
+namespace RingTheory.DepthTwo
+
+section Locus
+
+variable {B : Type*} [CommRing B] [IsNoetherianRing B]
+
+/-- **Avoiding the bad locus.** Let `good` be a property of elements of a Noetherian ring `B`,
+and `P` a prime such that every prime `Q ⊊ P` avoids some `good` element. Then there is `h₀ ∉ P`
+such that every prime `Q ∌ h₀` not containing `P` avoids some `good` element: the closed set of
+primes containing all `good` elements meets `D(h₀)` inside `V(P)`. -/
+lemma exists_forall_exists_not_mem (good : B → Prop) (P : Ideal B) [P.IsPrime]
+    (H : ∀ Q : Ideal B, Q.IsPrime → Q < P → ∃ h ∉ Q, good h) :
+    ∃ h₀ ∉ P, ∀ Q : Ideal B, Q.IsPrime → h₀ ∉ Q → ¬ P ≤ Q → ∃ h ∉ Q, good h := by
+  classical
+  let I := Ideal.span {h | good h}
+  have hfin := Ideal.finite_minimalPrimes_of_isNoetherianRing B I
+  let s := hfin.toFinset.filter fun p ↦ ¬ p ≤ P
+  have hs (p : Ideal B) (hp : p ∈ s) : ∃ x ∈ p, x ∉ P := Set.not_subset.1 (Finset.mem_filter.1 hp).2
+  choose! f hf using hs
+  refine ⟨∏ p ∈ s, f p, ?_, fun Q hQ hQh hPQ ↦ ?_⟩
+  · rw [Ideal.IsPrime.prod_mem_iff]
+    rintro ⟨p, hp, hfp⟩
+    exact (hf p hp).2 hfp
+  · by_contra! hall
+    obtain ⟨p, hp, hpQ⟩ := Ideal.exists_minimalPrimes_le (I := I) (J := Q)
+      (Ideal.span_le.2 fun h hh ↦ by_contra fun hhQ ↦ hall h hhQ hh)
+    have := hp.1.1
+    by_cases hpP : p ≤ P
+    · rcases lt_or_eq_of_le hpP with hlt | rfl
+      · obtain ⟨h, hhp, hh⟩ := H p this hlt
+        exact hhp (hp.1.2 (Ideal.subset_span hh))
+      · exact hPQ hpQ
+    · have hps : p ∈ s := Finset.mem_filter.2 ⟨(Set.Finite.mem_toFinset _).2 hp, hpP⟩
+      exact hQh ((Ideal.IsPrime.prod_mem_iff).2 ⟨p, hps, hpQ (hf p hps).1⟩)
+
+end Locus
+
+end RingTheory.DepthTwo
