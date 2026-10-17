@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-trf-pairing-point-normalization",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Pairing and its point normalization",
@@ -12,50 +12,236 @@
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-pairing/prop-trf-pairing-point-normalization.md",
   "place": "node prop-trf-pairing-point-normalization, order 2320"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-trf-categorical-trace",
+  "def-trf-correspondence-between-pairs",
+  "def-trf-supported-pairing"
+ ],
  "proof": [
   {
-   "text": "The supported-class bijection of\n[def-trf-correspondence], followed by the Kunneth–Verdier\nisomorphism [thm-trf-kunneth-verdier], turns $u$ at a point into\n$(u\\otimes1)\\operatorname{coev}_P:A\\to Q\\otimes_A^{\\mathrm L}P^\\vee$, and\nsimilarly for $v$. In the recipe of\n[def-trf-supported-pairing], contraction of these two classes cancels\nthe adjacent evaluation–coevaluation pair by a triangle identity. What\nremains is precisely the composite defining the categorical trace of\n[def-trf-categorical-trace], with endomorphism $vu$; the graded\nsigns are fixed by the formal laws [prop-trf-trace-formal-laws].\nThis proves the normalization.",
+   "text": "Use the global finite-field and finite-coefficient conventions already fixed by [def-trf-coefficient-conventions], so $k$ is algebraically closed, $A=A_{E,n}$ with $n\\geq1$, and $s=\\operatorname{Spec}k$. In [def-trf-correspondence-between-pairs] take $X=Y=C=D=s$, $K=P$, $L=Q$, and all legs to be identities. Thus $u:P\\to Q$ and $v:Q\\to P$ are an opposite pair, even when $P\\neq Q$; the support intersection and all its projections are $s$ and identities. The identity functor is its own exceptional right adjoint, hence $\\omega_s=A_s$ by [def-trf-dualizing-complex]. Choose bounded finite-projective representatives $B,T$ of the perfect complexes, with their evaluation, coevaluation and finite dual frames as in [def-trf-categorical-trace]. Their coefficient-sheaf versions are bounded complexes of retracts of finite sums of $A_s$: their cohomology is finite constructible and their tensor products with a sheaf in degree zero have a common bounded range. They therefore belong to $D^b_{ctf}(s,A)$. All exceptional admissibility conditions in the pairing and Künneth–Verdier constructions are identity cases here. The exact equivalence [lem-weil-point-fibre-equivalence], with the sections functor specified by [def-weil-finite-coefficient-point], allows us to check the morphism equality on these models. On finite sums of the unit, tensor, evaluation, and symmetry have their ordinary module formulas; restricting to the finite-projective retracts gives the signed model formulas of [def-trf-categorical-trace]. The morphism-representative bijection [lem-pc-ring-derived-map-representative] gives degree-zero chain maps $U:B\\to T$, $V:T\\to B$ representing $u,v$.",
    "uses": [
-    "def-trf-correspondence",
+    "def-trf-coefficient-conventions",
+    "def-trf-correspondence-between-pairs",
+    "def-trf-dualizing-complex",
+    "def-trf-categorical-trace",
+    "lem-weil-point-fibre-equivalence",
+    "def-weil-finite-coefficient-point",
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-pairing/prop-trf-pairing-point-normalization.proof.md",
+    "place": "first paragraph: point hypotheses and perfect-complex models"
+   }
+  },
+  {
+   "text": "The class bijection is [lem-trf-correspondence-class]. For identity support it is tensor–Hom adjunction. In [def-sf-kv-maps] (ii)–(iv), all exceptional counits at the point are identity maps, and the transpose of $\\kappa_{Q,P}$ is $Q\\otimes P^\\vee\\otimes P\\xrightarrow{1\\otimes\\operatorname{ev}_P}Q$. Its invertibility is [thm-trf-kunneth-verdier]. Choose finite dual frames $(e_{i,a},\\epsilon_{i,a})$ of $B^i$ and $(f_{j,b},\\phi_{j,b})$ of $T^j$ as in [def-trf-categorical-trace], so $x=\\sum_a\\epsilon_{i,a}(x)e_{i,a}$ and $y=\\sum_b\\phi_{j,b}(y)f_{j,b}$. The inverse Künneth–Verdier classes before swapping are\n$$\n\\widetilde u(1)=\\sum_{i,a}U(e_{i,a})\\otimes\\epsilon_{i,a},\\qquad\n\\widetilde v'(1)=\\sum_{j,b}V(f_{j,b})\\otimes\\phi_{j,b}.\n$$\nIndeed tensor–Hom transposition of the first sends $x\\in B^i$ to $\\sum_a\\epsilon_{i,a}(x)U(e_{i,a})=U(x)$, and transposition of the second sends $y\\in T^j$ to $\\sum_b\\phi_{j,b}(y)V(f_{j,b})=V(y)$. These tensors are genuine chain maps, not merely graded tensors: for either $W=B$ or $W=T$, write $(g_{i,a},\\gamma_{i,a})$ for its chosen degreewise dual frame. Expanding $dg_{i,a}$ in the frame of $W^{i+1}$ and using the dual-frame identity in $W^i$ gives\n$$\n\\sum_a dg_{i,a}\\otimes\\gamma_{i,a}\n=\\sum_b g_{i+1,b}\\otimes(\\gamma_{i+1,b}\\circ d).\n$$\nIn the differential of $\\sum_{i,a}g_{i,a}\\otimes\\gamma_{i,a}$, the differential on the first factor is the left side, while the differential on the second factor in the adjacent degree is the negative of the right side, since $(-1)^{i+1}(-1)^{-i}=-1$. Thus coevaluation is closed. Evaluation is a chain map as well: for $\\varphi$ of degree $-i$ and $x\\in W^{i-1}$ its value on $d(\\varphi\\otimes x)$ is $((-1)^{1-i}+(-1)^{-i})\\varphi(dx)=0$; on every other total degree it is zero by degree. Composing coevaluation with the chain maps $U\\otimes1$ or $V\\otimes1$ therefore gives the displayed classes. Together with their computed transposes, these are exactly the classes of $u,v$. The factor-exchange in Step 1 of [def-trf-supported-pairing] gives\n$$\n\\widetilde v(1)=\\sum_{j,b}(-1)^j\\phi_{j,b}\\otimes V(f_{j,b}),\n$$\nbecause $|\\phi_{j,b}|=-j$ and $|V(f_{j,b})|=j$.",
+   "uses": [
+    "lem-trf-correspondence-class",
+    "def-sf-kv-maps",
     "thm-trf-kunneth-verdier",
+    "def-trf-categorical-trace",
+    "def-trf-supported-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-pairing/prop-trf-pairing-point-normalization.proof.md",
+    "place": "first paragraph: both supported classes and the swap"
+   }
+  },
+  {
+   "text": "For the identity supports, $\\mu$ and the exceptional adjunction in [def-trf-supported-pairing] are unit identifications, so the pairing is its contraction of $\\widetilde u\\otimes\\widetilde v$. A summand has factor order $U(e_{i,a}),\\epsilon_{i,a},\\phi_{j,b},V(f_{j,b})$. To apply $\\operatorname{ev}_T\\otimes\\operatorname{ev}_B$, move $\\phi_{j,b}$ past $\\epsilon_{i,a}$ and $U(e_{i,a})$, leaving order $\\phi_{j,b},U(e_{i,a}),\\epsilon_{i,a},V(f_{j,b})$. The additional Koszul sign is $(-1)^{(-j)(-i+i)}=1$. Evaluation is zero unless $i=j$, and the finite dual-frame identity for $T^i$ gives\n$$\n\\begin{aligned}\n\\langle u,v\\rangle_{\\mathrm{LV}}\n&=\\sum_{i,a,b}(-1)^i\\phi_{i,b}(U(e_{i,a}))\\epsilon_{i,a}(V(f_{i,b}))\\\\\n&=\\sum_{i,a}(-1)^i\\epsilon_{i,a}(VU(e_{i,a})).\n\\end{aligned}\n$$\nApply the defining trace composite of [def-trf-categorical-trace] to $VU$ on $B$: coevaluation sends $1$ to $\\sum_{i,a}e_{i,a}\\otimes\\epsilon_{i,a}$; $VU\\otimes1$ sends it to $\\sum_{i,a}VU(e_{i,a})\\otimes\\epsilon_{i,a}$; symmetry contributes $(-1)^{i(-i)}=(-1)^i$; evaluation gives the last displayed sum. Thus the pairing equals $\\operatorname{tr}_A(vu\\mid P)$. This is equality of the specified derived morphisms by the model comparison in Step 1; conjugating the representative of $vu$ leaves its trace unchanged by [prop-trf-trace-formal-laws] (conjugacy invariance). The calculation uses finite dual frames and allows nonzero differentials.",
+   "uses": [
     "def-trf-supported-pairing",
     "def-trf-categorical-trace",
     "prop-trf-trace-formal-laws"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-pairing/prop-trf-pairing-point-normalization.proof.md",
+    "place": "first paragraph: explicit triangle cancellation and trace, including graded signs"
+   }
   },
   {
-   "text": "The same adjunction calculation identifies the *diagonal\nspecialization* on any $X$: if $f:\\Fix(c)\\to X$ is the canonical map,\nits exceptional adjoint is\n\n$$\nRf_!A_{\\Fix(c)}\\simeq\\Delta^*Rc_!A_C\n\\xrightarrow{\\Delta^*\\widetilde u}K\\otimes_A^{\\mathrm L}D_XK\n\\xrightarrow{\\mathrm{ev}\\circ\\mathrm{sym}}\\omega_X .\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Indeed, under the tensor–Hom adjunction and biduality ([thm-trf-verdier-biduality]) of\n[def-trf-dualizing-complex], the class of the diagonal identity maps\nto $1_K$, and the supported cup product reduces by the projection\nformula and $!$-base change to the displayed composite. This is the\nclassical trace-class dictionary used by the proper-comparison input on\nthe specific representatives.",
+   "text": "The second and third source paragraphs also record a diagonal dictionary on $X$. Let $c:C\\to X\\times_sX$ be an admissible correspondence, $K\\in D^b_{ctf}(X,A)$, $u:Lc_2^*K\\to Rc_1^!K$, and assume all the exceptional admissibility hypotheses of [lem-trf-trace-class-diagonal-pairing], including those for the diagonal opposite pair and its trace-map comparison. Put $F=\\operatorname{Fix}(c)$ and let $f:F\\to X$ be its canonical map. The cited lemma states that $\\langle u,1_K\\rangle_{\\mathrm{LV}}=\\operatorname{Tr}_c(u)$, and that both sides are the exceptional adjoint along $f$ of the Künneth–Verdier class, base changed to the diagonal and evaluated. With $\\widetilde u:Rc_!A_C\\to K\\boxtimes_A^{\\mathrm L}D_XK$ defined in [def-trf-supported-pairing], this is\n$$\nRf_!A_F\\simeq L\\Delta^*Rc_!A_C\n\\xrightarrow{L\\Delta^*\\widetilde u}K\\otimes_A^{\\mathrm L}D_XK\n\\xrightarrow{\\operatorname{ev}_K\\circ\\operatorname{sym}}\\omega_X.\n$$\nThe first isomorphism is the fixed-square base change included in that lemma's adjoint description, and $\\operatorname{ev}_K:D_XK\\otimes K\\to\\omega_X$ is the evaluation defined in [def-trf-dualizing-complex]. Thus the displayed consequence uses the existing lemma's statement, under its full hypotheses.",
    "uses": [
-    "thm-trf-verdier-biduality",
+    "lem-trf-trace-class-diagonal-pairing",
+    "def-trf-supported-pairing",
     "def-trf-dualizing-complex"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-pairing/prop-trf-pairing-point-normalization.proof.md",
+    "place": "second and third paragraphs: diagonal-specialization consequence"
+   }
   }
  ],
  "proof_deps": [
-  "def-trf-correspondence",
+  "def-trf-coefficient-conventions",
+  "def-trf-correspondence-between-pairs",
+  "def-trf-dualizing-complex",
+  "def-trf-categorical-trace",
+  "lem-weil-point-fibre-equivalence",
+  "def-weil-finite-coefficient-point",
+  "lem-pc-ring-derived-map-representative",
+  "lem-trf-correspondence-class",
+  "def-sf-kv-maps",
   "thm-trf-kunneth-verdier",
   "def-trf-supported-pairing",
-  "def-trf-categorical-trace",
   "prop-trf-trace-formal-laws",
-  "thm-trf-verdier-biduality",
-  "def-trf-dualizing-complex"
+  "lem-trf-trace-class-diagonal-pairing"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-pairing/prop-trf-pairing-point-normalization.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-pairing/prop-trf-pairing-point-normalization.proof.md",
+  "place": "first paragraph expanded on finite-projective dual frames; second and third paragraphs via the existing diagonal-pairing statement"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "supported pairing of perfect complexes at a point equals categorical trace of composite",
+   "results": "8 hits: HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply; DerivedCategory.TStructure.t; CategoryTheory.Functor.mem_homologicalKernel_trW_iff; DerivedCategory.instIsLEObjSingleFunctor; CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom; CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply; CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply; DerivedCategory.instIsGEObjSingleFunctor. Generic duality/ordinary module trace declarations do not state the supported-pairing normalization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.trace, tensor, evaluation, coevaluation",
+   "results": "0 hits: . loogle: unknown identifier 'CategoryTheory.MonoidalCategory.trace'. Generic duality/ordinary module trace declarations do not state the supported-pairing normalization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidalCategory\\.trace|integral_traceClass_eq_trace",
+   "results": "0 hits: . Generic duality/ordinary module trace declarations do not state the supported-pairing normalization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "point normalization supported pairing categorical trace",
+   "results": "8 hits: Algebra.normalizedTrace_def; Algebra.normalizedTrace; Algebra.normalizedTrace_algebraMap_eq_id; Algebra.normalizedTrace_eq_of_finiteDimensional_apply; Algebra.normalizedTrace_eq_of_finiteDimensional; Algebra.normalizedTrace.congr_simp; Algebra.normalizedTrace_self; Algebra.normalizedTrace_map. Generic duality/ordinary module trace declarations do not state the supported-pairing normalization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "supported pairing of perfect complexes at a point equals categorical trace of composite",
+   "results": "8 hits: DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.left_fac_of_isStrictlyGE; DerivedCategory.instIsLEObjSingleFunctor; DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.instIsGEObjSingleFunctor. Generic duality/ordinary module trace declarations do not state the supported-pairing normalization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalCategory.trace",
+   "results": "0 hits: . loogle: unknown identifier 'MonoidalCategory.trace'. Generic duality/ordinary module trace declarations do not state the supported-pairing normalization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "integral_traceClass_eq_trace",
+   "results": "0 hits: . Generic duality/ordinary module trace declarations do not state the supported-pairing normalization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- CategoryTheory.MonoidalCategory.trace _",
+   "results": "0 hits: . loogle: Unknown constant `CategoryTheory.MonoidalCategory.trace`. Generic duality/ordinary module trace declarations do not state the supported-pairing normalization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "categorical trace in a symmetric monoidal category",
+   "results": "8 hits: CategoryTheory.ExactPairing.evaluation; CategoryTheory.ExactPairing.evaluation'; CategoryTheory.MonObj.termγ; CategoryTheory.MonObj.termγ[_]; CategoryTheory.MonObj.termγ[_,_]; CategoryTheory.RigidCategory; CategoryTheory.ExactPairing; CategoryTheory.RightRigidCategory. Generic duality/ordinary module trace declarations do not state the supported-pairing normalization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def trace|theorem trace",
+   "results": "0 hits: . Generic duality/ordinary module trace declarations do not state the supported-pairing normalization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "evaluation contraction of dual morphisms equals trace of composition in a rigid category",
+   "results": "8 hits: CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation; CategoryTheory.leftAdjointMate_comp_evaluation; CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation; CategoryTheory.rightAdjointMate_comp_evaluation; LinearMap.trace_eq_contract_apply; LinearMap.trace_eq_contract; CategoryTheory.ExactPairing.coevaluation_evaluation'; CategoryTheory.ExactPairing.evaluation_coevaluation'. Generic duality/ordinary module trace declarations do not state the supported-pairing normalization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coevaluation\"",
+   "results": "12 hits: CategoryTheory.ExactPairing.coevaluation; CategoryTheory.ExactPairing.coevaluation'; CategoryTheory.coevaluation_comp_leftAdjointMate; CategoryTheory.coevaluation_comp_rightAdjointMate; CategoryTheory.coevaluation_comp_leftAdjointMate_assoc; CategoryTheory.coevaluation_comp_rightAdjointMate_assoc; CategoryTheory.ExactPairing.coevaluation_evaluation''; CategoryTheory.ExactPairing.evaluation_coevaluation''. Generic duality/ordinary module trace declarations do not state the supported-pairing normalization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coevaluation|ExactPairing",
+   "results": "25 hits: Mathlib/LinearAlgebra/Coevaluation.lean; Mathlib/LinearAlgebra/Coevaluation.lean; Mathlib/LinearAlgebra/Coevaluation.lean; Mathlib/LinearAlgebra/Coevaluation.lean; Mathlib/LinearAlgebra/Coevaluation.lean; Mathlib/Algebra/Category/FGModuleCat/Basic.lean; Mathlib/Algebra/Category/FGModuleCat/Basic.lean; Mathlib/Algebra/Category/FGModuleCat/Basic.lean. Generic duality/ordinary module trace declarations do not state the supported-pairing normalization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lefschetz Verdier pairing for two maps between perfect complexes at a point is trace of composition",
+   "results": "8 hits: DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.ShortComplex.ShortExact.singleδ, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.Abelian.Ext.homLinearEquiv, CategoryTheory.Functor.comp_homologySequenceδ, CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift, CategoryTheory.Functor.homologySequenceδ_comp. Generic derived-category, rigid-category or finite-free module identities do not state the supported Lefschetz–Verdier normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "trace_eq_contract|coevaluation_evaluation|evaluation_coevaluation",
+   "results": "12 hits: Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean. Generic derived-category, rigid-category or finite-free module identities do not state the supported Lefschetz–Verdier normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lefschetz Verdier pairing equals trace of composition of perfect complex morphisms",
+   "results": "8 hits: LinearMap.trace_eq_contract', LinearMap.trace_eq_contract, LinearMap.IsPerfPair.congr, LinearMap.apply_symm_toPerfPair_self, RootPairing.toPerfPair_comp_root, LinearMap.toPerfPair_apply, LinearMap.IsPerfPair.dualEval, Matrix.toPerfectPairing_apply_apply. Generic derived-category, rigid-category or finite-free module identities do not state the supported Lefschetz–Verdier normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coevaluation\", \"evaluation\"",
+   "results": "12 hits: CategoryTheory.ExactPairing.coevaluation, CategoryTheory.ExactPairing.coevaluation', CategoryTheory.coevaluation_comp_leftAdjointMate, CategoryTheory.coevaluation_comp_rightAdjointMate, CategoryTheory.coevaluation_comp_leftAdjointMate_assoc, CategoryTheory.coevaluation_comp_rightAdjointMate_assoc, CategoryTheory.ExactPairing.coevaluation_evaluation'', CategoryTheory.ExactPairing.evaluation_coevaluation''. Generic derived-category, rigid-category or finite-free module identities do not state the supported Lefschetz–Verdier normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "trace_eq_contract|tensorLeftHomEquiv_whiskerRight_comp_evaluation",
+   "results": "6 hits: Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean. These ordinary finite-free module contraction formulas and generic adjunction identities do not state the supported Lefschetz–Verdier pairing for complexes on the coefficient site.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"contract\"",
+   "results": "5 hits: LinearMap.trace_eq_contract_of_basis, LinearMap.trace_eq_contract, LinearMap.trace_eq_contract_of_basis', LinearMap.trace_eq_contract', LinearMap.trace_eq_contract_apply. These ordinary finite-free module contraction formulas and generic adjunction identities do not state the supported Lefschetz–Verdier pairing for complexes on the coefficient site.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "categorical trace is contraction of the tensors corresponding to two opposite linear maps",
+   "results": "8 hits: LinearMap.trace_eq_contract_apply, LinearMap.trace_eq_contract', LinearMap.trace_eq_contract, LinearMap.trace_comp_comm, LinearMap.trace_eq_contract_of_basis, LinearMap.trace_eq_contract_of_basis', LinearMap.trace_comp_cycle', LinearMap.trace_comp_cycle. These ordinary finite-free module contraction formulas and generic adjunction identities do not state the supported Lefschetz–Verdier pairing for complexes on the coefficient site.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -86,5 +272,34 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-p-pairing"
+ "unit": "sk-p-pairing",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-trf-pairing-point-normalization",
+  "worker": "stage1",
+  "summary": "Rechecked the existing sandbox against the current blueprint and all cited statements. Retained the explicit opposite-pair dual-frame calculation, point-model comparison, and signed contraction, and the source diagonal consequence under the existing lemma's full hypotheses. All 18 statement quotes match the current DAG. Repeated Mathlib searches with actual logged outputs; no new nodes or Mathlib leaves, and the sorried Lean special case is not an attachment. Second reading supplies the differential cancellation establishing that the finite-dual-frame coevaluation and evaluation used in Step 2 are chain maps, as the definition itself explicitly postpones these assertions. No new node is required for this elementary calculation.",
+  "blueprint": "Steps 1–3 realize the first paragraph of prop-trf-pairing-point-normalization.proof.md (point models, class adjunction, and explicit contraction); Step 4 realizes its second and third paragraphs (diagonal dictionary).",
+  "tool_uses": [
+   {
+    "node": "lem-trf-trace-class-diagonal-pairing",
+    "why": "The second source paragraph uses the established diagonal trace-class/exceptional-adjoint dictionary, which is a generic lemma from the trace-class unit rather than a new point-normalization node."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Only its exact, fully faithful finite-coefficient fibre functor is used to detect the point-model equality. The supported-pairing construction and Kunneth–Verdier class remain the unit route; tensor/evaluation agreement is checked on the finite-projective models in Step 1."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-trace-class-diagonal-pairing",
+  "lem-weil-point-fibre-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-e9fc28798",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-e9fc28798 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 4 steps and the full statements of all 13 cited nodes. The item statement is word-for-word the main-20261015 blueprint statement (order 2664; same as master 2320) and is not weakened. Step 1: the opposite pair with identity legs on s is a valid instance of def-trf-correspondence-between-pairs, and omega_s=A_s. Equality of morphisms is detected through the fibre equivalence (exact and fully faithful only; it is not used as monoidal). The tensor and evaluation formulas are taken on finite sums of A_s, which I accept as an elementary computation at the final object. The Mathlib representative leaf applies because the complexes are bounded projective. Step 2: the transpose of kappa is 1⊗ev with no Koszul sign, checked against def-sf-kv-maps (iii). I re-derived the coevaluation and evaluation chain-map calculation from the d^vee sign of def-trf-categorical-trace and confirmed the swap sign (-1)^j. Avoiding the basis-based lem-trf-chain-supertrace is right. Step 3: the move sign is +1, i=j is forced, and the frame collapse gives sum (-1)^i eps(VU e), which is the trace composite; only the conjugacy clause of prop-trf-trace-formal-laws is used. Step 4 restates the statement of lem-trf-trace-class-diagonal-pairing under its full hypotheses (source paragraphs 2–3, unit step 2). Small cases checked: A[0], A[1], unequal ranks A^2 vs A, Hom=0, zero objects, n=1 and n>1, empty Fix. proof_deps equals the union of the step uses. There is no cycle and no duplicate in the DAG, no new nodes and no SGA source. All cited statements lie on the unit route (sk-def-sf-admissible is reached through sk-thm-sf-package), so the two declared tool_uses are redundant and harmless. The unit's realized fields are rightly left empty, because the new blueprint states the unit as its own sk-p-pairing node. No fixes."
+ }
 }

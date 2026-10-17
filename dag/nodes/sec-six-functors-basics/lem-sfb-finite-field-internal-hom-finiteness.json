@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sfb-dc-hom-preserves",
-   "place": "lem-sfb-dc-hom-preserves.proof.md, sentence 'By Deligne's finiteness theorem for the internal $\\RHom$ (SGA 4½, Th. finitude, 1.6) on the finite type $k$-scheme $X$, with coefficients in which $p$ is invertible, this is a bounded complex with constructible cohomology': the finite-coefficient finiteness, sourced to Bhatt–Scholze 6.7.13 under the no-SGA route lock (parent steps 1–3).",
+   "place": "lem-sfb-dc-hom-preserves.proof.md, finite-coefficient internal-Hom finiteness sentence after the reduction-modulo-varpi display; realized by the closed-support and stratified devissage proof of Bhatt–Scholze Lemmas 6.7.11 and 6.7.13.",
    "via": []
   },
   "same_as": []
@@ -23,9 +23,157 @@
   "sk-def-sfb-constructible",
   "sk-def-sfb-derived-tensor-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the constant coefficient ring sheaf $A_T$ on every scheme $T$ below, using the canonical identification $p_T^*\\underline A=A_T$. Since $A$ is a finite field, finite-dimensional, finitely generated and finitely presented $A$-modules are the same finite modules. Consequently the finite constant local model definition in [sk-def-sfb-constructible] is exactly the intrinsic finite-coefficient constructibility used below. Write $\\mathcal B(T)$ for the complexes with this constructible cohomology in a finite interval. The field $k$ is Noetherian (its only ideals are $0,k$), and $\\operatorname{Spec}k$ is quasi-compact with its single point; [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. Every open subscheme of a Noetherian scheme is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. An immersion is locally of finite type by [lem-weil-pbc-immersion-base-change-lft]. Closed immersions are quasi-compact (inverse images of quasi-compact opens are closed subsets of those opens); an open immersion in a Noetherian scheme is quasi-compact by the preceding open-subscheme result applied on affine opens. Hence all open and closed immersions used below are finite type. Their sources are again finite type over $k$: on affine charts this says that a finitely generated algebra over a finitely generated $k$-algebra is finitely generated, by adjoining both finite sets of generators. They are therefore Noetherian too. Such schemes are quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]; the quasi-compactness and quasi-separatedness required of the morphisms below follow from [lem-weil-pbc-qcqs-morphism-permanence]. No assumption on perfection, finiteness or separable closedness of $k$ is used. The ambient categories and internal Hom of the statement are those of the cited ringed-site nodes: module objects over the ring object $A_T$ of $\\Sh(T_{\\mathrm{proét}},\\Ab)$ are exactly sheaves of modules over the constant ring sheaf $A_T$, with the same morphisms, and the Layer-B derived tensor product of [sk-def-sfb-derived-tensor-hom] is the K-flat derived tensor product of module sheaves. Hence its internal Hom, being a right adjoint of $K\\otimes^{\\mathbf L}_{A_T}-$, is canonically isomorphic, by uniqueness of right adjoints, to the ringed-site $R\\mathcal Hom_{A_T}$ used in steps 7–9.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "§6.7 hypotheses; finite-type specialization of the schemes used in Lemmas 6.7.11 and 6.7.13"
+   }
+  },
+  {
+   "text": "The category $\\mathcal B(T)$ is closed under shifts and distinguished triangles. Indeed [lem-sfb-discrete-noetherian-constructible-serre] applies to the Noetherian coefficient ring $A$ on the pro-étale site, and [lem-sf-derived-homology-long-exact] expresses every new cohomology sheaf in a triangle as an extension of a cokernel by a kernel of maps between the other two complexes' cohomology sheaves. The cited closure statement uses constructibility imposed on each affine open; on the Noetherian, hence qcqs, scheme $T$ it agrees with the global finite stratification of [sk-def-sfb-constructible]. A global stratification restricts to one on each affine open $U$, since $Z_a\\cap U$ is locally closed and constructible in $U$ and inverse images compose. Conversely, given such partitions on a finite affine open cover $T=\\bigcup_bW_b$, [lem-weil-pbc-etale-stratification-local-gluing-core] gives a finite constructible locally closed stratification of $T$ each of whose stratum immersions factors through some local stratum $T_{b,c}\\to W_b\\to T$. The inverse image along that factorization of a sheaf which is pro-étale locally constant with finite-dimensional values is again such a sheaf (pull back the trivializing cover; the inverse image of a constant sheaf is constant). Thus kernels, cokernels and extensions stay in the finite constant local model sense. Their two finite intervals give a finite interval after taking their union and the adjacent shifted interval. For a scheme morphism $v:T'\\to T$, inverse image with constant coefficients is exact by [lem-weil-pbc-site-pullback-abelian-exact] (the coefficient ring pulls back to the same constant ring). Its cohomology is therefore $v^*H^r(-)$. Pulling back the finite stratification and the finite constant local models proves that $v^*$ preserves $\\mathcal B$; the constructible pullback assertion is also [lem-weil-pbc-module-constructible-pullback]. In particular this applies to open and closed inverse images. This argument concerns inverse image, not exceptional inverse image.",
+   "uses": [
+    "lem-sfb-discrete-noetherian-constructible-serre",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-module-constructible-pullback",
+    "lem-weil-pbc-etale-stratification-local-gluing-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09B5, lemma-constructible-serre; pullback of the strata in definition-constructible (Tag 09AJ); long exact cohomology sequence"
+   }
+  },
+  {
+   "text": "For any finite-type morphism $f:T\\to V$ between the finite-type $k$-schemes used here, ordinary pro-étale $Rf_*$ preserves $\\mathcal B$. To see all hypotheses, choose for $C\\in\\mathcal B(T)$ a bounded constructible étale origin $C_0$ by [lem-weil-pbc-finite-ring-constructible-derived-origin]. Since $A$ is annihilated by $\\ell$ and $p\\ne\\ell$, the integer $\\ell$ is invertible in $k$. Thus [thm-dg-finite-type-constructibility], which allows arbitrary fields and finite rings, gives $Rf_{\\mathrm{ét},*}C_0\\in D^b_c(V_{\\mathrm{ét}},A)$. The morphism is qcqs as checked in step 1, and $C_0$ is bounded below, so [sk-thm-pe-direct-image-comparison] identifies\n$$Rf_{\\mathrm{proét},*}C\\cong\\nu_V^*Rf_{\\mathrm{ét},*}C_0.$$\nThe interval-preserving constructible comparison in the first cited node puts the right side in $\\mathcal B(V)$. In particular this proves the ordinary direct-image finiteness needed for each open or closed immersion below; it does not assume a cohomological-dimension bound on the ground field.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "thm-dg-finite-type-constructibility",
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Theorem 6.7.1, Lemma 6.7.2 with R=A and m=0; comparison Lemma 5.4.3; Stacks Tags 09AL and 099R"
+   }
+  },
+  {
+   "text": "Let $g:Z\\hookrightarrow T$ be a closed immersion among these schemes, with open complement $h:W\\hookrightarrow T$, and let $M\\in\\mathcal B(T)$. Apply [lem-exc-proetale-support-triangle] to obtain\n$$g_*Rg^!M\\longrightarrow M\\longrightarrow Rh_*h^*M\\longrightarrow g_*Rg^!M[1].$$\nHere $T$ is Noetherian and $A$ is finite, exactly the hypotheses of that ambient support triangle. Step 2 gives $h^*M\\in\\mathcal B(W)$; step 3 gives $Rh_*h^*M\\in\\mathcal B(T)$; step 2 and the triangle give $g_*Rg^!M\\in\\mathcal B(T)$. By [lem-weil-pbc-proetale-ringed-open-closed], $g^*g_*\\cong\\mathrm{id}$ and $g_*$ is exact. Applying the constructible-preserving exact $g^*$ of step 2 therefore gives $Rg^!M\\in\\mathcal B(Z)$. The complement is quasi-compact because $T$ is Noetherian. This proves the closed-support case inside this argument, without introducing another node.",
+   "uses": [
+    "lem-exc-proetale-support-triangle",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.11, proof; open-complement support triangle"
+   }
+  },
+  {
+   "text": "Every sheaf of $A_T$-modules is flat. Here is the elementary argument that permits use of flat-sheaf generation without an additional finite-Tor hypothesis. Regard the coefficient ring as the sheafification of the constant ring presheaf $A$. By [lem-pc-sites-module-sheafification-tensor], tensoring two $A_T$-module sheaves can be computed by sheafifying the presheaf $U\\mapsto F(U)\\otimes_A G(U)$. A monomorphism of sheaves is injective on sections by [lem-weil-pbc-sheafification-exact]. For every object $U$, choose an $A$-basis of $F(U)$; tensoring an injection with $F(U)$ is then a direct sum of copies of that injection, hence injective. Exact sheafification, again [lem-weil-pbc-sheafification-exact], preserves this monomorphism. Tensor is right exact (it represents bilinear maps, so is a left adjoint), and is therefore exact. This proves flatness even though a constructible sheaf need not be locally free on all of $T$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-tensor",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW, lemma-sheafification-tensor, applied to the constant presheaf A; exact sheafification, lemma-sheafification-exact; vector-space basis calculation"
+   }
+  },
+  {
+   "text": "Apply clauses (1) and (2) of [det-sf-flat-model-generation] to each constructible sheaf $F$ on $X$: its flatness was proved in step 5 and $X$ is Noetherian by step 1. It follows that $F$ is a finite iterated extension of $a_!L$ for locally closed strata $a:S\\hookrightarrow X$ and locally constant sheaves $L$ with finite projective $A$-values, hence finite-dimensional $A$-values. Use precisely that node's convention: factor $a$ as $S\\xrightarrow{j}Z\\xrightarrow{g}X$, with $j$ open in the scheme-theoretic closure and $g$ closed, and put $a_!L=g_*j_!L$. Each short exact extension in the sheaf filtration gives a distinguished triangle after placing the sheaves in degree zero, by [lem-weil-pbc-complex-ses-triangle]. Both $Z$ and $S$ satisfy step 1. For the bounded complex $P$, the triangles of [lem-pc-derived-lower-truncation-step-triangle] give a finite construction from the $H^r(P)[-r]$: if $H^r(P)=0$ outside $[u,v]$, start with $\\tau_{\\ge v+1}P=0$ and successively use\n$$H^r(P)[-r]\\longrightarrow\\tau_{\\ge r}P\\longrightarrow\\tau_{\\ge r+1}P\\longrightarrow H^r(P)[-r+1]$$\nfor $r=v,v-1,\\ldots,u$, ending at $\\tau_{\\ge u}P\\cong P$. Consequently $P$ is obtained by finitely many shifts and extensions from these $g_*j_!L$.",
+   "uses": [
+    "det-sf-flat-model-generation",
+    "lem-pc-derived-lower-truncation-step-triangle",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.3.3 and 6.3.9 and the filtering argument of Lemma 6.7.13; existing flat-sheaf generation used only in clauses (1)–(2)"
+   }
+  },
+  {
+   "text": "For later use let $L$ be locally constant with finite-dimensional $A$-values on $S$ and let $N\\in\\mathcal B(S)$. Then $R\\mathcal Hom_{A_S}(L,N)\\in\\mathcal B(S)$. Indeed [lem-weil-pbc-ringed-internal-hom-exact-restriction] allows restriction of the ambient derived internal Hom to every object of a pro-étale cover trivializing $L$. On a member on which $L\\cong A^d$, the restricted Hom is $N^{\\oplus d}$: by tensor–Hom adjunction the internal Hom out of the tensor unit $A$ is the identity, and a finite direct sum in the first argument becomes a finite product, equal here to a finite direct sum. Thus the cohomology vanishes outside the very same finite interval as that of $N$, independently of $d$. Moreover $H^rR\\mathcal Hom(L,N)=\\mathcal Hom(L,H^rN)$, and the basis calculation gives $\\mathcal Hom(L,H^rN)=L^\\vee\\otimes H^rN$ locally. On any stratum trivializing $H^rN$ pro-étale locally, intersect that cover with a trivializing cover of $L$; these sheaves then have finite-dimensional constant values, and so does their tensor product. The original finite stratification for $H^rN$ therefore witnesses constructibility of this cohomology sheaf. No assertion that restriction to an arbitrary closed stratum commutes with derived Hom is being used.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.13, locally constant calculation; Stacks Tag 08JB, lemma-restriction-RHom-to-U"
+   }
+  },
+  {
+   "text": "Compute the Hom for a generator from step 6, keeping its open-then-closed factorization. Apply [lem-weil-stratum-ambient-hom] first to the closed immersion $g:Z\\hookrightarrow X$ (take the subsequent open immersion to be the identity), and then to the open immersion $j:S\\hookrightarrow Z$ (take the preceding closed immersion to be the identity). Since the ambient right adjoint of open extension by zero is the exact restriction $j^*$, these give\n$$\\begin{aligned}\nR\\mathcal Hom_{A_X}(g_*j_!L,Q)\n&\\cong Rg_*R\\mathcal Hom_{A_Z}(j_!L,Rg^!Q)\\\\\n&\\cong Rg_*Rj_*R\\mathcal Hom_{A_S}(L,j^*Rg^!Q).\n\\end{aligned}$$\nIn the open specialization the closed factor is the identity; its direct image has identity right adjoint, since $\\operatorname{Hom}(\\mathrm{id}(K),M)=\\operatorname{Hom}(K,\\mathrm{id}(M))$. The definition of $Rs^!$ in [lem-weil-stratum-ambient-hom] therefore gives $j^!=j^{-1}=j^*$. Exactness of $g_*$, so $Rg_*=g_*$, is included in [lem-weil-pbc-condensed-open-closed-recollement], applied to the finite constant coefficient ring. Only its exact sheaf direct image is used here; the closed exceptional functor is the ambient right adjoint already used in step 4. Every base is Noetherian by step 1 and every open complement is quasi-compact, as required by these two cited statements. Step 4 gives $Rg^!Q\\in\\mathcal B(Z)$, step 2 gives $j^*Rg^!Q\\in\\mathcal B(S)$, and step 7 gives constructibility and boundedness of the innermost Hom. Applying step 3 to $j$ and then $g$ proves $R\\mathcal Hom(g_*j_!L,Q)\\in\\mathcal B(X)$. We never exchange the two factors of $a$, and need no assertion about independence of its factorization.",
+   "uses": [
+    "lem-weil-stratum-ambient-hom",
+    "lem-weil-pbc-condensed-open-closed-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.13, adjunction calculation, expanded for the canonical open-then-closed stratum generators; Lemma 6.7.11"
+   }
+  },
+  {
+   "text": "Fix $Q$ and propagate step 8 through the finite construction of $P$ in step 6. The bifunctor sends triangles to triangles contravariantly in its first variable and sends a shift in that variable to the opposite shift in the value by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Thus the zero object, each generator, each shifted generator, and each successive extension have Hom into $Q$ in $\\mathcal B(X)$, using the closure established in step 2. Induction first over each finite extension filtration of a sheaf and then over the finite truncation tower of $P$ proves $R\\mathcal Hom_{A_X}(P,Q)\\in\\mathcal B(X)$. By the definition of $\\mathcal B$ in step 1 this is exactly the two claimed conclusions: a finite cohomological interval and constructibility in the specified finite constant local model sense. The empty scheme and zero complexes give zero throughout.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.13, finite dévissage; Stacks Tag 08JC, lemma-RHom-triangulated"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-sfb-discrete-noetherian-constructible-serre",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-module-constructible-pullback",
+  "lem-weil-pbc-etale-stratification-local-gluing-core",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "thm-dg-finite-type-constructibility",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-exc-proetale-support-triangle",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-weil-pbc-sheafification-exact",
+  "det-sf-flat-model-generation",
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-stratum-ambient-hom",
+  "lem-weil-pbc-condensed-open-closed-recollement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.7.13, proof, and Lemma 6.7.11; finite-coefficient specialization R=A, m=0, with finite stratified dévissage expanded using Lemmas 6.3.3 and 6.3.9."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -117,10 +265,73 @@
    "results": "No hits.",
    "date": "2026-10-16",
    "verdict": "no match: these general sheaf, finite-presentation and categorical declarations do not state this coefficient-specific constructibility theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "(Constructible|constructible).*(RHom|derivedHom|internalHom)|(RHom|derivedHom|internalHom).*(Constructible|constructible)",
+   "results": "{\"t\": \"2026-10-17T00:34:45Z\", \"tool\": \"grep\", \"query\": \"(Constructible|constructible).*(RHom|derivedHom|internalHom)|(RHom|derivedHom|internalHom).*(Constructible|constructible)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned categorical, condensed-module, or finite-dimensional module internal Hom declarations do not state constructible derived internal-Hom finiteness on a scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible complexes of finite field module sheaves are closed under derived internal Hom",
+   "results": "{\"t\": \"2026-10-17T00:34:45Z\", \"tool\": \"leansearch\", \"query\": \"Bounded constructible complexes of finite field module sheaves are closed under derived internal Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.locallySmall\", \"CategoryTheory.ihom\", \"CategoryTheory.MonoidalClosed.closed\", \"CategoryTheory.internalHom\", \"FGModuleCat.instIsMonoidalClosedModuleCatIsFG\", \"FGModuleCat.ihom_obj\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"HomologicalComplex.instAbelian\"], \"digest\": \"8c8222187b108d7a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned categorical, condensed-module, or finite-dimensional module internal Hom declarations do not state constructible derived internal-Hom finiteness on a scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of bounded constructible sheaves over a finite coefficient field on a finite type scheme is bounded constructible",
+   "results": "{\"t\": \"2026-10-17T00:34:13Z\", \"tool\": \"leanfinder\", \"query\": \"Derived internal Hom of bounded constructible sheaves over a finite coefficient field on a finite type scheme is bounded constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"instMonoidalClosedLightCondSet\", \"instMonoidalClosedCondensedSet\", \"LightCondensed.ihomPoints\", \"CompHausLike.LocallyConstantModule.functor\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\"], \"digest\": \"1fcbe3f711e243ac\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned categorical, condensed-module, or finite-dimensional module internal Hom declarations do not state constructible derived internal-Hom finiteness on a scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafHom\"",
+   "results": "{\"t\": \"2026-10-17T00:34:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.presheafHom\", \"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.presheafHom_naturality\", \"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.presheafHom_naturality_assoc\", \"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.uliftYonedaEquiv_presheafHom_uliftYoneda_obj\", \"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.uliftYonedaEquiv_ι_presheafHom\", \"CategoryTheory.Functor.IsCoverDense.Types.presheafHom\", \"CategoryTheory.Functor.IsCoverDense.sheafHom\", \"CategoryTheory.Functor.IsCoverDense.sheafHom_eq\"], \"digest\": \"e22a5a38ac04183e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned categorical, condensed-module, or finite-dimensional module internal Hom declarations do not state constructible derived internal-Hom finiteness on a scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves on the pro etale site with finite field coefficients internal Hom finiteness",
+   "results": "{\"t\": \"2026-10-17T00:34:50Z\", \"tool\": \"leanfinder\", \"query\": \"Constructible sheaves on the pro etale site with finite field coefficients internal Hom finiteness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"Condensed.finFree\", \"Condensed.lanSheafProfinite\", \"Condensed.profiniteSolid\", \"LightCondensed\", \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"LightCondAb.ofSheafLightProfinite\"], \"digest\": \"b2984149e50958fb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned categorical, condensed-module, or finite-dimensional module internal Hom declarations do not state constructible derived internal-Hom finiteness on a scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "(constructible|Constructible).*(sheafExt|Ext|internalHom|ihom)|(sheafExt|Ext|internalHom|ihom).*(constructible|Constructible)",
+   "results": "{\"t\": \"2026-10-17T00:46:27Z\", \"tool\": \"grep\", \"query\": \"(constructible|Constructible).*(sheafExt|Ext|internalHom|ihom)|(sheafExt|Ext|internalHom|ihom).*(constructible|Constructible)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern sheaf cohomology, ambient Ext or module-category structure, without constructibility or eventual vanishing of derived internal Hom on finite-type schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher sheaf Ext between constructible sheaves of finite dimensional vector spaces on schemes is constructible and vanishes in large degrees",
+   "results": "{\"t\": \"2026-10-17T00:46:28Z\", \"tool\": \"leanfinder\", \"query\": \"Higher sheaf Ext between constructible sheaves of finite dimensional vector spaces on schemes is constructible and vanishes in large degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"CategoryTheory.hasExt_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"CategoryTheory.hasInjectiveDimensionLT_iff\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\"], \"digest\": \"52b0bb66aeaa209b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern sheaf cohomology, ambient Ext or module-category structure, without constructibility or eventual vanishing of derived internal Hom on finite-type schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-17T00:46:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ext\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.OverPresheafAux.OverArrows.ext\", \"CategoryTheory.OverPresheafAux.OverArrows.ext_iff\", \"CategoryTheory.OverPresheafAux.YonedaCollection.ext\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeUliftYonedaUliftYonedaMap\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_leftKanExtension\", \"CategoryTheory.Presheaf.isExtensionAlongULiftYoneda\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension\"], \"digest\": \"5dbe54259bd12d8c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern sheaf cohomology, ambient Ext or module-category structure, without constructibility or eventual vanishing of derived internal Hom on finite-type schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf Ext of constructible finite field module sheaves on an algebraic variety is bounded constructible",
+   "results": "{\"t\": \"2026-10-17T00:47:43Z\", \"tool\": \"leansearch\", \"query\": \"Sheaf Ext of constructible finite field module sheaves on an algebraic variety is bounded constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"SheafOfModules.instAbelian\", \"SheafOfModules.IsFiniteType.mk\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.hasLimitsOfSize\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.mk\"], \"digest\": \"b0dc836e05a81e4c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern sheaf cohomology, ambient Ext or module-category structure, without constructibility or eventual vanishing of derived internal Hom on finite-type schemes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-dc-hom-preserves",
@@ -128,5 +339,139 @@
   "group": "Q36"
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-dc-restricted-functors"
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-finite-field-internal-hom-finiteness",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Nine steps expand the finite-coefficient Bhatt–Scholze support-and-devissage proof using existing nodes only. They prove ordinary direct-image finiteness via etale origin/comparison, derive closed-support finiteness from localization, prove field-coefficient sheaf flatness explicitly, and compute internal Hom on open-then-closed stratum generators before finite truncation induction. No new nodes or Mathlib leaves. No finite/perfect/separably closed ground-field hypothesis or additional finite-Tor hypothesis is used.",
+  "blueprint": "Realizes the finite-coefficient internal-Hom finiteness sentence of lem-sfb-dc-hom-preserves.proof.md after its mod-varpi Hom display. Preserves the unit restricted-functor route and uses Bhatt–Scholze 6.7.11–6.7.13 for the finite-coefficient input.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Checks the Noetherian hypothesis for the ambient support and stratified-generation tools; the unit does not supply this scheme-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Ensures open strata and open complements stay Noetherian and quasi-compact."
+   },
+   {
+    "node": "lem-weil-pbc-immersion-base-change-lft",
+    "why": "Supplies locally finite type for each open or closed immersion; a generic scheme tool."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Supplies quasi-separatedness for the comparison theorem."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Supplies qcqs for the ordinary direct-image comparison on the finite-type strata."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "The generic cohomology exact sequence checks closure of bounded constructible complexes under cones."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Exactness of site inverse image, used for ordinary constructible pullback."
+   },
+   {
+    "node": "lem-weil-pbc-module-constructible-pullback",
+    "why": "Pulls finite stratifications and finite presentations back along the immersions."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Finite-ring comparison identifies intrinsic bounded constructibility with bounded constructible etale origin."
+   },
+   {
+    "node": "thm-dg-finite-type-constructibility",
+    "why": "Ordinary finite-coefficient direct-image finiteness over an arbitrary field; the unit lower-star lemma only treats adic and rational coefficients."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Transports the ordinary finite-ring etale direct-image finiteness to the pro-etale ambient category."
+   },
+   {
+    "node": "lem-exc-proetale-support-triangle",
+    "why": "The ambient closed-support triangle, used to prove constructibility of the closed exceptional inverse image rather than assume it."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Exact closed direct image and g^*g_*=id finish the closed-support calculation."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "The constant-presheaf tensor formula proves flatness over the coefficient field by a basis calculation."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Exact sheafification and sectionwise monomorphisms justify the elementary flatness calculation."
+   },
+   {
+    "node": "det-sf-flat-model-generation",
+    "why": "Clauses (1)–(2) give finite stratified extension filtrations of flat constructible sheaves, with general finite coefficients and no special ground field."
+   },
+   {
+    "node": "lem-pc-derived-lower-truncation-step-triangle",
+    "why": "The explicit generic truncation triangle gives a finite construction of P from its cohomology sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Ambient ringed-site Hom commutes with slice restriction, shifts and triangles; no constructible-preservation is assumed."
+   },
+   {
+    "node": "lem-weil-stratum-ambient-hom",
+    "why": "Ambient internal-Hom adjunction for an open immersion and a closed immersion; no constructible-preservation or biduality is assumed."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-open-closed-recollement",
+    "why": "Identifies the open exceptional inverse image with restriction and the closed derived direct image with its exact sheaf functor."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Turns the short exact sheaf extensions of the stratified filtration into distinguished triangles for the derived internal-Hom induction."
+   },
+   {
+    "node": "lem-sfb-discrete-noetherian-constructible-serre",
+    "why": "The generic weak-Serre theorem for discrete Noetherian coefficient rings supplies kernels, cokernels and extensions on the pro-etale site; this unit has no separate finite-field constructible-Serre statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-stratification-local-gluing-core",
+    "why": "Glues the per-affine strata of the weak-Serre statement to one global finite stratification on the Noetherian scheme; a generic scheme tool absent from this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-module-constructible-pullback",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "thm-dg-finite-type-constructibility",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-exc-proetale-support-triangle",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-weil-pbc-sheafification-exact",
+  "det-sf-flat-model-generation",
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-stratum-ambient-hom",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sfb-discrete-noetherian-constructible-serre",
+  "lem-weil-pbc-etale-stratification-local-gluing-core"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N5-13f746974",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-13f746974 (reviewer sub-agent of L); spot-checked: I read the item, all 24 proof dependencies and 5 stmt_deps, the parent's use of the item, the unit, and Bhatt–Scholze 6.7.11 and 6.7.13 (PDF text). The statement is the R=A, m=0 case of 6.7.13 and is not weakened. Checks: X=Spec k needs no bound on cd(k), because sheaf Ext of finite Galois modules over F_l vanishes in positive degrees; the cases j_!A, empty X and zero P or Q behave as expected. No duplicate node exists: thm-coef-finite-hom, lem-fin-lisse-field-dual and the formal stratum-Hom nodes have other hypotheses. Steps 3–9 are correct. The direct image goes through the etale origin node, thm-dg (arbitrary field, l invertible) and the qcqs comparison. The closed shriek is handled by the support triangle and i^*i_*=id, as in BS 6.7.11. Flatness holds because tensor over a field is exact sectionwise and sheafification is exact. The flat-model filtration and the truncation tower have correct indices (n=-r). The stratum ambient Hom is applied twice, with the identity as one factor each time, in the open-then-closed order. I repaired two E6-type gaps. (1) Step 2 used the Serre node's per-affine constructibility as if it were the item's global stratification; I added the conversion, citing lem-weil-pbc-etale-stratification-local-gluing-core, with a tool_uses entry. (2) Step 1 did not identify the statement's closed-structure internal Hom with the ringed-site RHom used in steps 7–9; I added an elementary uniqueness-of-adjoints sentence and cited sk-def-sfb-derived-tensor-hom. I accept all declared tool_uses as generic tools. No SGA source is used. The statement is unchanged, and no node is added or dropped.; 1 file(s) fixed by the reviewer"
+ }
 }

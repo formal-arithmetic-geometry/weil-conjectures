@@ -3,67 +3,175 @@
  "blueprint": {
   "is": "thm-sf-dual-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Dual base change",
- "statement": "In the setting of [def-sf-datum], let\n\n$$\n\\begin{array}{ccc}\nX' & \\xrightarrow{g'} & X\\\\\nf'\\downarrow && \\downarrow f\\\\\nY' & \\xrightarrow{g} & Y\n\\end{array}\n$$\n\nbe a Cartesian square of separated finite-type $S$-schemes. Then there is a\ncanonical isomorphism, natural in the square and compatible with the pasting\nof squares,\n\n$$\nRf^!Rg_*\\xrightarrow{\\ \\sim\\ }Rg'_*Rf'^!,\n$$\n\nthe right adjoint of the base-change isomorphism\n$\\operatorname{Ex}_!:Lg^*Rf_!\\cong Rf'_!Lg'^*$. If $g$ is proper, so that\n$g'$ is proper as well and $Rg_!=Rg_*$, $Rg'_!=Rg'_*$ by [fix-prop-adjunctions],\nthe same isomorphism reads\n\n$$\nRf^!Rg_!\\xrightarrow{\\ \\sim\\ }Rg'_!Rf'^!.\n$$",
+ "statement": "Fix a six-functor datum [def-sf-datum], with its finite-type $k$-scheme and coefficient conventions, and write $\\mathcal C_T=D^b_{ctf}(T,\\Lambda)$ for its supplied finite-Tor categories. Let\n$$\n\\begin{array}{ccc}\nX' & \\xrightarrow{g'} & X\\\\\nf'\\downarrow && \\downarrow f\\\\\nY' & \\xrightarrow{g} & Y\n\\end{array}\n$$\nbe a Cartesian square of separated finite-type $k$-schemes whose arrows are separated and of finite type. Use the canonical exchange and composition comparisons, with the identity, square-comparison and pasting normalizations of [fix-lem-exchanges], restricted to the domains supplied by the datum. There is a canonical natural isomorphism of functors $\\mathcal C_{Y'}\\to\\mathcal C_X$,\n$$\n\\beta_\\square:Rf^!Rg_*\\xrightarrow{\\sim}Rg'_*Rf'^!,\n$$\nnatural in the square through the adjoint comparison maps and compatible with horizontal and vertical pasting. More precisely, under the composite adjunctions [def-weil-pbc-composite-adjunction]\n$$Lg^*Rf_!\\dashv Rf^!Rg_*,\\qquad Rf'_!Lg'^*\\dashv Rg'_*Rf'^!,$$\n$\\beta_\\square$ is the inverse of the conjugate [def-weil-pbc-adjunction-conjugate] of the canonical base-change isomorphism $\\operatorname{Ex}_!:Lg^*Rf_!\\xrightarrow{\\sim}Rf'_!Lg'^*$; equivalently it is the conjugate of $\\operatorname{Ex}_!^{-1}$. If $g$ is proper, then $g'$ is proper, and under the proper-coincidence identifications $Ru_!\\cong Ru_*$ of axiom (A4) of [def-sf-datum], the same isomorphism reads\n$$Rf^!Rg_!\\xrightarrow{\\sim}Rg'_!Rf'^!.$$\nAll integral operations here are completed, and the rational and algebraically closed coefficient operations have the datum's scalar-localization and common-stage meanings; there is no assertion on unrestricted ambient categories.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/thm-sf-dual-base-change.md",
   "place": "node thm-sf-dual-base-change, order 2234"
  },
  "stmt_deps": [
   "def-sf-datum",
-  "fix-prop-adjunctions"
+  "fix-lem-exchanges",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate"
  ],
  "proof": [
   {
-   "text": "The map $\\operatorname{Ex}_!$ is the canonical exchange of\n[def-exchange-projection]; that it is an isomorphism is axiom (A2), and\nin the concrete setting it is the assertion of the compact-support\nbase-change theorem of the compact-support chapter\n([thm-cbc-qbar], with the finite-coefficient, pro-étale and finite-extension forms [thm-cbc-finite-torsion], [thm-cbc-finite-level-proetale], [thm-cbc-complete-proetale], [thm-cbc-finite-extension]) at the coefficient stage\n$\\Lambda$, with the proper case and the finite-type case supplied by the\nproper-base-change theorems of the proper-base-change chapter\n([lemma-weil-pbc-prime-proper-base-change], [thm-weil-pbc-bounded-below], [thm-weil-pbc-finite-level-proetale], [thm-weil-pbc-complete-proetale], [thm-weil-pbc-qbar]) and the smooth case by the\nsmooth-base-change theorems of the smooth-base-change chapter\n([sbc-thm-smooth-base-change]). The right adjoint of the composite\n$Lg^*Rf_!$ is the composite of the right adjoints in the reverse order,\n$Rf^!Rg_*$, and the right adjoint of $Rf'_!Lg'^*$ is $Rg'_*Rf'^!$: both\nadjunctions are the ones of [def-sf-datum](A1), and they are the\nadjunctions proved in [fix-prop-adjunctions]. An isomorphism of\nfunctors induces an isomorphism between their right adjoints by the\nuniqueness of adjoints, and the induced map is the mate of\n$\\operatorname{Ex}_!$ along the two pasted adjunctions, hence natural and\ncompatible with pasting by [lem-sf-mate]. The second assertion\nsubstitutes the properness identification $Rg_!=Rg_*$ of\n[fix-prop-adjunctions], which is stable under base change because\nproperness is ([lemma-weil-pbc-prime-proper-base-change] for the square).",
+   "text": "Put $A=Lg^*Rf_!$, $B=Rf'_!Lg'^*$, $R=Rf^!Rg_*$ and $T=Rg'_*Rf'^!$. The datum [def-sf-datum](A1) supplies the four individual adjunctions on $\\mathcal C_X,\\mathcal C_Y,\\mathcal C_{X'},\\mathcal C_{Y'}$. Applying the Hom-bijection construction of [def-weil-pbc-composite-adjunction] twice gives $A\\dashv R$ and $B\\dashv T$. In particular $\\operatorname{Hom}(AK,L)=\\operatorname{Hom}(Rf_!K,Rg_*L)=\\operatorname{Hom}(K,RL)$, and the other chain is $\\operatorname{Hom}(BK,L)=\\operatorname{Hom}(Lg'^*K,Rf'^!L)=\\operatorname{Hom}(K,TL)$. All objects in these chains lie in the categories stipulated by the datum, so no ambient exceptional adjoint is being used. Axiom (A2) supplies the specified natural isomorphism $\\tau=\\operatorname{Ex}_!:A\\to B$.",
    "uses": [
-    "def-exchange-projection",
-    "thm-cbc-qbar",
-    "thm-cbc-finite-torsion",
-    "thm-cbc-finite-level-proetale",
-    "thm-cbc-complete-proetale",
-    "thm-cbc-finite-extension",
-    "lemma-weil-pbc-prime-proper-base-change",
-    "thm-weil-pbc-bounded-below",
-    "thm-weil-pbc-finite-level-proetale",
-    "thm-weil-pbc-complete-proetale",
-    "thm-weil-pbc-qbar",
-    "sbc-thm-smooth-base-change",
     "def-sf-datum",
-    "fix-prop-adjunctions",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-sf-dual-base-change.proof.md",
+    "place": "Proof: A1, A2 and the two composite right adjoints"
+   }
+  },
+  {
+   "text": "Let $\\eta_A,\\varepsilon_A$ and $\\eta_B,\\varepsilon_B$ be the units and counits just constructed. Apply [def-weil-pbc-adjunction-conjugate] to $\\tau:A\\to B$. Its conjugate is the natural transformation\n$$\\alpha:T\\xrightarrow{\\eta_A T}RAT\\xrightarrow{R\\tau T}RBT\\xrightarrow{R\\varepsilon_B}R.$$\nConjugate $\\tau^{-1}$ in the other direction to obtain\n$$\\beta:R\\xrightarrow{\\eta_B R}TBR\\xrightarrow{T\\tau^{-1}R}TAR\\xrightarrow{T\\varepsilon_A}T.$$\nThat node's composition and identity clauses give $\\alpha\\circ\\beta=(\\tau^{-1}\\circ\\tau)^c=\\mathrm{id}_R$ and $\\beta\\circ\\alpha=(\\tau\\circ\\tau^{-1})^c=\\mathrm{id}_T$. Thus $\\beta=\\alpha^{-1}$ is the claimed isomorphism. Its component at any $L\\in\\mathcal C_{Y'}$ is exactly this unit--inverse-exchange--counit composite; in particular it is a natural transformation in $L$, rather than just an objectwise choice of isomorphisms.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-sf-dual-base-change.proof.md",
+    "place": "Proof: uniqueness of right adjoints and the mate of Ex_!; direction made explicit"
+   }
+  },
+  {
+   "text": "For naturality in the square, [fix-lem-exchanges](1) gives commutative exchange diagrams through the canonical square comparisons. Write the left and right exchange functors for two squares as $A_i\\dashv R_i$, $B_i\\dashv T_i$, $\\tau_i:A_i\\to B_i$, with $A_i,B_i:\\mathcal C_i\\to\\mathcal D_i$. A square comparison with endpoint functors $G:\\mathcal C_1\\to\\mathcal C_2$, $H:\\mathcal D_1\\to\\mathcal D_2$ has comparison transformations $a:A_2G\\to HA_1$, $b:B_2G\\to HB_1$, and the exchange diagram is\n$$b\\circ(\\tau_2G)=(H\\tau_1)\\circ a.$$\nTheir mates have types $a^\\flat:GR_1\\to R_2H$ and $b^\\flat:GT_1\\to T_2H$. Put $\\alpha_i=\\tau_i^c$, $\\beta_i=\\alpha_i^{-1}$ as in Step 2. Applying [lem-weil-pbc-mate-pasting](3a) to the left side and (3b) to the right side gives\n$$(\\alpha_2H)\\circ b^\\flat=a^\\flat\\circ(G\\alpha_1).$$\nPostcompose with $\\beta_2H$ and precompose with $G\\beta_1$; the inverse equations of [def-weil-pbc-adjunction-conjugate] cancel $\\alpha_i\\beta_i$ and yield\n$$b^\\flat\\circ(G\\beta_1)=(\\beta_2H)\\circ a^\\flat:GR_1\\longrightarrow T_2H.$$\nThis is exactly the required naturality diagram through the adjoint comparison maps, including endpoint functors. For fixed endpoints take $G,H$ to be identities. Comparisons formed by composing or whiskering square data have these same mates by [lem-weil-pbc-mate-pasting](1)--(2), so the displayed equation applies to them as well.",
+   "uses": [
+    "fix-lem-exchanges",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-sf-dual-base-change.proof.md",
+    "place": "Proof: naturality of the mate; square-comparison compatibility"
+   }
+  },
+  {
+   "text": "For pasting, use the two explicit exchange equations of [fix-lem-exchanges](2). Conjugation reverses composition by [def-weil-pbc-adjunction-conjugate], and the whiskered conjugates are identified by the two pasting clauses of [lem-weil-pbc-mate-pasting], with the pasted units and counits of [def-weil-pbc-composite-adjunction]. Taking inverses gives the following formulas, which also specify the claimed compatibility. For horizontal pasting with $h:Y''\\to Y'$ and $h':X''\\to X'$, write $f'':X''\\to Y''$ for the further base change and $\\beta_g,\\beta_h$ for the two dual exchanges. Then\n$$\\beta_{gh}=(Rg'_*\\beta_h)\\circ(\\beta_g Rh_*):Rf^!Rg_*Rh_*\\longrightarrow Rg'_*Rh'_*Rf''^!.$$\nFor vertical pasting with $e:W\\to X$, its base change $e':W'\\to X'$, and $g'':W'\\to W$, write $\\beta_e:Re^!Rg'_*\\to Rg''_*Re'^!$. Then\n$$\\beta_{fe}=(\\beta_e Rf'^!)\\circ(Re^!\\beta_f):Re^!Rf^!Rg_*\\longrightarrow Rg''_*Re'^!Rf'^!.$$\nInsert the ordinary direct-image composition comparisons and their adjoint pullback comparisons from the pasted (A1) datum; for the exceptional comparisons insert $R(fe)^!\\cong Re^!Rf^!$ and $R(f'e')^!\\cong Re'^!Rf'^!$, which [lem-sf-mate] identifies as the conjugates of compact-support composition. The formulas have the stated domains and codomains. Since identity exchange is the identity by [fix-lem-exchanges](2), conjugation and inversion also give identity dual exchange. These computations prove both kinds of pasting, rather than asserting an unspecified coherence of right-adjoint choices.",
+   "uses": [
+    "fix-lem-exchanges",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-composite-adjunction",
+    "def-sf-datum",
     "lem-sf-mate"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-sf-dual-base-change.proof.md",
+    "place": "Proof: compatibility with pasting by mate calculus"
+   }
+  },
+  {
+   "text": "Suppose $g$ is proper. In the square rotated so that $g$ is the morphism being pulled back, [lem-weil-pbc-proper-base-change] says that its base change $g'$ is proper. Let $c_g:Rg_!\\xrightarrow{\\sim}Rg_*$ and $c_{g'}:Rg'_!\\xrightarrow{\\sim}Rg'_*$ be the identifications supplied by [def-sf-datum](A4). The required proper-case arrow is the explicit composite\n$$Rf^!Rg_!\\xrightarrow{Rf^!c_g}Rf^!Rg_*\\xrightarrow{\\beta_\\square}Rg'_*Rf'^!\\xrightarrow{c_{g'}^{-1}Rf'^!}Rg'_!Rf'^!.$$\nEach factor is an isomorphism, so this is an isomorphism. It is exactly the previously constructed arrow expressed through $c_g,c_{g'}$, and hence retains its naturality and pasting compatibilities when the same canonical identifications are inserted.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "def-sf-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-sf-dual-base-change.proof.md",
+    "place": "Proof: final properness substitution; Stacks Tag 01W4 for properness under base change"
+   }
   }
  ],
  "proof_deps": [
-  "def-exchange-projection",
-  "thm-cbc-qbar",
-  "thm-cbc-finite-torsion",
-  "thm-cbc-finite-level-proetale",
-  "thm-cbc-complete-proetale",
-  "thm-cbc-finite-extension",
-  "lemma-weil-pbc-prime-proper-base-change",
-  "thm-weil-pbc-bounded-below",
-  "thm-weil-pbc-finite-level-proetale",
-  "thm-weil-pbc-complete-proetale",
-  "thm-weil-pbc-qbar",
-  "sbc-thm-smooth-base-change",
   "def-sf-datum",
-  "fix-prop-adjunctions",
-  "lem-sf-mate"
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate",
+  "fix-lem-exchanges",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sf-mate",
+  "lem-weil-pbc-proper-base-change"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/thm-sf-dual-base-change.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-sf-dual-base-change.proof.md",
+  "place": "Full proof, with the conjugate direction, naturality equation and horizontal/vertical pasting formulas written out"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between left adjoint functors induces an isomorphism of their right adjoints, compatibly with composition",
+   "results": "8 hits including CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso, rightAdjointUniq, and leftAdjointCompIso.",
+   "date": "2026-10-17",
+   "verdict": "generalization: abstract right-adjoint isomorphism only; reused existing conjugation and composite-adjunction nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIso, CategoryTheory.Adjunction.comp",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.conjugateIso'",
+   "date": "2026-10-17",
+   "verdict": "no match: unknown identifier, corrected in later query"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateIso|conjugateEquiv|conjugate.*(comp|id)",
+   "results": "Search directory: Mathlib/CategoryTheory/Adjunction. 19 hits including Mathlib/CategoryTheory/Adjunction/Mates.lean:275 conjugateEquiv; CompositionIso.lean:45,66,74 and Unique.lean:103; Opposites.lean:93-104 deprecated wrappers.",
+   "date": "2026-10-17",
+   "verdict": "generalization: abstract conjugation; read Mates.lean and reused def-weil-pbc-adjunction-conjugate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right adjoints of isomorphic left adjoints are isomorphic",
+   "results": "8 hits including CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso and CategoryTheory.Bicategory.conjugateEquiv_iso; rightAdjointUniq_trans_app.",
+   "date": "2026-10-17",
+   "verdict": "generalization: abstract adjunction isomorphism; does not supply the given six-functor datum and geometric comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugation of natural transformations under adjunctions reverses composition, preserves identities and isomorphisms, and commutes with whiskering of adjoint functors",
+   "results": "8 hits including CategoryTheory.conjugateEquiv, conjugateEquiv_comp, conjugateEquiv_comm, conjugateEquiv_apply_app, and CompositionIso conjugate formulas.",
+   "date": "2026-10-17",
+   "verdict": "generalization: reuse existing DAG conjugation and mate-pasting Mathlib leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.conjugateIsoEquiv",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.Adjunction.conjugateIsoEquiv'",
+   "date": "2026-10-17",
+   "verdict": "no match: namespace corrected in later query"
+  },
+  {
+   "tool": "grep",
+   "query": "^(def|theorem|lemma).*conjugate|mateEquiv_(vcomp|hcomp)|def comp",
+   "results": "Search directory: Mathlib/CategoryTheory/Adjunction. 14 hits, including Basic.lean:567 Adjunction.comp; Mates.lean:170 mateEquiv_vcomp, :209 mateEquiv_hcomp and :275 conjugateEquiv.",
+   "date": "2026-10-17",
+   "verdict": "generalization: exact abstract facts already represented by existing DAG leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "5 hits: CategoryTheory.conjugateIsoEquiv : (L₂ ≅ L₁) ≃ (R₁ ≅ R₂) and its hom/inv projection lemmas in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-17",
+   "verdict": "generalization: existing def-weil-pbc-adjunction-conjugate is the matching leaf; item requires applying this to the supplied composite adjunctions and adding geometric/coherence clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "def conjugateIsoEquiv|theorem conjugateEquiv_comp|theorem conjugateEquiv_id|theorem mateEquiv_vcomp|theorem mateEquiv_hcomp",
+   "results": "Search directory: Mathlib/CategoryTheory/Adjunction/Mates.lean. 5 hits at Mates.lean:170 mateEquiv_vcomp, :209 mateEquiv_hcomp, :319 conjugateEquiv_id, :350 conjugateEquiv_comp, :425 conjugateIsoEquiv. The wrapper splits single-file grep lines into file/line fields incorrectly; these are the actual source line numbers, verified by reading.",
+   "date": "2026-10-17",
+   "verdict": "generalization: matching formal facts all reused through existing nodes; item is split with the specific Ex_! and proper-coincidence identifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv CategoryTheory.Adjunction.comp",
+   "results": "0 hits; Loogle application type mismatch: CategoryTheory.Adjunction.comp is an adjunction-composition function and is not an argument to conjugateIsoEquiv. Follow-up single-name query CategoryTheory.conjugateIsoEquiv returned its five existing declarations.",
+   "date": "2026-10-17",
+   "verdict": "no match: malformed application query, not evidence of absence; corrected with the logged single-name query"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -99,5 +207,20 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-package"
+ "unit": "sk-thm-sf-package",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-sf-dual-base-change",
+  "worker": "stage1",
+  "summary": "Formal split on the supplied finite-Tor datum, using A1/A2/A4 and the canonical exchange coherence. STATEMENT-DISPUTED: the source gives the right-adjoint arrow in the opposite direction to conjugation; the displayed forward isomorphism is the inverse conjugate. The unspecified S is replaced by the k-scheme setting actually assigned categories by the datum. Removed unnecessary concrete proper/smooth/compact-support base-change chains: their verification is not needed for this axiomatic formal consequence. Reused composite-adjunction, conjugation, mate-pasting and proper-stability nodes; no new nodes. Supplied explicit formulas for both inverse maps, naturality, both pastings and proper transport.",
+  "blueprint": "Main-20261015 proof: its A1/A2 sentence and reverse-order right-adjoint sentence are Step 1; uniqueness and mate sentence is Step 2; naturality is Step 3; pasting is Step 4; final properness sentence is Step 5. The concrete verification sentence is unnecessary once a six-functor datum is assumed, and its unrelated Ex_* theorems are not invoked."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-336517641",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-336517641 (reviewer sub-agent of L); spot-checked: Read the full item (statement, 5 steps, deps, searches), master and main-20261015 source texts (identical), unit sk-thm-sf-package, chapter, and every cited statement (def-sf-datum A1/A2/A4, fix-lem-exchanges (1)-(2), composite adjunction, conjugate, mate-pasting (1)-(3b), lem-sf-mate, proper-base-change leaf), plus Mathlib Mates.lean:275/319/350/425/486/505. Statement: S->k is the datum's own setting, separatedness is kept, and the forward arrow is correctly (tau^-1)^c, since conjugateEquiv sends (L2->L1) to (R1->R2), so Ex_!^c : Rg'_*Rf'^! -> Rf^!Rg_*. This agrees with fix-prop-adjunctions(4) and def-trf-admissibility. Both conclusions are kept and nothing is weakened; the coefficient category is the datum's D^b_ctf and Ex_! is the def-exchange-projection exchange. Steps: (1) both composite Hom chains are typed. (2) The unit/counit formulas of alpha and beta and the inverse identities check with the order of (s∘s')^c = s'^c∘s^c. (3) (3a)/(3b) give (alpha2 H)b^flat = a^flat(G alpha1); cancelling gives b^flat(G beta1) = (beta2 H)a^flat : GR1->T2H. (4) I recomputed the horizontal beta_gh = (Rg'_*beta_h)(beta_g Rh_*) and the vertical beta_fe = (beta_e Rf'^!)(Re^! beta_f) from the whiskered conjugates; both match. (5) g' is proper as the base change of g along f, and c_g'^-1 is used correctly. Route: all citations are in-unit or in cited units (sk-prop-sf-cbc, sk-lem-sf-mate) or are definitions/Mathlib leaves, so no tool_uses are needed. Dropping the concrete base-change theorems is legitimate under the A2 axiom. proof_deps equals the union of the step uses, there is no cycle (12,628 ids traversed), and no deps are missing or merged. There are no new nodes. Duplicate search (prop-exc-ambient-dual-base-change, def-trf-admissibility, fix-prop-adjunctions(4)) found none. Edge cases: identity square, empty scheme, scaled tau, g=id. No fixes."
+ }
 }

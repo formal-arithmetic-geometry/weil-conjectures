@@ -30,48 +30,150 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The degreewise block formula in the statement defines a simplicial set. Restricting or repeating vertices in the lower simplex and composing or repeating arrows in the upper chain preserves the compatibility equations; when a block disappears, the stated pure simplex is obtained. Hence the inclusions of K and N(I) are simplicial, and the maps iota_a from the right joins K_a^{triangleright} are simplicial. This is a direct verification from the ordered join and coherent-diagram conventions.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Notation 4.2.3.1 and Remark 4.2.3.2, pp. 248-249; degreewise definition of the collage."
+   }
+  },
+  {
+   "text": "Use the relative skeletal cells of [lem-coef-infinity-monomorphism-boundary-cells] to order the nondegenerate simplices of $N(I)$ dimension by dimension, well-ordering each small set of cells. Let $Y_0=\\varnothing$, attach one simplex along its entire boundary at each successor, and take unions at limits. For $Y\\subseteq N(I)$ let $A(Y)\\subseteq K_F$ contain $K$ and exactly those remaining simplices whose upper block belongs to $Y$. Put $A_\\alpha=A(Y_\\alpha)$ and $q_\\alpha=q|_{A_\\alpha}$. Thus $A_0=K$ and the final union is $K_F$. If the attached simplex is $\\sigma=(a_0\\to\\cdots\\to a_n)$, the square attaching $A_\\alpha$ to $A_{\\alpha+1}$ is the pushout of\n$$K_{a_0}\\star\\partial\\Delta^n\\longrightarrow K_{a_0}\\star\\Delta^n.$$\nHere $\\partial\\Delta^0=\\varnothing$ and $L\\star\\varnothing=L$. The attaching map on the pure lower block is $\\pi_{a_0}$; on a mixed simplex with lower lift $u$ and upper face beginning at $a_j$, its first lift is $F(a_0\\to a_j)u$, followed by its images along that face. To check the pushout degreewise, a simplex not already in $A_\\alpha$ has upper block a degeneracy of the newly attached nondegenerate $\\sigma$, with its surjection onto $[n]$. Its first upper vertex is therefore $a_0$, and its lower lift in $K_{a_0}$ uniquely supplies the remaining data. The other simplices of the attaching join have upper block in the boundary or are pure lower simplices, so are identified with the old part. This proves the claimed pushout even when $\\pi_{a_0}$ is not injective.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Proposition 4.2.3.4, filtration by simplices of N(I) and the displayed join pushout, pp.249-250; degreewise verification added."
+   }
+  },
+  {
+   "text": "We first give the boundary argument needed at a successor. For a quasicategory $Q$ and $s:\\Delta^n\\to Q$ with $s(0)$ initial, write $J_s$ for the join cocone quasicategory defined in [lem-coef-join-slice-cocone-comparison], and write $s_\\partial=s|_{\\partial\\Delta^n}$. A boundary lifting problem of dimension $m\\geq0$ for $J_s\\to J_{s_\\partial}$ is, by that degreewise definition, precisely a map into $Q$ on\n$$(\\partial\\Delta^n\\star\\Delta^m)\\cup(\\Delta^n\\star\\partial\\Delta^m)=\\partial\\Delta^{n+m+1}.$$\nIts first vertex is $s(0)$. Apply [lem-coef-infinity-relative-initial-boundary] to $Q\\to\\Delta^0$: its relative-initial condition at $s(0)$ is exactly initiality, since every target mapping space is a point. This map is an inner fibration because $Q$ is a quasicategory. The boundary dimension $n+m+1$ is positive, including $n=m=0$, so the lemma gives the desired filler with the entire prescribed boundary fixed. Hence $J_s\\to J_{s_\\partial}$ has the right lifting property for every boundary inclusion, including dimension zero, and is a trivial Kan fibration by [lem-coef-kan-quillen-right-proper]. The case $n=0$ reads $J_{s(0)}\\to Q$ because the join cocone category of the empty diagram is $Q$.",
+   "uses": [
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-coef-infinity-relative-initial-boundary",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Lemma 4.2.3.3, pp.249-250; its double-join boundary calculation is expanded, including dimension zero."
+   }
+  },
+  {
+   "text": "For a successor cell $\\sigma=(a_0\\to\\cdots\\to a_n)$ set $L=K_{a_0}$, $b=p\\pi_{a_0}$ and $Q=J_b$. The join-slice comparison [lem-coef-join-slice-cocone-comparison] makes $Q$ a quasicategory and makes the vertex represented by $q\\iota_{a_0}$ initial, because its associated coherent cocone is colimiting by hypothesis. Restriction of $q$ to the attaching join $L\\star\\Delta^n$ is exactly a simplex $s:\\Delta^n\\to Q$. Its first vertex is that local cocone, including when $n=0$. The pushout of step 2 identifies the restriction map\n$$J_{q_{\\alpha+1}}\\longrightarrow J_{q_\\alpha}$$\nwith the pullback of $J_s\\to J_{s_\\partial}$ along restriction of an old cocone to $L\\star\\partial\\Delta^n$. Explicitly an $m$-simplex on the new piece is a map $(L\\star\\Delta^n)\\star\\Delta^m\\to\\mathcal E$ fixed on $L\\star\\Delta^n$; associating the ordered three blocks identifies it with $\\Delta^n\\star\\Delta^m\\to J_b$ fixed on $s$. On its boundary this is precisely the old-piece restriction. The joins associate because each simplex is an ordered concatenation of the same three blocks, with the same operators. The join operation with a fixed right factor preserves this nonempty pushout: degreewise its pure right simplices are identified once and its remaining summands preserve the set pushout. Thus this is an identity of the whole simplicial pullback, not just of its vertices. Step 3 proves the pulled-back map is a trivial Kan fibration: a boundary lifting problem in the pullback is a problem for that map with its old-piece coordinate already prescribed.",
+   "uses": [
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Proposition 4.2.3.4, successor pullback of the cocone restriction of Lemma 4.2.3.3, p.250; all block identifications made explicit."
+   }
+  },
+  {
+   "text": "At a limit ordinal $\\lambda$, a map $A_\\lambda\\star\\Delta^m\\to\\mathcal E$ is exactly a compatible family of maps $A_\\alpha\\star\\Delta^m\\to\\mathcal E$ for $\\alpha<\\lambda$: the domain is the union degreewise, with its pure right factor already shared. It follows that $J_{q_\\lambda}=\\varprojlim_{\\alpha<\\lambda}J_{q_\\alpha}$ as simplicial sets. To fill a boundary square for the final restriction $J_q\\to J_p$, start with its given $\\Delta^m$-simplex in $J_p$. Inductively lift that simplex along every successor map of step 4, using the prescribed restriction of the original $\\partial\\Delta^m$-simplex. At limits the previously chosen compatible lifts define their union. This constructs a lift of the entire $\\Delta^m$ keeping its boundary fixed. It works for $m=0$ as well: the boundary is empty and each successor still has its dimension-zero filler. Thus the final restriction has all boundary lifts, and [lem-coef-kan-quillen-right-proper] makes $J_q\\to J_p$ a trivial Kan fibration. This argument uses actual lifts, not an inference that an ordinary inverse limit of arbitrary weak equivalences is a weak equivalence.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Proposition 4.2.3.4, limit ordinal and final transfinite tower, pp.250-251; recursive boundary lifts written out."
+   }
+  },
+  {
+   "text": "All maps $J_{q_\\beta}\\to J_{q_\\alpha}$ retain the apex, since they restrict only the diagram block of the ordered join. Pull back the final trivial Kan fibration along $J_p\\times_{\\mathcal E}\\{T\\}\\to J_p$; its source is $J_q\\times_{\\mathcal E}\\{T\\}$. A boundary lift of this pullback keeps the prescribed $J_p$ coordinate, so it keeps its constant apex $T$ in every degree. The pullback is therefore again a trivial Kan fibration and a weak equivalence by [lem-coef-kan-quillen-right-proper]. The fixed-apex clause of [lem-coef-join-slice-cocone-comparison] gives natural equivalences from its two Kan complexes to\n$$\\operatorname{Map}_{\\operatorname{Fun}(K_F,\\mathcal E)}(q,\\Delta_{K_F}T),\\qquad \\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(p,\\Delta_KT).$$\nNaturality with respect to shape restriction identifies the intervening map with the actual restriction in the statement, so it too is a weak equivalence. The comparisons are also natural in the apex and preserve coherent postcomposition by the same cited statement. Restriction of join data commutes exactly with precomposition on the diagram block; consequently its coherent-transformation version is natural in $T$ and compatible with coherent postcomposition. The filler choices above prove that this specified map is an equivalence and are not used to define it.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.2.3.4, last assertion, together with Proposition 4.2.1.5 and Corollaries 4.2.1.7-4.2.1.8 for fixed-apex coherent mapping spaces."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-join-slice-cocone-comparison",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "HTT Notation 4.2.3.1, Lemma 4.2.3.3 and proof of Proposition 4.2.3.4, pp.248-251: upper-chain join pushouts, initial-vertex boundary fillers, successor pullbacks and transfinite lifts; fixed-apex comparison from Proposition 4.2.1.5 and Corollaries 4.2.1.7-4.2.1.8."
+ },
  "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "A decomposition of a simplicial diagram into a family of local colimit cocones induces an equivalence on spaces of cocones",
-   "results": "{\"t\": \"2026-10-16T21:25:27Z\", \"tool\": \"leanfinder\", \"query\": \"A decomposition of a simplicial diagram into a family of local colimit cocones induces an equivalence on spaces of cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.ofCoconeEquiv_apply_desc\", \"CategoryTheory.Functor.coconeTypesEquiv\", \"CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence\", \"CategoryTheory.Limits.Cocones.functorialityEquivalence\", \"CategoryTheory.Limits.Cocones.functorialityEquivalence_functor\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv_symm_apply_desc\", \"CategoryTheory.Limits.Cocones.whiskeringEquivalence\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\"], \"digest\": \"1b3a00cfb172bece\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: hits are ordinary CategoryTheory cocones/equivalences or colimits of simplicial sets in the ordinary category SSet. The six SSet.coconeN hits concern monogenous subcomplexes; none states restriction on coherent cocone spaces for the decomposition construction. The pinned Quasicategory grep has zero hits."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"SSet\", \"cocone\"",
-   "results": "{\"t\": \"2026-10-16T21:25:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"cocone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SSet.coconeN\", \"SSet.isColimitCoconeN\", \"SSet.coconeN'\", \"SSet.isColimitCoconeN'\", \"SSet.coconeN'_pt\", \"SSet.coconeN'_ι_app\"], \"digest\": \"1e01c5b637bbe9e1\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: hits are ordinary CategoryTheory cocones/equivalences or colimits of simplicial sets in the ordinary category SSet. The six SSet.coconeN hits concern monogenous subcomplexes; none states restriction on coherent cocone spaces for the decomposition construction. The pinned Quasicategory grep has zero hits."
-  },
   {
    "tool": "grep",
    "query": "decomposition|colimit|cocone",
-   "results": "{\"t\": \"2026-10-16T21:25:27Z\", \"tool\": \"grep\", \"query\": \"decomposition|colimit|cocone\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-16T22:25:45Z\", \"tool\": \"grep\", \"query\": \"decomposition|colimit|cocone\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: hits are ordinary CategoryTheory cocones/equivalences or colimits of simplicial sets in the ordinary category SSet. The six SSet.coconeN hits concern monogenous subcomplexes; none states restriction on coherent cocone spaces for the decomposition construction. The pinned Quasicategory grep has zero hits."
+   "verdict": "no exact match: ordinary categorical cocones and simplicial horn/model-structure results do not state the quasicategorical decomposition restriction theorem."
   },
   {
    "tool": "leansearch",
    "query": "Restriction of coherent cocones along a decomposition simplicial set is an equivalence if every local cone is colimiting",
-   "results": "{\"t\": \"2026-10-16T21:25:27Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of coherent cocones along a decomposition simplicial set is an equivalence if every local cone is colimiting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Final.isColimitExtendCoconeEquiv\", \"CategoryTheory.Limits.Cocone.isColimitOfIsIsoColimMapι\", \"SimplicialObject.Splitting.isColimit'\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\", \"SimplicialObject.Splitting.isColimit\", \"CategoryTheory.Functor.CoconeTypes.IsColimit.equiv.congr_simp\", \"CategoryTheory.WithInitial.isColimitEquiv\", \"CategoryTheory.Limits.isColimitOfConeRightOpOfCocone\"], \"digest\": \"c430b2b633bcdbf3\"}",
+   "results": "{\"t\": \"2026-10-16T22:25:45Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of coherent cocones along a decomposition simplicial set is an equivalence if every local cone is colimiting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Final.isColimitExtendCoconeEquiv\", \"CategoryTheory.Limits.Cocone.isColimitOfIsIsoColimMapι\", \"SimplicialObject.Splitting.isColimit'\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\", \"SimplicialObject.Splitting.isColimit\", \"CategoryTheory.Functor.CoconeTypes.IsColimit.equiv.congr_simp\", \"CategoryTheory.WithInitial.isColimitEquiv\", \"CategoryTheory.Limits.isColimitOfConeRightOpOfCocone\"], \"digest\": \"c430b2b633bcdbf3\"}",
    "date": "2026-10-17",
-   "verdict": "no match: hits are ordinary CategoryTheory cocones/equivalences or colimits of simplicial sets in the ordinary category SSet. The six SSet.coconeN hits concern monogenous subcomplexes; none states restriction on coherent cocone spaces for the decomposition construction. The pinned Quasicategory grep has zero hits."
+   "verdict": "no exact match: ordinary categorical cocones and simplicial horn/model-structure results do not state the quasicategorical decomposition restriction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"cocone\"",
+   "results": "{\"t\": \"2026-10-16T22:25:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"cocone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SSet.coconeN\", \"SSet.isColimitCoconeN\", \"SSet.coconeN'\", \"SSet.isColimitCoconeN'\", \"SSet.coconeN'_pt\", \"SSet.coconeN'_ι_app\"], \"digest\": \"1e01c5b637bbe9e1\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: ordinary categorical cocones and simplicial horn/model-structure results do not state the quasicategorical decomposition restriction theorem."
   },
   {
    "tool": "leanfinder",
-   "query": "Higher category decomposition of diagrams: prescribed local colimits extend coherently and restriction of cocone categories is a trivial fibration",
-   "results": "{\"t\": \"2026-10-16T21:25:28Z\", \"tool\": \"leanfinder\", \"query\": \"Higher category decomposition of diagrams: prescribed local colimits extend coherently and restriction of cocone categories is a trivial fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"CategoryTheory.SmallObject.preservesColimit\", \"CategoryTheory.OrthogonalReflection.isLocal_isLocal_toSucc\", \"SSet.horn.isColimit\", \"CategoryTheory.TransfiniteCompositionOfShape.ici_isColimit\"], \"digest\": \"6bb4d3333e9eff48\"}",
+   "query": "A decomposition of a simplicial diagram into a family of local colimit cocones induces an equivalence on spaces of cocones",
+   "results": "{\"t\": \"2026-10-16T22:25:50Z\", \"tool\": \"leanfinder\", \"query\": \"A decomposition of a simplicial diagram into a family of local colimit cocones induces an equivalence on spaces of cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Final.coconesEquiv\", \"CategoryTheory.Limits.MultispanIndex.multicoforkEquivSigmaCoforkOfIsColimit\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\", \"CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence\", \"CategoryTheory.Functor.coconeTypesEquiv\", \"CategoryTheory.Limits.Cocones.precomposeEquivalence\", \"CategoryTheory.Functor.coconeTypesEquiv_apply_ι_app\", \"CategoryTheory.Limits.isColimitMapCoconeCofanMkEquiv\"], \"digest\": \"116a664bdb093fe5\"}",
    "date": "2026-10-17",
-   "verdict": "no match: hits are ordinary CategoryTheory cocones/equivalences or colimits of simplicial sets in the ordinary category SSet. The six SSet.coconeN hits concern monogenous subcomplexes; none states restriction on coherent cocone spaces for the decomposition construction. The pinned Quasicategory grep has zero hits."
+   "verdict": "no exact match: ordinary categorical cocones and simplicial horn/model-structure results do not state the quasicategorical decomposition restriction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An initial vertex forces relative boundary fillers for simplices and restriction of infinity categorical join cocones",
+   "results": "{\"t\": \"2026-10-16T23:12:41Z\", \"tool\": \"leanfinder\", \"query\": \"An initial vertex forces relative boundary fillers for simplices and restriction of infinity categorical join cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.isColimit\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.horn.multicoequalizerDiagram\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SimplexCategory.Truncated.initial_inclusion\", \"SSet.horn₃₁.desc.multicofork\"], \"digest\": \"7b1ce3600ee264f4\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: ordinary categorical cocones and simplicial horn/model-structure results do not state the quasicategorical decomposition restriction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"initial\"",
+   "results": "{\"t\": \"2026-10-16T23:12:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"initial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: ordinary categorical cocones and simplicial horn/model-structure results do not state the quasicategorical decomposition restriction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "join|underCategory|coslice|initial",
+   "results": "{\"t\": \"2026-10-16T23:12:41Z\", \"tool\": \"grep\", \"query\": \"join|underCategory|coslice|initial\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: ordinary categorical cocones and simplicial horn/model-structure results do not state the quasicategorical decomposition restriction theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A colimit cocone is an initial object of the undercategory and gives a trivial fibration on cocones when diagrams are decomposed",
+   "results": "{\"t\": \"2026-10-16T23:14:16Z\", \"tool\": \"leansearch\", \"query\": \"A colimit cocone is an initial object of the undercategory and gives a trivial fibration on cocones when diagrams are decomposed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.colimitCoconeIsColimit\", \"CategoryTheory.Functor.CoconeTypes.IsColimit\", \"CategoryTheory.Limits.Types.TypeMax.colimitCocone\", \"CategoryTheory.Limits.ColimitCocone\", \"CategoryTheory.Limits.ColimitCocone.mk\", \"CategoryTheory.Limits.colimit.cocone\", \"CategoryTheory.Limits.Types.TypeMax.colimitCoconeIsColimit\", \"CategoryTheory.Limits.Types.colimitCocone\"], \"digest\": \"3e8bf60d3150f400\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: ordinary categorical cocones and simplicial horn/model-structure results do not state the quasicategorical decomposition restriction theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-directed-cone-cover",
@@ -91,5 +193,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-decomposition-local-colimit-cocones",
+  "worker": "stage1",
+  "summary": "Second reading replaced the unsupported mixed-simplex/parameterized extension argument by the explicit HTT upper-chain filtration and join-slice boundary lifting proof in six steps. The statement is unchanged. No new nodes: existing join-slice comparison, relative-initial boundary criterion, relative skeletal cells and Kan-Quillen model structure suffice. All mathlib_searches now quote actual searches.jsonl entries, including independent second-reader searches. No Lean work or compilation.",
+  "blueprint": "Realizes the blueprint ancestor prop-coef-integral-exceptional-adjoint, Proof paragraph 2: finite-coefficient mapping-complex adjunction before derived inverse limit, specifically the HTT directed-cover retraction and coherent join-cocone restriction."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-88ba85413",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-88ba85413 (reviewer sub-agent of L); spot-checked: I read HTT §4.2.3 from the IAS PDF (Notation 4.2.3.1, Remark 4.2.3.2, Lemma 4.2.3.3 and its proof, Proposition 4.2.3.4 and its whole proof, pp. 248-251). The item's K_F, the maps iota_a (HTT's pi'_I) and the fixed-apex restriction conclusion match HTT's last assertion for an arbitrary category I and non-injective maps pi_a. HTT's existence clause is not claimed, and no citer needs it. Step 1 is an elementary degreewise check. Step 2's pushout of K_{a0}*dDelta^n into K_{a0}*Delta^n holds degreewise by Eilenberg-Zilber uniqueness, including n=0 and non-injective pi. Step 3 is HTT 4.2.3.3: the boundary is dDelta^{n+m+1}, which is positive-dimensional, and with Y=Delta^0 being p-initial is the same as being initial. Step 4: the join with a fixed right factor preserves the pushout, s(0)=q iota_{a0} is initial by the join-slice node, and the successor map is a pullback of a trivial fibration. Step 5 lifts through the limit stages explicitly. Step 6 passes to the fibre over T and uses the fixed-apex and naturality clauses, then 2-out-of-3. Small cases: I a single object, I empty, K empty (pointwise initial objects), K_a empty. There are no new nodes. All four cited lemmas are in the item's unit sk-prop-sf-biduality-general and the definition is notation only, so no tool_uses are needed. There is no cycle (closure of 165 nodes), proof_deps equals the union of the step uses, and no node duplicates the general theorem. The statement is unchanged, no SGA source is used, and I made no fixes. The archived HTT copy is still WANTED."
  }
 }
