@@ -152,4 +152,72 @@ noncomputable def tensorLeftObjRegularIso : (tensorLeft M).obj (regular A) ≅ M
 
 end RegularLeft
 
+section IhomFree
+
+lemma tensorLeftMap_ι_comp_tensorLeftMap_π {n : ℕ} (M : Fin n → Mod C A) (i j : Fin n) :
+    tensorLeftMap (biproduct.ι M i) ≫ tensorLeftMap (biproduct.π M j) =
+      if h : i = j then eqToHom (by subst h; rfl) else 0 := by
+  rw [← tensorLeftMap_comp, biproduct.ι_π]
+  split_ifs with h
+  · subst h
+    simp [tensorLeftMap_id]
+  · exact (tensorLeftMapAddHom _ _).map_zero
+
+lemma ihomMap_π_comp_ihomMap_ι {n : ℕ} (M : Fin n → Mod C A) (i j : Fin n) :
+    ihomMap (biproduct.π M j) ≫ ihomMap (biproduct.ι M i) =
+      if h : i = j then eqToHom (by subst h; rfl) else 0 := by
+  rw [← ihomMap_comp, biproduct.ι_π]
+  split_ifs with h
+  · subst h
+    simp [ihomMap_id]
+  · exact (ihomMapAddHom _ _).map_zero
+
+/-- **For a free module of finite rank, `Hom_A(Aⁿ, -) ≅ - ⊗_A Aⁿ`**: both are `(-)ⁿ`. -/
+noncomputable def ihomIsoTensorLeftFree (n : ℕ) :
+    ihom (⨁ fun _ : Fin n ↦ regular A) ≅ tensorLeft (⨁ fun _ : Fin n ↦ regular A) where
+  hom := ∑ i, ihomMap (biproduct.ι (fun _ : Fin n ↦ regular A) i) ≫ ihomRegularIso.hom ≫
+    tensorLeftRegularIso.inv ≫ tensorLeftMap (biproduct.ι (fun _ : Fin n ↦ regular A) i)
+  inv := ∑ i, tensorLeftMap (biproduct.π (fun _ : Fin n ↦ regular A) i) ≫
+    tensorLeftRegularIso.hom ≫ ihomRegularIso.inv ≫
+      ihomMap (biproduct.π (fun _ : Fin n ↦ regular A) i)
+  hom_inv_id := by
+    rw [Preadditive.sum_comp]
+    simp_rw [Preadditive.comp_sum, Category.assoc]
+    have (i j : Fin n) : ihomMap (biproduct.ι (fun _ : Fin n ↦ regular A) i) ≫
+        ihomRegularIso.hom ≫ tensorLeftRegularIso.inv ≫
+        tensorLeftMap (biproduct.ι (fun _ : Fin n ↦ regular A) i) ≫
+        tensorLeftMap (biproduct.π (fun _ : Fin n ↦ regular A) j) ≫
+          tensorLeftRegularIso.hom ≫ ihomRegularIso.inv ≫
+            ihomMap (biproduct.π (fun _ : Fin n ↦ regular A) j) =
+        if i = j then ihomMap (biproduct.ι (fun _ : Fin n ↦ regular A) i) ≫
+            ihomMap (biproduct.π (fun _ : Fin n ↦ regular A) i) else 0 := by
+      rw [← Category.assoc (tensorLeftMap _), tensorLeftMap_ι_comp_tensorLeftMap_π]
+      split_ifs with h
+      · subst h
+        simp
+      · simp
+    simp_rw [this]
+    simp only [Finset.sum_ite_eq, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+    exact sum_ihomMap_ι_comp_ihomMap_π _
+  inv_hom_id := by
+    rw [Preadditive.sum_comp]
+    simp_rw [Preadditive.comp_sum, Category.assoc]
+    have (i j : Fin n) : tensorLeftMap (biproduct.π (fun _ : Fin n ↦ regular A) i) ≫
+        tensorLeftRegularIso.hom ≫ ihomRegularIso.inv ≫
+        ihomMap (biproduct.π (fun _ : Fin n ↦ regular A) i) ≫
+        ihomMap (biproduct.ι (fun _ : Fin n ↦ regular A) j) ≫ ihomRegularIso.hom ≫
+          tensorLeftRegularIso.inv ≫ tensorLeftMap (biproduct.ι (fun _ : Fin n ↦ regular A) j) =
+        if j = i then tensorLeftMap (biproduct.π (fun _ : Fin n ↦ regular A) i) ≫
+            tensorLeftMap (biproduct.ι (fun _ : Fin n ↦ regular A) i) else 0 := by
+      rw [← Category.assoc (ihomMap _), ihomMap_π_comp_ihomMap_ι]
+      split_ifs with h
+      · subst h
+        simp
+      · simp
+    simp_rw [this]
+    simp only [Finset.sum_ite_eq, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+    exact sum_tensorLeftMap_π_comp_tensorLeftMap_ι _
+
+end IhomFree
+
 end CategoryTheory.Mod

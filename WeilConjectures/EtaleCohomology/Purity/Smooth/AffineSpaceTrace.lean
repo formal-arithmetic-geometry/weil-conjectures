@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceU
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 public import WeilConjectures.SixFunctors.OpenClosed.Derived
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineChern
 
 /-!
 # The affine-space trace
@@ -38,9 +39,6 @@ supported direct images and the projection formula.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.exists_isIso_biprod_desc_projectiveLine`: the cohomology of the
-  projective line (`thm-amb-p1-decomposition`, a node of `sk-lem-geo-p1-cohomology`, recorded
-  without proof).
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_affineLine`:
   `Rp_! Λ ≅ Λ_S(-1)[-2]` for the affine line.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_twistShift_affineSpace`:
@@ -105,36 +103,6 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
 
 section ProjectiveLine
 
-/-- The unit `Λ_Y ⟶ Rf_* Λ_X` of the derived adjunction `Lf^* ⊣ Rf_*` at the constant
-complex. -/
-noncomputable def constantComplexUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    constantComplex Λ Y ⟶ (R((f)_*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ X) :=
-  (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).unit.app _ ≫
-    (R((f)_*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarConstantComplexIso Λ f).hom
-
-instance (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
-    HasInvertibleExponent Λ (ProjectiveLine S) :=
-  .of_hom (ProjectiveLine S ↘ S)
-
-/-- Blueprint `thm-amb-p1-decomposition`: The projective-line calculation before purity
-
-Let `q : ℙ¹_S ⟶ S` be the projective line over a scheme on which the exponent of `Λ` is
-invertible, and `h` the Kummer first Chern class of `𝒪(1)`, read as a morphism
-`Λ_S(-1)[-2] ⟶ Rq_* Λ_{ℙ¹_S}`. Then `(1, h) : Λ_S ⊕ Λ_S(-1)[-2] ⟶ Rq_* Λ_{ℙ¹_S}`, the first
-component being the unit of `Lq^* ⊣ Rq_*`, is an isomorphism.
-
-This is a node of the blueprint subsection `sk-lem-geo-p1-cohomology` (where `S` is noetherian),
-recorded here without proof. The first Chern class is not constructed in the library, so the
-statement records the existence of a second component `h`, the content being that the
-complement of the unit summand is `Λ_S(-1)[-2]`. -/
-theorem exists_isIso_biprod_desc_projectiveLine [HasTateTwist.IsNormalized Λ]
-    (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
-    ∃ h : (tateObject Λ S (-1))⟦2 * (-1 : ℤ)⟧ ⟶
-        (R((ProjectiveLine S ↘ S)_*[ModuleCat.{u + 1} Λ])).obj
-          (constantComplex Λ (ProjectiveLine S)),
-      IsIso (biprod.desc (constantComplexUnit Λ (ProjectiveLine S ↘ S)) h) :=
-  sorry
-
 omit [Finite Λ] [HasTateTwist Λ] in
 /-- The derived pullback along the identity is the identity. -/
 lemma nonempty_leftDerivedUpperStar_id_iso (S : Scheme.{u}) (h : S ⟶ S) (hh : h = 𝟙 S) :
@@ -186,6 +154,9 @@ theorem nonempty_iso_rightDerivedLowerShriek_affineLine (S : Scheme.{u})
     [HasInvertibleExponent Λ S] :
     Nonempty ((R(𝔸(ULift.{u} (Fin 1); S) ↘ S)_![ModuleCat.{u + 1} Λ]).obj
         (constantComplex Λ 𝔸(ULift.{u} (Fin 1); S)) ≅ (tateObject Λ S (-1))⟦2 * (-1 : ℤ)⟧) := by
+  obtain ⟨K, hK, hN⟩ := HasTateTwist.IsNormalized.exists_hasKummerClass (Λ := Λ)
+  subst hK
+  let := K
   set A := ModuleCat.{u + 1} Λ
   let c := ProjectiveLine.affineLineCompactification' S
   let j := c.i
@@ -204,7 +175,7 @@ theorem nonempty_iso_rightDerivedLowerShriek_affineLine (S : Scheme.{u})
   have : (R((q)_*[A])).IsTriangulated :=
     (mapDerivedUpperStarLowerStarAdjunction A q).isTriangulated_rightAdjoint
   have hT' := (R((q)_*[A])).map_distinguished _ hT
-  obtain ⟨h, hh⟩ := exists_isIso_biprod_desc_projectiveLine Λ S
+  have hh := isIso_biprod_desc_projectiveLine Λ S
   have hs := isIso_constantComplexUnit_comp_map_unit Λ q i (ProjectiveLine.infinity_over (S := S))
   have : IsIso (constantComplexUnit Λ q ≫ (R((q)_*[A])).map
       (Triangle.mk ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).counit.app
@@ -212,7 +183,7 @@ theorem nonempty_iso_rightDerivedLowerShriek_affineLine (S : Scheme.{u})
         ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app
           (constantComplex Λ (ProjectiveLine S))) w).mor₂) := hs
   obtain ⟨e⟩ := nonempty_iso_of_distTriang_of_isIso_biprod_desc _ _ _ hT'
-    (constantComplexUnit Λ q) h
+    (constantComplexUnit Λ q) (projectiveLineChernMap Λ S)
   -- `Rp_! Λ = Rq_* j_! Λ = Rq_* j_! j^* Λ`
   exact ⟨((rightDerivedLowerShriekIso Λ c).app _).symm ≪≫
     (R((q)_*[A])).mapIso ((D((j)_!open[A])).mapIso

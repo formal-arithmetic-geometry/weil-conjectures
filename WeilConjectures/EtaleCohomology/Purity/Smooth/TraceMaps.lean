@@ -13,7 +13,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceTrace
 The blueprint defines the integration maps of `sk-prop-an` *under the input* of the cohomology
 of the projective line: an isomorphism `Λ_S ⊕ Λ_S(-1)[-2] ≅ Rq_* Λ_{ℙ¹_S}`
 (`thm-amb-p1-decomposition`, whose existence is
-`AlgebraicGeometry.Etale.exists_isIso_biprod_desc_projectiveLine`). The definitions here take
+`AlgebraicGeometry.Etale.isIso_biprod_desc_projectiveLine`). The definitions here take
 this input, twisted by `(1)[2]`, as an argument:
 
 * the *trace of the projective line* `t_q : Rq_* Λ(1)[2] ⟶ Λ_S`: the inverse of the input
