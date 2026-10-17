@@ -5,9 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension.LocalStep
-public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension.ProjectiveLine
-public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension.StalkFormula
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.LocalStep
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.ProjectiveLine
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.StalkFormula
 public import WeilConjectures.AlgebraicGeometry.Sites.SupportDimension
 
 /-!

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension.StalkFormula
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.StalkFormula
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 public import WeilConjectures.AlgebraicGeometry.Sites.LerayVanishing

@@ -5,9 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension.GenericPoint
-public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension.Leray
-public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension.Support
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.GenericPoint
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.Leray
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.Support
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
 
 /-!

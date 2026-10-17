@@ -7,8 +7,8 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Polynomial
 public import Mathlib.RingTheory.MvPolynomial.Basic
-public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension.StrictHenselization
-public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension.SubalgebraLimit
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.StrictHenselization
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.SubalgebraLimit
 public import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension
 
 /-!

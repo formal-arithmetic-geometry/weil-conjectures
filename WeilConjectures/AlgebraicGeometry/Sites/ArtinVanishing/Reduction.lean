@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension.AffineSpace
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.AffineSpace
 public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
 
 /-!

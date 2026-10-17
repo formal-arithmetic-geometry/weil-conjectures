@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension.StalkVanishing
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.StalkVanishing
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 

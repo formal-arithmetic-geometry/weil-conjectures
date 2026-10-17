@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Flat.TorsionFree
 public import Mathlib.RingTheory.Unramified.LocalStructure
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
-public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension.Algebra
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.Algebra
 
 /-!
 # The strict henselization of a regular domain

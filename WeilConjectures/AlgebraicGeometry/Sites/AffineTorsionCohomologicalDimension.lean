@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension
-public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension.Reduction
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.Reduction
 
 /-!
 # The affine Artin vanishing bound
