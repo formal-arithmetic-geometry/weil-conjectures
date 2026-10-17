@@ -563,5 +563,28 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q53-694d5f9ba (reviewer sub-agent of L); spot-checked: Reviewed and written to review.md. The repaired finite-dominant fibre-purity lemma fixes the prior E5/C2 issue; all hypotheses, dependencies, sources, route constraints, edge cases, and proof steps check out."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e74b37de",
+  "group": "Q117",
+  "result": "fix",
+  "note": "Statement matches node clause by clause (IsIntegral/IsNoetherian S, flat+LocallyOfFiniteType+QuasiCompact+reduced C,X,Y, EtaModification a,b = proper + schematically dense open iso + generic-fibre iso, eta-normality hnormal, proper q with dense-open iso and integral S', C'-morphism via hgq/hgc, F = (pullback.fst y q).fiber hy, finite range of canonical lift into X_s with closed points). Fibrewise closedness of y accepted: the prior H3 return required it and the node proof uses only that. Helper is the canonical pullback lift, not hollow. Delivered module compiles clean via nt_compile.py (2.0 s; error detection sanity-checked). Fixes: H8 helper docstring lacked source place and blueprint tag (added); H9 unused import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber removed (compiles clean without it); H11 thin second reading supplemented clause by clause in fixes/lem-trf-base-modification-comparison-fibre-image.report.md. Fixed module compiles clean (2.3 s); statement unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.BaseModificationComparisonFibreImage",
+  "declaration": "AlgebraicGeometry.base_modification_comparison_fibre_image",
+  "declarations": [
+   "AlgebraicGeometry.baseModificationFibreMap",
+   "AlgebraicGeometry.base_modification_comparison_fibre_image"
+  ],
+  "file": "lean/Sheaf/TraceFormula/BaseModificationComparisonFibreImage.lean",
+  "statement": "theorem base_modification_comparison_fibre_image {S : Scheme.{u}} [IsIntegral S] [IsNoetherian S] (η : S) (hη : IsGenericPoint η Set.univ) {C X Y : Scheme.{u}} (c : C ⟶ S) (x : X ⟶ S) (y : Y ⟶ S) [Flat c] [Flat x] [Flat y] [LocallyOfFiniteType c] [QuasiCompact c] [LocallyOfFiniteType x] [QuasiCompact x] [LocallyOfFiniteType y] [QuasiCompact y] [IsReduced C] [IsReduced X] [IsReduced Y] (a : X ⟶ C) (b : Y ⟶ C) (hac : a ≫ c = x) (hbc : b ≫ c = y) (ha : EtaModification (S.fromSpecStalk η) a c) (hb : EtaModification (S.fromSpecStalk η) b c) (hnormal : ∀ {Z : Scheme.{u}} (f : Z ⟶ Y), IsFinite f → EtaModification (S.fromSpecStalk η) f (b ≫ c) → IsIso f) {S' : Scheme.{u}} (q : S' ⟶ S) [IsIntegral S'] (hq : IsProper q) (hbirational : ∃ U : S.Opens, Dense (U : Set S) ∧ IsIso (q ∣_ U)) (g : pullback y q ⟶ pullback x q) (hgq : g ≫ pullback.snd x q = pullback.snd y q) (hgc : g ≫ pullback.fst x q ≫ a = pullback.fst y q ≫ b) (hy : Y) (hyclosed : IsClosed ({y.asFiber hy} : Set (y.fiber (y hy)))) : (Set.range (baseModificationFibreMap c x y a b hac hbc q g hgc hy)).Finite ∧ ∀ z ∈ Set.range (baseModificationFibreMap c x y a b hac hbc q g hgc hy), IsClosed ({z} : Set (x.fiber (y hy)))",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-3e74b37de"
  }
 }

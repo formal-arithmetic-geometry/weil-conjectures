@@ -301,5 +301,24 @@
   "group": "Q72",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q72-4b89708a6 (reviewer sub-agent of L); spot-checked: The mathematics and all 11 proof steps pass source, hypothesis, edge-case, route, duplication, and long-step checks. Repair metadata: created.item/group incorrectly named Q29's different item, and worker-authored split_report.tool_uses must be removed for maintainer recording. Corrected full JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-reduced-curve-normalization-genus.json; review.md records sources, checks, and accepted tools.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a0bcb0481",
+  "group": "Q11",
+  "result": "fix",
+  "note": "Every hypothesis and conclusion clause was checked against the node and the recorded dependency declarations (eulerChar, Hom.genus, Scheme.normalization/fromNormalization with IsIntegral, IsConnectedCurve, IsPureDimension, vanishingIdeal reduced-induced subscheme, unitToPushforwardObjUnit cokernel, finsum over closed points); all match. Finding: the support clause Set.Finite {y | δ y ≠ 0} was weaker than 'F supported on finitely many closed points' (finrank is 0 on an infinite-dimensional stalk; closedness not stated). fixes/ReducedCurveNormalizationGenus.lean adds ∀ y, Module.Finite k F_y (implicit in δ = dim_k F_y, proof step 7) and ∀ y, δ y ≠ 0 → IsClosed {y}; fixes/lem-trf-reduced-curve-normalization-genus.report.md appends a review note. Hom.genus (H⁰(Ω¹)) versus the node's H¹(O) is the already recorded def-sc-genus attachment and agrees by Serre duality (genus_eq_arithmeticGenus); accepted. Edge cases: disconnected curve, smooth curve with F = 0, nodal and cuspidal cubics, empty scheme excluded by Nonempty, universes standard. Gates: sorry-only proof, docstrings with source and blueprint, no hollow definition, no pro-etale content, no extra assumptions. nt_compile: delivered file clean (3.3 s), fixed file clean (2.9 s), and an injected error was reported."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ReducedCurveNormalizationGenus",
+  "declaration": "AlgebraicGeometry.reduced_curve_normalization_genus",
+  "statement": "theorem reduced_curve_normalization_genus {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}} [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] [IsReduced X] [Nonempty X] (hPure : Scheme.IsPureDimension X 1) : ∃ (v : ℕ) (e : Fin v ≃ {Z : Set X // Z ∈ irreducibleComponents X}), ∃ (hI : ∀ i : Fin v, IsIntegral (Scheme.IdealSheafData.vanishingIdeal ⟨(e i).1, isClosed_of_mem_irreducibleComponents _ (e i).2⟩).subscheme), (∀ i : Fin v, Smooth (@Scheme.fromNormalization _ (hI i) ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨(e i).1, isClosed_of_mem_irreducibleComponents _ (e i).2⟩).subschemeι ≫ (X ↘ Spec (.of k))) ∧ IsProper (@Scheme.fromNormalization _ (hI i) ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨(e i).1, isClosed_of_mem_irreducibleComponents _ (e i).2⟩).subschemeι ≫ (X ↘ Spec (.of k))) ∧ IsConnectedCurve (@Scheme.fromNormalization _ (hI i) ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨(e i).1, isClosed_of_mem_irreducibleComponents _ (e i).2⟩).subschemeι ≫ (X ↘ Spec (.of k)))) ∧ IsFinite (Limits.Sigma.desc (fun i : Fin v ↦ @Scheme.fromNormalization _ (hI i) ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨(e i).1, isClosed_of_mem_irreducibleComponents _ (e i).2⟩).subschemeι) ) ∧ ∃ (F : X.Modules) (δ : X → ℕ), F = cokernel (SheafOfModules.unitToPushforwardObjUnit (Limits.Sigma.desc (fun i : Fin v ↦ @Scheme.fromNormalization _ (hI i) ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨(e i).1, isClosed_of_mem_irreducibleComponents _ (e i).2⟩).subschemeι )).toRingCatSheafHom) ∧ δ = (fun y ↦ Module.finrank k ((ModuleCat.restrictScalars ((X.presheaf.germ ⊤ y trivial).hom.comp (@algebraMap k Γ(X, ⊤) _ _ ((X ↘ Spec (.of k)).ΓAlgebra)))).obj (ModuleCat.of (X.presheaf.stalk y) ((F.presheaf.stalk y : AddCommGrpCat) : Type u)))) ∧ (∀ y : X, Module.Finite k ((ModuleCat.restrictScalars ((X.presheaf.germ ⊤ y trivial).hom.comp (@algebraMap k Γ(X, ⊤) _ _ ((X ↘ Spec (.of k)).ΓAlgebra)))).obj (ModuleCat.of (X.presheaf.stalk y) ((F.presheaf.stalk y : AddCommGrpCat) : Type u)))) ∧ Set.Finite {y : X | δ y ≠ 0} ∧ (∀ y : X, δ y ≠ 0 → IsClosed ({y} : Set X)) ∧ 1 - Scheme.Modules.eulerChar k (Scheme.Modules.unit X) = (1 : ℤ) - v + ∑ i : Fin v, (Scheme.Hom.genus (@Scheme.fromNormalization _ (hI i) ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨(e i).1, isClosed_of_mem_irreducibleComponents _ (e i).2⟩).subschemeι ≫ (X ↘ Spec (.of k))) : ℤ) + ∑ᶠ y : {y : X // IsClosed ({y} : Set X)}, (δ y.1 : ℤ)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/ReducedCurveNormalizationGenus.lean",
+  "fixed_by": "NT-stage2-cc-a0bcb0481"
  }
 }

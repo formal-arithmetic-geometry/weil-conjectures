@@ -162,5 +162,23 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-f1707ae71 (reviewer sub-agent of L); spot-checked: Read the item, chapter/unit route, all four cited definitions, and Hübner–Schmidt Theorem 6.1 with its setup (PDF lines 927–958). Both proof steps match the source clauses exactly, preserve all hypotheses and strict contraction, contain no hidden long lemma, duplicate, cycle, SGA or dropped-route machinery, and no forbidden batch-5 dependency. Small comparable, equal, and incomparable-prime cases were checked. Review written to review.md; no fixes or accepted tool_uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97f2e8deb",
+  "group": "N3",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause of artin_embedded_hensel_join matches the node: normal domain (IsDomain+IsIntegrallyClosed), IsSepClosure(FractionRing P) Ksep, prime ideals with no extra assumptions, IsHenselizationAtPrime henselizations with injective embeddings that agree with the map from P, J = Subring.closure of the two ranges, HenselianLocalRing J, and for incomparable primes IsStrictlyHenselianLocalRing J with the comap of maximalIdeal strictly below q1 and q2. Universes: henselizations in P's universe as the recorded dependency fixes; Ksep has its own universe. The node changes only in its lean field and lean.statement is verbatim the file signature. Docstrings give the source and blueprint id; nothing proved beyond sorry; no new definitions; no existing declaration found. nt_compile.py compiles the file clean in 2.0 s; the only non-standard axiom is sorryAx. The source PDF has no local copy, so the source check rests on the stage-1-reviewed node. Minor only: short N3 second-reading section, redundant ∃ hJ, unused open Set."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ArtinEmbeddedHenselJoin",
+  "declaration": "artin_embedded_hensel_join",
+  "file": "lean/Sheaf/TraceFormula/ArtinEmbeddedHenselJoin.lean",
+  "statement": "theorem artin_embedded_hensel_join (P : Type u) [CommRing P] [IsDomain P] [IsIntegrallyClosed P] (Ksep : Type v) [Field Ksep] [Algebra (FractionRing P) Ksep] [IsSepClosure (FractionRing P) Ksep] (q₁ q₂ : Ideal P) [q₁.IsPrime] [q₂.IsPrime] (H₁ H₂ : Type u) [CommRing H₁] [CommRing H₂] [Algebra (Localization.AtPrime q₁) H₁] [Algebra (Localization.AtPrime q₂) H₂] [HenselianLocalRing H₁] [HenselianLocalRing H₂] (hH₁ : Algebra.IsHenselizationAtPrime P q₁ H₁) (hH₂ : Algebra.IsHenselizationAtPrime P q₂ H₂) (e₁ : H₁ →+* Ksep) (e₂ : H₂ →+* Ksep) (he₁ : Function.Injective e₁) (he₂ : Function.Injective e₂) (compat₁ : e₁.comp ((algebraMap (Localization.AtPrime q₁) H₁).comp (algebraMap P (Localization.AtPrime q₁))) = (algebraMap (FractionRing P) Ksep).comp (algebraMap P (FractionRing P))) (compat₂ : e₂.comp ((algebraMap (Localization.AtPrime q₂) H₂).comp (algebraMap P (Localization.AtPrime q₂))) = (algebraMap (FractionRing P) Ksep).comp (algebraMap P (FractionRing P))) : HenselianLocalRing (Subring.closure (Set.range e₁ ∪ Set.range e₂)) ∧ ((¬q₁ ≤ q₂ ∧ ¬q₂ ≤ q₁) → ∃ hJ : HenselianLocalRing (Subring.closure (Set.range e₁ ∪ Set.range e₂)), (IsStrictlyHenselianLocalRing (Subring.closure (Set.range e₁ ∪ Set.range e₂)) ∧ Ideal.comap (RingHom.codRestrict ((algebraMap (FractionRing P) Ksep).comp (algebraMap P (FractionRing P))) (Subring.closure (Set.range e₁ ∪ Set.range e₂)) (fun p => by rw [← congrArg (fun f : P →+* Ksep => f p) compat₁] exact Subring.subset_closure (Or.inl ⟨_, rfl⟩))) (@IsLocalRing.maximalIdeal (Subring.closure (Set.range e₁ ∪ Set.range e₂)) _ (@HenselianLocalRing.toIsLocalRing _ _ hJ)) < q₁) ∧ Ideal.comap (RingHom.codRestrict ((algebraMap (FractionRing P) Ksep).comp (algebraMap P (FractionRing P))) (Subring.closure (Set.range e₁ ∪ Set.range e₂)) (fun p => by rw [← congrArg (fun f : P →+* Ksep => f p) compat₁] exact Subring.subset_closure (Or.inl ⟨_, rfl⟩))) (@IsLocalRing.maximalIdeal (Subring.closure (Set.range e₁ ∪ Set.range e₂)) _ (@HenselianLocalRing.toIsLocalRing _ _ hJ)) < q₂)",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
