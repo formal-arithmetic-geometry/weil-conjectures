@@ -10,6 +10,7 @@ public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurity
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Spreading
 public import WeilConjectures.RingTheory.Etale.TraitSection.ReductionProof
 public import WeilConjectures.RingTheory.DiscreteValuationRing.EtaleRootsOfUnity
+public import WeilConjectures.RingTheory.IntegralClosure.LocalizationSmoothBaseChange
 
 /-!
 # Étaleness of the normalization near a section over a trait
@@ -52,14 +53,12 @@ variable {R₀ B Bk L : Type u} [CommRing R₀] [IsDomain R₀] [IsIntegrallyClo
   [CommRing L] [Algebra Bk L] [Algebra B L] [IsScalarTower B Bk L]
   [Module.Finite Bk L] [Algebra.Etale Bk L]
 
+omit [IsNoetherianRing B] in
 include Bk in
 /-- **Étaleness of the normalization at a section over a trait**, local form: the base change of
 the integral closure of `B` in `L` to the local ring `B_P`, `P = ε⁻¹(q)`, is finite étale.
-
-TODO (gap, the `sorry` below): the integral closure of `B` in `L` commutes with the base change
-`B → B ⊗[R₀] A₁` (a localization followed by the étale `A → A₁`;
-`TensorProduct.toIntegralClosure_bijective_of_tower`). The other steps are in
-`Algebra.etale_localization_integralClosure_of_baseChange`. -/
+The steps are in `Algebra.etale_localization_integralClosure_of_baseChange`; the integral closure
+commutes with the base change `B → B ⊗[R₀] A₁` (a localization followed by the étale `A → A₁`). -/
 theorem etale_localization_integralClosure_of_height_eq_one (ε : B →ₐ[R₀] R₀) (q : Ideal R₀)
     [q.IsPrime] (hq : q.height = 1) (G : Type*) [Group G] [Finite G]
     [MulSemiringAction G L] [SMulCommClass G Bk L]
@@ -98,7 +97,8 @@ theorem etale_localization_integralClosure_of_height_eq_one (ε : B →ₐ[R₀]
     rw [IsScalarTower.algebraMap_eq R₀ A A₁, ← Ideal.comap_comap, hmax]
     exact Localization.AtPrime.under_maximalIdeal
   exact etale_localization_integralClosure_of_baseChange (Bk := Bk) ε q hq0 G hfix hrank hG φ hφ
-    hφinj A₁ hinj hq₁ hζ (by sorry)
+    hφinj A₁ hinj hq₁ hζ
+    (TensorProduct.toIntegralClosure_bijective_of_isLocalization_of_smooth (A := A) q.primeCompl)
 
 include Bk in
 /-- **Étaleness of the normalization near a section over a trait** (trait case of the proof of

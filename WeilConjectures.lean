@@ -3699,6 +3699,7 @@ public import WeilConjectures.RingTheory.Etale.KummerDescent
 public import WeilConjectures.RingTheory.Etale.TraitSection
 public import WeilConjectures.RingTheory.Etale.TraitSection.BaseChange
 public import WeilConjectures.RingTheory.Etale.TraitSection.Core
+public import WeilConjectures.RingTheory.Etale.TraitSection.Descent
 public import WeilConjectures.RingTheory.Etale.TraitSection.KummerIntegralClosure
 public import WeilConjectures.RingTheory.Etale.TraitSection.Points
 public import WeilConjectures.RingTheory.Etale.TraitSection.Reduction
@@ -3767,6 +3768,7 @@ public import WeilConjectures.RingTheory.IndSmoothFinitePresentationFactorizatio
 public import WeilConjectures.RingTheory.IndStandardSmooth
 public import WeilConjectures.RingTheory.InertiaUnramifiedPoint
 public import WeilConjectures.RingTheory.IntegralClosure.EtaleBaseChange
+public import WeilConjectures.RingTheory.IntegralClosure.LocalizationSmoothBaseChange
 public import WeilConjectures.RingTheory.IntegralClosure.NoetherianApproximation
 public import WeilConjectures.RingTheory.IntegralIdempotentAnnihilatingPolynomial
 public import WeilConjectures.RingTheory.IntegrallyClosed.DepthTwo

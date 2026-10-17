@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.RingTheory.Etale.TraitSection.Core
+public import WeilConjectures.RingTheory.Etale.TraitSection.Descent
 public import WeilConjectures.RingTheory.Etale.TraitSection.Reduction
 
 /-!
@@ -17,18 +18,12 @@ unity, whose maximal ideal lies over `q`. Base changing the trait data to `A₁`
 `Algebra.etale_localization_integralClosure_of_isPrimitiveRoot`, the normalization becomes finite
 étale at the section after base change to `(B₁)_{P₁}`, hence is finite étale over `B_P` by
 descent along the flat local map `B_P → (B₁)_{P₁}`
-(`Algebra.etale_localization_integralClosure_of_baseChange`).
+(`Algebra.etale_localization_integralClosure_of_baseChange`), using that the integral closure
+commutes with the base change `B → B₁` (the hypothesis `hint`) and
+`Algebra.etale_and_finite_localization_of_baseChange`.
 
 This is part of the trait case of blueprint `sbc-thm-spreading-finite-etale-galois`
 ([Stacks 0EYJ]).
-
-TODO (remaining gaps, marked `sorry` in the proof):
-* `L₁` is finite étale over `B_K₁` of rank `|G|`. Use the isomorphism
-  `B_K₁ ⊗[B_K] L ≅ L₁` (`IsLocalization.algebraLid`, `Algebra.TensorProduct.cancelBaseChange`) and
-  `Module.rankAtStalk_baseChange`.
-* Descent: `(B₁)_{P₁} ⊗[B₁] T₁ ≅ (B₁)_{P₁} ⊗[B_P] (B_P ⊗[B] T₀)` (via `hint` and
-  `TensorProduct.toIntegralClosure_bijective_of_isLocalization`), then
-  `Algebra.etale_and_finite_of_isLocalHom` along `B_P → (B₁)_{P₁}`.
 -/
 
 @[expose] public section
@@ -49,6 +44,7 @@ variable {R₀ B Bk L : Type u} [CommRing R₀] [IsDomain R₀] [IsIntegrallyClo
 
 set_option maxHeartbeats 3200000 in
 -- The base-changed algebras `B₁`, `Bk₁` and `L₁` make instance synthesis slow.
+omit [IsIntegrallyClosed R₀] [IsNoetherianRing R₀] [IsNoetherianRing B] in
 attribute [local instance] Algebra.TensorProduct.rightAlgebra in
 include Bk in
 /-- **Reduction of the trait case to a base containing the roots of unity.** See the module
@@ -165,6 +161,12 @@ theorem etale_localization_integralClosure_of_baseChange (ε : B →ₐ[R₀] R�
       rwa [e, e] at h
   obtain ⟨hE, hF⟩ := etale_localization_integralClosure_of_isPrimitiveRoot (A := A₁) (B := B₁)
     (Bk := Bk₁) (L := L₁) ε₁ G hfix₁ hrank₁ hG₁ (K := K₁) φ₁ hφ₁ hφ₁inj hζ
-  sorry
+  -- descent along the flat local map `B_P → (B₁)_{P₁}`
+  have hP : q.comap ε = ((maximalIdeal A₁).comap ε₁).comap (algebraMap B B₁) := by
+    ext b
+    rw [Ideal.mem_comap, Ideal.mem_comap, Ideal.mem_comap, ← hq₁, Ideal.mem_comap]
+    exact iff_of_eq (congrArg (· ∈ maximalIdeal A₁) (hε₁ b)).symm
+  exact etale_and_finite_localization_of_baseChange (q.comap ε) ((maximalIdeal A₁).comap ε₁) hP
+    (AlgEquiv.ofBijective (TensorProduct.toIntegralClosure B B₁ L) hint) hE hF
 
 end Algebra
