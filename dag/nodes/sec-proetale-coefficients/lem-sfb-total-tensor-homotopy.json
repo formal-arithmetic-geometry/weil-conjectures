@@ -101,12 +101,19 @@
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-derived-tensor-hom",
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Monoidal",
+  "declaration": "HomotopyCategory.MonoidalCategory.instMonoidalCategory",
   "declarations": [
    "HomotopyCategory.MonoidalCategory.instMonoidalCategory",
-   "HomotopyCategory.MonoidalCategory.instMonoidalHomologicalComplexQuotient_weilConjectures"
+   "HomotopyCategory.MonoidalCategory.instMonoidalHomologicalComplexQuotient_weilConjectures",
+   "HomologicalComplex.monoidalCategory"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 17:05 UTC for group NR, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: The first descends the specified signed direct-sum tensor and degree-zero unit to"
+  "statement": "noncomputable instance instMonoidalCategory : MonoidalCategory (HomotopyCategory C c)",
+  "branch": "slopmaster2",
+  "by": "Q104",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Existing signed direct-sum total tensor and homotopy descent. Specialize c to ComplexShape.up ℤ. Under Abelian C, MonoidalCategory C, MonoidalPreadditive C, all small colimits and their preservation by tensoring on both sides, all the displayed graded-tensor and HasMapBifunctor prerequisites are inferred; validated with scompile.py using independent object and morphism universes and only HasColimitsOfSize.{0,0} and two-sided PreservesColimitsOfSize.{0,0}. HomologicalComplex.monoidalCategory gives the complex structure, the primary declaration gives its homotopy descent, and the named quotient instance gives a strong monoidal quotient with identity unit/tensor comparison isomorphisms. The associator and unitors are explicitly quotient images. Both upstream homotopy instances use only propext, Classical.choice and Quot.sound; no new module is needed."
  },
  "lean_audit": {
   "master": {
@@ -163,5 +170,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b45d0fc3",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Existing-declaration record only (lean field completed; statement/deps unchanged vs base). Upstream FromJoel HomotopyCategory.Monoidal: genuine quotient lift of Mathlib's signed total tensor (eps2=negOnePow p, unit single 0), ofBifunctor with real pentagon/triangle, quotient CoreMonoidal with identity mu/eps; constraints proved to be quotient images. All 5 deps match; no stronger assumptions; independent universes; lean.statement verbatim. nt_compile scratch checks clean: instances elaborate at up Z with HasColimitsOfSize.{0,0}, and also from the node's literal HasColimits/PreservesColimits via Mathlib shrink lemmas (citers must add these two haveI lines); unit/associator/unitor equalities and signs by rfl; axioms propext/Classical.choice/Quot.sound only. Worker report real; second-reading section is the 2026-10-17 policy note."
  }
 }

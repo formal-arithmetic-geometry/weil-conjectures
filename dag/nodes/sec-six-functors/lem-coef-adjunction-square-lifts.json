@@ -209,5 +209,28 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-5bb170021 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source lifting argument, and unit/chapter route. Corrected ill-typed uses of Phi_f in steps 2 and 7; statement and dependencies unchanged. Finite-set checks confirm four-lift and empty-lift cases. No duplicate or missing non-elementary premise found. Review and whole corrected JSON saved under the review directory.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d094dfb9",
+  "group": "NA",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: Bᵒᵖ ⥤ Cat diagram, Mathlib adjunctions as Φ_r, square equation via canonical eqToHom transports a^*=f^*h^*, b^*=h^*g^* (equivalent to the original), exact u_f/α̃/β̃, fibre square, total/fibre diagonal subtypes, Equiv with forward Φ_h⁻¹ and inverse Φ_h fixed by formulas. Independent universes, no extra assumptions; edge cases (identities with non-normalized adjoints, empty diagonal sets) covered. Helpers are real canonical data with source/blueprint docstrings; only proof is sorry; lean.statement verbatim; only the lean field changed; names unique in Mathlib/project. nt_compile --json rc 0, no messages (error reporting confirmed by an injected error). A full proof compiled in /tmp only, so the statement is true as stated. Second-reading section is the standard post-2026-10-17 note. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.CoefficientAdjunctionSquareLifts",
+  "declaration": "CategoryTheory.adjunctionSquareLifts",
+  "declarations": [
+   "CategoryTheory.adjunctionSquareComponent",
+   "CategoryTheory.adjunctionSquareTop",
+   "CategoryTheory.adjunctionSquareLifts"
+  ],
+  "file": "lean/Sheaf/SixFunctors/CoefficientAdjunctionSquareLifts.lean",
+  "statement": "theorem adjunctionSquareLifts {B : Type u} [Category.{v} B] (D : Bᵒᵖ ⥤ Cat.{vₘ, uₘ}) (L : ∀ {s t : B}, (s ⟶ t) → (D.obj (op s) ⥤ D.obj (op t))) (adj : ∀ {s t : B} (r : s ⟶ t), L r ⊣ (D.map r.op).toFunctor) {s t z v₀ : B} {A : D.obj (op s)} {B₁ : D.obj (op t)} {X : D.obj (op z)} {Y : D.obj (op v₀)} (f : s ⟶ t) (g : z ⟶ v₀) (h : t ⟶ z) (a : s ⟶ z) (b : t ⟶ v₀) (ha : f ≫ h = a) (hb : h ≫ g = b) (v : A ⟶ (D.map f.op).toFunctor.obj B₁) (w : X ⟶ (D.map g.op).toFunctor.obj Y) (α : A ⟶ (D.map a.op).toFunctor.obj X) (β : B₁ ⟶ (D.map b.op).toFunctor.obj Y) (_hsquare : adjunctionSquareComponent D f h a ha α ≫ (D.map f.op).toFunctor.map ((D.map h.op).toFunctor.map w) = v ≫ (D.map f.op).toFunctor.map (adjunctionSquareComponent D h g b hb β)) : adjunctionSquareTop (adj f) (adj h) (adjunctionSquareComponent D f h a ha α) ≫ w = (L h).map (((adj f).homEquiv A B₁).symm v) ≫ ((adj h).homEquiv B₁ ((D.map g.op).toFunctor.obj Y)).symm (adjunctionSquareComponent D h g b hb β) ∧ ∃ e : {d : B₁ ⟶ (D.map h.op).toFunctor.obj X // v ≫ (D.map f.op).toFunctor.map d = adjunctionSquareComponent D f h a ha α ∧ d ≫ (D.map h.op).toFunctor.map w = adjunctionSquareComponent D h g b hb β} ≃ {δ : (L h).obj B₁ ⟶ X // (L h).map (((adj f).homEquiv A B₁).symm v) ≫ δ = adjunctionSquareTop (adj f) (adj h) (adjunctionSquareComponent D f h a ha α) ∧ δ ≫ w = ((adj h).homEquiv B₁ ((D.map g.op).toFunctor.obj Y)).symm (adjunctionSquareComponent D h g b hb β)}, (∀ d, (e d).val = ((adj h).homEquiv B₁ X).symm d.val) ∧ (∀ δ, (e.symm δ).val = (adj h).homEquiv B₁ X δ.val)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

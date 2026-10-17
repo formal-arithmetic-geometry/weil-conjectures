@@ -238,5 +238,28 @@
   "group": "Q67",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q67-7df571ae7 (reviewer sub-agent of L); spot-checked: Read and checked the complete item, all four steps, cited definition, Kerodon 0060, unit/chapter route and master target sources. Coordinate proof and endpoint/naturality equations are valid; 200,784 finite operator checks passed. No new nodes, missing citations or circular dependencies. review.md records the checks and a nonblocking stale title/report discrepancy."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a84044060",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Single commit (report, node, module); node differs from base only in lean; lean.statement verbatim. Clause-by-clause: K/u0/u1/eta with h0,h1 via SSet.ι0/ι1; [Quasicategory C] as in node, no extra hypotheses; Fun(K,C) = (ihom K).obj C as fixed by def-cbc-enhanced-diagrams-cones; precompositionCylinder is a real curry/ev construction giving F(eta(k,t a),a) on all simplices; endpoints equal MonoidalClosed.pre u0/u1 (uncurry_pre confirms precomposition, orientation correct); naturality for arbitrary q : C -> C' typed correctly. Scratch proofs of all three clauses compiled (true and not vacuous); delivered proof is sorry. Edge cases (empty K, empty C, u0=u1, higher simplices, single universe u) fine. Docstrings carry source, blueprint and all 4 proof steps; no line over 100 chars; autoImplicit off; import used; new name. nt_compile.py --json: rc=0, 4.3 s, no errors or warnings (error detection confirmed). Nonblocking: the second reading is the author's own pass."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityPrecompositionCylinder",
+  "declaration": "SSet.Enhanced.precompositionCylinder_endpoints_natural",
+  "declarations": [
+   "SSet.Enhanced.precompositionCylinder",
+   "SSet.Enhanced.precompositionCylinder_endpoints_natural"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityPrecompositionCylinder.lean",
+  "statement": "theorem precompositionCylinder_endpoints_natural {K : SSet.{u}} (u₀ u₁ : K ⟶ K) (η : K ⊗ Δ[1] ⟶ K) (h₀ : SSet.ι₀ ≫ η = u₀) (h₁ : SSet.ι₁ ≫ η = u₁) (C : SSet.{u}) [Quasicategory C] : (SSet.ι₀ ≫ precompositionCylinder η C = (MonoidalClosed.pre u₀).app C) ∧ (SSet.ι₁ ≫ precompositionCylinder η C = (MonoidalClosed.pre u₁).app C) ∧ (∀ (C' : SSet.{u}) [Quasicategory C'] (q : C ⟶ C'), precompositionCylinder η C ≫ (ihom K).map q = ((ihom K).map q ▷ Δ[1]) ≫ precompositionCylinder η C')",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The cylinder is constructed explicitly by evaluation and currying. The theorem states the two endpoint restrictions and naturality under target simplicial maps, on the existing internal functor simplicial set of def-cbc-enhanced-diagrams-cones."
  }
 }

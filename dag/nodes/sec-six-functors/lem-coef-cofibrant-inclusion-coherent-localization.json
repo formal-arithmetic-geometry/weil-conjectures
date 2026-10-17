@@ -197,5 +197,28 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-bcce87ac4 (reviewer sub-agent of L); spot-checked: Read the required instructions, item, cited nodes, unit/chapter route, Mathlib search evidence, and Lurie HA sources. Verified all five proof steps, hypotheses, coherent functor-category descent, edge cases, duplicate audit, and route/tool use. Wrote review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5429e4c5f",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Read the node, both stmt deps (ModelInfinityDerivedAdjunction ReplacementAdjunction/Represents pattern, FiniteReedy.IsLocalization/diagram/transformation, frameLargeNerveMap), Mathlib CofibrantObject, and the delivered module. Hypotheses equal the dep's model-category convention; (Q,e,he) is equivalent to the node's functorial initial-map factorization; universes max u v w with u,v independent; full-internal-hom localization predicate. Conclusion: Q preserves weak equivalences; inclusion/replacement with equivalence comparison edges; alpha (repl≫incl⇒id) and beta (incl≫repl⇒id) are equivalence edges; normalization pastings with transformation qM e and the real restriction cofibrantReplacementRestriction checked endpoint by endpoint; coherentDiagrams for all K. lean.statement verbatim; node changed only in lean; docstrings carry source and blueprint; single sorry; no duplicate (Dk comparison is a different statement). nt_compile --json of the snapshot file: clean in 7.6 s. Cosmetic only: hM/hA unused structure parameters; 'Remark the project server' glitch in the report."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CofibrantInclusionCoherentLocalization",
+  "declaration": "HomotopicalAlgebra.ModelInfinity.cofibrantInclusionCoherentLocalization",
+  "declarations": [
+   "HomotopicalAlgebra.ModelInfinity.cofibrantReplacementRestriction",
+   "HomotopicalAlgebra.ModelInfinity.CofibrantLocalizationComparison",
+   "HomotopicalAlgebra.ModelInfinity.cofibrantInclusionCoherentLocalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CofibrantInclusionCoherentLocalization.lean",
+  "statement": "theorem cofibrantInclusionCoherentLocalization {C : Type u} [Category.{v} C] [ModelCategory C] [HasLimits C] [HasColimits C] [(cofibrations C).HasFunctorialFactorization (trivialFibrations C)] [(trivialCofibrations C).HasFunctorialFactorization (fibrations C)] (Q : C ⥤ CofibrantObject C) (e : Q ⋙ CofibrantObject.ι ⟶ 𝟭 C) (he : ∀ X : C, Fibration (e.app X) ∧ WeakEquivalence (e.app X)) (M A : SSet.{max u v w}) [SSet.Quasicategory M] [SSet.Quasicategory A] (qM : FiniteReedy.largeNerve.{u, v, max u v w} C ⟶ M) (qA : FiniteReedy.largeNerve.{u, v, max u v w} (CofibrantObject C) ⟶ A) (hM : FiniteReedy.IsLocalization.{u, v, max u v w} (weakEquivalences C) qM) (hA : FiniteReedy.IsLocalization.{u, v, max u v w} (weakEquivalences (CofibrantObject C)) qA) : (∀ {X Y : C} (f : X ⟶ Y), WeakEquivalence f → WeakEquivalence (Q.map f)) ∧ Nonempty (CofibrantLocalizationComparison Q e qM qA hM hA)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

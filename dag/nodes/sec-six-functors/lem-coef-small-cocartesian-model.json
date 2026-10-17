@@ -214,5 +214,28 @@
   "group": "Q75",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q75-2a0fc0e19 (reviewer sub-agent of L); spot-checked: Read the item and sole new node in full; checked all five steps, cited statements and sources, universe bounds, strict over-base maps, fiber equivalences, reflection, edge cases, duplicates and cycles. Accepted the declared mapping-space tool use. Master target coefficients and morphism directions checked without assuming a seeded comparison theorem. No fixes needed; details in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-122e99ec8",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Every clause matches the node: S and E0 actually u-small (IsSmall), fibers IsEssentiallySmall, cocartesianFibrationOver p and p0, strict F ≫ p = p0, IsFunctorEquivalence F, every fiber map (canonical pullback.map helper, real data) an equivalence, preservation and reflection in the right direction. Ambient universe max (u+1) v, no universe equality. [Quasicategory E] is implied by the other hypotheses, so not stronger. Empty base, empty fibers and a point base are covered. Docstrings have source and blueprint, the only sorry is the node's theorem, the statement matches the file exactly, lines are within 100 characters, and there is no duplicate in Mathlib or the project. nt_compile on the snapshot: item clean 3.1-4.2 s, SpaceValuedStraightening clean 4.7 s. The noncomputable Diagrams repair is already on the side head from Q19, so it is redundant but harmless; optionally land with --revert-nodes lem-coef-space-valued-straightening to keep Q19's record.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SmallCocartesianModel",
+  "declaration": "SSet.Enhanced.small_cocartesian_model",
+  "declarations": [
+   "SSet.Enhanced.smallCocartesianFiberMap",
+   "SSet.Enhanced.small_cocartesian_model"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SmallCocartesianModel.lean",
+  "statement": "theorem small_cocartesian_model (S E : SSet.{max (u + 1) v}) [Quasicategory S] [Quasicategory E] (hS : Presentability.IsSmall.{u, max (u + 1) v} S) (p : E ⟶ S) (hp : cocartesianFibrationOver p) (hfib : ∀ s : S _⦋0⦌, Presentability.IsEssentiallySmall.{u, max (u + 1) v} (fiber p s)) : ∃ E₀ : SSet.{max (u + 1) v}, Presentability.IsSmall.{u, max (u + 1) v} E₀ ∧ Quasicategory E₀ ∧ ∃ p₀ : E₀ ⟶ S, cocartesianFibrationOver p₀ ∧ ∃ (F : E₀ ⟶ E) (h : F ≫ p = p₀), IsFunctorEquivalence F ∧ (∀ s : S _⦋0⦌, IsFunctorEquivalence (smallCocartesianFiberMap p₀ p F h s)) ∧ preservesCocartesianEdges p₀ p F h ∧ (∀ e : Δ[1] ⟶ E₀, IsCocartesianEdge p (e ≫ F) → IsCocartesianEdge p₀ e)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Small and large simplicial sets are represented in the containing universe max (u + 1) v. The recorded Presentability.IsSmall predicate expresses actual u-smallness of the base and output total simplicial set, distinct from essential smallness of the input fibers. The fiber comparison is the canonical pullback.map of the strict over-base comparison."
  }
 }

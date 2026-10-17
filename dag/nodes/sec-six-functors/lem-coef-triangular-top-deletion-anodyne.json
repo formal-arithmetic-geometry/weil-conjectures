@@ -238,5 +238,31 @@
   "group": "Q08",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q08-56472d82b (reviewer sub-agent of L); spot-checked: Reviewed all required instructions, sources, nodes, parent use, unit route, and delivery-error checks. Verified every proof step, edge cases n=1 and n=2, exhaustive matching/rank checks through n=8, citations, acyclicity, and the repaired shelling argument. Wrote review.md; no fixes or tool_uses accepted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b08b7b0f",
+  "group": "Q38",
+  "result": "pass",
+  "note": "All node clauses match the Lean: T_n is TerminalComparisonArrow with its thin Hom (i<=i', j'<=j); B_n is terminalComparisonBoundary (all proper Finsets, empty one included); Y_n is the fullSubcomplex on vertices other than (n,n); D_n is the preimage of B_n along Y_n.ι; the marking is constant source coordinate, with degenerate edges by rfl; the induced marking on D_n uses inducedMarkingMap on the actual inclusion; the conclusion is Marked.markedAnodyne. No extra hypotheses, one declared universe u, n>=1 as in the node; n=1 is exactly generator (ii). Four helper defs carry real data and the one theorem is sorry. Docstrings give the source place, blueprint id and all nine proof steps. lean.statement matches the file verbatim and only the lean field changed. No new name already exists in Mathlib, slopmaster2 or the side tree; max line 94. nt_compile.py --json on the snapshot file: exit 0, no errors or warnings (9.0 s; TerminalComparisonCoherence 7.6 s). Observations, not faults: the reused interval helpers live in the module of the consumer lem-coef-terminal-comparison-coherence, so its stage-3 proof will need the helpers moved to a base module first (reported by the worker; no DAG cycle). The Second reading section is the post-2026-10-17 placeholder."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.TriangularTopDeletionAnodyne",
+  "declaration": "SSet.Enhanced.triangular_top_deletion_anodyne",
+  "declarations": [
+   "SSet.Enhanced.triangularTopDeletion",
+   "SSet.Enhanced.triangularTopDeletionMarked",
+   "SSet.Enhanced.triangularTopDeletionBoundary",
+   "SSet.Enhanced.triangularTopDeletionInclusion",
+   "SSet.Enhanced.triangular_top_deletion_anodyne"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/TriangularTopDeletionAnodyne.lean",
+  "statement": "theorem triangular_top_deletion_anodyne (n : ℕ) (hn : 1 ≤ n) : Marked.markedAnodyne (triangularTopDeletionInclusion.{u} n)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the concrete interval category, ordinary nerve and proper-face union already defined in TerminalComparisonCoherence. Full-subcomplex deletion, the exact constant-first marking, the intersection by preimage, and its canonical induced-marking inclusion are helpers of this node. Only the final theorem is postponed; no existing theorem from TerminalComparisonCoherence is used."
  }
 }

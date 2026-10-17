@@ -216,5 +216,24 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-b270c6d84 (reviewer sub-agent of L); spot-checked: Read both nodes and all cited statements/sources; verified all five steps, endpoint-fixed homotopies, horn filtration, edge cases, duplicates, and unit route. Mathematics passes. Added only missing merged_into and lean_audit bookkeeping fields to the new node under fixes/. Full checks recorded in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a3bf66617",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: Kan X,Y in common universe u, arbitrary r, vertex y; P_y/Q_y = existing comma X Y r y true/false (degreewise endpoint equations); R,S strictly over X; SSet.Homotopy for R≫S and S≫R to identities with either orientation and projection constant on the whole cylinder; no fibration/nonemptiness assumption. Node copy differs only in lean field; lean.statement verbatim. Five-step proof plan checked correct; cited nodes exist. No duplicate in side lean/Sheaf or Mathlib. No definitions, sorry-only proof, docstrings with source and blueprint tag. nt_compile --json on snapshot: rc=0, 3.2 s, no errors/warnings; #print axioms shows sorryAx only as expected. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanFiberPathReversal",
+  "declaration": "SSet.Enhanced.kan_fiber_path_reversal",
+  "file": "lean/Sheaf/AlgebraicTopology/KanFiberPathReversal.lean",
+  "statement": "theorem kan_fiber_path_reversal {X Y : SSet.{u}} [KanComplex X] [KanComplex Y] (r : X ⟶ Y) (y : Y _⦋0⦌) : KanComplex (comma X Y r y true) ∧ KanComplex (comma X Y r y false) ∧ ∃ (R : comma X Y r y true ⟶ comma X Y r y false) (S : comma X Y r y false ⟶ comma X Y r y true), R ≫ (commaSubcomplex X Y r y false).ι ≫ fst _ _ = (commaSubcomplex X Y r y true).ι ≫ fst _ _ ∧ S ≫ (commaSubcomplex X Y r y true).ι ≫ fst _ _ = (commaSubcomplex X Y r y false).ι ≫ fst _ _ ∧ ((∃ H : SSet.Homotopy (R ≫ S) (𝟙 (comma X Y r y true)), H.h ≫ (commaSubcomplex X Y r y true).ι ≫ fst _ _ = fst _ _ ≫ (commaSubcomplex X Y r y true).ι ≫ fst _ _) ∨ (∃ H : SSet.Homotopy (𝟙 (comma X Y r y true)) (R ≫ S), H.h ≫ (commaSubcomplex X Y r y true).ι ≫ fst _ _ = fst _ _ ≫ (commaSubcomplex X Y r y true).ι ≫ fst _ _)) ∧ ((∃ H : SSet.Homotopy (S ≫ R) (𝟙 (comma X Y r y false)), H.h ≫ (commaSubcomplex X Y r y false).ι ≫ fst _ _ = fst _ _ ≫ (commaSubcomplex X Y r y false).ι ≫ fst _ _) ∨ (∃ H : SSet.Homotopy (𝟙 (comma X Y r y false)) (S ≫ R), H.h ≫ (commaSubcomplex X Y r y false).ι ≫ fst _ _ = fst _ _ ≫ (commaSubcomplex X Y r y false).ι ≫ fst _ _))",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing comma fibers with outgoing=true/false. All maps and homotopies preserve the source projection exactly; each homotopy permits either endpoint orientation. No new definitions or statement corrections."
  }
 }
