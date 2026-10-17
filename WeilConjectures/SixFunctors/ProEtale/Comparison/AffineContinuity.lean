@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.LimitSystem.DerivedContinuity
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 
 /-!
 # Pro-étale cohomology of a pro-étale affine
@@ -41,12 +42,14 @@ global sections. -/
 noncomputable def comparisonUpperStarConstantSheafIsoAddCommGrpCat (X : Scheme.{u}) :
     constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙ ν^*(X)[AddCommGrpCat.{u + 1}] ≅
       constantSheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} :=
-  (((constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1} (Etale.isTerminalMkId X)).comp
+  (((constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1}
+      (Scheme.Etale.isTerminalMkId X)).comp
       (comparisonAdjunction AddCommGrpCat.{u + 1} X)).ofNatIsoRight
-    ((toProEt X).sheafPushforwardContinuousCompSheafSectionsObjIso AddCommGrpCat.{u + 1}
+    ((Scheme.toProEt X).sheafPushforwardContinuousCompSheafSectionsObjIso AddCommGrpCat.{u + 1}
       X.smallEtaleTopology (Scheme.ProEt.topology X)
         (Opposite.op (Scheme.Etale.mk (𝟙 X))))).leftAdjointUniq
-    (constantSheafAdj (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} (ProEt.isTerminalMkId X))
+    (constantSheafAdj (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}
+      (Scheme.ProEt.isTerminalMkId X))
 
 /-- The constant pro-étale sheaf `ℤ`. -/
 noncomputable abbrev proUnitSheaf (U : Scheme.{u}) :
@@ -110,18 +113,25 @@ private lemma bijective_mk₀_comp {C : Type*} [Category C] [HasShift C ℤ]
 lemma bijective_shiftedHom_map_comparisonUpperStar {U : Scheme.{u}}
     (P L : DerivedCategory (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1})) (a n : ℤ)
     [L.IsGE a] :
-    Function.Bijective (fun x : ShiftedHom P L n ↦ x.map D(ν^*(U)[AddCommGrpCat.{u + 1}])) := by
+    Function.Bijective (fun x : ShiftedHom P L n ↦
+      x.map (comparisonUpperStar AddCommGrpCat.{u + 1} U).mapDerivedCategory) := by
   have hplus : DerivedCategory.TStructure.t.plus (L⟦n⟧) :=
     ⟨a - n, DerivedCategory.TStructure.t.isGE_shift L a n (a - n) (by omega)⟩
   have h := bijective_comparisonUpperStar_mapDerivedCategory_map P (L⟦n⟧) hplus
-  have e : (fun x : ShiftedHom P L n ↦ x.map D(ν^*(U)[AddCommGrpCat.{u + 1}])) =
-      (Iso.homToEquiv (Iso.refl (D(ν^*(U)[AddCommGrpCat.{u + 1}]).obj P))
-        ((D(ν^*(U)[AddCommGrpCat.{u + 1}]).commShiftIso n).app L)) ∘
-        (fun g : P ⟶ L⟦n⟧ ↦ D(ν^*(U)[AddCommGrpCat.{u + 1}]).map g) := by
-    ext x
-    simp [ShiftedHom.map, Iso.homToEquiv]
-  rw [e]
-  exact (Equiv.bijective _).comp h
+  have e (x : ShiftedHom P L n) :
+      x.map (comparisonUpperStar AddCommGrpCat.{u + 1} U).mapDerivedCategory =
+        (comparisonUpperStar AddCommGrpCat.{u + 1} U).mapDerivedCategory.map x ≫
+          ((comparisonUpperStar AddCommGrpCat.{u + 1} U).mapDerivedCategory.commShiftIso n).hom.app
+            L := rfl
+  refine ⟨fun x y hxy ↦ h.1 ?_, fun z ↦ ?_⟩
+  · simp only at hxy
+    rw [e, e] at hxy
+    exact (cancel_mono _).1 hxy
+  · obtain ⟨g, hg⟩ := h.2 (z ≫
+      ((comparisonUpperStar AddCommGrpCat.{u + 1} U).mapDerivedCategory.commShiftIso n).inv.app L)
+    refine ⟨g, ?_⟩
+    simp only at hg ⊢
+    rw [e, hg, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 
 /-- Blueprint `det-sf-comparison-affine-continuity`: Pro-étale cohomology of a pro-étale affine.
 

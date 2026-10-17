@@ -155,4 +155,191 @@ lemma δ_last_comp_prism_last {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) :
   rw [Fin.val_castSucc, δ_val, if_pos (by simp <;> omega)]
   exact congrArg Fin.val (toOrderHom_congr θ (by simp <;> omega))
 
+lemma prism_δ_of_le {n : ℕ} (i : Fin (n + 2)) (j : Fin (n + 1)) (h : i.val ≤ j.val) :
+    prism (δ i) j = δ i.castSucc := by
+  ext x : 3
+  apply Fin.ext
+  rw [prism_apply]
+  by_cases hx : x.val ≤ j.val
+  · rw [prismFun_of_le _ _ _ hx, Fin.val_castSucc, δ_val, δ_val, Fin.val_castSucc]
+  · rw [prismFun_of_lt _ _ _ (by omega), Fin.val_succ, δ_val, δ_val, Fin.val_castSucc]
+    simp only
+    split_ifs <;> omega
+
+lemma δ_apply_of_le {n : ℕ} (i : Fin (n + 2)) (j : Fin (n + 1)) (h : i.val ≤ j.val) :
+    (δ i).toOrderHom j = j.succ := by
+  apply Fin.ext
+  rw [δ_val, if_neg (by omega), Fin.val_succ]
+
+lemma prism_δ_of_lt {n : ℕ} (i : Fin (n + 2)) (j : Fin (n + 1)) (h : j.val < i.val) :
+    prism (δ i) j = δ i.succ := by
+  ext x : 3
+  apply Fin.ext
+  rw [prism_apply]
+  by_cases hx : x.val ≤ j.val
+  · rw [prismFun_of_le _ _ _ hx, Fin.val_castSucc, δ_val, δ_val, Fin.val_succ]
+    simp only
+    split_ifs <;> omega
+  · rw [prismFun_of_lt _ _ _ (by omega), Fin.val_succ, δ_val, δ_val, Fin.val_succ]
+    simp only
+    split_ifs <;> omega
+
+lemma δ_apply_of_lt {n : ℕ} (i : Fin (n + 2)) (j : Fin (n + 1)) (h : j.val < i.val) :
+    (δ i).toOrderHom j = j.castSucc := by
+  apply Fin.ext
+  rw [δ_val, if_pos h, Fin.val_castSucc]
+
+lemma prism_σ_of_le {n : ℕ} (i j : Fin (n + 1)) (h : i.val ≤ j.val) :
+    prism (σ i) j.succ = σ i.castSucc := by
+  ext x : 3
+  apply Fin.ext
+  rw [prism_apply]
+  by_cases hx : x.val ≤ j.val + 1
+  · rw [prismFun_of_le _ _ _ (by simpa using hx), Fin.val_castSucc, σ_val, σ_val,
+      Fin.val_castSucc]
+  · rw [prismFun_of_lt _ _ _ (by simp; omega), Fin.val_succ, σ_val, σ_val, Fin.val_castSucc]
+    simp only
+    split_ifs <;> omega
+
+lemma σ_apply_succ_of_le {n : ℕ} (i j : Fin (n + 1)) (h : i.val ≤ j.val) :
+    (σ i).toOrderHom j.succ = j := by
+  apply Fin.ext
+  rw [σ_val, if_neg (by simp; omega), Fin.val_succ]
+  omega
+
+lemma prism_σ_of_ge {n : ℕ} (i j : Fin (n + 1)) (h : j.val ≤ i.val) :
+    prism (σ i) j.castSucc = σ i.succ := by
+  ext x : 3
+  apply Fin.ext
+  rw [prism_apply]
+  by_cases hx : x.val ≤ j.val
+  · rw [prismFun_of_le _ _ _ (by simpa using hx), Fin.val_castSucc, σ_val, σ_val, Fin.val_succ]
+    simp only
+    split_ifs <;> omega
+  · rw [prismFun_of_lt _ _ _ (by simp; omega), Fin.val_succ, σ_val, σ_val, Fin.val_succ]
+    simp only
+    split_ifs <;> omega
+
+lemma σ_apply_castSucc_of_ge {n : ℕ} (i j : Fin (n + 1)) (h : j.val ≤ i.val) :
+    (σ i).toOrderHom j.castSucc = j := by
+  apply Fin.ext
+  rw [σ_val, if_pos (by simpa using h), Fin.val_castSucc]
+
 end SimplexCategory
+
+namespace CategoryTheory.SimplicialObject
+
+open SimplexCategory
+
+variable {C : Type*} [Category* C] (V : SimplicialObject C)
+
+/-- A path family of degree `n`: `n + 1` prism simplices glued along their common faces. -/
+def IsPathFamily {T : C} {n : ℕ} (h : Fin (n + 1) → (T ⟶ V _⦋n + 1⦌)) : Prop :=
+  ∀ j : Fin n, h j.succ ≫ V.δ j.succ.castSucc = h j.castSucc ≫ V.δ j.succ.castSucc
+
+variable {V}
+
+lemma IsPathFamily.map_succ_eq {T : C} {n : ℕ} {h : Fin (n + 1) → (T ⟶ V _⦋n + 1⦌)}
+    (hh : V.IsPathFamily h) (j : Fin n) {Δ : SimplexCategory} (μ : Δ ⟶ ⦋n + 1⦌)
+    (hμ : ∀ x, μ.toOrderHom x ≠ j.succ.castSucc) :
+    h j.succ ≫ V.map μ.op = h j.castSucc ≫ V.map μ.op := by
+  obtain ⟨μ', rfl⟩ := eq_comp_δ_of_not_surjective' μ _ hμ
+  simp only [op_comp, Functor.map_comp, ← Category.assoc]
+  exact congrArg (· ≫ V.map μ'.op) (hh j)
+
+lemma IsPathFamily.map_eq {T : C} {n : ℕ} {h : Fin (n + 1) → (T ⟶ V _⦋n + 1⦌)}
+    (hh : V.IsPathFamily h) (a b : Fin (n + 1)) (hab : a.val ≤ b.val) {Δ : SimplexCategory}
+    (μ : Δ ⟶ ⦋n + 1⦌) (hμ : ∀ x, ¬ (a.val < (μ.toOrderHom x).val ∧ (μ.toOrderHom x).val ≤ b.val)) :
+    h b ≫ V.map μ.op = h a ≫ V.map μ.op := by
+  obtain ⟨d, hd⟩ : ∃ d, b.val = a.val + d := ⟨b.val - a.val, by omega⟩
+  induction d generalizing b with
+  | zero => rw [show b = a from Fin.ext (by omega)]
+  | succ d ih =>
+    have hb : b.val - 1 < n + 1 := by omega
+    let b' : Fin (n + 1) := ⟨b.val - 1, hb⟩
+    have hj : b.val - 1 < n := by have := b.isLt; omega
+    let j : Fin n := ⟨b.val - 1, hj⟩
+    have e1 : j.succ = b := Fin.ext (by simp [j]; omega)
+    have e2 : j.castSucc = b' := Fin.ext (by simp [j, b'])
+    rw [← e1, hh.map_succ_eq j μ (fun x hx ↦ hμ x ⟨?_, ?_⟩), e2,
+      ih b' (by simp [b']; omega) (fun x hx ↦ hμ x ⟨hx.1, by simp [b'] at hx; omega⟩)
+      (by simp [b']; omega)]
+    · rw [hx]; simp [j]; omega
+    · rw [hx]; simp [j]; omega
+
+variable (V) in
+/-- The action of `θ : ⦋m⦌ ⟶ ⦋n⦌` on path families. -/
+def pathMap {T : C} {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) (h : Fin (n + 1) → (T ⟶ V _⦋n + 1⦌))
+    (k : Fin (m + 1)) : T ⟶ V _⦋m + 1⦌ :=
+  h (θ.toOrderHom k) ≫ V.map (prism θ k).op
+
+lemma isPathFamily_pathMap {T : C} {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌)
+    {h : Fin (n + 1) → (T ⟶ V _⦋n + 1⦌)} (hh : V.IsPathFamily h) :
+    V.IsPathFamily (V.pathMap θ h) := by
+  intro j
+  simp only [pathMap, Category.assoc, SimplicialObject.δ, ← Functor.map_comp, ← op_comp,
+    δ_comp_prism_succ]
+  have hmono : (θ.toOrderHom j.castSucc).val ≤ (θ.toOrderHom j.succ).val :=
+    θ.toOrderHom.monotone (Fin.castSucc_le_succ j)
+  refine hh.map_eq _ _ hmono _ fun x ⟨hx₁, hx₂⟩ ↦ ?_
+  simp only [comp_toOrderHom, OrderHom.comp_coe, Function.comp_apply, prism_apply] at hx₁ hx₂
+  generalize hy : (SimplexCategory.δ j.succ.castSucc).toOrderHom x = y at hx₁ hx₂
+  have hyv := δ_val j.succ.castSucc x
+  rw [hy] at hyv
+  simp only [Fin.val_castSucc, Fin.val_succ] at hyv
+  by_cases hxj : x.val ≤ j.val
+  · rw [if_pos (by omega)] at hyv
+    rw [prismFun_of_le _ _ _ (by simp <;> omega)] at hx₁
+    have := θ.toOrderHom.monotone (show (⟨y.val, by simp; omega⟩ : Fin (m + 1)) ≤ j.castSucc
+      from by rw [Fin.le_def]; simp; omega)
+    rw [Fin.le_def] at this
+    simp at hx₁
+    omega
+  · rw [if_neg (by omega)] at hyv
+    rw [prismFun_of_lt _ _ _ (by simp <;> omega)] at hx₂
+    have := θ.toOrderHom.monotone (show j.succ ≤ (⟨y.val - 1, by simp; omega⟩ : Fin (m + 1))
+      from by rw [Fin.le_def]; simp; omega)
+    rw [Fin.le_def] at this
+    simp at hx₂
+    omega
+
+lemma pathMap_id {T : C} {n : ℕ} (h : Fin (n + 1) → (T ⟶ V _⦋n + 1⦌)) :
+    V.pathMap (𝟙 _) h = h := by
+  funext k
+  simp [pathMap, prism_id]
+
+lemma pathMap_comp {T : C} {l m n : ℕ} (θ' : ⦋l⦌ ⟶ ⦋m⦌) (θ : ⦋m⦌ ⟶ ⦋n⦌)
+    (h : Fin (n + 1) → (T ⟶ V _⦋n + 1⦌)) :
+    V.pathMap θ' (V.pathMap θ h) = V.pathMap (θ' ≫ θ) h := by
+  funext k
+  simp only [pathMap, Category.assoc, ← Functor.map_comp, ← op_comp, prism_comp,
+    comp_toOrderHom, OrderHom.comp_coe, Function.comp_apply]
+
+lemma pathMap_zero_δ_zero {T : C} {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌)
+    {h : Fin (n + 1) → (T ⟶ V _⦋n + 1⦌)} (hh : V.IsPathFamily h) :
+    V.pathMap θ h 0 ≫ V.δ 0 = h 0 ≫ V.δ 0 ≫ V.map θ.op := by
+  simp only [pathMap, Category.assoc, SimplicialObject.δ, ← Functor.map_comp, ← op_comp,
+    δ_zero_comp_prism_zero]
+  refine hh.map_eq _ _ (Nat.zero_le _) _ fun x ⟨hx₁, hx₂⟩ ↦ ?_
+  simp only [comp_toOrderHom, OrderHom.comp_coe, Function.comp_apply] at hx₁ hx₂
+  rw [δ_val, if_neg (by simp)] at hx₂
+  have := θ.toOrderHom.monotone (Fin.zero_le x)
+  rw [Fin.le_def] at this
+  simp at hx₂ this
+  omega
+
+lemma pathMap_last_δ_last {T : C} {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌)
+    {h : Fin (n + 1) → (T ⟶ V _⦋n + 1⦌)} (hh : V.IsPathFamily h) :
+    V.pathMap θ h (Fin.last m) ≫ V.δ (Fin.last (m + 1)) =
+      h (Fin.last n) ≫ V.δ (Fin.last (n + 1)) ≫ V.map θ.op := by
+  simp only [pathMap, Category.assoc, SimplicialObject.δ, ← Functor.map_comp, ← op_comp,
+    δ_last_comp_prism_last]
+  refine (hh.map_eq _ _ (Fin.le_last _) _ fun x ⟨hx₁, hx₂⟩ ↦ ?_).symm
+  simp only [comp_toOrderHom, OrderHom.comp_coe, Function.comp_apply] at hx₁ hx₂
+  rw [δ_val, if_pos (by simp <;> omega)] at hx₁
+  have := θ.toOrderHom.monotone (Fin.le_last x)
+  rw [Fin.le_def] at this
+  simp at hx₁ this
+  omega
+
+end CategoryTheory.SimplicialObject
