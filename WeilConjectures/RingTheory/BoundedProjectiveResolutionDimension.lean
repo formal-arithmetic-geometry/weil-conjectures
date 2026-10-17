@@ -57,4 +57,42 @@ theorem hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE
         (hS.hasProjectiveDimensionLT_X₃_iff n inferInstance).mp h
       exact hasProjectiveResolutionLE_of_shortExact_projective_middle n S hS
         inferInstance (ih S.X₁ hK)
+/-- A module has a projective resolution of finite length if and only if it has finite
+projective dimension. -/
+theorem exists_hasProjectiveResolutionLE_iff
+    {R : Type u} [CommRing R] (X : ModuleCat.{max u v} R) :
+    (∃ n, HasProjectiveResolutionLE X n) ↔ HasFiniteProjectiveDimension X :=
+  exists_congr fun n ↦ hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE X n
+
+/-- If `d` is the least length of a projective resolution of a nonzero module `X`, then the
+projective dimension of `X` is `d`. Source: Stacks Project, Algebra, Lemma 065R. -/
+theorem projectiveDimension_eq_of_hasProjectiveResolutionLE
+    {R : Type u} [CommRing R] (X : ModuleCat.{max u v} R) (hX : ¬ Limits.IsZero X) (d : ℕ)
+    (hd : HasProjectiveResolutionLE X d) (hmin : ∀ m < d, ¬ HasProjectiveResolutionLE X m) :
+    projectiveDimension X = d := by
+  refine le_antisymm ((projectiveDimension_le_iff X d).2
+    ((hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE X d).1 hd)) ?_
+  cases d with
+  | zero =>
+    have hne : projectiveDimension X ≠ ⊥ := fun h ↦ hX ((projectiveDimension_eq_bot_iff X).1 h)
+    obtain ⟨a, ha⟩ := WithBot.ne_bot_iff_exists.1 hne
+    rw [← ha]
+    exact WithBot.coe_le_coe.2 (zero_le (a := a))
+  | succ k =>
+    refine (projectiveDimension_ge_iff X (k + 1)).2 fun h ↦ ?_
+    exact hmin k (Nat.lt_succ_self k)
+      ((hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE X k).2 h)
+
 end ModuleCat
+
+namespace Ring
+
+/-- Global dimension at most `n` means that every module has a projective resolution of length
+at most `n`. -/
+theorem hasGlobalDimensionLE_iff (R : Type u) [CommRing R] (n : ℕ) :
+    HasGlobalDimensionLE.{u, max u v} R n ↔
+      ∀ M : ModuleCat.{max u v} R, ModuleCat.HasProjectiveResolutionLE M n :=
+  forall_congr' fun M ↦
+    (ModuleCat.hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE M n).symm
+
+end Ring
