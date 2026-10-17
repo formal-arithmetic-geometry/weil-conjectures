@@ -10,6 +10,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 
 import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
+import Sheaf.Paper.InverseImageModuleFlat
 
 /-!
 
@@ -157,6 +159,28 @@ private lemma mapCochainComplexDesc_comm
   simpa only [mapCochainComplexμIso_hom_f_eq_desc] using
     (G.mapCochainComplexμIso K L).hom.comm' n n' h
 
+private lemma isIso_tensorCounit_app_app
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    [MonoidalCategory E] (L : C ⥤ D) (F : D ⥤ E) (G : C ⥤ E)
+    (T : C ⥤ C ⥤ E) (τ : L ⋙ F ⟶ G) [IsIso τ]
+    (α : (((Functor.whiskeringLeft₂ _).obj G).obj G).obj (curriedTensor _) ⟶ T)
+    (A B : C) [IsIso ((α.app A).app B)] :
+    IsIso ((((((Functor.whiskeringLeft₂ _).obj L).obj L).map
+        (𝟙 ((((Functor.whiskeringLeft₂ _).obj F).obj F).obj (curriedTensor _))) ≫
+      Functor.whiskeringLeft₂Equiv.symm
+        (Functor.whiskeringLeft₂Equiv (𝟙 _) ≫ Functor.whiskerRight
+          (NatTrans.prod τ τ) (Functor.uncurry.obj (curriedTensor _)) ≫
+            Functor.whiskeringLeft₂Equiv α)).app A).app B) := by
+  change IsIso (𝟙 _ ≫ (𝟙 _ ≫
+    (Functor.uncurry.obj (curriedTensor E)).map
+      ((τ.app A, τ.app B) : (_, _) ⟶ (_, _)) ≫ (α.app A).app B))
+  simp only [Category.id_comp]
+  have : IsIso ((τ.app A, τ.app B) :
+      (F.obj (L.obj A), F.obj (L.obj B)) ⟶ (G.obj A, G.obj B)) :=
+    (isIso_prod_iff E E).mpr ⟨inferInstance, inferInstance⟩
+  exact IsIso.comp_isIso' (Functor.map_isIso (Functor.uncurry.obj (curriedTensor E))
+    ((τ.app A, τ.app B) : (_, _) ⟶ (_, _))) inferInstance
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme Functor
@@ -232,6 +256,17 @@ noncomputable def upperStarTensorComplexHom
   f n := upperStarTensorComplexHomX Λ f A B n
   comm' n n' h := upperStarTensorComplexHom_comm Λ f A B n n' h
 
+private lemma isIso_upperStarTensorComplexHom
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) :
+    IsIso (upperStarTensorComplexHom Λ f A B) := by
+  have he : upperStarTensorComplexHom Λ f A B =
+      ((f)^*⟦Λ⟧.mapCochainComplexμIso A B).hom := by
+    ext n : 1
+    exact (mapCochainComplexμIso_hom_f_eq_desc ((f)^*⟦Λ⟧) A B n).symm
+  rw [he]
+  infer_instance
+
 /-! ### The homotopy category -/
 
 /-- The bifunctor `(A, B) ↦ Qh (f^* (A ⊗ B))` on the homotopy category of complexes of module
@@ -303,8 +338,32 @@ instance isLeftDerivedFunctor₂_upperStarTensor :
     (leftDerivedUpperStarTensorRight Λ f).IsLeftDerivedFunctor₂
       (leftDerivedUpperStarTensorRightCounit Λ f)
       (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ))
-      (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) :=
-  sorry
+      (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) := by
+  have hflat : (f)^*⟦Λ⟧.PreservesFlat := by
+    let G := (f)^*[Ab.{u + 1}]
+    let R := condensedRingObj Λ Y
+    let ρ := (asIso (condensedPullbackHom Λ f)).inv
+    have h := ProEtale.inverseImageModule_preservesFlat f R (condensedRingObj Λ X) ρ
+    let e : (f)^*⟦Λ⟧ ≅ Mod.mapModComap ρ :=
+      Functor.isoWhiskerLeft (G.mapMod R)
+        (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f))
+    exact ⟨fun hM ↦ (ObjectProperty.flat).prop_of_iso (e.symm.app _) (h.flat_obj hM)⟩
+  refine LocalizerMorphism.isLeftDerivedFunctor₂_of_isLeftDerivabilityStructure
+    (HomotopyCategory.quasiIsoLocalizerMorphism (f)^*⟦Λ⟧.kFlatMap)
+    (HomotopyCategory.quasiIsoLocalizerMorphism (f)^*⟦Λ⟧.kFlatMap) _ ?_
+  intro A B
+  have hμ := Functor.isIso_μNatTrans_Qh_app_app_of_kFlat
+    (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj A.obj) _ B.property
+  have hc : IsIso (upperStarTensorComplexHom Λ f A.obj.as B.obj.as) :=
+    isIso_upperStarTensorComplexHom Λ f A.obj.as B.obj.as
+  have hα : IsIso (((upperStarTensorCounit Λ f).app A.obj).app B.obj) :=
+    IsIso.comp_isIso' hμ (Functor.map_isIso DerivedCategory.Qh
+      ((HomotopyCategory.quotient _ _).map
+        (upperStarTensorComplexHom Λ f A.obj.as B.obj.as)))
+  exact isIso_tensorCounit_app_app DerivedCategory.Qh L((f)^*⟦Λ⟧)
+    ((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (upperStarTensorTarget Λ f) (f)^*⟦Λ⟧.leftDerivedFunctorCounit
+    (upperStarTensorCounit Λ f) A.obj B.obj
 
 /-- The counit of the bifunctor `Lf^* (- ⊗ᴸ -)`: `Lf^*` of the lax structure
 `Qh A ⊗ᴸ Qh B ⟶ Qh (A ⊗ B)` of the localization, followed by the counit
@@ -340,8 +399,22 @@ lemma leftDerivedUpperStarTensor_fac :
 
 /-- The comparison `m : Lf^* (- ⊗ᴸ -) ⟶ Lf^* - ⊗ᴸ Lf^* -` is an isomorphism. See the module
 docstring. -/
-instance isIso_leftDerivedUpperStarTensor : IsIso (leftDerivedUpperStarTensor Λ f) :=
-  sorry
+instance isIso_leftDerivedUpperStarTensor : IsIso (leftDerivedUpperStarTensor Λ f) := by
+  have hleft : (leftDerivedUpperStarTensorLeft Λ f).IsLeftDerivedFunctor₂
+      (leftDerivedUpperStarTensorLeftCounit Λ f)
+      (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ))
+      (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) := by
+    exact Functor.isLeftDerivedFunctor₂_leftDerivedDerivedTensor (f)^*⟦Λ⟧
+  have h : leftDerivedUpperStarTensor Λ f =
+      Functor.leftDerived₂NatTrans (leftDerivedUpperStarTensorRight Λ f)
+        (leftDerivedUpperStarTensorRightCounit Λ f)
+        (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ))
+        (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ))
+        (leftDerivedUpperStarTensorLeft Λ f) (leftDerivedUpperStarTensorLeftCounit Λ f)
+        (𝟙 _) := by
+    simp only [Functor.leftDerived₂NatTrans, Category.comp_id, leftDerivedUpperStarTensor]
+  rw [h]
+  infer_instance
 
 /-- The comparison isomorphism `m_{K,L} : Lf^* (K ⊗ᴸ L) ≅ Lf^* K ⊗ᴸ Lf^* L` of the derived
 pullback with the derived tensor product. -/
