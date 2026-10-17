@@ -255,5 +255,31 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-1a9005ea4 (reviewer sub-agent of L); spot-checked: I read the item, all seven cited statements, and the parent's step that uses the item (lem-coef-simplicial-grothendieck-hocolimit). Source: HTT Definition A.3.5.7 and Lemma A.3.5.9. HTT is not in literature/; the worker recorded WANTED and set proof_origin to agent. The statement matches A.3.5.9 and is not weakened: A-filtration, a functor f bijective on objects that preserves the filtration, a trivial Kan fibration on every mapping set, and a projectively cofibrant diagram of lower subcategories. Small cases tested: A empty, a loop, equal grades in both directions, no largest element, and pairs with empty mapping sets. Duplicate search over dag/nodes (A.3.5.9, projectively cofibrant, bijective on objects with trivial Kan fibration) found only the parent. All cited nodes are in the item's unit, so the route is fine and no tool use is needed. Step 2 checks the smallness hypothesis of the small-object node with kappa = aleph_0, since the boundary of a simplex is finite. Step 3: the pushout-comparison node identifies the fixed-object and variable-object attachments. Step 4: in the word formula grades go up along every word, so the grading survives each attachment; lifting against I_d plus the Kan-Quillen node gives trivial fibrations. Step 5 (elementary): restricting to grades at most a is a direct reading of the word formula. Step 6: the direct lift is correct. Step 7: the definition of Dwyer-Kan equivalence gives the conclusion. FIX, fault C1/C3 in Step 6: the text cited lem-coef-simplicial-inversion-universal-property but left it out of uses. The step also extended lifts into X_a, whose objects can vary, by the free-arrow property, which only covers fixed-object targets. I added lem-coef-simplicial-inversion-universal-property and lem-coef-scat-fixed-object-pushout-comparison to Step 6's uses and rewrote that sentence; the set of proof_deps is unchanged. The corrected node is fixes/dag/nodes/sec-six-functors/lem-coef-poset-filtered-cofibrant-resolution.json, and the full checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PosetFilteredCofibrantResolution",
+  "declaration": "CategoryTheory.CoherentNerve.poset_filtered_cofibrant_resolution",
+  "declarations": [
+   "CategoryTheory.CoherentNerve.posetFilteredFullSubcategory",
+   "CategoryTheory.CoherentNerve.posetFilteredFullSubcategoryInclusion",
+   "CategoryTheory.CoherentNerve.posetFilteredFullSubcategoryMap",
+   "CategoryTheory.CoherentNerve.posetFilteredLowerDiagram",
+   "CategoryTheory.CoherentNerve.poset_filtered_cofibrant_resolution"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PosetFilteredCofibrantResolution.lean",
+  "statement": "theorem poset_filtered_cofibrant_resolution (A : Type u) [PartialOrder A] (C : SCat.{u}) (d : C → A) (hd : ∀ x y : C, ¬ d x ≤ d y → ∀ n : SimplexCategoryᵒᵖ, IsEmpty ((hom C x y).obj n)) (B : CategoryTheory.BergnerModelData.{u}) (M : ModelCategory (A ⥤ SCat.{u})) (hW : M.categoryWithWeakEquivalences.weakEquivalences = SSet.Bergner.dwyerKanEquivalences.functorCategory A) (hF : M.categoryWithFibrations.fibrations = B.model.categoryWithFibrations.fibrations.functorCategory A) : ∃ (C' : SCat.{u}) (f : C' ⟶ C), Function.Bijective f.obj ∧ (∀ x y : C', SSet.modelCategoryQuillen.I.rlp (f.map x y)) ∧ (∀ x y : C', ¬ d (f.obj x) ≤ d (f.obj y) → ∀ n : SimplexCategoryᵒᵖ, IsEmpty ((hom C' x y).obj n)) ∧ (∀ (X Y : A ⥤ SCat.{u}) (p : X ⟶ Y), (∀ a : A, B.model.categoryWithFibrations.fibrations (p.app a) ∧ SSet.Bergner.dwyerKanEquivalences (p.app a)) → ∀ g : posetFilteredLowerDiagram C' (fun x ↦ d (f.obj x)) ⟶ Y, ∃ l : posetFilteredLowerDiagram C' (fun x ↦ d (f.obj x)) ⟶ X, l ≫ p = g) ∧ SSet.Bergner.dwyerKanEquivalences f ∧ ∀ a : A, SSet.Bergner.dwyerKanEquivalences (posetFilteredFullSubcategoryMap f (fun x ↦ d (f.obj x) ≤ a) (fun x ↦ d x ≤ a) (fun _ hx ↦ hx))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-b1c1cc473"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1c1cc473",
+  "group": "NH",
+  "result": "fix",
+  "note": "H4: the helper posetFilteredObjectwise duplicates Mathlib's MorphismProperty.functorCategory, which the project already uses. fixes/PosetFilteredCofibrantResolution.lean deletes it and rewrites hW/hF with .functorCategory A; the two are definitionally equal (checked with Iff.rfl), so the statement is unchanged. fixes/<item>.report.md appends a correction section. Every clause matches the node and HTT A.3.5.9: bijective on objects, a trivial Kan fibration (I.rlp) on every mapping set, grade emptiness, the projective-cofibrancy lifting property against objectwise Bergner fibration and Dwyer-Kan maps, and Dwyer-Kan equivalence of f and of every restriction. BergnerModelData fixes all classes. A : Type u is what the parent needs. Edge cases checked: empty A, empty lower subcategories, loops, degree 0. No hollow definitions; docstrings have source and blueprint; the only proof is sorry; the recorded statement matches the file. nt_compile: the delivered and fixed files are both clean (rc=0, no messages)."
  }
 }

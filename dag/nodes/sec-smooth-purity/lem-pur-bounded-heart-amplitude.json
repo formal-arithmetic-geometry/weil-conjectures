@@ -228,5 +228,23 @@
   "group": "Q139",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-2f00da32c (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 cited statements, the parent prop-finite-compact-support-constructibility (its step 5 is the only citer, with T=Rf^c_{!,n}, c=0, d=2e), the unit sk-prop-sf-cbc, the main-20261015 blueprint proof Steps 3-4 (from.place matches verbatim), Stacks derived.tex 08J5 (remark-truncation-distinguished-triangle, second displayed triangle) and more-etale.tex 0G2A (proof of (3): induction on b-a, details omitted, now written out). The statement is true and unchanged. Tested on a=b, T=[r], K=0, S={0} and negative indices. Step checks: step 1 uses truncation-descends clause (a) as stated; step 2 gets the shift sign i-q right via commShift and lem-sp-derived-cohomology-shift (k=-q), and [q+c,q+d] lies in [a+c,b+d] because a<=q<=b; step 3 base case: K_{a-1} is quasi-isomorphic to 0; step 4 combines the truncation-triangle statement, exactness of T and LES exactness at the middle term (HomologySequence.exact2 leaf), with q<=b guaranteed by n<b-a+1; step 5: tau_{<=b}C->C is a quasi-isomorphism. proof_deps equals the union of uses; no cycle, no new nodes, no SGA. Duplicate search (amplitude, heart-bound, devissage, way-out): lem-sfb-left-complete-heart-upper-bound is one-sided and needs products and completeness, so it is not a duplicate; no other candidate. Accepted tool_uses: lem-weil-pbc-truncation-descends and lem-weil-pbc-truncation-triangle, both generic abstract derived-category tools outside sk-prop-sf-cbc with no replacement of the route. Fix (one B5 citation fault): the step 3 source named Tag 05RU as 'definition-derived-category', but its label is definition-unbounded-derived-category (tags/tags 7423, derived.tex 3690). I corrected it and added the label to the step 5 05RU mention; the whole item is in fixes/dag/nodes/sec-smooth-purity/lem-pur-bounded-heart-amplitude.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BoundedHeartAmplitude",
+  "declaration": "DerivedCategory.bounded_heart_amplitude",
+  "file": "lean/Sheaf/CategoryTheory/BoundedHeartAmplitude.lean",
+  "statement": "theorem bounded_heart_amplitude (A : Type uA) [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A] (B : Type uB) [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] (T : DerivedCategory A ⥤ DerivedCategory B) [T.CommShift ℤ] [T.IsTriangulated] (S : A → Prop) (_hSiso : ∀ (M N : A), (M ≅ N) → S M → S N) (_hSzero : S (0 : A)) (c d : ℤ) (_hcd : c ≤ d) (_hHeart : ∀ (M : A), S M → ∀ (i : ℤ), i < c ∨ d < i → IsZero ((homologyFunctor B i).obj (T.obj ((singleFunctor A 0).obj M)))) (a b : ℤ) (_hab : a ≤ b) (K : DerivedCategory A) (_hK : ∀ (r : ℤ), r < a ∨ b < r → IsZero ((homologyFunctor A r).obj K)) (_hKS : ∀ (r : ℤ), S ((homologyFunctor A r).obj K)) : ∀ (i : ℤ), i < a + c ∨ b + d < i → IsZero ((homologyFunctor B i).obj (T.obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98b5f6b0e",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Clause-by-clause match of DerivedCategory.bounded_heart_amplitude against the node: abelian A and B with HasDerivedCategory and six independent universes; T a DerivedCategory functor with CommShift ℤ and IsTriangulated; S closed under isomorphism and containing 0; c<=d; heart bound via singleFunctor A 0; a<=b; H^r(K)=0 outside [a,b] and H^r(K) in S for all r; conclusion IsZero(H^i(TK)) for i<a+c or i>b+d. Nothing extra assumed. The homologyFunctor ShiftSequence gives H^a(K[n])=H^{a+n}(K), the node's convention. lean.statement is verbatim. Only the lean field differs from side. No definitions, proof sorry only, source and blueprint docstrings present, theorem docstring carries the five proof steps. Imported truncation modules exist as the dependency nodes record. No duplicate found. Worker report real; Second reading section is the accepted 2026-10-17 direct-delivery note. nt_compile.py --json: rc=0, 1.0 s, no errors or warnings."
  }
 }
