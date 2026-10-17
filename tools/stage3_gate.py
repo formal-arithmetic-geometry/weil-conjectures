@@ -77,8 +77,7 @@ def gate(D: dict, group: str, item: str, graph=None, cycle_check: bool = True) -
         proved += [k for k in d["sorry_before"] if k in d["new"] and k not in d["sorry_after"]]
         new_sorry += d["new_sorry"]
     # the human, 2026-10-17 (upstream sync e47efb5a5): statements in the adopted source library stay verbatim; a
-    # delivery may fill proof bodies of existing declarations that already contain `sorry` (including definitions and
-    # instances) and add private helpers, nothing else
+    # delivery may fill proof bodies of existing theorems there and add private helpers, nothing else
     UPNOTE = "upstream statements are verbatim; prove it or state the needed variant in a `Sheaf` module"
     for m in D["modules"]:
         if not m["file"].startswith("lean/WeilConjectures/"):
