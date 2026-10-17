@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "thm-weil-six-operations",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "prop-functor-package"
+  ]
  },
  "kind": "statement",
  "title": "The assembled operations on their proved domains",
@@ -14,28 +16,142 @@
  },
  "stmt_deps": [
   "prop-functor-package",
-  "thm-sf-biduality-class"
+  "thm-sf-biduality-class",
+  "def-fix-six-functor-datum"
  ],
  "proof": [
   {
-   "text": "Apply the terminal assembly [prop-functor-package]. This theorem is\nan export of its seven clauses and is not an input to their proofs.",
+   "text": "Identify the global finite-field setting with the datum of [def-fix-six-functor-datum]: the geometric base is the fixed algebraic closure $k$ of $k_0=\\mathbf F_q$, the prime $\\ell$ differs from $p$, $E/\\mathbf Q_\\ell$ is finite, and $n\\geq1$. The coefficient stages are $A_{E,n},\\mathcal O_E,E,\\Qlb$, with exactly the completion, rationalization and common-stage conventions of that datum. Take the separated finite-type schemes and morphisms, and the operations named there. This only identifies the parameters and notation; it makes no claim about preservation or existence beyond the cited datum.",
+   "uses": [
+    "def-fix-six-functor-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-six-operations.proof.md",
+    "place": "Apply the terminal assembly: identification of its parameters; operation datum, opening paragraph and clauses 1–5"
+   }
+  },
+  {
+   "text": "Apply [prop-functor-package] to these same parameters. Its clauses (1)–(7), without changing any objects or transformations, give respectively coefficient extension and descent, compactification and reduction comparisons, compact-support composition and localization, base change, the compact-support projection isomorphism, smooth purity, and Verdier exchange with exceptional adjunction. The preceding paragraph of that proposition also gives general internal-Hom coefficient comparison and constructible preservation. Retain its finite-stage $D^b_{ctf}$ domain and its specified integral/field $D^b_c$ domains. In particular the dimension-free Hom bound retains a site-perfect first argument; ordinary base change retains the proper-$f$ or smooth-$g$ alternative, torsion bounded-below finite coefficients, and adic constructible higher coefficients. The projection formula retains the finite-Tor condition on its second factor, smooth purity retains its stated admissible domains, and exceptional adjunction is the constructible adjunction stated in the package. Thus all seven clauses and the additional Hom assertions in the present statement are direct instances of the existing package; none is reproved using this export.",
    "uses": [
     "prop-functor-package"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-six-operations.proof.md",
+    "place": "Entire proof: Apply the terminal assembly [prop-functor-package]; package opening domain paragraph and clauses 1–7"
+   }
+  },
+  {
+   "text": "For the explicitly named biduality conclusion, apply [thm-sf-biduality-class] to a separated finite-type $k$-scheme $X$ and each of the four coefficient stages just fixed. Its dualizing object is $Ra_X^!\\Lambda$ and its dual is $R\\mathcal Hom_\\Lambda(-,Ra_X^!\\Lambda)$, the same operations as in the datum and in clause (7) of the package. It states the exact contravariant anti-equivalence and the natural evaluation-defined isomorphism $K\\longrightarrow D_{X,\\Lambda}D_{X,\\Lambda}K$. At $A_{E,n}$ take its $D^b_{ctf}$ domain; at $\\mathcal O_E,E,\\Qlb$ take the whole specified $D^b_c$ domain, exactly as that theorem says. This supplies the last sentence of the present statement without adding a site-perfect hypothesis to general biduality or enlarging any other clause.",
+   "uses": [
+    "thm-sf-biduality-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-six-operations.proof.md",
+    "place": "Terminal export; final sentence of the statement names thm-sf-biduality-class explicitly"
+   }
   }
  ],
  "proof_deps": [
-  "prop-functor-package"
+  "def-fix-six-functor-datum",
+  "prop-functor-package",
+  "thm-sf-biduality-class"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-six-operations.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-weil4/thm-weil-six-operations.proof.md",
+  "place": "Entire terminal-assembly proof, expanded to identify parameters, retain every domain, and make the statement's biduality reference explicit; the blueprint is agent-written."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Verdier|six.?functor|six.?operation|site.?perfect",
+   "results": "25 displayed hits: Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Presentable/Directed.lean, Mathlib/Algebra/Homology/SpectralObject/Page.lean, Mathlib/Algebra/Homology/SpectralObject/Basic.lean, Mathlib/Algebra/Homology/SpectralObject/Cycles.lean. Broad hits concern Verdier localization/thesis citations, ell-adic cohomology definitions, or unrelated radical/adic substrings; the focused Sites search has no six-operation, constructibility, purity or exceptional-duality theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Six functor formalism with constructible finite torsion, integral and l-adic coefficients and Verdier biduality over finite fields",
+   "results": "8 displayed hits: SheafOfModules.PullbackConstruction.adjunction, CondensedSet.LocallyConstant.functorFullyFaithful, LightCondSet.LocallyConstant.functorFullyFaithful, CategoryTheory.exactFunctor, CategoryTheory.Adjunction.Quadruple.casesOn, CategoryTheory.Adjunction.Quadruple.mk.noConfusion, CategoryTheory.Adjunction.Quadruple.mk, CategoryTheory.Adjunction.Quadruple.ctorIdx. Hits concern underived sheaf adjunctions, generic exact functors/adjunction quadruples, or order/fractional-ideal duality; none gives the geometric package.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Verdier\"",
+   "results": "12 displayed hits: CategoryTheory.ObjectProperty.IsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.IsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingOppositeOpOfIsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingOppositeOpOfIsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.isVerdierLeftLocalizing_op_iff, CategoryTheory.ObjectProperty.isVerdierRightLocalizing_op_iff, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingUnopOfIsVerdierRightLocalizingOpposite, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingUnopOfIsVerdierLeftLocalizingOpposite. The Verdier hits are left/right localizing object properties, not duality; the dualizing query has no hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Six operations for constructible etale adic sheaves over a finite field, coefficient change, base change, smooth purity and Verdier biduality",
+   "results": "8 displayed hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.Etale. Hits concern etale morphisms/sites, generic derived-category exact functors, condensed modules or sheaf adjunctions; none states this four-stage constructible six-operation package.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier.dual|dualizing|constructible|adic|purity|exceptional",
+   "results": "25 displayed hits in Mathlib/AlgebraicGeometry: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean. Broad hits concern Verdier localization/thesis citations, ell-adic cohomology definitions, or unrelated radical/adic substrings; the focused Sites search has no six-operation, constructibility, purity or exceptional-duality theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality involution on bounded constructible etale sheaves over finite fields with integral l-adic and rational l-adic coefficients",
+   "results": "8 displayed hits: Lat.dualEquiv_inverse, Lat.dualEquiv, BddOrd.dualEquiv_inverse, BddLat.dualEquiv_inverse, FractionalIdeal.dual_involutive, FinBddDistLat.dualEquiv_inverse, PartOrd.dualEquiv, BddLat.dual. Hits concern underived sheaf adjunctions, generic exact functors/adjunction quadruples, or order/fractional-ideal duality; none gives the geometric package.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 displayed hits: none. The Verdier hits are left/right localizing object properties, not duality; the dualizing query has no hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible derived category of l-adic sheaves on schemes: exceptional adjunction and involutive duality from the dualizing complex",
+   "results": "8 displayed hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Functor.mapDerivedCategory, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.sheafAdjunctionCocontinuous, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.mapDerivedCategoryFactorsh. Hits concern etale morphisms/sites, generic derived-category exact functors, condensed modules or sheaf adjunctions; none states this four-stage constructible six-operation package.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|dualizing|constructible|six.?functor|six.?operation|purity|exceptional",
+   "results": "0 displayed hits in Mathlib/AlgebraicGeometry/Sites: none. Broad hits concern Verdier localization/thesis citations, ell-adic cohomology definitions, or unrelated radical/adic substrings; the focused Sites search has no six-operation, constructibility, purity or exceptional-duality theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sheaf functors on constructible complexes: proper and smooth base change, compact support projection formula, duality and change of coefficient rings",
+   "results": "Eight hits: SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pullbackComp. Read pushforwardNatIso and its surrounding declarations in Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:190-249: these concern underived module-sheaf pushforward and natural transformations, not constructible derived six operations or the four coefficient stages.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bidual\"",
+   "results": "0 hits; successful Loogle response.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|dualiz|compactSupport|extraordinary|sixOperations|sixFunctor",
+   "results": "25 displayed hits (wrapper cap), beginning with Mathlib/Tactic/Translate/ToDual.lean and Mathlib/MeasureTheory/Measure/Haar/Unique.lean. These displayed results concern order dualization and compact support of functions, not this package. A separate read-only rg of Mathlib/AlgebraicGeometry/Sites with the same pattern returned no hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -60,5 +176,34 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-thm-weil4"
+ "unit": "sk-thm-weil4",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-weil-six-operations",
+  "worker": "stage1",
+  "summary": "Checked the unchanged imported export against both blueprint snapshots and all three cited statements. Made the global operation datum explicit, retained every package hypothesis and coefficient category, and cited the four-stage biduality theorem separately. No new nodes, Mathlib leaves or exact project attachment. All searches are actual msearch.py calls recorded in searches.jsonl.",
+  "blueprint": "Realizes the entire terminal-assembly proof of thm-weil-six-operations (current main-20261015 order 3276): identify its unchanged datum, apply the existing seven-clause package, and explicitly export the biduality theorem named in its statement. The sk-thm-weil4 unit key statement is Betti symmetry; this auxiliary export is not that key statement and changes no unit realization or unit proof.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "This auxiliary zeta-layer export uses the existing assembled operations package verbatim, exactly as its own blueprint proof instructs. The Betti-symmetry unit supplies no operations package; no step of Betti symmetry is replaced."
+   },
+   {
+    "node": "thm-sf-biduality-class",
+    "why": "The export statement explicitly names this existing all-stage Verdier biduality result; it is used as a generic duality theorem on the identical constructible categories. The Betti-symmetry unit contains no such general theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package",
+  "thm-sf-biduality-class"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-e757cc9a9",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-e757cc9a9 (reviewer sub-agent of L); spot-checked: Read everything required: the contract files, delivery-errors A-F, the packet, the report, the item JSON, all three cited statements and both blueprint snapshots of the item, the package and the biduality theorem, plus the unit sk-thm-weil4 and the chapter sec-zeta-weil. The item's statement matches both snapshots word for word, and the DAG statement of prop-functor-package equals the main-20261015 text exactly. The blueprint proof just applies the package; the three steps expand it. Step 1 (elementary) identifies the parameters with def-fix-six-functor-datum. Step 2 applies prop-functor-package clauses 1-7 and its opening paragraph, keeping every domain. In particular it keeps the base-change map g*Rf_* -> Rf'_*g'* for proper f or smooth g, on bounded-below torsion complexes at finite level and adic pro-etale D^b_c at the higher stages, with no discrete non-torsion claim. It also keeps g*Rf_! ~= Rf'_!g'*, the finite-Tor second factor in the projection formula, and the site-perfect condition on the sharper Hom bound. Step 3 applies thm-sf-biduality-class: omega = Ra^!Lambda, the evaluation-defined map is an isomorphism, D^b_ctf at finite level and the whole D^b_c at the integral and field stages. These match datum clause 5 and package clause 7. Each step takes only what the cited statement says, nothing from a proof. There is no cycle: a transitive walk from the three cited nodes never reaches the item. There are no new nodes, nothing cites SGA, and purity follows the lecture-notes route. Small cases (n=1, empty scheme, relative dimension 0) add no assertion beyond the inputs. The off-unit uses of prop-functor-package and thm-sf-biduality-class are accepted as tool_uses: this blueprint export is filed under sk-thm-weil4, its proof requires exactly these two inputs, and the chapter uses sec-six-functors. No fixes were needed."
+ }
 }

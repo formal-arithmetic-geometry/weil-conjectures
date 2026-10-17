@@ -28,9 +28,72 @@
  "stmt_deps": [
   "lem-coef-dgcat-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the dg Leibniz rule $\\partial(vu)=(\\partial v)u+(-1)^{|v|}v\\partial u$, which is the chain-map composition condition in the cited definition. Under (B), write $\\theta_x:x\\to x[1]$ and $\\eta_x:x[1]\\to x$ for the mutually inverse closed graded maps of degrees $-1$ and $1$ corresponding to the identity under shifting. For a cone sequence $y\\xrightarrow{a_f}C(f)\\xrightarrow{b_f}x[1]$ choose the splitting $(\\pi_f,s_f)$ specified by (C). Its boundary condition reads $\\pi_f\\partial s_f=f\\eta_x$. Differentiating the five splitting identities gives $b_f\\partial s_f=0$, $(\\partial\\pi_f)a_f=0$, and $(\\partial\\pi_f)s_f=-\\pi_f\\partial s_f$. Therefore $\\partial s_f=(a_f\\pi_f+s_fb_f)\\partial s_f=a_ff\\eta_x$ and $\\partial\\pi_f=(\\partial\\pi_f)(a_f\\pi_f+s_fb_f)=-f\\eta_xb_f$. These are direct consequences of the stated cone and dg axioms, not an invocation of a triangle theorem.",
+   "uses": [
+    "lem-coef-dgcat-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09P6, lemma-get-triangle, proof equations (1)-(6); Tag 09QJ, situation-ABC, boundary condition (C)."
+   }
+  },
+  {
+   "text": "For $f=1_x$, abbreviate its cone data by $C,a,b,\\pi,t$. The degree-minus-one endomorphism $h=t\\theta_x\\pi$ satisfies $\\partial h=(a\\eta_x)\\theta_x\\pi-t\\theta_x(-\\eta_xb)=a\\pi+tb=1_C$. Here the minus sign is the Leibniz sign for $t\\theta_x$ of degree $-1$; $\\eta_x\\theta_x=1_x$ and $\\theta_x\\eta_x=1_{x[1]}$. This proves identity-cone contractibility directly in two equalities, with no new lemma node.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QK, lemma-id-cone-null, complete contraction calculation, with the shift identifications written explicitly."
+   }
+  },
+  {
+   "text": "Fix a closed degree-zero $\\alpha:x\\to y$. By (A) set $M=y\\oplus C(1_x)$, with closed inclusions $I:y\\to M$, $J:C(1_x)\\to M$ and projections $P:M\\to y$, $Q:M\\to C(1_x)$. Put $j=I\\alpha+Ja$ and $r=P$. These are closed degree-zero maps and $rj=\\alpha$. The closed map $I$ obeys $rI=1_y$. By the preceding contraction, the degree-minus-one map $H=JhQ$ has $\\partial H=JQ=1_M-IP$, since $J,Q$ are closed. Thus $r$ is a homotopy equivalence with inverse $I$. Admissibility of $j$ will be proved by exhibiting its quotient in the next two steps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QM, lemma-factor, direct-sum construction and final homotopy calculation; $h$ contracts $1_{C(1_x)}$, not $1_x$."
+   }
+  },
+  {
+   "text": "Choose a cone sequence $y\\xrightarrow{a'}D=C(\\alpha)\\xrightarrow{b'}x[1]$ with graded splitting $(\\pi',t')$, by (C). Define the degree-zero map $q:M\\to D$ by $q=a'(P-\\alpha\\pi Q)-t'bQ$. This quotient is the cone object $D$, not the dg direct sum $y\\oplus x[1]$. By the identities of Step 1, $\\partial\\pi=-\\eta_x b$ and $\\partial t'=a'\\alpha\\eta_x$. Since $a',P,\\alpha,Q,b$ are closed, $\\partial q=a'\\alpha\\eta_x bQ-a'\\alpha\\eta_x bQ=0$. Also $qj=a'(\\alpha-\\alpha\\pi a)-t'ba=0$. This checks the closedness and zero-composite conditions that a merely graded quotient would not provide.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QM, lemma-factor, missing admissible-quotient verification repaired using a cone from Tag 09QJ, situation-ABC; differential identities from Tag 09P6, lemma-get-triangle."
+   }
+  },
+  {
+   "text": "Set $\\rho=\\pi Q:M\\to x$ and $\\sigma=I\\pi'-Jtb':D\\to M$, graded degree-zero maps, with no assertion that they are closed. The splitting identities for $C(1_x)$ and $D$ give $\\rho j=\\pi a=1_x$ and $\\rho\\sigma=-\\pi tb'=0$. They also give $q\\sigma=a'\\pi'+t'b'=1_D$. Expanding the other composite gives $\\sigma q=I(P-\\alpha\\pi Q)+JtbQ$; hence $j\\rho+\\sigma q=IP+J(a\\pi+tb)Q=IP+JQ=1_M$. Together with $qj=0$ from Step 4, these are exactly the five identities defining the admissible sequence $x\\xrightarrow{j}M\\xrightarrow{q}D$. Consequently the single-arrow construction has an admissible monomorphism $j$ and homotopy equivalence $r$ satisfying $rj=\\alpha$ strictly.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QM, lemma-factor: explicit verification of the omitted graded splitting, using the corrected quotient $C(\\alpha)$."
+   }
+  },
+  {
+   "text": "Induct on the number $N\\geq1$ of objects. For $N=1$, put $y_1=x_1$ and $r_1=1_{x_1}$; there is no arrow condition. Suppose the replacement through $x_{N-1}$ has been constructed, with $y_1=x_1$, $r_1=1$, each $r_i$ a homotopy equivalence, each $j_i$ admissible, and $r_{i+1}j_i=f_ir_i$ for $i<N-1$. The composite $\\alpha=f_{N-1}r_{N-1}:y_{N-1}\\to x_N$ is closed of degree zero by the dg Leibniz rule. Apply Steps 2-5 to this composite, naming the resulting $M,j,r$ as $y_N,j_{N-1},r_N$. They give precisely $r_Nj_{N-1}=f_{N-1}r_{N-1}$ strictly. Retain all earlier data and equations. This proves the induction step, including $N=2$ from the base case, and all required clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QN, lemma-analogue-sequence-maps-split, base case and induction using Tag 09QM, lemma-factor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dgcat-model-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09QN (lemma-analogue-sequence-maps-split), 09QM (lemma-factor), 09QK (lemma-id-cone-null), 09P6 (lemma-get-triangle). Follows the source induction and direct-sum construction, but the omitted/incorrect quotient in 09QM is repaired by an explicit cone quotient with all differential and splitting calculations."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +136,45 @@
    "results": "{\"t\": \"2026-10-16T22:38:16Z\", \"tool\": \"leanfinder\", \"query\": \"A chain of cochain maps admits a homotopy equivalent chain of degreewise split injections by mapping cylinders\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.cylinder.homotopyEquiv\", \"HomologicalComplex.cylinder.map_ι₀_eq_map_ι₁\", \"HomologicalComplex.cylinder.desc\", \"CochainComplex.MappingConeCompHomotopyEquiv.homotopyInvHomId\", \"HomologicalComplex.cylinder.πCompι₀Homotopy\", \"HomologicalComplex.cylinder.homotopy₀₁\", \"HomologicalComplex.cylinder.ι₁\", \"HomologicalComplex.cylinder.inlX\"], \"digest\": \"47e115dd19c5d112\"}",
    "date": "2026-10-17",
    "verdict": "No match: HomologicalComplex.cylinder.homotopyEquiv concerns the ordinary cylinder of one homological complex. It does not state finite admissible replacement in an arbitrary dg category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite composable maps in an arbitrary dg category with shifts and cones admit replacement by graded split closed injections and homotopy equivalences",
+   "results": "{\"t\": \"2026-10-17T00:33:12Z\", \"tool\": \"leanfinder\", \"query\": \"finite composable maps in an arbitrary dg category with shifts and cones admit replacement by graded split closed injections and homotopy equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ComplexShape.QFactorsThroughHomotopy\", \"instQFactorsThroughHomotopyIntUp\", \"instQFactorsThroughHomotopyDown\", \"HomotopyCategory.composableArrowsFunctor\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"HomotopyCategory.composableArrowsFunctor_obj\", \"HomotopyCategory.composableArrowsFunctor_map\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\"], \"digest\": \"32e8874ae5b4004c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary cochain complexes in a preadditive or abelian category, not arbitrary small dg categories satisfying (A),(B),(C). Read Mathlib/Algebra/Homology/Factorizations/CM5b.lean:30-32,110-121 and HomotopyCofiber.lean:536-555. In particular cm5b assumes an abelian category with enough injectives, and cylinder homotopy equivalences concern HomologicalComplex objects. Transporting those results to an arbitrary dg category is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite sequence in a differential graded category replaced by admissible monomorphisms and homotopy equivalences",
+   "results": "{\"t\": \"2026-10-17T00:33:08Z\", \"tool\": \"leansearch\", \"query\": \"finite sequence in a differential graded category replaced by admissible monomorphisms and homotopy equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory.standard\", \"CategoryTheory.ShortComplex.ShortExact.mono_f\", \"HomologicalComplexUpToQuasiIso.Q\", \"CategoryTheory.ShortComplex.HomotopyEquiv\", \"CategoryTheory.ComposableArrows.Exact.mk\", \"SimplexCategory.instHasStrongEpiMonoFactorisations\", \"CategoryTheory.ShortComplex.Homotopy\", \"CategoryTheory.ShortComplex\"], \"digest\": \"28d0f11097fcd55b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary cochain complexes in a preadditive or abelian category, not arbitrary small dg categories satisfying (A),(B),(C). Read Mathlib/Algebra/Homology/Factorizations/CM5b.lean:30-32,110-121 and HomotopyCofiber.lean:536-555. In particular cm5b assumes an abelian category with enough injectives, and cylinder homotopy equivalences concern HomologicalComplex objects. Transporting those results to an arbitrary dg category is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, HomotopyEquiv",
+   "results": "{\"t\": \"2026-10-17T00:33:08Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.mappingCone, HomotopyEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.rotateHomotopyEquiv\", \"CochainComplex.mappingConeCompHomotopyEquiv\", \"CochainComplex.cm5b.homotopyEquiv\"], \"digest\": \"4f1864ddf7423682\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary cochain complexes in a preadditive or abelian category, not arbitrary small dg categories satisfying (A),(B),(C). Read Mathlib/Algebra/Homology/Factorizations/CM5b.lean:30-32,110-121 and HomotopyCofiber.lean:536-555. In particular cm5b assumes an abelian category with enough injectives, and cylinder homotopy equivalences concern HomologicalComplex objects. Transporting those results to an arbitrary dg category is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mapping cylinder factorization of a closed dg morphism as a graded split inclusion followed by a homotopy equivalence",
+   "results": "{\"t\": \"2026-10-17T00:33:11Z\", \"tool\": \"leanfinder\", \"query\": \"mapping cylinder factorization of a closed dg morphism as a graded split inclusion followed by a homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.cylinder.desc\", \"HomologicalComplex.cylinder.homotopyEquiv\", \"HomologicalComplex.cylinder.πCompι₀Homotopy\", \"HomologicalComplex.cylinder.π\", \"HomologicalComplex.cylinder\", \"HomologicalComplex.cylinder.homotopy₀₁\", \"HomologicalComplex.cylinder.ι₀\", \"HomologicalComplex.cylinder.inlX\"], \"digest\": \"28ea61efa6a7ecd6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary cochain complexes in a preadditive or abelian category, not arbitrary small dg categories satisfying (A),(B),(C). Read Mathlib/Algebra/Homology/Factorizations/CM5b.lean:30-32,110-121 and HomotopyCofiber.lean:536-555. In particular cm5b assumes an abelian category with enough injectives, and cylinder homotopy equivalences concern HomologicalComplex objects. Transporting those results to an arbitrary dg category is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyEquiv|def cylinder",
+   "results": "{\"t\": \"2026-10-17T00:33:08Z\", \"tool\": \"grep\", \"query\": \"homotopyEquiv|def cylinder\", \"sub\": \"Algebra/Homology/Factorizations\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Factorizations/CM5b.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5b.lean\"], \"digest\": \"b4576abb1199503f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary cochain complexes in a preadditive or abelian category, not arbitrary small dg categories satisfying (A),(B),(C). Read Mathlib/Algebra/Homology/Factorizations/CM5b.lean:30-32,110-121 and HomotopyCofiber.lean:536-555. In particular cm5b assumes an abelian category with enough injectives, and cylinder homotopy equivalences concern HomologicalComplex objects. Transporting those results to an arbitrary dg category is not a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dg-abc-homotopy-category-triangulated",
@@ -84,5 +182,21 @@
   "group": "NL"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dg-abc-admissible-replacement",
+  "worker": "stage1",
+  "summary": "Rechecked the earlier sandbox against dga.tex. Replaced its nonclosed direct-sum quotient by C(alpha), proved the quotient closed, and verified all five splitting identities. Folded the elementary identity-cone contraction into the item, removing the unnecessary new child and its hidden back-reference. Six explicit algebraic steps and induction prove the unchanged statement. Source error: Tag 09QM displays quotient x[1] and writes a contraction of 1_x; the correct quotient here is C(alpha), and the contracted identity is 1_C(1_x).",
+  "blueprint": "Serves paragraph 2 (the three mapping-complex adjunctions) of prop-coef-integral-exceptional-adjoint, along the existing dg-enrichment and finite-cone ancestry. Locally realizes the simultaneous admissible-replacement input to lem-coef-dg-abc-homotopy-category-triangulated; no unit or chapter route changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-22f735be0",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-22f735be0 (reviewer sub-agent of L); spot-checked: PASS with no fixes. Read the item in full and the source, Stacks dga.tex section-review: Tags 09P6, 09QJ, 09QK, 09QM, 09QN and definition-dg-direct-sum, with tags checked against tags/tags. Also read the statement of the cited node lem-coef-dgcat-model-structure, where only the definition of a dg category is used, and how the parent uses the item: lem-coef-dg-abc-homotopy-category-triangulated applies it with N=2 and N=3 and needs the strict squares. The statement matches 09QN under (A)-(C); y1=x1 and r1=1 are true and come from the source's base case. The statement is unchanged and no target is involved. I re-derived every step by hand. Step 1: ds=a f eta and dpi=-f eta b. Step 2: d(t theta pi)=a pi+tb=1_C. Step 3: dH=1-IP and rj=alpha. Step 4: q=a'(P-alpha pi Q)-t'bQ has dq=0 and qj=0. Step 5: all five splitting identities hold, including sigma q=I(P-alpha pi Q)+JtbQ, without assuming rho or sigma closed. Step 6: the induction is stated explicitly. The proof still works if the shift identification flips the boundary sign. The source error is confirmed: 09QM's quotient x[1] fails for x=0, and 1_x is not a boundary; the delivery uses C(alpha) and contracts 1_C(1_x). Edge cases x=0, alpha=0, alpha=1 on Z[0] and N=1,2,3 pass. There are no new nodes. The only dg-abc siblings, cone-homotopy and admissible-flag-quotients, do not duplicate the item. The only citation is in the same unit, there are no tool_uses, no SGA is used, and Mathlib searches of three kinds are recorded. Minor: the report's second-reading section says created.item was changed, but the node correctly keeps the parent as created.item. That is report wording only and not split-owned."
+ }
 }
