@@ -1,229 +1,203 @@
 {
-  "id": "lem-weil-pbc-popescu-lift-chart-flat",
-  "kind": "statement",
-  "title": "Flat local map on a prepared Popescu chart",
-  "statement": "Let R and Cbar be commutative rings, pi in R, and compatible algebra structures R to Cbar and R/pi^2 to Cbar. Let d be prepared finite polynomial data [lem-weil-pbc-popescu-lift-preparation]: P=R[x_1,...,x_n], finitely many f_l, a_k, subsets E_k, coefficients h_{klj}, g_{kl}, and a surjection epsilon:(R/pi^2)[x] to Cbar with the prescribed kernel, smooth charts, conormal and differential bases, normalized coefficients and cleared relations. Put Q=P[z_1,...,z_m], u_l=f_l-pi z_l, p_{kl}=a_k z_l-sum_{j in E_k}h_{klj}z_j-pi g_{kl}, D=ULift(Q/(u_l,p_{kl})), and D_0=D/pi D. Let c:Cbar to D_0 be an R-algebra map taking epsilon(X_i) to the original generator x_i of D_0. Fix a prime q of D_0 and a chart k with c(epsilon(reduced(a_k))) outside q. Put qD equal to the inverse image of q in D, and p equal to its contraction to R. Assume R is Noetherian [def-weil-pbc-noetherian-ring] and Ann_R(pi)=Ann_R(pi^2). Then the canonical local ring map R_p to D_{qD} [def-weil-pbc-localization-at-prime] is flat [def-weil-pbc-flat-ring-map]. No smoothness conclusion is asserted.",
-  "source": {
+ "id": "lem-weil-pbc-popescu-lift-chart-flat",
+ "kind": "statement",
+ "title": "Flat local map on a prepared Popescu chart",
+ "statement": "Let R and Cbar be commutative rings, pi in R, and compatible algebra structures R to Cbar and R/pi^2 to Cbar. Let d be prepared finite polynomial data [lem-weil-pbc-popescu-lift-preparation]: P=R[x_1,...,x_n], finitely many f_l, a_k, subsets E_k, coefficients h_{klj}, g_{kl}, and a surjection epsilon:(R/pi^2)[x] to Cbar with the prescribed kernel, smooth charts, conormal and differential bases, normalized coefficients and cleared relations. Put Q=P[z_1,...,z_m], u_l=f_l-pi z_l, p_{kl}=a_k z_l-sum_{j in E_k}h_{klj}z_j-pi g_{kl}, D=ULift(Q/(u_l,p_{kl})), and D_0=D/pi D. Let c:Cbar to D_0 be an R-algebra map taking epsilon(X_i) to the original generator x_i of D_0. Fix a prime q of D_0 and a chart k with c(epsilon(reduced(a_k))) outside q. Put qD equal to the inverse image of q in D, and p equal to its contraction to R. Assume R is Noetherian [def-weil-pbc-noetherian-ring] and Ann_R(pi)=Ann_R(pi^2). Then the canonical local ring map R_p to D_{qD} [def-weil-pbc-localization-at-prime] is flat [def-weil-pbc-flat-ring-map]. No smoothness conclusion is asserted.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-popescu-lift-preparation",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "The private polynomial_value helper compares two R-algebra homomorphisms out of the original-variable polynomial algebra. MvPolynomial.algHom_ext extends hc to all polynomials. In the inverse-image prime qD of the special-fibre prime, pi belongs to qD and the image of a_k avoids it.",
+   "uses": [
+    "lem-weil-pbc-popescu-lift-preparation",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/smoothing.tex",
     "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+   }
   },
-  "stmt_deps": [
-    "lem-weil-pbc-popescu-lift-preparation",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-flat-ring-map",
-    "def-weil-pbc-noetherian-ring"
-  ],
-  "proof": [
-    {
-      "text": "The private polynomial_value helper compares two R-algebra homomorphisms out of the original-variable polynomial algebra. MvPolynomial.algHom_ext extends hc to all polynomials. In the inverse-image prime qD of the special-fibre prime, pi belongs to qD and the image of a_k avoids it.",
-      "uses": [
-        "lem-weil-pbc-popescu-lift-preparation",
-        "def-weil-pbc-localization-at-prime"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/smoothing.tex",
-        "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
-      }
-    },
-    {
-      "text": "Construct the partial chart and its explicit m-equation presentation in n+m variables. Apply partial_chart_fibre_dimension. The proved partial_chart_flat helper applies exists_flat_away_of_fibre_dimension_eq, uses (n+m)-m=n, and transports Module.Flat along the explicit equivalence of localizations induced by finiteChartEquiv.",
-      "uses": [
-        "lem-weil-pbc-popescu-lift-partial-chart-dimension",
-        "lem-weil-pbc-equation-count-fibre-dimension-flat",
-        "def-weil-pbc-flat-ring-map",
-        "def-weil-pbc-localization-at-prime"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/smoothing.tex",
-        "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
-      }
-    },
-    {
-      "text": "Apply annihilator_element_flat_base_change to the algebra map R to T twice, at pi and pi^2. Rewrite map_pow and the hypothesis hAnnR to obtain Ann_T(pi)=Ann_T(pi^2).",
-      "uses": [
-        "lem-weil-pbc-annihilator-element-flat-base-change",
-        "def-weil-pbc-flat-ring-map"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/smoothing.tex",
-        "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
-      }
-    },
-    {
-      "text": "The proved equation_key_identity and invertibility of a_k kill every u_l in T. Applying the same identity with chart kprime gives pi*p_kprime,l=0. All these identities are compiled Lean proofs, not additional holes.",
-      "uses": [
-        "lem-weil-pbc-popescu-lift-preparation",
-        "def-weil-pbc-localization-at-prime"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/smoothing.tex",
-        "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
-      }
-    },
-    {
-      "text": "Use chart_relations_pi_divisible to write p_kprime,l=pi*y. Its pi-torsion gives pi^2*y=0. Equality of annihilators gives pi*y=0. Thus all full defining equations vanish in T. Ideal.span_le expresses vanishing on the full defining ideal.",
-      "uses": [
-        "lem-weil-pbc-popescu-lift-chart-relations",
-        "def-weil-pbc-flat-ring-map"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/smoothing.tex",
-        "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
-      }
-    },
-    {
-      "text": "The explicit chartMap is surjective by quotient surjectivity and ULift. A private proved lemma localRingHom_bijective_of_kernel_vanishes proves injectivity after localization using numerator and denominator lifts, the fraction zero criterion and vanishing of the kernel in T; surjectivity follows by lifting both numerator and denominator. Apply it to chartMap after proving its kernel vanishes by quotient induction. This yields chart_comparison_bijective.",
-      "uses": [
-        "lem-weil-pbc-popescu-lift-chart-relations",
-        "def-weil-pbc-localization-at-prime"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/smoothing.tex",
-        "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
-      }
-    },
-    {
-      "text": "Promote the bijective localRingHom to an R-algebra equivalence, proving scalar compatibility with localRingHom_to_map and chartMap.commutes. Transport Module.Flat R T along its inverse linear equivalence. Give the target local ring the algebra structure from the canonical localRingHom R_p to D_qD and prove its R scalar tower. Module.flat_iff_of_isLocalization then gives exactly the unchanged target conclusion.",
-      "uses": [
-        "def-weil-pbc-flat-ring-map",
-        "def-weil-pbc-localization-at-prime",
-        "lem-weil-pbc-flat-over-localization"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/smoothing.tex",
-        "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-flat-ring-map",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-annihilator-element-flat-base-change",
-    "lem-weil-pbc-equation-count-fibre-dimension-flat",
-    "lem-weil-pbc-flat-over-localization",
-    "lem-weil-pbc-popescu-lift-chart-relations",
+  {
+   "text": "Apply the restored partial_chart_flat theorem to qD. It applies the restored partial_chart_fibre_dimension theorem and exists_flat_away_of_fibre_dimension_eq to the explicit m-equation presentation in n+m variables, then transports flatness across the explicit localization algebra equivalence.",
+   "uses": [
     "lem-weil-pbc-popescu-lift-partial-chart-dimension",
-    "lem-weil-pbc-popescu-lift-preparation"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "lem-weil-pbc-equation-count-fibre-dimension-flat"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent.",
-    "note": "M3 formal reduction: explicit partial chart, fibre dimension, equation count, key identities, divisibility, annihilator base change, local comparison and localization of the base."
+    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Prepared Popescu lifting quotient flat at primes containing pi when annihilator pi equals annihilator pi squared",
-      "date": "2026-10-13",
-      "results": "service unavailable: Internal Server Error",
-      "verdict": "unavailable; no negative verdict"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Flatness of a Popescu lifting quotient from equation count and vanishing of chart kernel in local rings",
-      "date": "2026-10-13",
-      "results": "Algebra.Smooth.flat, RingHom.Flat.propertyIsLocal, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Module.flat_of_localized_span, Module.flat_of_isLocalized_span, RingHom.Flat.ofLocalizationSpanTarget, Module.flat_of_localized_maximal, RingHom.smooth_def",
-      "verdict": "No exact statement for the prepared lifting quotient; generic ingredients only."
-    },
-    {
-      "tool": "grep",
-      "query": "annihilator.*flat|flat.*annihilator|exists_flat_away",
-      "date": "2026-10-13",
-      "results": "No hits.",
-      "verdict": "No exact statement for the prepared lifting quotient; generic ingredients only."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Flatness of a polynomial quotient after lifting smooth algebra modulo the square of an element with equal annihilators",
-      "date": "2026-10-13",
-      "results": "Algebra.Smooth.flat, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Smooth, Algebra.Smooth.formallySmooth, RingHom.Smooth, RingHom.smooth_def, RingHom.Smooth.toAlgebra, RingHom.smooth_algebraMap",
-      "verdict": "Second reading: no statement identifies the explicit prepared quotient or proves this chart conclusion."
-    },
-    {
-      "tool": "loogle",
-      "query": "Algebra.Smooth, MvPolynomial",
-      "date": "2026-10-13",
-      "results": "No hits.",
-      "verdict": "Second reading: no statement identifies the explicit prepared quotient or proves this chart conclusion."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.RingTheory.PopescuLiftSmoothSpecial",
-    "date": "2026-10-13",
-    "group": "F1"
+  {
+   "text": "Apply annihilator_element_flat_base_change to the flat algebra map R to T twice, at pi and pi^2. Rewrite map_pow and hAnnR to obtain Ann_T(pi)=Ann_T(pi^2).",
+   "uses": [
+    "lem-weil-pbc-annihilator-element-flat-base-change",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+   }
   },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-finite-etale-lifting",
-      "place": "Tag 07CP within the essential-surjectivity approximation: equation-count flatness and annihilator argument identifying the local rings of D_k and D",
-      "via": [
-        "lem-weil-pbc-popescu-lift-smooth-special",
-        "lem-weil-pbc-popescu-lift-smooth",
-        "lem-weil-pbc-popescu-lifting",
-        "lem-weil-pbc-popescu-reduce-to-field",
-        "lem-weil-pbc-popescu-smoothing",
-        "lem-weil-pbc-henselian-pair-approximation",
-        "lem-weil-pbc-finite-etale-lifting-approximation",
-        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-      ]
-    },
-    "same_as": []
+  {
+   "text": "Use chart_relations_pi_divisible, inside the existing proved chart_comparison_bijective helper, to write each remaining equation as pi*y. The key equation identities kill its product with pi. The transported annihilator equality therefore kills the equation itself. Vanishing on the defining ideal and the surjectivity of chartMap make its localRingHom bijective. RingHom.Flat.of_bijective makes this comparison map flat.",
+   "uses": [
+    "lem-weil-pbc-popescu-lift-chart-relations",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+   }
   },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "module": "Sheaf.RingTheory.PopescuLiftChartFlat",
-    "file": "lean/Sheaf/RingTheory/PopescuLiftChartFlat.lean",
-    "declaration": "Algebra.popescu_lift_chart_flat",
-    "statement": "theorem popescu_lift_chart_flat (R : Type a) (Cbar : Type c)\n    [CommRing R] [CommRing Cbar] [Algebra R Cbar] [IsNoetherianRing R] (π : R)\n    [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]\n    [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]\n    (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared)\n    (hAnnR : Module.annihilator R (Ideal.span ({π} : Set R)) =\n      Module.annihilator R (Ideal.span ({π ^ 2} : Set R)))\n    (c : Cbar →ₐ[R] (d.liftingAlgebra ⧸\n      Ideal.span ({algebraMap R d.liftingAlgebra π} : Set d.liftingAlgebra)))\n    (hc : ∀ i : Fin d.n, c (d.ε (MvPolynomial.X i)) = Ideal.Quotient.mk _ (d.x i))\n    (q : PrimeSpectrum (d.liftingAlgebra ⧸\n      Ideal.span ({algebraMap R d.liftingAlgebra π} : Set d.liftingAlgebra)))\n    (k : Fin d.r) (hk : c (d.ε (d.reduced (d.a k))) ∉ q.asIdeal) :\n    let qD := PrimeSpectrum.comap (Ideal.Quotient.mk _) q\n    (Localization.localRingHom (PrimeSpectrum.comap (algebraMap R d.liftingAlgebra) qD).asIdeal\n      qD.asIdeal (algebraMap R d.liftingAlgebra) rfl).Flat",
-    "existing": false,
-    "branch": "sheaf-dag",
-    "by": "F1",
-    "date": "2026-10-13"
-  },
-  "reviewed": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "F1",
-    "result": "pass",
-    "landing": "20261012T213848-L-1207955",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "M3",
-    "result": "pass",
-    "landing": "20261012T232142-L-1993271",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "Use chartMap.commutes to identify the contraction of the partial-chart prime with the contraction of qD to R. Install the canonical localized-base algebra structure on the partial-chart local ring and its scalar tower via localRingHom_to_map. Module.flat_iff_of_isLocalization transports its R-flatness to R_p-flatness. Compose this flat localRingHom with the flat comparison map. localRingHom_comp and chartMap.commutes identify that composite with exactly the canonical map in the unchanged target conclusion.",
+   "uses": [
+    "lem-weil-pbc-flat-over-localization",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-annihilator-element-flat-base-change",
+  "lem-weil-pbc-equation-count-fibre-dimension-flat",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-popescu-lift-chart-relations",
+  "lem-weil-pbc-popescu-lift-partial-chart-dimension",
+  "lem-weil-pbc-popescu-lift-preparation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent.",
+  "note": "R4 returned-delivery repair: restore the original partial-chart proofs with a direct import all of their upstream dimension dependency; combine equation-count flatness, annihilator base change, bijective local comparison and localization of the base. No new intermediate modules or holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Prepared Popescu lifting quotient flat at primes containing pi when annihilator pi equals annihilator pi squared",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable; no negative verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of a Popescu lifting quotient from equation count and vanishing of chart kernel in local rings",
+   "date": "2026-10-13",
+   "results": "Algebra.Smooth.flat, RingHom.Flat.propertyIsLocal, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Module.flat_of_localized_span, Module.flat_of_isLocalized_span, RingHom.Flat.ofLocalizationSpanTarget, Module.flat_of_localized_maximal, RingHom.smooth_def",
+   "verdict": "No exact statement for the prepared lifting quotient; generic ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator.*flat|flat.*annihilator|exists_flat_away",
+   "date": "2026-10-13",
+   "results": "No hits.",
+   "verdict": "No exact statement for the prepared lifting quotient; generic ingredients only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of a polynomial quotient after lifting smooth algebra modulo the square of an element with equal annihilators",
+   "date": "2026-10-13",
+   "results": "Algebra.Smooth.flat, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Smooth, Algebra.Smooth.formallySmooth, RingHom.Smooth, RingHom.smooth_def, RingHom.Smooth.toAlgebra, RingHom.smooth_algebraMap",
+   "verdict": "Second reading: no statement identifies the explicit prepared quotient or proves this chart conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, MvPolynomial",
+   "date": "2026-10-13",
+   "results": "No hits.",
+   "verdict": "Second reading: no statement identifies the explicit prepared quotient or proves this chart conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuLiftSmoothSpecial",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07CP within the essential-surjectivity approximation: equation-count flatness and annihilator argument identifying the local rings of D_k and D",
+   "via": [
+    "lem-weil-pbc-popescu-lift-smooth-special",
+    "lem-weil-pbc-popescu-lift-smooth",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuLiftChartFlat",
+  "file": "lean/Sheaf/RingTheory/PopescuLiftChartFlat.lean",
+  "declaration": "Algebra.popescu_lift_chart_flat",
+  "statement": "theorem popescu_lift_chart_flat (R : Type a) (Cbar : Type c)\n    [CommRing R] [CommRing Cbar] [Algebra R Cbar] [IsNoetherianRing R] (π : R)\n    [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]\n    [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]\n    (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared)\n    (hAnnR : Module.annihilator R (Ideal.span ({π} : Set R)) =\n      Module.annihilator R (Ideal.span ({π ^ 2} : Set R)))\n    (c : Cbar →ₐ[R] (d.liftingAlgebra ⧸\n      Ideal.span ({algebraMap R d.liftingAlgebra π} : Set d.liftingAlgebra)))\n    (hc : ∀ i : Fin d.n, c (d.ε (MvPolynomial.X i)) = Ideal.Quotient.mk _ (d.x i))\n    (q : PrimeSpectrum (d.liftingAlgebra ⧸\n      Ideal.span ({algebraMap R d.liftingAlgebra π} : Set d.liftingAlgebra)))\n    (k : Fin d.r) (hk : c (d.ε (d.reduced (d.a k))) ∉ q.asIdeal) :\n    let qD := PrimeSpectrum.comap (Ideal.Quotient.mk _) q\n    (Localization.localRingHom (PrimeSpectrum.comap (algebraMap R d.liftingAlgebra) qD).asIdeal\n      qD.asIdeal (algebraMap R d.liftingAlgebra) rfl).Flat",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T213848-L-1207955",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261017T003428-L-3317504",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

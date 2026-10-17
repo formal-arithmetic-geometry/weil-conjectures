@@ -13,7 +13,7 @@ import Sheaf.RingTheory.EquationCountFibreDimensionFlat
 import Sheaf.RingTheory.PopescuPartialChartPolynomial
 import Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension
 import Mathlib.RingTheory.Kaehler.TensorProduct
-import all Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension
+import all WeilConjectures.RingTheory.SmoothAtPrimeDifferentialsDimension
 
 /-! # The partial equation chart in Popescu lifting
 
@@ -192,9 +192,7 @@ def finiteChartEquiv (d : PopescuLiftPresentation R Cbar π) (k : Fin d.r) :
       exact ((MvPolynomial.renameEquiv R finSumFinEquiv).symm_apply_apply _).symm)).trans
     (ULift.algEquiv (R := R)).symm
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- The smooth special fibre of the partial chart has dimension n at the chosen prime.
+/-- The smooth special fibre of the partial chart has dimension n at the chosen prime.
 
 Source: Stacks Project, Tag 07CP (lemma-lifting), the calculation of D_k/pi D_k.
 (blueprint: lem-weil-pbc-popescu-lift-partial-chart-dimension).
@@ -211,7 +209,7 @@ basis to the residue field; its rank is (n-card(E_k))+card(E_k)=n by Prepared.ca
 The smooth-over-field differential dimension theorem gives dimension n at Q. The spectrum
 map of localization at t is an open embedding, which preserves dimension at a point,
 so the original fibre point also has dimension n. No flatness or equality of annihilators
-is used. - /
+is used. -/
 theorem partial_chart_fibre_dimension [Algebra R Cbar]
     [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]
     (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared)
@@ -300,14 +298,11 @@ theorem partial_chart_fibre_dimension [Algebra R Cbar]
   change topologicalKrullDimAt qF = _
   rw [← hQ, ← Algebra.dimAt_openEmbedding
     (PrimeSpectrum.localization_away_isOpenEmbedding L t) Q, ← hdim, hfin]
--/
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- Apply equation-count flatness to the finite presentation of the partial chart.
+/-- Apply equation-count flatness to the finite presentation of the partial chart.
 
 Source: Stacks Project, Tag 07CP, applying Tag 00ST to D_k.
-(blueprint: lem-weil-pbc-popescu-lift-partial-chart-dimension). - /
+(blueprint: lem-weil-pbc-popescu-lift-partial-chart-dimension). -/
 theorem partial_chart_flat [Algebra R Cbar] [IsNoetherianRing R]
     [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]
     (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared)
@@ -336,6 +331,5 @@ theorem partial_chart_flat [Algebra R Cbar] [IsNoetherianRing R]
       rw [e.commutes, ← IsScalarTower.algebraMap_apply R (d.chartAlgebra k)
         (d.chartLocal k q)]
   exact Module.Flat.of_linearEquiv eA.symm.toLinearEquiv
--/
 
 end Algebra.PopescuLiftPresentation

@@ -54,7 +54,7 @@
    }
   },
   {
-   "text": "The range of the spectrum map of localization at t is basicOpen t. Because qF avoids t, choose a prime Q over it. Smoothness of L gives a smooth principal neighbourhood of Q by localizing at 1. Apply finiteDimensional_and_finrank_kaehlerDifferential_eq_of_isSmoothAtPrime to Q. The differential residue basis makes its dimension n. The spectrum map of principal localization is an open embedding; apply the existing Algebra.dimAt_openEmbedding from SmoothAtPrimeDifferentialsDimension, made available by the proof-only import all, to preserve dimension at the chosen prime. Thus dimension at qF equals dimension at Q, proving the original finite-chart fibre dimension without changing its statement.",
+   "text": "The range of the spectrum map of localization at t is basicOpen t. Because qF avoids t, choose a prime Q over it. Smoothness of L gives a smooth principal neighbourhood of Q by localizing at 1. Apply finiteDimensional_and_finrank_kaehlerDifferential_eq_of_isSmoothAtPrime to Q. The differential residue basis makes its dimension n. The spectrum map of principal localization is an open embedding; apply the existing Algebra.dimAt_openEmbedding from WeilConjectures.RingTheory.SmoothAtPrimeDifferentialsDimension, made available by a direct proof-only import all of that upstream module, to preserve dimension at the chosen prime. Thus dimension at qF equals dimension at Q, proving the original finite-chart fibre dimension without changing its statement.",
    "uses": [
     "lem-weil-pbc-smooth-over-field-dimension-differentials",
     "def-kun-topological-dimension-at-point",
@@ -65,11 +65,23 @@
     "document": "literature/stacks-project/smoothing.tex",
     "place": "Stacks Project, Tag 07CP (lemma-lifting), displayed calculation of (D_k/pi D_k) localized at a_k; read at https://stacks.math.columbia.edu/tag/07CP because the local TeX is absent."
    }
+  },
+  {
+   "text": "The partial_chart_flat corollary applies exists_flat_away_of_fibre_dimension_eq to the finite presentation and this dimension calculation, uses (n+m)-m=n, and transports flatness through the explicit localization algebra equivalence induced by finiteChartEquiv.",
+   "uses": [
+    "lem-weil-pbc-equation-count-fibre-dimension-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+   }
   }
  ],
  "proof_deps": [
   "def-kun-topological-dimension-at-point",
   "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-equation-count-fibre-dimension-flat",
   "lem-weil-pbc-kahler-differentials-base-change",
   "lem-weil-pbc-kahler-differentials-localization",
   "lem-weil-pbc-kahler-differentials-polynomial-extension",
@@ -82,7 +94,8 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Stacks Project, Tag 07CP (lemma-lifting), displayed calculation of (D_k/pi D_k) localized at a_k; read at https://stacks.math.columbia.edu/tag/07CP because the local TeX is absent."
+  "place": "Stacks Project, Tag 07CP (lemma-lifting), displayed calculation of (D_k/pi D_k) localized at a_k; read at https://stacks.math.columbia.edu/tag/07CP because the local TeX is absent.",
+  "note": "R4 repairs the upstream module-system import boundary and restores both original proofs, without changing their statements or adding holes."
  },
  "mathlib_searches": [
   {
@@ -149,7 +162,21 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lean": {},
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuLiftPartialChart",
+  "file": "lean/Sheaf/RingTheory/PopescuLiftPartialChart.lean",
+  "declaration": "Algebra.PopescuLiftPresentation.partial_chart_fibre_dimension",
+  "statement": "theorem partial_chart_fibre_dimension [Algebra R Cbar]\n    [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]\n    (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared)\n    (k : Fin d.r) (q : PrimeSpectrum d.liftingAlgebra)\n    (hπ : algebraMap R d.liftingAlgebra π ∈ q.asIdeal)\n    (hk : ULift.up (Ideal.Quotient.mk d.definingIdeal (d.includeX (d.a k))) ∉ q.asIdeal) :\n    let q' := PrimeSpectrum.comap (d.finiteChartEquiv k).toRingHom (d.chartPrime k q)\n    let p := PrimeSpectrum.comap (algebraMap R (d.finiteChartAlgebra k)) q'\n    topologicalKrullDimAt\n      (PrimeSpectrum.preimageEquivFiber R (d.finiteChartAlgebra k) p ⟨q', rfl⟩) =\n        (d.n : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-17",
+  "declarations": [
+   "Algebra.PopescuLiftPresentation.partial_chart_fibre_dimension",
+   "Algebra.PopescuLiftPresentation.partial_chart_flat"
+  ],
+  "note": "Restore the two original proved declarations after the upstream-sync take-out; import all directly from WeilConjectures.RingTheory.SmoothAtPrimeDifferentialsDimension to access its proof dependencies and private open-embedding dimension lemma. Every existing active declaration is unchanged."
+ },
  "reviewed": {
   "date": "2026-10-12",
   "by": "L",
@@ -161,12 +188,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D4",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261013T024031-L-3333566",
+  "landing": "20261017T003428-L-3317504",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
