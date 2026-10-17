@@ -1147,6 +1147,9 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PicTorsionPairi
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PicTorsionPairingTransport
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ResidueSequence
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ResidueSequenceFrobenius
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ResidueSequenceGysin
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ResidueSequenceKummer
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ResidueSequenceRestrict
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RestrictionWeilGroup
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Specialization
@@ -3764,6 +3767,7 @@ public import WeilConjectures.RingTheory.IdempotentsDeterminedModuloRadical
 public import WeilConjectures.RingTheory.ImprovePresentationSmoothConormalFree
 public import WeilConjectures.RingTheory.IndSmoothFinitePresentationFactorization
 public import WeilConjectures.RingTheory.IndStandardSmooth
+public import WeilConjectures.RingTheory.InertiaStrictHenselization
 public import WeilConjectures.RingTheory.InertiaUnramifiedPoint
 public import WeilConjectures.RingTheory.IntegralIdempotentAnnihilatingPolynomial
 public import WeilConjectures.RingTheory.JacobianPresentationLift
@@ -3812,6 +3816,7 @@ public import WeilConjectures.RingTheory.ProEtale.IdentifiesLocalRings
 public import WeilConjectures.RingTheory.ProEtale.Ind
 public import WeilConjectures.RingTheory.ProEtale.IndBijectiveOnStalks
 public import WeilConjectures.RingTheory.ProEtale.IndEtale
+public import WeilConjectures.RingTheory.ProEtale.IndEtaleDirectedUnion
 public import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 public import WeilConjectures.RingTheory.ProEtale.IndZariski
 public import WeilConjectures.RingTheory.ProEtale.IntegralLocal
@@ -3858,6 +3863,7 @@ public import WeilConjectures.RingTheory.Spectrum.Prime.Colimit
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.RingTheory.StandardSmoothDimensionAtPoints
 public import WeilConjectures.RingTheory.StandardSmoothQuotientLift
+public import WeilConjectures.RingTheory.StrictlyHenselianInvariants
 public import WeilConjectures.RingTheory.StrictlyHenselianNormal
 public import WeilConjectures.RingTheory.SymmetricAlgebraFinitePresentation
 public import WeilConjectures.RingTheory.SymmetricAlgebraQuotientModule
@@ -4316,6 +4322,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedSectio
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZeroLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseGaloisDescent
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseGerm
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
@@ -4498,6 +4505,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.U
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.StrictlyHenselianNeighbourhood
 public import WeilConjectures.SixFunctors.ProEtale.StrictlyHenselianStalk
 public import WeilConjectures.SixFunctors.ProEtale.WeaklyContractibleCohomology
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
@@ -4575,6 +4583,7 @@ public import WeilConjectures.WeilSheaf.ArtinSchreierFrobenius
 public import WeilConjectures.WeilSheaf.ArtinSchreierPurity
 public import WeilConjectures.WeilSheaf.ArtinSchreierTrace
 public import WeilConjectures.WeilSheaf.BoundaryStalk
+public import WeilConjectures.WeilSheaf.BoundaryStalkGaloisInvariants
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.CohomologyExact
@@ -4656,6 +4665,7 @@ public import WeilConjectures.WeilSheaf.StalkIso
 public import WeilConjectures.WeilSheaf.StalkMonoidal
 public import WeilConjectures.WeilSheaf.StalkOpenImmersion
 public import WeilConjectures.WeilSheaf.StalkPairing
+public import WeilConjectures.WeilSheaf.StalkStrictlyHenselian
 public import WeilConjectures.WeilSheaf.StalkTateTwist
 public import WeilConjectures.WeilSheaf.StalkTensor
 public import WeilConjectures.WeilSheaf.StalkUpperStar
