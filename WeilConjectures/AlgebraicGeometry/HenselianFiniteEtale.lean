@@ -17,8 +17,6 @@ import WeilConjectures.AlgebraicGeometry.HenselianClopenRestriction
 import WeilConjectures.AlgebraicGeometry.SchemeClopenIdempotent
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleRestrictionFullyFaithful
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleLiftingEssentialSurjectivity
-import WeilConjectures.AlgebraicGeometry.FiniteEtaleYonedaLocalTrivializations
-import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleEquivalenceH1
 
 /-!
@@ -105,17 +103,7 @@ theorem Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso (T : Scheme.{u}) :
     ∀ E : Sheaf T.smallEtaleTopology (Type (u + 1)), IsFiniteLocallyConstantSheafOfTypes E →
       ∃ (P : Scheme.{u}) (π : P ⟶ T) (_ : IsFinite π) (_ : Etale π),
         Nonempty (E.obj ≅ uliftYoneda.{u + 1}.obj (Scheme.Etale.mk π)) :=
-  by
-    constructor
-    · intro P π _ _
-      let F := (T.smallEtaleTopology.uliftYoneda.{u + 1}).obj (Scheme.Etale.mk π)
-      obtain ⟨⟨𝒰, h𝒰⟩, hfin⟩ := Scheme.finiteEtale_yoneda_local_trivializations T P π
-      refine ⟨F.property, ⟨⟨𝒰, ?_⟩, hfin⟩⟩
-      intro j
-      obtain ⟨S, _, ⟨e⟩⟩ := h𝒰 j
-      exact Sheaf.isConstant_of_iso _ e
-    · intro E hE
-      exact Scheme.finiteLocallyConstant_sets_representable T E hE.1 hE.2
+  isFiniteLocallyConstant_yoneda_and_exists_iso' T
 
 
 section Henselian
