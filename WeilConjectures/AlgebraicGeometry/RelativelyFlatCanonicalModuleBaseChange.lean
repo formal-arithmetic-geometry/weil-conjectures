@@ -42,7 +42,7 @@ private theorem isIso_of_open_restrictions
     intro y _
     obtain ⟨i, hi⟩ := hcover y
     exact TopologicalSpace.Opens.mem_iSup.mpr ⟨i, hi⟩
-  apply (sheaf_module_isIso_iff_isIso_over_open_cover
+  apply (sheaf_module_isIso_iff_isIso_over_open_cover.{u, u, u}
     Y.toRingedSpace I U hU _ _
     ((DerivedCategory.homologyFunctor _ n).map φ)).mpr
   intro i
