@@ -13,9 +13,99 @@
   "def-weil-pbc-special-cocontinuous-functor",
   "def-trf-geometric-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check finite limits. A terminal object and fibre products give binary products $X\\times Y=X\\times_{e_{\\mathcal C}}Y$. The equalizer of $a,b:X\\rightrightarrows Y$ is the pullback of $(a,b):X\\to Y\\times Y$ and the diagonal $Y\\to Y\\times Y$. Thus these constructions give finite limits in $\\mathcal C$. Hypotheses (d) and (e), with the chosen isomorphism $u(e_{\\mathcal C})\\cong e_{\\mathcal D}$, carry these very terminal objects, products and equalizers to their counterparts in $\\mathcal D$, so $u$ preserves finite limits. Continuity means in particular that $u$ sends every covering family to a covering family [def-weil-pbc-sites-and-cohomology](3).",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XU (lemma-bigger-site), hypotheses (d),(e), verifying the finite-limit hypotheses of Tag 00X6 (proposition-get-morphism)"
+   }
+  },
+  {
+   "text": "Use the common-universe convention [def-weil-size-convention], taking the sheaf values in a containing universe. Apply the set-sheaf clause of [lem-weil-pbc-left-exact-site-inverse-image-tensor] to the finite limits and image-covering condition just checked. It gives exactly the sheafified left Kan extension $L(F)=(u_pF)^\\#$, its adjunction $L\\dashv R$, and preservation of finite limits and all colimits by $L$. Hence $u$ defines a morphism of sites $f:\\mathcal D\\to\\mathcal C$ by [def-weil-pbc-sites-and-cohomology](3), with $f_*=R$ and $f^{-1}=L$. The same adjunction is the geometric morphism on sheaf topoi in [def-trf-geometric-morphism].",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00X6 (proposition-get-morphism), 00X1 (definition-morphism-sites), 00XC (lemma-morphism-sites-topoi), and 00XU (lemma-bigger-site), first paragraph of proof"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-continuous-cocontinuous-topos-adjunction] using precisely hypotheses (a),(b). Its functor called $L$ there is our restriction $R$, and its functor called $R$ there is our $g_*$. It supplies the geometric morphism $g:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ with $g^{-1}=R$ and $R\\dashv g_*$. For $F\\in\\operatorname{Sh}(\\mathcal C)$, sections of $g_*F$ over $V$ are the compatible families $(s_{A,\\psi})$ for $\\psi:uA\\to V$. In this model the counit $\\varepsilon_F:Rg_*F\\to F$, evaluated at $X$, sends a family to $s_{X,\\mathrm{id}_{uX}}$. Together with step 2 this is the adjoint triple $L\\dashv R\\dashv g_*$.",
+   "uses": [
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00XO (lemma-cocontinuous-morphism-topoi) and 00XR (lemma-when-shriek); Tag 00XT (lemma-back-and-forth), first paragraph of proof"
+   }
+  },
+  {
+   "text": "Compute the inverse of this counit explicitly. Fix $X\\in\\mathcal C$. By full faithfulness, every $\\psi:uA\\to uX$ is uniquely $u(a)$ for $a:A\\to X$. Given $t\\in F(X)$, put $s_{A,u(a)}=F(a)(t)$. These entries satisfy compatibility: for $b:B\\to A$, $F(b)(F(a)(t))=F(a\\circ b)(t)$. Conversely the compatibility equation for $a:A\\to X$ and the identity of $uX$ gives $s_{A,u(a)}=F(a)(s_{X,\\mathrm{id}_{uX}})$. Thus evaluation at the identity and this construction are inverse functions. For $h:X'\\to X$ and $a:A\\to X'$, restriction of this family has coordinate $F(h\\circ a)(t)=F(a)(F(h)(t))$ at $u(a)$, which proves naturality in $X$. A morphism $F\\to F'$ commutes with the construction by its naturality. Therefore these inverses give an inverse natural transformation to the canonical counit $\\varepsilon:Rg_*\\to\\operatorname{id}$. Only the compatible-family and counit formulas in [lem-weil-pbc-continuous-cocontinuous-topos-adjunction] are used here; no density hypothesis is needed.",
+   "uses": [
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XT (lemma-back-and-forth), first paragraph: fully faithful pointwise evaluation of the right adjoint"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-adjoint-triple-unit-counit] to the actual adjunctions $L\\dashv R\\dashv g_*$ of steps 2 and 3. Since their second counit is the isomorphism of step 4, their first unit $\\eta:\\operatorname{id}\\to RL$ is an isomorphism. This is the canonical unit for the sheafified $L=(u_p\\,)^\\#$, since it is the unit of that very first adjunction. Thus both canonical back-and-forth maps required in the statement have now been proved invertible.",
+   "uses": [
+    "lem-trf-adjoint-triple-unit-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XT (lemma-back-and-forth), two canonical isomorphisms; unit deduced formally from the proved counit by Mathlib/CategoryTheory/Adjunction/Triple.lean:66-75"
+   }
+  },
+  {
+   "text": "By the composition convention of [def-trf-geometric-morphism], $(f\\circ g)_*=f_*g_*=Rg_*$. The counit isomorphism $Rg_*\\cong\\operatorname{id}_{\\operatorname{Sh}(\\mathcal C)}$ from step 4 is therefore a natural isomorphism of direct-image functors from $f\\circ g$ to the identity. The same definition identifies such an isomorphism with an invertible $2$-morphism (and with its inverse-image mate). Consequently $f\\circ g$ is isomorphic to the identity geometric morphism.",
+   "uses": [
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XU (lemma-bigger-site), first paragraph of proof: identity composite"
+   }
+  },
+  {
+   "text": "Finally let $F,G\\in\\operatorname{Sh}(\\mathcal C)$. For $b:LF\\to LG$, its adjunct is $R(b)\\circ\\eta_F:F\\to RLG$. Define $a=\\eta_G^{-1}\\circ R(b)\\circ\\eta_F:F\\to G$. Naturality of $\\eta$ gives $R(L(a))\\circ\\eta_F=\\eta_G\\circ a=R(b)\\circ\\eta_F$, so injectivity of the adjunction bijection gives $L(a)=b$. Conversely if $b=L(a)$, the same naturality equation makes the displayed formula recover $a$. Thus the actual map $a\\mapsto L(a)$ on each Hom set has this explicit inverse. Hence $L=f^{-1}$ is fully faithful.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XU (lemma-bigger-site), last paragraph of proof: the adjunction Hom-set bijection and the invertible unit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "lem-trf-adjoint-triple-unit-counit",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00XU (lemma-bigger-site), 00XT (lemma-back-and-forth), 00XR (lemma-when-shriek), 00X6 (proposition-get-morphism). The 00XT right-adjoint calculation is explicit; its unit follows from the Mathlib adjoint-triple lemma instead of the source two-plus-construction argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +148,38 @@
    "results": "{\"t\": \"2026-10-17T19:02:37Z\", \"tool\": \"grep\", \"query\": \"fullyFaithful.*sheafPullback|isIso.*unit|sheafAdjunctionContinuous\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Comap.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/ExtensiveTopology.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\"], \"digest\": \"51c6f1900f17f34c\"}",
    "date": "2026-10-18",
    "verdict": "no match: read CoverLifting.lean:275-367, Pullback.lean:36-130 and DenseSubsite/SheafEquiv.lean:35-112. The adjunctions exist separately, but the invertible sheafified left-Kan unit and Stacks covering-family hypotheses require further proofs. Dense-subsite results impose cover-density, absent here, and therefore do not specialize to 00XU."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful continuous cocontinuous functor of sites preserving fibre products and final objects gives a bigger-site retraction with fully faithful sheafified left adjoint",
+   "results": "{\"t\": \"2026-10-17T19:19:01Z\", \"tool\": \"leanfinder\", \"query\": \"A fully faithful continuous cocontinuous functor of sites preserving fibre products and final objects gives a bigger-site retraction with fully faithful sheafified left adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"CategoryTheory.GrothendieckTopology.PreservesSheafification.transport\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\"], \"digest\": \"64d83e4bf6ff45c2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the full bigger-site statement: CoverLifting.lean:275-367 supplies the cocontinuous adjunction, and DenseSubsite/SheafEquiv.lean:97-108 adds cover-density absent here; pointwise presheaf lanUnit results do not address sheafification. The two phrasings (current and retained creation searches) gave only these pieces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit, CategoryTheory.Functor.sheafAdjunctionCocontinuous",
+   "results": "{\"t\": \"2026-10-17T19:19:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit, CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the full bigger-site statement: CoverLifting.lean:275-367 supplies the cocontinuous adjunction, and DenseSubsite/SheafEquiv.lean:97-108 adds cover-density absent here; pointwise presheaf lanUnit results do not address sheafification. The two phrasings (current and retained creation searches) gave only these pieces."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma-bigger-site|back-and-forth|sheafAdjunctionCocontinuous",
+   "results": "{\"t\": \"2026-10-17T19:19:02Z\", \"tool\": \"grep\", \"query\": \"lemma-bigger-site|back-and-forth|sheafAdjunctionCocontinuous\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean\"], \"digest\": \"e5a4edcbdd6dfd81\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the full bigger-site statement: CoverLifting.lean:275-367 supplies the cocontinuous adjunction, and DenseSubsite/SheafEquiv.lean:97-108 adds cover-density absent here; pointwise presheaf lanUnit results do not address sheafification. The two phrasings (current and retained creation searches) gave only these pieces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "fully faithful continuous cocontinuous site functor sheafified left Kan extension unit isomorphism",
+   "results": "{\"t\": \"2026-10-17T19:19:02Z\", \"tool\": \"leansearch\", \"query\": \"fully faithful continuous cocontinuous site functor sheafified left Kan extension unit isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsIsoAppLanUnit_1\", \"CategoryTheory.Functor.instIsIsoAppLanUnit\", \"CategoryTheory.Functor.instIsIsoAppUnitLanAdjunctionOfHasPointwiseLeftKanExtension\", \"CategoryTheory.Functor.leftKanExtensionUnit\", \"CategoryTheory.Adjunction.instIsIsoAppUnitObjOfFaithfulOfFull\", \"CategoryTheory.Equivalence.sheafCongr_unitIso\", \"CategoryTheory.Adjunction.instIsIsoAppUnitOfFullOfFaithful\", \"CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful\"], \"digest\": \"9e023036797c0bb4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the full bigger-site statement: CoverLifting.lean:275-367 supplies the cocontinuous adjunction, and DenseSubsite/SheafEquiv.lean:97-108 adds cover-density absent here; pointwise presheaf lanUnit results do not address sheafification. The two phrasings (current and retained creation searches) gave only these pieces."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-big-small-etale-exact-retraction",
@@ -87,5 +205,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-bigger-site-retraction",
+  "worker": "stage1",
+  "summary": "Kept the statement and all five hypotheses. Seven steps: finite limits from terminal objects and pullbacks; generic 00X6 geometric-morphism construction; 00XR adjoint triple; explicit fully faithful compatible-family counit inverse; canonical sheafified unit via the exact Mathlib adjoint-triple theorem; identity composite; explicit Hom-set inverse proving full faithfulness. One new Mathlib leaf, no unsplit lemmas. No SGA source, Lean writing or compilation.",
+  "blueprint": "Realizes the recorded ancestor normal-cone specialization through the exact small/big etale retraction (0DE5/0DDI): general Sites 00XU theorem needed by lem-trf-big-small-etale-exact-retraction. The sk-i-curve-zero unit route and its contraction/normal-cone step remain unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic 00X6 theorem: only the set-sheaf adjunction and finite-limit/colimit preservation clauses are used; no trace-formula node supplies this site infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "why": "Generic 00XR geometric morphism with compatible-family right adjoint and canonical counit formula; no trace-formula node supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-48e905e6d",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-48e905e6d (reviewer sub-agent of L); spot-checked: I read the whole delivery and checked it against Stacks sites.tex 00XU (lemma-bigger-site), 00XT (lemma-back-and-forth), 00XR (lemma-when-shriek) and 00X6 (proposition-get-morphism); the labels match tags/tags. Item hypotheses (a)-(e) match 00XU one for one. Writing (e) as u(e_C)≅e_D instead of = does not weaken anything because terminality is invariant under isomorphism. No conclusion is weakened, and the citer lem-trf-big-small-etale-exact-retraction uses only clauses the item states. Step 1: products come from fibre products over the final object and equalizers from pullback along the diagonal; u preserves both, and the step is elementary. Step 2: the hypotheses of lem-weil-pbc-left-exact-site-inverse-image-tensor (finite limits, covers preserved) hold. Its statement gives (u_pF)^# ⊣ restriction and exactness, so def-weil-pbc-sites-and-cohomology(3) defines the site morphism. Step 3: lem-weil-pbc-continuous-cocontinuous-topos-adjunction needs only (a) and (b). The roles are matched correctly (its L is our R, its R is our g_*), and its counit formula s_{U,id} is quoted correctly. Step 4: the explicit inverse built from full faithfulness is correct, including compatibility and naturality. Step 5: the Mathlib leaf Triple.isIso_unit_iff_isIso_counit (Adjunction/Triple.lean:54-75, read) matches exactly for L⊣R⊣g_*, so the canonical sheafified unit is invertible. Steps 6 and 7 (identity composite via def-trf-geometric-morphism; full faithfulness from the invertible unit) are correct. New node lem-trf-adjoint-triple-unit-counit: self-contained, an exact Mathlib leaf, tested on the identity triple, on {*}→{0<1}, and on ⊔⊣Δ⊣× (where both maps fail to be isomorphisms). rg finds no existing node stating it, and it is not a restated clause of the item. Its blueprint from/via fields are correct. I accept both declared tool_uses, the 00X6 and 00XR site lemmas, as generic black boxes; neither touches the sk-i-curve-zero route. No cycle, proof_deps equals the union of step uses, no SGA source. No changes were made."
  }
 }

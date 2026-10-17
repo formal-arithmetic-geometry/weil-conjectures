@@ -54,32 +54,42 @@
    }
   },
   {
-   "text": "The constructions in steps 1--2 have actual derived cone models, rather than arbitrary transformations on a triangulated category. Use the stable flat differential graded model of module complexes. Exact constant-coefficient inverse image preserves monomorphisms, flat terms and K-flat complexes, so it preserves the cofibrations (monomorphisms with K-flat flat-term cokernel) and their trivial instances. It is therefore a differential graded left Quillen functor; its derived-unit condition holds because it preserves quasi-isomorphisms. Its right adjoint derives with the canonical adjunction. The differential graded derived calculus supplies compatible units, counits, tensor and square mates, together with their composition homotopies. This checks the hypotheses of that calculus for the ordinary exchanges, including $R\\bar j_*$.",
+   "text": "Work in ordinary unbounded derived categories. Constant-coefficient inverse image is additive and exact; open extension by zero is exact as well. Their termwise derived functors are therefore triangulated. Every module complex has a K-injective resolution, so the unbounded right-derived-functor theorem applies to $R\\bar j_*$ and to each proper $Rr_*$. Equip each right adjoint with the shift structure determined by its left adjoint: the adjunction shift lemma makes both unit and counit shift-compatible, and the triangulated-right-adjoint theorem then gives exactness with these compatible shifts. Thus $T=i^*R\\bar j_*$, $T=q^*$ and $Ru_!=Rr_*j_!$ are triangulated. For tensor, choose a K-flat resolution $P$ of the fixed input. The descended total tensor bifunctor is independent of this model. The total differential gives $P\\otimes\\operatorname{Cone}(f)\\cong\\operatorname{Cone}(P\\otimes f)$: on the shifted summand of $P$-degree $p$ the identification has sign $(-1)^p$. Tensoring with $P$ preserves quasi-isomorphisms by K-flatness, so this cone identity descends to distinguished triangles. For the other variable, transport along the natural symmetry isomorphism $\\sigma$ (Koszul sign $(-1)^{pq}$ in bidegree $(p,q)$): on $P^p\\otimes C^{q+1}$ the shift identification of $P\\otimes C[1]$ carries $(-1)^p$ and that of $C[1]\\otimes P$ none, so $\\sigma$ commutes with these identifications and $-\\otimes^LN\\cong N\\otimes^L-$ as functors with shift; this gives exactness in the other variable. These arguments impose no lower bound on the complexes.",
    "uses": [
-    "lem-coef-sheaf-flat-model",
     "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-coef-dg-derived-quillen-calculus"
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint",
+    "lem-pc-kflat-resolution",
+    "def-kun-derived-tensor",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-kun-tensor-sym"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product); agent application of the cited differential graded model statements"
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor), 0A8D (lemma-adjoint-is-exact), 06YS (lemma-K-flat-resolution); agent application to ordinary unbounded derived functors and the total-tensor cone formula"
    }
   },
   {
-   "text": "For an open compactification factor $a$, extension by zero is exact. Its sheaf tensor identity shows that it sends flat sheaves to flat sheaves and K-flat complexes to K-flat complexes: tensoring $a_!P$ with an acyclic complex $N$ is $a_!(P\\otimes a^*N)$, which is acyclic. Consequently $a_!$ is also a differential graded left Quillen functor for the preceding flat models, and preserves all quasi-isomorphisms. Compose its enhanced functor with the enhanced proper direct image. The exchanges and compactification comparisons used above are obtained by units, counits, composition and inversion of the indicated enhanced equivalences, so the cited derived calculus provides their cone compatibility. Exact functors between these stable models preserve finite cofibres and shifts. Tensor has this property separately in either variable. This proves the shift/cone assertion on unbounded inputs without invoking the bounded-below filtered-lift theorem.",
+   "text": "Use the shift structures of step 3 throughout. Pullback composition is induced termwise, and hence commutes with shifts. The open tensor comparison is induced by the sheaf tensor identity on direct-sum total complexes, so it commutes with their signed shift identifications. For the right-adjoint tensor map, transpose its shift-compatibility square: both paths become the tensor of the two counits, with the same tensor shift identification. Their equality follows from shift compatibility of those counits. Thus $t$ is shift-compatible in either input. All ordinary square mates, projection maps and the map $d_u$ of step 2 are composites and whiskerings of these comparisons, units and counits. The composition/whiskering lemma therefore makes them shift-compatible. The unbounded compact-support comparisons on a compactification are proper exchange followed by the degreewise open comparison; their composition and refinement comparisons have the adjunction normalizations stated in the cited compact-support theorem. They consequently have the same compatibility. If a shift-compatible comparison $\\alpha$ is invertible, its shift equation $\\varphi_2\\alpha_{[1]}=\\alpha[1]\\varphi_1$ gives $\\varphi_1\\alpha_{[1]}^{-1}=\\alpha[1]^{-1}\\varphi_2$ by multiplication with the inverses. This covers the inverses used in $C_u$. Finally the shift-compatible-transformation lemma makes the three components of each transformation on a triangle a morphism of its image triangles. Step 3 says those triangles are distinguished. This proves the stated compatibility with derived cone triangles, also for tensor in either variable, on all the ambient unbounded inputs.",
    "uses": [
-    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+    "lem-kun-derived-pullback-composition-monoidal",
     "lem-pur-etale-open-derived-tensor",
-    "lem-coef-sheaf-flat-model",
-    "lem-coef-dg-derived-quillen-calculus",
+    "lem-sfb-monoidal-adjunction-mates",
+    "def-kun-projection-formula-map",
     "lem-amb-unbounded-compact-support-comparisons"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent application of derived enhancement calculus and the open tensor identity; unbounded cone models"
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/more-etale.tex",
+    "place": "Tags 0144 (definition-triangle), 014V (definition-exact-functor-triangulated-categories), 014Y (lemma-composition-exact), 0A8D (lemma-adjoint-is-exact), 0F7J (lemma-shriek-composition), 0F7L (lemma-base-change-shriek); agent unit/counit and shift-compatibility verification"
    }
   },
   {
@@ -234,17 +244,24 @@
   "lem-amb-unbounded-compact-support-comparisons",
   "def-trf-deformation-specialization",
   "def-kun-projection-formula-map",
-  "lem-coef-sheaf-flat-model",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-coef-dg-derived-quillen-calculus",
   "lem-weil-pbc-extension-by-zero-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sf-triangulated-right-adjoint",
+  "lem-pc-kflat-resolution",
+  "def-kun-derived-tensor",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-kun-tensor-sym",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
   "lem-pur-etale-open-derived-tensor",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-kun-proper-base-change-torsion-ring",
   "lem-weil-pbc-mate-pasting",
   "sbc-thm-bounded-derived-smooth-base-change",
   "lem-asd-compact-projection-exchange",
-  "lem-kun-tensor-sym",
   "lem-weil-pbc-strictly-henselian-sections-stalk",
   "lem-kun-0ezp",
   "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
@@ -330,7 +347,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-duality-operation-squares",
@@ -354,107 +371,131 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "item": "lem-trf-nearby-compact-tensor-coherence",
   "worker": "stage1",
-  "summary": "Expanded the counit-defined exchanges into fourteen steps, proving the composition, tensor, projection and counit formulas on ordinary unbounded etale categories, with finite-trait and reduction comparisons. Reused existing nodes throughout; no new nodes and no statement change. Maintainer reader (2026-10-18) made the statement precise without changing its content: the compact-support projection map PF_u is now spelled out on a compactification (proper projection map of def-kun-projection-formula-map followed by the open tensor comparison of lem-pur-etale-open-derived-tensor), and 'trait' cites def-sc-discrete-valuation-ring; both added to stmt_deps. Maintainer reader Q34 (2026-10-18): the statement now says explicitly that $h=u_{\\bar\\eta}$ in (i) and $h=u$ in (ii) and that unprimed source-fibre operations in the formulas are those of $h$ (as steps 2, 5, 6, 8, 10 already read them), and 'bounded constructible' cites def-weil-pbc-constructible-complexes (added to stmt_deps). No content change; proof untouched.",
+  "summary": "Expanded the counit-defined exchanges into fourteen steps, proving the composition, tensor, projection and counit formulas on ordinary unbounded etale categories, with finite-trait and reduction comparisons. Reused existing nodes throughout; no new nodes and no statement change. Maintainer reader (2026-10-18) made the statement precise without changing its content: the compact-support projection map PF_u is now spelled out on a compactification (proper projection map of def-kun-projection-formula-map followed by the open tensor comparison of lem-pur-etale-open-derived-tensor), and 'trait' cites def-sc-discrete-valuation-ring; both added to stmt_deps. Maintainer reader Q34 (2026-10-18): the statement now says explicitly that $h=u_{\\bar\\eta}$ in (i) and $h=u$ in (ii) and that unprimed source-fibre operations in the formulas are those of $h$ (as steps 2, 5, 6, 8, 10 already read them), and 'bounded constructible' cites def-weil-pbc-constructible-complexes (added to stmt_deps). No content change; proof untouched. Repair by Q25 (2026-10-18, ordinary-derived route pivot): replaced proof indices 2--3 by termwise exact functors, K-injective right derived functors, the triangulated-right-adjoint theorem, K-flat total tensor cone identities, and shift-compatible adjunction transformations. Removed both dropped dg/model nodes from the proof and current tool-use declarations. The statement and other twelve proof steps are unchanged; no new nodes. Maintainer reader Q25 (2026-10-18): step 3 now cites lem-kun-tensor-sym for exactness of derived tensor in the second variable and writes the sign check that the symmetry commutes with the shift identifications; no other change.",
   "blueprint": "lem-trf-local-term-locality proof (1)--(2): the structural part of normal-cone specialization, Varshavsky 1.3.2 and 4.1.4(b), before nearby Verdier duality.",
   "tool_uses": [
    {
     "node": "prop-weil-pbc-inverse-image-modules-exact",
-    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact used only for its stated ordinary etale or abstract categorical interface in steps 1, 3, 11, 12; the local-term unit supplies no replacement for this tool."
+    "why": "Inverse image of etale sheaves of modules over a constant ring is exact: used in steps 1, 3, 11, 12 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-kun-inverse-image-monoidal",
-    "why": "Generic Monoidality of the derived inverse image used only for its stated ordinary etale or abstract categorical interface in steps 1, 12; the local-term unit supplies no replacement for this tool."
+    "why": "Monoidality of the derived inverse image: used in steps 1, 12 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-kun-derived-pullback-composition-monoidal",
-    "why": "Generic Canonical derived etale inverse-image composition is monoidal used only for its stated ordinary etale or abstract categorical interface in steps 1, 6, 7, 8, 14; the local-term unit supplies no replacement for this tool."
+    "why": "Canonical derived etale inverse-image composition is monoidal: used in steps 1, 4, 6, 7, 8, 14 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-sfb-monoidal-adjunction-mates",
-    "why": "Generic Lax and oplax monoidal structures transferred by adjunction used only for its stated ordinary etale or abstract categorical interface in steps 1; the local-term unit supplies no replacement for this tool."
+    "why": "Lax and oplax monoidal structures transferred by adjunction: used in steps 1, 4 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-sfb-monoidal-adjunction-unit-counit",
-    "why": "Generic Unit and counit of a monoidal adjunction are monoidal used only for its stated ordinary etale or abstract categorical interface in steps 1, 8, 10, 14; the local-term unit supplies no replacement for this tool."
+    "why": "Unit and counit of a monoidal adjunction are monoidal: used in steps 1, 8, 10, 14 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "thm-nagata-compactification",
-    "why": "Generic Nagata compactification, [stacks-project] used only for its stated ordinary etale or abstract categorical interface in steps 2; the local-term unit supplies no replacement for this tool."
+    "why": "Nagata compactification, [stacks-project]: used in steps 2 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used only for its stated ordinary etale or abstract categorical interface in steps 2; the local-term unit supplies no replacement for this tool."
+    "why": "A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6): used in steps 2 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-amb-unbounded-compact-support-comparisons",
-    "why": "Generic Unbounded ordinary etale compact-support comparisons used only for its stated ordinary etale or abstract categorical interface in steps 2, 4, 5, 7, 9, 12, 14; the local-term unit supplies no replacement for this tool."
-   },
-   {
-    "node": "lem-coef-sheaf-flat-model",
-    "why": "Generic Monoidal flat model for unbounded complexes on a ringed site used only for its stated ordinary etale or abstract categorical interface in steps 3, 4; the local-term unit supplies no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic Derived tensor comparison for arbitrary ringed topoi used only for its stated ordinary etale or abstract categorical interface in steps 3; the local-term unit supplies no replacement for this tool."
-   },
-   {
-    "node": "lem-coef-dg-derived-quillen-calculus",
-    "why": "Generic Enhanced derived adjunction and monoidal Quillen calculus used only for its stated ordinary etale or abstract categorical interface in steps 3, 4; the local-term unit supplies no replacement for this tool."
+    "why": "Unbounded ordinary etale compact-support comparisons: used in steps 2, 4, 5, 7, 9, 12, 14 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-weil-pbc-extension-by-zero-exact",
-    "why": "Generic Extension by zero is exact (étale site) used only for its stated ordinary etale or abstract categorical interface in steps 4; the local-term unit supplies no replacement for this tool."
+    "why": "Extension by zero is exact (étale site): used in steps 3 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "An exact functor of abelian categories induces a triangulated functor on derived categories: used in steps 3 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Existence of K-injective resolutions: used in steps 3 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "The unbounded right derived functor is triangulated: used in steps 3 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "why": "Shift isomorphisms compatible with an adjunction: counit from unit, and uniqueness on the right adjoint: used in steps 3, 4 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-sf-triangulated-right-adjoint",
+    "why": "A shift-compatible right adjoint of a triangulated functor is triangulated: used in steps 3 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of K-flat resolutions on a ringed site: used in steps 3 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Derived tensor and K-flat representative descent on a ringed site: used in steps 3 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "why": "Composites and whiskerings of shift-compatible natural transformations are shift-compatible: used in steps 4 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+    "why": "A shift-compatible natural transformation gives morphisms of the image triangles: used in steps 4 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-pur-etale-open-derived-tensor",
-    "why": "Generic Open extension by zero and unbounded derived tensor on ordinary etale sites used only for its stated ordinary etale or abstract categorical interface in steps 4; the local-term unit supplies no replacement for this tool."
+    "why": "Open extension by zero and unbounded derived tensor on ordinary etale sites: used in steps 4 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "why": "Generic Canonical composition comparison for unbounded ringed-topos direct images used only for its stated ordinary etale or abstract categorical interface in steps 5, 11, 13; the local-term unit supplies no replacement for this tool."
+    "why": "Canonical composition comparison for unbounded ringed-topos direct images: used in steps 5, 11, 13 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-kun-proper-base-change-torsion-ring",
-    "why": "Generic Unbounded proper base change over a torsion coefficient ring used only for its stated ordinary etale or abstract categorical interface in steps 5, 13; the local-term unit supplies no replacement for this tool."
+    "why": "Unbounded proper base change over a torsion coefficient ring: used in steps 5, 13 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-weil-pbc-mate-pasting",
-    "why": "Generic Mates of pasted squares and of conjugate-whiskered squares used only for its stated ordinary etale or abstract categorical interface in steps 5, 7, 8, 10, 12, 14; the local-term unit supplies no replacement for this tool."
+    "why": "Mates of pasted squares and of conjugate-whiskered squares: used in steps 5, 7, 8, 10, 12, 14 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "sbc-thm-bounded-derived-smooth-base-change",
-    "why": "Generic Bounded derived smooth base change used only for its stated ordinary etale or abstract categorical interface in steps 6; the local-term unit supplies no replacement for this tool."
+    "why": "Bounded derived smooth base change: used in steps 6 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-asd-compact-projection-exchange",
-    "why": "Generic Compact-support projection maps commute with etale exchange used only for its stated ordinary etale or abstract categorical interface in steps 9, 10; the local-term unit supplies no replacement for this tool."
+    "why": "Compact-support projection maps commute with etale exchange: used in steps 9, 10 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-kun-tensor-sym",
-    "why": "Generic Symmetry of the derived tensor product used only for its stated ordinary etale or abstract categorical interface in steps 9; the local-term unit supplies no replacement for this tool."
+    "why": "Symmetry of the derived tensor product: used in steps 3, 9 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-weil-pbc-strictly-henselian-sections-stalk",
-    "why": "Generic Global sections over a strictly henselian local scheme are the stalk at the closed point used only for its stated ordinary etale or abstract categorical interface in steps 11; the local-term unit supplies no replacement for this tool."
+    "why": "Global sections over a strictly henselian local scheme are the stalk at the closed point: used in steps 11 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-kun-0ezp",
-    "why": "Generic Cohomology of a separably closed field vanishes in positive degrees used only for its stated ordinary etale or abstract categorical interface in steps 11; the local-term unit supplies no replacement for this tool."
+    "why": "Cohomology of a separably closed field vanishes in positive degrees: used in steps 11 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-    "why": "Generic A surjective closed immersion is a universal homeomorphism used only for its stated ordinary etale or abstract categorical interface in steps 12, 13; the local-term unit supplies no replacement for this tool."
+    "why": "A surjective closed immersion is a universal homeomorphism: used in steps 12, 13 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
-    "why": "Generic Base change equivalence for universal homeomorphisms used only for its stated ordinary etale or abstract categorical interface in steps 12, 13; the local-term unit supplies no replacement for this tool."
+    "why": "Base change equivalence for universal homeomorphisms: used in steps 12, 13 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    },
    {
     "node": "lem-weil-pbc-finite-proper",
-    "why": "Generic Finite morphisms are proper used only for its stated ordinary etale or abstract categorical interface in steps 13; the local-term unit supplies no replacement for this tool."
+    "why": "Finite morphisms are proper: used in steps 13 only for its stated ordinary-derived, etale or categorical interface; the local-term unit supplies no replacement for this generic tool."
    }
   ]
  },
@@ -482,14 +523,23 @@
   "lem-kun-0ezp",
   "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
   "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
-  "lem-weil-pbc-finite-proper"
+  "lem-weil-pbc-finite-proper",
+  "lem-sf-exact-functor-derived-triangulated",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sf-triangulated-right-adjoint",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q34-c19de4b52",
-  "group": "Q34",
+  "reviewer": "NT-cc-Q25-28d50129a",
+  "group": "Q25",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-c19de4b52 (reviewer sub-agent of L); spot-checked: I read the whole item: all 14 steps, the statement and stmt_deps of all 39 cited nodes, unit sk-i-curve-zero, chapter sec-trace-formula, and Varshavsky 1.3.1-1.3.3, Def. 4.1.3 and 4.1.4(b). The delivery's only change against the side DAG is status unsplit->split. The content is the version already merged after Q36's reviewer FIX. Source match: b_u is Varshavsky's BC^*. C_u is BC_!: inverse compact base change along i, then the j^*-adjoint of (generic compact base change, then counit); it also matches def-trf-deformation-specialization. t_Z is the lax map of 4.1.4(b). The proper and smooth clauses are 1.3.2(c); composition, b-monoidality and normalisation are axioms (III), (IV) and (II). The coefficient category is the ordinary unbounded D(T_et,A) with A=O_E/varpi^n and l!=p; no pro-etale category is substituted. Hypotheses: Nagata applies and every scheme is Noetherian, including Y_etabar and Z_K, as lem-amb-unbounded-compact-support-comparisons and lem-asd-compact-projection-exchange require. Proper base change holds for a torsion ring on unbounded inputs. For smooth base change, jbar_Y is affine hence qcqs, l^m kills A and is invertible, and inputs are D^b_c. Psi_B A=A via the strictly henselian stalk lemma and 0EZP. For the trait extension, t=v s^e with no residue extension, and Z_0 sits in Z x_B Spec(O_B'/s^e) as a nilpotent thickening. lem-asd's Pi is sigma.PF.sigma, so it agrees with PF_u. I typechecked every displayed equation. Edge cases: identity, empty scheme, Spec F, P^1_B, e>1, and A=Z/l^2 with an unbounded-below tensor; no invertibility of t is claimed. No new nodes; neighbouring nearby-cycle nodes are not duplicates; no SGA. I accept the 24 declared tool_uses. FIX (B2/B3), with the corrected item in fixes/: (1) the statement now says h=u_etabar in (i) and h=u in (ii), and that unprimed source-fibre u^*, Ru_*, Ru_!, PF_u, mu_u, eps_u mean the operations for h, as the steps already read them; (2) 'bounded constructible' now cites def-weil-pbc-constructible-complexes, added to stmt_deps. Content unchanged, proof untouched.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-28d50129a (reviewer sub-agent of L); spot-checked: Read the item in full: statement, all 14 steps, the 17 nodes cited by the replaced steps 2-3, the repair note, Stacks 015F/0A8D/06YS/014Y and Varshavsky 1.3.2(b)-(c), 1.3.3(a), Def 4.1.3, 4.1.4(b). Pivot: the repair note names machinery only at 0-based steps 2 and 3 (lem-coef-dg-derived-quillen-calculus, lem-coef-sheaf-flat-model) and says all other steps keep their route and citations. Both steps were rewritten on the ordinary derived route: termwise exact functors (lem-sf-exact-functor-derived-triangulated), K-injective right derived functors, a shift-compatible adjunction feeding lem-sf-triangulated-right-adjoint, a K-flat cone identity (I checked the sign (-1)^p) and commshift composition/whiskering plus the triangle-morphism lemma. The 12 verbatim steps cite no machinery, so keeping them is what the note asks. 'quillen' occurs only in the maintainer-owned historical top-level tool_uses, which the delivery may not edit; there is no citation in any step, proof_deps, stmt_deps or split_report.tool_uses. The merge should replace tool_uses by the accepted 30 split_report.tool_uses, which drops lem-coef-dg-derived-quillen-calculus, lem-coef-sheaf-flat-model and the unused lem-weil-pbc-ringed-topoi-derived-tensor-pullback. Maps match Varshavsky: b=BC^*, C=BC_!, t_Z as in 4.1.4(b). The coefficient category is ordinary unbounded D(T_et, A_{E,n}). Statement unchanged; no new nodes; no SGA; all off-route statements are declared. One FIX (C1): step 2 got exactness in the second tensor variable by 'interchanging factors' with no citation. It now cites lem-kun-tensor-sym and writes the Koszul-sign check that the symmetry commutes with the shift identifications. proof_deps was recomputed and the tool_uses 'why' updated; the corrected item is in fixes/.; 1 file(s) fixed by the reviewer"
  }
 }
