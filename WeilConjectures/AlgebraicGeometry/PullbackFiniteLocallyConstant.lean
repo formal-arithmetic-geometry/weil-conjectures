@@ -11,6 +11,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAbelianLift
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # Pullback of finite locally constant abelian etale sheaves
@@ -106,14 +107,15 @@ private theorem underlying_locallyConstant_upperStar {X Y : Scheme.{u}} (g : Y �
 
 private theorem finiteLocallyConstant_of_iso {X : Scheme.{u}}
     {G H : Sheaf X.smallEtaleTopology (Type (u + 1))} (e : G ≅ H)
-    (hG : IsFiniteLocallyConstantEtaleSheafOfSets G) :
-    IsFiniteLocallyConstantEtaleSheafOfSets H := by
+    (hG : IsFiniteLocallyConstantSheafOfTypes G) :
+    IsFiniteLocallyConstantSheafOfTypes H := by
   obtain ⟨⟨𝒰, h𝒰⟩, hf⟩ := hG
   refine ⟨⟨𝒰, fun j ↦ ?_⟩, ?_⟩
   · have := h𝒰 j
     exact Sheaf.isConstant_congr _ ((X.smallEtaleTopology.overPullback _ _).mapIso e)
-  · intro Ω _ _ s
-    have := hf Ω s
+  · refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
+    have := (ConcreteCategory.isFinitelyGenerated_iff_finite _).mp
+      (hf.isFinitelyGenerated_sheafFiber Ω s)
     exact Finite.of_equiv _ (((pointSmallEtale s).sheafFiber.mapIso e).toEquiv)
 
 /-- Pullback along a composite agrees with iterated pullback, and preserves finite local
@@ -142,14 +144,14 @@ Proof:
    along the inverse of the composition isomorphism from step 1 -/
 theorem pullback_finite_locally_constant {T Y Y' : Scheme.{u}}
     (g : Y' ⟶ Y) (f : Y ⟶ T) (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
-    (hF : IsFiniteLocallyConstantEtaleSheafOfSets
+    (hF : IsFiniteLocallyConstantSheafOfTypes
       ((sheafCompose Y.smallEtaleTopology
         (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
         ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj F))) :
     Nonempty (((Etale.upperStar AddCommGrpCat.{u + 1} (g ≫ f)).obj F) ≅
       ((Etale.upperStar AddCommGrpCat.{u + 1} g).obj
         ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj F))) ∧
-    IsFiniteLocallyConstantEtaleSheafOfSets
+    IsFiniteLocallyConstantSheafOfTypes
       ((sheafCompose Y'.smallEtaleTopology
         (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
         ((Etale.upperStar AddCommGrpCat.{u + 1} (g ≫ f)).obj F)) := by
@@ -158,11 +160,11 @@ theorem pullback_finite_locally_constant {T Y Y' : Scheme.{u}}
   refine ⟨⟨c⟩, finiteLocallyConstant_of_iso
     ((sheafCompose _ (CategoryTheory.forget AddCommGrpCat.{u + 1})).mapIso c.symm) ?_⟩
   refine ⟨underlying_locallyConstant_upperStar g G hF.1, ?_⟩
-  intro Ω _ _ s
+  refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
   have hfinite : Finite (((pointSmallEtale (s ≫ g)).sheafFiber
       (A := Type (u + 1))).obj
         ((sheafCompose _ (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G)) :=
-    hF.2 Ω (s ≫ g)
+    hF.finite_sheafFiber Ω (s ≫ g)
   have : CategoryTheory.Limits.PreservesFilteredColimitsOfSize.{u, u}
       (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
     CategoryTheory.Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1}

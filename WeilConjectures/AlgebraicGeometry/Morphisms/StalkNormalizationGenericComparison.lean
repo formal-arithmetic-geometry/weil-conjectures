@@ -53,8 +53,6 @@ private theorem normalization_iso_of_iso_over {X Y T : Scheme.{u}}
     · simp
   exact ⟨⟨a, b, hab, hba⟩, by simp [a]⟩
 
--- The retained normality and generic-open hypotheses are unnecessary for this comparison.
-set_option linter.unusedVariables false in
 /-- The concrete stalk pullback is the normalization of a generic Galois cover of the
 smooth local total space, with the comparison commuting with the maps to that space.
 
@@ -85,13 +83,12 @@ ramification theory are not used in this comparison. -/
 theorem GaloisCover.stalk_normalization_generic_comparison {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
-    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]
     (G : Type (u + 1)) [Group G] [Finite G]
     {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)
     (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)
     (Z : GaloisCover G Cη)
-    (U : S.Opens) (hηU : genericPoint S ∈ U)
+    (U : S.Opens)
     (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
     (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)
     (hψ : IsPullback ψ Z.π PA.obj.hom jU)

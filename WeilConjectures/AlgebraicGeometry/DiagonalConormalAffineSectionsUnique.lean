@@ -9,6 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalConormalDerivation
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
+/-! # Uniqueness of normalized diagonal conormal derivations on sections
+
+Two diagonal conormal derivations normalized by the kernel class map agree on the
+sections over every open (Stacks Project, Tag 08S2). -/
+
 @[expose] public section
 
 universe u

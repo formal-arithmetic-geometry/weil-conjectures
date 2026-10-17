@@ -10,9 +10,9 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Ample
+import Mathlib.AlgebraicGeometry.Artinian
 import Mathlib.AlgebraicGeometry.Limits
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import WeilConjectures.AlgebraicGeometry.ZeroDimensionalNoetherianFiniteDiscrete
 
 /-! # Affineness and ampleness in dimension zero
 
@@ -113,8 +113,9 @@ Source: Stacks Project, Properties, Lemmas 0AAX and 0CKV, and Definition 01PS
 (blueprint: lem-sc-zero-dim-noetherian-affine).
 
 Proof:
-1. Apply `finite_and_discreteTopology_of_topologicalKrullDim_le_zero`, including the
-empty case, and install its finite and discrete topology instances.
+1. The dimension bound makes `Y` locally Artinian
+(`IsLocallyArtinian.of_topologicalKrullDim_le_zero`), hence Artinian, so its underlying
+space is finite (`IsArtinianScheme.finite`) and discrete. This includes the empty case.
 2. Mathlib's finite-discrete scheme instance gives `IsAffine Y` directly.
 3. Take tensor power one. Transport the global section `1` along the inverse right
 unitor to obtain a section of this tensor power. Choose the top affine open.
@@ -128,9 +129,8 @@ theorem isAffine_and_isAmple_tensorUnit_of_dim_le_zero (Y : Scheme.{u})
     [IsLocallyNoetherian Y] [CompactSpace Y] [Y.IsSeparated]
     (hdim : topologicalKrullDim Y ≤ 0) :
     IsAffine Y ∧ IsAmple Y (𝟙_ Y.Modules) := by
-  have hfd := finite_and_discreteTopology_of_topologicalKrullDim_le_zero Y hdim
-  have : Finite Y := hfd.1
-  have : DiscreteTopology Y := hfd.2
+  have : IsLocallyArtinian Y := .of_topologicalKrullDim_le_zero hdim
+  have : IsArtinianScheme Y := {}
   have h_aff : IsAffine Y := inferInstance
   exact ⟨h_aff, isAmple_tensorUnit_of_affine Y h_aff⟩
 

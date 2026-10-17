@@ -6,13 +6,14 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.Gm
-public import WeilConjectures.FieldTheory.GaloisUnitsCohomology
-import WeilConjectures.FieldTheory.GaloisUnitsHomogeneousComparison
-import WeilConjectures.AlgebraicGeometry.EtaleUnitsTwoCocycleComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleStalkContinuousCohomology
+public import WeilConjectures.AlgebraicGeometry.EtaleUnitsGaloisPointStalk
 
 /-!
 # Degree-two comparison for the multiplicative sheaf over a field
+
+The cohomological Brauer group `H²(Spec K_ét, 𝔾ₘ)` of a field `K` is the second continuous
+Galois cohomology of the units of a separable closure.
 
 Source: Stacks Project, Lemmas 04JQ and 03QU, Example 03QV (2), and Section 0DVG.
 (blueprint: lem-sc-etale-galois-units-comparison).
@@ -24,35 +25,27 @@ universe u
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Second continuous Galois cohomology of separable-closure units computes the second
-etale cohomology of the multiplicative group over a field.
+/-- The second étale cohomology of the multiplicative group over a field `K` is the second
+continuous Galois cohomology of the units of the separable closure `Ks` of `K`.
 
-Proof: choose a geometric point with algebraically closed residue field containing the
-separable closure. Its stalk functor is an exact equivalence between abelian etale
-sheaves on `Spec K` and discrete modules with continuous absolute Galois action. The
-stalk of `gmSheaf` is the unit group of the separable closure with its natural action:
-etale neighbourhoods of the point see precisely finite separable extensions. Under
-this equivalence, global sections are invariants. An exact equivalence preserves
-injectives, so applying invariants to the transported injective resolution identifies
-the right derived functors of sections and invariants in every degree. The continuous
-cochain resolution computes derived invariants for discrete modules over a profinite
-group; the homogeneous cochain model is the one in `Field.GaloisUnitsH2`. Take degree
-two and forget the group structures. Here the Galois group is compact Hausdorff, so
-the compact-open exponential law identifies the iterated continuous maps used by
-Mathlib with continuous maps on finite powers of the group. The homogeneous and
-inhomogeneous complexes agree by the usual change of variables. Topological-module
-homology has the underlying algebraic kernel modulo image, so its topology does not
-change the cohomology classes. Universe lifts in `gmSheaf` only lift the
-coefficient group, and their canonical equivalences induce the same cohomology.
+This is `AlgebraicGeometry.Scheme.sheafHAddEquivContinuousCohomology` for `𝔾ₘ`, whose stalk
+at the Galois point is identified with `Ksˣ` by evaluation of germs at the geometric point
+(`AlgebraicGeometry.Scheme.gmSheafFiberGaloisPointAddEquiv`). It is the composite of the
+comparison of étale cohomology over a field with `Ext` in discrete Galois modules
+(`AlgebraicGeometry.Scheme.sheafHAddEquivGaloisH`) and the computation of this `Ext` by
+continuous homogeneous cochains (`DiscreteModule.hAddEquivContinuousCohomology`). The stalk of
+`𝔾ₘ` is the group of units of `Ks` even when `K` is imperfect. This additive equivalence and
+its inverse supersede the former one-sided embeddings
+(blueprint: lem-sc-etale-units-h2-forward-embedding)
+(blueprint: lem-sc-etale-units-h2-reverse-embedding).
 
 Source: Stacks Project, Lemmas 04JQ and 03QU, Example 03QV (2), and Section 0DVG.
-The source's geometric point uses an algebraic closure; its multiplicative stalk is
-still separable-closure units even when the base field is imperfect.
 (blueprint: lem-sc-etale-galois-units-comparison). -/
-theorem nonempty_equiv_galoisUnitsH2_cohomologicalBrauerGroup (K : Type u) [Field K] :
-    Nonempty (Field.GaloisUnitsH2 K ≃ (Spec (.of K)).CohomologicalBrauerGroup) := by
-  obtain ⟨eCochains⟩ := Field.nonempty_equiv_galoisUnitsH2_twoCocycleClasses K
-  obtain ⟨eEtale⟩ := nonempty_equiv_twoCocycleClasses_cohomologicalBrauerGroup K
-  exact ⟨eCochains.trans eEtale⟩
+noncomputable def cohomologicalBrauerGroupAddEquivGaloisUnitsH2 (K : Type u) [Field K] :
+    (Spec (.of K)).CohomologicalBrauerGroup ≃+ Field.GaloisUnitsH2 K :=
+  haveI : DiscreteTopology (Field.galoisUnitsTopRep K).V := ⟨rfl⟩
+  sheafHAddEquivContinuousCohomology K (SeparableClosure K) (Spec (.of K)).gmSheaf
+    (Field.galoisUnitsTopRep K) (gmSheafFiberGaloisPointAddEquiv K)
+    (gmSheafFiberGaloisPointAddEquiv_presheafFiberAct K) 2
 
 end AlgebraicGeometry.Scheme

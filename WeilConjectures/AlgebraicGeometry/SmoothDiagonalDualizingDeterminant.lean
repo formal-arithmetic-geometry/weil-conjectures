@@ -8,7 +8,7 @@ module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
@@ -105,7 +105,7 @@ theorem smoothDiagonal_dualizing_determinant
     Nonempty ((c.obj OP).obj ≅
       ((DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj
-          (Scheme.Modules.exteriorSheaf
+          (Scheme.Modules.exteriorPower
             (SheafOfModules.homObj (R := X.sheaf) f.relativeDifferentials
               (SheafOfModules.unit X.ringCatSheaf)) d))⟦-(d : ℤ)⟧) := by
   classical

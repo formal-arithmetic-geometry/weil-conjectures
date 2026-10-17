@@ -172,10 +172,10 @@ summand as the original extension. Injectivity of the Ext-one direct-sum compari
 (lem-weil-pbc-ext-one-direct-sum) gives an isomorphism of extensions fixing both ends. -/
 theorem extension_descends_of_summands
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
-    (_hflat : (algebraMap R S).Flat)
+    (hflat : (algebraMap R S).Flat)
     {N : Type w} [AddCommGroup N] [Module R N]
     {J : Type x} (C : J → Type y) [∀ j, AddCommGroup (C j)] [∀ j, Module R (C j)]
-    (_hC : ∀ (j : J) (T : Type z) [AddCommGroup T] [Module S T]
+    (hC : ∀ (j : J) (T : Type z) [AddCommGroup T] [Module S T]
       (a : S ⊗[R] N →ₗ[S] T) (b : T →ₗ[S] S ⊗[R] C j),
       Function.Injective a → Function.Exact a b → Function.Surjective b →
       ∃ (E : Type (max w y)) (_ : AddCommGroup E) (_ : Module R E)
@@ -186,8 +186,8 @@ theorem extension_descends_of_summands
           b.comp θ.toLinearMap = q.baseChange S)
     {T : Type z} [AddCommGroup T] [Module S T]
     (a : S ⊗[R] N →ₗ[S] T) (b : T →ₗ[S] S ⊗[R] (⨁ j, C j))
-    (_ha : Function.Injective a) (_hab : Function.Exact a b)
-    (_hb : Function.Surjective b) :
+    (ha : Function.Injective a) (hab : Function.Exact a b)
+    (hb : Function.Surjective b) :
     ∃ (E : Type (max w x y)) (_ : AddCommGroup E) (_ : Module R E)
       (i : N →ₗ[R] E) (q : E →ₗ[R] (⨁ j, C j)),
       Function.Injective i ∧ Function.Exact i q ∧ Function.Surjective q ∧
@@ -216,12 +216,12 @@ theorem extension_descends_of_summands
     let aj : S ⊗[R] N →ₗ[S] P := a.codRestrict P (by
       intro n
       change b (a n) ∈ f.range
-      rw [_hab.apply_apply_eq_zero]
+      rw [hab.apply_apply_eq_zero]
       exact Submodule.zero_mem _)
     let bj : P →ₗ[S] S ⊗[R] C j := r.comp (b.comp P.subtype)
     have haj : Function.Injective aj := by
       intro n n' h
-      exact _ha (congrArg Subtype.val h)
+      exact ha (congrArg Subtype.val h)
     have habj : Function.Exact aj bj := by
       intro t
       constructor
@@ -230,21 +230,21 @@ theorem extension_descends_of_summands
           rw [← hP t]
           change f (bj t) = 0
           rw [ht, map_zero]
-        obtain ⟨n, hn⟩ := (_hab t).mp hbt
+        obtain ⟨n, hn⟩ := (hab t).mp hbt
         exact ⟨n, Subtype.ext hn⟩
       · rintro ⟨n, rfl⟩
         change r (b (a n)) = 0
-        rw [_hab.apply_apply_eq_zero, map_zero]
+        rw [hab.apply_apply_eq_zero, map_zero]
     have hbj : Function.Surjective bj := by
       intro c
-      obtain ⟨t, ht⟩ := _hb (f c)
+      obtain ⟨t, ht⟩ := hb (f c)
       refine ⟨⟨t, ?_⟩, ?_⟩
       · change b t ∈ f.range
         exact ⟨c, ht.symm⟩
       · change r (b t) = c
         rw [ht, hrf_apply]
     obtain ⟨E, hAdd, hMod, i, q, hi, hiq, hq, θ, hθi, hθq⟩ :=
-      _hC j P aj bj haj habj hbj
+      hC j P aj bj haj habj hbj
     let k : S ⊗[R] E →ₗ[S] T := P.subtype.comp θ.toLinearMap
     refine ⟨E, hAdd, hMod, i, q, hi, hiq, hq, k, ?_, ?_⟩
     · change P.subtype.comp (θ.toLinearMap.comp (i.baseChange S)) = a
@@ -307,7 +307,7 @@ theorem extension_descends_of_summands
       (TensorProduct.mk R S (⨁ j, C j) 1).comp qF := by
     apply extension_map_ext C E iF qF hiqF q hq f hfq
     · intro n
-      simp [hgi0, a0, _hab.apply_apply_eq_zero, hiqF.apply_apply_eq_zero]
+      simp [hgi0, a0, hab.apply_apply_eq_zero, hiqF.apply_apply_eq_zero]
     · intro j e
       simp only [LinearMap.comp_apply, LinearMap.coe_restrictScalars, hgf0, hfq]
       change b (k j (1 ⊗ₜ[R] e)) = 1 ⊗ₜ[R] DirectSum.lof R J C j (q j e)
@@ -315,7 +315,7 @@ theorem extension_descends_of_summands
   have hbg : b.comp g = qF.baseChange S := by
     ext e
     simpa [hg] using DFunLike.congr_fun hb0 e
-  let : Module.Flat R S := (RingHom.flat_algebraMap_iff).mp _hflat
+  let : Module.Flat R S := (RingHom.flat_algebraMap_iff).mp hflat
   have hex : Function.Exact (iF.baseChange S) (qF.baseChange S) := by
     change Function.Exact (iF.lTensor S) (qF.lTensor S)
     exact Module.Flat.lTensor_exact S hiqF
@@ -330,7 +330,7 @@ theorem extension_descends_of_summands
     obtain ⟨n, hn⟩ := (hex _).mp hqz
     have han : a n = 0 := by
       rw [← hgi, LinearMap.comp_apply, hn, hz]
-    have hn0 : n = 0 := _ha (han.trans (map_zero a).symm)
+    have hn0 : n = 0 := ha (han.trans (map_zero a).symm)
     have hsub : x - y = 0 := by rw [← hn, hn0, map_zero]
     exact sub_eq_zero.mp hsub
   have hgsur : Function.Surjective g := by
@@ -338,7 +338,7 @@ theorem extension_descends_of_summands
     obtain ⟨x, hx⟩ := hsur (b t')
     have ht : b (t' - g x) = 0 := by
       rw [map_sub, ← LinearMap.comp_apply, hbg, hx, sub_self]
-    obtain ⟨n, hn⟩ := (_hab _).mp ht
+    obtain ⟨n, hn⟩ := (hab _).mp ht
     refine ⟨x + iF.baseChange S n, ?_⟩
     have hgin : g (iF.baseChange S n) = a n := DFunLike.congr_fun hgi n
     rw [map_add, hgin, hn]

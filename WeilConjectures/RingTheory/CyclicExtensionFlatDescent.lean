@@ -55,14 +55,14 @@ Proof:
    is bijective and gives the required linear equivalence. -/
 theorem exists_cyclic_extension_flat_descent
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
-    (_hflat : (algebraMap R S).Flat) (I : Ideal R) (_hI : I.FG)
-    (_hquot : Function.Bijective
+    (hflat : (algebraMap R S).Flat) (I : Ideal R) (hI : I.FG)
+    (hquot : Function.Bijective
       (Ideal.quotientMap (I.map (algebraMap R S)) (algebraMap R S) Ideal.le_comap_map))
-    (n : ℕ) (_hn : 1 ≤ n)
+    (n : ℕ) (hn : 1 ≤ n)
     {N : Type w} [AddCommGroup N] [Module R N]
     {T : Type x} [AddCommGroup T] [Module S T]
     (a : S ⊗[R] N →ₗ[S] T) (b : T →ₗ[S] S ⊗[R] (R ⧸ I ^ n))
-    (_ha : Function.Injective a) (_hab : Function.Exact a b)
+    (ha : Function.Injective a) (hab : Function.Exact a b)
     (_hb : Function.Surjective b) :
     ∃ (E : Type (max u w)) (_ : AddCommGroup E) (_ : Module R E)
       (j : N →ₗ[R] E) (q : E →ₗ[R] (R ⧸ I ^ n)),
@@ -73,14 +73,14 @@ theorem exists_cyclic_extension_flat_descent
   classical
   let : Module R T := Module.restrictScalars R S T
   let : IsScalarTower R S T := IsScalarTower.restrictScalars R S T
-  have : Module.Flat R S := RingHom.flat_algebraMap_iff.mp _hflat
+  have : Module.Flat R S := RingHom.flat_algebraMap_iff.mp hflat
   let J := I ^ n
   obtain ⟨τ, hτ⟩ := _hb (1 ⊗ₜ[R] (1 : R ⧸ J))
   let ar := a.restrictScalars R
   let c : J →ₗ[R] T := (LinearMap.id : R →ₗ[R] R).smulRight τ |>.comp J.subtype
   have hc : ∀ r : J, c r ∈ LinearMap.range ar := by
     intro r
-    apply (_hab (c r)).mp
+    apply (hab (c r)).mp
     change b ((r : R) • τ) = 0
     rw [map_smul_of_tower, hτ, ← TensorProduct.tmul_smul]
     have hr : (r : R) • (1 : R ⧸ J) = 0 := by
@@ -88,15 +88,15 @@ theorem exists_cyclic_extension_flat_descent
       simpa using (Ideal.Quotient.eq_zero_iff_mem.mpr r.property)
     rw [hr, TensorProduct.tmul_zero]
   let d : J →ₗ[R] S ⊗[R] N :=
-    (LinearEquiv.ofInjective ar _ha).symm.toLinearMap.comp (c.codRestrict _ hc)
+    (LinearEquiv.ofInjective ar ha).symm.toLinearMap.comp (c.codRestrict _ hc)
   have hd (r : J) : a (d r) = (r : R) • τ := by
-    have h := (LinearEquiv.ofInjective ar _ha).apply_symm_apply (c.codRestrict _ hc r)
+    have h := (LinearEquiv.ofInjective ar ha).apply_symm_apply (c.codRestrict _ hc r)
     exact congrArg Subtype.val h
-  obtain ⟨l, m, hl⟩ := exists_ideal_power_hom_lift _hflat I _hI _hquot n _hn d
+  obtain ⟨l, m, hl⟩ := exists_ideal_power_hom_lift hflat I hI hquot n hn d
   let τ' := τ + a m
   have hτ' : b τ' = 1 ⊗ₜ[R] (1 : R ⧸ J) := by
     dsimp [τ']
-    rw [map_add, hτ, _hab.apply_apply_eq_zero m, add_zero]
+    rw [map_add, hτ, hab.apply_apply_eq_zero m, add_zero]
   have hlτ (r : J) : a (1 ⊗ₜ[R] l r) = (r : R) • τ' := by
     rw [hl r, map_add, map_smul_of_tower, hd r]
     exact (smul_add _ _ _).symm
@@ -169,7 +169,7 @@ theorem exists_cyclic_extension_flat_descent
   have hbg (z : E) : b (g z) = 1 ⊗ₜ[R] q z := by
     obtain ⟨⟨p, r⟩, rfl⟩ := W.mkQ_surjective z
     change b (a (1 ⊗ₜ[R] p) + r • τ') = 1 ⊗ₜ[R] J.mkQ r
-    rw [map_add, _hab.apply_apply_eq_zero, zero_add, map_smul_of_tower, hτ',
+    rw [map_add, hab.apply_apply_eq_zero, zero_add, map_smul_of_tower, hτ',
       ← TensorProduct.tmul_smul]
     congr 1
     change Ideal.Quotient.mk J (r * 1) = Ideal.Quotient.mk J r
@@ -197,13 +197,13 @@ theorem exists_cyclic_extension_flat_descent
       obtain ⟨p, hp⟩ := (hbase z).mp hqz
       have hap : a p = 0 := by
         rw [← hcj, hp, hz]
-      have hp0 : p = 0 := _ha (hap.trans (map_zero a).symm)
+      have hp0 : p = 0 := ha (hap.trans (map_zero a).symm)
       simpa [hp0] using hp.symm
     · intro z
       obtain ⟨e, he⟩ := hqbase (b z)
       have hzero : b (z - θ₀ e) = 0 := by
         rw [map_sub, hcb, he, sub_self]
-      obtain ⟨p, hp⟩ := (_hab (z - θ₀ e)).mp hzero
+      obtain ⟨p, hp⟩ := (hab (z - θ₀ e)).mp hzero
       refine ⟨j.baseChange S p + e, ?_⟩
       rw [map_add, hcj, hp]
       exact sub_add_cancel z (θ₀ e)

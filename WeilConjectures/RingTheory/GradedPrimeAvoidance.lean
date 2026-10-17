@@ -129,7 +129,7 @@ Choose a homogeneous component `y` in the product ideal outside the last prime. 
 degree since the product ideal is contained in `I`. Then `x ^ deg(y) + y ^ deg(x)` belongs to
 `I` and is homogeneous of positive degree. At every earlier prime the second summand belongs
 to the prime and the first does not; at the last prime the first belongs and the second does
-not. Hence the sum avoids all primes. These are the five elementary steps of the DAG proof;
+not. Hence the sum avoids all primes. These are the five elementary steps of the blueprint proof;
 no additional proof-dependency nodes are used. -/
 theorem exists_homogeneous_mem_notMem_of_isPrime
     {A : Type u} {σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]

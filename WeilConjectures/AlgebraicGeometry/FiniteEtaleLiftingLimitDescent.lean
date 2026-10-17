@@ -39,7 +39,7 @@ from lifting them over henselian G-ring pairs. Hypothesis `H` is the statement o
 Source: Stacks Project, Lemma 0GS2, proof, "General case"
 (blueprint: lem-weil-pbc-finite-etale-lifting-limit-descent).
 
-Proof (the eight steps of the DAG node):
+Proof (the eight steps of the blueprint node):
 1. By lem-weil-pbc-proper-limit-noetherian and lem-weil-pbc-limit-affine-transition,
    approximate the proper morphism Y → Spec A by proper Yᵢ → Spec Aᵢ, with Aᵢ finitely
    generated over ℤ, affine transition maps, and A the filtered colimit of the Aᵢ.

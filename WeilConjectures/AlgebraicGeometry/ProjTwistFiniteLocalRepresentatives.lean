@@ -18,7 +18,6 @@ Source: Stacks Project, Tags 01MN and 01M7.
 -/
 
 @[expose] public section
-set_option linter.unusedVariables false
 
 universe v
 open CategoryTheory Opposite LocalizedModule
@@ -47,7 +46,7 @@ theorem twist_finiteLocal_representatives
     let B := HomogeneousLocalization.Away 𝒜 f
     let M := LocalizedModule.Away f A
     letI : Module B M := Module.compHom M (algebraMap B (Localization.Away f))
-    ∃ (n : ℕ) (g : Fin n → B) (hspan : Ideal.span (Set.range g) = ⊤)
+    ∃ (n : ℕ) (g : Fin n → B) (_ : Ideal.span (Set.range g) = ⊤)
       (t : ∀ i : Fin n, LocalizedModule.Away (g i) M),
       (∀ (i : Fin n) (p : basicOpen 𝒜 f),
       let F := IsLocalization.map (M := Submonoid.powers f)

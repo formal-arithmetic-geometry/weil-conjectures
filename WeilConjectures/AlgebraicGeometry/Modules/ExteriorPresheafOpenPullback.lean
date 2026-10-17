@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPresheafOpenPullbackData
 
 /-!
@@ -42,14 +42,15 @@ map on tuples sending each tuple to its wedge using the exterior-power universal
 Do this in both directions through the inverse ring isomorphism. The composites are the
 identity on pure wedges, hence on the exterior powers by `exteriorPower.linearMap_ext`.
 The same pure-wedge test proves naturality with respect to every inclusion V' ⊆ V,
-using the defining pure-wedge formula of `exteriorSheafRestriction_existsUnique`.
+using the pure-wedge formula `PresheafOfModules.exteriorPower_map_ιMulti`.
 These component isomorphisms give the asserted presheaf isomorphism. This argument works
 also for n = 0 (empty wedges and scalar transport), empty opens, and the empty scheme;
 it does not require finite generation or local freeness. -/
 theorem exteriorPresheaf_open_pullback {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
     (U : X.Opens) :
     Nonempty ((PresheafOfModules.pullback.{v} U.ι.toRingCatSheafHom.hom).obj
-      (exteriorSheafPresheaf M n) ≅ exteriorSheafPresheaf (M.restrict U.ι) n) := by
+      (_root_.PresheafOfModules.exteriorPower (R := _) M.val n) ≅
+        _root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n) := by
   obtain ⟨app, happ⟩ := exteriorPresheaf_open_pullback_data M n U
   refine ⟨PresheafOfModules.isoMk app ?_⟩
   intro V W f

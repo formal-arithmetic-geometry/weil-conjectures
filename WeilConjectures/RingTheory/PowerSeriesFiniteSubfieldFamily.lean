@@ -127,7 +127,8 @@ exponents are p-divisible. Transport B_J to C by e.symm. Construct F_J as the
 subfield of K consisting of quotients of images of elements of this subring
 with nonzero denominator; the fraction map is injective, so the quotient set
 is closed under all field operations. It contains the prime field, since
-constants in F_p are pth powers. Apply RingTheory.powerSeriesRingSubfields
+constants in F_p are pth powers. Apply
+RingTheory.iInter_frobenius_subfields_mvPolynomial_mvPowerSeries
 with these explicitly constructed coefficient and quotient families. Its four
 clauses give finiteness, containment of K^p, intersection K^p and directedness
 (the index for two finite sets is their union). Transport finiteness across e;
@@ -187,8 +188,8 @@ theorem exists_powerSeries_finite_subfield_family
       · exact Subfield.subset_closure ⟨a, a.property, rfl⟩
       · exact Subfield.subset_closure ⟨b, b.property, rfl⟩
   obtain ⟨hfinite, hpower, hinter, hdir⟩ :=
-    powerSeriesRingSubfields p k I t ⟨b, hb⟩ n m K kJ (fun _ => rfl)
-      BJ hBJ KJ hKJ
+    iInter_frobenius_subfields_mvPolynomial_mvPowerSeries p k I t ⟨b, hb⟩ n m K kJ
+      (fun _ => rfl) BJ hBJ KJ hKJ
   let A : Finset I → Subring C := fun J => (BJ J).comap e.toRingHom
   have hbase (J : Finset I) (a : ZMod p) : algebraMap (ZMod p) K a ∈ KJ J := by
     apply hpower J

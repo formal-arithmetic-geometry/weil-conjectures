@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationAdjunction
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
 import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Category.Grp.Zero
@@ -33,10 +34,11 @@ Source: Stacks Project, Tag 079W, Lemma cohomology-lemma-adjoint, and Tag 0A9A,
 Lemma perfect-lemma-supported-generator, induction paragraph.
 (blueprint: lem-pc-open-derived-restriction-comparison).
 
-Proof: Apply `open_derived_localization_adjunction` to obtain the localizations and
-adjunction. Let e be the exact canonical module equivalence `Modules.overEquiv U`.
-The composition isomorphism identifies M with L followed by the derived equivalence
-D(e). The existing quasi-coherent restriction criterion and quasi-coherence of
+Proof: Obtain the localizations from `nonempty_hasDerivedCategory_openSubscheme` and
+`nonempty_derivedOpenLocalization`, and the adjunction from
+`open_derived_localization_adjunction`. Let e be the exact canonical module equivalence
+`Modules.overEquiv U`. The composition isomorphism identifies M with L followed by the derived
+equivalence D(e). The existing quasi-coherent restriction criterion and quasi-coherence of
 restriction prove the first clause in each degree. Exactness identifies homology
 with restriction of homology; the restriction stalk isomorphism identifies the
 stalk at x with the original stalk at x.val. Transporting zero additive groups
@@ -80,9 +82,9 @@ theorem open_derived_restriction_comparison
         Subsingleton (L.obj (Q⟦n⟧) ⟶ L.obj K) →
         Subsingleton ((M.obj Q)⟦n⟧ ⟶ M.obj K)) ∧
       (∀ K : schemeDerivedCategory X, IsZero (M.obj K) → IsZero (L.obj K)) := by
-  obtain ⟨hD, hO, R, ⟨adj⟩⟩ := open_derived_localization_adjunction X U
+  obtain ⟨hD⟩ := nonempty_hasDerivedCategory_openSubscheme.{u, w} X U
   let := hD
-  let := hO
+  obtain ⟨R, ⟨adj⟩⟩ := open_derived_localization_adjunction X U
   let r := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
   let e := Equivalence.functor
     (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
@@ -92,7 +94,8 @@ theorem open_derived_restriction_comparison
   let M := F.mapDerivedCategory
   let L := r.mapDerivedCategory
   let c : M ≅ L ⋙ e.mapDerivedCategory := Functor.mapDerivedCategoryCompIso r e
-  refine ⟨hD, hO, R, adj, ?_, ?_, ?_, ?_⟩
+  refine ⟨hD, (nonempty_derivedOpenLocalization.{u, w} U.toScheme).some, R, adj,
+    ?_, ?_, ?_, ?_⟩
   · intro K hK
     apply (schemeDerivedQCoh_openRestriction_iff X U K).mpr
     intro n

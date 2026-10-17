@@ -16,7 +16,6 @@ import Mathlib.LinearAlgebra.Dual.Lemmas
 
 Source: blueprint `sk-i-cartier`, third proof paragraph, and the dimension paragraph of
 `lem-wf-same-lie-closed-subgroup`.
-(blueprint: lem-ag-smooth-lie-local-dimension)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace AlgebraicGeometry.GrpObj
 
 Source: blueprint `sk-i-cartier`, third proof paragraph, and
 `lem-wf-same-lie-closed-subgroup`, the dimension paragraph.
-(blueprint: lem-ag-smooth-lie-local-dimension)
 
 Proof: Write `e` for the image of the unique point of `Spec k` under the identity section.
 The section identifies the residue field at `e` with `k`. Restrict to an affine neighbourhood
@@ -53,7 +51,7 @@ theorem finrank_lie_eq_localKrullDim_of_smooth
   let R := G.left.presheaf.stalk (unitSection G (IsLocalRing.closedPoint k))
   have : IsRegularLocalRing R :=
     Smooth.isRegularLocalRing_stalk G.hom (unitSection G (IsLocalRing.closedPoint k))
-  obtain ⟨r, ⟨E⟩⟩ := exists_lie_identity_cotangent_dual_equiv G
+  let r := identityResidueEquiv G
   let : RingHomInvPair r.toRingHom r.symm.toRingHom := RingHomInvPair.of_ringEquiv r
   let : RingHomInvPair r.symm.toRingHom r.toRingHom :=
     RingHomInvPair.of_ringEquiv r.symm
@@ -61,7 +59,8 @@ theorem finrank_lie_eq_localKrullDim_of_smooth
       Module.finrank (IsLocalRing.ResidueField R)
         (Module.Dual (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R)) := by
     exact congrArg Cardinal.toNat
-      (rank_eq_of_equiv_equiv r E.toAddEquiv r.bijective (fun c v ↦ E.map_smulₛₗ c v))
+      (rank_eq_of_equiv_equiv r (lieCotangentDualEquiv G).toAddEquiv r.bijective
+        (fun c v ↦ (lieCotangentDualEquiv G).map_smulₛₗ c v))
   rw [hdim, Subspace.dual_finrank_eq]
   exact (IsRegularLocalRing.iff_finrank_cotangentSpace R).mp inferInstance
 

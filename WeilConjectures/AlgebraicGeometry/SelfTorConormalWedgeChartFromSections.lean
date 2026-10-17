@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 public import WeilConjectures.AlgebraicGeometry.SelfTorAffineSection
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafQuasicoherent
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
@@ -138,7 +138,7 @@ theorem exists_selfTor_conormal_wedge_chart_from_sections
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (n : ℕ) (U : Y.affineOpens)
     (e : let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
-      let E := Scheme.Modules.exteriorSheaf N n
+      let E := Scheme.Modules.exteriorPower N n
       let M := conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n
       let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙
         Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i
@@ -147,7 +147,7 @@ theorem exists_selfTor_conormal_wedge_chart_from_sections
           ((T.obj M).over (i ⁻¹ᵁ U.1)).val.obj
             (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1))))) :
     let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
-    let E := Scheme.Modules.exteriorSheaf N n
+    let E := Scheme.Modules.exteriorPower N n
     let M := conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n
     let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙
       Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i
@@ -157,7 +157,7 @@ theorem exists_selfTor_conormal_wedge_chart_from_sections
         s.hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1)))) x =
           e x := by
   let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
-  let E := Scheme.Modules.exteriorSheaf N n
+  let E := Scheme.Modules.exteriorPower N n
   let M := conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n
   let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙
     Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i

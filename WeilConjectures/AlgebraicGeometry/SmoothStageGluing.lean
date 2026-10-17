@@ -8,8 +8,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import WeilConjectures.AlgebraicGeometry.Morphisms.AffineLimitSmoothStage
-import WeilConjectures.RingTheory.SmoothAlgebraFilteredColimitDescent
 
 @[expose] public section
 
@@ -19,27 +17,25 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- The locality/gluing part of eventual smoothness.  A smooth finite-stage model
-for the finitely many affine charts, together with comparison isomorphisms, yields
-smoothness of the original pullback morphism at a common later stage.
+/-- The gluing part of eventual smoothness.  A smooth finite-stage model `q` of the
+pullback morphism, i.e. a smooth `q : Z ⟶ N.D.obj j.left` together with a comparison
+isomorphism `e : Z ≅ pullback p (N.D.map j.hom)` over `N.D.obj j.left`, makes the pullback
+morphism itself smooth at that stage, since smoothness is invariant under isomorphism.
 Source: Stacks Project, Tag 0C0C, limits.tex, locality of smoothness after a common
 cofiltered refinement.
 (blueprint: lem-sbc-noetherian-approximation-smooth-stage-gluing) -/
 theorem Scheme.NoetherianApproximation.smooth_stage_of_affine_models
     {S : Scheme.{u}} (N : S.NoetherianApproximation) {i : N.I}
-    {Y X : Scheme.{u}} (p : Y ⟶ N.D.obj i)
-    [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p]
-    (f : X ⟶ S) [Smooth f] (a : X ⟶ Y)
-    (H : IsPullback a f p (N.π.app i))
+    {Y : Scheme.{u}} (p : Y ⟶ N.D.obj i)
     (hmodel : ∃ (j : Over i) (Z : Scheme.{u}) (q : Z ⟶ N.D.obj j.left)
-      (_ : LocallyOfFinitePresentation q) (_ : QuasiCompact q) (_ : QuasiSeparated q),
-      Smooth q ∧ Nonempty (Z ≅ Limits.pullback p (N.D.map j.hom))) :
+      (e : Z ≅ pullback p (N.D.map j.hom)),
+        e.hom ≫ pullback.snd p (N.D.map j.hom) = q ∧ Smooth q) :
     ∃ j : Over i, Smooth (pullback.snd p (N.D.map j.hom)) := by
-  have _ := hmodel
-  apply Scheme.exists_smooth_stage_of_affine_limit N.D N.π N.isLimit
-    (fun g => N.isAffineHom_map g)
-    (fun k => N.isNoetherian_obj k)
-    (fun k => inferInstance)
-    p f a H
+  obtain ⟨j, Z, q, e, he, hq⟩ := hmodel
+  refine ⟨j, ?_⟩
+  have : pullback.snd p (N.D.map j.hom) = e.inv ≫ q := by
+    rw [← he, Iso.inv_hom_id_assoc]
+  rw [this]
+  infer_instance
 
 end AlgebraicGeometry

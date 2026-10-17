@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
@@ -90,7 +90,7 @@ private noncomputable def coordinateAdd {X : Scheme.{u}} (M : X.Modules)
 private lemma coordinateAdd_germ {X : Scheme.{u}} (M : X.Modules)
     (x : X) (U : X.Opens) (hx : x ∈ U)
     (π : M.over U ⟶ SheafOfModules.unit (X.ringCatSheaf.over U))
-    (V : X.Opens) (hxV : x ∈ V) (m : Γ(M, V)) (_h : True) :
+    (V : X.Opens) (hxV : x ∈ V) (m : Γ(M, V)) :
     coordinateAdd M x U hx π (M.presheaf.germ V x hxV m) =
       X.presheaf.germ (V ⊓ U) x ⟨hxV, hx⟩
         ((π.val.app (op (Over.mk (homOfLE inf_le_right : V ⊓ U ⟶ U)))).hom
@@ -107,7 +107,7 @@ private noncomputable def coordinateLinear {X : Scheme.{u}} (M : X.Modules)
     (π : M.over U ⟶ SheafOfModules.unit (X.ringCatSheaf.over U)) :
     M.presheaf.stalk x →ₗ[X.presheaf.stalk x] X.presheaf.stalk x :=
   stalkLinearMapMk (coordinateAdd M x U hx π) fun V hxV r m ↦ by
-    rw [coordinateAdd_germ (_h := trivial), coordinateAdd_germ (_h := trivial),
+    rw [coordinateAdd_germ, coordinateAdd_germ,
       Scheme.Modules.map_smul]
     rw [(π.val.app _).hom.map_smul]
     change X.presheaf.germ (V ⊓ U) x ⟨hxV, hx⟩ (_ * _) = _
@@ -119,12 +119,12 @@ set_option backward.isDefEq.respectTransparency false in
 private lemma coordinateLinear_germ_of_le {X : Scheme.{u}} (M : X.Modules)
     (x : X) (U : X.Opens) (hx : x ∈ U)
     (π : M.over U ⟶ SheafOfModules.unit (X.ringCatSheaf.over U))
-    (V : X.Opens) (hxV : x ∈ V) (hVU : V ≤ U) (m : Γ(M, V)) (_h : True) :
+    (V : X.Opens) (hxV : x ∈ V) (hVU : V ≤ U) (m : Γ(M, V)) :
     coordinateLinear M x U hx π (M.presheaf.germ V x hxV m) =
       X.presheaf.germ V x hxV
         ((π.val.app (op (Over.mk (homOfLE hVU)))).hom m) := by
   change coordinateAdd M x U hx π (M.presheaf.germ V x hxV m) = _
-  rw [coordinateAdd_germ (_h := trivial)]
+  rw [coordinateAdd_germ]
   let a : V ⊓ U ⟶ V := homOfLE inf_le_left
   let a' : Over.mk (homOfLE inf_le_right : V ⊓ U ⟶ U) ⟶
       Over.mk (homOfLE hVU : V ⟶ U) := Over.homMk a
@@ -160,7 +160,7 @@ set_option backward.isDefEq.respectTransparency false in
 private lemma localBasisGerm_eq {X : Scheme.{u}} (M : X.Modules)
     (x : X) (U : X.Opens) (hx : x ∈ U) {I : Type u}
     (e : M.over U ≅ SheafOfModules.free I) (j : I)
-    (V : X.Opens) (hxV : x ∈ V) (hVU : V ≤ U) (_h : True) :
+    (V : X.Opens) (hxV : x ∈ V) (hVU : V ≤ U) :
     localBasisGerm M x U hx e j = M.presheaf.germ V x hxV
       ((localInclusion M U e j).val.app (op (Over.mk (homOfLE hVU))) (1 : Γ(X, V))) := by
   let a' : Over.mk (homOfLE hVU : V ⟶ U) ⟶ Over.mk (𝟙 U) :=
@@ -181,7 +181,7 @@ private lemma localBasisGerm_eq {X : Scheme.{u}} (M : X.Modules)
 /-- The sum of the coordinate projection-inclusion composites is the identity. -/
 private lemma local_sum {X : Scheme.{u}} (M : X.Modules) (U : X.Opens)
     {I : Type u} [Fintype I] [DecidableEq I]
-    (e : M.over U ≅ SheafOfModules.free I) (_h : True) :
+    (e : M.over U ≅ SheafOfModules.free I) :
     ∑ j, localProjection M U e j ≫ localInclusion M U e j = 𝟙 (M.over U) := by
   simp only [localProjection, localInclusion, Category.assoc, ← Preadditive.comp_sum]
   simp_rw [← Category.assoc]
@@ -192,11 +192,11 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The stalk coordinate vectors have Kronecker-delta coordinates. -/
 private lemma coordinate_basis {X : Scheme.{u}} (M : X.Modules)
     (x : X) (U : X.Opens) (hx : x ∈ U) {I : Type u} [DecidableEq I]
-    (e : M.over U ≅ SheafOfModules.free I) (j k : I) (_h : True) :
+    (e : M.over U ≅ SheafOfModules.free I) (j k : I) :
     coordinateLinear M x U hx (localProjection M U e j)
       (localBasisGerm M x U hx e k) = if k = j then 1 else 0 := by
   unfold localBasisGerm
-  rw [coordinateLinear_germ_of_le M x U hx _ U hx le_rfl (_h := trivial)]
+  rw [coordinateLinear_germ_of_le M x U hx _ U hx le_rfl]
   have hp : localInclusion M U e k ≫ localProjection M U e j =
       if k = j then 𝟙 _ else 0 := by
     simp only [localInclusion, localProjection, Category.assoc, Iso.inv_hom_id_assoc,
@@ -221,16 +221,16 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Every germ is the sum of its coordinates times the local basis germs. -/
 private lemma sum_coordinate_basis {X : Scheme.{u}} (M : X.Modules)
     (x : X) (U : X.Opens) (hx : x ∈ U) {I : Type u} [Fintype I] [DecidableEq I]
-    (e : M.over U ≅ SheafOfModules.free I) (m : M.presheaf.stalk x) (_h : True) :
+    (e : M.over U ≅ SheafOfModules.free I) (m : M.presheaf.stalk x) :
     ∑ j, coordinateLinear M x U hx (localProjection M U e j) m •
       localBasisGerm M x U hx e j = m := by
   obtain ⟨V, hVU, hxV, m, rfl⟩ := M.presheaf.exists_le_germ_eq m hx
-  simp_rw [coordinateLinear_germ_of_le M x U hx _ V hxV hVU (_h := trivial),
-    localBasisGerm_eq M x U hx e _ V hxV hVU (_h := trivial), ← Scheme.Modules.germ_smul]
+  simp_rw [coordinateLinear_germ_of_le M x U hx _ V hxV hVU,
+    localBasisGerm_eq M x U hx e _ V hxV hVU, ← Scheme.Modules.germ_smul]
   rw [← map_sum]
   congr 1
   have he := congrArg (fun g ↦
-    (g.val.app (op (Over.mk (homOfLE hVU)))).hom m) (local_sum M U e trivial)
+    (g.val.app (op (Over.mk (homOfLE hVU)))).hom m) (local_sum M U e)
   rw [SheafOfModules.sum_val_app_apply] at he
   change ∑ j, (localInclusion M U e j).val.app (op (Over.mk (homOfLE hVU)))
       ((localProjection M U e j).val.app (op (Over.mk (homOfLE hVU))) m) = m at he
@@ -254,7 +254,7 @@ private noncomputable def localStalkEquiv {X : Scheme.{u}} (M : X.Modules)
     coordinateLinear M x U hx (localProjection M U e j)) (by
     constructor
     · intro m n h
-      rw [← sum_coordinate_basis M x U hx e m trivial, ← sum_coordinate_basis M x U hx e n trivial]
+      rw [← sum_coordinate_basis M x U hx e m, ← sum_coordinate_basis M x U hx e n]
       apply Finset.sum_congr rfl
       intro j hj
       exact congrArg (fun a ↦ a • localBasisGerm M x U hx e j) (congrFun h j)
@@ -263,7 +263,7 @@ private noncomputable def localStalkEquiv {X : Scheme.{u}} (M : X.Modules)
       ext k
       change coordinateLinear M x U hx (localProjection M U e k) _ = c k
       rw [map_sum]
-      simp_rw [LinearMap.map_smul, coordinate_basis M x U hx e _ _ trivial]
+      simp_rw [LinearMap.map_smul, coordinate_basis M x U hx e _ _]
       simp)
 
 /-- Restrict a finite frame to the inverse image of its trivializing open. -/
@@ -334,7 +334,7 @@ theorem koszulRegularImmersion_self_ext_stalk_bases
         (H.obj (op (S.obj B), S.obj B))
     let T := (Scheme.Modules.restrictFunctor V.ι).obj
       ((Scheme.Modules.tensorPullback i).obj G)
-    let E := Scheme.Modules.exteriorSheaf
+    let E := Scheme.Modules.exteriorPower
       ((Scheme.Modules.restrictFunctor V.ι).obj
         (SheafOfModules.homObj (R := Z.sheaf)
           ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)
@@ -372,7 +372,7 @@ theorem koszulRegularImmersion_self_ext_stalk_bases
     obtain ⟨eE⟩ := (Scheme.Modules.exteriorSheaf_local_free_comparison V.toScheme
       (D.restrict V.ι) n (V.ι ⁻¹ᵁ W) m eDV).1
     let c := Scheme.Modules.localStalkEquiv
-      (Scheme.Modules.exteriorSheaf (D.restrict V.ι) n) z (V.ι ⁻¹ᵁ W) hzU eE
+      (Scheme.Modules.exteriorPower (D.restrict V.ι) n) z (V.ι ⁻¹ᵁ W) hzU eE
     exact ⟨((Pi.basisFun (V.toScheme.presheaf.stalk z)
       (ULift.{u} (Set.powersetCard (Fin m) n))).map c.symm).reindex Equiv.ulift⟩
 

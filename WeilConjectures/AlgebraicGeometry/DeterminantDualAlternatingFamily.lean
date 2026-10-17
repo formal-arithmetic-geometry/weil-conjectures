@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import WeilConjectures.AlgebraicGeometry.DeterminantDualPairingFunctional
@@ -22,6 +22,7 @@ universe u
 
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
+open Scheme.Modules (wedge)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- On a fixed open, the determinant pairing gives a unique alternating family of
@@ -36,7 +37,7 @@ finite determinant polynomial by ring restriction make this a presheaf morphism
 on Over U. Extend uniquely through the sheafification of the exterior presheaf
 on this open site. Restriction of sheafification to an open is sheafification
 on that open site, so the resulting morphism is an internal dual section of
-exteriorSheaf M n over U. The determinant is alternating and multilinear in
+exteriorPower M n over U. The determinant is alternating and multilinear in
 its columns; uniqueness of extension carries these identities to the internal
 functional, giving the stated alternating map. For uniqueness, pure wedges
 span each sectionwise exterior power, and the sheafification adjunction is
@@ -45,16 +46,16 @@ the empty open and the zero ring, without requiring local freeness. -/
 theorem exterior_dual_pairing_local (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
     (U : X.Opens) :
     ∃! A : ((Scheme.Modules.dual M).val.obj (op U)) [⋀^Fin n]→ₗ[X.presheaf.obj (op U)]
-        ((Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj (op U)),
+        ((Scheme.Modules.dual (Scheme.Modules.exteriorPower M n)).val.obj (op U)),
       ∀ (V : X.Opens) (g : V ⟶ U) (a : Fin n → M.val.obj (op V))
         (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)),
-        (A φ).app (op (Over.mk g)) (Scheme.Modules.exteriorSheafSection M n V a) =
+        (A φ).app (op (Over.mk g)) (wedge (M := M) (r := n) (U := V) a) =
           (Matrix.of fun i j ↦ (show X.presheaf.obj (op V) from
             (φ j).app (op (Over.mk g)) (a i))).det := by
   classical
   choose q hq huniq using exterior_dual_pairing_functional X M n U
   let A : ((Scheme.Modules.dual M).val.obj (op U)) [⋀^Fin n]→ₗ[X.presheaf.obj (op U)]
-      ((Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj (op U)) :=
+      ((Scheme.Modules.dual (Scheme.Modules.exteriorPower M n)).val.obj (op U)) :=
     { toFun := q
       map_update_add' := by
         intro dec φ j x y
@@ -62,11 +63,11 @@ theorem exterior_dual_pairing_local (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
         apply exteriorSheaf_dual_ext X M n U
         intro V g a
         change (q (Function.update φ j (x + y))).app (op (Over.mk g))
-          (Scheme.Modules.exteriorSheafSection M n V a) =
+          (wedge (M := M) (r := n) (U := V) a) =
           ((q (Function.update φ j x)).app (op (Over.mk g))
-            (Scheme.Modules.exteriorSheafSection M n V a)) +
+            (wedge (M := M) (r := n) (U := V) a)) +
           ((q (Function.update φ j y)).app (op (Over.mk g))
-            (Scheme.Modules.exteriorSheafSection M n V a))
+            (wedge (M := M) (r := n) (U := V) a))
         rw [hq, hq, hq]
         let B : Matrix (Fin n) (Fin n) (X.presheaf.obj (op V)) :=
           Matrix.of fun i k ↦ (φ k).app (op (Over.mk g)) (a i)
@@ -91,10 +92,10 @@ theorem exterior_dual_pairing_local (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
         apply exteriorSheaf_dual_ext X M n U
         intro V g a
         change (q (Function.update φ j (r • x))).app (op (Over.mk g))
-            (Scheme.Modules.exteriorSheafSection M n V a) =
+            (wedge (M := M) (r := n) (U := V) a) =
           (X.presheaf.map g.op r) * (show X.presheaf.obj (op V) from
             (q (Function.update φ j x)).app (op (Over.mk g))
-              (Scheme.Modules.exteriorSheafSection M n V a))
+              (wedge (M := M) (r := n) (U := V) a))
         rw [hq, hq]
         let B : Matrix (Fin n) (Fin n) (X.presheaf.obj (op V)) :=
           Matrix.of fun i k ↦ (φ k).app (op (Over.mk g)) (a i)
@@ -118,7 +119,7 @@ theorem exterior_dual_pairing_local (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
         apply exteriorSheaf_dual_ext X M n U
         intro V g a
         change (q φ).app (op (Over.mk g))
-          (Scheme.Modules.exteriorSheafSection M n V a) = 0
+          (wedge (M := M) (r := n) (U := V) a) = 0
         rw [hq]
         exact Matrix.det_zero_of_column_eq (R := X.presheaf.obj (op V)) hne
           (fun k ↦ congrArg (fun z ↦ z.app (op (Over.mk g)) (a k)) hij) }

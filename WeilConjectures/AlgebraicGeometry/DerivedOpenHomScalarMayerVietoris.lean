@@ -165,8 +165,7 @@ theorem derived_open_hom_scalar_mayer_vietoris
   let R := fun W : X.Opens ↦
     (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory
   have h (W : X.Opens) : ∃ G, Nonempty (R W ⊣ G) := by
-    obtain ⟨hD, hO, G, hG⟩ := open_derived_localization_adjunction X W
-    exact ⟨G, hG⟩
+    exact open_derived_localization_adjunction X W
   choose G hG using h
   let adj (W : X.Opens) : R W ⊣ G W := (hG W).some
   let A := (G (U ⊔ V)).obj ((R (U ⊔ V)).obj (E'⟦k⟧))

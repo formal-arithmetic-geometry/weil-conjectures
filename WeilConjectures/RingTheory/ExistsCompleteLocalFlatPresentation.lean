@@ -30,7 +30,7 @@ surjective vertical maps and a flat upper map between complete Noetherian local 
 Source: Stacks Project, More on Algebra, Lemma 15.40.3 (Tag 07NN).
 (blueprint: lem-weil-pbc-complete-local-flat-presentation)
 
-Proof outline, following the six steps of the DAG node:
+Proof outline, following the six steps of the blueprint node:
 1. The residue fields of `A` and `B` have the same characteristic. Choose Cohen power-series
    surjections `q : R → A` and `b : S₀ → B` using
    `lem-weil-pbc-cohen-structure-power-series-surjection`. The rings are Noetherian, regular,

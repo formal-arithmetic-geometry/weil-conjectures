@@ -50,7 +50,8 @@ At a base point `t`, the automorphisms of `F_t` act on the stalk `G_t`
 faithful and essentially surjective functor to continuous finite-dimensional representations.
 
 The existence of a monodromy which is an equivalence at every base point, for a connected
-regular locally Noetherian `Y`, is `AlgebraicGeometry.ProEtale.exists_lisseMonodromy`.
+regular Noetherian `Y`, is `AlgebraicGeometry.ProEtale.exists_lisseMonodromy`
+(`WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExists`).
 -/
 
 @[expose] public section
@@ -373,21 +374,5 @@ theorem mono_comp_upperStar_comp_apply (f : Y ⟶ Y) {y t : Spec (.of (Algebraic
   rfl
 
 end LisseMonodromy
-
-/-- **Lisse `ℚ̄_ℓ`-sheaves and continuous representations** (blueprint:
-`cor-galois-lisse-representations`, the case `Λ = ℚ̄_ℓ`). On a connected regular locally
-Noetherian scheme `Y` (hence geometrically unibranch), the stalks of lisse `ℓ`-adic sheaves carry
-a monodromy along paths of fibre functors, compatible with reparametrisation, pullback, global
-sections and duals, which at every base point `t` identifies lisse sheaves with continuous
-finite-dimensional `ℚ̄_ℓ`-representations of `π₁(Y, t)`.
-
-The blueprint deduces the case `Λ = ℚ̄_ℓ` from finite coefficient rings `𝒪_E / 𝔪ⁿ` by passing to
-adic limits, inverting `ϖ_E` and taking the colimit over the finite extensions `E ⊆ ℚ̄_ℓ`. In the
-Bhatt–Scholze model of lisse sheaves used here (pro-étale locally free `ℚ̄_ℓ,Y`-modules) this
-needs in addition the comparison with adic systems: lisse `𝒪_E`-lattices, whose reductions are
-finite locally constant étale sheaves. -/
-theorem exists_lisseMonodromy [IsLocallyNoetherian Y] [IsRegular Y] [ConnectedSpace Y] :
-    ∃ M : LisseMonodromy l Y Ω, ∀ t, M.IsEquivalenceAt t := by
-  sorry
 
 end AlgebraicGeometry.ProEtale

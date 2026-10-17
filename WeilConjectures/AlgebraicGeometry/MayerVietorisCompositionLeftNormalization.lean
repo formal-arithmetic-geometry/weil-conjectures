@@ -28,7 +28,6 @@ attribute [local instance 2000] schemeMVModuleAbelian
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
--- Retain the original unused F binder for exact statement compatibility.
 set_option maxHeartbeats 800000 in
 -- The exact restriction factors require additional categorical instance conversions.
 /-- Left-hand composition normalization to the complex-composition composite.

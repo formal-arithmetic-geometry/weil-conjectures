@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 
 /-!
 # Exterior sheaf maps induced by module morphisms
@@ -23,9 +23,11 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 private theorem restriction_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
     {U V : X.Opensᵒᵖ} (k : U ⟶ V) (a : Fin n → M.val.obj U) :
-    exteriorSheafRestriction M n k (exteriorPower.ιMulti (X.presheaf.obj U) n a) =
-      exteriorPower.ιMulti (X.presheaf.obj V) n (fun i ↦ M.val.map k (a i)) :=
-  (Classical.choose_spec (exteriorSheafRestriction_existsUnique M n k)).1 a
+    (M.val.exteriorPower (R := X.presheaf) n).map k
+        (_root_.exteriorPower.ιMulti (X.presheaf.obj U) n a) =
+      (_root_.exteriorPower.ιMulti _ n (fun i ↦ M.val.map k (a i)) :
+        (M.val.exteriorPower (R := X.presheaf) n).obj V) :=
+  _root_.PresheafOfModules.exteriorPower_map_ιMulti (R := X.presheaf) M.val n k a
 
 set_option maxHeartbeats 800000 in
 -- Comparing scheme ring-sheaf scalar structures requires additional elaboration.
@@ -39,48 +41,48 @@ Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph,
 exterior-power universal properties (blueprint: lem-sc-exterior-sheaf-map-exists). -/
 theorem exteriorSheaf_map_exists {X : Scheme.{v}} {M N : X.Modules}
     (f : M ⟶ N) (n : ℕ) :
-    ∃ e : exteriorSheaf M n ⟶ exteriorSheaf N n,
+    ∃ e : exteriorPower M n ⟶ exteriorPower N n,
       ∀ (U : X.Opens) (a : Fin n → M.val.obj (op U)),
-        e.val.app (op U) (exteriorSheafSection M n U a) =
-          exteriorSheafSection N n U (fun i ↦ f.val.app (op U) (a i)) := by
-  let p : exteriorSheafPresheaf M n ⟶ exteriorSheafPresheaf N n :=
-    { app := fun U ↦ ModuleCat.ofHom (X := exteriorSheafObj M n U)
-        (Y := exteriorSheafObj N n U)
-        (exteriorPower.map (R := X.presheaf.obj U) n (f.val.app U).hom)
+        e.val.app (op U) (wedge (M := M) (r := n) (U := U) a) =
+          wedge (M := N) (r := n) (U := U) (fun i ↦ f.val.app (op U) (a i)) := by
+  let p : (M.val.exteriorPower (R := X.presheaf) n) ⟶ (N.val.exteriorPower (R := X.presheaf) n) :=
+    { app := fun U ↦ ModuleCat.ofHom (X := ((M.val.exteriorPower (R := X.presheaf) n).obj U))
+        (Y := ((N.val.exteriorPower (R := X.presheaf) n).obj U))
+        (_root_.exteriorPower.map (R := X.presheaf.obj U) n (f.val.app U).hom)
       naturality := by
         intro U V k
         apply ModuleCat.hom_ext
-        apply exteriorPower.linearMap_ext (R := X.presheaf.obj U)
+        apply _root_.exteriorPower.linearMap_ext (R := X.presheaf.obj U)
           (N := (ModuleCat.restrictScalars (X.ringCatSheaf.obj.map k).hom).obj
-            (exteriorSheafObj N n V))
+            (((N.val.exteriorPower (R := X.presheaf) n).obj V)))
         apply DFunLike.ext
         intro a
         symm
-        change exteriorSheafRestriction N n k
-            (exteriorPower.map (R := X.presheaf.obj U) n (f.val.app U).hom
-              (exteriorPower.ιMulti (X.presheaf.obj U) n a)) =
-          exteriorPower.map (R := X.presheaf.obj V) n (f.val.app V).hom
-            (exteriorSheafRestriction M n k
-              (exteriorPower.ιMulti (X.presheaf.obj U) n a))
-        rw [exteriorPower.map_apply_ιMulti (R := X.presheaf.obj U) (f.val.app U).hom a,
+        change ((N.val.exteriorPower (R := X.presheaf) n).map k)
+            (_root_.exteriorPower.map (R := X.presheaf.obj U) n (f.val.app U).hom
+              (_root_.exteriorPower.ιMulti (X.presheaf.obj U) n a)) =
+          _root_.exteriorPower.map (R := X.presheaf.obj V) n (f.val.app V).hom
+            (((M.val.exteriorPower (R := X.presheaf) n).map k)
+              (_root_.exteriorPower.ιMulti (X.presheaf.obj U) n a))
+        rw [_root_.exteriorPower.map_apply_ιMulti (R := X.presheaf.obj U) (f.val.app U).hom a,
           restriction_wedge N n k, restriction_wedge M n k a]
-        erw [exteriorPower.map_apply_ιMulti (R := X.presheaf.obj V)
+        erw [_root_.exteriorPower.map_apply_ιMulti (R := X.presheaf.obj V)
           (f.val.app V).hom (fun i ↦ M.val.map k (a i))]
-        apply congrArg (exteriorPower.ιMulti (X.presheaf.obj V) n)
+        apply congrArg (_root_.exteriorPower.ιMulti (X.presheaf.obj V) n)
         funext i
         exact (PresheafOfModules.naturality_apply f.val k (a i)).symm }
   refine ⟨(PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).map p, ?_⟩
   intro U a
   have h := congrArg
-    (fun k ↦ k.app (op U) (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a))
+    (fun k ↦ k.app (op U) (_root_.exteriorPower.ιMulti (X.presheaf.obj (op U)) n a))
     ((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.naturality p)
   change ((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.app
-      (exteriorSheafPresheaf N n)).app (op U)
-      (exteriorPower.map (R := X.presheaf.obj (op U)) n (f.val.app (op U)).hom
-        (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a)) =
+      (N.val.exteriorPower (R := X.presheaf) n)).app (op U)
+      (_root_.exteriorPower.map (R := X.presheaf.obj (op U)) n (f.val.app (op U)).hom
+        (_root_.exteriorPower.ιMulti (X.presheaf.obj (op U)) n a)) =
     ((PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).map p).val.app (op U)
-      (exteriorSheafSection M n U a) at h
-  rw [exteriorPower.map_apply_ιMulti (R := X.presheaf.obj (op U))
+      (wedge (M := M) (r := n) (U := U) a) at h
+  rw [_root_.exteriorPower.map_apply_ιMulti (R := X.presheaf.obj (op U))
     (f.val.app (op U)).hom a] at h
   exact h.symm
 

@@ -17,7 +17,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 import WeilConjectures.AlgebraicGeometry.KoszulDualConormalRankStratum
-import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafTopInvertible
+import WeilConjectures.AlgebraicGeometry.Modules.Determinant
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
@@ -75,9 +75,7 @@ theorem koszulRegularImmersion_dualizing_term {Z Y : Scheme.{u}} (i : Z ⟶ Y)
       (SheafOfModules.unit Z.ringCatSheaf))
   have : N.IsFiniteLocallyFreeOfRank n :=
     koszulRegularImmersion_dual_conormal_rank_stratum i hregular r hr n
-  have : (Scheme.Modules.exteriorSheaf N n).IsInvertible :=
-    Scheme.Modules.exteriorSheaf_top_isInvertible N n
-  have : (Scheme.Modules.exteriorSheaf N n).IsQuasicoherent := inferInstance
+  have : (Scheme.Modules.exteriorPower N n).IsQuasicoherent := inferInstance
   have : IsClosedImmersion U.ι := by
     apply IsClosedImmersion.of_isPreimmersion
     rw [Scheme.Opens.range_ι]
@@ -85,6 +83,6 @@ theorem koszulRegularImmersion_dualizing_term {Z Y : Scheme.{u}} (i : Z ⟶ Y)
   simpa only [Scheme.Modules.locallyRankedExteriorTerm, Int.natCast_nonneg,
     if_true, Int.toNat_natCast] using
     Scheme.Modules.isQuasicoherent_pushforward_of_isClosedImmersion U.ι
-      (Scheme.Modules.exteriorSheaf N n)
+      (Scheme.Modules.exteriorPower N n)
 
 end AlgebraicGeometry

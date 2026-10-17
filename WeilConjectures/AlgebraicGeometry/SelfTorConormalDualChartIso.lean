@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
@@ -73,7 +73,7 @@ theorem selfTor_conormal_dual_chart_iso
       ((DerivedCategory.homologyFunctor
         (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj
           (S.obj B ⊗ S.obj B))
-    ∃ τ : Scheme.Modules.exteriorSheaf
+    ∃ τ : Scheme.Modules.exteriorPower
       ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n ⟶ Q,
       ∀ (V : Z.Opens) (U : Y.affineOpens),
         let W := V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1)
@@ -83,7 +83,7 @@ theorem selfTor_conormal_dual_chart_iso
         ∃ (a : (((Scheme.Modules.restrictFunctor V.ι).obj
               (Scheme.Modules.dual Q)).over W) ≅ F.obj (op _))
           (b : F.obj (op _) ≅ (((Scheme.Modules.restrictFunctor V.ι).obj
-              (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf
+              (Scheme.Modules.dual (Scheme.Modules.exteriorPower
                 ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n))).over W)),
           ((Scheme.Modules.restrictFunctor V.ι).map (Scheme.Modules.dualMap τ)).over W =
             a.hom ≫ F.map c.op ≫ b.hom := by
@@ -94,7 +94,7 @@ theorem selfTor_conormal_dual_chart_iso
     ((DerivedCategory.homologyFunctor
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj
         (S.obj B ⊗ S.obj B))
-  let E := Scheme.Modules.exteriorSheaf
+  let E := Scheme.Modules.exteriorPower
     ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n
   obtain ⟨φ, hφ, hcompatible⟩ := exists_compatible_affine_selfTor_maps i n
   let O (U : Y.affineOpens) : Z.Opens := i ⁻¹ᵁ U.1

@@ -25,7 +25,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
--- Retain the original interface even though affineness of U and perfectness of Q are unused.
 set_option linter.unusedVariables false in
 /-- An arbitrary chain map of perfect stalk complexes lifts on an affine neighbourhood.
 Source: Stacks Project, Tag 09RE, affine proof's finite-presentation calculation;

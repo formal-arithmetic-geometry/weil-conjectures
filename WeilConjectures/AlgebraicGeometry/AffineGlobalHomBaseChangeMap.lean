@@ -103,7 +103,6 @@ def schemeGlobalDerivedHomOver {R : CommRingCat.{u}} {X : Scheme.{u}}
 Source: Stacks Tag 0AA7 (blueprint: def-pc-affine-global-hom-base-change-map). -/
 def affineDerivedExtension {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R) :
     DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B) := by
-  -- Retain the original sheaf-derived-category parameter in the exposed API.
   let _ := ‹∀ Z : Scheme.{u},
     HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))›
   let ρ := affineBaseRingMap g
@@ -236,7 +235,6 @@ theorem canonicalPullbackAdjunction_homEquiv_symm_original
   exact Adjunction.homEquiv_ofNatIsoLeft_symm_apply _ _ f
 
 set_option linter.unusedSectionVars false in
--- Retain the original module-category instance in the public theorem signature.
 /-- Existence of tensor/internal-Hom adjunctions with the normalized evaluation counit.
 The inverse Hom equivalences satisfy the shared K-flat representative equation: the
 chain evaluation is specified on every summand using the recorded sheaf tensor-Hom
@@ -316,7 +314,6 @@ def canonicalTensorHomAdjunction (S : Scheme.{u}) (K : schemeDerivedCategory S) 
   (Classical.choose (exists_canonicalTensorHomAdjunction S)) K
 
 set_option linter.unusedVariables false in
--- The construction is valid without perfectness or quasi-coherence; retain the public API.
 set_option maxHeartbeats 800000 in
 -- Unfolding affine scalar restriction comparisons requires extra elaboration heartbeats.
 /-- The canonical comparison is specified by four equations, not mere existence of

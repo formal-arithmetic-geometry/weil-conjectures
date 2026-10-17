@@ -26,7 +26,6 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-set_option linter.unusedVariables false in
 /-- A finitely presented affine morphism has a quasi-finite polynomial chart near any point,
 with the number of variables equal to the dimension of the fibre at that point.
 
@@ -50,8 +49,8 @@ needs to be added: the quantified point y excludes an empty source.
 theorem exists_quasiFinite_polynomial_chart
     {X T : Scheme.{u}} [IsAffine X] [IsAffine T]
     (f : X ⟶ T) [LocallyOfFinitePresentation f] (y : X) :
-    ∃ (U : X.Opens) (_ : IsAffine U.toScheme) (hy : y ∈ U) (n : ℕ)
-      (e : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin n)) T),
+    ∃ U : X.Opens, IsAffine U.toScheme ∧ y ∈ U ∧
+      ∃ (n : ℕ) (e : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin n)) T),
       LocallyOfFinitePresentation e ∧ LocallyQuasiFinite e ∧
       e ≫ (AffineSpace (ULift.{u} (Fin n)) T ↘ T) = U.ι ≫ f ∧
       topologicalKrullDimAt (f.asFiber y) = (n : WithBot ℕ∞) := by

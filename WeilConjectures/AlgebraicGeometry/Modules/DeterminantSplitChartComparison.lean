@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
@@ -199,7 +199,7 @@ set_option backward.isDefEq.respectTransparency false in
 private theorem topExterior_generator {X : Scheme.{v}} (M : X.Modules)
     (V : X.Opens) (r : ℕ)
     (e : M.over V ≅ SheafOfModules.free (ULift.{v} (Fin r))) :
-    ∃ t : Γ(exteriorSheaf M r, V), IsFreeGenerator t := by
+    ∃ t : Γ(exteriorPower M r, V), IsFreeGenerator t := by
   classical
   let : Unique (Set.powersetCard (Fin r) r) :=
     { default := ⟨Finset.univ, by simp⟩
@@ -254,17 +254,17 @@ theorem determinant_split_chart_comparison {X : Scheme.{v}}
           (∀ z, (eW z).2 = S.g.val.app (op W) z) ∧
           Function.Bijective
             (((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.app
-              (exteriorSheafPresheaf S.X₂ (r + s))).app (op W)) ∧
+              ((S.X₂.val.exteriorPower (R := X.presheaf) (r + s)))).app (op W)) ∧
           Function.Bijective
-            ((tensorSectionsMap (exteriorSheaf S.X₁ r) (exteriorSheaf S.X₃ s) W).comp
+            ((tensorSectionsMap (exteriorPower S.X₁ r) (exteriorPower S.X₃ s) W).comp
               (TensorProduct.map (R := X.presheaf.obj (op W))
                 (R₂ := X.presheaf.obj (op W)) (σ₁₂ := RingHom.id _)
                 (((PresheafOfModules.sheafificationAdjunction
                   (𝟙 X.ringCatSheaf.obj)).unit.app
-                  (exteriorSheafPresheaf S.X₁ r)).app (op W)).hom
+                  (S.X₁.val.exteriorPower (R := X.presheaf) r)).app (op W)).hom
                 (((PresheafOfModules.sheafificationAdjunction
                   (𝟙 X.ringCatSheaf.obj)).unit.app
-                  (exteriorSheafPresheaf S.X₃ s)).app (op W)).hom)) := by
+                  (S.X₃.val.exteriorPower (R := X.presheaf) s)).app (op W)).hom)) := by
   classical
   intro x hx
   obtain ⟨V, hVU, hxV, ⟨aV⟩, ⟨cV⟩⟩ := commonFrames S.X₁ S.X₃ r s U x hx

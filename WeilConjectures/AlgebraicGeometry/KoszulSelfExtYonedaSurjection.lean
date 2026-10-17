@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
@@ -111,7 +111,7 @@ theorem koszulRegularImmersion_self_ext_yoneda_surjection
         (H.obj (op (S.obj B), S.obj B))
     let T := (Scheme.Modules.restrictFunctor V.ι).obj
       ((Scheme.Modules.tensorPullback i).obj G)
-    let E := Scheme.Modules.exteriorSheaf
+    let E := Scheme.Modules.exteriorPower
       ((Scheme.Modules.restrictFunctor V.ι).obj
         (SheafOfModules.homObj (R := Z.sheaf)
           ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)

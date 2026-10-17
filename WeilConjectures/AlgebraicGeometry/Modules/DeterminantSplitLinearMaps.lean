@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
@@ -238,38 +238,38 @@ set_option backward.isDefEq.respectTransparency false in
 private theorem local_wedge_family_ext {X : Scheme.{v}} (A C D : X.Modules)
     (r s : ℕ) (U : X.Opens)
     (d e : ∀ W : X.Opens, W ≤ U →
-      (exteriorSheaf A r ⊗ exteriorSheaf C s).val.obj (op W)
+      (exteriorPower A r ⊗ exteriorPower C s).val.obj (op W)
         →ₗ[X.presheaf.obj (op W)] D.val.obj (op W))
     (hdmap : ∀ (W V : X.Opens) (hW : W ≤ U) (hVW : V ≤ W) x,
       D.val.map (homOfLE hVW).op (d W hW x) =
         d V (hVW.trans hW)
-          ((exteriorSheaf A r ⊗ exteriorSheaf C s).val.map (homOfLE hVW).op x))
+          ((exteriorPower A r ⊗ exteriorPower C s).val.map (homOfLE hVW).op x))
     (hemap : ∀ (W V : X.Opens) (hW : W ≤ U) (hVW : V ≤ W) x,
       D.val.map (homOfLE hVW).op (e W hW x) =
         e V (hVW.trans hW)
-          ((exteriorSheaf A r ⊗ exteriorSheaf C s).val.map (homOfLE hVW).op x))
+          ((exteriorPower A r ⊗ exteriorPower C s).val.map (homOfLE hVW).op x))
     (hpure : ∀ W hW (a : Fin r → A.val.obj (op W))
       (b : Fin s → C.val.obj (op W)),
-      d W hW (tmulSection (exteriorSheafSection A r W a)
-        (exteriorSheafSection C s W b)) =
-      e W hW (tmulSection (exteriorSheafSection A r W a)
-        (exteriorSheafSection C s W b))) : d = e := by
-  have hsecond := locally_surjective_generated_induction (exteriorSheafPresheaf C s)
-    (exteriorSheaf C s)
+      d W hW (tmulSection (wedge (M := A) (r := r) (U := W) a)
+        (wedge (M := C) (r := s) (U := W) b)) =
+      e W hW (tmulSection (wedge (M := A) (r := r) (U := W) a)
+        (wedge (M := C) (r := s) (U := W) b))) : d = e := by
+  have hsecond := locally_surjective_generated_induction (C.val.exteriorPower (R := X.presheaf) s)
+    (exteriorPower C s)
     ((PresheafOfModules.sheafificationAdjunction.{v}
-      (𝟙 X.ringCatSheaf.obj)).unit.app (exteriorSheafPresheaf C s))
+      (𝟙 X.ringCatSheaf.obj)).unit.app (C.val.exteriorPower (R := X.presheaf) s))
     (by
       rw [PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app]
       exact (GrothendieckTopology.W_toSheafify _ _).isLocallySurjective)
-    (fun W ↦ Set.range (exteriorPower.ιMulti (X.presheaf.obj (op W)) s))
-    (fun W ↦ exteriorPower.ιMulti_span _ _ _)
+    (fun W ↦ Set.range (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) s))
+    (fun W ↦ _root_.exteriorPower.ιMulti_span _ _ _)
     (fun W y ↦ ∀ hW : W ≤ U, ∀ a : Fin r → A.val.obj (op W),
-      d W hW (tmulSection (exteriorSheafSection A r W a) y) =
-        e W hW (tmulSection (exteriorSheafSection A r W a) y))
+      d W hW (tmulSection (wedge (M := A) (r := r) (U := W) a) y) =
+        e W hW (tmulSection (wedge (M := A) (r := r) (U := W) a) y))
     (by intro W hW a; simp only [tmulSection_zero, map_zero])
     (by
       intro W x y hx hy hW a
-      rw [tmulSection_add (M := exteriorSheaf A r) (N := exteriorSheaf C s),
+      rw [tmulSection_add (M := exteriorPower A r) (N := exteriorPower C s),
         map_add, map_add, hx hW a, hy hW a])
     (by
       intro W c x hx hW a
@@ -282,38 +282,38 @@ private theorem local_wedge_family_ext {X : Scheme.{v}} (A C D : X.Modules)
       intro V f hf
       have hf' : homOfLE (leOfHom f) = f := Subsingleton.elim _ _
       rw [← hf']
-      erw [tmulSection_map (M := exteriorSheaf A r) (N := exteriorSheaf C s)]
+      erw [tmulSection_map (M := exteriorPower A r) (N := exteriorPower C s)]
       rw [hf']
       have hm := (PresheafOfModules.naturality_apply
         ((PresheafOfModules.sheafificationAdjunction.{v}
-          (𝟙 X.ringCatSheaf.obj)).unit.app (exteriorSheafPresheaf A r)) f.op
-        (exteriorPower.ιMulti (X.presheaf.obj (op W)) r a)).symm
-      have hr := (Classical.choose_spec
-        (exteriorSheafRestriction_existsUnique A r f.op)).1 a
-      have hm' : (exteriorSheaf A r).val.map f.op
-          (exteriorSheafSection A r W a) =
-        exteriorSheafSection A r V (fun i ↦ A.val.map f.op (a i)) :=
+          (𝟙 X.ringCatSheaf.obj)).unit.app (A.val.exteriorPower (R := X.presheaf) r)) f.op
+        (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r a)).symm
+      have hr :=
+        (_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := X.presheaf) A.val r f.op) a
+      have hm' : (exteriorPower A r).val.map f.op
+          (wedge (M := A) (r := r) (U := W) a) =
+        wedge (M := A) (r := r) (U := V) (fun i ↦ A.val.map f.op (a i)) :=
         hm.trans (congrArg
           (((PresheafOfModules.sheafificationAdjunction.{v}
             (𝟙 X.ringCatSheaf.obj)).unit.app
-              (exteriorSheafPresheaf A r)).app (op V)) hr)
+              (A.val.exteriorPower (R := X.presheaf) r)).app (op V)) hr)
       erw [hm']
       exact ht V f hf ((leOfHom f).trans hW) (fun i ↦ A.val.map f.op (a i)))
-  have hfirst := locally_surjective_generated_induction (exteriorSheafPresheaf A r)
-    (exteriorSheaf A r)
+  have hfirst := locally_surjective_generated_induction (A.val.exteriorPower (R := X.presheaf) r)
+    (exteriorPower A r)
     ((PresheafOfModules.sheafificationAdjunction.{v}
-      (𝟙 X.ringCatSheaf.obj)).unit.app (exteriorSheafPresheaf A r))
+      (𝟙 X.ringCatSheaf.obj)).unit.app (A.val.exteriorPower (R := X.presheaf) r))
     (by
       rw [PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app]
       exact (GrothendieckTopology.W_toSheafify _ _).isLocallySurjective)
-    (fun W ↦ Set.range (exteriorPower.ιMulti (X.presheaf.obj (op W)) r))
-    (fun W ↦ exteriorPower.ιMulti_span _ _ _)
-    (fun W x ↦ ∀ hW : W ≤ U, ∀ y : (exteriorSheaf C s).val.obj (op W),
+    (fun W ↦ Set.range (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r))
+    (fun W ↦ _root_.exteriorPower.ιMulti_span _ _ _)
+    (fun W x ↦ ∀ hW : W ≤ U, ∀ y : (exteriorPower C s).val.obj (op W),
       d W hW (tmulSection x y) = e W hW (tmulSection x y))
     (by intro W hW y; simp only [zero_tmulSection, map_zero])
     (by
       intro W x y hx hy hW z
-      rw [add_tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf C s),
+      rw [add_tmulSection (M := exteriorPower A r) (N := exteriorPower C s),
         map_add, map_add, hx hW z, hy hW z])
     (by
       intro W c x hx hW y
@@ -326,11 +326,11 @@ private theorem local_wedge_family_ext {X : Scheme.{v}} (A C D : X.Modules)
       intro V f hf
       have hf' : homOfLE (leOfHom f) = f := Subsingleton.elim _ _
       rw [← hf']
-      erw [tmulSection_map (M := exteriorSheaf A r) (N := exteriorSheaf C s)]
+      erw [tmulSection_map (M := exteriorPower A r) (N := exteriorPower C s)]
       rw [hf']
-      exact ht V f hf ((leOfHom f).trans hW) ((exteriorSheaf C s).val.map f.op y))
-  let M := exteriorSheaf A r
-  let N := exteriorSheaf C s
+      exact ht V f hf ((leOfHom f).trans hW) ((exteriorPower C s).val.map f.op y))
+  let M := exteriorPower A r
+  let N := exteriorPower C s
   let k := toSheafifyTensor M N ≫ (SheafOfModules.tensorObjIsoSheafification M N).inv.val
   have hk : Presheaf.IsLocallySurjective (Opens.grothendieckTopology X)
       ((PresheafOfModules.toPresheaf _).map k) := by
@@ -386,14 +386,14 @@ set_option backward.isDefEq.respectTransparency false in
 private theorem wedge_update_add {X : Scheme.{v}} {A B : X.Modules}
     (f : A ⟶ B) (r s : ℕ) (W : X.Opens) (a : Fin r → A.val.obj (op W))
     (c : Fin s → B.val.obj (op W)) (j : Fin s) (x y : B.val.obj (op W)) :
-    exteriorSheafSection B (r + s) W
+    wedge (M := B) (r := (r + s)) (U := W)
       (Fin.append (fun k ↦ f.val.app (op W) (a k)) (Function.update c j (x + y))) =
-    exteriorSheafSection B (r + s) W
+    wedge (M := B) (r := (r + s)) (U := W)
       (Fin.append (fun k ↦ f.val.app (op W) (a k)) (Function.update c j x)) +
-    exteriorSheafSection B (r + s) W
+    wedge (M := B) (r := (r + s)) (U := W)
       (Fin.append (fun k ↦ f.val.app (op W) (a k)) (Function.update c j y)) := by
   classical
-  simp only [append_update, exteriorSheafSection]
+  simp only [append_update, wedge]
   rw [AlternatingMap.map_update_add, map_add]
 
 set_option backward.isDefEq.respectTransparency false in
@@ -402,17 +402,17 @@ private theorem wedge_lifts_eq {X : Scheme.{v}} {A B : X.Modules}
     (W : X.Opens) (a : Fin r → A.val.obj (op W))
     (c c' : Fin s → B.val.obj (op W))
     (hc : ∀ j, ∃ z : A.val.obj (op W), c j = c' j + f.val.app (op W) z) :
-    exteriorSheafSection B n W
+    wedge (M := B) (r := n) (U := W)
       (fun i ↦ Fin.append (fun k ↦ f.val.app (op W) (a k)) c (Fin.cast hr i)) =
-    exteriorSheafSection B n W
+    wedge (M := B) (r := n) (U := W)
       (fun i ↦ Fin.append (fun k ↦ f.val.app (op W) (a k)) c' (Fin.cast hr i)) := by
   classical
   subst n
   simp only [Fin.cast_refl]
   have h (T : Finset (Fin s)) :
-      exteriorSheafSection B (r + s) W
+      wedge (M := B) (r := (r + s)) (U := W)
         (Fin.append (fun k ↦ f.val.app (op W) (a k)) (T.piecewise c c')) =
-      exteriorSheafSection B (r + s) W
+      wedge (M := B) (r := (r + s)) (U := W)
         (Fin.append (fun k ↦ f.val.app (op W) (a k)) c') := by
     induction T using Finset.induction_on with
     | empty => simp
@@ -466,19 +466,19 @@ theorem determinant_split_linear_maps_exists {X : Scheme.{v}}
     (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))
     (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b) :
     ∃! (d : ∀ (W : X.Opens), W ≤ U →
-      (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)
-        →ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W)),
+      (exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃).val.obj (op W)
+        →ₗ[X.presheaf.obj (op W)] (exteriorPower S.X₂ r₂).val.obj (op W)),
       (∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))
         (b : Fin r₃ → S.X₃.val.obj (op W)),
-        d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)
-          (exteriorSheafSection S.X₃ r₃ W b)) =
-        exteriorSheafSection S.X₂ r₂ W
+        d W hW (tmulSection (wedge (M := S.X₁) (r := r₁) (U := W) a)
+          (wedge (M := S.X₃) (r := r₃) (U := W) b)) =
+        wedge (M := S.X₂) (r := r₂) (U := W)
           (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))
             (fun j ↦ l W hW (b j)) (Fin.cast hr i))) ∧
       (∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) y,
-        (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =
+        (exteriorPower S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =
           d Z (hZW.trans hW)
-            ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map
+            ((exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃).val.map
               (homOfLE hZW).op y)) := by
   let t := localEval U (biprod.inr ≫ e.inv)
   obtain ⟨d, hdwedge, hdmap⟩ :=
@@ -486,9 +486,9 @@ theorem determinant_split_linear_maps_exists {X : Scheme.{v}}
       (localEval_map U (biprod.inr ≫ e.inv))
   have hformula : ∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))
       (b : Fin r₃ → S.X₃.val.obj (op W)),
-      d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)
-        (exteriorSheafSection S.X₃ r₃ W b)) =
-      exteriorSheafSection S.X₂ r₂ W
+      d W hW (tmulSection (wedge (M := S.X₁) (r := r₁) (U := W) a)
+        (wedge (M := S.X₃) (r := r₃) (U := W) b)) =
+      wedge (M := S.X₂) (r := r₂) (U := W)
         (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))
           (fun j ↦ l W hW (b j)) (Fin.cast hr i)) := by
     intro W hW a b
@@ -505,7 +505,7 @@ theorem determinant_split_linear_maps_exists {X : Scheme.{v}}
     abel
   refine ⟨d, ⟨hformula, hdmap⟩, ?_⟩
   intro d' hd'
-  apply local_wedge_family_ext S.X₁ S.X₃ (exteriorSheaf S.X₂ r₂) r₁ r₃ U
+  apply local_wedge_family_ext S.X₁ S.X₃ (exteriorPower S.X₂ r₂) r₁ r₃ U
     d' d hd'.2 hdmap
   intro W hW a b
   exact (hd'.1 W hW a b).trans (hformula W hW a b).symm

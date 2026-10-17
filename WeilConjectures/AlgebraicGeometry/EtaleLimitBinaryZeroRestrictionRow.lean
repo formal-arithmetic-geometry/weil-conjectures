@@ -37,7 +37,6 @@ private theorem biprod_prod_snd (A B : AddCommGrpCat.{u + 1}) :
       AddCommGrpCat.ofHom (AddMonoidHom.snd A B) = biprod.snd := by
   rw [← AddCommGrpCat.biprodIsoProd_inv_comp_snd, Iso.hom_inv_id_assoc]
 
--- The existential finality witness is retained in the original statement.
 set_option linter.unusedVariables false in
 set_option maxHeartbeats 600000 in
 -- The dependent scheme and sheaf identifications exhaust the default elaboration budget.

@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 import WeilConjectures.AlgebraicGeometry.Modules.DualLocalEvaluation
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
@@ -24,6 +24,7 @@ universe u
 
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
+open Scheme.Modules (wedge)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite-free exterior sheaves admit wedge bases, and internal dual evaluation identifies
@@ -58,20 +59,20 @@ theorem exterior_dual_local_frames (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
     ∃ (a : Module.Basis (Fin r) (X.presheaf.obj (op V)) (M.val.obj (op V)))
       (φ : Fin r → (Scheme.Modules.dual M).val.obj (op V))
       (b : Module.Basis (Set.powersetCard (Fin r) n) (X.presheaf.obj (op V))
-        ((Scheme.Modules.exteriorSheaf (Scheme.Modules.dual M) n).val.obj (op V)))
+        ((Scheme.Modules.exteriorPower (Scheme.Modules.dual M) n).val.obj (op V)))
       (d : Module.Basis (Set.powersetCard (Fin r) n) (X.presheaf.obj (op V))
-        ((Scheme.Modules.exteriorSheaf M n).val.obj (op V)))
-      (c : (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj (op V) ≃ₗ[
+        ((Scheme.Modules.exteriorPower M n).val.obj (op V)))
+      (c : (Scheme.Modules.dual (Scheme.Modules.exteriorPower M n)).val.obj (op V) ≃ₗ[
         X.presheaf.obj (op V)] Module.Dual (X.presheaf.obj (op V))
-          ((Scheme.Modules.exteriorSheaf M n).val.obj (op V))),
+          ((Scheme.Modules.exteriorPower M n).val.obj (op V))),
       (∀ (j : Fin r) (x : M.val.obj (op V)),
         (φ j).app (op (Over.mk (𝟙 V))) x = a.coord j x) ∧
-      (∀ s, b s = Scheme.Modules.exteriorSheafSection (Scheme.Modules.dual M) n V
+      (∀ s, b s = wedge (M := (Scheme.Modules.dual M)) (r := n) (U := V)
         (φ ∘ Set.powersetCard.ofFinEmbEquiv.symm s)) ∧
-      (∀ s, d s = Scheme.Modules.exteriorSheafSection M n V
+      (∀ s, d s = wedge (M := M) (r := n) (U := V)
         (a ∘ Set.powersetCard.ofFinEmbEquiv.symm s)) ∧
-      (∀ (ψ : (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj (op V))
-        (x : (Scheme.Modules.exteriorSheaf M n).val.obj (op V)),
+      (∀ (ψ : (Scheme.Modules.dual (Scheme.Modules.exteriorPower M n)).val.obj (op V))
+        (x : (Scheme.Modules.exteriorPower M n).val.obj (op V)),
         c ψ x = ψ.app (op (Over.mk (𝟙 V))) x) := by
   classical
   let : CommRing (X.ringCatSheaf.obj.obj (op V)) :=
@@ -100,13 +101,14 @@ theorem exterior_dual_local_frames (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
   obtain ⟨_, hExtDual⟩ := Scheme.Modules.exteriorSheaf_local_free_comparison X
     (Scheme.Modules.dual M) n U r eDual
   let q := (((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.app
-    (Scheme.Modules.exteriorSheafPresheaf M n)).app (op V)).hom
+    (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)).app (op V)).hom
   let qDual := (((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.app
-    (Scheme.Modules.exteriorSheafPresheaf (Scheme.Modules.dual M) n)).app (op V)).hom
+    ((_root_.PresheafOfModules.exteriorPower (R := _) (Scheme.Modules.dual M).val n))).app
+      (op V)).hom
   let d := (a.exteriorPower n).map (LinearEquiv.ofBijective q (hExt V g))
   let b := (φBasis.exteriorPower n).map (LinearEquiv.ofBijective qDual (hExtDual V g))
   obtain ⟨c, hc⟩ := Scheme.Modules.dual_local_evaluation_equiv X
-    (Scheme.Modules.exteriorSheaf M n) U (ULift.{u} (Set.powersetCard (Fin r) n))
+    (Scheme.Modules.exteriorPower M n) U (ULift.{u} (Set.powersetCard (Fin r) n))
     eExt V g
   refine ⟨a, φ, b, d, c, hφ, ?_, ?_, hc⟩
   · intro s

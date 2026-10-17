@@ -46,7 +46,7 @@ theorem existsUnique_hom_of_cover
     (hR : Presheaf.IsSheaf J (R ⋙ forget₂ CommRingCat RingCat.{u}))
     (F G : SheafOfModules.{v} ⟨R ⋙ forget₂ CommRingCat RingCat.{u}, hR⟩)
     (U : C) (I : Type w) (Uᵢ : I → C) (f : ∀ i : I, Uᵢ i ⟶ U)
-    [∀ (V : C) (g : V ⟶ U) (i : I), HasPullback g (f i)]
+    [∀ i j : I, HasPullback (f i) (f j)]
     (hcover : Sieve.ofArrows Uᵢ f ∈ J U)
     (φᵢ : ∀ i : I, F.over (Uᵢ i) ⟶ G.over (Uᵢ i))
     (hcompatible : ∀ (i j : I) (W : C) (a : W ⟶ pullback (f i) (f j)),

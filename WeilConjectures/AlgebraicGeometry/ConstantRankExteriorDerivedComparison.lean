@@ -32,12 +32,14 @@ set_option maxHeartbeats 800000 in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private noncomputable def exteriorIso {X : Scheme.{u}} (M N : X.Modules)
-    (d : ℕ) (e : M ≅ N) : exteriorSheaf M d ≅ exteriorSheaf N d := by
+    (d : ℕ) (e : M ≅ N) : exteriorPower M d ≅ exteriorPower N d := by
   let ep : M.val ≅ N.val := (toPresheafOfModules X).mapIso e
-  let es (U : X.Opensᵒᵖ) : exteriorSheafObj M d U ≅ exteriorSheafObj N d U :=
+  let es (U : X.Opensᵒᵖ) : (_root_.PresheafOfModules.exteriorPower (R := _) M.val d).obj U ≅
+      (_root_.PresheafOfModules.exteriorPower (R := _) N.val d).obj U :=
     (ModuleCat.exteriorPower.functor (X.presheaf.obj U) d).mapIso
       ((PresheafOfModules.evaluation X.ringCatSheaf.obj U).mapIso ep)
-  let pe : exteriorSheafPresheaf M d ≅ exteriorSheafPresheaf N d :=
+  let pe : _root_.PresheafOfModules.exteriorPower (R := _) M.val d ≅
+      _root_.PresheafOfModules.exteriorPower (R := _) N.val d :=
     PresheafOfModules.isoMk es (by
       intro U V f
       let : CommRing (X.ringCatSheaf.obj.obj U) :=
@@ -48,13 +50,12 @@ private noncomputable def exteriorIso {X : Scheme.{u}} (M N : X.Modules)
       apply exteriorPower.linearMap_ext
       ext a
       change exteriorPower.map d (e.hom.val.app V).hom
-          (exteriorSheafRestriction M d f (exteriorPower.ιMulti (X.presheaf.obj U) d a)) =
-        exteriorSheafRestriction N d f
+          ((_root_.PresheafOfModules.exteriorPower (R := _) M.val d).map f
+            (exteriorPower.ιMulti (X.presheaf.obj U) d a)) =
+        ((_root_.PresheafOfModules.exteriorPower (R := _) N.val d).map f)
           (exteriorPower.map d (e.hom.val.app U).hom (exteriorPower.ιMulti (X.presheaf.obj U) d a))
-      have hm := (Classical.choose_spec
-        (exteriorSheafRestriction_existsUnique M d f)).1 a
-      have hn := (Classical.choose_spec
-        (exteriorSheafRestriction_existsUnique N d f)).1
+      have hm := (_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := _) M.val d f) a
+      have hn := (_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := _) N.val d f)
           (fun i ↦ e.hom.val.app U (a i))
       have hu := exteriorPower.map_apply_ιMulti (R := X.presheaf.obj U) (n := d)
         (e.hom.val.app U).hom a
@@ -92,7 +93,7 @@ private theorem zeroPushforward {X Y : Scheme.{u}} [IsEmpty Y]
 
 private theorem termIso {X : Scheme.{u}} (M : X.Modules) (d : ℕ) (i : ℤ) :
     Nonempty (locallyRankedExteriorTerm M (LocallyConstant.const X d) i ≅
-      if i = (d : ℤ) then exteriorSheaf M d else
+      if i = (d : ℤ) then exteriorPower M d else
         (Limits.HasZeroObject.zero (C := X.Modules)).choose) := by
   classical
   by_cases hi : i = (d : ℤ)
@@ -101,9 +102,9 @@ private theorem termIso {X : Scheme.{u}} (M : X.Modules) (d : ℕ) (i : ℤ) :
       ext x
       simp [exteriorRankOpen]
     let T (U : X.Opens) : X.Modules :=
-      (pushforward U.ι).obj (exteriorSheaf ((restrictFunctor U.ι).obj M) d)
+      (pushforward U.ι).obj (exteriorPower ((restrictFunctor U.ι).obj M) d)
     simp only [locallyRankedExteriorTerm, Int.natCast_nonneg, if_pos, Int.toNat_natCast]
-    change Nonempty (T (exteriorRankOpen (LocallyConstant.const X d) d) ≅ exteriorSheaf M d)
+    change Nonempty (T (exteriorRankOpen (LocallyConstant.const X d) d) ≅ exteriorPower M d)
     rw [hrank]
     exact exteriorSheaf_fullOpen_pushforward_iso M d
   · simp only [if_neg hi]
@@ -129,10 +130,10 @@ Proof: the fibre of the constant function d over d is all of X, while each other
 fibre is empty. Restriction and pushforward along the inclusion of the full open
 compose to the identity, and exterior powers commute with this restriction.
 Pushforward from an empty open is zero. Thus the locally ranked exterior complex
-has exteriorSheaf M d in degree d and zero in every other degree, with zero
+has exteriorPower M d in degree d and zero in every other degree, with zero
  differential. The sectionwise exterior-power maps induced by e and e.inv commute
 with restrictions (check on pure wedges) and are inverse; sheafification gives
-exteriorSheaf M d isomorphic to exteriorSheaf N d. These maps give a degreewise
+exteriorPower M d isomorphic to exteriorPower N d. These maps give a degreewise
 isomorphism to the single complex with that sheaf in degree d. Apply the derived
 localization functor, and the single/shift comparison: a single in degree d is
 the degree-zero single shifted by -d. Empty X and d = 0 obey the same calculation. -/
@@ -144,10 +145,10 @@ theorem constantRankExterior_derived_iso {X : Scheme.{u}}
         (locallyRankedExteriorComplex M (LocallyConstant.const X d))) ≅
       ((DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj
-          (exteriorSheaf N d))⟦-(d : ℤ)⟧) := by
+          (exteriorPower N d))⟦-(d : ℤ)⟧) := by
   classical
   let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
-  let F : C := exteriorSheaf M d
+  let F : C := exteriorPower M d
   let K : CochainComplex C ℤ :=
     locallyRankedExteriorComplex M (LocallyConstant.const X d)
   let S : CochainComplex C ℤ := (CochainComplex.singleFunctor C (d : ℤ)).obj F
@@ -169,6 +170,6 @@ theorem constantRankExterior_derived_iso {X : Scheme.{u}}
     ((DerivedCategory.singleFunctorIsoCompQ C (d : ℤ)).app F).symm ≪≫
     (DerivedCategory.singleFunctor C (d : ℤ)).mapIso (exteriorIso M N d e) ≪≫
     (((DerivedCategory.singleFunctors C).shiftIso (-(d : ℤ)) (d : ℤ) 0
-      (by simp)).app (exteriorSheaf N d)).symm⟩
+      (by simp)).app (exteriorPower N d)).symm⟩
 
 end AlgebraicGeometry.Scheme.Modules

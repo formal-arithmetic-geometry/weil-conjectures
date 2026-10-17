@@ -7,9 +7,9 @@ Authors: Bin Wu
 module
 
 /-
-Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group C1
+Authors: Bin Wu
 -/
 
 public import WeilConjectures.AlgebraicGeometry.Curve

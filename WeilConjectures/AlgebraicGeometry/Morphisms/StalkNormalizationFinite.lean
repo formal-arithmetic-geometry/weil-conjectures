@@ -33,7 +33,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 /-- Finiteness of the concrete normalization at a generic boundary point.
 
 Source: Stacks Project, Tag 0EYJ (pione-lemma-extend-covering), local claim;
@@ -52,22 +51,16 @@ by pullback to the local family at s. The affine algebra lemma uses the trace
 bound of Stacks 032L; its only remaining geometric input is the injection of
 sections of the open cover into its finite etale generic algebra. No action,
 invertible group order, or minimal boundary condition enters this finiteness
-argument. The statement retains all the original hypotheses. -/
-theorem GaloisCover.stalk_normalization_finite {S C : Scheme.{u}} [IsNoetherian S]
+argument. -/
+theorem stalk_normalization_finite {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]
-    (G : Type (u + 1)) [Group G] [Finite G]
-    (hG : IsUnit (Nat.card G : Γ(S, ⊤)))
     {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)
     (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)
-    (Z : GaloisCover G Cη)
-    (U : S.Opens) (hηU : genericPoint S ∈ U)
-    (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
-    (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)
-    (hψ : IsPullback ψ Z.π PA.obj.hom jU)
-    (s : S) (hs : s ∉ U)
-    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s) :
+    (U : S.Opens)
+    (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
+    (s : S) :
     letI : IsFinite PA.obj.hom := PA.property
     letI : QuasiCompact (c ⁻¹ᵁ U).ι :=
       MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)

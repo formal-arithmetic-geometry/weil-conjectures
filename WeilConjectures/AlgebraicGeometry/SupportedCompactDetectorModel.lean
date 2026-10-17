@@ -183,9 +183,7 @@ private theorem supported_closed_coproducts (Y : Scheme.{u})
   let si := (S.mapIso iso).addCommGroupIsoToAddEquiv
   have (i : I) : Subsingleton (↑(TopCat.Presheaf.stalk (M i).val.presheaf y)) :=
     (p.prop_diag_obj ⟨i⟩).2 k y hy
-  obtain ⟨d, _⟩ := SheafOfModules.exists_stalk_directSum_linearEquiv R I
-    (fun U r s ↦ by
-      exact @mul_comm (Y.presheaf.obj (Opposite.op U)) _ r s) M y
+  obtain ⟨d, _⟩ := SheafOfModules.exists_stalk_directSum_linearEquiv R I M y
   have : Subsingleton (↑(TopCat.Presheaf.stalk (∐ M).val.presheaf y)) :=
     d.toEquiv.injective.subsingleton
   have : Subsingleton (S.obj (∐ M)) := by

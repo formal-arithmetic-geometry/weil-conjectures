@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentation
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilPathFrobeniusElement
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.WeilSheaf.StalkCharpoly
 
 /-!
@@ -34,6 +35,7 @@ universe u
 -- `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy` are elaborated without this instance;
 -- elaborating `Sheaf.Γ` through it here would produce terms which the kernel compares slowly.
 attribute [-instance] ModuleCat.instIsRightAdjointForgetLinearMapIdCarrier
+  ModuleCat.isGrothendieckAbelian_of_commRing
   CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape
 
 open CategoryTheory

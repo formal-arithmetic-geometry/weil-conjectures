@@ -46,7 +46,7 @@ C₀; d/dx extends (lem-weil-pbc-derivation-extends) with D(f) = f' a unit mod f
 is regular (lem-weil-pbc-hypersurface-derivation-regular).
 7. Characteristic p: A₀ ≅ k[[X₁, …, X_d]]; r₀ = 0 by lem-weil-pbc-helper-g-ring-char-p,
 r₀ ≠ 0 by lem-weil-pbc-another-helper-g-ring. Steps 3, 2, 1 conclude. -/
-theorem completeLocalFormalFibres
+theorem isRegular_algebraMap_adicCompletion_localization
     (S : Type u) [CommRing S] [IsNoetherianRing S] [IsLocalRing S]
     [IsAdicComplete (IsLocalRing.maximalIdeal S) S]
     (Q : Ideal (Polynomial S)) [Q.IsMaximal]

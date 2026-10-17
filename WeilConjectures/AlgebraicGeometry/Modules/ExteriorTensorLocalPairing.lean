@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import WeilConjectures.AlgebraicGeometry.Modules.LocalBilinearSheafificationTensor
 
@@ -25,20 +25,18 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 private theorem restriction_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
     {U V : X.Opensᵒᵖ} (g : U ⟶ V) (a : Fin n → M.val.obj U) :
-    exteriorSheafRestriction M n g (exteriorPower.ιMulti (X.presheaf.obj U) n a) =
-      exteriorPower.ιMulti (X.presheaf.obj V) n (fun i ↦ M.val.map g (a i)) :=
-  (Classical.choose_spec (exteriorSheafRestriction_existsUnique M n g)).1 a
+    (M.val.exteriorPower (R := X.presheaf) n).map g
+        (_root_.exteriorPower.ιMulti (X.presheaf.obj U) n a) =
+      (_root_.exteriorPower.ιMulti _ n (fun i ↦ M.val.map g (a i)) :
+        (M.val.exteriorPower (R := X.presheaf) n).obj V) :=
+  _root_.PresheafOfModules.exteriorPower_map_ιMulti (R := X.presheaf) M.val n g a
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem exterior_section_map {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
     {W Z : X.Opens} (g : Z ⟶ W) (a : Fin n → M.val.obj (op W)) :
-    (exteriorSheaf M n).val.map g.op (exteriorSheafSection M n W a) =
-      exteriorSheafSection M n Z (fun i ↦ M.val.map g.op (a i)) := by
-  let η := (PresheafOfModules.sheafificationAdjunction.{v}
-    (𝟙 X.ringCatSheaf.obj)).unit.app (exteriorSheafPresheaf M n)
-  have hn := PresheafOfModules.naturality_apply η g.op
-    (exteriorPower.ιMulti (X.presheaf.obj (op W)) n a)
-  exact hn.symm.trans (congrArg (η.app (op Z)) (restriction_wedge M n g.op a))
+    (exteriorPower M n).val.map g.op (wedge (M := M) (r := n) (U := W) a) =
+      wedge (M := M) (r := n) (U := Z) (fun i ↦ M.val.map g.op (a i)) :=
+  wedge_map g a
 
 private noncomputable def wedgeMul {R M : Type v} [CommRing R] [AddCommGroup M]
     [Module R M] (r s : ℕ) :
@@ -55,8 +53,8 @@ private noncomputable def wedgeMul {R M : Type v} [CommRing R] [AddCommGroup M]
 
 private theorem wedgeMul_wedge {R M : Type v} [CommRing R] [AddCommGroup M]
     [Module R M] (r s : ℕ) (a : Fin r → M) (c : Fin s → M) :
-    wedgeMul r s (exteriorPower.ιMulti R r a) (exteriorPower.ιMulti R s c) =
-      exteriorPower.ιMulti R (r + s) (Fin.append a c) := by
+    wedgeMul r s (_root_.exteriorPower.ιMulti R r a) (_root_.exteriorPower.ιMulti R s c) =
+      _root_.exteriorPower.ιMulti R (r + s) (Fin.append a c) := by
   apply Subtype.ext
   exact ExteriorAlgebra.ιMulti_mul_ιMulti a c
 
@@ -69,7 +67,7 @@ Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph, construct
 before independence of lifts (blueprint: lem-sc-exterior-tensor-local-pairing).
 
 Proof: Write j for the inclusion of U, V(W)=j(image)(j(preimage)(W))=U ∩ W,
-and H=j_*(exteriorSheaf B (r+s)|U). Its sections on W are the exterior-sheaf
+and H=j_*(exteriorPower B (r+s)|U). Its sections on W are the exterior-sheaf
 sections on V(W), with scalars restricted from W. The equality
 j.app W followed by (j.appIso (j(preimage)(W))).inv = O_X(W → V(W))
 identifies this scalar action with ordinary restriction.
@@ -89,8 +87,8 @@ beta_V(W). The scalar identity above makes this an O_X(W)-bilinear map into H(W)
 It is natural: for Z contained in W, V(Z) is contained in V(W), and the two
 composites from V(Z) to W are equal; beta's naturality gives the required equation.
 Apply the bilinear sheafification extension theorem and then the sheaf tensor
-universal property to obtain phi: exteriorSheaf A r tensor exteriorSheaf C s → H.
-For W contained in U the open-restriction adjunction unit from exteriorSheaf B n
+universal property to obtain phi: exteriorPower A r tensor exteriorPower C s → H.
+For W contained in U the open-restriction adjunction unit from exteriorPower B n
 has bijective component, since V(W)=W and its component is restriction along
 that equality. Compose phi_W with the inverse of this linear equivalence to
 get d_W. Naturality of phi and the unit gives naturality of d. Their equations
@@ -106,67 +104,64 @@ theorem exteriorTensor_local_pairing {X : Scheme.{v}} {A B C : X.Modules}
       B.val.map (homOfLE hZW).op (t W hW b) =
         t Z (hZW.trans hW) (C.val.map (homOfLE hZW).op b)) :
     ∃ d : ∀ W : X.Opens, W ≤ U →
-      (exteriorSheaf A r ⊗ exteriorSheaf C s).val.obj (op W)
-        →ₗ[X.presheaf.obj (op W)] (exteriorSheaf B n).val.obj (op W),
+      (exteriorPower A r ⊗ exteriorPower C s).val.obj (op W)
+        →ₗ[X.presheaf.obj (op W)] (exteriorPower B n).val.obj (op W),
       (∀ W hW (a : Fin r → A.val.obj (op W)) (b : Fin s → C.val.obj (op W)),
-        d W hW (tmulSection (exteriorSheafSection A r W a)
-          (exteriorSheafSection C s W b)) =
-        exteriorSheafSection B n W
+        d W hW (tmulSection (wedge (M := A) (r := r) (U := W) a)
+          (wedge (M := C) (r := s) (U := W) b)) =
+        wedge (M := B) (r := n) (U := W)
           (fun i ↦ Fin.append (fun j ↦ f.val.app (op W) (a j))
             (fun j ↦ t W hW (b j)) (Fin.cast hr i))) ∧
       (∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) y,
-        (exteriorSheaf B n).val.map (homOfLE hZW).op (d W hW y) =
+        (exteriorPower B n).val.map (homOfLE hZW).op (d W hW y) =
           d Z (hZW.trans hW)
-            ((exteriorSheaf A r ⊗ exteriorSheaf C s).val.map (homOfLE hZW).op y)) := by
+            ((exteriorPower A r ⊗ exteriorPower C s).val.map (homOfLE hZW).op y)) := by
   subst n
   let η := (PresheafOfModules.sheafificationAdjunction.{v}
     (𝟙 X.ringCatSheaf.obj)).unit
   let b : ∀ W : X.Opens, W ≤ U →
-      (exteriorSheafPresheaf A r).obj (op W) →ₗ[X.presheaf.obj (op W)]
-        (exteriorSheafPresheaf C s).obj (op W) →ₗ[X.presheaf.obj (op W)]
-          (exteriorSheaf B (r + s)).val.obj (op W) := fun W hW ↦
+      (A.val.exteriorPower (R := X.presheaf) r).obj (op W) →ₗ[X.presheaf.obj (op W)]
+        (C.val.exteriorPower (R := X.presheaf) s).obj (op W) →ₗ[X.presheaf.obj (op W)]
+          (exteriorPower B (r + s)).val.obj (op W) := fun W hW ↦
     (LinearMap.llcomp (X.presheaf.obj (op W)) _ _ _
-      ((η.app (exteriorSheafPresheaf B (r + s))).app (op W)).hom).comp
-      (((wedgeMul r s).compl₂ (exteriorPower.map (R := X.presheaf.obj (op W)) s
+      ((η.app ((B.val.exteriorPower (R := X.presheaf) (r + s)))).app (op W)).hom).comp
+      (((wedgeMul r s).compl₂ (_root_.exteriorPower.map (R := X.presheaf.obj (op W)) s
         (t W hW))).comp
-        (exteriorPower.map (R := X.presheaf.obj (op W)) r (f.val.app (op W)).hom))
+        (_root_.exteriorPower.map (R := X.presheaf.obj (op W)) r (f.val.app (op W)).hom))
   have hb (W : X.Opens) (hW : W ≤ U) (a : Fin r → A.val.obj (op W))
       (c : Fin s → C.val.obj (op W)) :
-      b W hW (exteriorPower.ιMulti (X.presheaf.obj (op W)) r a)
-        (exteriorPower.ιMulti (X.presheaf.obj (op W)) s c) =
-      exteriorSheafSection B (r + s) W
+      b W hW (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r a)
+        (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) s c) =
+      wedge (M := B) (r := (r + s)) (U := W)
         (Fin.append (fun j ↦ f.val.app (op W) (a j)) (fun j ↦ t W hW (c j))) := by
-    change (η.app (exteriorSheafPresheaf B (r + s))).app (op W)
+    change (η.app ((B.val.exteriorPower (R := X.presheaf) (r + s)))).app (op W)
       (wedgeMul r s
-        (exteriorPower.map (R := X.presheaf.obj (op W)) r (f.val.app (op W)).hom
-          (exteriorPower.ιMulti (X.presheaf.obj (op W)) r a))
-        (exteriorPower.map (R := X.presheaf.obj (op W)) s (t W hW)
-          (exteriorPower.ιMulti (X.presheaf.obj (op W)) s c))) = _
-    rw [exteriorPower.map_apply_ιMulti, exteriorPower.map_apply_ιMulti, wedgeMul_wedge]
+        (_root_.exteriorPower.map (R := X.presheaf.obj (op W)) r (f.val.app (op W)).hom
+          (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r a))
+        (_root_.exteriorPower.map (R := X.presheaf.obj (op W)) s (t W hW)
+          (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) s c))) = _
+    rw [_root_.exteriorPower.map_apply_ιMulti, _root_.exteriorPower.map_apply_ιMulti,
+      wedgeMul_wedge]
     rfl
   have hbmap : ∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) (x y),
-      b Z (hZW.trans hW) ((exteriorSheafPresheaf A r).map (homOfLE hZW).op x)
-        ((exteriorSheafPresheaf C s).map (homOfLE hZW).op y) =
-      (exteriorSheaf B (r + s)).val.map (homOfLE hZW).op (b W hW x y) := by
+      b Z (hZW.trans hW) ((A.val.exteriorPower (R := X.presheaf) r).map (homOfLE hZW).op x)
+        ((C.val.exteriorPower (R := X.presheaf) s).map (homOfLE hZW).op y) =
+      (exteriorPower B (r + s)).val.map (homOfLE hZW).op (b W hW x y) := by
     intro W Z hW hZW x y
     let g := (homOfLE hZW).op
     have hpure (a : Fin r → A.val.obj (op W)) (c : Fin s → C.val.obj (op W)) :
-        b Z (hZW.trans hW) ((exteriorSheafPresheaf A r).map g
-          (exteriorPower.ιMulti (X.presheaf.obj (op W)) r a))
-          ((exteriorSheafPresheaf C s).map g
-            (exteriorPower.ιMulti (X.presheaf.obj (op W)) s c)) =
-        (exteriorSheaf B (r + s)).val.map g
-          (b W hW (exteriorPower.ιMulti (X.presheaf.obj (op W)) r a)
-            (exteriorPower.ιMulti (X.presheaf.obj (op W)) s c)) := by
-      change b Z (hZW.trans hW) (exteriorSheafRestriction A r g
-        (exteriorPower.ιMulti (X.presheaf.obj (op W)) r a))
-        (exteriorSheafRestriction C s g
-          (exteriorPower.ιMulti (X.presheaf.obj (op W)) s c)) = _
+        b Z (hZW.trans hW) ((A.val.exteriorPower (R := X.presheaf) r).map g
+          (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r a))
+          ((C.val.exteriorPower (R := X.presheaf) s).map g
+            (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) s c)) =
+        (exteriorPower B (r + s)).val.map g
+          (b W hW (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r a)
+            (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) s c)) := by
       rw [restriction_wedge A r g a, restriction_wedge C s g c]
       erw [hb Z (hZW.trans hW) (fun i ↦ A.val.map g (a i))
         (fun i ↦ C.val.map g (c i)), hb W hW a c]
       rw [exterior_section_map]
-      apply congrArg (exteriorSheafSection B (r + s) Z)
+      apply congrArg (wedge (M := B) (r := (r + s)) (U := Z))
       funext i
       refine Fin.addCases (fun j ↦ ?_) (fun j ↦ ?_) i
       · simp only [Fin.append_left]
@@ -174,15 +169,15 @@ theorem exteriorTensor_local_pairing {X : Scheme.{v}} {A B C : X.Modules}
       · simp only [Fin.append_right]
         exact (ht W Z hW hZW (c j)).symm
     have hfirst (a : Fin r → A.val.obj (op W)) : ∀ y,
-        b Z (hZW.trans hW) ((exteriorSheafPresheaf A r).map g
-          (exteriorPower.ιMulti (X.presheaf.obj (op W)) r a))
-          ((exteriorSheafPresheaf C s).map g y) =
-        (exteriorSheaf B (r + s)).val.map g
-          (b W hW (exteriorPower.ιMulti (X.presheaf.obj (op W)) r a) y) := by
+        b Z (hZW.trans hW) ((A.val.exteriorPower (R := X.presheaf) r).map g
+          (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r a))
+          ((C.val.exteriorPower (R := X.presheaf) s).map g y) =
+        (exteriorPower B (r + s)).val.map g
+          (b W hW (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r a) y) := by
       intro y
       have hy : y ∈ Submodule.span (X.presheaf.obj (op W))
-          (Set.range (exteriorPower.ιMulti (X.presheaf.obj (op W)) s)) := by
-        rw [exteriorPower.ιMulti_span]; trivial
+          (Set.range (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) s)) := by
+        rw [_root_.exteriorPower.ιMulti_span]; trivial
       induction hy using Submodule.span_induction with
       | mem y hy => obtain ⟨c, rfl⟩ := hy; exact hpure a c
       | zero => simp only [map_zero]
@@ -190,9 +185,10 @@ theorem exteriorTensor_local_pairing {X : Scheme.{v}} {A B C : X.Modules}
       | smul k y _ hy =>
         rw [PresheafOfModules.map_smul, (b Z _ _).map_smul,
           (b W _ _).map_smul, PresheafOfModules.map_smul, hy]
+        rfl
     have hx : x ∈ Submodule.span (X.presheaf.obj (op W))
-        (Set.range (exteriorPower.ιMulti (X.presheaf.obj (op W)) r)) := by
-      rw [exteriorPower.ιMulti_span]; trivial
+        (Set.range (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r)) := by
+      rw [_root_.exteriorPower.ιMulti_span]; trivial
     induction hx using Submodule.span_induction with
     | mem x hx => obtain ⟨a, rfl⟩ := hx; exact hfirst a y
     | zero => simp only [map_zero, LinearMap.zero_apply]
@@ -200,13 +196,14 @@ theorem exteriorTensor_local_pairing {X : Scheme.{v}} {A B C : X.Modules}
     | smul k x _ hx =>
       rw [PresheafOfModules.map_smul, (b Z _).map_smul, LinearMap.smul_apply,
         (b W _).map_smul, LinearMap.smul_apply, PresheafOfModules.map_smul, hx]
+      rfl
   obtain ⟨d, hd, hdn⟩ := local_bilinear_sheafification_tensor_extension
-    (exteriorSheafPresheaf A r) (exteriorSheafPresheaf C s)
-    (exteriorSheaf B (r + s)) U b hbmap
+    (A.val.exteriorPower (R := X.presheaf) r) (C.val.exteriorPower (R := X.presheaf) s)
+    (exteriorPower B (r + s)) U b hbmap
   refine ⟨d, ?_, hdn⟩
   intro W hW a c
-  exact (hd W hW (exteriorPower.ιMulti (X.presheaf.obj (op W)) r a)
-    (exteriorPower.ιMulti (X.presheaf.obj (op W)) s c)).trans (hb W hW a c)
+  exact (hd W hW (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r a)
+    (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) s c)).trans (hb W hW a c)
 
 
 end AlgebraicGeometry.Scheme.Modules

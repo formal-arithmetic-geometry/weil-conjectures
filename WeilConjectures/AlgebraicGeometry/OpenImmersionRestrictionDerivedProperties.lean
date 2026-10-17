@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
@@ -24,14 +24,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Open restriction is additive because its maps are sectionwise the original module maps.
-Source: Stacks Project, Tag 08FE, proof; sectionwise module operations.
-(blueprint: lem-pc-open-immersion-restriction-derived-properties). -/
-instance restriction_additive {X Y : Scheme.{u}} (j : X ⟶ Y)
-    [IsOpenImmersion j] : (Scheme.Modules.restrictFunctor j).Additive := ⟨by
-  intro M N f g
-  ext U x
-  rfl⟩
 
 /-- Restriction along any open immersion is exact and preserves K-injective complexes.
 Source: Stacks Project, Tag 08BS and sectionwise module limits (Tag 01AH).
@@ -53,8 +45,6 @@ theorem openImmersion_restriction_derived_properties
   let e := j.isoOpensRange
   let F := Scheme.Modules.restrictFunctor e.hom
   let G := Scheme.Modules.restrictFunctor e.inv
-  let : F.Additive := restriction_additive _
-  let : G.Additive := restriction_additive _
   let : F.IsEquivalence := Functor.IsEquivalence.mk' G
     ((Scheme.Modules.restrictFunctorId).symm ≪≫
       (Scheme.Modules.restrictFunctorCongr e.inv_hom_id).symm ≪≫

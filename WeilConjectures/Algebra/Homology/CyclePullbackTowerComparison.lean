@@ -283,21 +283,6 @@ theorem tower_comparison_second {A : Type u} [Category.{v} A] [Abelian A]
   have h := NatTrans.congr_app (indexed_differential T π F N i hi) b
   simpa [indexedPullback, targetTerm, Category.assoc] using h
 
-/-- The pointwise pullback comparison and its first projection equation.
-Source: Stacks Project, Derived Categories, Lemma 05T7 (1).
-(blueprint: new-tower-comparison-first). -/
-theorem tower_comparison_first {A : Type u} [Category.{v} A] [Abelian A]
-    {B : Type uB} [Category.{vB} B] (T : A ⥤ A) (π : T ⟶ 𝟭 A)
-    (F : B ⥤ CochainComplex A ℤ) (N : ℤ) (b : B) (i : ℤ) (hi : i ≤ N) :
-    let d := (differential T π F N (i + 1)).app b
-    let f := (F.obj b).d i (i + 1)
-    let g := kernel.ι d ≫ (augmentation T π F N (i + 1)).app b
-    ∃ (c : (term T π F N i).obj b ≅ T.obj (pullback f g)),
-      c.hom ≫ π.app (pullback f g) ≫ pullback.fst f g =
-        (augmentation T π F N i).app b := by
-  exact ⟨canonicalComparison T π F N b i hi,
-    tower_comparison_canonical_first T π F N b i hi⟩
-
 /-- (blueprint: lem-pc-cycle-pullback-tower-comparison-stage3) -/
 theorem tower_comparison {A : Type u} [Category.{v} A] [Abelian A]
     {B : Type uB} [Category.{vB} B] (T : A ⥤ A) (π : T ⟶ 𝟭 A)

@@ -25,7 +25,6 @@ universe u v
 
 namespace MvPolynomial
 
-set_option linter.unusedVariables false in
 /-- Every finitely generated graded module over `k[x₀,x₁]` has finitely many homogeneous
     generators, and these generators give a surjective graded map from a finite sum of shifts.
 
@@ -47,7 +46,7 @@ theorem exists_finite_homogeneous_generators {k : Type u} [Field k]
       s ∈ homogeneousSubmodule (Fin 2) k n → x ∈ ℳ j →
         s • x ∈ ℳ ((n : ℤ) + j)) :
     ∃ (r : ℕ) (d : Fin r → ℤ) (m : Fin r → M)
-      (hm : ∀ i, m i ∈ ℳ (d i))
+      (_ : ∀ i, m i ∈ ℳ (d i))
       (f : (Fin r →₀ MvPolynomial (Fin 2) k) →ₗ[MvPolynomial (Fin 2) k] M),
       Function.Surjective f ∧
       (∀ i, f (Finsupp.single i 1) = m i) ∧
