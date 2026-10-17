@@ -98,6 +98,7 @@ lemma isIso_tensorBaseChangeMap_degenerate_iff_kunnethMap {X' Y : Scheme.{u}} (h
 set_option maxHeartbeats 2000000 in
 set_option maxHeartbeats 2000000 in
 set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 2000000 in
 /-- **Finite pushforwards of the unit.** For a commutative square `h ≫ f' = e ≫ g` and a finite
 morphism `π' : X'ᵢ ⟶ X'` with base change `ρ : Yᵢ ⟶ Y` along `h`, the base change map
 `Rπ'_* Λ ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* Rπ'_* Λ ⊗ᴸ Le^* F)` is an isomorphism as soon as the derived
