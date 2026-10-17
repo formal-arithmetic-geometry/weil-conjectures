@@ -60,6 +60,36 @@ lemma adicLowerStarCompGlobalSectionsIso_hom_app_comp {R S T : Scheme.{u}} (h₁
   rw [← globalSectionsLowerStarIso_comp, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
     CategoryTheory.Functor.map_id, Category.id_comp]
 
+/-- The invariance of global sections under pushforward along equal morphisms. -/
+lemma adicLowerStarCompGlobalSectionsIso_hom_app_congr {Z W : Scheme.{u}} {g g' : Z ⟶ W}
+    (h : g = g') (M : AdicSheaf l Z) :
+    (adicGlobalSections l W).map ((adicLowerStarCongr l h).hom.app M) ≫
+        (adicLowerStarCompGlobalSectionsIso l g').hom.app M =
+      (adicLowerStarCompGlobalSectionsIso l g).hom.app M :=
+  globalSectionsLowerStarIso_congr _ h M.X
+
+/-- The invariance of global sections under pushforward is compatible with the identification of
+the pushforwards along the two sides `a ≫ b = c ≫ d` of a commutative square. -/
+lemma adicLowerStarCompGlobalSectionsIso_inv_app_comm {Z₁ Z₂ Z₃ Z₄ : Scheme.{u}} (a : Z₁ ⟶ Z₂)
+    (b : Z₂ ⟶ Z₄) (c : Z₁ ⟶ Z₃) (d : Z₃ ⟶ Z₄) (hc : a ≫ b = c ≫ d) (M : AdicSheaf l Z₁) :
+    (adicLowerStarCompGlobalSectionsIso l b).inv.app ((a)_*ᵃ[l].obj M) ≫
+        (adicGlobalSections l Z₄).map ((adicLowerStarComp l a b ≪≫ adicLowerStarCongr l hc ≪≫
+          (adicLowerStarComp l c d).symm).hom.app M) ≫
+        (adicLowerStarCompGlobalSectionsIso l d).hom.app ((c)_*ᵃ[l].obj M) =
+      (adicLowerStarCompGlobalSectionsIso l a).hom.app M ≫
+        (adicLowerStarCompGlobalSectionsIso l c).inv.app M := by
+  have h₁ := adicLowerStarCompGlobalSectionsIso_hom_app_comp l a b M
+  have h₂ := adicLowerStarCompGlobalSectionsIso_hom_app_comp l c d M
+  have h₃ := adicLowerStarCompGlobalSectionsIso_hom_app_congr l hc M
+  rw [← cancel_mono ((adicLowerStarCompGlobalSectionsIso l c).hom.app M)]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc,
+    Iso.inv_hom_id_app, Category.comp_id]
+  rw [← h₂, h₃]
+  rw [← cancel_epi ((adicLowerStarCompGlobalSectionsIso l b).hom.app ((a)_*ᵃ[l].obj M)),
+    Iso.hom_inv_id_app_assoc]
+  rw [h₁, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+
 /-- The identifications `e_* ℚ̄_ℓ ≅ ℚ̄_ℓ` along isomorphisms are compatible with composition. -/
 lemma adicLowerStar_map_adicLowerStarUnitIso_hom {X Y Z : Scheme.{u}} (e : X ≅ Y) (e' : Y ≅ Z) :
     (e'.hom)_*ᵃ[l].map (adicLowerStarUnitIso l e).hom ≫ (adicLowerStarUnitIso l e').hom =

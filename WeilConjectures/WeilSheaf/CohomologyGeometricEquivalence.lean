@@ -5,13 +5,26 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomologyNatIso
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraFrobenius
+public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedGlobalSectionsTransport
 public import WeilConjectures.WeilSheaf.CohomologyExact
 
 /-!
 # The equivalence on constant-sheaf cohomology induced by a geometric isomorphism
 
-Source: the isomorphism-invariance part of the base-change clause of
-`sec-poincare-duality/sk-thm-poincare-duality/thm-weil-poincare-duality.md`.
+The cohomology `Hⁱ(X ⊗ k̄, ℚ̄_ℓ)` of the constant Weil sheaf is, after forgetting its Frobenius,
+the cohomology of the derived global sections `RΓ(X̄, ℚ̄_ℓ)` of the constant `ℓ`-adic sheaf on the
+geometric fiber (`AlgebraicGeometry.WeilSheaf.cohomologyCarrierIso`): forgetting the Weil
+structure commutes with right derivation, and global sections over `Spec k̄` are exact. Under this
+identification the Frobenius is the transport of `RΓ(X̄, ℚ̄_ℓ)` along the inverse of the geometric
+Frobenius of `X̄` (`AlgebraicGeometry.WeilSheaf.cohomologyCarrierIso_hom_frobenius`).
+
+An isomorphism `e : Ȳ ≅ X̄` of geometric fibers, over possibly different finite fields, therefore
+induces a linear equivalence `Hⁱ(Y ⊗ k̄', ℚ̄_ℓ) ≃ Hⁱ(X ⊗ k̄, ℚ̄_ℓ)`
+(`AlgebraicGeometry.WeilSheaf.cohomologyLinearEquivOfGeometricFiberIso`), the transport of
+`RΓ(-, ℚ̄_ℓ)` along `e`. This is the isomorphism-invariance part of the base-change clause of
+`thm-weil-poincare-duality`.
 -/
 
 @[expose] public section
@@ -23,20 +36,137 @@ open scoped AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.WeilSheaf
 
-/-- The linear equivalence induced by an isomorphism of geometric fibers.
+section
 
-Source: literature/blueprint/master/blueprint/sec-poincare-duality/
-sk-thm-poincare-duality/thm-weil-poincare-duality.md, base-change clause.
-(blueprint: def-pod-cohomology-geometric-equivalence)
+variable (k : Type u) [Field k] [Finite k] (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
+  [X.Over (Spec (.of k))]
 
-Construction: identify Weil cohomology, after forgetting Frobenius, with homology of
-derived global sections of the constant adic sheaf. The forgetful functor from Weil
-sheaves preserves injective resolutions, and global sections at the geometric point
-are exact, giving the first identification. Pushforward along e is an exact equivalence;
-its composition with global sections is global sections on the source, and it carries
-the constant adic sheaf to the constant adic sheaf. Derive this identity, apply homology,
-and compose with the two identifications. All comparison isomorphisms are constructed
-from the library's composition and exact-functor isomorphisms. -/
+instance : (IsoAlgebra.forget (frobeniusPullback k l X)).PreservesKInjectiveComplexes := by
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (X ↘ Spec (.of k)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (X ↘ Spec (.of k)).geometricFiber) ℤ
+  infer_instance
+
+instance : PreservesFiniteLimits
+    (ProEtale.adicGlobalSections l (Spec (.of k) ↘ Spec (.of k)).geometricFiber) := by
+  unfold ProEtale.adicGlobalSections
+  infer_instance
+
+instance : PreservesFiniteColimits
+    (ProEtale.adicGlobalSections l (Spec (.of k) ↘ Spec (.of k)).geometricFiber) := by
+  have : (ProEtale.adicGlobalSections l
+      (Spec (.of k) ↘ Spec (.of k)).geometricFiber).PreservesEpimorphisms := by
+    unfold ProEtale.adicGlobalSections
+    infer_instance
+  have := Functor.preservesHomology_of_preservesEpis_and_kernels
+    (ProEtale.adicGlobalSections l (Spec (.of k) ↘ Spec (.of k)).geometricFiber)
+  exact Functor.preservesFiniteColimits_of_preservesHomology _
+
+end
+
+variable (k : Type u) [Field k] [Finite k] (l : ℕ) [Fact l.Prime] [Fact (ringChar k ≠ l)]
+  (X : Scheme.{u}) [X.Over (Spec (.of k))]
+  [QuasiCompact (X ↘ Spec (.of k))] [QuasiSeparated (X ↘ Spec (.of k))]
+  [LocallyOfFiniteType (X ↘ Spec (.of k))]
+
+/-- The derived pushforward `Ra_* ℚ̄_ℓ` of the constant Weil sheaf along the structure morphism,
+in the derived category of pro-étale Weil sheaves on `Spec k₀`. -/
+noncomputable abbrev derivedLowerStarAdicConstant :
+    DerivedCategory (ProEtaleWeilSheaf k l (Spec (.of k))) :=
+  (ProEtaleWeilSheaf.lowerStar k l (X ↘ Spec (.of k))).rightDerivedFunctor.obj
+    ((DerivedCategory.singleFunctor _ 0).obj (ProEtaleWeilSheaf.adicConstant k l X))
+
+/-- **The carrier of constant-sheaf cohomology.** Forgetting its Frobenius, the cohomology
+`Hⁱ(X ⊗ k̄, ℚ̄_ℓ) = Γ(Spec k̄, 𝓗ⁱ(Ra_* ℚ̄_ℓ))` is `Hⁱ RΓ(X̄, ℚ̄_ℓ)`: global sections over `Spec k̄`
+are exact, and `Γ(Spec k̄, -) ∘ Ra_* ≅ RΓ(X̄, -)` after forgetting the Weil structures. -/
+noncomputable def cohomologyCarrierIso (i : ℤ) :
+    (IsoAlgebra.forget _ ⋙
+        ProEtale.adicGlobalSections l (Spec (.of k) ↘ Spec (.of k)).geometricFiber).obj
+        ((DerivedCategory.homologyFunctor _ i).obj (derivedLowerStarAdicConstant k l X)) ≅
+      (DerivedCategory.homologyFunctor _ i).obj
+        (ProEtale.derivedGlobalSectionsUnit l (X ↘ Spec (.of k)).geometricFiber) :=
+  ((IsoAlgebra.forget _ ⋙ ProEtale.adicGlobalSections l
+      (Spec (.of k) ↘ Spec (.of k)).geometricFiber).mapDerivedCategoryHomologyFunctorIso i).app _ ≪≫
+    (DerivedCategory.homologyFunctor _ i).mapIso
+      ((IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompIso
+          (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l (X ↘ Spec (.of k))
+            (comp_over (X ↘ Spec (.of k)) (Spec (.of k))))
+          (ProEtale.adicLowerStarCompGlobalSectionsIso l
+            (Scheme.Hom.geometricFiberMap (X ↘ Spec (.of k)) (comp_over (X ↘ Spec (.of k)) (Spec (.of k)))))).app _ ≪≫
+        (ProEtale.adicGlobalSections l (X ↘ Spec (.of k)).geometricFiber).rightDerivedFunctor.mapIso
+          (((IsoAlgebra.forget _).mapDerivedCategorySingleFunctor 0).app _))
+
+/-- The Frobenius of `Hⁱ(X ⊗ k̄, ℚ̄_ℓ)` is the automorphism of global sections over `Spec k̄`
+induced by the Weil structure of the cohomology sheaf `𝓗ⁱ(Ra_* ℚ̄_ℓ)`. -/
+lemma cohomology_adicConstant_frobenius (i : ℤ) :
+    ((adicConstant k l X).cohomology i).frobenius = WeilCoefficients.linearEquivOfIso
+      ((IsoAlgebra.forgetCompIsoOfIso (ProEtale.adicLowerStarCompGlobalSectionsIso l
+        (Spec (.of k) ↘ Spec (.of k)).geometricGaloisFrobenius.inv)).app
+          ((DerivedCategory.homologyFunctor _ i).obj (derivedLowerStarAdicConstant k l X))) :=
+  rfl
+
+/-- **The Frobenius of constant-sheaf cohomology is the transport along the geometric Frobenius.**
+Under `Hⁱ(X ⊗ k̄, ℚ̄_ℓ) ≅ Hⁱ RΓ(X̄, ℚ̄_ℓ)`, the Frobenius is induced by the transport of
+`RΓ(X̄, ℚ̄_ℓ)` along the inverse of the geometric Frobenius of `X̄`. -/
+lemma cohomologyCarrierIso_hom_frobenius (i : ℤ) :
+    (IsoAlgebra.forgetCompIsoOfIso (ProEtale.adicLowerStarCompGlobalSectionsIso l
+        (Spec (.of k) ↘ Spec (.of k)).geometricGaloisFrobenius.inv)).hom.app
+          ((DerivedCategory.homologyFunctor _ i).obj (derivedLowerStarAdicConstant k l X)) ≫
+        (cohomologyCarrierIso k l X i).hom =
+      (cohomologyCarrierIso k l X i).hom ≫ (DerivedCategory.homologyFunctor _ i).map
+        (ProEtale.derivedGlobalSectionsUnitIso l
+          (X ↘ Spec (.of k)).geometricGaloisFrobenius.symm).hom := by
+  have hG := Functor.mapDerivedCategoryHomologyFunctorIso_hom_app_naturality
+    (IsoAlgebra.forgetCompIsoOfIso (ProEtale.adicLowerStarCompGlobalSectionsIso l
+      (Spec (.of k) ↘ Spec (.of k)).geometricGaloisFrobenius.inv)) i
+    (derivedLowerStarAdicConstant k l X)
+  have hB := IsoAlgebra.mapDerivedCategoryNatIso_forgetCompIsoOfIso_hom_app_rightDerivedFunctor_obj
+    (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l (X ↘ Spec (.of k))
+      (comp_over (X ↘ Spec (.of k)) (Spec (.of k))))
+    (ProEtale.adicLowerStarCompGlobalSectionsIso l
+      (Scheme.Hom.geometricFiberMap (X ↘ Spec (.of k))
+        (comp_over (X ↘ Spec (.of k)) (Spec (.of k)))))
+    (ProEtale.adicLowerStarCompGlobalSectionsIso l
+      (Spec (.of k) ↘ Spec (.of k)).geometricGaloisFrobenius.inv)
+    (ProEtale.adicLowerStarCompGlobalSectionsIso l
+      (X ↘ Spec (.of k)).geometricGaloisFrobenius.inv)
+    (fun M ↦ ProEtale.adicLowerStarCompGlobalSectionsIso_inv_app_comm l _ _ _ _ _ M)
+    ((DerivedCategory.singleFunctor _ 0).obj (ProEtaleWeilSheaf.adicConstant k l X))
+  simp only [cohomologyCarrierIso, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
+  rw [reassoc_of% hG]
+  simp only [Category.assoc]
+  refine congrArg (_ ≫ ·) ?_
+  simp only [← Functor.map_comp]
+  refine congrArg (DerivedCategory.homologyFunctor _ i).map ?_
+  erw [reassoc_of% hB]
+  simp only [Category.assoc]
+  refine congrArg (_ ≫ ·) ?_
+  have h₁ := Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor
+    (IsoAlgebra.forget (frobeniusPullback k l X)) (frobeniusPullback k l X)
+    (ProEtaleWeilSheaf.adicConstant k l X)
+  have h₂ := Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor
+    (IsoAlgebra.strNatIso (frobeniusPullback k l X)) (ProEtaleWeilSheaf.adicConstant k l X)
+  simp only [ProEtale.derivedGlobalSectionsUnitIso, Iso.trans_hom, Iso.app_hom,
+    Functor.mapIso_hom]
+  have hn := (Functor.rightDerivedFunctorIsoMapDerivedCategoryComp
+    (ProEtale.adicLowerStarCompGlobalSectionsIso l
+      (X ↘ Spec (.of k)).geometricGaloisFrobenius.inv)).hom.naturality
+    (((IsoAlgebra.forget (frobeniusPullback k l X)).mapDerivedCategorySingleFunctor 0).hom.app
+      (ProEtaleWeilSheaf.adicConstant k l X))
+  erw [reassoc_of% hn]
+  refine congrArg (_ ≫ ·) ?_
+  simp only [Functor.comp_map, ← Functor.map_comp]
+  refine congrArg _ ?_
+  rw [Category.assoc, h₂, ← h₁]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  rfl
+
+/-- The linear equivalence induced by an isomorphism of geometric fibers: the transport of
+`RΓ(Ȳ, ℚ̄_ℓ) ≅ RΓ(X̄, ℚ̄_ℓ)` along `e`, through the identifications
+`AlgebraicGeometry.WeilSheaf.cohomologyCarrierIso` of the carriers of the cohomology of the
+constant Weil sheaves.
+(blueprint: ingredient of the base-change clause of `thm-weil-poincare-duality`) -/
 noncomputable def cohomologyLinearEquivOfGeometricFiberIso
     (k k' : Type u) [Field k] [Finite k] [Field k'] [Finite k']
     (l : ℕ) [Fact l.Prime] [Fact (ringChar k ≠ l)] [Fact (ringChar k' ≠ l)]
@@ -47,71 +177,10 @@ noncomputable def cohomologyLinearEquivOfGeometricFiberIso
     [LocallyOfFiniteType (Y ↘ Spec (.of k'))]
     (e : (Y ↘ Spec (.of k')).geometricFiber ≅ (X ↘ Spec (.of k)).geometricFiber) (i : ℤ) :
     ((WeilSheaf.adicConstant k' l Y).cohomology i).carrier ≃ₗ[PadicAlgCl l]
-      ((WeilSheaf.adicConstant k l X).cohomology i).carrier := by
-  let adicΓ (l : ℕ) [Fact l.Prime] (Z : Scheme.{u}) :
-      ProEtale.AdicSheaf l Z ⥤ WeilCoefficients.{u} l :=
-    ProEtale.AdicSheaf.forget Z ⋙ Sheaf.Γ _ _
-  let adicLowerStarΓIso (l : ℕ) [Fact l.Prime]
-      {Z W : Scheme.{u}} (g : Z ⟶ W) :
-      ProEtale.adicLowerStar l g ⋙ adicΓ l W ≅ adicΓ l Z :=
-    Functor.isoWhiskerLeft (ProEtale.AdicSheaf.forget Z)
-      (ProEtale.globalSectionsLowerStarIso (WeilCoefficients.{u} l) g)
-  let cohomologyCarrierIso (k : Type u) [Field k] [Finite k]
-      (l : ℕ) [Fact l.Prime] [Fact (ringChar k ≠ l)]
-      (X : Scheme.{u}) [X.Over (Spec (.of k))]
-      [QuasiCompact (X ↘ Spec (.of k))] [QuasiSeparated (X ↘ Spec (.of k))]
-      [LocallyOfFiniteType (X ↘ Spec (.of k))] (i : ℤ) :
-      ((adicΓ l (X ↘ Spec (.of k)).geometricFiber).rightDerivedFunctor ⋙
-        _root_.DerivedCategory.homologyFunctor _ i).obj
-          ((_root_.DerivedCategory.singleFunctor _ 0).obj
-            (ProEtale.AdicSheaf.unit l (X ↘ Spec (.of k)).geometricFiber)) ≅
-        (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj
-          ((WeilComplex.homologySheaf i).obj ((WeilComplex.derivedLowerStar
-            (X ↘ Spec (.of k))).obj
-              (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k l X)))).obj.carrier.X := by
-    let a := X ↘ Spec (.of k)
-    let f := Scheme.Hom.geometricFiberMap a (comp_over a (Spec (.of k)))
-    let G := adicΓ l (Spec (.of k) ↘ Spec (.of k)).geometricFiber
-    let F := adicΓ l a.geometricFiber
-    let W := ProEtaleWeilSheaf.lowerStar k l a
-    let M := (_root_.DerivedCategory.singleFunctor _ 0).obj (WeilSheaf.adicConstant k l X).obj
-    let K := W.rightDerivedFunctor.obj M
-    have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
-      (ProEtale.AdicSheaf l a.geometricFiber) ℤ
-    have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
-      (ProEtale.AdicSheaf l a.geometricFiber) ℤ
-    let e : (IsoAlgebra.forget _).mapDerivedCategory.obj K ≅
-        (ProEtale.adicLowerStar l f).rightDerivedFunctor.obj
-          ((_root_.DerivedCategory.singleFunctor _ 0).obj
-            (ProEtale.AdicSheaf.unit l a.geometricFiber)) :=
-      (IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso _ _).app _ ≪≫
-        Functor.mapIso _ (((IsoAlgebra.forget _).mapDerivedCategorySingleFunctor 0).app
-          (WeilSheaf.adicConstant k l X).obj)
-    have : G.Additive := by dsimp [G, adicΓ]; infer_instance
-    have : PreservesFiniteLimits G := by dsimp [G, adicΓ]; infer_instance
-    have : G.PreservesEpimorphisms := by dsimp [G, adicΓ]; infer_instance
-    have : G.PreservesHomology := Functor.preservesHomology_of_preservesEpis_and_kernels G
-    have : PreservesFiniteColimits G := Functor.preservesFiniteColimits_of_preservesHomology G
-    let e₀ := (Functor.rightDerivedFunctorCompMapDerivedCategoryIso
-      (ProEtale.adicLowerStar l f) G).symm ≪≫
-        Functor.rightDerivedFunctorNatIso (adicLowerStarΓIso l f)
-    let e₁ := ((IsoAlgebra.forget _).mapDerivedCategoryHomologyFunctorIso i).app K
-    let e₂ := (G.mapDerivedCategoryHomologyFunctorIso i).app
-      ((IsoAlgebra.forget _).mapDerivedCategory.obj K)
-    exact ((G.mapIso e₁) ≪≫ e₂ ≪≫
-      (_root_.DerivedCategory.homologyFunctor _ i).mapIso
-        (G.mapDerivedCategory.mapIso e ≪≫ e₀.app _)).symm
-  let FX := adicΓ l (X ↘ Spec (.of k)).geometricFiber
-  let L := ProEtale.adicLowerStar l e.hom
-  let U := ProEtale.AdicSheaf.unit l (Y ↘ Spec (.of k')).geometricFiber
-  let M := (_root_.DerivedCategory.singleFunctor _ 0).obj U
-  let eΓ := (Functor.rightDerivedFunctorCompIso' L FX (adicLowerStarΓIso l e.hom)).app M
-  let eU := (L.singleFunctorCompRightDerivedFunctorIso).app U ≪≫
-    (_root_.DerivedCategory.singleFunctor _ 0).mapIso (ProEtale.adicLowerStarUnitIso l e)
-  let eD := eΓ.symm ≪≫ FX.rightDerivedFunctor.mapIso eU
-  exact WeilCoefficients.linearEquivOfIso
-    ((cohomologyCarrierIso k' l Y i).symm ≪≫
-      (_root_.DerivedCategory.homologyFunctor _ i).mapIso eD ≪≫
-        cohomologyCarrierIso k l X i)
+      ((WeilSheaf.adicConstant k l X).cohomology i).carrier :=
+  WeilCoefficients.linearEquivOfIso
+    (cohomologyCarrierIso k' l Y i ≪≫
+      (DerivedCategory.homologyFunctor _ i).mapIso (ProEtale.derivedGlobalSectionsUnitIso l e) ≪≫
+        (cohomologyCarrierIso k l X i).symm)
 
 end AlgebraicGeometry.WeilSheaf
