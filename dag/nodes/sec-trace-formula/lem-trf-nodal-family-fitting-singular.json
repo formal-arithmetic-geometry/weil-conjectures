@@ -217,5 +217,23 @@
   "group": "Q91",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q91-449914ecc (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, cited DAG statements, unit route, and Stacks sources in full. Verified hypotheses, base-change formation, Fitting conventions, geometric-fibre unramifiedness, nodal criterion, edge cases, searches, duplicates, route compliance, and repair citations. No mathematical or structural faults found."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.TraceFormula.NodalFamilyFittingSingular",
+  "declaration": "AlgebraicGeometry.nodal_family_fitting_singular",
+  "file": "lean/Sheaf/SixFunctors/TraceFormula/NodalFamilyFittingSingular.lean",
+  "statement": "theorem nodal_family_fitting_singular {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [LocallyOfFinitePresentation f] (hgeom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ S), Nonempty (pullback (C := Scheme.{u}) f g) → (pullback (C := Scheme.{u}) f g).IsPureDimension 1 ∧ ∀ x : pullback (C := Scheme.{u}) f g, x ∉ (pullback.snd f g).smoothLocus → IsGeometricOrdinaryDoublePoint Ω (pullback (C := Scheme.{u}) f g) x) : IsOpen (f.smoothLocus : Set X) ∧ Set.range (Scheme.firstFittingSingularSubscheme f) = (f.smoothLocus : Set X)ᶜ ∧ (LocallyOfFiniteType (Scheme.firstFittingSingularSubscheme f ≫ f) ∧ IsOpenImmersion (pullback.diagonal (Scheme.firstFittingSingularSubscheme f ≫ f))) ∧ ∀ (S' : Scheme.{u}) (g : S' ⟶ S), Nonempty (Over.mk (pullback.map (Scheme.firstFittingSingularSubscheme f ≫ f) g f g (Scheme.firstFittingSingularSubscheme f) (𝟙 S') (𝟙 S) (Category.comp_id (Scheme.firstFittingSingularSubscheme f ≫ f)) ((Category.comp_id g).trans (Category.id_comp g).symm)) ≅ Over.mk (Scheme.firstFittingSingularSubscheme (pullback.snd f g))) ∧ Set.range (Scheme.firstFittingSingularSubscheme (pullback.snd f g)) = ((pullback.snd f g).smoothLocus : Set (pullback (C := Scheme.{u}) f g))ᶜ",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37dcd192c",
+  "group": "Q130",
+  "result": "fix",
+  "note": "Read all clauses against the node and Stacks 0C59/0C5B and 0C3I/0C3K: the hypotheses (flat, locally finitely presented, nonempty geometric fibres of pure dimension 1 with ordinary double points at nonsmooth points, quantified over all algebraically closed Omega, which is equivalent) and the conclusions (open smooth locus, support equals the complement of the smooth locus, unramified in the recorded inline form, canonical base-change iso in Over X' via pullback.map, support after base change) all match, with no stronger assumptions. The ring-iso form of the double-point predicate is equivalent to an Omega-algebra iso. Edge cases, single universe, verbatim statement, docstrings, sorry-only proof, report sections and node diff (only lean changed) all OK; no duplicate. F1: the stated proof dependency lem-trf-geometric-fibre-unramified-criterion (module Sheaf.AlgebraicGeometry.GeometricFibreUnramifiedCriterion, on the base) was not imported (stages/2-statements §3 rule 7). Complete replacement file in fixes/lean/Sheaf/SixFunctors/TraceFormula/NodalFamilyFittingSingular.lean adds only that non-public import; no record change. nt_compile: delivered file clean (17.0 s/8.3 s), error probe reports errors correctly, fixed file clean (9.2 s)."
  }
 }

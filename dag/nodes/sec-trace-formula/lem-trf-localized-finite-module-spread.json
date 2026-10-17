@@ -132,5 +132,23 @@
   "group": "Q49",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-587f02cc9 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. Statement: it is exactly Stacks Tag 05N5(1) (algebra.tex, algebra-lemma-construct-fp-module, statement ~l.31490, proof of (1) l.31504-31508) with I=0 and S={f^n}. R'=R_f and S^{-1}(M/IM)=M_f, Stacks 'finite' means finitely generated, and no hypothesis was added or dropped. It is not a target, so there is no base-change or coefficient question. Step 1: K=ker(q∘π) is Stacks' inverse image of ker q. Step 2: M=R^n/K is finitely generated and q∘π induces a map M→L. Step 3: I checked that θ((x+K)/f^r)=q(x/f^r) is well defined because f^k(f^s x−f^r y)∈K and f acts invertibly on L; that it is surjective because every vector has a common denominator; and that it is injective because q(x/1)=f^r q(x/f^r)=0 gives x∈K. Each of these is one line from the cited mathlib-leaf definitions (localization away, Module.Finite, LocalizedModule), so marking the step elementary is fair. Edge cases that hold: f nilpotent or f=0 (L=0, K=R^n, M=0), f a unit, L=0 or n=0, L free, and ℤ with f=2, L=ℤ[1/2]/3. The citer lem-trf-regular-local-pic-zero (same unit sk-i-curve-zero) uses exactly this statement with R=A and L=P. Only definitions are cited, so there is no route question and no tool_uses. rg over the DAG for 05N5/05N6/construct-fp-module finds no duplicate. The Mathlib searches cover three kinds (Loogle honestly recorded as unavailable), and my own grep of the IsLocalizedModule exists-lemmas found no descent theorem. The blueprint from/same_as fields and split_report.blueprint are present, and nothing cites SGA. Minor: the report claims a citations.json file that the delivery does not contain; this does not affect the DAG. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalizedFiniteModuleSpread",
+  "declaration": "Module.exists_finite_localizationAway_model",
+  "file": "lean/Sheaf/RingTheory/LocalizedFiniteModuleSpread.lean",
+  "statement": "theorem exists_finite_localizationAway_model {R : Type u} [CommRing R] (f : R) (L : Type v) [AddCommGroup L] [Module (Localization.Away f) L] [Module.Finite (Localization.Away f) L] : ∃ M : ModuleCat.{u} R, Module.Finite R M ∧ Nonempty (LocalizedModule (Submonoid.powers f) M ≃ₗ[Localization.Away f] L)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a134236dd",
+  "group": "NX",
+  "result": "pass",
+  "note": "Checked node, 3 stmt deps, Stacks 05N5(1) (algebra.tex l.31489-31508, I=0, S=powers f), module and report. Every clause matches: CommRing R, f, L with Module.Finite over Localization.Away f, ∃ M : ModuleCat.{u} R finite with Nonempty (LocalizedModule (powers f) M ≃ₗ[R_f] L); no extra hypotheses; M in R's universe is no restriction (witness R^n/K), L universe free. Edge cases f nilpotent/0, R=0, L=0, f unit, non-f.p. L covered. No Mathlib/project duplicate found by rg. Docstrings have source, blueprint tag and proof steps; sorry only; statement field verbatim; node diff vs landed only in lean. nt_compile --json clean (rc 0, no diagnostics; a broken control variant reported its error). Cosmetic only: report cites searches.jsonl not in delivery."
  }
 }

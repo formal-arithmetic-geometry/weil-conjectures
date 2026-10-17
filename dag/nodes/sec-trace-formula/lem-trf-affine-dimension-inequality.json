@@ -165,5 +165,24 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-b56846233 (reviewer sub-agent of L); spot-checked: I read the item, the parent lem-trf-local-dimension-formula's use of it, and the statement of each of the 11 cited nodes, all checked against Stacks algebra.tex Lemma lemma-dimension-formula (Tag 02IJ): statement and full proof. The statement matches 02IJ's inequality clause hypothesis for hypothesis and is not weakened; the universally-catenary equality is the separate node lem-exc-dimension-formula-universally-catenary-finite-type-domain. Small cases checked: R=S; k to k[T] at 0 and (T); Z to Z[i] at (1+i); Z_(p)[T] at (p,T) and (p); Z_(p)[1/p] at 0. Step 1: polynomial domain, free hence flat, finite type hence Noetherian, then the 00ON flat height formula; trdeg_R R[T]=1 from the domain tower. Step 2: localizing D[T] at D minus 0 keeps heights because every prime below q-bar meets D in 0; the PID and power-basis nodes give the cases Q=0 and Q nonzero, with sum 1 in both. Step 3: n meets R in 0, so theta is algebraic; ht(q)+1 <= ht(q') by putting 0 below n, an elementary replacement for 'one-equation'. Step 4: induction through A=R[x_1..x_{n-1}], which is a Noetherian domain; field and domain towers; ht(r) is finite and cancels. Route: the only non-leaf cited statement, lem-weil-pbc-localization-prime-residue-field-iso (unit sk-thm-p1), is on the transitive route of sk-i-curve-zero, so no tool use is needed and none is accepted. No SGA source. No duplicate after rg for 02IJ, trdeg_R S and 'dimension formula'. Not in Mathlib. Fixes, in fixes/dag/nodes/sec-trace-formula/lem-trf-affine-dimension-inequality.json: (1) B4: the escapes \\bar, \\ne and \\theta in the proof JSON had been decoded as backspace, newline and tab, and are restored as TeX; (2) E5: Step 3's 'clearing denominators' is written out; (3) D4: Step 4 states the inductive claim and the kernel-zero / kernel-nonzero dichotomy for one generator; (4) Step 2 states why localization keeps the height. Uses, proof_deps and all other fields are unchanged. No new nodes, no drops.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AffineDimensionInequality",
+  "declaration": "Ideal.height_add_trdeg_residueField_le",
+  "file": "lean/Sheaf/RingTheory/AffineDimensionInequality.lean",
+  "statement": "theorem height_add_trdeg_residueField_le {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsDomain R] [IsDomain S] [Algebra R S] [IsNoetherianRing R] [Algebra.FiniteType R S] (hinj : Function.Injective (algebraMap R S)) (p : Ideal R) (q : Ideal S) [p.IsPrime] [q.IsPrime] (hpq : p = q.comap (algebraMap R S)) : q.height + Cardinal.toENat (@Algebra.trdeg p.ResidueField q.ResidueField _ _ (Ideal.ResidueField.map p q (algebraMap R S) hpq).toAlgebra) ≤ p.height + Cardinal.toENat (Algebra.trdeg R S)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Additive form of the ordinary subtraction inequality avoids truncated subtraction in ℕ∞. Ideal.ResidueField has the canonical IsFractionRing of the quotient instance; its map supplies the residue extension."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7a190aac",
+  "group": "NH",
+  "result": "pass",
+  "note": "Matches Stacks 02IJ and the node clause by clause. Hypotheses: domains, injective algebraMap, IsNoetherianRing R, Algebra.FiniteType R S, primes with p = comap q. Canonical Ideal.ResidueField.map supplies the residue algebra; ResidueField carries the IsFractionRing (R/p) instance; Ideal.height; Algebra.trdeg via toENat. Additive form is exactly equivalent because all four quantities are finite under the hypotheses; the universally-catenary equality is a separate node. Independent universes u and v, no extra assumptions. Edge cases R=S, k[T] at 0 and (T), Z[i], Z_(p)[T] checked. No Mathlib or project duplicate; the only similar declaration is the sibling UC equality. Node differs from the current node only in lean; lean.statement is verbatim. Docstrings carry source, blueprint and proof steps; proof is sorry. Report sections present (second reading self-performed, substantive). nt_compile --json on the snapshot file: exit 0, about 10 s, clean."
  }
 }

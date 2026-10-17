@@ -24,7 +24,9 @@
   "def-weil-finite-integral-morphism",
   "def-pc-fibre-product",
   "def-kun-topological-krull-dimension",
-  "def-sc-generic-point"
+  "def-sc-generic-point",
+  "def-trf-orgogozo-induction-data",
+  "def-weil-pure-dimension"
  ],
  "proof": [
   {
@@ -269,5 +271,23 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-a31fc4efd (reviewer sub-agent of L); spot-checked: PASS: the full delivery was read; no fixes and no dropped nodes. Item (7 steps) and the single new statement-only node lem-trf-temkin-stable-modification. Sources: (1) ILO X §3.2.2 (printed p.158): multipointed curves, explicitly not proper or separated. (2) ILO Theorem 3.4 Steps 1-4 (pp.159-161): Temkin 1.5 and 1.1 are applied after flattening, and semistability is preserved by base change. (3) Temkin arXiv:0707.3953 §1.2, read online and not archived: the multipointed-curve definition, modifications as compatible pairs (f_C,f_D), semistability, eta-modifications, Theorems 1.1 and 1.5. These confirm every clause of the new node: the marking map d with its eta-iso, projectivity of b, the alteration, nonseparated C allowed, base-change stability. Finite over a dense open and excellence of the alteration base are true consequences over a Noetherian base. (4) Stacks 0200 and the remark after it (replace by the scheme-theoretic closure of pi^-1(U)), plus 01R8, 01W6, 01IQ, 01O3, 01QR, 01W3-5, 07QU; all tag/label pairs verified. Step checks: Chow hypotheses hold (a proper). T is Noetherian, so the open immersion is quasi-compact. The scheme image with its kernel ideal is integral by the domain argument on affine charts using density. r is proper; the immersion into P^N_S is proper over separated, hence closed, so H-projective. S' is excellent by 07QU. The common finite open is valid (the generic fibre is one point, the image of the complement is closed and misses eta). Proj base change for an arbitrary morphism, Sym commutes with pullback, and the closed immersion pulls back. n is proper via K=m^-1(H x S'). Edge cases checked: empty H, field base, identity case, extra Chow components, nonempty generic marking, nonseparated C. Duplicate search over dag/nodes and both blueprint snapshots found nothing that states Temkin's theorem without a cycle; the new node does not restate the item, which adds H-projectivity, the integrality refinement and transport. Ten generic scheme tool_uses accepted (Chow, proper-fp permanence, finite type over Noetherian, scheme-image kernel, nagata open-in-image, P^n proper, proper over separated, proper immersion closed, excellence of finite type, relative Proj base change). No SGA, no cycle, item statement unchanged. WANTED: an archival Temkin copy (reported by the worker)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StableModificationFlatCurvePair",
+  "declaration": "AlgebraicGeometry.exists_stableModification_flatCurvePair",
+  "file": "lean/Sheaf/AlgebraicGeometry/StableModificationFlatCurvePair.lean",
+  "statement": "theorem exists_stableModification_flatCurvePair {S C H : Scheme.{u}} [IsIntegral S] [IsNoetherian S] (hS : ∀ U : S.Opens, IsAffineOpen U → IsExcellent Γ(S, U)) (η : S) (hη : IsGenericPoint η (Set.univ : Set S)) (f : C ⟶ S) (i : H ⟶ C) [IsClosedImmersion i] [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] [Flat (i ≫ f)] [LocallyOfFinitePresentation (i ≫ f)] [QuasiCompact (i ≫ f)] [QuasiSeparated (i ≫ f)] (hCdim : ∀ s : S, (f.fiber s).IsPureDimension 1) (hHdim : ∀ s : S, ((i ≫ f).fiber s).IsPureDimension 0) [Smooth (f.fiberToSpecResidueField η)] [Etale ((i ≫ f).fiberToSpecResidueField η)] : ∃ (S' : Scheme.{u}) (_ : IsIntegral S') (_ : IsNoetherian S') (r : S' ⟶ S), (∀ U : S'.Opens, IsAffineOpen U → IsExcellent Γ(S', U)) ∧ IsHProjective r ∧ DenseRange r.base ∧ (∃ U : S.Opens, Dense (U : Set S) ∧ IsFinite (r ∣_ U)) ∧ ∃ (C' H' : Scheme.{u}) (g : C' ⟶ S') (i' : H' ⟶ C') (m : C' ⟶ pullback f r) (n : H' ⟶ pullback (i ≫ f) r), m ≫ pullback.snd f r = g ∧ i' ≫ g = n ≫ pullback.snd (i ≫ f) r ∧ i' ≫ m ≫ pullback.fst f r = n ≫ pullback.fst (i ≫ f) r ≫ i ∧ IsProjectiveBundle m ∧ IsProper n ∧ (∀ η' : S', IsGenericPoint η' (Set.univ : Set S') → IsIso (pullback.snd m ((pullback.snd f r).fiberι η')) ∧ IsIso (pullback.snd n ((pullback.snd (i ≫ f) r).fiberι η'))) ∧ Flat g ∧ LocallyOfFinitePresentation g ∧ QuasiCompact g ∧ QuasiSeparated g ∧ (∀ s : S', (g.fiber s).IsPureDimension 1) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S') (x : (pullback (C := Scheme.{u}) g s : Scheme.{u})), (∃ U : (pullback g s : Scheme.{u}).Opens, x ∈ U ∧ Smooth (U.ι ≫ pullback.snd g s)) ∨ Orgogozo.IsOrdinaryDoublePoint (pullback.snd g s) x) ∧ IsClosedImmersion i' ∧ Etale (i' ≫ g) ∧ ∀ x : H', ∃ U : C'.Opens, i' x ∈ U ∧ Smooth (U.ι ≫ g)",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2172425d",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean: S excellent/integral/Noetherian with generic point eta; flat finitely presented (lfp+qc+qs) C and H=i>>f with a closed immersion; every fibre IsPureDimension 1/0; smooth/etale generic fibres; output S' excellent integral Noetherian, r IsHProjective, dominant, finite over a dense open; m into pullback f r and n into pullback (i>>f) r with the three equations giving a morphism of closed pairs over S'; IsProjectiveBundle m, IsProper n, generic-fibre isos; g flat fp pure dim 1; geometric fibres smooth or IsOrdinaryDoublePoint (equivalent to the node, rules out non-reduced fibres, universe-u test fields are the standard equivalent convention); i' closed, etale, in the smooth locus. No stronger assumptions; edge cases (empty H/C/fibres, non-separated C, disconnected fibres, char 2, identity alteration) covered. No new definitions, proof is sorry only, docstrings carry source, blueprint id and 7 steps. Existing definitions reused (HasNodalGeometricFibres rightly not used: it requires connected fibres). lean.statement verbatim; the 2 added stmt_deps are landed and acyclic. The older def-sc-generic-point copy is only the base copy, not a change. Second-reading section is the post-10-17 dispatcher note, accepted. nt_compile --json rc=0, 5.1 s, no warnings; probe: signature matches, axioms only sorryAx plus standard."
  }
 }

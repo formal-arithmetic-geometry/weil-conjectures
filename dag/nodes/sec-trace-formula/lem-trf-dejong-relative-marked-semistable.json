@@ -23,7 +23,10 @@
   "def-weil-closed-immersion",
   "def-weil-finite-integral-morphism",
   "def-kun-topological-krull-dimension",
-  "def-sc-generic-point"
+  "def-sc-generic-point",
+  "def-trf-nodal-geometric-fibres",
+  "def-trf-effective-cartier-center",
+  "def-weil-pure-dimension"
  ],
  "proof": [
   {
@@ -448,5 +451,23 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-9a8c03dec (reviewer sub-agent of L); spot-checked: I read all of it: the item's statement and 14 steps, the four new nodes in full, every cited node's statement, the unit sk-i-curve-zero with its via chain, and the sources. Sources: ILO IX Thm 1.2 (p.131) and §1.3 (p.132); ILO X §3.2.2 and Thm 3.4 proof Steps 1-4 (pp.158-161); Stacks 03H0, 0BUG, 0FD1, 0B3I, 07QU, 0AB7, 0BFP, 0AB1, 081R, 0GSJ, 0B9D, each checked against its label in the .tex files. The item statement is identical to the side-project copy; stmt_deps only gain generic-point and dimension. There is no cycle and no SGA source, and the step uses equal proof_deps. Every step's hypotheses hold. Points worth naming: Y is converted to H-projective using the ample structure sheaf on Spec R. The Chow model's generic fibre has dimension 1 by trdeg and maps to a normal target, so the new birational-curve lemma applies. The marking is etale over K_0 by cancellation. The flatification and stable-modification hypotheses are met (flat, pure dimension, closed marking). Step 7 checks projectivity through the H-projective conversions and P(O^{N+1}). Step 8 proves X' integral by flat injectivity into the generic localization. Step 9 has the semicontinuity direction right (n(t)>=n(s) near s, so connected generic fibre forces connected fibres). In Step 10 the generic fibres of a and b are finite. Step 12 uses Cartier criterion clause (3) on the open smooth locus. Step 14 builds T' as T_sing plus the closed images of the finitely many vertical components. The new nodes are all true and none duplicates an existing node or restates an item clause. Stein node: S_0=Spec f_*O is finite, integral, excellent and projective-bundle; K_0 is finite separable over K; C_eta is geometrically integral over K_0 (P^1_C/R shows the constant extension is needed). Birational-curve node: proper+quasi-finite gives finite (0AB7), and finite birational onto a normal curve is an isomorphism (0AB1); non-normal E is allowed. Flatification node: 081R on C plus H after generic flatness; the strict transform is the closure of the generic fibre; 0GSJ gives pure dimension; H_1 is finite. Stable-modification node: matches ILO X §3.2.2 and Step 3 (Temkin 1.5/1.1); a Chow refinement makes r H-projective, and base change preserves the rest by Step 4. Temkin 2010 itself is not in literature/ (WANTED). I accept the 18 declared tool_uses as generic black-box tools. FIX: two B3/B4 wording repairs, no change to the mathematics. (1) lem-trf-flatification-horizontal-curve-pair: the garbled 'proper [def-weil-proper-morphism]ties' now reads 'properties', with the citation moved to 'C_1->C is proper [def-weil-proper-morphism]'. (2) lem-trf-proper-birational-normal-curve-iso: added the missing inline citation [def-pc-curve], which was already in stmt_deps. Corrected files are in fixes/dag/nodes/sec-trace-formula/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DeJongRelativeMarkedSemistable",
+  "file": "lean/Sheaf/AlgebraicGeometry/DeJongRelativeMarkedSemistable.lean",
+  "declaration": "AlgebraicGeometry.exists_deJong_relativeMarkedSemistable",
+  "statement": "theorem exists_deJong_relativeMarkedSemistable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] [IsDominant f] [IsIntegral X] [IsIntegral Y] [IsNoetherian X] [IsNoetherian Y] (hX : ∀ U : X.Opens, IsAffineOpen U → IsExcellent Γ(X, U)) (hY : ∀ U : Y.Opens, IsAffineOpen U → IsExcellent Γ(Y, U)) (R : Type u) [CommRing R] [IsNoetherianRing R] (p : Y ⟶ Spec (CommRingCat.of R)) (hp : IsProjectiveBundle p) (y : Y) (hy : IsGenericPoint y Set.univ) [Smooth (f.fiberToSpecResidueField y)] [IrreducibleSpace (f.fiber y)] (hdim : topologicalKrullDim (f.fiber y) = 1) (Z : Scheme.{u}) (j : Z ⟶ X) [IsClosedImmersion j] (hZ : IsNowhereDense (Set.range j)) [Etale ((j ≫ f).fiberToSpecResidueField y)] : ∃ (X' Y' : Scheme.{u}) (a : X' ⟶ X) (b : Y' ⟶ Y) (f' : X' ⟶ Y') (hfp : LocallyOfFinitePresentation f'), a ≫ f = f' ≫ b ∧ IsProper a ∧ IsDominant a ∧ (∃ U : X.Opens, Dense (U : Set X) ∧ IsFinite (pullback.snd a U.ι)) ∧ IsProjectiveBundle b ∧ IsDominant b ∧ (∃ U : Y.Opens, Dense (U : Set Y) ∧ IsFinite (pullback.snd b U.ι)) ∧ IsIntegral X' ∧ IsIntegral Y' ∧ (∀ U : X'.Opens, IsAffineOpen U → IsExcellent Γ(X', U)) ∧ (∀ U : Y'.Opens, IsAffineOpen U → IsExcellent Γ(Y', U)) ∧ IsProjectiveBundle f' ∧ Flat f' ∧ QuasiCompact f' ∧ QuasiSeparated f' ∧ @HasNodalGeometricFibres _ _ f' hfp ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Y'), (pullback f' g).IsPureDimension 1) ∧ (∃ (D : Scheme.{u}) (i : D ⟶ X'), IsEffectiveCartierCenter i ∧ IsProper (i ≫ f') ∧ Etale (i ≫ f') ∧ (∀ d : D, i d ∈ ((@Scheme.Hom.smoothLocus _ _ f' hfp) : Set X')) ∧ ∃ (T : Set Y') (hT : IsClosed T), IsNowhereDense T ∧ Smooth (f' ∣_ (⟨Tᶜ, hT.isOpen_compl⟩ : Y'.Opens)) ∧ Set.preimage a (Set.range j) ⊆ Set.range i ∪ Set.preimage f' T) ∧ ∃ y' : Y', IsGenericPoint y' Set.univ ∧ Smooth (f'.fiberToSpecResidueField y') ∧ GeometricallyIntegral (f'.fiberToSpecResidueField y')",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-17"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13669bbad",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Node unchanged except lean record and three landed stmt_deps (allowed by §5); lean.statement verbatim. All hypotheses match the node with nothing stronger (IsProjectiveBundle p equals the H-projective convention over Spec R; Smooth/IrreducibleSpace/dim-1 generic fibre; Z closed, nowhere dense, generic fibre etale). All conclusions present: commuting square, a and b generically finite as finite over a dense open, excellent integral X' and Y', f' projective-bundle/flat/finitely presented, HasNodalGeometricFibres plus IsPureDimension 1, D an IsEffectiveCartierCenter that is proper and etale over Y' inside smoothLocus, T' closed nowhere dense with f' smooth off T' and the boundary inclusion, generic fibre smooth and geometrically integral. Edge cases (empty Z, D, T'; nonempty fibres) and universes fine. No hollow definitions, sorry only, docstrings carry source, blueprint tag and the 14 proof steps. nt_compile --json on the snapshot file: rc 0, no diagnostics."
  }
 }

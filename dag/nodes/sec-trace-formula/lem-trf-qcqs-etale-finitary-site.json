@@ -244,5 +244,31 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-ffba2c81a (reviewer sub-agent of L); spot-checked: I read the item and all 18 cited node statements, unit sk-i-curve-zero, chapter sec-trace-formula and the citer lem-trf-qcqs-oriented-triple-presentation. Sources: Stacks topologies.tex 021D (l.946), 021E (l.979), 04HR (l.1008); labels 01KU/01KV/01KN/01TR/01TS/02GW/0217/021C/021I/03A0 checked in the tag file; ILO XI proof of 2.5, printed p.179. The statement is unchanged and is not a target, and the citer still gets everything it uses from it. No new nodes, no SGA citation, and proof_deps equals the union of the step uses. Every cited statement node is a Mathlib leaf, so no tool_uses are needed and none were added. Step by step: (1) A is qcqs by permanence (2). A map a:A->C is étale by 02GW cancellation, separated by separated-cancellation (b), and qc/qs by permanence (1), so it is of finite presentation. (2) The fibre product P is separated and of finite presentation through base change, permanence (3) and proper-fp (d),(e). It is étale and a T_Et fibre product by etale-base-change-finite-limits (2). Terminal object plus pullbacks give all finite limits, and the inclusion preserves them. (3) Affine opens are étale (open immersion composed with étale), separated (affine source) and of finite presentation, which needs only T quasi-separated. A full-site cover of A in E(T) is refined by finitely many affine opens: images are open and A is quasi-compact. (4) The three pretopology axioms hold, using covering-composition, covering-base-change and pullbacks from step 2. (5) Both directions of the induced-sieve criterion hold: each W_j is an affine open inside some U_i, and fullness puts W_j->B in E(T). (6) The hypotheses of the dense-subsite equivalence match exactly, with small comma categories coming from the skeleton convention. (7) Base change along an arbitrary e between qcqs schemes preserves separated étale finite presentation, finite limits (computed in the full sites, inclusions fully faithful) and finite covers. Edge cases: T empty; T non-affine or non-separated; U_i not qc; e not qc; T=Spec k, which gives finite étale k-schemes. No duplicate in the DAG; related but distinct: etale-qcqs-cofinal-finite-coverings, finitary-site-coherent-generators and the affine-site comparison nodes. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.QCQSEtaleFinitarySite",
+  "declaration": "AlgebraicGeometry.Scheme.exists_qcqs_etale_finitary_site",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleFinitaryProperty",
+   "AlgebraicGeometry.Scheme.EtaleFinitary",
+   "AlgebraicGeometry.Scheme.finiteJointlySurjectivePrecoverage",
+   "AlgebraicGeometry.Scheme.finiteJointlySurjectiveTopology",
+   "AlgebraicGeometry.Scheme.exists_qcqs_etale_finitary_site"
+  ],
+  "file": "lean/Sheaf/TraceFormula/QCQSEtaleFinitarySite.lean",
+  "statement": "theorem exists_qcqs_etale_finitary_site (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T] : (∃ A : EtaleFinitary T, A.obj = Etale.mk (𝟙 T) ∧ Nonempty (IsTerminal A)) ∧ HasFiniteLimits (EtaleFinitary T) ∧ PreservesFiniteLimits (etaleFinitaryProperty T).ι ∧ (∀ A : EtaleFinitary T, CompactSpace A.obj.left ∧ QuasiSeparatedSpace A.obj.left) ∧ (finiteJointlySurjectivePrecoverage T).IsSiteForCoverings ∧ finiteJointlySurjectiveTopology T = (etaleFinitaryProperty T).ι.inducedTopology T.smallEtaleTopology ∧ (∃ _ : (etaleFinitaryProperty T).ι.IsContinuous (finiteJointlySurjectiveTopology T) T.smallEtaleTopology, ((etaleFinitaryProperty T).ι.sheafPushforwardContinuous (Type u) (finiteJointlySurjectiveTopology T) T.smallEtaleTopology).IsEquivalence) ∧ (∀ (T' : Scheme.{u}) [CompactSpace T'] [QuasiSeparatedSpace T'] (e : T' ⟶ T), ∃ F : EtaleFinitary T ⥤ EtaleFinitary T', PreservesFiniteLimits F ∧ Nonempty (F ⋙ (etaleFinitaryProperty T').ι ≅ (etaleFinitaryProperty T).ι ⋙ MorphismProperty.Over.pullback @Etale (⊤ : MorphismProperty Scheme) e) ∧ (∀ {X : EtaleFinitary T} {R : Sieve X}, R ∈ finiteJointlySurjectiveTopology T X → Sieve.functorPushforward F R ∈ finiteJointlySurjectiveTopology T' (F.obj X)))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-5efb706a4"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5efb706a4",
+  "group": "Q06",
+  "result": "fix",
+  "note": "Read item node (7 steps), 5 stmt deps, the citer lem-trf-qcqs-oriented-triple-presentation, the module, the report (Worker report + Second reading by Q06 present), SiteCoveringAxioms.IsSiteForCoverings, Mathlib inducedTopology (SGA4 finest-continuous; equals the node's sieve criterion for a full cover-dense ι) and sheafPushforwardContinuous. Only the item's lean field changed. F1 (H3), fixed: the sheaf clause was Nonempty (Sheaf smallEtaleTopology Type ≌ Sheaf J Type), an arbitrary equivalence in Type 0, but the node says restriction induces it and the citer's step 1 relies on that; replaced by ∃ _ : ι.IsContinuous J K, (ι.sheafPushforwardContinuous (Type u) J K).IsEquivalence. F2 (H8), fixed: the docstring now gives the 7 proof steps with their dependency nodes. F3 (H9), fixed: dropped 3 unused imports (Sites.Finite, JointlySurjective, DenseSubsite.Basic). All other clauses correct: qcqs instances; separated+lfp+qc+qs full subcategory of T.Etale; identity terminal; HasFiniteLimits plus PreservesFiniteLimits ι; objects qcqs; finite jointly surjective precoverage allowing the empty family; equality with induced topology; base change over arbitrary e between qcqs schemes with an iso to Over.pullback and preservation of covering sieves. Universes shared (T, T' : Scheme.{u}); no duplicate notion (rg side lean + Mathlib); no hollow def; only the theorem proof is sorry. nt_compile.py: delivered file clean (8.5 s), fixed file clean, no warnings (14.1 s); error reporting confirmed with a deliberately broken copy. Fixes: fixes/QCQSEtaleFinitarySite.lean, fixes/lem-trf-qcqs-etale-finitary-site.report.md."
  }
 }

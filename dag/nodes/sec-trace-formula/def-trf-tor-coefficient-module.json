@@ -1,0 +1,130 @@
+{
+ "id": "def-trf-tor-coefficient-module",
+ "kind": "definition",
+ "title": "The coefficient algebra module structure and canonical coefficient map on Tor",
+ "status": "split",
+ "statement": "Let $R\\to A\\to B$ be homomorphisms of commutative rings, with the composite $R\\to B$, let $M$ be an $R$-module, and let $n\\geq0$. Use $\\operatorname{Tor}^R_n(M,B)$ of [def-weil-pbc-tor-modules]. The functor in the coefficient module is additive. Regard this existing Tor group as an $A$-module by letting $a\\in A$ act by the functorial image of the $R$-linear coefficient endomorphism $b\\mapsto ab$ of $B$. This specifies the action, rather than choosing an arbitrary module structure. For another commutative $A$-algebra $C$, with its composite $R$-algebra structure, and an $A$-algebra homomorphism $f:B\\to C$, the canonical coefficient map $\\operatorname{Tor}^R_n(M,B)\\to\\operatorname{Tor}^R_n(M,C)$ is the functorial map induced by the underlying $R$-linear map of $f$; it is $A$-linear. In particular, $B=A$ defines the coefficient $A$-module $\\operatorname{Tor}^R_n(M,A)$.",
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Section Functorialities for Tor, Tag 00M7, item (1), with the functorial resolution computation of section Tor, Tag 00LY."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The natural coefficient algebra module structure on Tor over a commutative base ring",
+   "results": "{\"t\": \"2026-10-17T19:15:29Z\", \"tool\": \"leansearch\", \"query\": \"The natural coefficient algebra module structure on Tor over a commutative base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.AlgebraTensorModule.congr_trans\", \"TensorProduct.AlgebraTensorModule.curry_injective_iff\", \"TensorProduct.instModule\", \"TensorProduct.Algebra.module.congr_simp\", \"TensorProduct.Algebra.module\", \"CoalgCat.tensorObj_isModule\", \"Submodule.tensorToSpan.congr_simp\", \"Module.Finite.base_change\"], \"digest\": \"7afeb65577913c1e\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.mkOfSMul, CategoryTheory.Tor",
+   "results": "{\"t\": \"2026-10-17T19:15:30Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.mkOfSMul, CategoryTheory.Tor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "torCoefficient|TorCoefficient|torSecondFunctor",
+   "results": "{\"t\": \"2026-10-17T19:15:30Z\", \"tool\": \"grep\", \"query\": \"torCoefficient|TorCoefficient|torSecondFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a fixed module M, Tor is additive in coefficient homomorphisms and the coefficient algebra acts functorially",
+   "results": "{\"t\": \"2026-10-17T19:17:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a fixed module M, Tor is additive in coefficient homomorphisms and the coefficient algebra acts functorially\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.Tor\", \"Rep.Tor_map\", \"lTensor.toFun\", \"rTensor.toFun\", \"Rep.Tor_obj\", \"PolynomialLaw.toFun_add_apply\", \"ModuleCat.instMonoidalPreadditive\", \"PolynomialLaw.add_def_apply\"], \"digest\": \"ef412f9db7980135\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*[Mm]odule|torCoefficient|TorCoefficient (Mathlib/CategoryTheory/Monoidal)",
+   "results": "{\"t\": \"2026-10-17T19:17:28Z\", \"tool\": \"grep\", \"query\": \"Tor.*[Mm]odule|torCoefficient|TorCoefficient\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\"], \"digest\": \"f620d23baba831f0\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"torCoefficientFunctor_additive|torCoefficientAction|torCoefficientLinearMap\" in WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json; rg -n \"Tor.*coefficient.*module|coefficient.*action.*Tor|canonical.*action.*Tor\" in DAG Tor nodes; blueprint_refs.py search \"Tor coefficient\"",
+   "results": "No existing all-degree coefficient-module interface. Sheaf.RingTheory.TorOneSurjectiveFlatMiddle has CategoryTheory.torOneModule and torOneCoefficientMap for n=1 only; lem-weil-pbc-tor-one-second-additive and lem-weil-pbc-tor-one-second-linear are also n=1 only. Blueprint search: 4 unrelated nodes; no exact notion.",
+   "date": "2026-10-17",
+   "verdict": "new all-degree coefficient interface required"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tor-localization-on-spec",
+  "date": "2026-10-17",
+  "group": "Q19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The coefficient A-module structure and functorial coefficient map needed to form the prime localization of Tor in lem-trf-tor-localization-on-spec, proof Steps 1 and 2.",
+   "via": [
+    "lem-trf-tor-localization-on-spec",
+    "lem-trf-log-regular-monomial-tor",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.TorCoefficientModule",
+  "declaration": "ModuleCat.torCoefficientModule",
+  "declarations": [
+   "ModuleCat.torCoefficientFunctor_additive",
+   "ModuleCat.torCoefficientAction",
+   "ModuleCat.torCoefficientModule",
+   "ModuleCat.torCoefficientLinearMap_smul",
+   "ModuleCat.torCoefficientLinearMap"
+  ],
+  "file": "lean/Sheaf/RingTheory/TorCoefficientModule.lean",
+  "statement": "def torCoefficientModule (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] (M : ModuleCat.{u} R) (B : Type u) [CommRing B] [Algebra R B] [Algebra A B] [IsScalarTower R A B] (n : ℕ) : ModuleCat.{u} A",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90f84f411",
+  "group": "Q19",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90f84f411",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Item Lean matches the node clause by clause: any ring map R->A, R-module M, n:N, p:PrimeSpectrum A, Localization.AtPrime; Tor' with M in the derived slot and R fixed; the canonical map is LocalizedModule.lift of the Tor' map for Algebra.ofId A A_p; bijective at every p, and Subsingleton Tor_n(M,A) iff Subsingleton Tor_n(M,A_p) for all p (both directions). No extra hypotheses; the single universe u is forced by Mathlib's monoidal ModuleCat Tor'. The item record changes only lean and adds the new def to stmt_deps; lean.statement is verbatim for both nodes. New def-trf-tor-coefficient-module matches Stacks Functorialities for Tor item (1). Its action is rfl Tor'(Module.toModuleEnd a) and t/1 maps to the functorial coefficient image, both checked by compiled test lemmas. Real data, only Prop fields are sorry, no duplicate (TorOneSurjectiveFlatMiddle is degree 1 only). Edge cases n=0, A=0, M=0, non-flat A are fine. Docstrings carry source and blueprint tags; all proofs are sorry. nt_compile --json of both siblings exited 0 with no warnings (5.4 s, 6.1 s). Minor and harmless: the sorry additivity instance overlaps the proved degree-1 instance (Prop); the second reading was a self-reread and the report says so."
+ }
+}

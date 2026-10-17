@@ -12,7 +12,10 @@
   "def-weil-pbc-etale-site",
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-trf-proper-hypercover",
+  "def-trf-total-simplicial-etale-site",
+  "def-trf-total-etale-augmentation-adjunction"
  ],
  "proof": [
   {
@@ -304,5 +307,26 @@
   "group": "Q55",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-05ef95801 (reviewer sub-agent of L); spot-checked: I read the item, its 9 steps and all 5 new nodes in full, and the statements of every cited node. Sources checked in Stacks: section-proper-hypercovering-spaces, 0DHJ and 0DHL with their proofs (scheme version permitted there), 0D8N, 0D97, 09WG, 0D99, 0DE5 (needs torsion), section-ph and 0DBQ. Item statement unchanged and not weakened: it is the scheme version of 0DHL for constant torsion Lambda (m Lambda=0). Torsion is needed because the comparison 0DE5/0DGU that 0DHL relies on assumes it; 0DHL's own unrestricted wording does not hold as printed. Steps checked: (1) M_n is an equalizer of proper products, cut out by a closed diagonal; the induction is correct. (2) Matching maps base-change correctly. (3) Proper surjective singletons cover in ph, so the site descent node applies with finite limits, a small site and E in D+. (4)-(6) Square, component units and composite-unit equation: I checked the directions; eta_a is shown invertible itself, not just its endpoints isomorphic. (7) I redid the transpose with the ringed counit theorem (A=Z, R=constant Lambda, c invertible); it holds. (8) Forgetting is exact and conservative, and the forgotten complex is torsion. (9) Every Y and every L_Y covered. New nodes: def-trf-ph-scheme-site has the same sheaves as Stacks ph by 0DBQ, so the same topology. lem-trf-ph-etale-torsion-comparison is exactly 0DE5. lem-trf-site-hypercover-derived-descent is the D+ case of 0D8N. lem-trf-simplicial-ph-etale-square is the scheme version of 0DHJ. lem-trf-total-site-derived-components is 0D97+09WG, and its unit claim checked. None restates a clause of the item. rg duplicate search found none: the closest nodes (lem-trf-simplicial-derived-image-spectral-sequence, ringed-hypercover-injective-augmentation, lem-cbc hypersheaf nodes, thm-weil-pbc-hypercover-cohomology) are all different statements. No SGA cited. All 7 declared tool_uses accepted. Two clarifications written to fixes/ (both are needed for step 5's hypothesis check): the square node now says h is induced by the site morphisms V->V/U_n, compatible with the structure maps through canonical fibre-product isomorphisms, with (h^{-1}G)_n=h_{U_n}^{-1}G_n. The total-components node now allows the simplicial laws and the commutation of the h_n to hold through specified coherent canonical isomorphisms, which the etale and ph simplicial sites need. Details in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperHypercoverEtaleDescent",
+  "declaration": "AlgebraicGeometry.isProper_and_universal_etale_descent_of_isProperHypercover",
+  "declarations": [
+   "AlgebraicGeometry.isProper_and_universal_etale_descent_of_isProperHypercover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperHypercoverEtaleDescent.lean",
+  "statement": "theorem isProper_and_universal_etale_descent_of_isProperHypercover {X : Scheme.{u}} (U : SimplicialObject (Over X)) (hU : IsProperHypercover U) : (∀ n : ℕ, IsProper (U.obj (op (SimplexCategory.mk n))).hom) ∧ (∀ (Y : Scheme.{u}) (f : Y ⟶ X), IsProperHypercover (U ⋙ Over.pullback f)) ∧ (∀ (Λ : Type (u + 1)) [CommRing Λ] (m : ℕ), 1 ≤ m → (m : Λ) = 0 → (∀ L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), IsIso ((totalEtaleAugmentationAdjunction U Λ).derivedPlus.unit.app L)) ∧ (∀ (Y : Scheme.{u}) (f : Y ⟶ X) (L : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))), IsIso ((totalEtaleAugmentationAdjunction (U ⋙ Over.pullback f) Λ).derivedPlus.unit.app L)))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f4f3df52a",
+  "group": "NC",
+  "result": "pass",
+  "note": "Read node, all 8 stmt deps, Stacks section-proper-hypercovering-spaces and 0DHL, both modules, report. Item: IsProperHypercover U governs every conjunct: proper augmentations; IsProperHypercover after Over.pullback f for every f; for all Λ:Type(u+1) CommRing with 1≤m, (m:Λ)=0, IsIso of derivedPlus.unit of totalEtaleAugmentationAdjunction on DerivedCategory.Plus of etale Λ-module sheaves, over X and every base change Y with arbitrary L. No extra hypotheses, universes bound. New node def-trf-total-etale-augmentation-adjunction: direct image = Ran_{p^op} restricted to etale V/X, equal to Stacks 0D70's equalizer (terminal U_n×_XV per degree); inverse image = its left adjoint, canonical up to unit-compatible iso; only 4 named true property theorems are sorry; all §5 fields present; no duplicate found by rg over lean/Sheaf, dag/nodes and the shared repo. stmt_deps gain only two landed definitions plus the new node; lean.statement verbatim in both files. nt_compile --json on both files: exit 0, no diagnostics. Minor, no repair needed: the component theorem states only that an iso exists in each degree, not the node's transition-map clause."
  }
 }

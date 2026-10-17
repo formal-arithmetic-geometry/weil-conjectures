@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-weil-pbc-tor-modules",
   "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-module-localization"
+  "def-weil-pbc-module-localization",
+  "def-trf-tor-coefficient-module"
  ],
  "proof": [
   {
@@ -182,5 +183,28 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-d2fc21d66 (reviewer sub-agent of L); spot-checked: I read the whole delivery and passed it with no changes; review.md has the details. The delivery is one commit containing only the report and the item, with no new nodes, no SGA citation and no tool_uses. The statement is unchanged and true. It is the B=A_p case of the fixed-base flat coefficient change: Stacks 00M8 (algebra.tex l.18735) changes R as well, and the source note says so instead of misquoting it. Small cases check out: n=0 matches 00DK; R=Z[x], A=Z with x->0 and M=Z gives Tor_1=Z, whose localization at (l) is Z_(l); R=Z, A=Z/2, M=Z/2 shows a non-flat A over R causes no problem; A=0 makes the criterion vacuous. Step 1: lem-weil-pbc-localization-tensor-over-base applied with R:=A, A:=A, M:=A, N:=T and S=A minus p gives T_p = A_p (x)_A T. The fraction formulas match def-weil-pbc-module-localization. Step 2: A_p is S^{-1}A, which is flat over A by lem-weil-pbc-localization-flat. That meets every hypothesis of the same-unit node lem-trf-tor-flat-base-change, and the composite map is identified with the canonical map explicitly on cycles. Step 3: lem-weil-pbc-linear-map-bijective-at-maximal-localizations (00HN(6), l.4051) applied to T->0 gives the converse with no extra hypotheses. All 00D2/00DK/00HN/00HT/00LY/00M8 tags match tags/tags. The flat-base-change node does not cite the item, so there is no cycle, and it is in the same unit; the sec-proper-base-change citations are Mathlib leaves and definitions. The duplicate search found lem-pc-derived-tensor-flat-second-localization, a derived generalization in another unit; citing it would leave the unit's route, so it is correctly not used. Parent lem-trf-log-regular-monomial-tor Step 2 uses the item exactly as stated. One minor point, not changed: an inherited Loogle record says 'unavailable', but its result was a query error (unknown identifier), not a service outage; a later Loogle search with 0 hits is recorded."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TorCoefficientLocalization",
+  "declaration": "ModuleCat.tor_coefficient_localization",
+  "declarations": [
+   "ModuleCat.torCoefficientLocalization_units",
+   "ModuleCat.torCoefficientLocalizationMap",
+   "ModuleCat.tor_coefficient_localization"
+  ],
+  "file": "lean/Sheaf/RingTheory/TorCoefficientLocalization.lean",
+  "statement": "theorem tor_coefficient_localization (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] (M : ModuleCat.{u} R) (n : ℕ) : (∀ p : PrimeSpectrum A, Function.Bijective (torCoefficientLocalizationMap R A M n p)) ∧ (Subsingleton (torCoefficientModule R A M A n) ↔ ∀ p : PrimeSpectrum A, Subsingleton (torCoefficientModule R A M (Localization.AtPrime p.asIdeal) n))",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90f84f411",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Item Lean matches the node clause by clause: any ring map R->A, R-module M, n:N, p:PrimeSpectrum A, Localization.AtPrime; Tor' with M in the derived slot and R fixed; the canonical map is LocalizedModule.lift of the Tor' map for Algebra.ofId A A_p; bijective at every p, and Subsingleton Tor_n(M,A) iff Subsingleton Tor_n(M,A_p) for all p (both directions). No extra hypotheses; the single universe u is forced by Mathlib's monoidal ModuleCat Tor'. The item record changes only lean and adds the new def to stmt_deps; lean.statement is verbatim for both nodes. New def-trf-tor-coefficient-module matches Stacks Functorialities for Tor item (1). Its action is rfl Tor'(Module.toModuleEnd a) and t/1 maps to the functorial coefficient image, both checked by compiled test lemmas. Real data, only Prop fields are sorry, no duplicate (TorOneSurjectiveFlatMiddle is degree 1 only). Edge cases n=0, A=0, M=0, non-flat A are fine. Docstrings carry source and blueprint tags; all proofs are sorry. nt_compile --json of both siblings exited 0 with no warnings (5.4 s, 6.1 s). Minor and harmless: the sorry additivity instance overlaps the proved degree-1 instance (Prop); the second reading was a self-reread and the report says so."
  }
 }

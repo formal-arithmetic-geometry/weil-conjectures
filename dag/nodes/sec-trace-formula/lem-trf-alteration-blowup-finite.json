@@ -199,5 +199,24 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-1920ecd59 (reviewer sub-agent of L); spot-checked: I read the item, its unit sk-i-curve-zero, the parent lem-trf-modification-closed-image-lifting (Steps 2 and 7), the statements of all 21 cited nodes (including the main-20261015 blueprint_update of thm-nagata-strict-transform-is-blowup), Stacks flat.tex 0B49 (lines 9173-9194) and morphisms.tex 052A (lines 5172-5184). The local archival PDF of Orgogozo Lemma 2.5 is absent, so the WANTED line and proof_origin by=agent are correct. The statement is unchanged and not weakened. It is not a duplicate of lem-trf-alteration-finite-refinement: it is stronger (both modifications are blowups and the centre is nowhere dense) and restricted to integral schemes. The delivery creates no new node and cites no SGA source. Step 1: proper implies finite type; 052A on integral Z gives a flat open, which meets the finite locus; this gives finite locally free over an affine U and so the hypotheses of 0B49. Step 2: by the definition of admissible blowup, V(I) is disjoint from the dense open U, hence nowhere dense; over the complement, p is a_U, which is surjective. Step 3: finite implies proper, so the image is closed; it contains v^{-1}(U), which is dense by the Conrad lemma, so p is surjective. Step 4: the strict transform is Bl_{IO_W}(W); this blowup is U_W-admissible with U_W=a^{-1}(U) nonempty and dense; it is an isomorphism over U_W and dense there, and proper, so u is a modification. Off-unit tools: the nagata lemmas and lem-pc-proper-base-change are Lean-closed; I accept the declared tool_use of lem-sbc-generic-flat-finite-presentation. Small cases checked: the identity, t->t^2, and Bl_0 A^2 -> A^2. Fix (proof text only): step 4 now says the strict transform is the closure of the part over Z\\R, not over U_W, and gives an explicit argument for a∘u=v∘p through W x_Z Z~; step 2 typo closed-subsheme corrected.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AlterationBlowupFinite",
+  "file": "lean/Sheaf/Paper/AlterationBlowupFinite.lean",
+  "declaration": "AlgebraicGeometry.Orgogozo.exists_blowup_finite_surjective",
+  "statement": "theorem exists_blowup_finite_surjective {W Z : Scheme.{u}} [IsIntegral W] [IsIntegral Z] [IsReduced W] [IsReduced Z] [IsNoetherian W] [IsNoetherian Z] (a : W ⟶ Z) (ha : IsAlteration a) : ∃ (I : Z.IdealSheafData), IsNowhereDense (I.support : Set Z) ∧ IsClosedImmersion I.subschemeι ∧ IsModification I.blowupMap ∧ ∃ (J : W.IdealSheafData), IsModification J.blowupMap ∧ ∃ (p : J.blowup ⟶ I.blowup), IsFinite p ∧ Surjective p ∧ J.blowupMap ≫ a = p ≫ I.blowupMap",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-18",
+  "fixed_by": "NT-stage2-cc-dc206991f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dc206991f",
+  "group": "Q30",
+  "result": "fix",
+  "note": "Statement correct clause by clause: integral/reduced/Noetherian W,Z, IsAlteration a; ∃ I with IsNowhereDense I.support (R=I.subscheme), Bl_R(Z)=I.blowup; ∃ J blowup modification; ∃ p finite surjective (AlgebraicGeometry.Surjective) with J.blowupMap ≫ a = p ≫ I.blowupMap. Extra IsModification I.blowupMap and IsClosedImmersion I.subschemeι are implied by the other clauses (equivalent, not stronger) and the citer needs the first. lean.statement verbatim; node unchanged; not a duplicate of exists_finite_surjective_refinement; no definitions; sorry-only axioms; nt_compile clean for delivered and fixed file. Fixes: (1) A1/A11 placeholder '## Second reading by Q30' replaced by a real reading in fixes/lem-trf-alteration-blowup-finite.report.md; (2) inaccurate module-docstring sentence (said strict transform, statement uses J.blowup) corrected in fixes/AlterationBlowupFinite.lean, statement unchanged."
  }
 }

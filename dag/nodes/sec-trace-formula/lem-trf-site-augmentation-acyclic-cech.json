@@ -19,7 +19,8 @@
   "def-weil-pbc-simplicial-object",
   "def-trf-geometric-morphism",
   "def-weil-abstract-derived-category",
-  "def-sp-left-exact-additive"
+  "def-sp-left-exact-additive",
+  "lem-trf-slice-site-simplicial-augmentation"
  ],
  "proof": [
   {
@@ -147,5 +148,55 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-bdc9c84b5 (reviewer sub-agent of L); spot-checked: I read the item, the new helper lem-trf-site-augmentation-spectral-sequence, every cited statement (including the Mathlib leaf lem-weil-pbc-derived-plus-iso-on-cohomology) and the parent lem-trf-site-hypercover-derived-descent in full. I checked them against Stacks spaces-simplicial.tex Tags 0D79 and 0D7A (lines 1711-1830) and section-hypercovering (line 4795 onward). The item is true as stated and carries no hypercover hypothesis, as in Stacks. Step 1, the vertex/edge kernel identification, is acceptably elementary; it is the same argument as step 3 of the étale node. Step 2 reads row 0 of E_1 off the helper. In Step 3 the vanishing positive rows make the edge map, which is H(kappa_F), an isomorphism, and the D^+ criterion finishes. I checked this independently on the double complex A^{p,q}=b_{p,*}I^q_p. The helper duplicates nothing and is no clause of the item. lem-trf-simplicial-derived-image-spectral-sequence covers only étale topoi with constant-Lambda coefficients, and lem-trf-total-site-derived-components covers component restriction for a morphism of total sites. No SGA citation; no target is touched; the unit route is unchanged; no tool_uses. I tested the trivial augmentation with F_p=A (complex A-0->A-id->A..., cohomology A in degree 0), F=0, and the Čech case. Three repairs, with whole corrected files in fixes/dag/nodes/sec-trace-formula/: (1) B2: the helper used C_b(F) without defining it. Its statement now introduces F's components and transitions, C_b(F), and e, and adds the true H^0 normalization H^0(kappa_F)∘e = the canonical b_*F=H^0(Rb_*F), which I verified on the double complex. Item Step 3's identity-on-H^0 claim had no source without it. (2) Step 3's bracket cited def-weil-abstract-derived-category for the isomorphism criterion; it now cites lem-weil-pbc-derived-plus-iso-on-cohomology, and the degree-zero sentence now derives the normalization from the helper clause plus Step 1. (3) R^q and Rb_* had no definition node; I added def-sp-left-exact-additive to both nodes' stmt_deps and statements. The item's hypotheses and conclusions are unchanged.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SiteAugmentationAcyclicCech",
+  "declaration": "CategoryTheory.SimplicialSlice.site_augmentation_acyclic_cech",
+  "declarations": [
+   "CategoryTheory.SimplicialSlice.augmentedOver",
+   "CategoryTheory.SimplicialSlice.augmentationMap",
+   "CategoryTheory.SimplicialSlice.AbelianSheaf",
+   "CategoryTheory.SimplicialSlice.restriction",
+   "CategoryTheory.SimplicialSlice.inverse",
+   "CategoryTheory.SimplicialSlice.direct",
+   "CategoryTheory.SimplicialSlice.adjunction",
+   "CategoryTheory.SimplicialSlice.abelianSheafGrothendieck",
+   "CategoryTheory.SimplicialSlice.test",
+   "CategoryTheory.SimplicialSlice.testOperatorApp",
+   "CategoryTheory.SimplicialSlice.testOperator_naturality",
+   "CategoryTheory.SimplicialSlice.testOperator",
+   "CategoryTheory.SimplicialSlice.test_continuous",
+   "CategoryTheory.SimplicialSlice.componentDirect",
+   "CategoryTheory.SimplicialSlice.componentDirectMap",
+   "CategoryTheory.SimplicialSlice.componentDirectMap_id",
+   "CategoryTheory.SimplicialSlice.componentDirectMap_comp",
+   "CategoryTheory.SimplicialSlice.cosimplicialDirect",
+   "CategoryTheory.SimplicialSlice.cechFunctor",
+   "CategoryTheory.SimplicialSlice.localizationDirect",
+   "CategoryTheory.SimplicialSlice.localizationAdjunction",
+   "CategoryTheory.SimplicialSlice.edge",
+   "CategoryTheory.SimplicialSlice.edge_comp_d",
+   "CategoryTheory.SimplicialSlice.direct_additive",
+   "CategoryTheory.SimplicialSlice.localizationDirect_additive",
+   "CategoryTheory.SimplicialSlice.cechPlusFunctor",
+   "CategoryTheory.SimplicialSlice.cechDerivedFunctor",
+   "CategoryTheory.SimplicialSlice.edgeH0",
+   "CategoryTheory.SimplicialSlice.IsComponentwiseAcyclic",
+   "CategoryTheory.SimplicialSlice.site_augmentation_acyclic_cech"
+  ],
+  "file": "lean/Sheaf/TraceFormula/SiteAugmentationAcyclicCech.lean",
+  "statement": "theorem site_augmentation_acyclic_cech [HasDerivedCategory.{w'} (AbelianSheaf J A.left)] : (∀ F : AbelianSheaf J A.left, Nonempty (IsLimit (KernelFork.ofι (edge J A F) (edge_comp_d J A F)))) ∧ ∃ κ : (IsComponentwiseAcyclic J A).ι ⋙ cechDerivedFunctor J A ≅ (IsComponentwiseAcyclic J A).ι ⋙ DerivedCategory.Plus.singleFunctor (AbelianSheaf J A.left) 0 ⋙ (direct J A).rightDerivedFunctorPlus, ∀ F : (IsComponentwiseAcyclic J A).FullSubcategory, edgeH0 J A F.obj ≫ (DerivedCategory.Plus.homologyFunctor _ 0).map (κ.hom.app F) = (direct J A).rightDerivedPlusSingleUnitHomology F.obj",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f6990010f",
+  "group": "N4",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: small site with finite limits (Category.{v} C, J, coefficients AddCommGrpCat.{max u v}, no universe equality); arbitrary augmented simplicial object; comma total site with vertical topology; localization direct image by Over.pullback precomposition; Cech complex via Mathlib alternatingCofaceMapComplex with the variance checked; edge = homEquiv mate of the degree-0 counit component; kernel clause for all F; componentwise acyclicity for all p and all q>0; natural iso on the acyclic full subcategory in D+ with H0 normalization against the canonical rightDerivedPlusSingleUnitHomology. Statement field verbatim. Elaborated signature has no extra binders; instantiated at distinct universes. The dependency §1(B) repair of Q17's module is universe-only; its only importer SiteHypercoverDerivedDescent compiles. nt_compile clean for all three files (one load timeout at load ~180, retry passed). No hollow definitions; sorrys are documented Prop theorems. Non-blocking: redundant sorry'd direct_additive duplicates a proved instance; dependency lean.by changed Q17->N4 with a note; the spectral-sequence proof dependency has no Lean module yet."
  }
 }

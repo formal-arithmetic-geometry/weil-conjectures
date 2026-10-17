@@ -145,5 +145,28 @@
   "group": "Q142",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-0e56c5f1c (reviewer sub-agent of L); spot-checked: Read the item, the only parent that cites it (lem-coef-slice-cartesian-colimit-criterion, which uses only clauses (i) and (ii)) and all seven cited node statements in full, plus the unit sk-prop-sf-biduality-general, which has no steps; all cited statements are in the item's own unit. HTT is not archived in the literature, so I checked the HTT 2.4.2.5/2.4.1.5 argument independently. The statement is true. Small cases checked: p=id_B (E^cart=B), B=Δ^0 (E^cart=E^≃), empty fibers, and the nerve of a 1-categorical Grothendieck fibration. It is not a target node, so the base-change and coefficient-category check does not apply. No SGA is cited and no tool_uses are needed. I repaired three faults in fixes/dag/nodes/sec-six-functors/lem-coef-cartesian-core-right-fibration.json. (1) C1/C4: step 1 used Cartesian composition and cancellation and the Cartesian-ness of degenerate edges without citing lem-coef-infinity-cocartesian-composition-initiality, and it merged the n=1 horn, the inner horns and the Λ^n_n case. I rewrote it case by case: {n-1,n} lies in d_0 of Λ^n_n; for n≥3 every edge is already in the horn; for n=2 the new edge comes from composition (i=1) or cancellation (i=2). (2) In step 2 I wrote out the hypothesis of the degenerate-base clause of lem-coef-cocartesian-local-global (the degenerate edge is a global cocartesian lift) and the dualization to p^op. I also stated that E^cart is a quasicategory, which the use of lem-coef-infinity-right-fibration-fibers needs. (3) E5: step 3 said 'the same argument on simplices' and made a coherence-under-composition claim that is not in the statement. I replaced it with an exact cylinder argument: all edges of h restricted to Δ^1×(E_c)^≃ are Cartesian (fiber equivalences, h_0-images of equivalences, the vertical lifts, and the diagonals through the 2-simplex ((0,1,1),s_0e)), so the restriction is a right-fibration transport datum with end map f^* restricted to cores. I dropped the unneeded mapping-fiber citation and set proof_deps to the union of the uses. The statement, stmt_deps, blueprint and split_report are unchanged. Remark: the statement uses 'transport' without a node defining it; the proof now fixes its meaning. No new nodes and nothing to drop.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianCoreRightFibration",
+  "declaration": "SSet.Enhanced.cartesian_core_right_fibration",
+  "declarations": [
+   "SSet.Enhanced.cartesianCore",
+   "SSet.Enhanced.cartesian_core_right_fibration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CartesianCoreRightFibration.lean",
+  "statement": "theorem cartesian_core_right_fibration {E B : SSet.{u}} (p : E ⟶ B) [Quasicategory E] [Quasicategory B] (hp : cartesianFibration p) : rightFibration ((cartesianCore p).ι ≫ p) ∧ (∀ b : B _⦋0⦌, (cartesianCore p).preimage (pullback.snd (SSet.const (X := Δ[0]) b) p) = core (fiber p b)) ∧ (∀ (b c : B _⦋0⦌) (f : B _⦋1⦌), B.δ 1 f = b → B.δ 0 f = c → ∀ (T : fiber p c ⟶ fiber p b) (h : Δ[1] ⊗ fiber p c ⟶ E), lift (SSet.const (X := fiber p c) (stdSimplex.obj₀Equiv.symm 0)) (𝟙 _) ≫ h = T ≫ pullback.snd (SSet.const (X := Δ[0]) b) p → lift (SSet.const (X := fiber p c) (stdSimplex.obj₀Equiv.symm 1)) (𝟙 _) ≫ h = pullback.snd (SSet.const (X := Δ[0]) c) p → h ≫ p = fst Δ[1] (fiber p c) ≫ SSet.yonedaEquiv.symm f → (∀ y : (fiber p c) _⦋0⦌, pCartesianEdge p (lift (𝟙 Δ[1]) (SSet.const (X := Δ[1]) y) ≫ h)) → ∃ (Tcore : (core (fiber p c)).toSSet ⟶ (core (fiber p b)).toSSet) (g : Δ[1] ⊗ (core (fiber p c)).toSSet ⟶ (cartesianCore p).toSSet), g ≫ (cartesianCore p).ι = (Δ[1] ◁ (core (fiber p c)).ι) ≫ h ∧ Tcore ≫ (core (fiber p b)).ι = (core (fiber p c)).ι ≫ T)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The auxiliary cartesianCore is the explicit simplicial subset constructed in this lemma. Fiber identification is equality of subcomplexes of the original strict fiber; both transport factorizations are characterized by inclusion equations, with no choice of transport."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6af932d79",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Checked every clause against the node and its dependencies. Hypotheses: single universe u, [Quasicategory E] [Quasicategory B], recorded cartesianFibration; nothing stronger. cartesianCore is a real subcomplex (all edges, degenerate included, satisfy the recorded pCartesianEdge), not a duplicate. Clauses: rightFibration of ι≫p; fiber equality preimage = core (fiber p b), true by HTT 2.4.1.5; transport quantifies over every Cartesian cylinder (h, T), orientation correct, and yields the actual restrictions g and Tcore with no choice. Edge cases fine (empty fibers, dimension 0, p=id, B=Δ^0, nerves). lean.statement verbatim equal to the file; docstrings carry source, blueprint tag and proof steps; only sorry; report has both sections. nt_compile.py --json on the snapshot: clean, 7.3 s and 11.9 s, exit 0. Minor only: step 1 condensed in the docstring, HTT Rem. 2.4.2.9 citation not checked."
  }
 }

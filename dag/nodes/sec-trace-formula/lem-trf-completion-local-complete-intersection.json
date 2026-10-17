@@ -274,5 +274,24 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-4a0705311 (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 31 cited statements and dpa.tex lines 1670-1860 (09PZ with its proof, 09Q0, 09Q1; tags confirmed in tags/tags). New node lem-trf-regular-quotient-completion-kernel-test is true: it is exactly 09Q1 (1)<=>(2) for a regular local R combined with 09PZ (some vs every regular-local surjection onto a complete ring), and Q need not be complete, as in the 09PZ proof. Tested on I=0, Z_p[[x]]->F_p[[x]], k[u,v]_(u,v) with I=(u,v)^2, and the unit ideal (excluded). It is statement-only and self-contained; searches are logged; no duplicate in the DAG (rg for 09PZ/09Q0/09Q1/09Q6/ci-well-defined/quotient-regular-ring); it is strictly smaller than the item, not a restated clause. Item steps check: step 1 hypotheses hold (Noetherian local A, completion local with residue field F and n-adically complete). Step 2 gives a field coefficient ring via Lambda∩m=pLambda=0 in both characteristics; the ring section is correctly not required to be k-linear. Step 3: the universal-property and complete-source-surjectivity hypotheses hold and ker psi lies in l. Step 4: the global-CI cover with T nonzero and dim m-t feeds the regular-sequence node, then the kernel test (=>). Step 5: the kernel test (<=) gives exactly the hypothesis of the 00SC node at p, so g=1 cover. Step 6: the induction is properly set up and the CM-quotient hypotheses are checked at each index; the upper bound comes from Supp(A)=Spec A. Statement unchanged and true, including inseparable residue fields. The 10 declared tool_uses from sk-thm-p1 are generic commutative algebra the unit route does not replace: accepted. No SGA source. No target touched. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CompletionLocalCompleteIntersection",
+  "declaration": "Algebra.completion_local_complete_intersection_iff",
+  "statement": "theorem completion_local_complete_intersection_iff (k : Type u) (S : Type v) [Field k] [CommRing S] [Algebra k S] [Algebra.FiniteType k S] (p : Ideal S) [p.IsMaximal] : ((∃ g : S, g ∉ p ∧ IsLocalCompleteIntersection k (Localization.Away g)) ↔ (∃ (r c : ℕ) (h : Fin c → MvPowerSeries (Fin r) (S ⧸ p)), RingTheory.Sequence.IsRegular (MvPowerSeries (Fin r) (S ⧸ p)) (List.ofFn h) ∧ (∀ i : Fin c, h i ∈ Ideal.span (Set.range (fun j : Fin r => MvPowerSeries.X j))) ∧ Nonempty ((MvPowerSeries (Fin r) (S ⧸ p) ⧸ Ideal.span (Set.range h)) ≃+* AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p)))) ∧ ((∃ g : S, g ∉ p ∧ IsLocalCompleteIntersection k (Localization.Away g)) → (↑(IsLocalRing.depth (R := Localization.AtPrime p) (Localization.AtPrime p)) : WithBot ℕ∞) = ringKrullDim (Localization.AtPrime p)) ∧ (IsLocalCompleteIntersection k S → ∀ (q : Ideal S) [hq : q.IsMaximal], (↑(IsLocalRing.depth (R := Localization.AtPrime q) (Localization.AtPrime q)) : WithBot ℕ∞) = ringKrullDim (Localization.AtPrime q))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/CompletionLocalCompleteIntersection.lean",
+  "fixed_by": "NT-stage2-cc-1df61fe44"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1df61fe44",
+  "group": "NK",
+  "result": "fix",
+  "note": "The statement matches the node clause by clause (FiniteType k S, maximal p, A=Localization.AtPrime p, F=S/p, Â=AdicCompletion (maxIdeal A) A, (1) ∃g∉p with an LCI S_g, (2) ∃r c h regular in (X_j) with a ring iso F[[z]]/(h) ≃+* Â, depth=dim under (1), and at every maximal ideal when S is an LCI). No stronger assumptions; universes u, v independent; lean.statement verbatim; edge cases r=0/c=0, g=1, g=0 checked; proof sorry only. nt_compile: the delivered and fixed files both compile clean, and the AdjoinRoot import is needed for the FiniteType instance on S_g. FIXED H8: the theorem docstring now carries the six proof steps with their cited nodes. FIXED H9: the proof-dependency import AdicCompletionNoetherian is now non-public, and non-public imports of the Mathlib proof-dependency modules Noetherian.Defs, RegularLocalRing.Defs and AdicCompletion.Functoriality were added. Fix file: fixes/CompletionLocalCompleteIntersection.lean. Minor, unchanged: the report wrongly says S⧸p gets a field instance, which the statement does not need."
  }
 }

@@ -24,7 +24,9 @@
   "def-nagata-relative-proj",
   "def-nagata-scheme-theoretic-image",
   "def-kun-topological-krull-dimension",
-  "def-sc-generic-point"
+  "def-sc-generic-point",
+  "def-nagata-admissible-blowup",
+  "lemma-nagata-strict-transform-closure-characterization"
  ],
  "proof": [
   {
@@ -346,5 +348,24 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-a61940537 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the new node, every cited statement, ILO X Thm 3.4 Step 2 (printed p.160) and Stacks 081R, 0GSJ/0GSK, 02NJ/02NK and 080D. The item statement is unchanged and true. The new node lem-trf-flat-dense-generic-fibre-pure-dimension is a true real lemma (0GSK second list with F=O_X, geometric fibres by 02NK), not a duplicate, and not a clause of the item. I checked its proof via 0GSJ and tested it on empty X, d=0, nonflat and nondense counterexamples, and DVR families. Steps 1 and 3-8 check out with all hypotheses verified: blowup charts in Frac A, S1 integral/Noetherian/excellent, Sym I onto Rees giving the projective-bundle embedding, flatness over a domain giving that each transform is the schematic closure of its generic fibre, C1 integral, C1->C proper and birational, pure dims 1/0 from the new node, and H1 finite via 0397/02LS. One fault (C3/C4): Step 2 took Stacks 081R from a commentary sentence in sk-lem-nagata-sketch-elimination. That node's proof says flattening 'is not needed here', and its closed Lean (exists_admissibleBlowup_isOpenImmersion_strictTransformMap) does not state flattening, so the item's main input was unproved in the DAG. Repaired: added the statement-only node lem-trf-flattening-by-admissible-blowup (exact 081R hypotheses, source flat.tex lemma-flat-after-blowing-up). Mathlib was searched by grep only; LeanSearch/Loogle are recorded as unavailable because they can't be reached from this machine. Step 2 now cites the new node with the qcqs check, proof_deps are recomputed, and the tool_use for the elimination node is removed. The other 17 tool_uses are accepted. Maintenance: that sentence in the elimination node's statement should be removed or marked as commentary.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatificationHorizontalCurvePair",
+  "declaration": "AlgebraicGeometry.exists_flatification_horizontal_curve_pair",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatificationHorizontalCurvePair.lean",
+  "statement": "theorem exists_flatification_horizontal_curve_pair {S C H Hη : Scheme.{u}} [IsIntegral S] [IsNoetherian S] (hexc : ∀ V : S.Opens, IsAffineOpen V → IsExcellent Γ(S, V)) (η : S) (hη : IsGenericPoint η (Set.univ : Set S)) (h : C ⟶ S) [IsHProjective h] [IsIntegral C] [Smooth (h.fiberToSpecResidueField η)] [IrreducibleSpace (h.fiber η)] (hdim : topologicalKrullDim (h.fiber η) = 1) (jη : Hη ⟶ h.fiber η) [IsClosedImmersion jη] [IsFinite (jη ≫ h.fiberToSpecResidueField η)] [Etale (jη ≫ h.fiberToSpecResidueField η)] (i : H ⟶ C) [IsClosedImmersion i] (hclosure : i.ker = (jη ≫ h.fiberι η).ker) : ∃ (U : S.Opens) (B : IsAdmissible S U) (C₁ H₁ : Scheme.{u}) (c₁ : C₁ ⟶ pullback h B.I.blowupMap) (i₁ : H₁ ⟶ C₁) (k₁ : H₁ ⟶ pullback (i ≫ h) B.I.blowupMap), Dense (U : Set S) ∧ IsIntegral B.I.blowup ∧ IsNoetherian B.I.blowup ∧ (∀ V : B.I.blowup.Opens, IsAffineOpen V → IsExcellent Γ(B.I.blowup, V)) ∧ IsProjectiveBundle B.I.blowupMap ∧ IsIso (B.I.blowupMap ∣_ U) ∧ IsIntegral C₁ ∧ IsClosedImmersion c₁ ∧ IsClosedImmersion i₁ ∧ IsClosedImmersion k₁ ∧ k₁ ≫ pullback.fst (i ≫ h) B.I.blowupMap ≫ i = i₁ ≫ c₁ ≫ pullback.fst h B.I.blowupMap ∧ k₁ ≫ pullback.snd (i ≫ h) B.I.blowupMap = i₁ ≫ c₁ ≫ pullback.snd h B.I.blowupMap ∧ c₁.ker = (strictTransformι h B.I.blowupMap B.I.support.compl).ker ∧ k₁.ker = (strictTransformι (i ≫ h) B.I.blowupMap B.I.support.compl).ker ∧ c₁.ker = (pullback.snd (h.fiberι η) (pullback.fst h B.I.blowupMap)).ker ∧ (i₁ ≫ c₁).ker = (pullback.snd (jη ≫ h.fiberι η) (pullback.fst h B.I.blowupMap)).ker ∧ IsHProjective (c₁ ≫ pullback.snd h B.I.blowupMap) ∧ Flat (c₁ ≫ pullback.snd h B.I.blowupMap) ∧ LocallyOfFinitePresentation (c₁ ≫ pullback.snd h B.I.blowupMap) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ B.I.blowup), Nonempty (pullback (C := Scheme.{u}) (c₁ ≫ pullback.snd h B.I.blowupMap) s) ∧ ∀ Z ∈ irreducibleComponents (pullback (C := Scheme.{u}) (c₁ ≫ pullback.snd h B.I.blowupMap) s), topologicalKrullDim Z = 1) ∧ IsFinite (i₁ ≫ c₁ ≫ pullback.snd h B.I.blowupMap) ∧ Flat (i₁ ≫ c₁ ≫ pullback.snd h B.I.blowupMap) ∧ LocallyOfFinitePresentation (i₁ ≫ c₁ ≫ pullback.snd h B.I.blowupMap) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ B.I.blowup), Nonempty (pullback (C := Scheme.{u}) (i₁ ≫ c₁ ≫ pullback.snd h B.I.blowupMap) s) → ∀ Z ∈ irreducibleComponents (pullback (C := Scheme.{u}) (i₁ ≫ c₁ ≫ pullback.snd h B.I.blowupMap) s), topologicalKrullDim Z = 0) ∧ (∃ (gC : h.fiber η ⟶ C₁) (gH : Hη ⟶ H₁), gC ≫ c₁ ≫ pullback.fst h B.I.blowupMap = h.fiberι η ∧ gH ≫ i₁ = jη ≫ gC ∧ IsPullback gC (h.fiberToSpecResidueField η) (c₁ ≫ pullback.snd h B.I.blowupMap ≫ B.I.blowupMap) (S.fromSpecResidueField η) ∧ IsPullback gH (jη ≫ h.fiberToSpecResidueField η) (i₁ ≫ c₁ ≫ pullback.snd h B.I.blowupMap ≫ B.I.blowupMap) (S.fromSpecResidueField η)) ∧ IsProper (c₁ ≫ pullback.fst h B.I.blowupMap) ∧ (∃ V : C.Opens, Dense (V : Set C) ∧ IsIso ((c₁ ≫ pullback.fst h B.I.blowupMap) ∣_ V))",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the canonical admissible blowup and strict-transform APIs. Closed immersions and equality of their kernel ideal sheaves specify the closures and strict transforms up to their unique isomorphisms over the ambient schemes. Generic-fibre pullback squares include their embedding compatibility. Finite presentation is locally finite presentation together with the quasi-compactness and quasi-separatedness supplied by H-projectivity or finiteness."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0ec5b17c",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Read node, all 19 stmt deps and exact declarations (IsAdmissible, strictTransformι, IsProjectiveBundle, IsHProjective, fiber API, IsExcellent, Hom.ker). Every hypothesis and conclusion clause matches the node with no stronger assumptions; the extra nonemptiness of the curve's geometric fibres is implied by 'pure of dimension 1' and proved in node Step 7. Edge cases checked: empty marking, identity blowup, dimension-0 base, universes (all u). lean.statement is verbatim equal to the file; one sorry; source/blueprint docstrings and the 8-step proof docstring are present; only module, node (lean plus two landed, acyclic stmt_deps) and report changed. nt_compile --json rc=0 with no messages (7.5 s/8.6 s). Minor: the statement cites lemma-nagata-strict-transform-closure-characterization rather than def-nagata-strict-transform (same declaration); the second-reading section is the standard post-10-17 placeholder."
  }
 }

@@ -64,5 +64,28 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-07b80c47c (reviewer sub-agent of L); spot-checked: I read the whole definition. The source (main-20261015 sk-prop-sp-composition/pur9-def-upper-shriek-composition.md, order 2320) cites three pur9 ids that no blueprint snapshot defines, so replacing them with DAG nodes was right. Fault (E4/E6): the delivered statement took Rf^!, Rg^! and R(gf)^! from pur713-def-upper-shriek. That node is imported and unreviewed, and it defines Rf^! on unbounded D(Y_proet,A) through a non-existent proper-adjoint input; def-weil-exceptional-inverse-image shows this ambient right adjoint fails in general (elliptic-curve counterexample). The counit eps_{gf}, however, came from the standing adjunction of def-pur-conventions, which belongs to def-weil-exceptional-inverse-image. On top of that, L was arbitrary, while alpha_{g,f} of thm-sf-comp-composition is defined only on D^+_et. Repair, statement and stmt_deps only: the functors are now those of def-weil-exceptional-inverse-image; L lies in D^b_c(S,A); K=R(gf)^!L has etale origin by lem-sf-proetale-constructible-origin(ii); Rf_!K stays bounded below of etale origin by thm-sf-comp-composition; the two hom bijections come from thm-sf-ambient-adjoint-class(2). I removed pur713-def-upper-shriek and added def-weil-exceptional-inverse-image, thm-sf-ambient-adjoint-class and lem-sf-proetale-constructible-origin. None of the three reaches the item, so there is no cycle. The defining mate eps_{gf} o alpha_{g,f} and the composite counit eps_g Rg_!(eps_f Rg^!) are unchanged; I checked them against def-weil-pbc-composite-adjunction and unit statement (1). D^b_c covers every use: the unit works in D_ctf, thm-pur-composition-coherence (merged) uses D^b_ctf and already reads the item this way, and the chart-normalization node uses L=Lambda. Edge cases checked: f or g an identity gives the identity, L=0, n=1 with E ramified. Duplicate candidates read (lem-sf-mate, fix-prop-adjunctions(3), det-sp-composition-comparisons(1)) are statements about the map, not this definition. There are no new nodes and no proof steps, so no tool_uses are needed. No SGA source is cited, and no target changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StandingExceptionalComposition",
+  "declaration": "AlgebraicGeometry.ProEtale.standingExceptionalComposition",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.standingExceptionalHomEquiv",
+   "AlgebraicGeometry.ProEtale.standingExceptionalComposition"
+  ],
+  "file": "lean/Sheaf/Paper/StandingExceptionalComposition.lean",
+  "statement": "def standingExceptionalComposition (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y S : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [S.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (S ↘ Spec (.of P.field.k))] [QuasiCompact (S ↘ Spec (.of P.field.k))] (f : X ⟶ Y) (g : Y ⟶ S) [f.IsOver (Spec (.of P.field.k))] [g.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper constructs the normalized Hom equivalence from fixedCompactSupportComparisonIso, the derived comparison adjunction, the ordinary etale adjunction and fully faithful comparison pullback. The main definition applies the composite of these equivalences to the specified originCompositionAmbient followed by the standing counit. sfFiniteExceptionalAt at the chosen compactification supplies K; its formula is definitionally the existing rightDerivedUpperShriek. No additional adjunction, preservation or origin hypotheses are supplied by the caller."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c5acaeb3",
+  "group": "N9",
+  "result": "pass",
+  "note": "Read node, 8 stmt deps, report, module, and dependency sources (sfFiniteExceptionalAt, fixedCompactSupportComparisonIso/FixedComparisonClassAdjunction.homEquiv_normalized, originCompositionAmbient, Nagata HasCompactification). All hypotheses match the node: PurityFiniteSetting conventions, finite-type k-schemes, separated finite-type f and g over k (IsOver = k-morphism reading), L in D^b_c(S,A) on ProEt, no universe equality. alpha is the canonical forward compositor on its etale-origin domain. The helper Hom bijection is real data matching the normalized chain of thm-sf-ambient-adjoint-class; its witness choice does not affect the result. Counit is helper.symm (id); the composite transpose goes through g then f, as in Adjunction.comp_homEquiv. nt_compile: module clean in 18.9 s; #check gives R(gf)^!L -> Rf^!Rg^!L; no sorry in the module (sorryAx comes from upstream). Only the lean field changed; statement verbatim. No duplicate: HasAmbientExceptionalRightAdjoint.compIso assumes the nonexistent ambient adjoint, the rest are etale, proper or existential. Edge cases (identities, L=0, empty schemes, n=1, ramified E) are covered. No findings."
  }
 }

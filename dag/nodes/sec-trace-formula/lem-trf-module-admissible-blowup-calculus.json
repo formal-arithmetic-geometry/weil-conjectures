@@ -280,5 +280,28 @@
   "group": "Q69",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-39920dd8b (reviewer sub-agent of L); spot-checked: I read all ten steps of lem-trf-module-admissible-blowup-calculus. I checked each cited node's statement, using the blueprint_update for thm-nagata-composition-of-blowups and the other nagata nodes. I read the Stacks sources in divisors.tex: 080B, 080D, 080F, 080H, 080I and 080K. The statement is true and has not been weakened: it is 080B plus 080I(1) plus 080F(2) for admissible blowups, with elementary permanence facts added. Steps 1–2: S_1 is qcqs via properness, separatedness and qcqs permanence clause (2). The composition theorem's hypotheses hold, and the support union misses U. Steps 3–6 follow the proof of 080I. q^* preserves epimorphisms (shown on stalks), and the composite kernel is supported on the preimage of V(K). Different-centres is applied on S_1 with the Cartier divisor E from principalization; its no-E-supported-sections hypothesis comes from the kernel lemma. I checked the step-6 set equality c^{-1}(Z_1∪E)=(bc)^{-1}(Z∪b(Z_1)) point by point. It uses that b is an isomorphism over S∖Z, and the quasi-compactness of S∖Z is correctly justified. Steps 7–8 (agreement over U, finite type) are correct. Steps 9–10 give flatness via lem-pc-relatively-flat-module-pullback, with no hypothesis on b. On affine charts where E=V(a) with a a nonzerodivisor, a is injective on the flat module N, and the basic-open localization node gives a^n t=0, so t=0. Small cases checked: U=S, U empty, F=0, F=k[t]⊕k[t]/(t) over k[t] with centre (t) (shows the result depends on the centre), and the same centre twice. There are no new nodes and no cycle. Nothing restates the item or the cited nodes; lem-trf-strict-transform-composition is the scheme version and is not used for the module claim. I accept both declared tool_uses: lem-pc-relatively-flat-module-pullback and lem-weil-pbc-affine-module-basic-open-localization. No other off-route statement dependency is unclosed, and no SGA source is cited. For the maintainer: source.place (a maintainer-owned field) still says 080K for lemma-composition-finite-type-blowups; the correct tag is 080B. Only proof_origin was corrected, so please fix source.place on the maintainer side. I made no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleAdmissibleBlowupCalculus",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleAdmissibleBlowupCalculus",
+  "statement": "theorem moduleAdmissibleBlowupCalculus {X S : Scheme.{u}} (U : S.Opens) (_hU : IsCompact (U : Set S)) (f : X ⟶ S) (F : X.Modules) [hF : F.IsQuasicoherent] [CompactSpace S] [QuasiSeparatedSpace S] (B : IsAdmissible S U) (C : IsAdmissible B.I.blowup (B.I.blowupMap ⁻¹ᵁ U)) : ∃ (hI : B.I.toModules.IsFiniteType) (hJ : C.I.toModules.IsFiniteType) (hF1 : (@moduleStrictTransform _ _ f B.I hI F hF).IsQuasicoherent) (K : S.IdealSheafData) (hK : K.toModules.IsFiniteType), (K.support : Set S) = (B.I.support : Set S) ∪ B.I.blowupMap '' (C.I.support : Set B.I.blowup) ∧ ∃ (e : C.I.blowup ≅ K.blowup) (m : Limits.pullback (pullback.snd f B.I.blowupMap) C.I.blowupMap ⟶ Limits.pullback f K.blowupMap) (hm : pullback.fst (pullback.snd f B.I.blowupMap) C.I.blowupMap ≫ pullback.fst f B.I.blowupMap = m ≫ pullback.fst f K.blowupMap), e.hom ≫ K.blowupMap = C.I.blowupMap ≫ B.I.blowupMap ∧ m ≫ pullback.snd f K.blowupMap = pullback.snd (pullback.snd f B.I.blowupMap) C.I.blowupMap ≫ e.hom ∧ IsIso m ∧ ∃! a : @moduleStrictTransform _ _ (pullback.snd f B.I.blowupMap) C.I hJ (@moduleStrictTransform _ _ f B.I hI F hF) hF1 ⟶ (tensorPullback m).obj (@moduleStrictTransform _ _ f K hK F hF), IsIso a ∧ (tensorPullback (pullback.fst (pullback.snd f B.I.blowupMap) C.I.blowupMap)).map (@moduleStrictTransformQuotient _ _ f B.I hI F hF) ≫ @moduleStrictTransformQuotient _ _ (pullback.snd f B.I.blowupMap) C.I hJ (@moduleStrictTransform _ _ f B.I hI F hF) hF1 ≫ a = (tensorPullbackCompositionIso (pullback.fst (pullback.snd f B.I.blowupMap) C.I.blowupMap) (pullback.fst f B.I.blowupMap) (m ≫ pullback.fst f K.blowupMap) hm).inv.app F ≫ (tensorPullbackCompositionIso m (pullback.fst f K.blowupMap) (m ≫ pullback.fst f K.blowupMap) rfl).hom.app F ≫ (tensorPullback m).map (@moduleStrictTransformQuotient _ _ f K hK F hF)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleAdmissibleBlowupCalculus.lean",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransformQuotient",
+   "AlgebraicGeometry.Scheme.Modules.moduleAdmissibleBlowupPermanence",
+   "AlgebraicGeometry.Scheme.Modules.moduleAdmissibleBlowupCalculus"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e495c81a4",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Statement matches the node and Stacks 080B/080I(1)/080F(2)/080D clause by clause. The comparison is a unique isomorphism fixed by a commuting square of quotients, and the fibre-product identification is fixed by both projections. Finite-type and quasi-coherence witnesses are conclusions, not hypotheses. moduleStrictTransformQuotient is real data. Proofs are sorry only, docstrings are present, lean.statement is verbatim, and nt_compile returned 0 with no warnings. Notes: def-pc-tensor-pullback-composition-iso is used but not in stmt_deps (landed, non-blocking); source.place 080K should be 080B (maintainer field)."
  }
 }

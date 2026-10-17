@@ -91,10 +91,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-9943db3cc",
-  "group": "Q17",
+  "reviewer": "NT-stage2-cc-f6990010f",
+  "group": "N4",
   "result": "pass",
-  "note": "Item statement matches node and Stacks 0D8N bounded-below clause by clause: small site with finite limits, augmented U as SimplicialObject (Over X), proper-face matching limits in C/X (n=0 terminal X/X), matching maps uniquely fixed by hμ, covering hypothesis for all n>=0 in J.over X, D+ input, IsIso of the actual derivedPlus unit of the specified augmentation adjunction (no free geometric morphism, no exactness of b_*). Common universe u is the size convention. lean.statement verbatim for item and slice-site records; stmt_deps gained only the landed matching-object node and the slice-site node stated here (human 2026-10-16). Dependency module SliceSiteSimplicialAugmentation builds the real comma total site, vertical coverings, projection, precomposition inverse image, component isos and adjunctions; defs have real data, postponed theorems are true. Docstrings, line lengths, autoImplicit ok. nt_compile.py on both files: clean, only sorry warnings, diagnostics confirmed live. Minor non-blocking: thin second-reading section (clause list is in the worker report and this review); no separate exactness clause for transition base change (follows from Mathlib, unused)."
+  "note": "Every node clause matches the Lean: small site with finite limits (Category.{v} C, J, coefficients AddCommGrpCat.{max u v}, no universe equality); arbitrary augmented simplicial object; comma total site with vertical topology; localization direct image by Over.pullback precomposition; Cech complex via Mathlib alternatingCofaceMapComplex with the variance checked; edge = homEquiv mate of the degree-0 counit component; kernel clause for all F; componentwise acyclicity for all p and all q>0; natural iso on the acyclic full subcategory in D+ with H0 normalization against the canonical rightDerivedPlusSingleUnitHomology. Statement field verbatim. Elaborated signature has no extra binders; instantiated at distinct universes. The dependency §1(B) repair of Q17's module is universe-only; its only importer SiteHypercoverDerivedDescent compiles. nt_compile clean for all three files (one load timeout at load ~180, retry passed). No hollow definitions; sorrys are documented Prop theorems. Non-blocking: redundant sorry'd direct_additive duplicates a proved instance; dependency lean.by changed Q17->N4 with a note; the spectral-sequence proof dependency has no Lean module yet."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.SliceSiteSimplicialAugmentation",
@@ -140,9 +140,9 @@
   "file": "lean/Sheaf/CategoryTheory/SliceSiteSimplicialAugmentation.lean",
   "statement": "theorem sliceSiteSimplicialAugmentation [HasPullbacks C] (J : GrothendieckTopology C) (U : SimplicialObject C) : (∀ (p q : SimplexCategoryᵒᵖ) (α : q ⟶ p), (Over.pullback (U.map α)).IsContinuous (J.over (U.obj p)) (J.over (U.obj q))) ∧ (∀ n : SimplexCategoryᵒᵖ, (component U n).IsContinuous (J.over (U.obj n)) (topology J U))",
   "branch": "newtargets-dag",
-  "by": "Q17",
+  "by": "N4",
   "date": "2026-10-17",
   "existing": false,
-  "note": "This genuine existing prerequisite had neither a lean record nor a Mathlib match. The human bottom-up instruction authorizes stating it in the same delivery. The module constructs its comma total site and augmentation projection, uses Mathlib slice base change and coherence, and supplies the canonical augmentation inverse image and its adjunctions. No existing interface is replaced."
+  "note": "Section 1(B) repair: reuse the landed Q17 total-slice construction and every declaration name, generalizing its object and morphism universes independently. The recorded SmallCategory interface unnecessarily equated those universes; covering-family indices and coefficients use max u v. At equal universes the definitions and interfaces specialize to the landed ones. No mathematical statement changes."
  }
 }

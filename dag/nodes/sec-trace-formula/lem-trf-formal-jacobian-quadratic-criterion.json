@@ -307,5 +307,29 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-9ba3c9509 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, the statement of every cited node and the source at each cited place: Stacks curves.tex 0C48 (lemma-reduced-quotient-regular-ring-dim-2) with its proof, the nondegeneracy paragraph before 0C49, 0C49 (lemma-nodal-algebraic) with its proof, 0C4B (lemma-fitting-ideal-well-defined) and 0C4C (lemma-fitting-ideal). The item statement is unchanged and matches 0C4C (1)<=>(3) together with 0C49(3) for A=F[[t]]/I. Separability is automatic because the residue field is F. Clause (c), a ring isomorphism that need not be F-linear, is true, and steps 8-10 prove it through depth, cotangent dimension and the semilinear transfer of the degree-two relation. Nothing is weakened. Steps 1-10 check: minimal coordinates via Nakayama, full coordinates and quotient by variables, with H inside p^2. The block Jacobian I_t+B gives J equal to the (e-1)-minors of B, using minor-inclusions (1), and J lies in m^{e-1}. e=2 comes from Nakayama and the depth-0 field case. 0C48(2) gives H=(f). f_u and f_v give determinant 4ac-b^2. The Morse node gives (b). Model depth 1 comes from the u,v regular sequence, depth <= dim Supp, depth drop by one and depth over a quotient ring, with every hypothesis checked. The kernel of Sym^2(m/m^2) -> m^2/m^3 is span(f_2) or 0, the polar determinant transforms by (det P)^2 sigma(.), and Nakayama finishes. No division by 2 is used anywhere. New nodes: minor-invariance (0C4B, true by Cauchy-Binet and the chain rule; tested with a redundant generator, I=0 and a nonlinear coordinate change), regular-surface-depth-one-principal (0C48(2) as stated; tested on 0, m, (u^2,uv) and (uv)), and binary Morse (true in every characteristic by successive degree-r corrections through the invertible polar matrix; tested with uv+u^3 in characteristic 2). All are statement-only, self-contained and correctly tagged, and none restates a clause of the item. rg over the whole DAG for the tags, labels and key phrases found no duplicates. I accept the seven declared generic tool_uses from sec-proper-base-change. No SGA is used. The step citations match uses, and proof_deps equals their union. No fixes were made."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.FormalJacobianQuadraticCriterion",
+  "file": "lean/Sheaf/TraceFormula/FormalJacobianQuadraticCriterion.lean",
+  "declaration": "MvPowerSeries.formal_jacobian_quadratic_criterion",
+  "declarations": [
+   "MvPowerSeries.formalJacobianMatrix",
+   "MvPowerSeries.formalJacobianIdeal",
+   "MvPowerSeries.formalJacobianMaximalIdeal",
+   "MvPowerSeries.formal_jacobian_quadratic_criterion"
+  ],
+  "statement": "theorem formal_jacobian_quadratic_criterion (F : Type u) [Field F] (n s : ℕ) (hn : 2 ≤ n) (I : Ideal (MvPowerSeries (Fin n) F)) (hI : I ≤ IsLocalRing.maximalIdeal (MvPowerSeries (Fin n) F)) (f : Fin s → MvPowerSeries (Fin n) F) (hgen : I = Ideal.span (Set.range f)) : ((Ideal.depth (formalJacobianMaximalIdeal F n I) (MvPowerSeries (Fin n) F ⧸ I) = (1 : ℕ∞) ∧ formalJacobianIdeal F n s I f = formalJacobianMaximalIdeal F n I) ↔ ∃ (a b c : F), b ^ 2 - 4 * a * c ≠ 0 ∧ Nonempty ((MvPowerSeries (Fin n) F ⧸ I) ≃ₐ[F] (MvPowerSeries (Fin 2) F ⧸ Ideal.span ({MvPowerSeries.C a * (MvPowerSeries.X 0) ^ 2 + MvPowerSeries.C b * (MvPowerSeries.X 0 * MvPowerSeries.X 1) + MvPowerSeries.C c * (MvPowerSeries.X 1) ^ 2} : Set (MvPowerSeries (Fin 2) F))))) ∧ ((∃ (a b c : F), b ^ 2 - 4 * a * c ≠ 0 ∧ Nonempty ((MvPowerSeries (Fin n) F ⧸ I) ≃ₐ[F] (MvPowerSeries (Fin 2) F ⧸ Ideal.span ({MvPowerSeries.C a * (MvPowerSeries.X 0) ^ 2 + MvPowerSeries.C b * (MvPowerSeries.X 0 * MvPowerSeries.X 1) + MvPowerSeries.C c * (MvPowerSeries.X 1) ^ 2} : Set (MvPowerSeries (Fin 2) F))))) ↔ ∃ (a b c : F), b ^ 2 - 4 * a * c ≠ 0 ∧ Nonempty ((MvPowerSeries (Fin n) F ⧸ I) ≃+* (MvPowerSeries (Fin 2) F ⧸ Ideal.span ({MvPowerSeries.C a * (MvPowerSeries.X 0) ^ 2 + MvPowerSeries.C b * (MvPowerSeries.X 0 * MvPowerSeries.X 1) + MvPowerSeries.C c * (MvPowerSeries.X 1) ^ 2} : Set (MvPowerSeries (Fin 2) F)))))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-18"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd8d6f03f",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Node changed only in lean; lean.statement verbatim in the file. Every clause matches the node and Stacks 0C4C/0C49: field F, n>=2 (hn), I<=maximal ideal (hI), finite generators (hgen), termwise pderiv Jacobian reduced mod I, canonical Matrix.minorIdeal of size n-1, J=map of the maximal ideal, Ideal.depth=1, (b) as AlgEquiv (equal to complete local F-algebra iso), (c) as RingEquiv, discriminant b^2-4ac!=0 with no division by 2 (char 2 covered), TFAE as (a<->b)&(b<->c). Edge cases n=2, s=0 (compiled test: J=bot), I=0, single universe all fine. Gates met: helper defs hold real data with source/blueprint docstrings, ten-step proof docstring, only sorry, lines <=100, imports used, no duplicate notion found. Worker report is real; the Second reading section is the standard post-2026-10-17 placeholder. nt_compile.py --json on the side overlay: clean, exit 0, 7.2 s. Observation only: def-trf-minor-ideal (landed) is not in stmt_deps; adding it is optional."
  }
 }

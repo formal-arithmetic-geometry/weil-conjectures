@@ -10,7 +10,11 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-segal-presheaf-localization"
+  "def-coef-segal-presheaf-localization",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "def-coef-presentable-infinity-category",
+  "def-coef-infinity-category-of-spaces",
+  "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "proof": [
   {
@@ -201,5 +205,30 @@
   "group": "Q108",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q108-8219af636 (reviewer sub-agent of L); spot-checked: Mathematics and all four proof steps pass; sources, hypotheses, edge cases, duplicates and dependency cycles checked. Corrected one blueprint attribution: universe-enlargement step 3 belongs to the immediate DAG parent, not the blueprint ancestor. Whole corrected JSON is under fixes/dag/nodes; detailed checks are in review.md. Statement and proof unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DayCoconeRelationsCompatible",
+  "declaration": "SSet.Enhanced.DayCoconeRelations.day_cocone_relations_compatible",
+  "declarations": [
+   "SSet.Enhanced.DayCoconeRelations.EquivalentCocones",
+   "SSet.Enhanced.DayCoconeRelations.Relation",
+   "SSet.Enhanced.DayCoconeRelations.Relation.arrow",
+   "SSet.Enhanced.DayCoconeRelations.day_cocone_relations_compatible"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DayCoconeRelationsCompatible.lean",
+  "statement": "theorem day_cocone_relations_compatible {E : SSet.{max (u + 1) v}} [Quasicategory E] (p : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (hmono : IsMonoidalInfinityCategory p) (hsmall : Presentability.IsSmall.{u, max (u + 1) v} (monoidalUnderlying p)) (tensor : (∏ᶜ (fun _ : Fin 2 ↦ monoidalUnderlying p)) ⟶ monoidalUnderlying p) (htensor : IsMonoidalTensorOperation p 2 tensor) (P : SpaceProducts.{u, v}) (D : DayExtension.{u, v} (binaryTensor tensor)) (HC : YonedaLimits.HomPresentation.{u, v} (monoidalUnderlying p)) (R : Type u) (K : R → SSet.{max (u + 1) v}) (hK : ∀ r : R, Presentability.IsSmall.{u, max (u + 1) v} (K r)) (d : ∀ r : R, K r ⟶ monoidalUnderlying p) (cocones : ∀ r : R, (coconeCategory (d r)) _⦋0⦌) (hstable : ∀ (r : R) (c : (monoidalUnderlying p) _⦋0⦌) (i : Fin 2), ∃ (r' : R) (j : K r ⟶ K r'), IsFunctorEquivalence j ∧ EquivalentCocones j (CategoryTheory.Spaces.mappedCocone (Algebroid.tensorWith tensor c i) (d r) (cocones r)) (cocones r')) (relations : ∀ r : R, Relation (MonoidalClosed.curry HC.hom.bifunctor) (d r) (cocones r)) : IsMonoidallyCompatible (dayConvolution P D) (Set.range (fun r : R ↦ (relations r).arrow))",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses normalized HomPresentation Yoneda, small underlying category and small arbitrary simplicial shapes, and actual tensor-image cocones. Stability is equivalence of entire coherent cocones with a compatible apex equivalence, including empty shapes. Relation generators project actual morphisms from supplied colimiting presheaf cocones to the full Yoneda-image cocones. The added statement dependencies are already landed owners of the reused interfaces. No colimit in C or symmetry is assumed; all theorems remain sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b76b78e1a",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Every node clause checked against the Lean: universes u and max(u+1) v; C as monoidalUnderlying p with smallness; the operadic tensor, with i=0 giving c⊗– and i=1 giving –⊗c; arbitrary small shapes K, empty allowed. The stability hypothesis requires an apex equivalence and a whole-transformation equivalence with a shape-equivalence reindex, the same convention as brown_cocone_equivalence_transport, and is not stronger than the node. Relation projects a cocone map from a colimiting Yoneda-image cocone to the exact mappedCocone, so each s_r is canonical. Conclusion is IsMonoidallyCompatible (dayConvolution P D) S_R. Edge cases R empty, K empty, unit and identity reindex are covered; no symmetry or colimit in C assumed. Helpers are real, documented and not duplicated. The 4 added stmt_deps exist and form no cycle. lean.statement verbatim; single sorry theorem with 4-step proof docstring. nt_compile per-file clean in 12.5 s. Findings: none."
  }
 }

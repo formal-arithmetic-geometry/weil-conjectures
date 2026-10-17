@@ -234,5 +234,23 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-88bbad648 (reviewer sub-agent of L); spot-checked: I read the item's statement and all six steps in full, every cited node's statement, the parent lem-trf-modification-closed-image-lifting, unit sk-i-curve-zero, and Stacks 02NW (generically finite), 01W5, 01K1 and lemma-local-ring-fibre. The Orgogozo PDF is not in the literature, so proof_origin=agent and the WANTED line are correct. The statement holds on the cases I tested: h=id, a normalization, and P^1 over a point (where a non-closed choice of y would fail, and the step avoids it). It is not a duplicate of any DAG node, and it is a lemma inside the parent's Step 1, not a restated clause. Repaired two faults. (1) C1/C4, Step 1: the step used without citation that the fibre's points are the points of h^-1(eta) and that residue fields agree between the fibre and Y; it now cites def-pc-scheme-fibre and lem-weil-pbc-fibre-product-point-residue-field. (2) E5, Step 4: the argument that the generic fibre is Spec kappa(y) mixed up tensoring with kappa(eta) and localizing at y. It now proves a^-1(eta)={y} directly: residue fields are unchanged under the closed immersions (lem-weil-pbc-field-point-factors-through-immersion (1)), y is a closed point of the finite-type fibre (lem-kun-closed-point-field (a)), and every point of the fibre is a specialization of the generic point y. Also dropped the uncited 'unique' in Step 2, recomputed proof_deps, and added two generic sk-thm-p1 tool_uses. The six declared tool_uses are all generic scheme lemmas and are accepted. Statement unchanged; no node added or dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ClosedImageGenericAlteration",
+  "declaration": "AlgebraicGeometry.Orgogozo.exists_closed_image_generic_alteration",
+  "file": "lean/Sheaf/TraceFormula/ClosedImageGenericAlteration.lean",
+  "statement": "theorem exists_closed_image_generic_alteration {X Y : Scheme.{u}} [IsReduced X] [IsNoetherian X] [IsReduced Y] [IsNoetherian Y] (h : Y ⟶ X) [IsProper h] (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z] (himage : Set.range i.base ⊆ Set.range h.base) : ∃ (W : Scheme.{u}) (j : W ⟶ Y), IsClosedImmersion j ∧ IsIntegral W ∧ ∃ (a : W ⟶ Z), a ≫ i = j ≫ h ∧ IsProper a ∧ Surjective a ∧ (∃ U : Z.Opens, Dense (U : Set Z) ∧ IsFinite (pullback.snd a U.ι)) ∧ IsAlteration a",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0ade88f40",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Read node, 5 stmt_deps records, IsAlteration def, module, report, commit diff (3 files, item changes only lean). Every hypothesis/clause matches: reduced+Noetherian X,Y; IsProper h; closed immersion i, IsIntegral Z; range i ⊆ range h; ∃ W j closed immersion, IsIntegral W, ∃ a, a≫i=j≫h, IsProper, AlgebraicGeometry.Surjective, finite over dense open via pullback.snd a U.ι, IsAlteration a. No extra hypotheses, single universe u as IsAlteration requires, no unbound variables. Edge cases (empty X, h=id, P^1 over point) fine. No duplicate found in Mathlib, side lean or WeilConjectures. No defs, proof sorry, docstrings with source place, blueprint tag and step-by-step proof, lines ≤92, statement verbatim. nt_compile.py --json clean (5.6 s), #check resolves names as intended, axioms only sorryAx+standard."
  }
 }

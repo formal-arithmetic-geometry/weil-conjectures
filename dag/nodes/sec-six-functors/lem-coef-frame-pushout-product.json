@@ -10,7 +10,8 @@
  "stmt_deps": [
   "lem-coef-cosimplicial-frame-mapping",
   "lem-coef-reedy-model-structure",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "lem-cbc-framed-horn-criterion"
  ],
  "proof": [
   {
@@ -232,5 +233,31 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-9492fe94d (reviewer sub-agent of L); spot-checked: The mathematics is correct and complete; one metadata field repaired. Source checked: I read Hovey, Model Categories, Props 5.4.1, 5.4.3 (printed pp.130-131), 3.6.8 and Remark 5.2.9 / Prop 3.1.5 in a local text copy of the cited PDF (/tmp/hovey/h.txt; the network is blocked). The item matches 5.4.3 hypothesis by hypothesis: a Reedy cofibration between cosimplicial frames on cofibrant A and B, a simplicial trivial cofibration, and the pushout in the same orientation. The target is not weakened. Step checks: Step 1 identifies V_T(boundary of Delta^n) with L_nT through proper injections and epi-mono factorization, includes n=0, and is rightly marked elementary. Step 2 instantiates the corner-lifting Mathlib leaf with C=M^Delta, D=sSet, E=M: the left corner equals the Reedy relative latching map lambda_n f and the right corner equals q_p; no fibrancy is used. Step 3: the Kan-Quillen boundary characterization makes q_p a trivial fibration, i (a mono) lifts against it, and the leaf then gives f box i in C. Step 4: frame latching maps are cofibrations; the collapse T^n->T^0 equals the augmentation component (eps_0=1 plus naturality), so the boundary-collapse test applies to A and B. Step 5: B(x)K->P is the cobase change of A(x)i, so it is a trivial cofibration by LLP closure; h after j is B(x)i, and 2-of-3 with Step 3 finishes. Edge cases checked: K=L, f=id, the initial constant frame (reduces to Corollary 5.4.4), horn inclusions (the parent's use). There are no new nodes. No duplicate: weighted-coend-skeletal-filtration, resolution-interval-tensor, framed-projective-diagram-resolution, reedy-left-frame-comparison and the Joyal/sSet pushout-product nodes all state different things. Not a restated clause of the parent lem-coef-frame-source-kan-fibration. No cycle: the 646-node closure of the deps omits the item. All cited nodes are in the item's own unit, so no tool_uses; no SGA. FIX: blueprint.from.via was truncated to ['lem-coef-frame-source-kan-fibration']. I replaced it with the full 11-entry chain (the parent followed by the parent's 10-entry via), as brief section 7.2 and blueprint_refs computed() require. The whole corrected file is at fixes/dag/nodes/sec-six-functors/lem-coef-frame-pushout-product.json; no other field changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FramePushoutProduct",
+  "declaration": "CategoryTheory.frame_pushout_product",
+  "declarations": [
+   "CategoryTheory.frameTensorTranspose",
+   "CategoryTheory.frameTensorSimplexEvaluation",
+   "CategoryTheory.frame_tensor_universal",
+   "CategoryTheory.framePushoutProduct",
+   "CategoryTheory.frame_pushout_product"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FramePushoutProduct.lean",
+  "statement": "theorem frame_pushout_product (C : Type u) [Category.{v} C] [HasLimits C] [HasColimits C] [ModelCategory C] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations C) (fibrations C)] [MorphismProperty.HasFunctorialFactorization (cofibrations C) (trivialFibrations C)] {A B : C} [IsCofibrant A] [IsCofibrant B] (FA : CosimplicialFrame C A) (FB : CosimplicialFrame C B) (f : FA.obj ⟶ FB.obj) (hReedy : Reedy.leftClass (monomorphisms SimplexCategory) (cofibrations C) f) {K L : SSet.{v}} (i : K ⟶ L) (hi : Mono i) (hiw : SSet.Enhanced.IsWeakHomotopyEquivalence i) : Cofibration (framePushoutProduct f i) ∧ WeakEquivalence (framePushoutProduct f i)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the landed framedHornCoend and both induced maps from lem-cbc-framed-horn-criterion, added to stmt_deps. The helper definitions construct the canonical transpose, representable evaluation, and pushout-product arrow. frame_tensor_universal states the tensor comparison clauses already explicit in this node; frame_pushout_product states its final model-category conclusion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac153a544",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Read the node, the four stmt deps (the frame structure, the Reedy relative-latching class with P = monos, Kan-Quillen weak equivalences, the reused framedHornCoend family), the module, the report and Hovey 5.4.3/5.2.7. Every hypothesis and both parts of the trivial-cofibration conclusion match, with the same pushout orientation; no augmentation compatibility is required, as in the source. The frame_tensor_universal clauses (simplex iso, canonical transpose bijection, naturality in Y, K and T) are true. K, L : SSet.{v} is forced by the recorded tensor interface. The definitions are real, proofs are sorry only, docstrings carry the source place and blueprint tag, and the main docstring has all 5 steps. lean.statement matches the file verbatim and the node statement is unchanged. No name collisions. The added cross-unit stmt_dep makes no cycle and the unit-route check does not apply to it. nt_compile.py was clean twice (9.5 s, 19.7 s), with no errors or warnings. No findings."
  }
 }

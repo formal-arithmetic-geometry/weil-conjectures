@@ -9,7 +9,9 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "lem-coef-enriched-category-tensor-calculus",
+  "lem-coef-nonsymmetric-operadic-tensor-adjunction"
  ],
  "proof": [
   {
@@ -263,5 +265,59 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-a54d6f087 (reviewer sub-agent of L); spot-checked: Read the item, all 3 new nodes, every cited node, the unit record and the parent's uses, plus Gepner–Haugseng arXiv 1312.3178 §§7.1–7.4 (PDF fetched read-only). Item statement is unchanged against the side DAG; only the split fields changed. def-coef-enriched-interval-strings matches GH Def. 7.1.4/RM, 7.3.1–7.3.7, 7.3.9, 7.3.13–7.3.16 and 7.4.1: the Str^+ cocartesian condition equals GH's q-left-Kan condition, and the relative-nerve target of r was checked to be well defined. lem-coef-interval-string-segal-fibration matches Props. 7.3.10(i,iii,iv), 7.3.11, 7.3.12(iii) and Lemma 7.4.2; the comma-fiber identification was checked by hand at n=1 using Rem. 7.3.8 and the active map [1]->[2]. lem-coef-interval-string-inert-extraction matches Lemmas 7.3.15 and 7.3.17. No new node duplicates an existing one or restates the item; the existing enrichment-change nodes need presentability. Steps checked: 1 (final evaluation via closedness); 2 (dual of HTT 2.4.4.9 via the cocartesian mapping-space criterion and the relative-final boundary lemma; trivial Kan fibration including dimension 0); 3 (section, inert to cocartesian, algebroid definition on the left fibration Δ_K^op); 5 (relative right adjoint over Fin_*, no presentability); 7 (Yoneda chain using strong monoidality); 8 (mate recomputed exactly); 9–10 (binary and unit cases verified, higher arities sketched at the level of the item's own informal clause); 11 (empty and singleton O, L=id, X=1). Accepted tool_use: lem-weil-pbc-trivial-kan-homotopy-equivalence, section clause only. Remarks, no change: the symmetric-to-Δ^op restriction is implicit and elementary; the item's stmt_deps could cite the symmetric-monoidal classification node (this predates the delivery). No fixes, no drops."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ClosedSelfEnrichmentBaseChange",
+  "declaration": "SSet.Enhanced.ClosedSelfEnrichment.closed_self_enrichment_base_change",
+  "declarations": [
+   "SSet.Enhanced.ClosedSelfEnrichment.prependInitial",
+   "SSet.Enhanced.ClosedSelfEnrichment.initialExtension",
+   "SSet.Enhanced.ClosedSelfEnrichment.shiftedBase",
+   "SSet.Enhanced.ClosedSelfEnrichment.tuple",
+   "SSet.Enhanced.ClosedSelfEnrichment.pair",
+   "SSet.Enhanced.ClosedSelfEnrichment.singleton",
+   "SSet.Enhanced.ClosedSelfEnrichment.fixedString",
+   "SSet.Enhanced.ClosedSelfEnrichment.singletonString",
+   "SSet.Enhanced.ClosedSelfEnrichment.evaluationCollapse",
+   "SSet.Enhanced.ClosedSelfEnrichment.BinaryPresentation",
+   "SSet.Enhanced.ClosedSelfEnrichment.tensorAt",
+   "SSet.Enhanced.ClosedSelfEnrichment.homAt",
+   "SSet.Enhanced.ClosedSelfEnrichment.closedInputs",
+   "SSet.Enhanced.ClosedSelfEnrichment.SelfEnrichment",
+   "SSet.Enhanced.ClosedSelfEnrichment.tensorEdge",
+   "SSet.Enhanced.ClosedSelfEnrichment.LaxBinaryComparison",
+   "SSet.Enhanced.ClosedSelfEnrichment.mixedLeft",
+   "SSet.Enhanced.ClosedSelfEnrichment.mixedRight",
+   "SSet.Enhanced.ClosedSelfEnrichment.atFirst",
+   "SSet.Enhanced.ClosedSelfEnrichment.IsEvaluationMate",
+   "SSet.Enhanced.ClosedSelfEnrichment.EvaluationParameters",
+   "SSet.Enhanced.ClosedSelfEnrichment.evaluationSource",
+   "SSet.Enhanced.ClosedSelfEnrichment.evaluationTarget",
+   "SSet.Enhanced.ClosedSelfEnrichment.evaluationHom",
+   "SSet.Enhanced.ClosedSelfEnrichment.identityParameter",
+   "SSet.Enhanced.ClosedSelfEnrichment.DinaturalEvaluation",
+   "SSet.Enhanced.ClosedSelfEnrichment.tensorTransformations",
+   "SSet.Enhanced.ClosedSelfEnrichment.parameterHom",
+   "SSet.Enhanced.ClosedSelfEnrichment.betaParameter",
+   "SSet.Enhanced.ClosedSelfEnrichment.IsCoherentEvaluationMate",
+   "SSet.Enhanced.ClosedSelfEnrichment.AdjointChange",
+   "SSet.Enhanced.ClosedSelfEnrichment.Statement",
+   "SSet.Enhanced.ClosedSelfEnrichment.closed_self_enrichment_base_change"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ClosedSelfEnrichmentBaseChange.lean",
+  "statement": "theorem closed_self_enrichment_base_change {E D : SSet.{u}} [Quasicategory E] [Quasicategory D] (p : E ⟶ monoidalSimplexBase.{u}) (q : D ⟶ monoidalSimplexBase.{u}) (_hp : IsMonoidalInfinityCategory p) (_hq : IsMonoidalInfinityCategory q) (SC : Algebroid.TensorCalculus.SymmetricExtension p) (SD : Algebroid.TensorCalculus.SymmetricExtension q) (B : BinaryPresentation p) (V : BinaryPresentation q) (HC : (monoidalUnderlying p).op ⊗ monoidalUnderlying p ⟶ monoidalUnderlying p) (HD : (monoidalUnderlying q).op ⊗ monoidalUnderlying q ⟶ monoidalUnderlying q) (_closedC : OperadicTensor.MappingAdjunction (lift (snd _ _) (fst _ _) ≫ B.tensor) HC) (_closedD : OperadicTensor.MappingAdjunction (lift (snd _ _) (fst _ _) ≫ V.tensor) HD) (L : D ⟶ E) (hL : IsStrongMonoidalInfinityFunctor q p L) (LS : SD.total ⟶ SC.total) (hLS : IsStrongSymmetricMonoidal SD.projection SC.projection LS) (_hrestriction : AreLMNaturallyEquivalentOver SC.projection (q ≫ nerveMap (AsSmall.down ⋙ SD.base ⋙ AsSmall.up)) (L ≫ SC.restriction) (SD.restriction ≫ LS)) (R : monoidalUnderlying p ⟶ monoidalUnderlying q) (adj : CoherentAdjunction (relativeFiberMap L hL.1.1 (monoidalBaseVertex 1)) R) (unitC : monoidalUnderlying p _⦋0⦌) (_hunitC : IsMonoidalTensorUnit p unitC) : Nonempty (Statement SC SD B V HC HD L hL LS hLS R adj unitC)",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the published generic three-variable MappingAdjunction to express closedness without losing source-variable coherence. The two added statement dependencies are already landed and supply generic symmetric-extension/internal-Hom specialization and mapping-space-adjunction definitions. Helpers specify augmented-string evaluation and the canonical adjoint tensor mate, all in this owning node; no independent mathematical notion is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49ea89e30",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps, report, module and the used declarations (MappingAdjunction, homAt, SymmetricExtension, Is*MonoidalInfinity*, CoherentAdjunction, Represents, HasMonoidalOperationMates, TransportData, twistedArrow API). Every node clause rendered without added hypotheses (no presentability/smallness/completeness); closedness via generic 3-variable MappingAdjunction; lax R via AdjointChange+HasMonoidalOperationMates; binary comparison pinned by inert projections and cocartesian fold; algebra over core with families by precompose and change of base by postcomposition; beta equivalence in Fun(D^op x C,D) with fixed-X and twisted-arrow-parametrised evaluation-mate equations; R[1,B]~RB. Verified all Represents endpoint equalities hold (no vacuous clauses) and BinaryPresentation data always exists. Edge cases (empty/singleton O, arity 0, L=id, X=1) covered. Gates: single sorry, no hollow defs, docstrings with source and blueprint, lines<=100, lean.statement verbatim, declarations list exact, stmt_deps gained only landed acyclic nodes. nt_compile --json clean (46.3 s / 39.1 s, <60 s). Remark: the Second reading section is the author's own, not another worker's, but names concrete changes."
  }
 }

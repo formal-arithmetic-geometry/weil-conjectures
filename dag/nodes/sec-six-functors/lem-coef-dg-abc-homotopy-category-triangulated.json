@@ -25,7 +25,8 @@
   "place": "Tag 09QJ, TeX label situation-ABC, with axioms (A) and (B) in section-review immediately before it; Tag 09P6, TeX label lemma-get-triangle, defines the boundary; Tag 09QY, TeX label proposition-ABC-homotopy-category-triangulated; Tag 09QU, TeX label lemma-cone-homotopy, parts (1) and (2), identifies the two classes of triangles."
  },
  "stmt_deps": [
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "def-coef-dg-abc-data"
  ],
  "proof": [
   {
@@ -217,5 +218,27 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-ed45575b4 (reviewer sub-agent of L); spot-checked: I read the item, its four new nodes, the cited nodes def-weil-triangulated-category and lem-coef-dgcat-model-structure, the parent module-cone node, the unit record, Stacks dga.tex section-review through 09QY, and Mathlib Triangulated.lean lines 71-87 (Octahedron) and 376-398 (IsTriangulated.mk'). The item statement is byte-identical to the base and agrees with 09QJ/09QY, with the cone-triangle clause from 09QU(1)+(2) using -p. I recomputed all ten steps. Steps 2-3 reproduce 09P6/09QQ. Step 4 gives both inclusions of the triangle classes and the identity-on-x,y normal form. Step 5 checks the (1,1,-1) squares. Step 6 checks dE=dF=0, FE=1, EF=1, Ea=i, pE=b and the three squares of (-1,1,E), with rho·dt=pi·ds exactly by (C). Step 7 gives dc=0 for the cone map, using the correctly typed p_1 in place of the source's typo. In steps 8-10 the four flag equations and the boundary p_1[1]delta_3 match Octahedron comm1-4 and mem exactly. New nodes: cone-homotopy matches the 09QU(1) proof, and I checked d e=0, d t=0, et=1 and [delta e]=[-p_a] myself. For replacement, 09QM prints a wrong quotient; I constructed the true quotient c(g) with all five splitting identities, so 09QN holds. For flag-quotients, the source assumes a quotient q_2 exists; I proved it exists with pi_2=pi_1 pi_3 and checked all five identities of (u,v,r,t), the boundary, and the four H^0 identities (the last holds up to d(pi_3 s_2)). The Mathlib leaf IsTriangulated.mk' is exact. No duplicates turned up in a DAG-wide grep for the tags, the vocabulary and the declaration; citing the parent/grandparent would be cyclic. Every new node records the three kinds of Mathlib search. The unit route is unchanged, no tool_uses are needed, and no SGA is cited. Minor: the new nodes lack lean_audit, which 44 recent DAG nodes also lack; left unrepaired. No fixes written."
  },
- "lead_note": "2026-10-18 L (route pivot, the human): the model structure node lem-coef-dgcat-model-structure was cited only for the definition of a small dg category; that definition is now recalled inline in the statement (Stacks 09QJ route) and the citation removed"
+ "lead_note": "2026-10-18 L (route pivot, the human): the model structure node lem-coef-dgcat-model-structure was cited only for the definition of a small dg category; that definition is now recalled inline in the statement (Stacks 09QJ route) and the citation removed",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgAbcHomotopyCategoryTriangulated",
+  "declaration": "CategoryTheory.IntegralDGCategory.ABC.abc_homotopy_category_triangulated",
+  "declarations": [
+   "CategoryTheory.IntegralDGCategory.ABC.abc_homotopy_category_triangulated"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgAbcHomotopyCategoryTriangulated.lean",
+  "statement": "theorem abc_homotopy_category_triangulated (A : IntegralDGCategory.{u, v}) (hA : AxiomA A) (S : Shifts A) (hC : ∀ (x y : A.Obj) (f : Closed A x y), Nonempty (Cone S f)) : Nonempty (TriangulatedRealization A S)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the separately delivered ABC-data definition and the existing integral dg-category encoding. The conclusion supplies the H⁰ category on the literal object set with a surjective additive class map identifying exactly differences of boundaries, fixing induced composition and shifts, and both exact descriptions of its distinguished triangles. No category or triangulation is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c98194ddc",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read node, def-coef-dg-abc-data, def-weil-triangulated-category, both modules, report, and Stacks dga.tex 09QJ/09P6/09QU/09QY plus section-review and the Comp^dg examples. Every hypothesis matches: IntegralDGCategory (exact notion over Z, independent universes u,v), AxiomA (dg zero object + 5-identity dg biproducts), Shifts (strict dg functors, homShift to Mathlib shift with (-1)^n d; the (-1)^{np} postcomposition sign is the one forced in Comp^dg(B)), Admissible (5 identities, pi/s graded), boundary pi d(s), Cone with exact f[1] equality. The conclusion pins H0 Homs/composition/shifts and both triangle classes (cone with -p) plus Pretriangulated+IsTriangulated. No extra assumptions or universe restriction; empty object type excluded by (A) as in the source. New node follows H12; no duplicate notion (Dg.Cat/DGCat are other encodings; IntegralDGCategory already used in the via chain); only lean/stmt_deps changed; no cycle; statements verbatim; 10 proof steps verbatim; lines <=100; only the theorem is sorry. nt_compile --json on both files: rc 0, no errors or warnings. Informational: HasShift add/zero isos left free (no effect on TR1-TR4); second-reading section is an author self-check, accepted since this review is the independent reading."
+ }
 }
