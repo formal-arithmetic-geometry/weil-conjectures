@@ -92,7 +92,7 @@ noncomputable def upperStarDerivedLowerStarIso (G : WeilComplex k₀ l U) :
         (ProEtaleWeilSheaf.lowerStar k₀ l j) (ProEtaleWeilSheaf.upperStar k₀ l j)).symm.app
         G.obj ≪≫
       (Functor.rightDerivedFunctorNatIso
-        (ProEtaleWeilSheaf.lowerStarCompUpperStarIso j)).app G.obj ≪≫
+        (ProEtaleWeilSheaf.lowerStarCompUpperStarIso k₀ l j)).app G.obj ≪≫
       (Functor.rightDerivedFunctorIsoMapDerivedCategory (𝟭 _)).app G.obj ≪≫
       (Functor.mapDerivedCategoryIdIso _).app G.obj)
 

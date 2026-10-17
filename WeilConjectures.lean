@@ -2203,10 +2203,8 @@ public import WeilConjectures.CategoryTheory.EffacingSequenceComparison
 public import WeilConjectures.CategoryTheory.EffacingSequencePushout
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunction
-public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraCounit
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFullyFaithful
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraTwist
-public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraUnit
 public import WeilConjectures.CategoryTheory.Endofunctor.Shift
 public import WeilConjectures.CategoryTheory.EssentiallyConstantSystem
 public import WeilConjectures.CategoryTheory.ExactCouple

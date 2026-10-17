@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.Analysis.Analytic.ConvergenceRadius
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.Curve
 public import WeilConjectures.WeilSheaf.LSeries
 public import WeilConjectures.WeilSheaf.StalkTensorTrace
 
@@ -26,8 +27,9 @@ tensor square `G ⊗ G` have nonnegative coefficients.
 - `AlgebraicGeometry.WeilSheaf.IsReal.hasNonnegCoeffs_lFactor_tensorObj`: the local factors of
   `L(U₀, G ⊗ G, t)` have nonnegative coefficients.
 - `AlgebraicGeometry.WeilSheaf.lSeries_mul_localPolynomial_compactlySupportedCohomology_two`: the
-  Euler product of the `L`-series, stated with `sorry`; it is the curve case of the
-  Grothendieck–Lefschetz trace formula.
+  Euler product of the `L`-series, the curve case of the Grothendieck–Lefschetz trace formula,
+  deduced from its coefficientwise form
+  `AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_eq`.
 -/
 
 @[expose] public section
@@ -92,6 +94,7 @@ variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [IsAffine U]
   [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))]
   [GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀))]
 
+open scoped PowerSeries.WithPiTopology in
 /-- **Euler product of the `L`-function of a lisse sheaf.** Let `U₀` be a smooth geometrically
 connected affine curve and `G` a lisse Weil sheaf on `U₀`. Then, as power series in `t`,
 
@@ -107,7 +110,44 @@ theorem lSeries_mul_localPolynomial_compactlySupportedCohomology_two (ι : Padic
     G.lSeries ι *
         (((G.compactlySupportedCohomology 2).localPolynomial.map ι : Polynomial ℂ) : ℂ⟦X⟧) =
       (((G.compactlySupportedCohomology 1).localPolynomial.map ι : Polynomial ℂ) : ℂ⟦X⟧) := by
-  sorry
+  classical
+  have : IsSeparated (U ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  have : QuasiCompact (U ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  -- the images under `ι` of power series with nonzero constant coefficient commute with `⁻¹`
+  have hinv (φ : (PadicAlgCl l)⟦X⟧) (hφ : constantCoeff φ ≠ 0) :
+      PowerSeries.map ι φ⁻¹ = (PowerSeries.map ι φ)⁻¹ := by
+    have hφ' : constantCoeff (PowerSeries.map ι φ) ≠ 0 := by
+      rw [← coeff_zero_eq_constantCoeff_apply, coeff_map, coeff_zero_eq_constantCoeff_apply]
+      exact (map_ne_zero ι).2 hφ
+    rw [PowerSeries.eq_inv_iff_mul_eq_one hφ', ← map_mul, PowerSeries.inv_mul_cancel _ hφ,
+      map_one]
+  have hP (M : FrobeniusModule.{u + 1, 0} (PadicAlgCl l)) :
+      constantCoeff ((M.localPolynomial : Polynomial (PadicAlgCl l)) : (PadicAlgCl l)⟦X⟧) ≠ 0 := by
+    rw [← coeff_zero_eq_constantCoeff_apply, Polynomial.coeff_coe, FrobeniusModule.localPolynomial,
+      LinearMap.coeff_zero_charpolyRev]
+    exact one_ne_zero
+  set P₁ : (PadicAlgCl l)⟦X⟧ :=
+    ((G.compactlySupportedCohomology 1).localPolynomial : (PadicAlgCl l)⟦X⟧)
+  set P₂ : (PadicAlgCl l)⟦X⟧ :=
+    ((G.compactlySupportedCohomology 2).localPolynomial : (PadicAlgCl l)⟦X⟧)
+  -- coefficientwise, `L(U₀, G, t)` is the image of `P₁ / P₂`
+  have key : G.lSeries ι = PowerSeries.map ι (P₁ * P₂⁻¹) := by
+    ext n
+    have hfin := (U ↘ Spec (CommRingCat.of k₀)).finite_setOf_degreeOver_le n
+    refine tendsto_nhds_unique (((WithPiTopology.continuous_coeff ℂ n).tendsto _).comp
+      (G.hasProd_lFactor ι)) (tendsto_const_nhds.congr' ?_)
+    filter_upwards [Filter.eventually_ge_atTop hfin.toFinset] with t ht
+    rw [Function.comp_apply, coeff_map, ← coeff_prod_inv_localPolynomial_stalk_eq G hG n t
+      fun x hx ↦ ht (hfin.mem_toFinset.2 hx), ← coeff_map, map_prod]
+    refine congrArg _ (Finset.prod_congr rfl fun x _ ↦ ?_)
+    rw [lFactor, hinv _ (by
+        rw [← coeff_zero_eq_constantCoeff_apply, Polynomial.coeff_coe,
+          Polynomial.coeff_zero_eq_eval_zero, Polynomial.eval_comp]
+        simpa [Polynomial.coeff_zero_eq_eval_zero,
+          zero_pow ((U ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2)] using hP (G.stalk x)),
+      ← Polynomial.polynomial_map_coe, Polynomial.map_comp, Polynomial.map_pow, Polynomial.map_X]
+  rw [key, Polynomial.polynomial_map_coe, Polynomial.polynomial_map_coe, ← map_mul, mul_assoc,
+    PowerSeries.inv_mul_cancel _ (hP _), mul_one]
 
 end EulerProduct
 
