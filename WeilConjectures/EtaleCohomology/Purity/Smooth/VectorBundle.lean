@@ -298,13 +298,14 @@ lemma exists_mulVec_coord {W : Scheme.{u}} (i j : E.ι) (a : W ⟶ (π ⁻¹ᵁ 
     refine Finset.sum_congr rfl fun s _ ↦ ?_
     rw [map_mul, ← key, ← key, ← key, ← hca, Category.assoc]
 
-omit [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ V] in
+omit [HasInvertibleExponent Λ V] in
 /-- **Frame classes agree on overlaps.** Two frames of a closed immersion whose functions differ,
 on a scheme `W` étale over both, by an invertible matrix, have the same restriction to `W`
 (`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec`). -/
 theorem _root_.AlgebraicGeometry.Etale.restrictSupportedClass_frameClass_eq_of_mulVec
     {X Z : Scheme.{u}} {c : ℕ} {i : Z ⟶ X} [IsClosedImmersion i] [HasInvertibleExponent Λ X]
-    (F₁ F₂ : i.EtaleFrame c) {W : Scheme.{u}} [HasInvertibleExponent Λ W] (a : W ⟶ F₁.U)
+    (F₁ F₂ : i.EtaleFrame c) {W : Scheme.{u}} [HasInvertibleExponent Λ W]
+    {k' : Type u} [Field k'] (aW : W ⟶ Spec (.of k')) (a : W ⟶ F₁.U)
     (b : W ⟶ F₂.U) [AlgebraicGeometry.Etale a] [AlgebraicGeometry.Etale b]
     (M : Matrix (Fin c) (Fin c) Γ(W, ⊤)) (hM : IsUnit M.det)
     (v w : Fin c → Γ(W, ⊤)) (hv : ∀ t, a.appTop (F₁.f t) = v t)
@@ -343,7 +344,7 @@ theorem _root_.AlgebraicGeometry.Etale.restrictSupportedClass_frameClass_eq_of_m
           (leftDerivedUpperStarConstantComplexIso Λ (𝟙 _)).inv
           (leftDerivedUpperStarTateShiftIso Λ (𝟙 _) c) (kummerBoundaryProduct Λ w') := by
     rintro _ rfl g hg
-    exact (restrictSupportedClass_kummerBoundaryProduct_mulVec Λ v M hM g hg).symm
+    exact (restrictSupportedClass_kummerBoundaryProduct_mulVec Λ aW v M hM g hg).symm
   exact key w hMf g₀ hg₀
 
 /-- The restriction of supports along the inclusion of a chart is invertible. -/
@@ -408,7 +409,8 @@ theorem exists_thomClass :
     exact (constantComplexIso_inv_comp_leftDerivedUpperStarComp_map_supportedRestriction Λ
       (E.frame i).e a _ rfl E.zero _ _ (E.frame i).toZ (E.frame i).isPullback g₁ hg₁ _ hg' _ _
         (hδ i)).trans
-      ((restrictSupportedClass_frameClass_eq_of_mulVec Λ (E.frame i) (E.frame j) a b M hM
+      ((restrictSupportedClass_frameClass_eq_of_mulVec Λ (E.frame i) (E.frame j)
+        (a ≫ (E.frame i).e ≫ π ≫ aS) a b M hM
         (fun t ↦ a.appTop ((E.frame i).f t)) (fun t ↦ b.appTop ((E.frame j).f t))
         (fun _ ↦ rfl) (fun _ ↦ rfl) hMf
         g₁ hg₁ g₂ hg₂).trans

@@ -277,7 +277,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
   [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ V] [HasCompactification π]
   {k : Type u} [Field k] (aS : S ⟶ Spec (.of k)) [IsSeparated aS] [LocallyOfFiniteType aS]
 
-include aS in
+include E aS in
 /-- Over a chart `π⁻¹ U ≅ 𝔸^d_U`, the dualizing complex of `π` restricts to `Λ(d)[2d]`: by
 smooth base change `ω_π` restricts to `ω_{π_U}`, which the chart identifies with the dualizing
 complex of `𝔸^d_U`, and affine-space purity (`cor-pur-affine-space-purity`). -/
@@ -307,7 +307,7 @@ lemma nonempty_iso_leftDerivedUpperStar_dualizingComplex (i : E.ι) :
       (ωp ≪≫ twistShiftConstantComplexIso Λ _ d) ≪≫
     leftDerivedUpperStarTateShiftIso Λ _ d⟩
 
-include aS in
+include E aS in
 /-- Blueprint `sk-prop-an`: vector-bundle purity for the dualizing complex,
 
 `ω_π = Rπ^! Λ_S ≅ Λ_V(d)[2d]`.
@@ -347,7 +347,7 @@ theorem nonempty_iso_dualizingComplex :
   exact ⟨(shiftFunctorCompIsoId _ (-(2 * (d : ℤ))) (2 * (d : ℤ)) (by ring)).symm.app ω ≪≫
     (shiftFunctor _ _).mapIso e.symm⟩
 
-include aS in
+include E aS in
 /-- Blueprint `thm-amb-vector-bundle-purity`: Vector-bundle purity before smooth orientation
 
 Let `π : V ⟶ S` be a vector bundle of rank `d` over a separated scheme of finite type over a
@@ -370,7 +370,7 @@ theorem nonempty_iso_rightDerivedUpperShriek
   exact ⟨t.symm ≪≫ ((derivedTensor (ModuleCat.{u + 1} Λ) V).obj _).mapIso ω ≪≫
     (((derivedTensor (ModuleCat.{u + 1} Λ) V).obj _).commShiftIso (2 * (d : ℤ))).app _⟩
 
-include aS in
+include E aS in
 /-- Blueprint `def-amb-vector-integration`: Integration along a vector bundle
 
 The *integration map* `t_π : Rπ_! Λ_V(d)[2d] ⟶ Λ_S` of a vector bundle of rank `d`: the transpose
@@ -396,7 +396,8 @@ noncomputable def integrationTranspose :
 
 lemma integrationTranspose_eq :
     E.integrationTranspose Λ aS = (E.nonempty_iso_dualizingComplex Λ aS).some.inv := by
-  simp [integrationTranspose, integration]
+  rw [integrationTranspose, integration]
+  exact Equiv.apply_symm_apply _ _
 
 /-- The transpose of the integration map is an isomorphism `Λ_V(d)[2d] ≅ ω_π`. -/
 instance isIso_integrationTranspose : IsIso (E.integrationTranspose Λ aS) := by
@@ -443,7 +444,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
   [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ V] [HasCompactification π]
   {k : Type u} [Field k] (aS : S ⟶ Spec (.of k)) [IsSeparated aS] [LocallyOfFiniteType aS]
 
-include aS in
+include E aS in
 /-- Blueprint `cor-pur-vector-bundle-purity`: Vector-bundle purity
 
 Blueprint `sk-prop-an`: vector-bundle purity on the pro-étale site. For a vector bundle
