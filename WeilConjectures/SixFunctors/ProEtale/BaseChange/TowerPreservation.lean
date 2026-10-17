@@ -69,6 +69,12 @@ set_option hygiene false in
 local notation "𝐃(" T ")" =>
   _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))
 
+
+set_option pp.explicit true in
+#synth HasDerivedCategory (Sheaf (Scheme.ProEt.topology (⊤_ Scheme.{u})) (ModuleCat.{u + 1} A))
+set_option pp.explicit true in
+#synth Linear A (𝐃(⊤_ Scheme.{u}))
+#exit
 /-- A functor `Φ : D(S_proét, A) ⥤ D(T_proét, A)` *commutes with the reductions*: for every
 `K` and `n`, `Φ (K ⊗ᴸ A/Iⁿ) ≅ Φ(K) ⊗ᴸ A/Iⁿ`. -/
 def CommutesWithReductions {S T : Scheme.{u}} (Φ : 𝐃(S) ⥤ 𝐃(T)) : Prop :=

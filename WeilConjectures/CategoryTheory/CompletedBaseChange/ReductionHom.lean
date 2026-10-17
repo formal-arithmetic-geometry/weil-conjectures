@@ -143,13 +143,16 @@ lemma arrows_comm :
   refine ⟨?_, ?_, ?_, ?_⟩ <;> ext K <;> simp only [NatTrans.comp_app]
   · rw [arrowH_app, arrowH_app, mapA_app, mapB_app, ← Functor.map_comp, ← Functor.map_comp,
       projF_naturality]
-  · rw [arrowV_app, arrowV_app, mapA_app, mapC_app, Category.assoc, ← τ.commG_assoc]
-    congr 1
-    exact (τ.τY'.naturality _).symm
+  · rw [arrowV_app, arrowV_app, mapA_app, mapC_app, Category.assoc]
+    have h₁ := τ.commG (𝔇.lowerF.obj K)
+    have h₂ := τ.τY'.naturality (𝔇.exchange.natTrans.app K)
+    dsimp at h₁ h₂ ⊢
+    rw [h₂, reassoc_of% h₁]
   · rw [arrowH'_app, arrowH'_app, mapC_app, mapD_app, projF'_naturality_assoc, Category.assoc,
       ← Functor.map_comp, ← Functor.map_comp]
     congr 2
-    rw [Iso.inv_comp_eq, ← τ.commG'_assoc, Iso.hom_inv_id, Category.comp_id]
+    rw [← Iso.app_inv, ← Iso.app_inv, Iso.inv_comp_eq, ← Category.assoc, Iso.eq_comp_inv,
+      Iso.app_hom, Iso.app_hom, τ.commG']
   · rw [arrowV'_app, arrowV'_app, mapB_app, mapD_app]
     exact (𝔗.exchange.natTrans.naturality (τ.τX.app K)).symm
 

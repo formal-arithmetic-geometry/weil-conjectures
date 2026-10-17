@@ -64,7 +64,7 @@ The preadditivity of this monoidal structure needs no transport of its own: it i
 `CategoryTheory.Sheaf.monoidalPreadditive` of
 `WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal`, which applies to any sheaf
 category. The remaining transports are in the sibling files `TensorColimits` and
-`FlatResolution` of this folder; the latter is still recorded with `sorry`.
+`FlatResolution` of this folder.
 
 -/
 
