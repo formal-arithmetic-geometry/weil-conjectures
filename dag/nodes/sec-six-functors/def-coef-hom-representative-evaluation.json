@@ -1,0 +1,141 @@
+{
+ "id": "def-coef-hom-representative-evaluation",
+ "kind": "definition",
+ "title": "Canonical evaluation on fixed Hom representatives",
+ "status": "split",
+ "statement": "Let $J$ be a site on a category with object universe $c$ and morphism universe $v$, and let $A$ be a sheaf of commutative rings with rings and modules in universe $\\max(c,v,u)$. Use its module sheaves [def-weil-sheaf-of-modules-category], Hom complexes and their actual chosen product projections [def-pur-hom-complex], and fixed functorial K-injective replacement $I(M)$ [prop-pur-kinjective-resolutions-exist] used to define derived internal Hom [def-pur-derived-internal-hom]. For complexes $P,L,M$, a chain map $\\phi:P\\to\\mathcal Hom^\\bullet(L,I(M))$, integers $p,q,k$ with $q+p=k$, an object $U$, and local sections $x\\in P^p(U)$ and $y\\in L^q(U)$, define the representative evaluation to be $\\pi_{p,q,k}(\\phi^p(x))(y)\\in I(M)^k(U)$. The evaluation of the local Hom section is at the identity object of the localized site over $U$. Keep with this definition the actual localization factorization $R\\mathcal Hom(QL,QM)\\cong Q\\mathcal Hom^\\bullet(L,I(M))$ and the inverse of the localized augmentation $QM\\to QI(M)$; no new replacement or arbitrary comparison is chosen.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-hom-complex",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-derived-internal-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A8X and 0A95; injectives.tex Tag 079P. Componentwise evaluation on the fixed Hom and K-injective models, used in proof steps 6 and 14 of lem-coef-derived-system-evaluation-calculus."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical componentwise evaluation into the fixed K injective Hom complex on an arbitrary ringed site",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.eval",
+     "CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex",
+     "HomologicalComplex.Hom.mk.injEq",
+     "HomologicalComplex.eval_map",
+     "HomologicalComplex.eval_obj",
+     "HomologicalComplex.Hom.isoOfComponents_app",
+     "HomologicalComplex.Hom.isoApp",
+     "HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_apply"
+    ]
+   },
+   "date": "2026-10-16",
+   "verdict": "No declaration of canonical local evaluation into the fixed Hom/K-injective representative on arbitrary ringed sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical componentwise evaluation of a section of a sheaf Hom complex into a functorial K injective resolution on an arbitrary ringed site",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.cm5b.I_X",
+     "CategoryTheory.InjectiveResolution.ι'",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'",
+     "CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc",
+     "CategoryTheory.InjectiveResolution.ofCocomplex",
+     "CategoryTheory.InjectiveResolution.Hom",
+     "CategoryTheory.InjectiveResolution.Hom.hom'",
+     "CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'"
+    ]
+   },
+   "date": "2026-10-16",
+   "verdict": "No declaration of canonical local evaluation into the fixed Hom/K-injective representative on arbitrary ringed sites."
+  },
+  {
+   "tool": "grep",
+   "query": "hom.*[Rr]epresentative.*[Ee]val|[Hh]omSectionEvaluation",
+   "results": {
+    "n_hits": 0,
+    "note": "",
+    "top": []
+   },
+   "date": "2026-10-16",
+   "verdict": "No declaration of canonical local evaluation into the fixed Hom/K-injective representative on arbitrary ringed sites."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n HomSectionEvaluation|hom.*Representative.*Eval in WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search Hom representative evaluation",
+   "results": "No exact declaration or blueprint node. Related schemeTensorHomUncurryComponent and def-pc-canonical-derived-tensor-hom-model are specialized to the Zariski ringed space of a scheme, not an arbitrary ringed site.",
+   "date": "2026-10-16",
+   "verdict": "New general representative-evaluation definition needed; existing Hom/resolution constructions are reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-derived-system-evaluation-calculus",
+  "date": "2026-10-16",
+  "group": "N0"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Canonical representative evaluation for the closed tensor-Hom normalization and its degree-zero identity.",
+   "via": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientHomRepresentativeEvaluation",
+  "file": "lean/Sheaf/Paper/CoefficientHomRepresentativeEvaluation.lean",
+  "declaration": "WeilConjectures.coefficientHomSectionEvaluation",
+  "statement": "def coefficientHomSectionEvaluation (P L M : CochainComplex (SheafOfModules.{max c v u} ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ) (φ : P ⟶ homComplex.{c, v, max c v u, max c v u} (R := A) L ((coefficientHomResolution.{u, c, v} J A).obj M)) (p q k : ℤ) (h : q + p = k) (U : Cᵒᵖ) (x : (P.X p).val.obj U) (y : (L.X q).val.obj U) : (((coefficientHomResolution.{u, c, v} J A).obj M).X k).val.obj U",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-16",
+  "declarations": [
+   "WeilConjectures.coefficientHomComponent",
+   "WeilConjectures.coefficientHomResolution",
+   "WeilConjectures.coefficientHomResolutionIso",
+   "WeilConjectures.coefficientHomResolutionInverse",
+   "WeilConjectures.coefficientHomSectionEvaluation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e107de0a",
+  "group": "N0",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e107de0a",
+  "group": "N0",
+  "result": "pass",
+  "note": "Previous RETURN (24d3ed97d8f8) finding resolved: the new fiber_transition field states that, for normalized M,N and n<=m, the transition of the internal Hom (in adjoint form, under fiberHom at m and n) equals F_{mn}(fiberHom_m) then c_{m,n} then RHom_{B_n}(alpha_M^-1, alpha_N). c_{m,n} is the transpose of reduced evaluation along the recorded derivedChangeOfRingsIndependentCoefficients for B_m->B_n. The adjunction is pinned by ordinary_unit (sheafified 1⊗x) and unit_model; D.tensor is pinned by the pure-tensor tensor_model on K-flats. alpha is the actual transition adjoint, and its invertibility follows from the normalization criterion by Yoneda. The other changes only package existing formulas, verbatim: CoefficientScalarTensorGenerators, CoefficientTensorUncurryModel, CoefficientGlobalLimitModel. The commit touches only its 11 files. Statement verbatim; all 92 declarations listed; docstrings with source and blueprint everywhere; no hollow data; every sorry is a standalone theorem. nt_compile --json on all 5 modules: exit 0, no messages (calculus 33.8 s, tensor-Hom 14.8 s, others under 28 s). Edge cases m=n, n=0 (index n means B_{n+1}), empty W, zero objects and unbounded complexes are all admitted. Report has Worker report and Second reading by N0."
+ }
+}

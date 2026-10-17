@@ -1,0 +1,147 @@
+{
+ "id": "def-coef-hom-zero-cycle-class",
+ "kind": "definition",
+ "title": "Canonical zero-cycle class in derived global Hom",
+ "status": "split",
+ "statement": "Let $J$ be a ringed site, with module sheaves [def-weil-sheaf-of-modules-category], derived category [def-weil-abstract-derived-category] and derived internal Hom [def-pur-derived-internal-hom]. Use the fixed Hom representative, product projections, functorial K-injective replacement $I(M)$ and its localization factorization from [def-coef-hom-representative-evaluation]. Define the class of a zero cycle $z$ of $\\Gamma\\mathcal Hom^\\bullet(L,I(M))$ in $H^0R\\Gamma R\\mathcal Hom(QL,QM)$ by its ordinary cohomology class, the universal right-derived global-section unit, and the inverse of the actual Hom localization factorization. Evaluate $z$ in degree $p$ by its actual $(p,p)$ product projection and local Hom evaluation at the identity over each object. The canonical additive identification of [lem-pur-rhom-global-sections] is fixed uniquely by naturality and the following representative normalization: for a K-flat source [def-pc-kflat-complex], if $z$ evaluates componentwise to a chain map $f:L\\to I(M)$, its class corresponds to $Q(f)$ followed by the inverse of the localized augmentation $QM\\to QI(M)$. This defines the cycle-class construction and fixes the comparison; it introduces no second derived Hom or global cohomology functor.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-coef-hom-representative-evaluation",
+  "lem-pur-rhom-global-sections",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JA, RHom and global sections; injectives.tex Tag 079P, the universal derived unit. The canonical cycle-class construction fixes the H0 comparison in proof step 14 of lem-coef-derived-system-evaluation-calculus."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical zero cycle class in derived global internal Hom on a ringed site normalized by the represented chain map",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.cyclesMap_zero",
+     "CochainComplex.HomComplex.Cochain.ofHom_zero",
+     "CochainComplex.HomComplex.Cocycle.toSingleMk_zero",
+     "CochainComplex.HomComplex.Cocycle.homOf",
+     "CochainComplex.HomComplex.CohomologyClass.mk_zero",
+     "CochainComplex.HomComplex.Cocycle.cochain_ofHom_homOf_eq_coe",
+     "HomologicalComplex.cyclesMap",
+     "HomologicalComplex.homologyMap_zero"
+    ]
+   },
+   "date": "2026-10-16",
+   "verdict": "No canonical sheaf-Hom zero-cycle class into derived global internal Hom with its fixed representative normalization; the existing abstract cohomology/cocycle APIs and recorded RHom comparison are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "HomZeroClass|homZeroClass|[Zz]ero[Cc]ycle.*[Rr][Hh]om",
+   "results": {
+    "n_hits": 0,
+    "note": "",
+    "top": []
+   },
+   "date": "2026-10-16",
+   "verdict": "No canonical sheaf-Hom zero-cycle class into derived global internal Hom with its fixed representative normalization; the existing abstract cohomology/cocycle APIs and recorded RHom comparison are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical zero cycle class in derived global internal Hom on a ringed site normalized by the represented chain map",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.Hom.zero_app",
+     "CategoryTheory.Sheaf.H",
+     "CategoryTheory.instZeroHomSheaf",
+     "CochainComplex.HomComplex.Cocycle.coe_zero",
+     "CochainComplex.HomComplex.Cocycle.toSingleMk_zero",
+     "CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk",
+     "CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_zero",
+     "CategoryTheory.Abelian.Ext.mk₀_hom"
+    ]
+   },
+   "date": "2026-10-16",
+   "verdict": "No canonical sheaf-Hom zero-cycle class into derived global internal Hom with its fixed representative normalization; the existing abstract cohomology/cocycle APIs and recorded RHom comparison are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n HomZeroClass|homZeroClass|[Zz]ero[Cc]ycle.*[Rr][Hh]om in WeilConjectures, lean/Sheaf, dag/nodes; blueprint_refs.py search Hom zero cycle",
+   "results": "No exact source or side declaration, or DAG/blueprint node. The existing lem-pur-rhom-global-sections has the abstract natural equivalence but no actual zero-cycle class or normalization by the represented chain map.",
+   "date": "2026-10-16",
+   "verdict": "Missing independent cycle-class construction needed to state the prescribed degree-zero gamma identity."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-derived-system-evaluation-calculus",
+  "date": "2026-10-16",
+  "group": "N0"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "The degree-zero cycle class and representative normalization fixing the enriched adjunction Hom projection.",
+   "via": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientHomZeroClass",
+  "declaration": "WeilConjectures.coefficientHomZeroClass",
+  "declarations": [
+   "WeilConjectures.coefficientGlobalSections",
+   "WeilConjectures.coefficientOrdinarySections",
+   "WeilConjectures.coefficientRightDerivedComparison",
+   "WeilConjectures.coefficientSiteSectionsComparison",
+   "WeilConjectures.coefficientHomSectionComplex",
+   "WeilConjectures.coefficientHomZeroClass",
+   "WeilConjectures.coefficientHomZeroEvaluation",
+   "WeilConjectures.coefficientHomZeroEquiv_exists",
+   "WeilConjectures.coefficientHomZeroEquiv"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientHomZeroClass.lean",
+  "statement": "def coefficientHomZeroClass (L M : CochainComplex (SheafOfModules.{max c v u} ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ) (z : (coefficientHomSectionComplex.{u, c, v} J A L M).cycles 0)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e107de0a",
+  "group": "N0",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e107de0a",
+  "group": "N0",
+  "result": "pass",
+  "note": "Previous RETURN (24d3ed97d8f8) finding resolved: the new fiber_transition field states that, for normalized M,N and n<=m, the transition of the internal Hom (in adjoint form, under fiberHom at m and n) equals F_{mn}(fiberHom_m) then c_{m,n} then RHom_{B_n}(alpha_M^-1, alpha_N). c_{m,n} is the transpose of reduced evaluation along the recorded derivedChangeOfRingsIndependentCoefficients for B_m->B_n. The adjunction is pinned by ordinary_unit (sheafified 1⊗x) and unit_model; D.tensor is pinned by the pure-tensor tensor_model on K-flats. alpha is the actual transition adjoint, and its invertibility follows from the normalization criterion by Yoneda. The other changes only package existing formulas, verbatim: CoefficientScalarTensorGenerators, CoefficientTensorUncurryModel, CoefficientGlobalLimitModel. The commit touches only its 11 files. Statement verbatim; all 92 declarations listed; docstrings with source and blueprint everywhere; no hollow data; every sorry is a standalone theorem. nt_compile --json on all 5 modules: exit 0, no messages (calculus 33.8 s, tensor-Hom 14.8 s, others under 28 s). Edge cases m=n, n=0 (index n means B_{n+1}), empty W, zero objects and unbounded complexes are all admitted. Report has Worker report and Second reading by N0."
+ }
+}

@@ -24,7 +24,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-monoidal-infinity-category"
+  "def-coef-monoidal-infinity-category",
+  "def-coef-left-module-operadic-encoding"
  ],
  "proof": [
   {
@@ -213,5 +214,33 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleOperadicColimitDetection",
+  "declaration": "SSet.Enhanced.module_operadic_colimit_detection",
+  "declarations": [
+   "SSet.Enhanced.operadicActionInput",
+   "SSet.Enhanced.operadicActionArrow",
+   "SSet.Enhanced.IsOperadicActionTensor",
+   "SSet.Enhanced.operadicTensorBy",
+   "SSet.Enhanced.coherentCoconeImage",
+   "SSet.Enhanced.CoconeEquivalent",
+   "SSet.Enhanced.module_operadic_colimit_detection"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ModuleOperadicColimitDetection.lean",
+  "statement": "theorem module_operadic_colimit_detection {O V M : SSet.{u}} [Quasicategory O] [Quasicategory V] [Quasicategory M] (r : O ⟶ lmBase.{u}) (pV : V ⟶ monoidalSimplexBase.{u}) (A : CoherentLeftTensoring (M := M) r pV) (action : monoidalUnderlying pV ⊗ M ⟶ M) (hAction : IsOperadicActionTensor A action) (B : (lmAlgebras r) _⦋0⦌) : (∀ e : (LMModuleFiber r B) _⦋1⦌, IsEquivalenceEdge (LMModuleFiber r B) e ↔ IsEquivalenceEdge M ((A.underlying B).app _ e)) ∧ (∀ (K : SSet.{u}) (p : K ⟶ LMModuleFiber r B) (c : (coconeCategory (p ≫ A.underlying B)) _⦋0⦌), IsColimiting (p ≫ A.underlying B) c → (∀ v : (monoidalUnderlying pV) _⦋0⦌, IsColimiting (p ≫ A.underlying B ≫ operadicTensorBy action v) (coherentCoconeImage (p ≫ A.underlying B) (operadicTensorBy action v) c)) → (∃ d : (coconeCategory p) _⦋0⦌, IsColimiting p d ∧ CoconeEquivalent (coherentCoconeImage p (A.underlying B) d) c) ∧ (∀ d : (coconeCategory p) _⦋0⦌, IsColimiting p d ↔ IsColimiting (p ≫ A.underlying B) (coherentCoconeImage p (A.underlying B) d)))",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repairs H12/H4 by using Q16’s landed operadic tensoring, algebra section, strict LMModuleFiber and evaluation-at-m underlying map. Helpers identify the displayed binary action using the existing IsLMOrderedOperation and map coherent cocones; no parallel module encoding is delivered."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e53d64f2",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Read node, 3 stmt_deps, full LeftModuleOperadicEncoding (645 lines) and EnhancedDiagramsCones conventions. Lean uses landed Q16 CoherentLeftTensoring/LMModuleFiber/underlying, no private model. All clauses match node with the same quantifier order: unconditional equivalence detection iff; arbitrary K,p and specified c with IsColimiting c and IsColimiting(v⊗c) for all vertices v of monoidalUnderlying; existence with CoconeEquivalent (full cocone equivalence edge); iff for every module cocone. hAction only names A's action via IsLMOrderedOperation along admissible [0,1] arrow, always satisfiable, not stronger. coherentCoconeImage endpoints checked against commaSubcomplex false, proofs complete. Single universe u, no extra assumptions; edge cases (empty or point K, empty M, unit algebra, u=0, degenerate edges) covered. Node differs from shared DAG only in lean and added stmt_dep def-coef-left-module-operadic-encoding (genuinely used, acyclic); dep node copies identical. lean.statement verbatim; 7 declarations listed; source/blueprint docstrings; 5-step proof docstring; only sorry is the theorem proof; lines <=100. Report has Worker report and Second reading by Q15. nt_compile.py --json: exit 0, module 1.7 s, no errors or warnings."
  }
 }

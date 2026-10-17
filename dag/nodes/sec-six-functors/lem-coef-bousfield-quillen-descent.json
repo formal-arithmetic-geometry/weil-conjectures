@@ -211,5 +211,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BousfieldQuillenDescent",
+  "file": "lean/Sheaf/CategoryTheory/BousfieldQuillenDescent.lean",
+  "declaration": "HomotopicalAlgebra.bousfield_quillen_descent",
+  "statement": "theorem bousfield_quillen_descent {M : Type u} {N : Type u'} [Category.{v} M] [Category.{v'} N] (localized : ModelCategory M) [ModelCategory M] [ModelCategory N] [HasLimits M] [HasColimits M] [HasLimits N] [HasColimits N] [(cofibrations M).HasFunctorialFactorization (trivialFibrations M)] [(trivialCofibrations M).HasFunctorialFactorization (fibrations M)] [(cofibrations N).HasFunctorialFactorization (trivialFibrations N)] [(trivialCofibrations N).HasFunctorialFactorization (fibrations N)] [SimplicialCategory M] (T : SimplicialTensorCotensor M) (hSM7 : SimplicialModelLocalization.SatisfiesSM7 M) (I : Type w) (A B : I → M) (s : ∀ i : I, A i ⟶ B i) (Q : M ⥤ M) (ε : Q ⟶ 𝟭 M) (hQ : ∀ X : M, IsCofibrant (Q.obj X) ∧ WeakEquivalence (ε.app X)) (hC : localized.categoryWithCofibrations.cofibrations = cofibrations M) (hW : ∀ {X Y : M} (f : X ⟶ Y), localized.categoryWithWeakEquivalences.weakEquivalences f ↔ ∀ Z : M, IsFibrant Z → (∀ i : I, SSet.Enhanced.IsWeakHomotopyEquivalence (eHomWhiskerRight SSet (Q.map (s i)) Z)) → SSet.Enhanced.IsWeakHomotopyEquivalence (eHomWhiskerRight SSet (Q.map f) Z)) [localized.categoryWithCofibrations.cofibrations.HasFunctorialFactorization (localized.categoryWithFibrations.fibrations ⊓ localized.categoryWithWeakEquivalences.weakEquivalences)] [(localized.categoryWithCofibrations.cofibrations ⊓ localized.categoryWithWeakEquivalences.weakEquivalences).HasFunctorialFactorization localized.categoryWithFibrations.fibrations] (F : M ⥤ N) (U : N ⥤ M) (adj : F ⊣ U) (hF : ∀ {X Y : M} (f : X ⟶ Y), Cofibration f → Cofibration (F.map f)) (hFt : ∀ {X Y : M} (f : X ⟶ Y), Cofibration f → WeakEquivalence f → Cofibration (F.map f) ∧ WeakEquivalence (F.map f)) (hS : ∀ i : I, WeakEquivalence (F.map (Q.map (s i)))) : (∀ {X Y : M} (f : X ⟶ Y), localized.categoryWithCofibrations.cofibrations f → Cofibration (F.map f)) ∧ (∀ {X Y : M} (f : X ⟶ Y), localized.categoryWithCofibrations.cofibrations f → localized.categoryWithWeakEquivalences.weakEquivalences f → Cofibration (F.map f) ∧ WeakEquivalence (F.map f))",
+  "branch": "newtargets-dag",
+  "by": "Q122",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-71b70a549"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-71b70a549",
+  "group": "Q122",
+  "result": "fix",
+  "note": "Substantive binder-order fault, repaired in fixes/BousfieldQuillenDescent.lean (complete file). The explicit (localized : ModelCategory M) was bound after [ModelCategory M], so it became the preferred local instance; the pp.explicit #check shows hC elaborated to localized.cof = localized.cof, IsFibrant Z in hW was localized-fibrant, and hF/hFt assumed F preserves localized (trivial) cofibrations, i.e. the conclusion. Fix: bind localized before [ModelCategory M], as in the landed BousfieldLocalFibrations; after the fix all M-classes (cofibrations M, Cofibration, WeakEquivalence, IsCofibrant, IsFibrant, SatisfiesSM7) use the original instance, verified by pp.explicit #check; nothing else changed and lean.statement is refit by merge_delivery. Clause-by-clause match with the node and Hirschhorn 3.3.18(1); conventions match quillenAdjunctionInfinityLocalization and simplicial_model_nerve_localization; derived Map(QX,Z) for fibrant Z via eHomWhiskerRight; I : Type w independent; no properness, combinatoriality or target simpliciality; edge cases empty I, identity arrows, Q = 𝟭, identity adjunction checked; statement field verbatim; no hollow definitions, sorry only, docstrings and imports fine. nt_compile: delivered file rc 0 (the fault is invisible to the compiler); fixed file rc 0, no errors. Minor: the report's claim that bousfield-local-fibrations is not landed is stale (landed 2026-10-17; its IsLocal/localEquivalences agree with the inline formulas)."
  }
 }

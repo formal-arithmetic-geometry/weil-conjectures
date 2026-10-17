@@ -27,7 +27,8 @@
  },
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-presheaf-yoneda"
  ],
  "proof": [
   {
@@ -287,5 +288,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityPresheafPresentability",
+  "declaration": "CategoryTheory.Spaces.infinityPresheaves_presentable",
+  "file": "lean/Sheaf/CategoryTheory/InfinityPresheafPresentability.lean",
+  "statement": "theorem infinityPresheaves_presentable (D : SSet.{u}) [SSet.Quasicategory D] : ∃ (hP : SSet.Quasicategory (infinityPresheaves D)), @SSet.Presentability.IsPresentable.{u, 0} (infinityPresheaves D) hP",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing coherent space-valued presheaf construction; the quasicategory structure is existentially concluded rather than added as a hypothesis. IsPresentable is relative to the same small universe as D."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-36740472f",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Read node, 3 stmt deps and their Lean (IsPresentable/IsAccessible/IsKappaAccessible/IsKappaCompact/HasSmallColimits in PresentableInfinityCategory.lean; infinityPresheaves in InfinityPresheafYoneda.lean:159; infinityCategory = SimplicialNerve Kan.{u}), module, report (Worker report + Second reading by Q42 present). Statement matches node and HTT Remark 5.5.3.7 (specialized to quasicategories): D : SSet.{u} quasicategory, no extra hypotheses; existential Quasicategory witness is Prop so equals assertion; IsPresentable.{u,0} on SSet.{u+1} gives small universe u, regular kappa in Cardinal.{u}, HasSmallColimits.{u,u+1}, mapping-space compactness; universe polymorphism covers larger universes. Edge cases D empty/point, empty shapes OK. Only sorry, docstrings with source/blueprint and all 7 proof steps, lines <=100, lean.statement verbatim, imports = stmt-dep modules public + exactly the 3 proof deps with lean records non-public. Node change only lean record + added stmt_dep def-coef-infinity-presheaf-yoneda (used by signature; no cycle). nt_compile.py --json local overlay: exit 0, 1.6 s, no errors. Cosmetic: redacted remark number in report text."
  }
 }

@@ -1,0 +1,151 @@
+{
+ "id": "def-coef-ringed-tensor-hom-model",
+ "kind": "definition",
+ "title": "Canonical closed tensor-Hom representative model on a ringed site",
+ "status": "split",
+ "statement": "Let $J$ be a ringed site with commutative coefficient ring sheaf $A$, module category [def-weil-sheaf-of-modules-category], derived category [def-weil-abstract-derived-category] and its recorded derived internal Hom $H$ [def-pur-derived-internal-hom]. A closed tensor-Hom structure for $H$ consists of a monoidal structure whose right tensor by $L$ is left adjoint to $H(L,-)$, with counit evaluation natural also in $L$. Its tensor bifunctor, transposition and internal composition are the tensor, Hom equivalence and transpose of the composite evaluations of these adjunctions. A canonical K-flat representative model for it is a natural isomorphism from localization of the actual total tensor complex [def-pc-tensor-complex-sheaves] on pairs of K-flat complexes [def-pc-kflat-complex] to the derived tensor of their localizations, with the following fixed normalization. Use the actual Hom representative, product projections, K-injective replacement $I(M)$, localization factorization and inverse localized augmentation [def-coef-hom-representative-evaluation]. For K-flat $P,L$ and every $\\phi:P\\to\\mathcal Hom^\\bullet(L,I(M))$, there is a chain map $\\psi:\\operatorname{Tot}(P\\otimes L)\\to I(M)$ sending each actual sheafified pure-tensor summand $x\\otimes y$ to $\\phi(x)(y)$; the comparison followed by the closed transpose inverse of the localized $\\phi$ equals $Q(\\psi)$ followed by the inverse localized augmentation. The pure tensor generator uses the actual sheafification unit and total-complex summand inclusion, not a chosen map. The total tensor preserves K-flatness. Universes are independent for site objects, arrows and coefficients, with module universe $\\max(c,v,u)$. This is a representative characterization of the existing derived tensor and internal Hom, not a second derived tensor construction.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-coef-hom-representative-evaluation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN and 07A4 for the K-flat total tensor; Tags 08J9 and 0A98 for closed tensor-Hom evaluation and composition. The general ringed-site representative normalization used in proof steps 5-6 of lem-coef-derived-system-evaluation-calculus."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived tensor Hom closed model on K flat complexes over a general ringed site with componentwise uncurry evaluation",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.MonoidalClosed.uncurry",
+     "CategoryTheory.MonoidalClosed.uncurry_eq",
+     "CategoryTheory.MonoidalClosed.uncurry'",
+     "CategoryTheory.MonoidalClosed.curryHomEquiv'",
+     "CategoryTheory.uncurry_pre",
+     "CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.ev_app",
+     "CategoryTheory.MonoidalClosed.uncurry_ihom_map",
+     "ModuleCat.monoidalClosed_uncurry"
+    ]
+   },
+   "date": "2026-10-16",
+   "verdict": "No general ringed-site closed derived tensor-Hom representative normalization. Existing monoidal category, total-complex tensor, Hom, K-flat and K-injective constructions are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived tensor Hom closed model on K flat complexes over a general ringed site with componentwise uncurry evaluation",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+     "LightCondensed.instMonoidalClosedLightCondMod",
+     "instMonoidalClosedLightCondSet",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite",
+     "CategoryTheory.Tor'_obj_obj"
+    ]
+   },
+   "date": "2026-10-16",
+   "verdict": "No general ringed-site closed derived tensor-Hom representative normalization. Existing monoidal category, total-complex tensor, Hom, K-flat and K-injective constructions are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientTensorModels|[Rr]inged.*[Tt]ensor[Hh]om[Mm]odel",
+   "results": {
+    "n_hits": 0,
+    "note": "",
+    "top": []
+   },
+   "date": "2026-10-16",
+   "verdict": "No general ringed-site closed derived tensor-Hom representative normalization. Existing monoidal category, total-complex tensor, Hom, K-flat and K-injective constructions are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg TensorHomModel|CanonicalDerivedTensorHom|canonical-derived-tensor-hom-model|CoefficientTensorModels in dag/nodes, lean/Sheaf and WeilConjectures; blueprint_refs.py search canonical derived tensor Hom model",
+   "results": "The existing def-pc-canonical-derived-tensor-hom-model and CanonicalDerivedTensorHomModel.lean specialize their signature to Scheme.Modules and the Zariski ringed space. No general ringed-site counterpart was found; the blueprint search returned 0 matches.",
+   "date": "2026-10-16",
+   "verdict": "A new definition of the general ringed-site representative normalization is needed, since the pro-etale site and its ringed sequence site are not Zariski ringed spaces of schemes."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-derived-system-evaluation-calculus",
+  "date": "2026-10-16",
+  "group": "N0"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "The closed tensor-Hom model and componentwise canonical uncurrying in proof steps 5-6.",
+   "via": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientRingedTensorHomModel",
+  "declaration": "WeilConjectures.CoefficientTensorModels",
+  "declarations": [
+   "WeilConjectures.CoefficientClosedStructure",
+   "WeilConjectures.CoefficientClosedStructure.tensor",
+   "WeilConjectures.CoefficientClosedStructure.evaluation",
+   "WeilConjectures.CoefficientClosedStructure.transpose",
+   "WeilConjectures.CoefficientClosedStructure.composition",
+   "WeilConjectures.coefficientTotalTensor",
+   "WeilConjectures.coefficientKFlatInclusion",
+   "WeilConjectures.coefficientTensorGenerator",
+   "WeilConjectures.coefficientTotalTensor_isKFlat",
+   "WeilConjectures.CoefficientTensorUncurryModel",
+   "WeilConjectures.CoefficientTensorModels",
+   "WeilConjectures.CoefficientTensorModels.iso"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientRingedTensorHomModel.lean",
+  "statement": "structure CoefficientTensorModels {C : Type c} [Category.{v} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max c v u}] [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}] (A : Sheaf J CommRingCat.{max c v u}) [HasDerivedCategory.{w} (SheafOfModules.{max c v u} ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))] (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J A))",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Performance repair: CoefficientTensorUncurryModel packages verbatim the representative formula formerly written in the uncurry_model field; that field asserts this same proposition. The comparison, pure-tensor formula, fixed Hom evaluation and closed transpose normalization are unchanged. No extra module or altered mathematical statement."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e107de0a",
+  "group": "N0",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e107de0a",
+  "group": "N0",
+  "result": "pass",
+  "note": "Previous RETURN (24d3ed97d8f8) finding resolved: the new fiber_transition field states that, for normalized M,N and n<=m, the transition of the internal Hom (in adjoint form, under fiberHom at m and n) equals F_{mn}(fiberHom_m) then c_{m,n} then RHom_{B_n}(alpha_M^-1, alpha_N). c_{m,n} is the transpose of reduced evaluation along the recorded derivedChangeOfRingsIndependentCoefficients for B_m->B_n. The adjunction is pinned by ordinary_unit (sheafified 1⊗x) and unit_model; D.tensor is pinned by the pure-tensor tensor_model on K-flats. alpha is the actual transition adjoint, and its invertibility follows from the normalization criterion by Yoneda. The other changes only package existing formulas, verbatim: CoefficientScalarTensorGenerators, CoefficientTensorUncurryModel, CoefficientGlobalLimitModel. The commit touches only its 11 files. Statement verbatim; all 92 declarations listed; docstrings with source and blueprint everywhere; no hollow data; every sorry is a standalone theorem. nt_compile --json on all 5 modules: exit 0, no messages (calculus 33.8 s, tensor-Hom 14.8 s, others under 28 s). Edge cases m=n, n=0 (index n means B_{n+1}), empty W, zero objects and unbounded complexes are all admitted. Report has Worker report and Second reading by N0."
+ }
+}
