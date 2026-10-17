@@ -1,0 +1,82 @@
+{
+ "id": "lem-trf-sharp-fs-orthant-embedding",
+ "kind": "statement",
+ "title": "Lattice-intersection embedding of a sharp fs monoid",
+ "statement": "Let $P$ be a finitely generated integral saturated commutative monoid, written additively, with group completion $G=P^{\\rm gp}$ [def-trf-fs-log-blowup]. Assume $P$ is sharp: if $a,b\\in P$ and $a+b=0$, then $a=b=0$. Then there exist an integer $r\\geq0$ and an injective group homomorphism $\\lambda:G\\to\\mathbf Z^r$ such that $\\lambda(P)=\\lambda(G)\\cap\\mathbf N^r$, where $\\mathbf N^r$ is the set of integer vectors with every coordinate nonnegative. In particular $\\lambda|_P$ identifies $P$ with this intersection as an additive monoid. The cases $P=\\{0\\}$ and $r=0$ are allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 3.1.17 (saturation) and 3.1.29 (rational polyhedral description), printed pp. 101 and 103, motivate this explicit lattice-intersection formulation. This formulation and its proof plan are by Q48, not a theorem quoted verbatim from those passages; see report.md. Kato 1994, Toric singularities, is WANTED for the underlying toric local algebra."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finitely generated sharp saturated additive monoid embeds in a finite product of natural numbers as the intersection with a subgroup of integers",
+   "results": "Eight hits, including Nat.addSubmonoid_fg, AddSubmonoid.fg_iff_exists_fin_addMonoidHom and AffineAddMonoid.embedding_injective. The last embeds into a free abelian group but does not identify P with a nonnegative lattice intersection; source Mathlib/Algebra/AffineMonoid/Embedding.lean:39-46 read.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sharp finitely generated saturated integral additive monoid is the intersection of its group lattice with a finite nonnegative orthant",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsProperLinearSet\", \"module\": \"Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Defs\", \"type\": \"{M : Type u_1} → [AddCommMonoid M] → Set M → Prop\", \"doc\": \"A set $ s $ is a proper linear set if there exists a vector $ a $ and a finite set $ t $ of vectors that are linearly independent over $ \\\\mathbb{N} $, such that $ s $ equals the translate $ a + S $, w\"}\n  {\"name\": \"IsLinearSet.of_fg\", \"module\": \"Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Defs\", \"type\": \"∀ {M : Type u_1} [inst : AddCommMonoid M] {P : AddSubmonoid M}, P.FG → IsLinearSet ↑P\", \"doc\": \"If $ P $ is a finitely generated additive submonoid of an additive commutative monoid $ M $, then $ P $, when viewed as a subset of $ M $, is a linear set. This follows because a finitely generated ad\"}\n  {\"name\": \"AddSubmonoid.fg_of_subtractive\", \"module\": \"Mathlib/GroupTheory/Finiteness\", \"type\": \"∀ {M : Type u_5} [inst : AddCommMonoid M] [inst_1 : PartialOrder M] [WellQuasiOrderedLE M] [IsOrderedCancelAddMonoid M]\\n  [CanonicallyOrderedAdd M] {P : AddSubmonoid M}, (∀ x ∈ P, ∀ (y : M), x + y ∈ P → y ∈ P) → P.FG\", \"doc\": \"Let $M$ be an additive commutative monoid equipped with a partial order $\\\\leq$ that is well-quasi-ordered, cancellative ordered, and canonically ordered. If $P$ is an additive submonoid of $M$ satisfy\"}\n  {\"name\": \"IsSemilinearSet.of_fg\", \"module\": \"Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Defs\", \"type\": \"∀ {M : Type u_1} [inst : AddCommMonoid M] {P : AddSubmonoid M}, P.FG → IsSemilinearSet ↑P\", \"doc\": \"Every finitely generated additive submonoid of $ M $ is a semilinear set, as it can be expressed as a finite union of linear sets (each being a translate of a finitely generated additive submonoid).\"}\n  {\"name\": \"IsAffineAddMonoid.toFG\", \"module\": \"Mathlib/Algebra/AffineMonoid/Basic\", \"type\": \"∀ {M : Type u_1} {inst : AddCommMonoid M} [self : IsAffineAddMonoid M], AddMonoid.FG M\", \"doc\": \"Every affine additive commutative monoid is finitely generated as an additive monoid, meaning there exists a finite subset $S \\\\subseteq M$ such that every element of $M$ can be expressed as a finite s\"}\n  {\"name\": \"IsLinearSet.exists_fg_eq_subtypeVal\", \"module\": \"Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic\", \"type\": \"∀ {M : Type u_1} [inst : AddCommMonoid M] {s : Set M},\\n  IsLinearSet s → ∃ P s', P.FG ∧ IsLinearSet s' ∧ s = Subtype.val '' s'\", \"doc\": \"For any linear set $ s $, there exists a finitely generated additive submonoid $ P $ of $ M $ and a linear set $ s' $ in $ P $ such that $ s $ is equal to the image of $ s' $ under the canonical embed\"}\n  {\"name\": \"IsProperSemilinearSet\", \"module\": \"Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Defs\", \"type\": \"{M : Type u_1} → [AddCommMonoid M] → Set M → Prop\", \"doc\": \"A set $ s $ is proper semilinear if there exists a finite family $ S $ of proper linear sets such that $ s $ is the union of all elements in $ S $. In other words, $ s $ can be expressed as a finite u\"}\n  {\"name\": \"IsLinearSet.univ\", \"module\": \"Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Defs\", \"type\": \"∀ {M : Type u_1} [inst : AddCommMonoid M] [AddMonoid.FG M], IsLinearSet Set.univ\", \"doc\": \"If $ M $ is a finitely generated additive monoid, then the universal set $ M $ is a linear set, meaning it can be expressed as the translate of a finitely generated additive submonoid by some element \"}\nRead the returned declarations: none supplies the lattice-intersection property.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Embed a pointed saturated affine semigroup in natural number vectors using finitely many integral linear inequalities",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AffineAddMonoid.embedding\", \"module\": \"Mathlib/Algebra/AffineMonoid/Embedding\", \"type\": \"(M : Type u_1) →\\n  [inst : AddCancelCommMonoid M] →\\n    [AddMonoid.FG M] → [IsAddTorsionFree M] → M →+ FreeAbelianGroup (Fin (AffineAddMonoid.dim M))\", \"doc\": \"The function defines an additive monoid homomorphism from an affine additive monoid $ M $ to the free abelian group $ \\\\mathbb{Z}^{\\\\dim M} $, where $ \\\\dim M $ is the rank of the Grothendieck group of $\"}\n  {\"name\": \"NumberField.mixedEmbedding.fundamentalCone.integerSet\", \"module\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone\", \"type\": \"(K : Type u_1) → [inst : Field K] → [NumberField K] → Set (NumberField.mixedEmbedding.mixedSpace K)\", \"doc\": \"The set of elements in the mixed embedding space of a number field $ K $ that belong to both the fundamental cone (defined as the preimage of the unit lattice's fundamental domain under the logarithmi\"}\n  {\"name\": \"Nat.isLinearSet_iff_exists_matrix\", \"module\": \"Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic\", \"type\": \"∀ {ι : Type u_3} {s : Set (ι → ℕ)}, IsLinearSet s ↔ ∃ v n A, s = {x | ∃ x_1, v + A.mulVec x_1 = x}\", \"doc\": \"A set $ s $ of functions from $ \\\\iota $ to $ \\\\mathbb{N} $ is a linear set if and only if there exists a base vector $ v : \\\\iota \\\\to \\\\mathbb{N} $, a natural number $ n $, and a matrix $ A $ with rows i\"}\n  {\"name\": \"NumberField.mixedEmbedding.fundamentalCone.mem_integerSet\", \"module\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] {a : NumberField.mixedEmbedding.mixedSpace K},\\n  a ∈ NumberField.mixedEmbedding.fundamentalCone.integerSet K ↔\\n    a ∈ NumberField.mixedEmbedding.fundamentalCone K ∧ ∃ x, (NumberField.mixedEmbedding K) ↑x = a\", \"doc\": \"An element $ a $ in the mixed embedding space of a number field $ K $ belongs to the integer set $ \\\\text{integerSet}(K) $ if and only if $ a $ lies in the fundamental cone $ \\\\text{fundamentalCone}(K) \"}\n  {\"name\": \"AffineAddMonoid.embedding_injective\", \"module\": \"Mathlib/Algebra/AffineMonoid/Embedding\", \"type\": \"∀ {M : Type u_1} [inst : AddCancelCommMonoid M] [inst_1 : AddMonoid.FG M] [inst_2 : IsAddTorsionFree M],\\n  Function.Injective ⇑(AffineAddMonoid.embedding M)\", \"doc\": \"There exists an additive monoid homomorphism from an affine additive monoid $ M $ to the free abelian group $ \\\\mathbb{Z}^{\\\\dim M} $, where $ \\\\dim M $ denotes the rank of the Grothendieck group of $ M \"}\n  {\"name\": \"NumberField.mixedEmbedding.fundamentalCone.paramSet\", \"module\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne\", \"type\": \"(K : Type u_1) → [inst : Field K] → [NumberField K] → Set (NumberField.mixedEmbedding.realSpace K)\", \"doc\": \"The set of functions $ f $ in the real space of infinite places of $ K $ such that $ f(w_0) \\\\leq 0 $ and $ 0 \\\\leq f(w) < 1 $ for all other infinite places $ w \\\\neq w_0 $. This is the Cartesian product\"}\n  {\"name\": \"fintypeAffineCoords\", \"module\": \"Mathlib/LinearAlgebra/AffineSpace/Basis\", \"type\": \"(ι : Type u_1) → (k : Type u_2) → [inst : Ring k] → [Fintype ι] → AffineSubspace k (ι → k)\", \"doc\": \"Given a finite type $\\\\iota$ and a ring $k$, this affine subspace consists of all functions $f : \\\\iota \\\\to k$ such that the sum of $f(i)$ over all $i \\\\in \\\\iota$ equals 1. It is constructed as the preim\"}\n  {\"name\": \"Mathlib.Tactic.Linarith.CertificateOracle.simplexAlgorithmSparse\", \"module\": \"Mathlib/Tactic/Linarith/Oracle/SimplexAlgorithm\", \"type\": \"Mathlib.Tactic.Linarith.CertificateOracle\", \"doc\": \"A certificate oracle that constructs a certificate for linear arithmetic constraints by: (1) preprocessing hypotheses into a sparse matrix and identifying strict inequalities, (2) applying the simplex\"}\nRead the returned declarations: none supplies the lattice-intersection property.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AffineAddMonoid.embedding",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AffineAddMonoid.embedding\", \"module\": \"Mathlib.Algebra.AffineMonoid.Embedding\", \"type\": \" (M : Type u_1) [AddCancelCommMonoid M] [AddMonoid.FG M] [HasUniqueDiv M] : M →+ FreeAbelianGroup (Fin (AffineAddMonoid.dim M))\", \"doc\": \"An arbitrary embedding of an affine monoid `M` into `ℤ ^ dim M`.\"}\n  {\"name\": \"AffineAddMonoid.embedding_injective\", \"module\": \"Mathlib.Algebra.AffineMonoid.Embedding\", \"type\": \" {M : Type u_1} [AddCancelCommMonoid M] [AddMonoid.FG M] [HasUniqueDiv M] : Function.Injective ⇑(AffineAddMonoid.embedding M)\", \"doc\": \"\"}\nRead the returned declarations: none supplies the lattice-intersection property.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "saturat|orthant|embedding|dual",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/Algebra/AffineMonoid/UniqueSums.lean\", \"line\": \"11\", \"text\": \"import Mathlib.Algebra.AffineMonoid.Embedding\"}\n  {\"file\": \"Mathlib/Algebra/AffineMonoid/UniqueSums.lean\", \"line\": \"18\", \"text\": \"unique sums. This is a direct corollary of them embedding into `ℤⁿ` for some `n`.\"}\n  {\"file\": \"Mathlib/Algebra/AffineMonoid/UniqueSums.lean\", \"line\": \"27\", \"text\": \"  .of_injective_addHom (embedding M).toAddHom embedding_injective inferInstance\"}\n  {\"file\": \"Mathlib/Algebra/AffineMonoid/Embedding.lean\", \"line\": \"39\", \"text\": \"/-- An arbitrary embedding of an affine monoid `M` into `ℤ ^ dim M`. -/\"}\n  {\"file\": \"Mathlib/Algebra/AffineMonoid/Embedding.lean\", \"line\": \"40\", \"text\": \"noncomputable def embedding : M →+ FreeAbelianGroup (Fin (dim M)) :=\"}\n  {\"file\": \"Mathlib/Algebra/AffineMonoid/Embedding.lean\", \"line\": \"45\", \"text\": \"lemma embedding_injective : Injective (embedding M) := by\"}\n  {\"file\": \"Mathlib/Algebra/AffineMonoid/Embedding.lean\", \"line\": \"46\", \"text\": \"  simpa [embedding] using! mk_left_injective 0\"}\nRead the returned declarations: none supplies the lattice-intersection property.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-regular-saturation-normality",
+  "date": "2026-10-18",
+  "group": "Q48"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration ancestry, through log-regular divisorial structure: the saturated completed local models in Expose VI 1.6(i)--(ii). Expose VIII 3.1.17 (saturation) and 3.1.29 (rational polyhedral description), printed pp. 101 and 103, motivate this explicit lattice-intersection formulation. This formulation and its proof plan are by Q48, not a theorem quoted verbatim from those passages; see report.md. Kato 1994, Toric singularities, is WANTED for the underlying toric local algebra.",
+   "via": [
+    "lem-trf-log-regular-saturation-normality",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -13,9 +13,90 @@
   "def-weil-pbc-cohen-ring",
   "def-weil-pbc-normal-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-sharp-fs-orthant-embedding] to $P$, obtaining $\\lambda:G\\hookrightarrow\\mathbf Z^r$. Inside $\\mathbf Z^{r+n}$ put $M=\\lambda(G)\\times\\mathbf Z^n$ and $Q=M\\cap\\mathbf N^{r+n}=\\lambda(P)\\times\\mathbf N^n$. This monoid is finitely generated: take the images of generators of $P$ and the $n$ coordinate vectors. The coefficient-preserving renaming $z^qt^e\\mapsto z^{(\\lambda(q),e)}$ is an isomorphism $L[P][t_1,\\ldots,t_n]\\cong L[Q]$, with inverse supplied by the inverse of $\\lambda|_P$. It carries the specified completion ideal onto $J=\\mathfrak m_L L[Q]+(z^v:v\\neq0)$: every nonzero pair has either $q\\neq0$ or a positive $t$ exponent. Applying this isomorphism and its inverse to every quotient identifies $B_L(P,n)$ with the $J$-adic completion $T$.",
+   "uses": [
+    "lem-trf-sharp-fs-orthant-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70; Q48 agent proof of normality of these models"
+   }
+  },
+  {
+   "text": "Both allowable coefficient rings are complete local rings with finitely generated maximal ideal ($0$ or $(p)$): for a field the maximal ideal is $0$ and the completion is constant, and for a Cohen ring completeness is part of [def-weil-pbc-cohen-ring]. Apply [lem-trf-completed-monoid-support-projection] to $M,Q$ above. It identifies $T=B_L(P,n)$ with the supported subring of $A=L[[X_1,\\ldots,X_r,t_1,\\ldots,t_n]]$ by $z^q\\mapsto X^{\\lambda(q)}$, and gives a $T$-linear retraction $\\rho:A\\to T$. In particular $\\rho(1)=1$ and $\\rho(ta)=t\\rho(a)$ for $t\\in T$.",
+   "uses": [
+    "lem-trf-completed-monoid-support-projection",
+    "def-weil-pbc-cohen-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70; Q48 agent proof of normality of these models"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-power-series-field-cohen-regular-complete], $A$ is regular local. In case (i) put $S=A$. In case (ii) put $\\Theta=\\iota(\\theta)$ and $\\mathfrak n=(p,X_1,\\ldots,X_r,t_1,\\ldots,t_n)\\subset A$. Every nonzero monoid element has a nonzero exponent vector, so the hypothesis on $\\theta-p$ implies that $\\Theta$ has constant coefficient exactly $p$. Consequently $\\Theta\\in\\mathfrak n$ and $\\Theta\\notin\\mathfrak n^2$: the constant coefficient of any element of $\\mathfrak n^2$ belongs to $p^2C$, whereas $p\\notin p^2C$, since $C$ is a domain and $p$ is a nonunit uniformizer [def-weil-pbc-cohen-ring]. Now [lem-weil-pbc-regular-local-hypersurface-criterion] makes $S=A/(\\Theta)$ regular local. This works also for $r+n=0$, when $\\Theta=p$ and $S=C/pC$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-regular-local-hypersurface-criterion",
+    "def-weil-pbc-cohen-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032C (remark-Noetherian-complete-local-ring-universally-catenary), 0327 (definition-cohen-ring), and 00NQ (lemma-regular-ring-CM); explicit constant-coefficient check by Q48"
+   }
+  },
+  {
+   "text": "In case (i) we already have the inclusion $R=T\\hookrightarrow S=A$ and its $R$-linear retraction. In case (ii), $\\rho(\\Theta a)=\\theta\\rho(a)$ implies $T\\cap\\Theta A=\\theta T$: if $t=\\Theta a\\in T$, apply $\\rho$ to obtain $t=\\theta\\rho(a)$; the reverse inclusion is immediate. Thus $R=T/(\\theta)$ embeds in $S=A/(\\Theta)$, and $[a]\\mapsto[\\rho(a)]$ is a well-defined $R$-linear retraction $\\bar\\rho:S\\to R$ fixing $1$.",
+   "uses": [
+    "lem-trf-completed-monoid-support-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70; Q48 agent proof of normality of these models"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-regular-local-localization] to regard the regular local ring $S$ as a regular ring, then apply [lem-weil-pbc-regular-ring-normal]. Its conclusion says every prime localization of $S$ is a normal domain. At the maximal ideal $\\mathfrak m_S$ the canonical map $S\\to S_{\\mathfrak m_S}$ is an isomorphism: every denominator lies outside the unique maximal ideal and is already a unit. Therefore $S$ itself is a nonzero normal domain.",
+   "uses": [
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-regular-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0AFS (lemma-localization-of-regular-local-is-regular), 0567 (lemma-regular-normal), 00GV (definition-ring-normal), and 0309 (definition-domain-normal)"
+   }
+  },
+  {
+   "text": "The unital injection $R\\hookrightarrow S$ makes $R$ a nonzero domain and embeds $\\operatorname{Frac}(R)$ into $\\operatorname{Frac}(S)$. Let $x=a/b\\in\\operatorname{Frac}(R)$, $b\\neq0$, be integral over $R$. Its same monic equation makes it integral over $S$, so $x\\in S$ by the normality just proved. Apply the $R$-linear retraction of step 4 to $bx=a$: it gives $b\\bar\\rho(x)=a$, hence $x=\\bar\\rho(x)\\in R$ inside $\\operatorname{Frac}(S)$. (Use $\\rho$ for $\\bar\\rho$ in case (i).) This proves that $R$ is integrally closed in its fraction field in both cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70; Q48 agent proof of normality of these models"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-sharp-fs-orthant-embedding",
+  "lem-trf-completed-monoid-support-projection",
+  "def-weil-pbc-cohen-ring",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-regular-local-hypersurface-criterion",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.6(i)--(ii), printed p. 70, specifies the models; the normality proof here is by Q48 using a supported-series module projection and the cited Stacks regular-local results. Kato 1994, Theorem 4.1, remains WANTED; no proof is attributed to that unavailable text."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +132,38 @@
    "results": "[grep] OK 0 hit(s)\nRead the returned types: ordinary completions, univariate power series, polynomial monomial divisibility, and normalization do not give complete saturated monoid models or their mixed-characteristic quotients. No match for this statement.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normality of complete toric local rings, including a quotient of a Cohen monoid ring by p plus monomials",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"isLocalRing_of_isAdicComplete_maximal\", \"module\": \"Mathlib.RingTheory.AdicCompletion.LocalRing\", \"type\": \"[IsAdicComplete m R] : IsLocalRing R\", \"doc\": \"If a commutative ring $ R $ is adic complete with respect to a maximal ideal $ \\\\mathfrak{m} $, then $ R $ is a local ring.\"}\n  {\"name\": \"IsLocalization.integerNormalization\", \"module\": \"Mathlib.RingTheory.Localization.Integral\", \"type\": \"(p : S[X]) : R[X]\", \"doc\": \"Given a polynomial $ p $ over the localization $ S $ of a commutative ring $ R $ at a submonoid $ M $, this function constructs a polynomial in $ R[X] $ by replacing each coefficient of $ p $ with an \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localRingLocalizations\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(P : PrimeSpectrum.Top R) : IsLocalRing <| Localizations R P\", \"doc\": \"For any commutative ring $ R $ and prime ideal $ P $ in its prime spectrum, the localization of $ R $ at the submonoid of elements not in $ P $ forms a local ring. This localization inverts all elemen\"}\n  {\"name\": \"PowerSeries.instNormalizationMonoid\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": NormalizationMonoid k⟦X⟧\", \"doc\": \"For any field $ k $, the ring of formal power series $ k[[X]] $ is equipped with a normalization monoid structure. The normalization unit $ \\\\operatorname{normUnit}(f) $ for a nonzero power series $ f \"}\n  {\"name\": \"Polynomial.instNormalizationMonoid\", \"module\": \"Mathlib.Algebra.Polynomial.FieldDivision\", \"type\": \": NormalizationMonoid R[X]\", \"doc\": \"For any commutative ring $ R $ equipped with a normalization monoid structure, the polynomial ring $ R[X] $ inherits a normalization monoid structure. This structure is defined by normalizing the lead\"}\n  {\"name\": \"HomogeneousLocalization.isLocalRing\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization\", \"type\": \": IsLocalRing (HomogeneousLocalization.AtPrime 𝒜 𝔭)\", \"doc\": \"The homogeneous localization of a graded algebra at the complement of a prime ideal is a local ring.\"}\n  {\"name\": \"Localization.AtPrime.isLocalRing\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \": IsLocalRing (Localization P.primeCompl)\", \"doc\": \"For a semiring $ R $ and a prime ideal $ P $, the localization of $ R $ at the complement of $ P $ forms a local ring. This means the localized ring has a unique maximal ideal, which corresponds to th\"}\n  {\"name\": \"PadicInt.instIsLocalRing\", \"module\": \"Mathlib.NumberTheory.Padics.PadicIntegers\", \"type\": \": IsLocalRing ℤ_[p]\", \"doc\": \"The ring of p-adic integers $\\\\mathbb{Z}_p$ is a local ring, meaning it has a unique maximal ideal consisting of all p-adic integers with p-adic valuation strictly greater than 0.\"}\nNo returned declaration proves the complete monoid models normal.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, AddMonoidAlgebra",
+   "results": "[loogle] OK 0 hit(s)\nNo returned declaration proves the complete monoid models normal.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed.*MonoidAlgebra|MonoidAlgebra.*IsIntegrallyClosed|normal.*semigroup|saturated.*normal",
+   "results": "[grep] OK 0 hit(s)\nNo returned declaration proves the complete monoid models normal.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completion of a sharp saturated affine monoid algebra over a field and its Cohen ring quotient by p plus monomials are normal domains",
+   "results": "Eight hits, including PreTilt.isDomain, Tilt, IsDedekindDomain.HeightOneSpectrum.adicCompletion and instCommRingBDeRhamPlus; these concern different completions and do not prove normality for the stated monoid models.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-log-regular-divisorial-structure",
@@ -66,7 +175,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), nearby-duality alteration ancestry: the log-regular local algebra needed for the normalization of log blowups, via Expose VI 1.4 and its completed-local charts in VI 1.6. Expose VI 1.6(i)--(ii), printed p. 70, the saturated complete local models; their normality is the fs local-algebra case of Kato (1994), Theorem 4.1. Kato is not in literature/: WANTED, as recorded in report.md. No non-saturated theorem from VIII 3.5 is asserted.",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration ancestry, through log-regular divisorial structure: the saturated completed local models in Expose VI 1.6(i)--(ii).",
    "via": [
     "lem-trf-log-regular-divisorial-structure",
     "lem-trf-log-blowup-normalization",
@@ -80,5 +189,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-log-regular-saturation-normality",
+  "worker": "stage1",
+  "summary": "Kept the full statement including arbitrary Cohen residue field, zero monoid and zero variable cases. Proved normality by an orthant lattice embedding, completion as supported formal series, a module projection, and regularity of the ambient power-series hypersurface. Only the lattice embedding and completion comparison are new unsplit statements. Checked all cited statements and source hypotheses; Kato is unavailable and the proof is explicitly agent-origin.",
+  "blueprint": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration ancestry, through log-regular divisorial structure: the saturated completed local models in Expose VI 1.6(i)--(ii).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Regularity of the ambient formal power-series ring over a field or any Cohen ring; the log-regular unit does not state this general local-algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-hypersurface-criterion",
+    "why": "Regularity of a quotient by an element outside the square of the maximal ideal; this is a general commutative-algebra tool, not a change to the alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "The general implication regular local implies regular ring, needed for the normality theorem in its stated form."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "The general theorem regular rings are normal; used only for the ambient regular local ring, not for the singular monoid model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-regular-local-hypersurface-criterion",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-4b9340775",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-4b9340775 (reviewer sub-agent of L); spot-checked: I read the whole delivery and every step holds. Source: ILO Exposé VI 1.6 (p.70) gives exactly the models k[[P]][[t]] and C[[P]][[t]]/(f) with f≡p mod (P−{0}, t). The item's statement is word for word the model clause of lem-trf-log-regular-completed-chart, nothing is weakened, and normality is correctly marked agent-proved with Kato 1994 WANTED. Step 1: Q=λ(P)×N^n=(λ(G)×Z^n)∩N^{r+n}, and the completion ideal maps onto J. Step 2: both coefficient rings are complete local with finitely generated maximal ideal (0 or pC), so the projection lemma applies. Step 3: Θ has constant coefficient exactly p, while every element of 𝔫² has constant coefficient in p²C and p∉p²C, so the hypersurface criterion applies; r+n=0 gives C/p. Step 4: T∩ΘA=θT follows from the T-linearity of ρ, so R embeds in S with an R-linear retraction. Step 5: regular local ⇒ regular ⇒ normal, and S≅S_m. Step 6: the retraction argument correctly descends integral closure. Both new nodes are true and statement-only, and neither restates the item. Orthant embedding: G is torsion-free, the kernel of the facet map is trivial by sharpness, and it fails without saturation (⟨2,3⟩) or without sharpness. Support projection: the filtrations are cofinal, the image is the closure A_Q, π(ab)=aπ(b) because e∈Q iff f∈Q, and π is not multiplicative for the diagonal M. Duplicate search over orthant, toric, monoid algebra, saturated+normal and supported series found only distinct nodes (fine-monoid-finite-saturation, toric-refinement, completed-chart, complete-toric-monomial-factors). I accept the four declared tool uses, all generic commutative-algebra results from sec-proper-base-change: power-series regularity, the hypersurface criterion, regular local⇒regular, regular⇒normal. No cycle, no SGA, no changes made."
  }
 }
