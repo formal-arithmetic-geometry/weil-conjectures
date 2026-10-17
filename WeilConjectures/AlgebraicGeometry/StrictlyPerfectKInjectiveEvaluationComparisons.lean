@@ -61,13 +61,13 @@ theorem exists_strictlyPerfect_kInjective_evaluation_comparisons (X : Scheme.{u}
     (P : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
     (F : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
     [F.IsKInjective]
-    (_hstrict : Scheme.IsStrictlyPerfect X U P)
+    (hstrict : Scheme.IsStrictlyPerfect X U P)
     (_eK : (SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj K ≅ DerivedCategory.Q.obj P)
     (_eN : (SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj N ≅ DerivedCategory.Q.obj F)
     (f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F)
-    (_hf : IsLocalOrdinaryEvaluation X U P F f) :
+    (hf : IsLocalOrdinaryEvaluation X U P F f) :
     let R := (SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory
     let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
@@ -92,9 +92,9 @@ theorem exists_strictlyPerfect_kInjective_evaluation_comparisons (X : Scheme.{u}
       ((schemeDerivedTensorHomEquiv X) D K (𝟙_ (schemeDerivedCategory X)) (𝟙 D)) ≫
         (ρ_ N).hom)
   obtain ⟨r, hr⟩ := exists_strictlyPerfect_evaluation_local_retraction
-    X K N U P _hstrict _eK
+    X K N U P hstrict _eK
   obtain ⟨s, hs⟩ := exists_strictlyPerfect_evaluation_local_section
-    X K N U P _hstrict _eK
+    X K N U P hstrict _eK
   change R.map g ≫ r = 𝟙 _ at hr
   change s ≫ R.map g = 𝟙 _ at hs
   have hrs : r = s := by
@@ -118,7 +118,7 @@ theorem exists_strictlyPerfect_kInjective_evaluation_comparisons (X : Scheme.{u}
     _eK.symm _eN.symm
   let b := c.symm ≪≫ d
   have : ∀ n : ℤ, IsIso (f.f n) :=
-    fun n ↦ isIso_localOrdinaryEvaluation_degree X U P F _hstrict f _hf n
+    fun n ↦ isIso_localOrdinaryEvaluation_degree X U P F hstrict f hf n
   have : IsIso f := HomologicalComplex.Hom.isIso_of_components f
   let Q := DerivedCategory.Q.{w}
     (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
