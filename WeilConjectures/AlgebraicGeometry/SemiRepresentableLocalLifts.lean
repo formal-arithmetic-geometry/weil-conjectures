@@ -82,7 +82,11 @@ lemma hasLocalLifts_of_isSemiRepresentableHypercover (K : SimplicialObject X.Eta
           (incl.{u} X.Etale).map (p.π ⦋n + 1⦌ (by simp) (SimplexCategory.δ i)))
         (by
           rintro ⟨⟨a, b⟩, hab⟩
-          dsimp [SimplicialObject.matchingBoundaryIndex]
+          change (incl.{u} X.Etale).map (p.π ⦋n + 1⦌ (by simp) (SimplexCategory.δ a)) ≫
+              (incl.{u} X.Etale).map (K.δ (b.pred (Fin.ne_zero_of_lt hab))) =
+            (incl.{u} X.Etale).map (p.π ⦋n + 1⦌ (by simp) (SimplexCategory.δ b)) ≫
+              (incl.{u} X.Etale).map (K.δ (a.castLT
+                (Nat.lt_of_lt_of_le hab (Nat.le_of_lt_succ b.isLt))))
           rw [← Functor.map_comp, ← Functor.map_comp]
           congr 1
           have hb : b = (b.pred (Fin.ne_zero_of_lt hab)).succ := (Fin.succ_pred _ _).symm
@@ -92,7 +96,8 @@ lemma hasLocalLifts_of_isSemiRepresentableHypercover (K : SimplicialObject X.Eta
             have h' : a.val < b.val := hab
             simp only [Fin.val_castLT, Fin.val_pred]
             omega
-          rw [p.w _ _ (by simp) (by simp), p.w _ _ (by simp) (by simp)]
+          rw [SimplicialObject.δ, SimplicialObject.δ, p.w _ _ (by simp) (by simp),
+            p.w _ _ (by simp) (by simp)]
           congr 1
           have := SimplexCategory.δ_comp_δ H
           rw [← hb] at this

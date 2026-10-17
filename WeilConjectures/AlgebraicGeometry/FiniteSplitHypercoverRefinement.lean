@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitHypercoverLocalLifts
+public import WeilConjectures.AlgebraicGeometry.SemiRepresentableLocalLifts
 
 /-!
 # Refinements of finite split étale hypercovers
@@ -159,6 +160,9 @@ theorem exists_truncated_refinement
     ∃ V : FiniteSplitEtaleHypercover X,
       Nonempty ((SimplicialObject.truncation r).obj V.simplicial ⟶
           (SimplicialObject.truncation r).obj K) := by
-  sorry
+  obtain ⟨V, ℓ, -⟩ := FiniteSplitHypercoverEngine.exists_hypercover
+    (Scheme.hasLocalLifts_of_isSemiRepresentableHypercover K hK) (fun _ ↦ ⊤)
+    (fun _ ↦ X.smallEtaleTopology.top_mem _)
+  exact ⟨V, ⟨(SimplicialObject.truncation r).map ℓ⟩⟩
 
 end AlgebraicGeometry.FiniteSplitEtaleHypercover

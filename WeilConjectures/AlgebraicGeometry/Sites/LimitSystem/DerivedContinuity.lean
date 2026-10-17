@@ -260,7 +260,7 @@ lemma IsHyperHContinuousAt.shift
     ((shiftFunctorCompIsoId _ m (-m) (add_neg_cancel m)).inv.app K : K ⟶ K⟦m⟧⟦-m⟧)
     (𝟙 (K⟦m⟧) : K⟦m⟧ ⟶ K⟦m⟧) (add_neg_cancel m) (neg_add_cancel m) ?_ ?_ (by omega)
   · simp [ShiftedHom.comp, ShiftedHom.mk₀, shiftFunctorCompIsoId, shiftFunctorZero']
-  · simp only [ShiftedHom.comp, ShiftedHom.mk₀, Functor.map_id, Category.id_comp]
+  · simp only [ShiftedHom.comp, ShiftedHom.mk₀, CategoryTheory.Functor.map_id, Category.id_comp]
     rw [shift_shiftFunctorCompIsoId_inv_app]
     simp [shiftFunctorCompIsoId, shiftFunctorZero']
 
@@ -351,17 +351,17 @@ lemma singleContinuity_of_isLimit (hc : IsLimit ((Over.forget S).mapCone c)) :
   · obtain ⟨q, rfl⟩ := Int.eq_ofNat_of_zero_le hn
     obtain ⟨hs, hi⟩ := cohomologyMap_isColimit_of_isLimit F D c hc q
     refine ⟨fun x ↦ ?_, fun i y hy ↦ ?_⟩
-    · obtain ⟨e, rfl⟩ := (sheafHToHyperH_bijective F c.pt q).2 x
+    · obtain ⟨e, rfl⟩ := (sheafHEquivHyperH F c.pt q).bijective.2 x
       obtain ⟨i, y, hy⟩ := hs e
-      refine ⟨i, sheafHToHyperH F (D.obj i) q y, ?_⟩
-      rw [overRestrict_sheafHToHyperH, hy, ← Sheaf.H.map_comp_apply, Iso.hom_inv_id_app,
+      refine ⟨i, sheafHEquivHyperH F (D.obj i) q y, ?_⟩
+      rw [overRestrict_sheafHEquivHyperH, hy, ← Sheaf.H.map_comp_apply, Iso.hom_inv_id_app,
         Sheaf.H.map_id_apply]
-    · obtain ⟨e, rfl⟩ := (sheafHToHyperH_bijective F (D.obj i) q).2 y
-      rw [overRestrict_sheafHToHyperH, ← sheafHToHyperH_zero F c.pt q] at hy
-      have h0 := (sheafHToHyperH_bijective F c.pt q).1 hy
+    · obtain ⟨e, rfl⟩ := (sheafHEquivHyperH F (D.obj i) q).bijective.2 y
+      rw [overRestrict_sheafHEquivHyperH, ← sheafHEquivHyperH_zero F c.pt q] at hy
+      have h0 := (sheafHEquivHyperH F c.pt q).bijective.1 hy
       obtain ⟨j, g, hg⟩ := hi i e (eq_zero_of_sheafH_map_eq_zero _ h0)
       refine ⟨j, g, ?_⟩
-      rw [overRestrict_sheafHToHyperH, hg, map_zero, sheafHToHyperH_zero]
+      rw [overRestrict_sheafHEquivHyperH, hg, map_zero, sheafHEquivHyperH_zero]
 
 end Single
 

@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicTopology.SimplicialObject.Split
 /-!
 # Blueprint statements
 
-def-weil-pbc-finite-split-hypercover.
+Blueprint `def-weil-pbc-finite-split-hypercover`.
 -/
 
 @[expose] public section
@@ -26,7 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- def-weil-pbc-finite-split-hypercover. -/
+/-- Blueprint `def-weil-pbc-finite-split-hypercover`: part of the data of finite split étale
+hypercovers, their refinements, truncations and complexes of sections. -/
 structure SplitEtaleHypercover (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X] where
   simplicial : SimplicialObject X.Etale
@@ -54,7 +55,8 @@ structure SplitEtaleHypercover (X : Scheme.{u})
     matchingMap n ≫ projection n Δ h θ = simplicial.map θ.op
   matching_cover : ∀ n, Surjective (matchingMap n).left
 
-/-- def-weil-pbc-finite-split-hypercover. -/
+/-- Blueprint `def-weil-pbc-finite-split-hypercover`: part of the data of finite split étale
+hypercovers, their refinements, truncations and complexes of sections. -/
 structure FiniteSplitEtaleHypercover (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X] extends SplitEtaleHypercover X where
   finite_each_degree : ∀ n, ∃ (k : ℕ) (V : Fin k → X.Etale)
@@ -68,19 +70,23 @@ namespace FiniteSplitEtaleHypercover
 
 variable {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
 
-/-- def-weil-pbc-finite-split-hypercover. -/
+/-- Blueprint `def-weil-pbc-finite-split-hypercover`: part of the data of finite split étale
+hypercovers, their refinements, truncations and complexes of sections. -/
 abbrev Refinement (U V : FiniteSplitEtaleHypercover X) := U.simplicial ⟶ V.simplicial
 
-/-- def-weil-pbc-finite-split-hypercover. -/
+/-- Blueprint `def-weil-pbc-finite-split-hypercover`: part of the data of finite split étale
+hypercovers, their refinements, truncations and complexes of sections. -/
 def isRefinementHomotopic {U V : FiniteSplitEtaleHypercover X}
     (f g : U.Refinement V) : Prop :=
   Relation.EqvGen (fun a b : U.Refinement V ↦ Nonempty (SimplicialObject.Homotopy a b)) f g
 
-/-- def-weil-pbc-finite-split-hypercover. -/
+/-- Blueprint `def-weil-pbc-finite-split-hypercover`: part of the data of finite split étale
+hypercovers, their refinements, truncations and complexes of sections. -/
 def RefinementClasses (U V : FiniteSplitEtaleHypercover X) :=
   Quot (fun a b : U.Refinement V ↦ Nonempty (SimplicialObject.Homotopy a b))
 
-/-- def-weil-pbc-finite-split-hypercover. -/
+/-- Blueprint `def-weil-pbc-finite-split-hypercover`: part of the data of finite split étale
+hypercovers, their refinements, truncations and complexes of sections. -/
 def truncation (U : FiniteSplitEtaleHypercover X) (r : ℕ) :=
   ((SimplicialObject.truncation r).obj U.simplicial,
     fun n : Fin (r + 1) ↦
@@ -91,25 +97,29 @@ def truncation (U : FiniteSplitEtaleHypercover X) (r : ℕ) :=
         PLift.up (U.projection_naturality n.val), PLift.up (U.matching_universal n.val),
         PLift.up (U.matchingMap_projection n.val), PLift.up (U.matching_cover n.val)))
 
-/-- def-weil-pbc-finite-split-hypercover. -/
+/-- Blueprint `def-weil-pbc-finite-split-hypercover`: part of the data of finite split étale
+hypercovers, their refinements, truncations and complexes of sections. -/
 def sectionCosimplicial (U : FiniteSplitEtaleHypercover X)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{v}) : CosimplicialObject AddCommGrpCat.{v} :=
   U.simplicial.rightOp ⋙ F.obj
 
-/-- def-weil-pbc-finite-split-hypercover. -/
+/-- Blueprint `def-weil-pbc-finite-split-hypercover`: part of the data of finite split étale
+hypercovers, their refinements, truncations and complexes of sections. -/
 noncomputable def complex (U : FiniteSplitEtaleHypercover X)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{v}) : CochainComplex AddCommGrpCat.{v} ℕ :=
   (AlgebraicTopology.alternatingCofaceMapComplex AddCommGrpCat.{v}).obj
     (U.sectionCosimplicial F)
 
-/-- def-weil-pbc-finite-split-hypercover. -/
+/-- Blueprint `def-weil-pbc-finite-split-hypercover`: part of the data of finite split étale
+hypercovers, their refinements, truncations and complexes of sections. -/
 noncomputable def cohomology (U : FiniteSplitEtaleHypercover X)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{v}) (q : ℕ) : AddCommGrpCat.{v} :=
   (U.complex F).homology q
 
 end FiniteSplitEtaleHypercover
 
-/-- def-weil-pbc-finite-split-hypercover. -/
+/-- Blueprint `def-weil-pbc-finite-split-hypercover`: part of the data of finite split étale
+hypercovers, their refinements, truncations and complexes of sections. -/
 structure TruncatedFiniteSplitEtaleHypercover (X : Scheme.{u}) (r : ℕ) where
   simplicial : SimplicialObject.Truncated X.Etale r
   N : Fin (r + 1) → X.Etale
@@ -160,11 +170,13 @@ structure TruncatedFiniteSplitEtaleHypercover (X : Scheme.{u}) (r : ℕ) where
 
 namespace TruncatedFiniteSplitEtaleHypercover
 
-/-- def-weil-pbc-finite-split-hypercover. -/
+/-- Blueprint `def-weil-pbc-finite-split-hypercover`: part of the data of finite split étale
+hypercovers, their refinements, truncations and complexes of sections. -/
 def diagram {X : Scheme.{u}} {r : ℕ} (U : TruncatedFiniteSplitEtaleHypercover X r) :=
   U.simplicial ⋙ Scheme.Etale.forget X
 
-/-- def-weil-pbc-finite-split-hypercover. -/
+/-- Blueprint `def-weil-pbc-finite-split-hypercover`: part of the data of finite split étale
+hypercovers, their refinements, truncations and complexes of sections. -/
 def IsBaseChange {X Y : Scheme.{u}} {r : ℕ} (f : X ⟶ Y)
     (U : TruncatedFiniteSplitEtaleHypercover Y r)
     (V : TruncatedFiniteSplitEtaleHypercover X r) : Prop :=
