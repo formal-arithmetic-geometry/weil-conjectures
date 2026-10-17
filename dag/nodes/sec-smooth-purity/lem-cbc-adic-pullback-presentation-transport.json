@@ -20,7 +20,9 @@
   "prop-weil-pbc-rlim-functoriality",
   "def-weil-pbc-completed-pullback",
   "def-weil-extension-by-zero-presheaf",
-  "def-weil-presheaf-modules-sheafification"
+  "def-weil-presheaf-modules-sheafification",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "lem-pur-site-restriction-module-adjunction-exact"
  ],
  "proof": [
   {
@@ -320,5 +322,58 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-a15f1e693 (reviewer sub-agent of L); spot-checked: Read the item's statement and all ten steps in full, every cited node's statement, the parent lem-cbc-completed-extension-zero-comparison (Steps 9 and 11 cite this item), its main-20261015 blueprint proof, unit sk-prop-sf-cbc, and Stacks 05S7 (derived.tex l.4509) and 03DI/03DJ (sites-modules.tex l.2058/2160). The statement and stmt_deps are byte-identical to the unsplit side-DAG node, so nothing was changed or weakened. There are no new nodes and no SGA citation. review_split.py gives PASS, and every off-unit statement use is a declared tool_use; I accept all seven. Mathematics: the component hypothesis plus the limit-sheaf definition in the adic datum force c^(1)=c^(2) (Step 1). The quotient square holds because the adjuncts g_*(q)rho_b and rho_a q agree on constant sections and hence after sheafification. So G_1=G_2 and alpha is the identity (Step 2). I checked both hypotheses of lem-pur-left-derived-from-kflat-class through lem-weil-pbc-diagram-kflat-replacements, for J the singleton, N^op and Jx[1] (Steps 3-4). Exactness of Q'G_i on the homotopy category is one line. Step 5 resolves the quotient tower again instead of treating it as K-flat, which is correct. I recomputed e~ v_1 = v_2 Delta(e) (Step 6), E_K u_1 = u_2 e_K through naturality of eta for the functorial K-injective model (Steps 7-8), and the inverse-mate substitution (Steps 9-10). Steps 6-8 agree with the augmentation and unit construction in def-weil-pbc-completed-pullback. Non-load-bearing remarks: Step 9's generator formulas for unit and counit come from the 03DI construction, but Step 10 needs only that both presentations use the same adjunction. The report mislabels 05S9 and lists a citations.json that is not in the commit. Edge cases tested: empty T', g=id, a=b, unit ideal, U=X, K=0. No fixes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e27840fb7",
+  "group": "Q61",
+  "result": "fix",
+  "note": "Reviewed all statements, dependencies, canonical constructions, universes, and edge cases. Compilation passed cleanly in sandbox and library modes. Only H2 signature whitespace needed correction; fixes contains the complete replacement Lean record. Full findings are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicPullbackPresentationTransport",
+  "declaration": "AlgebraicGeometry.Scheme.adic_pullback_presentation_transport",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adic_pullback_coefficient_presentations",
+   "AlgebraicGeometry.Scheme.adicPresentationPullback",
+   "AlgebraicGeometry.Scheme.adicPresentationIdentity",
+   "AlgebraicGeometry.Scheme.adicPresentationOrdinaryUniversal_proof",
+   "AlgebraicGeometry.Scheme.adicPresentationOrdinaryUniversal",
+   "AlgebraicGeometry.Scheme.adicPresentationTowerUniversal_proof",
+   "AlgebraicGeometry.Scheme.adicPresentationTowerUniversal",
+   "AlgebraicGeometry.Scheme.adicPresentationOrdinaryIso",
+   "AlgebraicGeometry.Scheme.adicPresentationTowerIso",
+   "AlgebraicGeometry.Scheme.adic_pullback_presentation_transport",
+   "AlgebraicGeometry.Scheme.adicPresentationConstantIso",
+   "AlgebraicGeometry.Scheme.HasAdicPresentationConstantNormalization",
+   "AlgebraicGeometry.Scheme.adicPresentationConstantIso_normalized",
+   "AlgebraicGeometry.Scheme.adicPresentationEvaluationComplex_eq",
+   "AlgebraicGeometry.Scheme.HasAdicPresentationEvaluationNormalization",
+   "AlgebraicGeometry.Scheme.adicPresentationEvaluationIso_exists",
+   "AlgebraicGeometry.Scheme.adicPresentationEvaluationIso",
+   "AlgebraicGeometry.Scheme.adicPresentationFiniteIso",
+   "AlgebraicGeometry.Scheme.adicPresentationCompletion",
+   "AlgebraicGeometry.Scheme.adicPresentationUnit",
+   "AlgebraicGeometry.Scheme.adicPresentationLimitComparison",
+   "AlgebraicGeometry.Scheme.adicPresentationComparison_squares",
+   "AlgebraicGeometry.Scheme.adicPresentationFiniteIso_transport",
+   "AlgebraicGeometry.Scheme.adicPresentationFiniteIso_transition",
+   "AlgebraicGeometry.Scheme.adicPresentationCompletion_transport",
+   "AlgebraicGeometry.Scheme.adicPresentationLocalizedFinitePull",
+   "AlgebraicGeometry.Scheme.adicPresentationLocalizedComparison",
+   "AlgebraicGeometry.Scheme.adicPresentationLocalizedComparison_isIso",
+   "AlgebraicGeometry.Scheme.adicPresentationInverseMate",
+   "AlgebraicGeometry.Scheme.adicPresentationInverseMate_counit",
+   "AlgebraicGeometry.Scheme.adicPresentationInverseMate_eq"
+  ],
+  "file": "lean/Sheaf/Paper/AdicPullbackPresentationTransport.lean",
+  "statement": "theorem adic_pullback_presentation_transport : (∃! e : L₁ ≅ L₂, Functor.whiskerLeft DerivedCategory.Qh e.hom ≫ ε₂ = ε₁) ∧ (∃! e : T₁ ≅ T₂, Functor.whiskerLeft DerivedCategory.Qh e.hom ≫ τ₂ = τ₁)",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Return 10174673fb00 repaired: generalized counit-normalized constant and evaluation comparisons, all finite quotient-transition squares, normalized completion unit square, and concrete finite cartesian-open mates using sheafified extension by zero. Reuses the landed normalized finite-reduction and localized-module-adjunction interfaces.",
+  "fixed_by": "NT-stage2-Codex-e27840fb7"
  }
 }

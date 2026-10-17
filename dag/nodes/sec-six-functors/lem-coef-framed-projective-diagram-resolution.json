@@ -291,5 +291,34 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-a8ede8746 (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the item's ten steps, both new nodes, and the full statement of every cited node. Step 1: the co-Yoneda map gives V_j(Δ^r)≅A^r, the boundary map gives V_j(∂Δ^r)≅L_rA_j, and the collapse is the structure map. Step 2 meets the boundary-collapse test's hypotheses exactly. Step 3: the chain splitting by nonidentity internal arrows gives R_T(Δ^n)=(PA)^n. Steps 4–5: F_c is left adjoint to evaluation, so it preserves projective cofibrations; pushout and ω-composite closure then apply, and L_n(PA)=R_T(∂Δ^n). Step 6: I checked every reversed-convention identity by hand against the hypotheses of lem-coef-simplicial-extra-degeneracy-prism (n=p-1). Step 7: R_{const V}(K)=V(K) because [0] is terminal in Δ. Step 8: the double anodyne pushout-product and the filtration cells for K×{k}→K×Δ^1 make i_k a trivial cofibration, so p is a weak equivalence. Step 9: the localization iff applies. Step 10: two-out-of-three, and the empty-J case is vacuous. New node split-functor-coend-filtration is true: it is the Reedy pushout-product filtration, using L_p(L×Δ^•)=L×∂Δ^p and the summand latching of T. I tested p=0, K=L and constant T. It is not a one-line specialization of lem-coef-weighted-coend-skeletal-filtration, which with J=Δ^op filters in the inner direction with different cells. New node functor-coend-homotopy-prism is true via R_{T⊠L}(K)≅R_T(K×L), checked on generators Δ^q⊠V. Its endpoint orientation agrees with the cited homotopy convention. Neither new node needs enrichment, unlike lem-coef-reedy-realization-prism and lem-coef-tensor-coend-skeletal-pushouts. A DFS over the snapshot DAG finds no cycle. The route stays inside unit sk-prop-sf-biduality-general, and there are no SGA citations and no tool_uses. Hovey, Dugger and Hirschhorn are absent from the literature archive and are reported as WANTED with proof_origin agent; I checked those arguments directly instead of reading the sources. No fixes were written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-274345814",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Immutable snapshot audited; exact statement and declarations match, dependencies and edge cases checked, report sections present, scompile sandbox/library overlays pass, no fixes required."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FramedProjectiveDiagramResolution",
+  "file": "lean/Sheaf/CategoryTheory/FramedProjectiveDiagramResolution.lean",
+  "declaration": "HomotopicalAlgebra.FramedProjective.exists_resolution",
+  "declarations": [
+   "HomotopicalAlgebra.FramedProjective.coefficient",
+   "HomotopicalAlgebra.FramedProjective.barShape",
+   "HomotopicalAlgebra.FramedProjective.barCoefficient",
+   "HomotopicalAlgebra.FramedProjective.barCoefficientMap",
+   "HomotopicalAlgebra.FramedProjective.barIndex",
+   "HomotopicalAlgebra.FramedProjective.barObject",
+   "HomotopicalAlgebra.FramedProjective.barInjection",
+   "HomotopicalAlgebra.FramedProjective.Resolution",
+   "HomotopicalAlgebra.FramedProjective.exists_resolution"
+  ],
+  "statement": "theorem exists_resolution [ModelCategory M] [HasLimits M] (P : ModelCategory (J ⥤ M)) (hPW : P.categoryWithWeakEquivalences.weakEquivalences = (weakEquivalences M).functorCategory J) (hPF : P.categoryWithFibrations.fibrations = (fibrations M).functorCategory J) (A : SimplexCategory ⥤ J ⥤ M) (hA : ∀ (j : J) (q : SimplexCategory), cofibrations M (Reedy.latchingTo (monomorphisms SimplexCategory) (coefficient A j) q)) (hconst : ∀ {q q' : SimplexCategory} (a : q ⟶ q') (j : J), weakEquivalences M ((A.map a).app j)) : Nonempty (Resolution P A)",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-17"
  }
 }
