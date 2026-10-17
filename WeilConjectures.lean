@@ -3678,11 +3678,9 @@ public import WeilConjectures.RingTheory.Etale.DepthTwo.Diagonal.Basic
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Diagonal.LiftQuotient
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Global
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Lift
-public import WeilConjectures.RingTheory.Etale.DepthTwo.LiftComplete
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Local
 public import WeilConjectures.RingTheory.Etale.DepthTwo.LocalToGlobal
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Rank
-public import WeilConjectures.RingTheory.Etale.DepthTwo.RegularQuotient
 public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurity
 public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurityDiagonal
 public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurityFiber
