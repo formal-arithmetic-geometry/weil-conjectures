@@ -38,7 +38,7 @@ variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
 /-- The components of the inverse of the composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁₂)_*`
 of étale pushforwards are the restriction maps along the inverse pullback pasting
 isomorphisms. -/
-lemma lowerStarComp_inv_app_hom_app (h₁₂ : T ⟶ R) (hh₁₂ : h₁₂ = h₁ ≫ h₂)
+lemma lowerStarComp_inv_app_hom_app_of_eq (h₁₂ : T ⟶ R) (hh₁₂ : h₁₂ = h₁ ≫ h₂)
     (G : Sheaf T.smallEtaleTopology A) (V : R.Etaleᵒᵖ) :
     ((Etale.lowerStarComp A h₁ h₂ h₁₂ hh₁₂).inv.app G).hom.app V =
       G.obj.map ((MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) h₁ h₂ h₁₂
@@ -191,7 +191,7 @@ lemma exists_sheafFiber_map_descentTransition_eq_zero (i : I)
   have hz : ((c.π.app k)_*[ModuleCat.{u + 1} Λ].obj F).obj.map ψε.op
       (((lowerStarComp (ModuleCat.{u + 1} Λ) (c.π.app k) (D.map g) (c.π.app i)
         (c.w g).symm).inv.app F).hom.app (op Vε) t) = 0 := by
-    rw [lowerStarComp_inv_app_hom_app, lowerStar_obj_val_map]
+    rw [lowerStarComp_inv_app_hom_app_of_eq, lowerStar_obj_val_map]
     erw [← ConcreteCategory.comp_apply]
     rw [← Functor.map_comp, ← op_comp, hθ, op_comp, Functor.map_comp, ConcreteCategory.comp_apply]
     erw [hft]

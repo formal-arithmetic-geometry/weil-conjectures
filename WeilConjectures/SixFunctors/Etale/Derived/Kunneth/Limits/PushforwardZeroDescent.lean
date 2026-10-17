@@ -180,17 +180,16 @@ lemma pushforwardStageIso_descentTransition (q : X ⟶ Y) {Y' : Scheme.{u}} (g :
         LimitStage.Hom (⟨Z, Y, f₀ ≫ q, q, 𝟙 Z⟩ : LimitStage X Z)
           ⟨Z, Y', f₀ ≫ r, r, 𝟙 Z⟩)).app J ≫
         ((q)^*[ModuleCat.{u + 1} Λ]).map (pushforwardStageIso Λ f₀ J q).hom := by
-  let φ : LimitStage.Hom (⟨Z, Y, f₀ ≫ q, q, 𝟙 Z⟩ : LimitStage X Z) ⟨Z, Y', f₀ ≫ r, r, 𝟙 Z⟩ :=
-    ⟨𝟙 Z, g, by simp [hr], hr.symm, by simp⟩
-  let πq : LimitStage.Hom (⟨Z, X, f₀, 𝟙 X, 𝟙 Z⟩ : LimitStage X Z) ⟨Z, Y, f₀ ≫ q, q, 𝟙 Z⟩ :=
-    ⟨𝟙 Z, q, by simp, by simp, by simp⟩
-  let πr : LimitStage.Hom (⟨Z, X, f₀, 𝟙 X, 𝟙 Z⟩ : LimitStage X Z) ⟨Z, Y', f₀ ≫ r, r, 𝟙 Z⟩ :=
-    ⟨𝟙 Z, r, by simp, by simp, by simp⟩
-  have hcomp : πq.comp φ = πr := LimitStage.Hom.ext (by simp [πq, φ, πr]) hr.symm
   have hq := sheafTransition_pushforwardStage_proj Λ f₀ J q
   have hr' := sheafTransition_pushforwardStage_proj Λ f₀ J r
-  have hc := LimitStage.sheafTransition_comp_app Λ πq φ J
-  rw [hcomp] at hc
+  have hc := LimitStage.sheafTransition_comp_app Λ
+    (⟨𝟙 Z, q, by simp, by simp, by simp⟩ :
+      LimitStage.Hom (⟨Z, X, f₀, 𝟙 X, 𝟙 Z⟩ : LimitStage X Z) ⟨Z, Y, f₀ ≫ q, q, 𝟙 Z⟩)
+    (⟨𝟙 Z, g, by simp [hr], hr.symm, by simp⟩ :
+      LimitStage.Hom (⟨Z, Y, f₀ ≫ q, q, 𝟙 Z⟩ : LimitStage X Z) ⟨Z, Y', f₀ ≫ r, r, 𝟙 Z⟩) J
+  rw [show LimitStage.Hom.comp _ _ = (⟨𝟙 Z, r, by simp, by simp, by simp⟩ :
+      LimitStage.Hom (⟨Z, X, f₀, 𝟙 X, 𝟙 Z⟩ : LimitStage X Z) ⟨Z, Y', f₀ ≫ r, r, 𝟙 Z⟩) from
+    LimitStage.Hom.ext (by simp) hr.symm] at hc
   have hL : ((r)^*[ModuleCat.{u + 1} Λ]).map (pushforwardStageIso Λ f₀ J r).hom ≫
       descentTransition _ q g r hr (((f₀)_*[ModuleCat.{u + 1} Λ]).obj J) =
       (Etale.upperStarComp (ModuleCat.{u + 1} Λ) q g r hr).hom.app
@@ -206,20 +205,20 @@ lemma pushforwardStageIso_descentTransition (q : X ⟶ Y) {Y' : Scheme.{u}} (g :
     simp only [Functor.comp_map] at nn
     rw [descentTransition_eq_upperStarComp, reassoc_of% nn]
     simp only [Functor.map_comp]
-  have hR : (LimitStage.sheafTransition Λ φ).app J ≫
+  have hR : (LimitStage.sheafTransition Λ (⟨𝟙 Z, g, by simp [hr], hr.symm, by simp⟩ :
+      LimitStage.Hom (⟨Z, Y, f₀ ≫ q, q, 𝟙 Z⟩ : LimitStage X Z)
+        ⟨Z, Y', f₀ ≫ r, r, 𝟙 Z⟩)).app J ≫
       ((q)^*[ModuleCat.{u + 1} Λ]).map (pushforwardStageIso Λ f₀ J q).hom =
       (Etale.upperStarComp (ModuleCat.{u + 1} Λ) q g r hr).hom.app
           (((f₀ ≫ r)_*[ModuleCat.{u + 1} Λ]).obj (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J)) ≫
         ((q)^*[ModuleCat.{u + 1} Λ]).map
-          ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ) (⟨φ.wg⟩ : CommSq (𝟙 Z) (f₀ ≫ q) (f₀ ≫ r) g)).app
+          ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ) (⟨by simp [hr]⟩ : CommSq (𝟙 Z) (f₀ ≫ q) (f₀ ≫ r) g)).app
               (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J) ≫
             ((f₀ ≫ q)_*[ModuleCat.{u + 1} Λ]).map
               ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) (𝟙 Z) (𝟙 Z) (𝟙 Z) (by simp)).inv.app J) ≫
             (pushforwardStageIso Λ f₀ J q).hom) := by
     rw [LimitStage.sheafTransition_app]
     simp only [Functor.map_comp, Category.assoc]
-    rfl
-  change _ = (LimitStage.sheafTransition Λ φ).app J ≫ _
   rw [hL, hR]
   congr 2
   apply eq_of_upperStar_map_comp_counit
