@@ -8,7 +8,8 @@
   "place": "The general square argument in the proof of Theorem 7.5.18, printed p. 380 (PDF p. 395); its inputs are Proposition 6.1.14, Proposition 6.1.15 and pointwise Kan extension in Proposition 6.4.9 with finality Theorem 6.4.5. This general form abstracts the proof, not the Brown theorem. No Stacks tag states it. Read online 2026-10-17; archive WANTED."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-colimit-gluing"
  ],
  "proof": [
   {
@@ -220,5 +221,23 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-2bef33d51 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-infinity-comma-corepresentable-colimit, and the statements of all cited nodes: def-cbc-enhanced-diagrams-cones, def-coef-infinity-category-of-spaces, hom-bifunctor-functoriality, mapping-composition and cbc-enhanced-functor-cone-calculus. Read Cisinski CatLR (July 30, 2026, /tmp/catlr-nd) at Prop. 6.1.14–6.1.15 (pp. 269–271), Prop. 6.4.9 (p. 298), Cor. 7.5.17 and Thm 7.5.18 (pp. 379–380). The item is the Thm 7.5.18 square abstracted, with exactly its hypotheses: i fully faithful, q essentially surjective, and the comma functors final as in 7.5.17/6.4.5. The statement is unchanged and has no SGA citation. Steps 1–5 are correct. Step 4 states coherence of the cocone morphism, which is needed: the BZ/S^1 example shows pointwise homotopies of legs do not suffice. That coherence follows from the coherent T_* naturality in the hom-bifunctor node applied to u, ri and θ. Every hypothesis is used. Item small cases checked: Δ0, Δ1 picking 0, and BG→pt, where finality holds iff G is contractible. The new node is v_!h^k≃h^{v(k)} evaluated pointwise. It is true; checked for v=id, K=BG→pt (contractible homotopy orbits) and K=∅. It is statement only, self-contained, searched three ways, strictly smaller than the item, and not a duplicate of the ordinary pointwise-Kan, coherent-diagram-coyoneda, space-yoneda-density, pointwise-yoneda-evaluation or terminal-local-kan-corepresentability nodes; blueprint search for 'corepresentable' returns 0. Blueprint from/via are correct and there is no cycle (closure of 182 cited nodes). FIX: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc) is outside the unit's route, and the delivery left split_report.tool_uses empty. I added it with its reason in fixes/dag/nodes/sec-six-functors/lem-coef-final-square-full-faithfulness.json, and accept it as a tool use (vertexwise equivalences, the colimit mapping-space criterion, and contractibility of initial objects).; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e5cd0e8f",
+  "group": "NP",
+  "result": "pass",
+  "note": "Read the node, both statement dependencies (EnhancedDiagramsCones and InfinityColimitGluing declarations), the module, the report and Cisinski HCHA (CatLR) Cor 7.5.17/Thm 7.5.18 pp.379-380. All clauses match: theta is an equivalence edge ri=>uq; hi/hq exact; commas are full degreewise pullbacks; T/w encode (i(b), u(alpha) o theta_b) with the faces checked, always satisfiable by inner-horn filling, so no extra assumption; hT is finality via the canonical gluingCoconeRestrict (same apex), target universe max(u+1) v (universe-independent notion); conclusion is IsFullyFaithful u on the actual mappingSpaceMap. The node diff is only lean plus stmt_deps +lem-coef-infinity-colimit-gluing, with no cycle; the statement is verbatim in the file; sorry only, no hollow defs, docstrings carry source, blueprint and proof steps; both report sections present. nt_compile.py --json on the side overlay: rc=0, no errors or warnings, 1.6 s. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FinalSquareFullFaithfulness",
+  "declaration": "SSet.Enhanced.final_square_full_faithfulness",
+  "file": "lean/Sheaf/CategoryTheory/FinalSquareFullFaithfulness.lean",
+  "statement": "theorem final_square_full_faithfulness : ∀ {A B X Y : SSet.{u}} [Quasicategory A] [Quasicategory B] [Quasicategory X] [Quasicategory Y] (i : A ⟶ B) (q : A ⟶ X) (r : B ⟶ Y) (u : X ⟶ Y) (θ : ((ihom A).obj Y) _⦋1⦌) (hθsource : ((ihom A).obj Y).δ 1 θ = diagramVertex (i ≫ r)) (hθtarget : ((ihom A).obj Y).δ 0 θ = diagramVertex (q ≫ u)) (hθequiv : IsEquivalenceEdge ((ihom A).obj Y) θ) (hi : IsFullyFaithful i) (hq : ∀ x : X _⦋0⦌, ∃ a : A _⦋0⦌, ∃ e : X _⦋1⦌, X.δ 1 e = q.app _ a ∧ X.δ 0 e = x ∧ IsEquivalenceEdge X e) (T : ∀ a : A _⦋0⦌, comma A X q (q.app _ a) true ⟶ comma B Y r (u.app _ (q.app _ a)) true) (hTind : ∀ a : A _⦋0⦌, T a ≫ (commaSubcomplex B Y r (u.app _ (q.app _ a)) true).ι ≫ fst _ _ = (commaSubcomplex A X q (q.app _ a) true).ι ≫ fst _ _ ≫ i) (w : ∀ a : A _⦋0⦌, comma A X q (q.app _ a) true ⟶ (ihom Δ[2]).obj Y) (hwθ : ∀ a : A _⦋0⦌, w a ≫ (MonoidalClosed.pre (stdSimplex.δ 2)).app Y = (commaSubcomplex A X q (q.app _ a) true).ι ≫ fst _ _ ≫ MonoidalClosed.curry ((β_ Δ[1] A).hom ≫ MonoidalClosed.uncurry (SSet.yonedaEquiv.symm θ))) (hwα : ∀ a : A _⦋0⦌, w a ≫ (MonoidalClosed.pre (stdSimplex.δ 0)).app Y = (commaSubcomplex A X q (q.app _ a) true).ι ≫ snd _ _ ≫ (ihom Δ[1]).map u) (hwT : ∀ a : A _⦋0⦌, w a ≫ (MonoidalClosed.pre (stdSimplex.δ 1)).app Y = T a ≫ (commaSubcomplex B Y r (u.app _ (q.app _ a)) true).ι ≫ snd _ _) (hT : ∀ a : A _⦋0⦌, ∀ (E : SSet.{max (u + 1) v}) [Quasicategory E] (F : SSet.uliftFunctor.{max (u + 1) v}.obj (comma B Y r (u.app _ (q.app _ a)) true) ⟶ E), ∀ c : (coconeCategory F) _⦋0⦌, IsColimiting F c → IsColimiting (SSet.uliftFunctor.{max (u + 1) v}.map (T a) ≫ F) ((gluingCoconeRestrict (SSet.uliftFunctor.{max (u + 1) v}.map (T a)) F).app _ c)), IsFullyFaithful u",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

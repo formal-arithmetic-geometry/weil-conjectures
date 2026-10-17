@@ -240,5 +240,28 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-afc094a13 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, and the full statements of the five cited nodes (reedy-model-structure, kan-quillen-right-proper, simplicial-space-reedy-cartesian, kan-realization-serre, def-cbc-enhanced-diagrams-cones). Statement, stmt_deps, blueprint and unit are unchanged from base. The source is Rezk §§5.1-5.8 and (6.3); it is not archived, the WANTED line is present and proof_origin=agent is correct. Step 1: the matching object at [1] is W_0^2, so (d1,d0) is a Kan fibration. Restriction along a mono into W->* is a Kan fibration (cartesian node, Y=*). The spine restriction is a trivial fibration, and its fixed-vertex pullback keeps boundary RLP including n=0. Step 2: checked the faces of T in W_3 (d3T=012, d1T=023, d0T=123, d2T=013), and d1d1=d1d2=03 gives associativity. Units come from s0f=(s0x,f,f) and s1f=(f,s0y,f). Lift and representative independence use n=1 boundary and Λ^1 horn lifting. Step 3 is elementary. Step 4: Z={02,12,13}, t(g)=(s0x,g,s0y) on vertices (y,x,y,x). Faces 012 and 123 give [g][a]=1_y and [b][g]=1_x. For the converse, the spine (h,g,h) plus fixed-endpoint edge chains lift through r. Step 5: t(G) endpoint compatibility is checked for moving endpoints, iterated over edge chains in Kan W_1. Step 6 is elementary and correct in all degrees. Small cases checked: empty W, N[1], BG, and the two-object groupoid with paths that change endpoints. No new nodes, all cited statements are in the item's unit, no tool_uses, no cycle, all three Mathlib search kinds are recorded, and no SGA. Duplicate search over the DAG (Segal and homotopy-category nodes) found nothing equivalent. Maintainer note only: def-coef-segal-space embeds the Step 4 inverse criterion as a claim inside a definition. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df6055918",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Checked all node clauses against Lean: Space.{u}=Δᵒᵖ⥤SSet, IsSegal (Kan matching-map Reedy fibrancy + Enhanced weak equivalences for n≥2), strict mappingFiber, homotopyCategory (hoFunctor of vertex row, homs = π₀ fibres via homotopyCategory_homs; checked mathematically), homotopyFunctor_map_fiberEdge (functoriality), homotopy_category_components (π₀.mk g = π₀.mk g' → IsIso iff, endpoints free), equivalenceSubcomplex_mappingFiber (strict fibre of W_eq in every degree; fullSubcomplex checked). No extra hypotheses or universe restriction; edge cases (empty, x=y, n=2, q=0) covered. Node differs from base only in lean; statement verbatim; imports per rule 7; no defs, all sorry; docstrings with Rezk place, blueprint id and proof steps; Worker report and Second reading real. nt_compile --json rc=0 with no diagnostics; a deliberate-error control run failed with rc=1. Non-blocking observation: SSet.Segal and def-coef-segal-space's CategoryTheory.SegalSpace are parallel encodings landed by maintainers; the item rightly uses SSet.Segal (the node's literal object, the only one with hW), but citers complete-segal-dk-levelwise and outer-horn use the other, so stage 3 needs a comparison; the report's 'single definitions' claim overlooks def-coef-segal-space (report-only)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SegalHomotopyCategoryComponents",
+  "declaration": "SSet.Segal.homotopy_category_components",
+  "declarations": [
+   "SSet.Segal.homotopyFunctor_map_fiberEdge",
+   "SSet.Segal.equivalenceSubcomplex_mappingFiber",
+   "SSet.Segal.homotopy_category_components"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SegalHomotopyCategoryComponents.lean",
+  "statement": "theorem homotopy_category_components (W : Space.{u}) (hW : IsSegal W) {g g' : (W.obj (op ⦋1⦌)) _⦋0⦌} (hgg' : SSet.π₀.mk g = SSet.π₀.mk g') : IsIso (edgeClass W g) ↔ IsIso (edgeClass W g')",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

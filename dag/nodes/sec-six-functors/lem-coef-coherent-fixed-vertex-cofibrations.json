@@ -224,5 +224,25 @@
   "group": "Q80",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-63ecdbed6 (reviewer sub-agent of L); spot-checked: FIX for C5: the new node lem-coef-coherent-simplex-boundary-cube duplicates the existing base node lem-coef-rigidification-boundary-cube. That node is in the same unit and has the same HTT 2.2.5.1 source place. It states the same thing: C[∂Δ^n]→C[Δ^n] is injective, all mapping sets agree except (0,n), where the map is ∂B_{n-1}⊂B_{n-1} under characteristic functions, with B_0=∅ for n=1. It also states the pushout square along U(∂B)→U(B). The new node is dropped and the item's steps 3 and 4 are rewritten to cite the existing node; the corrected item is in fixes/dag/nodes/sec-six-functors. Step 3 now uses the pushout: an extension of the boundary functor g is exactly a cube map extending the prescribed map on ∂B, and pushout uniqueness gives the condition for lying over f. Repeated labels are handled through U(K)→E(a,a). Step 4 is in the B/∂B notation and glues explicitly. proof_deps is the union of the step uses, with no cycle (the rigidification node does not reach the item). The item statement is unchanged and not weakened; the cofibration is the LLP against mapping-wise trivial Kan fibrations, with no local Kan hypothesis. Checks: step 1 uses the mathlib skeletal-cell node and Kerodon Tag 0077; since u_0 is bijective no 0-cells are attached, Z_1=Z_0 and every stage has vertex set O. Step 2 is elementary: C is left adjoint to the nerve, and the object set is S_0 because Ob is left adjoint to the indiscrete category. Step 4 uses the KQ core: degreewise injections are cofibrations and the mapping maps are trivial fibrations. Step 5 is a stated sequential induction. Small cases: n=1 is ∅→Δ^0, a vertex lift by surjectivity of a trivial fibration. n=2 gives (0,2) = {02, 12∘01} = ∂Δ^1. K=L, O=∅ and repeated labels also work. The dropped node's mathematics was correct. HTT is not in the local literature: read online, WANTED. No SGA is used and no tool_uses are needed (all nodes are in the same unit).; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c5417949",
+  "group": "NN",
+  "result": "fix",
+  "note": "Statement faithful to node and HTT 2.2.5.1: degreewise-injective, vertex-bijective f : K ⟶ L in SSet.{u}; A B : Bergner.Fixed K₀ with isos to rigidification.obj K/L pinned to the canonical vertices x and f(x); square bundleMap g ≫ eL.hom = eK.hom ≫ rigidification.map f; Bergner.fixedCofibrations = LLP against mappingwise (Quillen J horn-RLP ⊓ Enhanced weak homotopy equivalence). The existential is equivalent to the universal reading (pinned object functions give identity-on-objects isos; LLP is iso-closed). No added hypotheses or universe restriction. Edge cases ∅, n=1, loops and repeated labels are covered. Only the item's lean field changed and its statement is verbatim. nt_compile --json rc=0 for delivered (1.3 s) and fixed (2.1 s) files; warn.sorry=false in lakefile. FIX: (1) H8: the theorem docstring now carries the node's five proof steps and cites all four proof_deps (previously three were missing); signature unchanged; (2) report: the false 'proof and proof_deps are empty' sentence and two garbled 'Theorem the project server' references are corrected, and a Reviewer fix section is appended."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CoherentFixedVertexCofibrations",
+  "declaration": "SSet.PinchedCube.coherent_fixed_vertex_cofibrations",
+  "file": "lean/Sheaf/AlgebraicTopology/CoherentFixedVertexCofibrations.lean",
+  "statement": "theorem coherent_fixed_vertex_cofibrations {K L : SSet.{u}} (f : K ⟶ L) (hinj : ∀ n : SimplexCategoryᵒᵖ, Function.Injective (f.app n)) (hvertices : Function.Bijective (f.app (Opposite.op ⦋0⦌))) : ∃ (A B : Bergner.Fixed (K _⦋0⦌)) (eK : Bergner.bundle A ≅ rigidification.obj K) (eL : Bergner.bundle B ≅ rigidification.obj L) (g : A ⟶ B), (∀ x : K _⦋0⦌, eK.hom.obj x = (coherentSimplexUnit.app ⦋0⦌ ≫ rigidification.map (yonedaEquiv.symm x)).obj (SimplicialThickening.mk (ULift.up 0))) ∧ (∀ x : K _⦋0⦌, eL.hom.obj x = (coherentSimplexUnit.app ⦋0⦌ ≫ rigidification.map (yonedaEquiv.symm (f.app _ x))).obj (SimplicialThickening.mk (ULift.up 0))) ∧ Bergner.bundleMap g ≫ eL.hom = eK.hom ≫ rigidification.map f ∧ Bergner.fixedCofibrations (K _⦋0⦌) g",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The existing colimit realization is relabelled by K_0 using enriched isomorphisms whose object functions are pinned to its canonical zero-simplex inclusions. The commuting equation specifies exactly its induced arrow, and fixedCofibrations is the recorded mappingwise trivial Kan fibration left lifting class. No additional definition or mathematical hypothesis.",
+  "fixed_by": "NT-stage2-cc-4c5417949"
  }
 }
