@@ -1578,6 +1578,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeHorizontalPasti
 public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.DerivedCategoryComparison
 public import WeilConjectures.AlgebraicGeometry.DerivedCategoryQCoherentAlgebra
 public import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 public import WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyPullbackLaws
@@ -1613,6 +1614,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedOpenTestObject
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenUnionAdjunctionTriangle
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenUnionSESPresentation
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenUnitRestrictionIso
+public import WeilConjectures.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackAcrossUniverses
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackAcrossUniversesLeftDerived
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackAcrossUniversesRetraction
@@ -6101,6 +6103,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Filtered.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Category
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.LeftDerivedEquivalence
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
