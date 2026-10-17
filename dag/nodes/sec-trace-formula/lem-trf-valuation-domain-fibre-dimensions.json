@@ -289,5 +289,23 @@
   "group": "Q140",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-5bf897492 (reviewer sub-agent of L); spot-checked: Read the full item, the new helper, all the required files (AGENTS.md, stages/1-dag.md, brief-stage1.md, GOAL.md, dag-sync.md, delivery-errors.md A–G, packet.md, report), the statement of every cited node, the unit record sk-i-curve-zero, and Stacks Algebra Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), statement and proof. The item matches 00QK hypothesis by hypothesis, including equidimensionality; nothing is weakened. It is not a target node, so there is no base-change morphism to compare. Steps 1–8 check against the statements they cite: 00P0 and 00OT give d; 00QH gives d<=n, through the open containing (0) of the domain D; 00QE gives the chart B=D_g; 00DK localization plus the D(g) homeomorphism keep the local dimension n on T; 00PN gives quasi-finiteness of both scalar-extended charts, with the finite-sum hypothesis checked explicitly; the trdeg argument gives a nonzero generic kernel; the finite valuation normalization is right for any rank; the residue relation with the helper gives n<=d; 0B7I, 00ES and 00OT give both clauses. The new helper lem-trf-quasi-finite-polynomial-kernel-dimension-drop is true: phi factors through P/I with I=ker phi nonzero and dim P/I<=n-1, then 00QF applies. I tested it on T=0, n=0, k[x,y]/(xy) and the identity map. It is not a clause of the item and not a specialization of the 00QG or 00QF nodes. rg over dag/nodes and the main-20261015 blueprint found no duplicate. Form B1–B5 is fine, searches are recorded and blueprint.from/via are set. I accepted the seven declared sk-thm-p1 tool_uses (the 00P0, 00OT, 00QH, 00QE, open-subspace, 00PN and 0B7I nodes): they are generic algebra lemmas that the proof of 00QK itself invokes. No SGA is used. Fix (C1): step 6 used that B->H is the localization at A\\{0} without citing the node that states it. Its uses now has lem-weil-pbc-generic-fibre-localization-domain-irreducible, and the text names it. This is the only change, in fixes/dag/nodes/sec-trace-formula/lem-trf-valuation-domain-fibre-dimensions.json. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ValuationDomainFibreDimensions",
+  "declaration": "ValuationRing.finiteType_domain_fibre_dimensions",
+  "file": "lean/Sheaf/RingTheory/ValuationDomainFibreDimensions.lean",
+  "statement": "theorem finiteType_domain_fibre_dimensions (A : Type u) [CommRing A] [IsDomain A] [ValuationRing A] (D : Type v) [CommRing D] [IsDomain D] [Algebra A D] [Algebra.FiniteType A D] (hAD : Function.Injective (algebraMap A D)) [Nontrivial (D ⊗[A] IsLocalRing.ResidueField A)] : ringKrullDim (D ⊗[A] IsLocalRing.ResidueField A) = ringKrullDim (D ⊗[A] FractionRing A) ∧ ∀ Z : Set (PrimeSpectrum (D ⊗[A] IsLocalRing.ResidueField A)), Z ∈ irreducibleComponents (PrimeSpectrum (D ⊗[A] IsLocalRing.ResidueField A)) → topologicalKrullDim Z = ringKrullDim (D ⊗[A] FractionRing A)",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-da6ce53ed",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable node, six statement dependencies, Stacks 00QK, exact declarations, report sections, edge cases, universes, verbatim signature, and route-pivot exclusions. Per-file scompile.py reproduction passed without diagnostics. No fixes needed; branch head unchanged."
  }
 }

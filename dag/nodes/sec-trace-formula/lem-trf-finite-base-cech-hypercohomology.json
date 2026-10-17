@@ -263,5 +263,39 @@
   "group": "Q46",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-5cd4358bf (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and the three new nodes in full, plus every cited node's statement. Sources checked at the cited place: Stacks 09Z2 (etale-cohomology.tex l.8412-8487), 03QP, and derived.tex 0141 with remark-match; tags 015M/015J/0133/0130/0132/012K/0959 were resolved through tags/tags. Step 1 applies the Cartan-Eilenberg augmentation criterion only to the unreplaced exact rows, which needs no injectivity. Step 2 uses the bounded functorial resolution, with hypotheses supplied by the Grothendieck and embedding nodes; I checked that naturality gives the bicomplex map. Step 3: the column-cone double complex is first-quadrant after the shift, so thm-sp gives an acyclic total; the sign map is checked. Step 4: the finite-diagonal total of injectives is K-injective by the 079P clause; I checked that I(F)->Tot J is a chain map (I(d0 e)=I(d1 e)) and that kun-well-defined applies; mapped-total needs only additivity. Step 5: Čech degree is the first filtration index, and the reindexing j-a and the finite range 0<=q<=n-a are checked. Steps 6-7: b_q is node 2's mate; the roof's v is a columnwise quasi-iso, so the cone-comparison lemma applies; node 2's square gives the column map as res_g. New nodes are all true and not duplicates. Node 1 is the module form of 09Z2's exactness assertion; the existing 09Z2 hits are set-level degree-0 descent nodes. Node 2: p_* is exact, preserves injectives through its exact left adjoint, and the square holds; the existing Leray nodes are abelian or Z/n only. Node 3 is a generic roof lemma, not a clause of the parent. Form checks: blueprint from/via are correct, searches are recorded in three kinds, no SGA is cited, and proof_deps equal the union of uses. I accept all 10 declared tool_uses as generic homological tools. Edge cases tested: empty Y, Z=Y, split cover, a purely inseparable cover and negative a. Note for the parent, lem-trf-nearby-finite-base-descent step 5: the item's restriction map on resolved diagrams is a roof with a columnwise quasi-iso backward arrow. Applying the cone lemma to it needs one standard extra line (a homotopy fibre product). No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FiniteBaseCechHypercohomology",
+  "declaration": "AlgebraicGeometry.Etale.exists_finite_base_cech_hypercohomology",
+  "declarations": [
+   "AlgebraicGeometry.Etale.finiteCechRestriction",
+   "AlgebraicGeometry.Etale.finiteCechPullbackComp",
+   "AlgebraicGeometry.Etale.finiteCechProjection",
+   "AlgebraicGeometry.Etale.finiteCechColumnMap",
+   "AlgebraicGeometry.Etale.finiteCechBicomplex",
+   "AlgebraicGeometry.Etale.finiteCechTotal",
+   "AlgebraicGeometry.Etale.finiteCechTotalMap",
+   "AlgebraicGeometry.Etale.FiniteCechResolvedModel",
+   "AlgebraicGeometry.Etale.FiniteCechSpectralConvergence",
+   "AlgebraicGeometry.Etale.FiniteCechResolvedRoof",
+   "AlgebraicGeometry.Etale.finiteCechBaseMap",
+   "AlgebraicGeometry.Etale.finiteCechBaseCoefficientIso",
+   "AlgebraicGeometry.Etale.exists_finite_base_cech_hypercohomology"
+  ],
+  "file": "lean/Sheaf/TraceFormula/FiniteBaseCechHypercohomology.lean",
+  "statement": "theorem exists_finite_base_cech_hypercohomology {Z Y : Scheme.{u}} (p : Z ⟶ Y) [IsFinite p] [Surjective p] (a : ℤ) (K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) [K.IsGE a] : ∃ M : FiniteCechResolvedModel Λ p K a, FiniteCechSpectralConvergence Λ M ∧ (∀ (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (_ : L.IsGE a) (v : K ⟶ L), ∃ (N : FiniteCechResolvedModel Λ p L a) (R : FiniteCechResolvedRoof Λ M.diagram N.diagram a), (DerivedCategory.Q.map R.forward.left ≫ R.pointIso.inv ≫ DerivedCategory.Q.map R.last.left) ≫ N.pointIso.hom = M.pointIso.hom ≫ (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Y).map v ∧ (∀ q : SimplexCategory, (DerivedCategory.Q.map (R.forward.right.app q) ≫ (R.columnIso q).inv ≫ DerivedCategory.Q.map (R.last.right.app q)) ≫ (N.columnIso q).hom = (M.columnIso q).hom ≫ (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) ((Arrow.mk p).cechNerve.obj (op q))).map ((upperStar (ModuleCat.{u + 1} Λ) (finiteCechProjection p q)).mapDerivedCategory.map v)) ∧ M.pointIso.inv ≫ DerivedCategory.Q.map M.augmentation ≫ DerivedCategory.Q.map (finiteCechTotalMap Λ R.forward) ≫ R.totalIso.inv ≫ DerivedCategory.Q.map (finiteCechTotalMap Λ R.last) = (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Y).map v ≫ N.pointIso.inv ≫ DerivedCategory.Q.map N.augmentation) ∧ ∀ (Y' : Scheme.{u}) (h : Y' ⟶ Y), ∃ (M' : FiniteCechResolvedModel Λ (pullback.fst h p) ((upperStar (ModuleCat.{u + 1} Λ) h).mapDerivedCategory.obj K) a) (R : FiniteCechResolvedRoof Λ M.diagram M'.diagram a), (DerivedCategory.Q.map R.forward.left ≫ R.pointIso.inv ≫ DerivedCategory.Q.map R.last.left) ≫ M'.pointIso.hom = M.pointIso.hom ≫ finiteCechRestriction Λ h K ∧ (∀ q : SimplexCategory, (DerivedCategory.Q.map (R.forward.right.app q) ≫ (R.columnIso q).inv ≫ DerivedCategory.Q.map (R.last.right.app q)) ≫ (M'.columnIso q).hom = (M.columnIso q).hom ≫ finiteCechRestriction Λ ((finiteCechBaseMap p h).left.app (op q)) ((upperStar (ModuleCat.{u + 1} Λ) (finiteCechProjection p q)).mapDerivedCategory.obj K) ≫ (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) ((Arrow.mk (pullback.fst h p)).cechNerve.obj (op q))).map (finiteCechBaseCoefficientIso Λ p h K q).hom) ∧ M.pointIso.inv ≫ DerivedCategory.Q.map M.augmentation ≫ DerivedCategory.Q.map (finiteCechTotalMap Λ R.forward) ≫ R.totalIso.inv ≫ DerivedCategory.Q.map (finiteCechTotalMap Λ R.last) = finiteCechRestriction Λ h K ≫ M'.pointIso.inv ≫ DerivedCategory.Q.map M'.augmentation",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The auxiliary definitions specify the canonical unit–Leray restriction, existing Čech nerve and alternating-coface total, compatible resolved diagrams, their actual diagram roofs, and the column-filtration convergence predicate. They construct no arbitrary comparison. The theorem has one postponed proof and includes naturality in coefficients and arbitrary change of base, without asserting column restriction isomorphisms. ModuleCat-valued étale sheaves use the coefficient encoding of def-kun-rgamma-unbounded."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-11fc27956",
+  "group": "NF",
+  "result": "pass",
+  "note": "Full immutable delivery review completed; exact signature, dependencies, edge cases, docstrings, route-pivot compliance, and server compilation verified with no findings."
  }
 }

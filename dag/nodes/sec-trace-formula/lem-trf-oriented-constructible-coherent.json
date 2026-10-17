@@ -141,5 +141,27 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-af452ec93 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-coherent-set-criterion, the parent lem-trf-psi-constructibility-descent (which uses both directions of the item), every cited statement, and unit sk-i-curve-zero. The item statement is unchanged and correct. The new node is the coefficient-free set-valued criterion: not a restated clause, not everything moved down (D1/D2), and no duplicate found by rg over dag/nodes or the main-20261015 blueprint. I tested the small cases Spec k and the empty X. I could not read the source myself: Orgogozo §8.1 is online only and network access is blocked. ILO Exp. XI §2.4-2.5, read locally, gives coherence of oriented products but not the criterion; the WANTED line stands. Not a target node, no SGA cited, no tool_uses needed. I fixed three faults in fixes/: (1) E5 in item step 3: the 'transport' of module operations kept the same cover, but the transported operations are only locally constant; the step is rewritten to refine each U_i by decomposing the finitely many operation morphisms between constant finite sheaves (coproducts of 1). Steps 2-3 now also use def-trf-oriented-nearby-cycles (module inverse image = set inverse image), and proof_deps is updated. (2) B2/B3 in the new node: the statement now defines restriction along P_ab->V_f via lem-trf-oriented-product-universal and spells out 'locally constant with finite set values'; stmt_deps adds def-constructible-stratification, def-weil-constructible-subset and lem-trf-oriented-product-universal, and drops the unused def-trf-oriented-constructible-sheaf. (3) B9: the new node's blueprint.from.via now begins with the item.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrientedConstructibleCoherent",
+  "declaration": "AlgebraicGeometry.orientedConstructible_iff_coherent",
+  "file": "lean/Sheaf/Paper/OrientedConstructibleCoherent.lean",
+  "statement": "theorem orientedConstructible_iff_coherent {X S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S] (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (Λ : Type v) [CommRing Λ] [Finite Λ] (F : Modules.{u, v} f (𝟙 S) Λ) : IsConstructible f (𝟙 S) Λ F ↔ IsCoherentObject.{max (u + 1) v} ((sheafCompose (productTopology.{u, v} f (𝟙 S)) (forget AddCommGrpCat.{max (u + 1) v})).obj ((SheafOfModules.toSheaf _).obj F))",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.orientedProductSetSheaves_hasCoproducts",
+   "AlgebraicGeometry.orientedConstructible_iff_coherent"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-db617368d",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Statement, dependencies, source, Lean signature, docstrings, edge cases, route-pivot compliance, report sections, and per-file compilation all checked successfully."
  }
 }
