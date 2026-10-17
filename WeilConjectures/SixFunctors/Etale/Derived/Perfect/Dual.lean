@@ -227,11 +227,11 @@ section Biduality
 
 variable (A X)
 
-attribute [local instance] _root_.DerivedCategory.braidedCategory
+attribute [local instance] _root_.DerivedCategory.braidedCategoryOfKFlat
 
 /-- The coefficient biduality `K ⟶ K^∨∨`, natural in `K`: the double-dual map
 `CategoryTheory.MonoidalClosed.toIhomIhomUnit` of the braided monoidal closed category
-`D(X_ét)`, for the braiding `DerivedCategory.braidedCategory` of the derived tensor product. -/
+`D(X_ét)`, for the braiding `DerivedCategory.braidedCategoryOfKFlat` of the derived tensor product. -/
 noncomputable def coefficientDualDoubleDual :
     𝟭 _ ⟶ (coefficientDual A X).rightOp ⋙ coefficientDual A X :=
   MonoidalClosed.toIhomIhomNatTrans (𝟙_ _)

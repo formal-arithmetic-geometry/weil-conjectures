@@ -44,13 +44,15 @@ compatibility of `g^*` with the Koszul braidings on homotopy categories. The gen
 follows since every object of `D(Y_ét)` is isomorphic to such a `Qh P`.
 
 The derived braiding identity `DerivedMonoidal.braiding_hom_μ` is first instantiated for a
-general category (`DerivedCategory.braidedCategory_braiding_hom_μ_Qh`), and only then at étale
-sheaves: instantiating it directly at étale sheaves makes the elaborator compare two
+general category (`DerivedCategory.braidedCategoryOfKFlat_braiding_hom_μ_Qh`), and only then at
+étale sheaves: instantiating it directly at étale sheaves makes the elaborator compare two
 elaborations of the monoidal structure (see the implementation notes of
 `WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided`).
 -/
 
 @[expose] public section
+
+attribute [local instance] HomotopyCategory.koszulBraidedCategory
 
 open CategoryTheory Category Limits MonoidalCategory HomologicalComplex
 
@@ -188,11 +190,11 @@ variable [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C]
   [MonoidalPreadditive C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
 
 open Functor.LaxMonoidal in
-/-- The braiding `DerivedCategory.braidedCategory` on objects `Qh K`, `Qh M`:
+/-- The braiding `DerivedCategory.braidedCategoryOfKFlat` on objects `Qh K`, `Qh M`:
 `β_{Qh K, Qh M} ≫ μ_{M, K} = μ_{K, M} ≫ Qh β_{K, M}`, where `β_{K, M}` is the Koszul braiding of
 the homotopy category. -/
-lemma braidedCategory_braiding_hom_μ_Qh (K M : HomotopyCategory C (.up ℤ)) :
-    letI := braidedCategory C
+lemma braidedCategoryOfKFlat_braiding_hom_μ_Qh (K M : HomotopyCategory C (.up ℤ)) :
+    letI := braidedCategoryOfKFlat C
     (β_ (Qh.obj K) (Qh.obj M)).hom ≫ μ Qh M K = μ Qh K M ≫ Qh.map (β_ K M).hom :=
   DerivedMonoidal.braiding_hom_μ Qh (HomotopyCategory.quasiIso C (.up ℤ)) K M
 
@@ -236,7 +238,7 @@ open _root_.DerivedCategory
 lemma derivedBraiding_hom_μ_Qh (X : Scheme.{u})
     (K M : HomotopyCategory (Sheaf X.smallEtaleTopology A) (.up ℤ)) :
     (β_ (Qh.obj K) (Qh.obj M)).hom ≫ μ Qh M K = μ Qh K M ≫ Qh.map (β_ K M).hom :=
-  braidedCategory_braiding_hom_μ_Qh _ K M
+  braidedCategoryOfKFlat_braiding_hom_μ_Qh _ K M
 
 section PreservesFlat
 

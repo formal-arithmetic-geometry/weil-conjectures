@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 
 /-!
 # The homotopy category of cochain complexes is braided
@@ -52,14 +53,21 @@ complexes. -/
 noncomputable def braiding (K L : HomotopyCategory C (.up ℤ)) : K ⊗ L ≅ L ⊗ K :=
   (quotient C (.up ℤ)).mapIso (β_ K.as L.as)
 
+/-- The braiding agrees with the braiding `HomotopyCategory.MonoidalCategory.braiding` underlying
+the instance `HomotopyCategory.MonoidalCategory.braidedCategory`. -/
+lemma braiding_eq_monoidalCategoryBraiding (K L : HomotopyCategory C (.up ℤ)) :
+    braiding K L = ((MonoidalCategory.braiding C (.up ℤ)).app K).app L := rfl
+
 lemma braiding_quotient (K L : CochainComplex C ℤ) :
     braiding ((quotient C _).obj K) ((quotient C _).obj L) = (quotient C _).mapIso (β_ K L) :=
   rfl
 
 /-- The braided monoidal structure on the homotopy category of cochain complexes induced by the
-Koszul braiding, with the hexagon identities proved. It is not an instance: the instance on
-the homotopy category is `HomotopyCategory.MonoidalCategory.braidedCategory`, whose hexagon
-identities are not proved yet. -/
+Koszul braiding, with the hexagon identities proved. Its braiding is that of the instance
+`HomotopyCategory.MonoidalCategory.braidedCategory`
+(`HomotopyCategory.braiding_eq_monoidalCategoryBraiding`), whose hexagon identities are not
+proved yet; it is not an instance, to avoid a diamond, and is meant to be used as a local
+instance. -/
 noncomputable abbrev koszulBraidedCategory : BraidedCategory (HomotopyCategory C (.up ℤ)) where
   braiding := braiding
   braiding_naturality_left {X Y} f Z := by

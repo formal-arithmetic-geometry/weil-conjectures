@@ -11,18 +11,20 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 # The braiding of the derived tensor product
 
 For a braided Grothendieck abelian category `C` with functorial flat resolutions, this file
-names the braiding `DerivedCategory.braidedCategory C` of the derived tensor product on
-`DerivedCategory C`, whose existence is `DerivedCategory.nonempty_braidedCategory`: the braiding
-of `C`, with the Koszul sign rule on complexes, descended along K-flat resolutions
-(`CategoryTheory.DerivedMonoidal.braidedCategory`).
+names the braided structure `DerivedCategory.braidedCategoryOfKFlat C` of the derived tensor
+product on `DerivedCategory C`, whose existence is `DerivedCategory.nonempty_braidedCategory`:
+the braiding of `C`, with the Koszul sign rule on complexes, descended along K-flat resolutions
+(`CategoryTheory.DerivedMonoidal.braidedCategoryOfKFlat`). Its braiding is that of the instance
+`DerivedCategory.braidedCategory`; here the hexagon identities are proved.
 
 ## Implementation notes
 
-`DerivedCategory.braidedCategory` is not an instance, since other braidings of derived categories
-are assumed as instances elsewhere (for instance `AlgebraicGeometry.ProEtale.DerivedBraiding`).
-It is meant to be used as a local instance. It is stated for a general `C`: instantiating it at a
-concrete sheaf category is cheap, while elaborating `DerivedMonoidal.braidedCategory` directly at
-such a category makes the kernel compare two elaborations of the monoidal structure.
+`DerivedCategory.braidedCategoryOfKFlat` is not an instance, since other braidings of derived
+categories are assumed as instances elsewhere (for instance
+`AlgebraicGeometry.ProEtale.DerivedBraiding`). It is meant to be used as a local instance. It is
+stated for a general `C`: instantiating it at a concrete sheaf category is cheap, while
+elaborating `DerivedMonoidal.braidedCategoryOfKFlat` directly at such a category makes the
+kernel compare two elaborations of the monoidal structure.
 -/
 
 @[expose] public section
@@ -44,7 +46,8 @@ variable [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C]
 /-- The braiding of the derived tensor product on `DerivedCategory C`: the braiding of `C`, with
 the Koszul sign rule on complexes, descended along K-flat resolutions. -/
 @[instance_reducible]
-noncomputable def braidedCategory : BraidedCategory (DerivedCategory C) :=
-  DerivedMonoidal.braidedCategory Qh (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
+noncomputable def braidedCategoryOfKFlat : BraidedCategory (DerivedCategory C) :=
+  letI := HomotopyCategory.koszulBraidedCategory (C := C)
+  DerivedMonoidal.braidedCategoryOfKFlat Qh (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
 
 end DerivedCategory

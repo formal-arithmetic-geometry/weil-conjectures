@@ -102,7 +102,7 @@ with the Koszul sign rule on complexes, descended along K-flat resolutions
 `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip`, and is used as a local instance. -/
 noncomputable abbrev derivedBraidedCategory (X : Scheme.{u}) :
     BraidedCategory (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
-  _root_.DerivedCategory.braidedCategory _
+  _root_.DerivedCategory.braidedCategoryOfKFlat _
 
 attribute [local instance] derivedBraidedCategory
 

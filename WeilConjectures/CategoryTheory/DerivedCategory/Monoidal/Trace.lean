@@ -28,6 +28,8 @@ This is used for blueprint `sk-p-trace`, together with `lem-trf-chain-supertrace
 
 @[expose] public section
 
+attribute [local instance] HomotopyCategory.koszulBraidedCategory
+
 universe v u
 
 open CategoryTheory Limits MonoidalCategory Functor.LaxMonoidal Functor.OplaxMonoidal
@@ -42,11 +44,11 @@ local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
 
 instance : IsIso (ε (Qh : _ ⥤ DerivedCategory A)) := inferInstanceAs (IsIso (𝟙 _))
 
-/-- For the braiding `DerivedCategory.braidedCategory` of the derived tensor product, the lax
-monoidal structure of `Qh : K(A) ⥤ D(A)` is compatible with the Koszul braiding of the homotopy
+/-- For the braiding `DerivedCategory.braidedCategoryOfKFlat` of the derived tensor product, the
+lax monoidal structure of `Qh : K(A) ⥤ D(A)` is compatible with the Koszul braiding of the homotopy
 category and the braiding of `D(A)`. -/
 lemma braiding_hom_μ_Qh (X Y : HomotopyCategory A (.up ℤ)) :
-    letI := braidedCategory A
+    letI := braidedCategoryOfKFlat A
     (β_ (Qh.obj X) (Qh.obj Y)).hom ≫ μ Qh Y X = μ Qh X Y ≫ Qh.map (β_ X Y).hom :=
   DerivedMonoidal.braiding_hom_μ _ _ X Y
 
