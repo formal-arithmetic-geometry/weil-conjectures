@@ -183,5 +183,23 @@
   "group": "N4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-b771b9699 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-kan-coherent-nerve-cell-filtration, all cited statements, the ancestor prop-coef-integral-exceptional-adjoint (main-20261015) and Mathlib SimplicialNerve.lean:1-40, which lists the locally-Kan quasicategory theorem as an open Project, so there is no Mathlib leaf. Kerodon and HTT are not in literature/. I checked Kerodon 00LJ / HTT 1.1.5.10 from my own knowledge and re-derived every combinatorial claim myself. Item: the statement matches 00LJ hypothesis by hypothesis (every mapping set Kan gives inner-horn filling), and the universe clause covers Kan_W. Step 1: by the colimit definition of C[K], a horn map gives F_0; the step uses the new node's statement only; Kan fillers exist since m>=1 and outer horns are allowed by def-cbc; a functor out of U(Delta^m) needs only the unit laws, also when x=y; the pushout induction is set up properly. Step 2: def-coef-infinity-category-of-spaces gives mapping sets Fun(S,T); lem-cbc-kan-functor-space-kan (a Mathlib leaf, SSet.instKanComplexObjIhom) with K=S, Z=T makes them Kan; the ambient universe is fine; the declared tool_use is accepted. No cycle: both new dependencies have no deps, and the cyclic lem-coef-coherent-nerve-comparison is rightly not cited. New node, true as stated: only Map(0,n) changes; it is the cube missing its interior and the face x_i=0, i.e. the box (boundary of cube^{n-2} in cube^{n-2}) pushout-product ({1} in Delta^1); this is a finite composite of horn attachments, some outer, which is why j ranges over 0..m. Since 0 has no incoming and n no outgoing maps, the pushouts along U(-) create no composites. Checked n=2 (Lambda^1_0) and n=3,i=1 (Lambda^2_1 then Lambda^2_2). B1-B7 pass: statement only; C[K] and U(X) defined inline; correct blueprint from/via; four kinds of search recorded. It does not restate the item (no Kan target, no nerve). Duplicate search: I read lem-coef-rigidification-boundary-cube (the boundary analogue, not horns), coherent-nerve-relative-cube-comparison, coherent-inner-anodyne-equivalences, pinched-cube-latching, coherent-fixed-vertex-cofibrations and coherent-nerve-comparison; none duplicates the new node or the item. No SGA source is used. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fbbfd5d53",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Every clause matches the node and Kerodon 2.4.5.1/00LJ: any SimplicialCategory A (Type u, Category.{v}) with all sHom Kan has SSet.Quasicategory (SimplicialNerve A), the same nerve the project's CoherentNerve.nerveFunctor uses; the unconditional conjunct SSet.Quasicategory Spaces.infinityCategory.{w} is the nerve of all w-small Kan complexes with internal-Hom enrichment. No extra assumptions; u, v, w independent and bound; edge cases (empty A, empty Hom sets, n<2, empty Kan complex) covered. lean.statement is verbatim the file signature; only the node's lean field changed. No definitions, proof only sorry, source/blueprint docstrings with both proof steps; real worker report and second-reading sections. nt_compile.py on the snapshot module against the local side overlay: rc 0, no errors or warnings. Minor: a 'Theorem the project server' substitution artefact in the report text; the second conjunct duplicates the existing sorry'd Spaces.infinityCategory_quasicategory (allowed, since the node includes that clause)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KanCoherentNerveQuasicategory",
+  "declaration": "CategoryTheory.kan_coherent_nerve_quasicategory",
+  "file": "lean/Sheaf/CategoryTheory/KanCoherentNerveQuasicategory.lean",
+  "statement": "theorem kan_coherent_nerve_quasicategory : (∀ (A : Type u) [Category.{v} A] [SimplicialCategory A], (∀ x y : A, SSet.KanComplex (SimplicialCategory.sHom x y)) → SSet.Quasicategory (SimplicialNerve A)) ∧ SSet.Quasicategory Spaces.infinityCategory.{w}",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

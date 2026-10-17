@@ -27,7 +27,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "def-coef-left-module-operadic-encoding"
+  "def-coef-left-module-operadic-encoding",
+  "def-coef-symmetric-operadic-approximation",
+  "def-coef-relative-symmetric-operadic-algebras"
  ],
  "proof": [
   {
@@ -199,5 +201,26 @@
   "group": "Q118",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-82385ff63 (reviewer sub-agent of L); spot-checked: PASS, with no fixes. Caveat: Higher Algebra is not archived in the project, so I could not open it. I checked both new statements against the HA definitions and theorems I know (2.3.3.6, 2.3.3.25, 2.3.3.23/26 including the unary-equivalence hypothesis, and 2.1.4.6), and I also derived them from the DAG's own nodes. Item: statement unchanged. Its hypotheses on r match def-coef-left-module-operadic-encoding clause for clause, and the approximation clauses match HA 2.3.3.6. Step 1: the recognition hypotheses are exactly the item's, n=0 included, and every object is cofibrant because cofibrations are monomorphisms. Step 2: the marked-equivalence node is applied to the given f. Its strict-fibre caution is unnecessary but harmless, because ⟨1⟩ is alone in its isomorphism class in Fin_* with no nontrivial automorphisms. Step 3: the Mathlib slice-model leaf makes u a weak equivalence between cofibrant objects over P^in, with no properness used. Step 4: I verified the adjunction Hom_N(X,R^L)=Hom_K(L,H_P(X,R)) and that H_P(Y,R)->H_P(X,R) is the pullback of the enriched corner map along the vertex Y->P, so the right adjoint preserves fibrations and trivial fibrations, hence Quillen. Step 5: the derived-adjunction node's Ken Brown clause gives a K-weak equivalence between fibrant D^natural objects. By marked-point-cartesian-model (Map^sharp = core of Fun) together with the localization node, this is a categorical equivalence. Step 6: an elementary n-simplex unpacking; the flat parameter means only the vertexwise inert condition is imposed, and u^* is h -> h∘(f×id). New node marked-equivalence: by the pattern mapping test it is equivalent to the absolute HA 2.3.3.23 algebra equivalence, so it is true. Tested on id, on Cut: Δ^op -> Assoc, and on the fold map P⊔P->P, which shows the colour hypothesis is needed. It is strictly smaller than the item, which is relative over P. New node recognition: the hypotheses make E an ∞-operad, with markings agreeing, so r is a fibration of fibrant objects in the HA 2.1.4.6 pattern model. Checked at n=0 and at r=id. No duplicates: the existing operadic nodes are nonsymmetric, generic model-calculus, or LM definitions (whole-DAG rg search). No cycle from the item (DFS over 408 ancestors). All proof deps are in unit sk-prop-sf-biduality-general, so tool_uses is empty. B1–B7 hold. The blueprint from-place is the item's paragraph-2 ancestor."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77a4fc36d",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Return-L repair verified: the diff from 7750ab8a6d94 only removes the duplicate operad base, inert/active predicates, IsSymmetricInfinityOperad, operadicOverMaps and operadicVertexDiagram, and reuses the landed RelativeSymmetricOperadicAlgebras declarations (finStarBase/Vertex/Edge/Rho, IsSymmetricInertEdge, IsActiveEdge, IsSymmetricInfinityOperad, operadicDiagram, relativeOperadicDiagramComplex); each replacement is equivalent to what it replaces. Item matches node clause by clause: approximation per HA 2.3.3.6 with locally cocartesian rho_i edges via pullback and active cartesian lifts with fixed target, general case as an existential factorisation; strict colour-fibre map of the original f; operadic fibration = isofibration + inert lifts + transport fibre Segal (empty product terminal) + relative output mapping Segal, with no active/limit/presentability assumption; sections fix the base on whole simplices with a vertex-only inert condition; restriction is explicit precomposition; both naturality equalities present. Statement unchanged from live; lean.statement verbatim and declaration lists exact; stmt_deps acyclic; no duplicate names in live lean/Sheaf; relativeOperadicAlgebras is a different marking. No hollow definitions; only sorry is the item theorem; docstrings carry source and blueprint; report has Worker report and Second reading by Q21. nt_compile.py --json of both files: clean, rc 0. Cosmetic only: 12 'the project server' redactions of HA numbers in report.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicApproximationRestriction",
+  "declaration": "SSet.Enhanced.operadicApproximationRestriction",
+  "declarations": [
+   "SSet.Enhanced.operadicApproximationRestriction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicApproximationRestriction.lean",
+  "statement": "theorem operadicApproximationRestriction {C P E : SSet.{u}} [Quasicategory C] [Quasicategory P] [Quasicategory E] (p : P ⟶ finStarBase.{u}) (f : C ⟶ P) (r : E ⟶ P) (hp : IsSymmetricInfinityOperad p) (hf : IsOperadicApproximation p f) (hcolour : IsFunctorEquivalence (operadicColourMap p f)) (hr : IsSymmetricOperadicFibration p r) : IsFunctorEquivalence (operadicSectionRestriction p r f) ∧ (∀ (E' : SSet.{u}) (r' : E' ⟶ P) (h : E ⟶ E') (hc : h ≫ r' = r) (hm : ∀ e : Δ[1] ⟶ E, IsSymmetricInertEdge p (e ≫ r) → IsCocartesianEdge r e → IsCocartesianEdge r' (e ≫ h)), operadicSectionRestriction p r f ≫ operadicSectionPostcompose p r r' f h hc hm = operadicSectionPostcompose p r r' (𝟙 P) h hc hm ≫ operadicSectionRestriction p r' f) ∧ ∀ (P' D : SSet.{u}) (j : P' ⟶ P) (g : D ⟶ C) (b : D ⟶ P') (hc : g ≫ f = b ≫ j), operadicSectionRestriction p r f ≫ operadicLiftRestriction p r f (b ≫ j) g hc = operadicSectionRestriction p r j ≫ operadicLiftRestriction p r j (b ≫ j) b rfl",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
