@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-trf-global-operator-naturality",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Naturality of the global operator",
@@ -14,32 +14,131 @@
  },
  "stmt_deps": [
   "def-trf-global-operator",
-  "def-trf-correspondence"
+  "def-trf-correspondence",
+  "def-trf-admissibility",
+  "def-trf-coefficient-conventions"
  ],
  "proof": [
   {
-   "text": "By [def-trf-global-operator] the operator $T_c(u)$ is the\ncomposite of the five arrows displayed there. Each of them is\nnatural in $u$ and $K$: the unit of the adjunction\n$Lc_2^*\\dashv Rc_{2*}$ and the counit of the adjunction\n$Rc_{1!}\\dashv Rc_1^!$ of [def-trf-admissibility] are natural\ntransformations, the two comparison isomorphisms are the specified\nstructure isomorphisms of the six-operations package and are natural\nin the coefficient object, and $R\\Gamma_c(C,-)$ is a functor, so\nthat $R\\Gamma_c(C,u)$ is natural in $u$ and in $K$ by\n[def-trf-coefficient-conventions]. A composite of natural\narrows is natural, which is the displayed commutativity.",
+   "text": "Keep the scheme correspondence $c$ fixed. By [def-trf-correspondence], the two coefficient maps have types $u:Lc_2^*K\\to Rc_1^!K$ and $u':Lc_2^*K'\\to Rc_1^!K'$. Write $P=Lc_2^*$, $Q=Rc_1^!$, $H=Rc_{2*}$, $J=Rc_{1!}$, $F=R\\Gamma_c(X,-)$ and $G=R\\Gamma_c(C,-)$, with $F$ and $G$ the functors $\\operatorname{Fib}_s\\circ Ra_!$ of [def-trf-coefficient-conventions]. In [def-trf-global-operator], let $\\eta:\\operatorname{id}\\to HP$ be the unit of $P\\dashv H$ (this is the ordinary pullback adjunction, not the exceptional adjunction of admissibility), and let $\\varepsilon:JQ\\to\\operatorname{id}$ be the exceptional counit supplied by [def-trf-admissibility]. The properness of $c_2$ and the composition law in clause (3) of [prop-functor-package] give the natural comparison $\\alpha:FHP\\xrightarrow{\\sim}GP$; the inverse composition law for $a_Xc_1=a_C$ gives $\\beta:GQ\\xrightarrow{\\sim}FJQ$. These are precisely the comparisons specified in [def-trf-global-operator]. All their domains are the given finite-coefficient constructible domains. Put $p_K=\\alpha_K\\circ F(\\eta_K)$ and $q_K=F(\\varepsilon_K)\\circ\\beta_K$. The five-arrow definition now reads $T_c(u)=q_K\\circ G(u)\\circ p_K$, and the formula with $K',u'$ defines $T_c(u')$.",
    "uses": [
     "def-trf-global-operator",
+    "def-trf-correspondence",
     "def-trf-admissibility",
-    "def-trf-coefficient-conventions"
+    "def-trf-coefficient-conventions",
+    "prop-functor-package"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/lem-trf-global-operator-naturality.proof.md",
+    "place": "First sentence and the unit, counit, comparison-isomorphism, and functoriality clauses"
+   }
+  },
+  {
+   "text": "Let $f:K\\to K'$ be the stated morphism of coefficient correspondences. Its commuting coefficient square means $Q(f)\\circ u=u'\\circ P(f)$. Naturality of $\\eta$ says $HP(f)\\circ\\eta_K=\\eta_{K'}\\circ f$, and naturality of $\\alpha$ says $GP(f)\\circ\\alpha_K=\\alpha_{K'}\\circ FHP(f)$. Apply $F$ to the first equality and substitute it into the second to obtain $GP(f)\\circ p_K=p_{K'}\\circ F(f)$. Naturality of $\\varepsilon$ says $f\\circ\\varepsilon_K=\\varepsilon_{K'}\\circ JQ(f)$, and naturality of $\\beta$ says $FJQ(f)\\circ\\beta_K=\\beta_{K'}\\circ GQ(f)$. Apply $F$ to the counit equality and substitute the comparison equality to obtain $F(f)\\circ q_K=q_{K'}\\circ GQ(f)$. Finally, applying the functor $G$ to the coefficient square gives $GQ(f)\\circ G(u)=G(u')\\circ GP(f)$. Here $GP(f)$ means $G(P(f))$, and the other juxtaposed functors are interpreted in the same way. These three identities are the naturality squares for the first two, last two, and middle arrows, respectively.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/lem-trf-global-operator-naturality.proof.md",
+    "place": "Each of the five arrows is natural: explicit component equations using the data identified in step 1"
+   }
+  },
+  {
+   "text": "Using the three identities of step 2 in order, and associativity of composition, compute\n$$\\begin{aligned}\nF(f)\\circ T_c(u)\n&=F(f)\\circ q_K\\circ G(u)\\circ p_K\\\\\n&=q_{K'}\\circ GQ(f)\\circ G(u)\\circ p_K\\\\\n&=q_{K'}\\circ G(u')\\circ GP(f)\\circ p_K\\\\\n&=q_{K'}\\circ G(u')\\circ p_{K'}\\circ F(f)\n=T_c(u')\\circ F(f).\n\\end{aligned}$$\nSince $F(f)=R\\Gamma_c(X,f)$, this is exactly the commutative square asserted in the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/lem-trf-global-operator-naturality.proof.md",
+    "place": "Final sentence: composition of natural arrows, expanded into the commuting-square calculation"
+   }
   }
  ],
  "proof_deps": [
   "def-trf-global-operator",
+  "def-trf-correspondence",
   "def-trf-admissibility",
-  "def-trf-coefficient-conventions"
+  "def-trf-coefficient-conventions",
+  "prop-functor-package"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-operator/lem-trf-global-operator-naturality.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/lem-trf-global-operator-naturality.proof.md",
+  "place": "Entire blueprint proof; explicit component equations and composition calculation supplied by the worker"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the compactly supported cohomology endomorphism induced by an intertwining map of cohomological correspondences",
+   "results": "8 returned hits, all group-cohomology functoriality declarations, including groupCohomology.map_comp and cochainsMap_f_1_comp_cochainsIso₁; none states compact-support naturality for scheme cohomological correspondences.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "globalOperator|global_operator|cohomologicalCorrespondence",
+   "results": "0 hits for globalOperator|global_operator|cohomologicalCorrespondence in the pinned Mathlib source.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism intertwining two cohomological correspondences commutes with their induced endomorphisms on compact support cohomology",
+   "results": "8 returned hits: Representation.IsIntertwiningMap and its constructor, Representation.IntertwiningMap.ctorIdx, group-cohomology functoriality declarations and CochainComplex.mkHom. These concern representations, ordinary group cohomology, or chain maps; none states the scheme-cohomological-correspondence operator theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Adjunction.unit",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An intertwining morphism of coefficient objects makes the induced compactly supported cohomology operators of a scheme correspondence commute",
+   "results": "8 group-cohomology functoriality hits, including groupCohomology.π_map_apply and cochainsMap_f_3_comp_cochainsIso₃; none concerns compact-support operators of scheme correspondences.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "globalOperator|cohomological[Cc]orrespondence|compactSupport",
+   "results": "25 hits on compact support of functions in topology and analysis, including HasCompactSupport.comp_smul and HasCompactSupport.div; none is a derived compact-support correspondence operator.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the global operator of a cohomological correspondence with proper ordinary leg",
+   "results": "8 hits including CategoryTheory.Sheaf.ΓRes_naturality, ΓObjEquivHom_naturality, Scheme.Γevaluation_naturality_apply and MorphismProperty.naturalityProperty. These are ordinary sections or generic naturality, not the specified geometric operator.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a composite constructed by whiskering adjunction unit and counit with natural isomorphisms and an intertwining morphism",
+   "results": "8 hits on adjunction mates and conjugate equivalences, including CategoryTheory.unit_conjugateEquiv and CategoryTheory.conjugateEquiv_counit. Their displayed types compare mates for two adjunctions; none states the compact-support operator construction or its coefficient intertwining theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits, led by CategoryTheory.NatTrans.naturality (Mathlib/CategoryTheory/NatTrans.lean, structure field at lines 53-57). This is the component equation used in elementary step 2, not a declaration of the geometric global-operator theorem; no exact or one-line geometric specialization was found.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "globalOperator.*natur|natur.*globalOperator|cohomological.*[Cc]orrespondence",
+   "results": "0 hits in the pinned Mathlib source.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -67,5 +166,29 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-operator"
+ "unit": "sk-d-operator",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-global-operator-naturality",
+  "worker": "stage1",
+  "summary": "Retained the imported statement and added its missing admissibility and coefficient-convention statement dependencies. Expanded the five-arrow proof into the typed first/middle/last composites, the component naturality identities, and the explicit final commuting-square calculation. The ordinary pullback unit is supplied by the global-operator definition, the exceptional counit by admissibility, and the natural comparisons by clause (3) of the functor package. No new nodes or Mathlib leaves.",
+  "blueprint": "Step 1 identifies the five arrows and the coefficient functor in the current main-20261015 proof; step 2 expands its naturality assertions for units, counits, comparison isomorphisms and the coefficient map; step 3 writes the calculation behind its final composition sentence.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "Clause (3) supplies the canonical natural proper-coincidence and compact-support composition comparisons used by the global-operator definition. This generic six-functor interface does not replace any step of the global-operator unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-248661cbb",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-248661cbb (reviewer sub-agent of L); spot-checked: I read the whole item and every cited node in full. The statement matches main-20261015 and master sk-d-operator/lem-trf-global-operator-naturality.md word for word and is unchanged, so no target is weakened. With c fixed, a morphism of correspondences means Rc1^!(f)∘u=u'∘Lc2^*(f); this is forced by the types in def-trf-correspondence. Step 1 rebuilds the five arrows of def-trf-global-operator. The unit comes from Lc2^*⊣Rc2* (fix-prop-adjunctions (1)). α is Fib(γ_{c2})∘Fib(Ra_X!(p_{c2}^{-1})) and β is γ_{c1}^{-1}, both from prop-functor-package clause (3). The natural counit comes from def-trf-admissibility, and R\\u0393_c=Fib_s∘Ra_! comes from def-trf-coefficient-conventions. Each naturality used is in the statements, not in any proof. I recomputed the component equations of step 2 (p-square via α naturality at P(f) plus F applied to the unit naturality; q-square via counit naturality and β; middle square = G of the coefficient square) and the chain in step 3; all domains agree. Properness is used only for c2. Edge cases: the identity correspondence reduces to F(f)F(u)=F(u')F(f); zero K, zero f and the empty X give zero; n=1 is covered. Accepted tool_use: prop-functor-package, the realized package that sk-d-six only specifies; it is used as a black box for natural comparisons. Duplicate check: the triangulated, perfect and graph-operator nodes state different results, and two of them cite this item consistently. No new nodes, no SGA, three kinds of search recorded. No fixes."
+ }
 }

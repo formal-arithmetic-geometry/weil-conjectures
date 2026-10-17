@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-thm-vanishing",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Vanishing in the universal curve test",
@@ -13,34 +13,153 @@
   "place": "node sk-thm-vanishing, order 1465"
  },
  "stmt_deps": [
-  "sk-def-smooth"
+  "def-sbc-smooth-morphisms",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "sbc-def-base-change-square",
+  "def-sbc-normal-dominant-galois",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-etale-sheaves"
  ],
  "proof": [
   {
-   "text": "*Reduction to $\\Z/d\\Z$.* The higher direct images of a sheaf of\n$\\Lambda$-modules are those of its underlying abelian sheaf. As an abelian\ngroup $\\Lambda/d\\Lambda$ has exponent dividing $d$, so it is a direct sum of\ncyclic groups $\\Z/d'\\Z$ with $d'\\mid d$, and the constant sheaf\n$\\Lambda/d\\Lambda$ is the corresponding direct sum of constant sheaves\n$\\Z/d'\\Z$. Since $h$ is affine (a base change of $f$), it is quasi-compact\nand quasi-separated, so $R^qh_*$ commutes with direct sums. Each $d'\\mid d$\nis invertible on $S$. It therefore suffices to prove $R^qh_*(\\Z/d\\Z)=0$ for\n$q\\ge1$ and every integer $d$ invertible on $S$.",
+   "text": "Put $n=|d|$. Since $A$ is a nonzero domain and $d$ is invertible in $A$, $d\\ne0$, hence $n\\ge1$. The ideals $d\\Lambda$ and $n\\Lambda$ agree, since $d=\\pm n$, and $n$ is invertible on $S$. Fix a positive cohomological degree $q$, regarded as a natural number. These replacements do not change the coefficient sheaf or the desired conclusion.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-vanishing/sk-thm-vanishing.proof.md",
+    "place": "Reduction to cyclic coefficients; explicit normalization of the signed integer d"
+   }
   },
   {
-   "text": "$R^qh_*(\\Z/d\\Z)$ is the sheaf associated with\n$U\\mapsto H^q(U\\times_S\\Spec K,\\Z/d\\Z)$ on $X_{\\Et}$; we must kill\neach $\\xi$ in one of these groups on an étale cover of $U$.",
-   "uses": [],
-   "elementary": null
+   "text": "The map $g:\\operatorname{Spec}K\\to S=\\operatorname{Spec}A$ is a morphism between affine schemes and therefore affine by [lem-weil-pbc-morphism-affine-schemes-affine]. In the displayed Cartesian square, $h:Y\\to X$ is the base change of $g$ along $f$ (not the base change of $f$). Clauses (1) and (3) of [lem-weil-pbc-affine-morphism-permanence] make $h$ affine and then quasi-compact and quasi-separated. These are precisely the geometric hypotheses needed for coefficient reduction.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "01SH, lemma-morphism-affines-affine; 01SD, lemma-base-change-affine; 01S7, lemma-affine-separated. Corrects the side named in the blueprint reduction paragraph."
+   }
   },
   {
-   "text": "- $q>1$: $U\\times_S\\Spec K$ is an affine smooth curve over\n$K$, and [sk-prop-cd-affine] gives the vanishing.\n- $q=1$: by [sk-prop-normal-form] replace $U$ by an étale\ncover with $U\\to V\\to S$, $U\\to V$ affine with geometrically connected fibres\nand a section $\\sigma$, $V\\to S$ étale ($f$ is smooth, so it has\ngeometrically reduced fibres, and $U\\to V$ is smooth because $U\\to S$ is\nsmooth and $V\\to S$ is étale); by\n[sk-prop-etale-normal], $V$ is an open\nof the normal $S$, so we may assume $X\\to S$ affine smooth, with\ngeometrically connected fibres and a section $\\sigma$, and\n$\\xi\\in H^1(Y,\\Z/d\\Z)$. By [sk-prop-ext-invariance] the pullback\nmap $H^1(X_L,\\Z/d\\Z)\\to H^1(Y,\\Z/d\\Z)$ is an isomorphism, so $\\xi$ comes from a class on\n$X_L$; by [sk-prop-input-torsors] this\nclass is a $\\Z/d\\Z$-torsor $P\\to X_L$, a finite étale cover with a\nfree transitive $\\Z/d\\Z$-action. It need not be connected ($X_L$ is\nconnected, and $P$ is connected only when the class corresponds to a\n*surjection* $\\pi_1(X_L)\\to\\Z/d\\Z$), so it need not be Galois;\nlet $P_0\\subseteq P$ be a connected component. Then $P_0\\to X_L$ is\na finite étale Galois cover whose group is the stabiliser\n$G\\subseteq\\Z/d\\Z$ of $P_0$ (the image of $\\pi_1(X_L)$), $|G|$\ndivides $d$, and $P$ is the torsor induced from the $G$-torsor\n$P_0$; in particular $P_0\\to X_L$ trivializes $P$ (the diagonal\nsection of $P_0\\times_{X_L}P_0$). Over the $L$-point $\\sigma(\\eta)$\nthe cover $P_0$ is split ($L$ algebraically closed), so $P_0$ has an\n$L$-point above $\\sigma(\\eta)$; by [sk-prop-input-spreading] $P_0$\n($G$ is a finite abelian group of order invertible on $S$, and $P_0$ is a\n$G$-torsor) spreads to a $G$-torsor $X'\\to X$ with $X'\\times_XX_L\\cong P_0$\n$G$-equivariantly; then $X'\\times_XY\\to Y$ is the pullback of\n$P_0\\to X_L$, over which $P$, hence $\\xi$, is trivial, so the class\nof $\\xi$ is killed in $H^1(X'\\times_XY,\\Z/d\\Z)$: $\\{X'\\to X\\}$ is\nthe required étale cover and the sheaf is zero.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $e$ be any natural-number divisor of $n$. Then $e\\ge1$, and writing $n=ea$ shows that $e$ is invertible on $S$: an inverse is $a n^{-1}$. Apply [sbc-thm-universal-test-vanishing] to the same square and integer $e$. Its hypotheses are exactly those already assumed here: $X\\to S$ is affine smooth of relative dimension one with $X$ affine; $A$ is a normal domain with algebraically closed fraction field $L$; $K/L$ is an algebraically closed extension; and $g$ is the specified geometric generic map, induced by $A\\subset L\\subset K$. It yields $R^q h_*\\underline{\\mathbf Z/e\\mathbf Z}=0$ as an abelian sheaf for every $e\\mid n$. This existing split in the same unit carries the sheafified-presheaf argument, affine-curve vanishing for $q>1$, and the slicing, invariance, torsor-component and spreading argument for $q=1$; none of those steps is replaced.",
+   "uses": [
+    "sbc-thm-universal-test-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-vanishing/sk-thm-vanishing.proof.md",
+    "place": "The cyclic case: sheafified cohomology presheaf paragraph and both degree bullets, already realized by sbc-thm-universal-test-vanishing"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-constant-module-higher-direct-image-cyclic-reduction] to $h$, the arbitrary commutative ring $\\Lambda$, and the natural numbers $n,q$. Step 2 gives its quasi-compact and quasi-separated hypotheses; step 3 supplies its vanishing hypothesis for every divisor of $n$. Its conclusion is exactly $R^q h_*\\underline{\\Lambda/n\\Lambda}=0$ in sheaves of $\\Lambda$-modules. By step 1 this is $R^q h_*\\underline{\\Lambda/d\\Lambda}=0$. Since $q\\ge1$ was arbitrary, all the asserted higher direct images vanish. No finiteness hypothesis on $\\Lambda$ is imposed by the cited reduction.",
+   "uses": [
+    "lem-sbc-constant-module-higher-direct-image-cyclic-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-vanishing/sk-thm-vanishing.proof.md",
+    "place": "Reduction to Z/dZ, read with Stacks 03Q8 (lemma-higher-direct-images), 03Q5 (lemma-colimit), and 03FD (lemma-cohomology-modules-abelian-agree); the existing coefficient-reduction node packages these inputs"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-constant-module-higher-direct-image-cyclic-reduction",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "sbc-thm-universal-test-vanishing"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-vanishing/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-vanishing/sk-thm-vanishing.proof.md",
+  "place": "Reduction to cyclic coefficients, reusing the already split cyclic theorem of the same unit and the existing reviewed coefficient-transfer interface"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "vanishing of higher direct images of constant module sheaf on a geometric generic fibre of an affine smooth relative curve",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.Modules.instAbelian; AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.AffineSpace.not_isIntegralHom; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "vanishing higher direct image constant sheaf affine smooth curve algebraically closed field",
+   "results": "8 hits: CategoryTheory.constantSheaf; CategoryTheory.constantSheafΓAdj; AlgebraicGeometry.StructureSheaf.res_const; LightCondensed.IsDiscrete; CategoryTheory.Sheaf.IsConstant.mem_essImage; CategoryTheory.Sheaf.isConstant_iff_mem_essImage; CategoryTheory.Sheaf.IsConstant.casesOn; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "étale cohomology of smooth affine curve over algebraically closed field vanishes above degree one",
+   "results": "8 hits: Algebra.FormallyEtale.subsingleton_h1Cotangent; Algebra.IsStandardSmooth.subsingleton_h1Cotangent; Algebra.formallyEtale_iff; Algebra.etaleLocus_eq_compl_support; Algebra.FormallySmooth.subsingleton_h1Cotangent; Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat; Algebra.SubmersivePresentation.subsingleton_h1Cotangent; Algebra.FormallySmooth.iff_subsingleton_and_projective",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher direct image of constant coefficients on affine curve is zero in positive degree",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.res_const'; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; Polynomial.coeff_C_succ; CategoryTheory.Sheaf.mem_essImage_of_isConstant; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.StructureSheaf.const_zero; CategoryTheory.Sheaf.IsConstant.mk; CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Functor.rightDerived",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantZMod|higherDirectImage",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage.*constant|isZero.*higherDirectImage",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of constant torsion sheaves along the geometric generic fibre of a smooth affine curve vanish",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.res_const, AlgebraicGeometry.StructureSheaf.res_const', CategoryTheory.Sheaf.IsConstant.casesOn, CategoryTheory.Sheaf.IsConstant.recOn, ModuleCat.Tilde.res_const, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure-sheaf sections, constant-sheaf definitions or smooth loci, not etale higher-direct-image vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The higher direct images of a constant torsion sheaf along the geometric generic fibre inclusion of a smooth affine curve over a normal domain with algebraically closed fraction field vanish in positive degrees",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.AffineSpace.not_isIntegralHom, Algebra.smoothLocus_eq_compl_support_inter, AlgebraicGeometry.stalkMap_injective_of_isAffine",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure-sheaf sections, constant-sheaf definitions or smooth loci, not etale higher-direct-image vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived direct image of a locally constant torsion etale sheaf vanishes over a geometric generic fibre of a smooth relative curve",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.exists_lift_of_germInjective_aux, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.exists_lift_of_germInjective",
+   "date": "2026-10-17",
+   "verdict": "no match: results are about structure-sheaf sections, infinitesimal morphisms and etale algebra neighborhoods, not torsion etale higher-direct-image vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(constantSheaf|locallyConstant)|higherDirect.*(ZMod|constant)",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -178,5 +297,29 @@
     }
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-thm-vanishing",
+  "worker": "stage1",
+  "summary": "Kept the current main-20261015 statement, filled its actual definition dependencies, and reused the already split cyclic vanishing theorem in this unit together with the reviewed arbitrary-module coefficient-reduction lemma. Normalized signed d and verified every divisor is invertible. Corrected the blueprint side error: h is the base change of g, with affineness and qcqs supplied by two existing Mathlib leaves. Corrected the prior report: bounded-exponent abelian groups do admit cyclic direct-sum decompositions without finite generation. No new nodes were needed.",
+  "blueprint": "Steps 1, 2 and 4 realize the current proof reduction paragraph; step 3 reuses sbc-thm-universal-test-vanishing, already realizing both original unit steps and the current proof cyclic sheafification/affine-curve/slicing/torsor/spreading route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-constant-module-higher-direct-image-cyclic-reduction",
+    "why": "Generic transfer from vanishing of cyclic abelian higher direct images to arbitrary constant Lambda/dLambda module coefficients. The cyclic theorem of this unit does not state coefficient transfer; this supplies precisely the current blueprint reduction paragraph without replacing the curve-test route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-constant-module-higher-direct-image-cyclic-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-74c79220c",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-74c79220c (reviewer sub-agent of L); spot-checked: I read the item, the four cited statements and proofs, the definitions in stmt_deps, the main-20261015 _section and proof, the unit record and the slopmaster2 Lean statement (Vanishing.lean:346, coefficients are Λ-module constantModSheaf). The statement is the current blueprint's, word for word, and not weakened; its coefficients are sheaves of Λ-modules, matching the Lean. Step 1 (elementary): d≠0 because A is a nonzero domain, dΛ=nΛ, and n is a unit. Step 2: Stacks 01SH and Mathlib isAffineHom_of_isAffine make g affine; clauses (1) and (3) of the permanence leaf make h affine and qcqs. The delivery correctly fixes the blueprint's wrong side: h is the base change of g, not of f. Step 3: every hypothesis of sbc-thm-universal-test-vanishing (same unit, NC-reviewed) is met with integer e dividing n, and e is invertible since e·(a n^{-1})=1. Its conclusion is the abelian vanishing of R^q h_* Z/e. Step 4: lem-sbc-constant-module-higher-direct-image-cyclic-reduction (qcqs h, any Λ, natural n and q) gives R^q h_*(Λ/nΛ)=0 as Λ-modules, which is Λ/dΛ by step 1. I accept its tool_use: it is a generic coefficient transfer, it replaces no curve-test step, and it is the same reduction the Lean proof uses. Over the transitive closure of all cited nodes there is no cycle. There are no new nodes, and the grep for Λ/dΛ found no duplicate; the only citer, sk-lem-induction, uses exactly this Λ-form. Edge cases checked: d=±1, Λ=0, negative d, empty X, and the affine line with K=L. No fixes."
  }
 }
