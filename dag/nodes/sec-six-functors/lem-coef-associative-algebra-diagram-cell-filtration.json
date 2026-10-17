@@ -251,5 +251,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AssociativeAlgebraDiagramCellFiltration",
+  "declaration": "HomotopicalAlgebra.associativeAlgebraDiagramCellFiltration",
+  "declarations": [
+   "HomotopicalAlgebra.algebraDiagramInitialMap",
+   "HomotopicalAlgebra.freeAlgebraDiagramCells",
+   "HomotopicalAlgebra.associativeAlgebraDiagramCellFiltration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AssociativeAlgebraDiagramCellFiltration.lean",
+  "statement": "theorem associativeAlgebraDiagramCellFiltration {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [MonoidalCategory M] (_hM : CombinatorialModelCategory.{u, v, v} M) (_leftAdj : ∀ X : M, ((tensoringLeft M).obj X).IsLeftAdjoint) (_rightAdj : ∀ X : M, ((tensoringRight M).obj X).IsLeftAdjoint) (_unit : IsCofibrant (𝟙_ M)) (_pushoutProduct : ∀ (f g : Arrow M), Cofibration f.hom → Cofibration g.hom → Cofibration ((MonoidalCategory.Arrow.pushoutProduct.obj f).obj g).hom ∧ (WeakEquivalence f.hom ∨ WeakEquivalence g.hom → WeakEquivalence ((MonoidalCategory.Arrow.pushoutProduct.obj f).obj g).hom)) (_monoidAxiom : NonsymmetricMonoidAxiom M) (W : AssociativeWordFiltration.Construction M) (tr : AssociativeAlgebraTransfer W) {J : Type v} (a : J → Arrow M) (_generating : (MorphismProperty.ofHoms (fun t ↦ (a t).hom)).rlp = trivialFibrations M) (_cofibrant : ∀ t : J, IsCofibrant (a t).left ∧ IsCofibrant (a t).right) {I : Type v} [SmallCategory I] (S : ModelCategory (I ⥤ M)) (R : ModelCategory (I ⥤ Mon M)) (_weakS : S.categoryWithWeakEquivalences.weakEquivalences = (weakEquivalences M).functorCategory I) (_fibS : S.categoryWithFibrations.fibrations = (fibrations M).functorCategory I) (_weakR : R.categoryWithWeakEquivalences.weakEquivalences = tr.model.categoryWithWeakEquivalences.weakEquivalences.functorCategory I) (_fibR : R.categoryWithFibrations.fibrations = tr.model.categoryWithFibrations.fibrations.functorCategory I) (A : I ⥤ Mon M) (_hA : R.categoryWithCofibrations.cofibrations (algebraDiagramInitialMap W A)) : ∃ (Z : I ⥤ Mon M) (s : A ⟶ Z) (r : Z ⟶ A), s ≫ r = 𝟙 A ∧ MorphismProperty.transfiniteCompositions.{v} (freeAlgebraDiagramCells W S a).pushouts (algebraDiagramInitialMap W Z)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-47c7231fa",
+  "group": "N9",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, edge cases and verbatim Lean signature pass; scompile.py reproduced clean compilation. Repaired H11 with a complete report replacement in fixes/ supplying the independent second reading. Details in review.md. No Lean, node or branch changes."
  }
 }
