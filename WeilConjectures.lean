@@ -239,6 +239,7 @@ public import WeilConjectures.Algebra.Homology.DerivedFreeModuleHomology
 public import WeilConjectures.Algebra.Homology.DerivedHomFiniteFreeModel
 public import WeilConjectures.Algebra.Homology.DerivedHomFiniteFreeModelAux
 public import WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Algebra.Homology.DerivedInternalHomComparison
 public import WeilConjectures.Algebra.Homology.DerivedInternalHomShiftComparison
 public import WeilConjectures.Algebra.Homology.DerivedInternalHomShiftLeft
 public import WeilConjectures.Algebra.Homology.DerivedInternalHomShiftRight
@@ -334,9 +335,11 @@ public import WeilConjectures.Algebra.Homology.FreeResolutionSesSplit
 public import WeilConjectures.Algebra.Homology.FreeRestrictionTorBound
 public import WeilConjectures.Algebra.Homology.GradedScalarExtensionCoherence
 public import WeilConjectures.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplexComponents
 public import WeilConjectures.Algebra.Homology.HomComplexDualTotalComparison
 public import WeilConjectures.Algebra.Homology.HomComplexGlobalCochains
 public import WeilConjectures.Algebra.Homology.HomComplexGlobalHomotopy
+public import WeilConjectures.Algebra.Homology.HomComplexInternalHomComparison
 public import WeilConjectures.Algebra.Homology.HomComplexMappingCone
 public import WeilConjectures.Algebra.Homology.HomComplexMappingConeDifferential
 public import WeilConjectures.Algebra.Homology.HomComplexProjections
