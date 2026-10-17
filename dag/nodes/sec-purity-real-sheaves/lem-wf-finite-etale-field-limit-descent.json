@@ -287,5 +287,29 @@
   "group": "Q109",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q109-9ec33c685 (reviewer sub-agent of L); spot-checked: Read the complete item, route, cited DAG statements, Stacks sources, and report. All three descent clauses and hypotheses check out; edge cases, affine transitions, qcqs conditions, base-change identifications, searches, and route restrictions pass. No new nodes, duplicates, hidden long steps, forbidden SGA, or route-pivot machinery found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteEtaleFieldLimitDescent",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtaleFieldLimitDescent",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.fieldBaseChangeMap",
+   "AlgebraicGeometry.Scheme.finiteEtaleFieldRefinementMap",
+   "AlgebraicGeometry.Scheme.finiteEtaleFieldLimitDescent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/FiniteEtaleFieldLimitDescent.lean",
+  "statement": "theorem finiteEtaleFieldLimitDescent {K L : Type u} [Field K] [Field L] [Algebra K L] [Algebra.IsSeparable K L] (X₀ : Over (Spec (.of K))) [IsSeparated X₀.hom] [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] : (∀ P : (pullback X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap K L)))).FiniteEtale, ∃ (E : IntermediateField K L) (_ : FiniteDimensional K E) (P_E : (pullback X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap K E)))).FiniteEtale), Nonempty ((FiniteEtale.pullback (fieldBaseChangeMap X₀ E.val)).obj P_E ≅ P)) ∧ (∀ (E : IntermediateField K L) (_ : FiniteDimensional K E) (P_E Q_E : (pullback X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap K E)))).FiniteEtale) (f : (FiniteEtale.pullback (fieldBaseChangeMap X₀ E.val)).obj P_E ⟶ (FiniteEtale.pullback (fieldBaseChangeMap X₀ E.val)).obj Q_E), ∃ (E' : IntermediateField K L) (_ : FiniteDimensional K E') (h : E ≤ E') (f' : (FiniteEtale.pullback (fieldBaseChangeMap X₀ (IntermediateField.inclusion h))).obj P_E ⟶ (FiniteEtale.pullback (fieldBaseChangeMap X₀ (IntermediateField.inclusion h))).obj Q_E), finiteEtaleFieldRefinementMap X₀ h P_E ≫ f'.hom.left = f.hom.left ≫ finiteEtaleFieldRefinementMap X₀ h Q_E) ∧ (∀ (E : IntermediateField K L) (_ : FiniteDimensional K E) (P_E Q_E : (pullback X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap K E)))).FiniteEtale) (f_E h_E : P_E ⟶ Q_E), (FiniteEtale.pullback (fieldBaseChangeMap X₀ E.val)).map f_E = (FiniteEtale.pullback (fieldBaseChangeMap X₀ E.val)).map h_E → ∃ (E' : IntermediateField K L) (_ : FiniteDimensional K E') (h : E ≤ E'), (FiniteEtale.pullback (fieldBaseChangeMap X₀ (IntermediateField.inclusion h))).map f_E = (FiniteEtale.pullback (fieldBaseChangeMap X₀ (IntermediateField.inclusion h))).map h_E)",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The three clauses are conjuncts. The two helpers construct only the canonical maps induced by algebra homomorphisms and fibre-product projections. Morphism descent uses their commuting square, equivalent to equality after canonical pullback associativity."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c83f088a",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Read node, 5 stmt deps, Stacks 0BTV place, module, report, and the exact FiniteEtale/FiniteEtale.pullback declarations. Hypotheses match exactly (Field/Algebra/Algebra.IsSeparable; X0 over Spec K with IsSeparated+LocallyOfFiniteType+QuasiCompact; finite intermediate fields via IntermediateField+FiniteDimensional), with no stronger assumptions. Clauses (1) iso over X_L and (3) eventual equality are exact; (2) refinement-square form checked equivalent to base-change equality by fibre-product pasting (the snd component is automatic since f is an X_L-morphism). Edge cases (empty, L=K, E'=E, any characteristic, single universe u) are covered. Helpers fieldBaseChangeMap/finiteEtaleFieldRefinementMap are canonical pullback.maps with no sorry axiom, have source/blueprint docstrings and no name clash. Main theorem is sorry only, with 9-step proof docstring. lean.statement is verbatim; only the lean key changed in the node. nt_compile --json is clean; a probe confirmed error reporting and that sorryAx is only on the main theorem. No pro-etale substitute, no build, no writes."
  }
 }

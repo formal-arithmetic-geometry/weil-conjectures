@@ -172,5 +172,24 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-eaf49bf81 (reviewer sub-agent of L); spot-checked: Reviewed the item, unit, cited nodes, blueprint proof, coefficient categories, Frobenius base change, edge cases, route restrictions, and graph dependencies. No mathematical or structural faults found; review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.DeligneLaumon.Reduction.FinitePushforwardPunctual",
+  "declaration": "AlgebraicGeometry.WeilSheaf.punctualWeights_lowerStar_of_isFinite",
+  "file": "lean/Sheaf/DeligneLaumon/Reduction/FinitePushforwardPunctual.lean",
+  "statement": "theorem punctualWeights_lowerStar_of_isFinite {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X₀ Y₀ : Scheme.{u}} [X₀.Over (Spec (CommRingCat.of k₀))] [Y₀.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X₀ ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X₀ ↘ Spec (CommRingCat.of k₀))] [IsSeparated (X₀ ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Y₀ ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (Y₀ ↘ Spec (CommRingCat.of k₀))] [IsSeparated (Y₀ ↘ Spec (CommRingCat.of k₀))] (f₀ : X₀ ⟶ Y₀) [f₀.IsOver (Spec (CommRingCat.of k₀))] [IsFinite f₀] (ι : PadicAlgCl l ≃+* ℂ) (G : WeilSheaf k₀ l X₀) (w : ℝ) : (G.HasWeightsAtMost ι.toRingHom w → ((lowerStar f₀).obj G).HasWeightsAtMost ι.toRingHom w) ∧ (G.IsPunctuallyPureOfWeight ι.toRingHom w → ((lowerStar f₀).obj G).IsPunctuallyPureOfWeight ι.toRingHom w)",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Sheaf-level assertion uses the existing upstream constructible Weil sheaf, canonical lowerStar and eigenvalue weight predicates, as in the sibling finite-etale purity module. No derived category of Weil sheaves is used. The two implications are separate conjuncts, so purity does not require an upper-bound hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b69f207f",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Clause-by-clause match: k0 finite field, l prime with ringChar k0 ≠ l, X0 and Y0 locally of finite type, quasi-compact and separated over Spec k0, f0 IsFinite and over k0, ι : PadicAlgCl l ≃+* ℂ, G : WeilSheaf k0 l X0 (constructible pro-étale fixed pair), canonical lowerStar f0, separate upper-bound and purity conjuncts using the recorded per-closed-point eigenvalue predicates (Stalk.lean:347,353); no extra hypotheses. The upstream WeilSheaf is forced by the recorded def-weil-punctual-weights declaration and matches the landed FiniteMapPurity sibling; upstream proves only the purity half, so a new sorry statement is justified. Edge cases (empty, zero, non-reduced, all real w) and the single universe u (forced upstream) are fine. Docstrings give source place, blueprint tag and the four proof steps; statement field verbatim; node diff is only the lean record. nt_compile --json at the real path: clean, 4.1 s; axioms only sorryAx plus standard. Report has a real Worker report; the Second reading section is the standard post-10-17 direct-delivery note. No fixes."
  }
 }

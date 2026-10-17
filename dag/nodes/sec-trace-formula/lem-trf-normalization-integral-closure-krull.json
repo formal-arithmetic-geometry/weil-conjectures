@@ -353,5 +353,29 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-ca9d8c528 (reviewer sub-agent of L); spot-checked: Read all required coordination files, the item, five new nodes, cited DAG statements, unit route, and Swanson–Huneke Theorem 4.10.5 through printed p. 92. Verified all 16 proof steps, hypotheses, fraction-field/base-change identifications, edge cases, finite-character and valuation arguments, no circularity or duplicate restatement, recorded Mathlib searches, and route-pivot/SGA compliance. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalizationIntegralClosureKrull",
+  "declaration": "RingTheory.normalization_integralClosure_isKrull",
+  "file": "lean/Sheaf/RingTheory/NormalizationIntegralClosureKrull.lean",
+  "statement": "theorem normalization_integralClosure_isKrull (R : Type u) [CommRing R] [IsDomain R] [IsNoetherianRing R] : ∃ hN : IsDomain (integralClosure R (FractionRing R)), (∀ (P : Ideal (integralClosure R (FractionRing R))) (hP : P.IsPrime), P ≠ ⊥ → (∀ Q : Ideal (integralClosure R (FractionRing R)), Q.IsPrime → Q < P → Q = ⊥) → IsNoetherianRing (@Localization.AtPrime (integralClosure R (FractionRing R)) _ P hP) ∧ IsDomain (@Localization.AtPrime (integralClosure R (FractionRing R)) _ P hP) ∧ IsIntegrallyClosed (@Localization.AtPrime (integralClosure R (FractionRing R)) _ P hP)) ∧ (Set.range (algebraMap (integralClosure R (FractionRing R)) (FractionRing (integralClosure R (FractionRing R)))) = ⋂ s : normalizationHeightOneIndex (integralClosure R (FractionRing R)), Set.range (normalizationLocalizationMap (integralClosure R (FractionRing R)) hN s.1 s.2.1)) ∧ (∀ x : integralClosure R (FractionRing R), x ≠ 0 → Set.Finite {P : Ideal (integralClosure R (FractionRing R)) | ∃ hP : P.IsPrime, P ≠ ⊥ ∧ (∀ Q : Ideal (integralClosure R (FractionRing R)), Q.IsPrime → Q < P → Q = ⊥) ∧ x ∈ P})",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "RingTheory.normalizationLocalizationMap",
+   "RingTheory.normalizationHeightOneIndex",
+   "RingTheory.normalization_integralClosure_isKrull"
+  ],
+  "fixed_by": "NT-stage2-cc-729dbdf59"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-729dbdf59",
+  "group": "NY",
+  "result": "fix",
+  "note": "The statement matches the node clause by clause: R is a CommRing, IsDomain and IsNoetherianRing; N = integralClosure R (FractionRing R); N is a domain (exists hN : IsDomain, a Prop); (i) each height-one localization is IsNoetherianRing, IsDomain and IsIntegrallyClosed; (ii) the range of algebraMap equals the intersection of the canonical IsLocalization.map images over the height-one subtype, and an empty intersection is univ, i.e. the whole field; (iii) each nonzero x lies in finitely many height-one primes. Height one is the node's own wording (nonzero prime, no prime strictly between bottom and P), equivalent in a domain to Ideal.height = 1; noted, not a fault. Both helpers are real, canonical and carry docstrings. Edge cases (R a field, zero ring excluded, x = 0 excluded, a single universe u) are correct. No existing Mathlib or side declaration was found. lean.statement is verbatim in the file; imports are Mathlib only; no line exceeds 100 characters; the proof is sorry. Both report sections are present. nt_compile --json: the delivered file compiled clean in 2.6 s and the fixed file clean in 4.5 s, with no warnings. Fault H8: the theorem docstring summarized the 16-step proof in one sentence. Fixed by fixes/NormalizationIntegralClosureKrull.lean, which gives Steps 1-16 with their cited nodes and changes the docstring only (signature unchanged)."
  }
 }

@@ -212,8 +212,8 @@
   "file": "lean/Sheaf/TraceFormula/ProjQcOpenTwistAmple.lean",
   "statement": "theorem exists_common_degree_twist_ample {A σ : Type u} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A] (𝒜 : ℕ → σ) [GradedRing 𝒜] {U : Scheme.{u}} (j : U ⟶ Proj 𝒜) [IsOpenImmersion j] [CompactSpace U] : ∃ e : ℕ, 0 < e ∧ ∀ k : ℕ, 0 < k → ∃ hL : ((Proj.twist 𝒜 (Int.ofNat (e * k))).restrict j).IsInvertible, @Scheme.Modules.IsAmple U ((Proj.twist 𝒜 (Int.ofNat (e * k))).restrict j) hL ∧ ∃ μ : ((Proj.twist 𝒜 (Int.ofNat e)).restrict j).tensorPow k ⟶ (Proj.twist 𝒜 (Int.ofNat (e * k))).restrict j, IsIso μ ∧ ∀ (V : U.Opens) (s : Fin k → Γ((Proj.twist 𝒜 (Int.ofNat e)).restrict j, V)) (x : j ''ᵁ V), (((Proj.twist 𝒜 (Int.ofNat (e * k))).restrictAppIso j V).hom (Scheme.Modules.Hom.app μ V (Proj.twistTensorSection 𝒜 j e V k s))).val x = ∏ i : Fin k, ((((Proj.twist 𝒜 (Int.ofNat e)).restrictAppIso j V).hom (s i)).val x : Localization.AtPrime x.val.asHomogeneousIdeal.toIdeal)",
   "branch": "newtargets-dag",
-  "by": "Q128",
-  "date": "2026-10-17",
+  "by": "Q16",
+  "date": "2026-10-18",
   "existing": false,
   "declarations": [
    "AlgebraicGeometry.Proj.twistTensorSection",
@@ -224,9 +224,9 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-2c27656a2",
-  "group": "Q128",
+  "reviewer": "NT-stage2-cc-3073ee438",
+  "group": "Q16",
   "result": "pass",
-  "note": "Statement, dependencies, source alignment, docstrings, edge cases, route-pivot compliance, and compiler evidence all checked successfully."
+  "note": "Re-delivery of the landed Q128 module: the only change is one docstring sentence, plus lean.statement layout and by/date in the record; node statement unchanged. Checked against Stacks 01MW (1)-(7) and 01Q2: ℕ-graded A with Proj 𝒜, an open immersion j with CompactSpace U, ∃ e>0 then ∀ k>0: restricted twist of degree e*k is IsInvertible and IsAmple, and an IsIso μ from tensorPow k of O_U(e) to O_U(e*k) pinned to the product of fractions in Localization.AtPrime via the real recursive twistTensorSection (tmulSection / unitSectionsEquiv, same recursion as tensorPow, same tensor as IsAmple). No extra hypotheses; U=∅ covered; k=0 excluded as in the node; universe u forced by Proj. Statement verbatim in the file; docstrings have source and blueprint; only the theorem has sorry. nt_compile.py on the side copy (differs only by the docstring): rc=0, 3.0 s, no errors or warnings. Observations: redundant docstring sentence, stale reviewed_lean, brief second reading."
  }
 }

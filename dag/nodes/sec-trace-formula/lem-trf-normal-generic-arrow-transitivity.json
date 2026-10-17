@@ -262,5 +262,28 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q03-9ef2913ce (reviewer sub-agent of L); spot-checked: Read the item, auxiliary node, cited statements, unit/chapter route, Orgogozo Lemma 8.3.2, and Stacks tags 0GJ2, 04HX, 06DI, 092R, 097N, 09GU, 09GV. Verified all seven steps, hypotheses, algebraic embedding and automorphism arguments, edge cases, searches, duplicate checks, blueprint route, and tool uses. Review written to review.md; no repairs required."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.NormalGenericArrowTransitivity",
+  "declaration": "AlgebraicGeometry.Scheme.normal_generic_arrow_transitivity",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.genericGeometricPointDirectImage",
+   "AlgebraicGeometry.Scheme.normal_generic_arrow_transitivity"
+  ],
+  "file": "lean/Sheaf/TraceFormula/NormalGenericArrowTransitivity.lean",
+  "statement": "theorem normal_generic_arrow_transitivity {N : Scheme.{u}} [IsIntegral N] (hN : ∀ x : N, IsDomain (N.presheaf.stalk x) ∧ IsIntegrallyClosed (N.presheaf.stalk x)) (η : N) (hη : IsGenericPoint η Set.univ) (Ωη : Type u) [Field Ωη] [IsAlgClosed Ωη] [Algebra (N.residueField η) Ωη] [Algebra.IsAlgebraic (N.residueField η) Ωη] {Ωn : Type u} [Field Ωn] [IsAlgClosed Ωn] (n : Spec (.of Ωn) ⟶ N) : Nonempty (genericGeometricPointDirectImage N η Ωη ⟶ (pointSmallEtale n).skyscraperSheafFunctor (A := Type (u + 1))) ∧ ∀ (a b : genericGeometricPointDirectImage N η Ωη ⟶ (pointSmallEtale n).skyscraperSheafFunctor (A := Type (u + 1))), ∃ σ : Aut (genericGeometricPointDirectImage N η Ωη), a = σ.hom ≫ b",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Direct-image 2-morphisms are natural transformations between the canonical Mathlib Point.skyscraperSheafFunctor right adjoints to the geometric stalks. The residue-field embedding and the algebraic closure are arbitrary; σ is an automorphism of the generic direct-image functor. No statement or dependency change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-549875f91",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Every clause of normal_generic_arrow_transitivity matches the node: IsIntegral N; stalks are integrally closed domains (IsDomain redundant but node wording); IsGenericPoint eta univ; arbitrary algebraic closure (IsAlgClosed + Algebra.IsAlgebraic over residueField eta); geometric generic point Spec.map(algebraMap) >> fromSpecResidueField; any geometric point n; arrows are natural transformations of pointSmallEtale skyscraperSheafFunctor direct images, matching the def-trf-geometric-morphism 2-morphism convention and the project's LocalOrientedProjectionArrows.point with Type (u+1); Nonempty, and forall a b exists sigma : Aut, a = sigma.hom >> b (= b o sigma), existence only. No Noetherian or extra hypotheses; single universe u; edge cases covered. The helper has real data and is not a duplicate notion. Node copy differs from the side clone only in lean; lean.statement verbatim; docstrings have the source, blueprint id and the 7 proof steps; proof is sorry only; report sections present. nt_compile --json: rc=0, 3.5 s, no diagnostics; probe #check/#print axioms: only the theorem uses sorryAx. Remarks only: unused proof-dependency imports."
  }
 }
