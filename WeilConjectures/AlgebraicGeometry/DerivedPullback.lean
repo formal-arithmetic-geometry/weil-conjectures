@@ -16,6 +16,7 @@ import WeilConjectures.AlgebraicGeometry.InverseImageExactKFlat
 import WeilConjectures.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import Mathlib.Tactic.IrreducibleDef
 
 /-! # Derived pullback of modules on schemes
 
@@ -192,7 +193,7 @@ the tensor pullback whose counit is an isomorphism on K-flat complexes
 (`AlgebraicGeometry.derivedPullback_spec`).
 
 (blueprint: def-pc-derived-pullback) -/
-noncomputable def derivedPullback :
+noncomputable irreducible_def derivedPullback :
     schemeDerivedCategory.{u, w} S ⥤ schemeDerivedCategory.{u, w} T :=
   (schemeDerivedCategoryEquiv S).functor ⋙ Scheme.Modules.derivedPullback g ⋙
     (schemeDerivedCategoryEquiv T).inverse
@@ -202,6 +203,7 @@ across the equivalences `schemeDerivedCategoryEquiv`. -/
 noncomputable def derivedPullbackIso :
     (schemeDerivedCategoryEquiv.{w} S).inverse ⋙ derivedPullback.{u, w} g ⋙
         (schemeDerivedCategoryEquiv.{w} T).functor ≅ Scheme.Modules.derivedPullback g :=
+  Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight (eqToIso (derivedPullback_def g)) _) ≪≫
   Functor.isoWhiskerRight (schemeDerivedCategoryEquiv S).counitIso
       (Scheme.Modules.derivedPullback g ⋙ (schemeDerivedCategoryEquiv T).inverse ⋙
         (schemeDerivedCategoryEquiv T).functor) ≪≫
@@ -228,14 +230,22 @@ instance : (Scheme.Modules.derivedPullback g).IsLeftDerivedFunctor
   inferInstanceAs ((Scheme.Modules.derivedPullback g).IsLeftDerivedFunctor
     (Scheme.Modules.derivedPullbackCounit g) (HomotopyCategory.quasiIso S.Modules _))
 
-/-- The counit `Lg^*(E) ⟶ g^* E` of `derivedPullback g`, for the pullback of modules. -/
-noncomputable def derivedPullbackCounit :
-    DerivedCategory.Qh ⋙ derivedPullback.{u, w} g ⟶
+/-- The counit of the composite `(schemeDerivedCategoryEquiv S).functor ⋙
+Scheme.Modules.derivedPullback g ⋙ (schemeDerivedCategoryEquiv T).inverse`. -/
+noncomputable def derivedPullbackModelCounit :
+    DerivedCategory.Qh ⋙ ((schemeDerivedCategoryEquiv S).functor ⋙
+        Scheme.Modules.derivedPullback g ⋙ (schemeDerivedCategoryEquiv.{w} T).inverse) ⟶
       (pullbackHomotopyCategory g ⋙ modulesQh T) ⋙ (schemeDerivedCategoryEquiv.{w} T).inverse :=
   (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight (qhCompSchemeDerivedCategoryEquivFunctor S).hom _ ≫
     ((Functor.associator _ _ _).inv ≫
       Functor.whiskerRight (modulesDerivedPullbackCounit g) _)
+
+/-- The counit `Lg^*(E) ⟶ g^* E` of `derivedPullback g`, for the pullback of modules. -/
+noncomputable def derivedPullbackCounit :
+    DerivedCategory.Qh ⋙ derivedPullback.{u, w} g ⟶
+      (pullbackHomotopyCategory g ⋙ modulesQh T) ⋙ (schemeDerivedCategoryEquiv.{w} T).inverse :=
+  Functor.whiskerLeft _ (eqToHom (derivedPullback_def g)) ≫ derivedPullbackModelCounit g
 
 instance : (derivedPullback.{u, w} g).IsLeftDerivedFunctor (derivedPullbackCounit.{u, w} g)
     (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings S.toRingedSpace))
@@ -244,12 +254,18 @@ instance : (derivedPullback.{u, w} g).IsLeftDerivedFunctor (derivedPullbackCouni
     (modulesDerivedPullbackCounit g)
     (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings S.toRingedSpace))
       (ComplexShape.up ℤ)) (schemeDerivedCategoryEquiv.{w} T).inverse
-  exact Functor.isLeftDerivedFunctor_precomp_of_isEquivalence
-    (schemeDerivedCategoryEquiv S).functor (qhCompSchemeDerivedCategoryEquivFunctor S) _ _
-    (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings S.toRingedSpace))
-        (ComplexShape.up ℤ))
-
-attribute [irreducible] derivedPullback
+  have h : ((schemeDerivedCategoryEquiv S).functor ⋙ Scheme.Modules.derivedPullback g ⋙
+      (schemeDerivedCategoryEquiv.{w} T).inverse).IsLeftDerivedFunctor
+      (derivedPullbackModelCounit g)
+      (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings S.toRingedSpace))
+        (ComplexShape.up ℤ)) :=
+    Functor.isLeftDerivedFunctor_precomp_of_isEquivalence
+      (schemeDerivedCategoryEquiv S).functor (qhCompSchemeDerivedCategoryEquivFunctor S) _ _
+      (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings S.toRingedSpace))
+          (ComplexShape.up ℤ))
+  exact (Functor.isLeftDerivedFunctor_iff_of_iso (α := derivedPullbackCounit g)
+    (α' := derivedPullbackModelCounit g) (e := eqToIso (derivedPullback_def g))
+    (comm := rfl) ..).2 h
 
 /-- **The derived pullback is the left derived functor of the tensor pullback.** For
 `g : T ⟶ S`, `derivedPullback g` is a triangulated left derived functor of the tensor pullback
