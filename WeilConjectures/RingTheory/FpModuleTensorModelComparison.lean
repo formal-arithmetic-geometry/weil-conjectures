@@ -102,7 +102,7 @@ theorem exists_eventually_tensor_model_equiv
         Nonempty (((F.obj j : Type v) ⊗[F.obj i] A) ⊗[P] L ≃ₗ[
           (F.obj j : Type v) ⊗[F.obj i] A] ((F.obj j : Type v) ⊗[F.obj i] A) ⊗[A] M) := by
   classical
-  obtain ⟨k, hik, q, hqC, hq, hmodel⟩ :=
+  obtain ⟨k, hik, q, hqC, hq, aPk, -, hmodel⟩ :=
     exists_tensor_model_algebra_tail F c hc f P Q aP e he
   obtain ⟨j₀, hkj₀, hmodules⟩ :=
     exists_eventually_compatible_module_equiv F c hc Q L
@@ -121,8 +121,15 @@ theorem exists_eventually_tensor_model_equiv
     (Algebra.TensorProduct.map (AlgHom.id (F.obj j) (F.obj j)) f).toRingHom
   let : Algebra D E := d.toAlgebra
   let : Algebra Q E := (q j hkj).toAlgebra
-  obtain ⟨aPj, hPQ, hpush⟩ := hmodel j hkj
-  let : Algebra P D := aPj
+  obtain ⟨hPQ, hpush⟩ := hmodel j hkj
+  let : Algebra (F.obj i : Type v) (F.obj k : Type v) := (F.map (homOfLE hik)).hom.toAlgebra
+  let tkj : F.obj k →ₐ[F.obj i] F.obj j :=
+    { (F.map (homOfLE hkj)).hom with
+      commutes' := fun s ↦ (ConcreteCategory.congr_hom
+        (F.map_comp (homOfLE hik) (homOfLE hkj)) s).symm }
+  let aPj : Algebra P D :=
+    ((Algebra.TensorProduct.map tkj (AlgHom.id (F.obj i) A)).toRingHom.comp
+      (@algebraMap P ((F.obj k : Type v) ⊗[F.obj i] A) _ _ aPk)).toAlgebra
   let : Algebra P E := (d.comp (algebraMap P D)).toAlgebra
   let : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl
   let : IsScalarTower P Q E := hPQ

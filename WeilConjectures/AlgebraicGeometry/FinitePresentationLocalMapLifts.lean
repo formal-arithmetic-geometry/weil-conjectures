@@ -51,10 +51,10 @@ displayed recovery equations. The comparison e is explicitly the canonical tenso
 pullback composition comparison, so no choice of comparison is needed. No agreement
 on overlaps has been imposed. Empty charts have unique maps; an empty cover requires
 no lifts and j itself is an upper bound. The zero ring and zero modules cause no
-exception. Noetherianity is not used. -/
+exception. -/
 theorem exists_finitePresentation_local_map_lifts
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
-    (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]
+    (R : I ⥤ CommRingCat.{u})
     (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]
     (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))
     [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] :

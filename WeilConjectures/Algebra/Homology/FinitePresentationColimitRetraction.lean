@@ -80,17 +80,15 @@ private theorem transportComparisons
       (extendScalarsComp p ri).app X
     let ej (X : ModuleCat R) := eqToIso (congrArg (fun r ↦ (extendScalars r).obj X) h0j) ≪≫
       (extendScalarsComp p' rj).app X
-    ∃ w : (extendScalars p').obj M ⟶ (extendScalars p').obj N,
-      (ej M).hom ≫ (extendScalars rj).map w ≫ (ej N).inv =
+    let c := eqToIso (congrArg extendScalars hp) ≪≫ extendScalarsComp p q
+    (ej M).hom ≫ (extendScalars rj).map (c.hom.app M ≫ (extendScalars q).map v ≫ c.inv.app N) ≫
+        (ej N).inv =
       (ei M).hom ≫ (extendScalars ri).map v ≫ (ei N).inv := by
   subst p'
   subst ri
   subst r0
-  refine ⟨(extendScalarsComp p q).hom.app M ≫ (extendScalars q).map v ≫
-    (extendScalarsComp p q).inv.app N, ?_⟩
   simpa [eqToIso_refl, Iso.refl_hom, Iso.refl_inv, Iso.trans_hom, Iso.trans_inv,
     Category.id_comp, Category.comp_id, Iso.app_hom, Iso.app_inv] using transport p q rj M N v
-
 
 private theorem finitePresentation_extendScalars
     {R S : Type u} [CommRing R] [CommRing S] (r : R →+* S)
@@ -142,9 +140,9 @@ these canonical ones because they agree on all tensors 1 tensor m, which generat
 the base changes. Thus the composite of the two descended maps becomes the identity
 after extending to the colimit. Finite presentation is preserved by scalar extension.
 Apply the equality clause to this composite and the identity, then extend both maps
-to the resulting later stage. Functoriality makes their composite the identity there.
-The canonical iterated scalar-extension isomorphism for M gives eM. Lift this stage
-and these maps back to the original preorder. For zero models the maps are zero and
+to the resulting later stage. Functoriality makes their composite the identity there,
+and the canonical iterated scalar-extension isomorphisms carry their extensions to the
+colimit to s and r. Lift this stage and these maps back to the original preorder. For zero models the maps are zero and
 the identity of the zero module is zero; for a singleton diagram this is ordinary
 transport of a retraction along a ring isomorphism. -/
 theorem exists_retraction_model_of_directed_colimit
@@ -160,10 +158,13 @@ theorem exists_retraction_model_of_directed_colimit
     (hsr : s ≫ r = 𝟙 _) :
     ∃ (j : I) (hij : i ≤ j),
       let E := extendScalars (F.map (homOfLE hij)).hom
+      let e (X : ModuleCat.{u} (F.obj i)) := eqToIso (congrArg (fun r ↦ (extendScalars r).obj X)
+          (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE hij)).symm)) ≪≫
+        (extendScalarsComp (F.map (homOfLE hij)).hom (colimit.ι F j).hom).app X
       ∃ (s' : E.obj M ⟶ E.obj N) (r' : E.obj N ⟶ E.obj M),
         s' ≫ r' = 𝟙 _ ∧
-        Nonempty ((extendScalars (colimit.ι F j).hom).obj (E.obj M) ≅
-          (extendScalars (colimit.ι F i).hom).obj M) := by
+        (e M).hom ≫ (extendScalars (colimit.ι F j).hom).map s' ≫ (e N).inv = s ∧
+        (e N).hom ≫ (extendScalars (colimit.ι F j).hom).map r' ≫ (e M).inv = r := by
   classical
   let e (t : Set.Ici i) (X : ModuleCat.{u} (F.obj i)) :=
     eqToIso (congrArg (fun r ↦ (extendScalars r).obj X)
@@ -179,19 +180,15 @@ theorem exists_retraction_model_of_directed_colimit
       ∃ w : (extendScalars (F.map (homOfLE t.property)).hom).obj X ⟶
         (extendScalars (F.map (homOfLE t.property)).hom).obj Y,
         (e t X).hom ≫ (extendScalars (colimit.ι F j).hom).map w ≫ (e t Y).inv =
-          (e a X).hom ≫ (extendScalars (colimit.ι F a.val).hom).map v ≫ (e a Y).inv := by
-    apply transportComparisons
+          (e a X).hom ≫ (extendScalars (colimit.ι F a.val).hom).map v ≫ (e a Y).inv :=
+    ⟨_, transportComparisons
       (F.map (homOfLE a.property)).hom (F.map (homOfLE t.property)).hom
       (F.map (homOfLE haj)).hom (colimit.ι F a.val).hom
       (colimit.ι F j).hom (colimit.ι F i).hom
-      _ _ _ _ X Y v
-    · exact congrArg CommRingCat.Hom.hom
-        (F.map_comp (homOfLE a.property) (homOfLE haj))
-    · exact (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE haj))).symm
-    · exact (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE a.property))).symm
-    · exact (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE t.property))).symm
-  obtain ⟨sj, hsj⟩ := lift a haj M N sa
-  obtain ⟨rj, hrj⟩ := lift b hbj N M rb
+      (congrArg CommRingCat.Hom.hom (F.map_comp (homOfLE a.property) (homOfLE haj)))
+      (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE haj))).symm
+      (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE a.property))).symm
+      (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE t.property))).symm X Y v⟩
   have hs : (e t M).hom ≫ (extendScalars (colimit.ι F j).hom).map sj ≫
       (e t N).inv = s := hsj.trans hsa
   have hr : (e t N).hom ≫ (extendScalars (colimit.ι F j).hom).map rj ≫
@@ -212,10 +209,19 @@ theorem exists_retraction_model_of_directed_colimit
     congrArg CommRingCat.Hom.hom (F.map_comp (homOfLE t.property) (homOfLE hjk))
   let c := eqToIso (congrArg extendScalars hc) ≪≫
     extendScalarsComp (F.map (homOfLE t.property)).hom (F.map (homOfLE hjk)).hom
+  have move (X Y : ModuleCat.{u} (F.obj i)) (v : E.obj X ⟶ E.obj Y) :=
+    transportComparisons
+      (F.map (homOfLE t.property)).hom (F.map (homOfLE (t.property.trans hjk))).hom
+      (F.map (homOfLE hjk)).hom (colimit.ι F j).hom
+      (colimit.ι F k).hom (colimit.ι F i).hom hc
+      (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE hjk))).symm
+      (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE t.property))).symm
+      (congrArg CommRingCat.Hom.hom
+        (colimit.w F (homOfLE (t.property.trans hjk)))).symm X Y v
   refine ⟨k, t.property.trans hjk,
     c.hom.app M ≫ T.map sj ≫ c.inv.app N,
-    c.hom.app N ≫ T.map rj ≫ c.inv.app M, ?_, ?_⟩
-  · exact conjugation_retraction T (c.app M) (c.app N) sj rj hk
-  · exact ⟨(e ⟨k, t.property.trans hjk⟩ M).symm⟩
+    c.hom.app N ≫ T.map rj ≫ c.inv.app M, ?_, (move M N sj).trans hs,
+    (move N M rj).trans hr⟩
+  exact conjugation_retraction T (c.app M) (c.app N) sj rj hk
 
 end ModuleCat
