@@ -180,10 +180,7 @@ theorem Etale.affine_closed_etale_neighborhood_comparison
   · intro a
     have hE : E.hom = eB.hom ≫ AddCommGrpCat.ofHom φ := rfl
     rw [hE, ← Category.assoc, hB a]
-    ext x
-    simp only [AddCommGrpCat.hom_comp, AddCommGrpCat.hom_ofHom, AddMonoidHom.coe_comp,
-      Function.comp_apply, φ]
-    exact congrArg Abelian.Ext.hom
-      (cohomologyMap_comp_leg kk (Spec.map (c.ι.app a)) (v a) t i (wt a) hi' (hs a) G q _)
+    refine AddCommGrpCat.ext fun x ↦ ?_
+    exact cohomologyMap_comp_leg kk (Spec.map (c.ι.app a)) (v a) t i (wt a) hi' (hs a) G q _
 
 end AlgebraicGeometry
