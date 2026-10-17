@@ -2,7 +2,7 @@
  "id": "lem-trf-algebraic-space-open-gluing",
  "kind": "statement",
  "title": "Gluing algebraic spaces along open subfunctors",
- "statement": "Let $S$ be a scheme [def-pc-scheme] and let $F$ be a sheaf of sets on $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site, def-weil-pbc-sheafification]. Suppose there is a set-indexed family of subfunctors $F_i\\subset F$ such that each $F_i$ is an algebraic space [def-trf-algebraic-space], each map $F_i\\to F$ is representable and an open immersion, the map $\\coprod_iF_i\\to F$ is surjective as a sheaf map, and $\\coprod_iF_i$ is an algebraic space. Then $F$ is an algebraic space.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $F$ be a sheaf of sets on $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site, def-weil-pbc-sheafification]. Suppose there is a set-indexed family of subfunctors [def-pc-subfunctor] $F_i\\subset F$ such that each $F_i$ is an algebraic space [def-trf-algebraic-space], each map $F_i\\to F$ is representable and an open immersion [def-weil-open-immersion], the map $\\coprod_iF_i\\to F$ is surjective as a sheaf map, and $\\coprod_iF_i$ is an algebraic space. Then $F$ is an algebraic space.",
  "source": {
   "document": "literature/stacks-project/spaces.tex",
   "place": "Tag 02WR (glueing-algebraic-spaces), all five hypotheses and its representability/diagonal/gluing argument."
@@ -11,11 +11,126 @@
   "def-pc-scheme",
   "def-pc-fppf-site",
   "def-weil-pbc-sheafification",
-  "def-trf-algebraic-space"
+  "def-trf-algebraic-space",
+  "def-pc-subfunctor",
+  "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First, representable functors $h_Z$ on the big fppf site are sheaves. Indeed, for any fppf covering and any affine open $A$ in its target, [lem-pc-fppf-affine-refinement] supplies finitely many affine opens of the covering schemes above $A$ whose images cover $A$. Thus the covering satisfies exactly [def-weil-pbc-fpqc-covering]. Apply [lem-weil-pbc-fpqc-representable-descent] to descend compatible maps into $Z$. For maps over $S$, the descended map is over $S$ because its composite to $S$ agrees with the prescribed structural map after the covering, and the uniqueness assertion of the same descent lemma detects this equality. This works for the empty target as well.",
+   "uses": [
+    "lem-pc-fppf-affine-refinement",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, lemma-fpqc-universal-effective-epimorphisms; topologies.tex Tag 021P, lemma-fppf-affine"
+   }
+  },
+  {
+   "text": "Put $H=\\coprod_iF_i$ in sheaves and let $P(T)=\\coprod_iF_i(T)$ be the sectionwise presheaf coproduct. The universal property in [def-weil-pbc-sheafification] identifies $P^\\#$ with $H$: a map from either to a sheaf $K$ is exactly a family of maps $F_i\\to K$. Consequently [lem-weil-pbc-site-sheafification-sections-local] says that a section of $H$ is fppf locally represented by a section of one $F_i$, and equality of two such representatives in $H$ holds locally already in $P$. In particular unequal indices can coincide only on the empty scheme: every nonempty scheme admits no empty fppf covering, and restriction in $P$ preserves the index.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-pc-fppf-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WI, lemma-colimit-sheaves, universal property; Tag 00WK, lemma-sections-sheafification"
+   }
+  },
+  {
+   "text": "Fix a scheme $T$ and a map $h_T\\to F$. By the representable-open hypothesis, $h_T\\times_FF_i=h_{V_i}$ for an open subscheme $V_i\\subseteq T$, using [def-trf-algebraic-space] and [def-weil-open-immersion]. The sheaf surjectivity of $H\\to F$ gives fppf local lifts of this map to $H$; refining by Step 2 gives an fppf covering $T_a\\to T$ whose maps to $F$ factor through some $F_{i(a)}$. Each $T_a\\to T$ therefore factors through $V_{i(a)}$ by the fibre-product universal property. The family $T_a\\to T$ is jointly surjective by [def-pc-fppf-site], so $T=\\bigcup_iV_i$. All such tests, including their further pullbacks, give open coverings in this way.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-open-immersion",
+    "def-pc-fppf-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR, lemma-glueing-algebraic-spaces, first paragraph"
+   }
+  },
+  {
+   "text": "Let $E_T=H\\times_Fh_T$. It is a sheaf: matching sections in the two factors glue uniquely, and their equality in $F$ persists by the sheaf uniqueness axiom [def-weil-pbc-sites-and-cohomology]. Form the scheme $C_T=\\coprod_iV_i$ by [lem-weil-pbc-scheme-coproduct-family]. Its coprojections have disjoint open images covering $C_T$. The maps $h_{V_i}\\to E_T$ therefore define a natural map $h_{C_T}\\to E_T$: for $W\\to C_T$, restrict to the inverse images of those disjoint opens and glue the resulting sections of $E_T$. This uses [lem-pc-zariski-coverings-are-fppf]. Every section $(a,t)$ of $E_T(W)$ fppf locally has $a$ in one $F_i$ by Step 2; the equality over $F$ then gives a map to $V_i$, hence to $C_T$. Any two local maps inducing $(a,t)$ agree: by Step 2 their indices agree after a further fppf refinement, and with the same index their maps to $V_i$ agree because $F_i\\to F$ is a subfunctor and $V_i$ is its pullback to $T$. The sheaf property of $h_{C_T}$ from Step 1 glues these maps uniquely. The resulting inverse is natural and proves $h_{C_T}\\simeq E_T$ over $h_T$. Thus $q:H\\to F$ is representable, and its scheme test is $C_T\\to T$, which is surjective by Step 3.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-pc-zariski-coverings-are-fppf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR, first paragraph: representation of the pullback of the sheaf coproduct by the scheme coproduct"
+   }
+  },
+  {
+   "text": "For schemes $T,T'$ mapping to $F$, set $G=h_T\\times_Fh_{T'}$ and $G_i=G\\times_FF_i$. Write $V_i=T\\times_FF_i$ and $V'_i=T'\\times_FF_i$ as in Step 3. Since $F_i\\subset F$ is monic, the sectionwise pullback equations give $G_i=h_{V_i}\\times_{F_i}h_{V'_i}$. This is represented by a scheme because the diagonal of the algebraic space $F_i$ is representable [def-trf-algebraic-space]. For every $h_W\\to G$, the pullback of $G_i\\to G$ is $h_W\\times_FF_i$, an open subscheme of $W$, and these opens cover $W$ by Step 3. Thus the $G_i$ are representable open subfunctors covering $G$. Moreover $G$ is a Zariski sheaf: its sections are pairs of scheme maps with equal images in the sheaf $F$, and the sheaf condition follows by componentwise gluing, Step 1 and [lem-pc-zariski-coverings-are-fppf]. Apply [lem-pc-schemes-criterion] to obtain a scheme representing $G$. An arbitrary test of $F\\to F\\times F$ is exactly such a pair of maps from a scheme, so this proves representability of the diagonal of $F$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-pc-zariski-coverings-are-fppf",
+    "lem-pc-schemes-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR, second paragraph, applying Schemes Tag 01JJ (lemma-glue-functors)"
+   }
+  },
+  {
+   "text": "For every test $h_T\\to F$, Step 4 represents the base change of $q$ by $C_T=\\coprod_iV_i\\to T$. Its restriction to each coproduct summand is the open immersion $V_i\\hookrightarrow T$, hence etale by [lem-weil-pbc-etale-composition-cancellation](1). The summands are an open covering by [lem-weil-pbc-scheme-coproduct-family]. Apply [lem-weil-pbc-etale-local-on-source] to conclude that $C_T\\to T$ is etale. It is surjective by Step 3. Hence $q:H\\to F$ is representable, surjective and etale, in the scheme-test sense of [def-trf-algebraic-space].",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-local-on-source",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR, first and last paragraphs; morphisms.tex Tags 02GP and 02GJ"
+   }
+  },
+  {
+   "text": "By the hypothesis that $H$ is an algebraic space and [def-trf-algebraic-space], choose a scheme $U$ and a representable surjective etale map $h_U\\to H$. For any $h_T\\to F$, the fibre-product equations identify $h_U\\times_Fh_T$ with $h_U\\times_HE_T$. Step 4 represents $E_T$ by the scheme $C_T$. Therefore $h_U\\times_HE_T$ is a scheme, and its projection to $C_T$ is etale and surjective by the scheme-test definition for the atlas $h_U\\to H$. The map $C_T\\to T$ is etale and surjective by Step 6. Their composite is etale by [lem-weil-pbc-etale-composition-cancellation](2) and surjective by [lem-trf-surjective-morphism-composition]. Thus $h_U\\to F$ is a representable surjective etale scheme atlas. Together with the given fppf sheaf condition and Step 5's representable diagonal, this is precisely the definition of an algebraic space [def-trf-algebraic-space].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-trf-surjective-morphism-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR, last paragraph: compose the coproduct atlas with the representable surjective etale map to F"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-weil-open-immersion",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pc-fppf-affine-refinement",
+  "lem-pc-schemes-criterion",
+  "lem-pc-zariski-coverings-are-fppf",
+  "lem-trf-surjective-morphism-composition",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WR, lemma-glueing-algebraic-spaces, all three paragraphs; the composite atlas is checked on scheme tests, using etaleness of the coproduct map."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -135,10 +250,136 @@
    "results": "AlgebraicGeometry.Scheme.Cover.gluedCover, AlgebraicGeometry.PresheafedSpace.GlueData.ι_jointly_surjective, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U, AlgebraicGeometry.Scheme.GlueData.mk, AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.LocallyRingedSpace.GlueData, AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_jointly_surjective, AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusion",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|LocalRepresentability.isRepresentable",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Representability.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An fppf sheaf covered by open algebraic subspaces is an algebraic space",
+   "results": "AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover; AlgebraicGeometry.instIsAffineXSchemeAffineCover; AlgebraicGeometry.Scheme.affineCover; AlgebraicGeometry.Scheme.instInhabitedOpenCover; AlgebraicGeometry.Scheme.openCoverOfISupEqTop; AlgebraicGeometry.Scheme.openCoverOfIsOpenCover; AlgebraicGeometry.Scheme.affineOpenCover; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+   "results": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf sheaf covered by representable open immersions from algebraic spaces with algebraic space coproduct is an algebraic space",
+   "results": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; AlgebraicGeometry.Scheme.Cover.instIsOpenImmersionFromGlued; AlgebraicGeometry.Scheme.LocalRepresentability.representableBy; AlgebraicGeometry.coprodOpenCover; AlgebraicGeometry.sigmaOpenCover; AlgebraicGeometry.Scheme.LocalRepresentability.glueData; AlgebraicGeometry.Scheme.IsLocallyDirected.openCover_X; AlgebraicGeometry.Scheme.IsLocallyDirected.openCover",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.IsOpenImmersion",
+   "results": "AlgebraicGeometry.Etale.instOfIsOpenImmersion",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing algebraic spaces from a set of open subspaces using a scheme etale atlas and a representable diagonal",
+   "results": "AlgebraicGeometry.Scheme.GlueData.glued; AlgebraicGeometry.Scheme.GlueData.toGlueData; AlgebraicGeometry.Scheme.GlueData; AlgebraicGeometry.Scheme.GlueData.gluedScheme; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued; AlgebraicGeometry.LocallyRingedSpace.GlueData.toGlueData; AlgebraicGeometry.Scheme.Cover.gluedCover; AlgebraicGeometry.Scheme.LocalRepresentability.glueData",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|theorem isRepresentable|instOfIsOpenImmersion",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Representability.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
+  },
+  {
+   "tool": "grep",
+   "query": "sigmaDesc|IsZariskiLocalAtSource.*Etale",
+   "results": "Mathlib/AlgebraicGeometry/Cover/Sigma.lean; Mathlib/AlgebraicGeometry/Limits.lean; Mathlib/AlgebraicGeometry/Limits.lean; Mathlib/AlgebraicGeometry/Limits.lean; Mathlib/AlgebraicGeometry/Limits.lean; Mathlib/AlgebraicGeometry/Limits.lean; Mathlib/AlgebraicGeometry/LimitsOver.lean; Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The morphism from a disjoint union of schemes to T is etale if every component map is etale",
+   "results": "AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.instIsAffineHomDescScheme; AlgebraicGeometry.IsFinite.instDescScheme; AlgebraicGeometry.sigmaMk",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc",
+   "results": "AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary small indexed family of etale scheme morphisms to a scheme T, the induced morphism from the coproduct of their sources to T is etale",
+   "results": "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.Flat.instDescScheme",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
+  },
+  {
+   "tool": "grep",
+   "query": "IsZariskiLocalAtSource|sigmaDesc",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
+  },
+  {
+   "tool": "grep",
+   "query": "subcanonical|Subcanonical",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representable presheaves on the big fppf site of schemes are sheaves",
+   "results": "CategoryTheory.Sheaf.isSheaf_of_isRepresentable; CategoryTheory.Sheaf.isSheaf_yoneda_obj; CategoryTheory.GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable; CategoryTheory.GrothendieckTopology.Subcanonical; AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts; AlgebraicGeometry.Scheme.Modules.isSheaf; AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
+  },
+  {
+   "tool": "loogle",
+   "query": "GrothendieckTopology.Subcanonical",
+   "results": "loogle: unknown identifier 'GrothendieckTopology.Subcanonical'",
+   "date": "2026-10-17",
+   "verdict": "query rejected (unknown identifier); not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The big fppf topology on schemes over a base is subcanonical: every functor of points of a scheme is a sheaf",
+   "results": "AlgebraicGeometry.Scheme.subcanonical_zariskiTopology; AlgebraicGeometry.Scheme.smallGrothendieckTopology; AlgebraicGeometry.Scheme.jointlySurjectiveTopology; AlgebraicGeometry.Scheme.grothendieckTopology; AlgebraicGeometry.Scheme.overGrothendieckTopology; CategoryTheory.GrothendieckTopology.instSubcanonicalCanonicalTopology; AlgebraicGeometry.Scheme.instLocallyCoverDenseOverTopMorphismPropertyOverForgetOverGrothendieckTopology; AlgebraicGeometry.Scheme.overPretopology",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
+  },
+  {
+   "tool": "grep",
+   "query": "fppfTopology|fpqcTopology|Subcanonical",
+   "results": "16; 25; 53; 75; 78",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable",
+   "results": "CategoryTheory.GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern scheme gluing, etale scheme morphisms or generic subcanonical topologies, not algebraic-space gluing"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-relation-quotient",
@@ -167,5 +408,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-algebraic-space-open-gluing",
+  "worker": "stage1",
+  "summary": "Split Tag 02WR into seven steps, retaining all hypotheses and conclusion. Made fppf descent for scheme maps and the sheaf-coproduct pullback identification explicit using existing DAG nodes; glued the scheme tests of the diagonal by Tag 01JJ and constructed the atlas by composition. No new nodes. Added only definition citations to the statement. Reused arbitrary-source etale locality instead of creating a coproduct lemma.",
+  "blueprint": "Auxiliary Tag 02WR input in the quotient-by-etale-relation branch of lem-trf-local-term-locality, via lem-trf-etale-relation-quotient and the ancestry already recorded in blueprint.from. Steps realize its parent quotient proof final gluing paragraph; no chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic finite affine refinement of an fppf covering, used only to check the fpqc-covering definition for representable descent; this trace-formula unit has no covering-refinement statement."
+   },
+   {
+    "node": "lem-pc-schemes-criterion",
+    "why": "Generic representability by schemes from a Zariski covering by representable open subfunctors, exactly the tool required in the diagonal paragraph of Tag 02WR; the curve-zero unit has no representability criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fppf-affine-refinement",
+  "lem-pc-schemes-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q44-a7233224c",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-a7233224c (reviewer sub-agent of L); spot-checked: Read the item and all seven steps against Stacks 02WR and cited statements/sources. Hypotheses, sheaf-coproduct base change, diagonal gluing, and composite atlas check out, including empty and infinite-family cases. No new nodes, duplicates, cycles, or long steps. Accepted both declared generic tool uses. Detailed checks recorded in review.md."
  }
 }

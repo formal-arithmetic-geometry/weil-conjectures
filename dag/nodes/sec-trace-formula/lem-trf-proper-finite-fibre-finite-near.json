@@ -12,9 +12,68 @@
   "def-weil-proper-morphism",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because f is proper, it is of finite type (and locally of finite type) and universally closed by [pqf-lem-proper-basic]. Applying [pqf-lem-locqf-fibre-discrete] to the finite set f^{-1}(\\{s\\}) shows that f is quasi-finite at every point of that fibre.",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "pqf-lem-locqf-fibre-discrete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02UP proof, first sentence; Morphisms Tags 02NH and 01TI"
+   }
+  },
+  {
+   "text": "Let U\\subseteq X be the open locus where f is quasi-finite, supplied by [lem-sc-quasi-finite-points-open]. By Step 1 every point of f^{-1}(\\{s\\}) lies in U. Therefore, for Z=X\\setminus U, one has s\\notin f(Z).",
+   "uses": [
+    "lem-sc-quasi-finite-points-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02UP proof, first two sentences"
+   }
+  },
+  {
+   "text": "The image f(Z) is closed because f is universally closed by [pqf-lem-proper-basic]. Hence V=S\\setminus f(Z) is an open neighbourhood of s. For the inverse-image open W=f^{-1}(V), every point lies in U, so W\\subseteq U.",
+   "uses": [
+    "pqf-lem-proper-basic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02UP proof, sentences concerning Z, f(Z), and the choice of V"
+   }
+  },
+  {
+   "text": "The restriction f^{-1}(V)\\to V is proper by [lem-pc-proper-base-change], since it is the base change of f along the open immersion V\\hookrightarrow S. It is locally quasi-finite by [lem-weil-pbc-lqf-restriction-to-opens], applied to the locally quasi-finite morphism U\\to S from Step 2 and the open subscheme W=f^{-1}(V)\\subseteq U. Therefore [pqf-lem-proper-lqf-finite] makes f^{-1}(V)\\to V finite. This is the required neighbourhood.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-lqf-restriction-to-opens",
+    "pqf-lem-proper-lqf-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02UP proof, final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-sc-quasi-finite-points-open",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "pqf-lem-locqf-fibre-discrete",
+  "pqf-lem-proper-basic",
+  "pqf-lem-proper-lqf-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02UP, lemma-proper-finite-fibre-finite-in-neighbourhood"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +112,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-modification-fibre-centre-finite",
@@ -65,7 +124,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Temkin §4.2, Lemmas 4.2.1--4.2.2: the finite Gamma_0 set of residual-transcendence-degree-one fibre-generic centres over closed points; Lemma 4.2.1: obtain an actual finite neighbourhood of a fibre-generic point, then use normality to identify the finite birational morphism",
+   "place": "Auxiliary proper-finite-near lemma used in the Temkin modification-fibre argument: the finite fibre at a fibre-generic point is upgraded to a finite restriction over an open neighbourhood.",
    "via": [
     "lem-trf-modification-fibre-centre-finite",
     "lem-trf-finite-fibre-valuation-domination",
@@ -83,5 +142,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-proper-finite-fibre-finite-near",
+  "worker": "stage1",
+  "summary": "Audited Tag 02UP and split its proof into four complete steps. The existing DAG supplies properness consequences, finite-fibre quasi-finiteness, openness of the quasi-finite locus, restriction of local quasi-finiteness to opens, and the proper-plus-locally-quasi-finite finiteness criterion; no new nodes or Lean attachments are needed.",
+  "blueprint": "Realizes the auxiliary proper-finite-near input in the Temkin modification-fibre argument below lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lqf-restriction-to-opens",
+    "why": "The final restriction from the quasi-finite locus U to the inverse-image open f^{-1}(V) is a generic restriction-of-locally-quasi-finite morphisms fact; no node in sk-i-curve-zero supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lqf-restriction-to-opens"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q20-21c109247",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q20-21c109247 (reviewer sub-agent of L); spot-checked: Read the mathematics in full. Stacks 02UP matches the arbitrary-base statement; all four steps have applicable citations, including the empty-fibre case. The existing neighbourhood theorem requires a locally Noetherian base and cannot replace this item. Accepted the open-restriction tool use. No repairs needed; concrete checks are in review.md."
  }
 }
