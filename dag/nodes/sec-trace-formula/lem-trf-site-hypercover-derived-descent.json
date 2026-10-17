@@ -12,12 +12,93 @@
   "def-weil-size-convention",
   "def-trf-geometric-morphism",
   "def-weil-abstract-derived-category",
-  "def-weil-pbc-simplicial-object",
-  "def-weil-pbc-topos"
+  "def-weil-pbc-simplicial-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal D=\\mathcal C/X$. Its terminal object is $X/X$. For $T\\to X$, the slice $\\mathcal D/T$ is $\\mathcal C/T$: an object in either description is a map to $T$, and the extra map to $X$ is its composite. The induced covering sieves agree. The localization inverse image $b_p^{-1}$ is restriction to $U_p$, and $(b^{-1}I)_p=b_p^{-1}I$ with restriction transition maps. For $T\\in\\mathcal D$ put $U^T_p=T\\times_XU_p$. Its matching object is $T\\times_XM_p$: a test-object map to either description is exactly a compatible family of face maps and the fixed map to $T$. Thus each matching sieve is the pullback of the given covering sieve and is covering. These assertions include $p=0$, where the matching object is $T$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "section-hypercovering and remark-augmentation-over-object; base-changed matching limits by their universal property."
+   }
+  },
+  {
+   "text": "Let $I$ be injective in $\\mathrm{Ab}(\\mathcal D)$. The site restriction theorem supplies the exact left adjoint $b_{p,!}$ to $b_p^{-1}$. Hence $b_p^{-1}I$ is injective: for a monomorphism $A\\hookrightarrow B$ on $\\mathcal C/U_p$, exactness gives $b_{p,!}A\\hookrightarrow b_{p,!}B$; extend its map to $I$ by injectivity and transpose back. The abelian sheaf categories on the slice and total sites have enough injectives. Consequently injective objects are $b_{p,*}$-acyclic by the injective-acyclicity clause of Leray's lemma. Apply the acyclic Cech computation to $F=b^{-1}I$. Its complex has, on $T\\to X$, the explicit terms\n$$C_b(F)^p(T)=I(T\\times_XU_p),$$\nwith the alternating restriction differential. This follows from the direct-image adjunction for localization: $b_{p,*}G$ on $T$ is $G(T\\times_XU_p\\to U_p)$.",
+   "uses": [
+    "lem-weil-pbc-site-restriction-injectives",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-trf-site-augmentation-acyclic-cech"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D8G, first paragraph; localization injectivity 0D88 (singleton case 03F3), and the computation 0D7A."
+   }
+  },
+  {
+   "text": "For every $T\\in\\mathcal D$, apply injective hypercover section exactness in the site $\\mathcal D$ to $U^T_\\bullet\\to T$ and the injective sheaf $I$ on $\\mathcal D$. Step 1 verified every matching-cover hypothesis. The result is precisely exactness of\n$$0\\to I(T)\\to C_b(b^{-1}I)^0(T)\\to C_b(b^{-1}I)^1(T)\\to\\cdots.$$\nThus the augmented complex of sheaves is exact: kernels are computed sectionwise, and sectionwise equality of an image with a kernel also gives equality after sheafifying the image. In degree zero, the kernel map $e:b_*b^{-1}I\\to b_{0,*}b_0^{-1}I$ of the Cech computation composed with the underived unit $\\eta:I\\to b_*b^{-1}I$ is adjoint to the degree-zero component of $\\varepsilon_{b^{-1}I}\\circ b^{-1}\\eta=\\mathrm{id}$ (triangle identity), so $e\\eta$ is the unit of $b_0$, i.e. the restriction map $I(T)\\to I(T\\times_XU_0)$ just used. Since $e$ and this restriction both map their sources isomorphically onto $\\ker\\delta^0$, the unit $\\eta$ is an isomorphism. In positive degrees the Cech complex has zero cohomology. Its canonical derived-image comparison therefore gives $R^q b_*b^{-1}I=0$ for $q>0$.",
+   "uses": [
+    "lem-trf-site-hypercover-injective-sections",
+    "lem-trf-site-augmentation-acyclic-cech"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D8G first paragraph; injective section exactness is 01GW, applied after each base change, and the Cech identification is 0D79--0D7A."
+   }
+  },
+  {
+   "text": "The base and total categories of abelian sheaves are Grothendieck: apply the ring-sheaf Grothendieck theorem on each small site to the integer ring sheaf. An abelian sheaf has its unique integer action by repeated addition, so its category is the category of modules over that sheaf. The total site is small because its objects are a countable union of objects of the small slices, and its morphisms add only simplex-category arrows. Enough injectives is supplied by the general site-sheaf theorem. Choose a bounded-below complex $I^\\bullet$ of injectives representing the prescribed $E$, using the bounded-below injective-representative theorem. Since $b^{-1}$ is exact, $b^{-1}I^\\bullet$ represents $b^{-1}E$ and is bounded below. Step 3 shows that each of its terms is $b_*$-acyclic.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D8G, bounded case; injective representation 013K and Grothendieck sheaf categories 079Q."
+   }
+  },
+  {
+   "text": "Apply the complexes clause of Leray's acyclicity lemma to $b_*$ and $b^{-1}I^\\bullet$. It says that the canonical comparison from the termwise complex $b_*b^{-1}I^\\bullet$ to $Rb_*b^{-1}E$ induces an isomorphism on every cohomology sheaf. By step 3 the degreewise underived units give an isomorphism of complexes $I^\\bullet\\to b_*b^{-1}I^\\bullet$; it is a chain map by naturality of the underived unit. The composite of its localization with the canonical derived comparison is the ordinary derived adjunction unit: on any injective replacement $b^{-1}I^\\bullet\\to J^\\bullet$ it is represented by\n$$I^\\bullet\\xrightarrow{\\eta}b_*b^{-1}I^\\bullet\\longrightarrow b_*J^\\bullet,$$\nthe adjoint of that replacement map. This is the definition of the adjunction induced by $b^{-1}\\dashv b_*$. Hence the specified unit induces an isomorphism on every cohomology sheaf, and is an isomorphism in the derived category.",
+   "uses": [
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D8G, bounded case; Leray 015E, and the ordinary derived comparison computed by injective resolutions (05TI)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-restriction-injectives",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-trf-site-augmentation-acyclic-cech",
+  "lem-trf-site-hypercover-injective-sections",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0D8N via 0D8G, first paragraph and bounded case; the sheaf-exactness argument is evaluated on each base change using Hypercoverings Tag 01GW."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,10 +134,45 @@
    "results": "{\"t\": \"2026-10-17T17:55:19Z\", \"tool\": \"leanfinder\", \"query\": \"The derived unit E to Ra star a inverse E is an isomorphism for a site hypercover augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.OneHypercover.isoMk\", \"CategoryTheory.GrothendieckTopology.OneHypercover.isoMk_hom\", \"CategoryTheory.GrothendieckTopology.OneHypercover.isoMk_inv\", \"CategoryTheory.GrothendieckTopology.OneHypercover.toHOneHypercover\", \"CategoryTheory.GrothendieckTopology.HOneHypercover\", \"CategoryTheory.Precoverage.ZeroHypercover.instIsLocalAtTargetIsomorphisms\", \"CategoryTheory.GrothendieckTopology.OneHypercover.toZeroHypercover_toPreZeroHypercover\", \"CategoryTheory.GrothendieckTopology.Cover.oneHypercover\"], \"digest\": \"78f3005e1e2a565d\"}",
    "date": "2026-10-17",
    "verdict": "no match: OneHypercover and its multiequalizer gluing do not assert derived descent for a full simplicial hypercover."
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover.*(derived|cohomolog)|descent.*hypercover",
+   "results": "{\"t\": \"2026-10-17T18:17:16Z\", \"tool\": \"grep\", \"query\": \"hypercover.*(derived|cohomolog)|descent.*hypercover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: full hypercover derived descent is not supplied by OneHypercover gluing, exact-functor localization, or the generic derived adjunction unit formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hypercover\", \"DerivedCategory\"",
+   "results": "{\"t\": \"2026-10-17T18:17:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hypercover\\\", \\\"DerivedCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: full hypercover derived descent is not supplied by OneHypercover gluing, exact-functor localization, or the generic derived adjunction unit formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived adjunction unit for a hypercover augmentation is an isomorphism on bounded below abelian sheaf complexes",
+   "results": "{\"t\": \"2026-10-17T18:17:16Z\", \"tool\": \"leansearch\", \"query\": \"The derived adjunction unit for a hypercover augmentation is an isomorphism on bounded below abelian sheaf complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Functor.instIsIsoAppUnitLanAdjunctionOfHasPointwiseLeftKanExtension\", \"CategoryTheory.Adjunction.unitAsIsoOfIso\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.isIso_sheafificationAdjunction_counit\", \"CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_unit\"], \"digest\": \"4fbfbf709237c7fc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: full hypercover derived descent is not supplied by OneHypercover gluing, exact-functor localization, or the generic derived adjunction unit formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable hypercover of a small site gives an isomorphism from any bounded below complex to the derived pushforward of its inverse image",
+   "results": "{\"t\": \"2026-10-17T18:17:25Z\", \"tool\": \"leanfinder\", \"query\": \"A representable hypercover of a small site gives an isomorphism from any bounded below complex to the derived pushforward of its inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.OneHypercover.IsPreservedBy\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.PreservesOneHypercovers\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\"], \"digest\": \"0d2a93a6683529cd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: full hypercover derived descent is not supplied by OneHypercover gluing, exact-functor localization, or the generic derived adjunction unit formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological descent of abelian sheaves along a simplicial hypercover: E is isomorphic to Rb star b inverse E",
+   "results": "{\"t\": \"2026-10-17T18:17:26Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomological descent of abelian sheaves along a simplicial hypercover: E is isomorphic to Rb star b inverse E\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'\", \"CategoryTheory.GrothendieckTopology.OneHypercover.isoMk\", \"CategoryTheory.GrothendieckTopology.OneHypercover.isoMk_hom\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.hom_ext\", \"CategoryTheory.GrothendieckTopology.OneHypercover.toZeroHypercover_toPreZeroHypercover\", \"CategoryTheory.GrothendieckTopology.OneHypercover.f_glueMorphisms_assoc\"], \"digest\": \"d4ef2be0b452f8e8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: full hypercover derived descent is not supplied by OneHypercover gluing, exact-functor localization, or the generic derived adjunction unit formula."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-proper-hypercover-etale-descent",
@@ -80,5 +196,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-site-hypercover-derived-descent",
+  "worker": "stage1",
+  "summary": "Proved the bounded-below Stacks 0D8N assertion through injective component acyclicity, objectwise exact hypercover section complexes on every base change, and Leray for bounded-below acyclic complexes. Retained the arbitrary (not necessarily subcanonical) site hypothesis and normalized the actual ordinary derived unit. Two new statement-only lemmas, no Mathlib leaf or Lean attachment.",
+  "blueprint": "The retained lem-trf-local-term-locality normal-cone specialization ancestry, Orgogozo Lemma 3.1.1 first descent isomorphism: steps 1--3 supply the injective case of general site descent, and steps 4--5 the bounded-below passage used by the proper-hypercover descent argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-restriction-injectives",
+    "why": "General exact extension-by-zero/restriction adjunction supplies localization injectivity; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "General existence theorem for arbitrary small slice and total sites; scheme-etale injective existence is insufficient."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Generic injective and bounded-below termwise-acyclic computation, applied to augmentation direct image; it does not replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic Grothendieck property for integer sheaves on base and total sites, checking the complexes clause of Leray."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Canonical bounded-below derived comparison on injective representatives, used to specify the unit as a chain-level adjoint."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-restriction-injectives",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-299f44bd8",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-299f44bd8 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited node's statement and the sources: Stacks spaces-simplicial section-hypercovering, 0D8N, 0D8G (paragraph 1 and bounded case), 0D79/0D7A with their proofs; hypercovering.tex covering-SR, the hypercovering definition, example-hypercovering-in-C, 01GE, 01GW and its proof; sites 09W9(3). The item statement (unchanged) is the D^+ case of 0D8N. Finite limits are stronger than the source's fibre products. Saying the sieve generated by U_n->M_n is covering is the 01GE local-surjectivity form of the source's condition. The conclusion is the actual unit. The five steps follow 0D8G and are correct: (1) slice and matching base change, elementary, pullback sieve checked including p=0; (2) j_! exact gives injective restriction, Leray(1), and the explicit formula C^p(T)=I(T x_X U_p); (3) 01GW-type exactness on every T, so the augmented sheaf complex is exact; (4) Grothendieck property via the ring-sheaf node with O=Z, plus a D^+ injective representative; (5) Leray(3) and the chain-level unit. New node injective-sections is true by 01GE and Hom(-,I) exactness, and it does not need subcanonicity. It differs from the subcanonical ringed variants and the scheme-specific variants, and it is not a restated item clause. New node augmentation-acyclic-cech is true: b_*F is the kernel of the first two face maps, by the vertex/edge argument, and the 0D7A double-complex comparison applies. It is not a duplicate of the scheme-étale spectral-sequence node or the total-site-components node. Small cases checked: a constant hypercover (maps id,0,id,...), I=0, and the trivial site. Fixes: (a) the acyclic-cech statement now names the kernel map e (adjoint of the degree-0 component of the counit) instead of a bare 'canonically'; (b) both new nodes spell out the augmentation, and injective-sections gives the covering-sieve hypothesis in terms of covering families; (c) item step 3 now derives e∘eta = unit of b_0 = restriction by the triangle identity and concludes that eta is an isomorphism. Accepted tool uses: site-restriction-injectives, site-sheaves-enough-injectives, leray-acyclicity, ring-sheaves-grothendieck, right-derived-plus-injective, all generic black boxes. No SGA source, no cycle, blueprint from/via/same_as correct.; 3 file(s) fixed by the reviewer"
  }
 }
