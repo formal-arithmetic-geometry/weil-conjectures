@@ -67,7 +67,7 @@ theorem rhom_supported_quasiCoherent_perfect_part
   intro n
   apply (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
     ((DerivedCategory.homologyFunctor
-      (SheafOfModules (moduleRings X.toRingedSpace)) n).mapIso (asIso c))
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).mapIso (asIso c))
   exact htensor n
 
 end AlgebraicGeometry
