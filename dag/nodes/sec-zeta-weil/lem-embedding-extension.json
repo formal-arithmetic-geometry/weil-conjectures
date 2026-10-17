@@ -231,5 +231,23 @@
   "group": "Q153",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-5b17c7614 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, every cited statement, the master and main-20261015 blueprints, and the Mathlib and slopmaster2 sources in full. The statement is unchanged and matches main-20261015. The report wrongly says main has no proof: its lem-embedding-extension.proof.md is verbatim the master proof, and this changes nothing. Steps 1-7 are checked one by one. The bases are taken directly over L, which is a valid simplification of the blueprint route. In step 5, uniqueness of algebraic closures (lem-pc-algebraic-closure-exists-unique (2)) is applied over the same field K after twisting C's structure by f~, so the restriction to L is σ. Step 6 uses lem-weil-realization-exists so the hypothesis on realizations is not empty, and uses finite generation for Q(α). Step 7 proves Galois stability directly from def-weil-numbers. All citations are definitions, Mathlib leaves, or the same-unit realization lemma, so there is no route issue and no tool_uses. Leaves confirmed: Complex.isAlgClosed (Polynomial/Basic.lean:52) exact; Cardinal.mk_complex (Complex/Cardinality.lean:25) exact; IsAlgClosed.cardinal_eq_cardinal_transcendence_basis_of_aleph0_lt (Classification.lean:122) a one-line specialization whose hypotheses all hold in step 3. The p-adic cardinality node is unsplit and statement-only. Its candidate PadicAlgCl.mk_eq_continuum (slopmaster2 Complex.lean:58-63) states exactly the same thing, and the file has no sorry; I support the attachment. I found no duplicates in the DAG or the blueprint, and no new node restates a clause of the item. Edge cases checked: L=Q, α=0, i≤0, γ=id, and the uncountability hypothesis. No fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EmbeddingExtension",
+  "declaration": "WeilConjectures.embedding_extension_and_intrinsic_weights",
+  "file": "lean/Sheaf/Paper/EmbeddingExtension.lean",
+  "statement": "theorem embedding_extension_and_intrinsic_weights (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (Qbar : Type v) [Field Qbar] [Algebra ℚ Qbar] [IsAlgClosure ℚ Qbar] (i : ℤ) (L : Subfield C.Qbar) [NumberField L] (σ : L →+* ℂ) : (∃ ι : C.Qbar ≃+* ℂ, ∀ x : L, ι (x : C.Qbar) = σ x) ∧ (∀ α : Qbar, (∀ (j : C.AlgebraicNumberRealization D Qbar) (ι : C.Qbar ≃+* ℂ), ‖ι ((AlgEquiv.toEquiv j) α : C.Qbar)‖ = (D.q : ℝ) ^ ((i : ℝ) / 2)) → ∀ τ : IntermediateField.adjoin ℚ ({α} : Set Qbar) →+* ℂ, ‖τ (IntermediateField.AdjoinSimple.gen ℚ α)‖ = (D.q : ℝ) ^ ((i : ℝ) / 2)) ∧ (∀ (γ : Qbar ≃ₐ[ℚ] Qbar) (α : Qbar), IsWeilNumber D α (i : ℝ) → IsWeilNumber D (γ α) (i : ℝ))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6708bc777",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Statement, dependencies, edge cases, docstrings, report sections, and Lean declarations checked; per-file scompile passed with server confirmation."
  }
 }

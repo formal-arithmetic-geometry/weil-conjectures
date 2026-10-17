@@ -10,7 +10,11 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-abstract-derived-category",
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "def-coef-tensored-algebroid-presentation",
+  "def-coef-integral-derived-coefficients",
+  "def-coef-coherent-monad-modules",
+  "def-coef-coherent-bar-word-data"
  ],
  "proof": [
   {
@@ -226,5 +230,42 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-13ddc9d23 (reviewer sub-agent of L); spot-checked: I read the whole split: the statement, all 8 steps, the full statements of all four cited nodes (lem-coef-infinity-monadic-bar, lem-coef-enriched-category-tensor-calculus, def-cbc-enhanced-diagrams-cones, def-coef-complete-algebroid), the citing step of the parent lem-coef-quillen-section-rectification, and paragraph 2 of the blueprint proof main-20261015 prop-coef-integral-exceptional-adjoint. That paragraph does not prove the bar theorem, so proof_origin by=agent is correct. The delivery creates no new nodes, cites no SGA and has empty tool_uses. Every proof dependency is in unit sk-prop-sf-biduality-general or is a definition, and there is no cycle. I redid the computations by hand. The cofaces are d^0 f = b T(f) (using the triangle identity Uε_Z η_{UZ} = 1), interior d^i f = f T^{i-1}μ, and last d^{r+1} f = f T^r(a). The r codegeneracies from degree r to r-1 are s^i f = f T^i η. The augmentation component is α_r(F) = U(F) a^[r], via a^[r+1] η = a^[r]. The split-word composite reduces to v(1⊗u)(1⊗1⊗a^[p+q]): this uses counit naturality together with the hypothesis that the counit respects the tensor comparison. As an independent check, U(G) b^[q] T^q(U(F) a^[p]) = U(G) U(F) a^[p+q] because U(F) is a T-module map. Step 7's conjugated m_Q is a real morphism with pr_{p+q} m_Q ≃ c_{p,q}(pr_q⊗pr_p). Associativity holds: h T^r(g) T^{r+q}(f) for both bracketings. Edge cases checked: T = id gives a constant cosimplicial object; p = q = 0 gives ordinary composition; the unit at r = 0 is 1_A. The steps use no hypothesis outside the statement. A DAG search found no duplicate; linear-monad-tensor-enrichment, dg-model-homotopy-colimits and infinity-free-module-bar state other facts. FIX (C1): step 2 makes D(-,Y) a coherent V-valued diagram and Ψ a coherent enriched equivalence, which needs the coherence of enriched composition and evaluation, but the step did not cite it. I added lem-coef-enriched-category-tensor-calculus to step 2's uses; the node was already in proof_deps. Remark only: the inherited statement uses 'enriched adjunction' and 'tensored' without a definition node, which many coef nodes share project-wide. The statement is unchanged and not weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MonadicBarTotalization",
+  "declaration": "SSet.Enhanced.Algebroid.monadic_bar_totalization",
+  "declarations": [
+   "SSet.Enhanced.MonadicBarTotalization",
+   "SSet.Enhanced.counitBarMappingDiagram",
+   "SSet.Enhanced.counitBarMappingRestriction",
+   "SSet.Enhanced.counitBarMappingEvaluation",
+   "SSet.Enhanced.IsCounitBarMappingLimit",
+   "SSet.Enhanced.Algebroid.constantModuleWeight",
+   "SSet.Enhanced.Algebroid.relativeCoherentModules",
+   "SSet.Enhanced.Algebroid.relativeCoherentForget",
+   "SSet.Enhanced.Algebroid.relativeCoherentDiagram",
+   "SSet.Enhanced.Algebroid.IsLinearCoherentMonad",
+   "SSet.Enhanced.Algebroid.IsCoherentModuleEnrichment",
+   "SSet.Enhanced.Algebroid.IsLinearCounitBar",
+   "SSet.Enhanced.Algebroid.MappingOutPreservesRealizations",
+   "SSet.Enhanced.Algebroid.monadicMappingTerm",
+   "SSet.Enhanced.Algebroid.monadicMappingAt",
+   "SSet.Enhanced.Algebroid.monadic_bar_totalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/MonadicBarTotalization.lean",
+  "statement": "theorem monadic_bar_totalization {E : SSet.{u + 2}} (p : E ⟶ monoidalSimplexBase.{u + 2}) (unit : UnitSection p) (_coefficients : IntegralDerivedCoefficients.{u} p) (P Q : TensoredAlgebroidPresentation.{u + 1} p unit) (L : LinearTensoredFunctor P Q) (U : LinearTensoredFunctor Q P) (adj : LinearTensoredAdjunction P Q L U) (_realizations : HasInfinityColimitsOfShape splitSimplicialIndex Q.category) (_preserves : PreservesInfinityColimitsOfShape splitSimplicialIndex U.underlying) (_conservative : ∀ e : Q.category _⦋1⦌, IsEquivalenceEdge P.category (U.underlying.app _ e) → IsEquivalenceEdge Q.category e) (_mapping_out : MappingOutPreservesRealizations Q.hom) : ∃ (T : CoherentMonad P.actionTotal) (T₀ : CoherentMonad P.category) (R : TensoredAlgebroidPresentation p unit) (F : LinearTensoredFunctor R P) (K : LinearTensoredFunctor Q R) (M : R.actionTotal ⟶ relativeCoherentModules T P.actionBase) (K₀ : Q.category ⟶ coherentMonadModules T₀) (B : splitAugmentedIndex ⊗ Q.actionTotal ⟶ Q.actionTotal) (B₀ : splitAugmentedIndex ⊗ Q.category ⟶ Q.category) (H : splitAugmentedIndex.op ⊗ (Q.category.op ⊗ Q.category) ⟶ monoidalUnderlying p) (Ψ : (splitAugmentedIndex.op ⊗ (Q.category.op ⊗ Q.category)) ⊗ Δ[1] ⟶ monoidalUnderlying p), IsLinearCoherentMonad P T ∧ coherentMonadFunctor T = L.total ≫ U.total ∧ (coherentMonadUnitIndex ▷ P.actionTotal) ≫ T.action = (β_ Δ[1] P.actionTotal).hom ≫ adj.unitTotal ∧ monadicMultiplication T = (𝟙 Δ[1] ⊗ₘ L.total) ≫ (β_ Δ[1] Q.actionTotal).hom ≫ adj.counitTotal ≫ U.total ∧ (𝟙 coherentMonadIndex ⊗ₘ CoherentBar.fiberInclusion P.actionBase (op CoherentBar.mixedLetter)) ≫ T.action = T₀.action ≫ CoherentBar.fiberInclusion P.actionBase (op CoherentBar.mixedLetter) ∧ coherentMonadFunctor T₀ = L.underlying ≫ U.underlying ∧ (coherentMonadUnitIndex ▷ P.category) ≫ T₀.action = monadicEdgeFamily adj.underlying.unitEdge ∧ monadicMultiplication T₀ = monadicWhisker L.underlying U.underlying adj.underlying.counitEdge ∧ IsCoherentModuleEnrichment P R T F M ∧ K.total ≫ F.total = U.total ∧ K.underlying ≫ F.underlying = U.underlying ∧ IsFunctorEquivalence K.total ∧ IsFunctorEquivalence K.underlying ∧ K₀ ≫ coherentModuleForget T₀ = U.underlying ∧ L.underlying ≫ K₀ ≫ coherentModuleDiagram T₀ = coherentFreeDiagram T₀ ∧ monadicComparisonAction T₀ K₀ = monadicWhisker (𝟙 Q.category) U.underlying adj.underlying.counitEdge ∧ CoherentBar.fiberInclusion Q.actionBase (op CoherentBar.mixedLetter) ≫ K.total ≫ M ≫ relativeCoherentDiagram T P.actionBase = K₀ ≫ coherentModuleDiagram T₀ ≫ (ihom coherentAlgebraWeight).map (CoherentBar.fiberInclusion P.actionBase (op CoherentBar.mixedLetter)) ∧ L.total ≫ K.total ≫ M ≫ relativeCoherentDiagram T P.actionBase = coherentFreeDiagram T ∧ (monadicModuleActionIndex ▷ Q.actionTotal) ≫ (𝟙 coherentAlgebraWeight ⊗ₘ (K.total ≫ M ≫ relativeCoherentDiagram T P.actionBase)) ≫ (ihom.ev coherentAlgebraWeight).app P.actionTotal = (β_ Δ[1] Q.actionTotal).hom ≫ adj.counitTotal ≫ U.total ∧ IsLinearCounitBar P Q L U adj B ∧ (𝟙 splitAugmentedIndex ⊗ₘ CoherentBar.fiberInclusion Q.actionBase (op CoherentBar.mixedLetter)) ≫ B = B₀ ≫ CoherentBar.fiberInclusion Q.actionBase (op CoherentBar.mixedLetter) ∧ (∀ x : Q.category _⦋0⦌, IsSplitAugmentationColimit (coherentBarAt B₀ x)) ∧ lift (SSet.const (SSet.opObjEquiv.symm splitAugmentationVertex)) (𝟙 _) ≫ H = Q.hom ∧ (∀ r : ℕ, lift (SSet.const (SSet.opObjEquiv.symm (coherentBarDegree r))) (𝟙 _) ≫ H = monadicMappingTerm T₀ U.underlying P.hom r) ∧ lift (𝟙 _) (SSet.const (stdSimplex.obj₀Equiv.symm 0)) ≫ Ψ = counitBarMappingDiagram B₀ Q.hom ∧ lift (𝟙 _) (SSet.const (stdSimplex.obj₀Equiv.symm 1)) ≫ Ψ = H ∧ (∀ z : (splitAugmentedIndex.op ⊗ (Q.category.op ⊗ Q.category)) _⦋0⦌, IsEquivalenceEdge (monoidalUnderlying p) ((lift (SSet.const z) (𝟙 Δ[1]) ≫ Ψ).app _ (SSet.yonedaEquiv (𝟙 Δ[1])))) ∧ (lift (SSet.const (SSet.opObjEquiv.symm splitAugmentationVertex)) (𝟙 _) ⊗ₘ 𝟙 Δ[1]) ≫ Ψ = fst _ _ ≫ Q.hom ∧ ∀ x y : Q.category _⦋0⦌, IsCounitBarMappingLimit (monadicMappingAt H x y)",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical tensor-enriched module model retains ordinal-sum equivariance on the full algebra weight, including iterated cuts and empty words. The limiting comparison is an augmented natural equivalence, constant at its actual apex. All helpers are concrete constructions; only the named theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-05d12b80a",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Statement, dependencies, universes, edge cases, docstrings, report sections, and compiler evidence checked; delivery is correct."
  }
 }

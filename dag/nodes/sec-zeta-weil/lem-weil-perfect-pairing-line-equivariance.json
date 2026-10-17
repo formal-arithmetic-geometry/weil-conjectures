@@ -190,5 +190,23 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-04dd99b6f (reviewer sub-agent of L); spot-checked: I read the whole item. It is unchanged, true and self-contained, with perfectness defined inline and stmt_deps limited to the dimension and finite-dimensional definition nodes. I read all six steps against the statement of def-weil-vector-space-dimension (dimension = size of a basis, basis-independent). Step 1 gets the unique coordinate along e = ab with a ≠ 0. Step 2 proves T = β(e,-) injective from injectivity of J. Step 3 builds f_m and uses surjectivity of J, so T is a linear iso. Step 4 shows W has a singleton basis {T^{-1}(m0)}. Step 5 substitutes x = e to get equivariance. Step 6 uses injectivity to get F_W = c·id, with no division by c. Every step is honestly elementary. Small cases: V = W = M = L with β = a·xy gives F_W = c, including c = 0 and over F_2; W = 0 is impossible; rescaling e is harmless. The statement matches its only use, prop-endpoints step 3 (L = Q_l, V = H^0, W = H^{2d}, M = Q_l(-d), c = q^d). Sources: prop-endpoints.md and .proof.md, identical in main-20261015 and master; Milne LEC Remark 27.7 (p. 156) and the proof of Thm 27.12 (p. 158) give only the motivation, so proof_origin by agent is correct. Duplicate search: lem-weil-similitude-pairing-reciprocity is scalar-valued, needs c ≠ 0 and has spectral conclusions, so it is no duplicate; no blueprint same_as. All three kinds of Mathlib search are recorded and none gives a full match. No new nodes, no tool_uses, no SGA, nothing changed under fixes."
+ },
+ "lean": {
+  "module": "Sheaf.ZetaWeil.PerfectPairingLineEquivariance",
+  "declaration": "LinearMap.perfectPairingLineEquivariance",
+  "file": "lean/Sheaf/ZetaWeil/PerfectPairingLineEquivariance.lean",
+  "statement": "theorem perfectPairingLineEquivariance (L : Type uL) [Field L] (V : Type uV) [AddCommGroup V] [Module L V] [FiniteDimensional L V] (W : Type uW) [AddCommGroup W] [Module L W] [FiniteDimensional L W] (M : Type uM) [AddCommGroup M] [Module L M] [FiniteDimensional L M] (β : V →ₗ[L] W →ₗ[L] M) (hβ : Function.Bijective β) (hβ_flip : Function.Bijective β.flip) (F_V : V →ₗ[L] V) (F_W : W →ₗ[L] W) (F_M : M →ₗ[L] M) (c : L) (hcompat : ∀ (x : V) (y : W), β (F_V x) (F_W y) = F_M (β x y)) (hV : F_V = LinearMap.id) (hM : F_M = c • LinearMap.id) (hVdim : Module.finrank L V = 1) (hMdim : Module.finrank L M = 1) : Module.finrank L W = 1 ∧ (∀ (e : V), e ≠ 0 → Function.Bijective (β e) ∧ (∀ y : W, β e (F_W y) = F_M (β e y))) ∧ F_W = c • LinearMap.id",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-60f823917",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, report sections, and per-file scompile evidence all checked; no findings."
  }
 }

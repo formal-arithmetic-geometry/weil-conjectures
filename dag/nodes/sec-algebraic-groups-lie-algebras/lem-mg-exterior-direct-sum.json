@@ -76,5 +76,23 @@
   }
  },
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-r-linear-library"
+ "unit": "sk-r-linear-library",
+ "lean": {
+  "module": "WeilConjectures.RepresentationTheory.ExteriorPowerDirectSum",
+  "declaration": "Representation.exteriorPowerDirectSumEquiv",
+  "statement": "noncomputable def exteriorPowerDirectSumEquiv : ∀ {s : ℕ} {V : Fin s → Type v}\n    [∀ i, AddCommGroup (V i)] [∀ i, Module k (V i)] [∀ i, FiniteDimensional k (V i)]\n    (ρs : ∀ i, Representation k W (V i)) (N : ℕ),\n    ((directSum ρs).exteriorPower N).Equiv\n      (directSum fun n : {n : Fin s → ℕ // ∑ i, n i = N} ↦ piTprodExteriorPower ρs n.1)",
+  "branch": "slopmaster2",
+  "by": "Q34",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Existing source declaration in WeilConjectures.RepresentationTheory.ExteriorPowerDirectSum. Its Fin-indexed family of finite-dimensional representations and sum-indexed direct sum of pi tensor products is exactly the canonical equivariant exterior-power decomposition in the node; cases s = 0 and N = 0 are included by the declaration."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ffba67332",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable node/report, exact blueprint source, upstream constructions, dependencies, universes and edge cases. Statement matches verbatim; scompile.py checks passed with standard axioms only. No fixes needed; branch unchanged."
+ }
 }

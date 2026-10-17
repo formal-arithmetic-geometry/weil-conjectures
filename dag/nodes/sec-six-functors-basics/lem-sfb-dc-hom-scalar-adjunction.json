@@ -15,7 +15,9 @@
   "def-pc-kflat-complex",
   "lem-pur-derived-change-of-rings",
   "def-pur-derived-internal-hom",
-  "def-pc-sheaf-restrict-scalars"
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-coef-ringed-tensor-hom-model"
  ],
  "proof": [
   {
@@ -269,5 +271,53 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-cf84f8d82 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the statement of every cited node, the parent lem-sfb-dc-hom-preserves (step 6 is its only use of the item), the unit record and the main-20261015 blueprint proof. I checked Stacks 07A6, 07A4 (including its proof), 0D6D, 08J9, 08JA and 05RT at the cited labels. There are no new nodes and no SGA source; the DAG stays acyclic; no existing node duplicates the item. The coefficient category is ordinary unbounded D(Mod) on a V-small site, the same as in every cited node. Steps 1-3: I checked all five Hom bijections, their domains and the direction of mu. Step 4 is a Yoneda argument with an explicit inverse. Step 5: I recomputed the transpose of alpha; naturality of eta and mu plus the triangle identity reduce it to restricted evaluation after the unit. Step 6: S⊗_R P is K-flat with flat terms, so towers are computed by actual complexes, and the unit identity x↦1⊗(1⊗x)↦1⊗x holds by clause (1) of the coefficient-adjunction node. Step 7: I checked the types and the cancellation in the successive Hom chain, and the pure-tensor identity (t b(s)⊗x)⊗(1⊗y). That identity rests on the termwise construction from Stacks 07A4's proof, which the tensor-pullback node calls canonical; this is a mild reliance, not a gap. Step 8: restriction commutes with cohomology and reflects isomorphisms of module sheaves, and the unbounded cohomology criterion then gives conservativity. Small cases checked: the zero ring, and Z→F_p with K=Z and K=Z/p (both sides N⊕N[-1]). I accept all six declared tool_uses as generic ringed-site coefficient tools. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ScalarInternalHomAdjunction",
+  "declaration": "CategoryTheory.scalarInternalHomAdjunction_exists",
+  "declarations": [
+   "SheafOfModules.scalarModules",
+   "SheafOfModules.scalarRestriction",
+   "SheafOfModules.scalarRestriction_limits",
+   "SheafOfModules.scalarRestriction_colimits",
+   "SheafOfModules.scalarComplex",
+   "SheafOfModules.scalarHomotopy",
+   "SheafOfModules.scalarDerivedRestriction",
+   "SheafOfModules.scalarRestrictionComparison",
+   "SheafOfModules.scalarPairComplexComparison",
+   "SheafOfModules.scalarChainTranspose",
+   "SheafOfModules.ScalarDerivedPair",
+   "CategoryTheory.ScalarHomModels",
+   "CategoryTheory.scalarHomUnitSection",
+   "CategoryTheory.ScalarHomTensorComparison",
+   "CategoryTheory.scalarHomSource",
+   "CategoryTheory.scalarHomTarget",
+   "CategoryTheory.scalarHomBijection",
+   "CategoryTheory.scalarHomRestrictionTensor",
+   "CategoryTheory.scalarHomRestrictedEvaluation",
+   "CategoryTheory.scalarHomOrdinaryRestrictionComp",
+   "CategoryTheory.scalarHomRestrictionComp",
+   "CategoryTheory.scalarHomOrdinaryRestrictionId",
+   "CategoryTheory.scalarHomRestrictionId",
+   "CategoryTheory.scalarHomExtensionComp",
+   "CategoryTheory.scalarHomExtensionId",
+   "CategoryTheory.ScalarInternalHomAdjunction",
+   "CategoryTheory.scalarInternalHomAdjunction_exists"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ScalarInternalHomAdjunction.lean",
+  "statement": "theorem scalarInternalHomAdjunction_exists : ∃ (M : ScalarHomModels.{c, v, r, w} J) (μ : ∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S), ScalarHomTensorComparison M a), Nonempty (ScalarInternalHomAdjunction M μ)",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical evaluation-normalized comparison, five representing Hom bijections, arbitrary coefficient-tower and identity coherence, and conservative exact restriction. Reuses the landed normalized scalar-adjunction and tensor-Hom representative model; helpers only package those actual operations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2dbed4899",
+  "group": "N2",
+  "result": "fix",
+  "note": "Mechanical H1/H11 report defect fixed in fixes/lem-sfb-dc-hom-scalar-adjunction.report.md; no mathematical or Lean correction needed."
  }
 }
