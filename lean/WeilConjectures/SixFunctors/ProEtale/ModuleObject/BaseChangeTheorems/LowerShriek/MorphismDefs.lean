@@ -272,7 +272,7 @@ end OpenImmersion
 
 section LowerShriek
 
-variable {X Y X' Y' : Over (Spec (.of k))}
+variable [IsFinitenessCoefficient ℓ Λ] {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]

@@ -141,7 +141,8 @@ variable {X Y Z : Over (Spec (.of k))}
 /-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the derived lower shriek on
 bounded constructible complexes, for the chosen compactifications. -/
 @[no_expose]
-noncomputable def Slop.boundedConstructibleLowerShriekComp (f : X ⟶ Y) (g : Y ⟶ Z) :
+noncomputable def Slop.boundedConstructibleLowerShriekComp
+    [IsFinitenessCoefficient ℓ Λ] (f : X ⟶ Y) (g : Y ⟶ Z) :
     boundedConstructibleLowerShriek Λ ℓ (f ≫ g) ≅
       boundedConstructibleLowerShriek Λ ℓ f ⋙ boundedConstructibleLowerShriek Λ ℓ g :=
   sorry

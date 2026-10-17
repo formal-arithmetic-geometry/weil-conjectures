@@ -258,7 +258,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
   {p : X' ⟶ X} {i' : X' ⟶ Z'} {j : X ⟶ Z} {p' : Z' ⟶ Z}
-  [IsOpenImmersion j.left] [IsOpenImmersion i'.left]
+  [IsOpenImmersion j.left] [IsOpenImmersion i'.left] [IsFinitenessCoefficient ℓ Λ]
 
 include ℓ k
 

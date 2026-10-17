@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FinitenessCoefficient
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.Over
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
@@ -101,6 +102,13 @@ These are theorems for the `ℓ`-adic coefficient rings, the condensed rings `E�
 extension `E` of `ℚ_ℓ` and `ℚ̲̄_ℓ` (Deligne's finiteness theorems, Bhatt–Scholze, Section 6.8);
 `Λ` is kept general here, the coefficient ring being an input of the statements.
 
+That `Rf_*` preserves bounded constructible complexes is false for a general `Λ` (for the constant
+discrete ring `𝔽_p`, `H¹(𝔸¹, 𝔽_p)` is infinite by Artin–Schreier). It is stated, and the
+restricted pushforward `Rf_*`, its adjunction and the lower shriek are defined, only for the
+coefficient rings of Deligne's finiteness theorems, `[IsFinitenessCoefficient ℓ Λ]`
+(`WeilConjectures.CategoryTheory.RingObjects.Condensed.FinitenessCoefficient`), as in the
+blueprint (`sk-def-sfb-dc-restricted-functors`).
+
 -/
 
 @[expose] public section
@@ -184,14 +192,11 @@ noncomputable def boundedConstructibleUpperStarComp {Z : Over (Spec (.of k))}
       Functor.isoWhiskerLeft _ (boundedConstructibleUpperStarCompatibility Λ ℓ f).symm ≪≫
       (Functor.associator _ _ _).symm)
 
-/- STATEMENT-DISPUTED: arbitrary condensed coefficients include the constant discrete F_p
-in characteristic p. For A¹ over an algebraically closed field of characteristic p,
-Artin–Schreier gives H¹(A¹, F_p) = k[t] / (F - 1)k[t], which is infinite-dimensional.
-Thus this nonproper pushforward is not constructible. The assumptions on ℓ do not constrain
-Λ. A coefficient hypothesis is needed; the signature and original hole are retained. -/
-/-- The derived pushforward `Rf_*` on module objects over `Λ` preserves bounded constructible
-complexes. -/
-lemma boundedConstructible_rightDerivedLowerStar_obj
+/-- The derived pushforward `Rf_*` on module objects over a coefficient ring `Λ` of Deligne's
+finiteness theorems preserves bounded constructible complexes. For a general `Λ` this is false:
+for the constant discrete ring `𝔽_p` and the affine line over an algebraically closed field of
+characteristic `p`, Artin–Schreier gives `H¹(𝔸¹, 𝔽_p) = k[t] / (F - 1) k[t]`, which is infinite. -/
+lemma boundedConstructible_rightDerivedLowerStar_obj [IsFinitenessCoefficient ℓ Λ]
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj Λ X.left)))
     (hK : boundedConstructible (condensedRingObj Λ X.left) K) :
@@ -200,12 +205,13 @@ lemma boundedConstructible_rightDerivedLowerStar_obj
 
 /-- The derived pushforward `Rf_* : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` on bounded constructible complexes:
 the restriction of `R((f)_*⟦Λ⟧)`. -/
-noncomputable def boundedConstructibleLowerStar : Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(Y.left)⟦Λ⟧ :=
+noncomputable def boundedConstructibleLowerStar [IsFinitenessCoefficient ℓ Λ] :
+    Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(Y.left)⟦Λ⟧ :=
   (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ R((f.left)_*⟦Λ⟧))
     fun K ↦ boundedConstructible_rightDerivedLowerStar_obj Λ ℓ f K.obj K.property
 
 /-- The restricted derived pushforward is compatible with the inclusions. -/
-noncomputable def boundedConstructibleLowerStarCompatibility :
+noncomputable def boundedConstructibleLowerStarCompatibility [IsFinitenessCoefficient ℓ Λ] :
     boundedConstructibleLowerStar Λ ℓ f ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ R((f.left)_*⟦Λ⟧) :=
   ObjectProperty.liftCompιIso _ _ _
@@ -213,7 +219,7 @@ noncomputable def boundedConstructibleLowerStarCompatibility :
 /-- The derived adjunction `Lf^* ⊣ Rf_*` on bounded constructible complexes: the restriction of
 `ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction` along the fully faithful
 inclusions. -/
-noncomputable def boundedConstructibleUpperStarLowerStarAdjunction :
+noncomputable def boundedConstructibleUpperStarLowerStarAdjunction [IsFinitenessCoefficient ℓ Λ] :
     boundedConstructibleUpperStar Λ ℓ f ⊣ boundedConstructibleLowerStar Λ ℓ f :=
   Adjunction.restrictFullyFaithful (derivedUpperStarLowerStarAdjunction Λ f.left)
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
@@ -222,20 +228,21 @@ noncomputable def boundedConstructibleUpperStarLowerStarAdjunction :
 
 /-- The derived pullback `Lf^*` on bounded constructible complexes is a left adjoint, its right
 adjoint being `boundedConstructibleLowerStar`. -/
-instance isLeftAdjoint_boundedConstructibleUpperStar :
+instance isLeftAdjoint_boundedConstructibleUpperStar [IsFinitenessCoefficient ℓ Λ] :
     (boundedConstructibleUpperStar Λ ℓ f).IsLeftAdjoint :=
   (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f).isLeftAdjoint
 
 /-- The derived pushforward `Rf_*` on bounded constructible complexes is a right adjoint, its
 left adjoint being `boundedConstructibleUpperStar`. -/
-instance isRightAdjoint_boundedConstructibleLowerStar :
+instance isRightAdjoint_boundedConstructibleLowerStar [IsFinitenessCoefficient ℓ Λ] :
     (boundedConstructibleLowerStar Λ ℓ f).IsRightAdjoint :=
   (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f).isRightAdjoint
 
 /-- The composition isomorphism `Rf_* ⋙ Rg_* ≅ R(f ≫ g)_*` on bounded constructible complexes:
 the conjugate of `boundedConstructibleUpperStarComp` under the adjunctions
 `L(f ≫ g)^* ⊣ R(f ≫ g)_*` and `Lg^* ⋙ Lf^* ⊣ Rf_* ⋙ Rg_*`. -/
-noncomputable def boundedConstructibleLowerStarComp {Z : Over (Spec (.of k))}
+noncomputable def boundedConstructibleLowerStarComp [IsFinitenessCoefficient ℓ Λ]
+    {Z : Over (Spec (.of k))}
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (g : Y ⟶ Z) :
     boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleLowerStar Λ ℓ g ≅
       boundedConstructibleLowerStar Λ ℓ (f ≫ g) :=
@@ -342,7 +349,7 @@ section Shriek
 
 include ℓ k
 
-variable {X Y : Over (Spec (.of k))}
+variable [IsFinitenessCoefficient ℓ Λ] {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 

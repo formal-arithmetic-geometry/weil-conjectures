@@ -211,6 +211,7 @@ cartesian square `sq` of open immersions `i`, `i₁` and a morphism `h` as in
 followed by the inverse of the restriction comparison,
 `i₁_! ⟶ i₁_! ⋙ Lh^* ⋙ Rh_* ≅ i_! ⋙ Rh_*`. -/
 noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
+    [IsFinitenessCoefficient ℓ Λ]
     (sq : IsPullback (𝟙 X) i i₁ h) :
     boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⟶
       boundedConstructibleOpenImmersionLowerShriek Λ ℓ i ⋙ boundedConstructibleLowerStar Λ ℓ h :=
@@ -225,7 +226,7 @@ open scoped CategoryTheory.Obj in
 open CategoryTheory.Limits in
 /-- A proper refinement is an isomorphism on the open. On the complement, proper
 base change sends the extension-by-zero object to zero. -/
-private theorem refinementUnitIsIsoOfComplement
+private theorem refinementUnitIsIsoOfComplement [IsFinitenessCoefficient ℓ Λ]
     (sq : IsPullback (𝟙 X) i i₁ h)
     {C P : Over (Spec (.of k))}
     [LocallyOfFiniteType C.hom] [QuasiCompact C.hom] [IsSeparated C.hom]
@@ -305,7 +306,7 @@ private theorem refinementUnitIsIsoOfComplement
 
 open scoped CategoryTheory.Obj in
 open CategoryTheory.Limits in
-private theorem refinementPushforwardIsIsoOfProperBC
+private theorem refinementPushforwardIsIsoOfProperBC [IsFinitenessCoefficient ℓ Λ]
     [IsProper h.left] (sq : IsPullback (𝟙 X) i i₁ h)
     (hBC : ∀ {C P : Over (Spec (.of k))}
       [LocallyOfFiniteType C.hom] [QuasiCompact C.hom] [IsSeparated C.hom]
@@ -354,7 +355,8 @@ variable {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.h
 `i₁_! ⟶ i_! ⋙ Rh_*` is an isomorphism: `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rh_* ⋙ Rp₁_* ≅ i_! ⋙ Rp_*`. For
 compactifications `c` and `c₁` of `f` with `i = c.overI`, `p = c.overG`, `i₁ = c₁.overI` and
 `p₁ = c₁.overG`, it is an isomorphism `Rf_!^{c₁} ≅ Rf_!^c`. -/
-noncomputable def boundedConstructibleLowerShriekRefinementIso (sq : IsPullback (𝟙 X) i i₁ h)
+noncomputable def boundedConstructibleLowerShriekRefinementIso
+    [IsFinitenessCoefficient ℓ Λ] (sq : IsPullback (𝟙 X) i i₁ h)
     {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
     [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward Λ ℓ sq)] :
     boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⋙ boundedConstructibleLowerStar Λ ℓ p₁ ≅
