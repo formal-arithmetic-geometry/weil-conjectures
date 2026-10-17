@@ -108,7 +108,8 @@ noncomputable def pointSectionsDerivedBaseChangeIso :
     additive_constantSheaf Λ' _
   let eE := (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).symm.mapDerivedCategory
   let eF := (constantSheafEquivalenceOfIsSepClosed Λ' (k := k)).symm.mapDerivedCategory
-  let adjM := (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ).mapDerivedCategoryAdjunction
+  let adjM :=
+    (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ).mapDerivedCategoryAdjunction
   let κ₀ : derivedRestrictScalars φ (Spec (.of k)) ⋙ eE.functor ≅
       eF.functor ⋙ (ModuleCat.restrictScalars.{u + 1} φ).mapDerivedCategory :=
     (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫ Functor.mapDerivedCategoryCompIso
@@ -218,8 +219,10 @@ lemma exists_isDerivedBaseChange_integersStageMap {X : Scheme.{u}}
 /-- The derived base change `K ↦ K ⊗ᴸ_{𝒪_E} 𝒪_F` on `D(s_ét, 𝒪_E)`, left adjoint to restriction
 of scalars. -/
 noncomputable def stageDerivedBaseChange :
-    DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} (StageInt.{u} l E))) ⥤
-    DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} (StageInt.{u} l F))) :=
+    DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology
+      (ModuleCat.{u + 1} (StageInt.{u} l E))) ⥤
+    DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology
+      (ModuleCat.{u + 1} (StageInt.{u} l F))) :=
   let φ := integersStageMap.{u} h
   derivedBaseChange φ (Spec (.of k)) (exists_isDerivedBaseChange_integersStageMap h)
 
@@ -315,7 +318,8 @@ noncomputable def rationalStageTransitionFac :
         (DerivedCategory.boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l F.1)
           (Spec (.of k))).FullSubcategory := by
   unfold rationalStageTransition
-  exact Localization.Lifting.iso _ (Rationalization.W _ _) _ _
+  exact Localization.Lifting.iso _
+    (Rationalization.W (R := StageInt.{u} l E) (nonZeroDivisors _) _) _ _
 
 /-- The evaluation at the geometric point commutes with the scalar extension `- ⊗_E F`:
 `Fib_s(K ⊗_E F) ≅ Fib_s(K) ⊗_E F` for `K ∈ Dᵇc(s, E)`. -/
@@ -347,12 +351,44 @@ noncomputable def pointFiberStageTransitionIso :
     (integralStageTransition k h ⋙ ΦF) (ΦE ⋙ stageDerived l h)
     (rationalStageTransition k h ⋙ HF) (HE ⋙ stageDerived l h)
     (pointFiberRationalAuxTransitionIso k h)
-  exact NatIso.ofComponents (fun X ↦ (_root_.DerivedCategory.boundedFiniteCohomology _).isoMk (β.app X))
+  exact NatIso.ofComponents
+    (fun X ↦ (_root_.DerivedCategory.boundedFiniteCohomology _).isoMk (β.app X))
     fun f ↦ by
       ext
       exact β.hom.naturality f
 
 end Compatibility
+
+section Colimit
+
+/-- The cocone of categories `E ↦ (Fib_s ⊗_E ℚ̄_ℓ : Dᵇc(s, E) ⥤ Dᵇ_fd(ℚ̄_ℓ))` over the finite
+subextensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, with the scalar extensions `- ⊗_E F` as transition functors:
+the evaluation at the geometric point taken stagewise, followed by extension of scalars to
+`ℚ̄_ℓ`. -/
+noncomputable def pointFiberCocone :
+    CategoryCocone (fun E : FiniteIntermediateField l ↦ RationalPointStage.{u} l k E)
+      (FdAlgCl.{u} l) :=
+  (fdCocone l).transport (fun h ↦ rationalStageTransition k h)
+    (fun E ↦ (pointFiberStageEquivalence l k E).functor) (fun h ↦ pointFiberStageTransitionIso k h)
+
+/-- Blueprint `def-weil-finite-coefficient-point`: Finite coefficient categories over a point
+(stage `ℚ̄_ℓ`).
+
+At the algebraically closed coefficient `ℚ̄_ℓ`, `Dᵇc(s, ℚ̄_ℓ)` is the filtered 2-colimit
+`2-colim_E Dᵇc(s, E)` over the finite subextensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` along the scalar
+extensions `- ⊗_E F` (blueprint `def-weil-algebraically-closed-coefficients`), and
+`Dᵇ_fd(ℚ̄_ℓ) = 2-colim_E Dᵇ_fd(E)` is the bounded derived category of finite-dimensional
+`ℚ̄_ℓ`-vector spaces (`PadicAlgCl.fdCocone_isFilteredTwoColimit`). The evaluation at the
+geometric point of `s = Spec k`, obtained stagewise from the equivalences
+`Fib_s : Dᵇc(s, E) ≌ Dᵇ_fd(E)` (`AlgebraicGeometry.Etale.pointFiberStageEquivalence`), which
+commute with the scalar extensions (`AlgebraicGeometry.Etale.pointFiberStageTransitionIso`), and
+passed to the colimit, identifies `2-colim_E Dᵇc(s, E)` with `Dᵇ_fd(ℚ̄_ℓ)`: the cocone
+`E ↦ Fib_s ⊗_E ℚ̄_ℓ` with vertex `Dᵇ_fd(ℚ̄_ℓ)` is a filtered 2-colimit, i.e.
+`Fib_s : Dᵇc(s, ℚ̄_ℓ) ≌ Dᵇ_fd(ℚ̄_ℓ)`. -/
+theorem pointFiberCocone_isFilteredTwoColimit : (pointFiberCocone l k).IsFilteredTwoColimit :=
+  (fdCocone_isFilteredTwoColimit l).transport
+
+end Colimit
 
 end Etale
 

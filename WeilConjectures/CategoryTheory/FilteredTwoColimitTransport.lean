@@ -15,7 +15,8 @@ Let `c'` be a cocone of categories on a directed system `C' i` with vertex `D`, 
 `F i : C i ⥤ C' i` be equivalences from the stages of another directed system `C i`, compatible
 with the transition functors up to isomorphisms `β h : T h ⋙ F j ≅ F i ⋙ T' h`. Composing
 with the `F i` gives a cocone `CategoryCocone.transport` on the `C i` with the same vertex, and it
-is a filtered 2-colimit as soon as `c'` is (`CategoryTheory.CategoryCocone.IsFilteredTwoColimit.transport`):
+is a filtered 2-colimit as soon as `c'` is
+(`CategoryTheory.CategoryCocone.IsFilteredTwoColimit.transport`):
 a functor between filtered 2-colimits defined stagewise by equivalences is an equivalence. No
 compatibility of the `β h` with the composition of the transition functors is needed.
 -/

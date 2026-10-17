@@ -33,8 +33,9 @@ variable {F : Type (u + 1)} [Field F]
   (hs : ∀ X (n : ℤ), Q X → Q (X⟦n⟧))
 
 include h₀ hb in
-private lemma prop_single_pi (hF : Q ((singleFunctor (ModuleCat.{u + 1} F) 0).obj (ModuleCat.of F F)))
-    (n : ℕ) : Q ((singleFunctor (ModuleCat.{u + 1} F) 0).obj (ModuleCat.of F (Fin n → F))) := by
+private lemma prop_single_pi
+    (hF : Q ((singleFunctor (ModuleCat.{u + 1} F) 0).obj (ModuleCat.of F F))) (n : ℕ) :
+    Q ((singleFunctor (ModuleCat.{u + 1} F) 0).obj (ModuleCat.of F (Fin n → F))) := by
   induction n with
   | zero =>
     refine h₀ _ (Functor.map_isZero _ ?_)
@@ -98,7 +99,8 @@ private lemma prop_of_isGE_of_isLE_field
         ((TStructure.t.triangleLTGE b).obj M).obj₂) := hM b
     have hY : Module.Finite F Y := Module.Finite.equiv
       (asIso ((homologyFunctor _ b).map ((TStructure.t.triangleLTGE b).obj M).mor₂) ≪≫
-        (homologyFunctor _ b).mapIso e ≪≫ (singleFunctorCompHomologyFunctorIso _ b).app Y).toLinearEquiv
+        (homologyFunctor _ b).mapIso e ≪≫
+          (singleFunctorCompHomologyFunctorIso _ b).app Y).toLinearEquiv
     have h₃ : Q ((TStructure.t.triangleLTGE b).obj M).obj₃ :=
       Q.prop_of_iso e.symm (prop_single Q h₀ hb hs hF b Y)
     have hT₁ : Q ((TStructure.t.triangleLTGE b).obj M).obj₁ := by
