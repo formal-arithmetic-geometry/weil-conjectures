@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseAbelian
 public import WeilConjectures.WeilSheaf.LisseDuality
 public import WeilConjectures.WeilSheaf.UpperStarTensor
 
@@ -30,6 +31,61 @@ open ProEtale Endofunctor
 open scoped Obj
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
+
+namespace ProEtale
+
+attribute [local instance] Abelian.hasFiniteBiproducts
+
+open ZeroObject in
+/-- **A lisse sheaf whose stalks all vanish is zero.** Here the stalk at a point `y` is taken at
+a geometric point over `y` with values in an algebraic closure of the residue field. -/
+theorem IsAdicLisseSheaf.isZero_of_forall_subsingleton {Y : Scheme.{u}} {H : AdicSheaf l Y}
+    (hH : IsAdicLisseSheaf H)
+    (h : ∀ y : Y, ∃ (K : Type u) (_ : Field K) (_ : IsAlgClosed K) (s : Spec (.of K) ⟶ Y),
+      s.base (IsLocalRing.closedPoint K) = y ∧
+        Subsingleton ((Sheaf.Γ _ (WeilCoefficients.{u} l)).obj ((s)^*[_].obj H.X))) :
+    IsZero H := by
+  classical
+  obtain ⟨R, hR, hRH⟩ := hH
+  obtain ⟨κι, V, f, rfl⟩ := R.exists_eq_ofArrows
+  have hf (i : κι) : WeaklyEtale (f i) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hR (.mk i)
+  choose n e using fun i ↦ hRH (f i) (.mk i)
+  have hn (i i' : κι) (v : V i) (v' : V i') (hvv' : f i v = f i' v') : n i = n i' := by
+    have := AdicSheaf.rank_eq_of_apply_eq (𝟙 H) (f i) (f i') (e i).some (e i).some (e i').some
+      (e i').some v v' hvv'
+    rw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id,
+      CategoryTheory.Functor.map_id, Category.id_comp,
+      Iso.inv_hom_id, AdicSheaf.unitMatrix_id, AdicSheaf.unitMatrix_id,
+      Matrix.map_one _ (map_zero _) (map_one _), Matrix.map_one _ (map_zero _) (map_one _),
+      Matrix.rank_one, Matrix.rank_one, Fintype.card_fin, Fintype.card_fin] at this
+    exact this
+  have hsurj : ∀ y, ∃ j, y ∈ Set.range (f j) :=
+    ((Scheme.ofArrows_mem_precoverage_iff (P := @WeaklyEtale)).1
+      (Scheme.propQCPrecoverage_le_precoverage _ hR)).1
+  have hz (i : κι) : IsZero ((f i)^*ᵃ[l].obj H) := by
+    by_cases hV : Nonempty (V i)
+    · obtain ⟨v⟩ := hV
+      suffices h0 : n i = 0 by
+        refine IsZero.of_iso ?_ (e i).some
+        rw [h0]
+        exact ⟨fun _ ↦ ⟨⟨⟨0⟩, fun _ ↦ biproduct.hom_ext' _ _ fun j ↦ Fin.elim0 j⟩⟩,
+          fun _ ↦ ⟨⟨⟨0⟩, fun _ ↦ biproduct.hom_ext _ _ fun j ↦ Fin.elim0 j⟩⟩⟩
+      by_contra hpos
+      obtain ⟨K, _, _, s, hs, hsub⟩ := h (f i v)
+      obtain ⟨j, w, hw⟩ := hsurj (s.base (IsLocalRing.closedPoint K))
+      have hnj : 0 < n j := (hn j i w v (hw.trans hs)) ▸ Nat.pos_of_ne_zero hpos
+      have := nontrivial_globalSections_upperStar_of_iso (f j) (e j).some hnj s ⟨w, hw⟩
+      exact not_subsingleton _ hsub
+    · have : IsEmpty (V i) := not_nonempty_iff.1 hV
+      exact isZero_adicSheaf_of_isEmpty l _
+  have : IsIso (0 : H ⟶ 0) := isIso_of_isIso_adicUpperStar l f hR _ fun i ↦ by
+    have hz' : IsZero ((f i)^*ᵃ[l].obj 0) := Functor.map_isZero _ (isZero_zero _)
+    rw [(hz i).eq_of_src ((f i)^*ᵃ[l].map 0) ((hz i).iso hz').hom]
+    infer_instance
+  exact (isZero_zero _).of_iso (asIso (0 : H ⟶ 0))
+
+end ProEtale
 
 namespace ProEtaleWeilSheaf
 
