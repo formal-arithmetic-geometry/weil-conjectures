@@ -44,6 +44,7 @@ public import WeilConjectures.Algebra.Central.ReducedNorm
 public import WeilConjectures.Algebra.ChangeIdealCompletion
 public import WeilConjectures.Algebra.CharpolyLocallyFree
 public import WeilConjectures.Algebra.ExtOneDirectSum
+public import WeilConjectures.Algebra.FiniteFlatRestrictionProjective
 public import WeilConjectures.Algebra.FiniteReesModuleGeneration
 public import WeilConjectures.Algebra.FiniteTypeLiftNilpotent
 public import WeilConjectures.Algebra.FlatTorIdealCriterion
@@ -958,6 +959,7 @@ public import WeilConjectures.AlgebraicGeometry.FieldPointFactorsThroughClosedIm
 public import WeilConjectures.AlgebraicGeometry.FieldPointFactorsThroughImmersion
 public import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
 public import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrimeData
+public import WeilConjectures.AlgebraicGeometry.FiniteAffineFibreSections
 public import WeilConjectures.AlgebraicGeometry.FiniteClopenOpenCoverSection
 public import WeilConjectures.AlgebraicGeometry.FiniteClosedImmersionNearFibre
 public import WeilConjectures.AlgebraicGeometry.FiniteCoefficientOfFiniteStalks
