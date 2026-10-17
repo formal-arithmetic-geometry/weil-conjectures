@@ -12,9 +12,81 @@
   "lem-coef-reedy-model-structure",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $T^\\bullet=A^\\bullet$ or $B^\\bullet$, write $V_T(K)=T^\\bullet\\otimes K$. The displayed tensor–Hom adjunction makes $V_T$ a left adjoint; explicitly, maps from $V_T(\\operatorname{colim}_a K_a)$ to any $Y$ are compatible families of maps $K_a\\to H(T^\\bullet,Y)$, hence compatible families $V_T(K_a)\\to Y$. Thus $V_T$ preserves all small colimits. There is a natural identification $V_T(\\partial\\Delta^n)=L_nT^\\bullet$, compatible with the map to $V_T(\\Delta^n)=T^n$: a map $\\partial\\Delta^n\\to H(T^\\bullet,Y)$ is a family $T^r\\to Y$ indexed by the proper injective maps $[r]\\hookrightarrow[n]$, agreeing under the triangles between such maps. Every other simplex of the boundary factors as a surjection followed by a proper injection, and its value is forced by that family. These are precisely the cocones defining $L_nT^\\bullet$; the identification follows from the two universal properties. For $n=0$ both indexing data are empty and both objects are initial.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.4.1, proof: boundary tensor identifies with the latching object; Proposition 3.1.5 for the adjunction."
+   }
+  },
+  {
+   "text": "Fix any trivial fibration $p:E\\to F$ in $\\mathcal M$, with no fibrancy assumption on $E$ or $F$. Form the simplicial corner map\n$$q_p:H(B^\\bullet,E)\\longrightarrow H(A^\\bullet,E)\\times_{H(A^\\bullet,F)}H(B^\\bullet,F).$$\nApply the parametrized-adjunction corner-lifting equivalence to the tensor–Hom adjunction, with first arrow $f$, second arrow $\\partial\\Delta^n\\hookrightarrow\\Delta^n$, and third arrow $p$. By Step 1 its left corner arrow is\n$$\\lambda_n f:A^n\\amalg_{L_nA^\\bullet}L_nB^\\bullet\\longrightarrow B^n.$$\nThe Reedy cofibration hypothesis says exactly that $\\lambda_n f$ is a cofibration. The ground model-category lifting axiom gives $\\lambda_n f\\perp p$. The corner-lifting equivalence therefore says that $q_p$ lifts every boundary inclusion, including $n=0$.",
+   "uses": [
+    "lem-coef-parametrized-adjunction-corner-lifting",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.4.1: relative latching cofibration argument, expressed through tensor–Hom corner lifting."
+   }
+  },
+  {
+   "text": "The Kan–Quillen characterization of trivial fibrations by boundary lifting makes $q_p$ a trivial fibration of simplicial sets. Since the given $i:K\\to L$ is a cofibration there, the Kan–Quillen lifting axiom gives $i\\perp q_p$. Apply the same parametrized-adjunction corner-lifting equivalence, now with second arrow $i$. It gives $(f\\mathbin\\square i)\\perp p$. This holds for every trivial fibration $p$ in $\\mathcal M$, so the weak factorization system $(C,F\\cap W)$ of the ground model category implies that $f\\mathbin\\square i$ is a cofibration.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-parametrized-adjunction-corner-lifting",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.4.1, cofibration conclusion; model-category lifting characterization."
+   }
+  },
+  {
+   "text": "For each of the two frames $T^\\bullet$, Step 1 identifies $V_T(\\partial\\Delta^n)\\to V_T(\\Delta^n)$ with its cofibration $L_nT^\\bullet\\to T^n$. Also the collapse $V_T(\\Delta^n)\\to V_T(\\Delta^0)$ identifies with $T^n\\to T^0$. This is the augmentation component: naturality of the augmentation for $[n]\\to[0]$ and its identity component in degree zero give precisely that equality. It is therefore a weak equivalence by the definition of a frame. The boundary-and-collapse test applies to the colimit-preserving $V_T$ of Step 1, and shows that $V_T(i)$ is a trivial cofibration. Consequently both $A^\\bullet\\otimes K\\to A^\\bullet\\otimes L$ and $B^\\bullet\\otimes K\\to B^\\bullet\\otimes L$ are trivial cofibrations.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.4.3, proof using Proposition 3.6.8 and the frame augmentation."
+   }
+  },
+  {
+   "text": "Let $P=(A^\\bullet\\otimes L)\\amalg_{A^\\bullet\\otimes K}(B^\\bullet\\otimes K)$ and $h=f\\mathbin\\square i:P\\to B^\\bullet\\otimes L$. The map $j:B^\\bullet\\otimes K\\to P$ is the pushout of $A^\\bullet\\otimes i$. Trivial cofibrations are the left lifting class of all fibrations, so their pushout closure gives that $j$ is a trivial cofibration. By the defining pushout maps, $hj=B^\\bullet\\otimes i$, which is a weak equivalence by Step 4; $j$ is also a weak equivalence. Two-out-of-three gives that $h$ is a weak equivalence. Step 3 already gives that $h$ is a cofibration, so $h$ is a trivial cofibration, as required.",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.4.3, final pushout and two-out-of-three argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-reedy-model-structure",
+  "lem-coef-parametrized-adjunction-corner-lifting",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-lifting-class-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Hovey, Model Categories, Propositions 5.4.1 and 5.4.3, printed pp.130–131 (PDF pp.139–140), and Proposition 3.6.8. Read online; not archived in literature/. Cofibration reduction is written using the existing parametrized-adjunction lifting node instead of a new generator-extension lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -71,10 +143,52 @@
    "results": "General simplicial-set cofibration declarations; no cosimplicial-frame tensor theorem.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Reedy\", \"cofibration\"",
+   "results": "{\"t\": \"2026-10-17T19:00:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Reedy\\\", \\\"cofibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits for the joint Reedy/cofibration pattern."
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy|cosimplicial.*frame|frame.*cosimplicial",
+   "results": "{\"t\": \"2026-10-17T19:00:07Z\", \"tool\": \"grep\", \"query\": \"Reedy|cosimplicial.*frame|frame.*cosimplicial\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\"], \"digest\": \"a3443c2fc9c6614c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Reedy/Basic.lean has only Reedy structures and explicitly leaves the model structure as TODO; the monoidal pushout-product file constructs a different, generic monoidal arrow functor and does not prove the frame theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pushout product of a Reedy cofibration of cosimplicial frames with a trivial cofibration of simplicial sets is a trivial cofibration",
+   "results": "{\"t\": \"2026-10-17T19:00:19Z\", \"tool\": \"leanfinder\", \"query\": \"The pushout product of a Reedy cofibration of cosimplicial frames with a trivial cofibration of simplicial sets is a trivial cofibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_trivialCofibrations\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeCofibrations\", \"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\"], \"digest\": \"e93019d9f74557d9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results give generic model-category closure properties or Cech conerves, not a cosimplicial frame pushout-product theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a cosimplicial frame sends simplicial trivial cofibrations to trivial cofibrations",
+   "results": "{\"t\": \"2026-10-17T19:00:30Z\", \"tool\": \"leansearch\", \"query\": \"Tensoring a cosimplicial frame sends simplicial trivial cofibrations to trivial cofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.trivialCofibrations\", \"HomotopicalAlgebra.mem_trivialCofibrations\", \"HomotopicalAlgebra.trivialCofibrations_sub_cofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.instHasFactorizationOppositeTrivialCofibrationsFibrationsOfCofibrationsTrivialFibrations\", \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations\"], \"digest\": \"3dc3918c7184324c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results give trivial-cofibration definitions, weak factorization systems and simplicial cofibration instances, not a theorem about frame tensor pushout products."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reedy cofibrant cosimplicial resolutions tensor pushout product axiom framing",
+   "results": "{\"t\": \"2026-10-17T19:00:39Z\", \"tool\": \"leanfinder\", \"query\": \"Reedy cofibrant cosimplicial resolutions tensor pushout product axiom framing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Arrow.cechConerve\", \"CategoryTheory.CosimplicialObject.cechConerve\", \"CategoryTheory.CosimplicialObject.cechConerve_obj\", \"CategoryTheory.Arrow.augmentedCechConerve\", \"CategoryTheory.CosimplicialObject.augmentedCechConerve\", \"CategoryTheory.CosimplicialObject.augmentedCechConerve_obj\", \"CategoryTheory.CosimplicialObject.cechConerve_map\", \"CategoryTheory.Arrow.cechConerve_obj\"], \"digest\": \"b8219cbb27c12052\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results give generic model-category closure properties or Cech conerves, not a cosimplicial frame pushout-product theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "pushoutProduct|PushoutProduct",
+   "results": "{\"t\": \"2026-10-17T19:01:49Z\", \"tool\": \"grep\", \"query\": \"pushoutProduct|PushoutProduct\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Arrow.lean\", \"Mathlib/CategoryTheory/Monoidal/Arrow.lean\", \"Mathlib/CategoryTheory/Monoidal/Arrow.lean\", \"Mathlib/CategoryTheory/Monoidal/Arrow.lean\", \"Mathlib/CategoryTheory/Monoidal/Arrow.lean\", \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\"], \"digest\": \"bead5c16356d5ae4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Reedy/Basic.lean has only Reedy structures and explicitly leaves the model structure as TODO; the monoidal pushout-product file constructs a different, generic monoidal arrow functor and does not prove the frame theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-frame-source-kan-fibration",
@@ -88,10 +202,35 @@
    "node": "prop-coef-integral-exceptional-adjoint",
    "place": "Proof paragraph 2, middle derived mapping-complex comparison: the pushout-product assertion for a Reedy cofibration of cosimplicial frames and a simplicial trivial cofibration, used to obtain horn fillers after tensor–Hom adjunction.",
    "via": [
-    "lem-coef-frame-source-kan-fibration"
+    "lem-coef-frame-source-kan-fibration",
+    "lem-coef-model-undercategory-mapping-fiber",
+    "lem-coef-relative-cut-nerve-diagrams",
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-coef-module-operad-encoding",
+    "lem-coef-module-universal-arrow-criterion",
+    "lem-coef-infinity-free-module-bar",
+    "lem-coef-infinity-monadic-bar",
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-frame-pushout-product",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and proved it in five steps, reusing the existing parametrized-adjunction corner-lifting and boundary-and-collapse nodes. Boundary tensor/latching identification is written out; lifting against arbitrary trivial fibrations proves the cofibration clause; frame augmentations and the collapse test prove both tensor maps trivial; pushout stability and two-out-of-three finish. No new nodes.",
+  "blueprint": "Nearest ancestor prop-coef-integral-exceptional-adjoint, main-20261015 proof paragraph 2, derived coefficient-adjunction and inverse-limit mapping comparison, through lem-coef-frame-source-kan-fibration: this item supplies the pushout-product fact used for source-frame horn fillers. No unit/chapter route change."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-9492fe94d",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-9492fe94d (reviewer sub-agent of L); spot-checked: The mathematics is correct and complete; one metadata field repaired. Source checked: I read Hovey, Model Categories, Props 5.4.1, 5.4.3 (printed pp.130-131), 3.6.8 and Remark 5.2.9 / Prop 3.1.5 in a local text copy of the cited PDF (/tmp/hovey/h.txt; the network is blocked). The item matches 5.4.3 hypothesis by hypothesis: a Reedy cofibration between cosimplicial frames on cofibrant A and B, a simplicial trivial cofibration, and the pushout in the same orientation. The target is not weakened. Step checks: Step 1 identifies V_T(boundary of Delta^n) with L_nT through proper injections and epi-mono factorization, includes n=0, and is rightly marked elementary. Step 2 instantiates the corner-lifting Mathlib leaf with C=M^Delta, D=sSet, E=M: the left corner equals the Reedy relative latching map lambda_n f and the right corner equals q_p; no fibrancy is used. Step 3: the Kan-Quillen boundary characterization makes q_p a trivial fibration, i (a mono) lifts against it, and the leaf then gives f box i in C. Step 4: frame latching maps are cofibrations; the collapse T^n->T^0 equals the augmentation component (eps_0=1 plus naturality), so the boundary-collapse test applies to A and B. Step 5: B(x)K->P is the cobase change of A(x)i, so it is a trivial cofibration by LLP closure; h after j is B(x)i, and 2-of-3 with Step 3 finishes. Edge cases checked: K=L, f=id, the initial constant frame (reduces to Corollary 5.4.4), horn inclusions (the parent's use). There are no new nodes. No duplicate: weighted-coend-skeletal-filtration, resolution-interval-tensor, framed-projective-diagram-resolution, reedy-left-frame-comparison and the Joyal/sSet pushout-product nodes all state different things. Not a restated clause of the parent lem-coef-frame-source-kan-fibration. No cycle: the 646-node closure of the deps omits the item. All cited nodes are in the item's own unit, so no tool_uses; no SGA. FIX: blueprint.from.via was truncated to ['lem-coef-frame-source-kan-fibration']. I replaced it with the full 11-entry chain (the parent followed by the parent's 10-entry via), as brief section 7.2 and blueprint_refs computed() require. The whole corrected file is at fixes/dag/nodes/sec-six-functors/lem-coef-frame-pushout-product.json; no other field changed.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -11,9 +11,104 @@
   "def-trf-coherent-topos",
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in a small-site presentation of $\\mathcal E$ supplied by [def-trf-coherent-topos]. Epimorphisms are stable under pullback: a local lift of a section, provided by [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective], combines with its given section in the other factor by sectionwise pullbacks [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. The coproduct of any family of sheaves is the sheafification of their presheaf coproduct: the sheafification adjunction [def-weil-pbc-sheafification] identifies maps out of it with families of maps from the summands. Every section of this coproduct locally comes from a summand by [lem-weil-pbc-site-sheafification-sections-local]. Consequently a jointly epimorphic family is exactly a family in which every target section locally lifts into one member; this condition is stable under pullback. Indeed local surjectivity of its coproduct map gives a local coproduct section, and a further covering gives a section of one summand; the converse is immediate from the same criterion.",
+   "uses": [
+    "def-trf-coherent-topos",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WN (lemma-mono-epi-sheaves), 00W2 (lemma-limit-sheaf), 00WK (lemma-sections-sheafification), 0GMP (lemma-image-of-quasi-compact), 0GMQ (lemma-coproduct-quasi-compact): agent expansion of the coherent quotient criterion in the finite-presentation argument."
+   }
+  },
+  {
+   "text": "An epimorphic image of a quasi-compact object is quasi-compact. For an epimorphism $e:X\\to Y$ with $X$ quasi-compact, pull a jointly epimorphic family over $Y$ back to $X$ by step 1 and select finitely many members. If two maps from $Y$ agree on these selected members, they agree after $e$ by their pulled-back epimorphy, and hence agree by cancellation with $e$. Thus the selected family is epic over $Y$. Also a finite coproduct of quasi-compact objects is quasi-compact: pull any jointly epic family back to each summand, select finitely many indices for each, and take the finite union; right cancellation on every summand proves joint epimorphy. The empty coproduct is quasi-compact as well: any two maps from the initial object agree, so the empty subfamily already is epic.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WN (lemma-mono-epi-sheaves), 00W2 (lemma-limit-sheaf), 00WK (lemma-sections-sheafification), 0GMP (lemma-image-of-quasi-compact), 0GMQ (lemma-coproduct-quasi-compact): agent expansion of the coherent quotient criterion in the finite-presentation argument."
+   }
+  },
+  {
+   "text": "Fix the small full generating family $\\mathcal G$ of coherent objects closed under finite limits from [def-trf-coherent-topos]. Every quasi-compact object $X$ has a finite jointly epimorphic family $G_i\\to X$ with $G_i\\in\\mathcal G$: start with the generating epimorphism from a coproduct and use the definition of quasi-compactness to select finitely many summands. More generally, for any epimorphism $E\\to X$ with $X$ quasi-compact, first take a generating family $G_t\\to E$. The composite family to $X$ is jointly epic (composition of epimorphisms), so finitely many of its members cover $X$; each selected map still has its specified lift to $E$. The finite family can be empty. All index sets lie in the containing universe of [def-weil-size-convention].",
+   "uses": [
+    "def-trf-coherent-topos",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WN (lemma-mono-epi-sheaves), 00W2 (lemma-limit-sheaf), 00WK (lemma-sections-sheafification), 0GMP (lemma-image-of-quasi-compact), 0GMQ (lemma-coproduct-quasi-compact): agent expansion of the coherent quotient criterion in the finite-presentation argument."
+   }
+  },
+  {
+   "text": "Since the coherent object $P$ is quasi-compact and $p:P\\to A$ is epic, step 2 shows that $A$ is quasi-compact. It remains to check the quasi-separatedness condition for arbitrary quasi-compact $B,C$ with maps to $A$. Choose finite jointly epimorphic families $G_i\\to B$ and $H_j\\to C$ from $\\mathcal G$ by step 3. By step 1 the finite family $G_i\\times_A H_j\\to B\\times_A C$ is jointly epic: first pull the $G_i$ family back along $B\\times_A C\\to B$, then pull back the $H_j$ family along the resulting maps to $C$. Hence, by step 2, it suffices to prove that every $G_i\\times_A H_j$ is quasi-compact.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WN (lemma-mono-epi-sheaves), 00W2 (lemma-limit-sheaf), 00WK (lemma-sections-sheafification), 0GMP (lemma-image-of-quasi-compact), 0GMQ (lemma-coproduct-quasi-compact): agent expansion of the coherent quotient criterion in the finite-presentation argument."
+   }
+  },
+  {
+   "text": "Fix one pair $G=G_i$, $H=H_j$. The pullback $P\\times_A G\\to G$ is epic by step 1. Apply the lifted finite-generator presentation of step 3 to this epimorphism: obtain finitely many $K_a\\in\\mathcal G$ with a jointly epimorphic family $K_a\\to G$, together with maps $k_a:K_a\\to P$ satisfying $p k_a=(G\\to A)(K_a\\to G)$. Likewise obtain $L_b\\to H$ jointly epic with lifts $l_b:L_b\\to P$. By successive pullbacks of these two jointly epic families, the finite family $K_a\\times_A L_b\\to G\\times_A H$ is jointly epic.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WN (lemma-mono-epi-sheaves), 00W2 (lemma-limit-sheaf), 00WK (lemma-sections-sheafification), 0GMP (lemma-image-of-quasi-compact), 0GMQ (lemma-coproduct-quasi-compact): agent expansion of the coherent quotient criterion in the finite-presentation argument."
+   }
+  },
+  {
+   "text": "For each $a,b$, view $R$ over $P$ by its first projection $r_1$ and also by its second projection $r_2$. The universal property of the kernel pair identifies $$K_a\\times_A L_b\\simeq (K_a\\times_{k_a,P,r_1}R)\\times_{r_2,P,l_b}L_b.$$ Indeed, by sectionwise limits [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] a section of the right side over an object of the site is a quadruple $(x,(u,v),y)$ with $x$ a section of $K_a$, $(u,v)$ a section of $R$ (so $pu=pv$), $y$ a section of $L_b$, $u=k_a(x)$ and $v=l_b(y)$. It is determined by $(x,y)$, which is subject exactly to $pk_a(x)=pl_b(y)$; this is the condition defining a section of the left side, compatibly with restrictions, so the identification is natural. Now $K_a$ is quasi-compact, being a coherent object of $\\mathcal G$, and $R$ is quasi-compact by hypothesis. Since $P$ is coherent, it is quasi-separated, so the definition of quasi-separatedness in [def-trf-coherent-topos] makes $K_a\\times_P R$ quasi-compact. Apply the same definition again to the quasi-compact objects $K_a\\times_P R$, over $P$ by $r_2$, and $L_b$, over $P$ by $l_b$. Hence $K_a\\times_A L_b$ is quasi-compact; quasi-compactness passes along the isomorphism, since an isomorphism is an epimorphism (step 2). Only the quasi-separatedness of $P$ itself is used here; no coherence of a product of coherent objects is needed.",
+   "uses": [
+    "def-trf-coherent-topos",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WN (lemma-mono-epi-sheaves), 00W2 (lemma-limit-sheaf), 00WK (lemma-sections-sheafification), 0GMP (lemma-image-of-quasi-compact), 0GMQ (lemma-coproduct-quasi-compact): agent expansion of the coherent quotient criterion in the finite-presentation argument."
+   }
+  },
+  {
+   "text": "Step 2 applied to the finite jointly epic family of step 5 now makes $G\\times_A H$ quasi-compact. Applied to the finite jointly epic family of step 4, it makes $B\\times_A C$ quasi-compact. This holds for every quasi-compact $B,C$ over $A$, exactly the quasi-separatedness definition in [def-trf-coherent-topos]. The quasi-compactness of $A$ from step 4 therefore proves that $A$ is coherent. Empty finite families cause no exception because the empty coproduct case was included in step 2.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WN (lemma-mono-epi-sheaves), 00W2 (lemma-limit-sheaf), 00WK (lemma-sections-sheafification), 0GMP (lemma-image-of-quasi-compact), 0GMQ (lemma-coproduct-quasi-compact): agent expansion of the coherent quotient criterion in the finite-presentation argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-coherent-topos",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00WN (lemma-mono-epi-sheaves), 00W2 (lemma-limit-sheaf), 00WK (lemma-sections-sheafification), 0GMP (lemma-image-of-quasi-compact), 0GMQ (lemma-coproduct-quasi-compact): agent expansion of the coherent quotient criterion in the finite-presentation argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +147,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finitary-site-coherent-generators",
@@ -77,5 +172,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-coherent-epimorphic-quotient",
+  "worker": "stage1",
+  "summary": "Kept the statement. Expanded jointly epic family pullbacks, finite coherent local lifts, and the identification of each finite piece with an iterated fibre product through the kernel pair over P. The quasi-compactness of that piece uses only the quasi-separatedness of P twice; no auxiliary node is needed (the maintainer reader replaced the delivered finite-product auxiliary, which was unnecessary and a special case of lem-trf-coherent-object-approximation). Existing searches on the item are retained verbatim.",
+  "blueprint": "Constructibility input of lem-trf-local-term-locality, through the nearby-cycle constructibility descent chain: finite-cover-site coherence and coherent base-change in Orgogozo §8.1 and Lemma 9.1.5, as used in lem-trf-proper-base-change-coherent-conservative. The last step turning the transported finite epimorphic presentation into a coherent object.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Local representatives in arbitrary coproduct sheafifications establish pullback stability of jointly epic families; this generic sheafification tool is not supplied by a trace-unit statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-a11ae3e99",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-a11ae3e99 (reviewer sub-agent of L); spot-checked: Read the item, the new node, the statement of every cited node, the parent's step 11 (it uses the item's exact hypotheses), unit sk-i-curve-zero, Stacks sites.tex 0GMP/0GMQ (proofs 'Omitted' there, written out in step 2), 00W2, 00WK, 00WN and definition-quasi-compact-topos, and ILO XI Lemme 2.5 pp. 178-179 (context only; no SGA used). The item statement is unchanged and true; checked on Set/finite sets, p=id, empty P and terminal A. Steps 1-5 and 7 are correct: joint epimorphy means local lifting and is stable under pullback (sheafification adjunction plus 00WK), image and finite-coproduct quasi-compactness with right cancellation, finite generator covers with lifts, and the reduction to K_a x_A L_b. Step 6 was correct but cited a new node for coherence of P x P. That node is unneeded and is also a special case of the existing node lem-trf-coherent-object-approximation ('finite limits of coherent objects are coherent'), which C5 forbids duplicating. FIX: step 6 now identifies K_a x_A L_b with (K_a x_{P,r1} R) x_{r2,P} L_b using sectionwise limits, and gets quasi-compactness by applying the quasi-separatedness of P twice. Its uses are now def-trf-coherent-topos and the limits-sectionwise node; proof_deps is recomputed and split_report.summary updated. The new node is dropped and nothing else cites it. Accepted tool_use: lem-weil-pbc-site-sheafification-sections-local (generic 00WK, Lean-closed). No cycle; no target involved or weakened.; 1 file(s) fixed by the reviewer"
  }
 }

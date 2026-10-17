@@ -37,7 +37,7 @@
  ],
  "proof": [
   {
-   "text": "Work first over a finite coefficient field $E$, initially $\\mathbf Q_\\ell$, and put $R=\\mathcal O_E$, $t=\\varpi_E$. The schemes are qcqs, locally noetherian and finite-dimensional by the three geometric tools cited. A finite affine subcover of a noetherian affine cover makes them noetherian; $\\ell$ is invertible since $\\operatorname{char}k\\ne\\ell$. For any $K\\in\\mathcal I_T(R)$, its stratified-perfect description gives local bounded finite-projective $R$-complexes $P$. Each stratum is quasi-compact; the definition of pro-etale covering selects finitely many affine pieces from its trivializing cover. Take the extreme support degrees of these finitely many $P$, over the finitely many strata, to obtain $[a,b]$. Every reduction is locally represented by $P\\otimes_R R/t^n$, a complex of direct summands of finite free coefficient sheaves, hence flat, supported in $[a,b]$. The bounded-above-flat theorem makes it K-flat, so derived change of rings and tensor are computed on this model. For the zero object or empty scheme choose $a=b=0$. For any degree-zero finite-coefficient module sheaf $V$, tensor-pullback identifies the restricted $K_n\\otimes^L V$ with this bounded flat model tensored with the restricted $V$. Covering-family detection gives vanishing outside $[a,b]$ on each stratum. Write each stratum as a difference of two closed subsets and successively split along those finitely many closed subsets and their open complements. Every final piece lies in a stratum; the open-closed short exact sequence detects zero sheaves across each split. Reversing the splits proves the same vanishing on $T$. Thus all reductions of $K$ have finite Tor amplitude, uniformly in $n$. Apply this to $L$, the assumed $M$, and every integral test object. Their compatible etale-origin witnesses are part of membership in $\\mathcal I_T(R)$.",
+   "text": "Work first over a finite coefficient field $E$, initially $\\mathbf Q_\\ell$, and put $R=\\mathcal O_E$, $t=\\varpi_E$. The schemes are qcqs, locally noetherian and finite-dimensional by the three geometric tools cited. A finite affine subcover of a noetherian affine cover makes them noetherian; $\\ell$ is invertible since $\\operatorname{char}k\\ne\\ell$. For any $K\\in\\mathcal I_T(R)$, its stratified-perfect description gives local bounded finite-projective $R$-complexes $P$. Each stratum is quasi-compact; the definition of pro-etale covering selects finitely many affine pieces from its trivializing cover. Take the extreme support degrees of these finitely many $P$, over the finitely many strata, to obtain $[a,b]$. Every reduction is locally represented by $P\\otimes_R R/t^n$, a complex of direct summands of finite free coefficient sheaves, hence flat, supported in $[a,b]$. The bounded-above-flat theorem makes it K-flat, so derived change of rings and tensor are computed on this model. For the zero object or empty scheme choose $a=b=0$. For any degree-zero finite-coefficient module sheaf $V$, tensor-pullback identifies the restricted $K_n\\otimes^L V$ with this bounded flat model tensored with the restricted $V$. Covering-family detection gives vanishing outside $[a,b]$ on each stratum. Write each stratum as a difference of two closed subsets and successively split along those finitely many closed subsets and their open complements. Every final piece lies in a stratum; the open-closed short exact sequence detects zero sheaves across each split. Reversing the splits proves the same vanishing on $T$. Thus all reductions of $K$ have finite Tor amplitude, uniformly in $n$. On each stratum the same local model shows that every cohomology sheaf of $K_n$ is pro-etale locally the constant sheaf of the finite $R/t^n$-module $H^i(P\\otimes_RR/t^n)$, since restriction to a stratum is exact; so each such sheaf is constructible in the sense of [def-weil-proetale-constructible-sheaf], with the same finite stratification and the same interval $[a,b]$. With the etale-origin witnesses, every $K_n$ therefore lies in $D^b_{ctf}(T,R/t^n)$. Apply this to $L$, the assumed $M$, and every integral test object. Their compatible etale-origin witnesses are part of membership in $\\mathcal I_T(R)$.",
    "uses": [
     "pqf-lem-locnoeth-lft",
     "lem-weil-pbc-qcqs-over-affine",
@@ -49,7 +49,8 @@
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "def-weil-pbc-bounded-constructible-complete",
     "lem-pc-bounded-above-flat-kflat-site",
-    "lem-pur-derived-change-of-rings"
+    "lem-pur-derived-change-of-rings",
+    "def-weil-proetale-constructible-sheaf"
    ],
    "elementary": false,
    "source": {
@@ -85,12 +86,13 @@
    }
   },
   {
-   "text": "Let K be any object of I_X(R), and let P_R be the compact-support reconstruction functor. Its comparison alpha identifies R_Y(P_R K) with F R_X K as normalized derived systems. Write L_T for the total-limit functor of the system evaluation calculus. That calculus, the preceding mapping-system adjunction and alpha give the natural chain\nRHom_X(K,M) = RHom_X(K,L_X M_bullet) ≃ Rlim H_X(R_X K,M_bullet) ≃ Rlim H_Y(F R_X K,R_Y L) ≃ RHom_Y(P_R K,L_Y R_Y L) ≃ RHom_Y(P_R K,L).\nThe last arrow uses the actual derived-completeness isomorphism L→L_Y R_Y L in the definition of I_Y. These are isomorphisms of derived mapping complexes; take H^0 only after forming the displayed chain. This gives R-linear, natural inverse bijections Hom_X(K,M)≃Hom_Y(P_R K,L). The projection identities for gamma and the section adjunction show that the image of id_M is a morphism P_R M→L whose coherent reductions, conjugated by alpha and the supplied reduction identification, are exactly epsilon_n:F_n M_n→L_n. This is a statement about the specified derived-system map; equality is not deduced from equality of evaluations of arbitrary morphisms.",
+   "text": "Let K be any object of I_X(R), and let P_R be the compact-support reconstruction functor. Its comparison alpha identifies R_Y(P_R K) with F R_X K as normalized derived systems. Write L_T for the total-limit functor of the system evaluation calculus. That calculus, the preceding mapping-system adjunction and alpha give the natural chain\nRHom_X(K,M) = RHom_X(K,L_X M_bullet) ≃ Rlim H_X(R_X K,M_bullet) ≃ Rlim H_Y(F R_X K,R_Y L) ≃ RHom_Y(P_R K,L_Y R_Y L) ≃ RHom_Y(P_R K,L).\nThe last arrow is the unit u_L:L→L_Y R_Y L, whose composite to level n is the reduction map L→Res_n L_n; it is therefore the map comp_L:L→Rlim L_• induced by the quotient maps, and the Koszul reconstruction theorem makes comp_L an isomorphism because L is derived I-complete, as membership in I_Y requires [prop-weil-pbc-koszul-reconstruction]. These are isomorphisms of derived mapping complexes; take H^0 only after forming the displayed chain. This gives R-linear, natural inverse bijections Hom_X(K,M)≃Hom_Y(P_R K,L). The projection identities for gamma and the section adjunction show that the image of id_M is a morphism P_R M→L whose coherent reductions, conjugated by alpha and the supplied reduction identification, are exactly epsilon_n:F_n M_n→L_n. This is a statement about the specified derived-system map; equality is not deduced from equality of evaluations of arbitrary morphisms.",
    "uses": [
     "lem-pur-compact-support-condensed-realization",
     "lem-coef-derived-system-evaluation-calculus",
     "lem-coef-cartesian-section-adjoint-mates",
-    "def-weil-pbc-bounded-constructible-complete"
+    "def-weil-pbc-bounded-constructible-complete",
+    "prop-weil-pbc-koszul-reconstruction"
    ],
    "elementary": false,
    "source": {
@@ -204,7 +206,9 @@
   "lem-weil-finite-free-completed-scalar-comparison",
   "lem-weil-integral-scalar-extension-constructible",
   "lem-weil-pbc-condensed-flat-coefficient-calculus",
-  "prop-weil-pbc-qbar-condensed-two-colimit"
+  "prop-weil-pbc-qbar-condensed-two-colimit",
+  "def-weil-proetale-constructible-sheaf",
+  "prop-weil-pbc-koszul-reconstruction"
  ],
  "proof_origin": {
   "by": "agent",
@@ -342,7 +346,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "nt-target-smooth-purity-qbar",
   "by": "worker",
@@ -420,6 +424,10 @@
    {
     "node": "lem-pur-derived-change-of-rings",
     "why": "Generic ring-sheaf derived scalar extension computed by K-flat models, used for local finite quotient reductions."
+   },
+   {
+    "node": "prop-weil-pbc-koszul-reconstruction",
+    "why": "Step 4 needs that a derived I-complete integral object is the derived limit of its reduction tower through the quotient-map unit; this generic integral-coefficient fact is stated only in sk-thm-properbasechange, and the blueprint step ('the unit isomorphism for derived complete objects') uses it as a black box."
    }
   ]
  },
@@ -443,15 +451,16 @@
   "def-kun-truncations",
   "lem-pur-finite-smooth-adjunction-general-base",
   "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pur-derived-change-of-rings"
+  "lem-pur-derived-change-of-rings",
+  "prop-weil-pbc-koszul-reconstruction"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q11-608325a81",
-  "group": "Q11",
+  "reviewer": "NT-cc-NP-178bef400",
+  "group": "NP",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-608325a81 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement (unchanged), all 10 steps, the statements of all 12 stmt_deps and 26 proof_deps, unit sk-thm-purity-transport, and the current blueprint (main-20261015) proofs of sk-prop-sp-integral-adjunction, sk-prop-sp-rational, sk-thm-sp-qbar and sk-prop-sp-unique-adjoint. Master source: the cited path under literature/upstream-master-20261016 is absent here, so I read the same UpperShriek.lean module in ~/upstream-pr/proof-work/completion/source. There boundedConstructibleUpperShriek is the chosen right adjoint of Rg_* followed by i^*, with adjunction (open adjunction).comp(Adjunction.ofIsLeftAdjoint), over padicAlgClRingObj, and the statement specifies exactly this composite. Steps: (1) uniform Tor bounds come from local perfect models, a finite pro-etale refinement, K-flatness and open-closed assembly. It leaves implicit that the reductions have constructible cohomology, which is one line from the same local model. (2) the finite comparison lemma gives the invertible mates the cartesian-section adjunction needs. (3) case (b) uses componentwise cohomology, good truncations, the concentrated-single lemma and shifted full faithfulness, so ev_n θ = φ_n with no lifting of arbitrary maps; the SGA citation and the smooth-parent application are gone. (4) the γ/transpose/α/γ/derived-completeness chain, with H^0 taken last. (5) raw rationalization, J and lattices. (6–7) the finite-free mate on S/v^{en}, then the quotient mates and coherences give alternative (a) over F. (8) two-colimit descent, the schemes having noetherian underlying spaces. (9) Yoneda transpose with the counit and refinement squares. (10) unit and shifts. All correct. Small cases tested: f=id, empty X or Y, L=0, r=0 and r≠0, F=E, ramified F, and equal levels with no coherent identification (excluded by requiring (a) or (b)). The statement serves its only citer, nt-target-smooth-purity-qbar, which uses case (b) and the unit clause. No cycle, no merged or missing ids, proof_deps equals the union of step uses, no SGA sources. I accept the declared tool_uses; the off-route ones are lem-kun-dimension-finite-type and the three lem-coef-* generic coefficient-system tools. No new nodes and no duplicates (I checked sk-def-sfb-dc-upper-shriek, the sfb proper-adjoint lemmas and det-thm-restriction-local). FIX for B3: the inline definition of the target functor did not cite the existing definition nodes sk-def-sfb-dc-setting, sk-def-sfb-dc-lower-shriek and sk-def-sfb-dc-upper-shriek, which state exactly this construction and which the parent cites. I added the bracketed citations to the statement and the three ids to stmt_deps; the mathematics is unchanged. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-condensed-exceptional-reconstruction.json. Maintainer notes: the stale maintainer tool_uses entry lem-pur-finite-smooth-adjunction-general-base is no longer cited, and source.document points to a literature file this machine lacks (reported as WANTED). Details are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-178bef400 (reviewer sub-agent of L); spot-checked: The delivery flips the item from unsplit to split. It carries the existing ten-step split, already reviewed on 2026-10-17. I reread all of it against the current statements of all 14 stmt_deps and 28 proof_deps, unit sk-thm-purity-transport steps 2-3, and the main-20261015 blueprint proofs of sk-prop-sp-integral-adjunction, sk-prop-sp-rational, sk-thm-sp-qbar and sk-prop-sp-unique-adjoint. The cited UpperShriek.lean archive path is missing. I read the same module read-only at ~/upstream-pr/merge-master (md5 47f1b568, the same as completion/source). There boundedConstructibleUpperShriek is the chosen rightAdjoint of Rg_* followed by i^* for compactificationOverField k f, with adjunction (open i_! -| i^*).comp(Adjunction.ofIsLeftAdjoint). padicAlgClRingObj takes values in one finite subextension (EllAdic.lean 213-230), and Dbc has bounded, stratified locally finitely presented cohomology with no completeness condition. The statement, the two-colimit node and the sk-def-sfb nodes say exactly this, so the base-change and adjoint morphism and the coefficient category agree with the master and no categories are silently identified. The statement is not weakened, and k need not be algebraically closed. Small cases checked: f=id, X or Y empty, L=0, case (b) for smooth f with r=-2d, r=0, F=E, ramified F. Steps 2-10 are correct as written, including the case (b) truncation and full-faithfulness argument (no lifting of maps known only levelwise), the gamma/alpha Hom chain, rationalization, field extension on cofinal levels, two-colimit descent and the Yoneda transpose. No new nodes, no duplicates, no cycle, no SGA source. I accept the declared tool_uses. Repairs: (1) Step 1 never showed that the reductions have constructible cohomology, which Step 2 needs for D^b_ctf membership. I added the one-line local-model argument and cited def-weil-proetale-constructible-sheaf. (2) C1/C4: Step 4's last arrow L -> L_Y R_Y L needs the Koszul-complete to Rlim-of-reductions comparison, which the step did not cite. I identified the arrow as the unit, which equals comp_L, cited prop-weil-pbc-koszul-reconstruction, and declared it in split_report.tool_uses. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-condensed-exceptional-reconstruction.json. Maintainer: the top-level tool_uses still lists lem-pur-finite-smooth-adjunction-general-base, which the item no longer cites. Details in review.md.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

@@ -307,7 +307,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-etale-coefficient-system-adjoint",
   "by": "worker",
@@ -316,10 +316,10 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "item": "lem-pur-system-level-left-extension",
-  "worker": "stage1",
-  "summary": "Kept the statement and all existing route steps. Replaced the reopened 2429-character stability/derived-model step by five short steps: projective section rectification, right-Quillen evaluations, a cone lemma, a suspension-pushout lemma, and the enhanced derived adjunction. Added two statement-only nodes for the hidden cone and suspension arguments, with fresh Mathlib searches and no matches.",
+  "worker": "stage1-NK",
+  "summary": "Retained and independently audited the reviewed 13-step split; added complete citation quotes and NK review report. The item is now marked split so the delivery preflight recognizes its already reviewed proof.",
   "blueprint": "Nearest ancestor def-weil-exceptional-inverse-image, current main-20261015 adic-stage paragraph (derived inverse limits after compatible finite levels); via lem-pur-etale-coefficient-system-adjoint. Existing steps 1-5 and 11-13 retain their route; the replacement steps realize the projective section/stability paragraph before the inverse limit.",
   "tool_uses": [
    {
@@ -374,10 +374,10 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q44-abd34acf4",
-  "group": "Q44",
+  "reviewer": "NT-cc-NK-4640f78d6",
+  "group": "NK",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-abd34acf4 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited node's statement, unit sk-def-sf-operations, the main-20261015 def-weil-exceptional-inverse-image finite-level/adic paragraph, and Zheng Construction 4.1 p.21 (e_{n!} formula Λ_q⊗_{Λ_n}F for q≤n, 0 above). Compared with the live side-DAG base: the statement, stmt_deps, steps 1-5 and steps 11-13 (old 7-9) are unchanged; only old step 6 was split, into steps 6-10, all under 2000 characters. Steps 6-10 are correct. Step 5 supplies every hypothesis of lem-coef-quillen-section-rectification. Componentwise fibrations make e_n and U_r right Quillen. pointed-model-stability applies to Sect. dg-derived-quillen-calculus gives the derived adjunctions. Three repairs: (1) B2 in both new nodes: 'the projective dg model category of strict semilinear sections supplied by [rectification]' named no site, ring system, level model or Quillen diagram. Both statements now introduce C, B_n, the flat level models, and the Quillen hypothesis that step 5 proves, with explicit formulas for Q[1], CQ and the pushout. (2) The suspension node's 'canonical map' to Q[1] was ambiguous, and the obvious difference map x1−x2 has kernel Cone(2·1_Q), which is not acyclic when 2 is not invertible (example Q=Z/2 over F_2). It now names the projection (x1,x2,y)↦x2; this map is surjective with kernel ≅CQ, which is contractible. The bare lemma citation used as a proof hint and the unneeded cone node in stmt_deps are removed. (3) Stale renumbering: step 12 said 'representative Q of step 7', now step 11; split_report.blueprint said '1-5 and 7-9', now '1-5 and 11-13'. Step 6 again names the Quillen diagram of step 5, and step 8 now cites pointed-model-stability, which was already in its uses. Cone checks: y↦(0,y) is a chain map, the cokernel is Q[1], the contraction h(x,y)=(y,0) satisfies dh+hd=id, and the inclusion is a cofibration as Q⊗(Z[0]→Cone(1_{Z[0]})) by the dg axiom. Duplicates: lem-cbc-projective-cochain-suspension states the analogous calculation for a single ring's projective model, a different category, so it is neither a duplicate nor a generalization. Other suspension and ∞-categorical nodes do not state these calculations. No SGA citation, no cycle, all ids exist, uses match proof_deps, no new tool_uses. Fixes are under fixes/dag/nodes/sec-smooth-purity/; review.md has the details.; 3 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-4640f78d6 (reviewer sub-agent of L); spot-checked: The commit changes only the item's status (unsplit to split) and split_report date/worker/summary. Statement, stmt_deps, the 13 steps, proof_deps, blueprint and tool_uses are byte-identical to the base split that Q44 reviewed on 2026-10-17; two syncs had reset its status (ledger 2026-10-17 20:15/20:20) and the item is back in the side queue. I re-read all of it rather than relying on Q44. The report wrongly lists cone/suspension copies and a citations.json; neither is in the commit, both nodes already exist with created.item=this item, and the delivery creates no new node. Zheng Construction 4.1 (printed p.21) gives (e_{n!}F)_q=Lambda_q (x)_{Lambda_n} F for q<=n and 0 above, which matches step 3 and the singleton formula. The blueprint main-20261015 def-weil-exceptional-inverse-image O_E clause (derived inverse limits of finite-level functors) is the cited from.place. Steps: (1) in the product site C x J, (U_i,n)x_(U,n)(V,m)=(V x_U U_i,m) and coverings stay in one level; the Grothendieck and colimit hypotheses (small site, commutative ring sheaf) hold. (2) Derived coproducts come from Hom into a K-injective, for any small family; detection uses componentwise cohomology of the cone. (3)-(4) The adjunctions check by 1(x)x generation, t(r(i))=i, the pure-tensor squares and both triangle identities; marking these steps elementary is justified. (5) F_ij is left Quillen: flat-quotient tensor exactness, K-flat pullback preserved without flatness of c, and derived-change-of-rings(1) for trivial cofibrations. (6)-(7) Rectification hypotheses are supplied by step 5; componentwise fibrations make e_n and U_r right Quillen. (8)-(9) Cone and suspension: the projection (x1,x2,y)->x2 is a chain map, surjective, with kernel CQ, which is contractible; so Sigma is isomorphic to [1] and Sect is stable. (10)-(13) The dg calculus applies; cofibrant evaluations are K-flat, so the tensor formulas hold; the derived associator is computed on K-flat terms; t_{r o s}=t_s o t_r is verified. Small cases checked: Z/p^n on a point (L_2(Z/p) is unbounded, as the statement allows), r=id, r(i)=2i. Kan comma category: its terminal object is t(m). No cycle, uses equal proof_deps, all ids exist, no SGA. lem-pur-coefficient-evaluation-derived-left-adjoint is a special case that cites the item, not a duplicate; lem-cbc-projective-cochain-suspension concerns a different category. The nine declared tool_uses are generic foundations and accepted. No fixes."
  },
  "lean_audit": {
   "master": {

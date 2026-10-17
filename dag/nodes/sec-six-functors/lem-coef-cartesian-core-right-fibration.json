@@ -11,9 +11,74 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The simplicial subset $E^{\\mathrm{cart}}$ is closed under faces and degeneracies: every edge of a face of a simplex is an edge of that simplex, and every edge of a degeneracy $s_j\\sigma$ is an edge of $\\sigma$ or a degenerate edge, and degenerate edges are $p$-Cartesian by the Cartesian dual (through [lem-coef-marked-opposite-relative-calculus], which exchanges cartesian and cocartesian edges under $E\\mapsto E^{\\mathrm{op}}$, $B\\mapsto B^{\\mathrm{op}}$) of [lem-coef-infinity-cocartesian-composition-initiality]. The same dual gives, for a $2$-simplex of $E$ with edges $u:x\\to y$, $v:y\\to z$, $w:x\\to z$ and $v$ $p$-Cartesian, that $u$ is $p$-Cartesian if and only if $w$ is (composition and cancellation). Now take a lifting problem $\\Lambda_i^n\\to E^{\\mathrm{cart}}$ over $\\sigma:\\Delta^n\\to B$ with $n\\ge1$, $0<i\\le n$. Case $n=1$, $i=1$: the horn is a vertex $y$ over $\\sigma(1)$, and the Cartesian-fibration clause of [def-coef-infinity-fibrations] gives a $p$-Cartesian edge over $\\sigma$ with target $y$; it lies in $E^{\\mathrm{cart}}$. Case $n\\ge2$, $0<i<n$: $p$ is an inner fibration, so a filler $\\Delta^n\\to E$ over $\\sigma$ exists. Case $n\\ge2$, $i=n$: the edge $\\{n-1,n\\}$ lies in the face $d_0$ of $\\Lambda^n_n$, so it is prescribed and $p$-Cartesian, and by the definition of a $p$-Cartesian edge in [def-coef-infinity-fibrations] a filler over $\\sigma$ exists. It remains to see that every edge of the filler is Cartesian. For $n\\ge3$ every edge $\\{a,b\\}$ of $\\Delta^n$ misses at least two vertices, hence a vertex $j\\neq i$, so it lies in the face $d_j\\subseteq\\Lambda_i^n$ and is already Cartesian. For $n=2$, $i=1$, the only new edge is $\\{0,2\\}$, the composite in a $2$-simplex whose edges $\\{0,1\\},\\{1,2\\}$ are Cartesian, hence Cartesian; for $n=2$, $i=2$, the only new edge is $\\{0,1\\}$, and $\\{1,2\\},\\{0,2\\}$ are Cartesian, so cancellation makes $\\{0,1\\}$ Cartesian. Hence the filler lies in $E^{\\mathrm{cart}}$ and $p|_{E^{\\mathrm{cart}}}$ is a right fibration. Since $B$ is a quasicategory and $p|_{E^{\\mathrm{cart}}}$ lifts inner horns, $E^{\\mathrm{cart}}$ is a quasicategory as well.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-marked-opposite-relative-calculus",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.4.2.5 and Proposition 2.4.1.5, printed p. 122; the outer-horn proof that the Cartesian-edge simplicial subset is a right fibration."
+   }
+  },
+  {
+   "text": "Fix a vertex $b$ of $B$. A simplex of the degreewise fiber $E^{\\mathrm{cart}}\\times_B\\{b\\}$ is a simplex of $E_b=E\\times_B\\{b\\}$ all of whose edges are $p$-Cartesian; each such edge lies over the degenerate edge $\\mathrm{id}_b$. Apply [lem-coef-cocartesian-local-global] to the inner fibration $p^{\\mathrm{op}}:E^{\\mathrm{op}}\\to B^{\\mathrm{op}}$; by [lem-coef-marked-opposite-relative-calculus] its cocartesian edges are the $p$-Cartesian edges reversed, and its vertex fibers are the opposites $(E_b)^{\\mathrm{op}}$. The hypothesis of its degenerate-base clause holds because the degenerate edge at the source is cocartesian ([lem-coef-infinity-cocartesian-composition-initiality]). Since an edge of $E_b$ is an equivalence exactly when its reverse is an equivalence of $(E_b)^{\\mathrm{op}}$, an edge of $E_b$ is $p$-Cartesian if and only if it is an equivalence in $E_b$. Therefore the degreewise fiber is exactly the simplicial subset of $E_b$ of simplices all of whose edges are equivalences, which is the core $(E_b)^{\\simeq}$ of [def-cbc-enhanced-diagrams-cones]. The identification is an equality of simplicial subsets of $E$, and holds trivially when $E_b$ is empty. As a consistency check, $E^{\\mathrm{cart}}$ is a quasicategory (step 1), so [lem-coef-infinity-right-fibration-fibers] applied to the right fibration $p|_{E^{\\mathrm{cart}}}$ also gives that this fiber is a Kan complex.",
+   "uses": [
+    "lem-coef-cocartesian-local-global",
+    "lem-coef-marked-opposite-relative-calculus",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-right-fibration-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.1.5 and Corollary 2.4.2.5, printed p. 122; fiber-core identification."
+   }
+  },
+  {
+   "text": "Let $f:b\\to c$ be an edge of $B$. Cartesian transport along $f$ is the end map $h_0=h|_{\\{0\\}\\times E_c}:E_c\\to E_b$ of a map $h:\\Delta^1\\times E_c\\to E$ with $ph=f\\circ\\mathrm{pr}_{\\Delta^1}$, $h|_{\\{1\\}\\times E_c}$ the inclusion, and every edge $h|_{\\Delta^1\\times\\{y\\}}$ $p$-Cartesian; right-fibration transport along $f$ for $p|_{E^{\\mathrm{cart}}}$ is the end map of a map $g:\\Delta^1\\times(E^{\\mathrm{cart}})_c\\to E^{\\mathrm{cart}}$ over $f\\circ\\mathrm{pr}_{\\Delta^1}$ with $g|_{\\{1\\}\\times(E^{\\mathrm{cart}})_c}$ the inclusion. Given such an $h$, by step 2 $(E^{\\mathrm{cart}})_c=(E_c)^{\\simeq}$; restrict $h$ to $g=h|_{\\Delta^1\\times(E_c)^{\\simeq}}$. We check that $g$ lands in $E^{\\mathrm{cart}}$, i.e. that every edge of $\\Delta^1\\times(E_c)^{\\simeq}$ goes to a $p$-Cartesian edge. An edge is $(\\alpha,e)$ with $\\alpha$ an edge of $\\Delta^1$ and $e:y\\to y'$ an equivalence of $E_c$ (or degenerate). If $\\alpha$ is constant at $1$, its image is $e$, an equivalence over $\\mathrm{id}_c$, hence $p$-Cartesian by step 2. If $\\alpha$ is constant at $0$, its image is $h_0(e)$; the simplicial map $h_0:E_c\\to E_b$ carries the inverse and the two $2$-simplex witnesses of $e$ to such data for $h_0(e)$, so $h_0(e)$ is an equivalence of $E_b$ and hence $p$-Cartesian by step 2. If $\\alpha$ is $0\\to1$ and $e$ is degenerate at $y$, the image is $h|_{\\Delta^1\\times\\{y\\}}$, Cartesian by hypothesis. If $\\alpha$ is $0\\to1$ and $e$ is arbitrary, the $2$-simplex $((0,1,1),s_0e)$ of $\\Delta^1\\times(E_c)^{\\simeq}$ has edges $(0\\to1,\\mathrm{id}_y)$, $(1,e)$ and $(0\\to1,e)$; its image is a $2$-simplex of $E$ whose first two edges are Cartesian by the previous cases, so its third edge is Cartesian by the composition law of step 1 ([lem-coef-infinity-cocartesian-composition-initiality], dualized by [lem-coef-marked-opposite-relative-calculus]). Hence $g$ is a map into $E^{\\mathrm{cart}}$ over $f\\circ\\mathrm{pr}_{\\Delta^1}$ restricting to the inclusion of the fiber at $1$, i.e. a right-fibration transport datum along $f$, and its end map is $h_0|_{(E_c)^{\\simeq}}:(E_c)^{\\simeq}\\to(E_b)^{\\simeq}$, the restriction to cores of Cartesian transport. On vertices this sends $y$ to the source of the Cartesian lift $h|_{\\Delta^1\\times\\{y\\}}$ of $f$ with target $y$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-marked-opposite-relative-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.4.2.5 with Proposition 2.4.1.5, printed p. 122; transport and compatibility with Cartesian transport."
+   }
+  },
+  {
+   "text": "Steps 1 to 3 together give all three clauses: $p|_{E^{\\mathrm{cart}}}$ is a right fibration, its degreewise fiber over each vertex $b$ is $(E_b)^{\\simeq}$, and every Cartesian transport datum along $f$ restricts on cores to a right-fibration transport datum with end map the restriction of $f^*$. No step used a size bound beyond the fixed universe of [def-cbc-enhanced-diagrams-cones] or nonemptiness of any fiber.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.4.2.5, conclusion and universe convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "lem-coef-marked-opposite-relative-calculus",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-cocartesian-local-global",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-right-fibration-fibers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Corollary 2.4.2.5 and Proposition 2.4.1.5, printed p. 122; expanded outer-horn, fiber-core and transport argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -38,7 +103,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "N8",
   "item": "lem-coef-slice-cartesian-colimit-criterion",
@@ -49,7 +114,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, coherent finite-coefficient mapping-complex adjunction before R lim; through the algebroid completion and space-geometric-descent branch, the slice-core right-fibration criterion HTT 6.1.3.5(2) iff (3) used in the descent argument of HTT 6.1.3.9. Supporting general the cartesian core of a cartesian fibration is a right fibration, not a claim explicitly written in the blueprint.",
+   "place": "Proof paragraph 2, coherent finite-coefficient mapping-complex adjunction before R lim; the slice-core right-fibration criterion used in the space-geometric-descent branch. This node supplies the general Cartesian-core right-fibration lemma invoked there.",
    "via": [
     "lem-coef-slice-cartesian-colimit-criterion",
     "lem-coef-cartesian-colimit-descent-criterion",
@@ -64,5 +129,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-cartesian-core-right-fibration",
+  "worker": "stage1",
+  "summary": "Read the imported item, chapter and unit records, searched the source checkouts for an exact declaration, and found no finished attachment. Searched the DAG and whole blueprint for duplicate Cartesian-core/right-fibration statements; none exists. Retained both statement dependencies and split the proof into the outer-horn right-fibration argument, the fiber-core identification, Cartesian transport, and the final universe/empty-fiber check. Existing Cartesian mapping-fiber, opposite-duality, cocartesian local-global, and right-fibration fiber statements are cited exactly where used. The pinned Mathlib searches found only ordinary fibered-category APIs and inner-fibration primitives, so this remains an unsplit non-Mathlib theorem.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: coherent finite-coefficient mapping-complex adjunction and the slice-core right-fibration criterion in the space-geometric-descent branch. The split realizes the supporting Cartesian-core lemma used by that route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-0e56c5f1c",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-0e56c5f1c (reviewer sub-agent of L); spot-checked: Read the item, the only parent that cites it (lem-coef-slice-cartesian-colimit-criterion, which uses only clauses (i) and (ii)) and all seven cited node statements in full, plus the unit sk-prop-sf-biduality-general, which has no steps; all cited statements are in the item's own unit. HTT is not archived in the literature, so I checked the HTT 2.4.2.5/2.4.1.5 argument independently. The statement is true. Small cases checked: p=id_B (E^cart=B), B=Δ^0 (E^cart=E^≃), empty fibers, and the nerve of a 1-categorical Grothendieck fibration. It is not a target node, so the base-change and coefficient-category check does not apply. No SGA is cited and no tool_uses are needed. I repaired three faults in fixes/dag/nodes/sec-six-functors/lem-coef-cartesian-core-right-fibration.json. (1) C1/C4: step 1 used Cartesian composition and cancellation and the Cartesian-ness of degenerate edges without citing lem-coef-infinity-cocartesian-composition-initiality, and it merged the n=1 horn, the inner horns and the Λ^n_n case. I rewrote it case by case: {n-1,n} lies in d_0 of Λ^n_n; for n≥3 every edge is already in the horn; for n=2 the new edge comes from composition (i=1) or cancellation (i=2). (2) In step 2 I wrote out the hypothesis of the degenerate-base clause of lem-coef-cocartesian-local-global (the degenerate edge is a global cocartesian lift) and the dualization to p^op. I also stated that E^cart is a quasicategory, which the use of lem-coef-infinity-right-fibration-fibers needs. (3) E5: step 3 said 'the same argument on simplices' and made a coherence-under-composition claim that is not in the statement. I replaced it with an exact cylinder argument: all edges of h restricted to Δ^1×(E_c)^≃ are Cartesian (fiber equivalences, h_0-images of equivalences, the vertical lifts, and the diagonals through the 2-simplex ((0,1,1),s_0e)), so the restriction is a right-fibration transport datum with end map f^* restricted to cores. I dropped the unneeded mapping-fiber citation and set proof_deps to the union of the uses. The statement, stmt_deps, blueprint and split_report are unchanged. Remark: the statement uses 'transport' without a node defining it; the proof now fixes its meaning. No new nodes and nothing to drop.; 1 file(s) fixed by the reviewer"
  }
 }

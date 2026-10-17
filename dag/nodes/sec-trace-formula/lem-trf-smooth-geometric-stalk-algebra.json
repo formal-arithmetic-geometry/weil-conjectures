@@ -18,9 +18,170 @@
   "def-nagata-relative-affine-space",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $s,v$ for the images of the geometric points. Choose Noetherian affine neighbourhoods of $s$ and $v$, which exist by [pqf-def-locnoeth]. By [lem-weil-pbc-affine-open-stalk-localization] their ordinary local rings are prime localizations of the corresponding Noetherian coordinate rings, hence are Noetherian by [lem-weil-pbc-localization-noetherian]. The compatible affine-chart comparison [lem-exc-affine-strict-local-ring-comparison] identifies $A$ and $B$ with the algebraic strict henselizations of these ordinary local rings, relative to the separable residue closures inside the common geometric field $\\Omega$. Consequently [lem-sc-strict-henselization-noetherian] makes $A,B$ Noetherian. The same comparison says they are local and identifies their residue evaluations into $\\Omega$ with their local residue maps. In particular, a function belongs to their maximal ideal exactly when its value under geometric-point evaluation is zero.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-strict-henselization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tag 04HX (lemma-describe-etale-local-ring); Tag 06LJ (lemma-henselization-noetherian); algebra.tex Tag 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "Let $j:\\operatorname{Spec}A\\to S$ be the strict-local structural map. By [lem-weil-pbc-strict-henselization-functoriality](1), $\\bar s$ factors through its closed geometric point $a:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}A$. Form $W=V\\times_S\\operatorname{Spec}A$ and $\\bar w=(\\bar v,a)$ by [def-pc-fibre-product]. The projection $p:W\\to\\operatorname{Spec}A$ is smooth by clause (2) of [lem-pc-proper-base-change]. The structural map $j$ is ind-etale over an affine neighbourhood of $s$ by [lem-weil-pbc-strict-henselization-affine-chart-ind-etale]: it factors through that neighbourhood, since its inverse image contains the closed point of the local spectrum and therefore is the whole spectrum. The base-change clause of [lem-trf-ind-etale-strict-local-invariance] now identifies $W_{(\\bar w)}$ with $V_{(\\bar v)}$. This is the canonical functorial identification. The ring map $A\\to\\mathcal O^{\\mathrm{sh}}_{W,\\bar w}\\cong B$ is the map $A\\to B$ of the statement: it factors locally through the ordinary local ring at $w$ and its strict henselization by [lem-exc-affine-strict-local-ring-comparison], its spectrum followed by $j$ is the structural map to $S$, and on residue fields it is the prescribed inclusion inside $\\Omega$, so uniqueness in [lem-weil-pbc-strict-henselization-functoriality](3) applies. These constructions use the same geometric field throughout.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-pc-fibre-product",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-exc-affine-strict-local-ring-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tag 08HV (lemma-strictly-henselian-functorial-improve), scheme form; Tag 01VB (lemma-base-change-smooth); ind-etale invariance as in Tags 05WR (lemma-quasi-finite-strict-henselization) and 0GIP (lemma-base-change-strict-henselization-quasi-finite)."
+   }
+  },
+  {
+   "text": "Let $w$ be the image of $\\bar w$ and put $C=\\mathcal O_{W,w}$. By [lem-pc-smooth-flat] the smooth map $p$ is flat, so [def-weil-flat-morphism] gives a flat local map $A\\to C$; here $w$ lies above the closed point of $\\operatorname{Spec}A$, whose local ring is $A$ itself. The affine comparison [lem-exc-affine-strict-local-ring-comparison] identifies $\\mathcal O^{\\mathrm{sh}}_{W,\\bar w}$ with $C^{\\mathrm{sh}}$ compatibly with its structural map. The local map $C\\to C^{\\mathrm{sh}}$ is faithfully flat by [lem-sc-strict-henselization-faithfully-flat]. Transitivity [lem-pc-module-flat-transitive] makes $A\\to C^{\\mathrm{sh}}\\cong B$ flat. It is local by [lem-weil-pbc-strict-henselization-functoriality](3), or by the composition of the two local maps. Notice that this flatness argument does not require $C$ to be Noetherian; it therefore applies unchanged to any smooth morphism at geometric points.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "def-weil-flat-morphism",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-pc-module-flat-transitive",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tag 01VF (lemma-smooth-flat); Tag 07QM (lemma-dumb-properties-henselization), (1); algebra.tex Tag 00HC (lemma-composition-flat)."
+   }
+  },
+  {
+   "text": "Put $\\kappa=A/\\mathfrak m_A$ and $Z=W\\times_{\\operatorname{Spec}A}\\operatorname{Spec}\\kappa$. This is a closed subscheme of $W$: on every affine chart with coordinate ring $D$, it is $\\operatorname{Spec}(D/\\mathfrak m_A D)$, by [lem-weil-pbc-fibre-product-affine-spectra] and [def-weil-closed-immersion]. The point $\\bar w$ factors through $Z$, since its map from $A$ factors through $\\kappa$. By [lem-trf-closed-immersion-strict-localization-cartesian] its strict local ring is precisely $B/\\mathfrak m_A B=F$, with the indicated quotient map. The morphism $Z\\to\\operatorname{Spec}\\kappa$ is smooth by [lem-pc-proper-base-change](2). By the affine-local characterization in [def-sbc-smooth-morphisms], choose an affine neighbourhood of this point with smooth $\\kappa$-algebra of functions. Its ordinary local ring is regular (and hence Noetherian) by [lem-weil-pbc-smooth-over-field-regular-local]. Apply [lem-exc-affine-strict-local-ring-comparison] and [lem-sc-strict-henselization-regular] to obtain regularity of $F$. This argument for regularity of the strict-local closed fibre applies to any smooth morphism, independently of regularity of its base.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "lem-trf-closed-immersion-strict-localization-cartesian",
+    "lem-pc-proper-base-change",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-strict-henselization-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 05WS (lemma-quotient-strict-henselization); Tag 00TT (lemma-characterize-smooth-over-field); Tag 04HX (lemma-describe-etale-local-ring); more-algebra.tex Tag 06LN (lemma-henselization-regular); morphisms.tex Tag 01VB (lemma-base-change-smooth)."
+   }
+  },
+  {
+   "text": "For $I\\subseteq\\mathfrak m_A$, [lem-weil-pbc-flat-module-quotient-flat] applied to the flat $A$-module $B$ makes $B/IB$ flat over $A/I$. Since $A\\to B$ is local, $IB\\subseteq\\mathfrak m_B$. The quotient-local-ring statement [lem-weil-pbc-quotient-local-structure] gives maximal ideals $\\mathfrak m_A/I$ and $\\mathfrak m_B/IB$ in the two nonzero quotients. The inverse image of the latter is the former: the residue of $a+I$ lies in it exactly when the image of $a$ in $B$ belongs to $\\mathfrak m_B$, exactly when $a\\in\\mathfrak m_A$. Thus the induced map is local. Its closed fibre is\n$$(B/IB)/(\\mathfrak m_A/I)(B/IB)=B/\\mathfrak m_A B=F,$$\nsince $IB\\subseteq\\mathfrak m_A B$. This proves the first paragraph of the statement.",
+   "uses": [
+    "lem-weil-pbc-flat-module-quotient-flat",
+    "lem-weil-pbc-quotient-local-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HI (lemma-flat-base-change); local rings Section 07BH, Lemma 07BJ (lemma-characterize-local-ring-map); quotient identification by the displayed ideals."
+   }
+  },
+  {
+   "text": "Now assume $V=\\mathbf A^r_S$. Let $J_K=(t_i:i\\in K)$ and let $V_K\\hookrightarrow V$ set these coordinates equal to zero. On an affine base chart its coordinate-ring quotient sends the selected variables to zero and fixes every other variable; its inverse identifies it with the polynomial ring in the remaining $r-k$ variables. These maps commute with restriction to principal opens, so [def-nagata-relative-affine-space] identifies $V_K=\\mathbf A^{r-k}_S$ over $S$. It is a closed immersion by [def-weil-closed-immersion], and its projection is smooth by [sbc-lem-affine-space-smooth]. The evaluation statement in step 1 and $t_i\\in\\mathfrak m_B$ imply that $\\bar v$ factors through $V_K$. By [lem-trf-closed-immersion-strict-localization-cartesian] its strict local ring is $B_K=B/J_K$. Applying the argument of steps 2--3 to the smooth projection $V_K\\to S$ gives a flat local map $A\\to B_K$. Here this repeats that argument with $V_K$ in place of $V$, not an appeal to the conclusion of this item. By [lem-weil-pbc-flat-module-quotient-flat] and [lem-weil-pbc-quotient-local-structure], as in step 5, $A/I\\to B_K/IB_K=B/(IB+J_K)$ is flat and local. This quotient is Noetherian: each of its ideals lifts to an ideal of the Noetherian ring $B$, whose finite generators descend to generators of the original ideal. Its closed fibre is $B/(\\mathfrak m_A B+J_K)=F/(\\bar t_i:i\\in K)=F_K$.",
+   "uses": [
+    "def-nagata-relative-affine-space",
+    "def-weil-closed-immersion",
+    "sbc-lem-affine-space-smooth",
+    "lem-trf-closed-immersion-strict-localization-cartesian",
+    "lem-weil-pbc-flat-module-quotient-flat",
+    "lem-weil-pbc-quotient-local-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tags 00T6 (definition-standard-smooth), 00T7 (lemma-standard-smooth), 01VF (lemma-smooth-flat), 05WS (lemma-quotient-strict-henselization), 00HI (lemma-flat-base-change); coordinate quotient from the polynomial universal property."
+   }
+  },
+  {
+   "text": "In the model of step 2, the affine fibre of $W=\\mathbf A^r_A$ over the closed point is $\\operatorname{Spec}P$ with $P=\\kappa[t_1,\\ldots,t_r]$. This follows from the affine description in [def-nagata-relative-affine-space] and the tensor-product description [lem-weil-pbc-fibre-product-affine-spectra]: evaluating the coefficients in $\\kappa$ gives the polynomial ring over $\\kappa$. Let $\\mathfrak q$ be the prime defined by the lifted geometric point in this fibre. Then every $t_i$ for $i\\in K$ lies in $\\mathfrak q$. Put $L=(t_i:i\\in K)\\subset P$ and $\\mathfrak q'=\\mathfrak q/L$. Step 4 and [lem-exc-affine-strict-local-ring-comparison] identify $F$ with $(P_{\\mathfrak q})^{\\mathrm{sh}}$. The closed-immersion quotient statement [lem-trf-closed-immersion-strict-localization-cartesian], now for $\\operatorname{Spec}(P/L)\\hookrightarrow\\operatorname{Spec}P$, similarly identifies $F_K$ with $((P/L)_{\\mathfrak q'})^{\\mathrm{sh}}$. Here $P/L$ is the polynomial ring in the remaining variables, by sending those variables to their quotient classes and all selected variables to zero. The localizations of $P$ and $P/L$ are Noetherian regular local rings by [lem-weil-pbc-polynomial-ring-field-regular-ring]; their strict henselizations are regular by [lem-sc-strict-henselization-regular]. In particular $F_K$ is regular.",
+   "uses": [
+    "def-nagata-relative-affine-space",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-trf-closed-immersion-strict-localization-cartesian",
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-sc-strict-henselization-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tag 00OQ (proposition-finite-gl-dim-polynomial-ring); Tag 05WS (lemma-quotient-strict-henselization); Tag 06LN (lemma-henselization-regular); etale-cohomology.tex Tag 04HX (lemma-describe-etale-local-ring)."
+   }
+  },
+  {
+   "text": "Let $D=\\kappa[t_i:i\\in K]\\subset P$ and $\\mathfrak n=(t_i:i\\in K)\\subset D$. Since $\\mathfrak q$ contains the selected variables, $\\mathfrak q\\cap D=\\mathfrak n$: reduction of any $f\\in D$ modulo those variables is its constant in $\\kappa$, and a nonzero constant is a unit, so cannot belong to $\\mathfrak q$. Both $D$ and $P$ are Noetherian by [lem-weil-pbc-polynomial-ring-field-regular-ring]. The map $D\\to P$, adjoining the other variables, is smooth by [lem-weil-pbc-polynomial-ring-smooth] and flat by [lem-weil-pbc-smooth-ring-map-flat]. Apply [lem-weil-pbc-flat-height-formula] at $\\mathfrak q$ and $\\mathfrak n$:\n$$\\dim P_{\\mathfrak q}=\\dim D_{\\mathfrak n}+\\dim(P_{\\mathfrak q}/\\mathfrak nP_{\\mathfrak q}).$$\nThe first summand is $k$ by [lem-weil-pbc-polynomial-ring-origin-regular-local]. The second ring is $(P/L)_{\\mathfrak q'}$: the two maps send $f/g$ to $(f\\bmod L)/(g\\bmod L)$ and conversely, and denominators are invertible on both sides. By [lem-sc-strict-henselization-dimension] and the models in step 7, $\\dim F=\\dim P_{\\mathfrak q}$ and $\\dim F_K=\\dim(P/L)_{\\mathfrak q'}$. Hence $\\dim F=\\dim F_K+k$. The argument includes $K=\\varnothing$ (then $D=\\kappa$, $\\mathfrak n=0$) and $K=\\{1,\\ldots,r\\}$; it never assumes $\\mathfrak q$ maximal.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "lem-weil-pbc-flat-height-formula",
+    "lem-weil-pbc-polynomial-ring-origin-regular-local",
+    "lem-sc-strict-henselization-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tags 00ON (lemma-dimension-base-fibre-equals-total), 00OP (lemma-dim-affine-space), 00OQ (proposition-finite-gl-dim-polynomial-ring), 00T7 (lemma-standard-smooth); Tag 06LK (lemma-henselization-dimension)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-pc-fibre-product",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-pc-smooth-flat",
+  "def-weil-flat-morphism",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-pc-module-flat-transitive",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-closed-immersion",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-sc-strict-henselization-regular",
+  "lem-weil-pbc-flat-module-quotient-flat",
+  "lem-weil-pbc-quotient-local-structure",
+  "def-nagata-relative-affine-space",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-polynomial-ring-origin-regular-local",
+  "lem-sc-strict-henselization-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Strict-local smooth comparison assembled from Tags 04HX, 08HV, 01VB, 01VF, 07QM, 05WS, 00TT, 06LJ, 06LN and 06LK; coordinate dimension computed by 00ON and 00OP. This is the algebraic input to ILO VI 1.8, not a proof asserted to occur verbatim there."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +217,45 @@
    "results": "{\"t\": \"2026-10-17T18:14:24Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth morphism induces a flat map on geometric stalk rings whose closed fibre is a regular local ring; coordinate hyperplanes cut the closed fibre in a regular local ring of codimension the number of coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"RingHom.Smooth.locally_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"40dd477e1d732319\"}; Smoothness charts and flatness of finitely presented algebras do not identify geometric stalk maps or their coordinate closed-fibre quotients. The regular-sequence base-change hits supply only one algebraic ingredient. Grep finds no strict henselization in AlgebraicGeometry. No exact or one-line match.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|strict_hensel|henselization",
+   "results": "{\"t\": \"2026-10-17T19:03:50Z\", \"tool\": \"grep\", \"query\": \"strictHensel|strict_hensel|henselization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: they concern ordinary smooth affine charts, ordinary smooth-algebra flatness, and standard smooth presentations. None states the strict-local comparison or the coordinate quotient and fibre dimension clauses. Read Smooth/Flat.lean and AlgebraicGeometry/Morphisms/Smooth.lean for the candidate flatness and chart statements.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict henselizations of a smooth local homomorphism are flat with regular closed fibre",
+   "results": "{\"t\": \"2026-10-17T19:03:50Z\", \"tool\": \"leansearch\", \"query\": \"Strict henselizations of a smooth local homomorphism are flat with regular closed fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.Smooth.flat\", \"RingHom.Smooth\", \"RingHom.Smooth.ofLocalizationSpanTarget\", \"HenselianLocalRing.toIsLocalRing\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.Smooth.formallySmooth\", \"RingHom.Flat.ofLocalizationSpanTarget\"], \"digest\": \"308237dc04574f32\"}; Read the returned hits: they concern ordinary smooth affine charts, ordinary smooth-algebra flatness, and standard smooth presentations. None states the strict-local comparison or the coordinate quotient and fibre dimension clauses. Read Smooth/Flat.lean and AlgebraicGeometry/Morphisms/Smooth.lean for the candidate flatness and chart statements.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"stalk\"",
+   "results": "{\"t\": \"2026-10-17T19:03:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSmooth\\\", \\\"stalk\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: they concern ordinary smooth affine charts, ordinary smooth-algebra flatness, and standard smooth presentations. None states the strict-local comparison or the coordinate quotient and fibre dimension clauses. Read Smooth/Flat.lean and AlgebraicGeometry/Morphisms/Smooth.lean for the candidate flatness and chart statements.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth morphism of locally Noetherian schemes the map on strict henselian geometric local rings is flat and its closed fibre is regular",
+   "results": "{\"t\": \"2026-10-17T19:03:57Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth morphism of locally Noetherian schemes the map on strict henselian geometric local rings is flat and its closed fibre is regular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.Smooth.flat\"], \"digest\": \"5a09dd32e40b0cf1\"}; Read the returned hits: they concern ordinary smooth affine charts, ordinary smooth-algebra flatness, and standard smooth presentations. None states the strict-local comparison or the coordinate quotient and fibre dimension clauses. Read Smooth/Flat.lean and AlgebraicGeometry/Morphisms/Smooth.lean for the candidate flatness and chart statements.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In affine space over a local ring, quotienting the strict local ring by any coordinates vanishing at the point remains flat over the base and decreases regular closed fibre dimension by the number of coordinates",
+   "results": "{\"t\": \"2026-10-17T19:04:08Z\", \"tool\": \"leanfinder\", \"query\": \"In affine space over a local ring, quotienting the strict local ring by any coordinates vanishing at the point remains flat over the base and decreases regular closed fibre dimension by the number of coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension\", \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmoothOfRelativeDimension\"], \"digest\": \"1a8544729c6e4dc1\"}; Read the returned hits: they concern ordinary smooth affine charts, ordinary smooth-algebra flatness, and standard smooth presentations. None states the strict-local comparison or the coordinate quotient and fibre dimension clauses. Read Smooth/Flat.lean and AlgebraicGeometry/Morphisms/Smooth.lean for the candidate flatness and chart statements.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-log-smooth-log-regular",
@@ -84,5 +280,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-smooth-geometric-stalk-algebra",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Eight steps establish the smooth strict-local map by ind-etale base-change invariance and faithful flatness of algebraic strict henselization, identify its closed fibre by the closed-immersion quotient theorem, and compute coordinate-section quotients via actual affine coordinate subspaces. The dimension equality uses the flat height formula on the polynomial closed fibre over the strict-local residue field, including nonclosed points. All ingredients already have DAG nodes, so no new node is introduced. All Mathlib searches actually run in this sandbox are retained alongside the earlier records.",
+  "blueprint": "Historical ancestry retained from lem-trf-local-term-locality through the nearby-cycle/alteration and nodal-log-regularity auxiliary chain. The item supplies the flat smooth comparison and affine-coordinate-section assertions used in steps 3 and 8 of lem-trf-log-smooth-log-regular (ILO VI 1.8 and the injective chart at the end of VI Proposition 1.9). The current main-20261015 local-term proof uses contracting correspondences; this delivery only splits the already-created local-algebra input and changes no unit route. Whole-blueprint searches for henselization, regular sequence, polynomial ring, ind-etale, smooth flat and the full item found no blueprint node with the same combined statement.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Generic affine-chart comparison of geometric and algebraic strict local rings input to the strict-local commutative-algebra calculation; this supplies a local algebra or scheme permanence fact, and replaces no step of the trace-formula unit."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic strict henselization preserves noetherianity of local rings input to the strict-local commutative-algebra calculation; this supplies a local algebra or scheme permanence fact, and replaces no step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic strict henselizations at a geometric point and their functoriality input to the strict-local commutative-algebra calculation; this supplies a local algebra or scheme permanence fact, and replaces no step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "why": "Generic strict henselization is ind-etale over an affine chart input to the strict-local commutative-algebra calculation; this supplies a local algebra or scheme permanence fact, and replaces no step of the trace-formula unit."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic strict henselization is faithfully flat input to the strict-local commutative-algebra calculation; this supplies a local algebra or scheme permanence fact, and replaces no step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "Generic local rings of a smooth algebra over a field are regular input to the strict-local commutative-algebra calculation; this supplies a local algebra or scheme permanence fact, and replaces no step of the trace-formula unit."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Generic strict henselization preserves regular local rings input to the strict-local commutative-algebra calculation; this supplies a local algebra or scheme permanence fact, and replaces no step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-ring-origin-regular-local",
+    "why": "Generic the polynomial ring over a field localized at the origin is regular local of dimension d input to the strict-local commutative-algebra calculation; this supplies a local algebra or scheme permanence fact, and replaces no step of the trace-formula unit."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "Generic strict henselization preserves local krull dimension input to the strict-local commutative-algebra calculation; this supplies a local algebra or scheme permanence fact, and replaces no step of the trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-sc-strict-henselization-regular",
+  "lem-weil-pbc-polynomial-ring-origin-regular-local",
+  "lem-sc-strict-henselization-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-813cbb180",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-813cbb180 (reviewer sub-agent of L); spot-checked: PASS with no repairs. I read in full the item, its 8 steps, all 30 proof dependencies and 9 statement dependencies, the parent lem-trf-log-smooth-log-regular (steps 3 and 8, which use the item) and the unit sk-i-curve-zero. The delivery has no new nodes. proof_deps equals the union of the step uses, every cited id exists and none is merged, and a 504-node closure traversal finds no cycle. The statement is unchanged and not weakened. Small cases checked: base k[eps]/(eps^2) with r=2; the nonclosed prime q=(t1) with K={1}, giving dims 1 and 0; K empty; K all coordinates; I=0 and I=m_A. Step checks: (1) the affine-chart comparison plus 06LJ gives Noetherian local rings and the kernel of evaluation. (2) The strict-local structural map is ind-etale over an affine chart, because an open containing the closed point of a local spectrum is everything. The base-change clause of lem-trf-ind-etale-strict-local-invariance gives W_(w) = V_(v), and uniqueness in functoriality (3) gives the A-structure. (3) Smooth implies flat, then C to C^sh is faithfully flat, then transitivity. (4) The closed-immersion strict-localization theorem gives F = B/m_A B, then smooth over kappa gives a regular local ring, then 06LN. (5) The quotient by I is elementary. (6) V_K = A^{r-k}_S is smooth, B_K = B/J_K, and the argument of steps 2-3 is re-run, not circular. (7) Models (P_q)^sh and ((P/L)_q')^sh are both regular. (8) q meets D in n, the flat height formula gives dim P_q = k + dim (P/L)_q', and strict henselization preserves dimension (06LK). Two identifications are accepted as elementary: the pairs vs triples definitions of strict henselization (isomorphic index categories), and the Nagata vs sbc affine-space definitions (same gluing of Spec R[x]). Stacks labels read: 05WS, 06LN, 06LK, 06LJ, 07QM(1), 08HV, 04HX. The other cited tags were confirmed through the tags file. No SGA source is used. All 9 declared tool_uses are accepted; they are generic strict-henselization and local-algebra tools and are exactly the off-unit, non-Mathlib, non-closed citations. Duplicate candidates read and found distinct: lem-sbc-affine-strict-henselization-structural-flat, lem-sc-smooth-strict-local-field-model-core, the lem-sbc-polynomial-chart-* nodes and lem-weil-pbc-smooth-local-acyclicity. None states the item."
  }
 }
