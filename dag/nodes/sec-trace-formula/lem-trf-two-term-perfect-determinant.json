@@ -13,7 +13,11 @@
   "def-amb-finite-locally-free-module",
   "def-sc-invertible-module",
   "def-weil-pbc-exterior-algebra",
-  "def-pc-module-pullback"
+  "def-pc-module-pullback",
+  "def-pc-perfect-complex",
+  "def-sc-sheaf-exterior-power",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-recorded-pullback-composition"
  ],
  "proof": [
   {
@@ -305,5 +309,39 @@
   "group": "Q92",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q92-c492a2c4f (reviewer sub-agent of L); spot-checked: Read both nodes in full and checked all ten steps against Stacks 0FJI–0FJM, 0FJX–0FJY and the cited interfaces. Verified normalization, nonflat pullback, edge cases, duplicates and absence of a dependency cycle. No repairs needed. Detailed checks and accepted tool uses are in review.md; unavailable pivot-history checks are explicitly noted."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.TwoTermPerfectDeterminant",
+  "file": "lean/Sheaf/TraceFormula/TwoTermPerfectDeterminant.lean",
+  "declaration": "AlgebraicGeometry.exists_twoTermPerfectDeterminantData",
+  "statement": "theorem exists_twoTermPerfectDeterminantData [∀ (X : Scheme.{u}) (U : X.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] : (∀ (X : Scheme.{u}) (L : schemeDerivedCategory X), isTwoTermPerfect X L ↔ Scheme.IsPerfect X L ∧ ∀ (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (i : ℤ), i < -1 ∨ 0 < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj (L ⊗ (DerivedCategory.singleFunctor _ 0).obj M))) ∧ Nonempty (TwoTermPerfectDeterminantData.{u, w})",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-17",
+  "declarations": [
+   "AlgebraicGeometry.TwoTermDeterminantModel",
+   "AlgebraicGeometry.TwoTermDeterminantModel.complex",
+   "AlgebraicGeometry.TwoTermDeterminantModel.line",
+   "AlgebraicGeometry.TwoTermDeterminantModel.identity",
+   "AlgebraicGeometry.isTwoTermPerfect",
+   "AlgebraicGeometry.TwoTermPerfectCore",
+   "AlgebraicGeometry.twoTermDeterminantValue",
+   "AlgebraicGeometry.twoTermDeterminantIso",
+   "AlgebraicGeometry.twoTermDeterminantZeroObject",
+   "AlgebraicGeometry.twoTermDeterminantPullbackId",
+   "AlgebraicGeometry.twoTermDeterminantDerivedCompositionLift",
+   "AlgebraicGeometry.TwoTermPerfectDeterminantData",
+   "AlgebraicGeometry.exists_twoTermPerfectDeterminantData"
+  ],
+  "note": "The local two-term condition, model/zero comparisons, evaluation normalization, and all pullback coherences are explicit data. Ordinary pullbacks use the recorded section-normalized adjunction. Derived composition is pinned to the universal lift from its original K-flat counits and this normalized tensor comparison; no natural isomorphism is chosen from a bare existence assertion. Reuses four additional landed dependencies for perfect complexes, sheaf exterior powers, derived tensor and the retained original pullback counits. Only the final existence/equivalence theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b6e53d456",
+  "group": "NK",
+  "result": "fix",
+  "note": "Mechanical report repair supplied; Lean, node statement, dependencies, source alignment, edge cases, and compilation all checked."
  }
 }
