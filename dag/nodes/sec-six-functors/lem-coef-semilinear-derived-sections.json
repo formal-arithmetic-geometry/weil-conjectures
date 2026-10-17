@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2: the finite derived mapping-complex adjunction before R lim; paragraph 1: a normalized exceptional tower must be an actual functor. Technical strict/enhanced semilinear localization foundation.",
+   "place": "Proof paragraph 2: the finite coefficient-level derived adjunctions before R lim; paragraph 1: a normalized coefficient tower as an actual object of an ordinary derived category of strict semilinear systems. Ordinary-derived technical foundation (levelwise operations, evaluations, normalized objects).",
    "via": [
     "lem-coef-finite-adjunction-diagram-realization"
    ]
@@ -13,177 +13,248 @@
  },
  "kind": "statement",
  "title": "Derived semilinear sections and coefficient-linear geometric operations",
- "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] and let $B_1\\leftarrow B_2\\leftarrow\\cdots$ be a strict inverse sequence of sheaves of commutative rings: each $B_n$ is a functor $\\mathcal C^{\\mathrm{op}}\\to\\operatorname{CommRing}$ whose underlying presheaf of sets is a sheaf, and the transition maps are natural ring homomorphisms. Let $\\mathscr S(B)$ have objects $B_n$-module sheaves $M_n$ with $B_{n+1}$-linear maps $M_{n+1}\\to\\operatorname{Res}_{n+1,n}M_n$, and compatible componentwise maps as morphisms [def-weil-sheaf-of-modules-category, def-pc-sheaf-restrict-scalars]. Exactness is componentwise. Use unbounded cochain complexes and derived categories [def-pc-cochain-complex-modules, def-weil-abstract-derived-category]. Write $\\mathbf D(B_n)$ for the enhanced derived module category, meaning the differential graded localization of complexes at quasi-isomorphisms, retaining mapping complexes and their higher composition homotopies, rather than just its ordinary homotopy category $D(B_n)$. A homotopy coherent semilinear section consists of objects of $\\mathbf D(B_n)$ and maps to the restricted next objects, with composition homotopies and their higher compatibilities; morphisms retain the same compatibilities. Equivalently these are sections of the derived module-category diagram with forward transition functors $-\\otimes^L_{B_m}B_n$, using derived extension/restriction adjunction to write the structure maps in restriction form. For $m\\ge n\\ge1$, $\\operatorname{Res}_{m,n}$ denotes restriction along $B_m\\to B_n$. A cartesian section is one for which each adjoint $M_m\\otimes^L_{B_m}B_n\\to M_n$ is an equivalence [lem-pur-derived-change-of-rings].\n\nThe enhanced localization of complexes in $\\mathscr S(B)$ at componentwise quasi-isomorphisms is equivalent, over all evaluation functors, to this category of homotopy coherent semilinear sections. Its ordinary homotopy category is $D(\\mathscr S(B))$. Under the equivalence its cartesian objects are exactly the normalized derived systems. Equivalences are detected by the evaluations. This holds for unbounded complexes and without flatness of $B_m\\to B_n$.\n\nLet $u:\\operatorname{Sh}(\\mathcal C')\\to\\operatorname{Sh}(\\mathcal C)$ be a morphism of topoi with ring systems $C_n=u^{-1}B_n$ and the specified transition maps. Here a morphism of topoi is an adjunction $u^{-1}\\dashv u_*$ with $u^{-1}$ preserving finite limits. Exact inverse image and its derived right adjoint act on the above section models; their evaluations are the ordinary $u^{-1}$ and $Ru_{*,n}$, with their units and counits. For an open localization the exact extension by zero acts on these models as well [lem-pur-site-restriction-module-adjunction-exact]. Derived coefficient extension and tensor use K-flat representatives and the total tensor complex [def-pc-kflat-complex, def-pc-tensor-complex-sheaves]. They and comparisons formed from the above operations, pullback composition identifications, maps of module sheaves, tensor evaluation, and adjunction units and counits have simultaneous enhanced section models. This includes exchange maps obtained as adjunction mates [def-weil-pbc-adjunction-mate], open-extension base-change maps obtained by open adjunction, and composites of these maps with proper direct-image composition. This clause gives models for those specified constructions, without claiming that these comparisons are invertible on arbitrary inputs. In particular the coefficient projection comparison for $Ru_*$, and its composites with open extension, is the derived counit transpose on these models. Evaluation, composition, and taking adjunction transposes preserve these specified constructions and their coherence homotopies. No assertion that evaluation of a K-injective semilinear system is K-injective is part of this statement. In the tensor-Hom evaluation clause, fiberwise internal Hom means the construction for a cartesian first input: for cartesian $M$ and any section $N$, its fiber is $R\\mathcal Hom_{B_n}(M_n,N_n)$, with transitions obtained by the tensor-Hom comparison and the inverse of the cartesian comparison for $M$ [def-pur-derived-internal-hom]. It is not an assertion of fiberwise internal Hom or fiberwise tensor-Hom evaluation for arbitrary lax first inputs.",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] and let $B_1\\leftarrow B_2\\leftarrow\\cdots$ be a strict inverse sequence of sheaves of commutative rings on it. Let $\\mathscr S(B)$ consist of $B_n$-module sheaves $M_n$ and $B_{n+1}$-linear maps $M_{n+1}\\to\\operatorname{Res}_{n+1,n}M_n$, with compatible componentwise morphisms [def-weil-sheaf-of-modules-category, def-pc-sheaf-restrict-scalars]. Equivalently these are modules over the ring object $B_\\bullet$ in the topos of inverse sequences of sheaves on $\\mathcal C$. This is a Grothendieck abelian category with componentwise exactness. Use ordinary unbounded cochain complexes and derived categories [def-pc-cochain-complex-modules, def-weil-abstract-derived-category]. Evaluation induces exact functors $e_n:D(\\mathscr S(B))\\to D(B_n)$, computed termwise, jointly detecting isomorphisms. For $m\\geq n$, the transitions induce natural reduction maps $t_{m,n}:M_m\\otimes^L_{B_m}B_n\\to M_n$, compatible with composition through the canonical tensor associators [lem-pur-derived-change-of-rings]. An object is called normalized, or cartesian, when all these maps are isomorphisms. No flatness of the coefficient maps is assumed.\n\nLet $u:\\operatorname{Sh}(\\mathcal C')\\to\\operatorname{Sh}(\\mathcal C)$ be a morphism of topoi presented by small sites, an adjunction $u^{-1}\\dashv u_*$ whose inverse image preserves finite limits, and put $C_n=u^{-1}B_n$. Exact levelwise inverse image gives $V=u^{-1}_\\bullet:D(\\mathscr S(B))\\to D(\\mathscr S(C))$. Levelwise module direct image has a total right derived functor $G=Ru_{*,\\bullet}$ and $V\\dashv G$. There are canonical natural isomorphisms $e_nV=u^{-1}e_n$ and $e_nG\\cong Ru_{*,n}e_n$, compatible with the units, counits and transition maps. In extension form the transitions of $GN$ are $G_n(t^N_{m,n})\\circ b_{m,n,N_m}$, where $G_n=Ru_{*,n}$, $T_{m,n}=-\\otimes^L_{B_m}B_n$, $S_{m,n}=-\\otimes^L_{C_m}C_n$, and $b_{m,n}:T_{m,n}G_m\\to G_nS_{m,n}$ is the mate of the inverse of $S_{m,n}u^{-1}\\cong u^{-1}T_{m,n}$ [def-weil-pbc-adjunction-mate]. For an open localization, exact extension by zero $j_!$ and restriction act on systems and their derived categories, with the ordinary level adjunctions [lem-pur-site-restriction-module-adjunction-exact].\n\nFor a compatible map $B_\\bullet\\to D_\\bullet$ of ring systems, derived extension of scalars is defined on these ordinary derived categories and evaluates to $M_n\\otimes^L_{B_n}D_n$. Derived tensor of systems evaluates to $M_n\\otimes^L_{B_n}N_n$. These operations use K-flat resolutions and the total tensor complex [def-pc-kflat-complex, def-pc-tensor-complex-sheaves]. Let $H_B(M,N)=R\\mathcal Hom_{B_\\bullet}(M,N)$ be internal Hom on the ringed topos of systems [def-pur-derived-internal-hom]. For cartesian $M$ and arbitrary $N$, there are canonical natural identifications $e_nH_B(M,N)\\cong R\\mathcal Hom_{B_n}(M_n,N_n)$, carrying system evaluation to ordinary tensor-Hom evaluation. Its reduction transition is the transpose of\n$$S(H_m)\\otimes^L M_n\\xrightarrow{1\\otimes t_{m,n}^{M,-1}}S(H_m)\\otimes^L S(M_m)\\cong S(H_m\\otimes^L M_m)\\xrightarrow{S(\\mathrm{ev})}S(N_m)\\xrightarrow{t^N_{m,n}}N_n,$$\nwhere in this formula $S=-\\otimes^L_{B_m}B_n$ and $H_m=R\\mathcal Hom_{B_m}(M_m,N_m)$. No fiberwise-Hom formula is asserted for noncartesian first inputs.\n\nPullback-composition identifications, maps of module sheaves, the preceding tensor and evaluation maps, and units and counits give natural transformations on the ordinary derived categories of systems. Their specified exchange maps are the ordinary adjunction-mate words; this includes open-adjunction exchange and composites with proper direct-image composition. The coefficient projection comparison for $Ru_*$ is precisely $b_{m,n}$ above. The general tensor projection map is the transpose of $u^{-1}(Ru_*N\\otimes^LP)\\cong u^{-1}Ru_*N\\otimes^Lu^{-1}P\\xrightarrow{\\varepsilon_N\\otimes1}N\\otimes^Lu^{-1}P$. Evaluation, composition and taking these specified adjunction transposes agree with the levelwise constructions and ordinary mate-pasting identities. These assertions concern maps actually constructed on $D(\\mathscr S(B))$, without a claim that evaluations detect equality of arbitrary morphisms, that comparisons are invertible on arbitrary inputs, or that evaluated K-injective systems are K-injective. No right adjoint on the subcategory of normalized systems is asserted.",
  "source": {
   "document": "literature/stacks-project/injectives.tex",
   "place": "Tag 079P (theorem-K-injective-embedding-grothendieck), functorial resolution foundation only. The comparison with enhanced varying-ring sections and the simultaneous derived operations are additional agent-formulated localization assertions, not the statement of 079P; they supply the missing coherent construction in the proof of lem-coef-finite-exceptional, paragraphs 2-3."
  },
  "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
   "def-weil-sheaf-of-modules-category",
   "def-pc-sheaf-restrict-scalars",
   "def-pc-cochain-complex-modules",
   "def-weil-abstract-derived-category",
   "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-adjunction-mate",
   "lem-pur-site-restriction-module-adjunction-exact",
   "def-pc-kflat-complex",
   "def-pc-tensor-complex-sheaves",
-  "def-weil-pbc-adjunction-mate",
-  "def-weil-pbc-sites-and-cohomology",
   "def-pur-derived-internal-hom"
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal A_n=\\operatorname{Mod}(B_n)$ and $F_{m,n}(P)=P\\otimes_{B_m}B_n$ on complexes. The degreewise adjunction is the enriched chain-complex adjunction: $a:P\\to\\operatorname{Res}_{m,n}Q$ corresponds to $\\widetilde a(x\\otimes b)=b\\,a(x)$ and the inverse sends $v$ to $x\\mapsto v(x\\otimes1)$. Balancing proves the inverse identities; the same formulas in each degree commute with $d(h)=d_Qh-(-1)^{|h|}h d_P$. They apply to module sheaves, by the ringed-topos module adjunction with identity underlying topos. Thus a complex in $\\mathscr S(B)$ is exactly a strict section with structure maps $F_{m,n}P_m\\to P_n$. Compatibility for adjacent arrows gives all longer arrows, using the associative tensor rebracketing; under the displayed formulas this is exactly the strict restriction-form cocycle. Morphisms are identified by the same calculation. The differential and semilinear structure commute in precisely the two descriptions.",
+   "text": "Present the sequence topos by the small site $\\mathcal C\\times\\mathbf N_{\\geq1}$: an arrow $(U,n)\\to(W,m)$ consists of $U\\to W$ and $n\\leq m$, and generating covers have fixed index and are covers of $\\mathcal C$. Pulling back such a cover along an index-changing arrow still gives a fixed-index cover, so this is a site. Its sheaf condition says exactly that each level is a sheaf; the other restrictions give inverse-sequence transitions. The ring sheaf $(U,n)\\mapsto B_n(U)$ is therefore $B_\\bullet$, and its module sheaves are exactly $\\mathscr S(B)$. Kernels and cokernels are computed at each level using kernels and sheafified cokernels of module sheaves; the scalar-linear transitions descend to these constructions. Hence cohomology of a complex of systems is componentwise.",
    "uses": [
+    "def-weil-pbc-sites-and-cohomology",
     "def-weil-sheaf-of-modules-category",
-    "def-pc-sheaf-restrict-scalars",
-    "def-pc-cochain-complex-modules",
-    "lem-weil-pbc-ringed-topoi-module-adjunction"
+    "def-pc-sheaf-restrict-scalars"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
-    "place": "Proof paragraphs 1-2: coherent finite operations and enriched adjunction before inverse limits; agent expansion with the explicitly isolated model/localization foundations."
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
    }
   },
   {
-   "text": "Equip each $\\operatorname{Ch}(\\mathcal A_n)$ with the flat model of [lem-coef-sheaf-flat-model]. Check the left Quillen hypothesis, including the nonflat case. If $i:P\\to Q$ is a cofibration, its degreewise cokernel $H$ is flat-term K-flat. Tensoring $0\\to P^r\\to Q^r\\to H^r\\to0$ with $B_n$ remains exact by [lem-weil-pbc-site-flat-quotient-tensor-ses]; forgetting the $B_n$ action reflects this exactness. Its new cokernel is $H\\otimes_{B_m}B_n$, flat-term K-flat by [lem-weil-pbc-ringed-topos-kflat-pullback] for the identity topos and $B_m\\to B_n$. Hence $F_{m,n}(i)$ is a cofibration. If $i$ is trivial, $H$ is acyclic, and $0\\to H$ is a quasi-isomorphism between flat-term K-flat complexes; [lem-weil-pbc-ringed-topoi-derived-pullback] says its pullback is a quasi-isomorphism. Thus $F_{m,n}(i)$ is trivial. The chain-level tensor/restriction adjunction of step 1 is therefore a differential graded Quillen adjunction. Its enhanced derived left functor is $T_{m,n}=-\\otimes^L_{B_m}B_n$, with exactly the ordinary computation of [lem-pur-derived-change-of-rings]; its right functor is exact scalar restriction. Apply [lem-coef-dg-derived-quillen-calculus] to the associativity isomorphisms $F_{n,r}F_{m,n}\\cong F_{m,r}$ to obtain their derived coherent composition identifications. No $B_n$ is assumed flat as a $B_m$-module.",
+   "text": "Apply [lem-pur-ringed-site-grothendieck-abelian] and [prop-pur-kinjective-resolutions-exist] to that small ringed site. This gives Grothendieck abelianness and unbounded K-injective resolutions in $\\mathscr S(B)$. Exact evaluation descends termwise by [lem-weil-pbc-exact-functor-derived-factorization]. A morphism in the derived category is invertible exactly when its cone is acyclic; its evaluated cones are the cones of its evaluations. Componentwise cohomology therefore proves joint detection of isomorphisms. This uses only localization of complexes of systems, not a category of diagrams in triangulated categories.",
    "uses": [
-    "lem-coef-sheaf-flat-model",
-    "lem-weil-pbc-site-flat-quotient-tensor-ses",
-    "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-pur-derived-change-of-rings",
-    "lem-coef-dg-derived-quillen-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
-    "place": "Proof paragraphs 1-2: coherent finite operations and enriched adjunction before inverse limits; agent expansion with the explicitly isolated model/localization foundations."
-   }
-  },
-  {
-   "text": "Take the small category $I=\\mathbf N_{\\ge1}^{\\mathrm{op}}$ and the Quillen diagram just checked. Concretely its free section at $m$ has $(E_m P)_n=P\\otimes_{B_m}B_n$ for $n\\le m$, and zero otherwise; a map from it to a section is uniquely determined by its component $P\\to M_m$. For $n\\le m$, that component forces the map to be $P\\otimes_{B_m}B_n\\to M_m\\otimes_{B_m}B_n\\to M_n$; the cocycle gives compatibility. This verifies the free/evaluation identification and its variance in this diagram. Apply [lem-coef-quillen-section-rectification]: its projective weak equivalences are precisely componentwise quasi-isomorphisms. Via step 1 the source of its enhanced comparison is the required localization of $\\operatorname{Ch}(\\mathscr S(B))$; via step 2 its target is the diagram of enhanced $B_n$-module categories with forward transitions $T_{m,n}$. It is an equivalence over every evaluation, retaining mapping complexes. Its ordinary homotopy category is $D(\\mathscr S(B))$, since the cohomology of a complex of systems is computed componentwise, and both ordinary localizations invert exactly those maps. This uses the derived-category definition, rather than identifying $D(\\mathscr S(B))$ with ordinary sections of the triangulated $D(B_n)$.",
-   "uses": [
-    "lem-coef-quillen-section-rectification",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-exact-functor-derived-factorization",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
-    "place": "Proof paragraphs 1-2: coherent finite operations and enriched adjunction before inverse limits; agent expansion with the explicitly isolated model/localization foundations."
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
    }
   },
   {
-   "text": "For a strict complex $P$, choose a projective cofibrant section replacement $Q P\\to P$ as in step 3. Its evaluations are cofibrant and the maps $Q P_n\\to P_n$ are quasi-isomorphisms. Thus the coherent structure arrow is represented by $F_{m,n}(Q P_m)\\to Q P_n$; after the evaluation equivalences it is the composite $T_{m,n}P_m\\simeq F_{m,n}(Q P_m)\\to Q P_n\\to P_n$. Compatibility of $Q P\\to P$ with restriction-form transitions, followed by the adjunction formula of step 1, identifies this composite with the derived adjoint of $P_m\\to\\operatorname{Res}_{m,n}P_n$. Consequently it is cartesian exactly when all the displayed adjoints are equivalences, which is the normalization condition in this statement. For adjacent indices the condition implies it for all $m\\ge n$, because $T_{m,r}\\simeq T_{n,r}T_{m,n}$ and a functor preserves equivalences; the converse includes the adjacent indices. Equivalence detection is the componentwise detection assertion of [lem-coef-quillen-section-rectification]. The flat models and that theorem are unbounded, so nothing in these conclusions used a boundedness or coefficient-flatness assumption.",
-   "uses": [
-    "lem-coef-quillen-section-rectification",
-    "lem-coef-dg-derived-quillen-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
-    "place": "Proof paragraphs 1-2: coherent finite operations and enriched adjunction before inverse limits; agent expansion with the explicitly isolated model/localization foundations."
-   }
-  },
-  {
-   "text": "Write $V_n=u^{-1}$ on $B_n$-modules with target $C_n=u^{-1}B_n$ and $G_n=Ru_{*,n}$. Module inverse image is exact: finite limits come from the topos inverse image and colimits from its being a left adjoint, with the induced module action. For a flat-model cofibration its cokernel remains flat-term K-flat by [lem-weil-pbc-ringed-topos-kflat-pullback]; exactness preserves the monomorphism and the acyclic-cokernel condition. Thus $V_n\\dashv u_{*,n}$ is differential graded Quillen by [lem-weil-pbc-ringed-topoi-module-adjunction], and [lem-coef-dg-derived-quillen-calculus] gives $V_n\\dashv G_n$ with enhanced units $\\eta_n$ and counits $\\epsilon_n$. Denote the coefficient extension on the source site by $T_{m,n}$ and on the inverse-image site by $S_{m,n}$. The canonical tensor comparison gives a coherent equivalence $q_{m,n}:S_{m,n}V_m\\simeq V_nT_{m,n}$: on flat representatives it is the ordinary inverse-image tensor isomorphism, and [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the coherent calculus identify its derived version. Set $(VM)_n=V_nM_n$, with transition $S_{m,n}V_mM_m\\xrightarrow{q}V_nT_{m,n}M_m\\xrightarrow{V_n\\tau^M}V_nM_n$. This is a coherent section by naturality and the tensor associativity diagrams; every higher compatibility is the image of those diagrams under the enhanced localization calculus.",
+   "text": "On underlying sequence topoi, evaluation $e_n$ is inverse image of a geometric morphism: its right adjoint sends a sheaf $F$ to the sequence with value $F$ for $q\\geq n$ and terminal sheaf for $q<n$. The adjunction follows by extending the component at $n$ along the given transitions; evaluation preserves finite limits. The structural ring map is $e_nB_\\bullet=B_n$. Thus [lem-weil-pbc-ringed-topos-kflat-pullback] says evaluation carries flat-term K-flat complexes on the sequence site to flat-term K-flat complexes over $B_n$. Apply [lem-pc-kflat-resolution] on that site and [lem-weil-pbc-site-derived-tensor-descent]: evaluating the resulting total tensor complexes computes $e_n(M\\otimes^L_{B_\\bullet}N)=M_n\\otimes^L_{B_n}N_n$. The comparisons on morphisms are induced by actual tensor chain maps and inversion of quasi-isomorphisms.",
    "uses": [
     "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-coef-sheaf-flat-model",
-    "lem-coef-dg-derived-quillen-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
-    "place": "Proof paragraphs 1-2: coherent finite operations and enriched adjunction before inverse limits; agent expansion with the explicitly isolated model/localization foundations."
-   }
-  },
-  {
-   "text": "Define the enhanced mate $b_{m,n}:T_{m,n}G_m\\to G_nS_{m,n}$ to be the transpose under $V_n\\dashv G_n$ of\n$$V_nT_{m,n}G_m\\xrightarrow{q^{-1}}S_{m,n}V_mG_m\\xrightarrow{S_{m,n}\\epsilon_m}S_{m,n}.$$\nFor a coherent section $N$ set $(GN)_n=G_nN_n$ and set its transition to $G_n(\\tau^N_{m,n})\\,b_{m,n,N_m}$. The mate formula in [def-weil-pbc-adjunction-mate], applied with $L_1=V_m,L_2=V_n,G=T_{m,n},H=S_{m,n},\\alpha=q^{-1}$, fixes the direction. For a composable pair, the iterated mate is the mate of the pasted inverse $q$'s, by [lem-coef-dg-derived-quillen-calculus]; hence applying $G_r$ to the cocycle of $N$ supplies the cocycle of $GN$, including its higher homotopies. The component mapping adjunction sends $h_n:V_nM_n\\to N_n$ to $G_n(h_n)\\eta_{n,M_n}$. Explicitly, the section condition for $h$ is\n$$h_n V_n(\\tau^M_{m,n})=\\tau^N_{m,n}S_{m,n}(h_m)q^{-1}_{m,n,M_m}.$$\nTransposing the left side gives $g_n\\tau^M_{m,n}$, where $g_n=G_n(h_n)\\eta_{n,M_n}$. Naturality of $q$, the defining transpose of $b$, and $\\epsilon_m V_m(\\eta_m)=1$ identify the transpose of the right side with $G_n(\\tau^N_{m,n})b_{m,n,N_m}T_{m,n}(g_m)$. These are exactly the two section composites for $g$. The enriched mate calculus makes this an equivalence of compatibility homotopies for each string of arrows. Thus these equivalences identify the coherent mapping ends of [lem-coef-quillen-section-rectification]. They give $V\\dashv G$ on sections, with inverse transpose $g_n\\mapsto\\epsilon_{n,N_n}V_n(g_n)$. The enhanced triangle identities give actual coherent section units and counits. Transport these functors and maps through step 3. The derived evaluation of $V$ is $u^{-1}$, since $V_n$ is exact and preserves all quasi-isomorphisms. For $G$: given $N_n$, choose a termwise injective K-injective resolution $N_n\\to I$ [prop-pur-kinjective-resolutions-exist]. By [lem-coef-kinjective-flat-model-fibrant] $I$ is fibrant in the flat model, so this weak equivalence to a fibrant object presents the derived right functor of [lem-coef-dg-derived-quillen-calculus], and $G_nN_n$ is represented by $u_*I$. This is the K-injective direct image $Ru_{*,n}N_n$ of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. On these representatives the derived unit and counit are the classes of the strict unit and counit, as for the ordinary derived adjunction. This construction uses no claim that evaluation sends a K-injective system to a K-injective complex, and does not require $b_{m,n}$ to be invertible.",
-   "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "lem-coef-quillen-section-rectification",
-    "lem-coef-dg-derived-quillen-calculus",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-coef-kinjective-flat-model-fibrant",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
-    "place": "Proof paragraphs 1-2: coherent finite operations and enriched adjunction before inverse limits; agent expansion with the explicitly isolated model/localization foundations."
-   }
-  },
-  {
-   "text": "For an open localization $j$ use the exact adjunction $j_!\\dashv j^*$ of [lem-pur-site-restriction-module-adjunction-exact]. For a flat module $F$ on the slice, tensoring a short exact sequence on the ambient site with $j_!F$ is, by [lem-weil-pbc-ringed-slice-extension-tensor], the result of applying exact $j_!$ to its exact restriction tensored with $F$. Thus $j_!F$ is flat. The same projection identity shows that $j_!P$ is K-flat whenever $P$ is: for an acyclic test complex $A$, $(j_!P)\\otimes A\\cong j_!(P\\otimes j^*A)$ is acyclic, since $j^*$ and $j_!$ are exact. Applied to cokernels this checks that $j_!$ preserves cofibrations and trivial cofibrations of the flat model. The same projection identity, taking $A=B_n[0]$, gives the coefficient comparison $T_{m,n}j_!\\simeq j_!S_{m,n}$. On representatives the map carries $x\\otimes b$ to $x\\otimes j^*b$ on the corresponding extension summand; composing coefficient maps gives the same balanced tensor, so these maps satisfy the cocycle. The enhanced calculus gives the coherent derived adjunction and comparisons. Use these coefficient comparisons and the transition formula of step 5, with $j_!$ in place of $V$, to obtain extension by zero on coherent sections, and then step 3 gives its strict derived-system model.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-coef-sheaf-flat-model",
-    "lem-coef-dg-derived-quillen-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
-    "place": "Proof paragraphs 1-2: coherent finite operations and enriched adjunction before inverse limits; agent expansion with the explicitly isolated model/localization foundations."
-   }
-  },
-  {
-   "text": "For a compatible map of ring systems, apply the coefficient extension Quillen adjunction of step 2 at every index. Rebracketing $(P\\otimes_{B_m}B_n)\\otimes_{B_n}D_n$ as $P\\otimes_{B_m}D_n$ and comparing with $(P\\otimes_{B_m}D_m)\\otimes_{D_m}D_n$ gives the coefficient compatibility; here $D_m\\to D_n$ denotes the target system, not a derived category. The enhanced calculus makes these into coherent comparisons. For tensor of two sections set $(M\\otimes^L N)_n=M_n\\otimes^L_{B_n}N_n$; its transition is\n$$T_{m,n}(M_m\\otimes^L_{B_m}N_m)\\simeq T_{m,n}M_m\\otimes^L_{B_n}T_{m,n}N_m\\xrightarrow{\\tau^M\\otimes\\tau^N}M_n\\otimes^L_{B_n}N_n.$$\nThe first arrow is the strong monoidal coefficient extension comparison, coming from balanced tensor rebracketing on cofibrant representatives. Associativity, units and symmetry for these transitions are supplied by the monoidal clause of [lem-coef-dg-derived-quillen-calculus]. Cofibrant section replacements have K-flat flat-term evaluations by [lem-coef-quillen-section-rectification] and [lem-coef-sheaf-flat-model], so these evaluated operations are computed by the total tensor complex of [def-pc-tensor-complex-sheaves]. Module-sheaf maps induce their chain maps and then their enhanced localization maps.",
-   "uses": [
-    "lem-coef-sheaf-flat-model",
-    "lem-coef-quillen-section-rectification",
-    "lem-coef-dg-derived-quillen-calculus",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
     "def-pc-tensor-complex-sheaves"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
-    "place": "Proof paragraphs 1-2: coherent finite operations and enriched adjunction before inverse limits; agent expansion with the explicitly isolated model/localization foundations."
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
    }
   },
   {
-   "text": "Keep the notation of step 8. For fiberwise internal Hom take a cartesian first input $M$ and any section $N$. Put $H_n=R\\mathcal Hom_{B_n}(M_n,N_n)$ [def-pur-derived-internal-hom]. To identify this with the internal Hom of the flat model, choose a termwise injective K-injective resolution $N_n\\to I$ [prop-pur-kinjective-resolutions-exist]. By [lem-coef-kinjective-flat-model-fibrant] $I$ is fibrant in the flat model. If $P\\to M_n$ is a cofibrant replacement, the model internal Hom is therefore represented by $\\mathcal Hom^\\bullet(P,I)$. Precomposition identifies it with $\\mathcal Hom^\\bullet(M_n,I)$ in the derived category by [lem-pur-rhom-well-defined], using the identity quasi-isomorphism on $I$. This is precisely the cited K-injective definition of $H_n$, and naturality of that comparison identifies evaluations as well. Write $T=T_{m,n}$ and $\\alpha:TM_m\\simeq M_n$ for the cartesian transition. Define the transition $TH_m\\to H_n$ by tensor-Hom transposition of\n$$TH_m\\otimes^L M_n\\xrightarrow{1\\otimes\\alpha^{-1}}TH_m\\otimes^L TM_m\\simeq T(H_m\\otimes^L M_m)\\xrightarrow{T\\mathrm{ev}}TN_m\\xrightarrow{\\tau^N}N_n.$$\nThis is available in the enhanced closed model calculus of [lem-coef-dg-derived-quillen-calculus]. For $m\\ge n\\ge r$, write $h_{m,n}:T_{m,n}H_m\\to H_n$ for this transpose and $\\nu_{m,n}=\\tau^N_{m,n}$. Its defining equality is\n$$\\mathrm{ev}_n(h_{m,n}\\otimes\\alpha_{m,n})=\\nu_{m,n}T_{m,n}(\\mathrm{ev}_m),$$\nusing the strong monoidal rebracketing. Applying it first to $n\\to r$ and then to $m\\to n$ gives\n$$\\mathrm{ev}_r\\bigl((h_{n,r}T_{n,r}h_{m,n})\\otimes(\\alpha_{n,r}T_{n,r}\\alpha_{m,n})\\bigr)=(\\nu_{n,r}T_{n,r}\\nu_{m,n})T_{m,r}(\\mathrm{ev}_m).$$\nThe cocycles identify the second tensor factor with $\\alpha_{m,r}$ and the right side with $\\nu_{m,r}T_{m,r}(\\mathrm{ev}_m)$. Since $\\alpha_{m,r}$ is invertible, enhanced tensor-Hom transposition identifies $h_{n,r}T_{n,r}h_{m,n}$ with $h_{m,r}$. Their higher coherent versions, and naturality in $M,N$, follow from the same enhanced tensor-Hom transposition. By this definition the fiberwise evaluations $H_n\\otimes^L M_n\\to N_n$ are a coherent section map. For a section map $P\\otimes^L M\\to N$, transposition gives $P_n\\to H_n$; the displayed formula converts its transition-compatibility into that of the given evaluation map, and the inverse construction is evaluation. These are inverse on the coherent mapping ends of step 3. Thus evaluation and transposition are constructed on sections for precisely the cartesian-first-input scope stated above. Together with step 8 this proves the simultaneous models for coefficient extension, tensor and the specified evaluations; it does not introduce arbitrary lifts from the homotopy categories.",
+   "text": "For a $B_n$-module $F$, define $(E_nF)_q=F\\otimes_{B_n}B_q$ for $q\\leq n$ and zero for $q>n$, with quotient-induced transitions. A map $h:F\\to M_n$ extends uniquely to $E_nF\\to M$: its component at $q\\leq n$ is $x\\otimes a\\mapsto a\\,\\tau_{nq}(h(x))$, and above $n$ the source is zero. Balancing and the transition cocycle verify this formula; evaluating at $n$ recovers $h$. This proves the natural adjunction $E_n\\dashv e_n$ by the module tensor/restriction adjunction. These formulas also commute with the Hom-complex differential $d(h)=d_Mh-(-1)^{|h|}hd_F$, giving the adjunction on homotopy categories.",
    "uses": [
-    "lem-coef-dg-derived-quillen-calculus",
-    "def-pur-derived-internal-hom",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-coef-kinjective-flat-model-fibrant",
-    "lem-pur-rhom-well-defined"
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
+   }
+  },
+  {
+   "text": "The additive functor $QE_n$ preserves shifts and cone matrices. Every complex over $B_n$ has a flat-term K-flat resolution [lem-pc-kflat-resolution]. A quasi-isomorphism between such complexes remains a quasi-isomorphism after each tensor $-\\otimes_{B_n}B_q$ by [lem-pur-derived-change-of-rings](1), and hence after $E_n$ by componentwise cohomology. The resolving-class criterion [lem-pur-left-derived-from-kflat-class] gives an everywhere-defined $L_n=LE_n$, computed by $E_nP$ on those representatives. By [lem-weil-pbc-exact-functor-derived-functor], exact evaluation is its own everywhere-defined right derived functor, so [lem-pc-derived-adjoint-functors] gives $L_n\\dashv e_n$. In particular $e_qL_nP=P\\otimes^L_{B_n}B_q$ for $q\\leq n$ and is zero otherwise. No coefficient-flatness hypothesis entered this argument.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-pc-derived-adjoint-functors",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
-    "place": "Proof paragraphs 1-2: coherent finite operations and enriched adjunction before inverse limits; agent expansion with the explicitly isolated model/localization foundations."
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
    }
   },
   {
-   "text": "For any specified exchange square form its map as the unit/composition/counit word in [def-weil-pbc-adjunction-mate], using the enhanced inverse-image composition identifications. Those identifications are induced by composition of the actual inverse-image functors and, for coefficient pullback, the strong monoidal maps of step 8. Each letter has been constructed on coherent sections in steps 5-9, so the same word is a coherent natural transformation there. For an open-extension base-change map use the transpose of its inverse-image/open-restriction square under the enhanced $j_!\\dashv j^*$ instead; this supplies that specified map with all its coherence, without a claim of invertibility. For composites of direct images take the right-adjoint composition comparison supplied by the enhanced calculus, the mate of inverse-image composition; its ordinary evaluated comparison is the one of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. This applies in particular to proper morphisms without imposing extra assumptions on the input. Pasting these words gives their composites with open extension and proper composition. The enhanced calculus sends the associativity/naturality diagrams for these words to coherent diagrams. Transporting the entire diagram through the equivalence of step 3 gives simultaneous models, including its maps and homotopies, in the enhanced localization of strict systems.",
+   "text": "For $m\\geq n$, put $T_{m,n}=-\\otimes^L_{B_m}B_n$. There is a natural map $\\sigma_{mn}:L_nT_{m,n}\\to L_m$: on a flat-term K-flat $P$ over $B_m$, its components are the tensor rebracketing identity $P\\otimes_{B_m}B_q$ for $q\\leq n$ and the zero-source map for $q>n$. K-flat pullback ensures the iterated tensors compute the displayed functors. Resolving-class tensor descent makes this a transformation of functors on the derived categories. Both composites for three indices have precisely the same components as chain maps on the same representative, so they are equal after localization. The derived adjunction sends precomposition with $\\sigma_{mn}$ to $h\\mapsto t_{m,n}T_{m,n}(h)$: this is the tensor-adjoint formula $x\\otimes a\\mapsto a\\tau_{mn}h(x)$. It follows that the $t_{m,n}$ are natural and satisfy their cocycle. Invertibility of adjacent reductions implies invertibility of all reductions by this cocycle and preservation of isomorphisms by tensor; this proves the stated normalization criterion.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-derived-adjoint-functors",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
+   }
+  },
+  {
+   "text": "Apply $u^{-1}$ and $u_*$ termwise on the underlying sequence topoi. Their adjunction follows by applying the original adjunction at every index: the naturality equations for a family of maps correspond under transposition. The inverse image preserves finite limits and colimits, so is exact on module systems, with coefficient ring $C_\\bullet=u^{-1}B_\\bullet$. This is a morphism of the two ringed sequence topoi. Apply [lem-weil-pbc-ringed-projection-mate-exact] and [prop-pur-kinjective-resolutions-exist] there. They give $V\\dashv G=Ru_{*,\\bullet}$, with $G$ computed by a K-injective system resolution and $V$ termwise exact. The unit and counit here are maps in the ordinary derived categories of systems.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
+   }
+  },
+  {
+   "text": "Write $L_n^B,L_n^C$ for the finite left extensions on the two sites. On a flat-term K-flat representative $P$, inverse image and coefficient tensor give $VE_n^BP\\cong E_n^Cu^{-1}P$, with the same zero components above $n$. The isomorphism is $u^{-1}(P\\otimes_{B_n}B_q)\\cong u^{-1}P\\otimes_{C_n}C_q$. K-flat pullback and derived tensor/pullback identify it as $VL_n^B\\cong L_n^Cu^{-1}$ on the ordinary derived categories. For $P\\in D(B_n)$ and $N\\in D(\\mathscr S(C))$, the natural bijections\n$$\\operatorname{Hom}(P,e_nGN)\\cong\\operatorname{Hom}(L_n^BP,GN)\\cong\\operatorname{Hom}(VL_n^BP,N)\\cong\\operatorname{Hom}(L_n^Cu^{-1}P,N)\\cong\\operatorname{Hom}(u^{-1}P,N_n)\\cong\\operatorname{Hom}(P,Ru_{*,n}N_n)$$\ntherefore give $e_nG\\cong Ru_{*,n}e_n$ by Yoneda. This proves the formula without any preservation of K-injectives by evaluation.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
+   }
+  },
+  {
+   "text": "Use the canonical adjunctions in the preceding Hom bijections. The derived adjunction formula on a resolving representative is the ordinary tensor-adjoint formula: its unit sends $x$ to $x\\otimes1$, and its transpose sends $x\\otimes a$ to $a h(x)$. This follows from the canonical pre-derived adjunction formula of [lem-pc-pre-derived-adjoint-functors-general], with the identity resolving leg, and then naturality in a K-flat resolution. Consequently the Hom bijections defining $e_nG$ carry the evaluated unit and counit to the level unit and counit: applying the bijection to an identity gives its unit, and applying its inverse to an identity gives its counit. The comparison $VL_n^B\\cong L_n^Cu^{-1}$ commutes with $\\sigma_{mn}$, since its two composites are the same inverse-image tensor reassociation on $q\\leq n$ and zero above. Transpose this square. The reduction transition of $GN$ becomes $G_n(t^N_{m,n})b_{m,n}$, where $b$ is the transpose of\n$$u^{-1}T_{m,n}G_m\\xrightarrow{q^{-1}}S_{m,n}u^{-1}G_m\\xrightarrow{S_{m,n}\\varepsilon_m}S_{m,n}.$$\nOrdinary mate pasting gives the composition law. This proves compatibility of evaluations with the adjunction maps and coefficient transitions, not merely the evaluated objects.",
+   "uses": [
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
+   }
+  },
+  {
+   "text": "For an open localization apply $j_!,j^*$ at each level. Their exactness and adjunction follow from [lem-pur-site-restriction-module-adjunction-exact], by transposing the transition equations. Both exact functors are their own total derived functors [lem-weil-pbc-exact-functor-derived-functor], so they descend termwise and retain their adjunction by [lem-pc-derived-adjoint-functors]. To compute coefficient change, use the slice projection identity [lem-weil-pbc-ringed-slice-extension-tensor]. It also proves $j_!$ preserves flatness: tensoring an exact sequence with $j_!F$ is exact $j_!$ applied to its exact restriction tensored with flat $F$. For K-flat $P$ and acyclic $A$, $(j_!P)\\otimes A\\cong j_!(P\\otimes j^*A)$ is acyclic, proving K-flatness. Thus the same identity on K-flat resolutions gives the derived coefficient comparison. On an extension summand it sends $x\\otimes b$ to $x\\otimes j^*b$; iterated coefficient changes agree as balanced tensors. All these are transformations on systems before localization and so have the stated ordinary derived system models.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pc-derived-adjoint-functors",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
+   }
+  },
+  {
+   "text": "A compatible ring-system map $B_\\bullet\\to D_\\bullet$ is a map of ring sheaves on the sequence site. Apply derived ringed-topos pullback for the identity topos [lem-weil-pbc-ringed-topoi-derived-pullback], resolving by flat-term K-flat complexes on that site. Their evaluations are flat-term K-flat by step 3, so evaluation of extension is exactly $M_n\\otimes^L_{B_n}D_n$. Tensor and coefficient composition are obtained from total tensor rebracketing. The monoidal and composition comparisons of [lem-sfb-ringed-derived-monoidal-comparisons] apply both to the sequence topos and to each evaluation morphism. They prove compatibility with tensor associativity, units, symmetry and iterated pullback. Thus these comparisons are actual natural transformations on ordinary derived systems, with the indicated evaluation formulas, for arbitrary coefficient maps.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "def-pc-tensor-complex-sheaves",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
+   }
+  },
+  {
+   "text": "On any of the small ringed sites in use, define $H(M,N)$ by the K-injective construction [def-pur-derived-internal-hom]; its independence is [lem-pur-rhom-well-defined]. The internal-Hom identity of [lem-weil-pbc-ringed-internal-hom-exact-restriction] and the global-sections identification of [lem-pur-rhom-global-sections] give\n$$\\operatorname{Hom}(P,H(M,N))\\cong H^0R\\Gamma H(P,H(M,N))\\cong H^0R\\Gamma H(P\\otimes^LM,N)\\cong\\operatorname{Hom}(P\\otimes^LM,N).$$\nThese bijections are natural. Hence they define the tensor-Hom adjunction and its evaluation on the sequence site as well as on each level. This supplies the system internal Hom without trying to assemble unrelated fiber objects.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
+   }
+  },
+  {
+   "text": "Let $M$ be cartesian. There is a canonical system map\n$$L_n(P\\otimes^L_{B_n}M_n)\\cong L_nP\\otimes^L_{B_\\bullet}L_nM_n\\longrightarrow L_nP\\otimes^L_{B_\\bullet}M,$$\nwhere the last arrow uses the counit $L_ne_nM\\to M$. For the first isomorphism take flat-term K-flat representatives over $B_n$. Their $E_n$ extensions are K-flat with flat terms: below $n$ this is K-flat pullback, above $n$ zero; componentwise exactness and tensor then test K-flatness of these particular systems. The ordinary tensor rebracketing gives the isomorphism on these strict models and descends by tensor descent. At $q\\leq n$ the second arrow is $T_{n,q}P\\otimes^L t^M_{n,q}$, which is invertible by cartesianness, and above $n$ it is $0\\to0$. Joint detection therefore makes the displayed projection map an isomorphism of derived systems. This is a constructed map, not an inference of equality from evaluations.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
+   }
+  },
+  {
+   "text": "For every $P\\in D(B_n)$, apply the adjunctions and the preceding projection isomorphism to obtain\n$$\\operatorname{Hom}(P,e_nH_B(M,N))\\cong\\operatorname{Hom}(L_nP,H_B(M,N))\\cong\\operatorname{Hom}(L_nP\\otimes^LM,N)\\cong\\operatorname{Hom}(L_n(P\\otimes^LM_n),N)\\cong\\operatorname{Hom}(P\\otimes^LM_n,N_n)\\cong\\operatorname{Hom}(P,H_{B_n}(M_n,N_n)).$$\nYoneda gives the claimed natural internal-Hom comparison. Its definition by these transposes carries system evaluation to the fiber evaluation. Transpose the reduction transition of the system evaluation map. Since $t^M_{m,n}$ is invertible, the resulting equation uniquely determines the reduction of $H_B(M,N)$: it is exactly the transpose of the formula displayed in the statement. The cocycle holds as an equation of system maps because evaluation and its adjunction were constructed on the sequence site; alternatively its two transposes are the same twice-reassociated evaluation followed by the transition of $N$, by the tensor associators. The inverse cartesian comparison is essential here.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful",
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
+   }
+  },
+  {
+   "text": "Form each specified exchange by its unit/composition/counit word [def-weil-pbc-adjunction-mate] for the derived functors on the ringed sequence topoi; for an open map use $j_!\\dashv j^*$ instead. Pullback composition and direct-image composition use the normalized ordinary comparisons [lem-sfb-ringed-derived-monoidal-comparisons, lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Every letter is already a system functor or transformation. Evaluation of those letters is the level letter, including the unit and counit by step 9 and the exact open adjunction by step 10. Hence evaluation of the word is the corresponding level word. The same applies to any specified composite with open extension or proper direct image. Ordinary mate pasting proves compatibility with composition on the system category itself. No properness was needed to construct a direct-image composition, and no invertibility of a mate is inferred.",
    "uses": [
     "def-weil-pbc-adjunction-mate",
-    "lem-coef-dg-derived-quillen-calculus",
-    "lem-coef-quillen-section-rectification",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
-    "place": "Proof paragraphs 1-2: coherent finite operations and enriched adjunction before inverse limits; agent expansion with the explicitly isolated model/localization foundations."
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
    }
   },
   {
-   "text": "In particular the coefficient projection $T_{m,n}G_mN\\to G_nS_{m,n}N$ is exactly $b_{m,n,N}$ of step 6: its transpose is $S_{m,n}(\\epsilon_{m,N})\\,q^{-1}_{m,n,G_mN}$. For a general tensor factor $P$ the same formula reads\n$$u^{-1}(Ru_*N\\otimes^L P)\\simeq u^{-1}Ru_*N\\otimes^L u^{-1}P\\xrightarrow{\\epsilon_N\\otimes1}N\\otimes^L u^{-1}P.$$\nTaking its enhanced adjoint defines the projection comparison, using step 8 for tensor. It and its composites with $j_!$ are therefore the derived counit transposes in these models. An evaluation functor applies to every letter of these displayed words, hence gives the prescribed levelwise projection or exchange formula. Applying evaluation to the unit/composition/counit word for any transpose gives the same word formed after evaluation. The coherent functoriality and triangle homotopies of [lem-coef-dg-derived-quillen-calculus] establish this before taking ordinary homotopy categories; no faithfulness of evaluation on morphisms is inferred from its detection of equivalences. This proves the final preservation clause for evaluation, composition and adjunction transposes.",
+   "text": "The coefficient projection is $b_{m,n}$ because its transpose is, by definition, $S_{m,n}(\\varepsilon_m)q^{-1}$. For a general tensor factor use the derived projection map of [lem-weil-pbc-ringed-projection-mate-exact] on the ringed sequence topos: its transpose is $(\\varepsilon_N\\otimes1)\\mu$. Evaluating gives the displayed ordinary level projection formula, since both $\\mu$ and $\\varepsilon$ have already been identified under evaluation. Composites with open extension evaluate to the same composites. Applying evaluation to a specified adjunction transpose applies it to its unit/functor/counit expression; the identified units and counits give precisely the transpose formed at the level. All equations here are equations in the ordinary derived system category proved by adjunction or inherited from strict chain maps, rather than deduced from equality at every level.",
    "uses": [
-    "lem-coef-dg-derived-quillen-calculus",
-    "def-weil-pbc-adjunction-mate"
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
-    "place": "Proof paragraphs 1-2: coherent finite operations and enriched adjunction before inverse limits; agent expansion with the explicitly isolated model/localization foundations."
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
    }
   }
  ],
@@ -194,27 +265,38 @@
   "def-pur-derived-internal-hom",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-sites-and-cohomology",
   "def-weil-sheaf-of-modules-category",
-  "lem-coef-dg-derived-quillen-calculus",
-  "lem-coef-kinjective-flat-model-fibrant",
-  "lem-coef-quillen-section-rectification",
-  "lem-coef-sheaf-flat-model",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-kflat-resolution",
+  "lem-pc-pre-derived-adjoint-functors-general",
   "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-rhom-global-sections",
   "lem-pur-rhom-well-defined",
+  "lem-pur-ringed-site-grothendieck-abelian",
   "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-weil-pbc-ringed-slice-extension-tensor",
   "lem-weil-pbc-ringed-topoi-derived-pullback",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-pbc-ringed-topoi-module-adjunction",
   "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "lem-weil-pbc-site-flat-quotient-tensor-ses",
+  "lem-weil-pbc-site-derived-tensor-descent",
   "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
-  "place": "Proof paragraphs 1-2: coherent finite operations and enriched adjunction before inverse limits; agent expansion with the explicitly isolated model/localization foundations."
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23-24; the ordinary ringed-topos-of-systems construction and its evaluation adjunction, generalized here from quotient constant rings to ring sheaves. Other operations use Stacks Tags 06YS, 06YY, 07A4, 07A6, 08J7-08JB. This is the ordinary-derived-route restatement requested by the human, 2026-10-18 (coord/returns/NF.md)."
  },
  "mathlib_searches": [
   {
@@ -300,10 +382,45 @@
    "results": "8 hits: HomologicalComplex.IsStrictlySupported; HomologicalComplex.map_isStrictlySupported; HomologicalComplex.instIsSupportedOfIsStrictlySupported; HomologicalComplex.IsStrictlySupportedOutside; Rep.standardComplex.forget₂ToModuleCat; HomologicalComplex.instIsStrictlySupportedExtend; ComplexShape.Embedding.HasLift; Module.Flat.of_forall_exists_factorization",
    "date": "2026-10-16",
    "verdict": "no match: ordinary derived localizations and sheaf categories do not provide varying-ring enhanced sections and coherent geometric adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary unbounded derived category of strict inverse systems of sheaf modules over varying rings, exact evaluation, derived inverse image and direct image",
+   "results": "{\"t\": \"2026-10-17T19:01:40Z\", \"tool\": \"leanfinder\", \"query\": \"Ordinary unbounded derived category of strict inverse systems of sheaf modules over varying rings, exact evaluation, derived inverse image and direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Condensed.instAB4StarCondensedMod\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"instAbelianCondensedMod\", \"Condensed.instAB5CondensedMod\", \"localCohomology.diagram\", \"LightCondensed.instCountableAB4StarLightCondMod\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\"], \"digest\": \"8eeb7264c0c6d97f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary sheaf operations, scalar Tor, or exact derived functors, not the combined varying-ring system theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, DerivedCategory",
+   "results": "{\"t\": \"2026-10-17T19:01:57Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, DerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary sheaf operations, scalar Tor, or exact derived functors, not the combined varying-ring system theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*[Ss]ystem|[Ss]ystem.*semilinear|[Dd]erived.*[Ee]valuation|[Ee]valuation.*[Dd]erived",
+   "results": "{\"t\": \"2026-10-17T19:02:09Z\", \"tool\": \"grep\", \"query\": \"semilinear.*[Ss]ystem|[Ss]ystem.*semilinear|[Dd]erived.*[Ee]valuation|[Ee]valuation.*[Dd]erived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Ring/CompTypeclasses.lean\"], \"digest\": \"2d98c19dcf1fc6ae\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary sheaf operations, scalar Tor, or exact derived functors, not the combined varying-ring system theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived module category of varying ring towers with levelwise tensor pullback and pushforward",
+   "results": "{\"t\": \"2026-10-17T19:02:09Z\", \"tool\": \"leansearch\", \"query\": \"Unbounded derived module category of varying ring towers with levelwise tensor pullback and pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback\", \"PresheafOfModules.pushforward₀\", \"SheafOfModules.PullbackConstruction.adjunction\", \"PresheafOfModules.pullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.pushforward₀_obj_obj_isModule\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"DerivedCategory.instLinear\"], \"digest\": \"133455433414e727\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary sheaf operations, scalar Tor, or exact derived functors, not the combined varying-ring system theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived functors on modules over a ring object in the topos of inverse sequences commute with evaluation at every level, with tensor and adjunction comparisons",
+   "results": "{\"t\": \"2026-10-17T19:02:19Z\", \"tool\": \"leanfinder\", \"query\": \"Derived functors on modules over a ring object in the topos of inverse sequences commute with evaluation at every level, with tensor and adjunction comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_map_app\", \"LightCondensed.ihomPoints_symm_comp\", \"CategoryTheory.Tor'_obj_map\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"Rep.Tor\"], \"digest\": \"b6a14b7648223b26\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary sheaf operations, scalar Tor, or exact derived functors, not the combined varying-ring system theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-finite-adjunction-diagram-realization",
   "by": "worker",
@@ -312,83 +429,143 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "item": "lem-coef-semilinear-derived-sections",
   "worker": "stage1",
-  "summary": "Expanded the localization claim by a projective model of sections of the coefficient-extension Quillen diagram. Checked the nonflat coefficient maps using flat-cokernel tensor exactness and K-flat pullback. Constructed direct-image section transitions as possibly noninvertible derived coefficient mates and proved the enhanced section adjunction via coherent mapping ends. Gave open extension, tensor, projection and exchange words on those models. Three generic statement-only foundations remain; no geometric clause is replaced by a same-setting child and no K-injective evaluation assertion is used. STATEMENT-DISPUTED: clarified fiberwise internal-Hom evaluation to require a cartesian first input; a two-level field example refutes the unrestricted lax interpretation. The normalized-system applications in the parent satisfy this condition.",
-  "blueprint": "Ancestor proof paragraph 1 needs the actual normalized exceptional tower; paragraph 2 needs a coherent finite enriched mapping adjunction before R lim. Steps 1-4 give the underlying strict/coherent section realization; steps 5-10 supply geometric operations, counits and their specified mates without assuming projection or exchange invertibility.",
+  "summary": "Route-pivot repair per coord/returns/NF.md, human decision 2026-10-18: replaced the enhanced/model-category realization by the ordinary derived category of module sheaves on the small sequence site. Constructed finite derived left extension using K-flat resolutions, evaluated derived direct image by its ordinary adjunction, and proved cartesian-input internal Hom by a projection map and Yoneda. Retained the unbounded and arbitrary-ring-sheaf scope, the specified mates, and the prohibition on inferring equality from evaluations. No new nodes or model machinery; old statement restated as explicitly requested.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 1: actual coefficient tower; paragraph 2: ordinary coefficient derived adjunctions before R lim and their units/counits. The enhanced rectification branch is removed by the human route pivot.",
   "tool_uses": [
    {
     "node": "def-pc-cochain-complex-modules",
-    "why": "Generic definition or localization interface used to construct this section model; no geometric route is replaced."
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
    },
    {
     "node": "def-pc-sheaf-restrict-scalars",
-    "why": "Generic definition or localization interface used to construct this section model; no geometric route is replaced."
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
    },
    {
     "node": "def-pc-tensor-complex-sheaves",
-    "why": "Generic definition or localization interface used to construct this section model; no geometric route is replaced."
-   },
-   {
-    "node": "def-weil-abstract-derived-category",
-    "why": "Generic definition or localization interface used to construct this section model; no geometric route is replaced."
-   },
-   {
-    "node": "def-weil-pbc-adjunction-mate",
-    "why": "Generic definition or localization interface used to construct this section model; no geometric route is replaced."
-   },
-   {
-    "node": "def-weil-sheaf-of-modules-category",
-    "why": "Generic definition or localization interface used to construct this section model; no geometric route is replaced."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic K-flat coefficient extension identifies the evaluated derived coefficient functors."
-   },
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Exact slice extension/restriction adjunction provides open extension on the model."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
-    "why": "Generic slice projection formula proves flatness and K-flatness preservation and coefficient compatibility of extension by zero."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "why": "Quasi-isomorphism preservation on flat-term K-flat complexes verifies trivial-cofibration preservation."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "why": "Generic normalized direct-image comparison identifies the ordinary evaluated composition of enhanced right adjoints."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic derived tensor/pullback comparison identifies the ordinary fiber comparison used in the enhanced calculation."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "why": "Module pullback/direct-image adjunction on arbitrary ringed topoi supplies the enriched chain-level adjunction."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "why": "K-flat flat-term preservation verifies the flat-model cofibrancy conditions for ringed-topos pullback."
-   },
-   {
-    "node": "lem-weil-pbc-site-flat-quotient-tensor-ses",
-    "why": "Flat-quotient tensor exactness verifies that arbitrary coefficient extension preserves flat-model cofibrations."
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
    },
    {
     "node": "def-pur-derived-internal-hom",
-    "why": "Defines the fiberwise Hom and its ordinary K-injective model; the enhanced and section-level coherence is constructed in step 9."
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
    },
    {
-    "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Generic K-injective resolution and Hom comparison identify the flat-model internal Hom with the already-defined sheaf derived internal Hom, without changing the geometric route."
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
    },
    {
     "node": "lem-pur-rhom-well-defined",
-    "why": "Generic K-injective resolution and Hom comparison identify the flat-model internal Hom with the already-defined sheaf derived internal Hom, without changing the geometric route."
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-of-natural-bijection",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ordinary ringed-site, localization, K-flat/K-injective, or categorical adjunction tool used on the explicitly constructed small sequence site; it supplies no alternative geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Identifies termwise exact evaluations and open functors with their total derived functors before applying the ordinary derived-adjunction theorem."
    }
   ]
  },
@@ -410,15 +587,31 @@
   "lem-weil-pbc-site-flat-quotient-tensor-ses",
   "def-pur-derived-internal-hom",
   "prop-pur-kinjective-resolutions-exist",
-  "lem-pur-rhom-well-defined"
+  "lem-pur-rhom-well-defined",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-kflat-resolution",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-rhom-global-sections",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-exact-functor-derived-functor"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q62-9efe0d9f7",
-  "group": "Q62",
+  "reviewer": "NT-cc-NE-e8ae20921",
+  "group": "NE",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-9efe0d9f7 (reviewer sub-agent of L); spot-checked: Read in full: the item and its ten steps, every cited node's statement, the blueprint ancestor prop-coef-integral-exceptional-adjoint (proof text identical in master and main-20261015), Stacks 079P/079L/070H, and the Mathlib Lifting.lean and KInjective.lean files. The delivery itself only sets status split; I reviewed the whole existing split anyway. The mathematics is correct. Step 2 checks the left Quillen property for nonflat B_m->B_n, tested on Z/4->Z/2. Step 4's derived cartesian condition is the right one: (Z/2,Z/2,id) has an invertible strict adjoint but is not cartesian. I recomputed step 6's mate direction (alpha=q^{-1}) and its transpose identity, and the cocycle of the cartesian-input internal Hom (it needs alpha invertible, so the disputed clause is justified). Two faults, both fixed in fixes/. (1) The long step 8 (4361 characters) hid a lemma: an inline proof that a termwise-injective K-injective complex extends maps along monomorphisms with acyclic cokernel, hence is fibrant in the flat model. This is now the new statement-only node lem-coef-kinjective-flat-model-fibrant; no DAG duplicate exists. The Mathlib candidate Lifting.hasLift + IsKInjective.eq_δ_of_cocycle combines declarations, so it is not a leaf; LeanSearch and Loogle are recorded as unavailable because this service blocks network. Step 8 is split into 8 (coefficient extension and tensor) and 9 (internal Hom); old steps 9-10 become 10-11. (2) Step 6 said 'evaluations are u^{-1} and Ru_* by construction'. It now identifies G_n with the K-injective Ru_* through a fibrant termwise-injective K-injective resolution. proof_deps are recomputed. The statement is unchanged, no SGA is cited, and the inherited tool_uses are accepted.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-e8ae20921 (reviewer sub-agent of L); spot-checked: I read the restated item, its 16 steps and the statements of all 33 cited nodes in full; the mathematics is correct. The restatement is authorized by the human's route pivot of 2026-10-18 (coord/repair-notes/lem-coef-semilinear-derived-sections.json, statement_restated true). The enhanced clauses are dropped, the ordinary clauses the note lists are kept, and no right adjoint on normalized objects is promised. This is not a target node, so no target is weakened. Source checks: Zheng Construction 4.1 (p.21) matches steps 3-4: e_{n*} has value F for q>=n and * below, and e_{n!}F=(Lambda_q (x) F)_{q<=n}. Zheng Lemma 4.10 (pp.23-24) is exactly step 8's argument: the base change L e_{n!} f^* = f^{N*} L e_{n!}, then adjunction and Yoneda. The Stacks tags 079P, 06YS, 07A6, 08J7-08JB, 06XN and 09T5 exist with the cited labels. I re-derived the following. Step 1: fixed-index covers pull back to fixed-index covers on C x N. Step 4: E_n -| e_n, including balancing and uniqueness. Step 6: sigma_{mn} is a system map. Step 9: the mate direction is alpha=q^{-1} with transpose S(eps)q^{-1}. Step 13: E_nP is K-flat in S(B) because Tot(E_nP (x) A)_q = P (x)_{B_n} A_q; the projection map is invertible exactly when the t^M_{n,q} are. Step 14: the six-term Hom chain. Small cases: the constant-field noncartesian first input confirms the cartesian restriction is needed; a nonflat Z/4->F_2 tower confirms normalization must be derived; n=1, u=id, j=id and the empty site all behave. There is no cycle: the transitive dependencies do not reach the item. lem-pur-system-level-left-extension and lem-pur-coefficient-evaluation-derived-left-adjoint cite the item, so they could not be used, and they are constant-coefficient or downstream special cases, not duplicates. There are no new nodes and no machinery or SGA citations. The only off-route statement is lem-sfb-ringed-derived-monoidal-comparisons; I accept it as a generic monoidal-coherence tool_use. One fix: the item's source and blueprint.from.place still described the removed enhanced comparison and named only 079P. In fixes/dag/nodes/sec-six-functors/lem-coef-semilinear-derived-sections.json the source is now Zheng 4.1/4.10, generalized by an agent, plus the Stacks tags, and from.place no longer says 'enhanced'. The statement, steps and dependencies are unchanged. For the maintainer: the stale top-level tool_uses entry lem-weil-pbc-site-flat-quotient-tensor-ses and the old Q62 reviewed record should be overwritten at merge.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
