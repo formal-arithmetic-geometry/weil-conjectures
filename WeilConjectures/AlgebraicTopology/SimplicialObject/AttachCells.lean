@@ -302,21 +302,25 @@ def isColimitBinaryCofanOfIsPushout {A : Type} [Finite A] (p q : A → Prop)
     IsColimit (BinaryCofan.mk inl
       (Sigma.desc fun a : {a // q a} ↦ Sigma.ι (fun _ : A ↦ N) a.1 ≫ inr)) := by
   classical
-  let d : ∀ (s : BinaryCofan Z (∐ fun _ : {a // q a} ↦ N)), (∐ fun _ : A ↦ N) ⟶ s.pt :=
-    fun s ↦ Sigma.desc fun a ↦
-      if ha : p a then Sigma.ι (fun _ : {a // p a} ↦ N) ⟨a, ha⟩ ≫ f ≫ s.inl
-      else Sigma.ι (fun _ : {a // q a} ↦ N) ⟨a, (hq a).2 ha⟩ ≫ s.inr
-  have hd : ∀ s, f ≫ s.inl = Sigma.map' (f := fun _ : {a // p a} ↦ N)
-      (g := fun _ : A ↦ N) Subtype.val (fun _ ↦ 𝟙 N) ≫ d s := fun s ↦ by
+  let d : ∀ {T : C} (_ : Z ⟶ T) (_ : (∐ fun _ : {a // q a} ↦ N) ⟶ T),
+      (∐ fun _ : A ↦ N) ⟶ T :=
+    fun x y ↦ Sigma.desc fun a ↦
+      if ha : p a then Sigma.ι (fun _ : {a // p a} ↦ N) ⟨a, ha⟩ ≫ f ≫ x
+      else Sigma.ι (fun _ : {a // q a} ↦ N) ⟨a, (hq a).2 ha⟩ ≫ y
+  have hd : ∀ {T : C} (x : Z ⟶ T) (y : (∐ fun _ : {a // q a} ↦ N) ⟶ T),
+      f ≫ x = Sigma.map' (f := fun _ : {a // p a} ↦ N)
+        (g := fun _ : A ↦ N) Subtype.val (fun _ ↦ 𝟙 N) ≫ d x y := fun x y ↦ by
     refine Sigma.hom_ext _ _ (fun a ↦ ?_)
     simp [d, a.2]
-  refine BinaryCofan.IsColimit.mk _ (fun s ↦ PushoutCocone.IsColimit.desc h s.inl (d s) (hd s))
-    (fun s ↦ PushoutCocone.IsColimit.inl_desc h _ _ _) (fun s ↦ ?_) (fun s m h₁ h₂ ↦ ?_)
+  refine BinaryCofan.IsColimit.mk _
+    (fun x y ↦ PushoutCocone.IsColimit.desc h x (d x y) (hd x y))
+    (fun x y ↦ PushoutCocone.IsColimit.inl_desc h _ _ _) (fun x y ↦ ?_)
+    (fun x y m h₁ h₂ ↦ ?_)
   · refine Sigma.hom_ext _ _ (fun a ↦ ?_)
     have ha : ¬ p a.1 := (hq a.1).1 a.2
-    simp only [colimit.ι_desc_assoc, Discrete.functor_obj_eq_as, Cofan.mk_pt, Cofan.mk_ι_app,
-      Category.assoc, PushoutCocone.IsColimit.inr_desc h]
-    simp [d, ha]
+    rw [BinaryCofan.mk_inr, Sigma.ι_desc_assoc, Category.assoc]
+    erw [PushoutCocone.IsColimit.inr_desc h]
+    simp only [d, Sigma.ι_desc, dif_neg ha]
   · refine PushoutCocone.IsColimit.hom_ext h ?_ ?_
     · rw [PushoutCocone.IsColimit.inl_desc h]
       exact h₁
@@ -327,7 +331,8 @@ def isColimitBinaryCofanOfIsPushout {A : Type} [Finite A] (p q : A → Prop)
         simp only [Sigma.ι_comp_map'_assoc, Category.id_comp] at this
         change Sigma.ι (fun _ : A ↦ N) a ≫ inr ≫ m = _
         rw [reassoc_of% this.symm]
-        simp [d, ha, h₁]
+        have h₁' : inl ≫ m = x := h₁
+        simp [d, ha, h₁']
       · have := Sigma.ι (fun _ : {a // q a} ↦ N) ⟨a, (hq a).2 ha⟩ ≫= h₂
         simp only [BinaryCofan.mk_inr, colimit.ι_desc_assoc, Discrete.functor_obj_eq_as,
           Cofan.mk_pt, Cofan.mk_ι_app, Category.assoc] at this

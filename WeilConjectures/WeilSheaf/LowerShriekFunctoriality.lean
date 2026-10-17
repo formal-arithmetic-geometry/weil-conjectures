@@ -165,7 +165,9 @@ theorem exists_distTriang_openClosed (j : U ⟶ X) [IsOpenImmersion j] [QuasiCom
   have hT' : (WeilComplex.objectProperty k₀ l X).ι.mapTriangle.obj (Triangle.mk f₁ g₁ h₁) ∈
       distTriang _ := hT
   obtain ⟨φ, -, -⟩ := exists_iso_of_arrow_iso _ _ hT' hw (Arrow.isoMk e (Iso.refl _) (by
-    simp [f₁]))
+    change _ = (WeilComplex.objectProperty k₀ l X).ι.map f₁ ≫ 𝟙 _
+    rw [Category.comp_id, ObjectProperty.ι_map]
+    rfl))
   exact ⟨ObjectProperty.isoMk _ (Triangle.π₃.mapIso φ)⟩
 
 

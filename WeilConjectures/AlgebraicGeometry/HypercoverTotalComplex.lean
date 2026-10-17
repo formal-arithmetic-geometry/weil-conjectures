@@ -156,4 +156,65 @@ lemma totD_totD (n : ℕ) : U.totD L n ≫ U.totD L (n + 1) = 0 := by
     dVert_dVert, zero_comp, smul_zero, add_zero, zero_add, dHor_dVert]
   simp [pow_succ]
 
+
+/-- The total complex `Tot(U, L)`. -/
+noncomputable def totComplex : CochainComplex A ℕ :=
+  CochainComplex.of (U.totObj L) (U.totD L) (U.totD_totD L)
+
+lemma totComplex_d (n : ℕ) : (U.totComplex L).d n (n + 1) = U.totD L n :=
+  CochainComplex.of_d _ _ _ n
+
+/-- The complex of global sections `Γ(X, L)`, computed as sections over the final object. -/
+noncomputable abbrev gammaComplex : CochainComplex A ℕ :=
+  (((sheafSections X.smallEtaleTopology A).obj (op (⊤_ X.Etale))).mapHomologicalComplex _).obj L
+
+/-- The complex of sections `C(U, F)` of a sheaf over the hypercover. -/
+noncomputable abbrev secComplex (F : Sheaf X.smallEtaleTopology A) : CochainComplex A ℕ :=
+  (AlgebraicTopology.alternatingCofaceMapComplex A).obj (U.simplicial.rightOp ⋙ F.obj)
+
+/-- Restriction from global sections to `U_p`. -/
+noncomputable abbrev resTop (G : Sheaf X.smallEtaleTopology A) (p : ℕ) :
+    G.obj.obj (op (⊤_ X.Etale)) ⟶ G.obj.obj (op (U.simplicial _⦋p⦌)) :=
+  G.obj.map (terminal.from (U.simplicial _⦋p⦌)).op
+
+lemma resTop_d (G : Sheaf X.smallEtaleTopology A) :
+    U.resTop G 0 ≫ (U.secComplex G).d 0 1 = 0 := by
+  rw [show (U.secComplex G).d 0 1 = AlgebraicTopology.AlternatingCofaceMapComplex.objD
+    (U.simplicial.rightOp ⋙ G.obj) 0 from CochainComplex.of_d _ _ _ 0]
+  rw [AlgebraicTopology.AlternatingCofaceMapComplex.objD, Fin.sum_univ_two]
+  simp only [Fin.val_zero, pow_zero, one_smul, Fin.val_one, pow_one, neg_smul,
+    Preadditive.comp_add, Preadditive.comp_neg, CosimplicialObject.δ, Functor.comp_map,
+    Functor.rightOp_map, ← Functor.map_comp, ← op_comp]
+  rw [Subsingleton.elim (U.simplicial.map (SimplexCategory.δ 0).op ≫ terminal.from _)
+    (U.simplicial.map (SimplexCategory.δ 1).op ≫ terminal.from _), add_neg_cancel]
+
+/-- The augmentation `Γ(X, L) ⟶ Tot(U, L)` along the column `p = 0`. -/
+noncomputable def totAug : gammaComplex L ⟶ U.totComplex L :=
+  CochainComplex.ofHom
+    (fun n ↦ U.resTop (L.X n) 0 ≫ U.totι L 0 n n (zero_add n)) (fun n ↦ by
+      rw [totComplex_d, Category.assoc, totι_totD]
+      simp only [Preadditive.comp_add, ← Category.assoc, pow_zero, one_smul]
+      rw [show U.resTop (L.X n) 0 ≫ U.dHor L 0 n = 0 from U.resTop_d (L.X n), zero_comp,
+        zero_add]
+      congr 1
+      exact ((L.d n (n + 1)).hom.naturality _).symm)
+
+variable {L} in
+/-- The map `C(U, F) ⟶ Tot(U, L)` along the row `r = 0`, for `ι : F ⟶ L^0` killed by `d`. -/
+noncomputable def totRow {F : Sheaf X.smallEtaleTopology A} (ι : F ⟶ L.X 0)
+    (hι : ι ≫ L.d 0 1 = 0) : U.secComplex F ⟶ U.totComplex L :=
+  CochainComplex.ofHom
+    (fun n ↦ ι.hom.app (op (U.simplicial _⦋n⦌)) ≫ U.totι L n 0 n (add_zero n)) (fun n ↦ by
+      rw [totComplex_d, Category.assoc, totι_totD]
+      have h₁ : ι.hom.app (op (U.simplicial _⦋n⦌)) ≫ U.dVert L n 0 = 0 := by
+        rw [← NatTrans.comp_app]
+        change (ι ≫ L.d 0 1).hom.app _ = 0
+        rw [hι]
+        rfl
+      simp only [Preadditive.comp_add, Preadditive.comp_zsmul, ← Category.assoc, h₁,
+        zero_comp, smul_zero, add_zero]
+      congr 1
+      exact ((AlgebraicTopology.alternatingCofaceMapComplex A).map
+        (Functor.whiskerLeft U.simplicial.rightOp ι.hom)).comm n (n + 1) |>.symm)
+
 end AlgebraicGeometry.SplitEtaleHypercover

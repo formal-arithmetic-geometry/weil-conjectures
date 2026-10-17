@@ -65,7 +65,8 @@ lemma eq_of_zero (c d : BoundaryCone W 0 N) : c = d :=
 /-- A map `Δ ⟶ ⦋n + 1⦌` factoring through a face `δ j` is not an epimorphism. -/
 lemma _root_.SimplexCategory.not_epi_comp_δ {n : ℕ} {Δ : SimplexCategory} (a : Δ ⟶ ⦋n⦌)
     (j : Fin (n + 2)) : ¬ Epi (a ≫ SimplexCategory.δ j) := fun h ↦ by
-  have := SimplexCategory.len_le_of_epi (epi_of_epi a (SimplexCategory.δ j))
+  have := epi_of_epi a (SimplexCategory.δ j)
+  have := SimplexCategory.len_le_of_epi (SimplexCategory.δ j)
   simp at this
 
 /-- The pullback of a face of a boundary cone along `a` is given by `descApp`. -/
@@ -147,19 +148,21 @@ theorem postcomp {W' : SimplicialObject C} (f : W ⟶ W')
       w Δ Δ' h h' α θ := by
         have := hf Δ h
         have := hf Δ' h'
-        rw [Category.assoc, ← p.w Δ Δ' h h' α θ, Category.assoc, IsIso.inv_comp_eq,
-          ← f.naturality_assoc, IsIso.hom_inv_id, Category.comp_id] }
+        rw [Category.assoc, ← p.w Δ Δ' h h' α θ, Category.assoc]
+        congr 1
+        rw [IsIso.inv_comp_eq, ← f.naturality_assoc, IsIso.hom_inv_id, Category.comp_id] }
   refine ⟨hc.lift q, ?_, fun g hg ↦ hc.eq_lift ?_⟩
   · refine BoundaryCone.ext' fun Δ h θ ↦ ?_
     have := hf Δ h
     have hq := congrArg (fun d ↦ d.π Δ h θ) (hc.precomp_lift q)
-    simp only [BoundaryCone.precomp_π] at hq
+    dsimp only [BoundaryCone.precomp_π, q] at hq
     rw [BoundaryCone.precomp_π, BoundaryCone.postcomp_π, ← Category.assoc, hq,
       Category.assoc, IsIso.inv_hom_id, Category.comp_id]
   · refine BoundaryCone.ext' fun Δ h θ ↦ ?_
     have := hf Δ h
     have hg' := congrArg (fun d ↦ d.π Δ h θ) hg
     simp only [BoundaryCone.precomp_π, BoundaryCone.postcomp_π] at hg'
+    dsimp only [q]
     rw [BoundaryCone.precomp_π, ← hg', Category.assoc, Category.assoc, IsIso.hom_inv_id,
       Category.comp_id]
 
@@ -261,7 +264,6 @@ def matchingObjCone (W : SimplicialObject C) : ∀ n : ℕ, BoundaryCone W n (ma
         have := Multiequalizer.condition (matchingBoundaryIndex W n)
           ⟨(i.castSucc, j.succ), Fin.castSucc_lt_succ_iff.2 hij⟩
         dsimp [matchingBoundaryIndex, matchingBoundaryShape] at this
-        rw [Fin.pred_succ, Fin.castLT_castSucc] at this
         exact this.symm)
 
 @[simp]
@@ -303,8 +305,9 @@ theorem isMatchingCone_map_matchingObjCone {D : Type u'} [Category.{v'} D]
   | 0 => isMatchingCone_of_isTerminal _ (terminalIsTerminal.isTerminalObj G _)
   | 1 => isMatchingCone_of_isLimit_fan _ (isLimitOfHasProductOfPreservesLimit G _)
       fun j ↦ by rw [BoundaryCone.map_π, matchingObjCone_one_π_δ]
-  | n + 2 => isMatchingCone_of_isLimit_multifork (K := (Multiequalizer.multifork _).map G)
-      (Multifork.isLimitMapOfPreserves _ _ G (limit.isLimit _)) _
+  | n + 2 => isMatchingCone_of_isLimit_multifork (W := W ⋙ G) (n := n)
+      (K := (Multiequalizer.multifork (matchingBoundaryIndex W n)).map G)
+      (Multifork.isLimitMapOfPreserves _ G (limit.isLimit _)) _
       fun j ↦ by
         rw [BoundaryCone.map_π, matchingObjCone_succ_succ_π_δ]
         rfl

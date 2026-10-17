@@ -165,6 +165,18 @@ lemma derivedOpenImmersionLowerShriekToLowerStar_app_eq_of_refinement
   rw [map_derivedOpenImmersionLowerShriekToLowerStar_app_comp_counit, Functor.map_comp,
     Functor.map_comp, Category.assoc, Category.assoc, conjugateEquiv_counit,
     Adjunction.comp_counit_app]
+  set ϕ := Functor.mapDerivedCategoryNatIso (upperStarComp A c.i r.hom d.i r.i_hom.symm) ≪≫
+    (r.hom)^*[A].mapDerivedCategoryCompIso (c.i)^*[A]
+  set y := (refinementLowerShriekBaseChangeDerivedIso A r hcart).inv.app M ≫
+    (derivedOpenImmersionLowerShriekToLowerStar A c.i).app M
+  have h1 := ϕ.hom.naturality (R((r.hom)_*[A]).map y)
+  have h2 := ϕ.hom.naturality ((mapDerivedUpperStarLowerStarAdjunction A r.hom).unit.app
+    (D((d.i)_!open[A]).obj M))
+  have h3 := (mapDerivedUpperStarLowerStarAdjunction A r.hom).counit.naturality y
+  have h4 := (mapDerivedUpperStarLowerStarAdjunction A r.hom).left_triangle_components
+    (D((d.i)_!open[A]).obj M)
+  simp only [Functor.comp_map, Functor.id_map] at h1 h2 h3
+  erw [reassoc_of% h1, reassoc_of% h2]
   done
 
 end Etale

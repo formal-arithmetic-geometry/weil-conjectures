@@ -120,14 +120,16 @@ theorem stageEventually_splitting :
   let Al : SplitIndex Δ → Scheme.{u} := fun x : SplitIndex Δ ↦ (S.N x.1).left
   let p : ∀ x : SplitIndex Δ, Al x ⟶ D.obj i := fun x ↦ (S.N x.1).hom
   let W : Over (D.obj i) := Over.mk (Sigma.desc p)
-  let ℓ : ∀ x, S.N x.1 ⟶ W := fun x ↦ Over.homMk (Sigma.ι Al x) (Sigma.ι_desc p x)
+  let ℓ : ∀ x : SplitIndex Δ, S.N x.1 ⟶ W := fun x ↦
+    Over.homMk (Sigma.ι Al x) (Sigma.ι_desc p x)
   have hs : IsColimit (Cofan.mk W.left fun x ↦ (ℓ x).left) := coproductIsCoproduct Al
   let w : W ⟶ S.G.obj Δ := Over.homMk (Sigma.desc fun x ↦ (S.leg Δ x).left)
     (Sigma.hom_ext _ _ fun x ↦ by
       rw [Sigma.ι_desc_assoc]
       exact (Over.w (S.leg Δ x)).trans (Sigma.ι_desc p x).symm)
-  have hℓw : ∀ x, ℓ x ≫ w = S.leg Δ x := fun x ↦
-    Over.OverMorphism.ext (Sigma.ι_desc (fun y : SplitIndex Δ ↦ (S.leg Δ y).left) x)
+  have hℓw : ∀ x, ℓ x ≫ w = S.leg Δ x := fun x ↦ by
+    apply Over.OverMorphism.ext
+    exact Sigma.ι_desc (fun y : SplitIndex Δ ↦ (S.leg Δ y).left) x
   have hcomp : ∀ x, CompactSpace (Al x) := fun x ↦ by
     obtain ⟨_, _, _, _⟩ := S.hN x.1
     exact QuasiCompact.compactSpace_of_compactSpace (S.N x.1).hom
@@ -173,7 +175,8 @@ theorem stageEventually_surjective (n : Fin (r + 1)) :
     StageEventually i (fun _ h ↦ Surjective ((Over.pullback (D.map h)).map (S.mm n)).left) := by
   have hpb := isLimitOfPreserves (Over.pullback (c.π.app i)) (S.isLimitM n)
   have hU : IsLimit (matchingCone U.diagram n.val ((Scheme.Etale.forget c.pt).obj (U.matching n))
-      (fun Δ h θ ↦ (Scheme.Etale.forget c.pt).map (U.projection n Δ h θ)) (fun Δ Δ' h h' α θ ↦ by
+      (fun Δ h θ ↦ ((Scheme.Etale.forget c.pt).map (U.projection n Δ h θ) :
+        _ ⟶ U.diagram.obj (op Δ))) (fun Δ Δ' h h' α θ ↦ by
         exact (Functor.map_comp (Scheme.Etale.forget c.pt) _ _).symm.trans
           (congrArg _ (U.projection_naturality n Δ Δ' h h' α θ)))) :=
     isLimitMatchingCone fun T p hp ↦ U.matching_universal n T p hp
@@ -201,8 +204,11 @@ theorem stageEventually_surjective (n : Fin (r + 1)) :
     refine ⟨(S.e.inv.app (op (truncTop n))).left z, φ.hom.left.homeomorph.injective ?_⟩
     change (((Over.pullback (c.π.app i)).map (S.mm n)).left ≫ φ.hom.left)
       ((S.e.inv.app (op (truncTop n))).left z) = φ.hom.left x
-    rw [← Over.comp_left, key, Over.comp_left, ← Scheme.Hom.comp_apply, ← Category.assoc,
-      ← Over.comp_left, Iso.inv_hom_id_app, Over.id_left, Category.id_comp]
+    have hz' : (S.e.hom.app (op (truncTop n))).left ((S.e.inv.app (op (truncTop n))).left z) =
+        z := by
+      rw [← Scheme.Hom.comp_apply, ← Over.comp_left, Iso.inv_hom_id_app]
+      rfl
+    rw [← Over.comp_left, key, Over.comp_left, Scheme.Hom.comp_apply, hz']
     exact hz
   obtain ⟨i₁, h₁, H⟩ := exists_stage_jointly_surjective D hc (Finset.univ : Finset Unit)
     (S.M n) (fun _ ↦ S.G.obj (op (truncTop n))) (fun _ ↦ S.mm n) (S.isQcqsEtale_M n)

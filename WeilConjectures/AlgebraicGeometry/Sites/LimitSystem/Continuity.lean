@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.LimitSystem.StageCover
 public import WeilConjectures.AlgebraicGeometry.EtaleLimitCompatibleExactSystems
 public import WeilConjectures.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDelta
+public import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 
 /-!
 # Continuity of étale cohomology for systems of sheaves
@@ -60,7 +61,8 @@ def IsContinuousAt (n : ℕ) : Prop :=
 
 variable {S}
 
-lemma Laws.transitionH_comp (hS : S.Laws) {i j k : I} (f : i ⟶ j) (g : j ⟶ k) (n : ℕ)
+lemma Laws.transitionH_comp [IsDirected I (· ≤ ·)] [Nonempty I] (hS : S.Laws) {i j k : I}
+    (f : i ⟶ j) (g : j ⟶ k) (n : ℕ)
     (y : Sheaf.H (S.F i) n) :
     S.transitionH (f ≫ g) n y = S.transitionH g n (S.transitionH f n y) := by
   obtain ⟨H, eH, hH, -, -, -⟩ := etale_limit_canonical_cohomology_diagram D c S.F S.φ
@@ -71,7 +73,8 @@ lemma Laws.transitionH_comp (hS : S.Laws) {i j k : I} (f : i ⟶ j) (g : j ⟶ k
   have h' := (cancel_mono (eH k).inv).1 ((cancel_epi (eH i).hom).1 h)
   exact congrArg (fun φ ↦ φ.hom y) h'
 
-lemma Laws.toLimitH_transitionH (hS : S.Laws) {i j : I} (f : i ⟶ j) (n : ℕ)
+lemma Laws.toLimitH_transitionH [IsDirected I (· ≤ ·)] [Nonempty I] (hS : S.Laws) {i j : I}
+    (f : i ⟶ j) (n : ℕ)
     (y : Sheaf.H (S.F i) n) : S.toLimitH j n (S.transitionH f n y) = S.toLimitH i n y := by
   obtain ⟨H, eH, hH, B, eB, hB⟩ := etale_limit_canonical_cohomology_diagram D c S.F S.φ
     hS.hidentity hS.hcomposition S.G S.eG S.hG S.L n
@@ -115,6 +118,7 @@ private lemma middle_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
       ((congrArg (fun h ↦ Sheaf.H.map h n (cohomologyMap f S.X₂ n z))
         t.comm₂₃.symm).trans (Sheaf.H.map_comp_apply t.τ₂ S'.g _))
 
+set_option maxHeartbeats 1000000 in
 include hc in
 /-- **Dimension shifting for continuity.** If continuity holds in degree `n` for all systems,
 it holds in degree `n + 1` for all systems. -/
@@ -218,9 +222,11 @@ lemma equiv₀_toLimitH (i : I) (y : Sheaf.H (S.F i) 0) :
           (PreservesTerminal.iso (c.π.app (op i)).Etale).inv.op
           (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (c.π.app (op i))).unit.app
             (S.F i)).hom.app (op (⊤_ _)) (Sheaf.H.equiv₀ _ terminalIsTerminal y)))) := by
-  rw [← (Sheaf.H.equiv₀ _ terminalIsTerminal).symm_apply_apply y]
-  change Sheaf.H.equiv₀ _ _ (Sheaf.H.map _ 0 (cohomologyMap _ _ 0 _)) = _
-  rw [← Sheaf.H.equiv₀_naturality, equiv₀_cohomologyMap_zero, AddEquiv.apply_symm_apply]
+  have h := equiv₀_cohomologyMap_zero (c.π.app (op i)) (S.F i)
+    (Sheaf.H.equiv₀ _ terminalIsTerminal y)
+  rw [AddEquiv.symm_apply_apply] at h
+  change Sheaf.H.equiv₀ _ _ (Sheaf.H.map _ 0 (cohomologyMap _ _ 0 y)) = _
+  rw [← Sheaf.H.equiv₀_naturality, h]
   rfl
 
 variable (S) in
@@ -234,9 +240,11 @@ lemma equiv₀_transitionH {i j : I} (f : i ⟶ j) (y : Sheaf.H (S.F i) 0) :
           (PreservesTerminal.iso (D.map f.op).Etale).inv.op
           (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (D.map f.op)).unit.app
             (S.F i)).hom.app (op (⊤_ _)) (Sheaf.H.equiv₀ _ terminalIsTerminal y))) := by
-  rw [← (Sheaf.H.equiv₀ _ terminalIsTerminal).symm_apply_apply y]
-  change Sheaf.H.equiv₀ _ _ (Sheaf.H.map _ 0 (cohomologyMap _ _ 0 _)) = _
-  rw [← Sheaf.H.equiv₀_naturality, equiv₀_cohomologyMap_zero, AddEquiv.apply_symm_apply]
+  have h := equiv₀_cohomologyMap_zero (D.map f.op) (S.F i)
+    (Sheaf.H.equiv₀ _ terminalIsTerminal y)
+  rw [AddEquiv.symm_apply_apply] at h
+  change Sheaf.H.equiv₀ _ _ (Sheaf.H.map _ 0 (cohomologyMap _ _ 0 y)) = _
+  rw [← Sheaf.H.equiv₀_naturality, h]
 
 include hc in
 /-- **Continuity in degree zero**: `H⁰(X, L) = colimᵢ H⁰(Dᵢ, Fᵢ)`. -/
@@ -256,9 +264,10 @@ theorem isContinuousAt_zero (S : SystemData D c) (hS : S.Laws) : S.IsContinuousA
     intro z z' h
     apply (Sheaf.H.equiv₀ _ terminalIsTerminal).injective
     have h' := congrArg ((S.F j).obj.map (hW.from (⊤_ _)).op) h
+    have hid : hW.from (⊤_ _) ≫ terminal.from _ = 𝟙 _ := terminal.hom_ext _ _
     simp only [sec, ← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp] at h'
-    rwa [terminal.hom_ext (hW.from (⊤_ _) ≫ terminal.from _) (𝟙 _), op_id,
-      CategoryTheory.Functor.map_id] at h'
+    erw [hid, op_id, CategoryTheory.Functor.map_id] at h'
+    exact h'
   refine ⟨fun x ↦ ?_, fun i y hy ↦ ?_⟩
   · obtain ⟨k⟩ := ‹Nonempty I›
     let T₀ : (D.obj (op k)).Etale :=
