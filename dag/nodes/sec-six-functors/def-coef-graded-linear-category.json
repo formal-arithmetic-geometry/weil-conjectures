@@ -1,0 +1,112 @@
+{
+ "id": "def-coef-graded-linear-category",
+ "kind": "definition",
+ "title": "Graded linear categories and graded linear functors from dg categories",
+ "status": "split",
+ "statement": "Let $R$ be a commutative ring. A $\\mathbf Z$-graded $R$-linear category on an object set $O$ consists of an $R$-module $\\mathcal D(x,y)^n$ for every $x,y\\in O$ and $n\\in\\mathbf Z$, units $1_x\\in\\mathcal D(x,x)^0$, and $R$-bilinear composition $\\mathcal D(y,z)^p\\times\\mathcal D(x,y)^q\\to\\mathcal D(x,z)^{p+q}$, satisfying the two unit laws and associativity. No differential is part of this structure. For a small $R$-linear cochain dg category $\\mathcal C$ as in [lem-coef-dgcat-free-cell-calculus], a graded $R$-linear functor $\\mathcal C\\to\\mathcal D$ is an object function $F$ and degree-preserving $R$-linear maps $\\mathcal C(x,y)^n\\to\\mathcal D(Fx,Fy)^n$, preserving units and composition. It need not commute with the differential of $\\mathcal C$. Object and morphism universes of $\\mathcal D$ are independent.",
+ "stmt_deps": [
+  "lem-coef-dgcat-free-cell-calculus"
+ ],
+ "source": {
+  "document": "https://arxiv.org/pdf/0710.4303",
+  "place": "Chapter 1, section 1.3.1, proof of Lemma 1.10, printed p. 29, underlying graded word calculation and four components of the cone contraction; explicit graded-linear formulation of lem-coef-dgcat-cone-word-normal-form."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A graded R-linear category has graded modules of morphisms and degree additive associative unital bilinear composition; a graded linear functor preserves these operations",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Linear.noConfusion\", \"module\": \"Mathlib.CategoryTheory.Linear.Basic\", \"type\": \"{P : Sort u_1} →\\n  {R : Type w} →\\n    {inst : Semiring R} →\\n      {C : Type u} →\\n        {inst_1 : CategoryTheory.Category.{v, u} C} →\\n          {inst_2 : CategoryTheory.Preadditive C} →\\n            {t : CategoryTheory.Linear R C} →\\n              {R' : Type w} →\\n                {inst' : Semiring R'}\", \"doc\": \"Given a semiring $ R $ and a preadditive category $ \\\\mathcal{C} $, this defines the structure of an $ R $-linear category on $ \\\\mathcal{C} $, where each hom-set $ \\\\text{Hom}(X,Y) $ is equipped with an\"}\n  {\"name\": \"CategoryTheory.Linear.mk.noConfusion\", \"module\": \"Mathlib.CategoryTheory.Linear.Basic\", \"type\": \"{R : Type w} →\\n  {inst : Semiring R} →\\n    {C : Type u} →\\n      {inst_1 : CategoryTheory.Category.{v, u} C} →\\n        {inst_2 : CategoryTheory.Preadditive C} →\\n          {P : Sort u_1} →\\n            {homModule : autoParam ((X Y : C) → Module R (X ⟶ Y)) CategoryTheory.Linear.homModule._autoParam} →\\n \", \"doc\": \"Given a semiring $ R $ and a preadditive category $ \\\\mathcal{C} $, this defines the structure of an $ R $-linear category on $ \\\\mathcal{C} $, where each hom-set $ \\\\text{Hom}(X,Y) $ is equipped with an\"}\n  {\"name\": \"CategoryTheory.Linear.homModule\", \"module\": \"Mathlib.CategoryTheory.Linear.Basic\", \"type\": \"{R : Type w} →\\n  {inst : Semiring R} →\\n    {C : Type u} →\\n      {inst_1 : CategoryTheory.Category.{v, u} C} →\\n        {inst_2 : CategoryTheory.Preadditive C} → [self : CategoryTheory.Linear R C] → (X Y : C) → Module R (X ⟶ Y)\", \"doc\": \"Given a semiring $ R $ and an $ R $-linear category $ \\\\mathcal{C} $, for any objects $ X $ and $ Y $ in $ \\\\mathcal{C} $, the hom-set $ \\\\text{Hom}(X, Y) $ is equipped with the structure of an $ R $-mod\"}\n  {\"name\": \"CategoryTheory.Functor.mapLinearMap\", \"module\": \"Mathlib.CategoryTheory.Linear.LinearFunctor\", \"type\": \"{X Y : C} : (X ⟶ Y) →ₗ[R] F.obj X ⟶ F.obj Y\", \"doc\": \"For objects $X$ and $Y$ in an $R$-linear category $\\\\mathcal{C}$, an $R$-linear functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ induces an $R$-linear map $\\\\text{Hom}(X, Y) \\\\to \\\\text{Hom}(F(X), F(Y))$ that pr\"}\n  {\"name\": \"CategoryTheory.Linear\", \"module\": \"Mathlib.CategoryTheory.Linear.Basic\", \"type\": \"(R : Type w) →\\n  [Semiring R] →\\n    (C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Preadditive C] → Type (max (max u v) w)\", \"doc\": \"Given a semiring $ R $ and a preadditive category $ C $, the type of $ R $-linear category structures on $ C $, where each hom-set is an $ R $-module and composition of morphisms is $ R $-bilinear.\"}\n  {\"name\": \"FDRep.instLinear\", \"module\": \"Mathlib.RepresentationTheory.FDRep\", \"type\": \"{R G : Type u} → [inst : CommRing R] → [inst_1 : Monoid G] → CategoryTheory.Linear R (FDRep R G)\", \"doc\": \"For a commutative ring $ R $ and monoid $ G $, the category $ \\\\text{FDRep}_R(G) $ of finitely generated left $ R $-modules with $ G $-action is an $ R $-linear category. This means that for any two re\"}\n  {\"name\": \"CategoryTheory.Functor.Linear\", \"module\": \"Mathlib.CategoryTheory.Linear.LinearFunctor\", \"type\": \"(R : Type u_1) →\\n  [inst : Semiring R] →\\n    {C : Type u_2} →\\n      {D : Type u_3} →\\n        [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n          [inst_2 : CategoryTheory.Category.{v_2, u_3} D] →\\n            [inst_3 : CategoryTheory.Preadditive C] →\\n              [inst_4 : CategoryTheory.Prea\", \"doc\": \"Given a semiring $ R $ and $ R $-linear categories $ C $ and $ D $, the property that a functor $ F : C \\to D $ preserves the $ R $-module structure on hom-sets and the $ R $-bilinearity of composition\"}\n  {\"name\": \"CategoryTheory.functorCategoryLinear\", \"module\": \"Mathlib.CategoryTheory.Linear.FunctorCategory\", \"type\": \": Linear R (C ⥤ D)\", \"doc\": \"If $\\\\mathcal{D}$ is an $R$-linear category, then the category of functors $[\\\\mathcal{C}, \\\\mathcal{D}]$ is also $R$-linear. Specifically, for any functors $F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, the set \"}\n",
+   "date": "2026-10-17",
+   "verdict": "No exact match. Ordinary Linear/LinearFunctor lack integer-graded morphism modules. DifferentialObject and HomologicalComplex.forget forget one complex, not category composition. Mathlib EnrichedCategory is generic; this homogeneous API supplies the missing graded-linear specialization with no differential on the target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Z graded R linear category with homogeneous module valued morphisms and bilinear unital associative composition, and a linear functor forgetting the differential of a dg category",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.dgoToHomologicalComplex_obj_X\", \"module\": \"Mathlib/Algebra/Homology/DifferentialObject\", \"type\": \"∀ {β : Type u_1} [inst : AddCommGroup β] (b : β) (V : Type u_2) [inst_1 : CategoryTheory.Category.{v_1, u_2} V]\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms V]\\n  (X : CategoryTheory.DifferentialObject ℤ (CategoryTheory.GradedObjectWithShift b V)) (i : β),\\n  ((HomologicalComplex.dgoToHomologica\", \"doc\": \"For any additive commutative group $\\\\beta$, element $b \\\\in \\\\beta$, category $\\\\mathcal{V}$ with zero morphisms, and differential object $X$ in the category of $\\\\mathbb{Z}$-graded objects with shift $b$\"}\n  {\"name\": \"CategoryTheory.Linear\", \"module\": \"Mathlib/CategoryTheory/Linear/Basic\", \"type\": \"(R : Type w) →\\n  [Semiring R] →\\n    (C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Preadditive C] → Type (max (max u v) w)\", \"doc\": \"Given a semiring $ R $ and a preadditive category $ C $, the type of $ R $-linear category structures on $ C $, where each hom-set is an $ R $-module and composition of morphisms is $ R $-bilinear.\"}\n  {\"name\": \"HomologicalComplex.dgoToHomologicalComplex\", \"module\": \"Mathlib/Algebra/Homology/DifferentialObject\", \"type\": \"{β : Type u_1} →\\n  [inst : AddCommGroup β] →\\n    (b : β) →\\n      (V : Type u_2) →\\n        [inst_1 : CategoryTheory.Category.{v_1, u_2} V] →\\n          [inst_2 : CategoryTheory.Limits.HasZeroMorphisms V] →\\n            CategoryTheory.Functor (CategoryTheory.DifferentialObject ℤ (CategoryTheory.GradedOb\", \"doc\": \"The functor that maps a differential object in the category of ℤ-graded objects with shift $ b $ to a homological complex over $ V $ with shape $ \\\\text{ComplexShape.up'}(b) $. For each differential ob\"}\n  {\"name\": \"CategoryTheory.GradedObjectWithShift\", \"module\": \"Mathlib/CategoryTheory/GradedObject\", \"type\": \"{β : Type w} → [AddCommGroup β] → β → Type u → Type (max w u)\", \"doc\": \"A graded object in a category $\\\\mathcal{C}$ indexed by an additive commutative group $\\\\beta$, consisting of a family of objects in $\\\\mathcal{C}$ parameterized by $\\\\beta$ together with a distinguished \"}\n  {\"name\": \"HomologicalComplex.forget\", \"module\": \"Mathlib/Algebra/Homology/HomologicalComplex\", \"type\": \"{ι : Type u_1} →\\n  (V : Type u) →\\n    [inst : CategoryTheory.Category.{v, u} V] →\\n      [inst_1 : CategoryTheory.Limits.HasZeroMorphisms V] →\\n        (c : ComplexShape ι) → CategoryTheory.Functor (HomologicalComplex V c) (CategoryTheory.GradedObject ι V)\", \"doc\": \"The functor that maps a homological complex in a category $ V $ with shape $ \\\\iota $ to its underlying graded object by forgetting the differential structure. For objects, it assigns to each complex $\"}\n  {\"name\": \"HomologicalComplex.homologicalComplexToDGO\", \"module\": \"Mathlib/Algebra/Homology/DifferentialObject\", \"type\": \"{β : Type u_1} →\\n  [inst : AddCommGroup β] →\\n    (b : β) →\\n      (V : Type u_2) →\\n        [inst_1 : CategoryTheory.Category.{v_1, u_2} V] →\\n          [inst_2 : CategoryTheory.Limits.HasZeroMorphisms V] →\\n            CategoryTheory.Functor (HomologicalComplex V (ComplexShape.up' b))\\n              (Ca\", \"doc\": \"The functor that maps a homological complex in a category $ V $ with shape determined by an element $ b $ of an additive commutative group to a differential object in the category of $ \\\\mathbb{Z} $-gr\"}\n  {\"name\": \"HomologicalComplex.homologicalComplexToDGO_obj_obj\", \"module\": \"Mathlib/Algebra/Homology/DifferentialObject\", \"type\": \"∀ {β : Type u_1} [inst : AddCommGroup β] (b : β) (V : Type u_2) [inst_1 : CategoryTheory.Category.{v_1, u_2} V]\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms V] (X : HomologicalComplex V (ComplexShape.up' b)) (i : β),\\n  ((HomologicalComplex.homologicalComplexToDGO b V).obj X).obj i = X.X i\", \"doc\": \"For a homological complex $X$ in a category $\\\\mathcal{V}$ with shape determined by an element $b$ of an additive commutative group $\\\\beta$, the object mapping of the functor from homological complexes\"}\n  {\"name\": \"HomologicalComplex.dgoToHomologicalComplex_obj_d\", \"module\": \"Mathlib/Algebra/Homology/DifferentialObject\", \"type\": \"∀ {β : Type u_1} [inst : AddCommGroup β] (b : β) (V : Type u_2) [inst_1 : CategoryTheory.Category.{v_1, u_2} V]\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms V]\\n  (X : CategoryTheory.DifferentialObject ℤ (CategoryTheory.GradedObjectWithShift b V)) (i j : β),\\n  ((HomologicalComplex.dgoToHomologi\", \"doc\": \"For a differential object $X$ in the category of $\\\\mathbb{Z}$-graded objects with shift $b$, the differential $d_{i,j}$ of the corresponding homological complex is defined as follows: if $i + b = j$, \"}\n",
+   "date": "2026-10-17",
+   "verdict": "No exact match. Ordinary Linear/LinearFunctor lack integer-graded morphism modules. DifferentialObject and HomologicalComplex.forget forget one complex, not category composition. Mathlib EnrichedCategory is generic; this homogeneous API supplies the missing graded-linear specialization with no differential on the target."
+  },
+  {
+   "tool": "grep",
+   "query": "GradedLinearCategory|GradedLinearFunctor|graded.linear.categor|graded.linear.functor",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "No exact match. Ordinary Linear/LinearFunctor lack integer-graded morphism modules. DifferentialObject and HomologicalComplex.forget forget one complex, not category composition. Mathlib EnrichedCategory is generic; this homogeneous API supplies the missing graded-linear specialization with no differential on the target."
+  },
+  {
+   "tool": "grep",
+   "query": "GradedLinearCategory|GradedLinearFunctor|graded.linear.categor|graded.linear.functor in WeilConjectures/ and lean/Sheaf; tools/blueprint_refs.py search \"graded linear\"",
+   "results": "No matching graded-linear-category or graded-linear-functor declaration in /home/ubuntu/weil-src-slopmaster2/WeilConjectures or /home/ubuntu/weil-newtargets-shared/lean/Sheaf; blueprint search: 0 blueprint nodes match 'graded linear'. DAG grep: the item itself defines the notion in prose; other hits concern graded rings/modules, filtered complexes or infinity functors.",
+   "date": "2026-10-17",
+   "verdict": "The missing notion has no owning definition node or existing concrete homogeneous interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dgcat-cone-word-normal-form",
+  "date": "2026-10-17",
+  "group": "Q51"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Cone-word generation: the target and functors in the equality-on-generators conclusion.",
+   "via": [
+    "lem-coef-dgcat-cone-word-normal-form",
+    "lem-coef-dgcat-equivalence-cell-calculus",
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-dg-quasifunctor-invariance",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GradedLinearCategory",
+  "declaration": "CategoryTheory.Dg.GradedLinearCategory",
+  "declarations": [
+   "CategoryTheory.Dg.GradedLinearCategory",
+   "CategoryTheory.Dg.GradedLinearFunctor"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/GradedLinearCategory.lean",
+  "statement": "structure GradedLinearCategory (O : Type v)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Two genuine data structures: GradedLinearCategory on an explicit object type and GradedLinearFunctor from the dependency dg category. No proof is postponed in this definition module."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08ab899ac",
+  "group": "Q51",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08ab899ac",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Read the item, the new def-coef-graded-linear-category node and module, both dependency modules (FreeCellCalculus: ArrowCell, Term, eval, exists_arrowCell; FormalConeEnlargement: ConeSystem embedding_full/embedding_obj, ConeCoordinates.partition), the report, and the citer equivalence-cell-calculus. The statement field is unchanged; the node diff is only lean plus one added stmt_dep. Every clause matches: L as pullback on Option A with distinct labels; T as any ArrowCell for dh=1_Z (unique up to iso by its universal property); T0 on A; the coordinate images; v,a,b,w recomputed with degrees 0,-1,-1,-2; both identities' signs and degrees checked; finite Term generation over all old arrows and the four letters; functor equality into arbitrary GradedLinearCategory.{u,v,w}. Universal quantification over K and E is sound. No extra hypotheses or closedness. The new graded-linear definition is real data with no duplicate found. Docstrings have source, blueprint and 5 proof steps; the only proof is sorry. The Second reading section is the standard accepted 2026-10-17 note. nt_compile.py --json on both files: exit 0, no errors or warnings. No fixes needed."
+ }
+}

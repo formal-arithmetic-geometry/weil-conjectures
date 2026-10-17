@@ -246,5 +246,32 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-4ea5ecd05 (reviewer sub-agent of L); spot-checked: Read in full: the item and its 5 steps, the parent lem-amb-linear-trace-invariance (step 3 is its only use of the item), the blueprint main-20261015 sk-prop-an/lem-amb-linear-trace-invariance proof paragraphs 1–2, unit sk-prop-an, and the statement of every cited node, including the definition behind the exchange (def-cbc-exchange-map), def-amb-etale-compact-support with its blueprint_update, and lem-amb-etale-compact-comparisons. The coefficient category is the same throughout: ordinary étale D^+ with a finite commutative ring A, in the item, the parent, thm-cbc-finite-torsion and def-cbc-exchange-map. The base-change map is the exchange map of def-cbc-exchange-map (Rp_*j_! form), made compactification-independent as in thm-cbc-finite-torsion; no pro-étale coefficients are identified with it. All hypotheses of the theorem hold, and the statement is unchanged and not weakened. Step 1: elementary and correct; (a,f) has inverse a^{-1}pr_1 because fa^{-1}=f. Step 4: I recomputed it. Pasting the a-square with the u-square in either order gives the same Cartesian square with top au'=u'a_T, which yields D∘u^*E_a=E_{a_T}∘C_u with δ the quotient of the two associativity isomorphisms. Naturality of C_u applied to θ, using θ_T∘δ=u'^*θ, gives C_u∘u^*F(θ)=F_T(θ_T)∘D, and the three-term chain is correct. Edge cases checked: f=1 (forces a=1, ρ=θ), the fold map Y⊔Y→Y with the swap, empty X, and the parent's d=0 and identity-section cases. No new nodes, no duplicate found in the DAG, no cycle, no SGA. Two citation faults fixed in fixes/dag/nodes/sec-smooth-purity/lem-amb-compact-action-base-change.json (only proof and proof_deps changed). (1) C4/C1, steps 2 and 5: the statement's claim that ρ is independent of the compactification needs the refinement comparisons to be natural in K, so that Rf_!(θ), F_T(θ_T) and F_T(δ) are carried along. thm-cbc-finite-torsion covers only the exchange map, and def-amb-etale-compact-support defers this property. Added [lem-amb-etale-compact-comparisons]: same unit sk-prop-sf-cbc, so on route, and its hypotheses are met. (2) C1, step 4: the pullback compactification must have a quasi-compact open part to be an allowed compactification and to apply the theorem. Added the Mathlib leaf [lem-pc-quasi-compact-base-change]. proof_deps is again the union of the steps' uses. The declared tool_uses are accepted as harmless: thm-cbc-finite-torsion is on route, and the other two are Mathlib leaves.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-319b5632c",
+  "group": "Q100",
+  "result": "pass",
+  "note": "Read the node, all 7 statement dependencies and their lean records, the blueprint source (lem-amb-linear-trace-invariance proof paragraphs 1-2), the module, and the report (Worker report and Second reading by Q100 both present). Checked the exact upstream declarations: rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap, lowerShriekBaseChange(_eq), shriekIso, upperStarIdDerivedPlus, ofIsPullback. Every clause matches with the same quantifier order: the Cartesian square, rho=Rf_!(theta)∘E_a with the identity-pullback identification, IsIso, independence via shriekIso c d, rho_{1,1}=1, and arbitrary Noetherian T base change with any compactification d of f_T with quasi-compact open part. theta_T is built from sqIso and u'^*theta; a_T is pullback.map. No extra hypotheses; the A:Type(u+1) universe follows thm-cbc. The helper definitions are canonical, and print axioms shows no sorry in them. The only sorrys are 3 theorems that are clauses of the node, with source/blueprint/proof docstrings. lean.statement is verbatim in the file. nt_compile --json against the local side overlay is clean (9.1 s); a probe confirmed the tool reports errors. Edge cases checked: empty X/T, f=1, fold map with swap, u=1, a=1 with arbitrary theta. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompactSupportActionBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.compactSupportActionBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.compactSupportActionSquare",
+   "AlgebraicGeometry.Etale.compactSupportActionExchange",
+   "AlgebraicGeometry.Etale.compactSupportAction",
+   "AlgebraicGeometry.Etale.compactSupportActionPullback",
+   "AlgebraicGeometry.Etale.compactSupportActionPullbackCoefficient",
+   "AlgebraicGeometry.Etale.compactSupportAction_id",
+   "AlgebraicGeometry.Etale.compactSupportActionBaseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactSupportActionBaseChange.lean",
+  "statement": "theorem compactSupportActionBaseChange (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) [QuasiCompact c.i] (a : X ≅ X) (ha : a.hom ≫ f = f) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (theta : ((derivedPlusFormalism (ModuleCat.{u + 1} A)).pb a.hom).obj K ≅ K) : IsIso (compactSupportAction A c (compactSupportActionSquare f a ha) K theta) ∧ (∀ (d : Compactification f) [QuasiCompact d.i], compactSupportAction A c (compactSupportActionSquare f a ha) K theta ≫ ((derivedPlusFormalism (ModuleCat.{u + 1} A)).shriekIso c d).hom.app K = ((derivedPlusFormalism (ModuleCat.{u + 1} A)).shriekIso c d).hom.app K ≫ compactSupportAction A d (compactSupportActionSquare f a ha) K theta) ∧ (∀ (T : Scheme.{u}) [IsNoetherian T] (u : T ⟶ Y) (d : Compactification (pullback.snd f u)) [QuasiCompact d.i], ((derivedPlusFormalism (ModuleCat.{u + 1} A)).pb u).map (compactSupportAction A c (compactSupportActionSquare f a ha) K theta) ≫ (compactSupportActionExchange A (IsPullback.of_hasPullback f u) c d).app K = (compactSupportActionExchange A (IsPullback.of_hasPullback f u) c d).app K ≫ compactSupportAction A d (compactSupportActionSquare (pullback.snd f u) (compactSupportActionPullback f a ha u) (by simp [compactSupportActionPullback, pullback.map])) (((derivedPlusFormalism (ModuleCat.{u + 1} A)).pb (pullback.fst f u)).obj K) (compactSupportActionPullbackCoefficient A f a ha u K theta))",
+  "branch": "newtargets-dag",
+  "by": "Q100",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -25,7 +25,8 @@
  },
  "stmt_deps": [
   "lem-coef-dgcat-free-cell-calculus",
-  "lem-coef-dgcat-formal-cone-enlargement"
+  "lem-coef-dgcat-formal-cone-enlargement",
+  "def-coef-graded-linear-category"
  ],
  "proof": [
   {
@@ -197,5 +198,49 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-8df518ce4 (reviewer sub-agent of L); spot-checked: I read the item in full: statement, 5 steps, deps, blueprint, split_report and 10 logged Mathlib searches (leansearch, leanfinder, loogle, grep). I also read the full statements of its only deps, lem-coef-dgcat-free-cell-calculus and lem-coef-dgcat-formal-cone-enlargement, both in the item's own unit sk-prop-sf-biduality-general, so no tool_uses are involved. The delivery creates no new nodes and changes no statement. Step 1 applies the free-cell lemma with s=t=Z, e=h, n=-1, a=1_Z: the identity is closed, as the lemma requires, and the exhaustive graded-split word filtration plus finite induction gives finite word spanning. Step 2: I recomputed the degrees of pi_a h iota_b as (-1,-2,0,-1). They equal (-b_h,-w_h,v_h,a_h), consistent with parent step 2's matrix [[-b,-w],[v,a]] and the sibling's v:y->x. Step 3 is two-sided distributivity with no Koszul sign. Step 4: the coefficients a_m iota, pi a_j iota and pi a_0 are maps between representables, and the cone statement's embedding clause identifies them with arrows of A. Step 5 is functor equality by induction on word length plus linearity. Edge cases checked: u=0, x=y, m=0/1/2, R=0, characteristic 2, h^2 not equal to 0, and no use of closedness of iota/pi. There is no cycle; the only citer is parent lem-coef-dgcat-equivalence-cell-calculus step 6, which uses exactly this generation and equality. It does not duplicate the sibling cell-comparison-functors, which constructs F and G, and it does not restate a clause of the parent. No SGA source. One limit: the Tabuada source (arXiv:0710.4303, Lemma 1.10) could not be opened, since it is not archived and this reviewer has no network access. The proof is agent-origin, flagged WANTED and self-contained, so this does not affect correctness. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08ab899ac",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Read the item, the new def-coef-graded-linear-category node and module, both dependency modules (FreeCellCalculus: ArrowCell, Term, eval, exists_arrowCell; FormalConeEnlargement: ConeSystem embedding_full/embedding_obj, ConeCoordinates.partition), the report, and the citer equivalence-cell-calculus. The statement field is unchanged; the node diff is only lean plus one added stmt_dep. Every clause matches: L as pullback on Option A with distinct labels; T as any ArrowCell for dh=1_Z (unique up to iso by its universal property); T0 on A; the coordinate images; v,a,b,w recomputed with degrees 0,-1,-1,-2; both identities' signs and degrees checked; finite Term generation over all old arrows and the four letters; functor equality into arbitrary GradedLinearCategory.{u,v,w}. Universal quantification over K and E is sound. No extra hypotheses or closedness. The new graded-linear definition is real data with no duplicate found. Docstrings have source, blueprint and 5 proof steps; the only proof is sorry. The Second reading section is the standard accepted 2026-10-17 note. nt_compile.py --json on both files: exit 0, no errors or warnings. No fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgCategoryConeWordNormalForm",
+  "declaration": "CategoryTheory.Dg.coneWordNormalForm",
+  "declarations": [
+   "CategoryTheory.Dg.coneWordFullCategory",
+   "CategoryTheory.Dg.coneWordLabel",
+   "CategoryTheory.Dg.coneWordBase",
+   "CategoryTheory.Dg.ConeContractingCell",
+   "CategoryTheory.Dg.coneWordOldCategory",
+   "CategoryTheory.Dg.coneWordOld",
+   "CategoryTheory.Dg.coneWordInY",
+   "CategoryTheory.Dg.coneWordOutY",
+   "CategoryTheory.Dg.coneWordInX",
+   "CategoryTheory.Dg.coneWordOutX",
+   "CategoryTheory.Dg.coneWordH",
+   "CategoryTheory.Dg.coneWordMul",
+   "CategoryTheory.Dg.coneWordV",
+   "CategoryTheory.Dg.coneWordA",
+   "CategoryTheory.Dg.coneWordB",
+   "CategoryTheory.Dg.coneWordW",
+   "CategoryTheory.Dg.ConeWordLetter",
+   "CategoryTheory.Dg.ConeWordLetter.source",
+   "CategoryTheory.Dg.ConeWordLetter.target",
+   "CategoryTheory.Dg.ConeWordLetter.degree",
+   "CategoryTheory.Dg.coneWordLetterValue",
+   "CategoryTheory.Dg.ConeWordNormalForm",
+   "CategoryTheory.Dg.coneWordNormalForm"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgCategoryConeWordNormalForm.lean",
+  "statement": "theorem coneWordNormalForm {A : Cat R} (K : FormalConeCalculus R) (a : ClosedArrow R A) (E : ConeContractingCell R K a) : ConeWordNormalForm.{u, v, w} R E",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Universal in the recorded FormalConeCalculus and any ArrowCell realization of dh=1_Z. L is the full category on Option A (representables and the chosen cone), T0 the full category on A. ConeWordNormalForm contains both identities, finite Term spanning and equality of graded linear functors into arbitrary graded targets. No construction is chosen from Nonempty."
  }
 }

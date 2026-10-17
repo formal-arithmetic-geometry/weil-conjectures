@@ -289,5 +289,29 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-ab1b3395e (reviewer sub-agent of L); spot-checked: I read the item, its 10 steps, both new nodes, every cited statement and the parent citer's steps 2 and 8. The math is correct. Hirschhorn is not under literature/; it is cited by URL, the same convention 29 existing DAG nodes use, and the proof is marked as agent-written. So I checked each step against the cited node statements rather than the source pages. Step 2 is the lifting test, with component maps 1×p^{C(j)}. Step 3 rests on K_n∩D_nL=D_nK and the filtration transitions λ_nf□δ_ni. Steps 4 and 6 are Brown arguments. Step 5 uses the right adjoint of evaluation and the boundary-collapse test. Step 8 follows the extra-degeneracy identities of the free-bar node, read with C=J^op (c_0=j_p). In Step 9 I expanded both coends myself: both give ∫^p∫^r∐V^r_{j_0}·(K(j_p)_r×Δ^p_r), with d_0 the K action at j_p and d_p the V action. Step 10 applies the injective model. The cases J=∅, J=*, K=∅ hold. There is no cycle: the item is not reachable from any of its dependencies (212 nodes checked). The new nodes are true statements with statement only; I tested the skeletal filtration on J=* with Δ^0 and Δ^1 weights, and the framed resolution on J=*, where PA=A. Neither duplicates tensor-coend-skeletal-pushouts, simplicial-bar-projective-resolution, free-bar-cell-filtration or presheaf-simplex-hocolim-resolution, and neither restates a clause of the item. Two citation repairs are in fixes/: (1) Steps 3 and 8 now cite the same-unit node lem-coef-simplicial-latching-degenerate-subset for 'latching set = degenerate subset', which replaces lem-weil-pbc-simplicial-set-nondegenerate-decomposition from another unit; that node gives only unique decomposition. The section argument is now written out, and the now-unneeded tool_uses entry is removed. (2) Step 2 now cites lem-coef-parametrized-adjunction-corner-lifting and is marked non-elementary. proof_deps was recomputed; no statement changed and no node was dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1baa7e30",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Checked each hypothesis and conclusion clause against the node: the Reedy-convention binders, the projective P via hPW/hPF, Reedy cofibrancy hV through latchingTo over the injections of Δ, hconst, the injective model I with objectwise Kan weak equivalences and monomorphisms, the concrete mappingFunctor (ULift Hom with precomposition actions), IsCoend with the correct J and Δ relations on the unit transposes, and the mono to cofibration and mono plus weak homotopy equivalence to trivial cofibration clauses. The universes are bound and not restricted; HasColimitsOfSize.{max w v t} is the size the coend needs. Edge cases J empty, K empty and n = 0 hold. No hollow definitions; the only proof is sorry on the theorem, whose docstring carries the 10 steps; docstrings carry the source place and blueprint tag. lean.statement matches the file verbatim; only the lean field of the node changed; both report sections are present; no duplicate in lean/Sheaf. nt_compile --json of the snapshot module exited 0 (1.7 s); only the last 20 output lines were kept, so warnings were not seen."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProjectiveFrameWeightedCoend",
+  "declaration": "HomotopicalAlgebra.ProjectiveFrame.weighted_coend_adjunction",
+  "file": "lean/Sheaf/CategoryTheory/ProjectiveFrameWeightedCoend.lean",
+  "statement": "theorem weighted_coend_adjunction [ModelCategory M] [HasLimits M] [HasColimits M] [HasLimitsOfSize.{w, w} M] [HasColimitsOfSize.{w, w} M] [HasColimitsOfSize.{max w v t, max w v t} M] [(cofibrations M).HasFunctorialFactorization (trivialFibrations M)] [(trivialCofibrations M).HasFunctorialFactorization (fibrations M)] (P : ModelCategory (J ⥤ M)) [(P.categoryWithCofibrations.cofibrations).HasFunctorialFactorization (P.categoryWithFibrations.fibrations ⊓ P.categoryWithWeakEquivalences.weakEquivalences)] [(P.categoryWithCofibrations.cofibrations ⊓ P.categoryWithWeakEquivalences.weakEquivalences).HasFunctorialFactorization P.categoryWithFibrations.fibrations] (hPW : P.categoryWithWeakEquivalences.weakEquivalences = (weakEquivalences M).functorCategory J) (hPF : P.categoryWithFibrations.fibrations = (fibrations M).functorCategory J) (V : SimplexCategory ⥤ J ⥤ M) (hV : ∀ n : SimplexCategory, P.categoryWithCofibrations.cofibrations (Reedy.latchingTo (monomorphisms SimplexCategory) V n)) (hconst : ∀ {n n' : SimplexCategory} (a : n ⟶ n') (j : J), weakEquivalences M ((V.map a).app j)) : ∃ (I : ModelCategory (Jᵒᵖ ⥤ SSet.{max v t})) (L : (Jᵒᵖ ⥤ SSet.{max v t}) ⥤ M) (a : L ⊣ mappingFunctor V), I.categoryWithWeakEquivalences.weakEquivalences = SSet.KanQuillen.weakEquivalenceStructure.weakEquivalences.functorCategory Jᵒᵖ ∧ I.categoryWithCofibrations.cofibrations = (monomorphisms SSet.{max v t}).functorCategory Jᵒᵖ ∧ (∀ K : Jᵒᵖ ⥤ SSet.{max v t}, IsCoend V K (fun j n x ↦ (((a.unit.app K).app (op j)).app (op n) x).down)) ∧ (∀ (K K' : Jᵒᵖ ⥤ SSet.{max v t}) (i : K ⟶ K'), (∀ j : Jᵒᵖ, Mono (i.app j)) → cofibrations M (L.map i)) ∧ (∀ (K K' : Jᵒᵖ ⥤ SSet.{max v t}) (i : K ⟶ K'), (∀ j : Jᵒᵖ, Mono (i.app j)) → (∀ j : Jᵒᵖ, SSet.Enhanced.IsWeakHomotopyEquivalence (i.app j)) → trivialCofibrations M (L.map i))",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "HomotopicalAlgebra.ProjectiveFrame.Compatible",
+   "HomotopicalAlgebra.ProjectiveFrame.IsCoend",
+   "HomotopicalAlgebra.ProjectiveFrame.mappingFunctor",
+   "HomotopicalAlgebra.ProjectiveFrame.weighted_coend_adjunction"
+  ]
  }
 }
