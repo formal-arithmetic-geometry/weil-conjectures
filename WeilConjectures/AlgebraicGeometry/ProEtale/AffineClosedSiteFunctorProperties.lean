@@ -67,34 +67,6 @@ private theorem coordinates_indEtale (A : Type u) [CommRing A] (I : Ideal A)
   · exact (proAffineEtale_Spec_iff (f := (Scheme.ΓSpecIso (.of (A ⧸ I))).inv)).mp
       (proAffineEtale.of_isAffine _)
 
-private theorem lift_map_naturality {A C D : Type u} [CommRing A] [CommRing C]
-    [CommRing D] [Algebra A C] [Algebra A D] (φ : C →ₐ[A] D) :
-    (Algebra.ClosedLift.toAlgHom A D).comp (Algebra.ClosedLift.map φ) =
-      φ.comp (Algebra.ClosedLift.toAlgHom A C) := by
-  suffices h : CommAlgCat.ofHom ((Algebra.ClosedLift.toAlgHom A D).comp
-      (Algebra.ClosedLift.map φ)) =
-      CommAlgCat.ofHom (φ.comp (Algebra.ClosedLift.toAlgHom A C)) from
-    congrArg CommAlgCat.Hom.hom h
-  apply colimit.hom_ext
-  intro X
-  apply CommAlgCat.hom_ext
-  change ((Algebra.ClosedLift.toAlgHom A D).comp (Algebra.ClosedLift.map φ)).comp
-      (colimit.ι (Algebra.ClosedLift.diagram A C) X).hom =
-    (φ.comp (Algebra.ClosedLift.toAlgHom A C)).comp
-      (colimit.ι (Algebra.ClosedLift.diagram A C) X).hom
-  rw [AlgHom.comp_assoc, Algebra.ClosedLift.ι_map, Algebra.ClosedLift.ι_toAlgHom,
-    AlgHom.comp_assoc, Algebra.ClosedLift.ι_toAlgHom]
-  rfl
-
-private theorem lift_surjective (A C : Type u) [CommRing A] [CommRing C]
-    [Algebra A C] (I : Ideal A) [Algebra (A ⧸ I) C] [IsScalarTower A (A ⧸ I) C]
-    [Algebra.IndEtale (A ⧸ I) C] :
-    Function.Surjective (Algebra.ClosedLift.toAlgHom A C) := by
-  intro c
-  obtain ⟨q, hq⟩ := (Algebra.ClosedLift.bijective_reduction A C I).surjective c
-  obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective q
-  exact ⟨b, hq⟩
-
 private theorem lift_specializes (A C : Type u) [CommRing A] [CommRing C]
     [Algebra A C] (I : Ideal A) [Algebra (A ⧸ I) C] [IsScalarTower A (A ⧸ I) C]
     [Algebra.IndEtale (A ⧸ I) C] (x : PrimeSpectrum (Algebra.ClosedLift A C)) :
@@ -115,7 +87,7 @@ private theorem lift_specializes (A C : Type u) [CommRing A] [CommRing C]
       sInf_le ⟨bot_le, hm⟩) hj
   have hr : (⟨m, hm.isPrime⟩ : PrimeSpectrum (Algebra.ClosedLift A C)) ∈
       Set.range (PrimeSpectrum.comap ε) := by
-    rw [range_comap_of_surjective C ε (lift_surjective A C I)]
+    rw [range_comap_of_surjective C ε (Algebra.ClosedLift.surjective_toAlgHom A C I)]
     exact hker
   obtain ⟨z, hz⟩ := hr
   refine ⟨z, ?_⟩
@@ -187,7 +159,7 @@ private theorem inclusion_closed (A : Type u) [CommRing A] (I : Ideal A)
   have := coordinates_indEtale A I V
   have : IsClosedImmersion (Spec.map (CommRingCat.ofHom
       (Algebra.ClosedLift.toAlgHom A (closedSiteCoordinates A I V)).toRingHom)) :=
-    IsClosedImmersion.spec_of_surjective _ (lift_surjective A _ I)
+    IsClosedImmersion.spec_of_surjective _ (Algebra.ClosedLift.surjective_toAlgHom A _ I)
   unfold closedSiteLiftInclusion
   infer_instance
 
@@ -197,7 +169,7 @@ private theorem inclusion_naturality (A : Type u) [CommRing A] (I : Ideal A)
       f.left ≫ closedSiteLiftInclusion A I W := by
   change (V.left.isoSpec.hom ≫ Spec.map _) ≫ Spec.map _ = _
   rw [Category.assoc, ← Spec.map_comp]
-  have hn := lift_map_naturality (closedSiteCoordinatesMap A I f)
+  have hn := Algebra.ClosedLift.toAlgHom_map (closedSiteCoordinatesMap A I f)
   have he : CommRingCat.ofHom
       ((Algebra.ClosedLift.toAlgHom A (closedSiteCoordinates A I V)).comp
         (Algebra.ClosedLift.map (closedSiteCoordinatesMap A I f))).toRingHom =

@@ -3790,7 +3790,6 @@ public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Regular
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Stabilizer
 public import WeilConjectures.RingTheory.IdempotentsDeterminedModuloRadical
 public import WeilConjectures.RingTheory.ImprovePresentationSmoothConormalFree
-public import WeilConjectures.RingTheory.IndPrincipalZariski
 public import WeilConjectures.RingTheory.IndSmoothFinitePresentationFactorization
 public import WeilConjectures.RingTheory.IndStandardSmooth
 public import WeilConjectures.RingTheory.InertiaUnramifiedPoint

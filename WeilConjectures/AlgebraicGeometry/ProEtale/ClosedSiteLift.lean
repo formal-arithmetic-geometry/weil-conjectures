@@ -103,15 +103,6 @@ def closedSiteLiftMap {V W : (Spec (.of (A ⧸ I))).AffineProEt} (f : V ⟶ W) :
       (Algebra.ClosedLift.map (closedSiteCoordinatesMap A I f)).toRingHom))
     (closedSiteLiftMap_over A I f)
 
-private theorem closedLift_map_id (C : Type u) [CommRing C] [Algebra A C] :
-    Algebra.ClosedLift.map (AlgHom.id A C) = AlgHom.id A (Algebra.ClosedLift A C) := by
-  apply CommAlgCat.hom_ext_iff.mp
-  apply colimit.hom_ext (F := Algebra.ClosedLift.diagram A C)
-  intro X
-  apply CommAlgCat.hom_ext
-  change (Algebra.ClosedLift.map (AlgHom.id A C)).comp _ = _
-  exact Algebra.ClosedLift.ι_map (AlgHom.id A C) X
-
 /-- The lift preserves identities.
 Source: blueprint order 1843 (blueprint: def-exc-closed-site-lift).
 Proof: the coordinate identity is the identity algebra map. The colimit-induced
@@ -125,24 +116,8 @@ theorem closedSiteLiftMap_id (V : (Spec (.of (A ⧸ I))).AffineProEt) :
       AlgHom.id A (closedSiteCoordinates A I V) := by
     ext x
     rfl
-  rw [h, closedLift_map_id]
+  rw [h, Algebra.ClosedLift.map_id]
   exact Spec.map_id _
-
-private theorem closedLift_map_comp {C D E : Type u} [CommRing C] [CommRing D]
-    [CommRing E] [Algebra A C] [Algebra A D] [Algebra A E]
-    (φ : C →ₐ[A] D) (ψ : D →ₐ[A] E) :
-    Algebra.ClosedLift.map (ψ.comp φ) =
-      (Algebra.ClosedLift.map ψ).comp (Algebra.ClosedLift.map φ) := by
-  apply CommAlgCat.hom_ext_iff.mp
-  apply colimit.hom_ext (F := Algebra.ClosedLift.diagram A C)
-  intro X
-  apply CommAlgCat.hom_ext
-  change (Algebra.ClosedLift.map (ψ.comp φ)).comp _ =
-    ((Algebra.ClosedLift.map ψ).comp (Algebra.ClosedLift.map φ)).comp _
-  have h₁ := Algebra.ClosedLift.ι_map (ψ.comp φ) X
-  have h₂ := Algebra.ClosedLift.ι_map φ X
-  have h₃ := Algebra.ClosedLift.ι_map ψ ((Algebra.ClosedLift.postcomp φ).obj X)
-  exact h₁.trans ((congrArg (fun q ↦ (Algebra.ClosedLift.map ψ).comp q) h₂).trans h₃).symm
 
 /-- The lift preserves composition.
 Source: blueprint order 1843 (blueprint: def-exc-closed-site-lift).
@@ -158,7 +133,7 @@ theorem closedSiteLiftMap_comp
       (closedSiteCoordinatesMap A I f).comp (closedSiteCoordinatesMap A I g) := by
     ext x
     rfl
-  rw [h, closedLift_map_comp, ← Spec.map_comp]
+  rw [h, Algebra.ClosedLift.map_comp, ← Spec.map_comp]
   rfl
 
 /-- The functor v from the affine closed-site basis to the affine basis over A:

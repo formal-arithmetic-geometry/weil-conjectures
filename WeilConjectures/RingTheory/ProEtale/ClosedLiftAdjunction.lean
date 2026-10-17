@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.RingTheory.ProEtale.ClosedLiftMap
-public import WeilConjectures.RingTheory.IndPrincipalZariski
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 
@@ -166,7 +165,8 @@ private theorem closedHomEquiv_apply (A : Type u) [CommRing A] (I : Ideal A)
     [Algebra.IndEtale A D] (f : D →ₐ[A] ClosedLift A C) (d : D) :
     closedHomEquiv A I D C f (Ideal.Quotient.mk _ d) = toAlgHom A C (f d) := rfl
 
-private theorem toAlgHom_map {A C C' : Type u} [CommRing A] [CommRing C] [CommRing C']
+/-- The map to the input algebra is natural in the input algebra. -/
+theorem toAlgHom_map {A C C' : Type u} [CommRing A] [CommRing C] [CommRing C']
     [Algebra A C] [Algebra A C'] (φ : C →ₐ[A] C') :
     (toAlgHom A C').comp (map φ) = φ.comp (toAlgHom A C) := by
   suffices hh : CommAlgCat.ofHom ((toAlgHom A C').comp (map φ)) =
@@ -178,28 +178,6 @@ private theorem toAlgHom_map {A C C' : Type u} [CommRing A] [CommRing C] [CommRi
     (φ.comp (toAlgHom A C)).comp (Limits.colimit.ι (diagram A C) X).hom
   rw [AlgHom.comp_assoc, ι_map, ι_toAlgHom, AlgHom.comp_assoc, ι_toAlgHom]
   rfl
-
-private theorem closed_map_id {A C : Type u} [CommRing A] [CommRing C] [Algebra A C] :
-    map (AlgHom.id A C) = AlgHom.id A (ClosedLift A C) := by
-  have h := indEtale_lift_unique (toAlgHom A C)
-  exact ((h.choose_spec.2 _ (by
-      change (toAlgHom A C).comp (map (AlgHom.id A C)) = _
-      rw [toAlgHom_map, AlgHom.id_comp])).trans
-    (h.choose_spec.2 _ (by
-      change (toAlgHom A C).comp (AlgHom.id A (ClosedLift A C)) = _
-      rw [AlgHom.comp_id])).symm)
-
-private theorem closed_map_comp {A C C' C'' : Type u} [CommRing A]
-    [CommRing C] [CommRing C'] [CommRing C'']
-    [Algebra A C] [Algebra A C'] [Algebra A C'']
-    (φ : C →ₐ[A] C') (ψ : C' →ₐ[A] C'') :
-    map (ψ.comp φ) = (map ψ).comp (map φ) := by
-  have h := indEtale_lift_unique ((ψ.comp φ).comp (toAlgHom A C))
-  exact ((h.choose_spec.2 _ (toAlgHom_map _)).trans
-    (h.choose_spec.2 _ (by
-      change (toAlgHom A C'').comp ((map ψ).comp (map φ)) = _
-      rw [← AlgHom.comp_assoc, toAlgHom_map, AlgHom.comp_assoc, toAlgHom_map,
-        ← AlgHom.comp_assoc])).symm)
 
 private theorem quotient_indEtale (A : Type u) [CommRing A] (I : Ideal A)
     (D : CommAlgCat.{u} A) [Algebra.IndEtale A D] :
@@ -287,7 +265,7 @@ theorem exists_natural_homEquiv (A : Type u) [CommRing A] (I : Ideal A) :
   refine ⟨fun D C _ _ _ _ ↦ closedHomEquiv A I D C, ?_⟩
   intro D C _ _ _ _
   refine ⟨quotient_indEtale A I D, closedHomEquiv_apply A I D C, ?_, ?_,
-    closed_map_id, ?_⟩
+    ClosedLift.map_id, ?_⟩
   · intro D' _ r f d
     rw [closedHomEquiv_apply, closedHomEquiv_apply]
     rfl
@@ -295,6 +273,6 @@ theorem exists_natural_homEquiv (A : Type u) [CommRing A] (I : Ideal A) :
     rw [closedHomEquiv_apply, closedHomEquiv_apply]
     exact DFunLike.congr_fun (toAlgHom_map (φ.restrictScalars A)) (f d)
   · intro C' C'' _ _ _ _ _ _ φ ψ
-    exact closed_map_comp (φ.restrictScalars A) (ψ.restrictScalars A)
+    exact ClosedLift.map_comp (φ.restrictScalars A) (ψ.restrictScalars A)
 
 end Algebra.ClosedLift
