@@ -176,5 +176,23 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-4e1c88c4f (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-simplicial-localization-existence and the full statements of all cited nodes (def-coef-universally-localizing-simplicial-map, def-cbc-enhanced-diagrams-cones, lem-coef-joyal-filtered-equivalences, lem-coef-joyal-functor-equivalence-test). I also read the unit, the citer lem-coef-universal-localization-degenerate-edges, and Kerodon 05ZP and 05ZQ online. The item matches 05ZQ hypothesis by hypothesis, and its statement is unchanged. The cocone condition is equivalent to filtered. V as the union of images equals colim V_i, because filtered colimits of sets preserve monos. Step 1: the 05ZP functoriality gives q_i=L(p_i) with v_i p_i=q_i u_i. Step 2: every H on Y_i inverts T_i=p_i(V_i), so v_i^* is an equivalence. 2-out-of-3 with u_i^* q_i^*=p_i^* v_i^* makes q_i^* one, and the test lemma (ii)=>(i) gives Joyal equivalences. Step 3: T=p(V), and q=colim q_i by functoriality of L. The Joyal filtered-colimit node applies to v and q. Step 4: p^* lands in Fun_V because H p j_i = H k_i p_i, and p^* v^* = u^* q^* gives the localization equivalence for every E. The new node faithfully states 05ZP (functorial, commutes with filtered colimits via the small-object construction of Kerodon Prop. 4.1.3.2). It passes B1-B7, has three kinds of recorded Mathlib search, and is not a restatement of the item. I tested it on small cases (W empty, Delta^1 with its edge, C empty, one-object I) and on non-injective transitions. No duplicates: rg for 05ZP/05ZQ finds only these nodes and the citer. system-localization-universal and simplicial-inversion-universal-property differ, and the blueprint has no matching node. The graph has no cycle, all uses are in unit sk-prop-sf-biduality-general, tool_uses is empty, no SGA source is used, and this is not a target node. I confirm the noted 05ZQ notation typo (U=G(T)). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalizationFilteredColimit",
+  "declaration": "SSet.Enhanced.isLocalizationAtEdges_colimMap_of_isFiltered",
+  "file": "lean/Sheaf/CategoryTheory/LocalizationFilteredColimit.lean",
+  "statement": "theorem isLocalizationAtEdges_colimMap_of_isFiltered (I : Type u) [SmallCategory I] [IsFiltered I] (X Y : I ⥤ SSet.{u}) (p : X ⟶ Y) (V : ∀ i : I, Set ((X.obj i) _⦋1⦌)) (hV : ∀ {i j : I} (a : i ⟶ j), (X.map a).app (Opposite.op ⦋1⦌) '' V i ⊆ V j) (hp : ∀ i : I, IsLocalizationAtEdges.{u, v} (p.app i) (V i)) : IsLocalizationAtEdges.{u, v} (colimMap p) (⋃ i : I, (colimit.ι X i).app (Opposite.op ⦋1⦌) '' V i)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-26a296555",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Statement matches node and Kerodon 05ZQ clause by clause: SmallCategory+IsFiltered = small nonempty finite-cocone category (Mathlib cocone_nonempty / of_cocone_nonempty); functor X Y : I ⥤ SSet.{u} with p : X ⟶ Y gives the strict diagram; hV is image containment (no injectivity); hp and the conclusion use the recorded IsLocalizationAtEdges.{u,v} with the same test universe max u v; colimMap p at exactly ⋃ i, (colimit.ι X i)_1 '' V i. No extra hypotheses, universes bound explicitly, edge cases covered, only the lean field changed, statement verbatim in file, theorem-only module with sorry, source/blueprint docstrings and 4-step proof plan present, no duplicate found, report has Worker report and Second reading by Q02. nt_compile.py --json on the snapshot file: rc 0, no errors or warnings. No findings."
  }
 }
