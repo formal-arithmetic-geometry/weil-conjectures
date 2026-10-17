@@ -27,7 +27,12 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-coherent-nerve-comparison"
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-model-colimit-localization-comparison",
+  "def-coef-simplicial-tensor-cotensor",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-finite-reedy-localization"
  ],
  "proof": [
   {
@@ -335,5 +340,52 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-9eb24e962 (reviewer sub-agent of L); spot-checked: Read in full: the item's statement and all 10 steps, plus the full current statements of all 11 cited nodes (2 statement deps, 9 proof deps). The unit and blueprint ancestry match. The delivery has no new nodes. HTT is not under literature/, so I checked against my own knowledge of HTT A.3.3.2-A.3.3.5, 4.2.4.1/4.2.4.4-4.2.4.5/4.2.4.8 and A.2.4.4-A.2.4.5. The statement matches these hypothesis by hypothesis; the final clause adds the all-cofibrant hypothesis and is valid as stated. No SGA. proof_deps equals the union of the step uses. The dependency closure (366 nodes) has no cycle. Off-unit use: lem-cbc-enhanced-functor-cone-calculus, declared in tool_uses and already accepted elsewhere; I accept it for steps 5 and 8. Checked by hand: step 1 (T⊗a from the pushout product with ∅→T); step 2 (retract-of-cells argument, C_p∩W_I=T_p, ground Sat(J)); step 3 (Smith (i)-(v) one by one); step 4 (elementary: F_i(a)□j=F_i(a□j) plus closure under cell operations); step 6 (coequalizer/equalizer and the end formula); steps 7-8 (cofibrant/fibrant pairs and the cone-calculus criterion); step 9 (f',g' fibrations as pullbacks of (e0,e1); injective fibrancy lift; discrete-cospan counit); step 10 (P is the pullback of P' along σ; graph factorization; Kan right properness; Yoneda with bifibrant P and P'; the cone homotopy comes from the contractible homotopy fiber). Small cases: K empty, a point, ΩZ in sSet, identity legs. FIX (E5) in step 5: the injective comparison said only that 'replacement transformations are objectwise weak equivalences, so the comparison agrees up to coherent natural equivalence', with no argument. I rewrote it explicitly: a common evaluation map e on objectwise-bifibrant diagrams; Φ=ψ_p^{-1}ψ_q from nerve-localization; functorial projective cofibrant replacement maps Q_0 to P_0; the vertex criterion of cone-calculus gives e_pN(Q_p)≃e_q on N(Q_0); full faithfulness of restriction along the localization N(Q_0)→N_hc(Q) gives e_q≃e_pΦ. I added cone-calculus to step 5's uses (already in proof_deps) and updated the tool_uses note. Whole corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-model-coherent-diagrams.json. No statement change and no dropped nodes. Note: steps 2-4 reprove the projective structure that the unsplit lem-coef-simplicial-projective-model-calculus already states; acceptable, since there is no new node and no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialModelCoherentDiagrams",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialModelCoherentDiagrams.lean",
+  "declaration": "CategoryTheory.simplicial_model_coherent_diagrams",
+  "declarations": [
+   "CategoryTheory.CoherentModelDiagrams.Diagrams",
+   "CategoryTheory.CoherentModelDiagrams.eval",
+   "CategoryTheory.CoherentModelDiagrams.Objectwise",
+   "CategoryTheory.CoherentModelDiagrams.FreeDiagrams",
+   "CategoryTheory.CoherentModelDiagrams.FreeGenerators",
+   "CategoryTheory.CoherentModelDiagrams.DiagramModel",
+   "CategoryTheory.CoherentModelDiagrams.ConicalAdjunctions",
+   "CategoryTheory.CoherentModelDiagrams.BifibrantDiagrams",
+   "CategoryTheory.CoherentModelDiagrams.NerveEvaluation",
+   "CategoryTheory.CoherentModelDiagrams.rectificationMap",
+   "CategoryTheory.CoherentModelDiagrams.modelCofibrant",
+   "CategoryTheory.CoherentModelDiagrams.modelFibrant",
+   "CategoryTheory.CoherentModelDiagrams.diagramBifProperty",
+   "CategoryTheory.CoherentModelDiagrams.sameUniverseLift",
+   "CategoryTheory.CoherentModelDiagrams.GroundLocalization",
+   "CategoryTheory.CoherentModelDiagrams.constantsNerveMap",
+   "CategoryTheory.CoherentModelDiagrams.Comparison",
+   "CategoryTheory.CoherentModelDiagrams.localizedArrow",
+   "CategoryTheory.CoherentModelDiagrams.edgeOfVertex",
+   "CategoryTheory.CoherentModelDiagrams.constantNormalization",
+   "CategoryTheory.CoherentModelDiagrams.DerivedCones",
+   "CategoryTheory.CoherentModelDiagrams.pathLeg",
+   "CategoryTheory.CoherentModelDiagrams.pathPullback",
+   "CategoryTheory.CoherentModelDiagrams.PathPullbackComparison",
+   "CategoryTheory.CoherentModelDiagrams.Conclusion",
+   "CategoryTheory.simplicial_model_coherent_diagrams"
+  ],
+  "statement": "theorem simplicial_model_coherent_diagrams (M : Type u) [Category.{v} M] [ModelCategory M] [HasLimitsOfSize.{v, v} M] [HasColimitsOfSize.{v, v} M] [SimplicialCategory M] (_hM : CombinatorialModelCategory.{u, v, v} M) (T : SimplicialTensorCotensor M) (_hSM7 : SimplicialModelLocalization.SatisfiesSM7 M) : Conclusion M T",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Enriched diagram objects and enriched ends are specified by Mathlib EnrichedFunctor and GradedNatTrans; canonical evaluation is fixed on every coherent simplex. Derived cone formulas use the recorded canonical transport spans and the localized adjunction unit/counit. The cospan clause includes the actual single-path pullback and its induced limiting cone. No DAG statement or proof dependencies changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a80bbb5b2",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Per-file compile reproduced via nt_compile.py on the side overlay: 70 modules, item module 4.6 s, no errors or warnings. lean.statement verbatim in the file; all 26 declarations present; one sorry. Node changes are only lean plus five landed stmt_deps with lean records (allowed by brief-stage2 §140); no dependency cycle in the 440-node closure; statement, proof and proof_deps unchanged. Clause-by-clause match: combinatorial simplicial model hypotheses (CombinatorialModelCategory.{u,v,v}, SatisfiesSM7, tensor/cotensor) with no extra assumptions or universe equality; enriched diagrams pinned by Mathlib GradedNatTrans; projective/injective models fixed by objectwise W plus fibrations/cofibrations; free-cell generation as an equality for every small generating S; canonical rectification map fixed on every simplex for both models; conical adjunctions pinned by unit/counit; derived cocone/cone fixed by Composes triangles with correct comma/Composes directions plus IsColimiting/IsLimiting; single-path pullback with induced cone fixed via r∘nu ≃ π∘Δh, assuming only all-cofibrant objects, fibrant X Y Z and a good PathObject, no right properness. Edge cases covered: empty K and I, discrete index, identity legs. All 10 node proof steps verbatim in the docstring; every declaration has source and blueprint docstrings; real Worker report and Second reading by Q25 sections. No findings requiring a fix."
  }
 }
