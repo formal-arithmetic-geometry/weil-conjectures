@@ -6,10 +6,9 @@ Authors: SHEAF group W4
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-public import Mathlib.CategoryTheory.Functor.Currying
 
-import all Sheaf.AlgebraicGeometry.CoherentFormalModule
-import all Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardAdic
+import all WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+import all WeilConjectures.AlgebraicGeometry.ModulePullbackIdealPowerProductImage
 
 /-! # Formal quotients by a second ideal
 
@@ -44,6 +43,14 @@ theorem formalSecondIdealQuotient_supported
     ∀ n : ℕ, IsZero (Scheme.idealModuleProduct
       (K ^ (e + 1)).subschemeι.ker.toModulesι
       (((M.obj ⋙ formalCompletionFunctor K).flip.obj (op e)).obj (op n))) := by
-  sorry
+  intro n
+  change IsZero (Scheme.idealModuleProduct (K ^ (e + 1)).subschemeι.ker.toModulesι
+    (formalModuleQuotient K (e + 1) (M.obj.obj (op n))))
+  rw [Scheme.IdealSheafData.ker_subschemeι]
+  obtain ⟨a, ha⟩ := power_subobject_eq K (e + 1)
+  obtain ⟨d, hd⟩ := product_iso _ _ a ha
+    (formalModuleQuotient K (e + 1) (M.obj.obj (op n)))
+  exact IsZero.of_iso
+    (idealModuleProduct_quotient_zero (Scheme.idealSheafPower K.toModulesι (e + 1)).2) d.symm
 
 end AlgebraicGeometry

@@ -12,30 +12,35 @@
  ],
  "proof": [
   {
-   "text": "At each level the term is the cokernel quotient by the recursive K-power product. The existing private idealModuleProduct_quotient_zero theorem in CoherentFormalModule proves annihilation by this recursive power.",
+   "text": "Unfold the flipped completion system at I-level n to formalModuleQuotient K (e+1) (M.obj.obj (op n)), and rewrite the kernel of the closed immersion using Scheme.IdealSheafData.ker_subschemeι.",
    "uses": [
     "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": true
   },
   {
-   "text": "Rewrite the closed-immersion kernel with ker_subschemeι. Reuse power_inclusion_iso and product_inclusion_iso from ThickeningSystemPushforwardAdic (import all): the former identifies the positive recursive power inclusion with (K^(e+1)).toModulesι, and the latter identifies their multiplication images on the quotient. Transfer the zero-object property across that isomorphism. These helpers are already proved using the affine-section ideal-power formula, not assumed.",
+   "text": "Reuse the already-proved private power_subobject_eq and product_iso from WeilConjectures.AlgebraicGeometry.ModulePullbackIdealPowerProductImage through proof-only import all. The former identifies the recursive K-power inclusion with the ideal-data power inclusion, including exponent zero; the latter transports their product images on the quotient module. Only these proved helper theorems are used, not the pullback theorem itself.",
    "uses": [
-    "lem-weil-pbc-thickening-system-pushforward-adic",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "lem-weil-pbc-module-pullback-ideal-power-product-image"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Reuse the already-proved private idealModuleProduct_quotient_zero from WeilConjectures.AlgebraicGeometry.CoherentFormalModule through proof-only import all: multiplication by the recursive power on the cokernel of its product inclusion is zero. IsZero.of_iso transports this zero object across the inverse of the product isomorphism to the required ideal-data product.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-coherent-formal-module",
-  "lem-weil-pbc-thickening-system-pushforward-adic",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+  "lem-weil-pbc-module-pullback-ideal-power-product-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 088A, construction of G_e; second reading by W4 closes the Lean proof using existing recursive-power/product isomorphisms and cokernel annihilation."
+  "place": "Tag 088A, construction of G_e; repaired by P2 on 2026-10-17 to reuse existing proved recursive-power/product isomorphisms and cokernel annihilation, removing all duplicate local helper theorems."
  },
  "mathlib_searches": [
   {
@@ -114,13 +119,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "X-32d56",
-  "group": "W4",
+  "reviewer": "COMPILER",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T024052-L-3340575",
+  "landing": "20261017T003426-L-3316873",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures, proofs and residual transition statement against the node records, repository baseline, source construction, compilation and axiom checks."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
