@@ -3,42 +3,150 @@
  "blueprint": {
   "is": "lem-sf-point",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The point, evaluated",
- "statement": "In the setting of [def-sf-datum], let $s=\\operatorname{Spec}k$ with\nstructure morphism $a_s=\\operatorname{id}_s$. Then\n$\\omega_s=Ra_s^!\\Lambda\\cong\\Lambda_s$; for every object $C$ of the\npoint category one has\n$R\\mathcal H om_s(C,\\omega_s)\\cong R\\operatorname{Hom}_\\Lambda(C,\\Lambda)$;\nevaluation at the geometric point is an exact equivalence\n$\\Fib_s:D^b_c(s,\\Lambda)\\to D^b_{\\mathrm{fin}}(A_{E,n})$, hence\nconservative; and for $K\\in D^b_{ctf}(X,\\Lambda)$ one has\n$\\Fib_s(Ra_{X!}K)=R\\Gamma_c(X,K)$,\n$\\Fib_s(Ra_{X*}K)=R\\Gamma(X,K)$ and\n$H^r(-)=\\operatorname{Hom}_s(\\Lambda[-r],-)$.",
+ "statement": "Fix the global finite-field and coefficient data and a six-functor datum as in [def-sf-datum], with $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$. Use the small pro-etale point coefficient categories and evaluation functor of [def-weil-finite-coefficient-point]. Put $s=\\operatorname{Spec}k$, $a_s=\\operatorname{id}_s$, and $\\omega_s=Ra_s^!\\Lambda_s$. Let $X$ be a separated finite-type $k$-scheme with structure map $a_X:X\\to s$, as required for the operations in the datum and the cohomology of [def-weil-ordinary-compact-cohomology]. Then:\n\n1. $\\omega_s\\cong\\Lambda_s$.\n2. For every $C\\in D^b_c(s,\\Lambda)$, evaluation identifies its internal dual with its coefficient dual $R\\operatorname{Hom}_\\Lambda(-,\\Lambda)$ of [def-pod-perfect-point-complex]:\n$$\\operatorname{Fib}_s\\bigl(R\\mathcal H om_s(C,\\omega_s)\\bigr)\\cong R\\operatorname{Hom}_\\Lambda\\bigl(\\operatorname{Fib}_s C,\\Lambda\\bigr).$$\n3. $\\operatorname{Fib}_s$ is an exact equivalence from $D^b_c(s,\\Lambda)$ to the corresponding point category $D^b_{\\mathrm{fin}}(A_{E,n})$, $D^b_{\\mathrm{fg}}(\\mathcal O_E)$, $D^b_{\\mathrm{fd}}(E)$, or the common-stage $D^b_{\\mathrm{fd}}(\\Qlb)$, hence conservative.\n4. For every $K\\in D^b_{ctf}(X,\\Lambda)$,\n$$\\operatorname{Fib}_s(Ra_{X!}K)=R\\Gamma_c(X,K),\\qquad \\operatorname{Fib}_s(Ra_{X*}K)=R\\Gamma(X,K).$$\n5. For every $C\\in D^b_c(s,\\Lambda)$ and $r\\in\\mathbf Z$ there is the natural identification\n$$H^r(\\operatorname{Fib}_s C)\\cong\\operatorname{Hom}_{D^b_c(s,\\Lambda)}(\\Lambda_s[-r],C).$$\nAt the algebraically closed coefficient stage, coefficient duals are interpreted at common finite stages, and $H^r$ is the colimit of the finite-stage cohomology vector spaces under scalar extension to $\\Qlb$, as in [def-weil-coefficient-cohomology-modules]; the source's formulas omitting $\\operatorname{Fib}_s$ use the equivalence in (3).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.md",
   "place": "node lem-sf-point, order 2180"
  },
  "stmt_deps": [
-  "def-sf-datum"
+  "def-sf-datum",
+  "def-weil-finite-coefficient-point",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-coefficient-cohomology-modules",
+  "def-pod-perfect-point-complex"
  ],
  "proof": [
   {
-   "text": "The operations are those of the six-functor datum of [def-sf-datum].\n$Rf^!$ is the right adjoint of $Rf_!$ by (A1); for $f=\\operatorname{id}_s$\nthe identity functor is its own right adjoint, so\n$Ra_s^!\\Lambda\\cong\\Lambda_s$. The identification of\n$R\\mathcal H om_s$ with $R\\operatorname{Hom}_\\Lambda$ is\n[def-weil-finite-coefficient-point]. The two identifications of the\nglobal-section complexes are the definitions of\n[def-weil-ordinary-compact-cohomology], and the last display is the\nshift convention together with $\\operatorname{Hom}_s(\\Lambda,-)=\\Fib_s$.\nConservativity and exactness hold because $\\Fib_s$ is an equivalence.",
+   "text": "The datum [def-sf-datum] supplies $Rf_!\\dashv Rf^!$ by (A1) and proper coincidence by (A4). The identity $a_s$ is proper and its ordinary direct image is the identity, hence $Ra_{s!}\\cong\\mathrm{id}$. Write $G=Ra_s^!$ and transport the adjunction to $\\mathrm{id}\\dashv G$. Its unit and counit are $\\eta:\\mathrm{id}\\to G$ and $\\varepsilon:G\\to\\mathrm{id}$. The first triangle gives $\\varepsilon_C\\eta_C=1_C$. The other gives $G(\\varepsilon_C)\\eta_{G C}=1_{G C}$; naturality of $\\eta$ identifies its left side with $\\eta_C\\varepsilon_C$. Thus $\\eta_C$ and $\\varepsilon_C$ are inverse, naturally in $C$, and $G\\Lambda_s\\cong\\Lambda_s$.",
    "uses": [
-    "def-sf-datum",
+    "def-sf-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+    "place": "paragraph, sentences 1--4"
+   }
+  },
+  {
+   "text": "Apply the point-only conclusion of [lem-pod-point-dualizing-complex], namely $D_sC\\cong C^\\vee$ for every object of the point category. To meet its Poincare-conventions hypothesis without imposing conditions on the given $X$, take the auxiliary $X_0=\\operatorname{Spec}k_0$ in [def-pod-conventions]. This is smooth, separated, finite type and geometrically connected of pure dimension zero; its base change is $s$, with identity structure map. The ambient admissibility required by those conventions is satisfied for this identity: compact support and its right adjoint are identities, the identity and all its base changes have zero higher direct images on every module sheaf, so full cohomological dimension and both interval shifts are zero, and all coefficient comparisons are identities. Choose the identity compactification. For clause (1), [def-weil-full-cohomological-dimension] has $c_{\\mathrm{cd}}=0$: every base change is again an identity and is exact on all module sheaves. Clauses (2) and (3) of [def-weil-exceptional-adjoint-admissibility] hold with $c_f^-=c_f^+=0$, since the identity preserves both constructibility and finite Tor amplitude. The identity adjunction has identity unit and counit; its coefficient comparisons are identities and its refinement comparisons restrict to the identity on the open source, so the adjunction data agree under them. At the point, [def-pod-conventions] explicitly uses the same four categories as [def-weil-finite-coefficient-point] and writes $A$ for the selected coefficient ring. Its $A$ is therefore our $\\Lambda$. The clauses of these conventions used here are the geometric setting, the four point categories and the displayed definition of $C^\\vee$; the updated Frobenius-transport and purity-orientation clauses introduce no further hypothesis on this point calculation. By [def-pod-perfect-point-complex], $C^\\vee=R\\operatorname{Hom}_A(C,A)$; this dual definition has no perfectness hypothesis. By [def-sf-datum], the datum's exceptional inverse image and internal Hom are those of its operation datum, namely the constructible exceptional inverse image and the derived internal Hom used in [lem-pod-point-dualizing-complex]; hence $\\omega_s=\\omega_{s,\\Lambda}$ and $R\\mathcal Hom_s(C,\\omega_s)=D_sC$. With $V=\\operatorname{Fib}_s C$, the cited point formula reads $\\operatorname{Fib}_s(R\\mathcal Hom_s(C,\\omega_s))\\cong R\\operatorname{Hom}_\\Lambda(V,\\Lambda)$, as required.",
+   "uses": [
+    "lem-pod-point-dualizing-complex",
+    "def-pod-perfect-point-complex",
     "def-weil-finite-coefficient-point",
+    "def-pod-conventions",
+    "def-weil-exceptional-adjoint-admissibility",
+    "def-weil-full-cohomological-dimension",
+    "def-sf-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+    "place": "paragraph, sentence 5"
+   }
+  },
+  {
+   "text": "The exact equivalence statement for evaluation is [lem-weil-point-fibre-equivalence]. An equivalence is conservative, and the cited statement also records preservation of shifts and distinguished triangles, hence exactness in the triangulated point categories.",
+   "uses": [
+    "lem-weil-point-fibre-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+    "place": "paragraph, final sentence"
+   }
+  },
+  {
+   "text": "For $K\\in D^b_{ctf}(X,\\Lambda)$, the definitions in [def-weil-ordinary-compact-cohomology] are exactly $R\\Gamma_c(X,K)=\\operatorname{Fib}_s(Ra_{X!}K)$ and $R\\Gamma(X,K)=\\operatorname{Fib}_s(Ra_{X*}K)$, giving the two displayed global-section identifications.",
+   "uses": [
     "def-weil-ordinary-compact-cohomology"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+    "place": "paragraph, sentence 6"
+   }
+  },
+  {
+   "text": "The exact equivalence of [lem-weil-point-fibre-equivalence] and the coefficient-unit identification in [lem-sf-point-fibre-derived-tensor] give $\\operatorname{Hom}_s(\\Lambda_s[-r],C)\\cong\\operatorname{Hom}_{D(\\Lambda)}(\\Lambda[-r],V)$ for $V=\\operatorname{Fib}_s C$ at a finite, integral or rational stage. Here the point targets are full subcategories of their module derived categories, as specified by [def-weil-finite-coefficient-point]. Compute the latter Hom group using [lem-coef-kprojective-derived-hom-bijection]. The complex $P=\\Lambda[-r]$ is K-projective directly: a chain map $P\\to N$ into an acyclic complex is a cycle $z\\in N^r$, and $z=d y$ yields a null-homotopy by sending $1$ to $y\\in N^{r-1}$. Consequently derived maps from $P$ are chain maps modulo homotopy. A chain map $P\\to V$ is exactly a cycle in degree $r$; two such maps are homotopic exactly when their cycles differ by a boundary. Their quotient is $H^r(V)$ by [def-weil-coefficient-cohomology-modules]. A chain map of targets sends $z$ to its image and $d y$ to the boundary of the image of $y$, so this bijection is natural in $V$. This also fixes the shift sign. At $\\Qlb$, use the Hom-colimit definition of [def-weil-point-fd-qlbar-category]: represent $C$ and the unit at a common finite extension, apply the field-stage calculation, and pass to that directed colimit. Its transition is scalar extension and has $H^r(TV)=H^r(V)\\otimes L$, as stated in that definition, so the Hom colimit is $\\varinjlim_{L\\supseteq E}H^r(V_E)\\otimes_E L=H^r(V_E)\\otimes_E\\Qlb$, exactly $H^r(V)$ by [def-weil-coefficient-cohomology-modules]. The stagewise naturality just checked commutes with these scalar-extension transitions, so it descends to the asserted natural identification.",
+   "uses": [
+    "lem-weil-point-fibre-equivalence",
+    "lem-sf-point-fibre-derived-tensor",
+    "def-weil-finite-coefficient-point",
+    "lem-coef-kprojective-derived-hom-bijection",
+    "def-weil-point-fd-qlbar-category",
+    "def-weil-coefficient-cohomology-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+    "place": "paragraph, final Hom/shift assertion; explicit chain-map/homotopy calculation using the cited K-projective Hom bijection"
+   }
   }
  ],
  "proof_deps": [
+  "def-pod-conventions",
+  "def-pod-perfect-point-complex",
   "def-sf-datum",
+  "def-weil-coefficient-cohomology-modules",
+  "def-weil-exceptional-adjoint-admissibility",
   "def-weil-finite-coefficient-point",
-  "def-weil-ordinary-compact-cohomology"
+  "def-weil-full-cohomological-dimension",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-point-fd-qlbar-category",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-pod-point-dualizing-complex",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-weil-point-fibre-equivalence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+  "place": "sole paragraph; expanded typed point identifications and explicit shifted-unit Hom calculation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Functor",
+   "results": "12 generic categorical equivalence hits, including Equivalence.functor, Equivalence.inverse, Functor.asEquivalence, unitIso and counitIso; none constructs the geometric point equivalence or its duality identification.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "evaluation at a geometric algebraically closed point identifies constructible derived sheaves with bounded finite coefficient complexes and preserves duality",
+   "results": "Eight algebraic-geometry section/localization hits, including exists_of_res_eq_of_qcqs_of_top and ModuleCat.Tilde.exists_const; none addresses the constructible point derived equivalence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived global sections of a constructible sheaf complex over an algebraically closed point is an equivalence with finite coefficient complexes",
+   "results": "Sheaf.Γ, Sheaf.ΓObjEquivHom, constantSheafΓAdj, Sheaf.ΓObjEquivSections and LocallyConstant.functorFullyFaithful; generic underived sections or condensed full faithfulness do not supply the constructible point derived equivalence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricPoint.*[Ee]quivalence|constructible.*[Ee]quivalence|coefficientDual|rightDerivedGlobalSections",
+   "results": "0 hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived global sections at separably closed geometric point equivalent to finite coefficient complexes",
+   "results": "Eight hits concerning affine transition limits and formally etale field algebras, including AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit and Algebra.FormallyEtale.iff_exists_algEquiv_prod; none states the constructible point derived equivalence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -62,5 +170,49 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-global-duality"
+ "unit": "sk-thm-sf-global-duality",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-point",
+  "worker": "stage1",
+  "summary": "Repaired the imported point lemma using existing nodes only. Made the four coefficient-stage targets explicit, typed the internal-dual comparison after Fib_s, made the separated finite-type setting explicit, and replaced the ill-typed assertion Hom(unit,-)=Fib_s by an actual shifted-unit chain-map/homotopy calculation using the existing K-projective Hom bijection. The tagged Lean duality theorem is sorry. All cited statements and common-stage hypotheses were checked; no new nodes. The Poincare point lemma is applied with auxiliary X_0=Spec k_0, with its identity admissibility checked directly; the identity adjunction calculation is explicit. Second reading supplies direct citations for full cohomological dimension and coefficient cohomology, and writes the scalar-extension colimit and naturality explicitly. Returned-delivery repair: re-read the current def-pod-conventions statement against the reviewed quotation, refreshed its stale citation, and explicitly scoped step 2 to its unchanged setting, point categories and coefficient-dual formula. The changed Frobenius-transport and coefficient-stage purity-orientation clauses are not used in that argument. All cited statements were re-read on the current DAG; retained the existing searches and mathematical split.",
+  "blueprint": "The five steps realize the sole paragraph of lem-sf-point.proof.md: identity adjunction and omega (step 1), point internal-Hom identification (step 2), equivalence and conservativity (step 3), the two RGamma definitions (step 4), and the shift/Hom formula (step 5).",
+  "tool_uses": [
+   {
+    "node": "lem-pod-point-dualizing-complex",
+    "why": "Generic point dualizing calculation from the Poincare-duality package; the global-duality unit has no separate point-duality proof node."
+   },
+   {
+    "node": "def-pod-perfect-point-complex",
+    "why": "The coefficient-dual notation R Hom_Λ(C,Λ) is defined in the point-complex conventions used by the cited dualizing lemma."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Generic theorem proving the four point fibre functors are exact equivalences; the global-duality unit only consumes this result."
+   },
+   {
+    "node": "lem-sf-point-fibre-derived-tensor",
+    "why": "Only its coefficient-unit identification is needed to compute maps from the shifted point unit; it does not depend on this item."
+   },
+   {
+    "node": "lem-coef-kprojective-derived-hom-bijection",
+    "why": "Generic localization Hom computation for a K-projective source; supplies the derived-category step in the cohomology formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-point-dualizing-complex",
+  "def-pod-perfect-point-complex",
+  "lem-weil-point-fibre-equivalence",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-coef-kprojective-derived-hom-bijection"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-1c5ae2f58",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-1c5ae2f58 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item, its 5 steps, every cited node statement (including blueprint_update), the blueprint lem-sf-point statement and proof in main-20261015 (order 2524), the unit, and both users (thm-sf-global-duality, lem-sf-detection). There are no new nodes. The statement repairs are correct and do not weaken the target: the source's uniform D^b_fin(A_{E,n}) target is false at O_E, E and Qlb, so the four stage targets of lem-weil-point-fibre-equivalence are used; Fib_s types the internal-dual comparison; X is now introduced as separated finite type. Checks: C=0, C=Lambda_s, A_{E,n} with n=2 and C=A/varpi (A is self-injective, so the dual is bounded), X empty, and shifts r=0,±1. Step 1: the A1/A4 triangle and naturality argument is correct. Step 2: instantiating def-pod-conventions with X_0=Spec k_0 is valid. The identity morphism meets def-weil-exceptional-adjoint-admissibility clauses 1-3 with FullCD 0 and bounds c^±=0, and the point conclusion holds for every C. Step 3: equivalence plus shifts and triangles gives exactness and conservativity. Step 4: direct instance of def-weil-ordinary-compact-cohomology; its Ra_! and Ra_* are the datum's operations. Step 5: K-projectivity of Lambda[-r] checked by hand; H^r = Z^r/B^r; the Qlb Hom colimit gives H^r(V) tensored to Qlb. No cycle: the 14 cited nodes' dependency closure does not reach the item. No SGA. I accept the tool_uses lem-pod-point-dualizing-complex and lem-sf-point-fibre-derived-tensor; the blueprint's attribution of the dual identity to def-weil-finite-coefficient-point is wrong, so a tool is needed. Two FIX repairs in fixes/dag/nodes/sec-six-functors/lem-sf-point.json: (1) clause 2 now cites the coefficient dual RHom_Lambda(-,Lambda) as [def-pod-perfect-point-complex], added to stmt_deps (error B3). (2) Step 2 now cites def-sf-datum for identifying the datum's Ra_s^! and RHom with the constructible exceptional inverse image and derived internal Hom of lem-pod-point-dualizing-complex, so omega_s = omega_{s,Lambda} (error C3/C4). No mathematical change, no node dropped.; 1 file(s) fixed by the reviewer"
+ }
 }
