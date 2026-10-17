@@ -302,5 +302,37 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-fa3ecb93f (reviewer sub-agent of L); spot-checked: Read the required project documents, item, unit/chapter route, all cited node statements, ILO VIII §§4.1.8 and 4.2.9, and cited Stacks locations. Verified all eight steps, hypotheses, saturation and flat étale base change, m=1/2/3 and empty-center cases, route/tool-use compliance, and absence of forbidden SGA or dropped machinery. No repair or node drop is needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoordinateBlowupBranchDrop",
+  "declaration": "AlgebraicGeometry.CoordinateBlowupBranchDrop.coordinate_blowup_branch_drop",
+  "declarations": [
+   "AlgebraicGeometry.CoordinateBlowupBranchDrop.centerSheaf",
+   "AlgebraicGeometry.CoordinateBlowupBranchDrop.chartRing",
+   "AlgebraicGeometry.CoordinateBlowupBranchDrop.ratio",
+   "AlgebraicGeometry.CoordinateBlowupBranchDrop.strictEquation",
+   "AlgebraicGeometry.CoordinateBlowupBranchDrop.projection",
+   "AlgebraicGeometry.CoordinateBlowupBranchDrop.divisor",
+   "AlgebraicGeometry.CoordinateBlowupBranchDrop.HasCoordinateParameters",
+   "AlgebraicGeometry.CoordinateBlowupBranchDrop.coordinateGerm",
+   "AlgebraicGeometry.CoordinateBlowupBranchDrop.equationGerm",
+   "AlgebraicGeometry.CoordinateBlowupBranchDrop.LocalChartProperties",
+   "AlgebraicGeometry.CoordinateBlowupBranchDrop.BaseChangedChartProperties",
+   "AlgebraicGeometry.CoordinateBlowupBranchDrop.coordinate_blowup_branch_drop"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoordinateBlowupBranchDrop.lean",
+  "statement": "theorem coordinate_blowup_branch_drop {R : Type u} [CommRing R] [IsRegularRing R] (m : ℕ) (t : Fin m → R) (hm : 1 ≤ m) (ht : HasCoordinateParameters t) : (∀ i : Fin m, AffineBlowup.chartRing (PermissibleCoordinateChart.center t Finset.univ) (t i) = Algebra.adjoin R (Set.range (fun j : {j : Fin m // j ≠ i} ↦ AffineBlowup.chartFraction (t i) 1 (t j))) ∧ (∀ j : Fin m, algebraMap R (chartRing t i) (t j) = algebraMap R (chartRing t i) (t i) * ratio t i j) ∧ (strictTransformMap (divisor (∏ j : Fin m, t j)).subschemeι (projection t i) (centerSheaf t).support.compl).ker = divisor (strictEquation t i) ∧ IsRegularRing (chartRing t i) ∧ LocalChartProperties t i (𝟙 (Spec (.of (chartRing t i))))) ∧ (∀ (S : Scheme.{u}) (q : S ⟶ Spec (.of R)), Etale q → BaseChangedChartProperties t q)",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7aebaeb7c",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, module, report, edge cases, route pivot, and compiler evidence; scompile passed sandbox and library forms."
  }
 }
