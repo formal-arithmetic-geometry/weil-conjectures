@@ -52,6 +52,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 set_option hygiene false in
 local notation "j̄" => Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀)))
 
+
 /-- Category algebra for the compatibility of the counit: a morphism `i ≫ θ` built from a
 morphism `i` compatible with structure maps and a morphism `θ` compatible with structure maps. -/
 lemma comp_map_comp_eq_of_compatible {𝒞 : Type*} [Category 𝒞] (T : 𝒞 ⥤ 𝒞) {W Z Z' M N F' : 𝒞}
@@ -61,47 +62,68 @@ lemma comp_map_comp_eq_of_compatible {𝒞 : Type*} [Category 𝒞] (T : 𝒞 �
     u ≫ T.map (i ≫ θ) ≫ ψF = v ≫ w ≫ ψ' ≫ i ≫ θ := by
   rw [T.map_comp, Category.assoc, hn, reassoc_of% hc]
 
-/-- The counit `j̄^* j̄_* F ⟶ F` of the underlying sheaves, as a morphism out of the underlying
-sheaf of the Weil sheaf `j^* j_* F`. -/
-noncomputable abbrev directImageCounit :
-    ((upperStar j).obj ((directImage j).obj F)).obj.carrier.X ⟶ F.obj.carrier.X :=
-  ((upperStarLowerStarAdjunction j).counit.app F).hom.hom.f.hom
+section UpperStarHom
 
-/-- The counit `j̄^* j̄_* F ⟶ F`, out of `j̄^*` of the underlying sheaf of `j_* F`. -/
-noncomputable abbrev directImageCounit' :
-    (j̄)^*[WeilCoefficients.{u} l].obj ((directImage j).obj F).obj.carrier.X ⟶ F.obj.carrier.X :=
-  (𝟙 _ : (j̄)^*[_].obj ((directImage j).obj F).obj.carrier.X ⟶
-    ((upperStar j).obj ((directImage j).obj F)).obj.carrier.X) ≫ directImageCounit j F
+variable {F} (L : WeilSheaf k₀ l U ⥤ WeilSheaf k₀ l X)
 
-set_option maxHeartbeats 4000000 in
--- unifying the Weil structures of `j^* j_* F` and of the source of the counit is slow
-/-- The counit `j^* j_* F ⟶ F` commutes with the Weil structures. -/
-lemma directImageCounit_naturality :
-    ((U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l].map
-        (directImageCounit j F) ≫ F.frobeniusStr =
-      ((upperStar j).obj ((directImage j).obj F)).frobeniusStr ≫ directImageCounit j F :=
-  frobeniusStr_naturality ((upperStarLowerStarAdjunction j).counit.app F)
+/-- The underlying morphism `j̄^* L(F) ⟶ F` of sheaves of a morphism of Weil sheaves
+`θ : j^* L(F) ⟶ F`, for a functor `L` (stated for the composite `L ⋙ j^*`, as for the counit of
+`j^* ⊣ j_*`). -/
+noncomputable def upperStarHom (θ : (L ⋙ upperStar j).obj F ⟶ (𝟭 _).obj F) :
+    (j̄)^*[WeilCoefficients.{u} l].obj (L.obj F).obj.carrier.X ⟶ F.obj.carrier.X :=
+  (𝟙 _ : (j̄)^*[_].obj (L.obj F).obj.carrier.X ⟶ ((L ⋙ upperStar j).obj F).obj.carrier.X) ≫
+    θ.hom.hom.f.hom
 
-set_option maxHeartbeats 4000000 in
--- unifying the underlying sheaves of `j^* j_* F` and `j̄^* j̄_* F` is slow
-/-- The counit `j̄^* j̄_* F ⟶ F` is compatible with the Weil structures. -/
-lemma directImageCounit_frobeniusStr_compatible :
+/-- The underlying morphism `j̄^* L(F) ⟶ F` of a morphism of Weil sheaves `j^* L(F) ⟶ F` is
+compatible with the Weil structures. -/
+lemma upperStarHom_frobeniusStr_compatible (θ : (L ⋙ upperStar j).obj F ⟶ (𝟭 _).obj F) :
     (ProEtale.upperStarComp _ (U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
-      (j̄)).hom.app ((directImage j).obj F).obj.carrier.X ≫
+      (j̄)).hom.app (L.obj F).obj.carrier.X ≫
         ((U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map
-          (directImageCounit' j F) ≫ F.frobeniusStr =
+          (upperStarHom j L θ) ≫ F.frobeniusStr =
       (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
-          j (comp_over j (Spec (CommRingCat.of k₀)))).symm).hom.app
-          ((directImage j).obj F).obj.carrier.X ≫
+          j (comp_over j (Spec (CommRingCat.of k₀)))).symm).hom.app (L.obj F).obj.carrier.X ≫
         (ProEtale.upperStarComp _ (j̄)
           (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app
-          ((directImage j).obj F).obj.carrier.X ≫
-        (j̄)^*[_].map ((directImage j).obj F).frobeniusStr ≫ directImageCounit' j F :=
+          (L.obj F).obj.carrier.X ≫
+        (j̄)^*[_].map (L.obj F).frobeniusStr ≫ upperStarHom j L θ :=
   comp_map_comp_eq_of_compatible
     (((U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l])
-    _ _ _ _ _ (directImageCounit j F) ((upperStar j).obj ((directImage j).obj F)).frobeniusStr
-    F.frobeniusStr
-    (upperStar_frobeniusStr_compatible j ((directImage j).obj F))
-    (directImageCounit_naturality j F)
+    _ _ _ _ _ θ.hom.hom.f.hom ((upperStar j).obj (L.obj F)).frobeniusStr F.frobeniusStr
+    (upperStar_frobeniusStr_compatible (φ := j) (L.obj F)) (frobeniusStr_naturality θ)
+
+end UpperStarHom
+
+/-- The underlying morphism of the counit `j^* j_* F ⟶ F` of Weil sheaves is the counit of
+`j̄^* ⊣ j̄_*` on the underlying sheaves. -/
+lemma upperStarHom_counit :
+    upperStarHom j (lowerStar j) ((upperStarLowerStarAdjunction j).counit.app F) =
+      (ProEtale.upperStarLowerStarAdjunction (WeilCoefficients.{u} l) (j̄)).counit.app
+        F.obj.carrier.X := by
+  rw [upperStarHom, upperStarLowerStarAdjunction_counit_app_hom_hom_f,
+    ProEtale.adicUpperStarLowerStarAdjunction, Adjunction.modAdjunction_counit_app_hom]
+  exact Category.id_comp _
+
+/-- **The counit `j̄^* j̄_* F ⟶ F` is compatible with the Weil structures** of `F` and of
+`j_* F`. -/
+lemma counit_frobeniusStr_compatible :
+    (ProEtale.upperStarComp _ (U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+      (j̄)).hom.app ((lowerStar j).obj F).obj.carrier.X ≫
+        ((U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map
+          ((ProEtale.upperStarLowerStarAdjunction (WeilCoefficients.{u} l) (j̄)).counit.app
+            F.obj.carrier.X) ≫ F.frobeniusStr =
+      (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
+          j (comp_over j (Spec (CommRingCat.of k₀)))).symm).hom.app
+          ((lowerStar j).obj F).obj.carrier.X ≫
+        (ProEtale.upperStarComp _ (j̄)
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app
+          ((lowerStar j).obj F).obj.carrier.X ≫
+        (j̄)^*[_].map ((lowerStar j).obj F).frobeniusStr ≫
+          (ProEtale.upperStarLowerStarAdjunction (WeilCoefficients.{u} l) (j̄)).counit.app
+            F.obj.carrier.X := by
+  have h := upperStarHom_frobeniusStr_compatible j (lowerStar j)
+    ((upperStarLowerStarAdjunction j).counit.app F)
+  rw [upperStarHom_counit] at h
+  exact h
 
 end AlgebraicGeometry.WeilSheaf
