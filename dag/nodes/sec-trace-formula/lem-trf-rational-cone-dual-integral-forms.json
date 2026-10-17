@@ -122,5 +122,24 @@
   "group": "Q67",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-524a3064e (reviewer sub-agent of L); spot-checked: I read the item and the new node lem-trf-rational-cone-dual-finite in full. Source: ILO Exposé VIII Remark 3.1.29, printed p.103. It only points to Kato 1994 §9.6 and Nizioł 2006, and the delivery says so honestly: proof marked as written by an agent, Kato WANTED. Step 1 takes exactly the new node's statement, the finite rational H-description, and handles V=0 with the empty family. Step 2 clears denominators in the dual basis of the Z-basis; positive scalars leave the inequalities and the span unchanged; elementary. Step 3: a common kernel of zero follows from pointedness (x and -x both lie in C), and in finite dimension that gives span = V*; for V≠0 this forces r≥1; elementary and correct. The new node is the rational Minkowski–Weyl theorem, which is true. I tested it on: m=0 (C={0}, forms ±coordinates), C=V (s=0), the cone in Q^2 spanned by (1,0),(1,2) (forms y and 2x-y), and a non-pointed half-plane (form y). It is not a clause of the item: it has no lattice, integrality or spanning. It is not a duplicate: the rg search of the DAG found only the Gordan node and the sharp-cone-lattice node, which state different things. Mathlib (Geometry/Convex/Cone/DualFinite.lean) has only the DualFG definition and API, with Minkowski–Weyl mentioned in a docstring but not proved, so it stays unsplit. The citer lem-trf-sharp-fs-orthant-embedding uses exactly the item's conclusions. No route departure, no tool_uses, no SGA. This is not a target node, so there is no base-change morphism to check. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-027608031",
+  "group": "Q71",
+  "result": "fix",
+  "note": "Checked every clause of the node: L free of finite rank, V = ℚ⊗[ℤ]L (canonical orientation), C as nonnegative rational combinations, pointedness (-C is pointwise negation, checked with pp.explicit), reproducing hypothesis, integral φ with rational extensions Φ, span = ⊤, C = {Φ ≥ 0}, V = 0 ⇒ r = 0. Edge cases m = 0, L = 0 and rank 1 are fine; the citer is unaffected; the delivered statement field is verbatim. Fixed in fixes/RationalConeDualIntegralForms.lean: (H3) the node's 'when V ≠ 0 every such family has r ≥ 1' was stated only for the family asserted to exist, and is now universal over families that are integral, extend, span and cut out C; (H8) source place in the theorem docstring, the three proof steps in the docstring, blueprint tag in the module docstring; (H9) removed the redundant [Module ℤ L] instance diamond and the unused universe v. Delivered and fixed files both compile with no error through nt_compile.py (the wrapper prints no warnings, so warning-cleanliness rests on reading the code); only sorryAx beyond the standard axioms."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.RationalConeDualIntegralForms",
+  "declaration": "rationalConeDualIntegralForms",
+  "file": "lean/Sheaf/TraceFormula/RationalConeDualIntegralForms.lean",
+  "statement": "theorem rationalConeDualIntegralForms (L : Type u) [AddCommGroup L] [Module.Free ℤ L] [Module.Finite ℤ L] (m : ℕ) (v : Fin m → L) : let V := ℚ ⊗[ℤ] L let C : Set V := {x | ∃ q : Fin m → ℚ≥0, x = ∑ j, (q j : ℚ) • TensorProduct.tmul ℤ (1 : ℚ) (v j)} (C ∩ (-C) = ({0} : Set V)) → (∀ x : V, ∃ c₁ ∈ C, ∃ c₂ ∈ C, x = c₁ - c₂) → (∃ (r : ℕ) (φ : Fin r → L →+ ℤ) (Φ : Fin r → V →ₗ[ℚ] ℚ), (∀ (i : Fin r) (ℓ : L), Φ i (TensorProduct.tmul ℤ (1 : ℚ) ℓ) = (φ i ℓ : ℚ)) ∧ Submodule.span ℚ (Set.range Φ) = ⊤ ∧ C = {x | ∀ i, 0 ≤ Φ i x} ∧ ((∀ x : V, x = 0) → r = 0)) ∧ ((∃ x : V, x ≠ 0) → ∀ (r : ℕ) (φ : Fin r → L →+ ℤ) (Φ : Fin r → V →ₗ[ℚ] ℚ), (∀ (i : Fin r) (ℓ : L), Φ i (TensorProduct.tmul ℤ (1 : ℚ) ℓ) = (φ i ℓ : ℚ)) → Submodule.span ℚ (Set.range Φ) = ⊤ → C = {x | ∀ i, 0 ≤ Φ i x} → 0 < r)",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-027608031"
  }
 }
