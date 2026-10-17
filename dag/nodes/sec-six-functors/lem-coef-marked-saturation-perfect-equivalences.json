@@ -29,7 +29,8 @@
  "stmt_deps": [
   "def-weil-size-convention",
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-marked-anodyne-lifting-calculus"
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-finite-marked-fibrancy-criterion"
  ],
  "proof": [
   {
@@ -200,5 +201,26 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MarkedSaturationPerfectEquivalences",
+  "declaration": "SSet.Marked.marked_saturation_perfect_equivalences",
+  "declarations": [
+   "SSet.Marked.marked_saturation_perfect_equivalences"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/MarkedSaturationPerfectEquivalences.lean",
+  "statement": "theorem marked_saturation_perfect_equivalences : ∃ (T : Marked.{u} ⥤ Marked.{u}) (η : 𝟭 Marked.{u} ⟶ T), (∀ X : Marked.{u}, transfiniteCompositions.{u} finiteMarkedGenerators.pushouts (η.app X) ∧ ∃ (Q : SSet.{u}), Quasicategory Q ∧ T.obj X = natural Q) ∧ PreservesFilteredColimits T ∧ (∀ X : Marked.{u}, weak (η.app X)) ∧ (∀ {X Y : Marked.{u}} (f : X ⟶ Y), weak f ↔ ∃ (QX QY : SSet.{u}), Quasicategory QX ∧ Quasicategory QY ∧ T.obj X = natural QX ∧ T.obj Y = natural QY ∧ Enhanced.IsFunctorEquivalence (T.map f).val) ∧ (isomorphisms Marked.{u} ≤ weak) ∧ (∀ {X Y Z : Marked.{u}} (f : X ⟶ Y) (g : Y ⟶ Z), weak f → weak g → weak (f ≫ g)) ∧ (∀ {X Y Z : Marked.{u}} (f : X ⟶ Y) (g : Y ⟶ Z), weak f → weak (f ≫ g) → weak g) ∧ (∀ {X Y Z : Marked.{u}} (f : X ⟶ Y) (g : Y ⟶ Z), weak g → weak (f ≫ g) → weak f) ∧ IsStableUnderFilteredColimits.{u, u} weak ∧ (∃ (G : MorphismProperty Marked.{u}), G.IsSmall.{u} ∧ G ≤ weak ∧ ∀ {X Y : Marked.{u}} (f : X ⟶ Y), weak f → ∃ (J : Type u) (_ : SmallCategory J) (_ : IsFiltered J) (F : J ⥤ Arrow Marked.{u}) (c : Cocone F), (∀ j : J, G (F.obj j).hom) ∧ Nonempty (IsColimit c) ∧ Nonempty (c.pt ≅ Arrow.mk f)) ∧ (∀ X : Marked.{u}, ∀ C : SSet.{max u v}, Quasicategory C → Enhanced.IsWeakHomotopyEquivalence (mapSharpPre (enlargeMap.{u, v} (η.app X)) (natural C)))",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-887fe82aa",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Every node clause matches the Lean theorem: W is the existing SSet.Marked.weak; T, η, T(X)=natural Q, preservation of filtered colimits, every unit in W, detection weak f ↔ IsFunctorEquivalence (T.map f).val for arbitrary f, the four perfectness clauses (isomorphisms, three 2-of-3 implications, IsStableUnderFilteredColimits.{u,u}, small G ≤ weak with a one-step filtered presentation that matches proof step 6 and the downstream model-recognition hWgen), transfinite pushout attachment of finiteMarkedGenerators ((i),(ii),(iii),A♭→A, nothing else), and the larger-universe test via enlargeMap.{u,v}. No extra hypotheses or universe equalities. Node diff: only the lean record plus the landed stmt_dep lem-coef-finite-marked-fibrancy-criterion (allowed; graph search finds no cycle). lean.statement verbatim. No definitions, only sorry, docstrings carry source, blueprint id and all seven proof steps. Edge cases checked: empty X, empty C, n=0/1 horns, identity unit, v=0, universes. nt_compile.py --json on the snapshot: exit 0, no errors or warnings. Cosmetic only: report.md garbles HTT 3.1.3.7/3.1.3.5 as 'the project server'."
  }
 }
