@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.RationalStage
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Generation
 
 /-!
 # Properties of the field coefficient stages
@@ -41,6 +42,48 @@ stages proved elsewhere in the blueprint:
 universe w u
 
 open CategoryTheory Limits
+
+namespace DerivedCategory
+
+open Pretriangulated
+
+variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
+
+/-- A triangulated property of objects of `D(C)`, closed under isomorphisms, which holds for
+every object of `C` placed in degree `0` holds for every bounded object: by induction on the
+length of the range of `K`, along the truncation triangle `τ_{< b} K ⟶ K ⟶ τ_{≥ b} K ⟶` whose
+third term is `Hᵇ K` placed in degree `b`. -/
+lemma prop_of_isGE_of_isLE_of_forall_singleFunctor (P : ObjectProperty (DerivedCategory C))
+    [P.IsTriangulated] [P.IsClosedUnderIsomorphisms]
+    (h : ∀ G : C, P ((singleFunctor C 0).obj G)) (K : DerivedCategory C) (a b : ℤ)
+    [K.IsGE a] [K.IsLE b] : P K := by
+  suffices H : ∀ (m : ℕ) (a : ℤ) (K : DerivedCategory C), K.IsGE a → K.IsLE (a + m - 1) → P K
+    from H (b - a + 1).toNat a K inferInstance (TStructure.t.isLE_of_le K b _ (by lia))
+  intro m
+  induction m with
+  | zero =>
+    intro a K _ _
+    have : K.IsLE (a - 1) := by simpa using ‹K.IsLE (a + ↑(0 : ℕ) - 1)›
+    exact P.prop_of_isZero (TStructure.t.isZero K (a - 1) a (by lia))
+  | succ m ih =>
+    intro a K _ _
+    set b : ℤ := a + m
+    let T := (TStructure.t.triangleLTGE b).obj K
+    have hT : T ∈ distTriang _ := TStructure.t.triangleLTGE_distinguished b K
+    have : T.obj₃.IsLE b := by
+      have : K.IsLE b := TStructure.t.isLE_of_le K (a + ↑(m + 1) - 1) _ (by lia)
+      exact inferInstanceAs (TStructure.t.IsLE ((TStructure.t.truncGE b).obj K) b)
+    have : T.obj₃.IsGE b := inferInstanceAs (TStructure.t.IsGE ((TStructure.t.truncGE b).obj K) b)
+    obtain ⟨G, ⟨eG⟩⟩ := exists_iso_singleFunctor_obj_of_isGE_of_isLE T.obj₃ b
+    have h₃ : P T.obj₃ :=
+      P.prop_of_iso ((((singleFunctors C).shiftIso (-b) b 0 (by lia)).app G) ≪≫ eG.symm)
+        (P.le_shift (-b) _ (h G))
+    have h₁ : P T.obj₁ := ih a T.obj₁
+      (inferInstanceAs (TStructure.t.IsGE ((TStructure.t.truncLT b).obj K) a))
+      (TStructure.t.isLE_truncLT_obj _ _ _ (by lia))
+    exact P.ext_of_isTriangulatedClosed₂ _ hT h₁ h₃
+
+end DerivedCategory
 
 namespace AlgebraicGeometry
 
@@ -112,12 +155,24 @@ variable (F : Type (u + 1)) [Field F] (X : Scheme.{u})
 
 For a coefficient field `F`, every bounded constructible complex `K` of étale sheaves of
 `F`-modules has finite Tor amplitude: there are `a ≤ b` with `𝓗ʳ(K ⊗ᴸ_F M) = 0` for `r ∉ [a, b]`
-and every sheaf `M` of `F`-modules. -/
+and every sheaf `M` of `F`-modules.
+
+The blueprint node is stated for the rationalized category `Dᵇc(Y, E)` and for the common-stage
+category `Dᵇc(Y, ℚ̄_ℓ)`. In this repository these have no derived tensor product with sheaves, so
+the statement is formalised for étale sheaves of modules over a discrete field `F`.
+
+Every sheaf of `F`-modules is flat (its stalks are `F`-vector spaces), so each sheaf placed in
+degree `0` has Tor amplitude in `[0, 0]`; finite Tor amplitude is a triangulated property, so it
+holds for every bounded complex, by induction along truncation triangles. -/
 theorem Etale.DerivedCategory.finiteTorAmplitude_of_boundedConstructible_of_field
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} F))}
     (hK : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} F) X K) :
-    Etale.DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} F) X K :=
-  sorry
+    Etale.DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} F) X K := by
+  obtain ⟨⟨⟨a, _⟩, ⟨b, _⟩⟩, -⟩ := hK
+  refine _root_.DerivedCategory.prop_of_isGE_of_isLE_of_forall_singleFunctor _ (fun G ↦ ?_) K a b
+  refine ⟨0, 0, Etale.torAmplitudeIn_singleFunctor_zero_of_flat _ G ?_⟩
+  exact (Etale.flat_iff_forall_flat_sheafFiber_obj G).2 fun _ ↦
+    (ModuleCat.flat_iff_flat _).2 inferInstance
 
 /-- Blueprint `rem-ptr-weil-finite-tor-amplitude-4`: Pointer to the properties of finite Tor
 amplitude.
