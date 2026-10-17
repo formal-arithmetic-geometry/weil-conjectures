@@ -1,66 +1,266 @@
 {
-  "id": "def-sc-general-linear-group",
-  "blueprint": {
-    "is": "def-sc-general-linear-group",
-    "from": null,
-    "same_as": null
+ "id": "def-sc-general-linear-group",
+ "blueprint": {
+  "is": "def-sc-general-linear-group",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The general and special linear group schemes",
+ "statement": "Let $k$ be a field [def-weil-field] and $c\\geq1$. Put $P=k[x_{ij}:1\\leq i,j\\leq c]$, the multivariate polynomial algebra [def-weil-pbc-mv-polynomial-ring], and $X=(x_{ij})$, a matrix [def-weil-matrix]. With determinant as in [def-weil-pbc-matrix-determinant], put\n$$D=\\det X=\\sum_{\\sigma\\in\\mathfrak S_c}\\operatorname{sgn}(\\sigma)\\prod_{i=1}^c x_{i\\sigma(i)},\\qquad A=P[1/D]$$\nusing localization [def-weil-ring-localization-away]. The *general linear group scheme* is $\\mathrm{GL}_{c,k}=\\operatorname{Spec}A$ [def-weil-affine-spectrum], a group scheme in [def-sc-group-scheme], with coordinate $k$-algebra maps\n$$m^*(x_{ij})=\\sum_{r=1}^c x_{ir}\\otimes x_{rj},\\qquad\\varepsilon(x_{ij})=\\delta_{ij},\\qquad i^*(x_{ij})=(-1)^{i+j}M_{ji}/D.$$\nHere tensor products are commutative $k$-algebra tensor products [lem-weil-pbc-algebra-tensor-pushout-universal-property]; $M_{ji}$ is the determinant of the submatrix obtained by deleting row $j$ and column $i$ of $X$. For $c=1$ that minor is the empty determinant $1$. The values on $D^{-1}$ are forced by those on $x_{ij}$. For every commutative $k$-algebra $R$ [def-weil-pbc-algebra-hom-quotient], its $R$-points (morphisms $\\operatorname{Spec}R\\to\\mathrm{GL}_{c,k}$ over $\\operatorname{Spec}k$) identify naturally with the group of invertible $c\\times c$ matrices over $R$, with multiplication $(UV)_{ij}=\\sum_rU_{ir}V_{rj}$, identity $(\\delta_{ij})$, and matrix inverse.\n\nThe *special linear group scheme* is\n$$\\mathrm{SL}_{c,k}=\\operatorname{Spec}\\bigl(P/(D-1)\\bigr)\\subseteq\\mathrm{GL}_{c,k},$$\nwhere the quotient algebra is as in [def-weil-pbc-algebra-hom-quotient]. The inclusion is induced by $A\\to P/(D-1)$ sending $x_{ij}$ to its residue class and $D^{-1}$ to $1$; it is a closed immersion [def-weil-closed-immersion] and a closed subgroup scheme [def-sc-group-scheme-subgroup]. Its $R$-points are the matrices with determinant $1$. Finally the determinant is a homomorphism $\\det:\\mathrm{GL}_{c,k}\\to\\mathbf G_m$ [def-sc-gm-ga], dual to the $k$-algebra map $k[t,t^{-1}]\\to A$ with $t\\mapsto D$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/def-sc-general-linear-group.md",
+  "place": "node def-sc-general-linear-group, order 1966"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-matrix",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-ring-localization-away",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-cauchy-binet] with $m=n=c$. The only subset of $\\{1,\\ldots,c\\}$ of size $c$ is the whole set, whose submatrices are the original matrices. Thus $\\det(UV)=\\det(U)\\det(V)$ over every commutative ring. From [def-weil-pbc-matrix-determinant], $\\det I=1$: only the identity permutation contributes. Applying a ring homomorphism to the finite Leibniz sum proves $f(\\det U)=\\det(f(U))$. The row-indexed Leibniz formula used here agrees with that node's column-indexed formula by replacing $\\sigma$ with $\\sigma^{-1}$, whose sign is the same and whose factors are a reindexing of the product.",
+   "uses": [
+    "lem-weil-pbc-cauchy-binet",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0F0K (item-cauchy-binet), square specialization; Leibniz calculations supplied"
+   }
   },
-  "kind": "definition",
-  "title": "The general and special linear group schemes",
-  "statement": "Let $k$ be a field and $c\\geq1$. The *general linear group\nscheme* is the affine scheme\n\n$$\n\\mathrm{GL}_{c,k}:=\\Spec k[x_{ij}:1\\leq i,j\\leq c]\\bigl[1/\\det\\bigr],\n\\qquad\n\\det:=\\sum_{\\sigma\\in\\mathfrak S_c}\\operatorname{sgn}(\\sigma)\n\\prod_{i=1}^{c}x_{i\\sigma(i)},\n$$\n\nwith comultiplication $m^*(x_{ij})=\\sum_{r=1}^{c}x_{ir}\\otimes x_{rj}$,\ncounit $\\varepsilon(x_{ij})=\\delta_{ij}$ and antipode\n$i^*(x_{ij})=(-1)^{i+j}M_{ji}/\\det$, where $M_{ji}$ is the\ndeterminant of the matrix obtained from $(x_{kl})$ by deleting row\n$j$ and column $i$; the group-scheme axioms of\n[def-sc-group-scheme] hold because matrix multiplication is\nassociative, $1$ is a unit and $A\\cdot A^{\\mathrm{adj}}=\\det(A)\\cdot1$\nwith $A^{\\mathrm{adj}}=(M_{kl})$. Its $R$-points are\n$\\mathrm{GL}_c(R)$, the group of invertible $c\\times c$ matrices over\n$R$. The *special linear group scheme* is the closed\nsubgroup scheme\n\n$$\n\\mathrm{SL}_{c,k}:=\\Spec k[x_{ij}]/(\\det-1)\\subseteq\\mathrm{GL}_{c,k}.\n$$\n\nThe determinant defines a homomorphism\n$\\det:\\mathrm{GL}_{c,k}\\to\\mathbf G_m$ with\n[def-sc-gm-ga], dual to $t\\mapsto\\det$; it is multiplicative\nbecause $\\det(AB)=\\det(A)\\det(B)$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/def-sc-general-linear-group.md",
-    "place": "node def-sc-general-linear-group, order 1966"
+  {
+   "text": "For any $c\\times c$ matrix $U$ over a commutative ring with $d=\\det U$ a unit, [lem-weil-pbc-matrix-adjugate-identity] gives both $U(d^{-1}\\operatorname{adj}U)=I$ and $(d^{-1}\\operatorname{adj}U)U=I$. Conversely an inverse $V$ gives $\\det U\\det V=\\det V\\det U=1$ by Step 1. This proves the equivalence of invertibility and unit determinant, and the inverse-entry formula. A two-sided inverse is unique: if $UV=VU=I$ and $UW=WU=I$, then $V=V(UW)=(VU)W=W$. The matrix associativity used here is a finite-sum identity: both $((UV)W)_{ij}$ and $(U(VW))_{ij}$ are $\\sum_{r,s}U_{ir}V_{rs}W_{sj}$. Identity multiplication follows by summing the Kronecker deltas.",
+   "uses": [
+    "lem-weil-pbc-matrix-adjugate-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DQ (lemma-matrix-left-inverse), proof: the two adjugate identities; elementary consequences written out"
+   }
   },
-  "stmt_deps": [
+  {
+   "text": "By [def-weil-pbc-mv-polynomial-ring], a $k$-algebra map $P\\to R$ is uniquely a choice of entries $u_{ij}\\in R$. Its value at $D$ is $\\det U$ by Step 1. Apply [lem-weil-pbc-ring-localization-universal-property] to $\\{1,D,D^2,\\ldots\\}$. It extends uniquely to $A\\to R$ exactly when $\\det U$ is a unit; the extension takes $f/D^n$ to $f(U)(\\det U)^{-n}$. It is a $k$-algebra map since it agrees with the original map on constants. Step 2 identifies these tuples with invertible matrices. By [def-weil-affine-spectrum] these maps are exactly the $R$-points over $\\operatorname{Spec}k$. This bijection commutes with every $k$-algebra map $R\\to R'$ since applying that map to the entries gives the same evaluation on every polynomial and every inverse denominator. In particular, maps from $A$ are determined by the coordinate entries.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 022W (example-general-linear-group), representability; localization justified by algebra.tex, Tag 00CP (proposition-universal-property-localization)"
+   }
+  },
+  {
+   "text": "Set $A=P[1/D]$ using [def-weil-ring-localization-away]. In the commutative algebra $A\\otimes_k A$ of [lem-weil-pbc-algebra-tensor-pushout-universal-property], let $X_L=(x_{ij}\\otimes1)$ and $X_R=(1\\otimes x_{ij})$. Their determinants are $D\\otimes1$ and $1\\otimes D$, both units, by Step 1. Hence $X_LX_R$ is invertible, and Step 3 constructs the algebra map $m^*:A\\to A\\otimes_k A$ with the claimed coordinate values. Evaluating at $I$ gives $\\varepsilon:A\\to k$. In $A$, Step 2 gives $Y=D^{-1}\\operatorname{adj}X$ with $XY=YX=I$, so $\\det Y=D^{-1}$ by Step 1. Evaluation at $Y$ gives $i^*:A\\to A$, whose entries are exactly the signed transposed minors in the statement. These are actual algebra maps, including on inverse denominators. The spectrum correspondence [def-weil-affine-spectrum] and the affine-product formula [lem-weil-pbc-fibre-product-affine-spectra] turn them into $m,i,e$ on the displayed affine scheme.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 022W (example-general-linear-group), multiplication formula; current blueprint companion proof for identity and inverse"
+   }
+  },
+  {
+   "text": "Check the diagrams of [def-sc-group-scheme] on coordinates, using Step 3 to detect equality of maps from $A$. The tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] identifies either parenthesization of the triple product by $(a\\otimes b)\\otimes c\\leftrightarrow a\\otimes(b\\otimes c)$. Both iterated multiplications send $x_{ij}$ to $\\sum_{r,s}x_{ir}\\otimes x_{rs}\\otimes x_{sj}$. The two unit composites take $x_{ij}$ to $\\sum_r\\delta_{ir}x_{rj}=x_{ij}$ and $\\sum_rx_{ir}\\delta_{rj}=x_{ij}$. For the two inverse diagrams, the tensor maps $a\\otimes b\\mapsto i^*(a)b$ and $a\\otimes b\\mapsto ai^*(b)$ exist by the same universal property, and their composites with $m^*$ take $x_{ij}$ to $(YX)_{ij}=\\delta_{ij}$ and $(XY)_{ij}=\\delta_{ij}$ by Step 2. These are the values of the identity section followed by the structural map. By the affine-product formula [lem-weil-pbc-fibre-product-affine-spectra] the iterated products of $\\mathrm{GL}_{c,k}$ are the spectra of these tensor algebras, with the projections induced by the coordinate inclusions, so $m\\times\\mathrm{id}$, $\\mathrm{id}\\times m$, $(i,\\mathrm{id})$ and $(\\mathrm{id},i)$ are the spectra of the maps above. Thus the diagrams commute as scheme morphisms by [def-weil-affine-spectrum]. Evaluation of $m^*$, $\\varepsilon$ and $i^*$ at any $R$ gives precisely matrix product, identity and inverse. The natural bijection in Step 3 is therefore a group isomorphism.",
+   "uses": [
     "def-sc-group-scheme",
-    "def-sc-gm-ga",
-    "def-sc-group-scheme-subgroup"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1966,
-  "blueprint_uses": [
-    "def-sc-gm-ga",
-    "def-sc-group-scheme",
-    "def-sc-group-scheme-subgroup"
-  ],
-  "uses_not_cited": [
-    "def-sc-group-scheme-subgroup"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-sc-general-linear-group.proof.md",
+    "place": "entire proof paragraph, associativity, unit and inverse calculations expanded"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-an",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $k$ be a field and $c\\geq1$. The *general linear group\nscheme* is the affine scheme\n\n$$\n\\mathrm{GL}_{c,k}:=\\Spec k[x_{ij}:1\\leq i,j\\leq c]\\bigl[1/\\det\\bigr],\n\\qquad\n\\det:=\\sum_{\\sigma\\in\\mathfrak S_c}\\operatorname{sgn}(\\sigma)\n\\prod_{i=1}^{c}x_{i\\sigma(i)},\n$$\n\nwith comultiplication $m^*(x_{ij})=\\sum_{r=1}^{c}x_{ir}\\otimes x_{rj}$,\ncounit $\\varepsilon(x_{ij})=\\delta_{ij}$ and antipode\n$i^*(x_{ij})=(-1)^{i+j}M_{ji}/\\det$, where $M_{ji}$ is the\ndeterminant of the matrix obtained from $(x_{kl})$ by deleting row\n$j$ and column $i$, as a group scheme in the sense of\n[def-sc-group-scheme]. Its $R$-points are\n$\\mathrm{GL}_c(R)$, the group of invertible $c\\times c$ matrices over\n$R$. The *special linear group scheme* is the closed\nsubgroup scheme\n\n$$\n\\mathrm{SL}_{c,k}:=\\Spec k[x_{ij}]/(\\det-1)\\subseteq\\mathrm{GL}_{c,k}.\n$$\n\nThe determinant defines a homomorphism\n$\\det:\\mathrm{GL}_{c,k}\\to\\mathbf G_m$ with\n[def-sc-gm-ga], dual to $t\\mapsto\\det$.",
-    "proof": [
-      {
-        "text": "The group-scheme axioms of [def-sc-group-scheme] hold because matrix\nmultiplication is associative, $1$ is a unit and\n$A\\cdot A^{\\mathrm{adj}}=\\det(A)\\cdot1$ with $A^{\\mathrm{adj}}=\\bigl((-1)^{k+l}M_{lk}\\bigr)_{k,l}$. The\ndeterminant is a homomorphism because $\\det(AB)=\\det(A)\\det(B)$.",
-        "uses": [
-          "def-sc-group-scheme"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "For $\\mathbf G_m$ as in [def-sc-gm-ga], send $\\sum_na_nt^n\\in k[t,t^{-1}]$ to $\\sum_na_nD^n\\in A$. This is an algebra map: finite sums and convolution of exponents preserve addition and multiplication, and $D$ is a unit. Thus it defines the claimed determinant morphism by [def-weil-affine-spectrum]. Step 1 applied to $X_LX_R$ gives $m^*(D)=(D\\otimes1)(1\\otimes D)=D\\otimes D$; also $\\varepsilon(D)=1$ and $i^*(D)=D^{-1}$. These are exactly the multiplication, identity and inverse formulas for $t$ in [def-sc-gm-ga]; equality on $t$ forces equality on $t^{-1}$ and on every Laurent polynomial. Hence the determinant is a homomorphism in [def-sc-group-scheme], with value $\\det U$ on the matrix point $U$.",
+   "uses": [
+    "def-sc-gm-ga",
+    "def-weil-affine-spectrum",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 022X (example-determinant), expanded using the coordinate formulas of Tag 022U (example-multiplicative-group)"
+   }
+  },
+  {
+   "text": "Let $Q=P/(D-1)$ with residue matrix $\\bar X$. The quotient map is surjective and $\\det\\bar X=1$ by [def-weil-pbc-algebra-hom-quotient] and Step 1. Thus [lem-weil-pbc-ring-localization-universal-property] extends it to $q:A\\to Q$ with $q(D^{-1})=1$. It remains surjective, since each residue polynomial is the image of the same polynomial in $A$. More precisely $A/(D-1)A\\cong Q$: $q$ induces one map, and $P\\to A/(D-1)A$ induces the other since it kills $D-1$. The composites fix every coordinate; they also fix the inverse of $D$, which equals $1$ in these quotients, so they are identities. Therefore $\\operatorname{Spec}q$ is a closed immersion [def-weil-closed-immersion]: apply [lem-weil-pbc-closed-immersion-affine-cover-criterion](2) to the covering of $\\operatorname{Spec}A$ by the single affine open $\\operatorname{Spec}A$, whose preimage $\\operatorname{Spec}Q$ is affine with surjective section map $q$ [def-weil-affine-spectrum]. A map $Q\\to R$ is exactly evaluation at entries $U$ with $\\det U=1$: substitutions killing $D-1$ factor by $[f]\\mapsto f(U)$, well-defined since every multiple of $D-1$ evaluates to zero. This proves the asserted image on $R$-points, with no reducedness assumption on $R$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-sc-general-linear-group.md",
+    "place": "special-linear quotient clause, omitted algebra verification supplied; closed immersions: morphisms.tex, Tag 01QO (lemma-closed-immersion)"
+   }
+  },
+  {
+   "text": "In $Q\\otimes_kQ$, the two generic residue matrices have determinant $1$, so their product also has determinant $1$ by Step 1. Substitution therefore defines $Q\\to Q\\otimes_kQ$; evaluation at $I$ defines $Q\\to k$. In $Q$, Step 2 gives $\\bar X^{-1}=\\operatorname{adj}\\bar X$, and Step 1 gives its determinant $1$, so substitution also defines $Q\\to Q$ for the inverse. Factorization through $P/(D-1)$ is the representative calculation of Step 7. Under the affine-product formula [lem-weil-pbc-fibre-product-affine-spectra] these are group operations, since the coordinate identities of Step 5 remain valid after taking residue classes; the inclusion preserves the operations because its pullback $q$ preserves each displayed coordinate formula. On every $R$ it is injective: two maps $Q\\to R$ agreeing after the surjection $q$ agree on every residue polynomial. Its image is the matrices with determinant $1$, containing $I$ and closed under product and inverse by Step 1. This verifies exactly the closed-subgroup condition [def-sc-group-scheme-subgroup] and all the special-linear clauses.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-sc-general-linear-group.md",
+    "place": "special-linear closed-subgroup clause, group operations and subgroup verification supplied"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cauchy-binet",
+  "def-weil-pbc-matrix-determinant",
+  "lem-weil-pbc-matrix-adjugate-identity",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sc-group-scheme",
+  "def-sc-gm-ga",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-sc-general-linear-group.proof.md",
+  "place": "entire paragraph, expanded using Stacks Tags 022W, 022X, 0F0K, 07DQ, 00CP, 01I4 and 01QO and the special-linear clause in the companion definition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "general linear group scheme|special linear group scheme|CoordinateRing|GeneralLinearGroup",
+   "results": "{\"t\": \"2026-10-17T14:10:26Z\", \"tool\": \"grep\", \"query\": \"general linear group scheme|special linear group scheme|CoordinateRing|GeneralLinearGroup\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full scheme-theoretic item: matrix groups and determinant identities are partial components only; no special-linear affine quotient scheme and subgroup inclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.GeneralLinearGroup, HopfAlgebra",
+   "results": "{\"t\": \"2026-10-17T14:10:27Z\", \"tool\": \"loogle\", \"query\": \"Matrix.GeneralLinearGroup, HopfAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full scheme-theoretic item: matrix groups and determinant identities are partial components only; no special-linear affine quotient scheme and subgroup inclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The general linear group scheme Spec k[x_ij, 1/det] and the special linear closed subgroup Spec k[x_ij]/(det-1) with determinant homomorphism",
+   "results": "{\"t\": \"2026-10-17T14:10:37Z\", \"tool\": \"leanfinder\", \"query\": \"The general linear group scheme Spec k[x_ij, 1/det] and the special linear closed subgroup Spec k[x_ij]/(det-1) with determinant homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup\", \"Matrix.SpecialLinearGroup.range_toGL\", \"SpecialLinearGroup.mem_range_toGeneralLinearGroup_iff\", \"Matrix.ProjectiveSpecialLinearGroup\", \"Subgroup.instHasDetOneRangeSpecialLinearGroupGeneralLinearGroupMapGL\", \"Matrix.SpecialLinearGroup\", \"SpecialLinearGroup.instGroup\", \"SpecialLinearGroup.toGeneralLinearGroup\"], \"digest\": \"865186b4159bca55\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full scheme-theoretic item: matrix groups and determinant identities are partial components only; no special-linear affine quotient scheme and subgroup inclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "CoordinateRing|GeneralLinearGroup|SpecialLinearGroup",
+   "results": "{\"t\": \"2026-10-17T14:10:46Z\", \"tool\": \"grep\", \"query\": \"CoordinateRing|GeneralLinearGroup|SpecialLinearGroup\", \"sub\": \"RingTheory/HopfAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full scheme-theoretic item: matrix groups and determinant identities are partial components only; no special-linear affine quotient scheme and subgroup inclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "General linear and special linear group schemes represented by the determinant localization and determinant one quotient",
+   "results": "{\"t\": \"2026-10-17T14:10:46Z\", \"tool\": \"leansearch\", \"query\": \"General linear and special linear group schemes represented by the determinant localization and determinant one quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup\", \"MatrixGroups.term𝒮ℒ\", \"Matrix.SpecialLinearGroup.instCoeFun\", \"SpecialLinearGroup.instCoeFunForall\", \"SpecialLinearGroup\", \"SpecialLinearGroup.instGroup\", \"Matrix.SpecialLinearGroup.instGroup\", \"Matrix.GeneralLinearGroup.det\"], \"digest\": \"af10f71e49b2224f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full scheme-theoretic item: matrix groups and determinant identities are partial components only; no special-linear affine quotient scheme and subgroup inclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine group scheme representing the functor of invertible matrices over commutative algebras with determinant map to the multiplicative group",
+   "results": "{\"t\": \"2026-10-17T14:10:58Z\", \"tool\": \"leanfinder\", \"query\": \"Affine group scheme representing the functor of invertible matrices over commutative algebras with determinant map to the multiplicative group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.instGroup\", \"SpecialLinearGroup\", \"Matrix.termGL\", \"Matrix.SpecialLinearGroup.instGroup\", \"Matrix.SpecialLinearGroup.toGL\", \"SpecialLinearGroup.toGeneralLinearGroup\", \"Matrix.GeneralLinearGroup.det\", \"Matrix.SpecialLinearGroup.range_toGL\"], \"digest\": \"780dbbbb789fed39\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full scheme-theoretic item: matrix groups and determinant identities are partial components only; no special-linear affine quotient scheme and subgroup inclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem det_mul|def det|theorem det_one",
+   "results": "{\"t\": \"2026-10-17T14:11:23Z\", \"tool\": \"grep\", \"query\": \"theorem det_mul|def det|theorem det_one\", \"sub\": \"LinearAlgebra/Matrix/Determinant\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean\"], \"digest\": \"653df580495f8f04\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full scheme-theoretic item: matrix groups and determinant identities are partial components only; no special-linear affine quotient scheme and subgroup inclusion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1966,
+ "blueprint_uses": [
+  "def-sc-gm-ga",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "uses_not_cited": [
+  "def-sc-group-scheme-subgroup"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $k$ be a field and $c\\geq1$. The *general linear group\nscheme* is the affine scheme\n\n$$\n\\mathrm{GL}_{c,k}:=\\Spec k[x_{ij}:1\\leq i,j\\leq c]\\bigl[1/\\det\\bigr],\n\\qquad\n\\det:=\\sum_{\\sigma\\in\\mathfrak S_c}\\operatorname{sgn}(\\sigma)\n\\prod_{i=1}^{c}x_{i\\sigma(i)},\n$$\n\nwith comultiplication $m^*(x_{ij})=\\sum_{r=1}^{c}x_{ir}\\otimes x_{rj}$,\ncounit $\\varepsilon(x_{ij})=\\delta_{ij}$ and antipode\n$i^*(x_{ij})=(-1)^{i+j}M_{ji}/\\det$, where $M_{ji}$ is the\ndeterminant of the matrix obtained from $(x_{kl})$ by deleting row\n$j$ and column $i$, as a group scheme in the sense of\n[def-sc-group-scheme]. Its $R$-points are\n$\\mathrm{GL}_c(R)$, the group of invertible $c\\times c$ matrices over\n$R$. The *special linear group scheme* is the closed\nsubgroup scheme\n\n$$\n\\mathrm{SL}_{c,k}:=\\Spec k[x_{ij}]/(\\det-1)\\subseteq\\mathrm{GL}_{c,k}.\n$$\n\nThe determinant defines a homomorphism\n$\\det:\\mathrm{GL}_{c,k}\\to\\mathbf G_m$ with\n[def-sc-gm-ga], dual to $t\\mapsto\\det$.",
+  "proof": [
+   {
+    "text": "The group-scheme axioms of [def-sc-group-scheme] hold because matrix\nmultiplication is associative, $1$ is a unit and\n$A\\cdot A^{\\mathrm{adj}}=\\det(A)\\cdot1$ with $A^{\\mathrm{adj}}=\\bigl((-1)^{k+l}M_{lk}\\bigr)_{k,l}$. The\ndeterminant is a homomorphism because $\\det(AB)=\\det(A)\\det(B)$.",
+    "uses": [
+     "def-sc-group-scheme"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-sc-general-linear-group",
+  "worker": "stage1",
+  "summary": "Followed main-20261015 and repaired the older imported unsigned, untransposed adjugate assertion. Named existing polynomial, determinant, localization, affine, tensor and quotient prerequisites; supplied coordinate maps, all group diagrams, the natural points description, determinant homomorphism and determinant-one quotient subgroup. No new nodes were needed. Project Lean gives the GL part only, not the full SL clause.",
+  "blueprint": "Steps 1-2 supply the determinant and corrected adjugate facts used in the current proof; Steps 3-5 realize its group-scheme assertion; Step 6 realizes its determinant-homomorphism sentence; Steps 7-8 verify the companion definition's special-linear closed-subgroup clause. A supporting definition of sk-prop-an, not its key proposition. Whole-blueprint searches general linear, special linear, determinant, matrix, det(AB), 022W and 022X found no equivalent full node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-880ac2c1e",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-880ac2c1e (reviewer sub-agent of L); spot-checked: I read the item in full: statement and all 8 steps. I also read the current main-20261015 blueprint statement and proof, the old master import, Stacks 022W (groupoids.tex l.485) and 01QO (morphisms.tex l.58-81), and the full statement of every cited node. The delivery has no new nodes and the statement keeps every clause and hypothesis of the current blueprint (field k, c>=1, all commutative k-algebras R). The antipode (-1)^{i+j}M_ji/D is correct. The old master adjugate (M_kl) is false: for [[1,2],[3,4]] the product is [[8,5],[20,13]], not -2I, and the delivery follows the corrected current blueprint. Steps 1-4, 6 and 8 are correct: Cauchy-Binet in the square case with the row/column Leibniz reindexing, both adjugate identities, the polynomial and localization (00CP) universal properties for points over all R, m*/eps/i* built in A⊗A, det to G_m checked on t, and the det-1 subgroup condition. Edge cases checked: c=1, c=2, characteristic 2, dual numbers, the zero ring. Duplicate search: sk-d-geometry only mentions GL in a survey with no coordinate maps, SL or det, so it is not a duplicate. Off-unit dependencies are Mathlib leaves or the Lean-closed Cauchy-Binet; no tool_uses are needed. FIX (two missing citations): Step 7 derived 'Spec q is a closed immersion' from def-weil-closed-immersion, but that node's affine form 01QO(2) needs every affine open. I now cite the existing Mathlib leaf lem-weil-pbc-closed-immersion-affine-cover-criterion(2) with the single-open cover. Step 5 also needed lem-weil-pbc-fibre-product-affine-spectra to turn the coordinate identities into scheme diagrams on G×G and G×G×G. proof_deps is recomputed. The statement is unchanged and no nodes are dropped. Corrected file: fixes/dag/nodes/sec-smooth-purity/def-sc-general-linear-group.json.; 1 file(s) fixed by the reviewer"
+ }
 }

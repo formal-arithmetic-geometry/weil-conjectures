@@ -13,9 +13,68 @@
   "def-weil-pbc-bounded-derived-subcategories",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sbc-cohomology-in-weak-serre-subcategory] with ambient abelian category $\\mathcal B$ and weak Serre subcategory $\\mathcal S$. Its hypotheses are exactly the assumed strict fullness, containment of zero, kernel and cokernel closure for morphisms between objects of $\\mathcal S$, and extension closure. Thus $\\mathcal W=\\{K\\in D^+(\\mathcal B):H^q(K)\\in\\mathcal S\\text{ for every }q\\in\\mathbf Z\\}$ is a strictly full triangulated subcategory. By [def-weil-triangulated-subcategory], it contains zero and is closed under taking the middle vertex of a distinguished triangle whose first and third vertices belong to $\\mathcal W$.",
+   "uses": [
+    "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, label lemma-cohomology-in-serre-subcategory (including bounded versions); Tag 0152, label lemma-derived-canonical-delta-functor; applied to the filtration reduction in more-etale.tex Tag 0GKY, label lemma-loc-constant-shriek-rel-dim-1, proof final paragraph."
+   }
+  },
+  {
+   "text": "For $0\\leq i\\leq r$ let $P(i)$ mean $\\Phi(F_i[0])\\in\\mathcal W$, equivalently that all its cohomology objects belong to $\\mathcal S$. The base case $P(0)$ holds: $F_0[0]=0$, and additivity of $\\Phi$ gives $\\mathrm{id}_{\\Phi(0)}=\\Phi(\\mathrm{id}_0)=\\Phi(0)=0$. Hence $\\Phi(0)$ is a zero object. Its cohomology is zero (compute it on the zero complex using [def-weil-abstract-derived-category]), and $\\mathcal S$ contains zero and is closed under isomorphisms.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, label lemma-cohomology-in-serre-subcategory (including bounded versions); Tag 0152, label lemma-derived-canonical-delta-functor; applied to the filtration reduction in more-etale.tex Tag 0GKY, label lemma-loc-constant-shriek-rel-dim-1, proof final paragraph."
+   }
+  },
+  {
+   "text": "For each $1\\leq i\\leq r$, the subobject inclusion and its quotient give a short exact sequence $0\\to F_{i-1}\\to F_i\\to Q_i\\to0$. By [lem-sf-derived-ses-triangle] this yields a distinguished triangle $F_{i-1}[0]\\to F_i[0]\\to Q_i[0]\\to F_{i-1}[0][1]$. All three vertices are bounded below, so this is a triangle of $D^+(\\mathcal A)$ with its inherited structure [def-weil-pbc-bounded-derived-subcategories]. Applying the triangulated functor $\\Phi$ gives a distinguished triangle $\\Phi(F_{i-1}[0])\\to\\Phi(F_i[0])\\to\\Phi(Q_i[0])\\to\\Phi(F_{i-1}[0])[1]$, where the last arrow uses its given shift isomorphism, exactly as in [def-weil-triangulated-category].",
+   "uses": [
+    "lem-sf-derived-ses-triangle",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, label lemma-cohomology-in-serre-subcategory (including bounded versions); Tag 0152, label lemma-derived-canonical-delta-functor; applied to the filtration reduction in more-etale.tex Tag 0GKY, label lemma-loc-constant-shriek-rel-dim-1, proof final paragraph."
+   }
+  },
+  {
+   "text": "Assume $1\\leq i\\leq r$ and $P(i-1)$. The first vertex of the triangle in step 3 belongs to $\\mathcal W$ by this induction hypothesis. Its third vertex belongs to $\\mathcal W$ by the hypothesis on every $H^q(\\Phi(Q_i[0]))$. The middle-vertex closure from step 1, in the sense of [def-weil-triangulated-subcategory], therefore gives $P(i)$. Finite induction gives $P(r)$; since $F_r=F$, this is the desired conclusion for every integer $q$. If $r=0$ the base case already is the conclusion. Equal consecutive subobjects merely give $Q_i=0$, and the same argument applies without any strictness assumption.",
+   "uses": [
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, label lemma-cohomology-in-serre-subcategory (including bounded versions); Tag 0152, label lemma-derived-canonical-delta-functor; applied to the filtration reduction in more-etale.tex Tag 0GKY, label lemma-loc-constant-shriek-rel-dim-1, proof final paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "def-weil-triangulated-subcategory",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-ses-triangle",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06UQ, label lemma-cohomology-in-serre-subcategory (including bounded versions); Tag 0152, label lemma-derived-canonical-delta-functor; applied to the filtration reduction in more-etale.tex Tag 0GKY, label lemma-loc-constant-shriek-rel-dim-1, proof final paragraph."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +110,127 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-17",
    "verdict": "no match: the returned declarations do not state finite-filtration transfer through an arbitrary triangulated functor into a weak-Serre cohomology class"
+  },
+  {
+   "tool": "leansearch",
+   "query": "triangulated functor finite extensions cohomology weak Serre class",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Functor.IsTriangulated",
+     "CategoryTheory.Functor.IsTriangulated.mk",
+     "CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
+     "CategoryTheory.Functor.IsTriangulated.rec",
+     "CategoryTheory.ObjectProperty.IsSerreClass.mk",
+     "CategoryTheory.Functor.IsTriangulated.recOn",
+     "CategoryTheory.Functor.IsTriangulated.instAdditive",
+     "CategoryTheory.Functor.isTriangulated_of_precomp"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned support conditions, triangulated structure, or unrelated filtrations do not state finite-filtration transfer for an arbitrary triangulated functor and weak Serre class"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated",
+   "results": {
+    "hits": 12,
+    "top": [
+     "CategoryTheory.ObjectProperty.IsTriangulated",
+     "CategoryTheory.ObjectProperty.IsTriangulated.toContainsZero",
+     "CategoryTheory.ObjectProperty.IsTriangulated.toIsStableUnderShift",
+     "CategoryTheory.ObjectProperty.instIsClosedUnderBinaryProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms",
+     "CategoryTheory.ObjectProperty.instIsClosedUnderFiniteProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms",
+     "CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated",
+     "CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated",
+     "CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned support conditions, triangulated structure, or unrelated filtrations do not state finite-filtration transfer for an arbitrary triangulated functor and weak Serre class"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyProperty|WeakSerre|weak.Serre|finite.*filtration",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/RingTheory/Filtration.lean",
+     "Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean",
+     "Mathlib/Probability/Martingale/OptionalSampling.lean",
+     "Mathlib/Probability/Martingale/OptionalSampling.lean",
+     "Mathlib/Probability/Martingale/Centering.lean",
+     "Mathlib/Probability/Martingale/Centering.lean",
+     "Mathlib/Probability/Martingale/Centering.lean",
+     "Mathlib/Probability/Martingale/Centering.lean"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned support conditions, triangulated structure, or unrelated filtrations do not state finite-filtration transfer for an arbitrary triangulated functor and weak Serre class"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite filtration in an abelian category under a triangulated functor cohomology of graded pieces in a weak Serre subcategory implies cohomology of the filtered object is in that subcategory",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.IsGE",
+     "DerivedCategory.IsLE",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.TStructure.t",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "DerivedCategory.instIsLEObjSingleFunctor"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned support conditions, triangulated structure, or unrelated filtrations do not state finite-filtration transfer for an arbitrary triangulated functor and weak Serre class"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A triangulated functor sends a finite filtration with graded pieces in a triangulated subcategory to an object of that subcategory",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Functor.essImageDistTriang",
+     "CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished",
+     "CategoryTheory.Functor.instIsTriangulatedHomologicalKernel",
+     "CategoryTheory.Triangulated.TStructure.triangleLTGE",
+     "CategoryTheory.Triangulated.TStructure.truncLT",
+     "CategoryTheory.Triangulated.TStructure.truncGE",
+     "CategoryTheory.Triangulated.TStructure.triangle_map_exists",
+     "CategoryTheory.Triangulated.TStructure"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned support conditions, triangulated structure, or unrelated filtrations do not state finite-filtration transfer for an arbitrary triangulated functor and weak Serre class"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyProperty|WeakSerre|weak.Serre|filtration|devissage",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": "Algebra/Homology/DerivedCategory"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned support conditions, triangulated structure, or unrelated filtrations do not state finite-filtration transfer for an arbitrary triangulated functor and weak Serre class"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
@@ -76,5 +252,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-etale-lisse-filtration-devissage",
+  "worker": "stage1",
+  "summary": "Proved the finite-filtration transfer by finite induction, using the existing weak-Serre cohomology triangulated-subcategory lemma and short-exact-sequence triangle Mathlib leaf. All hypotheses and the r=0/non-strict-filtration clauses are unchanged; no new nodes.",
+  "blueprint": "Realizes the finite-filtration reduction behind the classical constructibility input of thm-weil-pbc-direct-image-finiteness-proper: Tag 0GKY final proof paragraph, via the ancestor chain recorded in blueprint.from. The induction supplies the abstract transfer needed there, without replacing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "why": "Generic weak-Serre cohomology closure in a derived category, used as a black box; no node of this unit states this closure for an arbitrary abelian category. This supports the finite-filtration argument and does not replace the constructibility route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-cohomology-in-weak-serre-subcategory"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-1eb572bbe",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-1eb572bbe (reviewer sub-agent of L); spot-checked: Read the item, the report and all 7 cited statements in full. Statement: S is strictly full, contains 0 and is closed under kernels, cokernels and extensions, which is exactly Homology Tag 0754 (weak Serre). It is true; tested r=0, r=1, zero quotients, S=B, S={0} and Phi=0. Sources checked: more-etale.tex Tag 0GKY (lemma-loc-constant-shriek-rel-dim-1), last paragraph of the proof (finite filtration by constant sheaves reduces to the constant case), and derived.tex Tag 06UQ, line 5936, including the bounded versions. Step 1: the hypotheses of lem-sbc-cohomology-in-weak-serre-subcategory match the item's word for word with ambient B. Its D+ intersection clause and def-weil-triangulated-subcategory give zero and middle-vertex closure; strict fullness removes the 'up to isomorphism'. Step 2: the base case Phi(0)=0 follows from additivity and is elementary. Step 3: the Mathlib leaf lem-sf-derived-ses-triangle (singleTriangle_distinguished) gives the triangle; the degree-0 complexes lie in D+ with the inherited structure; def-weil-triangulated-category matches the exact-functor hypothesis, shift isomorphism included. Step 4: the induction is set up correctly (P(i) stated first, base case, step), with no hidden lemma. proof_deps equals the union of the step uses. No new nodes. No duplicate found in a scripted DAG search for filtration plus Serre/triangulated/extension; the only citer is the parent, step 5; no cycle. Accepted tool_use: lem-sbc-cohomology-in-weak-serre-subcategory, a generic Stacks 06UQ result from unit sk-rem-rest used as a black box that replaces no unit step. No SGA source; no base-change morphism or coefficient category is involved. No fixes."
  }
 }

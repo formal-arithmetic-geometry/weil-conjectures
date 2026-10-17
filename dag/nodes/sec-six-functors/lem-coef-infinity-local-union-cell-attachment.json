@@ -2,18 +2,102 @@
  "id": "lem-coef-infinity-local-union-cell-attachment",
  "kind": "statement",
  "title": "Cell attachments in the directed-union collage",
- "statement": "Use small simplicial sets and nerves from [def-cbc-enhanced-diagrams-cones], and the ordered join from [lem-coef-infinity-join-cocone-associativity]. Let $K$ be a small simplicial set, $I$ a small nonempty partially ordered set, and $(K_i)_{i\\in I}$ an increasing family of simplicial subsets of $K$. Let $M\\subseteq K\\star N(I)$ contain the pure $K$ and nerve simplices and exactly those mixed simplices $\\sigma\\star(i_0\\leq\\cdots\\leq i_n)$ for which $\\sigma\\in K_{i_0}$. For a simplicial subset $Y\\subseteq N(I)$ let $M_Y\\subseteq M$ contain $K$ and those pure upper or mixed simplices whose upper block lies in $Y$. Suppose $Y'=Y\\cup\\tau$, where $\\tau:\\Delta^n\\hookrightarrow N(I)$ is a nondegenerate strict chain $(i_0<\\cdots<i_n)$, $n\\geq1$, not in $Y$ and with $\\partial\\tau\\subseteq Y$. The natural map $K_{i_0}\\star\\Delta^n\\to M_{Y'}$ is degreewise injective, its intersection with $M_Y$ is exactly $K_{i_0}\\star\\partial\\Delta^n$, and the induced comparison $$M_Y\\amalg_{K_{i_0}\\star\\partial\\Delta^n}(K_{i_0}\\star\\Delta^n)\\longrightarrow M_{Y\\prime}$$ is an isomorphism of simplicial sets. At the vertex stage, $M_{N(I)^{(0)}}=K\\cup\\bigcup_i(K_i\\star\\{i\\})$, and two distinct local cones intersect only in $K_i\\cap K_j\\subseteq K$. These assertions include empty $K$ and empty $K_i$; no directedness or covering assumption is required.",
+ "statement": "Use small simplicial sets and nerves from [def-cbc-enhanced-diagrams-cones], and the ordered join from [lem-coef-infinity-join-cocone-associativity]. Let $K$ be a small simplicial set, $I$ a small nonempty partially ordered set, and $(K_i)_{i\\in I}$ an increasing family of simplicial subsets of $K$. Let $M\\subseteq K\\star N(I)$ contain the pure $K$ and nerve simplices and exactly those mixed simplices $\\sigma\\star(i_0\\leq\\cdots\\leq i_n)$ for which $\\sigma\\in K_{i_0}$. For a simplicial subset $Y\\subseteq N(I)$ let $M_Y\\subseteq M$ contain $K$ and those pure upper or mixed simplices whose upper block lies in $Y$. Suppose $Y'=Y\\cup\\tau$, where $\\tau:\\Delta^n\\hookrightarrow N(I)$ is a nondegenerate strict chain $(i_0<\\cdots<i_n)$, $n\\geq1$, not in $Y$ and with $\\partial\\tau\\subseteq Y$. Here $\\partial\\Delta^n\\subseteq\\Delta^n$ is the simplicial subset of the non-surjective monotone maps $[m]\\to[n]$, $\\partial\\tau$ is its image under $\\tau$, $Y\\cup\\tau$ means $Y\\cup\\tau(\\Delta^n)$, and $N(I)^{(0)}\\subseteq N(I)$ is the simplicial subset of constant chains (the vertices and their degeneracies). The natural map $K_{i_0}\\star\\Delta^n\\to M_{Y'}$ is degreewise injective, its intersection with $M_Y$ is exactly $K_{i_0}\\star\\partial\\Delta^n$, and the induced comparison $$M_Y\\amalg_{K_{i_0}\\star\\partial\\Delta^n}(K_{i_0}\\star\\Delta^n)\\longrightarrow M_{Y\\prime}$$ is an isomorphism of simplicial sets. At the vertex stage, $M_{N(I)^{(0)}}=K\\cup\\bigcup_i(K_i\\star\\{i\\})$, and two distinct local cones intersect only in $K_i\\cap K_j\\subseteq K$. These assertions include empty $K$ and empty $K_i$; no directedness or covering assumption is required. Here a pushout is a colimit of the displayed span, in the sense of [def-weil-pbc-category-colimit].",
  "source": {
   "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
   "place": "Proof of Proposition 4.2.3.4, induction on the nondegenerate simplices of N(I), printed pp.249-251; explicit degreewise pushout calculation extracted for the returned step 2. Read online 2026-10-17; not archived in literature/ (WANTED)."
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-infinity-join-cocone-associativity"
+  "lem-coef-infinity-join-cocone-associativity",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the ordered-block formula in [lem-coef-infinity-join-cocone-associativity]: in degree $m$ the pure summands are $K_m$ and $N(I)_m$, and each mixed summand has labels $(\\sigma,\\beta)$ with $\\sigma\\in K_a$, $\\beta=(j_0\\leq\\cdots\\leq j_b)$ and $a+b+1=m$. In $M$ its membership condition is $\\sigma\\in(K_{j_0})_a$. A simplicial operator restricts each block as specified there. If both survive, its lower label is a restriction of $\\sigma$ and its upper initial vertex is some $j_t\\geq j_0$; closure of $K_{j_0}$ and $K_{j_0}\\subseteq K_{j_t}$ give membership. If one block disappears, the result is in a pure summand. Thus the formula indeed defines a simplicial subset $M$. Restricting the upper block to any simplicial subset $Y$ again defines a simplicial subset $M_Y$: any surviving upper block is a restriction of a simplex of $Y$, while a disappearing upper block leaves a simplex of $K$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-join-cocone-associativity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Notation 4.2.3.1, Remark 4.2.3.2, and proof of Proposition 4.2.3.4, printed pp.248-250 (PDF pp.265-267). Agent-written ordered-block calculation expanding the asserted attachment square; read online 2026-10-17, archive WANTED."
+   }
+  },
+  {
+   "text": "Identify the image of $\\tau$ with $\\Delta^n$. By [def-cbc-enhanced-diagrams-cones], a degree-$b$ simplex of $\\Delta^n$ is a monotone map $\\alpha:[b]\\to[n]$. Define its boundary as the subcomplex of maps omitting a vertex: this is exactly the union of its proper faces, since a nonsurjective map factors through the face omitting any missing vertex. Every such simplex has image in $Y$ by $\\partial\\tau\\subseteq Y$. Conversely, if $\\alpha$ is surjective, choose $s(t)=\\min\\alpha^{-1}(t)$. Then $s:[n]\\to[b]$ is monotone and $\\alpha s=1$. If $\\tau\\alpha$ were in $Y$, restriction along $s$ would put $\\tau$ in $Y$, a contradiction. Consequently $Y\\cap\\tau(\\Delta^n)=\\tau(\\partial\\Delta^n)$ in every degree, including all degenerate simplices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Notation 4.2.3.1, Remark 4.2.3.2, and proof of Proposition 4.2.3.4, printed pp.248-250 (PDF pp.265-267). Agent-written ordered-block calculation expanding the asserted attachment square; read online 2026-10-17, archive WANTED."
+   }
+  },
+  {
+   "text": "Put $A=K_{i_0}$, $B=A\\star\\Delta^n$, and $B_0=A\\star\\partial\\Delta^n$. The map $B\\to K\\star N(I)$ is $A\\hookrightarrow K$ on pure lower labels, $\\alpha\\mapsto\\tau\\alpha$ on pure upper labels, and $(\\sigma,\\alpha)\\mapsto(\\sigma,\\tau\\alpha)$ on mixed labels. It commutes with operators by the ordered-block formula of [lem-coef-infinity-join-cocone-associativity]. It is injective in each degree: block lengths are retained and both factor maps are injective, the latter because $\\tau$ is an embedded strict chain. For a mixed label the first upper vertex is $i_{\\alpha(0)}$, and $A\\subseteq K_{i_{\\alpha(0)}}$; hence its image lies in $M_{Y'}$. The pure summands do too. Denote this embedded image also by $B$.",
+   "uses": [
+    "lem-coef-infinity-join-cocone-associativity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Notation 4.2.3.1, Remark 4.2.3.2, and proof of Proposition 4.2.3.4, printed pp.248-250 (PDF pp.265-267). Agent-written ordered-block calculation expanding the asserted attachment square; read online 2026-10-17, archive WANTED."
+   }
+  },
+  {
+   "text": "Compute $B\\cap M_Y$ on the three types of labels. Pure lower labels are precisely $A$ on both sides. They are also the pure lower labels of $B_0$; here $n\\geq1$ ensures the boundary contains vertices, and the join formula includes its pure lower summand. A pure upper label $\\alpha$ lies in $M_Y$ exactly when $\\tau\\alpha\\in Y$, which by step 2 is equivalent to $\\alpha$ omitting a vertex. A mixed label $(\\sigma,\\alpha)$ of $B$ already satisfies the collage membership condition by step 3, so it lies in $M_Y$ exactly under the same condition $\\tau\\alpha\\in Y$. These are exactly the pure upper and mixed labels of $B_0$. Thus $B\\cap M_Y=B_0$ as simplicial subsets, not merely on vertices.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Notation 4.2.3.1, Remark 4.2.3.2, and proof of Proposition 4.2.3.4, printed pp.248-250 (PDF pp.265-267). Agent-written ordered-block calculation expanding the asserted attachment square; read online 2026-10-17, archive WANTED."
+   }
+  },
+  {
+   "text": "Every simplex of $M_{Y'}$ lies in $M_Y\\cup B$. This is immediate for a pure lower simplex. For a pure upper simplex outside $Y$, the equality $Y'=Y\\cup\\tau$ expresses it uniquely as $\\tau\\alpha$; by step 2, $\\alpha$ is surjective, so it is in $B$. For a mixed simplex $(\\sigma,\\beta)$ outside $M_Y$, its upper block likewise has the form $\\beta=\\tau\\alpha$ with $\\alpha$ surjective. In particular $\\alpha(0)=0$, so the initial upper vertex is $i_0$. Membership in $M$ is therefore exactly $\\sigma\\in K_{i_0}=A$, and this simplex is the image of $(\\sigma,\\alpha)\\in B$. Conversely both $M_Y$ and $B$ lie in $M_{Y'}$. Hence $M_{Y'}=M_Y\\cup B$ in each degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Notation 4.2.3.1, Remark 4.2.3.2, and proof of Proposition 4.2.3.4, printed pp.248-250 (PDF pp.265-267). Agent-written ordered-block calculation expanding the asserted attachment square; read online 2026-10-17, archive WANTED."
+   }
+  },
+  {
+   "text": "Verify the pushout universal property of [def-weil-pbc-category-colimit] directly. For any simplicial set $T$ and maps $f:M_Y\\to T$, $g:B\\to T$ agreeing on $B_0$, define $h:M_{Y'}\\to T$ on a simplex using $f$ if it lies in $M_Y$ and $g$ if it lies in $B$. Step 5 guarantees an available value; step 4 and the agreement make it independent of the choice. For any simplicial operator, choose a piece containing the original simplex. That piece is a simplicial subset, so it also contains the restricted simplex; using that same piece gives $h(\\theta^*x)=\\theta^*h(x)$. Thus $h$ is simplicial and has the required restrictions. The union identity makes it unique. This proves that the displayed square is a pushout. To identify its comparison with a chosen pushout $P$, glue the two canonical maps into $P$ by this construction to obtain $M_{Y'}\\to P$. The composites with $P\\to M_{Y'}$ restrict to the identity on both pieces and hence are identities by uniqueness. The comparison is therefore an isomorphism.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Notation 4.2.3.1, Remark 4.2.3.2, and proof of Proposition 4.2.3.4, printed pp.248-250 (PDF pp.265-267). Agent-written ordered-block calculation expanding the asserted attachment square; read online 2026-10-17, archive WANTED."
+   }
+  },
+  {
+   "text": "A simplex of $N(I)^{(0)}$ is a constant chain at one vertex $i$, since the zero skeleton consists of vertices and their degeneracies. In the ordered-block formula of [lem-coef-infinity-join-cocone-associativity], the allowed mixed labels over that chain are exactly those in $K_i$; the pure upper labels are the constant chains themselves. Together with the pure $K$ labels these give $M_{N(I)^{(0)}}=K\\cup\\bigcup_i(K_i\\star\\{i\\})$. For $i\\ne j$, pure upper and mixed labels from the two cones cannot coincide because their upper vertices differ; the common pure lower labels are exactly $K_i\\cap K_j$. If $K_i=\\varnothing$, that cone still contains the vertex $i$ and its degeneracies, but no lower or mixed labels. If $K=\\varnothing$, all $K_i$ are empty, $M_Y=Y$, and the square is ordinary simplex attachment along its boundary; the preceding formulas still prove it. Nothing used a common upper bound or $\\bigcup_iK_i=K$: monotonicity alone was used in steps 1 and 3. Thus all stated empty cases and the absence of directedness or covering hypotheses are verified.",
+   "uses": [
+    "lem-coef-infinity-join-cocone-associativity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Notation 4.2.3.1, Remark 4.2.3.2, and proof of Proposition 4.2.3.4, printed pp.248-250 (PDF pp.265-267). Agent-written ordered-block calculation expanding the asserted attachment square; read online 2026-10-17, archive WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-join-cocone-associativity",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "Notation 4.2.3.1, Remark 4.2.3.2, and proof of Proposition 4.2.3.4, printed pp.248-250 (PDF pp.265-267). Agent-written ordered-block calculation expanding the asserted attachment square; read online 2026-10-17, archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +126,54 @@
    "results": "{\"t\": \"2026-10-17T10:43:39Z\", \"tool\": \"leansearch\", \"query\": \"A collage of an increasing family of simplicial subsets is obtained by attaching each chain cell K_i join Delta^n along K_i join boundary Delta^n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.AttachCells.rec\", \"SSet.hasColimits\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj\"], \"digest\": \"b9294c3d3dd0833c\"}",
    "date": "2026-10-17",
    "verdict": "no match: AttachCells.rec and RelativeCellComplex.attachCells supply generic cell data, not this specific collage identification."
+  },
+  {
+   "tool": "grep",
+   "query": "join.*boundary|collage|Subcomplex.BicartSq.isPushout",
+   "results": "{\"t\": \"2026-10-17T13:06:26Z\", \"tool\": \"grep\", \"query\": \"join.*boundary|collage|Subcomplex.BicartSq.isPushout\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no collage or ordered-join boundary theorem; BicartSq.isPushout at SubcomplexColimits.lean:86-100 is a general union/intersection tool and requires the identities proved here.",
+   "subdirectory": "AlgebraicTopology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A union of simplicial subsets is the pushout of the two subsets over their intersection",
+   "results": "{\"t\": \"2026-10-17T13:06:26Z\", \"tool\": \"leansearch\", \"query\": \"A union of simplicial subsets is the pushout of the two subsets over their intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.horn₂₀.isPushout\", \"SSet.horn₂₂.isPushout\", \"SSet.instFiniteCoprod\", \"SSet.horn₂₂.sq\", \"SSet.stdSimplex.face_inter_face\", \"Finset.union_subset\", \"SSet.Subcomplex\"], \"digest\": \"80fc8205cebb3444\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures; generic subcomplex colimits, nerves, Quillen generators and simplex subcomplexes do not state the collage membership, intersection and vertex-stage assertions. Subcomplex.BicartSq.isPushout (SubcomplexColimits.lean:86-100) requires the lattice identities calculated in steps 4 and 5."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"join\"",
+   "results": "{\"t\": \"2026-10-17T13:06:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"disjoint_nhdsSet_principal\", \"disjoint_principal_nhdsSet\", \"SeparatedNhds.disjoint_nhdsSet\", \"IsCompact.disjoint_nhdsSet_left\", \"IsCompact.disjoint_nhdsSet_right\", \"nhdsSet_prod_le_of_disjoint_cocompact\", \"prod_nhdsSet_le_of_disjoint_cocompact\", \"IsCompact.disjoint_nhdsSet_nhds\"], \"digest\": \"59a57545577dce73\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned topological nhdsSet/disjoint substring matches, not ordered simplicial joins."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ordered join collage of increasing simplicial subsets attaches a nerve simplex by a pushout along the join with its boundary",
+   "results": "{\"t\": \"2026-10-17T13:06:28Z\", \"tool\": \"leanfinder\", \"query\": \"An ordered join collage of increasing simplicial subsets attaches a nerve simplex by a pushout along the join with its boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.isColimit\", \"CategoryTheory.Arrow.cechConerve_map\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.nerve\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.Arrow.cechConerve_obj\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"CategoryTheory.Arrow.augmentedCechConerve_hom_app\"], \"digest\": \"ea9b9fa85d20b362\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures; generic subcomplex colimits, nerves, Quillen generators and simplex subcomplexes do not state the collage membership, intersection and vertex-stage assertions. Subcomplex.BicartSq.isPushout (SubcomplexColimits.lean:86-100) requires the lattice identities calculated in steps 4 and 5."
+  },
+  {
+   "tool": "grep",
+   "query": "BicartSq|def join|orderedJoin|sharpJoin",
+   "results": "{\"t\": \"2026-10-17T13:07:35Z\", \"tool\": \"grep\", \"query\": \"BicartSq|def join|orderedJoin|sharpJoin\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\"], \"digest\": \"74220e7eddf4b806\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no collage or ordered-join boundary theorem; BicartSq.isPushout at SubcomplexColimits.lean:86-100 is a general union/intersection tool and requires the identities proved here.",
+   "subdirectory": "AlgebraicTopology/SimplicialSet"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The join with a simplicial subset attaches each simplex along its boundary and its overlap is computed degreewise",
+   "results": "{\"t\": \"2026-10-17T13:07:37Z\", \"tool\": \"leanfinder\", \"query\": \"The join with a simplicial subset attaches each simplex along its boundary and its overlap is computed degreewise\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.S.subcomplex\", \"SSet.hasColimits\", \"SSet.Subcomplex\", \"SSet.Subcomplex.Pairing\", \"SSet.Subcomplex.BicartSq\", \"SSet.modelCategoryQuillen.I\"], \"digest\": \"26a6b3274c5a0879\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures; generic subcomplex colimits, nerves, Quillen generators and simplex subcomplexes do not state the collage membership, intersection and vertex-stage assertions. Subcomplex.BicartSq.isPushout (SubcomplexColimits.lean:86-100) requires the lattice identities calculated in steps 4 and 5."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-directed-union-local-colimits",
@@ -73,5 +201,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-local-union-cell-attachment",
+  "worker": "stage1",
+  "summary": "No new nodes. Expanded the degreewise ordered-block argument: checked simplicial closure, boundary versus surjective upper labels, injectivity, exact intersection, union, the simplicial pushout universal property, and the vertex and empty cases. Retained all hypotheses and conclusions; made the existing colimit definition a statement dependency. No finished project declaration or Mathlib leaf states the whole item. Maintainer reader (2026-10-17): defined $\\partial\\Delta^n$, $\\partial\\tau$, $Y\\cup\\tau$ and $N(I)^{(0)}$ inline in the statement (meaning unchanged, as used in steps 2, 5 and 7).",
+  "blueprint": "Realizes the recorded from.place of prop-coef-integral-exceptional-adjoint through lem-coef-infinity-directed-union-local-colimits, proof steps 2 and 3: the successor pushout K_{i_0} star boundary Delta^n -> K_{i_0} star Delta^n and the vertex-stage intersections. The blueprint ancestor itself states the coefficient adjunction; this is the elementary attachment calculation inside its foundational descent ancestry."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-87b5e1d82",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-87b5e1d82 (reviewer sub-agent of L); spot-checked: Read the item (statement and all 7 steps), the statements of the three cited nodes (def-cbc-enhanced-diagrams-cones; lem-coef-infinity-join-cocone-associativity, only its join formula used; def-weil-pbc-category-colimit), and the citer lem-coef-infinity-directed-union-local-colimits, whose steps 2-3 use exactly the successor pushout, the exact intersection and the vertex-stage formula. HTT 4.2.3 is not in literature/: the proof is agent-marked with WANTED recorded, so I checked it on its own. Steps 1 (closure, using K_{j0} contained in K_{jt}), 2 (boundary = non-surjective maps, min-fibre section), 3 (injective since tau is a strict chain; membership via K_{i0} contained in K_{i_alpha(0)}), 4 (intersection on all three simplex types), 5 (a simplex outside M_Y has a surjective upper label, so its first vertex is i0), 6 (pushout universal property proved by direct gluing) and 7 (vertex stage, empty K and K_i) are all correct and really elementary. My own exhaustive script passed 3840 cases: K=Delta^1, chain and fork posets, all increasing families, all Y and tau, degrees up to 4. No directedness or covering is used; nothing is weakened. No new nodes. Duplicate search over the decomposition, right-anodyne, simplex-join-attachment, fiber-collage and cofibrant-subset nodes found no duplicate. The route stays in the item's own unit; no tool_uses. FIX (B3): the statement used the boundary of Delta^n, the boundary of tau, Y union tau and the 0-skeleton of N(I) without defining them, and no cited node defines them. I added their definitions inline, meaning unchanged. Not fixed, only noted: source.place gives HTT pp.249-251 but proof_origin gives pp.248-250.; 1 file(s) fixed by the reviewer"
  }
 }

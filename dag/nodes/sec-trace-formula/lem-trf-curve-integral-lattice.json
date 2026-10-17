@@ -1,10 +1,82 @@
 {
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Q:D^b_c(X,\\mathcal O_E)\\to D^b_c(X,E)$ for the scalar localization and transport the given lattice along $\\alpha$, so $Q(K_{\\mathcal O})\\simeq K_E$. The rational truncations of [prop-constructible-truncations] are induced by the standard truncations of integral representatives, so $Q(\\mathcal H^j(K_{\\mathcal O}))\\simeq\\mathcal H^j(K_E)=0$ for $j\\neq0$, because $K_E$ is in the heart. In the scalar localization an object is zero exactly when $\\varpi^N$ kills its identity for some $N$ (the identity maps to $\\mathrm{id}\\otimes1=0$ in $\\operatorname{Hom}\\otimes_{\\mathcal O_E}E$). So each $\\mathcal H^j(K_{\\mathcal O})$, $j\\ne0$, is killed by a power of $\\varpi$. By [lem-weil-pbc-integral-stratified-perfect-characterization] (ii)$\\Leftrightarrow$(iii), which describes exactly the category of [def-weil-derived-complete-integral-detailed] over the noetherian finite-dimensional scheme $X$, there is a finite stratification such that on each stratum $C=\\mathcal H^0(K_{\\mathcal O})$ is pro-etale locally $\\widehat{\\mathcal O}_{E,X}\\otimes_{\\mathcal O_E}N$ with $N$ finitely presented. Finitely many such local pieces cover each quasi-compact stratum. On a piece with $N\\simeq\\mathcal O_E^r\\oplus\\bigoplus_i\\mathcal O_E/\\varpi^{e_i}$, the $\\varpi$-power torsion is $\\bigoplus_i\\widehat{\\mathcal O}_{E,X}/\\varpi^{e_i}$, since the completed coefficient sheaf is $\\varpi$-torsion-free. Kernels and unions are formed locally, so a common exponent $e$ gives $\\varpi^eD=0$ and $D=\\ker(\\varpi^e:C\\to C)$. The characterization is closed under cones and under cohomology sheaves placed in degree zero. Hence $D$, the $\\mathcal H^{-1}$ of the cone of $\\varpi^e$, and $M=C/D$, the $\\mathcal H^0$ of the cone of $D\\hookrightarrow C$, lie in the integral category. Locally $M\\simeq\\widehat{\\mathcal O}_{E,X}\\otimes_{\\mathcal O_E}\\mathcal O_E^r$, so $\\varpi$ is injective on $M$.",
+   "uses": [
+    "prop-constructible-truncations",
+    "def-weil-rationalization-karoubi",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 5, sentence beginning “The cohomology sheaves H^j ...”"
+   }
+  },
+  {
+   "text": "The cones of the canonical maps $\\tau^{\\le0}K_{\\mathcal O}\\to K_{\\mathcal O}$ and $\\tau^{\\le0}K_{\\mathcal O}\\to\\mathcal H^0(K_{\\mathcal O})=C$ have finitely many nonzero cohomology sheaves, each killed by a power of $\\varpi$ (Step 1). The cone of $C\\to M$ is $D[1]$, killed by $\\varpi^e$. If $Z'\\to Z\\to Z''\\to$ is a triangle with $\\varpi^a\\mathrm{id}_{Z'}=0$ and $\\varpi^b\\mathrm{id}_{Z''}=0$, then $\\varpi^b\\mathrm{id}_Z$ factors through $Z'$, so $\\varpi^{a+b}\\mathrm{id}_Z=0$. Induction over the truncation triangles of [prop-constructible-truncations] shows that each cone has its identity killed by a power of $\\varpi$. Each cone is therefore zero in the exact scalar localization of [def-weil-rationalization-karoubi], so the three maps become isomorphisms there. Composing with $\\alpha$ gives a specified isomorphism $K_E\\simeq Q(K_{\\mathcal O})\\simeq Q(M)=M[1/\\varpi]$. [lem-weil-compact-support-representative-independence] for $f=a_X$ turns it into an isomorphism $(Ra_{X!}K_E)\\otimes^L_{\\mathcal O_E}E\\simeq(Ra_{X!}M)\\otimes^L_{\\mathcal O_E}E$ of the rational compact-support objects of [def-weil-integral-rational-qbar-compact-support]. Taking point sections and cohomology, and using that $E$ is flat over $\\mathcal O_E$, gives $H_c^i(X,K_E)\\simeq H^i(R\\Gamma_c(X,M))\\otimes_{\\mathcal O_E}E$.",
+   "uses": [
+    "prop-constructible-truncations",
+    "def-weil-rationalization-karoubi",
+    "lem-weil-compact-support-representative-independence",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 5, rational-category paragraph"
+   }
+  },
+  {
+   "text": "Since $\\varpi$ is injective on $M$, the two-term resolution $\\widehat{\\mathcal O}_{E,X}\\xrightarrow{\\varpi^n}\\widehat{\\mathcal O}_{E,X}$ of $(A_n)_X$ shows that the derived reduction is the ordinary quotient $M_n=M/\\varpi^nM$, concentrated in degree zero. By Step 1, $M$ is an object of the derived-complete integral category of [def-weil-derived-complete-integral-detailed], so each $M_n$ is a bounded finite-torsion constructible complex. Apply [lem-coef-integral-residue-tor] to $M$ with $[a,b]=[0,0]$: every $M_n$ has Tor amplitude in $[0,0]$, so $M_n\\in D^b_{ctf}(X,A_n)$. Each $M_n$ is a constructible sheaf in degree zero over the finite ring $A_n$. [lem-weil-pbc-finite-ring-constructible-derived-origin] therefore supplies a pair $(L_n,\\alpha_n)$, with $L_n$ a bounded constructible etale complex and $\\alpha_n:\\nu_X^*L_n\\xrightarrow{\\sim}M_n$, which is an explicit etale-origin witness in the sense of [def-weil-pbc-etale-origin-witness]. The transitions are the quotient maps $M/\\varpi^{n+1}M\\to M/\\varpi^nM$. The induced maps $M_n\\otimes^L_{A_n}A_j\\to M_j$ are the identifications $(M\\otimes^L\\widehat{\\mathcal O}/\\varpi^n)\\otimes^L_{A_n}A_j\\simeq M\\otimes^L\\widehat{\\mathcal O}/\\varpi^j$ given by associativity of the derived tensor product, so they are isomorphisms. This gives the normalized $A_\\bullet$-system of [def-trf-adic-system].",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-coef-integral-residue-tor",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-weil-pbc-etale-origin-witness",
+    "def-trf-adic-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 5, reduction-tower paragraph"
+   }
+  },
+  {
+   "text": "By Step 3, $(M_n)_n$ is the reduction tower of the integral object $M$ and a normalized $A_\\bullet$-system, which is the hypothesis of [prop-trf-adic-coefficient-morphism-systems]. That proposition assumes no Weil structure and no coefficient morphism for its clauses (1) and (2). Its statement identifies the derived limit $P_{\\mathcal O}$ of the tower $P_n=R\\Gamma_c(X,M_n)$ with $R\\Gamma_c(X,M)$ of [def-weil-integral-rational-qbar-compact-support], applied to $a_X:X\\to\\operatorname{Spec}k$. Clause (2) then says that $P=R\\Gamma_c(X,M)$ is represented by a bounded complex of finite free $\\mathcal O_E$-modules, and that the canonical maps $\\pi_n:P\\otimes^L_{\\mathcal O_E}A_n\\to R\\Gamma_c(X,M_n)$ are isomorphisms for every $n\\ge1$. Only clauses (1) and (2), the perfectness and integral-realization assertions, are used.",
+   "uses": [
+    "prop-trf-adic-coefficient-morphism-systems",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 5, finite-free P paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-constructible-truncations",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-compact-support-representative-independence",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-coef-integral-residue-tor",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "def-weil-pbc-etale-origin-witness",
+  "def-trf-adic-system",
+  "prop-trf-adic-coefficient-morphism-systems"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+  "place": "Step 5: curves, lattice and adic-system paragraphs"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-trf-l-function-euler-product",
@@ -15,7 +87,7 @@
  "unit": "sk-thm-trace-transport",
  "id": "lem-trf-curve-integral-lattice",
  "title": "Integral lattice and finite-free compact-support model on a curve",
- "statement": "Fix the global finite-field and coefficient datum of [def-trf-coefficient-conventions], with $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k_0$, $E/\\mathbf Q_\\ell$ finite, valuation ring $\\mathcal O_E$, uniformizer $\\varpi$ and $A_n=\\mathcal O_E/\\varpi^n$. Let $X_0$ be separated of finite type over $k_0$ with $\\dim X_0\\le1$, and put $X=X_0\\times_{k_0}k$. The integral category and its rationalization are [def-weil-derived-complete-integral-detailed, def-weil-rationalization-karoubi]. Let $K_E\\in D^b_c(X,E)$ be an object which is a sheaf in degree zero for the standard pair of [def-weil-constructible-standard-tstructure] (no Weil structure is used), and let $K_{\\mathcal O}\\in D^b_c(X,\\mathcal O_E)$ together with an isomorphism $\\alpha:K_{\\mathcal O}\\xrightarrow{\\sim}K_E$ of $D^b_c(X,E)$ be any integral lattice of $K_E$ (for instance $K_{\\mathcal O}=K_E$, $\\alpha=\\mathrm{id}$). No finite-level hypothesis (etale-origin witness or admissibility) is assumed for the reductions of $K_{\\mathcal O}$. Set $C=\\mathcal H^0(K_{\\mathcal O})$, $D=\\bigcup_{n\\ge1}\\ker(\\varpi^n:C\\to C)$ and $M=C/D$, regarded as sheaves of modules over the completed coefficient sheaf of [def-weil-completed-integral-coefficients]. Then $D$ is killed by a single power of $\\varpi$, $M$ is a constructible integral sheaf on which multiplication by $\\varpi$ is injective, and $K_E\\simeq M[1/\\varpi]$ in $D^b_c(X,E)$. The derived reductions of $M$ are the underived sheaves $M_n=M/\\varpi^nM$, they lie in $D^b_{ctf}(X,A_n)$ and admit explicit etale-origin witnesses [def-weil-pbc-etale-origin-witness], and their quotient-induced transitions form a normalized system [def-trf-adic-system]. Moreover, for the compact-support functor [def-weil-integral-rational-qbar-compact-support], $P=R\\Gamma_c(X,M)$ is represented by a bounded complex of finite free $\\mathcal O_E$-modules, with\n$$P\\otimes^L_{\\mathcal O_E}A_n\\simeq R\\Gamma_c(X,M_n),\\qquad H_c^i(X,K_E)\\simeq H^i(P)\\otimes_{\\mathcal O_E}E\\quad(n\\ge1,\\ i\\in\\mathbf Z).$$\nNo Weil structure on $M$ is asserted.",
+ "statement": "Fix the global finite-field and coefficient datum of [def-trf-coefficient-conventions], with $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k_0$, $E/\\mathbf Q_\\ell$ finite, valuation ring $\\mathcal O_E$, uniformizer $\\varpi$ and $A_n=\\mathcal O_E/\\varpi^n$. Let $X_0$ be separated of finite type over $k_0$ with $\\dim X_0\\le1$, and put $X=X_0\\times_{k_0}k$. The integral category and its rationalization are [def-weil-derived-complete-integral-detailed, def-weil-rationalization-karoubi]. Let $K_E\\in D^b_c(X,E)$ be an object which is a sheaf in degree zero for the standard pair of [def-weil-constructible-standard-tstructure] (no Weil structure is used), and let $K_{\\mathcal O}\\in D^b_c(X,\\mathcal O_E)$ together with an isomorphism $\\alpha:K_{\\mathcal O}\\xrightarrow{\\sim}K_E$ of $D^b_c(X,E)$ be any integral lattice of $K_E$ (when $K_E$ is presented by an integral object, take that chosen integral representative together with its specified localization isomorphism $\\alpha$). No finite-level hypothesis (etale-origin witness or admissibility) is assumed for the reductions of $K_{\\mathcal O}$. Set $C=\\mathcal H^0(K_{\\mathcal O})$, $D=\\bigcup_{n\\ge1}\\ker(\\varpi^n:C\\to C)$ and $M=C/D$, regarded as sheaves of modules over the completed coefficient sheaf of [def-weil-completed-integral-coefficients]. Then $D$ is killed by a single power of $\\varpi$, $M$ is a constructible integral sheaf on which multiplication by $\\varpi$ is injective, and $K_E\\simeq M[1/\\varpi]$ in $D^b_c(X,E)$. The derived reductions of $M$ are the underived sheaves $M_n=M/\\varpi^nM$, they lie in $D^b_{ctf}(X,A_n)$ and admit explicit etale-origin witnesses [def-weil-pbc-etale-origin-witness], and their quotient-induced transitions form a normalized system [def-trf-adic-system]. Moreover, for the compact-support functor [def-weil-integral-rational-qbar-compact-support], $P=R\\Gamma_c(X,M)$ is represented by a bounded complex of finite free $\\mathcal O_E$-modules, with\n$$P\\otimes^L_{\\mathcal O_E}A_n\\simeq R\\Gamma_c(X,M_n),\\qquad H_c^i(X,K_E)\\simeq H^i(P)\\otimes_{\\mathcal O_E}E\\quad(n\\ge1,\\ i\\in\\mathbf Z).$$\nNo Weil structure on $M$ is asserted.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
   "place": "Step 5: curves, lattice and adic-system paragraphs"
@@ -33,50 +105,29 @@
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "integral lattice torsion-free constructible sheaf curve Weil complex compact support",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → {K : Type u_2} → [inst_1 : Field K] → [Algebra R K] → WeierstrassCurve K → Prop\", \"doc\": \"Given a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and a Weierstrass curve over $ K $, this proposition asserts that the curve is integral (i.e., its coordinate ri\"}\n  {\"name\": \"WeierstrassCurve.exists_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] [inst_3 : IsDomain R]\\n  [ValuationRing R] [IsFractionRing R K] (W : WeierstrassCurve K), ∃ C, WeierstrassCurve.IsIntegral R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ has an integral coordina\"}\n  {\"name\": \"WeierstrassCurve.integralModel\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    {K : Type u_2} →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra R K] → (W : WeierstrassCurve K) → [hW : WeierstrassCurve.IsIntegral R W] → WeierstrassCurve R\", \"doc\": \"Given a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and an integral Weierstrass curve $ W $ over $ K $, this constructs the integral model of $ W $ as a Weierstrass\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], IsDomain ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For any integral scheme $X$, the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain. This follows from the property that an integral scheme is both irreducible and reduced, ensur\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n",
+   "query": "integral lattice torsion-free constructible sheaf curve compact support finite free reduction",
+   "results": "WeierstrassCurve.IsIntegral; WeierstrassCurve.exists_isIntegral; WeierstrassCurve.integralModel; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; AlgebraicGeometry.isReduced_of_isIntegral; no sheaf/lattice result",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "RΓ_c finite free O_E reduction constructible sheaf",
-   "results": "[loogle] OK 0 hit(s) | loogle: Unknown identifier `RΓ_c`\n",
+   "query": "Module.Free, Module.Torsion, CategoryTheory.DerivedCategory",
+   "results": "0 hits; unknown identifier Module.Torsion",
    "date": "2026-10-17",
    "verdict": "unavailable"
   },
   {
    "tool": "grep",
-   "query": "finite-free.*RΓ_c|torsion-free.*constructible|adic.*coefficient [Mathlib/]",
-   "results": "[grep] OK 0 hit(s)\n",
+   "query": "finite.free|torsion.free|constructible.*sheaf|compact.support [Mathlib/]",
+   "results": "0 hits",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "Heart of scalar localized bounded constructible derived category is represented by a torsion free integral sheaf",
-   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE gives a bounded complex in an ordinary derived category, not a torsion-free constructible lattice in the scalar-localized integral category.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For a rational constructible l-adic complex in degree zero there is a torsion free constructible integral sheaf lattice with flat finite reductions",
-   "results": "Condensed.finFree and locally constant condensed-module constructions; none constructs this lattice or its compact-support reduction comparison.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Triangulated.TStructure, Localization",
-   "results": "No hits.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Torsion free constructible integral sheaf lattice of rational sheaf with finite free compact support cohomology model and reduction comparison",
-   "results": "SheafOfModules.free, Module.free_iff_isTorsionFree and torsion-module lemmas concern free modules or ordinary sheaves, not this integral constructible lattice and its compact-support realization.",
+   "query": "A rational constructible l-adic complex concentrated in degree zero admits a torsion-free integral lattice whose compact-support cohomology is finite free and compatible with reductions",
+   "results": "Submodule.IsLattice.free; IsDedekindDomain.HeightOneSpectrum.instIsTorsionFreeSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers; ZLattice.module_free; ZLattice.FG; ZLattice.module_finite; no constructible compact-support lattice theorem",
    "date": "2026-10-17",
    "verdict": "no match"
   }
@@ -84,10 +135,34 @@
  "blueprint": {
   "from": {
    "node": "thm-trf-l-function-euler-product",
-   "place": "Step 5, curves: the construction M=H^0(K_O)/(torsion), normalized reduction tower, finite-free P and its reduction comparison",
+   "place": "Step 5, curves: construction M=H^0(K_O)/(torsion), normalized reduction tower, finite-free P and its reduction comparison, and compactification vanishing range",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-curve-integral-lattice",
+  "worker": "stage1",
+  "summary": "Repaired the returned split. Step 3 now proves membership in the derived-complete integral category and invokes the existing residue-Tor lemma with interval [0,0] to establish the required uniform finite-Tor condition for every M_n, followed by etale-origin witnesses and normalization. Step 4 identifies the proposition’s integral derived-limit realization with the defined compact-support object and explicitly records a compatible zero coefficient-morphism family as an optional interface datum, without asserting a Weil structure. The ambiguous K_O=K_E parenthetical was replaced by a category-correct representative/localization formulation.",
+  "blueprint": "Steps 1-4 realize Step 5 of thm-trf-l-function-euler-product.proof.md up to and including the finite-free P with its reduction comparison: the torsion-free quotient M (step 1), the rational identification K = M[1/varpi] and H_c^i(X,K)=H^i(RGamma_c(X,M)) tensor E (step 2), the finite-Tor normalized reduction tower (step 3), and items (1),(2) of prop-trf-adic-coefficient-morphism-systems (step 4). The rank inequality and the compactification/cohomological-dimension vanishing that end blueprint Step 5 are not part of this lemma's statement; they are carried by the parent's own steps 9-11.",
+  "tool_uses": [
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Rational truncations induced by integral standard truncations, used to see that the nonzero-degree cohomology sheaves of the lattice are torsion (blueprint Step 5); same tool use as accepted on the parent thm-trf-l-function-euler-product."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-constructible-truncations"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-c097455e5",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-c097455e5 (reviewer sub-agent of L); spot-checked: Read the item, blueprint main-20261015 thm-trf-l-function-euler-product Step 5, unit sk-thm-trace-transport, both citers and every cited statement. The statement is true and not weakened; tested on zero and torsion lattices, X empty, j_!O_E (including X=A^1) and C=O+O/varpi^2. Three faults repaired in fixes/: (1) C4/E6, coefficient category and route: steps 1 and 3 took local models from sk-lem-int-integral-heart, which is stated for the sfb Dbc(X,O_E) of sk-lem-integral-models (condensed coefficients) and lies off the route. Replaced by the on-route lem-weil-pbc-integral-stratified-perfect-characterization, which describes exactly def-weil-derived-complete-integral-detailed; torsion exponent, D=ker varpi^e and M are now argued inside that category. (2) C1: step 2 passed the rational isomorphism to RGamma_c, which def-weil-integral-rational-qbar-compact-support leaves to a separate statement; added lem-weil-compact-support-representative-independence (on route). (3) D/E5: the former step 5 proved H_c vanishing outside {0,1,2}, which is not in the statement, skipping Nakayama and the proetale/etale comparison; removed, since the parent's steps 9-11 do it. Also removed the unneeded zero coefficient-morphism aside in step 4, rebuilt proof_deps, and declared tool use prop-constructible-truncations as on the parent. Batch-5 check: lem-trf-compactification-cohomology and sk-lem-int-integral-heart are no longer cited (the latter reached sec-poincare-duality only through cor-galois-lisse-representations, a lisse/Galois lemma, not duality). prop-trf-adic-coefficient-morphism-systems is kept: the item uses only clauses (1)-(2), perfectness and a finite-free integral model of RGamma_c. That is finiteness, a hypothesis the trace-formula assumption does not give, and the proposition is not proved through the trace formula. Its operator and trace clauses (3)-(4) do enter the batch-5 closure, as the landed parent's direct citation of thm-trf-trace-formula-e already does; review.md names the narrower finiteness nodes if a minimal closure is wanted. No cycles; every id exists and is unmerged.; 1 file(s) fixed by the reviewer"
  }
 }

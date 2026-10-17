@@ -4,13 +4,14 @@
  "title": "Coefficient compatibility of the chosen compact-support Frobenius transport",
  "chapter": "sec-trace-formula",
  "unit": "sk-thm-trace-transport",
- "statement": "Fix the global finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and finite extensions $E\\subset M$ of $\\mathbf Q_\\ell$ in a fixed algebraic closure. Let $X_0$ be separated of finite type over $k_0$, put $X=X_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$, and fix one compactification of $X_0\\to\\operatorname{Spec}k_0$ over $k_0$. Use its base change and the specified compactification-relative Frobenius exchange of [def-weil-frobenius-square-exchange] at all coefficient levels. Work in the framework rationalized categories [def-weil-rationalization-karoubi], with $T=-\\otimes_E M$. Write $G_E=Lg_{X,E}^*$, $G_M=Lg_{X,M}^*$ for geometric-Frobenius pullback [def-weil-frobenius-detailed, def-weil-derived-pullback-tensor-hom], and $C_E=R\\Gamma_c(X,-)$, $C_M=R\\Gamma_c(X,-)$ [def-weil-integral-rational-qbar-compact-support, def-weil-finite-coefficient-point]. Let $t_{E,K}:C_EK\\to C_EG_EK$ and $t_{M,TK}:C_MTK\\to C_MG_MTK$ be the actual compact-support transports of [def-weil-frobenius-cohomology-transport].\n\nFor every $K\\in D^b_c(X,E)$ let $d_K:T G_EK\\xrightarrow{\\sim}G_MTK$ be the rationalization of the canonical pullback scalar comparison [lem-pur-integral-operations-scalar-extension], and let $b_K:C_EK\\otimes_E M\\xrightarrow{\\sim}C_MTK$ be the compact-support operation comparison [lem-fix-operation-reduction] followed by the sections comparison [lem-weil-point-sections-scalar-extension]. Then\n$$C_M(d_K)b_{G_EK}(t_{E,K}\\otimes_E M)=t_{M,TK}b_K.$$\nThis equation is natural in $K$ and compatible with the specified identity and successive-field-extension comparisons. It concerns the chosen strict-system exchange before realization, and hence its integral realization and rationalization, without any finite Tor-amplitude assumption on reductions. The canonical pullback scalar comparisons used in this equation also commute with the canonical composition identifications for successive Frobenius pullbacks.",
+ "statement": "Fix the global finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and finite extensions $E\\subset M$ of $\\mathbf Q_\\ell$ in a fixed algebraic closure. Let $X_0$ be separated of finite type over $k_0$, put $X=X_0\\times_{k_0}k$, $s=\\operatorname{Spec}k$, and $a_X:X\\to s$. Fix a compactification $X_0\\xrightarrow{j_0}\\overline X_0\\xrightarrow{r_0}\\operatorname{Spec}k_0$ [def-weil-compactifications-refinements]. Use its base change $c=(j,r)$ and the specified compactification-relative Frobenius exchange [def-weil-frobenius-square-exchange] at every coefficient stage.\n\nFor $F=E,M$ and $Z=X,s$, use the raw rationalized category $\\mathcal C_F(Z)=D^b_c(Z,\\mathcal O_F)[1/\\varpi_F]$ [def-weil-rationalization-karoubi], with no idempotent completion. Let $T_Z:\\mathcal C_E(Z)\\to\\mathcal C_M(Z)$ be integral completed scalar extension followed by rationalization. Write $V=-\\otimes_E M:D^b_{\\mathrm{fd}}(E)\\to D^b_{\\mathrm{fd}}(M)$ for scalar extension of module complexes. Let $G_F=Lg_{X,F}^*$ and $H_F=Lg_{s,F}^*$ be geometric-Frobenius pullbacks [def-weil-frobenius-detailed, def-weil-derived-pullback-tensor-hom], $A_F=Ra^c_{X!,F}:\\mathcal C_F(X)\\to\\mathcal C_F(s)$ [def-weil-integral-rational-qbar-compact-support], and $B_F=\\operatorname{Fib}_{s,F}:\\mathcal C_F(s)\\to D^b_{\\mathrm{fd}}(F)$ [def-weil-finite-coefficient-point]. Put $C_F=B_FA_F$. Let $t_{F,K}:C_FK\\to C_FG_FK$ be the actual transport [def-weil-frobenius-cohomology-transport].\n\nFor $K\\in\\mathcal C_E(X)$ use $d_K:T_XG_EK\\xrightarrow{\\sim}G_MT_XK$, the rationalization of the canonical pullback comparison [lem-pur-integral-operations-scalar-extension], with the specified simultaneous-diagram normalization of [lem-trf-integral-pullback-comparison-realization]. Let $\\rho_K:T_sA_EK\\xrightarrow{\\sim}A_MT_XK$ be the compact-support operation comparison [lem-fix-operation-reduction] for the fixed $c$. Let $v_N:VB_EN\\xrightarrow{\\sim}B_MT_sN$ be the inverse of the rational sections comparison [lem-weil-point-sections-scalar-extension]. Define $b_K=B_M(\\rho_K)v_{A_EK}:VC_EK\\xrightarrow{\\sim}C_MT_XK$. Then in $D^b_{\\mathrm{fd}}(M)$,\n$$C_M(d_K)b_{G_EK}V(t_{E,K})=t_{M,T_XK}b_K.$$\nThe equation is natural in $K$ and compatible with identity and successive finite field extensions under the specified scalar associators. Its exchange compatibility holds already for the specified maps on strict semilinear coefficient diagrams before realization, and therefore for their integral realizations and rationalizations. No finite Tor-amplitude hypothesis on reductions is imposed. The same canonical pullback scalar comparisons commute with the canonical composition identifications for successive Frobenius pullbacks.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
   "place": "Last sentence: Frobenius endomorphisms are transported; coefficient compatibility of the chosen compact-support exchange and pullback composition extracted from returned Step 6, last paragraph."
  },
  "stmt_deps": [
   "def-weil-finite-field-fiber",
+  "def-weil-compactifications-refinements",
   "def-weil-frobenius-square-exchange",
   "def-weil-rationalization-karoubi",
   "def-weil-frobenius-detailed",
@@ -19,51 +20,260 @@
   "def-weil-finite-coefficient-point",
   "def-weil-frobenius-cohomology-transport",
   "lem-pur-integral-operations-scalar-extension",
+  "lem-trf-integral-pullback-comparison-realization",
   "lem-fix-operation-reduction",
   "lem-weil-point-sections-scalar-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the compactification in the statement. Write $P_F=Rr_{*,F}$, $J_F=j_{!,F}$ and $U_F=Lg_{\\overline X,F}^*$, so $A_F=P_FJ_F$. Use the same notation on integral models. The Frobenius squares for $r_0,j_0,a_{X_0}$ use the automorphisms induced on the factor $k$, not morphisms over $k$. They are Cartesian by [lem-weil-frobenius-square-cartesian]. Pullback by these automorphisms preserves integral bounded constructible objects [lem-weil-isomorphism-derived-pullback]. Compact support for $a_X$ and for $j$ has integral bounded constructible output [lem-sf-integral-compact-support-constructible]; for $j$ its compactification is $j$ followed by the identity of $\\overline X$, so this gives the domain of $J_F$. The proper $r$ is a finite-type $k$-morphism, so [lem-sf-integral-direct-image-constructible] gives the domain of $P_F$. Thus all integral comparisons used below apply to $K$, $G_EK$, $J_EK$ and their images. Rationalization uses exactly these objects.",
+   "uses": [
+    "def-weil-frobenius-square-exchange",
+    "lem-weil-frobenius-square-cartesian",
+    "lem-weil-isomorphism-derived-pullback",
+    "lem-sf-integral-compact-support-constructible",
+    "lem-sf-integral-direct-image-constructible",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/sk-thm-trace-transport.proof.md",
+    "place": "Steps 2-4, bounded integral operation domains and passage to the raw field stages; expanded for the chosen Frobenius square."
+   }
+  },
+  {
+   "text": "Work first with whole coefficient diagrams. On each corner $Z$, use strict semilinear systems of $(\\mathcal O_F/\\varpi_F^n)_Z$-modules as in [lem-coef-semilinear-derived-sections], with the simultaneous derived pullbacks, proper direct images, open extensions and adjunction maps specified there. Coefficient extension is derived, computed on K-flat models; it is not assumed exact between finite quotient rings. The actual quotient maps and scalar/pullback chain maps are the ones of [lem-pur-scalar-extension-tower-coherence], which commute with transitions even for ramified $E\\subset M$. In these models the proper exchange is the specified mate, and the open exchange is the specified open-adjunction map. Use the coefficient operation comparisons and their preservation of units, counits and tensor associativity from [lem-fix-operation-reduction]. This chooses the maps being compared before applying any evaluation or inverse limit; equality after separate finite evaluations will not be used to infer equality of system maps.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-scalar-extension-tower-coherence",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/sk-thm-trace-transport.proof.md",
+    "place": "Step 2, compatible coefficient constructions, and Step 3, passage to the adic stage; the strict model of def-weil-frobenius-square-exchange specifies this passage."
+   }
+  },
+  {
+   "text": "Let $a_{f,L}:T Lf_E^*L\\to Lf_M^*TL$ denote the pullback coefficient comparison on the relevant corners. By [lem-trf-integral-pullback-comparison-realization], for composable $h,k$ its simultaneous-diagram normalization satisfies\n$$Lh_M^*(a_{k,L})a_{h,Lk_E^*L}T(c^E_{h,k,L})=c^M_{h,k,TL}a_{kh,L}.$$\nApply this to the two composites $r g_{\\overline X}=g_s r$. Identifying those composites by that equality of scheme maps gives precisely the pull-comparison cube for the proper Frobenius square. This checks the square-identification factor as well as the two pullback comparisons; naturality of a single pullback comparison alone would not do so. The asserted equations hold for whole quotient diagrams, and the canonical comparisons in [lem-pur-integral-operations-scalar-extension] are the realizations of these specified families.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-frobenius-square-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Final paragraph: comparisons transport actual units, counits and tensor associativity maps, hence identities between their composites."
+   }
+  },
+  {
+   "text": "For the proper factor let $u_L:T_sP_EL\\to P_MT_{\\overline X}L$ be its coefficient comparison, and $e^r_F:H_FP_F\\to P_FU_F$ its Frobenius exchange. The mate formula [def-weil-pbc-adjunction-mate] writes this exchange as $R(H\\varepsilon)\\circ R(\\theta)\\circ\\eta$: the unit, the pullback-square identification, and the counit. In the coefficient cube take the four adjunctions to be $Lr_F^*\\dashv P_F$, one at each vertical copy of the square, for $F=E,M$. The two horizontal comparisons are $a_{g_s}$ and $a_{g_{\\overline X}}$; the two push comparisons are $u$. The specified $u$ is the mate of $a_r^{-1}$: $u_L=P_M(T_{\\overline X}\\varepsilon_{E,L})P_M(a_{r,P_EL}^{-1})\\eta_{M,T_sP_EL}$. The preservation of actual units and counits in [lem-fix-operation-reduction] identifies this formula with the operation comparison, so both counit mate equations hold. The pull cube is Step 3. Thus every hypothesis of the general eight-category [lem-weil-pbc-coefficient-exchange-mates] is met, including invertibility of the pull coefficient comparisons, and it gives\n$$P_M(a_{g_{\\overline X},L})u_{U_EL}T_s(e^r_E(L))=e^r_M(T_{\\overline X}L)H_M(u_L)a_{g_s,P_EL}.$$\nThis is the comparison of the specified proper exchange maps, without assuming the exchanges themselves invertible.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-coefficient-exchange-mates",
+    "lem-fix-operation-reduction",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Final paragraph: comparisons transport actual units, counits and tensor associativity maps, hence identities between their composites."
+   }
+  },
+  {
+   "text": "For the open factor put $z_K:T_{\\overline X}J_EK\\to J_MT_XK$. This is the canonical tensor/open-extension comparison: on the ringed slice site it is the inverse of the isomorphism of [lem-weil-pbc-ringed-slice-extension-tensor]. The small pro-etale slice identification is [lem-weil-proetale-weakly-etale-localization]. For the derived version use K-flat representatives: $J$ preserves K-flatness because the displayed tensor identity identifies $J(P)\\otimes Q$ with $J(P\\otimes j^*Q)$, acyclic for acyclic $Q$, as restriction and $J$ are exact on these models [lem-coef-semilinear-derived-sections]. For completed coefficients use the canonical finite-free tensor/completion comparison [lem-weil-finite-free-completed-scalar-comparison]; it identifies this map with the same coefficient-system construction. Write $o_F:U_FJ_F\\to J_FG_F$ for the specified open exchange. On the simultaneous models [lem-coef-semilinear-derived-sections], its inverse is the open-adjunction map whose restriction is the identity, as normalized in [lem-trf-open-square-exchange]. Take the two composites comparing its coefficient extensions and transpose under $J_M\\dashv j^*$. Their restrictions are both the identity after the pull-comparison cube for $j g_X=g_{\\overline X}j$ (Step 3's composition equation, now for $j$). Preservation of the adjunction maps gives equal transposes; the mate bijection gives equal arrows. Inverting this identity gives\n$$J_M(a_{g_X,K})z_{G_EK}T_{\\overline X}(o_E(K))=o_M(T_XK)U_M(z_K)a_{g_{\\overline X},J_EK}.$$\nThe construction and equality take place on whole coefficient diagrams.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-coef-semilinear-derived-sections",
+    "lem-trf-open-square-exchange",
+    "def-weil-pbc-adjunction-mate",
+    "lem-fix-operation-reduction",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Final paragraph: comparisons transport actual units, counits and tensor associativity maps, hence identities between their composites."
+   }
+  },
+  {
+   "text": "Write $e_F=P_F(o_F)e^r_F$ for the compactification-relative exchange [def-weil-frobenius-square-exchange] and $\\rho_K=P_M(z_K)u_{J_EK}$. This is the compact-support comparison for $A_F=P_FJ_F$ supplied by [lem-fix-operation-reduction]. Substitute the two equations of Steps 4-5 in this expression. Naturality of $u$ with respect to $o_E(K)$ moves it past $T(o_E(K))$; naturality of $e^r_M$ with respect to $z_K$ moves $P_MU_M(z_K)$ to $H_MP_M(z_K)$. The remaining adjacent factors are exactly $\\rho_{G_EK}$ and $H_M(\\rho_K)$. Hence\n$$A_M(a_{g_X,K})\\rho_{G_EK}T_s(e_E(K))=e_M(T_XK)H_M(\\rho_K)a_{g_s,A_EK}.$$\nThis is the exchange square, obtained by pasting the proper and open squares with their specified comparison maps.",
+   "uses": [
+    "def-weil-frobenius-square-exchange",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Final paragraph: comparisons transport actual units, counits and tensor associativity maps, hence identities between their composites."
+   }
+  },
+  {
+   "text": "Apply exact restriction to completed coefficients and the derived-limit functor on strict towers [lem-weil-pbc-ringed-strict-tower-homotopy-limit] to Step 6. The simultaneous section models preserve the specified constructions and coherence homotopies [lem-coef-semilinear-derived-sections]. Thus this is an equality of maps of diagrams to which a functor is applied, not a claim that finite reductions detect arbitrary morphisms. The comparison maps $\\alpha_!,\\beta_!$ in [def-weil-frobenius-square-exchange] identify the resulting arrows with the defined integral exchange $\\beta_!R\\lim(e^c)\\alpha_!$. The operation comparisons [lem-fix-operation-reduction] identify the other arrows with the defined integral $a$ and $\\rho$. Conjugating by these identifications gives exactly Step 6 at the integral level. Apply scalar localization [def-weil-rationalization-karoubi]; it preserves composition and equality, and every rational object has an integral representative. The resulting equation holds in $\\mathcal C_M(s)$ for all rational $K$, with $a_{g_X,K}=d_K$. No finite-level compact-support coefficient-change theorem with a finite-Tor hypothesis was applied.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-coef-semilinear-derived-sections",
+    "def-weil-frobenius-square-exchange",
+    "lem-fix-operation-reduction",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/sk-thm-trace-transport.proof.md",
+    "place": "Steps 3-4, integral realization followed by rationalization; the morphisms being realized are fixed before this passage."
+   }
+  },
+  {
+   "text": "For $N\\in\\mathcal C_E(s)$ put $a_{s,N}=a_{g_s,N}$ and use $v_N:VB_EN\\to B_MT_sN$ in the statement. The rational sections comparison [lem-weil-point-sections-scalar-extension] and the definition [def-weil-finite-coefficient-point] give this isomorphism between module complexes. The scalar-extension clause of [lem-weil-frobenius-point-transport-natural] (2), with the actual point transport of [def-weil-frobenius-point-transport], is the well-typed identity\n$$B_M(a_{s,N})v_{H_EN}V(\\iota_{E,N})=\\iota_{M,T_sN}v_N.$$\nHere both sides start at $VB_EN$ and end at $B_MH_MT_sN$. This uses the point-transport compatibility explicitly asserted there; it does not infer that assertion from naturality in a fixed coefficient category.",
+   "uses": [
+    "lem-weil-point-sections-scalar-extension",
+    "def-weil-finite-coefficient-point",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Final sentence, point-fibre part of the auxiliary transport assertion; the explicit coefficient compatibility is the statement of lem-weil-frobenius-point-transport-natural (2)."
+   }
+  },
+  {
+   "text": "Now expand $t_{F,K}=B_F(e_F(K))\\iota_{F,A_FK}$ using [def-weil-frobenius-cohomology-transport]. Put $N=A_EK$ and $N'=A_EG_EK$. Naturality of $v$ on $e_E(K)$, Step 7, Step 8, and then naturality of $\\iota_M$ on $\\rho_K$ give, in that order,\n$$\\begin{aligned}\nC_M(d_K)b_{G_EK}V(t_{E,K})\n&=B_M(A_M(d_K)\\rho_{G_EK}T_s(e_E(K)))v_{H_EN}V(\\iota_{E,N})\\\\\n&=B_M(e_M(T_XK))B_M(H_M(\\rho_K))B_M(a_{s,N})v_{H_EN}V(\\iota_{E,N})\\\\\n&=B_M(e_M(T_XK))B_M(H_M(\\rho_K))\\iota_{M,T_sN}v_N\\\\\n&=B_M(e_M(T_XK))\\iota_{M,A_MT_XK}B_M(\\rho_K)v_N\\\\\n&=t_{M,T_XK}b_K.\n\\end{aligned}$$\nAll arrows lie in $D^b_{\\mathrm{fd}}(M)$; the input is $VC_EK$ and the output is $C_MG_MT_XK$. This proves the displayed equation rather than identifying an unspecified transport with it.",
+   "uses": [
+    "def-weil-frobenius-cohomology-transport",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Final sentence, compact-support transport part: expanded auxiliary coefficient equation, written by the repairing agent."
+   }
+  },
+  {
+   "text": "Every factor in Step 9 is natural: $e_F,t_F$ by [def-weil-frobenius-square-exchange, def-weil-frobenius-cohomology-transport], $\\iota_F$ by [lem-weil-frobenius-point-transport-natural], the operation comparisons by [lem-fix-operation-reduction], and $a,v$ by [lem-pur-integral-operations-scalar-extension, lem-weil-point-sections-scalar-extension]. Composing their naturality squares proves naturality of the displayed equality in $K$, including arbitrary morphisms in the raw rationalization, since the extension on morphisms is the linear scalar localization of the integral extension [def-weil-rationalization-karoubi].",
+   "uses": [
+    "def-weil-frobenius-square-exchange",
+    "def-weil-frobenius-cohomology-transport",
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-fix-operation-reduction",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-point-sections-scalar-extension",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Final paragraph: comparisons transport actual units, counits and tensor associativity maps, hence identities between their composites."
+   }
+  },
+  {
+   "text": "For $E=M$ the specified pull/scalar comparisons are identities [lem-trf-integral-pullback-comparison-realization] and $v$ is the identity [lem-weil-point-sections-scalar-extension]. The proper coefficient comparison is the mate of the identity pull comparison; the open comparison is the identity tensor comparison. The mate formula makes $u,z,\\rho$ identities, hence $b=1$ and the equation reduces to $t=t$. For $E\\subset M\\subset L$, identify the two scalar-extension functors by [lem-weil-scalar-extension-composition]. The pull comparisons obey its associator by [lem-trf-integral-pullback-comparison-realization]. For the proper comparison, take the counit transpose of $u^{L/M}_{T_{\\overline X,M/E}(-)}\\,T_{s,L/M}(u^{M/E})$. Apply first the counit mate equation for $u^{L/M}$ and then the one for $u^{M/E}$; the result is $T_{L/E}(\\varepsilon_E)$ preceded by the inverse of the composite pull coefficient comparison. Its tower equation identifies this with the transpose of $u^{L/E}$. The mate bijection [def-weil-pbc-adjunction-mate] gives equality. For $z$, both maps are the tensor reassociation of open extension, so tensor associativity [lem-fix-operation-reduction] gives equality. Therefore $\\rho^{L/E}=\\rho^{L/M}T(\\rho^{M/E})$ under the scalar associators. Finally $v$ obeys the explicit associator equation of [lem-weil-point-sections-scalar-extension]. Substitute these equations in $b=B(\\rho)v$: its two-step comparison equals its direct comparison, and pasting the two equations of Step 9 yields the direct one.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-weil-scalar-extension-composition",
+    "def-weil-pbc-adjunction-mate",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Final paragraph: comparisons transport actual units, counits and tensor associativity maps, hence identities between their composites."
+   }
+  },
+  {
+   "text": "For composable Frobenius powers use the composition/scalar equation in [lem-trf-integral-pullback-comparison-realization] with $h=g_X^r$ and $k=g_X^t$. It identifies the comparison for $L(g_X^{r+t})^*$ with the two comparisons for $Lg_X^{r*}Lg_X^{t*}$ under the specified composition isomorphisms. The same statement asserts associativity, units and arbitrary finite iterations, before realization and after rationalization. Thus the $d_K$ used in Step 9 has exactly the final composition compatibility claimed in the item; this conclusion uses the composition/scalar theorem and is not inferred from its field-tower clause alone.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Final sentence, compatibility of transporting Frobenius pullbacks under coefficient passage; precise composition assertion supplied by the cited auxiliary node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-coefficient-point",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-frobenius-point-transport",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-rationalization-karoubi",
+  "lem-coef-semilinear-derived-sections",
+  "lem-fix-operation-reduction",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pur-scalar-extension-tower-coherence",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-open-square-exchange",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-pbc-coefficient-exchange-mates",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Final sentence, 'the Frobenius endomorphisms are transported by this isomorphism': auxiliary coefficient compatibility needed to justify that sentence for the specified compact-support construction; the source does not display this square. The detailed mate, open-adjunction and pasting calculation is an agent proof using the existing comparison statements; it is not asserted verbatim in the blueprint."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Compactly supported cohomology transport along geometric Frobenius commutes with finite coefficient field extension using a fixed compactification",
-   "results": "8 hits: groupCohomology.coindIso, groupCohomology.map_id_comp_H0Iso_hom, groupCohomology.map_H0Iso_hom_f_apply, groupCohomology.map_id_comp_H0Iso_hom_apply, groupCohomology.map_H0Iso_hom_f, WittVector.IsocrystalEquiv.frob_equivariant, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁, groupCohomology.resNatTrans_app",
+   "results": "8 hits: groupCohomology.exists_mul_galRestrict_of_norm_eq_one, groupCohomology.coindIso, WittVector.IsocrystalEquiv.frob_equivariant, isConj_arithFrobAt, groupCohomology.map_id_comp_H0Iso_hom, groupCohomology.map_H0Iso_hom_f_apply, groupCohomology.map_id_comp_H0Iso_hom_apply, groupCohomology.map_H0Iso_hom_f",
    "date": "2026-10-17",
-   "verdict": "no match: the hits do not state this lemma; see the source comparison in report.md"
+   "verdict": "no match: hits concern elementary scalar extension, finite fields, group cohomology or test functions; none gives the specified pro-etale compact-support comparison"
   },
   {
-   "tool": "leanfinder",
-   "query": "Base change of coefficient fields commutes with the natural Frobenius transport map on compact cohomology and rational point fibers of constructible sheaves",
-   "results": "8 hits: WittVector.IsocrystalHom.frob_equivariant, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.IsocrystalEquiv.frob_equivariant, WeierstrassCurve.map_baseChange, WeierstrassCurve.VariableChange.map_baseChange, WeierstrassCurve.Affine.Point.map_baseChange, RingHom.map_frobeniusEquiv_symm, isConj_arithFrobAt",
+   "tool": "grep",
+   "query": "Frobenius.*(coefficient|cohomology)|((coefficient|cohomology).*Frobenius)",
+   "results": "0 hits: ; subdirectory Mathlib/AlgebraicGeometry",
    "date": "2026-10-17",
-   "verdict": "no match: the hits do not state this lemma; see the source comparison in report.md"
+   "verdict": "no match: hits concern elementary scalar extension, finite fields, group cohomology or test functions; none gives the specified pro-etale compact-support comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*Frobenius|Frobenius.*scalar",
+   "results": "1 hits: Mathlib/FieldTheory/Finite/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern elementary scalar extension, finite fields, group cohomology or test functions; none gives the specified pro-etale compact-support comparison"
   },
   {
    "tool": "leansearch",
    "query": "Scalar extension preserves the compact support Frobenius exchange transformation and the rational point stalk transport",
    "results": "8 hits: LinearEquiv.extendScalarsOfIsLocalizationEquiv, CompactlySupportedContinuousMap.instSMulOfContinuousConstSMul, AlgHom.extendScalars, LinearMap.extendScalarsOfIsLocalization, LinearMap.extendScalarsOfIsLocalization_apply', AlgHom.extendScalarsOfSurjective, LinearMap.extendScalarsOfSurjective, CompactlySupportedContinuousMap.instSMulOfContinuousSMulOfContinuousMapClass",
    "date": "2026-10-17",
-   "verdict": "no match: the hits do not state this lemma; see the source comparison in report.md"
+   "verdict": "no match: hits concern elementary scalar extension, finite fields, group cohomology or test functions; none gives the specified pro-etale compact-support comparison"
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory.NatTrans.naturality",
    "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
    "date": "2026-10-17",
-   "verdict": "no match: the hits do not state this lemma; see the source comparison in report.md"
+   "verdict": "no match: hits concern elementary scalar extension, finite fields, group cohomology or test functions; none gives the specified pro-etale compact-support comparison"
   },
   {
-   "tool": "grep",
-   "query": "Frobenius.*(coefficient|cohomology)|((coefficient|cohomology).*Frobenius)",
-   "results": "0 hits: ; Mathlib/AlgebraicGeometry",
+   "tool": "leanfinder",
+   "query": "Naturality of compact support exchange under extension of coefficient fields",
+   "results": "8 hits: ContDiffMapSupportedIn.structureMapLM_eq_of_scalars, ContDiffMapSupportedIn.toBoundedContinuousFunctionCLM_eq_of_scalars, ContDiffMapSupportedIn.structureMapCLM_eq_of_scalars, ContDiffMapSupportedIn.toBoundedContinuousFunctionLM_eq_of_scalars, TestFunction.coe_ofSupportedInLM, TestFunction.toBoundedContinuousFunctionCLM_eq_of_scalars, TestFunction.coe_ofSupportedInCLM, ContDiffMapSupportedIn.postcompLM_apply",
    "date": "2026-10-17",
-   "verdict": "no match: the hits do not state this lemma; see the source comparison in report.md"
+   "verdict": "no match: hits concern elementary scalar extension, finite fields, group cohomology or test functions; none gives the specified pro-etale compact-support comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-trf-karoubi-independence",
@@ -73,10 +283,109 @@
  "blueprint": {
   "from": {
    "node": "prop-trf-karoubi-independence",
-   "place": "Last sentence: Frobenius endomorphisms are transported; coefficient compatibility of the chosen compact-support exchange and pullback composition extracted from returned Step 6, last paragraph.",
+   "place": "Final sentence, 'the Frobenius endomorphisms are transported by this isomorphism': auxiliary coefficient compatibility needed to justify that sentence for the specified compact-support construction; the source does not display this square.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-frobenius-transports-scalar-extension",
+  "worker": "stage1",
+  "summary": "Repair of C4, C8, E4, E7, F1, F2, F4, F5: distinguish sheaf and module coefficient categories; correct the source attribution; construct the proper and open comparison squares on simultaneous diagrams, paste them, realize and rationalize, then explicitly compute the point-fibre transport equality. Reuse existing pullback-composition and point-transport coherence nodes; no new nodes. Preserve the original mathematical claim, clarifying the actual comparison normalizations. citations.json is now written and checked.",
+  "blueprint": "Auxiliary justification of the final sentence of prop-trf-karoubi-independence.proof.md. Steps 2-6 construct compatible finite coefficient diagrams (unit Step 2), Step 7 realizes and rationalizes them (unit Steps 3-4), and Steps 8-12 give point-fibre transport and coherences for the field-stage comparison. This lemma proves no trace identity and makes no change to the chapter or unit route; no reference to a nonexistent 'returned Step 6' remains.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-coefficient-exchange-mates",
+    "why": "Generic mate-cube transport theorem used in Step 4 after its hypotheses are checked; it replaces no coefficient-stage step of the trace-transport unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Generic ringed-slice tensor/extension-by-zero identity used to specify z in Step 5."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identification of an open pro-etale site with a slice site, needed to apply the ringed-slice tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Functorial derived limit on strict towers, used only to apply realization to an already commuting square."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "General coherent section models for the actual operations, units, counits and mates; needed to prove the exchange equality before realization."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Naturality and the explicitly asserted scalar-extension compatibility of point transport, needed to pass from exchange to cohomology."
+   },
+   {
+    "node": "lem-pur-scalar-extension-tower-coherence",
+    "why": "Generic strict quotient-diagram normalization for pullback and tensor scalar comparisons, including ramified extensions."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Canonical finite-free tensor/completion comparison, used for the open coefficient comparison."
+   },
+   {
+    "node": "lem-weil-frobenius-square-cartesian",
+    "why": "Geometric Cartesian-square and isomorphism facts for the semilinear Frobenius, independently of coefficient stages."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Domain check for pullback by the Frobenius scheme automorphisms."
+   },
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Bounded integral operation-domain check, not the trace identity."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Bounded integral domain check for the proper factor."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "The specified natural, unital and transitive sections comparison into module complexes."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "The scalar associator used in the successive-field-extension clause."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Canonical pullback coefficient comparison on integral bounded constructible objects."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Actual operation comparisons preserving associativity and adjunction data; realizes coefficient compatibility, not an alternative route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-coefficient-exchange-mates",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-pur-scalar-extension-tower-coherence",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-fix-operation-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-2f8d0a2bc",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-2f8d0a2bc (reviewer sub-agent of L); spot-checked: Read in full: the item, its 12 steps, the statement of every cited node (24), unit sk-thm-trace-transport, the main-20261015 prop-trf-karoubi-independence proof (last sentence), sk-thm-trace-transport.proof Steps 2-4, the last paragraphs of the lem-fix-operation-reduction proof, and Stacks 07A7. The statement is well typed: raw rationalized C_F, T_Z = completed scalar extension then rationalization, B_F into D^b_fd(F), V for module complexes, and both sides go V C_E K -> C_M G_M T_X K. It adds no hypothesis and drops none, and it is not a target. I checked the edge cases E=M, a three-field tower, a ramified extension, K=0, empty X and j=id. I redid the typing and the pasting myself: the proper mate cube (Step 4, hypotheses of lem-weil-pbc-coefficient-exchange-mates listed and supplied), the open square by transposition and identity restriction (Step 5), the compact-support pasting (Step 6), realization through the defining beta_! Rlim(e^c) alpha_! and rationalization (Step 7), the explicit point-transport scalar clause of lem-weil-frobenius-point-transport-natural (2) (Step 8), and the five-line chain of Step 9. All are correct. Steps 11-12 follow from the composition, scalar and associator clauses of lem-trf-integral-pullback-comparison-realization and lem-weil-point-sections-scalar-extension. The dependency closure has no cycle (the parent is correctly not a dependency) and no SGA source is cited. The only off-route statements are lem-pur-integral-operations-scalar-extension and lem-weil-point-sections-scalar-extension, both declared and already accepted on the parent; I accept them as tool uses. No new nodes. Duplicate check: lem-trf-compact-support-coefficient-transport (finite-ring ctf), lem-trf-frobenius-coefficient-reduction-coherence and lem-trf-local-frobenius-transport-normalization (stalk analogue) are different statements. FIX: removed the split_report.tool_uses entry for 'lem-weil-pbc-adjunction-mate', which is a nonexistent id (the node actually cited is def-weil-pbc-adjunction-mate, on-route and a mathlib definition). Maintainer note: source.place (a maintainer-owned field) still says 'extracted from returned Step 6', which contradicts the report's correction; it should take the proof_origin.place text.; 1 file(s) fixed by the reviewer"
  }
 }
