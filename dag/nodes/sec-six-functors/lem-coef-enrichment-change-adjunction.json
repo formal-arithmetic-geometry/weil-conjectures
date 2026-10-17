@@ -69,9 +69,22 @@
    }
   },
   {
-   "text": "Specialize lem-coef-algebroid-segal-localization-model to the terminal one-object monoidal category T and S=empty. Evaluation at its unique object identifies P(T) with Spc; Day convolution is cartesian product because the Day indexing category has a single object and arrow. The cartesian fibration T_tensor has one-point fibers over every [n], so T_tensor≃Delta. Thus the definition of Q_T in def-coef-segal-presheaf-localization is exactly the canonical Segal condition on simplicial spaces. The cited model equivalence therefore gives N:Algd(Spc)≃Seg_infty, identifying X_A with Z_0 and A(x,y) with the arrow fiber of Z=N(A), compatibly with the canonical unit and composition maps. The statement of lem-coef-algebroid-equivalence-nerve identifies I_0(A) with X_A and the fiber of I_1(A) at (x,y) with the invertible components of Map_Spc(*,A(x,y))≃A(x,y). Under N these are exactly the invertible components of the arrow fiber of Z. The homotopy-fiber detection lemma, with base the identity of X_A^2, identifies I_1(A) with Z_eq. Under these identifications the map Map(E^0,A)→Map(E^1,A) induced by s sends each object to its identity arrow, hence is s_0:Z_0→Z_eq. By lem-coef-algebroid-completion, A is complete exactly when this map is an equivalence, which is Rezk completeness as defined in lem-coef-complete-segal-quasicategory-comparison. Restrict N and its inverse to these full subcategories to get Cat_Spc≃CSS_infty, and compose with R^{-1} from that comparison node to get Cat_Spc≃Cat_infty. For complete A set C=R^{-1}N(A) and let e:N(A)≃R(C) be the counit equivalence. The components e_0,e_1 commute with the endpoint maps up to their simplicial homotopies; applying e_1 to an arrow and e_0 to its endpoint paths defines the map on homotopy fibers at (x,y) and (e_0x,e_0y). The inverse components and unit/counit homotopies give its inverse. Combining the model identification of the source with the Rezk-node identification of the target gives A(x,y)≃Map_C(e_0x,e_0y), naturally in A,x,y.",
+   "text": "Let $T$ be the terminal monoidal infinity category (one object $*$, only identities, $T^\\otimes=\\Delta^{\\mathrm{op}}$) and take $S=\\varnothing$ in [lem-coef-algebroid-segal-localization-model]. Evaluation at $*$ identifies $P(T)$ with $\\mathrm{Spc}$. Monoidal identification: the unit functor $u:T\\to\\mathrm{Spc}$, $*\\mapsto*$, is strong monoidal for the cartesian structure, its enhancement being the section of $\\mathrm{Spc}^\\times\\to\\Delta^{\\mathrm{op}}$ through the unit tuples $(*,\\ldots,*)$; cocartesian transport sends a unit tuple to the tuple of block products of points, again a unit tuple, so every arrow goes to a cocartesian arrow. By the last clause of [lem-coef-operadic-day-convolution] (spaces are cocomplete and cartesian product preserves colimits separately), the colimit-preserving Yoneda extension $u_!:P(T)\\to\\mathrm{Spc}$ is strong monoidal for Day convolution. It preserves colimits and sends $y(*)=*$ to $*$, so under evaluation it is the identity of $\\mathrm{Spc}$. Hence $P(T)$ with Day convolution is monoidally equivalent to cartesian-monoidal spaces, and postcomposition gives $\\operatorname{Algd}(P(T))\\simeq\\operatorname{Algd}(\\mathrm{Spc})$. The cartesian fibration $T_\\otimes\\to\\Delta$ is classified by the constant functor at a point, so $T_\\otimes\\simeq\\Delta$, every list $\\boldsymbol c$ is $(*,\\ldots,*)$, and $P(T_\\otimes)$ is simplicial spaces. The Segal condition of [def-coef-segal-presheaf-localization] then reads $Z_n\\simeq Z_1\\times_{Z_0}\\cdots\\times_{Z_0}Z_1$, so $Q_T$ is the Segal spaces of [lem-coef-complete-segal-quasicategory-comparison]. The model equivalence gives $N:\\operatorname{Algd}(\\mathrm{Spc})\\simeq\\mathrm{Seg}_\\infty$, identifying $X_A$ with $Z_0$ and $A(x,y)$ with the arrow fibre $H_Z(x,y)(*)$ of $Z=N(A)$, compatibly with the canonical unit and composition maps. For $\\phi=*$ one has $a_\\phi=*$ and $E_T(*)=\\Delta^1$, so the model's displayed formula gives $Z_1\\simeq\\int_{(x,y)\\in Z_0^2}H_Z(x,y)(*)$ over $Z_0^2$.",
    "uses": [
     "def-coef-segal-presheaf-localization",
+    "lem-coef-algebroid-segal-localization-model",
+    "lem-coef-operadic-day-convolution",
+    "lem-coef-complete-segal-quasicategory-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Theorem 4.4.7"
+   }
+  },
+  {
+   "text": "With $N$, $Z=N(A)$ and the arrow-fibre formula of step 4: $E^1$ has object set $\\{0,1\\}$ and all mapping objects $*$, so by the same formula the point of the arrow fibre of $N(E^1)$ at $(0,1)$ is a map $\\Delta^1\\to N(E^1)$ with endpoints $0,1$. Restriction along it gives $w:I_1(A)=\\operatorname{Map}(E^1,A)\\simeq\\operatorname{Map}(N(E^1),Z)\\to\\operatorname{Map}(\\Delta^1,Z)=Z_1$ over $X_A^2=Z_0^2$. On the fibre over $(x,y)$ it is evaluation of $E^1\\to A$ on the arrow $*=E^1(0,1)\\to A(x,y)$, followed by $A(x,y)\\simeq H_Z(x,y)(*)$. By [lem-coef-algebroid-equivalence-nerve] this evaluation identifies that fibre of $I_1(A)$ with the invertible components of $\\operatorname{Map}_{\\mathrm{Spc}}(*,A(x,y))=A(x,y)$. Because $N$ respects units and composition, these are exactly the arrows invertible in the homotopy category of $Z$, i.e. the fibre of $Z_{\\mathrm{eq}}$. So $w$ lands in $Z_{\\mathrm{eq}}$ and is an equivalence on every fibre over the identity of $X_A^2$; [lem-coef-spaces-homotopy-fiber-detection] gives $w:I_1(A)\\simeq Z_{\\mathrm{eq}}$. Under $w$ and $I_0(A)\\simeq X_A=Z_0$, precomposition with $s:E^1\\to E^0$ becomes $s_0:Z_0\\to Z_{\\mathrm{eq}}$, since $s$ sends the arrow of $E^1$ to the identity. By [lem-coef-algebroid-completion], $A$ is complete exactly when $\\operatorname{Map}(E^0,A)\\to\\operatorname{Map}(E^1,A)$ is an equivalence, i.e. exactly when $Z$ is Rezk complete. Restricting $N$ and its inverse to these full subcategories gives $\\operatorname{Cat}_{\\mathrm{Spc}}\\simeq\\mathrm{CSS}_\\infty$. Composing with $R^{-1}$ from [lem-coef-complete-segal-quasicategory-comparison] gives $\\operatorname{Cat}_{\\mathrm{Spc}}\\simeq\\mathrm{Cat}_\\infty$.",
+   "uses": [
     "lem-coef-algebroid-segal-localization-model",
     "lem-coef-algebroid-equivalence-nerve",
     "lem-coef-spaces-homotopy-fiber-detection",
@@ -81,11 +94,24 @@
    "elementary": false,
    "source": {
     "document": "https://arxiv.org/html/1312.3178",
-    "place": "Theorem 4.4.7 and Theorem 5.4.6"
+    "place": "Theorem 5.4.6 and its proof"
    }
   },
   {
-   "text": "For any small indexing infinity category K, postcomposition sends a K-diagram U to f_*U or g_*U and sends a transformation to its image. The units and counits of steps 1 and 3 give transformations on these diagrams whose components at k are eta_{U(k)} and epsilon_{U(k)}; their naturality squares and higher simplices are those of the original coherent transformations. For diagrams U,V, the assignments a↦g_*(a)∘eta_U and b↦epsilon_V∘f_*(b) are inverse maps on the diagram mapping spaces: their composites are the identities by naturality and the two triangle homotopies, evaluated on the whole diagrams. Use L_W f_* in place of f_* for the complete-object adjunction. Likewise, postcomposing diagrams with N, R and their chosen inverses gives inverse functors, with the postcomposed unit/counit equivalences. The mapping-fiber identifications of step 4 commute with diagram arrows and higher simplices by their stated naturality. Thus the adjunctions and comparison identifications have the asserted coherent diagram naturality.",
+   "text": "For complete $A$ put $C=R^{-1}N(A)$ with $N$ from step 4 and $R$ from step 5, and let $e:N(A)\\simeq R(C)$ be the counit equivalence. Its components $e_0,e_1$ commute with the endpoint maps $(-)_1\\to(-)_0^2$ up to their simplicial homotopies. Applying $e_1$ to an arrow and $e_0$ to its endpoint paths defines a map from the homotopy fibre at $(x,y)$ to the one at $(e_0x,e_0y)$. Since $e_1$ and $e_0\\times e_0$ are equivalences, [lem-coef-spaces-homotopy-fiber-detection] makes this fibre map an equivalence. The source fibre is $A(x,y)$ by the identification from [lem-coef-algebroid-segal-localization-model] used in step 4. The target fibre is $\\operatorname{Map}_C(e_0x,e_0y)$ by [lem-coef-complete-segal-quasicategory-comparison]. Hence $A(x,y)\\simeq\\operatorname{Map}_C(e_0x,e_0y)$, naturally in $A$, $x$, $y$, because the model identification, $e$ and the Rezk-node identification are natural.",
+   "uses": [
+    "lem-coef-algebroid-segal-localization-model",
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-complete-segal-quasicategory-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Theorem 5.4.6 (mapping spaces of the comparison)"
+   }
+  },
+  {
+   "text": "For any small indexing infinity category K, postcomposition sends a K-diagram U to f_*U or g_*U and sends a transformation to its image. The units and counits of steps 1 and 3 give transformations on these diagrams whose components at k are eta_{U(k)} and epsilon_{U(k)}; their naturality squares and higher simplices are those of the original coherent transformations. For diagrams U,V, the assignments a↦g_*(a)∘eta_U and b↦epsilon_V∘f_*(b) are inverse maps on the diagram mapping spaces: their composites are the identities by naturality and the two triangle homotopies, evaluated on the whole diagrams. Use L_W f_* in place of f_* for the complete-object adjunction. Likewise, postcomposing diagrams with N, R and their chosen inverses gives inverse functors, with the postcomposed unit/counit equivalences. The mapping-fiber identifications of step 6 commute with diagram arrows and higher simplices by their stated naturality. Thus the adjunctions and comparison identifications have the asserted coherent diagram naturality.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -106,8 +132,9 @@
   "lem-coef-presentable-infinity-adjoints",
   "def-coef-segal-presheaf-localization",
   "lem-coef-algebroid-segal-localization-model",
-  "lem-coef-algebroid-equivalence-nerve",
-  "lem-coef-complete-segal-quasicategory-comparison"
+  "lem-coef-operadic-day-convolution",
+  "lem-coef-complete-segal-quasicategory-comparison",
+  "lem-coef-algebroid-equivalence-nerve"
  ],
  "proof_origin": {
   "by": "agent",
@@ -191,10 +218,59 @@
    "results": "{\"t\": \"2026-10-16T17:58:10Z\", \"tool\": \"leanfinder\", \"query\": \"For a monoidal colimit preserving functor with lax monoidal right adjoint, induced functors on algebras over a nonsymmetric infinity operad are adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.mapMon\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\", \"CategoryTheory.Adjunction.isMonoidal_comp\", \"CommRingCat.monoidAlgebraAdj\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.mapMon_counit\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε\"], \"digest\": \"9511e2814cee8532\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary category theory only"
+  },
+  {
+   "tool": "grep",
+   "query": "change.?[Oo]f.?[Bb]ase|[Ee]nrich.*[Aa]djunction|[Aa]djunction.*[Ee]nrich",
+   "results": "{\"t\": \"2026-10-17T07:46:07Z\", \"tool\": \"grep\", \"query\": \"change.?[Oo]f.?[Bb]ase|[Ee]nrich.*[Aa]djunction|[Aa]djunction.*[Ee]nrich\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category enrichment and monoidal adjunctions do not give the variable-object infinity-category adjunction, completion, or complete Segal-space comparison. Read TransportEnrichment at Mathlib/CategoryTheory/Enriched/Basic.lean:115 and rightAdjointLaxMonoidal at Mathlib/CategoryTheory/Monoidal/Functor.lean:947; EnrichedCat.lean:19 lists change of base as future work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A colimit preserving strong monoidal functor and its lax monoidal right adjoint induce adjunctions on enriched infinity categories",
+   "results": "{\"t\": \"2026-10-17T07:46:08Z\", \"tool\": \"leansearch\", \"query\": \"A colimit preserving strong monoidal functor and its lax monoidal right adjoint induce adjunctions on enriched infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.ofBifunctor\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.mapMon\", \"CategoryTheory.Adjunction.instIsMonoidal\", \"CategoryTheory.Limits.IsColimit.ofLeftAdjoint\", \"CategoryTheory.Adjunction.mapCommMon\", \"CategoryTheory.Adjunction.colim_preservesColimits\", \"CategoryTheory.MonoidalClosed.FunctorCategory.adj\"], \"digest\": \"787e99333025932f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category enrichment and monoidal adjunctions do not give the variable-object infinity-category adjunction, completion, or complete Segal-space comparison. Read TransportEnrichment at Mathlib/CategoryTheory/Enriched/Basic.lean:115 and rightAdjointLaxMonoidal at Mathlib/CategoryTheory/Monoidal/Functor.lean:947; EnrichedCat.lean:19 lists change of base as future work."
+  },
+  {
+   "tool": "loogle",
+   "query": "Enriched Adjunction",
+   "results": "{\"t\": \"2026-10-17T07:46:08Z\", \"tool\": \"loogle\", \"query\": \"Enriched Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `Enriched`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category enrichment and monoidal adjunctions do not give the variable-object infinity-category adjunction, completion, or complete Segal-space comparison. Read TransportEnrichment at Mathlib/CategoryTheory/Enriched/Basic.lean:115 and rightAdjointLaxMonoidal at Mathlib/CategoryTheory/Monoidal/Functor.lean:947; EnrichedCat.lean:19 lists change of base as future work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A colimit preserving strong monoidal functor and its lax monoidal right adjoint induce adjunctions on enriched infinity categories",
+   "results": "{\"t\": \"2026-10-17T07:46:10Z\", \"tool\": \"leanfinder\", \"query\": \"A colimit preserving strong monoidal functor and its lax monoidal right adjoint induce adjunctions on enriched infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.TransportEnrichment.enrichedOrdinaryCategory\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_counitIso\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"CategoryTheory.EnrichedCat.bicategory\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_functor\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_unitIso\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor_obj\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_inverse\"], \"digest\": \"9b5a8ad3ff13cb02\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category enrichment and monoidal adjunctions do not give the variable-object infinity-category adjunction, completion, or complete Segal-space comparison. Read TransportEnrichment at Mathlib/CategoryTheory/Enriched/Basic.lean:115 and rightAdjointLaxMonoidal at Mathlib/CategoryTheory/Monoidal/Functor.lean:947; EnrichedCat.lean:19 lists change of base as future work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lax monoidal right adjoints preserve complete categorical algebras and space enriched infinity categories are small infinity categories",
+   "results": "{\"t\": \"2026-10-17T07:48:27Z\", \"tool\": \"leanfinder\", \"query\": \"Lax monoidal right adjoints preserve complete categorical algebras and space enriched infinity categories are small infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\", \"CategoryTheory.TransportEnrichment.enrichedOrdinaryCategory\", \"CategoryTheory.TransportEnrichment\", \"CategoryTheory.Adjunction.IsMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal\", \"CategoryTheory.Monoidal.Reflective.closed\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor\"], \"digest\": \"036398e176fd1091\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category enrichment and monoidal adjunctions do not give the variable-object infinity-category adjunction, completion, or complete Segal-space comparison. Read TransportEnrichment at Mathlib/CategoryTheory/Enriched/Basic.lean:115 and rightAdjointLaxMonoidal at Mathlib/CategoryTheory/Monoidal/Functor.lean:947; EnrichedCat.lean:19 lists change of base as future work."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Enriched\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-17T07:48:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"Enriched\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category enrichment and monoidal adjunctions do not give the variable-object infinity-category adjunction, completion, or complete Segal-space comparison. Read TransportEnrichment at Mathlib/CategoryTheory/Enriched/Basic.lean:115 and rightAdjointLaxMonoidal at Mathlib/CategoryTheory/Monoidal/Functor.lean:947; EnrichedCat.lean:19 lists change of base as future work."
+  },
+  {
+   "tool": "grep",
+   "query": "change.?[Oo]f.?[Bb]ase|[Ee]nrich.*[Aa]djunction|[Aa]djunction.*[Ee]nrich",
+   "results": "{\"t\": \"2026-10-17T07:48:28Z\", \"tool\": \"grep\", \"query\": \"change.?[Oo]f.?[Bb]ase|[Ee]nrich.*[Aa]djunction|[Aa]djunction.*[Ee]nrich\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean\", \"Mathlib/CategoryTheory/Enriched/EnrichedCat.lean\"], \"digest\": \"ff5f13758a8d5047\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category enrichment and monoidal adjunctions do not give the variable-object infinity-category adjunction, completion, or complete Segal-space comparison. Read TransportEnrichment at Mathlib/CategoryTheory/Enriched/Basic.lean:115 and rightAdjointLaxMonoidal at Mathlib/CategoryTheory/Monoidal/Functor.lean:947; EnrichedCat.lean:19 lists change of base as future work."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-enriched-category-tensor-calculus",
   "by": "worker",
@@ -206,17 +282,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-enrichment-change-adjunction",
   "worker": "stage1",
-  "summary": "Expanded the variable-object mapping-space adjunction, singleton-locality preservation and completion reflector. The space comparison specializes the existing presheaf Segal model at the terminal monoidal category and derives completeness from the existing equivalence-nerve and locality theorems. Two statement-only searched prerequisites remain: the operad-natural algebra adjunction and the independent Rezk/quasicategory comparison. Second reading removed the redundant space-algebroid model and wrote the fiber and diagram maps explicitly. The imported statement is unchanged.",
+  "summary": "Q83 rechecked the inherited five-step argument against Gepner–Haugseng 4.3.19, 5.7.17, 5.4.6, 4.4.7 and A.5.11, and Joyal–Tierney 4.9–4.11. All thirteen prerequisite nodes already exist and state the assertions used. Retained the statement and proof, marked the item split, reran and recorded Mathlib searches, and supplied verbatim per-step citations and source/edge-case review. No new nodes or Mathlib leaves.",
   "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim; the change-of-enrichment machinery already singled out in the item source is expanded, without changing the coefficient category or the route.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q02-b8ac8ce66",
-  "group": "Q02",
+  "reviewer": "NT-cc-Q83-cf76eadcf",
+  "group": "Q83",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-b8ac8ce66 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and the statements of all 13 cited nodes in full. Sources read in the arXiv PDFs. Gepner–Haugseng 1312.3178: Lemma 4.3.19, Corollary 4.4.5, Theorem 4.4.7, Proposition 5.4.4, Theorem 5.4.6, Proposition 5.7.17 with its proof, Proposition A.5.11 with its proof. Joyal–Tierney math/0607820: Gamma(X)_m=J(X^{Delta[m]}), Propositions 4.9-4.10, Theorem 4.11. The item statement is unchanged and matches GH clause by clause. Step 1 follows GH 4.3.19: the fibre formula of the object-space fibration, an L_gen bridge from the generalized operad Delta_X^op (it commutes with postcomposition), the new operadic node, fibre detection over the identity of Map(X,Y), and the pointwise adjoint criterion. Step 2 follows 5.7.17(i): strong monoidality gives f_*E^n=E^n, so the s-locality maps agree; it is rightly marked elementary. Step 3 follows 5.4.4 and 5.7.17(ii): the {s}-localization reflector and the mapping chain. Step 4 specializes the existing presheaf Segal model at the terminal monoidal category with S empty (P(*)=Spc with cartesian Day product, T_tensor equivalent to Delta, Q_T equal to Segal spaces), so the dropped space-algebroid child really was redundant. Completeness becomes Rezk completeness by the equivalence nerve, fibre detection and s-locality. The step relies on the model's 'canonical maps' compatibility for units and composition; it is terse but correct. Step 5 is formal diagram postcomposition of the coherent unit and counit data. New node lem-coef-operadic-change-enrichment matches GH A.5.11 and its proof (R_O natural in O; colour components by restricting to Delta^op_int), and the worker correctly reports the source's F_[0]/F_[1] typo. New node lem-coef-complete-segal-quasicategory-comparison matches JT's Gamma, Proposition 4.10 and Theorem 4.11; the arrow fibre is the mapping space because J(X^{delta1}) is a Kan fibration. Tested on C empty, [1], BG, and the non-complete discrete nerve of a group G. Neither new node duplicates an existing node or restates the item (I searched the DAG for Segal, Rezk, A.5.11, 1312.3178, lax-monoidal adjunctions and nerve comparisons). Forms B1-B9 hold: statement only, three search kinds recorded, single TeX escapes, blueprint ancestor and via correct, same unit. All cited nodes are in unit sk-prop-sf-biduality-general; no tool_uses are needed; no SGA source; no cycle; proof_deps equals the union of uses; the dropped node is cited nowhere. No fixes and no drops."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-cf76eadcf (reviewer sub-agent of L); spot-checked: Read the item, all 13 cited statements and Gepner–Haugseng 1312.3178 (Lemma 4.3.19, Prop 5.4.4, Thm 5.4.6, Prop 5.7.17 with proof, Prop A.5.11) from the arXiv PDF. The statement matches GH hypothesis by hypothesis (presentably monoidal V and W, f strong monoidal and colimit-preserving, g with the adjoint lax structure, Lf_* = GH's L_W F_*) and is not weakened. There are no new nodes. No duplicates found by grep for change-of-enrichment, Cat_Spc and Rezk/Segal. No cycle, no SGA, no tool_uses. Steps 1–3 and 5 are correct (fibre formula + q(X) replacement + A.5.11 + fibre detection; 5.7.17(i) is elementary from strong monoidality; the reflector chain; formal diagram naturality). Long step 4 (2006 chars) had two repairable faults and no hidden lemma. C1/C4: the monoidal equivalence between P(T) with Day convolution and cartesian Spc was argued only for the underlying bifunctor; repaired by citing the last clause of lem-coef-operadic-day-convolution (same unit, no cycle) for the strong monoidal unit functor T→Spc. E5: homotopy-fibre detection was applied without a map of total spaces I_1(A)→Z_eq; repaired by building w through E_T(*)=Δ^1, the model's arrow-fibre formula and the point Δ^1→N(E^1). The step was also split into steps 4–6 (all under 2000 characters), with old step 5 becoming step 7 and its references updated. The corrected item is in fixes/; only proof and proof_deps changed. Edge cases checked: f=id, empty object space, [1], the discrete group nerve G, and the terminal T.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
