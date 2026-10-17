@@ -16,9 +16,297 @@
   "def-weil-proper-morphism",
   "def-sbc-smooth-morphisms"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work after the chosen strict henselization; write $X=X^{\\mathrm{sh}}$, $j:X_{\\bar\\eta}\\to X$ and $i:X_0\\to X$. The coefficient ring is finite, killed by a power of $\\ell$ invertible on the trait. The geometric generic map $j$ is affine (an algebraic field extension composed with the principal generic open immersion), hence qcqs; it is not being treated as an open immersion or a finite-type morphism. Exactness of $i^*$ and right-derived exactness of $Rj_*$ make $i^*Rj_*$ an exact triangulated functor on the ambient derived categories, in particular on bounded-below inputs. All subsequent module cohomology computations may be forgotten to abelian sheaves and recovered: the canonical bounded-below comparison is an isomorphism for every scheme morphism.",
+   "uses": [
+    "def-trf-coefficient-conventions",
+    "def-trf-deformation-specialization",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.3.1(e)"
+   }
+  },
+  {
+   "text": "Fix a geometric point $x$ of $X_0$. The strict-henselization stalk formula identifies $(R\\Psi K)_x$ with $R\\Gamma(X_{(x)}\\times_{D^{\\mathrm{sh}}}\\bar\\eta,K)$. Express $X_{(x)}$ as the inverse limit of affine etale neighborhoods $U$ of $x$ in $X$; use a small cofinal system, with affine transition maps. After base change to $\\bar\\eta$, all $U_{\\bar\\eta}$ are affine schemes of finite type over the separably closed geometric generic field $\\bar K$. The fixed coefficient complex is pulled back from $T=X_{\\bar\\eta}$, exactly as required in the derived continuity theorem. Thus in each degree the stalk cohomology is $\\varinjlim_U H^r(U_{\\bar\\eta},K)$. The same computation applies to $K\\otimes_A^L\\underline M$ whenever that tensor is bounded below. In step 10 this holds for every module $M$, including infinite ones, because the finite-Tor hypothesis puts this tensor in $D^{[a,b]}$. No bounded-below assertion for that tensor is made for a general bounded $K$.",
+   "uses": [
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lem-weil-pbc-derived-etale-cohomology-limit",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.3.1(e), stalk computation expanded using ordinary etale continuity"
+   }
+  },
+  {
+   "text": "Assume $X_{\\bar\\eta}$ nonempty and choose a finite integer $d\\geq\\dim X_{\\bar\\eta}$. An etale map preserves local dimensions, so $\\dim U_{\\bar\\eta}\\leq d$. Apply the relative torsion direct-image dimension bound to $U_{\\bar\\eta}\\to\\operatorname{Spec}\\bar K$: it is qc and locally finite type, its target is over the separably closed field $\\bar K$, and $A$ is torsion. Hence its cohomology on every module sheaf vanishes above $2d$. Step 2 then gives $R^q\\Psi F=0$ for $q>2d$ for every sheaf $F$. For a complex with cohomology in $[c,e]$, finite induction over its truncation triangles, using step 1, gives nearby-cycle cohomology in $[c,e+2d]$. Vanishing at every stalk gives vanishing of the sheaf. If the geometric generic fibre is empty, $j_*=0$ and all these conclusions hold with the zero complex without choosing its dimension.",
+   "uses": [
+    "lem-sc-etale-local-dimension",
+    "lem-kun-relative-torsion-direct-image-dimension-bound",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-kun-stalks-of-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.3.1(e), finite cohomological bound; see Stacks dimension bound cited by the referenced node"
+   }
+  },
+  {
+   "text": "Let $K_0=\\operatorname{Frac}(R^{\\mathrm{sh}})$ and let $\\bar K$ be the field of the chosen geometric generic point, an algebraic closure of $K_0$ (if it is a separable closure, everything below holds with $K^s=\\bar K$ and $\\pi$ the identity). Let $K^s\\subseteq\\bar K$ be the separable algebraic closure of $K_0$ in $\\bar K$: it is a separable closure of $K_0$, and $\\bar K/K^s$ is purely inseparable. Put $\\pi:X_{\\bar K}\\to X_{K^s}$ and $j^s:X_{K^s}\\to X$, so $j=j^s\\pi$. A base change of $\\pi$ along a morphism $Y\\to X_{K^s}$ is $Y\\times_{K^s}\\bar K\\to Y$, a homeomorphism for every $K^s$-scheme $Y$; so $\\pi$ is a universal homeomorphism. Topological invariance makes $\\pi^{-1}$ and $\\pi_*$ quasi-inverse equivalences of etale sheaf categories, compatible with inverse images; the constant rings correspond, so the same holds for $A$-module sheaves. Hence $\\pi_*$ is exact and $R\\pi_*=\\pi_*$. For a module sheaf $F$ on $X_{\\bar K}$ put $F^s=\\pi_*F$, so $\\pi^{-1}F^s\\simeq F$; pushforward composition gives $Rj_*F\\simeq Rj^s_*R\\pi_*F=Rj^s_*F^s$, hence $i^*R^qj_*F\\simeq i^*R^qj^s_*F^s$ for every $q$.",
+   "uses": [
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "def-weil-pbc-relative-separable-closure",
+    "lem-pc-homeo-pure-insep",
+    "def-weil-universal-homeomorphism",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SI (topological invariance of the etale site, universal homeomorphisms); Illusie (2021) §1.1 uses a separable closure of eta, which this step compares with the chosen algebraically closed geometric generic point"
+   }
+  },
+  {
+   "text": "Let $F$ be constructible on $X_{\\bar K}$, with strata $T_k$ taken with their reduced structures $Z_k$ and immersions $\\iota_k$, as the definition allows. The homeomorphism $\\pi$ of qcqs schemes preserves quasi-compact opens, hence constructible and locally closed subsets, so the sets $\\pi(T_k)$ form a finite partition of $X_{K^s}$ into locally closed constructible subsets. Give $\\pi(T_k)$ its reduced structure $Z'_k$, with immersion $\\iota'_k$. The base change $Z'_k\\times_{X_{K^s}}X_{\\bar K}\\to X_{\\bar K}$ is an immersion with image $\\pi^{-1}\\pi(T_k)=T_k$, so $Z_k$ is its reduction; thus $\\rho_k:Z_k\\to Z'_k$ is a surjective closed immersion followed by a base change of $\\pi$, a composite of universal homeomorphisms, hence a universal homeomorphism, and $\\iota'_k\\rho_k=\\pi\\iota_k$. So $\\rho_k^{-1}\\iota_k'^{-1}F^s\\simeq\\iota_k^{-1}\\pi^{-1}F^s\\simeq\\iota_k^{-1}F$ is finite locally constant: choose an etale cover $\\{U_i\\to Z_k\\}$ and finite $A$-modules $M_i$ with restrictions $\\underline{M_i}$. By the site equivalence for $\\rho_k$, $U_i\\simeq U'_i\\times_{Z'_k}Z_k$ for an etale cover $\\{U'_i\\to Z'_k\\}$; the projection $U_i\\to U'_i$ is a universal homeomorphism, whose inverse-image equivalence carries both $(\\iota_k'^{-1}F^s)|_{U'_i}$ and $\\underline{M_i}$ to $\\underline{M_i}$. Hence $(\\iota_k'^{-1}F^s)|_{U'_i}\\simeq\\underline{M_i}$, and $F^s$ is constructible on $X_{K^s}$.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SI (topological invariance), with the stratum definition of constructibility (Tag 03RW region); written out by the maintainer reader"
+   }
+  },
+  {
+   "text": "Let $L$ range over the finite subextensions of $K^s/K_0$; each is finite separable, since $K^s/K_0$ is separable algebraic. The schemes $X_L$ are qcqs, the transition maps are affine, and their inverse limit is $X_{K^s}$: on an affine chart this is the identity $B\\otimes_{K_0}K^s=\\varinjlim_L(B\\otimes_{K_0}L)$, as $K^s$ is the union of these $L$. The finite subextensions form a small directed set (the compositum contains any two). Constructible-module limit descent therefore gives, for the constructible $F^s$ of step 5, a finite separable $L/K_0$ and a constructible $F'$ on $X_L$ with $F'_{K^s}\\simeq F^s$. Let $v:X_L\\to X_{K_0}$. It is finite etale: finiteness is obtained by tensoring a finite $K_0$-basis of $L$ on each affine chart, and etaleness follows from the finite separable field-extension theorem and its base-change stability. The target is Noetherian because it is finite type over the field $K_0$, so the finite morphism $v$ is of finite presentation. Thus $G=v_*F'$ is constructible and $Rv_*F'=G$, by finite pushforward finiteness over the field $K_0$.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-limit-descent",
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-kun-095r",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-finite-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 09YU (lemma-category-is-colimit)(3), 095R (lemma-finite-pushforward-constructible); descent and finite direct image on the arithmetic generic fibre"
+   }
+  },
+  {
+   "text": "Base change $v$ along $X_{K^s}\\to X_{K_0}$, writing $P=X_L\\times_{X_{K_0}}X_{K^s}$, $w:P\\to X_{K^s}$, $b:P\\to X_L$, and $H=b^*F'$. The inclusion $L\\subset K^s$ gives a section $s:X_{K^s}\\to P$ of $w$. Both $v$ and $w$ are finite, hence proper (in particular $w$ is separated), and $w$ is etale. The section theorem identifies $s(X_{K^s})$ as an open and closed subscheme of $P$. Proper base change for $v$ identifies $G_{K^s}$ with $w_*H$ (higher direct images vanish by the finite-image theorem; its target is finite type over $K^s$ and Noetherian, so $w$ is finite presentation). For every etale $V\\to X_{K^s}$, the two disjoint opens over $s(X_{K^s})$ and its complement give $H(P\\times V)=H(V\\times s(X_{K^s}))\\times H(V\\times(P\\setminus s(X_{K^s})))$. Restriction to the first factor and inclusion with zero on the second commute with restrictions and are $A$-linear. By the inverse-image/restriction theorem for the etale map $s$, its first factor is the sections of $s^*H=F'_{K^s}\\simeq F^s$; thus these are sheaf maps $F^s\\xrightarrow{u}G_{K^s}\\xrightarrow{r}F^s$ with $ru=1$. No trace divided by $[L:K_0]$ is used.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-kun-095r",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-finite-fp-locnoeth",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Finite proper base change and the clopen-section decomposition, applied to the geometric generic base change of v; elementary sectionwise sheaf-product calculation"
+   }
+  },
+  {
+   "text": "The ring $R^{\\mathrm{sh}}$ is a strictly henselian discrete valuation ring: it is strictly henselian local, and since $k[t]_{(t)}$ (the localization of a principal ideal domain at a nonzero prime) is a discrete valuation ring, so is its strict henselization. Its fraction field is $K_0$, $\\operatorname{Spec}K^s$ is a separable closure of its generic point, and its closed fibre is $X_0$ with the map $i$ of the specialization datum. $X$ is separated and finite type over $D^{\\mathrm{sh}}$, and $A$ is finite and killed by a power of $\\ell$, which is invertible in $R^{\\mathrm{sh}}$ since $\\ell\\neq\\operatorname{char}k$. Apply the standard sheaf nearby-cycle theorem to the constructible sheaf $G$ on the generic fibre $X_{K_0}$: $C_q=i^*R^qj^s_*(G_{K^s})$ is constructible for every $q$ and eventually zero. Apply the additive functor $i^*R^qj^s_*$ to $u,r$ of step 7: the maps $U_q,R_q$ satisfy $R_qU_q=1$. The projector $e_q=U_qR_q$ is an endomorphism of the constructible sheaf $C_q$, and its kernel $\\ker(1-e_q)$ is constructible by Serre closure. The maps $U_q,R_q$ identify that kernel with $i^*R^qj^s_*F^s$, which is $i^*R^qj_*F$ by step 4. This proves constructibility of the nearby cycles of the arbitrary geometric-generic sheaf $F$. The uniform bound for all sheaves remains the independent bound of step 3.",
+   "uses": [
+    "lem-trf-nearby-cycle-sheaf-finiteness",
+    "thm-constructible-serre",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-sc-strict-henselization-dvr",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://afst.centre-mersenne.org/item/10.5802/afst.1667.pdf",
+    "place": "Luc Illusie, Grothendieck and vanishing cycles, Ann. Fac. Sci. Toulouse 30 (2021), §1.1, formula (1.2), and §1.2, last paragraph, printed pp. 85–86: specialize to a sheaf in degree zero; finite constant coefficient-ring form by retaining its action. Read online; local archival copy WANTED in report.md."
+   }
+  },
+  {
+   "text": "Let $K\\in D^b_c(X_{\\bar\\eta},A)$. It is obtained by finitely many truncation triangles from its constructible cohomology sheaves shifted by their degrees. Steps 4–8 and the bound of step 3 give bounded constructible nearby cycles of each of those shifted sheaves. Apply the exact functor of step 1 to the truncation triangles. At each induction stage the cohomology long exact sequence expresses each new cohomology sheaf as an extension of a cokernel by a kernel of morphisms between constructible sheaves. Closure under kernels, cokernels and extensions gives constructibility. The common interval of step 3 gives boundedness. This proves the assertion for all bounded constructible complexes, without assuming finite Tor amplitude.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.3.1(e), passing from sheaves to bounded complexes by truncation triangles"
+   }
+  },
+  {
+   "text": "Now suppose $K$ has Tor amplitude $[a,b]$. For every affine neighborhood $U$ of step 2 and every $A$-module $M$, scalar projection gives\n$R\\Gamma(U_{\\bar\\eta},K)\\otimes_A^LM\\simeq R\\Gamma(U_{\\bar\\eta},K\\otimes_A^L\\underline M)$.\nIts hypotheses hold: $U_{\\bar\\eta}$ is qcqs and finite torsion cohomological dimension follows from clause (2) of [lem-kun-0f10], since it is finite type over the separably closed field; the uniform A-cohomology bound is separately step 3. Inverse image is monoidal, so the right-hand input has cohomology in $[a,b]$; step 3 gives output cohomology in $[a,b+2d]$. Choose bounded-below resolution models for the restriction diagram of step 2, with their natural comparison maps. The resolution-naturality lemma computes the derived restriction maps on these models. Their colimit maps to the limit-space cohomology model, and step 2 makes this a quasi-isomorphism. Filtered colimits commute with cohomology: for the kernel assertion a represented element whose image becomes zero is already zero at a common later index, and cokernels commute with colimits by their universal property. Tensor commutes with that colimit as well: compute $-\\otimes_A^LM$ by a fixed bounded-above free resolution of the degree-zero module $M$, whose tensor total complex uses direct sums, and take the filtered colimit term by term. Thus $(R\\Psi K)_x\\otimes_A^LM$ has cohomology only in $[a,b+2d]$.",
+   "uses": [
+    "def-kun-tor-amplitude",
+    "lem-kun-0f12",
+    "lem-kun-inverse-image-monoidal",
+    "lem-kun-0f10",
+    "lem-sp-derived-injective-resolution-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.3.1(e), finite Tor assertion expanded via scalar projection on affine neighborhoods"
+   }
+  },
+  {
+   "text": "For an arbitrary module sheaf $G$ on $X_0$, exact monoidal stalk pullback identifies $(R\\Psi K\\otimes_A^LG)_x$ with $(R\\Psi K)_x\\otimes_A^LG_x$. Apply step 10 with the possibly infinite module $M=G_x$. Stalks commute with cohomology and detect zero sheaves, so $R\\Psi K\\otimes_A^LG$ has no cohomology outside $[a,b+2d]$, uniformly for every $G$. This is precisely finite Tor amplitude; no assumption that the cohomology modules of $K$ are flat is used.",
+   "uses": [
+    "lem-kun-stalk-as-pullback",
+    "lem-kun-inverse-image-monoidal",
+    "lem-kun-stalks-of-cohomology",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.3.1(e), conversion of scalar bounds at stalks to the full module-sheaf Tor condition"
+   }
+  },
+  {
+   "text": "Suppose $h:\\mathcal X\\to\\mathcal Y$ proper, and base change it to the strict henselian trait. Properness persists under this base change. The equality $j_Yh_{\\bar\\eta}=h j_X$ and the canonical composition comparisons give\n$i_Y^*Rj_{Y*}Rh_{\\bar\\eta*}K\\simeq i_Y^*Rh_*Rj_{X*}K$.\nApply proper base change for the torsion ring $A$ to $h$ and the special immersion $i_Y$, with input $Rj_{X*}K$. That input need not be bounded constructible on the total trait; the cited theorem is valid on the unbounded module category and hence applies. It gives\n$i_Y^*Rh_*Rj_{X*}K\\xrightarrow{\\sim}Rh_{0*}i_X^*Rj_{X*}K$.\nThe composite is the required proper exchange. The generic proper pushforward is bounded constructible by finite-type-over-a-field constructibility, applied over the field $\\bar K$ (not to the total trait); thus the left side is within the just-established nearby-cycle domain.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-pc-proper-base-change",
+    "thm-dg-finite-type-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.3.2(b)--(c), proper exchange written through ordinary proper base change"
+   }
+  },
+  {
+   "text": "Suppose $h$ smooth. In the generic-fibre Cartesian square with bottom arrow $j_Y:Y_{\\bar\\eta}\\to Y$ and vertical arrows $h$ and $h_{\\bar\\eta}$, smooth base change gives\n$h^*Rj_{Y*}L\\xrightarrow{\\sim}Rj_{X*}h_{\\bar\\eta}^*L$.\nHere $h$ is smooth and $j_Y$ is qcqs by step 1; the finite coefficient exponent is invertible on $Y$. The theorem only requires $L$ bounded constructible on $Y_{\\bar\\eta}$ and does not require $Rj_{Y*}L$ constructible on $Y$. Pull back by the exact functor $i_X^*$ and identify $i_X^*h^*=h_0^*i_Y^*$ to obtain the required smooth exchange. Pullback of a finite constructible stratification, and of its finite locally constant restrictions, shows that $h_{\\bar\\eta}^*L$ is bounded constructible, so this too is within the nearby-cycle domain.",
+   "uses": [
+    "sbc-thm-bounded-derived-smooth-base-change",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.3.2(b)--(c), smooth exchange through the generic-fibre square"
+   }
+  },
+  {
+   "text": "Use the general abelian-category clause of the filtered-operation lift theorem on small etale module categories. Exact inverse images lift termwise; $Rj_*$ and the adjunction exchanges lift with unchanged forgetful maps. Compute bounded-below objects by injective resolutions. The resolution-naturality lemma identifies their augmentation squares before cohomology and supplies cone resolutions (finite sums of injectives remain injective), so the following calculation computes the derived exchanges. For $alpha:P^\\bullet\\to Q^\\bullet$, use $\\operatorname{Cone}(\\alpha)^r=Q^r\\oplus P^{r+1}$ with differential $(q,p)\\mapsto(dq+\\alpha p,-dp)$. For a commuting square $A\\xrightarrow{a}B$, $C\\xrightarrow{b}D$ with vertical maps $u:A\\to C$, $v:B\\to D$, the two iterated cones have terms $D^r\\oplus C^{r+1}\\oplus B^{r+1}\\oplus A^{r+2}$ and $D^r\\oplus B^{r+1}\\oplus C^{r+1}\\oplus A^{r+2}$. The map $(d,c,b_0,a_0)\\mapsto(d,b_0,c,-a_0)$ intertwines their differentials: the two mixed entries are $u a_0$ and $-a a_0$, whose signs both reverse. Hence interchanging the cone directions gives an isomorphism. Applying this to an exchange on a cone triangle gives the triangle of defect cones, compatibly with its maps. This uses the specified resolution and filtered lifts, rather than inferring a functorial cone from triangulated exactness alone.",
+   "uses": [
+    "lem-trf-filtered-derived-operation-lifts",
+    "lem-sp-derived-injective-resolution-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§3.2.1 and Remark 3.2.5, defect-cone use; filtered model enhancement from the cited operation-lift theorem"
+   }
+  },
+  {
+   "text": "The exchanges in steps 12--13 were made from the actual inverse/direct adjunction units and counits and the canonical composition comparisons. For two composable morphisms substitute those formulas: mate-pasting along the nonadjoint sides identifies the two-square composite with the mate of the outer square; pasting along the adjunctions inserts exactly the unit $R_1\\eta_2L_1\\circ\\eta_1$ and counit $\\varepsilon_2\\circ L_2\\varepsilon_1R_2$. This proves composition compatibility; the identity clause gives identity compatibility. The nearby unit is $i^*\\eta_j(H):i^*H\\to i^*Rj_*j^*H$. Naturality of $\\eta_j$ and the triangle identities give the same pasted-square identity with this unit inserted.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-trf-deformation-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.3.2(b), adjoint exchanges and their compatibility with the specialization unit"
+   }
+  },
+  {
+   "text": "For compact supports, use the actual transformation $B_h:Rh_{0!}R\\Psi_X\\to R\\Psi_YRh_{\\bar\\eta!}$: its formula is the inverse compact-support base change along $i_Y$, followed by the map $i_Y^*Rh_!Rj_{X*}\\to i_Y^*Rj_{Y*}Rh_{\\bar\\eta!}$ adjoint to\n$j_Y^*Rh_!Rj_{X*}\\simeq Rh_{\\bar\\eta!}j_X^*Rj_{X*}\\xrightarrow{Rh_{\\bar\\eta!}\\varepsilon_{j_X}}Rh_{\\bar\\eta!}$.\nThis is the construction specified in the deformation definition. All these schemes are qcqs, h is separated finite type, and Nagata supplies the compactifications, including those of two composable maps and their composite. The compact-support base-change theorem supplies its naturality and horizontal/vertical pasting on bounded-below etale inputs. Substituting the displayed counit formula into a composite $hg$, that pasting and naturality of the counit give $B_{hg}=(B_hRg_{\\bar\\eta!})\\circ(Rh_{0!}B_g)$ after the compact-support composition identifications. Identity base changes and the adjunction triangle identities give the identity and nearby-unit equations. Take its exceptional mate only on the constructible domains where the fibre adjunctions are supplied. The mate-pasting and changing-adjunction equations carry these equations to the exceptional exchanges, with the same unit/counit compatibilities. No exceptional functor on all complexes over the total trait is introduced.",
+   "uses": [
+    "def-trf-deformation-specialization",
+    "thm-nagata-compactification",
+    "thm-cbc-finite-torsion",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.3.2(b), construction of compact-support exchange and its exceptional mate"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-coefficient-conventions",
+  "def-trf-deformation-specialization",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-weil-pbc-derived-etale-cohomology-limit",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-sc-etale-local-dimension",
+  "lem-kun-relative-torsion-direct-image-dimension-bound",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-kun-stalks-of-cohomology",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "def-weil-pbc-relative-separable-closure",
+  "lem-pc-homeo-pure-insep",
+  "def-weil-universal-homeomorphism",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+  "lem-weil-pbc-constructible-module-limit-descent",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-kun-095r",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-finite-fp-locnoeth",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-trf-nearby-cycle-sheaf-finiteness",
+  "thm-constructible-serre",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-sc-strict-henselization-dvr",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "lem-kun-0f12",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-0f10",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-kun-stalk-as-pullback",
+  "lem-pc-proper-base-change",
+  "thm-dg-finite-type-constructibility",
+  "sbc-thm-bounded-derived-smooth-base-change",
+  "lem-trf-filtered-derived-operation-lifts",
+  "lem-weil-pbc-mate-pasting",
+  "thm-nagata-compactification",
+  "thm-cbc-finite-torsion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Varshavsky §§1.3.1(e),1.3.2(b)–(c),3.2.1; sheaf finiteness input read in Illusie (2021) §1.2 for a constructible sheaf on the arithmetic generic fibre; passage from the algebraically closed to the separably closed generic field by topological invariance, geometric-generic descent via Stacks 09YU and a split finite etale pushforward. The separate Tor, exchange and model arguments are retained."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +342,87 @@
    "results": "8 hits: DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsLEObjSingleFunctor",
    "date": "2026-10-17",
    "verdict": "no match: inspected hits concern structure-sheaf germs, algebraic base-change stability, normed-ring units, topological specialization, or ordinary derived truncations; none states geometric nearby cycles or the normal-cone generic vanishing assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "nearbyCycles|nearby_cycles|vanishingCycles|Milnor|constructible.*direct.image",
+   "results": "1 hits: Mathlib/Geometry/Manifold/PoincareConjecture.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned declarations; they concern algebraic morphisms, finite generation, normed-ring units or other sites and do not assert this etale cohomology statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"constructible\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned declarations; they concern algebraic morphisms, finite generation, normed-ring units or other sites and do not assert this etale cohomology statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nearby\"",
+   "results": "2 hits: Units.ofNearby, Units.val_ofNearby",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned declarations; they concern algebraic morphisms, finite generation, normed-ring units or other sites and do not assert this etale cohomology statement."
+  },
+  {
+   "tool": "grep",
+   "query": "nearby|vanishingCycle|StrictHenselization|constructible.*(pushforward|directImage)|arithmetic.*cohomology",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned declarations; they concern algebraic morphisms, finite generation, normed-ring units or other sites and do not assert this etale cohomology statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible geometric nearby cycles preserve finite Tor amplitude and satisfy proper and smooth exchange",
+   "results": "8 hits: AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsProper.instMorphismRestrict, Algebra.Smooth.baseChange, Topology.IsConstructible.biInter, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, Algebra.FormallyEtale.instTensorProduct, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned declarations; they concern algebraic morphisms, finite generation, normed-ring units or other sites and do not assert this etale cohomology statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a constructible sheaf on a geometric generic fibre over an excellent trait its nearby cycle sheaf in a fixed degree is an epimorphic image of arithmetic higher direct image after a finite extension of traits",
+   "results": "8 hits: SheafOfModules.GeneratingSections.opEpi_comp, LightCondensed.epi_π_app_zero_of_epi, AlgebraicGeometry.Scheme.instEpiCommRingCatResidue, CategoryTheory.coherentTopology.epi_π_app_zero_of_epi, Condensed.epi_iff_locallySurjective_on_compHaus, LightCondMod.epi_iff_locallySurjective_on_lightProfinite, LightCondMod.instPreservesEpimorphismsLightCondSetForget, CondensedMod.epi_iff_locallySurjective_on_compHaus",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned declarations; they concern algebraic morphisms, finite generation, normed-ring units or other sites and do not assert this etale cohomology statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of finite torsion etale sheaves for a finite type morphism between schemes of finite type over a discrete valuation ring are constructible and vanish above a finite bound",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.finiteType_appLE, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned types concern finite ring quotients, scheme residue maps, field embeddings or module generators; none states etale derived-image finiteness or the finite-stage restriction epimorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "constructib.*(torsion|cohomolog)|nearby.?cycle|vanishing.?cycle",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned types concern finite ring quotients, scheme residue maps, field embeddings or module generators; none states etale derived-image finiteness or the finite-stage restriction epimorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nearbyCycle\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned types concern finite ring quotients, scheme residue maps, field embeddings or module generators; none states etale derived-image finiteness or the finite-stage restriction epimorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of constructible torsion sheaves over a discrete valuation ring is finite in each degree and eventually zero",
+   "results": "8 hits: Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField, Condensed.finFree, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, LightCondensed.instIsGrothendieckAbelianLightCondMod, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, IsLocalRing.finite_residueField_of_compactSpace, SheafOfModules.IsFiniteType",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned types concern finite ring quotients, scheme residue maps, field embeddings or module generators; none states etale derived-image finiteness or the finite-stage restriction epimorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from etale cohomology over finite extensions of a henselian trait to its separably closed generic fibre becomes surjective in a fixed degree after one finite extension",
+   "results": "8 hits: IsSepClosed.surjective_restrictDomain_of_isSeparable, AlgebraicGeometry.Scheme.residue_surjective, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Polynomial.Gal.restrictComp_surjective, IsFractionRing.stabilizerHom_surjective, Algebra.Extension.toKaehler_surjective, surjective_fontaineTheta, IsAlgClosed.surjective_restrictDomain_of_isAlgebraic",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned types concern finite ring quotients, scheme residue maps, field embeddings or module generators; none states etale derived-image finiteness or the finite-stage restriction epimorphism."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-specialization-zero-section",
@@ -76,5 +441,239 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-nearby-cycle-finiteness-exchange",
+  "worker": "stage1",
+  "summary": "Repair of return a88651d2e8: withdrew the finite-stage domination lemma rather than repushing it. Replaced it with the explicitly named standard nearby-cycle constructibility/vanishing theorem for a constructible sheaf on the arithmetic generic fibre, read online in Illusie (2021) §1.2. Existing 09YU descent, finite pushforward and proper base change give a split inclusion of an arbitrary geometric-generic sheaf into an arithmetic sheaf after geometric pullback; the projector kernel gives constructibility. The source-attribution/archive question is escalated in report.md for HUMAN.md. Retained and reread the independent bound, Tor-amplitude, exchange, cone and mate arguments. No statement change, Lean work or push. Maintainer-reader FIX (2026-10-17): the new input is stated for a constructible sheaf on the arithmetic generic fibre, exactly as Illusie (2021) p.86 states it; new steps 4-5 pass from the chosen algebraically closed geometric generic field to the separable closure by topological invariance before the separable descent; step 8 cites the strict-henselization DVR lemma for the trait hypothesis.",
+  "blueprint": "lem-trf-local-term-locality proof paragraphs (1)--(2), normal-cone specialization via lem-trf-specialization-zero-section, Varshavsky §§1.3--1.4.",
+  "tool_uses": [
+   {
+    "node": "def-trf-coefficient-conventions",
+    "why": "Generic tool in step(s) 1; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 1."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic tool in step(s) 1, 9; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 1, 11."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic tool in step(s) 1; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 1."
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "why": "Generic tool in step(s) 1, 2; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 1, 2."
+   },
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "Generic tool in step(s) 2; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 2."
+   },
+   {
+    "node": "lem-weil-pbc-derived-etale-cohomology-limit",
+    "why": "Generic tool in step(s) 2; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 2."
+   },
+   {
+    "node": "def-weil-pbc-strict-henselization-limit",
+    "why": "Generic tool in step(s) 2; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 2."
+   },
+   {
+    "node": "lem-sc-etale-local-dimension",
+    "why": "Generic tool in step(s) 3; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 3."
+   },
+   {
+    "node": "lem-kun-relative-torsion-direct-image-dimension-bound",
+    "why": "Generic tool in step(s) 3; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 3."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic tool in step(s) 3, 7; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 3, 9."
+   },
+   {
+    "node": "lem-kun-stalks-of-cohomology",
+    "why": "Generic tool in step(s) 3, 7; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 3, 9."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-limit-descent",
+    "why": "Generic ordinary etale descent, finite-image, or section tool used below the normal-cone specialization route; the local-term unit provides no replacement for this generic infrastructure. Generic use in repaired step(s) 4."
+   },
+   {
+    "node": "lem-weil-pbc-finite-separable-extension-etale",
+    "why": "Generic ordinary etale descent, finite-image, or section tool used below the normal-cone specialization route; the local-term unit provides no replacement for this generic infrastructure. Generic use in repaired step(s) 4."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic ordinary etale descent, finite-image, or section tool used below the normal-cone specialization route; the local-term unit provides no replacement for this generic infrastructure. Generic use in repaired step(s) 4, 5."
+   },
+   {
+    "node": "lem-kun-095r",
+    "why": "Generic ordinary etale descent, finite-image, or section tool used below the normal-cone specialization route; the local-term unit provides no replacement for this generic infrastructure. Generic use in repaired step(s) 4, 5."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic ordinary etale descent, finite-image, or section tool used below the normal-cone specialization route; the local-term unit provides no replacement for this generic infrastructure. Generic use in repaired step(s) 5."
+   },
+   {
+    "node": "lem-weil-pbc-etale-section-clopen-immersion",
+    "why": "Generic ordinary etale descent, finite-image, or section tool used below the normal-cone specialization route; the local-term unit provides no replacement for this generic infrastructure. Generic use in repaired step(s) 5."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Generic tool in step(s) 8; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 5, 10."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic tool in step(s) 4, 5; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 6, 7."
+   },
+   {
+    "node": "def-weil-pbc-constructible-complexes",
+    "why": "Generic tool in step(s) 5; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 7."
+   },
+   {
+    "node": "def-kun-tor-amplitude",
+    "why": "Generic tool in step(s) 6, 7; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 8, 9."
+   },
+   {
+    "node": "lem-kun-0f12",
+    "why": "Generic tool in step(s) 6; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 8."
+   },
+   {
+    "node": "lem-kun-inverse-image-monoidal",
+    "why": "Generic tool in step(s) 6, 7; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 8, 9."
+   },
+   {
+    "node": "lem-kun-0f10",
+    "why": "Clause (2) supplies finite full torsion cohomological dimension on the affine generic neighborhoods for scalar projection in step 6; step 3 separately supplies the uniform coefficient-specific 2d bound. Generic use in repaired step(s) 8."
+   },
+   {
+    "node": "lem-sp-derived-injective-resolution-naturality",
+    "why": "Steps 6 and 10 use normalized comparisons on diagrams of bounded-below resolutions and their actual cone resolutions; this generic homological tool supplies no nearby-cycle finiteness result. Generic use in repaired step(s) 8, 12."
+   },
+   {
+    "node": "lem-kun-stalk-as-pullback",
+    "why": "Generic tool in step(s) 7; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 9."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic tool in step(s) 8; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 10."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic tool in step(s) 8, 9; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 10, 11."
+   },
+   {
+    "node": "thm-dg-finite-type-constructibility",
+    "why": "Generic tool in step(s) 8; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 10."
+   },
+   {
+    "node": "sbc-thm-bounded-derived-smooth-base-change",
+    "why": "Generic tool in step(s) 9; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 11."
+   },
+   {
+    "node": "lem-trf-filtered-derived-operation-lifts",
+    "why": "Generic tool in step(s) 10; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 12."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic tool in step(s) 11, 12; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 13, 14."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic tool in step(s) 12; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 14."
+   },
+   {
+    "node": "thm-cbc-finite-torsion",
+    "why": "Generic tool in step(s) 12; ordinary etale or homological infrastructure absent from the local-term unit, preserving its normal-cone route. Generic use in repaired step(s) 14."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic etale or finite-presentation tool in repaired steps 4–5, used on finite-type schemes over the generic field, without replacing the normal-cone route."
+   },
+   {
+    "node": "pqf-lem-finite-fp-locnoeth",
+    "why": "Generic etale or finite-presentation tool in repaired steps 4–5, used on finite-type schemes over the generic field, without replacing the normal-cone route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic etale or finite-presentation tool in repaired steps 4–5, used on finite-type schemes over the generic field, without replacing the normal-cone route."
+   },
+   {
+    "node": "lem-pc-homeo-pure-insep",
+    "why": "Step 4 takes from its statement that base change along a purely inseparable field extension is a homeomorphism, to see that X_barK -> X_Ks is a universal homeomorphism; no local-term unit node gives this field-theoretic fact."
+   },
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Steps 4-5 use the equivalence of etale topoi along a universal homeomorphism, compatible with inverse/direct images, to compare the algebraic and separable generic fibres; generic etale infrastructure absent from the unit."
+   },
+   {
+    "node": "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+    "why": "Step 5 descends an etale trivializing cover along a universal homeomorphism of strata; generic etale infrastructure absent from the unit."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "why": "Step 5 uses that a reduction (surjective closed immersion) is a universal homeomorphism; generic scheme fact absent from the unit."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dvr",
+    "why": "Step 8 takes from it that the strict henselization of the DVR k[t]_(t) is a DVR, the trait hypothesis of the standard nearby-cycle input; generic commutative-algebra fact absent from the unit."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "Step 8 takes from it that the chosen strict henselization is strictly henselian local; generic infrastructure absent from the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-coefficient-conventions",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-weil-pbc-derived-etale-cohomology-limit",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-sc-etale-local-dimension",
+  "lem-kun-relative-torsion-direct-image-dimension-bound",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-kun-stalks-of-cohomology",
+  "lem-weil-pbc-constructible-module-limit-descent",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-kun-095r",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-kun-proper-base-change-torsion-ring",
+  "thm-constructible-serre",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "lem-kun-0f12",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-0f10",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-kun-stalk-as-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pc-proper-base-change",
+  "thm-dg-finite-type-constructibility",
+  "sbc-thm-bounded-derived-smooth-base-change",
+  "lem-trf-filtered-derived-operation-lifts",
+  "lem-weil-pbc-mate-pasting",
+  "thm-nagata-compactification",
+  "thm-cbc-finite-torsion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-finite-fp-locnoeth",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-pc-homeo-pure-insep",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-sc-strict-henselization-dvr",
+  "lem-weil-pbc-strict-henselization-local-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-be86a15cf",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-be86a15cf (reviewer sub-agent of L); spot-checked: Three repairable faults; corrected item and new node are in fixes/dag/nodes/sec-trace-formula/. (1) E5/E7/B5: the second reader rewrote lem-trf-nearby-cycle-sheaf-finiteness to take F on the geometric generic fibre and said the source does the same. The source does not. Illusie, AFST 30 (2021) p.86 (formula (1.2) on p.85) states Deligne's result for K in D^b_c(X_eta) on the arithmetic generic fibre, with RPsi K = i^*R jbar_*(K|X_etabar), etabar a separable closure. That change also made the item's descent and retract steps pointless. I restated the node for a constructible F on X_eta with output i^*R^q jbar_*(pi^*F), matching Illusie's statement and place. (2) E1: in the DAG a geometric point has an algebraically closed field, and K_0 = Frac(R^sh) is imperfect because char k = p. Old step 4 treated Kbar as a separable closure and claimed X_Kbar = lim X_L over finite separable L, which is false for an algebraic closure. I inserted new steps 4-5. Step 4 takes K^s, the separable closure of K_0 in Kbar (lem-weil-pbc-separable-first-purely-inseparable); X_Kbar -> X_K^s is a universal homeomorphism (lem-pc-homeo-pure-insep); topological invariance (thm-weil-pbc-universal-homeomorphism-invariance) plus pushforward composition give i^*R^q j_*F = i^*R^q j^s_*F^s. Step 5 transfers constructibility through the strata, using lemma-weil-pbc-universal-homeomorphism-site-equivalence and lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism. The old descent, retract and application steps, now 6-8, run over K^s. (3) C1: the 'strictly henselian trait' hypothesis had no citation; new step 8 cites lem-weil-pbc-strict-henselization-local-structure and lem-sc-strict-henselization-dvr (Stacks 0AP3). Step references are renumbered and proof_deps regenerated; six off-unit tool uses were added to split_report, with no cycles. I checked all 16 steps against the cited statements: 0F12/0F10(2), unbounded torsion proper base change, smooth base change with g = j_Y qcqs and L in D^b_c(Y_etabar), the iterated-cone sign, and mates only on D^b_ctf. The base-change maps are those of def-trf-deformation-specialization, with etale constant-A coefficients. Small cases checked: characteristic 0, L = K_0, ell dividing [L:K_0], empty fibres, X = S. The new node is the input the return asked for; the duplicate search found nothing; it cites no SGA. The SGA 4 1/2 attribution question is escalated to HUMAN in the report. Maintainer note: def-trf-deformation-specialization should say explicitly that etabar is an algebraic or separable closure of the generic point. Targets are unchanged.; 2 file(s) fixed by the reviewer"
  }
 }

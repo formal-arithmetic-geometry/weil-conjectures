@@ -14,9 +14,119 @@
   "def-weil-abstract-derived-category",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Finite filtered objects form an additive category: use the zero object and biproducts of $\\mathcal A$, with $F^p(X\\oplus Y)=F^pX\\oplus F^pY$ [def-sp-filtration]. Composition is bilinear on the subgroups of filtration-preserving maps. Finite sums of finite filtrations remain finite; if bounds $[a,b]$ are prescribed, they remain $F^a=X\\oplus Y$ and $F^{b+1}=0$. Apply [lem-trf-additive-homotopy-category-triangulated] to this additive category $\\mathcal C$. It gives the unbounded homotopy category $K(\\mathcal C)$ its cochain shift and direct-sum cone triangulation.",
+   "uses": [
+    "def-sp-filtration",
+    "lem-trf-additive-homotopy-category-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014S (proposition-homotopy-category-triangulated); Tag 05RX (section-filtered-derived-category), finite filtered objects are additive"
+   }
+  },
+  {
+   "text": "Pass to bounded-below complexes using [def-weil-triangulated-subcategory]. They form a full additive subcategory of $K(\\mathcal C)$: a homotopy between two such complexes has the same components and equations in either category. Zero and both shifts are bounded below. If $X^n=0$ for $n<N_X$ and $Y^n=0$ for $n<N_Y$, then $C(f)^n=Y^n\\oplus X^{n+1}=0$ for $n<\\min(N_Y,N_X-1)$. For a distinguished triangle $X\\to Y\\to Z\\to X[1]$ whose outer vertices are bounded below, rotate to $Z[-1]\\to X\\to Y\\to Z$; TR3 with identity maps on the first two vertices gives a triangle morphism from the cone triangle of $Z[-1]\\to X$, and [lem-sf-triangle-morphism-iso] makes its third component an isomorphism. This cone is bounded below. Thus the inherited triangulation exists, its triangles are precisely those isomorphic inside this subcategory to its cone triangles, and its inclusion is exact. This is $K^+(\\mathcal C)$.",
+   "uses": [
+    "def-weil-triangulated-subcategory",
+    "lem-trf-additive-homotopy-category-triangulated",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RP (remark-boundedness-conditions-triangulated), Tag 05RQ (lemma-bounded-triangulated-subcategories), Tag 05QX (lemma-triangulated-subcategory)"
+   }
+  },
+  {
+   "text": "For every filtration index $p$, taking $\\operatorname{gr}^p$ commutes with the finite direct sums in a cone and with the shift, and the quotient formula identifies $\\operatorname{gr}^p(\\operatorname{Cone}(f))$ with the ordinary mapping cone of $\\operatorname{gr}^p(f)$ [def-sp-filtered-complex-subquotients]. By [lem-pur-quasi-iso-cone-acyclic], $\\operatorname{gr}^p(f)$ is a quasi-isomorphism exactly when this graded cone is acyclic. Hence $f\\in W$ exactly when every graded piece of its cone is acyclic, which is the asserted filtered-acyclic cone criterion.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S1, definition-filtered-acyclic and lemma-filtered-acyclic; Tag 05RT, lemma-acyclic"
+   }
+  },
+  {
+   "text": "Let $\\mathcal S$ be the full subcategory of $K^+(\\mathcal C)$ consisting of graded-acyclic complexes. The graded functors preserve homotopies (apply their additive maps to $f-g=dh+hd$), so cohomology of each grade is well-defined and sends isomorphisms to isomorphisms; hence $\\mathcal S$ is replete. Zero and shifts belong to $\\mathcal S$. If $X,Y\\in\\mathcal S$, every $H^n(\\operatorname{gr}^p f)$ is the isomorphism $0\\to0$; Step 3 and [lem-pur-quasi-iso-cone-acyclic] show $C(f)\\in\\mathcal S$. In a triangle with outer vertices in $\\mathcal S$, rotate once backwards; TR3 and [lem-sf-triangle-morphism-iso], applied with identity maps on its first two vertices, identify its third vertex with the cone between those shifted outer vertices. Hence the original middle vertex belongs to $\\mathcal S$. Thus [def-weil-triangulated-subcategory] makes $\\mathcal S$ a full replete triangulated subcategory. This verifies the needed kernel closure directly.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "def-weil-abstract-derived-category",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-weil-triangulated-subcategory",
+    "lem-sf-triangle-morphism-iso",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S1 (lemma-filtered-acyclic), its triangulated-kernel closure, using the cone criterion of Tag 05RT (lemma-acyclic)"
+   }
+  },
+  {
+   "text": "By Step 3, a map lies in $W$ exactly when its cone belongs to $\\mathcal S$. Apply the existing Mathlib leaf [lem-trf-triangulated-subcategory-cone-system] to $K^+(\\mathcal C)$ and $\\mathcal S$ from Step 4. Its conclusion supplies identities and composition, both left and right calculi of fractions (both Ore and both cancellation axioms), shift invariance, and completion of a commuting square between distinguished triangles whose first two vertical maps lie in $W$ by a third map in $W$. These are exactly the multiplicative-system and triangulation-compatibility hypotheses [def-pur-saturated-triangulated-localization].",
+   "uses": [
+    "lem-trf-triangulated-subcategory-cone-system",
+    "def-pur-saturated-triangulated-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RG (lemma-construct-multiplicative-system), first assertion; applied as in Tag 05S1 (lemma-filtered-acyclic)"
+   }
+  },
+  {
+   "text": "Localize $K^+(\\mathcal C)$ at the multiplicative system $W$ of Step 5, with the universal property in [def-pur-saturated-triangulated-localization]. Apply [lem-pur-localization-triangles-05r6] to this triangulated category and compatible system. It gives the triangulation of $K^+(\\mathcal C)[W^{-1}]$, an exact localization functor $Q$, and the characterization of distinguished triangles as triangles isomorphic to images of distinguished triangles. By Step 2 these are precisely images of cone triangles. The chosen larger universe is used for this localization and its morphisms.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization",
+    "lem-pur-localization-triangles-05r6"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05R6 (proposition-construct-localization); Tag 05S2 (definition-filtered-derived)"
+   }
+  },
+  {
+   "text": "For a full additive subcategory $\\mathcal J\\subseteq\\mathcal C$, its zero object and binary biproducts give $K(\\mathcal J)$ the cone triangulation of [lem-trf-additive-homotopy-category-triangulated]; the bounded-below restriction is justified by the bound and subcategory criterion in Step 2 [def-weil-triangulated-subcategory]. Inclusion preserves homotopies, shifts and biproducts, so sends each cone triangle to its cone triangle (up to the canonical biproduct isomorphism). It therefore carries every triangle isomorphic to one to a distinguished triangle, which is exactness [def-weil-triangulated-category]. All preceding steps also apply when $\\mathcal C$ was chosen with fixed bounds $[a,b]$: degree shifts leave filtration indices unchanged, and every cone uses only direct sums with $F^a$ equal to the whole term and $F^{b+1}=0$. No uniform filtration bound over all cochain degrees was used in the unrestricted case.",
+   "uses": [
+    "lem-trf-additive-homotopy-category-triangulated",
+    "def-weil-triangulated-subcategory",
+    "def-weil-triangulated-category",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014X (lemma-additive-exact-homotopy-category); Tags 05RX, 05S1 and 05S2, with fixed-interval additive subcategory"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-saturated-triangulated-localization",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-weil-triangulated-subcategory",
+  "lem-pur-localization-triangles-05r6",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-sf-triangle-morphism-iso",
+  "lem-trf-additive-homotopy-category-triangulated",
+  "lem-trf-triangulated-subcategory-cone-system"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014S, 05RQ, 05QX, 05S1, 05RG, 05R6 and 05S2; additive exact inclusions by Tag 014X"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,7 +151,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-filtered-localization-injective-model",
@@ -61,5 +171,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-filtered-cone-localization",
+  "worker": "stage1",
+  "summary": "Additive homotopy triangulation, explicit bounded-below restriction, graded cone criterion, direct graded-acyclic subcategory closure, existing Mathlib cone-system leaf for both fraction calculi and triangle compatibility, triangulated localization, and full-additive-subcategory exactness. One new Mathlib leaf for the general additive homotopy triangulation; item statement unchanged.",
+  "blueprint": "Realizes prop-trf-trace-additivity-open-closed Step 3 sentence “Cone triangles in the localization of finite filtered complexes” through the filtered localization-injective-model route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-26a86e2b6",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-26a86e2b6 (reviewer sub-agent of L); spot-checked: I read all of the item, the new node and every cited node's statement, plus Stacks derived.tex 05RX (l.4167), 05S1 (l.4292), 05S2 (l.4321), 05RG (l.1909), 014S (l.3320, which covers any additive category) and 014X (l.3431). I also read the main-20261015 proof of prop-trf-trace-additivity-open-closed, Step 3 (DF(A), l.100-111), and checked the Mathlib lines Triangulated.lean:29/191/208, Pretriangulated.lean:54/479/590/597, Shift.lean:144 and MappingCone.lean:275-290; all are correct. The item statement is unchanged and matches the filtered derived category in Stacks: Fil^f is additive but not abelian, filtrations are finite per object with no uniform bound, and W is the class of graded quasi-isomorphisms. Every step is correct. Step 2 bounds the cone (C(f)^n=0 for n<min(N_Y,N_X-1)) and gets closure under triangles from backward rotation, TR3 and the two-out-of-three iso lemma. Step 3 identifies gr^p of the cone with the ordinary cone of gr^p f in the abelian category A. Step 4 checks directly that graded-acyclic complexes form a replete triangulated subcategory. Step 5 takes both calculi of fractions plus shift and triangle compatibility (MS1-3, MS5, MS6, no saturation needed) from the Mathlib trW leaf. Step 6 applies the 05R6 leaf. Step 7: zero objects and biproducts of a full additive J stay zero objects and biproducts in C, so the inclusion sends cone triangles to cone triangles; the fixed interval [a,b] is preserved. The new node lem-trf-additive-homotopy-category-triangulated is a genuine Mathlib leaf for 014S, strictly smaller than the item and with the correct -p sign. It does not duplicate lem-pur-homotopy-category-triangulated (abelian only), the dg-category nodes, lem-kun-filtered-quasi-isomorphism-fractions or def-trf-finite-filtered-localization. Route: lem-pur-quasi-iso-cone-acyclic's unit sk-def-sf-operations is in the transitive uses of sk-i-global-additivity, and the other off-unit nodes are Mathlib leaves or definitions, so no tool_uses are needed and none were accepted. Edge cases a=b (ordinary D^+), the zero complex, identity maps and J={0} are all consistent. Fix (B9): the new node's blueprint.from.via listed only the item. It now also lists the item's own via, giving [lem-trf-filtered-cone-localization, lem-trf-filtered-localization-injective-model, lem-trf-filtered-derived-operation-lifts], and from.place now points to the actual Step 3 DF(A) sentence. The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-additive-homotopy-category-triangulated.json.; 1 file(s) fixed by the reviewer"
  }
 }

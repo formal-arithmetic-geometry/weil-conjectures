@@ -1,0 +1,89 @@
+{
+ "id": "lem-trf-additive-homotopy-category-triangulated",
+ "kind": "statement",
+ "title": "Triangulation of the homotopy category over an additive category",
+ "statement": "Let $\\mathcal B$ be a preadditive category [def-weil-preadditive-category] with a zero object and binary biproducts. Let $K(\\mathcal B)$ be the category of integer-indexed cochain complexes $(X^n,d_X^n)$, with $d_X^{n+1}d_X^n=0$, whose morphisms are chain maps modulo homotopies $f-g=d_Yh+hd_X$, $h^n:X^n\\to Y^{n-1}$. Set $(X[1])^n=X^{n+1}$ with differential $-d_X$. For a chain map $f:X\\to Y$, set $C(f)^n=Y^n\\oplus X^{n+1}$ with differential $(y,x)\\mapsto(d_Yy+f(x),-d_Xx)$; its cone triangle is $X\\xrightarrow fY\\xrightarrow i C(f)\\xrightarrow{-p}X[1]$, where $i$ and $p$ are the inclusion and projection. With this shift and distinguished triangles the triangles isomorphic to these cone triangles, $K(\\mathcal B)$ is triangulated [def-weil-triangulated-category].",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 014S (proposition-homotopy-category-triangulated), triangulation of the homotopy category of any additive category; Mathlib HomotopyCategory triangulation."
+ },
+ "stmt_deps": [
+  "def-weil-preadditive-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an additive category with zero object and binary biproducts, the homotopy category of integer cochain complexes is triangulated with mapping cone triangles",
+   "results": "HomotopyCategory.instIsTriangulatedIntUp; HomotopyCategory.instPretriangulatedIntUp; HomotopyCategory.Pretriangulated.distinguishedTriangles; HomotopyCategory.mappingCone_triangleh_distinguished; all in Mathlib/Algebra/Homology/HomotopyCategory/{Triangulated,Pretriangulated}.lean",
+   "date": "2026-10-17",
+   "verdict": "match: HomotopyCategory.instIsTriangulatedIntUp has assumptions Preadditive, HasBinaryBiproducts and HasZeroObject and gives the triangulated structure; the distinguished-triangle declarations give mapping-cone triangles"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyCategory.instIsTriangulatedIntUp, HomotopyCategory.mappingCone_triangleh_distinguished",
+   "results": "0 hits from Loogle",
+   "date": "2026-10-17",
+   "verdict": "no match: Loogle did not parse the comma-separated declaration query"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsTriangulatedIntUp|mappingCone_triangleh_distinguished",
+   "results": "0 hits from msearch grep service (subdirectory Mathlib/Algebra/Homology/HomotopyCategory)",
+   "date": "2026-10-17",
+   "verdict": "no match: the grep service returned no hits for this directory-qualified pattern"
+  },
+  {
+   "tool": "leansearch",
+   "query": "triangulated homotopy category of cochain complexes over an additive category with mapping cone distinguished triangles",
+   "results": "HomotopyCategory.instIsTriangulatedIntUp; HomotopyCategory.mappingConeCompTriangleh_distinguished; HomotopyCategory; HomotopyCategory.Pretriangulated.distinguished_cocone_triangle; CochainComplex.mappingCone.triangleh; DerivedCategory.instIsTriangulated",
+   "date": "2026-10-17",
+   "verdict": "match: the first declaration gives the required general triangulation and the mappingCone triangle declarations give its distinguished cones"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive category has a triangulated homotopy category; a full subcategory stable under shift and mapping cones inherits triangulation",
+   "results": "8 hits: HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic; HomotopyCategory.instIsTriangulatedIntUp; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; HomotopyCategory.instPretriangulatedIntUp; DerivedCategory.instIsTriangulated; DerivedCategory.instPretriangulated; CategoryTheory.Triangulated.Localization.isTriangulated",
+   "date": "2026-10-17",
+   "verdict": "match: independently read Triangulated.lean:208 and Pretriangulated.lean:54,590; the assumptions are preadditive, binary biproducts and zero object, with the cone triangle ending in minus the projection."
+  },
+  {
+   "tool": "grep",
+   "query": "IsTriangulated \\(HomotopyCategory|mappingCone_triangleh_distinguished",
+   "results": "7 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean",
+   "date": "2026-10-17",
+   "verdict": "match: independently read Triangulated.lean:208 and Pretriangulated.lean:54,590; the assumptions are preadditive, binary biproducts and zero object, with the cone triangle ending in minus the projection."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "HomotopyCategory.instIsTriangulatedIntUp; HomotopyCategory.Pretriangulated.distinguishedTriangles; HomotopyCategory.mappingCone_triangleh_distinguished",
+  "file": "Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean:208",
+  "how": "exact, one declaration per clause: HomotopyCategory.instIsTriangulatedIntUp at Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean:208 gives triangulation under Preadditive, HasBinaryBiproducts and HasZeroObject. HomotopyCategory.Pretriangulated.distinguishedTriangles at Pretriangulated.lean:479 defines distinguished triangles as those isomorphic to mapping-cone triangles; mappingCone_triangleh_distinguished at line 590 verifies each such triangle. CochainComplex.mappingCone.triangle at Pretriangulated.lean:54 has the third arrow minus the cone projection. Bounded-below restriction is proved separately in the item, not claimed as part of this leaf. The shift differential is minus d by Shift.lean:144, and the two cone differential components are MappingCone.lean:275,288.",
+  "line": 208
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-filtered-cone-localization",
+  "date": "2026-10-17",
+  "group": "Q27"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-global-additivity",
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-trace-additivity-open-closed",
+   "place": "Step 3: the triangle endomorphism carried into the filtered derived category DF(A) ('an endomorphism of the two-step filtered perfect complex ... in the filtered derived category $DF(A)$'); the cone triangulation of the additive filtered homotopy category on which DF(A) is built.",
+   "via": [
+    "lem-trf-filtered-cone-localization",
+    "lem-trf-filtered-localization-injective-model",
+    "lem-trf-filtered-derived-operation-lifts"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -14,9 +14,96 @@
   "def-weil-pbc-constructible-complexes",
   "lem-trf-dnc-functorial-geometry"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a generic point ξ of a component of Z. Normal finite-type X has disjoint irreducible components, so work on the component containing ξ. If f is identically zero there, Z=X locally and i^*M=0 makes M=0, giving the assertion. If f is a unit, Z is empty. Otherwise Z is an effective principal Cartier divisor. Shrinking about ξ, the generic smooth-coordinate reduction gives Z=V(g^r) with g:X→A¹ smooth. All later shrinkings contain ξ.",
+   "uses": [
+    "lem-trf-dnc-principal-generic-smooth-reduction",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3 proof, first paragraph"
+   }
+  },
+  {
+   "text": "For this pair let C_{X,Z}(M)=cone(z^*sp_{\\widetilde X_Z}M→i^*M), using the canonical map (1.8). Take the cone on the functorial derived models supplied by the nearby-cycle finiteness node; this gives the triangulated defect functor. The defect-comparison node supplies its proper and smooth comparisons and localization isomorphism.",
+   "uses": [
+    "def-trf-deformation-specialization",
+    "def-trf-coefficient-conventions",
+    "lem-trf-dnc-functorial-geometry",
+    "lem-trf-dnc-defect-proper-smooth-comparison",
+    "lem-trf-nearby-cycle-finiteness-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.4 equation (1.8) and Lemma 3.2.1"
+   }
+  },
+  {
+   "text": "For any finite constant module sheaf L_X, the smooth-coordinate reduction and smooth defect comparison reduce C_{X,Z}(L_X) to C_{A¹,V(x^r)}(L_{A¹}), which vanishes by the constant-defect node. The localization isomorphism in the defect-comparison node then gives C_{X,Z}(j_!L_U)=C_{X,Z}(L_X)=0. This proves the constant-on-the-complement case, allowing arbitrary finite constant modules and nonreduced thickening r≥1.",
+   "uses": [
+    "lem-trf-dnc-principal-generic-smooth-reduction",
+    "lem-trf-dnc-contractible-constant-defect",
+    "lem-trf-dnc-defect-proper-smooth-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3 proof, constant-sheaf case; Example 3.1.2 and Lemma 3.1.3"
+   }
+  },
+  {
+   "text": "For a constructible sheaf F with i^*F=0, the finite-cover sequence node allows shrinking about ξ so F=j_!G with G finite locally constant. Prove by induction on the integer a≥-1, simultaneously for all such G, that H^a(C(j_!G)) vanishes at ξ. For a<-1 it vanishes already: the defining formula sp=i^*Rj_* on an exact inverse-image pullback of F has no negative cohomology, and C is the cone of a map to the sheaf i^*F=0. Choose the finite etale trivialization and its finite normalization q:X′→X from the sequence node. Step 3 on each component of normal X′ gives generic vanishing for C_{X′,Z′}(j′_!p^*G), since p^*G is constant. The sequence node makes q finite and each point over ξ generic in Z′. Its finite-stalk formula and exactness identify (Rq_{Z*}C_{X′,Z′}(j′_!p^*G))_{ξ} with a finite product of zero stalk complexes. Proper comparison for q thus gives (C(q_*j′_!p^*G))_{ξ}=0. Apply the triangulated defect functor to the short exact sequence 0→j_!G→q_*j′_!p^*G→j_!G′→0. Its cohomology sequence identifies H^a(C(j_!G)) at ξ with H^{a-1}(C(j_!G′)) at ξ, which vanishes by induction. Thus every cohomology stalk of C(F) vanishes.",
+   "uses": [
+    "lem-trf-dnc-generic-local-system-devissage",
+    "lem-trf-dnc-defect-proper-smooth-comparison",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "def-trf-deformation-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3 proof, second paragraph"
+   }
+  },
+  {
+   "text": "For bounded constructible M, the exact restriction i^* sends its cohomology sheaves to zero since i^*M=0. The defect functor is triangulated by the comparison node, so the successive triangles τ≤b-1 M→τ≤b M→H^b(M)[-b] of the truncation definition reduce C(M) at ξ, in finitely many steps, to Step 4; hence C(M) has zero stalk. Since C(M)=cone(z^*sp(M)→0), its vanishing implies the required zero-section specialization stalk vanishes. Constructibility and boundedness of specialization from the nearby-cycle finiteness node show that finitely many cohomology supports avoid ξ, so after shrinking they vanish on a dense open of the component. This proves the equivalent formulation and the affine-space special case.",
+   "uses": [
+    "lem-trf-dnc-defect-proper-smooth-comparison",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "def-weil-pbc-derived-inverse-image",
+    "def-kun-truncations",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3 conclusion and the triangulated reduction from D^b_ctf to sheaves"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-trf-coefficient-conventions",
+  "def-trf-deformation-specialization",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-trf-dnc-contractible-constant-defect",
+  "lem-trf-dnc-defect-proper-smooth-comparison",
+  "lem-trf-dnc-functorial-geometry",
+  "lem-trf-dnc-generic-local-system-devissage",
+  "lem-trf-dnc-principal-generic-smooth-reduction",
+  "lem-trf-nearby-cycle-finiteness-exchange"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Claim 3.2.3, with Lemma 3.2.1 and the constant contraction Lemma 3.1.3"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,7 +142,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-specialization-zero-section",
@@ -74,5 +161,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-dnc-generic-zero-section-vanishing",
+  "worker": "stage1",
+  "summary": "Read Varshavsky Claim 3.2.3 and supporting §3.1--3.2.2. Split the constant contraction, smooth-coordinate reduction, defect comparison, and finite normalization exact sequence into statement-only children; prove the simultaneous cohomological induction explicitly in the item. Handle the identically-zero equation separately and retain nonreduced divisors and finite coefficients without Tor-amplitude hypotheses.",
+  "blueprint": "Realizes Claim 3.2.3 of the proof of sk-i-curve-zero, including its first (normal/smooth reduction), constant-sheaf, and general finite-etale devissage paragraphs.",
+  "tool_uses": [
+   {
+    "node": "def-trf-deformation-specialization",
+    "why": "Defines the specialization map and its coefficient conventions used to form the defect cone."
+   },
+   {
+    "node": "def-weil-pbc-constructible-complexes",
+    "why": "Supplies the bounded constructible and finite-locally-constant-on-strata hypotheses used in the truncation and generic-lisse reduction."
+   },
+   {
+    "node": "def-kun-truncations",
+    "why": "Defines the finite successive-truncation triangles used to reduce a bounded complex to its cohomology sheaves; no competing trace-formula route is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-deformation-specialization",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-truncations"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NH-a4f6bff45",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-a4f6bff45 (reviewer sub-agent of L); spot-checked: I read in full the item, the 4 new nodes, every cited statement and the parent's proof, plus Varshavsky math/0505564: §1.3.2-1.3.3, §1.4 ((1.8), Lemma 1.4.3), §3 intro, Example 3.1.2, Lemmas 3.1.3-3.1.4, Lemma 3.2.1, 3.2.2(I)-(III), Claim 3.2.3 and Remark 3.2.5. The item matches Claim 3.2.3: same hypotheses, nonreduced Z allowed, no Tor finiteness, etale D^b_c(X,A_{E,n}) coefficients, BC^* along the zero-section lift. The proof stays on the unit's normal-cone route. Steps: (1) the components of a normal X are disjoint; the cases f=0 and f a unit are handled; otherwise f is a nonzerodivisor and the smooth-reduction child applies. (2)-(3) smooth comparison along g with Z=g^{-1}V(x^r), the constant-defect child, then localization. (4) the base case a<-1 holds since C=z^*sp[1] sits in degrees >=-1; the induction is simultaneous over local systems G on one U; the middle term vanishes at xi by proper comparison along the finite map q, the finite-stalk product and Step 3 on normal X'. (5) truncation triangles, then the dense-open form by constructibility. Children: generic smooth reduction (height-one point, DVR, uniformizer, perfect k) is true; constant defect on A^1 with V(x^r) holds for any finite module and any r; the defect comparison is true; the finite-cover sequence is true clause by clause (q_*j'_!=j_!p_*, the bad locus avoids xi). No restatement, no circular split, no duplicate (searched contractible, uniformizer/DVR, V(x^r), relative normalization, constant family). No SGA cited, no cycle. Fixes: (a) lem-trf-dnc-defect-proper-smooth-comparison used an undefined 'canonical zero-section map' on non-ctf D^b_c. I made it explicit as BC^* for Z_D->X~_Z followed by the inverse of the constant-family unit, now asserted invertible on D^b_c (Varshavsky 1.3.3(a)/Remark 3.2.5, also proved in the parent's proof). This is needed for C(i_*N)=0 and for the constant-defect child with non-flat L. (b) lem-trf-dnc-generic-local-system-devissage listed 4 lemma ids in stmt_deps that its statement does not use; I removed them. Accepted tool_use: def-kun-truncations.; 2 file(s) fixed by the reviewer"
  }
 }
