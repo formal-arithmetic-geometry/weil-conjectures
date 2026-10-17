@@ -2,7 +2,7 @@
  "id": "lem-kun-universal-homeomorphism-exchange",
  "kind": "statement",
  "title": "Underived exchange is invertible for universal-homeomorphism base changes",
- "statement": "Let\n$$\n\\begin{array}{ccc}X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\\end{array}\n$$\nbe a cartesian square of schemes [def-weil-pbc-cartesian-square] in which $g:Y'\\to Y$ and $g':X'\\to X$ are universal homeomorphisms [def-weil-universal-homeomorphism]. For every abelian sheaf $F$ on $X_{\\Et}$, the canonical underived exchange morphism [def-weil-pbc-underived-exchange]\n$\\gamma_F:g^{-1}f_*F\\to f'_*g'^{-1}F$ is an isomorphism. More precisely, after applying $g_*$, the exchange satisfies\n$$g_*(\\gamma_F)\\circ\\eta_{g,f_*F}=f_*(\\eta_{g',F}),$$\nusing the direct images of [def-weil-pbc-direct-image], the canonical composition isomorphism $g_*f'_*\\cong f_*g'_*$, and where $\\eta$ denotes the inverse-image/direct-image unit [def-weil-pbc-inverse-image].",
+ "statement": "Let\n$$\n\\begin{array}{ccc}X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\\end{array}\n$$\nbe a cartesian square of schemes [def-weil-pbc-cartesian-square] in which $g:Y'\\to Y$ and $g':X'\\to X$ are universal homeomorphisms [def-weil-universal-homeomorphism]. For every abelian sheaf $F$ on $X_{\\Et}$, the canonical underived exchange morphism [def-weil-pbc-underived-exchange]\n$\\gamma_F:g^{-1}f_*F\\to f'_*g'^{-1}F$ is an isomorphism. More precisely, after applying $g_*$, the exchange satisfies\n$$g_*(\\gamma_F)\\circ\\eta_{g,f_*F}=f_*(\\eta_{g',F}),$$\nusing the direct images of [def-weil-pbc-direct-image], the canonical composition isomorphism $d_{f,g'}\\circ d_{g,f'}^{-1}:g_*f'_*\\xrightarrow{\\sim}(g\\circ f')_*=(f\\circ g')_*\\xrightarrow{\\sim}f_*g'_*$ built from the isomorphisms $d_{u,v}:(u\\circ v)_*\\xrightarrow{\\sim}u_*v_*$ of [lem-weil-pbc-inverse-image-composition] (1) (implicit on the left side of the equation), and where $\\eta$ denotes the inverse-image/direct-image unit [def-weil-pbc-inverse-image].",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 0F1C, proof of lemma-base-change-field-extension, perfect-closure reduction; Proposition topological invariance (Tag 03SI), with the exchange map written using the section formula of the project statement"
@@ -12,11 +12,62 @@
   "def-weil-universal-homeomorphism",
   "def-weil-pbc-underived-exchange",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [thm-weil-pbc-universal-homeomorphism-invariance] to the two horizontal maps g and g'. It says that a universal homeomorphism induces an equivalence of small etale sheaf categories compatible with inverse and direct images. Since inverse image is left adjoint to direct image by [def-weil-pbc-inverse-image], the corresponding units eta_g:F→g_*g^{-1}F and eta_{g',F}:F→g'_*g'^{-1}F are isomorphisms (the direct images are quasi-inverses).",
+   "uses": [
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SI, proposition-topological-invariance; the equivalence and its inverse/direct-image compatibility"
+   }
+  },
+  {
+   "text": "Let V→Y' be etale. By [lem-weil-pbc-underived-exchange-sectionwise], the component of gamma_F on V sends a representative given by W→Y and s∈F(X×_YW) to the restriction of s on X'×_{Y'}V. Apply g_* and precompose with eta_{g,f_*F}. Fix an etale W→Y and s∈(f_*F)(W)=F(X×_YW). The unit eta_{g,f_*F} of the sheafified presheaf inverse image of [def-weil-pbc-inverse-image] sends s to the class over W×_YY' of the representative (W, id_{W×_YY'}, s); likewise eta_{g',F} sends s∈F(U), U=X×_YW, to the class over U×_XX' of (U, id, s). By the sectionwise description with V=W×_YY', gamma_F sends the first class to the restriction of s along X'×_{Y'}(W×_YY')→X×_YW, a section of g'^{-1}F. Under the canonical composition identification d_{f,g'}∘d_{g,f'}^{-1}:g_*f'_*≅f_*g'_* (the isomorphisms d of [lem-weil-pbc-inverse-image-composition] (1), with their coherences from [lem-weil-pbc-direct-image-composition-coherence]), which on W is F applied to the canonical isomorphisms (W×_YY')×_{Y'}X'≅W×_YX'≅(X×_YW)×_XX' of objects of X'_Et, this sends s to the same section obtained by applying the unit eta_{g',F} and then f_*. The direct-image formula in [def-weil-pbc-direct-image] makes this equality sectionwise; representatives agree after a common etale refinement, so it is an equality of sheaf maps. Hence g_*(gamma_F)∘eta_{g,f_*F}=f_*(eta_{g',F}).",
+   "uses": [
+    "lem-weil-pbc-underived-exchange-sectionwise",
+    "lem-weil-pbc-direct-image-composition-coherence",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1C, perfect-closure reduction, using the section formula for the exchange; Tag 03SI, unit compatibility"
+   }
+  },
+  {
+   "text": "The right side of the equation in Step 2 is an isomorphism because eta_{g',F} is an isomorphism by Step 1 and f_* is a functor. Therefore g_*(gamma_F) is an isomorphism by two-out-of-three, since eta_{g,f_*F} is also an isomorphism. The equivalence induced by g in Step 1 is conservative, so its direct image g_* reflects isomorphisms; consequently gamma_F itself is an isomorphism.",
+   "uses": [
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SI, proposition-topological-invariance, together with the adjunction-unit argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-direct-image-composition-coherence",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-underived-exchange-sectionwise",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F1C, proof of lemma-base-change-field-extension, perfect-closure reduction; Tag 03SI, proposition-topological-invariance"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -69,7 +120,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-kun-0f1c",
@@ -86,5 +137,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-kun-universal-homeomorphism-exchange",
+  "worker": "stage1",
+  "summary": "Split the underived exchange assertion into the universal-homeomorphism equivalence/unit argument, the sectionwise verification of the unit equation, and the conservativity argument reflecting the isomorphism back along g_*. No new nodes were needed: the existing topological-invariance, sectionwise-exchange, direct-image, and direct-image-composition statements provide the complete route.",
+  "blueprint": "Realizes the parent blueprint lem-kun-0f1c current Step 1 sentence stating that inverse/direct images under the purely inseparable universal-homeomorphism squares are identified, specifically the canonical underived exchange and its unit equation.",
+  "tool_uses": [
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Step 1 and Step 3 use its equivalence of etale sheaf categories, compatibility with inverse/direct images, and conservativity."
+   },
+   {
+    "node": "lem-weil-pbc-underived-exchange-sectionwise",
+    "why": "Step 2 uses its exact sectionwise description of the canonical underived exchange."
+   },
+   {
+    "node": "lem-weil-pbc-direct-image-composition-coherence",
+    "why": "Step 2 uses its canonical composition isomorphisms for direct images."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Step 2 and the statement use its clause (1) isomorphisms d_{u,v}:(u∘v)_*≅u_*v_* to form the composition identification g_*f'_*≅f_*g'_*; no node of this unit defines them."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-weil-pbc-underived-exchange-sectionwise",
+  "lem-weil-pbc-direct-image-composition-coherence",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-afca308b2",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-afca308b2 (reviewer sub-agent of L); spot-checked: Read in full: the item, the parent lem-kun-0f1c (current proof step 6 and its main-20261015 blueprint_update), and every cited statement (cartesian-square and underived-exchange including their blueprint_updates, universal-homeomorphism, direct/inverse image, topological invariance, the sectionwise exchange lemma, both d-coherence and composition nodes). Checked Stacks 03SI (etale-cohomology.tex l.6548) and 0F1C (l.18032, the perfect-closure reduction). The statement only gained a proof; the base node differs only in proof, proof_deps, proof_origin, status and split_report. Hypotheses match Stacks and the parent's use. The coefficients are Ab(X_et) and the map is the canonical mate Ex^0, not an unspecified isomorphism. Correctness: the unit equation g_*γ∘η_g f_* = f_*η_{g'} (modulo d) holds for any cartesian square; I checked it on sections through (W×_YY')×_{Y'}X' ≅ W×_YX' ≅ (X×_YW)×_XX'. Invertibility follows from the topological-invariance equivalence (unit isomorphisms, g_* conservative). Tested on the identity square, nilpotent thickenings and f=id. No duplicate in the DAG, no new node, no cycle (checked by reachability), no SGA source. Accepted tool_uses: the invariance theorem, the sectionwise exchange lemma, the direct-image composition coherence, and lem-weil-pbc-inverse-image-composition, which I added; the unit cites no units and all four are generic tools. Repairs, in fixes/dag/nodes/sec-smooth-purity/lem-kun-universal-homeomorphism-exchange.json: (1) the statement's uncited 'canonical composition isomorphism g_*f'_*≅f_*g'_*' is now written explicitly as d_{f,g'}∘d_{g,f'}^{-1}, citing lem-weil-pbc-inverse-image-composition (1), which is added to stmt_deps; (2) Step 2 now writes out the representative form of η_{g,f_*F} and η_{g',F} and the fibre-product isomorphisms behind d, cites that node and def-weil-pbc-inverse-image, and proof_deps is recomputed; (3) a tool_uses entry is added for the new citation. If the merge tool does not apply statement fields, the statement citation needs repair in maintenance.; 1 file(s) fixed by the reviewer"
  }
 }

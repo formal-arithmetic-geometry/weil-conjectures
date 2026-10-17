@@ -20,9 +20,94 @@
   "def-exchange-projection",
   "def-weil-pbc-etale-origin-witness"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $M=j_!^eL$; it is bounded below because $j_!^e$ is exact and acts degreewise [lem-weil-pbc-extension-by-zero-exact, lem-weil-pbc-exact-functor-bounded-below]. Write $\\bar w:\\overline T'=\\overline T\\times_UU'\\to\\overline T$ for the projection of [def-cbc-compact-support-square], so that $(p,p',v,\\bar w)$ is a Cartesian square. The proper maps $p,p'$ are of finite type, hence quasi-compact, and separated, hence quasi-separated [def-weil-pbc-scheme-conventions, lem-pc-separated-quasi-separated]; no hypothesis on $v$ is needed. Let $b_p,b_{p'}$ be the counit-mate direct-image comparisons [lem-weil-pbc-comparison-direct-image-canonical-mate], natural in their input; they are the normalized comparisons used in $C_{c,L}$ and $C_{c',l_wL}$. Apply [lem-weil-pbc-transport-identifies-exchange] to $(f,f',g,g')=(p,p',v,\\bar w)$ and the input $M$. With $E^e_{*,M}=\\operatorname{Ex}_{*,p}(M)$ the etale unit--square--counit exchange of [def-cbc-exchange-map] and $E^p_{*}$ the ambient ringed exchange used in [def-exchange-projection], its equation reads\n$$Rp'_{\\mathrm{proet},*}(a_{\\bar w,M})\\circ b_{p',l_{\\bar w}M}\\circ A_{U'}(E^e_{*,M})=E^p_{*,A_{\\overline T}M}\\circ v^*(b_{p,M})\\circ a_{v,Rp_{\\mathrm{et},*}M}.\\tag{1}$$\nThis is an equality of specified morphisms; no invertibility of either exchange is used.",
+   "uses": [
+    "lem-weil-pbc-transport-identifies-exchange",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-pbc-scheme-conventions",
+    "lem-pc-separated-quasi-separated",
+    "def-cbc-compact-support-square",
+    "def-cbc-exchange-map",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Lines 4--15: transport the proper direct-image parts by the site comparison."
+   }
+  },
+  {
+   "text": "Let $e_j:A_{\\overline T}j_!^e\\xrightarrow{\\sim}j_!^pA_T$ and $e_{j'}$ be the degreewise derived extensions of the canonical sheaf comparison [lem-cbc-proetale-extension-zero-comparison]; these are the open factors of $C_{c,L}$ and $C_{c',l_wL}$. Let $\\beta^e_L:l_{\\bar w}j_!^eL\\xrightarrow{\\sim}j'^e_!l_wL$ be the etale open base-change isomorphism of [cor-cbc-derived-extension-zero-base-change] used in [def-cbc-exchange-map], and $\\beta^p_N:\\bar w^*j_!^pN\\xrightarrow{\\sim}j'^p_!w^*N$ the pro-etale one of [lem-cbc-proetale-extension-zero-base-change] used in [def-exchange-projection], both for the upper open-immersion square $(j,j',\\bar w,w)$, with $\\bar w$ arbitrary. Apply [lem-fix-site-open-exchange] to this square (its $g,h$ are $\\bar w,w$, its $\\rho_u$ is $a_u^{-1}$, and its $c_j,e^{\\mathrm{et}},e^{\\mathrm{proet}}$ are $e_j,\\beta^e,\\beta^p$). Multiplying its equation on the left by $j'^p_!(a_{w,L})$ and on the right by $a_{\\bar w,M}$ gives\n$$\\beta^p_{A_TL}\\circ\\bar w^*(e_{j,L})\\circ a_{\\bar w,M}=j'^p_!(a_{w,L})\\circ e_{j',l_wL}\\circ A_{\\overline T'}(\\beta^e_L),\\tag{2}$$\nnatural in $L$.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-comparison",
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-fix-site-open-exchange",
+    "lem-weil-pbc-comparison-pullback",
+    "def-cbc-compact-support-square",
+    "def-cbc-exchange-map",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Lines 15--19: transport the extension-by-zero factors by the comparisons [lem-cbc-proetale-extension-zero-comparison] and [lem-cbc-proetale-extension-zero-base-change]."
+   }
+  },
+  {
+   "text": "By definition $E_u^e(L)=Rp'_{\\mathrm{et},*}(\\beta^e_L)\\circ E^e_{*,M}$ [def-cbc-exchange-map] and $E_u^p(N)=Rp'_{\\mathrm{proet},*}(\\beta^p_N)\\circ E^p_{*,j_!^pN}$ [def-exchange-projection]; also $C_{c,L}=Rp_{\\mathrm{proet},*}(e_{j,L})\\circ b_{p,M}$, so $S_L=v^*Rp_{\\mathrm{proet},*}(e_{j,L})\\circ v^*(b_{p,M})\\circ a_{v,Rp_{\\mathrm{et},*}M}$. Write $P'=Rp'_{\\mathrm{proet},*}$. Naturality of the mate $E^p_*$ in the morphism $e_{j,L}$, then (1), then (2), then naturality of $b_{p'}$ in $\\beta^e_L$ give\n$$\\begin{aligned}E_u^p(A_TL)\\circ S_L&=P'(\\beta^p_{A_TL}\\circ\\bar w^*e_{j,L})\\circ E^p_{*,A_{\\overline T}M}\\circ v^*(b_{p,M})\\circ a_{v,Rp_{\\mathrm{et},*}M}\\\\&=P'(\\beta^p_{A_TL}\\circ\\bar w^*e_{j,L}\\circ a_{\\bar w,M})\\circ b_{p',l_{\\bar w}M}\\circ A_{U'}(E^e_{*,M})\\\\&=P'(j'^p_!a_{w,L}\\circ e_{j',l_wL})\\circ P'A_{\\overline T'}(\\beta^e_L)\\circ b_{p',l_{\\bar w}M}\\circ A_{U'}(E^e_{*,M})\\\\&=P'(j'^p_!a_{w,L})\\circ P'(e_{j',l_wL})\\circ b_{p',j'^e_!l_wL}\\circ A_{U'}\\bigl(Rp'_{\\mathrm{et},*}(\\beta^e_L)\\circ E^e_{*,M}\\bigr)\\\\&=T_L\\circ A_{U'}(E_u^e(L)).\\end{aligned}$$\nThe last line is the definition of $T_L$ and $C_{c',l_wL}$. Every factor is natural in $L$, so the equality is natural in $L$.",
+   "uses": [
+    "def-cbc-exchange-map",
+    "def-exchange-projection",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-transport-identifies-exchange",
+    "lem-fix-site-open-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Lines 19--20: the transported composite is the pro-etale compact-support exchange map."
+   }
+  },
+  {
+   "text": "Let $(L,\\alpha:A_TL\\xrightarrow{\\sim}N)$ be an etale-origin witness [def-weil-pbc-etale-origin-witness]. The transported etale exchange at $N$ is $\\Psi_{L,\\alpha}=F_{u'}^pw^*(\\alpha)\\circ T_L\\circ A_{U'}(E_u^e(L))\\circ S_L^{-1}\\circ v^*F_u^p(\\alpha)^{-1}$, using that $S_L,T_L$ are composites of the isomorphisms $a_v,a_w$ [lem-weil-pbc-comparison-pullback], $b_p,b_{p'}$ and $e_j,e_{j'}$. By Step 3 the middle part is $E_u^p(A_TL)$, and naturality of the transformation $E_u^p$ applied to $\\alpha$ gives $\\Psi_{L,\\alpha}=E_u^p(N)$. The right side involves no witness, so for any other witness $(L',\\alpha')$ of $N$, in particular an isomorphic one, $\\Psi_{L',\\alpha'}=E_u^p(N)=\\Psi_{L,\\alpha}$.",
+   "uses": [
+    "def-weil-pbc-etale-origin-witness",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Lines 21--22: independence of the witness by functoriality of the transported map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-cbc-derived-extension-zero-base-change",
+  "def-cbc-compact-support-square",
+  "def-cbc-exchange-map",
+  "def-exchange-projection",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-scheme-conventions",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-fix-site-open-exchange",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-transport-identifies-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Transport proof, lines 4--22"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -89,7 +174,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-co-smooth-composition",
@@ -115,5 +200,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-co-smooth-exchange-transport",
+  "worker": "stage1",
+  "summary": "Expanded the blueprint's finite-level transport argument into four proof steps. The proper direct-image exchange is transported using the normalized comparison, the etale-to-pro-etale and pro-etale base-change comparisons identify the open-extension factors, and composing these squares gives the specified compact-support exchange equality; witness transport and invariance follow by naturality. No new nodes were required because every non-elementary ingredient is already stated in the DAG. Maintainer review repair (2026-10-17): Step 2 now cites the open-extension site/base-change coherence lem-fix-site-open-exchange instead of an unsupported naturality claim; Steps 1 and 3 write equations (1), (2) and the full composite calculation; control characters for \\bar and \\alpha corrected.",
+  "blueprint": "Realizes the transport proof of thm-cbc-finite-level-proetale.proof.md, lines 4--22: proper direct-image transport, extension-by-zero transport, composition identifying the pro-etale compact-support exchange, and witness independence.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-site-open-exchange",
+    "why": "Step 2 takes the compatibility of the site comparison e_j with etale and pro-etale open base change for an arbitrary base-change morphism; no node of sk-prop-cohsm or of its route states this generic coherence (lem-trf-open-base-change-site-transport needs Noetherian qcqs corners). Same use as accepted for lem-amb-compact-support-site-comparison-open."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-site-open-exchange"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NU-d7b9120a3",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-d7b9120a3 (reviewer sub-agent of L); spot-checked: I read the item in full, every cited statement, the blueprint sources (lem-pur-co-smooth-composition.proof.md, final sentence; thm-cbc-finite-level-proetale.proof.md, lines 5-23) and the unit route (sk-prop-cohsm reaches sk-prop-sf-cbc, sk-thm-properbasechange, sk-thm-p1 and sk-def-exchange). The statement is unchanged and correct. Coefficients are constant discrete Λ-modules with Λ finite commutative, as in lem-weil-pbc-transport-identifies-exchange. E^e is exactly the composite of def-cbc-exchange-map. E^p is the def-exchange-projection composite (ambient ringed exchange, then the pro-étale β) with v arbitrary. I type-checked both sides of the equality. Small cases check: with v=id it reduces to reflexivity, with j=id to lem-weil-pbc-transport-identifies-exchange, and with p=id to lem-fix-site-open-exchange. It is not a duplicate: lem-amb-compact-support-site-comparison-open is only the case of an open v on Noetherian schemes, and thm-cbc-finite-level-proetale only defines the transported map. There are no new nodes. I repaired three faults in fixes/ (proof, proof_deps and split_report only). (1) B4: the JSON had control characters: \\b+'ar' in place of \\bar in step 2, and U+0007+'lpha' in place of \\alpha in step 4. (2) C1/E5: step 2 claimed the open-extension square commutes 'by naturality'. That square is a coherence of independently defined mates (e_j, β^e, β^p), no cited statement gave it, and the étale β^e (cor-cbc-derived-extension-zero-base-change) was not cited. The existing lem-fix-site-open-exchange states it exactly for arbitrary g, so step 2 now cites it as equation (2) and declares it in split_report.tool_uses. I accept that tool use: it is already accepted for lem-amb-compact-support-site-comparison-open, and the on-route lem-trf-open-base-change-site-transport needs Noetherian qcqs corners. (3) Step 1 did not justify that p and p' are qcqs (now via def-weil-pbc-scheme-conventions and lem-pc-separated-quasi-separated) or that j_!L is bounded below (now via lem-weil-pbc-extension-by-zero-exact and lem-weil-pbc-exact-functor-bounded-below). It also attributed the equality to full faithfulness; the step now states equation (1) directly from the lemma. Step 3 is now the explicit calculation: naturality of E^p_*, then (1), then (2), then naturality of b_{p'}. I checked each equality. Step 4 now reads: by naturality of E^p in α, Ψ_{L,α}=E^p(N), which does not depend on the witness. The details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
