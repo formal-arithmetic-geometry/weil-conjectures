@@ -27,9 +27,103 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal A,\\mathcal B,\\mathcal T$ and $r:\\mathcal T\\to\\mathcal A$ be the algebra and triple categories of [lem-coef-symmetric-operadic-extension-boundaries], and set $H=(A,F,\\eta)$. At a color $d$, its diagram $D_d$ and cocone $c_d$ have component $F(\\alpha)\\eta_p$. These are coherent diagrams, because source projection, $A$, $F$, and $\\eta$ are coherent functors and transformations; composing their simplices gives the stated cocone. The selected terminal object $t_d=(p_d,\\alpha_d)$ has $D_d(t_d)=A(p_d)$ and $c_d(t_d)=e_d=F(\\alpha_d)\\eta_{p_d}$. The source of an edge of $J_d$ is an edge of $\\mathcal P^\\otimes$ whose image under $u$ is active. Since $u$ is over $N(\\mathrm{Fin}_*)$, that source edge is active too, so $D_d$ takes values in the active subcategory. The cocone $c_d$ is active because $\\eta$ lies over identities in $\\mathcal O^\\otimes$ and each $\\alpha$ is active. The slice $J_d$ is small since both indexing operads are small. The hypothesis says exactly that $e_d$ is $q$-cocartesian.",
+   "uses": [
+    "lem-coef-symmetric-operadic-extension-boundaries"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 3.1.3.1, printed p. 342: the specified active cocone from an algebra transformation."
+   }
+  },
+  {
+   "text": "Fix $d$ and any finite tuple $Z$ in $\\mathcal E^\\otimes$. The active edge $e_d\\oplus1_Z$ is $q$-cocartesian by [lem-coef-active-operad-cocartesian-concatenation]. For every color $W$ the mapping criterion [lem-coef-infinity-cocartesian-mapping-criterion] therefore gives a homotopy pullback square with top row $\\operatorname{Map}_{\\mathcal E^\\otimes}(F(d)\\oplus Z,W)\\to\\operatorname{Map}_{\\mathcal E^\\otimes}(A(p_d)\\oplus Z,W)$ and the analogous bottom row in $\\mathcal O^\\otimes$. The same is true with all four mapping spaces restricted to active arrows. Indeed the active subspace is the inverse image of the discrete set of active pointed maps. Restrict the lower-left corner to active maps, then the right corners to active maps: composition with the active edge $e_d\\oplus1_Z$ sends that lower-left subspace into the active lower-right subspace. Thus this restriction is a pullback of the original square on the indicated components, with exactly the same path data. No assertion that a nonactive map has nonactive composite is needed.",
+   "uses": [
+    "lem-coef-active-operad-cocartesian-concatenation",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.2.4.8 and Lemma 3.1.1.14, printed pp. 212 and 324: fixed concatenation and the cocartesian universal square."
+   }
+  },
+  {
+   "text": "Use [lem-coef-infinity-final-index-colimit] on $D_d\\oplus Z:J_d\\to\\mathcal E^\\otimes_{\\mathrm{act}}$. The value $A(p_d)\\oplus Z$ is a colimit with a cocone whose terminal component is its identity. The dual mapping-space criterion of [lem-cbc-enhanced-functor-cone-calculus] shows that evaluation at $t_d$ induces an equivalence from coherent cocones $D_d\\oplus Z\\to\\Delta W$ to $\\operatorname{Map}_{\\mathcal E^\\otimes_{\\mathrm{act}}}(A(p_d)\\oplus Z,W)$: precomposing with that colimit cocone is its inverse, since evaluation of that cocone is the identity. Apply the same argument to $q(D_d\\oplus Z)$ in $\\mathcal O^\\otimes_{\\mathrm{act}}$. The active subcategories are quasicategories: an inner-horn filler in the total quasicategory has its edges over composites of active pointed maps and hence stays active. These two evaluation equivalences commute with $q$ and with restriction along the actual cocone $c_d\\oplus1_Z$; its component at $t_d$ is the edge of step 2. Therefore the local testing square in [lem-coef-symmetric-operadic-extension-boundaries] is identified with the homotopy pullback square of step 2. The homotopy-pullback invariance of [lem-coef-kan-homotopy-pullback-invariance] justifies replacing the two right corners by these equivalent mapping spaces, retaining the evaluation and composition homotopies. This proves the local condition for $H$, for every $d,Z,W$. In particular it proves operadic, rather than merely underlying, universality. The empty context and nullary $p_d$ are included. Terminal objects are used separately to verify a condition; no coherent choice of terminal objects as $d$ varies is required.",
+   "uses": [
+    "lem-coef-infinity-final-index-colimit",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-symmetric-operadic-extension-boundaries"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 3.1.1.4 and Lemma 3.1.1.14, printed pp. 319 and 324: terminal-index reduction for every fixed context."
+   }
+  },
+  {
+   "text": "For any triple $K=(A',F',\\eta')$, consider $\\rho:\\operatorname{Map}_{\\mathcal T}(H,K)\\to\\operatorname{Map}_{\\mathcal A}(A,A')$ induced by $r$. We prove that it lifts every $\\partial\\Delta^s\\hookrightarrow\\Delta^s$, including $s=0$. In the right-pinched model of [def-cbc-enhanced-diagrams-cones], a specified mapping-space boundary for $s>0$ gives the proper faces of $\\Delta^{s+1}$ containing its final vertex; adjoin its entire initial face as the constant simplex $H$. These are all faces of $\\partial\\Delta^{s+1}$, with final vertex $K$. The proposed simplex on the right supplies the corresponding $\\mathcal A$-simplex, constant at $A$ on the initial face. For $s=0$ prescribe the two vertices $H,K$ of $\\Delta^1$ directly; the proposed right simplex is the source edge. Apply [lem-coef-symmetric-operadic-extension-boundaries] with $n=s+1>0$. Its initial vertex is $H$, whose local condition was proved in step 3, and its filler preserves every specified face. The filler is precisely the required pinched mapping simplex. By [lem-coef-kan-quillen-right-proper], $\\rho$ is a trivial Kan fibration and hence an equivalence of spaces. This proves existence and contractibility of coherent extensions of transformations, including their higher simplices, rather than just a bijection of homotopy classes.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-symmetric-operadic-extension-boundaries",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 3.1.3.16 and the proof of Proposition 3.1.3.2, printed pp. 347-348: pinched mapping-space boundary argument."
+   }
+  },
+  {
+   "text": "Take $K=K_G=(u^*G,G,1_{u^*G})$. We identify $\\rho$ with the comparison in the statement. The endpoint corner $\\operatorname{Fun}(\\Delta^1,\\mathcal A)\\to\\mathcal A\\times\\mathcal A$ is an isofibration by [lem-coef-infinity-isofibration-exponentiation], so its pullbacks defining $\\mathcal T$ are quasicategories. On mapping spaces this corner is a Kan fibration by [lem-coef-infinity-inner-mapping-fiber]. Right-pinched mapping simplices commute with degreewise pullbacks. More explicitly, for $K=(A',F',\\eta')$ put $S=\\operatorname{Map}_{\\mathcal A}(A,A')$, $V=\\operatorname{Map}_{\\mathcal A}(u^*F,u^*F')$, $R=\\operatorname{Map}_{\\mathcal B}(F,F')$, and $M=\\operatorname{Map}_{\\operatorname{Fun}(\\Delta^1,\\mathcal A)}(\\eta,\\eta')$. The mapping space of $\\mathcal T$ is the strict pullback $M\\times_{S\\times V}(S\\times R)$, where $(a,b)$ maps to $(a,u^*(b))$. The endpoint map $M\\to S\\times V$ is the Kan fibration just obtained. Thus [lem-coef-kan-pullback-path-comparison] identifies this strict pullback with its homotopy pullback. The formula in [lem-coef-infinity-arrow-morphism-square] is an equivalence over $S\\times V$ up to its specified coherent homotopy. Its replacement in this homotopy pullback is valid by [lem-coef-kan-homotopy-pullback-invariance]. To see the resulting coordinates, write the path in $S\\times V$ as paths from $(a_0,v_0)$ to $(a,u^*(b))$; compose their images with the square path $\\eta'a_0\\simeq v_0\\eta$. The result is $\\eta'a\\simeq u^*(b)\\eta$. The variables $a_0,v_0$ with their endpoint paths form contractible path factors, with inverse inserting constant paths. This gives, for general $K=(A',F',\\eta')$, pairs $(a,b)$ and a coherent path $\\eta'a\\simeq u^*(b)\\eta$, with $a\\in\\operatorname{Map}_{\\mathcal A}(A,A')$ and $b\\in\\operatorname{Map}_{\\mathcal B}(F,F')$. For $K_G$ it is\n$$\\operatorname{Map}_{\\mathcal A}(A,u^*G)\\times^h_{\\operatorname{Map}_{\\mathcal A}(A,u^*G)}\\operatorname{Map}_{\\mathcal B}(F,G),$$\nwhere the first map is the identity and the second is $b\\mapsto u^*(b)\\eta$. Projection to $b$ is an equivalence: for each $b$ the remaining datum is a variable point and a path from it to the specified point $u^*(b)\\eta$, a contractible path space, with section given by the constant path. Under this equivalence $\\rho$ is restriction followed by composition with $\\eta$, with its canonical composition homotopy. Step 4 proves that this is an equivalence, as required.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-inner-mapping-fiber",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 3.1.3.2, printed p. 348: comparison of the two endpoint restrictions, written here in the coherent comma model."
+   }
+  },
+  {
+   "text": "The comparison itself is the coherent transformation of space-valued functors $(H,G)\\mapsto\\operatorname{Map}_{\\mathcal B}(F,G)\\to\\operatorname{Map}_{\\mathcal A}(A,u^*G)$ given by $b\\mapsto u^*(b)\\eta$. A morphism $H\\to H'$ is a pair $(a:A\\to A',f:F\\to F')$ with the coherent square $u^*(f)\\eta\\simeq\\eta'a$. For $b:F'\\to G$, this square supplies $u^*(bf)\\eta\\simeq u^*(b)\\eta'a$, exactly the naturality square in the contravariant triple variable. Postcomposition in $G$ gives the other variable. Their higher compatibilities are the simplices of the arrow functor category, so this constructs naturality without choosing inverses for each terminal slice. After a common universe enlargement, [lem-cbc-enhanced-functor-cone-calculus] says a coherent transformation is an equivalence if all its components are. Step 5 proves those components are equivalences on the full subcategory of triples satisfying the stated hypotheses. It is therefore the asserted natural equivalence of space-valued functors, with both parameter variables and all their higher simplices.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.3.2, printed p. 342, and its proof on p. 348: naturality of the actual restriction/composition comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-symmetric-operadic-extension-boundaries",
+  "lem-coef-active-operad-cocartesian-concatenation",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-final-index-colimit",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-inner-mapping-fiber",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-infinity-arrow-morphism-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, middle mapping-complex comparison: supporting terminal-active operadic criterion, expanded using HA (2017) online; no archived HA source is present."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -93,10 +187,45 @@
    "results": "{\"t\": \"2026-10-16T22:42:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLeftKanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isLeftKanExtensionId\", \"CategoryTheory.Functor.instIsLeftKanExtensionLeftKanExtensionLeftKanExtensionUnit\", \"CategoryTheory.Functor.IsLeftKanExtension\", \"CategoryTheory.Functor.coconeOfIsLeftKanExtension\", \"CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence\", \"CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence'\", \"CategoryTheory.Functor.colimitIsoOfIsLeftKanExtension\", \"CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension\"], \"digest\": \"661bfef1aedf5636\"}",
    "date": "2026-10-16",
    "verdict": "no match: second-reader search. CategoryTheory/Adjunction/Comma.lean:85-127 gives ordinary Hom-set adjunctions from terminal comma objects; CategoryTheory/Functor/KanExtension/Basic.lean:180-209 gives ordinary natural-transformation bijections. Neither treats relative infinity-operadic algebras or mapping spaces. The grep hit is a bibliographic use of Operads, not a declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Terminal active operation slices give relative free algebra mapping space equivalences without colimits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgCat.adj\", \"module\": \"Mathlib/Algebra/Category/AlgCat/Basic\", \"type\": \"(R : Type u) → [inst : CommRing R] → AlgCat.free R ⊣ CategoryTheory.forget (AlgCat R)\", \"doc\": \"For any commutative ring $ R $, the free algebra functor from the category of types to the category of $ R $-algebras is left adjoint to the forgetful functor. This adjunction is established by the na\"}\n  {\"name\": \"CategoryTheory.Monad.FreeCoequalizer.topMap\", \"module\": \"Mathlib/CategoryTheory/Monad/Coequalizer\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {T : CategoryTheory.Monad C} → (X : T.Algebra) → T.free.obj (T.obj X.A) ⟶ T.free.obj X.A\", \"doc\": \"The morphism obtained by applying the free $ T $-algebra functor to the structure map $ \\\\theta: T(A) \\\\to A $ of a $ T $-algebra $ (A, \\\\theta) $, resulting in a map $ T(T(A)) \\\\to T(A) $ given by the mo\"}\n  {\"name\": \"AlgCat.free_map\", \"module\": \"Mathlib/Algebra/Category/AlgCat/Basic\", \"type\": \"∀ (R : Type u) [inst : CommRing R] {X Y : Type u} (f : X ⟶ Y),\\n  (AlgCat.free R).map f = AlgCat.ofHom ((FreeAlgebra.lift R) (FreeAlgebra.ι R ∘ f))\", \"doc\": \"For any commutative ring $ R $ and types $ X $ and $ Y $, the action of the free algebra functor on a function $ f : X \\to Y $ is the $ R $-algebra homomorphism from $ \\\\text{FreeAlgebra}(R, X) $ to $ \\\\\"}\n  {\"name\": \"CategoryTheory.Monad.FreeCoequalizer.π\", \"module\": \"Mathlib/CategoryTheory/Monad/Coequalizer\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] → {T : CategoryTheory.Monad C} → (X : T.Algebra) → T.free.obj X.A ⟶ X\", \"doc\": \"Given a monad $ T $ on a category $ \\\\mathcal{C} $ and a $ T $-algebra $ X = (A, \\\\theta) $ in the Eilenberg-Moore category, the morphism $ \\\\pi $ is the structure map $ \\\\theta: T(A) \\\\to A $ that defines\"}\n  {\"name\": \"CategoryTheory.Monad.FreeCoequalizer.bottomMap\", \"module\": \"Mathlib/CategoryTheory/Monad/Coequalizer\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {T : CategoryTheory.Monad C} → (X : T.Algebra) → T.free.obj (T.obj X.A) ⟶ T.free.obj X.A\", \"doc\": \"The morphism in the free $T$-algebra category induced by the monad multiplication $\\\\mu_{T(X)}: T(T(X)) \\\\to T(X)$, where $X$ is a $T$-algebra. This map satisfies the associativity condition $\\\\mu_X \\\\cir\"}\n  {\"name\": \"AlgCat.free\", \"module\": \"Mathlib/Algebra/Category/AlgCat/Basic\", \"type\": \"(R : Type u) → [inst : CommRing R] → CategoryTheory.Functor (Type u) (AlgCat R)\", \"doc\": \"The functor from the category of types to the category of $ R $-algebras that assigns to each type $ S $ the free $ R $-algebra generated by $ S $, and to each function $ f : S \\to T $ the unique $ R $\"}\n  {\"name\": \"CategoryTheory.algebraEquivUnder\", \"module\": \"Mathlib/CategoryTheory/Monad/Products\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (X : C) →\\n      [inst_1 : CategoryTheory.Limits.HasBinaryCoproducts C] →\\n        (CategoryTheory.coprodMonad X).Algebra ≌ CategoryTheory.Under X\", \"doc\": \"For a category $\\\\mathcal{C}$ with binary coproducts and an object $X$, the Eilenberg-Moore category of the coproduct monad $T(X) = X \\\\sqcup X$ is equivalent to the under category $X/\\\\mathcal{C}$. This\"}\n  {\"name\": \"CategoryTheory.Monad.FreeCoequalizer.topMap_f\", \"module\": \"Mathlib/CategoryTheory/Monad/Coequalizer\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {T : CategoryTheory.Monad C} (X : T.Algebra),\\n  (CategoryTheory.Monad.FreeCoequalizer.topMap X).f = T.map X.a\", \"doc\": \"For any $T$-algebra $X = (A, \\theta)$, the underlying morphism $f$ of the top map $\\\\text{topMap}(X)$ is equal to the application of the monad $T$'s map to the structure morphism $\\\\theta: T(A) \\to A$, i.\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: CategoryTheory/Functor/KanExtension/Basic.lean:165-209 concerns ordinary categories and Hom-set bijections; the free AlgCat and ordinary Monad hits do not concern coherent relative infinity-operad algebras. The whole-Mathlib grep has bibliographic mentions only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquivOfIsLeftKanExtension\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.Functor.homEquivOfIsLeftKanExtension\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \" {C : Type u_1} {H : Type u_3} {D : Type u_5} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_3} H] [CategoryTheory.Category.{v_5, u_5} D] (F' : CategoryTheory.Functor D H) {L : CategoryTheory.Functor C D} {F : CategoryTheory.Functor C H} (α : F ⟶ L.comp F') [F'.IsLeftKanExte\", \"doc\": \"If `(F', α)` is a left Kan extension of `F` along `L`, then this\\nis the induced bijection `(F' ⟶ G) ≃ (F ⟶ L ⋙ G)` for all `G`. \"}\n  {\"name\": \"CategoryTheory.Functor.homEquivOfIsLeftKanExtension_symm_apply\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \" {C : Type u_1} {H : Type u_3} {D : Type u_5} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_3} H] [CategoryTheory.Category.{v_5, u_5} D] (F' : CategoryTheory.Functor D H) {L : CategoryTheory.Functor C D} {F : CategoryTheory.Functor C H} (α : F ⟶ L.comp F') [F'.IsLeftKanExte\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.homEquivOfIsLeftKanExtension_apply_app\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \" {C : Type u_1} {H : Type u_3} {D : Type u_5} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_3} H] [CategoryTheory.Category.{v_5, u_5} D] (F' : CategoryTheory.Functor D H) {L : CategoryTheory.Functor C D} {F : CategoryTheory.Functor C H} (α : F ⟶ L.comp F') [F'.IsLeftKanExte\", \"doc\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: CategoryTheory/Functor/KanExtension/Basic.lean:165-209 concerns ordinary categories and Hom-set bijections; the free AlgCat and ordinary Monad hits do not concern coherent relative infinity-operad algebras. The whole-Mathlib grep has bibliographic mentions only."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|operadic|terminal.*active|active.*terminal",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"line\": \"55\", \"text\": \"  monoids in monoidal categories, in: Operads: Proceedings of Renaissance\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: CategoryTheory/Functor/KanExtension/Basic.lean:165-209 concerns ordinary categories and Hom-set bijections; the free AlgCat and ordinary Monad hits do not concern coherent relative infinity-operad algebras. The whole-Mathlib grep has bibliographic mentions only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of coherent relative infinity operad algebras represents maps from terminal active cocartesian cocones",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SmallObject.SuccStruct.restrictionLTOfCoconeIso\", \"module\": \"Mathlib.CategoryTheory.SmallObject.Iteration.FunctorOfCocone\", \"type\": \": SmallObject.restrictionLT (ofCocone c) (le_refl j) ≅ F\", \"doc\": \"Given a cocone $ c $ over a diagram $ F : (-\\\\infty, j) \\\\to \\\\mathcal{C} $, the restriction of the functor $ \\\\text{ofCocone}(c) $ (which extends $ F $ to $ (-\\\\infty, j] $) back to $ (-\\\\infty, j) $ is na\"}\n  {\"name\": \"CategoryTheory.Limits.Cocone\", \"module\": \"Mathlib.CategoryTheory.Limits.Cones\", \"type\": \"{J : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} J] →\\n    {C : Type u₃} →\\n      [inst_1 : CategoryTheory.Category.{v₃, u₃} C] → CategoryTheory.Functor J C → Type (max (max u₁ u₃) v₃)\", \"doc\": \"The type of cocones for a diagram $ F : \\\\mathcal{J} \\\\to \\\\mathcal{C} $, where $ \\\\mathcal{J} $ and $ \\\\mathcal{C} $ are categories. A cocone consists of an object $ N $ in $ \\\\mathcal{C} $ (the apex) and \"}\n  {\"name\": \"CategoryTheory.Functor.cocones\", \"module\": \"Mathlib.CategoryTheory.Limits.Cones\", \"type\": \": C ⥤ Type max u₁ v₃\", \"doc\": \"The functor from category $\\\\mathcal{C}$ to the category of types, constructed by composing the constant functor $\\\\mathcal{J} \\\\to \\\\text{Type}$ with the Coyoneda embedding applied to the opposite of the\"}\n  {\"name\": \"CategoryTheory.cocones\", \"module\": \"Mathlib.CategoryTheory.Limits.Cones\", \"type\": \": (J ⥤ C)ᵒᵖ ⥤ C ⥤ Type max u₁ v₃\", \"doc\": \"A functor from the opposite category of functors $ \\\\mathcal{J} \\\\to \\\\mathcal{C} $ to the category of functors $ \\\\mathcal{C} \\\\to \\\\text{Type} $, constructed by composing the constant functor $ \\\\mathcal{J\"}\n  {\"name\": \"CategoryTheory.Limits.isColimitOfConeRightOpOfCocone\", \"module\": \"Mathlib.CategoryTheory.Limits.Opposites\", \"type\": \"(F : Jᵒᵖ ⥤ C) {c : Cocone F} (hc : IsLimit (coneRightOpOfCocone c)) : IsColimit c\", \"doc\": \"For a diagram $F: \\\\mathcal{J}^{\\\\text{op}} \\\\to \\\\mathcal{C}$, a cocone $c$ for $F$ is a colimit if the cone constructed from $c$ for the corresponding diagram $F^{\\\\text{rop}}: \\\\mathcal{J} \\\\to \\\\mathcal{C\"}\n  {\"name\": \"CommAlgCat.binaryCofan\", \"module\": \"Mathlib.Algebra.Category.CommAlgCat.Monoidal\", \"type\": \": BinaryCofan A B\", \"doc\": \"The binary cocone in the category of commutative $ R $-algebras, constructed from two objects $ A $ and $ B $ with inclusion morphisms $ A \\to P $ and $ B \\to P $ as the cocone components. This forms a \"}\n  {\"name\": \"CategoryTheory.Limits.ColimitCocone\", \"module\": \"Mathlib.CategoryTheory.Limits.HasLimits\", \"type\": \"{J : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} J] →\\n    {C : Type u} → [inst_1 : CategoryTheory.Category.{v, u} C] → CategoryTheory.Functor J C → Type (max (max u u₁) v)\", \"doc\": \"Given categories $ J $ and $ C $, and a functor $ F : J \\\\to C $, the type of cocones for $ F $.\"}\n  {\"name\": \"CategoryTheory.Limits.CoconeMorphism\", \"module\": \"Mathlib.CategoryTheory.Limits.Cones\", \"type\": \"{J : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} J] →\\n    {C : Type u₃} →\\n      [inst_1 : CategoryTheory.Category.{v₃, u₃} C] →\\n        {F : CategoryTheory.Functor J C} → CategoryTheory.Limits.Cocone F → CategoryTheory.Limits.Cocone F → Type v₃\", \"doc\": \"The type of morphisms between two cocones for a diagram $ F : \\\\mathcal{J} \\\\to \\\\mathcal{C} $, where a morphism from a cocone with apex $ N $ to one with apex $ N' $ is a morphism $ f : N \\\\to N' $ in $ \"}",
+   "date": "2026-10-17",
+   "verdict": "no match: CategoryTheory/Functor/KanExtension/Basic.lean:165-209 concerns ordinary categories and Hom-set bijections; the free AlgCat and ordinary Monad hits do not concern coherent relative infinity-operad algebras. The whole-Mathlib grep has bibliographic mentions only."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|operadic|operadicLeftKan",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"line\": \"55\", \"text\": \"  monoids in monoidal categories, in: Operads: Proceedings of Renaissance\"}\n  {\"file\": \"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"line\": \"39\", \"text\": \"[F. Chapoton, M. Livernet, *Pre-Lie algebras and the rooted trees operad*][chapoton_livernet_2001]\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: CategoryTheory/Functor/KanExtension/Basic.lean:165-209 concerns ordinary categories and Hom-set bijections; the free AlgCat and ordinary Monad hits do not concern coherent relative infinity-operad algebras. The whole-Mathlib grep has bibliographic mentions only."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-module-universal-arrow-criterion",
@@ -104,5 +233,29 @@
   "group": "Q42"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-operadic-terminal-active-mapping",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses unchanged. Verified absence of project Lean declarations and searched the whole blueprint and DAG, including the existing nonsymmetric operadic cocone results. Proved the terminal-slice reduction in every fixed context using active cocartesian concatenation and mapping squares. Derived the mapping-space equivalence from relative simplex-boundary filling, spelling out s=0 and the coherent comma mapping formula. Two statement-only generic foundations remain; neither repeats the terminal-active mapping conclusion. Checked all cited statements, nullary and empty contexts, u=id, and naturality in coherent triples. No colimits, presentability, SGA sources, or coefficient-category identifications were introduced. Independent second reading explains activeness of the active-slice source arrows, writes the two-endpoint mapping pullback explicitly, and cites homotopy-pullback invariance there. Off-unit cone calculus is proposed in split_report.tool_uses and explained in the report; no top-level maintainer tool authorization is written.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, current main-20261015 proof paragraph 2: the middle finite mapping-complex adjunction before R lim. This item serves the generic free-module criterion in the coherent monadic bar foundation. Steps 1-3 verify local operadic cocones, steps 4-5 give the universal mapping property, and step 6 retains all naturality data.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent cocone mapping criterion and pointwise criterion for equivalences of functor categories; used in steps 3 and 6, without replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-4dde02cc9",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-4dde02cc9 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. HA is not archived, so I checked the cited places against the online HA PDF (Sept 2017 edition, text extracted in /tmp). Rem 2.2.4.6-2.2.4.8 (p.212) give the active ⊕ and the stability of active q-cocartesian edges in O-monoidal categories, which is the concatenation node, hypotheses identical. Def 3.1.1.2 (p.318: colour-fibre slices, for every ⊕C) matches the local condition with colour targets W and every ⊕Z. Lemma 3.1.1.14 (p.324) is exactly item steps 2-3. Def 3.1.3.1 and Prop 3.1.3.2 (p.342) have q only a fibration of ∞-operads, so the item, which adds a cocartesian q, terminal active slices and a cocartesian terminal edge, is a true special case and nothing is weakened. Lemma 3.1.3.16 (n>0, prescribed boundary over a fixed base, condition only at vertex 0), with Rem 3.1.3.15 and the proof of 3.1.3.2, matches the boundary node. Its comma model T is the pushout-algebra category, and r=ev0 is a categorical fibration, so strict filling transfers from HA's M⊗ model. Small cases: u=id gives an equivalence; the trivial P into Comm gives the unit as initial algebra; an empty J_d is excluded by the hypothesis. Steps 1-6: active-component restriction of the cocartesian mapping square is valid; terminal evaluation is via the final-index colimit and the cone-calculus dual; the index shift s+1 includes s=0; strict/path comma pullback through the endpoint Kan fibration, and for K_G projection to Map(F,G) with ρ = b↦u*(b)η. I verified each one. The item statement is unchanged against the live side DAG. No cycle (closure of 406 nodes). No SGA. No duplicates: correspondence-kan-filling and the other free-cocone nodes are nonsymmetric or presentable, and nothing else in the DAG states envelope/concatenation. All three search kinds are recorded. Ancestry is prop-coef-integral-exceptional-adjoint with the correct via list, same_as []. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus for steps 3 and 6, a generic cocone/pointwise-equivalence criterion from sec-smooth-purity, which the chapter uses. No fixes. HA archive remains WANTED."
+ }
 }
