@@ -94,24 +94,77 @@
    }
   },
   {
-   "text": "The map $j$ is quasi-compact by hypothesis and quasi-separated: an open immersion identifies $U\\times_XU$ with $U$, and its diagonal with the identity of $U$, which is quasi-compact by the definition (the preimage of an affine open is that affine open). Thus the hypotheses of [prop-weil-pbc-comparison-direct-image] hold for $j$ and the bounded-below complex $L$ of step 4. Its natural isomorphism gives\n$$Rj_{\\mathrm{proét},*}\\bar K\\simeq\\nu_X^*Rj_{\\mathrm{ét},*}L.$$\nThe right side is bounded constructible by the bounded constructible derived equivalence of [sk-thm-pe-constructible-comparison] on $X$. To relate this residue-coefficient direct image to the ambient $A$-coefficient direct image in step 2, put $B_T=(P_1)_T$ and let $r_T:(T_{\\mathrm{proét}},B_T)\\to(T_{\\mathrm{proét}},A_T)$ be the identity on the underlying topos with ring map $A_T\\to B_T$. Its module direct image is restriction of scalars [def-pc-sheaf-restrict-scalars]. This restriction is exact: kernels and cokernels have the same underlying abelian sheaves. By [lem-weil-pbc-exact-functor-derived-functor], $Rr_{T,*}=\\operatorname{Res}_T$. The two composites $r_X\\circ j_B$ and $j_A\\circ r_U$ are the same morphism of ringed topoi: both have underlying $j$ and ring map $j^{-1}A_X\\to A_U\\to B_U$, since reduction of coefficient sections commutes with pullback. Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to both factorizations to obtain\n$$Rj_{A,*}\\operatorname{Res}_U\\bar K\\simeq\\operatorname{Res}_X Rj_{B,*}\\bar K.$$\nThus the canonical isomorphism of step 2 at $n=1$ identifies the underlying $A_X$-complex of the first reduction of $Rj_*K$ with the restriction of the bounded constructible étale-origin $B_X$-complex just obtained. Even if the reduction comparison is viewed in the ambient $A_X$-derived category, it induces $P_1$-linear isomorphisms on cohomology: both cohomology actions factor through $A_X\\twoheadrightarrow(P_1)_X$, so an $A_X$-linear map is automatically $(P_1)_X$-linear. Thus the constructibility conclusion is genuinely for the residue coefficient modules, not just for underlying abelian sheaves.",
+   "text": "The open immersion $j$ is quasi-separated: $U\\times_XU\\cong U$ and its diagonal is the identity, whose inverse image of an affine open is that affine open and hence quasi-compact. Together with the assumed quasi-compactness, this makes $j$ qcqs. This uses only the open-immersion and quasi-compactness definitions [def-weil-open-immersion, def-weil-finite-type-morphism].",
    "uses": [
     "def-weil-open-immersion",
-    "def-weil-finite-type-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Constructibility paragraph: check the qcqs hypothesis"
+   }
+  },
+  {
+   "text": "Apply [prop-weil-pbc-comparison-direct-image] to $j$ and the bounded-below complex $L$ of step 4. Its natural comparison and $\\nu_U^*L\\simeq\\bar K$ give\n$$Rj_{B,*}\\bar K\\simeq\\nu_X^*Rj_{\\mathrm{ét},*}L,\\qquad B_T=(P_1)_T.$$\nBy step 4 and the bounded constructible equivalence [sk-thm-pe-constructible-comparison] on $X$, this is a bounded constructible $B_X$-complex of étale origin. Here $Rj_{B,*}$ denotes direct image with the residue coefficient rings, before restriction to $A_X$-modules.",
+   "uses": [
     "prop-weil-pbc-comparison-direct-image",
-    "sk-thm-pe-constructible-comparison",
-    "def-pc-sheaf-restrict-scalars",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+    "sk-thm-pe-constructible-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
-    "place": "Constructibility of the reduction; qcqs direct-image comparison and return to the pro-étale site"
+    "place": "Constructibility paragraph: apply qcqs comparison at residue coefficients"
    }
   },
   {
-   "text": "Steps 3 and 5 establish the two conditions in [sk-lem-integral-models] (2) on $X$: derived completeness and bounded constructible étale-origin residue reduction. It follows that $Rj_*K\\in\\Dbc(X,\\mathcal O_E)$. The same node explicitly asserts $\\Dbc(X,\\mathcal O_E)=\\Dctf(X,\\mathcal O_E)$ in this setting, so the finite Tor amplitude conclusion also follows. This uses the existing residue criterion, which realizes the blueprint's reference to the integral constructibility criterion, and proves every clause of the item.",
+   "text": "For $T=U,X$ let $a_T:A_T\\to B_T$ be reduction, the pullback from the point of $\\underline{\\mathcal O_E}\\to\\underline{P_1}$. Apply [sk-prop-sfb-cartesian-coefficients] to these two coefficient rings: it supplies the ring isomorphisms $c_A:j^{-1}A_X\\simeq A_U$ and $c_B:j^{-1}B_X\\simeq B_U$. The coefficient-change square of [sk-def-sfb-coefficient-change] states exactly $a_Uc_A=c_Bj^{-1}a_X$. Thus [lem-weil-pbc-ring-sheaf-change-adjunction] applies with $u=j$, $R_T=A_T$, $S_T=B_T$. Its direct-image comparison, inverted, gives\n$$Rj_{A,*}\\operatorname{Res}_U\\bar K\\simeq\\operatorname{Res}_X Rj_{B,*}\\bar K.$$\nThis cited lemma treats arbitrary compatible ring sheaves; it requires neither finite $A$ nor flatness of $B_T$ over $A_T$.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-coefficient-change",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Constructibility paragraph: coefficient square and derived scalar-restriction comparison"
+   }
+  },
+  {
+   "text": "Put $M=(Rj_{A,*}K)\\otimes^L_{A_X}B_X$ and $N=Rj_{B,*}\\bar K$. The case $n=1$ of step 2, followed by step 7, gives $\\operatorname{Res}_X M\\simeq\\operatorname{Res}_X N$ in $D(A_X)$. Restriction along $A_X\\to B_X$ is exact by [lem-weil-restriction-of-scalars-exact], so its cohomology is the restriction of the $B_X$-cohomology. Consequently these isomorphisms induce $A_X$-linear isomorphisms $H^q(M)\\simeq H^q(N)$ for every $q$.",
+   "uses": [
+    "lem-weil-restriction-of-scalars-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Constructibility paragraph: compare cohomology after exact restriction"
+   }
+  },
+  {
+   "text": "The quotient $A_X\\to B_X$ is an epimorphism by the exact coefficient resolution of [det-pe-derived-nakayama-resolution] with $n=1$, already used in step 2. Each section $b$ of $B_X$ therefore lifts locally to a section $a$ of $A_X$. For an $A_X$-linear map $h:H^q(M)\\to H^q(N)$ from step 8 and a local section $m$, one has $h(bm)=h(am)=a h(m)=b h(m)$ on such a cover; the sheaf condition gives the equality globally. The same computation applies to the inverse. Thus $H^q(M)\\simeq H^q(N)$ as $B_X$-modules. Step 6 now implies that $M$ is bounded with constructible residue-coefficient cohomology.",
+   "uses": [
+    "det-pe-derived-nakayama-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Constructibility paragraph: elementary descent of linearity along the coefficient epimorphism"
+   }
+  },
+  {
+   "text": "The discrete field $P_1$ is Noetherian, and $X$ is qcqs in the standing setting. Hence the derived equivalence of [sk-thm-pe-constructible-comparison] applies to the bounded constructible $B_X$-complex $M$ of step 9. In particular $M$ is pulled back from a bounded constructible complex on $X_{\\mathrm{ét}}$. This verifies the étale-origin condition for the actual residue reduction of $Rj_{A,*}K$, without lifting the ambient $A_X$-derived isomorphism of step 8 to a morphism of $B_X$-complexes.",
+   "uses": [
+    "sk-thm-pe-constructible-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Constructibility paragraph: deduce étale origin for the actual residue reduction"
+   }
+  },
+  {
+   "text": "Steps 3 and 10 establish the two conditions in [sk-lem-integral-models] (2) on $X$: derived completeness and bounded constructible étale-origin residue reduction. It follows that $Rj_*K\\in\\Dbc(X,\\mathcal O_E)$. The same node explicitly asserts $\\Dbc(X,\\mathcal O_E)=\\Dctf(X,\\mathcal O_E)$ in this setting, so the finite Tor amplitude conclusion also follows. This uses the existing residue criterion, which realizes the blueprint's reference to the integral constructibility criterion, and proves every clause of the item.",
    "uses": [
     "sk-lem-integral-models"
    ],
@@ -137,14 +190,15 @@
   "def-weil-open-immersion",
   "def-weil-finite-type-morphism",
   "prop-weil-pbc-comparison-direct-image",
-  "def-pc-sheaf-restrict-scalars",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-coefficient-change",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-restriction-of-scalars-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
-  "place": "All four paragraphs, expanded in six steps; canonical tower input from the cited existing general nodes"
+  "place": "All four paragraphs, expanded in eleven steps; general coefficient-change and exact restriction lemmas replace the hidden argument in former step 5"
  },
  "mathlib_searches": [
   {
@@ -240,7 +294,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -260,16 +314,66 @@
   "date": "2026-10-17",
   "item": "det-thm-sf-pf-adic-open",
   "worker": "stage1",
-  "summary": "Made the standing positive-characteristic separated finite-type scheme setting and coefficient category explicit; supplied canonical all-level reduction and completion-unit compatibility, then finite-coefficient open finiteness and qcqs etale/pro-etale comparison. Reused existing nodes only, including sk-lem-integral-models for the residue criterion and finite Tor equality; no new nodes or Lean attachments. Statement dispute and stale unit metadata are documented in report.md. Independent second reading adds the exact restriction-of-scalars/derived-composition argument connecting integral and residue direct images.",
-  "blueprint": "Reduction paragraph is step 2; Completeness is steps 1 and 3; Constructibility of the reduction is steps 1, 4 and 5; Conclusion is step 6. The current main-20261015 unit is Open direct image and projection formula, unlike the stale recorded unit text."
+  "summary": "Repair of the 2026-10-17 re-split request: retain the statement, Lean record, proof route and original steps 1-4 and conclusion. Replace former step 5 by short steps citing the existing general ring-sheaf change-of-coefficients comparison, Cartesian coefficients, the coefficient-change square, and exact restriction. Write quotient-linearity as its own elementary section calculation and use constructible comparison to recover etale origin. No new nodes: the needed non-elementary lemmas already exist.",
+  "blueprint": "Completeness paragraph: steps 1 and 3; Reduction: step 2; Constructibility of the reduction: steps 4-10; Conclusion: step 11. The original statement and all four parts of its route are preserved.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-integral-models",
+    "why": "Use its residue criterion and integral finite-Tor equality, the exact criterion called for in the conclusion paragraph."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Identify the coefficient ring as a DVR with finite residue field; this is coefficient algebra needed by the unit."
+   },
+   {
+    "node": "det-pe-derived-nakayama-resolution",
+    "why": "Use the finite free coefficient resolution for reduction cones and the quotient epimorphism."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Apply the general triangulated property of right derivation to the reduction cone."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Use its canonical finite-reduction, strict-tower and completion-unit comparisons; these are general direct-image tools implementing the completeness paragraph."
+   },
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Verify the finite perfect quotient hypotheses of the direct-image tower tool."
+   },
+   {
+    "node": "sk-thm-pe-constructible-comparison",
+    "why": "Compare constructible finite-coefficient complexes on etale and pro-etale sites, as the constructibility paragraph requires."
+   },
+   {
+    "node": "cor-fin-deligne-open-finite-coefficients",
+    "why": "Use the finite-coefficient open-finiteness theorem explicitly required by the constructibility paragraph."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "Use the qcqs finite-coefficient etale/pro-etale direct-image comparison called for by the blueprint."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Supply the inverse-image isomorphisms of completed integral and finite residue coefficients needed by the general coefficient-change tool."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Use its arbitrary compatible ring-sheaf direct-image comparison; the same-unit flat coefficient-change lemma cannot handle the nonflat residue quotient."
+   },
+   {
+    "node": "lem-weil-restriction-of-scalars-exact",
+    "why": "Use exact scalar restriction from residue to completed coefficients to identify cohomology, a generic coefficient tool."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q28-3d9911b67",
-  "group": "Q28",
+  "reviewer": "NT-cc-NX-be0d0aa92",
+  "group": "NX",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q28-3d9911b67 (reviewer sub-agent of L); spot-checked: Read all six steps, every cited statement, and cited source passages. Canonical reduction, completion-unit compatibility, finite-coefficient comparison, and scalar restriction are valid; torsion, empty, and identity cases pass. No new nodes or dependency cycle. Accepted tools and inherited stale unit/source metadata are documented in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-be0d0aa92 (reviewer sub-agent of L); spot-checked: I read the whole item, with the blueprint main-20261015 statement and its four-paragraph proof, and every cited node statement. Sources checked: Stacks 09A6 (proetale lemma-morphism-comparison), 09C1 (definition-Dbc), 0D6E (derived-pushforward-composition) and 0A07. Statement: the statement is unchanged and not weakened, and all categories use the completed coefficient sheaf. Steps 1-4 and 11: the integral-models residue criterion, the DVR facts, and the canonical projection-formula, tower and completion-unit clauses of prop-weil-pbc-direct-image-limits all hold. Its hypotheses come from the standard-quotients-perfect node. The open-finiteness corollary applies because P_1 is a finite field of characteristic ell and ell is invertible in k. New steps 5-10: Step 5: j is qcqs; this step is elementary and correct. Step 6: the qcqs comparison of etale and pro-etale direct images applies, with the constructible equivalence. Step 7: Cartesian coefficients supply the two ring isomorphisms and the coefficient-change square is exactly the hypothesis of lem-weil-pbc-ring-sheaf-change-adjunction; that lemma needs no flatness, which matters because O_E->F_E is not flat. Step 8: exact restriction to completed-coefficient modules gives isomorphisms on cohomology; no lift from D(A) to D(B) is claimed. Step 9: B-linearity by local lifting along the epimorphism is correct. Step 10: the step recovers etale origin through essential surjectivity. Other checks: no cycle; uses equal proof_deps; there are no new nodes and no restatement; tested on the empty U, identity j and torsion K cases. I accept the declared tool_uses. One fix: step 9 relied on the epimorphism A_X->B_X with an empty uses list. In fixes/ it now cites det-pe-derived-nakayama-resolution with n=1; proof_deps is unchanged. The unit record sk-thm-sf-pf-adic is stale maintainer metadata; the report flags it and the delivery did not edit it.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
@@ -282,5 +386,19 @@
    "decls": [],
    "missing": []
   }
- }
+ },
+ "tool_uses": [
+  "sk-lem-integral-models",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "det-pe-derived-nakayama-resolution",
+  "lem-pc-right-derived-functor-triangulated",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "sk-thm-pe-constructible-comparison",
+  "cor-fin-deligne-open-finite-coefficients",
+  "prop-weil-pbc-comparison-direct-image",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-restriction-of-scalars-exact"
+ ]
 }
