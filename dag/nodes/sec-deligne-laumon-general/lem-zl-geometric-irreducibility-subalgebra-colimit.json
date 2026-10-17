@@ -14,9 +14,118 @@
   "def-pc-geometrically-irreducible",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary field extension $K/k$. By [lem-weil-pbc-fibre-product-affine-spectra], the base change of $\\operatorname{Spec}T$ along $\\operatorname{Spec}K\\to\\operatorname{Spec}k$ is $\\operatorname{Spec}(T\\otimes_kK)$ for every commutative $k$-algebra $T$. Thus [def-pc-geometrically-irreducible] reduces each assertion to irreducibility of these spectra for every $K$. We will use [lem-zl-spectrum-irreducible-nilradical-prime]: this is exactly properness and primality of the ideal of nilpotent elements. In particular every algebra assumed geometrically irreducible has nonzero tensor product with $K$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-geometrically-irreducible",
+    "lem-zl-spectrum-irreducible-nilradical-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037N, reduction to arbitrary field extension; definition-geometrically-irreducible immediately before it; Tag 00ES(2)."
+   }
+  },
+  {
+   "text": "For assertion (1), $K$ is a flat $k$-module. Indeed apply [lem-weil-pbc-field-extension-base-change-faithfully-flat] with $D=k$; [def-weil-pbc-faithfully-flat-ring-map] implies flatness of $k\\otimes_kK$. The maps $k\\otimes_kK\\to K$, $a\\otimes b\\mapsto ab$, and $K\\to k\\otimes_kK$, $b\\mapsto1\\otimes b$, are inverse $k$-linear maps by bilinearity, so flatness transfers to $K$. Since $u$ is injective and $k$-linear, [def-weil-pbc-flat-ring-map] gives an injection $v=u\\otimes1:A\\otimes_kK\\to S\\otimes_kK$. Its multiplicativity and preservation of $1$ follow on pure tensors from [lem-weil-pbc-algebra-tensor-pushout-universal-property] and extend by generation [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037N proof, first sentence (tensoring the injection); Tag 00HD definition of flatness."
+   }
+  },
+  {
+   "text": "Write $B=A\\otimes_kK$ and $C=S\\otimes_kK$. Injectivity gives $x^n=0$ in $B$ if and only if $v(x)^n=0$ in $C$. Hence $N_B=v^{-1}(N_C)$. By [lem-zl-spectrum-irreducible-nilradical-prime] and the hypothesis on $S$, $N_C$ is prime and proper. Its inverse image is proper since $v(1)=1\\notin N_C$; if $xy\\in N_B$, then $v(x)v(y)\\in N_C$, so $v(x)\\in N_C$ or $v(y)\\in N_C$, hence $x\\in N_B$ or $y\\in N_B$. The same criterion gives irreducibility of $\\operatorname{Spec}B$. Since $K/k$ was arbitrary, [def-pc-geometrically-irreducible] and the identification in step 1 prove (1).",
+   "uses": [
+    "lem-zl-spectrum-irreducible-nilradical-prime",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037N proof, subalgebra assertion; equivalent nilradical formulation of the irreducibility argument, Tag 00ES(2)."
+   }
+  },
+  {
+   "text": "For assertion (2), let $A=\\varinjlim_i A_i$ with maps $\\iota_i$. Regard the given nonempty small directed poset as a small filtered category: it has a common target for any two objects, and parallel arrows are equal. By [lem-weil-pbc-filtered-colimit-algebras-elementwise], $A$ is a colimit of the underlying rings and every element has a representative $\\iota_i(a)$. It is also a colimit of the underlying $k$-modules, as follows directly. For any compatible family of $k$-linear maps $f_i:A_i\\to M$, put $f(\\iota_i(a))=f_i(a)$. This is independent of the representative by [lem-weil-pbc-filtered-colimit-rings-zero]: equality is witnessed at a common later stage. To check additivity, move two representatives to a common upper bound and use additivity there; scalar compatibility is checked at a single stage. Every element has a representative, so $f$ is the unique such linear map. This proves the required module colimit universal property.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037N proof, final sentence; underlying colimit description as in Tags 00D6 and 00D7."
+   }
+  },
+  {
+   "text": "Put $B_i=A_i\\otimes_kK$ and $B=A\\otimes_kK$. Apply [lem-weil-pbc-tensor-commutes-with-colimits] to the small diagram of $k$-modules of step 4, with $N=K$. It says that $B$, with maps $j_i=\\iota_i\\otimes1$, is the module colimit of the $B_i$. The maps $j_i$ and all transition maps are unital ring maps: on pure tensors they preserve $1\\otimes1$ and the multiplication $(a\\otimes b)(a\\prime\\otimes b\\prime)=aa\\prime\\otimes bb\\prime$ of [lem-weil-pbc-algebra-tensor-pushout-universal-property]; bilinearity and generation [def-weil-pbc-module-tensor-product] extend the identity. By [lem-weil-pbc-filtered-colimit-modules-elementwise], every element of $B$ is represented in some $B_i$, two such representatives can be moved to a common stage, and an element maps to zero precisely when it becomes zero at a later stage. These facts require no injectivity of transition maps.",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037N proof, final sentence; tensor commutation Tag 00DD and module colimit descriptions Tags 00D6, 00D7."
+   }
+  },
+  {
+   "text": "Each $\\operatorname{Spec}B_i$ is irreducible by the hypotheses and step 1, so [lem-zl-spectrum-irreducible-nilradical-prime] says $N_{B_i}$ is proper and prime. Choose $i\\in I$, possible by nonemptiness. If $1_B=0$, then $j_i(1_{B_i})=0$, and [lem-weil-pbc-filtered-colimit-modules-elementwise] gives some $j\\geq i$ where the image of $1_{B_i}$ is zero. The transition map is unital, so $1_{B_j}=0$, contrary to properness of $N_{B_j}$. Thus $1_B\\ne0$ and $N_B$ is proper: $1_B$ cannot be nilpotent.",
+   "uses": [
+    "lem-zl-spectrum-irreducible-nilradical-prime",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037N(3), nonemptiness implicit in irreducibility; final proof sentence expanded using Tag 00D7."
+   }
+  },
+  {
+   "text": "To prove primality of $N_B$, take $x,y\\in B$ with $xy\\in N_B$, and choose $n\\geq1$ with $(xy)^n=0$. By [lem-weil-pbc-filtered-colimit-modules-elementwise] and directedness, represent $x,y$ in one $B_i$ by $x_i,y_i$. Since the coprojections preserve products, $j_i((x_iy_i)^n)=0$. The same cited zero criterion gives $j\\geq i$ where $(x_jy_j)^n=0$. The prime ideal $N_{B_j}$ of step 6 therefore contains $x_j$ or $y_j$. Some positive power of the corresponding element is zero at stage $j$, and its image in $B$ has that same power zero. Consequently $x\\in N_B$ or $y\\in N_B$. Together with step 6 this makes $N_B$ prime. By [lem-zl-spectrum-irreducible-nilradical-prime], $\\operatorname{Spec}B$ is irreducible. This holds for every $K/k$, so [def-pc-geometrically-irreducible] and step 1 give (2). No finite-generation or reducedness was used.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-zl-spectrum-irreducible-nilradical-prime",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037N(3), final proof sentence expanded by detection of one nilpotence relation at a finite stage; Tag 00ES(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-geometrically-irreducible",
+  "lem-zl-spectrum-irreducible-nilradical-prime",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-rings-zero",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Expansion of Tag 037N(1),(3), following its tensor/base-change reduction, with the equivalent nilradical criterion of Tag 00ES(2) replacing its minimal-prime/image argument in (1) and spelling out the directed-colimit argument in (3)."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -73,10 +182,42 @@
    "date": "2026-10-17",
    "verdict": "no match",
    "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric irreducibility of spectra is preserved under injective algebra maps and directed colimits",
+   "results": "8 hits: Algebra.IsGeometricallyReduced.of_injective, AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier, AlgebraicGeometry.Spec.map_injective, Algebra.IsGeometricallyReduced.of_forall_fg, PrimeSpectrum.irreducibleSpace, AlgebraicGeometry.Scheme.IsGermInjective.Spec, Algebra.IsGeometricallyReduced, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier. GeometricallyReduced results do not assert geometric irreducibility; the nilradical criterion alone does not prove either closure assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "bf07ab61404c5596"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum irreducible injective ring map colimit",
+   "results": "0 hits: . loogle: Unknown identifier `irreducible`. GeometricallyReduced results do not assert geometric irreducibility; the nilradical criterion alone does not prove either closure assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometrically irreducible algebras over a field are closed under subalgebras and filtered direct limits",
+   "results": "8 hits: Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.IsGeometricallyReduced, Algebra.IsGeometricallyReduced.of_injective, Algebra.isReduced_of_isGeometricallyReduced, Algebra.isGeometricallyReduced_iff, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier. GeometricallyReduced results do not assert geometric irreducibility; the nilradical criterion alone does not prove either closure assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "ecea2d7430bc0351"
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*irreducib|irreducib.*(colimit|directLimit|subalgebra)",
+   "results": "16 hits: Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean. GeometricallyReduced results do not assert geometric irreducibility; the nilradical criterion alone does not prove either closure assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "3d732a68a6e1ae3b"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-generic-point-geometric-irreducibility",
@@ -96,5 +237,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-geometric-irreducibility-subalgebra-colimit",
+  "worker": "stage1",
+  "summary": "Retained both clauses and all hypotheses of Tag 037N. Expanded field-extension flatness, descent of the prime nilradical under injection, the underlying module colimit universal property, tensor commutation, nonzeroness and finite-stage detection of nilpotent products. Reused existing affine base-change, flatness and colimit tools and added one exact Mathlib leaf for the nilradical criterion. Checked statements, sources, edge cases and exact citation quotes.",
+  "blueprint": "Current blueprint main-20261015, lem-zl-bertini-finite-cover-curve proof paragraph 3: apply Tag 0G4F to X and T; the generic-residue-field passage in the proof of 0G4F is carried by lem-zl-bertini-irreducible-member and this item. Geometric irreducibility is preserved by subalgebras and directed colimits.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic algebra/topology tool used exactly as stated for the arbitrary field extension or filtered diagram; the current unit supplies no replacement for this foundational fact. It expands Tag 037N below the existing Bertini route."
+   },
+   {
+    "node": "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "why": "Generic algebra/topology tool used exactly as stated for the arbitrary field extension or filtered diagram; the current unit supplies no replacement for this foundational fact. It expands Tag 037N below the existing Bertini route."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic algebra/topology tool used exactly as stated for the arbitrary field extension or filtered diagram; the current unit supplies no replacement for this foundational fact. It expands Tag 037N below the existing Bertini route."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "why": "Generic algebra/topology tool used exactly as stated for the arbitrary field extension or filtered diagram; the current unit supplies no replacement for this foundational fact. It expands Tag 037N below the existing Bertini route."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-rings-zero",
+    "why": "Generic algebra/topology tool used exactly as stated for the arbitrary field extension or filtered diagram; the current unit supplies no replacement for this foundational fact. It expands Tag 037N below the existing Bertini route."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-commutes-with-colimits",
+    "why": "Generic algebra/topology tool used exactly as stated for the arbitrary field extension or filtered diagram; the current unit supplies no replacement for this foundational fact. It expands Tag 037N below the existing Bertini route."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "why": "Generic algebra/topology tool used exactly as stated for the arbitrary field extension or filtered diagram; the current unit supplies no replacement for this foundational fact. It expands Tag 037N below the existing Bertini route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-rings-zero",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N6-5c0ff7332",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-5c0ff7332 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the new leaf, the statement of every cited node, Stacks algebra.tex 11207-11257 (Definition 037M, Lemma 037N and its proof), blueprint main-20261015 lem-zl-bertini-finite-cover-curve proof paragraph 3, and Mathlib RingTheory/Spectrum/Prime/Topology.lean:276. Statement: it matches 037N(1) (injective k-map, equivalent via the image) and 037N(3). Requiring I to be nonempty adds nothing, since the empty colimit would be k, which is geometrically irreducible. Nothing is weakened, no hypothesis is added, and it matches both uses in the citer lem-zl-generic-point-geometric-irreducibility. Step 1: the fibre-product leaf identifies the base change with Spec(T⊗K), which bridges the DAG definition and Stacks 037M. Steps 2-3: K is flat via the faithfully-flat leaf with D=k and k⊗K≅K. The injective tensor map is a unital ring map, and the preimage of a proper prime nilradical is a proper prime nilradical. Step 4 constructs the module-colimit universal property instead of claiming it from a node: well-definedness via the rings-zero leaf, k-linearity because the ι_i are algebra maps, uniqueness via representatives. Step 5: tensor commutes with colimits, and the modules-elementwise leaf needs no injectivity. Step 6: nonemptiness of I gives 1≠0 in B. Step 7: finite-stage detection of (xy)^n=0 plus primality at stage j proves the nilradical of B is prime. All 12 proof dependencies are Mathlib leaves, so there is no route issue. The declared tool_uses are harmless and accepted but unnecessary. New node lem-zl-spectrum-irreducible-nilradical-prime: an exact one-line specialization of PrimeSpectrum.irreducibleSpace_iff_isPrime_nilradical (CommSemiring version; IrreducibleSpace includes nonempty, IsPrime includes proper). It is self-contained, has three kinds of search and correct blueprint.from/via, and is not a restatement of an item clause. Tested on the zero ring, a field, the dual numbers, k×k and k[x,y]/(xy). The rg duplicate search (nilradical, 00ES, the declaration name, geometrically irreducible) found no duplicate; lem-weil-pbc-spec-irreducible-closed-subsets-primes and lem-pc-integral-scheme-irreducible do not state the criterion. No SGA cited. No changes made."
  }
 }
