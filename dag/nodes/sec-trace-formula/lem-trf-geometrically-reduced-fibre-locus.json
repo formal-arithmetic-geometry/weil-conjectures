@@ -1,0 +1,104 @@
+{
+ "id": "lem-trf-geometrically-reduced-fibre-locus",
+ "kind": "statement",
+ "title": "Constructibility and base-change equality of the geometrically reduced fibre locus",
+ "statement": "Let $A\\to B$ be a finitely presented homomorphism of commutative rings [def-weil-pbc-finitely-presented-algebra]. For a prime $\\mathfrak p$ of $A$ let $\\kappa(\\mathfrak p)$ be its residue field [def-weil-residue-field], and put\n$$E_{\\mathrm{red}}(B/A)=\\{\\mathfrak p\\in\\operatorname{Spec}A\\mid B\\otimes_A\\kappa(\\mathfrak p)\\text{ is geometrically reduced over }\\kappa(\\mathfrak p)\\}.$$\nHere geometrically reduced means that the spectrum is reduced after every field extension, as in [def-pc-geometrically-irreducible], and $\\operatorname{Spec}$ is [def-weil-affine-spectrum]. Then $E_{\\mathrm{red}}(B/A)$ is constructible [def-weil-constructible-subset]. Moreover, for every homomorphism $a:A\\to A'$ of commutative rings, with $B'=B\\otimes_A A'$, one has\n$$E_{\\mathrm{red}}(B'/A')=(\\operatorname{Spec}a)^{-1}(E_{\\mathrm{red}}(B/A)).$$\nNo flatness, injectivity or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0579 (lemma-geometrically-reduced-constructible) and 0576 (lemma-base-change-fibres-geometrically-reduced), affine ring form. In 0579 the locus is locally constructible; on the affine (hence qcqs) base it is constructible by Properties Tag 054C (lemma-locally-constructible)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-residue-field",
+  "def-pc-geometrically-irreducible",
+  "def-weil-affine-spectrum",
+  "def-weil-constructible-subset"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented commutative algebra the set of primes where its fibre is geometrically reduced is constructible and this locus pulls back exactly under arbitrary base change",
+   "results": "PrimeSpectrum.isConstructible_range_comap and isConstructible_comap_image, open-map Chevalley results, and Algebra.IsGeometricallyReduced definitions/criteria. These do not give the fibre locus.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The geometrically reduced fibre locus of a finitely presented algebra is constructible and commutes with base change",
+   "results": "Algebra.IsGeometricallyReduced, isGeometricallyReduced_iff, of_forall_fg, and Scheme.Hom.isLocallyConstructible_image; no fibre-locus constructibility.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyReduced, IsConstructible",
+   "results": "0 hits; Loogle reports unknown identifier IsConstructible.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyReduced, Topology.IsConstructible",
+   "results": "0 hits with qualified constructibility identifier.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.*reduced|geometricallyReduced",
+   "results": "Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean and Integral.lean: definitions, fibre criteria and base-change stability, but no constructible locus theorem. Grep restricted to AlgebraicGeometry.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite presentation morphism of affine schemes the loci of geometrically reduced and geometrically irreducible fibres are locally constructible",
+   "results": "Chevalley image/preimage constructibility, LocallyOfFinitePresentation and fibre Jacobson instances; none asserts constructibility of geometric fibre loci.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructib.*(reduced|irreducible)|geometric.*constructib|0579|055B",
+   "results": "Only GroupTheory/Coset/Card.lean:67 (wikidata Q505798, an unrelated numeric substring). No geometric fibre-locus theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-noetherian-approximation",
+  "date": "2026-10-18",
+  "group": "Q04"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), the projectivity of S over R (Tag 05FT) used with Tag 05FQ. In the resulting 05FT Noetherian-approximation input: 05FG, good reduced-fibre locus and its base-change equality.",
+   "via": [
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

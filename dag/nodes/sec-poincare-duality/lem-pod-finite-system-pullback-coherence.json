@@ -1,0 +1,104 @@
+{
+ "id": "lem-pod-finite-system-pullback-coherence",
+ "kind": "statement",
+ "title": "Coherent composition of finite-coefficient pullback on strict systems",
+ "statement": "Let $A_1\\leftarrow A_2\\leftarrow\\cdots$ be an inverse sequence of finite commutative rings and ring homomorphisms. Let $j:Y\\to Z$, $h:Z\\to W$ and $k:W\\to V$ be arbitrary morphisms of schemes [def-pc-scheme]. Use fixed small representatives of their small pro-etale sites [def-weil-pbc-proetale-site, def-weil-size-convention]. Write $B_{T,n}=(A_n)_T$ for the constant ring sheaf and use its canonical inverse-image identifications, compatible with maps of coefficient rings [def-weil-pbc-constant-sheaf, prop-weil-pbc-proetale-constant-ring-map]. For each scheme $T$ let $\\mathscr S_T$ be the abelian category of sequences of $B_{T,n}$-module sheaves $M_n$ with $B_{T,n+1}$-linear maps $M_{n+1}\\to\\operatorname{Res}_{B_{T,n+1}\\to B_{T,n}}M_n$; morphisms commute with these maps and exactness is componentwise [lem-coef-semilinear-derived-sections]. Use the ordinary unbounded derived categories $D(\\mathscr S_T)$ [def-weil-abstract-derived-category]. For each composite $f$ of the given scheme maps let $U_f:D(\\mathscr S_{\\mathrm{target}(f)})\\to D(\\mathscr S_{\\mathrm{source}(f)})$ be the functor obtained by applying the exact finite-coefficient module inverse image levelwise and then termwise to complexes [prop-weil-pbc-proetale-constant-exact, lem-coef-semilinear-derived-sections].\n\nThe canonical module-pullback composition maps determine natural isomorphisms of derived-system functors\n$$a_{h,k}:U_{k\\circ h}\\xrightarrow{\\sim}U_hU_k.$$\nFor every complex of strict systems, this is represented by the termwise module comparison at every degree and coefficient level; these module comparisons commute with the semilinear transitions. Evaluation at level $n$ identifies $a_{h,k}$ with the canonical finite-coefficient derived comparison $c_{h,k}$ of [lem-weil-pbc-proetale-derived-pullback-composition]. For every $S\\in D(\\mathscr S_V)$,\n$$U_j(a_{h,k}(S))\\circ a_{j,k\\circ h}(S)=a_{j,h}(U_kS)\\circ a_{h\\circ j,k}(S)$$\nas morphisms in $D(\\mathscr S_Y)$, under the canonical associator. This equality is induced by an equality of natural transformations on complexes of strict systems before localization. No normalization, boundedness, constructibility or flatness of $A_m\\to A_n$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition, proof: termwise composition on flat-term K-flat representatives. The varying-coefficient strict-system comparison, transition compatibility and its associativity equation are the agent-formulated refinement extracted from the integral pullback composition argument; 0D6D alone does not assert them."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-constant-sheaf",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-abstract-derived-category",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical inverse image composition on derived categories of inverse systems of sheaves with varying coefficient rings satisfies associativity as maps of whole systems",
+   "results": "Eight hits, including SheafOfModules.pullback_assoc and Scheme.Modules.pseudofunctor_associativity_assoc; these concern underived sheaves or scheme modules. Other hits concern localization or unrelated sheaf maps.",
+   "date": "2026-10-18",
+   "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback_assoc|pullbackComp|semilinear.*system [Algebra/Category/ModuleCat/Sheaf]",
+   "results": "Five hits in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167,177,180,193,194. Read lines 150-212: pullbackComp and pullback_assoc are underived module-sheaf statements.",
+   "date": "2026-10-18",
+   "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback_assoc\"",
+   "results": "Six hits: SheafOfModules.pullback_assoc, PresheafOfModules.pullback_assoc, overMapPullback_assoc, and categorical pullbacks. No derived varying-coefficient system theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associativity of inverse image composition for inverse sequences of module sheaves over varying finite coefficient rings in unbounded derived categories",
+   "results": "Eight hits including SheafOfModules.pullback_assoc and unrelated image/sheaf-composition identities; no derived system theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear|mapDerivedCategory|pullback_assoc [Algebra/Homology/DerivedCategory]",
+   "results": "Ten hits in DerivedCategory/ExactFunctor.lean and Ext/Map.lean. Read ExactFunctor.lean:27-58: mapDerivedCategory is exact-functor descent, not construction and coherence of semilinear coefficient-system inverse images.",
+   "date": "2026-10-18",
+   "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "Twelve hits in ExactFunctor.lean, including Functor.mapDerivedCategoryCompIso and NatTrans.mapDerivedCategory. Generic exact-functor descent is relevant infrastructure but does not supply the module-system comparison or its coefficient-transition normalization.",
+   "date": "2026-10-18",
+   "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact levelwise pullback of semilinear coefficient towers has coherent natural composition maps before derived localization, compatible with coefficient transition maps",
+   "results": "Eight hits, all ordinary ring/module localization exactness or cotangent-module identities, not coefficient systems.",
+   "date": "2026-10-18",
+   "verdict": "no match: the complete varying-coefficient system theorem is not an exact match or a one-line specialization of these hits"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declarations": [
+   "SheafOfModules.pullback_assoc",
+   "CategoryTheory.Functor.mapDerivedCategoryCompIso",
+   "CategoryTheory.NatTrans.mapDerivedCategory"
+  ],
+  "note": "Underived sheaf composition coherence and generic exact-functor descent; the ring-system construction and compatibility are additional work, so this is not a Mathlib leaf."
+ },
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-integral-pullback-composition",
+  "date": "2026-10-18",
+  "group": "NG"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-local-frobenius-trace",
+   "place": "statement, second sentence of the first paragraph: 'Iterating the Weil isomorphism $r$ times and using the resulting return to $\\bar y$ defines ... the local operator $F_y$' (the canonical identifications $L(g_Y^{n})^*Lg_Y^*\\cong L(g_Y^{n+1})^*$ and $L(g_s^n)^*L\\bar x^*\\cong L\\bar x^*L(g_Y^n)^*$ at the integral level underlying the rational coefficients $E$); the finite-coefficient system reassociation used in the integral comparison proof, formerly Step 5",
+   "via": [
+    "lem-pod-integral-pullback-composition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

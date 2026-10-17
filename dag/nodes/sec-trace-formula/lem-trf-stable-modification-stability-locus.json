@@ -24,9 +24,117 @@
   "def-weil-proper-morphism",
   "lem-trf-riemann-zariski-finite-refinement"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First obtain an isomorphism open on the original base. All four schemes $X,D,Y_0,E_0$ are of finite presentation over $U_0$, by the multipointed hypotheses. Choose any nonempty affine open $A\\subseteq U_0$. The principal opens $D(a)\\subseteq A$ for nonzero $a\\in\\Gamma(A,\\mathcal O_A)$ form a directed inverse system with affine transitions and limit $\\operatorname{Spec}k(U_0)$: its coordinate-ring colimit is the fraction field of the domain $\\Gamma(A,\\mathcal O_A)$. Use [thm-pd-spreading-out](2) to descend the two given generic inverse maps, and (3) to impose both inverse identities for each map after a common further localization. This yields a nonempty open $W_0\\subseteq A\\subseteq U_0$ containing $\\eta_0$ over whose full preimages both $g_X$ and $g_D$ are isomorphisms. Also $U_0$ and all its finite-type quasi-models are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. No valuation-centre descent theorem is used to spread these generic inverses.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), clauses (2),(3), applied to principal open neighbourhoods of the generic point; Morphisms Tag 01T6."
+   }
+  },
+  {
+   "text": "The open $W_0$ is schematically dense in $U_0$: every affine domain $B$ in the integral scheme injects into $k(U_0)$, so a section vanishing on $W_0$ vanishes at the generic point and is zero on each such affine chart. The open immersion $W_0\\hookrightarrow U_0$ is quasi-compact and quasi-separated, since $U_0$ is Noetherian. Apply [lemma-nagata-dense-flat-pullback] with this immersion as $h$ and first $q:X\\to U_0$, then $q:D\\to U_0$. Both are flat by hypothesis. The inverse images $X_{W_0}\\subseteq X$ and $D_{W_0}\\subseteq D$ are therefore schematically dense in the targets of $g_X$ and $g_D$. Together with properness and the generic isomorphisms, Step 1 shows that $g$ is an $\\eta$-modification. This step does not assert semistability of $(Y_0,E_0)$.",
+   "uses": [
+    "lemma-nagata-dense-flat-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 081I (flat base change of scheme-theoretic images), with the flat target maps X and D."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-stable-modification-constructibility] to the proper pair $g$ over the integral Noetherian base $U_0$. Its generic-isomorphism and dense-target-open assumptions were verified in Steps 1--2; its source need not yet be semistable. Let $C\\subseteq U_0$ be the resulting constructible subset of points at which the source geometric fibre is semistable and has no exceptional contracted component. For every point $v\\in\\operatorname{Spec}V$, put $u=g_V(v)\\in U_0$, where $g_V$ denotes the prescribed base map. The fibre of the pulled-back pair at $v$ is the base change of the pair at $u$ along the field extension $\\kappa(u)\\hookrightarrow\\kappa(v)$. It is geometrically stable by the hypothesis on the modification over $V$. The reverse implication of [lem-trf-stable-modification-stability-field-descent] gives semistability and geometric stability at $u$. Thus the image of every point, not only the closed point, of $\\operatorname{Spec}V$ lies in $C$.",
+   "uses": [
+    "lem-trf-stable-modification-constructibility",
+    "lem-trf-stable-modification-stability-field-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 5.1(ii), printed p. 34, and the field-extension invariance hypothesis of Remark 3.1.1(i)(a),(ii), pp. 14--15."
+   }
+  },
+  {
+   "text": "Choose an affine open $A_0\\subseteq U_0$ containing the centre of $V$. The map $\\operatorname{Spec}V\\to U_0$ factors through $A_0$, since every point of the spectrum of a local ring generalizes its closed point. The set $C_0=C\\cap A_0$ is constructible by [lem-weil-pbc-constructible-open-restriction]. Since $A_0$ is Noetherian affine, write $C_0$ as a finite Boolean combination of principal opens, using [def-weil-constructible-subset] and finite principal-open covers of its open pieces. Consider the directed system of affine centred quasi-models $U_i\\to A_0$, let $c_i$ be their centres, and put $T_i=\\operatorname{Spec}\\mathcal O_{U_i,c_i}$. By [lem-trf-riemann-zariski-local-colimit], its limit is $\\operatorname{Spec}V$, also after restricting to refinements of $A_0$. All $T_i$ are affine, hence qcqs, and their transition maps are affine. The inverse image of $C_0$ in $T_0=\\operatorname{Spec}\\mathcal O_{A_0,c_0}$ is constructible: replace each principal open in the Boolean expression by the principal open of its image in this local ring. Step 3 says that the limit maps into this inverse image. Apply [lem-weil-pbc-limit-contained-in-constructible] (05F4) to obtain an index $i$ for which the entire image of $T_i\\to A_0$ is contained in $C_0$.",
+   "uses": [
+    "lem-weil-pbc-constructible-open-restriction",
+    "def-weil-constructible-subset",
+    "lem-trf-riemann-zariski-local-colimit",
+    "lem-weil-pbc-limit-contained-in-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05F4 (lemma-limit-contained-in-constructible), first application, along the centre local rings; Temkin Lemma 3.2.2, printed p. 16."
+   }
+  },
+  {
+   "text": "Write the affine quasi-model just chosen as $U_i=\\operatorname{Spec}B$, with centre $c_i$ corresponding to $\\mathfrak p\\subset B$. The subset $E_i\\subseteq U_i$ which is the inverse image of $C_0$ is a finite Boolean combination of principal opens, by the same substitution of functions as in Step 4, so is constructible [def-weil-constructible-subset]. The limit of the directed system $D(f)=\\operatorname{Spec}B_f$, indexed by $f\\notin\\mathfrak p$ and ordered by further localization, is $\\operatorname{Spec}B_{\\mathfrak p}$: $B_{\\mathfrak p}$ is the colimit of these localizations. All stages and transition maps are affine. Step 4 says this limit maps into $E_i$. Apply [lem-weil-pbc-limit-contained-in-constructible] a second time, now to these principal neighbourhoods (including $D(1)=U_i$). It gives $f\\notin\\mathfrak p$ with $U:=D(f)\\subseteq E_i$. Since the map $B_{\\mathfrak p}\\to V$ is local, $f$ maps to a unit of $V$, and the chosen lift $\\operatorname{Spec}V\\to U_i$ factors through $U$. The scheme $U$ is integral, and its composite to $U_0$ is separated of finite type with the prescribed generic map from $\\operatorname{Spec}L$. Thus it is an $L$-quasi-model through $x$ whose image in $U_0$ is contained in $C$.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-limit-contained-in-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05F4, second application, along principal affine neighbourhoods of the chosen centre; the localization colimit is written out."
+   }
+  },
+  {
+   "text": "Pull back the given pairs to $U$, writing them as $(Y,E)\\to(X_U,D_U)$. By [lem-trf-semistable-marked-base-change], both remain multipointed curves, and the target retains its smooth generic curve and etale generic marking because the generic point maps to $\\eta_0$. Properness of each pair map follows from [lem-weil-pbc-proper-base-change]. For any $t\\in U$ with image $s\\in C$, the pair over $\\kappa(t)$ is the base change of the pair over $\\kappa(s)$. By [lem-trf-stable-modification-stability-field-descent], it is semistable and geometrically stable. In particular $E_t\\to\\operatorname{Spec}\\kappa(t)$ is etale. Flatness and finite presentation of $E\\to U$ allow [lem-sbc-flat-fibre-etale-neighbourhoods] at each $t$, proving that $E\\to U$ is etale. At every point of $E$ the fibre curve is smooth; flatness and finite presentation of $Y\\to U$ allow [lem-trf-smooth-at-point-fibre-criterion], so the marking lies in the relative smooth locus. The nodal geometric fibres and absence of exceptional components already hold at every $t$. Hence the source over $U$ is semistable and has the geometric stability condition of the item.",
+   "uses": [
+    "lem-trf-semistable-marked-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-trf-stable-modification-stability-field-descent",
+    "lem-sbc-flat-fibre-etale-neighbourhoods",
+    "lem-trf-smooth-at-point-fibre-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§1.2, printed p. 2: semistability is equivalent to semistability on geometric fibres; arbitrary base change and Remark 3.1.1."
+   }
+  },
+  {
+   "text": "Set $U^\\circ=U\\times_{U_0}W_0$. It is an open containing the generic point of the integral scheme $U$, so is dense and schematically dense by the affine-domain argument of Step 2. The maps over its full preimages are isomorphisms by Step 1 and transitivity of fibre products. Because $U$ is Noetherian, the open immersion $U^\\circ\\hookrightarrow U$ is qcqs. Apply [lemma-nagata-dense-flat-pullback] to this immersion and the flat maps $X_U\\to U$ and $D_U\\to U$. This proves schematic density in the two targets $X_U$ and $D_U$, including when the marking is empty. With properness from Step 6 and the generic-fibre isomorphisms, the pair is an $\\eta$-modification; Step 6 makes it stable. Finally the factorization from Step 5 respects $\\operatorname{Spec}L$, so [lem-trf-riemann-zariski-finite-refinement] identifies its point of $RZ_L(U)$ with $x$ under the open injection into $RZ_L(U_0)$. This is every conclusion of the item.",
+   "uses": [
+    "lemma-nagata-dense-flat-pullback",
+    "lem-trf-riemann-zariski-finite-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 1.5, printed p. 36, and Corollary 3.2.7, printed p. 17; schematic density by Stacks 081I."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constructible-subset",
+  "lem-sbc-flat-fibre-etale-neighbourhoods",
+  "lem-trf-riemann-zariski-finite-refinement",
+  "lem-trf-riemann-zariski-local-colimit",
+  "lem-trf-semistable-marked-base-change",
+  "lem-trf-smooth-at-point-fibre-criterion",
+  "lem-trf-stable-modification-constructibility",
+  "lem-trf-stable-modification-stability-field-descent",
+  "lem-weil-pbc-constructible-open-restriction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-limit-contained-in-constructible",
+  "lem-weil-pbc-proper-base-change",
+  "lemma-nagata-dense-flat-pullback",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Expanded proof of the approximation paragraph of Theorem 1.5 (printed p. 36), using Lemma 3.2.2, Lemma 5.1(ii), Remark 3.1.1 and Stacks 01ZM, 05F4, 081I. Primary PDF read online; local copy remains WANTED. The two separate 05F4 applications and target-density checks are written explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +166,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-stable-modification-spreading",
@@ -70,12 +178,36 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Temkin proof component: Lemma 5.1(ii) constructibility of stable fibres and shrinking to the stable locus in the second paragraph of the proof of Theorem 1.5.",
+   "place": "Temkin Lemma 5.1(ii): constructibility of stable fibres and shrinking to the stable locus; the generic-isomorphism paragraph of Theorem 1.5.",
    "via": [
     "lem-trf-stable-modification-spreading"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-stable-modification-stability-locus",
+  "worker": "stage1",
+  "summary": "Repaired every numbered return: self-contained constructibility and centre-colimit statements with exact scope and audits; separate field-extension invariance node; generic inverse descent by 01ZM; every valuation point maps into the constructible stable set; two explicit 05F4 applications at centre local rings and affine neighbourhoods; schematic density in X_U and D_U with properness cited. No statement change to the item.",
+  "blueprint": "Realizes the Temkin Theorem 1.5 approximation paragraph used by the nearby-cycle branch of lem-trf-local-term-locality: Lemma 3.2.2 for centres, Lemma 5.1(ii) and Remark 3.1.1 for the constructible fibre condition. The generic-isomorphism and density subarguments now appear explicitly in Steps 1--2 and 7.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-flat-fibre-etale-neighbourhoods",
+    "why": "Generic flat-fibre criterion for etaleness, used only to turn the fibrewise marking condition into structural etaleness; no trace-formula unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-flat-fibre-etale-neighbourhoods"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q123-f8cb1622b",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q123-f8cb1622b (reviewer sub-agent of L); spot-checked: Read the full item and all three new nodes. Verified Temkin §1.2, Remark 3.1.1, Lemmas 3.2.2 and 5.1(ii), and the Theorem 1.5 approximation argument; checked Stacks citations, both limit applications, density, field reflection, edge cases, duplicates, and route restrictions. No fixes required. Detailed review written to review.md."
  }
 }

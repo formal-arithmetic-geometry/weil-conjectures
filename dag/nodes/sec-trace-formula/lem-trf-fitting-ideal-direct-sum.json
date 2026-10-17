@@ -11,9 +11,52 @@
   "def-weil-finitely-generated-module",
   "lem-trf-fitting-ideal-independence-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose finite generating families of $M$ and $N$ [def-weil-finitely-generated-module], giving surjections $\\pi:R^{\\oplus n}\\to M$ and $\\rho:R^{\\oplus m}\\to N$ by sending the standard coordinates to those generators. Put $K=\\ker\\pi$ and $L=\\ker\\rho$. The map $q:R^{\\oplus(n+m)}\\to M\\oplus N$, $q(x,y)=(\\pi(x),\\rho(y))$, is surjective, since preimages can be chosen separately, and $\\ker q=K\\oplus L$, since $q(x,y)=0$ exactly when $\\pi(x)=0$ and $\\rho(y)=0$. The combined family $(\\pi(e_i),0),(0,\\rho(e_j))$ generates $M\\oplus N$. Thus [lem-trf-fitting-ideal-independence-base-change], with $k=0$, computes $I_0(M)$, $I_0(N)$ and $I_0(M\\oplus N)$ from these three surjections. Write their kernel-row ideals as $A$, $B$, $C$, respectively.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-trf-fitting-ideal-independence-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07Z8 (lemma-fitting-ideal), kernel-row description, and 07ZA (lemma-fitting-ideal-basics), proof of (2): the direct-sum presentation."
+   }
+  },
+  {
+   "text": "For a generator of $C$, take $n+m$ rows $z_i=(x_i,y_i)$ in $K\\oplus L$ and form the square matrix $Z=[X\\ Y]$ with the first $n$ and last $m$ columns separated. In the Leibniz sum [def-weil-pbc-matrix-determinant], group permutations according to the set $S$ of rows used in the first $n$ columns. If $S=\\{s_1<\\cdots<s_n\\}$ and its complement is $\\{t_1<\\cdots<t_m\\}$, every permutation in this group is uniquely $\\tau_S\\circ(\\alpha\\oplus\\beta)$, where $\\tau_S$ lists $s_1,\\ldots,s_n,t_1,\\ldots,t_m$ and $\\alpha\\in S_n$, $\\beta\\in S_m$. Its sign is $\\operatorname{sgn}(\\tau_S)\\operatorname{sgn}(\\alpha)\\operatorname{sgn}(\\beta)$. Distributing the two finite sums therefore gives\n$$\\det Z=\\sum_{|S|=n}\\operatorname{sgn}(\\tau_S)\\det(X_S)\\det(Y_{S^c}).$$\nHere $X_S$ consists of $n$ rows of $K$ and $Y_{S^c}$ of $m$ rows of $L$, in increasing order. Hence their determinants belong to $A$ and $B$. Each summand belongs to the product ideal $AB$, and so $C\\subseteq AB$. This is a regrouping of the defining finite sum, not an appeal to an unstated minor-ideal formula.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07ZA (lemma-fitting-ideal-basics), proof of (2), expanding the determinant calculation behind Tag 07Z7 (lemma-ideals-generated-by-minors), part (4)."
+   }
+  },
+  {
+   "text": "Conversely, let $a=\\det(x_i)_{i=1}^n$ and $b=\\det(y_j)_{j=1}^m$ be kernel-row generators of $A$ and $B$. The rows $(x_i,0)$ followed by $(0,y_j)$ lie in $K\\oplus L$. In the Leibniz sum [def-weil-pbc-matrix-determinant] for their block diagonal matrix, a term is zero unless its permutation preserves the two blocks. The remaining permutations are uniquely pairs $(\\alpha,\\beta)\\in S_n\\times S_m$, with product signs; distributing gives determinant $ab$. Thus $ab\\in C$. Every $u\\in A$ and $v\\in B$ is a finite linear combination of their respective determinant generators, so distributing $uv$ writes it as a finite linear combination of such $ab$. By the definition of ideal multiplication as finite sums of products $uv$, this proves $AB\\subseteq C$. Together with Step 2 and the identifications of Step 1 this is the asserted equality. If $n=0$ or $m=0$, the empty determinant is $1$ by the same cited definition: the subset and permutation sums above still apply, including $n=m=0$. No finite generation of $K$ or $L$ was used.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07ZA (lemma-fitting-ideal-basics), proof of (2), reverse inclusion in the block-diagonal maximal-minor calculation of Tag 07Z7(4), with empty blocks included."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 07ZA (lemma-fitting-ideal-basics), part (2), and 07Z8 (lemma-fitting-ideal), kernel-row description. The determinant expansion omitted in 07Z7(4) is written out directly using the Leibniz formula."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +92,45 @@
    "results": "{\"t\": \"2026-10-17T19:44:43Z\", \"tool\": \"leansearch\", \"query\": \"zeroth Fitting ideal of direct sum is product and Fitting ideal of finitely presented module is finitely generated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteOfFinitePresentation\", \"Module.FinitePresentation.mk\", \"Module.Finite.instDirectSum\", \"Module.FinitePresentation\", \"Module.finitePresentation_of_projective\", \"Module.Presentation.directSum_R\", \"Module.Finite.instDFinsupp\", \"Submodule.finite_sup\"], \"digest\": \"9b5a3f24fdb8941a\"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The zeroth Fitting ideal of a direct sum of two finitely generated modules equals the product of their zeroth Fitting ideals",
+   "results": "{\"t\": \"2026-10-17T20:29:35Z\", \"tool\": \"leanfinder\", \"query\": \"The zeroth Fitting ideal of a direct sum of two finitely generated modules equals the product of their zeroth Fitting ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.jacobson_pi_eq_bot\", \"LieModule.posFittingComp_map_incl_sup_of_codisjoint\", \"Submodule.torsionBySet_isInternal\", \"Submodule.isInternal_prime_power_torsion\", \"Module.jacobson_pi_le\", \"Submodule.torsionBy_isInternal\", \"Submodule.isInternal_prime_power_torsion_of_pid\", \"Submodule.exists_isInternal_prime_power_torsion\"], \"digest\": \"f320d9a90aa0e09c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fittingIdeal|FittingIdeal|fitting_ideal|determinantal|minorIdeal",
+   "results": "{\"t\": \"2026-10-17T20:29:41Z\", \"tool\": \"grep\", \"query\": \"fittingIdeal|FittingIdeal|fitting_ideal|determinantal|minorIdeal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fitting ideal of a direct sum is the product of the Fitting ideals",
+   "results": "{\"t\": \"2026-10-17T20:29:42Z\", \"tool\": \"leansearch\", \"query\": \"Fitting ideal of a direct sum is the product of the Fitting ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Presentation.directSum_R\", \"DirectSum.ker_map\", \"DirectSum\", \"Module.Flat.directSum_iff\", \"Module.Finite.instDirectSum\", \"DirectSum.mrange_map\", \"Module.Flat.directSum\", \"Module.finrank_directSum\"], \"digest\": \"b39ad9db130ec91a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fitting\"",
+   "results": "{\"t\": \"2026-10-17T20:29:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"fitting\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieModule.posFittingComp\", \"LieModule.posFittingCompOf\", \"LieModule.posFittingComp_eq_bot_of_isNilpotent\", \"LieModule.posFittingCompOf_eq_bot_of_isNilpotent\", \"LieModule.posFittingCompOf_le_lowerCentralSeries\", \"LieModule.posFittingCompOf_le_posFittingComp\", \"LieModule.iInf_lowerCentralSeries_eq_posFittingComp\", \"LieModule.posFittingComp_le_iInf_lowerCentralSeries\"], \"digest\": \"5a8b2c063e148cda\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ideal generated by maximal minors of a block diagonal presentation matrix is the product of the ideals generated by maximal minors of the two blocks",
+   "results": "{\"t\": \"2026-10-17T20:29:54Z\", \"tool\": \"leanfinder\", \"query\": \"The ideal generated by maximal minors of a block diagonal presentation matrix is the product of the ideals generated by maximal minors of the two blocks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.Pivot.isTwoBlockDiagonal_listTransvecCol_mul_mul_listTransvecRow\", \"Matrix.det_blockDiagonal\", \"Algebra.Norm.Transitivity.mul_auxMat_blockTriangular\", \"Algebra.Norm.Transitivity.auxMat_blockTriangular\", \"Algebra.Norm.Transitivity.auxMat_toSquareBlock_ne\", \"Matrix.TransvectionStruct.sumInl_toMatrix_prod_mul\", \"Algebra.Norm.Transitivity.auxMat_toSquareBlock_eq\", \"Matrix.Pivot.exists_isTwoBlockDiagonal_of_ne_zero\"], \"digest\": \"a5140d8627b269fa\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-fitting-trick",
@@ -82,5 +160,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-fitting-ideal-direct-sum",
+  "worker": "stage1",
+  "summary": "Kept the statement and proved the two ideal inclusions by explicit Leibniz-sum calculations on arbitrary kernel rows. Reused finite generation, presentation independence and the Mathlib determinant definition; no new nodes, no finite-presentation assumption, and empty blocks included. Searched project Lean, DAG, blueprint and Mathlib; no attachment or item match.",
+  "blueprint": "Realizes the imported dependency of lem-trf-etale-fitting-trick on the direct-sum identity 07ZA(2), used at the final Fitting-ideal product paragraph of Stacks 0812. Retains nearest blueprint ancestor lem-trf-local-term-locality and its existing ancestry. No separate Fitting assertion occurs in that ancestor.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N2-a77d51268",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-a77d51268 (reviewer sub-agent of L); spot-checked: Mathematics, source alignment, hypotheses, determinant inclusions, edge cases, route, searches, and duplicate checks pass. Repaired the metadata fault in fixes/dag/nodes/sec-trace-formula/lem-trf-fitting-ideal-direct-sum.json: created.item was incorrectly lem-trf-etale-fitting-trick and is corrected to lem-trf-fitting-ideal-direct-sum. Review written to review.md.; 1 file(s) fixed by the reviewer"
  }
 }
