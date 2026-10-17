@@ -3488,6 +3488,7 @@ public import WeilConjectures.Mathlib.RingTheory.Idempotents
 public import WeilConjectures.Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import WeilConjectures.Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 public import WeilConjectures.Mathlib.RingTheory.Invariant.Profinite
+public import WeilConjectures.Mathlib.RingTheory.Invariant.Reynolds
 public import WeilConjectures.Mathlib.RingTheory.IsTensorProduct
 public import WeilConjectures.Mathlib.RingTheory.Kaehler.Basic
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.NonZeroDivisors
@@ -3688,6 +3689,9 @@ public import WeilConjectures.RingTheory.Etale.DepthTwo.Spreading
 public import WeilConjectures.RingTheory.Etale.DescentAtPrime
 public import WeilConjectures.RingTheory.Etale.IntegralClosureSpreading
 public import WeilConjectures.RingTheory.Etale.IntegrallyClosed
+public import WeilConjectures.RingTheory.Etale.InvariantsDescent
+public import WeilConjectures.RingTheory.Etale.InvariantsDescentAux
+public import WeilConjectures.RingTheory.Etale.KummerDescent
 public import WeilConjectures.RingTheory.Etale.TraitSection
 public import WeilConjectures.RingTheory.EtaleAlgebraLift
 public import WeilConjectures.RingTheory.EtaleAlgebraLiftEtaleFP
@@ -3755,6 +3759,7 @@ public import WeilConjectures.RingTheory.IntegralClosure.EtaleBaseChange
 public import WeilConjectures.RingTheory.IntegralClosure.NoetherianApproximation
 public import WeilConjectures.RingTheory.IntegralIdempotentAnnihilatingPolynomial
 public import WeilConjectures.RingTheory.IntegrallyClosed.DepthTwo
+public import WeilConjectures.RingTheory.Invariant.Kummer
 public import WeilConjectures.RingTheory.JacobianPresentationLift
 public import WeilConjectures.RingTheory.Kaehler.LocalizationPolynomial
 public import WeilConjectures.RingTheory.Kaehler.Trace
