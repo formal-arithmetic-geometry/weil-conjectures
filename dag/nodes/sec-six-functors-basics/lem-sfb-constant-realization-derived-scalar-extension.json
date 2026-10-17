@@ -1,0 +1,88 @@
+{
+ "id": "lem-sfb-constant-realization-derived-scalar-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof, first sentence invoking sk-prop-integral-criterion: preparatory constant-realization and successive-reduction arguments before local perfect lifting (Stacks 09C5: constant realization of the derived reductions E_{n+1}\\otimes^L\\Lambda/I^n and of M^\\bullet/I^nM^\\bullet).",
+   "via": [
+    "lem-sfb-wcontractible-constant-reductions-ml",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived constant realization commutes with derived scalar extension",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] and let $q:R\\to S$ be a homomorphism of commutative rings, with induced map $\\underline q:\\underline R\\to\\underline S$ of constant ring sheaves [def-weil-pbc-constant-sheaf]. Use module sheaves [def-weil-sheaf-of-modules-category], unbounded derived categories [def-weil-abstract-derived-category], the derived constant realizations $c_R:D(R)\\to D(\\mathcal C,\\underline R)$ and $c_S:D(S)\\to D(\\mathcal C,\\underline S)$ [def-sfb-site-derived-constant-module-functor], derived scalar extension along $q$ and along $\\underline q$ [lem-pur-derived-change-of-rings] (along $q$ on the one-object site with only the identity covering), and restriction of scalars [def-pc-sheaf-restrict-scalars]. For every $M\\in D(R)$ there is an isomorphism $$\\kappa_M:c_R(M)\\otimes^{\\mathbf L}_{\\underline R}\\underline S\\xrightarrow{\\sim}c_S(M\\otimes^{\\mathbf L}_RS)$$ in $D(\\mathcal C,\\underline S)$, natural in $M$, with the following properties. (1) If $K^\\bullet$ is a K-flat complex of $R$-modules with flat terms representing $M$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules], then $c_R(K^\\bullet)$ (termwise constant sheaves) is a K-flat complex of $\\underline R$-modules with flat terms, and $\\kappa_M$ is represented by the termwise isomorphism $c_R(K^p)\\otimes_{\\underline R}\\underline S\\cong c_S(K^p\\otimes_RS)$ [def-pur-sheaf-tensor-product] induced by the identity of the constant presheaves with value $K^p\\otimes_RS$. (2) Under $\\kappa_M$ and the identification of $c_S$ followed by restriction to $\\underline R$ with $c_R$ followed by restriction to $R$, the realization $c_R$ of the scalar-extension unit $M\\to M\\otimes^{\\mathbf L}_RS$ is the scalar-extension unit $c_R(M)\\to c_R(M)\\otimes^{\\mathbf L}_{\\underline R}\\underline S$. (3) For a further homomorphism $S\\to T$, the isomorphisms $\\kappa$ for $R\\to S$, $S\\to T$ and $R\\to T$ are compatible with the canonical transitivity isomorphisms $(-\\otimes^{\\mathbf L}S)\\otimes^{\\mathbf L}T\\cong-\\otimes^{\\mathbf L}T$ on both sides. No boundedness, finiteness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, lemma-pullback-K-flat, and Tag 0D6D, lemma-derived-pullback-composition, applied to the morphisms of ringed topoi from $(\\Sh(\\mathcal C),\\underline R)$, $(\\Sh(\\mathcal C),\\underline S)$ to the one-point ringed topoi $(pt,R)$, $(pt,S)$; sites-modules.tex Tag 093J, lemma-constant-exact. Reviewer extraction of the step 'constant realization commutes with derived reduction' used in proetale.tex Tag 09C5."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -n 'extendScalars|ExtendScalars' Mathlib/Algebra/Category/ModuleCat/Sheaf Mathlib/Algebra/Category/ModuleCat/Presheaf (Mathlib of /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib)",
+   "results": "no hits",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib has no scalar extension of sheaves of modules along a ring-sheaf map"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -ln 'DerivedCategory' Mathlib | rg -i 'tensor|monoidal|scalar'",
+   "results": "no files",
+   "date": "2026-10-17",
+   "verdict": "no match: no derived tensor / derived scalar extension in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'theorem|def |lemma' Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "results": "constantSheaf, constantSheafAdj, constantCommuteCompose (constant sheaf commutes with postcomposition by a functor D => E), isConstant lemmas",
+   "date": "2026-10-17",
+   "verdict": "no match: constantCommuteCompose concerns postcomposition with a functor of value categories, not derived scalar extension of module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "DAG duplicate search: rg over snapshot/dag/nodes for statements citing lem-pur-derived-change-of-rings together with constant sheaves; titles containing constant and tensor/scalar/coefficient",
+   "results": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback (tensor of two objects, comparison only in D(\\underline R)); lem-trf-site-derived-tensor-restriction (comparison after restriction to D(R)); def-weil-pbc-constant-coefficient-scalar-extension (definition only); lem-weil-pbc-completed-constant-finite-complex-realization (completed coefficients, finite rings); def-weil-pbc-derived-normalization-arrows (constant/restriction comparison gamma, no tensor)",
+   "date": "2026-10-17",
+   "verdict": "no existing node states this comparison in D(\\underline S)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-wcontractible-constant-reductions-ml",
+  "date": "2026-10-17",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

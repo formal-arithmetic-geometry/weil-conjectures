@@ -37,18 +37,13 @@
  ],
  "proof": [
   {
-   "text": "If $W$ is empty, evaluation of every module sheaf at $W$ is zero (the empty covering gives a terminal section group), so the conclusion holds. Assume $W$ nonempty, and put $A_n=A/J^n$. Fix the given constant markings $H_n\\simeq\\underline{E_n}$. We will use the following elementary detection observation on every nonempty pro-étale object $U$: if a constant module sheaf $\\underline T|_U$ is zero, then $T=0$. Indeed, the module sheafification of the constant presheaf has as underlying abelian sheaf the abelian sheafification [lem-pc-sites-module-sheafification-interface], whose underlying sheaf of sets is the set sheafification [lem-pc-sites-sheafification-underlying-sets]. So if $t\\in T$ has image $0$ in $\\underline T(U)$, the sections $t$ and $0$ of the constant presheaf become equal after sheafification, hence agree on the members of some covering $\\{U_i\\to U\\}$ [lem-weil-pbc-site-sheafification-sections-local], i.e. $t=0$ in $T$ as soon as the covering has a member; pro-étale coverings are jointly surjective, so a covering of nonempty $U$ is a nonempty family. Constant realization is exact by the constant-module section lemma, so $H^i(\\underline C)=\\underline{H^i(C)}$. Applying the observation to the cohomology of a cone shows that constant realization on a nonempty $U$ reflects whether an algebraic derived morphism is an isomorphism. Constant realization also commutes with derived tensor: apply derived tensor pullback to the morphism from the sheaf topos to the one-point topos, with the constant coefficient ring. These identifications are natural in complexes and quotient maps. Here and below the canonical normalization of successive reductions is justified explicitly: choose a K-flat resolution with flat terms, using [lem-pc-kflat-resolution]. Its scalar extension remains K-flat with flat terms by [lem-pur-kflat-change-of-rings]. For ring maps $R\\to S\\to T$, the chain isomorphism $(K^\\bullet\\otimes_R S)\\otimes_S T\\to K^\\bullet\\otimes_R T$, $(x\\otimes s)\\otimes t\\mapsto x\\otimes st$, with inverse $x\\otimes t\\mapsto(x\\otimes1)\\otimes t$, therefore computes derived successive extension. It commutes with every quotient unit $x\\mapsto x\\otimes1$. All rings used in the constant-exactness assertion, namely $A_n$ and later $B$, are Noetherian: for $A_n$ this follows because its ideals correspond to ideals of $A$ containing $J^n$.",
+   "text": "If $W$ is empty, evaluation of every module sheaf at $W$ is zero by the empty covering, so the conclusion holds. Assume $W$ nonempty, put $A_n=A/J^n$, and fix the given markings $H_n\\simeq\\underline{E_n}$. On each nonempty pro-étale object $U$, the constant-unit detection lemma says that $\\underline T|_U=0$ implies $T=0$. The derived reflection lemma says that $H^i(\\underline C)=\\underline{H^i(C)}$ and that constant realization on $U$ reflects algebraic derived isomorphisms. Constant realization commutes with derived scalar extension along every ring map $A_t\\to A_m$, in the derived category over the target constant ring, compatibly with scalar-extension units and with transitivity, by the cited constant scalar-extension lemma; this is what identifies $\\underline{E_n}\\otimes^L_{\\underline{A_n}}\\underline{A_m}$ with $\\underline{E_n\\otimes^L_{A_n}A_m}$ below. For successive coefficient reductions, use the cited normalization lemma, whose isomorphism is natural and carries successive quotient units to the direct quotient unit, for both algebraic and sheaf coefficients. All rings used in the constant-section exactness assertion, namely $A_n$ and later $B$, are Noetherian; for $A_n$ its ideals correspond to ideals of $A$ containing $J^n$.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-constant-sheaf",
-    "lem-weil-pbc-constant-module-section-properties",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pc-kflat-resolution",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-sites-module-sheafification-interface",
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local"
+    "lem-sfb-constant-realization-detects-zero",
+    "lem-sfb-constant-realization-reflects-isomorphism",
+    "lem-sfb-constant-realization-derived-scalar-extension",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-pbc-constant-module-section-properties"
    ],
    "elementary": false,
    "source": {
@@ -135,24 +130,20 @@
  ],
  "proof_deps": [
   "def-pc-perfect-ring-complex",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-proetale-site",
   "lem-pc-kflat-closure",
-  "lem-pc-kflat-resolution",
-  "lem-pc-sites-module-sheafification-interface",
-  "lem-pc-sites-sheafification-underlying-sets",
   "lem-pur-derived-change-of-rings",
-  "lem-pur-kflat-change-of-rings",
+  "lem-sfb-constant-realization-derived-scalar-extension",
+  "lem-sfb-constant-realization-detects-zero",
+  "lem-sfb-constant-realization-reflects-isomorphism",
   "lem-sfb-perfect-constant-derived-map-local",
+  "lem-sfb-successive-derived-quotient-normalization",
   "lem-weil-pbc-adic-completion-mod-ideal",
   "lem-weil-pbc-adic-completion-noetherian",
   "lem-weil-pbc-artin-rees",
   "lem-weil-pbc-constant-module-section-properties",
   "lem-weil-pbc-nilpotent-projective-complex-lift",
   "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-rlim-perfect-complete",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-weil-pbc-rlim-perfect-complete"
  ],
  "proof_origin": {
   "by": "document",
@@ -246,7 +237,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-adic-residue-lisse-perfect-lift",
@@ -259,16 +250,12 @@
   "date": "2026-10-17",
   "item": "lem-sfb-wcontractible-constant-reductions-ml",
   "worker": "stage1",
-  "summary": "Statement unchanged. Expanded Stacks 09C5 for all degrees, without finite coefficient assumptions or compatible constant markings. Added the generic local-algebraicity input 09BE, proved perfectness of every algebraic constant value via 09AR and nilpotent Nakayama, reused 09AW and completion lemmas, and wrote the direct Artin–Rees cycle argument and finite-triple image comparison. One statement-only new node; no Mathlib leaves or Lean edits.",
-  "blueprint": "Realizes the local perfect-lifting input below det-lem-integral-models-stacks, Proof first sentence invoking sk-prop-integral-criterion, through the 09C5 ingredient of 09C6 / Bhatt–Scholze Lemma 6.6.8. The inherited ancestry and unit route are unchanged.",
+  "summary": "Repair requested by the human: statement and Lean record unchanged, later proof steps retained verbatim. Replaced the 2366-character first step by a short step citing three extracted statement-only lemmas for constant-unit detection, derived reflection and successive scalar-extension normalization. Reused the existing general tensor-pullback comparison. Sources, citations, duplicate checks and Mathlib searches checked afresh for the new nodes. Maintainer reader (FIX): the tensor-pullback node compares derived tensors of two objects in D(\\underline{A_n}) only, not derived scalar extension in D(\\underline{A_m}); step 1 now cites the reviewer-added statement-only lemma lem-sfb-constant-realization-derived-scalar-extension instead.",
+  "blueprint": "Realizes the local perfect-lifting input below det-lem-integral-models-stacks, Proof first sentence invoking sk-prop-integral-criterion, through the 09C5 ingredient of 09C6 / Bhatt–Scholze Lemma 6.6.8. The repaired first-step sublemmas make explicit the preparatory constant-realization and successive-reduction arguments; inherited ancestry and unit route are unchanged.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-constant-module-section-properties",
     "why": "Exactness of constant realization and of its evaluated module functor, for arbitrary Noetherian rings; no unit-local node supplies this generic site calculation."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic tensor comparison for constant realization, needed to identify derived reductions without finite coefficient assumptions."
    },
    {
     "node": "lem-weil-pbc-nilpotent-projective-complex-lift",
@@ -297,18 +284,6 @@
    {
     "node": "lem-pur-derived-change-of-rings",
     "why": "K-flat computation of derived coefficient extension, used together with K-flat preservation and the explicit tensor reassociation formula."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic existence of a K-flat flat-term representative, needed to justify successive quotient reduction at chain level."
-   },
-   {
-    "node": "lem-pur-kflat-change-of-rings",
-    "why": "Generic preservation of K-flat complexes with flat terms under coefficient extension, needed for the two successive derived reductions."
-   },
-   {
-    "node": "lem-weil-pbc-site-sheafification-sections-local",
-    "why": "Generic local description of sheafification (Sites 00WB/00WK): two presheaf sections with equal images in the sheafification agree on a covering; used in step 1 to show that a constant sheaf on a nonempty pro-étale object detects zero. No node of the unit gives it."
    }
   ]
  },
@@ -327,12 +302,12 @@
   "lem-weil-pbc-site-sheafification-sections-local"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q13-0127776d9",
-  "group": "Q13",
+  "reviewer": "NT-cc-Q48-e70dfe900",
+  "group": "Q48",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-0127776d9 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, all cited statements, Stacks 09C5 (proetale.tex line 5988 ff.) and 09BE (sites-cohomology.tex, lemma-locally-constant-map), and the unit and chapter records. Item statement is unchanged; its coefficients are \\underline A-modules on W_proét, the same category as in 09C5. The parent's use in lem-sfb-adic-residue-lisse-perfect-lift matches the statement. The mathematics is correct. Step 1: empty W and constant-sheaf detection. Step 2: F_n ≅ E_1 locally via 09BE, detection, then 09AR (I^n=0) with nilpotent Nakayama gives bounded finite projectives. Step 3: algebraic transitions with normalized reductions. Step 4: 05GG applied to J and J^n, 0316, and 09AW with all hypotheses met. Step 5: Artin–Rees cycle correction y in I^{t-c}P^q ⊆ I^nP^q, so images are stable for t>=n+c. Step 6: exact evaluation, so RΓ(W,-)=Γ(W,-). Step 7: one isomorphism per t carries the two images onto each other. New node lem-sfb-perfect-constant-derived-map-local is exactly 09BE (perfect source, arbitrary target, any site with final object), statement-only, with a correct blueprint ancestor and searches recorded. It is not a duplicate: the existing finite-ring nodes for 09BE/094G need finite coefficients and bounded complexes. One C4/C1 fault, which I fixed. Step 1 claimed that 'equality after sheafification is witnessed locally', but def-weil-pbc-sheafification gives only the universal property. Step 1 now cites lem-pc-sites-module-sheafification-interface, lem-pc-sites-sheafification-underlying-sets (both Mathlib leaves) and lem-weil-pbc-site-sheafification-sections-local (00WB/00WK; off-unit, so I added it to split_report.tool_uses). proof_deps is now the union of the uses. I accept all declared tool_uses as generic black boxes. No SGA source is used. The report mentions a citations.json that is not in the commit; this affects only the report.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-e70dfe900 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the 3 new nodes, the statement of every cited node, the unit/chapter route, and Stacks proetale 09C5 (full proof), sites 00WB/00WK, sites-modules 093J/03CY, and sites-cohomology 0D6D/0G7E. The item statement is unchanged and steps 2-7 are byte-identical to the base. New nodes: detects-zero is true; the nonempty-U hypothesis is needed and present (empty U has zero sections); proof via 00WK, coverings jointly surjective, constant presheaf restrictions are identities. Reflects-isomorphism is true via exactness of constant realization (093J) and the cone argument; tested on f=0 on a nonzero module and on the zero complex. Successive-normalization is 0D6D/0G7E specialized to ring-sheaf maps on one site; checked identity maps, T=0 and the one-object site. None of them restates an item clause. Duplicate candidates read and rejected: lem-trf-site-derived-tensor-restriction (comparison only after restriction to D(R)), lem-sfb-flat-scalar-tower-coherence (exact extension only), field and rationalized scalar-tower nodes, picard pullback-composition nodes; blueprint searches found nothing. One C4 fault, which I fixed. Steps 2, 3 and 7 need c_{A_m}(E ⊗^L_{A_n} A_m) ≅ c(E) ⊗^L_{A̲_n} A̲_m in D(A̲_m), compatibly with the quotient units. The cited lem-weil-pbc-ringed-topoi-derived-tensor-pullback only gives a tensor of two objects in D(A̲_n) after restriction of scalars, which is not full, so it does not say this; this is the kind of hidden lemma the human returned the item for. I added the statement-only node lem-sfb-constant-realization-derived-scalar-extension (unsplit, created.item = this item): κ: c_R(M)⊗^L_{R̲}S̲ ≅ c_S(M⊗^L_R S) in D(S̲), represented on K-flat flat-term representatives (c_R of such a complex is again K-flat by 0G7E), compatible with units and transitivity. I rewrote step 1 to cite it instead of the tensor-pullback node (1253 characters), set proof_deps to the exact union of uses, and removed the tensor-pullback node from split_report.tool_uses. I accept the remaining declared tool_uses as generic black boxes. No SGA is used and there is no cycle. Minor: the report names a citations.json that is not in the commit.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
  "lean_audit": {
   "master": {

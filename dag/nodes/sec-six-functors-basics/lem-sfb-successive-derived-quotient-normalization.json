@@ -1,0 +1,111 @@
+{
+ "id": "lem-sfb-successive-derived-quotient-normalization",
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-wcontractible-constant-reductions-ml",
+  "date": "2026-10-17",
+  "group": "Q48"
+ },
+ "title": "Successive derived scalar extensions agree with direct quotient extension",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], let $R\\xrightarrow{a}S\\xrightarrow{b}T$ be maps of sheaves of commutative rings, and use their module sheaves and unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Derived scalar extension is the K-flat derived change of rings [lem-pur-derived-change-of-rings]. For every $C\\in D(R)$ there is a canonical natural isomorphism $(C\\otimes_R^L S)\\otimes_S^L T\\cong C\\otimes_R^L T$. On a K-flat flat-term representative $K^\\bullet$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules], this isomorphism is represented by $(K^\\bullet\\otimes_R S)\\otimes_S T\\to K^\\bullet\\otimes_R T$, $(x\\otimes s)\\otimes t\\mapsto x\\otimes b(s)t$, with inverse $x\\otimes t\\mapsto(x\\otimes1)\\otimes t$. Under these identifications the composite of the scalar-extension units for $a$ and $b$ is the unit for $ba$ (after restriction of scalars [def-pc-sheaf-restrict-scalars]). The comparison is natural in $C$ and in the composable ring maps and its iterated comparisons agree. This includes ordinary commutative rings by using the one-object site with only the identity covering.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition, and Tag 0G7E, lemma-pullback-K-flat; specialization to identity underlying topoi with ring maps, with explicit scalar-extension unit normalization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "successive derived quotient scalar extensions are canonically isomorphic via tensor associativity",
+   "results": "TensorProduct.tensorQuotMapSMulEquivTensorQuot; Ideal.qoutMapEquivTensorQout; TensorProduct.quotTensorEquivQuotSMul; no derived-site statement.",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic tensor equivalences do not state the K-flat derived quotient normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\" \"associativity\"",
+   "results": "0 hits; Loogle parsed the quoted words as an application and returned a type error.",
+   "date": "2026-10-17",
+   "verdict": "no match: malformed pattern produced no declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]ensor.*[Aa]ssoc|[Aa]ssoc.*[Tt]ensor",
+   "results": "Mathlib/Algebra/Homology/Monoidal.lean and module tensor files contain generic associativity, but no K-flat quotient normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived successive extension of scalars canonical associativity quotient maps",
+   "results": "ModuleCat.extendScalars_assoc; ModuleCat.extendScalars_assoc_assoc; Ideal.Quotient.isScalarTower; no K-flat derived theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match: generic module scalar towers do not state the site-level K-flat result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"assoc\"",
+   "results": "12 hits: TensorProduct.comm_comp_comm_assoc, TensorProduct.assoc, TensorProduct.tensorTensorTensorAssoc, TensorProduct.assoc_tmul, TensorProduct.assoc_symm_tmul, Equiv.tensorProductAssoc_def, LinearEquiv.tensorProductAssoc_def, TensorProduct.map_map_comp_assoc_eq",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits state local sheafification, ordinary module tensor, or condensed/local-site results; none states this pro-étale detection or general ring-sheaf derived normalization lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "(changeOfRings|extendScalars).*(assoc|comp)|derived.*[Aa]ssoc",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits state local sheafification, ordinary module tensor, or condensed/local-site results; none states this pro-étale detection or general ring-sheaf derived normalization lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transitivity of K flat derived scalar extension of sheaves of modules with canonical extension units",
+   "results": "8 hits: Module.FaithfullyFlat.trans, Module.Flat.trans, Algebra.FormallyUnramified.flat_of_restrictScalars, Module.Flat.isBaseChange, IsSMulRegular.of_flat_of_isBaseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.IsSeparable.trans, Module.Flat.instTensorProduct",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits state local sheafification, ordinary module tensor, or condensed/local-site results; none states this pro-étale detection or general ring-sheaf derived normalization lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"changeOfRings\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits state local sheafification, ordinary module tensor, or condensed/local-site results; none states this pro-étale detection or general ring-sheaf derived normalization lemma"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms of commutative ring sheaves on a site successive derived extension of scalars is naturally isomorphic to direct extension and respects units",
+   "results": "8 hits: SheafOfModules.pushforwardSections_unitHomEquiv, CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp, ModuleCat.extendScalars_assoc', ModuleCat.extendScalarsComp, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits state local sheafification, ordinary module tensor, or condensed/local-site results; none states this pro-étale detection or general ring-sheaf derived normalization lemma"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof, first sentence invoking sk-prop-integral-criterion: preparatory constant-realization and successive-reduction arguments before local perfect lifting.",
+   "via": [
+    "lem-sfb-wcontractible-constant-reductions-ml",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
