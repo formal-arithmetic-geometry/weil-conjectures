@@ -1,0 +1,114 @@
+{
+ "id": "stage3-sfb-open-base-change-component-section",
+ "kind": "statement",
+ "title": "Componentwise section of cartesian extension-by-zero exchange",
+ "statement": "Let ℓ be prime, k a field of positive prime characteristic different from ℓ, and Λ a commutative condensed ring. Let X, Z, Xprime and Zprime be separated finite-type k-schemes, with k-morphisms j:X→Z, g:Zprime→Z, jprime:Xprime→Zprime and gprime:Xprime→X forming a cartesian square; assume j and jprime are open immersions. Use the bounded constructible functors of [sk-def-sfb-dc-restricted-functors] and the unit-square-counit exchange formula of [def-sfb-dc-open-base-change-morphism]. Let α be a natural transformation gprime^* ⋙ jprime_! → j_! ⋙ g^* equal to this explicit formula. For every bounded constructible Λ_X-module complex K, there exists a morphism β_K from the target of α_K to its source such that β_K ≫ α_K is the identity on the target. No naturality in K is assumed or data chosen.",
+ "stmt_deps": [
+  "sk-def-sfb-dc-restricted-functors",
+  "def-sfb-dc-open-base-change-morphism"
+ ],
+ "proof": [
+  {
+   "text": "On abelian pro-etale sheaves, apply weakly etale base change to the cartesian open square and conjugate the resulting right-adjoint isomorphism. This is the existing openImmersionLowerShriekBaseChangeIso construction.",
+   "uses": [
+    "lem-weil-pbc-coefficient-site-weakly-etale-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For abelian pro-etale sheaves, cartesian extension-by-zero base change identifies the\ninverse image of the extension by zero with extension by zero from the pulled-back open.\nThe comparison is linear over the pulled-back coefficient ring: its map on the open is the\nidentity after the cartesian identification, and extension by zero gives the unique action\naway from the open. The coefficient morphisms are isomorphisms, so scalar transport preserves\nthis identification. Under the canonical scalar-transport\nisomorphisms, the adjunction units, counits and pullback composition comparisons on module\nobjects forget to these sheaf comparisons: expand the lifted adjunctions and cancel the\ncoefficient-isomorphism inverse pairs using their triangle identities. Their displayed mate\nis therefore precisely the linear exchange map. All four functors are exact. Applying this\nsheaf-level comparison and its inverse degreewise commutes with differentials and descends through\nquasi-isomorphisms.\nThe compatibility isomorphisms defining the restricted bounded constructible functors and\nadjunctions therefore identify the displayed composite on K with this derived exchange.\nTake the component of the degreewise inverse under these compatibility isomorphisms.\nIt is a morphism from the target to the source whose composite with α.app K is the identity,\nsince the degreewise inverse equation survives localization and restriction. Only existence\nfor this fixed K is asserted; the theorem does not choose data or assert naturality in K.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coefficient-site-weakly-etale-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-open-base-change/thm-sfb-dc-open-base-change-iso.md",
+  "place": "C3: detailed module-linear, exact-derived and bounded-constructible transport of the ordinary sheaf exchange; final component cancellation/existence"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeSection",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems/LowerShriek/ExchangeSection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekBaseChange_app_section",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-17",
+  "statement": "theorem boundedConstructibleOpenImmersionLowerShriekBaseChange_app_section\n    (sq : IsPullback g' j' j g)\n    (α : boundedConstructibleUpperStar Λ ℓ g' ⋙\n        boundedConstructibleOpenImmersionLowerShriek Λ ℓ j' ⟶\n      boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙\n        boundedConstructibleUpperStar Λ ℓ g)\n    (hα : α =\n      ((Functor.leftUnitor _).inv ≫ Functor.whiskerRight\n        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).unit\n        (boundedConstructibleUpperStar Λ ℓ g' ⋙\n          boundedConstructibleOpenImmersionLowerShriek Λ ℓ j')) ≫\n      (Functor.squareTransport (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j)\n        (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j')\n        (boundedConstructiblePullbackSquareComparison Λ ℓ sq.toCommSq.flip)).hom ≫\n      (Functor.whiskerLeft\n        (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙\n          boundedConstructibleUpperStar Λ ℓ g)\n        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j').counit ≫\n        (Functor.rightUnitor _).hom))\n    (K : Dᵇc(X.left)⟦Λ⟧) :\n    ∃ β : (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙\n        boundedConstructibleUpperStar Λ ℓ g).obj K ⟶\n      (boundedConstructibleUpperStar Λ ℓ g' ⋙\n        boundedConstructibleOpenImmersionLowerShriek Λ ℓ j').obj K,\n      β ≫ α.app K = 𝟙 _"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-open-base-change",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-open-base-change/thm-sfb-dc-open-base-change-iso.md",
+  "place": "Proof: componentwise cartesian section identification"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sfb-dc-open-base-change-iso",
+   "place": "strict componentwise substatement: component-section",
+   "via": []
+  },
+  "same_as": []
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs",
+  "group": "C3",
+  "date": "2026-10-17"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation is an isomorphism if each component is a monomorphism with a right inverse",
+   "results": "Eight hits including NatTrans.isIso_iff_isIso_app and NatTrans.mono_iff_mono_app.",
+   "date": "2026-10-17",
+   "verdict": "Generic categorical assembly is available; no geometric module-object exchange comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of extension by zero for module objects over a condensed ring in a cartesian square",
+   "results": "Eight hits about LightCondensed.ihomPoints and locally constant condensed modules.",
+   "date": "2026-10-17",
+   "verdict": "No match for the geometric module-object comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.mono_of_mono_app",
+   "results": "Exact generic theorem: monic components imply a monic natural transformation.",
+   "date": "2026-10-17",
+   "verdict": "Used in the importing item; does not prove either geometric component input."
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersionLowerShriek.*BaseChange|BaseChange.*openImmersionLowerShriek|isIso_of_mono_of_exists",
+   "results": "msearch returned zero Mathlib hits. Independent rg on lean/ found the ordinary abelian-sheaf exchange isomorphism in ProEtale/FiniteCoefficient/LowerShriek/Open/BaseChange.lean, but no bounded constructible module-object comparison.",
+   "date": "2026-10-17",
+   "verdict": "Reuse categorical assembly. Scalar, derived and restricted-mate compatibility remains the geometric input."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261017T032449-L-1749299",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261017T032449-L-1749299",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

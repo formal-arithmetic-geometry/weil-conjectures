@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
+import Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeMono
+import Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeSection
 
 /-!
 
@@ -189,7 +191,23 @@ theorem boundedConstructibleOpenImmersionLowerShriekBaseChange_leftInverse
       β ≫ boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq =
         𝟙 (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙
           boundedConstructibleUpperStar Λ ℓ g) := by
-  sorry
+  have hcomponent (K : Dᵇc(X.left)⟦Λ⟧) :
+      IsIso ((boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq).app K) := by
+    have := boundedConstructibleOpenImmersionLowerShriekBaseChange_app_mono Λ ℓ sq
+      (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq) rfl K
+    obtain ⟨β, hβ⟩ := boundedConstructibleOpenImmersionLowerShriekBaseChange_app_section Λ ℓ sq
+      (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq) rfl K
+    have hγ :
+        (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq).app K ≫
+          β = 𝟙 _ := by
+      apply (cancel_mono
+        ((boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq).app K)).1
+      simp only [Category.assoc, hβ, Category.comp_id, Category.id_comp]
+    exact ⟨⟨β, hγ, hβ⟩⟩
+  have := NatIso.isIso_of_isIso_app
+    (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq)
+  exact ⟨inv (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq),
+    IsIso.inv_hom_id _⟩
 
 /-- The cartesian extension-by-zero exchange has a right inverse.
 
@@ -204,7 +222,17 @@ theorem boundedConstructibleOpenImmersionLowerShriekBaseChange_rightInverse
       boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq ≫ γ =
         𝟙 (boundedConstructibleUpperStar Λ ℓ g' ⋙
           boundedConstructibleOpenImmersionLowerShriek Λ ℓ j') := by
-  sorry
+  obtain ⟨β, hβ⟩ := boundedConstructibleOpenImmersionLowerShriekBaseChange_leftInverse Λ ℓ sq
+  have hcomponent (K : Dᵇc(X.left)⟦Λ⟧) :
+      Mono ((boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq).app K) :=
+    boundedConstructibleOpenImmersionLowerShriekBaseChange_app_mono Λ ℓ sq
+      (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq) rfl K
+  have := NatTrans.mono_of_mono_app
+    (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq)
+  refine ⟨β, ?_⟩
+  apply (cancel_mono
+    (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq)).1
+  simp only [Category.assoc, hβ, Category.comp_id, Category.id_comp]
 
 /-- **Base change for extension by zero** on bounded constructible complexes: for a *cartesian*
 square with `j` and `j'` open immersions, the exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is
