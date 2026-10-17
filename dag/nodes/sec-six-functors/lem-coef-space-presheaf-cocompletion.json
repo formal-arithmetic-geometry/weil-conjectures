@@ -27,7 +27,8 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-category-of-spaces"
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-coherent-adjunction-data"
  ],
  "proof": [
   {
@@ -295,5 +296,23 @@
   "group": "Q114",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-7ad3518c1 (reviewer sub-agent of L); spot-checked: I read the item, the report and the full statement of every cited node. The statement is true and not weakened: S=N_hc(Kan_U) is cartesian closed, and empty spaces are allowed. I checked it on four edge cases. With X empty, and with Y empty, both sides are contractible. With X,Y nonempty and Z empty, both sides are empty. With X a point, the map is the identity. It also gives the citer lem-coef-algebroid-segal-localization-model step 1 exactly what that step uses. Step 1: the currying isomorphism E(X×Y,Z)≅E(Y,E(X,Z)) is correct from the Fun formulas in def-cbc-enhanced-diagrams-cones and def-coef-infinity-category-of-spaces. Step 2: the Mathlib leaf lem-coef-sset-anodyne-pushout-product applies, with the monomorphism ∅→X and a horn inclusion as the anodyne map. The horns match (n≥1, every i), so E(X,Z) is Kan. Step 3: the coherent nerve of an enriched functor is postcomposition, as the def-coef-coherent-nerve-infrastructure statement says, and the nerve preserves products. Step 4: Fun(Δ^0⨿Δ^0,S)=S×S holds literally. lem-coef-coherent-nerve-comparison (for locally Kan categories) together with the cone criterion of lem-cbc-enhanced-functor-cone-calculus shows that the product cone is limiting. Step 5: the variances, the unit, the counit and the triangle identities are correct. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc), as a generic limiting-cone criterion. I checked the duplicate candidates. lem-coef-spaces-slice-cartesian-closure is an unsplit generalization over S_{/B} and needs this item, so it is not a merge candidate. lem-coef-joyal-homotopy-exponentials is a weaker statement about Hom-sets in the homotopy category. HTT is not archived in the literature, so I could not check it at the cited place. Its absence is reported as WANTED and the proof is correctly marked agent-written. No SGA source is used. I made two repairs in fixes/dag/nodes/sec-six-functors/lem-coef-space-presheaf-cocompletion.json. (1) The report says the source locator was corrected, but source.place still said HTT §1.2.7. It now names Def. 1.2.16.1, Rem. 1.2.16.2-4 and the §2.2.4 comparison. (2) The statement claims naturality in X, but step 3 only built Map(X,-) for a fixed X. I added the enriched bifunctor E:Kan^op×Kan→Kan and the identification C[Δ^n]^op≅C[Δ^n], which makes Map(-,-):S^op×S→S a coherent bifunctor. Both additions are elementary. The statement and dependencies are unchanged, and no new nodes were added.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpacesCartesianClosed",
+  "declaration": "SSet.Enhanced.spaces_cartesian_closed",
+  "file": "lean/Sheaf/CategoryTheory/SpacesCartesianClosed.lean",
+  "statement": "theorem spaces_cartesian_closed : ∃ P : CategoryTheory.Spaces.infinityCategory.{u} ⊗ CategoryTheory.Spaces.infinityCategory.{u} ⟶ CategoryTheory.Spaces.infinityCategory.{u}, Nonempty (CoherentAdjunction (lift (𝟙 CategoryTheory.Spaces.infinityCategory.{u}) (𝟙 CategoryTheory.Spaces.infinityCategory.{u})) P) ∧ ∀ X : CategoryTheory.Spaces.infinityCategory.{u} _⦋0⦌, ∃ R : CategoryTheory.Spaces.infinityCategory.{u} ⟶ CategoryTheory.Spaces.infinityCategory.{u}, Nonempty (CoherentAdjunction (lift (𝟙 CategoryTheory.Spaces.infinityCategory.{u}) (SSet.const X) ≫ P) R)",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7fe844d30",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Full statement and dependency audit completed; edge cases and universes checked; scompile.py passed with no errors or warnings."
  }
 }
