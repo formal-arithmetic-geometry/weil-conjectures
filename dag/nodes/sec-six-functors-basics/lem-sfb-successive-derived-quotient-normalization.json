@@ -316,5 +316,34 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-e15420e4d (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps, the statements of all 14 cited nodes, the unit, the blueprint ancestor and creating item, and Stacks sites-cohomology at 0D6D (l.3658), 0G7E (l.3508) and 07A6 (l.3990). I checked the tag-to-label map for 06YS, 06YY, 0G7D, 03D7 and 03EK. The delivery has no new nodes and leaves the statement unchanged. The steps follow 0D6D for identity topoi with ring maps a and b. Step 1 takes a flat-term K-flat resolution from lem-pc-kflat-resolution. Step 2 applies lem-weil-pbc-ringed-topos-kflat-pullback with u=id and c=a, b, ba; flatness of the maps is not needed. Step 3 gives balanced inverse maps; I re-checked both balancing relations and both composites. Step 4 descends them through the first assertion of lem-weil-pbc-site-derived-tensor-descent and clause (2) of the localization node. Step 5 normalizes the units through clause (1) of lem-pur-sheaf-ring-derived-coefficient-adjunction, giving x⊗b(1)1=x⊗1. Step 6 proves coherence, with an induction on parenthesizations. Step 7 proves naturality in coefficient diagrams using b'β=γb. Step 8 specializes to the one-object identity-cover site, where every presheaf is a sheaf. I tested the statement on Z→Z/4→Z/2 with C=Z/2: both sides give [Z/2→0→Z/2], and the flat-term K-flat requirement is genuinely needed. proof_deps equals the union of uses and there is no cycle. Duplicate candidates read and rejected: pbc-proetale-derived-pullback-composition (schemes only), sfb-flat-scalar-tower-coherence (exact extensions only), sc-scalar-inverse-image-composition-coherence, sc-kflat-scalar-extension-derived-iso, and the ringed-topoi pullback, tensor-pullback and pushforward nodes. Mathlib searches cover all three kinds; the only hits are underived analogues, so this is not a leaf. I accept the five declared tool_uses as generic black boxes: kflat-resolution, kflat-pullback, derived-change-of-rings, site-derived-tensor-descent (first assertion only) and the coefficient adjunction (unit normalization only). Blueprint from/via/place are consistent and there is no SGA citation. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SuccessiveDerivedQuotientNormalization",
+  "declaration": "SheafOfModules.SuccessiveDerivedQuotient.successive_derived_quotient_normalization",
+  "declarations": [
+   "SheafOfModules.SuccessiveDerivedQuotient.Modules",
+   "SheafOfModules.SuccessiveDerivedQuotient.restriction",
+   "SheafOfModules.SuccessiveDerivedQuotient.pure",
+   "SheafOfModules.SuccessiveDerivedQuotient.Presentation",
+   "SheafOfModules.SuccessiveDerivedQuotient.sectionTensor",
+   "SheafOfModules.SuccessiveDerivedQuotient.squareComparison",
+   "SheafOfModules.SuccessiveDerivedQuotient.Normalization",
+   "SheafOfModules.SuccessiveDerivedQuotient.successive_derived_quotient_normalization"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/SuccessiveDerivedQuotientNormalization.lean",
+  "statement": "theorem successive_derived_quotient_normalization : ∃ p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a, Nonempty (Normalization p)",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The auxiliary structures bundle precisely the ordinary change-of-rings object/map equations, its universal left-derived pair, and the normalized comparison family. All tensor data are the recorded constructions; the sole postponed theorem is this node. Independent site-object, site-morphism, coefficient, and derived morphism universes are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1108fc4db",
+  "group": "Q26",
+  "result": "fix",
+  "note": "Wrote review.md and a complete replacement report under fixes/ repairing the H1/H11 second-reading placeholder. Statements, dependencies, universes, formulas, units, coherence, and edge cases checked; no substantive faults found. Both scompile.py checks passed cleanly. Branch unchanged."
  }
 }
