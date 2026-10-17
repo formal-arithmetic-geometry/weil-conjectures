@@ -21,7 +21,11 @@
   "def-weil-geometric-fibre",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-trf-multipointed-curve",
+  "def-trf-semistable-multipointed-curve",
+  "def-trf-multipointed-eta-modification",
+  "def-trf-stable-multipointed-eta-modification"
  ],
  "proof": [
   {
@@ -194,5 +198,23 @@
   "group": "Q124",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-fb9858f45 (reviewer sub-agent of L); spot-checked: Read the governing docs (AGENTS, GOAL, dag-sync, stage 1, brief, delivery-errors A-F), the report, the item, the 4 new nodes, every cited statement, unit sk-i-curve-zero, the chapter record and the parent's use of the item (uniqueness-normal step 4, which needs the arbitrary-K form). The item's statement and stmt_deps are byte-identical to the side DAG and to the Q91 creation, so nothing is weakened. uses equal proof_deps, there is no cycle (worker correctly avoided stable-reduction, which reaches this item via uniqueness-normal), and every cited id exists. Steps: (1) common-strict-refinement hypotheses match; (2) contracted-inclusion hypotheses match; (3) V is integrally closed, so Spec V is normal integral qcqs and the eta-normal lemma makes C' reduced and eta-normal; the factorization gives h with generic map f_eta^-1 g_eta; the marking ideal vanishes by flat torsion-freeness and lies over D by monomorphism; (4) proper base change and marked-base-change keep the hypotheses, and schematic density is preserved by flatness (at finite height the generic point is open); (5) both pullbacks are maps over C_B into a separated target, their equalizer ideal is V-torsion, and C'_B is flat over V, so they agree without B being a valuation ring; (6) V->V^s is affine and faithfully flat, so the base changes are fpqc coverings and the Mathlib representable-descent leaf gives h and, by its uniqueness clause, fh=g and the marking compatibility. New nodes: I proved component-factorization myself (the image graph is proper, quasi-finite and an eta-modification, so finite, so an isomorphism by eta-normality); separable-closure-extension is true (Chevalley extension, 0ASH torsion value groups give equal height, 0539 plus 00HR give faithful flatness; tags checked in the local Stacks tex); common-refinement (closure in X1 x_C X2, then a strict model; markings are overrings V_p, hence etale) and contracted-inclusion (exceptional tree with at most two boundary points would force an unstable contracted P^1) are true. All four are statement-only, self-contained, correctly cited, searched, and none restates the item. Duplicate scan: lem-trf-valuation-algebraic-height covers only the height clause of the extension node, so keep the new node, whose eventual split should cite it; I found no other duplicates. Accepted tool_use: lem-sc-flat-invertible-sections-torsion-free. Limitation: the Temkin PDF is not in literature/ and the network is blocked, so the Temkin place numbers are unverified; the item is marked agent-origin with a WANTED line. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-14bbc9fcb",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Reviewed the immutable packet, all 17 dependencies, source and canonical declarations, report sections, edge cases, route-pivot status, and exact theorem statement. Server scompile sandbox and library checks passed with no diagnostics; no substantive or mechanical errors found."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ValuationSemistableDominatesStable",
+  "declaration": "AlgebraicGeometry.exists_semistable_to_stable_valuation_comparison",
+  "file": "lean/Sheaf/TraceFormula/ValuationSemistableDominatesStable.lean",
+  "statement": "theorem exists_semistable_to_stable_valuation_comparison (K : Type u) [Field K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] (P Pst P' : MultipointedCurve (Spec (.of V))) (hXη : Smooth (pullback.snd P.x (Spec.map (CommRingCat.ofHom V.subtype)))) (hDη : Etale (pullback.snd P.d (Spec.map (CommRingCat.ofHom V.subtype)))) (f : MultipointedCurve.Hom Pst P) (g : MultipointedCurve.Hom P' P) (hf : f.IsStable (Spec.map (CommRingCat.ofHom V.subtype))) (hg : g.IsEtaModification (Spec.map (CommRingCat.ofHom V.subtype))) (hsemistable : P'.IsSemistable) : ∃ h : MultipointedCurve.Hom P' Pst, h.curve ≫ f.curve = g.curve ∧ h.marking ≫ f.marking = g.marking ∧ h.curveBaseChange (Spec.map (CommRingCat.ofHom V.subtype)) = g.curveBaseChange (Spec.map (CommRingCat.ofHom V.subtype)) ≫ @inv Scheme.{u} _ _ _ (f.curveBaseChange (Spec.map (CommRingCat.ofHom V.subtype))) hf.1.2.2.2.2.1 ∧ h.markingBaseChange (Spec.map (CommRingCat.ofHom V.subtype)) = g.markingBaseChange (Spec.map (CommRingCat.ofHom V.subtype)) ≫ @inv Scheme.{u} _ _ _ (f.markingBaseChange (Spec.map (CommRingCat.ofHom V.subtype))) hf.1.2.2.2.2.2",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
