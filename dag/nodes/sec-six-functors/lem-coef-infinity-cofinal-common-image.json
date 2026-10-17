@@ -263,5 +263,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityCofinalCommonImage",
+  "declaration": "SSet.Presentability.exists_equivalence_of_kappaCofinal",
+  "declarations": [
+   "SSet.Presentability.IsKappaCofinal",
+   "SSet.Presentability.HasTauSmallKappaFilteredColimits",
+   "SSet.Presentability.PreservesTauSmallKappaFilteredColimits",
+   "SSet.Presentability.exists_equivalence_of_kappaCofinal"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityCofinalCommonImage.lean",
+  "statement": "theorem exists_equivalence_of_kappaCofinal (κ τ : Cardinal.{u}) (hκ : κ.IsRegular) (hτ : τ.IsRegular) (hκτ : κ < τ) {X Y Z : SSet.{max (u + 1) v}} [Quasicategory X] [Quasicategory Y] [Quasicategory Z] (f : X ⟶ Y) (g : Z ⟶ Y) (hX : IsKappaFiltered κ X) (hY : IsKappaFiltered κ Y) (hZ : IsKappaFiltered κ Z) (hXcol : HasTauSmallKappaFilteredColimits κ τ X) (hYcol : HasTauSmallKappaFilteredColimits κ τ Y) (hZcol : HasTauSmallKappaFilteredColimits κ τ Z) (hfcol : PreservesTauSmallKappaFilteredColimits κ τ f) (hgcol : PreservesTauSmallKappaFilteredColimits κ τ g) (hf : IsKappaCofinal κ f) (hg : IsKappaCofinal κ g) : ∃ (x : X _⦋0⦌) (z : Z _⦋0⦌) (e : Y _⦋1⦌), Y.δ 1 e = f.app _ x ∧ Y.δ 0 e = g.app _ z ∧ SSet.Enhanced.IsEquivalenceEdge Y e",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Cofinality is expanded as an actual edge from each target coherent cocone to the canonical image of a source cocone. The two colimit helpers specialize the recorded filteredness, cardinal smallness and preservation definitions to the class already named in this node; no colimit objects or comparison maps are chosen."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f89ed26df",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Statement matches the node and HTT 5.4.6.3 clause by clause: regular κ<τ in Cardinal.{u}, X Y Z in SSet.{max (u+1) v}, κ-filteredness by the recorded IsKappaFiltered, τ-small κ-filtered colimits and their preservation by specializing the dependency's colimit-existence pattern and PreservesColimitsIn, κ-cofinality as weak cofinality of the canonical mappedCocone map on coconeCategory (edge orientation correct), conclusion an IsEquivalenceEdge from f(x) to g(z). No stronger hypotheses, no universe restriction. Edge cases checked: empty categories excluded by filteredness, empty L correctly untested, κ=ℵ0 allowed. No duplicate notion in side Lean, slopmaster2 or Mathlib; the helpers have real bodies and are in lean.declarations. Only the main theorem is sorry; docstrings carry source, blueprint and all 8 proof steps; lean.statement matches the file verbatim; imports correct (comma criterion has no Lean record); node changed only in lean. nt_compile --json on the local overlay: exit 0, no diagnostics. Cosmetic only: report.md reads 'Lemma the project server' in five places, a substitution artifact."
  }
 }

@@ -27,7 +27,8 @@
  },
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-colimit-gluing"
  ],
  "proof": [
   {
@@ -251,5 +252,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d19143b98",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Every clause of exists_cofinal_kappa_directed_poset matches the node and HTT 5.3.1.16/4.1.1.8: regular kappa (IsRegular includes infinitude), small kappa-filtered I via the landed IsKappaFiltered, existential poset A and map from nerve A chosen before every target quantifier, upper bounds for all subsets of size < kappa including the empty one, and colimiting cocones in every small-cocomplete target quasicategory of universe max(u+1) v preserved by the actual gluingCoconeRestrict (keeps apex and all coherent legs). No stronger hypotheses and no universe equation. Edge cases checked: empty I/A, kappa=aleph0, finite kappa, empty target. Only lean and a stmt_deps addition (owner of gluingCoconeRestrict) changed; no DAG cycle; lean.statement verbatim; one theorem with sorry proof, no definitions; docstrings carry the source place, blueprint id and four proof steps; report has Worker report and Second reading by Q65. No duplicate in Mathlib or side lean. nt_compile.py --json: rc 0, no errors or warnings (a broken copy gave rc 1, so the tool reports errors). Minor: garbled proposition numbers in the report prose only."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityCofinalKappaPoset",
+  "declaration": "SSet.Enhanced.exists_cofinal_kappa_directed_poset",
+  "file": "lean/Sheaf/CategoryTheory/InfinityCofinalKappaPoset.lean",
+  "statement": "theorem exists_cofinal_kappa_directed_poset (κ : Cardinal.{u}) (hκ : κ.IsRegular) (I : SSet.{u}) [Quasicategory I] (hI : SSet.Presentability.IsKappaFiltered κ I) : ∃ (A : Type u) (_ : PartialOrder A) (f : nerve A ⟶ I), (∀ s : Set A, HasCardinalLT s κ → ∃ b : A, ∀ a ∈ s, a ≤ b) ∧ ∀ (C : SSet.{max (u + 1) v}) [Quasicategory C], SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} C → ∀ (F : SSet.uliftFunctor.{max (u + 1) v, u}.obj I ⟶ C) (c : (coconeCategory F) _⦋0⦌), IsColimiting F c → IsColimiting (SSet.uliftFunctor.{max (u + 1) v, u}.map f ≫ F) ((gluingCoconeRestrict (SSet.uliftFunctor.{max (u + 1) v, u}.map f) F).app (op ⦋0⦌) c)",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the landed κ-small and κ-filtered quasicategory definitions. Cofinality is the stated preservation of each supplied coherent colimiting cocone under the existing gluingCoconeRestrict, retaining its apex and all restricted legs; the equivalent colimit comparison is thereby specified by its universal property. The target universe max (u + 1) v contains the small indexing universe. Added the landed owner of the actual cocone restriction map to stmt_deps; no new notion, dependency repair or statement correction."
  }
 }

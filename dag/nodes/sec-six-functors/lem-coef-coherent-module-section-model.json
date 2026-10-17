@@ -27,7 +27,11 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-monoidal-infinity-category",
   "def-coef-infinity-fibrations",
-  "def-coef-left-module-operadic-encoding"
+  "def-coef-left-module-operadic-encoding",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-cocartesian-section-colimits",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-source-gluing"
  ],
  "proof": [
   {
@@ -288,5 +292,43 @@
   "group": "Q118",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-f897e6404 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, all 11 cited statements, the unit and chapter, and Higher Algebra (2017) at the cited places: Def 2.3.3.6, Thm 2.3.3.23/26, Rem 2.3.3.27, Prop 4.1.2.11, Notation 4.2.1.6, Def 4.2.1.12/13/19, Constr 4.2.2.6, Rem 4.2.2.8, Def 4.2.2.10, Prop 4.2.2.12, Cor 4.2.2.16, 4.2.2.17-21 and Rem 4.2.2.26. HA is not in literature/; I read a copy cached by an earlier review. The item statement is unchanged from base except for the added encoding reference. The transport exponent n-alpha(m) matches HA Rem 4.2.2.21, and the I-condition matches Rem 4.2.2.19(2'). Steps 1-7 check out: X_B is the pullback along B of the inert-prism object; it is a categorical fibration by the exponentiation, cone-calculus and mapping-criterion nodes; the fibre is M by pointwise transport plus full-essential-image; mapping spaces over beta reduce to Map_M(B^k x, y), with both directions of the cocartesian characterization; marked prism lifts equal Gamma_I; the restriction theorem is applied twice and the isofibration-pullback lemma gives the equivalence of fixed-B fibres; the last-vertex edge has an empty tail and gives U. New nodes: the encoding matches HA 4.2.1.6/13/19; the restriction theorem is true and follows from Thm 2.3.3.23(1) by taking fibres, as HA does for Prop 4.2.2.12; I recomputed every clause of the prism node, including discrete colour fibres and markings (with m=0). None duplicates an existing node: the existing approximation nodes are nonsymmetric and absolute. None restates the item. The source error is confirmed: on the cross edge ([1],0)->([0],1), the bottom factor <2>-><1> merges a and m, so HA Rem 4.2.2.26's factorization fails; the node uses the correct vertical-then-top factorization. No cycle (closure 245 nodes); proof_deps equals the union of the uses; blueprint fields are correct. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus (componentwise equivalence criterion). Minor and not repaired: step 7 marked elementary is generous; the prism node takes its definition of approximation from a statement node. No SGA. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3fc51e60",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Every node clause matches the Lean conclusion Nonempty (CoherentModuleSectionModel T B): isofibration; local cocartesianness on every edge pullback; fibres equivalent to M; transport by B^(n-α(m)) with the right variance and an exact natural subtraction; power action pinned by the ordered-operation predicate; arrow comparison over endpoint pairs (IsLMEquivalenceOver) with the cocartesian-iff-equivalence clause; I = interval inclusions with α(m)=n; Γ_I as a full subcomplex of sections over the identity; LMod_B ≃ Γ_I; evaluations ≃ U with last-vertex edges pinned. Read LeftModuleOperadicEncoding, MonoidalInfinityCategory, InfinityFibrations, IsofibrationExponentiation, CocartesianSectionColimits, PointwiseCocartesianTransport and SourceAttachmentGluing declarations. Edge cases n=0, k=0, m=0, non-interval α(m)=n maps, empty M and universes are OK. No hollow definitions; the only sorry is the main theorem, with all seven proof steps in its docstring; source and blueprint docstrings present; statement verbatim; declarations list exact; only lean and four landed stmt_deps changed; both report sections present. The second reader's dedup to sourceAttachmentArrowFamily is correct. nt_compile.py --json compiled the module in 2.4 s, exit 0, no errors. Minor remark only: evaluations states existence, and its tie to the last-vertex edges is recorded in evaluationEdges."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoherentModuleSectionModel",
+  "declaration": "SSet.Enhanced.coherent_module_section_model",
+  "declarations": [
+   "SSet.Enhanced.IsModuleSectionLocalEdge",
+   "SSet.Enhanced.IsModuleSectionLocallyCocartesian",
+   "SSet.Enhanced.IsModuleSectionInert",
+   "SSet.Enhanced.moduleSectionSubcategory",
+   "SSet.Enhanced.moduleSectionDiagrams",
+   "SSet.Enhanced.moduleSectionEvaluation",
+   "SSet.Enhanced.moduleSectionLastArrow",
+   "SSet.Enhanced.moduleSectionLastEdges",
+   "SSet.Enhanced.moduleSectionActionWord",
+   "SSet.Enhanced.moduleSectionAlgebraValue",
+   "SSet.Enhanced.IsModuleSectionPowerAction",
+   "SSet.Enhanced.moduleSectionArrowFamily",
+   "SSet.Enhanced.moduleSectionArrowParameters",
+   "SSet.Enhanced.moduleSectionArrowInclusion",
+   "SSet.Enhanced.IsModuleSectionTransport",
+   "SSet.Enhanced.CoherentModuleSectionModel",
+   "SSet.Enhanced.coherent_module_section_model"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoherentModuleSectionModel.lean",
+  "statement": "theorem coherent_module_section_model {O V M : SSet.{u}} [Quasicategory O] [Quasicategory V] [Quasicategory M] {r : O ⟶ lmBase.{u}} {p : V ⟶ monoidalSimplexBase.{u}} (T : CoherentLeftTensoring (M := M) r p) (B : (lmAlgebras r) _⦋0⦌) : Nonempty (CoherentModuleSectionModel T B)",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "All helper constructions belong to this section-model statement. CoherentModuleSectionModel packages its existence clauses; the theorem asserts Nonempty and no definition chooses its data. Tensor powers are characterized by the recorded operadic operations. Mapping comparisons are equivalences over the full pair of endpoint fibres; the evaluation comparison retains the actual last-vertex section edges. The second reading reuses the landed sourceAttachmentArrowFamily and its projections, removing three duplicate helpers; the additional landed statement dependency supplies these constructions without assuming its theorem hypotheses."
  }
 }

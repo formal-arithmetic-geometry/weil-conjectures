@@ -295,5 +295,23 @@
   "group": "Q61",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-263dffde1 (reviewer sub-agent of L); spot-checked: I read all six steps and the full statements of all 8 cited nodes. Each step is correct. Step 2: ordinal reversal turns the cocartesian composition and initial-comparison clauses into the cartesian ones, with the comparison equivalence in the fibre over the degenerate base simplex. Step 3: the transitivity argument (cocartesian mapping criterion plus homotopy-pullback pasting) holds; all objects are quasicategories and the bottom square is a homotopy pullback by hypothesis. Step 4: the target-prescribed lift is the Lambda^1_1 horn of the core Kan fibration, and the inner horn over sigma gives exact equality of images. Step 6: fibre inverse witnesses project to ambient equivalences. One fault, repaired: the statement said F_1 'lifts equivalence edges with prescribed source' without requiring the lift to be an equivalence, and under that reading the edge criterion is false. Counterexample over S=[1]: E_1 has fibre C={f:0'->1', g, gf=id, fg=e not id} over 0, mapping to J={a~b} by f->i, g->i^{-1}, e->id. Every isomorphism lifts with prescribed source, but not to an isomorphism. Then P=E_0 x_H E_1 is isomorphic to [1], so its edge is q-cartesian, while its E_1 component, which factors through f, is not q_1-cartesian. The fix restates the hypothesis as Kerodon's isofibration (the lift is an equivalence edge). This is what step 4 needs from lem-coef-infinity-core-kan-fibration and what the parent, relative-join-simplex-extension step 4, supplies through a Joyal fibration (joyal-quasicategory-characterizations (1)). I also added one sentence to split_report.summary. The corrected item is in fixes/dag/nodes/sec-six-functors/. There are no new nodes (the worker's transitivity node was folded into step 3) and no dependency cycle (closure of 148 nodes). An rg search found no duplicate among localization-cartesian-pullback-pushout, cartesian-base-equivalence-invariance, relative-exponential-restriction and pointwise-cocartesian-transport. I accept both tool_uses (def-cbc-enhanced-diagrams-cones and lem-cbc-inner-fibration-equivalence-outer-horn-lift from sk-prop-sf-cbc). The source, Kerodon 02VV, is not archived, so agent origin and the WANTED line are correct; no SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianFibrationPullback",
+  "declaration": "SSet.Enhanced.cartesianFibration_pullback",
+  "file": "lean/Sheaf/CategoryTheory/CartesianFibrationPullback.lean",
+  "statement": "theorem cartesianFibration_pullback {S E₀ E₁ H : SSet.{u}} [Quasicategory S] [Quasicategory E₀] [Quasicategory E₁] [Quasicategory H] (q₀ : E₀ ⟶ S) (q₁ : E₁ ⟶ S) (r : H ⟶ S) (F₀ : E₀ ⟶ H) (F₁ : E₁ ⟶ H) (hq₀ : cartesianFibration q₀) (hq₁ : cartesianFibration q₁) (hr : InnerFibration r) (hF₀ : F₀ ≫ r = q₀) (hF₁ : F₁ ≫ r = q₁) (hpres₀ : preservesCartesianEdges q₀ r F₀ hF₀) (hpres₁ : preservesCartesianEdges q₁ r F₁ hF₁) (hiso : IsIsofibration F₁) : ∃ (hP : Quasicategory (pullback F₀ F₁)), @cartesianFibration (pullback F₀ F₁) S (pullback.fst F₀ F₁ ≫ q₀) hP inferInstance ∧ ∀ e : Δ[1] ⟶ pullback F₀ F₁, IsCartesianEdge (pullback.fst F₀ F₁ ≫ q₀) e ↔ IsCartesianEdge q₀ (e ≫ pullback.fst F₀ F₁) ∧ IsCartesianEdge q₁ (e ≫ pullback.snd F₀ F₁)",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-89991d3cf",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause, checked against the real dependency declarations: cartesianFibration, IsCartesianEdge, preservesCartesianEdges, IsEquivalenceEdge (face indices checked), and the reused IsIsofibration, whose lift must be an equivalence as the stage-1 Q61 correction requires. pullback F0 F1 is the degreewise SSet pullback and q = fst >> q0; the edge iff covers both directions and all edges. One universe u, no extra hypotheses, empty and degenerate cases covered. One theorem with a sorry proof, no definitions; module and theorem docstrings carry the source place, blueprint tag and six-step proof plan; rule-7 proof imports present, and the two proof deps left out have no lean record; no line over 100 characters; node differs from base only in lean, which has all keys and a verbatim statement. IsIsofibration reuse (node not in stmt_deps) is H4-correct, matches landed practice, and creates no DAG cycle. nt_compile.py --json on the snapshot file: clean, 1.3 s, exit 0, no warnings. Only cosmetic: report text has '5.1.4.21' scrubbed to 'the project server'."
  }
 }

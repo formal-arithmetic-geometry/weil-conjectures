@@ -1,0 +1,146 @@
+{
+ "id": "def-coef-relative-symmetric-operadic-algebras",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "The symmetric infinity-operad, inert/active pointed maps, relative operadic algebra categories, and active slices used to state the terminal-active mapping property.",
+   "via": [
+    "lem-coef-relative-operadic-terminal-active-mapping",
+    "lem-coef-module-universal-arrow-criterion",
+    "lem-coef-infinity-free-module-bar",
+    "lem-coef-infinity-monadic-bar",
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Relative symmetric infinity-operadic algebra interfaces",
+ "status": "split",
+ "statement": "Use the enhanced simplicial-set and cocartesian-fibration conventions of [def-cbc-enhanced-diagrams-cones] and [def-coef-infinity-fibrations], and the generic relative operation mapping spaces and composition graphs of [def-coef-monoidal-infinity-category]. Let $\\mathrm{Fin}_*$ be the skeleton of finite pointed sets with object $n$ equal to $\\{0,1,\\ldots,n\\}$ pointed at $0$, and pointed maps as morphisms. Inert maps have exactly one preimage of each non-basepoint; active maps have no non-basepoint mapping to $0$. An inert edge over its nerve is cocartesian over an inert map. A symmetric infinity-operad is an inner fibration to this nerve, with cocartesian inert lifts, the operation-space Segal product decompositions, and a tuple object for each finite family of colors, including the empty family. A map of such operads preserves inert edges and the base. For $v:P\\to O$ and $q:E\\to O$, define the coherent relative diagram category by requiring the entire diagram simplex to lie over the fixed $v$, and define $\\operatorname{Alg}_{P/O}(E)$ as its full inert-preserving subcategory. Restriction along $u:P\\to Q$ is actual precomposition in every degree. Define the active slice over a color and its pullback $J_d$ along $u$, with its source object and active-arrow projections. For a restriction functor $R:B\\to A$, define the coherent triple category $T$ with objects $(a,b,\\eta:a\\to Rb)$, retaining the coherent squares and all their higher simplices, its projections $r:T\\to A$ and $s:T\\to B$, and the identity-triple functor $S:b\\mapsto(Rb,b,1)$. The canonical mapping comparison is the span $\\operatorname{Map}_B(sH,G)\\leftarrow\\operatorname{Map}_T(H,SG)\\to\\operatorname{Map}_A(rH,R G)$ induced by these projections. Its left leg forgets the square, so its inverse followed by the right leg represents $b\\mapsto R(b)\\eta$. Define its being an equivalence by both specified legs being weak equivalences for every $G$; this coherent span retains naturality in $G$ and contravariantly in triples. Finally define the terminal-active cocone condition: for each color $d$ there is a terminal $t=(p,\\alpha:u(p)\\to d)$ of $J_d$ and a composition triangle with short edges $\\eta_p$ and $F(\\alpha)$ whose long edge is $q$-cocartesian.",
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-monoidal-infinity-category"
+ ],
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Higher Algebra, Definitions 2.1.1.8, 2.1.1.10, 2.1.2.7, 2.1.3.1 and 3.1.3.1, Proposition 3.1.3.2, and Lemma 3.1.1.14 (terminal-active special case)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "symmetric infinity operad finite pointed sets relative algebras",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SymAlg.sym_comp_unsym\", \"module\": \"Mathlib.Algebra.Symmetrized\", \"type\": \": (sym : α → αˢʸᵐ) ∘ unsym = id\", \"doc\": \"The composition of the identity equivalence from $\\\\alpha$ to its symmetric algebra $\\\\alpha^{\\\\mathrm{sym}}$ and the identity equivalence back to $\\\\alpha$ equals the identity function on $\\\\alpha$, i.e.,\"}\n  {\"name\": \"CategoryTheory.symmetricOfHasFiniteCoproducts\", \"module\": \"Mathlib.CategoryTheory.Monoidal.OfHasFiniteProducts\", \"type\": \"[HasInitial C] [HasBinaryCoproducts C] : SymmetricCategory C\", \"doc\": \"Given a category $\\\\mathcal{C}$ with an initial object and binary coproducts, this constructs a symmetric monoidal category structure on $\\\\mathcal{C}$ where the tensor product is the binary coproduct $\"}\n  {\"name\": \"SymAlg\", \"module\": \"Mathlib.Algebra.Symmetrized\", \"type\": \"(α : Type*) : Type _\", \"doc\": \"The symmetric algebra over a type $\\\\alpha$, denoted $\\\\mathrm{SymAlg}\\\\, \\\\alpha$, is defined as the type $\\\\alpha$ itself.\"}\n  {\"name\": \"HomotopicalAlgebra.Cylinder.symm_i\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Cylinder\", \"type\": \"[HasBinaryCoproducts C] : P.symm.i = (coprod.braiding A A).hom ≫ P.i\", \"doc\": \"In a homotopical category $\\\\mathcal{C}$ with binary coproducts, the inclusion morphism $i_{\\\\text{symm}}: A \\\\sqcup A \\\\to I(A)$ of the symmetric cylinder object $P_{\\\\text{symm}}$ is equal to the composi\"}\n  {\"name\": \"CategoryTheory.symmetricOfHasFiniteProducts\", \"module\": \"Mathlib.CategoryTheory.Monoidal.OfHasFiniteProducts\", \"type\": \"[HasTerminal C] [HasBinaryProducts C] : SymmetricCategory C\", \"doc\": \"Given a category $\\\\mathcal{C}$ with finite products, this constructs a symmetric monoidal category structure on $\\\\mathcal{C}$ by defining the tensor product as the categorical product, the unit object\"}\n  {\"name\": \"CategoryTheory.SymmetricCategory.noConfusion\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Braided.Basic\", \"type\": \"{P : Sort u_1} →\\n  {C : Type u} →\\n    {inst : CategoryTheory.Category.{v, u} C} →\\n      {inst_1 : CategoryTheory.MonoidalCategory C} →\\n        {t : CategoryTheory.SymmetricCategory C} →\\n          {C' : Type u} →\\n            {inst' : CategoryTheory.Category.{v, u} C'} →\\n              {inst'_1 : Categ\", \"doc\": \"A function that allows defining operations on symmetric monoidal categories by specifying their behavior on the underlying braided monoidal category equipped with the symmetry condition that the compo\"}\n  {\"name\": \"HomotopicalAlgebra.Precylinder.symm\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Cylinder\", \"type\": \": Precylinder A\", \"doc\": \"The precylinder structure on an object $A$ obtained by swapping the left and right inclusion morphisms $i_0$ and $i_1$ of a given precylinder $P$, while keeping the cylinder object $I(A)$ and projecti\"}\n  {\"name\": \"SSet.instFiniteTensorUnit\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Monoidal\", \"type\": \": (𝟙_ SSet.{u}).Finite\", \"doc\": \"The category of simplicial sets is equipped with a Cartesian monoidal category structure, inherited pointwise from the Cartesian monoidal structure on the category of types. This structure uses level-\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No matching symmetric infinity-operad or relative operadic algebra declaration; hits are ordinary symmetric categories, simplicial nerves or other basic constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "symmetric infinity operad terminal active slice relative algebra mapping equivalence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.nerveEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.ComposableArrows C 0 ≃ C\", \"doc\": \"There is a canonical equivalence between the category of 0-length composable arrows in $\\\\mathcal{C}$ (which corresponds to the objects of $\\\\mathcal{C}$) and the category $\\\\mathcal{C}$ itself. This est\"}\n  {\"name\": \"SSet.hoFunctor.unitHomEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal\", \"type\": \"(X : SSet) →\\n  (CategoryTheory.MonoidalCategoryStruct.tensorUnit SSet ⟶ X) ≃\\n    CategoryTheory.Functor ↑CategoryTheory.Cat.chosenTerminal ↑(SSet.hoFunctor.obj X)\", \"doc\": \"For any simplicial set $X$, there is a canonical equivalence between the set of morphisms from the terminal simplicial set to $X$ in the category of simplicial sets and the set of functors from the te\"}\n  {\"name\": \"SSet.opEquivalence\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Op\", \"type\": \"SSet ≌ SSet\", \"doc\": \"The equivalence between the category of simplicial sets and itself, constructed using the opposite functor induced by reversing simplicial structure. This equivalence arises because applying the oppos\"}\n  {\"name\": \"SSet.OneTruncation₂.nerveEquiv_symm_apply_obj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (f : C) (x : Fin 1),\\n  (SSet.OneTruncation₂.nerveEquiv.symm f).obj x = f\", \"doc\": \"For any category $\\\\mathcal{C}$ and morphism $f$ in $\\\\mathcal{C}$, the inverse of the canonical equivalence between $\\\\mathcal{C}$ and its 2-truncated nerve satisfies $(\\\\mathrm{Nerve}^{-1}(f)).\\\\mathrm{o\"}\n  {\"name\": \"SSet.unitHomEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal\", \"type\": \"(K : SSet) → (CategoryTheory.MonoidalCategoryStruct.tensorUnit SSet ⟶ K) ≃ K.obj (Opposite.op (SimplexCategory.mk 0))\", \"doc\": \"For any simplicial set $ K $, the set of natural transformations from the terminal simplicial set (the tensor unit in the Cartesian monoidal category of simplicial sets) to $ K $ is naturally isomorph\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Augmented\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max u v)\", \"doc\": \"The category of augmented simplicial objects in $\\\\mathcal{C}$, defined as the comma category between the identity functor on simplicial objects in $\\\\mathcal{C}$ and the constant functor from $\\\\mathcal\"}\n  {\"name\": \"AugmentedSimplexCategory.rightUnitor\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal\", \"type\": \"(x : AugmentedSimplexCategory) → x.tensorObj AugmentedSimplexCategory.tensorUnit ≅ x\", \"doc\": \"The right unitor isomorphism in the monoidal category structure on the augmented simplex category, asserting that the tensor product with the unit object (the initial object $[-1]$) on the right is na\"}\n  {\"name\": \"AugmentedSimplexCategory.leftUnitor\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal\", \"type\": \"(x : AugmentedSimplexCategory) → AugmentedSimplexCategory.tensorUnit.tensorObj x ≅ x\", \"doc\": \"The left unitor isomorphism in the monoidal category structure on the augmented simplex category, asserting that the tensor product of the unit object $[-1]$ with any object $x$ is naturally isomorphi\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No matching symmetric infinity-operad or relative operadic algebra declaration; hits are ordinary symmetric categories, simplicial nerves or other basic constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "InfinityOperad|infinityOperad|FinPointed|FinStar",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "No matching symmetric infinity-operad or relative operadic algebra declaration; hits are ordinary symmetric categories, simplicial nerves or other basic constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n relativeOperadicAlgebras|IsSymmetricInfinityOperad|FinStar|relative_operadic_terminal_active_mapping /home/ubuntu/weil-src-slopmaster2/WeilConjectures /home/ubuntu/weil-newtargets-shared/lean/Sheaf",
+   "results": "No matches.",
+   "date": "2026-10-17",
+   "verdict": "No source or project declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-relative-operadic-terminal-active-mapping",
+  "date": "2026-10-17",
+  "group": "Q17"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeSymmetricOperadicAlgebras",
+  "declaration": "SSet.Enhanced.IsSymmetricInfinityOperad",
+  "declarations": [
+   "SSet.Enhanced.FinStar",
+   "SSet.Enhanced.finStarCategory",
+   "SSet.Enhanced.finStarBase",
+   "SSet.Enhanced.finStarVertex",
+   "SSet.Enhanced.finStarEdge",
+   "SSet.Enhanced.finStarTriangle",
+   "SSet.Enhanced.IsFinStarInert",
+   "SSet.Enhanced.IsFinStarActive",
+   "SSet.Enhanced.finStarRho",
+   "SSet.Enhanced.IsSymmetricInertEdge",
+   "SSet.Enhanced.IsSymmetricOperadMap",
+   "SSet.Enhanced.HasSymmetricOperadicMappingProducts",
+   "SSet.Enhanced.IsSymmetricInfinityOperad",
+   "SSet.Enhanced.operadicDiagram",
+   "SSet.Enhanced.relativeOperadicDiagramComplex",
+   "SSet.Enhanced.relativeOperadicDiagrams",
+   "SSet.Enhanced.relativeOperadicDiagramInclusion",
+   "SSet.Enhanced.relativeOperadicAlgebras",
+   "SSet.Enhanced.IsActiveEdge",
+   "SSet.Enhanced.relativeActiveSlice",
+   "SSet.Enhanced.relativeActiveSliceSource",
+   "SSet.Enhanced.relativeActiveIndex",
+   "SSet.Enhanced.relativeOperadicAlgebraInclusion",
+   "SSet.Enhanced.relativeOperadicRestriction",
+   "SSet.Enhanced.operadicTripleComplex",
+   "SSet.Enhanced.operadicTriples",
+   "SSet.Enhanced.operadicTripleSource",
+   "SSet.Enhanced.operadicTripleTarget",
+   "SSet.Enhanced.operadicTripleEdge",
+   "SSet.Enhanced.operadicIdentityTriples",
+   "SSet.Enhanced.relativeActiveSliceArrow",
+   "SSet.Enhanced.relativeActiveIndexObject",
+   "SSet.Enhanced.relativeActiveIndexArrow",
+   "SSet.Enhanced.IsOperadicMappingEquivalence",
+   "SSet.Enhanced.HasTerminalActiveOperadicCocones"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeSymmetricOperadicAlgebras.lean",
+  "statement": "def IsSymmetricInfinityOperad {E : SSet.{u}} (p : E ⟶ finStarBase.{u}) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58f49123c",
+  "group": "Q17",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58f49123c",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read item, new def node def-coef-relative-symmetric-operadic-algebras, both modules line by line, and dependency decls (EnhancedDiagramsCones: commaSubcomplex true = arrows into d, mappingSpace, IsTerminal; InfinityFibrations: IsCocartesianEdge, cocartesianFibration; MonoidalInfinityCategory composition graph/long edge). Symmetric operad axioms match HA 2.1.1.10 (inert lifts, Segal mapping products with comparison fixed by long edges, tuple axiom incl. n=0); inert/active/rho/operad map exact; relative algebras fix the whole base diagram and are full inert-preserving; restriction is precomposition; triple category is the degreewise pullback with eta(1)=R(F); full active-arrow slice equals the slice of Q_act (checked); J_d is the pullback along u; only colours quantified; tau edges 01/12/02 = eta_p, F(alpha), cocartesian composite. Conclusion: both legs of the canonical span at the identity triple are weak equivalences; left leg is always an equivalence, so this is exactly b -> u*(b)eta being an equivalence. No extra assumptions, colimits or universe restrictions. Item statement/proof unchanged vs side DAG; lean.statement verbatim for both nodes; 35 declarations present; no duplicate notion (only chain-two and LM encodings exist). Single sorry; docstrings complete. nt_compile.py --json on both files: rc 0, clean. Cosmetic: worker report has HA numbers replaced by 'the project server'. No fixes."
+ }
+}

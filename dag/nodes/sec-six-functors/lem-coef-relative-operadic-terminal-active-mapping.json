@@ -25,7 +25,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "def-coef-relative-symmetric-operadic-algebras"
  ],
  "proof": [
   {
@@ -257,5 +258,27 @@
   "group": "Q47",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-4dde02cc9 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. HA is not archived, so I checked the cited places against the online HA PDF (Sept 2017 edition, text extracted in /tmp). Rem 2.2.4.6-2.2.4.8 (p.212) give the active ⊕ and the stability of active q-cocartesian edges in O-monoidal categories, which is the concatenation node, hypotheses identical. Def 3.1.1.2 (p.318: colour-fibre slices, for every ⊕C) matches the local condition with colour targets W and every ⊕Z. Lemma 3.1.1.14 (p.324) is exactly item steps 2-3. Def 3.1.3.1 and Prop 3.1.3.2 (p.342) have q only a fibration of ∞-operads, so the item, which adds a cocartesian q, terminal active slices and a cocartesian terminal edge, is a true special case and nothing is weakened. Lemma 3.1.3.16 (n>0, prescribed boundary over a fixed base, condition only at vertex 0), with Rem 3.1.3.15 and the proof of 3.1.3.2, matches the boundary node. Its comma model T is the pushout-algebra category, and r=ev0 is a categorical fibration, so strict filling transfers from HA's M⊗ model. Small cases: u=id gives an equivalence; the trivial P into Comm gives the unit as initial algebra; an empty J_d is excluded by the hypothesis. Steps 1-6: active-component restriction of the cocartesian mapping square is valid; terminal evaluation is via the final-index colimit and the cone-calculus dual; the index shift s+1 includes s=0; strict/path comma pullback through the endpoint Kan fibration, and for K_G projection to Map(F,G) with ρ = b↦u*(b)η. I verified each one. The item statement is unchanged against the live side DAG. No cycle (closure of 406 nodes). No SGA. No duplicates: correspondence-kan-filling and the other free-cocone nodes are nonsymmetric or presentable, and nothing else in the DAG states envelope/concatenation. All three search kinds are recorded. Ancestry is prop-coef-integral-exceptional-adjoint with the correct via list, same_as []. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus for steps 3 and 6, a generic cocone/pointwise-equivalence criterion from sec-smooth-purity, which the chapter uses. No fixes. HA archive remains WANTED."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58f49123c",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read item, new def node def-coef-relative-symmetric-operadic-algebras, both modules line by line, and dependency decls (EnhancedDiagramsCones: commaSubcomplex true = arrows into d, mappingSpace, IsTerminal; InfinityFibrations: IsCocartesianEdge, cocartesianFibration; MonoidalInfinityCategory composition graph/long edge). Symmetric operad axioms match HA 2.1.1.10 (inert lifts, Segal mapping products with comparison fixed by long edges, tuple axiom incl. n=0); inert/active/rho/operad map exact; relative algebras fix the whole base diagram and are full inert-preserving; restriction is precomposition; triple category is the degreewise pullback with eta(1)=R(F); full active-arrow slice equals the slice of Q_act (checked); J_d is the pullback along u; only colours quantified; tau edges 01/12/02 = eta_p, F(alpha), cocartesian composite. Conclusion: both legs of the canonical span at the identity triple are weak equivalences; left leg is always an equivalence, so this is exactly b -> u*(b)eta being an equivalence. No extra assumptions, colimits or universe restrictions. Item statement/proof unchanged vs side DAG; lean.statement verbatim for both nodes; 35 declarations present; no duplicate notion (only chain-two and LM encodings exist). Single sorry; docstrings complete. nt_compile.py --json on both files: rc 0, clean. Cosmetic: worker report has HA numbers replaced by 'the project server'. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeOperadicTerminalActiveMapping",
+  "declaration": "SSet.Enhanced.relative_operadic_terminal_active_mapping",
+  "declarations": [
+   "SSet.Enhanced.relative_operadic_terminal_active_mapping"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeOperadicTerminalActiveMapping.lean",
+  "statement": "theorem relative_operadic_terminal_active_mapping {E O P Q : SSet.{u}} (bE : E ⟶ finStarBase.{u}) (bO : O ⟶ finStarBase.{u}) (bP : P ⟶ finStarBase.{u}) (bQ : Q ⟶ finStarBase.{u}) (q : E ⟶ O) (v : Q ⟶ O) (u : P ⟶ Q) (hE : IsSymmetricInfinityOperad bE) (hO : IsSymmetricInfinityOperad bO) (hP : IsSymmetricInfinityOperad bP) (hQ : IsSymmetricInfinityOperad bQ) (hq : IsSymmetricOperadMap bE bO q) (hv : IsSymmetricOperadMap bQ bO v) (hu : IsSymmetricOperadMap bP bQ u) (hqfib : @cocartesianFibration E O q hE.1 hO.1) (H : (operadicTriples (relativeOperadicRestriction bP bQ bE v q u hu)) _⦋0⦌) (hterminal : HasTerminalActiveOperadicCocones bE bP bQ q v u hu H) : IsOperadicMappingEquivalence (relativeOperadicRestriction bP bQ bE v q u hu) H",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The specified restriction/composition map is represented by the canonical coherent triple-category span, using the dependency right-pinched mapping spaces. IsOperadicMappingEquivalence asserts weak equivalence of its fixed projections, retaining naturality in test algebras and coherent triples. The left leg has the contractible square-path factor, so this is precisely the stated comparison, without an arbitrary map or choice of composites."
  }
 }
