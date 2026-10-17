@@ -2,7 +2,7 @@
  "id": "lem-trf-relative-curve-factorization",
  "kind": "statement",
  "title": "Factorization through a relative curve",
- "statement": "Let $S$ be either the spectrum of a field or an excellent integral trait [def-exc-excellent-ring, def-sc-discrete-valuation-ring], with generic point $s$, and let $X\\to S$ be proper [def-weil-proper-morphism], dominant, finite type [def-weil-finite-type-morphism], with $X$ integral [def-pc-integral-scheme]. If the generic fibre $X_s$ [def-pc-scheme-fibre] has dimension $d\\geq1$ [def-kun-dimension], then there are an excellent integral scheme $Y$ [def-exc-excellent-ring, def-pc-integral-scheme], a projective [def-kun-projective] dominant finite-type morphism $Y\\to S$ whose generic fibre $Y_s$ has dimension $d-1$, an excellent integral scheme $X_0$, a proper dominant generically finite morphism $a:X_0\\to X$ (finite [def-weil-finite-integral-morphism] over a dense open of $X$), and a proper dominant morphism $g:X_0\\to Y$ such that the composites $X_0\\xrightarrow{a}X\\to S$ and $X_0\\xrightarrow{g}Y\\to S$ are equal, and such that the extension of function fields $\\kappa(Y)\\subset\\kappa(X_0)$ [def-sc-function-field] induced by $g$ has transcendence degree one [def-kun-transcendence-degree]. Excellence of a scheme means excellence of its affine coordinate rings.",
+ "statement": "Let $S$ be either the spectrum of a field or an excellent integral trait [def-exc-excellent-ring, def-sc-discrete-valuation-ring], with generic point $s$, and let $X\\to S$ be proper [def-weil-proper-morphism], dominant, finite type [def-weil-finite-type-morphism], with $X$ integral [def-pc-integral-scheme]. If the generic fibre $X_s$ [def-pc-scheme-fibre] has dimension $d\\geq1$ [def-kun-dimension], then there are an excellent integral scheme $Y$ [def-exc-excellent-ring, def-pc-integral-scheme], a projective [def-kun-projective] dominant finite-type morphism $Y\\to S$ whose generic fibre $Y_s$ has dimension $d-1$, an excellent integral scheme $X_0$, a proper dominant generically finite morphism $a:X_0\\to X$ (finite [def-weil-finite-integral-morphism] over a dense open of $X$), and a proper dominant morphism $g:X_0\\to Y$ such that the composites $X_0\\xrightarrow{a}X\\to S$ and $X_0\\xrightarrow{g}Y\\to S$ are equal, and such that the extension of function fields $\\kappa(Y)\\subset\\kappa(X_0)$ induced by $g$ has transcendence degree one [def-kun-transcendence-degree]. Here an integral trait is the spectrum of a discrete valuation ring [def-sc-discrete-valuation-ring]; for any integral scheme $T$, $\\kappa(T)$ means the residue field [def-weil-residue-field] at its generic point [def-sc-generic-point]. Excellence of a scheme means excellence of its affine coordinate rings.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose X, proof of Theorem 3.5, Step 5, printed p. 163: choose a rational map h' with relative transcendence degree one and take the schematic image after a projective modification."
@@ -17,12 +17,161 @@
   "def-kun-projective",
   "def-weil-finite-integral-morphism",
   "def-sc-generic-point",
-  "def-sc-function-field",
-  "def-kun-transcendence-degree"
+  "def-kun-transcendence-degree",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $S=\\operatorname{Spec}A$, $k=\\kappa(s)$ and $K=\\kappa(X)$. Dominance sends the generic point of $X$ to $s$. The generic fibre is integral: on affine charts its rings are localizations of domains by $A\\setminus\\{0\\}$, and its generic point is the generic point of $X$, with residue field $K$. It is of finite type over $k$, since localizing a finite list of algebra generators preserves that list. Thus [lem-sc-closed-irreducible-dimension-trdeg], applied to the entire generic fibre, gives $\\operatorname{trdeg}_kK=d$. A nonempty affine chart in this fibre has a finite-type domain as coordinate ring and fraction field $K$ by [lem-sc-integral-function-field-affine-fraction]; its algebra generators generate $K$ as a field. Apply [lem-weil-pbc-finitely-generated-field-finite-transcendence-basis] and the definition of transcendence degree to choose a basis $t_1,\\ldots,t_d$ of $K/k$.",
+   "uses": [
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed p. 163; explicit rational-map/graph construction"
+   }
+  },
+  {
+   "text": "Set $n=d-1$ and $Y=\\mathbf P^n_S$. Its standard charts are $\\operatorname{Spec}A[z_1,\\ldots,z_n]$ by [lem-weil-pbc-projective-space-standard-charts]. They are domains, and their generic points coincide on their nonempty pairwise overlaps, so $Y$ is integral; each chart maps its generic point to $s$, so $Y\\to S$ is dominant. The identity closed embedding into $\\mathbf P^n_S$ proves projectivity by [def-kun-projective], and [lemma-nagata-projective-space-base-change-proper] gives properness, hence finite type. The same chart description after replacing $A$ by $k$ gives $\\kappa(Y_s)=k(z_1,\\ldots,z_n)$; the indeterminates are a transcendence basis. Hence [lem-sc-closed-irreducible-dimension-trdeg] gives $\\dim Y_s=n$. For $n=0$ the chart is $\\operatorname{Spec}A$ and the field is $k$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-kun-projective",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "def-kun-transcendence-degree",
+    "lem-sc-closed-irreducible-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed p. 163; explicit rational-map/graph construction"
+   }
+  },
+  {
+   "text": "Choose a nonempty affine $V=\\operatorname{Spec}B\\subset X$ from a finite-type affine cover over $A$. By [lem-sc-integral-function-field-affine-fraction], write $t_i=b_i/c_i$ with $b_i,c_i\\in B$ and $c_i\\ne0$, for $1\\le i\\le n$. Put $c=\\prod_i c_i$ (empty product $1$), and $U=\\operatorname{Spec}B[1/c]$. This is nonempty and dense in $X$. The $A$-algebra map $A[z_1,\\ldots,z_n]\\to B[1/c]$, $z_i\\mapsto t_i$, gives an $S$-morphism $r:U\\to Y$ into the standard affine chart, by [def-weil-affine-spectrum] and [lem-weil-pbc-projective-space-standard-charts]. Its composite into $K$ is injective: $A\\subset k$ and the $t_i$ are algebraically independent over $k$. Thus the generic point maps to the zero prime of this chart, the generic point of $Y$, so $r$ is dominant and induces $\\kappa(Y)=k(t_1,\\ldots,t_n)\\subset K$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-projective-space-standard-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed p. 163; explicit rational-map/graph construction"
+   }
+  },
+  {
+   "text": "Let $\\gamma=(j,r):U\\to X\\times_SY$, where $j:U\\hookrightarrow X$. The ring $A$ is Noetherian (a field, or an excellent ring). Thus $U$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Every open of a Noetherian space is quasi-compact: otherwise a cover without a finite subcover gives a strictly increasing infinite chain of finite unions of its members. Consequently $j$ and $\\gamma$ are quasi-compact, since preimages of affine opens are opens in $U$. Let $i:X_0\\hookrightarrow X\\times_SY$ be the scheme-theoretic image, with its factor map from $U$, supplied by [lem-weil-pbc-scheme-image-qc-kernel]. Write $a=\\operatorname{pr}_X i$ and $g=\\operatorname{pr}_Y i$. As $Y\\to S$ is separated, [lemma-nagata-scheme-image-partial-section] says $a^{-1}(U)\\to U$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lemma-nagata-scheme-image-partial-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed p. 163; explicit rational-map/graph construction"
+   }
+  },
+  {
+   "text": "The support of $X_0$ is the closure of $\\gamma(U)$ by [lemma-nagata-scheme-image-ideal-qc], so it is nonempty and irreducible. To check reducedness explicitly, take an affine open $W$ in $X\\times_SY$ meeting $X_0$. The open $\\gamma^{-1}(W)$ is nonempty by density. Its sections inject into $K$ by [lem-sc-integral-scheme-stalks-in-function-field], applied to the integral scheme $U$. The affine ideal defining $X_0\\cap W$ is $\\ker(\\mathcal O(W)\\to\\mathcal O_U(\\gamma^{-1}W))$ by [lem-weil-pbc-scheme-image-qc-kernel]. This is a prime ideal, since the target embeds in a field; the quotient is therefore a domain. These affine charts cover $X_0$, so $X_0$ is reduced, hence integral. The open $a^{-1}(U)\\cong U$ is dense in $X_0$.",
+   "uses": [
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-weil-pbc-scheme-image-qc-kernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed p. 163; explicit rational-map/graph construction"
+   }
+  },
+  {
+   "text": "The projections $X\\times_SY\\to X$ and $X\\times_SY\\to Y$ are proper by [lem-weil-pbc-proper-base-change], using respectively the properness of $Y\\to S$ and the given properness of $X\\to S$. Since $i$ is a closed immersion, [lem-weil-pbc-closed-immersion-proper] makes both $a$ and $g$ proper. The image of $a$ contains the dense open $U$, and the image of $g$ contains the dense image $r(U)$, so both are dominant. The isomorphism $a^{-1}(U)\\to U$ of [lemma-nagata-scheme-image-partial-section] is finite (on affine rings it is an isomorphism), so $a$ is generically finite in the required convention, with degree one.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lemma-nagata-scheme-image-partial-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed p. 163; explicit rational-map/graph construction"
+   }
+  },
+  {
+   "text": "Identify $\\kappa(X_0)$ with $K$ using the common nonempty affine open $a^{-1}(U)\\cong U$ and [lem-sc-integral-function-field-affine-fraction]. Under this identification, the field map induced by $g$ is the inclusion $k(t_1,\\ldots,t_n)\\subset K$ computed in step 3, since $g|_U=r$. The tower formula [lem-kun-transcendence-degree-tower] gives $d=n+\\operatorname{trdeg}_{k(t_1,\\ldots,t_n)}K$. The two known degrees are finite and $n=d-1$, so the remaining degree is one. This also treats $d=1$, when the intermediate field is simply $k$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-kun-transcendence-degree-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed p. 163; explicit rational-map/graph construction"
+   }
+  },
+  {
+   "text": "The ring $A$ is excellent: this is assumed for a trait and follows from [lem-exc-fields-excellent] for a field. The scheme $Y$ is of finite type over $A$. The composite $X_0\\xrightarrow aX\\to S$ is proper by [lem-weil-pbc-proper-composition], hence of finite type. For every affine open $W$ in either $Y$ or $X_0$, [lem-weil-pbc-lft-affine-pairs] applied with the entire affine base $S=\\operatorname{Spec}A$ says $\\mathcal O(W)$ is a finite-type $A$-algebra. It is excellent by [lem-exc-finite-type-localization-excellent], taking the multiplicative subset $\\{1\\}$. This proves exactly the requested excellence of all affine coordinate rings.",
+   "uses": [
+    "lem-exc-fields-excellent",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-proper-morphism",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed p. 163; explicit rational-map/graph construction"
+   }
+  },
+  {
+   "text": "All maps were constructed over $S$: by the fibre-product relation, $(X\\to S)\\circ a=(Y\\to S)\\circ g$. With $X_0,Y,a,g$ as above, steps 2, 5, 6, 7 and 8 give every asserted clause. No finite-field, perfectness, separability or smoothness hypothesis was used.",
+   "uses": [
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed p. 163; explicit rational-map/graph construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+  "def-kun-transcendence-degree",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "def-kun-projective",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-proper-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lemma-nagata-scheme-image-partial-section",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-kun-transcendence-degree-tower",
+  "lem-exc-fields-excellent",
+  "lem-weil-pbc-proper-composition",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-pc-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X, proof of Theorem 3.5, Step 5, printed p. 163: choose the rational map and take its schematic graph image; the explicit choice Y=P^{d-1}_S is filled in using the cited Stacks results."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +200,38 @@
    "results": "AlgebraicGeometry.IsProper.mk; AlgebraicGeometry.IsIntegralHom.mk; AlgebraicGeometry.Scheme.RationalMap.ofFunctionField; no complete factorization theorem",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "graphClosure|graph_closure|RationalMap|schematicImage",
+   "results": "{\"t\": \"2026-10-17T16:18:15Z\", \"tool\": \"grep\", \"query\": \"graphClosure|graph_closure|RationalMap|schematicImage\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\"], \"digest\": \"1a78422ffcec88db\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolve a rational map to projective space by taking the closure of its graph",
+   "results": "{\"t\": \"2026-10-17T16:18:16Z\", \"tool\": \"leansearch\", \"query\": \"Resolve a rational map to projective space by taking the closure of its graph\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"LinearPMap.closure_inverse_graph\", \"LinearPMap.closure_def\", \"LinearPMap.closure\", \"LinearPMap.IsClosable\", \"LinearPMap.IsClosable.graph_closure_eq_closure_graph\", \"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\"], \"digest\": \"8ae1bac4d04e6545\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.RationalMap",
+   "results": "{\"t\": \"2026-10-17T16:18:16Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.RationalMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.id\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\"], \"digest\": \"dcb7bf20c3ad55ac\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper integral scheme over a field or excellent trait admits a birational graph modification mapping properly dominantly to projective space of generic dimension one less",
+   "results": "{\"t\": \"2026-10-17T16:18:17Z\", \"tool\": \"leanfinder\", \"query\": \"A proper integral scheme over a field or excellent trait admits a birational graph modification mapping properly dominantly to projective space of generic dimension one less\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"], \"digest\": \"4ebfd4ed3c706784\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-alteration-relative-curve-preparation",
@@ -77,5 +254,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-relative-curve-factorization",
+  "worker": "stage1",
+  "summary": "Constructed the rational map using d-1 elements of a transcendence basis and resolved it by its schematic graph image. Reused existing DAG statements for generic dimension, affine fraction fields, projective charts, partial sections, properness and excellence; no new nodes. Replaced a curve-only function-field citation with explicit generic residue-field meaning, without changing the mathematical assertion.",
+  "blueprint": "The item serves the alteration/nearby-cycle branch below lem-trf-local-term-locality, through the existing ancestry. Its steps expand precisely ILO Expose X, Theorem 3.5 Step 5: rational-map choice (steps 1-3), schematic graph modification (steps 4-6), relative transcendence degree one (step 7), and the excellence/structure-map bookkeeping (steps 8-9). The current main-20261015 contraction proof of the ancestor is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Generic geometric or field-theoretic tool used with its stated hypotheses in the rational-map/graph construction; this trace-formula unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic geometric or field-theoretic tool used with its stated hypotheses in the rational-map/graph construction; this trace-formula unit supplies no replacement."
+   },
+   {
+    "node": "def-kun-projective",
+    "why": "Generic geometric or field-theoretic tool used with its stated hypotheses in the rational-map/graph construction; this trace-formula unit supplies no replacement."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic geometric or field-theoretic tool used with its stated hypotheses in the rational-map/graph construction; this trace-formula unit supplies no replacement."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-partial-section",
+    "why": "Generic geometric or field-theoretic tool used with its stated hypotheses in the rational-map/graph construction; this trace-formula unit supplies no replacement."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-ideal-qc",
+    "why": "Generic geometric or field-theoretic tool used with its stated hypotheses in the rational-map/graph construction; this trace-formula unit supplies no replacement."
+   },
+   {
+    "node": "lem-exc-fields-excellent",
+    "why": "Generic geometric or field-theoretic tool used with its stated hypotheses in the rational-map/graph construction; this trace-formula unit supplies no replacement."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic geometric or field-theoretic tool used with its stated hypotheses in the rational-map/graph construction; this trace-formula unit supplies no replacement."
+   },
+   {
+    "node": "def-pc-base-change",
+    "why": "Generic geometric or field-theoretic tool used with its stated hypotheses in the rational-map/graph construction; this trace-formula unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "The general affine-pairs criterion for locally finite type morphisms verifies that every affine coordinate ring is a finite-type algebra over the excellent affine base."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "def-kun-projective",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-scheme-image-partial-section",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "def-pc-base-change",
+  "lem-weil-pbc-lft-affine-pairs"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-2064c93d6",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-2064c93d6 (reviewer sub-agent of L); spot-checked: I read the item, all 22 proof deps and 12 stmt deps (by their statements), the parent lem-trf-alteration-relative-curve-preparation (step 1, its only citer), and the source ILO Travaux de Gabber X Thm 3.5 Step 5, printed p.163 (PDF pp.168-170). The statement is the source's rational-map construction followed by the schematic image in X x Y. It has the parent's hypotheses (S a field or an excellent trait; X proper, dominant, finite type, integral; d = dim X_s >= 1) and gives exactly the clauses the parent uses: dim Y_s = d-1, X_0 and Y excellent, relative trdeg 1. Nothing is weakened and no SGA source is cited. Step checks: (1) dominance makes A\\{0} map to nonzero elements, so X_s is integral of finite type over k and the 0B1C node gives trdeg_k K = d. (2) Y = P^{d-1}_S is integral from its 01NG charts (nonempty overlaps), projective by def-kun-projective with the identity immersion, proper by the nagata node, and dim Y_s = d-1. (3) t_i = b_i/c_i; A[z] -> B[1/c] -> K is injective, so the generic point goes to the generic point of Y. (4) U is Noetherian, so j and gamma are quasi-compact; this is the hypothesis of the qc-kernel leaf and of the partial-section lemma, and Y/S is separated. (5) The image is irreducible as the closure of gamma(U), and each affine ideal is the kernel of a map into K, hence prime, so X_0 is integral. (6) Base change and closed-immersion (b) give a and g proper; both are dominant; a^{-1}U = U, so a is generically finite. (7) The trdeg tower gives relative degree 1, d=1 included. (8) 01T2 and 07QU give excellence. (9) The composites agree. Cases tested: d=1 (Y=S, X_0=X), X=P^d_S, the trait case P^1_A, and finite or imperfect k. There are no new nodes, and rg/blueprint search found no duplicate. Four tool_uses are needed and accepted: lem-sc-closed-irreducible-dimension-trdeg, lem-weil-pbc-projective-space-standard-charts, lem-exc-fields-excellent, lem-exc-finite-type-localization-excellent. The other declared entries are definitions, closed nodes or Mathlib leaves and need no tool_use. Minor: 'dominant' has no definition node anywhere in the DAG (the parent does the same). No fixes written."
  }
 }

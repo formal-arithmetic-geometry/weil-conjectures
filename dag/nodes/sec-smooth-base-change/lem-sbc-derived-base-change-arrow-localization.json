@@ -1,11 +1,122 @@
 {
  "chapter": "sec-smooth-base-change",
  "unit": "sk-def-bc",
- "status": "unsplit",
+ "status": "split",
  "mathlib_match": null,
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The maps $c$ and $d$ are base changes of the etale maps $b$ and $a$, so are etale. Identify $B_{\\Et}$, $(T_B)_{\\Et}$, $U_{\\Et}$ and $(Y_U)_{\\Et}$ with the slices of $S_{\\Et}$, $T_{\\Et}$, $X_{\\Et}$ and $Y_{\\Et}$ at their indicated objects. The identification $Y_U\\cong U\\times_BT_B$ is given by the projections to $U$ and $T$: both sides classify pairs with the same image in $S$. Etale inverse image is restriction. In the following all inverse images denote the exact termwise functors on the unbounded derived categories stipulated in the statement. Write the canonical inverse-image comparisons as $\\alpha_f:r_Uf^{-1}\\cong f_U^{-1}r_B$, $\\alpha_e:r_{Y_U}e^{-1}\\cong e_U^{-1}r_{T_B}$, $\\kappa:r_{Y_U}h^{-1}\\cong h_U^{-1}r_U$ and $\\ell:r_{T_B}g^{-1}\\cong g_B^{-1}r_B$. Write $p_g:r_BRg_*\\cong Rg_{B*}r_{T_B}$ and $p_h:r_URh_*\\cong Rh_{U*}r_{Y_U}$ for the derived slice comparisons, with constant coefficient ring $\\mathbf Z$. Thus $C_L^D=f_U^{-1}(p_{g,K})\\circ\\alpha_{f,Rg_*K}$ and $C_R^D=Rh_{U*}(\\alpha_{e,K})\\circ p_{h,e^{-1}K}$.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-ringed-derived-slice-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6G, lemma-restrict-direct-image-open; etale-cohomology.tex Tag 0EZR, lemma-base-change-local, displayed local identifications"
+   }
+  },
+  {
+   "text": "Let $\\theta:h^{-1}f^{-1}\\cong e^{-1}g^{-1}$ and $\\theta_U:h_U^{-1}f_U^{-1}\\cong e_U^{-1}g_B^{-1}$ be the square comparisons. Their compatibility with the four inverse-image comparisons is the equation, for $N\\in D(\\operatorname{Ab}(S_{\\Et}))$,\n$$e_U^{-1}(\\ell_N)\\circ\\alpha_{e,g^{-1}N}\\circ r_{Y_U}(\\theta_N)=\\theta_{U,r_BN}\\circ h_U^{-1}(\\alpha_{f,N})\\circ\\kappa_{f^{-1}N}.$$\nHere is why it is the canonical, rather than an arbitrary, square comparison: the direct-image composition identifications are induced by the projections of iterated fibre products and satisfy the associativity equation of [lem-weil-pbc-direct-image-composition-coherence]. Their unit-compatible left-adjoint comparisons are those of [lem-weil-pbc-inverse-image-composition]; applying [lem-trf-adjoint-composition-coherence] gives the displayed rebracketing equation at the sheaf level, with etale inverse image identified with restriction. The underlying composite scheme map in every path is $fa h_U=bf_Uh_U=bg_Be_U=ged$. Apply that equation termwise to a complex. Exactness of inverse images and restriction, together with cohomology comparison, shows that the termwise functors preserve quasi-isomorphisms; clause (2) of [lem-weil-pbc-localization-universal-property] preserves composition when descending the equation to $D$. This proves the displayed equation for arbitrary unbounded $N$.",
+   "uses": [
+    "lem-weil-pbc-direct-image-composition-coherence",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-trf-adjoint-composition-coherence",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-site-restriction-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, inverse-image square identification; inverse-image coherence and localization descent made explicit"
+   }
+  },
+  {
+   "text": "The counit compatibility in [lem-weil-pbc-ringed-derived-slice-localization], applied to $g$ localized at $B$, is the typed identity\n$$r_{T_B}(\\varepsilon_{g,K})=\\varepsilon_{g_B,K_B}\\circ g_B^{-1}(p_{g,K})\\circ\\ell_{Rg_*K}:r_{T_B}g^{-1}Rg_*K\\longrightarrow K_B.$$\nIt applies with no boundedness hypothesis: that node is stated for every object of the unbounded derived category. The ringed-site module functors here are the abelian-sheaf functors because the ring and its pullbacks are the constant ring $\\mathbf Z$.",
+   "uses": [
+    "lem-weil-pbc-ringed-derived-slice-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6G, lemma-restrict-direct-image-open, with the canonical adjunction of Tag 07A7, remark-base-change"
+   }
+  },
+  {
+   "text": "Put $A=f^{-1}Rg_*K$, $M=e^{-1}K$, and $t_K=e^{-1}(\\varepsilon_{g,K})\\circ\\theta_{Rg_*K}:h^{-1}A\\to M$. Define $t_{U,K_B}$ by the same formula for the local square. Step 2 at $N=Rg_*K$, followed by step 3, gives\n$$\\alpha_{e,K}\\circ r_{Y_U}(t_K)=t_{U,K_B}\\circ h_U^{-1}(C_L^D)\\circ\\kappa_A.$$\nIndeed naturality of $\\alpha_e$ first rewrites the left side as $e_U^{-1}(r_{T_B}\\varepsilon_{g,K})\\circ\\alpha_{e,g^{-1}Rg_*K}\\circ r_{Y_U}(\\theta_{Rg_*K})$. Substitute step 3 and then step 2. Naturality of $\\theta_U$ for $p_{g,K}:r_BRg_*K\\to Rg_{B*}K_B$ moves $g_B^{-1}(p_{g,K})$ across $\\theta_U$, leaving $h_U^{-1}(f_U^{-1}(p_{g,K})\\circ\\alpha_{f,Rg_*K})=h_U^{-1}(C_L^D)$.",
+   "uses": [
+    "sbc-def-base-change-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, counit transpose formula, with the substitutions of steps 2 and 3"
+   }
+  },
+  {
+   "text": "Use the derived slice counit compatibility for $h$ localized at $U$:\n$$\\varepsilon_{h_U,r_{Y_U}M}\\circ h_U^{-1}(p_{h,M})\\circ\\kappa_{Rh_*M}=r_{Y_U}(\\varepsilon_{h,M}).$$\nFor any arrow $v:A\\to Rh_*M$ the transpose of $C_R^D\\circ r_U(v)$ under $h_U^{-1}\\dashv Rh_{U*}$ is therefore\n$$\\alpha_{e,K}\\circ r_{Y_U}(\\varepsilon_{h,M}\\circ h^{-1}(v))\\circ\\kappa_A^{-1}.$$\nTo verify this formula, the definition of transpose first gives $\\varepsilon_{h_U,M_U}\\circ h_U^{-1}(Rh_{U*}(\\alpha_{e,K})\\circ p_{h,M}\\circ r_U(v))$, where $M_U=e_U^{-1}K_B$. Naturality of $\\varepsilon_{h_U}$ moves $\\alpha_{e,K}$ to the front; the displayed counit identity replaces the next two factors, and naturality of $\\kappa$ moves $v$ inside $r_{Y_U}h^{-1}$. This is precisely the asserted expression.",
+   "uses": [
+    "lem-weil-pbc-ringed-derived-slice-localization",
+    "sbc-def-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6G, lemma-restrict-direct-image-open; Tag 07A7, remark-base-change, derived adjunctions"
+   }
+  },
+  {
+   "text": "Take $v=\\beta_K$. By the defining transpose formula in [sbc-def-base-change-map], $\\varepsilon_{h,M}\\circ h^{-1}(\\beta_K)=t_K$. Thus step 5 and step 4 identify the transpose of $C_R^D\\circ r_U(\\beta_K)$ with $t_{U,K_B}\\circ h_U^{-1}(C_L^D)$. This is also the transpose of $\\beta_{U,K_B}\\circ C_L^D$, by the local defining formula and naturality of the counit. The hom correspondence of the stipulated derived adjunction is a bijection, so the two arrows are equal. Every comparison used is natural in $K$, and $\\beta$ is a natural transformation by its mate definition; hence this is an equality natural in $K$.",
+   "uses": [
+    "sbc-def-base-change-map",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, equality tested after the adjunction bijection; Tag 0EZR, derived locality"
+   }
+  },
+  {
+   "text": "Apply $H^q$ to the equality in step 6, for any $q\\in\\mathbf Z$. Restriction to $U$ is exact by [lem-weil-pbc-site-restriction-exact]. Consequently the natural isomorphism of [lem-weil-pbc-exact-functor-complex-cohomology] identifies $H^q(r_U(-))$ with $r_UH^q(-)$; this applies to derived arrows as well, since the termwise natural comparison descends along $Q$ by [lem-weil-pbc-localization-universal-property], clause (2). Its naturality identifies the restricted arrow, rather than only its source and target objects. Thus\n$$H^q(C_R^D)\\circ r_UH^q(\\beta_K)=H^q(\\beta_{U,K_B})\\circ H^q(C_L^D)$$\nunder those comparisons. No positivity of $q$, boundedness of $K$, or qcqs assumption on a scheme morphism was used.",
+   "uses": [
+    "lem-weil-pbc-site-restriction-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZR, lemma-base-change-local (2),(3); homology.tex Tag 010N, lemma-exact-functor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-ringed-derived-slice-localization",
+  "lem-weil-pbc-direct-image-composition-coherence",
+  "lem-trf-adjoint-composition-coherence",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-localization-universal-property",
+  "sbc-def-base-change-map",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A7 (remark-base-change) and 0D6G (lemma-restrict-direct-image-open), filling the arrow-compatibility calculation implicit in etale-cohomology.tex Tag 0EZR (lemma-base-change-local)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,6 +187,48 @@
    "results": "12 hits in CategoryTheory/Adjunction: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean; none states the specified geometric arrow-localization identity.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|localiz|counit",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Precoverage.lean; Mathlib/CategoryTheory/Sites/Precoverage.lean; Mathlib/CategoryTheory/Sites/Precoverage.lean; Mathlib/CategoryTheory/Sites/Precoverage.lean; Mathlib/CategoryTheory/Sites/Precoverage.lean; Mathlib/CategoryTheory/Sites/Point/Monoidal.lean; read the returned hits: none states the complete unbounded geometric slice-localization arrow identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived Beck Chevalley map for sheaves restricts to the base change map on localized sites",
+   "results": "CategoryTheory.Functor.sheafPushforwardContinuous; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback; CategoryTheory.GrothendieckTopology.overPullback; CategoryTheory.GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage; CategoryTheory.Sheaf.ΓRes; CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; CategoryTheory.GrothendieckTopology.overMapPullback; CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility; read the returned hits: none states the complete unbounded geometric slice-localization arrow identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\", \"comp\"",
+   "results": "CategoryTheory.Adjunction.comp_counit_app; CategoryTheory.Adjunction.comp_counit_app_assoc; CategoryTheory.Adjunction.comp_counit; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc; CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f; read the returned hits: none states the complete unbounded geometric slice-localization arrow identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived base change morphism commutes with restriction to etale slice sites under the canonical localization comparisons",
+   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; RingHom.Etale.isStableUnderBaseChange; AlgebraicGeometry.Scheme.Etale.forget; Algebra.FormallyEtale.localization_map; KaehlerDifferential.isBaseChange_of_formallyEtale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.opensDiagram_map; read the returned hits: none states the complete unbounded geometric slice-localization arrow identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|beck|mate|overPullback",
+   "results": "0 hits; read the returned hits: none states the complete unbounded geometric slice-localization arrow identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Beck Chevalley mate is compatible with localization of sites and restriction functors on unbounded derived categories",
+   "results": "CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Adjunction.derivedη_fac_app_assoc; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Adjunction.derived; CategoryTheory.Functor.mapDerivedCategoryFactors; read the returned hits: none states the complete unbounded geometric slice-localization arrow identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "created": {
@@ -86,7 +239,7 @@
  },
  "id": "lem-sbc-derived-base-change-arrow-localization",
  "title": "Derived base-change arrow under etale localization",
- "statement": "Let $f:X\\to S$ and $g:T\\to S$ be morphisms of schemes, with the Cartesian square $Y=X\\times_ST$, $h:Y\\to X$, $e:Y\\to T$ [sbc-def-base-change-square]. Let $a:U\\to X$ and $b:B\\to S$ be etale morphisms [def-weil-etale-morphism], and let $f_U:U\\to B$ satisfy $fa=bf_U$. Put $T_B=B\\times_ST$, with projections $g_B:T_B\\to B$ and $c:T_B\\to T$, and $Y_U=U\\times_XY$, with projections $h_U:Y_U\\to U$ and $d:Y_U\\to Y$. The canonical identification $Y_U\\cong U\\times_BT_B$ defines $e_U:Y_U\\to T_B$, so $ce_U=ed$. Work on the small etale sites [def-weil-pbc-etale-site] in the universe of [def-weil-size-convention], and write $r_Z$ for restriction to an etale object $Z$. Let $K\\in D(\\operatorname{Ab}(T_{\\Et}))$ be an arbitrary unbounded complex of abelian sheaves [def-weil-pbc-abelian-etale-sheaves], [def-weil-abstract-derived-category], and put $K_B=r_{T_B}K$. Use the exact etale inverse images [prop-weil-pbc-inverse-image-exact] and the unbounded derived direct images and canonical derived adjunctions of [sbc-def-base-change-map], specialized to constant coefficients $\\mathbf Z$ (abelian sheaves). Write $\\beta_K:f^{-1}Rg_*K\\to Rh_*e^{-1}K$ for its counit-transpose base-change morphism, and $\\beta_{U,K_B}$ for the corresponding morphism of $(f_U,g_B,h_U,e_U)$. Under the canonical comparisons\n$$C_L^D:r_Uf^{-1}Rg_*K\\xrightarrow{\\sim}f_U^{-1}r_BRg_*K\\xrightarrow{\\sim}f_U^{-1}Rg_{B*}K_B,$$\n$$C_R^D:r_URh_*e^{-1}K\\xrightarrow{\\sim}Rh_{U*}r_{Y_U}e^{-1}K\\xrightarrow{\\sim}Rh_{U*}e_U^{-1}K_B,$$\ninduced by termwise inverse-image composition and the derived slice-localization comparisons of [lem-weil-pbc-ringed-derived-slice-localization], one has\n$$C_R^D\\circ r_U(\\beta_K)=\\beta_{U,K_B}\\circ C_L^D.$$\nThis identity is natural in $K$. For every integer $q$, the exact-restriction/cohomology comparisons identify $r_UH^q(\\beta_K)$ with $H^q(\\beta_{U,K_B})$ under $H^q(C_L^D)$ and $H^q(C_R^D)$ [lem-weil-pbc-site-restriction-exact], [lem-weil-pbc-exact-functor-complex-cohomology].",
+ "statement": "Let $f:X\\to S$ and $g:T\\to S$ be morphisms of schemes, with the Cartesian square $Y=X\\times_ST$, $h:Y\\to X$, $e:Y\\to T$ [sbc-def-base-change-square]. Let $a:U\\to X$ and $b:B\\to S$ be etale morphisms [def-weil-etale-morphism], and let $f_U:U\\to B$ satisfy $fa=bf_U$. Put $T_B=B\\times_ST$, with projections $g_B:T_B\\to B$ and $c:T_B\\to T$, and $Y_U=U\\times_XY$, with projections $h_U:Y_U\\to U$ and $d:Y_U\\to Y$. The canonical identification $Y_U\\cong U\\times_BT_B$ defines $e_U:Y_U\\to T_B$, so $ce_U=ed$. Work on the small etale sites [def-weil-pbc-etale-site] in the universe of [def-weil-size-convention], and write $r_Z$ for restriction to an etale object $Z$. Let $K\\in D(\\operatorname{Ab}(T_{\\Et}))$ be an arbitrary unbounded complex of abelian sheaves [def-weil-pbc-abelian-etale-sheaves], [def-weil-abstract-derived-category], and put $K_B=r_{T_B}K$. Use the exact etale inverse images [prop-weil-pbc-inverse-image-exact] and the unbounded derived direct images and canonical derived adjunctions of [sbc-def-base-change-map], specialized to constant coefficients $\\mathbf Z$ (abelian sheaves). Write $\\beta_K:f^{-1}Rg_*K\\to Rh_*e^{-1}K$ for its counit-transpose base-change morphism, and $\\beta_{U,K_B}$ for the corresponding morphism of $(f_U,g_B,h_U,e_U)$. Under the canonical comparisons\n$$C_L^D:r_Uf^{-1}Rg_*K\\xrightarrow{\\sim}f_U^{-1}r_BRg_*K\\xrightarrow{\\sim}f_U^{-1}Rg_{B*}K_B,$$\n$$C_R^D:r_URh_*e^{-1}K\\xrightarrow{\\sim}Rh_{U*}r_{Y_U}e^{-1}K\\xrightarrow{\\sim}Rh_{U*}e_U^{-1}K_B,$$\ninduced by termwise inverse-image composition [lem-weil-pbc-inverse-image-composition], with etale inverse image identified with restriction [lem-weil-pbc-etale-inverse-image-restriction], and the derived slice-localization comparisons of [lem-weil-pbc-ringed-derived-slice-localization], one has\n$$C_R^D\\circ r_U(\\beta_K)=\\beta_{U,K_B}\\circ C_L^D.$$\nThis identity is natural in $K$. For every integer $q$, the exact-restriction/cohomology comparisons identify $r_UH^q(\\beta_K)$ with $H^q(\\beta_{U,K_B})$ under $H^q(C_L^D)$ and $H^q(C_R^D)$ [lem-weil-pbc-site-restriction-exact], [lem-weil-pbc-exact-functor-complex-cohomology].",
  "stmt_deps": [
   "sbc-def-base-change-square",
   "def-weil-pbc-etale-site",
@@ -97,10 +250,10 @@
   "lem-weil-pbc-ringed-derived-slice-localization",
   "lem-weil-pbc-site-restriction-exact",
   "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-site-morphism-composition",
   "lem-weil-pbc-etale-inverse-image-restriction",
   "def-weil-etale-morphism",
-  "def-weil-pbc-abelian-etale-sheaves"
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-inverse-image-composition"
  ],
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
@@ -115,5 +268,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sbc-derived-base-change-arrow-localization",
+  "worker": "stage1",
+  "summary": "Expanded the unbounded derived arrow identity into the inverse-image coherence equation, localized derived counit equations for g and h, and an explicit transpose comparison. Every auxiliary statement already has a DAG node; no new nodes. Preserved every hypothesis and the arbitrary unbounded K and all-integer cohomology clauses. Audited the bounded-below Lean locality candidates, which do not attach to this statement. Replaced the less precise composition dependency by the abelian inverse-image composition node actually used.",
+  "blueprint": "sbc-lem-etale-locality, proof second paragraph: locality for derived direct images and degree-q maps; sk-def-bc compatibility with etale localization. The current main-20261015 ancestor states clauses (2),(3) without an explicit proof; the calculation fills the compatibility implicit in Stacks 0EZR.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Identifies etale inverse image with actual restriction, required to apply the generic slice comparison to the given geometric square."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Generic unit-normalized inverse-image comparison fixes the composition maps used in the local square; the unit defines the base-change map using this generic construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-derived-slice-localization",
+    "why": "Generic unbounded slice comparisons, including unit/counit compatibility, supply the localization input explicitly required by Stacks 0EZR; sk-def-bc has no separate theorem proving them."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-ringed-derived-slice-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NO-b2ba06397",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-b2ba06397 (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps, every cited statement, the parent sbc-lem-etale-locality, unit sk-def-bc, and Stacks 0EZR (etale-cohomology.tex l.16307-16370), 0D6G (sites-cohomology.tex l.4374) and 07A7. The statement keeps full generality: unbounded K in D(T_et) with Z coefficients, arbitrary f_U with fa=bf_U, every integer q, and no added qcqs, torsion or boundedness assumption. Its base-change arrow is exactly the one of sbc-def-base-change-map (including the blueprint_update) at Lambda=Z, which is the Stacks map f^{-1}Rg_*K->Rh_*e^{-1}K. Step 1 checked: the slice node applies to g localized at B (giving T_B) and to h localized at U (giving Y_U), and Y_U = U x_S T = U x_B T_B. Step 2 checked: it compares six length-3 paths from Y_U to S, which reduce to each other by associativity of the unit-normalized comparisons; its descent to D uses clause (2) of the localization universal property. Steps 4, 5 and 6 recomputed by hand: the restricted global arrow and the local arrow have the same transpose t_U o h_U^{-1}(C_L^D), so they are equal by the adjunction bijection, and step 7 passes to H^q for every q. One identification is implicit in step 3, the slice node's left comparison with the inverse-image comparison l; it is forced by unit/counit compatibility, so not a fault. The underived arrow-localization node and the bounded-below exchange nodes are not duplicates. The item is a strict sub-lemma cited by step 6 of its parent, not a restatement. The dependency closure has no cycle. Batch-5 check: lem-trf-adjoint-composition-coherence is a Mathlib leaf of pure category theory (CategoryTheory.Adjunction.leftAdjointCompIso_assoc, CompositionIso.lean:170-184, read). It has no proof deps, and it is the only sec-trace-formula or sec-poincare-duality node in the item's closure. Neither assumption leaf gives a coherence law for adjunctions, so it is genuinely outside both assumed statements and the flag is no reason to return. I accept the three declared tool uses (etale inverse image = restriction, inverse-image composition, ringed derived slice localization). The other off-unit citations are generic, closed in slopmaster2, or Mathlib leaves; under the 2026-10-16 rule they are recorded, not refused. No fixes written."
  }
 }

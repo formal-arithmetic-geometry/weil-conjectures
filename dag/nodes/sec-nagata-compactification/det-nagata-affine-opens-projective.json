@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-nagata-affine-opens-projective",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Projective compactification of an affine piece",
@@ -15,44 +15,182 @@
  "stmt_deps": [
   "def-nagata-quasi-affine-immersion-affine-space",
   "def-nagata-projective-space-base-change",
-  "def-nagata-affine-compactification"
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-nagata-relative-affine-space",
+  "def-nagata-scheme-theoretic-image",
+  "def-pc-projective-morphism",
+  "def-nagata-compactification"
  ],
  "proof": [
   {
-   "text": "*Step 1: a quasi-compact immersion.* The standard chart\n$\\mathbf A^n_S\\hookrightarrow\\mathbf P^n_S$ is an open immersion\n([lemma-nagata-relative-affine-space-open-immersion]), so the composite\n$\\kappa:U\\to\\mathbf P^n_S$ is an immersion. Since $U$ is of finite type over\nthe Noetherian scheme $S$, $U$ is Noetherian, so every morphism out of $U$ is\nquasi-compact; in particular $\\kappa$ is quasi-compact. The scheme\n$\\mathbf P^n_S$ is separated over the quasi-separated scheme $S$, hence\nquasi-separated.",
+   "text": "Write $f:U\\to S$ for the given morphism and $P=\\mathbf P^n_S=\\mathbf P(\\{0,\\ldots,n\\};S)$. By [lemma-nagata-relative-affine-space-open-immersion], the standard chart $a:\\mathbf A^n_S\\hookrightarrow P$ is an open immersion over $S$. Set $\\kappa=a\\circ\\iota$. Thus $\\pi\\circ\\kappa=f$, where $\\pi:P\\to S$ is the structure morphism. The homogeneous-coordinate index set has $n+1$ elements, including when $n=0$.",
    "uses": [
     "lemma-nagata-relative-affine-space-open-immersion"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-affine-cover/det-nagata-affine-opens-projective.md",
+    "place": "standard-chart composite in the statement; current standard-chart lemma, extra homogeneous coordinate"
+   }
   },
   {
-   "text": "*Step 2: the closure.* By [lemma-nagata-immersion-open-in-scheme-image] the\nscheme-theoretic image $\\overline U$ of $\\kappa$ is a closed subscheme of\n$\\mathbf P^n_S$, $\\kappa$ factors through a quasi-compact open immersion\n$U\\to\\overline U$, and this open immersion is scheme-theoretically dense.",
+   "text": "By the definition of immersion [def-weil-closed-immersion], factor $\\iota$ as a closed immersion $U\\hookrightarrow V$ followed by an open immersion $V\\hookrightarrow\\mathbf A^n_S$. The composite $V\\hookrightarrow\\mathbf A^n_S\\xrightarrow{a}P$ identifies $V$ with an open subscheme of the open chart of $P$: an open subset of an open subset is open and restriction of the structure sheaf is transitive [def-weil-open-immersion]. Therefore $\\kappa$ is a closed immersion followed by an open immersion, hence an immersion.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IO (definition-immersion), and elementary open-immersion case of Tag 02V0 (lemma-composition-immersion)"
+   }
+  },
+  {
+   "text": "The structure morphism $\\pi$ is proper by [lemma-nagata-projective-space-base-change-proper], applied to the finite homogeneous-coordinate set $\\{0,\\ldots,n\\}$. In particular it is separated [def-weil-proper-morphism]. Apply [lemma-nagata-finite-type-to-separated-target] to $U\\xrightarrow{\\kappa}P\\xrightarrow{\\pi}S$: the composite is $f$, of finite type by hypothesis, and the second morphism is separated. Hence $\\kappa$ is of finite type, and therefore quasi-compact [def-weil-finite-type-morphism]. This proves precisely the hypothesis needed for the image lemma without any assertion about arbitrary morphisms out of $U$.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lemma-nagata-finite-type-to-separated-target",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/lemma-nagata-finite-type-to-separated-target.md",
+    "place": "statement and graph-factorization proof; proper projective-space projection from the current blueprint"
+   }
+  },
+  {
+   "text": "Apply [lemma-nagata-scheme-image-ideal-qc] to $\\kappa$. Its image $\\overline U=\\operatorname{SIm}(\\kappa)$ is a closed subscheme of $P$, with closed immersion $c:\\overline U\\hookrightarrow P$ and canonical factor $j:U\\to\\overline U$. The canonical factorization [def-nagata-scheme-image-factor] satisfies $c\\circ j=\\kappa$. All these objects are those of the statement, rather than a reduced topological closure.",
+   "uses": [
+    "lemma-nagata-scheme-image-ideal-qc",
+    "def-nagata-scheme-image-factor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01R7 (definition-scheme-theoretic-image), 01R8 (lemma-quasi-compact-scheme-theoretic-image); current blueprint image-interface and canonical-factor nodes"
+   }
+  },
+  {
+   "text": "Now $\\kappa$ is both an immersion (step 2) and quasi-compact (step 3). Thus [lemma-nagata-immersion-open-in-scheme-image] applies to this very morphism and says that $j:U\\to\\overline U$ is a quasi-compact open immersion with scheme-theoretically dense image (also topologically dense). No reducedness hypothesis is used.",
    "uses": [
     "lemma-nagata-immersion-open-in-scheme-image"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RG (lemma-quasi-compact-immersion), quasi-compact alternative; quasi-compactness of the canonical factor supplied by the cited node"
+   }
   },
   {
-   "text": "*Step 3: projectivity.* $\\overline U\\to S$ is the composite of the closed\nimmersion $\\overline U\\hookrightarrow\\mathbf P^n_S$ with the structure map,\nhence projective. The structure map is proper\n([lemma-nagata-projective-space-base-change-proper]) and closed immersions\nare proper, so $\\overline U\\to S$ is proper. The composite\n$U\\to\\overline U\\to S$ equals $U\\to\\mathbf A^n_S\\to S$, i.e. the given\nmorphism, since $\\iota$ is an $S$-morphism.",
+   "text": "Set $p=\\pi\\circ c:\\overline U\\to S$. The inclusion $c$ is a closed immersion and $\\pi$ is proper by step 3. Clause (b) of [lem-weil-pbc-closed-immersion-proper] therefore proves that $p$ is proper. In particular $p$ is of finite type [def-weil-proper-morphism], hence quasi-compact [def-weil-finite-type-morphism].",
    "uses": [
-    "lemma-nagata-projective-space-base-change-proper"
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W5 (lemma-closed-immersion-proper) and 01W3 (lemma-composition-proper)"
+   }
+  },
+  {
+   "text": "The closed immersion $c:\\overline U\\hookrightarrow\\mathbf P^n_S$ and the equality $p=\\pi\\circ c$ give an H-projective presentation of $p$. Together with its quasi-compactness from step 6, these are exactly the two requirements in [def-pc-projective-morphism]. Thus $p$ is projective in the blueprint convention.",
+   "uses": [
+    "def-pc-projective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W8 (definition-projective), H-projective clause; blueprint convention also requires quasi-compactness"
+   }
+  },
+  {
+   "text": "Finally $p\\circ j=\\pi\\circ c\\circ j=\\pi\\circ\\kappa=f$. Step 5 gives the quasi-compact open immersion and schematic density; step 6 gives properness and step 7 gives projectivity. The factorization is therefore a compactification in the sense of [def-nagata-compactification], with the additional quasi-compactness, density and projectivity claimed in the statement.",
+   "uses": [
+    "def-nagata-compactification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-affine-cover/det-nagata-affine-opens-projective.md",
+    "place": "concluding dense projective compactification clause"
+   }
   }
  ],
  "proof_deps": [
   "lemma-nagata-relative-affine-space-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-proper-morphism",
+  "lemma-nagata-finite-type-to-separated-target",
+  "def-weil-finite-type-morphism",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "def-nagata-scheme-image-factor",
   "lemma-nagata-immersion-open-in-scheme-image",
-  "lemma-nagata-projective-space-base-change-proper"
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-pc-projective-morphism",
+  "def-nagata-compactification"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-affine-cover/det-nagata-affine-opens-projective.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-affine-cover/det-nagata-affine-opens-projective.proof.md",
+  "place": "proof, Steps 1-3 (quasi-compact immersion; closure; projectivity), with the quasi-compactness of Step 1 obtained from the finite-type cancellation lemma instead of the uncited Noetherian-source claim, and the closed-immersion properness and projectivity made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProjective, AlgebraicGeometry.IsImmersion",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.IsProjective'",
+   "date": "2026-10-17",
+   "verdict": "invalid identifier; no match established by this query"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeTheoreticImage|IsProjective",
+   "results": "No hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scheme theoretic image of an immersion into projective space is a projective compactification",
+   "results": "AlgebraicGeometry.Scheme.Hom.isLocallyClosed_range; AlgebraicGeometry.IsImmersion.isLocallyClosed_range; AlgebraicGeometry.Scheme.Hom.image; AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion; AlgebraicGeometry.Scheme.Hom.imageι; AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion; AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage; AlgebraicGeometry.Scheme.IsQuasiAffine.mk",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item; image-interface hits cover only part"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An immersion of an affine finite type scheme into projective space has scheme theoretic image giving a projective compactification with schematically dense open immersion",
+   "results": "AlgebraicGeometry.Proj.awayι; AlgebraicGeometry.Proj.fromOfGlobalSections; AlgebraicGeometry.Proj.instIsOpenImmersionAwayι; AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion; AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion; AlgebraicGeometry.Proj; AlgebraicGeometry.Proj.awayι_toSpecZero_assoc; AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item; image-interface hits cover only part"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image factorization of a quasi compact immersion is a schematically dominant open immersion into its closed scheme theoretic image",
+   "results": "AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact; AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact; AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact; AlgebraicGeometry.Scheme.instQuasiCompactToImage; AlgebraicGeometry.IsImmersion.instToImage; AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion; AlgebraicGeometry.instIsDominantιCoborderRange; AlgebraicGeometry.Scheme.Hom.toImage",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item; image-interface hits cover only part"
+  },
+  {
+   "tool": "grep",
+   "query": "image|projective",
+   "results": "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean; directory Mathlib/AlgebraicGeometry/IdealSheaf",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item; image-interface hits cover only part"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -83,5 +221,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "det-nagata-affine-opens-projective",
+  "worker": "stage1",
+  "summary": "Kept the statement. Expanded the chart, immersion, finite-type cancellation, image factorization, density, properness, projectivity and compactification checks into eight short steps. Reused existing DAG statements throughout; created no nodes. Checked current blueprint updates and Mathlib image-interface hits; no full attachment exists.",
+  "blueprint": "Realizes the current item statement: standard-chart composite (steps 1-2), scheme-theoretic image and dense open immersion (steps 3-5), projective/proper structure map (steps 6-7), compactification equality (step 8). This is the affine-piece closure construction in the sole proof paragraph of sk-lem-nagata-sketch-affine-cover; it does not change the affine-cover unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-da905fcdf",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-da905fcdf (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, all 8 steps, and every cited node's stored statement and blueprint_update. Sources read: main-20261015 det-nagata-affine-opens-projective.md and .proof.md, the unit _section and its proof, the master lemma-nagata-finite-type-to-separated-target with its graph proof, Stacks 01RG (lemma-quasi-compact-immersion) and 01W8 (definition-projective). The statement is unchanged and keeps every hypothesis; no target is weakened. Removing def-nagata-affine-compactification from stmt_deps is correct, since the statement never names it. Step checks: (1) the chart lands in P({0}⊔n;S), the same base-change P that the properness lemma uses. (2) Composing open immersions is elementary. (3) π is proper, hence separated, and the stored statement of the cancellation lemma (finite type over a separated target; true by 01T8 and 01KV) makes κ finite type, hence quasi-compact. (4)-(5) The image-ideal lemma and the factor equality hold, and the open-in-image lemma for a quasi-compact immersion matches 01RG with no reducedness needed. (6) Lemma (b) on composing a closed immersion with a proper map applies. (7) This is the H-projective definition with quasi-compactness. (8) The compactification definition holds in both its stored and updated forms. Route: every cited statement is in the unit itself or the cited closure unit, or is a Mathlib leaf, so no tool_uses are needed. There are no new nodes and no duplicates (the affine-compactification def/prop only give existence). Edge cases n=0, U empty and nonreduced U are fine. Maintenance caveat: lemma-nagata-finite-type-to-separated-target's update and its attached Lean (locallyOfFiniteType_of_comp) give only the locally-finite-type version; applying that update must keep the separated-target finite-type clause this item cites. FIX: proof_origin wrongly said the current source has no proof section. It now cites det-nagata-affine-opens-projective.proof.md Steps 1-3 and notes the one deviation (cancellation lemma instead of the uncited Noetherian-source claim). The corrected item is in fixes/dag/nodes/sec-nagata-compactification/.; 1 file(s) fixed by the reviewer"
  }
 }

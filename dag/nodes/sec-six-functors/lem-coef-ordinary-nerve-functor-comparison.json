@@ -2,7 +2,7 @@
  "id": "lem-coef-ordinary-nerve-functor-comparison",
  "kind": "statement",
  "title": "Ordinary nerve and internal functor simplicial sets, with parameterized evaluation",
- "statement": "Use small ordinary nerves, standard simplices, simplicial products and internal functor simplicial sets of [def-cbc-enhanced-diagrams-cones], in a fixed containing universe. Let $J,I$ be small ordinary categories. The ordinary category $\\operatorname{Fun}_{\\mathrm{Cat}}(J,I)$ has functors as objects and natural transformations as arrows, composed componentwise. Its evaluation functor sends $(F,j)$ to $F(j)$. The map induced by the nerve of evaluation is a natural isomorphism of simplicial sets\n$$\\rho_{J,I}:N(\\operatorname{Fun}_{\\mathrm{Cat}}(J,I))\\xrightarrow{\\cong}\\operatorname{Fun}(N(J),N(I)).$$\nExplicitly, a string $F_0\\Rightarrow\\cdots\\Rightarrow F_r$ corresponds under $\\rho_{J,I}$ to the map $N(J)\\times\\Delta^r\\to N(I)$ obtained by taking the nerve of its evaluation functor $J\\times[r]\\to I$; evaluation on $(j,t)$ is $F_t(j)$, and mixed arrows use the given natural transformations. For every small simplicial set $X$ and simplicial map $f:N(I)\\to X$, postcomposition gives a simplicial map\n$$N(\\operatorname{Fun}_{\\mathrm{Cat}}(J,I))\\longrightarrow\\operatorname{Fun}(N(J),X).$$\nThe image of the displayed string is the entire prism $N(J)\\times\\Delta^r\\to N(I)\\xrightarrow{f}X$, including its faces and degeneracies. These formulas commute with restriction along every ordinary functor $q:J'\\to J$ and every monotone map $\\alpha:[s]\\to[r]$, simultaneously: restriction of the prism is the prism of the restricted string on $J'\\times[s]$. In particular, for $q:[k]\\to J$ the resulting $(k,r)$-parameter prism retains all parameter faces and degeneracies, including composition faces and identity degeneracies. No invertibility of the natural transformations and no quasicategory hypothesis on $X$ is required.",
+ "statement": "Use small ordinary nerves, standard simplices, simplicial products and internal functor simplicial sets of [def-cbc-enhanced-diagrams-cones], in a fixed containing universe. Let $J,I$ be small ordinary categories. The ordinary category $\\operatorname{Fun}_{\\mathrm{Cat}}(J,I)$ has functors as objects and natural transformations as arrows, composed componentwise. Its evaluation functor sends $(F,j)$ to $F(j)$. The map induced by the nerve of evaluation is a natural isomorphism of simplicial sets\n$$\\rho_{J,I}:N(\\operatorname{Fun}_{\\mathrm{Cat}}(J,I))\\xrightarrow{\\cong}\\operatorname{Fun}(N(J),N(I)).$$\nExplicitly, a string $F_0\\Rightarrow\\cdots\\Rightarrow F_r$ corresponds under $\\rho_{J,I}$ to the map $N(J)\\times\\Delta^r\\to N(I)$ obtained by taking the nerve of its evaluation functor $J\\times[r]\\to I$; evaluation on $(j,t)$ is $F_t(j)$, and mixed arrows use the given natural transformations. For every small simplicial set $X$, not necessarily a quasicategory, write $\\operatorname{Fun}(N(J),X)$ for the simplicial set given by the same formula as in [def-cbc-enhanced-diagrams-cones]: its $n$-simplices are the simplicial maps $N(J)\\times\\Delta^n\\to X$, and $\\alpha:[m]\\to[n]$ acts by precomposition with $\\mathrm{id}_{N(J)}\\times\\Delta(\\alpha)$. For every simplicial map $f:N(I)\\to X$, postcomposition gives a simplicial map\n$$N(\\operatorname{Fun}_{\\mathrm{Cat}}(J,I))\\longrightarrow\\operatorname{Fun}(N(J),X).$$\nThe image of the displayed string is the entire prism $N(J)\\times\\Delta^r\\to N(I)\\xrightarrow{f}X$, including its faces and degeneracies. These formulas commute with restriction along every ordinary functor $q:J'\\to J$ and every monotone map $\\alpha:[s]\\to[r]$, simultaneously: restriction of the prism is the prism of the restricted string on $J'\\times[s]$. In particular, for $q:[k]\\to J$ the resulting $(k,r)$-parameter prism retains all parameter faces and degeneracies, including composition faces and identity degeneracies. No invertibility of the natural transformations and no quasicategory hypothesis on $X$ is required.",
  "source": {
   "document": "https://kerodon.net/tag/0062",
   "place": "Kerodon Proposition 1.5.3.3, Tag 0062, statement and degreewise evaluation proof; the explicit parameter/postcomposition formula is its evaluation construction. Read online 2026-10-18; archival copy WANTED. This is a Kerodon tag, not a Stacks tag; no Stacks statement for the full internal-functor comparison was found."
@@ -10,9 +10,65 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each degree r, an r-simplex of the ordinary nerve N(Fun_Cat(J,I)) is a functor [r] → Fun_Cat(J,I). Uncurrying its objects F_t and arrows (the natural transformations between them) gives a functor E : J × [r] → I: E(j,t)=F_t(j), the J-arrows are F_t on morphisms, and the [r]-arrows are the components of the natural transformations. The naturality squares are exactly the commutation relations for mixed arrows, so this is a direct bijection of the two descriptions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0062",
+    "place": "Kerodon Proposition 1.5.3.3, Tag 0062, statement and degreewise evaluation proof; the explicit parameter/postcomposition formula is its evaluation construction. Read online 2026-10-18; archival copy WANTED. This is a Kerodon tag, not a Stacks tag; no Stacks statement for the full internal-functor comparison was found."
+   }
+  },
+  {
+   "text": "By the degreewise definition of the internal functor simplicial set in [def-cbc-enhanced-diagrams-cones], an r-simplex of Fun(N(J),N(I)) is a simplicial map N(J)×Δ^r→N(I). The standard simplex Δ^r is the nerve N([r]): both have m-simplices the monotone maps [m]→[r], with operators by precomposition. A functor [m]→J×[r] is a pair of functors [m]→J and [m]→[r], so N(J)×Δ^r=N(J×[r]) degreewise, compatibly with the operators. By [lem-coef-homotopy-category-nerve-adjunction], for small categories C,D there is the natural adjunction bijection Hom_Cat(τN(C),D)≅Hom_sSet(N(C),N(D)), and the counit ε_C:τN(C)→C is an isomorphism. By naturality of the counit, the map N(E) of a functor E:C→D corresponds under the adjunction to ε_D∘τN(E)=E∘ε_C. Hence E↦N(E) is the composite of the bijection E↦E∘ε_C with the adjunction bijection, and so it is a bijection Hom_Cat(C,D)→Hom_sSet(N(C),N(D)); this is Kerodon Proposition 1.3.3.1 (Tag 002Z), which the proof of Tag 0062 uses. With C=J×[r] and D=I, every r-simplex is N(E) for a unique functor E:J×[r]→I, and this decoding is inverse to the construction in the preceding step. This gives the degree-r bijection underlying ρ_{J,I}.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-homotopy-category-nerve-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0062",
+    "place": "Kerodon Proposition 1.5.3.3 (Tag 0062), proof: bijectivity of the middle map by the special case of Proposition 1.3.3.1 (Tag 002Z), full faithfulness of the nerve; read online."
+   }
+  },
+  {
+   "text": "For a monotone map α:[s]→[r], precomposition on the nerve side replaces E by E∘(id_J×α), and precomposition on the internal-hom side restricts the prism along id_{N(J)}×Δ(α). These are the same operation under the two descriptions. Thus the degreewise bijections assemble to a simplicial isomorphism. The evaluation functor J×[r]→I is exactly E, so the displayed formula sends F_0⇒⋯⇒F_r to the entire prism, with mixed arrows given by the components of the natural transformations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0062",
+    "place": "Kerodon Proposition 1.5.3.3, Tag 0062, statement and degreewise evaluation proof; the explicit parameter/postcomposition formula is its evaluation construction. Read online 2026-10-18; archival copy WANTED. This is a Kerodon tag, not a Stacks tag; no Stacks statement for the full internal-functor comparison was found."
+   }
+  },
+  {
+   "text": "Postcomposition with any simplicial map f:N(I)→X sends the prism to N(J)×Δ^r→N(I)→X and therefore defines the asserted simplicial map into Fun(N(J),X). For an ordinary functor q:J'→J, restriction is precomposition by q×id_[r] on the category side and by N(q) on the simplicial side; the square commutes degreewise. These operations commute simultaneously with α, so all parameter faces and degeneracies, including composition faces and identity degeneracies, are retained.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0062",
+    "place": "Kerodon Proposition 1.5.3.3, Tag 0062, statement and degreewise evaluation proof; the explicit parameter/postcomposition formula is its evaluation construction. Read online 2026-10-18; archival copy WANTED. This is a Kerodon tag, not a Stacks tag; no Stacks statement for the full internal-functor comparison was found."
+   }
+  },
+  {
+   "text": "The construction only uses ordinary functors, naturality equations, and the simplicial identities. It never asks a natural transformation to be invertible and never uses horn filling in X; it also works for empty J or I and for every small X. Therefore ρ is a natural isomorphism with all the stated restriction and postcomposition compatibilities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0062",
+    "place": "Kerodon Proposition 1.5.3.3, Tag 0062, statement and degreewise evaluation proof; the explicit parameter/postcomposition formula is its evaluation construction. Read online 2026-10-18; archival copy WANTED. This is a Kerodon tag, not a Stacks tag; no Stacks statement for the full internal-functor comparison was found."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-homotopy-category-nerve-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://kerodon.net/tag/0062",
+  "place": "Proposition 1.5.3.3, degreewise evaluation proof and its explicit prism construction (read online 2026-10-18; archival copy WANTED)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -86,7 +142,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-augmented-vertex-cone-recognition",
@@ -112,5 +168,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-ordinary-nerve-functor-comparison",
+  "worker": "stage1",
+  "summary": "No finished declaration was found in the project Lean sources. I split the assertion directly into degreewise construction, inverse decoding, simplicial-operator compatibility, postcomposition and restriction naturality, and edge-case checks. The proof is self-contained from the definitions supplied by def-cbc-enhanced-diagrams-cones and the degreewise evaluation argument of Kerodon Tag 0062; no child node is needed.",
+  "blueprint": "The steps realize the ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2, specifically the derived coefficient adjunction and coherent nerve/functor-category comparison used for parameterized coordinate triangles (the former step 4 of lem-coef-augmented-vertex-cone-recognition).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-10a725129",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-10a725129 (reviewer sub-agent of L); spot-checked: Read the item, its definition node def-cbc-enhanced-diagrams-cones, the citing steps 4-5 of lem-coef-augmented-vertex-cone-recognition, the unit and chapter records, and Kerodon Prop 1.5.3.3 (Tag 0062), statement and proof, online. The statement agrees with the source: the nerve of evaluation gives an isomorphism N(Fun(J,I)) -> Fun(NJ,NI), for small categories with no further hypotheses. The postcomposition, restriction and parameter clauses are elementary additions. Tested on J empty (both sides Delta^0), I empty with J nonempty (both empty), J=[0], and J=I=[1] (3 vertices and 6 edges on both sides). Steps 1, 3, 4 and 5 are elementary and correct; step 3 also checks that the adjoint of the nerve of evaluation is N(E). No new nodes. No duplicate in dag/nodes and no blueprint same_as; the nearby ordinary-nerve-discrete-hom-comparison is a different statement. No Mathlib match: NerveAdjunction.lean has only the adjunction. Not a target node, and no route issue. Fixes: (1) C1/D3: the source proof uses Kerodon 002Z (the nerve is fully faithful), which the existing Mathlib leaf lem-coef-homotopy-category-nerve-adjunction states via the adjunction with an isomorphic counit. Step 2 proved it by a loose hand argument in which identities came from 2-simplices. It now cites the leaf and def-cbc-enhanced-diagrams-cones, derives the bijection E -> N(E) from counit naturality, and is marked elementary=false; proof_deps updated, no cycle. (2) B3: the definition node defines Fun(K,C) only for a quasicategory C, while the item uses Fun(N(J),X) for any small X. One sentence in the statement now gives the same degreewise formula for any X; the statement is neither weaker nor stronger. No tool_uses. WANTED: archival copies of Kerodon 0062 and 002Z.; 1 file(s) fixed by the reviewer"
  }
 }
