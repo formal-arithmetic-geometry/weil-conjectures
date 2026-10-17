@@ -11,9 +11,83 @@
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each of the functors $w=v,u,uv$, the hypothesis that precomposition preserves sheaves gives the direct-image functor $w^s$ on the indicated sheaf category. The defining presheaf formula gives $(uv)^s\\mathcal H=\\mathcal H\\circ u\\circ v=v^s(u^s\\mathcal H)$, including the same equality on morphisms. The adjunction-and-sheafification construction of [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] therefore supplies $w_s\\dashv w^s$ and identifies $w_s\\mathcal F$ with $(w_p\\mathcal F)^\\#$, with the colimit coprojections followed by the sheafification unit as the maps $\\iota^w_{S,\\alpha}$.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VE and 00WX, construction of the presheaf left adjoint and its sheafification; Tag 03CB proof, equality $(u\\circ v)^s=v^su^s$"
+   }
+  },
+  {
+   "text": "Compose the adjunctions $u_s\\dashv u^s$ and $v_s\\dashv v^s$ using [def-weil-pbc-composite-adjunction]. Its unit at $\\mathcal F$ is $v^s(\\eta^u_{v_s\\mathcal F})\\circ\\eta^v_{\\mathcal F}$. Since $(uv)^s=v^su^s$ by step 1, this is an adjunction for the same right adjoint as $(uv)_s\\dashv(uv)^s$. Apply [lem-weil-pbc-conjugate-iso-unit-equation] with the identity right-adjoint isomorphism. It yields a unique natural isomorphism $\\kappa:u_sv_s\\xrightarrow{\\sim}(uv)_s$ satisfying $v^su^s(\\kappa_{\\mathcal F})\\circ v^s(\\eta^u_{v_s\\mathcal F})\\circ\\eta^v_{\\mathcal F}=\\eta^{uv}_{\\mathcal F}$.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CB, lemma-composition-morphisms-sites; uniqueness of the compatible left-adjoint comparison, with Categories Tag 0B65"
+   }
+  },
+  {
+   "text": "The unit equation from step 2 first gives the formula on the canonical\ncolimit generator: at $W\\in\\mathcal C$ and $x\\in\\mathcal F(W)$,\n$\\eta^v_{\\mathcal F}$ uses the pair $(W,\\mathrm{id}_{v(W)})$, and\n$v^s(\\eta^u)$ then uses $(v(W),\\mathrm{id}_{u(v(W))})$; the composite unit\nuses $(W,\\mathrm{id}_{(uv)(W)})$. Thus $\\kappa$ sends the identity-index\nnested generator to the identity-index composite generator. For arbitrary\n$\\psi:V\\to v(W)$ and $\\phi:U\\to u(V)$, the colimit coprojection maps\nin the two successive colimits carry this identity-index generator to\n$\\iota^u_{V,\\phi}(\\iota^v_{W,\\psi}(x))$; the corresponding map in the\nsingle composite colimit carries it to\n$\\iota^{uv}_{W,u(\\psi)\\phi}(x)$. Naturality of the unit and of $\\kappa$,\nfollowed by the sheafification unit, therefore gives\n$\\kappa_{\\mathcal F,U}(\\iota^u_{V,\\phi}(\\iota^v_{W,\\psi}(x)))=\n\\iota^{uv}_{W,u(\\psi)\\phi}(x)$. This uses only the defining\ncolimit coprojections and the universal sheafification map, so it does not\nassume that an arbitrary sheafified section has a single colimit representative.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VE and 00WX, unit on colimit coprojections; Tag 03CB, composition comparison"
+   }
+  },
+  {
+   "text": "Let $\\alpha,\\beta:u_sv_s\\mathcal F\\to\\mathcal H$ have equal values on all the nested generators in the statement. Use the composite adjunction of [def-weil-pbc-composite-adjunction]. By [lem-weil-pbc-adjunct-counit-identity], two maps out of $u_sv_s\\mathcal F$ are equal once their adjuncts into $v^su^s\\mathcal H$ are equal. The adjunct of either map is $v^su^s(\\alpha)$, respectively $v^su^s(\\beta)$, followed by the composite unit. On every section $x\\in\\mathcal F(W)$ of every object $W\\in\\mathcal C$, the composite unit is the nested generator from step 3, so the hypothesis makes these two adjuncts agree on every section; equality of natural transformations is componentwise. Thus $\\alpha=\\beta$. This argument applies to sets and to abelian groups and does not assert that every section of the sheafified source is itself a single colimit representative.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-adjunct-counit-identity",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, adjunct/counit uniqueness; combined with Sites Tag 03CB and the section formula from Tags 00VE and 00WX"
+   }
+  },
+  {
+   "text": "All constructions used above are functorial in $\\mathcal F$ and in restriction maps $U'\\to U$: the colimit coprojections, the sheafification unit, the two adjunction units, and the comparison supplied by [lem-weil-pbc-conjugate-iso-unit-equation] are natural. Therefore the normalization and the equality-detection assertion are natural in $\\mathcal F$ and compatible with restrictions, as required.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VE and 00WX, functoriality of the colimit adjunction and sheafification; Tag 03CB, naturality of the comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CB and its proof, with Tags 00VE and 00WX for the colimit adjunction and sheafification; the generator normalization and equality detection are expanded here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,7 +133,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-absolute-frobenius-site",
@@ -76,5 +150,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-site-inverse-image-composition-generators",
+  "worker": "stage1",
+  "summary": "Split the generic sheaf inverse-image composition lemma into five steps. The first establishes the direct-image equality and the three sheaf adjunctions; the second constructs the unique unit-compatible comparison by the composite-adjunction and conjugate-isomorphism lemmas; the third computes its value on nested colimit generators; the fourth proves that those generators detect equality by the composite adjunction; and the fifth records naturality in the sheaf and restrictions. No new DAG nodes were needed. Corrected step 3 to derive the arbitrary-generator formula from identity-index generators via the colimit coprojection maps and sheafification, rather than evaluating a unit equation on an element outside its domain.",
+  "blueprint": "This realizes the nested-colimit composition comparison used in proof paragraph 4 of lem-trf-absolute-frobenius-site: taking left adjoints, normalizing on nested generators, and detecting equality of the resulting sheaf maps."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q56-063486c03",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q56-063486c03 (reviewer sub-agent of L); spot-checked: Step 3 incorrectly evaluates the unit equation on an arbitrary nested colimit generator, although that equation has domain F. Corrected DAG JSON is in fixes/dag/nodes/sec-six-functors/lem-trf-site-inverse-image-composition-generators.json, deriving the formula first on identity-index generators and transporting it via colimit coprojections and sheafification. Full source and cited-node review is in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

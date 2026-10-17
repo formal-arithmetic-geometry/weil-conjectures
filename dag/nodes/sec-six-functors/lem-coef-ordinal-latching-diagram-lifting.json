@@ -17,9 +17,80 @@
   "def-weil-pbc-category-colimit",
   "lem-coef-lifting-class-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a square $ps=tf$. For $\\beta\\leq\\alpha$ write $Z_{\\beta\\alpha}:Z_\\beta\\to Z_\\alpha$ for the transition map of any of the four diagrams. A partial lift on $\\{\\beta:\\beta<\\alpha\\}$ means maps $h_\\beta:E_\\beta\\to U_\\beta$ satisfying $h_\\beta f_\\beta=s_\\beta$, $p_\\beta h_\\beta=t_\\beta$, and $U_{\\beta\\gamma}h_\\beta=h_\\gamma E_{\\beta\\gamma}$ whenever $\\beta\\leq\\gamma<\\alpha$. At $\\alpha=0$ this is the empty family. We show explicitly how to extend any such family by one component at $\\alpha$, including when $\\alpha$ is a nonzero limit ordinal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Mark Hovey, Model categories, Definition 5.1.1, printed p. 120, and proof of Proposition 5.1.4, printed p. 121: compatible partial lifts on initial degree segments and the empty base. Agent specialization to the ordinal category with degree equal to the index."
+   }
+  },
+  {
+   "text": "Given this partial lift, the maps $a_\\beta=U_{\\beta\\alpha}h_\\beta:E_\\beta\\to U_\\alpha$ form a cocone: for $\\beta\\leq\\gamma<\\alpha$,\n$$a_\\gamma E_{\\beta\\gamma}=U_{\\gamma\\alpha}h_\\gamma E_{\\beta\\gamma}=U_{\\gamma\\alpha}U_{\\beta\\gamma}h_\\beta=a_\\beta.$$\nThe colimit universal property gives $a:L_\\alpha E\\to U_\\alpha$. Let $d:L_\\alpha D\\to D_\\alpha$ and $e:L_\\alpha E\\to E_\\alpha$ be the structure maps and $\\ell:L_\\alpha D\\to L_\\alpha E$ the map induced by $f$. On each coprojection from $D_\\beta$ we have\n$$a\\ell\\iota^D_\\beta=U_{\\beta\\alpha}h_\\beta f_\\beta=U_{\\beta\\alpha}s_\\beta=s_\\alpha D_{\\beta\\alpha}=s_\\alpha d\\iota^D_\\beta.$$\nUniqueness in the colimit property gives $a\\ell=s_\\alpha d$. Applying the same property to the span defining $P_\\alpha=D_\\alpha\\amalg_{L_\\alpha D}L_\\alpha E$ gives $q:P_\\alpha\\to U_\\alpha$ with $qj_D=s_\\alpha$ and $qj_E=a$. The span is finite and the predecessor category is small, so all these colimits exist.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Mark Hovey, Model categories, Definition 5.1.2, printed p. 120, and proof of Proposition 5.1.4, printed p. 121: the map from the latching object into the new right source and the relative-latching pushout. Cocone and pushout details supplied using Stacks Tag 002F, categories-definition-colimit."
+   }
+  },
+  {
+   "text": "The map $q$ is the top of a square with left side $\\lambda_\\alpha(f)$ and bottom $t_\\alpha$. Indeed, on the $D_\\alpha$ leg,\n$$p_\\alpha qj_D=p_\\alpha s_\\alpha=t_\\alpha f_\\alpha=t_\\alpha\\lambda_\\alpha(f)j_D.$$\nOn a coprojection from $E_\\beta$ into the other leg, naturality of $p,t$ gives\n$$p_\\alpha a\\iota^E_\\beta=p_\\alpha U_{\\beta\\alpha}h_\\beta=V_{\\beta\\alpha}p_\\beta h_\\beta=V_{\\beta\\alpha}t_\\beta=t_\\alpha E_{\\beta\\alpha}=t_\\alpha e\\iota^E_\\beta.$$\nThe universal property first of $L_\\alpha E$ and then of the pushout therefore gives $p_\\alpha q=t_\\alpha\\lambda_\\alpha(f)$. These equality tests remain valid for an empty predecessor category: its colimit has a unique map to each object.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Mark Hovey, Model categories, proof of Proposition 5.1.4, printed p. 121: commutativity of the relative-latching lifting square. Agent expansion of both leg identities using Stacks Tag 002F, categories-definition-colimit."
+   }
+  },
+  {
+   "text": "Apply the assumed left lifting property of $\\lambda_\\alpha(f)$ against $p_\\alpha$ to this square. Its diagonal is a map $h_\\alpha:E_\\alpha\\to U_\\alpha$ with $h_\\alpha\\lambda_\\alpha(f)=q$ and $p_\\alpha h_\\alpha=t_\\alpha$. Restriction to $j_D$ gives $h_\\alpha f_\\alpha=s_\\alpha$. For every $\\beta<\\alpha$, restriction to $j_E\\iota^E_\\beta$ gives\n$$h_\\alpha E_{\\beta\\alpha}=h_\\alpha\\lambda_\\alpha(f)j_E\\iota^E_\\beta=qj_E\\iota^E_\\beta=a\\iota^E_\\beta=U_{\\beta\\alpha}h_\\beta.$$\nThus adjoining $h_\\alpha$ extends the partial lift without changing any earlier component. In particular this is an extension at a limit object itself, rather than an assertion that $E_\\alpha$ or $U_\\alpha$ is the colimit of its predecessors.",
+   "uses": [
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Mark Hovey, Model categories, proof of Proposition 5.1.4, printed p. 121: choose the new diagonal and extend the earlier partial lift. Agent generalization uses the assumed lifting property for this pair of maps directly."
+   }
+  },
+  {
+   "text": "Use well-ordered recursion to make these extensions compatible for all $\\alpha<\\theta$. Here is a total recursion rule to which the cited statement applies. Take $\\mathcal V$ to be the collection of all partial lifts on initial segments of $\\theta$, including the empty one. Enlarge the universe if necessary; these families form a set since they are indexed by subsets of the small set $\\theta$ and have components in the fixed hom sets. By choice fix one extension from step 4 for each valid input partial lift and next index. Given arbitrary $(v_\\beta)_{\\beta<\\alpha}$ in $\\mathcal V$, if each $v_\\beta$ has domain $\\{\\gamma:\\gamma\\leq\\beta\\}$ and these families agree on overlaps, let $G_\\alpha$ be the chosen extension at $\\alpha$ of their union; otherwise let $G_\\alpha$ be the empty partial lift. In the first case the union is a partial lift on $\\{\\gamma:\\gamma<\\alpha\\}$: each equation involves at most two indices and is verified in a $v_\\beta$ containing them. The cited recursion theorem gives $v_\\alpha=G_\\alpha((v_\\beta)_{\\beta<\\alpha})$. Well-ordered induction verifies that $v_\\alpha$ always has domain $\\{\\gamma:\\gamma\\leq\\alpha\\}$ and extends every $v_\\beta$ with $\\beta<\\alpha$: the earlier families agree because the larger one extends the smaller one, so the first branch applies. At $0$ the union is empty, and at a limit index it is just the union of already chosen components. The only colimits in the construction are those of steps 2 and 3; no continuity of a diagram is needed.",
+   "uses": [
+    "lem-weil-pbc-transfinite-recursion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Mark Hovey, Model categories, proof of Proposition 5.1.4, printed p. 121: transfinite construction and agreement on initial segments. Agent implementation by the existing well-ordered-recursion node, with a total rule and an explicit invariant."
+   }
+  },
+  {
+   "text": "For nonempty $\\theta$, define $h_\\alpha$ to be the $\\alpha$-component of $v_\\alpha$. Compatibility of the partial lifts implies that $v_\\gamma$ has this same $\\alpha$-component whenever $\\alpha\\leq\\gamma$. Consequently, for every $\\alpha\\leq\\gamma<\\theta$, the partial-lift equations in $v_\\gamma$ give $U_{\\alpha\\gamma}h_\\alpha=h_\\gamma E_{\\alpha\\gamma}$. Thus the components define a natural transformation $h:E\\to U$, and its component equations give $hf=s$ and $ph=t$. If $\\theta=0$, the unique empty family is already such a natural transformation and both identities hold componentwise. Since the square was arbitrary, this proves the required lifting property in the functor category.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Mark Hovey, Model categories, proof of Proposition 5.1.4, printed p. 121: compatible partial lifts give a natural diagonal. Agent expansion includes the empty ordinal."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-lifting-class-closure",
+  "lem-weil-pbc-transfinite-recursion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+  "place": "Generalization of Mark Hovey, Model categories, Definition 5.1.1 and Definition 5.1.2 (printed p. 120), and the latching induction in the proof of Proposition 5.1.4 (printed p. 121; PDF pages 130-131 in one-based numbering). Read online, not archived locally. The argument is supplied for ordinal diagrams from pairwise lifting, without model-category assumptions; total recursion is made explicit. The historical blueprint paragraph contains only the finite derived adjunction calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -83,10 +154,52 @@
    "results": "{\"t\": \"2026-10-17T11:36:44Z\", \"tool\": \"grep\", \"query\": \"hasLiftingPropertyFixedBot_ι_app_bot|theorem hasLift|theorem hasLiftingProperty_ι_app_bot\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/LiftingProperties/Adjunction.lean\"], \"digest\": \"a2ef57c0788b8ad2\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean:32-75 and 243-273. This lifts one continuous transfinite composite against a fixed map, not arbitrary ordinal diagram transformations against varying component maps. Adjunction.hasLiftingProperty_iff at CategoryTheory/LiftingProperties/Adjunction.lean:95 transports an existing lifting property only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasLiftingProperty, CategoryTheory.NatTrans",
+   "results": "{\"t\": \"2026-10-17T12:48:54Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.HasLiftingProperty, CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: qualified lifting-property and natural-transformation query has no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "latching|HasLiftingProperty.*NatTrans|NatTrans.*HasLiftingProperty",
+   "results": "{\"t\": \"2026-10-17T12:48:54Z\", \"tool\": \"grep\", \"query\": \"latching|HasLiftingProperty.*NatTrans|NatTrans.*HasLiftingProperty\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no latching lifting declaration; Reedy/Basic.lean:21-24 lists diagram model structures as TODO"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations of ordinal diagrams have lifts if each relative latching map lifts against the corresponding right component",
+   "results": "{\"t\": \"2026-10-17T12:49:02Z\", \"tool\": \"leanfinder\", \"query\": \"Natural transformations of ordinal diagrams have lifts if each relative latching map lifts against the corresponding right component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLift\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.wellOrderInductionData.map_lift\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.wellOrderInductionData.lift_f'\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLiftingPropertyFixedBot_ι_app_bot\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.SqStruct.map\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.wellOrderInductionData.liftHom\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.wellOrderInductionData.lift\", \"CategoryTheory.SmallObject.hasRightLiftingProperty_πObj\"], \"digest\": \"05282eacf9ef20bd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: transfiniteComposition.hasLift and its variants require F.IsWellOrderContinuous and one fixed ground right map (TransfiniteCompositionLifting.lean:32-75,243-255); small-object and model axioms do not state ordinal natural-transformation lifting"
+  },
+  {
+   "tool": "grep",
+   "query": "latching|Reedy",
+   "results": "{\"t\": \"2026-10-17T12:49:12Z\", \"tool\": \"grep\", \"query\": \"latching|Reedy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\"], \"digest\": \"a3443c2fc9c6614c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no latching lifting declaration; Reedy/Basic.lean:21-24 lists diagram model structures as TODO"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map of well ordered diagrams whose relative latching maps have lifting properties admits a natural diagonal against a given objectwise right map",
+   "results": "{\"t\": \"2026-10-17T12:49:13Z\", \"tool\": \"leansearch\", \"query\": \"A map of well ordered diagrams whose relative latching maps have lifting properties admits a natural diagonal against a given objectwise right map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.cm4a\", \"CategoryTheory.MorphismProperty.rlp\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLiftingProperty_ι_app_bot\", \"CategoryTheory.SmallObject.hasRightLiftingProperty_πObj\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLift\", \"CategoryTheory.HasLiftingPropertyFixedTop\", \"CategoryTheory.HasLiftingPropertyFixedBot\", \"CategoryTheory.HasLiftingProperty.mk\"], \"digest\": \"2e960d739d8e2ceb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: transfiniteComposition.hasLift and its variants require F.IsWellOrderContinuous and one fixed ground right map (TransfiniteCompositionLifting.lean:32-75,243-255); small-object and model axioms do not state ordinal natural-transformation lifting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative latching morphisms have the left lifting property implies lifting for natural transformations in an ordinal functor category without continuity assumptions",
+   "results": "{\"t\": \"2026-10-17T12:49:23Z\", \"tool\": \"leanfinder\", \"query\": \"Relative latching morphisms have the left lifting property implies lifting for natural transformations in an ordinal functor category without continuity assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLift\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLiftingPropertyFixedBot_ι_app_bot\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLiftingProperty_ι_app_bot\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.wellOrderInductionData.map_lift\", \"CategoryTheory.SmallObject.llp_rlp_ιObj\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.wellOrderInductionData.lift\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.wellOrderInductionData.lift_f'\", \"CategoryTheory.MorphismProperty.llp_rlp_of_hasSmallObjectArgument'\"], \"digest\": \"ee6789dc3815f183\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: transfiniteComposition.hasLift and its variants require F.IsWellOrderContinuous and one fixed ground right map (TransfiniteCompositionLifting.lean:32-75,243-255); small-object and model axioms do not state ordinal natural-transformation lifting"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-model-cofibrant-colimit-comparison",
@@ -98,7 +211,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, middle finite mapping-complex comparison before the total inverse limit: cell induction on the unit for free dg diagrams; ordinal-stage lifting argument of lem-coef-model-cofibrant-colimit-comparison, original step 4",
+   "place": "Historical ancestry: prop-coef-integral-exceptional-adjoint proof paragraph 2, middle isomorphism in the finite derived adjunction calculation. The helper was introduced through lem-coef-model-cofibrant-colimit-comparison, original step 4. The ordinal/latching induction is absent from that blueprint paragraph; its actual source is Hovey, Model categories, Definitions 5.1.1-5.1.2 and proof of Proposition 5.1.4, printed pp. 120-121.",
    "via": [
     "lem-coef-model-cofibrant-colimit-comparison",
     "lem-coef-locally-cofibrant-dg-restriction",
@@ -111,5 +224,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-ordinal-latching-diagram-lifting",
+  "worker": "stage1",
+  "summary": "Q58 repaired return E7: reread Hovey Definitions 5.1.1-5.1.2 and Proposition 5.1.4; corrected every proof-step source and proof_origin to Hovey and explicitly distinguished historical blueprint ancestry from the actual latching-induction source. Retained the checked six-step construction, existing dependencies, statement, citations and search log. No new nodes.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, paragraph 2: middle finite derived adjunction isomorphism only. This paragraph contains no ordinal/latching argument. The helper introduced in lem-coef-model-cofibrant-colimit-comparison original step 4 supports that calculation indirectly; steps 1-6 here instead spell out the generalized Hovey Proposition 5.1.4 construction. No blueprint text or unit route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q58-b95884d0f",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q58-b95884d0f (reviewer sub-agent of L); spot-checked: Read the full item, report, unit/chapter route, cited nodes, blueprint, Hovey source, and Stacks colimit source. The six-step ordinal latching induction is mathematically sound, including empty, successor, limit, and noncontinuous cases. Hypotheses and citations match; no duplicate, circular, restated, or hidden long-step lemma was found. Review written to review.md."
  }
 }

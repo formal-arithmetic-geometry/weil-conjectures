@@ -12,9 +12,98 @@
   "def-weil-size-convention",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every $n\\geq0$, the product marking on $K^\\sharp\\times(\\Delta^n)^\\sharp$ marks every edge: both coordinates of any product edge are marked. Thus a map from this marked product to $C^\\natural$ is exactly a simplicial map $h:K\\times\\Delta^n\\to C$ carrying every edge to an equivalence. For every simplex $\\sigma$ of the product, all edges of $h\\sigma$ are then equivalences, so $h\\sigma$ belongs to the core $C^\\simeq$ of [def-cbc-enhanced-diagrams-cones]. Conversely, a map into this core carries every edge to an equivalence. Factoring through the simplicial subset $C^\\simeq\\subseteq C$ is unique. This gives the required degreewise bijection, including degree zero.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, mapping formulas; direct reconstruction of the fully marked source case."
+   }
+  },
+  {
+   "text": "Under these bijections, the operator associated to $\\alpha:[m]\\to[n]$ is on both sides precomposition by $\\mathrm{id}_K\\times\\Delta(\\alpha)$. The bijections therefore form the stated identity of simplicial sets. Restriction along $u:K^{\\prime}\\to K$ is on both sides precomposition by $u\\times\\mathrm{id}$. If $v:C\\to D$ is a map of quasicategories, it sends an inverse edge and its two inverse-triangle witnesses to the corresponding witnesses in $D$, so sends equivalences to equivalences and restricts to $v^\\simeq:C^\\simeq\\to D^\\simeq$. Both sides send $h$ to the same underlying map $vh$. This proves both naturalities with the normalization in the statement.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, mapping formulas; restriction and postcomposition checked on the identical maps."
+   }
+  },
+  {
+   "text": "Put $E=C^\\simeq$. Since $C$ is a quasicategory, [lem-cbc-enhanced-functor-cone-calculus] states that its core $E$ is Kan. Thus the map $E\\to\\Delta^0$ is a Kan fibration. This uses no nonemptiness condition: the Kan condition tests horns only in positive dimensions.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 1.2.5.3, maximal Kan subcomplex; existing enhanced-calculus statement supplies this input."
+   }
+  },
+  {
+   "text": "By [lem-coef-kan-quillen-right-proper], the degreewise injective weak homotopy equivalence $j:K\\hookrightarrow L$ is a trivial cofibration of the Kan model structure. Its lifting axiom against fibrations says precisely that $j$ is anodyne in the sense of [lem-coef-sset-anodyne-pushout-product], namely it has the left lifting property against every Kan fibration. For $n\\geq0$, the boundary inclusion $b_n:\\partial\\Delta^n\\hookrightarrow\\Delta^n$ is degreewise injective. Apply [lem-coef-sset-anodyne-pushout-product] with $i=b_n$ and with its anodyne map equal to $j$. It gives that\n$$q_n:(\\Delta^n\\times K)\\amalg_{\\partial\\Delta^n\\times K}(\\partial\\Delta^n\\times L)\\longrightarrow\\Delta^n\\times L$$\nis anodyne. Its left lifting property therefore applies to $E\\to\\Delta^0$ from step 3.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
+    "place": "SSet.anodyneExtensions_pushoutObjObjι, lines 95-103; Kan model lifting classes as stated in the cited Kan-Quillen node."
+   }
+  },
+  {
+   "text": "Consider an arbitrary square against $b_n$ for $r:\\operatorname{Fun}(L,E)\\to\\operatorname{Fun}(K,E)$. A map $T\\to\\operatorname{Fun}(L,E)$ is, by the formula for this simplicial exponential in [def-cbc-enhanced-diagrams-cones], the same map $L\\times T\\to E$ under simplicial currying. Concretely evaluation sends $(\\ell,t)$ in degree $m$ to the value at $(\\ell,\\mathrm{id}_{[m]})$ of the $m$-simplex corresponding to $t$; the inverse restricts a map $L\\times T\\to E$ along every simplex of $T$. Hence the two maps in the square are compatible maps $L\\times\\partial\\Delta^n\\to E$ and $K\\times\\Delta^n\\to E$. Compatibility is equality on $K\\times\\partial\\Delta^n$, so they give a map from the domain of $q_n$ to $E$, after switching the product coordinates. Step 4 supplies its extension to $\\Delta^n\\times L$. Switching coordinates back and currying gives a filler for the original square, with exactly its prescribed boundary and restriction. This works for every $n$, so $r$ has all the claimed boundary lifts.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.1.4.4, fully marked parameter argument; direct exponential adjunction and lifting-square calculation."
+   }
+  },
+  {
+   "text": "The boundary characterization in [lem-coef-kan-quillen-right-proper] now says that $r$ is a trivial Kan fibration. The identity of steps 1-2 identifies this very restriction map with the marked restriction in the statement. When $n=0$, the boundary is empty and $q_0$ is $j$ itself, up to coordinate switches; the same lift therefore proves surjectivity on vertices. If $K$ is empty, weak equivalence forces $L$ to be empty as well, since a nonempty simplicial set has a vertex and its realization has a component; both mapping complexes are then terminal. If $C$ is empty and $K,L$ are nonempty, both mapping complexes are empty and restriction is the identity on the empty simplicial set, which has all boundary lifts vacuously. These checks also cover $K=L=\\varnothing$ and impose no extra hypotheses.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.1.4.4; boundary lifting conclusion and direct empty-case checks."
+   }
+  },
+  {
+   "text": "All maps and factorizations through the core above use subsets, degreewise products and pushouts of the input sets, and sets of maps between these sets. The standard simplices and their boundaries are finite. The core-Kan assertion and the anodyne lifting statements used above are relative to the fixed universe, so their fillers are maps between the same small simplicial sets. Thus the identity and restriction conclusion remain in the universe of the input, as stipulated in [def-weil-size-convention].",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Universe-relative form of the Section 3.1.3 formulas and Corollary 3.1.4.4; direct size check."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-sset-anodyne-pushout-product",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient adjunction: technical marked-model input for finite-adjunction-diagram realization. Agent reconstruction of HTT Section 3.1.3 and Corollary 3.1.4.4 from the existing cited inputs; HTT is not archived and the attempted online read was unavailable (HTTP 429)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +139,45 @@
    "results": "{\"t\": \"2026-10-17T08:33:48Z\", \"tool\": \"grep\", \"query\": \"MarkedSSet|marked.*simplicial|MapSharp|mapSharp|Kan.*[Cc]ore\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits give generic model-category lifting classes and unmarked SSet horn/boundary classes (CategoryWithFibrations.lean:38-79). They do not identify sharp mapping objects with the core or construct the marked restriction map. StrictBicategory.lean:49-71 supplies a Cat-enrichment of QCat, not this identity. The unmarked pushout-product ingredient is already lem-coef-sset-anodyne-pushout-product, not the whole present marked assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully marked mapping simplicial sets from K sharp to a quasicategory with equivalences marked equal the simplicial exponential of its Kan core; restriction along a trivial Kan cofibration is a trivial Kan fibration",
+   "results": "{\"t\": \"2026-10-17T12:19:29Z\", \"tool\": \"leanfinder\", \"query\": \"Fully marked mapping simplicial sets from K sharp to a quasicategory with equivalences marked equal the simplicial exponential of its Kan core; restriction along a trivial Kan cofibration is a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Quasicategory\", \"CategoryTheory.nerveFunctor.full\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.Truncated.cosk.full\", \"SSet.IsStrictSegal\", \"SSet.Truncated.sk.full\"], \"digest\": \"52cd664031194df7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are unmarked Kan/Quasicategory horn or boundary classes and nerve/truncation facts; none states the sharp marked mapping identity or restriction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MarkedSSet\"",
+   "results": "{\"t\": \"2026-10-17T12:19:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"MarkedSSet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no marked simplicial-set implementation or sharp/core mapping identity was returned."
+  },
+  {
+   "tool": "grep",
+   "query": "MarkedSSet|marked.*simplicial|MapSharp|mapSharp|Kan.*[Cc]ore",
+   "results": "{\"t\": \"2026-10-17T12:19:40Z\", \"tool\": \"grep\", \"query\": \"MarkedSSet|marked.*simplicial|MapSharp|mapSharp|Kan.*[Cc]ore\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no marked simplicial-set implementation or sharp/core mapping identity was returned."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sharp mapping complex from fully marked K into a quasicategory with equivalences marked is the exponential of its Kan core",
+   "results": "{\"t\": \"2026-10-17T12:19:40Z\", \"tool\": \"leansearch\", \"query\": \"The sharp mapping complex from fully marked K into a quasicategory with equivalences marked is the exponential of its Kan core\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryOfKanComplex\", \"SSet.KanComplex\", \"ComplexShape.Embedding.stupidTruncFunctor_obj\", \"CategoryTheory.ShortComplex.exact_iff_epi_imageToKernel'\", \"SSet.StrictSegal.quasicategory'\", \"HomologicalComplex.stupidTruncMap\", \"CategoryTheory.ShortComplex.exact_iff_epi_imageToKernel\", \"CategoryTheory.expComparison\"], \"digest\": \"7a8041344747a423\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Basic.lean:57-60 gives Kan implies quasicategory, not that a quasicategory core is Kan or the marked mapping identity; remaining hits are unrelated or general closed-functor comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked simplicial mapping spaces with every source edge marked identify with maps into the maximal Kan subcomplex of a quasicategory",
+   "results": "{\"t\": \"2026-10-17T12:21:53Z\", \"tool\": \"leanfinder\", \"query\": \"Marked simplicial mapping spaces with every source edge marked identify with maps into the maximal Kan subcomplex of a quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Quasicategory\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.S.toN\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.Quasicategory.hornFilling\", \"SSet.OneTruncation₂.Hom\"], \"digest\": \"a2d826a5e16952d5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are unmarked Kan/Quasicategory horn or boundary classes and nerve/truncation facts; none states the sharp marked mapping identity or restriction theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-point-cartesian-model",
@@ -80,5 +204,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-marked-sharp-anodyne-restriction",
+  "worker": "stage1",
+  "summary": "Proved the fully marked mapping identity by unique factorization through the core, checked its operators and both naturalities, and converted every boundary restriction square into lifting an unmarked anodyne pushout product against the Kan core. Reused existing core-Kan, Kan-Quillen and pushout-product statements; created no nodes. Preserved the complete statement and checked empty inputs, dimension zero and universe size.",
+  "blueprint": "Realizes paragraph 2 of the ancestor integral exceptional-adjoint proof: the technical marked-point model input to finite-adjunction-diagram realization, specifically Corollary 3.1.4.4 used in marked-point model proof step 9.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Only its assertion that the core of every quasicategory is Kan is used; this is a generic simplicial tool and the item unit supplies no separate core-Kan theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q124-a6b25e00e",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q124-a6b25e00e (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, route, and relevant sources. Verified all seven steps, empty cases, degree-zero lifting, pushout-product hypotheses, and absence of dependency cycles or duplicate helpers. Accepted the declared core-Kan tool use. No repairs needed; concrete checks are recorded in review.md."
  }
 }

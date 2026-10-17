@@ -11,9 +11,81 @@
   "lem-coef-model-infinity-derived-adjunction",
   "lem-coef-system-localization-universal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose functorial cofibrant replacements $\\epsilon_{\\mathcal N}:Q_{\\mathcal N}\\to\\mathrm{id}$ and $\\epsilon_{\\mathcal M}:Q_{\\mathcal M}\\to\\mathrm{id}$ by factoring the initial maps as cofibrations followed by trivial fibrations. Naturality gives $\\epsilon_{Y'}Q(f)=f\\epsilon_Y$; for a weak equivalence $f$, two-out-of-three shows that $Q(f)$ is a weak equivalence between cofibrant objects. Fix a cofibrant $A\\in\\mathcal M$. By hypothesis $L_A=F(A,-)$ has an ordinary right adjoint $U_A$ and preserves cofibrations and trivial cofibrations. Apply [lem-coef-model-infinity-derived-adjunction] to this exact Quillen pair. It gives $T_A=\\mathbf L L_A\\dashv\\mathbf R U_A$, with a coherent identification $T_Aq_{\\mathcal N}\\simeq H_A$, where $H_A(Y)=q_{\\mathcal P}F(A,Q_{\\mathcal N}Y)$. In particular $L_A$ preserves weak equivalences between cofibrant objects; together with the preceding calculation this shows that $H_A$ inverts every weak equivalence.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 4.1.8.8, printed pp. 493-494, and Remark 1.3.4.27, printed p. 120; agent-written general bifunctor comparison from the cited derived-adjunction and localization interfaces, rather than an application of the combinatorial hypothesis in Corollary 1.3.4.26."
+   }
+  },
+  {
+   "text": "Write $G_A=B(q_{\\mathcal M}A,-)$ and denote the specified comparison by $\\gamma$. Precompose $\\gamma$ with the ordinary functor $Y\\mapsto(A,Q_{\\mathcal N}Y)$ into $\\mathcal M^c\\times\\mathcal N^c$. Since $q_{\\mathcal N}(\\epsilon_Y)$ is an equivalence, we obtain a natural equivalence of functors on $N(\\mathcal N)$:\n$$G_Aq_{\\mathcal N}\\xleftarrow{\\ G_Aq_{\\mathcal N}(\\epsilon)\\ }G_Aq_{\\mathcal N}Q_{\\mathcal N}\\xrightarrow{\\ \\gamma_{A,Q_{\\mathcal N}(-)}\\ }H_A.$$\nBoth arrows are equivalences: the first because a functor preserves equivalences, the second by the assumed comparison on the whole nerve of the cofibrant-input category. Thus this is a coherent natural equivalence, including all simplices, rather than a collection of objectwise isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 4.1.8.8, printed pp. 493-494, and Remark 1.3.4.27, printed p. 120; agent-written general bifunctor comparison from the cited derived-adjunction and localization interfaces, rather than an application of the combinatorial hypothesis in Corollary 1.3.4.26."
+   }
+  },
+  {
+   "text": "Both $G_Aq_{\\mathcal N}$ and $T_Aq_{\\mathcal N}$ invert weak equivalences. Apply [lem-coef-system-localization-universal] with $\\mathcal C=N(\\mathcal N)$, its system of weak equivalences, and $\\mathcal E=\\mathcal P_\\infty$. Restriction along $q_{\\mathcal N}$ is an equivalence onto the full functor subcategory inverting this system. Compose Step 2 with the inverse of the identification $T_Aq_{\\mathcal N}\\simeq H_A$ from Step 1. Full faithfulness of restriction lifts this equivalence to $\\theta_A:G_A\\simeq T_A$ in $\\operatorname{Fun}(\\mathcal N_\\infty,\\mathcal P_\\infty)$. Its inverse and the two inverse homotopies lift by the same full faithfulness, so the lifted transformation is an equivalence.",
+   "uses": [
+    "lem-coef-system-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 4.1.8.8, printed pp. 493-494, and Remark 1.3.4.27, printed p. 120; agent-written general bifunctor comparison from the cited derived-adjunction and localization interfaces, rather than an application of the combinatorial hypothesis in Corollary 1.3.4.26."
+   }
+  },
+  {
+   "text": "For a cofibrant $D\\in\\mathcal N$, both $Q_{\\mathcal N}D$ and $D$ are cofibrant. Step 1 therefore implies that $q_{\\mathcal P}F(A,\\epsilon_D)$ is an equivalence. Use it as the canonical comparison $T_A(q_{\\mathcal N}D)\\simeq q_{\\mathcal P}F(A,D)$. Naturality of the given $\\gamma$ for the arrow $(1_A,\\epsilon_D)$ in $\\mathcal M^c\\times\\mathcal N^c$ gives\n$$q_{\\mathcal P}F(A,\\epsilon_D)\\,\\gamma_{A,Q_{\\mathcal N}D}\\simeq\\gamma_{A,D}\\,G_A(q_{\\mathcal N}\\epsilon_D).$$\nAfter inverting the rightmost equivalence, this says exactly that $\\theta_A$ followed by the canonical derived comparison restricts to $\\gamma_{A,D}$. This is an identity of natural transformations on $N(\\mathcal N^c)$: it comes from precomposing the naturality of $\\gamma$ with the natural transformation $Q_{\\mathcal N}|_{\\mathcal N^c}\\to\\mathrm{id}_{\\mathcal N^c}$, hence includes all higher naturality simplices. It proves the required extension assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 4.1.8.8, printed pp. 493-494, and Remark 1.3.4.27, printed p. 120; agent-written general bifunctor comparison from the cited derived-adjunction and localization interfaces, rather than an application of the combinatorial hypothesis in Corollary 1.3.4.26."
+   }
+  },
+  {
+   "text": "Fix instead a cofibrant $D\\in\\mathcal N$ and use the second Quillen pair $K_D=F(-,D)\\dashv V_D$ from the hypotheses. By [lem-coef-model-infinity-derived-adjunction], $S_D=\\mathbf L K_D\\dashv\\mathbf R V_D$ and $S_Dq_{\\mathcal M}\\simeq q_{\\mathcal P}F(Q_{\\mathcal M}(-),D)$. The comparison in this variable is the explicit natural zigzag\n$$B(q_{\\mathcal M}(-),q_{\\mathcal N}D)\\xleftarrow{\\ B(q_{\\mathcal M}\\epsilon,q_{\\mathcal N}D)\\ }B(q_{\\mathcal M}Q_{\\mathcal M}(-),q_{\\mathcal N}D)\\xrightarrow{\\ \\gamma_{Q_{\\mathcal M}(-),D}\\ }q_{\\mathcal P}F(Q_{\\mathcal M}(-),D).$$\nThe two arrows are equivalences for exactly the two reasons given in Step 2. Apply [lem-coef-system-localization-universal] now to $N(\\mathcal M)$ to lift this zigzag to $B(-,q_{\\mathcal N}D)\\simeq S_D$. On cofibrant $A$, naturality for $(\\epsilon_A,1_D)$ gives $q_{\\mathcal P}F(\\epsilon_A,D)\\gamma_{Q_{\\mathcal M}A,D}\\simeq\\gamma_{A,D}B(q_{\\mathcal M}\\epsilon_A,q_{\\mathcal N}D)$. Here $F(\\epsilon_A,D)$ is a weak equivalence between cofibrant-input values by the cited Quillen result. Cancelling as in Step 4 proves the specified extension in this variable. No interchange of the two inputs of $F$ has been used.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-system-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 4.1.8.8, printed pp. 493-494, and Remark 1.3.4.27, printed p. 120; agent-written general bifunctor comparison from the cited derived-adjunction and localization interfaces, rather than an application of the combinatorial hypothesis in Corollary 1.3.4.26."
+   }
+  },
+  {
+   "text": "By [lem-coef-cosimplicial-frame-mapping], every $x\\in\\mathcal M_\\infty$ is equivalent to $q_{\\mathcal M}A$ for a cofibrant $A$. Choose $e:q_{\\mathcal M}A\\simeq x$. The bifunctor supplies a natural equivalence $B(e,-):G_A\\simeq B(x,-)$. For $y\\in\\mathcal N_\\infty$ and $z\\in\\mathcal P_\\infty$, its inverse, Step 3, and Step 1 give the natural mapping-space equivalences\n$$\\operatorname{Map}_{\\mathcal P_\\infty}(B(x,y),z)\\simeq\\operatorname{Map}_{\\mathcal P_\\infty}(T_A(y),z)\\simeq\\operatorname{Map}_{\\mathcal N_\\infty}(y,\\mathbf R U_A(z)).$$\nThus $\\mathbf R U_A$ is a right adjoint to $B(x,-)$. Likewise the cited representative assertion in $\\mathcal N$ writes any $d$ as an object equivalent to $q_{\\mathcal N}D$ with $D$ cofibrant; the equivalence $B(-,q_{\\mathcal N}D)\\simeq B(-,d)$ and Step 5 give $\\operatorname{Map}(B(x,d),z)\\simeq\\operatorname{Map}(x,\\mathbf R V_D(z))$. Hence every partial functor in the other variable also has a right adjoint. These equivalences are natural in the two mapping-space variables, so they assert actual infinity-categorical adjunctions. The argument used no enrichment or symmetry.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 4.1.8.8, printed pp. 493-494, and Remark 1.3.4.27, printed p. 120; agent-written general bifunctor comparison from the cited derived-adjunction and localization interfaces, rather than an application of the combinatorial hypothesis in Corollary 1.3.4.26."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-system-localization-universal",
+  "lem-coef-cosimplicial-frame-mapping"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Lemma 4.1.8.8, printed pp. 493-494, and Remark 1.3.4.27, printed p. 120; agent-written general bifunctor comparison from the cited derived-adjunction and localization interfaces, rather than an application of the combinatorial hypothesis in Corollary 1.3.4.26."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,10 +114,45 @@
    "results": "{\"t\": \"2026-10-17T08:27:32Z\", \"tool\": \"leanfinder\", \"query\": \"A bifunctor of model categories left Quillen separately on cofibrant inputs induces derived partial left adjoints on infinity categorical localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derived\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans\", \"CategoryTheory.Functor.IsLeftDerivedFunctor\"], \"digest\": \"f308c3423aa05710\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/CategoryTheory/Localization/Bifunctor.lean:54-110 and Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean. lift₂ and Lifting₂.fst/snd give ordinary-category localized bifunctors; Adjunction.derived gives ordinary derived adjunctions. None identifies the partial functors of a coherent bifunctor with infinity-categorical derived adjoints. The semantic hits concern ordinary left derivability and ordinary Kan extensions."
+  },
+  {
+   "tool": "grep",
+   "query": "lift₂|Lifting₂|Quillen",
+   "results": "{\"t\": \"2026-10-17T11:18:39Z\", \"tool\": \"grep\", \"query\": \"lift₂|Lifting₂|Quillen\", \"sub\": \"CategoryTheory/Localization\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Bifunctor.lean\", \"Mathlib/CategoryTheory/Localization/Bifunctor.lean\", \"Mathlib/CategoryTheory/Localization/Bifunctor.lean\", \"Mathlib/CategoryTheory/Localization/Bifunctor.lean\", \"Mathlib/CategoryTheory/Localization/Bifunctor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\"], \"digest\": \"c810237dc453c67a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Bifunctor.lean:61-110 defines Lifting₂, its fst/snd restrictions and lift₂ for ordinary categories; Functor/Derived/Adjunction.lean:144-149 derives ordinary adjunctions. CofibrantObjectHomotopy.lean:127-152 gives ordinary replacement objects, and DerivabilityStructureCofibrant.lean:65 supplies ordinary left derivability. None supplies the coherent infinity-category comparison and mapping-space adjunctions stated here. Read the returned declarations; the second semantic phrasing also returns ordinary-category results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofibrant replacement identifies a localized bifunctor with derived Quillen functors on infinity categories",
+   "results": "{\"t\": \"2026-10-17T11:18:39Z\", \"tool\": \"leansearch\", \"query\": \"Cofibrant replacement identifies a localized bifunctor with derived Quillen functors on infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"CategoryTheory.Functor.IsLeftDerivedFunctor\"], \"digest\": \"a04597179cdf235b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Bifunctor.lean:61-110 defines Lifting₂, its fst/snd restrictions and lift₂ for ordinary categories; Functor/Derived/Adjunction.lean:144-149 derives ordinary adjunctions. CofibrantObjectHomotopy.lean:127-152 gives ordinary replacement objects, and DerivabilityStructureCofibrant.lean:65 supplies ordinary left derivability. None supplies the coherent infinity-category comparison and mapping-space adjunctions stated here. Read the returned declarations; the second semantic phrasing also returns ordinary-category results."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "{\"t\": \"2026-10-17T11:18:39Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.derived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived_unit\"], \"digest\": \"ecb89a2541633757\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Bifunctor.lean:61-110 defines Lifting₂, its fst/snd restrictions and lift₂ for ordinary categories; Functor/Derived/Adjunction.lean:144-149 derives ordinary adjunctions. CofibrantObjectHomotopy.lean:127-152 gives ordinary replacement objects, and DerivabilityStructureCofibrant.lean:65 supplies ordinary left derivability. None supplies the coherent infinity-category comparison and mapping-space adjunctions stated here. Read the returned declarations; the second semantic phrasing also returns ordinary-category results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Partial functors of a homotopy coherent localized bifunctor left Quillen in each cofibrant variable are derived left adjoints",
+   "results": "{\"t\": \"2026-10-17T11:18:46Z\", \"tool\": \"leanfinder\", \"query\": \"Partial functors of a homotopy coherent localized bifunctor left Quillen in each cofibrant variable are derived left adjoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.localization\", \"CategoryTheory.Adjunction.derived'\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\"], \"digest\": \"6a031c4800ba1b1f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Bifunctor.lean:61-110 defines Lifting₂, its fst/snd restrictions and lift₂ for ordinary categories; Functor/Derived/Adjunction.lean:144-149 derives ordinary adjunctions. CofibrantObjectHomotopy.lean:127-152 gives ordinary replacement objects, and DerivabilityStructureCofibrant.lean:65 supplies ordinary left derivability. None supplies the coherent infinity-category comparison and mapping-space adjunctions stated here. Read the returned declarations; the second semantic phrasing also returns ordinary-category results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural comparison on cofibrant objects extends through infinity categorical localization and identifies partial derived adjunctions",
+   "results": "{\"t\": \"2026-10-17T11:21:06Z\", \"tool\": \"leanfinder\", \"query\": \"A natural comparison on cofibrant objects extends through infinity categorical localization and identifies partial derived adjunctions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\"], \"digest\": \"ad739f619e8528e1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Bifunctor.lean:61-110 defines Lifting₂, its fst/snd restrictions and lift₂ for ordinary categories; Functor/Derived/Adjunction.lean:144-149 derives ordinary adjunctions. CofibrantObjectHomotopy.lean:127-152 gives ordinary replacement objects, and DerivabilityStructureCofibrant.lean:65 supplies ordinary left derivability. None supplies the coherent infinity-category comparison and mapping-space adjunctions stated here. Read the returned declarations; the second semantic phrasing also returns ordinary-category results."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-sifted-good-diagram-calculus",
@@ -72,5 +179,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-localized-bifunctor-partial-derived-adjoints",
+  "worker": "stage1",
+  "summary": "Q74 gives a direct coherent replacement-and-descent argument using the existing Quillen derived-adjunction and localization universal-property nodes. Both variables, compatibility with the specified cofibrant comparison, and mapping-space adjunctions at arbitrary localized objects are explicit. No new nodes and no statement change.",
+  "blueprint": "Realizes the nearest ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, derived mapping adjunction in the R Hom / R lim comparison, through the recorded good-diagram-calculus ancestry; specifically the generic partial-derived-adjoint comparison extracted from its ordered tensor step. Neither the unit route nor the chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q74-19f574ebd",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q74-19f574ebd (reviewer sub-agent of L); spot-checked: Reviewed item and all six steps, dependency statements, blueprint route, cited sources, hypotheses, edge cases, searches, duplicates, and long-step rule. No new nodes, mathematical gaps, circularity, restatement, SGA use, or repairs found. Wrote review.md."
  }
 }

@@ -15,9 +15,59 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The induced reduction square commutes: $r\\circ j_{\\mathrm{red}}=j\\circ s$. Indeed, identify $U$ with its open image using [def-weil-open-immersion]. The nilradical sheaf of $U$ is the restriction of that of $X$: on every affine open $V\\subseteq U$, both are the nilradical of the same ring $\\Gamma(V,\\mathcal O_U)=\\Gamma(V,\\mathcal O_X)$. The quotient maps defining reduction in [def-weil-pbc-scheme-reduction] therefore restrict to one another. Thus $j_{\\mathrm{red}}$ is the inclusion of the corresponding open in $X_{\\mathrm{red}}$, and both composites have the same underlying inclusion and the same map of structure sheaves.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-fin-open-degree-zero.proof.md",
+    "place": "First paragraph: reduction comparison; Schemes Tag 01J4 (schemes-definition-reduced-induced-scheme)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-reduction-universal-homeomorphism] applied to the arbitrary scheme $U$, its reduction $s:U_{\\mathrm{red}}\\to U$ is a universal homeomorphism. Apply [thm-weil-pbc-universal-homeomorphism-invariance] to $s$: the inverse and direct images on the small etale topoi are quasi-inverse, so the adjunction unit on the underlying abelian sheaf is an isomorphism $\\eta_{s,F}:F\\xrightarrow{\\sim}s_*s^{-1}F$, natural in $F$. For the constant commutative ring $\\Lambda$, [prop-weil-pbc-inverse-image-modules-exact], clauses (1)--(3), identifies $s^{-1}\\Lambda_U$ with $\\Lambda_{U_{\\mathrm{red}}}$ and identifies the module adjunction unit with this abelian unit. In particular $\\eta_{s,F}$ is $\\Lambda_U$-linear. Its inverse is linear as well: if $y=\\eta_{s,F}(x)$ and $a$ is a local coefficient section, then $\\eta_{s,F}^{-1}(ay)=\\eta_{s,F}^{-1}(\\eta_{s,F}(ax))=ax$. Hence it is an isomorphism of module sheaves. The reduction theorem and invariance theorem require neither a nilpotent bound on the nilradical nor any Noetherian or finiteness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SI (proposition-topological-invariance), (1)--(2), with Tag 04DZ (theorem-topological-invariance); morphisms.tex Tag 054M (lemma-reduction-universal-homeomorphism); sites-modules.tex Tag 03D7 (lemma-adjoint-pullback-pushforward-modules)"
+   }
+  },
+  {
+   "text": "Put $G=s^{-1}F$. Let $d_{a,b}:(a\\circ b)_*\\xrightarrow{\\sim}a_*b_*$ be the natural module direct-image composition comparison of [lem-weil-pbc-inverse-image-composition-module-linear], clause (1). Define the required map to be the composite $$j_*F\\xrightarrow{\\ j_*\\eta_{s,F}\\ }j_*s_*G\\xrightarrow{\\ d_{j,s,G}^{-1}\\ }(j\\circ s)_*G=(r\\circ j_{\\mathrm{red}})_*G\\xrightarrow{\\ d_{r,j_{\\mathrm{red}},G}\\ }r_*j_{\\mathrm{red},*}G.$$ The middle equality uses step 1. The functor $j_*$ of [def-weil-pbc-direct-image] sends the inverse of $\\eta_{s,F}$ to an inverse of $j_*\\eta_{s,F}$; the other arrows are module isomorphisms by the cited composition theorem. Thus the composite is a $\\Lambda$-linear isomorphism. For a module morphism $a:F\\to F\\prime$, naturality of the unit gives $s_*s^{-1}(a)\\circ\\eta_{s,F}=\\eta_{s,F\\prime}\\circ a$; apply $j_*$ and then the naturality squares for both $d$ comparisons to obtain $$r_*j_{\\mathrm{red},*}s^{-1}(a)\\circ\\alpha_F=\\alpha_{F\\prime}\\circ j_*(a),$$ where $\\alpha_F$ is the displayed composite. This proves naturality in $F$ without an additional base-change theorem.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8 (lemma-push-pull-composition-modules); topologies.tex Tags 021I (lemma-morphism-big-small-etale) and 021J (lemma-composition-etale)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-fin-open-degree-zero.proof.md",
+  "place": "First paragraph: inverse-image equivalences for reduction and identification of direct images by adjunction; expanded using Stacks Tags 054M, 03SI and 03D8"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +124,45 @@
    "results": "0 hits. ",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"reduction\"",
+   "results": "0 hits. ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "reduc.*(lowerStar|pushforward|directImage)|(lowerStar|pushforward|directImage).*reduc",
+   "results": "0 hits. ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open immersion direct image of etale module sheaves is unchanged under reduction of the schemes",
+   "results": "8 hits. AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.IsOpenImmersion.instIsIsoCommRingCatStalkMap, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe scheme reduction or Zariski structure-sheaf restriction, not constant-coefficient module direct image on small etale sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction of schemes induces equivalence of etale sheaves, and direct image along an open immersion factors through direct image from the reduction",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe scheme reduction or Zariski structure-sheaf restriction, not constant-coefficient module direct image on small etale sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit F to s pushforward s pullback F is an isomorphism for reduction s of any scheme, so open direct images agree with those from reduced schemes",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Opens.instIsIsoCommRingCatAppLEιTopToScheme, AlgebraicGeometry.Scheme.ofRestrict_appIso, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.Scheme.Opens.topIso_hom, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.ΓSpecIso_obj_hom, AlgebraicGeometry.Scheme.Opens.topIso, AlgebraicGeometry.Scheme.Opens.isoOfLE",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe scheme reduction or Zariski structure-sheaf restriction, not constant-coefficient module direct image on small etale sites"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-fin-open-degree-zero",
@@ -94,5 +179,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-fin-reduction-open-direct-image",
+  "worker": "stage1",
+  "summary": "Kept the unrestricted constant-coefficient statement and its six statement dependencies. Expanded the reduction comparison into three steps: commuting reduction square, invertible linear reduction adjunction unit, and a natural composite of direct-image composition comparisons. Reused existing DAG nodes; no new nodes. Checked exact cited clauses, small cases, blueprint ancestry, project declarations and two semantic Mathlib phrasings.",
+  "blueprint": "The first paragraph of thm-fin-open-degree-zero.proof.md: 'Reduction of the ambient scheme causes no change' and 'The inverse-image equivalences for reduction commute with open restriction; adjunction then identifies their direct images as well.' Steps 1--3 supply the full comparison used to take X reduced before Noetherian induction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Generic constant-coefficient module direct-image composition comparison (Stacks 03D8); the affine-line/Kummer unit supplies no such general comparison. This expands its reduction step without replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-composition-module-linear"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-808aa4aca",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-808aa4aca (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, route, and report; recorded checks in review.md. The linear reduction unit and composition maps prove the comparison with correct types and naturality. Edge cases pass; no cycles, hidden long steps, new duplicates, forbidden batch-5 dependencies, or target weakening. Accepted the declared module-composition tool use."
  }
 }
