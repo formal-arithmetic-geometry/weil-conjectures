@@ -17,8 +17,6 @@ Source: Stacks Project, Sites, Lemma 7.10.5 (Tag 00W6) and its proof
 
 @[expose] public section
 
-set_option autoImplicit false
-
 universe u w w' t
 
 open CategoryTheory CategoryTheory.Limits
