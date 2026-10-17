@@ -18,7 +18,8 @@
   "def-pc-fibre-product",
   "def-weil-unramified-morphism",
   "def-weil-closed-immersion",
-  "def-kun-dimension"
+  "def-kun-dimension",
+  "def-trf-nodal-geometric-fibres"
  ],
  "proof": [
   {
@@ -189,5 +190,27 @@
   "group": "Q87",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-bff05ddfc (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the sources: Stacks curves 0C59, 0C5A, 0C5B, definition-nodal and definition-multicross; divisors 0C3I, 0C3J, 0C3K; more-algebra 07Z8; and blueprint main-20261015 lem-trf-local-term-locality. The new lemma lem-trf-nodal-family-fitting-singular is a true, more general Stacks package and does not restate the item: (1)⇒(2) of 0C59, plus 0C3K with d=1, 0C3I and 0C5B. I tested it on xy=t over k[t] and its base change t=s^2, where Sing becomes Spec k[s]/(s^2), which is non-reduced as the item's disclaimer allows. Its hypotheses match the item. No duplicate exists anywhere in the DAG, and there is no Fitting ideal in Mathlib. Two repairs, in fixes/: (B2/B3) def-trf-first-fitting-singular-subscheme did not say which minors define Fit_1 and wrongly assumed a finite presentation of Omega_{A/R} for a morphism only locally of finite type. It now defines Fit_1 by the (n-1)-minors of matrices with rows in the relation module, as in 07Z8, cites its notions inline and adds 07Z6, 07Z8 and 07ZA to the source. (C1) Item step 2 reduced from geometric fibres to ordinary fibres with no citation and used closed-immersion base change without a node. It now works on the ordinary fibre Z=S_f x_Y kappa(y) directly, citing def-pc-scheme-fibre, unramified base change, the Mathlib leaf lem-weil-pbc-closed-immersion-base-change, projective base change, unramified-over-field-discrete and zero-dimensional-closed-subscheme-finite, and ends with: discrete and affine, hence quasi-compact, hence finite. proof_deps are updated and there is no cycle. Steps 1, 3 and 4 are correct as delivered. The item statement is unchanged. Note: the report says the item's created metadata was corrected, but the file still names Q88/lem-trf-plurinodal-alteration; that field is maintainer-owned and I left it. Tools from other units to record at the merge: lem-pc-projective-base-change, lem-pc-zero-dimensional-closed-subscheme-finite, lem-weil-pbc-unramified-over-field-discrete and lem-weil-pbc-unramified-base-change-open.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a9c89f7c",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: Noetherian Y, IsHProjective, Flat, LocallyOfFinitePresentation, HasNodalGeometricFibres (connected+nonempty, global dim 1, which equals pure dim 1 for a connected finite-type fibre, ring iso of the completed local ring at nonsmooth points to Ω[[u,v]]/(uv)); open smooth locus; one existential S outside the ∀Y₁ binder with closed immersion, inline unramified (LFT ∧ open-immersion diagonal), range = complement of the smooth locus, finite fibres; base change keeps all four properties, fst⁻¹ smoothLocus = new smoothLocus, canonical nodalSingularBaseChangeMap (real pullback.map) is a closed immersion, unramified and supported on the new nonsmooth locus; no reduction claim. No extra assumptions or universe restrictions; lean.statement verbatim; node diff vs main is only the lean record and the added landed stmt_dep def-trf-nodal-geometric-fibres (no cycle); docstrings carry source, blueprint id and the 4-step proof; sole sorry in the theorem (#print axioms). nt_compile --json on the snapshot module: rc=0, 3.1 s, no errors or warnings; the error check works (control). Edge cases (empty Y/X, smooth family, xy=t with t=s², char 2) fine."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.TraceFormula.ProjectiveNodalFamilyGeometry",
+  "declaration": "AlgebraicGeometry.projective_nodal_family_geometry",
+  "file": "lean/Sheaf/SixFunctors/TraceFormula/ProjectiveNodalFamilyGeometry.lean",
+  "statement": "theorem projective_nodal_family_geometry {X Y : Scheme.{u}} (f : X ⟶ Y) [IsNoetherian Y] [IsHProjective f] [Flat f] [LocallyOfFinitePresentation f] (hN : HasNodalGeometricFibres f) : IsOpen (f.smoothLocus : Set X) ∧ ∃ (S : Scheme.{u}) (i : S ⟶ X), IsClosedImmersion i ∧ (LocallyOfFiniteType (i ≫ f) ∧ IsOpenImmersion (pullback.diagonal (i ≫ f))) ∧ Set.range i = (f.smoothLocus : Set X)ᶜ ∧ (∀ y : Y, Set.Finite ((i ≫ f) ⁻¹' {y})) ∧ ∀ (Y₁ : Scheme.{u}) (g : Y₁ ⟶ Y) [IsNoetherian Y₁], IsHProjective (pullback.snd f g) ∧ Flat (pullback.snd f g) ∧ LocallyOfFinitePresentation (pullback.snd f g) ∧ HasNodalGeometricFibres (pullback.snd f g) ∧ (pullback.fst f g) ⁻¹ᵁ f.smoothLocus = (pullback.snd f g).smoothLocus ∧ IsClosedImmersion (nodalSingularBaseChangeMap f i g) ∧ (LocallyOfFiniteType (pullback.snd (i ≫ f) g) ∧ IsOpenImmersion (pullback.diagonal (pullback.snd (i ≫ f) g))) ∧ Set.range (nodalSingularBaseChangeMap f i g) = ((pullback.snd f g).smoothLocus : Set (pullback f g : Scheme.{u}))ᶜ",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.nodalSingularBaseChangeMap",
+   "AlgebraicGeometry.projective_nodal_family_geometry"
+  ]
  }
 }

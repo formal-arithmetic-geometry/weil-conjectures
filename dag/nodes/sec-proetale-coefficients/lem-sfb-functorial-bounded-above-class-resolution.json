@@ -239,16 +239,16 @@
   "file": "lean/Sheaf/Algebra/Homology/FunctorialBoundedAboveClassResolution.lean",
   "statement": "theorem exists_functorial_boundedAbove_class_resolution {A : Type u} [Category.{v} A] [Abelian A] (F : ObjectProperty A) [F.ContainsZero] [F.IsClosedUnderIsomorphisms] (h_biproduct : ∀ (U V : A), F U → F V → F (U ⊞ V)) (h_summand : ∀ (U V : A), F (U ⊞ V) → F U ∧ F V) (P : A ⥤ A) (hP : ∀ (M : A), F (P.obj M)) (ε : P ⟶ 𝟭 A) (hε : ∀ (M : A), Epi (ε.app M)) : ∃ (S : CochainComplex.Minus A ⥤ CochainComplex A ℤ) (a : S ⟶ CochainComplex.Minus.ι A), (∀ (L : CochainComplex.Minus A), QuasiIso (a.app L)) ∧ (∀ (L : CochainComplex.Minus A) (i : ℤ), F ((S.obj L).X i)) ∧ (∀ (L : CochainComplex.Minus A) (b : ℤ), L.obj.IsStrictlyLE b → (S.obj L).IsStrictlyLE b)",
   "branch": "newtargets-dag",
-  "by": "Q27",
-  "date": "2026-10-17",
+  "by": "NR",
+  "date": "2026-10-18",
   "existing": false
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-fb9693251",
-  "group": "Q27",
-  "result": "pass",
-  "note": "Read the node, both statement dependencies (def-sp-abelian: Mathlib Abelian; def-weil-abstract-derived-category), the blueprint source, upstream CochainComplex.Minus (an existential bound in a full subcategory), the FromJoel LeftResolution/CochainComplexMinus construction (bound instance l.134, quasi-iso l.202-224) and Mathlib LeftResolution/Reduced. Every clause matches: ContainsZero plus binary biproducts is equivalent to finite biproducts; the summand clause is verbatim; P has no additivity; ε has epi components; S : Minus A ⥤ CochainComplex A ℤ with a : S ⟶ Minus.ι; quasi-iso, termwise membership in F, and IsStrictlyLE b preserved for every b. There are no extra assumptions and the universes are independent. The statement is true via the full subcategory on F (idempotent complete by summand closure), the reduced LeftResolution and minusResolutionFunctor. Edge cases L=0, single-degree complexes, maps with unequal bounds and non-additive P(0)≠0 are covered. Only the node's lean field changed, and lean.statement is verbatim. Docstrings have the source, the blueprint ID and the proof steps; nothing hollow or proved; lines ≤89. nt_compile --json gave exit 0, no warnings, 2.0 s, and an injected error was caught. The second-reading section is an honest self-check that still goes through every clause; noted, not counted as a fault. No findings."
+  "reviewer": "NT-stage2-cc-b1a6c3109",
+  "group": "NR",
+  "result": "fix",
+  "note": "Duplicate delivery: the item was already landed by Q27 (reviewed PASS); NR's commit only moves lean.by/date and module Authors from Q27 to NR, and its report wrongly says the node is unchanged. Statement checked clause by clause against the node and CochainComplex.Minus (existential-bound full subcategory): all clauses match, no extra assumptions, universes free; edge cases (L=0, M[n], unequal bounds, P(0)!=0, F = all objects) hold; sorry only, docstrings with source and blueprint ID. nt_compile --json on the snapshot file: exit 0 in 2.0 s; injected error caught (exit 1). Fixes restore the Q27 attribution in the lean record and the module (byte-identical to the landed file) and add a correction note to the report."
  }
 }

@@ -226,5 +226,28 @@
   "group": "Q104",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q104-b09bd85ef (reviewer sub-agent of L); spot-checked: Step 4 contains the ill-typed term `f(d_N x)`; x lies in P while d_N acts on N. Corrected DAG JSON is at fixes/dag/nodes/sec-poincare-duality/lem-pod-projective-hom-evaluation-model.json, replacing it with the valid d_N(f(x)) and f(d_P x) terms. Full audit is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d27cb0214",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: CommRing R; P bounded above and termwise Module.Projective with no finiteness; N arbitrary; moduleHomComplex sign d_N z-(-1)^n z d_P via Mathlib δ; comparison Q(D) ≅ ihom(QP)(QN) uniquely fixed by counit_eq together with IsIso μ; homMap pinned componentwise; naturality uses pre(Q a) then ihom.map(Q b) with correct variances; evaluation pinned as (p*q).negOnePow • z.v on ιTensorObj summands, chain-map signs and naturality checked by hand. HasDerivedCategory.{u} is the dep node's convention and an instance exists (ofIsGrothendieckAbelian), so not vacuous. Not hollow; only main theorem sorry; docstrings carry source place, blueprint tag and proof steps; lean.statement verbatim; node otherwise unchanged; no duplicate in side Lean. nt_compile --json clean (8.0 s/8.3 s, exit 0); error reporting confirmed with a deliberately broken copy. Report has Worker report and Second reading by Q80 sections."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ProjectiveHomEvaluationModel",
+  "declaration": "CochainComplex.projective_hom_evaluation_model",
+  "declarations": [
+   "CochainComplex.ProjectiveHomEvaluationModel",
+   "CochainComplex.projective_hom_evaluation_model"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ProjectiveHomEvaluationModel.lean",
+  "statement": "theorem projective_hom_evaluation_model : Nonempty (ProjectiveHomEvaluationModel R)",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The structure packages the entire comparison, naturality, tensor model and signed counit clauses. Every map is characterized by its homogeneous components or its counit equation; no data is chosen from the postponed theorem."
  }
 }

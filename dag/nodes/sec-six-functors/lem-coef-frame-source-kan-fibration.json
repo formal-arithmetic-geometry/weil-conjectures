@@ -119,5 +119,29 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-4b1977aff (reviewer sub-agent of L); spot-checked: The mathematics is correct and was read in full. Read against Hovey, Model Categories (local pdftotext copy, since Hovey is not in literature/): Prop 3.1.5, Def 5.2.7, Rem 5.2.9, Prop 5.4.1, Prop 5.4.3 with its proof, Cor 5.4.4. New node lem-coef-frame-pushout-product states Hovey 5.4.3 exactly: a Reedy cofibration of frames on cofibrant objects, any simplicial trivial cofibration, and the same pushout orientation. It is true (5.4.1 gives the cofibration; 3.6.8 plus two-out-of-three gives the weak equivalence), was tested on Delta^0->Delta^1 and K=L, does not restate the item, and has no duplicate in the DAG (checked parametrized-adjunction-corner-lifting, resolution-interval-tensor, framed-projective-diagram-resolution, frame-bisimplicial-span and others). Item step 1 (horn lifting by adjunction against Y->*, Kan-ness from lem-coef-cosimplicial-frame-mapping) is correct, including n=1. Its hypotheses match the parent lem-coef-model-undercategory-mapping-fiber step 7. Everything stays in unit sk-prop-sf-biduality-general, so no tool_uses. Three repairs, as whole files in fixes/: (1) B3/C4: the new node cited def-coef-simplicial-tensor-cotensor (enriched tensors, not Hovey's frame tensor) and no node for sSet trivial cofibrations; it now defines A⊗K inline as in Hovey 3.1.5 and cites lem-coef-kan-quillen-right-proper instead. (2) C1: step 1 used 'horn inclusions are trivial cofibrations' with no node; it now cites lem-coef-kan-quillen-right-proper and proof_deps is updated. (3) E5: step 2 claimed the chosen horn fillers are natural; it is rewritten as naturality of the restriction maps, still elementary. Also proof_origin.by changed from document to agent, since Hovey is not archived (brief §4). The item statement is unchanged and not weakened; no SGA source used; no cycle.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-988b5b78d",
+  "group": "N0",
+  "result": "fix",
+  "note": "All statement clauses checked against the node, Hovey Prop 5.4.3 / Cor 5.4.4 and the dependency modules. Frames: CosimplicialFrame; cofibrancy of A and B follows from latching_cofibration at 0. Augmentation square hAug with constNat; hZero is u^0=u. Reedy cofibration: leftClass (monomorphisms SimplexCategory) (cofibrations C), the positive class of simplex_reedy_structure. Conclusion: both frameHom complexes Kan, plus J.rlp of frameHomPre uFrame Y (same idiom as the dependency's fibration_mapping). Both naturality squares are correctly typed; the omitted base square is implied and the missing Reedy hypothesis on u' only generalizes. No universe restriction or extra hypotheses; helpers are not hollow; lean.statement is verbatim; H1 shape ok; searches recorded. nt_compile (--json, side overlay) is clean for the delivered and the fixed file, and the compiler was confirmed to report errors. One fault, H8: the theorem docstring lacked the node's proof step by step. fixes/lean/Sheaf/CategoryTheory/FrameSourceKanFibration.lean adds the source place and proof steps 1-2 with the signature unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FrameSourceKanFibration",
+  "file": "lean/Sheaf/CategoryTheory/FrameSourceKanFibration.lean",
+  "declaration": "CategoryTheory.frame_source_kan_fibration",
+  "declarations": [
+   "CategoryTheory.constNat",
+   "CategoryTheory.AugmentedFrameMap",
+   "CategoryTheory.frame_source_kan_fibration"
+  ],
+  "statement": "theorem frame_source_kan_fibration (C : Type u) [Category.{v} C] [HasLimits C] [HasColimits C] [ModelCategory C] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations C) (fibrations C)] [MorphismProperty.HasFunctorialFactorization (cofibrations C) (trivialFibrations C)] {A B : C} (FA : CosimplicialFrame C A) (FB : CosimplicialFrame C B) (uFrame : FA.obj ⟶ FB.obj) (uBase : A ⟶ B) (hAug : uFrame ≫ FB.augmentation = FA.augmentation ≫ constNat uBase) (hZero : uFrame.app ⦋0⦌ ≫ eqToHom FB.degree_zero = eqToHom FA.degree_zero ≫ uBase) (hReedy : HomotopicalAlgebra.Reedy.leftClass (monomorphisms SimplexCategory) (cofibrations C) uFrame) : (∀ (Y : C), IsFibrant Y → (frameHom FA.obj Y).KanComplex ∧ (frameHom FB.obj Y).KanComplex ∧ SSet.modelCategoryQuillen.J.rlp (frameHomPre uFrame Y)) ∧ (∀ {A' B' : C} (FA' : CosimplicialFrame C A') (FB' : CosimplicialFrame C B') (uFrame' : FA'.obj ⟶ FB'.obj) (uBase' : A' ⟶ B') (hAug' : uFrame' ≫ FB'.augmentation = FA'.augmentation ≫ constNat uBase') (hZero' : uFrame'.app ⦋0⦌ ≫ eqToHom FB'.degree_zero = eqToHom FA'.degree_zero ≫ uBase') (a : FA.obj ⟶ FA'.obj) (b : FB.obj ⟶ FB'.obj) (aBase : A ⟶ A') (bBase : B ⟶ B') (ha : AugmentedFrameMap FA FA' a aBase) (hb : AugmentedFrameMap FB FB' b bBase) (hPair : a ≫ uFrame' = uFrame ≫ b) {Y Y' : C} (g : Y ⟶ Y') (hY : IsFibrant Y) (hY' : IsFibrant Y'), (frameHomPre uFrame' Y ≫ frameHomPre a Y = frameHomPre b Y ≫ frameHomPre uFrame Y) ∧ (frameHomPre uFrame Y ≫ frameHomPost FA.obj g = frameHomPost FB.obj g ≫ frameHomPre uFrame Y'))",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-988b5b78d"
  }
 }
