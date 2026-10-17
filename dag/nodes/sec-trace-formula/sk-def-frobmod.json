@@ -98,5 +98,32 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0829ad761",
+  "group": "NS",
+  "result": "pass",
+  "note": "Existing-record delivery (only lean field added; report has Worker report + Second reading by NS; lean.statement verbatim from DetTrace.lean). Checked against blueprint sk-def-frobmod/_section.md: FrobeniusModule (fin-dim + LinearEquiv, any field covers Q̄_ℓ); LinearMap.traceSeries = mk(if n=0 then 0 else tr(F^n)/n) for arbitrary F (FiniteDimensional binder dropped, more general); LinearMap.charpolyRev = charpoly.reverse = det(1-TF) via Matrix.reverse_charpoly (Free/Finite inferred), localPolynomial specializes it; alternatingTraceSeries = sum over Finset ℤ of negOnePow • traceSeries, coefficient lemma exists; no semisimplicity. Edge cases (empty s, V=0, singular F, n=0, negative i, independent universes) fine. No duplicates in Mathlib or the DAG; axioms only propext/choice/Quot.sound. nt_compile probe importing the recorded module, #check/#print/#print axioms on all 7 declarations plus rfl checks, compiled with no errors (warnings only for long lines in the probe). No findings."
+ },
+ "lean": {
+  "module": "WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TraceSeries",
+  "declaration": "LinearMap.traceSeries",
+  "declarations": [
+   "FrobeniusModule",
+   "FrobeniusModule.localPolynomial",
+   "LinearMap.charpolyRev",
+   "LinearMap.traceSeries",
+   "FrobeniusModule.traceSeries",
+   "LinearMap.alternatingTraceSeries",
+   "FrobeniusModule.alternatingTraceSeries"
+  ],
+  "statement": "noncomputable def traceSeries (F : Module.End K V) : K⟦X⟧ :=",
+  "branch": "slopmaster2",
+  "by": "NS",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "The imported upstream modules supply every clause: FrobeniusModule is the finite-dimensional vector space with linear automorphism; LinearMap.charpolyRev is det(1-TF) for any finite-dimensional endomorphism (finite/free instances follow over a field), and FrobeniusModule.localPolynomial specializes it. LinearMap.traceSeries and LinearMap.alternatingTraceSeries supply the generic series; the FrobeniusModule wrappers specialize them. The generic trace definitions omit unused FiniteDimensional binders and agree with the node on finite-dimensional spaces. All are available through the recorded public-import module."
  }
 }

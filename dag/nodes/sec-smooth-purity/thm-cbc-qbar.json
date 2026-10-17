@@ -328,5 +328,34 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-9342fef0a (reviewer sub-agent of L); spot-checked: Read the full item, new node, cited statements, sources, and unit/chapter route. All six steps check; coefficient coherence is a distinct unsplit prerequisite. Verified map directions, representative independence, edge cases, duplicate candidates, and absence of self-dependency. Accepted both declared descent tools. No target-category identification is assumed. Detailed review written to review.md; no fixes required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96477fe6e",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Statement matches node/source (master 1645 = main-20261015 1992) clause by clause: hypotheses identical to finiteExtension_compactSupportBaseChange (compactifications, proper/open squares, f separated+LOFT+QC, 4 schemes Noetherian/finite-dim/l-invertible, nothing on g); conclusions: IsIso of descNatTrans and every component, finite-overfield representative mkHom M h h (β_U.hom ≫ τ_M ≫ β_V.inv) checked against DescentSpec orientation, representative/E independence with fixed endpoints. CbcQbarExchangeModel fields uniquely fixed: source/target functor equalities plus raw-localization universal property, sourceBeta/targetBeta via canonical open-adjunction mate, pbcScalarDirectImageIso.inv and unit-characterized completed-pullback comparison (unique since datum completedPull is derived completion and scalar extension preserves completeness), normalized exchange with hc never vacuous (finiteExtension_cbcComplete); Nonempty is a conclusion, no added coherence hypothesis. No duplicate notion (pbcScalarCompletedPullIso is the reflector presentation, pbcDescentOperations is Rf_*). Gates: no hollow defs, one sorry, source/blueprint docstrings, 6-step proof docstring, autoImplicit false, lines <=100, only lean changed, statement verbatim, 8 declarations present, Worker report + Second reading by Q03 present. nt_compile.py --json on local side overlay: exit 0, no errors/warnings, module 40.2 s."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QbarCompactSupportBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.qbarCompactSupportBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcScalarOrdinaryIso",
+   "AlgebraicGeometry.Scheme.CbcCompletedScalarComparison",
+   "AlgebraicGeometry.Scheme.cbcScalarOpenInverse",
+   "AlgebraicGeometry.Scheme.cbcScalarSourceInverse",
+   "AlgebraicGeometry.Scheme.cbcScalarTargetInverse",
+   "AlgebraicGeometry.Scheme.CbcScalarInverseBetaSpec",
+   "AlgebraicGeometry.Scheme.CbcQbarExchangeModel",
+   "AlgebraicGeometry.Scheme.qbarCompactSupportBaseChange"
+  ],
+  "file": "lean/Sheaf/Paper/QbarCompactSupportBaseChange.lean",
+  "statement": "theorem qbarCompactSupportBaseChange [IsSeparated f] [LocallyOfFiniteType f] [IsNoetherian Y] [IsNoetherian X'] (_dimY : ∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞)) (_dimX' : ∃ n : ℕ, topologicalKrullDim X' ≤ (n : WithBot ℕ∞)) (_invY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (_invX' : ∀ x : X', IsUnit (l : X'.presheaf.stalk x)) : Nonempty (CbcQbarExchangeModel l Ω c c' gbar properSquare openSquare) ∧ ∀ D : CbcQbarExchangeModel l Ω c c' gbar properSquare openSquare, (∀ (E : Padic.FiniteCoefficientFields l Ω) (K : pbcStageCategory l Ω X E), IsIso ((D.exchange.τ E).app K)) ∧ IsIso (StageSystem.Morphism.descNatTrans D.exchange) ∧ (∀ K : pbcQbarCategory l Ω X, IsIso ((StageSystem.Morphism.descNatTrans D.exchange).app K)) ∧ (∀ (K : pbcQbarCategory l Ω X) (M : Padic.FiniteCoefficientFields l Ω) (h : K.stage ≤ M), (StageSystem.Morphism.descNatTrans D.exchange).app K = StageSystem.PairCategory.mkHom (X := D.U.base.functor.obj K) (Y := D.V.base.functor.obj K) M h h ((D.U.base.β h).hom.app K.obj ≫ (D.exchange.τ M).app (((pbcScalarSystem l Ω X dX.out iX.out).T h).obj K.obj) ≫ (D.V.base.β h).inv.app K.obj)) ∧ (∀ (K A B : pbcQbarCategory l Ω X) (α : A ≅ K) (β : B ≅ K), D.U.base.functor.map α.inv ≫ (StageSystem.Morphism.descNatTrans D.exchange).app A ≫ D.V.base.functor.map α.hom = D.U.base.functor.map β.inv ≫ (StageSystem.Morphism.descNatTrans D.exchange).app B ≫ D.V.base.functor.map β.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second reading fixes the scalar comparisons as well as the operations and exchange: sourceBeta and targetBeta localize the canonical open-unit and proper-counit mates, with completed pullback comparisons uniquely fixed by their ordinaryToCompleted unit equations. Canonical transport uses the recorded universal counits; no extra geometric/coefficient-coherence hypothesis or replacement coefficient category is introduced."
  }
 }

@@ -226,5 +226,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-349f11cc0",
+  "group": "Q121",
+  "result": "pass",
+  "note": "The only DAG change is the item's lean record; sk-def-pe-classical-definition is unchanged. Statement matches node and blueprint: arbitrary X : Scheme.{u}, Λ : Type u with CommRing, and the conjuncts IsClassicalModule Λ 0, IsClosedUnderKernels, IsClosedUnderCokernels and IsClosedUnderExtensions. I checked these against Mathlib ObjectProperty/Kernels.lean and Extensions.lean: they cover all limit (co)kernel forks and every short exact sequence with classical ends, and claim no Serre (subobject/quotient) closure. IsClassicalModule is the recorded dependency's real continuity-map predicate over SheafOfModules of the constant ULift Λ sheaf on Scheme.ProEt.topology X; no hollow definition or pro-etale substitute. Universes follow the dependency's u/u+1 convention; autoImplicit false; lean.statement is verbatim in the file. Docstrings carry source and blueprint id with all 7 proof steps; proof is sorry; proof-only imports non-public. No duplicate found. nt_compile.py --json on the snapshot file: exit 0, module 1.9 s, no errors or other diagnostics. Report has real Worker report and Second reading by Q121. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClassicalModuleWeakSerre",
+  "declaration": "AlgebraicGeometry.ProEtale.classicalModule_weakSerre",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClassicalModuleWeakSerre.lean",
+  "statement": "theorem classicalModule_weakSerre (X : Scheme.{u}) (Λ : Type u) [CommRing Λ] : IsClassicalModule (X := X) Λ 0 ∧ ObjectProperty.IsClosedUnderKernels (IsClassicalModule (X := X) Λ) ∧ ObjectProperty.IsClosedUnderCokernels (IsClassicalModule (X := X) Λ) ∧ ObjectProperty.IsClosedUnderExtensions (IsClassicalModule (X := X) Λ)",
+  "branch": "newtargets-dag",
+  "by": "Q121",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
