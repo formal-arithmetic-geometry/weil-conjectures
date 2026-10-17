@@ -8,11 +8,100 @@
   "place": "Tag 06XT (definition-yoneda-extension); prefix pullback and endpoint-fixing comparison in Section 06XP; the pullback construction is Homology section-extensions. Agent-formulated exact-sequence comparison for the inherited step 8."
  },
  "stmt_deps": [
-  "def-sp-abelian"
+  "def-sp-abelian",
+  "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\ell:L\\to E_0$ and $i:K\\to P$ for the kernel inclusions. The arrow $E_1\\to E_0$ factors uniquely as $\\ell d$ for $d:E_1\\to L$. Exactness at $E_0$ makes $d$ epic by [lem-weil-pbc-abelian-exact-iff-epi-kernel-lift]. Since $\\ell$ is monic, a morphism into $E_1$ is killed by $d$ if and only if it is killed by $\\ell d$. Thus replacing the final arrow of the prefix by $d$ preserves its preceding kernel and all earlier exactness. Together with $d$ epic, this proves that the prefix ending in $L$ is an $(n-1)$-extension. The same criterion applied to $K\\xrightarrow{i}P\\xrightarrow{ep}F$ gives exactness at $P$, since the induced arrow to $\\ker(ep)=K$ is $1_K$; $i$ is monic and $ep$ is epic by hypothesis, so its zero-augmented sequence is short exact. Finally $epi=0$ gives a unique $a:K\\to L$ with $\\ell a=pi$.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010E (definition-exact); kernel universal property; the exactness-to-kernel criterion used in the construction of extensions, Tag 010I (section-extensions)."
+   }
+  },
+  {
+   "text": "Form $Q=E_1\\times_L K$ with projections $r:Q\\to E_1$, $s:Q\\to K$, so $dr=as$. Explicitly take $Q=\\ker((d,-a):E_1\\oplus K\\to L)$: maps $W\\to Q$ correspond uniquely to pairs $(x:W\\to E_1,y:W\\to K)$ with $dx=ay$. This proves existence and the pullback universal property from the biproduct and kernel in [def-sp-abelian]. Let $D=T$ and $b:T\\to E_1$ be the original first arrow if $n=2$; if $n>2$, let $D=E_2$ and $b:E_2\\to E_1$ be the original differential. In either case $db=0$, hence there is a unique $j:D\\to Q$ with $rj=b$ and $sj=0$. Use $j$ as the new incoming arrow. For $n>2$ its composite with the preceding differential vanishes, since both projections of that composite vanish.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 05PJ (example-fibre-product-pushouts), part (1): fibre product as kernel of the difference map; Tag 010I (section-extensions), pullback construction."
+   }
+  },
+  {
+   "text": "The projection $s$ is epic. Indeed, for any $y:W\\to K$, the epimorphism $d$ and [lem-sp-abelian-refinements](a) give an epimorphism $\\rho:W\\prime\\to W$ and $x:W\\prime\\to E_1$ with $dx=ay\\rho$. The pair $(x,y\\rho)$ gives $z:W\\prime\\to Q$ with $sz=y\\rho$. Applying (a) once more, now to $s$, proves the claim. This is the three-line refinement proof of stability under pullback (Tag 05PK), so no additional pullback lemma is needed.",
+   "uses": [
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 05PK (lemma-epimorphism-universal-abelian-category), part (1); formulation by refinements as in Tag 08N5 (lemma-check-exactness-fibre-product)."
+   }
+  },
+  {
+   "text": "Exactness at $Q$ follows from [lem-sp-abelian-refinements](b), rather than from element chasing in a concrete category. For $z:W\\to Q$ with $sz=0$, one has $drz=asz=0$. The original exactness at $E_1$, with incoming arrow $b:D\\to E_1$, gives an epimorphism $\\rho:W\\prime\\to W$ and $t:W\\prime\\to D$ such that $bt=rz\\rho$. Both projections of $jt$ and $z\\rho$ agree: their $r$-projections are $bt=rz\\rho$, and their $s$-projections are zero. Therefore $jt=z\\rho$, proving exactness of $D\\xrightarrow{j}Q\\xrightarrow{s}K$ by (b).",
+   "uses": [
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 08N5 (lemma-check-exactness-fibre-product): exactness tested by lifts after epimorphic refinement; applied to the pullback of Tag 010I (section-extensions)."
+   }
+  },
+  {
+   "text": "Check the remaining terms of $\\eta$. If $n=2$, $j:T\\to Q$ is monic because $rj=b$ is the monomorphism $T\\to E_1$: $ju=jv$ implies $bu=bv$, hence $u=v$. Thus the sequence $0\\to T\\xrightarrow{j}Q\\xrightarrow{s}K\\to0$ is exact. If $n>2$, $jt=0$ is equivalent to $bt=0$ for every morphism $t$ into $E_2$: one implication follows by applying $r$, and the other from the two projections $rjt=bt=0$, $sjt=0$. Hence $\\ker j=\\ker b$ as subobjects of $E_2$, so original exactness at $E_2$ gives new exactness there. All terms further left, including the monic left endpoint, are unchanged. With Steps 3 and 4 this proves every exactness assertion for $\\eta$.",
+   "uses": [
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010E (definition-exact); Tag 010I (section-extensions), explicit kernel check for the pullback."
+   }
+  },
+  {
+   "text": "Splice by taking the joining arrow $is:Q\\to P$. Because $i$ is monic, $ist=0$ if and only if $st=0$ for every morphism $t$ into $Q$. Its kernel is therefore $\\ker s$, so exactness at $Q$ is Step 4. At $P$, the incoming map to $\\ker(ep)=K$ is $s$, which is epic by Step 3; [lem-weil-pbc-abelian-exact-iff-epi-kernel-lift] gives exactness there. All terms left of $Q$ have already been checked, and $ep$ is epic. Consequently this is an exact $n$-extension of $F$ by $T$.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XT (definition-yoneda-extension); Tag 06XP (section-ext), concatenation of Yoneda extensions; explicit exactness at the join."
+   }
+  },
+  {
+   "text": "Take the comparison to $\\xi$ to be $r$ at $Q$, $p$ at $P$, and identities elsewhere. The incoming square at $Q$ is $rj=b$ by construction; this also checks the $T$-endpoint square when $n=2$. The joining square commutes because $p(is)=(pi)s=(\\ell a)s=\\ell(dr)=(\\ell d)r$. The right endpoint square is $ep=ep$, with identity on $F$. When $n>2$ the $T$-endpoint and all other squares are identities on unchanged arrows. Thus this is a morphism of exact extensions fixing both endpoints. By the stated definition of Yoneda equivalence, this single morphism proves the splice equivalent to $\\xi$; no Ext comparison, resolutions, or projective or injective objects are used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XT (definition-yoneda-extension): endpoint-fixing comparison diagrams; the single morphism gives a common-refinement diagram by its identity map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
+  "lem-sp-abelian-refinements"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 010I, 05PJ, 05PK, 08N5, with Yoneda equivalence from derived.tex Tag 06XT; explicit higher-prefix and comparison argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +137,45 @@
    "results": "8 hits: CategoryTheory.Abelian.Ext.precomp_mk₀_injective_of_epi, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃, CategoryTheory.Abelian.Ext.covariant_sequence_exact₁, CategoryTheory.Abelian.Ext.mono_precomp_mk₀_of_epi, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₂, CategoryTheory.Abelian.Ext.covariant_sequence_exact₃, CategoryTheory.Abelian.Ext.contravariantSequence",
    "date": "2026-10-17",
    "verdict": "no match: inspected Ext/Basic.lean:128-174,288-296 and Ext/ExtClass.lean:126-138. These are derived Ext operations, not the stated construction and endpoint-fixing comparison of exact Yoneda extensions. Identifying exact-sequence splicing with this operation is an additional theorem, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back a Yoneda extension prefix and splicing with a replacement short exact tail gives an endpoint fixing morphism of exact extensions",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.contravariantSequence, CategoryTheory.Abelian.Ext.covariantSequence, CategoryTheory.Abelian.Ext.covariant_sequence_exact₃, CategoryTheory.Abelian.Ext.covariant_sequence_exact₂, CategoryTheory.Abelian.Ext.covariant_sequence_exact₁, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₂, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern derived Ext operations or exactness of truncated sequences, not the explicit higher Yoneda-extension replacement and endpoint-fixing comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Yoneda.*extension|extension.*Yoneda|splic",
+   "results": "11 hits: Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Limits/Presheaf.lean, Mathlib/CategoryTheory/Limits/Presheaf.lean, Mathlib/CategoryTheory/Limits/Presheaf.lean, Mathlib/CategoryTheory/Limits/Presheaf.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern derived Ext operations or exactness of truncated sequences, not the explicit higher Yoneda-extension replacement and endpoint-fixing comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"comp_assoc\"",
+   "results": "6 hits: ModuleCat.extendScalars_id_comp_assoc, HomologicalComplex.extendMap_comp_assoc, CategoryTheory.Abelian.Ext.comp_assoc_of_second_deg_zero, CategoryTheory.Abelian.Ext.comp_assoc_of_third_deg_zero, CategoryTheory.Abelian.Ext.comp_assoc, CategoryTheory.ShortComplex.ShortExact.extClass_comp_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern derived Ext operations or exactness of truncated sequences, not the explicit higher Yoneda-extension replacement and endpoint-fixing comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a Yoneda extension prefix followed by splicing gives an endpoint fixing morphism of extensions",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact sequence with last middle object replaced by a morphism surjecting onto the quotient is equivalent to the original n extension",
+   "results": "8 hits: CategoryTheory.ComposableArrows.Exact.δlast, CategoryTheory.Abelian.Ext.covariantSequence_exact, CategoryTheory.ComposableArrows.exact_iff_δlast, CategoryTheory.ComposableArrows.exact_of_δlast, CategoryTheory.ComposableArrows.Exact.sc', CategoryTheory.ComposableArrows.Exact.exact', CategoryTheory.ComposableArrows.Exact.exact, CategoryTheory.ShortComplex.exact_iff_exact_up_to_refinements",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern derived Ext operations or exactness of truncated sequences, not the explicit higher Yoneda-extension replacement and endpoint-fixing comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-module-flat-cotorsion-foundation",
@@ -74,5 +198,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-yoneda-pullback-splice",
+  "worker": "stage1",
+  "summary": "Expanded the exact-sequence argument into seven steps, with explicit pullback universal properties, refinement lifts valid in any abelian category, exactness at both splice terms, and every comparison square. Checked n=2 separately and that only ep, not p, must be epic. Reused existing Mathlib leaves; no new node is needed.",
+  "blueprint": "Historical proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coefficient derived adjunction foundation, inherited step 8 of lem-coef-module-flat-cotorsion-foundation. This item supplies only the Yoneda prefix replacement comparison. Current blueprint main-20261015 omits that historical foundational paragraph; the inherited ancestry is retained. Whole-blueprint searches for Yoneda and pullback/splice found no equivalent imported node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N4-3c3a089f8",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-3c3a089f8 (reviewer sub-agent of L); spot-checked: I read the item in full: 7 steps, no new nodes, statement unchanged. All four cited nodes are Mathlib leaves (def-sp-abelian, def-weil-pbc-exact-sequence, lem-weil-pbc-abelian-exact-iff-epi-kernel-lift, lem-sp-abelian-refinements), and each step uses exactly the clause it cites. Step 1: d:E_1→L is epic by the kernel-lift criterion, the prefix is exact because ℓ is monic, and K→P→F is short exact. Step 2: Q=ker((d,-a)), with j=(b,0) since db=0; the n=2 and n>2 cases are both handled. Step 3: s is epic by refinements (a) applied twice (Stacks 05PK(1)). Step 4: exactness at Q by (b) plus the jointly monic projections. Step 5: for n=2, j is monic; for n>2, ker j=ker b. Step 6: the splice is exact at Q (i is monic) and at P (the lift is s, which is epic). Step 7: all squares commute, including p·is=ℓas=ℓdr. Source checks: Stacks derived.tex:8775 Tag 06XT (common middle row; one morphism gives it with the identity), homology.tex Tags 010I, 05PJ, 05PK (line 919) and 08N5 (line 935), with labels confirmed in tags/tags. Small cases tested: n=2, p=1, F=0 (including p=0) and T=0 all check out. A duplicate search of dag/nodes found no duplicate (yoneda-zero-splice, sc-p1-pullback-extension-class and pbc-pushout-ses are different statements). The parent's step 8 use matches the hypotheses. Mathlib searches cover three kinds, with LeanSearch honestly recorded as unavailable. No SGA is used. No fixes; no tool_uses."
  }
 }

@@ -19,9 +19,100 @@
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $r=|\\pi_E|_E$. By [lem-weil-l-adic-extension-integers-dvr], $0<r<1$ and the units of $\\mathcal O_E$ have absolute value $1$; by [lem-weil-l-adic-extension-absolute-value] the absolute value is nonarchimedean. For $z\\in E$, division by $\\pi_E^n$ gives\n$$z\\in\\pi_E^n\\mathcal O_E\\quad\\Longleftrightarrow\\quad |z|_E\\le r^n.$$\nEach coset $x+\\pi_E^n\\mathcal O_E$ is open: if $y$ belongs to it and $|z-y|_E<r^n$, the ultrametric inequality puts $z$ in it. Its complement is a union of the other cosets, so it is also closed. Since $r^n\\to0$, these cosets, for $n\\ge1$, form a neighbourhood basis at $x\\in\\mathcal O_E$. Finally [lem-weil-valued-dvr-finite-quotients] supplies finiteness of $A_n$ and the surjective reduction transitions, with the stated ideals.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.md",
+    "place": "Clause 1: presentation of the profinite set of integers; explicit argument by Q139"
+   }
+  },
+  {
+   "text": "The reductions are compatible ring homomorphisms, so $q$ is a ring homomorphism to the displayed compatible-family ring $L=\\varprojlim_n A_n$. If $q(x)=q(y)$, then step 1 gives $|x-y|_E\\le r^n$ for every $n\\ge1$. As $r^n\\to0$, $|x-y|_E=0$, hence $x=y$. Thus $q$ is injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.md",
+    "place": "Clause 1: presentation of the profinite set of integers; explicit argument by Q139"
+   }
+  },
+  {
+   "text": "For $b=(b_n)\\in L$, choose representatives $a_n\\in\\mathcal O_E$ of $b_n$. Compatibility implies $a_m-a_n\\in\\pi_E^n\\mathcal O_E$ for every $m\\ge n$, hence $|a_m-a_n|_E\\le r^n$. Thus $(a_n)$ is Cauchy, and [lem-weil-l-adic-extension-complete] gives a limit $a\\in E$. For each fixed $n$, choose $m\\ge n$ sufficiently large that $|a-a_m|_E<r^n$. The ultrametric inequality gives $|a-a_n|_E\\le r^n$. In particular $|a|_E\\le\\max(|a_n|_E,r^n)\\le1$, so $a\\in\\mathcal O_E$, and $q_n(a)=b_n$ for every $n$. This proves surjectivity. A bijective ring homomorphism has a ring-homomorphic inverse: the inverse preserves each operation by applying $q$ and using injectivity. This proves the ring assertion of clause 1.",
+   "uses": [
+    "lem-weil-l-adic-extension-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.md",
+    "place": "Clause 1: presentation of the profinite set of integers; explicit argument by Q139"
+   }
+  },
+  {
+   "text": "For $x\\in\\mathcal O_E$ let $C_n(q(x))=\\{b\\in L:b_n=q_n(x)\\}$. These are open and closed coordinate cylinders, and $q^{-1}C_n(q(x))=x+\\pi_E^n\\mathcal O_E$. Moreover they form a neighbourhood basis in $L$: a product-basic neighbourhood restricts finitely many coordinates, and the cylinder at their maximum index is contained in it, by compatibility. Step 1 gives the corresponding basis on $\\mathcal O_E$. Consequently $q$ and its inverse are continuous, proving the homeomorphism in clause 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.md",
+    "place": "Clause 1: presentation of the profinite set of integers; explicit argument by Q139"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-l-adic-extension-proper] to the given finite-dimensional extension $E/\\mathbf Q_\\ell$ with its extending absolute value. The closed ball $\\{x\\in E:|x|_E\\le1\\}$ is compact; it is exactly $\\mathcal O_E$, with the topology prescribed in the statement. Thus $\\mathcal O_E$ is compact.",
+   "uses": [
+    "lem-weil-l-adic-extension-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.md",
+    "place": "Clause 1: presentation of the profinite set of integers; explicit argument by Q139"
+   }
+  },
+  {
+   "text": "The metric $d(x,y)=|x-y|_E$ makes $\\mathcal O_E$ Hausdorff: distinct points have disjoint balls of radius $d(x,y)/3$. If a subset contains distinct $x,y$, step 2 provides an $n$ with $q_n(x)\\ne q_n(y)$. The clopen coset $q_n^{-1}(q_n(x))$ and its complement separate that subset into two nonempty relatively open pieces. Thus every connected subset has at most one point. Together with step 5 this proves clause 2, with exactly the definition of profinite given in the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZY, lemma-profinite, forward implication: distinct points separated by a finite coordinate; metric separation written explicitly"
+   }
+  },
+  {
+   "text": "For the continuous $g:\\mathcal O_E\\to Q$, each fibre $g^{-1}(g(x))$ is open because $Q$ is discrete. By step 1 choose $n_x\\ge1$ such that $U_x=x+\\pi_E^{n_x}\\mathcal O_E$ lies in that fibre. Compactness from step 5 gives a finite subcover $U_{x_1},\\ldots,U_{x_t}$. It is nonempty since $0\\in\\mathcal O_E$. Put $n=\\max_i n_{x_i}$. If $q_n(y)=q_n(z)$, select $i$ with $y\\in U_{x_i}$. Then $z-y\\in\\pi_E^n\\mathcal O_E\\subseteq\\pi_E^{n_{x_i}}\\mathcal O_E$, hence $z\\in U_{x_i}$ and $g(y)=g(z)$. Define $h(q_n(y))=g(y)$. This is well defined by the preceding calculation and is defined on all of $A_n$ since a quotient map is surjective. It satisfies $g=h\\circ q_n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZZ, lemma-profinite-refine-open-covering, finite subcover followed by a common dominating index; specialized directly to the coset basis"
+   }
+  },
+  {
+   "text": "If $h'\\circ q_n=g$, every $b\\in A_n$ has a representative $y\\in\\mathcal O_E$, so $h'(b)=g(y)=h(b)$; hence $h'=h$. For $m\\ge n$ let $\\rho_{mn}:A_m\\to A_n$ be reduction and put $h_m=h\\circ\\rho_{mn}$. Since $q_n=\\rho_{mn}\\circ q_m$, $h_m\\circ q_m=g$. Surjectivity of $q_m$ gives uniqueness by the same representative calculation. This proves every assertion in clause 3; surjectivity of $g$ was not needed, so it certainly holds under the stated hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.md",
+    "place": "Clause 1: presentation of the profinite set of integers; explicit argument by Q139"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-l-adic-extension-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.md",
+  "place": "Clause 1; Q139 supplies the complete local-field tower argument, and expands the finite-subcover argument of Stacks Tag 08ZZ"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -43,11 +134,53 @@
    "results": "not run: LeanSearch is not reachable from the review service on the project server",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicComplete|isLimitQuotPowCone|exists.*[Ff]actor",
+   "results": "{\"t\": \"2026-10-17T08:40:09Z\", \"tool\": \"grep\", \"query\": \"IsAdicComplete|isLimitQuotPowCone|exists.*[Ff]actor\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Noetherian.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\"], \"digest\": \"cc8473f8a3c339c0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item; local-field completeness/compactness and general profinite reconstruction are partial ingredients, requiring the explicit coset and tower comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ring of integers in a finite p-adic extension is a profinite ring isomorphic to the inverse limit of its finite quotients",
+   "results": "{\"t\": \"2026-10-17T08:40:09Z\", \"tool\": \"leansearch\", \"query\": \"The ring of integers in a finite p-adic extension is a profinite ring isomorphic to the inverse limit of its finite quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProfiniteGrp.isIso_toLimit\", \"ProfiniteGrp.isoLimittoFiniteQuotientFunctor\", \"Profinite.asLimitConeIso\", \"Profinite.isoAsLimitConeLift\", \"PadicInt\", \"PadicInt.subring\", \"PadicInt.instCommRing\", \"PadicInt.instInhabited\"], \"digest\": \"b2f2ab3850854d70\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item; local-field completeness/compactness and general profinite reconstruction are partial ingredients, requiring the explicit coset and tower comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, Profinite",
+   "results": "{\"t\": \"2026-10-17T08:40:09Z\", \"tool\": \"loogle\", \"query\": \"IsAdicComplete, Profinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item; local-field completeness/compactness and general profinite reconstruction are partial ingredients, requiring the explicit coset and tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ring of integers of a finite extension of the p-adic numbers is the inverse limit of finite quotients and every continuous map to a finite set factors through a quotient",
+   "results": "{\"t\": \"2026-10-17T08:40:19Z\", \"tool\": \"leanfinder\", \"query\": \"The ring of integers of a finite extension of the p-adic numbers is the inverse limit of finite quotients and every continuous map to a finite set factors through a quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt.instIsAdicCompleteMaximalIdeal\", \"PadicInt.adicCompletionIntegersEquiv\", \"PadicInt.coe_adicCompletionIntegersEquiv_apply\", \"Padic.adicCompletionEquiv\", \"PadicInt.coe_adicCompletionIntegersEquiv_symm_apply\", \"Rat.HeightOneSpectrum.adicCompletionIntegers.padicIntEquiv\", \"Rat.HeightOneSpectrum.adicCompletion.padicEquiv\", \"PadicComplexInt.integers\"], \"digest\": \"7054ecf0376e8a62\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item; local-field completeness/compactness and general profinite reconstruction are partial ingredients, requiring the explicit coset and tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "isLimit|[Cc]ontinuous|[Hh]omeomorph|[Ff]actor",
+   "results": "{\"t\": \"2026-10-17T08:41:37Z\", \"tool\": \"grep\", \"query\": \"isLimit|[Cc]ontinuous|[Hh]omeomorph|[Ff]actor\", \"sub\": \"NumberTheory/LocalField\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/LocalField/Basic.lean\", \"Mathlib/NumberTheory/LocalField/Basic.lean\"], \"digest\": \"6166674486a8b772\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item; local-field completeness/compactness and general profinite reconstruction are partial ingredients, requiring the explicit coset and tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete discrete valuation ring with finite residue field is topologically the projective limit of its residue rings and every finite discrete continuous function is constant modulo some power of its maximal ideal",
+   "results": "{\"t\": \"2026-10-17T08:41:48Z\", \"tool\": \"leanfinder\", \"query\": \"A complete discrete valuation ring with finite residue field is topologically the projective limit of its residue rings and every finite discrete continuous function is constant modulo some power of its maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField\", \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.instInhabitedSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsNonarchimedeanLocalField.instCompleteSpaceSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"Valued.integer.totallyBounded_iff_finite_residueField\", \"isLocalRing_of_isAdicComplete_maximal\", \"IsDedekindDomain.HeightOneSpectrum.mem_adicCompletionIntegers\"], \"digest\": \"53571ead62cc3a75\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item; local-field completeness/compactness and general profinite reconstruction are partial ingredients, requiring the explicit coset and tower comparison"
   }
  ],
  "mathlib_match": null,
  "mathlib_candidate": "NumberTheory/LocalField/Basic.lean: CompactSpace 𝒪[K] (line 102), IsAdicComplete 𝓂[K] 𝒪[K] (line 176) for an IsNonarchimedeanLocalField; would need the comparison of E/Q_ell with that structure, the homeomorphism to the limit and clause 3.",
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +201,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-integers-profinite-tower",
+  "worker": "stage1",
+  "summary": "Eight explicit steps: coset estimates, injectivity, compatible Cauchy representatives, topology bases, compact unit ball, separation, finite-cover factorization, and uniqueness at all higher levels. No statement change and no new nodes. All non-elementary inputs are existing DAG statements.",
+  "blueprint": "Realizes the coefficient-space input in det-prop-sfb-qlbar-colimit-x-integral-limit clause 1 and unit sk-prop-sfb-qlbar-colimit-x step 1: the profinite set O_E=lim_n O_E/pi_E^n and cofinality of these finite quotients.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic local-field DVR and unit absolute-value facts used in the coset calculation; the coefficient comparison unit has no separate arithmetic input proving them."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-b6d1bcf8b",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-b6d1bcf8b (reviewer sub-agent of L); spot-checked: Read the item, all eight steps, all six cited statements, the blueprint clause, the unit and the parent's use of the item. I read the item and all eight steps in full against the six cited statements: def-weil-l-adic-coefficient-extension, l-adic-extension-integers-dvr, l-adic-extension-absolute-value, valued-dvr-finite-quotients, l-adic-extension-complete and l-adic-extension-proper. I also read main-20261015 sk-prop-sfb-qlbar-colimit-x-integral-limit.md clause 1, step 1 of the unit sk-prop-sfb-qlbar-colimit-x, and step 3 of the parent, which uses clauses (1)-(3) exactly as stated. The Stacks labels are correct: 08ZY lemma-profinite, 08ZZ lemma-profinite-refine-open-covering, 08ZU theorem-tychonov, 0ET8. The statement is unchanged and true. I tested it on Q_l/Z_l, a ramified E with r=|pi|=l^{-1/2}, n=1, a singleton Q and an empty Q (vacuous). Step checks: (1) z is in pi^n O exactly when |z|<=r^n, by dividing by pi^n, which is nonzero. Each coset is a clopen closed ball, and these balls form a basis. The hypotheses of finite-quotients come from integers-dvr (2), (3) and (4). (3) The Cauchy argument from arbitrary representatives, the ultrametric estimate and the proof that a is in O_E are correct. (4) The cylinder basis and the maximal index are correct. (5) O_E is the closed unit ball of a proper space, so it is compact. (7) and (8) are short, correct finite-subcover and surjectivity arguments, acceptably marked elementary. Duplicate search: lem-pod-adic-limit-finite-modules (2) is only a module and m-adic version. The profinite function-factorization leaf needs (1) and (2) first. Neither is a duplicate. The delivery has no new nodes and no cycle. Accepted tool_use: lem-weil-l-adic-extension-integers-dvr. It is a generic local-field DVR fact, used as a black box, and no node of this unit gives it. The other off-unit citations are Mathlib leaves. Minor point, no change needed: source.place mentions Tychonoff 08ZU, but the proof gets compactness from properness of E. No fixes."
  }
 }

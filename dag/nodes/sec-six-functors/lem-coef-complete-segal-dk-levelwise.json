@@ -63,16 +63,36 @@
    }
   },
   {
-   "text": "Here is the natural consequence of completeness needed later, with its fiber comparison made explicit. Put $A=W_0$, $K_A=\\operatorname{Fun}(\\Delta^1,A)$, $q_A=(\\operatorname{ev}_0,\\operatorname{ev}_1):K_A\\to A^2$, and let $c_A:A\\to K_A$ insert constant paths. The endpoint map $q_A$ is a Kan fibration: a horn-lifting problem for it is adjoint to extending a map from $(\\Lambda_i^m\\times\\Delta^1)\\cup(\\Delta^m\\times\\partial\\Delta^1)$ to $\\Delta^m\\times\\Delta^1$; this inclusion is anodyne by [lem-coef-sset-anodyne-pushout-product], since the horn inclusion is anodyne in [lem-coef-kan-quillen-right-proper]. Its target $A$ is Kan, so the extension exists. In particular $K_A$ is Kan. For the identity map of $A$, the replacement in [lem-coef-space-path-fibration-replacement] identifies with $K_A$, and its constant-path inclusion is exactly $c_A$, hence is a weak equivalence.\n\nThe maps $s_0:A\\to W_{\\mathrm{eq}}$ and $c_A:A\\to K_A$ lie over $A^2$, with source structure map $\\Delta_A$. Both are weak equivalences, the first by completeness. Apply [lem-coef-spaces-homotopy-fiber-detection] twice with base map $1_{A^2}$, and then [lem-coef-kan-pullback-path-comparison] for the two endpoint fibrations. For every pair $(x,y)$ this gives a natural zigzag of weak equivalences\n$$E_W(x,y)\\longrightarrow\\operatorname{hofib}_{(x,y)}(p_W^{\\mathrm{eq}})\\longleftarrow\\operatorname{hofib}_{(x,y)}(\\Delta_A)\\longrightarrow\\operatorname{hofib}_{(x,y)}(q_A)\\longleftarrow\\operatorname{Path}_A(x,y),$$\nwhere $\\operatorname{Path}_A(x,y)$ is the strict fiber of $q_A$. The arrows use constant paths, $s_0$, and $c_A$, so this zigzag commutes with every map of complete Segal spaces, including the basepoint given by the identity and the constant loop when $x=y$. It follows that $E_W(x,y)$ is nonempty exactly when $x$ and $y$ belong to the same component of $A$. Indeed a nonempty Kan complex has a vertex, weak equivalences preserve nonemptiness through their bijections on components, and vertices of the path space are edges $x\\to y$; an edge-chain in a Kan complex is replaced by one edge using successive two-dimensional horn fillers.",
+   "text": "Put $A=W_0$, $K_A=\\operatorname{Fun}(\\Delta^1,A)$ and $q_A=(\\operatorname{ev}_0,\\operatorname{ev}_1):K_A\\to A^2$. Apply the Mathlib leaf [lem-cbc-internal-hom-fibration-corner-map] to the monomorphism $\\partial\\Delta^1\\hookrightarrow\\Delta^1$ and the Kan fibration $A\\to\\Delta^0$. Its target is $\\operatorname{Fun}(\\partial\\Delta^1,A)=A^2$, so it gives exactly the endpoint fibration $q_A$. Filling a horn in $A^2$ coordinatewise and then lifting it along $q_A$ proves $K_A$ Kan. Apply [lem-coef-space-path-fibration-replacement] to $1_A$: its total space $A\\times_{A,\\operatorname{ev}_0}K_A$ is isomorphic to $K_A$ by projection, with inverse $\\gamma\\mapsto(\\gamma(0),\\gamma)$. Its weak equivalence is therefore precisely the constant-path map $c_A:A\\to K_A$, and $q_Ac_A=\\Delta_A$ by evaluation.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
-    "lem-coef-sset-anodyne-pushout-product",
-    "lem-coef-kan-quillen-right-proper",
-    "lem-coef-space-path-fibration-replacement",
-    "lem-coef-spaces-homotopy-fiber-detection",
-    "lem-coef-kan-pullback-path-comparison"
+    "lem-cbc-internal-hom-fibration-corner-map",
+    "lem-coef-space-path-fibration-replacement"
    ],
    "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Proposition 6.4 (1) => (4) and Corollary 6.5, with an explicit natural path-model zigzag"
+   }
+  },
+  {
+   "text": "Completeness gives the weak equivalence $s_0:A\\to W_{\\mathrm{eq}}$ over $A^2$, and step 3 gives the weak equivalence $c_A$ over that same base. Apply [lem-coef-complete-segal-path-fiber-comparison]. Its specified zigzag compares $E_W(x,y)$ with $\\operatorname{Path}_A(x,y)=\\operatorname{fib}_{(x,y)}q_A$, naturally in maps of complete Segal spaces. For $x=y$ it preserves the identity-arrow and constant-loop basepoints. Thus later comparisons use the actual induced path map and its actual constant-loop basepoint.",
+   "uses": [
+    "lem-coef-complete-segal-path-fiber-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Proposition 6.4 (1) => (4) and Corollary 6.5, with an explicit natural path-model zigzag"
+   }
+  },
+  {
+   "text": "Vertices of $\\operatorname{Path}_A(x,y)$ are exactly edges $x\\to y$. Such an edge exists precisely when $x,y$ are in the same simplicial component: reverse an edge by filling a two-dimensional outer horn with its edge and a degenerate edge, and compose two consecutive edges by filling $\\Lambda_1^2$. This compresses any finite unoriented edge-chain to one edge. The component identification of [lem-coef-kan-realization-serre] identifies these classes with components of $|A|$. Along the zigzag of step 4 nonemptiness is preserved, because a simplicial set is nonempty exactly when it has a vertex, and a weak equivalence is bijective on components. Hence $E_W(x,y)$ is nonempty precisely when $x,y$ are in the same component of $A$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-realization-serre"
+   ],
+   "elementary": true,
    "source": {
     "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
     "place": "Proposition 6.4 (1) => (4) and Corollary 6.5, with an explicit natural path-model zigzag"
@@ -108,7 +128,7 @@
    }
   },
   {
-   "text": "By the zigzag of step 3, two vertices of $W_0$ belong to the same component if and only if $E_W(x,y)$ is nonempty, equivalently if and only if they are isomorphic in $hW$. Essential surjectivity thus makes $\\pi_0f_0$ surjective. For injectivity, if $fx$ and $fy$ are in the same component of $V_0$, they are isomorphic in $hV$. Full faithfulness from step 5 lifts this isomorphism and its inverse and reflects their inverse equations, so $x,y$ are isomorphic in $hU$ and hence lie in the same component of $U_0$. This proves that $\\pi_0f_0$ is bijective, including the empty case.",
+   "text": "By the zigzag of step 4, two vertices of $W_0$ belong to the same component if and only if $E_W(x,y)$ is nonempty, equivalently if and only if they are isomorphic in $hW$. Essential surjectivity thus makes $\\pi_0f_0$ surjective. For injectivity, if $fx$ and $fy$ are in the same component of $V_0$, they are isomorphic in $hV$. Full faithfulness from step 7 lifts this isomorphism and its inverse and reflects their inverse equations, so $x,y$ are isomorphic in $hU$ and hence lie in the same component of $U_0$. This proves that $\\pi_0f_0$ is bijective, including the empty case.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-coef-segal-homotopy-category-components"
@@ -120,7 +140,7 @@
    }
   },
   {
-   "text": "Write $A=U_0$, $B=V_0$, and $g=f_0$. The mapping-space hypothesis and step 5 give, for every vertex $x$ of $A$, a weak equivalence\n$$E_U(x,x)\\longrightarrow E_V(gx,gx).$$\nThe natural zigzag of step 3 commutes with $f$, including its identity and constant-loop basepoints. Two-out-of-three therefore gives a weak equivalence\n$$\\operatorname{Path}_A(x,x)\\longrightarrow\\operatorname{Path}_B(gx,gx),$$\nwhich is the pointed loop map $\\Omega_xA\\to\\Omega_{gx}B$. This argument uses only the strict/path comparisons and completeness zigzag; it does not assume that $g$ is already a weak equivalence and does not invoke a total-space fiber criterion. The path-fibration replacement of step 3 identifies these strict fibers with the corresponding homotopy fibers, so the comparison is natural in the chosen vertex and in maps of complete Segal spaces.",
+   "text": "Write $A=U_0$, $B=V_0$, and $g=f_0$. The mapping-space hypothesis and step 7 give, for every vertex $x$ of $A$, a weak equivalence\n$$E_U(x,x)\\longrightarrow E_V(gx,gx).$$\nThe natural zigzag of step 4 commutes with $f$, including its identity and constant-loop basepoints. Two-out-of-three therefore gives a weak equivalence\n$$\\operatorname{Path}_A(x,x)\\longrightarrow\\operatorname{Path}_B(gx,gx),$$\nwhich is the pointed loop map $\\Omega_xA\\to\\Omega_{gx}B$. This argument uses only the strict/path comparisons and completeness zigzag; it does not assume that $g$ is already a weak equivalence and does not invoke a total-space fiber criterion. The path-fibration replacement of step 3 identifies these strict fibers with the corresponding homotopy fibers, so the comparison is natural in the chosen vertex and in maps of complete Segal spaces.",
    "uses": [
     "lem-coef-kan-pullback-path-comparison",
     "lem-coef-space-path-fibration-replacement",
@@ -133,7 +153,7 @@
    }
   },
   {
-   "text": "The loop equivalences of step 7 and the component bijection of step 6 imply that $g:A\\to B$ is a weak homotopy equivalence as follows. For each vertex $x\\in A$ and every $j\\geq0$, use the natural boundary bijections of [lem-coef-kan-path-boundary-bijections]\n$$\\pi_{j+1}^s(A,x)\\cong\\pi_j^s(\\Omega_xA,c_x),\\qquad \\pi_{j+1}^s(B,gx)\\cong\\pi_j^s(\\Omega_{gx}B,c_{gx}).$$\nThe map between their right sides is a bijection, for $j=0$ by the component comparison of [lem-coef-kan-realization-serre], and for $j\\geq1$ by its simplicial/realized homotopy-group comparison and the loop weak equivalence. Naturality of the boundary maps gives bijectivity of the map on $\\pi_{j+1}^s$ on the left; these maps are group homomorphisms, so they are isomorphisms. The same realization comparison gives isomorphisms on all positive homotopy groups of $|A|\\to|B|$ at vertices. Any point in a realization has a representative in a simplex and is connected inside that simplex to a vertex. For a path $\\gamma$ from a source vertex $x$ to a source point $a$, [lem-coef-homotopy-groups-basepoint-change] gives isomorphisms $\\beta_\\gamma$ and $\\beta_{|g|\\gamma}$. Their displayed concentric-cube formula commutes with postcomposition: applying $|g|$ to its inner cube gives the inner cube for $|g|\\circ u$, and applying $|g|$ to its outer shell gives the shell along $|g|\\gamma$. Consequently $\\beta_{|g|\\gamma}\\circ |g|_{*,a}=|g|_{*,x}\\circ\\beta_\\gamma$, so the isomorphism at $x$ implies the isomorphism at $a$. Together with the already proved component bijection this is precisely the definition of weak homotopy equivalence. Thus $f_0=g$ is a weak equivalence; this supplies the degree-zero conclusion, rather than citing a pasting argument as its proof.",
+   "text": "The loop equivalences of step 9 and the component bijection of step 8 imply that $g:A\\to B$ is a weak homotopy equivalence as follows. For each vertex $x\\in A$ and every $j\\geq0$, use the natural boundary bijections of [lem-coef-kan-path-boundary-bijections]\n$$\\pi_{j+1}^s(A,x)\\cong\\pi_j^s(\\Omega_xA,c_x),\\qquad \\pi_{j+1}^s(B,gx)\\cong\\pi_j^s(\\Omega_{gx}B,c_{gx}).$$\nThe map between their right sides is a bijection, for $j=0$ by the component comparison of [lem-coef-kan-realization-serre], and for $j\\geq1$ by its simplicial/realized homotopy-group comparison and the loop weak equivalence. Naturality of the boundary maps gives bijectivity of the map on $\\pi_{j+1}^s$ on the left; these maps are group homomorphisms, so they are isomorphisms. The same realization comparison gives isomorphisms on all positive homotopy groups of $|A|\\to|B|$ at vertices. Any point in a realization has a representative in a simplex and is connected inside that simplex to a vertex. For a path $\\gamma$ from a source vertex $x$ to a source point $a$, [lem-coef-homotopy-groups-basepoint-change] gives isomorphisms $\\beta_\\gamma$ and $\\beta_{|g|\\gamma}$. Their displayed concentric-cube formula commutes with postcomposition: applying $|g|$ to its inner cube gives the inner cube for $|g|\\circ u$, and applying $|g|$ to its outer shell gives the shell along $|g|\\gamma$. Consequently $\\beta_{|g|\\gamma}\\circ |g|_{*,a}=|g|_{*,x}\\circ\\beta_\\gamma$, so the isomorphism at $x$ implies the isomorphism at $a$. Together with the already proved component bijection this is precisely the definition of weak homotopy equivalence. Thus $f_0=g$ is a weak equivalence; this supplies the degree-zero conclusion, rather than citing a pasting argument as its proof.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-coef-kan-path-boundary-bijections",
@@ -147,7 +167,7 @@
    }
   },
   {
-   "text": "Now $f_0\\times f_0$ is a weak equivalence by the coordinatewise product argument of step 4. Apply [lem-coef-spaces-homotopy-fiber-detection] to the endpoint square, using the assumed mapping-space equivalences and [lem-coef-kan-pullback-path-comparison], to conclude that $f_1$ is a weak equivalence. For $n\\geq2$, form the consecutive-edge fiber products one factor at a time. The endpoint maps $W_1\\to W_0$ are Kan fibrations because $p_W$ is one and projection from $W_0^2$ is one; composites and pullbacks of horn-lifting maps are horn-lifting maps, by successively solving the same lifting problems. Thus each intermediate edge product is Kan, and each strict pullback in the construction compares naturally with its path-model homotopy pullback by [lem-coef-kan-pullback-path-comparison]. Inductively [lem-coef-kan-homotopy-pullback-invariance], with the established equivalences $f_0$ and $f_1$, makes the map of $n$-edge products a weak equivalence. The commuting Segal comparison maps from $U_n,V_n$ are weak equivalences by hypothesis; two-out-of-three now gives that $f_n$ is a weak equivalence. This proves every degree and completes both implications.",
+   "text": "Now $f_0\\times f_0$ is a weak equivalence by the coordinatewise product argument of step 6. Apply [lem-coef-spaces-homotopy-fiber-detection] to the endpoint square, using the assumed mapping-space equivalences and [lem-coef-kan-pullback-path-comparison], to conclude that $f_1$ is a weak equivalence. For $n\\geq2$, form the consecutive-edge fiber products one factor at a time. The endpoint maps $W_1\\to W_0$ are Kan fibrations because $p_W$ is one and projection from $W_0^2$ is one; composites and pullbacks of horn-lifting maps are horn-lifting maps, by successively solving the same lifting problems. Thus each intermediate edge product is Kan, and each strict pullback in the construction compares naturally with its path-model homotopy pullback by [lem-coef-kan-pullback-path-comparison]. Inductively [lem-coef-kan-homotopy-pullback-invariance], with the established equivalences $f_0$ and $f_1$, makes the map of $n$-edge products a weak equivalence. The commuting Segal comparison maps from $U_n,V_n$ are weak equivalences by hypothesis; two-out-of-three now gives that $f_n$ is a weak equivalence. This proves every degree and completes both implications.",
    "uses": [
     "lem-coef-spaces-homotopy-fiber-detection",
     "lem-coef-kan-pullback-path-comparison",
@@ -164,6 +184,8 @@
  ],
  "proof_deps": [
   "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-internal-hom-fibration-corner-map",
+  "lem-coef-complete-segal-path-fiber-comparison",
   "lem-coef-homotopy-groups-basepoint-change",
   "lem-coef-kan-homotopy-pullback-invariance",
   "lem-coef-kan-path-boundary-bijections",
@@ -174,8 +196,7 @@
   "lem-coef-reedy-model-structure",
   "lem-coef-segal-homotopy-category-components",
   "lem-coef-space-path-fibration-replacement",
-  "lem-coef-spaces-homotopy-fiber-detection",
-  "lem-coef-sset-anodyne-pushout-product"
+  "lem-coef-spaces-homotopy-fiber-detection"
  ],
  "proof_origin": {
   "by": "agent",
@@ -220,7 +241,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-segal-dk-diagonal-equivalence",
@@ -245,17 +266,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-complete-segal-dk-levelwise",
   "worker": "stage1",
-  "summary": "Repair of all three return points: explicitly cite Reedy matching fibrancy and strict/path pullback comparison; replace the degeneracy-path error by endpoint lifting and component invariance; write the completeness fiber zigzag, component bijection, diagonal homotopy pullback, and natural loop-boundary calculation proving degree zero. Add one strictly foundational statement-only Segal homotopy-category/component-invariance node. Preserve the item statement and current-main maintainer metadata. Second reading supplies the realization/product citation, writes the equivalence-arrow common-base comparison, and derives basepoint-change naturality from its stated cube formula.",
-  "blueprint": "Realizes the inherited mapping-space/diagonal infrastructure below proof paragraph 2 of prop-coef-integral-exceptional-adjoint (the displayed derived coefficient adjunction), not a new coefficient route. The mathematical steps follow Rezk 7.6, 6.4, 6.5 and 5.8, with the previously omitted degree-zero inference expanded.",
+  "summary": "Repair of the human return concerning the 2130-character third step. Retain the statement and Lean record exactly, and retain the original proof route and every other argument. The endpoint construction now cites the existing Mathlib corner-map leaf and the existing path replacement theorem; a new statement-only lemma exposes the full natural pointed completeness/fiber zigzag; edge-chain compression and nonemptiness remain explicit elementary consequences. Original steps 4–9 are retained with their references renumbered. No proof step exceeds 2000 characters.",
+  "blueprint": "Same inherited mapping-space/diagonal infrastructure below paragraph 2 of prop-coef-integral-exceptional-adjoint. Steps 3–5 realize original step 3 via Rezk Proposition 6.4 (diagram (6.3), (1)⇒(4)) and Corollary 6.5; all other arguments of Rezk 7.6 remain in place.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q58-673125dbc",
+  "reviewer": "NT-cc-Q58-d01fb7f0f",
   "group": "Q58",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-673125dbc (reviewer sub-agent of L); spot-checked: I read the item, its 9 steps, the new node, the statement of each of the 13 cited nodes, the parent lem-coef-segal-dk-diagonal-equivalence, and the unit record. The source is Rezk, A model for the homotopy theory of homotopy theory: Section 5 (5.4, 5.8), Proposition 6.4, Corollary 6.5 and Proposition 7.6. It is not archived in literature/, so WANTED is recorded and proof_origin is agent. The statement says the same as Rezk 7.6: Reedy fibrant, strict Segal fiber products, completeness as s0:W0->W_eq, and DK as mapping-space weak equivalences plus essential surjectivity, which is equivalent to an equivalence of homotopy categories. It is unchanged from the base. Step 1: degree-one Reedy matching object is W0^2, so (d1,d0) is a fibration; strict/path comparison applies. Step 2: the restriction to W_eq is still a fibration (horns contain a vertex). Step 3: fiber detection with base map the identity of A^2 for s0 and c_A; q_A is a fibration by the pushout-product leaf; gives the natural zigzag and 'E nonempty iff same component'. Step 4: f0xf0 is a weak equivalence via realization of finite limits; fiber detection gives the mapping-space maps; essential surjectivity by lifting along Lambda^1_0 from s0(fx), with component invariance with moving endpoints. This repairs the old degeneracy error. Steps 5-6: fully faithful, reflects isomorphisms, E_U->E_V is a weak equivalence, pi0 f0 bijective. Step 7: two-out-of-three on the zigzag gives loop-space weak equivalences without assuming g is a weak equivalence; the first paragraph is redundant but correct. Step 8: boundary bijections, realization comparison and basepoint-change naturality prove f0 is a weak equivalence. Step 9: f1 by fiber detection over all vertex pairs; for n>=2 by homotopy-pullback invariance and the Segal maps. proof_deps equals the union of uses. New node lem-coef-segal-homotopy-category-components (Rezk 5.4/5.8): true without completeness; tested on the empty space and on discrete nerves of [1] and of a group. It does not restate a clause of the item, and is not a duplicate of segal-equivalence-classifier or segal-inverse-evaluation (they presuppose the invariance but do not assert it) or the other Segal nodes. Form: statement only, 9 recorded searches of all kinds, blueprint from/via correct. Every citation is in the unit apart from a definition and a Mathlib leaf; no tool uses; no SGA; no target, base-change morphism or coefficient category touched. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-d01fb7f0f (reviewer sub-agent of L); spot-checked: I read the item's 11 steps, the new node lem-coef-complete-segal-path-fiber-comparison and the statement of all 14 cited nodes. Rezk is not in literature/, so I checked against what I know of Rezk 6.4, (6.3), 6.5, 5.8 and 7.6, and the proof is correctly marked by=agent. The item statement is unchanged, has a stage-2 Lean record, and matches Rezk 7.6. Step 3: the corner-map Mathlib leaf applied to the boundary inclusion of Delta^1 and A->Delta^0 has target exactly A^2, so q_A is a fibration; path replacement applied to 1_A gives c_A. Step 4 uses the new node. Its hypotheses hold because def-coef-segal-space's W_eq and completeness agree with the item's. Step 5 (component criterion) is genuinely elementary. Step 6 lifts against Lambda^1_0 starting at s_0(fx), which lies over (fx,fx), and ends at a real arrow fx->b, so essential surjectivity is proved. Step 7 (reflecting isomorphisms) and step 8 (pi_0 bijection) are correct. Step 9 uses two-out-of-three along the natural pointed zigzag and does not assume g is a weak equivalence, so there is no cycle. Steps 10 (boundary bijections, realization, basepoint-change naturality) and 11 (fiber detection, homotopy-pullback invariance, Segal maps) are correct. New node: true. The outer arrows are strict/path comparisons. The inner arrows are fiber detection over the identity of A^2, using p_W s_0 = q_A c_A = Delta_A strictly; naturality and basepoints check. I tested it on the empty space, a discrete set and a groupoid nerve. It is strictly smaller than the item and is not a restatement. The DAG-wide search found no duplicate. Form B1-B10 is met. The route stays within unit sk-prop-sf-biduality-general apart from one definition and one Mathlib leaf, so no tool use is needed. There is no cycle and proof_deps equals the union of uses. No SGA source. No changes; the only blemish is wording, as step 8 says 'step 4' where it means steps 4-5."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.CompleteSegalDKLevelwise",

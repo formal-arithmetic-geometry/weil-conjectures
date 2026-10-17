@@ -10,9 +10,130 @@
  "stmt_deps": [
   "def-kun-subspace-topology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Normalize the inequalities about $c$: put $\\delta_j=a_j-\\ell_j(c)>0$ and $f_j(w)=\\ell_j(w)/\\delta_j$. The index set $J$ is nonempty: otherwise $P=\\mathbb R^d$, which is unbounded since $d\\geq1$. Write $f_j(w)=\\sum_{i=1}^d\\alpha_{ji}w_i$ in standard coordinates, and set $A=1+\\max_{j\\in J}\\sum_i|\\alpha_{ji}|>0$. The triangle inequality and $|w_i-z_i|\\leq\\|w-z\\|$ give $|f_j(w)-f_j(z)|\\leq A\\|w-z\\|$ for every $j$. We use the subspace topologies defined in [def-kun-subspace-topology] throughout.",
+   "uses": [
+    "def-kun-subspace-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent supplement for the radial boundary-extension input below proof paragraph 2; explicit calculation, step 1. Context: Hovey, Model Categories, printed p.79, boundary/horn-pair paragraph; Hovey does not state this auxiliary lemma."
+   }
+  },
+  {
+   "text": "Define $g(w)=\\max_{j\\in J}f_j(w)$. For each $j$, $f_j(w)\\leq f_j(z)+A\\|w-z\\|\\leq g(z)+A\\|w-z\\|$; taking the maximum and interchanging $w,z$ gives $|g(w)-g(z)|\\leq A\\|w-z\\|$. In particular $g$ is continuous, directly by this estimate. Linearity gives $g(0)=0$ and $g(tw)=t g(w)$ for every $t\\geq0$ (also for $t=0$). Dividing each original inequality by its positive $\\delta_j$ shows $c+w\\in P$ if and only if $g(w)\\leq1$. These are explicit finite-maximum and scalar calculations, not an invocation of a general gauge theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent supplement for the radial boundary-extension input below proof paragraph 2; explicit calculation, step 2. Context: Hovey, Model Categories, printed p.79, boundary/horn-pair paragraph; Hovey does not state this auxiliary lemma."
+   }
+  },
+  {
+   "text": "For $w\\ne0$, one has $g(w)>0$. Indeed, if $g(w)\\leq0$, then for every $t\\geq0$, $g(tw)=t g(w)\\leq0\\leq1$, so $c+tw\\in P$. This contradicts boundedness: $\\|c+tw\\|\\geq t\\|w\\|-\\|c\\|$ tends to infinity because $\\|w\\|>0$. Thus $g$ vanishes only at $0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent supplement for the radial boundary-extension input below proof paragraph 2; explicit calculation, step 3. Context: Hovey, Model Categories, printed p.79, boundary/horn-pair paragraph; Hovey does not state this auxiliary lemma."
+   }
+  },
+  {
+   "text": "The interior is exactly $\\{c+w:g(w)<1\\}$. If $g(w)<1$, the ball of radius $(1-g(w))/(2A)$ about $c+w$ lies in $P$, by the estimate in step 2. If $g(w)=1$, then $w\\ne0$ and $g((1+t)w)=1+t>1$ for $t>0$; the points $c+(1+t)w$ lie outside $P$ and approach $c+w$. Hence such a point is not interior. Points with $g(w)>1$ do not belong to $P$, so cannot be interior. By the definition of boundary in the statement, $\\partial P=\\{c+w:g(w)=1\\}$; in particular $c\\notin\\partial P$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent supplement for the radial boundary-extension input below proof paragraph 2; explicit calculation, step 4. Context: Hovey, Model Categories, printed p.79, boundary/horn-pair paragraph; Hovey does not state this auxiliary lemma."
+   }
+  },
+  {
+   "text": "For $x=c+w\\in P\\setminus\\{c\\}$ put $r(x)=g(w)$ and $p(x)=c+w/g(w)$. Steps 2 and 3 give $0<r(x)\\leq1$. Positive homogeneity gives $g(p(x)-c)=g(w)/g(w)=1$, so step 4 puts $p(x)$ in $\\partial P$. Substituting the definitions gives $x=c+r(x)(p(x)-c)$. Conversely, for $p\\in\\partial P$ and $0<r\\leq1$, $g(r(p-c))=r$, so $c+r(p-c)$ belongs to $P\\setminus\\{c\\}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent supplement for the radial boundary-extension input below proof paragraph 2; explicit calculation, step 5. Context: Hovey, Model Categories, printed p.79, boundary/horn-pair paragraph; Hovey does not state this auxiliary lemma."
+   }
+  },
+  {
+   "text": "These coordinates are unique. If $x=c+s(u-c)$ with $u\\in\\partial P$ and $0<s\\leq1$, step 4 gives $g(u-c)=1$; applying $g$ and its positive homogeneity gives $g(x-c)=s$. Consequently $s=r(x)$ and $u=c+(x-c)/s=p(x)$. This also shows that a boundary point has radial coordinates $(p,r)=(x,1)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent supplement for the radial boundary-extension input below proof paragraph 2; explicit calculation, step 6. Context: Hovey, Model Categories, printed p.79, boundary/horn-pair paragraph; Hovey does not state this auxiliary lemma."
+   }
+  },
+  {
+   "text": "Both coordinates are continuous on $P\\setminus\\{c\\}$. The scalar coordinate is Lipschitz by step 2. For the boundary coordinate, fix $w_0\\ne0$ and $\\rho=g(w_0)>0$. If $\\|w-w_0\\|<\\rho/(2A)$ then $g(w)>\\rho/2$ and $|1/g(w)-1/\\rho|\\leq2A\\|w-w_0\\|/\\rho^2$. Expanding $w/g(w)-w_0/\\rho=(w-w_0)/g(w)+w_0(1/g(w)-1/\\rho)$ bounds its norm by $(2/\\rho+2A\\|w_0\\|/\\rho^2)\\|w-w_0\\|$. This proves continuity into the ambient Euclidean space. Since $p(x)\\in\\partial P$, continuity into the subspace $\\partial P$ follows directly from [def-kun-subspace-topology]: the inverse image of an open set $V\\cap\\partial P$ is the inverse image of $V$.",
+   "uses": [
+    "def-kun-subspace-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent supplement for the radial boundary-extension input below proof paragraph 2; explicit calculation, step 7. Context: Hovey, Model Categories, printed p.79, boundary/horn-pair paragraph; Hovey does not state this auxiliary lemma."
+   }
+  },
+  {
+   "text": "Perform the same construction for $Q,v$, with $\\epsilon_k=b_k-m_k(v)>0$, $h(z)=\\max_{k\\in K}m_k(z)/\\epsilon_k$, and $B=1+\\max_k\\sum_i|\\beta_{ki}|$, where $m_k(z)/\\epsilon_k=\\sum_i\\beta_{ki}z_i$. Here $K\\ne\\varnothing$ because $Q$ is bounded and $e\\geq1$. Every calculation in steps 1–7 applies with these substitutions. In particular $h(tz)=t h(z)$ for $t\\geq0$, $h(z)>0$ for $z\\ne0$, $|h(z)-h(z')|\\leq B\\|z-z'\\|$, and the unique continuous coordinates are $s(y)=h(y-v)$ and $q(y)=v+(y-v)/s(y)$ for $y\\ne v$. Also $\\partial Q=\\{v+z:h(z)=1\\}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent supplement for the radial boundary-extension input below proof paragraph 2; explicit calculation, step 8. Context: Hovey, Model Categories, printed p.79, boundary/horn-pair paragraph; Hovey does not state this auxiliary lemma."
+   }
+  },
+  {
+   "text": "Given the prescribed homeomorphism $\\psi$, define $H(c)=v$ and $H(x)=v+r(x)(\\psi(p(x))-v)$ for $x\\ne c$. The point $\\psi(p(x))$ belongs to $\\partial Q$, so $h(H(x)-v)=r(x)h(\\psi(p(x))-v)=r(x)\\in(0,1]$. Thus $H(x)\\in Q\\setminus\\{v\\}$, with $Q$-coordinates $(\\psi(p(x)),r(x))$. Similarly define $G(v)=c$ and $G(y)=c+s(y)(\\psi^{-1}(q(y))-c)$ for $y\\ne v$; it belongs to $P\\setminus\\{c\\}$ and has $P$-coordinates $(\\psi^{-1}(q(y)),s(y))$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent supplement for the radial boundary-extension input below proof paragraph 2; explicit calculation, step 9. Context: Hovey, Model Categories, printed p.79, boundary/horn-pair paragraph; Hovey does not state this auxiliary lemma."
+   }
+  },
+  {
+   "text": "Using precisely the coordinates computed in step 9 gives $G(H(x))=c+r(x)(\\psi^{-1}(\\psi(p(x)))-c)=x$ for $x\\ne c$, and $H(G(y))=v+s(y)(\\psi(\\psi^{-1}(q(y)))-v)=y$ for $y\\ne v$. At the centers the two identities follow from the definitions. For $x\\in\\partial P$, step 6 gives $r(x)=1$ and $p(x)=x$, whence $H(x)=\\psi(x)$. Thus the inverse and boundary restriction have exactly the formulas asserted in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent supplement for the radial boundary-extension input below proof paragraph 2; explicit calculation, step 10. Context: Hovey, Model Categories, printed p.79, boundary/horn-pair paragraph; Hovey does not state this auxiliary lemma."
+   }
+  },
+  {
+   "text": "Away from the centers, $H$ and $G$ are continuous: their formulas in step 9 are compositions of the continuous coordinates of steps 7–8, the given continuous maps $\\psi,\\psi^{-1}$, and vector addition and scalar multiplication in Euclidean spaces. These last operations are coordinatewise sums and products of real numbers. The restrictions to the punctured spaces suffice locally at every noncenter, since a ball of radius $\\|x-c\\|/2$ about $x\\ne c$ avoids $c$, and likewise for $v$. Their images lie in $Q$ and $P$ respectively; [def-kun-subspace-topology] turns this ambient continuity into continuity for those codomains.",
+   "uses": [
+    "def-kun-subspace-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent supplement for the radial boundary-extension input below proof paragraph 2; explicit calculation, step 11. Context: Hovey, Model Categories, printed p.79, boundary/horn-pair paragraph; Hovey does not state this auxiliary lemma."
+   }
+  },
+  {
+   "text": "It remains to check continuity at the centers, without requiring a limit for the boundary coordinate. Boundedness supplies constants $M_P,M_Q\\geq1$ with $\\|p-c\\|\\leq M_P$ for all $p\\in P$ and $\\|q-v\\|\\leq M_Q$ for all $q\\in Q$ (translate the given bounding balls and enlarge the radii). For $x\\ne c$, $\\|H(x)-v\\|=r(x)\\|\\psi(p(x))-v\\|\\leq M_Q g(x-c)\\leq M_Q A\\|x-c\\|$. This inequality also holds at $x=c$. Hence $\\|x-c\\|<\\eta/(M_Q A)$ implies $\\|H(x)-v\\|<\\eta$, for every $\\eta>0$. Similarly $\\|G(y)-c\\|\\leq M_P B\\|y-v\\|$, proving continuity at $v$. Together with steps 10–11, these estimates make $H$ a continuous bijection with continuous inverse $G$, which is the asserted homeomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent supplement for the radial boundary-extension input below proof paragraph 2; explicit calculation, step 12. Context: Hovey, Model Categories, printed p.79, boundary/horn-pair paragraph; Hovey does not state this auxiliary lemma."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-subspace-topology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Explicit normalized-linear-inequality proof for the radial-extension auxiliary lemma used by lem-coef-realization-finite-limits, step 12; original context Hovey p.79, not a proof asserted by Hovey."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -62,10 +183,45 @@
    "results": "{\"t\": \"2026-10-17T07:26:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a bounded polytope defined by finitely many linear inequalities and a strict interior point the radial projection onto the boundary is continuous and extends every prescribed boundary homeomorphism by rays\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_homeomorph_image_interior_closure_frontier_eq_unitBall\", \"exists_homeomorph_image_eq\", \"continuousOn_stereoToFun\", \"continuous_stereoInvFun\", \"gaugeRescaleHomeomorph\", \"stereographic\", \"onePointEquivSphereOfFinrankEq\", \"Set.instTietzeExtensionUnitClosedBall\"], \"digest\": \"aa1aba82fc7782ba\"}",
    "date": "2026-10-17",
    "verdict": "no match: read GaugeRescale.lean:129-197 and RadialEquiv.lean:31-77. Gauge rescaling produces a particular ambient homeomorphism, not an extension of an arbitrarily prescribed boundary homeomorphism nor the stated polytope ray coordinates. homeomorphSphereProd is polar coordinates about a sphere, not a polytope frontier. onePointCongr (OnePoint/Basic.lean:626-634) extends to one-point compactifications, not across a polytope interior. Other hits concern manifolds or partial homeomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "radial.*(extend|frontier)|extend.*(homeomorph|boundary)|homeomorph.*extend",
+   "results": "{\"t\": \"2026-10-17T10:10:22Z\", \"tool\": \"grep\", \"query\": \"radial.*(extend|frontier)|extend.*(homeomorph|boundary)|homeomorph.*extend\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/Algebra/Lie/Extension.lean\", \"Mathlib/Geometry/Manifold/Immersion.lean\", \"Mathlib/Geometry/Manifold/Immersion.lean\", \"Mathlib/Topology/Algebra/Algebra/Equiv.lean\", \"Mathlib/Geometry/Manifold/VectorBundle/Basic.lean\", \"Mathlib/Geometry/Manifold/ContMDiff/Atlas.lean\", \"Mathlib/Geometry/Manifold/ContMDiff/Atlas.lean\"], \"digest\": \"89be4edac88fd856\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read GaugeRescale.lean:128-197 and RadialEquiv.lean:26-69 in the pinned Mathlib. The former constructs a particular ambient homeomorphism and records existence/image equalities, not extension of arbitrary prescribed boundary data; the latter gives sphere polar coordinates, not the stated polytope coordinates. A composition of these theorems would still require the cone-extension continuity argument, so is not a one-line specialization. Other hits concern unrelated manifolds or partial homeomorphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Radial projection from an interior point of a bounded polytope is continuous and coning extends any boundary homeomorphism",
+   "results": "{\"t\": \"2026-10-17T10:10:22Z\", \"tool\": \"leansearch\", \"query\": \"Radial projection from an interior point of a bounded polytope is continuous and coning extends any boundary homeomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"continuousOn_stereoToFun\", \"homeomorphSphereProd\", \"homeomorphUnitSphereProd\", \"Profinite.NobelingProof.continuous_projRestricts\", \"ContinuousStar\", \"AffineEquiv.toHomeomorphOfFiniteDimensional\", \"exists_homeomorph_image_eq\", \"OpenPartialHomeomorph.univUnitBall\"], \"digest\": \"0a5718c2b1bad595\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read GaugeRescale.lean:128-197 and RadialEquiv.lean:26-69 in the pinned Mathlib. The former constructs a particular ambient homeomorphism and records existence/image equalities, not extension of arbitrary prescribed boundary data; the latter gives sphere polar coordinates, not the stated polytope coordinates. A composition of these theorems would still require the cone-extension continuity argument, so is not a one-line specialization. Other hits concern unrelated manifolds or partial homeomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed homeomorphism between the boundaries of two bounded convex polytopes extends by radial coordinates from strict interior points",
+   "results": "{\"t\": \"2026-10-17T10:10:24Z\", \"tool\": \"leanfinder\", \"query\": \"A prescribed homeomorphism between the boundaries of two bounded convex polytopes extends by radial coordinates from strict interior points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_homeomorph_image_eq\", \"gaugeRescaleHomeomorph\", \"exists_homeomorph_image_interior_closure_frontier_eq_unitBall\", \"image_gaugeRescaleHomeomorph_interior\", \"ModelWithCorners.ofConvexRange\", \"ModelWithCorners.of_convex_range\", \"ModelWithCorners.mk_coe\", \"ModelWithCorners.toHomeomorph_apply\"], \"digest\": \"37f7e482b958f1bf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read GaugeRescale.lean:128-197 and RadialEquiv.lean:26-69 in the pinned Mathlib. The former constructs a particular ambient homeomorphism and records existence/image equalities, not extension of arbitrary prescribed boundary data; the latter gives sphere polar coordinates, not the stated polytope coordinates. A composition of these theorems would still require the cone-extension continuity argument, so is not a one-line specialization. Other hits concern unrelated manifolds or partial homeomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "gaugeRescaleHomeomorph|exists_homeomorph_image|homeomorphSphereProd",
+   "results": "{\"t\": \"2026-10-17T10:11:10Z\", \"tool\": \"grep\", \"query\": \"gaugeRescaleHomeomorph|exists_homeomorph_image|homeomorphSphereProd\", \"sub\": \"Analysis\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Module/Ball/RadialEquiv.lean\", \"Mathlib/Analysis/Normed/Module/Ball/RadialEquiv.lean\", \"Mathlib/Analysis/Normed/Module/Ball/RadialEquiv.lean\", \"Mathlib/Analysis/Normed/Module/Ball/RadialEquiv.lean\", \"Mathlib/Analysis/Normed/Module/Ball/RadialEquiv.lean\", \"Mathlib/Analysis/Convex/GaugeRescale.lean\", \"Mathlib/Analysis/Convex/GaugeRescale.lean\", \"Mathlib/Analysis/Convex/GaugeRescale.lean\"], \"digest\": \"4e009b38baa2df6d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read GaugeRescale.lean:128-197 and RadialEquiv.lean:26-69 in the pinned Mathlib. The former constructs a particular ambient homeomorphism and records existence/image equalities, not extension of arbitrary prescribed boundary data; the latter gives sphere polar coordinates, not the stated polytope coordinates. A composition of these theorems would still require the cone-extension continuity argument, so is not a one-line specialization. Other hits concern unrelated manifolds or partial homeomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary homeomorphism of convex body boundaries extends to their cones by preserving the radial parameter, with continuous inverse",
+   "results": "{\"t\": \"2026-10-17T10:11:12Z\", \"tool\": \"leanfinder\", \"query\": \"An arbitrary homeomorphism of convex body boundaries extends to their cones by preserving the radial parameter, with continuous inverse\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"gaugeRescaleHomeomorph\", \"exists_homeomorph_image_interior_closure_frontier_eq_unitBall\", \"exists_homeomorph_image_eq\", \"ModelWithCorners.ofConvexRange\", \"homeomorphSphereProd\", \"homeomorphUnitSphereProd\", \"homeomorphSphereProd_apply_fst_coe\", \"homeomorphSphereProd_symm_apply_coe\"], \"digest\": \"1d4dc9eefa6f97df\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read GaugeRescale.lean:128-197 and RadialEquiv.lean:26-69 in the pinned Mathlib. The former constructs a particular ambient homeomorphism and records existence/image equalities, not extension of arbitrary prescribed boundary data; the latter gives sphere polar coordinates, not the stated polytope coordinates. A composition of these theorems would still require the cone-extension continuity argument, so is not a one-line specialization. Other hits concern unrelated manifolds or partial homeomorphisms."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-realization-finite-limits",
@@ -91,5 +247,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-polytope-boundary-radial-extension",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Supplied twelve elementary calculation steps using the finite maximum of normalized defining linear forms. Proved positivity by boundedness, characterized the boundary, constructed and uniquely recovered radial coordinates, checked their continuity quantitatively, and proved the prescribed extension and inverse continuous including at the centers. No auxiliary nodes or non-elementary black boxes are needed; preserved all inherited searches and provenance.",
+  "blueprint": "Supports proof paragraph 2 of prop-coef-integral-exceptional-adjoint through the recorded cosimplicial-frame ancestry: fills the radial-extension input of lem-coef-realization-finite-limits step 12 in its boundary/horn-pair realization argument. The auxiliary item is not itself a statement of the unit and no unit route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-44710ab78",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-44710ab78 (reviewer sub-agent of L); spot-checked: I read the item and all 12 steps in full, plus the only cited node, def-kun-subspace-topology (Mathlib instTopologicalSpaceSubtype). Steps 1, 7 and 11 use it only for what its statement says: the opens of a subspace are the sets V∩Y with V open. I rechecked every estimate. Step 1: delta_j>0 and J is nonempty because P is bounded and d>=1. Step 2: g is A-Lipschitz, positively homogeneous, and x is in P exactly when g<=1. Step 3: g>0 off 0 because the ray would otherwise stay in P, contradicting boundedness. Step 4: the ball of radius (1-g)/(2A) and the outward ray (1+t)w give interior = {g<1} and boundary = {g=1}. Steps 5-6: existence and uniqueness of the radial coordinates. Step 7: for |w-w0|<rho/(2A), g(w)>rho/2 and the norm bound holds. Steps 8-10: h(H(x)-v)=r, both composites are the identity, and H restricted to the boundary is psi. Step 11: continuity away from the centers by composition into the subspaces. Step 12: |H(x)-v|<=M_Q*A*|x-c| at the centers. All 12 elementary flags are justified. Small cases tested: P=[-2,3] with c=1 and Q=[-1,5] with v=0 under the endpoint swap; a square with a redundant inequality; the parent lem-coef-realization-finite-limits step 12, where the simplex t_j>=0, sum<=1 and the cylinder with 0<=h<=1 and center (c_F,1/2) meet every hypothesis and boundary means P minus int P as used there. There are no new nodes. Duplicate search by rg over dag/nodes: convex-body-ball-homeomorphism, horn-boundary-cylinder-homeomorphism and cubical-open-box-pair do not state a prescribed-boundary extension. Mathlib candidates (gaugeRescale, homeomorphSphereProd, onePointCongr) are correctly judged no match. No route issue: only a definition leaf is cited. Not a target node, so the base-change and coefficient checks do not apply. Hovey is absent from literature/; the report has the WANTED line and proof_origin is agent. No SGA is cited. Remark outside scope: def-kun-subspace-topology's source tag 0055 is wrong. No fixes written."
  }
 }
