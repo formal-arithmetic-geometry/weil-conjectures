@@ -1,0 +1,113 @@
+# WeilConjectures.SmoothPurity.Defs maintenance, 2026-10-17
+
+Status: cause confirmed; the delivery blocker remains unresolved. Its fix requires a
+protected landing-tool/policy change. No mathematical repair was delivered or claimed.
+
+## Cause
+
+The stage-3 queue includes this source-library module with one hole, but its only hole
+is the data body of `AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso`, a
+`noncomputable def`, not a theorem (`lean/WeilConjectures/SmoothPurity/Defs.lean:88-92`).
+Any actual repair must change that body.
+
+On the server, `tools/stage3_gate.py:79-105` refuses every changed non-theorem body in
+`lean/WeilConjectures/`. It does so even when the signature and attributes are identical
+and the hole count falls from one to zero. The refusal precedes the repair lookup at
+line 106. This behavior was deliberately introduced by commit
+`b58a93234bda6477f46314755f19bb62fb7a61f9` (source-library freeze, decision of the human).
+The later commit `e5248d4fd3` allows private proof imports, but does not address data bodies.
+
+The generic definition-repair wording in the worker brief does not override that gate.
+Also, `stage3_delivery.repair_job("G1", item)` returns `None`: that function recognizes
+only reserved `XR...` global-build repairs. There is no current item-specific entry in
+`coord/repairs.txt` or `coord/returns/G1.md`. Adding such an entry or moving the repair
+lookup earlier would therefore not, by itself, fix this case.
+
+The dispatcher snapshot had `tries[item + "@new"] = 20` and repeated gate-refusal notes.
+Recent worker runs (including `1792208988` and `1792209424`) reproduce this conflict.
+No matching delivery/landing record was found in `coord/deliveries.log` or the checked
+`~/cc1/autoland.log`, `buildloop.log`, and `ALERT.log`: the failure occurs before landing.
+The counter is evidence of repeated failed work, not an eligibility rule.
+
+## Verification
+
+An independent read-only check on the server used the real `s3.diff_module` parser and
+`stage3_gate.gate`, with an empty import graph for two import-free synthetic inputs:
+
+```text
+noncomputable def gateWitness : Nat := sorry
+  -> noncomputable def gateWitness : Nat := 0
+REFUSE: changes the body of non-theorem declaration(s) gateWitness
+statement_changed = []; changed attributes = []; sorry 1 -> 0
+
+theorem gateWitness : True := by sorry
+  -> theorem gateWitness : True := by trivial
+AUTO
+statement_changed = []; changed attributes = []; sorry 1 -> 0
+
+G1 repair reservation: None
+```
+
+This isolates the policy conflict without attempting smooth-purity mathematics or
+submitting a synthetic delivery. The worker's real-candidate diagnostic with the full
+import-cycle check also reports the same non-theorem refusal.
+
+The unchanged source module compiled successfully on the server, exit 0, in 2.1 seconds:
+
+```bash
+SHEAF_GROUP=maint-G1-smooth-purity-1792209418 SHEAF_FILE_TIMEOUT=60 \
+  tools/lean_file.sh lean/WeilConjectures/SmoothPurity/Defs.lean
+```
+
+Only that file was compiled. No `lake build` was run and no unrelated process was killed.
+The compile created only the tool's private maintenance build output; it does not prove
+the sorried definition or validate the retained candidate.
+
+## Required owner change
+
+`tools/stage3_gate.py` is a landing tool. The maintenance prompt explicitly forbids
+editing landing tools and requires describing their needed changes here instead. I did
+not edit it, the delivery/landing tools, review service, dispatcher, or admission tools.
+
+The tool/policy owner must reconcile the explicitly queued data-hole task with the
+source-library freeze. If repairing this adopted definition is intended, define and
+implement a narrow authorization for replacing its existing sorried data body with a
+real construction while preserving its signature, attributes, and target meaning.
+Route the definition change through the applicable independent interface review and
+retain change-record, consumer, DAG, import-cycle, compile, and axiom checks. Do not
+exempt arbitrary definition changes, accept a no-op, or mark the hole proved.
+
+Regression coverage should include an authorized existing data-hole repair, an
+unauthorized change to concrete source data, changed signatures/attributes, a new
+source declaration, new/hidden sorry, and ordinary theorem-proof completion. Test the
+actual G1 assignment path; an XR-only exception does not authorize this item. The
+source-freeze decision must explicitly cover this exception before implementation.
+
+If the freeze remains absolute, its owner must supply an approved integration path
+for the concrete construction. Merely changing the brief, retrying, or allowing an
+import cannot make this definition repair land under the current gate.
+
+No cap, throttle, admission change, dispatch suppression, or failure-count reset was made.
+
+## Changes and next worker
+
+Added this local `REPORT.md` and an incident record on the server at
+`coord/reports/maintenance/G1-WeilConjectures.SmoothPurity.Defs-1792209418.md`.
+No pre-existing project source, node, brief, tool, claim, or dispatcher state was changed.
+Report backups are retained as sibling `.bak` files. The server record is committed
+under `coord/.merge.lock` using `SHEAF_LEAD=L-only` and the requested author identity;
+its commit ID is recorded in the maintenance session's final local `REPORT.md`.
+
+The retained sandbox candidate is explicitly invalid: `NormalizedWitness.lean` supplies
+only arbitrary mutually inverse maps, and `smoothPurityIso` chooses them with
+`Classical.choice`. There is no normalization equation or uniqueness determining that
+choice. Compilation does not cure this AGENTS.md §5 violation. Do not deliver that
+candidate, its `lem-pur-condensed-normalized-witness` node, or its change record as a
+repair. They remain untouched as diagnostic evidence, and a worker is currently active
+in that sandbox.
+
+A valid future implementation must construct the intended normalized data and use
+separate property theorems for unfinished proofs. Its delivery must exercise the full
+current gate; a gate-only diagnostic is not a successful delivery dry run. The earlier
+72-minute split-off budget refusal is a separate check, not the cause of the blanket
+definition-body rejection.
