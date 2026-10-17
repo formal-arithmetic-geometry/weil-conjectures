@@ -197,8 +197,42 @@ theorem derivedMaps_exists (X : BigradedExactCouple C s) : Nonempty (DerivedMaps
     rw [← hg p q]
     simpa using imageSubobject_factors_comp_self (M.alpha p q) (𝟙 _)
 
+instance (X : BigradedExactCouple C s) (p q : ℤ) : Mono (X.derivedDInclusion p q) := by
+  dsimp only [derivedDInclusion]
+  infer_instance
+
+instance (X : BigradedExactCouple C s) (p q : ℤ) : Epi (X.derivedEProjection p q) := by
+  dsimp only [derivedEProjection]
+  infer_instance
+
+/-- The induced maps of the derived couple are unique:`alpha'` is determined by the mono
+inclusion of the derived `D`-terms, `f'` by this inclusion and the epi projection from
+cycles, and `g'` by the epi `D → im alpha`.
+Source: Stacks Project, Tag 011R (blueprint: def-sp-exact-couple). -/
+instance (X : BigradedExactCouple C s) : Subsingleton (DerivedMaps X) where
+  allEq M N := by
+    have hα : M.alpha = N.alpha := by
+      funext p q
+      exact (cancel_mono (X.derivedDInclusion (p - 1) (q + 1))).mp
+        ((M.alpha_comm p q).trans (N.alpha_comm p q).symm)
+    have hf : M.f = N.f := by
+      funext p q
+      refine (cancel_mono (X.derivedDInclusion (p + 2) (q - 1))).mp ?_
+      exact (cancel_epi (X.derivedEProjection p q)).mp
+        ((M.f_comm p q).trans (N.f_comm p q).symm)
+    have hg : M.g = N.g := by
+      funext p q
+      exact (cancel_epi (factorThruImage (X.alpha (p + 1) (q - 1)))).mp
+        ((M.g_comm p q).trans (N.g_comm p q).symm)
+    cases M
+    cases N
+    dsimp only at hα hf hg
+    subst hα hf hg
+    rfl
+
 /-- The derived couple. Its data comes from the maps whose existence and
-exactness are stated in `derivedMaps_exists`.
+exactness are stated in `derivedMaps_exists`; they are unique by the `Subsingleton`
+instance on `DerivedMaps`.
 Source: Stacks Project, Tags 011R and 0AMJ (blueprint: def-sp-exact-couple). -/
 noncomputable def derived (X : BigradedExactCouple C s) : BigradedExactCouple C (s + 1) :=
   let M := Classical.choice X.derivedMaps_exists

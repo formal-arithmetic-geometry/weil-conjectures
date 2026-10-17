@@ -21,6 +21,9 @@ universe u w
 open CategoryTheory
 namespace Rep
 
+attribute [local instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
+
 set_option backward.isDefEq.respectTransparency false in
 /-- Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point.
 (blueprint: lem-exc-discrete-continuous-rep-to-commgrp-ess-surj)

@@ -33,18 +33,10 @@ theorem brownCohomologicalRepresentabilityUniverseTransfer
     [IsTriangulated C] [HasCoproducts.{max w v vH} C]
     (hC : IsCompactlyGeneratedTriangulated.{max w v vH} C)
     (H : Cᵒᵖ ⥤ AddCommGrpCat.{vH}) [H.IsHomological]
-    (hH : ∀ I : Type (max w v vH), PreservesLimitsOfShape (Discrete I) H)
-    (hBrown : ∀ (A : Type u) [Category.{max w v vH} A]
-      [HasZeroObject A] [HasShift A ℤ] [Preadditive A]
-      [∀ n : ℤ, (shiftFunctor A n).Additive] [Pretriangulated A]
-      [IsTriangulated A] [HasCoproducts.{max w v vH} A],
-      IsCompactlyGeneratedTriangulated.{max w v vH} A →
-      ∀ (K : Aᵒᵖ ⥤ AddCommGrpCat.{max w v vH}) [K.IsHomological],
-      (∀ I : Type (max w v vH), PreservesLimitsOfShape (Discrete I) K) →
-      ∃ G : A, Nonempty (K ≅ preadditiveYoneda.obj G)) :
+    (hH : ∀ I : Type (max w v vH), PreservesLimitsOfShape (Discrete I) H) :
     (H ⋙ forget AddCommGrpCat).IsRepresentable := by
   obtain ⟨G, hG⟩ := brownCohomologicalRepresentabilityUniverseTransfer_aux
-    C hC H hH hBrown
+    C hC H hH
   exact ⟨⟨G, hG⟩⟩
 
 end CategoryTheory

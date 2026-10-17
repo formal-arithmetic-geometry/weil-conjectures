@@ -9,8 +9,8 @@ module
 public import WeilConjectures.Topology.OpenModuleCohomology
 public import Mathlib.Algebra.Exact.Basic
 import WeilConjectures.AlgebraicGeometry.InjectiveRestrictionSurjective
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquareBoundaryExact
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquareBoundaryNaturality
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.InjExactSquareBoundaryExact
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.InjExactSquareBoundaryNaturality
 import Mathlib.Topology.Sheaves.MayerVietoris
 
 /-! # Mayer--Vietoris for modules on a ringed space
@@ -169,7 +169,7 @@ theorem module_mayerVietoris (X : RingedSpace.{v}) :
       { app := fun F ↦ S.boundary F p
         naturality := by
           intro F G f
-          exact (S.boundary_naturality p).1 f }
+          exact S.boundary_naturality p f }
   refine ⟨fun U V p ↦ d (sectionSquare X U V) p, ?_, ?_, ?_⟩
   · intro U V F
     exact (sectionSquare X U V).boundary_exact.1 F
@@ -188,7 +188,7 @@ theorem module_mayerVietoris (X : RingedSpace.{v}) :
         comm₃₄ := sectionRestriction_square X _ _ _ _ }
     apply NatTrans.ext
     funext F
-    exact ((sectionSquare X U V).boundary_naturality p).2
+    exact (sectionSquare X U V).boundary_square_naturality p
       (sectionSquare X (U ⊓ W) (V ⊓ W)) φ F
 
 end AlgebraicGeometry.RingedSpace

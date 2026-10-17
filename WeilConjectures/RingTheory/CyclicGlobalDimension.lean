@@ -77,8 +77,7 @@ class, hence is a quotient `R ⧸ I` of `R` for the kernel of the map sending `r
 corresponding scalar multiple of that class.  Transport the assumed projective resolution
 of `R ⧸ I` across this cyclic identification.  The well-ordered-union projective-dimension
 lemma then gives a projective resolution of `M` of length at most `n`; since `M` was
-arbitrary, this is `HasGlobalDimensionLE R n`.  The formal proof is split off here because
-this filtration and transport argument is not yet available in the library.
+arbitrary, this is `HasGlobalDimensionLE R n`.
 -/
 theorem hasGlobalDimensionLE_of_cyclic
     (R : Type u) [CommRing R] (n : ℕ)

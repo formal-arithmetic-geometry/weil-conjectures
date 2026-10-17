@@ -23,7 +23,6 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /- The polynomial chart produced by the affine quasi-finite theorem. -/
-set_option linter.unusedVariables false in
 /-- A prescribed natural fibre dimension yields a quasi-finite polynomial chart.
 
 Source: Stacks Project Tag 00QE and its affine translation in Tag 00RH.
@@ -49,8 +48,8 @@ theorem exists_quasiFinite_polynomial_chart_data
     {X T : Scheme.{u}} [IsAffine X] [IsAffine T]
     (f : X ⟶ T) [LocallyOfFinitePresentation f] (y : X) (n : ℕ)
     (hdim : topologicalKrullDimAt (f.asFiber y) = (n : WithBot ℕ∞)) :
-    ∃ (U : X.Opens) (_ : IsAffine U.toScheme) (hy : y ∈ U)
-      (e : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin n)) T),
+    ∃ U : X.Opens, IsAffine U.toScheme ∧ y ∈ U ∧
+      ∃ e : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin n)) T,
       LocallyOfFinitePresentation e ∧ LocallyQuasiFinite e ∧
       e ≫ (AffineSpace (ULift.{u} (Fin n)) T ↘ T) = U.ι ≫ f := by
   let : Algebra Γ(T, ⊤) Γ(X, ⊤) := f.appTop.hom.toAlgebra

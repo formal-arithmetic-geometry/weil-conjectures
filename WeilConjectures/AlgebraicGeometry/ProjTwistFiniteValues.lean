@@ -9,11 +9,17 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 import WeilConjectures.AlgebraicGeometry.ProjTwistLocalClearing
 import Mathlib.Data.Fintype.EquivFin
+
+/-! # Finite local representatives of twist sections
+
+A section of a twist `𝒪(k)` on a standard open `D₊(f)` of `Proj A` is represented by
+finitely many fractions on a principal cover of the affine chart, and these fractions recover
+the section values under every canonical evaluation (Stacks Project, Tag 01M7). -/
+
 @[expose] public section
 universe v
 open CategoryTheory Opposite LocalizedModule
 namespace AlgebraicGeometry.Proj
-set_option linter.unusedVariables false in
 /-- Finite representatives satisfy the section values for every canonical evaluation.
 Source: Stacks Project, Section 27.8, Lemma 27.8.1 (finite standard-open refinements)
 and the construction preceding Lemma 27.8.4, Tag 01M7, applied to A(k).
@@ -45,7 +51,7 @@ theorem twist_finiteLocal_values
     let B := HomogeneousLocalization.Away 𝒜 f
     let M := LocalizedModule.Away f A
     letI : Module B M := Module.compHom M (algebraMap B (Localization.Away f))
-    ∃ (n : ℕ) (g : Fin n → B) (hspan : Ideal.span (Set.range g) = ⊤)
+    ∃ (n : ℕ) (g : Fin n → B) (_ : Ideal.span (Set.range g) = ⊤)
       (t : ∀ i : Fin n, LocalizedModule.Away (g i) M),
       ∀ (i : Fin n) (p : basicOpen 𝒜 f)
         (e : LocalizedModule.Away (g i) M →+

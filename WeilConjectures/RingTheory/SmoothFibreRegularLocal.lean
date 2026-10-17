@@ -9,7 +9,7 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-import WeilConjectures.RingTheory.SmoothOverFieldRegularLocal
+import WeilConjectures.RingTheory.RegularLocalRing.Smooth
 
 /-!
 # Smooth fibres have regular local rings
@@ -47,6 +47,6 @@ theorem smooth_fibre_regular_local
   have hs : Smooth p.asIdeal.ResidueField (p.asIdeal.Fiber S) := inferInstance
   refine ⟨hs, ?_⟩
   intro Q
-  exact smooth_over_field_regular_local p.asIdeal.ResidueField (p.asIdeal.Fiber S) Q.asIdeal
+  exact Smooth.isRegularLocalRing_localization p.asIdeal.ResidueField (p.asIdeal.Fiber S) Q.asIdeal
 
 end Algebra

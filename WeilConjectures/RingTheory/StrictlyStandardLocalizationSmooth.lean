@@ -29,7 +29,7 @@ namespace Algebra
 Source: Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07CA, first paragraph
 (blueprint: lem-weil-pbc-strictly-standard-localization-smooth).
 
-Proof (the six steps of the DAG node):
+Proof (the six steps of the blueprint node):
 1. Choose the presentation `P → A`, with kernel `I = (f₁, …, fₘ)`, and the integer `c`
 from `def-weil-pbc-strictly-standard-element`. By
 `lem-weil-pbc-polynomial-ring-kahler-basis`, the differentials of the variables form a basis

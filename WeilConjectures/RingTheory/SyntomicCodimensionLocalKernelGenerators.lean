@@ -39,7 +39,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 800000 in
 -- The three comparison equivalences involve several localization algebra towers;
 -- the default heartbeat budget is exhausted elaborating their compatibility formulas.
--- Retain the canonical quotient prime from the existing fibre comparison construction,
 -- so that the same homeomorphism also preserves its local dimension.
 private theorem exists_counted_polynomial_fibre_comparison
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]

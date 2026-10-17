@@ -33,7 +33,6 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] Algebra.Etale.of_finite_of_isSeparable
 
-set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Tag 04JM, invariance and finite Galois descent.
 (blueprint: lem-exc-field-invariant-germ-representative-identification).
 
@@ -55,15 +54,14 @@ theorem exists_fieldSection_of_finiteGalois_invariant_representative
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
     [IsScalarTower K Ks Ω] [IsAlgClosed Ω] [Algebra.IsAlgebraic K Ω]
     (s : Spec (.of Ω) ⟶ Spec (.of K))
-    (hs : s = Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
     (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))
     (action : MulAction Gal(Ks/K) ((pointSmallEtale s).sheafFiber.obj F))
-    (haction : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
-      (hτ : (algebraMap Ks Ω).comp g.toRingHom =
-        τ.toRingHom.comp (algebraMap Ks Ω))
-      (X : (Spec (.of K)).Etale) (x x' : (pointSmallEtale s).fiber.obj X)
-      (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)
-      (z : F.obj.obj (op X)),
+    (haction : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω),
+      (algebraMap Ks Ω).comp g.toRingHom =
+        τ.toRingHom.comp (algebraMap Ks Ω) →
+      ∀ (X : (Spec (.of K)).Etale) (x x' : (pointSmallEtale s).fiber.obj X),
+      x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left →
+      ∀ (z : F.obj.obj (op X)),
       action.smul g ((pointSmallEtale s).toPresheafFiber X x F.obj z) =
         (pointSmallEtale s).toPresheafFiber X x' F.obj z)
     (L : IntermediateField K Ks) [FiniteDimensional K L] [Algebra.IsSeparable K L]

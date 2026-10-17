@@ -76,23 +76,6 @@ theorem proj_sheafification_shortExact
       Set.range (alpha i f d hd hf) = degreeZeroFractions
         (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))
         (fun n : ℕ ↦ (𝓜 i n : Set (M i))) (Submonoid.powers f))
-    (hscalar : ∀ (i : Fin 3) (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)
-      (hf : f ∈ homogeneousSubmodule (Fin 2) k d)
-      (r : HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)
-      (s : (F i).val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),
-      alpha i f d hd hf (awayToSection (homogeneousSubmodule (Fin 2) k) f r • s) =
-        algebraMap (HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)
-          (Localization.Away f) r • alpha i f d hd hf s)
-    (hres : ∀ (i : Fin 3) (f g : MvPolynomial (Fin 2) k) (d b : ℕ) (hd : 0 < d) (hb : 0 < b)
-      (hf : f ∈ homogeneousSubmodule (Fin 2) k d) (hg : g ∈ homogeneousSubmodule (Fin 2) k b)
-      (inc : basicOpen (homogeneousSubmodule (Fin 2) k) g ≤
-        basicOpen (homogeneousSubmodule (Fin 2) k) f)
-      (e c : ℕ) (a : MvPolynomial (Fin 2) k),
-      0 < e → a ∈ homogeneousSubmodule (Fin 2) k c → g ^ e = a * f →
-      ∀ (m : ℕ) (y : M i) (s : (F i).val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),
-      alpha i f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →
-      alpha i g b hb hg ((F i).val.map (homOfLE inc).op s) =
-        mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g))
     (phi : M 0 →ₗ[MvPolynomial (Fin 2) k] M 1)
     (psi : M 1 →ₗ[MvPolynomial (Fin 2) k] M 2)
     (hphi : ∀ (z : ℤ) (y : M 0), y ∈ 𝓜 0 z → phi y ∈ 𝓜 1 z)
@@ -113,8 +96,6 @@ theorem proj_sheafification_shortExact
       alpha 2 f d hd hf (q.val.app (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) s) =
         mk (psi y) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f)) :
     ∃ h : i ≫ q = 0, (ShortComplex.mk i q h).ShortExact := by
-  have _ := hscalar
-  have _ := hres
   let B : Set (Proj (homogeneousSubmodule (Fin 2) k)).Opens :=
     {U | ∃ (f : MvPolynomial (Fin 2) k) (d : ℕ),
       0 < d ∧ f ∈ homogeneousSubmodule (Fin 2) k d ∧

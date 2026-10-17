@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPresheafStalkWedge
 import Mathlib.Topology.Sheaves.Sheafify
@@ -78,11 +78,12 @@ set_option backward.isDefEq.respectTransparency false in
 private theorem exteriorGermMap_res {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
     (x : X) {U V : X.Opens} (f : V ⟶ U) (hx : x ∈ V)
     (z : ⋀[X.presheaf.obj (op U)]^n (M.val.obj (op U))) :
-    exteriorGermMap M n x V hx (exteriorSheafRestriction M n f.op z) =
+    exteriorGermMap M n x V hx
+        (((PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).map f.op) z) =
       exteriorGermMap M n x U (f.le hx) z := by
   let L := exteriorGermMap M n x U (f.le hx)
   let K := exteriorGermMap M n x V hx
-  let r := exteriorSheafRestriction M n f.op
+  let r := ((PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).map f.op)
   change K (r z) = L z
   have hz : z ∈ Submodule.span (X.presheaf.obj (op U))
       (Set.range (exteriorPower.ιMulti (X.presheaf.obj (op U)) n)) := by
@@ -92,8 +93,9 @@ private theorem exteriorGermMap_res {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
   | mem z hz =>
     obtain ⟨a, rfl⟩ := hz
     change exteriorGermMap M n x V hx
-      ((exteriorSheafRestriction M n f.op).hom (exteriorPower.ιMulti _ n a)) = _
-    erw [(Classical.choose_spec (exteriorSheafRestriction_existsUnique M n f.op)).1 a]
+      (((PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).map f.op).hom
+        (exteriorPower.ιMulti _ n a)) = _
+    erw [(PresheafOfModules.exteriorPower_map_ιMulti (R := X.presheaf) M.val n f.op) a]
     erw [exteriorGermMap_wedge, exteriorGermMap_wedge]
     congr 1
     funext k
@@ -138,20 +140,23 @@ Proof: use the alternating map on germs and the exterior-power presentation.
 private theorem exteriorPresheaf_stalk_comparison {X : Scheme.{v}} (M : X.Modules)
     (n : ℕ) (x : X) :
     ∃ e : TopCat.Presheaf.stalk (C := Ab.{v})
-        (exteriorSheafPresheaf M n).presheaf x ≃ₗ[X.presheaf.stalk x]
+        (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).presheaf x
+          ≃ₗ[X.presheaf.stalk x]
         ⋀[X.presheaf.stalk x]^n (M.presheaf.stalk x),
       ∀ (U : X.Opens) (hx : x ∈ U) (a : Fin n → M.val.obj (op U)),
-        e (TopCat.Presheaf.germ (exteriorSheafPresheaf M n).presheaf U x hx
+        e (TopCat.Presheaf.germ
+            (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).presheaf U x hx
           (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a)) =
           exteriorPower.ιMulti (X.presheaf.stalk x) n
             (fun i ↦ M.presheaf.germ U x hx (a i)) := by
   classical
-  let P := exteriorSheafPresheaf M n
+  let P := (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n)
   let T := TopCat.Presheaf.stalk (C := Ab.{v}) P.presheaf x
   let W := ⋀[X.presheaf.stalk x]^n (M.presheaf.stalk x)
   obtain ⟨b, hb⟩ := exteriorPresheaf_stalk_wedge M n x
   let q : W →ₗ[X.presheaf.stalk x] T := exteriorPower.alternatingMapLinearEquiv b
-  let c : CategoryTheory.Limits.Cocone ((TopologicalSpace.OpenNhds.inclusion x).op ⋙ P.presheaf) :=
+  let c : CategoryTheory.Limits.Cocone
+      ((TopologicalSpace.OpenNhds.inclusion x).op ⋙ P.presheaf) :=
     { pt := AddCommGrpCat.of W
       ι :=
         { app := fun i ↦ AddCommGrpCat.ofHom
@@ -245,18 +250,21 @@ Source: Stacks Project, Lemma 007Z; blueprint step 2.
 -/
 private theorem exteriorSheaf_stalk_sheafification {X : Scheme.{v}} (M : X.Modules)
     (n : ℕ) (x : X) :
-    ∃ e : TopCat.Presheaf.stalk (C := Ab.{v}) (exteriorSheaf M n).presheaf x ≃ₗ[X.presheaf.stalk x]
-        TopCat.Presheaf.stalk (C := Ab.{v}) (exteriorSheafPresheaf M n).presheaf x,
+    ∃ e : TopCat.Presheaf.stalk (C := Ab.{v}) (exteriorPower M n).presheaf x
+          ≃ₗ[X.presheaf.stalk x]
+        TopCat.Presheaf.stalk (C := Ab.{v})
+          (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).presheaf x,
       ∀ (U : X.Opens) (hx : x ∈ U) (a : Fin n → M.val.obj (op U)),
-        e ((exteriorSheaf M n).presheaf.germ U x hx
-          (exteriorSheafSection M n U a)) =
-          TopCat.Presheaf.germ (exteriorSheafPresheaf M n).presheaf U x hx
+        e ((exteriorPower M n).presheaf.germ U x hx
+          (wedge (M := M) (r := n) (U := U) a)) =
+          TopCat.Presheaf.germ
+            (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).presheaf U x hx
             (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a) := by
-  let P := exteriorSheafPresheaf M n
+  let P := (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n)
   let θ := (PresheafOfModules.sheafificationAdjunction
     (𝟙 X.ringCatSheaf.obj)).unit.app P
   let L : TopCat.Presheaf.stalk (C := Ab.{v}) P.presheaf x →ₗ[X.presheaf.stalk x]
-      TopCat.Presheaf.stalk (C := Ab.{v}) (exteriorSheaf M n).presheaf x :=
+      TopCat.Presheaf.stalk (C := Ab.{v}) (exteriorPower M n).presheaf x :=
     { toFun := PresheafOfModules.stalkAddMap θ
       map_add' := (PresheafOfModules.stalkAddMap θ).map_add
       map_smul' := by
@@ -272,11 +280,11 @@ private theorem exteriorSheaf_stalk_sheafification {X : Scheme.{v}} (M : X.Modul
         dsimp only [PresheafOfModules.stalkAddMap]
         erw [TopCat.Presheaf.stalkFunctor_map_germ_apply,
           TopCat.Presheaf.stalkFunctor_map_germ_apply]
-        change TopCat.Presheaf.germ (exteriorSheaf M n).presheaf _ x hx
+        change TopCat.Presheaf.germ (exteriorPower M n).presheaf _ x hx
           ((θ.app _).hom (_ • _)) = _
         rw [(θ.app _).hom.map_smul]
         exact PresheafOfModules.germ_smul (R := X.presheaf)
-          (exteriorSheaf M n).val x _ hx _ _ }
+          (exteriorPower M n).val x _ hx _ _ }
   have hL : Function.Bijective L := by
     let t := (TopCat.Presheaf.stalkFunctor Ab.{v} x).map
       (CategoryTheory.toSheafify (Opens.grothendieckTopology X) P.presheaf)
@@ -318,10 +326,10 @@ both maps send the empty wedge to the empty wedge, and for a zero stalk ring
 all the modules are zero. No local freeness or exactness is needed. -/
 theorem exteriorSheaf_stalk_comparison {X : Scheme.{v}} (M : X.Modules)
     (n : ℕ) (x : X) :
-    ∃ e : (exteriorSheaf M n).presheaf.stalk x ≃ₗ[X.presheaf.stalk x]
+    ∃ e : (exteriorPower M n).presheaf.stalk x ≃ₗ[X.presheaf.stalk x]
         ⋀[X.presheaf.stalk x]^n (M.presheaf.stalk x),
       ∀ (U : X.Opens) (hx : x ∈ U) (a : Fin n → M.val.obj (op U)),
-        e ((exteriorSheaf M n).presheaf.germ U x hx (exteriorSheafSection M n U a)) =
+        e ((exteriorPower M n).presheaf.germ U x hx (wedge (M := M) (r := n) (U := U) a)) =
           exteriorPower.ιMulti (X.presheaf.stalk x) n
             (fun i ↦ M.presheaf.germ U x hx (a i)) := by
   obtain ⟨e₁, h₁⟩ := exteriorSheaf_stalk_sheafification M n x

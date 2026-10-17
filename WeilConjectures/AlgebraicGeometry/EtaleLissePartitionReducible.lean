@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.EtaleLocallyConstantOpenPullback
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # The reducible step for finite lisse partitions
@@ -34,10 +35,10 @@ private lemma lisse_open_comp {X Y : Scheme.{u}}
   have hopen : IsLisseEtaleSheafOfSets
       ((etaleSetPullback U.ι).obj ((etaleSetPullback g).obj F)) := by
     refine ⟨isLocallyConstantEtaleSheafOfSets_open_pullback _ U hF.1, ?_⟩
-    intro Ω _ _ s
+    refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
     obtain ⟨c, hc, _⟩ := etaleSetInverseImageStalkGerm Y U U.ι
       ((etaleSetPullback g).obj F) Ω s
-    have := hF.2 Ω (s ≫ U.ι)
+    have := hF.finite_sheafFiber Ω (s ≫ U.ι)
     exact Finite.of_injective c hc.1
   obtain ⟨c, _⟩ := etaleSetInverseImageCompositionUnits.2.2
   have transport : ∀ {V : Scheme.{u}}
@@ -50,8 +51,9 @@ private lemma lisse_open_comp {X Y : Scheme.{u}}
       exact Sheaf.isConstant_congr _
         ((V.smallEtaleTopology.overPullback (Type (u + 1))
           (𝒰.etalePrecoverageToEtale i)).mapIso e)
-    · intro Ω _ _ s
-      have := hfin Ω s
+    · refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
+      have := (ConcreteCategory.isFinitelyGenerated_iff_finite _).mp
+        (hfin.isFinitelyGenerated_sheafFiber Ω s)
       exact Finite.of_equiv _
         (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).mapIso e).toEquiv
   exact transport ((c X Y U g U.ι).app F) hopen

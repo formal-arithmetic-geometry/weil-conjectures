@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Abelian.Projective.Basic
 import Mathlib.Algebra.Homology.Embedding.TruncLEHomology
 
@@ -76,7 +77,7 @@ private theorem projective_cycles
     exact (⟨L.iCycles j, r, hir⟩ : Retract (L.cycles j) (L.X j)).projective
 
 /-- A bounded projective complex exact in positive degrees admits a bounded projective
-model with zero positive terms and the same homology in every degree.
+model with zero positive terms, together with a quasi-isomorphism to the original complex.
 
 Source: Stacks Project, More on Algebra, Tag 066Q; explicit tail splitting in
 lem-sc-strict-perfect-closed-pushforward-stalk-resolution, step 3.
@@ -91,9 +92,9 @@ inclusion; hence Z^j is projective as a retract of the projective term L^j.
 Take the good truncation at zero. Its degree-zero term is Z^0, its negative terms
 are those of L and its positive terms are zero, so all its terms are projective.
 The lower bound min(a,0) works. The inclusion of this truncation into L is a
-quasi-isomorphism because the positive homology of L vanishes. Its homology maps
-give the required isomorphisms. This realizes the same successive split-epimorphism
-argument as positive-tail removal without constructing the contractible summands.
+quasi-isomorphism because the positive homology of L vanishes. This realizes the same
+successive split-epimorphism argument as positive-tail removal without constructing the
+contractible summands.
 It covers an empty support interval and the zero complex, uses only projectivity,
 and chooses no degree-zero target module. -/
 theorem boundedProjective_nonpositiveModel
@@ -106,7 +107,7 @@ theorem boundedProjective_nonpositiveModel
       (∀ j : ℤ, j < a → IsZero (Q.X j)) ∧
       (∀ j : ℤ, Projective (Q.X j)) ∧
       (∀ j : ℤ, 0 < j → IsZero (Q.X j)) ∧
-      (∀ j : ℤ, Nonempty (Q.homology j ≅ L.homology j)) := by
+      ∃ ι : Q ⟶ L, QuasiIso ι := by
   obtain ⟨a, b, hb⟩ := hbound
   let emb := ComplexShape.embeddingUpIntLE 0
   let Q := L.truncLE emb
@@ -148,7 +149,6 @@ theorem boundedProjective_nonpositiveModel
     exact hexact j ((ComplexShape.notMem_range_embeddingUpIntLE_iff 0 j).mp hj)
   have hq : QuasiIso (L.ιTruncLE emb) :=
     (L.quasiIso_ιTruncLE_iff_isSupported emb).mpr hsupport
-  exact ⟨Q, min a 0, hlower, hp, hz,
-    fun j ↦ ⟨isoOfQuasiIsoAt (L.ιTruncLE emb) j⟩⟩
+  exact ⟨Q, min a 0, hlower, hp, hz, L.ιTruncLE emb, hq⟩
 
 end CochainComplex

@@ -9,16 +9,15 @@ module
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.LinearAlgebra.Dual.Defs
-import WeilConjectures.AlgebraicGeometry.RationalPointTangentDerivationIdentification
-import WeilConjectures.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
-import WeilConjectures.AlgebraicGeometry.GroupScheme.LieIdentityTangentEquiv
+public import WeilConjectures.AlgebraicGeometry.RationalPointTangentDerivationIdentification
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.LieIdentityTangentEquiv
 
 /-!
 # The Lie algebra and the cotangent dual at the identity
 
 Source: blueprint `sk-i-cartier`, third paragraph, and the dimension paragraph of
 `lem-wf-same-lie-closed-subgroup`.
-(blueprint: lem-ag-lie-identity-cotangent-dual)
 -/
 
 @[expose] public section
@@ -32,7 +31,9 @@ open scoped MonObj
 
 namespace AlgebraicGeometry.GrpObj
 
-private noncomputable def cotangentDualScalarEquiv
+/-- Restricting scalars along a ring isomorphism `r : k ≃+* K` identifies `k`-linear forms with
+`K`-linear forms, semilinearly along `r`: transport the values by `r`. -/
+noncomputable def cotangentDualScalarEquiv
     {k K : Type u} [Field k] [Field K] (r : k ≃+* K)
     (M : Type u) [AddCommGroup M] [Module K M] :
     letI : RingHomInvPair r.toRingHom r.symm.toRingHom :=
@@ -74,70 +75,85 @@ private noncomputable def cotangentDualScalarEquiv
           rw [ψ.map_smul, smul_eq_mul, map_mul, r.symm_apply_apply] }
     exact ⟨φ, by ext m; exact r.apply_symm_apply (ψ m)⟩
 
+/-- The structural residue map `k → κ(e)` at the identity `e` of `G` is a ring isomorphism,
+since `e` is a rational point (`identity_residue_rational`). -/
+def identityResidueEquiv {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :
+    k ≃+* IsLocalRing.ResidueField
+      (G.left.presheaf.stalk (unitSection G (IsLocalRing.closedPoint k))) :=
+  RingEquiv.ofBijective _ (identity_residue_rational G).1
+
+/-- The defining formula of `identityResidueEquiv`. -/
+theorem identityResidueEquiv_apply {k : Type u} [Field k] (G : Over (Spec (.of k)))
+    [GrpObj G] (c : k) :
+    let x := unitSection G (IsLocalRing.closedPoint k)
+    identityResidueEquiv G c =
+      (StructureSheaf.toStalk k (G.hom x) ≫ G.hom.stalkMap x ≫ G.left.residue x).hom c :=
+  rfl
+
 /-- The Lie algebra is the dual of the cotangent space at the rational identity, with
-scalars transported by the residue-field identification. No smoothness is required.
+scalars transported by the residue-field identification `identityResidueEquiv`. No smoothness
+is required. It is the composite of `lieIdentityTangentEquiv`, the rational
+tangent-cotangent duality `exists_rationalPoint_tangent_cotangent_linearEquiv` (the
+epsilon coefficient of the induced stalk map), and transport of the values of a functional
+along `identityResidueEquiv`. Its defining formula is
+`lieCotangentDualEquiv_apply_toCotangent`.
 
 Source: blueprint `sk-i-cartier`, third paragraph, and
-`lem-wf-same-lie-closed-subgroup`, dimension paragraph; Stacks Project, Tag 0B2C.
-(blueprint: lem-ag-lie-identity-cotangent-dual)
-
-Proof: Put `x = e(Spec k)` and `R = O(G,x)`. The section equation `e ≫ p = id`
-identifies the residue field at `x` with `k`: the composite from `k` to the residue
-field and back along `e` is the identity, and the map back is an injective map of
-fields. The structural residue map is therefore bijective; let `r` be this ring
-isomorphism. An infinitesimal point of the group is a dual-number morphism whose
-restriction is `e`. Transport the dual numbers along `r` to identify these with the
-rational tangent vectors at `x`. The library equivalence `lieEquiv` identifies the
-infinitesimal points with `Lie G`; its multiplication-to-addition and scaling
-identities identify the additive and scalar structures. Rational tangent-cotangent
-duality identifies these tangent vectors with the `k`-linear dual of `m/m²`, by
-taking the epsilon coefficient of the induced stalk map. Transport the values of
-a functional by `r` to obtain the residue-field-linear dual. These identifications
-compose to the asserted semilinear equivalence. Each inverse is given by the
-inverse construction (a functional defines the local map `a ↦ residue(a) + D(a) ε`),
-so the equivalence is bijective. More explicitly, let `i : k → R` be the structural
-map and write `a₀ = a - i (r.symm (residue a))`, which lies in the maximal ideal.
-For a residue-field-linear functional `φ`, set `D(a) = φ([a₀])`. Modulo the square
-of the maximal ideal, `(ab)₀ = residue(a) b₀ + residue(b) a₀`, so this defines a
-relative derivation and the stated local dual-number map. Its image lies at `x`,
-hence an affine neighbourhood of `x` reconstructs the scheme morphism; this is
-independent of the neighbourhood. Differentiating group multiplication at `(e,e)`
-sends `(v,w)` to `v+w`: its restrictions to either factor are the identity by the
-unit laws, and its differential is linear. Thus the group law on infinitesimal
-points agrees with addition of functionals. Scaling epsilon scales the functional,
-so the composed bijection is semilinear for the displayed ring isomorphism.
-This argument includes cotangent space zero and requires neither finite dimension
-nor regularity. -/
-theorem exists_lie_identity_cotangent_dual_equiv
-    {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :
+`lem-wf-same-lie-closed-subgroup`, dimension paragraph; Stacks Project, Tag 0B2C. -/
+def lieCotangentDualEquiv {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :
     let R := G.left.presheaf.stalk (unitSection G (IsLocalRing.closedPoint k))
-    ∃ r : k ≃+* IsLocalRing.ResidueField R,
-      letI : RingHomInvPair r.toRingHom r.symm.toRingHom :=
-        RingHomInvPair.of_ringEquiv r
-      letI : RingHomInvPair r.symm.toRingHom r.toRingHom :=
-        RingHomInvPair.of_ringEquiv r.symm
-      Nonempty (Lie G ≃ₛₗ[r.toRingHom]
-        Module.Dual (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R)) := by
+    letI : RingHomInvPair (identityResidueEquiv G).toRingHom
+        (identityResidueEquiv G).symm.toRingHom :=
+      RingHomInvPair.of_ringEquiv (identityResidueEquiv G)
+    letI : RingHomInvPair (identityResidueEquiv G).symm.toRingHom
+        (identityResidueEquiv G).toRingHom :=
+      RingHomInvPair.of_ringEquiv (identityResidueEquiv G).symm
+    Lie G ≃ₛₗ[(identityResidueEquiv G).toRingHom]
+      Module.Dual (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R) := by
   let x := unitSection G (IsLocalRing.closedPoint k)
   let R := G.left.presheaf.stalk x
   let K := G.left.residueField x
   let ρ : k →+* K :=
     (StructureSheaf.toStalk k (G.hom x) ≫ G.hom.stalkMap x ≫ G.left.residue x).hom
-  have hρ : Function.Bijective ρ := (identity_residue_rational G).1
-  let r : k ≃+* K := RingEquiv.ofBijective ρ hρ
+  let r := identityResidueEquiv G
   let : RingHomInvPair r.toRingHom r.symm.toRingHom :=
     RingHomInvPair.of_ringEquiv r
   let : RingHomInvPair r.symm.toRingHom r.toRingHom :=
     RingHomInvPair.of_ringEquiv r.symm
   let : Module k (schemeTangentSpace k G.left G.hom x) :=
     Module.compHom (schemeTangentSpace k G.left G.hom x) ρ
-  let : Module K (IsLocalRing.CotangentSpace R) :=
-    inferInstanceAs (Module (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R))
-  let : Module k (IsLocalRing.CotangentSpace R) :=
-    Module.compHom (IsLocalRing.CotangentSpace R) ρ
-  obtain ⟨E⟩ := exists_lie_identity_tangent_linearEquiv G
-  obtain ⟨F, _⟩ := exists_rationalPoint_tangent_cotangent_linearEquiv
-    k G.left G.hom x hρ
-  exact ⟨r, ⟨(E.trans F).trans (cotangentDualScalarEquiv r _)⟩⟩
+  exact ((lieIdentityTangentEquiv G).trans
+    (exists_rationalPoint_tangent_cotangent_linearEquiv k G.left G.hom x
+      (identity_residue_rational G).1).choose).trans (cotangentDualScalarEquiv r _)
+
+/-- The defining formula of `lieCotangentDualEquiv`: the functional attached to `v` sends the
+class of `a` in `m/m²` to the epsilon coefficient of `θ^♯ a`, where `θ` is the tangent vector
+`lieIdentityTangentEquiv G v` and `θ^♯` its stalk map into the dual numbers over `κ(e)`. -/
+theorem lieCotangentDualEquiv_apply_toCotangent
+    {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] (v : Lie G) :
+    let x := unitSection G (IsLocalRing.closedPoint k)
+    let R := G.left.presheaf.stalk x
+    let θ := lieIdentityTangentEquiv G v
+    ∃ hx : θ.val (IsLocalRing.closedPoint (DualNumber (G.left.residueField x))) = x,
+      ∀ a : IsLocalRing.maximalIdeal R,
+        lieCotangentDualEquiv G v ((IsLocalRing.maximalIdeal R).toCotangent a) =
+          TrivSqZeroExt.snd ((eqToHom (congrArg (fun y : G.left ↦ G.left.presheaf.stalk y)
+            hx.symm) ≫ Scheme.stalkClosedPointTo θ.val).hom a) := by
+  let x := unitSection G (IsLocalRing.closedPoint k)
+  let R := G.left.presheaf.stalk x
+  let K := G.left.residueField x
+  let ρ : k →+* K :=
+    (StructureSheaf.toStalk k (G.hom x) ≫ G.hom.stalkMap x ≫ G.left.residue x).hom
+  let : Module k (schemeTangentSpace k G.left G.hom x) :=
+    Module.compHom (schemeTangentSpace k G.left G.hom x) ρ
+  have hF := (exists_rationalPoint_tangent_cotangent_linearEquiv k G.left G.hom x
+    (identity_residue_rational G).1).choose_spec
+  obtain ⟨hx, D, ⟨hD, hDm⟩, -⟩ := hF (lieIdentityTangentEquiv G v)
+  refine ⟨hx, fun a ↦ ?_⟩
+  have h := congrArg TrivSqZeroExt.snd (hD a)
+  simp only [TrivSqZeroExt.snd_add, TrivSqZeroExt.snd_inl, TrivSqZeroExt.snd_inr,
+    zero_add] at h
+  rw [h, ← hDm a]
+  rfl
 
 end AlgebraicGeometry.GrpObj

@@ -159,7 +159,7 @@ theorem picardUniversalSingleRankMatch_of_source_local {X S T : Scheme.{u}}
     let := hUr'
     have hjr : ((Modules.tensorPullback j).obj M).IsFiniteLocallyFreeOfRank r :=
       SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso (ccomp.app M).symm
-    have hWr := tensorRankComp e.inv j M r hjr
+    have hWr := Modules.isFiniteLocallyFreeOfRank_tensorPullback_comp e.inv j M r hjr
     simpa only [j, Category.assoc, he] using hWr
   · have ha : e.inv ≫ (U.ι ≫ A.ι ≫ h ≫ g) = W.ι ≫ h ≫ g := by
       rw [← Category.assoc e.inv U.ι, ← Category.assoc (e.inv ≫ U.ι) A.ι]
@@ -171,6 +171,7 @@ theorem picardUniversalSingleRankMatch_of_source_local {X S T : Scheme.{u}}
     have hq : q ≫ pullback.fst f (U.ι ≫ A.ι ≫ h ≫ g) =
         pullback.fst f (W.ι ≫ h ≫ g) := by simp [q]
     simpa only [hq] using
-      tensorRankComp q (pullback.fst f (U.ι ≫ A.ι ≫ h ≫ g)) E r hEr'
+      Modules.isFiniteLocallyFreeOfRank_tensorPullback_comp q
+        (pullback.fst f (U.ι ≫ A.ι ≫ h ≫ g)) E r hEr'
 
 end AlgebraicGeometry.Scheme

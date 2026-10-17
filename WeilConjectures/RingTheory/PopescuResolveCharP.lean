@@ -97,7 +97,7 @@ is Noetherian and geometrically regular and the prime is minimal over the extend
 ideal. Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ
 (blueprint: lem-weil-pbc-popescu-resolve-char-p).
 
-Proof, following the DAG's expanded version of the source's reduction argument:
+Proof, following the blueprint's expanded version of the source's reduction argument:
 
 1. (Items item-power, item-generators, item-dimension: the integers $N$, $d$ and generators of
 $H_{A/k}$.) Write $H=H_{A/k}$ [def-weil-pbc-singular-ideal], $\mathfrak h_A=\sqrt{H\Lambda}$

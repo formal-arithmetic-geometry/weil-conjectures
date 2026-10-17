@@ -29,8 +29,6 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
--- Preserve the existing names of the action-compatibility proof binders.
-set_option linter.unusedVariables false in
 /-- The image of the canonical terminal germ map is precisely the invariant subgroup.
 
 Source: Stacks Project, Tags 04JM and 04JQ.
@@ -61,14 +59,14 @@ theorem etaleGlobalSections_galoisInvariants_image
       forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat ≅
       (pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).sheafFiber)
     (hi : ∀ (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})
-      (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
-      (hτ : (algebraMap Ks Ω).comp g.toRingHom =
-        τ.toRingHom.comp (algebraMap Ks Ω))
-      (X : (Spec (.of K)).Etale)
+      (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω),
+      (algebraMap Ks Ω).comp g.toRingHom =
+        τ.toRingHom.comp (algebraMap Ks Ω) →
+      ∀ (X : (Spec (.of K)).Etale)
       (x x' : (pointSmallEtale
-        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj X)
-      (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)
-      (z : F.obj.obj (op X)),
+        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj X),
+      x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left →
+      ∀ (z : F.obj.obj (op X)),
       (i.hom.app F) ((E.functor.obj F).obj.ρ g
         ((i.inv.app F) ((pointSmallEtale
           (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber X x F.obj z))) =

@@ -10,10 +10,9 @@ public import WeilConjectures.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.CategoryTheory.Adjunction.Basic
 import WeilConjectures.CategoryTheory.BrownCohomologicalRepresentability
-import WeilConjectures.CategoryTheory.BrownCohomologicalRepresentabilityUniverseTransfer
-import Mathlib.CategoryTheory.Adjunction.PartialAdjoint
-import Mathlib.CategoryTheory.Limits.Preserves.Opposites
-import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
+import WeilConjectures.CategoryTheory.TriangulatedEquivalenceTransfer
+import WeilConjectures.CategoryTheory.CompactGenerationEquivalence
+import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-!
 # Brown representability criterion for a right adjoint
@@ -37,15 +36,13 @@ Proposition `proposition-brown` (blueprint: lem-pc-brown-representability-right-
 The indexing universe contains both morphism universes and an arbitrary universe `w`
 for the generating set; object universes are independent.
 
-Proof: For each `d : D`, the additive functor `Hom_D(F(-), d)` is cohomological:
-exactness of `F` sends distinguished triangles to distinguished triangles, whose Hom
-sequences are exact. Preservation of coproducts by `F` and the universal property of
-coproducts show that this functor sends coproducts to products. Apply
-`lem-pc-brown-cohomological-representability` to represent it by an object `G(d)` of `C`.
-For a morphism `d ⟶ d'`, Yoneda gives the unique map `G(d) ⟶ G(d')` corresponding to
-postcomposition on these Hom functors. Uniqueness gives identities and composition,
-and makes the representing Hom bijections natural in both variables. These bijections
-give the adjunction `F ⊣ G`.
+Proof: Replace `C` and `D` by `ULiftHom.{max w v₁ v₂}` models, whose morphism types live
+in the coproduct indexing universe, transporting the triangulated structures, coproducts
+and compact generation along `ULiftHom.equiv`. The transported functor is triangulated and
+preserves coproducts, and the transported source has a family of compact generators
+(`IsCompactlyGeneratedTriangulated.exists_compactGenerators`), so it is a left adjoint by
+`Functor.isLeftAdjoint_of_compactGenerators`. Being a left adjoint is invariant under
+composition with equivalences, so `F` is a left adjoint.
 -/
 theorem brownRepresentabilityRightAdjoint
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
@@ -58,31 +55,42 @@ theorem brownRepresentabilityRightAdjoint
     (hC : IsCompactlyGeneratedTriangulated.{max w v₁ v₂} C)
     (hF : ∀ I : Type (max w v₁ v₂), PreservesColimitsOfShape (Discrete I) F) :
     F.IsLeftAdjoint := by
-  apply Functor.isLeftAdjoint_of_rightAdjointObjIsDefined_eq_top
-  funext d
-  apply propext
-  change (F.op ⋙ yoneda.obj d).IsRepresentable ↔ True
-  refine ⟨fun _ ↦ trivial, fun _ ↦ ?_⟩
-  let H := F.op ⋙ preadditiveYoneda.obj d
-  have hH : ∀ I : Type (max w v₁ v₂), PreservesLimitsOfShape (Discrete I) H := by
+  let eC : C ≌ ULiftHom.{max w v₁ v₂} C := ULiftHom.equiv
+  let eD : D ≌ ULiftHom.{max w v₁ v₂} D := ULiftHom.equiv
+  obtain ⟨zC, sC, pC, aC, tC, iC, cC, hTC⟩ := triangulatedEquivalenceTransfer eC
+  obtain ⟨zD, sD, pD, aD, tD, iD, cD, hTD⟩ := triangulatedEquivalenceTransfer eD
+  let := zC
+  let := sC
+  let := pC
+  let := aC
+  let := tC
+  let := iC
+  let := cC
+  let := zD
+  let := sD
+  let := pD
+  let := aD
+  let := tD
+  let := iD
+  let := cD
+  let := eC.commShiftInverse ℤ
+  let := eD.commShiftInverse ℤ
+  let := hTC.1
+  let := hTC.2
+  let := hTD.1
+  let := hTD.2
+  let : HasCoproducts.{max w v₁ v₂} (ULiftHom.{max w v₁ v₂} C) :=
+    fun _ ↦ Adjunction.hasColimitsOfShape_of_equivalence eC.inverse
+  obtain ⟨ι, S, hS⟩ := (compactGenerationEquivalence eC hC).exists_compactGenerators
+  let Fs := eC.inverse ⋙ F ⋙ eD.functor
+  have : ∀ I : Type (max w v₁ v₂), PreservesColimitsOfShape (Discrete I) Fs := by
     intro I
     let := hF I
-    let : PreservesColimitsOfShape (Discrete I)ᵒᵖ F :=
-      preservesColimitsOfShape_of_equiv (Discrete.opposite I).symm F
-    let : PreservesLimitsOfShape (Discrete I) F.op :=
-      preservesLimitsOfShape_op (Discrete I) F
-    have : PreservesLimitsOfShape (Discrete I)
-        (preadditiveYoneda.obj d ⋙ forget AddCommGrpCat) :=
-      inferInstanceAs (PreservesLimitsOfShape (Discrete I) (yoneda.obj d))
-    have : PreservesLimitsOfShape (Discrete I) (preadditiveYoneda.obj d) :=
-      preservesLimitsOfShape_of_reflects_of_preserves _ (forget AddCommGrpCat)
-    change PreservesLimitsOfShape (Discrete I) (F.op ⋙ preadditiveYoneda.obj d)
+    dsimp [Fs]
     infer_instance
-  have : H.IsHomological := by
-    change (F.op ⋙ preadditiveYoneda.obj d).IsHomological
-    infer_instance
-  apply brownCohomologicalRepresentabilityUniverseTransfer C hC H hH
-  intro A _ _ _ _ _ _ _ _ hA K _ hK
-  exact brownCohomologicalRepresentability A hA K hK
+  have hAdj : Fs.IsLeftAdjoint := Functor.isLeftAdjoint_of_compactGenerators hS Fs
+  have hAdj' : (F ⋙ eD.functor).IsLeftAdjoint :=
+    (Functor.isLeftAdjoint_comp_iff_right eC.inverse (F ⋙ eD.functor)).mp hAdj
+  exact (Functor.isLeftAdjoint_comp_iff_left F eD.functor).mp hAdj'
 
 end CategoryTheory

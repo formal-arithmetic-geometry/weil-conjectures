@@ -34,12 +34,12 @@ sheaves such as `AlgebraicGeometry.WeilComplex`: its Hom-groups are not Ext grou
 sheaves, since a nonsplit Frobenius extension of `Λ` by `Λ` gives no nonzero map `Λ ⟶ Λ[1]` of
 pairs.
 
-`AlgebraicGeometry.ProEtale.StrictWeilComplex` is not the structure
-`AlgebraicGeometry.ProEtale.WeilComplex` of
-`WeilConjectures.SixFunctors.ProEtale.TraceFormula.Frobenius`, which is the input of the
-trace formula: there the Frobenius `Φ₁ : X ⟶ X` over a base `s` is part of the data, `K` is any
-object of `D(X_proét, A)`, and the coefficient morphism `Φ₁^* K ⟶ K` need not be invertible; no
-morphisms between such data are defined. Here the automorphism `g` is a fixed parameter, `K`
+`AlgebraicGeometry.ProEtale.StrictWeilComplex` is not the category of Weil objects
+`AlgebraicGeometry.ProEtale.CondensedRing.WeilBoundedConstructible` of
+`WeilConjectures.WeilObject.BoundedConstructible.Defs`, which is the input of the trace formula
+(`WeilConjectures.TraceFormula.Main`): there the coefficients are `ℚ̄_ℓ`, the Frobenius
+`Φ : X ⟶ X` over `Spec k` is an endomorphism, not necessarily an automorphism, and `K` lies in
+`Dᵇc(X)⟦ℚ̲̄_ℓ⟧`. Here the coefficients are finite, the automorphism `g` is a fixed parameter, `K`
 lies in `Dctf(X, A)`, `φ` is an isomorphism, and the pairs form a category.
 
 ## Main definitions

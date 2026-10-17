@@ -226,10 +226,12 @@ theorem picardRankMatch_baseChange_stalk_finrank_eq {X S T : Scheme.{u}} (f : X 
       simp [bs]
     have hr : ((Modules.tensorPullback (pullback.fst f k)).obj E).IsFiniteLocallyFreeOfRank
         r := by
-      simpa only [har] using tensorRankComp ar (pullback.fst f (U.ι ≫ g)) E r hEr
+      simpa only [har] using Modules.isFiniteLocallyFreeOfRank_tensorPullback_comp ar
+        (pullback.fst f (U.ι ≫ g)) E r hEr
     have hs : ((Modules.tensorPullback (pullback.fst f k)).obj E).IsFiniteLocallyFreeOfRank
         s := by
-      simpa only [hbs] using tensorRankComp bs (pullback.fst f (V.ι ≫ h ≫ g)) E s hEs
+      simpa only [hbs] using Modules.isFiniteLocallyFreeOfRank_tensorPullback_comp bs
+        (pullback.fst f (V.ι ≫ h ≫ g)) E s hEs
     obtain ⟨x, hx⟩ := hne
     have hxt : f ((pullback.fst f g) x) = k ⟨t, htW⟩ := by
       change (pullback.fst f g ≫ f) x = (h ≫ g) t
