@@ -79,29 +79,6 @@ open _root_.CategoryTheory.Functor
 variable {C₁ C₂ D : Type*} [Category C₁] [Category C₂] [Category D]
   (r₁ : HomRel C₁) (r₂ : HomRel C₂)
 
-/-- A natural transformation between bifunctors on quotient categories, from one between their
-precompositions with the quotient functors. -/
-def natTransLift₂ {F G : Quotient r₁ ⥤ Quotient r₂ ⥤ D}
-    (τ : (((whiskeringLeft₂ D).obj (functor r₁)).obj (functor r₂)).obj F ⟶
-      (((whiskeringLeft₂ D).obj (functor r₁)).obj (functor r₂)).obj G) :
-    F ⟶ G where
-  app X₁ :=
-    { app X₂ := (τ.app X₁.as).app X₂.as
-      naturality := by
-        rintro _ _ ⟨f₂⟩
-        exact (τ.app X₁.as).naturality f₂ }
-  naturality := by
-    rintro _ _ ⟨f₁⟩
-    ext ⟨X₂⟩
-    exact NatTrans.congr_app (τ.naturality f₁) X₂
-
-@[simp]
-lemma natTransLift₂_app_app {F G : Quotient r₁ ⥤ Quotient r₂ ⥤ D}
-    (τ : (((whiskeringLeft₂ D).obj (functor r₁)).obj (functor r₂)).obj F ⟶
-      (((whiskeringLeft₂ D).obj (functor r₁)).obj (functor r₂)).obj G) (X₁ : C₁) (X₂ : C₂) :
-    ((natTransLift₂ r₁ r₂ τ).app ((functor r₁).obj X₁)).app ((functor r₂).obj X₂) =
-      (τ.app X₁).app X₂ := rfl
-
 /-- A natural isomorphism between bifunctors on quotient categories, from one between their
 precompositions with the quotient functors. -/
 @[simps]

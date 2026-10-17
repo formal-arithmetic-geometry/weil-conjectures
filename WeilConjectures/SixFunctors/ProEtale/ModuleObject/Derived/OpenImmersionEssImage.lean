@@ -19,7 +19,8 @@ Let `Λ` be a commutative condensed ring and `j : U ⟶ X` an open immersion. Th
 the extension by zero `j_! : Mod_{Λ_U} ⥤ Mod_{Λ_X}` is fully faithful and that its essential
 image, and the essential image of `Dj_!` on derived categories, contain the tensor products
 `j_! K ⊗ N`. This is the input of the derived projection formula
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionProjection`.
+`ProEtale.CondensedRing.isIso_openImmersionProjectionComparison` of
+`WeilConjectures.PoincareDuality.ProjectionFormula`.
 
 The argument runs as follows.
 

@@ -2264,7 +2264,6 @@ public import WeilConjectures.CategoryTheory.Monoidal.Braided.Adjunction
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.InvertibleDualizing
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ProjectionPairing
-public import WeilConjectures.CategoryTheory.Monoidal.Closed.VerdierExchange
 public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 public import WeilConjectures.CategoryTheory.Monoidal.DerivedBraided
 public import WeilConjectures.CategoryTheory.Monoidal.Dualizable
@@ -2488,7 +2487,7 @@ public import WeilConjectures.Compactification.IsomorphismNearClosure
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.Noetherian
 public import WeilConjectures.Compactification.Over
-public import WeilConjectures.Compactification.OverRefinement
+public import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Compactification.ProjectiveSpace
 public import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Compactification.RefinementPullback
@@ -4338,12 +4337,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionEssImage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionProjection
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition

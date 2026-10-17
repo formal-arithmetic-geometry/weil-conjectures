@@ -5,7 +5,10 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
+public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.PoincareDuality.Abstract
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionEssImage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 /-!
@@ -31,9 +34,9 @@ direction is chosen so that the Verdier exchange morphism can be defined from it
    `A = Di_! K`;
 2. the *inverse* of the projection comparison
    `q_{i,M,N} : Di_! (M ⊗ᴸ Li^* N) ⟶ Di_! M ⊗ᴸ N` of the adjunction `Di_! ⊣ Li^*` along the open
-   immersion `i` (`CategoryTheory.Adjunction.projectionComparison`), which is *assumed* to be an
-   isomorphism (`ProEtale.CondensedRing.isIso_openImmersionProjectionComparison`): this is the
-   derived projection formula for the extension by zero;
+   immersion `i` (`CategoryTheory.Adjunction.projectionComparison`), which is an isomorphism
+   (`ProEtale.CondensedRing.isIso_openImmersionProjectionComparison`): this is the derived
+   projection formula for the extension by zero;
 3. the identification `Li^* Lg^* B ≅ Lf^* B`.
 
 ## Main definitions
@@ -53,6 +56,11 @@ direction is chosen so that the Verdier exchange morphism can be defined from it
 
 ## Main results
 
+- `ProEtale.CondensedRing.isIso_openImmersionProjectionComparison`: `q_j` is an isomorphism. It
+  is the projection map `Adjunction.projectionMap` of `Dj_! ⊣ Lj^*`, which is an isomorphism
+  since `Dj_!` is fully faithful and `Dj_! M ⊗ᴸ N` lies in its essential image
+  (`ProEtale.CondensedRing.tensorObj_mem_essImage_mapDerivedCategory_openImmersionLowerShriek`).
+
 - `ProEtale.CondensedRing.exceptionalProjectionMorphismOfCompactification_natural_right` and
   `ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_natural_right`:
   `PF^!_{f,K,B}` is natural in `B`.
@@ -66,10 +74,6 @@ direction is chosen so that the Verdier exchange morphism can be defined from it
 
 ## Sorried input
 
-- `ProEtale.CondensedRing.isIso_openImmersionProjectionComparison`: `q_j` is an isomorphism.
-  On module objects `j_!` is exact and `j^*` is restriction, so `j_!(M ⊗ j^* N) ≅ j_! M ⊗ N`
-  holds already on the underived tensor products (`Adjunction.HasProjectionFormula` for
-  `j_! ⊣ j^*`), and both sides preserve K-flat resolutions.
 - `ProEtale.CondensedRing.isIso_boundedConstructibleExceptionalProjectionMorphism`: the derived
   projection formula for `Rf_!` on bounded constructible complexes (Input 2.1 of
   `WeilConjectures/PoincareDuality/Verdier_Poincare_Maps_ProEtale_Condensed_EN.tex`). It is
@@ -149,8 +153,30 @@ instance isIso_openImmersionProjectionComparison
     (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)))
     (N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
-    IsIso (openImmersionProjectionComparison Λ j M N) :=
-  sorry
+    IsIso (openImmersionProjectionComparison Λ j M N) := by
+  have e : openImmersionProjectionComparison Λ j M N =
+      (((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j).projectionMap
+        L((j)^*⟦Λ⟧) (curriedTensor _) (curriedTensor _)
+        (Functor.LaxMonoidal.μNatTrans L((j)^*⟦Λ⟧))).app M).app N := by
+    rw [Adjunction.projectionMap_app_app]
+    rfl
+  rw [e]
+  have : IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit :=
+    Adjunction.isIso_mapDerivedCategoryAdjunction_unit _
+  have := (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).fullyFaithfulLOfIsIsoUnit.full
+  have :=
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).fullyFaithfulLOfIsIsoUnit.faithful
+  have : IsIso (Functor.LaxMonoidal.μNatTrans L((j)^*⟦Λ⟧)) := by
+    have (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ X))) : IsIso ((Functor.LaxMonoidal.μNatTrans L((j)^*⟦Λ⟧)).app K) := by
+      have (Y : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (condensedRingObj Λ X))) :
+          IsIso (((Functor.LaxMonoidal.μNatTrans L((j)^*⟦Λ⟧)).app K).app Y) :=
+        inferInstanceAs (IsIso (Functor.LaxMonoidal.μ L((j)^*⟦Λ⟧) K Y))
+      exact NatIso.isIso_of_isIso_app _
+    exact NatIso.isIso_of_isIso_app _
+  obtain ⟨Z, ⟨e⟩⟩ := tensorObj_mem_essImage_mapDerivedCategory_openImmersionLowerShriek Λ j M N
+  exact Adjunction.isIso_projectionMap_app_app_of_iso _ _ _ _ _ M N Z e.symm
 
 @[reassoc]
 lemma openImmersionProjectionComparison_natural_right

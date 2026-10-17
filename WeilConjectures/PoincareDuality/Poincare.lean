@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.PoincareDuality.Verdier
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
 public import WeilConjectures.SmoothPurity.Defs
 
 /-!
@@ -79,6 +80,17 @@ lemma boundedConstructible_tateTwistDerived (X : Scheme.{u}) (d n : ℤ) :
     boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)
       ((shiftFunctor _ n).obj (tateTwistDerived X ℓ d)) :=
   sorry
+
+include p in
+omit [SmoothOfRelativeDimension d p.left] in
+/-- The shifted Tate twist `ℚ̄_ℓ,X(d)[2d]` is bounded constructible when `X` is smooth of pure
+relative dimension `d` over some `S`: by smooth purity (`smoothPurityIso`) it is isomorphic to
+`Rp^! ℚ̄_ℓ,S`, which is bounded constructible. -/
+lemma boundedConstructible_shift_tateTwistDerived :
+    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)
+      ((shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d)) :=
+  (boundedConstructible _).prop_of_iso (smoothPurityIso ℓ p d)
+    ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj (𝟙_ _)).property
 
 /-- The shifted Tate twist `ℚ̄_ℓ,X(d)[n]`, as a bounded constructible complex. -/
 noncomputable def boundedConstructibleTateTwist (X : Scheme.{u}) (d n : ℤ) :
