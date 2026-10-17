@@ -9,11 +9,94 @@
  },
  "stmt_deps": [
   "sk-def-sf-operations",
-  "sk-def-sf-kv-maps"
+  "sk-def-sf-kv-maps",
+  "thm-sf-comp-composition",
+  "def-weil-pbc-adjunction-conjugate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal C_Z=D^b_{ctf}(Z,A)$, $P_u=Ru_!$, $G_u=Ru^!$, and $t_f=\\mathrm{Ku}_!(f_1,f_2)$. These are the actual constructible adjunctions of [sk-def-sf-operations](vi). The product adjunction $(P_{f_1},P_{f_2})\\dashv(G_{f_1},G_{f_2})$ has the componentwise Hom bijection and componentwise counits. Apply [def-weil-pbc-adjunction-mate] with $L_1=(P_{f_1},P_{f_2})$, $L_2=P_F$, and $G,H$ the external-product functors on the source and target pairs. Its transpose description is exactly [sk-def-sf-kv-maps](ii); thus its mate is the specified $\\alpha_f$, rather than an arbitrary comparison. In particular, for $E_i\\in\\mathcal C_{Y_i}$ and $E=E_1\\boxtimes E_2$,\n$$\\varepsilon_{F,E}\\circ P_F(\\alpha_f(E_1,E_2))=(\\varepsilon_{f_1,E_1}\\boxtimes\\varepsilon_{f_2,E_2})\\circ t_f(G_{f_1}E_1,G_{f_2}E_2).$$\nThe adjunction Hom bijection is injective, so equality after this inverse transposition proves equality of the original morphisms.",
+   "uses": [
+    "sk-def-sf-operations",
+    "sk-def-sf-kv-maps",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: unfold its exceptional-adjoint definition"
+   }
+  },
+  {
+   "text": "Put $F=f_1\\times f_2$, $G=g_1\\times g_2$ and $h_i=g_if_i$. The left-adjoint input is [lem-sf-kv-shriek-composition]: under the specified composition identifications,\n$$t_h(B_1,B_2)=t_g(P_{f_1}B_1,P_{f_2}B_2)\\circ P_G(t_f(B_1,B_2)).$$\nIt also gives $t_{\\mathrm{id},\\mathrm{id}}=\\mathrm{id}$. This is a statement about the concrete compact-support product maps; it assumes no exceptional-product comparison. Its naturality in the two inputs is the naturality of the relative product map in [sk-thm-sf-kunneth-relative] and of the base-change comparisons in its construction [sk-def-sf-kv-maps](i).",
+   "uses": [
+    "lem-sf-kv-shriek-composition",
+    "sk-thm-sf-kunneth-relative",
+    "sk-def-sf-kv-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: left-adjoint composition input for affine factorization"
+   }
+  },
+  {
+   "text": "Under the conjugate composition comparisons of the question, [def-weil-pbc-composite-adjunction] and [def-weil-pbc-adjunction-conjugate] identify the counits with\n$$\\varepsilon_{GF} =\\varepsilon_G\\circ P_G\\varepsilon_FG_G,\\qquad \\varepsilon_{h_i}=\\varepsilon_{g_i}\\circ P_{g_i}\\varepsilon_{f_i}G_{g_i}.$$\nThis follows from the displayed composite-counit formula and the definition of a conjugate comparison. Put $L=L_1\\boxtimes L_2$, $E_i=G_{g_i}L_i$, $K_i=G_{f_i}E_i$, and $E=E_1\\boxtimes E_2$. For $u=G_F(\\alpha_g(L_1,L_2))\\circ\\alpha_f(E_1,E_2)$, inverse transposition under $P_GP_F\\dashv G_FG_G$ gives\n$$\\begin{aligned}\n\\varepsilon_{GF,L}\\circ P_GP_F(u)\n&=\\varepsilon_{G,L}\\circ P_G(\\alpha_g)\\circ P_G(\\varepsilon_{F,E}\\circ P_F\\alpha_f)\\\\\n&=(\\varepsilon_{g_1}\\boxtimes\\varepsilon_{g_2})\\circ t_g(E_1,E_2)\\circ P_G((\\varepsilon_{f_1}\\boxtimes\\varepsilon_{f_2})\\circ t_f(K_1,K_2))\\\\\n&=((\\varepsilon_{g_1}\\circ P_{g_1}\\varepsilon_{f_1})\\boxtimes(\\varepsilon_{g_2}\\circ P_{g_2}\\varepsilon_{f_2}))\\circ t_g(P_{f_1}K_1,P_{f_2}K_2)\\circ P_G(t_f(K_1,K_2))\\\\\n&=(\\varepsilon_{h_1}\\boxtimes\\varepsilon_{h_2})\\circ t_h(K_1,K_2).\n\\end{aligned}$$\nThe first equality is naturality of $\\varepsilon_F$; the second is step 1 for $f,g$; the third is naturality of $t_g$ with respect to the two counits; the fourth is step 2 and the component composite-counit formula. The last line is the inverse transpose of $\\alpha_h$ by step 1. Injectivity proves the composition equality.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: explicit composite-counit calculation of the composition identity"
+   }
+  },
+  {
+   "text": "For an identity pair use the canonical identity comparisons for $P$, and their conjugates for $G$. The identity adjunction of [def-weil-pbc-composite-adjunction] has identity counit. By step 2, $t_{\\mathrm{id},\\mathrm{id}}=\\mathrm{id}$, so the inverse transpose defining $\\alpha$ in step 1 is the identity map of $L_1\\boxtimes L_2$. Transposition for the identity adjunction is the identity function. This proves the identity assertion, also for arbitrary chosen exceptional adjoints after the specified conjugate identifications.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: identity normalization"
+   }
+  },
+  {
+   "text": "Let $\\tau_X:X_2\\times X_1\\to X_1\\times X_2$ and $\\tau_Y:Y_2\\times Y_1\\to Y_1\\times Y_2$ be the swap isomorphisms, $F=f_1\\times f_2$ and $F'=f_2\\times f_1$; then $F\\tau_X=\\tau_YF'$ and the square $(\\tau_X,F',F,\\tau_Y)$ is Cartesian. Write $s$ for the pullback-composition identification $L\\tau^*(M_1\\boxtimes M_2)\\cong M_2\\boxtimes M_1$ followed by the signed symmetry of $\\otimes^L$ (on $X$ or on $Y$), and $e:L\\tau_Y^*P_F\\to P_{F'}L\\tau_X^*$ for $\\operatorname{Ex}_!$ of this square [sk-def-sf-exchanges]. First, for $B_i\\in\\mathcal C_{X_i}$,\n$$s\\circ L\\tau_Y^*\\,t_{f_1,f_2}(B_1,B_2)=t_{f_2,f_1}(B_2,B_1)\\circ P_{F'}(s)\\circ e.\\qquad(*)$$\nBy [sk-def-sf-kv-maps](i), $t_{f_1,f_2}$ is $\\kappa^{\\mathrm{rel}}_{a,b}$ over $B=Y_1\\times Y_2$, for $a=f_1\\times\\mathrm{id}_{Y_2}$ and $b=\\mathrm{id}_{Y_1}\\times f_2$, followed by the inverse exchanges $\\operatorname{Ex}_!$ of the two product squares over $f_1$ and $f_2$. The base-change clause (iii) of [sk-thm-sf-kunneth-relative] for $\\tau_Y:Y_2\\times Y_1\\to B$ (a separated finite-type base) identifies $L\\tau_Y^*\\kappa^{\\mathrm{rel}}_{a,b}$ with $\\kappa^{\\mathrm{rel}}$ of the base-changed maps, which are $\\mathrm{id}_{Y_2}\\times f_1$ and $f_2\\times\\mathrm{id}_{Y_1}$, through $\\operatorname{Ex}_!$ along $\\tau_Y$ for $a$, $b$ and $F$ (the last is $e$) and the monoidality of $L\\tau_Y^*$. Its symmetry clause (i) then exchanges the two factors, with the swap of the fibre product and the Koszul signs of $\\sigma$; this yields the $\\kappa^{\\mathrm{rel}}$ in the construction of $t_{f_2,f_1}$. Finally the horizontal pasting equation of [fix-lem-exchanges](2), for the square along $\\tau_Y$ pasted with the product square over $f_1$ (whose composite bottom map $\\mathrm{pr}_{Y_1}\\tau_Y$ is the projection $Y_2\\times Y_1\\to Y_1$), identifies $\\operatorname{Ex}_!$ along $\\tau_Y$ for $a$, followed by $L\\tau_Y^*$ of the product-square exchange for $f_1$, with the product-square exchange for $f_1$ over $Y_2\\times Y_1$; likewise for $f_2$. Substituting these identities gives $(*)$. These schemes are separated of finite type and all inputs lie in the finite-Tor categories of step 1, as these clauses require.\n\nNow transpose. Apply $s\\circ L\\tau_Y^*(-)$ to the step-1 equation for $(f_1,f_2)$ at $E_i=L_i$. Naturality of the signed symmetry gives $s\\circ L\\tau_Y^*(\\varepsilon_{f_1}\\boxtimes\\varepsilon_{f_2})=(\\varepsilon_{f_2}\\boxtimes\\varepsilon_{f_1})\\circ s$, and $(*)$ with $B_i=G_{f_i}L_i$, followed by the step-1 equation for $(f_2,f_1)$, gives\n$$s\\circ L\\tau_Y^*\\bigl(\\varepsilon_{F}\\circ P_F\\alpha_{(f_1,f_2)}(L_1,L_2)\\bigr)=\\varepsilon_{F'}\\circ P_{F'}\\bigl(\\alpha_{(f_2,f_1)}(L_2,L_1)\\circ s\\bigr)\\circ e .$$\nThe left side is, by the definition of the conjugate in [def-weil-pbc-adjunction-conjugate] for the composite adjunctions $L\\tau_Y^*P_F\\dashv G_FR\\tau_{Y*}$ and $P_{F'}L\\tau_X^*\\dashv R\\tau_{X*}G_{F'}$ of [def-weil-pbc-composite-adjunction] (here $L\\tau^*\\dashv R\\tau_*$ are inverse equivalences), the transpose of $\\alpha_{(f_1,f_2)}$ transported along the swap by $s$ and by the conjugate $e^c$ of $e$; the right side is the transpose of $\\alpha_{(f_2,f_1)}\\circ s$ composed with $e$. Hence the transported $\\alpha_{(f_1,f_2)}$ and $\\alpha_{(f_2,f_1)}\\circ s$ have the same transpose, and transpose injectivity from step 1 proves the asserted symmetry. All symmetries retain their Koszul signs; no invertibility of $\\alpha$ or of $e$ is used.",
+   "uses": [
+    "sk-thm-sf-kunneth-relative",
+    "sk-def-sf-kv-maps",
+    "sk-def-sf-exchanges",
+    "fix-lem-exchanges",
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: symmetry of its defining two-counit transpose"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sf-operations",
+  "sk-def-sf-kv-maps",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sf-kv-shriek-composition",
+  "sk-thm-sf-kunneth-relative",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate",
+  "sk-def-sf-exchanges",
+  "fix-lem-exchanges"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+  "place": "alpha paragraph: composition and symmetry implicit in affine factorization, expanded by a two-counit calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +146,38 @@
    "results": "0 hits in Mathlib/AlgebraicGeometry: .  Read candidate Mathlib Mates.lean 425-436, Monoidal/Closed/Functor.lean 45-116, Monoidal/Functor.lean 947-975 and Triangulated/Pretriangulated.lean 189-203: conjugacy, Cartesian exponential maps, right-adjoint lax monoidality, or generic triangle completion; none states this comparison for the geometric derived sheaf operations.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of adjunction transpose maps equals transpose for composite adjunction and is compatible with symmetry",
+   "results": "CategoryTheory.Adjunction.toCat_comp_toCat; Module.Dual.transpose_comp; CategoryTheory.Equivalence.trans_toAdjunction; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.comp; CategoryTheory.conjugateEquiv_comp; CategoryTheory.Bicategory.Adjunction.comp; CategoryTheory.Bicategory.Adj.comp_adj. The search results concern ordinary sheaf pushforward, general adjunctions, or abstract monoidal composition, not the specified compact-support Kunneth maps. Read Mathlib CategoryTheory/Adjunction/Mates.lean 84-128,170-215, CategoryTheory/Sites/Continuous.lean 373-388 and CategoryTheory/Monoidal/Functor.lean 278-304; these do not identify the geometric shriek product comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherence of exceptional Kunneth transpose under composition and factor swap",
+   "results": "HomologicalComplex.leftUnitor'_inv_comm_assoc; HomologicalComplex.rightUnitor'_inv_comm; HomologicalComplex.leftUnitor'_inv_comm; CategoryTheory.MonoidalClosed.compTranspose_eq; CategoryTheory.MonoidalCategory.prodCompExternalProduct_inv_app; CategoryTheory.tensorRightHomEquiv_tensor; CategoryTheory.MonoidalCategory.externalProductSwap; CategoryTheory.tensorLeftHomEquiv_tensor. The search results concern ordinary sheaf pushforward, general adjunctions, or abstract monoidal composition, not the specified compact-support Kunneth maps. Read Mathlib CategoryTheory/Adjunction/Mates.lean 84-128,170-215, CategoryTheory/Sites/Continuous.lean 373-388 and CategoryTheory/Monoidal/Functor.lean 278-304; these do not identify the geometric shriek product comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp CategoryTheory.Adjunction.comp",
+   "results": "No hits. loogle: Application type mismatch: The argument\n  CategoryTheory.Adjunction.comp\nhas type\n  (?m.29 ⊣ ?m.30) →\n    (?m.31 ⊣ ?m.32) → (CategoryTheory.Functor.comp ?m.29 ?m.31 ⊣ CategoryTheory.Functor.comp ?m.32. The search results concern ordinary sheaf pushforward, general adjunctions, or abstract monoidal composition, not the specified compact-support Kunneth maps. Read Mathlib CategoryTheory/Adjunction/Mates.lean 84-128,170-215, CategoryTheory/Sites/Continuous.lean 373-388 and CategoryTheory/Monoidal/Functor.lean 278-304; these do not identify the geometric shriek product comparison.",
+   "date": "2026-10-17",
+   "verdict": "invalid pattern; not used to infer absence"
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*comp|counit.*composite|tensor.*swap",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean. The search results concern ordinary sheaf pushforward, general adjunctions, or abstract monoidal composition, not the specified compact-support Kunneth maps. Read Mathlib CategoryTheory/Adjunction/Mates.lean 84-128,170-215, CategoryTheory/Sites/Continuous.lean 373-388 and CategoryTheory/Monoidal/Functor.lean 278-304; these do not identify the geometric shriek product comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-sf-kunneth-verdier",
@@ -83,5 +194,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-kv-alpha-transpose-coherence",
+  "worker": "stage1",
+  "summary": "Expanded the exceptional product coherence into its mate definition, a searched left-adjoint Ku_! composition input, the explicit composite-counit equality, identity normalization and signed swap. No invertibility of alpha and no optional ambient pro-etale adjoint is used. Added one genuine geometric left-adjoint comparison statement, not an exceptional coherence clause.",
+  "blueprint": "Realizes the alpha paragraph of sk-thm-sf-kunneth-verdier: the composition compatibility needed for affine factorization and the symmetric two-variable treatment.",
+  "tool_uses": [
+   {
+    "node": "sk-thm-sf-kunneth-relative",
+    "why": "Uses the actual relative product naturality, symmetry and base-change clauses to identify the left-adjoint Ku_! maps; these are generic product tools explicitly used in sk-def-sf-kv-maps, not a replacement of the alpha proof route."
+   },
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Step 5 uses only the horizontal pasting equation of its clause (2) for Ex_! along the swap isomorphism composed with the product-square exchanges that build Ku_!; no node of sk-thm-sf-kunneth-verdier's own route states Ex_! pasting, and the unit's sibling nodes already use this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-thm-sf-kunneth-relative",
+  "fix-lem-exchanges"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-932842ade",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-932842ade (reviewer sub-agent of L); spot-checked: I read all of the mathematics. The item statement is byte-identical to the base and was not weakened. Two stmt_deps were added (thm-sf-comp-composition, def-weil-pbc-adjunction-conjugate); both are justified by the statement's conjugate composition comparisons. Coefficients are A_{E,n} on D^b_ctf throughout, with the unconditional adjunction of sk-def-sf-operations(vi) and P from (iv). thm-sf-comp-composition, stated on D^+_et, restricts to these objects because constructible objects have étale origin. No Rf^x and no admissibility datum is used. Step 1: α is the mate in def-weil-pbc-adjunction-mate of Ku_! for the componentwise product adjunction, and its transpose matches sk-def-sf-kv-maps(ii). Step 3: I checked all four lines of the counit calculation: naturality of ε_F, step 1 for g and f, naturality of t_g along ε_{f_i}, then the new node with B_i=K_i and the conjugate counit identity. Step 4: the identity pair is correct. Step 5 was mistyped (P_F where P_{F'} and the exchange along the swap are needed). It also covered the target identifications with 'base-change compatibility' (E5, C1/C4): it needs horizontal pasting of Ex_!. I rewrote step 5 with the precise equation (*) s∘Lτ_Y^* t_{f1,f2}=t_{f2,f1}∘P_{F'}(s)∘e. It is derived from sk-def-sf-kv-maps(i), the base-change clause (iii) along τ_Y and symmetry clause (i) of sk-thm-sf-kunneth-relative, and the pasting clause (2) of fix-lem-exchanges, then transposed through the conjugate e^c for the composite adjunctions. Uses and proof_deps were updated. I accepted the tool uses sk-thm-sf-kunneth-relative (Ku_! is built from κ^rel) and fix-lem-exchanges (already accepted in sibling nodes of this unit). The new node lem-sf-kv-shriek-composition is self-contained and statement-only. It concerns only the left-adjoint map t, so it is strictly smaller than the item and not a restated clause. It holds on the cases I tested (all identities, g=id, f2=g2=id, zero objects). It duplicates no node: sk-thm-sf-compatibility(6) and lem-sf-kunneth-coherence have no composition clause, and prop-trf-exceptional-kunneth proves the identity only inline. Its blueprint from/via are correct, there are no cycles, and the searches cover all three kinds. The corrected item is at fixes/dag/nodes/sec-six-functors/lem-sf-kv-alpha-transpose-coherence.json; review.md has the details.; 1 file(s) fixed by the reviewer"
  }
 }

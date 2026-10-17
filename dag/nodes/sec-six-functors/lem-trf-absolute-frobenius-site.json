@@ -110,21 +110,63 @@
    }
   },
   {
-   "text": "For $b\\geq0$ put $u_b(V)=V\\times_{X,F_X^b}X$ and $r_V^{(b)}=(F_V^b,v)$, with $u_0\\simeq\\operatorname{id}$ and $r^{(0)}=\\operatorname{id}$. Under the canonical identification $u_bu_a(V)\\simeq u_{a+b}(V)$, the composite $u_b(r_V^{(a)})r_V^{(b)}$ has projections $F_V^aF_V^b=F_V^{a+b}$ and $v$. Thus it equals $r_V^{(a+b)}$ by [def-pc-fibre-product]. The powers here are exactly those of [def-weil-absolute-frobenius-scheme]. Induction starting with $b=0,1$ makes every $r^{(b)}$ invertible. Applying a contravariant sheaf to this displayed equality gives the composite law for $\\delta^{(a+b)}$. To check the inverse-image comparison explicitly, a nested colimit representative for $(F_X^a)^{-1}(F_X^b)^{-1}\\mathcal F(U)$ consists of $\\phi:U\\to u_a(V)$, $\\psi:V\\to u_b(W)$, and $x\\in\\mathcal F(W)$. The canonical composition comparison identifies its index with $u_a(\\psi)\\phi:U\\to u_au_b(W)\\simeq u_{a+b}(W)$. Naturality of $r^{(a)}$ and the displayed iterate equality (with $a,b$ interchanged) give\n$$\n (r_W^{(a+b)})^{-1}u_a(\\psi)\\phi=(r_W^{(b)})^{-1}\\psi(r_V^{(a)})^{-1}\\phi.\n$$\nConsequently both the direct trivialization and the successive trivializations send this representative to $\\mathcal F((r_W^{(b)})^{-1}\\psi(r_V^{(a)})^{-1}\\phi)(x)$. The sheafification property [def-weil-pbc-sheafification] extends the equality to the inverse-image sheaves. Their coefficient maps also agree: on constant sections every map fixes $a\\in A$, and the same sheafification uniqueness proves equality on $A_X$. Thus this is an equality of module pullback comparisons. For an arbitrary complex $K$, choose a quasi-isomorphism $P\\to K$ with $P$ K-flat and with flat terms by [lem-pc-kflat-resolution]. Now [lem-weil-pbc-proetale-derived-pullback-composition] identifies its canonical derived composition comparison on $P$ with exactly the termwise module comparison just checked, and says the first pullback of $P$ is again K-flat with flat terms. The two proposed derived trivializations therefore agree on $Q(P)$. Naturality along the isomorphism $Q(P)\\to Q(K)$ gives equality on $Q(K)$, and [lem-weil-pbc-localization-universal-property](3) gives equality of natural transformations. Hence, writing $c_{a,b}:L(F_X^{a+b})^*\\to L(F_X^a)^*L(F_X^b)^*$ for that comparison, $\\tau^{(a+b)}=\\tau^{(a)}\\circ L(F_X^a)^*(\\tau^{(b)})\\circ c_{a,b}$. In particular the $p^b$-power trivialization is the $b$-fold composite of the $p$-power trivialization, with the identity at $b=0$.",
+   "text": "For $b\\geq0$ put $u_b(V)=V\\times_{X,F_X^b}X$ and $r_V^{(b)}=(F_V^b,v)$, using the powers of [def-weil-absolute-frobenius-scheme]. With the fibre-product identifications of [def-pc-fibre-product], $u_0\\simeq\\operatorname{id}$ and $r^{(0)}=\\operatorname{id}$. The projections of $u_b(r_V^{(a)})r_V^{(b)}$ to $V$ and $X$ are $F_V^aF_V^b=F_V^{a+b}$ and $v$, so projection uniqueness gives $r^{(a+b)}=u_b(r^{(a)})r^{(b)}$. Induct on $b$: $r^{(0)}$ is invertible, and $r^{(b+1)}=u_b(r^{(1)})r^{(b)}$ is invertible since step 3 gives invertibility of $r^{(1)}$ and functors preserve inverses. Naturality follows by the same two projection equations as step 1. Applying a contravariant sheaf to this equality gives the composition law for the direct-image comparisons $\\delta^{(b)}$.",
    "uses": [
-    "def-pc-fibre-product",
     "def-weil-absolute-frobenius-scheme",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-weil-pbc-localization-universal-property",
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-sheafification",
-    "lem-pc-kflat-resolution"
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site.proof.md",
+    "place": "Paragraph 4, taking left adjoints and composing the relative-Frobenius maps; expanded composite-inverse-image calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-site-inverse-image-composition-generators] to the small site used in step 1 and the functors $u=u_a$, $v=u_b$. Their precomposition preserves sheaves since step 7 identifies both functors with the identity. The canonical comparison from successive inverse images to the composite sends the nested generator $[[x,\\psi],\\phi]$, where $\\phi:U\\to u_a(V)$, $\\psi:V\\to u_b(W)$ and $x\\in\\mathcal F(W)$, to $[x,u_a(\\psi)\\phi]$, with $u_au_b\\simeq u_{a+b}$. The lemma also states that agreement on all these nested generators detects equality of sheaf morphisms, including after both sheafifications.",
+   "uses": [
+    "lem-trf-site-inverse-image-composition-generators"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site.proof.md",
-    "place": "Proof paragraph 4, multiplicative iterates; Stacks Tag 0D6D for the derived composition normalization"
+    "place": "Paragraph 4, taking left adjoints and composing the relative-Frobenius maps; expanded composite-inverse-image calculation."
+   }
+  },
+  {
+   "text": "Use the formula for $\\tau$ in step 4, for each invertible $r^{(b)}$ of step 7, and the normalized comparison in step 8. Naturality gives $u_a(\\psi)r_V^{(a)}=r_{u_b(W)}^{(a)}\\psi$. Naturality on $r_W^{(b)}$, followed by step 7, gives $r_{u_b(W)}^{(a)}r_W^{(b)}=r_W^{(a+b)}$ under the same fibre-product identification. Invert these equalities to obtain\n$$(r_W^{(a+b)})^{-1}u_a(\\psi)\\phi=(r_W^{(b)})^{-1}\\psi(r_V^{(a)})^{-1}\\phi.$$\nThe direct and successive trivializations therefore send $[[x,\\psi],\\phi]$ to the same section $\\mathcal F((r_W^{(b)})^{-1}\\psi(r_V^{(a)})^{-1}\\phi)(x)$. The equality-detection clause of [lem-trf-site-inverse-image-composition-generators] proves equality of the sheaf maps. This is the canonical comparison because the cited lemma fixes it by its adjunction unit equation, as in step 4.",
+   "uses": [
+    "lem-trf-site-inverse-image-composition-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site.proof.md",
+    "place": "Paragraph 4, taking left adjoints and composing the relative-Frobenius maps; expanded composite-inverse-image calculation."
+   }
+  },
+  {
+   "text": "For the constant ring $A_X$, the coefficient maps in the two comparisons agree: their adjuncts send each constant presheaf section $a\\in A$ to the same constant section, by [def-weil-proetale-inverse-image]. The uniqueness in [def-weil-pbc-sheafification] then gives equality on $A_X$. Thus the coefficient identification for the composite is the successive one. Step 5 makes both trivializations linear for these identified actions. The module pullback formula in [def-weil-pbc-proetale-operations] now transports the sheaf equality of step 9 to an equality of the canonical module pullback comparisons, since extension along a ring isomorphism only transports the action.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site.proof.md",
+    "place": "Paragraph 4, taking left adjoints and composing the relative-Frobenius maps; expanded composite-inverse-image calculation."
+   }
+  },
+  {
+   "text": "Pass the module iterate equality of step 10 to the specified derived composition comparison. For a complex $K$, choose a quasi-isomorphism $P\\to K$ with $P$ K-flat and with flat terms by [lem-pc-kflat-resolution]. By [lem-weil-pbc-proetale-derived-pullback-composition] the canonical derived comparison on $P$ is precisely the termwise module comparison of step 10, and the first pullback of $P$ is again K-flat with flat terms. Hence the two derived trivializations agree on $Q(P)$ and, by naturality along $Q(P)\\simeq Q(K)$, on $Q(K)$. Clause (3) of [lem-weil-pbc-localization-universal-property] gives equality of natural transformations. Writing $c_{a,b}:L(F_X^{a+b})^*\\to L(F_X^a)^*L(F_X^b)^*$ for this comparison, this is $\\tau^{(a+b)}=\\tau^{(a)}\\circ L(F_X^a)^*(\\tau^{(b)})\\circ c_{a,b}$. At $a=0$ or $b=0$ the representative formulas reduce to the identity; thus the $p^b$-power trivialization is the $b$-fold composite, including $b=0$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site.proof.md",
+    "place": "Paragraph 4, taking left adjoints and composing the relative-Frobenius maps; expanded composite-inverse-image calculation."
    }
   }
  ],
@@ -137,6 +179,7 @@
   "def-weil-proetale-inverse-image",
   "lem-pc-kflat-resolution",
   "lem-trf-relative-frobenius-universal-homeomorphism",
+  "lem-trf-site-inverse-image-composition-generators",
   "lem-trf-weakly-etale-between-objects",
   "lem-trf-weakly-etale-homeomorphism",
   "lem-weil-absolute-frobenius-well-defined",
@@ -155,22 +198,8 @@
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "canonical trivialization of derived pullback along absolute p-power Frobenius on the small pro-etale site",
-   "results": "PreTilt.untilt_iterate_frobeniusEquiv_symm_pow; AlgebraicGeometry.Scheme.smallEtaleTopology; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.frobeniusEquiv_apply; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; WittVector.Isocrystal.frobenius; WittVector.Isocrystal.frob",
-   "date": "2026-10-17",
-   "verdict": "no match: inspected hits do not state this scheme/site theorem"
-  },
-  {
-   "tool": "leanfinder",
    "query": "topological invariance of derived pullback along a universal homeomorphism of pro-etale schemes",
    "results": "AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.Etale.forget",
-   "date": "2026-10-17",
-   "verdict": "no match: inspected hits do not state this scheme/site theorem"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"frobenius\", \"pullback\"",
-   "results": "CategoryTheory.Regular.frobeniusMorphism_isPullback",
    "date": "2026-10-17",
    "verdict": "no match: inspected hits do not state this scheme/site theorem"
   },
@@ -179,18 +208,39 @@
    "query": "relativeFrobenius|absoluteFrobenius|IsUniversalHomeomorphism|leftDerivedUpperStar",
    "results": "0 hits; directory Mathlib/AlgebraicGeometry",
    "date": "2026-10-17",
-   "verdict": "no match: inspected hits do not state this scheme/site theorem"
+   "verdict": "no match: hits concern Witt vectors, ring-theoretic etaleness, general sheaf pullback, regular-category Frobenius or fiber bundles, not the scheme-Frobenius pro-etale trivialization"
   },
   {
    "tool": "leansearch",
    "query": "canonical trivialization of derived pullback along absolute Frobenius on pro-etale sheaves",
-   "results": "Trivialization.pullback; Trivialization.pullback_linear; FiberBundle.pullback_trivializationAt'; Trivialization.pullback_baseSet; Trivialization.pullback_apply; Trivialization.pullback_target; SheafOfModules.pullback; Trivialization.pullback_source",
+   "results": "8 hits; Trivialization.pullback, Trivialization.pullback_linear, FiberBundle.pullback_trivializationAt', Trivialization.pullback_baseSet, Trivialization.pullback_apply, Trivialization.pullback_target, SheafOfModules.pullback, Trivialization.pullback_source",
    "date": "2026-10-17",
-   "verdict": "no match: inspected hits do not state this scheme/site theorem"
+   "verdict": "no match: hits concern Witt vectors, ring-theoretic etaleness, general sheaf pullback, regular-category Frobenius or fiber bundles, not the scheme-Frobenius pro-etale trivialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"pullback\"",
+   "results": "1 hits; CategoryTheory.Regular.frobeniusMorphism_isPullback",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern Witt vectors, ring-theoretic etaleness, general sheaf pullback, regular-category Frobenius or fiber bundles, not the scheme-Frobenius pro-etale trivialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical trivialization of derived pullback along absolute p-power Frobenius on the small pro-etale site",
+   "results": "8 hits; WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.Isocrystal.frobenius, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.Isocrystal.frob, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern Witt vectors, ring-theoretic etaleness, general sheaf pullback, regular-category Frobenius or fiber bundles, not the scheme-Frobenius pro-etale trivialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "topological invariance of sheaves on the proetale site under absolute Frobenius",
+   "results": "8 hits; LightCondensed.ofSheafForgetLightProfinite_val, AlgebraicGeometry.Scheme.etaleTopology, LightCondensed.ofSheafLightProfinite_val, AlgebraicGeometry.Scheme.smallEtaleTopology, LightCondensed.ofSheafForgetLightProfinite, Condensed.isSheafProfinite, Condensed.ofSheafForgetProfinite, Condensed.lanSheafProfinite",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern Witt vectors, ring-theoretic etaleness, general sheaf pullback, regular-category Frobenius or fiber bundles, not the scheme-Frobenius pro-etale trivialization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "mentions_mathlib"
@@ -265,8 +315,8 @@
   "date": "2026-10-17",
   "item": "lem-trf-absolute-frobenius-site",
   "worker": "stage1",
-  "summary": "Repaired the earlier attempt after reading the current blueprint and cited statements. Isolated the general relative-Frobenius geometry as one unsplit Stacks 0CCB node; reused the two existing weakly-etale lemmas to obtain the site-object isomorphisms. Made naturality, the actual sheaf adjunction, its unique canonical mate, coefficient linearity, localization at quasi-isomorphisms, open restriction and the iterate equation explicit. Replaced invalid citation quotes and inaccurate search records with statements read and authentic queries. The item statement and imported blueprint metadata are unchanged. Independent second reading made the inverse-image colimit maps and the iterate comparison explicit and restricted the derived-composition normalization to the cited K-flat models.",
-  "blueprint": "Steps 1--3 realize paragraphs 1--3 (the geometric input of paragraph 2 is the new Tag 0CCB node); steps 4--5 realize paragraph 4 through the derived assertion; steps 6 and 7 realize its open-restriction and iterate sentences.",
+  "summary": "Repair of the returned long step 7: preserved the statement, Lean record, first six steps and proof route verbatim. Extracted the non-elementary sheafified inverse-image composition formula and equality detection into one new statement-only node. Separated the projection induction, normalized comparison, naturality calculation, coefficient transport and derived comparison into steps 7--11, citing the new input and existing K-flat/composition/localization nodes. Retained authentic previous searches and report, and searched all new-node candidates.",
+  "blueprint": "Steps 1--3 realize blueprint proof paragraphs 1--3; steps 4--5 realize paragraph 4 through the derived assertion, step 6 its restriction sentence, and steps 7--11 its composition/iteration sentence. The new node isolates the sheafified composition-generator argument hidden in returned step 7.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
@@ -300,10 +350,10 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q09-f16c0878c",
-  "group": "Q09",
+  "reviewer": "NT-cc-Q52-13ceb834b",
+  "group": "Q52",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-f16c0878c (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the new node lem-trf-relative-frobenius-universal-homeomorphism, every cited node's statement, the main-20261015 statement and proof, the unit record, and Stacks varieties.tex Tag 0CCB lemma-relative-frobenius (l.7117, with definition-relative-frobenius before it) and more-morphisms.tex Tags 0F6V (l.19190), 0F6W (l.19215) and 0951. ITEM STATEMENT: the only change from the live base is the source note (Lemma 37.64.15 replaced by the Stacks label), so the target is not weakened. COEFFICIENTS: the derived pullback is the ordinary module pullback of def-weil-pbc-proetale-operations, for any commutative ring A or ring sheaf. Step 5 proves c^f_A = tau_{A_X}, which matches the finite level of def-weil-derived-pullback-tensor-hom and the citer lem-pur-frobenius-trivialization-pullback. Integral and rational levels are left to the citers, which apply functors to the finite level. No coefficient categories are silently identified. STEPS: 1) naturality of r_V checked on both projections. 2) The 0CCB node applies to every site object, with no finiteness needed. 3) Hypotheses of 0951 and 0F6V checked. 4) The conjugate-mate directions check out; (U,r_U) is initial in I_U; the colimit map is compatible with transitions and satisfies the unit equation. 5) rho = delta^{-1} by sheafification uniqueness, c_A = tau_{A_X}, linearity holds, and the lift uses localization (2). 6) The open-restriction argument is correct, using F_X^{-1}(W) = W. 7) The iterate law was checked by projections; the displayed equation follows from naturality of r^{(a)} on psi and on r^{(b)}_W; the K-flat flat-term normalization and localization (3) are used correctly. No cycle (dependency search over the snapshot DAG). NEW NODE: passes B1-B9 and matches 0CCB hypothesis by hypothesis (the residue-field clause is omitted). Tested on X empty, v = id over an imperfect field, and F_p[e]/e^2 over F_p. Not a duplicate of lem-trf-scheme-frobenius-finite-radicial, i-relative-frob, lem-pur-absolute-frobenius-universal-homeomorphism or the downstream pullback node, and it does not restate a clause of the item. TOOL USES accepted: continuous-functor sheaf adjunction, weakly-etale localization, absolute-Frobenius well-definedness, derived pullback composition, K-flat resolution. No SGA. FIX: step 1 wrote u(V) = V x_{X,F_X} X, but def-weil-proetale-inverse-image (used in step 4) chooses X x_{F_X,X,v} V. I added one sentence identifying u with u_{F_X} through the swap isomorphism that respects the projections, so that r_V = (v,F_V) in the definition's order, and added def-weil-proetale-inverse-image to step 1's uses (proof_deps unchanged). The corrected item is fixes/dag/nodes/sec-six-functors/lem-trf-absolute-frobenius-site.json; the full checks are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-13ceb834b (reviewer sub-agent of L); spot-checked: Pass with no changes; full checks are in review.md. The item statement, Lean record, metadata and steps 1-6 are byte-identical to the live side node, so nothing is weakened. The repair replaces the returned 2459-character step 7 with steps 7-11 (775/606/816/673/945 characters) and adds one new node. Stacks sources read: 00VE lemma-adjoints-u (unit and adjunct constructions), 00WX lemma-adjoint-sheaves, 03CB lemma-composition-morphisms-sites, 0F6W, and the main-20261015 proof paragraph 4. New node lem-trf-site-inverse-image-composition-generators is true. kappa is the conjugate with delta=id and its unit direction is correct. I re-derived the normalization: the adjunct of eta^{uv} along v and then along u sends [[x,psi],phi] to [x,u(psi)phi]. The equality test follows from injectivity of the composite adjunction on the identity-index nested generators, so it needs no single-representative assumption for abelian sheaves. I tested it on the identity functors on a one-object site, on an empty site, and on the item's u,v isomorphic to id. Form B1-B9 is fine (statement-only, self-contained TeX, correct tags and labels, six real searches, blueprint.from = the item with via [] and same_as []). It is not a duplicate of lem-weil-pbc-site-morphism-composition(3), which has the comparison only, under exactness hypotheses, or of lem-weil-pbc-inverse-image-composition, which is etale-only. It does not restate a clause of the item and has no cycle. Step 7: the projection law r^(a+b)=u_b(r^(a))r^(b) and the induction are elementary. Step 9: I recomputed both trivializations on nested generators; they agree by naturality of r^(a) on psi and on r^(b)_W, together with step 7. Step 10: elementary, since the coefficient equality is the case F=A_X of step 9 and c=tau by step 5, for arbitrary commutative A. Step 11: K-flat flat-term normalization, the direction of c_{a,b}, and localization (3) are all correct. proof_deps equals the union of the step uses. The five declared tool uses are generic and I re-accept them. No SGA source is used. The chapter field (sec-six-functors) does not match its unit's chapter (sec-six-functors-basics); this predates the delivery, the worker reported it, and it is left to the maintainer."
  },
  "reviewed_lean": {
   "date": "2026-10-17",

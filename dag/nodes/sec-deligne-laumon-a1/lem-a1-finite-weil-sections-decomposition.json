@@ -1,0 +1,91 @@
+{
+ "id": "lem-a1-finite-weil-sections-decomposition",
+ "kind": "statement",
+ "title": "Geometric sections of a finite Weil scheme and the local return operators",
+ "statement": "Fix the finite-field datum $p,a,q,k_0=\\mathbf F_q,k=\\overline{\\mathbf F}_q$ of [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$. Let $Z_0\\to\\operatorname{Spec}k_0$ be finite [def-weil-finite-integral-morphism], put $Z=Z_0\\times_{k_0}k$, and let $\\mathcal G$ be a constructible $\\Qlb$-Weil sheaf on $Z_0$ [def-weil-weil-sheaf-complex, def-weil-constructible-heart]. Write $V=H_c^0(Z,\\mathcal G)$ for geometric compactly supported cohomology [def-weil-ordinary-compact-cohomology], with its geometric Frobenius $F$ [def-weil-global-geometric-frobenius], interpreted at a common finite coefficient-field stage as in the Weil-sheaf definition. For a closed point $x\\in|Z_0|$, put $d_x=[\\kappa(x):k_0]$ and let $P_x$ be the set of $k$-morphisms $z:\\operatorname{Spec}k\\to Z$ whose projection to $Z_0$ has image $x$. Let $\\mathcal G_z$ denote the geometric stalk at $z$, and let $F_{x,z}$ be its degree-$d_x$ local geometric-Frobenius operator [def-weil-local-frobenius-trace], also extended from a common finite coefficient-field stage.\n\nThe set $|Z_0|$ is finite, $|P_x|=d_x\\geq1$, and evaluation on geometric stalks gives a $\\Qlb$-linear isomorphism\n$$e:V\\xrightarrow{\\sim}\\bigoplus_{x\\in|Z_0|}\\ \\bigoplus_{z\\in P_x}\\mathcal G_z.$$\nThe vector space $V$ is finite-dimensional and $F$ is an automorphism. Under $e$, $F$ preserves each summand $V_x=\\bigoplus_{z\\in P_x}\\mathcal G_z$ and permutes its stalk summands cyclically, by linear isomorphisms. If $e_z:V\\to\\mathcal G_z$ is the component of $e$, then\n$$e_z\\circ F^{d_x}=F_{x,z}\\circ e_z\\qquad(z\\in P_x).$$\nThe evaluation isomorphism is natural for morphisms of constructible Weil sheaves. No reducedness of $Z_0$ and no weight or semisimplicity hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QP, proposition-finite-higher-direct-image-zero, part (1), the finite-level geometric-stalk input. The extension to common-stage rational coefficients and the Frobenius return identity are the agent formulation of the corrected first display of literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.proof.md; local return means precisely def-weil-local-frobenius-trace, not arithmetic Galois invariants.",
+  "external": [
+   {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.3), printed p. 150, rationalization and common-stage coefficients; (1.1.7)-(1.1.13), pp. 150-152, geometric Frobenius, Weil structure and degree-normalized local operator"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-integral-morphism",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constructible-heart",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Geometric compactly supported degree zero cohomology of a finite scheme over a finite field is the direct sum of its geometric stalks with Frobenius permuting the stalks",
+   "results": "Logged hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicTopology.singularHomologyFunctorZeroOfTotallyDisconnectedSpace, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated.  These are structure-sheaf limit, singular-homology, arithmetic-ring Frobenius or isocrystal results, not geometric cohomology of constructible Weil sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|FrobeniusModule|compactlySupportedCohomology",
+   "results": "Logged hits: .  No WeilSheaf/FrobeniusModule/cohomology declaration; the nonempty restricted search finds only scheme structure-sheaf stalks.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible Weil sheaf on a finite scheme has degree zero geometric cohomology equal to the sum of Frobenius induced representations of its closed point stalks",
+   "results": "Logged hits: IsArithFrobAt.arithFrobAt, arithFrobAt, IsArithFrobAt.exists_of_isInvariant, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, WittVector.isocrystal_classification, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, groupCohomology.Hilbert90.aux.  These are structure-sheaf limit, singular-homology, arithmetic-ring Frobenius or isocrystal results, not geometric cohomology of constructible Weil sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a sheaf on a finite scheme over an algebraically closed field equal the product of its geometric stalks, naturally with respect to Frobenius",
+   "results": "Logged hits: AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.termΓ(_,_), AlgebraicGeometry.Scheme.Γ, AlgebraicGeometry.germ_stalkClosedPointIso_hom, AlgebraicGeometry.StructureSheaf.to_global_factors_apply, AlgebraicGeometry.Scheme.Γ_def.  None is the constructible Weil-sheaf cohomology/decomposition or its weight bound; structure-sheaf sections and group cochains are different objects.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"finite\"",
+   "results": "Logged hits: Module.rankAtStalk_eq_of_le_of_finite_of_flat, Module.rankAtStalk_eq_of_le_of_finite_of_flat', Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver, Algebra.QuasiFiniteAt.of_surjectiveOnStalks, AlgebraicGeometry.LocallyOfFiniteType.stalkMap, Algebra.WeaklyQuasiFiniteAt.of_surjectiveOnStalks, Module.Free.away_of_finite_of_flat_of_rankAtStalk_constant, TopCat.Sheaf.instPreservesFiniteLimitsCompPresheafForgetStalkFunctor.  These concern commutative-ring stalk ranks, quasi-finite algebras and topological sheaves, not the claimed etale/adic decomposition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkIsoPi|piLift_stalkRestrict|finite.*stalk|stalk.*finite",
+   "results": "Logged hits: Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean.  No WeilSheaf/FrobeniusModule/cohomology declaration; the nonempty restricted search finds only scheme structure-sheaf stalks.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-finite-boundary-weights",
+  "date": "2026-10-17",
+  "group": "Q24"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-boundary-weights",
+   "place": "First sentence and displayed evaluation formula in the proof: replace the erroneous arithmetic-invariant formula by geometric stalks, retaining the Frobenius action needed in the following weight argument.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

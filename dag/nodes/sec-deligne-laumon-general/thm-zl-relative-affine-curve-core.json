@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-zl-relative-affine-curve-core",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Pure lisse relative affine-curve step",
@@ -14,34 +14,106 @@
  },
  "stmt_deps": [
   "def-weil-punctual-weights",
-  "def-weil-pbc-constructible-complexes",
   "def-weil-pbc-scheme-conventions",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-cohomology-sheaves"
  ],
  "proof": [
   {
-   "text": "By [lem-zl-relative-curve-punctual], all local Frobenius\neigenvalues on $R^ih_!\\mathcal F$ have absolute value at most\n$q_y^{(w+i)/2}$. The curve-reduction lemma [lem-zl-relative-curve-mixedness]\nsupplies a finite mixed filtration of this sheaf. Apply\n[lem-zl-mixed-punctual-cutoff] with $v=w+i$.\nThis proves the bound without assuming that unrelated filtrations\nof the individual stalks glue to Weil subsheaves.",
+   "text": "Fix a cohomological degree $i$ and put $\\mathcal G_i=R^ih_!\\mathcal F$. Apply [lem-zl-relative-curve-mixedness] to the given $h$ and $\\mathcal F$: the base and source are separated and of finite type over the fixed finite field, $h$ is smooth and separated, every nonempty geometric fiber is a smooth affine curve, and $\\mathcal F$ is lisse and punctually $\\iota$-pure of weight $w$, exactly as required there. Obtain a real number $u_i$ for which $\\mathcal G_i$ is $\\iota$-mixed of weights at most $u_i$. In particular it is a constructible $\\Qlb$-Weil sheaf and has a finite filtration by constructible Weil subsheaves with punctually pure quotients; these are part of the meaning of mixedness in [def-weil-punctual-weights]. No lissity of $\\mathcal G_i$ is asserted.",
    "uses": [
-    "lem-zl-relative-curve-punctual",
     "lem-zl-relative-curve-mixedness",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/thm-zl-relative-affine-curve-core.proof.md",
+    "place": "Proof: the curve-reduction lemma supplies a finite mixed filtration"
+   }
+  },
+  {
+   "text": "Apply [lem-zl-relative-curve-punctual] to the same morphism and pure lisse sheaf. For every closed point $y$ of degree $m$, each local Frobenius eigenvalue $\\alpha$ on $(\\mathcal G_i)_{\\bar y}$ satisfies $|\\iota(\\alpha)|\\le(q^m)^{(w+i)/2}=q_y^{(w+i)/2}$, with $q_y=\\#\\kappa(y)=q^m$. Thus the punctual upper bound holds for the very same sheaf $\\mathcal G_i$ shown mixed in step 1, with the same geometric-Frobenius and coefficient conventions.",
+   "uses": [
+    "lem-zl-relative-curve-punctual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/thm-zl-relative-affine-curve-core.proof.md",
+    "place": "Proof: first sentence, the punctual eigenvalue bound"
+   }
+  },
+  {
+   "text": "Apply [lem-zl-mixed-punctual-cutoff] with $Y_0$ the given base, $\\mathcal G=\\mathcal G_i$, $u=u_i$, and $v=w+i$. Its constructibility and finite mixed-filtration hypothesis are supplied by step 1; its bound at every closed point is supplied by step 2. The base is separated and finite type, and the finite field, embedding $\\iota$, coefficient field and local Frobenius operators agree throughout. The conclusion is that $R^ih_!\\mathcal F$ is $\\iota$-mixed of weights at most $w+i$. Since $i$ was arbitrary, this proves the assertion in every degree. The cutoff is applied to an existing filtration by Weil subsheaves, so no gluing of stalkwise filtrations is used.",
+   "uses": [
     "lem-zl-mixed-punctual-cutoff"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/thm-zl-relative-affine-curve-core.proof.md",
+    "place": "Proof: apply the punctual cutoff with v=w+i; final sentence"
+   }
   }
  ],
  "proof_deps": [
-  "lem-zl-relative-curve-punctual",
   "lem-zl-relative-curve-mixedness",
+  "def-weil-punctual-weights",
+  "lem-zl-relative-curve-punctual",
   "lem-zl-mixed-punctual-cutoff"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/thm-zl-relative-affine-curve-core.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/thm-zl-relative-affine-curve-core.proof.md",
+  "place": "Entire proof, expanded into three steps; the blueprint proof is agent-written"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsMixedOfWeightsAtMost|IsPunctuallyPureOfWeight|higherLowerShriek",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state a Weil-sheaf direct-image weight bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Deligne weight bound for compactly supported cohomology of a pure lisse sheaf on affine curves",
+   "results": "LieModule.Weight.instFinite; LieModule.Weight.instFintype; LieModule.Weight.instFintype.congr_simp; RootPairing.coxeterWeightIn_le_four; BoundingSieve.weights_nonneg; Finsupp.le_weight_of_ne_zero; ModularFormClass.exists_bound; BoundingSieve.multSum",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state a Weil-sheaf direct-image weight bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Weil\", \"weight\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state a Weil-sheaf direct-image weight bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lisse pure Weil sheaf on a smooth relative affine curve has compactly supported higher direct images mixed of weights at most the original weight plus cohomological degree",
+   "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; LightCondensed.instIsGrothendieckAbelianLightCondMod; DerivedCategory.isGE_Q_obj_iff; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; SheafOfModules.bijective_pushforwardSections; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; instAbelianLightCondMod",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state a Weil-sheaf direct-image weight bound"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|[Pp]unctually|[Mm]ixed.*[Ww]eight|[Ff]robenius.*[Cc]ohomology",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state a Weil-sheaf direct-image weight bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius eigenvalues on compactly supported etale cohomology of smooth affine curves over finite fields satisfy purity weight bounds",
+   "results": "FiniteField.Extension.frob; WittVector.StandardOneDimIsocrystal.frobenius_apply; frobenius.congr_simp; IsPurelyInseparable.iterateFrobenius; FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp; Module.End.instFintypeEigenvalues.congr_simp; AlgebraicGeometry.IsEtale.instFormallyUnramified; FiniteField.frobeniusAlgEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state a Weil-sheaf direct-image weight bound"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -655,5 +727,20 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-zl-relative-affine-curve-core",
+  "worker": "stage1",
+  "summary": "Expanded the existing three-lemma argument into mixedness, punctual estimate, and cutoff, with every hypothesis checked against the cited statements. Reused all three existing lemmas and created no nodes. Replaced the finite-coefficient constructibility definition by existing Weil-sheaf, lisse-adic, compact-support and cohomology definitions in statement dependencies. The statement is unchanged. Current Lean calls a still-sorried punctual-bound theorem, so no finished attachment is claimed.",
+  "blueprint": "Realizes the entire current thm-zl-relative-affine-curve-core.proof.md: the first sentence in step 2, the mixed-filtration sentence in step 1, and the cutoff/final no-gluing sentence in step 3. Within sk-p-dl-general-relative-line it combines the punctual part (unit step 1) with the real-envelope mixedness and cutoff part (unit step 2); no route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-d510f3d90",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-d510f3d90 (reviewer sub-agent of L); spot-checked: I read the full statement of the item and of all three cited lemmas, including their main-20261015 updates, against the master and main-20261015 blueprint sources (orders 2844/3188; proof file read). Step 1: lem-zl-relative-curve-mixedness has exactly the item's hypotheses and gives some u_i; constructibility of the filtration pieces comes from the definition of mixedness in def-weil-punctual-weights. Step 2: lem-zl-relative-curve-punctual gives |iota(alpha)| <= (q^m)^((w+i)/2) = q_y^((w+i)/2). The item also meets the updated form of this lemma: relative dimension one from the curve fibres, quasi-compactness because U_0 is Noetherian, affine fibres by descent from the geometric fibres, and i<0 is trivial. Step 3: lem-zl-mixed-punctual-cutoff with u=u_i and v=w+i; all its hypotheses are supplied and its conclusion is literally the item's. Tests: A^1 and G_m over a point with constant coefficients; empty U_0 or empty fibres (empty filtration); disconnected fibres are never assumed connected. Duplicates: cor-zl-rfshriek-sheaf generalizes the item, but it goes through thm-zl-relative-line-step, which cites this item, so using it would be circular; nothing else in the DAG states this. No new nodes, statement unchanged, no SGA. Coefficient category: the stmt_deps (def-weil-weil-sheaf-complex, def-pod-lisse-l-adic-sheaves, the Rf_! definition, cohomology sheaves) are the same ones used by the existing curve estimate thm-a1-curve-upper. Batch 5: def-pod-lisse-l-adic-sheaves is a pure definition (Weil II 1.1.1 lisse systems, no proof_deps), not part of the Poincare duality proof, so accepted. def-weil-integral-rational-qbar-compact-support is the definition of Rf_!; it reaches lem-pod-adic-limit-finite-modules only through the rationalization definition, and that lemma is coefficient commutative algebra about finite O_E-modules, not a duality step, so accepted. No step cites a trace-formula, Poincare-duality or batch-4 node. No fixes made."
  }
 }

@@ -11,9 +11,73 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-coherent-nerve-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $0\\leq i\\leq j\\leq r$ and let $P_{i,j}$ be the inclusion-ordered set of subsets $S\\subseteq\\{i,\\ldots,j\\}$ with $i,j\\in S$. By the defining standard-simplex clause of [lem-coef-coherent-nerve-comparison], $\\mathfrak C[\\Delta^r](i,j)=N(P_{i,j})$, with composition induced by union. The subset $m=\\{i,j\\}$ belongs to $P_{i,j}$ and satisfies $m\\subseteq S$ for every $S\\in P_{i,j}$. This includes $i=j$, when the poset has just the subset $\\{i\\}$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 1.1.5.1, printed pp. 20-21 (PDF pages 38-39); the mapping-poset definition and union composition."
+   }
+  },
+  {
+   "text": "Write $X=N(P_{i,j})$. Define $H:X\\times\\Delta^1\\to X$ directly in degree $n$: for a chain $S_0\\subseteq\\cdots\\subseteq S_n$ and a weakly increasing map $\\epsilon:[n]\\to[1]$, its output is the chain $T_0\\subseteq\\cdots\\subseteq T_n$ with $T_k=m$ if $\\epsilon(k)=0$ and $T_k=S_k$ if $\\epsilon(k)=1$. This is a chain: its initial entries are $m$, the sole possible switch uses $m\\subseteq S_k$, and its remaining entries are a subchain of the given chain. Restriction along every monotone $\\alpha:[q]\\to[n]$ gives the same formula with $S_{\\alpha(k)},\\epsilon(\\alpha(k))$, so $H$ commutes with every face and degeneracy. Its endpoint restrictions are the constant map at $m$ and $\\mathrm{id}_X$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 1.1.5.1 and Remark 1.1.5.2, printed pp. 20-21; explicit agent-written contraction of the displayed nerve."
+   }
+  },
+  {
+   "text": "Let $p:X\\to\\Delta^0$ be the unique map and $s:\\Delta^0\\to X$ the vertex $m$. Then $ps=\\mathrm{id}_{\\Delta^0}$ and $sp$ is the constant map at $m$. Step 2 supplies the required simplicial homotopy from $sp$ to $\\mathrm{id}_X$; the homotopy between $ps$ and the point identity is constant. Apply [lem-cbc-simplicial-homotopy-equivalence-weak] with $u=p$, $v=s$, $A=X$, $B=\\Delta^0$. It makes $p$ a weak homotopy equivalence, which is exactly weak contractibility. No Kan condition on $X$ is needed.",
+   "uses": [
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UB",
+    "place": "Proposition 3.1.7.13, forward implication, with Construction 3.6.5.1 (Tag 0148) for realization; the two homotopies are the explicit ones of step 2 and the constant point homotopy."
+   }
+  },
+  {
+   "text": "Let $f:X\\to Y$ be any simplicial map between two mapping sets in the statement, allowing different simplex dimensions and endpoints. Their point maps $p_X,p_Y$ are weak equivalences by step 3 and satisfy $p_Yf=p_X$. On path components, $f$ therefore induces the bijection $(p_Y)_*^{-1}(p_X)_*$. At each basepoint $x\\in|X|$ and each $n\\geq1$, functoriality of postcomposition gives $(p_Y)_*f_*=(p_X)_*$ on based homotopy groups, hence $f_*=(p_Y)_*^{-1}(p_X)_*$ is an isomorphism. Here the map induced by $p_Y$ uses basepoint $|f|(x)$, so all groups are correctly based. These component and group assertions are precisely the definition of weak homotopy equivalence in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 1.1.5.2, printed p. 21; elementary cancellation on the component sets and based homotopy groups of the maps to a point."
+   }
+  },
+  {
+   "text": "For $r>0$ and $0\\leq i\\leq r-1$, the edge $r-1\\to r$ corresponds to the vertex $\\{r-1,r\\}$ of the mapping poset. By the union-composition clause of [lem-coef-coherent-nerve-comparison], postcomposition is the nerve of the monotone map $P_{i,r-1}\\to P_{i,r}$, $S\\mapsto S\\cup\\{r-1,r\\}$. The union contains both endpoints and lies in $\\{i,\\ldots,r\\}$, and inclusion of subsets is preserved. Thus it is a simplicial map between exactly the two mapping sets covered by step 4, and is a weak homotopy equivalence. If $i=r-1$, its source is a point and the same formula applies; in particular $r=1,i=0$ is included.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 1.1.5.1, union composition, and Remark 1.1.5.2, the edge vertex; printed pp. 20-21. The consequence is used in Proposition 3.2.2.10."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Auxiliary coherent-realization calculation below the opening compactification-choice sentence, through lem-cbc-mapping-simplex-universal-equivalence. Explicit contraction written here, using HTT Definition 1.1.5.1 and Remark 1.1.5.2 and the existing homotopy-equivalence lemma. HTT and Kerodon sources read online; archival copies WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +127,59 @@
    "results": "{\"t\": \"2026-10-17T11:40:43Z\", \"tool\": \"loogle\", \"query\": \"SimplexCategory, nerve, contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'nerve'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "unavailable: query rejected by Loogle; not evidence of absence; other searches cover the statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping simplicial sets of the homotopy coherent realization of a standard simplex are nerves of interval subset posets and are weakly contractible",
+   "results": "{\"t\": \"2026-10-17T12:58:33Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping simplicial sets of the homotopy coherent realization of a standard simplex are nerves of interval subset posets and are weakly contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.isoNerve\", \"SSet.stdSimplex.isoNerve_hom_app_apply\", \"CategoryTheory.SimplicialNerve\", \"SSet.KanComplex\", \"SSet.prodStdSimplex.isoNerve\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.Nerve.strictSegal\"], \"digest\": \"aade7a3329cf2769\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give ordinary nerves, thickening definitions, standard simplices or general model-category localization, not all clauses of this coherent-realization mapping theorem. Read the returned types and the thickening source."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.{0,40}(nerve|realization)|subset.{0,30}poset|contractible.{0,30}nerve",
+   "results": "{\"t\": \"2026-10-17T12:59:09Z\", \"tool\": \"grep\", \"query\": \"coherent.{0,40}(nerve|realization)|subset.{0,30}poset|contractible.{0,30}nerve\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\"], \"digest\": \"9e93eca261ff5256\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: SimplicialNerve.lean defines the model; CoherentIso.lean concerns the walking isomorphism, not the mapping-space contraction. Read the SimplicialNerve source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every map between mapping spaces of the homotopy coherent realization of a standard simplex is a weak homotopy equivalence",
+   "results": "{\"t\": \"2026-10-17T12:59:09Z\", \"tool\": \"leansearch\", \"query\": \"Every map between mapping spaces of the homotopy coherent realization of a standard simplex is a weak homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategory.toTop\", \"SimplexCategory.toTop₀\", \"SimplexCategory.toTopMap\", \"SimplexCategory.toTopObj\", \"SSet.toTop\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"SimplexCategory.toTop_map\", \"SSet.stdSimplex.isoOfRepresentableBy\"], \"digest\": \"305be441187a2502\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give ordinary nerves, thickening definitions, standard simplices or general model-category localization, not all clauses of this coherent-realization mapping theorem. Read the returned types and the thickening source."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coherent\", \"simplex\"",
+   "results": "{\"t\": \"2026-10-17T12:59:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"coherent\\\", \\\"simplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The nerve of a partially ordered set with a least element contracts by the monotone map P times the ordered interval to P sending (x,0) to the minimum and (x,1) to x",
+   "results": "{\"t\": \"2026-10-17T13:00:02Z\", \"tool\": \"leanfinder\", \"query\": \"The nerve of a partially ordered set with a least element contracts by the monotone map P times the ordered interval to P sending (x,0) to the minimum and (x,1) to x\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PartialOrder.mem_range_nerve_σ_iff\", \"PartialOrder.mem_nerve_degenerate_of_eq\", \"CategoryTheory.SimplicialThickening.functor_map\", \"SSet.stdSimplex.isoNerve_hom_app_apply\", \"CategoryTheory.nerve.σ_obj\", \"CategoryTheory.nerve\", \"CategoryTheory.nerve_obj\", \"CategoryTheory.SimplicialNerve\"], \"digest\": \"21b7611334de297a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give ordinary nerves, thickening definitions, standard simplices or general model-category localization, not all clauses of this coherent-realization mapping theorem. Read the returned types and the thickening source."
+  },
+  {
+   "tool": "grep",
+   "query": "contractib|weakEquivalence|OrderBot|IsInitial",
+   "results": "{\"t\": \"2026-10-17T13:00:50Z\", \"tool\": \"grep\", \"query\": \"contractib|weakEquivalence|OrderBot|IsInitial\", \"sub\": \"AlgebraicTopology/SimplicialNerve.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialThickening.Path",
+   "results": "{\"t\": \"2026-10-17T13:00:51Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialThickening.Path\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.Path\", \"CategoryTheory.SimplicialThickening.instCategoryPath\", \"CategoryTheory.SimplicialThickening.Path.I\", \"CategoryTheory.SimplicialThickening.Path.left\", \"CategoryTheory.SimplicialThickening.Path.right\", \"CategoryTheory.SimplicialThickening.Path.le\", \"CategoryTheory.SimplicialThickening.Path.ext\", \"CategoryTheory.SimplicialThickening.Path.ext_iff\"], \"digest\": \"c0987c7a2436606b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Path and its fields/union formula define the subset model but do not prove the weak contractibility or arbitrary-map clauses; source SimplicialNerve.lean lines 58-140 read."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-mapping-simplex-universal-equivalence",
@@ -89,5 +202,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-standard-simplex-mapping-contractible",
+  "worker": "stage1",
+  "summary": "Q10: retained the statement, constructed the simplicial contraction of the endpoint-subset poset nerve degree by degree, applied the existing simplicial-homotopy-equivalence lemma without any Kan hypothesis, and checked all maps and union postcomposition on components and based homotopy groups. No new nodes, no Lean attachment, no statement dispute.",
+  "blueprint": "Realizes the auxiliary standard-simplex mapping contraction under the opening compactification-choice sentence of thm-cbc-finite-level-proetale, through the inherited via chain and step 1 of lem-cbc-mapping-simplex-universal-equivalence. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-coherent-nerve-comparison",
+    "why": "Uses only its defining standard-simplex subset-poset mapping formula, union composition and edge vertices, as already required by the item statement; the cbc unit has no separate coherent-realization definition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-coherent-nerve-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-833331f9d",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-833331f9d (reviewer sub-agent of L); spot-checked: I read the whole item: the statement is unchanged and true, and the delivery has 5 steps and no new nodes. Step 1: the mapping set C[Δ^r](i,j) is the nerve of P_{i,j}, the subsets of {i..j} containing i and j; this is literally the defining paragraph in the statement of lem-coef-coherent-nerve-comparison, and it agrees with HTT Def 1.1.5.1 and Rem 1.1.5.2 as I know them. There is no local HTT copy, so the page numbers rest on the report's WANTED. Its least element is m={i,j}. Step 2: I checked the explicit homotopy H on N(P)×Δ^1. The output is a chain for every case of ε(k),ε(k+1) (the case 1,0 cannot occur). It is natural in every monotone α, and its endpoints are the constant map at m and the identity. Step 3: every hypothesis of lem-cbc-simplicial-homotopy-equivalence-weak holds with u=p, v=s, B=Δ^0 (either endpoint order is allowed, no Kan condition), so p is a weak equivalence, which is weak contractibility by def-cbc. Step 4: cancellation from p_Y f=p_X on π_0 and on π_n at the basepoint |f|x is correct and elementary. Step 5: postcomposition with the edge r-1→r is the nerve of S↦S∪{r-1,r}, so step 4 applies; this is exactly the clause the parent lem-cbc-mapping-simplex-universal-equivalence uses for p(a)≤r-1. Small cases tested: r=0; i=j; r=1; r=2,i=0 (point→Δ^1); r=3,i=0 (edge→square). Against A–F: no cycle (the item's 499-node dependency closure does not contain it). My grep of the DAG and the main-20261015 blueprint found no node stating this result, though pinched-cube nodes repeat the definition of C[Δ^m]. No SGA source; not a target node. Accepted tool use: lem-coef-coherent-nerve-comparison (unit sk-prop-sf-biduality-general, which sk-prop-sf-cbc does not cite), used only for its defining clause of C[Δ^n]; it is already a statement dependency and was correctly declared in split_report.tool_uses. No fixes were made."
  }
 }

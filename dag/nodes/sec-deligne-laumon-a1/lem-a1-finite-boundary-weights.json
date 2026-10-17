@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-a1-finite-boundary-weights",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Weights of the cohomology of a finite boundary",
@@ -14,32 +14,130 @@
  },
  "stmt_deps": [
   "def-weil-ordinary-compact-cohomology",
-  "def-weil-punctual-weights"
+  "def-weil-punctual-weights",
+  "def-weil-finite-integral-morphism",
+  "def-weil-frobenius-module-weights"
  ],
  "proof": [
   {
-   "text": "Evaluation at geometric points gives, as in the proof of\n[lem-a1-finite-boundary-cohomology],\n\n$$\nH_c^0(Z,\\mathcal G)=\\bigoplus_{x\\in|Z_0|}\\mathcal G_{\\bar x}^{\n\\operatorname{Gal}(\\overline{\\kappa(x)}/\\kappa(x))},\n$$\n\nand each summand is an\n$F_x$-stable submodule of the stalk $\\mathcal G_{\\bar x}$, whose\neigenvalues are among the eigenvalues of $F_x$ ([p-linear-filtration]): all of them have\nweight at most $w$ by hypothesis, so the submodule is mixed of\nweights at most $w$ by [lem-a1-punctual-bound-module-mixed].",
+   "text": "Apply [lem-a1-finite-weil-sections-decomposition] to $Z_0$ and $\\mathcal G$. Thus $V=H_c^0(Z,\\mathcal G)$ is a finite-dimensional Frobenius module, and the evaluation maps $e_z:V\\to\\mathcal G_z$, indexed by the finitely many geometric points over the closed points $x$, jointly detect zero. For $d_x=[\\kappa(x):k_0]\\geq1$, the precise compatibility is $e_zF^{d_x}=F_{x,z}e_z$. In particular it is the local return operator $F_{x,z}$, not the global $q$-Frobenius itself, which acts on an individual stalk.",
    "uses": [
-    "lem-a1-finite-boundary-cohomology",
-    "p-linear-filtration",
+    "lem-a1-finite-weil-sections-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.proof.md",
+    "place": "Opening evaluation assertion and displayed formula, corrected using Stacks Tag 03QP"
+   }
+  },
+  {
+   "text": "For a closed point $x$ and a geometric lift $z$, interpret the stalk-weight hypothesis in the local normalization $q_x=q^{d_x}$ of [def-weil-punctual-weights]. If it is expressed as a mixed filtration, use [def-weil-frobenius-module-weights] with base $q_x$: its finite stable filtration has pure graded pieces of weights $u\\leq w$. By [p-linear-filtration] the characteristic polynomial of $F_{x,z}$ is the product of those of the graded pieces. A root of that product is a root of one factor, so every eigenvalue $\\alpha$ of $F_{x,z}$ has $|\\iota(\\alpha)|=q_x^{u/2}\\leq q_x^{w/2}$, since $q_x>1$. If the hypothesis is already given as the punctual eigenvalue bound, this is exactly that bound. This also treats zero stalks, whose characteristic polynomial has no roots.",
+   "uses": [
+    "def-weil-punctual-weights",
+    "def-weil-frobenius-module-weights",
+    "p-linear-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.proof.md",
+    "place": "The assertion that the stalk-weight hypothesis bounds every local eigenvalue; the filtration-to-spectrum implication is made explicit"
+   }
+  },
+  {
+   "text": "Let $\\lambda$ be an eigenvalue of $F$ and choose $v\\ne0$ with $Fv=\\lambda v$. Some component $e_z(v)$ is nonzero; let $x$ be its underlying closed point and $d=d_x$. Iterating $Fv=\\lambda v$ gives $F^dv=\\lambda^dv$, so the return identity of [lem-a1-finite-weil-sections-decomposition] gives $F_{x,z}e_z(v)=\\lambda^de_z(v)$. Therefore $\\lambda^d$ is an eigenvalue of the local stalk operator. The local eigenvalue bound established in step 2 gives $|\\iota(\\lambda^d)|\\leq(q^d)^{w/2}$. Since $\\iota$ is a field isomorphism, $|\\iota(\\lambda)|^d\\leq(q^{w/2})^d$. Both bases are nonnegative and $d\\geq1$, so taking the increasing $d$-th root yields $|\\iota(\\lambda)|\\leq q^{w/2}$. This proves the required spectral bound without any diagonalization or assertion about arithmetic invariant subspaces.",
+   "uses": [
+    "lem-a1-finite-weil-sections-decomposition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.proof.md",
+    "place": "Final weight argument, with the missing degree normalization and the nonzero eigenvector-component calculation supplied"
+   }
+  },
+  {
+   "text": "Every eigenvalue of the finite-dimensional Frobenius module $(V,F)$ satisfies the bound just proved. Apply [lem-a1-punctual-bound-module-mixed] to obtain that $(V,F)$ is $\\iota$-mixed of weights at most $w$, as required. If $V=0$, there are no eigenvalues and the same cited lemma applies; equivalently its mixed filtration is the empty one.",
+   "uses": [
     "lem-a1-punctual-bound-module-mixed"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.proof.md",
+    "place": "Last sentence, passage from eigenvalue bounds to the Frobenius-module weight bound"
+   }
   }
  ],
  "proof_deps": [
-  "lem-a1-finite-boundary-cohomology",
+  "lem-a1-finite-weil-sections-decomposition",
+  "def-weil-punctual-weights",
+  "def-weil-frobenius-module-weights",
   "p-linear-filtration",
   "lem-a1-punctual-bound-module-mixed"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.proof.md",
+  "place": "Corrected proof: geometric stalk evaluation, degree-d local return operators, and an eigenvector argument"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Geometric compactly supported degree zero cohomology of a finite scheme over a finite field is the direct sum of its geometric stalks with Frobenius permuting the stalks",
+   "results": "Logged hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicTopology.singularHomologyFunctorZeroOfTotallyDisconnectedSpace, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated.  These are structure-sheaf limit, singular-homology, arithmetic-ring Frobenius or isocrystal results, not geometric cohomology of constructible Weil sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weights of compactly supported cohomology of a zero dimensional scheme over a finite field",
+   "results": "Logged hits: AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential, ExistsContDiffBumpBase.w_compact_support, hasCompactSupport_iff_eventuallyEq, HasCompactSupport.zero, groupCohomology.cochainsIso₀, AlgebraicGeometry.Scheme.zeroLocus_eq_univ_iff_subset_nilradical_of_isCompact, AlgebraicTopology.singularHomologyFunctorZeroOfTotallyDisconnectedSpace.  None is the constructible Weil-sheaf cohomology/decomposition or its weight bound; structure-sheaf sections and group cochains are different objects.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"Frobenius\"",
+   "results": "Logged hits: . loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|FrobeniusModule|compactlySupportedCohomology",
+   "results": "Logged hits: .  No WeilSheaf/FrobeniusModule/cohomology declaration; the nonempty restricted search finds only scheme structure-sheaf stalks.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible Weil sheaf on a finite scheme has degree zero geometric cohomology equal to the sum of Frobenius induced representations of its closed point stalks",
+   "results": "Logged hits: IsArithFrobAt.arithFrobAt, arithFrobAt, IsArithFrobAt.exists_of_isInvariant, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, WittVector.isocrystal_classification, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, groupCohomology.Hilbert90.aux.  These are structure-sheaf limit, singular-homology, arithmetic-ring Frobenius or isocrystal results, not geometric cohomology of constructible Weil sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a sheaf on a finite scheme over an algebraically closed field equal the product of its geometric stalks, naturally with respect to Frobenius",
+   "results": "Logged hits: AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.termΓ(_,_), AlgebraicGeometry.Scheme.Γ, AlgebraicGeometry.germ_stalkClosedPointIso_hom, AlgebraicGeometry.StructureSheaf.to_global_factors_apply, AlgebraicGeometry.Scheme.Γ_def.  None is the constructible Weil-sheaf cohomology/decomposition or its weight bound; structure-sheaf sections and group cochains are different objects.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"finite\"",
+   "results": "Logged hits: Module.rankAtStalk_eq_of_le_of_finite_of_flat, Module.rankAtStalk_eq_of_le_of_finite_of_flat', Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver, Algebra.QuasiFiniteAt.of_surjectiveOnStalks, AlgebraicGeometry.LocallyOfFiniteType.stalkMap, Algebra.WeaklyQuasiFiniteAt.of_surjectiveOnStalks, Module.Free.away_of_finite_of_flat_of_rankAtStalk_constant, TopCat.Sheaf.instPreservesFiniteLimitsCompPresheafForgetStalkFunctor.  These concern commutative-ring stalk ranks, quasi-finite algebras and topological sheaves, not the claimed etale/adic decomposition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkIsoPi|piLift_stalkRestrict|finite.*stalk|stalk.*finite",
+   "results": "Logged hits: Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean.  No WeilSheaf/FrobeniusModule/cohomology declaration; the nonempty restricted search finds only scheme structure-sheaf stalks.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -153,5 +251,20 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-thm-dl-a1-upper"
+ "unit": "sk-thm-dl-a1-upper",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-a1-finite-boundary-weights",
+  "worker": "stage1",
+  "summary": "Retained the source statement. Corrected the false arithmetic-invariant description of geometric cohomology; isolated the geometric Qlb-stalk decomposition with its Frobenius return compatibility as one statement-only child. The proof itself now derives the global q-weight bound from a nonzero stalk component of a global eigenvector and the degree-d local operator, then applies the existing module-mixedness lemma. Historical Lean audit declarations absent from the provided source are not attachments.",
+  "blueprint": "Step 1 repairs the opening evaluation formula; step 2 spells out the local stalk spectral bound using the cited filtration theorem; step 3 supplies the missing local/global Frobenius degree calculation; step 4 realizes the final application of lem-a1-punctual-bound-module-mixed. These are the evaluation and final spectral sentences of lem-a1-finite-boundary-weights.proof.md. The unit sk-thm-dl-a1-upper and its filtration route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-081d71fab",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-081d71fab (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item, the new child, every cited statement, the unit sk-thm-dl-a1-upper, and Stacks 03QP (etale-cohomology.tex lines 8245-8264). The blueprint's display H_c^0 = sum of Gal-invariants of the stalks is false. Counterexamples: over Spec F_q with Frobenius -1 the invariants are 0 but the stalk has dimension 1; over Spec F_{q^2} with the constant sheaf the formula gives dimension 1 instead of 2. The repair keeps the blueprint's evaluate-then-bound route. Step 1 takes exactly what the child states. Step 2 is elementary: with local base q_x=q^{d_x}, p-linear-filtration bounds every local eigenvalue. Step 3 is elementary: a nonzero component e_z(v) of an eigenvector gives lambda^d as a local eigenvalue, and the d-th root gives |iota lambda|<=q^{w/2}. This normalization was missing in the old proof. Step 4 applies lem-a1-punctual-bound-module-mixed, whose hypotheses steps 1 and 3 supply. The child is true by 03QP(1) at the geometric point of Spec k. P_x matches the d_x embeddings of kappa(x), and Frobenius returns as in def-weil-local-frobenius-trace. I tested it on empty Z_0, degree 1 and 2 points, a nonreduced point and a Jordan block. It carries no weights, so it is not a restated clause of the parent, and no DAG node states it (the lem-trf-* and pbc candidates are finite-coefficient or ordinary sheaves). It meets B1-B9 with three kinds of search, and its coefficients are the same common-stage Qlb as the item's. The citers supply the hypothesis as the punctual eigenvalue bound, which matches step 2. Batch-5 check: all five flagged citations are general definitions, not steps in the proofs of the trace formula or Poincare duality. They are the Frobenius module and its weights (sk-def-frobmod), the constructible heart, H_c, global F and local F_y. The heart and F_y were already reached through def-weil-punctual-weights before this delivery. The item uses neither assumption. Caution for the child's future split: prove it through the pbc nodes (lem-weil-pbc-zero-dimensional-sections-stalks), not lem-trf-finite-scheme-derived-germs. No tool_uses needed."
+ }
 }

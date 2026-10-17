@@ -12,9 +12,125 @@
   "def-coef-infinity-fibrations",
   "def-weil-pbc-trivial-kan-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We prove the boundary-lifting assertion slightly more generally for diagrams into a cartesian fibration $p:E\\to S$ of quasicategories over a fixed simplex $\\sigma:N([n])^{\\mathrm{op}}\\to S$. Cartesian edges are tested in $E$, and terminal diagonal values are chosen in the strict fibres $E_i=E_{\\sigma(i)}$. The original assertion takes $S=N([n])^{\\mathrm{op}}$ and $\\sigma=\\mathrm{id}$. For $n\\geq1$, put $X=N(T_n)$ and delete $(n,n)$ to obtain $Y_n$. The vertices $(i,n)$ form a column simplex $C_n\\cong\\Delta^n$. Every chain containing $(n,n)$ lies in this column, since an arrow into $(n,n)$ forces the source's second coordinate to be $n$. Thus $X=Y_n\\cup C_n$ and $Y_n\\cap C_n$ is the face opposite the last vertex. Put $D_n=B_n\\cap Y_n$. Every diagonal $(i,i)$ for $i<n$ belongs to $D_n$, using the proper singleton subset $\\{i\\}$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of proof paragraph 2 through the finite-simplex terminal-comparison ancestry; marked lifting and terminal boundary extension, with all parameter boundaries fixed."
+   }
+  },
+  {
+   "text": "Mark exactly the $p$-cartesian edges of $E$. Degenerate edges are cartesian: their inverse witnesses make them equivalences, and [lem-cbc-inner-fibration-equivalence-outer-horn-lift] fills every required final horn. We check the four generating families in [lem-coef-marked-anodyne-lifting-calculus] for $E^\\natural\\to S^\\sharp$. Family (i) lifts by innerness. Family (ii) for dimension at least two lifts by the defining final-horn property of a marked edge; in dimension one it is the existence of a cartesian edge with prescribed target. Family (iii) only asks that the long edge of a triangle with cartesian consecutive edges be cartesian. Take opposites in [lem-coef-infinity-cocartesian-composition-initiality]: reversing simplex order exchanges initial and final horns, and the cited composition equivalence gives this conclusion. For family (iv), every edge of its Kan domain $K$ is an equivalence by [lem-coef-infinity-core-kan-fibration]. A simplicial map $K\\to E$ preserves the two inverse-triangle witnesses, so these edges map to equivalences and hence to cartesian edges by the same relative outer-horn lemma. No base map $K\\to S$ is assumed constant. Thus all four families lift. The lifting property is closed under pushouts by gluing a filler, under transfinite compositions by successive fillers and their union at limits, and under retracts by including and projecting a filler. It therefore holds for every marked-anodyne map.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-core-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of proof paragraph 2 through the finite-simplex terminal-comparison ancestry; marked lifting and terminal boundary extension, with all parameter boundaries fixed."
+   }
+  },
+  {
+   "text": "Fix a parameter dimension $m\\geq0$ and a boundary lifting problem for restriction. By the definition of the functor simplicial set this is a map on $(X\\times\\partial\\Delta^m)\\cup(B_n\\times\\Delta^m)$ with the prescribed diagonal and row conditions. Mark $Y_n$ by constant first coordinate and $D_n$ by restriction; mark the parameter simplex minimally. The marked product edges are exactly row edges at parameter vertices. By [lem-coef-triangular-top-deletion-anodyne], $D_n\\hookrightarrow Y_n$ is marked anodyne. Its pushout product with $(\\partial\\Delta^m)^\\flat\\hookrightarrow(\\Delta^m)^\\flat$ is marked anodyne by [lem-coef-marked-anodyne-lifting-calculus]. Step 2 lifts this map into $E^\\natural$ over the fixed base map $\\sigma\\circ\\operatorname{pr}_j$, ignoring the parameter. We obtain the extension on $Y_n\\times\\Delta^m$ preserving all required row edges and both prescribed restrictions. The diagonal strips there already belong to $D_n\\times\\Delta^m$ and remain fixed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-triangular-top-deletion-anodyne",
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of proof paragraph 2 through the finite-simplex terminal-comparison ancestry; marked lifting and terminal boundary extension, with all parameter boundaries fixed."
+   }
+  },
+  {
+   "text": "It remains to fill $C_n\\times\\Delta^m$, compatibly with its intersection with the map already defined. Its base projection is constant at $\\sigma(n)$, so this is a problem in the strict fibre $E_n$, which is a quasicategory directly from innerness: an inner-horn square in the fibre lies over the constant simplex at $\\sigma(n)$, and an inner-fibration filler stays in that fibre. The entire face opposite $(n,n)$ is already defined through $Y_n$. The strip $\\{(n,n)\\}\\times\\Delta^m$ is already constant at $t_n$, since $(n,n)\\in B_n$. Order the remaining nondegenerate simplices of $C_n\\times\\Delta^m=N([n]\\times[m])$ by dimension. Each has last column coordinate $n$: otherwise it would lie in the already defined opposite face. Its last vertex therefore maps to $t_n$. All its proper faces have been defined when it is attached. Apply [lem-cbc-terminal-boundary-extension] in $E_n$ to fill this whole boundary, leaving all previous simplices fixed; assign degenerate simplices by their operators. No missing vertex occurs, since every vertex is either in the opposite face or in the fixed strip. This finite induction fills the product. There is no new nondegenerate row edge in this last stage: an edge within the column has constant first coordinate only if it lies in a single-vertex parameter strip, and all such strips were already fixed or already defined. Thus the resulting map is an $m$-simplex of $\\mathcal L(X)$ with the prescribed boundary and restriction.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-cbc-terminal-boundary-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of proof paragraph 2 through the finite-simplex terminal-comparison ancestry; marked lifting and terminal boundary extension, with all parameter boundaries fixed."
+   }
+  },
+  {
+   "text": "Steps 3 and 4 solve every boundary lifting problem, including $m=0$ (where the parameter boundary is empty). By [def-weil-pbc-trivial-kan-fibration] this proves that restriction is a trivial Kan fibration for every $n\\geq1$. For $n=0$, $B_0$ is empty and the full diagram is required to be constant at $t_0$ in every parameter degree. Both simplicial sets are consequently the one-point simplicial set, and their restriction is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of proof paragraph 2 through the finite-simplex terminal-comparison ancestry; marked lifting and terminal boundary extension, with all parameter boundaries fixed."
+   }
+  },
+  {
+   "text": "We next show that the proper-face choice space maps to a point with every boundary lifting property, still in the generalized setting of step 1. Given $\\partial\\Delta^m\\to\\mathcal L(B_n)$, process the nonempty proper index subsets $F$ in increasing cardinality. At $N(T_F)$ the intersection with all previously processed nerves is exactly its own proper-face union $B_F$: intersections are the full nerve on the intersection of the index sets, and all proper subsets of $F$ were processed earlier. Keep the original parameter boundary as well. Order-identify $F$ with $[r]$, $r=|F|-1$, and apply step 5 to the same cartesian fibration $E\\to S$ and the restricted simplex $N(F)^{\\mathrm{op}}\\to S$. Thus we use exactly the same cartesian edges in $E$; no reflection theorem for cartesian edges under pullback is needed. Its diagonal values are the already specified terminal objects in the same strict fibres. The extension agrees on intersections, so the maps glue. Singleton faces use the forced constant diagonal map. All proper faces have now been filled, giving the requested simplex of $\\mathcal L(B_n)$. For $n=0$ this space is a point. The case $m=0$ supplies nonemptiness.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of proof paragraph 2 through the finite-simplex terminal-comparison ancestry; marked lifting and terminal boundary extension, with all parameter boundaries fixed."
+   }
+  },
+  {
+   "text": "By steps 5 and 6 the map $\\mathcal L(X)\\to\\Delta^0$ has the same boundary lifting property: first fill a parameter boundary in $\\mathcal L(B_n)$, then lift the resulting simplex along restriction. Thus the maps from both spaces to a point are trivial Kan fibrations. By [lem-weil-pbc-trivial-kan-lifts-monomorphisms] they lift horn inclusions as well, so both spaces are Kan; dimension-zero boundary lifting gives their vertices. For either map to a point, [lem-weil-pbc-trivial-kan-homotopy-equivalence] gives a section and a simplicial homotopy between the identity and the constant map defined by that section. The map to a point is therefore a weak homotopy equivalence by [lem-cbc-simplicial-homotopy-equivalence-weak]. This is precisely contractibility in the convention of the statement.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of proof paragraph 2 through the finite-simplex terminal-comparison ancestry; marked lifting and terminal boundary extension, with all parameter boundaries fixed."
+   }
+  },
+  {
+   "text": "For the last clause, let $p:E\\to S$ be cartesian and form the actual degreewise pullback $E'=E\\times_S N([n])^{\\mathrm{op}}$. An inner-horn square for $E'\\to N([n])^{\\mathrm{op}}$ projects to one for $p$; pair its filler in $E$ with the prescribed base simplex to fill the original square. A $p$-cartesian lift of the image of any base edge, with the prescribed target, pairs with that edge to give a cartesian lift in $E'$: its final-horn fillers pair in the same manner. Thus the pullback is cartesian. Its total space is a quasicategory: fill the image of any inner horn in the ordinal nerve, then lift it by innerness. Its strict fibres identify degreewise with $E_{\\sigma(i)}$, so their given terminal objects are still terminal. Apply steps 1 through 7 to this cartesian fibration over the ordinal nerve. No assertion that every cartesian edge of $E'$ is detected in $E$ is used. Terminality was used only within individual strict fibres, never after cartesian transport.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of proof paragraph 2 through the finite-simplex terminal-comparison ancestry; marked lifting and terminal boundary extension, with all parameter boundaries fixed."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-cbc-terminal-boundary-extension",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-triangular-top-deletion-anodyne",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Agent expansion of proof paragraph 2 through the finite-simplex terminal-comparison ancestry; marked lifting and terminal boundary extension, with all parameter boundaries fixed."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +166,24 @@
    "results": "{\"t\": \"2026-10-17T08:49:39Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of coherent triangular diagrams with terminal diagonal vertices and cartesian rows is a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.trivialFibrations_sub_fibrations\", \"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"HomotopicalAlgebra.mem_trivialFibrations\", \"HomotopicalAlgebra.trivialFibrations\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.instFibrationPCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemTrivialCofibrationsFibrations\"], \"digest\": \"7624469257aa7bd0\"}",
    "date": "2026-10-17",
    "verdict": "No match. Hits concern ordinary categories (or strict nerves), finite directed diagrams, and ordinary terminal objects; none is the relative lifting theorem for arbitrary quasicategories. Read HasFibers.lean:177-252 and FiberedCategory/Grothendieck.lean:38-81; the broad grep has no hit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The restriction of cartesian interval diagrams with terminal values on the diagonal to the boundary is a trivial Kan fibration",
+   "results": "{\"t\": \"2026-10-17T11:26:11Z\", \"tool\": \"leanfinder\", \"query\": \"The restriction of cartesian interval diagrams with terminal values on the diagonal to the boundary is a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.PathObject.IsGood.fibration_p\", \"HomotopicalAlgebra.PathObject.IsGood\", \"HomotopicalAlgebra.PathObject.IsVeryGood.toIsGood\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\"], \"digest\": \"699219483f30ebee\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The hits concern ordinary nerves, strict Segal simplicial sets, or the abstract model-category definition of a trivial fibration. None states the relative extension theorem for cartesian diagrams in arbitrary quasicategories. The second phrasing has the same scope mismatch."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite triangular diagrams of cartesian lifts with terminal diagonal objects extend compatible proper face diagrams with a contractible space of choices",
+   "results": "{\"t\": \"2026-10-17T11:26:12Z\", \"tool\": \"leanfinder\", \"query\": \"Finite triangular diagrams of cartesian lifts with terminal diagonal objects extend compatible proper face diagrams with a contractible space of choices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.cechNerveTerminalFrom\", \"SSet.horn₃₂.exists_desc\", \"SSet.horn₃₁.exists_desc\", \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"CategoryTheory.CechNerveTerminalFrom.uniqueToWideCospanNone\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\"], \"digest\": \"002c87a928b1b2d5\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The hits concern ordinary nerves, strict Segal simplicial sets, or the abstract model-category definition of a trivial fibration. None states the relative extension theorem for cartesian diagrams in arbitrary quasicategories. The second phrasing has the same scope mismatch."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-terminal-twisted-resolution",
@@ -83,5 +213,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-terminal-comparison-coherence",
+  "worker": "stage1",
+  "summary": "Kept the exact statement. Proved relative boundary lifting over an arbitrary fixed base simplex by the four marked-anodyne generating families, the deleted-column anodyne auxiliary, and terminal-column boundary fillers. Removed an insufficient general pullback citation and an uncited relative-calculus reference; avoided the cyclic relative marked-calculus node. Proved proper-face contractibility over the same ambient fibration and treated actual pullbacks by direct horn pairing. Checked n=0 and finite combinatorics through n=5.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, through the recorded ancestry: coherent terminal comparisons and cartesian-lift choices; realizes the finite-simplex relative extension required by lem-coef-cartesian-terminal-twisted-resolution step 1, rather than attributing that generalization to Cisinski Proposition 5.6.9.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Generic simplicial lifting or homotopy-contraction theorem, used through its stated interface; the unit has no replacement."
+   },
+   {
+    "node": "def-weil-pbc-trivial-kan-fibration",
+    "why": "Generic simplicial lifting or homotopy-contraction theorem, used through its stated interface; the unit has no replacement."
+   },
+   {
+    "node": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "why": "Generic simplicial lifting or homotopy-contraction theorem, used through its stated interface; the unit has no replacement."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic simplicial lifting or homotopy-contraction theorem, used through its stated interface; the unit has no replacement."
+   },
+   {
+    "node": "lem-cbc-terminal-boundary-extension",
+    "why": "Generic simplicial lifting or homotopy-contraction theorem, used through its stated interface; the unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Generic simplicial lifting or homotopy-contraction theorem, used through its stated interface; the unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "why": "Generic simplicial lifting or homotopy-contraction theorem, used through its stated interface; the unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-cbc-terminal-boundary-extension",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-726237fa8",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-726237fa8 (reviewer sub-agent of L); spot-checked: I read the item, its 8 steps, the new node, every cited statement, the parent's citing step, the unit record and the blueprint proof file (paragraph 2 is the adjunction computation; the item is an agent-written finite-simplex lemma that the ancestry needs, so proof_origin=agent is correct). The statement is unchanged and true; I checked n=0 and n=1 by hand. Step 1: chains through (n,n) lie in the column, so X=Y_n∪C_n. Step 2: I checked all four marked-anodyne generators for E^natural→S^sharp: inner horns; the final-horn definition and the cartesian-lift clause for (ii); the opposite of the cocartesian composition lemma for (iii); for (iv), edges of a Kan complex are equivalences, which are cartesian by the outer-horn lemma, whose hypotheses hold. Step 3: the marked edges of the product are exactly the row edges at parameter vertices, which is exactly what L requires; the pushout-product clause applies. Step 4: the column lies in the strict fibre over sigma(n); every simplex still to fill has its last vertex at t_n and dimension at least 1, so terminal-boundary-extension applies. Steps 5–7 follow the trivial-Kan-fibration definition, an induction over faces in increasing cardinality over the restricted simplex, then lifts-monomorphisms, section plus homotopy, and the weak-equivalence lemma; this is exactly the parent's use. Step 8: the pullback is handled by pairing horn fillers, with no reflection claim. New node lem-coef-triangular-top-deletion-anodyne: statement-only, self-contained, blueprint from and via correct, five searches recorded, and it does not restate a clause of the item. Tested: n=1 is generator (ii); n=2 by hand (two right horns, one inner horn, one triangle cancellation from the existing node); my own filtration script builds n=2..5 exactly, with only the row edges marked. No duplicates found by rg over the DAG (selectively-marked-terminal-cylinder, triangle-cancellation, relative-marked-anodyne-calculus and others read). No cycles (transitive closure checked), no SGA. Accepted tool_uses: lem-cbc-inner-fibration-equivalence-outer-horn-lift, lem-cbc-terminal-boundary-extension, lem-cbc-simplicial-homotopy-equivalence-weak, lem-weil-pbc-trivial-kan-homotopy-equivalence. The def and mathlib-leaf entries are harmless. Minor: the new node has no lean_audit key (state none); harmless, left as is. No fixes."
  }
 }

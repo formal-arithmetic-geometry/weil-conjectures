@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-weil-deligne-purity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Deligne smooth-proper purity",
@@ -21,57 +21,183 @@
   "def-weil-global-geometric-frobenius",
   "def-weil-ordinary-compact-cohomology",
   "def-weil-pbc-proetale-site",
-  "def-weil-weil-sheaf-complex"
+  "def-weil-weil-sheaf-complex",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-complex-weights",
+  "def-weil-frobenius-module-weights"
  ],
  "proof": [
   {
-   "text": "*Step 1: the main-route purity input.* The constant\n$\\Qlb$-Weil sheaf $(\\Qlb)_X$ is the constant $\\Qlb$-sheaf of\n[cor-zl-purity-smooth-proper] of the zeta chapter on the smooth,\nproper, geometrically connected $X_0$ of pure dimension $d$: the\nsmoothness, properness, geometric connectedness, coefficient, and\nFrobenius data of that corollary are among those fixed in the\nstatement, and the cohomological family is extended to $\\Qlb$ with\nthe Frobenius operator $F_{\\Qlb}$ as in the constant-sheaf setting\nthere. Hence, for every $0\\leq i\\leq2d$,\n$(H^i(X,\\Qlb),F_{\\Qlb})$ is $\\iota$-pure of weight $i$ in the sense of\n[def-weil-frobenius-module-weights] – this is assertion (4).\n\nFor assertion (2), apply the general $Rf_!$ weight theorem\n[thm-zl-wme-deligne-estimate] to the structure morphism\n$a_{X_0}:X_0\\to\\Spec k_0$ and to $K=(\\Qlb)_{X_0}$, viewed as a\ncomplex concentrated in degree $0$. Its only cohomology sheaf is the\nconstant sheaf, punctually $\\iota$-pure of weight $0$ by\n[lem-zl-constant-sheaf-weight-zero], so $K\\in D_{\\le0}(X_0)$ in the\nsense of [def-weil-complex-weights]. Hence\n$Ra_{X_0!}K\\in D_{\\le0}(\\Spec k_0)$: its degree-$i$ cohomology sheaf,\nwhose stalk at the unique closed point (with $q_y=q$) is\n$H_c^i(X,\\Qlb)$ with its geometric Frobenius, is $\\iota$-mixed of\nweights at most $i$. This is assertion (2); it is the absolute case of\nthe relative estimate, which bounds $Rf_!$ on every bounded\nconstructible Weil complex.\n\nIn addition, the proper coincidence\n$H_c^i(X,\\Qlb)\\xrightarrow{\\sim}H^i(X,\\Qlb)$ in the form of\n[prop-weil-proper-compact-coincidence] is Frobenius-equivariant,\nwhich is assertion (3), and it transfers the mixed bound of assertion\n(2) from $H_c^i$ to $H^i$.",
+   "text": "Put $K=(\\Qlb)_X$ with its canonical Weil structure. Its underlying complex is the coefficient unit in degree zero. By [lem-zl-constant-sheaf-weight-zero], it is punctually pure of weight zero. In the filtration definition of [def-weil-punctual-weights], the filtration $0\\subset K$ therefore makes it mixed of weights at most zero. Every other cohomology sheaf is zero and has the empty weight filtration. Hence [def-weil-complex-weights] gives $\\Wt_{\\iota,\\leq0}(K)$.",
    "uses": [
-    "cor-zl-purity-smooth-proper",
-    "def-weil-frobenius-module-weights",
-    "thm-zl-wme-deligne-estimate",
     "lem-zl-constant-sheaf-weight-zero",
-    "def-weil-complex-weights",
-    "prop-weil-proper-compact-coincidence"
+    "def-weil-punctual-weights",
+    "def-weil-complex-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/thm-weil-deligne-purity.proof.md",
+    "place": "Step 3: constant Weil sheaf"
+   }
   },
   {
-   "text": "*Step 2: the eigenvalue bound – assertion (5).* By\n[def-weil-frobenius-module-weights], $\\iota$-purity of weight\n$i$ of the Frobenius module $(H^i(X,\\Qlb),F_{\\Qlb})$ means\nprecisely that every eigenvalue $\\alpha$ of $F_{\\Qlb}$ on\n$H^i(X,\\Qlb)$ satisfies $|\\iota(\\alpha)|=q^{i/2}$, which is\nassertion (5).\n\n*Step 3: the constant Weil sheaf is pure of weight $0$ –\nassertion (1).* Let $K=(\\Qlb)_X$, with the canonical Weil\nstructure, and use the two predicates of [def-weil-complex-weights].\nThe cohomology sheaves of\n$\\operatorname{For}K$ are $(\\Qlb)_X$ in degree $0$ and $0$\nelsewhere. The constant sheaf is punctually $\\iota$-pure of weight\n$0$: its local Frobenius operators are the identities on the\none-dimensional stalks ([def-trf-frobenius-operators]), so every\nlocal eigenvalue is $1$, with $|\\iota(1)|=1=q_y^{0/2}$ for the\nresidue-field base $q_y$, which is the definition of\n[def-weil-punctual-weights] (this is [lem-zl-constant-sheaf-weight-zero]). Hence\n$\\Wt_{\\iota,\\leq0}(K)$ holds. For the lower predicate, the dual\ncomplex $D_XK$ of [def-weil-complex-weights] is\n\n$$\nD_XK=R\\mathcal Hom_{\\Qlb}\\bigl(K,\\omega_X\\bigr),\n\\qquad \\operatorname{For}(\\omega_X)=Ra_X^!\\Qlb,\n$$\n\nby the choice made in the statement and\n[def-weil-derived-pullback-tensor-hom]; the smooth-dualizing\nidentification [thm-sf-dual-perfect] gives\n\n$$\nD_XK\\cong(\\Qlb)_X^{\\vee}(d)[2d]\\cong(\\Qlb(d))_X[2d],\n$$\n\nthe coefficient dual $(\\Qlb)_X^{\\vee}$ of the constant rank-one sheaf\nbeing the constant rank-one sheaf\n([def-weil-derived-pullback-tensor-hom]), and the twist\n$(\\Qlb(d))_X$ carrying the canonical Weil structure. Its only\ncohomology sheaf, in degree $-2d$, is $((\\Qlb(d))_X)$, punctually\n$\\iota$-pure of weight $-2d$: the local geometric Frobenius acts on\n$\\Qlb(d)$ by the scalar $q^{-d}$\n([def-weil-frobenius-coefficient-twists]), so every local\neigenvalue is $q^{-d}$ with\n$|\\iota(q^{-d})|=q^{-d}=q^{(-2d)/2}$, by\n[def-weil-punctual-weights]. The weight $0+j$ required at\n$j=-2d$ by [def-weil-complex-weights] is therefore available:\n$-2d=0+(-2d)$. Thus $\\Wt_{\\iota,\\leq0}(D_XK)$ holds, i.e.\n$\\Wt_{\\iota,\\geq0}(K)$, and with $\\Wt_{\\iota,\\leq0}(K)$ the\nconstant Weil sheaf $(\\Qlb)_X$ is $\\iota$-pure of weight $0$.\nThis is assertion (1), and all five assertions of the statement are\nestablished.",
+   "text": "The coefficient unit $K$ is site-perfect: at the finite field stage it is the complex consisting of one free rank-one module in degree zero, which meets [def-weil-site-perfect-complex]. Its coefficient dual is the unit: the isomorphism $\\mathcal Hom(\\Lambda_X,\\Lambda_X)\\cong\\Lambda_X$ sends a map to its value at $1$, with inverse $b\\mapsto(a\\mapsto ab)$; these formulas commute with restriction and the canonical coefficient Weil structures. They compute the derived Hom as well, since Hom out of the free rank-one unit is the identity functor. The coefficient operations and their passage to $\\Qlb$ are those of [def-weil-derived-pullback-tensor-hom]. Apply [thm-sf-dual-perfect] at $\\Lambda=\\Qlb$ to obtain $D_XK\\cong\\Qlb_X(d)[2d]$. Here $X$ is smooth, separated of finite type and of pure dimension $d$, exactly the hypotheses of that theorem. The chosen dualizing lift is the canonical one required by [def-weil-complex-weights]. By [prop-weil-operations], purity and duality identifications are morphisms of Weil complexes; thus the displayed identification uses the canonical Tate Weil structure, rather than merely identifying the underlying complexes.",
    "uses": [
-    "def-weil-frobenius-module-weights",
-    "def-weil-complex-weights",
-    "def-trf-frobenius-operators",
-    "def-weil-punctual-weights",
-    "lem-zl-constant-sheaf-weight-zero",
+    "def-weil-site-perfect-complex",
     "def-weil-derived-pullback-tensor-hom",
     "thm-sf-dual-perfect",
-    "def-weil-frobenius-coefficient-twists"
+    "def-weil-complex-weights",
+    "prop-weil-operations"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/thm-weil-deligne-purity.proof.md",
+    "place": "Step 3: constant Weil sheaf"
+   }
+  },
+  {
+   "text": "Apply [lem-tw-tate-twist-weight-shift] to the lisse rank-one constant Weil sheaf, with $w=0$ and $n=d$, using its punctual purity from [lem-zl-constant-sheaf-weight-zero]. It says that $\\Qlb_X(d)$ is punctually pure of weight $-2d$. By the Weil isomorphism in step 2, the only nonzero cohomology sheaf of $D_XK$ is this sheaf in degree $-2d$. The filtration $0\\subset\\Qlb_X(d)$ and the empty filtrations in other degrees meet [def-weil-punctual-weights]. Thus its degree-$j$ sheaf is mixed of weights at most $j$ for all $j$, because at the sole nonzero degree $j=-2d$ the weight is $-2d=j$. By [def-weil-complex-weights], $\\Wt_{\\iota,\\leq0}(D_XK)$ is $\\Wt_{\\iota,\\geq0}(K)$. Together with step 1 this proves clause (1). In particular, the local twist bound uses each closed point's residue-field cardinality, not the fixed $q$ at points of higher degree.",
+   "uses": [
+    "lem-tw-tate-twist-weight-shift",
+    "lem-zl-constant-sheaf-weight-zero",
+    "def-weil-punctual-weights",
+    "def-weil-complex-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/thm-weil-deligne-purity.proof.md",
+    "place": "Step 3: constant Weil sheaf"
+   }
+  },
+  {
+   "text": "Apply [thm-zl-wme-deligne-estimate] with $f_0=a_{X_0}:X_0\\to\\Spec k_0$, $w=0$ and the constant constructible Weil complex. The source is separated finite type since $X_0$ is proper over $k_0$; the target is the finite-type point. Step 1 supplies the required upper weight bound. The theorem gives $Ra_{X!}K\\in D_{\\leq0}(\\Spec k_0)$. By [def-weil-complex-weights] its degree-$i$ cohomology sheaf is mixed of weights at most $i$. Evaluation at the geometric point is precisely $H_c^i(X,\\Qlb)$ by [def-weil-ordinary-compact-cohomology]. The Weil lift of this direct image is given by the compact-support exchange and the coefficient Weil map, as stated in [prop-weil-operations]; its local operator at the unique closed point of $\\Spec k_0$ is the global geometric Frobenius fixed in the item. Here the residue field has cardinality $q$. Evaluating its weight filtration therefore gives exactly the filtration of [def-weil-frobenius-module-weights]. This proves clause (2).",
+   "uses": [
+    "thm-zl-wme-deligne-estimate",
+    "def-weil-complex-weights",
+    "def-weil-ordinary-compact-cohomology",
+    "prop-weil-operations",
+    "def-weil-frobenius-module-weights",
+    "def-weil-punctual-weights",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/thm-weil-deligne-purity.proof.md",
+    "place": "Step 1, paragraph beginning For assertion (2)"
+   }
+  },
+  {
+   "text": "Since $X_0$ is proper, use the identity compactification and its geometric base change. By [prop-weil-proper-compact-coincidence], the canonical comparison $\\kappa_M:Ra_{X!}M\\to Ra_{X*}M$ is an isomorphism. Its compatibility with Frobenius transport is exactly clause (2) of [lem-pod-proper-coincidence-frobenius]: $\\tau_M\\operatorname{Fib}_s(\\kappa_M)=\\operatorname{Fib}_s(\\kappa_{Lg_X^*M})\\tau_{c,M}$. Put $M=\\operatorname{For}K$ and write $\\theta:Lg_X^*M\\to M$ for its Weil map. Naturality of $\\kappa$ for $\\theta$ gives $R\\Gamma(\\theta)\\operatorname{Fib}_s(\\kappa_{Lg_X^*M})=\\operatorname{Fib}_s(\\kappa_M)R\\Gamma_c(\\theta)$. Composing the two equalities yields $F\\operatorname{Fib}_s(\\kappa_M)=\\operatorname{Fib}_s(\\kappa_M)F_c$, because the global operators are $R\\Gamma(\\theta)\\tau_M$ and $R\\Gamma_c(\\theta)\\tau_{c,M}$ by [def-weil-global-geometric-frobenius]. Taking degree-$i$ cohomology proves clause (3), including equivariance of the specified comparison.",
+   "uses": [
+    "prop-weil-proper-compact-coincidence",
+    "lem-pod-proper-coincidence-frobenius",
+    "def-weil-global-geometric-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/thm-weil-deligne-purity.proof.md",
+    "place": "Step 1, paragraph beginning In addition"
+   }
+  },
+  {
+   "text": "Apply [cor-zl-purity-smooth-proper] to $X_0$ and the fixed finite-field, coefficient and embedding data. It requires smoothness, properness, geometric connectedness and pure dimension $d$, all assumed here, and uses the same algebraically closed coefficient category and global geometric-Frobenius convention. Its conclusion holds for every integer degree, hence for every $0\\leq i\\leq2d$: $(H^i(X,\\Qlb),F)$ is $\\iota$-pure of weight $i$. This is clause (4). The additional admissibility and finiteness assumptions of this item impose no missing hypothesis on that corollary.",
+   "uses": [
+    "cor-zl-purity-smooth-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/thm-weil-deligne-purity.proof.md",
+    "place": "Step 1, first paragraph: main-route purity input"
+   }
+  },
+  {
+   "text": "By [def-weil-frobenius-module-weights], purity of $(H^i(X,\\Qlb),F)$ of weight $i$ means that every eigenvalue $\\alpha$ satisfies $|\\iota(\\alpha)|=q^{i/2}$. Applied to step 6 this is clause (5).",
+   "uses": [
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/thm-weil-deligne-purity.proof.md",
+    "place": "Step 2: eigenvalue bound"
+   }
   }
  ],
  "proof_deps": [
-  "cor-zl-purity-smooth-proper",
-  "def-weil-frobenius-module-weights",
-  "thm-zl-wme-deligne-estimate",
   "lem-zl-constant-sheaf-weight-zero",
-  "def-weil-complex-weights",
-  "prop-weil-proper-compact-coincidence",
-  "def-trf-frobenius-operators",
   "def-weil-punctual-weights",
+  "def-weil-complex-weights",
+  "def-weil-site-perfect-complex",
   "def-weil-derived-pullback-tensor-hom",
   "thm-sf-dual-perfect",
-  "def-weil-frobenius-coefficient-twists"
+  "prop-weil-operations",
+  "lem-tw-tate-twist-weight-shift",
+  "thm-zl-wme-deligne-estimate",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-frobenius-module-weights",
+  "def-weil-local-frobenius-trace",
+  "prop-weil-proper-compact-coincidence",
+  "lem-pod-proper-coincidence-frobenius",
+  "def-weil-global-geometric-frobenius",
+  "cor-zl-purity-smooth-proper"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-input-weights/thm-weil-deligne-purity.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/thm-weil-deligne-purity.proof.md",
+  "place": "Steps 1–3, with missing Weil-equivariance and Tate-weight citations repaired using existing DAG statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Deligne smooth proper purity over finite fields: constant Weil sheaf pure weight zero, compact cohomology mixed, proper comparison, ordinary cohomology pure",
+   "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; LightCondAb.ofSheafLightProfinite; CompHausLike.LocallyConstantModule.functor; LightCondensed; LightCondMod.ofSheafLightProfinite; Condensed.isSheafProfinite; CondensedMod.ofSheafProfinite; hits concern affine limits, condensed categories, finite-field Frobenius, smooth algebras, isocrystals or archimedean gamma functions, not this cohomological theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.IsPureOfWeight FrobeniusModule IsMixedOfWeightLE",
+   "results": "No hits. loogle: Unknown constant `Polynomial.IsPureOfWeight`",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Deligne purity Frobenius weights",
+   "results": "No hits. ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth proper variety finite field cohomology Frobenius eigenvalues pure weight",
+   "results": "FiniteField.frobenius_pow; FiniteField.Extension.frob; WittVector.StandardOneDimIsocrystal.frobenius_apply; FiniteField.coe_frobeniusAlgHom; FiniteField.coe_frobeniusAlgEquivOfAlgebraic; Perfection.coeff_frobenius; FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp; AlgebraicGeometry.instIsProperOfIsFinite; hits concern affine limits, condensed categories, finite-field Frobenius, smooth algebras, isocrystals or archimedean gamma functions, not this cohomological theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of smooth proper schemes over finite fields satisfies the Weil conjectures Riemann hypothesis",
+   "results": "Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; AlgebraicGeometry.IsEtale.instFormallyUnramified; Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero; WittVector.isocrystal_classification; AlgebraicGeometry.IsEtale.of_comp; Algebra.Etale.iff_exists_algEquiv_prod; hits concern affine limits, condensed categories, finite-field Frobenius, smooth algebras, isocrystals or archimedean gamma functions, not this cohomological theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Frobenius",
+   "results": "No hits. loogle: unknown identifier 'Frobenius'",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Deligne|IsPureOfWeight|IsMixedOfWeight|WeilSheaf|FrobeniusModule",
+   "results": "Mathlib/NumberTheory/Harmonic/GammaDeriv.lean; Mathlib/NumberTheory/LSeries/MellinEqDirichlet.lean; Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean; Mathlib/CategoryTheory/Presentable/Directed.lean; Mathlib/CategoryTheory/Presentable/Directed.lean; Mathlib/CategoryTheory/Presentable/Directed.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean; hits concern affine limits, condensed categories, finite-field Frobenius, smooth algebras, isocrystals or archimedean gamma functions, not this cohomological theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -123,5 +249,94 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-input-weights"
+ "unit": "sk-input-weights",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-weil-deligne-purity",
+  "worker": "stage1",
+  "summary": "Q27 preserved the detailed source statement and split the bundled proof into seven steps, checking each citation against its current statement. Repaired missing equivariance evidence for the dualizing identification and proper comparison, and replaced the definition-only twist-scalar citation by the existing Tate-weight-shift lemma. No new nodes; Mathlib and Lean source do not supply the complete cohomological theorem.",
+  "blueprint": "Detailed proof Step 3 is realized by steps 1–3 (constant sheaf, smooth duality, lower weight); Step 1 by steps 4–6 (relative weight estimate, proper comparison, smooth-proper purity); Step 2 by step 7. Unit sk-input-weights steps (1)–(5) follow the same route; its relative estimate is thm-zl-wme-deligne-estimate.",
+  "tool_uses": [
+   {
+    "node": "def-weil-site-perfect-complex",
+    "why": "The coefficient unit is site-perfect by the finite-free definition; this generic coefficient notion is used to check the hypothesis of the unit route's duality theorem."
+   },
+   {
+    "node": "def-weil-derived-pullback-tensor-hom",
+    "why": "Types the coefficient-dual computation for the unit in the existing smooth-duality step."
+   },
+   {
+    "node": "def-weil-complex-weights",
+    "why": "Provides precisely the upper/lower complex-weight predicates named in the item and its source proof."
+   },
+   {
+    "node": "def-weil-punctual-weights",
+    "why": "Provides the filtration notion used to pass from punctual purity to upper complex weights."
+   },
+   {
+    "node": "def-weil-frobenius-module-weights",
+    "why": "The conclusion's finite-dimensional Frobenius-module weight definition."
+   },
+   {
+    "node": "thm-sf-dual-perfect",
+    "why": "The source proof already uses its smooth dualizing identification to prove the lower complex-weight predicate."
+   },
+   {
+    "node": "prop-weil-operations",
+    "why": "Supplies Weil equivariance of the purity/duality maps and the pushforward Weil structure; underlying duality alone does not give these."
+   },
+   {
+    "node": "lem-tw-tate-twist-weight-shift",
+    "why": "Generic Tate-weight calculation for the dualizing twist; it supplies the local residue-field weight bound required by the existing source route."
+   },
+   {
+    "node": "thm-zl-wme-deligne-estimate",
+    "why": "The relative weight estimate explicitly required by this unit, specialized to the structure morphism."
+   },
+   {
+    "node": "def-weil-ordinary-compact-cohomology",
+    "why": "Identifies the point fiber of compact-support pushforward with the displayed cohomology."
+   },
+   {
+    "node": "lem-pod-proper-coincidence-frobenius",
+    "why": "Generic compatibility of the very comparison and transports in clause (3); the unit's proper coincidence node gives only the underlying isomorphism."
+   },
+   {
+    "node": "def-weil-global-geometric-frobenius",
+    "why": "Defines the global operators as coefficient Weil maps composed with the transports in the equivariance calculation."
+   },
+   {
+    "node": "cor-zl-purity-smooth-proper",
+    "why": "The main-route smooth-proper purity input specified in the source proof and unit."
+   },
+   {
+    "node": "def-weil-local-frobenius-trace",
+    "why": "At the finite-field point the degree-one closed-point local operator is the global operator; this is the defining point calculation needed to read off the absolute weight estimate."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-site-perfect-complex",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-complex-weights",
+  "def-weil-punctual-weights",
+  "def-weil-frobenius-module-weights",
+  "thm-sf-dual-perfect",
+  "prop-weil-operations",
+  "lem-tw-tate-twist-weight-shift",
+  "thm-zl-wme-deligne-estimate",
+  "def-weil-ordinary-compact-cohomology",
+  "lem-pod-proper-coincidence-frobenius",
+  "def-weil-global-geometric-frobenius",
+  "cor-zl-purity-smooth-proper",
+  "def-weil-local-frobenius-trace"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-1a9c15af1",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-1a9c15af1 (reviewer sub-agent of L); spot-checked: Read the item and all cited statements in full. The statement is byte-identical to the main-20261015 source and nothing is weakened; there are no new nodes and no SGA citation. Step checks: (1) lem-zl-constant-sheaf-weight-zero (X_0 proper, so separated finite type), the filtration 0⊂K and empty filtrations elsewhere (m=0 allowed). (2) The unit is site-perfect by definition. thm-sf-dual-perfect's hypotheses come from def-pod-conventions and are met; admissibility 'at Qlb' means every finite stage with uniform bounds. Weil equivariance comes from prop-weil-operations, not from the underlying isomorphism. (3) lem-tw-tate-twist-weight-shift with w=0, n=d gives weight -2d at every closed point with q_y. The twist object of def-coefficient-twists-detailed carries the canonical Weil structure of def-weil-frobenius-coefficient-twists. Degree -2d gives weight -2d ≤ 0+j, so Wt_{≥0}. (4) thm-zl-wme-deligne-estimate's hypotheses are checked. Its pbc-qbar category is the same pair construction as def-weil-algebraically-closed-coefficients (rational stages recorded same_as), so this delivery adds no new coefficient identification. Unwinding def-weil-local-frobenius-trace and def-weil-frobenius-cohomology-transport at Spec k_0 (r=1) gives F_y = RΓ_c(θ)∘τ_c = F_c with q_y = q. (5) lem-pod-proper-coincidence-frobenius clause 2 plus naturality of κ in θ gives F∘Fib κ = Fib κ∘F_c; the algebra checks. (6) cor-zl-purity-smooth-proper has the same hypotheses and category. (7) The eigenvalue clause is the definition in def-weil-frobenius-module-weights. Edge cases d=0, i=0, i=2d, zero groups and higher-degree points are fine. Route: every cited statement's unit is on sk-input-weights' route except lem-pod-proper-coincidence-frobenius; I accept that tool_use as the generic 'map of Weil data' compatibility that the unit proof's clause 3 asserts. Batch-5 check, one conclusion each: def-weil-algebraically-closed-coefficients, def-weil-site-perfect-complex and def-weil-local-frobenius-trace are general definitions. prop-weil-operations (Weil lifts and equivariance; cited only by sec-zeta-weil nodes) is given by neither the non-equivariant PD isIso leaf nor the trace-formula leaf. lem-tw-tate-twist-weight-shift reaches the PD chapter only through the punctual-weight definition. lem-pod-proper-coincidence-frobenius is generic H_c/H Frobenius compatibility; within the trace formula it serves only finiteness and corollaries. None is a step of the trace-formula or PD proofs, and all were already in the closure through cor-zl-purity-smooth-proper or thm-zl-wme-deligne-estimate. Maintainer remark: the item keeps the source's admissibility hypothesis, but def-weil-exceptional-adjoint-admissibility warns that clause (1) fails for smooth proper curves, so the item may be vacuous in positive dimension. The unit statement drops that hypothesis. The worker correctly reported this and left `realized` unfilled. This needs HUMAN/maintenance attention. No fixes written."
+ }
 }

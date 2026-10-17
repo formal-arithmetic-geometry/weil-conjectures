@@ -14,9 +14,82 @@
   "def-weil-sheaf-of-modules-category",
   "lem-pe-constant-left-module-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a set $E$, let $P_E$ be the constant presheaf and let $1$ denote the terminal sheaf, whose underlying presheaf is constant singleton. Sectionwise, $P_E$ is the coproduct of $E$ copies of that presheaf. Thus a presheaf map $P_E\\to H$ to any sheaf $H$ is exactly a family $(1\\to H)_{e\\in E}$. By the sheafification universal property [def-weil-pbc-sheafification, def-weil-pbc-constant-sheaf], maps $\\underline E\\to H$ are the same families. This proves directly that $\\underline E=\\coprod_{e\\in E}1$, with injections $\\iota_e$ given by constant sections, including $E=\\varnothing$. A set map $a:E\\to F$ induces the sheaf map characterized by $\\iota_e\\mapsto\\iota_{a(e)}$.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J, example-constant-sheaf; universal property of sheafification, Tag 00WH"
+   }
+  },
+  {
+   "text": "The hypothesis on $f^{-1}$ identifies $f^{-1}1_{\\mathcal C}$ with $1_{\\mathcal D}$. Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to $f^{-1}\\dashv f_*$ and the discrete diagram indexed by the set $E$; this diagram is small in the fixed coefficient universe and its colimit was constructed in Step 1. Hence $f^{-1}\\underline E_{\\mathcal C}$ is a coproduct of $E$ copies of $1_{\\mathcal D}$. Its universal property gives the unique isomorphism $c_E:f^{-1}\\underline E_{\\mathcal C}\\to\\underline E_{\\mathcal D}$ carrying each $f^{-1}\\iota_e$ to $\\iota_e$. For $a:E\\to F$, the two maps $c_F f^{-1}(\\underline a)$ and $\\underline a c_E$ agree after every coproduct injection, so they agree. Thus $c$ is natural in all set maps.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, lemma-adjoint-exact (1); with sites.tex Tag 0H7J, example-constant-sheaf"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-sheafification-sets-exact], $\\underline{E\\times F}$ identifies with $\\underline E\\times\\underline F$ through the two projections, and $\\underline{\\{*\\}}=1$. Since $f^{-1}$ preserves finite limits, naturality of Step 2 with respect to these projections implies $c_{E\\times F}=c_E\\times c_F$ under these identifications: the two projections of both maps are equal, so the product universal property proves equality. Also $c_{\\{*\\}}$ is the terminal comparison. By [lem-cbc-module-sheafification-underlying-sets] with $P$ the constant $R$-module presheaf, the underlying set sheaf of $\\underline M$ is exactly the set constant sheaf used above, compatibly with its constant sections. The same compatibility for the constant ring follows from [lem-pc-sites-sheafification-underlying-sets].",
+   "uses": [
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-cbc-module-sheafification-underlying-sets",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WJ, lemma-sheafification-exact; Tag 00YR, section-sheaves-algebraic-structures, sheafification/forgetful comparison"
+   }
+  },
+  {
+   "text": "Use [lem-pe-constant-left-module-inverse-image] for $\\Lambda=R$, so the operations of $f_R^*\\underline M$ are obtained by applying $f^{-1}$ to the source operations. Naturality of $c$ for $+:M\\times M\\to M$, $0:\\{*\\}\\to M$ and $-:M\\to M$, together with Step 3, gives $c_M f^{-1}(+)=+\\,(c_M\\times c_M)$, $c_M f^{-1}(0)=0$ and $c_M f^{-1}(-)=-\\,c_M$. For the action $\\mu:R\\times M\\to M$ it gives $c_M f^{-1}(\\mu)=\\mu\\,(c_R\\times c_M)$. Here [lem-pc-sites-module-sheafification-interface] identifies the action on the constant module sheaf with the sheafification of this constant-presheaf action. The ring comparison $c_R$ agrees with the canonical ring identification in the inverse-image node: both carry every constant scalar injection to that scalar, and the coproduct universal property in Step 2 forces equality. Consequently $c_M$ is a morphism of module sheaves [def-weil-sheaf-of-modules-category]. Its inverse is linear: substituting $x=c_M^{-1}(y)$ in $c_M(ax)=a c_M(x)$ and applying $c_M^{-1}$ gives $c_M^{-1}(ay)=a c_M^{-1}(y)$, and the same argument gives additivity. It therefore gives the asserted module isomorphism.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi (2), (6); sites-modules.tex Tag 03CY, lemma-sheafification-presheaf-modules"
+   }
+  },
+  {
+   "text": "For an $R$-linear map $h:M\\to N$, Step 2 applied to its underlying set map says $c_N f^{-1}(\\underline h)=\\underline h c_M$. The inverse-image functor in Step 4 acts on maps by the underlying inverse image, so this is precisely the naturality square in module sheaves. Step 2 also proves that the underlying set comparison is the coproduct comparison required by the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J and Tag 00YV, naturality on structure-preserving maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-cbc-module-sheafification-underlying-sets",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 0H7J (constant-sheaf universal property), 00WJ (finite limits), 00YR and 00YV (algebraic structures); sites-modules.tex Tag 03CY (module action); categories.tex Tag 0038 (left adjoints and colimits)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +125,66 @@
    "results": "{\"t\": \"2026-10-17T08:41:27Z\", \"tool\": \"leanfinder\", \"query\": \"Pulling back a discrete constant module along a geometric morphism gives the constant sheaf of the same module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.LocallyConstant.functorIsoDiscreteAux₂\", \"CompHausLike.LocallyConstantModule.functor\", \"SheafOfModules.pullbackObjFreeIso\", \"LightCondMod.LocallyConstant.functorIsoDiscreteAux₂\", \"LightCondMod.LocallyConstant.functorIsoDiscreteComponents\", \"Condensed.discrete_map\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"CondensedMod.LocallyConstant.functorIsoDiscreteAux₁\"], \"digest\": \"743efe6d260dfaac\"}",
    "date": "2026-10-17",
    "verdict": "no match: constantSheaf and IsConstant describe constant objects; pullbackObjFreeIso treats free modules only. No hit gives the natural constant-module comparison for arbitrary geometric morphisms and arbitrary modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric inverse image of constant module sheaf along a geometric morphism",
+   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-17T11:45:35Z\", \"tool\": \"leanfinder\", \"query\": \"geometric inverse image of constant module sheaf along a geometric morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullbackObjUnitToUnit\", \"AlgebraicGeometry.StructureSheaf.comap_const\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"ModuleCat.Tilde.res_const\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\"], \"digest\": \"95c93523ff69a110\"}",
+   "verdict": "no match: constantSheaf and IsConstant concern constant objects; pullbackObjFreeIso concerns free sheaves, and the scheme pullbacks concern specific sites. None states this comparison for arbitrary geometric morphisms and arbitrary modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, SheafOfModules.pullback",
+   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-17T11:45:36Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.constantSheaf, SheafOfModules.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "no match: constantSheaf and IsConstant concern constant objects; pullbackObjFreeIso concerns free sheaves, and the scheme pullbacks concern specific sites. None states this comparison for arbitrary geometric morphisms and arbitrary modules."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*pullback|pullback.*constantSheaf",
+   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-17T11:45:36Z\", \"tool\": \"grep\", \"query\": \"constantSheaf.*pullback|pullback.*constantSheaf\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\"], \"digest\": \"bb20046a8810bc6e\"}",
+   "verdict": "no match: constantSheaf and IsConstant concern constant objects; pullbackObjFreeIso concerns free sheaves, and the scheme pullbacks concern specific sites. None states this comparison for arbitrary geometric morphisms and arbitrary modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of constant module sheaf preserves the module and is natural",
+   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-17T11:45:36Z\", \"tool\": \"leansearch\", \"query\": \"inverse image of constant module sheaf preserves the module and is natural\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"CategoryTheory.Sheaf.isConstant_congr\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"ModuleCat.Tilde.res_const\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality_assoc\", \"CategoryTheory.Sheaf.mem_essImage_of_isConstant\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality\"], \"digest\": \"969b684fb680c5ca\"}",
+   "verdict": "no match: constantSheaf and IsConstant concern constant objects; pullbackObjFreeIso concerns free sheaves, and the scheme pullbacks concern specific sites. None states this comparison for arbitrary geometric morphisms and arbitrary modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric inverse image preserves constant module sheaves for arbitrary geometric morphisms and arbitrary modules",
+   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-17T12:02:47Z\", \"tool\": \"leanfinder\", \"query\": \"geometric inverse image preserves constant module sheaves for arbitrary geometric morphisms and arbitrary modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\"], \"digest\": \"c5ea111a6b01ca03\"}",
+   "verdict": "no match: constantSheaf and IsConstant concern constant objects; pullbackObjFreeIso concerns free sheaves, and the scheme pullbacks concern specific sites. None states this comparison for arbitrary geometric morphisms and arbitrary modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, sheafPullback, SheafOfModules",
+   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-17T12:02:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.constantSheaf, sheafPullback, SheafOfModules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'sheafPullback'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "no match: constantSheaf and IsConstant concern constant objects; pullbackObjFreeIso concerns free sheaves, and the scheme pullbacks concern specific sites. None states this comparison for arbitrary geometric morphisms and arbitrary modules."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(pullback|inverse)|((pullback|inverse).*constantSheaf)",
+   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-17T12:02:48Z\", \"tool\": \"grep\", \"query\": \"constantSheaf.*(pullback|inverse)|((pullback|inverse).*constantSheaf)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\"], \"digest\": \"d9a32b5eb4b93045\"}",
+   "verdict": "no match: constantSheaf and IsConstant concern constant objects; pullbackObjFreeIso concerns free sheaves, and the scheme pullbacks concern specific sites. None states this comparison for arbitrary geometric morphisms and arbitrary modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "geometric inverse image of a constant sheaf of modules is the same constant sheaf naturally",
+   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-17T12:02:48Z\", \"tool\": \"leansearch\", \"query\": \"geometric inverse image of a constant sheaf of modules is the same constant sheaf naturally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isConstant_of_iso\", \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"CategoryTheory.Sheaf.IsConstant.mk\", \"CategoryTheory.Sheaf.mem_essImage_of_isConstant\", \"CategoryTheory.Sheaf.IsConstant.mem_essImage\", \"CategoryTheory.constantSheaf\", \"CategoryTheory.Sheaf.IsConstant.rec\", \"CategoryTheory.Sheaf.IsConstant.casesOn\"], \"digest\": \"c2be154d3f9254f1\"}",
+   "verdict": "no match: constantSheaf and IsConstant concern constant objects; pullbackObjFreeIso concerns free sheaves, and the scheme pullbacks concern specific sites. None states this comparison for arbitrary geometric morphisms and arbitrary modules."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-connected-etale-perfect-constant",
@@ -67,7 +196,7 @@
  "blueprint": {
   "from": {
    "node": "det-lem-integral-models-stacks",
-   "place": "Proof, first sentence invoking sk-prop-integral-criterion; local perfect lifting in the stratified-perfect characterization (Bhatt–Scholze Lemma 6.6.8 / Stacks 09C6). Hidden inverse-image argument in the local perfect-model trivialization on a weakly contractible object.",
+   "place": "Proof, first sentence invoking sk-prop-integral-criterion: the hidden inverse-image argument in the local perfect-model trivialization on a weakly contractible object.",
    "via": [
     "lem-sfb-connected-etale-perfect-constant",
     "lem-sfb-adic-residue-lisse-perfect-lift",
@@ -77,5 +206,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-geometric-inverse-image-constant-module",
+  "worker": "stage1",
+  "summary": "Expanded the constant-sheaf coproduct universal property inline, then applied colimit preservation and checked the comparison on products, addition, zero, negation and scalar multiplication. Reused the existing arbitrary-site sheafification comparison nodes; no new nodes. Removed the earlier undelivered coproduct lemma and its unlogged search claims from the delivery, preserving that attempt under prior-attempt/.",
+  "blueprint": "The five steps realize the hidden inverse-image argument in the ancestor proof's local perfect-model trivialization.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic geometric-morphism lift to constant-ring module sheaves; used only for its stated operation-by-operation construction and canonical constant-ring map, not to replace the integral-model route."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-interface",
+    "why": "Generic sheafification of a presheaf module over a presheaf ring identifies its scalar action after sheafification; no node of the integral-model unit states this construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pc-sites-module-sheafification-interface"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-269842107",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-269842107 (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited statement in full. Sources checked: Stacks sites.tex 0H7J example-constant-sheaf (l.2099), 00YV (l.10473), 00WJ (l.2134), and categories.tex 0038 lemma-adjoint-exact (1) (l.3472). The proof is correct. Step 1: the constant sheaf of E is the coproduct of E copies of the terminal sheaf, by the sheafification universal property; this holds for E empty and with empty covers. Step 2: left-adjoint colimit preservation applies, with a small discrete index, the colimit from Step 1 and the adjunction from the hypothesis; left exactness sends 1 to 1. Step 3: product compatibility via sheafification-sets-exact, plus the underlying-set leaves for module and ring sheafification. Step 4: I checked it against how lem-pe-constant-left-module-inverse-image builds the action, L(a_M)p^{-1}(c^{-1}x1). The step shows c_R equals the canonical c on scalar summands, and naturality for mu gives linearity. The interface leaf identifies the constant module action with the set sheafification of mu. The inverse is linear. Step 5 is naturality. No new nodes. The coefficient category is modules over the constant ring sheaf, which matches the parent's use for nu_X and nu_{V_i}; no target node or base-change morphism is involved. Small cases checked: M=0, E empty, E a singleton, f=id, zero ring. No cycle, and proof_deps equals the union of uses. Duplicate search over DAG constant/inverse-image nodes (sbc-geometric-point-module-constant, pbc-constant-ring-inverse-image-comparison, pbc-constant-module-section-coefficients, proetale-constant-ring-map and others) found none, and Mathlib has no matching leaf. Accepted tool_uses: lem-pe-constant-left-module-inverse-image (unit sk-prop-sf-comparison, a generic inverse-image construction) and lem-pc-sites-module-sheafification-interface (a Mathlib leaf). Fixes: Step 2 source.document changed to categories.tex for Tag 0038, and split_report.blueprint now says five steps instead of four.; 1 file(s) fixed by the reviewer"
  }
 }

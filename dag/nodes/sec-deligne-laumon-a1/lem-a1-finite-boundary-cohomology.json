@@ -1,126 +1,286 @@
 {
-  "id": "lem-a1-finite-boundary-cohomology",
-  "blueprint": {
-    "is": "lem-a1-finite-boundary-cohomology",
-    "from": null,
-    "same_as": null
+ "id": "lem-a1-finite-boundary-cohomology",
+ "blueprint": {
+  "is": "lem-a1-finite-boundary-cohomology",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cohomology of a finite boundary",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ and a prime $\\ell\\neq p$ [def-weil-finite-field-fiber]. Let $a_0:Z_0\\to\\operatorname{Spec}k_0$ be finite [def-weil-finite-integral-morphism], put $Z=Z_0\\times_{k_0}k$, and let $\\mathcal G$ be a $\\Qlb$-Weil sheaf on $Z_0$ [def-weil-weil-sheaf-complex]. Then, with compact-support cohomology as in [def-weil-ordinary-compact-cohomology],\n$$\n H_c^r(Z,\\mathcal G)=0\\qquad(r\\in\\mathbf Z,\\ r\\neq0).\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-finite-boundary-cohomology.md",
+  "place": "node lem-a1-finite-boundary-cohomology, order 2725"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-integral-morphism",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Write $s_0=\\operatorname{Spec}k_0$ and $s=\\operatorname{Spec}k$. The finite map $a_0$ is proper by [lem-weil-pbc-finite-proper], hence separated and of finite type by [def-weil-proper-morphism]; it is quasi-finite by [pqf-lem-finite-qf]. Thus $Z_0$ and $s_0$ satisfy the separated finite-type hypotheses of [lem-zl-quasi-finite]. No smoothness, reducedness, or weight hypothesis is needed.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "pqf-lem-finite-qf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WN, lemma-finite-proper; Tag 02NU, lemma-finite-quasi-finite; application to the structure map"
+   }
   },
-  "kind": "statement",
-  "title": "Cohomology of a finite boundary",
-  "statement": "Let $Z_0$ be finite over $k_0$ and let $\\mathcal G$ be a\nconstructible Weil sheaf whose stalks have weights at most $w$. Then\n$H_c^r(Z,\\mathcal G)=0$ for $r\\neq0$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-finite-boundary-cohomology.md",
-    "place": "node lem-a1-finite-boundary-cohomology, order 2725"
+  {
+   "text": "Put $N=Ra_{0!}\\mathcal G$, viewed on $s$ with its Weil structure. Use the all-degree cohomology identity in clause (1) of the statement of [lem-zl-quasi-finite]:\n$$\\mathcal H^j(N)=a_{0!}\\mathcal H^j(\\mathcal G).$$\nA Weil sheaf has underlying object in the constructible heart [def-weil-weil-sheaf-complex, def-weil-constructible-heart], so $\\tau^{\\geq1}\\mathcal G=0$ and $\\tau^{\\leq-1}\\mathcal G=0$; with $\\mathcal H^j=(\\tau^{\\geq j}\\tau^{\\leq j}-)[j]$ of [prop-constructible-truncations] this gives $\\mathcal H^j(\\mathcal G)=0$ for $j\\neq0$. The exact functor $a_{0!}$ sends the zero object to zero. Consequently $\\mathcal H^j(N)=0$ for every $j\\neq0$. This uses the stated cohomology identity, not the weight conclusions of that node or a torsion-coefficient substitute.",
+   "uses": [
+    "lem-zl-quasi-finite",
+    "def-weil-weil-sheaf-complex",
+    "def-weil-constructible-heart",
+    "prop-constructible-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+    "place": "Proof (1), the displayed identification of all cohomology sheaves; finite-map specialization"
+   }
   },
-  "stmt_deps": [
-    "def-weil-punctual-weights"
-  ],
-  "proof": [
-    {
-      "text": "For r < 0, unfold compact support as exact extension by zero followed by the right derived functor of pushforward along the chosen proper compactification. The exact functor sends a degree-zero sheaf to a degree-zero sheaf; Functor.isGE_rightDerivedFunctor_obj_singleFunctor and DerivedCategory.isZero_of_isGE give zero negative homology. WeilComplex.isZero_homologySheaf_obj_iff transfers this to the Weil cohomology sheaf. Global sections, forgetting adic coefficients, and coefficient restriction preserve zero objects; ModuleCat.subsingleton_of_isZero gives the required carrier subsingleton.",
-      "uses": [
-        "def-compact-support-direct-image-detailed",
-        "def-weil-ordinary-compact-cohomology"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "In the remaining case 0 < r, apply [lem-a1-finite-boundary-cohomology-positive] to obtain a zero Weil cohomology sheaf, then the same global-sections argument. The parent declaration is unchanged; this is a decomposition with a proved negative-degree branch and an open geometric upper-bound branch.",
-      "uses": [
-        "lem-a1-finite-boundary-cohomology-positive",
-        "def-weil-ordinary-compact-cohomology"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-compact-support-direct-image-detailed",
-    "def-weil-ordinary-compact-cohomology",
-    "lem-a1-finite-boundary-cohomology-positive"
-  ],
-  "proof_origin": {
-    "by": "F3 stage 3",
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-finite-boundary-cohomology.md",
-    "place": "Stage-3 reduction by sign of the cohomological degree"
+  {
+   "text": "Let $X\\in D^b_c(s,\\Qlb)$ be the underlying object of $N$. The standard pair is a bounded t-structure with truncations $\\tau^{\\leq m},\\tau^{\\geq m}$ [prop-constructible-truncations]. If $X\\in D^{\\leq n}_c$ with $n>0$, then $\\tau^{\\geq n}X=\\tau^{\\geq n}\\tau^{\\leq n}X=\\mathcal H^n(X)[-n]=0$ by step 2, so the truncation triangle $\\tau^{\\leq n-1}X\\to X\\to\\tau^{\\geq n}X\\xrightarrow{+1}$ gives $X\\cong\\tau^{\\leq n-1}X\\in D^{\\leq n-1}_c$. Boundedness and descending induction give $X\\in D^{\\leq0}_c$; dually, using $\\tau^{\\leq m}$ and ascending induction, $X\\in D^{\\geq0}_c$. So $X$ lies in the constructible heart [def-weil-constructible-heart], whose two classes are those of the standard pair. Unfolding these classes by [def-weil-constructible-standard-tstructure] (3) and then (2): there are $L_1,L_2\\in\\mathcal E_\\ell$, an integral object $P_1\\in D^b_c(s,\\mathcal O_{L_1})$ with $\\mathcal H^r(P_1)=0$ for all $r>0$, an integral object $P_2\\in D^b_c(s,\\mathcal O_{L_2})$ with $\\mathcal H^r(P_2)=0$ for all $r<0$ (cohomology sheaves of $\\widehat{\\mathcal O}$-module complexes), and isomorphisms $X\\cong(L_1,P_1)$ and $X\\cong(L_2,P_2)$ in $D^b_c(s,\\Qlb)$: compose the isomorphism to $(L_i,M_i)$ with the morphism represented at stage $L_i$ by the rational isomorphism $M_i\\cong P_i$. Only these definitional representatives in the integral category used by that definition are used; no comparison with another integral category and no single integral heart representative is needed.",
+   "uses": [
+    "prop-constructible-truncations",
+    "def-weil-constructible-heart",
+    "def-weil-constructible-standard-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-finite-boundary-cohomology.proof.md",
+    "place": "The degree-zero assertion: the geometric direct image lies in the heart, with definitional finite-stage integral representatives"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2725,
-  "blueprint_uses": [
-    "def-weil-ordinary-compact-cohomology",
-    "def-weil-punctual-weights"
-  ],
-  "uses_not_cited": [
-    "def-weil-punctual-weights"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite",
-          "module": "WeilConjectures.WeilSheaf.Cohomology",
-          "lines": [
-            119,
-            128
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [
-        "AlgebraicGeometry.LAdicWeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite"
-      ],
-      "open": []
-    }
+  {
+   "text": "For $i=1,2$, by [def-weil-finite-coefficient-point] (4) and (3), $\\operatorname{Fib}_s(L_i,P_i)=(L_i,A_i)$ with $A_i=\\Gamma(s,P_i)\\otimes_{\\mathcal O_{L_i}}L_i$. By [lem-weil-point-proetale-sections-exact], for the ring sheaf $\\widehat{\\mathcal O}_{L_i,s}$,\n$$H^r(\\Gamma(s,P_i))=\\Gamma(s,\\mathcal H^r(P_i)).$$\nThe field $L_i$ is flat over $\\mathcal O_{L_i}$ by [lem-weil-point-sections-finiteness] (3), so the termwise tensor product is exact [lem-weil-pbc-flat-tensor-exact] and commutes with homology [lem-sp-exact-functor-preserves-homology] (c): $H^r(A_i)=H^r(\\Gamma(s,P_i))\\otimes_{\\mathcal O_{L_i}}L_i$. Hence $H^r(A_1)=0$ for $r>0$ and $H^r(A_2)=0$ for $r<0$. Since $\\operatorname{Fib}_s$ is a functor, step 3 gives isomorphisms $\\operatorname{Fib}_s(X)\\cong(L_1,A_1)\\cong(L_2,A_2)$ in $D^b_{\\mathrm{fd}}(\\Qlb)$. Let $(E,A)$ be any finite-stage representative of $\\operatorname{Fib}_s(X)$. By [def-weil-point-fd-qlbar-category], an isomorphism $(E,A)\\cong(L_1,A_1)$ and its inverse are represented at one stage $M\\supseteq E,L_1$, and after enlarging $M$ they are mutually inverse there, so $T_{M/E}A\\cong T_{M/L_1}A_1$ in $D(M)$. With $H^r(T_{M/E'}B)\\cong H^r(B)\\otimes_{E'}M$ this gives $H^r(A)\\otimes_EM=0$ for $r>0$, hence $H^r(A)=0$ for $r>0$ since $M$ is a nonzero $E$-vector space. The same argument with $(L_2,A_2)$ gives $H^r(A)=0$ for $r<0$.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-point-sections-finiteness",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-sp-exact-functor-preserves-homology",
+    "def-weil-point-fd-qlbar-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-finite-boundary-cohomology.proof.md",
+    "place": "Apply the geometric-point coefficient functor to the degree-zero direct image; its integral and rational formulas"
+   }
   },
-  "chapter": "sec-deligne-laumon-a1",
-  "unit": "sk-i-dl-a1-local",
-  "lean": {
-    "module": "WeilConjectures.WeilSheaf.Cohomology",
-    "declaration": "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite",
-    "branch": "slopmaster2",
-    "line": 119,
-    "declarations": [
-      "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "F3",
-    "result": "pass",
-    "landing": "20261015T182204-L-785636",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $Z_0$ be finite over $k_0$ and let $\\mathcal G$ be a\nWeil sheaf on $Z_0$. Then\n$H_c^r(Z,\\mathcal G)=0$ for $r\\neq0$.",
-    "proof": [
-      {
-        "text": "After geometric base change a finite scheme is a finite discrete space:\nits cohomology is concentrated in degree zero, and the higher\ncompact-support groups of [def-weil-ordinary-compact-cohomology]\nvanish since the scheme is zero-dimensional.",
-        "uses": [
-          "def-weil-ordinary-compact-cohomology"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "By [def-weil-ordinary-compact-cohomology], $H_c^r(Z,\\mathcal G)=H^r(\\operatorname{Fib}_s(Ra_{Z!}\\operatorname{For}\\mathcal G))$, where the geometric direct image is the underlying object $X$ of $N$. Step 4 shows that every finite-stage representative of $\\operatorname{Fib}_s(X)$, and hence also its scalar extension to $\\Qlb$, has zero cohomology in every nonzero degree $r$, both positive and negative. A zero coefficient space has only its unique endomorphism, so its Weil/Frobenius structure adds no further condition.",
+   "uses": [
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-finite-boundary-cohomology.proof.md",
+    "place": "Conclusion using the definition of compact-support cohomology"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-proper",
+  "def-weil-proper-morphism",
+  "pqf-lem-finite-qf",
+  "lem-zl-quasi-finite",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constructible-heart",
+  "prop-constructible-truncations",
+  "def-weil-constructible-standard-tstructure",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-point-sections-finiteness",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-sp-exact-functor-preserves-homology",
+  "def-weil-point-fd-qlbar-category",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-finite-boundary-cohomology.proof.md",
+  "place": "Expand the degree-zero computation using the existing quasi-finite exactness theorem and the point coefficient construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.*[Cc]ohomology|[Cc]ohomology.*[Ff]inite|isGE_rightDerivedFunctor_obj_singleFunctor",
+   "results": "Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean; Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean (12 displayed hits)",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern singular/group/cotangent cohomology, support of functions, or generic derived categories, not this Weil cohomology assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported cohomology of a zero dimensional scheme concentrated in degree zero",
+   "results": "CompactlySupportedContinuousMap; hasCompactSupport_def; hasCompactSupport_iff_eventuallyEq; CompactlySupportedContinuousMap.mk; exists_compact_iff_hasCompactSupport; HasCompactSupport.zero; HasCompactSupport; CochainComplex.HomComplex.Cochain.ofHom_zero (8 displayed hits)",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern singular/group/cotangent cohomology, support of functions, or generic derived categories, not this Weil cohomology assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isGE_rightDerivedFunctor_obj_singleFunctor",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.isGE_rightDerivedFunctor_obj_singleFunctor';  (0 displayed hits)",
+   "date": "2026-10-17",
+   "verdict": "no match: identifier not in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported cohomology of a finite scheme with l-adic coefficients vanishes outside degree zero",
+   "results": "AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace; CochainComplex.isZero_of_isGE; CochainComplex.isZero_of_isLE; DerivedCategory.isZero_of_isGE; DerivedCategory.isZero_of_isLE; AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; DerivedCategory.isGE_iff (8 displayed hits)",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern singular/group/cotangent cohomology, support of functions, or generic derived categories, not this Weil cohomology assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of a finite discrete scheme over an algebraically closed field higher direct image vanishing",
+   "results": "Algebra.FormallyEtale.of_isSeparable_aux; Algebra.FormallyEtale.subsingleton_h1Cotangent; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; Algebra.Etale.iff_exists_algEquiv_prod; AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; Algebra.FormallyEtale.iff_exists_algEquiv_prod; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit (8 displayed hits)",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern singular/group/cotangent cohomology, support of functions, or generic derived categories, not this Weil cohomology assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2725,
+ "blueprint_uses": [
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-punctual-weights"
+ ],
+ "uses_not_cited": [
+  "def-weil-punctual-weights"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite",
+     "module": "WeilConjectures.WeilSheaf.Cohomology",
+     "lines": [
+      119,
+      128
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite"
+   ],
+   "open": []
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-i-dl-a1-local",
+ "lean": {
+  "module": "WeilConjectures.WeilSheaf.Cohomology",
+  "declaration": "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite",
+  "branch": "slopmaster2",
+  "line": 119,
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261015T182204-L-785636",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $Z_0$ be finite over $k_0$ and let $\\mathcal G$ be a\nWeil sheaf on $Z_0$. Then\n$H_c^r(Z,\\mathcal G)=0$ for $r\\neq0$.",
+  "proof": [
+   {
+    "text": "After geometric base change a finite scheme is a finite discrete space:\nits cohomology is concentrated in degree zero, and the higher\ncompact-support groups of [def-weil-ordinary-compact-cohomology]\nvanish since the scheme is zero-dimensional.",
+    "uses": [
+     "def-weil-ordinary-compact-cohomology"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-a1-finite-boundary-cohomology",
+  "worker": "stage1",
+  "summary": "Followed blueprint_update main-20261015: removed unused weight restrictions and made the geometric fibre and coefficient conventions explicit. Replaced inherited compiler-oriented sign branches by a complete finite-map specialization of an existing all-degree exactness theorem, followed by finite-stage heart representatives and an explicit point-sections calculation. No new nodes; no identification of torsion etale and adic Weil coefficients is assumed. Maintainer reader FIX (2026-10-17): steps 3-4 no longer apply prop-weil-localized-tstructure (stated for the integral category of def-weil-pbc-bounded-constructible-complete, whose identification with def-weil-derived-complete-integral-detailed was not cited); they now use the two definitional integral representatives of def-weil-constructible-standard-tstructure.",
+  "blueprint": {
+   "statement": "main-20261015 lemma: arbitrary Weil sheaf on a finite k0-scheme",
+   "steps": {
+    "1": "Finite structure morphism, no geometric smoothness assumption",
+    "2": "Cohomology concentrated in degree zero, using a pre-existing general exactness theorem",
+    "3": "Geometric direct image in the heart; definitional finite-stage integral representatives of its two standard bounds",
+    "4": "Degree-zero coefficient-space calculation on those representatives",
+    "5": "Vanishing compact-support groups by their definition"
+   }
+  },
+  "tool_uses": [
+   {
+    "node": "lem-zl-quasi-finite",
+    "why": "Only its general cohomology identity for exact quasi-finite compact direct image is used on a finite structure map; no weight argument or unit step is replaced."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Generic finite-stage truncation compatibility chooses a heart representative of the already-computed direct image."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Exact sections at the algebraically closed geometric point convert the vanishing cohomology sheaves to zero modules."
+   },
+   {
+    "node": "lem-weil-point-sections-finiteness",
+    "why": "Only the explicit flatness of E over its valuation ring in clause (3) is used."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic exactness of scalar extension by a flat module is needed in the point-fibre calculation."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "Generic homology preservation by exact tensor is used to compute the coefficient complex."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-quasi-finite",
+  "prop-constructible-truncations",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-point-sections-finiteness",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-sp-exact-functor-preserves-homology"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-90e3bfbf3",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-90e3bfbf3 (reviewer sub-agent of L); spot-checked: I read the item, the main-20261015 and master blueprint text, Stacks 01WN/02NU, every cited node's statement, the coefficient definitions and both batch-5 assumption leaves. The delivery adds no new nodes. The statement follows blueprint_update and only drops the unused weight hypothesis, so it is more general and nothing is weakened; the five citers are unaffected. Small cases check out (empty Z0, F_{q^2}, a non-reduced scheme, r=±1), and the rg search found no duplicate. Step 1 is correct: finite gives proper, separated, finite type and quasi-finite, which are the hypotheses of lem-zl-quasi-finite. Step 2 uses the all-degree identity, which is in the statement of lem-zl-quasi-finite and is true by Zariski's main theorem. Fault, repaired (C3/E6): step 3 applied prop-weil-localized-tstructure to D^b_c(s,E) built from def-weil-derived-complete-integral-detailed. That theorem is stated for the different integral category def-weil-pbc-bounded-constructible-complete, and the DAG identifies the two only inside the proof of prop-constructible-truncations, not in any cited statement. The fix rewrites steps 3-4 without prop-weil-localized-tstructure. Step 3 proves the object is in the heart from the bounded t-structure of prop-constructible-truncations, then unfolds def-weil-constructible-standard-tstructure (3),(2) into two integral representatives, one with H^{>0}=0 and one with H^{<0}=0. Step 4 computes their point fibres with the exactness of sections, flatness and homology-commutation lemmas, and compares stages via def-weil-point-fd-qlbar-category. proof_deps and tool_uses are updated to match. Batch-5 flags: lem-zl-quasi-finite is outside both assumptions (general functor foundations, not a trace-formula or Poincare-duality step). def-weil-constructible-heart and def-weil-finite-coefficient-point are general definitions already in the statement's closure. prop-constructible-truncations is the standard t-structure from the finiteness unit sk-lem-finite; neither leaf gives it, and the statement already depends on it. prop-weil-localized-tstructure is removed. No SGA citation and no cycle. Corrected file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-finite-boundary-cohomology.json.; 1 file(s) fixed by the reviewer"
+ }
 }

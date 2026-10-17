@@ -12,11 +12,68 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=\\operatorname{Fun}(K,\\mathcal C)$. Since $\\tau:F\\to G$ is an equivalence edge, choose an inverse edge $\\rho:G\\to F$ and 2-simplex witnesses for $\\rho\\tau\\simeq\\mathrm{id}_F$ and $\\tau\\rho\\simeq\\mathrm{id}_G$. The chosen composition triangle for $\\lambda\\tau$ is precisely a representative of the composite in $D$ needed below.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Lurie, Higher Topos Theory, Section 4.2.1: equivalence edges and coherent composition; Lemma 4.2.4.3"
+   }
+  },
+  {
+   "text": "For every vertex $x\\in\\mathcal C$, the simplicial set $D$ is a quasicategory and its mapping spaces are Kan complexes by [lem-cbc-enhanced-functor-cone-calculus]. Let $p_{\\tau,x}:\\operatorname{Map}_D(G,\\Delta_Kx)\\to\\operatorname{Map}_D(F,\\Delta_Kx)$ and $p_{\\rho,x}:\\operatorname{Map}_D(F,\\Delta_Kx)\\to\\operatorname{Map}_D(G,\\Delta_Kx)$ be precomposition by $\\tau$ and $\\rho$, i.e. the restrictions of the canonical composition class of [lem-coef-infinity-mapping-composition] to the vertices $\\tau$ and $\\rho$. Restricting the associativity homotopy for the objects $G,F,G,\\Delta_Kx$ to the vertices $\\tau,\\rho$ gives $p_{\\rho,x}p_{\\tau,x}\\simeq$ precomposition by a composite of $\\tau$ and $\\rho$ in $M(G,G)$. The 2-simplex witness for $\\tau\\rho\\simeq\\mathrm{id}_G$ gives that composite the component class of the degenerate identity edge, precomposition depends only on the component class, and unitality makes precomposition by the identity homotopic to the identity map; so $p_{\\rho,x}p_{\\tau,x}\\simeq\\mathrm{id}$. Symmetrically, with the objects $F,G,F,\\Delta_Kx$ and the witness for $\\rho\\tau\\simeq\\mathrm{id}_F$, $p_{\\tau,x}p_{\\rho,x}\\simeq\\mathrm{id}$. Hence both precomposition maps are homotopy equivalences, in particular equivalences of spaces.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Lurie, Higher Topos Theory, Section 4.2.1 and Lemma 4.2.4.3: mapping-space composition with an equivalence edge"
+   }
+  },
+  {
+   "text": "Fix $x$ and a coherent cocone $\\lambda:G\\to\\Delta_Kx$. For any vertex $y\\in\\mathcal C$, the dual cocone criterion says that $\\lambda$ is colimiting exactly when the map $q_{G,y}:\\operatorname{Map}_{\\mathcal C}(x,y)\\to\\operatorname{Map}_D(G,\\Delta_Ky)$, $a\\mapsto(\\Delta_Ka)\\lambda$, is an equivalence for every $y$; that is, $q_{G,y}$ is $\\Delta_K$ on mapping spaces followed by precomposition $p_{\\lambda,y}$ with $\\lambda$. For the composite cocone, $q_{F,y}=p_{\\lambda\\tau,y}\\circ\\Delta_K$. The chosen composition triangle has edges $\\tau,\\lambda,\\lambda\\tau$, so $[\\lambda\\tau]=[\\lambda][\\tau]$ in $hD$; since precomposition depends only on the component class, $p_{\\lambda\\tau,y}$ is homotopic to precomposition by the canonical composite of $\\lambda$ and $\\tau$, which by the associativity homotopy (objects $F,G,\\Delta_Kx,\\Delta_Ky$, restricted to the vertices $\\tau,\\lambda$) is homotopic to $p_{\\tau,y}p_{\\lambda,y}$. Hence $q_{F,y}\\simeq p_{\\tau,y}q_{G,y}$ for each $y$ separately; no coherence in $y$ is needed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Lurie, Higher Topos Theory, Section 4.2.1 and Lemma 4.2.4.3: cocone mapping-space criterion"
+   }
+  },
+  {
+   "text": "By Step 2, $p_{\\tau,y}$ is an equivalence for every $y$. Therefore $q_{F,y}$ is an equivalence for every $y$ if and only if $q_{G,y}$ is, by Step 3 and two-out-of-three for equivalences of spaces. Applying the cocone criterion gives that $\\lambda\\tau$ is colimiting if and only if $\\lambda$ is colimiting. The criterion and all constructions allow arbitrary small $K$, including the empty simplicial set, and no colimit object was assumed to exist in advance.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Lurie, Higher Topos Theory, Lemma 4.2.4.3 and Section 4.2.1: equivalence-transport conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "Lurie, Higher Topos Theory, Lemma 4.2.4.3 and Section 4.2.1; expanded mapping-space proof of equivalence transport for cocones"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-canonical-hocolim-degree-reduction",
@@ -70,7 +127,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2: the small model-category presentation input to the finite-coefficient mapping-complex adjunction; Dugger Proposition 4.6 and its proof in Section 8, especially Proposition 8.2 and Lemma 8.1, printed pp. 186, 193-196; item proof step 4: transport of a colimit cocone by the inverse of an equivalence of coherent diagrams.",
+   "place": "Proof paragraph 2: the small model-category presentation input to the finite-coefficient mapping-complex adjunction; Dugger Proposition 4.6 and its proof in Section 8, especially Proposition 8.2 and Lemma 8.1, printed pp. 186, 193-196; proof step 5 of lem-coef-canonical-hocolim-degree-reduction (the item it was created for): transport of a colimit cocone by the inverse of an equivalence of coherent diagrams.",
    "via": [
     "lem-coef-canonical-hocolim-degree-reduction",
     "lem-coef-dugger-homotopically-surjective-map",
@@ -85,5 +142,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-colimit-cocone-transport-equivalence",
+  "worker": "stage1",
+  "summary": "Split the transport lemma into four steps: choose an inverse equivalence edge, show precomposition induces equivalences on every mapping space, identify the two cocone tests by associativity, and apply the coherent cocone criterion. No new nodes were needed; the proof uses the existing enhanced cone calculus and mapping-composition statements. The statement and its empty-shape clause are unchanged.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: the small model-category presentation input to the finite-coefficient mapping-complex adjunction; especially the item proof step 4 transport of a colimit cocone by the inverse of an equivalence of coherent diagrams.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic sk-prop-sf-cbc quasicategory foundations used as a black box: Fun(K,C) is a quasicategory with Kan mapping spaces, and the dual cocone mapping-space criterion for colimiting cocones; no node of sk-prop-sf-biduality-general states this criterion, and the unit route is not replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-467d6ba12",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-467d6ba12 (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps and the full statements of the three nodes it cites (def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, lem-coef-infinity-mapping-composition), plus its two users, lem-coef-canonical-hocolim-degree-reduction steps 4-5 and lem-coef-cocartesian-horn-completion-comparison step 6. HTT 4.2.4.3 is not archived; the report has a WANTED line and proof_origin is agent, so I checked the mathematics directly. The statement is true and unchanged. I tested it with K empty, where D is a point and a colimiting cocone is an initial object, and with C the nerve of an ordinary category, where it is the classical natural-isomorphism case. Its direction matches both users. The dependency closure is acyclic (140 nodes). There are no new nodes and no SGA. This is not a target node, so no base-change morphism or coefficient category is involved. Fault C8: lem-cbc-enhanced-functor-cone-calculus belongs to unit sk-prop-sf-cbc, which is outside the route of sk-prop-sf-biduality-general, and no tool_uses was declared. I accepted it as a generic tool and added it to split_report.tool_uses; sibling nodes of this unit already use it the same way. Small repairs: step 2 now cites the cone calculus for the quasicategory and Kan inputs and writes out the associativity, witness and unitality homotopies with the objects named. Step 3 now writes out [lambda tau]=[lambda][tau], uses the fact that precomposition depends only on the component class, and replaces the claim of a homotopy 'coherent in y' with a pointwise one. blueprint.from.place is corrected from 'step 4' to step 5 of the parent. For the maintainer: lem-coef-brown-cocone-equivalence-transport (unsplit, NL) is a strict generalization that the report does not mention. It is not a duplicate, and its split could cite this item. Details are in review.md; the corrected item is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  }
 }

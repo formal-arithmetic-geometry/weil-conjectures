@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-wf-l2-purity-rigidity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The $L^2$-weight of a punctually pure lisse sheaf equals its weight",
@@ -20,71 +20,139 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal G^0=\\mathcal G\\otimes\\mathcal B_b$ for the normalizing\ntwist of [def-wf-normalized-real-envelope], so that\n$b=\\iota^{-1}(q^{-w/2})$, i.e. $2\\log_q|\\iota(b)|=-w$; by\n[lem-wf-constant-twist-weight] the sheaf $\\mathcal G^0$ is\npunctually $\\iota$-pure of\nweight $0$.",
+   "text": "Choose $b=\\iota^{-1}(q^{-w/2})$ and put $\\mathcal G^0=\\mathcal G\\otimes\\mathcal B_b$ as in [def-wf-normalized-real-envelope]. Here $q>1$, so $b\\ne0$ and $2\\log_q|\\iota(b)|=-w$. Applying [lem-wf-constant-twist-weight] with $c=-w$ gives punctual purity of $\\mathcal G^0$ of weight $0$. The twist is lisse: on a common local trivialization it is the tensor product of a locally constant finite-rank sheaf and the rank-one locally constant line [def-wf-constant-weil-twist]. It is nonzero, since twisting again by $\\mathcal B_{b^{-1}}$ recovers $\\mathcal G$ (the scalar characters multiply to $1$).",
    "uses": [
     "def-wf-normalized-real-envelope",
-    "lem-wf-constant-twist-weight"
+    "lem-wf-constant-twist-weight",
+    "def-wf-constant-weil-twist"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-purity-rigidity.proof.md",
+    "place": "Opening normalization paragraph"
+   }
   },
   {
-   "text": "Step 1 (the twist shifts the $L^2$-weight by $w$). At a closed point\n$y$ of degree $m$ the constant Weil twist\n[def-wf-constant-weil-twist] has trace $t_{\\mathcal B_b}(y)=b^m$,\nso $t_{\\mathcal G^0}(y)=b^{m}t_{\\mathcal G}(y)$ and therefore\n$\\|f_{\\mathcal G^0}\\|_m^2=q^{-mw}\\|f_{\\mathcal G}\\|_m^2$ for every\n$m\\ge1$. Substituting this into the defining ratio of\n[def-wf-l2-norm], the ratio of $\\mathcal G^0$ at the parameter\n$\\beta$ equals the ratio of $\\mathcal G$ at the parameter\n$\\beta+w$; the two limit superiors are therefore positive for the same\nparameters, and\n\n$$\n\\|\\mathcal G^0\\|=\\|\\mathcal G\\|-w .\n$$",
+   "text": "Write $S_m(\\mathcal H)=\\|f_{\\mathcal H}\\|_m^2$. By [lem-wf-trace-energy-constant-twist], $S_m(\\mathcal G^0)=q^{-mw}S_m(\\mathcal G)$ for every $m\\ge1$. Thus, for every real $\\beta$, the defining sequence for $\\mathcal G^0$ at $\\beta$ equals that for $\\mathcal G$ at $\\beta+w$, since $q^{-mw}/q^{m(\\beta+1)}=1/q^{m(\\beta+w+1)}$. If $A_{\\mathcal H}$ denotes the set of parameters with positive limsup in [def-wf-l2-norm], then $A_{\\mathcal G^0}=A_{\\mathcal G}-w$. Translation preserves order and suprema in the extended reals: an upper bound $u$ for the translated set corresponds exactly to the upper bound $u+w$ for the original set. This also covers the empty and unbounded sets. Consequently $\\|\\mathcal G^0\\|=\\|\\mathcal G\\|-w$.",
    "uses": [
-    "def-wf-constant-weil-twist",
+    "lem-wf-trace-energy-constant-twist",
     "def-wf-l2-norm"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-purity-rigidity.proof.md",
+    "place": "Step 1, equality of energies and translation of the defining parameter set"
+   }
   },
   {
-   "text": "Step 2 (the envelope has $L^2$-weight zero). The envelope\n\n$$\n\\mathcal E:=\\operatorname{Env}_\\iota(\\mathcal G;b)\n=\\mathcal G^0\\oplus\\bigl(\\mathcal G^0\\bigr)^\\vee\n$$\n\nof [def-wf-normalized-real-envelope] is $\\iota$-real by\n[lem-wf-envelope-real], and it is punctually $\\iota$-pure of\nweight $0$: the summand $\\mathcal G^0$ is, and its linear dual is\ntoo, because the dual of a weight-$0$ pure sheaf has the eigenvalues\n$\\alpha^{-1}$ with $|\\iota(\\alpha^{-1})|=1$, by\n[lem-tw-dual-negation] read at weight $0$, while a direct sum of\ntwo weight-$0$ pure sheaves is weight-$0$ pure. Since $\\mathcal G$\nis nonzero so is $\\mathcal E$, and the dictionary\n[thm-wf-l2-dictionary] applies to $\\mathcal E$ with $w=0$:\n\n$$\n\\|\\mathcal E\\|=0 .\n$$",
+   "text": "Put $\\mathcal E=\\mathcal G^0\\oplus(\\mathcal G^0)^\\vee$ as in [def-wf-normalized-real-envelope]. By [lem-tw-dual-negation] applied at weight $0$, the second summand is punctually pure of weight $0$. At each closed point the Frobenius on the direct sum is block diagonal, so its characteristic polynomial is the product of those of the two summands. All its eigenvalues therefore have absolute value $1$; this is punctual purity of weight $0$ by [def-weil-punctual-weights]. The first summand is nonzero, so $\\mathcal E$ is nonzero (its inclusion has a left inverse, the projection).",
    "uses": [
     "def-wf-normalized-real-envelope",
-    "lem-wf-envelope-real",
     "lem-tw-dual-negation",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-purity-rigidity.proof.md",
+    "place": "Step 2, purity and nonvanishing of the envelope"
+   }
+  },
+  {
+   "text": "By [lem-wf-envelope-real], $\\mathcal E$ is lisse and $\\iota$-real. It is nonzero and punctually pure of weight $0$ by the preceding step. The base remains the given smooth geometrically connected affine curve, so every hypothesis of [thm-wf-l2-dictionary] holds and it gives $\\|\\mathcal E\\|=0$.",
+   "uses": [
+    "lem-wf-envelope-real",
     "thm-wf-l2-dictionary"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-purity-rigidity.proof.md",
+    "place": "Step 2, application of the real-sheaf dictionary at weight zero"
+   }
   },
   {
-   "text": "Step 3 (comparison with the envelope). By the eigenvalue computation in\nthe proof of [lem-wf-envelope-real], an eigenvalue $\\beta_j$ of\n$F_y$ on $\\mathcal G^0_{\\bar y}$ has $|\\iota(\\beta_j)|=1$, so the\neigenvalues of the dual summand are\n$\\iota(\\beta_j^{-1})=\\overline{\\iota(\\beta_j)}$; the trace of the\nenvelope at $y$ is therefore\n\n$$\nt_{\\mathcal E}(y)=t_{\\mathcal G^0}(y)+t_{(\\mathcal G^0)^\\vee}(y)\n=2\\operatorname{Re}\\bigl(t_{\\mathcal G^0}(y)\\bigr).\n$$",
+   "text": "The energy comparison [lem-wf-trace-energy-real-envelope-bound] gives $0\\le S_m(\\mathcal E)\\le4S_m(\\mathcal G^0)$ for all $m\\ge1$. Divide by the positive number $q^{m(\\beta+1)}$. For these nonnegative sequences, if the limsup for $\\mathcal G^0$ is zero, then its terms tend to zero: for every $\\epsilon>0$ the tail is eventually less than $\\epsilon/4$. The comparison then makes the envelope's terms eventually less than $\\epsilon$, so its limsup is also zero. Contrapositively every parameter with positive limsup for $\\mathcal E$ also has positive limsup for $\\mathcal G^0$. Taking the suprema of these nested parameter sets in [def-wf-l2-norm] gives $0=\\|\\mathcal E\\|\\le\\|\\mathcal G^0\\|$. This uses only the stated energy inequality, not any assertion from the proof of the reality lemma.",
    "uses": [
-    "lem-wf-envelope-real"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The elementary inequality\n$|\\operatorname{Re}z|^2\\le|z|^2$ gives\n$|t_{\\mathcal E}(y)|^2\\le4\\,|t_{\\mathcal G^0}(y)|^2$ at every closed\npoint, hence $\\|f_{\\mathcal E}\\|_m^2\\le4\\|f_{\\mathcal G^0}\\|_m^2$ for\nevery $m$. In the defining ratio of [def-wf-l2-norm] this means\nthat a positive limit superior for $\\mathcal E$ at a parameter\n$\\beta$ forces a positive limit superior for $\\mathcal G^0$ at the\nsame parameter, so\n\n$$\n\\|\\mathcal E\\|\\le\\|\\mathcal G^0\\| .\n$$",
-   "uses": [
+    "lem-wf-trace-energy-real-envelope-bound",
     "def-wf-l2-norm"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-purity-rigidity.proof.md",
+    "place": "Step 3, positive-limsup parameter inclusion from the energy comparison"
+   }
   },
   {
-   "text": "With Step 2 this yields $\\|\\mathcal G^0\\|\\ge0$, while\n[lem-wf-l2-upper] —applied to the punctually weight-$0$ mixed\nsheaf $\\mathcal G^0$ —yields $\\|\\mathcal G^0\\|\\le0$. Hence\n$\\|\\mathcal G^0\\|=0$, and Step 1 gives $\\|\\mathcal G\\|=w$.",
+   "text": "A sheaf punctually pure of weight $0$ is mixed of weights at most $0$: the filtration $0\\subset\\mathcal G^0$ has its only quotient pure of weight $0$, as required by [def-weil-punctual-weights]. Hence [lem-wf-l2-upper] applies to the lisse twist on the same affine curve and gives $\\|\\mathcal G^0\\|\\le0$. Together with the previous inequality this proves $\\|\\mathcal G^0\\|=0$.",
    "uses": [
+    "def-weil-punctual-weights",
     "lem-wf-l2-upper"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-purity-rigidity.proof.md",
+    "place": "Final paragraph, upper bound for the normalized twist"
+   }
+  },
+  {
+   "text": "The translation identity of step 2 and $\\|\\mathcal G^0\\|=0$ yield $\\|\\mathcal G\\|-w=0$. Translation by the finite real number $w$ is invertible even on the extended reals, so $\\|\\mathcal G\\|=w$. The proof made no reality assumption on $\\mathcal G$; therefore the same conclusion holds in particular for the $\\iota$-realizable sheaves mentioned in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-purity-rigidity.proof.md",
+    "place": "Final paragraph, cancellation of the finite weight shift"
+   }
   }
  ],
  "proof_deps": [
   "def-wf-normalized-real-envelope",
   "lem-wf-constant-twist-weight",
   "def-wf-constant-weil-twist",
+  "lem-wf-trace-energy-constant-twist",
   "def-wf-l2-norm",
-  "lem-wf-envelope-real",
   "lem-tw-dual-negation",
+  "def-weil-punctual-weights",
+  "lem-wf-envelope-real",
   "thm-wf-l2-dictionary",
+  "lem-wf-trace-energy-real-envelope-bound",
   "lem-wf-l2-upper"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-purity-rigidity.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-purity-rigidity.proof.md",
+  "place": "Opening normalization and Steps 1-3, with explicit parameter-set translation and comparison"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The L2 growth weight of a nonzero punctually pure lisse Weil sheaf on a smooth affine curve equals its punctual weight",
+   "results": "Height.totalWeight; BoundingSieve.weights; Finsupp.degree_eq_weight_one; Finset.affineCombinationLineMapWeights_self; Finsupp.NonTorsionWeight.ne_zero; LieModule.zero_lt_finrank_genWeightSpace; Finsupp.weight_eq_zero_iff_eq_zero; Finsupp.nonTorsionWeight_of",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Punctually pure lisse sheaf trace energy growth exponent equals weight",
+   "results": "LieModule.traceForm_genWeightSpace_eq; LieModule.trace_comp_toEnd_genWeightSpace_eq; LieModule.traceForm_eq_sum_finrank_nsmul'; LieModule.trace_toEnd_genWeightSpace; IsPurelyInseparable.exponent_def; IsPurelyInseparable.elemExponent_le_of_pow_mem; LieModule.iSup_ucs_eq_genWeightSpace_zero; LieModule.range_traceForm_le_span_weight",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilSheaf\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|l2Weight",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -194,5 +262,29 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-l2-purity-rigidity",
+  "worker": "stage1",
+  "summary": "Preserved the punctual-purity statement and the normalized-envelope route; exposed the two sorried trace-energy comparisons in the Lean frontier as statement-only children, verified every citation against its statement, supplied the extended-real supremum arguments, and avoided using a lemma proof as a statement.",
+  "blueprint": "Current main-20261015 proof: opening paragraph realized by step 1; Step 1 by step 2 and the constant-twist child; Step 2 by steps 3-4; Step 3 by step 5 and the envelope-bound child; final paragraph by steps 6-7.",
+  "tool_uses": [
+   {
+    "node": "lem-tw-dual-negation",
+    "why": "Generic purity of the linear dual, specialized at weight zero for the envelope; the energy unit does not reprove contragredient stalk purity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-tw-dual-negation"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-f6029dc24",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-f6029dc24 (reviewer sub-agent of L); spot-checked: Read everything in full: the item, both new nodes, every cited statement, the blueprint main-20261015 statement and proof (the statement is unchanged from master; the main-20261017 snapshot only adds lean lines), the unit sk-l-dl-a1-energy, and the Lean frontier in slopmaster2 TraceEnergy.lean:420-436. Steps 1-7 are all correct with every hypothesis in force. Step 1: b=iota^{-1}(q^{-w/2}) gives c=-w in lem-wf-constant-twist-weight. Step 2: the parameter sets satisfy A_{G0}=A_G-w; the sign was checked, and the shift also holds for empty and unbounded sets. Step 3: lem-tw-dual-negation at weight 0 plus the block-diagonal direct sum. Step 4: every hypothesis of lem-wf-envelope-real and thm-wf-l2-dictionary holds for E. Step 5: the eps/4 limsup argument gives A_E inside A_{G0}. Step 6: the one-step filtration plus lem-wf-l2-upper. Step 7: cancellation in the extended reals. The split repairs the blueprint's use of a fact from the proof of lem-wf-envelope-real rather than its statement (C3). There is no cycle. Both new children are self-contained, statement-only and true: the twist trace is b^m at every F_{q^m}-point, including points over closed points of degree d|m, and t_E=2Re t_{F0} with |2Re z|^2<=4|z|^2. I tested the zero sheaf, empty X_0, b=1, rank one, theta=pi/2 and w<0. Each child matches a sorried Lean frontier declaration (traceEnergy_constantTwist, traceEnergy_realEnvelope_le). They restate no clause of the item, and a DAG-wide rg search found no duplicates. The tool use of lem-tw-dual-negation is accepted, since the blueprint proof itself cites it. Batch-5 check: all four flagged citations (def-weil-punctual-weights, def-weil-local-frobenius-trace, def-wf-constant-weil-twist, def-wf-normalized-real-envelope) are general definitions that define punctual weights, the local Frobenius operator/S_m, B_b and the envelope. None is a step of the trace formula or Poincare duality proofs; the new children only state them. Kept. The children lack lean_audit and merged_into because of the ownership filter; maintenance should record the sorry_here audits from lean_candidates. No changes were made."
  }
 }

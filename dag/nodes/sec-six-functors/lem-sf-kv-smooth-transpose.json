@@ -14,9 +14,98 @@
   "thm-pur-cohomological-smoothness",
   "lem-pur-derived-pullback-tensor-iso"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Abbreviate $P_h=Rh_!$, $U_h=Lh^*$, $\\omega=\\omega_f$, $H=U_fK\\otimes^L\\omega$, and $W=K\\boxtimes Q$. Write $t:Y\\times Z\\to Z$. Use the canonical identity adjunction to identify $R\\operatorname{id}_Z^!Q$ with $Q$. The finite-coefficient stability theorem, clauses (i),(ii),(iv),(v), puts all pullbacks, tensors, compact-support images and exceptional images below in $D^b_{ctf}$. The specified smooth tensor map $T=\\theta_{f,K}\\boxtimes1_Q:H\\boxtimes Q\\to Rf^!K\\boxtimes Q$ is an isomorphism by cohomological smoothness. Set $\\rho:H\\boxtimes Q\\xrightarrow{\\sim}U_FW\\otimes^LU_r\\omega$ to be the signed reassociation. It suffices to compare the two proposed maps after precomposition by $T$.",
+   "uses": [
+    "thm-sf-ctf-stability",
+    "thm-pur-cohomological-smoothness",
+    "lem-pur-derived-pullback-tensor-iso",
+    "sk-def-sf-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Definition 5.1 (specified tensor and base-change transposes); Remark 3.13 (target-module coherence)"
+   }
+  },
+  {
+   "text": "For any $M\\in D^b_{ctf}(X,A)$ put $E_M:U_sP_fM\\to P_FU_rM$ and $C_{M,Q}=(E_M^{-1}\\otimes1)\\operatorname{PF}_{F,U_rM,U_tQ}^{-1}$, as in the cited exterior module lemma. This is precisely $\\mathrm{Ku}_{!,f,\\operatorname{id}_Z}(M,Q)$. Indeed in the relative-product definition over $B=Y\\times Z$, the two maps to $B$ are $F:X\\times Z\\to B$ and $\\operatorname{id}_B:B\\to B$, with inputs $U_rM,U_tQ$. Its first nonidentity arrow is $\\operatorname{PF}_{F,U_rM,U_tQ}^{-1}$ and the product-square exchange contributes $E_M^{-1}$; the projection formula and composition maps for $\\operatorname{id}_B$ are identities, and the final two symmetries cancel. Thus the transpose of the specified $\\alpha_{f,\\operatorname{id}_Z}$ is $(\\varepsilon_{f,K}\\boxtimes1_Q)C_{Rf^!K,Q}$. Naturality of $C$ makes its precomposition with $P_F(T)$ equal to $((\\varepsilon_{f,K}P_f\\theta_{f,K})\\boxtimes1_Q)C_{H,Q}$.",
+   "uses": [
+    "lem-sf-exterior-shriek-projection-compatibility",
+    "sk-thm-sf-kunneth-relative",
+    "sk-def-sf-kv-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Definition 5.1 (specified tensor and base-change transposes); Remark 3.13 (target-module coherence)"
+   }
+  },
+  {
+   "text": "Put $e=\\varepsilon_{f,A_Y}:P_f\\omega\\to A_Y$. The definition of $\\theta_{f,K}$ gives the exact identity $\\varepsilon_{f,K}P_f\\theta_{f,K}=(e\\otimes1_K)\\operatorname{PF}_{f,\\omega,K}^{-1}P_f(\\sigma)$, where $\\sigma:U_fK\\otimes\\omega\\to\\omega\\otimes U_fK$. Substitute this in step 2. Apply the exterior module identity with $M=\\omega$, keeping its signed reordering of $K$ and $Q$. Expanding $C_{\\omega,Q}$ gives the resulting transpose\n$$a=(U_se\\otimes1_W)(E_\\omega^{-1}\\otimes1_W)\\operatorname{PF}_{F,U_r\\omega,W}^{-1}P_F(\\sigma\\rho).$$\nHere $\\sigma\\rho:H\\boxtimes Q\\to U_r\\omega\\otimes U_FW$ first applies $\\rho$ and then swaps its two factors. The cited module identity already includes extracting both target factors as the single object $W$. Applied after the displayed swap of $U_fK$ and $\\omega$, its $\\zeta$ is exactly $\\sigma\\rho$, so it gives the displayed formula directly.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "lem-sf-exterior-shriek-projection-compatibility",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Definition 5.1 (specified tensor and base-change transposes); Remark 3.13 (target-module coherence)"
+   }
+  },
+  {
+   "text": "Let $v=\\theta_{F,W}(1\\otimes b)\\rho:H\\boxtimes Q\\to RF^!W$, the proposed composite after precomposition by $T$. Its exceptional transpose is\n$$\\varepsilon_{F,W}P_F(v)=(\\varepsilon_{F,A}P_Fb\\otimes1_W)\\operatorname{PF}_{F,U_r\\omega,W}^{-1}P_F(\\sigma\\rho).$$\nTo see this, insert the counit-transpose defining formula for $\\theta_{F,W}$ from condition (2) of cohomological smoothness. Move $P_F(b\\otimes1)$ through the inverse projection formula by naturality in its first argument. This leaves the displayed composite, with exactly the same signed symmetry as in step 3; it does not choose an orientation or replace a specified map by an unspecified isomorphism.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Definition 5.1 (specified tensor and base-change transposes); Remark 3.13 (target-module coherence)"
+   }
+  },
+  {
+   "text": "Condition (3) in the definition of cohomological smoothness defines $b$ by its transpose in the Cartesian square $(F,r,f,s)$. Consequently\n$$\\varepsilon_{F,A}P_Fb=U_se\\circ E_\\omega^{-1}.$$\nSubstitution in step 4 makes its transpose exactly $a$ from step 3. Thus $v$ and $\\alpha_{f,\\operatorname{id}_Z}T$ have the same transpose under the actual constructible exceptional adjunction $P_F\\dashv RF^!$. Its Hom bijection is injective; hence they are equal. Cancel the isomorphism $T$ from step 1 to obtain the asserted equality, including the inverse $\\theta_{f,K}^{-1}$ in its stated position.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "thm-sf-ambient-adjoint-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Definition 5.1 (specified tensor and base-change transposes); Remark 3.13 (target-module coherence)"
+   }
+  },
+  {
+   "text": "The identities above hold for arbitrary $K,Q$ and are natural: $C$, the projection maps, the exchanges, $\\theta$ and $b$ are natural in their inputs, and tensor reassociation and symmetry are natural. Inverting the natural isomorphism $\\theta_{f,-}$ preserves naturality. The component equality therefore is the required equality of natural transformations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Definition 5.1 (specified tensor and base-change transposes); Remark 3.13 (target-module coherence)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-sf-ctf-stability",
+  "thm-pur-cohomological-smoothness",
+  "lem-pur-derived-pullback-tensor-iso",
+  "sk-def-sf-operations",
+  "lem-sf-exterior-shriek-projection-compatibility",
+  "sk-thm-sf-kunneth-relative",
+  "sk-def-sf-kv-maps",
+  "def-pur-co-smoothness",
+  "fix-prop-projection-formula",
+  "thm-sf-ambient-adjoint-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/scholze-six-functor-formalisms.pdf",
+  "place": "Explicit counit-transpose calculation from Definition 5.1 and Remark 3.13, realizing the blueprint smooth alpha paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,10 +155,38 @@
    "results": "8 hits: contractLeft_assoc_coevaluation, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation, CategoryTheory.tensorRightHomEquiv_tensor, contractLeft_assoc_coevaluation', CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CharacterModule.dual_rTensor_conj_homEquiv, CategoryTheory.ExactPairing.coevaluation_evaluation.  Read candidate Mathlib Mates.lean 425-436, Monoidal/Closed/Functor.lean 45-116, Monoidal/Functor.lean 947-975 and Triangulated/Pretriangulated.lean 189-203: conjugacy, Cartesian exponential maps, right-adjoint lax monoidality, or generic triangle completion; none states this comparison for the geometric derived sheaf operations.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*(kunneth|tensor)|kunneth.*(smooth|transpose)|cohomologicallySmooth",
+   "results": "0 hits: ; none states the specified geometric smooth exceptional transpose equality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth exceptional pullback relative dualizing complex exterior tensor product counit compatibility",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.ev_naturality_assoc, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_mapPullbackAdj_counit_app, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_counit_app, CategoryTheory.ChosenPullbacksAlong.fst', CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc, CategoryTheory.Adjunction.CommShift.CompatibilityCounit, CategoryTheory.ExponentiableMorphism.ev_naturality, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit; none states the specified geometric smooth exceptional transpose equality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projection formula base change and associativity identify exterior product of exceptional adjoints",
+   "results": "8 hits: ModuleCat.exteriorPower.iso₁_hom_naturality_assoc, exteriorPower.oneEquiv_naturality, ModuleCat.exteriorPower.iso₁_hom_naturality, ModuleCat.exteriorPower.iso₀_hom_naturality_assoc, exteriorPower.map_comp_ιMulti_family, exteriorPower.map_comp, exteriorPower.zeroEquiv_naturality, ExteriorAlgebra.toTrivSqZeroExt_comp_map; none states the specified geometric smooth exceptional transpose equality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth exceptional inverse image exterior tensor product is the transpose of compact support Kunneth and counits",
+   "results": "8 hits: rTensor.inverse_of_rightInverse_comp_rTensor, rTensor.inverse_of_rightInverse_apply, KaehlerDifferential.tensorKaehlerEquiv, lTensor.inverse_of_rightInverse_comp_lTensor, lTensor.inverse_of_rightInverse_apply, KaehlerDifferential.tensorKaehlerEquivBase, lTensor.inverse_of_rightInverse, KaehlerDifferential.tensorKaehlerEquiv_left_inv; none states the specified geometric smooth exceptional transpose equality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-sf-kunneth-verdier",
@@ -86,5 +203,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-kv-smooth-transpose",
+  "worker": "stage1",
+  "summary": "Expanded the specified smooth comparison into its two exceptional transposes; isolated the ordinary compact-support exterior module square, without smoothness or exceptional inverse images, as one searched statement-only child. Kept the item statement and its orientation-free lecture-notes route unchanged.",
+  "blueprint": "sk-thm-sf-kunneth-verdier, alpha smooth case: smooth trace is the exceptional counit and its base-change square is the adjoint of the same purity comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Canonical signed monoidal pullback identifications, a generic tensor tool."
+   },
+   {
+    "node": "def-pur-co-smoothness",
+    "why": "Definitions of the specified theta and dualizing base-change maps; no new purity route."
+   },
+   {
+    "node": "thm-pur-cohomological-smoothness",
+    "why": "Only invertibility of theta, already stipulated by the item."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Naturality and invertibility of the concrete compact-support projection maps."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Injectivity of the actual finite-coefficient constructible Hom adjunction; no unrestricted pro-etale adjoint."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Only closure under pullback, tensor, compact support and exceptional image at finite coefficients."
+   },
+   {
+    "node": "sk-thm-sf-kunneth-relative",
+    "why": "The explicit inverse-PF and inverse-exchange definition of the identity-factor compact-support Kunneth map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-pur-co-smoothness",
+  "thm-pur-cohomological-smoothness",
+  "fix-prop-projection-formula",
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-ctf-stability",
+  "sk-thm-sf-kunneth-relative"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N3-332570d58",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-332570d58 (reviewer sub-agent of L); spot-checked: PASS, no changes made. I read the item, the new node, every cited statement, the parent sk-thm-sf-kunneth-verdier step 4 (the only node citing the item), the unit record, the main-20261015 alpha paragraph, and Scholze Six-Functor Formalisms Remark 3.13 (p. 24) and Definition 5.1 (p. 32). The item's statement is unchanged and is exactly what the parent's step 4 uses. theta and b are the counit transposes of def-pur-co-smoothness(2),(3), which match Scholze Def. 5.1; they are invertible by thm-pur-cohomological-smoothness, whose statement depends on def-pur-co-smoothness. The coefficient category is finite A_{E,n} with D^b_ctf throughout. No SGA source is cited, and the item is not a target node. Step 2 is right: Ku_{!,f,id_Z} reduces to PF_{F,U_rM,U_tQ}^{-1} (sk-thm-sf-kunneth-relative clause (iv)) followed by E_M^{-1}, so the transpose of alpha is (eps⊠1)C. Step 3 combines the theta formula, naturality of C and the new lemma with M=omega. The two canonical isomorphisms zeta(sigma⊠1) and sigma∘rho have the same underlying permutation and are equal by symmetric-monoidal coherence. Step 4 follows from the theta formula for F and naturality of PF^{-1} in its first argument. Step 5 uses def-pur-co-smoothness(3) on the square (F,r,f,s), eps_F P_F b = U_s e∘E_omega^{-1}, and injectivity of the constructible Hom bijection of thm-sf-ambient-adjoint-class(2). I tested the item with Z=pt, Q=A and with f=id; both sides agree. The new node lem-sf-exterior-shriek-projection-compatibility type-checks and is true: it is PF base-change compatibility plus the D(Y)-linear coherence of Remark 3.13. Tested with f=id, Z=pt, K=A and zero inputs, with no counterexample. It contains no f^!, theta or smoothness, so it does not restate the item. It is not a duplicate: prop-sf-pf-coherence, lem-kun-proj-formula-natural, lem-sf-composition-projection-mate, lem-sf-kunneth-coherence, lem-sf-product-compactification-identity, lem-sf-proper-product-counit-transpose and lem-sf-kv-alpha-transpose-coherence state only base change or composition in f, never associativity of PF in the target tensor variable. Its blueprint ancestry and fields (B1-B9) and its searches are correct. All seven declared tool_uses are accepted as generic black-box tools: lem-pur-derived-pullback-tensor-iso, def-pur-co-smoothness, thm-pur-cohomological-smoothness, fix-prop-projection-formula, thm-sf-ambient-adjoint-class, thm-sf-ctf-stability and sk-thm-sf-kunneth-relative. Full review: review.md."
  }
 }

@@ -7,7 +7,7 @@
    "place": "step 5 of its split (source: ## Proof, step 3: '$P_{2d-i}(q^{-d}T^{-1})=\\prod(1-\\alpha_{i,r}^{-1}T^{-1})=(-1)^{b_i}T^{-b_i}(\\prod\\alpha_{i,r})^{-1}\\prod(1-\\alpha_{i,r}T)=(-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T)$'; the computation is [lem-weil-reciprocal-roots-laurent-identity], and the passage from $\\Qlb[T,T^{-1}]$, where the factorization lives, to $\\mathbf Q[T,T^{-1}]$, which the blueprint does not mention, is written out)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Reciprocity of two normalized polynomials with reciprocal root multisets",
@@ -24,34 +24,123 @@
   "def-weil-laurent-polynomial-ring",
   "def-weil-rational-function-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Root factorization and nonvanishing. The cited factorization node supplies elements α₁,…,αₙ∈L× with P(T)=∏ᵣ₌₁ⁿ(1−αᵣT), counted with multiplicity. Thus every αᵣ is nonzero, and the displayed hypothesis already writes Q(T)=∏ᵣ₌₁ⁿ(1−cαᵣ⁻¹T).",
+   "uses": [
+    "lem-weil-reciprocal-root-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-reciprocity/prop-duality-reciprocity.md",
+    "place": "## Proof, step 2: factorization into reciprocal roots"
+   }
+  },
+  {
+   "text": "Degree and determinant constants. Each factor 1−αᵣT and 1−cαᵣ⁻¹T has nonzero leading coefficient because αᵣ and c are units. The leading coefficient of a finite product is the product of the leading coefficients, so deg Q=n. Reading the coefficient of Tⁿ in the two displayed products gives D_P=∏ᵣ αᵣ and D_Q=∏ᵣ(cαᵣ⁻¹)=cⁿ(∏ᵣαᵣ)⁻¹. Hence D_P and D_Q are nonzero and D_PD_Q=cⁿ.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-polynomial-coefficient",
+    "lem-weil-reciprocal-root-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-reciprocity/prop-duality-reciprocity.md",
+    "place": "## Proof, step 2: the computations D_i=∏α_{i,r} and D_{2d-i}=q^{db_i}/D_i"
+   }
+  },
+  {
+   "text": "Laurent substitution. In L[T,T⁻¹], for each r one has 1−αᵣc⁻¹T⁻¹=−αᵣc⁻¹T⁻¹(1−cαᵣ⁻¹T). Multiplying these n identities and using the product formula for Q yields P(c⁻¹T⁻¹)=(−1)ⁿT⁻ⁿ(∏ᵣαᵣ) c⁻ⁿ Q(T)=(−1)ⁿT⁻ⁿD_Q⁻¹Q(T), where the last equality is the relation D_PD_Q=cⁿ from the preceding step.",
+   "uses": [
+    "def-weil-laurent-polynomial-ring",
+    "def-weil-rational-function-field",
+    "lem-weil-reciprocal-root-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-reciprocity/prop-duality-reciprocity.md",
+    "place": "## Proof, step 3: the Laurent-polynomial computation"
+   }
+  },
+  {
+   "text": "Evaluation form. Substituting any t∈L× for T in the Laurent identity is legitimate because t and t⁻¹ exist in the field. It gives P(c⁻¹t⁻¹)=(−1)ⁿt⁻ⁿD_Q⁻¹Q(t). Since [Tⁿ]Q=(−1)ⁿD_Q by the determinant-constant definition, (−1)ⁿD_Q⁻¹=([Tⁿ]Q)⁻¹, and therefore P(c⁻¹t⁻¹)=t⁻ⁿ([Tⁿ]Q)⁻¹Q(t).",
+   "uses": [
+    "def-weil-polynomial-coefficient",
+    "def-weil-laurent-polynomial-ring",
+    "def-weil-rational-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-reciprocity/prop-duality-reciprocity.md",
+    "place": "## Proof, step 3: the evaluation consequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-laurent-polynomial-ring",
+  "def-weil-polynomial-coefficient",
+  "def-weil-polynomial-ring",
+  "def-weil-rational-function-field",
+  "lem-weil-reciprocal-root-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-reciprocity/prop-duality-reciprocity.md",
+  "place": "## Proof, steps 2 and 3"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "grep -rn 'roots_eq_map_inv\\|roots_reverse\\|reverse_roots\\|reflect.*roots\\|roots.*reverse' Mathlib",
-   "results": "none (only RootSystem files, unrelated)",
-   "date": "2026-10-09",
+   "query": "roots_eq_map_inv|leadingCoeff_mul_leadingCoeff|eval_inv_mul_inv (Mathlib/)",
+   "results": "none (0 hits)",
+   "date": "2026-10-17",
    "verdict": "no match"
   },
   {
-   "tool": "grep",
-   "query": "grep -rn 'eval_eq_prod_roots\\|C_leadingCoeff_mul_prod_multiset_X_sub_C\\|prod_multiset_X_sub_C' Mathlib/Algebra/Polynomial/ Mathlib/FieldTheory/ (ingredients)",
-   "results": "Mathlib has the factorization of a split polynomial into its roots (`Polynomial.Splits.eval_eq_prod_roots`, `Polynomial.C_leadingCoeff_mul_prod_multiset_X_sub_C`, used by the source repository's proof) but not the reciprocity identity or the product rule for the leading coefficients",
-   "date": "2026-10-09",
-   "verdict": "no match; ingredients only"
+   "tool": "leansearch",
+   "query": "normalized polynomials whose reciprocal roots correspond under alpha maps to c over alpha",
+   "results": "Polynomial.instNormalizationMonoid; Polynomial.roots_normalize; Polynomial.normalize_eq_self_iff_monic; Polynomial.monic_normalize; Polynomial.leadingCoeff_smul_integralNormalization; no reciprocity theorem",
+   "date": "2026-10-17",
+   "verdict": "no match; unrelated normalization ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.leadingCoeff, Polynomial.roots, Multiset.prod",
+   "results": "Polynomial.C_leadingCoeff_mul_prod_multiset_X_sub_C; Polynomial.Splits.eval_eq_prod_roots; Polynomial.Splits.coeff_zero_eq_leadingCoeff_mul_prod_roots; Polynomial.Splits.eq_prod_roots; no reciprocity theorem",
+   "date": "2026-10-17",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "reciprocal roots transformed by c divided by alpha give leading coefficient product and polynomial reciprocity",
+   "results": "Polynomial.integralNormalization_mul_C_leadingCoeff; Polynomial.mul_scaleRoots; Polynomial.eval₂_reverse_mul_pow; Polynomial.eval₂_reflect_mul_pow; no exact theorem",
+   "date": "2026-10-17",
+   "verdict": "no exact match; ingredients only"
   },
   {
    "tool": "grep",
-   "query": "grep -n theorem ~/weil-conjectures-slopmaster2/WeilConjectures/Mathlib/FieldTheory/IsAlgClosed/Basic.lean (source repository, not Mathlib)",
-   "results": "Polynomial.leadingCoeff_mul_leadingCoeff_of_roots_eq_map_inv (94), Polynomial.eval_inv_mul_inv_of_roots_eq_map_inv (120): clauses 1 and 3 without sorry",
-   "date": "2026-10-09",
-   "verdict": "no match in Mathlib; Lean of the source repository recorded in source"
+   "query": "eval₂_reverse_mul_pow|coeff_zero_eq_leadingCoeff_mul_prod_roots|Splits.eq_prod_roots (Mathlib/Algebra/Polynomial/)",
+   "results": "none (0 hits from msearch service)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.eval₂_reverse_mul_pow, Polynomial.leadingCoeff, Polynomial.natDegree",
+   "results": "none (0 hits from msearch service)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "multiset reciprocal root correspondence normalized polynomial leading coefficient reciprocity",
+   "results": "Polynomial.rightInverse_ofMultiset_roots; Polynomial.roots_normalize; Polynomial.roots_scaleRoots; Polynomial.mul_scaleRoots; no exact reciprocity theorem",
+   "date": "2026-10-17",
+   "verdict": "no exact match; ingredients only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +160,20 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-prop-reciprocity"
+ "unit": "sk-prop-reciprocity",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-reciprocal-roots-laurent-identity",
+  "worker": "stage1",
+  "summary": "Compared the abstract normalized-polynomial statement with the master reciprocity blueprint and the sorry-free slopmaster2 polynomial declarations. No single declaration states all three clauses, so the item is split rather than attached. The proof has four short steps: factorization/nonvanishing, degree and determinant constants, Laurent substitution, and evaluation. The algebra in the product and substitution steps is elementary from the cited factorization and polynomial/Laurent definitions; no child node is introduced because each prospective child would merely restate a clause of this item. The edge case n=0 was checked: both products are empty, P=Q=1, D_P=D_Q=1, and all identities reduce to 1=1.",
+  "blueprint": "Realizes prop-duality-reciprocity, ## Proof steps 2 and 3, including the factor-by-factor Laurent computation."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-f06a6d4da",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-f06a6d4da (reviewer sub-agent of L); spot-checked: PASS, no changes made. I read the item and all six cited statements in full. The delivery creates no new nodes. Source: blueprint master prop-duality-reciprocity ## Proof steps 2-3; the proof text is identical to main-20261015. With the item's P=P_{2d-i}, Q=P_i and c=q^d, the reciprocal roots of P are q^d/α and those of Q are the α, so the hypothesis direction and clauses 1-2 match the blueprint's D_iD_{2d-i}=q^{db_i} and its Laurent identity. No hypothesis is added and nothing is weakened. Step 1: the factorization node clause 2 applies with K=L and ι=id. Step 2: the leading coefficients are (-1)^n∏α and (-1)^n c^n/∏α, so D_P=∏α, D_Q=c^n/∏α and the signs are correct. Step 3: the factor identity -αc⁻¹T⁻¹(1-cα⁻¹T)=1-αc⁻¹T⁻¹ checks by expansion, and c⁻ⁿ∏α=D_Q⁻¹. Step 4: evaluation at t≠0 is elementary and matches the Lean eval_inv_mul_inv form. Small cases: n=0 and n=1 by hand; n=3 with exact rationals (α=(2,3,-1/2), c=5, three values of t) by a python Fraction script. Route: the only statement used is in unit sk-def-roots, which the unit cites; no tool_uses; no SGA; the item is not a target node. Duplicates: lem-weil-reciprocal-polynomial, polynomial-reflection-multiplicative, similitude-pairing-reciprocity and alternating-product-reciprocity are related but none states this item; the only citer is prop-duality-reciprocity, which uses it consistently; same_as=[] is right. The two sorry-free slopmaster2 lemmas cover clause 1's product (lc P·lc Q=c^n) and clause 3 only, so splitting rather than attaching is right. Minor: two mathlib_searches records show 0 hits for names that exist in Mathlib (Reverse.lean:332 eval₂_reverse_mul_pow, Splits.lean:299/403); they don't change the no-exact-match verdict."
+ }
 }

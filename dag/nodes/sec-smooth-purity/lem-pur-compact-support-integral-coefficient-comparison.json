@@ -97,10 +97,12 @@
    }
   },
   {
-   "text": "Take total derived inverse limit of $q_\\bullet$, using the exact functor of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Tensor by $\\mathcal O_F$ commutes with this limit: after restriction to $\\mathcal O_E$ and the basis of Step 1 it is a finite direct sum, and the map $((x_n)_n)\\otimes b_i\\mapsto(x_n\\otimes b_i)_n$ identifies both products and $1-s$ in the Roos cone. Termwise products compute derived products here by [lem-weil-proetale-countable-products-exact]. Restriction detects quasi-isomorphisms, so this calculation also proves the assertion with its $\\mathcal O_F$-action. Passing from all $F$-levels to $en$ uses the canonical cofinal restriction of this same cone: in each finite block between retained indices, successively replace $x_i$ by $x_i-t_ix_{i+1}$. Eliminating those coordinates splits off identity maps, with contractible cones, and leaves $x_{en}-t_{en}\\cdots t_{e(n+1)-1}x_{e(n+1)}$ on the retained coordinates. The initial finite block is eliminated in the same way. More explicitly, the map between the two Roos two-term complexes has degree-zero map $(x_i)_i\\mapsto(x_{en})_n$ and degree-one map $y\\mapsto z$, where $z_n=\\sum_{i=en}^{e(n+1)-1}t_{en}\\cdots t_{i-1}y_i$ and the empty product is identity. Telescoping gives $z_n=x_{en}-t_{en}\\cdots t_{e(n+1)-1}x_{e(n+1)}$ when $y=(1-s)x$. Thus it is a chain map, and the block elimination proves that it is a quasi-isomorphism. These finite sums commute with tower maps; composing two cofinal restrictions concatenates the same sums, and the map carries a compatible-family unit with zero shifted-product component to that same unit at the retained levels. The integral definition [def-weil-integral-rational-qbar-compact-support] and the comparison $\\chi$ in [lem-weil-finite-free-completed-scalar-comparison] now identify the resulting morphism with $c_{F/E}:C_YP_E\\to P_FC_X$. Its cone has zero evaluation at every level, because each $q_n$ is invertible. Cohomology in the tower category is levelwise by [lem-weil-tower-category-levelwise-abelian], so that cone is zero before taking limits. The derived-limit functor therefore makes $c_{F/E}$ a natural isomorphism.",
+   "text": "Take total derived inverse limit of the strict map $q_\\bullet$ of Step 4, using [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The exact countable products supplied by [lem-weil-proetale-countable-products-exact] identify this functor with the specified product/cone model by [lem-weil-strict-roos-comparison]. Apply [lem-pur-compact-support-roos-cofinality] in the constant coefficient models of Step 2: finite free tensor commutes with this cone, and its explicit block map identifies the full $F$-tower limit with the retained $en$-tower limit. Both comparisons preserve the augmentation and the coefficient action. The integral definition [def-weil-integral-rational-qbar-compact-support] and the specified scalar map $\\chi$ of [lem-weil-finite-free-completed-scalar-comparison] therefore give $c_{F/E}$ with the required source and target. Each $q_n$ is invertible, so its tower cone has zero cohomology at every level. Cohomology of towers is levelwise by [lem-weil-tower-category-levelwise-abelian]; the cone is zero before taking limits. The exact total-limit functor makes $c_{F/E}$ an isomorphism.",
    "uses": [
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
     "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison",
+    "lem-pur-compact-support-roos-cofinality",
     "def-weil-integral-rational-qbar-compact-support",
     "lem-weil-finite-free-completed-scalar-comparison",
     "lem-weil-tower-category-levelwise-abelian"
@@ -155,16 +157,27 @@
    }
   },
   {
-   "text": "For finite coefficients use exactly the projection transformation of [def-exchange-projection]: the proper counit projection followed by the open tensor identification. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the square with horizontal identity-topos coefficient changes $A_n\\to B_n$ and vertical scheme maps $p$. The structure-ring maps commute by Step 2; no cartesianness is required. Its exchange is the proper coefficient mate of Step 3, so its equality gives the proper projection square. For the open factor both composites send $((x\\otimes b)\\otimes(y\\otimes b'))$ to $(x\\otimes y)\\otimes bb'$. This holds on the extension-by-zero presheaves, including zero values, and sheafification preserves the equality; [lem-weil-pbc-ringed-slice-extension-tensor] identifies the maps with the canonical open maps.\n\nTo prove the integral equality, work in the constant integral coefficient model of Step 2, and distinguish ordinary tensor over $\\underline{\\mathcal O_E}$ from the finite tensor over $(A_n)_W$. Do not tensor two reduced inputs over $\\underline{\\mathcal O_E}$. The completion reflector and its unit are fixed by [lem-sp-completed-pullback-adjunction]. For ordinary integral complexes $H,K$, take K-flat representatives $P,Q$. The balancing isomorphism\n$$(P\\otimes_{\\underline{\\mathcal O_E}}Q)\\otimes_{\\underline{\\mathcal O_E}}(A_n)_W\n \\cong(P\\otimes_{\\underline{\\mathcal O_E}}(A_n)_W)\\otimes_{(A_n)_W}(Q\\otimes_{\\underline{\\mathcal O_E}}(A_n)_W)$$\ncommutes with quotient maps and units. Thus the completion of ordinary tensor is exactly the completed tensor of [def-pur-integral-derived-operations]. The same definition identifies completed pullback with completion of ordinary pullback. Finite free scalar extension commutes with these completion units by the actual product/cone map of Step 5, and its constructible scalar comparisons are those of [lem-pur-integral-operations-scalar-extension].\n\nThe open operation also has its canonical reduction-limit identification by [lem-cbc-completed-extension-zero-comparison]. Its quasi-compactness hypothesis holds: $\\overline X$ is separated over $k$, so the graph of $j$ is closed; over affine $V\\subset\\overline X$ the inverse image is closed in the quasi-compact $X\\times_kV$, using a finite affine cover of $X$. The adic datum applies to either DVR: its finite quotients are perfect by the two-term free resolution using a nonzero uniformizer power. The stated theorem makes $j_!M$ complete and identifies it with the limit of its reduction tower. By [prop-weil-pbc-direct-image-limits], $Rp_*$ commutes canonically with this total limit. Consequently the integral compact-support functor identifies with $Rp_*j_!$ on these inputs. Under these identifications the map of Steps 4--5 is the ordinary integral coefficient mate followed by the open scalar identification: finite free tensor commutes with the products, and the direct-image/limit comparison respects adjunction transposes. For the last assertion, the exact constant-diagram functor $\\Delta$ is left adjoint to total derived limit; on a K-injective tower $I$, $\\operatorname{Hom}(\\Delta K,I)=\\operatorname{Hom}(K,\\lim I)$, and testing acyclic $K$ shows $\\lim I$ is K-injective. Termwise pullback commutes with $\\Delta$, so the composite Hom bijections identify the tower counit with the integral counit. The completed pullback adjunction of [lem-sp-completed-pullback-adjunction] then fixes its completed counit by the same Hom bijections.\n\nNow apply [lem-weil-pbc-ringed-exchange-tensor-coherence] directly to the ordinary integral constant-ring square $\\mathcal O_E\\to\\mathcal O_F$, and use the open balancing equality above. Pass this equality to the complete categories using the reflector. Explicitly, for integral $M$ on $X$ and $N$ on $Y$ in the asserted projection domain, precompose both proposed integral composites with the completion unit from $C_Y(P_EM\\otimes_{\\underline{\\mathcal O_E}}^L N)$ into their common source $C_Y(P_EM\\widehat\\otimes_{\\mathcal O_E}^L N)$. Step 5 identifies this with an $\\mathcal O_F$-completion unit. Both composites have complete target. Precomposition with this unit is a bijection on Hom into that target, by the reflector adjunction. Under the completed-pullback Hom bijection, the integral proper projection transpose $(\\varepsilon\\otimes1)\\mu$ precomposed with this unit is the ordinary transpose followed by completion; this is exactly how the completion-induced counit and the balancing tensor comparison just described act. The open factor has the same property by its canonical reduction-limit identification. Hence after precomposition the two composites are the equal ordinary ringed exchange/projection composites followed by the same completion maps. The Hom bijection proves the required equality of integral projection transformations. This proves equality of actual maps, using the completion unit rather than assuming faithfulness of individual finite reductions.",
+   "text": "First check the finite projection square of [def-exchange-projection]. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the square whose horizontal maps are identity-topos coefficient changes $A_n\\to B_n$ and whose vertical maps are $p$. The ring maps commute by Step 2. Its exchange is the proper coefficient mate of Step 3, so the stated equality is the required proper square. For the open constituent, both composites send $((x\\otimes b)\\otimes(y\\otimes b'))$ to $(x\\otimes y)\\otimes bb'$. This includes the zero sections of extension by zero; the equality descends through sheafification. [lem-weil-pbc-ringed-slice-extension-tensor] identifies these maps with the canonical open tensor maps.",
    "uses": [
     "def-exchange-projection",
     "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-pur-integral-operations-scalar-extension",
-    "def-pur-integral-derived-operations",
-    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-ringed-slice-extension-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48 (remark-compatible-with-diagram); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  },
+  {
+   "text": "For the integral square work in the constant coefficient model of Step 2. Apply [lem-pur-compact-support-completed-projection-coherence] with $A=\\mathcal O_E$ and then $\\mathcal O_F$. The completion reflector and its induced pullback adjunction are [lem-sp-completed-pullback-adjunction]. The quotient $A/(\\varpi^n)$ is perfect by its two-term free resolution $[A\\xrightarrow{\\varpi^n}A]$. The open map is quasi-compact: over affine $V\\subset\\overline X$, its graph realizes $j^{-1}V$ as a closed subscheme of $X\\times_kV$, a quasi-compact scheme. Thus [lem-cbc-completed-extension-zero-comparison] makes $j_!M$ complete and identifies it with its strict reduction limit. [prop-weil-pbc-direct-image-limits] then identifies integral compact support with $Rp_*j_!$. The new coherence lemma identifies the tower projection and counit with their completed-adjunction maps under precisely these limit comparisons. Now apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the ordinary constant-ring square $\\mathcal O_E\\to\\mathcal O_F$, and use the open balancing equality of the preceding step. Finite free tensor preserves the completion unit by Step 5; its constructible tensor and pullback comparisons are [lem-pur-integral-operations-scalar-extension]. The new lemma's unit equation makes both proposed completed composites equal after precomposition with that unit. Their target is complete, so its reflector Hom-bijection proves equality of the actual integral maps. No faithfulness of finite reductions is used.",
+   "uses": [
+    "lem-pur-compact-support-completed-projection-coherence",
     "lem-sp-completed-pullback-adjunction",
-    "lem-cbc-completed-extension-zero-comparison"
+    "lem-cbc-completed-extension-zero-comparison",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-pur-integral-operations-scalar-extension"
    ],
    "elementary": false,
    "source": {
@@ -186,16 +199,27 @@
    }
   },
   {
-   "text": "Finally check shifts for the specified maps. At the proper constituent use the canonical derived adjunction and tensor structures of [lem-weil-pbc-ringed-projection-mate-exact]. Its displayed projection shift equation shifts the tensor's second input, whereas here the variable is the direct-image input $N$. For this variable check the transpose from Step 3: after the canonical identifications, the transpose at $N[1]$ is $C(p^*Rp_*N)[1]\\xrightarrow{(C\\varepsilon_N)[1]}(CN)[1]$, the shift of the transpose at $N$. Indeed the counit commutes with the canonical adjunction shifts: both shifted Hom bijections are obtained from the original one by shifting source and target. Tensoring with the degree-zero algebra $B$ introduces no sign in this first-variable shift. Injectivity of the adjunction Hom bijection proves the required shift equation for the proper coefficient mate. The same argument applies on the diagram sites. For the open constituent, exact degreewise extension by zero is [lem-pur-site-restriction-module-adjunction-exact], and the tensor coefficient algebra is in degree zero. The chain map $j_!(P[1])\\otimes B\\to j_!(P\\otimes B)[1]$ sends $x\\otimes b$ to $x\\otimes b$ on both routes; differentials have the same shifted minus sign. Thus the open tensor map commutes with the canonical shift comparison. This also holds in the strict diagram category, so the ordered comparison $q_\\bullet$ commutes with shift there. [lem-weil-compact-support-reduction-tower-functor] supplies the exact shift structures of the compact-support lifts, and the total inverse limit of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] is exact. Consequently $c_{F/E}$ commutes with their canonical shifts. The strict scalar functor has its specified shift structure by [lem-weil-integral-scalar-extension-well-defined]. The map $\\chi$ of [lem-weil-finite-free-completed-scalar-comparison] itself is the quotient map into the product with zero component in the shifted product. Applying shift to this pair gives the same pair under the canonical shifted-cone identification (the extra component remains zero). Thus $\\chi$ commutes with these shifts, including the cone sign. The unit, composition, projection and refinement equalities above are preserved by these same shift identifications. This proves every clause for the chosen ordinary-tensor comparison.",
+   "text": "For the proper coefficient mate, apply [lem-weil-pbc-derived-adjunction-shift] on the original ringed sites and on the small diagram sites of [lem-weil-pbc-diagram-site-realization]. Its counit equation identifies the transpose at $N[1]$ with $(C\\varepsilon_N)[1]:C(p^*Rp_*N)[1]\\to(CN)[1]$, the shift of the transpose at $N$. The pullback/scalar comparison is tensor balancing with the degree-zero algebra, hence has no first-variable sign. Injectivity of the adjunction Hom-bijection gives the proper mate's shift equation. For the open constituent use exact degreewise extension by zero [lem-pur-site-restriction-module-adjunction-exact]: on a representing complex both routes send $x\\otimes b$ to $x\\otimes b$, and shifting puts the same minus sign on the differential. Their ordered composite $q_\\bullet$ therefore commutes with shift before taking limits. The compact-support lifts have the exact shift structures of [lem-weil-compact-support-reduction-tower-functor], and total limit is exact by [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Its comparison consequently respects these canonical shifts.",
    "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-weil-pbc-diagram-site-realization",
     "lem-pur-site-restriction-module-adjunction-exact",
     "lem-weil-compact-support-reduction-tower-functor",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU (definition-derived-tor), 0B56 (projection map), 0941 (strict derived limit); exact open extension, sites-modules.tex Tag 03DJ"
+   }
+  },
+  {
+   "text": "Finally the strict scalar functor commutes with shift by [lem-weil-integral-scalar-extension-well-defined]. On a K-flat representative the ordinary/strict comparison $\\chi$ of [lem-weil-finite-free-completed-scalar-comparison] is its quotient product map together with zero in the shifted product. Shifting this pair gives the quotient product map for the shifted complex; any cone sign acts on a zero extra component. Thus $\\chi$ itself respects the specified shift structures, and the ordinary-tensor comparison $c_{F/E}$ has the shift compatibility just proved for its strict-tower realization. This completes the asserted compatibilities.",
+   "uses": [
     "lem-weil-integral-scalar-extension-well-defined",
     "lem-weil-finite-free-completed-scalar-comparison"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tags 06YU (definition-derived-tor), 0B56 (projection map), 0941 (strict derived limit); exact open extension, sites-modules.tex Tag 03DJ"
@@ -203,45 +227,48 @@
   }
  ],
  "proof_deps": [
-  "def-coef-normalized-dvr-tower",
-  "def-exchange-projection",
-  "def-pur-integral-derived-operations",
-  "def-weil-finite-tor-amplitude",
-  "def-weil-integral-rational-qbar-compact-support",
-  "lem-cbc-completed-extension-zero-comparison",
-  "lem-cbc-strict-tower-proper-open-calculus",
   "lem-coef-finite-free-extension",
-  "lem-coef-normalized-dvr-effectivity",
-  "lem-fix-compact-support-coefficient-change",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-integral-operations-scalar-extension",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sc-dvr-fg-torsionfree-free",
-  "lem-sf-integral-compact-support-constructible",
-  "lem-sf-proetale-constructible-origin",
-  "lem-sp-completed-pullback-adjunction",
-  "lem-weil-compact-support-reduction-tower-functor",
-  "lem-weil-derived-scalar-extension-restriction-adjunction",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-integral-scalar-extension-well-defined",
-  "lem-weil-l-adic-extension-complete",
   "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-diagram-kflat-replacements",
-  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-l-adic-extension-complete",
   "lem-weil-pbc-finite-over-complete-ring",
-  "lem-weil-pbc-mate-pasting",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-pur-derived-change-of-rings",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
   "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
   "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-weil-tower-evaluation-kinjective",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-pur-compact-support-roos-cofinality",
+  "def-weil-integral-rational-qbar-compact-support",
   "lem-weil-tower-category-levelwise-abelian",
-  "lem-weil-tower-evaluation-kinjective",
+  "lem-fix-compact-support-coefficient-change",
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-weil-finite-tor-amplitude",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-sf-proetale-constructible-origin",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-weil-pbc-mate-pasting",
   "prop-compactification-refinement",
-  "prop-weil-pbc-direct-image-limits"
+  "def-exchange-projection",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-pur-compact-support-completed-projection-coherence",
+  "lem-sp-completed-pullback-adjunction",
+  "lem-cbc-completed-extension-zero-comparison",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-integral-scalar-extension-well-defined"
  ],
  "proof_origin": {
   "by": "agent",
@@ -419,7 +446,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-adic-purity-scalar-naturality",
   "by": "worker",
@@ -428,11 +455,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-sf-compatibility",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-pur-compact-support-integral-coefficient-comparison",
   "worker": "stage1",
-  "summary": "Constructed the specified finite proper-then-open coefficient maps as a single strict-tower transformation, passed to total derived limits and checked reductions, actual integral coherence, refinement normalization, projection and shift compatibilities. Reused the existing generic ringed and tower statements; no new node and no statement change. No exact closed project declaration states all clauses. Second reading made cofinal cone maps explicit, restricted DVR effectivity to genuine uniformizers, and verified the actual integral projection and first-variable shift maps by adjunction.",
-  "blueprint": "thm-pur-rational-and-qbar-purity, imported Proof Step 2 (Qbar-stage), and sk-thm-purity-transport Step 3: the independent compact-support coefficient comparison needed for scalar transport and its adjunction mate.",
+  "summary": "Repair of the long-step return: retained the item statement and Lean record verbatim and preserved all original steps other than 5, 9, 11. Extracted the cofinal Roos and completed-projection arguments into two statement-only nodes; the shift argument uses the existing canonical derived-adjunction shift theorem. Final steps 9-10 replace old 9 and final 12-13 replace old 11.",
+  "blueprint": "thm-pur-rational-and-qbar-purity imported Proof Step 2 (Qbar-stage), and sk-thm-purity-transport Step 3 coefficient transport. Old step 5 uses the new cofinal Roos lemma; old step 9 becomes steps 9-10 using the new completed-projection coherence lemma; old step 11 becomes steps 12-13 using the existing derived-adjunction shift theorem.",
   "tool_uses": [
    {
     "node": "lem-cbc-strict-tower-proper-open-calculus",
@@ -569,6 +596,14 @@
    {
     "node": "lem-cbc-completed-extension-zero-comparison",
     "why": "Step 9 uses preservation of derived completeness by quasi-compact open extension and its canonical strict reduction-limit comparison to identify the integral open projection factor; the transport unit gives no such comparison."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Step 5 needs the canonical natural identification of the explicit product cone with total strict inverse limit, including augmentation normalization; the coefficient compatibility unit does not supply it."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "Step 12 needs the actual ringed-site derived counit with its canonical K-flat/K-injective shift comparisons, including on diagram sites; the unit contains no theorem identifying these adjunction shifts."
    }
   ]
  },
@@ -606,15 +641,17 @@
   "prop-compactification-refinement",
   "prop-weil-pbc-direct-image-limits",
   "lem-sp-completed-pullback-adjunction",
-  "lem-cbc-completed-extension-zero-comparison"
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-pbc-derived-adjunction-shift"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q26-8c3ccad3c",
-  "group": "Q26",
+  "reviewer": "NT-cc-Q134-b0e40f9cd",
+  "group": "Q134",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-8c3ccad3c (reviewer sub-agent of L); spot-checked: Read all eleven steps and 49 cited statements. Verified strict-tower construction, ramified reductions, refinement, projection, composition and shift coherence against cited sources. No cycles, duplicates or repairs found. Accepted 34 declared tool uses. Exact master target categories remain distinct from this auxiliary’s completed-module categories. Detailed checks written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-b0e40f9cd (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 13 steps, the statements of all 42 nodes they cite, both new nodes, the Stacks tags 0941, 07A6, 0B56 and 0A07 at their labels, and the blueprint places (master purity-transport Step 3 and sk-thm-sf-compatibility clause 7). No SGA is cited. The statement, stmt_deps and Lean record are unchanged; the repair replaces the old steps 5, 9 and 11 with the new steps 5, 9-10 and 12-13. lem-pur-compact-support-roos-cofinality is true. The telescoping identity b_e(1-s)=(1-s_e)a_e holds. The map is degreewise split surjective, and 1-s is bijective between the kernels (solve backwards from each retained zero; the initial block is free), so it is a quasi-isomorphism even without exact products. The cases e=1, a zero tower, a constant tower, composition of restrictions, and rank 0 or 1 for the finite free tensor all check. lem-pur-compact-support-completed-projection-coherence is true: the unit equation is the reflector computation, its target is complete because Ru_* preserves complete objects, and the tower identification follows from the projection formula for perfect A/I^n together with 0A07. Its hypotheses (Noetherian ring, perfect quotients) hold for O_E and O_F with I=(uniformizer). It is the projection analogue of lem-sp-completion-mate-comparison, not a duplicate of it. Neither new node restates a clause of the item. Hypotheses checked at the uses: j is quasi-compact because Xbar is separated, which lem-cbc-completed-extension-zero-comparison needs; lem-fix-compact-support-coefficient-change is applied only within a single field; the exchange-tensor coherence needs no cartesian square. The step citations match their uses, there is no cycle, and every dependency is on the unit's route. Besides the 34 previously accepted tool uses, I accept the two new ones (lem-weil-pbc-derived-adjunction-shift, lem-weil-strict-roos-comparison) as generic tools. No fixes were needed. Details are in review.md."
  },
  "lean_audit": {
   "master": {

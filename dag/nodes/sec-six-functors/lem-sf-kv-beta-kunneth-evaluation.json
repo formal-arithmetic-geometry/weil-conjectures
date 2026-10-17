@@ -13,9 +13,130 @@
   "sk-thm-sf-tensor-hom",
   "sk-lem-sf-kunneth-star"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P_i=Rh_{i!}$, $H_i=Rh_{i*}$, $G_i=Rh_i^!$, $W_i=G_iL_i$, $B_i=H_iT_i$, and $P,H,G$ for the product morphism $h$. Let $\\theta_i:B_i\\xrightarrow{\\sim}R\\mathcal Hom(E_i,L_i)$ and $\\theta:HR\\mathcal Hom(F,GL)\\xrightarrow{\\sim}R\\mathcal Hom(PF,L)$ be the canonical tensor–Hom identifications in the statement. All inputs to the subsequent projection and adjunction maps lie in $D^b_{ctf}$: a lisse finite-projective sheaf has Tor amplitude $[0,0]$, its coefficient dual is locally its finite-projective module dual, and [thm-sf-ctf-stability](i)–(v) preserves the category under the operations used to form $W_i,T_i,B_i,F$ and $E_i$. In particular this justifies using $B_i$ as projection coefficients. The exceptional adjunction needed here is the actual constructible one, supplied at finite coefficients by [thm-sf-ambient-adjoint-class](2); the latter applies to bounded constructible inputs of etale origin and does not require an ambient exceptional-adjoint admissibility hypothesis.",
+   "uses": [
+    "sk-def-sf-operations",
+    "sk-thm-sf-tensor-hom",
+    "thm-sf-ctf-stability",
+    "thm-sf-ambient-adjoint-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "Beta: tensor–Hom identifications and their bounded constructible domains."
+   }
+  },
+  {
+   "text": "Let $v_i:F_i\\otimes^LT_i\\to W_i$ be contraction of $F_i$ with $F_i^\\vee$, leaving $W_i$ unchanged. This is the evaluation under the finite-projective identification prescribed in the statement. Put $W=W_1\\boxtimes W_2$ and $T=T_1\\boxtimes T_2$. The corresponding contraction $v:F\\otimes^LT\\to W$ is $v_1\\boxtimes v_2$ after signed interchange. Indeed the dual identification $F^\\vee=F_1^\\vee\\boxtimes F_2^\\vee$ sends $(\\phi_1,\\phi_2)$ to the functional $(x_1,x_2)\\mapsto\\phi_1(x_1)\\phi_2(x_2)$; contracting then gives the same two scalar multiplications in either order. This formula can be checked on local finite-free presentations and their finite-projective retracts. The $F_i$ and their duals are in degree zero, so moving either across a complex introduces sign $1$; all interchanges involving the other complexes use the same Koszul symmetry of the derived tensor. Here and below tensor evaluation and currying are those of [sk-def-sf-operations](i).",
+   "uses": [
+    "sk-def-sf-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "Beta: F dual, finite-projective evaluation, and signed tensor interchange."
+   }
+  },
+  {
+   "text": "Write $c_i:Lh_i^*B_i\\to T_i$ and $\\mu_i:P_iW_i\\to L_i$ for the ordinary and exceptional counits, and $u_i=v_i\\circ(1_{F_i}\\otimes c_i)$. Claim:\n$$e_i:=\\operatorname{ev}\\circ(1_{E_i}\\otimes\\theta_i)=\\mu_i\\circ P_i(u_i)\\circ\\operatorname{PF}_{h_i,F_i,B_i}:E_i\\otimes^LB_i\\to L_i.$$\nApply [lem-pod-hom-chain-counit-formula] with $f=h_i$, $M=F_i$, $N=L_i$, $t=1_{A_N}$: the canonical tensor–Hom map is $\\operatorname{curry}(p_N)$. Let $\\varphi_i=\\operatorname{curry}(v_i):T_i\\xrightarrow{\\sim}L_N=R\\mathcal Hom(F_i,W_i)$ be the prescribed finite-projective identification, so $\\theta_i=\\operatorname{curry}(p_N)\\circ H_i\\varphi_i$. By [lem-pod-closed-uncurry-laws], $e_i=p_N\\circ(1\\otimes H_i\\varphi_i)$ and $\\operatorname{ev}\\circ(1\\otimes\\varphi_i)=v_i$. Naturality of $\\operatorname{PF}$ [def-exchange-projection] in its second variable gives $\\operatorname{PF}_{A_N}\\circ(1\\otimes H_i\\varphi_i)=P_i(1\\otimes Lh_i^*H_i\\varphi_i)\\circ\\operatorname{PF}_{h_i,F_i,B_i}$, and naturality of the ordinary counit of [fix-prop-adjunctions](1) gives $\\varepsilon_{L_N}\\circ Lh_i^*H_i\\varphi_i=\\varphi_i\\circ c_i$. Substituting into $p_N$ gives the claim. The exceptional adjunction of the Hom-chain lemma is the constructible one of the datum, supplied in step 1; no unrestricted pro-etale adjoint is invoked.",
+   "uses": [
+    "lem-pod-hom-chain-counit-formula",
+    "lem-pod-closed-uncurry-laws",
+    "def-exchange-projection",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "Beta: expand the two individual tensor–Hom identifications into evaluation, ordinary counit, projection and exceptional counit."
+   }
+  },
+  {
+   "text": "Put $B=B_1\\boxtimes B_2$ and let $c:B\\to HT$ be the iterated ordinary product comparison of the statement. Its ordinary transpose is\n$$\\varepsilon_{h,T}\\circ Lh^*c=c_1\\boxtimes c_2:Lh^*B\\to T,$$\nthrough the monoidal pullback identifications. To check the specified order, factor $h=b\\circ a$ with $a=\\operatorname{id}_{S_1}\\times h_2$ and $b=h_1\\times\\operatorname{id}_{Y_2}$. The first product map has $Lb^*$-transpose $c_1\\boxtimes1_{B_2}$, by substituting the exchange-mate formula and the counit-defined ordinary projection formula of [def-exchange-projection]. The second has $La^*$-transpose $1_{T_1}\\boxtimes c_2$. Transposing the composite gives $(1_{T_1}\\boxtimes c_2)\\circ La^*(c_1\\boxtimes1_{B_2})=c_1\\boxtimes c_2$. The composite-counit formula in [fix-prop-adjunctions](3) gives precisely the displayed equation after ordinary direct-image composition. This checks the maps of [sk-lem-sf-kunneth-star]; their invertibility is not used in this calculation.",
+   "uses": [
+    "def-exchange-projection",
+    "fix-prop-adjunctions",
+    "sk-lem-sf-kunneth-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "Beta: twice Ku_*; take the ordinary transpose using exchange and projection definitions."
+   }
+  },
+  {
+   "text": "Let $\\gamma:B\\to R\\mathcal Hom(PF,L)$ be the composite in the question, before precomposing in the first Hom argument with $\\mathrm{Ku}_!^{-1}:E_1\\boxtimes E_2\\to PF$. Under the finite-projective identifications its map to $HR\\mathcal Hom(F,GL)$ is $H(q)\\circ c$, where $q=\\alpha\\circ v:F\\otimes^LT\\to GL$ is read as its tensor–Hom transpose. Apply [lem-pod-hom-chain-counit-formula] now with $f=h$, $M=F$, $N=L$ and $t=H(\\operatorname{curry}(q))\\circ c$. Naturality of the ordinary counit replaces its pullback followed by evaluation by $q\\circ(1_F\\otimes\\varepsilon_{h,T})\\circ(1_F\\otimes Lh^*c)$. Step 4 therefore gives the uncurried map\n$$\\operatorname{uncurry}(\\gamma)=\\mu\\circ P(\\alpha)\\circ P(u)\\circ\\operatorname{PF}_{h,F,B},$$\nwhere $\\mu:PGL\\to L$ is the exceptional counit and $u=(v_1\\boxtimes v_2)\\circ(1_F\\otimes(c_1\\boxtimes c_2)):F\\otimes^LLh^*B\\to W$. The pullback and signed interchange constraints in this formula are those already fixed in step 2. This is the Hom-chain formula applied to a specified morphism, not an assumption that a Hom comparison is invertible.",
+   "uses": [
+    "lem-pod-hom-chain-counit-formula",
+    "lem-pod-closed-uncurry-laws",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "Beta: ordinary then exceptional transpose of the displayed composite."
+   }
+  },
+  {
+   "text": "Write $K_V:P(V_1\\boxtimes V_2)\\to P_1V_1\\boxtimes P_2V_2$ for $\\mathrm{Ku}_!$ at any indicated pair. Since $\\alpha$ is the exceptional transpose specified by [sk-def-sf-kv-maps](ii), the adjunct–counit identity gives\n$$\\mu\\circ P(\\alpha)=(\\mu_1\\boxtimes\\mu_2)\\circ K_W.$$\nThis uses [lem-weil-pbc-adjunct-counit-identity] for $P\\dashv G$. Naturality of $K$, supplied by the canonical relative product theorem [sk-thm-sf-kunneth-relative], then gives\n$$K_W\\circ P(u)=(P_1u_1\\boxtimes P_2u_2)\\circ K_C\\circ P(\\delta),$$\nwhere $C_i=F_i\\otimes^LLh_i^*B_i$ and $\\delta:F\\otimes^LLh^*B\\to C_1\\boxtimes C_2$ is signed interchange. This follows by substituting $u=(u_1\\boxtimes u_2)\\circ\\delta$.",
+   "uses": [
+    "sk-def-sf-kv-maps",
+    "lem-weil-pbc-adjunct-counit-identity",
+    "sk-thm-sf-kunneth-relative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "Beta: substitute the defining Ku_!–counit transpose of alpha and use naturality."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-exterior-projection-kunneth] to $f_i=h_i$, $M_i=F_i$, and the coefficients $B_i$ of step 1. The latter are in $D^b_{ctf}$, and locally closed immersions between the stipulated schemes are separated of finite type. Substituting its identity for $K_C P(\\delta)\\operatorname{PF}_{h,F,B}$ in step 6 and then step 5 yields\n$$\\operatorname{uncurry}(\\gamma)=(e_1\\boxtimes e_2)\\circ\\xi\\circ(K_F\\otimes1_B),$$\nusing the two identities defining $e_i$ in step 3 and bifunctoriality of external tensor. Here $\\xi:(E_1\\boxtimes E_2)\\otimes^L(B_1\\boxtimes B_2)\\to(E_1\\otimes^LB_1)\\boxtimes(E_2\\otimes^LB_2)$ is the same signed interchange. Thus the contribution of the projection formulas has been accounted for by an explicit equality of the specified geometric maps.",
+   "uses": [
+    "lem-sf-exterior-projection-kunneth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "Beta: the projection-formula square reduces the uncurried composite to the two evaluations."
+   }
+  },
+  {
+   "text": "The last identification in the statement is contravariance of internal Hom along $K_F^{-1}:E_1\\boxtimes E_2\\xrightarrow{\\sim}PF$. Its uncurried effect is to precompose step 7 by $K_F^{-1}\\otimes1_B$: this is the naturality in the first variable of the tensor–Hom adjunction of [sk-def-sf-operations](i). The adjacent $K_F$ and $K_F^{-1}$ cancel. The resulting map is exactly $(e_1\\boxtimes e_2)\\circ\\xi$. By [sk-def-sf-kv-maps](iii), this is the uncurried evaluation defining $\\beta\\circ(\\theta_1\\boxtimes\\theta_2)$; both use the same signed symmetry. Currying is a bijection by [lem-pod-closed-uncurry-laws], so equality of these uncurried maps proves equality of the requested maps under the specified identifications. Only the $!$-Kunneth and tensor–Hom identifications have been inverted. Neither $\\alpha$ nor $\\beta$ has been assumed invertible, and no invertibility conclusion about them was used.",
+   "uses": [
+    "sk-def-sf-kv-maps",
+    "lem-pod-closed-uncurry-laws",
+    "sk-def-sf-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "Beta: cancel Ku_! against the final Hom identification and use uniqueness of the tensor–Hom transpose."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "fix-prop-adjunctions",
+  "lem-pod-closed-uncurry-laws",
+  "lem-pod-hom-chain-counit-formula",
+  "lem-sf-exterior-projection-kunneth",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "sk-def-sf-kv-maps",
+  "sk-def-sf-operations",
+  "sk-lem-sf-kunneth-star",
+  "sk-thm-sf-kunneth-relative",
+  "sk-thm-sf-tensor-hom",
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-ctf-stability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+  "place": "Beta final sentence, expanded into explicit evaluation/counit identities and the exterior projection-formula square."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,10 +186,38 @@
    "results": "8 hits: CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.coev_ev_assoc, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc, CategoryTheory.ExponentiableMorphism.ev_naturality, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc.  Read candidate Mathlib Mates.lean 425-436, Monoidal/Closed/Functor.lean 45-116, Monoidal/Functor.lean 947-975 and Triangulated/Pretriangulated.lean 189-203: conjugacy, Cartesian exponential maps, right-adjoint lax monoidality, or generic triangle completion; none states this comparison for the geometric derived sheaf operations.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth|externalHom|exceptional.*evaluation",
+   "results": "0 hits: . Read the geometric Kunneth/Comparisons.lean structure and Mathlib closed-functor/adjunction files. None states equality of the two specified geometric generator comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor Hom exchange for shriek pushforward identifies external internal Hom map with ordinary product and exceptional product comparison",
+   "results": "8 hits: lTensorHomEquivHomLTensor, CategoryTheory.Types.tensorProductAdjunction, TensorProduct.lTensorHomToHomLTensor, lTensorHomEquivHomLTensor_apply, lTensorHomEquivHomLTensor_toLinearMap, TensorProduct.homTensorHomMap, homTensorHomEquiv, CategoryTheory.tensorRightHomEquiv. Read the geometric Kunneth/Comparisons.lean structure and Mathlib closed-functor/adjunction files. None states equality of the two specified geometric generator comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.Monoidal.Reflective.monoidalClosed, CategoryTheory.Monoidal.Reflective.closed, CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom, CategoryTheory.Monoidal.Reflective.isIso_tfae. Read the geometric Kunneth/Comparisons.lean structure and Mathlib closed-functor/adjunction files. None states equality of the two specified geometric generator comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "External internal Hom comparison on extension by zero finite projective sheaves equals ordinary Kunneth comparison followed by exceptional Kunneth under tensor Hom adjunction",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', CategoryTheory.expComparison, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.ihomPoints. Read the geometric Kunneth/Comparisons.lean structure and Mathlib closed-functor/adjunction files. None states equality of the two specified geometric generator comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-sf-kunneth-verdier",
@@ -85,5 +234,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-kv-beta-kunneth-evaluation",
+  "worker": "stage1",
+  "summary": "Expanded the blueprint evaluation-identification sentence into eight typed steps, retaining the statement and all coefficient hypotheses. Reused the existing Hom-chain counit formula and ordinary adjunction normalization; isolated one genuine geometric exterior projection-formula compatibility as a searched statement-only node. The proof compares uncurried morphisms and uses neither invertibility nor a claimed inverse of alpha or beta.",
+  "blueprint": "Realizes the final beta paragraph of sk-thm-sf-kunneth-verdier: finite-projective identifications, two ordinary product maps, exceptional alpha transpose, and equality with the evaluation-defined beta.",
+  "tool_uses": [
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Only the ordinary adjunction and its composite-counit normalization (clauses 1 and 3) are used; no node in this unit states them."
+   },
+   {
+    "node": "lem-pod-hom-chain-counit-formula",
+    "why": "The formal counit representative of the tensor–Hom Hom chain is needed to identify a specified map; no node of this unit supplies that representative."
+   },
+   {
+    "node": "sk-thm-sf-kunneth-relative",
+    "why": "Naturality of the specified Ku_!, the relative product composite used in the unit, is needed in step 6."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Supplies the unconditional actual constructible exceptional adjunction at finite coefficients; no ambient admissibility is assumed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-prop-adjunctions",
+  "lem-pod-hom-chain-counit-formula",
+  "sk-thm-sf-kunneth-relative",
+  "thm-sf-ambient-adjoint-class"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N2-fffe0e98e",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-fffe0e98e (reviewer sub-agent of L); spot-checked: Read in full: the item (8 steps), the new node lem-sf-exterior-projection-kunneth, every cited statement (with blueprint_update for def-exchange-projection and thm-sf-ambient-adjoint-class), def-fix-six-functor-datum, the main-20261015 sk-thm-sf-kunneth-verdier unit and its beta paragraph, and the sk-thm-sf-tensor-hom unit Hom chain. The item statement and stmt_deps are byte-identical to base. Coefficients are D^b_ctf over A_{E,n} and Rh^! is the constructible adjoint (vi), the same functor as thm-sf-ambient-adjoint-class(2), with no admissibility assumed. I recomputed each step. Step 3: e_i = mu_i P_i(u_i) PF follows from the Hom-chain lemma with t=1, uncurry laws, naturality of PF and of the counit. Step 4: the transpose of the two Ku_* maps through h=(h_1 x id)(id x h_2) is c_1 boxtimes c_2. Step 5: uncurry(gamma) = mu P(alpha) P(u) PF. Step 6: adjunct-counit identity and Ku_! naturality. Step 7: the new square. Step 8: cancelling K_F and comparing with beta's evaluation transpose. All are correct. The Hom-chain lemma's 'exceptional adjunction of fix-prop-adjunctions' is met in its own setting: def-fix-six-functor-datum clause 4 makes the constructible adjoint unconditional. New node: self-contained, statement-only and searched, with blueprint.from correct. It is not a restated clause (no Hom, alpha or beta). It is not a duplicate of lem-sf-kunneth-coherence, sk-thm-sf-kunneth-relative or the lem-trf product/projection nodes, which would give it only by a pasting that involves base change. True on identity, unit-coefficient, zero and shift cases. Accepted tool use: lem-pod-hom-chain-counit-formula; the other declared tools are on the route. FIX (E5, C1): step 3's 'transporting' replaced by the explicit naturality identities; step 8 now cites sk-def-sf-operations(i) for first-variable naturality of tensor-Hom. proof_deps unchanged. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

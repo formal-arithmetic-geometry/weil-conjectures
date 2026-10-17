@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-a1-reduction-lisse-pure",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Lisse purity of the transported complex",
@@ -12,20 +12,33 @@
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-reduction-lisse-pure.md",
   "place": "node lem-a1-reduction-lisse-pure, order 2799"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-finite-field-fiber",
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-punctual-weights",
+  "def-weil-derived-direct-image",
+  "def-compact-support-direct-image-detailed",
+  "prop-weil-operations"
+ ],
  "proof": [
   {
-   "text": "On the open\n$W:=\\mathbf A^1_{k_0}\\setminus(B\\cup g(C'_0\\setminus C_0))$\nthe morphism $g$ is finite etale, all of its inverse image lies\nin $C_0$, and\n$\\mathcal K|_W=g_*(j_!\\mathcal F)|_W$ sheaf-theoretically, so the\nlissity and the punctual purity of weight $w$ in the sense of\n[def-weil-punctual-weights] follow from\n[lem-a1-finite-map-purity].",
+   "text": "Put $W=\\mathbf A^1_{k_0}\\setminus(B\\cup g(C'_0\\setminus C_0))$; $B$ is finite because $g$ is finite and generically étale between curves, and $C'_0\\setminus C_0$ is finite, so $W$ is a dense open. By the definition of the branch locus (the image of the closed set of points where $g$ is not étale), the base change $g_W:g^{-1}(W)\\to W$ is finite (base change of a finite morphism) and étale at every point. If $x\\in g^{-1}(W)$ and $x\\notin C_0$, then $g(x)\\in g(C'_0\\setminus C_0)$, which $W$ avoids; hence $g^{-1}(W)\\subseteq C_0$. Restriction to the open $g^{-1}(W)\\subseteq C_0$ gives $(j_!\\mathcal F)|_{g^{-1}(W)}=\\mathcal F|_{g^{-1}(W)}$, and restriction of a direct image to an open of the target is the direct image of the restriction, $(g_*j_!\\mathcal F)|_W=(g_W)_*(\\mathcal F|_{g^{-1}(W)})$, compatibly with the Weil structures; so $\\mathcal K|_W$ is the finite étale pushforward of $\\mathcal F|_{g^{-1}(W)}$. That restriction is again a lisse Weil sheaf, and it is punctually $\\iota$-pure of weight $w$, since the closed points of $g^{-1}(W)$ are closed points of $C_0$ with the same residue fields and Frobenius eigenvalues [def-weil-punctual-weights]. The lissity of $\\mathcal K|_W$ follows from [lem-a1-finite-map-lisse] applied to $g_W$, and its punctual purity of weight $w$ from [lem-a1-finite-map-purity] applied to $g_W$ and the definition of punctual purity in [def-weil-punctual-weights].",
    "uses": [
-    "def-weil-punctual-weights",
-    "lem-a1-finite-map-purity"
+    "lem-a1-finite-map-lisse",
+    "lem-a1-finite-map-purity",
+    "def-weil-punctual-weights"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-punctual-weights",
-  "lem-a1-finite-map-purity"
+  "lem-a1-finite-map-lisse",
+  "lem-a1-finite-map-purity",
+  "def-weil-punctual-weights"
  ],
  "proof_origin": {
   "by": "agent",
@@ -34,7 +47,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -152,5 +165,20 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-thm-dl-a1-upper"
+ "unit": "sk-thm-dl-a1-upper",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-a1-reduction-lisse-pure",
+  "worker": "stage1",
+  "summary": "Checked the imported reduction against the current main-20261015 blueprint. The original step used the finite-map purity node for lissity although that node states purity only, so I added the strictly smaller finite étale pushforward lissity node and cited it separately. The finite étale restriction over W and the identification of j_!F with F there are elementary from the definition of W and restriction by an open immersion.",
+  "blueprint": "The single proof paragraph: over W, g is finite étale with inverse image in C_0, K restricts to g_*F, and lissity and purity follow from the two cited properties."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-e0af20576",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-e0af20576 (reviewer sub-agent of L); spot-checked: Read the whole delivery against the main-20261015 blueprint (lem-a1-reduction-lisse-pure.md/.proof.md, order 3143, same text as master 2799); the item statement is verbatim and not weakened. Fault 1 (B3/C4/C5/E1/B2): the new node lem-a1-finite-map-lisse cited def-weil-pbc-etale-sheaves for 'lisse Weil sheaf' and def-weil-pbc-direct-image for g_*. Those define finite locally constant sheaves of sets and the torsion etale direct image, not Qlbar-Weil sheaves. Read literally, the node is the finite-coefficient fact already stated by lem-weil-pbc-etale-finite-pushforward-locally-constant (Stacks 095B). Read as the item needs it, it silently identifies two coefficient categories. It also lacked the hypothesis that Y_0, X_0 are of finite type over k_0. Fixed: the statement now uses separated finite-type k_0-schemes, constructible Qlbar-Weil sheaves [def-weil-weil-sheaf-complex] with lisse underlying Qlbar-sheaf [def-pod-lisse-l-adic-sheaves] (the convention of the reviewed thm-a1-affine-curve-upper and lem-a1-affine-hc2-pure), and Rg_* [def-weil-derived-direct-image] with the Weil lift [prop-weil-operations]. Tested on an empty Y and on Spec F_{q^2}->Spec F_q (Frobenius eigenvalues ±sqrt(alpha)). It is not a duplicate in the DAG or the blueprint, and not a restated clause. Fault 2 (B3): the item's stmt_deps was empty; I filled it with the curve, scheme, Weil-sheaf, lisse, punctual-weight, direct-image, j_! and Weil-lift definitions, and rewrote the step in TeX (B4). Step check: W is a dense open; g over W is finite etale by the definition of the branch locus and base change; g^{-1}(W) lies in C_0; (j_!F)|_{C_0}=F and restriction commutes with g_*; the restriction of F is still lisse and pure. These match the hypotheses of the new node and of lem-a1-finite-map-purity, whose statement is purity only (the worker correctly flagged the source error). The route stays in unit sk-thm-dl-a1-upper, no tool_uses, no SGA, and a DFS found no cycle. Item source.document still names the master copy; left as is, since the text is unchanged.; 2 file(s) fixed by the reviewer"
+ }
 }

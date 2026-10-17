@@ -20,9 +20,139 @@
   "def-pc-fibre-product",
   "def-weil-constructible-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $r=0$, use the single open $X$ and its identity stratum. Its image is constructible: $X$ and $\\varnothing$ are retrocompact opens, since their intersections with a quasi-compact open are that open and the empty set. This is a stratification by the definition, even when $X$ is empty. For $r>0$, take all intersections $U=U_1\\cap\\cdots\\cap U_r$ of members of the given open coverings. They are open and cover $X$: for each $x\\in X$, choose one $U_j$ containing $x$ for each of the finitely many $j$. Empty intersections can be retained or discarded. Fix such a $U$ for the remaining steps.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 005G (definition-constructible), 005H (lemma-constructible); empty-family case and finite intersections of open coverings"
+   }
+  },
+  {
+   "text": "Write $S_{j,a}\\to U_j$ for the $j$-th input stratification. Pull it back along $U\\to U_j$ using [lemma-constructible-pullback-stratification]. This gives a finite stratification $S'_{j,a}=U\\times_{U_j}S_{j,a}\\to U$ with images the inverse images of the original stratum images. Those images are constructible by [lem-pur-scheme-constructible-preimage], since $U\\to U_j$ is a scheme morphism; no quasi-compactness assumption on this open is needed. Keep the projection $S'_{j,a}\\to S_{j,a}$ from [def-pc-fibre-product]. Thus all input partitions now have the same base $U$ and actual morphisms to their original strata.",
+   "uses": [
+    "lemma-constructible-pullback-stratification",
+    "lem-pur-scheme-constructible-preimage",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054I, lemma-inverse-image-constructible; scheme-theoretic base change of a stratification"
+   }
+  },
+  {
+   "text": "Construct the common partition by induction on the number $m$ of input partitions already used. At $m=1$ use $S'_{1,a}\\to U$. Given an immersion $p:P\\to U$ in the current finite partition, pull the $(m+1)$-st stratification back to $P$ by [lemma-constructible-pullback-stratification]. Its strata are $Q_a=P\\times_U S'_{m+1,a}\\to P$; they form a finite disjoint covering of $P$ with images $p^{-1}(|S'_{m+1,a}|)$. Their composites to $U$ are immersions by clause (e) of [lem-weil-pbc-proper-fp-permanence]. An immersion is injective on underlying points: factor it as closed followed by open, each a homeomorphism onto its image [def-weil-closed-immersion, def-weil-open-immersion]. Consequently the composite image is exactly $|P|\\cap|S'_{m+1,a}|$. Running over all $P$ therefore gives a disjoint covering of $U$. It is finite because it is indexed by a finite union of finite sets. This proves the inductive assertion with the actual iterated fibre products, rather than replacing an image containment by a scheme factorization.",
+   "uses": [
+    "lemma-constructible-pullback-stratification",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 02V0, lemma-composition-immersion; Tags 01IO and 01HE (immersions); finite iteration of the pullback-stratification statement"
+   }
+  },
+  {
+   "text": "At the end of this induction every image is $\\bigcap_{j=1}^r|S'_{j,a_j}|$. These images are constructible by finite-intersection closure in [def-weil-constructible-subset]. Each map is an immersion and hence gives a locally closed scheme stratum by [def-constructible-stratification]. Remove empty products. The universal property of [def-pc-fibre-product] identifies each iterated product with the chosen finite fibre product $T_\\lambda$ and supplies projections to every factor. Composing with $S'_{j,a_j}\\to S_{j,a_j}$ gives $h_{\\lambda,j}:T_\\lambda\\to S_{j,a_j}$, and the composite to $X$ equals $T_\\lambda\\xrightarrow{i_\\lambda}U\\to X$ by the defining projection equations. Thus the asserted common stratification and all its projection morphisms have been constructed.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "def-constructible-stratification",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005H, lemma-constructible; fibre-product universal property, Tags 01JP and 001V"
+   }
+  },
+  {
+   "text": "We specify the coefficient identifications used to restrict the sheaves. On the etale sites, [lem-weil-pbc-etale-inverse-image-algebraic-structures](1)-(3) gives the geometric inverse image underlying the stated abelian inverse image. On the pro-etale sites it is the geometric inverse image constructed in [def-weil-proetale-inverse-image]. Apply [lem-pe-constant-left-module-inverse-image] to either: for every scheme morphism $f:V\\to W$ it identifies $f^{-1}\\underline R_W$ with $\\underline R_V$, carrying each constant scalar to itself, and transports module structures compatibly with composition and localization. This is the specified structure map adjoint to constant sections. Indeed its adjunct and the specified adjunct both send each $a\\in R$ to the constant section $a$ on every base-changed test object; the universal property of constant sheafification makes the ring maps equal. Hence extension along this ring isomorphism gives exactly the constant-coefficient module inverse image used here, for arbitrary $R$.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "def-weil-proetale-inverse-image",
+    "lem-pe-constant-left-module-inverse-image",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi (fixed-ring modules); Tag 0H7J, example-constant-sheaf; proetale.tex Tag 09A5, section-morphism"
+   }
+  },
+  {
+   "text": "For either choice of site, pulling back a chosen trivializing covering $\\{V_b\\to S\\}$ along a morphism $h:T\\to S$ gives a covering $\\{T\\times_SV_b\\to T\\}$. For the etale site use [lem-weil-pbc-etale-covering-base-change]. For the pro-etale site the arrows remain weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change], and the covering is fpqc by [lem-galois-fpqc-covering-base-change]; this is precisely a covering in [def-weil-pbc-proetale-site]. Write $h_b:T\\times_SV_b\\to V_b$ for the projection. By [lem-weil-pbc-localize-ringed-site-morphism], applied to the morphism of sites of $h$ (base-change functor $u(V)=T\\times_SV$, constant coefficient rings and the ring map of step 5), restriction to $V_b$ followed by the localized inverse image is canonically isomorphic to inverse image followed by restriction to $u(V_b)=T\\times_SV_b$: $(h^*G)|_{T\\times_SV_b}\\cong h_b^*(G|_{V_b})$ as module sheaves on the localized site. If the original restriction on $V_b$ is $\\underline{M_b}$, applying the localized inverse image to that isomorphism identifies its pullback with $\\underline{M_b}$ on $T\\times_SV_b$ by [lem-sfb-geometric-inverse-image-constant-module]. The model is the same $R$-module $M_b$, not its underlying finite set and not a finite presentation. Its given finite generating list remains unchanged.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-galois-fpqc-covering-base-change",
+    "def-weil-pbc-proetale-site",
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-weil-pbc-localize-ringed-site-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093R, lemma-pullback-locally-constant, omitted proof expanded using constant-module inverse image and covering base change (Tags 02GO, 01S1, 094U, 022D)"
+   }
+  },
+  {
+   "text": "Here is the compatibility with inverse-image composition used in the preceding step. The fixed-ring identifications of [lem-pe-constant-left-module-inverse-image] commute with composition and localization. For the constant module comparison use the description in [lem-sfb-geometric-inverse-image-constant-module]: on underlying sets it is obtained from the coproduct of copies of the terminal sheaf indexed by $M$. For $T\\xrightarrow h S\\xrightarrow a X$, let $\\alpha:(ah)^{-1}\\simeq h^{-1}a^{-1}$ be the canonical composition isomorphism. Both the direct constant comparison $c_{ah}$ and $c_h\\circ h^{-1}(c_a)\\circ\\alpha$ carry the summand labelled $m$ to the constant section labelled $m$, for every $m\\in M$: the adjunction-compatible composition comparison identifies the two successive pullbacks of that same constant section. Equality on all coproduct inclusions implies equality of the maps. The module inverse images have these underlying set comparisons by step 5, so this is also equality of module-sheaf maps. In particular the trivializations of step 6 are compatible with the specified constant-ring isomorphisms and the inverse-image composition isomorphism.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-sfb-geometric-inverse-image-constant-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J, example-constant-sheaf; Tag 00YV, proposition-functoriality-algebraic-structures-topoi; comparison on constant coproduct inclusions"
+   }
+  },
+  {
+   "text": "Apply steps 5-7 to each projection $h_{\\lambda,j}:T_\\lambda\\to S_{j,a_j}$ from step 4 and to every chosen covering and trivialization of $F_j|_{S_{j,a_j}}$. The equation between composites to $X$ in step 4 and the composition comparison of step 7 identify its pulled-back restriction with $i_\\lambda^*(F_j|_U)$. Step 6 gives exactly the requested pulled-back covering and its unchanged finitely generated module model. Such a covering exists for each $j$ by hypothesis, so [def-weil-pbc-finite-type-locally-constant-module-sheaf] makes every $i_\\lambda^*F_j$ locally constant of finite type: over any further site object pull these coverings back again to obtain its covering-sieve formulation. The same argument applies first to the open restriction $S'_{j,a_j}\\to S_{j,a_j}$ of step 2. Together with the open covering of step 1 and the finite constructible stratification of steps 3-4, this proves every clause. Empty schemes and empty products cause no additional local requirement. Neither the construction nor the constant-module comparison required a finite underlying set for $R$ or a Noetherian ring.",
+   "uses": [
+    "def-weil-pbc-finite-type-locally-constant-module-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093R, lemma-pullback-locally-constant (fixed-ring modules); conclusion for the constructed common strata"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "lemma-constructible-pullback-stratification",
+  "lem-pur-scheme-constructible-preimage",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "def-weil-proetale-inverse-image",
+  "lem-pe-constant-left-module-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-galois-fpqc-covering-base-change",
+  "def-weil-pbc-proetale-site",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "def-weil-pbc-finite-type-locally-constant-module-sheaf",
+  "lem-weil-pbc-localize-ringed-site-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093R, lemma-pullback-locally-constant (proof omitted); explicit scheme fibre-product refinement and constant-section coherence supplied using the cited existing nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +181,52 @@
    "results": "SheafOfModules.IsFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.GeneratingSections.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.GeneratingSections.IsFiniteType.finite; Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover; SheafOfModules.localGeneratorsDataOfIsFiniteType",
    "date": "2026-10-17",
    "verdict": "no match: finite-type module predicates, ordinary locally constant functions and condensed sheaves do not state this common-stratum theorem for constant-ring module sheaves on both scheme sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite families of module sheaves over a constant ring on etale or proetale sites have simultaneous locally constant trivializations on a fibre product common stratification",
+   "results": "LightCondMod.ofSheafLightProfinite; CompHausLike.LocallyConstantModule.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; SheafOfModules.isFinitePresentation; SheafOfModules.Presentation.IsFinite; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern condensed sheaves, locally constant functions, sheaf generators, or the definition/equivalence invariance of constant sheaves; none gives simultaneous scheme stratifications and constant-module pullback on both sites"
+  },
+  {
+   "tool": "grep",
+   "query": "stratification|pullback.*constantSheaf|constantSheaf.*pullback",
+   "results": "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern condensed sheaves, locally constant functions, sheaf generators, or the definition/equivalence invariance of constant sheaves; none gives simultaneous scheme stratifications and constant-module pullback on both sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common fibre product refinement of finite constructible stratifications preserving locally constant module sheaves over an arbitrary ring",
+   "results": "SheafOfModules.Finite.hasFiniteLimits; CompHausLike.LocallyConstantModule.functor_map_val; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule; CompHausLike.LocallyConstantModule.functor_obj_val; CategoryTheory.Meq.refine; SheafOfModules.IsFiniteType; SheafOfModules.IsFiniteType.mk; SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern condensed sheaves, locally constant functions, sheaf generators, or the definition/equivalence invariance of constant sheaves; none gives simultaneous scheme stratifications and constant-module pullback on both sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"constant\"",
+   "results": "CategoryTheory.Sheaf.IsConstant; CategoryTheory.constantSheaf; CategoryTheory.Sheaf.mem_essImage_of_isConstant; CategoryTheory.Sheaf.IsConstant.mem_essImage; CategoryTheory.Sheaf.IsConstant.mk; CategoryTheory.Sheaf.isConstant_congr; CategoryTheory.constantPresheafAdj; CategoryTheory.Sheaf.isConstant_of_iso",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern condensed sheaves, locally constant functions, sheaf generators, or the definition/equivalence invariance of constant sheaves; none gives simultaneous scheme stratifications and constant-module pullback on both sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of locally constant sheaves with finitely generated module values stays locally constant and finite partitions of schemes can be refined by intersections",
+   "results": "Profinite.exists_locallyConstant_finite_aux; Profinite.exists_locallyConstant_finite_nonempty; Profinite.exists_locallyConstant_fin_two; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux; Profinite.exists_locallyConstant; AlgebraicGeometry.exists_map_preimage_le_map_preimage; CompHausLike.LocallyConstantModule.functor; TopCat.partialSections.nonempty",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern condensed sheaves, locally constant functions, sheaf generators, or the definition/equivalence invariance of constant sheaves; none gives simultaneous scheme stratifications and constant-module pullback on both sites"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstant|stratif|commonRefinement",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean (subdirectory AlgebraicGeometry)",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern condensed sheaves, locally constant functions, sheaf generators, or the definition/equivalence invariance of constant sheaves; none gives simultaneous scheme stratifications and constant-module pullback on both sites"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-adic-constructible-finite-reductions",
@@ -84,5 +256,69 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-adic-finite-stratification-pullback",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Constructed the finite common stratification by actual iterated fibre products, retained constructibility under arbitrary open restriction, and pulled every chosen local trivialization back using general geometric constant-module inverse image. Verified canonical constant-section and composition identifications on coproduct labels. All ingredients are existing nodes; no new nodes, no Lean edits or compilation.",
+  "blueprint": "det-lem-integral-models-stacks proof first paragraph, final constructibility-comparison sentence, expanded via the retained lem-sfb-adic-constructible-finite-reductions common-strata argument (Steps 6 and 8). This supplies that auxiliary common-strata input without changing the integral-model unit route.",
+  "tool_uses": [
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "The generic geometric base-change theorem constructs actual scheme strata, with their images, on arbitrary bases; it does not replace the integral-models route."
+   },
+   {
+    "node": "lem-pur-scheme-constructible-preimage",
+    "why": "Generic constructible-subset inverse image under any scheme morphism; needed for restriction to arbitrary intersections of opens without Noetherian hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Only clause (e), composition of immersions, is used to embed the iterated fibre-product strata."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "why": "Generic small-etale geometric inverse image and its agreement with the existing abelian functor; supplies the fixed-ring module comparison hypotheses."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic constant-ring and module inverse image for geometric morphisms, including composition and localization coherence; no finite coefficient assumption."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Generic base change of an etale covering used to retain each chosen trivializing cover."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-composition-base-change",
+    "why": "Generic weakly-etale base change used for the arrows of pulled-back pro-etale trivializing covers."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Generic fpqc-cover base change, used with weakly-etale base change to retain pro-etale coverings."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Generic compatibility of module inverse image with restriction to localized sites, $(f_V)^*j_V^*\\cong j_U^*f^*$; needed to pass from the pulled-back sheaf restricted to $T\\times_SV_b$ to the localized pullback of the trivialized restriction on $V_b$. No node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-constructible-pullback-stratification",
+  "lem-pur-scheme-constructible-preimage",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-localize-ringed-site-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-b048ed217",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-b048ed217 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 8 steps, every cited statement, the unit sk-lem-integral-models, the chapter, and the parent finite-reductions (Steps 6 and 8, which use the item). Sources checked: Stacks 093R (sites-modules.tex l.8435, modules over a fixed ring, proof omitted) and 054I (morphisms.tex l.4339, any morphism of schemes). The statement is correct and not weakened. It uses classical constant rings R on either site, the coefficient category the parent uses, with no hidden identification. Edge cases checked: r=0, X empty, nonreduced strata (real fibre-product projections, no factorization through images), infinite R and non-finitely-presented M. No new nodes. It does not duplicate lem-exc-proetale-pullback-locally-constant (finite A, pro-etale only), lem-sfb-pullback-constant-model-constructible (condensed, qcqs, one stratification) or det-lem-coefficient-heart-common-stratification (Noetherian, rational). Step checks: (2) restriction to an open that need not be quasi-compact is fine by 054I; (3) the induction is properly set up, and the strata are disjoint and cover U because the images are p(p^{-1}|S'|); (5) the lem-pe isomorphism equals c^f_A, since both adjuncts send constant a to constant a; (7) agreement on coproduct summands is elementary. One fault (C1/C4), repaired: Step 6 uses (h^*G)|_{T x_S V_b} = h_b^*(G|_{V_b}) without a citation. I added lem-weil-pbc-localize-ringed-site-morphism, whose hypotheses I checked and which the pro-etale analogue also cites, to the step's uses, to proof_deps and to split_report.tool_uses; the item is not reachable from it, so no cycle. The 8 declared generic tool uses are accepted. The corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
  }
 }

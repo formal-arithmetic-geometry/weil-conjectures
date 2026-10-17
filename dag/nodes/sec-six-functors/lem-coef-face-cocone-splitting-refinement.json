@@ -11,9 +11,68 @@
   "lem-coef-pinched-cube-latching",
   "lem-coef-simplicial-interval-lifting"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the types of the evaluations. If $R=\\{a_0<\\cdots<a_r\\}$ is admissible, every $a_b$ belongs to every $S_t$, since $R\\subseteq S_0\\subseteq S_t$. For $T_b=S_q\\cap[a_{b-1},a_b]$, the restricted flag $X_b=(S_t\\cap[a_{b-1},a_b])_{t=0}^q$ therefore consists of subsets of $T_b$ containing its two endpoints, and defines a $q$-simplex of $\\mathfrak C[\\Delta^{T_b}](a_{b-1},a_b)$ by [lem-coef-pinched-cube-latching]. The inclusions $\\{a_b\\}\\subseteq T_b$ and strict compatibility of the given functors identify their endpoint objects with $d_{a_b}$. Hence their images are composable in degree $q$ in $D$, whose associative simplicial composition is part of [lem-coef-simplicial-interval-lifting]; the ordered composite defining $E_R(S)$ is well typed.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definitions 1.1.5.1 and 1.1.5.3, printed pp.20–22; agent expansion of the face-cocone calculation underlying the proof of Theorem 2.2.5.1, printed p.90."
+   }
+  },
+  {
+   "text": "Check admissibility under a refinement $R\\subseteq R'\\subseteq S_0$. Consecutive elements $u<v$ of $R'$ lie in one old interval $[a_{b-1},a_b]$: an old splitting vertex strictly between them would also belong to $R'$, contradicting consecutiveness. Their new support is $S_q\\cap[u,v]\\subseteq T_b$. It is nonempty, since $u,v\\in S_0\\subseteq S_q$. The closure hypothesis on $\\mathcal F$ therefore puts it in $\\mathcal F$. This proves admissibility of $R'$, including when some new interval has no interior vertices.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definitions 1.1.5.1 and 1.1.5.3, printed pp.20–22; agent expansion of the face-cocone calculation underlying the proof of Theorem 2.2.5.1, printed p.90."
+   }
+  },
+  {
+   "text": "For one insertion, take $c\\in S_0\\setminus R$ and the unique consecutive $a<b$ of $R$ with $a<c<b$. Set $T=S_q\\cap[a,b]$, $T^-=S_q\\cap[a,c]$, $T^+=S_q\\cap[c,b]$, and write $X,X^-,X^+$ for the corresponding restricted flags. They are valid mapping simplices, since $a,c,b\\in S_0$, and $T^-,T^+\\in\\mathcal F$ by Step 2. Inside $\\mathfrak C[\\Delta^T]$, composition in [lem-coef-pinched-cube-latching] gives $X=X^+\\circ X^-$: in each degree entry, $(S_t\\cap[a,c])\\cup(S_t\\cap[c,b])=S_t\\cap[a,b]$, and a flag in a poset nerve is determined by its entries. Here the two factors are viewed under the face inclusions. Apply the composition-preserving axiom of the enriched functor $f_T$ and its strict compatibility with these inclusions to obtain $f_T(X)=f_{T^+}(X^+)\\circ f_{T^-}(X^-)$. Thus the old factor at $[a,b]$ is replaced by exactly the two new factors; all other factors are unchanged. Associativity of composition in $D$ from [lem-coef-simplicial-interval-lifting] gives $E_{R\\cup\\{c\\}}(S)=E_R(S)$. This uses only union composition and the defining functor axiom, not a separate comparison theorem.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definitions 1.1.5.1 and 1.1.5.3, printed pp.20–22; agent expansion of the face-cocone calculation underlying the proof of Theorem 2.2.5.1, printed p.90."
+   }
+  },
+  {
+   "text": "Induct on the finite number $|R'\\setminus R|$ to prove equality for every refinement. If this number is zero, $R'=R$ and the evaluations are identical. Otherwise choose $c\\in R'\\setminus R$. Step 2 makes $R\\cup\\{c\\}$ admissible, Step 3 gives $E_{R\\cup\\{c\\}}(S)=E_R(S)$, and the induction hypothesis applies to $R\\cup\\{c\\}\\subseteq R'$ with one fewer missing vertex. It gives $E_{R'}(S)=E_{R\\cup\\{c\\}}(S)$, hence the required equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definitions 1.1.5.1 and 1.1.5.3, printed pp.20–22; agent expansion of the face-cocone calculation underlying the proof of Theorem 2.2.5.1, printed p.90."
+   }
+  },
+  {
+   "text": "For any admissible $R$, the refinement $R\\subseteq S_0$ and Steps 2 and 4 show that $S_0$ is admissible and $E_R(S)=E_{S_0}(S)$. Consequently two admissible splitting sets $R_1,R_2$ have equal evaluations by comparison with this same $E_{S_0}(S)$, even if neither contains the other. This consequence is conditional on the existence of an admissible splitting; the hypotheses do not assert that one always exists.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definitions 1.1.5.1 and 1.1.5.3, printed pp.20–22; agent expansion of the face-cocone calculation underlying the proof of Theorem 2.2.5.1, printed p.90."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-simplicial-interval-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Definitions 1.1.5.1 and 1.1.5.3, printed pp.20–22; agent expansion of the face-cocone calculation underlying the proof of Theorem 2.2.5.1, printed p.90."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +101,38 @@
    "results": "{\"t\": \"2026-10-17T08:39:02Z\", \"tool\": \"grep\", \"query\": \"SimplicialThickening|SimplicialCategory.*comp\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"0e82fb4db9393861\"}",
    "date": "2026-10-17",
    "verdict": "no match: read returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54–208. Union composition, order-map functoriality, ordinary cocones and split simplicial objects do not state independence or simplicial compatibility of evaluation on a family of faces. Two distinct semantic phrasings were inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialThickening|face.*cocone|splitting.*refin",
+   "results": "{\"t\": \"2026-10-17T12:57:38Z\", \"tool\": \"grep\", \"query\": \"SimplicialThickening|face.*cocone|splitting.*refin\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"0e82fb4db9393861\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned signatures; Mathlib/AlgebraicTopology/SimplicialNerve.lean:54–208 supplies Path, union composition and order-map functors, and Mathlib/CategoryTheory/Enriched/Basic.lean:299–310 supplies the enriched functor axiom. These do not state invariance of a compatible family of face evaluations under refinement. The two distinct semantic queries were read; generator-relation identities and pointed Kan-simplex multiplication concern different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In the simplicial thickening of an ordered simplex, a flag containing a vertex is the composite of its restrictions to the two intervals at that vertex",
+   "results": "{\"t\": \"2026-10-17T12:57:38Z\", \"tool\": \"leansearch\", \"query\": \"In the simplicial thickening of an ordered simplex, a flag containing a vertex is the composite of its restrictions to the two intervals at that vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening\", \"CategoryTheory.SimplicialThickening.as\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.comp\", \"CategoryTheory.SimplicialThickening.rec\", \"CategoryTheory.SimplicialThickening.casesOn\", \"CategoryTheory.SimplicialThickening.mk\", \"SSet.stdSimplex.face\", \"CategoryTheory.SimplicialThickening.compFunctor\"], \"digest\": \"7a68e6391629166f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned signatures; Mathlib/AlgebraicTopology/SimplicialNerve.lean:54–208 supplies Path, union composition and order-map functors, and Mathlib/CategoryTheory/Enriched/Basic.lean:299–310 supplies the enriched functor axiom. These do not state invariance of a compatible family of face evaluations under refinement. The two distinct semantic queries were read; generator-relation identities and pointed Kan-simplex multiplication concern different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialThickening\", \"comp\"",
+   "results": "{\"t\": \"2026-10-17T12:57:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialThickening\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.comp_I\", \"CategoryTheory.SimplicialThickening.compFunctor\", \"CategoryTheory.SimplicialThickening.compFunctor_obj\", \"CategoryTheory.SimplicialThickening.functor_comp\", \"CategoryTheory.SimplicialThickening.comp_app\"], \"digest\": \"39bfb555afdf5e29\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned signatures; Mathlib/AlgebraicTopology/SimplicialNerve.lean:54–208 supplies Path, union composition and order-map functors, and Mathlib/CategoryTheory/Enriched/Basic.lean:299–310 supplies the enriched functor axiom. These do not state invariance of a compatible family of face evaluations under refinement. The two distinct semantic queries were read; generator-relation identities and pointed Kan-simplex multiplication concern different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For compatible simplicial enriched functors on faces of a simplex, evaluating chains of subsets by composition is invariant under adding splitting vertices",
+   "results": "{\"t\": \"2026-10-17T12:57:42Z\", \"tool\": \"leanfinder\", \"query\": \"For compatible simplicial enriched functors on faces of a simplex, evaluating chains of subsets by composition is invariant under adding splitting vertices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.PtSimplex.MulStruct.δ_castSucc_castSucc_map\", \"SimplexCategoryGenRel.standardσ_cons_assoc\", \"SimplexCategoryGenRel.standardσ_comp_standardσ\", \"SimplexCategoryGenRel.standardσ_simplicialInsert\", \"SSet.PtSimplex.MulStruct.δ_succ_castSucc_map\", \"SSet.PtSimplex.MulStruct.δ_map_of_gt\", \"SimplexCategoryGenRel.standardσ_comp_standardσ_assoc\", \"SimplexCategory.const_subinterval_eq\"], \"digest\": \"8b29f8dce247230d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned signatures; Mathlib/AlgebraicTopology/SimplicialNerve.lean:54–208 supplies Path, union composition and order-map functors, and Mathlib/CategoryTheory/Enriched/Basic.lean:299–310 supplies the enriched functor axiom. These do not state invariance of a compatible family of face evaluations under refinement. The two distinct semantic queries were read; generator-relation identities and pointed Kan-simplex multiplication concern different objects."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-rigidification-boundary-cube",
@@ -76,5 +163,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-face-cocone-splitting-refinement",
+  "worker": "stage1",
+  "summary": "Kept the statement and its two statement dependencies. Checked well-typedness, downward-closed admissibility, the single-cut degreewise union identity and functor axiom, finite insertion induction, and comparison with the canonical splitting. All steps are elementary arguments from the cited definitions and the explicit strict-compatibility hypotheses; no new nodes. No exact attachment or Mathlib match was found. Read the inherited search records and ran four item-specific searches.",
+  "blueprint": "The inherited blueprint ancestry leads to paragraph 2 (derived coefficient-adjunction and inverse-limit comparison) of prop-coef-integral-exceptional-adjoint. This item is a foundational auxiliary calculation below that paragraph: it realizes precisely the insertion/refinement sentences extracted from former step 4 of lem-coef-rigidification-boundary-cube, supporting the first proof paragraph of HTT Theorem 2.2.5.1. The parent blueprint does not itself state this combinatorial lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-64d7248fa",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-64d7248fa (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, all 5 steps, the sources, the blueprint field and the searches. I also read the full statements of its two in-unit dependencies: lem-coef-pinched-cube-latching (the C[Δ^m] subset model, with union composition and image functoriality) and lem-coef-simplicial-interval-lifting (associative unital simplicial composition). I read the parent boundary-cube proof in full; its Step 4 is where this item is used. I compared the item with its sibling face-cocone-evaluation-simplicial, which proves a different statement (compatibility with α^*), so it is not a duplicate. Step 1 checks types: R⊆S_0⊆S_t puts the cut points into every entry, and the endpoint objects are identified through the singletons in F. Step 2 is correct: for consecutive u<v of R', v≤a_b, so the support is a nonempty subset of T_b and the closure of F under nonempty subsets puts it in F. Step 3 is correct: (S_t∩[a,c])∪(S_t∩[c,b])=S_t∩[a,b] entrywise because c∈S_0; then the functor axiom of f_T, the strict compatibility hypotheses and associativity in D give the equality. Step 4 is a properly set-up induction on |R'\\R|, and Step 5 compares any two admissible splittings through S_0. Every step marked elementary is genuinely elementary. The conclusion correctly depends on an admissible splitting existing; none is claimed. I checked small cases myself: |V| up to 5, q≤2, the full family and the proper nonempty family. There were 1372 refinements and no failures of admissibility or of the union identity. An rg search of the DAG found no duplicate, and the delivery has no new nodes. HTT is not in literature/; it is recorded as WANTED and proof_origin is agent, which is right. The facts used are carried by the cited node statements. No SGA source is used and no target is involved. No tool_uses are needed and there are no fixes."
  }
 }

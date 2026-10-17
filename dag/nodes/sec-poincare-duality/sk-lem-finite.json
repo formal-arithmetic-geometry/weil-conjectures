@@ -3,43 +3,182 @@
  "blueprint": {
   "is": "sk-lem-finite",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "thm-pod-point-perfectness"
+  ]
  },
  "kind": "statement",
  "title": "Finiteness: the global sections are perfect at the point",
- "statement": "In the setting of [sk-def-set], for $K\\in\\Dctf(X,\\Lambda)$, the\nperfectness of $\\RGammac(X,K)$ at finite coefficients in\n[sk-prop-sf-trace-perfectness] extends to $\\Oe,E,\\Qlb$.\nAt every coefficient stage, $\\RGamma(X,K)$ and the duals of both\nordinary and compactly supported cohomology are also perfect point\ncomplexes: bounded with finite cohomology of finite Tor amplitude\nat finite level, with one common amplitude over $\\Oe$, bounded with\nfinite-dimensional cohomology at the field stages.",
+ "statement": "Fix distinct primes $p,\\ell$, an integer $r\\geq1$, put $q=p^r$, let $k_0=\\mathbf F_q$, and fix an algebraic closure $k=\\overline{\\mathbf F}_q$. Fix a finite extension $E/\\mathbf Q_\\ell$ in $\\overline{\\mathbf Q}_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$. Let $X_0/k_0$ be smooth of relative dimension $d\\in\\mathbf Z_{\\geq0}$, separated of finite type and geometrically connected, put $X=X_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$, and let $a_X:X\\to s$ be the structure morphism, as in [sk-def-set]. For each coefficient stage $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$ let $K\\in D^b_{ctf}(X,\\Lambda)$, with the finite-Tor and coefficient-stage conventions of [def-weil-finite-tor-amplitude]. Use the ordinary coefficient complexes $C=R\\Gamma(X,K)$ and $C_c=R\\Gamma_c(X,K)$ of [def-weil-ordinary-compact-cohomology], and write $B^\\vee=R\\operatorname{Hom}_\\Lambda(B,\\Lambda)$ for a point complex $B$.\n\nThen $C,C_c,C^\\vee,C_c^\\vee$ are perfect point complexes in the sense of [sk-def-perfect]. At finite level they are bounded with finite cohomology and finite Tor amplitude. At $\\mathcal O_E$ they have bounded finitely generated cohomology and are perfect, and their finite reductions are perfect with one common Tor amplitude independent of $n$. At the field stages $E$ and $\\overline{\\mathbf Q}_\\ell$ they are bounded with finite-dimensional cohomology.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/_section.md",
   "place": "node sk-lem-finite, order 2770"
  },
  "stmt_deps": [
   "sk-def-set",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-ordinary-compact-cohomology",
   "sk-def-perfect"
  ],
  "proof": [
   {
-   "text": "*Step 1 (finite level).* Let $\\Lambda=A_{E,n}$ and let $K$ be a\nbounded constructible complex of finite Tor amplitude. The structure\nmorphism $a_X$ is separated of finite type over the field $k$, so the\nfiniteness theorems for constructible sheaves apply: the sheaves $R^qa_{X,*}K$ and\n$R^qa_{X,!}K$ are constructible and, if the cohomology sheaves of $K$\nlie in degrees $[a,b]$, both vanish for $q\\notin[a,b+2\\dim X]$: the\ncompact-support ones by the finiteness theorem for $Ra_{X!}$ and its\ncomparison with the proper case, the ordinary ones by the\nfibrewise cohomological-dimension bound, each applied to the\ncohomology sheaves of $K$ through the spectral sequence of the truncations\n(for $K=\\Lambda[-1]$ on a point the bound is $1$, not $2\\dim X=0$).\nAt the geometric point $s$ a constructible complex is a bounded complex of\nfinite modules, so\n$\\RGammac(X,K)$ and $\\RGamma(X,K)$ are bounded with finite cohomology.\n*Step 2 (perfectness over the Noetherian ring).* Over $A=\\AEn$, a\nbounded complex with finite cohomology and finite Tor amplitude is\nrepresented by a bounded complex of finite projective modules: take a\nbounded-above resolution by finitely generated free modules, truncate it in\ndegrees at least the lower amplitude bound, and observe that the resulting\ncokernel is finitely presented of Tor-dimension zero, hence flat, hence\nprojective, finitely presented flat modules over a Noetherian ring being\nprojective.\n*Step 3 (the stages and the duals).* The uniform-tower reconstruction\nplaces $\\RGammac(X,K)$ in $D^b_{\\mathrm{fg}}(\\Oe)$ with perfect\nreductions of one common amplitude. The same holds for\n$\\RGamma(X,K)$: choose a compactification $j:X\\hookrightarrow\\bar X$\nof the separated finite-type $k$-scheme $X$, as in the definition of\n$Rf_!$ in [sk-def-ops]. Then\n$Ra_{X*}=Ra_{\\bar X*}Rj_*=Ra_{\\bar X!}Rj_*$, $\\bar X$ being proper,\ni.e. $\\RGamma(X,K)=\\RGammac(\\bar X,Rj_*K)$; and $Rj_*$ carries\n$\\Dctf(X,\\Lambda)$ to $\\Dctf(\\bar X,\\Lambda)$, with Tor amplitude\n$[a,b]\\mapsto[a,b+2\\dim X]$, compatibly with the finite reductions\n([sk-thm-sf-direct-image-tor-amplitude];\n[thm-sf-ctf-stability](iii),(vii)). So $(Rj_*K_n)_n$ is again a\nnormalized system with common bounds on the proper $\\bar X$, and the\ncompact-support case just proved, applied to $\\bar X$ and $Rj_*K$,\nplaces $\\RGamma(X,K)$ in $D^b_{\\mathrm{fg}}(\\Oe)$ with perfect\nreductions of one common amplitude. The rational and algebraically closed\nstages of $\\RGammac$ and $\\RGamma$ follow by flat extension of scalars\n([sk-def-ops]); the dual of a bounded complex of finite projective modules\nis again one, termwise.",
+   "text": "The hypotheses on $X_0$ and the coefficients are exactly those of [sk-def-set]. By [lem-pod-separated-finite-type-base-change], $X$ is separated of finite type over the field $k$. By [lem-kun-dimension-finite-type], choose a nonnegative integer $D$ bounding its Krull dimension. We will use [thm-pod-point-perfectness] with this bound $D$, the same $X_0$, and the same $K$. Its opening sentence retains the finite-field datum and coefficient stages of the Poincare conventions but explicitly permits arbitrary separated finite-type $X_0$; it does not assume the exceptional-adjoint admissibility from the conventions. Its hypothesis $K\\in D^b_{ctf}(X,\\Lambda)$ is the same finite-Tor category [def-weil-finite-tor-amplitude], and its $R\\Gamma,R\\Gamma_c$ are the same point-fibre constructions [def-weil-ordinary-compact-cohomology]. Thus every hypothesis of that theorem holds, without adding properness, admissibility, or a Weil structure to $K$.",
    "uses": [
-    "sk-def-ops",
-    "sk-thm-sf-direct-image-tor-amplitude",
-    "thm-sf-ctf-stability"
+    "sk-def-set",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-kun-dimension-finite-type",
+    "thm-pod-point-perfectness",
+    "def-weil-finite-tor-amplitude",
+    "def-weil-ordinary-compact-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/sk-lem-finite.proof.md",
+    "place": "Proof, Step 1: geometric and coefficient hypotheses; the unit record explicitly names thm:pod-point-perfectness as its point-complex interface"
+   }
+  },
+  {
+   "text": "At $\\Lambda=A_{E,n}$ apply clause 1 of [thm-pod-point-perfectness]. It states boundedness, finite cohomology and finite Tor amplitude for all four point complexes, and gives bounded finite free representatives. Finite free modules are finite projective (the identity splits the free module from itself), so these representatives give precisely the perfect point complexes of [sk-def-perfect]. In particular this includes the finite compact-support perfectness from which the present lemma starts; ordinary cohomology and both point duals are covered by the same clause.",
+   "uses": [
+    "thm-pod-point-perfectness",
+    "sk-def-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/sk-lem-finite.proof.md",
+    "place": "Proof, Steps 1 and 2: finite-level bounded finiteness, finite Tor amplitude and perfectness"
+   }
+  },
+  {
+   "text": "At $\\Lambda=\\mathcal O_E$ apply clause 2 of [thm-pod-point-perfectness] to the same integral $K$. It asserts that all four complexes belong to $D^b_{\\mathrm{fg}}(\\mathcal O_E)$ and are perfect, that reduction of each is the corresponding finite-level complex of $K_n$, and that these reductions have a Tor interval independent of $n$. The perfectness asserted there is quasi-isomorphism to a bounded complex of finite projective $\\mathcal O_E$-modules, which is exactly the equivalent form of a perfect point complex in [sk-def-perfect]. These are the integral conclusion and its required common amplitude. The duals here are duals of the point complexes, as in the theorem, so this application does not identify a sheaf coefficient dual with a point dual.",
+   "uses": [
+    "thm-pod-point-perfectness",
+    "sk-def-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/sk-lem-finite.proof.md",
+    "place": "Proof, Step 3: integral reconstruction and the common finite-reduction amplitude"
+   }
+  },
+  {
+   "text": "For $\\Lambda=E$ and $\\Lambda=\\overline{\\mathbf Q}_\\ell$ apply clause 3 of [thm-pod-point-perfectness]. It states bounded finite-dimensional cohomology for each of $C,C_c,C^\\vee,C_c^\\vee$ at these very coefficient stages. By the field characterization in [sk-def-perfect], these are perfect point complexes. Together with the finite and integral cases above, this gives the assertion at every stage.",
+   "uses": [
+    "thm-pod-point-perfectness",
+    "sk-def-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/sk-lem-finite.proof.md",
+    "place": "Proof, Step 3: scalar extension to the rational and algebraically closed stages and the point duals"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-ops",
-  "sk-thm-sf-direct-image-tor-amplitude",
-  "thm-sf-ctf-stability"
+  "sk-def-set",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-kun-dimension-finite-type",
+  "thm-pod-point-perfectness",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-ordinary-compact-cohomology",
+  "sk-def-perfect"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/sk-lem-finite.proof.md",
+  "place": "Proof, Steps 1–3, assembled through the existing thm-pod-point-perfectness interface expressly named in dag/units/sk-lem-finite.json"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isPerfect_of_finiteTorAmplitude|isPerfect_compactlySupportedGlobalSections|finiteTorAmplitude_compactlySupportedGlobalSections",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the query names project-specific perfectness declarations absent from Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "perfectness of global sections of bounded constructible finite Tor amplitude sheaf complexes",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Sheaf.Γ",
+     "CategoryTheory.HasGlobalSectionsFunctor",
+     "SheafOfModules.sectionsFunctor",
+     "CategoryTheory.constantSheafΓAdj",
+     "SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+     "CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape",
+     "SheafOfModules.Finite.hasFiniteLimits",
+     "CategoryTheory.Sheaf.coneΓ_pt"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern general derived bounds, sections, or unrelated algebra; none gives all coefficient-stage cohomology and dual perfectness clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsPerfect, finiteTorAmplitude, finite cohomology",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "loogle: unknown identifier 'DerivedCategory.IsPerfect'"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the query names project-specific perfectness declarations absent from Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible finite Tor amplitude compactly supported global sections are perfect over finite coefficient ring",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.TStructure.t",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern general derived bounds, sections, or unrelated algebra; none gives all coefficient-stage cohomology and dual perfectness clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology finite coefficient integral adic ordinary compact support cohomology perfect point complexes duals",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "BDeRhamPlus",
+     "BDeRham",
+     "instCommRingBDeRhamPlus",
+     "Condensed.profiniteSolid",
+     "localCohomology.diagram",
+     "localCohomology",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "Algebra.etaleLocus_eq_compl_support"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern general derived bounds, sections, or unrelated algebra; none gives all coefficient-stage cohomology and dual perfectness clauses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -77,5 +216,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-lem-finite",
+  "worker": "stage1",
+  "summary": "Reused the existing more general blueprint theorem thm-pod-point-perfectness, explicitly named as the unit point-complex interface, rather than creating duplicate finite, integral or field lemmas. Checked identical coefficient categories and point duals, arbitrary separated finite-type hypotheses with no exceptional-adjoint admissibility, base change and existence of a finite dimension bound. Expanded the fixed-setting shorthand and stated the four complexes explicitly; the theorem is unchanged mathematically. No new nodes or Mathlib leaves. The upstream Lean covers only parts and has integral/adic sorries, so no complete attachment is claimed.",
+  "blueprint": "Step 1 verifies the hypotheses of the point-complex interface named in the unit. Step 2 realizes blueprint Proof Steps 1–2; Steps 3–4 realize blueprint Proof Step 3 (integral common amplitude, rational/common-stage extension, and both duals). The already present thm-pod-point-perfectness is the more general statement of the same result, so its existing proof cells are reused rather than duplicated.",
+  "tool_uses": [
+   {
+    "node": "thm-pod-point-perfectness",
+    "why": "The unit statement expressly identifies thm:pod-point-perfectness as the point-complex form assembling its finite, integral, and field-stage finiteness chain. Its general separated finite-type statement specializes to this smooth geometrically connected setting; citing this existing interface avoids duplicating all of its clauses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-pod-point-perfectness"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-ND-f368b2f8e",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-f368b2f8e (reviewer sub-agent of L); spot-checked: Read in full: the item, the main-20261015 blueprint statement and proof of sk-lem-finite, the unit record, and every cited node (sk-def-set, sk-def-perfect, def-weil-finite-tor-amplitude, def-weil-ordinary-compact-cohomology, lem-pod-separated-finite-type-base-change (Mathlib leaf), lem-kun-dimension-finite-type (Lean-closed), and thm-pod-point-perfectness with its whole proof). The statement matches the blueprint: same four complexes, same stages, nothing added or weakened; the O_E common amplitude is made explicit for the reductions. The coefficient categories are the same Dctf and Fib_s Ra_*/Ra_! nodes the general theorem uses. Steps 1-4 check the hypotheses of thm-pod-point-perfectness (base change of separated finite type, Krull-dimension bound D, and the theorem's statement frees X_0 from the conventions' admissibility) and apply its clauses 1-3. Using that theorem is a citation of an existing, more general reviewed node that the unit itself names, not a D1 split. I accept its tool_use. No new nodes and no cycle. Small cases checked: point with K=Λ, Λ[-1] or 0, A^1, integral coefficients on a curve. Batch-5 check: sk-lem-finite is used in batch 5 only for finite-dimensionality of H^i and H^i_c. The trace-formula assumption takes that as a hypothesis, and the PD assumption explicitly excludes the perfectness of Rp_!. By traversal, the closure of thm-pod-point-perfectness contains no Verdier-exchange, PD, trace-formula or trace-transport node. The sec-poincare-duality and sec-trace-formula nodes it reaches are generic: definitions, adic-module algebra, the base-change leaf, filtered-localization infrastructure. So all four listed citations lie genuinely outside the assumed statements and their proofs. FIX: Step 3 asserted perfectness in the sense of sk-def-perfect without citing it (C4). I added sk-def-perfect to its uses and wrote one identifying sentence; proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

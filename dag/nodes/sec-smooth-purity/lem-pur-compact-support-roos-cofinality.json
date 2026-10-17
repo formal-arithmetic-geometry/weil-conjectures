@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-compact-support-roos-cofinality",
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-compact-support-integral-coefficient-comparison",
+  "date": "2026-10-17",
+  "group": "Q134"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "kind": "statement",
+ "title": "Cofinal restriction of a Roos tower complex",
+ "statement": "Let $\\mathcal C$ be a small site, $A$ a commutative ring, and $\\mathcal A=\\operatorname{Mod}(\\underline A)$ the category of sheaves of modules over its constant ring sheaf [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category]. Assume countable products in $\\mathcal A$ are exact. Let $K_\\bullet$ be a strict tower of cochain complexes with chain maps $t_i:K_{i+1}\\to K_i$, $i\\geq1$ [def-weil-inverse-system]. Write $\\mathsf R(K_\\bullet)=\\operatorname{Cone}(1-s:\\prod_iK_i\\to\\prod_iK_i)[-1]$, where $(sx)_i=t_ix_{i+1}$; products are termwise and for $f:X\\to Y$ the cone convention is $\\operatorname{Cone}(f)^q=Y^q\\oplus X^{q+1}$ with differential $(y,x)\\mapsto(d_Yy+f(x),-d_Xx)$. For an integer $e\\geq1$ let $K^{(e)}_n=K_{en}$ with transition $t_{en}\\cdots t_{e(n+1)-1}$. The maps between the two product arrows given by\n$$a_e(x)_n=x_{en},\\qquad b_e(y)_n=\\sum_{i=en}^{e(n+1)-1}t_{en}\\cdots t_{i-1}y_i$$\n(empty products are identities) induce a natural quasi-isomorphism $r_e:\\mathsf R(K_\\bullet)\\to\\mathsf R(K^{(e)}_\\bullet)$. These maps commute with composition of restrictions to subsequences and send a strictly compatible augmentation $P\\to K_\\bullet$, represented by its product map and zero shifted-product component, to its restricted augmentation. For a finite free commutative $A$-algebra $B$ placed in degree zero, the canonical tensor/product maps give a natural isomorphism\n$$\\mathsf R(K_\\bullet)\\otimes_A B\\cong\\mathsf R(K_\\bullet\\otimes_A B)$$\nwhich is $B$-linear, commutes with every $r_e$, and carries the augmentation maps to their scalar extensions. All these assertions use the specified maps on complexes, before passing to the derived category [def-weil-abstract-derived-category].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos model; agent auxiliary: explicit cofinal block map and finite-free scalar comparison extracted from item proof step 5.",
+  "note": "The block-map theorem is agent-formulated, not asserted to be the literal statement of Tag 0941; its argument is retained in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cofinal subsequence of a tower has a quasi-isomorphic Roos complex with explicit finite block sums",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.exists_iso_Q_obj_of_isGE; AlgebraicTopology.DoldKan.Q_is_eventually_constant; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; CochainComplex.cm5b.instQuasiIsoIntP; DerivedCategory.right_fac_of_isStrictlyLE; DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary inverse-system equivalences, generic quasi-isomorphisms or exact functors do not state the explicit cofinal Roos map and its scalar/augmentation normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsLimit cofinal inverse system",
+   "results": "none; loogle: Unknown identifier `cofinal`",
+   "date": "2026-10-17",
+   "verdict": "invalid query; no absence conclusion drawn from this query"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|cofinal.*subsequence|homotopy.*limit",
+   "results": "Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean; Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean; Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean; Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary inverse-system equivalences, generic quasi-isomorphisms or exact functors do not state the explicit cofinal Roos map and its scalar/augmentation normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Explicit quasi-isomorphism between Roos complexes of a tower and its cofinal subsequence",
+   "results": "QuasiIso; quasiIso_of_comp_right; CategoryTheory.ShortComplex.QuasiIso.casesOn; quasiIso_comp; HomologicalComplex.mem_quasiIso_iff; HomologicalComplex.quasiIso; quasiIso_of_isIso; quasiIso_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary inverse-system equivalences, generic quasi-isomorphisms or exact functors do not state the explicit cofinal Roos map and its scalar/augmentation normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit is unchanged after retaining every e-th term of a sequential tower",
+   "results": "InverseSystem.pEquivOnLim; InverseSystem.globalEquiv; InverseSystem.globalEquiv_compatibility; InverseSystem.invLimEquiv_apply_coe; InverseSystem.globalEquiv_naturality; InverseSystem.invLimEquiv; InverseSystem.piLTLim; InverseSystem.invLimEquiv_symm_apply_coe",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary inverse-system equivalences, generic quasi-isomorphisms or exact functors do not state the explicit cofinal Roos map and its scalar/augmentation normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsCofilteredOrEmpty",
+   "results": "none; loogle: unknown identifier 'CategoryTheory.Limits.IsCofilteredOrEmpty'",
+   "date": "2026-10-17",
+   "verdict": "invalid query; no absence conclusion drawn from this query"
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|Roos|derived limit",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary inverse-system equivalences, generic quasi-isomorphisms or exact functors do not state the explicit cofinal Roos map and its scalar/augmentation normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofinal subsequence of an inverse tower preserves derived inverse limit",
+   "results": "InverseSystem.limit; InverseSystem.isNatEquiv_piEquivLim; InverseSystem.invLimEquiv.congr_simp; InverseSystem.invLimEquiv_symm_apply_coe; IsCofinal.trans; InverseSystem.globalEquiv; InverseSystem.PEquivOn.restrict_equiv; InverseSystem.PEquivOn.restrict",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary inverse-system equivalences, generic quasi-isomorphisms or exact functors do not state the explicit cofinal Roos map and its scalar/augmentation normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Roos\"",
+   "results": "Std.DTreeMap.Internal.Unit.RooSlice; Std.DTreeMap.Internal.Unit.RooSliceData; Std.DTreeMap.Internal.Const.RooSlice; Std.DTreeMap.Internal.Const.RooSliceData; Std.DTreeMap.Internal.RooSlice; Std.DTreeMap.Internal.RooSliceData; Std.DTreeMap.Internal.Unit.RooSliceData.range; Std.DTreeMap.Internal.Const.RooSliceData.range",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary inverse-system equivalences, generic quasi-isomorphisms or exact functors do not state the explicit cofinal Roos map and its scalar/augmentation normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyLimit\"",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary inverse-system equivalences, generic quasi-isomorphisms or exact functors do not state the explicit cofinal Roos map and its scalar/augmentation normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cofinal\"",
+   "results": "IsCofinal; IsCofinalFor; IsCofinalFor.rfl; IsCofinalFor.nonempty; IsCofinalFor.of_subset; LE.le.isCofinalFor; IsCofinalFor.union_left; IsCofinalFor.union_right",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary inverse-system equivalences, generic quasi-isomorphisms or exact functors do not state the explicit cofinal Roos map and its scalar/augmentation normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "invLimEquiv|pEquivOnLim",
+   "results": "Mathlib/Order/DirectedInverseSystem.lean; Mathlib/Order/DirectedInverseSystem.lean; Mathlib/Order/DirectedInverseSystem.lean; Mathlib/Order/DirectedInverseSystem.lean; Mathlib/Order/DirectedInverseSystem.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary inverse-system equivalences, generic quasi-isomorphisms or exact functors do not state the explicit cofinal Roos map and its scalar/augmentation normalization"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary for integral coefficient comparison proof step 5 (cofinal Roos map)",
+   "via": [
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

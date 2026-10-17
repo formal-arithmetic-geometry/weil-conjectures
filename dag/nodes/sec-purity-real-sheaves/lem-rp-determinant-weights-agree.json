@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-rp-determinant-weights-agree",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Rank-one purity discharges the finite-determinant hypotheses",
@@ -14,48 +14,147 @@
  },
  "stmt_deps": [
   "d-weights",
-  "def-wf-determinantal-weight"
+  "def-wf-determinantal-weight",
+  "def-pc-curve",
+  "def-wf-fundamental-representation",
+  "def-weil-punctual-weights"
  ],
  "proof": [
   {
-   "text": "A continuous $\\Qlb$-representation of $W(X_0)$ is defined over a finite\nextension $E$ of $\\mathbf Q_\\ell$, and so are its irreducible\nsubquotients after enlarging $E$. Hence the determinant line\n$\\det\\mathcal Q$ of [def-mg-determinant-line] is given by a continuous\ncharacter $\\chi_{\\det}=\\det\\circ\\rho_{\\mathcal Q}:W(X_0)\\to E^\\times$\nwith $E/\\mathbf Q_\\ell$ finite. The finite geometric image theorem\n[thm-wf-rank-one-finite-geometric-image-curve], applied to the normal\ngeometrically connected curve $X_0$ and to $\\chi_{\\det}$, says that\n$\\chi_{\\det}(\\pi_1(X))$ is finite; this is finite geometric determinant.",
+   "text": "Use the finite-field and coefficient conventions of [def-weil-punctual-weights]: $q>1$ and $\\ell\\nmid q$. By [def-pc-curve], $X_0$ is integral, separated, finite type over $k_0$, and of dimension one, hence pure of dimension one. Put $X=X_0\\times_{k_0}k$ and $\\Pi=\\pi_1(X,\\bar x)$. Geometric connectedness makes $X$ connected. These are the scheme hypotheses needed below. In particular $X$ is Noetherian and separated, as required for the coefficient conventions: after extending scalars, a finite affine cover with finitely generated coordinate algebras remains such a cover (the same generators generate $A\\otimes_{k_0}k$ over $k$). Apply [pqf-lem-locnoeth-lft] over the Noetherian field $k$ and use this finite cover for quasi-compactness. Separatedness persists since the diagonal is cut out locally by ideals, whose extended ideals cut out the diagonal after scalar extension. Let $V$ be the stalk of the nonzero lisse Weil sheaf $\\mathcal Q$, with the geometric action, degree-one operator $T_s$, and Weil action $\\rho$ of [def-wf-fundamental-representation].",
+   "uses": [
+    "def-weil-punctual-weights",
+    "def-pc-curve",
+    "pqf-lem-locnoeth-lft",
+    "def-wf-fundamental-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-rp-determinant-weights-agree.proof.md",
+    "place": "Paragraph 1: hypotheses and fundamental representation"
+   }
+  },
+  {
+   "text": "By [def-pod-lisse-l-adic-sheaves](4), the underlying lisse $\\Qlb$-sheaf has a lisse $E$-model for some finite $E/\\mathbf Q_\\ell$. By [cor-galois-lisse-representations](2), its fibre has a continuous geometric $E$-representation, and extending scalars gives $\\rho_{\\rm geom}$. Choose an $E$-basis of that fibre. Enlarge $E$ to contain the finitely many matrix entries of $T_s$ and $T_s^{-1}$; each entry is algebraic over $\\mathbf Q_\\ell$, so adjoining finitely many keeps the extension finite. The identity $T_s\\rho_{\\rm geom}(g)T_s^{-1}=\\rho_{\\rm geom}(sgs^{-1})$ in [def-wf-fundamental-representation] then holds over $E$: both matrices have entries there and their equality can be checked in $\\Qlb$. By [lem-wf-weil-fundamental-representation], $\\rho(gs^n)=\\rho_{\\rm geom}(g)T_s^n$. Thus this same formula takes values in $\\operatorname{GL}_r(E)$ and realizes the Weil representation over $E$. It is continuous: the geometric $E$-action is continuous by the cited equivalence; on each open degree coset it is that action multiplied by the fixed matrix $T_s^n$. No irreducibility or assertion about subquotients is needed here.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "cor-galois-lisse-representations",
+    "def-wf-fundamental-representation",
+    "lem-wf-weil-fundamental-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-rp-determinant-weights-agree.proof.md",
+    "place": "Paragraph 1: finite coefficient field, expanded for this particular sheaf"
+   }
+  },
+  {
+   "text": "By [def-mg-determinant-line], the rank-one sheaf $\\det\\mathcal Q$ has character $\\chi_{\\det}=\\det\\circ\\rho:W(X_0)\\to E^\\times$. This character is continuous: in the chosen basis its value is the finite determinant polynomial in the continuous matrix entries of $\\rho$, and its inverse is the same polynomial evaluated at $\\rho(w^{-1})$. Apply [thm-wf-rank-one-finite-geometric-image-curve]. Its curve hypotheses hold by step 1, its coefficient field is the finite $E$ from step 2, and $\\ell\\nmid q$. It gives that $\\chi_{\\det}(\\Pi)$ is finite. In the Weil degree datum [d-monodromy], $P=\\Pi$, so this is exactly finiteness of $\\delta_{\\mathcal Q}(P)$ in [d-weights]. This proves the first clause for every nonzero $\\mathcal Q$, with no assumption of irreducibility.",
    "uses": [
     "def-mg-determinant-line",
-    "thm-wf-rank-one-finite-geometric-image-curve"
+    "thm-wf-rank-one-finite-geometric-image-curve",
+    "d-monodromy",
+    "d-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-rp-determinant-weights-agree.proof.md",
+    "place": "Paragraph 1: determinant character and finite geometric image"
+   }
   },
   {
-   "text": "Let $r$ be the rank of $\\mathcal Q$ and $s$ a degree-one element. By\n[cor-wf-rank-one-punctual-purity-curve], $\\det\\mathcal Q$ is punctually\n$\\iota$-pure of weight\n\n$$\n2\\log_q|\\iota(\\chi_{\\det}(s))|=\\lambda_\\iota(\\det\\rho_{\\mathcal Q}(s)).\n$$",
+   "text": "Choose the same degree-one lift $s$ in the Weil degree datum. By [cor-wf-rank-one-punctual-purity-curve], applied to the continuous $E^\\times$-valued character of step 3 and the restriction of the fixed $\\iota$ to $E$, the determinant line is punctually $\\iota$-pure of weight $b=2\\log_q|\\iota(\\chi_{\\det}(s))|$. The character value is nonzero because it is a determinant of an invertible operator. Expanding $\\log_q$ and $\\lambda_\\iota$ as in [d-weights] gives $b=2\\log|\\iota(\\det\\rho(s))|/\\log q=\\lambda_\\iota(\\det\\rho(s))$. All hypotheses of the corollary are those already checked in steps 1–3, and an isomorphism $\\iota$ is in particular an embedding.",
    "uses": [
-    "cor-wf-rank-one-punctual-purity-curve"
+    "cor-wf-rank-one-punctual-purity-curve",
+    "d-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-rp-determinant-weights-agree.proof.md",
+    "place": "Paragraph 2: explicit punctual purity weight"
+   }
   },
   {
-   "text": "If $\\mathcal Q$ is irreducible, the uniqueness in\n[lem-wf-determinantal-weight-exists] identifies this number with the\nweight $a$ used in [def-wf-determinantal-weight], so\n\n$$\n\\dw_\\iota(\\mathcal Q)=\\frac{a}{r}\n=\\frac{\\lambda_\\iota(\\det\\rho_{\\mathcal Q}(s))}{r}\n=\\dw_{\\lambda_\\iota}(\\mathcal Q).\n$$",
+   "text": "Now assume $\\mathcal Q$ irreducible and write $r=\\operatorname{rank}\\mathcal Q>0$. By [lem-wf-determinantal-weight-exists], there is exactly one real punctual purity weight $a$ of its determinant line. Step 4 supplies such a weight $b$, hence $a=b$. By [def-wf-determinantal-weight] and [d-weights], with the same degree-one lift $s$, respectively $\\dw_\\iota(\\mathcal Q)=a/r$ and $\\dw_{\\lambda_\\iota}(\\mathcal Q)=\\lambda_\\iota(\\det\\rho(s))/r$. Substitute $a=b=\\lambda_\\iota(\\det\\rho(s))$ to obtain the claimed equality. The finite geometric determinant hypothesis in the latter definition was proved in step 3.",
    "uses": [
     "lem-wf-determinantal-weight-exists",
-    "def-wf-determinantal-weight"
+    "def-wf-determinantal-weight",
+    "d-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-rp-determinant-weights-agree.proof.md",
+    "place": "Paragraph 3: uniqueness and division by rank"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-punctual-weights",
+  "def-pc-curve",
+  "pqf-lem-locnoeth-lft",
+  "def-wf-fundamental-representation",
+  "def-pod-lisse-l-adic-sheaves",
+  "cor-galois-lisse-representations",
+  "lem-wf-weil-fundamental-representation",
   "def-mg-determinant-line",
   "thm-wf-rank-one-finite-geometric-image-curve",
+  "d-monodromy",
+  "d-weights",
   "cor-wf-rank-one-punctual-purity-curve",
   "lem-wf-determinantal-weight-exists",
   "def-wf-determinantal-weight"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-rp-determinant-weights-agree.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/lem-rp-determinant-weights-agree.proof.md",
+  "place": "Paragraphs 1–3; coefficient descent and scheme hypotheses expanded from the cited existing nodes."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"detWeight\"",
+   "results": "No hits. ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasFiniteGeometricDet|detWeight|determinantal|punctual.*pur",
+   "results": "No hits. ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lisse Weil sheaf on a normal geometrically connected curve over a finite field has finite geometric determinant and its determinantal purity weight equals the normalized logarithm of the determinant at degree one",
+   "results": "Hits: FunctionField.classNumber, NumberField.dedekindZeta_residue, NumberField.Units.finrank_mul_regOfFamily_eq_det, NumberField.Units.finrank_mul_regulator_eq_det, NumberField.dedekindZeta_residue_def, NumberField.Units.regOfFamily_eq_det, NumberField.Units.regulator_eq_det, NumberField.Units.regOfFamily_eq_det'.  Results concern ordinary linear algebra, number-field regulators, class numbers or Hilbert 90, not finite geometric determinant and purity of lisse Weil sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The determinant of a lisse Weil sheaf on a curve over a finite field has finite geometric monodromy and its purity weight is the logarithm of its degree one Frobenius eigenvalue",
+   "results": "Hits: LinearMap.finiteDimensional_of_det_ne_one, WittVector.instIsocrystalStandardOneDimIsocrystal, LinearMap.det_conj, LinearMap.detAux_def, LinearMap.det_eq_det_mul_det, LinearEquiv.isUnit_det, LinearEquiv.det, LinearEquiv.det_conj.  Results concern ordinary linear algebra, number-field regulators, class numbers or Hilbert 90, not finite geometric determinant and purity of lisse Weil sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous representation of the Weil group of a finite field curve, the determinant character has finite image on the geometric fundamental group and the normalized determinant weight agrees with punctual purity",
+   "results": "Hits: groupCohomology.norm_ofAlgebraAutOnUnits_eq, groupCohomology.exists_div_of_norm_eq_one, groupCohomology.Hilbert90.aux_ne_zero, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, groupCohomology.Hilbert90.aux, NumberField.dedekindZeta_residue, NumberField.Units.finrank_mul_regOfFamily_eq_det, NumberField.dedekindZeta_residue_def.  Results concern ordinary linear algebra, number-field regulators, class numbers or Hilbert 90, not finite geometric determinant and purity of lisse Weil sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilGroup|IsPunctuallyPure|frobeniusWeight|geometric.*determinant",
+   "results": "No hits. ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -82,5 +181,22 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-d-real-detweights"
+ "unit": "sk-d-real-detweights",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-rp-determinant-weights-agree",
+  "worker": "stage1",
+  "group": "Q52",
+  "summary": "Retained both clauses and the rank-one route. Made finite coefficient descent, character continuity, curve hypotheses, and the degree-datum identification explicit. Reused existing nodes throughout; no new nodes. Searched source Lean and Mathlib; no exact complete attachment or Mathlib match. Checked every citation against its statement.",
+  "blueprint": "Main-20261015 proof paragraph 1 is realized by steps 1–3, paragraph 2 by step 4, and paragraph 3 by step 5. Unit sk-d-real-detweights uses rank-one purity; that route is unchanged. The item is not the unit key node, so no unit realization fields are edited.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-b32cb65db",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-b32cb65db (reviewer sub-agent of L); spot-checked: Read the item, the main-20261015 statement and proof, the unit sk-d-real-detweights, and every cited statement (with blueprint_update texts). The delivery adds 0 new nodes and leaves the statement unchanged; proof_deps equals the union of the step uses, and review_split.py passes with no route notes. Step 1: def-pc-curve gives integral, separated, finite type, dim 1, hence pure dim 1; X is Noetherian via pqf-lem-locnoeth-lft (Stacks 01T6) plus quasi-compactness, separated by base change, and l is invertible. These hypotheses match those of def-pod-lisse(4), cor-galois-lisse(2) and thm-wf-rank-one-finite-geometric-image-curve. Step 2: the E-model, plus adjoining the finitely many algebraic entries of T_s^{±1}, gives a continuous Weil representation over a finite E; this is a correct sheaf-specific replacement of the blueprint's loose descent claim. Step 3: det∘rho is continuous, the rank-one theorem gives finite image on Pi, and P=Pi by d-monodromy, so the first clause holds without irreducibility. Step 4: the corollary allows the restricted embedding and gives 2log_q|iota(det rho(s))| = lambda_iota(det rho(s)). Step 5: uniqueness from lem-wf-determinantal-weight-exists gives a=b; both definitions divide by the same rank r>0, so the two weights agree. Edge cases checked: rank one; Qlb(-1); an irreducible rank-2 family with det Qlb(-1); changing s by u in Pi changes det only by a root of unity; reducible sheaves (first clause only). Batch-5 flags: def-pod-lisse-l-adic-sheaves, def-wf-fundamental-representation, d-monodromy and def-weil-punctual-weights are general definitions. cor-galois-lisse-representations and lem-wf-weil-fundamental-representation are foundational Galois/lisse facts that neither the trace-formula leaf nor the Poincare-duality leaf gives, and they are not steps of either proof. The existing stmt_dep def-wf-determinantal-weight already reaches them through lem-wf-determinantal-weight-exists. All accepted. No fixes, no tool_uses, no SGA."
+ }
 }

@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-weil-local-frobenius-conjugacy-class",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Independence of the local Frobenius operator from the embedding",
- "statement": "Fix the finite-field datum $p,a,q,k_0,k$, a prime $\\ell\\neq p$, a finite\nextension $E/\\Ql$, a finite-type $k_0$-scheme $Y_0$ with\n$Y=Y_0\\times_{k_0}k$, a Weil complex $K\\in D^b_{c,\\mathrm W}(Y,E)$, a closed\npoint $y\\in|Y_0|$ of degree $r=[\\kappa(y):\\Fq]$, and an integer $j\\in\\mathbf\nZ$. For two embeddings $\\kappa(y)\\hookrightarrow k$ with associated geometric\npoints $\\bar y,\\bar y'\\to Y$, the local operators $F_y$ and $F'_y$ on the\nstalks of the cohomology sheaf $\\mathcal H^j(\\operatorname{For}K)$\nconstructed in [def-weil-local-frobenius-trace] are conjugate: there is an\nisomorphism $\\mathcal H^j(\\operatorname{For}K)_{\\bar y}\\cong \\mathcal\nH^j(\\operatorname{For}K)_{\\bar y'}$ carrying $F_y$ to $F'_y$.",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ [def-weil-finite-field-fiber], a prime $\\ell\\neq p$, a finite\nextension $E/\\Ql$ [def-weil-l-adic-coefficient-extension], a finite-type $k_0$-scheme $Y_0$ with\n$Y=Y_0\\times_{k_0}k$, a Weil complex $K\\in D^b_{c,\\mathrm W}(Y,E)$, a closed\npoint $y\\in|Y_0|$ of degree $r=[\\kappa(y):\\Fq]$, and an integer $j\\in\\mathbf\nZ$. For two $k_0$-embeddings $\\kappa(y)\\hookrightarrow k$ with associated geometric\npoints $\\bar y,\\bar y'\\to Y$, the local operators $F_y$ and $F'_y$ on the\nstalks of the cohomology sheaf $\\mathcal H^j(\\operatorname{For}K)$\nconstructed in [def-weil-local-frobenius-trace] are conjugate: there is an\nisomorphism $\\mathcal H^j(\\operatorname{For}K)_{\\bar y}\\cong \\mathcal\nH^j(\\operatorname{For}K)_{\\bar y'}$ carrying $F_y$ to $F'_y$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/lem-weil-local-frobenius-conjugacy-class.md",
   "place": "node lem-weil-local-frobenius-conjugacy-class, order 2429"
@@ -16,30 +16,164 @@
   "def-weil-local-frobenius-trace",
   "def-weil-derived-cohomology-sheaves",
   "def-weil-scheme-morphism-properties",
-  "def-weil-weil-sheaf-complex"
+  "def-weil-weil-sheaf-complex",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension"
  ],
  "proof": [
   {
-   "text": "Two embeddings $\\kappa(y)\\hookrightarrow k$ differ by an element of\n$\\operatorname{Gal}(k/k_0)$, because $k$ is the fixed algebraic closure of the\nfinite field $k_0$ and $\\kappa(y)$ is a finite field; the associated\ngeometric points $\\bar y$ and $\\bar y'$ of $Y$ are therefore related by a\npower of the geometric-Frobenius automorphism $g_Y$ of\n[def-weil-frobenius-detailed]. That automorphism induces an isomorphism between the\nstalks of the cohomology sheaf $\\mathcal H^j(\\operatorname{For}K)$ at the two\npoints, and the Weil isomorphism is an isomorphism\n$Lg_Y^*\\operatorname{For}(K)\\xrightarrow{\\sim}\\operatorname{For}(K)$, which\nintertwines the local operator built at $\\bar y$ with the one built at its\ntranslate. Iterating this and using the $r$-fold return prescribed in\n[def-weil-local-frobenius-trace] transports $F_y$ to $F'_y$, which is the\nconjugacy asserted.",
+   "text": "Put $L=\\kappa(y)$, $M=\\operatorname{For}K$, $s=\\operatorname{Spec}k$, $h=\\operatorname{Spec}(\\gamma)$, $g=g_Y$ and $G=Lg^*$. By [lem-kun-closed-point-field](a), $L/k_0$ is finite, of positive degree $r$. By [lem-sfb-finite-field-galois-frobenius], it is normal and its automorphisms are the powers of $u\\mapsto u^q$, of order $r$. Consequently, for the two $k_0$-embeddings $e,e':L\\to k$ there is $0\\leq t<r$ with $e'=\\sigma^t e$, where $\\sigma=\\gamma^{-1}$: normality shows that every root in $k$ of an element's minimal polynomial lies in $e(L)$, hence $e'(L)=e(L)$, and the assertion follows by applying the cyclic Galois statement to $e^{-1}e'$. Define $z_i=g^i\\bar y h^{-i}$ for $i\\geq0$. The affine formula for $g$ in [def-weil-frobenius-detailed] shows that $z_i$ is the $k$-point associated with $\\sigma^i e$: on $A_0\\otimes_{k_0}k$ it is $a\\otimes b\\mapsto\\sigma^i(e(a))b$, with $a$ first evaluated in $L$. Thus $z_t=\\bar y'$, $z_{i+r}=z_i$ and $g^n z_i=z_{i+n}h^n$ for every $n\\geq0$. This uses reparametrized points, not the false equality $g^r z_i=z_i$ of scheme morphisms.",
    "uses": [
-    "def-weil-frobenius-detailed",
+    "lem-kun-closed-point-field",
+    "lem-sfb-finite-field-galois-frobenius",
+    "def-weil-frobenius-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/lem-weil-local-frobenius-conjugacy-class.md",
+    "place": "## Proof, expanded with semilinear source reparametrizations and the cyclic-product calculation"
+   }
+  },
+  {
+   "text": "Write $J_i(N)=\\operatorname{Fib}_s(Lz_i^*N)$, the rational point-complex functor of [def-weil-local-frobenius-trace]. The natural composition comparisons of [lem-pod-integral-pullback-composition], localized to $E$ as prescribed in [def-weil-derived-pullback-tensor-hom], identify $J_i(GN)$ with $\\operatorname{Fib}_s(Lh^*Lz_{i+1}^*N)$, since $gz_i=z_{i+1}h$. Define\n$$\\tau_i(N):J_{i+1}(N)\\xrightarrow{\\iota_{Lz_{i+1}^*N}}\\operatorname{Fib}_s(Lh^*Lz_{i+1}^*N)\\xrightarrow{\\sim}J_i(GN).$$\nHere $\\iota$ is the specified point transport of [def-weil-frobenius-point-transport], natural by [lem-weil-frobenius-point-transport-natural](2), and invertible by [lem-weil-frobenius-cohomology-transport-iso](1). For this last citation take its auxiliary $Y_0=\\operatorname{Spec}k_0$: its clause (1) concerns every point complex on $s$, so it imposes no separatedness on our $Y_0$. All the comparisons and transports are $E$-linear and natural in $N$. In particular $\\tau_i(B)J_{i+1}(u)=J_i(Gu)\\tau_i(A)$ for $u:A\\to B$. Since $z_{i+r}=z_i$, these definitions give $J_{i+r}=J_i$ and $\\tau_{i+r}=\\tau_i$ under the equality-of-point identifications.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-frobenius-point-transport",
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-weil-frobenius-cohomology-transport-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/lem-weil-local-frobenius-conjugacy-class.md",
+    "place": "## Proof, expanded with semilinear source reparametrizations and the cyclic-product calculation"
+   }
+  },
+  {
+   "text": "Define $Q_{i,0}(N)=1$ and\n$$Q_{i,n}(N)=\\tau_i(G^{n-1}N)\\cdots\\tau_{i+n-1}(N):J_{i+n}(N)\\longrightarrow J_i(G^nN).$$\nUnder $g^nz_i=z_{i+n}h^n$, this is exactly the $n$-fold point transport $I^{[n]}_{Lz_{i+n}^*N}$ followed by the composition comparison to $J_i(G^nN)$. Here is the induction checking that identification, including its normalization. For $n=0$ both are identities, and for $n=1$ it is the definition of $\\tau_i$. Suppose it is true for $n$ starting at $i+1$. The equality $Q_{i,n+1}(N)=\\tau_i(G^nN)Q_{i+1,n}(N)$ first applies $I^{[n]}_B$, where $B=Lz_{i+n+1}^*N$. The identification $Lz_{i+1}^*G^nN\\cong L(h^n)^*B$ comes from $g^nz_{i+1}=z_{i+n+1}h^n$. Naturality of $\\iota$ in [lem-weil-frobenius-point-transport-natural](2) moves this identification past the remaining transport, making that transport $\\iota_{L(h^n)^*B}$. Their composite is $I^{[n+1]}_B$ by the definition in [def-weil-local-frobenius-trace]. Associativity of [lem-pod-integral-pullback-composition], rationalized using [def-weil-derived-pullback-tensor-hom], identifies the remaining comparison with the one for $g^{n+1}z_i=z_{i+n+1}h^{n+1}$. This proves the induction with the specified maps, without choosing an integral Weil lattice.",
+   "uses": [
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-local-frobenius-trace",
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/lem-weil-local-frobenius-conjugacy-class.md",
+    "place": "## Proof, expanded with semilinear source reparametrizations and the cyclic-product calculation"
+   }
+  },
+  {
+   "text": "Let $C_i=J_i(M)$ and $\\theta:GM\\xrightarrow{\\sim}M$ be the Weil structure. Put $A_i=J_i(\\theta)\\tau_i(M):C_{i+1}\\xrightarrow{\\sim}C_i$ and $P_{i,n}=A_i\\cdots A_{i+n-1}$, with $P_{i,0}=1$. Expanding the recursion for $\\theta^{[n]}$ in [def-weil-local-frobenius-trace] gives $\\theta^{[n]}=\\theta\\circ G\\theta\\circ\\cdots\\circ G^{n-1}\\theta$; in particular $\\theta^{[n+1]}=\\theta\\circ G(\\theta^{[n]})$, with $\\theta^{[0]}=1$. We claim $P_{i,n}=J_i(\\theta^{[n]})Q_{i,n}(M)$. It holds for $n=0$. If it holds at $i+1,n$, naturality of $\\tau_i$ for $u=\\theta^{[n]}:G^nM\\to M$ gives\n$$\\begin{aligned}\nP_{i,n+1}&=J_i(\\theta)\\tau_i(M)J_{i+1}(\\theta^{[n]})Q_{i+1,n}(M)\\\\\n&=J_i(\\theta)J_i(G\\theta^{[n]})\\tau_i(G^nM)Q_{i+1,n}(M)\\\\\n&=J_i(\\theta^{[n+1]})Q_{i,n+1}(M).\n\\end{aligned}$$\nThe naturality used here is precisely that of [lem-weil-frobenius-point-transport-natural] and the pullback comparisons [lem-pod-integral-pullback-composition], localized as in [def-weil-derived-pullback-tensor-hom]. Thus the induction is a calculation with the already specified natural transformations, not an assertion of Frobenius compatibility without a calculation.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/lem-weil-local-frobenius-conjugacy-class.md",
+    "place": "## Proof, expanded with semilinear source reparametrizations and the cyclic-product calculation"
+   }
+  },
+  {
+   "text": "Set $n=r$. Now $z_{i+r}=z_i$, so step 3 identifies $Q_{i,r}(M)$ with the return transport $I^{[r]}_{Lz_i^*M}$ and its specified comparison. Step 4 therefore says\n$$F_i=J_i(\\theta^{[r]})Q_{i,r}(M)=A_iA_{i+1}\\cdots A_{i+r-1}:C_i\\xrightarrow{\\sim}C_i,$$\nwhere $F_i$ is exactly the local operator of [def-weil-local-frobenius-trace] at the embedding $\\sigma^ie$. In particular $F_0=F_y$ and $F_t=F'_y$ at the level of rational point complexes. No replacement of the geometric return $g^rz_i=z_ih^r$ by a fixed-point equality was made.",
+   "uses": [
     "def-weil-local-frobenius-trace"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/lem-weil-local-frobenius-conjugacy-class.md",
+    "place": "## Proof, expanded with semilinear source reparametrizations and the cyclic-product calculation"
+   }
+  },
+  {
+   "text": "Since $A_{i+r}=A_i$, the displayed products satisfy\n$$F_iA_i=(A_i\\cdots A_{i+r-1})A_i=A_i(A_{i+1}\\cdots A_{i+r})=A_iF_{i+1}.$$\nLet $T=A_0\\cdots A_{t-1}:C_t\\xrightarrow{\\sim}C_0$, taking $T=1$ when $t=0$. Repeated substitution in this equality gives $F_0T=TF_t$. Thus $U=T^{-1}:C_0\\xrightarrow{\\sim}C_t$ satisfies $UF_0=F_tU$. This is just associativity and cancellation of invertible maps; it does not require a separate conjugacy lemma.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/lem-weil-local-frobenius-conjugacy-class.md",
+    "place": "## Proof, expanded with semilinear source reparametrizations and the cyclic-product calculation"
+   }
+  },
+  {
+   "text": "Apply the cohomology functor $\\mathrm H^j$ of [def-weil-coefficient-cohomology-modules] to $U$ and to $UF_0=F_tU$. Functoriality carries $U^{-1}$ to the inverse of $\\mathrm H^j(U)$ and gives $\\mathrm H^j(U)\\mathrm H^j(F_0)=\\mathrm H^j(F_t)\\mathrm H^j(U)$. By [def-weil-local-frobenius-trace], $\\mathrm H^j(C_0)=\\mathcal H^j(M)_{\\bar y}$ and $\\mathrm H^j(C_t)=\\mathcal H^j(M)_{\\bar y'}$, and these induced endomorphisms are the operators named in the statement. Hence $\\mathrm H^j(U)$ is the asserted $E$-linear conjugating isomorphism. This also covers degrees in which the stalk is zero.",
+   "uses": [
+    "def-weil-coefficient-cohomology-modules",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/lem-weil-local-frobenius-conjugacy-class.md",
+    "place": "## Proof, expanded with semilinear source reparametrizations and the cyclic-product calculation"
+   }
   }
  ],
  "proof_deps": [
+  "lem-kun-closed-point-field",
+  "lem-sfb-finite-field-galois-frobenius",
   "def-weil-frobenius-detailed",
-  "def-weil-local-frobenius-trace"
+  "def-weil-local-frobenius-trace",
+  "lem-pod-integral-pullback-composition",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-frobenius-point-transport",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-frobenius-cohomology-transport-iso",
+  "def-weil-coefficient-cohomology-modules"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/lem-weil-local-frobenius-conjugacy-class.md",
-  "place": "## Proof"
+  "place": "## Proof; explicit corrected semilinear orbit transport and cyclic product expansion"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(localFrobenius|local_frobenius|WeilComplex|stalk.*[Ff]robenius|[Ff]robenius.*stalk)",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The conjugacy class of local Frobenius of a Weil sheaf is independent of the embedding of the residue field",
+   "results": "Hits: FiniteField.Extension.frob, IsArithFrobAt.conj, isConj_arithFrobAt, FiniteField.frobeniusAlgEquivOfAlgebraic, IsArithFrobAt.exists_primesOver_isConj, FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp, ConjRootClass.carrier_inj, ConjRootClass.mk_eq_mk. Read Mathlib/RingTheory/Frobenius.lean:254-282: isConj_arithFrobAt concerns chosen elements of a finite group acting on a ring, not Weil-complex stalk operators. Finite-field Frobenius automorphisms alone do not state the sheaf transport conclusion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"stalk\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf with an isomorphism from its Frobenius pullback has conjugate return maps on the fibres around a finite Frobenius orbit",
+   "results": "Hits: isConj_arithFrobAt, IsArithFrobAt.conj, IsArithFrobAt.arithFrobAt, frobeniusEquiv_apply, IsArithFrobAt.exists_of_isInvariant, coe_frobeniusEquiv, frobenius_apply_frobeniusEquiv_symm, WittVector.IsocrystalHom.frob_equivariant. Read Mathlib/RingTheory/Frobenius.lean:254-282: isConj_arithFrobAt concerns chosen elements of a finite group acting on a ring, not Weil-complex stalk operators. Finite-field Frobenius automorphisms alone do not state the sheaf transport conclusion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Weil complex over a finite field the local Frobenius operators on stalks at two embeddings of a closed point residue field into an algebraic closure are conjugate",
+   "results": "Hits: isConj_arithFrobAt, FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply, FiniteField.frobeniusAlgEquivOfAlgebraic, IsArithFrobAt.exists_primesOver_isConj, arithFrobAt, IsArithFrobAt.arithFrobAt, FiniteField.frobeniusAlgEquiv, FiniteField.frobeniusAlgEquiv_symm_apply. Read Mathlib/RingTheory/Frobenius.lean:254-282: isConj_arithFrobAt concerns chosen elements of a finite group acting on a ring, not Weil-complex stalk operators. Finite-field Frobenius automorphisms alone do not state the sheaf transport conclusion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsArithFrobAt|isConj_arithFrobAt",
+   "results": "Mathlib/RingTheory/Frobenius.lean:29,31,34,40,42 locates the ring-action arithmetic Frobenius API; read the actual isConj_arithFrobAt declaration at lines 274-281. It has a finite ring-action group and invariant subring, not a Weil structure or a geometric stalk.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -70,5 +204,44 @@
   }
  },
  "chapter": "sec-poincare-duality",
- "unit": "sk-lem-finite"
+ "unit": "sk-lem-finite",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-local-frobenius-conjugacy-class",
+  "worker": "stage1",
+  "summary": "Expanded the imported informal proof into seven steps using existing finite-field Galois, natural point-transport, point-transport invertibility and coherent pullback-composition nodes. Corrected the semilinear orbit by source reparametrization and made k_0-linearity of the residue embeddings explicit. The equality of local return operators with cyclic products is checked by two displayed inductions; no separatedness, finite-Tor lattice, or integral Weil structure is added. No new nodes.",
+  "blueprint": "The master blueprint proof sentence on two embeddings is step 1; its automorphism/stalk identification is steps 2-3; its Weil intertwining and r-fold-return sentence is steps 4-6; step 7 gives the cohomology-sheaf conclusion. The current main-20261015 statement is the same; its file has no proof text.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Only clause (a), finite residue extension at a closed point of a finite-type scheme, is used; the unit has no such field-theoretic tool."
+   },
+   {
+    "node": "lem-weil-frobenius-cohomology-transport-iso",
+    "why": "Only clause (1), invertibility of point transport for every point complex, is used, instantiated with auxiliary Y_0=Spec k_0; no cohomological finiteness route is replaced."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Naturality of the specified rational point transport is needed to expand the stalk return; it is a generic functorial tool, not a replacement of a finiteness-unit step."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "The natural associative composition comparisons, then rationalized, identify the specified point transports; this is generic pullback coherence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-closed-point-field",
+  "lem-weil-frobenius-cohomology-transport-iso",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-pod-integral-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-0dbd0b34b",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-0dbd0b34b (reviewer sub-agent of L); spot-checked: Shape: one commit on base 9fa489b containing only the item and its report. It adds no new nodes. I read the item, all ten proof dependencies, the master and main-20261015 blueprint text, def-weil-local-frobenius-trace, def-weil-frobenius-detailed, unit sk-lem-finite and chapter sec-poincare-duality. The main-20261015 proof text is in the separate .proof.md file and matches master word for word. The report is wrong to say that file has no proof text, but this changes nothing. Statement: the only change is 'embeddings' to 'k_0-embeddings'. This only makes the existing meaning explicit: an embedding that is not k_0-linear gives no geometric point of Y_0 x_{k_0} k, and def-weil-local-frobenius-trace already says 'Choose a k_0-embedding'. The statement is not weakened: coefficients stay E, Y_0 is any finite-type scheme with no separatedness, and every j and every closed point are covered. Step 1: lem-kun-closed-point-field(a) and the Mathlib leaf lem-sfb-finite-field-galois-frobenius give e' = phi_q^t e. With g_Y = id x Spec(gamma) I checked z_i = g^i ybar h^{-i} on rings: it sends a(x)b to gamma^{-i}(e(a)) b, so the sign is right. This gives z_t = ybar', z_{i+r} = z_i and g z_i = z_{i+1} h. Steps 2-4: I checked tau_i, the induction showing Q_{i,n} = I^[n] followed by the comparison, and P_{i,n} = J_i(theta^[n]) Q_{i,n} line by line. They use the definition's recursion together with point-transport naturality (lem-weil-frobenius-point-transport-natural(2)), invertibility (clause 1 of lem-weil-frobenius-cohomology-transport-iso, whose auxiliary Y_0 is set to Spec k_0 and does not appear in clause 1), and the integral pullback-composition naturality and associativity, rationalized as def-weil-derived-pullback-tensor-hom prescribes. Steps 5-7: the identity F_i A_i = A_i F_{i+1} gives U F_0 = F_t U, and applying H^j finishes the proof. I checked the cases t=0, r=1 and r=2. No hypothesis is used that the statement lacks, no cited node is used beyond its statement, and nothing is circular. Batch-5 check: I ran a closure script on the snapshot DAG with the item excluded. Every newly cited node is already in the closure of nt-target-weil-conjectures through existing nodes; for example, def-weil-local-frobenius-trace already cites lem-pod-integral-pullback-composition. Judged one by one: lem-pod-integral-pullback-composition is general pullback coherence over O_E, which neither assumption (the condensed Qlb Poincare isomorphism or the trace formula) gives and which is not a step of their proofs. def-weil-derived-pullback-tensor-hom, def-weil-frobenius-point-transport and def-weil-coefficient-cohomology-modules are general definitions. For lem-weil-frobenius-cohomology-transport-iso only clause 1 (the point transport is an isomorphism) is used; it reaches lem-trf-open-square-exchange only through clause 2, which the item does not use. All are genuinely outside the assumptions. I accept the declared tool_uses: lem-kun-closed-point-field(a), clause 1 of lem-weil-frobenius-cohomology-transport-iso, lem-weil-frobenius-point-transport-natural, and lem-pod-integral-pullback-composition (same unit). Duplicate check: lem-trf-local-frobenius-conjugacy-class needs A_{E,n} coefficients, separatedness and finite Tor, and lem-trf-rational-local-frobenius-powers needs separatedness and an integral lattice, so neither is a duplicate. No fixes were written. Full checks are in review.md."
+ }
 }

@@ -11,9 +11,146 @@
   "def-coef-good-cellular-tree",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write compositions right to left. For any root $R$, let $\\mathcal K_R=R/\\mathcal A$. Its Hom sets are small. It has all small colimits: adjoin a new initial indexing vertex with value $R$ and its structural arrows to the underlying diagram; its cocones are exactly cocones under $R$. For a nonempty filtered diagram, the underlying colimit already has this property: the maps from $R$ into its apex agree at common successors. Thus the forgetful functor creates filtered colimits. For $P$ presentable in $\\mathcal A$, the free object $\\Phi_R(P)=(R\\to R\\amalg P)$ is presentable in $\\mathcal K_R$, since $\\operatorname{Hom}_{\\mathcal K_R}(\\Phi_R(P),Z)=\\operatorname{Hom}_{\\mathcal A}(P,UZ)$. Also $1_R$ is presentable: its Hom functor is singleton, and a nonempty filtered colimit of singleton sets is singleton by the elementwise colimit criterion.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15 proof, printed p.879: relative compactness in the undercategory; universal-property expansion."
+   }
+  },
+  {
+   "text": "Fix $d$ and a downward-closed $B\\subseteq T_d$ with $|B|<\\kappa$. Regard its restricted tree as a cellular tree in $\\mathcal K_{F(d)}$, rooted at $1_{F(d)}$, with attaching endpoints $\\Phi_{F(d)}(P_t),\\Phi_{F(d)}(Q_t)$. Its cell square is the pushout of $\\Phi(P_t)\\to\\Phi(Q_t)$ along the map to its predecessor object: a map out is exactly a map from that predecessor object and a map from $Q_t$ agreeing on $P_t$. Hence this is precisely the original specified cell square, now under $F(d)$. Colimits under $1_{F(d)}$ are the same as colimits in $\\mathcal K_{F(d)}$, since maps out of this initial root are unique. Step 1 gives all colimits, small Hom sets, and presentability of this root and all the free endpoints. Apply [lem-coef-small-tree-presentable-vertices] in this ordinary category, with its small inherited indexing poset $B$. It says that $Y_d(B)$ is $\\kappa$-presentable in $\\mathcal K_{F(d)}$. This applies also to $B\\cap A_d$, and to $B=\\varnothing$. It makes no claim about presentability in $\\mathcal A$.",
+   "uses": [
+    "def-coef-good-cellular-tree",
+    "lem-coef-small-tree-presentable-vertices",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15 proof, printed p.879, compactness sentence, reduced to the existing small-tree theorem by free endpoints."
+   }
+  },
+  {
+   "text": "Let $\\mathscr P$ be the poset of families $B=(B_d)$ of downward-closed subsets of size less than $\\kappa$. It is small, as a subset of the product of the power sets of the small $T_d$. The downward closure of $E_d$ is $\\bigcup_{t\\in E_d}(\\{t\\}\\cup(T_d)_{<t})$, of size less than $\\kappa$ by goodness and regularity. Use it as $B_{0,d}$. Unions of fewer than $\\kappa$ members of $\\mathscr P$ are again members, so $\\mathscr P$ and every tail above a member are $\\kappa$-filtered. For every $e$, the diagrams $B\\mapsto Y_e(B_e)$ and $B\\mapsto Y_e(B_e\\cap A_e)$ have colimits $G(e)$ and $M(e)$ on every such tail. Indeed any vertex lies in a small downward closure (inside $A_e$ for the second diagram); union with the tail's lower bound supplies an index in the tail. A cocone family therefore gives a leg at each vertex, independent of choices by taking unions. Every order arrow occurs in one member, so these legs are a cocone on the whole tree, or its restriction to $A_e$. The converse is restriction, giving inverse correspondences of cocones. By Step 1 these presentations also hold in $F(d)/\\mathcal A$ after restricting the root maps along any fixed $F(d)\\to F(e)$.",
+   "uses": [
+    "def-coef-good-cellular-tree",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15-16, printed pp.879-882: small downward closures and the filtered presentations used by compactness."
+   }
+  },
+  {
+   "text": "Use the preceding presentations in $\\mathcal K_{F(d)}$. If $Z$ is one of the small pieces from Step 2, every map from $Z$ to $G(e)$ under $F(d)$ factors through $Y_e(B_e)$ on any specified tail; likewise a map to $M(e)$ factors through $Y_e(B_e\\cap A_e)$. This follows by applying presentability to that filtered diagram, then clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise]. Two maps from $Z$ to stages of the same presentation which agree in its total colimit become equal at a larger stage by clauses (2)-(3). All these are equalities under the chosen root. Fewer than $\\kappa$ factorizations and equality witnesses can be imposed simultaneously by taking a common upper bound in $\\mathscr P$. There are fewer than $\\kappa$ arrows, objects and composable pairs in $D$: for infinite $|\\operatorname{Mor}D|$, its square has the same cardinality by [lem-coef-infinite-cardinal-square-power]; the finite case is immediate.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-coef-infinite-cardinal-square-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15 compactness argument and A.3.3.16 proof conditions (c)-(f), printed pp.879-882; witnesses rather than cancellation."
+   }
+  },
+  {
+   "text": "We construct increasing $B_n\\in\\mathscr P$. Put $X_n^d=Y_d(B_{n,d})$, $H_n^d=Y_d(B_{n,d}\\cap A_d)$, and denote the canonical transitions by $i_n^d:X_n^d\\to X_{n+1}^d$, $j_n^d:H_n^d\\to H_{n+1}^d$, and $k_n^d:H_n^d\\to X_n^d$. Write $g_n^d:X_n^d\\to G(d)$ and $m_n^d:H_n^d\\to M(d)$ for the canonical maps, and $q^d:M(d)\\to G(d)$ for the given slice map. For every $\\alpha:d\\to e$ choose partial arrows $u_n(\\alpha):X_n^d\\to X_{n+1}^e$, $v_n(\\alpha):H_n^d\\to H_{n+1}^e$ under $F(d)$, using $F(\\alpha)$ on the target root. Require\n$$g_{n+1}^eu_n(\\alpha)=G(\\alpha)g_n^d,\\qquad m_{n+1}^ev_n(\\alpha)=M(\\alpha)m_n^d,$$\n$$k_{n+1}^ev_n(\\alpha)=u_n(\\alpha)k_n^d.$$\nAlso require $u_n(1_d)=i_n^d$, $v_n(1_d)=j_n^d$, and, for $n\\ge1$,\n$$u_n(\\alpha)i_{n-1}^d=i_n^eu_{n-1}(\\alpha),\\qquad v_n(\\alpha)j_{n-1}^d=j_n^ev_{n-1}(\\alpha).$$\nThese are partial arrows, not assertions that $B_n$ is already a slice.",
+   "uses": [
+    "def-coef-good-cellular-tree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15-16, printed pp.880-882: recursive partial-arrow invariant, including root, identity, transition and intersection equations."
+   }
+  },
+  {
+   "text": "The final invariant, for each composable pair $\\alpha:d\\to e$, $\\beta:e\\to h$ and $n\\ge1$, is\n$$u_n(\\beta)u_{n-1}(\\alpha)=u_n(\\beta\\alpha)i_{n-1}^d,\\qquad v_n(\\beta)v_{n-1}(\\alpha)=v_n(\\beta\\alpha)j_{n-1}^d.$$\nHere all maps land at stage $n+1$ in the appropriate target. The starting subsets $B_0$ were chosen in Step 3; there are no arrows at negative stages. To construct stage $n+1$ from $B_n$ and the earlier arrows, apply Step 4 to factor $G(\\alpha)g_n^d$ and $M(\\alpha)m_n^d$ under $F(d)$, for every arrow $\\alpha$. The sources are presentable by Step 2. A common upper member $C\\supseteq B_n$ supplies preliminary maps $a_\\alpha:X_n^d\\to Y_e(C_e)$ and $b_\\alpha:H_n^d\\to Y_e(C_e\\cap A_e)$ with the required global and root equations. The following steps impose the remaining equations by enlargement of $C$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15 composition diagrams and A.3.3.16 alternating enlargement, printed pp.880-882; simultaneous partial-map version."
+   }
+  },
+  {
+   "text": "First compare $a_\\alpha k_n^d$ and the canonical inclusion followed after $b_\\alpha$, as maps $H_n^d\\to Y_e(C_e)$. Their images in $G(e)$ are equal: the first is $G(\\alpha)g_n^dk_n^d$, and the second is $q^eM(\\alpha)m_n^d=G(\\alpha)q^dm_n^d$, which is the same map since $q^dm_n^d=g_n^dk_n^d$. Step 4 supplies an enlargement where this intersection equation holds. The maps $a_{1_d}$ and the canonical $X_n^d\\to Y_d(C_d)$ agree in $G(d)$; the maps $b_{1_d}$ and the canonical $H_n^d\\to Y_d(C_d\\cap A_d)$ agree in $M(d)$. Use Step 4 to make these identity equations hold as well. At $n=0$ these are all the extra equations. All sources here are small pieces under $F(d)$, hence presentable; no root has been assumed presentable in $\\mathcal A$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.16 condition (f) and A.3.3.15 identity compatibility, printed pp.879-882; explicit global comparison for intersection."
+   }
+  },
+  {
+   "text": "For $n\\ge1$, compare $a_\\alpha i_{n-1}^d$ with the transition out of $X_n^e$ followed after $u_{n-1}(\\alpha)$. Their images in $G(e)$ agree by the previously imposed global equation for $u_{n-1}$. For a composable pair $\\alpha,\\beta$, compare $a_\\beta u_{n-1}(\\alpha)$ with $a_{\\beta\\alpha}i_{n-1}^d$. Their images in $G(h)$ are respectively $G(\\beta)G(\\alpha)g_{n-1}^d$ and $G(\\beta\\alpha)g_{n-1}^d$, so are equal. The same two comparisons with $b,v,j$ agree in $M(e)$ and $M(h)$ because $M$ is a functor and the previous $v$ arrows have their global equations. Step 4 makes all four types of comparison literal after enlargement: their sources are $X_{n-1}^d$ or $H_{n-1}^d$, presentable under $F(d)$. Choose one upper bound for these witnesses and those of Step 7, postcompose every $a,b$, and call the resulting target family $B_{n+1}$ and maps $u_n,v_n$. Each equation is preserved because enlarging only postcomposes its two sides by the same canonical transition. In particular the equations involving $u_{n-1},v_{n-1}$ have those earlier maps fixed. This completes the induction for every natural number, without cancellation of any tree-colimit map.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15 two compatibility diagrams and A.3.3.16 conditions (d)-(e), printed pp.880-882; complete equality-witness calculation."
+   }
+  },
+  {
+   "text": "Put $B_d=\\bigcup_{n<\\omega}B_{n,d}$ and $C_d=B_d\\cap A_d=\\bigcup_{n<\\omega}(B_{n,d}\\cap A_d)$. They are downward-closed, $E_d\\subseteq B_d$, and $|B_d|<\\kappa$ since $\\kappa$ is uncountable regular. The objects $X^d=Y_d(B_d)$ and $H^d=Y_d(C_d)$ are the colimits of their chains: every vertex and order arrow in each union occurs in one stage, so the cocone argument of Step 3 applies. Let $x_n^d:X_n^d\\to X^d$ and $h_n^d:H_n^d\\to H^d$ be the canonical legs. The transition equations imply that $x_{n+1}^eu_n(\\alpha)$ is a cocone on $(X_n^d)$; hence it defines $U(\\alpha):X^d\\to X^e$ with $U(\\alpha)x_n^d=x_{n+1}^eu_n(\\alpha)$. Likewise obtain $V(\\alpha):H^d\\to H^e$ with $V(\\alpha)h_n^d=h_{n+1}^ev_n(\\alpha)$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15-16 conclusion, printed pp.881-882: countable unions and amalgamation using transition equations."
+   }
+  },
+  {
+   "text": "The identity equations give $U(1_d)x_n^d=x_{n+1}^di_n^d=x_n^d$, so $U(1_d)=1$. For a composable pair, the composition and transition equations give\n$$U(\\beta)U(\\alpha)x_n^d=x_{n+2}^hu_{n+1}(\\beta)u_n(\\alpha)=x_{n+2}^hu_{n+1}(\\beta\\alpha)i_n^d=x_{n+1}^hu_n(\\beta\\alpha)=U(\\beta\\alpha)x_n^d.$$\nColimit uniqueness gives functoriality. Replacing $U,u,x,i$ by $V,v,h,j$ gives the same proof for $V$. The root equations give natural transformations $F\\to X$ and $F\\to H$ by their displayed formulas on each stage; every partial map was chosen under $F(d)$. The global equations give natural transformations $X\\to G$ and $H\\to M$ by checking on $x_n$ and $h_n$. Their composites with the root maps are $f$ and the given $F\\to M$, by the tree structure maps. Thus $N=(B,U)$ and $N'=(C,V)$ are slices, with $N'$ mapping naturally to $M$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15-16 conclusion, printed pp.881-882: identities, composition, and the maps under F and over G checked on colimit legs."
+   }
+  },
+  {
+   "text": "Let $k^d:H^d\\to X^d$ be the canonical map from the intersection colimit. On each leg its naturality square is\n$$U(\\alpha)k^dh_n^d=x_{n+1}^eu_n(\\alpha)k_n^d=x_{n+1}^ek_{n+1}^ev_n(\\alpha)=k^eh_{n+1}^ev_n(\\alpha)=k^eV(\\alpha)h_n^d.$$\nUniqueness for the colimit $H^d$ proves $U(\\alpha)k^d=k^eV(\\alpha)$. Together with the natural canonical $H\\to M$ from Step 10 and the inclusions $C_d\\subseteq B_d,A_d$, this proves precisely that $N'$ extends to both $N$ and $M$. The maps $H\\to G$ induced through these two routes agree on every leg, so $N'$ is a slice over the original $G$ as required. This includes empty trees, empty intersections and empty $D$; the empty restricted object is its root, and all root equations used above remain valid.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.16 conclusion, printed p.882: explicit naturality of both canonical intersection maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "def-coef-good-cellular-tree",
+  "lem-coef-small-tree-presentable-vertices",
+  "lem-coef-infinite-cardinal-square-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT A.3.3.15-16, printed pp.879-882 (PDF indices 896-899); ordinary Set-enriched specialization with simultaneous partial arrows and all compactness equations expanded. Source opened online 2026-10-17; not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +186,80 @@
    "results": "{\"t\": \"2026-10-17T08:48:17Z\", \"tool\": \"leanfinder\", \"query\": \"Cellular presentations of natural transformations admit compatible small slices respecting intersections with an existing partial subdiagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"HomotopicalAlgebra.RelativeCellComplex\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\", \"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.ι\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.i\", \"CategoryTheory.SmallObject.attachCellsιFunctorObjOfSmall\"], \"digest\": \"9b406e31d1512a94\"}",
    "date": "2026-10-17",
    "verdict": "no match: relative cell complexes and successor-structure attachments do not produce compatible slices with intersection data. Read SmallObject/WellOrderInductionData.lean:13-70 and SmallObject/Construction.lean:13-130; their compatibility concerns a prescribed ordinal system, not restriction of independent trees to a natural transformation."
+  },
+  {
+   "tool": "grep",
+   "query": "cellular.*slice|good.*tree|compatible.*slice",
+   "results": "{\"t\": \"2026-10-17T12:52:55Z\", \"tool\": \"grep\", \"query\": \"cellular.*slice|good.*tree|compatible.*slice\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits are presentability closure, relative-cell-complex structures, or unrelated natural transformations, not simultaneous cellular slices with functor and intersection equations. Read RelativeCellComplex/Basic.lean:40-100 and Presentable/Limits.lean:175-200. The latter general theorem is already an existing DAG leaf; small-tree-presentable-vertices can be applied in the undercategory, so no new presentability node is created."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCardinalPresentable\", \"Under\"",
+   "results": "{\"t\": \"2026-10-17T12:52:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCardinalPresentable\\\", \\\"Under\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.instIsClosedUnderIsomorphismsIsCardinalPresentable\", \"CategoryTheory.isClosedUnderColimitsOfShape_isCardinalPresentable\", \"CategoryTheory.instIsStableUnderRetractsIsCardinalPresentable\", \"CategoryTheory.Comma.instIsStableUnderRetractsIsCardinalPresentable\"], \"digest\": \"3795ffc97b3d5569\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits are presentability closure, relative-cell-complex structures, or unrelated natural transformations, not simultaneous cellular slices with functor and intersection equations. Read RelativeCellComplex/Basic.lean:40-100 and Presentable/Limits.lean:175-200. The latter general theorem is already an existing DAG leaf; small-tree-presentable-vertices can be applied in the undercategory, so no new presentability node is created."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible small slices of cellular trees in a functor diagram respecting a prescribed slice and intersections",
+   "results": "{\"t\": \"2026-10-17T12:53:02Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible small slices of cellular trees in a functor diagram respecting a prescribed slice and intersections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"CategoryTheory.SmallObject.attachCellsιFunctorObjOfSmall\", \"HomotopicalAlgebra.RelativeCellComplex\", \"TopCat.partialSections\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\", \"CategoryTheory.SmallObject.succStruct\", \"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\"], \"digest\": \"9548562b4d275a30\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits are presentability closure, relative-cell-complex structures, or unrelated natural transformations, not simultaneous cellular slices with functor and intersection equations. Read RelativeCellComplex/Basic.lean:40-100 and Presentable/Limits.lean:175-200. The latter general theorem is already an existing DAG leaf; small-tree-presentable-vertices can be applied in the undercategory, so no new presentability node is created."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small compatible cellular slices of a natural transformation of diagrams in a locally presentable category",
+   "results": "{\"t\": \"2026-10-17T12:54:32Z\", \"tool\": \"leansearch\", \"query\": \"Small compatible cellular slices of a natural transformation of diagrams in a locally presentable category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.diagramNatTrans\", \"CategoryTheory.Limits.parallelPairHom\", \"CategoryTheory.NatTrans.mapSquare\", \"CategoryTheory.TwoSquare.natTrans\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux\", \"CategoryTheory.OrthogonalReflection.instSmallD₁OfIsSmallOfLocallySmall\", \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"CategoryTheory.ObjectProperty.instSmallStrictLimitsOfShapeOfSmallOfLocallySmall\"], \"digest\": \"324fde857b574959\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits are presentability closure, relative-cell-complex structures, or unrelated natural transformations, not simultaneous cellular slices with functor and intersection equations. Read RelativeCellComplex/Basic.lean:40-100 and Presentable/Limits.lean:175-200. The latter general theorem is already an existing DAG leaf; small-tree-presentable-vertices can be applied in the undercategory, so no new presentability node is created."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small subdiagrams of relative cell complexes can be closed under diagram arrows and their composition equations",
+   "results": "{\"t\": \"2026-10-17T12:54:39Z\", \"tool\": \"leanfinder\", \"query\": \"Small subdiagrams of relative cell complexes can be closed under diagram arrows and their composition equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"HomotopicalAlgebra.RelativeCellComplex\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\", \"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.i\", \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.ι\"], \"digest\": \"9163074c49a2be09\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits are presentability closure, relative-cell-complex structures, or unrelated natural transformations, not simultaneous cellular slices with functor and intersection equations. Read RelativeCellComplex/Basic.lean:40-100 and Presentable/Limits.lean:175-200. The latter general theorem is already an existing DAG leaf; small-tree-presentable-vertices can be applied in the undercategory, so no new presentability node is created."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCardinalPresentable|isCardinalPresentable",
+   "results": "{\"t\": \"2026-10-17T12:56:42Z\", \"tool\": \"grep\", \"query\": \"IsCardinalPresentable|isCardinalPresentable\", \"sub\": \"CategoryTheory/Presentable/Comma.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid local path: this pinned Mathlib has no Comma.lean; the wrapper reported zero hits without detecting the missing path. No absence conclusion; corrected grep of CategoryTheory/Presentable recorded separately."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative presentability of small cellular objects in an undercategory without presentability of the root",
+   "results": "{\"t\": \"2026-10-17T12:56:42Z\", \"tool\": \"leansearch\", \"query\": \"Relative presentability of small cellular objects in an undercategory without presentability of the root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isFinitelyPresentable\", \"CategoryTheory.ObjectProperty.isFinitelyPresentable\", \"CommRingCat.isFinitelyPresentable_under\", \"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.IsCardinalPresentable\", \"CategoryTheory.SmallObject.preservesColimit\", \"CategoryTheory.IsPresentable\", \"CategoryTheory.Under.hasLimit_of_hasLimit_comp_forget\"], \"digest\": \"916164e7ed82d8e2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits are presentability closure, relative-cell-complex structures, or unrelated natural transformations, not simultaneous cellular slices with functor and intersection equations. Read RelativeCellComplex/Basic.lean:40-100 and Presentable/Limits.lean:175-200. The latter general theorem is already an existing DAG leaf; small-tree-presentable-vertices can be applied in the undercategory, so no new presentability node is created."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Under\", \"isCardinalPresentable\"",
+   "results": "{\"t\": \"2026-10-17T12:56:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Under\\\", \\\"isCardinalPresentable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.instIsClosedUnderIsomorphismsIsCardinalPresentable\", \"CategoryTheory.isClosedUnderColimitsOfShape_isCardinalPresentable\", \"CategoryTheory.instIsStableUnderRetractsIsCardinalPresentable\", \"CategoryTheory.Comma.instIsStableUnderRetractsIsCardinalPresentable\"], \"digest\": \"3795ffc97b3d5569\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits are presentability closure, relative-cell-complex structures, or unrelated natural transformations, not simultaneous cellular slices with functor and intersection equations. Read RelativeCellComplex/Basic.lean:40-100 and Presentable/Limits.lean:175-200. The latter general theorem is already an existing DAG leaf; small-tree-presentable-vertices can be applied in the undercategory, so no new presentability node is created."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The colimit of a small good cellular tree is kappa presentable in the undercategory of its root even when the root is not presentable",
+   "results": "{\"t\": \"2026-10-17T12:56:45Z\", \"tool\": \"leanfinder\", \"query\": \"The colimit of a small good cellular tree is kappa presentable in the undercategory of its root even when the root is not presentable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.ColimitOfShape.isCardinalPresentable\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CategoryTheory.isCardinalPresentable_of_isColimit\", \"CategoryTheory.isCardinalPresentable_of_isColimit'\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit\", \"CategoryTheory.isClosedUnderColimitsOfShape_isCardinalPresentable\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit'\", \"CategoryTheory.isCardinalPresentable\"], \"digest\": \"e5333a8d9e1e4c1c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits are presentability closure, relative-cell-complex structures, or unrelated natural transformations, not simultaneous cellular slices with functor and intersection equations. Read RelativeCellComplex/Basic.lean:40-100 and Presentable/Limits.lean:175-200. The latter general theorem is already an existing DAG leaf; small-tree-presentable-vertices can be applied in the undercategory, so no new presentability node is created."
+  },
+  {
+   "tool": "grep",
+   "query": "Under|under|[Pp]ushout",
+   "results": "{\"t\": \"2026-10-17T13:00:08Z\", \"tool\": \"grep\", \"query\": \"Under|under|[Pp]ushout\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Presentable/ColimitPresentation.lean\"], \"digest\": \"13015ec9b39e658f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits are presentability closure, relative-cell-complex structures, or unrelated natural transformations, not simultaneous cellular slices with functor and intersection equations. Read RelativeCellComplex/Basic.lean:40-100 and Presentable/Limits.lean:175-200. The latter general theorem is already an existing DAG leaf; small-tree-presentable-vertices can be applied in the undercategory, so no new presentability node is created."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-scat-injective-universe-generators",
@@ -86,5 +293,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-diagram-cellular-compatible-slices",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Relative compactness follows by applying the existing small-tree-presentability theorem inside the undercategory, using free endpoints. Explicit filtered subset presentations and equality witnesses construct partial arrows simultaneously for the diagram and its intersections with the prescribed slice; their countable colimits satisfy all functor and extension equations. No new nodes.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, derived coefficient-adjunction and inverse-limit comparison paragraph before the displayed derived-limit formula, through the recorded fixed-shape replacement chain. Steps 1-4 supply the relative compactness input of HTT A.3.3.15; steps 5-8 realize the diagram closure and compatibility construction of A.3.3.15-16; steps 9-11 realize their amalgamation and both intersection naturality equations. The current main-20261015 ancestor states the constructible adjoint without this auxiliary model route; the recorded historical ancestry and unit are retained, and no unit step is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-4aa6440e9",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-4aa6440e9 (reviewer sub-agent of L); spot-checked: I read the whole item, including all 11 steps and every cited statement. The delivery is one commit containing the item and its report, with no new nodes, and the statement and stmt_deps are unchanged. Source: HTT A.3.3.15-16 is not archived in literature/. The WANTED line is recorded and proof_origin is by=agent, so I checked the proof directly as mathematics; it is self-contained. No SGA is cited. This is an auxiliary lemma, so no base-change morphism or coefficient category is involved. Reading of the statement: 'slice' means the canonical root maps and canonical tree maps are natural. That is the only reading the data allow, and it is how both Step 7 and the citer lem-coef-scat-injective-universe-generators use it, there in the pushout amalgamation along N'. Step 1: the forgetful functor from R/A creates nonempty filtered colimits, free objects are presentable via Hom adjunction, and 1_R is presentable. Step 2: I checked every hypothesis of lem-coef-small-tree-presentable-vertices in F(d)/A: small Homs, all colimits, initial root presentable, free endpoints presentable, |B|<kappa. I also checked that the pushout transported into the undercategory is the original cell square. Step 3: I checked smallness and kappa-filteredness of the family poset, the colimit presentations over each tail for G(e) and M(e), and that these use only downward-closure of A_e, never its size. Step 4: I checked the uses of elementwise clauses (1)-(3) and the bound of fewer than kappa requirements (composable pairs bounded by |Mor|^2). Steps 5-8: I recomputed the intersection comparison q^e M(alpha) m = G(alpha) q^d m = G(alpha) g k, and the transition and composition comparisons in G(e), G(h), M(e), M(h). Enlargement only postcomposes both sides, so no cancellation is used. Steps 9-11: I recomputed functoriality of U and V, naturality of F->X, X->G and H->M, and the k-naturality square leg by leg. The edge cases pass: empty D, automorphisms, A_d empty or equal to T_d, T_d empty, nonmonic cells, and non-presentable roots. Citations: the two same-unit nodes, plus Mathlib leaves and definitions as tools. No tool_uses are needed and there is no cycle. Duplicate check: I compared six nearby cellular-tree nodes (good-subset-enlargement, small-cellular-tree-descent, diagram-compact-pushout-descent, partial-cellular-root-descent-extension, cellular-tree-presentable-approximations, good-tree-idempotent-enlargement); none states this result. No fixes were needed."
  }
 }

@@ -10,9 +10,53 @@
  "stmt_deps": [
   "lem-coef-kan-fibrant-path-recognition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the functorial fibrant replacement r:S→RS supplied in [lem-coef-kan-fibrant-path-recognition], for each S among Q,X,Y,Z and their primed counterparts. Each component r_S is a trivial cofibration, hence a weak homotopy equivalence in the Kan–Quillen model structure of [lem-coef-kan-quillen-model-right-proper-core]. For each given corner weak equivalence e:S→S′, naturality gives r_S ≫ R(e)=e ≫ r_{S′}; two-out-of-three therefore makes R(e) a weak equivalence. Functoriality also sends every edge equality of the two strict squares to a strict equality after R. Thus the two R-squares have Kan corners and are connected by an objectwise weak-equivalence map.",
+   "uses": [
+    "lem-coef-kan-fibrant-path-recognition",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 2.3, printed p.4, invariance under weak equivalences; explicit functorial fibrant-replacement reduction in the path convention."
+   }
+  },
+  {
+   "text": "Write P=RX×_{RZ,ev₀}Fun(Δ¹,RZ)×_{ev₁,RZ}RY and define P′ analogously. Apply [lem-coef-kan-homotopy-pullback-invariance] to the cospans RX→RZ←RY and RX′→RZ′←RY′, with comparison maps Rα_X, Rα_Y and Rα_Z. The strict commutation equations from Step 1 are exactly the two hypotheses cu=u′a and cv=v′b of that node, and all six objects are Kan. It follows that the induced map h:P→P′, sending (x,y,γ) to (Rα_X x,Rα_Y y,Rα_Z∘γ), is a weak homotopy equivalence. The formula also shows that h carries the constant path at the common image of a square vertex to the corresponding constant path in the primed square.",
+   "uses": [
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 2.3, printed p.4, invariance under weak equivalences of squares, after passing to Kan replacements."
+   }
+  },
+  {
+   "text": "Let c:RQ→P and c′:RQ′→P′ be the constant-path comparison maps of [lem-coef-kan-fibrant-path-recognition]. Naturality of R and the coordinate formula for h give the strict equality h∘c=c′∘Rα_Q. By the recognition statement, the first original square is homotopy cartesian exactly when c is a weak homotopy equivalence, and the second exactly when c′ is. Step 1 makes Rα_Q a weak equivalence and Step 2 makes h a weak equivalence. The model two-out-of-three property in [lem-coef-kan-quillen-model-right-proper-core], applied to this commuting equality, therefore gives c weakly equivalent if and only if c′ is. This proves both directions, including empty or non-Kan original corners, because only their functorial replacements were required.",
+   "uses": [
+    "lem-coef-kan-fibrant-path-recognition",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 2.3, printed p.4, invariance under weak equivalences of squares; final two-out-of-three argument in the explicit path model."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-fibrant-path-recognition",
+  "lem-coef-kan-quillen-model-right-proper-core",
+  "lem-coef-kan-homotopy-pullback-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, displayed derived coefficient adjunction: objectwise invariance of homotopy-cartesian square presentations, expanded from Rezk Section 2.3 in the explicit Kan-replacement/path convention."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +102,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-sharp-pullback-calculus",
@@ -86,9 +130,24 @@
     "lem-coef-semilinear-derived-sections",
     "lem-coef-finite-adjunction-diagram-realization"
    ],
-   "place": "Paragraph 2, displayed derived coefficient adjunction in prop-coef-integral-exceptional-adjoint.proof.md: objectwise invariance of homotopy-cartesian square presentations, consequence (a) of the returned sharp-map proof step 1."
+   "place": "Paragraph 2, displayed derived coefficient adjunction in prop-coef-integral-exceptional-adjoint.proof.md: objectwise invariance of homotopy-cartesian square presentations, consequence (a) of the returned sharp-map proof step 1, realized through functorial Kan replacement and path-pullback comparison."
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-homotopy-cartesian-invariance",
+  "worker": "stage1",
+  "summary": "Retained the imported statement and its explicit two-leg fibration-replacement convention. The proof now chooses the functorial Kan replacement, uses naturality plus model two-out-of-three to obtain objectwise weak equivalences between the two Kan-replaced squares, applies the existing path-pullback invariance theorem to compare their path pullbacks, and transfers the constant-path weak-equivalence criterion by a strict commuting square. No new nodes were needed; all original emptiness and non-Kan cases remain covered.",
+  "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md, the displayed derived coefficient adjunction clause asserting objectwise invariance of homotopy-cartesian square presentations (the consequence (a) of the sharp-map proof step 1), via the explicit Section 2.3 invariance argument."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-e7f68274a",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-e7f68274a (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its three steps, and the full statements of the three nodes it cites. The commit touches only the item and the report. It adds no new nodes and claims no tool_uses. It does not use SGA, and the item's statement is unchanged. Step 1: the Kan-Quillen model structure in lem-coef-kan-quillen-model-right-proper-core is functorial, which gives the replacement R. Each RS is Kan, each r_S is a trivial cofibration, and naturality r_{S'}e=R(e)r_S plus two-out-of-three makes every R(e) a weak equivalence. One small wording point, left as it is: the step says lem-coef-kan-fibrant-path-recognition 'supplies' R, but that node only quantifies over any such R; existence comes from the model-structure node, which the step also cites. Step 2: every hypothesis of lem-coef-kan-homotopy-pullback-invariance holds. The six objects RX, RY, RZ and their primed copies are Kan, the three maps Rα are weak equivalences, and cu=u'a and cv=v'b follow from functoriality and the edge commutations. Step 3: I checked h∘c=c'∘Rα_Q coordinate by coordinate. The recognition node is applied to both squares with the same R, and two-out-of-three gives both directions. I tested an empty corner, a non-Kan base, identity comparison maps and a terminal base. Duplicate search: rg for 'homotopy.cartesian' over the DAG returned 33 files; the closest are kan-nerve-pullback-recognition (Kan corners only, in N_hc(Kan)), the fibration criterion and the pasting lemma, and none states this. The item does not restate a clause of its parent lem-coef-sharp-pullback-calculus. All cited nodes are in unit sk-prop-sf-biduality-general, and their transitive closure (73 nodes) does not contain the item, so there is no cycle. Rezk Section 2.3 is not archived; the report records it as WANTED and the proof is marked agent-written. The Mathlib searches cover all three kinds. This is not a target node. No changes."
  }
 }

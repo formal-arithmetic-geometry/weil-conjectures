@@ -13,9 +13,209 @@
   "def-coef-infinity-category-of-spaces",
   "lem-coef-infinity-slice-arrow-equivalence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a Kan fibration $c:C\\to B$ and any small simplicial set $A$, postcomposition $f:\\operatorname{Fun}(A,C)\\to\\operatorname{Fun}(A,B)$ is a Kan fibration. Indeed a horn problem transposes to a problem for $c$ against $A\\times\\Lambda_i^m\\hookrightarrow A\\times\\Delta^m$. Apply [lem-coef-sset-anodyne-pushout-product] to $\\varnothing\\hookrightarrow A$ and the horn inclusion; the latter is anodyne by [lem-coef-kan-quillen-right-proper]. Thus this product inclusion has the required lifting property. Taking $C\\to\\Delta^0$ proves that $\\operatorname{Fun}(A,C)$ is Kan whenever $C$ is Kan. A total space $A$ of an object $a:A\\to B$ is Kan: fill a horn first in $B$, then lift that specified filler along $a$. A horn in the strict fiber $H=f^{-1}(a)$ is filled by the lifting property for $f$ over the constant simplex at $a$. Hence $\\mathbf{Kan}_{\\mathcal U}$ and $\\mathcal K_B$ are locally Kan. Composition preserves these fibers since $dh=c$ and $cg=a$ imply $d(hg)=a$; identities preserve them too. Their coherent nerves are quasicategories by [lem-coef-coherent-nerve-comparison].",
+   "uses": [
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05Q0",
+    "place": "Example 5.5.1.23 and Corollary 3.1.3.2 (00TL); product lifting written out."
+   }
+  },
+  {
+   "text": "Put $D=N_{\\mathrm{hc}}\\mathbf{Kan}_{\\mathcal U}$. Construct $J$ in the join-slice model. An $n$-simplex $F:\\mathfrak C[\\Delta^n]\\to\\mathcal K_B$ has objects $a_i:A_i\\to B$. Forgetting the structure maps gives its total-space functor on $\\mathfrak C[\\Delta^n]$. Extend it to $\\mathfrak C[\\Delta^{n+1}]\\to\\mathbf{Kan}_{\\mathcal U}$ by giving the last vertex the value $B$ and every mapping set from $i\\leq n$ to $n+1$ the constant value $a_i$. This is an enriched functor: the only new composition equation is $a_jF_{ij}=a_i$, which holds on the whole mapping simplicial set because $F_{ij}$ lies in the strict fiber. The subset-poset formulas in [lem-coef-coherent-nerve-comparison] show that restriction along $\\alpha:[m]\\to[n]$, extended by fixing the last vertex, gives exactly the same extension of $F\\alpha$. Thus these simplices define a simplicial map $J:N_{\\mathrm{hc}}\\mathcal K_B\\to D_{/B}$. Its source projection is exactly $N_{\\mathrm{hc}}P$, in every degree, and its vertices are the required arrows. The target is a quasicategory by [lem-coef-infinity-slice-right-fibration].",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01ZN",
+    "place": "Construction 5.5.1.17; direct formula for the right-cone contraction, using subset-poset coherent simplices."
+   }
+  },
+  {
+   "text": "We specify the mapping comparisons used below, so that commutation on fibers is checked for actual maps. Write $R^m=\\mathfrak C[((\\Delta^m\\star\\{y\\})\\amalg_{\\Delta^m}\\{x\\})](x,y)$ and $p_m:R^m\\to\\Delta^m$ for the cosimplicial map of [lem-coef-pinched-rigidification-resolution]. For a mapping simplicial set $T=\\mathcal A(x,y)$ of a locally Kan simplicial category, define $\\theta_T:T\\to\\operatorname{Map}_{N_{\\mathrm{hc}}\\mathcal A}(x,y)$ by sending $\\sigma:\\Delta^m\\to T$ to the enriched adjoint whose morphism map is $\\sigma p_m:R^m\\to T$. This is the explicit isomorphism of [lem-coef-coherent-nerve-pinched-adjunction]. It is simplicial because $p$ is cosimplicial. It commutes strictly with maps of mapping simplicial sets and with enriched functors, and sends a constant vertex to the corresponding constant mapping simplex. In particular it gives maps $\\theta_{AC},\\theta_{AB}$ and $\\theta_H$ for $T=\\operatorname{Fun}(A,C),\\operatorname{Fun}(A,B),H=\\mathcal K_B(a,c)$.",
+   "uses": [
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-coherent-nerve-pinched-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01ZT",
+    "place": "Construction of the mapping comparisons preceding the cube, with the right-pinched adjunction made explicit."
+   }
+  },
+  {
+   "text": "Each $\\theta_T$ from step 3 is a weak homotopy equivalence. Set $L(K)=|K|_R$ and $G(T)=\\operatorname{Sing}_R T$. The two maps $p_K:L(K)\\to K$ and $e_T:L(G(T))\\to T$ are weak homotopy equivalences by [lem-coef-pinched-rigidification-resolution], since $T$ is Kan by step 1. Under the isomorphism of [lem-coef-coherent-nerve-pinched-adjunction], $\\theta_T$ is $p^*:T\\to G(T)$. Evaluation on a generator $(\\sigma,r)$ gives $e_T L(p^*)(\\sigma,r)=\\sigma(p(r))=p_T(\\sigma,r)$. Hence $L(p^*)$ is a weak equivalence by two-out-of-three. Naturality of $p$ gives $p_{G(T)}L(p^*)=p^*p_T$; another application of two-out-of-three makes $p^*$ a weak equivalence. Two-out-of-three is available in [lem-coef-kan-quillen-right-proper]. This proves the comparison claim for the specific maps of step 3, including $\\theta_H$, rather than just for unspecified equivalences of mapping spaces.",
+   "uses": [
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-coherent-nerve-pinched-adjunction",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01ZT",
+    "place": "The mapping-comparison equivalences in the proof of 01ZT; verified from the existing pinched-resolution theorem."
+   }
+  },
+  {
+   "text": "Fix objects $a:A\\to B$ and $c:C\\to B$. Define $Q_m$ to be the maps $\\Delta^m\\star\\Delta^1\\to D$ constant at $A$ on $\\Delta^m$ and equal to the edge $c$ on the last $\\Delta^1$. Restriction to its first or second endpoint gives $r:Q\\to M_{AC}$ and $t:Q\\to M_{AB}$, where $M_{AX}=\\operatorname{Map}_D(A,X)$. These mapping spaces are Kan by [lem-coef-infinity-slice-right-fibration]. The slice dual of [lem-cbc-relative-coslice-left-fibration], with $q:D\\to\\Delta^0$, $K=\\Delta^1$, and $K_0=\\{1\\}$, says $D_{/c}\\to D_{/B}$ is a right fibration; pull back over the constant source $A$ to get $t$. To see the dual precisely, reverse each ordered simplex and interchange the two join blocks: left horns become right horns, and $\\{1\\}$ becomes the first endpoint. Reversal preserves inner horns, so the cited hypotheses hold for $D^{\\mathrm{op}}$. Pullback preserves the horn lifting property by pulling each lifting problem to the original map. Now [lem-cbc-right-fibration-space-fiber] makes $t$ a Kan fibration and $Q$ Kan.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-cbc-relative-coslice-left-fibration",
+    "lem-cbc-right-fibration-space-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01ZT",
+    "place": "Slice dual of the auxiliary Q and its fibration pi-prime in the proof of 01ZT."
+   }
+  },
+  {
+   "text": "The other projection $r:Q\\to M_{AC}$ is a trivial Kan fibration. A boundary-lifting problem for it in dimension $m\\geq0$ is exactly extension into $D$ across\n$$ (\\partial\\Delta^m\\star\\Delta^1)\\cup(\\Delta^m\\star\\{0\\})\\hookrightarrow\\Delta^m\\star\\Delta^1.$$\nReverse the ordered vertices and interchange join blocks. This becomes the pushout-join in [lem-coef-infinity-anodyne-cocones] for the right horn $\\{1\\}=\\Lambda_1^1\\hookrightarrow\\Delta^1$ and the monomorphism $(\\partial\\Delta^m)^{\\mathrm{op}}\\hookrightarrow(\\Delta^m)^{\\mathrm{op}}$. That node makes it inner anodyne. Reversal carries each inner horn to an inner horn and preserves pushouts, compositions and retracts degreewise; hence the original inclusion is inner anodyne too. Since $D$ is a quasicategory, successive inner-horn fillers, their compatible unions, and retracts give the required extension. The constant $A$-face and the edge $c$ are already in the domain, so remain prescribed. For $m=0$ this is the inner $2$-horn of composable arrows. Thus $r$ lifts every boundary, including dimension zero; [lem-coef-kan-quillen-right-proper] makes it a trivial fibration and a weak equivalence.",
+   "uses": [
+    "lem-coef-infinity-anodyne-cocones",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01ZT",
+    "place": "Slice dual of the trivial-fibration projection pi in the proof of 01ZT; the join inclusion and dimension-zero case are explicit."
+   }
+  },
+  {
+   "text": "Construct $\\lambda:T=\\operatorname{Fun}(A,C)\\to Q$. For $\\sigma\\in T_m$, let $F_\\sigma:\\mathfrak C[\\Delta^{m+1}]\\to\\mathbf{Kan}_{\\mathcal U}$ be the adjoint of $\\theta_{AC}(\\sigma)$ from step 3: its initial block is constant at $A$ and its last vertex is $C$. Append a new last vertex $B$. Keep $F_\\sigma$ on old mapping sets, put the edge $C\\to B$ equal to $c$, and on the mapping set from an initial vertex $i$ to $B$ use\n$$N(P_{i,m+2})\\longrightarrow N(P_{i,m+1})\\xrightarrow{F_\\sigma}\\operatorname{Fun}(A,C)\\xrightarrow{c\\circ-}\\operatorname{Fun}(A,B),$$\nwhere the first map replaces the new last vertex by the preceding vertex $m+1$ and fixes all others. Images of subsets commute with union, so these maps satisfy enriched composition. They commute with initial-block operators, giving $\\lambda$. Restricting off $B$ gives $r\\lambda=\\theta_{AC}$. Restricting off $C$ gives $t\\lambda=\\theta_{AB}f$, for $f=c\\circ-$: the enriched adjoint is obtained from $\\sigma p_m$ by postcomposition with $c$, exactly the formula of step 3. This proves both equations on every simplex, not merely on components. Since $r$ and $\\theta_{AC}$ are weak equivalences by steps 4 and 6, $\\lambda$ is one too.",
+   "uses": [
+    "lem-coef-coherent-nerve-pinched-adjunction",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01ZT",
+    "place": "Final construction of lambda in the proof of 01ZT, with all orders reversed for the slice assertion."
+   }
+  },
+  {
+   "text": "The fiber $Q_a=t^{-1}(a)$ is exactly $\\operatorname{Map}_{D_{/B}}(a,c)$ in the right-pinched convention. Indeed its $m$-simplex is a map $\\Delta^m\\star\\{C\\}\\star\\{B\\}\\to D$, equal to $c$ on $CB$ and constant at the arrow $a$ on $\\Delta^m\\star\\{B\\}$. By the join-slice formula these are precisely the $(m+1)$-simplices in $D_{/B}$ constant at $a$ on the entire initial face and ending at $c$. Operators restrict only the initial block, so this is an equality of simplicial sets. The restriction $\\lambda|_H:H\\to Q_a$ equals $\\operatorname{Map}(J)\\theta_H$. To check it, start with the adjoint of $\\theta_H(\\sigma)$ in $\\mathcal K_B$ and apply step 2. All new mapping sets to $B$ are constant at $a$ or $c$. The construction in step 7 gives the same maps: $c\\sigma=a$ implies $c(\\sigma p_m)$ is the constant map $a$. Old mapping sets agree by the total-space functor and the naturality in [lem-coef-coherent-nerve-pinched-adjunction]. Thus the cube's fiber map is the actual map induced by $J$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-coherent-nerve-pinched-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01ZT",
+    "place": "The two pullback faces of the cube in the proof of 01ZT, checked in right-pinched coordinates."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-kan-pullback-fibration-invariance] to the strictly commutative cospan map\n$$ (T\\xrightarrow{f}\\operatorname{Fun}(A,B)\\xleftarrow{}\\{a\\})\\longrightarrow(Q\\xrightarrow{t}M_{AB}\\xleftarrow{}\\{a\\}) $$\nwith components $(\\lambda,\\theta_{AB},1)$. All three are weak homotopy equivalences by steps 4 and 7. Both left legs are Kan fibrations by steps 1 and 5. Step 3 ensures that $\\theta_{AB}$ takes the specified vertex to the same edge $a$, and step 7 proves the commuting square strictly. The cited statement therefore makes $H\\to Q_a$ a weak homotopy equivalence. By step 8 this is $\\operatorname{Map}(J)\\theta_H$, and $\\theta_H$ is a weak equivalence by step 4. Two-out-of-three in [lem-coef-kan-quillen-right-proper] proves that $\\operatorname{Map}(J)$ is an equivalence for every $a,c$. This is full faithfulness; no unrestricted strict fiber of an arbitrary equivalence has been used.",
+   "uses": [
+    "lem-coef-kan-pullback-fibration-invariance",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01ZT",
+    "place": "The cube and homotopy-pullback argument of 01ZT, using the existing strict-pullback invariance statement."
+   }
+  },
+  {
+   "text": "The same construction gives the claimed homotopy-fiber interpretation with its projection. By [lem-coef-kan-pullback-path-comparison], the constant-path maps $H\\to\\operatorname{hofib}_a(f)$ and $Q_a\\to\\operatorname{hofib}_a(t)$ are weak equivalences, since $f,t$ are Kan fibrations between Kan complexes. The strictly commutative cospan map of step 9 gives a weak equivalence of these path fibers by [lem-coef-kan-homotopy-pullback-invariance]. The diagram commutes also on constant paths. The map $r:Q\\to M_{AC}$ is an equivalence and records the total-space arrow. Under it, $t$ represents intrinsic postcomposition by $c$: the triangles defining $Q$ have edges given by $r$, $c$, and $t$, and $r\\lambda=\\theta_{AC}$, $t\\lambda=\\theta_{AB}f$. The adjunction comparison in [lem-coef-coherent-nerve-comparison] preserves enriched composition with its coherent homotopies, so this is the specified composition comparison. Consequently $Q_a$ computes the homotopy fiber of $\\operatorname{Map}_D(A,C)\\to\\operatorname{Map}_D(A,B)$ over $a$. The fiber identification in step 8 shows this is the comparison induced by $J$, and all maps retain the projection to the total-space mapping object.",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01ZT",
+    "place": "Source-compatible mapping-fiber refinement of the cube of 01ZT; constant-path homotopy fibers are compared explicitly."
+   }
+  },
+  {
+   "text": "Every vertex of $D_{/B}$ is an actual simplicial map $a:A\\to B$ between $\\mathcal U$-small Kan complexes: a coherent-nerve edge is a vertex in its enriched mapping set. Apply [lem-coef-space-path-fibration-replacement] to this map. It gives\n$$E_a=A\\times_{B,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,B),\\qquad q=\\operatorname{ev}_1:E_a\\to B,$$\nand the constant-path weak equivalence $i:A\\to E_a$, with $qi=a$. The map $q$ is a Kan fibration. Its total space is Kan by lifting first in $B$ and then along $q$. Each degree of $\\operatorname{Fun}(\\Delta^1,B)$ is a set of maps from the small simplicial set $\\Delta^1\\times\\Delta^n$ to $B$; products, subsets and the countable compatibility conditions stay in $\\mathcal U$. Thus $E_a$ is $\\mathcal U$-small and $q$ is an object of $\\mathcal K_B$.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-space-path-fibration-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05Q0",
+    "place": "Essential surjectivity in Example 5.5.1.23; the existing small mapping-path factorization specializes the factorization in 00UV."
+   }
+  },
+  {
+   "text": "The strict equation $qi=a$ supplies an edge $a\\to J(q)$ in the join slice: its corresponding $2$-simplex of $D$ has vertices $(A,E_a,B)$, edges $(i,q,a)$, and constant composition path because $qi=a$. It is obtained by the same enriched extension as step 2, which needs no fibration condition on its first object. Its source projection is $i$. By [lem-coef-kan-weak-equivalence-space-edge], this actual edge $i$ of $D$ is an equivalence. The projection $D_{/B}\\to D$ is a right fibration by [lem-coef-infinity-slice-right-fibration] and reflects equivalences: reverse ordered simplices to make it a left fibration and apply [lem-cbc-left-fibration-equivalence-lift]. Reversal preserves the inverse edges and their two triangular witnesses, so its conclusion reverses back. Both source and target are quasicategories, as required. Hence $a\\to J(q)$ is an equivalence in the slice. This proves essential surjectivity, including the triangle compatibility over $B$.",
+   "uses": [
+    "lem-coef-kan-weak-equivalence-space-edge",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-cbc-left-fibration-equivalence-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05Q0",
+    "place": "Essential surjectivity of Example 5.5.1.23; equivalence is verified in the slice, not just in the ambient space category."
+   }
+  },
+  {
+   "text": "For the fixed-target-arrow model, compose the join-slice comparison $J$ with $\\delta_B$ of [lem-coef-infinity-slice-arrow-equivalence]. This is an equivalence of quasicategories and satisfies $q_B\\delta_B=p_B$ exactly. Therefore it preserves the source equation from step 2 and sends an object $a$ to its arrow. By [lem-cbc-enhanced-functor-cone-calculus], an equivalence induces equivalences on mapping spaces, so full faithfulness and the mapping-fiber description persist; its quasi-inverse and coherent unit and counit transfer essential surjectivity as well. In the join model the equation $p_BJ=N_{\\mathrm{hc}}P$ is strict, and in this arrow model it remains strict; its constant transformation is the requested coherent natural equivalence. Identities and all coherent compositions are retained because the comparison was constructed on every coherent simplex in step 2; taking faces and degeneracies commutes with that construction. Step 8 checks the same construction on mapping simplices, rather than choosing unrelated equivalences on each mapping space.",
+   "uses": [
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01ZN",
+    "place": "Construction 5.5.1.17, source equation; the existing join/arrow equivalence transports this same comparison."
+   }
+  },
+  {
+   "text": "All simplicial mapping sets used above, and the replacement $E_a$, remain $\\mathcal U$-small: their simplices are subsets of products of small sets indexed by the small simplex category. The set of all $\\mathcal U$-small simplicial sets, their maps to $B$, and the nerves built from them are formed only in a containing universe. Thus none of the comparisons enlarges a total space. No argument chooses a vertex of an arbitrary fiber. If $B=\\varnothing$, any map $A\\to B$ forces $A=\\varnothing$ degreewise, so $\\mathcal K_B$ and its slice each have their unique empty-space object and contractible mapping spaces. If $A=\\varnothing$, both total-space functor objects are points and $H$ is a point. If $C=\\varnothing$ with nonempty $A$, $T$ and $H$ are empty and the same Kan-fibration fiber argument applies. In step 6 the dimension-zero boundary lift uses a composable pair, not a nonemptiness hypothesis on a mapping space. This accounts for every allowed empty case.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05Q0",
+    "place": "Universe and empty-case verification for the stated small-space version of Example 5.5.1.23."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-sset-anodyne-pushout-product",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-coherent-nerve-pinched-adjunction",
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-coef-infinity-anodyne-cocones",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-pullback-fibration-invariance",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-space-path-fibration-replacement",
+  "lem-coef-kan-weak-equivalence-space-edge",
+  "lem-cbc-left-fibration-equivalence-lift",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01ZT",
+  "place": "Reconstruction of the slice dual of Proposition 5.5.1.22 and Example 5.5.1.23 (05Q0), read online, with explicit coherent simplex formulas and small path-space replacement. Kerodon is not archived in literature/; WANTED is recorded in report.md. No SGA route."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +251,52 @@
    "results": "{\"t\": \"2026-10-17T08:41:25Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy coherent nerve of small Kan fibrations over a Kan complex is equivalent to the infinity category of spaces over that base, compatibly with total spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.nerve.functorOfNerveMap_nerveFunctor₂_map\", \"CategoryTheory.nerve.functorOfNerveMap\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.stdSimplex.isoNerve\", \"CategoryTheory.nerveAdjunction\"], \"digest\": \"cc395d0a0672123f\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits concern ordinary nerves, ordinary products or simplicial-set closedness, not coherent-nerve slice equivalences"
+  },
+  {
+   "tool": "grep",
+   "query": "KanFibration|rightFibration|coherent.*slice|slice.*nerve",
+   "results": "{\"t\": \"2026-10-17T11:33:32Z\", \"tool\": \"grep\", \"query\": \"KanFibration|rightFibration|coherent.*slice|slice.*nerve\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types; ordinary nerves, ordinary model slices, elementary simplicial enrichment and QCat do not state a homotopy coherent nerve equivalence with the space slice. Read Quasicategory/StrictBicategory.lean:48-70 and ModelCategory/Over.lean:65-80. The focused grep has no hits; the second semantic phrasing also returns only ordinary nerve results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "small Kan fibrations over B are equivalent to the infinity category of spaces over B",
+   "results": "{\"t\": \"2026-10-17T11:33:32Z\", \"tool\": \"leansearch\", \"query\": \"small Kan fibrations over B are equivalent to the infinity category of spaces over B\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.fibrations_over_iff\", \"HomotopicalAlgebra.ModelCategory.over\", \"HomotopicalAlgebra.trivialCofibrations_over_eq\", \"HomotopicalAlgebra.cofibrations_over_iff\", \"HomotopicalAlgebra.cofibrations_over_def\", \"HomotopicalAlgebra.fibrations_over_def\", \"HomotopicalAlgebra.trivialFibrations_over_eq\", \"CategoryTheory.Over.instIsEquivalenceObjPost\"], \"digest\": \"63442fb5acb8d7e8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types; ordinary nerves, ordinary model slices, elementary simplicial enrichment and QCat do not state a homotopy coherent nerve equivalence with the space slice. Read Quasicategory/StrictBicategory.lean:48-70 and ModelCategory/Over.lean:65-80. The focused grep has no hits; the second semantic phrasing also returns only ordinary nerve results."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.nerve, SSet.KanComplex, fibration",
+   "results": "{\"t\": \"2026-10-17T11:33:32Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.nerve, SSet.KanComplex, fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'fibration'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The simplicial category of small Kan fibrations over a Kan complex presents the infinity category of spaces over that base",
+   "results": "{\"t\": \"2026-10-17T11:33:33Z\", \"tool\": \"leanfinder\", \"query\": \"The simplicial category of small Kan fibrations over a Kan complex presents the infinity category of spaces over that base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"SSet.Augmented\", \"SSet\", \"SSet.hoFunctor\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.largeCategory\", \"CategoryTheory.nerveFunctor\"], \"digest\": \"8ee8e1aba2d8edd5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types; ordinary nerves, ordinary model slices, elementary simplicial enrichment and QCat do not state a homotopy coherent nerve equivalence with the space slice. Read Quasicategory/StrictBicategory.lean:48-70 and ModelCategory/Over.lean:65-80. The focused grep has no hits; the second semantic phrasing also returns only ordinary nerve results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy coherent nerve preserves a simplicial overcategory on fibrations and identifies its strict morphism fibers with homotopy fibers",
+   "results": "{\"t\": \"2026-10-17T11:37:39Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy coherent nerve preserves a simplicial overcategory on fibrations and identifies its strict morphism fibers with homotopy fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveFunctor\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\"], \"digest\": \"ef819aa97b8f615e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types; ordinary nerves, ordinary model slices, elementary simplicial enrichment and QCat do not state a homotopy coherent nerve equivalence with the space slice. Read Quasicategory/StrictBicategory.lean:48-70 and ModelCategory/Over.lean:65-80. The focused grep has no hits; the second semantic phrasing also returns only ordinary nerve results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Over\"",
+   "results": "{\"t\": \"2026-10-17T11:40:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Over\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"IsCompact.elim_nhds_subcover_nhdsSet\", \"IsCompact.elim_nhds_subcover_nhdsSet'\"], \"digest\": \"f3ec4c33aba4c8fc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types; ordinary nerves, ordinary model slices, elementary simplicial enrichment and QCat do not state a homotopy coherent nerve equivalence with the space slice. Read Quasicategory/StrictBicategory.lean:48-70 and ModelCategory/Over.lean:65-80. The focused grep has no hits; the second semantic phrasing also returns only ordinary nerve results."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-spaces-slice-cartesian-closure",
@@ -82,5 +324,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-fibration-slice-nerve-equivalence",
+  "worker": "stage1",
+  "summary": "Split in fourteen steps with no new nodes. Retained the exact statement. Proved local Kan fibrancy by pushout-product lifting; constructed the source-preserving coherent comparison by appending B to every enriched simplex; expanded the auxiliary triangle-space cube proving full faithfulness, with explicit right-pinched comparisons and Kan-fibration hypotheses. Compared its strict fibers with homotopy fibers, and used the existing small path replacement and slice equivalence reflection for essential surjectivity. All citations were read, closure-checked and quoted in citations.json. Checked empty cases, universes, blueprint ancestry, source tags, logged searches and long-step bounds. No Lean writing or builds.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint in main-20261015: the displayed finite-stage derived coefficient Hom adjunction before R lim. This is the strict-space-slice comparison used in the inherited enriched-tensor foundation through lem-coef-spaces-slice-cartesian-closure. No chapter or unit route changes; no other blueprint node states this comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-relative-coslice-left-fibration",
+    "why": "Generic relative join-slice restriction theorem, used after reversing simplices; the unit has no replacement for this relative horn-lifting tool."
+   },
+   {
+    "node": "lem-cbc-right-fibration-space-fiber",
+    "why": "Generic right-fibration-over-Kan theorem makes the auxiliary triangle projection a Kan fibration; the unit has no equivalent relative lifting theorem."
+   },
+   {
+    "node": "lem-cbc-left-fibration-equivalence-lift",
+    "why": "Generic equivalence-reflection theorem, reversed for a right-fibration slice projection; the unit does not supply this reflection result."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic fact that a functor equivalence induces equivalences of mapping spaces, used only to pass between the two stipulated slice models."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-cbc-left-fibration-equivalence-lift",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-427269b57",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-427269b57 (reviewer sub-agent of L); spot-checked: Read the item, its 14 steps and the full statements of all 23 cited nodes. The Kerodon source (05Q0/01ZT/01ZN) is not in literature/ and the worker recorded WANTED with proof_origin.by=agent, so I checked the reconstruction myself. Step 1: the pushout-product of the empty map into A with a horn is A×horn, so postcomposition by a Kan fibration is a Kan fibration. Step 2: the appended last vertex is a valid enriched functor because a_j∘g = a_i∘pr. Step 4: the identity e_T L(p*) = p_T plus two-out-of-three twice makes θ_T a weak equivalence. Step 5: t is the pullback of D_{/c}→D_{/B}; this is a right fibration by the reversed relative-coslice lemma with 𝒟=Δ^0. Step 6: the reversed inclusion is the pushout-join for the right horn Λ^1_1={1}→Δ^1, so it is inner anodyne. Step 7: replacing the new last vertex by the previous one commutes with union of subsets, and checking both restrictions gives rλ=θ_AC and tλ=θ_AB f. Step 8: the fiber Q_a equals the slice mapping space, and λ restricted to H equals Map(J)θ_H. Step 9: the strict-pullback invariance lemma applies with f and t Kan fibrations, which gives full faithfulness. Step 12: the path-space replacement gives an edge of the slice whose source is an equivalence, and equivalence reflection for the right fibration (reversed) makes it an equivalence, which gives essential surjectivity. I tested the cases B, A and C empty, and B a point. There are no new nodes and no cycle (the dependency closure does not reach the item). lem-coef-strict-intrinsic-right-fibration-slices is not a duplicate: it works in Cat rather than spaces and only maps onto an essential image. Blueprint from/via are consistent with the parent. I accept the four declared tool_uses of sk-prop-sf-cbc nodes (relative-coslice left fibration, right fibration over a Kan complex, equivalence reflection, mapping spaces under equivalences) as generic tools. No base-change or coefficient target is involved, no SGA is cited, and I made no fixes."
  }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-weight-purity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Smooth-proper purity of the constant Weil sheaf",
@@ -14,6 +14,7 @@
  },
  "stmt_deps": [
   "def-weil-algebraically-closed-coefficients",
+  "def-weil-complex-weights",
   "def-weil-exceptional-adjoint-admissibility",
   "def-weil-exceptional-inverse-image",
   "def-weil-finite-field-fiber",
@@ -29,26 +30,101 @@
  ],
  "proof": [
   {
-   "text": "The interpretation of the words weight for the constant Weil complex and\nits cohomology is the one fixed by [def-weil-complex-weights]: its\nupper-weight predicate is checked on the cohomology-sheaf filtration while\nits lower-weight predicate is obtained by applying the duality operation\nand the same filtration criterion. With these conventions the constant\nWeil sheaf $(\\Qlb)_X$ of the statement is the constant Weil complex of\nthe smooth-proper purity interface, whose hypotheses are exactly the\nsmoothness, properness, geometric connectedness, coefficient, and\nFrobenius data fixed above; clause (1) of\n[thm-weil-deligne-purity] is therefore precisely the assertion that\n$(\\Qlb)_X$ is $\\iota$-pure of weight $0$.",
+   "text": "Use exactly the finite-field datum $(p,a,q,k_0,k)$, the prime $\\ell\\neq p$, the coefficient field $\\Qlb$ in the algebraically closed coefficient category, the smooth proper geometrically connected $X_0$ of pure dimension $d$, the geometric fibre $X$ and the structure morphism $a_X$ fixed in the statement. Clause (3) of [lem-weil-smooth-proper-purity-hypotheses] applies to these data and shows that for every integer $j$ the groups $H^j(X,\\Qlb)$ and $H_c^j(X,\\Qlb)$ of [def-weil-ordinary-compact-cohomology] are finite-dimensional $\\Qlb$-vector spaces carrying the action of the global geometric Frobenius. This discharges the explicit finiteness hypothesis of [thm-weil-deligne-purity] used in Step 2; no hypothesis is added to the item.",
    "uses": [
-    "def-weil-complex-weights",
-    "thm-weil-deligne-purity"
+    "lem-weil-smooth-proper-purity-hypotheses"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weight-purity.proof.md",
+    "place": "proof paragraph: 'whose hypotheses are exactly the smoothness, properness, geometric connectedness, coefficient, and Frobenius data fixed above'"
+   }
+  },
+  {
+   "text": "Apply [thm-weil-deligne-purity] with $i=0$ (allowed since $d\\geq0$) to the same $p,a,q,k_0,k,\\ell,\\Qlb,\\iota,X_0,X,d,a_X,g_X$. Its smoothness, properness, geometric connectedness and pure-dimension hypotheses are those of the statement; the exceptional-adjoint admissibility of $a_X$ at $\\Qlb$ and the dualizing Weil complex $(\\omega_X,\\theta_{\\omega_X})$ with $\\operatorname{For}(\\omega_X)=Ra_X^!\\Qlb$ and canonical functorial Weil lift are assumed in the statement verbatim; the finiteness of the displayed cohomology groups is Step 1. The theorem's cohomology $H^i(Ra_{X*}(\\Qlb)_X)$, $H^i(Ra_{X!}(\\Qlb)_X)$ is the item's $H^i(R\\Gamma(X,(\\Qlb)_X))$, $H^i(R\\Gamma_c(X,(\\Qlb)_X))$ by the definition $R\\Gamma=\\operatorname{Fib}_s\\circ Ra_{X*}$, $R\\Gamma_c=\\operatorname{Fib}_s\\circ Ra_{X!}$ of [def-weil-ordinary-compact-cohomology], and both statements use the same constant $\\Qlb$-Weil object on the small pro-etale site of [def-weil-weil-sheaf-complex]. Its weight predicate for $(\\Qlb)_X$ is the one of [def-weil-complex-weights], formed with the same chosen $\\omega_X$: the upper predicate on the cohomology sheaves and the lower one through $D_X$. Assertion (1) of the theorem then says that $(\\Qlb)_X$ is $\\iota$-pure of weight $0$, which is the conclusion.",
+   "uses": [
+    "thm-weil-deligne-purity",
+    "def-weil-complex-weights",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weight-purity.proof.md",
+    "place": "proof paragraph: 'whose hypotheses are exactly the smoothness, properness, geometric connectedness, coefficient, and Frobenius data fixed above'"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-smooth-proper-purity-hypotheses",
+  "thm-weil-deligne-purity",
   "def-weil-complex-weights",
-  "thm-weil-deligne-purity"
+  "def-weil-ordinary-compact-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-input-weights/prop-weight-purity.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weight-purity.proof.md",
+  "place": "proof paragraph; the blueprint's one-sentence application of clause (1) of thm-weil-deligne-purity, with its finiteness hypothesis discharged by the same-unit hypotheses lemma (blueprint-only route; the blueprint is agent-written)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A constant Weil sheaf on a smooth proper geometrically connected variety over a finite field is pure of weight zero",
+   "results": "CategoryTheory.Sheaf.isConstant_of_forget; CategoryTheory.Sheaf.isConstant_iff_forget; WittVector.isocrystal_classification; CategoryTheory.Sheaf.IsConstant; CategoryTheory.Sheaf.mem_essImage_of_isConstant; CategoryTheory.Sheaf.isConstant_of_iso; CompHausLike.LocallyConstantModule.functor; CategoryTheory.Sheaf.IsConstant.mem_essImage",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "WeilSheaf.weightPurity_adicConstant, IsPunctuallyPureOfWeight, IsMixedOfWeightsAtMost",
+   "results": "none (unknown identifier 'WeilSheaf.weightPurity_adicConstant')",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "weightPurity_adicConstant|isPunctuallyPureOfWeight_adicConstant|IsMixedOfWeightsAtMost [Mathlib/]",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constant Weil sheaf is iota-pure of weight 0 on a smooth proper geometrically connected finite-field scheme",
+   "results": "LightCondensed.IsDiscrete; SlashInvariantForm.const; SlashInvariantForm.wt_eq_zero_of_eq_const; AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.Scheme.Etale; MvPolynomial.isWeightedHomogeneous_C; AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion; ModularForm.const",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "purity of constant sheaf Weil complex weight zero Frobenius",
+   "results": "BDeRham; BDeRhamPlus; WittVector.StandardOneDimIsocrystal; WittVector.instIsocrystalStandardOneDimIsocrystal; LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf; WittVector.StandardOneDimIsocrystal.frobenius_apply; WittVector.instModuleFractionRingStandardOneDimIsocrystal; CategoryTheory.Sheaf.isConstant_of_forget",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPunctuallyPureOfWeight IsMixedOfWeightsAtMost",
+   "results": "none (unknown identifier IsPunctuallyPureOfWeight)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "punctually.*pure|mixed.*weights [Mathlib/]",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pure constant sheaf Frobenius weight zero finite field",
+   "results": "CategoryTheory.Sheaf.isConstant_iff_mem_essImage; CategoryTheory.Sheaf.isConstant_of_iso; CategoryTheory.Sheaf.mem_essImage_of_isConstant; SlashInvariantForm.wt_eq_zero_of_eq_const; CategoryTheory.Sheaf.IsConstant.rec; LightCondensed.IsDiscrete; CategoryTheory.Sheaf.IsConstant.casesOn; CategoryTheory.constantSheaf",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -102,5 +178,20 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-input-weights"
+ "unit": "sk-input-weights",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-weight-purity",
+  "worker": "stage1",
+  "summary": "Compared the item with both the current main-20261015 blueprint and the imported master statement. The statement is unchanged. The current proof paragraph routes clause (1) to the existing bundled theorem thm-weil-deligne-purity, whose statement contains the identical constant-sheaf purity assertion; no new node is needed. The two Mathlib search rounds for the item found no matching declaration. Reviewer repair: the theorem's explicit finiteness hypothesis is discharged by clause (3) of lem-weil-smooth-proper-purity-hypotheses (new Step 1); def-weil-complex-weights added to stmt_deps and the weight notion cited; proof_origin set to agent (blueprint-only).",
+  "blueprint": "Realizes the main-20261015 prop-weight-purity proof paragraph: the interpretation of weights by def-weil-complex-weights, the check that the hypotheses agree (Step 1 supplies the finiteness hypothesis the paragraph leaves implicit), and clause (1) of thm-weil-deligne-purity (Step 2)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-71d8aeb96",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-71d8aeb96 (reviewer sub-agent of L); spot-checked: I read the item and every cited node in full, against both blueprint snapshots (master and main-20261015) and unit sk-input-weights. The statement is identical in both snapshots and nothing is weakened. There are no new nodes. Assertion (1) of thm-weil-deligne-purity is the right step, but the theorem has an explicit hypothesis that all displayed cohomology groups are finite-dimensional. The item does not assume this, and the report wrongly claimed there was no unstated hypothesis (E1). The repair adds a Step 1 that uses clause (3) of lem-weil-smooth-proper-purity-hypotheses (same unit, reviewed PASS) to supply finite-dimensional H^j and H^j_c over Qlb with the Frobenius action. It also adds def-weil-complex-weights to stmt_deps (B3): the statement and the blueprint proof both use that weight notion. Step 2 now checks each hypothesis and applies the theorem at i=0, which is allowed since d>=0. It identifies the theorem's H^i(Ra_*) and H^i(Ra_!) with the item's RΓ and RΓ_c through def-weil-ordinary-compact-cohomology. proof_origin is set to agent, since the route is blueprint-only, and proof_deps is the union of the uses. The coefficient category is the same on both sides: def-weil-weil-sheaf-complex at Qlb, built on def-weil-algebraically-closed-coefficients. The Frobenius g_X and the canonical lift on ω_X are also the same. All cited statements are in the same unit or are definitions, so there are no tool_uses. There is no cycle and no SGA citation. The d=0 case checks out. Corrected file: fixes/dag/nodes/sec-zeta-weil/prop-weight-purity.json.; 1 file(s) fixed by the reviewer"
+ }
 }

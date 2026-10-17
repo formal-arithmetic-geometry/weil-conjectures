@@ -27,11 +27,100 @@
   "place": "Proposition 7.7.3.19, slice pullback-adjoint context. Agent-extracted auxiliary lemma from former step 3 of lem-coef-space-universal-colimits: the iterated-slice homotopy-fiber comparison, including the contraction of the redundant B-compatibility. This is an explicit auxiliary comparison, not a claim that 05V1 states this formula verbatim. Read 05V1 online; archival copy WANTED. Kerodon tag, not Stacks tag."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-slice-arrow-equivalence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First fix the slice model. For a quasicategory $\\mathcal D$ and $t\\in\\mathcal D$, use the arrow slice $T_t=\\operatorname{Fun}(\\Delta^1,\\mathcal D)\\times_{\\mathrm{ev}_1,\\mathcal D}\\{t\\}$. The slice diagonal of [lem-coef-infinity-slice-arrow-equivalence] is an equivalence over $\\mathcal D$, and [lem-cbc-enhanced-functor-cone-calculus] says that an equivalence induces equivalences on full mapping spaces. Thus this calculation also computes the join-slice convention. Specialize the cone formula of the latter node to $K=\\Delta^0$ and the diagram with value $t$. Since $\\operatorname{Fun}(\\Delta^0,\\mathcal D)=\\mathcal D$ degreewise, its cone category is exactly $T_t$. For $r:u\\to t$ and $s:v\\to t$ it gives\n$$\\operatorname{Map}_{\\mathcal D_{/t}}(r,s)\\simeq\\operatorname{hofib}_{r}\\bigl(\\operatorname{Map}_{\\mathcal D}(u,v)\\xrightarrow{s\\circ-}\\operatorname{Map}_{\\mathcal D}(u,t)\\bigr).$$\nThis uses full Kan mapping spaces and the specified compatibility path, rather than equality of morphisms in the homotopy category. Enlarge the containing universe if necessary so that each quasicategory used here is small there.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary slice mapping formula for paragraph 2; Kerodon 02VT for slice/arrow presentation, and the K=point case of the existing cone-mapping lemma."
+   }
+  },
+  {
+   "text": "Apply Step 1 with $\\mathcal D=\\mathcal E_{/B}$, $t=a$, $r=\\widetilde q$ and $s=\\widetilde p$. The arrow slice is a quasicategory by the cone-category assertion of [lem-cbc-enhanced-functor-cone-calculus]. We obtain precisely the first displayed equivalence in the item. In particular its right-hand side is the homotopy fiber of the actual postcomposition map by $\\widetilde p$, with base point the specified triangle $\\widetilde q$. Denote this homotopy fiber by $H$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary expansion: the first equivalence is the cone-mapping formula applied once more in the slice."
+   }
+  },
+  {
+   "text": "Set $U=\\operatorname{Map}_{\\mathcal E}(X,Y)$, $V=\\operatorname{Map}_{\\mathcal E}(X,A)$ and $W=\\operatorname{Map}_{\\mathcal E}(X,B)$, and write $g=p\\circ-:U\\to V$ and $h=f\\circ-:V\\to W$. Let $b$ be the chosen edge $fq$ in $W$. The chosen triangle for $fq$ specifies a path $\\alpha:h(q)\\simeq b$. Put $V_b=\\operatorname{hofib}_b(h)$ and $\\eta=(q,\\alpha)\\in V_b$. The comma formula of [lem-coef-infinity-comma-mapping-pullback], applied to $\\mathcal C=\\mathcal D=\\mathcal E$, $F=\\mathrm{id}$, $\\mathcal B=\\Delta^0$ and $G(*)=B$, first identifies $\\operatorname{Map}_{\\mathcal E_{/B}}(x,y)$ with $\\operatorname{hofib}_{b'}(fp\\circ-)$ and $\\operatorname{Map}_{\\mathcal E_{/B}}(x,a)$ with $\\operatorname{hofib}_{b'}(h)$, where $b'$ represents the composite of the degenerate edge at $B$ with $b$. These are replaced by fibers of $hg$ over $b$ as follows. By [lem-coef-infinity-mapping-composition], composition is associative and unital up to simplicial homotopy, the chosen triangle gives $[f][p]=[fp]$, and postcomposition by an edge depends only on its component class; hence there are simplicial homotopies $K:U\\times\\Delta^1\\to W$ from $hg$ to $fp\\circ-$ and $\\Delta^1\\to W$ from $b'$ to $b$. For any simplicial homotopy $\\Theta:U\\times\\Delta^1\\to W$ from $r$ to $s$, the endpoint inclusions $i_0,i_1:U\\to U\\times\\Delta^1$ are weak homotopy equivalences (the projection is a simplicial homotopy inverse), and $\\Theta i_0=r$, $\\Theta i_1=s$ hold strictly; so [lem-coef-kan-homotopy-pullback-invariance], applied with $c=\\mathrm{id}_W$, the identity of the point leg, and $a=i_0$ or $a=i_1$, gives equivalences $\\operatorname{hofib}_b(r)\\simeq P(\\Theta,b)\\simeq\\operatorname{hofib}_b(s)$ over $U$. The same argument in the point variable moves $b'$ to $b$. Therefore it identifies\n$$\\operatorname{Map}_{\\mathcal E_{/B}}(x,y)\\simeq U_b:=\\operatorname{hofib}_b(hg),\\qquad \\operatorname{Map}_{\\mathcal E_{/B}}(x,a)\\simeq V_b.$$\nIts compatibility with endpoint projections and with composition by pasting squares identifies the postcomposition map with $g_b:U_b\\to V_b$, and $\\widetilde q$ with $\\eta$. Thus $H\\simeq\\operatorname{hofib}_{\\eta}(g_b)$. Applying Step 1 over $A$ also gives $\\operatorname{Map}_{\\mathcal E_{/A}}(q,p)\\simeq\\operatorname{hofib}_q(g)$. All identifications keep the chosen triangles; no strictly associative composition law on the right-pinched model is assumed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-comma-mapping-pullback",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary expansion: identify the two mapping spaces over B and their map with a map between homotopy fibers; comma naturality retains the chosen triangles."
+   }
+  },
+  {
+   "text": "Consider the diagram with top row $U_b\\xrightarrow{g_b}V_b\\to\\Delta^0$ and bottom row $U\\xrightarrow g V\\xrightarrow h W$. The rightmost vertical map selects $b$, and the other vertical maps forget the fiber path. Supply the right square with its universal path from $h(v)$ to $b$. Supply the outer rectangle with the universal path from $hg(u)$ to $b$. The commutation homotopy of the left square is the one induced by the triangles in Step 3, so its paste with the right square is this outer homotopy. By the path-space definition of the fibers, both the right square and outer rectangle are homotopy pullbacks. Right-square cancellation in [lem-coef-infinity-homotopy-pullback-pasting] therefore proves that the left square\n$$\\begin{array}{ccc}U_b&\\longrightarrow&V_b\\\\\n\\downarrow&&\\downarrow\\\\\nU&\\xrightarrow g&V\\end{array}$$\nis a homotopy pullback, with the specified commutation homotopy. This applies equally if some of these spaces or fibers are empty.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-homotopy-pullback-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary expansion: first application of Kerodon 0110, cancel the right square; the statement includes specified commutation homotopies."
+   }
+  },
+  {
+   "text": "Now form the diagram with top row $H\\to U_b\\to U$ and bottom row $\\Delta^0\\xrightarrow{\\eta}V_b\\to V$. Its left square is a homotopy pullback by the definition $H=\\operatorname{hofib}_{\\eta}(g_b)$. Its right square is the square proved to be a homotopy pullback in Step 4. The pasting assertion of [lem-coef-infinity-homotopy-pullback-pasting] makes the outer rectangle a homotopy pullback. The bottom composite selects $q\\in V$. Consequently its comparison is an equivalence\n$$H\\longrightarrow\\operatorname{hofib}_q(g).$$\nIt sends a morphism and its path over $A$ to that same pair, forgetting the additional path over $B$ and the homotopy that compares it to the image of the $A$-path. Combine with Steps 2 and 3 to get the second equivalence required in the item. The pasting argument proves that all the discarded data, including higher compatibilities, have the required homotopy type; no assertion about only connected components is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-homotopy-pullback-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary expansion: second application of Kerodon 0110, paste the fiber square with the square of Step 4."
+   }
+  },
+  {
+   "text": "Finally check the compatibility clauses on the comparison just constructed. In the comma presentation, a simplex of the iterated slice mapping space consists of the underlying morphism, the compatibility over $A$, and its additional coherent compatibility over $B$. The comparison retains the first two coordinates. Restriction along every map $\\Delta^m\\to\\Delta^n$ restricts each coordinate, so it commutes with this comparison. More generally the identity $\\operatorname{Fun}(K,T_t)=\\operatorname{Fun}(K,\\operatorname{Fun}(\\Delta^1,\\mathcal D))\\times_{\\operatorname{Fun}(K,\\mathcal D)}\\{\\Delta_Kt\\}$ follows degreewise by transposing maps out of $K\\times\\Delta^n$. It commutes with restriction in $K$. The naturality and composition-by-pasting clauses of [lem-coef-infinity-comma-mapping-pullback] therefore apply to coherent families as well: precomposition in $q$, postcomposition in $p$, and higher simplices of either family commute with forgetting those coordinates. A coherent change of a chosen composition triangle is another such family, and is sent to its underlying $A$-data by the same formula. The comparisons in Steps 4 and 5 use exactly the pasted homotopies, so are this forgetful comparison. Their equivalence property does not require choosing an inverse or a preferred triangle filler. This proves coherent naturality, compatibility with changes of composites, and all simplicial parameters. The only pullbacks formed in the argument are pullbacks of spaces or simplicial sets, so no limits in $\\mathcal E$ were assumed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-comma-mapping-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary expansion: degreewise parameter restriction and the existing natural comma comparison verify all coherence clauses."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-comma-mapping-pullback",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-kan-homotopy-pullback-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, auxiliary iterated-slice calculation. Proof uses the existing cone/comma mapping formulas and homotopy-pullback pasting. Online Kerodon 02VT and 0110 were read; these are Kerodon, not Stacks, tags."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -81,10 +170,101 @@
    "results": "{\"t\": \"2026-10-17T08:44:25Z\", \"tool\": \"grep\", \"query\": \"iteratedSliceEquiv|toOverSectionsAdj|dependent.*product|slice.*equiv\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: CategoryTheory.Over.iteratedSliceEquiv at Mathlib/CategoryTheory/Comma/Over/Basic.lean:358-387 is an equivalence of ordinary categories using equality in commuting triangles. It does not identify coherent slice mapping spaces, their homotopy fibers, or higher compatibilities for arbitrary quasicategories. ModelCategory/Over hits characterize ordinary fibrations only. The AlgebraicTopology grep has no corresponding result."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.?[Ff]iber|homotopy.?[Pp]ullback|[Ff]iber.*[Bb]ase[Cc]hange",
+   "results": "{\"t\": \"2026-10-17T12:27:35Z\", \"tool\": \"grep\", \"query\": \"homotopy.?[Ff]iber|homotopy.?[Pp]ullback|[Ff]iber.*[Bb]ase[Cc]hange\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary fibrations, path-object homotopy composition, or ordinary pullback fibers, not the full coherent iterated-slice mapping equivalence. Searches were exploratory for a generic fiber lemma; the existing DAG pasting theorem was found and reused, so no new node is created."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy fibers of a map of Kan complexes are unchanged by homotopy base change at corresponding points",
+   "results": "{\"t\": \"2026-10-17T12:27:36Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy fibers of a map of Kan complexes are unchanged by homotopy base change at corresponding points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"CategoryTheory.MorphismProperty.rlp_isStableUnderBaseChange\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeCofibrations\", \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"HomotopicalAlgebra.LeftHomotopyRel.precomp\", \"HomotopicalAlgebra.instFibrationPCofibrationsTrivialFibrations\"], \"digest\": \"b6982742153a0f47\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary fibrations, path-object homotopy composition, or ordinary pullback fibers, not the full coherent iterated-slice mapping equivalence. Searches were exploratory for a generic fiber lemma; the existing DAG pasting theorem was found and reused, so no new node is created."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopy\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-17T12:27:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"homotopy\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary fibrations, path-object homotopy composition, or ordinary pullback fibers, not the full coherent iterated-slice mapping equivalence. Searches were exploratory for a generic fiber lemma; the existing DAG pasting theorem was found and reused, so no new node is created."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For composable maps of Kan complexes M to N to P, the homotopy fiber of hofib at b of M to P mapping to hofib at b of N to P at a chosen lift of q is equivalent to hofib at q of M to N",
+   "results": "{\"t\": \"2026-10-17T12:27:37Z\", \"tool\": \"leanfinder\", \"query\": \"For composable maps of Kan complexes M to N to P, the homotopy fiber of hofib at b of M to P mapping to hofib at b of N to P at a chosen lift of q is equivalent to hofib at q of M to N\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.BifibrantObject.homMk_homMk\", \"HomotopicalAlgebra.FibrantObject.homMk_homMk\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.trans_ι\", \"HomotopicalAlgebra.PathObject.trans\", \"HomotopicalAlgebra.PathObject.trans_p₁\", \"HomotopicalAlgebra.FibrantObject.homMk_homMk_assoc\"], \"digest\": \"1fa7718f1d7069ab\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary fibrations, path-object homotopy composition, or ordinary pullback fibers, not the full coherent iterated-slice mapping equivalence. Searches were exploratory for a generic fiber lemma; the existing DAG pasting theorem was found and reused, so no new node is created."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy cartesian squares of spaces induce equivalences on the homotopy fibers of the vertical maps, naturally for all coherent diagrams and basepoints",
+   "results": "{\"t\": \"2026-10-17T12:36:38Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy cartesian squares of spaces induce equivalences on the homotopy fibers of the vertical maps, naturally for all coherent diagrams and basepoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousMap.HomotopyEquiv.piCongrRight\", \"HomotopicalAlgebra.Cylinder.LeftHomotopy.covering_homotopy\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.PathObject.trans_ι\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk\", \"HomotopicalAlgebra.PathObject.RightHomotopy.homotopy_extension\", \"HomotopicalAlgebra.RightHomotopyRel.leftHomotopyRel\"], \"digest\": \"0a850042980e8484\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary fibrations, path-object homotopy composition, or ordinary pullback fibers, not the full coherent iterated-slice mapping equivalence. Searches were exploratory for a generic fiber lemma; the existing DAG pasting theorem was found and reused, so no new node is created."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.?[Ff]iber|homotopy.?[Pp]ullback|fiber.*baseChange",
+   "results": "{\"t\": \"2026-10-17T12:51:23Z\", \"tool\": \"grep\", \"query\": \"homotopy.?[Ff]iber|homotopy.?[Pp]ullback|fiber.*baseChange\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary fibrations, path-object homotopy composition, or ordinary pullback fibers, not the full coherent iterated-slice mapping equivalence. Searches were exploratory for a generic fiber lemma; the existing DAG pasting theorem was found and reused, so no new node is created."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homotopy fiber of a homotopy pullback projection is equivalent to the original homotopy fiber over the corresponding point",
+   "results": "{\"t\": \"2026-10-17T12:51:24Z\", \"tool\": \"leansearch\", \"query\": \"The homotopy fiber of a homotopy pullback projection is equivalent to the original homotopy fiber over the corresponding point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.fiberPullbackEquiv_symm_fst_apply\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"CategoryTheory.PreGaloisCategory.fiberPullbackEquiv_symm_snd_apply\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"FiberBundle.pullback_trivializationAt'\", \"CategoryTheory.Functor.IsPreFibered.pullbackObj_proj\", \"HomotopicalAlgebra.instFibrationFstOfIsFibrant\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\"], \"digest\": \"b5868cb864768c78\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary fibrations, path-object homotopy composition, or ordinary pullback fibers, not the full coherent iterated-slice mapping equivalence. Searches were exploratory for a generic fiber lemma; the existing DAG pasting theorem was found and reused, so no new node is created."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra, \"pullback\"",
+   "results": "{\"t\": \"2026-10-17T12:51:24Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra, \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'HomotopicalAlgebra'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: Loogle rejected the namespace-only identifier; the later valid homotopy/pullback pattern and named-declaration searches were read instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy pullback square of Kan complexes induces an equivalence on homotopy fibers over every vertex, naturally with respect to homotopy coherent diagrams",
+   "results": "{\"t\": \"2026-10-17T12:51:33Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy pullback square of Kan complexes induces an equivalence on homotopy fibers over every vertex, naturally with respect to homotopy coherent diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.PathObject.trans_P\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.RightHomotopyRel.leftHomotopyRel\", \"CategoryTheory.PreOneHypercover.cylinderHomotopy\"], \"digest\": \"a50d42eb11e4c96d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary fibrations, path-object homotopy composition, or ordinary pullback fibers, not the full coherent iterated-slice mapping equivalence. Searches were exploratory for a generic fiber lemma; the existing DAG pasting theorem was found and reused, so no new node is created."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopy\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-17T12:52:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"homotopy\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary fibrations, path-object homotopy composition, or ordinary pullback fibers, not the full coherent iterated-slice mapping equivalence. Searches were exploratory for a generic fiber lemma; the existing DAG pasting theorem was found and reused, so no new node is created."
+  },
+  {
+   "tool": "grep",
+   "query": "iteratedSliceEquiv",
+   "results": "{\"t\": \"2026-10-17T12:54:52Z\", \"tool\": \"grep\", \"query\": \"iteratedSliceEquiv\", \"sub\": \"CategoryTheory/Comma/Over\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\"], \"digest\": \"b85135b189a24e9a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary CategoryTheory.Over results. Read Mathlib/CategoryTheory/Comma/Over/Basic.lean:359-387, especially iteratedSliceEquiv at line 382; its hom sets and equality of triangles do not give the full mapping spaces and homotopy fibers of arbitrary quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Over.iteratedSliceEquiv",
+   "results": "{\"t\": \"2026-10-17T12:54:53Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Over.iteratedSliceEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.Over.iteratedSliceEquiv\", \"CategoryTheory.Over.iteratedSliceEquiv_functor\", \"CategoryTheory.Over.iteratedSliceEquiv_inverse\", \"CategoryTheory.Over.iteratedSliceEquiv_counitIso\", \"CategoryTheory.Over.iteratedSliceEquiv_unitIso\", \"CategoryTheory.MonoOver.slice\", \"CategoryTheory.instIsDenseSubsiteOverLeftOverInverseIteratedSliceEquiv\", \"CategoryTheory.toOverIteratedSliceForwardIsoPullback_hom_app_left\"], \"digest\": \"e9272db5998e36ec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary CategoryTheory.Over results. Read Mathlib/CategoryTheory/Comma/Over/Basic.lean:359-387, especially iteratedSliceEquiv at line 382; its hom sets and equality of triangles do not give the full mapping spaces and homotopy fibers of arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping spaces in the iterated slice of an infinity category are naturally the same as the mapping spaces in the slice over the domain, including all higher homotopies",
+   "results": "{\"t\": \"2026-10-17T12:54:59Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping spaces in the iterated slice of an infinity category are naturally the same as the mapping spaces in the slice over the domain, including all higher homotopies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.iteratedSliceForward_map\", \"CategoryTheory.Over.iteratedSliceEquiv_functor\", \"CategoryTheory.Over.iteratedSliceBackward_map\", \"CategoryTheory.Over.iteratedSliceEquiv\", \"CategoryTheory.Over.iteratedSliceBackward_obj\", \"CategoryTheory.Over.iteratedSliceEquivOverMapIso\", \"CategoryTheory.Over.iteratedSliceForward\", \"CategoryTheory.Over.iteratedSliceBackward\"], \"digest\": \"eac36202a63fecba\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary CategoryTheory.Over results. Read Mathlib/CategoryTheory/Comma/Over/Basic.lean:359-387, especially iteratedSliceEquiv at line 382; its hom sets and equality of triangles do not give the full mapping spaces and homotopy fibers of arbitrary quasicategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-universal-colimits",
@@ -100,5 +280,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-iterated-slice-mapping",
+  "worker": "stage1",
+  "summary": "Proved the full iterated-slice mapping comparison by the slice homotopy-fiber formula and two explicit homotopy-pullback pasting applications, keeping the specified triangles and parameter restrictions. Reused all required lemmas; no new nodes and no change to the statement. Added the slice presentation to statement dependencies.",
+  "blueprint": "Realizes the inherited prop-coef-integral-exceptional-adjoint proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim: the passage from maps over B with a homotopy over A to maps over A in the space-base-change foundation.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic cone/mapping-space calculus supplies the K=point slice formula and invariance under the slice/arrow equivalence; the unit supplies no replacement for this general mapping-space tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-0dc39937a",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-0dc39937a (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, with no new nodes in the delivery. I read the full statements of def-cbc-enhanced-diagrams-cones, lem-coef-infinity-slice-arrow-equivalence, lem-cbc-enhanced-functor-cone-calculus, lem-coef-infinity-comma-mapping-pullback and lem-coef-infinity-homotopy-pullback-pasting, plus the unit record, ancestor paragraph 2 (main-20261015) and the citer lem-coef-space-universal-colimits step 5. The statement is true and was tested on ordinary nerves, the fork poset (empty case) and spaces with X=Y=A=pt (U_b=V_b=ΩB, g_b=id, fiber a point). Step 1 checked: the K=Δ^0 cone category equals T_t because Fun(Δ^0,C)=C degreewise, and transfer to the join slice goes through δ_y. Steps 2, 4, 5 and 6 checked: in Step 4 the left square commutes strictly once U_b=hofib_b(hg), and the cancellation and pasting are used as stated. Fault C1/E5 in Step 3: the comma formula gives hofib_{b'}((fp)∘−), and the step replaced it by hofib_b(hg) with the uncited sentence 'the triangle for fp identifies postcomposition by fp with hg'. That passage needs associativity and unitality of composition and homotopy invariance of homotopy fibers. Repaired in fixes/: Step 3 now cites lem-coef-infinity-mapping-composition and lem-coef-kan-homotopy-pullback-invariance (applied to endpoint inclusions U→U×Δ^1), and both are added to uses and proof_deps. Both are in the same unit and neither depends on the item, so no cycle. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (sk-prop-sf-cbc), a generic black-box mapping-space formula. The Mathlib no-match is correct (iteratedSliceEquiv covers ordinary categories only). No SGA used; statement unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

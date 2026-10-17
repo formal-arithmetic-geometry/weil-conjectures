@@ -1,0 +1,80 @@
+{
+ "id": "lem-trf-site-inverse-image-composition-generators",
+ "kind": "statement",
+ "title": "Composition of sheaf inverse images on nested colimit generators",
+ "statement": "Let $\\mathcal C,\\mathcal D,\\mathcal E$ be small sites and $v:\\mathcal C\\to\\mathcal D$, $u:\\mathcal D\\to\\mathcal E$ functors for which precomposition takes sheaves of sets to sheaves of sets. Work in a fixed larger universe containing these sites. Let $\\mathcal A$ be sets or abelian groups, and use the sheaf inverse images and adjunctions of [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction]. Thus $w_s\\mathcal F=(w_p\\mathcal F)^\\#$, where $w_p\\mathcal F(T)$ is the colimit of $\\mathcal F(S)$ over the opposite of the category of pairs $(S,\\alpha:T\\to w(S))$; sheafification is [def-weil-pbc-sheafification]. For such a functor $w$ and a sheaf $\\mathcal F$ on its source, denote by $\\iota^w_{S,\\alpha}:\\mathcal F(S)\\to(w_s\\mathcal F)(T)$ the colimit coprojection followed by sheafification. The equality $(uv)^s=v^su^s$ of direct images determines a unique adjunction-compatible natural isomorphism\n$$\\kappa:u_sv_s\\xrightarrow{\\sim}(uv)_s.$$\nHere adjunction compatibility means that $v^su^s(\\kappa_{\\mathcal F})\\circ v^s(\\eta^u_{v_s\\mathcal F})\\circ\\eta^v_{\\mathcal F}=\\eta^{uv}_{\\mathcal F}$, with $\\eta^w$ the unit of $w_s\\dashv w^s$. For every sheaf $\\mathcal F$ on $\\mathcal C$ with values in $\\mathcal A$, this comparison satisfies the following normalization: for $U\\in\\mathcal E$, $V\\in\\mathcal D$, $W\\in\\mathcal C$, arrows $\\phi:U\\to u(V)$ and $\\psi:V\\to v(W)$, and $x\\in\\mathcal F(W)$,\n$$\\kappa_{\\mathcal F,U}\\bigl(\\iota^u_{V,\\phi}(\\iota^v_{W,\\psi}(x))\\bigr)=\\iota^{uv}_{W,u(\\psi)\\phi}(x).$$\nMoreover, for any sheaf $\\mathcal H$ on $\\mathcal E$, two sheaf morphisms $\\alpha,\\beta:u_sv_s\\mathcal F\\to\\mathcal H$ are equal if their components have equal values on every element $\\iota^u_{V,\\phi}(\\iota^v_{W,\\psi}(x))$ with the indices above. For abelian sheaves this means equality on these generators, without assuming that every section is a single colimit representative. Both assertions are natural in $\\mathcal F$ and in restrictions $U'\\to U$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CB, lemma-composition-morphisms-sites, adjunction-compatible comparison; generator normalization from the colimit adjunction construction in lemma-adjoints-u and lemma-adjoint-sheaves."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*[Cc]omp|[Cc]omp.*sheafPullback|sheafify.*[Cc]omp|[Cc]omp.*sheafify",
+   "results": "25 hits: Mathlib/CategoryTheory/Sites/LocallyInjective.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Subsheaf.lean, Mathlib/CategoryTheory/Sites/Limits.lean, Mathlib/CategoryTheory/Sites/Limits.lean, Mathlib/CategoryTheory/Sites/Limits.lean, Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean; directory Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match: sheaf composition in the value category, individual sheaf pullback constructions, or direct-image comparison only; none states both the nested coprojection formula for successive inverse images on arbitrary sites and its equality-detection assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPullback, CategoryTheory.Functor.comp",
+   "results": "4 hits: CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso, CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_hom_app, CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_inv_app",
+   "date": "2026-10-17",
+   "verdict": "no match: sheaf composition in the value category, individual sheaf pullback constructions, or direct-image comparison only; none states both the nested coprojection formula for successive inverse images on arbitrary sites and its equality-detection assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison for successive inverse images of sheaves takes a nested colimit section to the section indexed by the composite arrow",
+   "results": "8 hits: AlgebraicGeometry.SheafedSpace.instHasColimitsOfShapeOfSmallOfHasLimitsOfShapeOpposite, AlgebraicGeometry.PresheafedSpace.colimitPresheafObjIsoComponentwiseLimit_inv_ι_app, CategoryTheory.Sheaf.createsColimitOfIsSheaf, AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.descCApp, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, AlgebraicGeometry.SheafedSpace.instEpiTopCatBaseHomPresheafedSpaceπ, CategoryTheory.Sheaf.isColimitSheafifyCocone, smoothSheafCommRing.ι_forgetStalk_inv_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: sheaf composition in the value category, individual sheaf pullback constructions, or direct-image comparison only; none states both the nested coprojection formula for successive inverse images on arbitrary sites and its equality-detection assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of inverse image sheaf functors computed by sheafified left Kan extensions sends nested colimit generators to the composite arrow",
+   "results": "8 hits: CategoryTheory.sheafComposeIso_inv_fac, CategoryTheory.Presieve.IsSheafFor.functorInclusion_comp_extend_assoc, CategoryTheory.sheafComposeIso_hom_fac, CategoryTheory.sheafComposeIso_inv_fac_assoc, CategoryTheory.GrothendieckTopology.sheafToPresheaf_map_sheafComposeNatTrans_eq_sheafifyCompIso_inv, CategoryTheory.GrothendieckTopology.sheafifyCompIso_inv_eq_sheafifyLift, CategoryTheory.GrothendieckTopology.toPlus_comp_plusCompIso_inv, CategoryTheory.GrothendieckTopology.toSheafify_comp_sheafifyCompIso_inv",
+   "date": "2026-10-17",
+   "verdict": "no match: sheaf composition in the value category, individual sheaf pullback constructions, or direct-image comparison only; none states both the nested coprojection formula for successive inverse images on arbitrary sites and its equality-detection assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullbackComp|sheafPullback.*[Cc]omp|[Cc]omp.*sheafPullback|[Ll]an.*[Cc]omp|[Cc]omp.*[Ll]an",
+   "results": "25 hits: Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: sheaf composition in the value category, individual sheaf pullback constructions, or direct-image comparison only; none states both the nested coprojection formula for successive inverse images on arbitrary sites and its equality-detection assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The left adjoint to precomposition by two continuous site functors is their composite sheaf pullback, with its formula on left Kan extension coprojections",
+   "results": "8 hits: CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, TopCat.Sheaf.instIsLeftAdjointPullback, TopCat.Sheaf.pullbackPushforwardAdjunction, CategoryTheory.Functor.sheafAdjunctionContinuous",
+   "date": "2026-10-17",
+   "verdict": "no match: sheaf composition in the value category, individual sheaf pullback constructions, or direct-image comparison only; none states both the nested coprojection formula for successive inverse images on arbitrary sites and its equality-detection assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-absolute-frobenius-site",
+  "date": "2026-10-17",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-absolute-frobenius-site",
+   "place": "Proof paragraph 4: taking left adjoints and composing them; the nested-colimit composition comparison used in returned step 7.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

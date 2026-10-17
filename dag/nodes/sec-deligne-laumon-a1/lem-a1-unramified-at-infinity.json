@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-a1-unramified-at-infinity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Removing a regular point to arrange infinity",
@@ -14,44 +14,167 @@
  },
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions",
-  "def-wf-middle-extension"
+  "def-weil-finite-field-fiber",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-punctual-weights",
+  "rem-dl-a1-conventions",
+  "def-weil-ordinary-compact-cohomology"
  ],
  "proof": [
   {
-   "text": "Choose a geometric point $s\\in U$, defined over a finite extension.\nOver a further finite extension choose\n$\\tau\\in\\mathrm{PGL}_2$ with $\\tau(s)=\\infty$.\nSet $V_0=\\tau(U_0\\setminus\\{s\\})\\subset\\mathbf A^1$ and let\n$\\mathcal E$ be the transported restriction.\nIt extends lisse across infinity, since $\\mathcal F$ was lisse at\n$s$; hence its inertia there is trivial.\nRestriction to a dense open preserves geometric irreducibility:\nthe fundamental group of that open surjects onto the fundamental\ngroup of the original smooth curve, by\n[lem-wf-dense-open-pi1-surjective] (parts (1) and (4)).\nThe isomorphism $\\tau$ and restriction preserve the local\nweight condition of [def-weil-punctual-weights].",
+   "text": "Choose a finite extension with a regular rational point. Use the finite-field datum of [def-weil-finite-field-fiber]. Since the nonempty open $U_0$ in $\\operatorname{Spec}k_0[x]$ contains a nonempty basic open $D(f)$ for some nonzero $f\\in k_0[x]$, choose $m\\geq1$ with $q^m>\\deg f$. A nonzero polynomial has at most its degree many roots, so some $a\\in k'_0=\\mathbf F_{q^m}\\subset k$ has $f(a)\\ne0$. Thus $s_0=(x=a)$ is a $k'_0$-rational point of $U'_0:=U_0\\times_{k_0}k'_0$. Set $W_0=U'_0\\setminus\\{s_0\\}$. This is still a dense nonempty open: deleting one closed point from an open of the integral affine line does not delete its generic point. The common geometric fibre of $U'_0$ and $U_0$ is $U$.",
    "uses": [
-    "lem-wf-dense-open-pi1-surjective",
-    "def-weil-punctual-weights"
+    "def-weil-finite-field-fiber"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-unramified-at-infinity.proof.md",
+    "place": "first paragraph, choice of s over a finite extension"
+   }
   },
   {
-   "text": "Open–closed recollement, [def-weil-open-closed-recollement], whose triangle exists for\n$\\Qlb$-Weil sheaves by [prop-sf-open-closed-triangle-all-stages],\nand the vanishing of $H_c^1$ on the single point from\n[lem-a1-finite-boundary-cohomology] give a surjection\n$H_c^1(U\\setminus\\{s\\},\\mathcal F)\\to H_c^1(U,\\mathcal F)$.\nTransport by $\\tau$ gives the asserted map in the convention of\n[def-weil-ordinary-compact-cohomology].",
+   "text": "Regard $\\mathcal F$ on $U$ with its $k'_0$-Weil structure $\\theta^{[m]}=\\theta\\circ g_U^*\\theta\\circ\\cdots\\circ(g_U^{m-1})^*\\theta$, using [def-weil-weil-sheaf-complex] and [def-weil-frobenius-detailed]; denote this sheaf by $\\mathcal F'$. Its underlying lisse sheaf is unchanged. If $y$ is a closed point of $U'_0$ above $x\\in U_0$, put $e=[\\kappa(y):\\kappa(x)]$. The residue-field Frobenius over $\\kappa(y)$ is the $e$-th power of that over $\\kappa(x)$; the iterated-stalk definition [def-weil-local-frobenius-trace] therefore makes its stalk operator $F_x^e$ (up to the choice of the geometric lift). Triangularizing $F_x$ shows that its eigenvalues become $\\alpha^e$, and $q_y=q_x^e$. Thus $|\\iota(\\alpha^e)|=q_x^{ew/2}=q_y^{w/2}$ by [def-weil-punctual-weights]. This verifies punctual purity of weight $w$ after the constant extension, including nonsemisimple stalk operators.",
    "uses": [
-    "def-weil-open-closed-recollement",
-    "prop-sf-open-closed-triangle-all-stages",
-    "lem-a1-finite-boundary-cohomology",
-    "def-weil-ordinary-compact-cohomology"
+    "def-weil-weil-sheaf-complex",
+    "def-weil-frobenius-detailed",
+    "def-weil-local-frobenius-trace",
+    "def-weil-punctual-weights"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-unramified-at-infinity.proof.md",
+    "place": "first paragraph, preservation of the local weight condition under the finite extension"
+   }
+  },
+  {
+   "text": "Use homogeneous coordinates $[X:Z]$ on $\\mathbf P^1_{k'_0}$ and set $\\tau[X:Z]=[Z:X-aZ]$. Its matrix has determinant $-1$, and its inverse is $[Y:T]\\mapsto[aY+T:Y]$; these formulas work in characteristic two as well. Hence $\\tau$ is a $k'_0$-isomorphism, sends $s_0=[a:1]$ to $\\infty=[1:0]$, and is $x\\mapsto1/(x-a)$ away from $s_0$. Define $V_0=\\tau(W_0)\\subset\\mathbf A^1_{k'_0}$ and $h=\\tau|_{W_0}:W_0\\xrightarrow{\\sim}V_0$. Define $\\mathcal E=(h^{-1})^*(\\mathcal F'|_{W_0})$. Transport of the local constant systems of [def-pod-lisse-l-adic-sheaves] makes $\\mathcal E$ lisse. Since $h$ is defined over $k'_0$, its pullback commutes with the geometric Frobenius and transports the Weil isomorphism of [def-weil-weil-sheaf-complex]. Stalks, residue fields and their local operators are identified under $h$, so purity follows directly from [def-weil-punctual-weights]. More strongly, $(\\tau^{-1})^*\\mathcal F'$ is lisse on $\\tau(U'_0)=V_0\\cup\\{\\infty\\}$ and restricts to $\\mathcal E$. By the extension criterion in [rem-dl-a1-conventions], $\\mathcal E$ is unramified at infinity. Thus no ramification hypothesis on the original infinity was used.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "def-weil-weil-sheaf-complex",
+    "def-weil-punctual-weights",
+    "rem-dl-a1-conventions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-unramified-at-infinity.proof.md",
+    "place": "first paragraph, the projective coordinate change and lisse extension across the new infinity"
+   }
+  },
+  {
+   "text": "Suppose the original underlying geometric sheaf $\\mathcal F$ is irreducible. The geometric curve $U$ is a nonempty open of $\\mathbf A^1_k$, hence connected, normal and Noetherian; the geometric $W=U\\setminus\\{s\\}$ is nonempty and dense. Apply the geometric-sheaf clause of part (4) of [lem-wf-dense-open-pi1-surjective] to $W\\hookrightarrow U$: $\\mathcal F|_W$ is irreducible. Equivalently part (1) says that $\\pi_1(W)\\to\\pi_1(U)$ is surjective, so no new invariant subspace can occur on restriction. Constant-field extension did not change $U$ or its underlying geometric sheaf, and the isomorphism $h$ induces inverse equivalences of their sheaf categories. Therefore $\\mathcal E$ is geometrically irreducible. This assertion concerns geometric irreducibility only; arithmetic irreducibility need not survive a constant-field extension.",
+   "uses": [
+    "lem-wf-dense-open-pi1-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-unramified-at-infinity.proof.md",
+    "place": "first paragraph, restriction to a dense open preserves geometric irreducibility"
+   }
+  },
+  {
+   "text": "Let $j_0:W_0\\hookrightarrow U'_0$ and $i_0:s_0\\hookrightarrow U'_0$ be the complementary immersions. All schemes are separated and of finite type over $k'_0$, and $\\ell$ is invertible. For the constructible $\\overline{\\mathbf Q}_\\ell$-Weil sheaf $\\mathcal F'$ in degree zero, [prop-sf-open-closed-triangle-all-stages] supplies the localization triangle with all arrows Weil-equivariant. Apply the localization-under-$Rf_!$ clause of [prop-functor-package] with $f:U\\to\\operatorname{Spec}k$. It gives the triangle with terms $R\\Gamma_c(W,\\mathcal F'|_W)$, $R\\Gamma_c(U,\\mathcal F')$, $R\\Gamma_c(s,\\mathcal F'_s)$, after the point-fibre interpretation of [def-weil-ordinary-compact-cohomology]. Work on the underlying coefficient complexes, not in a purported derived category of Weil sheaves. By [lem-weil-point-fibre-equivalence] the point-fibre functor $\\operatorname{Fib}_s$ is an exact equivalence (it commutes with shifts and carries distinguished triangles to distinguished triangles) onto the finite-dimensional derived category over the coefficient field, so the triangle becomes a distinguished triangle of coefficient complexes. The long exact cohomology sequence [lem-sf-derived-homology-long-exact], applied at a common finite coefficient-field stage and then extended to $\\overline{\\mathbf Q}_\\ell$, has the exact segment\n$$H_c^1(W,\\mathcal F'|_W)\\longrightarrow H_c^1(U,\\mathcal F')\\longrightarrow H_c^1(s,\\mathcal F'_s).$$\nExact coefficient-field transport and the equivariance of these comparisons are clauses of [prop-functor-package]. Thus both displayed arrows commute with Frobenius over $k'_0$.",
+   "uses": [
+    "prop-sf-open-closed-triangle-all-stages",
+    "prop-functor-package",
+    "def-weil-ordinary-compact-cohomology",
+    "lem-weil-point-fibre-equivalence",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-unramified-at-infinity.proof.md",
+    "place": "second paragraph, recollement followed by compact-support direct image and its degree-one exact sequence"
+   }
+  },
+  {
+   "text": "The closed scheme $s_0=\\operatorname{Spec}k'_0$ is finite over the current constant field, and $\\mathcal F'_s$ is constructible. At $r=1$, [lem-a1-finite-boundary-cohomology-positive] makes the last term of the preceding segment zero, in the cohomology convention of [def-weil-ordinary-compact-cohomology]. Exactness then makes its first arrow surjective. Finally $h:W\\xrightarrow{\\sim}V$ has $h_*\\mathcal F'|_W=\\mathcal E$ by its definition as transport of a sheaf. Direct image along an isomorphism is the inverse equivalence to pullback and is exact; $h$ is proper, so the proper-coincidence and compact-support-composition clauses of [prop-functor-package] identify $R\\Gamma_c(V,\\mathcal E)$ with $R\\Gamma_c(W,\\mathcal F'|_W)$. Composing this identification on $H^1$ with the surjection constructs\n$$H_c^1(V,\\mathcal E)\\twoheadrightarrow H_c^1(U,\\mathcal F).$$\nThe schemes and $h$ are defined over $k'_0$, and every comparison used here is Weil-equivariant by [prop-functor-package]. The underlying geometric sheaf on the right is the original $\\mathcal F$; its Weil operator is the iterate over $k'_0$ used in step 2. Thus this is precisely a Frobenius-equivariant surjection after the asserted finite constant-field extension.",
+   "uses": [
+    "lem-a1-finite-boundary-cohomology-positive",
+    "def-weil-ordinary-compact-cohomology",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-unramified-at-infinity.proof.md",
+    "place": "second paragraph, point vanishing, surjectivity and transport by tau"
+   }
   }
  ],
  "proof_deps": [
-  "lem-wf-dense-open-pi1-surjective",
+  "def-weil-finite-field-fiber",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-frobenius-detailed",
+  "def-weil-local-frobenius-trace",
   "def-weil-punctual-weights",
-  "def-weil-open-closed-recollement",
+  "def-pod-lisse-l-adic-sheaves",
+  "rem-dl-a1-conventions",
+  "lem-wf-dense-open-pi1-surjective",
   "prop-sf-open-closed-triangle-all-stages",
-  "lem-a1-finite-boundary-cohomology",
-  "def-weil-ordinary-compact-cohomology"
+  "prop-functor-package",
+  "def-weil-ordinary-compact-cohomology",
+  "lem-weil-point-fibre-equivalence",
+  "lem-sf-derived-homology-long-exact",
+  "lem-a1-finite-boundary-cohomology-positive"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-unramified-at-infinity.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-unramified-at-infinity.proof.md",
+  "place": "Both paragraphs, with the finite-field point choice, coordinate formula and compact-support long exact sequence expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unramifiedAtInfinity|compactlySupportedCohomology|WeilSheaf",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Removing a closed point from a smooth curve gives a surjection on compactly supported first cohomology of a lisse Weil sheaf",
+   "results": "AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks; smoothSheaf.eval_surjective; smoothSheafCommRing.eval_surjective; AlgebraicGeometry.Scheme.germ_stalkClosedPointTo; WeierstrassCurve.Affine.Point.some.elim; AlgebraicGeometry.stalkClosedPointIso_inv; AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo'; AlgebraicGeometry.Scheme.SpecMap_residue_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary scheme sections or stalks, not lisse Weil sheaves or compact-support reduction"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"compactlySupportedCohomology\"",
+   "results": "0 hits; loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: Loogle rejected the namespace identifier; superseded by the successful quoted-name query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a pure lisse Weil sheaf on an open affine line, remove a rational point and move it to infinity to obtain a Frobenius equivariant surjection on compactly supported first cohomology",
+   "results": "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_map_preimage_le_map_preimage; AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary scheme sections or stalks, not lisse Weil sheaves or compact-support reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*support|localization.*sequence",
+   "results": "0 hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilSheaf\"",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localization sequence for compact support cohomology on an algebraic curve, deleting a point and changing projective coordinates",
+   "results": "AlgebraicGeometry.Proj.awayMap_awayToSection; AlgebraicGeometry.Proj.awayMap_awayToSection_assoc; AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ_ΓToStalk; WeierstrassCurve.Affine.FunctionField; AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ; AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply; AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app; AlgebraicGeometry.Proj.awayToSection",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary scheme sections or stalks, not lisse Weil sheaves or compact-support reduction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -650,5 +773,49 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-thm-dl-a1-upper"
+ "unit": "sk-thm-dl-a1-upper",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-a1-unramified-at-infinity",
+  "worker": "stage1",
+  "summary": "Expanded the imported two-paragraph proof into six checked steps. The statement is unchanged, and agrees with the current main-20261015 source. Gave an explicit rational-point and coordinate construction, verified constant-field purity and geometric irreducibility, and supplied the missing compact-support localization and long exact sequence citations. Reused only existing nodes, with no new nodes. Removed the unused middle-extension statement dependency; added the actual coefficient, lisse-sheaf, weight and cohomology definitions. The broad Lean audit declarations are not exact attachments for this reduction.",
+  "blueprint": "Steps 1-4 realize the first blueprint paragraph (finite extension, coordinate change, unramifiedness, purity and geometric irreducibility); steps 5-6 realize the second (localization, point vanishing and transport). The item is not the key node of sk-thm-dl-a1-upper, so no unit realization is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-dense-open-pi1-surjective",
+    "why": "Generic restriction theorem for the geometric sheaf on a dense open of a normal curve; the affine-line weight-estimate unit supplies no fundamental-group theorem."
+   },
+   {
+    "node": "prop-sf-open-closed-triangle-all-stages",
+    "why": "Generic localization triangle at algebraically closed coefficient-field stage, including Weil equivariance; does not replace the affine-line weight argument."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Only the exact scalar transport and localization-under-compact-support/composition/proper-coincidence clauses are used, to turn the source recollement argument into compact-support cohomology."
+   },
+   {
+    "node": "lem-a1-finite-boundary-cohomology-positive",
+    "why": "Generic positive-degree vanishing for a finite scheme, used for the removed rational point; stronger weight assumptions in the original finite-boundary node are unnecessary."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Exactness of the point-fibre equivalence, needed to pass the compact-support localization triangle to coefficient complexes before taking the long exact sequence; generic coefficient fact, not part of the affine-line weight route (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-dense-open-pi1-surjective",
+  "prop-sf-open-closed-triangle-all-stages",
+  "prop-functor-package",
+  "lem-a1-finite-boundary-cohomology-positive",
+  "lem-weil-point-fibre-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-7046142a5",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-7046142a5 (reviewer sub-agent of L); spot-checked: I read the item in full against both blueprint snapshots (master order 2800; main-20261015 .md/.proof.md). The statement is verbatim and not weakened, there are no new nodes, and the route is the blueprint's two paragraphs (steps 1-4: point choice, PGL2 coordinate change, restriction; steps 5-6: recollement plus point vanishing). All six steps check out. Step 1: the D(f) root count gives a k'_0-point. Step 2: F_y=F_x^e with e=[k(y):k(x)] (m r'=e r), q_y=q_x^e, and it holds for non-semisimple F_x. Step 3: tau=[Z:X-aZ] has det -1 and the stated inverse is right; tau(W_0) lies in A^1, tau(U'_0)=V_0 union infinity, so E is unramified at infinity by rem-dl-a1-conventions. Step 4: U'_0 is a curve in the sense of d-real-setup, and the geometric clause of lem-wf-dense-open-pi1-surjective part (4) gives geometric irreducibility only. Step 6: hypotheses of lem-a1-finite-boundary-cohomology-positive hold at r=1 for s_0=Spec k'_0; transport uses h proper plus composition (prop-functor-package clause 3). Small cases checked: A^1 with constant sheaf, F=0, rank one, characteristic 2, e different from m. One fault, repaired: step 5 used lem-sf-derived-homology-long-exact on D(C) without citing that Fib_s carries distinguished triangles to distinguished triangles, which def-weil-finite-coefficient-point explicitly leaves to lem-weil-point-fibre-equivalence. I added that citation to step 5 text, uses and proof_deps, and declared it in split_report.tool_uses (fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-unramified-at-infinity.json). Batch-5 check: closures over stmt_deps and proof_deps of all five flagged citations, and of the added node, reach no non-definition node of sk-thm-trace-formula, sk-thm-trace-transport or sk-thm-poincare-duality, and no nt-target. def-pod-lisse-l-adic-sheaves and def-weil-local-frobenius-trace are general definitions. rem-dl-a1-conventions is a conventions node; it reaches lem-weil-local-frobenius-conjugacy-class only through def-weil-punctual-weights, which the base already cited, and that lemma is choice-independence of eigenvalues. prop-functor-package is cited only for clauses 1 and 3 (coefficient transport, localization and composition under Rf_!), not the Verdier clause; it reaches no PD/TF theorem, and 10 other nodes of this chapter already cite it. lem-a1-finite-boundary-cohomology-positive (finite-scheme H_c vanishing) reaches the PD chapter only through the constructible-heart definition. None of these is part of either assumption's statement or proof. Accepted tool_uses: lem-wf-dense-open-pi1-surjective, prop-sf-open-closed-triangle-all-stages, prop-functor-package, lem-a1-finite-boundary-cohomology-positive, lem-weil-point-fibre-equivalence. No SGA cited.; 1 file(s) fixed by the reviewer"
+ }
 }

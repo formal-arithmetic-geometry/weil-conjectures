@@ -1,0 +1,97 @@
+{
+ "id": "lem-pur-compact-support-completed-projection-coherence",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-pbc-diagram-site-realization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-compact-support-integral-coefficient-comparison",
+  "date": "2026-10-17",
+  "group": "Q134"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "kind": "statement",
+ "title": "Completion coherence for the integral projection mate",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subset A$ an ideal, and assume each $A_n=A/I^n$, $n\\geq1$, is perfect over $A$ (a bounded complex of finitely generated projective modules represents it). Let $u:\\operatorname{Sh}(\\mathcal X)\\to\\operatorname{Sh}(\\mathcal Y)$ be a morphism of topoi on small sites, with constant $A$-module sheaves and ordinary unbounded derived categories $D_T=D(\\operatorname{Mod}(\\underline A_T))$ [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Use the exact inverse image $u^*$, its K-injective derived right adjoint $P=Ru_*$, and their canonical counit [lem-weil-pbc-ringed-projection-mate-exact]. For $T=\\mathcal X,\\mathcal Y$ use the completion reflector $C_T:D_T\\to D_{T,\\mathrm{comp}}$ with unit $\\eta_T$ and $C_TV=R\\lim_n(V\\otimes_A^L\\underline{A_n}_T)$, and the induced completed adjunction $u_c^*=C_{\\mathcal X}u^*\\dashv P$ [lem-sp-completed-pullback-adjunction]. Write $V\\widehat\\otimes W=C_T(V\\otimes_A^LW)$ on complete objects. For complete $H\\in D_{\\mathcal X}$ and $K\\in D_{\\mathcal Y}$, let\n$$\\pi^c_{H,K}:C_{\\mathcal Y}(PH\\otimes_A^LK)\\longrightarrow P C_{\\mathcal X}(H\\otimes_A^Lu^*K)$$\nbe the projection mate for that completed adjunction and completed tensor. If $\\pi^o_{H,K}:PH\\otimes_A^LK\\to P(H\\otimes_A^Lu^*K)$ is the ordinary counit-defined projection, then\n$$\\pi^c_{H,K}\\circ\\eta_{\\mathcal Y,PH\\otimes_A^LK}=P(\\eta_{\\mathcal X,H\\otimes_A^Lu^*K})\\circ\\pi^o_{H,K}.$$\nThis characterizes $\\pi^c$ uniquely. It also identifies $\\pi^c$ with the total derived inverse limit of the finite-quotient projection mates $\\pi^{(n)}_{H_n,K_n}$, formed on the ringed diagram site, where $H_n=H\\otimes_A^L\\underline{A_n}$ and $K_n=K\\otimes_A^L\\underline{A_n}$ and the finite tensor is over $\\underline{A_n}$. The source identification uses the canonical perfect-coefficient projection comparisons $(PH)_n\\cong Ru_{*,A_n}H_n$ and tensor balancing; the target identification uses the canonical direct-image/total-limit comparison [lem-weil-ringed-tower-pushforward-limit-comparison]. All transitions are coefficient restrictions on one strict quotient diagram [lem-weil-pbc-diagram-site-realization]. The identification includes the counits: under these canonical direct-image/limit comparisons, the adjunction transpose of a strict tower map, composed with a constant-tower augmentation, equals the ordinary transpose of its limit map. It is equality of the specified transformations, without a faithfulness assumption on individual reductions.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map), 0941 (lemma-derived-limit-is-ok), 0A07 (lemma-Rf-commutes-with-Rlim); agent auxiliary extracting the completion-unit and tower-counit identifications of item proof step 9.",
+  "note": "The stated coherence is agent-formulated from these constructions, not claimed as a numbered Stacks theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Counit-defined projection formula on derived complete sheaves is the unique extension of the ordinary projection formula along the derived completion unit",
+   "results": "SheafOfModules.Presentation.map_π_eq; CategoryTheory.plusPlusAdjunction_counit_app_val; CategoryTheory.constantSheafAdj_counit_w; Condensed.profiniteSolidCounit; CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val; Condensed.profiniteSolidification; CategoryTheory.sheafComposeNatTrans_app_uniq; CategoryTheory.Sheaf.adjunction_counit_app_val",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification reflectors, Kan-extension counits and profinite/solid-module comparisons do not identify the completion-induced projection with its quotient-tower mate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"completion\"",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification reflectors, Kan-extension counits and profinite/solid-module comparisons do not identify the completion-induced projection with its quotient-tower mate"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*complet|complet.*projection|counit.*complet",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification reflectors, Kan-extension counits and profinite/solid-module comparisons do not identify the completion-induced projection with its quotient-tower mate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula counit map descends to the reflective category of derived complete sheaves",
+   "results": "CategoryTheory.Functor.totalLeftDerivedCounit; CategoryTheory.constantSheafAdj_counit_app; CategoryTheory.counit_obj_eq_map_counit; CategoryTheory.sheafification_reflective; CompHausLike.LocallyConstant.counit_app_val; CompHausLike.LocallyConstant.counit; Condensed.profiniteSolidCounit; CategoryTheory.Coreflective.instIsIsoAppCounitCoreflectorAdjunctionA",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification reflectors, Kan-extension counits and profinite/solid-module comparisons do not identify the completion-induced projection with its quotient-tower mate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection transformation for completed tensor and completed pullback agrees with the ordinary ringed topos projection after precomposing with the completion unit",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd; AlgebraicGeometry.Scheme.Pullback.Triplet.fst_SpecTensorTo_apply; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_base_fst; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.snd_SpecTensorTo_apply; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_base_snd; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification reflectors, Kan-extension counits and profinite/solid-module comparisons do not identify the completion-induced projection with its quotient-tower mate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed topos the completed projection formula agrees with the derived inverse limit of its finite quotient projection mates and the completion counit",
+   "results": "Condensed.profiniteSolidCounit; Condensed.profiniteSolidification; Condensed.isColimitLocallyConstantPresheaf_desc_apply; LightCondensed.ihomPoints_symm_comp; LightProfinite.lightToProfinite_map_proj_eq; LightCondensed.isoLocallyConstantOfIsColimit_inv; Condensed.isoLocallyConstantOfIsColimit_inv; LightCondensed.isColimitLocallyConstantPresheaf_desc_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification reflectors, Kan-extension counits and profinite/solid-module comparisons do not identify the completion-induced projection with its quotient-tower mate"
+  },
+  {
+   "tool": "grep",
+   "query": "commShiftIso_hom_app_counit_app_shift|totalLeftDerivedCounit|sheafification_reflective",
+   "results": "Mathlib/CategoryTheory/Shift/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Sites/Sheafification.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification reflectors, Kan-extension counits and profinite/solid-module comparisons do not identify the completion-induced projection with its quotient-tower mate"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary for integral coefficient comparison proof step 9 (completion unit and tower counits)",
+   "via": [
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

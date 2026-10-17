@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-embedding-extension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Extension of embeddings and intrinsic weights",
@@ -13,41 +13,181 @@
   "place": "node lem-embedding-extension, order 2905"
  },
  "stmt_deps": [
-  "def-weil-finite-field-fiber"
+  "def-weil-finite-field-fiber",
+  "def-weil-algebraic-closure-q",
+  "def-weil-number-field",
+  "def-weil-number-field-complex-embeddings",
+  "def-weil-field-extension-isomorphism",
+  "def-weil-simple-field-extension",
+  "def-weil-complex-absolute-value",
+  "def-weil-real-power",
+  "def-weil-numbers"
  ],
  "proof": [
   {
-   "text": "First extend $\\sigma:L\\hookrightarrow\\mathbf C$ to an isomorphism\nbetween the algebraic closure of $L$ inside $\\Qlb$ and the\nalgebraic closure of $\\sigma(L)$ inside $\\mathbf C$.\nBoth are countable algebraically closed fields. Choose\ntranscendence bases $B_\\ell$ and $B_{\\mathbf C}$ over these\nrespective fields. Each basis has cardinality $2^{\\aleph_0}$:\nan algebraic extension of the rational function field in a basis\n$B$ over a countable field has cardinality\n$\\max(\\aleph_0,|B|)$, whereas both ambient fields have\ncardinality $2^{\\aleph_0}$.\nA bijection $B_\\ell\\to B_{\\mathbf C}$, together with the chosen\nisomorphism on the algebraic closures of $L$, defines an\nisomorphism of the corresponding rational function fields.\nExtending it to their algebraic closures gives an isomorphism\n$\\iota:\\Qlb\\to\\mathbf C$ restricting to $\\sigma$.\nThe algebraic-closure convention is\n[def-weil-algebraic-closure-q].",
+   "text": "View $\\Qlb$ as an $L$-extension through the given inclusion, and view $\\mathbf C$ as an $L$-extension through $\\sigma$. The latter is legitimate because a field embedding is injective. A finite $\\mathbf Q$-basis of the number field $L$ gives a bijection of its underlying set with $\\mathbf Q^n$ for a finite $n$; this is countable. Thus $L$ is countable for both extension structures. This uses only the finite-dimensional definition of a number field and finite rational coordinates, and needs no separate lemma.",
    "uses": [
-    "def-weil-algebraic-closure-q"
+    "def-weil-number-field",
+    "def-weil-field-extension-isomorphism"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/lem-embedding-extension.md",
+    "place": "## Proof, first paragraph, countable coefficient fields; direct-base variant using L instead of its relative algebraic closure."
+   }
   },
   {
-   "text": "For an embedding $\\tau:\\mathbf Q(\\alpha)\\hookrightarrow\\mathbf C$, the\ncomposite $\\sigma_\\tau:=\\tau\\circ(\\jmath|_{\\mathbf Q(\\alpha)})^{-1}$\nembeds the number field $\\jmath(\\mathbf Q(\\alpha))\\subset\\Qlb$ into\n$\\mathbf C$; extending it as above gives an abstract field\nisomorphism $\\iota_\\tau:\\Qlb\\xrightarrow{\\sim}\\mathbf C$ with\n$\\iota_\\tau(\\jmath(\\alpha))=\\tau(\\alpha)$, so the hypothesis applied\nto this $\\iota_\\tau$ gives $|\\tau(\\alpha)|=q^{i/2}$.",
-   "uses": [],
-   "elementary": null
+   "text": "The field $\\Qlb$ is algebraically closed by its assumed algebraic-closure structure, and $\\mathbf C$ is algebraically closed by [lem-weil-complex-algebraically-closed]. The cardinality of the canonical algebraic closure $\\Omega_\\ell=\\operatorname{PadicAlgCl}(\\ell)$ is $2^{\\aleph_0}$ by [lem-weil-padic-algebraic-closure-cardinality]. Both $\\Omega_\\ell$ and the chosen $\\Qlb$ are algebraic closures of $\\mathbf Q_\\ell$, so [lem-pc-algebraic-closure-exists-unique] gives a $\\mathbf Q_\\ell$-isomorphism between them. As a bijection it transfers this cardinality to $\\Qlb$. By [lem-weil-complex-cardinality] the other ambient field has the same cardinality. Since $2^{\\aleph_0}>\\aleph_0$ by Cantor, both ambient fields are uncountable.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-complex-algebraically-closed",
+    "lem-weil-padic-algebraic-closure-cardinality",
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-weil-complex-cardinality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/lem-embedding-extension.md",
+    "place": "## Proof, first paragraph: both ambient fields have cardinality continuum; algebraic-closure uniqueness is Stacks 09GV, lemma-algebraic-closures-isomorphic."
+   }
   },
   {
-   "text": "For the Galois stability, let $\\gamma\\in\\operatorname{Gal} (\\overline{\\mathbf Q}/\\mathbf Q)$ and let\n$\\tau':\\mathbf Q(\\gamma(\\alpha))\\hookrightarrow\\mathbf C$. Then\n$\\tau'\\circ\\gamma:\\mathbf Q(\\alpha)\\hookrightarrow\\mathbf C$ is an\nembedding, so by the preceding paragraph\n$|\\tau'(\\gamma(\\alpha))|=|(\\tau'\\circ\\gamma)(\\alpha)|=q^{i/2}$.\nHence $\\gamma(\\alpha)$ satisfies the $q$-Weil condition of weight\n$i$ of [def-weil-numbers], which proves the stability\nassertion.",
+   "text": "Apply [lem-exc-transcendence-basis-exists] to the two $L$-extension structures from step 1. Obtain bases $(b_s)_{s\\in B_\\ell}$ in $\\Qlb$ and $(c_t)_{t\\in B_{\\mathbf C}}$ in $\\mathbf C$. Apply [lem-weil-countable-base-transcendence-cardinality] to each: its base is the countable field $L$, each ambient field is algebraically closed and uncountable by step 2, and these are transcendence bases. Hence $|B_\\ell|=2^{\\aleph_0}=|B_{\\mathbf C}|$, and choose a bijection $e:B_\\ell\\to B_{\\mathbf C}$.",
    "uses": [
-    "def-weil-numbers"
+    "lem-exc-transcendence-basis-exists",
+    "lem-weil-countable-base-transcendence-cardinality"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/lem-embedding-extension.md",
+    "place": "## Proof, first paragraph: choose transcendence bases and match their cardinalities; existence is Stacks 030F, lemma-transcendence-degree."
+   }
+  },
+  {
+   "text": "Put $A=L[b_s:s\\in B_\\ell]\\subset\\Qlb$ and $A^{\\prime}=\\sigma(L)[c_t:t\\in B_{\\mathbf C}]\\subset\\mathbf C$. Algebraic independence identifies these polynomial subalgebras with polynomial rings over the abstract coefficient field $L$ [def-weil-pbc-transcendence-basis]. Explicitly the coefficient $a$ evaluates to $a$ in $A$ and to $\\sigma(a)$ in $A^{\\prime}$. Renaming $X_s$ to $X_{e(s)}$ therefore defines a ring isomorphism $f:A\\to A^{\\prime}$ with $f(a)=\\sigma(a)$ and $f(b_s)=c_{e(s)}$. The inverse renames using $e^{-1}$ and applies $\\sigma^{-1}$ on $\\sigma(L)$; the two composites fix every coefficient and every variable, hence every polynomial. Both subalgebras are domains, since they lie in fields. Define $\\widetilde f:\\operatorname{Frac}(A)\\to\\operatorname{Frac}(A^{\\prime})$ by $a/b\\mapsto f(a)/f(b)$. It is well-defined because $a/b=a^{\\prime}/b^{\\prime}$ means $ab^{\\prime}=a^{\\prime}b$, an equality preserved by $f$; its inverse is the same formula with $f^{-1}$. Thus $\\widetilde f$ is a field isomorphism extending $\\sigma$. These are explicit substitutions and fraction identities, rather than a new lemma.",
+   "uses": [
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/lem-embedding-extension.md",
+    "place": "## Proof, first paragraph: the bijection of bases and coefficient isomorphism define an isomorphism of rational function fields; Stacks 030E, definition-transcendence (1)-(2)."
+   }
+  },
+  {
+   "text": "By [lem-exc-transcendence-basis-algebraic-closure], $\\Qlb$ is an algebraic closure of $K=\\operatorname{Frac}(A)$ and $\\mathbf C$ is an algebraic closure of $K^{\\prime}=\\operatorname{Frac}(A^{\\prime})$. Regard $\\mathbf C$ as a $K$-extension through $K\\xrightarrow{\\widetilde f}K^{\\prime}\\hookrightarrow\\mathbf C$. Its algebraic closedness is unchanged; every polynomial relation over $K^{\\prime}$ pulls back coefficientwise through $\\widetilde f^{-1}$ to a nonzero relation over $K$, so it remains algebraic over $K$. Now both ambient fields are algebraic closures of the same field $K$. Apply [lem-pc-algebraic-closure-exists-unique] to these two specified structure maps. It gives $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$ with $\\iota(x)=\\widetilde f(x)$ for $x\\in K$. For $a\\in L\\subset K$ this reads $\\iota(a)=\\sigma(a)$, proving the prescribed-restriction clause. Notice that an unspecified abstract isomorphism between the ambient fields would not suffice.",
+   "uses": [
+    "lem-exc-transcendence-basis-algebraic-closure",
+    "lem-pc-algebraic-closure-exists-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/lem-embedding-extension.md",
+    "place": "## Proof, first paragraph: extend the rational function field isomorphism to the algebraic closures; Stacks 09GV, lemma-algebraic-closures-isomorphic."
+   }
+  },
+  {
+   "text": "Choose an $\\ell$-adic realization $\\jmath$ using [lem-weil-realization-exists], so the universal hypothesis on realizations is not vacuous. Fix any $\\tau:\\mathbf Q(\\alpha)\\hookrightarrow\\mathbf C$. Since $\\alpha\\in\\overline{\\mathbf Q}$ is algebraic over $\\mathbf Q$, [lem-weil-pbc-algebraic-generators-finite-extension] applied to the single generator $\\alpha$ shows that $\\mathbf Q(\\alpha)$ is a finite extension of $\\mathbf Q$. Its image $L_\\tau=\\jmath(\\mathbf Q(\\alpha))\\subset\\Qlb$ is isomorphic over $\\mathbf Q$ to it and is therefore a number field (the images of a finite basis form a finite basis). The restriction of $\\jmath$ to $\\mathbf Q(\\alpha)$ is bijective onto this image. Define $\\sigma_\\tau:L_\\tau\\to\\mathbf C$ by $\\sigma_\\tau(z)=\\tau((\\jmath|_{\\mathbf Q(\\alpha)})^{-1}(z))$. This composite is a field embedding. Apply the extension constructed in steps 1-5 with $L_\\tau,\\sigma_\\tau$. The resulting isomorphism $\\iota_\\tau$ satisfies $\\iota_\\tau(\\jmath(\\alpha))=\\tau(\\alpha)$. The assumed equality for this $\\jmath$ and this $\\iota_\\tau$ gives $|\\tau(\\alpha)|=q^{i/2}$, as required.",
+   "uses": [
+    "lem-weil-realization-exists",
+    "lem-weil-pbc-algebraic-generators-finite-extension",
+    "def-weil-number-field",
+    "def-weil-simple-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/lem-embedding-extension.md",
+    "place": "## Proof, second paragraph: transport any embedding of Q(alpha) using a realization, and apply the first clause. Finiteness of a simple algebraic extension is Stacks 09GH, lemma-algebraic-finitely-generated."
+   }
+  },
+  {
+   "text": "For the last clause take any nonzero $q$-Weil number $\\beta\\in\\overline{\\mathbf Q}$ of weight $i$ in the sense of [def-weil-numbers], and let $\\gamma\\in\\operatorname{Gal}(\\overline{\\mathbf Q}/\\mathbf Q)$. The automorphism fixes the rationals and sends $\\mathbf Q(\\beta)$ isomorphically onto $\\mathbf Q(\\gamma(\\beta))$, since each generated field is the smallest subfield containing its indicated generator [def-weil-simple-field-extension]; apply the same inclusion argument to $\\gamma^{-1}$ for equality. Given an embedding $\\tau^{\\prime}:\\mathbf Q(\\gamma(\\beta))\\hookrightarrow\\mathbf C$, its composite with this restriction of $\\gamma$ is an embedding of $\\mathbf Q(\\beta)$. Hence $|\\tau^{\\prime}(\\gamma(\\beta))|=|(\\tau^{\\prime}\\circ\\gamma)(\\beta)|=q^{i/2}$. Also $\\gamma(\\beta)\\ne0$ by injectivity. This proves the Weil condition for $\\gamma(\\beta)$ directly from that for $\\beta$, independently of the stronger realization hypothesis. Applying this to $\\gamma^{-1}$ also gives equivalence of the conditions.",
+   "uses": [
+    "def-weil-numbers",
+    "def-weil-simple-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/lem-embedding-extension.md",
+    "place": "## Proof, third paragraph: Galois stability by composing embeddings."
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-algebraic-closure-q",
+  "def-weil-number-field",
+  "def-weil-field-extension-isomorphism",
+  "def-weil-algebraic-closure",
+  "lem-weil-complex-algebraically-closed",
+  "lem-weil-padic-algebraic-closure-cardinality",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-complex-cardinality",
+  "lem-exc-transcendence-basis-exists",
+  "lem-weil-countable-base-transcendence-cardinality",
+  "def-weil-pbc-transcendence-basis",
+  "lem-exc-transcendence-basis-algebraic-closure",
+  "lem-weil-realization-exists",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "def-weil-simple-field-extension",
   "def-weil-numbers"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/lem-embedding-extension.md",
-  "place": "## Proof"
+  "place": "## Proof, all three paragraphs; direct-base version of paragraph 1, using transcendence bases over L rather than first passing to its algebraic closure."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extend any embedding of a number field into the complex numbers to a field isomorphism from the algebraic closure of the p-adic numbers to the complex numbers",
+   "results": "NumberField.ComplexEmbedding.Extension, NumberField.InfinitePlace.Completion.extensionEmbedding, PadicComplex.coe_eq, NumberField.InfinitePlace.Completion.ringEquivComplexOfIsComplex, NumberField.InfinitePlace.Completion.bijective_extensionEmbedding_of_isComplex, NumberField.ComplexEmbedding.lift, NumberField.canonicalEmbedding, PadicComplex",
+   "date": "2026-10-17",
+   "verdict": "no full-item match: field classification/embedding tools do not state the prescribed restriction and intrinsic-weight/Galois clauses together; proof uses their separate interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed, AlgEquiv",
+   "results": "IsAlgClosed.nonempty_algEquiv_or_of_finrank_eq_two, IsSimpleRing.exists_algEquiv_matrix_of_isAlgClosed, IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed",
+   "date": "2026-10-17",
+   "verdict": "no full-item match: field classification/embedding tools do not state the prescribed restriction and intrinsic-weight/Galois clauses together; proof uses their separate interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "nonempty_algEquiv|mk_eq_continuum|lift_mk_eq|equivOf.*[Cc]ard",
+   "results": "Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/RingTheory/Localization/Cardinality.lean, Mathlib/RingTheory/Localization/Cardinality.lean, Mathlib/RingTheory/TotallySplit.lean",
+   "date": "2026-10-17",
+   "verdict": "no full-item match: field classification/embedding tools do not state the prescribed restriction and intrinsic-weight/Galois clauses together; proof uses their separate interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An embedding of a number field into complex numbers extends to a field isomorphism from the algebraic closure of p-adic numbers to complex numbers",
+   "results": "NumberField.InfinitePlace.Completion.bijective_extensionEmbedding_of_isComplex, NumberField.ComplexEmbedding.Extension, NumberField.canonicalEmbedding_injective, PadicComplex.coe_eq, NumberField.ComplexEmbedding.lift, NumberField.IsTotallyReal.complexEmbedding_isReal, NumberField.canonicalEmbedding, PadicComplex.coe_natCast",
+   "date": "2026-10-17",
+   "verdict": "no full-item match: field classification/embedding tools do not state the prescribed restriction and intrinsic-weight/Galois clauses together; proof uses their separate interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two algebraically closed fields of the same uncountable cardinality over a countable field are isomorphic over that field",
+   "results": "FirstOrder.Field.ACF_categorical, IsAlgClosed.ringEquiv_of_equiv_of_charZero, IsAlgClosed.ringEquiv_of_equiv_of_char_eq, IsAlgClosed.cardinal_eq_cardinal_transcendence_basis_of_aleph0_lt, IsAlgClosed.cardinal_eq_cardinal_transcendence_basis_of_aleph0_lt', IsAlgClosed.nonempty_algEquiv_or_of_finrank_eq_two, FirstOrder.Field.ACF_isComplete, Field.embEquivOfIsAlgClosed",
+   "date": "2026-10-17",
+   "verdict": "no full-item match: field classification/embedding tools do not state the prescribed restriction and intrinsic-weight/Galois clauses together; proof uses their separate interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed.equivOfTranscendenceBasis",
+   "results": "IsAlgClosed.equivOfTranscendenceBasis",
+   "date": "2026-10-17",
+   "verdict": "no full-item match: field classification/embedding tools do not state the prescribed restriction and intrinsic-weight/Galois clauses together; proof uses their separate interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "equivOfTranscendenceBasis|cardinal_eq_cardinal_transcendence_basis|equivOfEquiv",
+   "results": "Mathlib/FieldTheory/IsAlgClosed/Classification.lean, Mathlib/FieldTheory/IsAlgClosed/Classification.lean, Mathlib/FieldTheory/IsAlgClosed/Classification.lean, Mathlib/FieldTheory/IsAlgClosed/Classification.lean, Mathlib/FieldTheory/IsAlgClosed/Classification.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean (subdirectory Mathlib/FieldTheory/)",
+   "date": "2026-10-17",
+   "verdict": "no full-item match: field classification/embedding tools do not state the prescribed restriction and intrinsic-weight/Galois clauses together; proof uses their separate interfaces."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -74,5 +214,22 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-thm-intfactors"
+ "unit": "sk-thm-intfactors",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-embedding-extension",
+  "worker": "stage1",
+  "group": "Q153",
+  "summary": "Kept the statement. Filled the missing field-theory citations and realization-existence step. Constructed the prescribed extension by matching transcendence bases over the original countable number field L, explicit coefficient/variable substitution, and uniqueness of algebraic closures with twisted structure maps. Three new Mathlib leaves and one statement-only project-attachment candidate; no clause of the item is moved to a child. Intrinsic weights and Galois stability are proved directly.",
+  "blueprint": "Steps 1-5 realize the first proof paragraph, with the same transcendence-basis/rational-function/algebraic-closure route and L as countable coefficient field; step 6 realizes paragraph 2; step 7 realizes paragraph 3. The current main-20261015 statement is identical to the imported master statement; its markdown has no proof. No unit route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-5b17c7614",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-5b17c7614 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, every cited statement, the master and main-20261015 blueprints, and the Mathlib and slopmaster2 sources in full. The statement is unchanged and matches main-20261015. The report wrongly says main has no proof: its lem-embedding-extension.proof.md is verbatim the master proof, and this changes nothing. Steps 1-7 are checked one by one. The bases are taken directly over L, which is a valid simplification of the blueprint route. In step 5, uniqueness of algebraic closures (lem-pc-algebraic-closure-exists-unique (2)) is applied over the same field K after twisting C's structure by f~, so the restriction to L is σ. Step 6 uses lem-weil-realization-exists so the hypothesis on realizations is not empty, and uses finite generation for Q(α). Step 7 proves Galois stability directly from def-weil-numbers. All citations are definitions, Mathlib leaves, or the same-unit realization lemma, so there is no route issue and no tool_uses. Leaves confirmed: Complex.isAlgClosed (Polynomial/Basic.lean:52) exact; Cardinal.mk_complex (Complex/Cardinality.lean:25) exact; IsAlgClosed.cardinal_eq_cardinal_transcendence_basis_of_aleph0_lt (Classification.lean:122) a one-line specialization whose hypotheses all hold in step 3. The p-adic cardinality node is unsplit and statement-only. Its candidate PadicAlgCl.mk_eq_continuum (slopmaster2 Complex.lean:58-63) states exactly the same thing, and the file has no sorry; I support the attachment. I found no duplicates in the DAG or the blueprint, and no new node restates a clause of the item. Edge cases checked: L=Q, α=0, i≤0, γ=id, and the uncountability hypothesis. No fixes were needed."
+ }
 }
