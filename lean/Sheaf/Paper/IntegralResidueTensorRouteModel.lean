@@ -8,6 +8,8 @@ public import Sheaf.Paper.IntegralResidueTensorModel
 import Sheaf.Paper.IntegralResidueDerivedMonoidal
 import Sheaf.Paper.IntegralResidueOrdinaryMonoidal
 import Sheaf.Paper.IntegralResidueTensorPresentation
+import Sheaf.Paper.IntegralResidueTensorRouteKFlat
+import Sheaf.Paper.IntegralResidueTensorRouteDescent
 
 /-! Computation of the tensor-route in the residue tensor square.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
@@ -47,7 +49,10 @@ theorem integralResidue_tensorRoute_model_transport {X Y : Scheme.{u}} (f : X �
         Functor.OplaxMonoidal.δ (residueExchangeUpperStar (integralCoeff ℓ E) f)
           (DerivedCategory.Qh.obj P) (residueExchangeCoefficient ℓ E Y) ≫
         residueExchangeTensorModelTarget ℓ E f P =
-      residueExchangeTensorModelMap ℓ E f P := by sorry
+      residueExchangeTensorModelMap ℓ E f P := by
+  apply integralResidue_tensorRoute_descend ℓ E f m hFlat
+  intro P hP
+  exact integralResidue_tensorRoute_kFlat ℓ E f m hFlat P hP
 
 /-- Compute the tensor-route against the ordinary homotopy tensor model.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.

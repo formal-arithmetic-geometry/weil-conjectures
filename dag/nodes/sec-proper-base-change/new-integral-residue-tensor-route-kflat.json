@@ -1,0 +1,118 @@
+{
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": null,
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueTensorRouteModel",
+  "date": "2026-10-18",
+  "group": "B3"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261017T201725-L-80050",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261017T201725-L-80050",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "new-integral-residue-tensor-route-kflat",
+ "title": "Tensor-route computation on K-flat pullback representatives",
+ "statement": "For prime ℓ, normed E over ℚ_ℓ, f:X→Y, an explicit ordinary monoidal structure m, a proof that pullback preserves flat objects, and a homotopy complex P whose ordinary pullback is K-flat, the residue exchange tensor comparison equation holds with m-induced derived monoidal structure.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15"
+ },
+ "stmt_deps": [
+  "new-integral-residue-derived-monoidal",
+  "new-integral-residue-tensor-presentation",
+  "new-integral-residue-tensor-model"
+ ],
+ "proof": [
+  {
+   "text": "Expand the derived tensor comparison on the K-flat representative, normalize the fixed coefficient presentation through the symmetry isomorphism and apply its counit identity; identify the remaining ordinary composite with the tensor-model map.",
+   "uses": [
+    "new-integral-residue-derived-monoidal",
+    "new-integral-residue-tensor-presentation",
+    "new-integral-residue-tensor-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-derived-monoidal",
+  "new-integral-residue-tensor-presentation",
+  "new-integral-residue-tensor-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "date": "2026-10-18",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Remark 6.8.15",
+  "note": "Resolving-class component of the transport calculation; arbitrary P is handled by the separate descent node."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueTensorRouteKFlat",
+  "file": "lean/Sheaf/Paper/IntegralResidueTensorRouteKFlat.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorRoute_kFlat",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorRoute_kFlat"
+  ],
+  "statement": "theorem integralResidue_tensorRoute_kFlat {X Y : Scheme.{u}} (f : X ⟶ Y) (m : (f)^*⟦integralCoeff ℓ E⟧.Monoidal) (hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat) (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ)) (hP : ((f)^*⟦integralCoeff ℓ E⟧).kFlatMap P) : letI := residueExchangePullMonoidal ℓ E f m hFlat (residueExchangeUpperStar (integralCoeff ℓ E) f).map ((residueExchangeTensorIso ℓ E Y).hom.app (DerivedCategory.Qh.obj P)) ≫ Functor.OplaxMonoidal.δ (residueExchangeUpperStar (integralCoeff ℓ E) f) (DerivedCategory.Qh.obj P) (residueExchangeCoefficient ℓ E Y) ≫ residueExchangeTensorModelTarget ℓ E f P = residueExchangeTensorModelMap ℓ E f P",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-18"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived tensor comparison on K-flat representatives and descent through quasi-isomorphism",
+   "date": "2026-10-18",
+   "results": "Generic left-derived tensor comparison and localization results inspected.",
+   "verdict": "No direct residue route theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "leftDerivedTensorComparison_app_app_comp_counit",
+   "date": "2026-10-18",
+   "results": "Found the generic comparison-counit identity used as an ingredient.",
+   "verdict": "Generic ingredient only."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedTensorComparison_app_app_comp_counit|residue_exists_kFlatMap_iso",
+   "date": "2026-10-18",
+   "results": "Found generic derived comparison and K-flat model declarations in the library.",
+   "verdict": "No existing specialized route theorem."
+  }
+ ]
+}
