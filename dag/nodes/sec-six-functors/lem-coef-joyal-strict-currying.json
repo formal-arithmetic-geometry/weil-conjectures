@@ -163,10 +163,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-c5b284e3b",
-  "group": "Q24",
-  "result": "pass",
-  "note": "Read the node, def-cbc-enhanced-diagrams-cones (uses (ihom K).obj Q), the MarkedInternalHom proof dependency, the delivered module, the report and Mathlib FunctorToTypes/FunctorHom/StdSimplex. Every clause matches: the functorSimplexEquiv model is a canonical equivalence, plus restriction on the simplex factor, forward map ev∘(f×1) via braiding, ev_n(h,k)=h_n(k,id), inverse g_m(X(α)x,k), simultaneous X/K/Q naturality via pre and ihom.map, no fibrancy, one universe u. For the canonical E, conjuncts 1, 2, 3 and 5 are proved by rfl in a scratch file; conjunct 4 is true by hand unfolding (𝟙≫a step). No duplicates or name collisions; only the theorem is sorry; docstrings and lean.statement verbatim are OK; only the node's lean field changed; no lines over 100 characters. nt_compile --json is clean (3-6 s). The Second reading section is the accepted 2026-10-17 placeholder. Maintainer note: the node's source fields still cite HTT 1.2.7.3 while the docstrings cite Goerss-Jardine I.5.1; update the metadata."
+  "reviewer": "NT-stage2-cc-f815b56ed",
+  "group": "Q20",
+  "result": "fix",
+  "note": "Lean statement SSet.joyal_strict_currying matches every node clause: (ihom K).obj Q from def-cbc-enhanced-diagrams-cones via the choice-free functorSimplexEquiv; restriction on the simplex factor; forward map ev∘(f×1) with ev_n(h,k)=h_n(k,id); inverse g_m(X(α)x,k); combined X/K/Q naturality; no fibrancy; one universe; all variables bound; lean.statement verbatim; single sorry; docstrings carry source, blueprint id and the four proof steps. Identical to the already-landed Q24 statement (only the author line and lean.note differ). nt_compile clean (3-6 s, no warnings). A scratch file proves all five clauses for the canonical adjunction-plus-braiding equivalence (1,3 rfl; 2,5 ext;rfl; 4 from 1,3 and naturality). Edge cases (empty X/K/Q, K=Δ[0], n=m=0, degenerate α) covered. FIX: fixes/lem-coef-joyal-strict-currying.report.md replaces the placeholder 'Second reading by Q20' (which wrongly said the source correction is in the node copy) with a real second reading, and repairs the garbled 'HTT Proposition the project server' citation. Maintainer note: the node's maintainer-owned source/proof_origin fields should be changed from HTT 1.2.7.3 to Goerss-Jardine I.5 Prop. 5.1."
  },
  "lean": {
   "module": "Sheaf.AlgebraicTopology.JoyalStrictCurrying",
@@ -178,9 +178,9 @@
   "file": "lean/Sheaf/AlgebraicTopology/JoyalStrictCurrying.lean",
   "statement": "theorem joyal_strict_currying : ∃ E : ∀ X K Q : SSet.{u}, (X ⟶ (ihom K).obj Q) ≃ (X ⊗ K ⟶ Q), (∀ (K Q : SSet.{u}) (n m : SimplexCategory) (a : m ⟶ n) (h : ((ihom K).obj Q).obj (op n)), functorSimplexEquiv K Q m (((ihom K).obj Q).map a.op h) = (K ◁ SSet.stdSimplex.map a) ≫ functorSimplexEquiv K Q n h) ∧ (∀ (X K Q : SSet.{u}) (f : X ⟶ (ihom K).obj Q), E X K Q f = (f ▷ K) ≫ (β_ ((ihom K).obj Q) K).hom ≫ (ihom.ev K).app Q) ∧ (∀ (X K Q : SSet.{u}) (f : X ⟶ (ihom K).obj Q) (n : SimplexCategoryᵒᵖ) (x : X.obj n) (k : K.obj n), (E X K Q f).app n (x, k) = (functorSimplexEquiv K Q n.unop (f.app n x)).app n (k, stdSimplex.objEquiv.symm (𝟙 n.unop))) ∧ (∀ (X K Q : SSet.{u}) (g : X ⊗ K ⟶ Q) (n m : SimplexCategoryᵒᵖ) (x : X.obj n) (k : K.obj m) (a : m.unop ⟶ n.unop), (functorSimplexEquiv K Q n.unop (((E X K Q).symm g).app n x)).app m (k, stdSimplex.objEquiv.symm a) = g.app m (X.map a.op x, k)) ∧ (∀ (X X' K K' Q Q' : SSet.{u}) (c : X' ⟶ X) (a : K' ⟶ K) (b : Q ⟶ Q') (f : X ⟶ (ihom K).obj Q), E X' K' Q' (c ≫ f ≫ (MonoidalClosed.pre a).app Q ≫ (ihom K').map b) = (c ⊗ₘ a) ≫ E X K Q f ≫ b)",
   "branch": "newtargets-dag",
-  "by": "Q24",
+  "by": "Q20",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Uses the internal hom of EnhancedDiagramsCones, with its canonical Yoneda/exponential degree equivalence to Hom(K × Δ[n], Q). States restriction on the simplex factor, evaluation factorization, explicit forward and inverse formulas, and simultaneous X/K/Q naturality; no fibrancy hypotheses. The only postponed theorem is the item itself."
+  "note": "Uses the internal hom of EnhancedDiagramsCones, with its canonical Yoneda/exponential degree equivalence to Hom(K × Δ[n], Q). States restriction on the simplex factor, evaluation factorization, explicit forward and inverse formulas, and simultaneous X/K/Q naturality; no fibrancy hypotheses. The only postponed theorem is the item itself. Source correction for returned delivery: the supporting source is Goerss--Jardine, Simplicial Homotopy Theory, Chapter I Section 5, Proposition 5.1 (Exponential Law), not HTT Proposition 1.2.7.3; module and report citations are updated accordingly."
  }
 }

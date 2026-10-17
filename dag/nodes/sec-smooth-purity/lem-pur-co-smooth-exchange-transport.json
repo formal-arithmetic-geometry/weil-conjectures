@@ -18,7 +18,8 @@
   "lem-weil-pbc-comparison-pullback",
   "def-cbc-exchange-map",
   "def-exchange-projection",
-  "def-weil-pbc-etale-origin-witness"
+  "def-weil-pbc-etale-origin-witness",
+  "lem-sf-class-compact-support-comparison"
  ],
  "proof": [
   {
@@ -224,5 +225,30 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-d7b9120a3 (reviewer sub-agent of L); spot-checked: I read the item in full, every cited statement, the blueprint sources (lem-pur-co-smooth-composition.proof.md, final sentence; thm-cbc-finite-level-proetale.proof.md, lines 5-23) and the unit route (sk-prop-cohsm reaches sk-prop-sf-cbc, sk-thm-properbasechange, sk-thm-p1 and sk-def-exchange). The statement is unchanged and correct. Coefficients are constant discrete Λ-modules with Λ finite commutative, as in lem-weil-pbc-transport-identifies-exchange. E^e is exactly the composite of def-cbc-exchange-map. E^p is the def-exchange-projection composite (ambient ringed exchange, then the pro-étale β) with v arbitrary. I type-checked both sides of the equality. Small cases check: with v=id it reduces to reflexivity, with j=id to lem-weil-pbc-transport-identifies-exchange, and with p=id to lem-fix-site-open-exchange. It is not a duplicate: lem-amb-compact-support-site-comparison-open is only the case of an open v on Noetherian schemes, and thm-cbc-finite-level-proetale only defines the transported map. There are no new nodes. I repaired three faults in fixes/ (proof, proof_deps and split_report only). (1) B4: the JSON had control characters: \\b+'ar' in place of \\bar in step 2, and U+0007+'lpha' in place of \\alpha in step 4. (2) C1/E5: step 2 claimed the open-extension square commutes 'by naturality'. That square is a coherence of independently defined mates (e_j, β^e, β^p), no cited statement gave it, and the étale β^e (cor-cbc-derived-extension-zero-base-change) was not cited. The existing lem-fix-site-open-exchange states it exactly for arbitrary g, so step 2 now cites it as equation (2) and declares it in split_report.tool_uses. I accept that tool use: it is already accepted for lem-amb-compact-support-site-comparison-open, and the on-route lem-trf-open-base-change-site-transport needs Noetherian qcqs corners. (3) Step 1 did not justify that p and p' are qcqs (now via def-weil-pbc-scheme-conventions and lem-pc-separated-quasi-separated) or that j_!L is bounded below (now via lem-weil-pbc-extension-by-zero-exact and lem-weil-pbc-exact-functor-bounded-below). It also attributed the equality to full faithfulness; the step now states equation (1) directly from the lemma. Step 3 is now the explicit calculation: naturality of E^p_*, then (1), then (2), then naturality of b_{p'}. I checked each equality. Step 4 now reads: by naturality of E^p in α, Ψ_{L,α}=E^p(N), which does not depend on the witness. The details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportExchangeTransport",
+  "declaration": "AlgebraicGeometry.ProEtale.compactSupport_exchange_transport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.compactExchangeTransportComparison",
+   "AlgebraicGeometry.ProEtale.compactExchangeTransportSource",
+   "AlgebraicGeometry.ProEtale.compactExchangeTransportTarget",
+   "AlgebraicGeometry.ProEtale.compactExchangeTransportAtWitness",
+   "AlgebraicGeometry.ProEtale.compactSupport_exchange_transport"
+  ],
+  "file": "lean/Sheaf/Paper/CompactSupportExchangeTransport.lean",
+  "statement": "theorem compactSupport_exchange_transport (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (sq : IsPullback g' f' f g) (c : Compactification f) : (Functor.whiskerRight (Etale.rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap Λ sq c) (DerivedCategory.Plus.ι ⋙ (comparisonUpperStar (ModuleCat.{u + 1} Λ) Y').mapDerivedCategory) ≫ (compactExchangeTransportTarget Λ sq c).hom = (compactExchangeTransportSource Λ g c).hom ≫ Functor.whiskerLeft (DerivedCategory.Plus.ι ⋙ (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory) (rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} Λ) sq c)) ∧ (∀ (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (N : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) (alpha : (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.obj L.obj ≅ N), compactExchangeTransportAtWitness Λ sq c L N alpha = (rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} Λ) sq c).app N)",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f905594fc",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Read the item node, all 12 statement dependencies, the source place, both delivered modules and report.md (Worker report and Second reading by Q78 both present). Checked every clause: separated finite-type f, arbitrary g, Compactification f with c.ofIsPullback sq, fixed-scalar ModuleCat coefficients with Λ : Type (u+1) as in all dependencies, bounded-below input via Plus.ι. C = Plus compatibility then compactSupportSiteComparison.symm (counit mate fixedComparisonDirectImageMatePlus, then degreewise openImmersionLowerShriekComparisonUpperStarIso). a_v and a_w = leftDerivedUpperStarComparisonIso (tagged lem-weil-pbc-comparison-pullback; the same as in the Lean of lem-weil-pbc-transport-identifies-exchange). S and T unfold correctly. E^e is the recorded Etale...PlusBaseChangeMap; E^p is the second component of finiteExchangeProjection with g arbitrary (FiniteCoefficient copy differs only in imports). The first conjunct is an equality of natural transformations; the second equates the witness-transported map to E^p.app N for every (L,N,α), which gives witness invariance. No extra hypotheses; no hollow data (sorryAx only from upstream Prop isIso); one sorry; statement field verbatim; no duplicate found. The §1(B) dependency repair is a single import swap with bodies unchanged (diffed); added stmt_dep is used and acyclic. nt_compile.py on both files, three runs: 4-10 s and 11-19 s, clean. Minor non-blocking: dependency lean.note replaced rather than extended."
  }
 }

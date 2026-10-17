@@ -15,7 +15,8 @@
   "def-pur-hom-complex",
   "def-pc-tensor-complex-sheaves",
   "def-pc-kflat-complex",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-coef-ringed-tensor-hom-model"
  ],
  "proof": [
   {
@@ -168,5 +169,28 @@
   "group": "Q69",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q69-770ebe2d9 (reviewer sub-agent of L); spot-checked: Mathematics and split pass. Source metadata incorrectly identifies Tag 08JC as the Hom-complex/RHom construction; those are Sections 0A8X and 08J7. Corrected DAG JSON is in fixes/dag/nodes/sec-six-functors/lem-sf-even-line-hom-shift.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EvenLineHomShift",
+  "declaration": "CategoryTheory.SignedRingedHom.even_line_hom_shift",
+  "declarations": [
+   "CategoryTheory.SignedRingedHom.lineComparison",
+   "CategoryTheory.SignedRingedHom.even_line_hom_shift",
+   "CategoryTheory.SignedRingedHom.even_line_hom_shift_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/EvenLineHomShift.lean",
+  "statement": "theorem even_line_hom_shift (T : Modules J R) (hT : ∀ U : C, ∃ S : Sieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f → Nonempty ((SheafOfModules.overFunctor ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) V).obj T ≅ SheafOfModules.unit (((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R).over V))) (r s : ℤ) (hr : Even r) (K : D J R) : lineComparison J R (K⟦s⟧) (((DerivedCategory.singleFunctor (Modules J R) 0).obj T)⟦r⟧) ≫ (sourceShift J R K s).hom.app (((DerivedCategory.singleFunctor (Modules J R) 0).obj T)⟦r⟧) = ((sourceShift J R K s).hom.app (𝟙_ (D J R))) ▷ (((DerivedCategory.singleFunctor (Modules J R) 0).obj T)⟦r⟧) ≫ (((curriedTensor (D J R)).flip.obj (((DerivedCategory.singleFunctor (Modules J R) 0).obj T)⟦r⟧)).commShiftIso (-s)).hom.app ((hom J R K).obj (𝟙_ (D J R))) ≫ (lineComparison J R K (((DerivedCategory.singleFunctor (Modules J R) 0).obj T)⟦r⟧))⟦-s⟧'",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f189b870c",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Read the node, all 9 statement dependencies, the source tags (08JC/0A8X/08J7/08J9 checked in the tags file), both delivered modules, the report and the node records. Item: every clause matches. lineComparison is the real evaluation transpose with the Koszul braiding. sourceShift is the canonical rightAdjointUniq mate of the native tensor shift, in the right direction. The tensor-shift iso and composition order are right. hT is exactly locally isomorphic to R; Even r is the only parity condition; K is arbitrary; the epsilon normalization theorem covers s-only signs. lean.statement is verbatim. Section 1(B) repair of lem-weil-pbc-ringed-internal-hom-exact-restriction is justified: the old interface was existential only. The old module stays available by public import; no hollow definitions; only sorry proofs. normalizedAdjunction_existsUnique: uniqueness holds (monoidal structure fixed by h, comparison fixed as inverse of native mu, uncurry model on K-flat/K-injective representatives, evaluation naturality, adjunction fixed by its counit). totalTensor_eq_native confirmed by rfl in a scratch compile. derivedMonoidal_eq_localization is plausibly definitional (upstream inferInstanceAs of the same structure) but rfl exceeded 60 s. The Hom universe u for HasDerivedCategory is a size choice, not a restriction of the objects. nt_compile: SignedCalculus clean in 21-50 s (one earlier attempt timed out at load about 225), EvenLineHomShift clean in 7.8 s. No duplicate notion found. Informational only: the dependency record's restriction, exactness and shift clauses are carried by the public import; the second-reading section is the author's self-check."
  }
 }

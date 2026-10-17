@@ -226,16 +226,16 @@
   "file": "lean/Sheaf/Paper/ExtensionZeroStratifiedPerfect.lean",
   "statement": "theorem cbc_extension_zero_stratified_perfect (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {T U Z : Scheme.{u}} [IsNoetherian T] (j : U ⟶ T) [IsOpenImmersion j] [QuasiCompact j] (i : Z ⟶ T) [IsClosedImmersion i] (hcover : Set.range j ∪ Set.range i = Set.univ) (hdisjoint : Disjoint (Set.range j) (Set.range i)) (K : DerivedCategory (pbcModules U (pbcAdicCompletion U (pbcIntegralDatum l E)))) (hK : IsIntegralStratifiedPerfect U (pbcIntegralDatum l E) K) : IsIntegralStratifiedPerfect T (pbcIntegralDatum l E) ((cbcDerivedOpenShriek (pbcIntegralDatum l E) j inferInstance).obj K) ∧ IsZero ((adicTowerPullback i (pbcAdicCompletion T (pbcIntegralDatum l E))).obj ((cbcDerivedOpenShriek (pbcIntegralDatum l E) j inferInstance).obj K))",
   "branch": "newtargets-dag",
-  "by": "N8",
+  "by": "Q42",
   "date": "2026-10-17",
   "existing": false
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-e434722ce",
-  "group": "N8",
-  "result": "pass",
-  "note": "Clause-by-clause match: IsNoetherian T = finite affine Noetherian cover; IsOpenImmersion+QuasiCompact j; IsClosedImmersion i with range cover/disjoint = complement; K in completed-coefficient D(Mod(A_U)); hypothesis and conclusion via the existing canonical IsIntegralStratifiedPerfect (LocallyClosedStratification, pro-etale covering sieves, IsPerfectRingComplex models); j_! = cbcDerivedOpenShriek (same extensionByZeroPresheaf+sheafification as the recorded localizedModuleExtension, transported to ProEt universes); closed vanishing via the actual derived inverse image adicTowerPullback. Same datum and universes as the citer lem-cbc-integral-compact-support-uniform-restriction step 3 and the characterization lemma. Existential conclusion accepted (hypothesis is the same predicate; the source states preservation; the only citer needs only the predicate). Edge cases U or Z empty, K=0, empty stratification covered. No hollow defs, only sorry, docstrings with source and blueprint, no extra assumptions, no pro-etale substitute, lines <=100. Node diff vs base: lean field only, statement verbatim. nt_compile.py --json: rc 0, no diagnostics, item module 4.1 s. No blocking findings."
+  "reviewer": "NT-stage2-cc-864bfd206",
+  "group": "Q42",
+  "result": "fix",
+  "note": "Q42 re-delivers the already landed and N8-reviewed statement AlgebraicGeometry.Scheme.cbc_extension_zero_stratified_perfect; only lean.by N8->Q42 and a process-note docstring line changed. Checked every clause: IsNoetherian T = finite affine Noetherian cover; IsOpenImmersion+QuasiCompact j; IsClosedImmersion i with cover/disjoint; completed-coefficient D(Mod(A_U)) via pbcIntegralDatum (valuation ring, uniformizer ideal); hypothesis = IsIntegralStratifiedPerfect (finite LocallyClosedStratification, ProEt covering sieves, IsPerfectRingComplex models via actual inverse image); j_! = cbcDerivedOpenShriek (extensionByZeroPresheaf+sheafification, real data); closed vanishing via adicTowerPullback IsZero. Existential conclusion accepted as in the landed review (source states preservation; the only citer needs the predicate). Edge cases U/Z empty, K=0, n=0, P=0 covered; single universe, nothing unbound, only sorry, source/blueprint docstrings, statement verbatim. nt_compile on the byte-equivalent landed file: rc 0, no diagnostics, 7.9 s. FIX: fixes/ExtensionZeroStratifiedPerfect.lean removes the docstring line 'This Q42 stage-2 packet records the already landed statement verbatim.' (byte-identical to the landed file)."
  }
 }

@@ -106,7 +106,8 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "lem-coef-operadic-algebra-presentability",
-  "lem-coef-space-transport-classification"
+  "lem-coef-space-transport-classification",
+  "lem-coef-infinity-pinch-comparison"
  ],
  "mathlib_searches": [
   {
@@ -211,5 +212,30 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-ecb2091f3 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, report and route. Checked Haugseng Definition 2.1, Gepner–Haugseng Definition 3.1.13/Section 4.1, HTT relative-nerve results and Kerodon pinch comparison. All six steps pass, including empty spaces, n=0, repeated coordinates and homotopy-limit compatibility. No new nodes, duplicates, cycles or repairs. Detailed review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TupleOperadIncidence",
+  "declaration": "SSet.Enhanced.tuple_operad_incidence",
+  "declarations": [
+   "SSet.Enhanced.tupleOperad",
+   "SSet.Enhanced.tupleOperadProjection",
+   "SSet.Enhanced.tupleBaseArrow",
+   "SSet.Enhanced.tupleTransport",
+   "SSet.Enhanced.tuple_operad_incidence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TupleOperadIncidence.lean",
+  "statement": "theorem tuple_operad_incidence (X : SSet.{u}) (hX : KanComplex X) : leftFibration (tupleOperadProjection X) ∧ Quasicategory (tupleOperad X) ∧ cocartesianFibrationOver (tupleOperadProjection X) ∧ (∀ e : Δ[1] ⟶ tupleOperad X, IsCocartesianEdge (tupleOperadProjection X) e) ∧ Nonempty (KanRelativeNerve.TransportData (Algebroid.objectDiagram X)) ∧ (∀ S : SpaceStraightening.Straightening.{u}, SpaceStraightening.IsOrdinaryComparison S (AsSmall.{u} SimplexCategoryᵒᵖ) → KanRelativeNerve.IsClassified S (Algebroid.objectDiagram X)) ∧ Nonsymmetric.IsGeneralizedOperad (tupleOperadProjection X) ∧ (∀ (a b : tupleOperad X _⦋0⦌) (φ : mappingSpace monoidalSimplexBase a.base b.base _⦋0⦌), Nonempty (fiber (mappingSpaceMap (tupleOperadProjection X) a b) φ ≅ mappingSpace ((Algebroid.objectDiagram X).obj (b.base.obj 0)) (tupleTransport a b φ) (b.value 0 (𝟙 _))) ∧ Nonempty (mappingSpace ((Algebroid.objectDiagram X).obj (b.base.obj 0)) (tupleTransport a b φ) (b.value 0 (𝟙 _)) ≅ ∏ᶜ (fun j : Fin ((AsSmall.down.obj (b.base.obj 0)).unop.len + 1) ↦ mappingSpace X (tupleTransport a b φ j) (b.value 0 (𝟙 _) j))) ∧ (∃ j : mappingSpace ((Algebroid.objectDiagram X).obj (b.base.obj 0)) (tupleTransport a b φ) (b.value 0 (𝟙 _)) ⟶ arrowMappingSpace ((Algebroid.objectDiagram X).obj (b.base.obj 0)) (tupleTransport a b φ) (b.value 0 (𝟙 _)), ∃ r : arrowMappingSpace ((Algebroid.objectDiagram X).obj (b.base.obj 0)) (tupleTransport a b φ) (b.value 0 (𝟙 _)) ⟶ mappingSpace ((Algebroid.objectDiagram X).obj (b.base.obj 0)) (tupleTransport a b φ) (b.value 0 (𝟙 _)), Nonempty (SSet.Homotopy (j ≫ r) (𝟙 _)) ∧ Nonempty (SSet.Homotopy (r ≫ j) (𝟙 _))))",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab7952108",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Read the node, all 4 statement dependencies and the Lean declarations they use, the module and the report. The only hypotheses are X : SSet.{u} and KanComplex X. The relative-nerve clauses mirror kan_relative_nerve_left_fibration for objectDiagram X. IsGeneralizedOperad covers the Kan zero fibre, inert lifts, Segal maps for all n including 0, and incidence relative limits. For every a, b and φ the Lean gives an iso of the fibre with the mapping space in X^{n+1} from F(φ)a to b (canonical transport via nerve.homEquiv and objectDiagram.map), a coordinatewise product over Fin (n+1), and a homotopy equivalence with arrowMappingSpace. Empty X (vacuous), n=0 (one-factor product), empty path spaces and one universe all checked. No hollow definitions; the two abbrevs point to the recorded Algebroid.domain/projection; docstrings carry source and blueprint and follow the six proof steps; the only sorry is the theorem. The node changed only in lean plus the landed dependency lem-coef-infinity-pinch-comparison, which stage2_delivery.py allows. lean.statement is verbatim. The report has the Worker report and Second reading by Q79 sections. nt_compile.py --json: exit 0, 3.9 s, no diagnostics. No findings."
  }
 }

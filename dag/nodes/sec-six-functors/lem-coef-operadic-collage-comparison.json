@@ -31,7 +31,8 @@
  "stmt_deps": [
   "def-coef-operadic-correspondence",
   "lem-coef-cocartesian-straightening",
-  "def-coef-infinity-relative-cone"
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-comma-mapping-pullback"
  ],
  "proof": [
   {
@@ -347,5 +348,39 @@
   "group": "Q113",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-1c6dd0c73 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement in full. This delivery repairs the long-step return of the Q16-reviewed split. Compared with the Q16 fixed copy, the statement and steps 1, 2, 4, 7, 8 and 9 are unchanged; steps 3, 5 and 6 are now at most 1375 characters. proof_deps equals the union of uses, and the item does not occur among its 625 transitive dependencies, so there is no cycle. Step 3: I_r is exactly the inert category I_n of lem-coef-inert-operad-color-reconstruction. Over the ordinary base Δ^op×[1], the bridge's fiber test reduces the same-endpoint case to the reconstruction relative-limit axiom and the C→D case, through Step 2 and pointwise-cocartesian-transport, to the axiom in D. The D→C case is vacuous because there is no base arrow 1→0. Step 5: P=G_[1](D) checked degreewise; the dual mapping-simplex comparison with n=1 and degenerate E gives P^♭→M^♮, and the marked-flat test and the Joyal (i)⇒(ii) test then give the functor equivalence. Step 6: Δ^op has only identity isomorphisms, and V^⊗→S is an isofibration. Steps 7 and 8 have the correct comma orientation (θa and (u^*b)η). New bridge node: true (end/limit formula; discrete base mapping spaces give the fiberwise criterion); tested at r=0, r=1, empty fibers and no base arrow. It is not a duplicate of mapping-excision or the relative-cone tests. New overbase node: true (isofibration fibers are homotopy fibers; Joyal test on total and base). It had two B2 faults, both repaired in fixes/: it required V small although Step 6 applies it to a possibly large V^⊗, and it referred to nonexistent 'endpoint restrictions'. The statement now allows large V and says compatibility with restriction along i. No weakening and no drop. Accepted tool_uses: lem-cbc-strict-presentation-transport-representation, lem-cbc-cartesian-mapping-simplex-comparison, lem-cbc-enhanced-functor-cone-calculus, def-cbc-enhanced-cartesian-fibration. Gepner–Haugseng A.3–A.4 is not archived: WANTED, proof_origin agent, and I could not read it at the cited place. Not a target node; no coefficient category or base-change morphism involved; no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicCollageComparison",
+  "declaration": "SSet.Enhanced.Operadic.Collage.operadic_collage_comparison",
+  "declarations": [
+   "SSet.Enhanced.Operadic.Collage.activeArrows",
+   "SSet.Enhanced.Operadic.Collage.activeSource",
+   "SSet.Enhanced.Operadic.Collage.relativeActiveSlice",
+   "SSet.Enhanced.Operadic.Collage.relativeSliceArrow",
+   "SSet.Enhanced.Operadic.Collage.cylinderFunctors",
+   "SSet.Enhanced.Operadic.Collage.Cylinder",
+   "SSet.Enhanced.Operadic.Collage.Cylinder.sourceInclusion",
+   "SSet.Enhanced.Operadic.Collage.Cylinder.targetInclusion",
+   "SSet.Enhanced.Operadic.Collage.Cylinder.targetVertex",
+   "SSet.Enhanced.Operadic.Collage.familyInclusion",
+   "SSet.Enhanced.Operadic.Collage.AlgebraComparison",
+   "SSet.Enhanced.Operadic.Collage.HasCylinderComparisons",
+   "SSet.Enhanced.Operadic.Collage.operadic_collage_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicCollageComparison.lean",
+  "statement": "theorem operadic_collage_comparison {C D : SSet.{u}} (pC : C ⟶ monoidalSimplexBase) (pD : D ⟶ monoidalSimplexBase) (u : C ⟶ D) (hC : InertOperad.IsGeneralizedOperad pC) (hD : InertOperad.IsGeneralizedOperad pD) (hu : u ≫ pD = pC) (hinert : ∀ e : Δ[1] ⟶ C, IsMonoidalInertEdge pC e → IsMonoidalInertEdge pD (e ≫ u)) (hzeroC : KanComplex (fiber pC (monoidalBaseVertex 0))) (hzeroD : KanComplex (fiber pD (monoidalBaseVertex 0))) (hzero : ∃ z : fiber pC (monoidalBaseVertex 0) ⟶ fiber pD (monoidalBaseVertex 0), z ≫ monoidalFiberInclusion pD 0 = monoidalFiberInclusion pC 0 ≫ u ∧ IsFunctorEquivalence z) : ∃ K : Cylinder pC pD u, HasCylinderComparisons K",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Small simplicial cylinder correspondence with exact endpoint identifications, cocartesian transport, normalized retract and collapse prism, whole-functor restriction equivalence, canonical active-slice equivalence, and normalized coherent comma comparison. The existing generalComma/GeneralCommaPointwise interface is reused; its canonical comparison is uniquely specified by GeneralCommaComparisonFormula and carries GeneralCommaNaturality. Relative-active-slice helpers generalize the endpoint-specific dependency construction; the cylinder side uses the recorded activeSlice verbatim. No definition or data is chosen from this existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58e65ab13",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Matched all 6 hypotheses and 13 conclusion clauses against the node; no clause is weaker or stronger. Checked: equivalence over [0] pinned to u; [Quasicategory V] implied by IsMonoidalInfinityCategory; comparisons fixed by equations; mapping_formula's Classical.choose determined by GeneralCommaComparisonFormula; Cylinder constraints satisfiable by the relative-nerve model. Edge cases (empty C, no colors, arity 0, identity u) covered. Single universe u follows the dependency APIs. Helpers are generalizations, not duplicates. No hollow defs, one sorry, docstrings and 9-step proof present, statement verbatim, added dep landed and acyclic, report sections present. nt_compile.py clean (exit 0, 6.2 s). Non-blocking: mapping formula is stated on the comma side and transfers through the equivalence."
  }
 }

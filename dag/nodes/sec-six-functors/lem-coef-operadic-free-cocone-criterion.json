@@ -233,5 +233,39 @@
   "group": "Q122",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-b55d9fe58 (reviewer sub-agent of L); spot-checked: Read the item and all five steps in full, plus the full statements of all cited nodes: collage-comparison, def-coef-operadic-correspondence, correspondence-kan-filling, def-cbc-enhanced-diagrams-cones, kan-quillen-right-proper, and the stmt deps. Checked against Gepner–Haugseng arXiv:1312.3178v4, App. A, pp. 89–92 (PDF text). Statement: A.4.1, A.4.3 and A.4.4 are stated for an arbitrary non-symmetric ∞-operad O. The item specialises to O = V⊗ for monoidal V. Dropping the cocompleteness of the A.4 preamble is faithful to these statements. The 'over the base cocone' clause matches A.4.4. K_n = M_act ×_{N_act}(N_act)/n equals the source's A ×_B (B_act)/b on all simplices because activeness is detected in the base. Tested u = id, empty colours, an empty slice and nullary inputs; none is false. Step 1: the collage hypotheses match exactly, and the slice and cocone identification turns the item's condition into the definition's LKE condition. Step 2 is elementary and correct. Step 3: the existence clause of kan-filling with any monoidal V gives H, and the collage gives (B,A,η); this matches A.3.4(i) and Remark A.4.2. Step 4: right-pinched boundary data plus a constant initial face fill ∂Δ^{q+1}; the relative-boundary clause applies with m = q+1 > 0 and LKE initial vertex, and q = 0 is handled. The RLP against all ∂Δ^n, including n = 0, is the trivial-fibration characterisation of the cited node. Step 5: the comma formula with θ = id gives a homotopy pullback whose projection to F is an equivalence. Its first leg is id∘a, homotopic to the identity rather than equal; this does not affect the argument. Naturality comes from the collage clause. No new nodes, no cycle (dependency closure of 513 nodes excludes the item), all statements in unit sk-prop-sf-biduality-general, no tool_uses needed, no SGA. The existing stronger lem-coef-operadic-free-cocone-characterization (presentable case) is not a duplicate created here. Searches are recorded in all three kinds. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicFreeCoconeCriterion",
+  "declaration": "SSet.Enhanced.OperadicFree.operadic_free_cocone_criterion",
+  "declarations": [
+   "SSet.Enhanced.OperadicFree.activeSliceTarget",
+   "SSet.Enhanced.OperadicFree.activeSliceSource",
+   "SSet.Enhanced.OperadicFree.activeMapSlice",
+   "SSet.Enhanced.OperadicFree.activeMapSource",
+   "SSet.Enhanced.OperadicFree.activeMapToSlice",
+   "SSet.Enhanced.OperadicFree.algebraFunctor",
+   "SSet.Enhanced.OperadicFree.IsSliceCocone",
+   "SSet.Enhanced.OperadicFree.IsLocalExtension",
+   "SSet.Enhanced.OperadicFree.extensionPairs",
+   "SSet.Enhanced.OperadicFree.unitCylinder",
+   "SSet.Enhanced.OperadicFree.IsInducedCocone",
+   "SSet.Enhanced.OperadicFree.IsFreePair",
+   "SSet.Enhanced.OperadicFree.operadic_free_cocone_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicFreeCoconeCriterion.lean",
+  "statement": "theorem operadic_free_cocone_criterion {M N V : SSet.{max (u + 1) v}} [Quasicategory V] (q : M ⟶ monoidalSimplexBase) (r : N ⟶ monoidalSimplexBase) (p : V ⟶ monoidalSimplexBase) (hM : Presentability.IsSmall.{u} M) (hN : Presentability.IsSmall.{u} N) (hq : Nonsymmetric.IsGeneralizedOperad q) (hr : Nonsymmetric.IsGeneralizedOperad r) (hp : IsMonoidalInfinityCategory p) (f : M ⟶ N) (hf : IsLaxMonoidalInfinityFunctor q r f) (hzero : ∃ g : fiber q (monoidalBaseVertex 0) ⟶ fiber r (monoidalBaseVertex 0), g ≫ monoidalFiberInclusion r 0 = monoidalFiberInclusion q 0 ≫ f ∧ IsFunctorEquivalence g) (B : (Nonsymmetric.algebras q p) _⦋0⦌) : ((∃ z : (extensionPairs p f hf B) _⦋0⦌, IsFreePair p f hf B z) ↔ ∀ n : (monoidalUnderlying r) _⦋0⦌, ∃ c : rightJoinCone (activeMapSlice r f n) ⟶ V, IsLocalExtension r p f (algebraFunctor q p B) n c) ∧ (∀ z : (extensionPairs p f hf B) _⦋0⦌, IsFreePair p f hf B z → IsInitial (extensionPairs p f hf B) z)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Conditional active-cocone assembly. Sharp active slice and canonical base normalization retain all coherent simplices. The unit-induced cocone is the fixed-apex lift of the unit cylinder to the sharp cocone category, as in GH Definition A.4.1. Initiality in the existing coherent comma category expresses equivalence of composition with the specified unit, naturally on the whole target algebra category."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-040748ee3",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Checked each clause of operadic_free_cocone_criterion against the node and GH A.4.1/A.4.3/A.4.4. Universes max(u+1) v with IsSmall.{u}. Nonsymmetric.IsGeneralizedOperad hyps include the Kan zero fibres. hzero is the actual restriction of f plus IsFunctorEquivalence. Arbitrary monoidal V; [Quasicategory V] is needed to type IsMonoidalInfinityCategory and is implied anyway. activeMapSlice is the pullback of the active full sub-slice of N_{/n}, equal to M_act x_{N_act} (N_act)_{/n} because endpoint-preservation cancels. IsLocalExtension pins boundary T_n, the whole base cocone and apex [1] (also for empty K_n), and uses the recorded IsOperadicallyColimiting. extensionPairs = comma(..., restriction, B, false) = B down u*. IsInducedCocone is a cylinder from c to the slice cocone of A with boundary the unit cylinder of eta and constant apex A(n), i.e. A(alpha) after eta_m. IsInitial in B down u* is equivalent to Map(A,C)->Map(B,u*C), h -> u*h o eta, being an equivalence for all C, naturally. Iff and quantifier order match. Edge cases (empty slice/colours/zero fibres, f=id, nullary) OK. Not a duplicate of operadic_active_colimit_extension_criterion (ordinary operads, assumed colimits, global adjoint). Only the node's lean field changed; lean.statement verbatim; 13 declarations listed; docstrings with source and blueprint; one sorry carrying the 5-step proof. nt_compile.py: rc=0, 6.8 s, no errors or warnings (warn.sorry=false in lakefile; a deliberate-error probe confirmed errors are printed). No findings, no fixes."
  }
 }

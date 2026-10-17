@@ -8,7 +8,8 @@
   "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-sp-completed-pullback-adjunction",
   "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-pbc-diagram-site-realization"
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-sp-completion-mate-comparison"
  ],
  "proof": [
   {
@@ -458,5 +459,45 @@
   "group": "Q112",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q112-1d3168076 (reviewer sub-agent of L); spot-checked: Read the full item, all eleven steps, cited statements and source passages. Verified completion-unit uniqueness, quotient-ring tensor balancing, whole-tower equality and counit normalization; checked edge cases, duplicates, cycles, route and target-category distinctions. Accepted all 18 generic tool uses. No repairs or new nodes. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedProjectionCoherence",
+  "declaration": "CategoryTheory.AdicSites.ProjectionCoherence.completedProjectionCoherence",
+  "declarations": [
+   "CategoryTheory.AdicSites.ProjectionCoherence.corner",
+   "CategoryTheory.AdicSites.ProjectionCoherence.TensorData",
+   "CategoryTheory.AdicSites.ProjectionCoherence.TensorData.projection",
+   "CategoryTheory.AdicSites.ProjectionCoherence.CompletedTensor",
+   "CategoryTheory.AdicSites.ProjectionCoherence.CompletedTensor.projection",
+   "CategoryTheory.AdicSites.ProjectionCoherence.TensorData.towerProjection",
+   "CategoryTheory.AdicSites.ProjectionCoherence.ScalarTensor",
+   "CategoryTheory.AdicSites.ProjectionCoherence.ScalarTensor.Normalized",
+   "CategoryTheory.AdicSites.ProjectionCoherence.FiniteTensor",
+   "CategoryTheory.AdicSites.ProjectionCoherence.FiniteTensor.targetBalancing",
+   "CategoryTheory.AdicSites.ProjectionCoherence.FiniteTensor.projection",
+   "CategoryTheory.AdicSites.ProjectionCoherence.CompletedTensor.UnitEquation",
+   "CategoryTheory.AdicSites.ProjectionCoherence.CompletedTensor.Unique",
+   "CategoryTheory.AdicSites.ProjectionCoherence.CompletedTensor.LimitEquation",
+   "CategoryTheory.AdicSites.ProjectionCoherence.TransposeCompatibility",
+   "CategoryTheory.AdicSites.ProjectionCoherence.TensorData.FiniteEquation",
+   "CategoryTheory.AdicSites.ProjectionCoherence.CompletedTensor.Natural",
+   "CategoryTheory.AdicSites.ProjectionCoherence.completedProjectionCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedProjectionCoherence.lean",
+  "statement": "theorem completedProjectionCoherence (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (_hperfect : AdicSites.PerfectQuotients A I) (f : Morphism Y X) (o : TensorData f A) : ∃ (b : CompletedTensor I o) (s : ∀ n : ℕ, FiniteTensor (I := I) o n), (∀ H : X.derived A, IsIso (f.towerProjection A I H)) ∧ (∀ (n : ℕ) (H : X.derived A), IsIso (f.finiteProjection A I n H)) ∧ b.UnitEquation ∧ b.Unique ∧ b.LimitEquation ∧ o.FiniteEquation s ∧ TransposeCompatibility f A ∧ b.Natural",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the published AdicSites strict completion, finite coefficient and adjunction constructions through the recorded lem-sp-completion-mate-comparison module. The added stmt_dep is an already landed node, as allowed by brief-stage2 section 5. Tensor presentation records are existential conclusions with geometric, K-flat and unit normalizations. Only the main theorem has a postponed proof. Second-reader fix (NT-cc-Q92): the ordinary tensor presentation o : TensorData f A is now a universally quantified input (as RingedTensorModel/RingedTensorEdge are in the landed ringedProjectionMateExact and ringedExchangeTensorCoherence), not an existential; the completed comparisons b (unique by their unit equations) and the finite quotient presentations s stay existential conclusions. The delivered form only asserted the coherence for some unspecified tensor presentation.",
+  "fixed_by": "NT-stage2-cc-76cd917ce"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76cd917ce",
+  "group": "Q92",
+  "result": "fix",
+  "note": "Read the node, the source places (Stacks 07A6/0B56/0941/0A07/099M/099N), the AdicSites declarations used and RingedTensorModel/Edge. Every clause matches: Noetherian A; PerfectQuotients on A/I^(n+1); the completed projection is the completedAdjunction homEquiv with comparisons fixed by their unit equations; UnitEquation, Unique, LimitEquation (Step 11, r = rho_N C(pi^o)), FiniteEquation, TransposeCompatibility, Natural; the tower/finite source comparisons are asserted invertible, not assumed. Edge cases are covered, no extra hypotheses, no hollow definitions, docstrings present, only the main theorem is sorry, lean.statement was verbatim. F1 (H3): the theorem made the ordinary tensor presentation existential (exists o : TensorData f A), so the coherence was only claimed for some unspecified derived-tensor model, while the landed ringedProjectionMateExact and ringedExchangeTensorCoherence take models as inputs. Fixed: o is now an explicit argument; b (unique, existence = Step-1 invertibility) and s stay existential. Fixes: the module, lean-record.json (new verbatim statement) and report.md. nt_compile --json: delivered 17.3 s and fixed 15.8 s, rc 0, no errors or warnings (dependency timeouts under load about 210 cleared on retry)."
  }
 }

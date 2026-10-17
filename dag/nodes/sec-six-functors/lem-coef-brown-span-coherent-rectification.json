@@ -201,5 +201,45 @@
   "group": "Q116",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q116-feada1234 (reviewer sub-agent of L); spot-checked: Read the complete item, all six proof steps, cited statements and source locations. Prescribed component classes, fixed-endpoint gluing, horn orientations and equivalence detection check out. No duplicate or circular split found; finite cases passed. No repairs or tool_uses needed. Detailed checks saved in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BrownSpanCoherentRectification",
+  "declaration": "SSet.Enhanced.brown_span_coherent_rectification",
+  "declarations": [
+   "SSet.Enhanced.coherentSpanSourceMap",
+   "SSet.Enhanced.coherentSpanShape",
+   "SSet.Enhanced.coherentSpanLeft",
+   "SSet.Enhanced.coherentSpanRight",
+   "SSet.Enhanced.coherentSpanSource",
+   "SSet.Enhanced.coherentSpanLeftTarget",
+   "SSet.Enhanced.coherentSpanRightTarget",
+   "SSet.Enhanced.coherentSpanSourcePoint",
+   "SSet.Enhanced.coherentSpanLeftPoint",
+   "SSet.Enhanced.coherentSpanRightPoint",
+   "SSet.Enhanced.coherentSpanLeftEdge",
+   "SSet.Enhanced.coherentSpanRightSimplex",
+   "SSet.Enhanced.coherentSpanSourceVertex",
+   "SSet.Enhanced.coherentSpanLeftVertex",
+   "SSet.Enhanced.coherentSpanRightVertex",
+   "SSet.Enhanced.coherentSpanRightEdge",
+   "SSet.Enhanced.coherentSpanHomotopyObject",
+   "SSet.Enhanced.coherentSpanHomotopyMorphism",
+   "SSet.Enhanced.coherentSpanEdgeMorphism",
+   "SSet.Enhanced.brown_span_coherent_rectification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/BrownSpanCoherentRectification.lean",
+  "statement": "theorem brown_span_coherent_rectification (C : SSet.{u}) [SSet.Quasicategory C] : ∀ (d d' : coherentSpanShape ⟶ C) (eₐ : coherentSpanHomotopyObject (coherentSpanSourceVertex d) ⟶ coherentSpanHomotopyObject (coherentSpanSourceVertex d')) (eₓ : coherentSpanHomotopyObject (coherentSpanLeftVertex d) ⟶ coherentSpanHomotopyObject (coherentSpanLeftVertex d')) (eᵧ : coherentSpanHomotopyObject (coherentSpanRightVertex d) ⟶ coherentSpanHomotopyObject (coherentSpanRightVertex d')) [IsIso eₐ] [IsIso eₓ] [IsIso eᵧ], coherentSpanHomotopyMorphism (coherentSpanLeftEdge d) ≫ eₓ = eₐ ≫ coherentSpanHomotopyMorphism (coherentSpanLeftEdge d') → coherentSpanEdgeMorphism (coherentSpanRightEdge d) ≫ eᵧ = eₐ ≫ coherentSpanEdgeMorphism (coherentSpanRightEdge d') → ∃ η : ((ihom coherentSpanShape).obj C) _⦋1⦌, ((ihom coherentSpanShape).obj C).δ 1 η = diagramVertex d ∧ ((ihom coherentSpanShape).obj C).δ 0 η = diagramVertex d' ∧ IsEquivalenceEdge ((ihom coherentSpanShape).obj C) η ∧ ∃ qₐ : C.Edge (coherentSpanSourceVertex d) (coherentSpanSourceVertex d'), ∃ qₓ : C.Edge (coherentSpanLeftVertex d) (coherentSpanLeftVertex d'), ∃ qᵧ : C.Edge (coherentSpanRightVertex d) (coherentSpanRightVertex d'), qₐ.edge = (evaluation coherentSpanShape C coherentSpanSourcePoint).app _ η ∧ qₓ.edge = (evaluation coherentSpanShape C coherentSpanLeftPoint).app _ η ∧ qᵧ.edge = (evaluation coherentSpanShape C coherentSpanRightPoint).app _ η ∧ coherentSpanEdgeMorphism qₐ = eₐ ∧ coherentSpanEdgeMorphism qₓ = eₓ ∧ coherentSpanEdgeMorphism qᵧ = eᵧ",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f5b82fa7a",
+  "group": "NW",
+  "result": "pass",
+  "note": "Matches the node clause by clause: quasicategory C : SSet.{u} with no extra assumption; span shape is the pushout of two Δ[1] at vertex 0; h C is Mathlib hoFunctor.obj C (Boardman–Vogt for quasicategories, no competing project notion); three morphisms each with [IsIso], so the Fin 2 counterexample is excluded; leg equations [u]≫eₓ=eₐ≫[u'], [v]≫eᵧ=eₐ≫[v'] in the node's order; ∃ η in (ihom K).obj C with δ1=diagramVertex d, δ0=diagramVertex d', IsEquivalenceEdge, components = evaluation of η with classes eₐ,eₓ,eᵧ; existence only. Edge cases: identity case has a witness, empty C vacuous, degenerate legs allowed. 19 helpers are real constructions, the only sorry is the theorem, docstrings carry source place, blueprint tag and the 6 proof steps. lean.statement verbatim, all 20 declarations present, node differs from shared node only in lean, report has Worker report and Second reading by NW. nt_compile.py --json on the snapshot file: clean, 23.2 s and 16.0 s, exit 0, no warnings (warn.sorry=false). Cosmetic only: HomotopyMorphism vs EdgeMorphism used for the two legs."
  }
 }

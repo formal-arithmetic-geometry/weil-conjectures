@@ -284,5 +284,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CocompleteMonoidalTensor",
+  "declaration": "SSet.Enhanced.Algebroid.cocomplete_monoidal_tensor",
+  "declarations": [
+   "SSet.Enhanced.Algebroid.IsCocontinuousStrongMonoidalAt",
+   "SSet.Enhanced.Algebroid.IsBilinearCocontinuousStrongMonoidalAt",
+   "SSet.Enhanced.Algebroid.bilinearCocontinuousFunctorsAt",
+   "SSet.Enhanced.Algebroid.cocontinuousStrongMonoidalFunctorsAt",
+   "SSet.Enhanced.Algebroid.bilinearCocontinuousStrongMonoidalFunctorsAt",
+   "SSet.Enhanced.Algebroid.CocompleteMonoidalTensorAt",
+   "SSet.Enhanced.Algebroid.cocomplete_monoidal_tensor"
+  ],
+  "statement": "theorem cocomplete_monoidal_tensor {E F : SSet.{max (u + 1) v}} [Quasicategory E] [Quasicategory F] (p : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (q : F ⟶ monoidalSimplexBase.{max (u + 1) v}) (hp : IsCocompleteMonoidal.{u, v} p) (hq : IsCocompleteMonoidal.{u, v} q) : Nonempty (CocompleteMonoidalTensorAt.{u, v} p q)",
+  "by": "Q56",
+  "date": "2026-10-17",
+  "file": "lean/Sheaf/CategoryTheory/CocompleteMonoidalTensor.lean",
+  "branch": "newtargets-dag",
+  "existing": false,
+  "note": "Reviewer fix: added structured_universal (restriction to strong monoidal functors for every cocomplete monoidal target, as the node states); presentable clause uses the recorded IsPresentablyMonoidal/IsPresentable (the delivered IsPresentablyMonoidalAt omitted small colimits); reuses the recorded IsCocompleteMonoidal, Coyoneda.PreservesSmallColimits, Coyoneda.cocontinuous and PreservesSmallColimitsSeparately instead of private copies; universes follow def-coef-complete-algebroid (u small, ambient max (u + 1) v).",
+  "fixed_by": "NT-stage2-cc-bd493cbdc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd493cbdc",
+  "group": "Q56",
+  "result": "fix",
+  "note": "Delivered module compiles cleanly (nt_compile rc 0) and keeps the node statement verbatim, but the Lean misrendered it. (H3) The node's clause that the universal equivalence restricts to strong monoidal functors for every cocomplete monoidal Z was stated only when V, W and Z are presentably monoidal. (H3/H4/H5) IsPresentablyMonoidalAt required kappa-accessibility without HasSmallColimits, so it is not presentability, and it copies the recorded IsPresentablyMonoidal. (H4) IsCocompleteMonoidalAt, IsCocontinuousAt, cocontinuousFunctorsAt and IsBilinearUnderlyingCocontinuousAt copy the recorded IsCocompleteMonoidal, Coyoneda.PreservesSmallColimits, Coyoneda.cocontinuous and PreservesSmallColimitsSeparately. A free ambient universe w replaced the def-coef-complete-algebroid convention max (u+1) v. Minor: the proof docstring lacked the node's steps (H8) and the proof-dependency imports CocartesianStraightening and InfinityBoundedColimitPresentation were missing. fixes/: complete CocompleteMonoidalTensor.lean using the recorded declarations at max (u+1) v; a structured_universal field for every IsCocompleteMonoidal target; presentable clause via IsPresentablyMonoidal plus the restriction for IsPresentable targets; six-step docstring; added imports; lean-record.json; report.md with an appended fix section. The fixed module compiles with no error and no warning (13.5 s); an error probe confirmed the tool reports errors. Edge cases checked: empty shapes, arity 0, non-presentable and presentable targets, universes, vertical transformations. Not blocking: the AlgebroidBilinearColimits import means the stage-3 proof of bilinear_change_preserves_small_colimits must go in a separate module."
  }
 }

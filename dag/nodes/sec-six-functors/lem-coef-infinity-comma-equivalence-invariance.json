@@ -253,5 +253,29 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-8aeaf02bf (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the full statements of all six cited nodes. Statement unchanged; it matches Kerodon Remark 4.6.4.4 (Tag 03PN) for strictly commuting cospans with vertical equivalences, and no fibration hypothesis is added. Step 1: exponentiation applied to the boundary of Delta^1 inside Delta^1 makes the endpoint maps p and p' isofibrations; T = X x_P A is a quasicategory by the inner-horn lift through p. Step 2: products of equivalences, with witnesses taken coordinatewise; Ha = a'V holds. Step 3: the evaluation map Phi_K is a genuine simplicial map, so it carries the unit and counit equivalence witnesses to witnesses for Fun(Delta^1,h); p'u = Hp holds exactly. Step 4: pullback-equivalence applied with (P,P',A',H,p') matches its hypotheses; j = (p,u) is an equivalence by clause (2) and two-out-of-three. Steps 5-6: rho and tau are pullbacks of the fibration p', so they are isofibrations by clause (1); base-change applies with p, rho, j and a, and gives alpha. Step 7: second pullback-equivalence with (X,X',T',V,tau); the identification of U with X x_X' T' checks out. Step 8: beta alpha is (v, h composed, w) coordinatewise, and the endpoint equations hold strictly. Small cases checked: empty inputs, D = Delta^0 with G' = hG, discrete B, nerves of posets. No new nodes, no cycle (the dependency closure does not reach the item), no duplicate found in the DAG, all citations stay in unit sk-prop-sf-biduality-general, no tool_uses, no SGA. Not a target, so the base-change morphism and coefficient category check does not apply. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoherentOrientedFiberProductInvariance",
+  "declaration": "SSet.Enhanced.coherentOrientedFiberProduct_equivalence_invariance",
+  "declarations": [
+   "SSet.Enhanced.coherentOrientedFiberProductMap",
+   "SSet.Enhanced.coherentOrientedFiberProduct_equivalence_invariance"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoherentOrientedFiberProductInvariance.lean",
+  "statement": "theorem coherentOrientedFiberProduct_equivalence_invariance {C D B C' D' B' : SSet.{u}} [Quasicategory C] [Quasicategory D] [Quasicategory B] [Quasicategory C'] [Quasicategory D'] [Quasicategory B'] (F : C ⟶ B) (G : D ⟶ B) (F' : C' ⟶ B') (G' : D' ⟶ B') (v : C ⟶ C') (w : D ⟶ D') (h : B ⟶ B') (hv : IsFunctorEquivalence v) (hw : IsFunctorEquivalence w) (hh : IsFunctorEquivalence h) (hF : F ≫ h = v ≫ F') (hG : G ≫ h = w ≫ G') : Quasicategory (generalComma F G) ∧ Quasicategory (generalComma F' G') ∧ IsFunctorEquivalence (coherentOrientedFiberProductMap F G F' G' v w h hF hG) ∧ coherentOrientedFiberProductMap F G F' G' v w h hF hG ≫ generalCommaSource F' G' = generalCommaSource F G ≫ v ∧ coherentOrientedFiberProductMap F G F' G' v w h hF hG ≫ generalCommaTarget F' G' = generalCommaTarget F G ≫ w",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reviewer fix (H4): the oriented fiber product T is the already landed SSet.Enhanced.generalComma (Sheaf.CategoryTheory.InfinityCommaMappingPullback, node lem-coef-infinity-comma-mapping-pullback, same unit, on the delivery base): definitionally the same pullback of F ⊗ₘ G and arrowEndpoints B = lift (ev 0) (ev 1). The delivered duplicates coherentOrientedFiberProduct and coherentOrientedFiberProductObjects are removed; the endpoint equations use generalCommaSource/generalCommaTarget. The only helper is the canonical cospan-induced map coherentOrientedFiberProductMap, introduced by this statement, built from pullback.map with v ⊗ₘ w, (ihom Δ[1]).map h and h ⊗ₘ h. No DAG cycle: the closure of lem-coef-infinity-comma-mapping-pullback does not reach this item.",
+  "fixed_by": "NT-stage2-cc-3ed58ea02"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ed58ea02",
+  "group": "Q30",
+  "result": "fix",
+  "note": "Mathematics and statement correct: every hypothesis/clause of the node matches (6 quasicategories, IsFunctorEquivalence v,w,h, strict squares hF/hG, T and T' quasicategories, induced map (v, h-postcomposition, w) is a functor equivalence, strict endpoint equations); no fibration/nonempty assumption, single universe; edge cases checked; docstrings with source, blueprint and 8 proof steps; node changed only in lean; delivered file recompiled rc=0. H4 finding: coherentOrientedFiberProduct and coherentOrientedFiberProductObjects duplicate the landed SSet.Enhanced.generalComma / generalCommaEndpoints (InfinityCommaMappingPullback.lean:49, node lem-coef-infinity-comma-mapping-pullback, same unit, on the delivery base, no DAG cycle). Fix: fixes/CoherentOrientedFiberProductInvariance.lean removes the duplicates, imports InfinityCommaMappingPullback, keeps coherentOrientedFiberProductMap typed on generalComma, endpoint equations via generalCommaSource/Target (definitionally identical); fixes/lem-coef-infinity-comma-equivalence-invariance.lean-record.json gives declarations, verbatim statement and a note. Fixed file compiles rc=0 via nt_compile.py."
  }
 }

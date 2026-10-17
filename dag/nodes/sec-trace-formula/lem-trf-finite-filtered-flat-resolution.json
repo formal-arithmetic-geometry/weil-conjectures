@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-weil-sheaf-of-modules-category",
   "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "def-trf-split-flat-filtered-sheaf-models",
+  "def-trf-uniform-finite-filtered-localization"
  ],
  "proof": [
   {
@@ -389,5 +391,23 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-4f4cf0f49 (reviewer sub-agent of L); spot-checked: Read in full: the item (14 steps), the new node lem-trf-right-fraction-dense-subcategory, every cited statement, the parent's two steps that cite the item, def-trf-bounded-filtered-derived-category and the unit sk-i-additivity. Sources checked: Varshavsky §5.2.1(b) only points to Illusie V §2 for the filtered lifts, so the item is rightly marked agent-formulated with Illusie WANTED. Stacks 0GSL (statement and proof), 06YQ and 03EW(4) read; the other tags matched against their labels. Steps 1-5 (finite-sum flat covers of each filtration step, the pullback T^n, the cycle invariant, the acyclic kernel via the pair (0,z), the graded short exact sequences) checked line by line. Step 6 uses the 06YQ bounded-above flat K-flat node. Step 7: dg ABC hypotheses checked, including pi∂s=f for the cone. Step 8: cone class equals W, right calculus from the Mathlib-leaf cone-system node. Steps 10-14: interval compatibility, exact countable sums, the convolution grade formula, the off-diagonal blocks dying in grade r, and the Koszul swap signs, all correct. New node: true (dual of Kashiwara-Schapira 7.2.1, categorical core of 0GSL; axioms match Mathlib HasRightCalculusOfFractions); small cases checked; it restates no clause of the item; no duplicate in the DAG (lem-kun-finite-filtered-kflat-replacement only inlines the same argument for ring modules); no Mathlib match after reading Resolution.lean, LocalizerMorphism.lean and OfFunctorialResolutions.lean. FIX: step 9 claimed without proof that the localization of the homotopy category is the bounded-above filtered derived category, which this chapter defines by localizing complexes. Added the filtered-cylinder argument (signs checked; homotopic maps agree in K[W^-1]) and the localization universal property, and added lem-weil-pbc-localization-universal-property to the step's uses. Accepted tool uses: functorial flat cover, bounded-above flat K-flat, sheaf tensor closed, dg ABC triangulation. The three definition entries in tool_uses are unneeded but harmless. Outside this split: lem-pc-bounded-above-flat-kflat-site should cite 06YQ, not 06YS.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FiniteFilteredFlatSheafResolution",
+  "declaration": "SheafOfModules.FilteredFlat.finite_filtered_flat_resolution",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteFilteredFlatSheafResolution.lean",
+  "statement": "theorem finite_filtered_flat_resolution : (∀ (a b : ℤ), a ≤ b → ∀ M : Complexes R a b, ∃ (P : FlatComplexes R a b) (f : P.obj ⟶ M), (∀ p n : ℤ, Epi ((FilteredObject.restrictionSteps f.hom p).f n)) ∧ ∀ p : ℤ, QuasiIso (FilteredObject.gradedMapSteps f.hom p)) ∧ (∀ (a b : ℤ), a ≤ b → ∀ P : FlatComplexes R a b, CochainComplex.IsKFlatIndependentCoefficients (R := R) P.obj.obj.obj ∧ ∀ p : ℤ, CochainComplex.IsKFlatIndependentCoefficients (R := R) (P.obj.obj.filtration.gradedPiece p)) ∧ (∃ E : ∀ (a b : ℤ) (_ : a ≤ b), (flatHomotopyQuasiIso R a b).Localization ≌ UniformFilteredDerived (Modules R) (some (a, b)) (CochainComplex.minus (Modules R)), (∀ (a b : ℤ) (hab : a ≤ b), Nonempty ((flatHomotopyQuotient R a b ⋙ (flatHomotopyQuasiIso R a b).Q) ⋙ (E a b hab).functor ≅ flatInclusion R a b ⋙ (uniformFilteredQuasiIso (some (a, b)) (CochainComplex.minus (Modules R))).Q)) ∧ ∀ (a b c d : ℤ) (hab : a ≤ b) (hcd : c ≤ d) (ha : c ≤ a) (hb : b ≤ d), Nonempty (widenFlatLocalization R a b c d ha hb ⋙ (E c d hcd).functor ≅ (E a b hab).functor ⋙ widenDerived R a b c d ha hb)) ∧ (∀ (a b : ℤ), a ≤ b → ∀ (P : FlatComplexes R a b) (W : FilteredObject (CochainComplex (Modules R) ℤ)), W.filtration.IsFinite → (∀ p : ℤ, (W.filtration.gradedPiece p).Acyclic) → (∃ F : DecreasingFiltration (tensorTotal R P.obj.obj.obj W.obj), IsConvolution R P.obj.obj W F ∧ ∀ s : ℤ, (F.gradedPiece s).Acyclic) ∧ (∃ F : DecreasingFiltration (tensorTotal R W.obj P.obj.obj.obj), IsConvolution R W P.obj.obj F ∧ ∀ s : ℤ, (F.gradedPiece s).Acyclic))",
+  "branch": "newtargets-dag",
+  "by": "Q114",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4014ef109",
+  "group": "Q114",
+  "result": "pass",
+  "note": "Clean per-file compile of both delivered modules (nt_compile --json, dependency order, side overlay, rc 0, no warnings). Clause-by-clause match with the node; lean.statement verbatim; node text unchanged, stmt_deps adds only the new def node and the existing uniform-localization node. The equivalence is fixed to the inclusion-induced functor and the widening square uses canonical lifts. New definition module has real data, its one sorry is the named widenProperty theorem; split-flat predicate, filtered homotopy and convolution are faithful; total tensor is the same as in the K-flatness definition. No duplicate (FiniteFilteredHomotopyPlus is a different bounded-below model). No extra hypotheses, universes independent, docstrings and both report sections present."
  }
 }

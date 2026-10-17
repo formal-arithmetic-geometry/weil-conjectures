@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-pointed-model-stability"
  ],
  "proof": [
   {
@@ -179,5 +180,33 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-225a56123 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement. HTT is not archived locally, so the HTT checks are against the published text: Lemma 6.1.1.1 (target evaluation is a Cartesian fibration when C has pullbacks, Cartesian edges = pullback squares) and Proposition 2.4.4.3 (Cartesian criterion). The statement is true, with no hypothesis added. Small cases tested: posets with meets, Set, Δ0, the empty quasicategory, and identity base edges. Fixes: (1) C5/D. The new node lem-coef-infinity-space-cospan-limit-path-pullback duplicates the existing same-unit node lem-coef-kan-nerve-pullback-recognition (case q=id) together with the uniqueness of terminal cones, and it also cited def-cbc for 'the infinity category of spaces', which that node does not define (B3). I dropped it. Steps 2-3 now cite the existing lem-coef-infinity-terminal-pullback-criterion (path-model mapping-space test for cospan cones) in place of the dropped node and yoneda-presheaf-limits, with the pasting written out square by square. Step 3 now uses the 1_w collapse (unitality in lem-coef-infinity-mapping-composition) and two-out-of-three, because pasting alone cannot give the needed square. (2) C1/E5. Step 4 did not prove that Cartesian lifts are unique up to equivalence in the fibre, which the statement asserts. It is now proved with the existing lem-coef-infinity-cartesian-mapping-fiber and lem-coef-infinity-mapping-composition. Step 1's fibre description is made exact (the fibre is not full in Arr(C)). (3) In the Cartesian mapping-criterion node, source.place and blueprint.from.place no longer call HTT 2.4.4.3 a dual, and HTT 2.4.1.8 is cited as a Proposition. That node is kept: it is not a one-line specialization of the cocartesian sibling, because passing to the opposite category changes right-pinched mapping spaces into left-pinched ones. No cycle, all ids exist, proof_deps equals the union of the uses, and the route stays within sk-prop-sf-biduality-general. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus. Details are in review.md; corrected files are in fixes/dag/nodes/sec-six-functors/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ArrowTargetCartesianPullbacks",
+  "declaration": "SSet.Enhanced.arrow_target_cartesian_pullbacks",
+  "declarations": [
+   "SSet.Enhanced.arrowTargetEvaluation",
+   "SSet.Enhanced.arrowSquareCoordinates",
+   "SSet.Enhanced.arrowSquare",
+   "SSet.Enhanced.ArrowPullbackSquare",
+   "SSet.Enhanced.ArrowTargetFiberUniqueness",
+   "SSet.Enhanced.ArrowTargetCartesianPullbacksStatement",
+   "SSet.Enhanced.arrow_target_cartesian_pullbacks"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ArrowTargetCartesianPullbacks.lean",
+  "statement": "theorem arrow_target_cartesian_pullbacks (C : SSet.{u}) [Quasicategory C] (hC : ∀ F : (horn.{u} 2 2).toSSet ⟶ C, ∃ β : (coneCategory F) _⦋0⦌, IsLimiting F β) : ∃ hArr : Quasicategory ((ihom Δ[1]).obj C), @ArrowTargetCartesianPullbacksStatement C inferInstance hArr",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "H3 repair: only cospans (horn 2 2) are assumed to have limiting cones. The square predicate reuses the published ordered-square incoming-cospan cone, with its actual apex and cone transformation. The equivalence edge is in the fiber at the actual source c′ of f, and its endpoints project to the actual sources of e and the pullback lift e₀. The arrow-quasicategory structure is a conclusion, not an added hypothesis. All six helper definitions belong to this node. Adds only the already-landed square-definition dependency; no statement, proof, proof_deps, status or split_report changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24cfbc26e",
+  "group": "NK",
+  "result": "pass",
+  "note": "Checked every clause against the node and HTT 6.1.1.1. Hypothesis is cospan-only (horn 2 2): no terminal object, no all-limits assumption, no universe restriction; Arr(C) quasicategory is in the conclusion. The square from uncurry e has apex a over b->c<-z and reuses the published IsPullbackSquare (fixed apex and cone). Conclusion clauses: Cartesian fibration; Cartesian iff pullback for every edge; every Cartesian lift over f with target y is equivalent in fiber t c' to the pullback lift, with endpoints tied to the actual sources. Node diff: only the lean record and an added stmt_dep on landed same-unit lem-coef-pointed-model-stability; no cycle. lean.statement verbatim, all 7 declarations present, no hollow definitions, docstrings carry source and blueprint, single sorry, no duplicate notion found. nt_compile.py on the snapshot: clean, rc=0 (2.7 s, 4.4 s); tool confirmed to print errors via a probe. Minor, no action: horn 2 2 vs WalkingCospan nerve are isomorphic shapes; 'Lemma the project server' in report.md is a cosmetic artifact."
  }
 }

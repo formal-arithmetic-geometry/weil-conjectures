@@ -134,5 +134,32 @@
   "group": "Q90",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q90-164710851 (reviewer sub-agent of L); spot-checked: Read the complete stage instructions, packet/report, item, cited definitions, unit/chapter route, and exact current blueprint source. The composite adjunction types, projection maps, counits, transpose calculation, coherence conditions, restricted-domain clause, and edge cases all check. Four elementary steps correctly expand the blueprint’s abbreviated composition argument; no new nodes, duplicates, cycles, route violations, or hidden non-elementary lemmas were found. Wrote review.md. The report mentions citations.json, absent from the packet, but independently verified all cited statements directly."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CompositeTensorTranspose",
+  "declaration": "SecSmoothPurity.composite_tensor_transpose",
+  "file": "lean/Sheaf/CategoryTheory/CompositeTensorTranspose.lean",
+  "statement": "theorem composite_tensor_transpose {C : Type uX} [Category.{vX} C] [MonoidalCategory C] {D : Type uY} [Category.{vY} D] [MonoidalCategory D] {E : Type uZ} [Category.{vZ} E] [MonoidalCategory E] (S₁ : D ⥤ C) (S₂ : E ⥤ D) (P₁ : C ⥤ D) (P₂ : D ⥤ E) (G₁ : D ⥤ C) (G₂ : E ⥤ D) [S₁.Monoidal] [S₂.Monoidal] (adj₁ : P₁ ⊣ G₁) (adj₂ : P₂ ⊣ G₂) (pf : S₁.ProjectionFormula P₁) (pg : S₂.ProjectionFormula P₂) (K : E) : ((adj₁.comp adj₂).homEquiv (compositeTensorSource S₁ S₂ G₁ G₂ K) K).symm (compositeTensorFirst S₁ S₂ P₁ P₂ G₁ G₂ adj₁ adj₂ pf pg K) = compositeTensorInverseTranspose S₁ S₂ P₁ P₂ G₁ G₂ adj₁ adj₂ pf pg K ∧ ((adj₁.comp adj₂).homEquiv (compositeTensorSource S₁ S₂ G₁ G₂ K) K).symm (compositeTensorSecond S₁ S₂ P₁ P₂ G₁ G₂ adj₁ adj₂ pf pg K) = compositeTensorInverseTranspose S₁ S₂ P₁ P₂ G₁ G₂ adj₁ adj₂ pf pg K",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SecSmoothPurity.tensorCounitTranspose",
+   "SecSmoothPurity.compositeProjectionIso",
+   "SecSmoothPurity.compositeTensorSource",
+   "SecSmoothPurity.compositeTensorFirst",
+   "SecSmoothPurity.compositeTensorSecond",
+   "SecSmoothPurity.compositeTensorInverseTranspose",
+   "SecSmoothPurity.composite_tensor_transpose"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c88d439d",
+  "group": "Q83",
+  "result": "pass",
+  "note": "No change after the background file search finished. The source sentence was already confirmed at main-20261015 thm-pur-cohomological-smoothness.proof.md l.25-27. Every clause matches the node, both equalities hold by hand, helpers have real data, only the theorem is sorry, lean.statement is verbatim, and the per-file compile is clean."
  }
 }

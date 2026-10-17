@@ -347,33 +347,48 @@
   }
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-dd6be9055",
-  "group": "ND",
+  "reviewer": "NT-stage2-cc-f189b870c",
+  "group": "Q134",
   "result": "pass",
-  "note": "Wrote review.md. All statement clauses, dependencies, docstrings, universes, edge cases, and verbatim signature checks passed. Server-only compilation reproduced cleanly in 8.0 seconds; no delivery errors found."
+  "note": "Read the node, all 9 statement dependencies, the source tags (08JC/0A8X/08J7/08J9 checked in the tags file), both delivered modules, the report and the node records. Item: every clause matches. lineComparison is the real evaluation transpose with the Koszul braiding. sourceShift is the canonical rightAdjointUniq mate of the native tensor shift, in the right direction. The tensor-shift iso and composition order are right. hT is exactly locally isomorphic to R; Even r is the only parity condition; K is arbitrary; the epsilon normalization theorem covers s-only signs. lean.statement is verbatim. Section 1(B) repair of lem-weil-pbc-ringed-internal-hom-exact-restriction is justified: the old interface was existential only. The old module stays available by public import; no hollow definitions; only sorry proofs. normalizedAdjunction_existsUnique: uniqueness holds (monoidal structure fixed by h, comparison fixed as inverse of native mu, uncurry model on K-flat/K-injective representatives, evaluation naturality, adjunction fixed by its counit). totalTensor_eq_native confirmed by rfl in a scratch compile. derivedMonoidal_eq_localization is plausibly definitional (upstream inferInstanceAs of the same structure) but rfl exceeded 60 s. The Hom universe u for HasDerivedCategory is a size choice, not a restriction of the objects. nt_compile: SignedCalculus clean in 21-50 s (one earlier attempt timed out at load about 225), EvenLineHomShift clean in 7.8 s. No duplicate notion found. Informational only: the dependency record's restriction, exactness and shift clauses are carried by the public import; the second-reading section is the author's self-check."
  },
  "lean": {
-  "module": "Sheaf.Algebra.Homology.RingedInternalHomExactRestriction",
-  "declaration": "CategoryTheory.ringedInternalHom_tensor_adjunction",
+  "module": "Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus",
+  "declaration": "CategoryTheory.SignedRingedHom.normalizedAdjunction_existsUnique",
   "declarations": [
-   "CategoryTheory.ringedSite_overFunctor_additive",
-   "CategoryTheory.ringedSite_overFunctor_limits",
-   "CategoryTheory.ringedSite_overFunctor_colimits",
-   "CategoryTheory.ringedSite_overMap_additive",
-   "CategoryTheory.ringedSite_overMap_limits",
-   "CategoryTheory.ringedSite_overMap_colimits",
-   "CategoryTheory.ringedInternalHom_tensor_adjunction",
-   "CategoryTheory.ringedInternalHom_restriction",
-   "CategoryTheory.ringedInternalHom_exact"
+   "CategoryTheory.SignedRingedHom.Modules",
+   "CategoryTheory.SignedRingedHom.moduleMonoidal",
+   "CategoryTheory.SignedRingedHom.moduleSymmetric",
+   "CategoryTheory.SignedRingedHom.moduleClosed",
+   "CategoryTheory.SignedRingedHom.moduleGrothendieck",
+   "CategoryTheory.SignedRingedHom.moduleMonoidalPreadditive",
+   "CategoryTheory.SignedRingedHom.moduleFlatResolution",
+   "CategoryTheory.SignedRingedHom.D",
+   "CategoryTheory.SignedRingedHom.derivedMonoidal",
+   "CategoryTheory.SignedRingedHom.homFunctor",
+   "CategoryTheory.SignedRingedHom.hom",
+   "CategoryTheory.SignedRingedHom.derivedBraiding",
+   "CategoryTheory.SignedRingedHom.normalizedAdjunction_existsUnique",
+   "CategoryTheory.SignedRingedHom.adjunction",
+   "CategoryTheory.SignedRingedHom.tensorParameterShiftIso",
+   "CategoryTheory.SignedRingedHom.tensorParameterShift_naturality",
+   "CategoryTheory.SignedRingedHom.tensorParameterShift",
+   "CategoryTheory.SignedRingedHom.sourceShift",
+   "CategoryTheory.SignedRingedHom.moduleCountableColimits",
+   "CategoryTheory.SignedRingedHom.derivedMonoidal_eq_localization",
+   "CategoryTheory.SignedRingedHom.totalTensor_eq_native",
+   "CategoryTheory.SignedRingedHom.totalTensorNativeIso",
+   "CategoryTheory.SignedRingedHom.localizationLaxMonoidal",
+   "CategoryTheory.SignedRingedHom.derivedTensorShift"
   ],
-  "file": "lean/Sheaf/Algebra/Homology/RingedInternalHomExactRestriction.lean",
-  "statement": "theorem ringedInternalHom_tensor_adjunction {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))] (P : ObjectProperty (CochainComplex (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)) (hP : ∀ X, P X ↔ X.IsAcyclicTensorKFlat) (T : (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) × (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) ⥤ (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)))) (r : (P.ι.prod P.ι) ⋙ Functor.uncurry.obj ((@CategoryTheory.MonoidalCategory.curriedTensor (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) _ (SheafOfModules.monoidalCategory R)).map₂HomologicalComplex (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q ≅ ((P.ι ⋙ DerivedCategory.Q).prod (P.ι ⋙ DerivedCategory.Q)) ⋙ T) : ∃ e : ∀ K L M : (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))), (derivedInternalHom.{u, w} J R).obj (op K, (derivedInternalHom.{u, w} J R).obj (op L, M)) ≅ (derivedInternalHom.{u, w} J R).obj (op (T.obj (K, L)), M), ∀ (K L M K' L' M' : (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)))) (a : K' ⟶ K) (b : L' ⟶ L) (c : M ⟶ M'), (e K L M).hom ≫ (derivedInternalHom.{u, w} J R).map ((T.map (a, b)).op, c) = (derivedInternalHom.{u, w} J R).map (a.op, (derivedInternalHom.{u, w} J R).map (b.op, c)) ≫ (e K' L' M').hom",
+  "file": "lean/Sheaf/Algebra/Homology/RingedInternalHomSignedCalculus.lean",
+  "statement": "theorem normalizedAdjunction_existsUnique : ∃! S : WeilConjectures.CoefficientClosedStructure (homFunctor J R), ∃ (h : S.monoidal = derivedMonoidal J R) (M : WeilConjectures.CoefficientTensorModels.{u, u, u, u} J R S), ∀ P L, (M.comparison.app (P, L)).hom ≫ eqToHom (congrArg (fun (m : MonoidalCategory (D J R)) ↦ @MonoidalCategory.tensorObj (D J R) _ m.toMonoidalCategoryStruct (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj L.obj)) h) ≫ Functor.LaxMonoidal.μ DerivedCategory.Q P.obj L.obj ≫ DerivedCategory.Q.map (totalTensorNativeIso J R P.obj L.obj).inv = 𝟙 _",
   "branch": "newtargets-dag",
-  "by": "ND",
-  "date": "2026-10-15",
+  "by": "Q134",
+  "date": "2026-10-17",
   "existing": false,
-  "note": "The three statements ringedInternalHom_tensor_adjunction, ringedInternalHom_restriction and ringedInternalHom_exact jointly state the node. The six ringedSite_overFunctor/overMap supporting facts provide the additive and exact restriction instances needed to type its derived restriction functors. P, hP, T and r specify derived tensor by natural total tensor on precisely the K-flat complexes, as in the existing site-derived-tensor-descent interface."
+  "note": "§1(B): the previous module supplies only existential currying and existential CommShift structures. It does not give an evaluation-normalized external tensor--Hom adjunction or a chosen first-variable signed comparison; a choice from its bare Nonempty shift statement would not specify the required map. This module publicly imports the entire previous interface, retains every tensor/restriction/exactness assertion, and supplies the uniquely representative-normalized adjunction for the recorded derivedInternalHomOfUniverses, the ordinary K-flat monoidal tensor and its Koszul braiding, and the actual adjunction-mate sourceShift. The small Hom universe u is available for every small ringed site from its Grothendieck module category. Auxiliary additive-tensor and functorial-flat-cover facts implement this same canonical tensor construction, without additional hypotheses on the site or on derived objects."
  }
 }

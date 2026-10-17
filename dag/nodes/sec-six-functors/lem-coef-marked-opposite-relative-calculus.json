@@ -266,5 +266,30 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-a63ef4be2 (reviewer sub-agent of L); spot-checked: I read the item in full: statement and all 9 steps. I also read the full statements of its 4 cited nodes and the parent lem-coef-marked-relative-cartesian-model, Steps 14-17, which are the only citers; the item's statement supplies every clause they use. HTT is not in the local literature, so the WANTED line and the agent proof origin are correct. The route is unchanged, there is no SGA, no tool_uses are needed, and this is not a target node, so there was no base-change morphism to check against master. Every step is correct. Step 1: the only operator [1]->[0] is fixed by reversal, so the degenerate edges and the marking survive. Step 2: limits are wide fibre products over S, the empty limit is S^sharp, and in the monomorphism test the two simplices lie over the same base simplex. Step 3: the edge {n-1,n} reverses to {0,1}, horn n is exchanged with horn 0, and no quasicategory hypothesis is used. Step 4: theta_n is simplicial because (beta alpha)^v = beta^v alpha^v; (Delta alpha)^op theta_m = theta_n Delta(alpha^v), since both sides send beta to alpha beta^v; this gives the Map^op operators. Step 5: composition, identities and the tensor equality hold. Step 6: Y^{K sharp} x_{(S sharp)^{K sharp}} S^sharp is the slice cotensor; the Yoneda chain gives the cotensor isomorphism with its adjunctions. Step 7: reversal maps full subsets to full subsets, and the 2-simplex faces (e,id,g) become (g,id,e), swapping the two inverse witnesses. Step 8: the pushout-product isomorphism follows from Steps 2 and 5. Step 9: pullback reverses degreewise, and the unit x->(p x,x), the counit (t,y)->y and the fibres over Delta^0 are unchanged. Edge cases checked: S empty, empty diagrams, n=0,1,2, and bases that are not quasicategories. The rg search for duplicates (relative-marked-anodyne-calculus, enhanced-cartesian-fibration, model-equivalence-transport, the straightening nodes) found none. There are no new nodes. One fix, B3: the statement used 'natural markings' and Fun_{/S}(X,Y) without defining them. I added one definitional sentence taken from the parent: Z^natural marks the cartesian (respectively cocartesian) edges, and Fun_{/S}(X,Y)_n is the set of maps X x Delta^n -> Y over S. The meaning is unchanged. The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-marked-opposite-relative-calculus.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MarkedOppositeRelativeCalculus",
+  "declaration": "SSet.Marked.Over.marked_opposite_relative_calculus",
+  "declarations": [
+   "SSet.Marked.Over.distinguishedFunctorInclusion",
+   "SSet.Marked.Over.OppositeRelativeCalculus",
+   "SSet.Marked.Over.marked_opposite_relative_calculus",
+   "SSet.Marked.Over.naturallyMarkedFibration"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/MarkedOppositeRelativeCalculus.lean",
+  "statement": "theorem marked_opposite_relative_calculus : Nonempty OppositeRelativeCalculus.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the published relative-model primitive constructions; does not invoke its model-structure theorem. The normalized coordinate formulas determine the mapping and tensor comparisons, and the cotensor/base-change comparisons intertwine both units and counits. The sole postponed theorem contains the complete node statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a64cae35",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Matched every node clause to a field of OppositeRelativeCalculus: reversal equivalence with inverse via opFunctorCompOpFunctorIso; limits, colimits and monos; edge, fibration and natural-marking exchange over arbitrary bases (IsCartesianEdge/IsCocartesianEdge for n>=2, prescribed target/source, no Quasicategory binders); sharp_iso pinned to theta_n via SimplexCategory.rev (simpliciality checked by hand); identity and composition with full formulas; tensor_iso and tensor_parameter; cotensor adjunction with evaluation/coevaluation reversal; mapping adjunction; functor, distinguished-subset and core restrictions; pushout_product on the actual universal square; push/pull isos with unit and counit formulas and reversal; fiber_iso. No hypotheses, single universe u, no extra instances. Edge cases checked: empty S/E, empty (co)limits, n=0,1, non-quasicategory bases. Records: node changes only by the added lean field; statement verbatim; declarations complete; report sections present. nt_compile.py --json on the snapshot file against the side overlay: rc=0, no errors or warnings. Non-blocking: the public import of the parent module MarkedRelativeCartesianModel reuses its primitives (one definition per notion; the reverse import must be omitted under rule 7, as for three landed sibling nodes); naturallyMarkedFibration fills one proof field from the postponed theorem; garbled HTT numbers in one report sentence."
  }
 }

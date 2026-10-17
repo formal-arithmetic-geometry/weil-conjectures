@@ -288,5 +288,27 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-29f5cda58 (reviewer sub-agent of L); spot-checked: Read the whole delivery: one item, no new nodes. The statement matches Stacks 08FZ: (1) is clause (2) of the definition and (2) is clause (3) (sites-cohomology.tex l.12377-12394). The equivalence is the uniformity sentence in the proof of Stacks 09C2 (proetale.tex l.5803-5807). Hypotheses are the same as the source (quasi-compact X only). The coefficient ring is the constant A_X with ordinary derived tensor, and there is no base-change morphism. Checked on small cases: empty X, M=0, the zero ring, a finite disjoint union, and an infinite disjoint union, which shows quasi-compactness is needed. Steps 1, 3, 5 and 6 are correct. Step 3 gets the finite covering from the affine-target refinement of sk-def-pe-site plus the composition axiom, with no quasi-separatedness. Steps 5-6 use base change and the equalizer axiom and also work for empty X. Treating localization as a morphism of topoi matches existing reviewed nodes. Repair (C4): steps 2 and 4 applied lem-sf-site-tor-interval-restriction, whose E|_U is def-weil-pbc-ringed-site-derived-restriction with the K-flat flat-term tensor, as if it were the item's restriction def-weil-pbc-ringed-derived-restriction with the tensor of def-weil-proetale-tor-amplitude. I added the identification of the two, the missing uses, and recomputed proof_deps. lem-weil-pbc-site-derived-tensor-descent is added as a declared tool use. No duplicates found: lem-pc-quasi-compact-finite-tor-dimension is the O_X/Zariski analogue, and lem-sf-finite-cover-ctf-locality and lem-sfb-local-model-tor-bound-descent have stronger hypotheses. Batch-5 check: the flagged reach to def-pod-ring-scalar-extension runs only through the stale stmt_dep def-wf-tensor-product of the existing node lem-sf-site-tor-interval-restriction; its statement never uses that node. Without that entry its closure has 226 nodes and none in sec-trace-formula or sec-poincare-duality. Its proof is a generic ringed-site argument and no step of the trace formula or Poincare duality, and def-pod-ring-scalar-extension is a general definition. So the citation is outside both assumed statements and is kept; the maintainer should remove that stale stmt_dep. No SGA is used. Accepted tool uses: lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-sf-site-tor-interval-restriction, sk-def-pe-site and lem-weil-pbc-site-derived-tensor-descent.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleTorLocalGlobal",
+  "declaration": "AlgebraicGeometry.Scheme.hasFiniteCoefficientProEtaleTorAmplitude_iff_locally",
+  "declarations": [
+   "CategoryTheory.coefficientModelSliceRestriction",
+   "AlgebraicGeometry.Scheme.hasFiniteCoefficientProEtaleTorAmplitude_iff_locally"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleTorLocalGlobal.lean",
+  "statement": "theorem hasFiniteCoefficientProEtaleTorAmplitude_iff_locally (X : Scheme.{u}) [CompactSpace X] (A : Type (max v (u + 1))) [CommRing A] (M : ConstantCompletion.D (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) A)) : HasFiniteCoefficientProEtaleTorAmplitude X A M ↔ ∀ U : coefficientProEtaleSiteModel.{u, v} X, ∃ S : Presieve U, Sieve.generate S ∈ coefficientProEtaleModelTopology.{u, v} X U ∧ ∀ (V : coefficientProEtaleSiteModel.{u, v} X) (f : V ⟶ U), S f → ∃ a b : ℤ, HasCoefficientModelTorAmplitude ((ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) A).over V) ((coefficientModelSliceRestriction (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) A) V).obj M) a b",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-54acb4012",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Node diff adds only lean; lean.statement matches the file exactly. Clause check against the node and Stacks 08FZ/09C2: CompactSpace X; A : Type (max v (u+1)) CommRing with an independent universe; recorded AsSmall X.ProEt model and topology; constant ring sheaf; unbounded M in ConstantCompletion.D; (1) = recorded HasFiniteCoefficientProEtaleTorAmplitude (a<=b, every K-flat representative, every module); (2) = for every U a presieve with covering generated sieve, and for each member its own interval, HasCoefficientModelTorAmplitude on (constant).over V against all slice modules, with M restricted by the recorded ringedDerivedRestrictionSized. Helper coefficientModelSliceRestriction has real data and is not a duplicate. Universes u v w bound, autoImplicit false. Edge cases: empty X, M=0, zero ring, a=b. Docstrings with source and blueprint plus the six-step proof; only one sorry; lines <=100; report sections present. nt_compile.py --json: ProEtaleTorLocalGlobal.lean 12.5 s, exit 0, no diagnostics; a probe confirmed the tool reports errors. No findings."
  }
 }

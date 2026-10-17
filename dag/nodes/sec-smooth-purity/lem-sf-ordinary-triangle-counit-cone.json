@@ -164,5 +164,24 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-913a96ede (reviewer sub-agent of L); spot-checked: I read the item, the unit, the current blueprint proofs (main-20261015 sk-prop-sf-localization.proof.md and prop-sf-localization-all-stages.proof.md), the parent's Steps 3, 8 and 10, and every cited node's statement. The statement is true (tested on K=0, U empty, Z empty) and unchanged. The delivery creates no new nodes, and a scan of the DAG found no duplicate. Step 1 (orthogonality, ue=0), Step 2 (TR1) and Step 3 (existence of beta by hom-out (i), uniqueness by hom-out (ii) and Hom(A[1],B)=0) are correct; Step 1 was missing a closing $, now fixed. Step 4 had a gap (E5): the five lemma needs the square from Hom(M,C) to Hom(M,A[1]) to commute, but one side uses the arbitrary cone arrow w and the other the arbitrary connecting map of the ordinary triangle, and 'cancelling the adjacent unit-counit pair' does not apply to that map. I replaced it with two steps that follow the current blueprint's Existence argument. New Step 4: i_* is fully faithful (lem-weil-pbc-adjunction-counit-iso-right-fully-faithful), so e∘- is bijective on Hom(i_*Q,-); with hom-into (i)/(ii) and TR2 rotations this gives Hom(i_*Q,C)=0, and Hom(i_*Q,B)=0 by Step 1; for any such X the ordinary triangle gives Hom(M,X)≅Hom(j_!j^*M,X). New Step 5: through j_!⊣j^*, Hom(M,beta) becomes j^*beta∘-; j^*v is invertible (j^*A=0, hom-into, Yoneda node) and j^*u is invertible (triangle identity, invertible counit), so j^*beta and Hom(M,beta) are bijective. The Yoneda step is kept as Step 6. The five lemma is dropped and proof_deps is updated. All cited nodes are Mathlib leaves or definitions, so no tool_uses are needed and the route is unchanged. No SGA is cited. The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-sf-ordinary-triangle-counit-cone.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OrdinaryTriangleCounitCone",
+  "declaration": "CategoryTheory.ordinaryTriangleCounitCone",
+  "file": "lean/Sheaf/CategoryTheory/OrdinaryTriangleCounitCone.lean",
+  "statement": "theorem ordinaryTriangleCounitCone (iStar : TZ ⥤ T) (iLeft : T ⥤ TZ) (iRight : T ⥤ TZ) (jBang : TU ⥤ T) (jStar : T ⥤ TU) (jRight : TU ⥤ T) [iStar.CommShift ℤ] [iLeft.CommShift ℤ] [iRight.CommShift ℤ] [jBang.CommShift ℤ] [jStar.CommShift ℤ] [jRight.CommShift ℤ] [iStar.IsTriangulated] [iLeft.IsTriangulated] [iRight.IsTriangulated] [jBang.IsTriangulated] [jStar.IsTriangulated] [jRight.IsTriangulated] (adjLeft : iLeft ⊣ iStar) (adjRight : iStar ⊣ iRight) (adjBang : jBang ⊣ jStar) (adjOpen : jStar ⊣ jRight) (hClosed : ∀ P : TZ, IsIso (adjLeft.counit.app P)) (hOpen : ∀ Q : TU, IsIso (adjOpen.counit.app Q)) (hDisjoint : ∀ P : TZ, IsZero (jStar.obj (iStar.obj P))) (hOrdinary : ∀ M : T, ∃ δ : iStar.obj (iLeft.obj M) ⟶ (jBang.obj (jStar.obj M))⟦(1 : ℤ)⟧, Triangle.mk (adjBang.counit.app M) (adjLeft.unit.app M) δ ∈ distTriang T) : ∀ K : T, (∀ (C : T) (v : K ⟶ C) (w : C ⟶ (shiftFunctor T (1 : ℤ)).obj (iStar.obj (iRight.obj K))), Triangle.mk (adjRight.counit.app K) v w ∈ distTriang T → ∃ β : C ⟶ jRight.obj (jStar.obj K), v ≫ β = adjOpen.unit.app K ∧ IsIso β ∧ ∀ β' : C ⟶ jRight.obj (jStar.obj K), v ≫ β' = adjOpen.unit.app K → β' = β) ∧ ∀ (P : TZ) (Q : TU) (m : ℤ), Subsingleton ((shiftFunctor T m).obj (iStar.obj P) ⟶ jRight.obj Q)",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-13e92dfb3"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13e92dfb3",
+  "group": "Q58",
+  "result": "fix",
+  "note": "Statement checked clause by clause against the node: exact functors via CommShift+IsTriangulated, four adjunctions in the right directions, hClosed/hOpen counit isos, objectwise j^*i_*=0, ordinary triangle from the jBang counit and adjLeft unit with existential δ; for every completion of the adjRight counit there is a β with v≫β=u that is unique and IsIso; Subsingleton Hom((i_*P)⟦m⟧, j_*Q). Nothing assumed beyond the node, universes unrestricted, lean.statement verbatim, statement true (edge cases K=0, T_U trivial, T_Z trivial). H4: no Mathlib match; the side clone's Recollement.lean has different hypotheses and conclusions, so a new module is right (its subsingleton_hom_shift equals the second clause; the worker report's 'rg found nothing' is inaccurate). Delivered file compiles clean via nt_compile --json; the wrapper reports errors (control tested). H8 fix: complete replacement fixes/lean/Sheaf/CategoryTheory/OrdinaryTriangleCounitCone.lean adds the source place to the module and theorem docstrings and writes out the six proof steps; signature byte-identical; fixed file compiles clean."
  }
 }

@@ -198,5 +198,23 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-20ec04c30 (reviewer sub-agent of L); spot-checked: I read the whole item, all 8 steps, the new node lem-sf-perfect-ring-summand and every cited statement, against Stacks more-algebra.tex 0ATI (l.20287-20323), 066R/066S (l.18948-18971) and derived.tex (definition-triangulated-subcategory, lemma-triangulated-subcategory, definition-saturated, definition-generators). The item says the same as 0ATI for any commutative ring, and the 'equivalently thick' wording agrees with pur9-def-thick. Steps 1, 2 and 4 cite nodes that say what the steps take from them: the triangle-closure node and the TR2 rotations, which I checked in both directions, and 066S. Steps 3 and 5 are rightly marked elementary. The induction in steps 6-7 is set up properly, and step 8 is the intersection definition. I tested A=0, Z/2 over Z (perfect), Z/2 over Z/4 (not perfect), a nonfree projective summand, a two-term complex and the empty interval. The new node states 066S exactly, is statement-only and self-contained, and is not a duplicate: the only summand lemma in the DAG is the scheme-level lem-pc-perfect-summand (08CS, D(O_X)). slopmaster2 has no Lean for it. Step 1's off-unit node is on the route, because sk-thm-sf-package uses sk-prop-sf-biduality-general directly, so no tool_use is needed. Three repairable faults, fixed in fixes/: (C1) step 6 used closure of T under finite sums without the split triangle, so I cited the Mathlib leaf lem-sbc-biproduct-triangle-distinguished; (C1) step 7 used the stupid-truncation triangle with no node, so I cited the Mathlib leaf lem-weil-pbc-complex-ses-triangle (DerivedCategory.triangleOfSES_distinguished); (B9) the new node's blueprint.from.via was [item] and is now [item, lem-sf-perfect-over-derived-complete-ring]. I also wrote out the step 2 rotations explicitly and recomputed proof_deps. No statement was changed and no node dropped.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.PerfectRingClassicalGenerator",
+  "declaration": "DerivedCategory.isPerfectRingComplex_eq_triangEnvelope_singleton",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/PerfectRingClassicalGenerator.lean",
+  "statement": "theorem isPerfectRingComplex_eq_triangEnvelope_singleton (A : Type u) [CommRing A] [HasDerivedCategory.{w} (ModuleCat.{u} A)] : (IsPerfectRingComplex (R := A) : ObjectProperty (DerivedCategory (ModuleCat.{u} A))) = (ObjectProperty.singleton ((singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A A))).triangEnvelope",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a303e6d4b",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Node clauses match Lean: arbitrary CommRing A, DerivedCategory (ModuleCat.{u} A) with free localization universe w, recorded IsPerfectRingComplex (bounded f.g. projective model), unit singleFunctor 0 of ModuleCat.of A A. RHS (singleton A[0]).triangEnvelope is the thick closure (nonempty seed in a triangulated category gives IsTriangulated; IsStableUnderRetracts gives summands and iso closure; triangEnvelope_le_iff gives minimality), equal to the pur9-def-thick intersection and Stacks 0ATI. Edge cases checked: A=0, zero object, non-free projectives, both shift directions, Z/2 over Z/4. No hollow definitions; sorry only; source and blueprint docstrings present; 8-step proof plan; lean.statement verbatim; node changed only by its lean record; no new or dependency nodes. Second-reading section is the standard 2026-10-17 direct-delivery line, accepted as in landed reports. nt_compile.py --json: PerfectRingTriangleClosure 8.3 s and module 6.0 s/8.0 s, clean rc=0; an error control run confirmed diagnostics are shown. No findings."
  }
 }

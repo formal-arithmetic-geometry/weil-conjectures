@@ -23,7 +23,8 @@
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-site-comparison-morphism"
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pur-etale-sum-flat-kflat"
  ],
  "proof": [
   {
@@ -248,5 +249,34 @@
   "group": "Q55",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-d2753b73d (reviewer sub-agent of L); spot-checked: I read the whole item, all four steps, the parent lem-pur-support-site-comparison, the sibling lem-pur-support-quotient-product, unit sk-prop-a1-kummer, the blueprint source lem-pur-kunneth-supported (main-20261015) and the statement of every cited node. The item is correct. No new nodes, so no duplicates and no drop_nodes; the item does not restate a clause of the parent. Statement change accepted: j quasi-compact is exactly what lem-weil-pbc-proetale-ringed-open-closed and lem-sfb-open-closed-flatness require, and the only user (the parent) applies the item to finite-type k-schemes, which are Noetherian, so their open complements are quasi-compact and the use stays valid. The parent does not spell out this one-line check; I note it in review.md because the parent's fields are not this delivery's. Checks: (1) the étale open-closed sequence for F=A_T and the pro-étale ringed sequence, whose qc hypothesis matches. (2) lem-sfb gives i_*M flat for flat M, and lem-pc-bounded-above-flat-kflat-site gives the degree-zero K-flat clause. (3) closed-immersion-finite plus the finite stalk formula: the fibre is empty off C and a single point on C; the constant-stalk lemma sends the generator to 1. Cases C=∅, C=T and T=A^1 with C=0 agree. (4) ν^* is exact and the quotient maps match. Three repairable faults fixed in fixes/dag/nodes/sec-smooth-purity/lem-pur-support-quotient-flat.json: (a) C4: step 1 asserted inverse image of the constant sheaf is constant while citing only the definition; it now cites prop-weil-pbc-inverse-image-modules-exact(1) and def-weil-pbc-proetale-operations, and shows counit = defining arrow through free-Yoneda. (b) E5: step 4 appealed to an unconstructed comparison for j_!A_U; it now builds φ_V from ν^*⊣ν_* and Yoneda, checks the square, and gets the unique ψ from exactness of ν^*. (c) Two off-route tool uses added to split_report.tool_uses: lem-weil-pbc-proetale-ringed-open-closed and lem-weil-pbc-finite-stalk-formula-restriction. Accepted tool_uses: lem-sfb-open-closed-flatness, lem-pc-bounded-above-flat-kflat-site, lem-weil-pbc-free-yoneda-presheaf-module, lem-sf-comparison-pullback-exact, plus the two added. proof_deps is the union of uses; all ids exist and none is merged; the three newly cited nodes do not reach the item, so no cycle. No SGA is used; coefficients are ordinary constant-A module sheaves, as in the parent.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportQuotientFlat",
+  "declaration": "AlgebraicGeometry.Scheme.supportQuotient_flat_kflat_stalk_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleSupportQuotientArrow",
+   "AlgebraicGeometry.Scheme.proEtaleSupportQuotientArrow",
+   "AlgebraicGeometry.Scheme.etaleSupportQuotient",
+   "AlgebraicGeometry.Scheme.proEtaleSupportQuotient",
+   "AlgebraicGeometry.Scheme.etaleSupportQuotientMap",
+   "AlgebraicGeometry.Scheme.proEtaleSupportQuotientMap",
+   "AlgebraicGeometry.Scheme.supportQuotientConstantComparison",
+   "AlgebraicGeometry.Scheme.supportQuotient_flat_kflat_stalk_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportQuotientFlat.lean",
+  "statement": "theorem supportQuotient_flat_kflat_stalk_comparison [QuasiCompact a.openComplement.ι] : SheafOfModules.IsFlatOnSite ((etaleSumFlatModuleRealization T (ULift.{u + 1, u} A)).obj (etaleSupportQuotient A a)) ∧ SheafOfModules.IsFlatOnSite ((ProEtale.finiteCoefficientIntrinsicRealization T A).obj (proEtaleSupportQuotient A a)) ∧ CochainComplex.IsKFlatIndependentCoefficients ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj ((etaleSumFlatModuleRealization T (ULift.{u + 1, u} A)).obj (etaleSupportQuotient A a))) ∧ CochainComplex.IsKFlatIndependentCoefficients ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj ((ProEtale.finiteCoefficientIntrinsicRealization T A).obj (proEtaleSupportQuotient A a))) ∧ (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ T), ((t (IsLocalRing.closedPoint Ω) ∈ Set.range a) → ∃ e : (pointSmallEtale t).sheafFiber.obj (etaleSupportQuotient A a) ≅ ModuleCat.of (ULift.{u + 1, u} A) (ULift.{u + 1, u} A), (toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of (ULift.{u + 1, u} A) (ULift.{u + 1, u} A)))).app (op (Etale.mk (𝟙 T))) ≫ (pointSmallEtale t).toPresheafFiber (Etale.mk (𝟙 T)) (Over.homMk t (Category.comp_id t)) ((constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A))).obj (ModuleCat.of (ULift.{u + 1, u} A) (ULift.{u + 1, u} A))).obj ≫ (pointSmallEtale t).sheafFiber.map (etaleSupportQuotientMap A a) ≫ e.hom = 𝟙 _) ∧ ((t (IsLocalRing.closedPoint Ω) ∉ Set.range a) → IsZero ((pointSmallEtale t).sheafFiber.obj (etaleSupportQuotient A a)))) ∧ (∃! e : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T).obj (etaleSupportQuotient A a) ≅ proEtaleSupportQuotient A a, (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T).map (etaleSupportQuotientMap A a) ≫ e.hom = supportQuotientConstantComparison A (T := T) ≫ proEtaleSupportQuotientMap A a)",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Actual etale and pro-etale cokernels of extension-by-zero counits, with quotient maps and the canonical constant-section comparison. Fixed-scalar module sheaves are expressed in the recorded intrinsic flat/K-flat predicates through the existing canonical realization functors. stmt_deps gains the landed lem-pur-etale-sum-flat-kflat solely for its etaleSumFlatModuleRealization interface; its theorem is not used as a hypothesis. All proof-dependency modules with recorded declarations are imported. No statement correction or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ebb0f5d31",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Read check-brief2, the packet, the snapshot node, module and report, all 17 stmt_deps records and the exact declarations. Clause match: finite CommRing A lifted to ULift.{u+1} as in the recorded pro-etale interfaces; IsClosedImmersion a plus QuasiCompact a.openComplement.ι (carrier (range a)ᶜ), nothing stronger. Q_et and Q_proet are cokernels of the Etale/ProEtale openImmersionLowerShriekAdjunction counits at the constant sheaf (the recorded extension by zero; sfIntrinsicExtensionByZero transports the same functor); r = cokernel.π. Flatness is IsFlatOnSite and K-flatness is IsKFlatIndependentCoefficients of the ℤ-indexed single complex in degree 0, through the canonical realizations etaleSumFlatModuleRealization and finiteCoefficientIntrinsicRealization over constant rings. Etale stalk: over all sep-closed Ω in Type u, an iso to ULift A on C normalized by constant-1 germ ≫ stalk(r) ≫ e = 𝟙, IsZero off C. Comparison: ∃! e with ν^*r_et ≫ e = φ ≫ r_proet; comparisonAdjunction is the recorded proEtaleSiteComparisonModules and φ sends constant 1 to 1. The statement field is verbatim in the file. stmt_deps gained landed lem-pur-etale-sum-flat-kflat, which creates no cycle and is allowed. Edge cases C=∅, C=T, T=∅, A=0 and non-reduced C are fine. No duplicate quotient in the side tree; supportedCoefficients are a_* constructions. Gates: no hollow definitions, source/blueprint and proof docstrings present, only sorry, no pro-etale substitute, report sections present. nt_compile --json on the unchanged snapshot module: rc=0, 17.5 s, no errors or warnings; #print axioms shows sorryAx and standard axioms only. No findings."
  }
 }

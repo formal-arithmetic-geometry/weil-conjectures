@@ -141,5 +141,25 @@
   "group": "N4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-553a14f08 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources and unit/chapter route. Clarified scalar compatibility, the image sheaf and CoversTop application; corrected proof attribution. Statement unchanged. Corrected whole DAG JSON and concrete source, edge-case, dependency and target-category checks are recorded in fixes/ and review.md. No new nodes or accepted tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfRationalLocalGlobalPowerTorsion",
+  "declaration": "WeilConjectures.sfRationalLocalGlobalPowerTorsion",
+  "file": "lean/Sheaf/Paper/SfRationalLocalGlobalPowerTorsion.lean",
+  "statement": "theorem sfRationalLocalGlobalPowerTorsion (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t}) (_hl : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (C : DerivedCategory (integralTowerModules l E X)) (n : ℕ) (U : Fin n → AlgebraicGeometry.Scheme.ProEt X) (hU : (AlgebraicGeometry.Scheme.ProEt.topology X).CoversTop U) [Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory (integralTowerModules l E X))] [∀ j : Fin n, Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory (SheafOfModules.{max u (t + 1)} ((completedIntegralCoefficientSheafUnrestricted l E X).over (U j))))] (hzero : ∀ j : Fin n, IsZero ((ScalarLocalization.localization (Padic.coefficientExtensionIntegers l E) (DerivedCategory (SheafOfModules.{max u (t + 1)} ((completedIntegralCoefficientSheafUnrestricted l E X).over (U j)))) (Padic.coefficientExtensionUniformizer l E)).obj ((SheafOfModules.overFunctor.{max u (t + 1)} (completedIntegralCoefficientSheafUnrestricted l E X) (U j)).mapDerivedCategory.obj C))) : ∃ N : ℕ, ∀ d : ℤ, (DerivedCategory.homologyFunctor (integralTowerModules l E X) d).map ((Padic.coefficientExtensionUniformizer l E) ^ N • 𝟙 C) = 0",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second-reader fix: the scheme universe t and the coefficient universe u are independent (module size max u (t + 1)); the delivered single-universe slice instances had silently forced t = u. The node's standing hypothesis that l is invertible on X is rendered by _hl. The O_E-linear structures are instance arguments; since l is a unit times a power of the uniformizer and every linear structure restricts to the integer action, hypothesis and conclusion say the same for every choice, in particular for the canonical constant-section actions.",
+  "fixed_by": "NT-stage2-cc-20cd46925"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20cd46925",
+  "group": "Q30",
+  "result": "fix",
+  "note": "Statement matches node (Fin n CoversTop cover incl. n=0, termwise overFunctor.mapDerivedCategory restriction, IsZero in ScalarLocalization at ϖ, ∃N ∀d homologyFunctor.map (ϖ^N•𝟙 C)=0); no hollow defs, sorry only, ProEt site, no duplicate. Fixes (complete module in fixes/, compiled clean via nt_compile.py, 9.7 s before _hl and 29.9 s after; original also clean, 5.1 s): (1) silent universe restriction: single-universe helper instances forced X : Scheme.{u} with E : Type u; generalized to Scheme.{t}, modules max u (t+1), with site/slice sheafification instances (essentiallySmallSelf; Mathlib hasSheafify_of_essentiallySmall removed as in IntegralDerivedOperationsOnSlices); identical when t=u; (2) missing node hypothesis 'ℓ invertible on X' added as _hl; (3) docstring wrongly claimed canonical integralCoefficientLinear is used although Linear binders shadow it; kept binders after checking the statement is equivalent for every linear structure (l = unit·ϖ^e, ℤ-action canonical) and corrected the docstring; added source/blueprint docstrings to helper instances. lean-record.json adds only a note; statement refit from file."
  }
 }

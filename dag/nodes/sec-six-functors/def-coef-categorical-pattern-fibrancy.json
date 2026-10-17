@@ -185,5 +185,33 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-cd6b4d57c (reviewer sub-agent of L); spot-checked: Read the item in full and checked it online against Gepner–Haugseng arXiv:1312.3178v4 §3.2 (no local archive exists). Def 3.2.1: an ∞-category C, a marking containing the degenerate edges, and diagrams of ∞-categories p_α:K_α^◁→C sending edges into S. Rem 3.2.2: all 2-simplices scaled. Def 3.2.3(1)-(4): inner fibration, full π-cocartesian lifts over S, the classifying functor of X×_C K_α^◁ is a limit diagram in Cat_∞, and cocartesian sections are π-limit diagrams. Thm 3.2.5(2): T is exactly the cocartesian edges over S. The item's (i)-(iv) match these clause by clause. Restricting K_α to quasicategories is the source's own convention. Read all five cited statements. def-coef-infinity-fibrations gives inner fibrations, cocartesian edges and cocartesian fibrations; X and X_α are quasicategories, so these apply. lem-coef-marked-point-cartesian-model is used only for its opening definition of marked simplicial sets and marking-preserving maps; it is in the same unit. def-coef-infinity-relative-cone gives the join, K^◁ and the p-limit diagram used in (iv). lem-coef-cocartesian-straightening gives the classifying functor up to a contractible space of choices, so (iii) is a well-defined property, not a choice from an existence theorem. Small cases checked: A empty gives GH Ex. 3.2.11 coCart; K_α empty gives a terminal fiber and q-terminal objects; C empty is trivial; S equal to the degenerate edges gives the flat case. There are no new nodes. rg over dag/nodes finds no duplicate pattern definition, and a dependency cycle check is clean. The unit and blueprint ancestry are unchanged, no SGA is cited, and the Mathlib searches cover all three kinds. The two declared tool_uses are same-unit uses of definitional content only; accepted. One fix: in (iii), 'limit diagram' had no defining node for K^◁-shaped diagrams, since def-cbc defines only limiting cones as transformations. It is now 'a p-limit diagram in the sense of [def-coef-infinity-relative-cone] for p:Cat_∞→Δ^0'. This is equivalent to the absolute limit condition because the base mapping spaces are contractible, so the meaning is unchanged; the dependency was already cited. Corrected file: fixes/dag/nodes/sec-six-functors/def-coef-categorical-pattern-fibrancy.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CategoricalPatternFibrancy",
+  "declaration": "SSet.Enhanced.CategoricalPattern",
+  "declarations": [
+   "SSet.Enhanced.CategoricalPattern",
+   "SSet.Enhanced.CategoricalPattern.Object",
+   "SSet.Enhanced.CategoricalPattern.Hom",
+   "SSet.Enhanced.IsClassifyingFunctor",
+   "SSet.Enhanced.IsCategoricalPatternFibered",
+   "SSet.Enhanced.IsRelativeLimitDiagramOnLeftCone"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CategoricalPatternFibrancy.lean",
+  "statement": "structure CategoricalPattern",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The classifying functor is compared by a coherent natural equivalence of entire diagrams with the normalized straightening of a coCart vertex representing exactly the pullback projection. Clause (iv) uses the recorded IsRelativeLimitDiagram of def-coef-infinity-relative-cone, quantifying over the quasicategory structure of the total space (which clause (i) supplies); only the universe-lifted left-cone variant IsRelativeLimitDiagramOnLeftCone, needed because Cat infinity lives one universe up, is a helper of this item module. The relative-cone dependency record is unchanged.",
+  "fixed_by": "NT-stage2-cc-2d7f3e61a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d7f3e61a",
+  "group": "NG",
+  "result": "fix",
+  "note": "Read node, the 5 stmt_deps' Lean (CocartesianStraightening Statement/FiberTransport/BaseNaturality in full, RelativeInfinityCone.IsRelativeLimitDiagram, InfinityFibrations, Marked, AreNaturallyEquivalent) and GH 3.2.1/3.2.3/Rem 3.2.2/Thm 3.2.5(2). All clauses (C, S with degenerates, all 2-simplices scaled, small A and quasicategory K_alpha, left cones into S, marked slice objects/morphisms, (i) inner fibration, (ii) lifts with source x and T exactly the cocartesian edges over S, (iii) pullback projection cocartesian with a classifying functor naturally equivalent to the normalized straightening of the actual fibration and a limit over Cat_inf->Delta0, (iv) all cocartesian sections give q-limits) match. No extra hypotheses; universes u/u+1; edge cases (A empty, K empty -> terminal, C empty) fine; only the lean field changed; report has Worker report and Second reading by NG. H4 fix: IsRelativeLimitDiagramRaw was a verbatim copy of the recorded IsRelativeLimitDiagram minus Prop instance binders; it is removed and clause (iv) now uses @IsRelativeLimitDiagram with forall hX : Quasicategory X (supplied by clause (i)), so the meaning is unchanged; declarations and note updated in fixes/def-coef-categorical-pattern-fibrancy.lean-record.json. nt_compile --json: delivered and fixed files both rc 0 with no errors or warnings (an error sanity check gave rc 1)."
  }
 }

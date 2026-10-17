@@ -71,5 +71,32 @@
   "by": "L",
   "result": "pass",
   "note": "Mathlib leaf created by the split of def-pur-sheaf-hom; the match was verified by the lead against the Mathlib source at that item's review"
+ },
+ "lean": {
+  "module": "Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous",
+  "declaration": "SheafOfModules.overFunctor",
+  "declarations": [
+   "CategoryTheory.GrothendieckTopology.over",
+   "CategoryTheory.Sheaf.over",
+   "SheafOfModules.overFunctor",
+   "SheafOfModules.over",
+   "SheafOfModules.Hom.over",
+   "SheafOfModules.overMap",
+   "SheafOfModules.overFunctorMap"
+  ],
+  "statement": "def overFunctor (X : D) :\n    SheafOfModules.{v} R ⥤ SheafOfModules.{v} (R.over X)",
+  "branch": "mathlib",
+  "by": "NO",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "§1(B): no lean record existed. The exact existing Mathlib declarations already supply the entire node: J.over U has the induced covering sieves, Sheaf.over restricts sheaves and rings, overFunctor restricts module objects and morphisms sectionwise, and overMap with overFunctorMap supplies successive restriction. This records those declarations without introducing any duplicate construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-935315388",
+  "group": "NO",
+  "result": "pass",
+  "note": "Compared every node clause with Stacks 099A/0999 and the Lean statement: small site in u, commutative O, ideal as monic ι (Mono matches the subsheaf; the completeness definition itself has no Mono), arbitrary K, complete N, conclusion is the same IsLocallyDerivedRingedIdealComplete applied to the recorded derivedInternalHomOfUniverses.{u,u,u,w} (same K-injective Hom-complex construction as the older derivedInternalHom used inside the definition; an rfl definitional-equality probe hit the 60 s limit, so that is not claimed); no extra hypotheses or universe restriction. lean.statement verbatim; only lean fields changed; the def-pur-localized-ringed-site §1(B) existing:true record matches Mathlib Over.lean:248,512 and PushforwardContinuous.lean:59-89. Docstrings carry source, blueprint and all four proof steps; sorry only (axioms include sorryAx); lines at most 91. nt_compile --json rc=0 (16.1 s, 10.7 s). Edge cases K/N=0, empty site, I=0, I=O fine. Notes: second reading was by the author, not another group worker, but is a real reading; EtaleDerivedScalarTensor proof import was the recorded change-of-rings module when delivered and re-exports the current one."
  }
 }

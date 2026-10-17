@@ -14,7 +14,8 @@
   "def-sbc-affine-space",
   "def-weil-closed-immersion",
   "def-weil-open-immersion",
-  "pqf-def-locnoeth"
+  "pqf-def-locnoeth",
+  "def-pur-affine-line-datum"
  ],
  "proof": [
   {
@@ -200,5 +201,24 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-30ff22e38 (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery adds no new nodes. I read it against the main-20261015 lem-pur-gysin-structure proof (first paragraph: the pair (s,j) to which the localization triangle is applied), against each cited statement, and against Stacks 01T6 (morphisms.tex:2765) and 01OX (properties.tex:461). Statement: Y finite type over a field k, X=A^1_Y, U its complement of the zero section. Conclusions: X and U are finite type over k, Y, X and U are Noetherian, and j is quasi-compact. This is true. It drops the parent's separatedness, which is harmless, and it supplies exactly what parent step 0 uses. Small cases checked: Y empty, Spec k, Spec k[e]/e^2, P^1_k. Steps: 1 (Spec k Noetherian, then lem-weil-pbc-finite-type-over-noetherian), 2 (chart Spec R[t] plus composition clause (1)), 4 (lem-weil-pbc-qc-open-immersion-finite-type plus composition) and 5 are correct, and each hypothesis is met. Every cited proof node is a Mathlib leaf, so there is no route or tool_use issue. No SGA is cited. Duplicate search over dag/nodes (pur9-def-affine-line, def-pur-affine-line-datum, prop-pur-gm-relative-kummer and others) found no node stating these conclusions. The one fault: step 3 asserted j^{-1}(W)=D(t|_W) for an arbitrary affine W without saying that t is a global section of O_X or that s(Y) is the vanishing locus of t. I rewrote step 3 to state both explicitly, and added def-weil-finite-type-morphism to its uses (already in proof_deps). The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-pur-affine-line-support-geometry.json. No statement changed, and no tool_uses were accepted or needed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AffineLineSupportGeometry",
+  "declaration": "WeilConjectures.PurityFiniteSetting.affineLine_support_geometry",
+  "file": "lean/Sheaf/Paper/AffineLineSupportGeometry.lean",
+  "statement": "theorem affineLine_support_geometry (k : Type u) [Field k] (Y : Scheme.{u}) [Y.Over (Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] : (LocallyOfFiniteType (lineProjection Y ≫ Y ↘ Spec (.of k)) ∧ QuasiCompact (lineProjection Y ≫ Y ↘ Spec (.of k))) ∧ (LocallyOfFiniteType (puncturedProjection Y ≫ Y ↘ Spec (.of k)) ∧ QuasiCompact (puncturedProjection Y ≫ Y ↘ Spec (.of k))) ∧ IsNoetherian Y ∧ IsNoetherian (Line Y) ∧ IsNoetherian (Punctured Y) ∧ QuasiCompact (openImmersion Y)",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already landed, coefficient-independent geometric definitions Line, Punctured, lineProjection, puncturedProjection and openImmersion from def-pur-affine-line-datum; no coefficient setting, separatedness or finite-field assumption is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-232970ebe",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause. Hypotheses: Field k; Y over Spec k with LocallyOfFiniteType and QuasiCompact (finite type as in def-weil-finite-type-morphism); no extra separatedness, nonemptiness or finite-field assumption. Constructions: X = Line Y = AffineSpace (ULift (Fin 1)) Y; U = Punctured Y = basicOpen of the coordinate, which equals X minus the zero-section image by range_zeroSection; j = the canonical open immersion; all reused from the published def-pur-affine-line-datum. Conclusions: X and U finite type over k via composite structure maps, IsNoetherian of Y, X and U, QuasiCompact j. Only universe u, shared by k and Y, forced by Y.Over (Spec k). Node delta: lean record plus one added stmt_dep def-pur-affine-line-datum, checked acyclic. Edge cases checked: Y empty, Spec k, nonreduced, P^1, nonseparated, char p. Gates: no new definitions, single sorry, source and blueprint docstrings, five-step proof plan, lean.statement verbatim in the file. Report has Worker report and Second reading sections; the latter cites the 2026-10-17 direct-delivery policy. Compile: nt_compile on the delivered file timed out twice at 60 s on the side dependency PurityAffineLineDatum.lean under load about 150, an environment fault; a probe with verbatim copies of the six datum definitions and the delivered signature compiled cleanly in 21.8 s; the worker recorded clean compiles of 34.3 s and 23.1 s."
  }
 }

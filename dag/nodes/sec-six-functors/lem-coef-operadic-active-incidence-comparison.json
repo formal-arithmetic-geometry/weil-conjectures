@@ -253,5 +253,48 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-9e577b777 (reviewer sub-agent of L); spot-checked: I read the item, all five steps, every cited statement, the unit sk-prop-sf-biduality-general and the brief docs. The delivery changes one line (status set to split) and adds the report; there are no new nodes. The statement keeps every hypothesis, and each is used: global stationary cocartesian lifts in steps 1 and 3, constancy plus space zero-fibers for the contractible endpoint spaces C_j in steps 1 and 5. I re-derived the main points: (Delta^op_act)/[r] = product of the (Delta^op_act)/[1]; interval factorization through e with unique base factorization because h^op(0)=lambda(0) and h^op(l)=lambda(r); and the endpoint-preservation argument that makes X_sigma^a equal E_0 x_E E_{/sigma}. lem-coef-initial-poset-slice-restriction holds because {0} is left anodyne in Delta^d. The reflector plus lem-coef-cofinal-relative-join-slice-restriction gives exactly the map in (iii), with the orientation checked against HTT 4.1.3.1. Edge cases checked: r=0 (forces m=0, contractible slice), r=1, d=0, empty J. Long steps: step 1 (product decomposition) and step 3 (constructing the reflector) are each one argument and hide no lemma; the generic inputs are already cited nodes. proof_deps equals the union of the step uses; no cycle; no SGA. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-right-fibration-morphism-space. Checked as not duplicates: the symmetric (Fin_*) active-slice calculus, the operation Segal product and the collage comparison. HA, Gepner-Haugseng and HTT are not archived (WANTED; proof_origin agent). Minor: the report lists citations.json, which is not in the delivery."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicActiveIncidenceComparison",
+  "declaration": "SSet.Enhanced.Operadic.operadic_active_incidence_comparison",
+  "declarations": [
+   "SSet.Enhanced.Operadic.incidenceVertex",
+   "SSet.Enhanced.Operadic.initialFamily",
+   "SSet.Enhanced.Operadic.initialProjection",
+   "SSet.Enhanced.Operadic.familyZeroProjection",
+   "SSet.Enhanced.Operadic.edgeZeroProjection",
+   "SSet.Enhanced.Operadic.HasConstantZeroEdges",
+   "SSet.Enhanced.Operadic.HasGlobalStationaryInert",
+   "SSet.Enhanced.Operadic.familySourceComma",
+   "SSet.Enhanced.Operadic.familyCommaSource",
+   "SSet.Enhanced.Operadic.familyCommaSlice",
+   "SSet.Enhanced.Operadic.firstMixedEdge",
+   "SSet.Enhanced.Operadic.activeFamilyComma",
+   "SSet.Enhanced.Operadic.activeFamilyInclusion",
+   "SSet.Enhanced.Operadic.familyActiveSlice",
+   "SSet.Enhanced.Operadic.familyActiveSource",
+   "SSet.Enhanced.Operadic.familyActiveToSlice",
+   "SSet.Enhanced.Operadic.IsFamilyActiveCone",
+   "SSet.Enhanced.Operadic.incidenceCylinderEdge",
+   "SSet.Enhanced.Operadic.IsFamilyCut",
+   "SSet.Enhanced.Operadic.HasOrderedCutBases",
+   "SSet.Enhanced.Operadic.operadic_active_incidence_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicActiveIncidenceComparison.lean",
+  "statement": "theorem operadic_active_incidence_comparison {n : ℕ} (hn : 1 ≤ n) (P : Family (Δ[n] : SSet.{u})) (hconstant : HasConstantZeroEdges P) (hzero : ∀ z : (Δ[n] : SSet.{u}) _⦋0⦌, KanComplex (fiber (familyZeroProjection P) z)) (hglobal : HasGlobalStationaryInert P) : (∀ (t : Fin (n + 1)) (ht : 0 < t.val) (r : ℕ) (b : P.M _⦋0⦌), P.parameter.app _ b = stdSimplex.obj₀Equiv.symm t → P.operadicBase.app _ b = monoidalBaseVertex r → ∀ (bs : Fin r → P.M _⦋0⦌) (es : Fin r → (Δ[1] ⟶ fiber P.parameter (stdSimplex.obj₀Equiv.symm t))), (∀ i : Fin r, (es i ≫ fiberInclusion P.parameter (stdSimplex.obj₀Equiv.symm t)).app _ (stdSimplex.obj₀Equiv.symm 0) = b ∧ (es i ≫ fiberInclusion P.parameter (stdSimplex.obj₀Equiv.symm t)).app _ (stdSimplex.obj₀Equiv.symm 1) = bs i ∧ es i ≫ fiberProjection P.operadicBase P.parameter (stdSimplex.obj₀Equiv.symm t) = monoidalBaseEdge (monoidalRho i) ∧ IsCocartesianEdge (fiberProjection P.operadicBase P.parameter (stdSimplex.obj₀Equiv.symm t)) (es i)) → ∃ (R : ∀ i : Fin r, familyActiveSlice P b ⟶ familyActiveSlice P (bs i)) (c : rightJoinCone (familyActiveSlice P b) ⟶ P.M) (cs : ∀ i : Fin r, rightJoinCone (familyActiveSlice P (bs i)) ⟶ P.M) (L : Fin r → (familyActiveSlice P b ⊗ Δ[1] ⟶ initialFamily P)) (H : Fin r → (rightJoinCone (familyActiveSlice P b) ⊗ Δ[1] ⟶ P.M)), IsFunctorEquivalence (Pi.lift R) ∧ IsFamilyActiveCone P b c ∧ (∀ i : Fin r, IsFamilyCut P b (bs i) (es i ≫ fiberInclusion P.parameter (stdSimplex.obj₀Equiv.symm t)) (R i) c (cs i) (L i) (H i)) ∧ HasOrderedCutBases P b bs R L ∧ (r = 0 → IsContractible (familyActiveSlice P b)) ∧ (∀ (V : SSet.{u}) [Quasicategory V] (q : V ⟶ monoidalSimplexBase) (_hq : IsMonoidalInfinityCategory q) (F : initialFamily P ⟶ V), IsLaxMonoidalInfinityFunctor (initialProjection P) q F → ∀ (i : Fin r) (x : (familyActiveSlice P b) _⦋0⦌), IsMonoidalInertEdge q (incidenceCylinderEdge (L i) x ≫ F)) ∧ (∀ (V : SSet.{u}) [Quasicategory V] (q : V ⟶ monoidalSimplexBase) (_hq : IsMonoidalInfinityCategory q) (G : P.M ⟶ V), G ≫ q = P.operadicBase → (∀ (i : Fin r) (x : (familyActiveSlice P b) _⦋0⦌), IsMonoidalInertEdge q (incidenceCylinderEdge (L i) x ≫ fiberInclusion P.parameter (stdSimplex.obj₀Equiv.symm 0) ≫ G)) → (∀ i : Fin r, IsMonoidalInertEdge q (es i ≫ fiberInclusion P.parameter (stdSimplex.obj₀Equiv.symm t) ≫ G)) → ∀ (i : Fin r) (x : (rightJoinCone (familyActiveSlice P b)) _⦋0⦌), IsMonoidalInertEdge q (incidenceCylinderEdge (H i) x ≫ G))) ∧ (∀ (d : ℕ) (σ : Δ[d] ⟶ P.M), (∀ j : Fin (d + 1), ∃ t : Fin (n + 1), 0 < t.val ∧ (σ ≫ P.parameter).app _ (stdSimplex.obj₀Equiv.symm j) = stdSimplex.obj₀Equiv.symm t) → IsActiveDiagram P.operadicBase σ → (∃ r : (activeFamilyComma P σ).toSSet ⟶ familyActiveSlice P (σ.app _ (stdSimplex.obj₀Equiv.symm 0)), r ≫ familyActiveSource P (σ.app _ (stdSimplex.obj₀Equiv.symm 0)) = activeFamilyInclusion P σ ≫ familyCommaSource P σ ∧ (∀ (k : ℕ) (x : (activeFamilyComma P σ).toSSet _⦋k⦌), ((familyActiveToSlice P (σ.app _ (stdSimplex.obj₀Equiv.symm 0))).app _ (r.app _ x)).extension = orderedJoinFunctor.map (CategoryTheory.Prod.mkHom (𝟙 Δ[k]) (incidenceVertex d 0)) ≫ ((activeFamilyInclusion P σ ≫ familyCommaSlice P σ).app _ x).extension) ∧ modelCategoryQuillen.I.rlp r) ∧ ∀ (V : SSet.{u}) [Quasicategory V] (q : V ⟶ monoidalSimplexBase) (_hq : IsMonoidalInfinityCategory q) (F : initialFamily P ⟶ V), IsLaxMonoidalInfinityFunctor (initialProjection P) q F → modelCategoryQuillen.I.rlp (relativeCosliceRestrictionMap q (activeFamilyInclusion P σ) (familyCommaSource P σ ≫ F)))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded family, monoidal and join interfaces. Explicit source pullbacks and their active full subcomplexes; canonical first-vertex restriction specified on all join extensions; ordered cuts specified by coherent inert source and cone cylinders and exact base blocks; canonical relative right-coslice restriction. All helpers have real data; the sole postponed theorem is this node. Maintainer review fix: the private predicate IsInitialInertFunctor was definitionally SSet.Enhanced.IsLaxMonoidalInfinityFunctor (initialProjection P) q F, a recorded declaration of the statement dependency def-coef-monoidal-infinity-category (inert preservation over the common base, used elsewhere for generalized-operad sources); it is removed and the recorded predicate is used in both coefficient clauses. The statement is otherwise unchanged.",
+  "fixed_by": "NT-stage2-cc-8a2ea754a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a2ea754a",
+  "group": "N7",
+  "result": "fix",
+  "note": "Read node, 4 stmt deps and their Lean (OperadicCorrespondence, MonoidalInfinityCategory, RelativeCosliceLeftFibration, InitialPosetSliceRestriction), module, report. Hypotheses match exactly (hn; Family; HasConstantZeroEdges = IsConstantOverZero transported to each edge pullback; Kan zero fibres; global cocartesian stationary inert). J_b/X_sigma/X_sigma^a are the dependency-style pullback+full subcomplex. (i) cut equivalence pinned by IsFamilyCut cylinders (apex = es i, inert source cylinder) and HasOrderedCutBases block offsets; r=0 contractible; coefficient clauses encode Segal concatenation and induced cones. (ii) restriction uniquely specified, I.rlp incl. dim 0. (iii) literal relativeCosliceRestrictionMap, no colimit assumption. Edge cases d=0, r=0/1, empty J, zero-length blocks OK. V in SSet.{u} follows dependency convention; [Quasicategory V] is required by IsMonoidalInfinityCategory. Docstrings and 5-step proof present; only the item lean field changed; statement verbatim. Delivered and fixed modules compile clean via nt_compile (10.6 s / 17.5 s). Finding H4: IsInitialInertFunctor is definitionally the recorded IsLaxMonoidalInfinityFunctor (initialProjection P) q F of def-coef-monoidal-infinity-category. Fixed: helper removed, recorded predicate used in both clauses; fixes/ has the replacement .lean, lean-record.json (statement re-extracted, declarations updated, note) and report.md with a Maintainer review fix section."
  }
 }

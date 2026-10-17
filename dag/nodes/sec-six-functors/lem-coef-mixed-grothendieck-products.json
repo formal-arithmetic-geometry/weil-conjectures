@@ -24,7 +24,8 @@
   "place": "Proposition 3.1 and its mapping-space proof, binary-product assertion only; mixed-fibration convention as in Definition 2.2. No terminal-object conclusion is asserted."
  },
  "stmt_deps": [
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "def-coef-mixed-grothendieck-construction"
  ],
  "mathlib_searches": [
   {
@@ -243,5 +244,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MixedGrothendieckProducts",
+  "declaration": "SSet.Enhanced.mixed_grothendieck_binary_products",
+  "file": "lean/Sheaf/CategoryTheory/MixedGrothendieckProducts.lean",
+  "statement": "theorem mixed_grothendieck_binary_products {A B : SSet.{u + 1}} [hA : Quasicategory A] [hB : Quasicategory B] (hAprod : HasFiniteProducts A) (hBprod : HasFiniteProducts B) (F : oppositeSSet A ⊗ B ⟶ CatInfinity.{u}) (hF : FiberwisePreservesBinaryProducts F) (E : MixedGrothendieckConstruction F) : @cocartesianFibration _ _ E.projectionB E.total_quasicategory hB ∧ HasBinaryProducts E.total ∧ PreservesBinaryProducts E.projectionA ∧ PreservesBinaryProducts E.projectionB ∧ MixedProductFormula E",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.MixedProductFormula",
+   "SSet.Enhanced.mixed_grothendieck_binary_products"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-daa33fb32",
+  "group": "NK",
+  "result": "pass",
+  "note": "Delivery is exactly 5 files: report, new def node, item node with lean and the added dependency only, and two modules. Both modules compile cleanly through nt_compile.py --json (exit 0, no errors or warnings). Every clause matches the node and Haugseng Def 2.2/Prop 3.1: opposite first variable, Quasicategory and HasFiniteProducts bases, hF = PreservesLimitsOfShape of the whole F(a,-) with IsImageCone-pinned image cones, cocartesian projection to B with transport F(a,beta)u, HasBinaryProducts, both projections preserve, explicit product formula with apex over (aP,bP), exact base legs and equivalence edges giving the canonical comparison components; no terminal claim. A scratch Lean proof shows the transportA HEq endpoints match (source F(a',b)), so the construction is not vacuous by a variance mismatch. The mapping-fiber comparison is a weak equivalence to the hofiber of the actual base map, with constant path and two composition-triangle families. mixedMappingArrow's Classical.choose is fixed by the prism formula. New def node has the full §5 field set, cites all five deps, and has no duplicate in Mathlib or side lean/Sheaf. lean.statement is verbatim and all declarations exist. Docstrings carry source and blueprint. The only sorry is the theorem's. Universes u/u+1 with no added equation. Edge cases checked: empty E, constant terminal F, discrete F excluded. Minor: the Second reading section is the standard 2026-10-17 placeholder, accepted."
  }
 }

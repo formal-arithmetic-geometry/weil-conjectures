@@ -293,5 +293,31 @@
   "group": "Q64",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-875660546 (reviewer sub-agent of L); spot-checked: Read in full: the item, its base version (statement, source, blueprint and unit unchanged, so no target is weakened), every cited node's current statement, the lem-sf-point proof in blueprint main-20261015, the citer lem-sf-point and def-pod-conventions (a_X=id_s for X_0=Spec k_0), the unit and chapter route, and Stacks schemes.tex l.4275 Tag 01KT. Hypotheses: the base is S=s=Spec F̄_q and l≠p. The geometric hypotheses of def-weil-compactifications-refinements apply only over finite-field bases, so they are not needed here. Step 1: id_*, id_! and R(id)_* are the identity, matching the identity clause of the composition lemma. Step 2: FullCD(id,A;0) holds in both clauses, including site objects V that are not of finite type; p_V is an isomorphism, so its direct image is exact. Step 3: p_d j_d=id with p_d separated makes j_d a closed immersion by 01KT, so it is open and closed. Step 4: two-piece gluing gives j_!=j_*, exact, and equal to Rj_*. Step 5: beta_d and theta_u are built from clause 1 of lem-weil-derived-direct-image-composition (all unbounded complexes at finite level); its associativity gives beta_e theta_u=beta_d. The etale-origin comparison is not extended. Step 6: I recomputed the unit beta^-1 and counit beta; both refinement equations of def-weil-ambient-exceptional-adjoint reduce to theta_u=beta_e^-1 beta_d. Step 7: interval and Tor bounds are 0. Step 8: the coefficient mates are identities and the bounds are uniform. Edge cases: Z_d=s⊔C with C an elliptic curve, where FullCD for p_d is not required; Z/l^2→Z/l; n=1. No new nodes and no duplicate found by rg. Route: the composition lemma is in the cited unit sk-def-sf-operations; the section lemma and adjoint uniqueness are Mathlib leaves, and their declared tool_uses are accepted. No SGA citations. proof_deps equals the union of the step uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointIdentityAdmissibility",
+  "declaration": "WeilConjectures.point_identity_admissibility",
+  "declarations": [
+   "WeilConjectures.PointIdentityAdjunctionModel",
+   "WeilConjectures.PointIdentityCoefficientComparison",
+   "WeilConjectures.pointIdentityFiniteCoefficient",
+   "WeilConjectures.PointIdentityFiniteSystem",
+   "WeilConjectures.point_identity_admissibility"
+  ],
+  "file": "lean/Sheaf/Paper/PointIdentityAdmissibility.lean",
+  "statement": "theorem point_identity_admissibility (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] : ∃ M : ∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E], PointIdentityFiniteSystem (Spec (.of D.k)) l E, (∀ (E L : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (ι : E →ₐ[Padic l] L) (n : ℕ), PointIdentityCoefficientComparison (integralScalarQuotientMap l E L ι n) ((M E).model n) ((M L).model n)) ∧ ∃ hS : ∀ x : Spec (.of D.k), IsUnit (l : (Spec (.of D.k)).presheaf.stalk x), (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E], (∀ n : ℕ, IsExceptionalAdjointAdmissibleAtFiniteStage l E (n + 1) (Nat.le_add_left 1 n) (Spec (.of D.k)) (Spec (.of D.k)) (Spec (.of D.k)) hS (𝟙 _) (Compactification.ofIsProper (𝟙 _))) ∧ IsExceptionalAdjointAdmissibleAtIntegral l E (Spec (.of D.k)) (Spec (.of D.k)) (Spec (.of D.k)) hS (𝟙 _) (Compactification.ofIsProper (𝟙 _)) ∧ IsExceptionalAdjointAdmissibleAtRational l E (Spec (.of D.k)) (Spec (.of D.k)) (Spec (.of D.k)) hS (𝟙 _) (Compactification.ofIsProper (𝟙 _))) ∧ IsExceptionalAdjointAdmissibleAtAlgebraicallyClosed l Ω (Spec (.of D.k)) (Spec (.of D.k)) (Spec (.of D.k)) hS (𝟙 _) (Compactification.ofIsProper (𝟙 _))",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The owning-node helpers package the actual ambient adjunction datum, normalized identity isomorphisms, zero bounds and identity coefficient-mate equations; they introduce no alternative functor. Positive exponents are indexed by n+1. The sole theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7333d973f",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Statement matches node clause by clause against the exact published declarations: l≠p kept as hypothesis, invertibility hS supplied in the conclusion; all n≥1 via n+1; FullCD 0 (both clauses) and preservation bounds 0/0, uniform in field and exponent; leftIso/rightIso for every compactification with unit/counit identity equations and both refinement equations; reduction (m≤n, incl. equal and non-flat) and scalar-extension mates (integralScalarQuotientMap, all embeddings incl. identity) required to equal the identity, not just be invertible; admissibility via the dependency's own FiniteStage/Integral/Rational/AlgebraicallyClosed predicates. Universes u (geometry, fields) and v (Omega) independent, no silent restriction. Self-over instance and ofIsProper(id).g confirmed equal to the identity by rfl in a /tmp probe. lean.statement verbatim; node changed only in lean; no duplicate declarations; no hollow definitions; single sorry; docstrings carry source, blueprint tag and 8-step proof. nt_compile.py --json: exit 0, PointIdentityAdmissibility 8.7 s, no errors or warnings (two earlier attempts stopped on a 60 s timeout of an upstream side override under load ~170, environmental). No findings beyond a harmless redundancy nit."
  }
 }

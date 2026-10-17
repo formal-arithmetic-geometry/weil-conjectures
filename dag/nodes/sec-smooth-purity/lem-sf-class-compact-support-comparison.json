@@ -228,22 +228,22 @@
   "statement": "def compactSupportSiteComparison (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) : DerivedCategory.Plus.ι ⋙ (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory ⋙ rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ≅ DerivedCategory.Plus.ι ⋙ Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⋙ (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory",
   "file": "lean/Sheaf/AlgebraicGeometry/CanonicalCompactSupportSiteComparison.lean",
   "branch": "newtargets-dag",
-  "by": "Q31",
-  "date": "2026-10-16",
+  "by": "Q78",
+  "date": "2026-10-17",
   "existing": false,
-  "note": "The published upstream comparison selected an arbitrary proper direct-image isomorphism. This interface uses the actual fixedComparisonDirectImageMatePlus and exact open comparison, then the canonical bounded-below/ambient identifications; its natural components give the specified witness-natural compactification comparison.",
+  "note": "Section 1(B): the recorded module directly imported the retired ProEtale.Derived.LowerShriek after its other imports had loaded the same declarations from ProEtale.FiniteCoefficient.Derived.LowerShriek. Compilation rejected the duplicate rightDerivedLowerShriekOfCompactification. Replace just that import with the canonical finite-coefficient module. Every declaration, signature and definition body is unchanged: the proper factor is still fixedComparisonDirectImageMatePlus and the open factor its canonical degreewise comparison.",
   "declarations": [
    "AlgebraicGeometry.ProEtale.compactSupportSiteComparisonPlus",
    "AlgebraicGeometry.ProEtale.compactSupportSiteComparison"
   ]
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-e6d193a91",
-  "group": "Q31",
-  "result": "fix",
-  "note": "Wrote review.md and complete replacements under fixes/. Mathematics and canonical maps checked on both sites; verbatim signatures verified. Replaced one inline tactic proof with direct equality transport. All four fixed modules passed scompile.py server confirmation. Branch unchanged."
+  "reviewer": "NT-stage2-cc-f905594fc",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Read the item node, all 12 statement dependencies, the source place, both delivered modules and report.md (Worker report and Second reading by Q78 both present). Checked every clause: separated finite-type f, arbitrary g, Compactification f with c.ofIsPullback sq, fixed-scalar ModuleCat coefficients with Λ : Type (u+1) as in all dependencies, bounded-below input via Plus.ι. C = Plus compatibility then compactSupportSiteComparison.symm (counit mate fixedComparisonDirectImageMatePlus, then degreewise openImmersionLowerShriekComparisonUpperStarIso). a_v and a_w = leftDerivedUpperStarComparisonIso (tagged lem-weil-pbc-comparison-pullback; the same as in the Lean of lem-weil-pbc-transport-identifies-exchange). S and T unfold correctly. E^e is the recorded Etale...PlusBaseChangeMap; E^p is the second component of finiteExchangeProjection with g arbitrary (FiniteCoefficient copy differs only in imports). The first conjunct is an equality of natural transformations; the second equates the witness-transported map to E^p.app N for every (L,N,α), which gives witness invariance. No extra hypotheses; no hollow data (sorryAx only from upstream Prop isIso); one sorry; statement field verbatim; no duplicate found. The §1(B) dependency repair is a single import swap with bodies unchanged (diffed); added stmt_dep is used and acyclic. nt_compile.py on both files, three runs: 4-10 s and 11-19 s, clean. Minor non-blocking: dependency lean.note replaced rather than extended."
  },
  "split_report": {
   "date": "2026-10-16",

@@ -348,10 +348,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-eecaa460b",
-  "group": "Q13",
+  "reviewer": "NT-stage2-cc-1a299bde6",
+  "group": "Q02",
   "result": "pass",
-  "note": "Every clause of the node matches the Lean: IsGeneralizedOperad p/q (includes the Kan zero fiber); hf = over-base, inert-preserving; ∃ M' in universe u with IsGeneralizedOperad r; e ≫ g = f strictly; the equivalence has an over-base inert-preserving quasi-inverse r, and both inverse natural equivalences are equivalence edges inside markedFunctors (over-base complexes), with correct δ1/δ0 endpoints; the categorical fibration is inert-preserving over base, Mathlib SSet.InnerFibration, and lifts equivalence edges with given source and exact image. No extra hypotheses or universe restriction; empty operads, n=0 and identity edges are covered. Gates pass: predicates have real content, docstrings carry source place and blueprint tag, the theorem docstring has all 7 proof steps, the only proof is sorry, the node's statement field equals the file's signature, and no duplicate declaration exists. nt_compile.py: item module and SpaceValuedStraightening compile with no errors or warnings. Notes: the SpaceValuedStraightening noncomputable repair duplicates the identical fix already landed by Q19 (differs by one blank line), and the added stmt_dep is upstream and acyclic; if landing objects that the node moved after the base, use --revert-nodes lem-coef-space-valued-straightening. Some imports are unneeded but harmless."
+  "note": "Independent reading of Q02/lem-coef-cartesian-maps-presheaf-extension at 1a299bde6809. Every node clause matches the Lean (A U-small quasicategory; P(A) is the published infinityPresheaves; y is infinityYoneda; G ranges over all of diagrams (base A).op with V=max(u+1,v); right-fibration representative from an existential TransportClassifier with its clauses; cocartesian model Marked.Over.cartesianFunctors on the sharp opposite; Cartesian model as the op of the cocartesian model for O∘G per GHN §1.2; extensions preserve all IsSmall.{u} limit shapes including empty; restriction along y^op is an equivalence of whole functor categories; pre/postcomposition normalised on every relative simplex; any other representative or unstraightening covered). The quantifiers over S and O are pinned (FiberTransport, IsCatInfinityOpposite) and inhabited, so they are neither vacuous nor too loose. No extra assumptions, no universe equality, every variable bound. The strict objects equality is realisable. Edge cases checked: A empty, X empty, point or two points, G=[1], degenerate edges. No dependency cycle; all 11 stmt_deps have Lean records. No hollow definitions; the only sorry is the theorem; docstrings carry source, blueprint and the 7-step proof; lean.statement is verbatim and the declaration list matches. The SpaceValuedStraightening change (noncomputable abbrev Diagrams) is already live. nt_compile.py --json on both snapshot files: exit 0, no diagnostics. Already landed in batch 921a9050a4 with identical content. Process note only: the second-reading section is brief and self-described as a self-review; its single change (classifier T made existential) is correct."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.SpaceValuedStraightening",
@@ -373,9 +373,9 @@
   "file": "lean/Sheaf/CategoryTheory/SpaceValuedStraightening.lean",
   "statement": "theorem space_valued_straightening : ∃ S : Straightening.{u}, Nonempty (BaseNaturality S) ∧ ∀ (C : Type u) [Category.{u} C], IsOrdinaryComparison S C",
   "branch": "newtargets-dag",
-  "by": "Q13",
+  "by": "Q02",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Dependency-module repair under brief-stage2 §1(B). The recorded module cannot compile against the current smallSpaces: its Diagrams abbreviation is missing noncomputable. This delivery keeps every declaration type, body, universe, and theorem statement and adds only noncomputable to Diagrams. It states the same complete space-valued straightening and ordinary-base comparison. This transitive prerequisite of OperadicAlgebraPresentability is cited directly by the consumer so the repair is reviewable in the same packet."
+  "note": "Dependency build repair: smallSpaces was unified with the published noncomputable Spaces.infinityCategory presentation. The existing computable abbrev Diagrams therefore failed compilation with compiler.ir.check (depends on smallSpaces with no executable code). Mark Diagrams noncomputable; all its data, definitions, theorem statement and proof docstring remain unchanged. This is required to compile the unchanged CocartesianStraightening and KanRelativeNerveLeftFibration prerequisites in the updated overlay."
  }
 }

@@ -258,5 +258,32 @@
   "group": "Q81",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q81-7ca3e14f1 (reviewer sub-agent of L); spot-checked: Read the item, all cited DAG statements, unit/chapter route, Stacks Tags 04JQ, 03PT, 040R, 03PQ, 010N, 04VG/04VK, 05RU, 03EK, 06YS, 0DEN, and parent Tag 0F0F projection formula. The algebraically closed specialization gives trivial Galois action; unit/counit normalization, exact unbounded localization, tensor coherence, K-flat preservation, and derived comparison are correctly justified. Coefficients are genuinely Z and the parent base-change morphism and hypotheses are unchanged. Edge cases including zero, Z, Z/2 Tor, and unbounded complexes check out. No duplicate or circular node, no SGA citation, and both declared tool uses are accepted. Full review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricPointDerivedConstants",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_geometricPointDerivedConstantsData",
+  "declarations": [
+   "AlgebraicGeometry.Etale.geometricPointConstants",
+   "AlgebraicGeometry.Etale.geometricPointStalk",
+   "AlgebraicGeometry.Etale.geometricPointConstantGerm",
+   "AlgebraicGeometry.Etale.geometricPointIntegerDerivedSymmetry",
+   "AlgebraicGeometry.Etale.GeometricPointDerivedConstantsData",
+   "AlgebraicGeometry.Etale.nonempty_geometricPointDerivedConstantsData"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricPointDerivedConstants.lean",
+  "statement": "theorem nonempty_geometricPointDerivedConstantsData (Ω : Type u) [Field Ω] [IsAlgClosed Ω] : Nonempty (GeometricPointDerivedConstantsData Ω)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The structure packages all clauses for the actual constant and geometric-stalk functors, with the canonical constant-germ unit, uniquely normalized counit, ordinary unbounded derived tensor, and localization-factorization normalization. The coefficient symmetry is the existing canonical derived Koszul symmetry. Compatibility with the essentially surjective derived constant functor and its fixed invertible tensorators uniquely determines the sheaf symmetry, hence does not introduce an arbitrary braiding. The integer ring is canonically lifted to the coefficient universe, as in def-kun-derived-tensor; Point.ulift only reindexes the same pointed-neighbourhood colimit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e41c83bbd",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Compiled the delivered module with nt_compile.py on the side overlay: clean, no errors or warnings, 17-32 s. A probe confirmed the sheaf tensor (Etale.sheafMonoidalCategory), the K-flat derived tensor shared with derivedTensor, the canonical stalk tensor comparison and laxMonoidal_Q. Every node clause matches: actual stalk at the identity point (ulift only re-indexes the colimit) and constantSheaf; both functors equivalences; unit fixed to the constant germ; counit characterised by an iff (formula and uniqueness); termwise derived inverse equivalences with the descended adjunction; all lower bounds preserved on unbounded complexes; tensor comparisons pinned by unit monoidality and the derived factorisation equations, giving m⊗n↦m⊗n on constants; derived unit and counit monoidal. Universes ModuleCat.{u+1}(ULift Z) as recorded by the dependencies; no stronger hypotheses; one sorry; source and blueprint docstrings; statement field verbatim; node changed only in lean. F1 (non-blocking): the sheaf-side derived symmetry is the unique one compatible with C_D, but is not stated equal to the canonical Koszul DerivedMonoidal.braiding. Both ways of adding that equation exceeded the 60 s compile limit. The library records the derived braiding only as Nonempty, and none of the five citers uses the sheaf symmetry."
  }
 }

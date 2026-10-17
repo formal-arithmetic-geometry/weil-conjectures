@@ -194,5 +194,36 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-4ccd3de0e (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Corrected the missing Noetherian-open citation, inaccurate Step-8 provenance, and omitted tool-use declarations. Witness maps and bounded-below hypotheses check out; statement unchanged. Whole corrected JSON is under fixes/dag/nodes; detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeAdjointOpenOrigin",
+  "declaration": "AlgebraicGeometry.ProEtale.sfRelativeAdjointOpenOrigin",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sfRelativeEtaleAdjoint",
+   "AlgebraicGeometry.ProEtale.sfRelativeAdjointOriginUnit",
+   "AlgebraicGeometry.ProEtale.SfRelativeOriginArrows",
+   "AlgebraicGeometry.ProEtale.sfRelativeOpenOriginLeftEtale",
+   "AlgebraicGeometry.ProEtale.sfRelativeOpenOriginRightEtale",
+   "AlgebraicGeometry.ProEtale.sfRelativeOpenOriginLeftMap",
+   "AlgebraicGeometry.ProEtale.sfRelativeOpenOriginRightMap",
+   "AlgebraicGeometry.ProEtale.sfRelativeOriginRealizationIso",
+   "AlgebraicGeometry.ProEtale.sfRelativeOriginObject",
+   "AlgebraicGeometry.ProEtale.sfRelativeAdjointOpenOrigin",
+   "AlgebraicGeometry.ProEtale.sfRelativeAdjointOpenOriginObjects"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeAdjointOpenOrigin.lean",
+  "statement": "theorem sfRelativeAdjointOpenOrigin (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (X Y : Scheme.{u}) [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsProper f] {Y' : Scheme.{u}} (g : Y' ⟶ Y) [IsOpenImmersion g] (K0 : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))))) (K : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))))) (alpha : ((siteComparisonDerivedPullbackPlus Y (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))).obj K0).obj ≅ K) : DerivedCategory.TStructure.t.plus ((sfRelativeOpenOriginLeftEtale (Padic.coefficientExtensionRing l E (n + 1)) f g).obj ⟨K0.obj, K, alpha.hom⟩) ∧ DerivedCategory.TStructure.t.plus ((sfRelativeOpenOriginRightEtale (Padic.coefficientExtensionRing l E (n + 1)) f g).obj ⟨K0.obj, K, alpha.hom⟩) ∧ IsIso ((sfRelativeOpenOriginLeftMap (Padic.coefficientExtensionRing l E (n + 1)) f g).app ⟨K0.obj, K, alpha.hom⟩) ∧ IsIso ((sfRelativeOpenOriginRightMap (Padic.coefficientExtensionRing l E (n + 1)) f g).app ⟨K0.obj, K, alpha.hom⟩)",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-007e5923a",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: D/l/E/n+1 (n>=1), X and Y finite type over k, f proper, g an arbitrary open immersion, X'=pullback f g; B0/C0 are the exact composites with identity-open compactifications; Rf^! is the recorded sfFiniteExceptionalFixed; nu^* is the recorded siteComparisonDerivedPullbackPlus; the witness maps paste the comparison unit, the recorded pullback comparison and alpha, natural on the comma category; IsIso is claimed only at bounded-below origins, which is true via Stacks relative comparison; objects of the recorded witnessed category keep L and the realization iso. No hollow definitions, only sorry, source/blueprint docstrings present, statement verbatim, all 11 declarations present, universes unforced. The section 1(B) import-only repair of EtaleOriginAdjointClass is needed (the original fails with a duplicate derivedComparisonAdjunctionPlus) and its only importer AmbientAdjointDischarge compiles against it. nt_compile.py rc=0 for both delivered files and for the importer."
  }
 }

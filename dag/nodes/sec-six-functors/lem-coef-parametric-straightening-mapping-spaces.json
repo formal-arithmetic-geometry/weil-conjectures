@@ -11,7 +11,11 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
   "lem-coef-cocartesian-straightening",
-  "lem-coef-cat-infinity-colimits-cartesian-closure"
+  "lem-coef-cat-infinity-colimits-cartesian-closure",
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-cat-infinity-opposite-involution"
  ],
  "proof": [
   {
@@ -217,5 +221,55 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-950afdbe3 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, every cited statement, the unit/ancestry and the citer in full. GHN Prop 6.9 is not archived; it is still WANTED and proof_origin is agent. The statement is true in both variances and nothing in it is weakened. Small cases checked: B empty, C empty, C=Δ^0 (straightening full faithfulness), and C=Δ^1 (noninvertible parameter arrows allowed, Cartesian product edges need an invertible C-component). This is not a target node and no SGA source is used. There are no new nodes, no cycle, and no duplicate (lem-coef-unstraightening-external-products is a different, strict model-level statement). Every cited statement is in the item's unit, so no tool_uses are needed. Two missing citations, both repaired: (C1) step 1 used op: Cat_∞→Cat_∞ as an equivalence that preserves products without citing it, so it now cites the existing reviewed node lem-coef-cat-infinity-opposite-involution. (C1/E5) Steps 4 and 5 said 'products in the diagram category are pointwise … in each simplicial degree', which was uncited and not strict in the coherent-nerve model. They now cite lem-coef-marked-sections-pointwise-limits, applied to Cat_∞×B^(op)→B^(op) with T the base, g=id, W empty and J the two-point discrete shape; I checked those hypotheses. proof_deps is updated to the union of the uses. The whole corrected node is in fixes/dag/nodes/sec-six-functors/. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ParametricStraighteningMappingSpaces",
+  "declaration": "SSet.Enhanced.ParametricStraightening.parametric_straightening_mapping_spaces",
+  "declarations": [
+   "SSet.Enhanced.ParametricStraightening.parameter",
+   "SSet.Enhanced.ParametricStraightening.Objects",
+   "SSet.Enhanced.ParametricStraightening.fibrations",
+   "SSet.Enhanced.ParametricStraightening.object",
+   "SSet.Enhanced.ParametricStraightening.arrow",
+   "SSet.Enhanced.ParametricStraightening.index",
+   "SSet.Enhanced.ParametricStraightening.indexMap",
+   "SSet.Enhanced.ParametricStraightening.diagrams",
+   "SSet.Enhanced.ParametricStraightening.classify",
+   "SSet.Enhanced.ParametricStraightening.homFamily",
+   "SSet.Enhanced.ParametricStraightening.arguments",
+   "SSet.Enhanced.ParametricStraightening.firstFamily",
+   "SSet.Enhanced.ParametricStraightening.middleFamily",
+   "SSet.Enhanced.ParametricStraightening.pointwiseProduct",
+   "SSet.Enhanced.ParametricStraightening.lastFamily",
+   "SSet.Enhanced.ParametricStraightening.Currying",
+   "SSet.Enhanced.ParametricStraightening.Products",
+   "SSet.Enhanced.ParametricStraightening.IsPrepost",
+   "SSet.Enhanced.ParametricStraightening.Comparison",
+   "SSet.Enhanced.ParametricStraightening.IsPullback",
+   "SSet.Enhanced.ParametricStraightening.BaseCoherence",
+   "SSet.Enhanced.ParametricStraightening.Restriction",
+   "SSet.Enhanced.ParametricStraightening.enlarge",
+   "SSet.Enhanced.ParametricStraightening.Enlargement",
+   "SSet.Enhanced.ParametricStraightening.Statement",
+   "SSet.Enhanced.ParametricStraightening.enlargePair",
+   "SSet.Enhanced.ParametricStraightening.indexEnlargement",
+   "SSet.Enhanced.ParametricStraightening.EnlargementComparison",
+   "SSet.Enhanced.ParametricStraightening.parametric_straightening_mapping_spaces"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ParametricStraighteningMappingSpaces.lean",
+  "statement": "theorem parametric_straightening_mapping_spaces : ∃ (small : Statement.{u}) (large : Statement.{max u v}), Nonempty (EnlargementComparison.{u, v} small large)",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded relative full functor category and naturally marked fibrations in both variances. The testing-object displays are equivalences of whole space-valued functors on CatInfinity^op × (F^op × F). Explicit degreewise currying, pre/postcomposition, pullback and enlargement formulas retain transformations and higher simplices. Cocartesian classification is the recorded straightening; Cartesian classification reverses the total space and then applies CatInfinity opposite, restoring the original fibers. Added statement dependencies are existing landed interfaces used in the signature; no new node, dependency repair or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-89b939560",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Re-delivery after RETURN da941aaadcb3: all four required corrections are made. The repair module is removed, the cocartesian-straightening node is identical to the landed record, the item imports the recorded Sheaf.CategoryTheory.CocartesianStraightening, and the module is byte-identical to the previous reviewer's corrected file. Every node clause was checked against the Lean: both variances, Cartesian classification as reverse plus recorded cocartesian straightening plus CatInfinity opposite, cartesianFunctors as the full relative functor subcategory with mapping_core, parameter with the natural marking, first_comparison and second_comparison on Cat^op x (F^op x F), pointwiseProduct with value C x H(b), BaseCoherence, Restriction and IsPullback for change of base, EnlargementComparison for the universe, and small_functor_categories. The strict Currying iso was verified true. Edge cases B or C empty, C=Δ^0 or Δ^1, B=Δ^0 and a=id are fine. No hollow definition, one sorry, docstrings with source and blueprint, 29 of 29 declarations listed, lean.statement verbatim. The 4 added stmt_deps are landed, in the same unit and acyclic. No duplicate declarations. nt_compile.py --json rc=0, 14-23 s, no errors or warnings. Non-blocking: O1, comparison equivalences are existence-level and not tied to the restriction and enlargement maps (accepted; the citer uses a fixed base); O2, report line 66 has a stale 'dependency module repair is supplied below' sentence, cosmetic, and the report is not fixable via stage-2 fixes."
  }
 }

@@ -26,7 +26,8 @@
   "def-weil-point-finite-cohomology-complexes",
   "def-weil-point-fg-complete-complexes",
   "def-weil-point-fd-complexes",
-  "def-weil-point-fd-qlbar-category"
+  "def-weil-point-fd-qlbar-category",
+  "lem-weil-proetale-dbc-triangulated"
  ],
  "proof": [
   {
@@ -535,5 +536,29 @@
   "group": "Q108",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q108-a9b011781 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, all cited statements, unit/chapter route, blueprint sources, and literature. Verified all 14 proof steps, hypotheses, coefficient categories, base-change morphism direction, shift signs, edge cases, searches, duplicate checks, and A3/A5/A6 plus D5/E5 repairs. Wrote review.md; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointFibreEquivalence",
+  "declaration": "WeilConjectures.point_fibre_equivalence",
+  "declarations": [
+   "WeilConjectures.pointFibreTorsionSourceTriangulated",
+   "WeilConjectures.pointFibreTorsionSourceIsoClosed",
+   "WeilConjectures.point_fibre_equivalence"
+  ],
+  "file": "lean/Sheaf/Paper/PointFibreEquivalence.lean",
+  "statement": "theorem point_fibre_equivalence (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (E : Padic.FiniteCoefficientFields l Ω) (n : ℕ) (hn : 1 ≤ n) : (pointFiniteFibre D l hl E.val n hn).IsEquivalence ∧ (pointIntegralFibre D l hl E.val).IsEquivalence ∧ (pointRationalFibre D l hl E.val).IsEquivalence ∧ (pointQbarFibre D l hl Ω).IsEquivalence ∧ (∃ c : (pointFiniteFibre D l hl E.val n hn ⋙ (DerivedCategory.pointFiniteCohomology (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E.val n))).ι).CommShift ℤ, ∀ T, T ∈ distTriang _ → (@Functor.mapTriangle _ _ _ _ _ _ _ c).obj T ∈ distTriang _) ∧ (∃ c : (pointIntegralFibre D l hl E.val ⋙ (DerivedCategory.pointFgComplete (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E.val)) (Ideal.span {ULift.up (Padic.coefficientExtensionUniformizer l E.val)})).ι).CommShift ℤ, ∀ T, T ∈ distTriang _ → (@Functor.mapTriangle _ _ _ _ _ _ _ c).obj T ∈ distTriang _) ∧ (∃ c : (pointRationalFibre D l hl E.val ⋙ (DerivedCategory.pointFiniteDimensional E.val).ι).CommShift ℤ, ∀ T, T ∈ distTriang _ → (@Functor.mapTriangle _ _ _ _ _ _ _ c).obj T ∈ distTriang _) ∧ (∃ c : (pointQbarFibre D l hl Ω).CommShift ℤ, ∀ T, T ∈ distTriang _ → DerivedCategory.pointFdQbarDistinguished l Ω ((@Functor.mapTriangle _ _ _ _ _ _ _ c).obj T))",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The exactness clauses for the three full-subcategory targets are stated through their fully faithful ambient inclusions, precisely the inherited shifts and distinguished triangles. The fourth uses pointFdQbarDistinguished. The two source instances only expose the existing bounded-constructible triangulation and isomorphism closure; they contain no new postponed theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af7b8bf9f",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: the four recorded fibre functors (pointFiniteFibre/pointIntegralFibre/pointRationalFibre/pointQbarFibre) are each IsEquivalence; each exactness clause is an existing CommShift ℤ plus distinguished-triangle preservation, through the fully faithful ι for the three full-subcategory targets and through the recorded pointFdQbarDistinguished for Qlbar. Hypotheses D, l, hl, Ω, E (FiniteCoefficientFields), n≥1 are exact, with no extra assumptions; universes are inherited from the recorded functors. The two Prop instances only project the existing proEtale_bounded_constructible_isTriangulated (requires only Finite A); the stmt_deps addition is acyclic. lean.statement is verbatim; the node is otherwise unchanged; the report has real Worker report and Second reading sections; the docstring carries all 14 proof steps; only sorry. nt_compile.py exit 0 with no errors or warnings (PointFibreEquivalence 16.8 s; two earlier runs hit the 60 s limit on dependency modules under load average ~160). Nit: the helper instances could live in the triangulated module."
  }
 }

@@ -248,7 +248,7 @@
   "file": "lean/Sheaf/CategoryTheory/OrdinalLatchingDiagramLifting.lean",
   "statement": "theorem ordinalLatchingDiagramLifting {J : Type w} [LinearOrder J] [WellFoundedLT J] {B : Type u} [Category.{v} B] [HasColimitsOfSize.{w, w} B] {D E U V : J ⥤ B} (f : D ⟶ E) (p : U ⟶ V) (hlift : ∀ a : J, HasLiftingProperty (directRelativeLatchingMap f a) (p.app a)) : HasLiftingProperty f p",
   "branch": "newtargets-dag",
-  "by": "Q03",
+  "by": "N7",
   "date": "2026-10-17",
   "existing": false,
   "note": "Uses the previously landed directRelativeLatchingMap construction from lem-coef-small-direct-colimit-lifting. On a well-ordered preorder its incoming nonidentity-arrow category is canonically isomorphic to the strict predecessor category. Only that node's general definitions are used; its natural-number degree hypothesis is not assumed."
@@ -256,9 +256,9 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-b3c16bacf",
-  "group": "Q03",
+  "reviewer": "NT-stage2-cc-d657decce",
+  "group": "N7",
   "result": "pass",
-  "note": "Node diff vs side base: only lean (statement verbatim) and stmt_deps (+landed lem-coef-small-direct-colimit-lifting, acyclic, allowed by brief-stage2 l.140). Clause check: J:Type w LinearOrder+WellFoundedLT (empty allowed) = small ordinal; HasColimitsOfSize.{w,w} B with independent w v u; D E U V, f, p; hlift ∀a HasLiftingProperty (directRelativeLatchingMap f a) (p.app a) uses canonical landed colimit.desc/colimMap/pushout.desc maps; conclusion HasLiftingProperty f p in J ⥤ B with correct triangles. Compiled probe confirms the latching index object mk g ≠ mk (𝟙 a) iff b<a, i.e. strict predecessors. No continuity/model/degree/finiteness assumption; empty, least-element and limit cases covered. No defs, only sorry, docstrings carry Hovey source + blueprint tag + six-step proof. nt_compile --json on the snapshot file: clean, 1.8 s, rc=0. Report has Worker report and Second reading by Q03 (an author self-check, content correct). No collision in side lean/Sheaf or Mathlib."
+  "note": "Statement matches node clause by clause: J:Type w LinearOrder+WellFoundedLT = small ordinal (empty allowed, no continuity/bottom); B with HasColimitsOfSize.{w,w}, independent u v; hlift ∀a HasLiftingProperty (directRelativeLatchingMap f a) (p.app a) via landed canonical colimit.desc/colimMap/pushout.desc; conclusion HasLiftingProperty f p in J ⥤ B. Probe compiled: latching objects mk g ≠ mk (𝟙 a) ↔ b<a; HasPushouts from HasColimitsOfSize. lean.statement verbatim; stmt_deps correct and acyclic; no defs, sorry only (axioms: sorryAx); source/blueprint docstrings and six-step proof present; nt_compile clean 5.7 s. Note: redundant re-delivery of the item Q03 already landed with an identical statement; the diff is one docstring line, lean.by Q03→N7 and the N7 report; harmless."
  }
 }

@@ -214,5 +214,23 @@
    "missing": [],
    "open": []
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure",
+  "declaration": "HomotopyCategory.isLeftDerivabilityStructure_quasiIsoLocalizerMorphism",
+  "statement": "lemma isLeftDerivabilityStructure_quasiIsoLocalizerMorphism\n    {ρ : CochainComplex A ℤ ⥤ CochainComplex A ℤ} (p : ρ ⟶ 𝟭 _)\n    (hp : ∀ K, QuasiIso (p.app K)) (hρ : ∀ K, P ((quotient A (.up ℤ)).obj (ρ.obj K))) :\n    (quasiIsoLocalizerMorphism P).IsLeftDerivabilityStructure",
+  "branch": "slopmaster2",
+  "by": "Q15",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Exact existing upstream criterion, including the ambient abelian-category binders and [P.IsTriangulated] [P.IsClosedUnderIsomorphisms] from the surrounding section. The functor rho is defined on cochain complexes only. quasiIsoLocalizerMorphism P is the full inclusion with quasi-isomorphisms and their inverse image. No new declaration is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-070a75d85",
+  "group": "Q15",
+  "result": "pass",
+  "note": "The existing:true record names HomotopyCategory.isLeftDerivabilityStructure_quasiIsoLocalizerMorphism (DerivabilityStructure.lean:211-214, identical in slopmaster2 and clones/side). lean.statement is verbatim and the theorem is fully proved (axioms propext, Classical.choice, Quot.sound only). All clauses match: Abelian A with free universes; P with IsClosedUnderIsomorphisms and IsTriangulated, which is equivalent to the node's zero/shift/cone conditions (Subcategory.lean:193-204); rho a functor on CochainComplex only; p : rho to identity with QuasiIso components; P(q rho K); the conclusion is IsLeftDerivabilityStructure of P.iota with quasiIso and its inverse image. No extra hypotheses; edge cases fine; the consumer lem-sfb-kflat-derivability uses this interface. The commit touches only the node lean field and the report. nt_compile.py refused the probe file (outside the side lean tree); the lcompile probe (#check, #print axioms, IsTriangulated fields) compiled with exit 0. Blueprint .proof.md not available locally; relied on the consistently quoted source sentence and the upstream source lines. Minor: the Second reading section is the standard 2026-10-17 'worker delivers directly' note; non-blocking."
  }
 }

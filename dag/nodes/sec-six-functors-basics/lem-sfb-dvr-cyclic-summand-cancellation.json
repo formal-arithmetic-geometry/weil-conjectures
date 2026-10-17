@@ -205,5 +205,23 @@
   "group": "Q148",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-df987a4d8 (reviewer sub-agent of L); spot-checked: I read the whole item, its four proof steps, all four cited nodes, the parent lem-sfb-continuous-integral-matrix-local-smith, the unit record and Stacks 00E9 (algebra.tex:3367). The statement is true: A/(pi^e) has a local endomorphism ring when e>=1, and e=0 is trivial. Its hypotheses match its only use, parent step 5, where A=O_E and both modules are finitely generated quotients of A^(n-1). It does not restate a clause of the parent. Step checks: (1) a and a' act as multiplication by u and v, and the first component of GF(x,0)=(x,0) gives b'c=1-vu. (2) If u is in m, then w=1+(1-v)u is a unit by the unit criterion, and expanding HF shows its upper-left block is w. (3) I expanded F1R and LF1R by hand: the result is diag(p, h) with h=s-rp^{-1}q. (4) The second component of J(0,n) gives a two-sided inverse of h. Small cases: the swap on C+C (h=-1); [[p,1],[1,0]] over Z_p with e=2 (w=1+p, h=-(1+p)^{-1}); diagonal F; e=0; M=N=0. All four citations are existing Mathlib leaves, so there is no route or tool-use question. There are no new nodes and no duplicates (searched the snapshot DAG for cancellation, summand, cyclic and local-endomorphism wording). No SGA is used, and proof_origin is correctly agent. One cosmetic point is not a fault: steps 1, 3 and 4 repeat the 00E9 source place, but its text accurately says they are the agent's block-elimination argument. No changes and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DvrCyclicSummandCancellation",
+  "declaration": "IsDiscreteValuationRing.nonempty_linearEquiv_of_cyclic_prod",
+  "file": "lean/Sheaf/RingTheory/DvrCyclicSummandCancellation.lean",
+  "statement": "theorem nonempty_linearEquiv_of_cyclic_prod {A : Type u} [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (π : A) (hπ : IsLocalRing.maximalIdeal A = Ideal.span {π}) (e : ℕ) (M : Type v) (N : Type w) [AddCommGroup M] [AddCommGroup N] [Module A M] [Module A N] [Module.Finite A M] [Module.Finite A N] (h : Nonempty (((A ⧸ Ideal.span {π ^ e}) × M) ≃ₗ[A] ((A ⧸ Ideal.span {π ^ e}) × N))) : Nonempty (M ≃ₗ[A] N)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a09e3d23d",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsDiscreteValuationRing A, maximalIdeal = span{π}, e:ℕ (e=0 included), M:Type v, N:Type w with Module.Finite, A ⧸ span{π^e}, binary direct sum as product per proof step 1, Nonempty (M ≃ₗ[A] N); no stronger assumptions, universes unbound-free. Lemma true (local End of A/π^e); 4 proof steps checked; citer local-smith step 5 compatible. Only change to node is the lean record; lean.statement verbatim. One theorem, sorry only, no defs; source/blueprint docstrings with 4 steps; report sections present. No existing Mathlib/project match. nt_compile --json clean (3.5 s); broken control copy reported its error, so the clean result is real. No findings."
  }
 }

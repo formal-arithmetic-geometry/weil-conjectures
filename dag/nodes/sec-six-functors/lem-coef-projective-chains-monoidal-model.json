@@ -370,5 +370,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProjectiveChainsMonoidalModel",
+  "declaration": "HomotopicalAlgebra.projectiveChainsMonoidalModel",
+  "declarations": [
+   "HomotopicalAlgebra.projectiveTrivialTensorMaps",
+   "HomotopicalAlgebra.ProjectiveChainsMonoidalProperties",
+   "HomotopicalAlgebra.projectiveChainsMonoidalModel"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProjectiveChainsMonoidalModel.lean",
+  "statement": "theorem projectiveChainsMonoidalModel (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)] (m : ProjectiveCochainMonoidalModel R) : @ProjectiveChainsMonoidalProperties.{u, w, t} R _ m.model _",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the supplied ProjectiveCochainMonoidalModel directly, with its model structure passed explicitly to the bundled conclusion. The two helpers merely spell out this node’s tensor generators and conjunction of properties. The coherent conclusion uses the full published localization and derived symmetric operadic tensor interfaces; the ordinary Hom comparison uses actual chain maps and Mathlib Homotopy."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-731b6d459",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Read the item node, the 3 stmt_deps and the module against Mathlib and side-clone declarations. Left properness = IsStableUnderCobaseChangeAgainst W Cof; direction checked against IsStableUnderCobaseChangeAlong.of_isPushout. Tractable = m.combinatorial + generating-class fields + cofibrant S^{n+1}, D^n. Monoid axiom = transfiniteCompositions.{u} of pushouts of (trivial projective cofibration) ▷ arbitrary C ≤ quasiIso. allFibrant, unitCofibrant. Homotopy classes via DerivedCategory.Q surjective with kernel = Mathlib Homotopy (degree -1, f-g=dh+hd). Coherent clause uses the dependency's exact interface; universes {u+1,u,t} confirmed by #check; iff in both directions on 1-simplices. No extra assumptions; universes u, w, t independent. NonsymmetricMonoidAxiom and DgLeftProper are not duplicates. Docstrings, 11-step proof docstring, sorry-only proof, verbatim statement field, stmt_deps and declarations all ok. nt_compile.py --json on the snapshot: clean, no errors or warnings (14.0 s); error reporting confirmed with a broken copy. No findings."
  }
 }

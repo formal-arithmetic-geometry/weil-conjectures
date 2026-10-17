@@ -225,5 +225,23 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-6c0324a11 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited matrix definition, Bhatt–Scholze Proposition 6.8.4(1), and unit/chapter route. All four elementary steps correctly prove the noncommutative inverse formulas; exhaustive small-ring checks passed. No duplicates, hidden lemmas, forbidden dependencies, or repairs found. Full findings written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralSquareZeroMatrixLift",
+  "declaration": "integral_square_zero_matrix_lift",
+  "file": "lean/Sheaf/SixFunctors/IntegralSquareZeroMatrixLift.lean",
+  "statement": "theorem integral_square_zero_matrix_lift (R : Type u) [Ring R] (I : TwoSidedIdeal R) (hI : ∀ x y : R, x ∈ I → y ∈ I → x * y = 0) (r : ℕ) (B : Matrix (Fin r) (Fin r) R) (D : Matrix (Fin r) (Fin r) I.ringCon.Quotient) (hBD : B.map I.ringCon.mk' * D = 1) (hDB : D * B.map I.ringCon.mk' = 1) (C : Matrix (Fin r) (Fin r) R) (hC : ∀ i j, I.ringCon.mk' (C i j) = D i j) : let N : Matrix (Fin r) (Fin r) R := B * C - 1 let P : Matrix (Fin r) (Fin r) R := C * B - 1 B * (C * (1 - N)) = 1 ∧ (1 - P) * C * B = 1 ∧ C * (1 - N) = (1 - P) * C",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-810b6c8a0",
+  "group": "NL",
+  "result": "pass",
+  "note": "Read node, def-weil-matrix dep (Mathlib Matrix), BS Prop 6.8.4(1) source place, module, report. Lean matches node clause by clause: Ring R (unital, noncommutative), TwoSidedIdeal I, pairwise square-zero hI, Matrix (Fin r) (Fin r) R, D a two-sided inverse of B.map I.ringCon.mk', C any entrywise lift, N=BC-1, P=CB-1, the three identities in correct noncommutative order; the leading existence claim follows via surjective lift as the node says. Edge cases r=0, I=bot/top, noncommutative R covered; no universe restriction. lean.statement verbatim in file; all non-lean fields equal the base node; no statement_change; single sorry theorem, no defs; docstrings carry source and blueprint tag and the four proof steps in summary; lines <=100; Worker report and Second reading by NL present. nt_compile --json: compiled in 23.1 s with no errors and no warnings; #check shows the expected type. No findings requiring change."
  }
 }

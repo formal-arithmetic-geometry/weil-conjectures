@@ -231,5 +231,23 @@
   "group": "Q116",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-6484b5030 (reviewer sub-agent of L); spot-checked: I read the item in full, the statement of each of the 9 nodes it cites, and the Stacks text of more-algebra.tex at 066S, 0658, 064X, 066G and the tor-amplitude definition. The item statement matches 066S exactly: A is a commutative ring, the objects are in D(A), and perfect means a bounded complex of finitely generated projective modules. The six steps follow the source route of 0658, 064X and 066G. Step 1: the free-model lemma from 064U gives pseudo-coherence. Step 2: the last clause of the ring pseudo-coherence summand lemma (064X). Step 3: projective implies flat (a Mathlib leaf), and a bounded-above flat complex is K-flat (064K). Step 4: the K-flat clause (2) of the derived tensor functor gives one Tor interval [a,b] for every module M. Step 5: the 066G retract argument written out; it is genuinely elementary. Step 6: the ring criterion from 0658, applied to K and to L separately. proof_deps equals the union of the step uses, and there is no cycle. There are no new nodes. The only similar existing nodes (lem-pc-perfect-summand and the thick-closure lemma) are about D(O_X) on a scheme, a different object, so there is no duplicate. I accept the five declared off-unit tool uses; each is a generic algebra lemma that no node of sk-thm-sf-package states. Edge cases checked: A=0, a zero summand, and a projective but non-free summand over a non-Noetherian ring. Two defects in existing nodes need maintenance; neither is in this delivery, so they do not block it. First, lem-pc-ring-pseudo-coherent-finite-tor-perfect links D(R) and 'perfect' to the scheme definitions, although its text and conclusion are explicitly about the ring. Second, lem-pc-ring-pseudo-coherent-summand cites 064T where the tag is 064U. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.PerfectRingSummand",
+  "declaration": "DerivedCategory.isPerfectRingComplex_summand",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/PerfectRingSummand.lean",
+  "statement": "theorem isPerfectRingComplex_summand {A : Type u} [CommRing A] [HasDerivedCategory.{w} (ModuleCat.{u} A)] (K L : DerivedCategory (ModuleCat.{u} A)) (h : IsPerfectRingComplex (K ⊞ L)) : IsPerfectRingComplex K ∧ IsPerfectRingComplex L",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5777749cd",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 066S clause by clause: {A : Type u} [CommRing A], [HasDerivedCategory.{w}] with w independent of u, K L : DerivedCategory (ModuleCat.{u} A), h : IsPerfectRingComplex (K ⊞ L) ⊢ IsPerfectRingComplex K ∧ IsPerfectRingComplex L; uses the recorded def-pc-perfect-ring-complex predicate (bounded, finite projective, iso to Q.obj P). Node diff adds only the lean block, and lean.statement appears verbatim in the file. No new nodes or corrections. No existing ring summand theorem (only scheme IsPerfect X versions; upstream Perfect.lean has none). Docstrings carry the source place, the blueprint tag and the six proof steps; proof is sorry only; report has Worker report and Second reading by Q109. Edge cases (zero ring, zero summand, non-Noetherian, non-free projective) covered. nt_compile.py on the snapshot file: rc 0, ~4 s, no errors or warnings; probe axioms [propext, sorryAx, Classical.choice, Quot.sound]. No findings."
  }
 }
