@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShr
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow
 
 /-!
 
@@ -176,7 +177,8 @@ quasi-compact: if `Rf_!` sends `D^{≤ 0}` into `D^{≤ N}` then `Rf^!` sends `D
 fails: for `Y = ⊔ₙ Spec k` and `X = ⊔ₙ ℙⁿ_k`, `Rf^! Λ` restricts to `Λ(n)[2n]` on `ℙⁿ_k`. -/
 instance hasBoundedBelowUpperShriek [CompactSpace Y] (Λ : Type (u + 1)) [CommRing Λ]
     [Finite Λ] : HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f where
-  plus_rightDerivedUpperShriek_obj := sorry
+  plus_rightDerivedUpperShriek_obj :=
+    plus_obj_of_rightDerivedLowerShriek_adjunction Λ f (Adjunction.ofIsLeftAdjoint _)
 
 /-- The coefficients have exceptional inverse images along every morphism admitting a
 compactification, preserving bounded below objects when the target is quasi-compact:
