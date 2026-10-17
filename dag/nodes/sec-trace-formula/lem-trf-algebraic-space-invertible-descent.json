@@ -12,9 +12,113 @@
   "def-trf-algebraic-space",
   "def-sc-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on the small site $F_{\\mathrm{et}}$ with its structure sheaf as defined in [def-trf-algebraic-space], choosing a small skeleton and a universe containing $I$ and $I\\times I$ as in [def-weil-size-convention]. By [lem-trf-scheme-etale-invertible-comparison], set $L_i=A_{V_i}(M_i)$; these are line modules. Its pullback compatibility turns $\\alpha_{ij}$ into isomorphisms $a_{ij}:L_j|_{R_{ij}}\\to L_i|_{R_{ij}}$ on the small etale site of $R_{ij}$. The same compatibility for composition identifies the ordinary triple-pullback equation with $a_{ik}=a_{ij}a_{jk}$ and identifies diagonal restriction with the identity. No strict identification of distinct iterated module pullbacks is being assumed.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-size-convention",
+    "lem-trf-scheme-etale-invertible-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 03DX, 05VG and 03LC, comparison and pullback compatibility"
+   }
+  },
+  {
+   "text": "For each test scheme $W\\to F$ put $W_i=W\\times_F V_i$ and $W_{ij}=W\\times_F V_i\\times_F V_j$. These are schemes by the representable diagonal; they are etale test objects over the appropriate $V_i$ and $R_{ij}$ by the base-change meaning of etaleness in [def-trf-algebraic-space]. Define set-valued presheaves $H_i(W)=L_i(W_i)$ and $K_{ij}(W)=L_i(W_{ij})$, with restrictions induced by fibre products. They are sheaves: a covering $\\{W_b\\to W\\}$ pulls back to coverings of $W_i$ and $W_{ij}$, and their double intersections are the corresponding pullbacks of $W_b\\times_WW_c$. Consequently the sheaf equalizer axiom [def-weil-pbc-sites-and-cohomology](1) for $L_i$ is exactly that for $H_i$ or $K_{ij}$. This verification does not require $F$ to be a scheme or a terminal object of $F_{\\mathrm{et}}$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR (lemma-glue-sheaves), component sheaves in the compatible-tuples construction"
+   }
+  },
+  {
+   "text": "There are two natural maps $\\prod_i H_i\\rightrightarrows\\prod_{i,j}K_{ij}$, with coordinates $s_i|_{W_{ij}}$ and $a_{ij}(s_j|_{W_{ij}})$. Apply [lem-weil-pbc-site-sheaf-sets-limits-sectionwise](1) on $F_{\\mathrm{et}}$ first to the discrete index categories $I$ and $I\\times I$, then to the finite parallel-pair diagram. Its small-index hypothesis holds in the universe fixed in Step 1. The equalizer is a sheaf with the explicit values\n$$M(W)=\\{(s_i)\\in\\prod_i L_i(W_i):s_i|_{W_{ij}}=a_{ij}(s_j|_{W_{ij}})\\text{ for every }i,j\\}.$$\nRestrictions act coordinatewise; their compatibility with these equations follows from naturality of $a_{ij}$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR (lemma-glue-sheaves), compatible-tuples formula; Tag 00W2 (lemma-limit-sheaf) for its sheaf property"
+   }
+  },
+  {
+   "text": "Give $M(W)$ coordinatewise addition and inverse, and let $b\\in\\mathcal O_F(W)$ act on its $i$th coordinate by the restriction of $b$ to $W_i$. Each $a_{ij}$ is linear over $\\mathcal O_F(W_{ij})$, so the compatibility equations are closed under these operations and contain zero. All abelian-group and module laws hold coordinatewise because they hold in $L_i(W_i)$. For $W'\\to W$ the restriction is semilinear, since restriction in each $L_i$ is semilinear over the induced restriction of functions. Thus the sheaf of sets in Step 3 is a sheaf of $\\mathcal O_F$-modules in precisely the sectionwise sense of [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR, compatible-tuples construction with module operations; Modules on Sites Tag 03CV (definition-sheaf-modules)"
+   }
+  },
+  {
+   "text": "For an etale $W\\to V_a$ let $d_a:W\\to W_a$ be its graph over $F$. Define $e_{a,W}:M(W\\to F)\\to L_a(W)$ by $e_{a,W}((s_i))=d_a^*s_a$. For $y\\in L_a(W)$ define $i_{a,W}(y)$ by coordinates $s_i=a_{ia}(y|_{W_i})$, evaluating $a_{ia}$ using the map $W_i\\to R_{ia}$ furnished by its $V_i$-projection and $W_i\\to W\\to V_a$. On $W_{ij}$ the cocycle gives $a_{ij}(s_j|)=a_{ij}a_{ja}(y|)=a_{ia}(y|)=s_i|$, so this is a tuple in $M(W)$. Both formulas are linear. For $h:W'\\to W$ over $V_a$, the graph equation $h_a d'_a=d_a h$ proves restriction compatibility of $e_a$; naturality of $a_{ia}$ proves it coordinatewise for $i_a$. Hence these formulas define module-sheaf maps on $(V_a)_{\\mathrm{et}}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR, explicit graph evaluation and inverse for the local gluing isomorphisms"
+   }
+  },
+  {
+   "text": "The composite $e_ai_a$ is identity because $a_{aa}$ restricts to identity along the diagonal of $V_a$. For a compatible tuple $s$ and any $i$, pull its $(i,a)$ equation back along $W_i\\to W_{ia}$ whose $a$-coordinate is the given $W\\to V_a$. This yields $s_i=a_{ia}((d_a^*s_a)|_{W_i})$, so $i_ae_a$ is identity too. Thus $e_a:q_a^*M\\simeq L_a$. For a test scheme $W\\to R_{ab}$, pull the $(a,b)$ tuple equation back along the graph $W\\to W_{ab}$ of both structural maps: it becomes $e_a=a_{ab}e_b$. This proves that the local identifications induce exactly the prescribed transition isomorphisms, including self-overlaps; $a_{aa}$ was used as identity only on its diagonal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR, explicit verification of the inverse and of transition compatibility"
+   }
+  },
+  {
+   "text": "Choose Zariski trivializing covers of each $M_a$, as permitted by [def-sc-invertible-module]. By [lem-trf-scheme-etale-invertible-comparison], their associated etale modules are trivial with structure-module identification $A(\\mathcal O)\\simeq\\mathcal O$. For any test object $W\\to F$, the schemes $W_a$ cover $W$; further pullback of the trivializing covers covers each $W_a$. The composition-of-coverings axiom [def-weil-pbc-sites-and-cohomology](1) gives a covering of $W$ on which $M$ is the structure module, using $e_a$ from Step 6. Thus $M$ is a line module as defined in [def-trf-algebraic-space]. The same comparison equivalence interprets $e_a$ as $q_a^*M\\simeq M_a$ in ordinary invertible modules, and its faithfulness makes the transition identity of Step 6 the original $\\alpha_{ab}$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-trf-scheme-etale-invertible-comparison",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 060X (lemma-finite-locally-free-descends), etale-local rank-one specialization; here verified directly with local frames"
+   }
+  },
+  {
+   "text": "Finally let $M,N$ be any line modules on $F$, and let compatible ordinary module maps on the $V_i$ be given. Full faithfulness and pullback compatibility of [lem-trf-scheme-etale-invertible-comparison] turn them into maps $g_i:M|_{V_i}\\to N|_{V_i}$ agreeing on every overlap. For $s\\in M(W)$ put $t_i=g_i(s|_{W_i})\\in N(W_i)$. Agreement and naturality give $t_i|_{W_{ij}}=t_j|_{W_{ij}}$. The sheaf axiom [def-weil-pbc-sites-and-cohomology](1) yields a unique $t\\in N(W)$ restricting to all $t_i$; set $g_W(s)=t$. For $W'\\to W$, both restrictions of this formula have the same values on all $W'_i$, so separatedness makes $g$ natural. Additivity and $\\mathcal O_F(W)$-linearity follow by the same uniqueness, applied to $s+s'$ and $bs$. For $W\\to V_i$, restrict the defining equality on $W_i$ along its graph $W\\to W_i$; this gives $g_W(s)=g_i(s)$. A second global map with the same restrictions agrees on every $W_i$ and hence on $W$ by separatedness. This proves surjectivity and injectivity of the asserted restriction map.",
+   "uses": [
+    "lem-trf-scheme-etale-invertible-comparison",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TQ (lemma-glue-maps), sectionwise amalgamation, with linearity and ordinary-module interpretation made explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-scheme-etale-invertible-comparison",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 04TR (lemma-glue-sheaves) and 04TQ (lemma-glue-maps), compatible-tuples proof on test schemes; compare spaces-descent.tex Tag 04W8, etale special case, and descent.tex Tags 03DX/03LC/05VG."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +147,96 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "invertible.*descent|descent.*invertible|quasi.coherent.*descent",
+   "results": {
+    "t": "2026-10-17T19:40:49Z",
+    "tool": "grep",
+    "query": "invertible.*descent|descent.*invertible|quasi.coherent.*descent",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern schemes, gluing spaces, module definitions or abstract descent conditional on a stack instance, not algebraic-space module descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Line modules on an algebraic space descend from ordinary invertible sheaves on an etale cover with a cocycle",
+   "results": {
+    "t": "2026-10-17T19:40:49Z",
+    "tool": "leansearch",
+    "query": "Line modules on an algebraic space descend from ordinary invertible sheaves on an etale cover with a cocycle",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules",
+     "SheafOfModules.QuasicoherentData.rec",
+     "SheafOfModules.QuasicoherentData.mk",
+     "SheafOfModules.mk",
+     "AlgebraicGeometry.Scheme.Modules.isSheaf",
+     "SheafOfModules",
+     "CommRing.Pic.AsModule",
+     "CommRing.Pic.instCoeSortType"
+    ],
+    "digest": "6578aa5a4a3da554"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern schemes, gluing spaces, module definitions or abstract descent conditional on a stack instance, not algebraic-space module descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"descent\", \"Module\"",
+   "results": {
+    "t": "2026-10-17T19:40:49Z",
+    "tool": "loogle",
+    "query": "\"descent\", \"Module\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern schemes, gluing spaces, module definitions or abstract descent conditional on a stack instance, not algebraic-space module descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective descent of line bundles on algebraic spaces along jointly surjective etale scheme atlases, including gluing module morphisms",
+   "results": {
+    "t": "2026-10-17T19:40:54Z",
+    "tool": "leanfinder",
+    "query": "Effective descent of line bundles on algebraic spaces along jointly surjective etale scheme atlases, including gluing module morphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.SheafedSpace.GlueData.ι_jointly_surjective",
+     "AlgebraicGeometry.Scheme.Cover.ι_glueMorphisms",
+     "AlgebraicGeometry.PresheafedSpace.GlueData.ι_jointly_surjective",
+     "AlgebraicGeometry.Scheme.Cover.glueMorphisms",
+     "AlgebraicGeometry.LocallyRingedSpace.GlueData.toSheafedSpaceGlueData",
+     "AlgebraicGeometry.LocallyRingedSpace.GlueData",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'",
+     "AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk"
+    ],
+    "digest": "62d06fce52559fb5"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern schemes, gluing spaces, module definitions or abstract descent conditional on a stack instance, not algebraic-space module descent."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-polarized-scheme-etale-descent",
@@ -74,5 +264,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-algebraic-space-invertible-descent",
+  "worker": "stage1",
+  "summary": "Kept the imported statement. Constructed its module by sectionwise compatible tuples and proved its local identifications, cocycle, rank-one locality and the full morphism bijection. Reused sectionwise sheaf limits and introduced only the scheme Zariski/small-etale invertible-module comparison as a statement-only input; searched the DAG, current blueprint, project declarations and Mathlib.",
+  "blueprint": "Serves the inherited polarized-scheme descent input to the descent sentence of lem-trf-local-term-locality, through the unchanged via chain: construct the descended polarization and its compatible morphisms.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "why": "Generic small limits of sheaves are computed sectionwise; used only for products and an equalizer on the algebraic-space etale site. No node of this unit supplies this site-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q12-578e1b348",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q12-578e1b348 (reviewer sub-agent of L); spot-checked: Read the mathematics in full and wrote review.md. Stacks 04W8/060X, 03DX(2)/05VG/03LC(1), and 04TR/04TQ/00W2 support the eight-step construction and new comparison. Edge cases, duplicates, dependencies and route restrictions checked. Added only missing merged_into and empty lean_audit metadata in the corrected new-node JSON under fixes/.; 1 file(s) fixed by the reviewer"
  }
 }

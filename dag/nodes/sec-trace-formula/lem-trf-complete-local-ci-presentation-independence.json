@@ -13,41 +13,147 @@
   "def-weil-regular-scheme",
   "def-weil-pbc-regular-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The kernels of $q_0$ and $q$ are finitely generated ideals in the respective maximal ideals, since regular local rings are Noetherian. Complete $P$ and $Q$ at their maximal ideals. Apply completion-regular-kernel-preservation to each kernel, identifying its quotient with $A$. Since $A$ is already complete, the canonical completed quotient is again $A$; that lemma supplies the surjective maps from the completions and equivalences of the original and completed kernel conditions. Completion-regular-local says that both completed sources remain regular local. Thus it suffices to compare two complete regular local sources.",
+   "uses": [
+    "lem-trf-completion-regular-kernel-preservation",
+    "lem-weil-pbc-completion-regular-local",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ, proof, second paragraph (reduction to complete sources)."
+   }
+  },
+  {
+   "text": "Use the Cohen structure power-series surjection to fix $c_0:T_0=\\Lambda[[x_1,\\ldots,x_n]]\\twoheadrightarrow A$. Here $\\Lambda$ is a field of characteristic zero when the residue field of $A$ has characteristic zero, and a Cohen ring otherwise. The power-series regular-completeness lemma says that $T_0$ is complete regular local; its unique maximal ideal is $\\mathfrak n_0=\\mathfrak m_\\Lambda T_0+(x_1,\\ldots,x_n)$. A surjection from a local ring to a nonzero local ring carries the source maximal ideal onto the target maximal ideal (its inverse image is the unique maximal ideal), so $c_0$ is local. By the power-series formal-smoothness lemma, $T_0$ is formally smooth for the $\\mathfrak n_0$-adic topology over $B=\\mathbf Q$ in the characteristic-zero case, and over $B=\\mathbf Z$ otherwise.",
+   "uses": [
+    "lem-weil-pbc-cohen-structure-power-series-surjection",
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-power-series-field-cohen-fs-adic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ, proof, first paragraph; Algebra 032A, 032C; More on Algebra 07NL."
+   }
+  },
+  {
+   "text": "Let $r:R\\twoheadrightarrow A$ be either completed surjection from step 1, and put $J=\\ker r$. Apply the continuous lifting lemma with its base ring $B$, source $T_0$, target ring $R$, ideal of definition $I=\\mathfrak m_R$, quotient ideal $J$, and exponents $t=1$ and $r_{\\mathrm{exp}}=1$. The ring $R$ is $I$-adically complete and $J\\subseteq I$. The ideal $J$ is closed: if $z\\in\\bigcap_{N\\ge1}(J+\\mathfrak m_R^N)$, then $r(z)\\in\\bigcap_N\\mathfrak m_A^N=0$ by completeness of $A$, so $z\\in J$. Identify $R/J$ with $A$ via $r$. Since $c_0$ is local, $c_0(\\mathfrak n_0)\\subseteq\\mathfrak m_A=r(I)$, as required. In the $B=\\mathbf Q$ case $R$ is a $\\mathbf Q$-algebra because every nonzero integer has nonzero residue (the residue fields of $R$ and $A$ agree) and hence is a unit; the quotient and $c_0$ respect this structure. The lifting lemma gives $f:T_0\\to R$ with $r\\circ f=c_0$ and $f(\\mathfrak n_0)\\subseteq\\mathfrak m_R$.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-lift-into-complete",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ, proof, third paragraph, lifting the fixed map; More on Algebra 07NJ."
+   }
+  },
+  {
+   "text": "Choose generators $b_1,\\ldots,b_s$ of $J$, possible by Noetherianity, with $b_j\\in\\mathfrak m_R$. Put $T=\\Lambda[[x_1,\\ldots,x_n,y_1,\\ldots,y_s]]=T_0[[y_1,\\ldots,y_s]]$, where the equality is coefficient regrouping. The power-series regular-completeness lemma makes $T$ complete regular local. Apply power-series adic evaluation with coefficient ring $T_0$, coefficient map $f$, target ideal $\\mathfrak m_R$, and $y_j\\mapsto b_j$ to obtain $h:T\\to R$. Let $\\pi:T\\twoheadrightarrow T_0$ set every $y_j$ to zero. Then $r\\circ h=c_0\\circ\\pi$: for any series, terms of positive $y$-degree evaluate into $J$ modulo every $\\mathfrak m_A^N$ and vanish in $A$, which is separated; the constant coefficient maps by $r\\circ f=c_0$. Moreover $h$ carries the maximal ideal $\\mathfrak m_\\Lambda T+(x_1,\\ldots,x_n,y_1,\\ldots,y_s)$ into $\\mathfrak m_R$, so $h$ is local.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-power-series-adic-evaluation",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ, proof, third paragraph, adding variables and constructing the commutative square; More on Algebra 07NL universal property."
+   }
+  },
+  {
+   "text": "We prove the omitted surjectivity by a direct recursive expansion. Fix $z\\in R$. Starting with $S_0=0$, construct polynomials $S_N\\in T_0[y_1,\\ldots,y_s]$ of degree less than $N$ satisfying $z-h(S_N)\\in J^N$. Write this residual as $\\sum_{|\\nu|=N}d_\\nu b^\\nu$ with $d_\\nu\\in R$, using the monomial generators of $J^N$. For each coefficient choose $a_\\nu\\in T_0$ with $c_0(a_\\nu)=r(d_\\nu)$, possible since $c_0$ is surjective. Then $d_\\nu-f(a_\\nu)\\in J$. Hence $S_{N+1}=S_N+\\sum_{|\\nu|=N}a_\\nu y^\\nu$ satisfies $z-h(S_{N+1})\\in J^{N+1}$. This proves the induction, including $N=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ, proof, third paragraph, details of the claimed surjectivity (finite approximation)."
+   }
+  },
+  {
+   "text": "The corrections in step 5 have strictly increasing $y$-degree, so their coefficients define a series $S\\in T_0[[y_1,\\ldots,y_s]]=T$. The evaluation formula says $h(S)-h(S_N)\\in\\mathfrak m_R^N$, while $z-h(S_N)\\in J^N\\subseteq\\mathfrak m_R^N$. Therefore $z-h(S)\\in\\bigcap_N\\mathfrak m_R^N=0$, proving that $h$ is surjective. If $s=0$, then $J=0$, the first constant coefficient already maps to $z$, and no positive-degree corrections are needed.",
+   "uses": [
+    "lem-weil-pbc-power-series-adic-evaluation",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ, proof, third paragraph, details of the claimed surjectivity (formal-series limit)."
+   }
+  },
+  {
+   "text": "Apply regular-local-surjection-kernel-comparison to $T\\xrightarrow{h}R\\xrightarrow{r}A$: these maps are surjective local and $T,R$ are regular local. It equates the regular-sequence kernel conditions for $r\\circ h$ and $r$. Apply the same lemma to $T\\xrightarrow{\\pi}T_0\\xrightarrow{c_0}A$: here $\\pi$ is surjective local by evaluation at zero, and $T,T_0$ are regular local. It equates the kernel conditions for $c_0\\circ\\pi$ and $c_0$. The equality $r\\circ h=c_0\\circ\\pi$ now yields the equivalence of the kernel conditions for $r$ and $c_0$. Do this for each of the two completed sources; both compare with this one fixed $c_0$. Chaining the two equivalences and undoing step 1 proves the item. All kernels lie in the respective maximal ideals, and the comparison includes empty sequences.",
+   "uses": [
+    "lem-trf-regular-local-surjection-kernel-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PZ, proof, last paragraph; Algebra Tag 00SE (lemma-ci-well-defined), applied twice."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "lem-trf-completion-regular-kernel-preservation",
+  "lem-trf-regular-local-surjection-kernel-comparison",
+  "lem-weil-pbc-cohen-structure-power-series-surjection",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-fs-adic-lift-into-complete",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-weil-pbc-power-series-field-cohen-fs-adic",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "def-weil-regular-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PZ (lemma-ci-well-defined), complete proof, with the omitted surjectivity written as recursive monomial approximation; Algebra Tag 00SE for the two composable-surjection comparisons."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "complete Noetherian local ring regular presentation kernel regular independent of presentation",
-   "results": "Regular-sequence transport declarations only; no presentation-independence theorem.",
+   "query": "complete Noetherian local ring regular local surjection kernels generated by regular sequences independent of presentation",
+   "results": "No presentation-independence theorem; only regular-sequence and completion declarations.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "IsRegularLocalRing, RingHom.ker",
+   "query": "RingHom.ker, RingTheory.Sequence.IsRegular, IsLocalRing",
    "results": "0 hits for regular kernels of local presentations.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "regular.*presentation|kernel.*regular [Mathlib/RingTheory]",
-   "results": "No matching complete-intersection presentation theorem in Mathlib RingTheory.",
+   "query": "regular.*kernel.*presentation [Mathlib/RingTheory]",
+   "results": "No matching complete-intersection presentation theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "kernel of every regular local surjection onto a complete local ring is generated by regular sequence",
-   "results": "Regular-sequence localization/flatness declarations only; no independence result.",
+   "query": "regular sequence kernel invariant under regular local presentation of complete local ring",
+   "results": "Only RingTheory.Sequence.IsRegular and faithful-flat regular-sequence transport declarations.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete intersection local ring has a regular sequence kernel for any presentation as a quotient of a regular local ring",
+   "results": "RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem; IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal; RingTheory.Sequence.isRegular_iff; RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem; RingTheory.Sequence.isWeaklyRegular_iff_Fin; RingTheory.Sequence.isRegular_cons_iff'; RingTheory.Sequence.IsRegular.cons'; RingTheory.Sequence.isWeaklyRegular_iff",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-regular-quotient-completion-kernel-test",
@@ -59,12 +165,56 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "09PZ, the lemma proving that the complete-intersection condition is independent of the chosen regular-local surjection.",
+   "place": "09PZ, the lemma proving that the complete-intersection condition is independent of the chosen regular-local surjection: completion reduction, Cohen power-series comparison, and the final some/every equivalence.",
    "via": [
     "lem-trf-regular-quotient-completion-kernel-test"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-complete-local-ci-presentation-independence",
+  "worker": "stage1",
+  "summary": "Repaired the returned split: retain completion reduction; fix a Cohen presentation using existing existence and regularity lemmas; verify the hypotheses of continuous lifting; construct the enlarged power-series map with its correctly typed square; prove its surjectivity by recursive monomial approximation and separatedness; apply the new composable-regular-local-surjection comparison (Algebra 00SE) twice. The former common-refinement node is omitted because its equivalence restated the item.",
+  "blueprint": "The complete-intersection input below lem-trf-local-term-locality is realized along Stacks 09PZ: completion (step 1), fixed Cohen source (step 2), continuous lifting (step 3), enlarged power-series square and omitted surjectivity (steps 4–6), and the two Algebra 00SE comparisons (step 7).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cohen-structure-power-series-surjection",
+    "why": "Cohen existence supplies the fixed source in 09PZ; this is a general complete-local algebra tool and the unit has no such existence lemma."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "General regularity and completeness of power-series rings over a field or Cohen ring, used to verify the 00SE source hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-fs-adic",
+    "why": "General adic formal smoothness of the fixed Cohen source, needed by the explicit continuous lifting in 09PZ."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-lift-into-complete",
+    "why": "General continuous lifting theorem 07NJ, explicitly invoked by 09PZ; the unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-adic-evaluation",
+    "why": "Power-series universal property constructs the enlarged map and controls its truncations; no equivalent statement in the item unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cohen-structure-power-series-surjection",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-field-cohen-fs-adic",
+  "lem-weil-pbc-fs-adic-lift-into-complete",
+  "lem-weil-pbc-power-series-adic-evaluation"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q46-f4523fb76",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q46-f4523fb76 (reviewer sub-agent of L); spot-checked: Mathematics and sources check out. I added the existing def-weil-regular-scheme citation to steps 1 and 4, updated proof_deps, and wrote review.md plus the corrected DAG JSON. No other faults found.; 1 file(s) fixed by the reviewer"
  }
 }

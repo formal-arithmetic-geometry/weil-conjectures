@@ -14,9 +14,75 @@
   "def-weil-pbc-module-finite-type-presentation",
   "def-sbc-locally-finite-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Finite presentation is local on X and S, so work on affine opens X=Spec(B), S=Spec(A), with B finitely presented over A and the quasi-coherent finite-type module represented by a finite B-module N. Retrocompactness makes U∩Spec(A) quasi-compact, hence U=D(f_1)∪⋯∪D(f_n) for elements f_i∈A. Scheme-theoretic density gives an injective map A→A_{f_1}×⋯×A_{f_n}.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "pqf-def-coherent",
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 081N proof, affine reduction and first paragraph."
+   }
+  },
+  {
+   "text": "Fix a prime q of B. Choose a finite free surjection B^m→N. Since N is the filtered colimit of quotients B^m/(k_1,…,k_t) by finite subsets of its kernel, the stalk lemma of Tag 05I7 (the node lem-trf-flat-finite-type-flat-point-local) first gives that N_q is finitely presented over B_q because N_q is flat over A. Choose a finite quotient N′ and a surjection N′→N which is an isomorphism after each localization at f_i and at q. The q-local equality uses finite presentation of N_q, while the other equalities are witnessed after multiplying by powers of the inverted elements. Consequently N′_q≅N_q is flat over A.",
+   "uses": [
+    "lem-trf-flat-finite-type-flat-point-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 081N proof, filtered-colimit paragraph choosing k_1,…,k_t, using Tag 05I7."
+   }
+  },
+  {
+   "text": "The finite free presentation of N′ by finitely many relations makes N′ a finitely presented B-module. Apply the existing openness-of-flatness node lem-weil-pbc-openness-of-flatness, which is Tag 00RC, to A→B and N′ at q. Since N′_q is A-flat, its flat locus is open, so there exists g∉q such that N′_g is flat over A.",
+   "uses": [
+    "lem-weil-pbc-openness-of-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 081N proof, paragraph invoking Algebra, Theorem 00RC after the finite-relation approximation."
+   }
+  },
+  {
+   "text": "In the localization comparison diagram, the bottom map ∏_i N′_{gf_i}→∏_i N_{gf_i} is an isomorphism by construction. Flatness of N′_g over A, together with the injective map A→∏_iA_{f_i}, makes the left vertical map injective by the defining tensor criterion for flatness; the top map is therefore injective, and it is surjective from N′→N. Hence N_g≅N′_g is finitely presented over B_g.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 081N proof, displayed diagram and injectivity argument."
+   }
+  },
+  {
+   "text": "As q was arbitrary, the elements g obtained above give a basic-open cover of Spec(B) on which N is finitely presented. Finite presentation of a quasi-coherent module is local on the source, so the original sheaf F is of finite presentation on X.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 081N proof, final application of Algebra, Lemma cover."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-trf-flat-finite-type-flat-point-local",
+  "lem-weil-pbc-openness-of-flatness",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 081N complete affine proof; the local stalk input is Tag 05I7 and the flat-locus input is Tag 00RC."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,7 +121,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flattening-module-by-admissible-blowup",
@@ -67,8 +133,9 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 final paragraph: obtain finite presentation after flattening and making the preserved open schematically dense.",
+   "place": "Supporting input in the flattening argument: Tag 081N extends finite presentation of a finite-type module flat over the base from a retrocompact schematically dense open.",
    "via": [
+    "lem-trf-flat-finite-type-dense-presentation",
     "lem-trf-flattening-module-by-admissible-blowup",
     "lem-trf-flattening-by-admissible-blowup",
     "lem-trf-flatification-horizontal-curve-pair",
@@ -82,5 +149,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flat-finite-type-dense-presentation",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 081N in full and repaired the split after review. Replaced the false combined neighborhood lemma with the true affine stalk statement from Tag 05I7. The finite-relation approximation cites that stalk statement, and the flat neighborhood for the approximating finitely presented module now cites the existing Tag 00RC openness-of-flatness node. The item statement and all hypotheses remain unchanged.",
+  "blueprint": "The steps realize the Tag 081N input used by the ancestor flattening proof: affine reduction, finite-relation approximation using the 05I7 stalk criterion, Tag 00RC flat-locus openness, diagram injectivity, and local finite-presentation gluing.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-openness-of-flatness",
+    "why": "Step 3 needs the general Tag 00RC theorem that the flat locus of a finitely presented module over a finitely presented ring map is open; the Tag 081N route invokes this theorem and this unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-openness-of-flatness"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q57-f40140b68",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q57-f40140b68 (reviewer sub-agent of L); spot-checked: Reviewed item and new node against Stacks Tags 081N, 05I7, and 00RC, all cited DAG statements, unit/chapter route, hypotheses, affine localization argument, edge cases, searches, and duplicate candidates. The repaired stalk helper and openness tool are correctly separated; no false statement, circularity, restatement, route-pivot violation, or missing repair remains. Full review written to review.md."
  }
 }

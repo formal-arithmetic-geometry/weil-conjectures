@@ -16,9 +16,99 @@
   "def-weil-pbc-regular-system-of-parameters",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Order the elements of J with j first. The regular-parameter node [lem-weil-pbc-regular-local-generators-regular-sequence] applies after this permutation: the sequence (t_j,(t_i)_{i\\in J\\{j}}) is regular, and R/(t_i:i\\in J) is regular local. The chart presentation is the specialization of [lem-trf-blowup-chart-regular-sequence-presentation] with a=t_j and a_i=t_i. Its quotient by t_j is (R/(t_i:i\\in J))[u_i\\mid i\\in J\\{j}], which is regular by [lem-trf-polynomial-ring-regular-base] and the regular-local-to-regular-ring consequence in [lem-weil-pbc-regular-local-localization]. Multiplication by t_j on the chart is injective by the closed chart-generator lemma [lemma-nagata-chart-generator-regular]. If a prime P does not contain t_j, the chart localization is the corresponding localization of R and is regular by [lem-weil-pbc-regular-local-localization]. If P contains t_j, localize at P and apply [lem-exc-regular-local-lift-regular-sequence-quotient] to the nonzerodivisor t_j and the regular quotient just described. Thus every chart local ring is regular.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-trf-blowup-chart-regular-sequence-presentation",
+    "lem-trf-polynomial-ring-regular-base",
+    "lem-weil-pbc-regular-local-localization",
+    "lemma-nagata-chart-generator-regular",
+    "lem-exc-regular-local-lift-regular-sequence-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 4.2.9 proof, printed p. 121"
+   }
+  },
+  {
+   "text": "On the chart, the pullback of t_i is t_j for i=j, t_j u_i for i in J\\{j}, and t_i for i not in J. The chart extended center ideal is (t_j) by [lemma-nagata-chart-extended-ideal-principal]. Therefore the pullback of t_1\\cdots t_r has support exactly the union of t_j=0, u_i=0 for i in (J\\{j})\\cap\\{1,\\ldots,r\\}, and t_k=0 for k\\le r with k not in J. Passing to the reduction removes nilpotents but preserves this support by [def-weil-pbc-scheme-reduction], and the equations define closed immersions by [def-weil-closed-immersion].",
+   "uses": [
+    "lemma-nagata-chart-extended-ideal-principal",
+    "def-weil-pbc-scheme-reduction",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 4.2.9 proof, printed p. 121"
+   }
+  },
+  {
+   "text": "Fix a prime P and a selected subset of the displayed hyperplanes. A listed equation that is a unit at P gives an empty local intersection. For the remaining equations, first consider P with t_j not in P: the chart is a localization of R, and the surviving u_i equations are associates of t_i because t_i=t_j u_i; the selected t_i and t_k classes are independent members of the cotangent basis supplied by the permuted parameter system. If t_j is in P, the chart relations give t_i=t_j u_i: when u_i is in P this term is in the square of the maximal ideal, and when u_i is a unit t_i is an associate of t_j. Hence the classes of the vanishing coordinates t_j, the u_i in P, and the t_k in P with k not in J are linearly independent in the cotangent space; extend them to a minimal generating set of the maximal ideal. The resulting regular system of parameters is a regular sequence by [lem-weil-pbc-regular-local-generators-regular-sequence]. Quotienting successively by the selected equations therefore leaves a regular local ring and lowers dimension by one for each equation; localization is covered by [lem-weil-pbc-regular-local-localization]. Thus each nonempty intersection is regular and has codimension equal to the number of selected hyperplanes, with codimension interpreted by [def-weil-pbc-krull-dimension-ring].",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-regular-local-localization",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 4.2.9 proof and Remark 4.2.2(i), printed pp. 118, 121"
+   }
+  },
+  {
+   "text": "Use the strict-transform closure definition [def-nagata-strict-transform] with the complement of the center. On the j-chart the extended center ideal is (t_j) by [lemma-nagata-chart-extended-ideal-principal], so the part away from the center is D(t_j). For i=j, the relation t_i=t_j u_i forces every point with t_j=0 on V(t_j) to lie over the center, hence the chart contribution to the strict transform is empty. For i in J\\{j}, on D(t_j) the equation t_i=0 is equivalent to u_i=0; its closure is V(u_i), because t_j is a nonzerodivisor on A_j/(u_i) by [lem-trf-chart-coordinate-nonzerodivisors]. For i not in J, the equation remains t_i=0 on D(t_j), and its closure is V(t_i), because t_j is a nonzerodivisor on A_j/(t_i) by the same node. Reduction and the closed-immersion interpretation are supplied by [def-weil-pbc-scheme-reduction] and [def-weil-closed-immersion].",
+   "uses": [
+    "def-nagata-strict-transform",
+    "lemma-nagata-chart-extended-ideal-principal",
+    "lem-trf-chart-coordinate-nonzerodivisors",
+    "def-weil-pbc-scheme-reduction",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 4.2.9 proof, printed p. 121"
+   }
+  },
+  {
+   "text": "The standard charts are charts of one blowup [def-nagata-global-blowup], so the local descriptions agree on overlaps. Steps 2 and 3 give the reduced coordinate union and all scheme-theoretic intersections; Step 4 gives the exceptional component and each strict transform. If I is empty, H is empty and only the exceptional hyperplane remains. This proves the asserted chartwise statement, including the empty-product case.",
+   "uses": [
+    "def-nagata-global-blowup",
+    "def-weil-pbc-scheme-reduction",
+    "def-nagata-strict-transform",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 4.2.9 proof, printed p. 121"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-global-blowup",
+  "def-nagata-strict-transform",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-scheme-reduction",
+  "lem-exc-regular-local-lift-regular-sequence-quotient",
+  "lem-trf-blowup-chart-regular-sequence-presentation",
+  "lem-trf-chart-coordinate-nonzerodivisors",
+  "lem-trf-polynomial-ring-regular-base",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-regular-local-localization",
+  "lemma-nagata-chart-extended-ideal-principal",
+  "lemma-nagata-chart-generator-regular"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 4.2.9 proof, printed p. 121"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -30,14 +120,14 @@
   {
    "tool": "loogle",
    "query": "Regular, Scheme, Blowup, AffineBlowup",
-   "results": "0 hits; unknown identifier Regular",
+   "results": "0 hits; unknown identifier Regular.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "AffineBlowup|blowup|regular.*parameter|normalCrossing (Mathlib/AlgebraicGeometry)",
-   "results": "0 hits in Mathlib/AlgebraicGeometry",
+   "results": "0 hits in Mathlib/AlgebraicGeometry.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
@@ -47,10 +137,38 @@
    "results": "Returned smooth chart, Krull-dimension and regular-sequence declarations, but no blowup or boundary theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine blowup chart along a coordinate regular sequence has regular localizations",
+   "results": "Returned localization and standard-smoothness declarations, but no affine blowup regularity theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.isRegularRing_of_isRegularRing",
+   "results": "MvPolynomial.isRegularRing_of_isRegularRing; polynomial regularity over a regular base, but no blowup chart statement.",
+   "date": "2026-10-18",
+   "verdict": "generalization: polynomial regularity only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularRing|regular local (RingTheory/RegularLocalRing)",
+   "results": "Mathlib/RingTheory/RegularLocalRing/Polynomial.lean has polynomial regularity instances; no blowup chart theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "regularity of affine blowup charts along a regular sequence",
+   "results": "Regular-sequence localization declarations, but no theorem for affine blowup charts.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-permissible-boundary-preservation",
@@ -62,7 +180,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "coordinate-chart calculation in Lemma 4.2.9: standard blowup chart ring, coordinate total-transform hyperplanes, and regular intersections",
+   "place": "Lemma 4.2.9 coordinate-chart proof: choose regular parameters for Y, V and Z; compute the standard blowup charts and the total and strict transforms.",
    "via": [
     "lem-trf-permissible-boundary-preservation",
     "lem-trf-normal-crossings-strictification",
@@ -75,5 +193,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-permissible-coordinate-chart",
+  "worker": "stage1",
+  "summary": "Repaired the returned split. Step 1 now uses Stacks 0BIQ for the chart quotient, the existing regular-parameter quotient theorem, the chart-generator nonzerodivisor lemma, polynomial regularity, and Tag 00NU to prove chart regularity. Step 3 replaces the false maximal-ideal count by a two-case cotangent-space independence argument. Step 4 proves strict-transform closure using the chart principalization and an explicit nonzerodivisor sublemma for each coordinate quotient. Four supporting nodes were added; the Mathlib polynomial node is a leaf. The statement and source remain unchanged.",
+  "blueprint": "Realizes ILO VIII Lemma 4.2.9, printed p. 121: standard chart presentation and regularity, total-transform equations, regular intersections and codimensions, strict-transform closures, and compatibility of chart descriptions.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Step 1 uses its parameter-permutation and regular-quotient conclusions, and Step 3 uses its regular-sequence conclusion for the cotangent generators; this is a generic regular-local tool from sk-thm-p1."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Steps 1 and 3 use localization of regular local rings and the consequence that a regular local ring is regular; this generic localization tool is from sk-thm-p1."
+   },
+   {
+    "node": "lemma-nagata-chart-generator-regular",
+    "why": "Step 1 uses injectivity of multiplication by the chart generator on the affine blowup chart; this generic blowup-chart tool is from sk-lem-nagata-sketch-blowups."
+   },
+   {
+    "node": "lemma-nagata-chart-extended-ideal-principal",
+    "why": "Steps 2 and 4 use that the extended center ideal is generated by the chart generator; this generic blowup-chart tool is from sk-lem-nagata-sketch-blowups."
+   },
+   {
+    "node": "lem-exc-regular-local-lift-regular-sequence-quotient",
+    "why": "Step 1 uses its general regular-sequence quotient lifting criterion, specialized to the singleton sequence (t_j); this is a generic tool from sk-prop-a1-kummer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-regular-local-localization",
+  "lemma-nagata-chart-generator-regular",
+  "lemma-nagata-chart-extended-ideal-principal",
+  "lem-exc-regular-local-lift-regular-sequence-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-ce538cc1c",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-ce538cc1c (reviewer sub-agent of L); spot-checked: Read the required governance, unit/chapter route, item, report, every new node, cited statements, ILO Lemma 4.2.9, Stacks Tags 0BIQ and 00NU, and Mathlib polynomial source. Checked all five proof steps, hypotheses, edge cases, chart algebra, regularity, intersections, strict-transform closures, duplicate candidates, searches, blueprint fields, and route-pivot/SGA restrictions. Wrote review.md with concrete source and step checks; no mathematical or procedural fault found."
  }
 }

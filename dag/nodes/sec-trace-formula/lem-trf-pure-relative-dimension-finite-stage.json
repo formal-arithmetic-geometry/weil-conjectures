@@ -16,9 +16,114 @@
   "def-pc-scheme-fibre",
   "def-weil-pure-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Restrict to the cofinal directed tail $I_{\\ge i_0}$ and set $Y_i=Y_0\\times_{S_{i_0}}S_i$, $Z_i=Z_0\\times_{S_{i_0}}S_i$. The scheme-over-limit lemma gives affine transition maps and limits $Y,Z$. By qcqs permanence, the morphisms $Y_0,Z_0\\to S_{i_0}$ are quasi-compact and quasi-separated; their base changes have these properties, so $Y_i,Z_i$ are qcqs. Similarly $f_0$ is quasi-compact, and base change preserves this and local finite presentation, so each $f_i$ is of finite type. The comparison $Y_j\\to Y_i\\times_{Z_i}Z_j$ is an isomorphism by the universal property of fibre products, hence a closed immersion. Thus the finite-stage bound applies with bases $Z_i$ and sources $Y_i$.",
+   "uses": [
+    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-limit-fibre-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YZ and 05M5; finite-presentation base change in Morphisms Tag 01T4"
+   }
+  },
+  {
+   "text": "Applying the finite-stage fibre-dimension bound to the limit morphism $f:Y\\to Z$, whose fibres have dimension at most $d$ because they are pure of dimension $d$, gives an index $i_1\\ge i_0$ such that every fibre of $f_{i_1}$ has dimension at most $d$. Replacing $i_0$ by $i_1$ and reindexing the upper tail, assume from now on that every fibre of $f_0$ has dimension at most $d$.",
+   "uses": [
+    "lem-trf-limit-fibre-dimension-bound",
+    "def-weil-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EY2 proof, first sentence: By Lemma 05M5 we may assume all fibres of f0 have dimension ≤ d"
+   }
+  },
+  {
+   "text": "If $d>0$, let $U_0=\\{y\\in Y_0\\mid\\dim_y((Y_0)_{f_0(y)})\\le d-1\\}$. Since $d-1\\ge0$ and $f_0$ is locally of finite presentation, the bounded local fibre-dimension locus is open and retrocompact by Tag 02G0. If $d=0$, use the same displayed set: it is empty because the local topological dimension at a point is nonnegative, directly from its definition. The empty open is retrocompact. In either case put $E=Y_0\\setminus U_0$. It is constructible by the constructible-subset definition (take the retrocompact open $Y_0$ minus $U_0$).",
+   "uses": [
+    "lem-trf-retrocompact-bounded-fibre-dimension",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-constructible-subset",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G0 and the constructible-complement argument in Tag 0EY2"
+   }
+  },
+  {
+   "text": "For a scheme $F$ of finite type over a field, local dimension at a point is the maximum of the dimensions of the components through that point. Indeed choose an affine neighbourhood $V$: the affine dimension-at-point-components lemma gives the maximum for $V$, its components are the intersections with the components of $F$ that meet $V$, and the irreducible locally algebraic dimension lemma identifies their dimensions with those of the corresponding components of $F$. Thus a pure $d$-dimensional fibre has local dimension $d$ at every point. For $y\\in Y$, let $y_0\\in Y_0$ be its image. Tag 02FY identifies the local fibre dimensions at $y$ and $y_0$. If $y_0\\in U_0$, this contradicts the local dimension $d$ at $y$. Hence the image of $Y\\to Y_0$ lies in $E$. The fibres here are of finite type over their residue fields, since $f$ is a base change of the finite-type morphism $f_0$.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-weil-pure-dimension",
+    "def-pc-scheme-fibre",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-dimension-at-point-components",
+    "lem-sc-dimension-locally-algebraic",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EY2 proof, paragraph beginning Moreover the image of X → X0 is contained in E; varieties.tex Tag 0A21(3),(5), via algebra.tex Tag 00OT"
+   }
+  },
+  {
+   "text": "Apply the constructible-containment lemma to the system $(Y_i)_{i\\ge i_0}$, its limit $Y$, the stage $Y_0$, and $E$. It gives $i\\ge i_0$ such that for every $j\\ge i$ the image of $Y_j\\to Y_0$ is contained in $E$.",
+   "uses": [
+    "lem-weil-pbc-limit-contained-in-constructible",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-scheme-over-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EY2 proof, paragraph beginning Then for i >> 0 we have that the image of Xi → X0 is contained in E"
+   }
+  },
+  {
+   "text": "At the index $i$ obtained in Step 5, take $y_i\\in Y_i$ with image $y_0\\in E$. The upper bound for $f_0$ from Step 2 and Tag 02FY give local fibre dimension at most $d$ at $y_i$. Membership in $E$ says the local fibre dimension at $y_0$ is greater than $d-1$; Tag 02FY gives the same lower bound at $y_i$. Thus every point of every nonempty fibre of $f_i$ has local dimension $d$. To obtain purity, take the generic point of each component of such a fibre. In an affine neighbourhood of that point only that component passes through it; the affine dimension-at-point-components lemma and invariance of dimension on nonempty opens of an irreducible locally algebraic scheme identify its component dimension with the local dimension $d$. Hence $f_i$ has pure $d$-dimensional nonempty fibres. For every $j\\ge i$, the morphism $f_j$ is the base change of $f_i$ along $Z_j\\to Z_i$, so the pure-relative-dimension base-change lemma gives the required purity at every later stage.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-weil-pure-dimension",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-dimension-at-point-components",
+    "lem-sc-dimension-locally-algebraic",
+    "lem-trf-relative-dimension-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EY2 proof, final sentence, using Tag 02FY; varieties.tex Tag 0A21(3),(5), algebra.tex Tag 00OT, morphisms.tex Tag 02NK"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-dimension-at-point",
+  "def-pc-scheme-fibre",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pure-dimension",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-trf-limit-fibre-dimension-bound",
+  "lem-trf-relative-dimension-base-change",
+  "lem-trf-retrocompact-bounded-fibre-dimension",
+  "lem-weil-pbc-dimension-at-point-components",
+  "lem-weil-pbc-limit-contained-in-constructible",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-over-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0EY2, lemma-descend-dimension-d, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,7 +169,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-marked-curve-finite-type-model",
@@ -76,7 +181,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Finite-type integral models of multipointed curves. Subsidiary tool: Pure relative dimension descends to a finite stage.",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: finite-stage descent of the pure relative-dimension condition used in constructing finite-type models.",
    "via": [
     "lem-trf-marked-curve-finite-type-model",
     "lem-trf-temkin-stable-modification",
@@ -91,5 +196,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-pure-relative-dimension-finite-stage",
+  "worker": "stage1",
+  "summary": "Split the finite-stage pure-relative-dimension descent along Stacks Tag 0EY2. The proof first descends the upper fibre-dimension bound (05M5), then uses the retrocompact bounded-dimension locus (02G0), constructible containment (05F4), and base-change invariance of local fibre dimensions (02FY) to obtain pure dimension d at every later stage. Three supporting statement nodes were added for the general 05M5 bound, 02NK/02FY pure-dimension base change, and 02G0 retrocompactness; all Mathlib searches found no matching theorem. Edge cases d=0 and empty fibres are covered by the quantifiers and the pure-dimension definition.",
+  "blueprint": "The steps realize the finite-stage descent subsidiary input in the ancestor proof: after finite-type model construction, the pure relative-dimension condition is descended to a later stage."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q66-24e3d08d5",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q66-24e3d08d5 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited sources. Corrected TeX, handled d=0 explicitly, supplied existing dimension-comparison citations, and used the new base-change lemma for later-stage persistence. Four corrected JSON files are under fixes/; detailed checks are in review.md. No target weakened; corrected dependencies are acyclic and within route.; 4 file(s) fixed by the reviewer"
  }
 }
