@@ -396,7 +396,10 @@ instance ProEtale.full_adicLowerStar : (ProEtale.adicLowerStar l i).Full :=
 instance ProEtale.faithful_adicLowerStar : (ProEtale.adicLowerStar l i).Faithful :=
   (ProEtale.adicUpperStarLowerStarAdjunction l i).fullyFaithfulROfIsIsoCounit.faithful
 
-/-- The stage `ℚ̄_ℓ` of `Dᵇc(X, ℚ̄_ℓ)`: bounded complexes of sheaves of modules over the
+/-- Blueprint `def-weil-algebraically-closed-coefficients`: Algebraically closed coefficient
+category
+
+The stage `ℚ̄_ℓ` of `Dᵇc(X, ℚ̄_ℓ)`: bounded complexes of sheaves of modules over the
 constant `ℓ`-adic sheaf `ℚ̄_ℓ,X` with constructible cohomology sheaves
 (`AlgebraicGeometry.ProEtale.adicConstructibleSheaf`), the `2`-colimit over finite `E ⊆ ℚ̄_ℓ` of
 blueprint `def-weil-algebraically-closed-coefficients` realised in the Bhatt–Scholze model. -/

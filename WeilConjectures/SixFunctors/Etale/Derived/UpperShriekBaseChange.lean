@@ -115,8 +115,10 @@ instance isIso_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction_uni
   infer_instance
 
 /-- Blueprint `prop-exc-base-change-proper`: Base change for a proper morphism, against an open
-immersion; and blueprint `cor-exc-base-change-open-immersion-general`: Base change for an
-arbitrary morphism, against an open immersion.
+immersion.
+
+Blueprint `cor-exc-base-change-open-immersion-general`: Base change for an arbitrary morphism,
+against an open immersion.
 
 For a cartesian square `g' ≫ f = f' ≫ g` with `g` an open immersion, `f`, `f'` admitting
 compactifications and torsion coefficients `Λ`, the base-change comparison

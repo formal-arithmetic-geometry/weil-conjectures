@@ -305,7 +305,9 @@ section Stalk
 
 variable (A : Type*) [Category A] [HasColimitsOfSize.{u, u} A]
 
-/-- The **geometric stalk** functor `F ↦ F_s = colim F(U)` at a geometric point `s` of `S`, the
+/-- Blueprint `def-weil-pbc-geometric-stalks`: Geometric stalks
+
+The **geometric stalk** functor `F ↦ F_s = colim F(U)` at a geometric point `s` of `S`, the
 colimit running over the opposite of the category of pointed étale neighbourhoods `(U, u)`
 of `s`. This is the fibre functor on sheaves of Mathlib's point `pointSmallEtale s` of the
 small étale site.

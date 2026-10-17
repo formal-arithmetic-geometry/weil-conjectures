@@ -157,6 +157,8 @@ variable (f : X ⟶ Y) [HasCompactification f]
 
 /-- Blueprint `sk-thm-sf-pf-finite`: Projection formula, finite coefficients
 
+Blueprint `thm-sf-pf-finite`: Finite coefficients on the étale site
+
 This is also blueprint `thm-sf-pf-finite` (Finite coefficients on the étale site), the same
 statement in the setting of the six-functor datum `def-sf-datum`.
 

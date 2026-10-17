@@ -383,6 +383,9 @@ noncomputable def rightDerivedUpperShriekOfAdjunctionPlus :
 `Rf_!(c)` to the bounded below objects of étale origin and of `Rf^×(c)` to the bounded below
 objects are adjoint. Its counit is `rightDerivedUpperShriekOfAdjunctionCounit`.
 
+Blueprint `rem-ptr-weil-ambient-exceptional-adjoint-12`: Pointer to the properties of
+[def-weil-ambient-exceptional-adjoint]
+
 Blueprint `rem-sf-class-adjoint-residue` and `rem-ptr-weil-ambient-exceptional-adjoint-12`: this
 is an adjunction between the bounded below objects of étale origin and the bounded below objects
 only; no adjunction on arbitrary unbounded pro-étale objects is asserted, and statements
@@ -592,7 +595,16 @@ asserted: it is false in general (an elliptic curve over `𝔽̄_p` with `Λ = �
 This is also the content of the pointer remarks blueprint `rem-ptr-pur-conventions-5`,
 `rem-ptr-pur-td-datum-6`, `rem-ptr-trf-admissibility-12` and
 `rem-ptr-weil-exceptional-inverse-image-14`: on the bounded constructible and finite-Tor
-categories both halves of the datum are theorems. -/
+categories both halves of the datum are theorems.
+
+Blueprint `rem-ptr-pur-conventions-5`: Pointer to the properties of [def-pur-conventions]
+
+Blueprint `rem-ptr-pur-td-datum-6`: Pointer to the properties of [def-pur-td-datum]
+
+Blueprint `rem-ptr-trf-admissibility-12`: Pointer to the properties of [def-trf-admissibility]
+
+Blueprint `rem-ptr-weil-exceptional-inverse-image-14`: Pointer to the properties of
+[def-weil-exceptional-inverse-image] -/
 theorem hasCohomologicalDimensionLEOnEtaleOrigin_and_nonempty_adjunction_constructibleFiniteTor
     (d : ℕ) (hd : topologicalKrullDim (HasCompactification.compactification f).Z ≤
       (d : WithBot ℕ∞)) :

@@ -106,6 +106,8 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 /-- Blueprint `sk-def-sf-admissible`: the bound `FullCD(p, A; c)`. This is blueprint
 `def-weil-full-cohomological-dimension` (Full cohomological dimension).
 
+Blueprint `def-weil-full-cohomological-dimension`: Full cohomological dimension
+
 `p : X ⟶ Y` *has uniform cohomological dimension at most `c` at `A`* if the higher direct
 images of `p`, and of all its base changes along objects of `Y_proét`, vanish above `c` on
 *every* pro-étale sheaf of `A`-modules:
@@ -169,6 +171,8 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
 /-- Blueprint `sk-def-sf-admissible`: exceptional-adjoint admissibility, clauses (1)–(3).
 This is blueprint `def-weil-exceptional-adjoint-admissibility` (Exceptional-adjoint
 admissibility), at a finite coefficient stage.
+
+Blueprint `def-weil-exceptional-adjoint-admissibility`: Exceptional-adjoint admissibility
 
 The ambient exceptional right adjoint datum (1), together with the preservation clauses for
 every right adjoint `G` of `Rf_!`: `G` preserves bounded constructibility and carries each
