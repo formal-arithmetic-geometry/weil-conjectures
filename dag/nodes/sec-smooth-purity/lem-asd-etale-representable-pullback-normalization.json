@@ -234,5 +234,30 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-b4cf9ee2d (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements, Stacks 03Q1(4), 04D3 and 001P, and the current blueprint route. All five steps correctly establish the specified adjunct’s normalization, invertibility and naturality in sheaves of sets. Edge cases and duplicate candidates checked; dependency closure has no cycles or missing nodes. Accepted the declared sets-adjunction tool use. No repairs needed; concrete checks recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleRepresentablePullbackNormalization",
+  "declaration": "AlgebraicGeometry.etaleRepresentablePullbackNormalization",
+  "declarations": [
+   "AlgebraicGeometry.etaleRepresentableBaseChangeMap",
+   "AlgebraicGeometry.etaleRepresentablePullbackComparison",
+   "AlgebraicGeometry.etaleRepresentablePullbackHomEquiv",
+   "AlgebraicGeometry.etaleRepresentablePullbackNormalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleRepresentablePullbackNormalization.lean",
+  "statement": "theorem etaleRepresentablePullbackNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) (P : Y.Etale) : IsIso (etaleRepresentablePullbackComparison f P) ∧ (∀ (H H' : Sheaf X.smallEtaleTopology (Type (u + 1))) (a : (Scheme.etaleSetPullback f).obj (Y.smallEtaleTopology.uliftYoneda.{u + 1}.obj P) ⟶ H) (g : H ⟶ H'), etaleRepresentablePullbackHomEquiv f P H' (a ≫ g) = etaleRepresentablePullbackHomEquiv f P H a ≫ g) ∧ etaleRepresentablePullbackHomEquiv f P (X.smallEtaleTopology.uliftYoneda.{u + 1}.obj ((MorphismProperty.Over.pullback @Etale ⊤ f).obj P)) (etaleRepresentablePullbackComparison f P) = 𝟙 (X.smallEtaleTopology.uliftYoneda.{u + 1}.obj ((MorphismProperty.Over.pullback @Etale ⊤ f).obj P)) ∧ (∀ d : (Scheme.etaleSetPullback f).obj (Y.smallEtaleTopology.uliftYoneda.{u + 1}.obj P) ⟶ X.smallEtaleTopology.uliftYoneda.{u + 1}.obj ((MorphismProperty.Over.pullback @Etale ⊤ f).obj P), (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ f) (Type (u + 1)) (Y.smallGrothendieckTopology @Etale) (X.smallGrothendieckTopology @Etale)).homEquiv _ _ d).hom.app (op P) (ULift.up (𝟙 P)) = ULift.up (𝟙 ((MorphismProperty.Over.pullback @Etale ⊤ f).obj P))) ↔ d = etaleRepresentablePullbackComparison f P) ∧ (∀ (Q : Y.Etale) (t : P ⟶ Q), (Scheme.etaleSetPullback f).map (Y.smallEtaleTopology.uliftYoneda.{u + 1}.map t) ≫ etaleRepresentablePullbackComparison f Q = etaleRepresentablePullbackComparison f P ≫ X.smallEtaleTopology.uliftYoneda.{u + 1}.map ((MorphismProperty.Over.pullback @Etale ⊤ f).map t))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded etaleSetPullback and its constructed set adjunction, with Mathlib uliftYoneda into Type (u + 1). The three helper definitions give the specified beta, its adjunct c, and the adjunction/evaluation/inverse-evaluation Hom-bijection; they contain real data. Base change uses the recorded site functor, whose chosen pullback is P ×_Y X with the projection to X."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9b6d7984d",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, canonical constructions, and small-etale universe handling checked; scompile local/server confirmation passed."
  }
 }
