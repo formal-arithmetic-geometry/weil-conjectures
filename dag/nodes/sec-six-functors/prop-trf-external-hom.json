@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-trf-external-hom",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "External Hom; the $\\beta$ map",
@@ -18,38 +18,253 @@
  ],
  "proof": [
   {
-   "text": "Both sides are exact in each $E_i$, so devissage in both $E_i$ by the\ngeneration [lem-trf-devissage-generation] (generators $Rg_*j_!F$ with $F$ lisse with flat stalks on a\nstratum) reduces to $E_i=Rh_{i!}F_i$, where $h_i=g_ij_i$ with $g_i$ finite\nand $j_i$ open, and $F_i$ is lisse on $U_i$ with flat stalks. The stalks of\n$F_i$ are finite flat, hence free, over the local ring $A$, so $F_i$ is\nlocally finite free, hence perfect, and [prop-sf-dualizable-hom] gives\n$\\RHom_A(F_i,-)\\simeq F_i^\\vee\\otimes^{\\mathrm L}_A-$. The tensor–Hom\nand exceptional adjunctions ([lem-sf-tensor-hom]) give\n\n$$\n\\RHom_A(E_i,L_i)\\simeq Rh_{i*}\\RHom_A(F_i,h_i^!L_i)\n\\simeq Rh_{i*}\\bigl(F_i^\\vee\\otimes^{\\mathrm L}_Ah_i^!L_i\\bigr).\n$$",
+   "text": "Fix $L_1,L_2$. For fixed $E_2$, let $\\mathcal T_1(E_2)$ be the objects $E_1$ for which the specified $\\beta$ is invertible. The two sides are contravariant exact functors in $E_1$, and likewise in $E_2$: on the resolution models of [def-weil-derived-pullback-tensor-hom] and [def-pur-derived-internal-hom], tensor with a fixed K-flat complex carries a mapping cone to the mapping cone of the tensored map, and $\\mathcal Hom^\\bullet(-,I)$ carries a cone to the corresponding shifted cone. The evaluation maps defining $\\beta$ in [def-sf-kv-maps] respect these cone and shift identifications, using the tensor symmetry with its Koszul signs. All values remain in $D^b_{ctf}$ by [thm-sf-ctf-stability]. Thus [lem-sf-triangle-two-out-of-three], applied on the opposite triangulated category, gives cone closure of $\\mathcal T_1(E_2)$. It contains zero and is closed under shifts and finite sums. It is closed under direct summands: if $E_1$ is a retract of $E'_1$, naturality makes $\\beta(E_1,E_2)$ a retract in the arrow category of $\\beta(E'_1,E_2)$; composing the retraction and section with the inverse gives its inverse. Consequently it is thick. For fixed $E_1$, the two functors in $E_2$ are again contravariant exact by the displayed cone models and $\\beta$ respects shifts. Applying [lem-sf-triangle-two-out-of-three] gives cone closure in $E_2$; zero, shifts and finite sums are preserved, and a retraction in $E_2$ gives a retraction of the two arrows by naturality. If $s_A,r_A,s_B,r_B$ are the resulting sections and retractions of source and target and $b$ is the invertible larger arrow, $r_A b^{-1}s_B$ is an inverse of the retract arrow, as follows by naturality and $r_As_A=r_Bs_B=1$. Thus this class in $E_2$ is thick too. By [lem-trf-devissage-generation] it is therefore enough to prove $\\beta$ for every pair of generators $E_i=Rg_{i*}j_{i!}F_i$. Explicitly, first fix a generator $E_2$ and extend from generator $E_1$ to all $E_1$; then fix any $E_1$ and extend from generator $E_2$ to all $E_2$. This is thick generation, not replacement of lisse sheaves by constant sheaves.",
    "uses": [
-    "lem-trf-devissage-generation",
-    "prop-sf-dualizable-hom",
-    "lem-sf-tensor-hom"
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pur-derived-internal-hom",
+    "def-sf-kv-maps",
+    "thm-sf-ctf-stability",
+    "lem-sf-triangle-two-out-of-three",
+    "lem-trf-devissage-generation"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.proof.md",
+    "place": "first paragraph: exactness and dévissage in both $E_i$"
+   }
   },
   {
-   "text": "Writing $h=h_1\\times h_2$ and $F=F_1\\boxtimes_A^{\\mathrm L}F_2$, so that\n$F^\\vee\\simeq F_1^\\vee\\boxtimes_A^{\\mathrm L}F_2^\\vee$ and\n$E_1\\boxtimes_A^{\\mathrm L}E_2\\simeq Rh_!F$ by the $!$-Kunneth map, the\ncomparison becomes\n\n$$\nRh_{1*}\\bigl(F_1^\\vee\\otimes h_1^!L_1\\bigr)\\boxtimes_A^{\\mathrm L}\nRh_{2*}\\bigl(F_2^\\vee\\otimes h_2^!L_2\\bigr)\n\\xrightarrow[\\text{twice}]{\\mathrm{Ku}_*}\nRh_*\\bigl(F^\\vee\\otimes(h_1^!L_1\\boxtimes_A^{\\mathrm L}h_2^!L_2)\\bigr)\n\\xrightarrow{Rh_*(1\\otimes\\alpha)}\nRh_*\\bigl(F^\\vee\\otimes h^!(L_1\\boxtimes_A^{\\mathrm L}L_2)\\bigr),\n$$\n\nwhose target is $\\RHom_A(E_1\\boxtimes_A^{\\mathrm L}E_2,L_1\\boxtimes_A^{\\mathrm L}L_2)$\nby the same identifications;\nthe first arrow being [lem-trf-ordinary-kunneth] applied in each\nfactor (after the symmetry of the tensor product), and the second the exceptional Kunneth\n[prop-trf-exceptional-kunneth]. To identify this composite with the\nspecified $\\beta$, take ordinary and then exceptional adjoints: both\npaths become the tensor product of the two evaluation maps after the\nprojection formula. Hence $\\beta$ itself is an isomorphism.",
+   "text": "For these generators write $h_i=g_i\\circ j_i:U_i\\to X_i$. Here $g_i:\\overline U_i\\hookrightarrow X_i$ is closed, hence proper by [lem-weil-pbc-closed-immersion-proper], and $j_i:U_i\\hookrightarrow\\overline U_i$ is open. This is a compactification of $h_i$; the defining compactification formula [def-compact-support-direct-image-detailed] gives $E_i=Rh_{i!}F_i$ without assuming $h_i$ proper. The ring $A=A_{E,n}$ is finite local by [def-weil-l-adic-coefficient-extension]. The lisse constructible $F_i$ of [lem-trf-devissage-generation] has finite stalks by [def-weil-finite-torsion-constructibility] and is locally constant; hence it is locally a finite constant $A$-module with flat stalks. Each such module is free by [lem-weil-pbc-finite-flat-local-free], and its rank is finite because the module is finite. Thus $F_i$ is locally finite free, a site-perfect object concentrated in degree zero. Put $F_i^\\vee=R\\mathcal Hom_A(F_i,A_{U_i})$ and $C_i=F_i^\\vee\\otimes_A^L h_i^!L_i$. The exceptional inverse image here is the constructible one of [def-trf-admissibility]; in particular $h_i^!L_i$ is in $D^b_{ctf}(U_i,A)$. The dual $F_i^\\vee$ is locally finite free too, and tensor and ordinary direct-image preservation in [thm-sf-ctf-stability] give $C_i\\in D^b_{ctf}(U_i,A)$ and $Rh_{i*}C_i\\in D^b_{ctf}(X_i,A)$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-compact-support-direct-image-detailed",
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-finite-torsion-constructibility",
+    "lem-trf-devissage-generation",
+    "lem-weil-pbc-finite-flat-local-free",
+    "def-trf-admissibility",
+    "thm-sf-ctf-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.proof.md",
+    "place": "first paragraph: $h_i=g_i j_i$, finite flat stalks, and locally finite-free $F_i$"
+   }
+  },
+  {
+   "text": "Apply [prop-sf-dualizable-hom] to the locally finite-free $F_i$ and [lem-sf-tensor-hom] to $(h_i,F_i,L_i)$. Their canonical isomorphisms give\n$$\nH_i:=R\\mathcal Hom_A(E_i,L_i)\\simeq Rh_{i*}R\\mathcal Hom_A(F_i,h_i^!L_i)\\simeq Rh_{i*}C_i.\n$$\nSet $h=h_1\\times h_2$, $F=F_1\\boxtimes_A^L F_2$, and $L=L_1\\boxtimes_A^L L_2$. Tensoring local finite-free bases makes $F$ locally finite free and identifies its evaluation dual with $F_1^\\vee\\boxtimes_A^L F_2^\\vee$: on a trivializing cover the pairing sends $(\\lambda_1\\otimes\\lambda_2)\\otimes(v_1\\otimes v_2)$ to $\\lambda_1(v_1)\\lambda_2(v_2)$, and changes of bases preserve this pairing. Clause (i) of [def-sf-kv-maps], with its isomorphism provided by [thm-sf-kunneth-relative] over $X_1\\times X_2$, identifies $E:=E_1\\boxtimes_A^L E_2$ with $Rh_!F$. Thus the same tensor–Hom and perfect-evaluation isomorphisms identify\n$$\nR\\mathcal Hom_A(E,L)\\simeq Rh_*\\bigl(F^\\vee\\otimes_A^L h^!L\\bigr).\n$$\nAll objects to which these statements are applied are in their finite-Tor constructible domains by Step 2 and [thm-sf-ctf-stability]; $h$ is again separated finite type and has the constructible exceptional adjoint.",
+   "uses": [
+    "prop-sf-dualizable-hom",
+    "lem-sf-tensor-hom",
+    "def-sf-kv-maps",
+    "thm-sf-kunneth-relative",
+    "thm-sf-ctf-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.proof.md",
+    "place": "first displayed formula and second paragraph: dual of $F$ and the $!$-Künneth identification"
+   }
+  },
+  {
+   "text": "The ordinary Künneth map [lem-trf-ordinary-kunneth] is used twice, with its actual finite-Tor hypotheses. First use $f=h_1$, auxiliary scheme $X_2$, and auxiliary object $Rh_{2*}C_2$, which is allowed by Step 2. Next use $f=h_2$, auxiliary scheme $U_1$, and object $C_1$, exchanging the two factors. Applying $R(h_1\\times\\operatorname{id}_{X_2})_*$ to this second isomorphism and using the ordinary composition isomorphism [lem-weil-derived-direct-image-composition] gives the isomorphism\n$$\n\\begin{aligned}\nH_1\\boxtimes_A^L H_2\n&\\simeq Rh_{1*}C_1\\boxtimes_A^L Rh_{2*}C_2\\\\\n&\\xrightarrow{\\sim}R(h_1\\times\\operatorname{id}_{X_2})_*(C_1\\boxtimes_A^L Rh_{2*}C_2)\\\\\n&\\xrightarrow{\\sim}R(h_1\\times\\operatorname{id}_{X_2})_*R(\\operatorname{id}_{U_1}\\times h_2)_*(C_1\\boxtimes_A^L C_2)\\\\\n&\\xrightarrow{\\sim}Rh_*(C_1\\boxtimes_A^L C_2).\n\\end{aligned}\n$$\nDenote this composite by $K_*$. The finite-level clause of the composition theorem applies on the pro-étale derived categories; no integral or common-stage coefficient passage is involved.",
    "uses": [
     "lem-trf-ordinary-kunneth",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.proof.md",
+    "place": "second paragraph, first displayed arrow: ordinary Künneth twice"
+   }
+  },
+  {
+   "text": "Distribute the external tensors and use the dual pairing from Step 3 to identify\n$$\nC_1\\boxtimes_A^L C_2\\simeq F^\\vee\\otimes_A^L(h_1^!L_1\\boxtimes_A^L h_2^!L_2).\n$$\nThe exceptional comparison [prop-trf-exceptional-kunneth] for $(h_1,h_2,L_1,L_2)$ is an isomorphism\n$\\alpha_h:h_1^!L_1\\boxtimes_A^L h_2^!L_2\\to h^!L$.\nTensor it with $F^\\vee$, apply $Rh_*$, and compose with $K_*$ and the inverse of the target identification in Step 3. This produces an isomorphism\n$$\n\\gamma:H_1\\boxtimes_A^L H_2\\xrightarrow{\\sim}R\\mathcal Hom_A(E,L).\n$$\nHere the admissibility used is precisely that of the constructible exceptional adjoints in Step 2, not an ambient exceptional-adjoint datum.",
+   "uses": [
     "prop-trf-exceptional-kunneth"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.proof.md",
+    "place": "second paragraph, second displayed arrow: $Rh_*(1\\otimes\\alpha)$"
+   }
+  },
+  {
+   "text": "We verify that $\\gamma$ is the specified evaluation-defined $\\beta$, rather than just an unspecified isomorphism. Let $q_i:h_i^*H_i\\to C_i$ be the ordinary counit after $H_i\\simeq Rh_{i*}C_i$, using the ordinary adjunction in [fix-prop-adjunctions] (1); put $e_i:F_i\\otimes_A^L C_i\\to h_i^!L_i$ for the perfect-evaluation pairing, and $\\mu_i:Rh_{i!}h_i^!L_i\\to L_i$ for the constructible exceptional counit in [def-trf-admissibility]. The canonical tensor–Hom isomorphism [lem-sf-tensor-hom] says, on transposing, that evaluation $E_i\\otimes_A^L H_i\\to L_i$ is\n$$\nE_i\\otimes_A^L H_i\\xrightarrow{\\operatorname{PF}_{h_i}}\nRh_{i!}(F_i\\otimes_A^L h_i^*H_i)\n\\xrightarrow{Rh_{i!}(e_i\\circ(1\\otimes q_i))}\nRh_{i!}h_i^!L_i\\xrightarrow{\\mu_i}L_i.\n$$\nThe projection maps here are the natural isomorphisms of [fix-prop-projection-formula]; their second arguments $H_i$ have finite Tor amplitude by Step 2. By the definition of the canonical ordinary comparison, the ordinary transpose of $K_*$ is $q_1\\boxtimes q_2$, under $h^*(H_1\\boxtimes H_2)=h_1^*H_1\\boxtimes h_2^*H_2$. By [def-sf-kv-maps] (ii), the exceptional transpose of $\\alpha_h$ is $\\mathrm{Ku}_!$ followed by $\\mu_1\\boxtimes\\mu_2$. Consequently, transposing $\\gamma$ first across tensor–Hom and then across the ordinary and exceptional adjunctions gives\n$$\n\\begin{aligned}\nE\\otimes_A^L(H_1\\boxtimes_A^L H_2)\n&\\longrightarrow Rh_!\\bigl(F\\otimes_A^L h^*(H_1\\boxtimes_A^L H_2)\\bigr)\\\\\n&\\xrightarrow{Rh_!((e_1\\boxtimes e_2)\\circ(1\\otimes(q_1\\boxtimes q_2)))}\nRh_!(h_1^!L_1\\boxtimes_A^L h_2^!L_2)\\\\\n&\\xrightarrow{\\mathrm{Ku}_!}Rh_{1!}h_1^!L_1\\boxtimes_A^L Rh_{2!}h_2^!L_2\n\\xrightarrow{\\mu_1\\boxtimes\\mu_2}L.\n\\end{aligned}\n$$\nThe first arrow is the compact-support projection map, after $E\\simeq Rh_!F$. The canonical $\\mathrm{Ku}_!$ is the composite of base-change and projection maps in [thm-sf-kunneth-relative]. The symmetry, iterated-product, base-change and identity-factor projection-formula clauses (i)–(iv) of [lem-sf-kunneth-coherence] give the compatibility used here: pull the factor maps to $X_1\\times X_2$, insert $H_1,H_2$ as identity-map factors, and regroup the four factors as $(F_1,H_1)$ and $(F_2,H_2)$. Using these clauses, the displayed composite is the external product of the two preceding formulas for evaluation, with only the tensor symmetry moving $H_1$ past $E_2$. It is therefore exactly the tensor–Hom transpose defining $\\beta$ in [def-sf-kv-maps] (iii). Injectivity of the adjunction bijections gives $\\gamma=\\beta$. Hence $\\beta$ is invertible for generators, and Step 1 proves it for all $E_i$. Finally, evaluation, tensor symmetry and tensor–Hom transposition are natural (contravariantly in $E_i$, covariantly in $L_i$), so the specified isomorphism is natural in all four variables, independent of the generator choices.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "def-trf-admissibility",
+    "lem-sf-tensor-hom",
+    "fix-prop-projection-formula",
+    "def-sf-kv-maps",
+    "thm-sf-kunneth-relative",
+    "lem-sf-kunneth-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.proof.md",
+    "place": "last sentences: ordinary and exceptional adjoints, evaluation, and the projection formula"
+   }
   }
  ],
  "proof_deps": [
-  "lem-trf-devissage-generation",
-  "prop-sf-dualizable-hom",
+  "def-compact-support-direct-image-detailed",
+  "def-pur-derived-internal-hom",
+  "def-sf-kv-maps",
+  "def-weil-finite-torsion-constructibility",
+  "def-trf-admissibility",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-l-adic-coefficient-extension",
+  "fix-prop-adjunctions",
+  "fix-prop-projection-formula",
+  "lem-sf-kunneth-coherence",
   "lem-sf-tensor-hom",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-trf-devissage-generation",
   "lem-trf-ordinary-kunneth",
-  "prop-trf-exceptional-kunneth"
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-flat-local-free",
+  "prop-sf-dualizable-hom",
+  "prop-trf-exceptional-kunneth",
+  "thm-sf-ctf-stability",
+  "thm-sf-kunneth-relative"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.proof.md",
+  "place": "both proof paragraphs; details of thick closure, the two ordinary Künneth applications, and the final transpose calculation supplied explicitly"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "External Hom Kunneth isomorphism for constructible finite Tor complexes",
+   "results": "Hits: groupHomologyIso; Rep.standardResolution.extIso; Rep.torIso; HomologicalComplex₂.total.mapIso_hom; HomologicalComplex.rightUnitor'; HomologicalComplex.biprodXIso; CategoryTheory.ShortComplex.isIso_homologyMap_of_isIso; CochainComplex.isKProjective_of_iso (none state the external-Hom comparison).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of derived internal Hom objects commutes with external products",
+   "results": "Hits: Commute.tprod; CategoryTheory.Types.tensorProductAdjunction; CategoryTheory.MonoidalCategory.externalProductBifunctor_obj_obj; CategoryTheory.CartesianMonoidalCategory.fullSubcategory_tensorHom_hom; CategoryTheory.Functor.MonoidalRepresentableBy.tensorObj; CategoryTheory.MonoidalCategory.externalProductCompDiagIso; CategoryTheory.MonoidalCategory.prodCompExternalProduct_hom_app (none state the comparison).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RHom, externalProduct, IsIso",
+   "results": "0 hits; loogle: unknown identifier 'RHom'",
+   "date": "2026-10-17",
+   "verdict": "invalid query (unknown identifier); not evidence of absence; superseded by the valid Loogle searches below"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory, MonoidalClosed, externalProduct",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory'",
+   "date": "2026-10-17",
+   "verdict": "invalid query (unknown identifier); not evidence of absence; superseded by the valid Loogle searches below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "External Hom Kunneth isomorphism for constructible sheaves",
+   "results": "Hits: LightCondensed.ihomPoints_symm_comp; instMonoidalClosedLightCondSet; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; instMonoidalClosedCondensedSet; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.free_internallyProjective_iff_tensor_condition (none state the comparison).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite flat module over a local ring is finite free",
+   "results": "Hit: Module.free_of_flat_of_isLocalRing (Mathlib/RingTheory/LocalRing/Module), an exact algebraic lemma used for the stalk reduction.",
+   "date": "2026-10-17",
+   "verdict": "generalization: exact result is recorded by existing node lem-weil-pbc-finite-flat-local-free"
+  },
+  {
+   "tool": "grep",
+   "query": "externalProduct.*RHom",
+   "results": "Hits: Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:409,418 (unrelated external-product simplification lemmas).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Finite.*Flat.*Free|flat.*free.*local",
+   "results": "Hits: Mathlib/RingTheory/Flat/LocallyFree.lean:11 and Mathlib/RingTheory/LocalRing/Module.lean:304, theorem Module.free_of_flat_of_isLocalRing.",
+   "date": "2026-10-17",
+   "verdict": "match: Module.free_of_flat_of_isLocalRing, already recorded by lem-weil-pbc-finite-flat-local-free"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived external product commutes with internal Hom for constructible finite Tor etale sheaves over an algebraically closed field",
+   "results": "8 hits: LightCondensed monoidal and internal-Hom structures/ihomPoints and AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction. These concern underived condensed modules or structure-sheaf modules; none states the derived constructible external-Hom comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kunneth isomorphism for external products of derived internal Hom of constructible sheaves",
+   "results": "8 hits: CategoryTheory.MonoidalCategory.externalProduct, externalProductCompDiagIso, prodCompExternalProduct and their component lemmas; ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitLeft and its At version; Functor.mapDerivedCategoryFactorsh_hom_app. Read Monoidal/ExternalProduct/Basic.lean: these are pointwise tensor products of diagrams, not constructible sheaves on scheme products.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.externalProductBifunctor",
+   "results": "11 hits: externalProductBifunctor, externalProductCompDiagIso, externalProductSwap, object/map/component formulas, and IsSifted.factorization_prodComparison_colim. Read Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean: diagrams on product categories, no derived sheaf internal-Hom theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "externalProduct.*(ihom|internalHom|RHom)|(ihom|internalHom|RHom).*externalProduct",
+   "results": "3 hits: Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:357,409,418. Read these lines: tensorHom and externalProductBifunctor simplification in Day convolution associator/pentagon proofs, unrelated to the requested theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of internal Hom objects on two schemes compared to internal Hom of their external tensor products",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, Triplet.specTensorTo_snd_assoc, tensorCongr_SpecTensorTo_assoc, Triplet.specTensorTo_snd, Triplet.specTensorTo_fst_assoc, Triplet.specTensorTo_fst, tensorCongr_SpecTensorTo, ofPointTensor_SpecTensorTo. All concern scheme fibre-product points and residue-field tensors, not derived internal Hom.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed",
+   "results": "12 hits: MonoidalClosed, closed, mk, internalHom, internalHomAdjunction₂, instIsRightAdjointObjOppositeFunctorInternalHom, ofEquiv, internalHom_obj, internalHomAdjunction₂_adj, internalHom_map, ofEquiv_curry_def, ofEquiv_uncurry_def. These supply the general closed-category structure and adjunction, not geometric external-Hom invertibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth|Künneth|external.*[Hh]om",
+   "results": "5 hits: Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:244 (read: precomposition by an ordinary morphism), Monoidal/DayConvolution.lean:403,409,418 and Limits/Sifted.lean:171 (diagram external products). No Künneth or geometric external-Hom theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom of external tensor product on product of etale sites is tensor product of internal Homs for constructible finite Tor complexes",
+   "results": "8 hits: LightCondensed monoidal-closed structures, internallyProjective tensor criteria and free internallyProjective tensor criteria. All concern underived light condensed modules, not constructible derived sheaves on products of schemes.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "externalProduct.*(Hom|hom)|internalHom.*tensor",
+   "results": "4 hits: Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:403,409,418 and Mathlib/CategoryTheory/Limits/Sifted.lean:171. The returned lines use diagram external products in tensor simplifications and colimit comparisons; none is the geometric derived external-Hom comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.externalProductSwap",
+   "results": "3 hits: externalProductSwap and its hom_app_app/inv_app_app formulas. This is the swap isomorphism for diagrams indexed by product categories in a braided monoidal category; it does not assert external-Hom invertibility for constructible sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -80,5 +295,21 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-kunneth-verdier"
+ "unit": "sk-thm-sf-kunneth-verdier",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-trf-external-hom",
+  "worker": "stage1",
+  "summary": "Audited and replaced the earlier sandbox attempt. Kept the source statement and six-functors unit route. Expanded to six proof steps with explicit thick-generation closure, compactification and locally finite-free checks, source/target Hom identifications, two typed ordinary Künneth applications, exceptional Künneth, and the evaluation transpose calculation. Reused existing nodes only; corrected the claim about the Lean structure projection, which is not an unconditional proof and states only existence of some isomorphism. Repeated real Mathlib searches through msearch.py and read the candidate files.",
+  "blueprint": "Steps 1–2 realize the first proof paragraph through the locally finite-free reduction; Step 3 realizes its tensor–Hom formula and the second paragraph’s F-dual and shriek-product identifications; Steps 4–5 realize the two displayed comparison arrows; Step 6 expands the final evaluation/mate calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N8-d8529c135",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-d8529c135 (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery and found no faults, so nothing was repaired. Changes: none (no fixes, no drop_nodes, no tool_uses). STATEMENT: identical in master and main-20261015. It is true over a field, and checked at X_i a point (perfect complexes), at i_*A on A^1 and at zero objects. beta matches def-sf-kv-maps (iii) including its blueprint_update. SHAPE AND ROUTE: one commit with only the item and the report. No new nodes. proof_deps equals the union of the step uses. All 21 cited nodes lie on the transitive route of sk-thm-sf-kunneth-verdier, so no tool use is needed, and no SGA source is cited. STEPS: (1) lem-trf-devissage-generation gives thick generation in D(X,A); lem-sf-triangle-two-out-of-three has its exactness and shift hypotheses checked on the K-flat/K-injective models; the retract inverse r_A b^-1 s_B holds in both directions. (2) The generator closed immersion is proper (lem-weil-pbc-closed-immersion-proper), so def-compact-support-direct-image-detailed gives E_i=Rh_{i!}F_i. A_{E,n} is finite local (def-weil-l-adic-coefficient-extension item 4); stalks are finite (def-weil-finite-torsion-constructibility) and free (lem-weil-pbc-finite-flat-local-free). h^! preserves D^b_ctf by def-trf-admissibility, tensor and Rf_* by thm-sf-ctf-stability (ii)/(iii). (3) prop-sf-dualizable-hom applies to the site-perfect F_i only; lem-sf-tensor-hom (blueprint_update read) and def-sf-kv-maps (i) give E=Rh_!F. (4) lem-trf-ordinary-kunneth is applied twice, with (h_1,X_2,Rh_{2*}C_2) and (h_2,U_1,C_2,C_1) swapped, composed by lem-weil-derived-direct-image-composition (1). (5) prop-trf-exceptional-kunneth applies to (h_1,h_2,L_1,L_2). (6) Unwinding the Yoneda chain of lem-sf-tensor-hom gives mu, then adjoint, then PF, in the stated PF direction. The ordinary comparison's adjoint is counit times identity, giving q_1 times q_2 with the composite counit of fix-prop-adjunctions (3). alpha's transpose comes from def-sf-kv-maps (ii); Ku_!/PF coherence comes from lem-sf-kunneth-coherence (i)-(iv). So gamma equals beta. Minor, unchanged: step 6 names fix-prop-adjunctions (1) where clause (3) is also used, but the node cited is correct. DUPLICATES: a grep for external-Hom terms found def-sf-kv-maps, thm-trf-kunneth-verdier (which uses this item), lem-sf-hom-comparison-finite-free (a different statement) and unrelated Picard-framework nodes. None duplicates the item. LEAN: the HasKunnethComparisons.externalHom projection has a producer containing sorry and states only that some isomorphism exists, so it is not attached. Full checks are in review.md."
+ }
 }
