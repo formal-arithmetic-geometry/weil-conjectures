@@ -1,0 +1,87 @@
+{
+ "id": "lem-trf-simplicial-derived-colimit-computation",
+ "kind": "statement",
+ "title": "Contractible representable evaluations compute derived colimits, with reindexing naturality",
+ "statement": "Fix universes as in [def-weil-size-convention]. Let $\\mathcal D$ be a small ordinary category in the working universe, let $R$ be a commutative ring, and let $F:\\mathcal D\\to\\operatorname{Mod}_R$ be a covariant functor. Write $\\mathbf H(\\mathcal D,F)=\\mathbf L\\operatorname{colim}_{\\mathcal D}F\\in D(R)$, where the left derived colimit is computed from projective resolutions in the abelian functor category and derived categories mean [def-weil-abstract-derived-category]. Let $Q:\\Delta^{\\mathrm{op}}\\to\\mathcal D$ be a simplicial object [def-weil-pbc-simplicial-object] such that for every $T\\in\\mathcal D$ the simplicial set $\\operatorname{Hom}_{\\mathcal D}(T,Q_\\bullet)$ is homotopy equivalent to a singleton. Put $s(F(Q))^{-n}=F(Q_n)$ with differential $\\sum_i(-1)^iF(d_i)$, and zero terms in positive degrees. There is a canonical isomorphism $a_Q:s(F(Q))\\xrightarrow{\\sim}\\mathbf H(\\mathcal D,F)$, natural in $F$ and in $Q$. More precisely, the latter object has the bar-complex model with degree $-n$ equal to $\\bigoplus_{T_0\\to\\cdots\\to T_n}F(T_0)$, whose faces delete a vertex, applying $F$ to the first arrow for the first face. For a functor $u:\\mathcal D\\to\\mathcal D'$, a ring map $\\rho:R\\to R'$, and a natural transformation $\\theta:F\\to\\operatorname{Res}_\\rho(F'\\circ u)$, these bar complexes give a canonical map $\\mathbf H(u,\\theta):\\mathbf H(\\mathcal D,F)\\to\\operatorname{Res}_\\rho\\mathbf H(\\mathcal D',F')$ by $(T_0\\to\\cdots\\to T_n,x)\\mapsto(uT_0\\to\\cdots\\to uT_n,\\theta_{T_0}(x))$. It preserves identities and composition. If $Q'$ satisfies the same contractibility hypothesis in $\\mathcal D'$ and $k:uQ\\to Q'$ is a simplicial morphism, then $a_{Q'}\\circ s(F'(k)\\circ\\theta_Q)=\\mathbf H(u,\\theta)\\circ a_Q$ in $D(R)$, with restriction of scalars on all target objects. No contractibility assumption on $uQ$ is required. Restriction of scalars in this formula is degreewise restriction on the displayed bar complexes, hence is compatible with their comparison isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), applied to C=D^op; Tags 08PG (example-left-derived-colimits) and 08PH (example-morphism-categories), and Tag 08PD (remark-morphism-fibred-categories). The bar-complex formulas give the stated naturality, also under restriction of coefficient scalars."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "contractible representable values of cosimplicial object compute left derived colimit of any module presheaf",
+   "results": "8 hits; top=['PresheafOfModules.colimitCocone_pt', 'PresheafOfModules.isColimitFreeYonedaCoproductsCokernelCofork', 'PresheafOfModules.freeYonedaCoproductsCokernelCofork', 'PresheafOfModules.colimitCocone', 'PresheafOfModules.isColimitColimitCocone', 'PresheafOfModules.freeYonedaCoproduct', 'PresheafOfModules.colimitPresheafOfModules', 'PresheafOfModules.colimitPresheafOfModules_obj']; note=; digest=9aec7f72b469794c. Full output retained as repair-search-*.txt in the sandbox.",
+   "date": "2026-10-18",
+   "verdict": "no match: hits give ordinary presheaf colimits, free Yoneda generators, Dold-Kan, or group bar resolutions; none computes the derived colimit on arbitrary contractible representable evaluations or states reindexing naturality. Read ModuleCat/Presheaf/Generator.lean:95-160 and the returned types."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived colimit computed by evaluating presheaf on cosimplicial resolution natural with respect to functors",
+   "results": "8 hits; top=['CategoryTheory.Limits.colimitIsoFlipCompColim', 'CategoryTheory.CosimplicialObject.instHasColimits', 'CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation', 'PresheafOfModules.colimitPresheafOfModules', 'AlgebraicGeometry.PresheafedSpace.colimit', 'PresheafOfModules.hasColimit', 'AlgebraicGeometry.PresheafedSpace.colimitCocone', 'CategoryTheory.Limits.sigmaObjIso']; note=; digest=9ed890b9ce38a362. Full output retained as repair-search-*.txt in the sandbox.",
+   "date": "2026-10-18",
+   "verdict": "no match: hits give ordinary presheaf colimits, free Yoneda generators, Dold-Kan, or group bar resolutions; none computes the derived colimit on arbitrary contractible representable evaluations or states reindexing naturality. Read ModuleCat/Presheaf/Generator.lean:95-160 and the returned types."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerived\", \"colim\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Full output retained as repair-search-*.txt in the sandbox.",
+   "date": "2026-10-18",
+   "verdict": "no match: hits give ordinary presheaf colimits, free Yoneda generators, Dold-Kan, or group bar resolutions; none computes the derived colimit on arbitrary contractible representable evaluations or states reindexing naturality. Read ModuleCat/Presheaf/Generator.lean:95-160 and the returned types."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]osimplicial|[Cc]olim [sub=CategoryTheory/Abelian/LeftDerived]",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Full output retained as repair-search-*.txt in the sandbox.",
+   "date": "2026-10-18",
+   "verdict": "no match: hits give ordinary presheaf colimits, free Yoneda generators, Dold-Kan, or group bar resolutions; none computes the derived colimit on arbitrary contractible representable evaluations or states reindexing naturality. Read ModuleCat/Presheaf/Generator.lean:95-160 and the returned types."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology of a small category bar complex derived colimit contractible cosimplicial resolution",
+   "results": "8 hits; top=['Rep.barResolution.extIso', 'AlgebraicTopology.DoldKan.Γ₀.obj', 'CategoryTheory.Abelian.DoldKan.N', 'AlgebraicTopology.DoldKan.N₁_obj_p', 'AlgebraicTopology.NormalizedMooreComplex.objX_zero', 'AlgebraicTopology.normalizedMooreComplex', 'Rep.barResolution', 'Rep.barResolution_complex']; note=; digest=2c744902089b6030. Full output retained as repair-search-*.txt in the sandbox.",
+   "date": "2026-10-18",
+   "verdict": "no match: hits give ordinary presheaf colimits, free Yoneda generators, Dold-Kan, or group bar resolutions; none computes the derived colimit on arbitrary contractible representable evaluations or states reindexing naturality. Read ModuleCat/Presheaf/Generator.lean:95-160 and the returned types."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-resolution-coherence",
+  "date": "2026-10-18",
+  "group": "NV"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Contractible representable evaluations compute derived colimits, with reindexing naturality.",
+   "via": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

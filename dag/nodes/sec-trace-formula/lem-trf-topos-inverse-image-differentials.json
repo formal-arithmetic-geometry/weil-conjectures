@@ -13,9 +13,76 @@
   "def-weil-pbc-kahler-differentials",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the explicit relation-map presentation of sheaf differentials. For a presheaf ring map A→B, the free B-module sheaves on B×B, B×B, and A map to the free B-module sheaf on B by the additivity, Leibniz, and base-ring relations. Tag 08TP identifies the cokernel with the sheafification of U↦Ω_{B(U)/A(U)}, and identifies the generator [b] with the universal derivation. Applying this to the given A→B gives the stated model for Ω_{B/A}.",
+   "uses": [
+    "lem-trf-sheafified-module-differentials-cokernel",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, lemma-differentials-sheafify and proof"
+   }
+  },
+  {
+   "text": "By the exactness lemma for geometric inverse image, f^{-1} on transported abelian/module sheaves preserves the finite limits and cokernels appearing in this relation presentation. By the free-module comparison, f^{-1} of each free f-module term is canonically the corresponding free f^{-1}B-module term, with all canonical generators and finite-product comparisons preserved. Applying f^{-1} to the relation map therefore gives exactly the relation map defining Ω_{f^{-1}B/f^{-1}A}; exactness identifies its cokernel with f^{-1}Ω_{B/A}.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-trf-geometric-inverse-image-free-module",
+    "def-trf-geometric-morphism",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TQ, lemma-pullback-differentials and proof"
+   }
+  },
+  {
+   "text": "The isomorphism is canonical because it is induced by the unique map between the two cokernels carrying the inverse image of each generator db to the generator d(f^{-1}b). The relation equations (additivity, Leibniz, and annihilation of A) show that this map is well-defined; the same construction in the opposite direction is inverse by the cokernel universal property. Under this identification the inverse image of the universal derivation is the universal derivation.",
+   "uses": [
+    "lem-trf-sheafified-module-differentials-cokernel",
+    "lem-trf-geometric-inverse-image-free-module",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TQ, compatibility with universal derivations in the displayed cokernel construction"
+   }
+  },
+  {
+   "text": "For a commutative square of sheaf ring maps, every comparison map in the relation presentations is functorial in the ring maps and in f^{-1}; hence the induced differential isomorphisms commute with the square. For an identity geometric morphism, the comparison fixes every generator and is the identity by cokernel uniqueness. For composable geometric morphisms, both the direct composite comparison and the composite of the two comparisons fix every generator and use the same finite-product and free-module identifications, so they agree by the same uniqueness argument.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-free-module",
+    "lem-trf-geometric-inverse-image-exact",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TQ and the naturality/composition clause of the imported statement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-trf-geometric-inverse-image-free-module",
+  "lem-trf-sheafified-module-differentials-cokernel"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 08TP (lemma-differentials-sheafify) and 08TQ (lemma-pullback-differentials); naturality and composition follow from the universal derivation and cokernel uniqueness."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -68,7 +135,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-affine-cotangent-comparison",
@@ -80,7 +147,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Sheaf cotangent stalks, section maps and ring localization. Underived input: Inverse image preserves sheaf differentials.",
+   "place": "Supporting ring/sheaf input: sheaf cotangent stalks, section maps and ring localization. Underived input: inverse image preserves sheaf differentials, proved by the sheafified free-module relation-map presentation and exactness of geometric inverse image.",
    "via": [
     "lem-trf-affine-cotangent-comparison",
     "lem-trf-lci-cotangent-presentation",
@@ -98,5 +165,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-topos-inverse-image-differentials",
+  "worker": "stage1",
+  "summary": "Split the imported statement into the Stacks 08TP sheafified relation-map presentation, exactness of geometric inverse image on abelian/module sheaves, and the free-module comparison under inverse image. The final four steps construct the cokernel isomorphism, check universal derivations, and derive naturality and identity/composite coherence by generator and universal-property uniqueness. No statement clauses were changed.",
+  "blueprint": "Realizes the underived-input sentence in lem-trf-local-term-locality: sheaf cotangent presentation and inverse-image preservation of sheaf differentials.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "why": "Generic adjunction lift supplies abelian-group/module structure on inverse images; the trace-formula unit has no more specific algebraic-structure node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q42-24690dc35",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-24690dc35 (reviewer sub-agent of L); spot-checked: Two repairable faults found. The free-module node is ill-typed: with f:Sh(D)→Sh(C), its B and E must be sheaves on Sh(C), not “on the source”; corrected JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-geometric-inverse-image-free-module.json. The item’s created.item incorrectly names lem-trf-affine-cotangent-comparison; corrected in fixes/dag/nodes/sec-trace-formula/lem-trf-topos-inverse-image-differentials.json. Full review and source checks are in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
