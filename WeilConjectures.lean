@@ -3680,6 +3680,12 @@ public import WeilConjectures.RingTheory.Etale.DepthTwo.LocalToGlobal
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Rank
 public import WeilConjectures.RingTheory.Etale.DepthTwo.RegularQuotient
 public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurity
+public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurityDiagonal
+public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurityFiber
+public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurityFinite
+public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurityLocal
+public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPuritySpread
+public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurityStep
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Splitting
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Spreading
 public import WeilConjectures.RingTheory.Etale.IntegralClosureSpreading
@@ -3749,6 +3755,7 @@ public import WeilConjectures.RingTheory.IndStandardSmooth
 public import WeilConjectures.RingTheory.InertiaUnramifiedPoint
 public import WeilConjectures.RingTheory.IntegralIdempotentAnnihilatingPolynomial
 public import WeilConjectures.RingTheory.IntegrallyClosed.DepthTwo
+public import WeilConjectures.RingTheory.IntegrallyClosed.RegularPairAvoid
 public import WeilConjectures.RingTheory.JacobianPresentationLift
 public import WeilConjectures.RingTheory.Kaehler.LocalizationPolynomial
 public import WeilConjectures.RingTheory.Kaehler.Trace
@@ -3831,6 +3838,7 @@ public import WeilConjectures.RingTheory.SemilocalFiberGenerators
 public import WeilConjectures.RingTheory.SeparateImageClosedFromClosed
 public import WeilConjectures.RingTheory.SimpleFiltration
 public import WeilConjectures.RingTheory.SingularIdeal
+public import WeilConjectures.RingTheory.Smooth.IntegrallyClosed
 public import WeilConjectures.RingTheory.Smooth.SectionTruncation
 public import WeilConjectures.RingTheory.SmoothAtPrimeDifferentialsDimension
 public import WeilConjectures.RingTheory.SmoothConormalBasisEtalePolynomialChart
