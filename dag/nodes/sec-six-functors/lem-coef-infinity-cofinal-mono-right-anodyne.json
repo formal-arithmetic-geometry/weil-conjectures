@@ -228,5 +228,23 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-e03c64d2d (reviewer sub-agent of L); spot-checked: I read the item, all six proof steps and every cited statement in full: cofinality-space-test, right-fibration-section-limit, def-cbc-enhanced-diagrams-cones, unstraightening-homotopy-descent-gluing, kan-quillen-right-proper, small-object-cell-factorization, category-colimit, right-anodyne, plus the fibrations and spaces definitions. I also read the unit sk-prop-sf-biduality-general, the main-20261015 ancestor proof (paragraph 2) and how the parent uses the item. The statement is unchanged and true, and matches HTT 4.1.3.1/4.1.1.3(4) and Kerodon 02NZ/02N3. The under-comma orientation is right: {1}->Delta^1 passes, {0}->Delta^1 fails at 1, and the empty cases behave. Steps 1, 2, 4, 5 and 6 are correct against the cited statements. Their hypotheses hold: the comma is literally the one in condition (3); E = S^op is allowed; base-restriction naturality is used; the restriction-is-Kan-fibration clause applies with S = B; trivial fibrations lift including dimension 0; the arbitrary base is handled by pullback; the horn domains are finite; the right-horn convention matches; and the retract and coproduct refinement check out. One gap (C1/C4) in Step 3: it turned a terminal cone in S into an initial cocone in S^op citing only the definition. Mapping spaces in the DAG are right-pinched only, and Map in X^op is the left-pinched space of X, so a comparison is needed. Fixed: Step 3 now cites lem-coef-infinity-pinch-comparison (same unit, no cycle) and writes out the reduction via U_X(y,t) and |K^op| = |K|. It also states that an equivalence edge in N_hc(Kan) is a simplicial homotopy equivalence. proof_deps updated; the step is 1998 characters. There are no new nodes. Near-duplicates checked and rejected: coinitial-monomorphism-left-anodyne (the dual), cofinal-comma-criterion, equivalence-section-restriction, cone-mono-right-anodyne and terminal-anodyne. No off-unit tool uses, no SGA, Mathlib searches present and correct.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af9bb2d28",
+  "group": "ND",
+  "result": "pass",
+  "note": "Clause-by-clause match: Quasicategory A/B in universe u, hmono = degreewise injective, hfull = full-subcomplex identification stated in the node (stronger than Kerodon's bare mono but explicit in the node and met by the only citer), hcomma = IsContractible (Enhanced.comma A B j b false), checked in commaSubcomplex as {b}×_{ev0}Fun(Δ¹,B)×_{ev1}A in every degree, conclusion rightAnodyneExtensions j with 0<i horns (n≥1) and iso/pushout/transfinite/retract closure. Matches Kerodon 02NZ(2′)/02N3 and HTT 4.1.3.1; {1}↪Δ¹ passes, {0}↪Δ¹ fails. Edge cases: B empty (vacuous, iso), A empty (empty comma not contractible), single universe. Only the lean field changed; lean.statement matches the file signature exactly; Worker report and Second reading by ND are real; docstrings carry source and all six proof steps; non-public imports are the stated proof-dependency modules; no hollow defs, proof is sorry, lines ≤ 90; no duplicate in side Sheaf or Mathlib. nt_compile.py --json: rc=0, no diagnostics (warn.sorry=false). Cosmetic only: worker report says 'Remark the project server (02NZ)' in place of the section numbers."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityCofinalMonoRightAnodyne",
+  "declaration": "SSet.infinity_cofinal_mono_right_anodyne",
+  "file": "lean/Sheaf/CategoryTheory/InfinityCofinalMonoRightAnodyne.lean",
+  "statement": "theorem infinity_cofinal_mono_right_anodyne {A B : SSet.{u}} [Quasicategory A] [Quasicategory B] (j : A ⟶ B) (hfull : ∃ (P : B _⦋0⦌ → Prop) (e : A ≅ (Enhanced.fullSubcomplex B P).toSSet), e.hom ≫ (Enhanced.fullSubcomplex B P).ι = j) (hmono : ∀ n : SimplexCategoryᵒᵖ, Function.Injective (j.app n)) (hcomma : ∀ b : B _⦋0⦌, Enhanced.IsContractible (Enhanced.comma A B j b false)) : rightAnodyneExtensions j",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

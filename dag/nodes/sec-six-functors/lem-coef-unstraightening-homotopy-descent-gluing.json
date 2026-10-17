@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-right-fibration-fibers"
  ],
  "proof": [
   {
@@ -267,5 +268,28 @@
   "group": "Q72",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-667b370e5 (reviewer sub-agent of L); spot-checked: I read the item, its six steps and all nine cited statements in full, and checked HTT Lemmas 2.2.3.4 and 2.2.3.6 at printed pp. 80-82 (online Harvard PDF). The item's statement is byte-identical to the live unsplit node, so no target is weakened. This is not a target node, so the base-change and coefficient-category check does not apply. The general-monomorphism clause is HTT 2.2.3.4's own pushout-product proof; I checked the factor order against lem-coef-infinity-right-anodyne-product (horn times the monomorphism A to B). The Kan property comes from lem-cbc-right-fibration-space-fiber applied first over the point and then over the Kan complex M(A). S is never assumed Kan. Step 3's construction checks: ec=1, rc=f, pe=qr. Step 4: the endpoint map r is a right fibration; the gluing agrees on both intersections and over the base, and the filler comes from the horn times the two-endpoint inclusion. Step 5: the fiber of r over y is exactly the homotopy fiber of f_s from def-cbc. The Kan mapping-path criterion and lem-coef-right-fibration-contractible-fibers then show r is a trivial Kan fibration over an arbitrary base Y. Step 6: lifting against monomorphisms gives g, J with endpoints (fg,1_Y) and H with endpoints (gf,1_X), all over S. Edge cases checked: empty S, A, Z and fibers; n=1, j=1; f the identity. There are no new nodes and no cycle (the closure has 65 nodes). No duplicate found: the nearest neighbours require a quasicategory base. There are 14 search records of three kinds. I accept the two tool_uses as generic simplicial-homotopy tools from unit sk-prop-sf-cbc: lem-cbc-right-fibration-space-fiber and lem-cbc-kan-fibration-fiber-criterion. Minor point, not a fault of this delivery: the imported statement uses 'Kan fibration' without a definition among its statement dependencies. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ec0a1713",
+  "group": "NE",
+  "result": "pass",
+  "note": "Every clause matches the node and HTT 2.2.3.4/2.2.3.6. The mapping space is the strict fiber of ihom Z over diagramVertex a, i.e. maps Z×Δ^m→Y over a∘pr. KanComplex holds under rightFibration q alone. Monomorphism restriction is a real pullback.map via MonoidalClosed.pre, stated as J.rlp (all horns, Kan fibration). The subcomplex restriction r is uniquely fixed by its equation and stated as J.rlp. Fiberwise IsWeakHomotopyEquivalence of rightFibrationFiberMap gives g over S and H, J with endpoints (gf,1_X), (fg,1_Y) over S. No extra hypotheses; single universe u; empty S/Z/A/T/fibers checked. transportOverHom cannot be cited: space-transport-classification reaches this item through 10 nodes (verified), so building from existing primitives is correct. The added stmt_dep lem-coef-infinity-right-fibration-fibers is landed and allowed; no cycles; statement field unchanged; no name clashes. Docstrings carry source and blueprint; proof is sorry only. nt_compile --json: clean, rc 0, no warnings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.UnstraighteningHomotopyDescentGluing",
+  "declaration": "SSet.Enhanced.relativeFunctorSpace_rightFibration_descent",
+  "declarations": [
+   "SSet.Enhanced.relativeFunctorRestriction",
+   "SSet.Enhanced.relativeFunctorSpace_rightFibration_descent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/UnstraighteningHomotopyDescentGluing.lean",
+  "statement": "theorem relativeFunctorSpace_rightFibration_descent (S : SSet.{u}) : (∀ {Z Y : SSet.{u}} (a : Z ⟶ S) (q : Y ⟶ S), rightFibration q → KanComplex (fiber ((ihom Z).map q) (diagramVertex a)) ∧ (∀ {A B : SSet.{u}} (i : A ⟶ B) [Mono i] (aA : A ⟶ S) (aB : B ⟶ S) (comm : aA = i ≫ aB), modelCategoryQuillen.J.rlp (relativeFunctorRestriction aA aB i q comm)) ∧ (∀ (T : S.Subcomplex), ∃ r : fiber ((ihom Z).map q) (diagramVertex a) ⟶ fiber ((ihom (pullback a T.ι)).map (pullback.snd q T.ι)) (diagramVertex (pullback.snd a T.ι)), r ≫ pullback.snd _ _ ≫ (ihom (pullback a T.ι)).map (pullback.fst q T.ι) = pullback.snd _ _ ≫ (MonoidalClosed.pre (pullback.fst a T.ι)).app Y ∧ modelCategoryQuillen.J.rlp r)) ∧ (∀ {X Y : SSet.{u}} (p : X ⟶ S) (q : Y ⟶ S) (f : X ⟶ Y) (comm : f ≫ q = p), rightFibration p → rightFibration q → (∀ s : S _⦋0⦌, IsWeakHomotopyEquivalence (rightFibrationFiberMap p q f comm s)) → ∃ g : Y ⟶ X, g ≫ p = q ∧ ∃ (H : X ⊗ Δ[1] ⟶ X) (J : Y ⊗ Δ[1] ⟶ Y), SSet.ι₀ ≫ H = f ≫ g ∧ SSet.ι₁ ≫ H = 𝟙 X ∧ H ≫ p = CartesianMonoidalCategory.fst X Δ[1] ≫ p ∧ SSet.ι₀ ≫ J = g ≫ f ∧ SSet.ι₁ ≫ J = 𝟙 Y ∧ J ≫ q = CartesianMonoidalCategory.fst Y Δ[1] ≫ q)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing strict fiber of internal-hom postcomposition directly, with no second definition of the relative mapping space. The subset restriction is uniquely fixed on its entire underlying internal-hom map, with actual target over the pullback base. The landed rightFibrationFiberMap is reused and its owning node added to stmt_deps."
  }
 }

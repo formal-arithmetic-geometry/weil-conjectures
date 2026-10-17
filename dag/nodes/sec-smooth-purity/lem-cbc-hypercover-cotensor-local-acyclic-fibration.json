@@ -210,5 +210,28 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-17e302965 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, unit sk-prop-sf-cbc and Mathlib FiniteProd.lean:78-81, Finite.lean:30-31 and Monoidal.lean; no fixes written. Item statement is unchanged and true, and it matches its citer lem-cbc-hypercover-relative-lifting. Small cases checked: K=L gives the identity; K empty gives F^L->G^L; L empty forces K empty; on the trivial topology it is the classical trivial-fibration corner fact. Step 1: Kan-ness of the pullback is correct. G(V)->* is a fibration, the corner leaf gives a restriction fibration, and the proof fills the F^K coordinate first, then lifts through that fibration. Step 2: finite cell filtration of A_m into D_m from the finite Delta^m, the product leaf and the boundary-cell leaf. The boundary-cell leaf is a Mathlib leaf from another unit, so it is a tool and no tool_uses entry is needed. Step 3: the sieve induction R_j is set up correctly, using only the statement of the forward matching-cover node, with upward closure and transitivity. Step 4: the currying and gluing identification is genuinely elementary. Step 5: the generalized-cover conclusion plus the new converse criterion applied to H and B, which are objectwise Kan by Step 1. The degree-zero case is handled. New node lem-cbc-local-acyclic-matching-cover-criterion is the true converse from DHI Prop. 3.2/(3.4) (Jardine's characterisation). It is self-contained, statement-only, has all three search kinds and is no restatement of the item. A whole-DAG scan finds only the opposite-direction node. New node lem-cbc-finite-simplicial-product is an exact Mathlib leaf, SSet.instFiniteTensorObj, with no duplicate in the DAG. No SGA; DHI is WANTED and proof_origin is agent. Minor: the new nodes have no lean_audit field, which tools/lean_status.py fills."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dab6cb215",
+  "group": "Q54",
+  "result": "pass",
+  "note": "The node changes only in lean and lean.statement is verbatim in the file. The theorem matches DHI Prop 3.3 and the node clause by clause: small site, universes max u w, objectwise Kan F and G, the landed IsLocalKanFibration and IsLocalWeakEquivalence, SSet.Finite K and L with Mono i, and the four conclusions (Kan source, Kan pullback target, local Kan fibration, local weak equivalence) with no extra hypotheses. The helpers are real: cotensorCornerTarget is a Mathlib pullback of the ihom whiskerings, and cotensorCorner is pullback.lift by naturality of MonoidalClosed.pre; a probe confirmed both projections by simp. Axioms: sorryAx only in the theorem. There is no duplicate presheaf cotensor; SimplicialTensorCotensor is an abstract simplicial-category structure. The consumer HypercoverRelativeLifting uses the same conventions. Edge cases K=L, K empty, L empty, n=0, empty site and trivial topology are fine. Docstrings carry the source, blueprint and all five steps, and the report has both required sections. nt_compile --json gave rc=0 and was clean."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HypercoverCotensorLocalAcyclicFibration",
+  "declaration": "CategoryTheory.LocalSimplicialPresheaf.cotensorCorner_local_acyclic_fibration",
+  "declarations": [
+   "CategoryTheory.LocalSimplicialPresheaf.cotensorCornerTarget",
+   "CategoryTheory.LocalSimplicialPresheaf.cotensorCorner",
+   "CategoryTheory.LocalSimplicialPresheaf.cotensorCorner_local_acyclic_fibration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/HypercoverCotensorLocalAcyclicFibration.lean",
+  "statement": "theorem cotensorCorner_local_acyclic_fibration {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (F G : Cᵒᵖ ⥤ SSet.{max u w}) (hF : ∀ V : C, SSet.KanComplex (F.obj (op V))) (hG : ∀ V : C, SSet.KanComplex (G.obj (op V))) (f : F ⟶ G) (hf : IsLocalKanFibration J f) (hw : IsLocalWeakEquivalence J f) (K L : SSet.{max u w}) [SSet.Finite K] [SSet.Finite L] (i : K ⟶ L) [Mono i] : (∀ V : C, SSet.KanComplex ((F ⋙ ihom L).obj (op V))) ∧ (∀ V : C, SSet.KanComplex ((cotensorCornerTarget i f).obj (op V))) ∧ IsLocalKanFibration J (cotensorCorner i f) ∧ IsLocalWeakEquivalence J (cotensorCorner i f)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

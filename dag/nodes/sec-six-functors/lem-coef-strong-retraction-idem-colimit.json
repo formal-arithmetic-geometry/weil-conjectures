@@ -266,5 +266,36 @@
   "group": "Q08",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-6d5732414 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the full statements of the 6 cited nodes, the comma-criterion proof's pullback model, and the parent retract-colimit. There are no new nodes. R is the walking retraction, and its composition table is associative and closed. Step 1: I checked naturality of eta (re=r, 1r=r, rs=1) and the restrictions mu j=lambda_F and mu k=1. Step 2: I recomputed the comma categories: (X|v) has Hom(1,e)={e}, Hom(e,1)=empty and End(e)={1,e}; (Y|v)={s} with endomorphisms {1,e}; the two w-commas are points. Step 3: the contractions are natural (he=e, ee=e), and the cited homotopy lemma applies with no Kan hypothesis. Step 4: space-test (3) is the same strict pullback that the comma criterion's step 1 identifies with its infinity-pullback hypothesis; reviewed siblings use the same passage. Step 5: the identity cocone is colimiting by the unital clause of mapping-composition. Step 6: reflection along k and preservation along j hold for the specified cocone. Step 7: the dual cone-calculus criterion applies. Edge cases (constant F, ordinary split idempotent, empty E) are fine. HTT is not archived (WANTED, origin=agent); I verified the mathematics directly. I accept the tool_uses for the cbc simplicial-homotopy and cone-calculus nodes. An rg search found no duplicate. No SGA is used, the item is not a target, and no fixes were written. Cosmetic only: the letter b is used for two things in step 2."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb0952b61",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Read node, HTT 4.4.5.2/4.4.5.12 source place, EnhancedDiagramsCones (coconeCategory/comma/IsColimiting), EnhancedFunctorConeCalculus (IsColimiting iff CoconeColimitCriterion, covering the 'Equivalently' clause), module and report (Worker report and Second reading by Q36 present). Category R has exactly the 5 arrows with r∘s=1, s∘r=e, e²=e, r∘e=r, e∘s=s (diagrammatic order); I is the Mathlib FullSubcategory; the component-r nerve cylinder has the right type in Fun(Δ1,Fun(I,E)) with endpoints H and const F(Y), so the existential fixes the specified cocone; conclusion is IsColimiting. No extra hypotheses; universe u same as E (R finite, nothing lost); edge cases empty E, point E, u=0 covered; no duplicate declarations; only sorry is the main theorem; docstrings carry source and blueprint id and the 7-step proof; lean.statement verbatim; node changed only by its lean record; cofinality-space-test has no Lean record so it is correctly not imported. nt_compile --json on the side overlay: exit 0, 3.7 s, no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.StrongRetractionIdemColimit",
+  "declaration": "SSet.Enhanced.strongRetraction_idem_colimit",
+  "declarations": [
+   "SSet.Enhanced.WalkingRetraction",
+   "SSet.Enhanced.WalkingRetractionHom",
+   "SSet.Enhanced.walkingRetractionComp",
+   "SSet.Enhanced.walkingRetractionCategory",
+   "SSet.Enhanced.walkingIdempotentObjects",
+   "SSet.Enhanced.WalkingIdempotent",
+   "SSet.Enhanced.walkingIdempotentLegs",
+   "SSet.Enhanced.walkingIdempotentPrismFunctor",
+   "SSet.Enhanced.walkingIdempotentCylinder",
+   "SSet.Enhanced.strongRetraction_idem_colimit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/StrongRetractionIdemColimit.lean",
+  "statement": "theorem strongRetraction_idem_colimit {E : SSet.{u}} [Quasicategory E] (F : nerve WalkingRetraction.{u} ⟶ E) : ∃ t : (coconeCategory (nerveMap walkingIdempotentObjects.{u}.ι ≫ F)) _⦋0⦌, t.1.1 = F.app (op ⦋0⦌) (ComposableArrows.mk₀ WalkingRetraction.Y) ∧ t.1.2 = diagramVertex (MonoidalClosed.curry (walkingIdempotentCylinder ≫ F)) ∧ IsColimiting (nerveMap walkingIdempotentObjects.ι ≫ F) t",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper declarations construct exactly the finite category R, its full X subcategory, and the component-r nerve cylinder introduced in this statement. The existential cocone vertex is fixed by its apex and entire transformation, and asserted colimiting using the recorded coherent comma convention. The equivalent mapping-space formulation follows from the imported dual cocone criterion."
  }
 }

@@ -18,7 +18,8 @@
   "sk-def-pe-weak-contractible",
   "def-weil-sheaf-of-modules-category",
   "def-sfb-right-derived-functor",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "det-pe-wc-sections-derived"
  ],
  "proof": [
   {
@@ -257,5 +258,32 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e6195680",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Clause-by-clause match with node/Stacks 09A2: X, arbitrary RingCat sheaf R, U, W in Over U with hzero/hmatching verbatim from recorded det-pe-hypercover-existence form (no qcqs/affine), hweak via recorded IsWeaklyContractible at coefficient universe (equivalent across universes ≥ t+1; noted), strict bounded-below via Mathlib CochainComplex.Plus, C^{r,b}=K^b(W_r) by real restriction maps, alternating coface delta, Mathlib total with eps1=1, eps2=(-1)^r giving delta+(-1)^r d_K, RΓ = recorded rightDerivedFunctorOfQuasiIsoResolutions of evaluation to Ab, Nonempty natural iso on Plus. No extra hypotheses; site universes t+1/t kept. Helpers real (only Prop additivity theorem sorry'd), docstrings with source/blueprint and 7-step proof, all proofs sorry, no pro-etale substitute; existing commutative hypercover_computes_boundedBelow_complex is a different statement. Statement field unchanged; added stmt_dep det-pe-wc-sections-derived is landed and acyclic; lean.statement verbatim. Both report sections real. nt_compile.py --json: rc=0, no errors/warnings, 3.3 s; probe #check/#print axioms clean."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.HypercoverComplex",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.hypercover_complex_natural_iso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverAbelianSections",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverAbelianRows",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverAbelianRows_additive",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverAbelianTotal",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverAbelianEvaluation",
+   "AlgebraicGeometry.Scheme.ProEt.hypercover_complex_natural_iso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/HypercoverComplex.lean",
+  "statement": "theorem hypercover_complex_natural_iso (X : Scheme.{t}) (R : Sheaf (topology X) RingCat.{u}) (U : X.ProEt) (W : SimplicialObject (Over U)) [HasDerivedCategory.{wA} (ringedSiteModules.{max u v (t + 1)} R)] [HasDerivedCategory.{wB} AddCommGrpCat.{max u v (t + 1)}] (hweak : ∀ r : ℕ, (topology X).IsWeaklyContractible.{max u v (t + 1)} (W _⦋r⦌).left) (hzero : Presieve.singleton (W _⦋0⦌).hom ∈ (precoverage X) U) (hmatching : ∀ r : ℕ, ∃ (c : Cone (SimplicialObject.properFaceDiagram W (r + 1))) (μ : W _⦋r + 1⦌ ⟶ c.pt), Nonempty (IsLimit c) ∧ Presieve.singleton μ.left ∈ (precoverage X) c.pt.left ∧ ∀ a : SimplicialObject.ProperFaceCategory (r + 1), μ ≫ c.π.app (op a) = W.map a.obj.hom.op) : Nonempty (CochainComplex.Plus.ι (ringedSiteModules.{max u v (t + 1)} R) ⋙ DerivedCategory.Q ⋙ (hypercoverAbelianEvaluation X R U).rightDerivedFunctorOfQuasiIsoResolutions (moduleQuasiIsoKInjectiveResolutions X R) ≅ CochainComplex.Plus.ι (ringedSiteModules.{max u v (t + 1)} R) ⋙ hypercoverAbelianTotal X R U W ⋙ DerivedCategory.Q)",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The node allows arbitrary ring sheaves and takes derived values in abelian groups. The module supplies this node’s explicit abelian-section total using the existing presheaf, alternating-coface, zero-extension and signed-total functors; the commutative module-valued hypercoverTotal is not duplicated. Plus is precisely existence of an integer strict lower bound on the terms, and the conclusion is a natural isomorphism on that full category. The existing moduleQuasiIsoKInjectiveResolutions interface is used without any monomorphism, affineness, qcqs or universe-equality assumption."
  }
 }

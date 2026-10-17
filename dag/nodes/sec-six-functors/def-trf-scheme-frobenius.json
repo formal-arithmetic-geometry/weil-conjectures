@@ -146,5 +146,43 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-1fa8c20f4 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full. Item: I compared it clause by clause with main-20261015 def-trf-scheme-frobenius (order 2415) and its blueprint_update. Every clause matches: the datum (prime p, a>=1, q=p^a), finite-type X_0 with no separated or reduced hypothesis, sigma/gamma and g_gamma as in def-weil-frobenius-detailed, Phi=Phi_0 x id_k with the formula a⊗b->a^q⊗b as in def-weil-relative-frobenius-geometric-fiber, iterates, and pullback on the small pro-etale site (def-weil-pbc-proetale-site, def-weil-derived-pullback-tensor-hom, where ell != p makes ell invertible). The embedded claim 'finite and radicial' is correctly moved into a statement node, as stages/1-dag.md §2 requires; this is not D1 relabelling. It creates no cycle: none of the lemma's stmt_deps reaches the item. Replacing the generic collection node def-weil-scheme-morphism-properties with def-weil-finite-type-morphism is fine. The item is not the unit's key node, has no proof, cites no SGA, and changes no target. New node lem-trf-scheme-frobenius-finite-radicial: it carries a statement only, is self-contained, and cites a definition node for every notion. It satisfies B1-B9. I checked its Stacks sources in varieties.tex against tags/tags: 0CCB is lemma-relative-frobenius (l.7117), 0CCD is lemma-relative-frobenius-finite (l.7154), and 0CCG is remark-n-fold-relative-frobenius (l.7254). The statement is true. Over Spec k_0, F^a=id, so Fr^(q) is the a-fold relative Frobenius. That map is a composite of finite universal homeomorphisms with purely inseparable residue fields, and both properties survive base change to k. Only local finite type is used. Small cases pass: k_0[t] (free of rank q over k[t^q]); k_0[eps]/eps^2 (eps->0, still finite and radicial); the doubled-origin line (the non-separated case); the empty scheme. Duplicate check: i-relative-frob/d-relative-frob cite the item (so citing them would make a cycle) and assume separated models. lem-pur-absolute-frobenius-universal-homeomorphism has no finiteness and no scalar extension. Every other Frobenius node is a construction. Mathlib: 11 searches of all three kinds are recorded; none is a match. The Lean candidates IsFrobenius.isFinite_of_isPullback and isUniversalHomeomorphism_of_isPullback (Frobenius.lean 234-246) match, and are correctly left in lean_candidates for the maintainer. No fixes or tool_uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34c6782f2",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Node matches source blueprint main-20261015 order 2415; only the lean field changed. schemeFrobenius = recorded relativeFrobenius (q-power map on X0 base-changed to k); geometric/arithmetic Galois maps = geometricFrobenius hom/inv = id x Spec(gamma) / id x Spec(sigma), checked against galoisMap and geometricFrobeniusAlgEquivOfAlgebraic = (q-power Frobenius)^-1; iterate is the End power for any natural m. Finite type is exactly LocallyOfFiniteType + QuasiCompact, with no separated/reduced assumption. Pullbacks are the recorded canonical operations (constant-ring proEtaleConstantRingDerivedPullback, finite level n+1, integral, rational, common-stage with independent universe v). l-invertibility is real Bezout data from l != p, not a hypothesis. Only sorry is the finite/radicial Prop theorem (restates the landed child lemma, minor). Docstrings and blueprint markers on module and all 17 declarations; lines <= 100; autoImplicit false; lean.statement matches the file. Edge cases m=0, n=0, empty and nonreduced/nonseparated models, p=2, universes all ok. nt_compile.py on the snapshot (local side overlay, ~30 side dependencies first) compiled SchemeFrobenius.lean in 3.1 s, exit 0, no messages. Report has Worker report and Second reading by Q109. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.SchemeFrobenius",
+  "declaration": "WeilConjectures.FiniteFieldDatum.schemeFrobenius",
+  "declarations": [
+   "WeilConjectures.FiniteFieldDatum.schemeFrobenius",
+   "WeilConjectures.FiniteFieldDatum.schemeFrobeniusIterate",
+   "WeilConjectures.FiniteFieldDatum.arithmeticGaloisFrobenius",
+   "WeilConjectures.FiniteFieldDatum.geometricGaloisFrobenius",
+   "WeilConjectures.FiniteFieldDatum.schemeFrobenius_isFinite_isRadicial",
+   "WeilConjectures.FiniteFieldDatum.schemeFrobeniusDerivedPullback",
+   "WeilConjectures.FiniteFieldDatum.arithmeticGaloisDerivedPullback",
+   "WeilConjectures.FiniteFieldDatum.geometricGaloisDerivedPullback",
+   "WeilConjectures.FiniteFieldDatum.schemeFrobeniusCoefficientInvertible",
+   "WeilConjectures.FiniteFieldDatum.schemeFrobeniusFiniteDerivedPullback",
+   "WeilConjectures.FiniteFieldDatum.schemeFrobeniusIntegralDerivedPullback",
+   "WeilConjectures.FiniteFieldDatum.schemeFrobeniusRationalDerivedPullback",
+   "WeilConjectures.FiniteFieldDatum.schemeFrobeniusCommonStageDerivedPullback",
+   "WeilConjectures.FiniteFieldDatum.geometricGaloisFiniteDerivedPullback",
+   "WeilConjectures.FiniteFieldDatum.geometricGaloisIntegralDerivedPullback",
+   "WeilConjectures.FiniteFieldDatum.geometricGaloisRationalDerivedPullback",
+   "WeilConjectures.FiniteFieldDatum.geometricGaloisCommonStageDerivedPullback"
+  ],
+  "file": "lean/Sheaf/SixFunctors/SchemeFrobenius.lean",
+  "statement": "def schemeFrobenius (D : WeilConjectures.FiniteFieldDatum.{u}) (X₀ : Over (Spec (CommRingCat.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] : (D.geometricFiber X₀).left ⟶ (D.geometricFiber X₀).left",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Constructed scheme and Galois maps, iterates, the finite/radicial assertion, and canonical pullbacks at constant, finite, completed integral, rational and common-stage algebraically closed coefficient levels. Coefficient prime invertibility is constructed from l ≠ p using Bezout, with no extra hypothesis."
  }
 }

@@ -12,7 +12,10 @@
   "def-coef-simplicial-tensor-cotensor",
   "lem-coef-reedy-model-structure",
   "def-weil-pbc-simplicial-set",
-  "lem-coef-simplicial-extra-degeneracy-prism"
+  "lem-coef-simplicial-extra-degeneracy-prism",
+  "def-coef-simplicial-model-realization",
+  "def-coef-simplicial-realization-map",
+  "lem-coef-simplicial-undercategory-model"
  ],
  "proof": [
   {
@@ -292,5 +295,28 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-dff29f7ae (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full. The item statement is unchanged. S1: the pushout-product lifting follows from the mapping-space SM7 by transposing lifting squares through the representing isomorphism. S2: the latching category matches the J+/[n] latching of the Reedy node for Delta^op, the boundary inclusion is a Kan cofibration, and n=0 is covered. S3: closure under pushouts, then small-direct-colimit-lifting over N with L_kR=R_{k-1}, gives |X| cofibrant. S4: e0 is the horn Lambda^1_0, so i0 is a trivial cofibration; two-out-of-three makes p weak; boundary of Delta^1 gives i0+i1 a cofibration; no fibrancy used. S5: prism cover and adjacent overlaps (position j+1) checked; overlaps for j<k sit inside every intervening adjacent overlap. S6: recomputed all four coface/codegeneracy vertex identities and matched each to the face/degeneracy identities of the combinatorial-homotopy node. S7: tensor associativity and colimit preservation follow from the representing isomorphisms. S8: last face of kappa_n gives u, zeroth face of kappa_0 gives v, the stated orientation. New node lem-coef-tensor-coend-skeletal-pushouts: true (the Reedy cell filtration; checked independently by applying Hom(-,T), which gives the Tot-tower pullback); compatibility of the attaching maps checked; tested on n=0 and constant X=* (connected latching category, R_n stays Delta^0). B1-B9 hold: statement only, single-escaped TeX (doubled backslashes only in raw search output), four kinds of search recorded, blueprint from/via correct. Not a duplicate (rg for coend/skeletal/latching/realization/pushout-product, including a full-DAG latching scan) and not a restated clause of the item. All citations are in the unit; tool_uses empty. Dugger and Kerodon are not archived; the WANTED notices are correct and the proof is properly marked agent-written. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3133aba56",
+  "group": "N9",
+  "result": "pass",
+  "note": "Read node, 8 stmt deps' declarations (SatisfiesSM7/cornerMap, SimplicialTensorCotensor, Reedy.leftClass/relativeLatching, realization/relationLeft/Right, map, tensorCollapse), Mathlib SimplicialObject.Homotopy. Hypotheses equal the nerve-localization node's model convention (complete/cocomplete, functorial WFS, SM7); Reedy test uses (epimorphisms SimplexCategory).op, i.e. proper-surjection latching; realization is the node's coequalizer; prismInclusion is real data (tensor universal element at vertex i), tensorCollapse is the collapse to Δ^0; all cylinder clauses present; ∀ f g H ∃ h with i0≫h=|f|, i1≫h=|g|, orientation checked against Mathlib face identities and the κ_j triangulation. Node changed only in lean and stmt_deps (added 3 landed nodes with lean records, no cycle); lean.statement verbatim; docstrings with Dugger places and blueprint; only sorry. nt_compile --json of the snapshot module: exit 0, no diagnostics. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ReedyRealizationPrism",
+  "declaration": "CategoryTheory.SimplicialModelRealization.reedy_realization_prism",
+  "declarations": [
+   "CategoryTheory.SimplicialModelRealization.prismInclusion",
+   "CategoryTheory.SimplicialModelRealization.reedy_realization_prism"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ReedyRealizationPrism.lean",
+  "statement": "theorem reedy_realization_prism {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [MorphismProperty.HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] [SimplicialCategory M] (T : SimplicialTensorCotensor M) (_hSM7 : SimplicialModelLocalization.SatisfiesSM7 M) (X Y : SimplicialObject M) (_hX : HomotopicalAlgebra.Reedy.leftClass (MorphismProperty.epimorphisms SimplexCategory).op (cofibrations M) (initial.to X)) (_hY : HomotopicalAlgebra.Reedy.leftClass (MorphismProperty.epimorphisms SimplexCategory).op (cofibrations M) (initial.to Y)) : IsCofibrant (realization T X) ∧ prismInclusion T (realization T X) 0 ≫ SimplicialUndercategory.tensorCollapse T Δ[1] (realization T X) = 𝟙 (realization T X) ∧ prismInclusion T (realization T X) 1 ≫ SimplicialUndercategory.tensorCollapse T Δ[1] (realization T X) = 𝟙 (realization T X) ∧ WeakEquivalence (SimplicialUndercategory.tensorCollapse T Δ[1] (realization T X)) ∧ Cofibration (coprod.desc (prismInclusion T (realization T X) 0) (prismInclusion T (realization T X) 1)) ∧ ∀ (f g : X ⟶ Y) (_H : SimplicialObject.Homotopy f g), ∃ h : T.tensor Δ[1] (realization T X) ⟶ realization T Y, prismInclusion T (realization T X) 0 ≫ h = map T f ∧ prismInclusion T (realization T X) 1 ≫ h = map T g",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the landed tensor coequalizer realization, canonical realization map and tensor collapse; adds their existing owning nodes to stmt_deps. The only helper evaluates the chosen tensor universal element at the actual two interval vertices."
  }
 }

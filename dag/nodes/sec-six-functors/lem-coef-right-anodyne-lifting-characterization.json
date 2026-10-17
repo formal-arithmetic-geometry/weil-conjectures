@@ -250,5 +250,23 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-db570563f (reviewer sub-agent of L); spot-checked: I read all of the item's mathematics; it is correct. The statement and stmt_deps are unchanged from the base. Right horns are n>=1, 0<i<=n in both def-coef-infinity-fibrations and def-coef-infinity-right-anodyne, which matches HTT 2.0.0.3 and A.1.2.7. Small cases checked: {0} into Delta^1 is a right fibration (sieve), and the vertex-0 inclusion fails to lift against it. Empty-set to Delta^0 is a right fibration but not right anodyne. Isomorphisms satisfy both sides. Steps 1, 2, 4 and 5 are correct: step 2 uses the closure leaf, the transfinite LLP leaf and d = u v^-1; step 4's retract equations ga=sv=i, fr=pi=v, ps=1 were checked. One fault, under C5/B8: the new node lem-coef-right-anodyne-small-object-factorization is a direct specialization of the existing Mathlib leaf lem-coef-small-object-cell-factorization. Its smallness check and the inclusion of I-cell maps in the right anodyne class are already written out for the same right-horn set in lem-coef-infinity-equivalence-anodyne-factorization, steps 1-2. The report's not-duplicate check missed this leaf and lem-coef-accessible-small-object-factorization. Fix: fixes/dag/nodes/sec-six-functors/lem-coef-right-anodyne-lifting-characterization.json replaces step 3. The new step 3 applies the leaf with kappa=aleph0 and writes out the finite-horn smallness check. A new elementary step 4 shows the cell map is right anodyne (coproducts attached one summand at a time along a well-ordering), shows p is a right fibration, and takes the lift with sv=i, ps=1_V. Step 6 and proof_deps are updated. The graph is acyclic and the route stays in-unit with no tool_uses. Only proof, proof_deps and split_report changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b863d6f02",
+  "group": "NV",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: one arbitrary universe u for U,V,E,S; the recorded weak-saturation definition SSet.rightAnodyneExtensions (isos plus horns with 0<i in Fin(n+1), closed under pushouts, transfiniteCompositions.{u} and retracts); SSet.Enhanced.rightFibration (n>=1, 0<i), re-exported by the recorded InfinityFibrationsOverSimplicialBases module, so no §1(B) repair needed; Mathlib HasLiftingProperty gives exactly the diagonal with dv=u, qd=w; iff with the node's quantifier order; no Kan/quasicategory hypotheses. The Lean statement is true as typed. Edge cases checked: n=0,1; empty to point; isomorphisms; {0}->Delta^1. No Mathlib or project duplicate (Mathlib has only all-horn and inner-horn analogues). Gates: only sorry, no definitions, source and blueprint docstrings with all six proof steps, lean.statement verbatim, node changes only lean, report has Worker report and Second reading by NV. nt_compile.py --json on the snapshot module: exit 0, no errors or warnings. Observation only: report text has the 'Definition the project server' redaction artifact."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightAnodyneLiftingCharacterization",
+  "declaration": "SSet.rightAnodyneExtensions_iff_hasLiftingProperty",
+  "file": "lean/Sheaf/CategoryTheory/RightAnodyneLiftingCharacterization.lean",
+  "statement": "theorem rightAnodyneExtensions_iff_hasLiftingProperty {U V : SSet.{u}} (v : U ⟶ V) : rightAnodyneExtensions v ↔ ∀ {E S : SSet.{u}} (q : E ⟶ S), Enhanced.rightFibration q → HasLiftingProperty v q",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
