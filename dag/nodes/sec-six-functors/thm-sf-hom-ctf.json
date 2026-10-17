@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "thm-sf-hom-ctf",
   "from": null,
-  "same_as": []
+  "same_as": [
+   "sk-thm-sf-hom-ctf"
+  ]
  },
  "kind": "statement",
  "title": "Derived internal Hom at finite coefficients",
@@ -78,18 +80,31 @@
    }
   },
   {
-   "text": "For any $A_X$-module sheaf $N$ in degree zero and any $r\\notin I$, Steps 1 and 4 show that $\\mathcal H^r(H\\otimes_A^LN)|_{U_i}=0$ for every $i$. A sheaf vanishing on a cover is zero: restrict any section to the pullback cover and use uniqueness in the sheaf axiom. Thus $H$ has Tor interval $I$; taking $N=A_X$ gives a single global cohomological bound. To realize explicitly the finiteness unit's role in constructibility, fix $r$ and put $G=\\mathcal H^r(H)$. All $G|_{U_i}$ are constructible by Step 4. Write $U_{ij}=U_i\\cap U_j$ and let $j_i,j_{ij}$ denote the open inclusions into $X$. The intersections need not be affine. They are Noetherian quasi-compact opens; [lem-weil-pbc-qc-open-immersion-finite-type] makes their inclusions into $U_i$ finite type, hence they are finite type over $k$. Here finite-type composition follows directly by adjoining finite generating sets for the two affine coordinate algebras. Their restrictions $G|_{U_{ij}}$ are constructible: cover $U_{ij}$ by affine opens of $U_i$ and use the global-to-local and local-to-global directions of [lem-weil-pbc-constructible-qcqs-affine-local]. Apply [thm-fin-open-immersion] in degree zero to $j_i$ and $j_{ij}$; its finite prime-to-characteristic coefficients are exactly $A$, and $R^0j_*B=j_*B$ here: left exactness of $j_*$ in [def-weil-pbc-direct-image] applied to $0\\to B\\to J^0\\to J^1$ identifies $j_*B$ with $\\ker(j_*J^0\\to j_*J^1)$ for an injective resolution of $B$. Consequently all $j_{i,*}(G|_{U_i})$ and $j_{ij,*}(G|_{U_{ij}})$ are constructible. The direct images have the section formula of [def-weil-pbc-direct-image]. The sheaf gluing axiom, applied on every etale object $V\\to X$ to the open cover $V\\times_XU_i$, therefore identifies $G$ with the kernel of the difference-of-restrictions map\n$$\n\\bigoplus_i j_{i,*}(G|_{U_i})\\longrightarrow\n\\bigoplus_{i<j}j_{ij,*}(G|_{U_{ij}}).\n$$\nBoth sums are finite; finite sums are constructible by the extension clause of [thm-constructible-serre], and its kernel clause makes $G$ constructible. This proves the full general assertion. For an empty cover, the sheaf category on the empty scheme has only the zero object, so the conclusion is the same.",
+   "text": "For any $A_X$-module sheaf $N$ in degree zero, the restriction and tensor comparisons of Steps 1 and the local theorem of Step 4 give $\\mathcal H^r(H\\otimes_A^LN)|_{U_i}=0$ whenever $r\\notin I$, for every member of the affine cover. By [lem-sf-sheaf-zero-on-open-cover], applied to the covering family of open immersions $U_i\\hookrightarrow X$ of $X_{\\mathrm{et}}$, the sheaf $\\mathcal H^r(H\\otimes_A^LN)$, whose restrictions to this cover vanish, is zero. Hence $H$ has Tor interval $I$; taking $N=A_X$ gives a global cohomological bound.",
    "uses": [
-    "lem-weil-pbc-qc-open-immersion-finite-type",
-    "lem-weil-pbc-constructible-qcqs-affine-local",
-    "thm-fin-open-immersion",
-    "def-weil-pbc-direct-image",
-    "thm-constructible-serre"
+    "lem-weil-pbc-site-restriction-exact",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "cor-weil-finite-constructible-hom",
+    "lem-sf-sheaf-zero-on-open-cover"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
-    "place": "Proof, first two sentences: finite-affine reduction and descent; unit proof, constructibility clause, with the sk-prop-sf-finiteness open-immersion statement applied to the two Cech sheaf terms"
+    "place": "Proof, Step 5: local Tor vanishing and descent over the affine cover"
+   }
+  },
+  {
+   "text": "Fix $r$ and put $G=\\mathcal H^r(H)$. By Step 4 and the exact restriction of Step 1, each $G|_{U_i}=\\mathcal H^r(H|_{U_i})$ is a constructible sheaf of $A$-modules on the affine scheme $U_i$; $A$ is a finite commutative ring. Apply [lem-weil-pbc-constructible-qcqs-affine-local] first with $T=U_i$, which is affine, hence quasi-compact and separated, in particular quasi-separated: its implication (3)$\\Rightarrow$(1) shows that $G|_{U_i}$ satisfies condition (1) on $U_i$. Hence the open covering $X=\\bigcup_iU_i$ of Step 2 witnesses condition (2) for $G$ on $X$. By Step 2, $X$ is Noetherian, hence quasi-compact and quasi-separated, so the same lemma with $T=X$ gives (2)$\\Rightarrow$(3): $G$ is constructible on $X$. Together with the global bound of Step 5 this gives $H\\in D^b_{ctf}(X_{\\mathrm{et}},A)$ with Tor amplitude in $[c-b-2m,d-a+2m]$. For the empty scheme the empty cover satisfies (2) vacuously and $G=0$ is constructible. No Čech gluing or direct image along the open immersions is needed.",
+   "uses": [
+    "lem-weil-pbc-constructible-qcqs-affine-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
+    "place": "Proof, first sentence: \"The assertion is local on $X$\" — constructibility of the cohomology sheaves descends from the finite affine cover"
    }
   },
   {
@@ -131,8 +146,11 @@
    }
   },
   {
-   "text": "For any degree-zero sheaf $N$, Step 1 restricts $H\\otimes_A^LN$ to the corresponding tensor on each member of the site cover in Step 6. Step 8 makes its cohomology zero outside $[c-b,d-a]$ there. The sheaf-axiom argument of Step 5 therefore makes it zero globally, giving the sharper Tor interval and also boundedness by $N=A_X$. For this site-perfect case [lem-sf-ext-sheaf-constructible] supplies constructibility of every cohomology sheaf of $H$, so this case also proves membership in $D^b_{ctf}$ without using the general-case Verdier-duality argument.",
+   "text": "For any degree-zero sheaf $N$, Step 1 restricts $H\\otimes_A^LN$ to the corresponding tensor on each member $V_j$ of the etale covering of $X$ in Step 7 (exact restriction commutes with cohomology). Step 9 makes its cohomology zero outside $[c-b,d-a]$ there. For $r\\notin[c-b,d-a]$, [lem-sf-sheaf-zero-on-open-cover], applied to this covering family $\\{V_j\\to X\\}$ of $X_{\\mathrm{et}}$, therefore makes $\\mathcal H^r(H\\otimes_A^LN)$ zero globally, giving the sharper Tor interval and also boundedness by $N=A_X$. For this site-perfect case [lem-sf-ext-sheaf-constructible] supplies constructibility of every cohomology sheaf of $H$, so this case also proves membership in $D^b_{ctf}$ without using the general-case Verdier-duality argument.",
    "uses": [
+    "lem-weil-pbc-site-restriction-exact",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sf-sheaf-zero-on-open-cover",
     "lem-sf-ext-sheaf-constructible"
    ],
    "elementary": false,
@@ -143,29 +161,26 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-site-restriction-exact",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "def-weil-finite-type-morphism",
-  "lem-weil-pbc-affine-source-morphism-separated",
-  "lem-weil-pbc-open-subspace-dimension-monotone",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-sf-flat-model",
-  "lem-weil-pbc-slice-restriction-flat",
-  "lem-weil-pbc-constructible-qcqs-affine-local",
   "cor-weil-finite-constructible-hom",
-  "lem-weil-pbc-qc-open-immersion-finite-type",
-  "thm-fin-open-immersion",
-  "def-weil-pbc-direct-image",
-  "thm-constructible-serre",
-  "lem-sf-site-perfect-tor-window",
-  "def-pur-hom-complex",
-  "def-pur-derived-internal-hom",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
   "def-pc-kflat-complex",
-  "lem-sf-ext-sheaf-constructible"
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-weil-finite-type-morphism",
+  "lem-sf-ext-sheaf-constructible",
+  "lem-sf-flat-model",
+  "lem-sf-sheaf-zero-on-open-cover",
+  "lem-sf-site-perfect-tor-window",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-constructible-qcqs-affine-local",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-slice-restriction-flat",
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback"
  ],
  "proof_origin": {
   "by": "agent",
@@ -210,7 +225,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -238,11 +253,11 @@
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-hom-ctf",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "thm-sf-hom-ctf",
   "worker": "stage1",
-  "summary": "Checked the unit, the exact separated duality corollary, restriction/locality statements, and source Stacks 08G7. Expanded the implicit finite coefficient and etale site conventions without changing the mathematical claim. Separated affine restriction, uniform-bound gluing, local perfect-model shortening, ordinary Hom-complex calculation and its Tor estimate. One new statement-only generic ringed-site model lemma; no new definitions or clause-restating nodes. Lean general-case wrappers still depend on explicit sorries, so no attachment is claimed. The finiteness unit is realized genuinely by expressing each cohomology sheaf as the kernel between two finite sums of open direct images; open-immersion finiteness makes both terms constructible.",
-  "blueprint": "Steps 1–5 realize the first two sentences (finite affine reduction, geometric Verdier-duality corollary, locality). Steps 6–9 realize the remaining sentences (prescribed finite-projective model, Hom as dual tensor, bounded flat model, constructibility and descent). The unit's one proof step is carried by thm-sf-hom-ctf; the general branch retains cor-weil-finite-constructible-hom and its biduality/tensor route. Step 5 explicitly realizes the unit's sk-prop-sf-finiteness citation by the two-term sheaf-gluing kernel, without invoking a derived Cech resolution.",
+  "summary": "Re-split the returned 2,186-character constructibility/descent step. Step 5 gives local Tor vanishing on the finite affine cover and descends it with the cover-vanishing lemma; Step 6 descends constructibility of each cohomology sheaf directly by the affine-local criterion for constructibility. One statement-only lemma (vanishing of an etale module sheaf on a covering family) is added; it serves both the affine cover and the site-perfect etale cover. The original geometric Verdier-duality route and the sharpened local finite-projective calculation are retained. (Maintainer reader repair: the delivered Čech-kernel/open-direct-image route and its two new nodes were replaced by the affine-local criterion; the degree-zero node duplicated lem-sp-derived-well-defined.)",
+  "blueprint": "Steps 1–4 realize the finite affine reduction and the separated duality route (proof, first two sentences). Steps 5–6 realize the locality \"The assertion is local on X\": Tor vanishing through the cover-vanishing lemma, constructibility through the affine-local criterion. Steps 7–10 realize the local site-perfect model, the finite-projective Hom-complex calculation, the sharper Tor window and the final site-local descent (\"Both assertions are local on the site\").",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-site-restriction-exact",
@@ -287,14 +302,6 @@
    {
     "node": "lem-weil-pbc-constructible-qcqs-affine-local",
     "why": "Generic geometry, restriction, tensor-model, or Hom-complex tool used as stated to expand the locality/finite-projective calculation; it does not replace the unit's geometric duality route."
-   },
-   {
-    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
-    "why": "Generic tool for the finite-type overlaps and constructible kernel in the explicit finiteness-unit gluing step; no replacement of the duality route."
-   },
-   {
-    "node": "thm-constructible-serre",
-    "why": "Generic tool for the finite-type overlaps and constructible kernel in the explicit finiteness-unit gluing step; no replacement of the duality route."
    }
   ]
  },
@@ -314,12 +321,12 @@
   "thm-constructible-serre"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q09-dd588e03d",
-  "group": "Q09",
+  "reviewer": "NT-cc-Q32-c393e077b",
+  "group": "Q32",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-dd588e03d (reviewer sub-agent of L); spot-checked: Read the theorem, all nine steps, the new lemma, cited statements and source locations. Verified coefficient/site hypotheses, prescribed Tor-window models, gluing, endpoint signs, edge cases, duplicates and unit route. Accepted declared tool uses; no repairs needed. Detailed checks are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-c393e077b (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item statement (unchanged and not weakened; étale site with constant A_X coefficients, same as cor-weil-finite-constructible-hom; no base-change morphism involved), every step, the three new nodes, the statements of all cited nodes, the master blueprint source (order 2199), and the unit. The main-20261015 snapshot does not restate this unit. No SGA source is cited. Steps 1-5 and 7-10 are correct as delivered. I checked the [c-b,d-a] endpoint arithmetic and the Hom-complex differential and sign. The unit's example (closed point of A^1, m=1) is consistent with the bounds. I found and repaired three faults. (1) C5 duplicate: lem-sf-open-immersion-derived-degree-zero, H^0(Rj_*B)=j_*B, is the case v=j_* of the Mathlib leaf lem-sp-derived-well-defined (R^0v=v, with R^q u_* = H^q(Ru_*) by def-weil-pbc-direct-image). I dropped it. (2) B4: lem-sf-cech-kernel-open-cover stores \\bigoplus as the JSON escape \\b (backspace) followed by 'igoplus', and its index order i<j is never introduced. The whole Čech/open-direct-image detour (old Steps 6-8, using thm-fin-open-immersion and thm-constructible-serre) is unnecessary anyway. lem-weil-pbc-constructible-qcqs-affine-local, already cited in Step 3, gives (3)⇒(1) on the affine U_i and (2)⇒(3) on the qcqs X directly. I replaced old Steps 6-8 with one step citing it and dropped the node. (3) C4/E1 in old Step 12 (now Step 10): it referred to 'the site cover in Step 6' and 'Step 8', which are stale numbers (the cover is in old Step 9, the window in old Step 11). It also reused the Step 5 argument, but the cover-vanishing lemma there covered only finite open covers, while the site-perfect cover is an arbitrary étale covering. I generalized lem-sf-sheaf-zero-on-open-cover to any covering family of X_et; this is true by the separatedness of the sheaf on the pulled-back covering, and I checked the empty, one-member and zero cases. Step 10 now cites it with the correct step references and the restriction lemmas. I searched the DAG for duplicates of the kept node and found none; the nearest are stage3-categorical-finite-cover-local-zero and lem-weil-pbc-etale-section-zero-neighbourhood, which state different things. Corrected files: fixes/dag/nodes/sec-six-functors/thm-sf-hom-ctf.json (10 steps; proof_deps is the union of the step uses; split_report.tool_uses no longer lists lem-weil-pbc-qc-open-immersion-finite-type or thm-constructible-serre) and fixes/dag/nodes/sec-six-functors/lem-sf-sheaf-zero-on-open-cover.json. I accept the remaining declared tool uses as generic black boxes. The item's top-level tool_uses, set by an earlier merge, still lists the two removed nodes and should be recomputed at merge. Details are in review.md.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",
