@@ -8,6 +8,7 @@ module
 public import WeilConjectures.WeilSheaf.UpperStarComp
 public import WeilConjectures.WeilSheaf.UpperStarDual
 public import WeilConjectures.WeilSheaf.UpperStarTensor
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseTensor
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
 
 /-!
@@ -53,8 +54,23 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 /-- The tensor product with a pro-étale Weil sheaf whose underlying sheaf is lisse is exact. -/
 instance preservesFiniteLimits_tensorFunctor (C : ProEtaleWeilSheaf k₀ l X)
     [Fact (IsAdicLisseSheaf C.carrier)] :
-    PreservesFiniteLimits (ProEtaleWeilSheaf.tensorFunctor k₀ l X C) :=
-  sorry
+    PreservesFiniteLimits (ProEtaleWeilSheaf.tensorFunctor k₀ l X C) := by
+  have : (ProEtaleWeilSheaf.tensorFunctor k₀ l X C).Additive :=
+    (tensorIhomAdjunction k₀ l X C).left_adjoint_additive
+  rw [Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono]
+  intro S hS
+  have : PreservesFiniteColimits (ProEtaleWeilSheaf.tensorFunctor k₀ l X C) := by
+    have := (tensorIhomAdjunction k₀ l X C).leftAdjoint_preservesColimits.{0, 0}
+    exact PreservesColimitsOfSize.preservesFiniteColimits _
+  refine ⟨((Functor.preservesFiniteColimits_iff_forall_exact_map_and_epi _).1 inferInstance
+    S hS).1, ?_⟩
+  have := hS.mono_f
+  have : (Mod.tensorLeft C.carrier).PreservesMonomorphisms :=
+    IsAdicLisseSheaf.preservesMonomorphisms_tensorLeft (Fact.out)
+  have : Mono ((IsoAlgebra.forget _).map S.f) := inferInstance
+  have : Mono ((IsoAlgebra.forget _).map ((ProEtaleWeilSheaf.tensorFunctor k₀ l X C).map S.f)) :=
+    (Mod.tensorLeft C.carrier).map_mono ((IsoAlgebra.forget _).map S.f)
+  exact (IsoAlgebra.forget _).mono_of_mono_map this
 
 instance (C : ProEtaleWeilSheaf k₀ l X) : (ProEtaleWeilSheaf.tensorFunctor k₀ l X C).Additive :=
   (tensorIhomAdjunction k₀ l X C).left_adjoint_additive
