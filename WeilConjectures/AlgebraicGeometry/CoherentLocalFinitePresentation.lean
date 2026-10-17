@@ -12,6 +12,7 @@ import Mathlib.Data.Fintype.EquivFin
 import Mathlib.CategoryTheory.Sites.Spaces
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import WeilConjectures.AlgebraicGeometry.QuasicoherentSheafHom
 
 /-! # Local finite free presentations of coherent modules -/
 
@@ -25,18 +26,6 @@ attribute [local instance] HasFiniteBiproducts.of_hasFiniteProducts
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option backward.isDefEq.respectTransparency false in
-private noncomputable def finiteFreeIso
-    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    (R : Sheaf J RingCat.{u})
-    [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-    (A : SheafOfModules.{u} R) (η : A ≅ SheafOfModules.unit R)
-    (I : Type u) [Fintype I] :
-    (⨁ fun _ : Fin (Fintype.card I) ↦ A) ≅ SheafOfModules.free (R := R) I :=
-  biproduct.isoCoproduct _ ≪≫ Sigma.mapIso (fun _ ↦ η) ≪≫
-    Sigma.reindex (Fintype.equivFin I).symm (fun _ ↦ SheafOfModules.unit R)
-
-set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- A coherent source has a finite free cokernel presentation near each point.
 Source: Stacks Project, Modules, Lemma 01BW (lemma-coherent-finite-presentation).
