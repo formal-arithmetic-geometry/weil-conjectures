@@ -114,21 +114,52 @@
    }
   },
   {
-   "text": "The finite affine open cover from step 1 and its finite local stratifications from step 5 meet the hypotheses of [lem-weil-pbc-etale-stratification-local-gluing-core], since $S$ is quasi-compact and quasi-separated. Choose the resulting single finite constructible locally closed immersed stratification of $S$. Write a stratum immersion as $j=f\\circ g$, where $f:Z_{a,b}\\to W_a\\to S$ is one local stratum immersion and $g:H\\to Z_{a,b}$ is the actual factorization morphism provided by that node. By [lem-weil-pbc-inverse-image-composition] and [lem-weil-pbc-etale-inverse-image-restriction], $G:=f^{-1}K$ is the finite locally constant abelian sheaf of step 6 and $j^{-1}K\\cong g^{-1}G$. Choose its etale trivializing cover $v_i:V_i\\to Z_{a,b}$ with finite abelian values $A_i$. By [lem-weil-pbc-etale-covering-base-change], $U_i=H\\times_{Z_{a,b}}V_i\\to H$ is an etale covering; write $q_i:U_i\\to V_i$ and $k_i:U_i\\to H$ for its projections. Since $gk_i=v_iq_i$, the composition isomorphisms give $k_i^{-1}g^{-1}G\\cong q_i^{-1}v_i^{-1}G\\cong q_i^{-1}\\underline{A_i}$. Here inverse image preserves the same constant finite value, by the following elementary universal-property calculation, rather than an additional geometric lemma. For a finite set $A$, its constant presheaf is the coproduct indexed by $A$ of the singleton presheaf, so [def-weil-pbc-constant-sheaf] and the sheafification adjunction [def-weil-pbc-sheafification] identify its constant set sheaf with $\\coprod_{a\\in A}*$. By [lem-weil-pbc-etale-inverse-image-algebraic-structures], set inverse image is a left adjoint and preserves the terminal sheaf. It therefore carries this coproduct to $\\coprod_{a\\in A}*$: the coproduct universal property follows by applying its adjunction to $\\operatorname{Hom}(\\coprod_{a\\in A}*,q_*B)=\\prod_{a\\in A}\\operatorname{Hom}(*,q_*B)$. These comparisons are natural in maps of finite sets; finite-limit compatibility and the algebraic-structure clause of the same node consequently carry addition $A_i\\times A_i\\to A_i$, zero and negation to the very same operations. Thus $q_i^{-1}\\underline{A_i}\\cong\\underline{A_i}$ as abelian sheaves. The cover $\\{U_i\\to H\\}$ consequently trivializes $j^{-1}K$ with the same finite abelian values. Applying [def-weil-pbc-constructible-abelian-sheaf] to the single finite global partition proves constructibility of $K$. If $S$ is empty take the empty stratification; rank zero charts have $B_b=R$, kernel the zero abelian sheaf and solution cover the identity. Together with step 3 this proves both conclusions without any invertibility or global constant-rank hypothesis on $F$.",
+   "text": "The finite affine cover of step 1 and the finite chart stratifications of step 5 satisfy [lem-weil-pbc-etale-stratification-local-gluing-core]: $S$ is quasi-compact by hypothesis and quasi-separated by step 1. Choose its single finite constructible locally closed immersed stratification. For each stratum immersion $j:H\\to S$, that lemma gives actual scheme morphisms $g:H\\to Z_{a,b}$ and $f:Z_{a,b}\\to W_a\\to S$ with $j=f\\circ g$. By [lem-weil-pbc-inverse-image-composition] and [lem-weil-pbc-etale-inverse-image-restriction], $G:=f^{-1}K$ is the finite locally constant abelian sheaf obtained in step 6, and $j^{-1}K\\cong g^{-1}G$.",
    "uses": [
     "lem-weil-pbc-etale-stratification-local-gluing-core",
-    "lem-weil-pbc-etale-inverse-image-restriction",
     "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKU, lemma-frobenius-linear-on-vb, affine locality reduction and final constructibility; expanded using Etale Cohomology Tags 03S0 and 095A"
+   }
+  },
+  {
+   "text": "Choose the trivializing etale cover $v_i:V_i\\to Z_{a,b}$ of $G$ from step 6, with finite abelian values $A_i$ and $G|_{V_i}\\cong\\underline{A_i}_{V_i}$; since each $v_i$ is etale, [lem-weil-pbc-etale-inverse-image-restriction] identifies this restriction with the abelian inverse image, so $v_i^{-1}G\\cong\\underline{A_i}_{V_i}$. By [lem-weil-pbc-etale-covering-base-change], the projections $k_i:U_i:=H\\times_{Z_{a,b}}V_i\\to H$ form an etale covering. Write $q_i:U_i\\to V_i$ for the other projection. The fibre-product identity $g\\circ k_i=v_i\\circ q_i$ and [lem-weil-pbc-inverse-image-composition] give\n$$k_i^{-1}g^{-1}G\\cong q_i^{-1}v_i^{-1}G\\cong q_i^{-1}\\underline{A_i}_{V_i}.$$\nHere composition is applied to morphisms of schemes, so neither projection $q_i$ nor $g$ is assumed etale.",
+   "uses": [
     "lem-weil-pbc-etale-covering-base-change",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKU, lemma-frobenius-linear-on-vb, affine locality reduction and final constructibility; expanded using Etale Cohomology Tags 03S0 and 095A"
+   }
+  },
+  {
+   "text": "Apply [lemma-constructible-pullback-constant] to the scheme morphism $q_i$, with values in abelian groups and $M=A_i$. Its constant sheaves are those of [def-weil-pbc-constant-sheaf], the sheafifications of the constant abelian presheaf with value $A_i$, and its pullback is the abelian inverse image, so it gives an isomorphism of abelian sheaves\n$$q_i^{-1}\\underline{A_i}_{V_i}\\cong\\underline{A_i}_{U_i}.$$\nNo etaleness, torsion or finiteness hypothesis on $q_i$ or $A_i$ is needed. This comparison preserves the value $A_i$ itself, so the values remain finite groups. Combined with step 8 and $j^{-1}K\\cong g^{-1}G$, it trivializes $j^{-1}K$ on the covering $\\{U_i\\to H\\}$.",
+   "uses": [
+    "lemma-constructible-pullback-constant",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKU, lemma-frobenius-linear-on-vb, affine locality reduction and final constructibility; expanded using Etale Cohomology Tags 03S0 and 095A"
+   }
+  },
+  {
+   "text": "Each stratum of the single global finite constructible partition of step 7 now has finite locally constant abelian inverse image, by steps 8--9. Apply [def-weil-pbc-constructible-abelian-sheaf] to this partition to conclude that $K$ is constructible. If $S$ is empty take the empty partition. For a rank zero chart the polynomial quotient is $R$, the solution cover is the identity and the kernel is the zero abelian sheaf. Together with step 3 this proves both conclusions, without any invertibility or globally constant-rank hypothesis on $F$.",
+   "uses": [
     "def-weil-pbc-constructible-abelian-sheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKU, initial locality reduction and final constructibility; Tags 03S0 and 095A, global partition refinement as in 095E"
+    "place": "Tag 0GKU, lemma-frobenius-linear-on-vb, affine locality reduction and final constructibility; expanded using Etale Cohomology Tags 03S0 and 095A"
    }
   }
  ],
@@ -154,8 +185,8 @@
   "lem-weil-pbc-etale-stratification-local-gluing-core",
   "lem-weil-pbc-inverse-image-composition",
   "lem-weil-pbc-etale-covering-base-change",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-sheafification"
+  "lemma-constructible-pullback-constant",
+  "def-weil-pbc-constant-sheaf"
  ],
  "proof_origin": {
   "by": "document",
@@ -200,7 +231,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
   "by": "worker",
@@ -209,19 +240,29 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-weil-pbc-frobenius-vector-bundle-kernel",
   "worker": "stage1",
-  "summary": "Checked 0GKU and kept its statement. Wrote the affine matrix calculation, square-Jacobian solution cover, fieldwise solvability, represented kernel, finite-etale strata, abelian finite local constancy and one global refinement. Reused all existing auxiliary nodes, with no new nodes. Distinguished represented kernel base change from quasi-coherent module pullback; retained the finite-cardinality abelian convention and sectionwise universe transport. Returned route repair: step 7 now cites the closed composition comparison and Mathlib covering-base-change tool, and derives preservation of constant finite abelian values explicitly from the constant-sheaf definition, sheafification adjunction and existing inverse-image algebraic-structure statement. The rejected sk-prop-sf-cbc node is absent.",
-  "blueprint": "Classical torsion constructibility input: 0GKW final sentence invokes 0GKV for prime constant coefficients. Expanded by 0GKV case (b), final sentence: Applying lemma-frobenius-linear-on-vb we win. The seven steps expand precisely the invoked 0GKU input, below the fixed proper-base-change unit route."
+  "summary": "Repair of the human return on step 7: retained the statement, Lean record, original affine/Jacobian/Lang/representability/stratification route and steps 1--6 verbatim. Replaced the 2620-character final step with four short steps: global refinement, pulled-back covering and composition, constant abelian values via the existing lem-kun-pullback-constant with Z coefficients, and the constructibility conclusion. The previously inline constant-object coproduct/adjunction/algebraic-operations argument is now a citation of that existing general theorem. No new nodes or Mathlib leaves; all cited statements read and recorded verbatim in citations.json. Maintainer-reader fix (2026-10-17): step 9 now cites the in-route, Lean-closed lemma-constructible-pullback-constant (sk-thm-p1) for the abelian constant-sheaf pullback instead of the off-chapter lem-kun-pullback-constant; step 8 cites lem-weil-pbc-etale-inverse-image-restriction for restriction = inverse image along the etale v_i.",
+  "blueprint": "Classical torsion constructibility input: 0GKW final sentence invokes 0GKV for prime constant coefficients. Expanded by 0GKV case (b), final sentence: Applying lemma-frobenius-linear-on-vb we win. The seven steps expand precisely the invoked 0GKU input, below the fixed proper-base-change unit route. Returned long step 7 is now steps 7--10; its hidden constant-object comparison is supplied by the in-route lemma-constructible-pullback-constant of sk-thm-p1.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-lang-steinberg",
+    "why": "Step 3: surjectivity of F-1 for a p-linear endomorphism of a finite-dimensional vector space over an algebraically closed field, a black-box algebra fact; no node of the proper-base-change route states it."
+   },
+   {
+    "node": "lem-exc-etale-jacobian-presentation",
+    "why": "Step 2: a square Jacobian presentation gives an etale algebra of finite presentation, a black-box commutative-algebra fact; no node of the proper-base-change route states it."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NA-2db5150ad",
-  "group": "NA",
+  "reviewer": "NT-cc-NX-24116214d",
+  "group": "NX",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-2db5150ad (reviewer sub-agent of L); spot-checked: Read the complete packet, item, report, unit/chapter route, Tag 0GKU source, and all cited node statements. All seven proof steps are mathematically sound with hypotheses and coefficient category preserved; polynomial etale covers, Lang–Steinberg surjectivity, represented kernels, finite-etale stratification, and global inverse-image refinement check out. Edge cases rank zero, empty scheme, coefficients 0/1, and nonreduced characteristic-p rings were tested. No duplicate, circular, restated, false, or uncited major claim found; no repairs or new nodes are required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-24116214d (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item, all 10 steps, the report and the unit route sk-thm-properbasechange, plus Stacks more-etale.tex Tag 0GKU (lemma-frobenius-linear-on-vb), statement and proof. The item is the Noetherian specialization of 0GKU with the same hypotheses: no invertible F, no constant rank. Steps 1-6 are unchanged from the 2026-10-14 reviewed version and I re-checked them against their cited statements. The Jacobian is the identity because p=0; Lang-Steinberg is applied fibrewise; the 03S0 stratification needs qcqs, which holds for affine P->W; the represented inverse image holds for any morphism. Steps 7-10 are mathematically sound. The gluing core gives an actual factorization j=f∘g (E3 checked). Covering base change works for any g. Composition gives k_i^{-1}g^{-1}G ≅ q_i^{-1}v_i^{-1}G. No cycle: the 716-node closure does not reach the item. Edge cases tested: empty S, rank 0, F=0, rank-one Frobenius, nonreduced rings, A_i=0. Fault 1 (C7): step 9 used the off-chapter lem-kun-pullback-constant (sk-prop-sf-kunneth-ordinary) as a declared tool, with the false claim that no node in this unit states the comparison. lemma-constructible-pullback-constant (sk-thm-p1, in the route, slopmaster2-closed as upperStarConstantSheafIso, generic over abelian values) states g^*M_X ≅ M_Y for any g. Step 9 now cites it, and the kun tool use is withdrawn. Fault 2: step 8 silently identified G|_{V_i} with v_i^{-1}G; it now cites lem-weil-pbc-etale-inverse-image-restriction. proof_deps was recomputed. split_report.tool_uses now declares lem-sc-lang-steinberg (step 3) and lem-exc-etale-jacobian-presentation (step 2): both are off-unit black-box algebra facts that were already used in the reviewed version. No new or dropped nodes, no SGA. The corrected item is in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-frobenius-vector-bundle-kernel.json and the details are in review.md.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
@@ -252,5 +293,9 @@
   "by": "NJ",
   "date": "2026-10-15",
   "existing": false
- }
+ },
+ "tool_uses": [
+  "lem-sc-lang-steinberg",
+  "lem-exc-etale-jacobian-presentation"
+ ]
 }
