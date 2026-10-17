@@ -116,12 +116,19 @@ attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint ModuleCat.ha
 attribute [local instance] _root_.DerivedCategory.symmetricCategory
   leftDerivedUpperStarBraidedFunctor
 
+-- Give instance search the canonical larger-universe model of the small étale site.
+local instance essentiallySmall_etale_externalHom (X : Scheme.{u}) :
+    EssentiallySmall.{u + 1} X.Etale :=
+  have : LocallySmall.{u + 1} X.Etale :=
+    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+  essentiallySmall_of_small_of_locallySmall _
+
+attribute [local instance 20000] Etale.sheafBraidedCategory
+
 section Devissage
 
 variable [HasInvertibleExponent Λ (Spec (.of k))]
 
--- The kernel check of the identification of the projection formula hypotheses is slow.
-set_option maxHeartbeats 400000 in
 /-- **`β` under the exceptional inverse image along a stratum.** Let `P = Z₁ ×_k Z₂` with
 projections `p₁`, `p₂`, let `g₁ : Z₁' ⟶ Z₁` be quasi-compact and compactifiable, and let
 `g : P' ⟶ P` be its base change along `p₁`, with `p₁' : P' ⟶ Z₁'`. Then `Rg^!` of the external
