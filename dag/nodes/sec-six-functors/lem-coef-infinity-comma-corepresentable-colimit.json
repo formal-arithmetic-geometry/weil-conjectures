@@ -12,8 +12,77 @@
   "def-coef-infinity-category-of-spaces",
   "lem-coef-infinity-hom-bifunctor-functoriality"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Let $T_z=\\operatorname{Fun}(\\Delta^1,Z)\\times_{\\operatorname{ev}_1,Z}\\{z\\}$. Its source projection to $Z$ is a right fibration by [lem-coef-infinity-arrow-target-right-fibration]. Pulling back its horn lifting problems along $v$ shows directly that $p:I_z\\to K$ is a right fibration. Its total space is a quasicategory: project an inner horn to $K$, fill there, then use the right-fibration lift. The simplicial sets are $\\mathcal U$-small since all their simplex data are finite-simplex maps into the small simplicial sets $K,Z$. Write $Q_p$ for the coherent contravariant fiber transport of [lem-coef-right-fibration-section-limit].",
+   "uses": [
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-coef-right-fibration-section-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 6.1.14, printed pp. 269–270, Yoneda argument; mapping-out version using the right Kan formula for a right fibration from Kerodon 7.3.4.1, 7.3.4.4 and 7.3.6.1. Online sources, archival copies WANTED."
+   }
+  },
+  {
+   "text": "Identify this transport with $Q(t)=\\operatorname{Map}_Z(v(t),z)$, with precomposition as its arrow maps. To justify this for the entire coherent diagram, first use the join-slice right fibration $J=K\\times_Z Z_{/z}\\to K$ of [lem-coef-infinity-slice-right-fibration]. The final clause of [lem-coef-right-fibration-section-limit] explicitly identifies its transport $Q_J$ with $Q$. The comparison $\\delta_z:Z_{/z}\\to T_z$ of [lem-coef-infinity-slice-arrow-equivalence] is an equivalence of quasicategories over $Z$; both are right fibrations over $Z$, by [lem-coef-infinity-slice-right-fibration] and [lem-coef-infinity-arrow-target-right-fibration]. By [lem-coef-infinity-right-fibration-fibers] each fiber map $(Z_{/z})_y\\to(T_z)_y$ is a homotopy equivalence of Kan complexes. Its pullback along $v$ is a map $\\phi:J\\to I_z$ of right fibrations over $K$, and the fibers of $J$ and $I_z$ over $t$ are literally the fibers of $Z_{/z}$ and $T_z$ over $v(t)$, so every fiber map $\\phi_t$ is a homotopy equivalence. [lem-coef-right-fibration-section-limit] states that its transport construction is natural for maps of right fibrations over $K$. Hence $\\phi$ induces a coherent transformation $Q_J\\to Q_p$ in $\\operatorname{Fun}(K^{\\mathrm{op}},\\mathcal S_{\\mathcal U})$ whose vertex components are the maps $\\phi_t$. Since these components are equivalences, the objectwise criterion of [lem-cbc-enhanced-functor-cone-calculus] makes it a coherent equivalence, and so $Q\\simeq Q_J\\simeq Q_p$. On fiber points $\\delta_z$ sends the $1$-simplex $\\alpha:\\Delta^1\\to Z$ with last vertex $z$ to the same arrow, so the fiber point $\\alpha:v(t)\\to z$ of $I_z$ corresponds to that arrow in $Q(t)$, and transport along $f:t\\to t'$ is $\\alpha'\\mapsto\\alpha'\\circ v(f)$; the comparison and all its simplices respect these transports.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-right-fibration-section-limit",
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-coef-infinity-right-fibration-fibers",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 6.1.14, printed pp. 269–270, Yoneda argument; mapping-out version using the right Kan formula for a right fibration from Kerodon 7.3.4.1, 7.3.4.4 and 7.3.6.1. Online sources, archival copies WANTED."
+   }
+  },
+  {
+   "text": "Put $F(t)=\\operatorname{Map}_K(k,t)$, a coherent functor by [lem-coef-infinity-hom-bifunctor-functoriality]. Use the coherent small-space corepresentable model supplied by [lem-coef-infinity-pointwise-yoneda-evaluation], with its distinguished identity point; mapping-space identifications below are coherent comparison equivalences, rather than equalities of simplicial sets. For any small space $X$, [lem-coef-right-fibration-constant-right-kan] applied to $p:I_z\\to K$ identifies the space of coherent cocones $Fp\\to\\Delta_{I_z}X$ with $\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal S_{\\mathcal U})}(F,R_X)$, where $R_X(t)=\\operatorname{Map}(Q_p(t),X)$. Replace $Q_p$ by the coherent equivalence $Q$ of step 2. The Hom-functor theorem and the equivalence-on-mapping-spaces clause of [lem-cbc-enhanced-functor-cone-calculus] give the corresponding equivalence of these coherent $R_X$ diagrams. Apply the explicit covariant dual of [lem-coef-infinity-pointwise-yoneda-evaluation] to $(K,k,R_X)$. Evaluation at $1_k$ gives\n$$\\operatorname{Map}_{\\operatorname{Fun}(I_z,\\mathcal S_{\\mathcal U})}(D,\\Delta_{I_z}X)\\simeq\\operatorname{Map}(Q(k),X)=\\operatorname{Map}(\\operatorname{Map}_Z(v(k),z),X).$$\nAll equivalences concern whole spaces and are natural in $X$, not just component sets.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-right-fibration-constant-right-kan",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pointwise-yoneda-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 6.1.14, printed pp. 269–270, Yoneda argument; mapping-out version using the right Kan formula for a right fibration from Kerodon 7.3.4.1, 7.3.4.4 and 7.3.6.1. Online sources, archival copies WANTED."
+   }
+  },
+  {
+   "text": "Check that the inverse of the last equivalence is induced by the specified cocone. Given $g:Q(k)\\to X$, the inverse Yoneda formula of [lem-coef-infinity-pointwise-yoneda-evaluation] gives $\\theta_t(f)=R_X(f)(g)=g\\circ Q(f)$. The inverse/counit formula of [lem-coef-right-fibration-constant-right-kan] then gives, at $(t,\\alpha)$, the map\n$$f\\longmapsto\\theta_t(f)(\\alpha)=g(Q(f)(\\alpha))=g(\\alpha\\circ v(f)).$$\nThese formulas apply to coherent simplicial parameters by both cited statements; the precomposition and identity/composition homotopies are those of [lem-coef-infinity-hom-bifunctor-functoriality] and [lem-cbc-simplicial-composition-spine]. Consequently this equivalence is exactly postcomposition of the given cocone with $g$. The dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] proves that this specified cocone is colimiting with apex $Q(k)$. Comparing its universal property with that of any chosen colimit makes the canonical map in the statement an equivalence. No separate assumption of existence of space colimits is needed.",
+   "uses": [
+    "lem-coef-infinity-pointwise-yoneda-evaluation",
+    "lem-coef-right-fibration-constant-right-kan",
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-cbc-simplicial-composition-spine",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 6.1.14, printed pp. 269–270, Yoneda argument; mapping-out version using the right Kan formula for a right fibration from Kerodon 7.3.4.1, 7.3.4.4 and 7.3.6.1. Online sources, archival copies WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-right-fibration-section-limit",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-right-fibration-constant-right-kan",
+  "lem-coef-infinity-pointwise-yoneda-evaluation",
+  "lem-cbc-simplicial-composition-spine"
+ ],
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -35,10 +104,129 @@
    "results": "{\"t\": \"2026-10-17T02:31:46Z\", \"tool\": \"leanfinder\", \"query\": \"The left Kan extension of a corepresentable space valued functor is corepresentable, computed as the colimit over a costructured arrow infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.pointwiseLeftKanExtension_obj\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"Condensed.lanPresheafIso_hom\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap\", \"CategoryTheory.Functor.corepresentableByCompCoyonedaObjOfIsColimit\", \"LightCondensed.lanPresheafExt_hom\", \"Condensed.lanPresheafExt_hom\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension\"], \"digest\": \"d68530d7bba8d206\"}",
    "date": "2026-10-17",
    "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Presheaf.lean:402–421: the representable left-Kan-extension instance is for ordinary categories and Type-valued presheaves. The pointwise Kan APIs likewise use ordinary Category instances, not quasicategories or full mapping spaces. The comma and colimit search results do not assert this coherent space-valued cocone formula."
+  },
+  {
+   "tool": "grep",
+   "query": "coyoneda.*[Kk]an|[Kk]an.*coyoneda|colimitOfRepresentable|pointwiseLeftKanExtension",
+   "results": "{\"t\": \"2026-10-17T03:07:47Z\", \"tool\": \"grep\", \"query\": \"coyoneda.*[Kk]an|[Kk]an.*coyoneda|colimitOfRepresentable|pointwiseLeftKanExtension\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Flat.lean\", \"Mathlib/CategoryTheory/Functor/Flat.lean\", \"Mathlib/CategoryTheory/Functor/Flat.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\"], \"digest\": \"71ce542d371a4bb9\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: semantic results and Loogle pointwiseLeftKanExtension hits are for ordinary categories. Read KanExtension/Pointwise.lean:40–51 and Limits/Presheaf.lean:402–421. SimplicialNerve.lean:28–34 lists the space quasicategory as future work; the quasicategory-specific Kan/colimit grep has zero hits. No result proves this coherent mapping-space comma-colimit formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.coyoneda, CategoryTheory.Functor.IsLeftKanExtension",
+   "results": "{\"t\": \"2026-10-17T03:07:47Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.coyoneda, CategoryTheory.Functor.IsLeftKanExtension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: semantic results and Loogle pointwiseLeftKanExtension hits are for ordinary categories. Read KanExtension/Pointwise.lean:40–51 and Limits/Presheaf.lean:402–421. SimplicialNerve.lean:28–34 lists the space quasicategory as future work; the quasicategory-specific Kan/colimit grep has zero hits. No result proves this coherent mapping-space comma-colimit formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a functor of quasicategories the colimit over arrows v(t) to z of the mapping spaces Map(k,t) is Map(v(k),z)",
+   "results": "{\"t\": \"2026-10-17T03:07:48Z\", \"tool\": \"leanfinder\", \"query\": \"For a functor of quasicategories the colimit over arrows v(t) to z of the mapping spaces Map(k,t) is Map(v(k),z)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasColimits\", \"SSet.QCat.bicategory\", \"SSet.modelCategoryQuillen.J\", \"SSet.horn.isColimit\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.Truncated.hasColimits\"], \"digest\": \"75cc8862cf405cfc\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: semantic results and Loogle pointwiseLeftKanExtension hits are for ordinary categories. Read KanExtension/Pointwise.lean:40–51 and Limits/Presheaf.lean:402–421. SimplicialNerve.lean:28–34 lists the space quasicategory as future work; the quasicategory-specific Kan/colimit grep has zero hits. No result proves this coherent mapping-space comma-colimit formula."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftKanExtension|isLeftKanExtension",
+   "results": "{\"t\": \"2026-10-17T03:08:08Z\", \"tool\": \"grep\", \"query\": \"IsLeftKanExtension|isLeftKanExtension\", \"sub\": \"CategoryTheory/Limits/Presheaf.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"34\", \"160\", \"165\", \"177\", \"179\"], \"digest\": \"e832868ed33e5e5f\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: semantic results and Loogle pointwiseLeftKanExtension hits are for ordinary categories. Read KanExtension/Pointwise.lean:40–51 and Limits/Presheaf.lean:402–421. SimplicialNerve.lean:28–34 lists the space quasicategory as future work; the quasicategory-specific Kan/colimit grep has zero hits. No result proves this coherent mapping-space comma-colimit formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Co-Yoneda formula for homotopy colimits of mapping spaces over a comma quasicategory",
+   "results": "{\"t\": \"2026-10-17T03:08:09Z\", \"tool\": \"leansearch\", \"query\": \"Co-Yoneda formula for homotopy colimits of mapping spaces over a comma quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.corepresentableByCompCoyonedaObjOfIsColimit\", \"CategoryTheory.Limits.Cocone.isColimitYonedaEquiv\", \"CategoryTheory.Limits.PushoutCocone.isColimitYonedaEquiv\", \"CategoryTheory.Limits.whiskeringLimYonedaIsoCones\", \"CategoryTheory.Limits.colimitHomIsoLimitYoneda.congr_simp\", \"CategoryTheory.Limits.coyonedaCompLimIsoCones\", \"CategoryTheory.Limits.colimitCoyonedaHomIsoLimit'\", \"CategoryTheory.Presheaf.colimitOfRepresentable\"], \"digest\": \"b943aa1498fcde9c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: semantic results and Loogle pointwiseLeftKanExtension hits are for ordinary categories. Read KanExtension/Pointwise.lean:40–51 and Limits/Presheaf.lean:402–421. SimplicialNerve.lean:28–34 lists the space quasicategory as future work; the quasicategory-specific Kan/colimit grep has zero hits. No result proves this coherent mapping-space comma-colimit formula."
+  },
+  {
+   "tool": "grep",
+   "query": "pointwiseLeftKanExtension|hasPointwiseLeftKanExtension",
+   "results": "{\"t\": \"2026-10-17T03:08:19Z\", \"tool\": \"grep\", \"query\": \"pointwiseLeftKanExtension|hasPointwiseLeftKanExtension\", \"sub\": \"CategoryTheory/Functor/KanExtension\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\"], \"digest\": \"e356c928cbe64b7b\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: semantic results and Loogle pointwiseLeftKanExtension hits are for ordinary categories. Read KanExtension/Pointwise.lean:40–51 and Limits/Presheaf.lean:402–421. SimplicialNerve.lean:28–34 lists the space quasicategory as future work; the quasicategory-specific Kan/colimit grep has zero hits. No result proves this coherent mapping-space comma-colimit formula."
+  },
+  {
+   "tool": "grep",
+   "query": "KanExtension|[Kk]an.[Ee]xtension|[Cc]olimit",
+   "results": "{\"t\": \"2026-10-17T03:08:19Z\", \"tool\": \"grep\", \"query\": \"KanExtension|[Kk]an.[Ee]xtension|[Cc]olimit\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: semantic results and Loogle pointwiseLeftKanExtension hits are for ordinary categories. Read KanExtension/Pointwise.lean:40–51 and Limits/Presheaf.lean:402–421. SimplicialNerve.lean:28–34 lists the space quasicategory as future work; the quasicategory-specific Kan/colimit grep has zero hits. No result proves this coherent mapping-space comma-colimit formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left Kan extensions of space valued functors on infinity categories are computed by comma category colimits",
+   "results": "{\"t\": \"2026-10-17T03:08:20Z\", \"tool\": \"leansearch\", \"query\": \"Left Kan extensions of space valued functors on infinity categories are computed by comma category colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.LeftExtension\", \"CategoryTheory.Functor.leftKanExtension\", \"CategoryTheory.Functor.pointwiseLeftKanExtension\", \"CategoryTheory.Functor.pointwiseLeftKanExtension_obj\", \"CategoryTheory.Functor.leftKanExtensionUnit_leftKanExtension_map_leftKanExtensionObjIsoColimit_hom\", \"CategoryTheory.Functor.IsLeftKanExtension\", \"CategoryTheory.Functor.HasLeftKanExtension\", \"CategoryTheory.Functor.ι_leftKanExtensionObjIsoColimit_hom_assoc\"], \"digest\": \"c514d4e93b236c14\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: semantic results and Loogle pointwiseLeftKanExtension hits are for ordinary categories. Read KanExtension/Pointwise.lean:40–51 and Limits/Presheaf.lean:402–421. SimplicialNerve.lean:28–34 lists the space quasicategory as future work; the quasicategory-specific Kan/colimit grep has zero hits. No result proves this coherent mapping-space comma-colimit formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition along a functor between small quasicategories on space valued coherent functors has a left adjoint computed pointwise as a colimit over the comma quasicategory",
+   "results": "{\"t\": \"2026-10-17T03:08:20Z\", \"tool\": \"leanfinder\", \"query\": \"Precomposition along a functor between small quasicategories on space valued coherent functors has a left adjoint computed pointwise as a colimit over the comma quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\", \"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\", \"CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.Functor.leftAdjointObjIsDefined_colimit\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.Limits.instIsLeftAdjointFunctorColim\"], \"digest\": \"299537b378b6fd6e\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: semantic results and Loogle pointwiseLeftKanExtension hits are for ordinary categories. Read KanExtension/Pointwise.lean:40–51 and Limits/Presheaf.lean:402–421. SimplicialNerve.lean:28–34 lists the space quasicategory as future work; the quasicategory-specific Kan/colimit grep has zero hits. No result proves this coherent mapping-space comma-colimit formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pointwiseLeftKanExtension\"",
+   "results": "{\"t\": \"2026-10-17T03:08:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"pointwiseLeftKanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.HasPointwiseLeftKanExtension\", \"CategoryTheory.Functor.HasPointwiseLeftKanExtensionAt\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt\", \"CategoryTheory.Functor.pointwiseLeftKanExtension\", \"CategoryTheory.Functor.LeftExtension.isPointwiseLeftKanExtensionAt\", \"CategoryTheory.Functor.LeftExtension.instIsClosedUnderIsomorphismsIsPointwiseLeftKanExtensionAt\", \"CategoryTheory.Functor.LeftExtension.instSubsingletonIsPointwiseLeftKanExtensionAt\"], \"digest\": \"8eb23ec9e53d6034\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: semantic results and Loogle pointwiseLeftKanExtension hits are for ordinary categories. Read KanExtension/Pointwise.lean:40–51 and Limits/Presheaf.lean:402–421. SimplicialNerve.lean:28–34 lists the space quasicategory as future work; the quasicategory-specific Kan/colimit grep has zero hits. No result proves this coherent mapping-space comma-colimit formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent left Kan extension of an arbitrary diagram of spaces is the homotopy colimit on the infinity category of arrows from its image to the evaluation object",
+   "results": "{\"t\": \"2026-10-17T03:08:37Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy coherent left Kan extension of an arbitrary diagram of spaces is the homotopy colimit on the infinity category of arrows from its image to the evaluation object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.SimplicialObject.instIsLeftKanExtensionOppositeTruncatedSimplexCategoryObjSkAppTruncatedUnitSkAdjTruncation\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.Functor.pointwiseLeftKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension\"], \"digest\": \"e77f6edc3f9984a9\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: semantic results and Loogle pointwiseLeftKanExtension hits are for ordinary categories. Read KanExtension/Pointwise.lean:40–51 and Limits/Presheaf.lean:402–421. SimplicialNerve.lean:28–34 lists the space quasicategory as future work; the quasicategory-specific Kan/colimit grep has zero hits. No result proves this coherent mapping-space comma-colimit formula."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?[Kk]an|[Kk]an.?extension|[Cc]onstant",
+   "results": "{\"t\": \"2026-10-17T03:15:30Z\", \"tool\": \"grep\", \"query\": \"right.?[Kk]an|[Kk]an.?extension|[Cc]onstant\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: the ordinary Category right-Kan, fibered-category and presheaf hits do not state its coherent mapping-space comma-colimit formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a right fibration E to B of infinity categories classified by Q, coherent cocones F restricted to E to constant X correspond to natural transformations F to Map(Q,X)",
+   "results": "{\"t\": \"2026-10-17T03:15:31Z\", \"tool\": \"leansearch\", \"query\": \"For a right fibration E to B of infinity categories classified by Q, coherent cocones F restricted to E to constant X correspond to natural transformations F to Map(Q,X)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.cocones_obj_obj\", \"CategoryTheory.Functor.cocones_obj\", \"CategoryTheory.Limits.Cocone.ι\", \"CategoryTheory.cones_obj_obj\", \"CategoryTheory.Limits.Cocone.mk\", \"CategoryTheory.Functor.sectionsEquivHom\", \"CategoryTheory.Functor.coconeTypesEquiv\", \"CategoryTheory.Limits.IsColimit.corepresentableBy\"], \"digest\": \"a216398ce300b145\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: the ordinary Category right-Kan, fibered-category and presheaf hits do not state its coherent mapping-space comma-colimit formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RightKanExtension\"",
+   "results": "{\"t\": \"2026-10-17T03:15:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"RightKanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.HasRightKanExtension\", \"CategoryTheory.Functor.rightKanExtension\", \"CategoryTheory.Functor.isRightKanExtensionId\", \"CategoryTheory.Functor.instIsRightKanExtensionRightKanExtensionRightKanExtensionCounit\", \"CategoryTheory.Functor.IsRightKanExtension\", \"CategoryTheory.Functor.rightKanExtensionCounit\", \"CategoryTheory.Functor.HasRightKanExtension.mk\", \"CategoryTheory.Functor.coneOfIsRightKanExtension\"], \"digest\": \"48a6feb2cfb8f98b\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: the ordinary Category right-Kan, fibered-category and presheaf hits do not state its coherent mapping-space comma-colimit formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right Kan extension of a constant space X along a right fibration classified by a presheaf Q is the covariant functor b maps to the space of maps Q(b) to X",
+   "results": "{\"t\": \"2026-10-17T03:15:32Z\", \"tool\": \"leanfinder\", \"query\": \"Right Kan extension of a constant space X along a right fibration classified by a presheaf Q is the covariant functor b maps to the space of maps Q(b) to X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.lanPresheaf\", \"CategoryTheory.Presheaf.functorToRepresentables\", \"CategoryTheory.Presheaf.restrictedYoneda\", \"CategoryTheory.OverPresheafAux.YonedaCollection\", \"LightCondensed.lanPresheaf\", \"CategoryTheory.Presheaf.uniqueExtensionAlongYoneda\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap\", \"CategoryTheory.Presheaf.uniqueExtensionAlongULiftYoneda\"], \"digest\": \"fad641186f0ac26e\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: the ordinary Category right-Kan, fibered-category and presheaf hits do not state its coherent mapping-space comma-colimit formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dependent function space on the fibers of a right fibration gives the right adjoint on constant space valued diagrams to precomposition of coherent functors",
+   "results": "{\"t\": \"2026-10-17T03:15:50Z\", \"tool\": \"leanfinder\", \"query\": \"Dependent function space on the fibers of a right fibration gives the right adjoint on constant space valued diagrams to precomposition of coherent functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.rightAdjointOfCostructuredArrowTerminals\", \"HasFibers.canonical\", \"CategoryTheory.adjunctionOfCostructuredArrowTerminals\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.Functor.partialRightAdjoint\", \"CategoryTheory.Functor.IsPreFibered\", \"CategoryTheory.Functor.ranAdjunction\", \"CategoryTheory.Functor.Fiber.inducedFunctor\"], \"digest\": \"4f95a1096287afe8\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: the ordinary Category right-Kan, fibered-category and presheaf hits do not state its coherent mapping-space comma-colimit formula."
+  },
+  {
+   "tool": "grep",
+   "query": "ranAdjunction|rightKanExtensionCounit",
+   "results": "{\"t\": \"2026-10-17T03:16:49Z\", \"tool\": \"grep\", \"query\": \"ranAdjunction|rightKanExtensionCounit\", \"sub\": \"CategoryTheory/Functor/KanExtension\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean\"], \"digest\": \"f6f017a3df959ae5\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the item: the ordinary Category right-Kan, fibered-category and presheaf hits do not state its coherent mapping-space comma-colimit formula."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-final-square-full-faithfulness",
@@ -50,7 +238,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, derived coefficient adjunction: foundational localization comparison, via the pointwise Kan-extension argument of Cisinski Theorem 7.5.18; the representable comma-colimit computation used to prove full faithfulness.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the displayed derived coefficient adjunction and derived inverse-limit mapping-complex calculation, in main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md; foundational localization comparison via the representable comma-colimit calculation.",
    "via": [
     "lem-coef-final-square-full-faithfulness",
     "lem-coef-fibrant-subcategory-localization",
@@ -71,5 +259,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Proposition 6.1.14 Yoneda argument, expanded on mapping-out spaces using the right-fibration constant right Kan formula of Kerodon 7.3.4.1, 7.3.4.4 and 7.3.6.1. Online sources; archives WANTED."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-comma-corepresentable-colimit",
+  "worker": "stage1",
+  "summary": "Kept the full coherent-space statement. Proved its universal property by the general constant right Kan formula along a right fibration and covariant pointwise Yoneda evaluation. Wrote the arrow-to-join transport comparison and the evaluation formula identifying the specified cocone. One new statement-only non-Mathlib lemma. Avoided the existing left Kan theorem because it reaches the item through the model-localization chain.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the displayed derived coefficient adjunction and derived inverse-limit mapping-complex calculation, in main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md; foundational localization comparison via the representable comma-colimit calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "General functor-category equivalences and cocone mapping-space criterion; not a replacement of any geometric unit step."
+   },
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "General coherent composition and parameter homotopies for mapping-space formulas; no equivalent interface is in the biduality unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-composition-spine"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-e1a1c5d24",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-e1a1c5d24 (reviewer sub-agent of L); spot-checked: Read the full delivery: the item, the new node lem-coef-right-fibration-constant-right-kan, and every cited statement (also the proof of right-fibration-section-limit). Sources: fetched Cisinski CatLR.pdf and checked Prop. 6.1.14 (pp. 269-270, Yoneda proof that u_! h_A is h_B u) and Prop. 6.4.9 (p. 298, pointwise comma (co)limit); read Kerodon 02ZL (Props. 7.3.4.1 and 7.3.4.4, Kan extension along a fibration computed fiberwise) and 0309 (Prop. 7.3.6.1, universal property) online. The item is true as stated. Tested: v=id, K a point (gives the whole space Map(y,z)), empty comma, and Z=K(A,2) (gives the non-discrete K(A,1)). The new node is true: checked against the category-of-elements calculation, B a point, p=id, empty E and empty X. It has no proof sketch in its statement. It is more general than the item (arbitrary right fibration and arbitrary F), so it does not restate an item clause. No duplicate found by rg across the DAG (discrete-weight-coherent-cocones, space-presheaf-right-kan-mapping-formula and the others are ordinary-category or different results). No cycle before or after the fix. Repaired one fault (C4) in step 2: it took the comparison Q≃Q_p from space-valued-straightening via relative-cone-equivalence (4), but that node is about straightening St_B, and no cited statement identifies St_B with the section-limit transport. Rewrote step 2: slice-arrow-equivalence gives the equivalence δ_z over Z; slice-right-fibration and arrow-target-right-fibration make both sides right fibrations; right-fibration-fibers gives homotopy equivalences on fibers; pulling back along v gives a map J→I_z of right fibrations over K; section-limit's naturality for maps of right fibrations gives a transformation of transports; functor-cone-calculus's objectwise criterion makes it an equivalence. Removed space-valued-straightening, relative-cone-equivalence and simplicial-right-fibration-presentation from the item's proof_deps. Steps 1, 3 and 4 are sound; I recomputed the step-4 counit formula g(α∘v(f)). Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-simplicial-composition-spine (generic functor-category and composition calculus from unit sk-prop-sf-cbc). Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-infinity-comma-corepresentable-colimit.json; the new node is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
