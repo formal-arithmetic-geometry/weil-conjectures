@@ -75,26 +75,12 @@ theorem residueDerivedOplax_isIso_η :
 
 /-- The canonical strong monoidal structure obtained by deriving the ordinary
 strong monoidal comparison. All coherence laws are descended on flat resolutions. -/
-@[no_expose, irreducible] noncomputable def residueDerivedMonoidal :
+@[instance_reducible] noncomputable def residueDerivedMonoidal :
     F.leftDerivedFunctor.Monoidal := by
   letI := residueDerivedOplax F
   haveI := residueDerivedOplax_isIso_δ F
   haveI := residueDerivedOplax_isIso_η F
   exact (CoreMonoidal.ofOplaxMonoidal _).toMonoidal
-
-
-/-- The tensor component of the cached derived monoidal structure is the canonical
-left-derived tensor comparison.
-Source: the defining left-derived tensor comparison.
-(blueprint: new-integral-residue-derived-monoidal)
-Proof. Unfold the generic construction and its tensor component is definitionally the
-canonical comparison. -/
-theorem residueDerivedMonoidal_δ (M N : DerivedCategory C) :
-    letI := residueDerivedMonoidal F
-    OplaxMonoidal.δ F.leftDerivedFunctor M N =
-      (F.leftDerivedTensorComparison.app M).app N := by
-  unfold residueDerivedMonoidal
-  rfl
 
 end CategoryTheory.Functor
 
@@ -117,7 +103,7 @@ its data are exactly the existing derived monoidal instance. -/
 
 /-- The actual derived module pullback with the strong monoidal structure induced
 from an ordinary pullback structure and preservation of flat modules. -/
-@[no_expose, irreducible] noncomputable def residueExchangePullMonoidal
+@[instance_reducible] noncomputable def residueExchangePullMonoidal
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (m : (f)^*⟦integralCoeff ℓ E⟧.Monoidal)
     (hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat) :
@@ -126,23 +112,5 @@ from an ordinary pullback structure and preservation of flat modules. -/
   letI := hFlat
   unfold residueExchangeUpperStar
   exact (f)^*⟦integralCoeff ℓ E⟧.residueDerivedMonoidal
-
-
-/-- The cached pullback structure is the canonical generic derived structure.
-Source: the defining derived monoidal construction.
-(blueprint: new-integral-residue-derived-monoidal)
-Proof. Unfold the typed pullback wrapper; the two constructions are identical. -/
-theorem residueExchangePullMonoidal_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (m : (f)^*⟦integralCoeff ℓ E⟧.Monoidal)
-    (hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat) :
-    letI := m
-    letI := hFlat
-    residueExchangePullMonoidal ℓ E f m hFlat =
-      (by
-        unfold residueExchangeUpperStar
-        exact Functor.residueDerivedMonoidal (f)^*⟦integralCoeff ℓ E⟧) := by
-  unfold residueExchangePullMonoidal
-  rfl
-
 
 end AlgebraicGeometry.ProEtale.CondensedRing

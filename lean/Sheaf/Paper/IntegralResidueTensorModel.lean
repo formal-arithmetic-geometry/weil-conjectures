@@ -56,8 +56,7 @@ noncomputable def tensorModelCoefficientIso (B : C) :
 The final tensor factor is K-flat on the representatives used below.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
 (blueprint: new-integral-residue-tensor-model) -/
-@[no_expose, irreducible]
-noncomputable def tensorModelTarget (B : C) (P : HomotopyCategory C (.up ℤ)) :
+@[irreducible] noncomputable def tensorModelTarget (B : C) (P : HomotopyCategory C (.up ℤ)) :
     F.leftDerivedFunctor.obj (DerivedCategory.Qh.obj P) ⊗
         F.leftDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj B) ⟶
       DerivedCategory.Qh.obj
@@ -71,23 +70,6 @@ noncomputable def tensorModelTarget (B : C) (P : HomotopyCategory C (.up ℤ)) :
     LaxMonoidal.μ (DerivedCategory.Qh (C := D))
       ((F.mapHomotopyCategory (.up ℤ)).obj (tensorModelCoefficient B))
       ((F.mapHomotopyCategory (.up ℤ)).obj P)
-
-/-- The explicit formula for the cached tensor-model target.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
-(blueprint: new-integral-residue-tensor-model)
-Proof. The formula is the defining composite, so the identity is reflexive. -/
-theorem tensorModelTarget_eq (B : C) (P : HomotopyCategory C (.up ℤ)) :
-    tensorModelTarget F B P =
-  (β_ (F.leftDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj B))
-    (F.leftDerivedFunctor.obj (DerivedCategory.Qh.obj P))).inv ≫
-    ((F.leftDerivedFunctor.map (tensorModelCoefficientIso B).hom ≫
-      F.leftDerivedFunctorCounit.app (tensorModelCoefficient B)) ⊗ₘ
-      F.leftDerivedFunctorCounit.app P) ≫
-    LaxMonoidal.μ (DerivedCategory.Qh (C := D))
-      ((F.mapHomotopyCategory (.up ℤ)).obj (tensorModelCoefficient B))
-      ((F.mapHomotopyCategory (.up ℤ)).obj P) := by
-  unfold tensorModelTarget
-  rfl
 
 /-- The target comparison is invertible on representatives with K-flat image.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.

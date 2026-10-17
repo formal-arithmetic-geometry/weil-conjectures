@@ -280,7 +280,7 @@ end CategoryTheory.Mod.ResidueOrdinary
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Ordinary pullback for any condensed commutative coefficient ring is strong monoidal. -/
-@[no_expose, irreducible] noncomputable def residueOrdinaryUpperStarMonoidal
+@[instance_reducible] noncomputable def residueOrdinaryUpperStarMonoidal
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) : (f)^*⟦Λ⟧.Monoidal := by
   let G := (f)^*[Ab.{u + 1}]
@@ -292,26 +292,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
   exact Functor.Monoidal.transport
     (Functor.isoWhiskerLeft (G.mapMod (condensedRingObj Λ Y))
       (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f))).symm
-
-/-- The cached ordinary pullback structure is the original transported structure.
-Source: the balanced internal-module tensor construction.
-(blueprint: new-integral-residue-ordinary-monoidal)
-Proof. Both sides are the identical explicit construction. -/
-theorem residueOrdinaryUpperStarMonoidal_eq
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    residueOrdinaryUpperStarMonoidal Λ f = (by
-  let G := (f)^*[Ab.{u + 1}]
-  letI : G.Braided :=
-    { toMonoidal := inferInstance
-      braided X Y := Functor.LaxBraided.braided (F := G) X Y }
-  let ρ := (asIso (condensedPullbackHom Λ f)).inv
-  letI : (Mod.mapModComap ρ).Monoidal := Mod.ResidueOrdinary.mapModComapMonoidal ρ
-  exact Functor.Monoidal.transport
-    (Functor.isoWhiskerLeft (G.mapMod (condensedRingObj Λ Y))
-      (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f))).symm) := by
-  unfold residueOrdinaryUpperStarMonoidal
-  rfl
 
 /-- The ordinary integral pullback is strong monoidal, constructed from the ambient
 inverse image and the coefficient-pullback isomorphism. -/
