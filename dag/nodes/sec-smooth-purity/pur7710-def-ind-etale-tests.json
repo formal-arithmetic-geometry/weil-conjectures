@@ -3,22 +3,87 @@
  "blueprint": {
   "is": "pur7710-def-ind-etale-tests",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Affine ind-étale test objects",
- "statement": "Let $W$ be a scheme. A test object of $W_{\\Proet}$ is a morphism $u_B:B\\to W$ that factors through an affine open $V\\subseteq W$, where $B=\\varprojlim_iB_i$ is a cofiltered limit, with affine transition maps, of affine schemes $B_i$ étale and of finite presentation over $V$. Such a morphism is weakly étale, so $B$ is an object of $W_{\\Proet}$. The restriction of $K\\in D(W_{\\Proet},\\mathcal O_E/\\varpi^n)$ to a test object is $Lu^*_{B,\\mathcal O_E/\\varpi^n}K\\in D(B_{\\Proet},\\mathcal O_E/\\varpi^n)$, with constant coefficients $\\mathcal O_E/\\varpi^n$ (Definition “Finite-coefficient derived inverse image” (`pur713-def-derived-pull`)).",
+ "statement": "Let $W$ be a scheme [def-pc-scheme], and use the small pro-étale sites and size conventions of [def-weil-pbc-proetale-site]. A test object of $W_{\\Proet}$ is a morphism $u_B:B\\to W$ factoring as $B\\to V\\hookrightarrow W$ through an affine open subscheme $V\\subseteq W$ [def-weil-open-immersion], where, over $V$,\n$$\nB=\\varprojlim_{i\\in I}B_i\n$$\nis a small nonempty cofiltered limit of affine schemes $B_i$ with affine transition maps [pqf-def-affine-morphism], and every $B_i\\to V$ is étale [def-weil-etale-morphism] and of finite presentation [def-weil-pbc-scheme-conventions]. Here cofiltered means that $I^{\\mathrm{op}}$ is filtered, and the presentation is a limit over $V$ in the sense of [sk-def-pe-morphisms]. Equivalently, on writing $V=\\operatorname{Spec}R$ and $B_i=\\operatorname{Spec}C_i$, its source is $\\operatorname{Spec}(\\varinjlim_{I^{\\mathrm{op}}}C_i)$ [lem-weil-pbc-spec-small-colimit-limit]; thus $B\\to V$ is affine pro-étale in the terminology of [sk-def-pe-morphisms]. Such a morphism $u_B$ is weakly étale [det-pe-morphisms-etale-comparison, lem-weil-pbc-open-immersion-etale, sk-lem-pe-weakly-etale-stability], so $B\\to W$ is an object of $W_{\\Proet}$ [def-weil-pbc-proetale-site].\n\nFix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, a uniformizer $\\varpi$, and an integer $n\\geq1$, and put $A=\\mathcal O_E/\\varpi^n\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. For $T=W,B$, let $A_T$ be the constant coefficient sheaf and let $D(T_{\\Proet},A)$ be the ordinary unbounded derived category of $A_T$-module sheaves [def-weil-pbc-proetale-site]. The restriction of $K\\in D(W_{\\Proet},A)$ to a test object is, by definition,\n$$\nLu^*_{B,A}K\\in D(B_{\\Proet},A),\n$$\nwhere $Lu^*_{B,A}$ is the derived module inverse image of [def-weil-pbc-proetale-operations] for $u_B$ with the canonical coefficient identification $u_B^{-1}A_W\\xrightarrow{\\sim}A_B$ of [prop-weil-pbc-proetale-constant-ring-map].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/pur7710-def-ind-etale-tests.md",
   "place": "node pur7710-def-ind-etale-tests, order 1983"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "pqf-def-affine-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "sk-def-pe-morphisms",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "det-pe-morphisms-etale-comparison",
+  "sk-lem-pe-weakly-etale-stability",
+  "def-weil-pbc-proetale-site",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-operations",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-open-immersion-etale"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ind.?etale|pro.?etale|WeaklyEtale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define this class of test objects together with its finite constant-coefficient derived restriction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine inverse limits of etale schemes as test objects of the pro-etale site with derived restriction of finite constant coefficients",
+   "results": "AlgebraicGeometry.AffineScheme.hasLimits; AlgebraicGeometry.Scheme.isAffine_of_isLimit; AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit; AlgebraicGeometry.isAffineHom_π_app; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.AffineScheme.hasColimits; Profinite.lim; AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define this class of test objects together with its finite constant-coefficient derived restriction"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.WeaklyEtale, CategoryTheory.Limits.IsLimit",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define this class of test objects together with its finite constant-coefficient derived restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine ind-etale test objects of the small pro-etale site of a scheme and derived restriction with constant finite coefficients",
+   "results": "AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X; AlgebraicGeometry.Scheme.AffineCover.X; AlgebraicGeometry.Scheme.AffineCover.obj; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.IsEtale",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define this class of test objects together with its finite constant-coefficient derived restriction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"proetale\"",
+   "results": "AlgebraicGeometry.Scheme.proetalePrecoverage; AlgebraicGeometry.Scheme.proetaleTopology; AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage; AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage; AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage; AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology; AlgebraicGeometry.Scheme.proetaleTopology_eq_propQCTopology; AlgebraicGeometry.Scheme.etaleTopology_le_proetaleTopology",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define this class of test objects together with its finite constant-coefficient derived restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "ind.?[ée]tale|IndEtale|affine.*test|test.*object",
+   "results": "Mathlib/Condensed/Light/Functors.lean; Mathlib/Condensed/Functors.lean; Mathlib/CategoryTheory/MorphismProperty/Ind.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define this class of test objects together with its finite constant-coefficient derived restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pro-etale affine over a scheme factors through an affine open and is an inverse limit of finitely presented etale affine schemes",
+   "results": "AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.exists_isAffineOpen_preimage_eq",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define this class of test objects together with its finite constant-coefficient derived restriction"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -40,5 +105,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur7710-def-ind-etale-tests",
+  "worker": "stage1",
+  "summary": "Split the definition by naming the existing notions for its affine ind-etale presentations, weak-etale membership, and constant finite-coefficient derived restriction. Made the implicit index and coefficient conventions explicit and replaced the dangling pur713-def-derived-pull reference by the existing general identified-coefficient operations definition; no finite-type or characteristic hypothesis on W is added. No new nodes.",
+  "blueprint": "Realizes the three sentences of main-20261015 pur7710-def-ind-etale-tests.md: the affine-open inverse-limit presentation, weak-etale site membership, and finite constant-coefficient derived restriction. This definition is not the key statement of its ordinary-etale Kunneth unit; the unit record is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-f2ce6fec1",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-f2ce6fec1 (reviewer sub-agent of L); spot-checked: I read the item, the main-20261015 blueprint source pur7710-def-ind-etale-tests.md (order 1983), the unit sk-prop-sf-kunneth-ordinary, all 14 cited statements in full, and Stacks proetale.tex 097N (l.1210) and more-morphisms.tex 094X (l.19057). All three source sentences are matched hypothesis by hypothesis. (1) The factorization through an affine open and the small nonempty cofiltered limit of affine B_i, étale and of finite presentation (Stacks 01TP) over V, with affine transitions. lem-weil-pbc-spec-small-colimit-limit gives B ≅ Spec(colim over I^op of C_i); the limit over V equals the limit in schemes because the diagram is connected. (2) Weakly étale: R→colim C_i is ind-étale in the sense of def-weil-pbc-ind-etale-algebra, so det-pe-morphisms-etale-comparison clause 2 applies to B→V; clause 1 together with lem-weil-pbc-open-immersion-etale covers V→W; sk-lem-pe-weakly-etale-stability gives the composite. B is U-small up to isomorphism, so it is an object of the site. (3) Restriction is the uncompleted unbounded finite-coefficient Lu^* of def-weil-pbc-proetale-operations, with c_u from prop-weil-pbc-proetale-constant-ring-map (Λ finite discrete, u arbitrary; the proposition identifies its coefficient sheaf with the constant sheaf). The coefficient category is not changed. The blueprint's pur713-def-derived-pull exists in neither the blueprint nor the DAG, and the replacement matches the accepted pur713-def-pullback-comparison precedent. No hypothesis is added: no finite type, no separatedness, no ℓ-invertibility. Edge cases checked: one-object index, identity system, B empty, W empty, n=1, characteristic ℓ. There are no new nodes. Duplicate search (def-weil-pbc-ind-etale-basis, def-sfb-profinite-test-objects, def-exc-ind-etale-closed-lift) finds nothing equivalent, so same_as=[] is correct. All dependencies exist and are unmerged, and there is no cycle (274-node closure). No SGA is cited, no tool_uses are needed, and no changes were made."
  }
 }

@@ -26,9 +26,161 @@
   "def-pc-scheme",
   "def-sbc-closed-immersion-ideal-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Restrict the base to an affine open $W=\\operatorname{Spec}R$ containing the image $s$ of $y$. Apply [lem-pur-smooth-pair-regular-immersion] to the restricted smooth closed pair. Obtain an affine neighbourhood $X_0=\\operatorname{Spec}A$ of $i(y)$ and an $A$-regular sequence $f_1,\\ldots,f_b$ whose quotient $B=A/(f_1,\\ldots,f_b)$ defines $Y_0=Y\\times_XX_0$. The affine smoothness comparison [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] identifies $R\\to A$ and $R\\to B$ as smooth ring maps. In particular both are finitely presented, by [def-weil-pbc-smooth-ring-map], and flat by [lem-weil-pbc-smooth-ring-map-flat].",
+   "uses": [
+    "lem-pur-smooth-pair-regular-immersion",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-smooth-ring-map-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, first paragraph, using divisors.tex Tag 067U; morphisms.tex Tag 01V6 and smooth flatness"
+   }
+  },
+  {
+   "text": "Apply [sbc-thm-etale-local-normal-form] to $Y_0\\to W$ at $y$. It supplies an affine base neighbourhood $W'$, an open neighbourhood $Y_1$ of $y$, and an étale map $Y_1\\to\\mathbf A^a_{W'}$. The topology of a closed subscheme is the subspace topology, so choose an ambient open $O\\subset X_0$ with $O\\cap Y_0=Y_1$. Choose a principal affine neighbourhood of $i(y)$ inside $O\\cap X_{W'}$, and replace $X_0$ by it and $W$ by $W'$. The restricted $Y_0$ is affine and lies in $Y_1$. Its map $\\bar h:Y_0\\to\\mathbf A^a_W$ is still étale: restriction is composition with an open immersion [lem-weil-pbc-etale-composition-cancellation]. Regularity of the $f_j$ survives this localization: an element killed after localization is killed by a power of the denominator beforehand, and injectivity in each successive quotient forces it to vanish after localization. The final quotient remains nonzero since it has the point $y$. The new $X_0$ and $Y_0$ are open in $X\\times_SW$ and $Y\\times_SW$ for the new $W=\\operatorname{Spec}R$, and smoothness passes to open subschemes (a lifting from a first-order thickening of affine schemes lands in the open, the two having the same underlying space); so, as in step 1, [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] makes the new $R\\to A$ and $R\\to B$ smooth, hence finitely presented [def-weil-pbc-smooth-ring-map] and flat [lem-weil-pbc-smooth-ring-map-flat]. Write $\\bar g_j\\in B$ for the coordinates of $\\bar h$, and lift them to $g_j\\in A$ using the quotient surjection $A\\to B$.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-smooth-ring-map-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, choice and lifting of the etale coordinates; morphisms.tex Tag 054L"
+   }
+  },
+  {
+   "text": "Set $P=R[t_1,\\ldots,t_{a+b}]$ and let $P\\to A$ send $t_j$ to $g_j$ for $j\\leq a$ and $t_{a+j}$ to $f_j$. This defines $h:X_0\\to\\mathbf A^{a+b}_W$ [def-sbc-affine-space]. This map is finitely presented: write $A=R[z_1,\\ldots,z_N]/(F_1,\\ldots,F_c)$, choose polynomial representatives $G_j$ for the $g_j$ and $H_j$ for the $f_j$, and use the presentation $A=P[z_1,\\ldots,z_N]/(F_i,t_j-G_j,t_{a+j}-H_j)$. The inverse of this presentation sends each $z_i$ to its original class and each $t_j$ to its prescribed image; the two composites fix all generators. Also $A\\otimes_P P/(t_{a+1},\\ldots,t_{a+b})=A/(f_1,\\ldots,f_b)=B$: the forward map sends $u\\otimes\\bar p$ to $u\\,p(g,f)\\bmod(f)$ and its inverse sends $\\bar u$ to $u\\otimes1$. Thus the coordinate-subspace square is Cartesian before any étaleness assertion about $h$.",
+   "uses": [
+    "def-sbc-affine-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, displayed coordinate map and finite-presentation permanence; explicit finite presentation and fibre-product computation"
+   }
+  },
+  {
+   "text": "Put $k=\\kappa(s)$, write $z=h(y)\\in\\mathbf A^{a+b}_k$ and let $w\\in\\mathbf A^a_k$ be the same point on the coordinate subspace. Set $L=\\mathcal O_{(X_0)_s,y}$, $T=\\mathcal O_{\\mathbf A^{a+b}_k,z}$, $Q=\\mathcal O_{\\mathbf A^a_k,w}$ and $D=\\mathcal O_{(Y_0)_s,y}$. The ring $L$ is regular local by [lem-weil-pbc-smooth-fibre-regular-local]. The ring $T$ is regular local by [lem-weil-pbc-polynomial-ring-smooth] and [lem-weil-pbc-smooth-over-field-regular-local]. They are Noetherian, and $L$ is Cohen--Macaulay: a minimal system of generators of its maximal ideal has length $\\dim L$ and is regular by [lem-weil-pbc-regular-local-generators-regular-sequence]. Apply [lem-pur-relative-regular-equations-base-change] to $R\\to A$, its flat quotient $B$, and $R\\to k$. The prime for $y$ contains all the $f_j$; consequently the specified $f_j$ form a regular sequence in $L$, and $D=L/(f_1,\\ldots,f_b)L$.",
+   "uses": [
+    "lem-weil-pbc-smooth-fibre-regular-local",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-pur-relative-regular-equations-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, local rings on the fibre; divisors.tex Tag 0FUD, algebra.tex Tags 00TT and 00NQ"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-dimension-quotient-nonzerodivisor] successively in $L,L/(f_1),\\ldots,L/(f_1,\\ldots,f_{b-1})$. These are Noetherian local rings, and each next equation is a nonzerodivisor in the maximal ideal, so $\\dim L=b+\\dim D$. In $T$ the last $b$ variables also form a regular sequence: after killing predecessors the polynomial quotient is a polynomial ring in the remaining variables, where multiplication by the next variable shifts coefficients injectively; localization preserves that injection. Its final local quotient is $Q$. Applying the same dimension-drop lemma gives $\\dim T=b+\\dim Q$. Base change preserves the étaleness of $\\bar h$ [lem-weil-pbc-etale-scheme-base-change]; the affine ring comparison [lem-weil-pbc-etale-ring-map-iff-etale-affine] and [lem-sc-etale-local-dimension] therefore give $\\dim D=\\dim Q$. Hence $\\dim L=\\dim T$, including $b=0$.",
+   "uses": [
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-sc-etale-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, dimension comparison; more-algebra.tex Tag 07QP; algebra.tex Tag 00KW"
+   }
+  },
+  {
+   "text": "The local fibre ring $L/\\mathfrak m_TL$ equals $D/\\mathfrak m_QD$: the last variables belong to $\\mathfrak m_T$, their images are the $f_j$, and $T/(t_{a+1},\\ldots,t_{a+b})=Q$. This is the local ring at $y$ of a fibre of the étale morphism $\\bar h_s$. By [lem-weil-pbc-etale-fibre-discrete-separable-points] it is a finite separable field extension of $\\kappa(z)=\\kappa(w)$, hence has dimension zero. All three hypotheses of [lem-weil-pbc-miracle-flatness] now hold for the local map $T\\to L$: $T$ is regular, $L$ is Cohen--Macaulay, and $\\dim L=\\dim T+0$. Therefore $T\\to L$ is flat.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-miracle-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, finite local fibre and miracle flatness; algebra.tex Tag 00R4; morphisms.tex Tag 02GL"
+   }
+  },
+  {
+   "text": "Let $R_0=\\mathcal O_{W,s}$, $T_0=\\mathcal O_{\\mathbf A^{a+b}_W,h(y)}$ and $L_0=\\mathcal O_{X_0,y}$. Apply [lem-weil-pbc-criterion-flatness-fibre] to $R_0\\to T_0\\to L_0$ and $M=L_0$. Both algebras are essentially finitely presented over $R_0$: they are prime localizations of the finite-presentation algebras $R_0[t_1,\\ldots,t_{a+b}]$ and $A\\otimes_RR_0$, respectively (tensor the presentation of $A$ in step 3). The module $M$ is free of rank one over $L_0$ and nonzero. It is flat over $R_0$ by [lem-pc-smooth-flat]. Its reduction modulo the maximal ideal of $R_0$ is the flat $T$-module $L$ from step 6; the quotients are precisely the displayed fibre local rings, since localization and quotient send $u/v$ to its residue fraction. The criterion gives flatness of $T_0\\to L_0$.",
+   "uses": [
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, fibre criterion; Tag 039C, theorem-criterion-flatness-fibre, algebraic input Tag 00R7"
+   }
+  },
+  {
+   "text": "Put $N=(\\Omega_{A/P})_y$. It is a finite $L_0$-module: the finite presentation in step 3 makes the differentials of its finitely many algebra generators generate $\\Omega_{A/P}$ by additivity and the Leibniz rule [def-weil-pbc-kahler-differentials]. Differential base change [lem-weil-pbc-kahler-differentials-base-change], followed by localization, identifies $N/\\mathfrak m_{T_0}N$ with the differentials over $\\kappa(h(y))$ of the local fibre ring. Localization of differentials follows directly from their universal property: a derivation extends uniquely by $\\mathrm d(u/v)=v^{-1}\\mathrm du-uv^{-2}\\mathrm dv$. The fibre of $h$ at $h(y)$ equals the fibre of $\\bar h$ at the corresponding point of the coordinate subspace, by step 3. Since $\\bar h$ is étale, that fibre is étale over $\\kappa(h(y))$ [lem-weil-pbc-etale-scheme-base-change]. It is affine, the spectrum of $B\\otimes_{R[t_1,\\ldots,t_a]}\\kappa(h(y))$, so the affine ring comparison [lem-weil-pbc-etale-ring-map-iff-etale-affine] makes its module of differentials over $\\kappa(h(y))$ zero, and hence also its localization at $y$. Thus $N/\\mathfrak m_{L_0}N=0$. Nakayama [lem-weil-pbc-nakayama-local-generators], with the empty generating family, yields $N=0$. The finite presentation in step 3, flatness in step 7 and [lem-sc-etale-at-prime-flat-unramified-criterion] now give a principal open $U\\subseteq X_0$ containing $i(y)$ on which $h$ is étale.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-sc-etale-at-prime-flat-unramified-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, application of morphisms.tex Tag 02GU; algebra.tex Tags 00RV, 00DV and 00U6 spell out the pointwise criterion"
+   }
+  },
+  {
+   "text": "For $V=Y\\times_XU$, step 3 gives $V=U\\times_{\\mathbf A^{a+b}_W}\\mathbf A^a_W$ scheme-theoretically. Its map to $\\mathbf A^a_W$ is étale by base change [lem-weil-pbc-etale-scheme-base-change]. The ideal is generated by the pullbacks of the last $b$ coordinates, which are exactly the restrictions of $f_1,\\ldots,f_b$; localization preserves their successive multiplication injections by the fraction argument of step 2. Finally $\\mathbf A^n_W\\to\\mathbf A^n_S$ is an open immersion: over each affine base chart it is restriction to the inverse image of the open $W$, by [def-sbc-affine-space]. Composition with this inclusion preserves étaleness [lem-weil-pbc-etale-composition-cancellation]. The zero-coordinate inverse image is still $V$, since $U$ lies over $W$. These are all the required assertions over the original base $S$.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-sbc-affine-space",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, conclusion and coordinate-subspace square; morphisms.tex Tags 02GO, 02GP and 02GN"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-smooth-pair-regular-immersion",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "sbc-thm-etale-local-normal-form",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-sbc-affine-space",
+  "lem-weil-pbc-smooth-fibre-regular-local",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-pur-relative-regular-equations-base-change",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-sc-etale-local-dimension",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-miracle-flatness",
+  "lem-weil-pbc-criterion-flatness-fibre",
+  "lem-pc-smooth-flat",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-sc-etale-at-prime-flat-unramified-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0FUE, lemma-etale-local-structure and proof"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -95,7 +247,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-divisor-class",
@@ -111,5 +263,64 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-smooth-pair-local-coordinates",
+  "worker": "stage1",
+  "summary": "Expanded the proof of Stacks 0FUE with affine regular equations, lifted coordinates, explicit finite presentation and Cartesian square, regularity of the specified equations on the fibre, local dimension comparison, miracle flatness, the fibre criterion, and the differential/Nakayama etale criterion. Two strictly smaller statement-only prerequisites: local equations of the smooth immersion and relative regular-equation base change.",
+  "blueprint": {
+   "node": "lem-pur-divisor-class",
+   "places": [
+    "Proof, first sentence: supplies simultaneous local coordinates and regular equations for the smooth closed subfamily."
+   ]
+  },
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "steps 1-2: smooth affine morphism gives smooth ring map (01V6); generic commutative-algebra comparison, no node of sk-prop-a1-kummer gives it"
+   },
+   {
+    "node": "lem-weil-pbc-smooth-fibre-regular-local",
+    "why": "step 4: local rings of fibres of a smooth ring map are regular (00TT); generic algebra input of the 0FUE proof"
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "step 4: local rings of a smooth algebra over a field are regular, applied to the polynomial ring; generic algebra"
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "step 4: regular system of parameters is a regular sequence (00NQ), giving Cohen-Macaulayness; generic algebra"
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "step 6: fibres of an etale morphism are finite separable points (02GL); generic, Lean-closed upstream"
+   },
+   {
+    "node": "lem-weil-pbc-miracle-flatness",
+    "why": "step 6: miracle flatness (00R4), named in the 0FUE proof; generic algebra"
+   },
+   {
+    "node": "lem-weil-pbc-criterion-flatness-fibre",
+    "why": "step 7: fibre criterion of flatness (00R7, input of 039C named in 0FUE); generic algebra"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-fibre-regular-local",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-miracle-flatness",
+  "lem-weil-pbc-criterion-flatness-fibre"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-2b7a3e32a",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-2b7a3e32a (reviewer sub-agent of L); spot-checked: I read every step of the item and both new nodes in full, against Stacks 0FUE (more-morphisms.tex, lemma-etale-local-structure), 067U, 0FUD with the proof of lemma-relative-regular-immersion-flat-in-neighbourhood, and 0CEP. Statement: identical to the base (checked read-only); its hypotheses and conclusions match 0FUE one for one, and it also covers the parent lem-pur-divisor-class's use in the local ring at y. Steps 1-9: checked against every cited statement. The fibre-criterion hypotheses (00R7) and the miracle-flatness hypotheses (00R4: regular, Cohen-Macaulay, dimension equality) hold; the dimension count uses 00KW and 07QP; the final etaleness uses 00U6 after Nakayama. Edge cases b=0, a=0, Y=X and empty Y are all fine. New node lem-pur-smooth-pair-regular-immersion is true (067U plus the definition of a regular immersion, 063J). It is strictly smaller than the item and duplicates no existing node; the closest candidates are over a perfect field or treat only diagonals. New node lem-pur-relative-regular-equations-base-change is the true form of 0FUD: it restricts to primes containing the equations, which the source states loosely. Tested on Z[x]/x base-changed to F_p and on the excluded case Z with f=2. Repairs in fixes/dag/nodes/sec-smooth-purity/lem-pur-smooth-pair-local-coordinates.json: (C4) step 8 cited def-weil-unramified-morphism for vanishing differentials, but that node defines unramified through the diagonal; replaced by the fact that the fibre is affine and etale (02GO), so its differentials vanish by the affine etale comparison lem-weil-pbc-etale-ring-map-iff-etale-affine, and removed the old citation from uses and proof_deps. (E1) Step 2 did not re-derive that R->A and R->B are smooth, flat and finitely presented after shrinking the base to W'; added one sentence with the step-1 citations. Accepted seven tool uses of generic algebra from sk-thm-p1, recorded in split_report.tool_uses: lem-weil-pbc-smooth-ring-map-iff-smooth-affine, -smooth-fibre-regular-local, -smooth-over-field-regular-local, -regular-local-generators-regular-sequence, -etale-fibre-discrete-separable-points, -miracle-flatness, -criterion-flatness-fibre. No SGA is used and no node is dropped.; 1 file(s) fixed by the reviewer"
  }
 }
