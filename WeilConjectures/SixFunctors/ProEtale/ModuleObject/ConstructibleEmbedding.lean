@@ -21,12 +21,19 @@ file shows that the constructible module objects over `Λ_X` are essentially sma
   pullbacks `(g k)^*` jointly detect zero objects.
 * A constructible `M` is pro-étale locally finitely presented on the strata of a stratification;
   refining the pro-étale covers of the (quasi-compact) strata by finitely many affine opens, `M`
-  embeds into a finite product `∏ₖ (hₖ ≫ fₖ)_* hₖ^* coker(φₖ)`, for presentations
-  `φₖ : Λ^{mₖ} ⟶ Λ^{nₖ}` on schemes `Uₖ` and morphisms `hₖ : Wₖ ⟶ Uₖ`, `fₖ : Uₖ ⟶ X`
+  embeds into a finite product `∏ₖ (gₖ)_* hₖ^* coker(φₖ)`, for presentations
+  `φₖ : Λ^{mₖ} ⟶ Λ^{nₖ}` on schemes `Uₖ` and morphisms `hₖ : Wₖ ⟶ Uₖ`, `gₖ : Wₖ ⟶ X`
   (`ProEtale.CondensedRing.exists_mono_of_isConstructibleModuleObject`).
 * Such data form a set, and the module objects form a well-powered category, so the
   constructible module objects are essentially small
   (`ProEtale.CondensedRing.essentiallySmall_isConstructibleModuleObject_of_noetherianSpace`).
+
+## Implementation note
+
+The objects `g^* M` and `g_* N` are wrapped in the definitions `ProEtale.CondensedRing.pullObj`
+and `ProEtale.CondensedRing.pushObj`. Without them, the kernel checks definitional equalities
+such as `(g ≫ f)^*.obj M = (g' ≫ f')^*.obj M` (with `g = g'` and `f = f'` only up to
+reduction) by unfolding the pullback functors, which times out.
 -/
 
 @[expose] public section
