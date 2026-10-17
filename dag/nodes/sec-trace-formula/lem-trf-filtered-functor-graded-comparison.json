@@ -10,14 +10,79 @@
   "def-sp-abelian",
   "def-sp-filtration",
   "def-sp-filtered-complex-subquotients",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
  ],
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $i,r,M$. Use the universal truncations of [lem-trf-filtered-truncation-triangle]. Exactness of $\\widetilde G_i$ sends the truncation triangle to a distinguished triangle with middle vertex $\\widetilde G_iM$. Its first vertex is supported in degrees $\\ge r$ and its last in degrees $<r$: both truncated inputs have finite filtration support, so the stated preservation of every finite interval applies. Uniqueness of the supported truncation triangle gives isomorphisms $\\sigma^{\\ge}_{i,r,M}:\\widetilde G_i t_{\\ge r}M\\to t_{\\ge r}\\widetilde G_iM$ and $\\sigma^{<}_{i,r,M}:\\widetilde G_i t_{<r}M\\to t_{<r}\\widetilde G_iM$, characterized by $\\iota_{r,\\widetilde G_iM}\\sigma^{\\ge}_{i,r,M}=\\widetilde G_i(\\iota_{r,M})$ and $\\sigma^{<}_{i,r,M}\\widetilde G_i(q_{r,M})=q_{r,\\widetilde G_iM}$. These characterizations determine each map uniquely by the two Hom bijections in the cited statement. For any $v:M\\to N$, the two possible composites with the subcomplex comparison have the same composite with $\\iota_{r,\\widetilde G_iN}$ by naturality of $\\iota$; the Hom bijection makes them equal. For the quotient comparison, precomposition with $\\widetilde G_i(q_{r,M})$ gives equality by naturality of $q$. This precomposition is injective on maps into the low-supported target: $\\widetilde G_i(q_{r,M})=(\\sigma^{<}_{i,r,M})^{-1}q_{r,\\widetilde G_iM}$, so the quotient Hom bijection and invertibility of $\\sigma^{<}_{i,r,M}$ apply. Thus both comparisons are natural, without choosing a cone map.",
+   "uses": [
+    "lem-trf-filtered-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.2(c) and proof of Lemma 5.1.4(i), unary filtration-truncation argument"
+   }
+  },
+  {
+   "text": "For $T_p=t_{\\ge p}t_{<p+1}$ from [lem-trf-filtered-truncation-triangle], compose the comparisons of Step 1 to obtain $\\kappa_{i,p,M}=t_{\\ge p}(\\sigma^{<}_{i,p+1,M})\\circ\\sigma^{\\ge}_{i,p,t_{<p+1}M}:\\widetilde G_iT_pM\\xrightarrow{\\sim}T_p\\widetilde G_iM$. Since $\\omega T_p=\\operatorname{gr}^p$ naturally, define $\\theta^p_{i,M}=\\phi_{i,T_pM}\\circ\\omega(\\kappa_{i,p,M}^{-1}):\\operatorname{gr}^p\\widetilde G_iM\\xrightarrow{\\sim}G_i\\operatorname{gr}^pM$. Each factor is a natural isomorphism, so this proves the first clause. On an object supported only in degree $p$, the truncation maps identify $T_p$ with the identity, and this formula becomes the supplied forgetful comparison. The formula uses fixed truncation functors and no choice of finite bounds.",
+   "uses": [
+    "lem-trf-filtered-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.1(d), §5.1.2(b,c), Lemma 5.1.4(i), unary specialization"
+   }
+  },
+  {
+   "text": "Write $\\alpha=\\widetilde h$. Naturality of $\\alpha$ for $\\iota_{r,M}$ shows that $t_{\\ge r}(\\alpha_M)\\sigma^{\\ge}_{1,r,M}$ and $\\sigma^{\\ge}_{2,r,M}\\alpha_{t_{\\ge r}M}$ have the same composite with $\\iota_{r,\\widetilde G_2M}$. Their source is supported in degrees $\\ge r$, so the first Hom bijection of [lem-trf-filtered-truncation-triangle] proves equality. Likewise naturality for $q_{r,M}$ makes $t_{<r}(\\alpha_M)\\sigma^{<}_{1,r,M}$ and $\\sigma^{<}_{2,r,M}\\alpha_{t_{<r}M}$ equal after precomposition with $\\widetilde G_1(q_{r,M})$; the quotient Hom bijection and the isomorphism $\\sigma^{<}_{1,r,M}$ prove equality. Combining these two equations gives $T_p(\\alpha_M)\\kappa_{1,p,M}=\\kappa_{2,p,M}\\alpha_{T_pM}$. Apply $\\omega$, invert the two $\\kappa$ maps, and use the hypothesized equation $\\phi_{2,T_pM}\\omega(\\alpha_{T_pM})=h_{\\omega T_pM}\\phi_{1,T_pM}$. The result is exactly $\\theta^p_{2,M}\\operatorname{gr}^p(\\widetilde h_M)=h_{\\operatorname{gr}^pM}\\theta^p_{1,M}$. This proves transformation compatibility directly, using no faithfulness of the forgetful functor.",
+   "uses": [
+    "lem-trf-filtered-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.3(e), §5.1.2(b,c), Lemma 5.1.4(ii), unary specialization"
+   }
+  },
+  {
+   "text": "If $h$ is invertible, Step 3 makes every $\\operatorname{gr}^p(\\widetilde h_M)$ invertible. Choose a distinguished cone triangle of $\\widetilde h_M$. Exactness of each graded functor [lem-trf-filtered-truncation-triangle] and the zero-cone criterion [lem-kun-distinguished-cone-zero] show that every grade of its cone $C$ is zero. Represent $C$ by a bounded-below finite-filtered complex $K$: every $\\operatorname{gr}^pK$ is acyclic, hence $K\\to0$ is a graded quasi-isomorphism and is inverted by the defining localization. Thus $C=0$, and the same zero-cone criterion in $DF^+(\\mathcal B)$ gives invertibility of $\\widetilde h_M$. This holds for every $M$, proving the isomorphism clause.",
+   "uses": [
+    "lem-trf-filtered-truncation-triangle",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.1.4(iii); §5.1.2(a,b); zero-cone criterion also Stacks Tag 05QR, lemma-third-object-zero"
+   }
+  },
+  {
+   "text": "For identities and composites of supplied transformations, Step 3 says each graded transformation is conjugation of its ordinary transformation by the fixed $\\theta$ maps. Conjugating an identity yields an identity; for two transformations the intermediate $\\theta^{-1}\\theta$ cancels, giving compatibility with their composition. For filtered-functor composition, let $\\mathcal E$ be a third abelian category, and let $(\\widetilde F,\\phi_F)$, with $\\widetilde F:DF^+(\\mathcal A)\\to DF^+(\\mathcal B)$, and $(\\widetilde H,\\phi_H)$, with $\\widetilde H:DF^+(\\mathcal B)\\to DF^+(\\mathcal E)$, be supplied interval-preserving exact filtered lifts of exact functors $F$ and $H$, as in the statement. The composite $\\sigma^{\\ge}_{H,r,\\widetilde F M}\\circ\\widetilde H(\\sigma^{\\ge}_{F,r,M})$ has composite with $\\iota_{r,\\widetilde H\\widetilde F M}$ equal to $\\widetilde H\\widetilde F(\\iota_{r,M})$, so the universal Hom bijection [lem-trf-filtered-truncation-triangle] identifies it with $\\sigma^{\\ge}_{HF,r,M}$. Similarly $\\sigma^{<}_{H,r,\\widetilde F M}\\circ\\widetilde H(\\sigma^{<}_{F,r,M})$ is $\\sigma^{<}_{HF,r,M}$ by its quotient equation. Using naturality of $\\sigma^{\\ge}_{H,p}$ from Step 1 for $\\sigma^{<}_{F,p+1,M}$, therefore $\\kappa_{HF,p,M}=\\kappa_{H,p,\\widetilde F M}\\circ\\widetilde H(\\kappa_{F,p,M})$. Take the composite forgetful comparison to be $H(\\phi_{F,M})\\circ\\phi_{H,\\widetilde F M}$. Substitute the displayed $\\kappa$ equality in Step 2 and apply naturality of $\\phi_H$ to $\\kappa_F^{-1}$. This gives $\\theta^p_{HF,M}=H(\\theta^p_{F,M})\\circ\\theta^p_{H,\\widetilde F M}$, with the canonical functor-composition identifications. Identity filtered functors have identity $\\sigma,\\kappa$, so the formula also respects identities. All coherence assertions use these specified composite lift structures.",
+   "uses": [
+    "lem-trf-filtered-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.2(b,c), §5.1.3(b,e) and Lemma 5.1.4(i,ii), composition of the unary comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-filtered-truncation-triangle",
+  "lem-kun-distinguished-cone-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§5.1.1–§5.1.3 and Lemma 5.1.4(i)–(iii), pp.39–41; unary specialization with universal truncation maps made explicit"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-filtered-derived-operation-lifts",
@@ -73,12 +138,27 @@
  "blueprint": {
   "from": {
    "node": "prop-trf-trace-additivity-open-closed",
-   "place": "Step 3: the associated graded compact-support functors and canonical maps identify the two graded Frobenius operators; ordinary isomorphisms must stay invertible in the filtered category.",
+   "place": "Realizes Step 3 of prop-trf-trace-additivity-open-closed, paragraph 'More precisely, they form an endomorphism of this triangle of filtered origin': associated-graded compatibility for already supplied compact-support filtered functors and canonical transformations.",
    "via": [
     "lem-trf-filtered-derived-operation-lifts"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-filtered-functor-graded-comparison",
+  "worker": "stage1",
+  "summary": "Repaired the retained split after its first dry run rejected proofs on unsplit children. One statement-only foundational node gives universal filtration truncations and exact graded functors. The five item steps construct canonical truncation comparisons from universal maps, define the graded comparison, check transformations and composition by explicit equations, and prove isomorphism detection by the elementary cone/localization argument using the existing Mathlib zero-cone leaf. No mathematical change to the item statement; TeX escaping normalized. The unsupported uniqueness claim from the morphism-of-triangles axiom was removed.",
+  "blueprint": "Realizes Step 3 of prop-trf-trace-additivity-open-closed, paragraph 'More precisely, they form an endomorphism of this triangle of filtered origin': associated-graded compatibility for already supplied compact-support filtered functors and canonical transformations."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-65f051d6b",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-65f051d6b (reviewer sub-agent of L); spot-checked: I read all of the item and the new node lem-trf-filtered-truncation-triangle, every cited statement (def-sp-abelian, def-sp-filtration, def-sp-filtered-complex-subquotients, def-weil-abstract-derived-category, def-weil-triangulated-category, and the Mathlib leaf lem-kun-distinguished-cone-zero, Pretriangulated.lean:388), and Varshavsky §5.1.1(a)-(e), §5.1.2(a)-(c), §5.1.3(a)-(e) and Lemma 5.1.4(i)-(iii) with its full proof, pp.39-41. The item statement matches 5.1.3(b),(e) and 5.1.4 in the covariant unary DF^+ case and is not weakened. Steps 1-5 recomputed: sigma^>= is characterized by postcomposition with iota and sigma^< by precomposition with Gtilde(q)=(sigma^<)^{-1}q. kappa has the right source and target, and theta=phi o omega(kappa^{-1}). The transformation square follows from naturality of alpha and the 5.1.3(e) square at T_pM. Step 4 really is elementary: graded cones vanish, so K->0 is in W. In Step 5, kappa_HF=kappa_H o H(kappa_F) by naturality of sigma^>=_H, which gives theta_HF=H(theta_F) o theta_H. The new node is true and statement-only. Its Hom bijections and semi-orthogonality hold because a roof source can be replaced by its t_{>=r}. It states the adjoint directions correctly: Varshavsky 5.1.1(c) prints them reversed, and I verified the worker's F_2 counterexample with P_0, P_1. Small cases checked: zero category, pure degree, r beyond the support, two-step non-split filtrations, unbounded cochain degrees with a uniform filtration. Nothing in the DAG duplicates it. lem-trf-filtered-derived-hom-calculus states the truncation triangles only under enough injectives, so the new node generalizes that clause. lem-trf-filtered-cone-localization overlaps only in the triangulated-structure sentence. No blueprint node in main-20261015 matches, and there is no cycle. The route stays in unit sk-i-global-additivity; the cone-zero leaf is a Mathlib tool, so no tool_uses are needed. No SGA is cited. Fix: Step 5 of the item used an undeclared third category written as mathcal C, which clashes with the statement's dummy variable. I replaced it with a declared abelian category mathcal E and supplied interval-preserving lifts (F,phi_F),(H,phi_H), and named the naturality of sigma^>=_H. The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-filtered-functor-graded-comparison.json; no statement or dependency changed.; 1 file(s) fixed by the reviewer"
  }
 }

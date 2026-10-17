@@ -31,34 +31,147 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-cbc-enhanced-cartesian-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "grep",
-   "query": "grep -rn 'opFunctor|def op\\b|opEquiv' Mathlib/AlgebraicTopology/SimplicialSet/*.lean; grep -rln Quasicategory Mathlib",
-   "results": "Mathlib/AlgebraicTopology/SimplicialSet/Op.lean: SSet.opFunctor, the strict covariant involution of SSet induced by SimplexCategory.rev; SSet.S.opEquiv, SSet.N.opEquiv (Simplices.lean:170, NonDegenerateSimplices.lean:173); Quasicategory files (Basic, Nerve, StrictSegal, TwoTruncated, InnerFibration) contain no infinity category of quasicategories and no coherent functor on it.",
-   "date": "2026-10-17",
-   "verdict": "no match: Mathlib has the strict opposite of simplicial sets (the object part of this node) but no infinity category Cat_infty and no coherent functor on it"
+   "text": "For composable monotone maps $\\alpha:[l]\\to[m]$ and $\\beta:[m]\\to[n]$, $(\\beta\\alpha)^\\vee(i)=n-\\beta(\\alpha(l-i))=(\\beta^\\vee\\alpha^\\vee)(i)$, and $(1)^\\vee=1$. Thus the stated operators define a simplicial set and make $f\\mapsto f^{\\mathrm{op}}$ a covariant functor on simplicial sets. The formulas $(\\alpha^\\vee)^\\vee=\\alpha$ and coordinatewise action on products give $(K^{\\mathrm{op}})^{\\mathrm{op}}=K$ and $(K\\times L)^{\\mathrm{op}}=K^{\\mathrm{op}}\\times L^{\\mathrm{op}}$, on operators as well as simplices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.2.1; explicit calculation of the opposite simplex operators."
+   }
   },
   {
-   "tool": "leansearch",
-   "query": "opposite involution of the infinity category of infinity categories",
-   "results": "not run: network access is blocked for the reviewer on this machine",
+   "text": "The map $\\theta_n:\\Delta^n\\to(\\Delta^n)^{\\mathrm{op}}$ sending a $k$-simplex $\\gamma:[k]\\to[n]$ to $\\gamma^\\vee$ is an isomorphism and sends face $i$ to face $n-i$. Applying opposite to $\\Lambda_i^n\\to C^{\\mathrm{op}}$ and using $\\theta_n$ therefore gives a map $\\Lambda_{n-i}^n\\to C$. Since $0<n-i<n$, it has a filler; applying the inverse reversal gives the required filler in $C^{\\mathrm{op}}$. Hence opposite preserves quasicategories. Reversing an edge, its inverse, and the two inverse-witnessing triangles gives inverse witnesses in the opposite, so an edge is an equivalence if and only if its opposite is.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.2.1, reversed horn indices; inverse-edge definition in def-cbc-enhanced-diagrams-cones."
+   }
+  },
+  {
+   "text": "Use the marked simplicial sets, marking conventions, products and $\\operatorname{Map}^{\\sharp}$ of [lem-coef-marked-point-cartesian-model]. For $X=(K,M)$ set $O(X)=(K^{\\mathrm{op}},M)$, identifying the degree-one sets, and set $O(f)=f^{\\mathrm{op}}$. This preserves degeneracies and marked maps, and $O^2=\\mathrm{id}$; Step 2 gives $O(C^\\natural)=(C^{\\mathrm{op}})^\\natural$. For an $n$-simplex $h:X\\times(\\Delta^n)^\\sharp\\to Y$ of $\\operatorname{Map}^{\\sharp}(X,Y)$, put $\\rho_n(h)=h^{\\mathrm{op}}\\circ(1\\times\\theta_n)$. The identity $\\theta_n\\alpha=(\\alpha^\\vee)^{\\mathrm{op}}\\theta_m$ for $\\alpha:[m]\\to[n]$ gives $\\rho_n(h)\\circ(1\\times\\alpha)=\\rho_m(h\\circ(1\\times\\alpha^\\vee))$. Thus the actual natural simplicial isomorphism is $\\operatorname{Map}^{\\sharp}(X,Y)^{\\mathrm{op}}\\cong\\operatorname{Map}^{\\sharp}(OX,OY)$, with an opposite on the source. Applying the formula twice is identity.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Sections 1.2.1 and 3.1.3: Map-sharp defined before Remark 3.1.3.1; explicit operator calculation (agent expansion)."
+   }
+  },
+  {
+   "text": "For any simplicial set $A$, define $r_A:|A^{\\mathrm{op}}|\\to|A|$ by $[a,(t_0,\\ldots,t_n)]\\mapsto[a,(t_n,\\ldots,t_0)]$, using the realization quotient of [def-cbc-enhanced-diagrams-cones] and [lem-coef-realization-finite-limits]. For a simplex operator $\\alpha:[m]\\to[n]$, barycentric reflection satisfies $r_n\\alpha_*=(\\alpha^\\vee)_*r_m$, so this formula respects every quotient relation. It is continuous on each simplex, natural in $A$, and its inverse is the identical reflection for $A^{\\mathrm{op}}$. Hence a simplicial map is a weak homotopy equivalence if and only if its opposite is. For a marked weak equivalence $f:X\\to Y$ and any quasicategory $C$, Step 3 identifies the test map $\\operatorname{Map}^{\\sharp}(OY,C^\\natural)\\to\\operatorname{Map}^{\\sharp}(OX,C^\\natural)$ with the opposite of $\\operatorname{Map}^{\\sharp}(Y,(C^{\\mathrm{op}})^\\natural)\\to\\operatorname{Map}^{\\sharp}(X,(C^{\\mathrm{op}})^\\natural)$. This is a weak homotopy equivalence by the defining test in [lem-coef-marked-point-cartesian-model], since $C^{\\mathrm{op}}$ is a quasicategory. Therefore $O$ preserves marked weak equivalences.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-realization-finite-limits",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Sections 1.2.1 and 3.1.3, weak-equivalence test; quotient-reflection proof written by the second reader."
+   }
+  },
+  {
+   "text": "Let $\\mathcal M$ be the marked model category over a point from [lem-coef-marked-point-cartesian-model], with weak equivalences $W$, and let $\\mathcal F$ be its ordinary full subcategory on $C^\\natural$. That node makes every object cofibrant, identifies the fibrant objects with these $C^\\natural$, and identifies their enriched mapping sets with $\\operatorname{Fun}(C,D)^\\simeq$, compatibly with composition. Thus its bifibrant coherent nerve is exactly the $\\mathrm{Cat}_\\infty$ of [def-cbc-enhanced-cartesian-fibration]. Apply [lem-coef-simplicial-model-nerve-localization]: the canonical functor $q:N(\\mathcal F)\\to\\mathrm{Cat}_\\infty$, sending $C^\\natural$ to $C$ and a strict functor $u$ to its corresponding edge, is a homotopy coherent localization at $W|_{\\mathcal F}$. In particular restriction along $q$ identifies entire functor infinity categories with the full subcategories inverting these weak equivalences, for arbitrary target infinity categories, not just their homotopy categories.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-cartesian-fibration",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 1.3.4.20 and Remark 1.3.4.16; HTT Definition 3.0.0.1 and Corollary 3.1.4.4 identify the marked-point model."
+   }
+  },
+  {
+   "text": "By Steps 2-4, $O$ restricts to an ordinary endofunctor of $\\mathcal F$ preserving $W|_{\\mathcal F}$. Therefore $qN(O)$ inverts that class. The full functor-category universal property in [lem-coef-simplicial-model-nerve-localization] extends it to a coherent functor $\\mathrm{op}:\\mathrm{Cat}_\\infty\\to\\mathrm{Cat}_\\infty$, with specified natural equivalence $\\eta:\\mathrm{op}\\,q\\simeq qN(O)$. On $q(C^\\natural)=C$ and $q(u)=u$, this comparison identifies its object and arrow values with $C^{\\mathrm{op}}$ and $u^{\\mathrm{op}}$, respectively. Because this is an equivalence of entire functor infinity categories, the extension includes every higher simplex and its composition coherences. No simplicial map between the unopposed core mapping sets is asserted.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 1.3.4.20, homotopy coherent localization universal property; explicit application to the ordinary relative functor O."
+   }
+  },
+  {
+   "text": "Restrict $\\mathrm{op}^2$ along $q$ and compose the comparisons $\\mathrm{op}(\\eta)$ and $\\eta N(O)$ to obtain $\\mathrm{op}^2q\\simeq qN(O)^2=q$. Full faithfulness of restriction along $q$ in [lem-coef-simplicial-model-nerve-localization] lifts this specified equivalence to $\\epsilon:\\mathrm{op}^2\\simeq\\mathrm{id}_{\\mathrm{Cat}_\\infty}$. After the specified identifications of the two successive object values, its component at $C$ is the identity of $(C^{\\mathrm{op}})^{\\mathrm{op}}=C$, because the restricted comparison ends with the strict identity $O^2=\\mathrm{id}$. Thus $\\mathrm{op}$ is its own two-sided inverse and is an equivalence in the sense of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 1.3.4.20, full faithfulness on coherent natural transformations; the double-op comparison is written out here."
+   }
+  },
+  {
+   "text": "All opposite operators, marked products and the reflection maps are given in the universe of the input simplicial sets. The marked-point model and its bifibrant description are universe-relative by [lem-coef-marked-point-cartesian-model]. For universes $\\mathcal U\\subset\\mathcal V$, let $i:\\mathrm{Cat}_{\\infty,\\mathcal U}\\to\\mathrm{Cat}_{\\infty,\\mathcal V}$ be the natural inclusion. The two functors $i\\,\\mathrm{op}_{\\mathcal U}$ and $\\mathrm{op}_{\\mathcal V}i$ restrict along $q_{\\mathcal U}$ to the same $q_{\\mathcal V}N(O)$ on the smaller ordinary category of fibrant objects. Apply the full faithfulness in [lem-coef-simplicial-model-nerve-localization] with target $\\mathrm{Cat}_{\\infty,\\mathcal V}$ to obtain their natural equivalence; their double-op comparisons agree because both restrict to $O^2=\\mathrm{id}$. This is the claimed compatibility with universe inclusion.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 1.3.4.20 in nested universes; HTT marked-point model constructions in the universe of the input."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-cartesian-fibration",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-simplicial-model-nerve-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit opposite-operator, marked mapping-object and realization-reflection calculations, followed by the existing marked-point model and simplicial-model localization theorems (HA Theorem 1.3.4.20). Repaired independently by Q82 after detecting the first worker helper variance error."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "coherent opposite involution on infinity category of quasicategories",
+   "results": "SSet.opEquivalence_inverse, SSet.opEquivalence_functor, SSet.opEquivalence, SSet.opFunctorCompOpFunctorIso, SSet.opFunctor, SSet.op, SSet.opObjEquiv, SSet.QCat.bicategory. Source read at Mathlib/AlgebraicTopology/SimplicialSet/Op.lean:42-92; these give the strict simplicial-set opposite, not the coherent Cat_infty endofunctor.",
    "date": "2026-10-17",
-   "verdict": "unavailable"
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "SSet.opFunctor",
-   "results": "not run: network access is blocked for the reviewer on this machine",
+   "query": "SSet.opEquivalence, SSet.opFunctor",
+   "results": "4 hits: SSet.opEquivalence_functor, SSet.opEquivalence_inverse, SSet.opEquivalence_counitIso, SSet.opEquivalence_unitIso; these identify the strict SSet equivalence, not an infinity-categorical functor.",
    "date": "2026-10-17",
-   "verdict": "unavailable"
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MarkedSSet|marked.*model|CatInfinity|opFunctor",
+   "results": "8 hits in AlgebraicTopology/SimplicialSet: SSet opposite and monoidal structure only; no marked-point model or coherent Cat_infty opposite theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "opposite functor on the infinity category of quasicategories obtained from marked simplicial sets",
+   "results": "CategoryTheory.Cat.opFunctor, CategoryTheory.Functor.op, SimplicialObject.opFunctor, SSet.opFunctor, CategoryTheory.Functor.opInv, CategoryTheory.Functor.opHom, SSet.op, Bicategory.Opposite.opFunctor. None states the coherent Cat_infty involution.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +188,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cat-infinity-opposite-involution",
+  "worker": "stage1",
+  "summary": "Second reader rejected and removed the false new mapping-space helper: reversal gives Fun(C,D)^op, not Fun(C,D). The eight repaired steps prove strict reversal and horn preservation, compute marked mapping simplicial sets with the necessary opposite, prove weak-equivalence preservation by barycentric realization reflection, identify Cat_infty with the marked-point model localization using existing nodes, descend the ordinary relative functor with all higher coherences, lift O^2=id, and verify universe compatibility. The item statement is unchanged. Zero new nodes; no Mathlib match for the coherent Cat_infty theorem.",
+  "blueprint": "The same prop-coef-integral-exceptional-adjoint ancestry and downstream lem-coef-ind-right-adjoint-coherent use are retained: this constructs the coherent C -> C^op operation needed for the contravariant presheaf construction. The correction is below that unit route, using its existing generic model-localization foundations."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-ba136e256",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-ba136e256 (reviewer sub-agent of L); spot-checked: I read the item, its eight steps and the full statement of every cited node: def-cbc-enhanced-diagrams-cones, def-cbc-enhanced-cartesian-fibration, lem-coef-marked-point-cartesian-model, lem-coef-realization-finite-limits and lem-coef-simplicial-model-nerve-localization. I also read the unit sk-prop-sf-biduality-general, the chapter, and the only citer, lem-coef-ind-right-adjoint-coherent step 1. The delivery has no new nodes; the false helper, which had the wrong variance (Fun(C,D) where Fun(C,D)^op is needed), was correctly dropped. Checks by step: (1) I recomputed (beta alpha)^vee = beta^vee alpha^vee, (alpha^vee)^vee = alpha, and products. (2) theta_n is simplicial and carries the horn Lambda_{n-i} into (Lambda_i)^op; reversal swaps the inverse witnesses. (3) I verified theta_n alpha = (alpha^vee)^op theta_m on simplices, which gives Map^sharp(X,Y)^op = Map^sharp(OX,OY), natural in X. (4) Reflecting barycentric coordinates satisfies |alpha^vee|(rev t) = rev(|alpha| t), so it respects the realization quotient; the weak-equivalence test transfers through C^op, which is a small quasicategory by step 2. (5) I matched every hypothesis of the nerve-localization node against the marked-point model: all objects are cofibrant, the fibrants are the C^natural, and the cores give Cat_infty. So q is a localization with the universal property for every target. (6)-(8) The descent, the lift of op^2 = id, and the universe compatibility via the strict identity i q_U = q_V N(incl) are correct. The values C^op and u^op hold through the specified comparison eta, which is how the citer uses them. Small cases checked: empty set, Delta^0, Delta^1, no inner horns in dimension 1, degenerate edges, the fork poset. proof_deps equals the union of the step uses. All dependencies are in the item's own unit or are definitions, so no tool_uses are needed. No cycle. Duplicate search by rg over dag/nodes and blueprint main-20261015 found none. No SGA source is cited. The item is not a target, so the base-change check does not apply. HTT is WANTED and proof_origin is agent. No changes made."
  }
 }
