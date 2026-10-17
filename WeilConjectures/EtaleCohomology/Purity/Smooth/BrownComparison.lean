@@ -139,6 +139,8 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedUpperShriekAdjunction :
     (DerivedCategoryFiniteTor.rightDerivedLowerShriekCompatibility Λ aY f)
     (DerivedCategoryFiniteTor.rightDerivedUpperShriekCompatibility Λ aY f)
 
+omit [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] [IsSeparated aY] [HasInvertibleExponent Λ X]
+  [IsSeparated f] in
 /-- The counit of the restricted Brown adjunction is the counit of `Rf_! ⊣ Rf^!`. -/
 lemma DerivedCategoryFiniteTor.rightDerivedUpperShriekAdjunction_counit_app
     (K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) Y) :
@@ -150,8 +152,9 @@ lemma DerivedCategoryFiniteTor.rightDerivedUpperShriekAdjunction_counit_app
     (DerivedCategoryFiniteTor.rightDerivedLowerShriekCompatibility Λ aY f)
     (DerivedCategoryFiniteTor.rightDerivedUpperShriekCompatibility Λ aY f) K
   refine this.trans ?_
-  show 𝟙 _ ≫ (R(f)_![ModuleCat.{u + 1} Λ]).map (𝟙 _) ≫ _ = _
+  change 𝟙 _ ≫ (R(f)_![ModuleCat.{u + 1} Λ]).map (𝟙 _) ≫ _ = _
   rw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
+  rfl
 
 /-- The smooth purity isomorphism `γ_f : Lf^*(-)(d)[2d] ≅ Rf^!`
 (`AlgebraicGeometry.Etale.smoothPurityNatIso`, for an orientation `θ : ω_f ≅ Λ_X(d)[2d]`),
@@ -164,7 +167,7 @@ noncomputable def DerivedCategoryFiniteTor.smoothPurityNatIso
   NatIso.ofComponents
     (fun K ↦ ObjectProperty.isoMk _ ((Etale.smoothPurityNatIso Λ (d := d) f θ).app K.obj))
     (fun g ↦ by
-      refine ObjectProperty.hom_ext ?_
+      refine ObjectProperty.hom_ext (P := constructibleFiniteTor (ModuleCat.{u + 1} Λ) X) ?_
       exact (Etale.smoothPurityNatIso Λ (d := d) f θ).hom.naturality g.hom)
 
 /-- Blueprint `det-sp-comparison-brown-explicit`: The twisted inverse image is right adjoint to

@@ -305,16 +305,28 @@ theorem isContinuousAt_zero (S : SystemData D c) (hS : S.Laws) : S.IsContinuousA
       ((S.F j).obj.map (hWf.from (⊤_ _)).op t), (Sheaf.H.equiv₀ _ terminalIsTerminal).injective ?_⟩
     have hx : Sheaf.H.equiv₀ _ terminalIsTerminal x =
         S.L.pt.obj.map (hW.from (⊤_ _)).op ((S.stageMap f).hom.app (op T₀) t) := by
-      rw [ht, ← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp,
-        terminal.hom_ext (hW.from (⊤_ _) ≫ terminal.from _) (𝟙 _), op_id,
-        CategoryTheory.Functor.map_id]
+      have hid : hW.from (⊤_ _) ≫ terminal.from _ = 𝟙 _ := terminal.hom_ext _ _
+      rw [ht, ← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp]
+      erw [hid, op_id, CategoryTheory.Functor.map_id]
       rfl
-    rw [equiv₀_toLimitH, AddEquiv.apply_symm_apply, hx]
+    rw [equiv₀_toLimitH]
+    erw [AddEquiv.apply_symm_apply]
+    rw [hx]
     simp only [stageMap, limitComparison, ObjectProperty.FullSubcategory.comp_hom,
       NatTrans.comp_app, ConcreteCategory.comp_apply, lowerStar_map_hom_app,
       lowerStarComp_hom_app_hom_app]
-    trace_state
-    sorry
+    have hΦ : IsTerminal ((c.π.app (op j)).Etale.obj
+        ((MorphismProperty.Over.pullback @Etale ⊤ (D.map f.op)).obj T₀)) :=
+      IsTerminal.isTerminalObj _ _ hWf
+    have hη := NatTrans.naturality_apply ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+      (c.π.app (op j))).unit.app (S.F j)).hom (hWf.from (⊤_ _)).op t
+    erw [hη, ← NatTrans.naturality_apply (S.L.ι.app j).hom,
+      ← NatTrans.naturality_apply (S.eG j).inv.hom]
+    congr 2
+    erw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply, ← Functor.map_comp,
+      ← Functor.map_comp]
+    congr 2
+    exact Quiver.Hom.unop_inj (hΦ.hom_ext _ _)
   · sorry
 
 end Zero

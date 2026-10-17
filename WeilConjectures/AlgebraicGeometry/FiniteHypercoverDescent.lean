@@ -22,7 +22,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Blueprint: lemma-weil-pbc-finite-hypercover-descent. -/
+/-- Blueprint `lemma-weil-pbc-finite-hypercover-descent`: truncated finite split étale
+hypercovers of the limit, morphisms between them and equalities of such morphisms descend to a
+finite stage. -/
 theorem finite_hypercover_descent
     {I : Type w} [SmallCategory I] [IsFiltered I]
     (D : Iᵒᵖ ⥤ Scheme.{w})

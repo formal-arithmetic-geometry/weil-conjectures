@@ -147,7 +147,7 @@ lemma isIso_tower_map_app (k : SimplexCategoryᵒᵖ) {i j : ℕ} (hij : i ≤ j
 
 lemma isEventuallyConstantFrom (k : SimplexCategoryᵒᵖ) :
     (tower step ⋙ (evaluation _ _).obj k).IsEventuallyConstantFrom (k.unop.len + 1) :=
-  fun j f ↦ isIso_tower_map_app step k (leOfHom f) (Nat.lt_succ_self _)
+  fun _ f ↦ isIso_tower_map_app step k (leOfHom f) (Nat.lt_succ_self _)
 
 instance (k : SimplexCategoryᵒᵖ) : HasColimit ((tower step).flip.obj k) :=
   (isEventuallyConstantFrom step k).hasColimit
@@ -257,8 +257,9 @@ def isColimitStage (Δ : SimplexCategoryᵒᵖ) :
               Sigma.desc (fun s : {s : Δ.unop ⟶ ⦋m⦌ // Epi s} ↦
                 Sigma.ι (fun _ ↦ (cells step m).N) s.1 ≫ (cells step m).cone.attachInr.app Δ) :=
           by rw [Sigma.ι_desc]
-        erw [this, reassoc_of% h', hb.fac _ (.mk .right)]
-        exact Sigma.ι_desc _ ⟨e, he⟩
+        erw [this, h', Category.assoc, hb.fac _ (.mk .right)]
+        exact Sigma.ι_desc (fun s : {s : Δ.unop ⟶ ⦋m⦌ // Epi s} ↦
+          t.inj ⟨⟨op ⦋m⦌, s.1, s.2⟩, Nat.lt_succ_self m⟩) ⟨e, he⟩
     · refine BinaryCofan.IsColimit.hom_ext hb ?_ ?_
       · refine Cofan.IsColimit.hom_ext ih _ _ (fun A ↦ ?_)
         have h₁ := hg ⟨A.1, Nat.lt_succ_of_lt A.2⟩

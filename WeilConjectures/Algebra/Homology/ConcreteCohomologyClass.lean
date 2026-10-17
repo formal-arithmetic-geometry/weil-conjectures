@@ -151,7 +151,8 @@ lemma IsCls.map {L : HomologicalComplex A c} (φ : K ⟶ L) {i : ι} {y : ToType
     L.IsCls i (HomologicalComplex.homologyMap φ i y) (φ.f i x) := by
   obtain ⟨z, rfl, rfl⟩ := h
   refine ⟨HomologicalComplex.cyclesMap φ i z, ?_, ?_⟩
-  · rw [← ConcreteCategory.comp_apply, HomologicalComplex.cyclesMap_i, ConcreteCategory.comp_apply]
+  · rw [← ConcreteCategory.comp_apply, HomologicalComplex.cyclesMap_i,
+      ConcreteCategory.comp_apply]
   · rw [← ConcreteCategory.comp_apply, ← HomologicalComplex.homologyπ_naturality,
       ConcreteCategory.comp_apply]
 

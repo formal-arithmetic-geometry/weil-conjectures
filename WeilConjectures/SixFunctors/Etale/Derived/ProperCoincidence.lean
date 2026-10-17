@@ -221,7 +221,67 @@ theorem rightDerivedLowerShriekOfCompactificationComparison_comp_toLowerStar
     rightDerivedLowerShriekOfCompactificationComparison, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc,
     rightDerivedFunctorCompIso'_refinementLowerStarComp_hom, rightDerivedLowerStarCompHom_eq']
-  done
+  erw [← reassoc_of% hn, hA, hQ]
+  simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
+
+omit [HasSmallSiteSheafify A] in
+/-- For a proper `f`, the forget-supports map `ψ_c : Rf_!(c) ⟶ Rf_*` of every compactification
+`c` is an isomorphism: the open immersion `c.i` is then also closed. -/
+instance isIso_rightDerivedLowerShriekOfCompactificationToLowerStar [IsProper f]
+    (c : Compactification f) : IsIso (rightDerivedLowerShriekOfCompactificationToLowerStar A c) := by
+  have := c.isClosedImmersion_openImmersion ‹_›
+  unfold rightDerivedLowerShriekOfCompactificationToLowerStar
+  infer_instance
+
+section Torsion
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+
+/-- **The forget-supports maps do not depend on the compactification**: for two compactifications
+`c`, `d` of a quasi-compact `f`, the identification `Rf_!(c) ≅ Rf_!(d)` carries `ψ_d` to `ψ_c`. -/
+theorem rightDerivedLowerShriekOfCompactificationIso_hom_comp_toLowerStar [QuasiCompact f]
+    (c d : Compactification f) :
+    (rightDerivedLowerShriekOfCompactificationIso Λ c d).hom ≫
+        rightDerivedLowerShriekOfCompactificationToLowerStar (ModuleCat.{u + 1} Λ) d =
+      rightDerivedLowerShriekOfCompactificationToLowerStar (ModuleCat.{u + 1} Λ) c := by
+  have h₂ : inv (rightDerivedLowerShriekOfCompactificationComparison (ModuleCat.{u + 1} Λ)
+      (Compactification.infSnd c d) (Compactification.isPullback_infSnd c d)) ≫
+        rightDerivedLowerShriekOfCompactificationToLowerStar (ModuleCat.{u + 1} Λ) d =
+      rightDerivedLowerShriekOfCompactificationToLowerStar (ModuleCat.{u + 1} Λ)
+        (Compactification.inf c d) := by
+    rw [IsIso.inv_comp_eq, rightDerivedLowerShriekOfCompactificationComparison_comp_toLowerStar]
+  simp only [rightDerivedLowerShriekOfCompactificationIso, Iso.trans_hom, asIso_hom, Iso.symm_hom,
+    asIso_inv, Category.assoc, h₂]
+  exact rightDerivedLowerShriekOfCompactificationComparison_comp_toLowerStar _ _ _
+
+/-- Blueprint `sk-prop-sf-comp-proper`: Proper coincidence
+
+**Proper coincidence, canonically.** Let `f : X ⟶ Y` be proper and `Λ` finite. Then `(𝟙 X, f)`
+is a compactification of `f` (`AlgebraicGeometry.Compactification.ofIsProper`), and for every
+compactification `c = (i, g)` of `f` the forget-supports map
+`ψ_c : Rf_!(c) = Rg_* D(i_!) ⟶ Rg_* Ri_* ⟶ Rf_*` is an isomorphism; for `c = (𝟙 X, f)` it is the
+identification `Rf_! = Rf_* ∘ 𝟙_! ≅ Rf_*`. The identification is independent of the
+compactification: under the comparison `Rf_!(c) ≅ Rf_!(d)` of any two compactifications,
+`ψ_d` corresponds to `ψ_c`; in particular, for `R(f)_!`, defined with the chosen
+compactification, `ψ_c` is `ψ` of the chosen one after `Rf_!(c) ≅ R(f)_!`. -/
+theorem isIso_rightDerivedLowerShriekOfCompactificationToLowerStar_and_independent [IsProper f]
+    [HasCompactification f] :
+    (∀ c : Compactification f,
+      IsIso (rightDerivedLowerShriekOfCompactificationToLowerStar (ModuleCat.{u + 1} Λ) c)) ∧
+    (∀ c d : Compactification f,
+      (rightDerivedLowerShriekOfCompactificationIso Λ c d).hom ≫
+          rightDerivedLowerShriekOfCompactificationToLowerStar (ModuleCat.{u + 1} Λ) d =
+        rightDerivedLowerShriekOfCompactificationToLowerStar (ModuleCat.{u + 1} Λ) c) ∧
+    (rightDerivedLowerShriekIso Λ (Compactification.ofIsProper f)).hom ≫
+        rightDerivedLowerShriekOfCompactificationToLowerStar (ModuleCat.{u + 1} Λ)
+          (HasCompactification.compactification f) =
+      rightDerivedLowerShriekOfCompactificationToLowerStar (ModuleCat.{u + 1} Λ)
+        (Compactification.ofIsProper f) :=
+  ⟨fun c ↦ inferInstance, fun c d ↦
+    rightDerivedLowerShriekOfCompactificationIso_hom_comp_toLowerStar Λ c d,
+    rightDerivedLowerShriekOfCompactificationIso_hom_comp_toLowerStar Λ _ _⟩
+
+end Torsion
 
 end Etale
 

@@ -70,6 +70,8 @@ noncomputable def affineLineTwistShiftIso (S : Scheme.{u}) [HasInvertibleExponen
     (twistShift Λ 𝔸(ULift.{u} (Fin 1); S) 1).obj (constantComplex Λ 𝔸(ULift.{u} (Fin 1); S)) ≅
       (D(((ProjectiveLine.affineLineCompactification' S).i)^*[ModuleCat.{u + 1} Λ])).obj
         ((twistShift Λ (ProjectiveLine S) 1).obj (constantComplex Λ (ProjectiveLine S))) :=
+  haveI : HasInvertibleExponent Λ (ProjectiveLine.affineLineCompactification' S).Z :=
+    inferInstanceAs (HasInvertibleExponent Λ (ProjectiveLine S))
   (twistShift Λ _ 1).mapIso
       (leftDerivedUpperStarConstantComplexIso Λ (ProjectiveLine.affineLineCompactification' S).i
         ).symm ≪≫
