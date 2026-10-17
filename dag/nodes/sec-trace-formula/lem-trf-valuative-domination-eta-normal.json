@@ -16,9 +16,154 @@
   "def-pc-fibre-product",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The finite-type Noetherian permanence theorem makes S,C,X,Y Noetherian. The finite-type-algebra finite-presentation theorem applies on affine charts over S; quasi-compactness and quasi-separatedness follow from Noetherianness, so X,Y,C are finitely presented over S. Since a and b are proper they are finite type over the Noetherian C; the same affine argument makes X and Y finitely presented over C. Choose a nonempty affine chart Spec R of S. The domain R is a finitely generated Z-algebra, and its field of fractions K is generated as a field over its prime subfield by the finitely many algebra generators of R. The existing Abhyankar bound therefore applies to K: every valuation subring of K has finite height. Consequently the hypothesis supplies h_V for every centred valuation of K, including every point of the fixed-field Riemann–Zariski space used below.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-trf-abhyankar-finite-type-field-height",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 5.2 hypotheses and the proof of Theorem 1.2 immediately afterwards, printed pp. 34–35; finite-height reduction by Lemma 2.1.2 / Corollary 2.1.3(i)."
+   }
+  },
+  {
+   "text": "We will use generic density over each integral birational S-model T. On affine charts A→B and A→R, the affine flatness criterion makes B flat over A. The tensor identities (B⊗_A R)⊗_R M=B⊗_A M show that B⊗_A R preserves injections of R-modules, hence is R-flat. The same affine criterion makes Y_T flat over T. On an affine chart over a domain R in T, apply the torsion-free sections lemma with L=O: every nonzero element of R acts injectively. Thus the map from sections to their localization over Frac R=K is injective. This proves that the generic fibre is schematically dense in Y_T (and equally in X_T and C_T). Also a_T is separated, since a is proper. For two C_T-morphisms Y_T→X_T agreeing on the generic fibre, their equalizer is closed: it is the pullback of the closed diagonal of a_T. Its ideal vanishes after restriction to the generic fibre, hence is zero by the injectivity just proved. The two morphisms are equal. This proves the generic-uniqueness assertion used for both spreading and gluing.",
+   "uses": [
+    "lem-sc-flat-invertible-sections-torsion-free",
+    "def-weil-flat-morphism",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 5.2 proof, uniqueness of the comparison on overlaps; flat generic density and the separated equalizer argument are expanded here."
+   }
+  },
+  {
+   "text": "Fix a centred valuation V⊂K with its map Spec V→S. By (iii) of the birational Riemann–Zariski lemma (Z=S, F=K), the coordinate rings A_j⊂V of affine neighbourhoods of the centres of V on birational models of S form a filtered diagram of subrings of K with injective transitions and union V; ordered by inclusion they form a nonempty directed set, and Spec V=lim Spec A_j with affine transition maps. Each T_j=Spec A_j is an affine open of a proper birational model, so T_j→S is separated of finite type, T_j is integral with function field K, and Spec V→S lifts to T_j through A_j⊂V. Apply morphism descent to h_V over the inverse system C_{T_j}=C×_S T_j: its transitions are affine by base change, its limit is C_V since fibre products commute with these limits, its initial term is Noetherian and hence quasi-compact and quasi-separated, and X,Y are finitely presented over C by Step 1. Their base changes remain finitely presented, as tensoring a finite algebra presentation gives a finite presentation. Thus descent gives a C_T-morphism h_T:Y_T→X_T at some T=T_j, whose pullback to V is h_V; its generic fibre is a_η^{-1}b_η. By (ii), the centred valuations lifting to T form an open subspace containing V. These opens cover the space of centred valuations of K on S, which is quasi-compact by (i); this gives finitely many T_1,…,T_r with comparisons h_i:Y_{T_i}→X_{T_i}.",
+   "uses": [
+    "lem-trf-birational-riemann-zariski-neighbourhoods",
+    "lemma-nagata-morphism-descends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 5.2, first paragraph, printed p. 34: Lemma 3.2.2 and approximation, followed by quasi-compactness and Corollary 3.2.7."
+   }
+  },
+  {
+   "text": "Apply the existing birational quasi-modification common-cover theorem to these finitely many T_i→S. The integral Noetherian S is reduced, quasi-compact, quasi-separated, with one irreducible component; the valuation-cover hypothesis is exactly the cover from Step 3. It gives a reduced proper modification q:S′→S with a finite open cover W_i and maps W_i→T_i. The schematically dense open of S′ identified with an open of the integral S is irreducible; its closure is all of S′. Hence S′ is reduced and irreducible, thus integral, with function field K. Pull h_i back to W_i. On each overlap the maps agree generically, so Step 2 makes them equal. They glue to a C′-morphism g:Y′→X′, where primes mean full base change to S′. Finally q is an isomorphism over a dense open of S. Let ξ′ be the generic point of S′ and U′⊂S′ the schematically dense open mapped isomorphically by q onto an open q(U′) of S. A point x of S′ over η has local ring containing O_{S,η}=K and contained in k(S′)=K, hence equal to K; so x=ξ′, and q^{-1}(η)={ξ′}⊂U′. As q is proper, q(S′∖U′) is closed and misses η, so U_0=q(U′)∖q(S′∖U′) is a dense open of S with q^{-1}(U_0)⊂U′ mapped isomorphically onto U_0. This is the open required by the fibre-image lemma.",
+   "uses": [
+    "lem-trf-birational-quasi-modification-common-cover",
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 5.2, end of first paragraph, printed pp. 34–35: Proposition 3.2.6 and gluing the comparisons."
+   }
+  },
+  {
+   "text": "Put h_η=a_η^{-1}b_η and let Γ be its scheme-theoretic graph closure in Y×_C X. Its generic graph is closed because a_η is separated. Therefore Γ_η is that graph, and p:Γ→Y is proper by closed-immersion and proper-base-change permanence. To check an actual open isomorphism, apply morphism descent to h_η as a C_η-map along the directed affine open neighbourhoods of η in S. The finite-presentation hypotheses over C are as in Step 3. It gives a C_U-map h_U:Y_U→X_U over a dense base open U⊂S. Its graph is closed, because a_U is separated, and is schematically the closure of its generic graph: its source Y_U has schematically dense generic fibre by Step 2. Restriction of schematic closure to an open commutes with this closure construction. Hence Γ|_{Y_U}=graph(h_U), so p is an isomorphism over Y_U. The open Y_U is schematically dense in Y by Step 2. Also p^{-1}(Y_U) is schematically dense in Γ: a local section on Γ vanishing there vanishes on Γ_η, and the definition of Γ as schematic closure says the restriction to Γ_η has zero kernel. In particular Γ is reduced, since its generic graph is reduced and has this injective restriction.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism",
+    "lemma-nagata-morphism-descends",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 5.2, graph formulation of descent; separatedness, generic spreading, and both schematic-density assertions are supplied explicitly."
+   }
+  },
+  {
+   "text": "The pair (Y′→Y, Y′→X′→X) gives a map Y′→Y×_C X. It factors through Γ: the ideal of Γ pulls back to zero on the generic fibre of Y′, hence to zero everywhere by Step 2. Denote the factor by j:Y′→Γ. It is proper: its graph in Y′×_Y Γ is closed because p is separated, and projection from this fibre product to Γ is the base change of the proper map Y′→Y. Apply proper permanence. Its closed image contains Γ_η, since q_η is an isomorphism. As Γ_η is dense in Γ, j is surjective. Surjectivity persists on each fibre over Y, so Y′_y→Γ_y is surjective for every y∈Y.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 5.2 descent diagram, recast using the graph closure. The proper surjection is verified from its graph and the dense generic fibre."
+   }
+  },
+  {
+   "text": "Let $y$ be a closed point of $Y$ and $s$ its image in $S$; then $y$ is closed in $Y_s$. Apply the corrected flat fibre-image lemma to $q$ and $g$ from Step 4. By the lemma, the image is a finite set $E$ of closed points. By Step 6 the same set is the image of $\\Gamma_y$ in $X_s$. The closed-point field lemma applied to the finite-type $\\kappa(s)$-scheme $Y_s$ gives $[\\kappa(y):\\kappa(s)]<\\infty$. Now $\\Gamma_y$ is a closed subscheme of $\\operatorname{Spec} \\kappa(y)\\times_{\\kappa(s)}X_s$. For each $x\\in E$, the fibre of this ambient scheme above $x$ is $\\operatorname{Spec}(\\kappa(y)\\otimes_{\\kappa(s)}\\kappa(x))$; this algebra is finite-dimensional over $\\kappa(x)$, so has finitely many primes, all maximal. Therefore $\\Gamma_y$ has finitely many points, all closed, and dimension at most zero. The argument uses the global comparison after one base modification and never infers dimension zero from a valuation-valued point.",
+   "uses": [
+    "lem-trf-base-modification-comparison-fibre-image",
+    "lem-kun-closed-point-field",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 5.2 proof, printed p. 35, fibre-image subclaim (stated as the cited node; Temkin's printed inference is invalid as written, see the source-error note), followed by the finite graph-fibre computation."
+   }
+  },
+  {
+   "text": "The proper fibre-dimension upper-semicontinuity theorem shows that O={y∈Y | dim Γ_y≤0} is open. Step 7 puts every closed point of Y in O. If the closed complement were nonempty it would contain a closed point: in a Noetherian T0 space choose a minimal nonempty closed subset, which is a singleton. Thus O=Y. Properness makes p locally of finite type, and the relative-dimension-zero criterion now makes p locally quasi-finite (empty fibres cause no pointwise condition). The existing proper locally quasi-finite finiteness leaf then makes p finite. Step 5 proves it is an isomorphism on the generic fibre and between schematically dense open subschemes. It is therefore a finite η-modification of Y. The assumed η-normality says p is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+    "lem-trf-locally-quasi-finite-relative-dimension-zero",
+    "pqf-lem-proper-lqf-finite",
+    "def-weil-proper-morphism",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 5.2, printed p. 35, concluding descent via η-normality; the graph version uses Stacks Tag 02LS for proper locally quasi-finite finiteness."
+   }
+  },
+  {
+   "text": "Compose the inverse Y→Γ of p with the second projection Γ→X to obtain h. The defining identity of Y×_C X gives ah=b. Its generic fibre is h_η because Γ_η was defined as the graph of a_η^{-1}b_η.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 5.2 conclusion, printed p. 35."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-proper-morphism",
+  "lem-kun-closed-point-field",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-trf-abhyankar-finite-type-field-height",
+  "lem-trf-base-modification-comparison-fibre-image",
+  "lem-trf-birational-quasi-modification-common-cover",
+  "lem-trf-birational-riemann-zariski-neighbourhoods",
+  "lem-trf-locally-quasi-finite-relative-dimension-zero",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lemma-nagata-morphism-descends",
+  "pqf-lem-proper-lqf-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 5.2, printed pp. 34–35, read in the online PDF; the Riemann–Zariski/base-modification route is followed, with the final descent recast through a finite graph projection."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,7 +195,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-stable-modification-uniqueness-normal",
@@ -77,5 +222,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuative-domination-eta-normal",
+  "worker": "stage1",
+  "summary": "Repair replaces the invalid pointwise valuation argument with fixed-field Riemann–Zariski spreading, a finite common base modification, the isolated fibre-image input, and finite graph descent. It cites the existing Abhyankar height bound and proper locally quasi-finite finiteness leaf. Separatedness and flatness prove generic uniqueness, the open graph isomorphism, and schematic density. Two new statement-only nodes; statement unchanged. Maintainer-reader FIX: step 3 cites the existing lem-trf-birational-riemann-zariski-neighbourhoods (the duplicate new RZ node is dropped); step 4 proves that q is an isomorphism over a dense open; the invalid inline proof of the fibre-image lemma is removed from step 7.",
+  "blueprint": "Temkin Proposition 5.2 supplies the valuative domination input in the existing stable-modification uniqueness branch; finite height follows from the existing Abhyankar lemma.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-morphism-descends",
+    "why": "Finite-presentation limit descent spreads a morphism of whole families, first from a valuation and then from the generic fibre; it is applied to the base-changed C-system."
+   },
+   {
+    "node": "lem-sc-flat-invertible-sections-torsion-free",
+    "why": "With L=O it proves generic schematic density over integral birational base models and hence uniqueness via a separated equalizer."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+    "why": "This generic proper-morphism tool propagates zero-dimensional graph fibres from closed points to every point."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Zariski’s lemma bounds the residue extension at a fibre-closed point, controlling the graph fibre after extending κ(s) to κ(y)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-morphism-descends",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+  "lem-kun-closed-point-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-61d015be3",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-61d015be3 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps, both new nodes, every cited statement, the unit sk-i-curve-zero, and Temkin arXiv:0707.3953v3 at Prop. 5.2 (pp. 34-35), section 3 conventions and the proof of Thm 1.2, from the local pdftotext copy at /tmp/q38temkin. The statement is unchanged and matches Prop. 5.2 plus the finite-type-over-Z and Abhyankar finite-height reduction. Source error confirmed: Temkin's p. 35 step from 'quasi-finite over S'_s' to 's-quasi-finite image' is invalid as written. The new node lem-trf-base-modification-comparison-fibre-image is true: I proved it independently by fibre-dimension local constancy for flat X and Y, Mumford rigidity, and Stein factorization plus Chevalley to rule out isolated exceptional fibre components. It needs flatness but not eta-normality, and it is not a restated clause of the item. Three faults were fixed in fixes/. (1) C5: the new node lem-trf-riemann-zariski-birational-neighbourhoods duplicates the existing unsplit lem-trf-birational-riemann-zariski-neighbourhoods (same unit, same Temkin 3.2 places, same fixed K, quasi-compactness, open quasi-model subspaces, affine filtered limit). It is dropped, and step 3 now cites the existing node. (2) B1/E3, also the flagged long step 7 (2040 chars): the step carried an invalid inline 'formal functions/Stein' proof of the cited lemma. That is removed, the step is now 933 chars, and the node's source.place is cleaned of the same claim. (3) E5, step 4: 'q is an isomorphism over a dense open' is now proved (q^{-1}(eta) is the generic point, U0 = q(U') minus q(S' minus U')). Steps 1, 2, 5, 6, 8 and 9 check against the cited statements. Accepted tool_uses: lemma-nagata-morphism-descends, lem-sc-flat-invertible-sections-torsion-free, lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous, lem-kun-closed-point-field. No SGA is used.; 2 file(s) fixed by the reviewer"
  }
 }
