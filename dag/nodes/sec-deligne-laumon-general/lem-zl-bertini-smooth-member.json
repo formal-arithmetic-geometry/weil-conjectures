@@ -15,9 +15,68 @@
   "def-pc-zero-scheme",
   "def-pc-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a basis of $V$ and form the universal section $s_{\\mathrm{univ}}=\\sum_i x_i\\psi(v_i)$ on $\\mathbf A^r_k\\times_kY$; by the definition of the zero-scheme construction and base change, its zero scheme $H_{\\mathrm{univ}}$ has fibre over every coefficient point $v$ equal to $H_v=Z(\\psi(v))$.",
+   "uses": [
+    "def-pc-zero-scheme",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Situation 0FD3, construction of the universal divisor"
+   }
+  },
+  {
+   "text": "Let $\\Sigma$ be the non-smooth locus of the projection $q:H_{\\mathrm{univ}}\\to\\mathbf A^r_k$. The dimension estimate in [lem-zl-bertini-singular-locus-dimension] (Stacks Tag 0FD6) gives $\\dim(\\Sigma)<r$ and a proper closed subset $B\\subsetneq\\mathbf A^r_k$ containing $q(\\Sigma)$.",
+   "uses": [
+    "lem-zl-bertini-singular-locus-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD6, singular-locus dimension estimate"
+   }
+  },
+  {
+   "text": "Put $U=\\mathbf A^r_k\\setminus B$, an open subset. Since $q(\\Sigma)\\subseteq B$, every point of the open $q^{-1}(U)$ has an open neighbourhood on which $q$ is smooth; these neighbourhoods intersected with $q^{-1}(U)$ cover $q^{-1}(U)$, so $q_U:q^{-1}(U)\\to U$ is smooth by [lem-weil-pbc-smooth-local-on-source]. For a field extension $k'/k$ and $v\\in U(k')$, viewed as $\\operatorname{Spec}k'\\to U\\subseteq\\mathbf A^r_k$, the fibre $H_{\\mathrm{univ}}\\times_{\\mathbf A^r_k}\\operatorname{Spec}k'=q^{-1}(U)\\times_U\\operatorname{Spec}k'$ is the base change of $q_U$, hence smooth over $k'$ by [lem-pc-proper-base-change](2); by Step 1 it is $H_v$.",
+   "uses": [
+    "lem-zl-bertini-singular-locus-dimension",
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-pc-proper-base-change",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD6, conclusion after the dimension estimate"
+   }
+  },
+  {
+   "text": "Because $B$ is proper, $U$ is nonempty and Zariski open. The same $U$ works after every field extension by the universal-family base-change identification in Step 1, which is exactly the stated meaning of 'for general' $v$.",
+   "uses": [
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Situation 0FD3 and Lemma 0FD6, final assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-zero-scheme",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-zl-bertini-singular-locus-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD6, lemma-bertini proof via the universal divisor and singular-locus dimension estimate"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,7 +108,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-bertini-finite-cover-curve",
@@ -61,10 +120,25 @@
  "blueprint": {
   "from": {
    "node": "lem-zl-bertini-finite-cover-curve",
-   "place": "Tag 0FD6, lemma-bertini",
+   "place": "proof, second paragraph: 'Tag 0FD6 on $X\\setminus S$, together with these finitely many derivative conditions, makes a general member smooth everywhere on $X$' (this node is Tag 0FD6, used on $X\\setminus S$).",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-bertini-smooth-member",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 0FD6 and the universal-divisor proof. The imported statement is unchanged and no exact finished Lean declaration exists. Split the proof into universal-family identification, the singular-locus dimension estimate (the new statement-only node lem-zl-bertini-singular-locus-dimension), passage to the open complement, and field-extension/base-change compatibility. Existing definition dependencies were checked against the item statement.",
+  "blueprint": "The four steps realize the Tag 0FD6 construction of the universal divisor, its singular-locus dimension estimate, and the final general-member/base-change conclusion."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-4b312d1e3",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-4b312d1e3 (reviewer sub-agent of L); spot-checked: Read Stacks varieties.tex Situation 0FD3 and Lemma 0FD6 (l.10908-11060, whole proof), the blueprint ancestor lem-zl-bertini-finite-cover-curve (master proof para 2 uses 0FD6 on X minus S), and every cited node. The item agrees with 0FD6 hypothesis by hypothesis, including 'general'; the delivery did not change or weaken its statement. The split is genuine: steps for the universal family and its fibres, the new estimate node, the open complement plus smooth base change, and the elementary 'general'. The new node lem-zl-bertini-singular-locus-dimension (dim Sigma < r, so q(Sigma) lies in a proper closed subset) is true and strictly smaller than the item. I tested it on Y empty, Y=Spec k with r=1 (Sigma={0}) and P^1 with O(1) (Sigma={0}xP^1, dim 1<2). I also checked that the source's count stays valid at non-flat points. No duplicate found by rg (bertini, 0FD6, universal divisor, singular/smooth locus). Two faults, both fixed in fixes/: (1) B2/B3: the new node did not introduce psi, the universal section/H_univ or 'non-smooth locus', and did not cite the P(V) morphism. Its statement now defines them and cites def-weil-pbc-morphism-to-projective-space-by-sections. (2) C1/C4: step 3 cited def-pc-base-change for smoothness of fibres. It now cites lem-weil-pbc-smooth-local-on-source (Mathlib leaf) and lem-pc-proper-base-change(2) (Lean-closed), so no tool_uses are needed. blueprint.from.place on both nodes now names the blueprint proof sentence. Step 1's base change of the zero scheme along a non-flat map follows from the definition in a few lines; I accepted it as written. No SGA source is cited. Not a target node.; 2 file(s) fixed by the reviewer"
  }
 }

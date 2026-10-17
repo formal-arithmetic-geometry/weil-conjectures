@@ -18,11 +18,146 @@
   "def-pod-lisse-l-adic-sheaves",
   "def-weil-pbc-exact-sequence",
   "def-weil-derived-cohomology-sheaves",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $X=X_0\\times_{k_0}k$ and $U=U_0\\times_{k_0}k$, and use the same letter $j$ for the geometric open immersion. These are smooth separated finite-type curves over the perfect field $k$. Finite type over a field makes them Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (a field has only the two ideals), and finite-dimensional by [lem-kun-dimension-finite-type]. Thus the rational/common-stage categories used in the statement are defined. In particular all their opens are quasi-compact. Forget the Weil structures in the given sequence. It is short exact in the underlying constructible heart by [lem-dl-a1-constructible-fibres-exact]. Apply clause (4) of [lem-weil-heart-short-exact-triangles] in this heart to obtain a distinguished triangle $G_1\\to G\\to G_2\\xrightarrow{w}G_1[1]$ in the geometric constructible category. This use of the heart does not put a triangulated structure on Frobenius-fixed pairs.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-dl-a1-constructible-fibres-exact",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-exact/p-dl-a1-exact.proof.md",
+    "place": "Step 1: underlying geometric short exact sequence and its triangle."
+   }
+  },
+  {
+   "text": "The actual adic $Rj_*$ is an exact triangulated functor on these geometric categories. To check the coefficient issue, at a finite field $E$ first work over the completed sheaves $\\widehat{\\mathcal O}_{E,U}$ and $\\widehat{\\mathcal O}_{E,X}$. The natural comparison of [lem-pur-completed-coefficient-pushforward-comparison] identifies ordinary completed-ring derived direct image with the strict reduction-tower/derived-limit construction in the direct-image definition [def-weil-derived-direct-image]. Ordinary total right derived direct image is triangulated by [lem-pc-right-derived-functor-triangulated]. Its constructible restriction exists by [lem-sf-integral-direct-image-constructible], since $j$ is a morphism of finite-type schemes over $k$ and $\\ell$ is invertible. Its triangles are the inherited ambient triangles by [lem-weil-integral-constructible-triangulated]. Since $U$ and $X$ are Noetherian and finite-dimensional (step 1), [lem-weil-pbc-integral-stratified-perfect-characterization] identifies this derived-complete integral category with the integral category underlying the rational categories of [prop-weil-pbc-rational-transport]; so that theorem gives the exact rational functor. The coherent direct-image comparisons with finite field extension in [prop-weil-pbc-scalar-extension] satisfy the unit, associator and shift equations, so [prop-weil-pbc-descent-functors] descends the family of these exact functors to an exact functor on the pair category, which is the common-stage category of [def-weil-algebraically-closed-coefficients] built on the same finite stages; its triangles are the images of finite-stage triangles. Hence applying it to the triangle of step 1 gives a distinguished triangle $Rj_*G_1\\to Rj_*G\\to Rj_*G_2\\to Rj_*G_1[1]$, with bounded constructible terms.",
+   "uses": [
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "def-weil-derived-direct-image",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-weil-integral-constructible-triangulated",
+    "prop-weil-pbc-rational-transport",
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "prop-weil-pbc-descent-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2; Proposition 6.8.14(2) and Remark 6.8.15; completed-coefficient comparison specified by the cited DAG tool."
+   }
+  },
+  {
+   "text": "Apply the bottom-cohomology assertion of [lem-a1-qbar-open-closed-cohomology] with $m=0$ to each of $G_1,G,G_2$. Each is a lisse sheaf placed in degree zero on the dense open of the smooth separated finite-type curve. It gives $\\mathcal H^r(Rj_*G_i)=0$ for $r<0$ and the natural augmentation identification $\\mathcal H^0(Rj_*G_i)\\cong j_*G_i$. The same assertion gives $j^*j_*G_i\\cong G_i$. These are statements at rational/common-stage coefficients, rather than an application of a finite-torsion comparison without change of coefficients.",
+   "uses": [
+    "lem-a1-qbar-open-closed-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TD, lemma-left-exact-higher-derived (1),(3); its rational/common-stage version is the cited existing node."
+   }
+  },
+  {
+   "text": "Use clause (5) of [lem-weil-heart-short-exact-triangles] on the image triangle of step 2. Its cohomology sequence is exact in the constructible heart. Step 3 kills the degree $-1$ term and identifies its degree-zero terms, giving precisely $0\\to j_*G_1\\to j_*G\\to j_*G_2\\xrightarrow{\\delta}\\mathcal H^1(Rj_*G_1)$. Explicitly $\\delta$ is $\\mathcal H^0(Rj_*w)$ followed by the shift comparison $\\mathcal H^0((Rj_*G_1)[1])\\cong\\mathcal H^1(Rj_*G_1)$. This fixes the boundary and its sign. It is natural in the short exact sequence: a morphism of such sequences extends to a morphism of their heart triangles. Indeed the triangle axiom supplies the third map after the first two; because the third object is the cokernel of the first map in the heart, that map must be the given map on $G_2$. Applying $Rj_*$ and cohomology gives the commuting boundary square.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TE, lemma-right-derived-delta-functor; the low-degree sequence preceding it. Heart formulation: BBD 1.3.3–1.3.6."
+   }
+  },
+  {
+   "text": "The Frobenius pullbacks on $U$ and $X$ commute with ordinary cohomology and the heart identifications by [lem-a1-qbar-open-closed-cohomology]. Pull back the short exact sequence by geometric Frobenius and then apply its three Weil isomorphisms. This is a morphism of short exact sequences. The naturality argument of step 4 therefore makes $w$ commute with these isomorphisms. The canonical equivariant direct-image comparison of [lem-fix-weil-operations] carries this to a commuting square for $Rj_*w$. Taking $\\mathcal H^0$ and the shift comparison gives $\\delta\\circ\\theta_{j_*G_2}=\\theta_{R^1j_*G_1}\\circ g_X^*\\delta$. Thus $\\delta$ is a Weil-sheaf morphism. The same argument, or functoriality on the first two arrows, proves equivariance of all the other maps; the bottom-cohomology and open-counit identifications commute with the Weil structures by the cited cohomology node. Exactness is tested on the underlying heart by [lem-dl-a1-constructible-fibres-exact], so the resulting sequence is exact as a sequence of constructible Weil sheaves.",
+   "uses": [
+    "lem-a1-qbar-open-closed-cohomology",
+    "lem-fix-weil-operations",
+    "lem-dl-a1-constructible-fibres-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-exact/p-dl-a1-exact.proof.md",
+    "place": "Step 1: Weil equivariance of the connecting map, obtained by naturality on geometric triangles."
+   }
+  },
+  {
+   "text": "Let $a:W_0\\hookrightarrow X_0$ be any open, put $U_W=U_0\\times_{X_0}W_0$, and write $b:U_W\\hookrightarrow U_0$ and $j_W:U_W\\hookrightarrow W_0$. At a finite coefficient field $E$, [lem-weil-pbc-condensed-e-realization] identifies the rationalized adic functors and their adjunctions with the ambient continuous-$E$ module functors. For these functors clause (2) of [lem-sfb-derived-direct-image-open-coherence], with $f=j$ and open $a$, gives the natural isomorphism $a^*Rj_*\\cong Rj_{W,*}b^*$. Its normalization is the sectionwise identity on a K-injective representative, $I(V\\times_X U)$, and clause (3) gives compatibility with successive restrictions. Transport this isomorphism back by the realization equivalences. The comparison is the open unit-square-counit exchange: both maps on the representative are this same identity. [prop-weil-pbc-scalar-extension] therefore makes these isomorphisms compatible with finite coefficient extensions, since it preserves that specified exchange. By the clause of [prop-weil-pbc-descent-functors] on compatible natural transformations, they consequently descend to a natural isomorphism on the common-stage category [def-weil-algebraically-closed-coefficients], with the same successive-restriction identity. All opens here are quasi-compact by step 1, so the open-coherence theorem applies even when $W_0$ is empty or meets only some components.",
+   "uses": [
+    "lem-weil-pbc-condensed-e-realization",
+    "lem-sfb-derived-direct-image-open-coherence",
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-algebraically-closed-coefficients",
+    "prop-weil-pbc-descent-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6G, lemma-restrict-direct-image-open; Tag 08FI, lemma-restrict-K-injective-to-open. Rational realization: Bhatt–Scholze Proposition 6.8.14(2), Remark 6.8.15."
+   }
+  },
+  {
+   "text": "Restriction is exact on coefficient module sheaves by [lem-pur-site-restriction-module-adjunction-exact]; hence it commutes with kernels, images, cokernels and the cohomology of complexes. Under the rational/common-stage cohomology identification with ordinary pro-etale module representatives in [lem-a1-qbar-open-closed-cohomology], the comparison of step 6 therefore gives $a^*R^rj_*G_i\\cong R^rj_{W,*}b^*G_i$ and $a^*j_*G_i\\cong j_{W,*}b^*G_i$. The latter also follows directly from the section formula of [def-wf-middle-extension]. Exact restriction sends the short exact input to its restricted input, and sends its heart triangle to that triangle: the connecting arrow is characterized by clause (4) of [lem-weil-heart-short-exact-triangles]. Apply the natural comparison of step 6 to this triangle. Taking cohomology shows that the comparison square commutes for $\\mathcal H^0(Rj_*w)$, and hence for $\\delta$ after the shift identification. Thus the entire displayed sequence and its identifications commute with open restriction, including successive restrictions. Since the opens are defined over $k_0$, the exchange is equivariant by [lem-fix-weil-operations].",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-a1-qbar-open-closed-cohomology",
+    "def-wf-middle-extension",
+    "lem-weil-heart-short-exact-triangles",
+    "lem-fix-weil-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6G, lemma-restrict-direct-image-open; derived boundary compatibility by its naturality on triangles."
+   }
+  },
+  {
+   "text": "Take $W_0=U_0$ in step 6. Then $U_W=U_0$ and $j_W=\\operatorname{id}_{U_0}$, so $j^*Rj_*G_i\\cong G_i$. Indeed the ordinary identity functor applied to any complex is that complex, so its derived functor is the identity. By the cohomology-restriction identifications of step 7, $j^*R^1j_*G_i\\cong\\mathcal H^1(G_i)=0$, since $G_i$ is in the heart. In degree zero this is the already specified counit $j^*j_*G_i\\cong G_i$, because the comparison on sections is the identity. The same representative computation shows that the negative-degree zero identifications and all the degree-zero identifications restrict as claimed. No weight or purity property has entered any step.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-exact/p-dl-a1-exact.proof.md",
+    "place": "Step 2: restriction of the higher direct image to the open."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-dl-a1-constructible-fibres-exact",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "def-weil-derived-direct-image",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-integral-constructible-triangulated",
+  "prop-weil-pbc-rational-transport",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "prop-weil-pbc-descent-functors",
+  "lem-a1-qbar-open-closed-cohomology",
+  "lem-fix-weil-operations",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-sfb-derived-direct-image-open-coherence",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-wf-middle-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-exact/p-dl-a1-exact.proof.md",
+  "place": "Steps 1–2 expanded using Stacks 05TD, 05TE, 0D6G and the existing completed/rational coefficient comparisons."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +200,24 @@
    "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomologySequenceLemmas.lean, Mathlib/Algebra/Homology/HomologySequenceLemmas.lean, Mathlib/Algebra/Homology/HomologySequenceLemmas.lean; directory Mathlib/Algebra/Homology",
    "date": "2026-10-17",
    "verdict": "no match: generic derived-category and snake-lemma sequences do not identify the project adic direct image, its degree-zero heart, and its Weil-equivariant boundary map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural low degree exact sequence of higher direct images of constructible l-adic sheaves with Frobenius equivariant connecting morphism",
+   "results": "8 hits: CategoryTheory.ShortComplex.ShortExact.singleδ.congr_simp, CategoryTheory.ShortComplex.ShortExact.singleδ, DerivedCategory.triangleOfSESδ, groupCohomology.δ, CategoryTheory.kernelCokernelCompSequence.δ, groupHomology.δ, CategoryTheory.ShortComplex.ShortExact.δ, CategoryTheory.ShortComplex.ShortExact.δ_eq'",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the adic Weil direct-image sequence with its heart identifications, Frobenius boundary and open-restriction compatibility; generic homological algebra is reused through existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion defines a cohomological delta functor on constructible l-adic sheaves with degree zero ordinary pushforward and higher direct image zero on the open",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Hom.instIsContinuousOpensOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the adic Weil direct-image sequence with its heart identifications, Frobenius boundary and open-restriction compatibility; generic homological algebra is reused through existing DAG nodes."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "p-dl-a1-exact",
@@ -85,5 +234,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-dl-a1-weil-open-image-delta",
+  "worker": "stage1",
+  "summary": "Retained the statement. Split the low-degree sequence using existing heart, completed direct-image and rational coefficient tools; derived Frobenius equivariance from naturality on geometric triangles and proved compatibility with arbitrary and successive open restriction. No new nodes. The finite-coefficient open/closed adjunction node does not supply j^*Rj_* and is not used for that claim. Maintainer reader added the integral-category identification and the descent-to-common-stage theorem to steps 2 and 6.",
+  "blueprint": "Realizes p-dl-a1-exact.proof.md Step 1 (natural low-degree obstruction sequence and Weil boundary) and Step 2 (restriction of R^1 to the open), with the adic comparison and restriction obligations made explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Checks Noetherian hypotheses for the existing finite-stage coefficient categories; the weight-exactness unit has no scheme finiteness tool."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Checks finite-dimensionality required by the finite-stage coefficient categories; used only as a generic scheme-theory tool."
+   },
+   {
+    "node": "lem-dl-a1-constructible-fibres-exact",
+    "why": "Detects exactness after forgetting the Weil structure, exactly as in the parent split."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic heart short-exact triangle and cohomological-functor theorem supplies the boundary argument in the unit; no weight result is substituted."
+   },
+   {
+    "node": "lem-pur-completed-coefficient-pushforward-comparison",
+    "why": "Identifies the specified adic reduction-tower functor with ordinary completed-ring derived direct image, needed before applying generic homological algebra."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic K-injective derived-functor theorem proves exactness of completed-ring direct image; the unit does not prove that foundation."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Supplies the coefficient-stage constructible domain of the specified direct image, without a purity assumption."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Supplies the inherited-triangle interpretation when restricting the ambient exact functor."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic scalar-localization theorem transports exactness to finite rational coefficient fields."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Supplies coherent finite-field direct-image/exchange comparisons needed for common-stage descent."
+   },
+   {
+    "node": "lem-a1-qbar-open-closed-cohomology",
+    "why": "Supplies the rational/common-stage standard cohomology, bottom-cohomology augmentation and Weil compatibility, absent from the unit itself."
+   },
+   {
+    "node": "lem-fix-weil-operations",
+    "why": "Generic equivariance of direct image and exchange identifies the Weil maps; this is the explicit tool in the current parent blueprint."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-e-realization",
+    "why": "Compares the raw rationalized adic functors with the ambient E-module functors before the existing open-coherence theorem is used."
+   },
+   {
+    "node": "lem-sfb-derived-direct-image-open-coherence",
+    "why": "Generic open localization and successive-restriction theorem; specialized to f=j to prove the item compatibility, without citing the cyclic constant-field chart node."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exactness of module restriction supplies commutation with ordinary cohomology on open slices."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the derived-complete integral category of the direct-image definition with the integral category of the rational-transport and condensed-realization nodes over Noetherian finite-dimensional schemes; added by the maintainer reader."
+   },
+   {
+    "node": "prop-weil-pbc-descent-functors",
+    "why": "Descends scalar-compatible exact finite-stage functors and natural transformations to the common-stage Qlbar category; the definition alone does not state this; added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-dl-a1-constructible-fibres-exact",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-integral-constructible-triangulated",
+  "prop-weil-pbc-rational-transport",
+  "prop-weil-pbc-scalar-extension",
+  "lem-a1-qbar-open-closed-cohomology",
+  "lem-fix-weil-operations",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-sfb-derived-direct-image-open-coherence",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "prop-weil-pbc-descent-functors"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-821d188d3",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-821d188d3 (reviewer sub-agent of L); spot-checked: I read every proof step and the statement of every cited node. Sources checked: blueprint main-20261015 p-dl-a1-exact Steps 1–2; Stacks derived.tex 05TD and 05TE; sites-cohomology.tex 0D6G and 08FI. The statement is unchanged and true: tested with j=id, empty X, A^1 minus a point (delta can be nonzero) and disconnected X. Steps 1, 3, 4, 5, 7 and 8 are correct and their hypotheses hold (Noetherian, finite-dimensional, perfect field, smooth pure dimension-one curve, quasi-compact opens). Step 4's naturality argument (TR3 plus the cokernel) and step 5's Frobenius equivariance (uniqueness of the boundary, the Weil structure on Rj_* from lem-fix-weil-operations) are complete. There are no new nodes and no cycle. Two citations were missing (C4, E6) and I repaired both in the fixed item file. (1) Step 2 applied prop-weil-pbc-rational-transport, which is stated for def-weil-pbc-bounded-constructible-complete, to the def-weil-derived-complete-integral-detailed category without citing lem-weil-pbc-integral-stratified-perfect-characterization, which identifies the two. (2) Steps 2 and 6 descended the exact functor and the natural isomorphisms to the common-stage Qlbar category using only def-weil-algebraically-closed-coefficients; they now cite prop-weil-pbc-descent-functors. proof_deps and tool_uses are updated. Batch-5 check: lem-fix-weil-operations reaches only generic foundations: lem-pod-integral-pullback-composition (composition of integral pullbacks), plus the open-square exchange and adjunction-coherence lemmas of the trace-formula chapter. lem-weil-pbc-condensed-e-realization reaches only the general definition def-pod-ring-scalar-extension. Neither is a statement or proof step of the trace formula or Poincare duality. Except lem-trf-adjoint-composition-coherence, an adjunction-coherence lemma, all of them are already in the closure of the pre-existing statement dependency rem-dl-a1-conventions, and my two added citations reach nothing new. I accept the 14 declared tool uses and added 2.; 1 file(s) fixed by the reviewer"
  }
 }

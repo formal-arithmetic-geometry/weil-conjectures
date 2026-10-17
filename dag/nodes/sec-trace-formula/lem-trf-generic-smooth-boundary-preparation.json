@@ -26,41 +26,149 @@
   "def-pc-field-extension",
   "def-weil-pbc-finite-purely-inseparable-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\eta$ be the generic point of $Y$ and put $C=(X_0)_\\eta$. The hypothesis $\\operatorname{trdeg}_{\\kappa(Y)}\\kappa(X_0)=1$ and [lem-sc-closed-irreducible-dimension-trdeg] show that the integral generic fibre $C$ has dimension one. Apply [lem-weil-pbc-normalization-geonormal-insep] to the finite-type $\\kappa(Y)$-scheme $C$. It supplies a finite purely inseparable extension $K_1/\\kappa(Y)$ such that the normalization $N_1$ of $C\\times_{\\kappa(Y)}K_1$ is geometrically normal over $K_1$. This first extension is chosen only for geometric normality of the normalized curve.",
+   "uses": [
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-weil-pbc-normalization-geonormal-insep"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed p. 163"
+   }
+  },
+  {
+   "text": "First the properties of $N_1$. Since $K_1/\\kappa(Y)$ is purely inseparable, $C_{K_1}\\to C$ is a homeomorphism (elementary: some power $x\\mapsto x^{p^n}$ maps $\\mathcal O(C_{K_1})$ into $\\mathcal O(C)$ on affine charts, so each prime has exactly one prime above it), hence $C_{K_1}$ is irreducible, $(C_{K_1})_{\\mathrm{red}}$ is integral, and $N_1$ is its normalization; [lem-weil-pbc-reduced-algebraic-normalization-field-change] makes $N_1\\to(C_{K_1})_{\\mathrm{red}}$ finite, so $N_1$ is an integral finite-type $K_1$-scheme. Its function field is $\\kappa((C_{K_1})_{\\mathrm{red}})$, which is algebraic over $\\kappa(C)=\\kappa(X_0)$ and contains it, so it has transcendence degree one over $K_1$ (elementary, as $K_1/\\kappa(Y)$ is algebraic), and [lem-sc-closed-irreducible-dimension-trdeg] gives $\\dim N_1=1$. Let $D_1$ be the reduced inverse image in $N_1$ of the generic fibre $(a^{-1}Z)_\\eta\\subseteq C$. Since $Z$ omits the generic point of $X$ and $a$ is dominant, $a^{-1}Z$ omits the generic point of $X_0$, which is the generic point of $C$; as $N_1\\to C$ maps the generic point of the integral $N_1$ to that of $C$, $D_1$ omits the generic point of $N_1$ and is a nowhere-dense closed subscheme of the one-dimensional finite-type scheme $N_1$. Hence [lem-pc-nowhere-dense-dim-zero] gives $\\dim D_1\\leq0$, and [lem-pc-zero-dimensional-closed-subscheme-finite] makes $D_1$ finite over $K_1$; in particular it has finitely many irreducible components. Apply [lem-pur-finite-inseparable-geometric-reduction] to this finite-type scheme. We obtain a finite purely inseparable extension $K/K_1$ such that $(D_1\\times_{K_1}K)_{\\mathrm{red}}$ is geometrically reduced over $K$. It is finite over $K$, hence the spectrum of a finite reduced $K$-algebra, a finite product of finite field extensions $L/K$; each $L\\otimes_K\\bar K$ is reduced, so $L/K$ is separable (elementary: an inseparable element has minimal polynomial with a repeated root over $\\bar K$, giving a nilpotent in $K(\\alpha)\\otimes_K\\bar K\\subseteq L\\otimes_K\\bar K$). [lem-sc-finite-etale-algebra-criterion] therefore makes it finite etale over $K$. Thus the second extension is chosen for the boundary and is not inferred from smoothness of the curve.",
+   "uses": [
+    "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-pc-nowhere-dense-dim-zero",
+    "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "lem-pur-finite-inseparable-geometric-reduction",
+    "lem-sc-finite-etale-algebra-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed pp. 163–164"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-normalization-inseparable-base-change] with $k=\\kappa(Y)$, $k_1=K_1$, $k_2=K$ and the integral finite-type $\\kappa(Y)$-scheme $C$; its hypothesis is the geometric normality of $N_1$ from step 1. The normalization $N$ of $(C_K)_{\\mathrm{red}}$ is canonically $N_1\\times_{K_1}K$ over $C_K$, it is geometrically normal over $K$, and the reduced inverse image of $D_1$ in it is $(D_1\\times_{K_1}K)_{\\mathrm{red}}$; since reduced inverse images depend only on underlying sets, this is also the reduced inverse image of $(a^{-1}Z)_\\eta$ in $N$. Its dimension is one: $N$ is integral (it is the normalization of the integral scheme $(C_K)_{\\mathrm{red}}$) and of finite type over $K$ (a base change of $N_1$), and its function field is algebraic over $\\kappa(X_0)$ and contains it, so it has transcendence degree one over the algebraic extension $K$ of $\\kappa(Y)$; [lem-sc-closed-irreducible-dimension-trdeg] gives $\\dim N=1$. This supplies both the normalized curve and the boundary model to be spread over $Y$.",
+   "uses": [
+    "lem-trf-normalization-inseparable-base-change",
+    "lem-sc-closed-irreducible-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed pp. 163–164; normalization after the further purely inseparable extension"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-projective-inseparable-spread-normalization] to $Y$, $X_0$, $g$, the chosen $K/\\kappa(Y)$, and the given proper dominant generically finite $a:X_0\\to X$. We obtain an excellent integral $Y_1$, a finite projective proper dominant generically finite $b:Y_1\\to Y$ with $Y_1\\to S$ projective and $\\kappa(Y_1)\\cong K$, an excellent integral $X_1$, and maps $c:X_1\\to X_0$ and $f:X_1\\to Y_1$ with $g\\circ c=b\\circ f$. It also gives that $h=a\\circ c$ is proper dominant generically finite and identifies the generic fibre $(X_1)_{y_1}$ with the normalization of the corresponding dominant component after the field extension $K$.",
+   "uses": [
+    "lem-trf-projective-inseparable-spread-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed pp. 163–164"
+   }
+  },
+  {
+   "text": "The generic fibre in step 4 is the normalized one-dimensional component identified in step 3 and is geometrically normal over $\\kappa(y_1)\\cong K$. Therefore [lem-weil-pbc-geonormal-dim-one-smooth] makes $(X_1)_{y_1}$ smooth and geometrically reduced. The dominant component used in the normalization is integral, so its normalization is nonempty and connected; the irreducibility clause of that lemma gives that $(X_1)_{y_1}$ is an irreducible curve. Under the same identification, the reduced inverse image $((h^{-1}Z)_{\\mathrm{red}})_{y_1}$ is $(D_1\\times_{K_1}K)_{\\mathrm{red}}$, which was shown finite etale over $K$ in step 2. The empty boundary case is included.",
+   "uses": [
+    "lem-weil-pbc-geonormal-dim-one-smooth",
+    "lem-trf-normalization-inseparable-base-change",
+    "lem-sc-finite-etale-algebra-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X, proof of Theorem 3.5, Step 5, printed p. 164; smooth generic curve and finite etale reduced boundary"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-nowhere-dense-dim-zero",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-pur-finite-inseparable-geometric-reduction",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-finite-etale-algebra-criterion",
+  "lem-trf-normalization-inseparable-base-change",
+  "lem-trf-projective-inseparable-spread-normalization",
+  "lem-weil-pbc-geonormal-dim-one-smooth",
+  "lem-weil-pbc-normalization-geonormal-insep",
+  "lem-weil-pbc-reduced-algebraic-normalization-field-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X, proof of Theorem 3.5, Step 5, printed pp. 163–164, with the generic normalization, projective spreading, and finite étale boundary checks separated into four steps"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "After a finite purely inseparable extension the generic fibre of a finite type integral scheme and the reduced boundary become smooth and etale",
-   "results": "Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; Algebra.FormallyEtale.of_isSeparable_aux; Algebra.etaleLocus; no geometric preparation theorem",
-   "date": "2026-10-17",
+   "query": "After a finite purely inseparable extension and projective alteration, a proper relative curve has smooth irreducible generic fibre and finite etale reduced boundary",
+   "results": "AlgebraicGeometry.IsSmoothOfRelativeDimension; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; AlgebraicGeometry.IsEtale; no theorem for the alteration and boundary construction",
+   "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "IsSmooth IsEtale IsPurelyInseparable",
-   "results": "none; loogle reported Unknown identifier IsSmooth",
-   "date": "2026-10-17",
+   "query": "AlgebraicGeometry.IsSmooth AlgebraicGeometry.IsEtale IsPurelyInseparable",
+   "results": "0 hits; loogle reported Unknown identifier AlgebraicGeometry.IsSmooth",
+   "date": "2026-10-18",
    "verdict": "unavailable: query identifiers not found"
   },
   {
    "tool": "grep",
-   "query": "purely inseparable|smoothLocus|IsEtale AlgebraicGeometry",
-   "results": "recorded msearch.py grep returned Mathlib source hits; no combined theorem",
-   "date": "2026-10-17",
+   "query": "purelyInseparable|IsSmooth|IsEtale|normalization",
+   "results": "Mathlib/AlgebraicGeometry/Normalization.lean; Morphisms/Etale.lean; Morphisms/Smooth.lean; no combined theorem",
+   "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "generic smoothness after purely inseparable alteration and finite etale reduced boundary",
-   "results": "AlgebraicGeometry.IsSmooth.casesOn; Algebra.FormallySmooth.of_perfectField; AlgebraicGeometry.IsEtale.instIsSmooth; no complete preparation theorem",
-   "date": "2026-10-17",
+   "query": "A finite purely inseparable field extension can be spread by a projective normalization, and normalization of the dominant component of a proper base change remains proper dominant generically finite",
+   "results": "IsPurelyInseparable.normal; IsPurelyInseparable.isIntegral; IsPurelyInseparable.isAlgebraic; no geometric spreading theorem",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A two-stage finite purely inseparable extension makes the normalized generic curve geometrically normal and the reduced boundary finite etale",
+   "results": "WeierstrassCurve.IsGoodReduction; WeierstrassCurve.minimal; AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization; no preparation theorem",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyNormal AlgebraicGeometry.IsEtale IsPurelyInseparable",
+   "results": "0 hits; loogle reported Unknown identifier AlgebraicGeometry.GeometricallyNormal",
+   "date": "2026-10-18",
+   "verdict": "unavailable: query identifiers not found"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|purely.inseparable|GeometricallyNormal|finite.*etale [Mathlib/AlgebraicGeometry/]",
+   "results": "Normalization.lean; Morphisms/UniversallyInjective.lean; Morphisms/Etale.lean; no combined preparation theorem",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite purely inseparable extension first makes a normalization geometrically normal and a second extension makes a finite reduced boundary etale",
+   "results": "IsPurelyInseparable.normal; IsPurelyInseparable.isAlgebraic; IsPurelyInseparable.isIntegral; no geometric preparation theorem",
+   "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-alteration-relative-curve-preparation",
@@ -72,7 +180,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Expose X, proof of Theorem 3.5, Step 5: after the relative-curve factorization, pass to a finite purely inseparable extension of k(Y), take the normalizations, and spread the resulting generic preparation over a projective alteration of Y.",
+   "place": "Expose X, proof of Theorem 3.5, Step 5: choose a finite purely inseparable extension making the generic curve normal/smooth, extend it to a projective alteration of Y, normalize the dominant component, and arrange the reduced inverse image of Z to be finite étale.",
    "via": [
     "lem-trf-alteration-relative-curve-preparation",
     "lem-trf-plurinodal-alteration",
@@ -83,5 +191,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-generic-smooth-boundary-preparation",
+  "worker": "stage1",
+  "summary": "Compared the imported statement with Exposé X, Theorem 3.5 Step 5 and repaired the false separability inference. The proof now chooses K1 to make the normalized generic curve geometrically normal, chooses a further finite purely inseparable K/K1 using the finite-inseparable geometric-reduction lemma for the reduced boundary, and invokes an explicit normalization base-change node before spreading K projectively. The generic fibre dimension is derived from the one-dimensional generic fibre and finite birational normalization, and the boundary is proved finite etale from geometric reducedness and the finite-etale algebra criterion.",
+  "blueprint": "Step 1 realizes the initial finite purely inseparable normalization choice in Step 5; Step 2 realizes the additional purely inseparable extension needed for the reduced boundary; Step 3 realizes normalization compatibility and dimension; Step 4 realizes extension to a projective alteration; Step 5 realizes the smooth irreducible curve and finite etale boundary conclusions.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Steps 1 and 3 use the transcendence-degree dimension formula for the generic fibre and dimension preservation calculation; no node in sk-i-curve-zero supplies this formula."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-geonormal-insep",
+    "why": "Step 1 uses the generic finite purely inseparable extension whose normalized curve is geometrically normal; this normalization theorem is supplied from sec-proper-base-change."
+   },
+   {
+    "node": "lem-pur-finite-inseparable-geometric-reduction",
+    "why": "Step 2 uses the finite purely inseparable extension making a finite-type scheme reduction geometrically reduced; this field-preparation lemma is supplied from sec-smooth-purity."
+   },
+   {
+    "node": "lem-weil-pbc-geonormal-dim-one-smooth",
+    "why": "Step 5 uses the dimension-one geometrically normal implies smooth and geometrically reduced criterion; this generic field criterion is supplied from sec-proper-base-change."
+   },
+   {
+    "node": "lem-pc-nowhere-dense-dim-zero",
+    "why": "Step 2 uses the dimension-zero consequence for a nowhere-dense boundary in a curve; this dimension lemma is supplied from sec-picard-framework."
+   },
+   {
+    "node": "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "why": "Step 2 uses zero-dimensional finite-type boundary to obtain finiteness over the generic residue field; this finiteness lemma is supplied from sec-picard-framework."
+   },
+   {
+    "node": "lem-sc-finite-etale-algebra-criterion",
+    "why": "Steps 2 and 5 use the finite algebra criterion identifying a finite geometrically reduced algebra with a finite product of finite separable fields; this algebra lemma is supplied from sec-abelian-varieties."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+    "why": "Step 2 (added on review) takes only finiteness of the normalization of a reduced finite-type scheme over a field, to make N_1 of finite type over K_1; no node of sk-i-curve-zero states this generic finiteness fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-weil-pbc-normalization-geonormal-insep",
+  "lem-pur-finite-inseparable-geometric-reduction",
+  "lem-weil-pbc-geonormal-dim-one-smooth",
+  "lem-pc-nowhere-dense-dim-zero",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-sc-finite-etale-algebra-criterion",
+  "lem-weil-pbc-reduced-algebraic-normalization-field-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-80a8a7959",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-80a8a7959 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node's statement, the parent, unit sk-i-curve-zero, Gabber Exposé X Thm 3.5 Step 5 (pp.163–164) and Stacks 0C3N, 0BXT, 04KT and 038M/038O. The item states the outcome of Step 5 faithfully and is unchanged. The parent's step 2 uses it consistently. No SGA is cited. Both new nodes are true (proved in review.md), are not duplicates (searched 0C3N, normalization×purely inseparable, existing pbc and sbc radicial nodes) and do not restate item clauses. The imperfect-field example x^p=t over F_p(t) is now handled by the second extension K/K_1. I repaired three faults in fixes/. (1) lem-trf-normalization-inseparable-base-change cited the wrong Stacks tags: 07QT and 07QW are about excellence, not geometric normality; now 0C3N, 038M and 038O. (2) The same node took the normalization of C_{k_i}, which can be non-reduced (C=Spec k[x]/(x^p-t)), while def-sc-normalization needs an integral scheme. It also used 'geometrically normal', which no definition node defines. Now: the normalization of the integral (C_{k_i})_red, geometric normality written out, a unique isomorphism over C_{k_2}, a precise finiteness clause, and unused stmt_deps removed. (3) Item step 2 used integrality, finite type and dimension one of N_1 without argument. These are now proved: a homeomorphism under purely inseparable base change; finiteness of normalization from lem-weil-pbc-reduced-algebraic-normalization-field-change, newly cited and accepted as a tool; and the transcendence-degree lemma. Step 2 also now writes out why D_1 is nowhere dense and why geometrically reduced implies separable. Step 3's dimension argument is rewritten the same way. The existing tool_uses are accepted. The spreading node's c and f are read as the induced maps and left unchanged.; 2 file(s) fixed by the reviewer"
  }
 }

@@ -26,9 +26,108 @@
   "def-weil-derived-tensor",
   "def-weil-derived-cohomology-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a finite field stage E and an integral representative C in D^b_c(Y, O_E), the coefficient maps (O_E)_Y -> B_E define U_E by restriction of scalars. Restriction leaves the underlying sheaf of abelian groups and therefore preserves kernels, cokernels, quasi-isomorphisms, and distinguished triangles; termwise restriction consequently gives a triangulated functor D(Mod(B_E)) -> D(Y_proet, O_E). The constant sheaf (O_E)_Y is the coefficient ring used by the ordinary derived tensor, so U_E(C) tensor^L_{(O_E)_Y} E_Y is an object of D(Y_proet,E).",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-completed-integral-coefficients",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-field-tor-amplitude.proof.md",
+    "place": "first sentence: realization by restriction to the constant integral ring and inversion of the uniformizer"
+   }
+  },
+  {
+   "text": "The integral derived tensor is functorial and independent of the K-flat resolution, so C maps to U_E(C) tensor^L_{(O_E)_Y} E_Y and an integral morphism f maps to the corresponding derived-tensor morphism. The integral derived category is O_E-linear, and the derived category construction preserves that scalar action; hence this assignment sends af to a times its image. By the Hom formula defining the raw scalar localization, the O_E-linear assignment extends uniquely on morphisms by J_E(f tensor a)=a J_E(f), and it respects identities, composition, shifts, and distinguished triangles. Thus it is a well-defined E-linear functor J_E on D^b_c(Y,E).",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-integral-constructible-linear",
+    "lem-weil-linear-abelian-derived-category",
+    "def-weil-derived-tensor",
+    "lem-weil-derived-tensor-functorial",
+    "lem-weil-derived-tensor-resolution-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-field-tor-amplitude.proof.md",
+    "place": "first sentence: realization by restriction and inversion, together with the scalar-localized morphism formula"
+   }
+  },
+  {
+   "text": "Let C be integral and choose an interval [r,s] supplied by the uniform bound in the definition of D^b_c(Y,O_E) for all reductions C tensor^L_{O_E} A_{E,n}. Let V be an affine open of Y; it is an object of Y_proet and V_proet is the localized site Y_proet/V, so restriction to V is exact, preserves countable products, constant sheaves and their inverse limit B_E, and commutes with the derived reductions (computed termwise on a K-flat representative, which stays K-flat after restriction). Hence C|_V is derived complete for its quotient tower (the Roos triangle of the definition restricts to a distinguished triangle), and its reduction at n=1, C|_V tensor^L k_V with k=A_{E,1} the residue field, has cohomology only in [r,s]. Every sheaf N of k_W-modules (W an object over V) is flat: the tensor product is the sheafification of the sectionwise tensor product over the field k, which is exact. So (C|_V tensor^L k_V)|_W tensor^L N is computed termwise and has cohomology sheaves H^j tensor_k N, which vanish for j outside [r,s]; that reduction has Tor amplitude in [r,s]. The completed residue-cohomology bound (Tag 09C2 (1)) applied on the quasi-compact affine V gives H^i(C|_V)=0 outside [r,s]. The affine opens of Y cover the final object of Y_proet and H^i(C)|_V=H^i(C|_V), so H^i(C)=0 outside [r,s]. Restriction of scalars does not change the underlying cohomology sheaf, and E_Y is a flat (O_E)_Y-module (the filtered colimit of the free modules varpi_E^{-m}(O_E)_Y); therefore J_E(C)=U_E(C) tensor^L E_Y has cohomology H^i(C) tensor E_Y and the same vanishing interval. This proves cohomological boundedness, with the bound chosen before any test sheaf.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-sf-complete-residue-cohomology-bounds",
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C2, lemma-describe-constructible-complexes, assertion (1) and proof; the affine-local application is the same completeness and residue-Tor argument"
+   }
+  },
+  {
+   "text": "For E subset L write R=B_E and S=B_L. The finite-free completed scalar comparison identifies the derived change of rings C tensor^L_R S with the strict-tower integral scalar extension C tensor_{O_E} O_L, naturally in C (C is derived complete). Choose an O_E-basis e_1,...,e_d of O_L. Since varpi_E^n O_L = varpi_L^{ne} O_L, the towers (O_L/varpi_L^m)_Y and (O_L/varpi_E^n O_L)_Y = (A_{E,n})_Y^{d} are cofinal, and constant sheaves and limits commute with finite sums; so the map R tensor_{(O_E)_Y} (O_L)_Y -> S is an isomorphism of R-algebras. For a K-flat resolution P -> C over R, C tensor^L_R S is P tensor_R S, and termwise U_L(P tensor_R S) = U_E(P) tensor_{(O_E)_Y} (O_L)_Y as (O_L)_Y-modules. Since (O_L)_Y is free over (O_E)_Y and L_Y is a flat (O_L)_Y-module, derived tensors with them are computed termwise, and the associator gives U_L(C tensor^L_R S) tensor^L_{(O_L)_Y} L_Y = U_E(P) tensor_{(O_E)_Y} L_Y = (U_E(C) tensor^L_{(O_E)_Y} E_Y) tensor^L_{E_Y} L_Y. This isomorphism is natural in integral morphisms by functoriality of the derived tensor, independent of P by resolution independence, and O_E-linear, hence natural for scalar-localized morphisms f tensor a. The integral scalar extension lies in D^b_c(Y,O_L), and the raw localization D^b_c(Y,L) has the same objects, so this integral object is C tensor_E L itself; we obtain the natural isomorphism J_L(C tensor_E L) isomorphic to J_E(C) tensor^L_{E_Y} L_Y.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-integral-scalar-extension-constructible",
+    "def-weil-derived-tensor",
+    "lem-weil-derived-tensor-functorial",
+    "lem-weil-derived-tensor-resolution-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2), pp. 61–62, with the finite-free completed comparison and ordinary constant-coefficient restriction"
+   }
+  },
+  {
+   "text": "The comparison in the preceding step is the identity for E=L and is compatible with a tower E subset L subset M, because both sides are obtained from the same iterated derived tensor and the finite-free completion comparison is natural. The scalar-extension composition isomorphism (C tensor_E L) tensor_L M isomorphic to C tensor_E M gives the corresponding associativity square for the J-comparisons. For an object of the common-stage category D^b_c(Y,Qbar), choose a finite field E and a representative C, and define J_Qbar(E,C)=J_E(C) tensor^L_{E_Y} (Qbar)_Y. Every morphism is represented over one finite common field; applying J at that field and then extending scalars gives a map. Enlarging the common field changes it by the compatible comparison just proved, while the common-stage composition law makes successive enlargements agree. Hence the formula is independent of representatives and defines a Qbar-linear functor. The boundedness of its values follows from the finite-stage bound and flat scalar extension, and all target coefficient sheaves are discrete constant sheaves by construction.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-scalar-extension-composition",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-derived-tensor-functorial",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2), pp. 61–62, finite coefficient-field descent and scalar-extension coherence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-integral-constructible-linear",
+  "lem-weil-linear-abelian-derived-category",
+  "def-weil-derived-tensor",
+  "lem-weil-derived-tensor-functorial",
+  "lem-weil-derived-tensor-resolution-independent",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-sf-complete-residue-cohomology-bounds",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-integral-scalar-extension-constructible",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-field-tor-amplitude.proof.md",
+  "place": "first two sentences, expanded into the five steps above"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -81,7 +180,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-field-tor-amplitude",
@@ -98,5 +197,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sf-field-stage-ordinary-realization",
+  "worker": "stage1",
+  "summary": "Expanded the imported comparison obligation into five steps: construct restriction-of-scalars realizations, descend them through the raw scalar localization, prove local cohomological boundedness from the uniform reduction interval and Tag 09C2, establish finite-field scalar-extension compatibility via the finite-free completed comparison, and descend coherently to the common Qbar stage. No new nodes were needed; the existing definitions and comparison lemmas state the required ingredients.",
+  "blueprint": "The steps realize the first two sentences of lem-weil-field-tor-amplitude.proof.md: restriction/inversion supplies the ordinary realization, and the bounded constructibility of the rationalized/common-stage categories supplies the cohomological bounds.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-complete-residue-cohomology-bounds",
+    "why": "Step 3 takes from its statement the Tag 09C2 (1) implication (derived complete, residue Tor amplitude in [a,b], quasi-compact) => H^j vanishes outside [a,b]; it is a generic completion bound of unit sk-rem-sf-pf-done, and no node of the route states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-complete-residue-cohomology-bounds"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-a845b063b",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-a845b063b (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement, plus Stacks proetale.tex 09C2 (lemma-describe-constructible-complexes, its statement and proof) and Bhatt-Scholze Prop. 6.8.14 on pp. 61-62. The delivery creates no new node. The statement is correct and is not weakened. It keeps the completed coefficients B_E apart from the discrete constant sheaves (O_E)_Y, E_Y and Qbar_Y. I tested it on empty Y, on C=B_E over a separably closed point (J_E gives continuous E-valued sections in degree 0), on torsion objects (they go to 0), on E=L, and on a tower E<L<M; none gave a counterexample. Step 1 (restriction of scalars) and step 2 (descending to the raw scalar localization through the Hom formula) are correct. Step 3 is correct. On an affine open V it meets every hypothesis of lem-sf-complete-residue-cohomology-bounds: V is quasi-compact, derived completeness restricts, and the residue reduction has Tor amplitude in [r,s] because every sheaf of modules over the field k is flat. This follows the proof of Tag 09C2. Step 5 (common-stage descent and cocycle) is correct. Three faults, all repairable. (1) Route: step 3 uses lem-sf-complete-residue-cohomology-bounds, which is in unit sk-rem-sf-pf-done, outside the route of sk-prop-sf-rf-shriek-preservation, and the delivery did not declare it as a tool use. (2) Route: step 4 cites lem-weil-scalar-extension-well-defined, which is outside the route and says nothing here, because the raw localization has the same objects as the integral category. (3) tool_uses wrongly declared lem-pc-kflat-resolution (not in proof_deps) and the finite-free comparison (already on the route). Step 4 also hid the finite-free identification behind 'tensor associators' (E5 wording); I wrote out B_L = B_E tensor (O_L)_Y, using cofinality of the towers since varpi_E^n O_L = varpi_L^{ne} O_L, and added lem-pur-derived-change-of-rings. In step 3 I wrote out the slice-site restriction and the flatness arguments. The corrected item is in fixes/dag/nodes/sec-six-functors/lem-sf-field-stage-ordinary-realization.json: proof_deps recomputed, and tool_uses now holds only lem-sf-complete-residue-cohomology-bounds. I accept that one tool use: it is the generic Tag 09C2(1) bound and the item's own source names it. No SGA citation, no cycle, no duplicate found by rg over dag/nodes.; 1 file(s) fixed by the reviewer"
  }
 }

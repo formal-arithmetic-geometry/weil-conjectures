@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-wf-curve-finite-level-pd",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite-level degree-one Poincare pairing on a curve",
@@ -18,59 +18,120 @@
  ],
  "proof": [
   {
-   "text": "Write $R=A_n$ and $L=R\\Gamma(C,A_n(1))$. By\n[lem-sc-cohomological-dimension], $H^i(L)=0$ for\n$i\\notin\\{0,1,2\\}$. The degree-zero group is $R(1)$, since $C$ is\nconnected. The proper-curve Kummer computation in\n[thm-sc-proper-cohomology] shows that $H^2(L)$ is free of rank one over $R$; no choice of its basis is needed below.\nFinally, Kummer and the Jacobian identification in\n[lem-wf-curve-kummer-jacobian-tate-module], followed by\n[thm-av-final](c), gives\n\n$$\nH^1(L)\\cong J[\\ell^n](\\overline{k}_0)\\cong R^{2g},\n$$\n\nwhere $g=\\dim J$. Thus every cohomology module of $L$ is finite free. Over the\nalgebraically closed field, choosing a primitive $\\ell^n$-th root gives a\n(noncanonical) isomorphism of sheaves $A_n(1)\\cong A_n$; hence the\ncohomology modules of $R\\Gamma(C,A_n)$ are finite free as well.",
+   "text": "Put $R=A_n$. Write $\\nu_C:C_{\\mathrm{proet}}\\to C_{\\mathrm{et}}$ for the site comparison and put $L=R\\Gamma(C,A_n(1))$, derived global sections on the pro-etale site with the twist of [def-coefficient-twists-detailed]. By [lem-wf-curve-kummer-jacobian-tate-module], $A_n(1)$ is canonically $\\nu_C^*\\mu_{\\ell^n,C}$, and $\\nu_C^*$ of the etale constant sheaf $A_n$ is the pro-etale constant sheaf $A_n$; hence [lem-cbc-abelian-etale-proetale-cohomology-comparison] identifies $H^i(L)$ with $H^i_{\\mathrm{\\acute et}}(C,\\mu_{\\ell^n})$ and $H^i(R\\Gamma(C,A_n))$ with $H^i_{\\mathrm{\\acute et}}(C,A_n)$ for every $i$, and the etale groups in (3.4) are these pro-etale groups. The curve $C$ is smooth, separated, and connected over the algebraically closed field $\\overline{k}_0$, so [lem-sc-cohomological-dimension] gives $H^i(L)=0$ for $i>2$; because $L$ is derived global sections of a sheaf in degree zero, its negative cohomology also vanishes. Connectedness and the primitive-root trivialization identify $H^0(L)$ with $R(1)$. Under the same trivialization, [thm-sc-proper-cohomology] gives $H^2(L)\\cong R$, free of rank one. The Kummer/Jacobian isomorphism of [lem-wf-curve-kummer-jacobian-tate-module], followed by [thm-av-final](c), gives $H^1(L)\\cong J[\\ell^n](\\overline{k}_0)\\cong R^{2g}$, where $g=\\dim J$. Thus all cohomology modules of $L$ are finite free. Choosing a primitive $\\ell^n$-th root also gives a noncanonical sheaf isomorphism $A_n(1)\\cong A_n$, so the cohomology modules of $R\\Gamma(C,A_n)$ are finite free.",
    "uses": [
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
     "lem-sc-cohomological-dimension",
     "thm-sc-proper-cohomology",
     "lem-wf-curve-kummer-jacobian-tate-module",
     "thm-av-final"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-finite-level-pd.proof.md",
+    "place": "first paragraph"
+   }
   },
   {
-   "text": "We record the elementary splitting argument needed here. A bounded complex\nof finite free $R$-modules whose cohomology modules are projective is\nisomorphic in the derived category to the direct sum of its cohomology\nmodules placed in their degrees. Indeed, starting in the largest degree,\nsplit $0\\to Z^i\\to L^i\\to B^{i+1}\\to0$; then split\n$0\\to B^i\\to Z^i\\to H^i(L)\\to0$. Descending induction shows that all\nboundaries and cycles are projective and produces the direct-sum\ndecomposition; the complementary two-term summands have identity\ndifferential and are contractible. The required bounded finite-free model\nfor $L$ is supplied by [thm-pod-point-perfectness].",
+   "text": "By [thm-pod-point-perfectness], both $L$ and $R\\Gamma(C,A_n)$ admit bounded finite-free models. Apply [lem-wf-bounded-free-complex-projective-cohomology-splitting] to each model, since Step 1 gives projective (indeed finite free) cohomology, to obtain in the derived category the direct-sum decompositions $L\\simeq\\bigoplus_iH^i(L)[-i]$ and $R\\Gamma(C,A_n)\\simeq\\bigoplus_iH^i(C,A_n)[-i]$.",
    "uses": [
-    "thm-pod-point-perfectness"
+    "thm-pod-point-perfectness",
+    "lem-wf-bounded-free-complex-projective-cohomology-splitting"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-finite-level-pd.proof.md",
+    "place": "second paragraph"
+   }
   },
   {
-   "text": "Apply this splitting to $L$. Proper duality\n[thm-pod-proper-poincare-duality], with the constant coefficient object\nand $d=1$, identifies\n\n$$\nR\\Gamma(C,A_n)^\\vee\\xrightarrow{\\sim}L[2].\n$$",
+   "text": "Here $k_0=\\mathbf F_q$ and $\\overline{k}_0=k$ are the global finite-field datum of the blueprint, so with $X_0=C_0$, $d=1$, $E=\\mathbf Q_\\ell$ and $A=A_{E,n}=\\mathbf Z/\\ell^n\\mathbf Z$ we are in the fixed setting of [def-pod-conventions]: $C_0$ is smooth, separated of finite type, geometrically connected and of pure dimension one, and $X=C$. Specialize [thm-pod-proper-poincare-duality] to the proper curve $C$ (properness of $C_0$ is its extra hypothesis), the constant coefficient object $K=A_n$, and $d=1$. The constant coefficient object is free of rank one and hence perfect, while its coefficient dual $R\\mathcal Hom(A_n,A_n)=A_n$ with the degree-one twist is $A_n(1)$ by [def-coefficient-twists-detailed]. The theorem identifies the derived dual with the twisted complex:\n$$R\\Gamma(C,A_n)^\\vee\\xrightarrow{\\sim}L[2],$$\nwith inverse the adjoint of the derived pairing $\\beta_{A_n}$.",
    "uses": [
+    "def-pod-conventions",
     "thm-pod-proper-poincare-duality"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-finite-level-pd.proof.md",
+    "place": "third paragraph"
+   }
   },
   {
-   "text": "After the displayed decompositions, the degree-one component of this\nisomorphism is\n\n$$\nH^1(C,A_n)^\\vee\\xrightarrow{\\sim}H^1(C,A_n(1)).\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "By Step 2, $R\\Gamma(C,A_n)\\simeq\\bigoplus_iH^i(C,A_n)[-i]$ with finite free summands, so $R\\Gamma(C,A_n)^\\vee\\simeq\\bigoplus_iH^i(C,A_n)^\\vee[i]$ and $H^{-1}(R\\Gamma(C,A_n)^\\vee)=\\operatorname{Hom}_{A_n}(H^1(C,A_n),A_n)$; on the other side $H^{-1}(L[2])=H^1(L)$. Taking $H^{-1}$ of the isomorphism in Step 3 therefore yields\n$$H^1(C,A_n(1))\\xrightarrow{\\sim}H^1(C,A_n)^\\vee.$$\nBy [prop-pod-degree-of-the-pairing] the degree-zero part of $\\beta_{A_n}$, read through the proper comparison $R\\Gamma_c=R\\Gamma$ of [thm-pod-proper-poincare-duality], is the pairing $\\langle x,y\\rangle_1$ on $H^1(C,A_n)\\times H^1(C,A_n(1))$, namely cup product, evaluation $A_n\\otimes A_n(1)\\to A_n(1)$, and the normalized smooth trace $\\operatorname{Tr}^{\\mathrm{sm}}:H^2(C,A_n(1))\\to A_n$. Hence the displayed map is $y\\mapsto\\langle-,y\\rangle_1$, the adjoint of the cup–trace pairing. The same computation in degree $-2$ (where $H^0(C,A_n)=A_n$ by connectedness) shows that $y\\mapsto\\operatorname{Tr}^{\\mathrm{sm}}(y)$ is an isomorphism $H^2(C,A_n(1))\\to A_n$.",
+   "uses": [
+    "thm-pod-point-perfectness",
+    "lem-wf-bounded-free-complex-projective-cohomology-splitting",
+    "thm-pod-proper-poincare-duality",
+    "prop-pod-degree-of-the-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-finite-level-pd.proof.md",
+    "place": "third and fourth paragraphs"
+   }
   },
   {
-   "text": "By construction this component is the adjoint of the cup–trace pairing,\nso (3.4) is perfect. No assertion about a degreewise perfect pairing over a\nnon-field is being taken directly from the derived statement; the freeness\nand the elementary splitting above are what pass from derived duality to\ndegree one. Naturality and Frobenius equivariance of the pairing are the\nfinite-level specialization of\n[thm-pod-equivariance-of-the-twisted-pairing].",
+   "text": "The adjoint of Step 4 is an isomorphism of $A_n$-modules, so the cup–trace pairing (3.4) is perfect over $A_n$. The conclusion does not depend on the normalization of the trace: any $A_n$-linear isomorphism $t:H^2(C,A_n(1))\\to A_n$ satisfies $t=u\\operatorname{Tr}^{\\mathrm{sm}}$ with $u=t\\circ(\\operatorname{Tr}^{\\mathrm{sm}})^{-1}(1)\\in A_n^\\times$, and multiplying a perfect pairing by a unit leaves it perfect. Its Frobenius equivariance (not needed for perfectness) is the finite-level specialization of [thm-pod-equivariance-of-the-twisted-pairing].",
    "uses": [
     "thm-pod-equivariance-of-the-twisted-pairing"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-finite-level-pd.proof.md",
+    "place": "final paragraph"
+   }
   }
  ],
  "proof_deps": [
+  "def-pod-conventions",
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
   "lem-sc-cohomological-dimension",
-  "thm-sc-proper-cohomology",
+  "lem-wf-bounded-free-complex-projective-cohomology-splitting",
   "lem-wf-curve-kummer-jacobian-tate-module",
+  "prop-pod-degree-of-the-pairing",
   "thm-av-final",
+  "thm-pod-equivariance-of-the-twisted-pairing",
   "thm-pod-point-perfectness",
   "thm-pod-proper-poincare-duality",
-  "thm-pod-equivariance-of-the-twisted-pairing"
+  "thm-sc-proper-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-finite-level-pd.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite-level degree-one Poincare duality perfect pairing etale cohomology smooth projective curve",
+   "results": "No project theorem; unrelated hits Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, FGModuleCat.exactPairing, Algebra.etaleLocus_eq_compl_support, FunctionField.classNumber, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'; none states the item",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PoincareDuality, IsPerfectPairing, DerivedCategory.homologyFunctor, Module.Dual",
+   "results": "no hits; Loogle reported unknown identifier 'PoincareDuality'",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Poincare\\|perfect.*pairing\\|cupProduct in Mathlib/CategoryTheory/DerivedCategory",
+   "results": "no matches",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "perfect finite coefficient cup trace pairing H1 of a smooth proper geometrically connected curve",
+   "results": "LinearMap.IsPerfPair.of_injective, LinearMap.IsPerfPair.dualEval, LinearMap.IsPerfPair.mk, LinearMap.flip.instIsPerfPair, LinearMap.IsContPerfPair.mk, LinearMap.IsPerfPair, LinearMap.IsPerfectCompl, RootPairing.isPerfPair_toLinearMap; no etale curve theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -100,5 +161,29 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-rankone"
+ "unit": "sk-p-real-rankone",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-curve-finite-level-pd",
+  "worker": "stage1",
+  "summary": "Audited the imported finite-level Poincare pairing against the current main-20261015 blueprint and the cited DAG statements. No exact sorry-free Lean declaration exists. The first proof step verifies the finite-free cohomology of the twisted and untwisted complexes from curve cohomological dimension, the proper-curve Kummer computation, the Kummer/Jacobian identification, and abelian-variety torsion. The second step factors the point-perfectness finite-free models through one new statement-only splitting lemma for bounded finite-free complexes with projective cohomology. Proper derived duality then gives the degree-one adjoint, which is the cup-trace pairing; the final step records the existing equivariance consequence. The item statement is unchanged. Maintainer reader (2026-10-18): steps 1 and 4 now cite the etale/pro-etale cohomology comparison explicitly, step 3 checks the fixed setting of def-pod-conventions, step 4 cites prop-pod-degree-of-the-pairing for the degree-one pairing, step 5 notes independence of the trace normalization, and the off-route use of thm-pod-point-perfectness is declared.",
+  "blueprint": "Steps 1–5 realize the five paragraphs of the main-20261015 proof; the new splitting node states the argument in the paragraph beginning ‘We record the elementary splitting argument needed here’.",
+  "tool_uses": [
+   {
+    "node": "thm-pod-point-perfectness",
+    "why": "Steps 2 and 4 take from its finite-level clause that RΓ(C,A_n) and RΓ(C,A_n(1)) have bounded finite-free models; the main-20261015 blueprint proof of this item cites it directly, but its unit sk-thm-sf-package is not among the units sk-p-real-rankone cites, and no node of the route states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-pod-point-perfectness"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-c04a596a0",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-c04a596a0 (reviewer sub-agent of L); spot-checked: I read the item, the new splitting node, the master and main-20261015 blueprint statement and proof (main-20261017 is identical), unit sk-p-real-rankone, the chapter and every cited statement. The steps are mathematically correct and follow the blueprint's five paragraphs. Three faults are repaired in the fixes/ copies. (1) C1/E6: the étale and pro-étale categories were identified silently. Step 1 now cites lem-cbc-abelian-etale-proetale-cohomology-comparison with the Kummer node's A_n(1)=ν^*μ clause. (2) C1/E1: Step 3 did not check the fixed setting of def-pod-conventions (k_0=F_q is the global datum; C_0 is smooth, separated, geometrically connected, d=1, E=Q_ℓ). Step 4 did not cite prop-pod-degree-of-the-pairing for the cup–evaluation–Tr^sm identification. Both are now done, and the H^{-1} computation is written out. Step 5 notes that perfectness does not depend on the trace normalization (Tr^sm is an isomorphism on H^2; any other trace differs by a unit), which covers the citer's tr_{C,n}. 'Naturality' was dropped because thm-pod-equivariance-of-the-twisted-pairing does not state it. (3) C8: thm-pod-point-perfectness (unit sk-thm-sf-package) is off-route. It is now declared in split_report.tool_uses, and I accept it because the blueprint proof cites it. The new node lem-wf-bounded-free-complex-projective-cohomology-splitting is true: descending induction splits B^i and Z^i. The hypothesis is needed: over Z/4, Z/4 --2--> Z/4 has non-projective cohomology Z/2 and does not split. It is statement-only, not a restatement of the item, and rg over dag/nodes found no duplicate (only field-only or different nodes). I replaced its vague last sentence with the exact decomposition of complexes and dropped the unused stmt_dep def-pc-perfect-ring-complex. There is no cycle, no SGA citation, and the statement is unchanged. Maintainer note: the proof covers k_0=F_q only; the citer lem-wf-curve-h1-dual-tate-module speaks of arbitrary k_0.; 2 file(s) fixed by the reviewer"
+ }
 }

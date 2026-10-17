@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "thm-fd-generic-fourier-sheaf-pure",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The generic Fourier sheaf is pure of some weight",
- "statement": "In the conventions of [rem-dl-a1-conventions], let\n$j:U_0\\hookrightarrow A_0=\\mathbf A^1_{k_0}$ be a dense open immersion\nand let $\\mathcal M$ be a nonzero irreducible lisse Weil sheaf on $U_0$\nwhich is constituent-nonexceptional in the sense of\n[def-a1-constituent-nonexceptional] and punctually $\\iota$-pure of\nweight $w$. Let $j':U'_0\\hookrightarrow A'_0$ and the nonzero irreducible\nlisse Weil sheaf $\\mathcal M'$ on $U'_0$ be those of\n[prop-a1-fourier-middle-extension], so that\n\n$$\n\\operatorname{FT}_\\psi\\bigl((j_*\\mathcal M)[1]\\bigr)\\cong(j'_*\\mathcal M')[1].\n$$\n\nThen $\\mathcal M'$ is punctually $\\iota$-pure, on all of $U'_0$, of some\nreal weight $v$ (in the sense of [def-weil-punctual-weights]).",
+ "statement": "In the conventions of [rem-dl-a1-conventions], let $\\psi$ be a\nnontrivial additive character of $k_0$, let\n$j:U_0\\hookrightarrow A_0=\\mathbf A^1_{k_0}$ be a dense open immersion\nand let $\\mathcal M$ be a nonzero irreducible lisse Weil sheaf on $U_0$\n(irreducible among lisse Weil sheaves: its only lisse Weil subsheaves are\n$0$ and $\\mathcal M$) which is constituent-nonexceptional in the sense of\n[def-a1-constituent-nonexceptional] and punctually $\\iota$-pure of\nweight $w$. Let $j':U'_0\\hookrightarrow A'_0$ be a dense open immersion\ninto the dual line and $\\mathcal M'$ a lisse Weil sheaf on $U'_0$\n(such data exist by [prop-a1-fourier-middle-extension]) with\n\n$$\n\\operatorname{FT}_\\psi\\bigl((j_*\\mathcal M)[1]\\bigr)\\cong(j'_*\\mathcal M')[1].\n$$\n\nThen $\\mathcal M'$ is punctually $\\iota$-pure, on all of $U'_0$, of some\nreal weight $v$ (in the sense of [def-weil-punctual-weights]).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/thm-fd-generic-fourier-sheaf-pure.md",
   "place": "node thm-fd-generic-fourier-sheaf-pure, order 2776",
@@ -19,6 +19,7 @@
   ]
  },
  "stmt_deps": [
+  "rem-dl-a1-conventions",
   "def-a1-constituent-nonexceptional",
   "prop-a1-fourier-middle-extension",
   "def-weil-punctual-weights",
@@ -26,62 +27,147 @@
  ],
  "proof": [
   {
-   "text": "*Step 1: the real envelope after zero extension.* Put\n$b=\\iota^{-1}(q^w)$, $\\mathcal M^\\dagger=\\mathcal M^\\vee\\otimes\\mathcal B_b$,\nand let $\\mathcal K$ be the realified kernel on the Fourier square formed\nfrom $j_!\\mathcal M$ and $j_!\\mathcal M^\\dagger$ as in\n[lem-fd-realified-kernel-real]. By the general form of\n[lem-fd-realified-kernel-real], which needs only the purity of\n$\\mathcal M$, the constructible Weil sheaf $\\mathcal K$ is $\\iota$-real.\nBy [lem-fd-constituent-nonexceptional-concentration](3),\n$R^\\nu p_{2,!}\\mathcal K=0$ for $\\nu\\neq1$, and the sheaf\n\n$$\n\\mathcal G:=\\operatorname{FT}_\\psi(j_!\\mathcal M)\n$$\n\n(concentrated in degree $0$) is a direct summand of\n$\\mathcal H:=R^1p_{2,!}\\mathcal K$. By [lem-fd-realness-pushforward],\napplied to $\\mathcal K$ and this vanishing, $\\mathcal H$ is an\n$\\iota$-real constructible Weil sheaf on the dual line $A'_0$. Working\nwith $j_!\\mathcal M$ rather than $j_*\\mathcal M$ is what makes the\nreality available: at a missing point both summands of $\\mathcal K$ have\nzero stalk, while the boundary stalks of $j_*\\mathcal M$ and\n$j_*\\mathcal M^\\dagger$ need not have conjugate spectra.",
+   "text": "*Step 1: the real envelope after zero extension.* Put\n$b=\\iota^{-1}(q^w)$, $\\mathcal M^\\dagger=\\mathcal M^\\vee\\otimes\\mathcal B_b$,\nand let $\\mathcal K$ be the realified kernel on the Fourier square formed\nfrom $j_!\\mathcal M$ and $j_!\\mathcal M^\\dagger$ as in\n[lem-fd-realified-kernel-real]. By the general form of\n[lem-fd-realified-kernel-real], which needs only the purity of\n$\\mathcal M$, the constructible Weil sheaf $\\mathcal K$ is $\\iota$-real.\nBy [lem-fd-constituent-nonexceptional-concentration](3),\n$R^\\nu p_{2,!}\\mathcal K=0$ for $\\nu\\neq1$, and the sheaf\n$\\mathcal G:=\\operatorname{FT}_\\psi(j_!\\mathcal M)$ (concentrated in\ndegree $0$) is a direct summand of\n$\\mathcal H:=R^1p_{2,!}\\mathcal K$. By [lem-fd-realness-pushforward],\napplied to $\\mathcal K$ and this vanishing, $\\mathcal H$ is an\n$\\iota$-real constructible Weil sheaf on the dual line $A'_0$.",
    "uses": [
     "lem-fd-realified-kernel-real",
     "lem-fd-constituent-nonexceptional-concentration",
     "lem-fd-realness-pushforward"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/thm-fd-generic-fourier-sheaf-pure.proof.md",
+    "place": "Step 1"
+   }
   },
   {
-   "text": "*Step 2: $\\mathcal G$ surjects onto the middle extension.* By the\nzero-extension comparison [prop-fd-zero-extension-comparison], whose\nhypotheses are exactly those of the present statement,\n$\\operatorname{FT}_\\psi(j_!\\mathcal M[1])\\cong\\mathcal G[1]$ and there is\na short exact sequence of Weil sheaves\n$0\\to\\mathcal B'\\to\\mathcal G\\to j'_*\\mathcal M'\\to0$ on the dual line,\nwith $j'_*\\mathcal M'$ the middle extension of\n[def-wf-middle-extension]. In particular\n$\\mathcal G\\to j'_*\\mathcal M'$ is an epimorphism of Weil sheaves.",
+   "text": "*Step 2: the zero-extension comparison.* By\n[prop-fd-zero-extension-comparison], the hypotheses of which are exactly\nthose of the present statement, there is a sheaf $\\mathcal G$ with\n$\\operatorname{FT}_\\psi(j_!\\mathcal M[1])\\cong\\mathcal G[1]$ and a short\nexact sequence of Weil sheaves on the dual line\n$$0\\to\\mathcal B'\\to\\mathcal G\\to j'_*\\mathcal M'\\to0.$$\nHere $j'_*\\mathcal M'$ is the middle extension of\n[def-wf-middle-extension], so the last map is an epimorphism.",
    "uses": [
     "prop-fd-zero-extension-comparison",
     "def-wf-middle-extension"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/thm-fd-generic-fourier-sheaf-pure.proof.md",
+    "place": "Step 2"
+   }
   },
   {
-   "text": "*Step 3: purity on a dense open.* By [fin2-lem-lisse-dense-open],\napplied to $\\mathcal H$ and to $\\mathcal G$ and intersected with\n$U'_0$, there is a dense open $V'_0\\subset U'_0$ on which $\\mathcal H$\nand $\\mathcal G$ are lisse. Restriction to $V'_0$ is exact and additive,\nand $(j'_*\\mathcal M')|_{V'_0}=\\mathcal M'|_{V'_0}$. Composing the\nprojection $\\mathcal H\\to\\mathcal G$ onto the direct summand with the\nepimorphism of Step 2 gives an epimorphism of lisse Weil sheaves\n\n$$\n\\mathcal H|_{V'_0}\\twoheadrightarrow\\mathcal M'|_{V'_0}.\n$$\n\nThe restriction $\\mathcal M'|_{V'_0}$ is nonzero and irreducible: the\nWeil group of the dense open $V'_0$ of the normal connected curve\n$U'_0$ surjects onto that of $U'_0$ (the corresponding surjectivity of\nétale fundamental groups for a dense open of a normal connected scheme,\nSGA 1, Exp. V, 8.2), so the invariant subspaces are the same. Refining\nthe kernel of this epimorphism to a composition series of\n$\\mathcal H|_{V'_0}$ shows that $\\mathcal M'|_{V'_0}$ is an irreducible\nconstituent of $\\mathcal H|_{V'_0}$, which is lisse and $\\iota$-real\n([def-wf-iota-real]; reality is a pointwise condition and passes to\nthe open). As $V'_0$ is a dense open of the affine line, it is a smooth\ngeometrically connected affine curve, and\n[thm-rp-real-lisse-purity-affine] shows that $\\mathcal M'|_{V'_0}$ is\npunctually $\\iota$-pure of the real weight\n$v:=\\dw_\\iota(\\mathcal M'|_{V'_0})$, its determinantal weight of\n[def-wf-determinantal-weight].",
+   "text": "*Step 3: the lisse dense open and irreducibility.* By\n[prop-a1-fourier-middle-extension], applied to $\\psi$, $j$ and $\\mathcal M$\n(nonzero, irreducible lisse Weil, constituent-nonexceptional), there are a\ndense open immersion $j'':U''_0\\hookrightarrow A'_0$ and a nonzero\nirreducible lisse Weil sheaf $\\mathcal N$ on $U''_0$ with\n$\\operatorname{FT}_\\psi\\bigl((j_*\\mathcal M)[1]\\bigr)\\cong(j''_*\\mathcal N)[1]$.\nTogether with the hypothesis this gives $(j'_*\\mathcal M')[1]\\cong(j''_*\\mathcal N)[1]$;\ntaking the cohomology sheaf in degree $-1$ gives an isomorphism of Weil\nsheaves $j'_*\\mathcal M'\\cong j''_*\\mathcal N$ on $A'_0$. Apply\n[fin2-lem-lisse-dense-open] to $\\mathcal H$ and to $\\mathcal G$; on the\nline $A'_0$ the complement of each lisse open is finite, so intersecting\nthe two opens with $U'_0\\cap U''_0$ gives a dense open\n$V'_0\\subset U'_0\\cap U''_0$ on which $\\mathcal H$ and $\\mathcal G$ are\nlisse. For an open immersion the restriction of the direct image to the\nopen is the original sheaf, so restricting the isomorphism to $V'_0$ gives\n$\\mathcal M'|_{V'_0}\\cong\\mathcal N|_{V'_0}$: two lisse sheaves with\nisomorphic shifted middle extensions agree on a common dense open. Since\n$U''_0$ is a dense open of the affine line, it is a curve in the sense of\n[lem-wf-dense-open-pi1-surjective](4), and $V'_0$ is a nonempty open of it,\nso by that clause $\\mathcal N|_{V'_0}$, hence $\\mathcal M'|_{V'_0}$, is a\nnonzero irreducible lisse Weil sheaf. Restriction of sheaves is exact, and\nrestricting the projection from the direct summand\n$\\mathcal H\\twoheadrightarrow\\mathcal G$ together with the epimorphism of\nStep 2 (whose target restricts to $(j'_*\\mathcal M')|_{V'_0}=\\mathcal M'|_{V'_0}$)\ngives an epimorphism of lisse Weil sheaves\n$$\\mathcal H|_{V'_0}\\twoheadrightarrow\\mathcal M'|_{V'_0}.$$",
    "uses": [
+    "prop-a1-fourier-middle-extension",
     "fin2-lem-lisse-dense-open",
+    "lem-wf-dense-open-pi1-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/thm-fd-generic-fourier-sheaf-pure.proof.md",
+    "place": "Step 3, first paragraph; and sk-p-dl-a1-some-weight.proof.md: \"The transform ... is also the middle extension of an irreducible lisse sheaf, and two lisse sheaves with isomorphic shifted middle extensions agree on a common dense open\""
+   }
+  },
+  {
+   "text": "*Step 4: purity on the dense open.* The sheaf $\\mathcal H|_{V'_0}$ is\nlisse and $\\iota$-real: lissity is the choice of $V'_0$, and reality is\nthe pointwise condition of [def-wf-iota-real], hence survives restriction\nto an open. The epimorphism of Step 3 and a finite composition series of\nthe finite-dimensional lisse representation show that the nonzero\nirreducible sheaf $\\mathcal M'|_{V'_0}$ is an irreducible constituent of\n$\\mathcal H|_{V'_0}$. Since $V'_0$ is a dense open of the affine line, it\nis a smooth geometrically connected affine curve. Thus\n[thm-rp-real-lisse-purity-affine] gives punctually $\\iota$-pure weight\n$v:=\\dw_\\iota(\\mathcal M'|_{V'_0})$, with $\\dw_\\iota$ as in\n[def-wf-determinantal-weight].",
+   "uses": [
     "def-wf-iota-real",
     "thm-rp-real-lisse-purity-affine",
     "def-wf-determinantal-weight"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/thm-fd-generic-fourier-sheaf-pure.proof.md",
+    "place": "Step 3, second paragraph"
+   }
   },
   {
-   "text": "*Step 4: purity on all of $U'_0$.* The sheaf $\\mathcal M'$ is lisse on\nthe smooth geometrically connected curve $U'_0$ and its restriction to\nthe dense open $V'_0$ is punctually $\\iota$-pure of weight $v$. At a\npoint $x\\in U'_0\\setminus V'_0$ the inertia acts trivially, $\\mathcal M'$\nbeing lisse there, and the ordinary direct image from $V'_0$ recovers the\nstalk of $\\mathcal M'$ (the translation step of\n[lem-a1-constituent-nonexceptional-comparison]). The consequence\nclause of [cor-wf-unramified-boundary-purity] therefore gives that\n$\\mathcal M'$ is punctually $\\iota$-pure of weight $v$ on all of\n$U'_0$.",
+   "text": "*Step 5: purity on all of $U'_0$.* The sheaf $\\mathcal M'$ is lisse on\nthe smooth geometrically connected curve $U'_0$, and its restriction to\nthe dense open $V'_0$ is punctually $\\iota$-pure of weight $v$. Apply the\nconsequence clause of [cor-wf-unramified-boundary-purity] to the dense\nopen $V'_0\\hookrightarrow U'_0$; it gives that $\\mathcal M'$ is\npunctually $\\iota$-pure of weight $v$ on all of $U'_0$.",
    "uses": [
-    "lem-a1-constituent-nonexceptional-comparison",
     "cor-wf-unramified-boundary-purity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/thm-fd-generic-fourier-sheaf-pure.proof.md",
+    "place": "Step 4"
+   }
   }
  ],
  "proof_deps": [
-  "lem-fd-realified-kernel-real",
-  "lem-fd-constituent-nonexceptional-concentration",
-  "lem-fd-realness-pushforward",
-  "prop-fd-zero-extension-comparison",
+  "cor-wf-unramified-boundary-purity",
+  "def-wf-determinantal-weight",
+  "def-wf-iota-real",
   "def-wf-middle-extension",
   "fin2-lem-lisse-dense-open",
-  "def-wf-iota-real",
-  "thm-rp-real-lisse-purity-affine",
-  "def-wf-determinantal-weight",
-  "lem-a1-constituent-nonexceptional-comparison",
-  "cor-wf-unramified-boundary-purity"
+  "lem-fd-constituent-nonexceptional-concentration",
+  "lem-fd-realified-kernel-real",
+  "lem-fd-realness-pushforward",
+  "lem-wf-dense-open-pi1-surjective",
+  "prop-a1-fourier-middle-extension",
+  "prop-fd-zero-extension-comparison",
+  "thm-rp-real-lisse-purity-affine"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/thm-fd-generic-fourier-sheaf-pure.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/thm-fd-generic-fourier-sheaf-pure.proof.md",
+  "place": "Steps 1-4; irreducibility of the partner from sk-p-dl-a1-some-weight.proof.md"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Fourier Deligne transform of a pure irreducible nonexceptional lisse Weil sheaf has a punctually pure partner of some real weight",
+   "results": "FourierModule.mk.inj; CompHausLike.LocallyConstantModule.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; LightCondAb.ofSheafLightProfinite; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; CondensedMod.ofSheafCompHaus; LightCondAb",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "irreducible lisse Weil sheaf Fourier partner pure weight",
+   "results": "FourierTransform.fourierCLE; FourierTransform.fourierCLE_apply; FourierModule.mk.inj; FourierTransform.fourierEquiv_apply; FourierInvModule.mk.inj; FourierSMul; FourierTransform.fourierₗ_apply; FourierTransform.fourierEquiv",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FourierTransform IsPunctuallyPureOfWeight",
+   "results": "0 hits; loogle: Unknown identifier `IsPunctuallyPureOfWeight`",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.irreducible restriction dense open",
+   "results": "0 hits; loogle: expected end of input",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Fourier.*pure|PunctuallyPureOfWeight [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FundamentalGroup|fundamental.*group|irreducible [Mathlib/AlgebraicGeometry]",
+   "results": "Mathlib/AlgebraicGeometry/Geometrically/Integral.lean:9,47,49,51,53; Geometrically/Reduced.lean:74-80; Geometrically/Irreducible.lean:12-19; Geometrically/Basic.lean:16; FunctionField.lean:13,35,37,41,47; EllipticCurve/Affine/Basic.lean:123-125,208",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier Deligne transform of a pure irreducible nonexceptional lisse Weil sheaf has a punctually pure partner of some real weight",
+   "results": "FourierTransform.mk; FourierTransform.fourier; FourierTransform.fourierₗ; FourierTransform.recOn; FourierTransform.term𝓕; Real.fourierIntegral; FourierTransform; FourierInvPair",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction of an irreducible lisse sheaf to a dense open remains irreducible",
+   "results": "AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict; AlgebraicGeometry.Scheme.Modules.restrict_obj; AlgebraicGeometry.Scheme.restrict_presheaf_map; AlgebraicGeometry.Scheme.ofRestrict_appLE; AlgebraicGeometry.Scheme.Opens.toScheme; AlgebraicGeometry.IsIntegralHom.instMorphismRestrict; AlgebraicGeometry.IsLocalAtSource.resLE; AlgebraicGeometry.IsSeparated.instMorphismRestrict",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_remark",
@@ -590,5 +676,29 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "thm-fd-generic-fourier-sheaf-pure",
+  "worker": "stage1",
+  "summary": "Aligned the item with the main-20261015 blueprint by adding the explicit nontrivial additive character and lisse-partner wording. Reworked the proof into five steps: the realified kernel, zero-extension comparison, derivation of the partner's irreducibility from Fourier t-exactness and the simple-object classification, dense-open real purity, and extension across the lisse boundary. Reused the existing dense-open fundamental-group/Weil-group surjectivity node; no new nodes were needed. Maintainer reader (2026-10-18): Step 3 now derives the irreducibility of the given partner on the dense open by comparing it with the irreducible partner of [prop-a1-fourier-middle-extension], as the main-20261015 unit proof does, instead of through the perverse simple-object classification and t-exact equivalence; the explanatory citation of the Fourier trace formula in Step 1 was removed (the realified-kernel lemma states the reality used); the source metadata now names the main-20261015 files and no SGA document.",
+  "blueprint": "Steps 1, 2, 3 first paragraph, 3 second paragraph, and 4 of the blueprint proof are realized respectively by item steps 1, 2, 3, 4, and 5.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-dense-open-pi1-surjective",
+    "why": "The generic dense-open fundamental-group/Weil-group surjectivity and preservation of irreducibility are supplied by the existing purity-real-sheaves lemma; the Fourier-weight unit has no replacement for this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-dense-open-pi1-surjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NS-a74e7b377",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-a74e7b377 (reviewer sub-agent of L); spot-checked: I read the item, the main-20261015 source, the unit proof and every cited statement in full; there are no new nodes. The statement is the main-20261015 text verbatim: ψ is nontrivial and the partner M′ is any lisse sheaf. I tested it on the Kummer case U=G_m, M=L_χ, where M′ is pure of weight 1. Steps 1, 2, 4 and 5 are correct: the general clause of the realified-kernel lemma applies, as do concentration (3), the realness pushforward, the zero-extension comparison (a dense open of A¹ has finite complement), real-lisse purity on the dense open V′, and the consequence clause of cor-wf-unramified-boundary-purity. I repaired three faults in fixes/dag/nodes/sec-deligne-laumon-a1/thm-fd-generic-fourier-sheaf-pure.json. (1) C4/batch-5: Step 1 cited sk-thm-fourier-trace-formula, whose proof is the Grothendieck–Lefschetz trace formula, only as decoration, since the kernel lemma itself states the reality. I removed the citation and its tool_use. (2) E5/C3: in Step 3, the perverse simple-object classification only gives that the transform is a middle extension of some irreducible N; the comparison of M′ with N was missing, and the step tacitly used the t-exact equivalence on Weil objects. I rewrote the step along the main-20261015 unit route. prop-a1-fourier-middle-extension gives an irreducible N; taking H^{-1} gives j′_*M′≅j″_*N; restricting to a dense V′⊂U′∩U″ gives M′|V′≅N|V′, which is irreducible by clause (4) of lem-wf-dense-open-pi1-surjective. This drops the citations of thm-a1-fourier-t-exact and prop-a1-curve-perverse-simples. (3) The source metadata named the old master snapshot and an imported SGA 1 external entry (route lock); I updated source and proof_origin to the main-20261015 files. Batch-5 check, citation by citation: rem-dl-a1-conventions is a conventions definition and is accepted. lem-wf-dense-open-pi1-surjective reaches only the general lisse-to-representation dictionary, is on the transitive route, and its tool_use is accepted. sk-thm-fourier-trace-formula is removed. thm-a1-fourier-t-exact and prop-a1-curve-perverse-simples are removed, and they would have been acceptable since they reach only definitions. Every remaining citation is on the unit's transitive route. Separate issue for the maintainer: the pre-existing lem-fd-realness-pushforward cites thm-trf-* rather than nt-assume-trace-formula, and that node should be repointed.; 1 file(s) fixed by the reviewer"
  }
 }

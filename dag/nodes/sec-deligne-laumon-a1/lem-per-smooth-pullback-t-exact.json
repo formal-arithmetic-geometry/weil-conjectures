@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-per-smooth-pullback-t-exact",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Smooth pullback is perverse up to the shift",
@@ -19,31 +19,53 @@
  ],
  "proof": [
   {
-   "text": "For the $\\le$-direction: $Lf^*$ is exact (the cohomology sheaves\nof $Lf^*K$ are the pullbacks of those of $K$) and the geometric\nfibers of $f$ have dimension $d$, so the support of\n$\\mathcal H^{-i}(Lf^*K[d])$ has dimension at most the dimension of\nthe support of $\\mathcal H^{-i+d}(K)$ plus $d$ (the pullback of a\nconstructible sheaf has support the preimage, of dimension raised by\nthe fibre dimension $d$, and the shift of the cohomology index is\n$H^n(C[d])=H^{n+d}(C)$); hence\n\n$$\n\\dim\\operatorname{Supp}\\mathcal H^{-i}\\bigl(Lf^*K[d]\\bigr)\n\\le\\dim\\operatorname{Supp}\\mathcal H^{-i+d}(K)+d,\n$$\n\nand the support inequality for $K$ (applied to the index\n$i-d$) gives\n$\\dim\\operatorname{Supp}\\mathcal H^{-i+d}(K)\\le i-d$, so the\nright-hand side is $\\le i$, which is the support inequality\nfor $Lf^*K[d]$: $\\operatorname{SuppCon}(Lf^*K[d])$.\nFor the $\\ge$-direction: the cosupport condition of $K$, namely\n$\\operatorname{SuppCon}(D_YK)$, is transported along the smooth\nmorphism as follows. By the Verdier exchange of\n[fix-cor-verdier-exchange] applied to the smooth morphism $f$\n(the identity $D_XLf^*M\\cong Rf^!D_YM$ obtained from the exchange\nfor $f$ and biduality, which is the duality against pullback of\n[cor-sf-duality-pullback]) and by the smooth\nidentity $Rf^!M\\cong Lf^*M(d)[2d]$ (the smooth-purity form of the\ndualizing complexes of the smooth morphism,\n[cor-pur-adic-and-rational-smooth-dualizing-complexes] and [prop-functor-package]),\n\n$$\nD_X\\bigl(Lf^*[d]K\\bigr)\n\\cong Lf^*\\bigl(D_YK\\bigr)(d)[d].\n$$",
+   "text": "For the $\\le$-direction, let $K\\in{}^pD^{\\le0}(Y)$. The object $Lf^*K[d]$ lies in $D^b_c(X,\\overline{\\mathbf Q}_\\ell)$ by the constructible domain of pullback in [prop-functor-package]. By [def-per-perverse-subcategories] and [def-per-support-condition], $K$ satisfies $\\dim\\operatorname{Supp}\\mathcal H^{-j}(K)\\le j$ for every integer $j$. For an integer $i$, apply [lem-per-smooth-pullback-support-dimension] and then the hypothesis with $j=i-d$: $\\dim\\operatorname{Supp}\\mathcal H^{-i}(Lf^*K[d])\\le\\dim\\operatorname{Supp}\\mathcal H^{-i+d}(K)+d\\le(i-d)+d=i$ (with $-\\infty+d=-\\infty$ for empty support). Thus $\\operatorname{SuppCon}(Lf^*K[d])$, hence $Lf^*[d]K\\in{}^pD^{\\le0}(X)$. The same argument applies to every $K'\\in D^b_c(Y,\\overline{\\mathbf Q}_\\ell)$ with $\\operatorname{SuppCon}(K')$.",
    "uses": [
-    "fix-cor-verdier-exchange",
-    "cor-sf-duality-pullback",
-    "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+    "def-per-perverse-subcategories",
+    "def-per-support-condition",
+    "lem-per-smooth-pullback-support-dimension",
     "prop-functor-package"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-smooth-pullback-t-exact.proof.md",
+    "place": "The <=-direction paragraph"
+   }
   },
   {
-   "text": "The twist $(d)$ is lisse of rank one, hence support-preserving\n([lem-per-lisse-tensor-permanence]); the shift by $[d]$ moves\nthe cohomology index by $d$, i.e. $H^{-i}(Lf^*(D_YK)(d)[d])=H^{-i+d}(Lf^*(D_YK)(d))$, with the same\ndimension bookkeeping as in the $\\le$-direction; the support\ninequality for $D_YK$ therefore implies the one for\n$Lf^*D_YK(d)[d]$, i.e. $\\operatorname{SuppCon}\\bigl(D_X(Lf^*[d]K)\\bigr)$, and the\n$\\ge$-inclusion follows from [def-per-support-condition].",
+   "text": "For the $\\ge$-direction, let $K\\in D^b_c(Y,\\overline{\\mathbf Q}_\\ell)$. The duality against pullback of [cor-sf-duality-pullback], for the separated finite-type morphism $f$, gives the canonical isomorphism $D_X(Lf^*K)\\cong Rf^!(D_YK)$, where $D_YK\\in D^b_c(Y,\\overline{\\mathbf Q}_\\ell)$ by the $\\overline{\\mathbf Q}_\\ell$ Verdier clause of [prop-functor-package]. Smooth purity for $f$ of relative dimension $d$ (clause 6 of [prop-functor-package]) gives $Rf^!(D_YK)\\cong Lf^*(D_YK)(d)[2d]$. Since $D_X(M[d])=R\\mathcal Hom(M[d],\\omega_X)\\cong R\\mathcal Hom(M,\\omega_X)[-d]=D_X(M)[-d]$, composing gives the canonical isomorphism $$D_X\\bigl(Lf^*[d]K\\bigr)\\cong D_X(Lf^*K)[-d]\\cong Lf^*\\bigl(D_YK\\bigr)(d)[d].$$",
    "uses": [
-    "lem-per-lisse-tensor-permanence",
-    "def-per-support-condition"
+    "cor-sf-duality-pullback",
+    "prop-functor-package"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-smooth-pullback-t-exact.proof.md",
+    "place": "The Verdier exchange and smooth purity paragraph"
+   }
+  },
+  {
+   "text": "If $K\\in{}^pD^{\\ge0}(Y)$, then [def-per-perverse-subcategories] and [def-per-support-condition] give $\\operatorname{SuppCon}(D_YK)$, with $D_YK\\in D^b_c(Y,\\overline{\\mathbf Q}_\\ell)$ as in Step 2. Applying [lem-per-smooth-pullback-support-dimension] to $D_YK$ exactly as in Step 1 (the inequality for $D_YK$ at index $i-d$ gives the inequality at index $i$ after the shift $[d]$) gives $\\operatorname{SuppCon}(Lf^*(D_YK)[d])$. By [lem-per-tate-twist-support-condition] with $m=d$, $\\operatorname{SuppCon}\\bigl((Lf^*(D_YK)[d])(d)\\bigr)$, and $(M[d])(d)\\cong M(d)[d]$ because the twist is a derived tensor product with a complex in degree $0$. Isomorphic complexes have isomorphic cohomology sheaves, so the isomorphism of Step 2 gives $\\operatorname{SuppCon}(D_X(Lf^*[d]K))$, hence $Lf^*[d]K\\in{}^pD^{\\ge0}(X)$ by [def-per-support-condition] and [def-per-perverse-subcategories].",
+   "uses": [
+    "def-per-perverse-subcategories",
+    "def-per-support-condition",
+    "lem-per-smooth-pullback-support-dimension",
+    "lem-per-tate-twist-support-condition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-smooth-pullback-t-exact.proof.md",
+    "place": "The twist, shift, and >=-inclusion paragraph"
+   }
   }
  ],
  "proof_deps": [
-  "fix-cor-verdier-exchange",
   "cor-sf-duality-pullback",
-  "cor-pur-adic-and-rational-smooth-dualizing-complexes",
-  "prop-functor-package",
-  "lem-per-lisse-tensor-permanence",
-  "def-per-support-condition"
+  "def-per-perverse-subcategories",
+  "def-per-support-condition",
+  "lem-per-smooth-pullback-support-dimension",
+  "lem-per-tate-twist-support-condition",
+  "prop-functor-package"
  ],
  "proof_origin": {
   "by": "agent",
@@ -52,7 +74,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -122,5 +144,34 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-smooth-pullback-t-exact",
+  "worker": "stage1",
+  "summary": "Split the imported smooth-pullback t-exactness proof into the support estimate, the Verdier/smooth-purity duality identification, and the dual support argument. Added one strictly smaller unsplit node for exact pullback on cohomology and the dimension increase of supports under a smooth relative-d morphism. Checked the qbar constructible hypotheses and the shift indices against the source and the Lean declarations; no statement change was needed. Maintainer reader (2026-10-18): Step 3 no longer cites lem-per-lisse-tensor-permanence, whose statement assumes X smooth of pure dimension (not a hypothesis of this item); the twist is handled by the new statement-only lem-per-tate-twist-support-condition. Step 2 no longer cites cor-pur-adic-and-rational-smooth-dualizing-complexes (which needs X smooth over k) or fix-cor-verdier-exchange (its D_Y Rf_! formula is not what the step uses); the composite is written out from cor-sf-duality-pullback and the smooth-purity clause of prop-functor-package.",
+  "blueprint": "The three steps realize respectively the <=-direction paragraph, the Verdier exchange and smooth purity paragraph, and the twist/shift >=-direction paragraph of the main-20261015 proof.",
+  "tool_uses": [
+   {
+    "node": "cor-sf-duality-pullback",
+    "why": "Step 2 takes the canonical isomorphism D_X Lf^* = Rf^! D_Y for separated finite-type f from its statement; no node of the perverse unit gives this duality."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Steps 1-2 take from its statement the constructible domains of pullback and of the Qbar Verdier dual, and clause 6 (smooth purity Rf^! = f^*(r)[2r]); no node of the perverse unit gives these six-functor facts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-sf-duality-pullback",
+  "prop-functor-package"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-9670b6030",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-9670b6030 (reviewer sub-agent of L); spot-checked: I read the item, its new node, every cited statement, the main-20261015 blueprint proof, Stacks morphisms.tex at lemma-smoothness-dimension (tag 0AFF) and stacks-geometry.tex at line 1005 (tag 0DRI). The item statement is verbatim and unchanged. Its k is the global F̄_q (D_X comes from def-trf), which matches the base of cor-sf-duality-pullback and prop-functor-package. Three faults, all repaired in fixes/: (1) B5: the new node lem-per-smooth-pullback-support-dimension cites tag 0DRI, which is the algebraic-spaces lemma in stacks-geometry, while the cited morphisms label is tag 0AFF; corrected. The node is true (Supp f^*F = f^{-1}Supp F, and 0AFF on the smooth base change to the support) and is not a duplicate. (2) E1: Step 3 used lem-per-lisse-tensor-permanence, which assumes X smooth of pure dimension; the item assumes no such thing. I replaced it with a new statement-only node, lem-per-tate-twist-support-condition (a Tate twist leaves the supports of cohomology sheaves unchanged; created.item = the item; blueprint.from = the item at 'The twist (d) is lisse of rank one'; searched by rg and a Mathlib grep, with LeanSearch recorded as unavailable). (3) E1/C3/E5: Step 2 cited cor-pur-adic-and-rational-smooth-dualizing-complexes, which needs a_X smooth, and fix-cor-verdier-exchange, whose D_Y Rf_! formula is not what the step needs; the composite was also never written. It now reads D_X f^*K ≅ f^! D_Y K (cor-sf-duality-pullback), then f^! ≅ f^*(d)[2d] (prop-functor-package clause 6), then D_X(M[d]) = D_X(M)[-d], giving f^*(D_Y K)(d)[d]. Steps 1 and 3 now also state that f^*K[d] and D_Y K are constructible. I checked the index arithmetic and tested f: A^1 → pt, d = 0 and empty supports. Accepted tool_uses: cor-sf-duality-pullback and prop-functor-package; the other two declarations are removed. Not a fault of this split: the slopmaster2 Lean states the lemma for finite Λ on the étale site, not Q̄_ℓ, which matters for stage 2; and def-per-support-condition uses the finite-coefficient D_X of def-trf on Q̄_ℓ objects. No SGA source is used.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
