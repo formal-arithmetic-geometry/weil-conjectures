@@ -3867,6 +3867,7 @@ public import WeilConjectures.RingTheory.SeparateImageClosedFromClosed
 public import WeilConjectures.RingTheory.SimpleFiltration
 public import WeilConjectures.RingTheory.SingularIdeal
 public import WeilConjectures.RingTheory.Smooth.IntegrallyClosed
+public import WeilConjectures.RingTheory.Smooth.NoetherianNormalModel
 public import WeilConjectures.RingTheory.Smooth.SectionTruncation
 public import WeilConjectures.RingTheory.SmoothAtPrimeDifferentialsDimension
 public import WeilConjectures.RingTheory.SmoothConormalBasisEtalePolynomialChart
