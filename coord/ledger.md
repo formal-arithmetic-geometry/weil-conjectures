@@ -15712,3 +15712,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:34 L: merged deliver/B4/Sheaf.AlgebraicGeometry.FormalSecondIdealQuotientAdic (stage 3; reviewer PASS; after a return; landing 20261017T003415-L-3312997 (proof); batch 20261017T003410; modules 1; new nodes 0)
 - 00:34 L: merged deliver/C2/Sheaf.AlgebraicGeometry.CondensedQbarScalarBasisUnit (stage 3; reviewer PASS; first push; landing 20261017T003416-L-3313128 (interface); batch 20261017T003410; modules 3; new nodes 2)
 - 00:34 L: merged deliver/C4/Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale (stage 3; reviewer PASS; after a return; landing 20261017T003416-L-3313282 (proof); batch 20261017T003410; modules 1; new nodes 0)
+- 00:34 L: merged deliver/D3/Sheaf.AlgebraicGeometry.PushforwardSupportClosed (stage 3; reviewer PASS; after a return; landing 20261017T003417-L-3313431 (proof); batch 20261017T003410; modules 1; new nodes 0)

@@ -7,8 +7,11 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import all Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentAffineSectionsFinite
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.ClosedSupportPushforwardSupport
+import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 
 /-! # Closed support of a proper coherent pushforward
@@ -51,6 +54,35 @@ theorem pushforward_support_closed_subset
       (D : Set Z) =
         {x : Z | ¬ Subsingleton (((Scheme.Modules.pushforward q).obj F.obj).presheaf.stalk x)} ∧
       (D : Set Z) ⊆ q '' (C : Set Y) := by
-  sorry
+  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian q
+  have := Scheme.Modules.isGrothendieckAbelian Y
+  have hq := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType Y F.obj).mp
+    F.property
+  have : F.obj.IsQuasicoherent := hq.1
+  have : F.obj.IsFinitePresentation := by
+    have hfp (V : Y.affineOpens) : (F.obj.over V.1).IsFinitePresentation := by
+      have := IsLocallyNoetherian.component_noetherian V
+      have := Scheme.Modules.coherent_affine_sections_finite Y F.obj F.property V.1 V.2
+      have hp := Module.finitePresentation_of_finite Γ(Y, V.1) Γ(F.obj, V.1)
+      exact (((Scheme.Modules.quasicoherent_finite_type_affine.{u, u} Y).2 F.obj hq.1).1
+        V.1 V.2).2.mpr hp
+    exact @SheafOfModules.IsFinitePresentation.of_coversTop _ _ _ _ _ _ _ _ F.obj
+      Y.affineOpens (fun V ↦ V.1) (by
+        rw [Opens.coversTop_iff]
+        exact iSup_affineOpens_eq_top Y) hfp
+  have hfp := Scheme.Modules.isFinitePresentation_higherDirectImage q F.obj 0
+  have : ((Scheme.Modules.pushforward q).obj F.obj).IsFinitePresentation :=
+    (SheafOfModules.isFinitePresentation Z.ringCatSheaf).prop_of_iso
+      ((Scheme.Modules.pushforward q).rightDerivedZeroIsoSelf.app F.obj) hfp
+  let D : TopologicalSpace.Closeds Z :=
+    ⟨_, (Scheme.Modules.finite_type_module_support_closed Z
+      ((Scheme.Modules.pushforward q).obj F.obj)).2.2.2⟩
+  refine ⟨D, rfl, ?_⟩
+  let T : TopologicalSpace.Closeds Z :=
+    ⟨q.base '' (C : Set Y), q.isClosedMap _ C.isClosed⟩
+  apply Scheme.Modules.pushforward_support_subset_of_closed_support q F.obj T
+  intro y hy
+  change q.base y ∈ (T : Set Z)
+  exact ⟨y, by rw [hC]; exact hy, rfl⟩
 
 end AlgebraicGeometry
