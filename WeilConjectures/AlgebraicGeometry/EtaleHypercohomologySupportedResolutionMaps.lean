@@ -10,8 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.EtaleTermwiseHypercohomology
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 import WeilConjectures.AlgebraicGeometry.EtaleHypercohomologySupportedCETotals
-import WeilConjectures.Algebra.Homology.KInjectiveComparisonPrinciple
 import WeilConjectures.CategoryTheory.CartanEilenbergAugmentationQuasiIso
+import WeilConjectures.Algebra.Homology.KInjectiveResolution
 
 /-! # Support-controlled filtered resolution maps
 
@@ -210,8 +210,8 @@ theorem exists_etaleHypercohomology_supported_resolution_maps :
     rw [Functor.map_comp] at h'
     exact ⟨by simpa only [Category.assoc] using h'⟩
   have heq : Q.map g = Q.map (F.map (D X K).comparison ≫ j) := by
-    apply (CochainComplex.IsKInjective.precomp_bijective_of_quasiIso
-      (F.map (D X K).aug) (D Y L).ρ.complex).injective
+    apply (CochainComplex.IsKInjective.bijective_quotient_map_comp (J := (D Y L).ρ.complex) (F.map
+        (D X K).aug)).injective
     have h₁ := HomotopyCategory.eq_of_homotopy _ _ hg.some
     have h₂ := HomotopyCategory.eq_of_homotopy _ _ hcomp.some
     simpa only [Functor.map_comp] using h₁.trans h₂.symm

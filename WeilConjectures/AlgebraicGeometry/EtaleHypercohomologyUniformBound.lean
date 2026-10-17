@@ -15,8 +15,8 @@ public import WeilConjectures.AlgebraicGeometry.EtaleTermwiseHypercohomology
 import WeilConjectures.AlgebraicGeometry.EtaleHypercohomologySupportedResolutionMaps
 import WeilConjectures.AlgebraicGeometry.EtaleKInjectivePullbackAbutment
 import WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyPullbackLaws
-import WeilConjectures.Algebra.Homology.KInjectiveComparisonPrinciple
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.Algebra.Homology.KInjectiveResolution
 /-! # Quantitative stabilization for functorial hypercohomology
 
 Source: Stacks Project, Tags 015J and 0EZM.
@@ -256,8 +256,8 @@ theorem exists_etaleHypercohomology_uniform_bound
       (ComplexShape.up ℤ)
     let Q := HomotopyCategory.quotient
       (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (ComplexShape.up ℤ)
-    have hbij := CochainComplex.IsKInjective.precomp_bijective_of_quasiIso
-      (F.map (D X K).ρ.map) (D Y L).ρ.complex
+    have hbij := CochainComplex.IsKInjective.bijective_quotient_map_comp (J := (D Y L).ρ.complex)
+        (F.map (D X K).ρ.map)
     obtain ⟨a, ha⟩ := hbij.surjective (Q.map (v ≫ (D Y L).ρ.map))
     obtain ⟨j, rfl⟩ := Q.map_surjective a
     have hj : Nonempty (Homotopy (F.map (D X K).ρ.map ≫ j)
