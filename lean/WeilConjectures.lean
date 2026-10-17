@@ -4578,3 +4578,4 @@ public import WeilConjectures.ZetaLinearAlgebra.WeilFactorization
 public import WeilConjectures.ZetaLinearAlgebra.WeilNumbers
 public import WeilConjectures.ZetaSeries
 public import WeilConjectures.TraceFormula.Basic
+public import WeilConjectures.TraceFormula.Statement
