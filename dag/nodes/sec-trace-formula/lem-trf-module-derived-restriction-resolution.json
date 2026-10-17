@@ -18,9 +18,98 @@
   "def-weil-abstract-derived-category",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Mod}(T_{\\mathrm{et}},\\Lambda)$ and $\\mathcal B=\\operatorname{Mod}(T'_{\\mathrm{et}},\\Lambda)$. These are the module categories throughout the argument. They have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. The exact adjunction of [prop-weil-pbc-inverse-image-modules-exact] and [lem-sp-right-adjoint-preserves-injectives] imply that $u_*J$ is termwise injective; it remains bounded below. Thus $I,J,u_*J$ are K-injective by [lem-weil-pbc-dplus-injective-representative]. Write $\\delta_L:Q_Tu_*L\\to Ru_*Q_{T'}L$ for the direct-image comparison and $\\alpha^S_L:Q_\\Lambda\\Gamma(S,L)\\to R\\Gamma(S,Q_SL)$ for the sections comparison. They are natural and invertible on bounded-below injective complexes by [lem-weil-pbc-right-derived-plus-injective]. These are also the comparisons for the unbounded module-valued sections in [def-kun-rgamma-unbounded]: that definition uses the same K-injective complexes, and [lem-sf-kinjective-derived-map-computation] computes morphisms by the same homotopy classes. Its resolution-existence hypothesis holds by [prop-weil-pbc-kinjective-resolutions-exist].",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-kun-rgamma-unbounded",
+    "lem-sf-kinjective-derived-map-computation",
+    "prop-weil-pbc-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K (lemma-injective-resolutions-exist), 070J (lemma-bounded-below-injectives-K-injective), 05TI (lemma-enough-injectives-right-derived), 070Y (lemma-K-injective-defined); injectives.tex Tag 01DU (theorem-sheaves-modules-injectives)."
+   }
+  },
+  {
+   "text": "Let $\\eta_I:I\\to u_*u^{-1}I$ be the degreewise ordinary unit, and put $t=u_*a\\circ\\eta_I:I\\to u_*J$. The termwise adjunction of [lem-weil-pbc-termwise-adjunction-homotopy], applied to the module adjunction of [prop-weil-pbc-inverse-image-modules-exact], says precisely that $t$ is a chain map and is the ordinary homotopy-category transpose of $a$. At the terminal object $T$, the direct-image formula in [def-weil-pbc-direct-image] gives $(u_*a)^n(T)=a^n(T')$. By the definition of $e_{u,I}$ this proves, in each degree and hence as chain maps of $\\Lambda$-modules,\n$$\\Gamma(T,t)=\\Gamma(T',a)\\circ e_{u,I}.$$\nThe differentials commute because $\\eta$ is natural; all scalar actions are retained by the module adjunction.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01F8 (lemma-functoriality); degreewise adjunct calculation"
+   }
+  },
+  {
+   "text": "For the specified $a$, calculate its derived transpose directly. Exactness gives $D(u^{-1})(Q_TI)=Q_{T'}u^{-1}I$ by [lem-weil-pbc-exact-functor-derived-factorization]. Since $J$ and $u_*J$ are K-injective, [lem-weil-pbc-kinjective-hom-derived] and [lem-weil-pbc-termwise-adjunction-homotopy] give\n$$\\operatorname{Hom}_{D(\\mathcal B)}(Q_{T'}u^{-1}I,Q_{T'}J)\n\\cong\\operatorname{Hom}_{K(\\mathcal B)}(u^{-1}I,J)\n\\cong\\operatorname{Hom}_{K(\\mathcal A)}(I,u_*J)\n\\cong\\operatorname{Hom}_{D(\\mathcal A)}(Q_TI,Q_Tu_*J).$$\nThis sends $Q_{T'}a$ to $Q_Tt$. The bijections are natural: the middle one is natural by the termwise adjunction, and the outer ones are the localization bijections; target derived maps are represented by homotopy classes between injective representatives. Postcomposing with $\\delta_J$ gives the Hom bijection for the canonical derived adjunction, namely the localization of the ordinary adjunction computed on injective targets. By the unit formula of [lem-weil-pbc-adjunction-of-natural-bijection], its transpose is also $Ru_*(Q_{T'}a)\\circ\\eta^D_{Q_TI}$. Consequently\n$$Ru_*(Q_{T'}a)\\circ\\eta^D_{Q_TI}=\\delta_J\\circ Q_Tt.$$\nThis calculation takes place in module categories and does not require $a$ to be a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective) and 08BJ (lemma-adjoint-preserve-K-injectives): derived transpose computed through the homotopy-category adjunction"
+   }
+  },
+  {
+   "text": "Normalize the Leray map on the same module models. For a bounded-below derived $\\mathcal B$-object $N$, choose an injective representative $Q_{T'}L\\cong N$ using [lem-weil-pbc-dplus-injective-representative]. Then $Ru_*N$ is represented by $u_*L$ by [def-weil-pbc-direct-image], and $u_*L$ is a bounded-below injective complex by Step 1. Both successive derived functors can therefore be evaluated without a further replacement. The equality of module complexes $\\Gamma(T,u_*L)=\\Gamma(T',L)$ defines the canonical Leray comparison $\\lambda_N$. More explicitly, for $N=Q_{T'}J$ this normalization reads\n$$\\lambda_{Q_{T'}J}\\circ R\\Gamma(T,\\delta_J)\\circ\\alpha^T_{u_*J}=\\alpha_J.$$\nTo check naturality and independence of $L$, lift a derived morphism to a homotopy class between the chosen injective representatives using [lem-weil-pbc-kinjective-hom-derived]. Applying $u_*$ and then $\\Gamma(T,-)$ gives literally the same map as $\\Gamma(T',-)$, by the direct-image formula; comparisons for different choices are homotopy equivalences. Thus the equation is compatible with all changes of representatives. It is the composition-of-derived-functors comparison of Stacks 08J6/015M: deriving $\\Gamma(T,u_*(-))=\\Gamma(T',-)$ on these models gives exactly this identity, and the uniqueness clause of [lem-weil-pbc-right-derived-plus-injective] fixes its normalization. In particular it supplies naturality at $Q_{T'}a$.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J6 (remark-before-Leray); derived.tex Tag 015M (lemma-compose-derived-functors), with injective-preserving module direct image"
+   }
+  },
+  {
+   "text": "By the definition of $\\mathrm{res}_u$, naturality of $\\lambda$ at $Q_{T'}a$, and Step 3, the left side of the required identity is\n$$\\lambda_{Q_{T'}J}\\circ R\\Gamma\\bigl(T,Ru_*(Q_{T'}a)\\circ\\eta^D_{Q_TI}\\bigr)\n=\\lambda_{Q_{T'}J}\\circ R\\Gamma(T,\\delta_J)\\circ R\\Gamma(T,Q_Tt).$$\nNaturality of the sections comparison of [lem-weil-pbc-right-derived-plus-injective] at $t:I\\to u_*J$ gives\n$$R\\Gamma(T,Q_Tt)\\circ\\alpha_I=\\alpha^T_{u_*J}\\circ Q_\\Lambda\\Gamma(T,t).$$\nSubstituting this and the normalization in Step 4 reduces the left side to $\\alpha_J\\circ Q_\\Lambda\\Gamma(T,t)\\circ\\alpha_I^{-1}$. Step 2 replaces $\\Gamma(T,t)$ by $\\Gamma(T',a)\\circ e_{u,I}$, proving the displayed formula in $D(\\operatorname{Mod}\\Lambda)$. These substitutions use only functoriality and invertibility of the stated resolution comparisons. No inverse to $a$, finite-type hypothesis on $u$, or finiteness assumption on $\\Lambda$ has been used.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 01F8 (lemma-functoriality), 01F9 (equation-functorial-derived), and 01FB (remark-explain-arrow): the two resolution comparison equations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-kun-rgamma-unbounded",
+  "lem-sf-kinjective-derived-map-computation",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F8/01F9/01FB, extended to bounded-below constant-coefficient module complexes by the explicit homotopy-category adjunction calculation; sites-cohomology.tex Tag 08J6 and derived.tex Tags 070I, 08BJ, 015M."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +152,38 @@
    "results": "{\"t\": \"2026-10-17T20:30:11Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-module-derived-restriction-resolution: natural transformation between derived global sections induced by an exact inverse image adjunction is represented on injective complexes by the sectionwise unit and a map of resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality\"], \"digest\": \"dc05e3f77f380a7f\"}",
    "date": "2026-10-18",
    "verdict": "no match: read the returned derived-adjunction and classical injective-resolution declarations; none gives the module-valued total-derived section-unit formula on bounded-below complexes. Generic derived-unit factorization still needs the module Leray and section comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app|rightDerived_app_eq|isoRightDerivedObj_hom_naturality",
+   "results": "{\"t\": \"2026-10-17T20:56:19Z\", \"tool\": \"grep\", \"query\": \"derivedη_fac_app|rightDerived_app_eq|isoRightDerivedObj_hom_naturality\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\"], \"digest\": \"e4a0b5e12b05a6b9\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: source inspection shows underived/open-immersion sections, degreewise right-derived functors of objects, or the abstract derived-unit factorization only; the full module sections/unit-Leray formula requires the displayed multi-step argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A chain map from inverse image of an injective sheaf complex to an injective sheaf complex computes derived restriction of module valued global sections",
+   "results": "{\"t\": \"2026-10-17T20:56:19Z\", \"tool\": \"leansearch\", \"query\": \"A chain map from inverse image of an injective sheaf complex to an injective sheaf complex computes derived restriction of module valued global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.ΓRes_naturality\", \"CategoryTheory.Sheaf.ΓRes\", \"CategoryTheory.Sheaf.coneΓ_π_app\", \"HomologicalComplex.restrictionMap_comp\", \"CategoryTheory.Sheaf.ΓRes_map\", \"HomologicalComplex.restrictionMap_id\", \"ModuleCat.Tilde.res_apply\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\"], \"digest\": \"1f08194f264853d5\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: source inspection shows underived/open-immersion sections, degreewise right-derived functors of objects, or the abstract derived-unit factorization only; the full module sections/unit-Leray formula requires the displayed multi-step argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedη\"",
+   "results": "{\"t\": \"2026-10-17T20:56:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"derivedη\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\"], \"digest\": \"626afddfa1303a63\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: source inspection shows underived/open-immersion sections, degreewise right-derived functors of objects, or the abstract derived-unit factorization only; the full module sections/unit-Leray formula requires the displayed multi-step argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections restriction along a scheme morphism between constant ring module sheaves is computed by the adjunction unit on sections followed by any map to an injective complex",
+   "results": "{\"t\": \"2026-10-17T20:56:25Z\", \"tool\": \"leanfinder\", \"query\": \"Derived global sections restriction along a scheme morphism between constant ring module sheaves is computed by the adjunction unit on sections followed by any map to an injective complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ_hom_app\", \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\"], \"digest\": \"52ffbff6a167d22d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: source inspection shows underived/open-immersion sections, degreewise right-derived functors of objects, or the abstract derived-unit factorization only; the full module sections/unit-Leray formula requires the displayed multi-step argument."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-derived-sections-finite-pushforward-modules",
@@ -91,5 +208,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-module-derived-restriction-resolution",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and proved the formula directly using the chain adjunct t=u_*a composed with the ordinary unit. Computed its derived transpose through K-injective Hom bijections, normalized module Leray on the same injective models, and used naturality of the sections comparisons. No new nodes: in self-review the proposed unit-sections auxiliary was recognized as too close to a clause of the item and removed before delivery.",
+  "blueprint": "Realizes the module-linear restriction compatibility needed in finite-surjective Cech descent, in the ancestral split of lem-trf-local-term-locality: ordinary unit-section map, derived adjunct, and canonical module Leray normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Enough injectives in the actual constant-coefficient module categories, needed for the common resolution models. No trace-unit result replaces this categorical tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact inverse-image/module direct-image adjunction for arbitrary schemes, needed to retain the coefficient category. No trace-unit result replaces this categorical tool."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Existence of module K-injective resolutions for the generic unbounded derived-map calculation. No trace-unit result replaces this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "The generic termwise Hom bijection identifies the chain adjunct of a before localization. No trace-unit result replaces this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "The generic exact-functor factorization identifies inverse image termwise in the derived category. No trace-unit result replaces this categorical tool."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Generic K-injective formula identifies the unbounded sections comparisons with the bounded-below injective models. No trace-unit result replaces this categorical tool."
+   },
+   {
+    "node": "def-weil-pbc-direct-image",
+    "why": "Module direct-image sections formula and the named injective-resolution comparison. No trace-unit result replaces this categorical tool."
+   },
+   {
+    "node": "def-kun-rgamma-unbounded",
+    "why": "The statement requires module-valued unbounded global sections; this definition fixes its resolution models. No trace-unit result replaces this categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sf-kinjective-derived-map-computation",
+  "def-weil-pbc-direct-image",
+  "def-kun-rgamma-unbounded"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q33-4f2e7bd95",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-4f2e7bd95 (reviewer sub-agent of L); spot-checked: Read the full delivery, cited DAG statements, unit/chapter route, and Stacks sources. The five-step module-valued derived restriction/Leray identity is correctly typed, hypotheses and coefficient categories are preserved, edge cases check out, and no route, citation, duplicate, or mathematical defect was found."
  }
 }

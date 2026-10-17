@@ -18,55 +18,285 @@
   "def-weil-etale-morphism",
   "def-sbc-smooth-morphisms"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First, the final clause of [def-weil-geometric-fibre] identifies geometric fibres for different choices of algebraic closure. Such a semilinear isomorphism identifies the completed local rings, smooth and marked loci, components, projective-line components, contraction, and incidence of the special points. Thus the predicates in the statement do not depend on that choice. Choose an algebraic closure $a=\\bar k$ of $k$ and an algebraic closure $L=\\overline{k'}$ of $k'$. By [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] there is a $k$-embedding $a\\hookrightarrow L$. We regard it as an inclusion. Fibre-product associativity, obtained by applying the universal property in [def-pc-fibre-product] twice, identifies $(Y_a)_L$ with $(Y_{k'})_L$ and identifies the markings and pair maps. This uses an algebraically closed extension $L/a$; it does not assert that $L$ is algebraic over $k$.",
+   "uses": [
+    "def-weil-geometric-fibre",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C56, proof: compatible embeddings of algebraic closures; agent application to marked pairs"
+   }
+  },
+  {
+   "text": "If the source is geometrically semistable over $k$, the semistable-pair clause of [lem-trf-semistable-marked-base-change] applied to $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ gives semistability over $k'$. If $f$ is also geometrically stable, the same node's compatible-morphism clause preserves absence of exceptional components. These are exactly the two forward implications. Only ascent is taken from this node. Its first clause also ensures that every pair used below, including the pairs over $a$ and $L$, remains multipointed even before semistability has been proved.",
+   "uses": [
+    "lem-trf-semistable-marked-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent use of the existing arbitrary-base-change theorem; Temkin §1.2 geometric definitions"
+   }
+  },
+  {
+   "text": "We record the singular-locus test for these pure one-dimensional finite-type curves over any of the fields in Step 1. By [lem-trf-flat-dense-generic-fibre-pure-dimension], applied with base the spectrum of that field and generic fibre the entire curve, every algebraically closed extension still has pure dimension one. Flatness over the field and finite presentation come from [def-trf-multipointed-curve]. Hence [lem-trf-dth-fitting-smooth-locus] applies with $d=1$: the nonsmooth locus is the support of the first-Fitting subscheme $Z$. The differential base-change and localization isomorphisms [lem-weil-pbc-kahler-differentials-base-change], [lem-weil-pbc-kahler-differentials-localization], followed by [lem-trf-fitting-ideal-independence-base-change], identify $Z$ after every field extension with its scalar extension. In particular the nonsmooth locus pulls back exactly. This argument has no nodality hypothesis. All rings on finite-type affine charts are Noetherian by [lem-weil-pbc-finite-type-over-noetherian].",
+   "uses": [
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "def-trf-multipointed-curve",
+    "lem-trf-dth-fitting-smooth-locus",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-trf-fitting-ideal-independence-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C56, proof via the Fitting criterion; the generic Fitting and differential statements cited supply the base-change test"
+   }
+  },
+  {
+   "text": "Assume now that $(Y_{k'},E_{k'})$ is geometrically semistable. Put $C=Y_a$, so $C_L$ is nodal by Step 1 and the hypothesis. Let $x$ be a closed nonsmooth point of $C$. By [lem-weil-pbc-closed-point-residue-field-base], its residue field is $a$. On a finite-type affine neighbourhood $\\operatorname{Spec}S$ write $x=\\mathfrak p$, $A=S_{\\mathfrak p}$. There is exactly one point $y$ of $C_L$ above $x$, since its fibre is $\\operatorname{Spec}(a\\otimes_a L)=\\operatorname{Spec}L$; it is closed and nonsmooth by Step 3. Write $B=(S\\otimes_a L)_{\\mathfrak q}$ with $\\mathfrak q=\\ker(S\\otimes_a L\\to L)$. Apply [lem-trf-separable-closed-point-formal-presentation] with residue field $F=a$, which is finite separable over itself. It gives Noetherian local rings $A,B$, a faithfully flat local map with $\\mathfrak m_A B=\\mathfrak m_B$, and, for one presentation with $n\\ge2$, completed presentations $R=\\widehat A=a[[t_1,\\ldots,t_n]]/(g_1,\\ldots,g_s)$ and $R'=\\widehat B=L[[t_1,\\ldots,t_n]]/(g_1,\\ldots,g_s)$. The node also identifies both completed differential modules with the cokernels of the displayed Jacobian matrices.",
+   "uses": [
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-trf-separable-closed-point-formal-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C56, proof, reduction to closed rational points and complete local presentations; Varieties Tags 0C52, 0C54"
+   }
+  },
+  {
+   "text": "The completions $R,R'$ are Noetherian by [lem-weil-pbc-adic-completion-noetherian]. Their maximal ideals are $\\mathfrak m_A R$ and $\\mathfrak m_B R'$ by [lem-weil-pbc-local-completion-local-ring]. The induced map $R\\to R'$ is flat by [lem-weil-pbc-flat-completion] and local, with $\\mathfrak m_RR'=\\mathfrak m_{R'}$ and closed fibre $L$. It is faithfully flat by [lem-weil-pbc-flat-local-hom-faithfully-flat]. As $y$ is a node, $R'$ is ring-isomorphic to $L[[u,v]]/(uv)$. The implication (c)$\\Rightarrow$(a) of [lem-trf-formal-jacobian-quadratic-criterion] gives $\\operatorname{depth}R'=1$ and $J'=\\mathfrak m_{R'}$, where $J'$ is the ideal of $(n-1)$-minors of the Jacobian in Step 4. The flat-local depth formula [lem-weil-pbc-flat-local-depth-formula] gives $1=\\operatorname{depth}R+\\operatorname{depth}L=\\operatorname{depth}R$, since the maximal ideal of the field $L$ is zero and it has depth zero.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-flat-completion",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-trf-formal-jacobian-quadratic-criterion",
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C56, proof via Tag 0C4C; the cited flat-completion and depth statements justify reflection of depth"
+   }
+  },
+  {
+   "text": "Let $J\\subset R$ be the ideal of the same Jacobian minors over $a$. The common completed differential presentations in [lem-trf-separable-closed-point-formal-presentation], together with [lem-trf-fitting-ideal-independence-base-change] and the differential base-change/localization formulas used in Step 3, give $JR'=J'$. By Step 5, this is $\\mathfrak m_RR'$. Contraction along the faithfully flat map $R\\to R'$ using [lem-weil-pbc-faithfully-flat-ideal-contraction] gives $J=\\mathfrak m_R$. Together with depth one, implication (a)$\\Rightarrow$(b) of [lem-trf-formal-jacobian-quadratic-criterion] gives $R\\cong a[[u,v]]/(\\alpha u^2+\\beta uv+\\gamma v^2)$, with $\\beta^2-4\\alpha\\gamma\\ne0$. Over the algebraically closed field $a$ the quadratic factors as $\\ell_1\\ell_2$ with independent linear forms: if $\\alpha\\ne0$ factor its degree-two polynomial, and otherwise use $v(\\beta u+\\gamma v)$. The squared determinant of the two forms equals $\\beta^2-4\\alpha\\gamma$, also in characteristic two. The invertible linear substitution $(u,v)\\mapsto(\\ell_1,\\ell_2)$ therefore identifies this quotient with $a[[u,v]]/(uv)$. Thus every closed nonsmooth point of $C$ is a node.",
+   "uses": [
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-trf-fitting-ideal-independence-base-change",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "lem-trf-formal-jacobian-quadratic-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C56, final paragraph: reflection of the Jacobian criterion; linear factorization over an algebraically closed field written explicitly"
+   }
+  },
+  {
+   "text": "This also treats all nonsmooth points, not merely the closed ones. Let $I_x=\\operatorname{Fit}_1(\\Omega_{C/a,x})\\subset A$ at a closed $x\\in Z$. The completed differential presentation in [lem-trf-separable-closed-point-formal-presentation] and [lem-trf-fitting-ideal-independence-base-change] give $I_xR=J=\\mathfrak m_AR$. The map $A\\to R$ is faithfully flat by [lem-weil-pbc-local-completion-faithfully-flat], so [lem-weil-pbc-faithfully-flat-ideal-contraction] gives $I_x=\\mathfrak m_A$ and $\\mathcal O_{Z,x}=a$. For any $z\\in Z$, the closed-point density statement [lem-sc-lft-over-field-jacobson-space] applied to the nonempty closed subset $\\overline{\\{z\\}}\\subset Z\\subset C$ gives a closed point $x$ specializing $z$. But generalizations of $x$ inside $Z$ correspond to primes of $\\mathcal O_{Z,x}=a$, which has just one prime. Hence $z=x$. Every nonsmooth point of $C$ is therefore closed and is a node by Step 6.",
+   "uses": [
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-trf-fitting-ideal-independence-base-change",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "lem-sc-lft-over-field-jacobson-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C56, closed-point reduction; agent extension to all nonsmooth points using the first-Fitting support"
+   }
+  },
+  {
+   "text": "The other semistability clauses descend too. The singleton $\\{\\operatorname{Spec}k'\\to\\operatorname{Spec}k\\}$ is an fpqc cover: field extension is flat and its spectra each have one point; this verifies [def-weil-pbc-fpqc-covering], also by [lem-weil-pbc-field-extension-base-change-faithfully-flat]. Since $E_{k'}\\to\\operatorname{Spec}k'$ is etale, [lem-galois-fpqc-descend-etale] makes $E\\to\\operatorname{Spec}k$ etale. By Step 3 the nonsmooth locus of $Y\\to\\operatorname{Spec}k$ pulls back to that of $Y_{k'}$. If a point of the marking lay in it, scalar extension of the marking would have a point above it: on affine charts this follows from [lem-weil-pbc-field-extension-base-change-faithfully-flat] and [lem-weil-pbc-faithfully-flat-surjective-spectrum]. That point would lie in the nonsmooth locus upstairs, contradicting the marking hypothesis there. Thus the marking lies in the smooth locus over $k$. Step 7 supplies nodality over $a$, proving the reverse semistability implication.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-galois-fpqc-descend-etale",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent fpqc descent of the marking and smooth-locus incidence, after the node reflection proved from Tag 0C56"
+   }
+  },
+  {
+   "text": "It remains to reflect absence of exceptional components. Suppose $f_{k'}$ is geometrically stable; by Step 8 its source over $k$ is semistable. Work over $a\\subset L$ from Step 1. All algebraically closed extensions of the nodal curve $C=Y_a$ are nodal by [lem-trf-node-algebraically-closed-extension], and have pure dimension one by Step 3. Thus [lem-trf-nodal-family-fitting-singular] applies to $C\\to\\operatorname{Spec}a$: its singular subscheme is unramified, its support is the nonsmooth locus, and it commutes with extension to $L$. The marking is etale and hence unramified by [def-weil-etale-morphism]. Apply [lem-trf-unramified-field-fibre-decomposition] to the marking and the singular subscheme. Their finite separable residue fields equal $a$ by [lem-weil-pbc-algebraic-over-algebraically-closed-subfield]. They are finite unions of rational points: they are closed subschemes of the finite-type Noetherian curve, hence quasi-compact, so their disjoint open point decompositions have finite subcovers. Each point becomes exactly one $L$-point after scalar extension.",
+   "uses": [
+    "lem-trf-node-algebraically-closed-extension",
+    "lem-trf-nodal-family-fitting-singular",
+    "def-weil-etale-morphism",
+    "lem-trf-unramified-field-fibre-decomposition",
+    "lem-weil-pbc-algebraic-over-algebraically-closed-subfield",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent exceptional-component argument using the singular-subscheme theorem and unramified-over-field classification"
+   }
+  },
+  {
+   "text": "If there were an exceptional component $R\\subset C$ over $a$, it would persist as a component after extension to $L$. Indeed $a$ is algebraically closed in $L$ by [lem-weil-pbc-algebraic-over-algebraically-closed-subfield]; hence $\\operatorname{Spec}L$ is geometrically irreducible over $a$ by [lem-zl-field-extension-algebraically-closed-geometric]. Apply [lem-sc-product-irreducible-components-bijection] with $U=\\operatorname{Spec}L$ and $V=C$. Since $R\\cong\\mathbf P^1_a$, its scalar extension is irreducible and is the component corresponding to $R$; it is $\\mathbf P^1_L$ by [lemma-nagata-projective-space-base-change-pullback]. It remains contracted: a map $\\mathbf P^1_a\\to X_a$ with one-point image factors through an affine neighbourhood of that image and is given by an $a$-algebra map into $\\Gamma(\\mathbf P^1_a,\\mathcal O)=a$, the latter identity following from $a[t]\\cap a[t^{-1}]=a$ on the two standard charts. It therefore factors through an $a$-point, and its base change factors through the corresponding $L$-point.",
+   "uses": [
+    "lem-weil-pbc-algebraic-over-algebraically-closed-subfield",
+    "lem-zl-field-extension-algebraically-closed-geometric",
+    "lem-sc-product-irreducible-components-bijection",
+    "lemma-nagata-projective-space-base-change-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent contrapositive for stability: preservation of a forbidden component; only the component and projective-space base-change statements are used"
+   }
+  },
+  {
+   "text": "The number of special points on $R$ is unchanged. By Step 9 the union of marking and singular locus is a finite union of $a$-points whose scalar extension is exactly the corresponding union over $L$. A point in this union lies on $R$ precisely when its fibre product with $R$ is nonempty. That fibre product is either the point or empty; after extension it is respectively one $L$-point or empty, by [def-pc-fibre-product]. Thus no point splits or disappears and no new incidence is created. In particular $R_L$ has at most two special points. By Step 10 it is an exceptional contracted projective-line component of $C_L=(Y_{k'})_L$, contradicting geometric stability of $f_{k'}$ with the chosen algebraic closure $L$. This proves the reverse stability implication. Together with Steps 1, 2 and 8 it proves every clause, including closure independence. No generic-isomorphism, density, or properness over the ground field was used.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent special-point incidence calculation, completing the geometric stability reflection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-multipointed-curve",
+  "def-weil-etale-morphism",
+  "def-weil-geometric-fibre",
+  "def-weil-pbc-fpqc-covering",
+  "lem-galois-fpqc-descend-etale",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sc-product-irreducible-components-bijection",
+  "lem-trf-dth-fitting-smooth-locus",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "lem-trf-flat-dense-generic-fibre-pure-dimension",
+  "lem-trf-formal-jacobian-quadratic-criterion",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-node-algebraically-closed-extension",
+  "lem-trf-semistable-marked-base-change",
+  "lem-trf-separable-closed-point-formal-presentation",
+  "lem-trf-unramified-field-fibre-decomposition",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-pbc-algebraic-over-algebraically-closed-subfield",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-completion",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-zl-field-extension-algebraically-closed-geometric",
+  "lemma-nagata-projective-space-base-change-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C56 proof via completed presentations and the formal Jacobian criterion, with explicit depth/ideal descent; exceptional-component reflection is the agent contrapositive argument. Temkin §1.2 and Remark 3.1.1 were consulted online; the absent local PDF remains WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Stability of a marked semistable curve descends along a field extension",
    "results": "{\"t\": \"2026-10-17T19:49:54Z\", \"tool\": \"leanfinder\", \"query\": \"Stability of a marked semistable curve descends along a field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"d8d239efd7d2ce59\"}",
    "date": "2026-10-17",
-   "verdict": "no match: the returned signatures concern general constructibility, morphism permanence, or valuation rings; they do not state this marked-curve assertion or the valuation-centre inverse-limit identification."
+   "verdict": "no match: returned general base-change permanence or Weierstrass-curve results do not assert semistability and absence of exceptional components for arbitrary multipointed curves."
   },
   {
    "tool": "loogle",
    "query": "IsStableUnderBaseChange, field extension, contracted component",
    "results": "{\"t\": \"2026-10-17T19:49:55Z\", \"tool\": \"loogle\", \"query\": \"IsStableUnderBaseChange, field extension, contracted component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsStableUnderBaseChange'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: the returned signatures concern general constructibility, morphism permanence, or valuation rings; they do not state this marked-curve assertion or the valuation-centre inverse-limit identification."
+   "verdict": "no match: returned general base-change permanence or Weierstrass-curve results do not assert semistability and absence of exceptional components for arbitrary multipointed curves."
   },
   {
    "tool": "grep",
    "query": "stable.*curve|contracted.*component|field.*extension",
    "results": "{\"t\": \"2026-10-17T19:49:55Z\", \"tool\": \"grep\", \"query\": \"stable.*curve|contracted.*component|field.*extension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\"], \"digest\": \"6bf98eb0154e1835\"}",
    "date": "2026-10-17",
-   "verdict": "no match: the returned signatures concern general constructibility, morphism permanence, or valuation rings; they do not state this marked-curve assertion or the valuation-centre inverse-limit identification."
+   "verdict": "no match: returned general base-change permanence or Weierstrass-curve results do not assert semistability and absence of exceptional components for arbitrary multipointed curves."
   },
   {
    "tool": "leansearch",
    "query": "Geometric stability of a semistable marked curve is invariant under extension of the residue field",
    "results": "{\"t\": \"2026-10-17T19:49:55Z\", \"tool\": \"leansearch\", \"query\": \"Geometric stability of a semistable marked curve is invariant under extension of the residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStableUnderBaseChange\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\"], \"digest\": \"d56a1f9eca97ede9\"}",
    "date": "2026-10-17",
-   "verdict": "no match: the returned signatures concern general constructibility, morphism permanence, or valuation rings; they do not state this marked-curve assertion or the valuation-centre inverse-limit identification."
+   "verdict": "no match: returned general base-change permanence or Weierstrass-curve results do not assert semistability and absence of exceptional components for arbitrary multipointed curves."
   },
   {
    "tool": "leanfinder",
    "query": "An exceptional projective line component of a nodal marked curve persists over an extension of an algebraically closed field",
    "results": "{\"t\": \"2026-10-17T19:49:58Z\", \"tool\": \"leanfinder\", \"query\": \"An exceptional projective line component of a nodal marked curve persists over an extension of an algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Projective.nonsingularLift_zero\", \"WeierstrassCurve.Projective.Point.nonsingular\", \"WeierstrassCurve.Projective.nonsingularLift_iff\", \"WeierstrassCurve.Projective.nonsingularLift_some\", \"WeierstrassCurve.Projective.Nonsingular\", \"WeierstrassCurve.Projective.comp_equiv_comp\"], \"digest\": \"4109056b25eb850b\"}",
    "date": "2026-10-17",
-   "verdict": "no match: the returned signatures concern general constructibility, morphism permanence, or valuation rings; they do not state this marked-curve assertion or the valuation-centre inverse-limit identification."
+   "verdict": "no match: returned general base-change permanence or Weierstrass-curve results do not assert semistability and absence of exceptional components for arbitrary multipointed curves."
   },
   {
    "tool": "leansearch",
    "query": "Semistability and absence of exceptional components of marked curves are invariant under a field extension",
    "results": "{\"t\": \"2026-10-17T19:50:43Z\", \"tool\": \"leansearch\", \"query\": \"Semistability and absence of exceptional components of marked curves are invariant under a field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStableUnderBaseChange\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"WeierstrassCurve.IsIntegral.mk\"], \"digest\": \"35e034cd63704b23\"}",
    "date": "2026-10-17",
-   "verdict": "no match: the returned signatures concern general constructibility, morphism permanence, or valuation rings; they do not state this marked-curve assertion or the valuation-centre inverse-limit identification."
+   "verdict": "no match: returned general base-change permanence or Weierstrass-curve results do not assert semistability and absence of exceptional components for arbitrary multipointed curves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric semistability and stability of a marked curve invariant under field extension",
+   "results": "{\"t\": \"2026-10-17T20:41:48Z\", \"tool\": \"leanfinder\", \"query\": \"geometric semistability and stability of a marked curve invariant under field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\", \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"WeierstrassCurve.Jacobian.baseChange_nonsingular\"], \"digest\": \"b21e013096aa2424\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no general marked-curve stability assertion; the returned signatures are general permanence or formulas for points of a Weierstrass curve."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsStableUnderBaseChange, IsSemistable, field extension, marked curve",
+   "results": "{\"t\": \"2026-10-17T20:41:48Z\", \"tool\": \"loogle\", \"query\": \"IsStableUnderBaseChange, IsSemistable, field extension, marked curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsStableUnderBaseChange'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no general marked-curve stability assertion; the returned signatures are general permanence or formulas for points of a Weierstrass curve."
+  },
+  {
+   "tool": "grep",
+   "query": "stable.*curve|semistable.*field|contracted.*component",
+   "results": "{\"t\": \"2026-10-17T20:41:48Z\", \"tool\": \"grep\", \"query\": \"stable.*curve|semistable.*field|contracted.*component\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no general marked-curve stability assertion; the returned signatures are general permanence or formulas for points of a Weierstrass curve."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semistability and geometric stability of a proper marked curve are invariant under extension of the ground field",
+   "results": "{\"t\": \"2026-10-17T20:41:49Z\", \"tool\": \"leansearch\", \"query\": \"Semistability and geometric stability of a proper marked curve are invariant under extension of the ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStableUnderBaseChange\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange.mk\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\"], \"digest\": \"2801b6b5ef4d15d4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no general marked-curve stability assertion; the returned signatures are general permanence or formulas for points of a Weierstrass curve."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nodal marked curves and absence of contracted rational components are reflected by extension of the ground field",
+   "results": "{\"t\": \"2026-10-17T20:57:26Z\", \"tool\": \"leanfinder\", \"query\": \"Nodal marked curves and absence of contracted rational components are reflected by extension of the ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.isIntegral_iff\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"WeierstrassCurve.Jacobian.baseChange_nonsingular\", \"WeierstrassCurve.Affine.baseChange_nonsingular\", \"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.Projective.map_nonsingular\", \"WeierstrassCurve.baseChange_integralModel_eq\"], \"digest\": \"62e8e0bef65c8338\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no general marked-curve stability assertion; the returned signatures are general permanence or formulas for points of a Weierstrass curve."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-stable-modification-stability-locus",
@@ -78,12 +308,132 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The stable-modification approximation input to the nearby-cycle branch of lem-trf-local-term-locality: Temkin Theorem 1.5, printed p. 36, and the field-extension invariance hypothesis of Remark 3.1.1 used with Lemma 5.1(ii).",
+   "place": "The stable-modification approximation input to lem-trf-local-term-locality, through lem-trf-stable-modification-stability-locus: field-extension reflection needed in its Step 3 and field-extension ascent in Step 6; Temkin Remark 3.1.1(i)(a),(ii) and the geometric conditions of §1.2.",
    "via": [
     "lem-trf-stable-modification-stability-locus"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-stable-modification-stability-field-descent",
+  "worker": "stage1",
+  "group": "Q40",
+  "summary": "Repaired the returned false common-closure argument. Embed the smaller algebraic closure into the larger one, use arbitrary base change only for ascent, prove nodality reflection by the completed Jacobian criterion, flat-local depth and faithful-flat ideal contraction, and prove stability reflection by persistence of a forbidden component and its rational special points. No new nodes; the exact statement is unchanged. Added current verbatim citations, honest missing-source attribution, and restored authoritative creation provenance and non-self-referential blueprint ancestry.",
+  "blueprint": "Realizes the field-extension reflection used in lem-trf-stable-modification-stability-locus Step 3 and ascent used in Step 6, below the inherited stable-modification input of lem-trf-local-term-locality. The chapter and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Generic tool for field-extension reflection: Being etale descends along fpqc coverings (Stacks 02VN). It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Generic tool for field-extension reflection: Schemes locally of finite type over a field are Jacobson. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-sc-product-irreducible-components-bijection",
+    "why": "Generic tool for field-extension reflection: Components of a product with a geometrically irreducible scheme. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic tool for field-extension reflection: The completion of a Noetherian ring is Noetherian. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "why": "Generic tool for field-extension reflection: An algebraic extension embeds into an algebraically closed extension. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-algebraic-over-algebraically-closed-subfield",
+    "why": "Generic tool for field-extension reflection: An element algebraic over an algebraically closed subfield lies in it. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic tool for field-extension reflection: Residue fields of closed points over an algebraically closed field. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "why": "Generic tool for field-extension reflection: Ideals are contracted from a faithfully flat extension. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Generic tool for field-extension reflection: A faithfully flat ring map is surjective on spectra. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "why": "Generic tool for field-extension reflection: Base change along a field extension is faithfully flat. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic tool for field-extension reflection: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-flat-completion",
+    "why": "Generic tool for field-extension reflection: Completion of a flat local homomorphism of Noetherian local rings is flat. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-depth-formula",
+    "why": "Generic tool for field-extension reflection: Depth formula for a flat local homomorphism of Noetherian local rings. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "why": "Generic tool for field-extension reflection: A flat local homomorphism of local rings is surjective on spectra. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-kahler-differentials-base-change",
+    "why": "Generic tool for field-extension reflection: Kähler differentials commute with base change. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-kahler-differentials-localization",
+    "why": "Generic tool for field-extension reflection: Kähler differentials commute with localization of the algebra. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-faithfully-flat",
+    "why": "Generic tool for field-extension reflection: The completion of a Noetherian local ring is faithfully flat. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Generic tool for field-extension reflection: The completion of a Noetherian local ring is local with the same residue field. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lem-zl-field-extension-algebraically-closed-geometric",
+    "why": "Generic tool for field-extension reflection: Algebraic closure in a field extension implies geometric irreducibility. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-pullback",
+    "why": "Generic tool for field-extension reflection: Projective space commutes with base change. It supplies a local algebra, scalar-extension, or fpqc fact, not a replacement for a step of the trace-formula unit; no same-unit statement supplies this generic conclusion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-descend-etale",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sc-product-irreducible-components-bijection",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-pbc-algebraic-over-algebraically-closed-subfield",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-completion",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-zl-field-extension-algebraically-closed-geometric",
+  "lemma-nagata-projective-space-base-change-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q40-151b67bce",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-151b67bce (reviewer sub-agent of L); spot-checked: Read the item, all eleven proof steps, every cited node statement and source route, including Temkin §1.2 and Remark 3.1.1 online. Closure independence, Jacobian descent, fpqc marking descent, and exceptional-component reflection are correct; edge cases and route restrictions check out. Review written to review.md."
  }
 }

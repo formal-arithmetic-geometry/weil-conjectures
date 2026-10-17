@@ -14,9 +14,105 @@
   "def-pc-fppf-site",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $j=(s,t)$ and $q:h_U\\to F$. Here $h_Z(W)=\\operatorname{Mor}_S(W,Z)$ for every $S$-scheme $Z$. Apply [lem-trf-affine-etale-relation-separated-lqf] to obtain that $s,t$ and $j$ are separated and locally quasi-finite. The hypotheses are precisely that $U$ is affine and $(s,t)$ is an etale equivalence relation; $S$ need not be separated.",
+   "uses": [
+    "lem-trf-affine-etale-relation-separated-lqf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0265, opening two paragraphs."
+   }
+  },
+  {
+   "text": "Fix a scheme $T$ over $S$ and a map $a:h_T\\to F$. Write $Q(W)=U(W)/R(W)$. By [lem-weil-pbc-site-sheafification-sections-local], the section $a_T(\\mathrm{id}_T)\\in Q^\\#(T)$ has representatives in $Q(T_i)$ on an fppf covering $\\{T_i\\to T\\}$. Choose representatives $a_i:T_i\\to U$ of these equivalence classes. Naturality gives $a_W(g)=F(g)(a_T(\\mathrm{id}_T))$ for every $g:W\\to T$, so $q a_i=a|_{T_i}$ as natural transformations. This uses only the existence of local representatives, not representability or etaleness of $q$.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0265, first representability step, choice of an fppf cover and maps a_i."
+   }
+  },
+  {
+   "text": "Let $G=h_T\\times_F h_U$. The kernel-pair identity [lem-trf-etale-relation-kernel-pair] identifies its pullback to $T_i$ with $h_{X_i}$, where $X_i=T_i\\times_{a_i,U,s}R$ and the map $X_i\\to U$ is $t$ on the second factor. Explicitly, on a test scheme $W\\to T_i$, a point of $G$ is a map $u:W\\to U$ with $q(u)=q(a_i|_W)$; the kernel-pair identity gives a unique $r:W\\to R$ with $s(r)=a_i|_W$ and $t(r)=u$. This is a natural bijection, so it gives the asserted representation. The structure map $X_i\\to T_i$ is a base change of $s$ and is separated and locally quasi-finite by [lem-weil-pbc-separated-lqf-base-change] and step 1.",
+   "uses": [
+    "lem-trf-etale-relation-kernel-pair",
+    "lem-weil-pbc-separated-lqf-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0265, first representability step, displayed fibre-product calculation (with the two relation projections interchanged)."
+   }
+  },
+  {
+   "text": "Regard $G$ on the big fppf site of $T$ by $G(W)=\\{u:W\\to U\\mid q(u)=a|_W\\}$. The kernel-pair statement [lem-trf-etale-relation-kernel-pair] is an identity of fppf sheaves, so in particular $h_U$ is an fppf sheaf. Hence $G$ is a sheaf: the maps to $U$ glue uniquely on a cover, and their required equality in $F$ can be checked on that cover. Apply [lem-trf-fppf-sheaf-representability-descent-data] to the local schemes $X_i$. Its overlap comparison maps give a scheme descent datum with these very $X_i$. They are separated and locally quasi-finite over $T_i$ by step 3, so [lem-trf-separated-lqf-fppf-effective-descent] makes this datum effective. The representability-if-effective clause of the former lemma then represents $G$ by a scheme over $T$. This proves the first assertion.",
+   "uses": [
+    "lem-trf-etale-relation-kernel-pair",
+    "lem-trf-fppf-sheaf-representability-descent-data",
+    "lem-trf-separated-lqf-fppf-effective-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0265, end of the first representability step; Tags 02W5 and 02W8."
+   }
+  },
+  {
+   "text": "Now fix $a:h_T\\to F\\times F$, with components $a_1,a_2$. Apply [lem-weil-pbc-site-sheafification-sections-local] separately to these two quotient sections. Use pullback stability and composition of coverings, which are the site axioms in [def-weil-pbc-sites-and-cohomology], to take a common fppf refinement $\\{T_i\\to T\\}$. There are maps $u_i,v_i:T_i\\to U$ with $q(u_i)=a_1|_{T_i}$ and $q(v_i)=a_2|_{T_i}$. Hence $(u_i,v_i)$ is a map to $U\\times_SU$.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0265, third representability step, local lift to U times U; taking fppf lifts directly replaces the unnecessary intervening verification that q is etale."
+   }
+  },
+  {
+   "text": "Set $H=h_T\\times_{F\\times F,\\Delta}F$. On $W\\to T$, its sections are pairs consisting of the structure map and a section $z\\in F(W)$ with $z=a_1|_W=a_2|_W$. Thus the fibre is a singleton exactly when $a_1|_W=a_2|_W$, and otherwise empty. On $T_i$ this sheaf is represented by $Y_i=T_i\\times_{(u_i,v_i),U\\times_SU,j}R$: the kernel-pair identity [lem-trf-etale-relation-kernel-pair] says that $q(u_i|_W)=q(v_i|_W)$ holds exactly when there is a unique $r:W\\to R$ with $(s(r),t(r))=(u_i|_W,v_i|_W)$. This describes inverse natural maps on sections. The structure map $Y_i\\to T_i$ is a base change of $j$, so it is separated and locally quasi-finite by step 1 and [lem-weil-pbc-separated-lqf-base-change].",
+   "uses": [
+    "lem-trf-etale-relation-kernel-pair",
+    "lem-weil-pbc-separated-lqf-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0265, third representability step, cartesian square of j and Delta and its base change to T."
+   }
+  },
+  {
+   "text": "The functor $H$ on the big fppf site of $T$ is a sheaf: equality of the two fixed sections of $F$ is local, with a unique section whenever they agree. By [lem-trf-fppf-sheaf-representability-descent-data] the representing schemes $Y_i$ of step 6 carry the corresponding descent datum. By [lem-trf-separated-lqf-fppf-effective-descent] it is effective, since every $Y_i\\to T_i$ is separated and locally quasi-finite. The representability-if-effective clause of the former lemma represents $H$ by a scheme over $T$. As $a$ was arbitrary, the diagonal of $F$ is representable.",
+   "uses": [
+    "lem-trf-fppf-sheaf-representability-descent-data",
+    "lem-trf-separated-lqf-fppf-effective-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0265, final paragraph, applications of Tags 02W5 and 02W8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affine-etale-relation-separated-lqf",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-trf-etale-relation-kernel-pair",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lem-trf-fppf-sheaf-representability-descent-data",
+  "lem-trf-separated-lqf-fppf-effective-descent",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0265, lemma-presentation-quasi-compact, first and third representability steps; for the diagonal use the common fppf refinement of local representatives directly."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -136,10 +232,38 @@
    "results": "AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an affine scheme with an etale equivalence relation, the quotient sheaf has representable pullbacks and representable diagonal",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of the fppf sheaf quotient of an affine scheme by an etale equivalence relation",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*sheaf|etale.*equivalence.*relation",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.IsRepresentable",
+   "results": "loogle: unknown identifier 'CategoryTheory.Presheaf.IsRepresentable'; 0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-relation-quotient",
@@ -168,5 +292,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-affine-quotient-representable",
+  "worker": "stage1",
+  "summary": "Read Tag 0265 and its descent inputs; prove the two representability assertions by explicit local pullback identifications and effective descent. Reuse the existing kernel-pair, local sheafification-sections and base-change nodes; create only the missing geometry, descent-data/sheaf correspondence and effective-descent statements. No change to the item statement.",
+  "blueprint": "The geometric quotient-presentation subargument under lem-trf-local-term-locality, through lem-trf-etale-relation-quotient: realize the first and third representability steps of Tag 0265. The current main-20261015 local-term proof gives the ancestor context; the created quotient subargument is below the unit and neither its statement nor its route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-separated-lqf-base-change",
+    "why": "Generic stability of separated locally quasi-finite scheme morphisms under base change, used for the local models in steps 3 and 6; the present unit has no such permanence lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-separated-lqf-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q51-ba9717435",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q51-ba9717435 (reviewer sub-agent of L); spot-checked: Read all seven steps and three new nodes against Stacks 0265, 02W5, 02W8 and cited dependencies. Verified pullback orientations, hypotheses, edge cases, duplicate candidates and unit route. No long steps, cycles or mathematical faults found. Accepted the declared base-change tool use. Detailed checks written to review.md; no fixes required."
  }
 }
