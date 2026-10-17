@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-weil-zeta-integral-rational",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The zeta series is integral and rational",
@@ -17,28 +17,96 @@
  ],
  "proof": [
   {
-   "text": "In the situation of [prop-rational-descent] the assumed closed-point\nproduct is the identity of [prop-euler-product], so the\n[def-weil-point-counts-zeta] series $Z(X_0,T)$ lies in\n$1+T\\mathbf Z[[T]]$; by [prop-rational-descent] it also lies in\n$\\mathbf Q(T)$. This is the assertion.",
+   "text": "The hypotheses of [prop-rational-descent] give a proper scheme $X_0$ over $k_0=\\mathbf F_q$. Proper means, in particular, of finite type by [def-weil-proper-morphism]. Thus [prop-euler-product] applies with $Y_0=X_0$ and gives $Z(X_0,T)\\in1+T\\mathbf Z[[T]]$. Its series is the point-count exponential of [def-weil-point-counts-zeta], the same exponential used in the hypotheses; no change of zeta convention is involved.",
    "uses": [
-    "prop-rational-descent",
+    "def-weil-proper-morphism",
     "prop-euler-product",
     "def-weil-point-counts-zeta"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/prop-weil-zeta-integral-rational.proof.md",
+    "place": "Proof, first clause: the Euler-product integrality assertion, specialized to X_0"
+   }
+  },
+  {
+   "text": "Apply [prop-rational-descent] to the very same data and assumptions: the primes $p,\\ell$, the finite field $k_0$, the smooth proper geometrically connected $X_0$ of pure dimension $d$, its cohomological family, the closed-point and trace-to-determinant identities, and the assumed finite Hankel rank over $\\mathbf Q$. Every hypothesis is part of the situation in the statement of this item. Its conclusion is $Z(X_0,T)\\in\\mathbf Q(T)$.",
+   "uses": [
+    "prop-rational-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/prop-weil-zeta-integral-rational.proof.md",
+    "place": "Proof, second clause: by prop-rational-descent it also lies in Q(T)"
+   }
+  },
+  {
+   "text": "Steps 1 and 2 concern the same series $Z(X_0,T)$, so conjunction of their conclusions is exactly $Z(X_0,T)\\in(1+T\\mathbf Z[[T]])\\cap\\mathbf Q(T)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/prop-weil-zeta-integral-rational.proof.md",
+    "place": "Proof, final sentence: This is the assertion."
+   }
   }
  ],
  "proof_deps": [
-  "prop-rational-descent",
+  "def-weil-proper-morphism",
   "prop-euler-product",
-  "def-weil-point-counts-zeta"
+  "def-weil-point-counts-zeta",
+  "prop-rational-descent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rationality/prop-weil-zeta-integral-rational.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/prop-weil-zeta-integral-rational.proof.md",
+  "place": "Entire proof; expanded applications and intersection introduction"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The point count zeta function of a variety over a finite field has integer coefficients and is rational",
+   "results": "Hits read: ArithmeticFunction.zeta, NumberField.dedekindZeta, Poly, ArithmeticFunction.zetaUnit, ArithmeticFunction.zeta.termζ, Polynomial.int_coeff_of_cyclotomic', Poly.isPoly, ArithmeticFunction.pmul_zeta. None states the point-count zeta-series assertion; the results concern arithmetic/Dedekind zeta functions, Hilbert polynomials, Laurent-series embeddings, or integral Weierstrass models.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "zetaSeries|zeta.*rational|rational.*zeta",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries, RatFunc",
+   "results": "Hits read: RatFunc.coe_coe, RatFunc.valuation_eq_LaurentSeries_valuation, LaurentSeries.LaurentSeriesRingEquiv_def, LaurentSeries.LaurentSeriesRingEquiv_mem_valuationSubring, LaurentSeries.coe_X_compare, LaurentSeries.mem_integers_of_powerSeries, LaurentSeries.exists_powerSeries_of_memIntegers, LaurentSeries.powerSeriesAlgEquiv. None states the point-count zeta-series assertion; the results concern arithmetic/Dedekind zeta functions, Hilbert polynomials, Laurent-series embeddings, or integral Weierstrass models.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The point count zeta series of a smooth proper scheme over a finite field has integer coefficients and is a rational function over the rationals",
+   "results": "Hits read: Polynomial.existsUnique_hilbertPoly, Polynomial.coeff_mul_invOneSubPow_eq_hilbertPoly_eval, NumberField.dedekindZeta, Polynomial.finite_mahlerMeasure_le, Polynomial.cardPowDegreeIsAdmissible, Function.FactorizedRational.meromorphicNFOn_univ, FunctionField, FunctionField.inftyValuation.polynomial. None states the point-count zeta-series assertion; the results concern arithmetic/Dedekind zeta functions, Hilbert polynomials, Laurent-series embeddings, or integral Weierstrass models.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasseWeil|Hasse.Weil|Weil.*zeta|zeta.*[Ii]ntegr",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rationality and integrality of the Hasse Weil zeta function of a finite type scheme over a finite field",
+   "results": "Hits read: NumberField.dedekindZeta, WeierstrassCurve.IsIntegral, NumberField.dedekindZeta_residue_ne_zero, FunctionField.classNumber, WeierstrassCurve.exists_isIntegral, NumberField.dedekindZeta_residue_pos, WeierstrassCurve.isIntegral_of_exists_lift, WeierstrassCurve.instIsIntegralOfIsMinimal. None states the point-count zeta-series assertion; the results concern arithmetic/Dedekind zeta functions, Hilbert polynomials, Laurent-series embeddings, or integral Weierstrass models.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -65,5 +133,20 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-thm-rationality"
+ "unit": "sk-thm-rationality",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-weil-zeta-integral-rational",
+  "worker": "stage1",
+  "summary": "Checked the unchanged statement and proof in the current main-20261015 blueprint and the inherited master source. Expanded the proof into finite-type verification plus Euler-product integrality, exact application of rational descent with all its assumed identities and finite-rank hypothesis, and conjunction. Read every cited statement; all work is elementary specialization of existing statements. Searched the whole blueprint/DAG and the project Lean source; no new nodes and no exact whole-item Lean attachment. Recorded all six actual Mathlib searches.",
+  "blueprint": "Realizes the whole proof of prop-weil-zeta-integral-rational: its first Euler-product clause in step 1, rational-descent clause in step 2, and final assertion in step 3; these are the integral-coefficient and rationality conclusions of unit sk-thm-rationality. The unit key node is sk-thm-rationality, not this item, so no unit record is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NC-adbf0876d",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-adbf0876d (reviewer sub-agent of L); spot-checked: I read the item, the main-20261015 and master blueprint text (the same statement and proof in both), the unit sk-thm-rationality, and the full statements of prop-rational-descent, prop-euler-product, def-weil-point-counts-zeta, def-weil-proper-morphism and def-weil-geometric-hypotheses. The statement is unchanged and keeps every hypothesis of prop-rational-descent. Step 1: X_0 is proper by def-weil-geometric-hypotheses, which means proper in the sense of def-weil-proper-morphism and so includes finite type. prop-euler-product's own statement says Z(Y_0,T) is in 1+TZ[[T]] for every finite-type F_q-scheme, so applying it to X_0 is a one-line specialization, and the zeta series is the same point-count exponential. Step 2 applies prop-rational-descent to the same data to get Z in Q(T). Step 3 combines the two conclusions. All three steps are genuinely elementary. On the route: prop-rational-descent is in the item's own unit; prop-euler-product's unit sk-prop-euler is cited by sk-thm-rationality; the other two cited nodes are definitions. No tool_uses, no SGA. There are no new nodes. The candidates that state more general versions (thm-weil-final-rationality, sk-thm-rationality, prop-weil-integral-rational-series) do not state this conditional proposition, so same_as=[] is acceptable. Checked on small cases: Spec F_q gives (1-T)^-1 and P^1 gives 1/((1-T)(1-qT)). proof_deps equals the union of the step uses, and four kinds of search are recorded. No fixes."
+ }
 }
