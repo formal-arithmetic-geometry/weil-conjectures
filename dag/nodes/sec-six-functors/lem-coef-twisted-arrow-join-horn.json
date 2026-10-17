@@ -180,5 +180,27 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-69e0e1900 (reviewer sub-agent of L); spot-checked: I read all of the mathematics. The statement matches Kerodon 03JT (Prop 8.1.1.15, proof read online): Kerodon's 0<i<=n with horn Lambda^n_{n-i} is the item's k=n-i, so n>=1 and 0<=k<n. After the reindexing bar j->n-j, j->n+1+j, the excluded pair becomes t=i, so H_{n,k} is exactly Kerodon's K_0, which is the lifting domain used in step 2 of the parent lem-coef-twisted-arrow-left-fibration (d_j of Tw deletes bar j and j). I re-derived each step. Step 1: the support criterion follows from a monotone section of the surjection. Step 2: every non-basic set has a primary or secondary superset, and the full set is secondary because 0 is in L. Step 3 (primary): 2n+1 is in S because the pair {0,2n+1} has t=0, which is not i, and 0 is not in S; so v<h<2n+1. Step 3 and step 4 (secondary): F is non-basic because the deleted vertex lies only in the excluded pair {i,h}, and an earlier set of equal size containing F is forced by the tie rule to equal S. Step 4 also covers a facet that loses L by adding h, giving an earlier primary set. Step 5: the inverse image is exactly the inner horn in every degree. Step 6: the pushout is a direct degreewise gluing. Step 7 uses only the defining sentence of lem-coef-infinity-pushout-join-saturation, which is in the same unit, so no tool_use is needed. My own brute force (/tmp/q20check/chk.py) passes all 15 cases with 1<=n<=5 and 0<=k<n, 3252 attachments in total, with the horn intersections and final coverage exact. In the edge case n=1, k=0, H is the spine of Delta^3, attached in 4 steps. The report's prose for this case leaves out the two middle 2-simplices; that slip is in the report only, not the node. Other checks: there are no new nodes, the dependency closure has no cycle, rg searches of the DAG for 03JT, twisted arrow, paired, edgewise and inner anodyne found no duplicate (so same_as=[] is right), all three Mathlib search kinds are recorded, and nothing cites SGA. This is not a target node, so the base-change and coefficient check does not apply. I made no fixes and accepted no tool_uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-36c9659b4",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Read node, Kerodon 03JT place (i=n-k), both stmt_deps (EnhancedDiagramsCones, PushoutJoinSaturation using Mathlib innerAnodyneExtensions), module, report (real Worker report and Second reading by Q28). Every clause matches: Δ[2n+1] with bar j↦n-j, j↦n+1+j; pure blocks v≤n / n<v; paired deletions for j≠k; Monotone filtration A 0 = H, A last = ⊤; each step IsPushout f Λ[d,e].ι homOfLE g with 2≤d, 0<e<d; inner-anodyne conjunct on the canonical inclusion. No extra hypotheses; universe u unrestricted; lean.statement verbatim; helper has real data and is recorded; only sorry; docstrings have source and blueprint. Own enumeration for n≤4, all k<n confirms each attachment meets the prior stage in exactly its inner horn (counts 4/16/52/160). nt_compile --json on snapshot file: rc=0, no errors or warnings. Cosmetic only: report says 'Proposition the project server' for 8.1.1.15."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.TwistedArrowJoinHorn",
+  "declaration": "SSet.Enhanced.twistedArrow_join_horn_filtration",
+  "declarations": [
+   "SSet.Enhanced.twistedArrowJoinHorn",
+   "SSet.Enhanced.twistedArrow_join_horn_filtration"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/TwistedArrowJoinHorn.lean",
+  "statement": "theorem twistedArrow_join_horn_filtration (n k : ℕ) (hn : 1 ≤ n) (hk : k < n) : (∃ (r : ℕ) (A : Fin (r + 1) → (Δ[2 * n + 1] : SSet.{u}).Subcomplex) (hA : Monotone A), A 0 = twistedArrowJoinHorn n k ∧ A (Fin.last r) = ⊤ ∧ ∀ a : Fin r, ∃ (d : ℕ) (e : Fin (d + 1)), 2 ≤ d ∧ 0 < e.val ∧ e.val < d ∧ ∃ (f : (Λ[d, e] : SSet.{u}) ⟶ (A a.castSucc : SSet.{u})) (g : (Δ[d] : SSet.{u}) ⟶ (A a.succ : SSet.{u})), IsPushout f Λ[d, e].ι (Subcomplex.homOfLE (hA (Fin.castSucc_le_succ a))) g) ∧ innerAnodyneExtensions (twistedArrowJoinHorn.{u} n k).ι",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
