@@ -176,6 +176,7 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Cube
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.GaloisGroupLaw
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.GeometricPoints
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
