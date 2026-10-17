@@ -225,8 +225,8 @@ lemma smul_id_restrictScalars_obj_eq_zero
     r • 𝟙 ((Sheaf.restrictScalars (Scheme.ProEt.topology T) (Ideal.Quotient.mk J)).obj H) =
       0 := by
   ext U x
-  change (Ideal.Quotient.mk J r) • x = 0
-  rw [Ideal.Quotient.eq_zero_iff_mem.2 hr, zero_smul]
+  exact (congrArg (fun s : Λ ⧸ J ↦ s • (show H.obj.obj U from x))
+    (Ideal.Quotient.eq_zero_iff_mem.2 hr)).trans (zero_smul _ _)
 
 /-- `ν_*` commutes with the multiplication by a scalar. -/
 lemma comparisonLowerStar_map_smul_id

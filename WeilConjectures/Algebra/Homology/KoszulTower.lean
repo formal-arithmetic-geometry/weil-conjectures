@@ -305,4 +305,133 @@ theorem exists_koszulMap_mem_range [IsNoetherianRing R] (f : Fin r → R) (a n :
   refine Submodule.smul_induction_on hmem (fun x hx y hy ↦ ?_) (fun _ _ ↦ add_mem)
   exact smul_mem_range_koszulBoundary (f ^ a) n hy (hN hx)
 
+/-! ### Degree zero -/
+
+section DegreeZero
+
+variable {M : Type*} [AddCommGroup M] [Module R M]
+
+lemma coe_zeroEquiv_symm (a : R) :
+    ((exteriorPower.zeroEquiv R M).symm a : ExteriorAlgebra R M) = algebraMap R _ a := by
+  rw [exteriorPower.zeroEquiv_symm_apply, Submodule.coe_smul, exteriorPower.ιMulti_apply_coe,
+    ιMulti_zero_apply, Algebra.algebraMap_eq_smul_one]
+
+lemma coe_eq_algebraMap_zeroEquiv (x : ⋀[R]^0 M) :
+    (x : ExteriorAlgebra R M) = algebraMap R _ (exteriorPower.zeroEquiv R M x) := by
+  conv_lhs => rw [← (exteriorPower.zeroEquiv R M).symm_apply_apply x]
+  exact coe_zeroEquiv_symm _
+
+lemma coe_oneEquiv_symm (v : M) :
+    ((exteriorPower.oneEquiv R M).symm v : ExteriorAlgebra R M) = ι R v := by
+  rw [exteriorPower.oneEquiv_symm_apply, exteriorPower.ιMulti_apply_coe, ιMulti_apply]
+  simp
+
+end DegreeZero
+
+lemma koszulMap_zero (c : Fin r → R) : koszulMap c 0 = LinearMap.id := by
+  refine LinearMap.ext fun x ↦ Subtype.ext ?_
+  rw [koszulMap_coe, coe_eq_algebraMap_zeroEquiv x, AlgHom.commutes]
+  rfl
+
+/-- In degree one, the Koszul differential is `eᵢ ↦ gᵢ`, read through `⋀⁰ R^r ≅ R` and
+`⋀¹ R^r ≅ R^r`. -/
+lemma zeroEquiv_koszulBoundary_zero (g : Fin r → R) (x : ⋀[R]^1 (Fin r →₀ R)) :
+    exteriorPower.zeroEquiv R _ (koszulBoundary R r g 0 x) =
+      Finsupp.linearCombination R g (exteriorPower.oneEquiv R _ x) := by
+  obtain ⟨v, rfl⟩ := (exteriorPower.oneEquiv R (Fin r →₀ R)).symm.surjective x
+  rw [LinearEquiv.apply_symm_apply]
+  apply (algebraMap R (ExteriorAlgebra R (Fin r →₀ R))).injective
+  · rw [← coe_eq_algebraMap_zeroEquiv]
+    change CliffordAlgebra.contractLeft (Finsupp.linearCombination R g)
+      ((exteriorPower.oneEquiv R _).symm v : ExteriorAlgebra R (Fin r →₀ R)) = _
+    rw [coe_oneEquiv_symm, CliffordAlgebra.contractLeft_ι]
+    rfl
+
+/-- The augmentation `⋀⁰ R^r ≅ R ⟶ R ⧸ J` of the Koszul complex. -/
+noncomputable def koszulAug (J : Ideal R) : ⋀[R]^0 (Fin r →₀ R) →ₗ[R] R ⧸ J :=
+  J.mkQ ∘ₗ (exteriorPower.zeroEquiv R _).toLinearMap
+
+lemma koszulAug_apply (J : Ideal R) (x : ⋀[R]^0 (Fin r →₀ R)) :
+    koszulAug J x = Ideal.Quotient.mk J (exteriorPower.zeroEquiv R _ x) := rfl
+
+lemma koszulAug_surjective (J : Ideal R) : Function.Surjective (koszulAug (r := r) J) :=
+  (Submodule.mkQ_surjective J).comp (exteriorPower.zeroEquiv R _).surjective
+
+/-- The image of the Koszul differential `⋀¹ R^r ⟶ ⋀⁰ R^r ≅ R` is the ideal `(g₁, …, g_r)`. -/
+lemma map_zeroEquiv_range_koszulBoundary_zero (g : Fin r → R) :
+    (LinearMap.range (koszulBoundary R r g 0)).map (exteriorPower.zeroEquiv R _).toLinearMap =
+      Ideal.span (Set.range g) := by
+  rw [← LinearMap.range_comp]
+  have : (exteriorPower.zeroEquiv R _).toLinearMap ∘ₗ koszulBoundary R r g 0 =
+      Finsupp.linearCombination R g ∘ₗ (exteriorPower.oneEquiv R _).toLinearMap :=
+    LinearMap.ext (zeroEquiv_koszulBoundary_zero g)
+  rw [this, LinearMap.range_comp_of_range_eq_top _ (LinearEquiv.range _),
+    Finsupp.range_linearCombination]
+  rfl
+
+lemma koszulAug_comp_koszulBoundary (g : Fin r → R) {J : Ideal R}
+    (hJ : Ideal.span (Set.range g) ≤ J) : koszulAug J ∘ₗ koszulBoundary R r g 0 = 0 := by
+  refine LinearMap.ext fun x ↦ ?_
+  rw [LinearMap.comp_apply, koszulAug_apply, LinearMap.zero_apply,
+    Ideal.Quotient.eq_zero_iff_mem]
+  apply hJ
+  rw [← map_zeroEquiv_range_koszulBoundary_zero]
+  exact Submodule.mem_map_of_mem (LinearMap.mem_range_self _ x)
+
+/-- The augmentation is a cokernel of the first Koszul differential: `H₀(K_•(g)) = R ⧸ (g)`. -/
+lemma ker_koszulAug (g : Fin r → R) :
+    LinearMap.ker (koszulAug (Ideal.span (Set.range g))) =
+      LinearMap.range (koszulBoundary R r g 0) := by
+  ext x
+  rw [LinearMap.mem_ker, koszulAug_apply, Ideal.Quotient.eq_zero_iff_mem,
+    ← map_zeroEquiv_range_koszulBoundary_zero, Submodule.mem_map_equiv,
+    LinearEquiv.symm_apply_apply]
+
+/-! ### Vanishing above the rank -/
+
+instance subsingleton_exteriorPower_of_lt {n : ℕ} [Fact (r < n)] :
+    Subsingleton (⋀[R]^n (Fin r →₀ R)) := by
+  have hn : r < n := Fact.out
+  have : IsEmpty (Set.powersetCard (Fin r) n) := by
+    refine ⟨fun s ↦ ?_⟩
+    have := s.2
+    have h := Finset.card_le_univ (s : Finset (Fin r))
+    simp only [Fintype.card_fin] at h
+    rw [Set.powersetCard.mem_iff] at this
+    omega
+  exact ((Finsupp.basisSingleOne (R := R) (ι := Fin r)).exteriorPower R n).repr.toEquiv
+    |>.subsingleton
+
+/-! ### Homology of the Koszul tower -/
+
+/-- **Pro-vanishing of the Koszul homology**, homological form. For every level `a` and every
+positive degree `n + 1`, the transition `K_•(f^(k + a)) ⟶ K_•(f^a)` is zero on `H_{n+1}` for
+some `k`. -/
+theorem exists_homologyMap_koszulTower_eq_zero [IsNoetherianRing R] (f : Fin r → R)
+    (a n : ℕ) : ∃ k : ℕ, HomologicalComplex.homologyMap
+      ((koszulTower f).map (homOfLE (Nat.le_add_left a k)).op) (n + 1) = 0 := by
+  obtain ⟨k, hk⟩ := exists_koszulMap_mem_range f a n
+  refine ⟨k, ?_⟩
+  set K := (koszulTower f).obj (op (k + a))
+  set L := (koszulTower f).obj (op a)
+  set φ := (koszulTower f).map (homOfLE (Nat.le_add_left a k)).op
+  rw [← cancel_epi (K.homologyπ (n + 1)), HomologicalComplex.homologyπ_naturality, comp_zero]
+  ext x
+  obtain ⟨y, hy⟩ : ∃ y, koszulBoundary R r (f ^ a) (n + 1) y =
+      ((K.iCycles (n + 1) ≫ φ.f (n + 1)).hom x) := by
+    have hd : koszulBoundary R r (f ^ (k + a)) n (K.iCycles (n + 1) x) = 0 := by
+      have := congr($(K.iCycles_d (n + 1) n) x)
+      simpa [K, koszulTower, koszulComplex, ChainComplex.of_d] using this
+    have := hk _ hd
+    simp only [φ, koszulTower_map_f, Nat.add_sub_cancel, unop_op] at this ⊢
+    exact this
+  have hx : (HomologicalComplex.cyclesMap φ (n + 1)) x = (L.toCycles (n + 2) (n + 1)) y := by
+    apply (ModuleCat.mono_iff_injective (L.iCycles (n + 1))).1 inferInstance
+    rw [← ModuleCat.comp_apply, ← ModuleCat.comp_apply, HomologicalComplex.cyclesMap_i,
+      HomologicalComplex.toCycles_i]
+    rw [← hy]
+    simp [L, koszulTower, koszulComplex, ChainComplex.of_d]
+  rw [ModuleCat.comp_apply, hx, ← ModuleCat.comp_apply, HomologicalComplex.toCycles_comp_homologyπ]
+  rfl
+
 end ExteriorAlgebra

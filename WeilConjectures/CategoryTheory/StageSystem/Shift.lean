@@ -289,10 +289,8 @@ instance commShift_transIso_hom {i j : I} (h : i ≤ j) :
     simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
       Functor.commShiftIso_comp_hom_app, ι_commShiftIso_hom_app, comp_id, transIso_hom_app,
       isoToStage]
-    erw [comp_id, id_comp]
+    erw [comp_id]
     rw [shiftFunctor_map_mkHom, ι_map_eq le_rfl, mkHom_comp_mkHom]
-    dsimp only
-    rw [mkHom_comp_mkHom]
     congr 1
     have e := NatTrans.shift_app_comm (S.assoc h (le_refl j)).hom a K
     rw [Functor.commShiftIso_comp_hom_app] at e

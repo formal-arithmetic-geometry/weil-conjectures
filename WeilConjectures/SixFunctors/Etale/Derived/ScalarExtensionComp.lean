@@ -14,7 +14,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ScalarExtension
 
 Let `E ⊆ L ⊆ M` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`, and let `Y` be a scheme. The scalar
 extensions `- ⊗_E L : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, L)` of blueprint
-`def-weil-rationalization-karoubi` (`AlgebraicGeometry.Etale.derivedCompleteRationalScalarExtension`)
+`def-weil-rationalization-karoubi`
+(`AlgebraicGeometry.Etale.derivedCompleteRationalScalarExtension`)
 are compatible with the composition of finite extensions and with the identity extension
 (blueprint `lem-weil-scalar-extension-composition`):
 
@@ -162,26 +163,41 @@ variable (l : ℕ) [Fact l.Prime] (E L M : Type w) [Field E] [Field L] [Field M]
   [Algebra ℚ_[l] M] [IsScalarTower ℚ_[l] M (PadicAlgCl l)] [FiniteDimensional ℚ_[l] M]
   [Small.{u + 1} E] [Small.{u + 1} L] [Small.{u + 1} M] (Y : Scheme.{u})
 
+/-- The inclusion `D_comp(Y_ét, 𝒪_E) ⥤ D(Y_ét, 𝒪_E)` is fully faithful. -/
+noncomputable def fullyFaithfulDerivedCompleteIntegralι (E : Type w) [Field E]
+    [Algebra E (PadicAlgCl l)] [Small.{u + 1} E] :
+    (DerivedCategoryDerivedCompleteIntegral.ι Y.smallEtaleTopology l E).FullyFaithful :=
+  ObjectProperty.fullyFaithfulι _
+
+set_option maxHeartbeats 1600000 in
+-- the naturality check unfolds the derived base change functors
 /-- The composite of the integral scalar extensions `D_comp(Y_ét, 𝒪_E) ⥤ D_comp(Y_ét, 𝒪_L) ⥤
 D_comp(Y_ét, 𝒪_M)` is the integral scalar extension `D_comp(Y_ét, 𝒪_E) ⥤ D_comp(Y_ét, 𝒪_M)`. -/
 noncomputable def derivedCompleteIntegralScalarExtensionCompIso :
     derivedCompleteIntegralScalarExtension (Y := Y) l E L ⋙
         derivedCompleteIntegralScalarExtension l L M ≅
       derivedCompleteIntegralScalarExtension l E M :=
-  Functor.fullyFaithfulCancelRight
-    (_root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l M).ι
-    (Functor.isoWhiskerLeft
-      (_root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E).ι
-      (derivedBaseChangeCompIso Y _ _ _ _ _ _ (PadicAlgCl.integersShrinkMap_comp l E L M)))
+  let e := derivedBaseChangeCompIso Y _ _ _ exists_isDerivedBaseChange_integersShrinkMap
+    exists_isDerivedBaseChange_integersShrinkMap exists_isDerivedBaseChange_integersShrinkMap
+    (PadicAlgCl.integersShrinkMap_comp l E L M)
+  NatIso.ofComponents
+    (fun K ↦ (fullyFaithfulDerivedCompleteIntegralι l Y M).preimageIso
+      (e.app ((DerivedCategoryDerivedCompleteIntegral.ι _ l E).obj K)))
+    (fun f ↦ (fullyFaithfulDerivedCompleteIntegralι l Y M).map_injective (by
+      simp only [Functor.map_comp, Functor.FullyFaithful.preimageIso_hom,
+        Functor.FullyFaithful.map_preimage]
+      exact e.hom.naturality ((DerivedCategoryDerivedCompleteIntegral.ι _ l E).map f)))
 
 /-- The integral scalar extension along `𝒪_E ⟶ 𝒪_E` is the identity. -/
 noncomputable def derivedCompleteIntegralScalarExtensionIdIso :
     derivedCompleteIntegralScalarExtension (Y := Y) l E E ≅ 𝟭 _ :=
+  have := (fullyFaithfulDerivedCompleteIntegralι l Y E).full
+  have := (fullyFaithfulDerivedCompleteIntegralι l Y E).faithful
   Functor.fullyFaithfulCancelRight
-    (_root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E).ι
-    (Functor.isoWhiskerLeft
-      (_root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E).ι
-      (derivedBaseChangeIdIso Y _ (PadicAlgCl.integersShrinkMap_self l E) _))
+    (DerivedCategoryDerivedCompleteIntegral.ι Y.smallEtaleTopology l E)
+    (Functor.isoWhiskerLeft (DerivedCategoryDerivedCompleteIntegral.ι Y.smallEtaleTopology l E)
+      (derivedBaseChangeIdIso Y _ (PadicAlgCl.integersShrinkMap_self l E)
+        exists_isDerivedBaseChange_integersShrinkMap))
 
 /-- Blueprint `lem-weil-scalar-extension-composition`: Composition of scalar extensions.
 

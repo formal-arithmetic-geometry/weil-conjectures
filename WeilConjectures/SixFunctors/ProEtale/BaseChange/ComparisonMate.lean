@@ -116,6 +116,20 @@ lemma leftDerivedUpperStarComparisonIso_hom_app_comp
   rw [Functor.ι_map_mapDerivedCategoryPlusSquareIso_hom_app]
   simp [leftDerivedUpperStarComparisonIso, Functor.mapDerivedCategoryPlusCompatibility,
     Functor.mapDerivedCategoryNatIso_symm]
+  rfl
+
+variable {Λ} in
+/-- The components of the comparison `ν_Y^* Rf_* ≅ Rf_* ν_X^*` with unbounded pro-étale direct
+image. -/
+lemma rightDerivedLowerStarComparisonIso'_hom_app [QuasiCompact f] [QuasiSeparated f]
+    (M : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (rightDerivedLowerStarComparisonIso' f (ModuleCat.{u + 1} Λ)).hom.app M =
+      DerivedCategory.Plus.ι.map
+          ((rightDerivedLowerStarComparisonPlusIso f (ModuleCat.{u + 1} Λ)).hom.app M) ≫
+        (ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctorPlusCompatibility.hom.app
+          (D+(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M) := by
+  simp [rightDerivedLowerStarComparisonIso', Functor.mapDerivedCategoryPlusCompatibility]
+  exact Category.id_comp _
 
 /-- Blueprint `prop-weil-pbc-comparison-direct-image` (compatibility with the counits): the
 comparison `ν_Y^* Rf_* ≅ Rf_* ν_X^*` is the mate of the comparison `ν_X^* f^* ≅ Lf^* ν_Y^*`, in
@@ -153,18 +167,18 @@ theorem leftDerivedUpperStarComparisonIso_hom_app_comp_counit [QuasiCompact f]
   -- the unbounded statement
   have hd := leftDerivedUpperStarComparisonIso_hom_app_comp Λ f
     (R+(Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj M)
-  rw [← NatIso.naturality_2 (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
-    (ModuleCat.{u + 1} Λ) f)]
-  simp only [rightDerivedLowerStarComparisonIso', Iso.trans_hom, NatTrans.comp_app,
-    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app, Iso.symm_hom, Functor.mapDerivedCategoryPlusCompatibility,
-    Iso.refl_hom, Iso.refl_inv, NatTrans.id_app, Functor.map_id, Category.id_comp,
-    Category.comp_id, Functor.map_comp, Category.assoc]
+  rw [rightDerivedLowerStarComparisonIso'_hom_app, ← NatIso.naturality_2
+    (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) f),
+    Functor.map_comp]
+  simp only [Category.assoc]
   rw [Etale.derivedUpperStarLowerStarAdjunctionPlus,
     Adjunction.derivedAdjunctionPlus_eq_derivedPlus]
   erw [hP]
-  rw [Functor.map_comp, reassoc_of% hd]
-  rfl
+  have hd' := hd =≫ (DerivedCategory.Plus.ι.map
+    (D+(ν^*(X)[ModuleCat.{u + 1} Λ]).map
+      ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus.counit.app M)))
+  simp only [Category.assoc, Category.id_comp] at hd'
+  exact hd'
 
 end Derived
 
