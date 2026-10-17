@@ -38,7 +38,7 @@ The conjunct `t ≤ m` in `hDim` expresses the nonnegativity forced by the
 integer equality `dim T = m - t` for a nonzero ring; it prevents natural
 subtraction from admitting presentations with more equations than variables.
 
-Proof (the five DAG steps):
+Proof (the five blueprint steps):
 1. Put `J = Ideal.span (Set.range f)`, `T = Q / J`, and `X = Spec T`.
    The quotient is finite type over `k` (`def-weil-pbc-finite-type-algebra`),
    and `Q` is Noetherian (`lem-weil-pbc-finite-type-algebra-noetherian`).

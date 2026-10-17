@@ -37,7 +37,6 @@ private theorem associated_flat_tensor_finite
     (N : Type n) [AddCommGroup N] [Module R N] [Module.Flat R N]
     {p : Ideal R} (hp : p ∈ associatedPrimes R (M ⊗[R] N)) :
     p ∈ associatedPrimes R M := by
-  -- Localize over R, retaining N as the flat tensor factor.
   let : p.IsPrime := hp.isPrime
   let A := Localization.AtPrime p
   let L := LocalizedModule.AtPrime p M

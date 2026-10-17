@@ -35,7 +35,7 @@ clause quantifies over it without adding a hypothesis or choosing auxiliary data
 Source: Stacks Project, Algebra, Lemma Tag 0329, Definition Tag 0327.
 (blueprint: lem-weil-pbc-cohen-ring-mod-pn-formally-smooth)
 
-Proof route from the DAG:
+Proof route from the blueprint:
 1. Define P(m) to be the displayed square-zero lifting property. A ring with `p ^ m = 0`
 is uniquely a `ZMod (p ^ m)`-algebra, and every ring map between such rings is linear.
 By `Algebra.FormallySmooth.iff_comp_surjective`, formal smoothness is this lifting property.

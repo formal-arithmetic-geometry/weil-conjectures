@@ -169,7 +169,7 @@ private theorem analyticallyUnramified_normalization_descent (n : ℕ)
 Source: Stacks Project, Algebra, Lemma Tag 0331
 (blueprint: lem-weil-pbc-local-nagata-domain-analytically-unramified).
 
-Proof (the seven steps of the DAG node):
+Proof (the seven steps of the blueprint node):
 
 1. Induct on the finite Krull dimension $d=\dim A$: it is finite because the maximal ideal of a
 Noetherian local ring has finitely many generators and [lem-weil-pbc-noetherian-local-dimension-

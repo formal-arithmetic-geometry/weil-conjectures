@@ -60,7 +60,7 @@ The tensor factors are reversed from the printed statement via the canonical sym
 In characteristic zero its composition with the map to `Ω[K⁄ℤ]` is still injective.
 In characteristic `p`, the canonical maps identify the differentials over `ℤ` and `ZMod p`.
 
-Proof (the DAG's seven steps):
+Proof (the blueprint's seven steps):
 1. Since `C` is nonzero and `k` is a field, `k → C → K` embeds `k` in `K`, so their
 characteristic is either zero or a prime. The displayed map is the residue-field base
 change of the first map in the differential exact sequence for `ℤ → k → C`
