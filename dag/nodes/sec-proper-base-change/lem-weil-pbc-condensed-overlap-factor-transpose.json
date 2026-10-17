@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-condensed-overlap-factor-transpose",
+ "kind": "statement",
+ "title": "Transpose an existing fixed-field factor on one overlap",
+ "statement": "Fix E ≤ F and a commutative span W -> U,V -> X. Take E-module objects P,Q on U,V, an Omega-module M on X, and arbitrary Omega-linear maps from the scalar extensions of P,Q to the respective pullbacks of M. An E-linear map from p*P to the restriction of q*(F tensor_E Q), transported along the specified overlap E-ring comparison, whose composite with q* of the canonical F-adjoint equals p* of the original E-to-Omega adjoint followed by the overlap comparison, transposes to an underlying sheaf map p*(F tensor_E P) -> q*(F tensor_E Q) commuting with the canonical F-adjoints. No finite presentation, finite family, qcqs, stage-existence or invertibility hypothesis is used.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "(Obj) descent paragraph, finite-stage comparisons on pairwise overlaps"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-local-coefficient-adjoints"
+ ],
+ "proof": [
+  {
+   "text": "The finite local model is definitionally the specified scalar extension. The scalar-extension transitivity isomorphism carries the composite E-to-F and F-to-Omega units to the E-to-Omega unit. The proved equality to the canonical adjunct identifies the explicit underlying local adjoint with the mixed scalar map followed by the supplied Omega-linear map. Use the component presentation of the specified square comparison. Its equality to upperStarCompIso follows by specializing the generic reconstruction identity; no source-library definition is changed.",
+   "uses": [
+    "def-weil-pbc-condensed-local-coefficient-adjoints",
+    "def-weil-pbc-condensed-coefficient-complex-diagram"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a monoidal left adjoint, compose the lifted module Hom equivalence with the scalar-extension Hom equivalence. Naturality of the adjunction unit identifies the two right adjoints. The resulting Hom equivalence is precomposition with the pulled scalar unit on underlying maps. In particular it supplies a lift and detects equality.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality and monoidality of the overlap comparison identify the restriction of q* of the F-module with restriction along the pulled E-to-F ring map and the comparison at F. Transpose b through the preceding equivalence. Both composites into the restricted pullback of M are F-linear. Their precompositions with the pulled unit agree by hb and the unit-transitivity calculation, so injectivity gives equality. Forget linearity to obtain the required underlying sheaf map; the finite local model is already the specified scalar extension.",
+   "uses": [
+    "def-weil-pbc-condensed-local-coefficient-adjoints",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-condensed-local-coefficient-adjoints",
+  "def-weil-pbc-condensed-coefficient-complex-diagram",
+  "lem-weil-pbc-profinite-point-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "(Obj) descent paragraph, finite-stage comparisons on pairwise overlaps",
+  "note": "Complete Lean proof through the composed scalar/pullback adjunction and monoidal-square naturality. The comparison is reconstructed by explicit component maps in this Sheaf module and proved equal to the unchanged upstream upperStarCompIso. No holes; no source-library edits.",
+  "date": "2026-10-17"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a finitely presented module into a filtered colimit factors through a finite stage",
+   "results": "General finite-presentation and filtered-colimit APIs, no internal module overlap transposition theorem.",
+   "date": "2026-10-16",
+   "verdict": "The fixed-field compatibility calculation must be supplied from scalar adjunction and monoidal naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Generic adjunction Hom equivalence and naturality APIs; used in the attempted proof.",
+   "date": "2026-10-16",
+   "verdict": "The fixed-field compatibility calculation must be supplied from scalar adjunction and monoidal naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod.*extendScalars|IsFinitelyPresented",
+   "results": "Existing pullbackExtendScalarsIso and generic scalar extension adjunctions; no exact fixed-overlap transposition result.",
+   "date": "2026-10-16",
+   "verdict": "The fixed-field compatibility calculation must be supplied from scalar adjunction and monoidal naturality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of scalar extension adjunction and pullback of internal module morphisms on a commutative square of ringed topoi",
+   "results": "ModuleCat.extendRestrictScalarsAdj, PresheafOfModules.pullback and SheafOfModules.pullbackPushforwardAdjunction; no internal-module square transposition statement.",
+   "date": "2026-10-16",
+   "verdict": "The generic adjunction pattern is available, but our internal module-object square uses the existing library adjunctions. The new theorem proves their compatibility by composing Hom equivalences and checking the units."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedFiniteFamilyHomDescent",
+  "date": "2026-10-17",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-finite-family-hom-descent",
+   "place": "Fixed-field scalar adjunction and overlap comparison calculation",
+   "via": [
+    "lem-weil-pbc-condensed-local-model-gluing",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedOverlapFactorTranspose",
+  "file": "lean/Sheaf/Paper/CondensedOverlapFactorTranspose.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficient_overlap_factor_transpose",
+  "statement": "theorem finiteCoefficient_overlap_factor_transpose\n    (T X : Scheme.{u}) (f : X ⟶ T) (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n    (U V W : Scheme.{u}) (g : U ⟶ X) (h : V ⟶ X)\n    (p : W ⟶ U) (q : W ⟶ V) (w : p ≫ g = q ≫ h)\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      ((upperStar Ab.{u + 1} f).obj (padicAlgClRingObj T ℓ)))\n    (P : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n      ((upperStar Ab.{u + 1} g).obj\n        ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E))))\n    (Q : Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1})\n      ((upperStar Ab.{u + 1} h).obj\n        ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E))))\n    (a : (Mod.extendScalars ((upperStar Ab.{u + 1} g).map\n      ((upperStar Ab.{u + 1} f).map (padicSubfieldRingObjToPadicAlgCl T ℓ E)))).obj P ⟶\n        ((upperStar Ab.{u + 1} g).mapMod\n          ((upperStar Ab.{u + 1} f).obj (padicAlgClRingObj T ℓ))).obj M)\n    (c : (Mod.extendScalars ((upperStar Ab.{u + 1} h).map\n      ((upperStar Ab.{u + 1} f).map (padicSubfieldRingObjToPadicAlgCl T ℓ E)))).obj Q ⟶\n        ((upperStar Ab.{u + 1} h).mapMod\n          ((upperStar Ab.{u + 1} f).obj (padicAlgClRingObj T ℓ))).obj M)\n    (F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (hEF : E ≤ F)\n    (rE : (upperStar Ab.{u + 1} p).obj ((upperStar Ab.{u + 1} g).obj\n        ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E))) ⟶\n      (upperStar Ab.{u + 1} q).obj ((upperStar Ab.{u + 1} h).obj\n        ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E))))\n    [IsMonHom rE]\n    (hrE : rE = (overlapComparison w).hom.app\n      ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E)))\n    (b : ((upperStar Ab.{u + 1} p).mapMod\n      ((upperStar Ab.{u + 1} g).obj\n        ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E)))).obj P ⟶\n      (Mod.comap rE).obj (((upperStar Ab.{u + 1} q).mapMod\n        ((upperStar Ab.{u + 1} h).obj\n          ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E)))).obj\n        ((Mod.comap ((upperStar Ab.{u + 1} h).map\n          ((upperStar Ab.{u + 1} f).map (padicSubfieldRingObjMap T ℓ hEF)))).obj\n          (finiteCoefficientLocalModel T X f ℓ E V h Q F hEF))))\n    (hb : b.hom ≫ (upperStar Ab.{u + 1} q).map\n        (finiteCoefficientLocalAdjoint T X f ℓ E V h Q M c F hEF).hom =\n      (upperStar Ab.{u + 1} p).map\n        ((Mod.extendUnit ((upperStar Ab.{u + 1} g).map\n          ((upperStar Ab.{u + 1} f).map (padicSubfieldRingObjToPadicAlgCl T ℓ E))) P).hom ≫\n            a.hom) ≫ (overlapComparison w).hom.app M.X) :\n    ∃ s : (upperStar Ab.{u + 1} p).obj\n        (finiteCoefficientLocalModel T X f ℓ E U g P F hEF).X ⟶\n      (upperStar Ab.{u + 1} q).obj\n        (finiteCoefficientLocalModel T X f ℓ E V h Q F hEF).X,\n      s ≫ (upperStar Ab.{u + 1} q).map\n        (finiteCoefficientLocalAdjoint T X f ℓ E V h Q M c F hEF).hom =\n      (upperStar Ab.{u + 1} p).map\n        (finiteCoefficientLocalAdjoint T X f ℓ E U g P M a F hEF).hom ≫\n          (overlapComparison w).hom.app M.X",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-17",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.comparisonHom",
+   "AlgebraicGeometry.ProEtale.comparisonInv",
+   "AlgebraicGeometry.ProEtale.componentComparison",
+   "AlgebraicGeometry.ProEtale.overlapComparison",
+   "AlgebraicGeometry.ProEtale.finiteCoefficient_overlap_factor_transpose"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261017T021600-L-693731",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261017T021600-L-693731",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
