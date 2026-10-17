@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "det-thm-restriction-local",
-   "place": "Constructibility paragraph, closed-adjoint step: 'By [sk-prop-closed-adjoint-constructible], $i^!$ maps $\\Dbc(\\mathbf A^d_V,\\Lambda)$ into $\\Dbc(U,\\Lambda)$', the membership of $R\\underline\\Gamma_U$ of a bounded constructible complex in $\\Dbc(U,\\Lambda)$ for the finite-constant-local-model convention",
+   "place": "Constructibility paragraph, closed-adjoint step: the final assertion that $R\\underline\\Gamma_ZK\\in\\Dbc(Z,\\Lambda)$ in the finite-constant-local-model convention",
    "via": []
   },
   "same_as": []
@@ -25,9 +25,109 @@
   "def-weil-closed-immersion",
   "sk-lem-formal-closed-support"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The standing setting makes $X$ and $Z$ finite type over the field $k$. Every ideal in a field is either zero or the whole field, hence finitely generated. The one affine chart of $\\operatorname{Spec}k$ is therefore Noetherian and its underlying singleton space is quasi-compact; thus $\\operatorname{Spec}k$ is a Noetherian scheme. Consequently [lem-weil-pbc-finite-type-over-noetherian] makes both $X$ and $Z$ Noetherian. In particular $X$ is quasi-separated, since a locally Noetherian scheme is [lem-weil-pbc-locally-noetherian-quasi-separated]. Let $j:U\\hookrightarrow X$ be the open immersion of the complement $U=X\\setminus Z$. Then $U$ is Noetherian and therefore quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Applying [lem-weil-pbc-qcqs-morphism-permanence] to $U\\to X$ shows that $j$ is quasi-compact. Thus the hypotheses of the open direct-image and closed-support inputs apply.",
+   "uses": [
+    "sk-def-sfb-dc-setting",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "pqf-def-locnoeth",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
+    "place": "first paragraph: Noetherian standing-scheme case and quasi-compact complement"
+   }
+  },
+  {
+   "text": "For $f=j$ or $f=i$, the coefficient identification and exact module inverse image are given by [sk-prop-sfb-cartesian-coefficients]. Pull a finite stratification back along $f$ using [lemma-constructible-pullback-stratification]. Pull back its pro-étale local covers as well. On each such cover, [det-def-sfb-constructible-local-model] writes the module as the cokernel of a finite scalar matrix $A$. The exact inverse image preserves that cokernel and the finite free source and target; the coefficient identification carries $A$ to the same scalar matrix, giving the required finite constant local model on the inverse-image stratum. Exactness preserves kernels and cokernels [lem-weil-pbc-site-pullback-abelian-exact], hence also $H^q=\\ker d^q/\\operatorname{im}d^{q-1}$. The exact derived inverse image is computed termwise by [sk-def-sfb-derived-categories], so its cohomology is $f^*H^q$ and remains zero outside the original finite interval. This proves that $j^*$ and $i^*$ preserve the finite-constant-model bounded constructible category.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lemma-constructible-pullback-stratification",
+    "det-def-sfb-constructible-local-model",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
+    "place": "second paragraph: restriction and pullback preserve constructibility"
+   }
+  },
+  {
+   "text": "Apply clause (3) of [det-lem-formal-closed-support-derived] to $i$ and its open complement $j$. It gives, without any constructibility assumption, the distinguished triangle\n$$i_*R\\underline\\Gamma_ZK\\longrightarrow K\\longrightarrow Rj_*j^*K\\longrightarrow(i_*R\\underline\\Gamma_ZK)[1]$$\nin the ambient derived category, with second arrow the unit of $j^*\\dashv Rj_*$. In particular $F:=i_*R\\underline\\Gamma_ZK$ is the fiber of that unit map. Only this formal triangle is used here; its statement imposes no choice between the two constructibility conventions.",
+   "uses": [
+    "det-lem-formal-closed-support-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
+    "place": "first paragraph: the derived closed-support localization triangle"
+   }
+  },
+  {
+   "text": "By step 2, $j^*K\\in\\Dbc(U,\\Lambda)$. Apply [lem-sfb-rational-open-direct-image-constructible] to the quasi-compact open immersion $j$ of step 1. Its conclusion gives $Rj_*j^*K\\in\\Dbc(X,\\Lambda)$ in the finite-constant-local-model convention, for both $E$ and $\\overline{\\mathbf Q}_\\ell$.",
+   "uses": [
+    "lem-sfb-rational-open-direct-image-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
+    "place": "second paragraph: restriction and open direct-image finiteness"
+   }
+  },
+  {
+   "text": "The middle term $K$ is in $\\Dbc(X,\\Lambda)$ by hypothesis, and the third term is in that category by step 4. The finite-constant-model bounded constructible category is triangulated and closed under isomorphisms by [det-cor-coefficient-heart-ii-triangulated]. Applying its two-out-of-three property to the triangle in step 3 yields $F:=i_*R\\underline\\Gamma_ZK\\in\\Dbc(X,\\Lambda)$; its shift $F[1]$ is also in $\\Dbc(X,\\Lambda)$.",
+   "uses": [
+    "det-cor-coefficient-heart-ii-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
+    "place": "second paragraph: triangulated closure of the localization triangle"
+   }
+  },
+  {
+   "text": "The fiber formula in [det-lem-formal-closed-support-derived] identifies $R\\underline\\Gamma_ZK$ with $i^*F$, because $F$ is the fiber of the unit map $K\\to Rj_*j^*K$ in the triangle of step 3. The scheme $Z$ is Noetherian by step 1. Applying the exact pullback preservation argument of step 2 to $i$ gives $i^*F\\in\\Dbc(Z,\\Lambda)$, and closure under isomorphisms in [det-cor-coefficient-heart-ii-triangulated] transfers this membership across the fiber-formula isomorphism. Therefore $R\\underline\\Gamma_ZK\\in\\Dbc(Z,\\Lambda)$, while step 5 already gives all three displayed terms and the shift in $\\Dbc(X,\\Lambda)$.",
+   "uses": [
+    "det-lem-formal-closed-support-derived",
+    "det-cor-coefficient-heart-ii-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
+    "place": "second paragraph, last sentence: recover supported complex by closed pullback and fiber formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "det-cor-coefficient-heart-ii-triangulated",
+  "det-def-sfb-constructible-local-model",
+  "det-lem-formal-closed-support-derived",
+  "lem-sfb-rational-open-direct-image-constructible",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lemma-constructible-pullback-stratification",
+  "pqf-def-locnoeth",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-derived-categories",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
+  "place": "Both paragraphs: localization triangle, open direct-image finiteness, triangulated closure, and closed inverse image; expanded for the finite constant local model convention"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -69,10 +169,313 @@
    },
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived sections with support in a closed subscheme preserve bounded constructible pro-etale complexes with finite constant local models",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal",
+     "AlgebraicGeometry.exists_lift_of_germInjective_aux",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "Algebra.etaleLocus_eq_compl_support",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "sectionsWithSupport, Constructible, DerivedCategory",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "loogle: unknown identifier 'sectionsWithSupport'",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|constructible.*support|support.*constructible",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "closed support derived functor preserves bounded constructible complexes with finite constant local models",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.isGE_Q_obj_iff",
+     "CondensedSet.LocallyConstant.functorFullyFaithful",
+     "DerivedCategory.TStructure.t",
+     "CategoryTheory.Functor.mapDerivedCategoryFactors",
+     "HomologicalComplex.map_isStrictlySupported",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+     "HasCompactMulSupport.comp_isClosedEmbedding",
+     "HasCompactSupport.comp_isClosedEmbedding"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|ellAdicSheaf|[Cc]onstructible",
+   "results": {
+    "hits": 10,
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean"
+    ],
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/Sites"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|[Ll]isse|[Dd]irectImage",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/Sites"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Rj_|boundedConstructible|[Cc]onstructible.*[Ss]heaf",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/NumberTheory/LegendreSymbol/GaussEisensteinLemmas.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean",
+     "Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean",
+     "Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean",
+     "Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean",
+     "Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean",
+     "Mathlib/Algebra/Lie/Engel.lean",
+     "Mathlib/Algebra/Lie/Engel.lean"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward by an open immersion preserves bounded complexes stratified locally free over continuous l-adic field coefficient sheaves",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion",
+     "AlgebraicGeometry.Scheme.Modules.instFullPushforward",
+     "AlgebraicGeometry.IsOpenImmersion",
+     "AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom",
+     "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso",
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.opensFunctor",
+     "AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, AlgebraicGeometry.Scheme",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, DerivedCategory",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact open immersion of varieties preserves bounded constructible l-adic sheaves under derived direct image",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.isConstructible_image",
+     "AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion",
+     "AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
+     "AlgebraicGeometry.Scheme.instQuasiCompactToImage",
+     "AlgebraicGeometry.Scheme.Hom.isCompact_preimage",
+     "AlgebraicGeometry.QuasiCompact.isCompact_preimage",
+     "AlgebraicGeometry.QuasiCompact.of_comp",
+     "Topology.IsConstructible.image_of_isOpenEmbedding"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed subscheme the right adjoint to closed direct image preserves complexes with bounded lisse stratified cohomology",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+     "AlgebraicGeometry.Scheme.kerAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules",
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image of constructible pro-etale sheaves with rational l-adic coefficients has bounded constructible cohomology",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.isConstructible_image",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "LightCondMod.ofSheafLightProfinite",
+     "Condensed.lanSheafProfinite",
+     "CondensedMod.ofSheafProfinite",
+     "AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
+     "LightCondAb.ofSheafLightProfinite",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|ellAdicSheaf|proetale",
+   "results": {
+    "hits": 10,
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean"
+    ],
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/Sites"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi compact open immersion direct image bounded constructible continuous l-adic coefficients",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact",
+     "AlgebraicGeometry.QuasiCompact.mk",
+     "AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion",
+     "AlgebraicGeometry.Scheme.Hom.isCompact_preimage",
+     "IsCompact.isConstructible",
+     "AlgebraicGeometry.quasiCompact_iff_forall_affine",
+     "Topology.IsConstructible.image_of_isOpenEmbedding",
+     "AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, pushforward, IsOpenImmersion",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "loogle: unknown identifier 'pushforward'",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived direct image along a quasi compact open immersion preserves bounded constructible l-adic pro-etale complexes with finite constant local models",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.isConstructible_image",
+     "AlgebraicGeometry.exists_map_preimage_le_map_preimage",
+     "AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
+     "Topology.IsConstructible.image_of_isOpenEmbedding",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected",
+     "CategoryTheory.Functor.sheafPushforwardCocontinuous"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "maintainer-reader",
@@ -89,5 +492,23 @@
   }
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-restriction"
+ "unit": "sk-thm-restriction",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-rational-closed-support-constructible",
+  "worker": "stage1",
+  "summary": "Audited the rational finite-constant-local-model statement. The formal derived closed-support triangle is used without any constructibility convention. Exact cartesian inverse image preserves finite scalar presentations and cohomology, rational open direct-image finiteness supplies the third vertex, and two-out-of-three plus the formal fiber formula give constructibility on Z. Added one unsplit open-direct-image input. Restored the missing proof_origin, corrected one source path and the new node unit, reused and recorded the existing actual searches, and repaired citation excerpts.",
+  "blueprint": [
+   "First paragraph: formal derived closed-support localization triangle.",
+   "Second paragraph: exact restriction, rational open direct-image finiteness, two-out-of-three, and closed inverse-image fiber formula."
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-ffb96739b",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-ffb96739b (reviewer sub-agent of L); spot-checked: I read the whole item, the new node, every cited statement, the blueprint closed-support statement and proof, the sk-prop-open-coefficients proof, and Bhatt–Scholze 6.7.2, 6.7.11, 6.8.3/6.8.6/6.8.8 and 6.8.15. The six steps follow both paragraphs of the blueprint proof and are correct. Step 1 gets X, Z and U Noetherian and j quasi-compact from the cited Mathlib-leaf lemmas. Step 2 shows that exact cartesian pullback keeps scalar-matrix local models; it uses sk-prop-sfb-cartesian-coefficients (1), the Lemma in det-def-sfb-constructible-local-model, the stratification pullback and the exact-functor clause. Step 3 is clause (3) of det-lem-formal-closed-support-derived, which has no constructibility premise. Step 4 is the new node. Step 5 uses det-cor-coefficient-heart-ii-triangulated, whose Dbc is the finite-model convention of det-def-sfb-constructible-tor-amplitude (2), so the conventions match. Step 6 is the fiber formula plus step 2 for i. The new node lem-sfb-rational-open-direct-image-constructible is true (BS 6.7.2 and 6.8.15; for E and Qlb-bar, Lambda(*) is a field, so a finite constant model is the same as lisse). I tested U empty, U=X, K=0 and Gm into A1. It carries a statement only and is strictly smaller than the item, so it is not a D1 relabelling. It is not a duplicate: lem-sfb-dc-lower-star-preserves and det-prop-closed-adjoint-constructible-support use the general locally-finitely-presented predicate, det-thm-sf-pf-adic-open is integral with Dctf, and det-thm-sf-ctf-stability-direct-images would create a cycle. My own script found no cycle, and every statement used stays inside the sk-thm-restriction unit route, so no tool_uses are needed. Neither node cites SGA. Fixes, both wording or citation only: step 1 of the item had a garbled sentence, an unbracketed lem-weil-pbc-locally-noetherian-quasi-separated and an undefined j; and the new node's statement cited open immersion and quasi-compact only in stmt_deps, so I bracketed def-weil-open-immersion and def-weil-finite-type-morphism in the text. For the maintainer: the new node is the rational half of the sk-prop-open-coefficients unit statement, so it may also belong in that unit's realized.statement; I did not change the unit.; 2 file(s) fixed by the reviewer"
+ }
 }
