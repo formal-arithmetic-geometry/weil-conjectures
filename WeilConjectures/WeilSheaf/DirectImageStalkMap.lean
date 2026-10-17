@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibilityNat
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatNat
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.UpperStarLowerStar
