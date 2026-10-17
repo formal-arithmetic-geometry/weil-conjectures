@@ -11,9 +11,66 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each vertex $i$ choose an infinite regular $\\kappa_i\\in\\mathcal U$ witnessing accessibility of $\\mathcal C_i$, using presentability. For each edge $e$ choose the infinite regular $\\rho_e\\in\\mathcal U$ from the hypothesis. The vertex set $I_0$ and edge set $I_1$ are small because $I$ is a small simplicial set. Apply [lem-coef-small-family-regular-bound] to the small family of sets consisting of an ordinal representative of each $\\kappa_i$, an ordinal representative of each $\\rho_e$, and a copy of $\\mathbb N$. Obtain an infinite regular cardinal $\\theta\\in\\mathcal U$ strictly greater than the cardinality of their disjoint union. Each summand injects into that union, so $\\kappa_i<\\theta$, $\\rho_e<\\theta$, and $\\aleph_0<\\theta$. Including the last summand also handles the empty indexing category.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-small-family-regular-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 5.5.0.1; the small-family bound is an agent-explicit set-theoretic preparation for Definition A.2.6.3. Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "Put $\\sigma=2^\\theta$ and let $\\lambda=\\sigma^+$ be its successor cardinal. The power set and successor remain in $\\mathcal U$. By [lem-coef-infinite-cardinal-square-power], $\\theta<\\sigma$ and $\\sigma^\\theta=\\sigma$; by [lem-coef-infinite-cardinal-successor-regular], $\\lambda$ is infinite regular. Thus $\\lambda$ is uncountable. If $\\mu<\\lambda$ and $\\nu<\\kappa_i$, then $\\mu\\leq\\sigma$ by the definition of successor, and $\\nu\\leq\\theta$. Choose sets $M,N,S,T$ of cardinalities $\\mu,\\nu,\\sigma,\\theta$, injections $a:M\\hookrightarrow S$ and $b:N\\hookrightarrow T$, and a point $s_0\\in S$ (which exists since $\\sigma$ is infinite). Send $f:N\\to M$ to the function $g:T\\to S$ given by $g(b(n))=a(f(n))$ and $g(t)=s_0$ outside $b(N)$. Restricting to $b(N)$ and using injectivity of $a$ recovers $f$, so this is an injection even when $M$ or $N$ is empty. Hence $\\mu^\\nu\\leq\\sigma^\\theta=\\sigma<\\lambda$. This verifies the sharp power bound simultaneously for all $i$, without assuming that the original $\\kappa_i$ have a common accessibility rank before enlargement.",
+   "uses": [
+    "lem-coef-infinite-cardinal-square-power",
+    "lem-coef-infinite-cardinal-successor-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition A.2.6.3 and the immediately following successor-cardinal example; the common choice is agent-explicit. Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "Fix a vertex $i$. The cardinals $\\kappa_i<\\lambda$ are infinite regular in $\\mathcal U$, $\\mathcal C_i$ is $\\kappa_i$-accessible by step 1, and step 2 gives $\\mu^\\nu<\\lambda$ for every $\\mu<\\lambda$ and $\\nu<\\kappa_i$. Apply [lem-coef-infinity-sharp-accessibility-enlargement] with its lower cardinal equal to $\\kappa_i$ and its upper cardinal equal to $\\lambda$. It follows that every $\\mathcal C_i$ is $\\lambda$-accessible.",
+   "uses": [
+    "lem-coef-infinity-sharp-accessibility-enlargement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.2.9 Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "Fix an edge $e$ and a small $\\lambda$-filtered quasicategory $J$. Every $\\rho_e$-small simplicial set is $\\lambda$-small because $\\rho_e<\\theta<\\lambda$. Consequently every coherent diagram from a $\\rho_e$-small simplicial set into $J$ has a cocone by $\\lambda$-filteredness; thus $J$ is $\\rho_e$-filtered, including the empty test diagram. Given a diagram $F:J\\to\\mathcal C_{s(e)}$ and any colimiting cocone on it, the preservation hypothesis for $T_e$ applies and says precisely that its image is colimiting in $\\mathcal C_{t(e)}$. These colimits exist since the source category is presentable. Hence $T_e$ preserves all small $\\lambda$-filtered colimits. This reasoning applies to every edge, and uses none of the coherence data to change the specified functors, proving the remaining conclusion.",
+   "uses": [
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 5.3.1.7 and Definition 5.4.2.5, parenthetical monotonicity observation Read online; not archived in literature/."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "lem-coef-infinite-cardinal-square-power",
+  "lem-coef-infinite-cardinal-successor-regular",
+  "lem-coef-infinity-sharp-accessibility-enlargement",
+  "lem-coef-small-family-regular-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent-explicit simultaneous cardinal argument from Definition A.2.6.3 and Proposition 5.4.2.9, read online; no archived HTT copy is present. Functor monotonicity is written directly from filteredness."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +92,59 @@
    "results": "Mathlib/CategoryTheory/Presentable/StrongGenerator.lean; Mathlib/CategoryTheory/Presentable/Dense.lean and related ordinary-category files; no infinity theorem",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCardinalAccessibleCategory|IsRegular_succ|isRegular_succ",
+   "results": "{\"t\": \"2026-10-17T02:52:24Z\", \"tool\": \"grep\", \"query\": \"IsCardinalAccessibleCategory|IsRegular_succ|isRegular_succ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\"], \"digest\": \"ed55c137052d2c1f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categories with set-valued Hom; the item concerns individual quasicategories and mapping-space accessibility. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-51 and Basic.lean:50-78; these do not specialize to the infinity-categorical assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "simultaneous larger accessibility rank for small diagrams of presentable quasicategories",
+   "results": "{\"t\": \"2026-10-17T02:52:24Z\", \"tool\": \"leansearch\", \"query\": \"simultaneous larger accessibility rank for small diagrams of presentable quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isCardinalAccessible_of_le\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"CategoryTheory.Functor.IsCardinalAccessible\", \"CategoryTheory.IsCardinalAccessibleCategory\", \"CategoryTheory.Functor.instIsCardinalAccessibleComp\", \"CategoryTheory.IsAccessibleCategory.exists_cardinal\"], \"digest\": \"0ac7f5d9af2d11aa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categories with set-valued Hom; the item concerns individual quasicategories and mapping-space accessibility. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-51 and Basic.lean:50-78; these do not specialize to the infinity-categorical assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCardinalAccessibleCategory\"",
+   "results": "{\"t\": \"2026-10-17T02:52:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCardinalAccessibleCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalAccessibleCategory\", \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredGenerator\", \"CategoryTheory.IsCardinalAccessibleCategory.mk\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsCardinalAccessibleCategory.final_toCostructuredArrow\"], \"digest\": \"36a872e8625a8e25\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categories with set-valued Hom; the item concerns individual quasicategories and mapping-space accessibility. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-51 and Basic.lean:50-78; these do not specialize to the infinity-categorical assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small family of accessible infinity categories and accessible functors admits a common accessibility cardinal",
+   "results": "{\"t\": \"2026-10-17T02:52:25Z\", \"tool\": \"leanfinder\", \"query\": \"A small family of accessible infinity categories and accessible functors admits a common accessibility cardinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsAccessible.exists_cardinal\", \"CategoryTheory.IsAccessibleCategory.exists_cardinal\", \"CategoryTheory.Functor.isAccessible_of_isCardinalAccessible\", \"CategoryTheory.Functor.isCardinalAccessible_of_le\", \"CategoryTheory.Functor.IsCardinalAccessible\", \"CategoryTheory.Functor.isCardinalAccessible_of_isLimit\", \"CategoryTheory.Functor.instIsCardinalAccessibleOfPreservesColimitsOfSize\", \"CategoryTheory.IsCardinalAccessibleCategory\"], \"digest\": \"c6ba5faa3e04d22b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categories with set-valued Hom; the item concerns individual quasicategories and mapping-space accessibility. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-51 and Basic.lean:50-78; these do not specialize to the infinity-categorical assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Quasicategory.*[Aa]ccessib|[Aa]ccessib.*Quasicategory|isCardinalAccessible_of_le",
+   "results": "{\"t\": \"2026-10-17T03:03:17Z\", \"tool\": \"grep\", \"query\": \"Quasicategory.*[Aa]ccessib|[Aa]ccessib.*Quasicategory|isCardinalAccessible_of_le\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/Basic.lean\"], \"digest\": \"b69f6e1cfce4cbba\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently read Basic.lean:39-76 and LocallyPresentable.lean:35-51; these declarations concern ordinary Category instances, not individual quasicategories with mapping-space compactness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isCardinalAccessible_of_le\"",
+   "results": "{\"t\": \"2026-10-17T03:03:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"isCardinalAccessible_of_le\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isCardinalAccessible_of_le\"], \"digest\": \"442c0f54f29de1cc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently read Basic.lean:39-76 and LocallyPresentable.lean:35-51; these declarations concern ordinary Category instances, not individual quasicategories with mapping-space compactness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform regular cardinal for accessible functors between compactly generated quasicategories",
+   "results": "{\"t\": \"2026-10-17T03:03:19Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform regular cardinal for accessible functors between compactly generated quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCardinalAccessible\", \"CategoryTheory.Functor.IsAccessible.exists_cardinal\", \"CategoryTheory.Functor.isAccessible_of_isCardinalAccessible\", \"CategoryTheory.Functor.isCardinalAccessible_of_le\", \"CategoryTheory.IsCardinalAccessibleCategory\", \"CategoryTheory.IsCardinalLocallyPresentable\", \"CategoryTheory.IsCardinalPresentable\", \"CategoryTheory.Functor.instIsCardinalAccessibleId\"], \"digest\": \"08e7a1b01e80bca4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently read Basic.lean:39-76 and LocallyPresentable.lean:35-51; these declarations concern ordinary Category instances, not individual quasicategories with mapping-space compactness."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-small-right-adjoint-diagram-compact-model",
@@ -65,5 +171,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-small-family-accessibility-rank",
+  "worker": "stage1",
+  "summary": "Kept the statement and definitions; reused the existing sharp-enlargement theorem and three existing cardinal lemmas. Four steps choose all ranks, bound their disjoint union, construct a successor of a power cardinal satisfying all sharp inequalities, enlarge the categories, and check functor preservation directly from filteredness. No new nodes or attachments. Existing ordinal representatives and the extra countable summand make the universe and empty-index cases explicit.",
+  "blueprint": "Realizes the uniform-lambda step 2 of lem-coef-small-right-adjoint-diagram-compact-model, supporting the presentable Cartesian-fibration input to prop-coef-integral-exceptional-adjoint, proof paragraph 2, through the retained blueprint.from chain. No unit route or chapter changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-0959abb56",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-0959abb56 (reviewer sub-agent of L); spot-checked: I read the whole item, its four steps, the parent lem-coef-small-right-adjoint-diagram-compact-model and the statement of every cited node. I checked these against HTT from a server copy of its text: Proposition 5.4.2.9, Remark 5.4.2.10, Definition 5.4.2.5, Remark 5.4.2.13, and Definition A.2.6.3 with the note after it. The statement is true and unchanged, and nothing in it is weakened. Step 1: a small family of ordinals plus N, with lem-coef-small-family-regular-bound, gives a regular theta with kappa_i, rho_e < theta and aleph0 < theta, so the empty I case is covered. Step 2: lambda = (2^theta)^+. The square-power and successor-regular Mathlib leaves give mu^nu <= sigma^theta = sigma < lambda, which is HTT's example after A.2.6.3. The injection between function sets is correct, including the zero cases, and lambda is uncountable. Step 3: lem-coef-infinity-sharp-accessibility-enlargement is applied with lower cardinal kappa_i and upper cardinal lambda, and all of its hypotheses hold. Step 4 is genuinely elementary: a rho_e-small simplicial set is lambda-small, so a lambda-filtered J is rho_e-filtered. There are no new nodes. Searching the DAG for the HTT places and for rank wording found no duplicate; the nearest nodes cover one category or ordinary categories only. There is no cycle, proof_deps equals the union of the step uses, all cited statements are in the same unit, no tool_uses are needed, and no SGA is cited. FIX, applied in the item's source field only: (1) source.document had a broken host, math.ias.harvard.edu, inherited from the parent; I set it to www.math.ias.edu. (2) source.place said Remark 5.4.2.13 does a simultaneous family enlargement, but in HTT it treats one functor between two categories. I corrected the wording and added Definition 5.4.2.5 and the A.2.6.3 successor example, which the steps actually use.; 1 file(s) fixed by the reviewer"
  }
 }

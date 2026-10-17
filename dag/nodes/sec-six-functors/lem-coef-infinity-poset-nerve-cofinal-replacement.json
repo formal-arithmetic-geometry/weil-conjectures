@@ -33,9 +33,125 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a map $u:A\\to Z$, write $R_u$ for restriction on the displayed cocone mapping spaces in the statement. For composable maps $u:A\\to Z$ and $w:Z\\to W$, the defining precomposition formula gives $R_{wu}=R_uR_w$ (with the intervening diagram restricted to $Z$). Thus a composite of maps having the universal cocone-restriction property has that property: each composite on components and on all based homotopy groups is a composite of isomorphisms. The spaces concerned are Kan even for an arbitrary indexing simplicial set by [lem-cbc-enhanced-functor-cone-calculus]. If $K=\\varnothing$, take $B=\\varnothing$ and $\\varphi$ the unique map. Both indexing shapes are identical and restriction is the identity, so all clauses hold. In the remainder suppose $K\\ne\\varnothing$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Variant 4.2.3.15, composition of five maps, and Variant 4.2.3.16, empty base case; elementary restriction calculation. Online primary source read 2026-10-17; archival copy WANTED in report.md. No Stacks tag is asserted."
+   }
+  },
+  {
+   "text": "We first give the common degeneracy-removal argument. Suppose $X$ is a small simplicial set every nondegenerate simplex of which is a monomorphism. Let $\\mathsf S(X)$ be its simplex category, as explicitly defined in [lem-coef-simplex-last-vertex-cocone-equivalence], and let $B_X$ be its full subcategory of nondegenerate simplices. An arrow into a nondegenerate simplex is uniquely determined by its composite into $X$, since that target simplex is degreewise injective. Between nondegenerate simplices its simplex operator must be injective: a nontrivial surjective factor would make its source degenerate. Consequently there is at most one arrow between any two objects of $B_X$. Ordering them by existence of this arrow is antisymmetric, since arrows in both directions force equal dimensions and hence identity monotone operators. Thus $B_X$ is a poset. By [lem-weil-pbc-simplicial-set-nondegenerate-decomposition], every simplex $\\sigma$ has a unique presentation $\\sigma=\\bar\\sigma\\Delta(s_\\sigma)$ with $s_\\sigma$ surjective and $\\bar\\sigma$ nondegenerate. For any arrow $\\alpha:\\sigma\\to\\tau$ with $\\tau$ nondegenerate, factor $\\alpha=t_\\alpha\\circ s_\\alpha$ as its surjective image factor $s_\\alpha:[n]\\twoheadrightarrow[r]$ followed by its injective image inclusion $t_\\alpha:[r]\\hookrightarrow[m]$. The simplex $\\tau\\Delta(t_\\alpha)$ is nondegenerate: it is a monomorphism, and a degenerate simplex cannot be degreewise injective. Uniqueness of nondegenerate decomposition applied to $\\sigma=\\tau\\Delta(t_\\alpha)\\Delta(s_\\alpha)$ now gives $s_\\alpha=s_\\sigma$ and $\\tau\\Delta(t_\\alpha)=\\bar\\sigma$. This is the unique factorization $\\sigma\\xrightarrow{s_\\sigma}\\bar\\sigma\\xrightarrow{t_\\alpha}\\tau$. Hence $(\\sigma\\downarrow B_X)$ has the initial object $(\\bar\\sigma,s_\\sigma)$. The natural transformation from the constant functor at this object to the identity contracts its nerve by [lem-coef-nerve-natural-homotopy-equivalence]. To identify the infinity-categorical comma used below, put $C=\\mathsf S(X)$. The nerve $N(C_{\\sigma/})\\to N(C)$ is an isofibration: composition in an ordinary category fills all inner horns, and an isomorphism $t:c\\to c\\prime$ lifts at an object $\\sigma\\to c$ by composition to $\\sigma\\to c\\prime$, with its inverse lifting the inverse isomorphism. The strict pullback $N(B_X)\\times_{N(C)}N(C_{\\sigma/})$ is exactly the nerve of the ordinary comma just contracted. By [lem-coef-infinity-isofibration-pullback-limit], this strict pullback computes the infinity-categorical pullback in [lem-coef-infinity-cofinal-comma-criterion]. Thus its comma hypothesis holds for the nerve of $i_X:B_X\\hookrightarrow\\mathsf S(X)$. Apply [lem-coef-infinity-cofinal-comma-criterion] to get the universal equivalence $R_{N(i_X)}$ on cocone mapping spaces. Both index objects are nerves of small ordinary categories; no quasicategory assertion about $X$ was used.",
+   "uses": [
+    "lem-coef-simplex-last-vertex-cocone-equivalence",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-infinity-cofinal-comma-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Variant 4.2.3.15, step (5), and Variant 4.2.3.16, first paragraph; the adjunction/comma argument is written out using Stacks 017R, lemma-splitting-simplicial-sets, for unique degeneracy decomposition. Online primary source read 2026-10-17; archival copy WANTED in report.md. No Stacks tag is asserted."
+   }
+  },
+  {
+   "text": "Assume first that $\\kappa>\\aleph_0$. Put $I_1=\\mathsf S(K)$ and $K_1=N(I_1)$. The explicit last-vertex map $a=\\ell_K:K_1\\to K$ has universal cocone-restriction equivalences by [lem-coef-simplex-last-vertex-cocone-equivalence]. Put $I_2=\\mathsf S(K_1)$ and $K_2=N(I_2^{\\mathrm{op}})$. The first-vertex map $b=N(v_{I_1}):K_2\\to K_1$ has the same property by [lem-coef-simplex-first-vertex-cocone-equivalence]. Here the opposite on $I_2$ is essential: a simplex operator $\\alpha$ gives the arrow from the first vertex of the target chain to vertex $\\alpha(0)$, so it has the claimed direction only after taking the opposite.",
+   "uses": [
+    "lem-coef-simplex-last-vertex-cocone-equivalence",
+    "lem-coef-simplex-first-vertex-cocone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Variant 4.2.3.15, steps (1) and (2), printed p. 255. Online primary source read 2026-10-17; archival copy WANTED in report.md. No Stacks tag is asserted."
+   }
+  },
+  {
+   "text": "Let $I_3=\\mathsf S_{\\mathrm{inj}}(K_1)$, retaining ALL simplices of $K_1$ as objects and only injective simplex operators as arrows. Set $X=N(I_3^{\\mathrm{op}})$, and let $c:X\\to K_2$ be the nerve of inclusion. Its restriction maps $R_c$ are equivalences by [lem-coef-injective-simplex-cocone-restriction]. Every nonidentity morphism of $I_3$ strictly increases the dimension of its object: an injective monotone self-map of $[n]$ is the identity. A nondegenerate simplex of $X$ is therefore a chain of nonidentity arrows whose object-dimensions strictly decrease. Its vertices are distinct. The associated map $\\Delta^r\\to X$ is degreewise injective: equality of two image simplices implies equality of their vertex strings, and distinctness of the original vertices implies equality of the two monotone indexing maps. Thus every nondegenerate simplex of $X$ is a monomorphism.",
+   "uses": [
+    "lem-coef-injective-simplex-cocone-restriction",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Variant 4.2.3.15, step (3) and the dimension/face observation in step (5). Online primary source read 2026-10-17; archival copy WANTED in report.md. No Stacks tag is asserted."
+   }
+  },
+  {
+   "text": "Apply the degeneracy-removal argument of step 2 to this $X$, and write $B=B_X$. Let $d=\\ell_X:N(\\mathsf S(X))\\to X$; [lem-coef-simplex-last-vertex-cocone-equivalence] gives the equivalence $R_d$. With $e=N(i_X):N(B)\\to N(\\mathsf S(X))$, step 2 gives the equivalence $R_e$. Define the required actual simplicial map to be\n$$\\varphi=a\\circ b\\circ c\\circ d\\circ e:N(B)\\longrightarrow K.$$\nFor every fixed $\\mathcal E,p,T$, restriction along this map is exactly the composite of the five restrictions $R_a,R_b,R_c,R_d,R_e$ applied to their successively restricted diagrams. By step 1 it is an equivalence. This constructs the map and its restriction property before imposing a cardinal estimate; no colimit of $p$ has been chosen.",
+   "uses": [
+    "lem-coef-simplex-last-vertex-cocone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Variant 4.2.3.15, steps (4) and (5), printed p. 256; the composite is its five-map construction. Online primary source read 2026-10-17; archival copy WANTED in report.md. No Stacks tag is asserted."
+   }
+  },
+  {
+   "text": "We check $|B|<\\kappa$ in the uncountable case. Let $\\lambda<\\kappa$ be the number of nondegenerate simplices of $K$, and put $\\mu=\\max(\\aleph_0,\\lambda)<\\kappa$. By [lem-weil-pbc-simplicial-set-nondegenerate-decomposition], all simplices of $K$ are specified by a nondegenerate simplex and a monotone surjection between finite ordinals. There are countably many such finite operators, so their total number is at most $\\mu$. The morphisms of $I_1=\\mathsf S(K)$ are specified by two such objects and one of those finite operators, hence also number at most $\\mu$. Finite chains of these morphisms, which are the simplices of $K_1$, again number at most $\\mu$: for infinite $\\mu$, a countable union of finite powers of $\\mu$ has cardinality $\\mu$. Repeating the same count for the objects and arrows of $I_2$ and its wide subcategory $I_3$, and for finite chains in $I_3^{\\mathrm{op}}$, shows that $X$ has at most $\\mu$ simplices in total. Since $B$ is precisely its nondegenerate simplices, $|B|\\leq\\mu<\\kappa$. All sets are in $\\mathcal U$. This counting argument is not used at $\\kappa=\\aleph_0$.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Cardinality audit of HTT Variant 4.2.3.15: its categories of simplices and their nerves use countably many finite-word operations; the smallness convention is def-coef-presentable-infinity-category. Online primary source read 2026-10-17; archival copy WANTED in report.md. No Stacks tag is asserted."
+   }
+  },
+  {
+   "text": "It remains to handle $\\kappa=\\aleph_0$. By the definition in [def-coef-presentable-infinity-category], $K$ has finitely many nondegenerate simplices. Apply [lem-coef-finite-embedded-simplex-resolution] to obtain a finite simplicial set $Q$ and $q:Q\\to K$, with all nondegenerate simplices of $Q$ monomorphisms and with $R_q$ a universal equivalence. Apply step 2 with $X=Q$ and put $B=B_Q$. Its objects are exactly the nondegenerate simplices of $Q$, so $B$ is finite, including the possible empty case. By [lem-coef-simplex-last-vertex-cocone-equivalence], the map $\\ell_Q:N(\\mathsf S(Q))\\to Q$ has universal restriction equivalences. Define\n$$\\varphi=q\\circ\\ell_Q\\circ N(i_Q):N(B)\\longrightarrow K.$$\nIts restriction map is the composite $R_{N(i_Q)}R_{\\ell_Q}R_q$, so steps 1 and 2 give exactly the displayed equivalence in the item. This uses a finite resolution before forming the face poset; the countably infinite degeneracy category itself is never claimed finite.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-finite-embedded-simplex-resolution",
+    "lem-coef-simplex-last-vertex-cocone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Variant 4.2.3.16, printed p. 256: claim (*′) followed by the face-poset argument in the first paragraph. Online primary source read 2026-10-17; archival copy WANTED in report.md. No Stacks tag is asserted."
+   }
+  },
+  {
+   "text": "For either cardinal case the constructed $B$ and $\\varphi$ depend on $K$ and satisfy the equivalence for EVERY $\\mathcal E,p,T$. By [lem-cbc-enhanced-functor-cone-calculus] the two mapping simplicial sets are Kan. An equivalence of these spaces is surjective on components by the weak-homotopy-equivalence convention of [def-cbc-enhanced-diagrams-cones]. Given a vertex representing a prescribed cocone on $p\\varphi$, choose a source vertex whose image represents its component; the two target vertices are joined by a path in that Kan space. This proves the final cocone assertion. All inputs were restriction equivalences or comma tests, which required no colimits in $\\mathcal E$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 4.1.1.7 and the natural mapping-space comparison; elementary passage to components. Online primary source read 2026-10-17; archival copy WANTED in report.md. No Stacks tag is asserted."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-finite-embedded-simplex-resolution",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-injective-simplex-cocone-restriction",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "lem-coef-simplex-first-vertex-cocone-equivalence",
+  "lem-coef-simplex-last-vertex-cocone-equivalence",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent-written expansion of the five-map construction of HTT Variant 4.2.3.15 and the finite nonsingular intermediate resolution of Variant 4.2.3.16, with the explicit degeneracy/comma proof and cardinal bookkeeping above. Primary source read online; archival HTT copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -71,10 +187,59 @@
    "results": "not run: Loogle is not reachable from the review machine",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The last vertex map from the nerve of the category of simplices of any simplicial set is cofinal and preserves cocone mapping spaces",
+   "results": "Eight hits: CategoryTheory.SimplicialNerve, CategoryTheory.nerve, nerve.functorOfNerveMap, nerveFunctor, stdSimplex.isoNerve and related formulas. None states cofinality of the category of simplices.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "category of simplices last vertex cofinal functor",
+   "results": "Eight hits: SimplexCategory.II.map'_last, SSet.Augmented.stdSimplex, SimplexCategory.toTop, SSet.hoFunctor.unitHomEquiv, and terminality of the standard 0-simplex; none is the asserted theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.nerve",
+   "results": "CategoryTheory.nerve, nerveMap, nerveFunctor and PartOrd.nerveFunctor: definitions of nerves and their maps, not a cofinality theorem. Read Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:34-72.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "last.?vertex|lastVertex|categoryOfSimplices|category_of_simplices|CategoriesOfSimplices",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every small simplicial set admits a cofinal map from the nerve of a partially ordered set with the same cardinal bound",
+   "results": "Eight hits concerning nerves, simplicial nerves, nerves of preorders, coskeleta and standard-simplex nerve isomorphisms; no cofinal poset replacement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofinal functors from categories of simplices and nondegenerate face posets preserve spaces of cocones in an infinity category",
+   "results": "Eight hits on ordinary subcomplex multicoequalizers, horn colimits and ordinary preorder cocones, not homotopy cofinal replacement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every simplicial set admits a cofinal map from the nerve of a poset",
+   "results": "Eight hits on SSet, nerve, nerveFunctor, simplicial nerve, realization and Quillen cofibrations; no poset cofinal replacement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -91,5 +256,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-poset-nerve-cofinal-replacement",
+  "worker": "stage1",
+  "summary": "Expanded the uncountable five-map simplex-category construction and the separate finite embedded-simplex resolution, wrote out nondegenerate normalization via initial comma objects and the cardinal estimates, retained the item statement, and searched four strictly intermediate source lemmas. No Lean attachment was found.",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2, derived mapping-limit adjunction, via the existing chain through presentability and the poset cone test. The immediate place is the converse in HTT Remark 5.3.1.12 invoked in Proposition 5.3.5.15(a): steps 3-6 realize Variant 4.2.3.15; steps 2 and 7 realize Variant 4.2.3.16; steps 1 and 8 give the precise cocone mapping-space formulation.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "General quasicategory fact that Fun(K,E) is a quasicategory and has Kan mapping spaces for any small simplicial K. This is shared simplicial infrastructure, independent of the geometric compact-support route of its owning unit; no input from that geometry is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-92ff1e6ae",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-92ff1e6ae (reviewer sub-agent of L); spot-checked: I read all eight steps of the item, the four new nodes and the statement of every cited node. The item statement is unchanged and is exactly what lem-coef-filtered-poset-cone-test uses. HTT is not in literature/, so the WANTED line and proof_origin=agent are correct; I checked each claim mathematically. Step 2: B_X is a poset; the initial object (σ̄,s_σ) of the comma follows from the uniqueness clause of the Mathlib-leaf decomposition lemma; contractibility uses a non-invertible natural transformation, which the cited nerve lemma allows; strict and homotopy comma agree by the isofibration pullback lemma; the comma-criterion hypotheses hold for nerves. Steps 3-5: the composite a∘b∘c∘d∘e composes correctly, and I checked the direction of the first-vertex functor and that it is a functor on the opposite. Step 4: the embedded-simplex argument holds, since injective self-maps of [n] are identities. Step 6: the count μ=max(ℵ0,λ)<κ is right for uncountable κ. Step 7: the finite route goes through the finite resolution and B=B_Q is finite. Small-case tests of the new nodes: the last-vertex node at Δ^0 and N([1]); the first-vertex node, whose comma is S(N(c/C))^op and contractible; the injective-simplex node, whose comma is the semi-simplicial simplex category of Δ^n (this is HTT 6.5.3.7); the finite-resolution node, e.g. Sd²X, plus the empty cases. All four are true, statement-only and strictly smaller than the item. I found no duplicates after reading the subdivision, cofinal, cofinality-space-test, anodyne-cocone, colimit-subdiagram and decomposition nodes, and there is no cycle. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus: only its generic statement that Fun(K,E) has Kan mapping spaces is used. No fixes."
  }
 }
