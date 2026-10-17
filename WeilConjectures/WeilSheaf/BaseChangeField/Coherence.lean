@@ -57,7 +57,7 @@ lemma lowerStar_exchange_id {a : T₁ ⟶ T₁} {a' : T₂ ⟶ T₂} (ha : a = �
   (repeat' apply pullback.hom_ext) <;>
     simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
       MorphismProperty.Over.mk, MorphismProperty.Over.pullbackComp,
-      MorphismProperty.Over.pullbackId]
+      MorphismProperty.Over.pullbackId, pullback.condition]
 
 /-- The exchange isomorphisms along `p` are compatible with the composition `c = x ≫ y` of the
 vertical sides: the exchange isomorphism of the square of `c` is the composite of those of the
@@ -89,6 +89,8 @@ lemma lowerStar_exchange_vcomp {x₁ y₁ c₁ : T₁ ⟶ T₁} {x₂ y₂ c₂ 
     simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
       MorphismProperty.Over.mk, MorphismProperty.Over.pullbackComp]
 
+set_option maxHeartbeats 1600000 in
+-- the kernel checks large composites of pullback morphisms
 /-- The exchange isomorphisms of the faces of a commutative cube are compatible: for a square
 `p ≫ t₂ = t₁ ≫ p'` and vertical endomorphisms `x₁, x₂, y₁, y₂` of its corners forming
 commutative squares with `p`, `p'`, `t₁` and `t₂`, the two composites of exchange isomorphisms
@@ -125,7 +127,7 @@ lemma lowerStar_exchange_cube {T₁' T₂' : Scheme.{u}} (p' : T₁' ⟶ T₂') 
   simp only [MorphismProperty.Comma.comp_left]
   (repeat' apply pullback.hom_ext) <;>
     simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
-      MorphismProperty.Over.mk, MorphismProperty.Over.pullbackComp]
+      MorphismProperty.Over.mk, MorphismProperty.Over.pullbackComp, hc]
 
 end
 
@@ -144,6 +146,8 @@ lemma adicLowerStar_exchange_id {a : T₁ ⟶ T₁} {a' : T₂ ⟶ T₂} (ha : a
     adicLowerStarCongr_hom_app_hom, adicLowerStarComp_inv_app_hom, adicLowerStarId_hom_app_hom]
   exact lowerStar_exchange_id (WeilCoefficients.{u} l) p ha ha' h M.X
 
+set_option maxHeartbeats 1600000 in
+-- the kernel checks the identification of module and sheaf morphisms
 /-- `AlgebraicGeometry.ProEtale.lowerStar_exchange_vcomp` for sheaves of `ℚ̄_ℓ,X`-modules. -/
 lemma adicLowerStar_exchange_vcomp {x₁ y₁ c₁ : T₁ ⟶ T₁} {x₂ y₂ c₂ : T₂ ⟶ T₂}
     (hc₁ : c₁ = x₁ ≫ y₁) (hc₂ : c₂ = x₂ ≫ y₂) (hx : p ≫ x₂ = x₁ ≫ p) (hy : p ≫ y₂ = y₁ ≫ p)
@@ -164,6 +168,8 @@ lemma adicLowerStar_exchange_vcomp {x₁ y₁ c₁ : T₁ ⟶ T₁} {x₂ y₂ c
     adicLowerStarCongr_hom_app_hom, adicLowerStarComp_inv_app_hom]
   exact lowerStar_exchange_vcomp (WeilCoefficients.{u} l) p hc₁ hc₂ hx hy hc M.X
 
+set_option maxHeartbeats 1600000 in
+-- the kernel checks the identification of module and sheaf morphisms
 /-- `AlgebraicGeometry.ProEtale.lowerStar_exchange_cube` for sheaves of `ℚ̄_ℓ,X`-modules. -/
 lemma adicLowerStar_exchange_cube {T₁' T₂' : Scheme.{u}} (p' : T₁' ⟶ T₂') (t₁ : T₁ ⟶ T₁')
     (t₂ : T₂ ⟶ T₂') {x₁ : T₁ ⟶ T₁} {x₂ : T₂ ⟶ T₂} {y₁ : T₁' ⟶ T₁'} {y₂ : T₂' ⟶ T₂'}
