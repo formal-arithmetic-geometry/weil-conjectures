@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.Algebra.Homology.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 public import WeilConjectures.SixFunctors.Etale.SupportCohomology
 public import WeilConjectures.SixFunctors.OpenClosed.SupportedSections
 
@@ -21,13 +22,15 @@ sheaves
 
 `0 ⟶ Γ_Z(X, I) ⟶ Γ(X, I) ⟶ Γ(U, I) ⟶ 0`
 
-is a short exact sequence of complexes. Its triangle identifies, for a bounded below complex `K`,
-with a distinguished triangle
+is a short exact sequence of complexes. Its triangle identifies, for every complex `K` (represented
+by its functorial K-injective resolution, which has injective components), with a distinguished
+triangle
 
 `RΓ_Z(X, K) ⟶ RΓ(X, K) ⟶ RΓ(U, K) ⟶ RΓ_Z(X, K)[1]`
 
 whose first two maps are induced by the inclusion of sections with support and by the
-restriction, and taking cohomology gives the long exact sequence
+restriction, and whose connecting morphism is natural in `K`. Taking cohomology gives the long
+exact sequence
 
 `⋯ ⟶ H^q_Z(X, K) ⟶ H^q(X, K) ⟶ H^q(U, K) ⟶ H^{q+1}_Z(X, K) ⟶ ⋯`.
 
@@ -36,8 +39,11 @@ Here `RΓ(U, -)` is the right derived functor of the sections over the étale `X
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isSplitEpi_ΓRes_openComplement_of_injective`
-- `AlgebraicGeometry.Etale.exists_distTriang_rightDerivedSectionsWithSupport`
-- `AlgebraicGeometry.Etale.exact_derivedSupportCohomology`
+- `AlgebraicGeometry.Etale.sectionsWithSupportδ`: the connecting morphism, a natural
+  transformation `RΓ(U, -) ⟶ RΓ_Z(X, -)[1]`
+- `AlgebraicGeometry.Etale.distTriang_rightDerivedSectionsWithSupport`
+- `AlgebraicGeometry.Etale.exact_derivedSupportCohomology`,
+  `AlgebraicGeometry.Etale.homologyMap_sectionsWithSupportδ_naturality`
 -/
 
 @[expose] public section
@@ -86,7 +92,55 @@ lemma rightDerivedFunctorNatTrans_app_Q_obj {F G : C ⥤ D} [F.Additive] [G.Addi
     IsIso.hom_inv_id_assoc, reassoc_of% h₂, IsIso.hom_inv_id_assoc]
   exact h₃
 
+
+/-- The identification `R(F)(Q I) ≅ Q (F I)` on K-injective complexes is natural in morphisms of
+K-injective complexes. -/
+@[reassoc]
+lemma rightDerivedFunctorObjQIso_hom_naturality (F : C ⥤ D) [F.Additive]
+    {I J : CochainComplex C ℤ} [I.IsKInjective] [J.IsKInjective] (φ : I ⟶ J) :
+    F.rightDerivedFunctor.map (DerivedCategory.Q.map φ) ≫ (F.rightDerivedFunctorObjQIso J).hom =
+      (F.rightDerivedFunctorObjQIso I).hom ≫
+        DerivedCategory.Q.map ((F.mapHomologicalComplex _).map φ) := by
+  have h₁ := F.rightDerivedFunctorUnit.naturality ((HomotopyCategory.quotient _ _).map φ)
+  have h₂ := (DerivedCategory.quotientCompQhIso C).inv.naturality φ
+  have h₃ := (DerivedCategory.quotientCompQhIso D).hom.naturality
+    ((F.mapHomologicalComplex _).map φ)
+  dsimp at h₁ h₂ h₃
+  dsimp only [rightDerivedFunctorObjQIso, Iso.trans_hom, Iso.symm_hom, asIso_inv,
+    Functor.mapIso_hom, Iso.app_hom, Iso.app_inv]
+  have key : F.rightDerivedFunctor.map
+      (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map φ)) ≫
+        CategoryTheory.inv (F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj J)) =
+      CategoryTheory.inv (F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj I)) ≫
+        DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map
+          ((F.mapHomologicalComplex _).map φ)) := by
+    rw [IsIso.comp_inv_eq, assoc, h₁, IsIso.inv_hom_id_assoc]
+  rw [← F.rightDerivedFunctor.map_comp_assoc, h₂, F.rightDerivedFunctor.map_comp_assoc,
+    reassoc_of% key, assoc, assoc]
+  erw [h₃]
+
 end CategoryTheory.Functor
+
+namespace DerivedCategory
+
+variable {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+
+/-- Every morphism `Q(I) ⟶ Q(J)` in the derived category to the image of a K-injective complex
+`J` is induced by a morphism of complexes. -/
+lemma Q_map_surjective_of_isKInjective {I J : CochainComplex C ℤ} [J.IsKInjective]
+    (g : Q.obj I ⟶ Q.obj J) : ∃ φ : I ⟶ J, Q.map φ = g := by
+  obtain ⟨ψ, hψ⟩ := (CochainComplex.IsKInjective.Qh_map_bijective
+    ((HomotopyCategory.quotient _ _).obj I) J).2
+      ((quotientCompQhIso C).hom.app I ≫ g ≫ (quotientCompQhIso C).inv.app J)
+  obtain ⟨φ, rfl⟩ := (HomotopyCategory.quotient _ _).map_surjective ψ
+  refine ⟨φ, ?_⟩
+  have h := (quotientCompQhIso C).hom.naturality φ
+  dsimp at h hψ
+  rw [hψ, assoc, assoc, Iso.inv_hom_id_app, comp_id] at h
+  exact ((cancel_epi _).1 h).symm
+
+end DerivedCategory
+
 
 namespace CategoryTheory
 
@@ -272,108 +326,274 @@ theorem shortExact_sectionsWithSupportShortComplex
   · change Epi ((I.X n).ΓRes _)
     infer_instance
 
+/-- A morphism `φ : I ⟶ J` of complexes of injective sheaves induces a morphism of the short
+exact sequences `0 ⟶ Γ_Z(X, I) ⟶ Γ(X, I) ⟶ Γ(U, I) ⟶ 0` and `0 ⟶ Γ_Z(X, J) ⟶ Γ(X, J) ⟶ Γ(U, J) ⟶ 0`
+of `AlgebraicGeometry.Etale.sectionsWithSupportShortComplex`. -/
+@[simps]
+noncomputable def sectionsWithSupportShortComplexMap
+    {I J : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ} (φ : I ⟶ J) :
+    sectionsWithSupportShortComplex A i I ⟶ sectionsWithSupportShortComplex A i J where
+  τ₁ := ((Sheaf.ΓSupport X.smallEtaleTopology A
+    (op (Scheme.Etale.mk i.openComplement.ι))).mapHomologicalComplex _).map φ
+  τ₂ := ((Sheaf.Γ X.smallEtaleTopology A).mapHomologicalComplex _).map φ
+  τ₃ := (((sheafSections X.smallEtaleTopology A).obj
+    (op (Scheme.Etale.mk i.openComplement.ι))).mapHomologicalComplex _).map φ
+  comm₁₂ := (NatTrans.mapHomologicalComplex _ _).naturality φ
+  comm₂₃ := (NatTrans.mapHomologicalComplex _ _).naturality φ
+
 include hJX hJZ in
-/-- For a K-injective complex `I` of injective sheaves, the derived functors of the sections
-with support, of the global sections and of the sections over `U` fit in a distinguished
-triangle `RΓ_Z(X, I) ⟶ RΓ(X, I) ⟶ RΓ(U, I) ⟶ RΓ_Z(X, I)[1]`, whose first two maps are induced by
-the inclusion and the restriction: it is isomorphic to the triangle of the short exact sequence
-`AlgebraicGeometry.Etale.shortExact_sectionsWithSupportShortComplex`. -/
-theorem exists_distTriang_rightDerivedSectionsWithSupport_Q_obj
+/-- The connecting morphism `RΓ(U, I) ⟶ RΓ_Z(X, I)[1]` of a K-injective complex `I` of injective
+sheaves: the connecting morphism of the triangle of the short exact sequence
+`0 ⟶ Γ_Z(X, I) ⟶ Γ(X, I) ⟶ Γ(U, I) ⟶ 0`
+(`AlgebraicGeometry.Etale.shortExact_sectionsWithSupportShortComplex`), through the
+identifications `RF(I) ≅ F(I)` of the derived functors on K-injective complexes. -/
+noncomputable def sectionsWithSupportδQObj
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [∀ n, Injective (I.X n)]
     [I.IsKInjective] :
-    ∃ δ, Triangle.mk ((Functor.rightDerivedFunctorNatTrans (Sheaf.ΓSupportι X.smallEtaleTopology
+    ((sheafSections X.smallEtaleTopology A).obj
+        (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctor.obj
+          (DerivedCategory.Q.obj I) ⟶
+      ((Sheaf.ΓSupport X.smallEtaleTopology A
+        (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctor.obj
+          (DerivedCategory.Q.obj I))⟦(1 : ℤ)⟧ :=
+  (((sheafSections X.smallEtaleTopology A).obj
+      (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctorObjQIso I).hom ≫
+    DerivedCategory.triangleOfSESδ (shortExact_sectionsWithSupportShortComplex A i I) ≫
+      ((Sheaf.ΓSupport X.smallEtaleTopology A
+        (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctorObjQIso I).inv⟦(1 : ℤ)⟧'
+
+include hJX hJZ in
+/-- The connecting morphism `AlgebraicGeometry.Etale.sectionsWithSupportδQObj` is natural in
+morphisms of K-injective complexes of injective sheaves. -/
+@[reassoc]
+lemma sectionsWithSupportδQObj_naturality
+    {I J : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ} [∀ n, Injective (I.X n)]
+    [I.IsKInjective] [∀ n, Injective (J.X n)] [J.IsKInjective] (φ : I ⟶ J) :
+    ((sheafSections X.smallEtaleTopology A).obj
+        (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctor.map
+          (DerivedCategory.Q.map φ) ≫ sectionsWithSupportδQObj A i J =
+      sectionsWithSupportδQObj A i I ≫ ((Sheaf.ΓSupport X.smallEtaleTopology A
+        (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctor.map
+          (DerivedCategory.Q.map φ))⟦(1 : ℤ)⟧' := by
+  set Uo := op (Scheme.Etale.mk i.openComplement.ι)
+  have h₁ := Functor.rightDerivedFunctorObjQIso_hom_naturality
+    (Sheaf.ΓSupport X.smallEtaleTopology A Uo) φ
+  have h₃ := Functor.rightDerivedFunctorObjQIso_hom_naturality
+    ((sheafSections X.smallEtaleTopology A).obj Uo) φ
+  have hδ := DerivedCategory.triangleOfSESδ_naturality
+    (shortExact_sectionsWithSupportShortComplex A i I)
+    (shortExact_sectionsWithSupportShortComplex A i J) (sectionsWithSupportShortComplexMap A i φ)
+  have h₁' : ((Sheaf.ΓSupport X.smallEtaleTopology A Uo).rightDerivedFunctorObjQIso I).inv ≫
+      (Sheaf.ΓSupport X.smallEtaleTopology A Uo).rightDerivedFunctor.map
+        (DerivedCategory.Q.map φ) =
+      DerivedCategory.Q.map (((Sheaf.ΓSupport X.smallEtaleTopology A Uo).mapHomologicalComplex
+        _).map φ) ≫ ((Sheaf.ΓSupport X.smallEtaleTopology A Uo).rightDerivedFunctorObjQIso J).inv
+      := by
+    rw [Iso.inv_comp_eq, ← reassoc_of% h₁, Iso.hom_inv_id, comp_id]
+  simp only [sectionsWithSupportδQObj, assoc]
+  rw [reassoc_of% h₃]
+  congr 1
+  rw [← Functor.map_comp, h₁', Functor.map_comp]
+  erw [← reassoc_of% hδ]
+  rfl
+
+/-- The K-injective complex of injective sheaves representing an object `K` of the derived
+category: the functorial K-injective resolution
+(`CochainComplex.kInjectiveResolutionFunctor`) of a complex representing `K`. -/
+noncomputable abbrev sectionsWithSupportResolution
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    CochainComplex (Sheaf X.smallEtaleTopology A) ℤ :=
+  (CochainComplex.kInjectiveResolutionFunctor.{u + 1} _).obj (DerivedCategory.Q.objPreimage K)
+
+/-- The isomorphism `Q(I) ≅ K` for the resolution `I` of
+`AlgebraicGeometry.Etale.sectionsWithSupportResolution`. -/
+noncomputable def sectionsWithSupportResolutionIso
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    DerivedCategory.Q.obj (sectionsWithSupportResolution A K) ≅ K :=
+  have : QuasiIso ((CochainComplex.toKInjectiveResolution.{u + 1} _).app
+      (DerivedCategory.Q.objPreimage K)) :=
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u + 1} _ _).2
+  (asIso (DerivedCategory.Q.map ((CochainComplex.toKInjectiveResolution.{u + 1} _).app
+    (DerivedCategory.Q.objPreimage K)))).symm ≪≫ DerivedCategory.Q.objObjPreimageIso K
+
+include hJX hJZ in
+/-- The connecting morphism `δ : RΓ(U, K) ⟶ RΓ_Z(X, K)[1]` of the triangle of cohomology with
+support in `Z`, as a natural transformation: on a K-injective complex of injective sheaves it is
+`AlgebraicGeometry.Etale.sectionsWithSupportδQObj`, the connecting morphism of the short exact
+sequence `0 ⟶ Γ_Z(X, I) ⟶ Γ(X, I) ⟶ Γ(U, I) ⟶ 0`, and in general it is transported along the
+functorial K-injective resolution. -/
+noncomputable def sectionsWithSupportδ :
+    ((sheafSections X.smallEtaleTopology A).obj
+        (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctor ⟶
+      (Sheaf.ΓSupport X.smallEtaleTopology A
+        (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctor ⋙
+          shiftFunctor _ (1 : ℤ) where
+  app K := ((sheafSections X.smallEtaleTopology A).obj
+      (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctor.map
+        (sectionsWithSupportResolutionIso A K).inv ≫
+    sectionsWithSupportδQObj A i (sectionsWithSupportResolution A K) ≫
+      ((Sheaf.ΓSupport X.smallEtaleTopology A
+        (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctor.map
+          (sectionsWithSupportResolutionIso A K).hom)⟦(1 : ℤ)⟧'
+  naturality K L f := by
+    set Uo := op (Scheme.Etale.mk i.openComplement.ι)
+    set F₁ := (Sheaf.ΓSupport X.smallEtaleTopology A Uo).rightDerivedFunctor
+    set F₃ := ((sheafSections X.smallEtaleTopology A).obj Uo).rightDerivedFunctor
+    set eK := sectionsWithSupportResolutionIso A K
+    set eL := sectionsWithSupportResolutionIso A L
+    obtain ⟨φ, hφ⟩ := DerivedCategory.Q_map_surjective_of_isKInjective
+      (eK.hom ≫ f ≫ eL.inv)
+    have h₁ : f ≫ eL.inv = eK.inv ≫ DerivedCategory.Q.map φ := by
+      rw [hφ, Iso.inv_hom_id_assoc]
+    have h₂ : DerivedCategory.Q.map φ ≫ eL.hom = eK.hom ≫ f := by
+      rw [hφ, assoc, assoc, Iso.inv_hom_id, comp_id]
+    dsimp only [Functor.comp_map, Functor.comp_obj]
+    rw [← F₃.map_comp_assoc, h₁, F₃.map_comp_assoc, sectionsWithSupportδQObj_naturality_assoc,
+      ← Functor.map_comp, ← Functor.map_comp, h₂, Functor.map_comp, Functor.map_comp, assoc, assoc]
+
+include hJX hJZ in
+/-- On a K-injective complex `I` of injective sheaves, the connecting morphism
+`AlgebraicGeometry.Etale.sectionsWithSupportδ` is the connecting morphism
+`AlgebraicGeometry.Etale.sectionsWithSupportδQObj` of the short exact sequence
+`0 ⟶ Γ_Z(X, I) ⟶ Γ(X, I) ⟶ Γ(U, I) ⟶ 0`. -/
+lemma sectionsWithSupportδ_app_Q_obj
+    (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [∀ n, Injective (I.X n)]
+    [I.IsKInjective] :
+    (sectionsWithSupportδ A i).app (DerivedCategory.Q.obj I) = sectionsWithSupportδQObj A i I := by
+  set Uo := op (Scheme.Etale.mk i.openComplement.ι)
+  set e := sectionsWithSupportResolutionIso A (DerivedCategory.Q.obj I)
+  obtain ⟨φ, hφ⟩ := DerivedCategory.Q_map_surjective_of_isKInjective e.inv
+  have h := sectionsWithSupportδQObj_naturality A i φ
+  simp only [sectionsWithSupportδ]
+  rw [← hφ, reassoc_of% h, ← Functor.map_comp, ← Functor.map_comp, hφ, e.inv_hom_id,
+    CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, comp_id]
+
+include hJX hJZ in
+/-- For a K-injective complex `I` of injective sheaves, the derived functors of the sections
+with support, of the global sections and of the sections over `U` fit in the distinguished
+triangle `RΓ_Z(X, I) ⟶ RΓ(X, I) ⟶ RΓ(U, I) ⟶ RΓ_Z(X, I)[1]` whose first two maps are induced by
+the inclusion and the restriction and whose third map is
+`AlgebraicGeometry.Etale.sectionsWithSupportδQObj`: it is isomorphic to the triangle of the
+short exact sequence `AlgebraicGeometry.Etale.shortExact_sectionsWithSupportShortComplex`. -/
+theorem distTriang_rightDerivedSectionsWithSupport_Q_obj
+    (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [∀ n, Injective (I.X n)]
+    [I.IsKInjective] :
+    Triangle.mk ((Functor.rightDerivedFunctorNatTrans (Sheaf.ΓSupportι X.smallEtaleTopology
         A (op (Scheme.Etale.mk i.openComplement.ι)))).app (DerivedCategory.Q.obj I))
       ((Functor.rightDerivedFunctorNatTrans (Sheaf.natTransΓRes X.smallEtaleTopology A
-        (op (Scheme.Etale.mk i.openComplement.ι)))).app (DerivedCategory.Q.obj I)) δ ∈
-          distTriang _ := by
-  set Uo := op (Scheme.Etale.mk i.openComplement.ι)
+        (op (Scheme.Etale.mk i.openComplement.ι)))).app (DerivedCategory.Q.obj I))
+      (sectionsWithSupportδQObj A i I) ∈ distTriang _ := by
   have hS := shortExact_sectionsWithSupportShortComplex A i I
-  let e₁ := (Sheaf.ΓSupport X.smallEtaleTopology A Uo).rightDerivedFunctorObjQIso I
+  let e₁ := (Sheaf.ΓSupport X.smallEtaleTopology A
+    (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctorObjQIso I
   let e₂ := (Sheaf.Γ X.smallEtaleTopology A).rightDerivedFunctorObjQIso I
-  let e₃ := ((sheafSections X.smallEtaleTopology A).obj Uo).rightDerivedFunctorObjQIso I
-  refine ⟨e₃.hom ≫ (DerivedCategory.triangleOfSES hS).mor₃ ≫ e₁.inv⟦(1 : ℤ)⟧', ?_⟩
+  let e₃ := ((sheafSections X.smallEtaleTopology A).obj
+    (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctorObjQIso I
   refine isomorphic_distinguished _ (DerivedCategory.triangleOfSES_distinguished hS) _
     (Triangle.isoMk _ _ e₁ e₂ e₃ ?_ ?_ ?_)
   · exact Functor.rightDerivedFunctorNatTrans_app_Q_obj _ I
   · exact Functor.rightDerivedFunctorNatTrans_app_Q_obj _ I
-  · simp only [Triangle.mk_mor₃]
-    simp only [assoc, ← Functor.map_comp, Iso.inv_hom_id, CategoryTheory.Functor.map_id,
-      comp_id]
+  · simp only [Triangle.mk_mor₃, sectionsWithSupportδQObj, e₁, e₃, assoc, ← Functor.map_comp,
+      Iso.inv_hom_id, CategoryTheory.Functor.map_id, comp_id]
+    rfl
 
 include hJX hJZ in
 /-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
 
-Let `i : Z ⟶ X` be a closed immersion with open complement `U`, and `K` a bounded below complex
-of étale sheaves on `X` (for instance a sheaf placed in degree `0`). The maps
+Let `i : Z ⟶ X` be a closed immersion with open complement `U`, and `K` a complex of étale
+sheaves on `X` (for instance a sheaf placed in degree `0`). The maps
 `RΓ_Z(X, K) ⟶ RΓ(X, K) ⟶ RΓ(U, K)` induced by the inclusion of the sections with support in `Z`
-and by the restriction to `U` extend to a distinguished triangle
-`RΓ_Z(X, K) ⟶ RΓ(X, K) ⟶ RΓ(U, K) ⟶ RΓ_Z(X, K)[1]`.
+and by the restriction to `U`, together with the connecting morphism
+`δ : RΓ(U, K) ⟶ RΓ_Z(X, K)[1]` (`AlgebraicGeometry.Etale.sectionsWithSupportδ`, natural in `K`),
+form a distinguished triangle `RΓ_Z(X, K) ⟶ RΓ(X, K) ⟶ RΓ(U, K) ⟶ RΓ_Z(X, K)[1]`.
 
-Represent `K` by a bounded below complex `I` of injective sheaves. For an injective sheaf the
+Represent `K` by a K-injective complex `I` of injective sheaves. For an injective sheaf the
 restriction `Γ(X, I) ⟶ I(U)` is surjective, so `0 ⟶ Γ_Z(X, I) ⟶ Γ(X, I) ⟶ Γ(U, I) ⟶ 0` is a short
 exact sequence of complexes, and its triangle is the one of the statement. The long exact
 cohomology sequence is `AlgebraicGeometry.Etale.exact_derivedSupportCohomology`. -/
-theorem exists_distTriang_rightDerivedSectionsWithSupport
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) (n : ℤ) [K.IsGE n] :
-    ∃ δ, Triangle.mk ((Functor.rightDerivedFunctorNatTrans (Sheaf.ΓSupportι X.smallEtaleTopology
+theorem distTriang_rightDerivedSectionsWithSupport
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    Triangle.mk ((Functor.rightDerivedFunctorNatTrans (Sheaf.ΓSupportι X.smallEtaleTopology
         A (op (Scheme.Etale.mk i.openComplement.ι)))).app K)
       ((Functor.rightDerivedFunctorNatTrans (Sheaf.natTransΓRes X.smallEtaleTopology A
-        (op (Scheme.Etale.mk i.openComplement.ι)))).app K) δ ∈ distTriang _ := by
+        (op (Scheme.Etale.mk i.openComplement.ι)))).app K)
+      ((sectionsWithSupportδ A i).app K) ∈ distTriang _ := by
   set Uo := op (Scheme.Etale.mk i.openComplement.ι)
-  obtain ⟨L, _, ⟨eL⟩⟩ := K.exists_iso_Q_obj_of_isGE n
-  obtain ⟨R, -, hR⟩ := CochainComplex.KInjectiveResolution.exists_of_isStrictlyGE L n
-  have : IsIso (DerivedCategory.Q.map R.ι) := by
-    rw [DerivedCategory.isIso_Q_map_iff_quasiIso]
-    infer_instance
-  let eK : DerivedCategory.Q.obj R.I ≅ K := (asIso (DerivedCategory.Q.map R.ι)).symm ≪≫ eL.symm
-  obtain ⟨δ, hδ⟩ := exists_distTriang_rightDerivedSectionsWithSupport_Q_obj A i R.I
+  set I := sectionsWithSupportResolution A K
+  set eK := sectionsWithSupportResolutionIso A K
+  have hδ := distTriang_rightDerivedSectionsWithSupport_Q_obj A i I
   let F₁ := (Sheaf.ΓSupport X.smallEtaleTopology A Uo).rightDerivedFunctor
   let F₃ := ((sheafSections X.smallEtaleTopology A).obj Uo).rightDerivedFunctor
-  refine ⟨F₃.map eK.inv ≫ δ ≫ (F₁.map eK.hom)⟦(1 : ℤ)⟧', isomorphic_distinguished _ hδ _
+  refine isomorphic_distinguished _ hδ _
     (Triangle.isoMk _ _ (F₁.mapIso eK.symm)
       ((Sheaf.Γ X.smallEtaleTopology A).rightDerivedFunctor.mapIso eK.symm)
-      (F₃.mapIso eK.symm) ?_ ?_ ?_)⟩
+      (F₃.mapIso eK.symm) ?_ ?_ ?_)
   · exact ((Functor.rightDerivedFunctorNatTrans _).naturality eK.inv).symm
   · exact ((Functor.rightDerivedFunctorNatTrans _).naturality eK.inv).symm
-  · simp only [Triangle.mk_mor₃, Iso.symm_hom, Functor.mapIso_hom, assoc]
-    rw [← Functor.map_comp (shiftFunctor _ _), ← Functor.map_comp F₁, Iso.hom_inv_id,
-      CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, comp_id]
+  · simp only [Triangle.mk_mor₃, Iso.symm_hom, Functor.mapIso_hom]
+    exact ((sectionsWithSupportδ A i).naturality eK.inv).symm.trans
+      (by rw [sectionsWithSupportδ_app_Q_obj])
 
 include hJX hJZ in
 /-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
 
-**The long exact sequence.** For a bounded below complex `K` of étale sheaves on `X` (e.g. a
-sheaf in degree `0`) and a closed immersion `i : Z ⟶ X` with open complement `U`, there are
-connecting maps `δ : H^q(U, K) ⟶ H^{q+1}_Z(X, K)` such that
+**The long exact sequence.** For a complex `K` of étale sheaves on `X` (e.g. a sheaf in degree
+`0`) and a closed immersion `i : Z ⟶ X` with open complement `U`,
 
 `⋯ ⟶ H^q_Z(X, K) ⟶ H^q(X, K) ⟶ H^q(U, K) ⟶ H^{q+1}_Z(X, K) ⟶ H^{q+1}(X, K) ⟶ ⋯`
 
 is exact. Here `H^q_Z(X, K) = H^q(RΓ_Z(X, K))`
-(`AlgebraicGeometry.Etale.derivedSupportCohomology`), and the first two maps are induced by the
-inclusion of sections with support and the restriction; all maps are natural in `K`, the first
-two by construction. The sequence is the homology sequence of the triangle
-`AlgebraicGeometry.Etale.exists_distTriang_rightDerivedSectionsWithSupport`. -/
+(`AlgebraicGeometry.Etale.derivedSupportCohomology`), the first two maps are induced by the
+inclusion of sections with support and the restriction, and the connecting maps
+`H^q(U, K) ⟶ H^{q+1}_Z(X, K)` are those of the triangle
+`AlgebraicGeometry.Etale.distTriang_rightDerivedSectionsWithSupport`, induced by the connecting
+morphism `AlgebraicGeometry.Etale.sectionsWithSupportδ`. All maps are natural in `K`: the first
+two are induced by natural transformations, and the connecting maps by the natural
+transformation `sectionsWithSupportδ`
+(`AlgebraicGeometry.Etale.homologyMap_sectionsWithSupportδ_naturality`). -/
 theorem exact_derivedSupportCohomology
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) (n : ℤ) [K.IsGE n] :
-    ∃ δ, ∃ hT : Triangle.mk ((Functor.rightDerivedFunctorNatTrans (Sheaf.ΓSupportι
-        X.smallEtaleTopology A (op (Scheme.Etale.mk i.openComplement.ι)))).app K)
-      ((Functor.rightDerivedFunctorNatTrans (Sheaf.natTransΓRes X.smallEtaleTopology A
-        (op (Scheme.Etale.mk i.openComplement.ι)))).app K) δ ∈ distTriang _,
-      ∀ (q₀ q₁ : ℤ) (h : q₀ + 1 = q₁),
-        (ShortComplex.mk ((DerivedCategory.homologyFunctor A q₀).map
-            ((Functor.rightDerivedFunctorNatTrans (Sheaf.ΓSupportι X.smallEtaleTopology A
-              (op (Scheme.Etale.mk i.openComplement.ι)))).app K))
-          ((DerivedCategory.homologyFunctor A q₀).map
-            ((Functor.rightDerivedFunctorNatTrans (Sheaf.natTransΓRes X.smallEtaleTopology A
-              (op (Scheme.Etale.mk i.openComplement.ι)))).app K))
-          (by rw [← Functor.map_comp]; erw [comp_distTriang_mor_zero₁₂ _ hT]
-              exact Functor.map_zero _ _ _)).Exact ∧
-        (ShortComplex.mk _ _ (DerivedCategory.HomologySequence.comp_δ _ hT q₀ q₁ h)).Exact ∧
-        (ShortComplex.mk _ _ (DerivedCategory.HomologySequence.δ_comp _ hT q₀ q₁ h)).Exact := by
-  obtain ⟨δ, hδ⟩ := exists_distTriang_rightDerivedSectionsWithSupport A i K n
-  exact ⟨δ, hδ, fun q₀ q₁ h ↦ ⟨DerivedCategory.HomologySequence.exact₂ _ hδ q₀,
-    DerivedCategory.HomologySequence.exact₃ _ hδ q₀ q₁ h,
-    DerivedCategory.HomologySequence.exact₁ _ hδ q₀ q₁ h⟩⟩
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) (q₀ q₁ : ℤ) (h : q₀ + 1 = q₁) :
+    (ShortComplex.mk ((DerivedCategory.homologyFunctor A q₀).map
+        ((Functor.rightDerivedFunctorNatTrans (Sheaf.ΓSupportι X.smallEtaleTopology A
+          (op (Scheme.Etale.mk i.openComplement.ι)))).app K))
+      ((DerivedCategory.homologyFunctor A q₀).map
+        ((Functor.rightDerivedFunctorNatTrans (Sheaf.natTransΓRes X.smallEtaleTopology A
+          (op (Scheme.Etale.mk i.openComplement.ι)))).app K))
+      (by rw [← Functor.map_comp]
+          erw [comp_distTriang_mor_zero₁₂ _ (distTriang_rightDerivedSectionsWithSupport A i K)]
+          exact Functor.map_zero _ _ _)).Exact ∧
+    (ShortComplex.mk _ _ (DerivedCategory.HomologySequence.comp_δ _
+      (distTriang_rightDerivedSectionsWithSupport A i K) q₀ q₁ h)).Exact ∧
+    (ShortComplex.mk _ _ (DerivedCategory.HomologySequence.δ_comp _
+      (distTriang_rightDerivedSectionsWithSupport A i K) q₀ q₁ h)).Exact :=
+  ⟨DerivedCategory.HomologySequence.exact₂ _ (distTriang_rightDerivedSectionsWithSupport A i K) q₀,
+    DerivedCategory.HomologySequence.exact₃ _ (distTriang_rightDerivedSectionsWithSupport A i K)
+      q₀ q₁ h,
+    DerivedCategory.HomologySequence.exact₁ _ (distTriang_rightDerivedSectionsWithSupport A i K)
+      q₀ q₁ h⟩
+
+include hJX hJZ in
+/-- The connecting maps `H^q(U, K) ⟶ H^{q+1}_Z(X, K)` of the long exact sequence of cohomology
+with support (`AlgebraicGeometry.Etale.exact_derivedSupportCohomology`) are natural in `K`. -/
+lemma homologyMap_sectionsWithSupportδ_naturality
+    {K L : DerivedCategory (Sheaf X.smallEtaleTopology A)} (f : K ⟶ L) (q₀ q₁ : ℤ)
+    (h : 1 + q₀ = q₁) :
+    (DerivedCategory.homologyFunctor A q₀).map (((sheafSections X.smallEtaleTopology A).obj
+        (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctor.map f) ≫
+      (DerivedCategory.homologyFunctor A 0).shiftMap ((sectionsWithSupportδ A i).app L) q₀ q₁ h =
+    (DerivedCategory.homologyFunctor A 0).shiftMap ((sectionsWithSupportδ A i).app K) q₀ q₁ h ≫
+      (DerivedCategory.homologyFunctor A q₁).map ((Sheaf.ΓSupport X.smallEtaleTopology A
+        (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctor.map f) := by
+  have := (sectionsWithSupportδ A i).naturality f
+  dsimp only [Functor.comp_map] at this
+  have h₁ := (DerivedCategory.homologyFunctor A 0).shiftMap_comp' (((sheafSections
+    X.smallEtaleTopology A).obj (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctor.map
+      f) ((sectionsWithSupportδ A i).app L) q₀ q₁ h
+  have h₂ := (DerivedCategory.homologyFunctor A 0).shiftMap_comp ((sectionsWithSupportδ A i).app K)
+    ((Sheaf.ΓSupport X.smallEtaleTopology A
+      (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctor.map f) q₀ q₁ h
+  rw [this] at h₁
+  exact h₁.symm.trans h₂
 
 end Concrete
 
