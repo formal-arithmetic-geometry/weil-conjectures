@@ -89,27 +89,28 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-e48c7924f",
-  "group": "Q49",
-  "result": "fix",
-  "note": "Read the item, its four statement dependencies (Lean: IsGrothendieckTopos.{w}, GeometricMorphism) and the delivered CoherentTopos.lean; the node changed only in its lean record. All six declarations match the node: QC with w-indexed families and a Finset subfamily; QS for every IsPullback; coherent = QC and QS; coherent topos = IsGrothendieckTopos.{w} with a small coherent generating family, epis from coproducts, and IsClosedUnderLimitsOfShape for every FinCategory J (empty J gives the terminal object); coherent morphism preserves coherent objects; conservative reflects isomorphisms. No stronger assumptions, universes bound, docstrings present, no sorry, lean.statement verbatim, no duplicate in Mathlib or the project. The delivered file compiles clean (1.4 s). FIX: IsConservativeGeometricMorphism restated Mathlib's Functor.ReflectsIsomorphisms by hand (H4); its body is now u.inverse.ReflectsIsomorphisms. Two unused imports removed (H9). The fixed file compiles clean (1.1 s, rc 0); the report has an appended fix note."
+  "reviewer": "NT-stage2-Codex-4e91ac479",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source records, Lean declarations, docstrings, edge cases, route-pivot compliance, and report sections. Both delivered files compiled successfully via scompile.py with server confirmation; no substantive or mechanical defects found."
  },
  "lean": {
-  "module": "Sheaf.CategoryTheory.Sites.CoherentTopos",
-  "declaration": "CategoryTheory.IsCoherentTopos",
-  "file": "lean/Sheaf/CategoryTheory/Sites/CoherentTopos.lean",
-  "statement": "def IsCoherentTopos (E : Type u) [Category.{v} E] [HasCoproducts.{w} E] [HasFiniteLimits E] : Prop",
-  "branch": "newtargets-dag",
-  "by": "Q49",
-  "date": "2026-10-18",
-  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.CoherentToposRepair",
+  "declaration": "CategoryTheory.CoherentToposRepair.IsCoherentTopos",
   "declarations": [
-   "CategoryTheory.IsQuasiCompactObject",
-   "CategoryTheory.IsQuasiSeparatedObject",
-   "CategoryTheory.IsCoherentObject",
-   "CategoryTheory.IsCoherentTopos",
-   "CategoryTheory.IsCoherentGeometricMorphism",
-   "CategoryTheory.IsConservativeGeometricMorphism"
-  ]
+   "CategoryTheory.CoherentToposRepair.IsCoherentTopos",
+   "CategoryTheory.CoherentToposRepair.IsCoherentGeometricMorphism",
+   "CategoryTheory.CoherentToposRepair.IsConservativeGeometricMorphism",
+   "CategoryTheory.CoherentToposRepair.IsCoherentVanishingTopos",
+   "CategoryTheory.CoherentToposRepair.IsCoherentVanishingSquare",
+   "CategoryTheory.CoherentToposRepair.IsConservativeVanishingSquare"
+  ],
+  "statement": "def IsCoherentTopos (E : Type u) [Category.{v} E] : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/Sites/CoherentToposRepair.lean",
+  "note": "The recorded declaration required HasCoproducts as an ambient instance and triggered universe metavariable search for the large sheaf categories. This repair packages the coproduct and finite-limit structures existentially and defines the coherent-topos, coherent-geometric-morphism, and conservative-geometric-morphism predicates with the same source clauses. The item uses these repaired declarations at the common vanishing-topos universes."
  }
 }

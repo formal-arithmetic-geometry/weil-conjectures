@@ -113,21 +113,21 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor",
-  "declaration": "AlgebraicGeometry.ProEtale.derivedTensor",
-  "statement": "def derivedTensor :\n    DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤\n      DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤\n        DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)",
-  "branch": "slopmaster2",
-  "by": "Q98",
+  "module": "Sheaf.SixFunctors.IntrinsicDerivedTensorOfUniverses",
+  "declaration": "SheafOfModules.ringedSiteDerivedTensorOfUniverses",
+  "statement": "def ringedSiteDerivedTensorOfUniverses\n    {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]\n    {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r})\n    [HasSheafify J AddCommGrpCat.{r}] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]\n    [HasDerivedCategory.{w} (SheafOfModules.{r}\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))]\n    (K L : DerivedCategory (SheafOfModules.{r}\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) :\n    DerivedCategory (SheafOfModules.{r}\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))",
+  "branch": "newtargets-dag",
+  "by": "Q23",
   "date": "2026-10-17",
   "existing": true,
-  "note": "Section 1(B), exact existing presentation repair: the currently recorded ringedSiteDerivedTensorOfUniverses has intrinsic SheafOfModules endpoints, whereas this consumer, compactification projections and canonical site comparison use fixed-ring ModuleCat-valued sheaves. The existing generic derivedTensor specialized to ModuleCat.{u+1} A supplies the same ordinary uncompleted K-flat total tensor in that presentation. No universe equality, boundedness, Tor hypothesis or chosen map is added. The generalized intrinsic construction remains in its published module."
+  "note": "§1(B) existing-presentation repair: the previous fixed-ring ModuleCat-valued-sheaf derivedTensor has different endpoints from the intrinsic SheafOfModules categories used by the recorded completion, constant-to-completion map, and integral constructible category. Reuse the already published ringedSiteDerivedTensorOfUniverses, the same ordinary K-flat total tensor over the constant ring sheaf in the intrinsic presentation, retaining the unequal object/morphism universes of the small pro-etale site. Scalar extension in this item is its standard derived-change-of-rings form reductionDerivedChange; no new tensor construction or hypothesis."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-f33e87907",
-  "group": "Q98",
+  "reviewer": "NT-stage2-Codex-b2d3f3dd2",
+  "group": "Q23",
   "result": "pass",
-  "note": "Read the packet, item node, new helper node, both Lean modules, report and the cited declarations (ProEtale/Etale projectionMapOfCompactification, compactSupportSiteComparison, derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso, comparisonUpperStarCompUpperStarIso, recorded finiteExchangeProjection and supportSiteComparisonCoefficientPullbackIso). Every hypothesis matches the node (FiniteFieldDatum, l prime and l≠p, finite E/Q_l, n≥1, finite-type X/Y over k, f separated of finite type, fixed c, D^b_c M and H, finite Tor for H only). The equation C_D∘P_f(τ)∘PF^p = V_Y(PF^e)∘t∘(C_M⊗1) has the right order and directions. PF^p is the same declaration and body as def-exchange-projection's projection component. PF^e is built from the recorded def-kun-projection-formula-map and lem-pur-etale-open-derived-tensor declarations. t is .inv of the canonical tensor comparison. The pullback iso is the canonical mate. The bounded-below witnesses are existential Props, not extra hypotheses. No hollow definitions; only sorry; docstrings present; statements verbatim; universes bound; edge cases covered. The §1(B) records for def-weil-derived-tensor and def-compact-support-direct-image-detailed are exact upstream declarations with notes. nt_compile.py on both files: 9.9 s and 2.7 s, no errors or warnings. Non-blocking: no lean.note records the upstream tensor and pullback comparison declarations on their dependency nodes."
+  "note": "Audited immutable node, dependencies, source references, Lean declarations, docstrings, edge cases, route-pivot compliance, report sections, and reproduced scompile.py successfully with local/server confirmation. No substantive or mechanical findings."
  }
 }
