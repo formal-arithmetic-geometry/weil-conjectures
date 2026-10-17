@@ -282,5 +282,23 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-029421752 (reviewer sub-agent of L); spot-checked: Read in full: the item, the one new node lem-coef-cocartesian-joyal-fibration, the statements of all ten cited nodes, the parent's citing step and the unit record. HTT is not archived in literature/; both nodes record the online place with proof_origin agent, and the report has WANTED lines. The item matches HTT Lemma 5.4.4.1 clause by clause (any simplicial base, K empty allowed, strict lift) and is not weakened. Step 1: the blunt cone K⋄Δ^0 from the blunt-sharp join node; a map from it is a vertex y plus an edge a→Δ_K y (elementary). Step 2: generator (ii) at n=1, {1}^♯→(Δ^1)^♯, times ∅→(K^op)^♭ is marked anodyne, and the relative right-lifting property over any base S applies to p^op; all markings check. Step 3: the cocone clause of filteredness, with K empty still giving y (elementary). Step 4: the edges of s_1e are e, the degenerate edge at Δ_K x, and e; the inner horn times K^♭ gives σ, and its 02 edge lies over e. Step 5: the functor-equivalence test (ii)⇒(i) makes c a Joyal equivalence; factor c=rj; two lifting squares give vj=u, pv=br, si=jk, rs=1, so āi=a and pā=b hold strictly. The new node is HTT Proposition 3.3.1.7 plus its opposite and is true, including the empty-source case. It generalizes the quasicategory-base clause of lem-coef-relative-marked-anodyne-calculus; my searches for categorical/Joyal fibration, isofibration and 3.3.1.7 (54 files) found no duplicate. It is statement-only, self-contained, cites the right definitions, records searches of all three kinds, and has correct blueprint.from/via. All cited lemmas are in the item's unit, with no tool uses and no SGA. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7a2a4414f",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Statement matches node/HTT 5.4.4.1 clause by clause: regular ρ, relativeFibration true p (cocartesian over arbitrary base, no quasicategory binder; second reading correctly removed worker's extra Quasicategory E/S), ∀ vertex s ∃ Quasicategory(fiber) ∧ IsKappaFiltered (Prop class, implied by inner fibration, not stronger), IsKappaSmall K (K=∅ included; coconeCategory comma still demands an apex), strict lift with both equations. Universes u/v independent, all bound. lean.statement verbatim, only node change is the lean field, stmt_deps cover all notions, docstrings with source + blueprint + 5-step proof, sorry only, no definitions. nt_compile --json against local side overlay: rc 0, no errors/warnings, item 1.8 s. Duplicate searches agree: no existing theorem. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FilteredFiberSmallConeLifting",
+  "declaration": "SSet.Enhanced.filteredFiberSmallConeLifting",
+  "file": "lean/Sheaf/CategoryTheory/FilteredFiberSmallConeLifting.lean",
+  "statement": "theorem filteredFiberSmallConeLifting {E S : SSet.{v}} (ρ : Cardinal.{u}) (hρ : ρ.IsRegular) (p : E ⟶ S) (hp : SSet.Marked.Over.relativeFibration true p) (hfiltered : ∀ s : S _⦋0⦌, ∃ (hQ : SSet.Quasicategory (fiber p s)), @SSet.Presentability.IsKappaFiltered.{u, v} ρ (fiber p s) hQ) (K : SSet.{v}) (hK : SSet.Presentability.IsKappaSmall.{u, v} ρ K) (a : K ⟶ E) (b : rightJoinCone K ⟶ S) (hbase : a ≫ p = rightJoinConeInclusion K ≫ b) : ∃ (barA : rightJoinCone K ⟶ E), rightJoinConeInclusion K ≫ barA = a ∧ barA ≫ p = b",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

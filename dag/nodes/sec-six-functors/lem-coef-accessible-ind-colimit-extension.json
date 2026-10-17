@@ -203,5 +203,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-268af2cfa",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause of the Lean statement matches the node and HTT 5.3.5.10-11/5.4.2.2/5.5.1.1/5.5.1.9/5.3.1.18/5.5.4.14. Hypotheses: presentability of E (restored by the second reader with the dependency's IsPresentable.{u,v}), essential smallness, repleteness, compactness and closure under κ-small ambient colimits; nothing stronger. Conclusions: accessibility, small colimits, explicit ambient closure, preservation by the inclusion, E_0 ⊆ hull, poset-nerve presentation; quantifier order matches. Universes u and max (u+1) v as the dependency requires. compactFilteredHull has real data; posetNerve is a thin binding of Mathlib nerve; no duplicate notion found; only the theorem proof is sorry. Edge cases: empty colimit covered, ℵ₀ allowed, empty filtered index excluded. lean.statement verbatim; node unchanged apart from lean; both stmt_deps imported and used; Worker report and Second reading by Q50 sections present. nt_compile.py --json: rc 0, no diagnostics, 2.4 s. Cosmetic only: HTT numbers in the report text are replaced by 'the project server'."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AccessibleIndColimitExtension",
+  "declaration": "SSet.Presentability.accessible_ind_colimit_extension",
+  "declarations": [
+   "SSet.Presentability.compactFilteredHull",
+   "SSet.Presentability.posetNerve",
+   "SSet.Presentability.accessible_ind_colimit_extension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AccessibleIndColimitExtension.lean",
+  "statement": "theorem accessible_ind_colimit_extension (κ : Cardinal.{u}) (hκ : κ.IsRegular) (E : SSet.{max (u + 1) v}) [hE : SSet.Quasicategory E] (hEpresentable : IsPresentable.{u, v} E) (P : E _⦋0⦌ → Prop) (hPsmall : IsEssentiallySmall.{u, max (u + 1) v} (Enhanced.fullSubcomplex E P).toSSet) (hPreplete : ∀ (e : E _⦋1⦌), Enhanced.IsEquivalenceEdge E e → (P (E.δ 1 e) ↔ P (E.δ 0 e))) (hPcompact : ∀ (x : E _⦋0⦌), P x → IsKappaCompact E κ x) (hPcolimit : ∀ (K : SSet.{max (u + 1) v}), IsKappaSmall κ K → ∀ (F : K ⟶ E), (∀ i : K _⦋0⦌, P (F.app (op ⦋0⦌) i)) → ∀ (t : (Enhanced.coconeCategory F) _⦋0⦌), Enhanced.IsColimiting F t → P t.1.1) : ∃ (hE1 : SSet.Quasicategory (compactFilteredHull κ P).toSSet), @IsKappaAccessible.{u, max (u + 1) v} (compactFilteredHull κ P).toSSet hE1 κ ∧ HasSmallColimits.{u, max (u + 1) v} (compactFilteredHull κ P).toSSet ∧ (∀ (K : SSet.{max (u + 1) v}), IsSmall.{u, max (u + 1) v} K → ∀ (F : K ⟶ E), (∀ i : K _⦋0⦌, ∃ y : (compactFilteredHull κ P).toSSet _⦋0⦌, y.1 = F.app (op ⦋0⦌) i) → ∀ (t : (Enhanced.coconeCategory F) _⦋0⦌), Enhanced.IsColimiting F t → ∃ y : (compactFilteredHull κ P).toSSet _⦋0⦌, y.1 = t.1.1) ∧ PreservesColimitsIn (compactFilteredHull κ P).ι (fun I _ _ ↦ IsSmall.{u, max (u + 1) v} I) ∧ (∀ (x : E _⦋0⦌), P x → ∃ y : (compactFilteredHull κ P).toSSet _⦋0⦌, y.1 = x) ∧ (∀ (x : (compactFilteredHull κ P).toSSet _⦋0⦌), ∃ (A : Type u) (hA : PartialOrder A), ∃ (hN : SSet.Quasicategory (posetNerve A hA)), IsSmall.{u, u} (posetNerve A hA) ∧ @IsKappaFiltered.{u, u} κ (posetNerve A hA) hN ∧ ∃ (F : (SSet.uliftFunctor.{max (u + 1) v, u}).obj (posetNerve A hA) ⟶ E), (∀ i : (SSet.uliftFunctor.{max (u + 1) v, u}).obj (posetNerve A hA) _⦋0⦌, P (F.app (op ⦋0⦌) i)) ∧ ∃ (t : (Enhanced.coconeCategory F) _⦋0⦌), Enhanced.IsColimiting F t ∧ ∃ (e : E _⦋1⦌), Enhanced.IsEquivalenceEdge E e ∧ E.δ 1 e = x.1 ∧ E.δ 0 e = t.1.1)",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The filtered hull and explicit poset-nerve helper encode the replete compact filtered-colimit closure and its nerve-indexed presentations."
  }
 }
