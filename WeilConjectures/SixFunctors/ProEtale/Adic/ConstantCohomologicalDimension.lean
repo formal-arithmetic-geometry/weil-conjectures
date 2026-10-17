@@ -71,7 +71,7 @@ instance CompactLattice.isDirected : IsDirected (CompactLattice l) (· ≤ ·) w
       exact Submodule.add_mem_sup (Submodule.subset_span hx) (Submodule.subset_span hy)
 
 instance : Nonempty (CompactLattice l) :=
-  ⟨⟨⊥, by simpa using isCompact_singleton, by
+  ⟨⟨⊥, by simp, by
     refine Submodule.finiteDimensional_of_le (S₂ := ⊥) (Submodule.span_le.2 ?_)
     simp⟩⟩
 
@@ -112,7 +112,6 @@ lemma CompactLattice.ballSubgroup_succ_le (Λ : CompactLattice l) (m : ℕ) :
   intro x hx
   refine Metric.mem_ball.2 (lt_of_lt_of_le (Metric.mem_ball.1 hx) ?_)
   gcongr
-  push_cast
   linarith
 
 lemma CompactLattice.eq_zero_of_forall_mem_ballSubgroup (Λ : CompactLattice l) (x : Λ.1)
@@ -157,7 +156,8 @@ noncomputable def compactLatticeDiagram :
     ULift.{u + 1} (CompactLattice l) ⥤ Sheaf (Scheme.ProEt.topology S) AddCommGrpCat.{u + 1} where
   obj Λ := continuousSheaf S Λ.down.1
   map {Λ Λ'} f := continuousSheafMap S
-    ⟨AddSubgroup.inclusion (show Λ.down.1 ≤ Λ'.down.1 from (leOfHom f : Λ ≤ Λ')), continuous_subtype_val.subtype_mk _⟩
+    ⟨AddSubgroup.inclusion (show Λ.down.1 ≤ Λ'.down.1 from (leOfHom f : Λ ≤ Λ')),
+      continuous_subtype_val.subtype_mk _⟩
   map_id _ := rfl
   map_comp _ _ := rfl
 
@@ -230,7 +230,8 @@ noncomputable def isColimitAdicConstantSheafCocone : IsColimit (adicConstantShea
   have : Mono (colimit.desc (compactLatticeDiagram l S) (adicConstantSheafCocone l S)) :=
     colim.map_mono' (adicConstantSheafCocone l S).ι (colimit.isColimit _)
       (isColimitConstCocone _ _) _ (by simp)
-  have := isIso_of_mono_of_epi (colimit.desc (compactLatticeDiagram l S) (adicConstantSheafCocone l S))
+  have :=
+    isIso_of_mono_of_epi (colimit.desc (compactLatticeDiagram l S) (adicConstantSheafCocone l S))
   have : IsIso ((colimit.isColimit _).desc (adicConstantSheafCocone l S)) := this
   exact IsColimit.ofPointIso (colimit.isColimit _)
 

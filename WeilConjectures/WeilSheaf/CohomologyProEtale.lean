@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedForget
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.WeilSheaf.Cohomology
-public import WeilConjectures.WeilSheaf.Finiteness
+public import WeilConjectures.WeilSheaf.LowerStar
 
 /-!
 # Cohomology of a Weil sheaf as pro-étale sheaf cohomology
@@ -89,7 +89,7 @@ noncomputable abbrev underlyingSheaf (F : WeilSheaf k₀ l Y) :
 /-- The functor taking global sections over `Spec k̄` of the underlying sheaf of a Weil sheaf on
 `Spec k₀`, whose `ℚ̄_ℓ`-module structure is the carrier of
 `AlgebraicGeometry.WeilSheaf.globalSections`. -/
-noncomputable abbrev globalSectionsFunctor :
+noncomputable abbrev globalSectionsUnderlyingFunctor :
     WeilSheaf k₀ l (Spec (CommRingCat.of k₀)) ⥤ WeilCoefficients.{u} l :=
   ObjectProperty.ι _ ⋙ IsoAlgebra.forget _ ⋙ ProEtale.AdicSheaf.forget _ ⋙
     Sheaf.Γ _ (WeilCoefficients.{u} l)
@@ -98,7 +98,7 @@ noncomputable abbrev globalSectionsFunctor :
 `ℚ̄_ℓ`-module of `Hʳ(Y ⊗ k̄, F) = Γ(Spec k̄, 𝓗ʳ(Ra_* F))` is the pro-étale cohomology
 `Rʳ Γ(Ȳ_proét, F)` of the underlying sheaf of `ℚ̄_ℓ`-modules on the geometric fiber `Ȳ`. -/
 noncomputable def cohomologyIsoRightDerivedGlobalSections (F : WeilSheaf k₀ l Y) (r : ℕ) :
-    globalSectionsFunctor.obj ((WeilComplex.homologySheaf (r : ℤ)).obj
+    globalSectionsUnderlyingFunctor.obj ((WeilComplex.homologySheaf (r : ℤ)).obj
         ((WeilComplex.derivedLowerStar (Y ↘ Spec (CommRingCat.of k₀))).obj (toComplex.obj F))) ≅
       ((Sheaf.Γ (Scheme.ProEt.topology (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber)
         (WeilCoefficients.{u} l)).rightDerived r).obj F.underlyingSheaf := by
@@ -150,7 +150,7 @@ theorem subsingleton_cohomology_of_isZero_rightDerived (F : WeilSheaf k₀ l Y) 
       (WeilCoefficients.{u} l)).rightDerived r).obj F.underlyingSheaf)) :
     Subsingleton (F.cohomology r).carrier :=
   ModuleCat.subsingleton_of_isZero (M := (WeilCoefficients.toModuleCat l).obj
-    (globalSectionsFunctor.obj ((WeilComplex.homologySheaf (r : ℤ)).obj
+    (globalSectionsUnderlyingFunctor.obj ((WeilComplex.homologySheaf (r : ℤ)).obj
       ((WeilComplex.derivedLowerStar (Y ↘ Spec (CommRingCat.of k₀))).obj (toComplex.obj F)))))
     ((WeilCoefficients.toModuleCat l).map_isZero
       (h.of_iso (cohomologyIsoRightDerivedGlobalSections F r)))

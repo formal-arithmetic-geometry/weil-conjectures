@@ -69,7 +69,7 @@ lemma ContinuousMap.existsUnique_comp_mk_eq {T : Type*} [TopologicalSpace T]
       g m t}).Nonempty := by
     refine IsCompact.nonempty_iInter_of_sequence_nonempty_isCompact_isClosed _ (fun m a ha ↦ ?_)
       (fun m ↦ ?_) ?_ (fun m ↦ ?_)
-    · simp only [Set.mem_setOf_eq] at ha ⊢
+    · simp only [Set.mem_ofPred_eq] at ha ⊢
       rw [← hcompat m t, ← ha]
       rfl
     · obtain ⟨a, ha⟩ := QuotientAddGroup.mk_surjective (g m t)
@@ -158,6 +158,7 @@ noncomputable def continuousSheafTower (U : ℕ → OpenAddSubgroup A) (hU : ∀
   Functor.ofOpSequence (X := fun m ↦ continuousSheaf S (A ⧸ (U m : AddSubgroup A)))
     fun m ↦ continuousSheafMap S (openAddSubgroupQuotientMap U hU m)
 
+omit [CompactSpace A] in
 lemma continuousSheafTower_map_succ (U : ℕ → OpenAddSubgroup A) (hU : ∀ m, U (m + 1) ≤ U m)
     (m : ℕ) : (continuousSheafTower S U hU).map (homOfLE (m.le_add_right 1)).op =
       continuousSheafMap S (openAddSubgroupQuotientMap U hU m) :=
@@ -168,7 +169,8 @@ noncomputable def continuousSheafCone (U : ℕ → OpenAddSubgroup A) (hU : ∀ 
     Cone (continuousSheafTower S U hU) where
   pt := continuousSheaf S A
   π := NatTrans.ofOpSequence (F := (Functor.const ℕᵒᵖ).obj (continuousSheaf S A))
-    (G := continuousSheafTower S U hU) (fun m ↦ continuousSheafMap S (openAddSubgroupQuotientMk U m))
+    (G := continuousSheafTower S U hU)
+    (fun m ↦ continuousSheafMap S (openAddSubgroupQuotientMk U m))
     fun m ↦ by
       rw [continuousSheafTower_map_succ, ← continuousSheafMap_comp]
       exact Category.id_comp _
@@ -196,6 +198,7 @@ noncomputable def isLimitContinuousSheafCone (U : ℕ → OpenAddSubgroup A)
     exact congrArg (fun x : ULift.{u + 1} C(V.unop.left, A ⧸ (U m : AddSubgroup A)) ↦ x.down t)
       (hx (op m))
 
+omit [CompactSpace A] in
 /-- The morphism of sheaves `C(-, A) ⟶ C(-, B)` induced by a surjective homomorphism of discrete
 groups is an epimorphism: a continuous map to `B` is locally constant, hence locally lifts. -/
 lemma epi_continuousSheafMap_of_surjective {B : Type} [TopologicalSpace B] [AddCommGroup B]
@@ -205,7 +208,8 @@ lemma epi_continuousSheafMap_of_surjective {B : Type} [TopologicalSpace B] [AddC
   rw [← Sheaf.isLocallySurjective_iff_epi']
   refine ⟨fun {V} s₀ ↦ ?_⟩
   let s : C(V.left, B) := s₀.down
-  refine Scheme.ProEt.mem_topology_of_openImmersion _ (fun x : V.left ↦ (V.left.fiberOpens s (s x)).ι)
+  refine Scheme.ProEt.mem_topology_of_openImmersion _
+    (fun x : V.left ↦ (V.left.fiberOpens s (s x)).ι)
     (fun x ↦ ⟨x, ⟨x, rfl⟩, Scheme.Opens.ι_apply _ _⟩) fun x ↦
       ⟨ULift.up (ContinuousMap.const _ (hφ (s x)).choose), ?_⟩
   exact congrArg ULift.up (ContinuousMap.ext fun y ↦ (hφ (s x)).choose_spec.trans y.2.symm)
@@ -262,6 +266,7 @@ noncomputable def continuousSheafShortComplex (U : ℕ → OpenAddSubgroup A)
       ext x
       exact x.2)
 
+omit [CompactSpace A] in
 lemma shortExact_continuousSheafShortComplex (U : ℕ → OpenAddSubgroup A)
     (hU : ∀ m, U (m + 1) ≤ U m) (m : ℕ) :
     (continuousSheafShortComplex S U hU m).ShortExact := by

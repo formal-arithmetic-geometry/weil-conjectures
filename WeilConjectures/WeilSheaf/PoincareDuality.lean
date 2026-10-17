@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.BaseChangeField
 public import WeilConjectures.WeilSheaf.BaseChangeField.Cohomology
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.CohomologyAdicConstant
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.ZetaLinearAlgebra.TraceCup
 
@@ -105,7 +106,8 @@ theorem subsingleton_cohomology_adicConstant (d : ℕ)
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] {i : ℤ}
     (hi : i < 0 ∨ 2 * d < i) :
     Subsingleton ((adicConstant k₀ l X).cohomology i).carrier :=
-  sorry
+  subsingleton_cohomology_adicConstant_of_two_mul_lt k₀ l X d
+    (topologicalKrullDim_geometricFiber_le_of_smoothOfRelativeDimension _ d) hi
 
 /-- Blueprint `sk-cor-trace`, `sk-thm-derived-duality` (degreewise, with `K = ℚ̄_ℓ`, via
 `sk-thm-transport`) and `sk-thm-frobenius` (a), at the coefficient stage `ℚ̄_ℓ`: for `X`

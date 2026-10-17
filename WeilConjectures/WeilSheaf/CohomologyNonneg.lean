@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.Finiteness
+public import WeilConjectures.WeilSheaf.Cohomology
 
 /-!
 # Cohomology of a Weil sheaf vanishes in negative degrees
@@ -29,6 +29,15 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+
+/-- The global sections of a zero Weil sheaf vanish. -/
+theorem WeilSheaf.subsingleton_globalSections_of_isZero {X : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X}
+    (hF : IsZero F) : Subsingleton F.globalSections.carrier :=
+  ModuleCat.subsingleton_of_isZero <| Functor.map_isZero
+    (ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _ ⋙ ProEtale.AdicSheaf.forget _ ⋙
+      Sheaf.Γ _ (WeilCoefficients.{u} l) ⋙ WeilCoefficients.toModuleCat l) hF
 
 /-- The cohomology `Hʳ(Spec k̄, M)` of a Weil complex on `Spec k₀` concentrated in degrees `≥ a`
 vanishes in degrees `r < a`. -/
