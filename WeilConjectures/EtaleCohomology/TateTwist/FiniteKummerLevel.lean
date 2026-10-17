@@ -30,7 +30,7 @@ additive map of `ℤ/n`-modules being `ℤ/n`-linear.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.ringChar_eq_and_nonempty_tateTwistSheaf_iso`: blueprint
+- `AlgebraicGeometry.Etale.tateTwistSheafOneIsoQuotientSpanPow`: blueprint
   `lem-pur-finite-kummer-level`.
 -/
 
@@ -245,38 +245,42 @@ variable {R : Type (u + 1)} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R
   (hϖ : Irreducible ϖ) {ℓ : ℕ} (hℓ : ℓ.Prime) {e : ℕ} (he : 0 < e)
   (hℓe : Associated (ℓ : R) (ϖ ^ e)) (N : ℕ)
 
-include hϖ hℓ he hℓe in
 /-- Blueprint `lem-pur-finite-kummer-level`: Finite Kummer level of the Tate twist
 
 Let `R = 𝒪_E` be a discrete valuation ring with uniformizer `ϖ` and ramification index `e ≥ 1`
 over the prime `ℓ`, i.e. `ℓ = (unit) · ϖ^e`, and let `n = e N`, so that `N = n / e = n v_ℓ(ϖ)`.
 Then `A = A_{E,n} = 𝒪_E / ϖ^n` has characteristic `ℓ^N` (`ϖ^n 𝒪_E = ℓ^N 𝒪_E`, and `N` is the
-smallest exponent with `ℓ^N A = 0`), and on every scheme `T` on which `ℓ` is invertible the
-finite-level twist `A(1)_T` (`AlgebraicGeometry.Etale.tateTwistSheaf`, the Tate sheaf
-`μ_{ℓ^N} ⊗_ℤ A` of `def-coefficient-twists-detailed`) is canonically
+smallest exponent with `ℓ^N A = 0`; this is
+`IsDiscreteValuationRing.ringChar_quotient_span_pow`), and on every scheme `T` on which `ℓ` is
+invertible the finite-level twist `A(1)_T` (`AlgebraicGeometry.Etale.tateTwistSheaf`, the Tate
+sheaf `μ_{ℓ^N} ⊗_ℤ A` of `def-coefficient-twists-detailed`) is canonically
 
 `A(1)_T ≅ μ_{ℓ^N,T} ⊗_{ℤ/ℓ^N} A`
 
-(`AlgebraicGeometry.Etale.tateTwistSheafOneIsoExtendScalarsAlong`), the tensor product being over
-`ℤ/ℓ^N`, with `μ_{ℓ^N}` viewed as a sheaf of `ℤ/ℓ^N`-modules. Its compatibility with the derived
-tensor product is `AlgebraicGeometry.Etale.tateTwistObjIsoExtendScalarsAlong`, and its compatibility
-with base change is `AlgebraicGeometry.Etale.upperStar_map_tateSheafIso_hom`
-(`WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevelBaseChange`). -/
-theorem ringChar_eq_and_nonempty_tateTwistSheaf_iso :
-    ringChar (R ⧸ Ideal.span {ϖ ^ (e * N)}) = ℓ ^ N ∧
-      ∀ (T : Scheme.{u}) [HasInvertibleExponent (R ⧸ Ideal.span {ϖ ^ (e * N)}) T],
-        haveI := IsDiscreteValuationRing.charP_quotient_span_pow hϖ hℓ he hℓe N
-        haveI : NeZero (ringChar (R ⧸ Ideal.span {ϖ ^ (e * N)})) := ⟨by
-          rw [ringChar.eq _ (ℓ ^ N)]; exact pow_ne_zero _ hℓ.ne_zero⟩
-        Nonempty (tateTwistSheaf (R ⧸ Ideal.span {ϖ ^ (e * N)}) T 1 ≅
-          (extendScalarsAlong (R ⧸ Ideal.span {ϖ ^ (e * N)})
-            (ZMod.castHom (dvd_refl (ℓ ^ N)) (R ⧸ Ideal.span {ϖ ^ (e * N)})) T).obj
-              (T.rootsOfUnityModuleSheaf (ℓ ^ N))) := by
-  refine ⟨IsDiscreteValuationRing.ringChar_quotient_span_pow hϖ hℓ he hℓe N, fun T _ ↦ ?_⟩
-  have := IsDiscreteValuationRing.charP_quotient_span_pow hϖ hℓ he hℓe N
-  have : NeZero (ringChar (R ⧸ Ideal.span {ϖ ^ (e * N)})) := ⟨by
-    rw [ringChar.eq _ (ℓ ^ N)]; exact pow_ne_zero _ hℓ.ne_zero⟩
-  exact ⟨tateTwistSheafOneIsoExtendScalarsAlong _ _⟩
+(this definition, an instance of `AlgebraicGeometry.Etale.tateTwistSheafOneIsoExtendScalarsAlong`),
+the tensor product being over `ℤ/ℓ^N`, with `μ_{ℓ^N}` viewed as a sheaf of `ℤ/ℓ^N`-modules.
+Its compatibility with the derived tensor product is
+`AlgebraicGeometry.Etale.tateTwistObjIsoExtendScalarsAlong`, and its compatibility with base
+change is `AlgebraicGeometry.Etale.upperStar_map_tateSheafIso_hom`
+(`WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevelBaseChange`).
+
+The blueprint clause that `A` is free of rank `ef` over `ℤ/ℓ^N`, `A ≅ (ℤ/ℓ^N)^{ef}`, is not
+formalised. -/
+noncomputable def tateTwistSheafOneIsoQuotientSpanPow (T : Scheme.{u})
+    [HasInvertibleExponent (R ⧸ Ideal.span {ϖ ^ (e * N)}) T] :
+    haveI := IsDiscreteValuationRing.charP_quotient_span_pow hϖ hℓ he hℓe N
+    haveI : NeZero (ringChar (R ⧸ Ideal.span {ϖ ^ (e * N)})) := ⟨by
+      rw [ringChar.eq _ (ℓ ^ N)]
+      exact pow_ne_zero _ hℓ.ne_zero⟩
+    tateTwistSheaf (R ⧸ Ideal.span {ϖ ^ (e * N)}) T 1 ≅
+      (extendScalarsAlong (R ⧸ Ideal.span {ϖ ^ (e * N)})
+        (ZMod.castHom (dvd_refl (ℓ ^ N)) (R ⧸ Ideal.span {ϖ ^ (e * N)})) T).obj
+          (T.rootsOfUnityModuleSheaf (ℓ ^ N)) :=
+  haveI := IsDiscreteValuationRing.charP_quotient_span_pow hϖ hℓ he hℓe N
+  haveI : NeZero (ringChar (R ⧸ Ideal.span {ϖ ^ (e * N)})) := ⟨by
+    rw [ringChar.eq _ (ℓ ^ N)]
+    exact pow_ne_zero _ hℓ.ne_zero⟩
+  tateTwistSheafOneIsoExtendScalarsAlong _ _
 
 end ValuationRing
 

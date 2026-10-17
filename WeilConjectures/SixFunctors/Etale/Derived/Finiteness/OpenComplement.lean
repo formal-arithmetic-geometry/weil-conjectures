@@ -182,7 +182,15 @@ constructibility`). For the vanishing clause, `V` is of finite type over `k` of 
 `d`, so `R^q j_* M = 0` for `q > 2d` by
 `AlgebraicGeometry.Etale.isZero_rightDerived_lowerStar_of_two_mul_lt`; over a separably closed
 field this is the stalkwise argument of the blueprint, through the cohomological dimension
-bound `thm-sc-finite-type-torsion-cd` on the étale `V`-schemes. -/
+bound `thm-sc-finite-type-torsion-cd` on the étale `V`-schemes.
+
+This is also the content of blueprint `rem-pur-assembly-status` (status of the assembly): the
+open-complement condition (`def-exc-open-complement-bound`) is a theorem, not an assumption, and
+its constant `2d` does not depend on `Λ`. The remaining claims of that remark concern the general
+admissibility theorems `thm-pur-general-admissibility` and `cor-pur-general-admissibility-datum`,
+which are not formalised; for closed immersions see
+`AlgebraicGeometry.Etale.isLeftAdjoint_and_constructibleIn_and_torAmplitudeIn_of_isClosedImmersion`.
+-/
 theorem openComplementCondition_two_mul {k : Type u} [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] {V T : Scheme.{u}} (aT : T ⟶ Spec (.of k))
     [LocallyOfFiniteType aT] [QuasiCompact aT] (j : V ⟶ T) [IsOpenImmersion j] [QuasiCompact j]

@@ -31,8 +31,9 @@ over `Z` — and the two elementary lemmas of the blueprint about them.
 
 ## Implementation notes
 
-The pinned Mathlib has no relative `Spec` of a quasi-coherent graded algebra and no vector
-bundles over a scheme, so the normal cone cannot be *constructed* here. It is therefore
+The normal cone is constructed only downstream of this file
+(`AlgebraicGeometry.Scheme.Hom.normalBundleProj` in
+`WeilConjectures.AlgebraicGeometry.NormalBundle`), so it cannot be used here. It is therefore
 carried as *data*: `AlgebraicGeometry.Scheme.Hom.NormalConeData c i` bundles a scheme `N`, a
 projection `N ⟶ Z` and a zero section `Z ⟶ N` together with the properties the purity chapter
 uses, and every statement that needs a normal cone takes such a datum as a hypothesis. This
@@ -101,8 +102,12 @@ section, and the two properties the purity chapter uses — that the zero sectio
 closed section, and that `N ⟶ Z` is a vector bundle of rank `c`, of which only smoothness of
 relative dimension `c` is expressible in the pinned Mathlib.
 
-Mathlib has no relative `Spec` of a quasi-coherent graded `𝒪_Z`-algebra, so this datum cannot
-yet be constructed; it is taken as a hypothesis wherever a normal cone is needed. -/
+The normal cone itself is constructed downstream, in
+`WeilConjectures.AlgebraicGeometry.NormalBundle`
+(`AlgebraicGeometry.Scheme.Hom.normalBundleProj`, with zero section
+`AlgebraicGeometry.Scheme.Hom.normalConeZeroSection`), and is a vector bundle of rank `c` for a
+regular immersion (`AlgebraicGeometry.Scheme.Hom.isVectorBundle_normalBundleProj`). Statements
+that need a normal cone still take the datum as a hypothesis. -/
 -- TODO(unify): sk-def-purity-conv — construct the datum for every regular immersion.
 -- TODO: nothing ties the datum to `i`: any smooth rank-`c` projection with a closed zero section
 -- is accepted, which makes the existence of a deformation to the normal cone

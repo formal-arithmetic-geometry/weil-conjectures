@@ -176,7 +176,10 @@ complexes of `Λ`-modules with finitely generated (for `Λ` finite, equivalently
 `DerivedCategory.boundedFiniteCohomology_iff_finite`) cohomology modules. It is the restriction
 of the equivalence `D(Γ) : D(s_ét, Λ) ≌ D(Λ)` induced by the exact equivalence `Γ(s, -)`
 between étale sheaves of `Λ`-modules on `s` and `Λ`-modules, a sheaf on `s` being constructible
-if and only if its global sections are finitely generated. -/
+if and only if its global sections are finitely generated.
+
+Only the finite coefficient stage of the blueprint node is formalised: the analogous
+equivalences with coefficients `𝒪_E`, `E` and `ℚ̄_ℓ` are not. -/
 noncomputable def pointFiberEquivalence :
     DerivedCategoryBoundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) ≌
       DerivedCategory.BoundedFiniteCohomology Λ :=

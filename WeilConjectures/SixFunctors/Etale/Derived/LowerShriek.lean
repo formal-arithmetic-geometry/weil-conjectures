@@ -264,7 +264,8 @@ exponent is invertible on the base, the schemes are the geometric fibers `X = X�
 the categories are `Dᵇc(X, A)` and `Dctf(X, A)` of `AlgebraicGeometry.Etale.DerivedCategory`,
 `RΓ(s, -)` is the evaluation `Fib_s` at the geometric point
 (`AlgebraicGeometry.Etale.pointFiber`), and `H_c^i(X, K) = Hⁱ(RΓc(X, K))` is
-`AlgebraicGeometry.Etale.compactlySupportedCohomology`. -/
+`AlgebraicGeometry.Etale.compactlySupportedCohomology`. Only this étale model with finite
+coefficients is formalised; the pro-étale `ℓ`-adic conventions of the blueprint node are not. -/
 noncomputable def compactlySupportedGlobalSections :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤ DerivedCategory A :=
   R(f)_![A] ⋙ rightDerivedGlobalSections A Y

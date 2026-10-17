@@ -19,7 +19,7 @@ finite coefficient ring whose exponent is invertible in `k`
 exceptional inverse image along a closed immersion into such a scheme exists on the ambient
 derived category and preserves bounded constructibility and finite Tor amplitude, with explicit
 bounds, without any hypothesis
-(`AlgebraicGeometry.Etale.closedImmersion_exceptional_admissibility`).
+(`Etale.isLeftAdjoint_and_constructibleIn_and_torAmplitudeIn_of_isClosedImmersion`).
 
 Together with the smooth and general cases of
 `WeilConjectures.SixFunctors.Etale.Derived.PurityPreservation`, this gives the two remarks of
@@ -84,7 +84,8 @@ invertible in `k`. Then, without any further hypothesis:
 
 The open-complement condition used by clauses (2) and (3) is supplied by
 `AlgebraicGeometry.Etale.openComplementCondition_two_mul` (`lem-exc-open-complement-known`). -/
-theorem closedImmersion_exceptional_admissibility {k : Type u} [Field k] {Z T U : Scheme.{u}}
+theorem isLeftAdjoint_and_constructibleIn_and_torAmplitudeIn_of_isClosedImmersion {k : Type u}
+    [Field k] {Z T U : Scheme.{u}}
     (aT : T ⟶ Spec (.of k)) [LocallyOfFiniteType aT] [QuasiCompact aT] (d : ℕ)
     (hT : topologicalKrullDim T ≤ (d : WithBot ℕ∞)) (i : Z ⟶ T) [IsClosedImmersion i]
     [HasCompactification i] (j : U ⟶ T) [IsOpenImmersion j]
@@ -132,7 +133,8 @@ exceptional right adjoint datum is not a hypothesis, and the two preservation cl
 3. (closed immersions, without purity input: `lem-exc-closed-ambient`,
    `lem-exc-closed-amplitude`, `prop-exc-closed-tor`) for a closed immersion `i` into a
    finite-type `k`-scheme of dimension `≤ d`, `Ri^!` carries `[a, b]` to `[a, b + 2d + 1]` in
-   both clauses (`AlgebraicGeometry.Etale.closedImmersion_exceptional_admissibility`);
+   both clauses
+   (`Etale.isLeftAdjoint_and_constructibleIn_and_torAmplitudeIn_of_isClosedImmersion`);
 4. (separated finite-type morphisms, `thm-pur-general-admissibility`,
    `cor-pur-general-admissibility-datum`) for `f` separated of finite type over a finite-type
    `k`-scheme `Y`, there is `D` such that `Rf^!` carries `[a, b]` to `[a - 2D, b + 2d_Y + 1]` in
@@ -199,7 +201,8 @@ theorem ambient_and_preservationClauses {k : Type u} [Field k] (Λ : Type (u + 1
               ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
   refine ⟨⟨fun f _ ↦ inferInstance, fun _ X Y p _ aX aY _ _ hp d hd ↦ ?_⟩, fun aY f _ d _ ↦ ?_,
     fun aT _ _ d hT i _ j _ hij ↦
-      (closedImmersion_exceptional_admissibility aT d hT i j hij Λ).2,
+      (isLeftAdjoint_and_constructibleIn_and_torAmplitudeIn_of_isClosedImmersion aT d hT i j hij
+        Λ).2,
     fun aY _ _ f _ _ ↦ exists_preservationClauses Λ aY f⟩
   · have : HasInvertibleExponent Λ X := .of_hom aX
     exact ProEtale.hasCohomologicalDimensionLEOnEtaleOrigin Λ p aX aY hp d hd

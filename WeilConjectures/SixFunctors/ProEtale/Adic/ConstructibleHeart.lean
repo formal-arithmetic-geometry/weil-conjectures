@@ -50,7 +50,10 @@ bounded constructible derived category `D^b_c(X, ℚ̄_ℓ)`, as an object prope
 the abelian category `Sh_c(X, ℚ̄_ℓ)` of constructible `ℓ`-adic sheaves
 (`AlgebraicGeometry.ProEtale.DerivedCategory.adicConstructibleHeartEquiv`), whose objects have
 finite-level reductions satisfying the finite-torsion constructibility condition (see
-`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf`). -/
+`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf`).
+
+Only the case of `ℚ̄_ℓ` coefficients of the blueprint node is formalised; the variants with
+other coefficient rings are not. -/
 def adicConstructibleHeart : ObjectProperty (_root_.DerivedCategory (AdicSheaf l X)) :=
   boundedAdicConstructible l X ⊓ _root_.DerivedCategory.TStructure.t.le 0 ⊓
     _root_.DerivedCategory.TStructure.t.ge 0

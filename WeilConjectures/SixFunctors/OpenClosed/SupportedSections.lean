@@ -57,7 +57,10 @@ variable {U Z X : Scheme.{u}} (j : U ⟶ X) (s : Z ⟶ X) [IsOpenImmersion j] [I
 /-- Blueprint `def-pur-flasque-support`: Supported sections and flasque objects
 
 The subsheaf `𝒢_Z M = ker (M ⟶ j_* j^* M)` of sections of `M` supported on the closed
-complement `Z` of the open immersion `j : U ⟶ X`: the kernel of the unit of `j^* ⊣ j_*`. -/
+complement `Z` of the open immersion `j : U ⟶ X`: the kernel of the unit of `j^* ⊣ j_*`.
+
+The blueprint node is stated on the pro-étale site; it is formalised here on the small étale
+site only. -/
 @[simps]
 noncomputable def supportedSections :
     Sheaf X.smallEtaleTopology A ⥤ Sheaf X.smallEtaleTopology A where
@@ -218,7 +221,8 @@ lemma lowerStarClosedUpperShriekAdjunction_counit_app
 /-- Blueprint `def-pur-flasque-support`: Supported sections and flasque objects
 
 A sheaf `I` on `X` is *flasque for the pair* `(Z, U)` if the restriction `I ⟶ j_* j^* I` to the
-open part is an epimorphism; then `0 ⟶ 𝒢_Z I ⟶ I ⟶ j_* j^* I ⟶ 0` is exact. -/
+open part is an epimorphism; then `0 ⟶ 𝒢_Z I ⟶ I ⟶ j_* j^* I ⟶ 0` is exact. As for
+`AlgebraicGeometry.Etale.supportedSections`, this is the étale (not pro-étale) version. -/
 def IsFlasqueFor (I : Sheaf X.smallEtaleTopology A) : Prop :=
   Epi ((upperStarLowerStarAdjunction A j).unit.app I)
 
