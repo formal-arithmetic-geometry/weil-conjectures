@@ -25,7 +25,11 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-model-colimit-localization-comparison",
+  "def-coef-simplicial-tensor-cotensor",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-simplicial-presheaf-projective-model"
  ],
  "proof": [
   {
@@ -176,5 +180,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CombinatorialPresheafPresentation",
+  "declaration": "SSet.ProjectivePresheaf.combinatorial_presheaf_presentation",
+  "declarations": [
+   "SSet.ProjectivePresheaf.precomposition",
+   "SSet.ProjectivePresheaf.combinatorial_presheaf_presentation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CombinatorialPresheafPresentation.lean",
+  "statement": "theorem combinatorial_presheaf_presentation (M : Type (max (u + 1) v)) [Category.{u} M] [ModelCategory M] [HasLimitsOfSize.{u, u} M] [HasColimitsOfSize.{u, u} M] (_hM : CombinatorialModelCategory.{max (u + 1) v, u, u} M) : ∃ (D : Type u) (_ : SmallCategory D) (p : ModelCategory (Dᵒᵖ ⥤ SSet.{u})), p.categoryWithWeakEquivalences.weakEquivalences = (KanQuillen.weakEquivalenceStructure.weakEquivalences).functorCategory Dᵒᵖ ∧ p.categoryWithFibrations.fibrations = (modelCategoryQuillen.J.rlp).functorCategory Dᵒᵖ ∧ @CombinatorialModelCategory.{u + 1, u, u} _ _ p ∧ ∃ (Q T : (Dᵒᵖ ⥤ SSet.{u}) ⥤ (Dᵒᵖ ⥤ SSet.{u})) (q : Q ⟶ 𝟭 _) (t : 𝟭 _ ⟶ T), (∀ A : Dᵒᵖ ⥤ SSet.{u}, p.categoryWithCofibrations.cofibrations (initial.to (Q.obj A)) ∧ p.categoryWithFibrations.fibrations (q.app A) ∧ p.categoryWithWeakEquivalences.weakEquivalences (q.app A)) ∧ (∀ Z : Dᵒᵖ ⥤ SSet.{u}, p.categoryWithFibrations.fibrations (terminal.from (T.obj Z)) ∧ p.categoryWithCofibrations.cofibrations (t.app Z) ∧ p.categoryWithWeakEquivalences.weakEquivalences (t.app Z)) ∧ ∃ (I : Type u) (s : I → Arrow (Dᵒᵖ ⥤ SSet.{u})) (m : ModelCategory (Dᵒᵖ ⥤ SSet.{u})), m.categoryWithCofibrations.cofibrations = p.categoryWithCofibrations.cofibrations ∧ (∀ (A B : Dᵒᵖ ⥤ SSet.{u}) (f : A ⟶ B), m.categoryWithWeakEquivalences.weakEquivalences f ↔ ∀ Z : Dᵒᵖ ⥤ SSet.{u}, p.categoryWithFibrations.fibrations (terminal.from Z) → (∀ i : I, Enhanced.IsWeakHomotopyEquivalence (precomposition (Q.map (s i).hom) (T.obj Z))) → Enhanced.IsWeakHomotopyEquivalence (precomposition (Q.map f) (T.obj Z))) ∧ @CombinatorialModelCategory.{u + 1, u, u} _ _ m ∧ (∀ (A B A' : Dᵒᵖ ⥤ SSet.{u}) (i : A ⟶ B) (w : A ⟶ A'), m.categoryWithCofibrations.cofibrations i → m.categoryWithWeakEquivalences.weakEquivalences w → m.categoryWithWeakEquivalences.weakEquivalences (pushout.inl i w)) ∧ ∃ E : SimplicialCategory (Dᵒᵖ ⥤ SSet.{u}), IsUsualEnrichment E ∧ @CategoryTheory.SimplicialModelLocalization.SatisfiesSM7 _ _ p E ∧ @CategoryTheory.SimplicialModelLocalization.SatisfiesSM7 _ _ m E ∧ ∃ U : @SimplicialTensorCotensor _ _ E, (∀ (K : SSet.{u}) (F : Dᵒᵖ ⥤ SSet.{u}), U.tensor K F = tensor K F) ∧ (∀ (K : SSet.{u}) (F : Dᵒᵖ ⥤ SSet.{u}), U.cotensor K F = cotensor K F) ∧ ∃ (L : (Dᵒᵖ ⥤ SSet.{u}) ⥤ M) (R : M ⥤ (Dᵒᵖ ⥤ SSet.{u})) (adj : L ⊣ R), (∀ (A B : Dᵒᵖ ⥤ SSet.{u}) (f : A ⟶ B), m.categoryWithCofibrations.cofibrations f → Cofibration (L.map f)) ∧ (∀ (A B : Dᵒᵖ ⥤ SSet.{u}) (f : A ⟶ B), m.categoryWithCofibrations.cofibrations f → m.categoryWithWeakEquivalences.weakEquivalences f → Cofibration (L.map f) ∧ WeakEquivalence (L.map f)) ∧ ∀ (A : Dᵒᵖ ⥤ SSet.{u}) (Y : M) (f : L.obj A ⟶ Y), m.categoryWithCofibrations.cofibrations (initial.to A) → IsFibrant Y → (WeakEquivalence f ↔ m.categoryWithWeakEquivalences.weakEquivalences (adj.homEquiv A Y f))",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing ordinary combinatorial model, projective presheaf enrichment, tensor/cotensor and SM7 interfaces. The concrete precomposition helper supplies the canonical derived mapping-space maps. Added statement dependencies are already landed nodes owning these interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7294bd835",
+  "group": "Q132",
+  "result": "fix",
+  "note": "Lean signature and compile pass; supplied complete replacement report fixing H1/H11 because the delivered second-reading section was only a disclaimer."
  }
 }

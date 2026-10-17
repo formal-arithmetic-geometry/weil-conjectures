@@ -27,7 +27,13 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-spaces-kappa-limit-filtered-colimit",
+  "lem-coef-infinity-limits-products-pullbacks",
+  "lem-coef-infinity-colimit-gluing"
  ],
  "proof": [
   {
@@ -308,5 +314,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiftedNerveIndexCalculus",
+  "declaration": "SSet.Enhanced.SiftedIndex.sifted_nerve_index_calculus",
+  "declarations": [
+   "SSet.Enhanced.SiftedIndex.IsFinal",
+   "SSet.Enhanced.SiftedIndex.diagonal",
+   "SSet.Enhanced.SiftedIndex.PreservesFiniteProducts",
+   "SSet.Enhanced.SiftedIndex.ordinaryInsertion",
+   "SSet.Enhanced.SiftedIndex.ordinaryCocone",
+   "SSet.Enhanced.SiftedIndex.insertion",
+   "SSet.Enhanced.SiftedIndex.CanonicalComparison",
+   "SSet.Enhanced.SiftedIndex.sifted_nerve_index_calculus"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SiftedNerveIndexCalculus.lean",
+  "statement": "theorem sifted_nerve_index_calculus : (∀ (K : SSet.{u}) [Quasicategory K], Nonempty (CategoryTheory.Spaces.InterchangeColimit (SSet.uliftFunctor.{u + 1}.obj K)) ∧ ∀ L : CategoryTheory.Spaces.InterchangeColimit (SSet.uliftFunctor.{u + 1}.obj K), (PreservesFiniteProducts L ↔ Nonempty (K _⦋0⦌) ∧ IsFinal.{u, v} (lift (𝟙 K) (𝟙 K))) ∧ (PreservesFiniteProducts L → IsContractible K ∧ ∀ n : ℕ, IsFinal.{u, v} (diagonal K n))) ∧ (∀ (I : Type u) [SmallCategory I], (Nonempty ((nerve I) _⦋0⦌) ∧ IsFinal.{u, v} (lift (𝟙 (nerve I)) (𝟙 (nerve I)))) → Nonempty I ∧ IsConnected I ∧ (∀ n : ℕ, (Functor.pi' (fun _ : Fin n ↦ 𝟭 I)).Final) ∧ (∀ (n : ℕ) (C : Fin n → Type v) [∀ a, Category.{w} (C a)] (E : Type v) [Category.{w} E] [∀ a, HasColimitsOfSize.{u, u} (C a)] [HasColimitsOfSize.{u, u} E] (F : (∀ a, C a) ⥤ E), (∀ (a : Fin n) (x : ∀ b, C b), PreservesColimitsOfSize.{u, u} (ordinaryInsertion C x a ⋙ F)) → ∀ X : ∀ a, I ⥤ C a, IsIso (colimit.desc (Functor.pi' X ⋙ F) (ordinaryCocone F X))) ∧ (∀ (n : ℕ) (C : Fin n → SSet.{max (u + 1) v}) [∀ a, Quasicategory (C a)] (E : SSet.{max (u + 1) v}) [Quasicategory E], (∀ a, Presentability.HasSmallColimits.{u, max (u + 1) v} (C a)) → Presentability.HasSmallColimits.{u, max (u + 1) v} E → ∀ F : ∏ᶜ C ⟶ E, (∀ (a : Fin n) (x : ∀ b, C b _⦋0⦌), Presentability.PreservesColimitsIn (insertion C x a ≫ F) (fun J _ _ ↦ Presentability.IsSmall.{u, max (u + 1) v} J)) → ∀ (X : ∀ a, SSet.uliftFunctor.{max (u + 1) v}.obj (nerve I) ⟶ C a) (p : ∀ a, (coconeCategory (X a)) _⦋0⦌), (∀ a, IsColimiting (X a) (p a)) → CanonicalComparison F X p)) ∧ (Nonempty ((nerve SimplexCategoryᵒᵖ) _⦋0⦌) ∧ IsFinal.{0, max u v} (lift (𝟙 (nerve SimplexCategoryᵒᵖ)) (𝟙 (nerve SimplexCategoryᵒᵖ))))",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Full space-valued finite-product characterization, weak contractibility, every finite coherent/ordinary diagonal, both canonical finite-arity comparisons including n=0, and the opposite simplex nerve. Reuses the published InterchangeColimit, PreservesLimitsOfShape, coherent cocones and Algebroid.power. CanonicalComparison pins the entire product cocone by its projections; heterogeneous equality supplies the canonical transport along Pi.lift_π. Additional stmt_deps are landed interfaces, with no cycle. No separate siftedness predicate is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b8a1e9e18",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Clause-by-clause statement, dependencies, source, declarations, edge cases, docstrings, and immutable delivery report checked; scompile.py reproduced cleanly with no fixes needed."
  }
 }

@@ -216,5 +216,27 @@
   "group": "Q73",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-80f7b982c (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 4 steps, every cited statement, the parent lem-kun-0ezt, Stacks 0EYM (how the map is built) and 0EZT (proof of (2)), Remarks 07A7 and 0E47 in sites-cohomology, and the main-20261015 0ezt proof, which says no separate proof is given. The statement typechecks and the exchange orientations are right. It is exactly what 0ezt uses, with the transition cube and the projection cube and a coefficient morphism that need not be invertible. I tested it on q=0, on the all-identity cube, on phi=0, and on F_0=0 or F_1=0, and it holds in each case. It is not a restatement of the derived cube. Steps 1 to 3 are correct: the cube is applied with its exact face equalities, step 2 is plain naturality, and step 3 makes the cohomology identification natural through localization (2) and (3) and composition clause (2). C4/E5 fault in step 4, fixed: the step applied lem-kun-bc-map-on-cohomology, which is about Ex_square from def-weil-pbc-derived-exchange, to the cube's E_b, which are commutative-square mates. It never said why the two are the same. I added that argument. theta_square is c^{-1}∘c along fg'=gf' (blueprint_update of def-weil-pbc-cartesian-square, and lem-weil-pbc-square-iso-pasting). Its derived class therefore equals the commutative theta by composition clause (2) and localization (3), and the mates of equal isomorphisms are equal. This is the same repair made to lem-kun-0eym step 5. I added the matching uses and proof_deps. I also declared the tool use lem-weil-pbc-derived-inverse-image-composition, which was off-route and undeclared. Accepted tool uses: exact-functor cohomology, localization universal property, inverse-image composition. No new nodes, no SGA, no cycle. Duplicate search found none. The corrected item is at fixes/dag/nodes/sec-smooth-purity/lem-kun-higher-exchange-coefficient-cube.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.KunHigherExchangeCoefficientCube",
+  "declaration": "AlgebraicGeometry.Etale.abelianHigherExchange_coefficient_cube",
+  "declarations": [
+   "AlgebraicGeometry.Etale.abelianHigherExchange",
+   "AlgebraicGeometry.Etale.abelianHigherExchange_coefficient_cube"
+  ],
+  "file": "lean/Sheaf/Paper/KunHigherExchangeCoefficientCube.lean",
+  "statement": "theorem abelianHigherExchange_coefficient_cube {X₀ Y₀ S₀ T₀ X₁ Y₁ S₁ T₁ : Scheme.{u}} {h₀ : Y₀ ⟶ X₀} {e₀ : Y₀ ⟶ T₀} {f₀ : X₀ ⟶ S₀} {g₀ : T₀ ⟶ S₀} {h₁ : Y₁ ⟶ X₁} {e₁ : Y₁ ⟶ T₁} {f₁ : X₁ ⟶ S₁} {g₁ : T₁ ⟶ S₁} {x : X₁ ⟶ X₀} {y : Y₁ ⟶ Y₀} {s : S₁ ⟶ S₀} {a : T₁ ⟶ T₀} (sq₀ : ChosenCartesianSquare e₀ h₀ g₀ f₀) (sq₁ : ChosenCartesianSquare e₁ h₁ g₁ f₁) (sqf : CommSq x f₁ f₀ s) (sqg : CommSq a g₁ g₀ s) (sqh : CommSq y h₁ h₀ x) (sqe : CommSq y e₁ e₀ a) (F₀ : Sheaf T₀.smallEtaleTopology AddCommGrpCat.{u + 1}) (F₁ : Sheaf T₁.smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : ((a)^*[AddCommGrpCat.{u + 1}]).obj F₀ ⟶ F₁) (q : ℕ) : (squareUpperStarIso AddCommGrpCat.{u + 1} sqf).inv.app ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((g₀)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F₀))) ≫ ((f₁)^*[AddCommGrpCat.{u + 1}]).map (abelianHigherExchange sqg F₀ q ≫ (DerivedCategory.Plus.singleFunctor _ 0 ⋙ (g₁)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map φ) ≫ abelianHigherExchange sq₁.toCommSq F₁ q = ((x)^*[AddCommGrpCat.{u + 1}]).map (abelianHigherExchange sq₀.toCommSq F₀ q) ≫ abelianHigherExchange sqh (((e₀)^*[AddCommGrpCat.{u + 1}]).obj F₀) q ≫ (DerivedCategory.Plus.singleFunctor _ 0 ⋙ (h₁)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map ((squareUpperStarIso AddCommGrpCat.{u + 1} sqe).inv.app F₀ ≫ ((e₁)^*[AddCommGrpCat.{u + 1}]).map φ)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ff602b091",
+  "group": "NI",
+  "result": "fix",
+  "note": "Wrote review.md and a complete replacement report under fixes, repairing the placeholder second reading (H11). All statement clauses, dependencies, canonical maps, universes, and edge cases checked; Lean signature matches verbatim and scompile.py passed both module checks. Mathematics and Lean accepted unchanged."
  }
 }
