@@ -119,8 +119,7 @@ theorem GaloisCover.exists_stalk_finiteEtale_model {S C : Scheme.{u}} [IsNoether
   let f := PA.obj.hom ≫ (c ⁻¹ᵁ U).ι
   let l := pullback.fst c (S.fromSpecStalk s)
   have hfin : IsFinite (pullback.snd f.fromNormalization l) :=
-    GaloisCover.stalk_normalization_finite hS c G hG q j hCη Z U hηU
-      jU PA ψ hjU hψ s hs hmin
+    stalk_normalization_finite hS c q j hCη U PA s
   have het : Etale (pullback.snd f.fromNormalization l) :=
     GaloisCover.stalk_normalization_etale hS c σ hσ G hG q j hCη sη hsq hsj
       Z hZ U hηU jU PA ψ hjU hψ s hs hmin hfin
