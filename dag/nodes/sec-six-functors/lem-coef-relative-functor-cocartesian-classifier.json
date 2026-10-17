@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "lem-coef-cocartesian-straightening"
+  "lem-coef-cocartesian-straightening",
+  "lem-cbc-enhanced-relative-exponential"
  ],
  "proof": [
   {
@@ -288,5 +289,35 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-a1b77e698 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps and the full statements of all 16 cited nodes. The delivery has no new nodes. The statement is retained. It is HTT Cor. 3.2.2.13 with constant target C, which is the dual variance of GHN Def. 7.2/Prop. 7.3 as used in Cor. 9.9(2). Neither source is archived in literature/; the report records WANTED for both and proof_origin.by=agent. Variance checked: f:b->b' gives f^*:Z_{b'}->Z_b, so (-)∘f^* is covariant, matching cocartesian V_C. Small cases checked: Z empty, p=id, C empty, T empty, degenerate edges. Step checks: Steps 1-2 are exactly the construction and relative-Hom bijection of lem-cbc-enhanced-relative-exponential at K=T×Δ^r; functor-cone calculus allows any simplicial domain T, so the sections form a simplicial isomorphism. Step 3 is literal degreewise naturality, correctly marked elementary. Step 4: pointwise transport applies to p^op and to v once the mapping criterion converts the horn conditions; the universal evaluation of paired lifts gives F(f^*z)->(f_!F)(z), inverted by the edge criterion. Step 5: 0 is final in (Δ^n)^op, and composition-initiality 2-of-3 cancellation is used correctly. Step 6: the trivial Kan fibration of arrow-projection makes the lift choices coherent; straightening's transport-image and contractible-choice clauses identify the classifier. This step is the least detailed but adequate. Step 7: relative marked-anodyne pullback detection reduces the criterion to the pairs (η,ε); Cartesian edges over identities are equivalences. Step 8: Cartesian implies Joyal fibration implies isofibration, then the isofibration pullback-limit node applies with no hypothesis on t. Step 9: Joyal factorization plus categorical base change applied to p^op. proof_deps equals the union of the uses; all dependencies exist and none is merged; no cycle. A DAG rg found no duplicate: relative-exponential is a strict sub-statement, and the item is not a restated clause of its parent lem-coef-ghn-ind-presheaf-cartesian-realization, which uses it at C=S. Accepted tool_uses: lem-cbc-enhanced-relative-exponential and lem-cbc-enhanced-functor-cone-calculus, both generic quasicategory tools with no replacement in unit sk-prop-sf-biduality-general. No SGA is cited. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeFunctorCocartesianClassifier",
+  "declaration": "SSet.Enhanced.RelativeFunctorClassifier.relative_functor_cocartesian_classifier",
+  "declarations": [
+   "SSet.Enhanced.RelativeFunctorClassifier.SectionComparison",
+   "SSet.Enhanced.RelativeFunctorClassifier.CartesianLift",
+   "SSet.Enhanced.RelativeFunctorClassifier.ExponentialLift",
+   "SSet.Enhanced.RelativeFunctorClassifier.IsTargetFamily",
+   "SSet.Enhanced.RelativeFunctorClassifier.ShapeNaturality",
+   "SSet.Enhanced.RelativeFunctorClassifier.TargetNaturality",
+   "SSet.Enhanced.RelativeFunctorClassifier.BaseChange",
+   "SSet.Enhanced.RelativeFunctorClassifier.Statement",
+   "SSet.Enhanced.RelativeFunctorClassifier.relative_functor_cocartesian_classifier"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeFunctorCocartesianClassifier.lean",
+  "statement": "theorem relative_functor_cocartesian_classifier (B Z : SSet.{u}) (C : SSet.{max u v}) (p : Z ⟶ B) [Quasicategory B] [Quasicategory Z] [Quasicategory C] (hp : cartesianFibration p) : Nonempty (Statement C (SSet.uliftFunctor.{v, u}.map p))",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already constructed relative exponential and its canonical evaluation/fiber maps. All helper structures and predicates spell out this node’s normalized enriched comparison, parameterized naturality, actual straightening classifier, precomposition transport, edge criteria and categorical pullback presentation. Only the main theorem is postponed; no construction is chosen from it."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e91ed81aa",
+  "group": "Q43",
+  "result": "fix",
+  "note": "Statement correct: every node clause matches the Lean. Covered: small Cartesian fibration p, C in max u v with no forced universe equality, landed relativeExponential as V_C, canonical fibre iso, classifier = actual straightening of V_C with edges compared with pre r for every CartesianLift (variance checked), SectionComparison for every simplicial T fixed by universal evaluation, Shape/Target/BaseChange naturality with arbitrary parameters, the (eta,epsilon) preservation iff, the Delta1 edge test, and the infinity-pullback clauses via pullbackCoreComparison. No hollow helpers, only the main theorem is sorry, docstrings carry source, blueprint and all 9 steps, all 16 proof-dependency imports present, record verbatim, stmt_deps gains only the landed lem-cbc-enhanced-relative-exponential. Edge cases checked: empty B, fibres, C, T; p=id; degenerate edges. nt_compile.py --json on both delivered files: rc 0, no messages. Fixes: report.md with a real '## Second reading by Q43' replacing the placeholder, the text error 'HTT the project server' corrected, and a note that the SpaceValuedStraightening noncomputable repair was already landed by Q19 (93990d0775); the delivered copy differs only by a trailing blank line, harmless. Optional: --revert-nodes lem-coef-space-valued-straightening keeps Q19's lean.by attribution.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }

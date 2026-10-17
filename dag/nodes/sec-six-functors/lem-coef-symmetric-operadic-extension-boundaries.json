@@ -29,7 +29,8 @@
   "def-coef-infinity-fibrations",
   "lem-coef-operadic-approximation-restriction",
   "lem-coef-active-operad-cocartesian-concatenation",
-  "lem-coef-infinity-slice-right-fibration"
+  "lem-coef-infinity-slice-right-fibration",
+  "def-coef-relative-symmetric-operadic-algebras"
  ],
  "proof": [
   {
@@ -243,5 +244,32 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-e0cc887e9 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full (HA is not archived locally). I checked the HA places from my own knowledge of the text: Def 2.3.2.10, Def 3.1.1.2/Rem 3.1.1.5, Def 3.1.2.2, Thm 3.1.2.3(B), Rem 3.1.3.15, Lem 3.1.3.16 and the proof of Prop 3.1.3.2. The item statement is the relative-initial boundary criterion for free extensions in T = Fun(Δ1,A)×_{A,u*}B. It holds for n=1 and n=2 and matches the parent's use. All seven steps check out. Step 1: the cylinder's boundary lifting gives an exact lift; I verified independently that this clause holds because j is a mono categorical equivalence and q is a categorical fibration, and inert edges lie only in the endpoint fibres. Step 2: the last paragraph of lem-coef-relative-marked-anodyne-calculus applies to q^op. Step 4: I checked the prism faces and intersections by hand (Λ^{n+1}_k, n=1 case included). Step 5: lem-coef-cocartesian-categorical-base-change with S=Δ1, Z=M and t cocartesian, then Joyal lifting. Step 6: the first edge is {0}×Δ1, which carries the free vertex, and m=n+1≥2. Steps 3 and 7 are exact gluing and restriction. New nodes: the definition matches HA 2.3.2.10/3.1.1.2/3.1.2.2, including r=0 and empty J. The left-horn lemma is HA 3.1.2.3(B) for cocartesian q. The cylinder is true: I built one from the operadic collage with relative cell attachment, which keeps the fibres exactly P and Q. No duplicates found: the existing operadic nodes are nonsymmetric or state other things. No restated clauses, no cycle, no SGA, no tool_uses. FIX (B3): the cylinder node said 'classified by u', which no cited node defines. I replaced it with the concrete statement that t is cocartesian with j({p}×Δ1): p→u(p) t-cocartesian, and added def-coef-infinity-fibrations to stmt_deps. The whole corrected file is at fixes/dag/nodes/sec-six-functors/lem-coef-symmetric-operadic-mapping-cylinder.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SymmetricOperadicExtensionBoundaries",
+  "declaration": "SSet.Enhanced.symmetric_operadic_extension_boundaries",
+  "declarations": [
+   "SSet.Enhanced.operadicBoundaryActiveMap",
+   "SSet.Enhanced.IsOperadicBoundaryTensor",
+   "SSet.Enhanced.operadicBoundarySecondEdge",
+   "SSet.Enhanced.OperadicBoundaryLocalCondition",
+   "SSet.Enhanced.symmetric_operadic_extension_boundaries"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SymmetricOperadicExtensionBoundaries.lean",
+  "statement": "theorem symmetric_operadic_extension_boundaries {E O P Q : SSet.{u}} (bE : E ⟶ finStarBase.{u}) (bO : O ⟶ finStarBase.{u}) (bP : P ⟶ finStarBase.{u}) (bQ : Q ⟶ finStarBase.{u}) (q : E ⟶ O) (v : Q ⟶ O) (u : P ⟶ Q) (hE : IsSymmetricInfinityOperad bE) (hO : IsSymmetricInfinityOperad bO) (hP : IsSymmetricInfinityOperad bP) (hQ : IsSymmetricInfinityOperad bQ) (hq : IsSymmetricOperadMap bE bO q) (hv : IsSymmetricOperadMap bQ bO v) (hu : IsSymmetricOperadMap bP bQ u) (hqfib : cocartesianFibrationOver q) (n : ℕ) (hn : 0 < n) (b : Δ[n] ⟶ relativeOperadicAlgebras bP bE (u ≫ v) q) (h₀ : (boundary n).toSSet ⟶ operadicTriples (relativeOperadicRestriction bP bQ bE v q u hu)) (hboundary : h₀ ≫ operadicTripleSource (relativeOperadicRestriction bP bQ bE v q u hu) = (boundary n).ι ≫ b) (hlocal : OperadicBoundaryLocalCondition bE bO bP bQ q v u hq hu (h₀.app _ ⟨stdSimplex.obj₀Equiv.symm 0, by rw [boundary_obj_eq_univ 0 n hn]; trivial⟩)) : ∃ h : Δ[n] ⟶ operadicTriples (relativeOperadicRestriction bP bQ bE v q u hu), h ≫ operadicTripleSource (relativeOperadicRestriction bP bQ bE v q u hu) = b ∧ (boundary n).ι ≫ h = h₀",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the landed relative algebra restriction and coherent triple category. The local path-pullback square is expressed equivalently on its homotopy fibers at every target cocone with color apex, using right-pinched mapping spaces of the coherent cocone categories and the actual postcomposition functor, the landed SSet.Enhanced.coconePostcompose of lem-coef-infinity-cofinal-coslice-calculus (reviewer fix: the delivered duplicate operadicBoundaryCoconeMap, identical data, is removed). Binary concatenations are normalized by the dependency active envelope and its inert/fold transport. All four helper definitions belong to this assertion; no construction is chosen from a postponed existence theorem.",
+  "fixed_by": "NT-stage2-cc-c4a40305c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c4a40305c",
+  "group": "Q23",
+  "result": "fix",
+  "note": "Read node, report, module, and all used declarations (RelativeSymmetricOperadicAlgebras, EnhancedDiagramsCones, ActiveOperadCocartesianConcatenation, cocartesianFibrationOver, Mathlib boundary). Every hypothesis and conclusion clause matches: A/B/u*/T/r are the landed constructions; J_d is the arrow-model active slice; c_d is the coherent composite fixed by tau; concatenation is tested over all normalized t, which exist and are equivalent; the homotopy-pullback square is tested as weak equivalence of homotopy-fibre maps (cocone-category mapping spaces) at every colour-apex cocone; n>0, exact boundary equalities, local condition at vertex 0. Edge cases (n=1, empty J_d, empty Z) and the single-universe convention are fine; lean.statement is verbatim; the added landed stmt_dep is permitted. Finding H4: operadicBoundaryCoconeMap duplicates the landed SSet.Enhanced.coconePostcompose (lem-coef-infinity-cofinal-coslice-calculus) with identical data. Fixed in fixes/SymmetricOperadicExtensionBoundaries.lean (import InfinityCofinalCosliceCalculus, use coconePostcompose, signature unchanged) and fixes/lem-coef-symmetric-operadic-extension-boundaries.lean-record.json (declarations and note). No dependency cycle. nt_compile: delivered file clean (6.7 s); fixed file clean (3.7 s and 7.4 s); an injected-error control fails with exit 1."
  }
 }

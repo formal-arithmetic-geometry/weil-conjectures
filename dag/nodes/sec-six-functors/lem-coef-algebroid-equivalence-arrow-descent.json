@@ -147,5 +147,34 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-7d81bb402 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources and route. Corrected step 3's reversed indexing arrow to [0]→[n] in Δᵒᵖ. Fiberwise descent proves the unchanged statement without completeness assumptions. No new nodes or dependency cycle. Complete corrected JSON and detailed review.md supplied.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AlgebroidEquivalenceArrowDescent",
+  "declaration": "SSet.Enhanced.Algebroid.algebroid_equivalence_arrow_descent",
+  "declarations": [
+   "SSet.Enhanced.Algebroid.EndpointIndex",
+   "SSet.Enhanced.Algebroid.endpointRestrictionIndex",
+   "SSet.Enhanced.Algebroid.endpointCocone",
+   "SSet.Enhanced.Algebroid.descentAlgebroidEdge",
+   "SSet.Enhanced.Algebroid.EndpointBoundary",
+   "SSet.Enhanced.Algebroid.endpointSquareLegs",
+   "SSet.Enhanced.Algebroid.IsEndpointCartesian",
+   "SSet.Enhanced.Algebroid.algebroid_equivalence_arrow_descent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AlgebroidEquivalenceArrowDescent.lean",
+  "statement": "theorem algebroid_equivalence_arrow_descent {E : SSet.{max (u + 1) v}} [Quasicategory E] (p : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (hp : IsPresentablyMonoidal.{u, v} p) (unit : UnitSection p) (D : GeometricDescent.index.{max (u + 1) v} GeometricDescent.AugmentedIndex ⟶ uliftFunctor.{max (u + 1) v + 1}.obj (total.{u, v} p)) (hstructure : ∀ (j k : SimplexCategoryᵒᵖ) (f : j ⟶ k), IsFullyFaithful (descentAlgebroidEdge D (WithTerminal.incl.map f)) ∧ IsEssentiallySurjective unit (algebroidArrow (descentAlgebroidEdge D (WithTerminal.incl.map f)))) (hcocone : ∀ n : SimplexCategoryᵒᵖ, IsFullyFaithful (descentAlgebroidEdge D (WithTerminal.homFrom n))) (hobjects : GeometricDescent.IsColimitCocone (GeometricDescent.indexMap (GeometricDescent.column (WithInitial.of (Discrete.mk (0 : Fin 2)) : EndpointIndex)) ≫ endpointCocone unit D)) : (∀ (j k : SimplexCategoryᵒᵖ) (f : j ⟶ k), IsEndpointCartesian (endpointCocone unit D) (WithTerminal.incl.map f)) ∧ (∀ n : SimplexCategoryᵒᵖ, IsEndpointCartesian (endpointCocone unit D) (WithTerminal.homFrom n)) ∧ GeometricDescent.IsColimitCocone (GeometricDescent.indexMap (GeometricDescent.column (WithInitial.star : EndpointIndex)) ≫ endpointCocone unit D)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the natural I₀ ≃ U identification of the recorded equivalence-nerve dependency. A homotopy pullback over object-space squares is expressed as the identical limit with both products expanded into their endpoint factors. The canonical I₁ comparison equivalence is expressed by colimitingness of its specified augmented coherent cocone; the realization squares use I₁(B) via that equivalence. All endpoint maps and all higher coherence simplices are the restriction of nerveBifunctor, not independent supplied maps. No completeness assumption and no node statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bfc7f7827",
+  "group": "ND",
+  "result": "pass",
+  "note": "Checked node, report sections, both dependency nodes and their Lean (CompleteAlgebroid total/IsFullyFaithful/IsEssentiallySurjective/IsPresentablyMonoidal; AlgebroidEquivalenceNerve nerveBifunctor/nerveSource/algebroidArrow; SpaceGeometricDescent IsLimitingConeAt/IsColimitCocone/AugmentedIndex/column/selectArrow). Non-lean node fields identical to side clone; lean.statement verbatim; 8 declarations with source+blueprint docstrings; single sorry. Clause match: hstructure FF+ES on all Δop arrows incl. identities and degeneracies, hcocone FF only, hobjects = colimiting I0 cocone (I0≃U recorded), conjunct 1 = 5-object limit Y_k×_{X_k²}X_j² over both endpoints, conjunct 2 uses I1(B)/I0(B) apexes (equivalent to node's realization square given conjunct 3 and hobjects, documented), conjunct 3 = I1 cocone colimiting within one coherent endpointCocone (compatibility over U(B)²); no completeness; universes u,v independent; no hollow defs. nt_compile.py --json on snapshot file: exit 0, no errors, item 2.6 s/4.1 s."
  }
 }

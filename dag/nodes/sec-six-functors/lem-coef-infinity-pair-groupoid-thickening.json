@@ -243,5 +243,33 @@
   "group": "Q106",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q106-096a5c991 (reviewer sub-agent of L); spot-checked: Wrote review.md. The item and cited enhanced-diagram definition were read in full; Scholze Lecture II pp.14–15 and HTT Proposition 5.3.1.16 p.383 were checked. All six coordinate steps are valid, including outer horns, product quasicategory, simpliciality, explicit inverse triangles, strict projection compatibility, and empty-I/small-X cases. No new nodes, duplicates, missing hypotheses, route violations, or repairs were found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.PairGroupoidThickening",
+  "declaration": "SSet.Enhanced.pair_groupoid_thickening",
+  "declarations": [
+   "SSet.Enhanced.pairGroupoidCoordinateFunctor",
+   "SSet.Enhanced.pairGroupoidNerveCylinder",
+   "SSet.Enhanced.pairGroupoidProduct",
+   "SSet.Enhanced.pairGroupoidProjection",
+   "SSet.Enhanced.pairGroupoidSection",
+   "SSet.Enhanced.pairGroupoidCylinder",
+   "SSet.Enhanced.pair_groupoid_thickening"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/PairGroupoidThickening.lean",
+  "statement": "theorem pair_groupoid_thickening {I : SSet.{u}} (hI : I.Quasicategory) (X : Type u) (x₀ : X) : ((nerve (Codiscrete X)).KanComplex ∧ (pairGroupoidProduct I X).Quasicategory ∧ pairGroupoidSection I X x₀ ≫ pairGroupoidProjection I X = 𝟙 I ∧ SSet.Enhanced.IsFunctorEquivalence (pairGroupoidProjection I X) ∧ SSet.Enhanced.AreNaturallyEquivalent (pairGroupoidProjection I X ≫ pairGroupoidSection I X x₀) (𝟙 _) ∧ SSet.Enhanced.AreNaturallyEquivalent (pairGroupoidSection I X x₀ ≫ pairGroupoidProjection I X) (𝟙 _) ∧ ∃ e : ((ihom (pairGroupoidProduct I X)).obj (pairGroupoidProduct I X)) _⦋1⦌, e = SSet.yonedaEquiv (MonoidalClosed.curry (pairGroupoidCylinder I X x₀)) ∧ ((ihom (pairGroupoidProduct I X)).obj (pairGroupoidProduct I X)).δ 1 e = diagramVertex (pairGroupoidProjection I X ≫ pairGroupoidSection I X x₀) ∧ ((ihom (pairGroupoidProduct I X)).obj (pairGroupoidProduct I X)).δ 0 e = diagramVertex (𝟙 (pairGroupoidProduct I X)) ∧ IsEquivalenceEdge ((ihom (pairGroupoidProduct I X)).obj (pairGroupoidProduct I X)) e ∧ pairGroupoidCylinder I X x₀ ≫ pairGroupoidProjection I X = CartesianMonoidalCategory.fst (pairGroupoidProduct I X) Δ[1] ≫ pairGroupoidProjection I X)",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Returned-head repair: the specified cylinder is tied by currying and Yoneda to an equivalence edge with both endpoints; coordinate functor composition gives definitionally reflexive naturality."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4785ed813",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Every node clause is in the Lean theorem with no extra assumptions: Kan nerve of Codiscrete X, product quasicategory, section equation ps=id, IsFunctorEquivalence p plus natural equivalences of both composites for this s, a single edge e = curry of the specified cylinder with endpoints p≫s and 𝟙K that is an equivalence edge, and pη = p pr_K. The coordinate formula and the orientation of vertex 0 of Δ[1] were checked against Mathlib's stdSimplex.isoNerve. Edge cases checked: empty I, one-element X, infinite X, empty X excluded by x₀, a single universe u. Helpers carry real data and the only sorry is the theorem's own. Docstrings give the source place and blueprint tag, the theorem docstring follows all six proof steps, the dependency record is correct, lean.statement matches the file verbatim, and no duplicate was found in Mathlib or side lean/Sheaf. nt_compile.py (--json form) compiled the file cleanly in 5.8 s. The report has a real Worker report and a Second reading by Q87. Only finding: the clause AreNaturallyEquivalent (p≫s) 𝟙 follows from the e clause, which is harmless."
  }
 }

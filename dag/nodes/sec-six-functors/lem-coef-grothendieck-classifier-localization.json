@@ -305,5 +305,49 @@
   "group": "Q43",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-8b82e7267 (reviewer sub-agent of L); spot-checked: I read the item in full: all 10 steps, the statement of every cited node, and Haugseng arXiv:1312.3881v4 online (Def 4.2/4.4, Thm 4.6, Rem 4.7, Lemma 4.8, Cor 4.22). The statement is unchanged and not weakened. It is a genuine proper sublemma of lem-coef-grothendieck-fibre-localization, and there are no new nodes. Step 1: I checked the simplex formula (functoriality of t_J, restriction by strictness of H, composition law (g,w)(f,v)=(gf,w g_!v), marked edges are those with v invertible) against Haugseng Lemma 4.8. Steps 2-9 each use only statement clauses of their cited nodes. Step 4: the lift to WCat_inf is a check of its definition (unions of components, systems closed under homotopy). Step 5: the counit and triangle homotopies are part of 'left adjoint' in the DAG convention (pointwise-adjoint criterion). Step 6: the adjunct direction is correct, and forgetting systems gives beta lambda ~ theta. Step 7: full faithfulness of restriction along lambda_c gives alpha_c, with a contractible space of choices. Step 8: the lift along the isofibration over B=(K x dDelta^1) u (V x Delta^1) gives components exactly J_c. Step 10: the contractibility is assembled from homotopy fibres. Small cases checked: C terminal, W = isomorphisms, an empty fibre. One fault, fixed: step 3 assumed that every cocartesian edge of NT is (f,v) with v invertible, which needs the clause 'fibrant objects are exactly Z^natural' of lem-coef-marked-relative-cartesian-model (same unit, no cycle). I added that citation to step 3 and to proof_deps in fixes/. tool_uses accepted: lem-cbc-marked-relative-nerve-quillen and lem-cbc-enhanced-functor-cone-calculus are generic black boxes from unit sk-prop-sf-cbc. No SGA source is used, and there is no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GrothendieckClassifierLocalization",
+  "declaration": "SSet.Enhanced.GrothendieckClassifierLocalization.grothendieck_classifier_localization",
+  "declarations": [
+   "SSet.Enhanced.GrothendieckClassifierLocalization.nerveDiagram",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.ordinaryDiagram",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.triangles",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.trianglesMap",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.allFibers",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.RelativeData",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.nerveSystem",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.coCartArrow",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.OrdinaryClassification",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.Replacement",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.classified",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.atObject",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.LocalData",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.endpointPath",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.compositePath",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.triangleCoherence",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.underArrow",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.InvertsSystems",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.localizingUnder",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.localizationChoices",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.Comparison",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.ClassifierStatement",
+   "SSet.Enhanced.GrothendieckClassifierLocalization.grothendieck_classifier_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/GrothendieckClassifierLocalization.lean",
+  "statement": "theorem grothendieck_classifier_localization : Nonempty ClassifierStatement.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Retained intrinsic representatives, actual ordinary Grothendieck total and marking, coherent classifying diagrams and pointwise units, specified fibre functors and factorization homotopies, normalized straightening/unstraightening triangles, and contractible localization and comparison spaces. Initiality in the full coherent system-inverting undercategory expresses the natural localization-adjunction construction. Every helper belongs to this node and has real data; only the main existence theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14fb6bd68",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim; the 23 recorded declarations match the file. Every hypothesis matches the node with nothing stronger: small C, strict H, systems W with isos and transitions, Mathlib Grothendieck H with toTransport lifts, intrinsic p, q over NC preserving only the chosen lifts, LocalData units in the dependency's universal-arrow form, specified J_c and factorization edge. Every conclusion clause is present: classification by NH with iso-fibre marking; H_inf initial in the undercategory of system-inverting maps (checked comma direction); equivalence edge with components J_c; 2-simplex with the unit and straightened q (orientation checked); unstraightened total equivalence; contractible choice spaces. Edge cases: empty C, empty fibres, terminal C, W=isos, W=all arrows; single universe u. No hollow defs, only the main theorem is sorry, docstrings carry source/blueprint and the 10 proof steps, lines <=100, no duplicate notion. Compiled via nt_compile.py --json: clean, 15.2 s, rc 0 (diagnostics printing verified with a probe file). Minor observation: total_fibres uses an unconstrained unstraightenedFibre, but the fibre identification is carried by unstraightening_triangle and comparison_components, and the dependency exposes its fibre identifications only existentially. The second-reading section is the standard 2026-10-17 direct-delivery placeholder."
  }
 }

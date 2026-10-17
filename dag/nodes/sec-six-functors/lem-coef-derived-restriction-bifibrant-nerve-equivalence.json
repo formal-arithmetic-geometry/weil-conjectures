@@ -267,5 +267,29 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-f456a8b54 (reviewer sub-agent of L); spot-checked: Read the item, report, required DAG/route documents, all five cited node statements, Higher Algebra §§1.3.4.20–21 and Remark 1.3.4.27, and checked edge cases and hypotheses. Two substantive arguments were incorrectly marked elementary (steps 2 and 6); the item source still named HTT despite HA theorem references. Corrected whole DAG JSON is in fixes/dag/nodes/sec-six-functors/lem-coef-derived-restriction-bifibrant-nerve-equivalence.json; review.md records the checks. No nodes were dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedRestrictionBifibrantNerveEquivalence",
+  "declaration": "CategoryTheory.derived_restriction_bifibrant_nerve_equivalence",
+  "declarations": [
+   "CategoryTheory.DerivedRestriction.bifibrantRestriction",
+   "CategoryTheory.DerivedRestriction.nerveMap",
+   "CategoryTheory.derived_restriction_bifibrant_nerve_equivalence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedRestrictionBifibrantNerveEquivalence.lean",
+  "statement": "theorem derived_restriction_bifibrant_nerve_equivalence (M N : Type u) [Category.{v} M] [Category.{v} N] [ModelCategory M] [ModelCategory N] [SimplicialCategory M] [SimplicialCategory N] [HasLimits M] [HasColimits M] [HasLimits N] [HasColimits N] (_hM : CombinatorialModelCategory.{u, v, w} M) (_hN : CombinatorialModelCategory.{u, v, w} N) (_TM : SimplicialTensorCotensor M) (_TN : SimplicialTensorCotensor N) (_hSM : SatisfiesSM7 M) (_hSN : SatisfiesSM7 N) (L : EnrichedFunctor SSet M N) (R : EnrichedFunctor SSet N M) (adj : simplicialUnderlyingFunctor L ⊣ simplicialUnderlyingFunctor R) (_enrichedAdj : ∀ (X : M) (Y : N), IsIso (R.map (L.obj X) Y ≫ eHomWhiskerRight SSet (adj.unit.app X) (R.obj Y))) (_hL : ∀ {X Y : M} (f : X ⟶ Y), Cofibration f → Cofibration ((simplicialUnderlyingFunctor L).map f)) (_hLt : ∀ {X Y : M} (f : X ⟶ Y), Cofibration f → WeakEquivalence f → Cofibration ((simplicialUnderlyingFunctor L).map f) ∧ WeakEquivalence ((simplicialUnderlyingFunctor L).map f)) (_hEquiv : ∀ (X : M) (Y : N), IsCofibrant X → IsFibrant Y → ∀ f : L.obj X ⟶ Y, WeakEquivalence f ↔ WeakEquivalence (adj.homEquiv X Y f)) (Q : EnrichedFunctor SSet M M) (q : simplicialUnderlyingFunctor Q ⟶ 𝟭 M) (_qEnriched : ∀ X Y : M, Q.map X Y ≫ eHomWhiskerLeft SSet (Q.obj X) (q.app Y) = eHomWhiskerRight SSet (q.app X) Y) (_hQ : ∀ X : M, IsCofibrant (Q.obj X) ∧ Fibration (q.app X) ∧ WeakEquivalence (q.app X)) : ∃ h : ∀ Y : Bif N, IsCofibrant (Q.obj (R.obj Y.obj)) ∧ IsFibrant (Q.obj (R.obj Y.obj)), SSet.Enhanced.IsFunctorEquivalence (DerivedRestriction.nerveMap.{u, v, max u v t} (bifibrantRestriction R Q h)) ∧ (∀ (Z : SSet.{max u v t s}), Z.Quasicategory → ((SSet.hoFunctor.map ((MonoidalClosed.pre (SSet.uliftFunctor.{s}.map (DerivedRestriction.nerveMap.{u, v, max u v t} (bifibrantRestriction R Q h)))).app Z)).toFunctor).IsEquivalence) ∧ ∀ (C D : SSet.{max u v t}) (qM : largeNerve.{u, v, max u v t} M ⟶ C) (qN : largeNerve.{u, v, max u v t} N ⟶ D), C.Quasicategory → D.Quasicategory → IsLocalization (weakEquivalences M) qM → IsLocalization (weakEquivalences N) qN → ∀ (T : N ⥤ N) (tN : 𝟭 N ⟶ T), (∀ Y : N, IsFibrant (T.obj Y) ∧ WeakEquivalence (tN.app Y)) → Nonempty (ReplacementAdjunction.{u, v, u, v, t} adj (simplicialUnderlyingFunctor Q) q T tN qM qN) ∧ ∀ A : ReplacementAdjunction.{u, v, u, v, t} adj (simplicialUnderlyingFunctor Q) q T tN qM qN, SSet.Enhanced.IsEquivalenceEdge ((ihom C).obj C) A.coherent.unitEdge ∧ SSet.Enhanced.IsEquivalenceEdge ((ihom D).obj D) A.coherent.counitEdge ∧ ∀ (eM : SSet.uliftFunctor.{max u v t}.obj (SimplicialNerve (Bif M)) ⟶ C) (eN : SSet.uliftFunctor.{max u v t}.obj (SimplicialNerve (Bif N)) ⟶ D) (jM : largeNerve.{u, v, max u v t} (Bif M) ⟶ SSet.uliftFunctor.{max u v t}.obj (SimplicialNerve (Bif M))) (jN : largeNerve.{u, v, max u v t} (Bif N) ⟶ SSet.uliftFunctor.{max u v t}.obj (SimplicialNerve (Bif N))), SSet.Enhanced.IsFunctorEquivalence eM → SSet.Enhanced.IsFunctorEquivalence eN → IsOrdinaryNerveMap jM → IsOrdinaryNerveMap jN → SSet.Enhanced.AreNaturallyEquivalent (jM ≫ eM) (inclusionNerve (fun X : M ↦ IsCofibrant X ∧ IsFibrant X) ≫ qM) → SSet.Enhanced.AreNaturallyEquivalent (jN ≫ eN) (inclusionNerve (fun Y : N ↦ IsCofibrant Y ∧ IsFibrant Y) ≫ qN) → SSet.Enhanced.AreNaturallyEquivalent (DerivedRestriction.nerveMap.{u, v, max u v t} (bifibrantRestriction R Q h) ≫ eM) (eN ≫ A.right)",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-916c99440"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-916c99440",
+  "group": "Q86",
+  "result": "fix",
+  "note": "Read node, 4 stmt_deps decls (SimplicialModelNerveLocalization, ModelInfinityDerivedAdjunction ReplacementAdjunction, simplicialUnderlyingFunctor/CombinatorialModelCategory, Joyal), HA 1.3.4.20/21/27 place, module, report. Hypotheses/conclusions match clause by clause (enriched adjunction iso direction, Quillen iff, enriched naturality of q, trivial-fibration q, bifibrancy as output, Joyal test direction/universes, Nonempty ReplacementAdjunction + unit/counit equivalence edges, universal comparison nerveMap≫eM ≃ eN≫A.right is true for all normalized eM,eN). Universes bound; common u/v is the node's fixed-universe convention. Statement verbatim; node changes only lean. nt_compile clean (6.6 s; fix 2.4 s, rc 0). FIX: nerveMap duplicated landed CategoryTheory.hammockCoherentNerveMap (H4) -> body now SSet.uliftFunctor.map (hammockCoherentNerveMap F) with public import of HammockInfinityLocalization, signature unchanged; report's garbled HA citation ('Theorem the project server') restored. Optional: add lem-coef-hammock-infinity-localization to stmt_deps (upstream, acyclic)."
  }
 }

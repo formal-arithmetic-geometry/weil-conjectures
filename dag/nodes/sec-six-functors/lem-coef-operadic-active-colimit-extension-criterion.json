@@ -282,5 +282,40 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-42823121a (reviewer sub-agent of L); spot-checked: One commit with the item and its report only; no new nodes. Step 1 checked against the full statements of the four cited nodes. (1) The ordinary n=0 Segal condition makes O_[0] equivalent to a point; all its arrows are then equivalences, so it equals its core. That core is Kan by lem-cbc-enhanced-functor-cone-calculus, which is in unit sk-prop-sf-cbc; the declared tool use is accepted. So u_[0] is an equivalence. (2) I_n is the zigzag of n edges and n+1 vertices; singletons count as inert. Its limit is the stated homotopy pullback, and the vertex factors are contractible by the ordinary empty-product relative-limit clause. This reduces it to the ordinary product condition, and both sides are contractible at n=0. (3) The algebra definitions are identical. (4) O x_P (P_act)_{/b} = O_act x_{P_act} (P_act)_{/b} on all simplices, because u lies over the simplex category; D_{A,b} agrees, including the nullary unit. Step 2 uses only the statement of the same-unit node lem-coef-generalized-active-extension-criterion (unsplit). Its local two-sided tensor-preservation hypothesis is word for word the item's, and its conclusions cover the colimit formula, the Map equivalence, the identity-operation unit and substitution coherence. Edge cases checked: n=0,1, u=id, empty K_b, L or R equal to the unit, terminal V. My transitive-closure computation (535 nodes) shows no cycle; the earlier cycle through def-coef-operadic-correspondence is gone. Duplicate search covered the free-extension, cocomplete-extensions, free-cocone-criterion, active-slice-formula and active-lift nodes: the generalized criterion is a strict generalization, and citing it is sanctioned reuse. The item statement is unchanged and matches the shape of Lurie HA 3.1.3 in local form. I could not open the Gepner-Haugseng PDF: it is not archived and network access is blocked here. The proof takes nothing from it beyond the cited DAG node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicActiveColimitExtensionCriterion",
+  "declaration": "SSet.Enhanced.OperadicActiveExtension.operadic_active_colimit_extension_criterion",
+  "declarations": [
+   "SSet.Enhanced.OperadicActiveExtension.activeBase",
+   "SSet.Enhanced.OperadicActiveExtension.activePart",
+   "SSet.Enhanced.OperadicActiveExtension.activeInclusion",
+   "SSet.Enhanced.OperadicActiveExtension.sliceSubcomplex",
+   "SSet.Enhanced.OperadicActiveExtension.slice",
+   "SSet.Enhanced.OperadicActiveExtension.sliceSource",
+   "SSet.Enhanced.OperadicActiveExtension.sliceOperation",
+   "SSet.Enhanced.OperadicActiveExtension.IsTensorDiagram",
+   "SSet.Enhanced.OperadicActiveExtension.twoSidedTensor",
+   "SSet.Enhanced.OperadicActiveExtension.HasPreservedActiveColimits",
+   "SSet.Enhanced.OperadicActiveExtension.unitOnSlice",
+   "SSet.Enhanced.OperadicActiveExtension.IsSubstitutionCocone",
+   "SSet.Enhanced.OperadicActiveExtension.operadic_active_colimit_extension_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicActiveColimitExtensionCriterion.lean",
+  "statement": "theorem operadic_active_colimit_extension_criterion {O P E : SSet.{max (u + 1) v}} [Quasicategory O] [Quasicategory P] [Quasicategory E] (pO : O ⟶ monoidalSimplexBase.{max (u + 1) v}) (pP : P ⟶ monoidalSimplexBase.{max (u + 1) v}) (q : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (hO : IsChainTwoInfinityOperad pO) (hP : IsChainTwoInfinityOperad pP) (hsmallO : Presentability.IsSmall.{u, max (u + 1) v} O) (hsmallP : Presentability.IsSmall.{u, max (u + 1) v} P) (hq : IsMonoidalInfinityCategory q) (f : O ⟶ P) (hf : IsLaxMonoidalInfinityFunctor pO pP f) (hcolim : HasPreservedActiveColimits pO pP q f) : ∃ (R : InertOperad.algebras pP q ⟶ InertOperad.algebras pO q) (L : InertOperad.algebras pO q ⟶ InertOperad.algebras pP q), R ≫ InertOperad.algebraInclusion pO q = InertOperad.algebraInclusion pP q ≫ (MonoidalClosed.pre f).app E ∧ ∃ adj : HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L R, ∀ (A : (InertOperad.algebras pO q) _⦋0⦌) (b : (monoidalUnderlying pP) _⦋0⦌) (D : slice pO pP f ((monoidalFiberInclusion pP 1).app _ b) ⟶ monoidalUnderlying q) (H : slice pO pP f ((monoidalFiberInclusion pP 1).app _ b) ⊗ Δ[1] ⟶ E), IsTensorDiagram pO pP q f ((monoidalFiberInclusion pP 1).app _ b) A D H → ∃ c : (coconeCategory D) _⦋0⦌, IsColimiting D c ∧ IsSubstitutionCocone pO pP q f ((monoidalFiberInclusion pP 1).app _ b) adj A H c",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper declarations give literal active slices, tensor-operation cylinders, preserved colimit hypotheses, and substitution-normalized cocones. Activity reuses SSet.Enhanced.Operadic.IsActiveArrow and IsActiveEdge from Sheaf.CategoryTheory.OperadicCorrespondence (node def-coef-operadic-correspondence, already upstream of this item through the proof dependency lem-coef-generalized-active-extension-criterion), removing the H4 duplicate definitions without importing Sheaf.CategoryTheory.OperadicWeakApproximation: that module publicly imports Sheaf.CategoryTheory.OperadicAlgebraPresentability, whose node lists this item as a proof dependency, so the stage-2 proof-dependency import would close an import cycle. The mathematical statement is unchanged.",
+  "fixed_by": "NT-stage2-cc-b035b10b5"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b035b10b5",
+  "group": "NV",
+  "result": "fix",
+  "note": "Read node, 3 stmt deps, report (Worker report + Second reading by NV present), module and the exact side declarations (IsChainTwoInfinityOperad = NonsymmetricOperad.IsObject predicate; IsLaxMonoidalInfinityFunctor = inert-preserving over base; InertOperad.algebras; CoherentAdjunction; comma/coconeCategory; tensorWith). All hypotheses/conclusions match the node, no stronger assumption, edge cases n=0/empty K_b/unit L,R covered, no hollow defs, docstrings ok, only theorem sorry. Finding F1: the H4 repair imports OperadicWeakApproximation, which publicly imports OperadicAlgebraPresentability, whose node lists this item as a proof dependency; the stage-2 §3.7 proof-dep import would close an import cycle, blocking its stage-3 proof (the dry run already flagged the DAG cycle; the delivery dropped the DAG edge but kept the import). FIX: fixes/OperadicActiveColimitExtensionCriterion.lean uses the identical upstream SSet.Enhanced.Operadic.IsActiveArrow/IsActiveEdge from OperadicCorrespondence (def-coef-operadic-correspondence, already upstream via lem-coef-generalized-active-extension-criterion; import closure no longer contains OperadicAlgebraPresentability); updated lean-record note and report. Statement unchanged and verbatim; nt_compile.py exit 0 with no messages for both delivered and fixed files (a misspelt control fails with exit 1)."
  }
 }

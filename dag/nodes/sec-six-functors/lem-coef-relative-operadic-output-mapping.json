@@ -11,7 +11,8 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
   "lem-coef-relative-operadic-terminal-active-mapping",
-  "def-coef-colored-operator-systems"
+  "def-coef-colored-operator-systems",
+  "lem-coef-infinity-pointwise-cocartesian-transport"
  ],
  "proof": [
   {
@@ -208,5 +209,45 @@
   "group": "N4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-560e44916 (reviewer sub-agent of L); spot-checked: Read the item, report, required stage/coordination documents, unit route, all eight cited node statements, the Higher Algebra source locations, and the archived target declarations. The six proof steps correctly establish inert cocartesian recognition, the relative Segal fiber decomposition, blockwise transport, naturality, and nullary/empty-output cases. No new nodes, duplicates, cycles, unsupported hypotheses, coefficient-category substitutions, or SGA citations were found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeOperadicOutputMapping",
+  "declaration": "SSet.Enhanced.relative_operadic_output_mapping",
+  "declarations": [
+   "SSet.Enhanced.ColoredOutputBlock",
+   "SSet.Enhanced.ColoredOutputTransport",
+   "SSet.Enhanced.coloredOutputValue",
+   "SSet.Enhanced.coloredOutputParameters",
+   "SSet.Enhanced.coloredOutputArrows",
+   "SSet.Enhanced.coloredOutputArrow",
+   "SSet.Enhanced.coloredOutputArrowBase",
+   "SSet.Enhanced.coloredOutputFactors",
+   "SSet.Enhanced.coloredOutputFactorBase",
+   "SSet.Enhanced.coloredOutputFactorArrow",
+   "SSet.Enhanced.coloredOutputSquareAmbient",
+   "SSet.Enhanced.coloredOutputSquareBoundary",
+   "SSet.Enhanced.coloredOutputSquarePrescription",
+   "SSet.Enhanced.coloredOutputSquares",
+   "SSet.Enhanced.coloredOutputSquaresLeft",
+   "SSet.Enhanced.coloredOutputSquaresRight",
+   "SSet.Enhanced.coloredOutputMappingProduct",
+   "SSet.Enhanced.ColoredOutputPointComparison",
+   "SSet.Enhanced.relative_operadic_output_mapping"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeOperadicOutputMapping.lean",
+  "statement": "theorem relative_operadic_output_mapping {Color : Type u} [Category.{u} (ColoredTuple Color)] (O : ColoredOperatorPresentation Color) {E : SSet.{u}} (q : E ⟶ nerve.{u, u} (ColoredTuple Color)) (hE : IsSymmetricInfinityOperad (q ≫ nerveMap.{u, u} O.arity)) (hq : IsSymmetricOperadMap (q ≫ nerveMap.{u, u} O.arity) (nerveMap.{u, u} O.arity) q) (hqfib : cocartesianFibrationOver q) (T : ColoredTransportFrame O q) : (∀ e : Δ[1] ⟶ E, IsSymmetricInertEdge (q ≫ nerveMap.{u, u} O.arity) e → IsCocartesianEdge q e) ∧ ∀ (c d : ColoredTuple Color) (f : c ⟶ d), Nonempty (ColoredOutputTransport O q T f) ∧ ∀ S : ColoredOutputTransport O q T f, IsFunctorEquivalence (coloredOutputSquaresLeft S) ∧ IsFunctorEquivalence (coloredOutputSquaresRight S) ∧ coloredOutputSquaresLeft S ≫ coloredOutputArrowBase q f = coloredOutputSquaresRight S ≫ coloredOutputFactorBase S ∧ ∀ b : (coloredOutputParameters q c d) _⦋0⦌, @ColoredOutputPointComparison _ _ _ _ hE.1 _ _ _ _ _ S b",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The comparison is the fixed coherent-square span over the full product of tuple fibers. Its point-fiber projections, canonical right-pinch inclusions, and constant-path insertion give the specified homotopy-fiber/product equivalence. Ordered inert blocks and their actual inert-then-active lifts are comparison coordinates, whose existence is concluded, not an added hypothesis. All helpers belong to this node; only its main theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-12feef5a4",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Read node, report, module (19 declarations) and the dependency declarations (ColoredOperatorPresentation/ColoredTransportFrame, IsSymmetricInfinityOperad/InertEdge/OperadMap, cocartesianFibrationOver, mappingSpace/homotopyFiber/commaSubcomplex, transportPinch, arrowMappingSpaceInclusion, calculusFiber). Every hypothesis and clause matches HA 2.1.1.7/2.1.1.10(2)/2.1.2.22/2.1.2.16/2.1.3.4 and the node: inert edges q-cocartesian; block equations force exactly the inputs f-bar^-1(j) in increasing order; Nonempty of the inert-then-active transport is a conclusion and the comparison is asserted for every choice; specified coherent-square comparison (top g, right frame output projection, left pruning then frame operation lift); both span projections are functor equivalences; pointwise five-leg zigzag with every leg pinned by an equation; d.arity=0 contractibility; nullary blocks retained; no extra assumptions; one universe u. Edge cases and the mathematical truth of each clause checked. lean.statement verbatim; node changed only in lean and stmt_deps (added landed pointwise-transport node, also a proof dep; allowed). Docstrings with source, blueprint and six proof steps; proof imports = stated proof_deps; lines <=100. nt_compile --json: exit 0, no diagnostics; error control reports errors. Cosmetic only: report.md Edge-checks paragraph has HA reference numbers garbled into 'the project server' (correct places in node and docstrings)."
  }
 }

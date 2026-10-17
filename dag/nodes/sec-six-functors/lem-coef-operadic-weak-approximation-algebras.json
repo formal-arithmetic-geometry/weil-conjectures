@@ -28,7 +28,8 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "lem-coef-operadic-algebra-presentability",
-  "def-coef-operadic-weak-approximation"
+  "def-coef-operadic-weak-approximation",
+  "lem-coef-space-valued-straightening"
  ],
  "proof": [
   {
@@ -480,5 +481,29 @@
   "group": "Q123",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-ae0861d32 (reviewer sub-agent of L); spot-checked: I read all 14 steps and the full statements of all 15 cited nodes, checking them against GH arXiv:1312.3178v4 Def. A.6.1 and Thm. A.6.5 and against HA Thm. 2.3.3.23 with its full proof (pp. 266–268), both from read-only text copies already in /tmp. The statement is unchanged and matches A.6.5 hypothesis by hypothesis: generalized M, ordinary O and P, weak approximation with the equivalence/categorical-fibration factorization, f_[1] an equivalence, and an equivalence of the full algebra categories. Nothing is weakened. The steps follow HA: Cartesian cylinder and retraction r (2–3); I_X is coinitial because (I_X)_{/a} is exactly F_g(c,a) (4); the base-inert H_X is a correct repair of HA's slice (5); the unary comma is the disjoint union of the lift categories L(c,ρ_j), with initial cocartesian projections, which correctly replaces HA's 'final' (6); J_{X,i} ≃ O(X,i) because g_[1] is an equivalence (7); existence of the relative limits (8); criterion (b′), independent of choices (9); the hypotheses of right-Kan-universal-restriction hold (10); 𝒳=ℛ, including the t_j argument and the cases k=0 and m=0 (11–13); composition (14). The edge cases (empty colours, arity 0 and 1, base-inert but non-cocartesian edges) are handled. The delivery adds no new nodes. The symmetric Fin_* approximation nodes are not duplicates. There is no SGA citation and every step is under 2000 characters. I accept the tool use of lem-cbc-enhanced-functor-cone-calculus, which supplies only generic mapping-space and cone facts. One repair: step 9 reduced cones from H_X to J_X with the cone-comparison clause of lem-coef-relative-right-kan-universal-restriction but did not cite that node (C1/C3). I added the citation to step 9's text and uses; the node was already in proof_deps. The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-operadic-weak-approximation-algebras.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicWeakApproximationAlgebras",
+  "declaration": "SSet.Enhanced.Nonsymmetric.operadic_weak_approximation_algebras",
+  "file": "lean/Sheaf/CategoryTheory/OperadicWeakApproximationAlgebras.lean",
+  "declarations": [
+   "SSet.Enhanced.Nonsymmetric.operadicColourMap",
+   "SSet.Enhanced.Nonsymmetric.operadic_weak_approximation_algebras"
+  ],
+  "statement": "theorem operadic_weak_approximation_algebras {M O : SSet.{max u v}} (q : M ⟶ monoidalSimplexBase.{max u v}) (p : O ⟶ monoidalSimplexBase.{max u v}) (f : M ⟶ O) (hf : IsWeakApproximation.{u, v} q p f) (hcolour : IsFunctorEquivalence (operadicColourMap (M := M) (O := O) q p f hf.2.2.2.2.1)) {P : SSet.{max u v}} (r : P ⟶ monoidalSimplexBase.{max u v}) (hr : IsOperad r) : IsFunctorEquivalence (restriction r f hf.2.2.2.2.1)",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Maintainer review fix: the ordinary target operad is an arbitrary IsOperad r in SSet.{max u v} (no u-smallness), as in GH A.6.5 and the node; the theorem docstring carries the node's proof steps.",
+  "fixed_by": "NT-stage2-cc-ef36b7d0a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ef36b7d0a",
+  "group": "Q46",
+  "result": "fix",
+  "note": "Read the node, GH A.6.5/HA 2.3.3.23, all four stmt_deps and their declarations (IsWeakApproximation, IsOperad/IsGeneralizedOperad, restriction/markedRestriction, Operad, fiber, IsFunctorEquivalence), the citer lem-coef-operadic-localization-operation-criterion and the symmetric analogue. F1 (H3): (P : Operad.{u, max u v}) bundled u-smallness of the target, but the node, the source and the citer quantify over every ordinary operad P, and the enrichment ancestry needs large presentably monoidal V. The fix uses {P : SSet.{max u v}} (r : P ⟶ monoidalSimplexBase) (hr : IsOperad r) with conclusion restriction r f hf.2.2.2.2.1; a large-target instantiation was compile-checked. F2 (H8): the theorem docstring now gives the node's 14 proof steps. F3: the delivered SpaceValuedStraightening repair is superseded by Q19's landed noncomputable abbrev Diagrams; the landing auto-reverts that dependency node (nt_parallel2 --revert-nodes) and the extra stmt_dep is a landed node, so no fix file is needed. F4: the report's scrubbed 'hf.the project server.1' is corrected and a correction section appended. All other clauses, the helper operadicColourMap (canonical pullback.lift, no clash), edge cases and universes checked. nt_compile --json: delivered rc 0, fixed rc 0 with no diagnostics, diagnostics confirmed on a broken variant. fixes/: OperadicWeakApproximationAlgebras.lean, the item's lean-record.json and report.md.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }
