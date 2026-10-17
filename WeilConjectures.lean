@@ -4101,8 +4101,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SingleDelta
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.AffineSpace
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.BaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.BaseChangeCharts
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Charts
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.OpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
