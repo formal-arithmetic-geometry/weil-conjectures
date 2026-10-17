@@ -11,43 +11,152 @@
  "stmt_deps": [
   "def-trf-orgogozo-induction-data",
   "def-nagata-global-blowup",
+  "def-weil-closed-immersion",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $a$ is an alteration, it is proper and is finite over a dense open of the integral scheme $Z$ [def-trf-orgogozo-induction-data]. Properness gives finite type [def-weil-proper-morphism]. Intersect that finite locus with the nonempty open supplied by generic flatness and local finite presentation [lem-sbc-generic-flat-finite-presentation], and choose a nonempty affine open $U$ in the intersection. The restriction $a_U:W\\times_ZU\\to U$ is finite, flat and locally of finite presentation, hence finite locally free by the definition [def-pc-finite-locally-free]. The affine $U$ is quasi-compact, and the Noetherian integral scheme $Z$ is quasi-compact and quasi-separated, so the hypotheses of [lem-trf-finite-after-blowup] are met.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "def-weil-proper-morphism",
+    "lem-sbc-generic-flat-finite-presentation",
+    "def-pc-finite-locally-free",
+    "lem-trf-finite-after-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 052A, Proposition 29.28.1 (generic flatness); companion Tag 051T, Lemma 10.118.3 in literature/stacks-project/algebra.tex; Tag 01W1 (proper morphisms)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-after-blowup] to obtain a $U$-admissible blow-up $v:\\widetilde Z\\to Z$ and a finite locally free strict transform $p:\\widetilde W\\to\\widetilde Z$. By [lemma-nagata-admissible-blowup-over-open], the center ideal is the unit ideal on $U$ and $v^{-1}(U)\\to U$ is an isomorphism. Thus $v$ is the blow-up of a finite-type quasi-coherent ideal $\\mathcal I$ with $\\mathcal I|_U=\\mathcal O_U$ [def-nagata-admissible-blowup]. Let $R=V(\\mathcal I)\\hookrightarrow Z$ with its closed-subscheme structure [def-weil-closed-immersion]. Since $R$ is disjoint from the dense open $U$, it is nowhere dense, and $\\widetilde Z=\\operatorname{Bl}_R(Z)$. The strict-transform-over-complement statement [lemma-nagata-strict-transform-over-complement] identifies $p$ over $v^{-1}(U)$ with the base change of $a_U$, so it is surjective there.",
+   "uses": [
+    "lem-trf-finite-after-blowup",
+    "lemma-nagata-admissible-blowup-over-open",
+    "def-nagata-admissible-blowup",
+    "def-weil-closed-immersion",
+    "lemma-nagata-strict-transform-over-complement",
+    "def-trf-orgogozo-induction-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0B49, Lemma 29.27.1 (finite strict transform after an admissible blow-up); literature/stacks-project/divisors.tex, Tags 080D and 080E"
+   }
+  },
+  {
+   "text": "The map $p$ is finite because it is finite locally free [def-pc-finite-locally-free], hence proper [lem-weil-pbc-finite-proper] and universally closed [def-weil-proper-morphism]. Its image is therefore closed and contains the open $v^{-1}(U)$. The latter is topologically dense in $\\widetilde Z$ by [lemma-nagata-conrad-dense-in-admissible-blowup], applied to the dense quasi-compact open $U\\subseteq Z$ and the $U$-admissible blow-up $v$. Thus the closed image of $p$ is all of $\\widetilde Z$, proving that $p$ is surjective and finite in the sense of [def-weil-finite-integral-morphism].",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "lemma-nagata-conrad-dense-in-admissible-blowup",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W1 and 01W3 (proper maps are closed and finite maps are proper), with Tag 0B49"
+   }
+  },
+  {
+   "text": "Let $U_W=a^{-1}(U)\\subseteq W$. Since $a$ is surjective, $U_W$ is a nonempty open in the integral scheme $W$, hence is dense; it is quasi-compact because $a_U$ is finite and $U$ is affine. Let $\\widetilde W$ denote the strict transform used above and let $u:\\widetilde W\\to W$ be its projection. By [def-nagata-strict-transform] it is a closed subscheme of $W\\times_Z\\widetilde Z$, namely the scheme-theoretic closure of its open part over $Z\\setminus R$, and $u$ and $p$ are the restrictions of the two projections. The projection $W\\times_Z\\widetilde Z\\to W$ is proper: $v$ is proper by [lemma-nagata-blowup-proper], and properness is preserved by base change [lem-pc-proper-base-change]. The closed immersion followed by this projection is proper [lem-weil-pbc-closed-immersion-proper]. By [lemma-nagata-admissible-blowup-over-open], applied to $v$ and to the blow-up of $W$ in the extended ideal $\\mathcal I\\mathcal O_W$, the restriction of $u$ over $U_W$ is an isomorphism. The theorem [thm-nagata-strict-transform-is-blowup] identifies the strict transform with $\\operatorname{Bl}_{\\mathcal I\\mathcal O_W}(W)$; applying [lemma-nagata-conrad-dense-in-admissible-blowup] to the dense quasi-compact open $U_W\\subseteq W$ and this admissible blow-up shows that $u^{-1}(U_W)$ is topologically dense in $\\widetilde W$. Hence $u$ is a modification by [def-trf-orgogozo-induction-data]. Finally the same blow-up identification gives the required blowup modification, and $a\\circ u=v\\circ p$ holds because both are the composite $\\widetilde W\\hookrightarrow W\\times_Z\\widetilde Z\\to Z$ (the theorem also records this compatibility with the structure morphisms to $Z$).",
+   "uses": [
+    "def-nagata-strict-transform",
+    "lemma-nagata-blowup-proper",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lemma-nagata-admissible-blowup-over-open",
+    "thm-nagata-strict-transform-is-blowup",
+    "lemma-nagata-conrad-dense-in-admissible-blowup",
+    "def-trf-orgogozo-induction-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 080D and 080E (strict transform and its blow-up description); Tag 01W4 (proper base change)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-strict-transform",
+  "def-pc-finite-locally-free",
+  "def-trf-orgogozo-induction-data",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-proper-morphism",
+  "lem-pc-proper-base-change",
+  "lem-sbc-generic-flat-finite-presentation",
+  "lem-trf-finite-after-blowup",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-proper",
+  "lemma-nagata-admissible-blowup-over-open",
+  "lemma-nagata-blowup-proper",
+  "lemma-nagata-conrad-dense-in-admissible-blowup",
+  "lemma-nagata-strict-transform-over-complement",
+  "thm-nagata-strict-transform-is-blowup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0B49 (Lemma 29.27.1), together with divisors.tex Tags 080D and 080E; Orgogozo Lemma 2.5 is WANTED locally"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "For an alteration between reduced Noetherian schemes there is a nowhere dense center such that the corresponding blowups have a finite surjective strict transform",
-   "results": "AlgebraicGeometry.IsFinite; AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization; AlgebraicGeometry.LocallyQuasiFinite; AlgebraicGeometry.LocallyOfFiniteType; AlgebraicGeometry.Scheme.Hom.normalization; AlgebraicGeometry.Scheme.Hom.toNormalization (no blowup flattening theorem)",
+   "query": "For an alteration between integral reduced Noetherian schemes, a nowhere dense center such that the corresponding blowups have a finite surjective strict transform",
+   "results": "AlgebraicGeometry.IsFinite; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.IsIntegralHom; AlgebraicGeometry.LocallyOfFiniteType; AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization; no blowup-flattening theorem",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "IsFinite, IsProper, Scheme.BlowUp",
-   "results": "none; the query reports unknown identifier IsFinite",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.IdealSheafData.blowup, strictTransform",
+   "results": "0 hits; Loogle reported it is currently under load",
    "date": "2026-10-18",
    "verdict": "unavailable"
   },
   {
    "tool": "grep",
-   "query": "blowup|strictTransform|generically.*finite in Mathlib/AlgebraicGeometry",
-   "results": "none",
+   "query": "strictTransform|finite-after-blowing-up|IsFinite.*IsProper in Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "flattening by blowup makes a proper generically finite morphism finite",
-   "results": "AlgebraicGeometry.IsProper.instOfIsFinite; AlgebraicGeometry.instIsProperOfIsFinite; AlgebraicGeometry.IsFinite.recOn; AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom; AlgebraicGeometry.IsFinite; AlgebraicGeometry.IsFinite.mk; AlgebraicGeometry.IsFinite.instIsIntegralHom (no flattening theorem)",
+   "query": "A proper alteration becomes finite after an admissible blowup and its strict transform is a blowup of the source",
+   "results": "AlgebraicGeometry.IsProper.instOfIsFinite; AlgebraicGeometry.instIsProperOfIsFinite; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom; AlgebraicGeometry.isProper_iff; AlgebraicGeometry.IsProper.mk (no alteration/blowup theorem)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper generically finite morphism strict transform finite locally free after blowing up a dense open",
+   "results": "AlgebraicGeometry.LocallyQuasiFinite; AlgebraicGeometry.IsFinite; AlgebraicGeometry.LocallyOfFiniteType; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; AlgebraicGeometry.IsProper.instOfIsFinite; AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom; AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme (no flattening theorem)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFinite IsProper",
+   "results": "0 hits; Loogle reported it is currently under load",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|blowup in Mathlib/AlgebraicGeometry/Morphisms",
+   "results": "0 hits",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-modification-closed-image-lifting",
@@ -59,12 +168,36 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof of (1) and (2), the sentence invoking Lemma 2.5 to choose R_Z and blowups whose induced map is finite and surjective.",
+   "place": "Proof of (1) and (2), the sentence invoking Orgogozo Lemma 2.5 to choose a nowhere-dense center and blowups whose induced map is finite and surjective.",
    "via": [
     "lem-trf-modification-closed-image-lifting"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-alteration-blowup-finite",
+  "worker": "stage1",
+  "summary": "Repaired the returned split: corrected the step-1 Stacks source metadata and added the missing use of the finite-after-blowup lemma; declared generic flatness as an off-unit tool; replaced the unsupported scheme-theoretic density citation by the topological-density Conrad lemma; added the admissible-blowup-over-open and blowup-proper citations; and applied these over the target open U and the source open a^{-1}(U) with the extended ideal. The alteration statement is unchanged.",
+  "blueprint": "Realizes the parent proof sentence invoking Orgogozo Lemma 2.5 in the normal-cone alteration reduction.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-generic-flat-finite-presentation",
+    "why": "Generic flatness on the integral base produces the dense open where the alteration is flat and locally finitely presented; this generic scheme tool is outside the trace-formula unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-generic-flat-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N2-1920ecd59",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-1920ecd59 (reviewer sub-agent of L); spot-checked: I read the item, its unit sk-i-curve-zero, the parent lem-trf-modification-closed-image-lifting (Steps 2 and 7), the statements of all 21 cited nodes (including the main-20261015 blueprint_update of thm-nagata-strict-transform-is-blowup), Stacks flat.tex 0B49 (lines 9173-9194) and morphisms.tex 052A (lines 5172-5184). The local archival PDF of Orgogozo Lemma 2.5 is absent, so the WANTED line and proof_origin by=agent are correct. The statement is unchanged and not weakened. It is not a duplicate of lem-trf-alteration-finite-refinement: it is stronger (both modifications are blowups and the centre is nowhere dense) and restricted to integral schemes. The delivery creates no new node and cites no SGA source. Step 1: proper implies finite type; 052A on integral Z gives a flat open, which meets the finite locus; this gives finite locally free over an affine U and so the hypotheses of 0B49. Step 2: by the definition of admissible blowup, V(I) is disjoint from the dense open U, hence nowhere dense; over the complement, p is a_U, which is surjective. Step 3: finite implies proper, so the image is closed; it contains v^{-1}(U), which is dense by the Conrad lemma, so p is surjective. Step 4: the strict transform is Bl_{IO_W}(W); this blowup is U_W-admissible with U_W=a^{-1}(U) nonempty and dense; it is an isomorphism over U_W and dense there, and proper, so u is a modification. Off-unit tools: the nagata lemmas and lem-pc-proper-base-change are Lean-closed; I accept the declared tool_use of lem-sbc-generic-flat-finite-presentation. Small cases checked: the identity, t->t^2, and Bl_0 A^2 -> A^2. Fix (proof text only): step 4 now says the strict transform is the closure of the part over Z\\R, not over U_W, and gives an explicit argument for a∘u=v∘p through W x_Z Z~; step 2 typo closed-subsheme corrected.; 1 file(s) fixed by the reviewer"
  }
 }
