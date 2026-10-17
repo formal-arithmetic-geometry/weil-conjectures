@@ -137,5 +137,32 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-7e2ed1613 (reviewer sub-agent of L); spot-checked: I read the item's three steps, every cited statement (def-weil-pbc-proetale-modules, def-pc-sheaf-restrict-scalars, prop-weil-pbc-proetale-constant-exact, prop-weil-pbc-proetale-constant-ring-map, def-weil-proetale-inverse-image, def-weil-sheaf-of-modules-category, def-pc-scheme) and Stacks 03D3 lemma-adjoint-push-pull-modules (sites-modules.tex lines 1044-1130). The parent lem-exc-proetale-supported-kernel-complex uses the item for Z/n -> A exactly as stated. The mathematics is correct. Step 1 holds because the identity is R_X-linear exactly when c^S∘f^{-1}φ_Y = φ_X∘c^R. Step 2 needs the equivalent equality ρ^S φ_Y = f_*(φ_X) ρ^R. Step 3's unit equation holds because every underlying map is the identity or η_f and the forgetful functor is faithful. Small cases checked: X empty, R = 0, φ = id, and noncommutative M_2(F_p). Fixes (no new nodes, statement unchanged): (1) Step 1 only gestured at the coefficient-map equality. I wrote out the argument: pass to adjuncts, check on constant sections, glue over an open cover, then use sheafification. I also wrote out that f^{-1}(P_Y N) carries the f^{-1}-transformed restricted action, since f^{-1} preserves finite products. (2) Step 2 cited def-weil-proetale-inverse-image for ρ, but that node defines ρ only for commutative constant A. I added the missing citation of prop-weil-pbc-proetale-constant-ring-map, which defines ρ for noncommutative pro-étale coefficients. Tool uses for the maintainer to record: prop-weil-pbc-proetale-constant-ring-map and prop-weil-pbc-proetale-constant-exact (unit sk-thm-properbasechange). That unit is outside the sk-prop-sf-localization route, but these are generic coefficient facts that nothing in the route supplies, and other sec-smooth-purity nodes already use them as tools. No duplicate found, no SGA source used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteScalarUnitComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteScalarUnitComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteScalarPresheafMap",
+   "AlgebraicGeometry.ProEtale.finiteScalarRingMap",
+   "AlgebraicGeometry.ProEtale.finiteScalarRestriction",
+   "AlgebraicGeometry.ProEtale.finiteScalarModuleDirectImage",
+   "AlgebraicGeometry.ProEtale.finiteScalarModuleUnitSection",
+   "AlgebraicGeometry.ProEtale.finiteScalarUnitComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteScalarUnitComparison.lean",
+  "statement": "theorem finiteScalarUnitComparison : ∃ (adjR : finiteCoefficientModulePullback f R ⊣ finiteScalarModuleDirectImage f R) (adjS : finiteCoefficientModulePullback f S ⊣ finiteScalarModuleDirectImage f S) (eR : finiteCoefficientModulePullback f R ⋙ SheafOfModules.toSheaf (finiteCoefficientRingSheaf X R) ≅ SheafOfModules.toSheaf (finiteCoefficientRingSheaf Y R) ⋙ Scheme.proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}) (eS : finiteCoefficientModulePullback f S ⋙ SheafOfModules.toSheaf (finiteCoefficientRingSheaf X S) ≅ SheafOfModules.toSheaf (finiteCoefficientRingSheaf Y S) ⋙ Scheme.proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}) (α : finiteCoefficientModulePullback f S ⋙ finiteScalarRestriction φ X ≅ finiteScalarRestriction φ Y ⋙ finiteCoefficientModulePullback f R) (β : finiteScalarModuleDirectImage f S ⋙ finiteScalarRestriction φ Y ≅ finiteScalarRestriction φ X ⋙ finiteScalarModuleDirectImage f R), (∀ (N : FiniteCoefficientModules Y R) (W : Y.ProEtᵒᵖ) (m : N.val.obj W), (adjR.unit.app N).val.app W m = finiteScalarModuleUnitSection f R N W m) ∧ (∀ (N : FiniteCoefficientModules Y S) (W : Y.ProEtᵒᵖ) (m : N.val.obj W), (adjS.unit.app N).val.app W m = finiteScalarModuleUnitSection f S N W m) ∧ (∀ (N : FiniteCoefficientModules Y R), (SheafOfModules.toSheaf (finiteCoefficientRingSheaf Y R)).map (adjR.unit.app N) ≫ (Scheme.proEtaleSheafDirectImage f AddCommGrpCat.{u + 1}).map (eR.hom.app N) = (Scheme.proEtaleSheafAdjunction f AddCommGrpCat.{u + 1}).unit.app ((SheafOfModules.toSheaf (finiteCoefficientRingSheaf Y R)).obj N)) ∧ (∀ (N : FiniteCoefficientModules Y S), (SheafOfModules.toSheaf (finiteCoefficientRingSheaf Y S)).map (adjS.unit.app N) ≫ (Scheme.proEtaleSheafDirectImage f AddCommGrpCat.{u + 1}).map (eS.hom.app N) = (Scheme.proEtaleSheafAdjunction f AddCommGrpCat.{u + 1}).unit.app ((SheafOfModules.toSheaf (finiteCoefficientRingSheaf Y S)).obj N)) ∧ (∀ (N : FiniteCoefficientModules Y S) (W : X.ProEtᵒᵖ) (m : ((finiteCoefficientModulePullback f S).obj N).val.obj W), (eR.hom.app ((finiteScalarRestriction φ Y).obj N)).hom.app W ((α.hom.app N).val.app W m) = (eS.hom.app N).hom.app W m) ∧ (∀ (M : FiniteCoefficientModules X S) (W : Y.ProEtᵒᵖ) (m : M.val.obj ((Scheme.proEtaleBaseChange f).op.obj W)), (β.hom.app M).val.app W m = m) ∧ ∀ N : FiniteCoefficientModules Y S, (finiteScalarRestriction φ Y).map (adjS.unit.app N) ≫ β.hom.app ((finiteCoefficientModulePullback f S).obj N) ≫ (finiteScalarModuleDirectImage f R).map (α.hom.app N) = adjR.unit.app ((finiteScalarRestriction φ Y).obj N)",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded noncommutative transported-action pullback. Supplies pointwise/sheafified coefficient maps, the exact restriction functor, noncommutative sectionwise direct image through the recorded rho, and actual small-model Kan-extension unit sections. The theorem existentially names the lifted adjunctions and abelian pullback identifications, normalizing both on those concrete unit sections, before asserting the two natural isomorphisms, underlying identity clauses, and the actual-unit equation. No statement correction, new node or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-14f55e082",
+  "group": "N1",
+  "result": "fix",
+  "note": "Mathematics, dependencies, canonical units, universes, edge cases and verbatim signature checked; per-file compilation passed. review.md records all findings. Complete replacement report in fixes repairs the H11 placeholder second reading; no Lean or node changes needed."
  }
 }
