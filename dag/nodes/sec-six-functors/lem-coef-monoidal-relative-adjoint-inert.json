@@ -11,9 +11,112 @@
   "def-coef-monoidal-infinity-category",
   "lem-coef-cocartesian-relative-right-adjoint"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $p:E^\\otimes\\to S$ and $q:D^\\otimes\\to S$. Under the Segal equivalences of [def-coef-monoidal-infinity-category], preservation of the inert projections identifies $L_r$ with $(L_1)^r$. Equip it with the right adjoint $(R_1)^r$: take the products of the given unit, counit and triangle homotopies, then conjugate by the two Segal equivalences. This is elementary on simplices: the right-pinched mapping space of a degreewise product is the product of the right-pinched mapping spaces, so the adjunction equivalence is\n$$\\operatorname{Map}_{D^r}((L_1e_i),(d_i))=\\prod_i\\operatorname{Map}_D(L_1e_i,d_i)\\simeq\\prod_i\\operatorname{Map}_E(e_i,R_1d_i)=\\operatorname{Map}_{E^r}((e_i),(R_1d_i)).$$\nThe forward and inverse maps and their homotopies are taken coordinatewise. For $r=0$ both products are the point category, with their unique adjunction data.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Corollary 7.3.2.7, proof: product of the fibre adjunctions, including the empty product."
+   }
+  },
+  {
+   "text": "The maps $p,q$ are cocartesian fibrations and $L$ preserves all cocartesian edges by its strong monoidal hypothesis. Step 1 supplies a specified right adjoint to every fibre functor. Apply [lem-coef-cocartesian-relative-right-adjoint] to obtain a coherent relative right adjoint $R$, with unit, counit $\\varepsilon:LR\\to\\mathrm{id}$ and both triangle homotopies over the identity of $S$. Its fibre adjunction agrees with the specified product adjunction, as adjunction data. Henceforth use these equivalences when writing fibre coordinates: $R_r(d_i)=(R_1d_i)$ and the fibre counit has coordinates $\\varepsilon_{d_i}$. In particular the assertion includes the fibre at $[0]$. The cited theorem also gives the adjunction equivalence on each mapping-space fibre over a base arrow, with inverse $h\\mapsto\\varepsilon_yL(h)$.",
+   "uses": [
+    "lem-coef-cocartesian-relative-right-adjoint",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Corollary 7.3.2.7, application of the opposite of Proposition 7.3.2.6; compare Remark 7.3.2.4."
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-cocartesian-mapping-criterion], applied to the inner fibrations $p$ and $q$, their horn-cocartesian edges are exactly the edges cocartesian in the mapping-square sense of [lem-coef-infinity-pointwise-cocartesian-transport], so $p$ and $q$ satisfy that theorem's hypotheses; this is used here and in Steps 4--6. Let $\\beta:[n]\\to[m]$ be inert, with $\\beta^{\\mathrm{op}}(j)=a+j$. Its transport on both monoidal fibrations is, under Segal equivalences, the coordinate projection keeping $a+1,\\ldots,a+m$. Indeed $\\rho_j\\beta=\\rho_{a+j}$; composition of cocartesian lifts, supplied by [lem-coef-infinity-pointwise-cocartesian-transport], gives this identification after every output projection, and the Segal equivalence identifies their tuple. This argument is natural in fibre diagrams, since the transport theorem includes coherent transformations and their composition. If $m=0$ both target fibres are terminal and this is the empty projection. Since $L$ preserves cocartesian edges, the comparison $L_m\\beta_!^E\\simeq\\beta_!^D L_n$ is the one obtained by applying $L$ to a cocartesian lift. In the coordinates just described it is the identity comparison between the two projections of $(L_1)^n$.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Corollary 7.3.2.7, final sentence: coordinate description of transport over inert arrows."
+   }
+  },
+  {
+   "text": "Take an inert edge $b:d\\to d'$ over $\\beta$. Choose a $p$-cocartesian lift $u:Rd\\to e'$ over $\\beta$. The mapping-fibre formula of [lem-coef-infinity-pointwise-cocartesian-transport] factors $R(b)$ as $v\\circ u$ with $v:e'\\to Rd'$ in the fibre over $[m]$. Naturality of the vertical counit gives\n$$\\varepsilon_{d'}L_m(v)\\simeq (\\beta_!^D\\varepsilon_d):L_m(e')\\longrightarrow d',$$\nafter identifying $\\beta_!^Dd\\simeq d'$ using $b$ and using the strong comparison in Step 3. To see the formula, precompose it by the cocartesian edge $L(u)$: its two sides become $\\varepsilon_{d'}LR(b)$ and $b\\varepsilon_d$, respectively. The cited mapping-fibre equivalence allows cancellation of that precomposition. In the product adjunction coordinates of Step 2, its $j$th component says $\\varepsilon_{d_{a+j}}L_1(v_j)\\simeq\\varepsilon_{d_{a+j}}$. The fibre adjunction therefore identifies $v_j$ with $\\mathrm{id}_{R_1d_{a+j}}$. For $m=0$ this is the unique map between objects of a terminal category. Thus $v$ is an equivalence: its coordinates have inverse identities, and their inverse homotopies form an inverse tuple under the Segal equivalence.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-cocartesian-relative-right-adjoint",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Corollary 7.3.2.7, final sentence expanded: naturality of the counit makes the inert mate invertible."
+   }
+  },
+  {
+   "text": "For completeness, a vertical equivalence such as $v$ is $p$-cocartesian: precomposition by it has inverse precomposition by an inverse edge, by [lem-coef-infinity-mapping-composition]; the mapping-space square over the identity is consequently a homotopy pullback. Apply [lem-coef-infinity-cocartesian-mapping-criterion] to convert this to horn-cocartesianness. Composition of cocartesian edges from [lem-coef-infinity-pointwise-cocartesian-transport] now shows that $R(b)=vu$ is cocartesian. This is invariant under the factorization homotopy: the mapping-square criterion depends on precomposition, which depends only on the edge's component class by the mapping-composition statement. Its base map remains the inert arrow $\\beta$. Consequently $R$ carries all inert edges to inert edges and is lax monoidal by [def-coef-monoidal-infinity-category].",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Corollary 7.3.2.7, final sentence: passing from the invertible fibre mate to an inert edge."
+   }
+  },
+  {
+   "text": "Let $\\mu_r:[r]\\to[1]$ be opposite to $0\\mapsto0$, $1\\mapsto r$, and take its $q$-cocartesian operation edge $b:(d_i)\\to t_D(d_i)$, where $t_D$ denotes the $r$-fold tensor. Choose the $p$-cocartesian operation edge $u:(R_1d_i)\\to t_E(R_1d_i)$. Factor $R(b)$ through $u$, using [lem-coef-infinity-pointwise-cocartesian-transport], to obtain the comparison $c:t_E(R_1d_i)\\to R_1t_D(d_i)$. Counit naturality, cancelled along the cocartesian edge $L(u)$ exactly as in Step 4, says\n$$\\varepsilon_{t_D(d_i)}L_1(c)\\simeq\\left(L_1t_E(R_1d_i)\\simeq t_D(L_1R_1d_i)\\xrightarrow{\\ t_D(\\varepsilon_{d_i})\\ }t_D(d_i)\\right).$$\nThe strong comparison here comes from $L(u)$; Step 2 identifies $\\varepsilon_{(d_i)}$ with the tuple of counits, so its transport along $\\mu_r$ is their tensor. The inverse mapping-space adjunction in [lem-coef-cocartesian-relative-right-adjoint] is $h\\mapsto\\varepsilon L(h)$, which proves precisely that $c$ is the mate claimed in the statement. For $r=0$, $u$ and $b$ are unit edges, the tuple of counits is the unique empty tuple, and the displayed formula is the strong unit equivalence $L_1\\mathbf1_E\\simeq\\mathbf1_D$.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-cocartesian-relative-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Corollary 7.3.2.7 and the counit calculation of Remark 7.3.2.9; tensor mate and nullary unit."
+   }
+  },
+  {
+   "text": "The comparisons in Step 6 were read from the already coherent functor $R:D^\\otimes\\to E^\\otimes$, rather than assembled from isolated binary maps. In the nonsymmetric model of [def-coef-monoidal-infinity-category], substitution is composition of the corresponding base arrows and operation edges, with inert maps selecting the input blocks. The composition-compatible transport of [lem-coef-infinity-pointwise-cocartesian-transport] identifies the factorizations for composite operation edges with the composites of these comparisons. Applying $R$ to each compositional simplex gives that substitution compatibility; applying it to higher simplices gives the compatibility of those homotopies with all faces and degeneracies. The same assertion for degeneracies and empty blocks gives unit compatibility. Counit naturality is itself a coherent transformation by [lem-coef-cocartesian-relative-right-adjoint], and the adjunction equivalences are on whole mapping spaces, so the formula of Step 6 identifies these coherent comparisons, including their homotopies, with the stated mates. This proves the full coherence clause without any additional coherence choices.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-cocartesian-relative-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Corollary 7.3.2.7, conclusion that the relative adjoint is a map of operads; unpacking the coherent-functor definition in the nonsymmetric model."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-cocartesian-relative-right-adjoint",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pointwise-cocartesian-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent finite mapping-complex adjunction before R lim; foundational expansion following online HA 7.3.2.7, whose local archive is WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +153,46 @@
    "results": "{\"t\": \"2026-10-17T05:56:53Z\", \"tool\": \"leanfinder\", \"query\": \"Products of fibre adjunctions give a relative adjunction preserving inert projections in nonsymmetric monoidal infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.frobeniusMorphism\", \"CategoryTheory.Adjunction.isMonoidal_comp\", \"CategoryTheory.prodComparison_iso\", \"CategoryTheory.frobeniusMorphism_iso_of_preserves_binary_products\", \"CategoryTheory.frobeniusMorphism_mate\", \"CategoryTheory.Pi.monoidalClosed_closed_rightAdj\", \"CategoryTheory.expComparison\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\"], \"digest\": \"48cec519f1fe327a\"}",
    "date": "2026-10-17",
    "verdict": "no match: Monoidal/Functor.lean:937-953 defines Adjunction.rightAdjointLaxMonoidal for ordinary categories. It does not give a relative adjunction over the simplex category or preservation of inert edges of quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointLaxMonoidal|inert.*adjoint|monoidal.*quasicategory",
+   "results": "{\"t\": \"2026-10-17T06:22:05Z\", \"tool\": \"grep\", \"query\": \"rightAdjointLaxMonoidal|inert.*adjoint|monoidal.*quasicategory\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\"], \"digest\": \"9fe2d2308edc7555\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Monoidal/Functor.lean:937-964, especially Adjunction.rightAdjointLaxMonoidal at line 947. Its ordinary-category adjunction does not state a relative adjunction of quasicategories over the simplex category or inert preservation.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fibrewise right adjoint to a strong monoidal infinity functor preserves inert projections and is lax monoidal",
+   "results": "{\"t\": \"2026-10-17T06:22:06Z\", \"tool\": \"leansearch\", \"query\": \"A fibrewise right adjoint to a strong monoidal infinity functor preserves inert projections and is lax monoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal\", \"CategoryTheory.Adjunction.IsMonoidal\", \"CategoryTheory.Functor.preservesMonomorphisms_of_adjunction\", \"CategoryTheory.Functor.preservesMonomorphisms_of_isRightAdjoint\", \"CategoryTheory.Adjunction.mapMon\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε\", \"CategoryTheory.instLaxMonoidalFunctorObjWhiskeringRight\"], \"digest\": \"fc7e942d2493a38d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Monoidal/Functor.lean:937-964, especially Adjunction.rightAdjointLaxMonoidal at line 947. Its ordinary-category adjunction does not state a relative adjunction of quasicategories over the simplex category or inert preservation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"Monoidal\"",
+   "results": "{\"t\": \"2026-10-17T06:22:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"Adjunction\\\", \\\"Monoidal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.instIsMonoidalId\", \"CategoryTheory.Adjunction.leftAdjointOplaxMonoidal\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.IsMonoidal\", \"CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal_1\", \"CategoryTheory.Adjunction.isMonoidal_comp\"], \"digest\": \"c883095e29ee7cc3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Monoidal/Functor.lean:937-964, especially Adjunction.rightAdjointLaxMonoidal at line 947. Its ordinary-category adjunction does not state a relative adjunction of quasicategories over the simplex category or inert preservation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative right adjoint of a strong monoidal functor of monoidal infinity categories preserves inert edges",
+   "results": "{\"t\": \"2026-10-17T06:22:07Z\", \"tool\": \"leanfinder\", \"query\": \"The relative right adjoint of a strong monoidal functor of monoidal infinity categories preserves inert edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.Adjunction.mapMon\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.Truncated.nerve₂Adj\"], \"digest\": \"476e72b91684c9c6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Monoidal/Functor.lean:937-964, especially Adjunction.rightAdjointLaxMonoidal at line 947. Its ordinary-category adjunction does not state a relative adjunction of quasicategories over the simplex category or inert preservation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Products of fibre adjunctions give a relative adjunction over the simplex category and a lax monoidal right adjoint including the tensor unit",
+   "results": "{\"t\": \"2026-10-17T06:22:24Z\", \"tool\": \"leanfinder\", \"query\": \"Products of fibre adjunctions give a relative adjunction over the simplex category and a lax monoidal right adjoint including the tensor unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε\", \"CategoryTheory.SimplicialObject.cechNerveAdjunction\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\", \"CategoryTheory.Functor.instIsLeftAdjointDiscreteTensorLeftCompIncl\", \"CategoryTheory.FunctorToTypes.adj\", \"CategoryTheory.frobeniusMorphism\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"CategoryTheory.Types.tensorProductAdjunction\"], \"digest\": \"c7352a227fc088da\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Monoidal/Functor.lean:937-964, especially Adjunction.rightAdjointLaxMonoidal at line 947. Its ordinary-category adjunction does not state a relative adjunction of quasicategories over the simplex category or inert preservation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-day-relative-exponential-model",
@@ -80,5 +219,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-monoidal-relative-adjoint-inert",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the product fibre adjunctions, applied the existing coherent relative-adjoint theorem, and expanded inert preservation by counit naturality and cocartesian factorization. Derived all tensor mates including arity zero and retained the functorial substitution coherences. No new nodes; ordinary Mathlib monoidal adjunctions do not cover quasicategories.",
+  "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md: coherent finite-coefficient mapping-complex adjunction before R lim; specifically the relative monoidal adjoint input used by the Day section/evaluation model.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-9c762be3d",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-9c762be3d (reviewer sub-agent of L); spot-checked: Read the item, all seven steps and the full statements of every cited node (def-coef-monoidal-infinity-category, lem-coef-cocartesian-relative-right-adjoint, lem-coef-infinity-pointwise-cocartesian-transport, lem-coef-infinity-mapping-composition, lem-coef-infinity-cocartesian-mapping-criterion, def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations). Also read the unit, the blueprint ancestor's paragraph 2 and the citer lem-coef-day-relative-exponential-model. The statement is the nonsymmetric specialization of HA 7.3.2.7: no hypothesis added, nothing weakened. HA is not archived, and the node correctly records proof_origin agent with WANTED. Checks: the index identity rho_j beta = rho_{a+j}; the counit-naturality cancellation along L(u) in Step 4 (both sides are vertical maps L_m e' -> d', and v_j ~ id via the inverse map h -> eps L(h)); the vertical-equivalence-is-cocartesian argument in Step 5; the mu_r tensor mate and the r=0 unit case in Step 6. Small cases tested: L=id, r=0, r=1, n=m=0, terminal categories. There are no new nodes and no duplicates; operadic-change-enrichment is only a presentable special case. Every cited statement lies on the unit's route, so there are no tool_uses. No SGA. One fix: Steps 3-4 apply the transport lemma, whose cocartesian notion is the mapping-square one, to the horn-cocartesian fibrations p and q without citing the bridge. I added lem-coef-infinity-cocartesian-mapping-criterion to Step 3 (one sentence) and to the uses of Steps 3 and 4. proof_deps is unchanged and still equals the union of the uses.; 1 file(s) fixed by the reviewer"
  }
 }
