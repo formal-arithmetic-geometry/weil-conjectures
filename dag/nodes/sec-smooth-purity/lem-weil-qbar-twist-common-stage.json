@@ -17,9 +17,103 @@
   "def-weil-rationalization-karoubi",
   "lem-weil-integral-twist-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $B_{F/E}$ for the transitions and $a_{G/F,E,C}:B_{G/F}B_{F/E}C\\xrightarrow{\\sim}B_{G/E}C$ for their canonical composition maps [lem-weil-scalar-extension-composition]. Suppress only the canonical identity-extension unitors. For a fixed common stage $F$, put $X=B_{F/E}C$, $Y=B_{F/E'}C'$ and $b_C=\\beta_{F/E,C}$, $b_{C'}=\\beta_{F/E',C'}$. The supplied natural comparisons of [lem-weil-integral-twist-derived-scalar] are used after the rationalization [def-weil-rationalization-karoubi], exactly as assumed in the statement. Define\n$$t_F(f)=b_{C'}^{-1}\\circ T_{F,m}(f)\\circ b_C.$$\nIts source is $B_{F/E}(T_{E,m}C)$ and its target is $B_{F/E'}(T_{E',m}C')$, so it represents a morphism between the asserted image objects. Naturality of each comparison holds for the rationalized morphisms as part of the hypotheses; no construction with an infinite coefficient ring is being used.",
+   "uses": [
+    "lem-weil-scalar-extension-composition",
+    "lem-weil-integral-twist-derived-scalar",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence, common finite stages: typing the representative formula"
+   }
+  },
+  {
+   "text": "Fix $F\\subset G$ and abbreviate $B=B_{G/F}$, $T=T_{G,m}$, $a_C=a_{G/F,E,C}$, $a_{TC}=a_{G/F,E,T_{E,m}C}$ and $d_C=\\beta_{G/E,C}$. The tower equation of [lem-weil-integral-twist-scalar-coherence], after rationalization, is\n$$T(a_C)\\circ\\beta_{G/F,X}\\circ B(b_C)=d_C\\circ a_{TC}.$$\nConsequently\n$$B(b_C)\\circ a_{TC}^{-1}=\\beta_{G/F,X}^{-1}\\circ T(a_C)^{-1}\\circ d_C,$$\nand, for the target object,\n$$a_{TC'}\\circ B(b_{C'}^{-1})=d_{C'}^{-1}\\circ T(a_{C'})\\circ\\beta_{G/F,Y}.$$\nThese equalities follow by composing the tower equation with the displayed inverse isomorphisms on the indicated sides. They apply to $m$ and also to $-m$.",
+   "uses": [
+    "lem-weil-integral-twist-scalar-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence, common finite stages: tower equations with endpoints retained"
+   }
+  },
+  {
+   "text": "In the Hom system of [def-weil-algebraically-closed-coefficients], the enlargement of $f$ is $f^G=a_{C'}\\circ B(f)\\circ a_C^{-1}$. The enlargement of $t_F(f)$ is $a_{TC'}\\circ B(t_F(f))\\circ a_{TC}^{-1}$. Substitute the two equalities of Step 2 and use naturality\n$$\\beta_{G/F,Y}\\circ B(T_{F,m}(f))=T(B(f))\\circ\\beta_{G/F,X}$$\nof [lem-weil-integral-twist-derived-scalar]. The adjacent inverse factors cancel, giving\n$$a_{TC'}B(t_F(f))a_{TC}^{-1}=d_{C'}^{-1}T(a_{C'})T(B(f))T(a_C)^{-1}d_C=t_G(f^G).$$\nThus twisting commutes with every enlargement. If two representatives at different stages determine the same class, the cited definition says that their enlargements agree at one further finite common stage. Apply this equality there to see that their twisted representatives also agree. This proves independence of representatives, including arbitrary enlargements.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-integral-twist-derived-scalar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence, common finite stages: representative independence by an explicit transport equality"
+   }
+  },
+  {
+   "text": "At a common stage $F$, an identity is represented by $\\mathrm{id}_{B_{F/E}C}$, and $t_F(\\mathrm{id})=b_C^{-1}\\mathrm{id}\\,b_C=\\mathrm{id}$. For composable representatives, enlarge both to a common $F$, as allowed by [def-weil-algebraically-closed-coefficients], and write $b_C,b_{C'},b_{C''}$ for the three comparisons. Then\n$$t_F(g)\\circ t_F(f)=b_{C''}^{-1}T_{F,m}(g)b_{C'}b_{C'}^{-1}T_{F,m}(f)b_C=b_{C''}^{-1}T_{F,m}(g\\circ f)b_C=t_F(g\\circ f).$$\nStep 3 makes this calculation independent of that enlargement. This defines $T_m$ as a functor. Running the same construction with $-m$ defines $T_{-m}$.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence, common finite stages: identity and composition at a common finite stage"
+   }
+  },
+  {
+   "text": "Let $e_{E,C}:T_{E,-m}T_{E,m}C\\xrightarrow{\\sim}C$ denote the assumed natural line-evaluation inverse identity. For $E\\subset F$ define the comparison for this composite by\n$$\\gamma_{F/E,C}=T_{F,-m}(\\beta^{m}_{F/E,C})\\circ\\beta^{-m}_{F/E,T_{E,m}C}.$$\nIts source is $B_{F/E}(T_{E,-m}T_{E,m}C)$ and its target is $T_{F,-m}T_{F,m}(B_{F/E}C)$. Evaluation compatibility, assumed in the statement using [lem-weil-integral-twist-base-change], says precisely\n$$e_{F,B_{F/E}C}\\circ\\gamma_{F/E,C}=B_{F/E}(e_{E,C}).$$\nIndeed, the two paths tensor $C$ with the two opposite twist lines, extend coefficients, and evaluate the two line factors; the cited compatibility with evaluation equates these paths. The rationalization of [def-weil-rationalization-karoubi] preserves this equality, since it preserves composition and identities. Interchanging $m$ and $-m$ gives the same equation for the other assumed evaluation $e'_{E,C}:T_{E,m}T_{E,-m}C\\xrightarrow{\\sim}C$.",
+   "uses": [
+    "lem-weil-integral-twist-base-change",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence, common finite stages: evaluation compatibility for the composite twist"
+   }
+  },
+  {
+   "text": "For each $(E,C)$ take the common-stage class of $e_{E,C}$. Its enlargement to $F$ is represented by $B_{F/E}(e_{E,C})=e_{F,X}\\gamma_{F/E,C}$ by Step 5. Expanding twice the representative formula of Step 1 shows that $T_{-m}T_m([F,f])$ is represented by\n$$\\gamma_{F/E',C'}^{-1}\\circ T_{F,-m}T_{F,m}(f)\\circ\\gamma_{F/E,C}.$$\nMultiplying this expression on the left by $B_{F/E'}(e_{E',C'})$ gives\n$$e_{F,Y}T_{F,-m}T_{F,m}(f)\\gamma_{F/E,C}=f\\,e_{F,X}\\gamma_{F/E,C}=f\\,B_{F/E}(e_{E,C}),$$\nby naturality of the assumed finite-stage $e_F$. This is the required naturality square on common-stage classes [def-weil-algebraically-closed-coefficients]. Every component is invertible: the class of $e_{E,C}^{-1}$ is its inverse, since their composites are identities already at stage $E$. Hence $T_{-m}T_m\\cong\\mathrm{id}$. Using $e'$ and reversing the two signs in the displayed computation gives $T_mT_{-m}\\cong\\mathrm{id}$.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence, common finite stages: descent and naturality of both inverse identities"
+   }
+  },
+  {
+   "text": "The object $\\Qlb(m)$ of [def-coefficient-twists-detailed] is represented by $E(m)=T_{E,m}(E_S)$, and $\\Qlb(-m)$ by $E(-m)$. At this finite stage the assumed line evaluations identify both ordered tensor products $E(m)\\otimes_E^L E(-m)$ and $E(-m)\\otimes_E^L E(m)$ with the coefficient unit $E_S$. Step 5 proves that these evaluations commute with scalar extension. Their classes are therefore the two inverse tensor identifications in the common-stage interpretation of the cited definition. This proves the asserted invertibility of $\\Qlb(m)$, with inverse $\\Qlb(-m)$.",
+   "uses": [
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence, common finite stages: invertibility of the common-stage twist line"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-integral-twist-derived-scalar",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-integral-twist-scalar-coherence",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-integral-twist-base-change",
+  "def-coefficient-twists-detailed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "Final sentence; explicit conjugation, transport, composition and evaluation-descent calculations under the stated finite-stage hypotheses."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,9 +149,51 @@
    "results": "CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered",
    "date": "2026-10-17",
    "verdict": "no match: generic localization, module base change or colimits of types do not state this completed-sheaf/coefficient-category assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "common.?stage|filtered.?colimit.*(functor|equivalence)|colimit.*twist",
+   "results": "Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean; Mathlib/CategoryTheory/Limits/Indization/FilteredColimits.lean; Mathlib/CategoryTheory/Limits/Indization/Category.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern filtered colimits of types, equivalence of indexing diagrams, or ordinary scalar extension; none states this common-stage twist descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.NatIso",
+   "results": "loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-17",
+   "verdict": "no match: query rejected (loogle: unknown identifier 'CategoryTheory.NatIso')"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible natural isomorphisms between scalar extension and Tate twists induce an autoequivalence on the common finite stage category of l-adic complexes",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.homEquiv; CategoryTheory.Free.ext; CategoryTheory.Functor.CommShift.ofIso_compatibility; CategoryTheory.Idempotents.functorExtension₁CompWhiskeringLeftToKaroubiIso; CategoryTheory.Adjunction.LeftAdjointCommShift.iso'; Rep.indCoindNatIso; CategoryTheory.NatIso.mapHomologicalComplex; CategoryTheory.Functor.leftDerivedNatIso",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern filtered colimits of types, equivalence of indexing diagrams, or ordinary scalar extension; none states this common-stage twist descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent family of twist autoequivalences commuting with scalar extension induces inverse functors on the category with morphisms represented over common finite coefficient fields",
+   "results": "galLiftEquiv_symm_apply; CategoryTheory.PreGaloisCategory.autIsoFibers_inv_app; CategoryTheory.PreGaloisCategory.autMulEquivAutGalois_symm_app; ModuleCat.restrictScalarsComp'_inv_app; CommRingCat.moduleCatExtendScalarsPseudofunctor; ModuleCat.restrictScalarsComp'App_inv_apply; CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_symm_fiber; CategoryTheory.InducedCategory.homLinearEquiv_symm_apply_hom",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern filtered colimits of types, equivalence of indexing diagrams, or ordinary scalar extension; none states this common-stage twist descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"equivalence\"",
+   "results": "CategoryTheory.Limits.IsColimit.ofWhiskerEquivalence; CategoryTheory.Limits.IsColimit.whiskerEquivalence; CategoryTheory.Limits.IsColimit.whiskerEquivalenceEquiv; CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence; CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence_hom; CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence_inv; CategoryTheory.Limits.hasColimitsOfShape_of_equivalence; CategoryTheory.Limits.hasColimit_equivalence_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern filtered colimits of types, equivalence of indexing diagrams, or ordinary scalar extension; none states this common-stage twist descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible family of equivalences of categories induces an equivalence of their filtered two colimit using conjugation by natural scalar transition isomorphisms",
+   "results": "CategoryTheory.Limits.Types.FilteredColimit.rel_equiv; CategoryTheory.Limits.HasColimit.isoOfEquivalence; AlgebraicTopology.DoldKan.Compatibility.τ₁; CategoryTheory.Limits.Types.FilteredColimit.rel_eq_eqvGen_colimitTypeRel; CategoryTheory.IsFiltered.of_equivalence; ModuleCat.FilteredColimits.colimitSMulAux_eq_of_rel; CategoryTheory.Limits.HasColimit.isoOfEquivalence_hom_π; AlgebraicTopology.DoldKan.Compatibility.τ₀",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern filtered colimits of types, equivalence of indexing diagrams, or ordinary scalar extension; none states this common-stage twist descent"
   }
  ],
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-twist-preserves",
@@ -75,5 +211,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-qbar-twist-common-stage",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven steps give the typed conjugation formula, solve the tower equation, compute its commutation with Hom transport, verify identities and composition, and descend both natural line-evaluation isomorphisms and line invertibility. No new nodes: all substantive inputs are hypotheses backed by existing nodes.",
+  "blueprint": "prop-weil-twist-preserves, proof final sentence on integral and algebraically closed twists at common finite stages: Steps 1–4 realize well-defined stagewise twists; Steps 5–7 realize inverse line evaluations and invertibility.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "The canonical scalar associators identify endpoints in the existing Hom transport system. This generic coefficient-transition tool is required by the common-stage construction; no node in the item unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-scalar-extension-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-7d9c6b4f0",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-7d9c6b4f0 (reviewer sub-agent of L); spot-checked: I read the item in full, all 8 cited statements, the parent prop-weil-twist-preserves (all 13 steps), unit sk-prop-sf-existence, and the blueprint final sentence in both main-20261015 prop-weil-twist-preserves.proof.md and master prop-weil-twist-preserves.md. The delivery adds no new nodes and does not change the statement. Shape: one commit; proof_deps equals the union of the step uses; no cycle (the parent cites the item, the item does not cite the parent); no SGA source. Coefficient category: the raw common-stage Hom colimit of def-weil-algebraically-closed-coefficients and the raw rationalization, with no Karoubi completion. The coherence lemma says its a_C rationalizes to the lem-weil-scalar-extension-composition associator, so Step 2's a is the Hom-system transition. I checked every step by explicit composition. Step 2: both rearrangements of the tower equation are correct, sources and targets included. Step 3: with β_{G/F} naturality the enlargement of t_F(f) equals t_G(f^G), which gives representative independence. Step 4: identity and composition hold. Step 5: γ is well typed, and e_F∘γ = B(e_E) is the assumed evaluation-compatibility hypothesis written out termwise. Step 6: expanding twice gives γ'^{-1}T_{-m}T_m(f)γ, and the naturality square and inverse components follow. Step 7: E(m)=T_{E,m}(E_S), and invertibility at Q̄ is read as in the parent's statement. Edge cases m=0, m<0, E=E', F=E and unrelated E, E' all go through. No duplicate found (lem-weil-twist-rationalization covers only the rational stage; det-prop-sfb-cartesian-coefficients-twists and lem-sf-twist-interchange are about other things). Accepted tool_use: lem-weil-scalar-extension-composition (a generic associator, already part of the Hom system's definition). No fixes."
  }
 }

@@ -16,9 +16,212 @@
   "def-weil-pbc-henselian-terminology",
   "def-exc-excellent-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the geometric-duality range theorem to put $D_ZL$ and $T_ZL$ in $D^b_c$ for bounded constructible $L$, for $T=\\Psi$ and $T=q^*$. All pairings are formed in the ordinary unbounded etale derived category: $D_ZL\\otimes^L L$ need not be bounded below. For instance over $A=\\mathbf Z/\\ell^2$, $L=A/\\ell$ has nonzero Tor groups in arbitrarily large homological degrees. The ambient tensor and exchange maps in the tensor-coherence lemma make this tensor legitimate. Let $d_Z:T_Z\\omega_Z\\to\\omega_{Z'}$ be the structural exceptional mate of $C_{a_Z}$ followed by the base structural counit, normalized by $T_{\\mathrm{base}}A=A$. Define $E_Z(L)=d_Z\\circ T_Z(\\operatorname{ev}_L)\\circ t_Z$. The tensor--Hom adjunction gives its unique transpose $\\alpha_Z(L)$, or $\\beta_Z(L)$ for $q^*$. This construction assumes no invertibility of $d_Z$ or of its transpose. The dualizing objects of the statement are the ambient ones: over each geometric field, the finite-coefficient exceptional inverse image used for $\\omega_Z=Ra_Z^!A$ is $\\nu_Z^*a_Z^\\times R\\nu_{s,*}$ with its adjunction transported from the ordinary etale right adjoint $a_Z^\\times$ of $Ra_{Z!}$ [lem-pur-finite-coefficient-adjoint-comparisons], stated over an arbitrary field. Hence on small etale sites $\\omega_Z=a_Z^\\times A$, and its structural counit is the ambient counit [thm-amb-etale-exceptional-adjoint]; Steps 3--9 use this.",
+   "uses": [
+    "lem-trf-geometric-duality-uniform-range",
+    "lem-trf-nearby-compact-tensor-coherence",
+    "def-pur-derived-internal-hom",
+    "def-kun-derived-tensor",
+    "def-trf-deformation-specialization",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "1.3.2, 4.1.4(b); agent expansion of the structural counit/evaluation calculation, with the diagonal/deformation purity route"
+   }
+  },
+  {
+   "text": "Proper direct image preserves bounded constructibility by the finite-type finiteness theorem, which is stated over a field, hence applies to each indicated geometric field. The open--closed recollement theorem gives the required localization triangle. If $M$ is supported on the closed subscheme, $j^*M=0$ and that triangle identifies $M$ with $i_*i^*M$. For $u=he$, $e$ open and $h$ proper, the compactification $(e,h)$ computes $Ru_!$ as $Rh_*e_!$; compactification independence identifies it with the specified $Ru_!$. Compact-support base change along an open of the target identifies these computations after restriction. Extension by zero preserves constructibility by the extension-by-zero theorem, and boundedness follows from its exactness (already part of the recollement statement); proper finiteness then gives bounded constructibility of the composite. Restrictions preserve constructibility.",
+   "uses": [
+    "sbc-thm-finiteness-finite-type",
+    "lem-cbc-open-closed-recollement",
+    "def-amb-etale-compact-support",
+    "lem-amb-etale-compact-comparisons",
+    "lem-weil-pbc-etale-compact-support-base-change-qcqs",
+    "lem-fin-extension-by-zero",
+    "prop-constructible-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "1.3.2, 4.1.4(b); agent expansion of the structural counit/evaluation calculation, with the diagonal/deformation purity route"
+   }
+  },
+  {
+   "text": "For an arrow $h:X\\to Y$, let $d_h(N):T_Xh^!N\\to h'^!T_YN$ be the exceptional mate of $C_h$. Compact-support composition gives $C_{a_X}=C_{a_Y}\\circ Ra_{Y'!}(C_h)$ under $a_X=a_Yh$. Take exceptional adjuncts. The composite-adjunction counit is $\\epsilon_{a_Y}\\circ Ra_{Y!}(\\epsilon_h)$, so the mate-pasting identity gives\n$$d_X=h'^!(d_Y)\\circ d_h(\\omega_Y),\\qquad \\omega_X=h^!\\omega_Y.$$\nThis calculation uses the ambient right adjoints and fixes the structural maps over the actual geometric fields. The same argument defines the proper structural trace $\\tau_h:Rh_*\\omega_X\\to\\omega_Y$ and yields\n$$d_Y\\circ T_Y(\\tau_h)\\circ C_h(\\omega_X)=\\tau_{h'}\\circ Rh'_*(d_X)$$\nfor proper $h$. Indeed both exceptional adjuncts are $T_{\\mathrm{base}}$ of $\\epsilon_{a_Y}\\circ Ra_{Y!}\\epsilon_h$ after the composition formula for $C$. Thus the equality concerns the chosen structural counits. Composition of compact supports and of their right adjoints, used for $C_{a_X}$ and for $\\omega_X=h^!\\omega_Y$, is the unbounded composition comparison $\\alpha$ of [lem-amb-unbounded-compact-support-comparisons], which also supplies unbounded compact-support base change.",
+   "uses": [
+    "lem-trf-nearby-compact-tensor-coherence",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-weil-pbc-mate-pasting",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "1.3.2, 4.1.4(b); agent expansion of the structural counit/evaluation calculation, with the diagonal/deformation purity route"
+   }
+  },
+  {
+   "text": "For proper $h$ on either geometric fibre, use the absolute-trace exchange lemma with $F=Rh_*=Rh_!$, $U=h^*$, $R=Rh_*$, $P_Z=Ra_{Z!}$ and $\\Omega=A$. Its composition isomorphism is compact-support composition, and its tensor isomorphism is the proper projection formula, valid on unbounded etale categories. This supplies the proper-duality isomorphism $\\chi_h:Rh_*D_XL\\xrightarrow{\\sim}D_YRh_*L$ with the following specified evaluation:\n$$\\operatorname{ev}_{Rh_*L}(\\chi_h\\otimes1)=\\tau_h\\circ Rh_*\\operatorname{ev}_L\\circ\\mu_h.$$\nHere $\\mu_h:Rh_*D_XL\\otimes Rh_*L\\to Rh_*(D_XL\\otimes L)$ is the direct-image lax tensor map; by its counit definition it equals $Rh_*(1\\otimes\\epsilon_h)\\circ\\mathrm{PF}_h(D_XL,Rh_*L)$. The hypotheses hold without finite Tor dimension: the projection theorem is unbounded, the structural adjoints exist, and bounded constructibility of the resulting duals and images was checked in Steps 1--2. The isomorphism $\\kappa:Ra_{Y!}Rh_*\\cong Ra_{X!}$ on the whole unbounded categories is the composition comparison of [lem-amb-unbounded-compact-support-comparisons] with $Rh_!=Rh_*$ normalized by the compactification $(\\mathrm{id},h)$.",
+   "uses": [
+    "lem-sf-absolute-trace-exchange",
+    "lem-etale-proper-projection-formula-finite",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-trf-nearby-compact-tensor-coherence",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "1.3.2, 4.1.4(b); agent expansion of the structural counit/evaluation calculation, with the diagonal/deformation purity route"
+   }
+  },
+  {
+   "text": "Fix proper $h$. Precompose the pairing $E_Y(Rh_*L)$ by $T_Y\\chi_h\\otimes1$, and substitute Step 4. Monoidality of $e_h$ moves $t_Y$ and $T_Y\\mu_h$ to $Rh'_*t_X\\circ\\mu_{h'}\\circ(e_h\\otimes e_h)$. Naturality of $e_h$ moves $T_YRh_*\\operatorname{ev}_L$ to $Rh'_*T_X\\operatorname{ev}_L$. Finally replace $d_YT_Y\\tau_h e_h^{-1}$ by $\\tau_{h'}Rh'_*d_X$ using Step 3. The resulting equality is\n$$E_Y(Rh_*L)(T_Y\\chi_h\\otimes1)=\\tau_{h'}Rh'_*E_X(L)\\mu_{h'}(e_h(D_XL)\\otimes e_h(L)).$$\nUncurry $Rh'_*\\alpha_X(L)$ using Step 4 on the target fibre. Its evaluation is exactly the right side. Injectivity of the tensor--Hom bijection therefore identifies $\\alpha_Y(Rh_*L)$ with $Rh'_*\\alpha_X(L)$ under $\\chi_h,\\chi_{h'},e_h$. This proves equality of the actual arrows. With $T=q^*$ the identical equation proves the proper square for $\\beta$.",
+   "uses": [
+    "lem-trf-nearby-compact-tensor-coherence",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "1.3.2, 4.1.4(b); agent expansion of the structural counit/evaluation calculation, with the diagonal/deformation purity route"
+   }
+  },
+  {
+   "text": "Now let $h$ be smooth of pure relative dimension $r$. The ambient diagonal-purity lemma gives $h^!=h^*(-)(r)[2r]$ and the evaluation-normalized internal-Hom isomorphism $H_h$. Applied with $M=\\omega_Y$, it identifies $D_Xh^*L$ with $h^!D_YL=h^*D_YL(r)[2r]$. Denote the exceptional tensor map $h^!M\\otimes h^*N\\to h^!(M\\otimes N)$ by $T_h$. Its adjunct is inverse projection followed by $\\epsilon_h\\otimes1$. Under the preceding identification, the evaluation of $D_Xh^*L$ is $h^!\\operatorname{ev}_L\\circ T_h$. This is precisely the defining evaluation equation for $H_h$, rather than an assumed commutation of arbitrary pullback with internal Hom.",
+   "uses": [
+    "lem-trf-ambient-diagonal-purity-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "1.3.2, 4.1.4(b); agent expansion of the structural counit/evaluation calculation, with the diagonal/deformation purity route"
+   }
+  },
+  {
+   "text": "The projection identity for $C_h$ in the tensor-coherence lemma, transposed under $Rh'_!\\dashv h'^!$, gives\n$$d_h(M\\otimes N)\\,T_XT_h\\,t_X(1\\otimes b_h(N))=h'^!t_Y\\,T_{h'}(d_h(M)\\otimes1).$$\nTo see the direction, the adjunct on each side starts with inverse $\\mathrm{PF}_{h'}$, inserts $C_h$ on the first factor, and ends with $T_Y(\\epsilon_h\\otimes1)$; the displayed projection identity and the defining counit equation of $d_h$ make these equal. Set $M=D_YL$, $N=L$, follow by $h'^!T_Y\\operatorname{ev}_L$ and then $h'^!d_Y$. Step 3 identifies the last composite on the source side with $d_XT_X(h^!\\operatorname{ev}_L)$. Step 6 identifies the remaining evaluation. Hence, after tensoring the second factor by $b_h(L)$, the two pairings obtained from $\\alpha_X(h^*L)$ and $h'^!\\alpha_Y(L)\\circ d_h(D_YL)$ are equal. The tensor--Hom bijection identifies the arrows under $H_h,H_{h'}$ and smooth exchange $b_h$. This calculation applies also to $\\beta$. Here $\\mathrm{PF}_{h'}$ is invertible on the unbounded categories, as are the projection maps used to define $T_h,T_{h'}$: on a compactification $h'=rj$ the comparison $j_!(j^*P\\otimes Q)\\cong P\\otimes j_!Q$ is checked on geometric stalks [lem-weil-pbc-extension-by-zero-stalks] (identity over the open, both sides zero outside, computed termwise on a K-flat model since $j_!$ is exact), and $r$ satisfies the unbounded proper projection formula [lem-etale-proper-projection-formula-finite].",
+   "uses": [
+    "lem-trf-nearby-compact-tensor-coherence",
+    "lem-weil-pbc-mate-pasting",
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-pod-closed-uncurry-laws",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-etale-proper-projection-formula-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "1.3.2, 4.1.4(b); agent expansion of the structural counit/evaluation calculation, with the diagonal/deformation purity route"
+   }
+  },
+  {
+   "text": "Identify the smooth exceptional mate just used. In the Cartesian squares for $\\bar j$ and $i$, the base-change equation for $\\gamma_h$ in the ambient diagonal-purity lemma identifies the exceptional comparisons with ordinary pullback comparison tensored with $A(r)[2r]$. Passing from the $\\bar j^*$ square to its $R\\bar j_*$ mate, and composing with $i^*$, preserves that equation by mate pasting. Thus\n$$d_h(N)=b_h(N)^{-1}(r)[2r]$$\nunder the two purity identifications. The Tate line is defined on the whole trait family and is locally free of rank one; its tensor and shift can be moved through this comparison, as is already part of that base-change equation. Step 7 consequently reads\n$$\\alpha_X(h_{\\bar\\eta}^*L)=h_0^*\\alpha_Y(L)(r)[2r].$$\nFor $q^*$ the base-change equation gives the same conclusion directly. At $r=0$ the normalization is the etale adjunction, so in particular these are the required open-immersion squares.",
+   "uses": [
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-trf-nearby-compact-tensor-coherence",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "1.3.2, 4.1.4(b); agent expansion of the structural counit/evaluation calculation, with the diagonal/deformation purity route"
+   }
+  },
+  {
+   "text": "For a smooth pure-dimensional $X/F$, apply ambient diagonal purity to $a_X$ and its base change along $\\operatorname{Spec}K\\to\\operatorname{Spec}F$. The counit-defined exceptional base-change map is exactly $\\delta_X$, by its definition as the adjunct of compact-support base change and the structural counit. The purity base-change equation at $A_F$ therefore identifies it with the canonical map $q^*A_X(r)[2r]=A_{X_K}(r)[2r]$. This uses the diagonal, deformation and Kummer-normalized bundle construction, and makes no assertion about $\\delta_X$ for nonsmooth $X$.",
+   "uses": [
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-weil-pbc-etale-compact-support-base-change-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "1.3.2, 4.1.4(b); agent expansion of the structural counit/evaluation calculation, with the diagonal/deformation purity route"
+   }
+  },
+  {
+   "text": "The reduction and finite-trait-extension identifications of the tensor-coherence lemma identify $T,t,C$ and all composition maps. Step 3 then identifies their structural mates $d_Z$ by the injective exceptional-adjunction bijections. Evaluation, being the counit of tensor--Hom, is identified by conjugating that adjunction, and its transpose is consequently identified too. This proves reduction and finite-trait-extension compatibility of $\\alpha$ and $\\beta$. Here reduction means passage to reduced schemes, as used by the parent node to remove nilpotents; it does not mean derived reduction of the coefficient ring on arbitrary non-Tor-finite inputs. Topological invariance justifies the underlying etale identifications for reduced schemes.",
+   "uses": [
+    "lem-trf-nearby-compact-tensor-coherence",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "1.3.2, 4.1.4(b); agent expansion of the structural counit/evaluation calculation, with the diagonal/deformation purity route"
+   }
+  },
+  {
+   "text": "For descent put $k=\\kappa(\\eta)$, fix its chosen algebraic geometric closure $\\bar k$, and index its finite subextensions $k_i/k$. The schemes $X_i=X_\\eta\\times_k k_i$ are Noetherian, quasi-compact and quasi-separated, their transitions are affine, and their limit is $X_{\\bar\\eta}$. Constructible-sheaf limit descent gives models for the finitely many nonzero cohomology sheaves of $L$. To descend their extension data use the Ext-continuity lemma. By induction on the two finite Postnikov lengths, its isomorphisms for sheaves extend to Hom in each fixed degree between bounded constructible complexes: apply the long exact Hom sequences to truncation triangles, use exactness of filtered colimits, and the five lemma on five successive terms. To construct $L$ itself, start with its lowest cohomology sheaf and descend successively the connecting maps $H^q(L)[-q]\\to\\tau_{\\leq q-1}L[1]$ using that Hom continuity, then take their cones. Pullback is exact, so these triangles recover the Postnikov triangles of $L$. There are finitely many stages and maps; a common later finite subextension works for all. Thus $L$ descends to a bounded constructible complex over a finite extension of the generic field. Applying Step 10 after that extension shows that its geometric evaluation comparison is the specified one, independently of further finite extension.",
+   "uses": [
+    "lem-trf-constructible-etale-ext-continuity",
+    "lem-weil-pbc-constructible-module-limit-descent",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "1.3.2, 4.1.4(b); agent expansion of the structural counit/evaluation calculation, with the diagonal/deformation purity route"
+   }
+  },
+  {
+   "text": "All identities above are identities of natural maps on the specified derived models. An equality of such arrows identifies the corresponding model cones. The exact derived functors and their shift-compatible transformations supplied by tensor coherence preserve the triangles defining these cones. This gives the cone identifications asserted in the item. None of the arguments cancels $\\alpha_X$, $\\beta_X$, or a general structural comparison; only proper exchange, smooth exchange, proper duality and smooth purity were inverted.",
+   "uses": [
+    "lem-trf-nearby-compact-tensor-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "1.3.2, 4.1.4(b); agent expansion of the structural counit/evaluation calculation, with the diagonal/deformation purity route"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-geometric-duality-uniform-range",
+  "lem-trf-nearby-compact-tensor-coherence",
+  "def-pur-derived-internal-hom",
+  "def-kun-derived-tensor",
+  "def-trf-deformation-specialization",
+  "lem-pur-finite-coefficient-adjoint-comparisons",
+  "thm-amb-etale-exceptional-adjoint",
+  "sbc-thm-finiteness-finite-type",
+  "lem-cbc-open-closed-recollement",
+  "def-amb-etale-compact-support",
+  "lem-amb-etale-compact-comparisons",
+  "lem-weil-pbc-etale-compact-support-base-change-qcqs",
+  "lem-fin-extension-by-zero",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-mate-pasting",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-sf-absolute-trace-exchange",
+  "lem-etale-proper-projection-formula-finite",
+  "lem-pod-closed-uncurry-laws",
+  "lem-trf-ambient-diagonal-purity-base-change",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-trf-constructible-etale-ext-continuity",
+  "lem-weil-pbc-constructible-module-limit-descent",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-five-lemma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "1.3.2, 4.1.4(b); agent expansion of the structural counit/evaluation calculation, with the diagonal/deformation purity route"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,7 +295,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-cycle-verdier-duality",
@@ -113,5 +316,114 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-nearby-duality-operation-squares",
+  "worker": "stage1",
+  "summary": "Expanded structural evaluation comparisons through compact-support projection and counit identities; retained arbitrary geometric fields and non-finite-Tor inputs. Added three strictly smaller raw inputs (tensor/compact coherence, ambient diagonal purity, constructible Ext continuity). Localization and constructible finiteness use existing nodes. No comparison invertibility is assumed.",
+  "blueprint": "Realizes the normal-cone-specialization input of lem-trf-local-term-locality, Proof (1)--(2), through Varshavsky 1.3.2 and 4.1.4(b); proper and smooth evaluation squares are computed explicitly. Smooth purity follows the diagonal/deformation/Kummer route of main-20261015.",
+  "tool_uses": [
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Generic Derived internal Hom on a ringed site used in its stated etale or categorical domain; this supplies a tool for the evaluation calculation and does not replace the normal-cone specialization route."
+   },
+   {
+    "node": "def-kun-derived-tensor",
+    "why": "Generic Derived tensor product of etale sheaves used in its stated etale or categorical domain; this supplies a tool for the evaluation calculation and does not replace the normal-cone specialization route."
+   },
+   {
+    "node": "sbc-thm-finiteness-finite-type",
+    "why": "Generic Finiteness of higher direct images of finite-type morphisms used in its stated etale or categorical domain; this supplies a tool for the evaluation calculation and does not replace the normal-cone specialization route."
+   },
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "Generic Open-closed recollement used in its stated etale or categorical domain; this supplies a tool for the evaluation calculation and does not replace the normal-cone specialization route."
+   },
+   {
+    "node": "def-amb-etale-compact-support",
+    "why": "Generic Compact supports on the ordinary etale category used in its stated etale or categorical domain; this supplies a tool for the evaluation calculation and does not replace the normal-cone specialization route."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic The etale compact-support comparisons used in its stated etale or categorical domain; this supplies a tool for the evaluation calculation and does not replace the normal-cone specialization route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-compact-support-base-change-qcqs",
+    "why": "Generic Arbitrary base change for qcqs etale compact support used in its stated etale or categorical domain; this supplies a tool for the evaluation calculation and does not replace the normal-cone specialization route."
+   },
+   {
+    "node": "lem-fin-extension-by-zero",
+    "why": "Generic Extension by zero preserves constructibility used in its stated etale or categorical domain; this supplies a tool for the evaluation calculation and does not replace the normal-cone specialization route."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic Pullback of constructible sheaves used in its stated etale or categorical domain; this supplies a tool for the evaluation calculation and does not replace the normal-cone specialization route."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic The ordinary ambient exceptional adjoint used in its stated etale or categorical domain; this supplies a tool for the evaluation calculation and does not replace the normal-cone specialization route."
+   },
+   {
+    "node": "lem-sf-absolute-trace-exchange",
+    "why": "Generic Verdier exchange from absolute trace adjunctions and a projection formula used in its stated etale or categorical domain; this supplies a tool for the evaluation calculation and does not replace the normal-cone specialization route."
+   },
+   {
+    "node": "lem-etale-proper-projection-formula-finite",
+    "why": "Generic Unbounded proper projection formula with finite coefficients used in its stated etale or categorical domain; this supplies a tool for the evaluation calculation and does not replace the normal-cone specialization route."
+   },
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Generic Universal-homeomorphism invariance used in its stated etale or categorical domain; this supplies a tool for the evaluation calculation and does not replace the normal-cone specialization route."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-limit-descent",
+    "why": "Generic A constructible sheaf of $\\Lambda$-modules on a limit of qcqs schemes descends to some stage (Stacks 09YU (3), essential surjectivity) used in its stated etale or categorical domain; this supplies a tool for the evaluation calculation and does not replace the normal-cone specialization route."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic The truncation triangle tau_{<=q-1}K -> tau_{<=q}K -> H^q(K)[-q] is distinguished used in its stated etale or categorical domain; this supplies a tool for the evaluation calculation and does not replace the normal-cone specialization route."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Unbounded compact-support composition and base change (generic ambient tool) give kappa and omega_X=h^!omega_Y in Steps 3-4; no node of this unit states them."
+   },
+   {
+    "node": "lem-pur-finite-coefficient-adjoint-comparisons",
+    "why": "Identifies the finite-coefficient exceptional inverse image over an arbitrary field with the transported ordinary etale right adjoint, so the statement omega_Z=Ra_Z^!A is the ambient a_Z^times A used in the steps."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Stalks of extension by zero, used to check invertibility of the open part of the compact-support projection map in Step 7."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-derived-internal-hom",
+  "def-kun-derived-tensor",
+  "sbc-thm-finiteness-finite-type",
+  "lem-cbc-open-closed-recollement",
+  "def-amb-etale-compact-support",
+  "lem-amb-etale-compact-comparisons",
+  "lem-weil-pbc-etale-compact-support-base-change-qcqs",
+  "lem-fin-extension-by-zero",
+  "prop-constructible-pullback",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-sf-absolute-trace-exchange",
+  "lem-etale-proper-projection-formula-finite",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-weil-pbc-constructible-module-limit-descent",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-pur-finite-coefficient-adjoint-comparisons",
+  "lem-weil-pbc-extension-by-zero-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-7a7816caf",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-7a7816caf (reviewer sub-agent of L); spot-checked: I read the whole item, all 12 steps, the three new nodes, the statement of every cited node and the sources at the cited places: Varshavsky 0.3, 1.3.2(a)-(c) and 4.1.4(b); Scholze V Definition 5.1 and Theorem 5.5; Stacks 09YU and 0GIT. The item statement is unchanged and not weakened, and it covers every clause the parent lem-trf-nearby-cycle-verdier-duality uses. I rechecked the mate and transposition calculations of Steps 3, 5, 7 and 8 by hand, and the directions and normalizations are correct. The three new nodes are true, strictly smaller than the item, and none restates a clause of it. Ext-continuity is not a duplicate: the existing continuity nodes are all about the second variable on a fixed scheme. The ambient purity node overlaps the blueprint nodes thm-asd-smooth-tensor and prop-asd-smooth-base-change but is still needed, because neither chooses the DNC orientation; whoever splits it should cite them. I fixed three missing citations of the C1 kind in the item, with no statement change. (1) Step 1: the statement's omega=Ra^!A (constructible) is now identified with the ambient etale a^x A and its counit via lem-pur-finite-coefficient-adjoint-comparisons. (2) Steps 3-4: compact-support composition on the unbounded categories (kappa, omega_X=h^!omega_Y) was uncited; now lem-amb-unbounded-compact-support-comparisons. (3) Step 7: the compact-support projection map must be invertible on the unbounded categories (it also defines T_h); now justified by a compactification argument citing lem-weil-pbc-extension-by-zero-stalks and lem-etale-proper-projection-formula-finite. proof_deps is recomputed and three tool_uses are added with reasons. The 15 declared generic tool_uses are accepted. review_split.py passes before and after the fix, and the added citations create no cycle.; 1 file(s) fixed by the reviewer"
  }
 }

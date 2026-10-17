@@ -10,9 +10,78 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=J_0^{\\mathrm{disc}}$. Its canonical map $i:A\\to J$ is degreewise injective: an $m$-simplex of $A$ is the constant simplex at a vertex $j$, and restricting its image along any vertex of $\\Delta^m$ recovers $j$. Apply the restriction clause of [lem-coef-infinity-isofibration-exponentiation] with $A\\hookrightarrow J$ and the given quasicategory $D$. Thus $R:\\operatorname{Fun}(J,D)\\to\\operatorname{Fun}(A,D)$ is an isofibration between quasicategories. Apply [lem-coef-infinity-core-kan-fibration] to $R$. Its induced core map is exactly the stated restriction $r:E\\to B$, where $E=\\operatorname{Fun}(J,D)^\\simeq$ and $B=\\operatorname{Fun}(A,D)^\\simeq$, so $r$ lifts every horn, including the outer horns.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-core-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F3",
+    "place": "Corollary 4.4.5.3, followed by Proposition 4.4.3.7 (01EZ; also read in Subsection 4.4.3, 01CZ)."
+   }
+  },
+  {
+   "text": "Write $I=\\Delta^1$. The defining equations for $\\mathcal L=\\mathcal L(d,e)$ are preserved under precomposition by $\\Delta^m\\times I\\to\\Delta^n\\times I$ induced by every simplex operator. They therefore define a simplicial set. More generally, a simplicial map $T\\to\\mathcal L$ is precisely a map $H:T\\times I\\to E$ such that the restriction of $H$ to $T\\times\\{0\\}$ is constant at $d$ and $rH=e\\operatorname{pr}_I$: in degree $m$, evaluation sends a pair consisting of an $m$-simplex $t$ of $T$ and an $m$-simplex $s$ of $I$ to $H_t(\\operatorname{id}_{[m]},s)$. Conversely, restriction to each simplex $t:\\Delta^m\\to T$ recovers $H_t$. These operations are inverse and commute with operators, by the definition of the internal functor simplicial set in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, normalized coherent diagrams in the inverse-limit mapping-space calculation; explicit agent expansion of simplicial parameters."
+   }
+  },
+  {
+   "text": "Fix $n\\geq0$ and a boundary $u:\\partial\\Delta^n\\to\\mathcal L$, with $\\partial\\Delta^0=\\varnothing$. Step 2 gives its family $H_\\partial:\\partial\\Delta^n\\times I\\to E$. On $\\Delta^n\\times\\{0\\}$ prescribe the constant map at $d$. These maps agree on $\\partial\\Delta^n\\times\\{0\\}$, hence glue degreewise to a map from $K_n=(\\partial\\Delta^n\\times I)\\cup(\\Delta^n\\times\\{0\\})$ to $E$. Its image under $r$ equals $e\\operatorname{pr}_I$, since this holds on the first piece by the defining equation and on the second by $e(0)=r(d)$. The inclusion $\\{0\\}\\hookrightarrow I$ is the horn inclusion $\\Lambda_0^1\\hookrightarrow\\Delta^1$, so it has the left lifting property against all Kan fibrations. The inclusion $\\partial\\Delta^n\\hookrightarrow\\Delta^n$ is degreewise injective. Apply [lem-coef-sset-anodyne-pushout-product] to these two maps: the resulting map $K_n\\hookrightarrow\\Delta^n\\times I$ is anodyne. As $r$ is a Kan fibration by Step 1, it supplies a filler $H:\\Delta^n\\times I\\to E$ with $rH=e\\operatorname{pr}_I$, extending both prescribed pieces exactly. Step 2 identifies $H$ with a simplex of $\\mathcal L$ filling $u$. For $n=0$ this is a lift of $e$ with initial vertex $d$, so in particular $\\mathcal L$ has a vertex.",
+   "uses": [
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
+    "place": "SSet.anodyneExtensions_pushoutObjObjι, lines 95-103; explicit boundary lifting square, including dimension zero."
+   }
+  },
+  {
+   "text": "Step 3 proves that $\\mathcal L\\to\\Delta^0$ has the right lifting property against every boundary inclusion, including $\\partial\\Delta^0\\hookrightarrow\\Delta^0$. The boundary characterization in [lem-coef-kan-quillen-model-right-proper-core] makes this map a trivial fibration in the Kan--Quillen model structure. In particular it is a Kan fibration and a weak homotopy equivalence for the geometric-realization meaning fixed there. A Kan fibration to $\\Delta^0$ is exactly a Kan complex, and the weak equivalence to $\\Delta^0$ is exactly contractibility in [def-cbc-enhanced-diagrams-cones]. Together with the dimension-zero filler this gives all three assertions: nonempty, Kan, and contractible.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Definition Tag 08NL (label definition-trivial-kan, lines 5533-5545) for the boundary convention; the existing Kan--Quillen-model node supplies the weak-equivalence characterization."
+   }
+  },
+  {
+   "text": "Let $h$ be a vertex of $\\mathcal L$. It is an edge $d\\to d^{\\prime}=h(1)$ in the core $E$, hence an equivalence of coherent diagrams by the core definition in [def-cbc-enhanced-diagrams-cones]. The exact equation $rh=e$ gives both its prescribed vertex-equivalence path and $r(d^{\\prime})=e(1)$ as equalities of simplicial maps; no replacement of terminal vertex values by merely equivalent values has occurred. For any simplex operator $\\alpha:[m]\\to[n]$, the family associated to the restricted simplex is $h\\circ(\\Delta(\\alpha)\\times\\operatorname{id}_I)$. It still has initial value $d$ and projects to the entire fixed path $e$. Thus all parameter restrictions and all higher comparisons are those of the same Kan complex $\\mathcal L$, whose contractibility was just proved. The equation at $t=1$ constrains only the vertex restriction of the terminal diagram; the terminal diagram itself has never been fixed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, literal vertex normalization and compatibility of choices; explicit extraction from the defining equations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-sset-anodyne-pushout-product",
+  "lem-coef-kan-quillen-model-right-proper-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2; explicit normalized lift-space argument using existing isofibration/core, pushout-product and Kan--Quillen-model nodes. Online Kerodon 01F3 and 01CZ checked; archival copies WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +117,52 @@
    "results": "8 hits; recorded top names: CategoryTheory.LiftableCocone.noConfusionType, CategoryTheory.LiftableCocone.mk.noConfusion, CategoryTheory.LiftableCocone.noConfusion, CategoryTheory.Paths.lift_unique, CategoryTheory.HasLiftingPropertyFixedBot, CategoryTheory.Functor.IsCocartesian.map.congr_simp, CategoryTheory.CommSq.LiftStruct.mk.noConfusion, CategoryTheory.WithInitial.coconeEquiv_functor_obj_pt",
    "date": "2026-10-17",
    "verdict": "no match: ordinary enriched functor categories, model-category interfaces or ordinary Kan extension results; none states the specified quasicategory/coherent-nerve comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "isofibration|core.*fibration|fibration.*core|contractible.*lift",
+   "results": "{\"t\": \"2026-10-17T15:01:31Z\", \"tool\": \"grep\", \"query\": \"isofibration|core.*fibration|fibration.*core|contractible.*lift\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types are absent or concern basic horn filling, ordinary categorical cocones or abstract path objects; they do not state this quasicategory restriction/core assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent diagram equivalences in a quasicategory lift fixed vertex equivalences with a contractible space of normalized choices",
+   "results": "{\"t\": \"2026-10-17T15:01:32Z\", \"tool\": \"leansearch\", \"query\": \"Coherent diagram equivalences in a quasicategory lift fixed vertex equivalences with a contractible space of normalized choices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.map.congr_simp\", \"CategoryTheory.WithInitial.coconeEquiv_inverse_obj_pt_right\", \"CategoryTheory.Limits.Cocones.whiskeringEquivalence_functor\", \"CategoryTheory.WithInitial.coconeEquiv\", \"CategoryTheory.Functor.coconeTypesEquiv\", \"CategoryTheory.WithInitial.coconeEquiv_functor_obj_ι_app_of\", \"CategoryTheory.CommSq.lift.congr_simp\", \"CategoryTheory.Functor.mapCoconeInv\"], \"digest\": \"60d5f6c21e3ba9fe\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types are absent or concern basic horn filling, ordinary categorical cocones or abstract path objects; they do not state this quasicategory restriction/core assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"isofibration\"",
+   "results": "{\"t\": \"2026-10-17T15:01:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"isofibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types are absent or concern basic horn filling, ordinary categorical cocones or abstract path objects; they do not state this quasicategory restriction/core assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasicategory restriction of coherent diagrams to vertices has a contractible Kan space of lifts of a fixed equivalence path from a fixed diagram",
+   "results": "{\"t\": \"2026-10-17T15:01:33Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasicategory restriction of coherent diagrams to vertices has a contractible Kan space of lifts of a fixed equivalence path from a fixed diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.Quasicategory.hornFilling'\", \"SSet.StrictSegal.quasicategory\", \"SSet.Truncated.Quasicategory₂\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.quasicategory_of_filler\"], \"digest\": \"3daf83887461660d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types are absent or concern basic horn filling, ordinary categorical cocones or abstract path objects; they do not state this quasicategory restriction/core assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "fibration_pullbackObjObjπ|anodyneExtensions_pushoutObjObjι",
+   "results": "{\"t\": \"2026-10-17T15:01:45Z\", \"tool\": \"grep\", \"query\": \"fibration_pullbackObjObjπ|anodyneExtensions_pushoutObjObjι\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\"], \"digest\": \"53c2fa0e91f1c627\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the pushout-product and fibration-corner hits supply existing proof tools, not the full normalized quasicategory lift-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Kan fibration the simplicial set of lifts of a fixed path with a prescribed starting point is nonempty and weakly contractible",
+   "results": "{\"t\": \"2026-10-17T15:01:46Z\", \"tool\": \"leanfinder\", \"query\": \"For a Kan fibration the simplicial set of lifts of a fixed path with a prescribed starting point is nonempty and weakly contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.KanComplex\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"36353dd6db809269\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types are absent or concern basic horn filling, ordinary categorical cocones or abstract path objects; they do not state this quasicategory restriction/core assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-right-fibration-section-limit",
@@ -81,5 +192,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-coherent-vertex-equivalence-lifts",
+  "worker": "stage1-Q59",
+  "summary": "Preserved the statement. Proved restriction on cores is a Kan fibration using existing nodes, then filled every boundary in the normalized lift space with the anodyne pushout-product of a boundary and the initial-endpoint horn. Dimension zero gives nonemptiness; the existing Kan--Quillen model characterization gives Kan fibrancy and weak contractibility. Expanded exact terminal values and all simplicial parameter restrictions. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint (inverse-limit mapping-space calculation), through the inherited right-fibration-section-limit normalization steps 3-4. The unit and all ancestry metadata are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-bd5303db7",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-bd5303db7 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 5 steps and every cited node statement, and checked them against the main-20261015 ancestor proof file. The item's statement is byte-identical to the unsplit side-DAG node, and no new nodes are created. Statement checked: L(d,e) is exactly the fibre over (d,e) of Fun(Δ^1,E)→E×_B Fun(Δ^1,B), which is a trivial fibration once r is a Kan fibration. Small cases hold: J empty, J=Δ^0 and J discrete each give a point. Leaving the terminal diagram free is correct. Step 1: the map from A to J is degreewise injective. The 'In particular' clause of infinity-isofibration-exponentiation applies, and core-kan-fibration's definition of isofibration matches it, so r on cores is a Kan fibration. Step 2 is an elementary Yoneda/degreewise correspondence. Step 3: Λ^1_0={0} under the node's horn convention, the gluing over ∂Δ^n×{0} is compatible, and r applied to the glued map equals e·pr because e(0)=r(d). The pushout-product Mathlib leaf (∂Δ^n mono, Λ^1_0 anodyne) gives the filler, and n=0 gives nonemptiness. Step 4: lifting against all boundaries including n=0 makes L→Δ^0 a trivial fibration by the kan-quillen node, hence a Kan complex that is weakly contractible. That weak-equivalence notion agrees with def-cbc's 'contractible'. Step 5: a core edge is an equivalence, rh=e gives the exact terminal vertex values, and simplicial operators preserve both conditions. Route: every cited statement node is in sk-prop-sf-biduality-general; def-cbc is a definition and the pushout-product node is a Mathlib leaf, so no tool_uses are needed. No SGA is cited. Duplicate search found no node stating the item. Candidates read: finite-core-fiber-contraction, initial-evaluation-trivial-fibration, coherent-fixed-vertex-cofibrations, left-fibration-relative-cylinder-lifting (a generic tool that could stand in for Step 3, not a duplicate). Delivery-errors A–F are satisfied. Kerodon and HTT are recorded as WANTED, and proof_origin is agent. No fixes made."
  }
 }

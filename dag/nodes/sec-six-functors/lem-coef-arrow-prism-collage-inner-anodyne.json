@@ -12,9 +12,126 @@
   "def-coef-infinity-relative-join",
   "lem-coef-inner-anodyne-pushout-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $e:J\\to\\Delta^1$ record the join-block parameter of [def-coef-infinity-relative-join]. A simplex of $P_x$ is a weak chain $v_0\\leq\\cdots\\leq v_m$. Record its indices $a:[m]\\to[n]$ and its row $r:[m]\\to[1]$ ($s$ has row $0$, $t$ row $1$). The cross relations say precisely that both maps are monotone and $e(x)a\\leq r$. Assign this chain the pair $(r,a^*x)$. It respects every generating simplex-operator identification in the quotient. Conversely, a pair $(r,y)$ with $y\\in J_m$ and $e(y)\\leq r$ is represented in $P_y$ by the chain choosing $s_k$ when $r(k)=0$ and $t_k$ otherwise. Applying the support operator $a$ identifies this representative with the original chain in $P_x$. These two constructions are inverse in each degree and commute with precomposition. Hence, directly from the stated quotient, $P_m=\\{(r,y):e(y)\\leq r\\}$ with coordinatewise simplicial operators. This is an explicit identification of this item's objects, not an assumption that the support maps $P_x\\to P$ are injective.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-join"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Agent-written relative staircase expansion of the construction of S in Proposition 7.3.5.5; degreewise normal form for the quotient"
+   }
+  },
+  {
+   "text": "Write $J_0=e^{-1}(0)$ for the simplicial fiber, not the set of vertices. The full initial join factor identifies $J_0$ with $B$. In the normal form of step 1, the target simplex in each $Q_x$ gives exactly the pairs $(1,y)$. A chain in its prism has all indices in the initial block, and thus gives $e(y)=0$; conversely every pair with $e(y)=0$ is represented in the prism of $P_y$. Therefore $Q=(\\{1\\}\\times J)\\cup(\\Delta^1\\times J_0)$ inside $P$. Likewise $P_H=\\{(r,y)\\in P:y\\in H\\}$: one direction follows because $H$ is a simplicial subset; the other uses the representative in $P_y$. These formulas include degenerate supports and show that all these unions are simplicial subsets.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-join"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Agent-written relative staircase expansion of the construction of S in Proposition 7.3.5.5; identify the prescribed simplicial subset"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] to the second coordinate: write uniquely $y=a^*x$ for a surjective monotone $a:[m]\\twoheadrightarrow[n]$ and nondegenerate $x\\in J_n$. Since $a$ has a monotone section, $y\\in H$ if and only if $x\\in H$. For this fixed support, a pair $(r,a^*x)$ is degenerate in $P$ if and only if some adjacent positions have both the same $a$-value and the same $r$-value. In that case collapsing those positions produces its degeneracy explicitly. Conversely, if the pair is a degeneracy, its second coordinate and the uniqueness assertion force $a$ to factor through that degeneracy; its row factors too, giving such equal adjacent values. Thus every nondegenerate simplex of $P$ is represented by a strict chain in $P_x$ whose index map is surjective, with uniquely determined $x,a,r$. In particular two such representatives can coincide only when all three data coincide.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Agent-written relative staircase expansion of the construction of S in Proposition 7.3.5.5; unique nondegenerate support and the degeneracy test"
+   }
+  },
+  {
+   "text": "For a support $x\\in J_n$, let $i$ be its last initial-block index. If $i=-1$, only the target row is available, so all its chains lie in $Q$. If $i=n$, the whole $P_x$ is its prism, again in $Q$. If $x\\in H$, all its chains lie in $P_H$. Otherwise $0\\leq i<n$. A strict full-support chain outside $Q$ has a last source vertex $s_j$, $0\\leq j\\leq i$. All sources precede all targets. Surjectivity of its indices forces the sources to be exactly $s_0,\\ldots,s_j$ and the targets to be $t_{j+1},\\ldots,t_n$, with the sole optional additional vertex $t_j$. Thus the missing nondegenerate simplices, with this unique support, are exactly\n$$A_{x,j}=(s_0,\\ldots,s_j,t_{j+1},\\ldots,t_n),\\qquad B_{x,j}=(s_0,\\ldots,s_j,t_j,t_{j+1},\\ldots,t_n).$$\nTheir dimensions are $n$ and $n+1$. This exhausts the possibilities because any repeated index in a strict chain must occur at its single row change.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Agent-written relative staircase expansion of the construction of S in Proposition 7.3.5.5; enumerate the missing simplices; no separate comparison lemma is invoked"
+   }
+  },
+  {
+   "text": "Order attachments first by support dimension $n\\geq1$, then by $j=0,\\ldots,n-1$, using all eligible $x$ at a given $(n,j)$. For $B_{x,j}$, deleting $t_j$ gives $A_{x,j}$; the deleted vertex has position $j+1$, which is inner since $0<j+1<n+1$. Deleting $s_j$ gives $A_{x,j-1}$ for $j>0$, already attached, and gives the all-target simplex for $j=0$, in $Q$. Every other codimension-one face omits an index of $[n]$. Its second coordinate factors through a proper face of $x$, whose nondegenerate support has dimension at most $n-1$, so it is already present. The boundary of $A_{x,j}$ is present too: each of its faces omits an index. Consequently the prescribed part of the standard $(n+1)$-simplex $B_{x,j}$ is the horn $\\Lambda^{n+1}_{j+1}$, and filling it adds precisely the two still-missing nondegenerate simplices $A_{x,j},B_{x,j}$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Agent-written relative staircase expansion of the construction of S in Proposition 7.3.5.5; the inner horn and the complete face calculation"
+   }
+  },
+  {
+   "text": "Here the horn description is also valid globally, even when a support simplex has identified boundary faces. By the uniqueness in [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] as applied in step 3, the two new simplices $A_{x,j},B_{x,j}$ are nondegenerate and do not identify with any simplex already present or with the two new simplices for another support. All their proper faces except $A_{x,j}$ are accounted for in step 5. Any identifications among those faces occur inside the already prescribed subset. Degeneracies introduce no further relations, since their unique nondegenerate representatives were determined in step 3. Thus maps defined on the old subset and on these standard simplices agree globally exactly when they agree on the displayed horns. This also proves independence of attachments for distinct $x$ at the same $(n,j)$. Starting with the entire $P_H$ changes nothing: a new simplex has support $x\\notin H$, so it cannot lie in $P_H$, while faces whose supports lie in $H$ are already prescribed.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Agent-written relative staircase expansion of the construction of S in Proposition 7.3.5.5; compatibility under all quotient and degeneracy identifications, relative to arbitrary H"
+   }
+  },
+  {
+   "text": "Test the inclusion against any inner fibration $p:E\\to F$ in the sense of [lem-coef-inner-anodyne-pushout-product]. Given a commutative square with top $Q\\cup P_H\\to E$ and bottom $P\\to F$, extend its top map in the order of step 5. At each $(n,j)$ and each eligible $x$, the old map supplies the horn $\\Lambda^{n+1}_{j+1}\\to E$, and the composite $\\Delta^{n+1}\\xrightarrow{B_{x,j}}P\\to F$ supplies the bottom simplex. The right lifting property of $p$ gives a filler; give $A_{x,j}$ the missing face of that filler. Step 6 proves the choices agree on every overlap. Choose the fillers for each small family, continue through the finite list of $j$ for each $n$, and take the union over $n$. Every simplex is a degeneracy of one classified in step 4 or is initially prescribed, so the union is a simplicial lift on all of $P$. This proves the left lifting property against every inner fibration, precisely the definition of inner anodyne in the cited node. Neither a model-category theorem nor closure under transfinite compositions is being used without a citation.",
+   "uses": [
+    "lem-coef-inner-anodyne-pushout-product",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Agent-written relative staircase expansion of the construction of S in Proposition 7.3.5.5; construct the relative lift directly from inner horn lifting"
+   }
+  },
+  {
+   "text": "It remains to construct the other asserted maps. By [def-coef-infinity-relative-join], $J_0=B$, with target coordinate $v$, and the map $p_X:J\\to X$ is $y\\mapsto\\sigma_y$. On $\\Delta^1\\times J_0\\subseteq Q$ use evaluation $(t,b)\\mapsto b(t)$, the counit specified degreewise by the internal functor definition in [def-cbc-enhanced-diagrams-cones]. On $\\{1\\}\\times J$ use $p_X$. Their intersection is $\\{1\\}\\times B$, where both formulas equal $v$; hence they glue degreewise to a simplicial map $Q\\to X$. In each $Q_x$ its prism formula is $q$ and its target-simplex formula is $\\sigma$, including their common face because $q(1,-)=\\sigma|_{[i]}$. This proves exactly the stated evaluation, including compatibility under every simplex operator.",
+   "uses": [
+    "def-coef-infinity-relative-join",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Agent-written relative staircase expansion of the construction of S in Proposition 7.3.5.5; evaluation on Q and agreement on its overlap"
+   }
+  },
+  {
+   "text": "Finally $d_m(y)=(e(y),y)$ lies in $P_m$ by step 1 and commutes with every simplicial operator since $e$ is simplicial. Its representative in $P_y$ selects $s_0,\\ldots,s_i,t_{i+1},\\ldots,t_n$, exactly the required chain. For $i=-1$ it is the pure target chain and for $i=n$ the pure source chain. All arguments used only simplicial identities, the cited unique nondegenerate decomposition, and inner-horn lifting for the arbitrary test fibration. No quasicategory property of $X$ has entered.",
+   "uses": [
+    "def-coef-infinity-relative-join",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Agent-written relative staircase expansion of the construction of S in Proposition 7.3.5.5; the simplicial diagonal and the pure-factor cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-join",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "lem-coef-inner-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0302",
+  "place": "Proposition 7.3.5.5, construction of S; the stronger relative collage statement is proved here by an explicit staircase, not quoted as a theorem of Kerodon."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +174,66 @@
    "results": "{\"t\": \"2026-10-17T08:43:12Z\", \"tool\": \"loogle\", \"query\": \"SSet.innerAnodyneExtensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsInnerAnodyneExtensions\", \"SSet.instIsStableUnderRetractsInnerAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionInnerAnodyneExtensions\", \"SSet.instRespectsIsoInnerAnodyneExtensions\", \"SSet.innerAnodyneExtensions\", \"SSet.Subcomplex.Pairing.innerAnodyneExtensions\"], \"digest\": \"1e41fe895e33b68d\"}",
    "date": "2026-10-17",
    "verdict": "No match: horn-colimit and generating-acyclic-cofibration hits do not identify this collage inclusion. Pairing and IsInner are frameworks requiring the specific regular inner pairing, which is the substantive claim here. Inner/Basic.lean:43-62 and Inner/PushoutProduct.lean:55-98 were read; they do not construct this support collage or its pairing. Not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "attachCells|relativeCellComplex|RelativeCellComplex|isPushout.*[Ss]keleton|EilenbergZilber",
+   "results": "{\"t\": \"2026-10-17T12:49:40Z\", \"tool\": \"grep\", \"query\": \"attachCells|relativeCellComplex|RelativeCellComplex|isPushout.*[Ss]keleton|EilenbergZilber\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\"], \"digest\": \"b897a8c80af8d64e\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned skeletal/decomposition facts and horn or pairing infrastructure do not state this particular relative triangular-cylinder inclusion. The explicit staircase pairing is required, so there is no exact or one-line specialization. Read Inner/Basic.lean:43-61 and 100-142; Degenerate.lean:114 and 217-240. The unique decomposition is already the Mathlib leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition and is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every simplicial set is obtained by attaching its nondegenerate simplices along their boundaries, relative to a simplicial subset",
+   "results": "{\"t\": \"2026-10-17T12:49:40Z\", \"tool\": \"leanfinder\", \"query\": \"Every simplicial set is obtained by attaching its nondegenerate simplices along their boundaries, relative to a simplicial subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.iSup_ofSimplex_nonDegenerate_eq_top\", \"SSet.N.mk'_surjective\", \"SSet.Subcomplex.N.mk_surjective\", \"SSet.N.mk_surjective\", \"SSet.KanComplex\", \"SSet.Subcomplex\", \"SSet.Subcomplex.N\", \"SSet.S.mk_surjective\"], \"digest\": \"bb4864c9c8c6062d\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned skeletal/decomposition facts and horn or pairing infrastructure do not state this particular relative triangular-cylinder inclusion. The explicit staircase pairing is required, so there is no exact or one-line specialization. Read Inner/Basic.lean:43-61 and 100-142; Degenerate.lean:114 and 217-240. The unique decomposition is already the Mathlib leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition and is reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"nonDegenerate\"",
+   "results": "{\"t\": \"2026-10-17T12:49:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"nonDegenerate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.nonDegenerate\", \"SSet.nonDegenerate_zero\", \"SSet.nondegenerate_zero\", \"SSet.nonDegenerateEquivOfIso\", \"SSet.mem_degenerate_iff_notMem_nonDegenerate\", \"SSet.mem_nonDegenerate_iff_notMem_degenerate\", \"SSet.Subcomplex.eq_top_iff_contains_nonDegenerate\", \"SSet.Subcomplex.mem_nonDegenerate_iff\"], \"digest\": \"19805dc19517252d\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned skeletal/decomposition facts and horn or pairing infrastructure do not state this particular relative triangular-cylinder inclusion. The explicit staircase pairing is required, so there is no exact or one-line specialization. Read Inner/Basic.lean:43-61 and 100-142; Degenerate.lean:114 and 217-240. The unique decomposition is already the Mathlib leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition and is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any simplicial set J with a map e to Delta one the subset of Delta one times J defined by e less than or equal to the interval coordinate is inner anodyne relative to its top and its initial fiber",
+   "results": "{\"t\": \"2026-10-17T12:50:20Z\", \"tool\": \"leanfinder\", \"query\": \"For any simplicial set J with a map e to Delta one the subset of Delta one times J defined by e less than or equal to the interval coordinate is inner anodyne relative to its top and its initial fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Subcomplex.PairingCore.IsInner\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.horn\", \"SSet.Subcomplex.Pairing.IsInner\", \"SSet.S.IsUniquelyCodimOneFace\", \"SSet.boundary\"], \"digest\": \"ec7754bd1c4b2cef\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned skeletal/decomposition facts and horn or pairing infrastructure do not state this particular relative triangular-cylinder inclusion. The explicit staircase pairing is required, so there is no exact or one-line specialization. Read Inner/Basic.lean:43-61 and 100-142; Degenerate.lean:114 and 217-240. The unique decomposition is already the Mathlib leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition and is reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The triangular cylinder over a simplicial set is built from its top and its initial fiber by attaching inner horns",
+   "results": "{\"t\": \"2026-10-17T12:50:21Z\", \"tool\": \"leansearch\", \"query\": \"The triangular cylinder over a simplicial set is built from its top and its initial fiber by attaching inner horns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.mk\", \"HomotopicalAlgebra.Precylinder.ctorIdx\", \"HomotopicalAlgebra.Cylinder.noConfusionType\", \"HomotopicalAlgebra.Precylinder\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.Cylinder.ofFactorizationData\", \"HomotopicalAlgebra.Cylinder.ofFactorizationData_i₀\", \"HomotopicalAlgebra.Cylinder.instIsCofibrantI\"], \"digest\": \"76a3e154d8f065f1\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned skeletal/decomposition facts and horn or pairing infrastructure do not state this particular relative triangular-cylinder inclusion. The explicit staircase pairing is required, so there is no exact or one-line specialization. Read Inner/Basic.lean:43-61 and 100-142; Degenerate.lean:114 and 217-240. The unique decomposition is already the Mathlib leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition and is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "innerAnodyneExtensions|IsInner",
+   "results": "{\"t\": \"2026-10-17T12:50:21Z\", \"tool\": \"grep\", \"query\": \"innerAnodyneExtensions|IsInner\", \"sub\": \"AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\"], \"digest\": \"3e3cde5592784fae\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned skeletal/decomposition facts and horn or pairing infrastructure do not state this particular relative triangular-cylinder inclusion. The explicit staircase pairing is required, so there is no exact or one-line specialization. Read Inner/Basic.lean:43-61 and 100-142; Degenerate.lean:114 and 217-240. The unique decomposition is already the Mathlib leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition and is reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.innerAnodyneExtensions",
+   "results": "{\"t\": \"2026-10-17T12:51:26Z\", \"tool\": \"loogle\", \"query\": \"SSet.innerAnodyneExtensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsInnerAnodyneExtensions\", \"SSet.instIsStableUnderRetractsInnerAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionInnerAnodyneExtensions\", \"SSet.instRespectsIsoInnerAnodyneExtensions\", \"SSet.innerAnodyneExtensions\", \"SSet.Subcomplex.Pairing.innerAnodyneExtensions\"], \"digest\": \"1e41fe895e33b68d\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned skeletal/decomposition facts and horn or pairing infrastructure do not state this particular relative triangular-cylinder inclusion. The explicit staircase pairing is required, so there is no exact or one-line specialization. Read Inner/Basic.lean:43-61 and 100-142; Degenerate.lean:114 and 217-240. The unique decomposition is already the Mathlib leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition and is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*horn|horn.*pullback|triangular|collage",
+   "results": "{\"t\": \"2026-10-17T15:37:48Z\", \"tool\": \"grep\", \"query\": \"pullback.*horn|horn.*pullback|triangular|collage\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the additional focused grep returned no hits. The earlier triangular-cylinder and inner-pairing searches are retained and read; primitive horn/pairing and decomposition infrastructure does not give this particular relative inclusion in one line."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-arrow-join-geometry",
@@ -87,5 +260,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-arrow-prism-collage-inner-anodyne",
+  "worker": "stage1",
+  "summary": "Repair of the returned repurposing: restored the repository collage statement and its genuine ancestry, with an explicit nine-step relative inner-horn staircase proof. Retained the relevant recorded searches; reused the existing Mathlib nondegenerate-decomposition leaf. No new nodes, no completed-pullback subclaim, and no changes to the citer.",
+  "blueprint": "Inherited paragraph-2 derived-adjunction/stable-enhancement ancestry of prop-coef-integral-exceptional-adjoint, via the existing arrow-join chain. Locally this item realizes steps 5–7 of lem-coef-infinity-arrow-join-geometry (Kerodon 0302, construction of S). Current main-20261015 paragraph 1 has a different, completed-pullback argument; it is not the source of this collage statement and any parent-level rerouting is left to the maintainer."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-08562fb27",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-08562fb27 (reviewer sub-agent of L); spot-checked: Shape: one commit with the item and its report, no new nodes. Compared with the current unsplit node in weil-newtargets: only split-owned fields changed (proof, proof_deps, proof_origin, mathlib_searches, split_report, status); statement, stmt_deps, source, created and blueprint are identical, so nothing was weakened. I decoded J=B⋆_X X from def-coef-infinity-relative-join: the data (q in Fun(Δ^1,X)_i, σ, q(1,-)=σ|[i]) match the statement. Step 1 is correct: P_m={(r,y): e(y)≤r}, the simplicial subset of Δ^1×J, via the canonical representative (id,r) in P_y. Step 2: Q={1}×J ∪ Δ^1×J_0 and P_H=P∩(Δ^1×H), correct. Step 3: degeneracy in P equals degeneracy in Δ^1×J; with the uniqueness clauses of the Mathlib leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition this gives the adjacent-equality test. Step 4: the only missing simplices are A_{x,j} and B_{x,j}, j≤i<n. Step 5: I checked every face of B_{x,j} by hand; the horn is Λ^{n+1}_{j+1} with 0<j+1<n+1, so it is inner. Step 6: global gluing holds by the unique support, so identified faces of x cause no harm. Step 7: the lift is built directly from the LLP definition of inner anodyne in lem-coef-inner-anodyne-pushout-product, with no hidden saturation theorem. Steps 8-9: the evaluation glues on {1}×J_0 (both sides give v) and the diagonal is d(y)=(e(y),y); both correct. Small cases: X=B=Δ^0 gives P=Δ^2 and Q=Λ^2_1; J=Δ^2 with i=0 and with i=1 attach by Λ^2_1, Λ^3_1, Λ^3_2 and exhaust P_x; H=∅, H=J, X=∅ and B=∅ are trivial. The citer lem-coef-infinity-arrow-join-geometry steps 5-7 use exactly the clauses provided. Only definitions and Mathlib leaves are cited, so there is no route issue and no tool_uses. Duplicate check: rg for 'inner anodyne' over dag/nodes; I read six candidates (relative-join-prism-comparison, filtered-inner-horn-factorization, inner-horn-cell-generation, gapped-face, final-face-edge, twisted-pullback-boundary); none is a duplicate. Searches cover grep, LeanSearch, Loogle and LeanFinder. Kerodon 0302 is not in literature/: the report carries a WANTED line and proof_origin.by=agent. No SGA source is used. Not a target node, so the base-change/coefficient-category check does not apply. No fixes written."
  }
 }

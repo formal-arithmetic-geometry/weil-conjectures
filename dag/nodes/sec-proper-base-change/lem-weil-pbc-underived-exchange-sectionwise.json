@@ -3,45 +3,160 @@
  "blueprint": {
   "is": "lem-weil-pbc-underived-exchange-sectionwise",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Well-definedness of the sectionwise exchange rule",
- "statement": "Let $\\square$ be a cartesian square\n[def-weil-pbc-cartesian-square], let $F\\in\\Ab(X_{\\Et})$, and let\n$V\\to Y'$ be etale. For a representative of a section of $g^{-1}f_*F$ over\n$V$, consisting of an etale $W\\to Y$, a map $V\\to W\\times_YY'$, and a section\nof $F$ on $X\\times_YW$, restrict that section along $X'\\times_{Y'}V\\to\nX\\times_YW$ and sheafify. The resulting section of $f'_*g'^{-1}F$ over $V$\ndepends only on the class of that representative in $(g^{-1}f_*F)(V)$, and it\nis the section corresponding to the underived exchange morphism\n$\\Ex^0_{\\square,F}$ of [def-weil-pbc-underived-exchange] under the\nadjunction $f'^{-1}\\dashv f'_*$.",
+ "statement": "Let $\\square$ be a cartesian square of schemes [def-weil-pbc-cartesian-square], with arrows $f:X\\to Y$, $g:Y'\\to Y$, $g':X'\\to X$, $f':X'\\to Y'$, and let $F\\in\\Ab(X_{\\Et})$. Use inverse and direct images [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image]. Write $P_g(f_*F)$ for the presheaf inverse image whose sheafification is $g^{-1}f_*F$ [lem-weil-pbc-etale-inverse-image-algebraic-structures], [def-weil-pbc-sheafification]. For an etale $V\\to Y'$, a presheaf representative is a triple $(W,a,s)$ with $W\\to Y$ etale, $a:V\\to Y'\\times_YW$ over $Y'$, and $s\\in F(X\\times_YW)$. Its class in $(g^{-1}f_*F)(V)$ means the image of this presheaf representative under sheafification; no global representability of every sheaf section is asserted.\n\nPut $K=X\\times_YW$ and $A=X'\\times_{Y'}V$. The square and $a$ induce $\\ell_a:A\\to X'\\times_XK$ over $X'$. The sectionwise rule sends $(W,a,s)$ to\n$$\n \\ell_a^*\\bigl(\\eta_{g',F}(K)(s)\\bigr)\\in (g'^{-1}F)(A)=(f'_*g'^{-1}F)(V),\n$$\nwhere $\\eta_{g',F}:F\\to g'_*g'^{-1}F$ is the inverse-image adjunction unit. This is the precise meaning of restriction followed by sheafification along $A\\to K$. This rule extends to a morphism $g^{-1}f_*F\\to f'_*g'^{-1}F$, so its value depends only on the sheafified class, and that morphism is the underived exchange $\\Ex^0_{\\square,F}$ of [def-weil-pbc-underived-exchange]. Equivalently, its adjunct under $f'^{-1}\\dashv f'_*$ is $g'^{-1}\\varepsilon_f\\circ\\theta_\\square$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-exchange/lem-weil-pbc-underived-exchange-sectionwise.md",
   "place": "node lem-weil-pbc-underived-exchange-sectionwise, order 1037"
  },
  "stmt_deps": [
   "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "def-weil-pbc-sheafification",
   "def-weil-pbc-underived-exchange"
  ],
  "proof": [
   {
-   "text": "By [def-weil-pbc-underived-exchange] the morphism\n$\\Ex^0_{\\square,F}$ is the adjoint, under the adjunction $f'^{-1}\\dashv\nf'_*$ of [def-weil-pbc-inverse-image], of the composite\n$g'^{-1}\\varepsilon_f\\circ\\theta_\\square$, where $\\theta_\\square$ is the\nnatural isomorphism attached to the chosen identification of the cartesian\nsquare of [def-weil-pbc-cartesian-square] and $\\varepsilon_f$ is the\ncounit of the adjunction $f^{-1}\\dashv f_*$. Evaluating that composite on\nsections gives the displayed sectionwise rule: the counit\n$\\varepsilon_f:f^{-1}f_*F\\to F$ sends the section of $f^{-1}f_*F$ over $W$\nrepresented by a section of $F$ over $X\\times_YW$ to that section, the\nisomorphism $\\theta_\\square$ transports it along the identification $X'\\cong\nX\\times_YY'$ to the section over $X'\\times_{Y'}V$, and taking the adjoint of\nthe composite with respect to $f'^{-1}\\dashv f'_*$ is the identity on\nsections of the direct image of [def-weil-pbc-direct-image]. Two\nrepresentatives of one class in $(g^{-1}f_*F)(V)$, a filtered colimit of\nsections over etale $W\\to Y$ by [def-weil-pbc-inverse-image], agree over a\ncommon refinement, and the restriction maps of $F$ are compatible with that\nrefinement, so the resulting section of $f'_*g'^{-1}F$ over $V$ is\nindependent of the representative.",
+   "text": "Work on the small skeletons of [def-weil-size-convention]. For a scheme map $u$, let $b_u$ be the etale base-change functor. It preserves finite limits by [lem-weil-pbc-etale-base-change-finite-limits], so [lem-weil-pbc-presheaf-pullback-sets-left-exact] gives the presheaf inverse image $P_uH$ by the filtered colimit of $H(W)$ over pairs $(W,a:V\\to b_uW)$; restriction in $V$ precomposes $a$. Its presheaf-adjunction unit is the coprojection at $(W,\\mathrm{id}_{b_uW})$. After sheafification this is the sheaf-adjunction unit: indeed the composite of the presheaf adjunction and the sheafification adjunction has hom bijection $\\operatorname{Hom}((P_uH)^\\#,Q)=\\operatorname{Hom}(P_uH,Q)=\\operatorname{Hom}(H,u_*Q)$, whose unit is precisely that coprojection followed by sheafification. Apply [lem-weil-pbc-etale-inverse-image-algebraic-structures] to identify this construction and its adjunction with abelian inverse image. Thus the underlying presheaf of $P_g(f_*F)$ has representatives $(W,a,s)$ as stated, and the image of $(W,\\mathrm{id},s)$ is $\\eta_{g,f_*F}(W)(s)$.",
    "uses": [
-    "def-weil-pbc-underived-exchange",
+    "def-weil-size-convention",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q0, definition-inverse-image and equation-pullback; sites.tex Tags 00VC, 00VE, 00WH, 00YV"
+   }
+  },
+  {
+   "text": "Write $Q=g'^{-1}F$ and $B=f'_*Q$. By [def-weil-pbc-direct-image], $B(V)=Q(A)$. Given $(W,a,s)$, put $r_{W,a}(s)=\\ell_a^*(\\eta_{g',F}(K)(s))$. This is a group homomorphism in $s$. To check a transition, take $h:W_1\\to W_2$ with $a_2=(\\mathrm{id}_{Y'}\\times h)a_1$ and put $k=\\mathrm{id}_X\\times h:K_1\\to K_2$. Naturality of the unit gives\n$$ (\\mathrm{id}_{X'}\\times_Xk)^*\\eta_{g',F}(K_2)(s)=\\eta_{g',F}(K_1)(k^*s). $$\nSince $\\ell_{a_2}=(\\mathrm{id}_{X'}\\times_Xk)\\ell_{a_1}$, restriction once more yields $r_{W_2,a_2}(s)=r_{W_1,a_1}(k^*s)$. These are exactly the colimit relations. By the universal property [def-weil-pbc-category-colimit], the maps induce $r_V:P_g(f_*F)(V)\\to B(V)$. For $v:V_1\\to V_2$, the map $A_1\\to A_2$ satisfies $\\ell_{a v}=\\ell_a\\circ(\\mathrm{id}_{X'}\\times v)$, so $r$ commutes with restriction. Thus $r$ is a presheaf morphism of abelian groups.",
+   "uses": [
+    "def-weil-pbc-direct-image",
     "def-weil-pbc-inverse-image",
     "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-direct-image"
+    "def-weil-pbc-category-colimit"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VE, lemma-adjoints-u, proof: cocone given by restriction maps; applied to etale base change"
+   }
+  },
+  {
+   "text": "The target $B=f'_*Q$ is a sheaf by [def-weil-pbc-direct-image]. Apply [def-weil-pbc-sheafification] in abelian groups to $r$ to obtain a unique $\\psi:g^{-1}f_*F\\to B$ with $\\psi\\circ j=r$, where $j:P_g(f_*F)\\to g^{-1}f_*F$ is the sheafification map. In particular equal sheafified classes have equal images under the sectionwise rule, even when equality is not visible in the presheaf colimit. Evaluate at $V=b_gW$, $a=\\mathrm{id}$. The map $\\ell_a$ is then the canonical identification of the iterated fibre products. Step 1 shows that $\\psi\\eta_{g,f_*F}$ is the morphism\n$$ \\delta:f_*F\\xrightarrow{f_*\\eta_{g',F}}f_*g'_*Q\\xrightarrow{d}g_*f'_*Q, $$\nwhere $d$ is induced by $(X'\\times_X(X\\times_YW))\\cong X'\\times_{Y'}(Y'\\times_YW)$. This identifies the adjunct of $\\psi$ under $g^{-1}\\dashv g_*$ without assuming global representatives for arbitrary sheaf sections.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-cartesian-square"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WH, proposition-sheafification-adjoint; Tag 00VE, unit coprojection and adjunct formula"
+   }
+  },
+  {
+   "text": "We now compare with the fixed categorical exchange. Put $H=f_*F$. Under the composite adjunction $f'^{-1}g^{-1}\\dashv g_*f'_*$ of [def-weil-pbc-composite-adjunction], the adjunct of $f'^{-1}\\psi$ followed by the counit $\\varepsilon_{f',Q}$ is $g_*\\psi\\circ\\eta_{g,H}=\\delta$. Indeed taking the first adjunct under $f'^{-1}\\dashv f'_*$ gives $\\psi$ by its triangle identity, and taking the second gives this displayed formula. The square isomorphism is the one obtained by identifying both composite inverse images with $(fg')^{-1}=(gf')^{-1}$, as in [def-weil-pbc-cartesian-square]. The unit equation (2) of [lem-weil-pbc-inverse-image-composition] therefore says that, under these same composite adjunctions, the adjunct of\n$$ r_0=g'^{-1}\\varepsilon_{f,F}\\circ\\theta_{\\square,H} $$\nis\n$$ d\\circ f_*g'_*(g'^{-1}\\varepsilon_{f,F})\\circ f_*(\\eta_{g',f^{-1}H})\\circ\\eta_{f,H}. $$\nHere $d:f_*g'_*Q\\xrightarrow{\\sim}g_*f'_*Q$ is exactly the fibre-product identification of step 3: part (1) of the composition node gives its components. This use of the specified unit-compatible composition isomorphisms fixes the orientation of the mate.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-cartesian-square",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CB, lemma-composition-morphisms-sites; unit-compatible composition and the explicit composite adjunction"
+   }
+  },
+  {
+   "text": "Naturality of $\\eta_{g'}$ at $\\varepsilon_{f,F}:f^{-1}H\\to F$ gives\n$$ g'_*(g'^{-1}\\varepsilon_{f,F})\\circ\\eta_{g',f^{-1}H}=\\eta_{g',F}\\circ\\varepsilon_{f,F}. $$\nConsequently the last expression in step 4 equals\n$$ d\\circ f_*\\eta_{g',F}\\circ f_*\\varepsilon_{f,F}\\circ\\eta_{f,H}=d\\circ f_*\\eta_{g',F}=\\delta, $$\nusing the triangle identity $f_*\\varepsilon_{f,F}\\circ\\eta_{f,f_*F}=\\mathrm{id}_{f_*F}$. The composite-adjunction hom bijection is injective, so $\\varepsilon_{f',Q}\\circ f'^{-1}\\psi=r_0$. By [def-weil-pbc-underived-exchange], $\\Ex^0_{\\square,F}$ is the unique morphism with exactly this adjunct. Therefore $\\psi=\\Ex^0_{\\square,F}$, proving both the stated section formula and its independence of the representative.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-underived-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-def-exchange/_section.md",
+    "place": "Underived exchange paragraph; triangle-identity calculation of its adjunct"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-underived-exchange",
+  "def-weil-size-convention",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "def-weil-pbc-direct-image",
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-direct-image"
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-underived-exchange"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-exchange/lem-weil-pbc-underived-exchange-sectionwise.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-def-exchange/lem-weil-pbc-underived-exchange-sectionwise.md",
+  "place": "Statement (current snapshot has no Proof section); agent-supplied cocone, sheafification, and composite-adjunction calculation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The base change morphism for sheaves on small etale sites maps local representatives by restriction along the Cartesian square and sheafification",
+   "results": "SheafOfModules.pullback, CategoryTheory.GrothendieckTopology.overPullback, CategoryTheory.GrothendieckTopology.overMapPullback, CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback, TopCat.Sheaf.pullback, CategoryTheory.Functor.IsCoverDense.Types.appHom_restrict, CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq, CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_map_toFunctor_obj_val_obj",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification, pullback, or adjunction infrastructure does not state the etale Cartesian section formula"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChangeMap|exchange|sheafPullback.*(app|section)",
+   "results": "Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Canonical.lean; directory CategoryTheory/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification, pullback, or adjunction infrastructure does not state the etale Cartesian section formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The base change map on etale sheaves is induced by restricting representatives and sheafifying",
+   "results": "CategoryTheory.GrothendieckTopology.sheafifyMap, SheafOfModules.restrictScalars, CategoryTheory.GrothendieckTopology.sheafifyLift, SheafOfModules.restrictScalars_map_val, CategoryTheory.GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage, AlgebraicGeometry.PresheafedSpace.ofRestrict_base, AlgebraicGeometry.Spec.sheafedSpaceMap_hom_base, SheafOfModules.restrictScalars_obj_val",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification, pullback, or adjunction infrastructure does not state the etale Cartesian section formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.sheafificationAdjunction",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification, pullback, or adjunction infrastructure does not state the etale Cartesian section formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaf inverse image defined by left Kan extension and sheafification the counit evaluates a colimit representative by restriction",
+   "results": "CategoryTheory.Sheaf.adjunction_counit_app_val, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, CategoryTheory.constantSheafAdj_counit_w, CategoryTheory.plusPlusAdjunction_counit_app_val, CategoryTheory.Functor.IsDenseSubsite.isIso_ranCounit_app_of_isDenseSubsite, CategoryTheory.sheafComposeIso_inv_fac, CategoryTheory.sheafificationAdjunction_counit_app_val, CategoryTheory.GrothendieckTopology.sheafToPresheaf_map_sheafComposeNatTrans_eq_sheafifyCompIso_inv",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification, pullback, or adjunction infrastructure does not state the etale Cartesian section formula"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafifyLift|toSheafify.*(lift|Lift)|sheafAdjunctionContinuous",
+   "results": "Mathlib/CategoryTheory/Sites/CompatibleSheafification.lean, Mathlib/CategoryTheory/Sites/CompatibleSheafification.lean, Mathlib/CategoryTheory/Sites/CompatibleSheafification.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/Subsheaf.lean, Mathlib/CategoryTheory/Sites/Subsheaf.lean, Mathlib/CategoryTheory/Sites/Subsheaf.lean; directory CategoryTheory/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheafification, pullback, or adjunction infrastructure does not state the etale Cartesian section formula"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -66,5 +181,29 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange"
+ "unit": "sk-def-exchange",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-underived-exchange-sectionwise",
+  "worker": "stage1",
+  "summary": "NA direct delivery: made the presheaf representative and the sheafification map explicit; constructed the cocone by the pullback adjunction unit, checked its relations, sheafified, and computed its composite adjunct by unit compatibility and the triangle identity. No new nodes.",
+  "blueprint": "Realizes the sectionwise restriction and independence paragraph of this blueprint node; realizes the underived mate paragraph of current sk-def-exchange without changing the derived route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Generic unit-compatible composition of inverse/direct images, needed to identify the adjunct of the specified square isomorphism; no other node of sk-def-exchange states this unit equation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NA-cab0eaa66",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-cab0eaa66 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 5 steps, the statement of every cited node (including the blueprint_update texts of cartesian-square and underived-exchange), the master and main-20261015 blueprint statement and proof (the current snapshot does have a .proof.md, identical to master), the current sk-def-exchange _section.md, and Stacks 03Q0 (definition-inverse-image, equation-pullback), 00VC, 00VE, 00WH, 00YV and 03CB. The statement correction is right. In the X=Y=Spec k, X'=Y'=A^1 example, A is not étale over X, so the blueprint's 'restrict and sheafify' must be read as the unit eta_{g'} followed by restriction along ell_a. The new 'sheafified class' wording drops the false global-representability presupposition without weakening anything, since it asserts psi∘j=r. Steps 2 (cocone relations via naturality of eta_{g'} and ell_{a2}=(id×k)ell_{a1}) and 5 (naturality plus the triangle identity give delta) are elementary as claimed. Step 3 handles equality after sheafification correctly through the universal property. In step 4 I wrote out the compressed transport: adj_comp(phi∘c_{u,v}) = d_{u,v}∘adj_{uv}(phi) from equation (2), with theta = c_{f,g'}^{-1}∘c_{g,f'}, so the adjunct of r_0 is d∘f_*g'_*(g'^{-1}eps_f)∘f_*eta∘eta_f and the orientation of d matches ell_id. The reading of theta as built from composition isomorphisms comes from the current blueprint (the blueprint_update texts and _section.md); the old cartesian-square text only says 'a specified isomorphism'. I accept that. There is a minor set/abelian looseness in steps 1 and 3 (additivity of psi), covered by algebraic-structures (2)-(3). The off-unit tool use of lem-weil-pbc-inverse-image-composition (sk-thm-p1) is accepted: it is the generic composition isomorphism that the unit itself names. There is no circularity: the item's sectionwise assertion inside def-weil-pbc-underived-exchange is never used. There are no new nodes, no duplicates and no SGA source. Edge cases checked: identity square, F=0, V empty, the A^1 example. No changes made."
+ }
 }

@@ -8,11 +8,69 @@
   "place": "Agent scalar invariant calculation accompanying Example 3.1 and the finite-E argument of Theorem 6.12(2), extracted from step 2 of lem-sfb-continuous-integral-matrix-local-smith. HRS does not state this cancellation lemma; the complete intended scalar argument is in the repair report."
  },
  "stmt_deps": [
-  "def-sc-discrete-valuation-ring"
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-direct-sum-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $e=0$, then $\\pi^eA=A$ and the cyclic quotient is zero; the given isomorphism itself identifies $M$ with $N$. Hence suppose $e\\geq1$ and put $C=A/(\\pi^eA)$. Regard a binary direct sum as pairs with componentwise operations. Write the given isomorphism as $F(x,m)=(a(x)+b(m),c(x)+d(m))$ and its inverse as $G(x,n)=(a\\prime(x)+b\\prime(n),c\\prime(x)+d\\prime(n))$, with all component maps $A$-linear; here $a,a\\prime:C\\to C$, $b:M\\to C$, $c:C\\to N$, and $b\\prime:N\\to C$. Every element of $C$ is $t\\bar1$ for some $t\\in A$, so $a(t\\bar1)=t a(\\bar1)$ and $a\\prime(t\\bar1)=t a\\prime(\\bar1)$. Choose representatives $u,v\\in A$ of $a(\\bar1),a\\prime(\\bar1)$. Thus $a$ and $a\\prime$ are multiplication by $u$ and $v$, respectively. The first component of $GF(x,0)=(x,0)$ gives $b\\prime c=1-a\\prime a$, multiplication by $1-vu$ on $C$.",
+   "uses": [
+    "def-weil-pbc-quotient-module",
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E9 (algebra-lemma-characterize-local-ring), (1) implies (3); agent cyclic-block elimination argument using that criterion"
+   }
+  },
+  {
+   "text": "By [def-sc-discrete-valuation-ring], $A$ is local with maximal ideal $\\mathfrak m=\\pi A$. Apply [lem-weil-pbc-local-ring-unit-criterion] in $A$. If $u\\notin\\mathfrak m$, then $u$ is a unit, so $a$ is invertible on $C$ by multiplication by $u^{-1}$; set $F_1=F$. If $u\\in\\mathfrak m$, let $w=1+(1-v)u$. Then $w\\notin\\mathfrak m$: otherwise subtracting $(1-v)u\\in\\mathfrak m$ would put $1$ in the proper ideal $\\mathfrak m$. Hence $w$ is a unit. The linear shear $H:C\\oplus N\\to C\\oplus N$, $H(x,n)=(x+b\\prime(n),n)$ has inverse $(x,n)\\mapsto(x-b\\prime(n),n)$. Set $F_1=HF$. Its upper-left block is $a+b\\prime c$, multiplication by $u+1-vu=w$; this block is invertible by multiplication by $w^{-1}$. Thus in both cases $F_1:C\\oplus M\\to C\\oplus N$ is an isomorphism with an invertible upper-left block.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E9 (algebra-lemma-characterize-local-ring), (1) implies (3); agent cyclic-block elimination argument using that criterion"
+   }
+  },
+  {
+   "text": "Write $F_1(x,m)=(p(x)+q(m),r(x)+s(m))$, with $p:C\\to C$ invertible as just proved. Define $R(x,m)=(x-p^{-1}q(m),m)$ on $C\\oplus M$ and $L(x,n)=(x,n-rp^{-1}(x))$ on $C\\oplus N$. These maps are linear, and replacing each minus sign by a plus sign gives their inverses. Direct substitution gives $F_1R(x,m)=(p(x),r(x)+(s-rp^{-1}q)(m))$ and therefore $LF_1R(x,m)=(p(x),h(m))$, where $h=s-rp^{-1}q:M\\to N$. Consequently the diagonal map $D:(x,m)\\mapsto(p(x),h(m))$ is an isomorphism; its inverse is the explicitly available composite $R^{-1}F_1^{-1}L^{-1}$. This is a calculation with pairs, with no freeness or basis assumed for $M$ or $N$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E9 (algebra-lemma-characterize-local-ring), (1) implies (3); agent cyclic-block elimination argument using that criterion"
+   }
+  },
+  {
+   "text": "Let $J=D^{-1}$ and define the linear map $t:N\\to M$ by taking the second component of $J(0,n)$. From $DJ(0,n)=(0,n)$, the second component is $h(t(n))=n$. Also $D(0,m)=(0,h(m))$, so the second component of $JD(0,m)=(0,m)$ gives $t(h(m))=m$. Thus $h$ and $t$ are inverse $A$-linear maps, proving $M\\cong N$. All computations apply to the given finitely generated modules; they in fact need no finite-generation assumption.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E9 (algebra-lemma-characterize-local-ring), (1) implies (3); agent cyclic-block elimination argument using that criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-direct-sum-modules",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-local-ring-unit-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00E9, algebra-lemma-characterize-local-ring (unit criterion only); explicit agent block-elimination proof for the cyclic cancellation lemma extracted from the local Smith argument"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,10 +119,58 @@
    "date": "2026-10-17",
    "verdict": "no match: PID decomposition supplies existence but not cancellation or uniqueness of the cyclic multiplicities in one specialization",
    "digest": "a7f474514a7573ae"
+  },
+  {
+   "tool": "grep",
+   "query": "cancel.*(equiv|isomorph|LinearEquiv)|equiv.*cancel|isLocal.*cancel|local.*cancel",
+   "results": "12 hits; Mathlib/Algebra/Module/LocalizedModule/IsLocalization.lean, Mathlib/Algebra/Module/LocalizedModule/IsLocalization.lean, Mathlib/Algebra/Module/LocalizedModule/Exact.lean, Mathlib/Algebra/Module/LocalizedModule/Submodule.lean, Mathlib/Algebra/Module/LocalizedModule/Submodule.lean, Mathlib/Algebra/Module/LocalizedModule/Submodule.lean, Mathlib/Algebra/Module/LocalizedModule/Submodule.lean, Mathlib/Algebra/Module/LocalizedModule/Basic.lean. Search restricted to Algebra/Module. Hits concern decomposition, product linear maps, or composition/localization cancellation; none states summand cancellation.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "a7d892775bde288f"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism between direct sums C plus M and C plus N implies an isomorphism between M and N when the endomorphism ring of C is local",
+   "results": "8 hits; ModuleCat.coprodIsoDirectSum, ModuleCat.lof_coprodIsoDirectSum_inv_apply, DirectSum.congr_linearEquiv, ModuleCat.lof_coprodIsoDirectSum_inv, DirectSum.decompose, iSupIndep.ringEquiv, DirectSum.decomposeLinearEquiv, DirectSum.ringHom_ext'. Hits concern decomposition, product linear maps, or composition/localization cancellation; none states summand cancellation.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "0aed152d6854dfd0"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LinearEquiv\", \"cancel\"",
+   "results": "9 hits; LinearEquiv.comp_symm_cancel_left, LinearEquiv.comp_symm_cancel_right, LinearEquiv.symm_comp_cancel_left, LinearEquiv.symm_comp_cancel_right, LinearEquiv.symm_trans_cancel_left, LinearEquiv.symm_trans_cancel_right, LinearEquiv.trans_symm_cancel_left, LinearEquiv.trans_symm_cancel_right. Hits concern decomposition, product linear maps, or composition/localization cancellation; none states summand cancellation.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "fee9fb5fd303b6b7"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cancellation of a cyclic quotient summand over a local commutative ring: R/I direct sum M is isomorphic to R/I direct sum N implies M is isomorphic to N",
+   "results": "8 hits; Ideal.quotientEquivDirectSum, Submodule.quotientEquivDirectSum, IsLocalRing.map_mkQ_eq, Submodule.IsQuotientEquivQuotientPrime, Ideal.quotientEquivPiSpan, Submodule.quotientEquivPiSpan, Ideal.piQuotEquiv, Module.torsion_by_prime_power_decomposition. Hits concern decomposition, product linear maps, or composition/localization cancellation; none states summand cancellation.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "61fee053e9a0fe40"
+  },
+  {
+   "tool": "grep",
+   "query": "cancel.*(prod|biprod|directSum)|((prod|biprod|directSum).*(cancel|iso_iff))|krull.?schmidt",
+   "results": "25 hits; Mathlib/InformationTheory/KullbackLeibler/ChainRule.lean, Mathlib/NumberTheory/Fermat.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean, Mathlib/NumberTheory/ModularForms/SlashActions.lean, Mathlib/NumberTheory/SelbergSieve.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean. Hits concern decomposition, product linear maps, or composition/localization cancellation; none states summand cancellation.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "c2151f8e1b1147b9"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module with local endomorphism ring can be cancelled from an isomorphism of binary direct sums, by block Gaussian elimination and a shear",
+   "results": "8 hits; LinearMap.coprodEquiv, LinearEquiv.skewProd, lequivProdOfRightSplitExact, lequivProdOfLeftSplitExact, LinearMap.diag_toMatrix_directSum_collectedBasis_eq_zero_of_mapsTo_ne, CategoryTheory.HomOrthogonal.matrixDecompositionLinearEquiv, fromModuleCatToModuleCatLinearEquiv, CategoryTheory.HomOrthogonal.matrixDecompositionLinearEquiv_apply. Hits concern decomposition, product linear maps, or composition/localization cancellation; none states summand cancellation.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "2d876a05a70939b7"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-continuous-integral-matrix-local-smith",
@@ -84,5 +190,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-dvr-cyclic-summand-cancellation",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged; supplied a four-step direct cyclic-block cancellation proof using the existing Mathlib local-ring unit criterion, with explicit shear inverses, elimination, and inverse maps. Reused quotient/direct-sum definition leaves, searched the project and Mathlib, and created no auxiliary nodes. The e=0 case is explicit.",
+  "blueprint": "Serves the existing ancestry from lem-sfb-dc-hom-preserves.proof.md first sentence (scalar-model characterization recalled from lem-sfb-dc-lower-star-preserves), via integral-lfp-constant-model-comparison and continuous-integral-matrix-local-smith: proves precisely the cyclic cancellation required in that parent’s step 5 after one pivot. This is below-unit scalar algebra, with no change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-df987a4d8",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-df987a4d8 (reviewer sub-agent of L); spot-checked: I read the whole item, its four proof steps, all four cited nodes, the parent lem-sfb-continuous-integral-matrix-local-smith, the unit record and Stacks 00E9 (algebra.tex:3367). The statement is true: A/(pi^e) has a local endomorphism ring when e>=1, and e=0 is trivial. Its hypotheses match its only use, parent step 5, where A=O_E and both modules are finitely generated quotients of A^(n-1). It does not restate a clause of the parent. Step checks: (1) a and a' act as multiplication by u and v, and the first component of GF(x,0)=(x,0) gives b'c=1-vu. (2) If u is in m, then w=1+(1-v)u is a unit by the unit criterion, and expanding HF shows its upper-left block is w. (3) I expanded F1R and LF1R by hand: the result is diag(p, h) with h=s-rp^{-1}q. (4) The second component of J(0,n) gives a two-sided inverse of h. Small cases: the swap on C+C (h=-1); [[p,1],[1,0]] over Z_p with e=2 (w=1+p, h=-(1+p)^{-1}); diagonal F; e=0; M=N=0. All four citations are existing Mathlib leaves, so there is no route or tool-use question. There are no new nodes and no duplicates (searched the snapshot DAG for cancellation, summand, cyclic and local-endomorphism wording). No SGA is used, and proof_origin is correctly agent. One cosmetic point is not a fault: steps 1, 3 and 4 repeat the 00E9 source place, but its text accurately says they are the agent's block-elimination argument. No changes and no fixes."
  }
 }

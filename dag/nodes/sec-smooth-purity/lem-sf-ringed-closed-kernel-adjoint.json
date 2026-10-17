@@ -19,9 +19,141 @@
   "def-weil-abstract-derived-category",
   "def-pur-kinjective-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the three module categories over $B,i^{-1}B,j^{-1}B$. Apply the ringed-topoi module adjunction with structural ring map the identity on the inverse-image ring. Its tensor pullback is canonically inverse image, by $a\\otimes m\\mapsto am$ with inverse $m\\mapsto1\\otimes m$. This gives $i^*\\dashv i_*$ and $j^*\\dashv j_*$ with their module-linear units and counits. The ringed open-closed theorem gives $j_!\\dashv j^*$, exact $j_!$ and $i_*$, the invertible closed counit, $j^*i_*=0$, and the short exact sequence $0\\to j_!j^*M\\to M\\to i_*i^*M\\to0$. The immersion inverse-image theorem makes $i^*,j^*$ exact. All these hypotheses hold for our quasi-compact complementary open; no Noetherian or constant-coefficient hypothesis is being added.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open); sites-modules.tex Tag 03D7 (lemma-adjoint-pullback-pushforward-modules)"
+   }
+  },
+  {
+   "text": "The open-comparison equivalence identifies actual $j^*$ on modules with restriction to the open slice. For a module sheaf $Q$ on $U$ and an object $V\\to U$, base-change evaluation gives $(j_*Q)(V\\to X)=Q(V\\times_XU\\to U)=Q(V\\to U)$. Here $V\\times_XU\\cong V$ because $V\\to X$ already factors through the open immersion; this identification respects restrictions and coefficient actions. Under open comparison the counit $j^*j_*Q\\to Q$ is precisely this identity evaluation. Thus the ordinary open counit is a natural isomorphism. Write $a_N:N\\to j_*j^*N$ for the unit. The triangle identity says that $j^*a_N$ followed by this invertible counit is the identity; hence $j^*a_N$ is invertible.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-comparison",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BN (lemma-open-immersion); direct sectionwise computation of its counit"
+   }
+  },
+  {
+   "text": "Let $k_N:H_N\\to N$ be the kernel inclusion of $a_N$. Naturality of $a$ induces $H(f)$ on kernels for every module morphism $f$, and uniqueness in the kernel property proves identity, composition, and additivity. Exact $j^*$ from Step 1 carries this kernel to $\\ker(j^*a_N)=0$ by Step 2. Apply the short exact sequence of the ringed open-closed theorem to $H_N$: its left term is $j_!j^*H_N=0$, so its closed unit $h_N:H_N\\to i_*i^*H_N$ is an isomorphism. Its naturality follows from the naturality of that unit and of $H$. This is the required natural identification $H_N\\cong i_*i^!_0N$, with $i^!_0N=i^*H_N$.",
+   "uses": [
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH (lemma-ses-associated-to-open), applied to the support kernel"
+   }
+  },
+  {
+   "text": "For a module morphism $f:i_*P\\to N$, naturality of the open unit gives $a_N f=j_*j^*(f)\\,a_{i_*P}=0$, since $j^*i_*P=0$. It factors uniquely as $f=k_Ng$ through $g:i_*P\\to H_N$. If $c_P:i^*i_*P\\xrightarrow{\\sim}P$ is the closed counit, send $f$ to $\\alpha=i^*(g)c_P^{-1}:P\\to i^*H_N$. Conversely send $\\alpha$ to $k_Nh_N^{-1}i_*(\\alpha)$. These are inverse: naturality gives $h_Ng=i_*i^*(g)h_{i_*P}$, and the closed triangle identity gives $h_{i_*P}=(i_*c_P)^{-1}$. In the other direction apply $i^*$ and use naturality of $c$ and $c_{i^*H_N}i^*(h_N)=1$. All maps are module morphisms; kernel uniqueness and naturality of the closed unit and counit give naturality in both variables. Thus $i_*\\dashv i^!_0$. The adjunct of $1_{i^!_0N}$ is $k_Nh_N^{-1}$, proving the specified sheaf counit formula.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA and 09AH; formal kernel factorization and the closed adjunction triangle identities"
+   }
+  },
+  {
+   "text": "The small-site K-injective existence theorem applies separately to the three sites and their ring sheaves. Their module categories are Grothendieck abelian, and every complex has a functorial K-injective resolution. By the exact-functor factorization theorem the four exact functors $i_*,i^*,j_!,j^*$ induce triangulated functors on the unbounded derived categories, represented termwise. In particular termwise $i_*$ carries quasi-isomorphisms to quasi-isomorphisms, so this is the exact $i_*$ appearing in the assertion.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); sites-cohomology.tex Tag 07A5 (section-unbounded), injectives.tex Tag 079P (theorem-K-injective-embedding-grothendieck)"
+   }
+  },
+  {
+   "text": "The functor $i^!_0$ is additive by its kernel construction (Step 3) and additive $i^*$; it is left exact since it is the right adjoint in Step 4: a map into the image of a limiting cone is, by its natural Hom bijection, exactly a compatible family of maps into that cone. Applying it termwise therefore defines an exact functor on homotopy categories: it respects shifts, finite biproducts, and the displayed matrices of mapping cones. Apply the K-injective total-derived theorem to this homotopy functor followed by localization into $D(Z,i^{-1}B)$. It constructs $Ri^!_0$ and gives $Ri^!_0(K)=i^!_0(I_K)$ for any K-injective resolution. Moreover the right-adjoint-preserves-K-injectives lemma, applied to $i_*\\dashv i^!_0$ and exact $i_*$, shows that $i^!_0(I_K)$ is K-injective.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K (lemma-enough-K-injectives-implies), 08BJ (lemma-adjoint-preserve-K-injectives); termwise cone construction"
+   }
+  },
+  {
+   "text": "For any complex $L$ on $Z$ and K-injective resolution $K\\to I_K$ on $X$, compute naturally\n$$\\operatorname{Hom}_{D(X)}(i_*L,K)\\cong\\operatorname{Hom}_{K(X)}(i_*L,I_K)\\cong\\operatorname{Hom}_{K(Z)}(L,i^!_0I_K)\\cong\\operatorname{Hom}_{D(Z)}(L,Ri^!_0K).$$\nThe first and last bijections are the K-injective Hom theorem, using Step 6 for the last target; the middle is the termwise homotopy adjunction of Step 4. Thus $i_*\\dashv Ri^!_0$. At $K=QI$ for K-injective $I$, the inverse image of the identity under this bijection is $Q(i_*i^!_0I\\to I)$, the termwise sheaf counit from Step 4. For general $K$ compose this representative with the inverse of $K\\to QI_K$ in the derived category. This proves the asserted derived counit, rather than only existence of some right-adjoint isomorphism.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective); Tag 08BJ (lemma-adjoint-preserve-K-injectives), proof Hom equality"
+   }
+  },
+  {
+   "text": "For the three remaining adjunctions use respectively the ordinary pairs $(F,G)=(j_!,j^*),(i^*,i_*),(j^*,j_*)$ of Step 1. In each pair $F$ is exact, so the K-injective preservation lemma makes $GJ$ K-injective whenever $J$ is K-injective. The total-derived theorem constructs $RG$ on all complexes. For a target complex $K$ choose $K\\to J$ K-injective and compute\n$$\\operatorname{Hom}_{D}(FL,K)\\cong\\operatorname{Hom}_{K}(FL,J)\\cong\\operatorname{Hom}_{K}(L,GJ)\\cong\\operatorname{Hom}_{D}(L,RGK).$$\nThese are, in order, the K-injective Hom bijection, the termwise adjunction, and again the K-injective Hom bijection. When $G=j^*$ or $G=i_*$, it is exact, so the exact-functor derived theorem identifies $RG$ with the termwise $G$: the quasi-isomorphism $K\\to J$ remains one after $G$. The three resulting pairs are $j_!\\dashv j^*$, $i^*\\dashv i_*$, and $j^*\\dashv Rj_*$. The inverse image of the identity is the ordinary counit on $J$, giving their canonical derived counits.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ, 070K, 070I and 015F; three applications to the ordinary pairs"
+   }
+  },
+  {
+   "text": "The closed counit $i^*i_*\\to1$ from the ringed open-closed theorem is invertible in each degree and hence on complexes and their derived images. It is the derived closed counit of Step 8 under the termwise comparisons. For a complex $L$ on $U$ choose a K-injective resolution $L\\to J$. The derived open counit is represented by $j^*j_*J\\to J$, which is invertible in each degree by Step 2, so $j^*Rj_*\\cong1$ naturally. Finally $j^*i_*=0$ already holds in every degree by the ringed theorem, hence holds on the termwise derived functors. These arguments used all complexes, smallness only for K-injective existence, and quasi-compactness only for the stated open-closed inputs; no constructibility, boundedness, or supported localization triangle was used.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA and 09BN; termwise closed counit and K-injective representative of the open counit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Kernel deduction from Tags 09AA/09AH/09BN and ringed-module adjunction Tag 03D7; K-injective derivation by derived.tex Tags 070I/070K/08BJ and injectives.tex Tag 079P."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -40,7 +172,7 @@
   {
    "tool": "grep",
    "query": "sectionsWithSupport|support.*adjunction|kernel.*adjunction",
-   "results": "Mathlib/CategoryTheory/Limits/Shapes/Reflexive.lean",
+   "results": "Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean:486; Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean:516 (supporting functions for adjunction notation); Mathlib/CategoryTheory/Limits/Shapes/Reflexive.lean:51 (reflexive pairs). None constructs support-kernel adjunctions.",
    "date": "2026-10-17",
    "verdict": "no match: ordinary scheme structure-module pullback adjunctions and abstract derived-adjunction machinery do not construct the ringed pro-etale support-kernel right adjoint"
   },
@@ -60,7 +192,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-sf-localization-all-stages",
@@ -72,10 +204,79 @@
  "blueprint": {
   "from": {
    "node": "prop-sf-localization-all-stages",
-   "place": "Returned proof Step 2: kernel construction of the ambient adjunction before the Hom(-,K) comparison",
+   "place": "Ambient adjoints before localization: prop-sf-localization-all-stages proof Step 2, constructing the arbitrary-ring-sheaf support-kernel adjoint before the counit-cone Hom comparison.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-ringed-closed-kernel-adjoint",
+  "worker": "stage1",
+  "summary": "Constructed the support-kernel adjunction explicitly from the existing arbitrary-ringed open-closed theorem, identified its counit, and derived all four adjunctions on unbounded categories through existing K-injective tools. Statement unchanged; no new nodes; no supported triangle used.",
+  "blueprint": "Realizes prop-sf-localization-all-stages proof Step 2, Ambient adjoints before localization, serving the closed and open Hom rewritings of sk-prop-sf-localization.",
+  "tool_uses": [
+   {
+    "node": "def-weil-proetale-inverse-image",
+    "why": "Generic Inverse image and direct image along a morphism on small pro-etale sites interface used to construct the ambient ringed adjunction or its unbounded K-injective derivation; the supported-localization unit does not replace this tool, and no supported triangle is invoked."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic The functor induced by an exact functor is its own right and left derived functor interface used to construct the ambient ringed adjunction or its unbounded K-injective derivation; the supported-localization unit does not replace this tool, and no supported triangle is invoked."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic Enough K-injectives compute total right derived functors interface used to construct the ambient ringed adjunction or its unbounded K-injective derivation; the supported-localization unit does not replace this tool, and no supported triangle is invoked."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic Inverse images along immersions preserve pro-etale limits interface used to construct the ambient ringed adjunction or its unbounded K-injective derivation; the supported-localization unit does not replace this tool, and no supported triangle is invoked."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic Ringed pro-etale open-closed localization interface used to construct the ambient ringed adjunction or its unbounded K-injective derivation; the supported-localization unit does not replace this tool, and no supported triangle is invoked."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-comparison",
+    "why": "Generic Arbitrary-coefficient open localization interface used to construct the ambient ringed adjunction or its unbounded K-injective derivation; the supported-localization unit does not replace this tool, and no supported triangle is invoked."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic A right adjoint of an exact functor preserves K-injective complexes interface used to construct the ambient ringed adjunction or its unbounded K-injective derivation; the supported-localization unit does not replace this tool, and no supported triangle is invoked."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic Module pullback and pushforward adjunction on arbitrary ringed topoi interface used to construct the ambient ringed adjunction or its unbounded K-injective derivation; the supported-localization unit does not replace this tool, and no supported triangle is invoked."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic An adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise interface used to construct the ambient ringed adjunction or its unbounded K-injective derivation; the supported-localization unit does not replace this tool, and no supported triangle is invoked."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions of sheaves of modules interface used to construct the ambient ringed adjunction or its unbounded K-injective derivation; the supported-localization unit does not replace this tool, and no supported triangle is invoked."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N9-408d0d4d1",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-408d0d4d1 (reviewer sub-agent of L); spot-checked: I read the item, which has no new nodes and an unchanged statement, and all 9 of its proof steps in full, along with the full statements of every cited node. Stacks proetale.tex checks out at each cited place: 09AA lemma-closed-immersion, 09BM (exactness of i_* needs a retrocompact complement, which matches the quasi-compact j in the statement), 09BN (j^{-1}j_* is the identity) and 09AH (the short exact sequence when j is quasi-compact). The arguments are correct. Step 1 gets i^*⊣i_* and j^*⊣j_* from the ringed-topoi adjunction with c=id, identifying the tensor pullback by explicit inverse maps. Step 2 proves the open counit is invertible by evaluating on the slice, which is 09BN written out. Step 3: j^*H_N=0, so 09AH on H_N makes the supported unit an isomorphism. Step 4: the Hom bijection and its inverse are verified, and the counit is k_N h_N^{-1}. Step 6 applies right-adjoint-preserves-K-injectives with the exact left adjoint i_*, which is the correct direction. Steps 7 and 8 build the unbounded derived adjunctions through K-injective Hom bijections and the termwise homotopy adjunction. Step 9 shows the open derived counit is invertible degreewise on a K-injective, with no claim that higher direct images vanish. proof_deps equals the union of the steps' uses. Small cases tested: Z empty, U empty (also with nonreduced Z), B=0 and nonconstant B. No Noetherian, bounded or constructible hypothesis is used, and no SGA source is cited. I accept all declared tool_uses: ringed open-closed, ringed-topoi adjunction, immersion exactness, open comparison, and the K-injective and derived-functor lemmas. They are generic, and the unit's own nodes are stated only for finite constant coefficients, so none of them gives these facts for an arbitrary ring sheaf. The item gives the parent prop-sf-localization-all-stages, at its Step 2, exactly what it uses. Duplicate check: det-lem-formal-closed-support-adjunction, in the same unit, gives the adjunction only for coefficients pulled back from a condensed ring. The finite-ring Noetherian nodes lem-exc-proetale-closed-support and lem-exc-proetale-derived-adjunction-triangle are narrower. The item generalizes these and restates none of them. Only cosmetic point: Step 1 could also cite def-weil-proetale-inverse-image for the morphism of topoi, but that node is already in proof_deps. No changes made."
  }
 }

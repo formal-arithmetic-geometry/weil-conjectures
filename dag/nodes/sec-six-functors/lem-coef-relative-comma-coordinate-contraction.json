@@ -10,9 +10,192 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $I=\\Delta^1$, $B=S\\times V$, $T=S\\times R$, and $k:T\\to B$, $k(s,r)=(s,h(r))$. Products of Kan complexes are Kan by coordinatewise horn filling. For any Kan complex $W$, endpoint-pair evaluation $W^I\\to W\\times W$ is a Kan fibration: transpose a horn lift to extension from $(W\\text{-parameter }\\Delta^n\\times\\partial I)\\cup(\\Lambda_i^n\\times I)$ into $\\Delta^n\\times I$, and apply [lem-coef-sset-anodyne-pushout-product] to the boundary monomorphism and the horn inclusion. More precisely the displayed domain is $(\\Delta^n\\times\\partial I)\\cup_{\\Lambda_i^n\\times\\partial I}(\\Lambda_i^n\\times I)$; the symbol $W$ is only the target. Evaluation at either single endpoint has every boundary lift: the transposed inclusion is the pushout-product of $\\partial\\Delta^n\\hookrightarrow\\Delta^n$ and the one-dimensional horn $\\{e\\}\\hookrightarrow I$. Hence it is a trivial fibration by [lem-coef-kan-quillen-model-right-proper-core], including the boundary problem $n=0$. Pullbacks and composites of Kan fibrations remain fibrations by projecting a lifting problem, filling it, and pairing the filler with the other coordinate.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00TM",
+    "place": "Corollary 3.1.3.3 and Corollary 3.1.3.6 (00UT): explicit endpoint lifting arguments; online source, archive WANTED."
+   }
+  },
+  {
+   "text": "The endpoint map $\\ell:L\\to B$ is the pullback of $U^I\\to U\\times U$ along $(s,v)\\mapsto(f(s),g(v))$, so Step 1 makes it a Kan fibration. Form its strict base change $Q=L\\times_B T$. In each degree a simplex is $(s_0,v,\\gamma,s,r)$ with $s_0=s$ and $v=h(r)$; deleting $s_0,v$ identifies $Q$ strictly with $S\\times_U^hR$, and the inverse restores those two forced coordinates. Both formulas commute with simplicial operators and the map to $T$. By [lem-coef-kan-pullback-path-comparison], $D=L\\times_B^hT$ is Kan and constant-path insertion $j:Q\\to D$ is a weak equivalence. It is a monomorphism because forgetting the inserted constant path recovers the simplex of $Q$. The projections $Q\\to T$ and $D\\to T$ are Kan fibrations: for $D$ factor its endpoint-pair pullback through $L\\times T\\to T$, and use Step 1.",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/010B",
+    "place": "Construction 3.4.0.3 and the fibration comparison: strict base change of the endpoint map; agent coordinate identification."
+   }
+  },
+  {
+   "text": "We construct $c:D\\to Q$ relative to $j(Q)$. A simplex of $D$ has the coordinates in the statement: the path in $B$ is exactly a pair $(\\alpha:s_0\\leadsto s,\\beta:v\\leadsto h(r))$. Prescribe a triangle in $U$ with vertices $f(s_0),f(s),g(v)$ and edges $01=f\\alpha$, $02=\\gamma$. These are the horn $\\Lambda_0^2$; its filler supplies an edge $\\delta_0:f(s)\\leadsto g(v)$. On $j(Q)$ prescribe the degenerate triangle $s_0\\gamma$, so $\\delta_0=\\gamma$ there. The inclusion $(D\\times\\Lambda_0^2)\\cup_{j(Q)\\times\\Lambda_0^2}(j(Q)\\times\\Delta^2)\\hookrightarrow D\\times\\Delta^2$ is anodyne by [lem-coef-sset-anodyne-pushout-product]. Kan filling in $U$ therefore provides the triangle as one simplicial family, not separate vertex choices. Now fill $\\Lambda_1^2$ with edges $01=\\delta_0$ and $12=g\\beta$, prescribing $s_1\\gamma$ on $j(Q)$. Its long edge is $\\delta:f(s)\\leadsto gh(r)$. Set $c(s_0,v,\\gamma,s,r,\\alpha,\\beta)=(s,r,\\delta)$. This is a simplicial map over $T$, satisfies $cj=1_Q$ exactly, and represents $\\delta=(f\\alpha)^{-1}\\gamma(g\\beta)$ with both composition triangles retained. No strict reversal or concatenation map $U^I\\to U^I$ is presumed.",
+   "uses": [
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UT",
+    "place": "Corollary 3.1.3.6, relative outer- and inner-horn fillings; agent proof of the displayed path-coordinate formula."
+   }
+  },
+  {
+   "text": "Step 2 and $cj=1_Q$ imply that $c$ is a weak equivalence by two-out-of-three in [lem-coef-kan-quillen-model-right-proper-core]. There is also a homotopy $jc\\simeq1_D$ over $T$, fixed on $j(Q)$. Indeed $j$ is a monomorphic weak equivalence, hence a trivial cofibration in that model structure and has the left lifting property against Kan fibrations. Apply [lem-coef-sset-anodyne-pushout-product] to $j$ and $\\partial I\\hookrightarrow I$. It makes $(D\\times\\partial I)\\cup_{j(Q)\\times\\partial I}(j(Q)\\times I)\\hookrightarrow D\\times I$ anodyne. Prescribe $jc,1_D$ at the interval endpoints and the constant $j$-homotopy on $j(Q)\\times I$, over the constant-in-$I$ map to $T$. These prescriptions agree because $cj=1_Q$. Lift against the Kan fibration $D\\to T$ of Step 2. Thus the inverse comparison is exactly the insertion of the two forced coordinates and constant $\\alpha,\\beta$, and its inverse homotopy preserves the remaining coordinates.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UT",
+    "place": "Relative lifting for the inverse homotopy; agent expansion of coordinate contraction over S times R."
+   }
+  },
+  {
+   "text": "We now retain the specified homotopy $H:\\ell e\\simeq p$ for general $M$. Apply [lem-coef-space-path-fibration-replacement] to $p:M\\to B$ and $\\ell:L\\to B$. Write the replacements as $E_p\\xrightarrow{q_p}B$ and $E_\\ell\\xrightarrow{q_\\ell}B$, with constant-path inclusions $i_M,i_L$. They are Kan fibrations; the inclusions are weak equivalences and monomorphisms. Their total spaces are Kan since $B$ is Kan. The projection $r_\\ell:E_\\ell\\to L$ satisfies $r_\\ell i_L=1_L$, so is a weak equivalence by two-out-of-three. The specified homotopy gives $a:M\\to E_\\ell$, $a(m)=(e(m),H_m)$, and $q_\\ell a=p$, $r_\\ell a=e$. Hence $a$ is a weak equivalence. Here the orientation of $H_m$ is from $\\ell e(m)$ to $p(m)$; replacing it by a constant path would discard the given data.",
+   "uses": [
+    "lem-coef-space-path-fibration-replacement",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/010B",
+    "place": "Path-space replacement (also Kerodon 0101), applied to both endpoint maps; specified endpoint homotopy retained."
+   }
+  },
+  {
+   "text": "Because $i_M$ is a monomorphic weak equivalence, [lem-coef-kan-quillen-model-right-proper-core] makes it a trivial cofibration. Lift the square with top $a:M\\to E_\\ell$, bottom $q_p:E_p\\to B$, left $i_M$, and right $q_\\ell$ to obtain $F:E_p\\to E_\\ell$ satisfying $Fi_M=a$ and $q_\\ell F=q_p$ exactly. Two-out-of-three makes $F$ a weak equivalence. Apply [lem-coef-kan-pullback-fibration-invariance] to the strictly commuting cospans $E_p\\to B\\leftarrow T$ and $E_\\ell\\to B\\leftarrow T$ with vertical maps $F,1_B,1_T$; both left legs are Kan fibrations by Step 5. It gives a weak equivalence over $T$,\n$$F_T:E_p\\times_B T\\longrightarrow E_\\ell\\times_B T.$$\nDeleting the repeated endpoint in each degree identifies these source and target with $M\\times_B^hT$ and $D=L\\times_B^hT$, respectively. The composite $cF_T$ is the required equivalence to $Q=S\\times_U^hR$. It preserves $T=S\\times R$, hence both remaining projections. For $M=L$, $e=1$ and constant $H$, choose $F=1_{E_\\ell}$, recovering Steps 3–4 exactly.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "lem-coef-kan-pullback-fibration-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0109",
+    "place": "Proposition 3.4.0.2: comparison of strict pullbacks of fibration cospans after path replacement; agent strictification of the endpoint homotopy."
+   }
+  },
+  {
+   "text": "Define the choice spaces before using them. For an anodyne monomorphism $i:A_0\\hookrightarrow A_1$ and a Kan fibration $q:E\\to Z$, set\n$$\\rho_{i,q}:E^{A_1}\\longrightarrow E^{A_0}\\times_{Z^{A_0}}Z^{A_1},\\qquad u\\longmapsto(ui,qu),$$\nwhere $(E^A)_n=\\operatorname{Hom}(A\\times\\Delta^n,E)$. A boundary lifting problem for $\\rho_{i,q}$ transposes, by the displayed definition, to a lifting problem for $i\\mathbin\\square(\\partial\\Delta^n\\hookrightarrow\\Delta^n)$ against $q$. The pushout-product is anodyne by [lem-coef-sset-anodyne-pushout-product], so it has a lift. Thus $\\rho_{i,q}$ has every boundary lift, including $n=0$, and [lem-coef-kan-quillen-model-right-proper-core] makes it a trivial Kan fibration. For a fixed commuting square $(u_0:A_0\\to E,v:A_1\\to Z)$, define $\\mathcal C(i,q;u_0,v)$ to be its strict fiber: its $n$-simplices are extensions $A_1\\times\\Delta^n\\to E$ restricting to $u_0\\operatorname{pr}_{A_0}$ and lying over $v\\operatorname{pr}_{A_1}$. Pulling back a boundary lifting problem proves $\\mathcal C(i,q;u_0,v)\\to *$ is a trivial Kan fibration. It is therefore a nonempty contractible Kan complex. This is a direct lifting adjunction calculation, not an assumption that the set of vertex fillers is contractible.",
+   "uses": [
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UT",
+    "place": "Relative version of Corollary 3.1.3.6; the restriction/postcomposition map and every boundary lift are computed explicitly here."
+   }
+  },
+  {
+   "text": "Here are the two triangle spaces of Step 3. Put\n$$A_t=(D\\times\\Lambda_t^2)\\amalg_{Q\\times\\Lambda_t^2}(Q\\times\\Delta^2),\\qquad b_t:A_t\\hookrightarrow D\\times\\Delta^2\\quad(t=0,1),$$\nusing $j$ to regard $Q$ as a subcomplex of $D$. Each $b_t$ is anodyne by [lem-coef-sset-anodyne-pushout-product]. The prescribed first horn $(f\\alpha,\\gamma)$ and degenerate triangle on $Q$ give a map $u_0:A_0\\to U$. Define $\\mathcal C_1=\\mathcal C(b_0,U\\to *;u_0,*)$. Its universal triangle has the universal edge $\\delta_0$; hence on the parameter space $\\mathcal C_1$ it prescribes a map $A_1\\to U$ with horn $(\\delta_0,g\\beta)$ and degenerate triangle on $Q$. Define $\\mathcal C_2$ as the pullback of $\\rho_{b_1,U\\to *}$ along this map $\\mathcal C_1\\to U^{A_1}$. Step 7 proves both $\\mathcal C_1\\to *$ and $\\mathcal C_2\\to\\mathcal C_1$ trivial Kan fibrations. In particular the simultaneous pair of triangle fillers, including its dependence on the first filler, is a contractible Kan complex. Evaluation of its second triangle gives a simplicial family of maps $c$ with $cj=1$ and exactly the formula of Step 3.",
+   "uses": [
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UT",
+    "place": "Two successive pullbacks of the relative restriction trivial fibration; agent application to the two prescribed triangle horns."
+   }
+  },
+  {
+   "text": "The lift $F$ of Step 6 has choice space\n$$\\mathcal C_F=\\mathcal C(i_M,q_\\ell;a,q_p).$$\nHere $i_M$ is an anodyne monomorphism by Steps 5–6, and $q_\\ell$ is a Kan fibration, so Step 7 proves $\\mathcal C_F\\to *$ a trivial Kan fibration. To include inverse homotopies, put $b_H=j\\mathbin\\square(\\partial I\\hookrightarrow I)$; Step 4 makes this anodyne. For each $c$ furnished by $\\mathcal C_2$, prescribe on its domain the maps $jc,1_D$ and the constant homotopy on $Q$, and on $D\\times I$ the map to $T$ constant in $I$. Define $\\mathcal C_H\\to\\mathcal C_2$ by pulling back $\\rho_{b_H,D\\to T}$ along these prescriptions. Since $D\\to T$ is a Kan fibration, Step 7 proves this map a trivial Kan fibration. Therefore $\\mathcal C_H\\times\\mathcal C_F\\to *$ is a trivial Kan fibration (solve its boundary lifts successively). This is the precise contractible space of the triangle choices, their relative inverse homotopy, and the strictification lift. All prescribed faces extend through these same maps, not merely through a collection of unrelated vertex fillers.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UT",
+    "place": "Relative restriction/postcomposition maps for the strictification lift and the inverse homotopy; Step 7 proves the required trivial fibrations."
+   }
+  },
+  {
+   "text": "For naturality, work with an arbitrary coherent family of the input data, of any small simplicial shape $K$, in $\\operatorname{Fun}(K,\\mathcal S)$; enlarge the universe if necessary. By [lem-coef-infinity-yoneda-presheaf-limits], limits in this functor category exist and are computed pointwise. Use these limits to form the families $B=S\\times V$, $T=S\\times R$, $L=S\\times_U^hV$, $A=M\\times_B^hT$, $D=L\\times_B^hT$, and $Q=S\\times_U^hR$, with their cones. The path models of these cones are the coherent pullbacks: [lem-coef-kan-nerve-pullback-recognition] identifies cartesianness with the comparison to the path model, including the specified commutation homotopy. At each vertex, the path model's comparison with itself is the identity. Thus the pointwise criterion identifies the cones in this family with the models used in Steps 1–6. The datum $(e,H)$ is a morphism of cospans $M\\to B\\leftarrow T$ to $L\\to B\\leftarrow T$, with identity maps on $B,T$ and with its given square homotopy $H$. Applying the limiting-cone universal property inside this functor category gives a coherent transformation $t:A\\to D$ over $T$. This constructs the transformation with the whole $K$-family at once; it is not obtained by extending isolated choices at vertices.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-kan-nerve-pullback-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.1.2.2 and Corollary 5.1.2.3, dualized: pointwise limits of coherent families; path-model cone identification uses the cited DAG statement."
+   }
+  },
+  {
+   "text": "The maps $Q\\to L$, $Q\\to T$ induced by $1_S,h,1_R$ and their pullback-cone compatibility give a coherent transformation $j:Q\\to D$ in the same functor category. On the path models its component is the constant-path insertion of Step 2. The component of $t$ is represented by $F_T$ of Step 6, as verified in the next step. Consequently both $t$ and $j$ have weak-equivalence components. By [lem-coef-kan-weak-equivalence-space-edge] these are equivalence edges of $\\mathcal S$, and [lem-coef-infinity-pointwise-equivalences] makes $t$ and $j$ equivalences of entire $K$-diagrams. Invert $j$ there and compose with $t$. This supplies the coherent natural equivalence $A\\simeq Q$. The construction is a comparison of cones over $T$, so its projection compatibility is part of the transformation, with the inverse projection homotopy obtained by composing with the inverse triangles for $j$. Taking $K$ to include any desired transformations and their higher simplices proves naturality for coherent maps of input diagrams as well as for strict maps. The boundary and commutation data, notably $H$, are kept in those diagrams throughout.",
+   "uses": [
+    "lem-coef-kan-weak-equivalence-space-edge",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4: pointwise equivalences are equivalences in the whole functor category; apply after constructing the transformations by limiting cones."
+   }
+  },
+  {
+   "text": "Verify the representative used in Step 11. Regard $i_M:p\\to q_p$ and $i_L:\\ell\\to q_\\ell$ as maps of arrow diagrams of spaces, both with identity base map. They are equivalences of arrow diagrams by [lem-coef-kan-weak-equivalence-space-edge] and [lem-coef-infinity-pointwise-equivalences]. The arrow $a:M\\to E_\\ell$, $a(m)=(e(m),H_m)$, represents precisely $(e,H)$ after replacing $\\ell$ by $q_\\ell$: the simplicial homotopy\n$$(m,u)\\longmapsto(e(m),[t\\longmapsto H(m,\\min(t,u))])$$\nin $E_\\ell$ runs from $i_Le$ to $a$, and its image under $q_\\ell$ is $H(m,u)$. The minimum map $I\\times I\\to I$ is simplicial because minimum preserves order. Thus the square homotopy is the given $H$, with its higher parameter data. Since $Fi_M=a$ and $F$ lies over $B$, inverting $i_M$ in the arrow-diagram category identifies $F$ with this same morphism of replaced cospans. Its map on pullbacks is $F_T$, so it represents $t$. Finally $cj=1_Q$ and the homotopy of Step 4 identify $c$ as the inverse of $j$. Hence the natural equivalence of Step 11 is represented by $cF_T$, with the coordinate formula already proved. Steps 7–9 give the relative homotopies between choices and all their higher boundary extensions. No strict functorial selection of fillers is asserted.",
+   "uses": [
+    "lem-coef-kan-weak-equivalence-space-edge",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Arrow-diagram equivalence criterion and explicit shrinking of the endpoint path; agent identification of the coordinate representative with the coherent limiting-cone comparison."
+   }
+  },
+  {
+   "text": "Finally suppose $S=U$ and $f=1_U$. The identity map is a Kan fibration, since its lifting problems fill by their bottom simplex. Apply [lem-coef-kan-pullback-path-comparison] to $1_U:U\\to U$ and $gh:R\\to U$. The strict pullback is $R$, and its constant-path comparison is precisely $\\sigma(r)=(gh(r),r,1_{gh(r)})$. Hence $\\sigma$ is a weak equivalence. Projection $\\pi:Q\\to R$ satisfies $\\pi\\sigma=1_R$; two-out-of-three in [lem-coef-kan-quillen-model-right-proper-core] proves $\\pi$ a weak equivalence. The universal path coordinate $\\delta:s\\leadsto gh(r)$ itself gives a simplicial homotopy from the $S$-projection to $gh\\pi$.",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/010B",
+    "place": "Identity-leg specialization of the constant-path comparison; universal endpoint path gives the projection homotopy."
+   }
+  },
+  {
+   "text": "For each vertex $r\\in R$, the strict fiber of $\\pi$ consists of $(s,\\delta:s\\leadsto gh(r))$. It is exactly the path-model homotopy fiber of $1_U$ at $gh(r)$. By [lem-coef-space-contractible-fiber-equivalence] it is contractible. Also $\\pi$ is a Kan fibration by Step 1, so [lem-coef-kan-pullback-path-comparison] identifies this strict fiber with its homotopy fiber. Thus the homotopy fiber stated in the item is contractible with the indicated variable-point/path model. This applies component by component without connectedness assumptions; if $R$ is empty there are no vertices to check.",
+   "uses": [
+    "lem-coef-space-contractible-fiber-equivalence",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0328",
+    "place": "Remark 3.4.0.6: contractibility of homotopy fibers of an equivalence; strict/path comparison for the projection fibration."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-kan-nerve-pullback-recognition",
+  "lem-coef-kan-pullback-fibration-invariance",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-quillen-model-right-proper-core",
+  "lem-coef-kan-weak-equivalence-space-edge",
+  "lem-coef-space-contractible-fiber-equivalence",
+  "lem-coef-space-path-fibration-replacement",
+  "lem-coef-sset-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, derived mapping-complex adjunction; agent auxiliary Kan-space comparison for the coherent comma expansion, using online Kerodon 010B, 00TM, 00UT, 0109, 0101 and 0328 (not archived). Returned E5/C4 repaired by defining the restriction/postcomposition maps and their fibers, proving every boundary lifting property, and constructing naturality inside arbitrary coherent functor categories via pointwise limits and pointwise equivalences."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -48,10 +231,94 @@
    "results": "{\"t\": \"2026-10-17T10:11:35Z\", \"tool\": \"leanfinder\", \"query\": \"Associativity of homotopy fiber products of spaces and equivalence of the homotopy pullback of an identity map with the other space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.trans_P\", \"HomotopicalAlgebra.PathObject.trans_ι\", \"TopCat.pullbackIsoProdSubtype_inv_fst_assoc\", \"HomotopicalAlgebra.PathObject.trans_p₁\", \"HomotopicalAlgebra.PathObject.trans_p₀\", \"TopCat.pullbackIsoProdSubtype_hom_fst\", \"TopCat.pullbackIsoProdSubtype_inv_snd_assoc\", \"TopCat.pullbackIsoProdSubtype_inv_fst\"], \"digest\": \"2778860dcb60c5bb\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary categorical/model-category or truncated-quasicategory hits do not state the specified coherent Kan-space comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity of path-space homotopy pullbacks of Kan complexes and contraction when one map is identity",
+   "results": "{\"t\": \"2026-10-17T12:14:08Z\", \"tool\": \"leanfinder\", \"query\": \"Associativity of path-space homotopy pullbacks of Kan complexes and contraction when one map is identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.trans_p₁\", \"HomotopicalAlgebra.PathObject.trans_ι\", \"HomotopicalAlgebra.PathObject.trans_p₀\", \"HomotopicalAlgebra.PathObject.trans_P\", \"SSet.RelativeMorphism.Homotopy.rel_assoc\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h\", \"HomotopicalAlgebra.PrepathObject.trans_ι\", \"HomotopicalAlgebra.PrepathObject.trans_p₀\"], \"digest\": \"1f30822d8b5b8e83\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/PathObject.lean:53–103,141–170 and RightHomotopy.lean:55–100: these compose abstract path objects but do not compare the displayed endpoint base change of Kan spaces. Pullback/Assoc.lean:112–175 and HasPullback.lean:628–720 give strict categorical pullback isomorphisms, not weak equivalences with a specified endpoint homotopy. FundamentalGroupoid hits concern topological paths. Neither semantic phrasing nor Loogle supplies this coherent comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback.paste_horiz_iff, HomotopicalAlgebra.PathObject",
+   "results": "{\"t\": \"2026-10-17T12:14:08Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsPullback.paste_horiz_iff, HomotopicalAlgebra.PathObject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/PathObject.lean:53–103,141–170 and RightHomotopy.lean:55–100: these compose abstract path objects but do not compare the displayed endpoint base change of Kan spaces. Pullback/Assoc.lean:112–175 and HasPullback.lean:628–720 give strict categorical pullback isomorphisms, not weak equivalences with a specified endpoint homotopy. FundamentalGroupoid hits concern topological paths. Neither semantic phrasing nor Loogle supplies this coherent comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "path.*pullback|homotopy.*pullback|contractible.*fiber",
+   "results": "{\"t\": \"2026-10-17T12:14:08Z\", \"tool\": \"grep\", \"query\": \"path.*pullback|homotopy.*pullback|contractible.*fiber\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\"], \"digest\": \"e0a0a5d8439c82ab\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/PathObject.lean:53–103,141–170 and RightHomotopy.lean:55–100: these compose abstract path objects but do not compare the displayed endpoint base change of Kan spaces. Pullback/Assoc.lean:112–175 and HasPullback.lean:628–720 give strict categorical pullback isomorphisms, not weak equivalences with a specified endpoint homotopy. FundamentalGroupoid hits concern topological paths. Neither semantic phrasing nor Loogle supplies this coherent comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyPullback|homotopy_pullback|path.*pullback|constant.*path|contractible.*fiber",
+   "results": "{\"t\": \"2026-10-17T12:15:06Z\", \"tool\": \"grep\", \"query\": \"homotopyPullback|homotopy_pullback|path.*pullback|constant.*path|contractible.*fiber\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Basic.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Basic.lean\"], \"digest\": \"735a3a6ded8bd065\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/PathObject.lean:53–103,141–170 and RightHomotopy.lean:55–100: these compose abstract path objects but do not compare the displayed endpoint base change of Kan spaces. Pullback/Assoc.lean:112–175 and HasPullback.lean:628–720 give strict categorical pullback isomorphisms, not weak equivalences with a specified endpoint homotopy. FundamentalGroupoid hits concern topological paths. Neither semantic phrasing nor Loogle supplies this coherent comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback.paste_horiz_iff, CategoryTheory.Limits.pasteHorizIsPullbackEquiv, HomotopicalAlgebra.PathObject.trans",
+   "results": "{\"t\": \"2026-10-17T12:15:07Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsPullback.paste_horiz_iff, CategoryTheory.Limits.pasteHorizIsPullbackEquiv, HomotopicalAlgebra.PathObject.trans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/PathObject.lean:53–103,141–170 and RightHomotopy.lean:55–100: these compose abstract path objects but do not compare the displayed endpoint base change of Kan spaces. Pullback/Assoc.lean:112–175 and HasPullback.lean:628–720 give strict categorical pullback isomorphisms, not weak equivalences with a specified endpoint homotopy. FundamentalGroupoid hits concern topological paths. Neither semantic phrasing nor Loogle supplies this coherent comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homotopy pullback of Kan complexes is associative under a further pullback along an endpoint map, and the pullback with an identity map is equivalent to the other factor",
+   "results": "{\"t\": \"2026-10-17T12:15:07Z\", \"tool\": \"leansearch\", \"query\": \"A homotopy pullback of Kan complexes is associative under a further pullback along an endpoint map, and the pullback with an identity map is equivalent to the other factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullbackAssoc_inv_snd\", \"CategoryTheory.Limits.pullbackAssoc_hom_snd_snd_assoc\", \"CategoryTheory.Limits.pullbackAssocIsPullback\", \"CategoryTheory.Limits.pullbackAssoc_inv_snd_assoc\", \"CategoryTheory.Limits.pullbackAssoc_hom_fst_assoc\", \"CategoryTheory.Limits.pullbackAssoc_hom_snd_fst_assoc\", \"CategoryTheory.Limits.pullbackAssoc_hom_fst\", \"CategoryTheory.Limits.pullbackAssoc_hom_snd_fst\"], \"digest\": \"22efc8240f04cb2a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/PathObject.lean:53–103,141–170 and RightHomotopy.lean:55–100: these compose abstract path objects but do not compare the displayed endpoint base change of Kan spaces. Pullback/Assoc.lean:112–175 and HasPullback.lean:628–720 give strict categorical pullback isomorphisms, not weak equivalences with a specified endpoint homotopy. FundamentalGroupoid hits concern topological paths. Neither semantic phrasing nor Loogle supplies this coherent comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural equivalence between a homotopy pullback M times over S product V with S product R and S times over U with R when M is equivalent to S times over U with V",
+   "results": "{\"t\": \"2026-10-17T12:15:08Z\", \"tool\": \"leanfinder\", \"query\": \"Natural equivalence between a homotopy pullback M times over S product V with S product R and S times over U with R when M is equivalent to S times over U with V\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.prodComparisonIso_pullback_Spec_inv_left_fst_fst'\", \"CategoryTheory.Limits.pullbackProdSndIsoProd\", \"CategoryTheory.Functor.IsFibered.pullbackPullbackIso\", \"CategoryTheory.Limits.Types.pullbackIsoPullback\", \"CategoryTheory.Limits.pullbackProdFstIsoProd\", \"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso\", \"TopCat.pullbackIsoProdSubtype_inv_fst_assoc\", \"TopCat.pullbackIsoProdSubtype_inv_snd_assoc\"], \"digest\": \"cdadf54bbe812622\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/PathObject.lean:53–103,141–170 and RightHomotopy.lean:55–100: these compose abstract path objects but do not compare the displayed endpoint base change of Kan spaces. Pullback/Assoc.lean:112–175 and HasPullback.lean:628–720 give strict categorical pullback isomorphisms, not weak equivalences with a specified endpoint homotopy. FundamentalGroupoid hits concern topological paths. Neither semantic phrasing nor Loogle supplies this coherent comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homotopy pullback of Kan complexes with endpoint compatible equivalence and contractible identity leg",
+   "results": "SSet.RelativeMorphism.Homotopy.ofEq_h; SSet.RelativeMorphism.Homotopy.refl; SSet.RelativeMorphism.Homotopy.ofEq; SSet.RelativeMorphism.Homotopy.refl_h; HomotopicalAlgebra.PathObject.RightHomotopy.homotopy_extension; CategoryTheory.PreOneHypercover.cylinderHomotopy; HomotopicalAlgebra.PathObject.trans_P; HomotopicalAlgebra.PrepathObject.RightHomotopy",
+   "date": "2026-10-17",
+   "verdict": "no match: model-category path-object and relative-homotopy declarations do not state the coherent Kan-space comparison with endpoint compatibility and identity-leg fiber clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "PathObject, pullback, weak equivalence",
+   "results": "none; loogle reported unknown identifier 'PathObject'",
+   "date": "2026-10-17",
+   "verdict": "no match; service returned no usable declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*pullback|path.*fibration|contractible.*fiber [Mathlib/AlgebraicTopology]",
+   "results": "Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:79,162; Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean:181",
+   "date": "2026-10-17",
+   "verdict": "no match: generic path-object model-category results do not state this Kan-space lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homotopy pullback of Kan complexes with endpoint compatible equivalence contracts intermediate endpoint coordinates and has an identity leg section",
+   "results": "CategoryTheory.Limits.FormalCoproduct.homPullbackEquiv; HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h; CategoryTheory.IsPullback.lift; HomotopicalAlgebra.PrepathObject.RightHomotopy.trans; HomotopyEquiv.homotopyInvHomId; Path.Homotopic; HomotopicalAlgebra.PathObject.RightHomotopy.trans; AlgebraicTopology.DoldKan.homotopyPToId",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict pullback, abstract path-object, topological-path and homological declarations do not state the item"
+  },
+  {
+   "tool": "grep",
+   "query": "relative-comma-coordinate-contraction|contractible intermediate coordinates [WeilConjectures]",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no project declaration"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-relative-operadic-terminal-active-mapping",
@@ -76,5 +343,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-comma-coordinate-contraction",
+  "worker": "stage1",
+  "summary": "Repaired returned E5/C4 without changing the statement or checked Steps 1–6 and former Steps 8–9. Replaced former Step 7 by explicit simplicial lifting spaces and proofs of their trivial Kan fibrations, including the dependent triangle and inverse-homotopy towers. Constructed coherent naturality for arbitrary coherent families using pointwise limits, then identified the original cF_T with that comparison in the arrow-diagram category, retaining the specified H. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the inherited ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 mapping-complex adjunction, through terminal-active mapping proof steps 7–9: endpoint-compatible replacement, contraction of both intermediate coordinates, and identity-leg projection. The parent unit route is unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NV-3e7365e10",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-3e7365e10 (reviewer sub-agent of L); spot-checked: I read the item, all 14 steps and every cited statement in full. All 14 steps are correct, and the statement is unchanged and holds on small cases. Checks made: pasting identifies L x^h_B T with S x^h_U R using legs f and gh. The path formula (f alpha)^{-1} gamma (g beta) has the right endpoints f(s) to gh(r). The inverse is the constant-path insertion j. The identity-leg fiber {(s, delta: s to gh(r))} is contractible, and empty R, S, V, M are handled. Steps 1-6 are sound: the fibration and trivial-fibration lifts transpose to anodyne pushout-products. The relative horn fillers Lambda^2_0 and Lambda^2_1 agree on j(Q) through s_0 gamma and s_1 gamma. j is a trivial cofibration, which gives the homotopy jc ~ 1 relative to Q over T. The lifting square for F commutes, the fibration-invariance node gives F_T, and cF_T lies over T. The returned E5/C4 point is repaired. Step 7 defines rho_{i,q} and its strict fibers and proves them trivial fibrations. Steps 8-9 build C1, C2, C_F and C_H as pullbacks of those maps. Steps 10-12 construct naturality from pointwise limiting cones in Fun(K,S), using the presheaf-limits, nerve-pullback-recognition, space-edge and pointwise-equivalences nodes, each within its statement. The min homotopy from i_L e to a, lying over H, checks. Steps 13-14 are correct; pi is a pullback of ev_1. Every cited node is in unit sk-prop-sf-biduality-general, a definition, or a Mathlib leaf, so there are no tool_uses and no SGA. The item is not a target node, so the base-change and coefficient checks do not apply. The delivery adds no new nodes. I searched for duplicates: homotopy-pullback-pasting, the two pullback-invariance nodes, mapping-path-square-rectification and quillen-b-path-minmax state different things. The Kerodon, HTT and HA sources are online only and archive WANTED, so I could not read them at the cited place; proof_origin is correctly agent. One fault, C2: Step 7 was marked elementary although it uses two lemmas and a transposition argument. I set it to elementary false in fixes/dag/nodes/sec-six-functors/lem-coef-relative-comma-coordinate-contraction.json and changed nothing else.; 1 file(s) fixed by the reviewer"
  }
 }

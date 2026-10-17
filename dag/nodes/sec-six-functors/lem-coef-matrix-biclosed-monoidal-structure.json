@@ -11,9 +11,97 @@
   "lem-coef-projective-chains-monoidal-model",
   "lem-coef-graph-product-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-coef-projective-chains-monoidal-model] and [lem-coef-projective-cochain-monoidal-model], the underlying category $\\mathbf V$ is closed symmetric monoidal, with unit $I=R[0]$, direct-sum total tensor, and product total internal Hom, denoted $[A,C]$. Thus closedness and symmetry give natural bijections $\\operatorname{Hom}_{\\mathbf V}(A\\otimes B,C)\\cong\\operatorname{Hom}_{\\mathbf V}(B,[A,C])\\cong\\operatorname{Hom}_{\\mathbf V}(A,[B,C])$, where the second identification includes interchanging $A$ and $B$. By [lem-coef-graph-product-model], $\\mathbf G_S=\\prod_{S^2}\\mathbf V$ is complete and cocomplete. Products and coproducts of complexes can be formed degreewise with coordinatewise differential; their projection and inclusion maps satisfy the respective universal properties also for chain maps. A graph morphism is an arbitrary family of chain maps, so its Hom set is the product of the coordinate Hom sets. Smallness of $S$ ensures that all the indicated sums and products exist.",
+   "uses": [
+    "lem-coef-projective-chains-monoidal-model",
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-graph-product-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Definition 10.1, printed pp. 1595-1596; ambient hypotheses in Notation, printed p. 1545. Existing nodes supply the category of complexes."
+   }
+  },
+  {
+   "text": "Tensor distributes over every small coproduct in either variable, including the empty one. Indeed, closedness from [lem-coef-projective-cochain-monoidal-model] gives $\\operatorname{Hom}_{\\mathbf V}(A\\otimes\\bigoplus_iB_i,C)\\cong\\operatorname{Hom}_{\\mathbf V}(\\bigoplus_iB_i,[A,C])\\cong\\prod_i\\operatorname{Hom}_{\\mathbf V}(A\\otimes B_i,C)$. These bijections are restriction along $A\\otimes B_i\\to A\\otimes\\bigoplus_iB_i$, so these maps exhibit a coproduct. Symmetry gives the other variable, and the empty case gives $A\\otimes0\\cong0\\cong0\\otimes A$. For graph maps $f:P\\to P\\prime$ and $g:Q\\to Q\\prime$, define $f\\star g$ on the $u$-summand by $f(u,t)\\otimes g(s,u)$ followed by its target inclusion. The tensor bifunctor laws and the coproduct universal property give the identity and composition laws. This constructs the stated bifunctor.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Definition 10.1: elementary universal-property construction of the matrix tensor on maps and its distributivity identifications."
+   }
+  },
+  {
+   "text": "At $(s,t)$, expand the two triple products using Step 2. The source $((P\\star Q)\\star T)(s,t)$ is the coproduct over $(u,v)\\in S^2$ of $(P(v,t)\\otimes Q(u,v))\\otimes T(s,u)$, while $(P\\star(Q\\star T))(s,t)$ is the coproduct over the same pairs of $P(v,t)\\otimes(Q(u,v)\\otimes T(s,u))$. Define the associator on each summand by the tensor associator of [lem-coef-projective-cochain-monoidal-model] and the corresponding target inclusion. The inverse uses its inverse on the same summand, so the two composites are identities. Naturality follows after restriction to each summand from naturality of the tensor associator. In particular, no factors are permuted and no additional Koszul sign occurs.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Definition 10.1: associativity constraint, written explicitly on intermediate-vertex summands."
+   }
+  },
+  {
+   "text": "For $E\\star P$, all terms in $\\bigoplus_uE(u,t)\\otimes P(s,u)$ vanish except $u=t$, and that term is $I\\otimes P(s,t)$. For $P\\star E$, all terms in $\\bigoplus_uP(u,t)\\otimes E(s,u)$ vanish except $u=s$, leaving $P(s,t)\\otimes I$. Use the left and right tensor unitors of [lem-coef-projective-cochain-monoidal-model] to obtain natural graph isomorphisms $E\\star P\\cong P$ and $P\\star E\\cong P$. Their inverses are the inverse tensor unitors followed by the respective coproduct inclusions. The zero-summand assertions use the empty-coproduct calculation in Step 2, so they hold even when $R$ is the zero ring.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Definition 10.1: diagonal unit and its two unit constraints."
+   }
+  },
+  {
+   "text": "To check the pentagon for four graphs, restrict each composite to a summand indexed by a length-four path $s=x_0,x_1,x_2,x_3,x_4=t$. Step 3 leaves all three internal vertices fixed, so both composites have the same target summand. Their maps on its four tensor factors are precisely the two sides of the tensor pentagon in [lem-coef-projective-cochain-monoidal-model]. Equality on all summands proves the graph pentagon. For the triangle, summands with a nondiagonal factor of $E$ are zero. On a surviving summand the two composites are precisely the tensor triangle on $P(u,t)\\otimes I\\otimes Q(s,u)$, hence agree. Thus the constructed constraints satisfy the monoidal axioms. For $S=\\varnothing$ the graph category has one object and one morphism and every condition is vacuous; for a singleton $S$ these constraints are exactly those of $\\mathbf V$.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Definition 10.1: direct coherence verification by summand inclusions; tensor coherence is part of the cited closed symmetric monoidal structure."
+   }
+  },
+  {
+   "text": "Fix $P$ and define $R_P(H)(s,u)=\\prod_t[P(u,t),H(s,t)]$, with morphisms induced by postcomposition in each internal Hom. The closed structure of [lem-coef-projective-cochain-monoidal-model] and the coproduct and product universal properties give natural bijections\n$$\\begin{aligned}\\operatorname{Hom}_{\\mathbf G_S}(P\\star Q,H)&\\cong\\prod_{s,t,u}\\operatorname{Hom}_{\\mathbf V}(P(u,t)\\otimes Q(s,u),H(s,t))\\\\&\\cong\\prod_{s,u,t}\\operatorname{Hom}_{\\mathbf V}(Q(s,u),[P(u,t),H(s,t)])\\\\&\\cong\\prod_{s,u}\\operatorname{Hom}_{\\mathbf V}(Q(s,u),\\prod_t[P(u,t),H(s,t)])\\\\&=\\operatorname{Hom}_{\\mathbf G_S}(Q,R_P(H)).\\end{aligned}$$\nExplicitly, restrict a graph map to each $u$-summand, curry it, and collect the resulting maps using the $t$-product. The inverse projects to each $t$, uncurries, and extends from the $u$-summands. They are inverse and natural because restriction/extension, projection/tupling, and currying/uncurrying are inverse natural operations. This proves $P\\star-\\dashv R_P$.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Definition 10.1, printed p. 1596: right adjoint of left matrix tensor; direct Hom-set calculation."
+   }
+  },
+  {
+   "text": "Fix $Q$ and define $L_Q(H)(u,t)=\\prod_s[Q(s,u),H(s,t)]$, with the same postcomposition action. Now use the other tensor-Hom bijection of [lem-coef-projective-cochain-monoidal-model] to obtain\n$$\\begin{aligned}\\operatorname{Hom}_{\\mathbf G_S}(P\\star Q,H)&\\cong\\prod_{s,t,u}\\operatorname{Hom}_{\\mathbf V}(P(u,t)\\otimes Q(s,u),H(s,t))\\\\&\\cong\\prod_{u,t,s}\\operatorname{Hom}_{\\mathbf V}(P(u,t),[Q(s,u),H(s,t)])\\\\&\\cong\\operatorname{Hom}_{\\mathbf G_S}(P,L_Q(H)).\\end{aligned}$$\nHere transpose by first interchanging the two tensor factors and then currying; for homogeneous elements that interchange is $p\\otimes q\\mapsto(-1)^{|p||q|}q\\otimes p$. Collect over $s$ to define the forward map. The inverse projects to $s$, uncurries, interchanges back, and extends from the $u$-summands. The symmetry is its own inverse and all operations are natural, proving the second adjunction $-\\star Q\\dashv L_Q$. Both constructions remain valid for zero graphs and empty indexing sets. Together with Steps 3-5 this is the asserted biclosed monoidal structure.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Definition 10.1, printed p. 1596: right adjoint of right matrix tensor; direct Hom-set calculation, retaining the Koszul symmetry."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-projective-chains-monoidal-model",
+  "lem-coef-projective-cochain-monoidal-model",
+  "lem-coef-graph-product-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+  "place": "Muro Definition 10.1, printed pp. 1595-1596 (PDF pages 55-56), read online; explicit summand, coherence and Hom-set verifications written here. Archive absent from literature/ and requested in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +145,54 @@
    "results": "{\"t\": \"2026-10-17T08:45:20Z\", \"tool\": \"grep\", \"query\": \"[Mm]atrix|[Bb]iclosed|[Cc]onvolution\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\"], \"digest\": \"a1e890b47ff8ec6d\"}",
    "date": "2026-10-17",
    "verdict": "no match: Read the hits: tensor-Hom adjunction and graded-object/Day-convolution infrastructure do not construct the matrix graph monoidal category with the specified adjoints."
+  },
+  {
+   "tool": "grep",
+   "query": "biclosed|matrix|convolution",
+   "sub": "CategoryTheory/Monoidal",
+   "results": "{\"t\": \"2026-10-17T15:04:00Z\", \"tool\": \"grep\", \"query\": \"biclosed|matrix|convolution\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/Hopf_.lean\", \"Mathlib/CategoryTheory/Monoidal/Hopf_.lean\", \"Mathlib/CategoryTheory/Monoidal/Hopf_.lean\"], \"digest\": \"0cd89644c17c889c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Hits are ordinary Day convolution infrastructure; the focused matrix/quiver/biclosed search has no hits. No matrix graph monoidal structure with these two adjoints."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Matrix convolution of enriched graphs has left and right internal Homs given by products of internal Homs",
+   "results": "{\"t\": \"2026-10-17T15:04:00Z\", \"tool\": \"leansearch\", \"query\": \"Matrix convolution of enriched graphs has left and right internal Homs given by products of internal Homs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.DayConvolutionInternalHom\", \"CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.mk\", \"CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.ctorIdx\", \"CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.mk.sizeOf_spec\", \"CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.π\", \"CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.rec\", \"CategoryTheory.MonoidalCategory.DayConvolution.mk\", \"CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.hπ_assoc\"], \"digest\": \"d991578c7573f4fa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: DayConvolutionInternalHom assumes a monoidal indexing category and suitable end data, unlike the matrix graph construction; source read in DayConvolution/Closed.lean:12-26,39-89."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed",
+   "results": "{\"t\": \"2026-10-17T15:04:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed\", \"CategoryTheory.MonoidalClosed.closed\", \"CategoryTheory.MonoidalClosed.mk\", \"CategoryTheory.MonoidalClosed.internalHom\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂\", \"CategoryTheory.MonoidalClosed.instIsRightAdjointObjOppositeFunctorInternalHom\", \"CategoryTheory.MonoidalClosed.ofEquiv\", \"CategoryTheory.MonoidalClosed.internalHom_obj\"], \"digest\": \"e718cf89d43ce94f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: MonoidalClosed assumes a monoidal category and closed objects; it does not construct the matrix product or its constraints."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a set S the category of S by S indexed complexes with matrix multiplication tensor is a biclosed monoidal category",
+   "results": "{\"t\": \"2026-10-17T15:04:03Z\", \"tool\": \"leanfinder\", \"query\": \"For a set S the category of S by S indexed complexes with matrix multiplication tensor is a biclosed monoidal category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.instMonoidalClosed\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"CategoryTheory.tensorClosed\", \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"CategoryTheory.Closed\", \"CategoryTheory.MonoidalClosed\", \"CategoryTheory.ihom.instIsLeftAdjointTensorLeft\", \"LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat\"], \"digest\": \"683a690a652c3a0a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ModuleCat closedness and generic tensor-closed objects do not construct graph convolution or its two product internal Homs."
+  },
+  {
+   "tool": "grep",
+   "query": "Matrix.*[Mm]onoidal|[Mm]onoidal.*Matrix|Graph.*[Mm]onoidal|[Bb]iclosed|Quiver.*[Cc]onvolution",
+   "sub": "CategoryTheory",
+   "results": "{\"t\": \"2026-10-17T15:04:22Z\", \"tool\": \"grep\", \"query\": \"Matrix.*[Mm]onoidal|[Mm]onoidal.*Matrix|Graph.*[Mm]onoidal|[Bb]iclosed|Quiver.*[Cc]onvolution\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Hits are ordinary Day convolution infrastructure; the focused matrix/quiver/biclosed search has no hits. No matrix graph monoidal structure with these two adjoints."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A category of enriched quivers has associative matrix tensor given by sums over intermediate vertices and two product internal Hom right adjoints",
+   "results": "{\"t\": \"2026-10-17T15:04:25Z\", \"tool\": \"leanfinder\", \"query\": \"A category of enriched quivers has associative matrix tensor given by sums over intermediate vertices and two product internal Hom right adjoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.EnrichedCat\", \"CategoryTheory.eComp\", \"CategoryTheory.enrichedCategoryTypeOfCategory\", \"CategoryTheory.EnrichedOrdinaryCategory\", \"CategoryTheory.EnrichedCat.bicategory\", \"CategoryTheory.EnrichedCategory.comp\", \"CategoryTheory.MonoidalClosed.enrichedCategorySelf\", \"CategoryTheory.EnrichedCategory\"], \"digest\": \"689685ac8c1822b0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: EnrichedCategory and EnrichedCat concern categories already carrying composition; they do not equip the category of graphs with this matrix tensor."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-fixed-object-dg-free-model",
@@ -72,7 +204,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2: fixed-object graph model and convolution structure used to transfer the associative-algebra model structure.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint (main-20261015 .proof.md): coherent finite-level mapping-complex adjunction in the middle R lim comparison; matrix convolution used in the fixed-object graph model supporting this realization.",
    "via": [
     "lem-coef-fixed-object-dg-free-model",
     "lem-coef-fixed-object-enriched-rectification",
@@ -85,5 +217,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-matrix-biclosed-monoidal-structure",
+  "worker": "stage1",
+  "summary": "Q93 checked Muro Definition 10.1 and both existing input statements, found no exact project Lean attachment or Mathlib matrix structure, and supplied explicit bifunctor, associator, unit, coherence and two tensor-Hom adjunction calculations. Statement unchanged; all subsidiary verifications are elementary from the existing closed complex model and graph product category, so no new nodes were needed. Empty and singleton vertex sets, zero ring and Koszul tensor order were checked.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: fixed-object enriched model supporting the coherent finite-level adjunction in the middle R lim isomorphism; preserves the recorded ancestry through the graph-model node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-d8590d8be",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-d8590d8be (reviewer sub-agent of L); spot-checked: Read the item, its seven steps and the statements of the three same-unit nodes it cites (projective-chains, projective-cochain, graph-product), plus the parent dg-free-model. The statement is unchanged and correct. P⋆Q(s,t)=⊕_u P(u,t)⊗Q(s,u) matches the parent's composition A(u,t)⊗A(s,u)→A(s,t). I checked by hand that associativity reindexes to the same pairs (u,v), that E⋆P keeps u=t and P⋆E keeps u=s, and that R_P(H)(s,u)=∏_t[P(u,t),H(s,t)] and L_Q(H)(u,t)=∏_s[Q(s,u),H(s,t)] follow from currying; L_Q uses the cochain node's symmetry. Edge cases S empty, S a singleton and R=0 hold. Steps 2-7 are elementary uses of closedness and the coproduct and product universal properties, written out and not relabelled. Every citation states what its step takes from it. There are no new nodes, no duplicates (rg over the DAG and blueprint_refs search: the only related node, associative-algebra-model-transfer, takes biclosedness as a hypothesis) and no off-route or tool uses. I could not open Muro Definition 10.1: it is not in literature/, network access is blocked, and a search of the machine found no local copy. The delivery records it correctly as an agent proof with a WANTED line, and the mathematics was checked independently of Muro's notation. No SGA source. No fixes."
  }
 }
