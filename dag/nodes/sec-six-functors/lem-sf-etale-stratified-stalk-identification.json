@@ -18,9 +18,70 @@
   "def-weil-geometric-point",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=\\operatorname{Spec}\\Omega$ and define $T_{\\bar u}(G)=\\Gamma(P,\\bar u^{-1}G)$ on constant-$A$ module sheaves. The geometric-point comparison identifies this functor with the geometric stalk on underlying abelian groups. It is $A$-linear: for each $a\\in A$, naturality applied to the abelian-sheaf endomorphism $m_a:G\\to G$ identifies its action on both sides, and inverse image takes this action to the module action specified in the exact module inverse-image theorem. The identification of the coefficient-ring stalk with $A$ sends the germ of the constant section $a$ to $a$. The point-site global-sections functor and $\\bar u^{-1}$ are exact, so $T_{\\bar u}$ is exact. Now the module-linear composition comparison $\\bar u^{-1}f^{-1}G\\xrightarrow{\\sim}(f\\circ\\bar u)^{-1}G$ induces, on global sections and then via the point comparison, an $A$-linear natural isomorphism $T_{\\bar u}(f^{-1}G)\\xrightarrow{\\sim}T_{\\bar x}(G)=G_{\\bar x}$. Apply it in every degree of a complex: naturality with respect to each differential makes it an isomorphism of complexes.",
+   "uses": [
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-composition-module-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark 04JN (remark-stalk-pullback); Lemma 03Q1 (lemma-stalk-pullback) (1),(3); module composition: sites-modules.tex Lemma 03D8 (lemma-push-pull-composition-modules)."
+   }
+  },
+  {
+   "text": "Apply the exact-functor derived-factorization theorem to $f^{-1}$ and to the exact functors $T_{\\bar u}$ and $T_{\\bar x}$ of Step 1. Their termwise complex functors preserve quasi-isomorphisms and induce functors on the unbounded derived categories. The comparison of Step 1 descends through the localization: its naturality holds for chain maps and therefore also for their inverses when these become invertible. Thus $T_{\\bar u,D}(f^{-1}_DK)\\cong T_{\\bar x,D}(K)=K_{\\bar x}$. Apply $T_{\\bar u,D}$ to the given derived isomorphism $\\alpha$, and compose with the inverse of this comparison to obtain $K_{\\bar x}\\xrightarrow{\\sim}T_{\\bar u,D}(\\underline{E^\\bullet}_U)$. A functor sends the inverse of $\\alpha$ to an inverse, so this remains an isomorphism even when $\\alpha$ is represented by localized maps rather than by a chain isomorphism. The cited factorization theorem applies to arbitrary complexes; no boundedness is used.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015F (lemma-right-derived-exact-functor), (3),(4); applying its termwise factorization to the stalk comparison extracted from etale-cohomology.tex Lemma 09BI (lemma-connected-ctf-locally-constant)."
+   }
+  },
+  {
+   "text": "By the termwise-constant-complex definition, degree $n$ of $\\underline{E^\\bullet}_U$ is the constant sheaf $\\underline{E^n}_U$. The constant-stalk theorem gives an additive isomorphism $\\gamma_n:E^n\\to(\\underline{E^n}_U)_{\\bar u}$, $e\\mapsto\\operatorname{germ}(\\iota_U(e))$. This is $A$-linear because multiplication by $a\\in A$ on the constant sheaf is induced from $e\\mapsto ae$ on the constant presheaf, so $a\\gamma_n(e)=\\gamma_n(ae)$. Likewise the sheaf map $\\underline{d^n}$ is induced from $d^n:E^n\\to E^{n+1}$, giving $(\\underline{d^n})_{\\bar u}\\gamma_n(e)=\\operatorname{germ}(\\iota_U(d^ne))=\\gamma_{n+1}(d^ne)$. Hence the $\\gamma_n$ assemble to an $A$-linear chain isomorphism $E^\\bullet\\xrightarrow{\\sim}(\\underline{E^\\bullet}_U)_{\\bar u}$. Its inverse, followed by localization, identifies $T_{\\bar u,D}(\\underline{E^\\bullet}_U)$ with $E^\\bullet$ in $D(A)$.",
+   "uses": [
+    "def-kun-constant-sheaf",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03PT (lemma-stalk-exact) (2), Definition 040R (definition-stalk); canonical constant germs applied to the local constant models in Lemma 09BI (lemma-connected-ctf-locally-constant)."
+   }
+  },
+  {
+   "text": "Compose the isomorphism of Step 2 with the inverse of the constant-germ chain isomorphism of Step 3 in $D(A)$. This gives $K_{\\bar x}\\xrightarrow{\\sim}E^\\bullet$. Every map used is $A$-linear. The representative description is precisely termwise stalk evaluation followed by these canonical comparisons; descent through localization in Step 2 ensures that it is independent of how the given $\\alpha$ is represented.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Agent completion of the geometric-stalk comparison implicit in Lemma 09BI (lemma-connected-ctf-locally-constant)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-constant-sheaf",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Expansion of the overlap comparison implicit in Lemma 09BI (lemma-connected-ctf-locally-constant), using human-source statements in Tags 04JN, 03Q1, 03PT, 03D8 and derived.tex Tag 015F. The source does not spell out this generalized arbitrary-morphism, unbounded-complex argument."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -73,7 +134,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-etale-smooth-stratified-ctf",
@@ -92,5 +153,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-etale-stratified-stalk-identification",
+  "worker": "stage1",
+  "summary": "Retained the statement, inherited searches and four-step split; repaired the unstated inverse-image composition argument by citing the existing module-linear composition node, and the derived descent by citing the existing exact-functor derived-factorization Mathlib leaf. Wrote the scalar and differential identities for constant germs explicitly. The last step only composes previously established isomorphisms. No new nodes and no new hypotheses.",
+  "blueprint": "Realizes the proof paragraph of the imported node: the local constant complex on an etale cover member is identified with the original complex at a geometric stalk, using exact inverse image and stalk functoriality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "The generic point-site equivalence and natural stalk comparison give an exact module-valued stalk functor, without replacing the unit biduality route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exactness and constant-ring module actions are generic inverse-image tools; the biduality unit does not restate them."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "The generic module-linear inverse-image composition comparison is needed at the composite geometric point; no statement of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-inverse-image-composition-module-linear"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-ab9fcff4f",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-ab9fcff4f (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps and every cited statement in full, together with Stacks 09BI (l.13850), 03Q1 (1),(3), 04JN, 03PT (2), derived 015F (3),(4) and sites-modules 03D8. The item's statement, which predates this delivery, is true for arbitrary f, any commutative A and unbounded complexes. Edge cases checked: U empty (vacuous), A=0, E=0, f=id. Step 1: point-pullback-stalk clauses 1 and 2 at U and X, inverse-image-modules (1)-(3) and module-linear composition c_{f,ubar} give an exact, A-linear T_ubar∘f^{-1} ≅ (-)_xbar. Step 2: the exact-functor factorization leaf (mapDerivedCategoryFactors) plus routine localization descent gives T_ubar,D f^{-1}_D ≅ T_xbar,D; the step's '=' with K_xbar is meant up to the canonical iso, which is harmless. Step 3: the constant-stalk iso, with the scalar and differential equations written out, gives a chain iso. Step 4 is elementary composition. Every cited unit (sk-thm-properbasechange, sk-def-exchange, sk-thm-p1, sk-def-pbc) is in the transitive uses of sk-prop-sf-biduality-general, so the 3 declared tool_uses are accepted as generic tools. There are no new nodes. I found no duplicate in the DAG: finite-ring-derived-local-constancy, kun-stalks-of-cohomology and local-derived-stalk-transport all state different results. No cycle, no SGA source, no fixes written."
  }
 }

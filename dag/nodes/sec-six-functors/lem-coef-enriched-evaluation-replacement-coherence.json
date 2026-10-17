@@ -7,10 +7,84 @@
  },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
- "status": "unsplit",
+ "status": "split",
  "mathlib_match": null,
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Unpack the enriched-end mapping sets specified in [lem-coef-simplicial-projective-model-calculus], using only their definition, not its model-structure existence assertion. For an $n$-simplex $u$ of $B(b,b')$, the map $H_j(u)$ is an $n$-simplex of the enriched end, with evaluation $H_j(u)_i$ and enriched naturality in $i$. For an $n$-simplex $v$ of $I(i,i')$, set\n$$e_j(u,v)=H_j(b')(v)\\circ H_j(u)_i=H_j(u)_{i'}\\circ H_j(b)(v).$$\nThe equality is the end's enriched naturality equation. Both expressions commute with simplicial operators. For composable pairs $(u,v),(u',v')$, move $H_j(u')_{i'}$ past $H_j(b')(v)$ by that equation; associativity and functoriality give $e_j(u',v')e_j(u,v)=e_j(u'u,v'v)$. Identity pairs map to identities. Thus this formula defines the enriched functor $e_j$ on $B\\times I$. All its objects are bifibrant by hypothesis, so its target is the full simplicial subcategory $\\mathcal A^{cf}$. No cofibrancy condition on diagrams is used.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5, Definition 1.1.5.5 and Example 1.1.5.8; explicit enriched evaluation and interval construction (agent argument)."
+   }
+  },
+  {
+   "text": "Put $D=B\\times I$ and $r_{(b,i)}=q_b(i)$. Naturality of the enriched transformation $q$ in $B$ gives $q_{b'}(i)H_0(u)_i=H_1(u)_i q_b(i)$ as an equality on the entire mapping simplicial set. Since $q_{b'}$ is an enriched transformation of $I$-diagrams, $q_{b'}(i')H_0(b')(v)=H_1(b')(v)q_{b'}(i)$. Substituting these two equalities into step 1 gives\n$$r_{(b',i')}e_0(u,v)=e_1(u,v)r_{(b,i)}.$$\nHere vertices are made constant $n$-simplices when composed with $n$-simplices. Consequently these equalities hold as simplicial maps, not merely for arrows of an underlying ordinary category. They prove enriched naturality of $r:e_0\\Rightarrow e_1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5, Definition 1.1.5.5 and Example 1.1.5.8; explicit enriched evaluation and interval construction (agent argument)."
+   }
+  },
+  {
+   "text": "Construct $J:D\\times[1]\\to\\mathcal A^{cf}$ explicitly. On objects put $J(x,\\epsilon)=e_\\epsilon(x)$. On a mapping object with endpoints both $0$ or both $1$, use $e_0$ or $e_1$, respectively. On the cross mapping object from $(x,0)$ to $(y,1)$ put\n$$J(f,0\\to1)=r_y e_0(f)=e_1(f)r_x.$$\nOn the empty mapping object from level $1$ to level $0$ use its unique map. This defines simplicial maps by step 2. Composable interval arrows have levels $000,001,011,111$. The constant cases use the functor laws of $e_j$. For $001$ the composite is $r_z e_0(g)e_0(f)=r_z e_0(gf)$; for $011$ it is $e_1(g)r_y e_0(f)=r_z e_0(g)e_0(f)=r_z e_0(gf)$, by step 2. Identities at both levels are preserved. This verifies every enriched functor law, and the image of $(1_x,0\\to1)$ is exactly $r_x$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5, Definition 1.1.5.5 and Example 1.1.5.8; explicit enriched evaluation and interval construction (agent argument)."
+   }
+  },
+  {
+   "text": "Write $Q=N_{\\mathrm{hc}}(\\mathcal A^{cf})$ and $X=N_{\\mathrm{hc}}B$. The first is a quasicategory by [lem-coef-simplicial-model-nerve-localization], and the second is one by [lem-coef-coherent-nerve-comparison], since $B$ is locally Kan. Directly from the nerve formula in that comparison, a functor from $\\mathfrak C[\\Delta^n]$ to a product is a pair of functors. These degreewise bijections commute with simplex operators. Hence the coherent nerve preserves the products in question. Its value on the discrete simplicial category $[1]$ is its ordinary nerve, $\\Delta^1$, by the same cited statement. Taking the nerve of $J$ and precomposing by $1_X\\times a\\times1_{\\Delta^1}$ therefore gives\n$$X\\times K\\times\\Delta^1\\longrightarrow Q.$$\nReorder the last two factors and apply [lem-coef-joyal-strict-currying]. The result $X\\times\\Delta^1\\to\\operatorname{Fun}(K,Q)$ is an edge $\\eta:E_0\\to E_1$ of the outer functor simplicial set. Restriction to the endpoints agrees with the definition of $E_j$. Restriction to $(b,k)\\times\\Delta^1$ is the nerve edge of $r_{(b,a(k))}=q_b(a(k))$, because step 3 sends the interval arrow at that object to this vertex.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-joyal-strict-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5, Definition 1.1.5.5 and Example 1.1.5.8; explicit enriched evaluation and interval construction (agent argument)."
+   }
+  },
+  {
+   "text": "For each $(b,i)$, the arrow $q_b(i)$ is a weak equivalence between bifibrant objects. Under the inverse equivalence from $Q$ to the infinity localization in [lem-coef-simplicial-model-nerve-localization], its nerve edge maps to this arrow followed by localization; the agreement with inclusion on bifibrant objects is part of that node's statement. Localization inverts this arrow. An equivalence of categories reflects invertibility: apply its quasi-inverse to an inverse and the two inverse-triangle witnesses, then conjugate by the comparison equivalences with the identity. Thus the original edge of $Q$ is an equivalence. In particular every edge computed at the end of step 4 is an equivalence.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5, Definition 1.1.5.5 and Example 1.1.5.8; explicit enriched evaluation and interval construction (agent argument)."
+   }
+  },
+  {
+   "text": "Set $R=\\operatorname{Fun}(K,Q)$. For completeness, $R$ is a quasicategory: by [lem-coef-joyal-strict-currying], a horn in $R$ is a map $K\\times\\Lambda_i^n\\to Q$. The map $\\Lambda_i^n\\times K\\to\\Delta^n\\times K$ is inner anodyne by [lem-coef-inner-anodyne-pushout-product], applied to the inner horn and $\\varnothing\\hookrightarrow K$. Since $Q\\to\\Delta^0$ is an inner fibration by the definition of quasicategory, the required extension exists. Apply [lem-coef-infinity-pointwise-equivalences] first with target $Q$ and index $K$: for each vertex $b$ of $X$, the edge $\\eta_b$ in $R$ is an equivalence, since its components at all $k$ are the equivalences of step 5. Apply that same node again, now with target $R$ and index $X$, to conclude that $\\eta$ is an equivalence edge of $\\operatorname{Fun}(X,R)$. This is the asserted coherent natural equivalence, induced by precisely the interval functor of step 3. These arguments also cover empty $K$, $I$, or $B$: the corresponding vertex conditions are vacuous.",
+   "uses": [
+    "lem-coef-joyal-strict-currying",
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4; apply twice, after the explicit inner-horn lifting argument for the internal functor simplicial set."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-joyal-strict-currying",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-simplicial-projective-model-calculus"
+ ],
  "id": "lem-coef-enriched-evaluation-replacement-coherence",
  "kind": "statement",
  "title": "Coherence of enriched evaluation with projective replacement",
@@ -74,9 +148,48 @@
    "results": "{\"t\": \"2026-10-17T08:38:09Z\", \"tool\": \"grep\", \"query\": \"QuillenEquivalence|simplicial.*replacement|enriched.*replacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: enriched natural-transformation definitions and enriched ordinary-index functor categories do not give the two-parameter coherent-nerve evaluation comparison or its natural equivalence. Read Enriched/Basic.lean:393-461, SimplicialNerve.lean:14-34 and CofibrantObjectHomotopy.lean:131-178."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialNerve|EnrichedNatTrans",
+   "results": "{\"t\": \"2026-10-17T13:02:10Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve|EnrichedNatTrans\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\"], \"digest\": \"0dd98201da5c7f4d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib Enriched/Basic.lean:393-461, Enriched/FunctorCategory.lean:39-95, SimplicialNerve.lean:14-34 and ModelCategory/Bifibrant.lean:194-200. Hits give enriched definitions, ordinary-index functor ends, ordinary nerve edges or the bifibrant weak-equivalence predicate; none states this coherent evaluation equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedNatTrans\"",
+   "results": "{\"t\": \"2026-10-17T13:02:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedNatTrans\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CategoryTheory.EnrichedNatTrans\", \"CategoryTheory.enrichedNatTransYoneda\", \"CategoryTheory.enrichedNatTransYoneda_obj\", \"CategoryTheory.EnrichedNatTrans.mk\", \"CategoryTheory.EnrichedNatTrans.out\", \"CategoryTheory.enrichedNatTransYoneda_map\", \"CategoryTheory.enrichedNatTransYonedaTypeIsoYonedaNatTrans\"], \"digest\": \"b7ba7bab1eef4bd1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib Enriched/Basic.lean:393-461, Enriched/FunctorCategory.lean:39-95, SimplicialNerve.lean:14-34 and ModelCategory/Bifibrant.lean:194-200. Hits give enriched definitions, ordinary-index functor ends, ordinary nerve edges or the bifibrant weak-equivalence predicate; none states this coherent evaluation equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Enriched evaluation of an objectwise weak equivalence of simplicial functors gives a natural equivalence after taking the homotopy coherent nerve",
+   "results": "{\"t\": \"2026-10-17T13:02:11Z\", \"tool\": \"leansearch\", \"query\": \"Enriched evaluation of an objectwise weak equivalence of simplicial functors gives a natural equivalence after taking the homotopy coherent nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.functorHomEquiv.congr_simp\", \"CategoryTheory.Enriched.FunctorCategory.functorHomEquiv_apply_app\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.Enriched.FunctorCategory.homEquiv\", \"CategoryTheory.Enriched.FunctorCategory.functorHomEquiv\", \"CategoryTheory.Enriched.FunctorCategory.homEquiv_apply_π\", \"SSet.Truncated.nerve₂Adj\", \"SSet.Truncated.HomotopyCategory.functorEquiv\"], \"digest\": \"fd27d4f6e41909df\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib Enriched/Basic.lean:393-461, Enriched/FunctorCategory.lean:39-95, SimplicialNerve.lean:14-34 and ModelCategory/Bifibrant.lean:194-200. Hits give enriched definitions, ordinary-index functor ends, ordinary nerve edges or the bifibrant weak-equivalence predicate; none states this coherent evaluation equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicially enriched natural transformation with weak equivalence components between bifibrant diagrams induces a natural equivalence of homotopy coherent evaluation functors",
+   "results": "{\"t\": \"2026-10-17T13:02:14Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicially enriched natural transformation with weak equivalence components between bifibrant diagrams induces a natural equivalence of homotopy coherent evaluation functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"SSet.Truncated.HomotopyCategory.mkNatTrans\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"SSet.Truncated.HomotopyCategory.mkNatIso\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"SSet.Truncated.HomotopyCategory.mkNatIso_hom_app_mk\", \"SSet.Truncated.HomotopyCategory.functorEquiv\"], \"digest\": \"00eb7965c5887afc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib Enriched/Basic.lean:393-461, Enriched/FunctorCategory.lean:39-95, SimplicialNerve.lean:14-34 and ModelCategory/Bifibrant.lean:194-200. Hits give enriched definitions, ordinary-index functor ends, ordinary nerve edges or the bifibrant weak-equivalence predicate; none states this coherent evaluation equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking the homotopy coherent nerve carries enriched natural weak equivalences between objectwise cofibrant fibrant simplicial diagrams to equivalence edges in a functor quasicategory",
+   "results": "{\"t\": \"2026-10-17T13:03:00Z\", \"tool\": \"leanfinder\", \"query\": \"Taking the homotopy coherent nerve carries enriched natural weak equivalences between objectwise cofibrant fibrant simplicial diagrams to equivalence edges in a functor quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.homEquiv\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.nerve.homEquiv_edgeMk_map_nerveMap\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\"], \"digest\": \"d1bfd6f6bd85e2be\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib Enriched/Basic.lean:393-461, Enriched/FunctorCategory.lean:39-95, SimplicialNerve.lean:14-34 and ModelCategory/Bifibrant.lean:194-200. Hits give enriched definitions, ordinary-index functor ends, ordinary nerve edges or the bifibrant weak-equivalence predicate; none states this coherent evaluation equivalence."
   }
  ],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, before the displayed derived coefficient-adjunction calculation; explicit enriched evaluation/interval argument supporting the descendant rectification comparison. Online supporting references HTT Section 1.1.5 and Kerodon Tag 01DK; archival HTT is WANTED."
+ },
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
@@ -94,5 +207,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-evaluation-replacement-coherence",
+  "worker": "stage1",
+  "summary": "Constructed enriched evaluation on all mapping simplices, checked naturality in both parameters, and wrote the interval functor and its composition checks. Took its nerve and curried the actual map; used bifibrant localization and the existing pointwise-equivalence criterion twice. Proved the required functor object is a quasicategory by the cited inner-anodyne pushout-product. Preserved the statement and created no nodes.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2 before the derived coefficient-adjunction display: coherence of replacement under evaluation, in the descendant lem-coef-enriched-diagram-rectification comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-710a62dad",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-710a62dad (reviewer sub-agent of L); spot-checked: I read the whole item: its statement, all six steps and its metadata. It adds no new nodes. I read the statement of each of the seven cited nodes, the unit sk-prop-sf-biduality-general, and the ancestor's main-20261015 blueprint proof (prop-coef-integral-exceptional-adjoint, paragraph 2). I also read the only node that cites the item, lem-coef-enriched-diagram-rectification step 8, and its hypotheses match what the item assumes. Steps 1-3 are elementary and I checked each. Step 1: an n-simplex of the enriched end satisfies the interchange equation, so e_j is functorial on B x I. Step 2: r e_0 = e_1 r holds on full mapping simplicial sets, by naturality of q in B and of q_b in I. Step 3: I checked the interval functor J for the level cases 000, 001, 011 and 111, and the 1-to-0 mapping set is empty. Step 4: N_hc preserves the product degree by degree, N_hc[1] is Delta^1 by the discrete clause of coherent-nerve-comparison, and currying gives an edge of Fun(X,Fun(K,Q)) whose component at (b,k) is exactly q_b(a(k)). Step 5: this rests on the reading that the comparison of nerve-localization agrees with inclusion followed by localization on the ordinary nerve of the bifibrant objects. That is a fair reading of the cited statement (HA 1.3.4.20), and equivalences of quasicategories reflect equivalence edges. Step 6: Fun(K,Q) is a quasicategory by the pushout-product of an inner horn with the empty set into K, and the pointwise criterion is then applied twice, each time to a quasicategory target. Edge cases tested: K=Delta^0, I with one object, identity q, and empty B, I or K; all hold. All cited statements are in the item's own unit or are definitions, so no tool_uses are needed. There is no cycle. No duplicate: lem-coef-enriched-nerve-transformation only handles Kan-valued targets, and the cone-straightening, model-weak-equivalence-nerve and bifibrant-common-replacement nodes state other things. This is not a target node, so no base-change morphism applies. HTT is not in literature/; it is recorded as WANTED and the proof is marked agent-written. No SGA is used. The delivery blocker in the report concerns another base node, which parses in my snapshot. No fixes were made."
  }
 }
