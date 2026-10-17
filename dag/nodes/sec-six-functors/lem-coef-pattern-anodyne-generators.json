@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-coef-categorical-pattern-fibrancy",
   "lem-coef-marked-point-cartesian-model",
-  "lem-coef-categorical-pattern-model-calculus"
+  "lem-coef-categorical-pattern-model-calculus",
+  "lem-coef-pattern-anodyne-lifting-products"
  ],
  "proof": [
   {
@@ -195,5 +196,24 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-0eb4d4d6c (reviewer sub-agent of L); spot-checked: I read the item and the full statements of all cited nodes: lifting-products, def-coef-categorical-pattern-fibrancy, marked-point-cartesian-model, categorical-pattern-model-calculus and kan-quillen-right-proper. Step 1: all seven generator types match lifting-products' J_P clause by clause. For C0, the edge 01 lies in Λ^n_0 when n≥2, so the pushout marking is exactly (U,{01}). The weak saturations agree. Step 2: lifting-products' terminal-map lifting criterion is exactly the item's extension property, in both directions. Step 3: lifting-products makes P-anodyne maps injective, and model-calculus makes injective maps cofibrations. Lifting-products also makes restriction to Map^♯_C(-,Z) a trivial Kan fibration for every P-fibered Z, which by kan-quillen is a weak homotopy equivalence. Both nodes define Map^♯_C the same way, so model-calculus's mapping-space criterion makes the map a weak equivalence. Step 4: no finiteness on the K_a is used, empty shapes are allowed, and the universe clause only reapplies results already stated for any small pattern. Edge cases checked: empty A, empty K_a, n=1 in C2, n=2 in C0, the point pattern, and an empty base. The DAG has no cycle; the item's only citer is the universe-comparison node. All dependencies are in the same unit, so there are no tool_uses. The blueprint has no anodyne or categorical-pattern node, so same_as=[] is right. No SGA is cited. Higher Algebra Appendix B is not archived, so the WANTED line and proof_origin=agent are correct; I could not open the PDF and checked the HA content from memory and the source places recorded on the nodes. The second reading's claim that it changed `created` to Q06 is not reflected in the file, which correctly keeps the original Q87 value; this is not a DAG fault. No fixes were made and nothing is dropped. The target is not weakened."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94998ed12",
+  "group": "Q114",
+  "result": "pass",
+  "note": "Read the item node, all 4 stmt_deps and their Lean (PatternAnodyneLiftingProducts generators/anodyne/overGenerator/c2/finalCone, ModelCalculus cof/weak/ModelStatement, CategoricalPatternFibrancy, triangleMarkingMap, initialMarkedHorn, inverseTetrahedron). All seven generator types (A0-C2) match the node in markings, dimension ranges (C0 dim>=2, C2 dim>=1, C1 0<i<n) and base-map conditions. Fibered iff extension along generators (both directions, j ≫ b = a). Anodyne implies cof ∧ weak, which are the classes M_P fixes; a test compile confirmed by rfl that they resolve to CategoricalPattern.cof/weak. Universe u arbitrary, no finiteness assumption. Empty index, empty cones, lowest dimensions and empty base checked. lean.statement is verbatim and the node statement is unchanged; the stmt_deps addition is a landed lifting-products node used in the signature, with no cycle. No new definitions, sorry only, source and blueprint docstrings present, no pro-etale content. Report has both sections (the second reading is an honestly labelled same-group self-review). nt_compile.py --json: rc 0, no diagnostics, 3.6 s; test file clean in 4.0 s. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PatternAnodyneGenerators",
+  "declaration": "SSet.Enhanced.CategoricalPattern.pattern_anodyne_generators",
+  "file": "lean/Sheaf/CategoryTheory/PatternAnodyneGenerators.lean",
+  "statement": "theorem pattern_anodyne_generators (P : CategoricalPattern.{u}) : (∀ X : Object P, IsCategoricalPatternFibered P X ↔ ∀ (D E : Object P) (j : D ⟶ E), PatternAnodyne.generators P j → ∀ a : D ⟶ X, ∃ b : E ⟶ X, j ≫ b = a) ∧ (∀ (D E : Object P) (j : D ⟶ E), PatternAnodyne.anodyne P j → cof j ∧ weak j)",
+  "branch": "newtargets-dag",
+  "by": "Q114",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the seven existing PatternAnodyne.generators and their universe-small weak saturation PatternAnodyne.anodyne. The first conclusion spells out the extension property in the recorded marked pattern slice; the second uses the exact cof and weak classes fixed by the pattern model structure. Added the already landed generator node as a statement dependency because its definitions occur in the signature."
  }
 }

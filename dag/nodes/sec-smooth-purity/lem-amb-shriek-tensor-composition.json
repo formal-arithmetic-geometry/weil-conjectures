@@ -16,7 +16,8 @@
   "lem-amb-unbounded-compact-support-comparisons",
   "def-weil-scheme-morphism-properties",
   "lem-weil-pbc-ringed-slice-extension-tensor",
-  "def-kun-projection-formula-map"
+  "def-kun-projection-formula-map",
+  "lem-kun-tensor-sym"
  ],
  "proof": [
   {
@@ -343,5 +344,30 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-4b050c972 (reviewer sub-agent of L); spot-checked: Read all fourteen steps, cited statements and source passages. Verified the specified clopen-section comparison, noncartesian refinement compatibility, unbounded coefficients, route and edge cases. No long-step violations or repairs needed. Batch-5 dependencies use only generic facts outside the assumed duality statements. Detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d5687369",
+  "group": "NL",
+  "result": "pass",
+  "note": "Checked every node clause against compactSupportProjectionMap_comp and compactSupportProjectionMap_comparison: finite A in Type (u+1) (forced by the recorded API), unbounded M and K, P = signed-symmetry conjugate of the upstream projectionMapOfCompactification (proper projection, then derived open tensor iso, then canonical Lf*->D(f*)), alpha = recorded tower-normalized unboundedEtaleLowerShriekCompIso, (gf)^*K = f^*g^*K inserted via unboundedEtaleUpperStarCompIso, inverse conjunct is exactly the inverse of both sides, refinement clause for arbitrary c,d with the canonical rightDerivedLowerShriekOfCompactificationIso (non-cartesian case kept). HasCompactification(f≫g) is a Prop implied mathematically and required by the dependency. Helpers have real canonical data; theorems are sorry; docstrings carry source, blueprint and the 14 steps. Node changes only lean and adds landed lem-kun-tensor-sym to stmt_deps; lean.statement verbatim. Report has Worker report and Second reading sections. nt_compile.py --json on the snapshot text: clean in 18.6 s; a control run with an injected error reported it. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ShriekTensorComposition",
+  "declaration": "AlgebraicGeometry.Etale.compactSupportProjectionMap_comp",
+  "declarations": [
+   "AlgebraicGeometry.Etale.compactSupportProjectionMapOfCompactification",
+   "AlgebraicGeometry.Etale.compactSupportProjectionMap",
+   "AlgebraicGeometry.Etale.compactSupportProjectionMap_comp",
+   "AlgebraicGeometry.Etale.compactSupportProjectionMap_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ShriekTensorComposition.lean",
+  "statement": "theorem compactSupportProjectionMap_comp (A : Type (u + 1)) [CommRing A] [Finite A] {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z] (f : X ⟶ Y) (g : Y ⟶ Z) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] (M : DerivedCategoryModule A X) (K : DerivedCategoryModule A Z) : (compactSupportProjectionMap A g ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) K ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map (compactSupportProjectionMap A f M ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj K)) ≫ (unboundedEtaleLowerShriekCompIso A f g).hom.app (((derivedTensor (ModuleCat.{u + 1} A) X).obj ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj K))).obj M) = ((derivedTensor (ModuleCat.{u + 1} A) Z).obj K).map ((unboundedEtaleLowerShriekCompIso A f g).hom.app M) ≫ compactSupportProjectionMap A (f ≫ g) M K ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g)).map (((derivedTensor (ModuleCat.{u + 1} A) X).map ((unboundedEtaleUpperStarCompIso A f g).hom.app K)).app M)) ∧ (∀ [IsIso (compactSupportProjectionMap A g ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) K)] [IsIso (compactSupportProjectionMap A f M ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj K))] [IsIso (compactSupportProjectionMap A (f ≫ g) M K)], (unboundedEtaleLowerShriekCompIso A f g).inv.app (((derivedTensor (ModuleCat.{u + 1} A) X).obj ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj K))).obj M) ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map (inv (compactSupportProjectionMap A f M ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj K))) ≫ inv (compactSupportProjectionMap A g ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) K) = (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g)).map (((derivedTensor (ModuleCat.{u + 1} A) X).map ((unboundedEtaleUpperStarCompIso A f g).inv.app K)).app M) ≫ inv (compactSupportProjectionMap A (f ≫ g) M K) ≫ ((derivedTensor (ModuleCat.{u + 1} A) Z).obj K).map ((unboundedEtaleLowerShriekCompIso A f g).inv.app M))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The two helper definitions assemble the existing proper/open projection map with the canonical signed symmetry and the canonical Lf* to D(f*) comparison; their data contain no postponed theorem. The main theorem states the actual coefficient-first composition equality and its conditional inverse equality, with unboundedEtaleUpperStarCompIso explicit. The comparison theorem states tensor compatibility with arbitrary canonical compactification comparisons, including noncartesian proper refinements. The compositor is the recorded proper/open tower-normalized unboundedEtaleLowerShriekCompIso. No boundedness or Tor-amplitude assumption is made. The original split_report is retained without edits."
  }
 }

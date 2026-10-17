@@ -119,5 +119,23 @@
   "group": "Q60",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-e86a610fa (reviewer sub-agent of L); spot-checked: I read Stacks 0DD7 (sites-cohomology.tex, lemma-torsion: full statement and proof) and the first paragraph of the 0DE5 proof (etale-cohomology.tex, lemma-cohomological-descent-etale-ph). The item states 0DD7's bounded-below consequence, which is the form 0DE5 uses and the form lem-trf-ph-etale-torsion-comparison cites. It keeps local torsion with no common annihilator and is not weakened; small cases (K=0, Q/Z[0], shifts, the empty site) check out. Faults: (1) C1/C4: step 2 needs a bounded-below injective representative, but it cited prop-pur-kinjective-resolutions-exist, which gives only unbounded K-injective resolutions; that node is also off-unit, split, and undeclared. I rewrote the step to cite the existing Mathlib leaf lem-weil-pbc-dplus-injective-representative clause (1) with n=a, plus lem-weil-pbc-site-sheaves-enough-injectives. (2) D-class: no step needed the new node lem-trf-torsion-sheaf-serre, because each I^r_tor is torsion by definition. Its 'consequently Serre' step was also a non sequitur. I dropped the node and its only citation. (3) B3/C4: lem-trf-torsion-injective-subcomplex said its torsion condition came from def-weil-pbc-sites-and-cohomology, which does not define torsion. It also carried an unused stmt_dep, def-weil-pbc-kinjective-resolutions. I now define torsion inline and removed that stmt_dep. I checked this node against the 0DD7 claim: injectives are divisible, there is an exact sequence 0->I_tor->I->I(x)Q->0, and Q is flat. It holds for unbounded complexes, is strictly smaller than the item, and has no DAG duplicate (rg found only etale-site and coherent torsion nodes). Corrected files are in fixes/dag/nodes/sec-trace-formula/. No SGA; no tool_uses.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc7dd960e",
+  "group": "Q45",
+  "result": "pass",
+  "note": "The Lean statement matches lem-trf-torsion-sheaf-complex-representative clause by clause, with the node's quantifier order. The site is J.IsSiteForCoverings with independent universes u and v, and coefficients are AddCommGrpCat.{max u v t}. hK is the node's cohomological D+ bound and the conclusion's bound is termwise. Every cohomology sheaf and every term of L is torsion, using the existing upstream Sheaf.IsTorsion (covering sieve, IsOfFinAddOrder), which is equivalent to the node's covering-family definition under IsSiteForCoverings. The conclusion is Nonempty (Q.obj L ≅ K), and no binder chooses a common annihilator. A probe confirmed that HasSheafify cannot be inferred at max u v t but can at max u v; it is a Prop that holds on every small site, so it is needed to typecheck and adds no assumption. Edge cases checked: K=0, Q/Z in any degree, orders varying by component, negative degrees, the empty site and the empty cover. No duplicate declaration found. The proof is sorry only, docstrings carry source and blueprint, the statement field matches the file verbatim, and no line exceeds 100 characters. nt_compile --json returned rc 0 with no diagnostics (2.3 s); #print axioms shows only sorryAx beyond the standard axioms. Non-blocking finding: the 'Second reading by Q45' is labelled by its author as their own pass rather than another worker's reading; it is still a clause-level reading, and this independent review found no mismatch. No fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TorsionSheafComplexRepresentative",
+  "declaration": "CategoryTheory.Sheaf.exists_torsion_complex_representative",
+  "file": "lean/Sheaf/CategoryTheory/TorsionSheafComplexRepresentative.lean",
+  "statement": "theorem exists_torsion_complex_representative {C : Type u} [Category.{v} C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) [HasSheafify J.toGrothendieck AddCommGrpCat.{max u v t}] [HasDerivedCategory.{w} (Sheaf J.toGrothendieck AddCommGrpCat.{max u v t})] (K : DerivedCategory (Sheaf J.toGrothendieck AddCommGrpCat.{max u v t})) (hK : ∃ a : ℤ, ∀ r : ℤ, r < a → IsZero ((DerivedCategory.homologyFunctor (Sheaf J.toGrothendieck AddCommGrpCat.{max u v t}) r).obj K)) (hT : ∀ r : ℤ, ((DerivedCategory.homologyFunctor (Sheaf J.toGrothendieck AddCommGrpCat.{max u v t}) r).obj K).IsTorsion) : ∃ (a : ℤ) (L : CochainComplex (Sheaf J.toGrothendieck AddCommGrpCat.{max u v t}) ℤ), (∀ r : ℤ, r < a → IsZero (L.X r)) ∧ (∀ r : ℤ, (L.X r).IsTorsion) ∧ Nonempty (DerivedCategory.Q.obj L ≅ K)",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

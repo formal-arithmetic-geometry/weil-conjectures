@@ -259,5 +259,47 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b5e2cc93",
+  "group": "NX",
+  "result": "pass",
+  "note": "Read the node, the three stmt_deps declarations (tensor-calculus Statement/ClosedTensor/Diagrams, IntegralDerivedCoefficients, DgDerivedEnrichment Enrichment/UnderlyingComparison), UnderlyingModel, UnitSection, comma and the delivered module. All 15 node clauses are rendered: Restriction = enriched full faithfulness in V + exact InvertingObject essential image + contractible extension spaces that keep the restriction equivalence; multivariable SeparatelyInverts/multiRestriction (n=0 identity); DiagramRestrictions for every K : SSet.{u}; ParameterizedRestrictions; induced coherent square; opposites with q^op; inverse_restriction; component criterion; dg specialization, satisfiable for every R and U via the UnderlyingModel simplices equivalences. No extra assumptions; universes match the dependencies (u, u+2). Edge cases: n=0, empty W, empty categories, empty K, empty closed-arrow set. Node changes only lean; statement verbatim; 21 declarations recorded; docstrings and blueprint tags present; only the theorem is sorry. Second-reading placeholder matches 370 landed reports under the 2026-10-17 policy. nt_compile.py --json on the snapshot: exit 0, no errors or warnings, 21.7 s and 18.2 s. Non-blocking: substitution/composition compatibility and localized-equivalence inversion are stated via the bifunctorial internal Hom and parameterized restrictions; judged faithful."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnhancedLocalizationUniversal",
+  "declaration": "SSet.Enhanced.Algebroid.Localization.enhanced_localization_universal",
+  "declarations": [
+   "SSet.Enhanced.Algebroid.Localization.Relative",
+   "SSet.Enhanced.Algebroid.Localization.Inverts",
+   "SSet.Enhanced.Algebroid.Localization.InvertingObject",
+   "SSet.Enhanced.Algebroid.Localization.extensionSpace",
+   "SSet.Enhanced.Algebroid.Localization.Restriction",
+   "SSet.Enhanced.Algebroid.Localization.DiagramCondition",
+   "SSet.Enhanced.Algebroid.Localization.DiagramRestrictions",
+   "SSet.Enhanced.Algebroid.Localization.ParameterCondition",
+   "SSet.Enhanced.Algebroid.Localization.ParameterizedRestrictions",
+   "SSet.Enhanced.Algebroid.Localization.Localized",
+   "SSet.Enhanced.Algebroid.Localization.multiHom",
+   "SSet.Enhanced.Algebroid.Localization.SeparatelyInverts",
+   "SSet.Enhanced.Algebroid.Localization.multiRestriction",
+   "SSet.Enhanced.Algebroid.Localization.ComponentEquivalences",
+   "SSet.Enhanced.Algebroid.Localization.OppositeTransport",
+   "SSet.Enhanced.Algebroid.Localization.dgVertex",
+   "SSet.Enhanced.Algebroid.Localization.ClosedImage",
+   "SSet.Enhanced.Algebroid.Localization.dgRelative",
+   "SSet.Enhanced.Algebroid.Localization.DgSpecialization",
+   "SSet.Enhanced.Algebroid.Localization.LocalizationCalculus",
+   "SSet.Enhanced.Algebroid.Localization.enhanced_localization_universal"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnhancedLocalizationUniversal.lean",
+  "statement": "theorem enhanced_localization_universal {E : SSet.{u + 2}} [Quasicategory E] (p : E ⟶ monoidalSimplexBase.{u + 2}) (coefficients : IntegralDerivedCoefficients.{u} p) (unit : UnitSection p) (symmetry : TensorCalculus.SymmetricExtension p) (S : TensorCalculus.Statement.{u, u + 2} p unit symmetry) : Nonempty (LocalizationCalculus S) ∧ ∀ (R : DGRectification.Enrichment unit coefficients) (U : DGRectification.UnderlyingComparison R) (A : DGRectification.DGCat.{u}), Nonempty (DgSpecialization S R U A)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses completeCategory and the recorded tensor calculus. Restriction is the actual enriched internal-Hom image of q, fully faithful on coefficient mapping objects, with exactly the inverting essential image. Finite variables, coherent diagram and enriched operation parameters, opposite transport, relative functors, contractible specified extension spaces and the normalized dg specialization are included. No statement correction or dependency replacement."
  }
 }

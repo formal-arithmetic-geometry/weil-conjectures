@@ -219,5 +219,24 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-8634c63fd (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, the parent's use of the item, unit sk-i-curve-zero and its ancestor lem-trf-local-term-locality. Orgogozo Prop 2.3 is not local (WANTED), so I checked the mathematics against Stacks: more-morphisms lemma-local-structure-finite-type, morphisms lemma-quasi-finite-points-open, lemma-finite-projective, and 05K0 via thm-pqf-zmt-factorization. Both new statements are true and strictly smaller than the item. Local projection: Noether normalization on the fibre at y, then shrink to the open quasi-finite locus; d=dim_y(fibre)<=N. Envelope: the integral equations homogenize on the charts of P^d_B into a finite O_{P^d}-algebra, so T-bar is finite over P^d_B, H-projective over affine B, T is open in it and fibres have dim<=d. Tested edge cases: T empty, d=0, N=0, T=A^d_B. No duplicates; thm-zl-relative-noether is different. Steps 2-4 check all hypotheses. The item statement is unchanged. Fixes (C1/C4, B2/B3): step 1 asserted X_(x)=(X x_S B)_(x') over B citing only the definition, and passed from local to global fibre dimension uncited; it now cites lem-weil-pbc-strict-base-closed-point-localizations and lem-weil-pbc-dimension-supremum-local-dimensions, both added as tool uses with no cycle. Step 5 claimed open-immersion invariance of strict localization as elementary; it now cites the on-unit lem-trf-ind-etale-strict-local-invariance and is marked non-elementary. In local-quasi-finite-projection, N is now introduced and affine/separated/quasi-finite/A^d are cited. Item proof_origin is now by:agent (source not in literature/), and blueprint.from.place now names the ancestor's normal-cone step. Accepted tool uses: thm-pqf-zmt-factorization, lem-sc-fibre-dimension-after-base-change, plus the two added.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-caea43542",
+  "group": "N5",
+  "result": "pass",
+  "note": "Read the item node, its 8 statement dependencies and every declaration used (strictHenselizationMap, the unique pointed map from functoriality; strictHenselizationStructuralMap; strictHenselizationPointEvaluation; IsProjective, IsProper, Scheme.Hom.fiber, topologicalKrullDim). Every clause matches the node: f locally of finite type; N : ℕ; fibre bound over all s : S; geometric point x : Spec Ω ⟶ X; B = strictHenselizationScheme (x ≫ f); ∃ P and p projective and proper; y lies over the closed point of B (image of the canonical evaluation lift); θ : X_(x) ≅ P_(y) with θ.hom ≫ j_y ≫ p = strictHenselizationMap f x; fibres of p have dimension ≤ N. No extra hypotheses or universe restriction. The returned-head defect (θ onto all of P) is correctly repaired. Edge cases: empty X is vacuous, N=0 allowed, empty fibres are ⊥. Dependency nodes are byte-identical to the side clone; the item changed only by its lean record, verbatim in the file. No definitions (nothing hollow), proof is sorry, docstrings carry source, blueprint id and all 5 proof steps, no line over 100 characters, report sections present, no name clash. nt_compile --json: clean in 4.1 s; a deliberately broken test copy showed errors are reported; axioms are the standard ones plus sorryAx. Minor: the private ClosedLift import is unused but is the cited dependency's recorded module."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.BoundedDimensionProjectiveLocalModel",
+  "declaration": "AlgebraicGeometry.exists_boundedDimension_projective_local_model",
+  "file": "lean/Sheaf/TraceFormula/BoundedDimensionProjectiveLocalModel.lean",
+  "statement": "theorem exists_boundedDimension_projective_local_model {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (N : ℕ) (hN : ∀ s : S, topologicalKrullDim (f.fiber s) ≤ (N : WithBot ℕ∞)) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) : ∃ (P : Scheme.{u}) (p : P ⟶ Scheme.strictHenselizationScheme (x ≫ f)), IsProjective p ∧ IsProper p ∧ ∃ (y : Spec (.of Ω) ⟶ P), (y ≫ p) (IsLocalRing.closedPoint Ω) = (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation (x ≫ f))) (IsLocalRing.closedPoint Ω)) ∧ ∃ (θ : Scheme.strictHenselizationScheme x ≅ Scheme.strictHenselizationScheme y), θ.hom ≫ Scheme.strictHenselizationStructuralMap y ≫ p = Scheme.strictHenselizationMap f x ∧ ∀ s : Scheme.strictHenselizationScheme (x ≫ f), topologicalKrullDim (p.fiber s) ≤ (N : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned head 971e52348d13: θ now identifies the strict localizations at x and y, with compatibility through strictHenselizationStructuralMap y and p; the DAG statement is unchanged."
  }
 }

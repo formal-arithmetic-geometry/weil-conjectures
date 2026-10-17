@@ -209,5 +209,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-140d2a1cb",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Clauses checked one by one against the node and the interfaces in the side clone (OperadicAlgebraPresentability, CoherentAdjunction, RelativeCoherentAdjunction, RelativeMappingEquivalence, relativeFiberMap). Free extension: dependency's IsGeneralizedOperad (Kan zero fibre), canonical fibre map over [0], inert-preserving maps, CoherentAdjunction with universal unit. Trivial algebras: dependency's inertPart/inertAlgebras; colour restriction pinned through mono inclusions, an equivalence for every operad, strictly natural. Alg_triv fibration over the same localised base B; R fixed on every simplex as inert restriction; L over B; relative unit, counit and triangles; RelativeMappingEquivalence with fibre equivalences over every g. Smallness of O in the trivial clause matches the node's context and proof step 3. Edge cases (empty colours, n=0, noncontractible Kan zero fibres, empty mapping spaces, universes u and v independent) are covered. Item node changed only in lean; record complete and statement verbatim; dependency node unchanged; no name clashes; helpers are real constructions with source and blueprint docstrings; seven-step proof in the theorem docstring; theorem is sorry only. Both report sections present. nt_compile --json: exit 0, no errors or warnings (4.9 s). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicFreeExtension",
+  "declaration": "SSet.Enhanced.Nonsymmetric.operadic_free_extension",
+  "declarations": [
+   "SSet.Enhanced.Nonsymmetric.inertPartMap",
+   "SSet.Enhanced.Nonsymmetric.trivialAlgebraDiagram",
+   "SSet.Enhanced.Nonsymmetric.TrivialAlgebraPresentation",
+   "SSet.Enhanced.Nonsymmetric.HasNaturalTrivialColorEquivalence",
+   "SSet.Enhanced.Nonsymmetric.operadic_free_extension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicFreeExtension.lean",
+  "statement": "theorem operadic_free_extension {E : SSet.{max (u + 1) v}} [Quasicategory E] (p : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (hp : Algebroid.IsPresentablyMonoidal.{u, v} p) : (∀ (M N : SSet.{max (u + 1) v}) (q : M ⟶ monoidalSimplexBase) (r : N ⟶ monoidalSimplexBase), Presentability.IsSmall.{u} M → Presentability.IsSmall.{u} N → IsGeneralizedOperad q → IsGeneralizedOperad r → ∀ (f : M ⟶ N) (hf : IsLaxMonoidalInfinityFunctor q r f), IsFunctorEquivalence (relativeFiberMap f hf.1 (monoidalBaseVertex 0)) → ∃ L : algebras q p ⟶ algebras r p, Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L (restriction p f hf))) ∧ HasNaturalTrivialColorEquivalence.{u, max (u + 1) v} p ∧ ∃ (B T U : SSet.{max (u + 1) v + 1}) (hB : Quasicategory B) (hT : Quasicategory T) (hU : Quasicategory U) (i : SSet.uliftFunctor.{max (u + 1) v}.obj (nerve Operad.{u, max (u + 1) v}) ⟶ B) (π : T ⟶ B) (υ : U ⟶ B) (φ : cartesianGrothendieck (algebraDiagram.{u} p) ⟶ T) (ψ : cartesianGrothendieck (trivialAlgebraDiagram.{u} p) ⟶ U), UniversalPresentation.{u} p B T i π ∧ TrivialAlgebraPresentation.{u} p B U i υ ψ ∧ φ ≫ π = cartesianProjection (algebraDiagram.{u} p) ≫ i ∧ (∀ e : (cartesianGrothendieck (algebraDiagram.{u} p)) _⦋1⦌, cartesianMarked (algebraDiagram.{u} p) e → IsCartesianEdge π (SSet.yonedaEquiv.symm (φ.app _ e))) ∧ (∀ O : Operad.{u, max (u + 1) v}, ∃ χ : SSet.uliftFunctor.{max (u + 1) v + 1}.obj (algebras O.projection p) ⟶ fiber π (i.app _ (ULift.up (ComposableArrows.mk₀ O))), χ ≫ sectionFiberInclusion π (i.app _ (ULift.up (ComposableArrows.mk₀ O))) = cartesianFiberInclusion (algebraDiagram.{u} p) O ≫ φ ∧ IsFunctorEquivalence χ) ∧ @cartesianFibration _ _ π hT hB ∧ @cartesianFibration _ _ υ hU hB ∧ ∃ (R : T ⟶ U) (L : U ⟶ T) (hR : R ≫ υ = π) (hL : L ≫ π = υ) (adj : HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L R), Nonempty (RelativeCoherentAdjunction L hL R hR adj) ∧ (∀ (n : ℕ) (σ : ComposableArrows Operad.{u, max (u + 1) v} n) (x : (algebras (σ.obj (Fin.last n)).projection p) _⦋n⦌), R.app (op ⦋n⦌) (φ.app (op ⦋n⦌) ⟨σ, x⟩) = ψ.app (op ⦋n⦌) ⟨σ, (inertRestriction (σ.obj (Fin.last n)).projection p).app (op ⦋n⦌) x⟩) ∧ ∀ (x : U _⦋0⦌) (y : T _⦋0⦌), @Nonempty (@RelativeMappingEquivalence B U T hB hU hT υ π L hL R hR adj x y)",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

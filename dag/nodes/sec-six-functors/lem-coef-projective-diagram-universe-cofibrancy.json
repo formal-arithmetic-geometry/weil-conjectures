@@ -241,5 +241,39 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-4cf7602e5 (reviewer sub-agent of L); spot-checked: I read the item in full, the statements of all six cited nodes and the parent's use (operadic-tensor-adjunction step 5). The source is HTT Prop A.3.3.2 and Remark A.3.3.5; HTT is not archived under literature/, so the worker recorded WANTED and marked the proof agent-written, which is correct. The statement is unchanged and correct, and its hypotheses match finite-pattern-universe-comparison (U-small pattern, scaled 2-simplices, finite cone shapes) and coherent-diagrams (small locally Kan I). I tested empty I, a one-object I with I(*,*)=Δ^0, a one-object I with a Kan monoid, and empty cones/A; none breaks the statement. Step 1: I checked the DK equivalence via the coherent-nerve Quillen equivalence. I is Bergner-fibrant, every simplicial set is Joyal-cofibrant and the counit's adjoint is the identity, so the step holds. Step 2: the tensor A×L^♯ follows from Map^♯ and colimit preservation. Step 3: degreewise quotient colimits are correct. Steps 5–6: the lifting argument is correct, and step 6 correctly runs the transfinite recursion in the larger universe. Steps 7–8 are correct. One gap, repaired: the cited free-generator clause of coherent-diagrams states only that every projective cofibration is a retract of cells. Step 4's conclusion in the larger universe needed the converse, that F_i(g) is a projective cofibration and the class is closed under the cell operations. I added this to step 4, via the free-diagram adjunction (maps F_i(A)→D correspond to A→D(i)), objectwise trivial fibrations and closure of the left class of the factorization system. Only the step-4 text changed; uses and flags are unchanged. All uses are in-unit (the size convention is a definition), so no tool_uses. I found no duplicates: injective sCat universe generators, free-diagram homotopy density and small-diagram rectification are different statements. There are no new nodes and no SGA source.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-363295b47",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Read the node, all 5 stmt_deps and their Lean (Diagrams/DiagramModel/Objectwise, PatternUniverseLift/ComparisonData, Enrichment/ModelStatement, SCat/IsLocallyKan) and the HTT A.3.3.2/A.3.3.4-5 source. Every hypothesis matches: universes u and max u v with no equality forced; the same pattern via L; finite cones with the empty shape allowed; the comparison data; I small and locally Kan; the same index via a strict IndexLift isomorphism; projective = objectwise fibrations plus objectwise weak equivalences. Conclusions: projective cofibrations preserved; the same replacement arrow and source preserved; cofibrant-fibrant diagrams preserved. Viewing fixes values, components and every action simplex, so it is unique (Diagrams.functors is a bijection, representation_app ties maps to components) and exists (literal sharp composition). Edge cases empty I, empty cones and v=0 are covered. No hollow definitions; sorry only in the main proof, whose docstring has the 8 steps; docstrings, line lengths and the verbatim statement are OK; the node is unchanged apart from lean. nt_compile --json: exit 0, no errors or warnings (an injected error was reported). Minor, non-blocking: IndexLift overlaps ScatUniverseIso, a helper of an unrelated node; one transitive import is redundant."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProjectiveDiagramUniverseCofibrancy",
+  "declaration": "SSet.Enhanced.CategoricalPattern.ProjectiveUniverse.projective_diagram_universe_cofibrancy",
+  "declarations": [
+   "SSet.Enhanced.CategoricalPattern.ProjectiveUniverse.IndexLift",
+   "SSet.Enhanced.CategoricalPattern.ProjectiveUniverse.PatternDiagrams",
+   "SSet.Enhanced.CategoricalPattern.ProjectiveUniverse.PatternDiagramModel",
+   "SSet.Enhanced.CategoricalPattern.ProjectiveUniverse.PatternDiagrams.objects",
+   "SSet.Enhanced.CategoricalPattern.ProjectiveUniverse.PatternDiagrams.category",
+   "SSet.Enhanced.CategoricalPattern.ProjectiveUniverse.PatternDiagrams.value",
+   "SSet.Enhanced.CategoricalPattern.ProjectiveUniverse.PatternDiagrams.evaluate",
+   "SSet.Enhanced.CategoricalPattern.ProjectiveUniverse.PatternDiagrams.actionMap",
+   "SSet.Enhanced.CategoricalPattern.ProjectiveUniverse.PatternDiagramModel.modelStructure",
+   "SSet.Enhanced.CategoricalPattern.ProjectiveUniverse.IsProjective",
+   "SSet.Enhanced.CategoricalPattern.ProjectiveUniverse.Viewing",
+   "SSet.Enhanced.CategoricalPattern.ProjectiveUniverse.PreservesProjective",
+   "SSet.Enhanced.CategoricalPattern.ProjectiveUniverse.projective_diagram_universe_cofibrancy"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProjectiveDiagramUniverseCofibrancy.lean",
+  "statement": "theorem projective_diagram_universe_cofibrancy (P : CategoricalPattern.{u}) (P' : CategoricalPattern.{max u v}) (L : PatternUniverseLift.{u, v} P P') (finite_cone : ∀ a : P.index, SSet.Finite (P.cone a)) (K : SSet.Marked.CartesianModelStatement.{u}) (K' : SSet.Marked.CartesianModelStatement.{max u v}) (M : ModelStatement P K) (M' : ModelStatement P' K') (comparison : PatternUniverseComparisonData P P' L K K' M M') (I : SCat.{u}) (locally_kan : IsLocallyKan I) (J : SCat.{max u v}) (E : IndexLift.{u, v} I J) (D : PatternDiagrams P K M I) (D' : PatternDiagrams P' K' M' J) (m : PatternDiagramModel D) (m' : PatternDiagramModel D') (projective : IsProjective m) (projective' : IsProjective m') : Nonempty (Viewing L E D D') ∧ ∀ V : Viewing L E D D', PreservesProjective m m' V",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded pattern lift, universe-comparison data, and enriched diagram/model presentations. IndexLift identifies the same indexing category in both hom universes. Viewing normalizes the inclusion on values, component maps and every parameterized enriched action simplex. It exists and every such normalized inclusion preserves all three stated classes. Accessor aliases select the stored ground enrichment explicitly; no dependency is redefined or repaired."
  }
 }

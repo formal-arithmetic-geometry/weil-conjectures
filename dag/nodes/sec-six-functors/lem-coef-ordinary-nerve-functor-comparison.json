@@ -184,5 +184,31 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-10a725129 (reviewer sub-agent of L); spot-checked: Read the item, its definition node def-cbc-enhanced-diagrams-cones, the citing steps 4-5 of lem-coef-augmented-vertex-cone-recognition, the unit and chapter records, and Kerodon Prop 1.5.3.3 (Tag 0062), statement and proof, online. The statement agrees with the source: the nerve of evaluation gives an isomorphism N(Fun(J,I)) -> Fun(NJ,NI), for small categories with no further hypotheses. The postcomposition, restriction and parameter clauses are elementary additions. Tested on J empty (both sides Delta^0), I empty with J nonempty (both empty), J=[0], and J=I=[1] (3 vertices and 6 edges on both sides). Steps 1, 3, 4 and 5 are elementary and correct; step 3 also checks that the adjoint of the nerve of evaluation is N(E). No new nodes. No duplicate in dag/nodes and no blueprint same_as; the nearby ordinary-nerve-discrete-hom-comparison is a different statement. No Mathlib match: NerveAdjunction.lean has only the adjunction. Not a target node, and no route issue. Fixes: (1) C1/D3: the source proof uses Kerodon 002Z (the nerve is fully faithful), which the existing Mathlib leaf lem-coef-homotopy-category-nerve-adjunction states via the adjunction with an isomorphic counit. Step 2 proved it by a loose hand argument in which identities came from 2-simplices. It now cites the leaf and def-cbc-enhanced-diagrams-cones, derives the bijection E -> N(E) from counit naturality, and is marked elementary=false; proof_deps updated, no cycle. (2) B3: the definition node defines Fun(K,C) only for a quasicategory C, while the item uses Fun(N(J),X) for any small X. One sentence in the statement now gives the same degreewise formula for any X; the statement is neither weaker nor stronger. No tool_uses. WANTED: archival copies of Kerodon 0062 and 002Z.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a3944be59",
+  "group": "Q152",
+  "result": "pass",
+  "note": "Read node, def-cbc-enhanced-diagrams-cones (node + module: Fun(K,C) is (ihom K).obj C), Kerodon 0062, module, report; node changes only lean; statement verbatim; 5 declarations present. Clauses match: IsIso of canonical curry-of-evaluation comparison, prism/postcomposition formula for arbitrary X and f, restriction along q and along a in one equation, naturality in J (pre) and I (whiskeringRight); single universe u, no extra hypotheses; edge cases (empty J/I, r=0, noninvertible transformations, non-Kan X) covered. nt_compile --json library path: rc 0, no errors/warnings; axioms only sorryAx; probes prove prism formula, restriction clause and ihom=functorHom by rfl. Docstrings carry source/blueprint and the 5 proof steps; no hollow defs. Notes: cartesianNerveTransformation inlines the degree-1 case (import cycle documented, no action); report line garbles 'Proposition 1.5.3.3' (cosmetic)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OrdinaryNerveFunctorComparison",
+  "declaration": "CategoryTheory.nerve.functorComparison_spec",
+  "declarations": [
+   "CategoryTheory.nerve.functorEvaluation",
+   "CategoryTheory.nerve.functorComparison",
+   "CategoryTheory.nerve.functorPostcompose",
+   "CategoryTheory.nerve.functorPrism",
+   "CategoryTheory.nerve.functorComparison_spec"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OrdinaryNerveFunctorComparison.lean",
+  "statement": "theorem functorComparison_spec (J I : Type u) [SmallCategory J] [SmallCategory I] : IsIso (functorComparison J I) ∧ (∀ (X : SSet.{u}) (f : nerve I ⟶ X) (r : ℕ) (F : (nerve (J ⥤ I)) _⦋r⦌), uncurry (SSet.yonedaEquiv.symm ((functorPostcompose J I f).app _ F)) = functorPrism F ≫ f) ∧ (∀ (J' : Type u) [SmallCategory J'] (q : J' ⥤ J) (X : SSet.{u}) (f : nerve I ⟶ X), nerveMap ((Functor.whiskeringLeft J' J I).obj q) ≫ functorPostcompose J' I f = functorPostcompose J I f ≫ (pre (nerveMap q)).app X) ∧ (∀ (J' : Type u) [SmallCategory J'] (q : J' ⥤ J) (X : SSet.{u}) (f : nerve I ⟶ X) (r s : ℕ) (a : ⦋s⦌ ⟶ ⦋r⦌) (F : (nerve (J ⥤ I)) _⦋r⦌), (nerveMap q ⊗ₘ SSet.stdSimplex.map a) ≫ functorPrism F ≫ f = functorPrism ((nerveMap ((Functor.whiskeringLeft J' J I).obj q)).app _ ((nerve (J ⥤ I)).map a.op F)) ≫ f) ∧ (∀ (I' : Type u) [SmallCategory I'] (g : I ⥤ I'), nerveMap ((Functor.whiskeringRight J I I').obj g) ≫ functorComparison J I' = functorComparison J I ≫ (ihom (nerve J)).map (nerveMap g))",
+  "branch": "newtargets-dag",
+  "by": "Q152",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical evaluation and prism maps are real constructions using Mathlib ordinary functor categories, evaluationUncurried, Functor.prod′, curry and ihom. The single theorem asserts the specified comparison is an isomorphism together with its full postcomposition, source restriction, simultaneous simplex restriction and target naturality formulas. No assumptions on the simplicial target or invertibility of transformations."
  }
 }

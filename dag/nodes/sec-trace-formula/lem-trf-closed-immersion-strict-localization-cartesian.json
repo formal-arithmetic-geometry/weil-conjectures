@@ -237,5 +237,23 @@
   "group": "Q112",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-647d3ef59 (reviewer sub-agent of L); spot-checked: Read the item, the parent lem-trf-nearby-closed-image, unit sk-i-curve-zero and every cited node statement, including the Lean record of lem-sbc-strict-henselization-surjective-quotient. Checked Stacks algebra.tex 05WS (l.43703), 08HR (l.42881) and 08HT (l.42902), and tag 01JQ. The statement is true (05WS in scheme form). Tested on I=0, k[x] with I=(x), a nilpotent thickening, and the unit ideal (excluded). There are no new nodes. Gap (E1/C4) in Steps 2-3: lem-sbc-strict-henselization-surjective-quotient only says that some B-algebra structure exists on C/IC (the Lean statement is existential and calls it an arbitrary action). Step 3 still applied 08HR uniqueness to Q as an R-algebra and used that hbar is an R-algebra map, which holds only for the induced structure. Fix: Steps 2-3 are rewritten with Q under its induced structure, used only as a henselian local target (lem-weil-pbc-strictly-henselian-quotient). C_W is a filtered colimit of etale A_p-algebras and C_Z one of etale R-algebras (def-sc + lem-sc-pointed-etale-filtered, through lem-exc). 08HR is applied three times: over R for C_Z->Q (gives v), over R for C_Z->C_Z (hbar v=id), and over A_p for C_W->Q (v h#=q, so v hbar=id). All hypotheses were checked: local structure maps, base primes, tau=id_K as a kappa(p)-algebra map. The surjective-quotient node and its tool_uses request are removed. C1 in Step 4: the affine fibre product needed the existing Mathlib leaf lem-weil-pbc-fibre-product-affine-spectra (01JQ, pullbackSpecIso). The reduction to the chart U needed j_W to factor through U (lem-exc) and the open-subscheme factorization (def-weil-open-immersion). Both are now cited, the step is no longer marked elementary, and its source is corrected. The item statement, stmt_deps and blueprint are unchanged. proof_deps is recomputed. Accepted tool_uses: lem-exc-affine-strict-local-ring-comparison, lem-weil-pbc-strict-henselization-functoriality, lem-weil-pbc-etale-local-ring-triples, lem-weil-pbc-strictly-henselian-quotient, lem-sc-pointed-etale-filtered, lem-weil-pbc-map-into-henselian-colimit. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f4291b8f5",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matched to the node: Scheme.{u}, [IsClosedImmersion i], an algebraically closed Ω in universe u with a : Spec Ω ⟶ Z; IsIso of pullback.lift (j_Z, strictHenselizationMap i a) into pullback i j_W, components in the right order, square proved by strictHenselizationMap_over.symm. strictHenselizationMap is the unique canonical map of functoriality (3), not an arbitrary choice. The 'Equivalently' affine form is the node's own restatement; the only citer, lem-trf-nearby-closed-image, uses the scheme form. No extra hypotheses or universe restriction; empty Z, identity/zero ideal, nilpotent thickening and any algebraically closed Ω are covered. Node changed only in lean; record complete; statement matches the file exactly; lines <=100; imports used; docstrings have source and blueprint and the proof steps; proof is sorry; report has Worker report and Second reading by Q49. nt_compile.py --json: clean, exit 0, about 3-5 s; an injected error is caught (exit 1). Minor, no action: the functoriality node's record lists only ClosedLift_over and the canonical map comes through its public import, the project's existing interface."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationClosedImmersionCartesian",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_strictHenselizationClosedImmersionCartesian",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationClosedImmersionCartesian.lean",
+  "statement": "theorem isIso_strictHenselizationClosedImmersionCartesian {Z W : Scheme.{u}} (i : Z ⟶ W) [IsClosedImmersion i] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (a : Spec (.of Ω) ⟶ Z) : IsIso (pullback.lift (f := i) (g := strictHenselizationStructuralMap (a ≫ i)) (strictHenselizationStructuralMap a) (strictHenselizationMap i a) (by exact (strictHenselizationMap_over i a).symm))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

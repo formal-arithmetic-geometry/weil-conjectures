@@ -88,17 +88,18 @@
   "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FlatOnSite.lean",
   "statement": "def IsFlatOnSite (F : SheafOfModules.{m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) : Prop",
   "branch": "newtargets-dag",
-  "by": "NI",
-  "date": "2026-10-15",
+  "by": "Q124",
+  "date": "2026-10-17",
   "existing": false,
-  "note": "The wrapper selected an older artifact with a specialized coefficient/module size. Supply the current published independent-universe FlatOnSite source with only an explanatory module-docstring addition as a sibling overlay, preserving the sheafified sectionwise tensor exactness definition and its explicit sheafification infrastructure. All declarations, signatures, bodies and proof plans are unchanged; only the module documentation explains the integral-operations specialization."
+  "note": "The compiler loaded a universe-zero flatness artifact although the published source has independent site, coefficient and module universes. This delivery supplies that unchanged independent-universe definition as a sibling overlay (only module documentation added), preserving the exact sheafified tensor definition.",
+  "fixed_by": "NT-stage2-cc-e0dd71a2a"
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-bee7dec8e",
-  "group": "NI",
-  "result": "pass",
-  "note": "Statement, dependencies, source alignment, universes, edge cases, docstrings, reports, and all per-file scompile checks verified; no fixes required."
+  "reviewer": "NT-stage2-cc-e0dd71a2a",
+  "group": "Q124",
+  "result": "fix",
+  "note": "Read the item, all 12 stmt_deps incl. 3 new def nodes and the def-pc-flat-sheaf-modules (B) record, the 5 modules, the upstream RingedToposMorphism/AlgebraicInverseImage/IsFlatOnSite/restrictScalars declarations and Stacks 0FND/0DVC/03D3/03ER. Every clause matches: coherent square orientation, flatness at both sites, one shared geometric morphism, transpose-pinned module adjunctions, IsRightDerivedFunctor+computes+0FND transpose normalization, exactness and K-injective preservation for r_U,r_V, b/d directions, ordinary/inverse/direct normalizations pinning b,d, and the adjunct identity with b.inv. HEq fields compare rfl-equal types (scratch check), so they are not vacuous. No extra hypotheses, universes bound, no hollow defs, only sorry is the theorem. nt_compile on all 5 files is clean (Defs/Adjuncts take 42-50 s under load, near the 60 s limit). Fixes: (1) item module adds missing proof-dep imports EssentiallyConstantInd/Pro, Mathlib.RingTheory.TensorProduct.Basic, Mathlib.Algebra.Homology.DerivedCategory.KInjective (H9); (2) FlatOnSite.lean drops a delivery-specific docstring sentence. Both are recompiled clean."
  }
 }

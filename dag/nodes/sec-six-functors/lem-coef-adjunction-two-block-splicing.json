@@ -8,7 +8,8 @@
   "place": "Riehl--Verity, Homotopy coherent adjunctions and the formal theory of monads, Proposition 3.2.2 and its proof, pp. 824--825; Definitions 3.1.2 and 3.1.8. The block restriction maps are the interval representations of {0,...,m} and {m,...,m+n}. Online paper read; archival copy WANTED. No Stacks tag states this finite-string splicing lemma."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-adjunction-block-run-collapse"
  ],
  "proof": [
   {
@@ -146,5 +147,24 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-22421d289 (reviewer sub-agent of L); spot-checked: Read the item, all 5 steps and the new node lem-coef-adjunction-block-run-collapse in full, plus def-cbc-enhanced-diagrams-cones, the parent squiggle-normal-form (step 7 is the only use, step 3 defines the interval map) and unit sk-prop-sf-biduality-general. The item statement is byte-identical to the side-DAG copy, so it was not weakened. Riehl-Verity Prop. 3.2.2 is not in literature/ (WANTED recorded), so I checked the mathematics independently. L=min(j,m+1) and U=max(j-m,0) are the interval maps of the two block inclusions, and v and t are those of the last and first vertex, as the parent uses them. Exhaustive test: the run-collapse lemma holds for r<=4, every h and width<=9. The bijection was tested for (m,n) in {(1,1),(1,2),(2,1),(2,2),(1,3),(3,1)} and all four p,q: c of width<=12 always maps into the compatible set, the map is injective there, and every compatible pair of widths<=6 has a preimage. This includes singleton strings, strings with no interior letters, interior endpoint letters and the report's counterexample. Steps 1-5 use exactly what the new node states, applied with h=m and h=0 inside 0<=h<=r. The odd run lengths fix the alternation parity, the joins are strict, the endpoints are right and uniqueness follows by recovering the runs. The new node is statement-only and self-contained, records 4 searches, has no duplicate in the DAG and does not restate the item. Two repairs in fixes/dag/nodes/sec-six-functors/lem-coef-adjunction-block-run-collapse.json: (1) the R(D_h*x) clause 'leaving each 1-run unchanged' is false read literally for h>0; it now says each 1-run is replaced by its entries minus h, the meaning item steps 1 and 4 use. (2) blueprint.from.via omitted the creating item; lem-coef-adjunction-two-block-splicing is now first, per brief section 7.2. No tool_uses, no drop_nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ecf29f99e",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Every node clause maps exactly to the Lean (reused IsWord/IsAlternating/reduce/lowerRestriction/upperRestriction; v,t lambdas exact on bounded alphabets; Set.BijOn = MapsTo∧InjOn∧SurjOn onto the compatible set); no extra hypotheses, universes or instances; edge cases (singletons, all p,q, m=n=1, no length bound) covered. Own Python transcription of the Lean defs passed 3,618,238 cases for 7 (m,n) pairs, all p,q. Node changes only lean and stmt_deps (+landed lem-coef-adjunction-block-run-collapse, allowed by brief-stage2 l.140, acyclic); lean.statement verbatim; no defs, only sorry; docstrings carry source, blueprint and the 5 proof steps; no duplicate found. nt_compile --json rc 0, no errors or warnings (2.0 s). Observations only: the second reading is the author's own pass; the TeX statement does not cite the added stmt_dep."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AdjunctionTwoBlockSplicing",
+  "declaration": "CategoryTheory.AdjunctionWord.two_block_splicing",
+  "file": "lean/Sheaf/CategoryTheory/AdjunctionTwoBlockSplicing.lean",
+  "statement": "theorem two_block_splicing (m n : ℕ) (hm : 1 ≤ m) (hn : 1 ≤ n) (p q : Bool) : Set.BijOn (fun c : List ℕ ↦ (reduce (c.map (lowerRestriction m)), reduce (c.map (upperRestriction m)))) {c : List ℕ | IsWord (m + n) p q c} {ab : List ℕ × List ℕ | IsWord m p q ab.1 ∧ IsWord n p q ab.2 ∧ reduce (ab.1.map (fun j : ℕ ↦ if j ≤ m then 0 else 1)) = reduce (ab.2.map (fun j : ℕ ↦ if j = 0 then 0 else 1))}",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already published AdjunctionWord definitions of the proof dependency, now added to stmt_deps. Set.BijOn expresses the stated map into exactly the compatible pairs, including nonemptiness and strict alternation of both restrictions."
  }
 }

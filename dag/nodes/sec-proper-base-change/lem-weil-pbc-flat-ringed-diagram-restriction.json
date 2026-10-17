@@ -21,7 +21,11 @@
   "def-pc-sheaf-restrict-scalars",
   "def-weil-abstract-derived-category",
   "def-pur-kinjective-complex",
-  "lem-pc-pre-derived-adjoint-functors-general"
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-flat-ringed-diagram-input",
+  "def-weil-pbc-flat-ringed-diagram-comparisons",
+  "def-weil-pbc-flat-ringed-diagram-adjuncts"
  ],
  "proof": [
   {
@@ -359,5 +363,27 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-9e0979442 (reviewer sub-agent of L); spot-checked: I read the item, its 10 steps, every cited node's statement, the parent lem-weil-pbc-strict-tower-exchange-mate-normalization (steps 5-7 apply this item), the main-20261015 completed-exchange-coherence proof.md, and the Stacks sources 08BJ, 070K, 070I, 070Y, 0FND, 0DVC, 03CZ, 03D3 and 03DA, with labels checked against tags/tags. The statement is true and matches the parent's coefficient category: L_B is u^{-1} with its action transported through an isomorphism c_B, F_B is u_* with its action through the adjoint ring map, all on diagram-site module categories. Flatness is needed: with R=Z and S=Z/p on a point site, the complex Z/p is K-injective over Z/p but not over Z. Edge cases J empty, zero rings and u=id behave correctly. It is not a duplicate of lem-weil-pbc-ring-sheaf-change-adjunction (single pro-etale sites, no flatness, no diagrams; neither specializes to the other) and not a restated parent clause. Steps 1-6, 8 and 10 check: the coefficient square gives linearity of b^0, rho_R and rho_S are adjuncts of the two equal composites, the unit identity follows from the transport node's underlying-Hom clause, and 08BJ applies to E_T -| r_T (exact by flatness) and to L_B -| F_B (exact because u^{-1} preserves finite limits). The one gap, C2/E5 type: step 9 applied the representative formula of lem-pc-pre-derived-adjoint-functors-general without constructing the representing essentially-constant cocone and cone that the formula requires. I fixed this in step 7: p_s=RF(Qs)^{-1}beta_{I'} with rho=beta_{I_0}^{-1}RF(Qs_0), and I checked the transition identity QF_h(a) rho p_s = QF_h(c). Dually u_t=QG(t)^{-1}phi_M with r=phi_M^{-1}. Step 7's uses now include def-pc-essentially-constant-ind-diagram and def-pc-essentially-constant-pro-diagram (definitions, so notions rather than route) and lem-pc-pre-derived-adjoint-functors-general, and proof_deps is recomputed as the union. I accept the declared tool uses prop-pur-kinjective-resolutions-exist (generic K-injective resolutions) and lem-pc-pre-derived-adjoint-functors-general (the normalization the statement fixes). The other off-unit citations are on route through sk-def-exchange, or are definitions or Mathlib leaves. No new nodes, no SGA, statement unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0dd71a2a",
+  "group": "Q124",
+  "result": "fix",
+  "note": "Read the item, all 12 stmt_deps incl. 3 new def nodes and the def-pc-flat-sheaf-modules (B) record, the 5 modules, the upstream RingedToposMorphism/AlgebraicInverseImage/IsFlatOnSite/restrictScalars declarations and Stacks 0FND/0DVC/03D3/03ER. Every clause matches: coherent square orientation, flatness at both sites, one shared geometric morphism, transpose-pinned module adjunctions, IsRightDerivedFunctor+computes+0FND transpose normalization, exactness and K-injective preservation for r_U,r_V, b/d directions, ordinary/inverse/direct normalizations pinning b,d, and the adjunct identity with b.inv. HEq fields compare rfl-equal types (scratch check), so they are not vacuous. No extra hypotheses, universes bound, no hollow defs, only sorry is the theorem. nt_compile on all 5 files is clean (Defs/Adjuncts take 42-50 s under load, near the 60 s limit). Fixes: (1) item module adds missing proof-dep imports EssentiallyConstantInd/Pro, Mathlib.RingTheory.TensorProduct.Basic, Mathlib.Algebra.Homology.DerivedCategory.KInjective (H9); (2) FlatOnSite.lean drops a delivery-specific docstring sentence. Both are recompiled clean."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FlatRingedDiagramRestriction",
+  "declaration": "CategoryTheory.FlatRingedDiagramInput.flatRingedDiagramRestriction",
+  "declarations": [
+   "CategoryTheory.FlatRingedDiagramInput.flatRingedDiagramRestriction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FlatRingedDiagramRestriction.lean",
+  "statement": "theorem flatRingedDiagramRestriction (LR : derivedRV x J ⥤ derivedRU x J) (FR : derivedRU x J ⥤ derivedRV x J) (qLR : DerivedCategory.Q ⋙ LR ≅ inverseRComplex x J ⋙ DerivedCategory.Q) (ηR : directRComplex x J ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ FR) (aR : LR ⊣ FR) (derivedR : FR.IsRightDerivedFunctor ηR (HomologicalComplex.quasiIso (x.diagramsRU J) (.up ℤ))) (computesR : ∀ I : cochainRU x J, I.IsKInjective → IsIso (ηR.app I)) (transposeR : ∀ (P : cochainRV x J) (I : cochainRU x J) (f : (inverseRComplex x J).obj P ⟶ I), aR.homEquiv (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj I) (qLR.hom.app P ≫ DerivedCategory.Q.map f) = DerivedCategory.Q.map (((Adjunction.whiskerRight J x.R.adjunction).mapHomologicalComplex (.up ℤ)).homEquiv P I f) ≫ ηR.app I) (LS : derivedSV x J ⥤ derivedSU x J) (FS : derivedSU x J ⥤ derivedSV x J) (qLS : DerivedCategory.Q ⋙ LS ≅ inverseSComplex x J ⋙ DerivedCategory.Q) (ηS : directSComplex x J ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ FS) (aS : LS ⊣ FS) (derivedS : FS.IsRightDerivedFunctor ηS (HomologicalComplex.quasiIso (x.diagramsSU J) (.up ℤ))) (computesS : ∀ I : cochainSU x J, I.IsKInjective → IsIso (ηS.app I)) (transposeS : ∀ (P : cochainSV x J) (I : cochainSU x J) (f : (inverseSComplex x J).obj P ⟶ I), aS.homEquiv (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj I) (qLS.hom.app P ≫ DerivedCategory.Q.map f) = DerivedCategory.Q.map (((Adjunction.whiskerRight J x.S.adjunction).mapHomologicalComplex (.up ℤ)).homEquiv P I f) ≫ ηS.app I) : PreservesFiniteLimits (x.restrictU J) ∧ PreservesFiniteColimits (x.restrictU J) ∧ PreservesFiniteLimits (x.restrictV J) ∧ PreservesFiniteColimits (x.restrictV J) ∧ (∀ I : cochainSU x J, I.IsKInjective → CochainComplex.IsKInjective ((restrictUComplex x J).obj I)) ∧ (∀ I : cochainSV x J, I.IsKInjective → CochainComplex.IsKInjective ((restrictVComplex x J).obj I)) ∧ Nonempty (DerivedRestrictionComparison (x := x) (J := J) LR FR qLR ηR aR LS FS qLS ηS aS)",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-e0dd71a2a"
  }
 }

@@ -200,5 +200,28 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-475e089ae (reviewer sub-agent of L); spot-checked: FIX: I read the whole item and its source, and repaired two small faults in the item; no new or dropped nodes. Source checks: Stacks sites.tex 00Y6, 00Y8, 00YA (including the comparison map c in its proof of (2)), 00YK, lemma-exactness-stalks, and both directions of 00YM. The item is the 00YM converse for topos points with u_i(U)=p_i^{-1}(h_U^#), as in 00YA(2). No hypothesis was added, nothing is weakened, there is no base-change morphism or coefficient category, and no SGA source is cited. Steps: 1 (injectivity) and 2 (cokernel-pair coprojections equal, using separation applied to P) follow 00YM; 3 uses lem-galois-epi-iff-cokernel-pair (Categories 08LR); 4 uses lem-weil-pbc-sheaf-sets-mono-epi-iso (Sites 00WN). Fault 1 (B2/C1): the statement said 'identify p^{-1}F with its stalk colim F(U)', which assumes the 00YA bijection for an arbitrary site with no node behind it (lem-trf-site-point-reconstruction-sets needs finite limits) and never fixes which identification is meant. I now define [U,x,t]_{p_i} := p_i^{-1}(t~)(x), the image of the stalk triple under the canonical comparison map; the source place records that 00YA makes it bijective, so this is literally the 00YM condition. The proof never needs bijectivity, and the parent lem-trf-finitary-site-enough-points step 3 still applies, since it gets distinctness through the same canonical identification. Step 1 now writes out naturality (a∘t~ is the extension of a_U(t), by uniqueness in sheafification) and uses def-weil-pbc-sheafification. Fault 2 (C1): step 2 used 'left adjoints preserve pushouts' with no node; it now cites the Mathlib leaf lem-weil-pbc-left-adjoint-preserves-colimits, cites lem-galois-epi-iff-cokernel-pair for the equal coprojections in Set, and builds the sheaf pushout by sheafification. proof_deps is updated and there is no cycle. Edge cases: empty I forces Sh(C) to be trivial, so the claim holds; the identity and one-object site are immediate. Route: only definitions and Mathlib leaves, so no tool_uses. An rg search for duplicates (00YM/00YK/00YA, site-point nodes) found none. The worker's Mathlib searches could not be rerun because this machine has no search tools.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e439bb6c9",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node and Stacks 00YK/00YM: site = Precoverage.IsSiteForCoverings; points = GeometricMorphism family over Type (max u v w); u_i(U) = inverse image of the sheafified uliftYoneda representable; sectionMorphism = sheafifyLift of uliftYonedaEquiv.symm t (probe confirms it restricts to the Yoneda map); pointSectionImage is the canonical image; hsep has the node's quantifiers in the node's order; conclusion JointlyReflectIsomorphisms. Universes u v w w' all bound, none forced equal; empty I, empty C and s=s' cases match the node. Node differs from the side clone only in lean; lean.statement matches the file verbatim. Docstrings carry the source place, blueprint and four proof steps; helpers are not hollow; only postponed proof is sorry. Not a duplicate of Mathlib IsConservativeFamilyOfPoints/mk' (different notion and criterion). nt_compile.py: module clean in 3.1 s; control with a deliberate error printed it; helper probe clean. Both faults of the previous return (7760452255ec) fixed as requested."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.PointFamilyConservative",
+  "declaration": "CategoryTheory.point_family_conservative",
+  "declarations": [
+   "CategoryTheory.sectionMorphism",
+   "CategoryTheory.pointSectionImage",
+   "CategoryTheory.point_family_conservative"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/PointFamilyConservative.lean",
+  "statement": "lemma point_family_conservative {C : Type u} [Category.{v} C] (J : Precoverage C) (hJ : J.IsSiteForCoverings) (I : Type w') (p : I → GeometricMorphism (Type (max u v w)) (Sheaf J.toGrothendieck (Type (max u v w)))) (hsep : ∀ (F : Sheaf J.toGrothendieck (Type (max u v w))) (U : C) (s s' : F.obj.obj (op U)), s ≠ s' → ∃ (i : I) (x : (p i).inverse.obj ((presheafToSheaf J.toGrothendieck (Type (max u v w))).obj (uliftYoneda.{max u v w, v}.obj U))), pointSectionImage J (p i) F U x s ≠ pointSectionImage J (p i) F U x s') : JointlyReflectIsomorphisms (fun i : I ↦ (p i).inverse)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

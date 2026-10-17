@@ -11,7 +11,10 @@
   "def-weil-abstract-derived-category",
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-complete-algebroid",
-  "def-coef-coherent-monad-modules"
+  "def-coef-coherent-monad-modules",
+  "def-coef-tensored-algebroid-presentation",
+  "def-coef-integral-derived-coefficients",
+  "lem-coef-monadic-bar-totalization"
  ],
  "proof": [
   {
@@ -231,5 +234,29 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-773b96ccf (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps, the 5 new nodes in full, the statement of every cited node, the parent's step 11, the blueprint ancestor's paragraph 2, and the earlier return 08f2879a1e. All three faults of that return are repaired. (1) C1/E5: lem-coef-enriched-coherent-adjunction-extension is Riehl–Verity Thm 4.3.11 and fixes only one triangle witness, as Rem 4.3.12 requires. The lift node now states the enriched functor-category universal property, and Step 8 cites the cotensor identity of the tensor calculus. (2) C2/E5: lem-coef-cellular-weight-coherent-transfer is functoriality of flexible weighted limits for invertible coherent transformations, plus lifting along the isofibration for a relative cell complex. Steps 3, 4, 6 and 9 now use it, and no step claims strict componentwise equivariance any more. (3) B2/B3: lem-coef-enriched-simplicial-presentation now defines the presentation and states that one exists (strictification of the Joyal-enriched (infinity,2)-category). I checked the weight-cell node: j(d)=d⊕* is equivariant and bijective on vertices, and the cells match RV §6 flexibility. I checked the Adj homs: the atomic arrow [1]→[0] corresponds to uεu→u, and [0]→[1] is η·u. The Step 9 square typechecks: both sides go TU(K⊗Y)→K⊗UY. Small cases T=id, K=1 and K=0 behave, and no dualizability is needed. There are no duplicates: about 12 candidate nodes found by rg were opened and none states a new node; no new node restates an item clause. Every cited statement node is in unit sk-prop-sf-biduality-general, so no tool_uses are needed; no SGA is cited. One fault, fixed: Step 2 compared U{W,F} with Alg_T(C) by citing transfer, but the original action t lives on the quasicategory C, outside the presentation, where the transfer node does not literally apply. The corrected item makes qCat the presentation for V=spaces, via lem-coef-enrichment-change-adjunction (same unit, no cycle), and adds that node to the step's uses and to proof_deps. Remark only: the inherited statement has no definition node for 'enriched adjunction'; Step 7 reads it as an adjunction in Cat_V.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f8de4499",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Read the node, the 4 key statement dependencies (CoherentMonadModules, TensoredAlgebroidPresentation, IntegralDerivedCoefficients, MonadicBarTotalization helpers) and the delivered module. Every clause matches: IntegralDerivedCoefficients pins V=D(Z) on the same p; P is the landed tensored presentation; IsLinearCoherentMonad on the whole action encodes the enriched tensor-compatible monad with T0 its forced restriction; LinearMonadTensorEnrichment gives the enrichment equivalent to coherentMonadModules T0, relative-module identification, created tensors and hom_represents; LinearAdjunctionTensorComparison normalizes T=UL, eta, U eps L and the comparison (U, U eps) as a LinearTensoredFunctor with no equivalence claimed. No stronger hypotheses (none of monadic_bar_totalization's realization/conservativity assumptions); universes match the landed precedent; node statement byte-identical to the side clone; lean.statement verbatim; 3 added stmt_deps are landed with no DAG cycle (transitive walk); one sorry, no axioms, docstrings with source/blueprint and the 9-step proof; no name collisions. nt_compile --json rc=0 with no messages (sorry warnings are off in the lakefile, verified with a probe). Second-reading section is the standard direct-delivery note, accepted by precedent."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LinearMonadTensorEnrichment",
+  "declaration": "SSet.Enhanced.Algebroid.linear_monad_tensor_enrichment",
+  "declarations": [
+   "SSet.Enhanced.Algebroid.LinearMonadTensorEnrichment",
+   "SSet.Enhanced.Algebroid.LinearAdjunctionTensorComparison",
+   "SSet.Enhanced.Algebroid.linear_monad_tensor_enrichment"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LinearMonadTensorEnrichment.lean",
+  "statement": "theorem linear_monad_tensor_enrichment {E : SSet.{u + 2}} (p : E ⟶ monoidalSimplexBase.{u + 2}) (unit : UnitSection p) (_coefficients : IntegralDerivedCoefficients.{u} p) (P : TensoredAlgebroidPresentation.{u + 1} p unit) : (∀ (T : CoherentMonad P.actionTotal) (T₀ : CoherentMonad P.category), IsLinearCoherentMonad P T → (𝟙 coherentMonadIndex ⊗ₘ CoherentBar.fiberInclusion P.actionBase (op CoherentBar.mixedLetter)) ≫ T.action = T₀.action ≫ CoherentBar.fiberInclusion P.actionBase (op CoherentBar.mixedLetter) → Nonempty (LinearMonadTensorEnrichment P T T₀)) ∧ ∀ (Q : TensoredAlgebroidPresentation.{u + 1} p unit) (L : LinearTensoredFunctor P Q) (U : LinearTensoredFunctor Q P) (adj : LinearTensoredAdjunction P Q L U), Nonempty (LinearAdjunctionTensorComparison P Q L U adj)",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the landed complete tensor presentations and enhanced integral coefficients. The landed monadic-bar module supplies only its concrete relative coherent-module and linearity definitions; no monadicity or bar-totalization hypothesis or conclusion is assumed. Both result structures are types of data; only the final theorem is postponed. The adjunction comparison is not required to be an equivalence."
  }
 }

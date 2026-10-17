@@ -1,0 +1,129 @@
+{
+ "id": "def-weil-pbc-flat-ringed-diagram-input",
+ "kind": "definition",
+ "title": "Compatible flat coefficient input and its module diagram functors",
+ "status": "split",
+ "statement": "Let $\\mathcal C_V,\\mathcal C_U$ be small sites in the module-sheaf universe and let $u^{-1}\\dashv u_*$ be a geometric adjunction, with $u^{-1}$ preserving finite limits [def-weil-pbc-ringed-topos-morphism]. Let $R_V,S_V$ and $R_U,S_U$ be sheaves of commutative rings, with maps $a_V:R_V\\to S_V$ and $a_U:R_U\\to S_U$ and with $S_T$ flat over $R_T$ for $T=U,V$ [def-pc-flat-sheaf-modules]. A flat ringed diagram input records the two induced module direct images, the algebraic inverse images along $u^{-1}$ [def-weil-pbc-algebraic-inverse-image], their ring isomorphisms $c_B:u^{-1}B_V\\simeq B_U$ for $B=R,S$, and the equation $a_Uc_R=c_Su^{-1}a_V$. It records the induced additive module adjunctions $L_B\\dashv F_B$, whose underlying Hom bijections are the given sheaf adjunction under the specified underlying-sheaf identifications [def-weil-sheaf-of-modules-category]. For any small category $J$, put $\\mathcal A_{T,B}=\\operatorname{Fun}(J,\\operatorname{Mod}(B_T))$ and define $r_T$, $L_B$, $F_B$ by termwise restriction of scalars [def-pc-sheaf-restrict-scalars], inverse image and direct image. Abbreviate their degreewise functors on integer cochain complexes and the localizations $D(\\mathcal A_{T,B})$ [def-weil-abstract-derived-category]. For ordinary isomorphisms $b^0:r_UL_S\\simeq L_Rr_V$ and $d^0:r_VF_S\\simeq F_Rr_U$, the ordinary normalization predicate means that at every $J$-index their underlying maps are the identities between the specified inverse-image and direct-image sheaves, using those identifications.",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0FND and 0DVC, normalized derived adjunction; specialized to the coefficient comparison in lem-weil-pbc-flat-ringed-diagram-restriction; ordinary module actions from sites-modules.tex, Tag 03D3"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A geometric morphism with compatible flat coefficient ring isomorphisms induces normalized restriction comparisons on derived categories of module diagrams",
+   "results": "{\"top\": [\"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"RingCat.moduleCatRestrictScalarsPseudofunctor\", \"SheafOfModules.sheafificationCompPullback\", \"PresheafOfModules.isoMk\", \"PresheafOfModules.restriction\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardNatIso\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: existing ordinary scalar restriction, sheaf pullback and pseudofunctor APIs do not package the compatible geometric module actions and normalized derived diagram comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, CochainComplex.IsKInjective",
+   "results": "{\"top\": [], \"note\": \"\", \"n_hits\": 0}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: existing ordinary scalar restriction, sheaf pullback and pseudofunctor APIs do not package the compatible geometric module actions and normalized derived diagram comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "FlatRingedDiagram|DerivedRestrictionComparison|OrdinaryComparisonsNormalized",
+   "results": "{\"top\": [], \"note\": \"\", \"n_hits\": 0}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: existing ordinary scalar restriction, sheaf pullback and pseudofunctor APIs do not package the compatible geometric module actions and normalized derived diagram comparisons"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "date": "2026-10-17",
+  "group": "Q124"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Proof, finite-level equalities and naturality of coefficient reduction, via the normalized coefficient comparison",
+   "via": [
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FlatRingedDiagramRestrictionDefs",
+  "declaration": "CategoryTheory.FlatRingedDiagramInput",
+  "declarations": [
+   "CategoryTheory.FlatRingedModuleImage",
+   "CategoryTheory.FlatRingedDiagramInput",
+   "CategoryTheory.FlatRingedDiagramInput.restrictV",
+   "CategoryTheory.FlatRingedDiagramInput.restrictU",
+   "CategoryTheory.FlatRingedDiagramInput.inverseR",
+   "CategoryTheory.FlatRingedDiagramInput.inverseS",
+   "CategoryTheory.FlatRingedDiagramInput.directR",
+   "CategoryTheory.FlatRingedDiagramInput.directS",
+   "CategoryTheory.FlatRingedDiagramInput.diagramsRU",
+   "CategoryTheory.FlatRingedDiagramInput.diagramsSU",
+   "CategoryTheory.FlatRingedDiagramInput.diagramsRV",
+   "CategoryTheory.FlatRingedDiagramInput.diagramsSV",
+   "CategoryTheory.FlatRingedDiagramInput.OrdinaryComparisonsNormalized",
+   "CategoryTheory.FlatRingedDiagramInput.derivedRU",
+   "CategoryTheory.FlatRingedDiagramInput.derivedSU",
+   "CategoryTheory.FlatRingedDiagramInput.derivedRV",
+   "CategoryTheory.FlatRingedDiagramInput.derivedSV",
+   "CategoryTheory.FlatRingedDiagramInput.cochainRU",
+   "CategoryTheory.FlatRingedDiagramInput.cochainSU",
+   "CategoryTheory.FlatRingedDiagramInput.cochainRV",
+   "CategoryTheory.FlatRingedDiagramInput.cochainSV",
+   "CategoryTheory.FlatRingedDiagramInput.inverseRComplex",
+   "CategoryTheory.FlatRingedDiagramInput.inverseSComplex",
+   "CategoryTheory.FlatRingedDiagramInput.directRComplex",
+   "CategoryTheory.FlatRingedDiagramInput.directSComplex",
+   "CategoryTheory.FlatRingedDiagramInput.restrictUComplex",
+   "CategoryTheory.FlatRingedDiagramInput.restrictVComplex"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FlatRingedDiagramRestrictionDefs.lean",
+  "statement": "structure FlatRingedDiagramInput {C D : Type u} [SmallCategory C] [SmallCategory D] (K : GrothendieckTopology C) (H : GrothendieckTopology D)",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0dd71a2a",
+  "group": "Q124",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0dd71a2a",
+  "group": "Q124",
+  "result": "fix",
+  "note": "Read the item, all 12 stmt_deps incl. 3 new def nodes and the def-pc-flat-sheaf-modules (B) record, the 5 modules, the upstream RingedToposMorphism/AlgebraicInverseImage/IsFlatOnSite/restrictScalars declarations and Stacks 0FND/0DVC/03D3/03ER. Every clause matches: coherent square orientation, flatness at both sites, one shared geometric morphism, transpose-pinned module adjunctions, IsRightDerivedFunctor+computes+0FND transpose normalization, exactness and K-injective preservation for r_U,r_V, b/d directions, ordinary/inverse/direct normalizations pinning b,d, and the adjunct identity with b.inv. HEq fields compare rfl-equal types (scratch check), so they are not vacuous. No extra hypotheses, universes bound, no hollow defs, only sorry is the theorem. nt_compile on all 5 files is clean (Defs/Adjuncts take 42-50 s under load, near the 60 s limit). Fixes: (1) item module adds missing proof-dep imports EssentiallyConstantInd/Pro, Mathlib.RingTheory.TensorProduct.Basic, Mathlib.Algebra.Homology.DerivedCategory.KInjective (H9); (2) FlatOnSite.lean drops a delivery-specific docstring sentence. Both are recompiled clean."
+ }
+}

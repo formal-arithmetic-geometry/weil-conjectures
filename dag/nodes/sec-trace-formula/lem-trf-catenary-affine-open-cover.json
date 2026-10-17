@@ -219,5 +219,23 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-e68904851 (reviewer sub-agent of L); spot-checked: I read all of the mathematics. The item states Stacks properties.tex Tag 02IX (lemma-catenary-local), (4)=>(3), exactly as the source does, with no added Noetherian, quasi-separated or finiteness hypothesis. It is unchanged and not weakened. The catenary notion is the chain clause of def-exc-excellent-ring, which matches algebra Tag 00NI. The delivery adds no new nodes. Its five elementary steps write out the details that topology Tag 02I2 omits and that algebra Tag 02IH summarises. Step 1: an affine T is identified with Spec O_S(T) by def-pc-scheme and def-weil-affine-spectrum. Step 2: primes in [p,q] match irreducible closed sets in [V(q),V(p)] in reverse order, using clauses (1) and (2) of lem-weil-pbc-spec-irreducible-closed-subsets-primes (Mathlib closure_singleton at Topology.lean:173 and pointsEquivIrreducibleCloseds at :971). Steps 3 and 4: the open-subspace correspondence (orderIsoOfIsOpenEmbedding, Closeds.lean:515) is applied to W=V∩U_i inside V and inside U_i. Every member of each interval contains the point x=q, which lies in W, so the restriction to each interval is a bijection; I checked surjectivity through closure and the fact that inclusion is reflected. W is never assumed affine. Step 5: catenarity of A_i passes through these order isomorphisms, keeping both the length bound and equal saturated lengths. I tested the cover D(t), D(t-1) of Spec k[t], p=q, a field, empty V, the doubled-origin plane (not quasi-separated), and non-Noetherian chart rings. A DAG grep for catenar, 02IX, 02I2 and 02IH found no duplicate. There is no cycle, since the parent cites this item and not the reverse. Every cited node is a definition or a Mathlib leaf, so no tool_uses are needed. The searches are recorded properly, no SGA source is used, and I made no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b464795b2",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Read node, both stmt_deps (unchanged), Stacks properties.tex 02IX lines 1425-1444, landed IsCatenaryRing/IsPrimeChain/IsSaturatedPrimeChain, the module and the report. The statement renders (4)=>(3) exactly: S : Scheme.{u}, U : I → S.Opens, iSup U = ⊤, every U i IsAffineOpen, every Γ(S, U i) catenary ⇒ every affine V has Γ(S, V) catenary. No extra hypotheses, no definitions, sorry only. Docstrings carry the source place, blueprint tag and node proof. lean.statement is verbatim equal to the file signature; the node diff against the clone is only the added lean field. Edge cases (empty I/S, V = ∅, singleton cover) are covered. I : Type u is a harmless universe choice: covers reindex by their range in S.Opens, and the report states it. nt_compile.py --json on the snapshot file: 4.5 s, no errors or warnings. No findings."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.CatenaryAffineOpenCover",
+  "file": "lean/Sheaf/TraceFormula/CatenaryAffineOpenCover.lean",
+  "declaration": "AlgebraicGeometry.isCatenaryRing_of_affine_openCover",
+  "statement": "theorem isCatenaryRing_of_affine_openCover (S : Scheme.{u}) (I : Type u) (U : I → S.Opens) (hU : iSup U = ⊤) (hUi : ∀ i : I, IsAffineOpen (U i)) (hcat : ∀ i : I, IsCatenaryRing Γ(S, U i)) : ∀ (V : S.Opens), IsAffineOpen V → IsCatenaryRing Γ(S, V)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-18"
  }
 }

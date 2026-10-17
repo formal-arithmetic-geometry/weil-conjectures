@@ -1,0 +1,99 @@
+{
+ "id": "def-weil-pbc-flat-ringed-diagram-comparisons",
+ "kind": "definition",
+ "title": "Comparison functors and localization factors for flat coefficient restriction",
+ "status": "split",
+ "statement": "Fix a flat ringed diagram input and a small category $J$ [def-weil-pbc-flat-ringed-diagram-input]. Write $Q$ for localization of each diagram cochain category [def-weil-abstract-derived-category]. For specified functors $L_B:D(\\mathcal A_{V,B})\\to D(\\mathcal A_{U,B})$ and $F_B:D(\\mathcal A_{U,B})\\to D(\\mathcal A_{V,B})$, $B=R,S$, define comparison data to consist of ordinary natural isomorphisms $b^0:r_UL_S^0\\simeq L_R^0r_V$ and $d^0:r_VF_S^0\\simeq F_R^0r_U$; functors $\\bar r_T:D(\\mathcal A_{T,S})\\to D(\\mathcal A_{T,R})$ and factor isomorphisms $q_T:\\bar r_T Q\\simeq Qr_T$ for $T=U,V$; and natural isomorphisms $b:\\bar r_UL_S\\simeq L_R\\bar r_V$ and $d:\\bar r_VF_S\\simeq F_R\\bar r_U$. Superscript $0$ denotes the ordinary termwise image functors before localization; the factors use their degreewise functors on complexes.",
+ "stmt_deps": [
+  "def-weil-pbc-flat-ringed-diagram-input",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0FND and 0DVC, normalized derived adjunction; specialized to the coefficient comparison in lem-weil-pbc-flat-ringed-diagram-restriction; ordinary module actions from sites-modules.tex, Tag 03D3"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A geometric morphism with compatible flat coefficient ring isomorphisms induces normalized restriction comparisons on derived categories of module diagrams",
+   "results": "{\"top\": [\"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"RingCat.moduleCatRestrictScalarsPseudofunctor\", \"SheafOfModules.sheafificationCompPullback\", \"PresheafOfModules.isoMk\", \"PresheafOfModules.restriction\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardNatIso\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: existing ordinary scalar restriction, sheaf pullback and pseudofunctor APIs do not package the compatible geometric module actions and normalized derived diagram comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, CochainComplex.IsKInjective",
+   "results": "{\"top\": [], \"note\": \"\", \"n_hits\": 0}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: existing ordinary scalar restriction, sheaf pullback and pseudofunctor APIs do not package the compatible geometric module actions and normalized derived diagram comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "FlatRingedDiagram|DerivedRestrictionComparison|OrdinaryComparisonsNormalized",
+   "results": "{\"top\": [], \"note\": \"\", \"n_hits\": 0}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: existing ordinary scalar restriction, sheaf pullback and pseudofunctor APIs do not package the compatible geometric module actions and normalized derived diagram comparisons"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "date": "2026-10-17",
+  "group": "Q124"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Proof, finite-level equalities and naturality of coefficient reduction, via the normalized coefficient comparison",
+   "via": [
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FlatRingedDiagramRestrictionComparisons",
+  "declaration": "CategoryTheory.FlatRingedDiagramInput.DerivedRestrictionComparisonMaps",
+  "declarations": [
+   "CategoryTheory.FlatRingedDiagramInput.DerivedRestrictionComparisonMaps"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FlatRingedDiagramRestrictionComparisons.lean",
+  "statement": "structure DerivedRestrictionComparisonMaps (LR : derivedRV x J ⥤ derivedRU x J) (FR : derivedRU x J ⥤ derivedRV x J) (LS : derivedSV x J ⥤ derivedSU x J) (FS : derivedSU x J ⥤ derivedSV x J)",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0dd71a2a",
+  "group": "Q124",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0dd71a2a",
+  "group": "Q124",
+  "result": "fix",
+  "note": "Read the item, all 12 stmt_deps incl. 3 new def nodes and the def-pc-flat-sheaf-modules (B) record, the 5 modules, the upstream RingedToposMorphism/AlgebraicInverseImage/IsFlatOnSite/restrictScalars declarations and Stacks 0FND/0DVC/03D3/03ER. Every clause matches: coherent square orientation, flatness at both sites, one shared geometric morphism, transpose-pinned module adjunctions, IsRightDerivedFunctor+computes+0FND transpose normalization, exactness and K-injective preservation for r_U,r_V, b/d directions, ordinary/inverse/direct normalizations pinning b,d, and the adjunct identity with b.inv. HEq fields compare rfl-equal types (scratch check), so they are not vacuous. No extra hypotheses, universes bound, no hollow defs, only sorry is the theorem. nt_compile on all 5 files is clean (Defs/Adjuncts take 42-50 s under load, near the 60 s limit). Fixes: (1) item module adds missing proof-dep imports EssentiallyConstantInd/Pro, Mathlib.RingTheory.TensorProduct.Basic, Mathlib.Algebra.Homology.DerivedCategory.KInjective (H9); (2) FlatOnSite.lean drops a delivery-specific docstring sentence. Both are recompiled clean."
+ }
+}

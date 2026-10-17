@@ -201,5 +201,32 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-4d6205f16 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, the unit sk-prop-sf-biduality-general and the blueprint ancestor. Dwyer-Kan §7.1/Prop 7.2 is not stored locally (WANTED is recorded); I checked its mathematics independently. The item statement is true and unchanged; edge cases O=∅, u=v and K=∅ were checked. Fixes, in fixes/dag/nodes/sec-six-functors/: (1) C1/C3 in step 1: it took the generating cells from the free-calculus node's proof. Their source is the existing reviewed node lem-coef-cone-sorted-theory-identification, now cited together with the free-arrow adjunction (F_s ≅ F^O_{u,v} as left adjoints of the same evaluation). (2) E3 in step 5: it said S^□ = cofibrations ∩ weak equivalences, but the generator-extension lemma needs F∩W. The step now proves S^□ = F∩W and T^□ = F from the free-arrow adjunction and the Kan node. (3) B2/B3 in the new node: it used a tensor pushout product without defining the tensor (the tensor was defined only in the parent). The statement now defines X⊗C explicitly and writes out both pushout-product maps. Also step 2 now gives the explicit degreewise tensor formula, and step 3 now derives the enriched tensor and cotensor isomorphisms that def-coef-simplicial-tensor-cotensor requires; it cites that definition and is no longer marked elementary. The new node is not a restatement (it covers generator cells only) and is not a duplicate (rg search over dag/nodes). It is true: X⊗F(Y) ≅ F(X×Y) degreewise, F preserves pushouts and is left Quillen, and the anodyne pushout-product leaf gives triviality. All cited nodes are in the unit, so there are no tool_uses. No cycle, no drop.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6444b789d",
+  "group": "Q94",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps' Lean (Fixed/fixedCategory/fixedFibrations/fixedCofibrations, SimplicialTensorCotensor, cornerMap/SatisfiesSM7, freeArrow adjunction) and the module. Every clause matches: mappingCotensor has real internal-hom data with diagonal composition and constant identities; mappingCotensor_laws is a postponed theorem of the node's own Step 2 with a proof docstring; ∃T with T.cotensor = mappingCotensor; FixedMappingFormulas pins ε on operators (variance correct), pointwise composition and vertices; ∃m with exactly the local classes; SatisfiesSM7 for the same m and s; the free-arrow adjunction plus enriched iso e pinned simplexwise; Quillen clause (mono→fixedCofibrations, weak mono→fixedWeakEquivalences). Edge cases O=∅, u=v, K=∅, n=0 and universes OK; no extra assumptions. Commit changes 3 files, node differs only in lean, statement verbatim, lines ≤92, imports per brief. nt_compile (--json, snapshot file) clean in 3.7 s, no warnings. Non-blocking: the cotensor counit is not pinned to the canonical evaluation, as the node only asserts existence."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FixedObjectSimplicialMappingCalculus",
+  "declaration": "SSet.Bergner.fixed_object_simplicial_mapping_calculus",
+  "declarations": [
+   "SSet.Bergner.mappingCotensorEvaluation",
+   "SSet.Bergner.mappingCotensorId",
+   "SSet.Bergner.mappingCotensorComp",
+   "SSet.Bergner.mappingCotensor_laws",
+   "SSet.Bergner.mappingCotensor",
+   "SSet.Bergner.FixedMappingFormulas",
+   "SSet.Bergner.fixed_object_simplicial_mapping_calculus"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FixedObjectSimplicialMappingCalculus.lean",
+  "statement": "theorem fixed_object_simplicial_mapping_calculus (O : Type u) : ∃ s : SimplicialCategory (Fixed O), (∃ T : @SimplicialTensorCotensor (Fixed O) (fixedCategory O) s, (∀ (K : SSet.{u}) (B : Fixed O), T.cotensor K B = mappingCotensor K B)) ∧ @FixedMappingFormulas O s ∧ (∃ m : ModelCategory (Fixed O), m.categoryWithWeakEquivalences.weakEquivalences = fixedWeakEquivalences O ∧ m.categoryWithFibrations.fibrations = fixedFibrations O ∧ m.categoryWithCofibrations.cofibrations = fixedCofibrations O ∧ @CategoryTheory.SimplicialModelLocalization.SatisfiesSM7 (Fixed O) (fixedCategory O) m s) ∧ (∀ (a b : O) (K L : SSet.{u}) (i : K ⟶ L), Mono i → fixedCofibrations O (freeArrowMap a b i) ∧ (Enhanced.IsWeakHomotopyEquivalence i → fixedWeakEquivalences O (freeArrowMap a b i)))",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

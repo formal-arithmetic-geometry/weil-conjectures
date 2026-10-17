@@ -117,5 +117,28 @@
   "result": "pass; the item is a Mathlib leaf (status mathlib)"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-jacobian"
+ "unit": "sk-def-av-jacobian",
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-72ce049c6",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Each node clause matches the Lean exactly: integral, excellent (all affine opens) and Noetherian (locally Noetherian plus compact) on S, X, X', Y; f, g, h proper and dominant; pi proper and an isomorphism over a dense open (morphismRestrict); pi then f equals g then h; generic fibres geometrically integral with dimensions d >= 2, 1 and d-1; finite dimension of S and X implies finite dimension of Y and X'. No extra assumptions; the field quantification in universe u is equivalent to all extensions. Edge cases d<2, empty schemes and infinite dimension are handled as in the node. The three node copies differ from the side clone only in lean; the new Mathlib records for GeometricallyIntegral and IsGenericPoint are correct; lean.statement matches the file verbatim. No new definitions or duplicates; proof is sorry only; docstrings carry the source, blueprint id and all 13 proof steps. nt_compile.py --json of the snapshot file: rc=0, 3.1 s, no errors or warnings; a probe confirmed the signature and only sorryAx beyond standard axioms. Note only: the second-reading section was written by the same worker because the dispatcher allowed no second agent."
+ },
+ "lean": {
+  "module": "Mathlib.AlgebraicGeometry.Geometrically.Integral",
+  "declaration": "AlgebraicGeometry.GeometricallyIntegral",
+  "declarations": [
+   "AlgebraicGeometry.GeometricallyIntegral",
+   "AlgebraicGeometry.GeometricallyIrreducible",
+   "AlgebraicGeometry.GeometricallyReduced"
+  ],
+  "statement": "class GeometricallyIntegral (f : X ⟶ Y) : Prop where",
+  "note": "Section 1(B), requested on return: the exact mathlib_match lacks a lean record. Record the geometric-integrality class used by this consumer. Integral.lean also imports the irreducible and reduced classes; GeometricallyConnected is in Mathlib.AlgebraicGeometry.Geometrically.Connected, explicitly imported by the consumer. For each of the four classes, specialization to X → Spec k and geometrically_iff_of_commRing gives precisely the node’s base-change definition for every field extension. All four Mathlib definitions and docstrings were read. No definition is duplicated; mathlib_match and all other node fields are preserved.",
+  "branch": "mathlib",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": true
+ }
 }

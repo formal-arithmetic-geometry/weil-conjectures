@@ -11,7 +11,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-bousfield-kan-comparison-calculus"
+  "lem-coef-bousfield-kan-comparison-calculus",
+  "lem-coef-double-cylinder-weak-equivalence-gluing"
  ],
  "proof": [
   {
@@ -154,5 +155,30 @@
   "group": "Q77",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-7cc52d852 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, source locations, and route. Corrected Step 1’s interval attachment orientation and made the quotient presentation and inverse continuity explicit, citing existing lemmas. Statement unchanged; small cases, dependency cycles, duplicates, and long-step checks passed. Whole corrected JSON is under fixes/; concrete checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a1d0ad53",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean: Mathlib WalkingSpan; BK WalkingSpan U with σ over the first chain object; spanRealization (realized arrows fst/snd); the existing DoubleMappingCylinder.Space with (y,0)~f y and (y,1)~g y; w = sum of coordinates at c; w/2, 1-w/2 and 1/2 chosen by the last object (projIcc is the identity since 0<=w<=1); a family of homeomorphisms equal to the formula on every simplex point; naturality via bkMap and DoubleMappingCylinder.map; no nonemptiness, Kan or injectivity hypotheses. Orientation checked: where w=0 the bar construction applies U(c->a), which matches Rel.left. Universe is SSet.{u} with no restriction. stmt_deps gained only the landed node lem-coef-double-cylinder-weak-equivalence-gluing (allowed, no cycle; its only citer is the downstream gluing lemma). lean.statement matches the file verbatim. Docstrings, imports and line widths are fine; the only proof is sorry; the definitions carry real data. nt_compile --json on the snapshot: exit 0, 6.5 s, no errors or warnings. Minor: the second reading is a short self-reading by the author; the clause matching is in the Worker report and was redone in this review."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SpanBarRealizationCylinder",
+  "declaration": "SSet.BousfieldKan.span_realization_cylinder",
+  "declarations": [
+   "SSet.BousfieldKan.spanRealization",
+   "SSet.BousfieldKan.spanRealizationMap",
+   "SSet.BousfieldKan.spanSimplexValue",
+   "SSet.BousfieldKan.span_realization_cylinder"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SpanBarRealizationCylinder.lean",
+  "statement": "theorem span_realization_cylinder : ∃ Ψ : ∀ U : WalkingSpan ⥤ SSet.{u}, (|BK WalkingSpan U| ≃ₜ Space (spanRealization U)), (∀ (U : WalkingSpan ⥤ SSet.{u}) (n : SimplexCategory) (z : (BK WalkingSpan U).obj (op n)) (s : _root_.stdSimplex ℝ (Fin (n.len + 1))), Ψ U (toTop.map (yonedaEquiv.symm z) (n.toTopHomeo.symm s)) = spanSimplexValue U n z s) ∧ (∀ (U V : WalkingSpan ⥤ SSet.{u}) (φ : U ⟶ V) (x : |BK WalkingSpan U|), Ψ V (toTop.map (bkMap φ) x) = TopCat.DoubleMappingCylinder.map (spanRealizationMap φ) (Ψ U x))",
+  "branch": "newtargets-dag",
+  "by": "Q118",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The only added statement dependency supplies the already landed endpoint-quotient double cylinder and its canonical induced maps. The theorem states a family of homeomorphisms with the complete representative formula and strict naturality; no object is chosen from the existence theorem."
  }
 }
