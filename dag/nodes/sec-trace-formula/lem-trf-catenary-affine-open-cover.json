@@ -11,9 +11,82 @@
   "def-pc-scheme",
   "def-exc-excellent-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any affine open subscheme $T\\subseteq S$, put $R_T=\\mathcal O_S(T)$. By [def-pc-scheme] choose an affine presentation $T\\simeq\\operatorname{Spec}R$. Taking global sections gives $R_T\\simeq R$, since the spectrum construction [def-weil-affine-spectrum] has global sections $R$. Applying the functorial spectrum construction to this ring isomorphism gives a presentation $T\\simeq\\operatorname{Spec}R_T$. Its underlying homeomorphism sends irreducible closed subsets to irreducible closed subsets, with inverse doing the same, and preserves inclusion: these assertions follow directly by transporting closed sets and their decompositions through the homeomorphism.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IX, lemma-catenary-local, affine presentations used in (4) implies (3); spectra as in Schemes Tag 01HW."
+   }
+  },
+  {
+   "text": "For a commutative ring $R$, [lem-weil-pbc-spec-irreducible-closed-subsets-primes] says that $\\mathfrak r\\mapsto V_R(\\mathfrak r)$ is a bijection from primes to irreducible closed subsets, reversing inclusion. Thus, for primes $\\mathfrak p\\subseteq\\mathfrak q$, it identifies the interval of primes between them, in reverse order, with the entire interval of irreducible closed subsets between $V_R(\\mathfrak q)$ and $V_R(\\mathfrak p)$. Reversing the order of a finite strict chain preserves its length, and a member can be inserted on one side exactly when its corresponding member can be inserted on the other. Consequently finite length bounds and equality of lengths of saturated chains transfer in both directions. Here a saturated chain has no member strictly insertable between adjacent terms, as in [def-exc-excellent-ring].",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IH, lemma-catenary, expanded using Tag 00ES, lemma-irreducible, and the chain definition of Tag 00NI, definition-catenary."
+   }
+  },
+  {
+   "text": "Fix an affine open $V\\subseteq S$, put $B=\\mathcal O_S(V)$, and fix primes $\\mathfrak p\\subseteq\\mathfrak q$ of $B$. In the presentation of Step 1 set $Z=V_B(\\mathfrak q)$ and $Z^{\\prime}=V_B(\\mathfrak p)$, viewed as irreducible closed subsets of $V$ by [lem-weil-pbc-spec-irreducible-closed-subsets-primes]. Take the point $x\\in Z$ corresponding to $\\mathfrak q$, and choose $i$ with $x\\in U_i$. Set $W=V\\cap U_i$, an open subspace of both $V$ and $U_i$; no affineness of $W$ is needed. Every irreducible closed subset between $Z$ and $Z^{\\prime}$ meets $W$, because it contains $x$. The bijection of [lem-weil-pbc-open-subspace-irreducible-closed-correspondence], applied to $W\\subseteq V$, therefore restricts to an inclusion-preserving bijection from this entire interval onto the interval between $Z\\cap W$ and $Z^{\\prime}\\cap W$ in $W$. Surjectivity on these intervals follows by applying its inclusion-preserving inverse, closure in $V$, to the two endpoint inequalities.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 02I2, lemma-catenary, open-subspace correspondence in its proof; the correspondence is also used in Tag 0B7I, lemma-dimension-supremum-local-dimensions."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-open-subspace-irreducible-closed-correspondence] again, now to $W\\subseteq U_i$. Let $C=\\overline{Z\\cap W}^{\\,U_i}$ and $C^{\\prime}=\\overline{Z^{\\prime}\\cap W}^{\\,U_i}$. These are irreducible closed subsets of $U_i$ with $C\\subseteq C^{\\prime}$, and their intersections with $W$ are exactly $Z\\cap W$ and $Z^{\\prime}\\cap W$. Every irreducible closed subset between $C$ and $C^{\\prime}$ meets $W$, since it contains $C$ and $C\\cap W$ contains $x$. Thus intersection and closure give inverse inclusion-preserving bijections between the interval $[C,C^{\\prime}]$ in $U_i$ and $[Z\\cap W,Z^{\\prime}\\cap W]$ in $W$. Composing with Step 3 identifies the whole interval $[Z,Z^{\\prime}]$ in $V$ with $[C,C^{\\prime}]$ in $U_i$.",
+   "uses": [
+    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 02I2, lemma-catenary, restriction/closure correspondence in its proof, applied to both open inclusions."
+   }
+  },
+  {
+   "text": "By hypothesis $A_i=\\mathcal O_S(U_i)$ is catenary in the chain sense of [def-exc-excellent-ring]. Apply Steps 1 and 2 to $U_i$ and $A_i$: the interval $[C,C^{\\prime}]$ has a finite bound on strict-chain lengths, and all its saturated chains have the same length. The inclusion-preserving bijections of Steps 3 and 4 send a strict chain to a strict chain of the same length. They also preserve saturation: an intermediate member could be inserted into the image chain if and only if its inverse image could be inserted into the original chain. Hence these two chain conditions hold in $[Z,Z^{\\prime}]$, and then Step 2 transfers them to the prime interval $[\\mathfrak p,\\mathfrak q]$ of $B$. Since the prime pair was arbitrary, $B$ is catenary. A finite length bound also ensures a saturated chain exists: among the nonempty finite set of attainable chain lengths choose the largest, whose chain admits no insertion. If $V$ is empty, $B$ is the zero ring by its affine presentation and has no primes, so the same conclusion is vacuous. This also handles an empty indexing set, which can cover only the empty scheme.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IX, lemma-catenary-local, (4) implies (3), with the details of Topology Tag 02I2 and Algebra Tag 02IH written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "def-exc-excellent-ring",
+  "lem-weil-pbc-open-subspace-irreducible-closed-correspondence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 02IX, lemma-catenary-local, (4) implies (3); expands topology.tex Tag 02I2, lemma-catenary, using the open-subspace correspondence, and algebra.tex Tag 02IH, lemma-catenary."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +115,73 @@
    "results": "[leansearch] OK 8 hit(s): AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover; isNoetherian_iff_of_finite_affine_openCover; isNoetherian_Spec; isNoetherian_iff_of_finite_iSup_eq_top; Scheme.isArtinianScheme_Spec; affine_isReduced_iff; Scheme.mk.noConfusion; isLocallyNoetherian_iff_of_iSup_eq_top.",
    "date": "2026-10-18",
    "verdict": "no match: only Noetherian/Artinian/reduced scheme results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A topological space is catenary if it has an open cover by catenary spaces, and every open subspace is catenary",
+   "results": "{\"t\": \"2026-10-17T18:47:52Z\", \"tool\": \"leanfinder\", \"query\": \"A topological space is catenary if it has an open cover by catenary spaces, and every open subspace is catenary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrespectralSpace.of_isOpenCover\", \"TopologicalSpace.NoetherianSpace\", \"TopologicalSpace.IsOpenCover.quasiSober\", \"quasiSober_of_open_cover\", \"SpectralSpace\", \"TopologicalSpace.IsOpenCover.jacobsonSpace_iff\", \"TopologicalSpace.IsOpenCover.quasiSober_iff_forall\", \"PrespectralSpace\"], \"digest\": \"51233f4ac671fb72\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no returned declaration states affine-cover catenarity or its topological chain condition; Noetherianity, sobriety and dimension bounds do not assert equality of saturated-chain lengths."
+  },
+  {
+   "tool": "grep",
+   "query": "catenar",
+   "results": "{\"t\": \"2026-10-17T18:47:59Z\", \"tool\": \"grep\", \"query\": \"catenar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no returned declaration states affine-cover catenarity or its topological chain condition; Noetherianity, sobriety and dimension bounds do not assert equality of saturated-chain lengths."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A topological space is catenary if and only if it admits an open covering by catenary subspaces",
+   "results": "{\"t\": \"2026-10-17T18:47:59Z\", \"tool\": \"leansearch\", \"query\": \"A topological space is catenary if and only if it admits an open covering by catenary subspaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopologicalSpace.noetherianSpace_iff_opens\", \"TopologicalSpace.IsOpenCover.jacobsonSpace_iff\", \"TopologicalSpace.IsOpenCover\", \"TopologicalSpace.NoetherianSpace\", \"TopologicalSpace.noetherianSpace_TFAE\", \"TopologicalSpace.IsOpenCover.quasiSober_iff_forall\", \"PrespectralSpace.of_isOpenCover\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\"], \"digest\": \"a8c2aa07d16c4e64\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no returned declaration states affine-cover catenarity or its topological chain condition; Noetherianity, sobriety and dimension bounds do not assert equality of saturated-chain lengths."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"catenar\"",
+   "results": "{\"t\": \"2026-10-17T18:47:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"catenar\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no returned declaration states affine-cover catenarity or its topological chain condition; Noetherianity, sobriety and dimension bounds do not assert equality of saturated-chain lengths."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A catenary ring defines a catenary scheme and catenarity is local on an affine open covering",
+   "results": "{\"t\": \"2026-10-17T18:48:07Z\", \"tool\": \"leansearch\", \"query\": \"A catenary ring defines a catenary scheme and catenarity is local on an affine open covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\"], \"digest\": \"41ced3b723151f55\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no returned declaration states affine-cover catenarity or its topological chain condition; Noetherianity, sobriety and dimension bounds do not assert equality of saturated-chain lengths."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Catenarity of coordinate rings on an affine open cover implies catenarity of the ring of every affine open subscheme",
+   "results": "{\"t\": \"2026-10-17T18:48:08Z\", \"tool\": \"leanfinder\", \"query\": \"Catenarity of coordinate rings on an affine open cover implies catenarity of the ring of every affine open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"AlgebraicGeometry.of_affine_open_cover\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"AlgebraicGeometry.Scheme.isAffine_affineCover\"], \"digest\": \"7bb4fc768d7a6703\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no returned declaration states affine-cover catenarity or its topological chain condition; Noetherianity, sobriety and dimension bounds do not assert equality of saturated-chain lengths."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equal lengths of saturated chains of irreducible closed subsets and bounded lengths of chains is a local property for the Zariski topology",
+   "results": "{\"t\": \"2026-10-17T18:48:09Z\", \"tool\": \"leanfinder\", \"query\": \"Equal lengths of saturated chains of irreducible closed subsets and bounded lengths of chains is a local property for the Zariski topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"topologicalKrullDim\", \"PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim\", \"Ring.krullDimLE_iff\", \"Ring.krullDimLE_of_isLocalization_maximal\", \"ringKrullDim_le_iff_height_le\", \"Ring.KrullDimLE\", \"ringKrullDim\", \"Ring.KrullDimLE.of_isLocalization\"], \"digest\": \"85c64971e3afb24d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no returned declaration states affine-cover catenarity or its topological chain condition; Noetherianity, sobriety and dimension bounds do not assert equality of saturated-chain lengths."
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleCloseds|IrreducibleCloseds",
+   "results": "{\"t\": \"2026-10-17T18:48:43Z\", \"tool\": \"grep\", \"query\": \"irreducibleCloseds|IrreducibleCloseds\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Topology/KrullDimension.lean\", \"Mathlib/Topology/KrullDimension.lean\", \"Mathlib/Topology/KrullDimension.lean\", \"Mathlib/Topology/Sober.lean\", \"Mathlib/Topology/Sober.lean\", \"Mathlib/Topology/Sober.lean\", \"Mathlib/Topology/Sets/Closeds.lean\", \"Mathlib/Topology/Sets/Closeds.lean\"], \"digest\": \"207e6515cc4925d1\"}",
+   "date": "2026-10-17",
+   "verdict": "match for a supporting notion only: Closeds.lean was opened, and the existing DAG leaf lem-weil-pbc-open-subspace-irreducible-closed-correspondence records orderIsoOfIsOpenEmbedding; this does not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open subset U of a topological space X, closure induces an order isomorphism between irreducible closed subsets of U and irreducible closed subsets of X that meet U",
+   "results": "{\"t\": \"2026-10-17T18:48:45Z\", \"tool\": \"leanfinder\", \"query\": \"For an open subset U of a topological space X, closure induces an order isomorphism between irreducible closed subsets of U and irreducible closed subsets of X that meet U\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopologicalSpace.IrreducibleCloseds.orderIsoSubtype'\", \"TopologicalSpace.IrreducibleCloseds.orderIsoSubtype\", \"irreducibleSetEquivPoints\", \"subset_closure_inter_of_isPreirreducible_of_isOpen\", \"TopologicalSpace.IrreducibleCloseds.instCanLiftSetCoeAndIsIrreducibleIsClosed\", \"PrimeSpectrum.zeroLocusEquivIrreducibleCloseds\", \"TopologicalSpace.IrreducibleCloseds.coe_map\", \"genericPoints.component\"], \"digest\": \"6ef5ff55dfefb5e7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: results give irreducible-closed-set structures and density lemmas; the existing open-subspace correspondence leaf was reused after reading it."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-universally-catenary-affine-cover",
@@ -67,5 +203,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-catenary-affine-open-cover",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 02IX (4) implies (3) through the existing prime/irreducible-closed correspondence and open-subspace correspondence Mathlib leaves. The proof explicitly identifies entire intervals through V intersect U_i and checks both bounded chain lengths and saturation, without assuming affine intersections or Noetherianity. No new nodes or Lean attachment; statement and ancestry retained.",
+  "blueprint": "Realizes the catenary-local subargument in the excellence-locality support chain below lem-trf-local-term-locality, at the exact from.place inherited on this item: the universal-catenarity component passes from an affine cover to every affine open. The imported support ancestry and the unit route are retained.",
+  "new_nodes": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-e68904851",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-e68904851 (reviewer sub-agent of L); spot-checked: I read all of the mathematics. The item states Stacks properties.tex Tag 02IX (lemma-catenary-local), (4)=>(3), exactly as the source does, with no added Noetherian, quasi-separated or finiteness hypothesis. It is unchanged and not weakened. The catenary notion is the chain clause of def-exc-excellent-ring, which matches algebra Tag 00NI. The delivery adds no new nodes. Its five elementary steps write out the details that topology Tag 02I2 omits and that algebra Tag 02IH summarises. Step 1: an affine T is identified with Spec O_S(T) by def-pc-scheme and def-weil-affine-spectrum. Step 2: primes in [p,q] match irreducible closed sets in [V(q),V(p)] in reverse order, using clauses (1) and (2) of lem-weil-pbc-spec-irreducible-closed-subsets-primes (Mathlib closure_singleton at Topology.lean:173 and pointsEquivIrreducibleCloseds at :971). Steps 3 and 4: the open-subspace correspondence (orderIsoOfIsOpenEmbedding, Closeds.lean:515) is applied to W=V∩U_i inside V and inside U_i. Every member of each interval contains the point x=q, which lies in W, so the restriction to each interval is a bijection; I checked surjectivity through closure and the fact that inclusion is reflected. W is never assumed affine. Step 5: catenarity of A_i passes through these order isomorphisms, keeping both the length bound and equal saturated lengths. I tested the cover D(t), D(t-1) of Spec k[t], p=q, a field, empty V, the doubled-origin plane (not quasi-separated), and non-Noetherian chart rings. A DAG grep for catenar, 02IX, 02I2 and 02IH found no duplicate. There is no cycle, since the parent cites this item and not the reverse. Every cited node is a definition or a Mathlib leaf, so no tool_uses are needed. The searches are recorded properly, no SGA source is used, and I made no fixes."
  }
 }
