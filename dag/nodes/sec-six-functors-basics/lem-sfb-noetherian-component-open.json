@@ -1,0 +1,67 @@
+{
+ "id": "lem-sfb-noetherian-component-open",
+ "kind": "statement",
+ "title": "A Noetherian irreducible component contains a nonempty open",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] whose underlying topological space is Noetherian (every descending chain of closed subsets stabilizes), and let $Z\\subseteq |X|$ be an irreducible component [def-weil-irreducible-components]. Then there is a nonempty open subset $O\\subseteq |X|$ with $O\\subseteq Z$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 0052 (lemma-Noetherian), part (3)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every irreducible component of a Noetherian topological space contains a nonempty open subset",
+   "results": "TopologicalSpace.NoetherianSpace.exists_open_ne_empty_le_irreducibleComponent; TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent; finite_irreducibleComponents; no exact sheaf theorem.",
+   "date": "2026-10-17",
+   "verdict": "match: the second declaration is the exact component-open result."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent",
+   "results": "TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent (Mathlib.Topology.NoetherianSpace), with type (Z) (H) → ∃ o, IsOpen o ∧ o.Nonempty ∧ o ⊆ Z.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isOpen_nonempty_subset_irreducibleComponent",
+   "results": "Mathlib/Topology/NoetherianSpace.lean:203 theorem NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent [NoetherianSpace α] ...",
+   "date": "2026-10-17",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent",
+  "file": "Mathlib/Topology/NoetherianSpace.lean",
+  "how": "Apply the exact declaration TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent at lines 202--205 to the underlying topological space of X. The item’s Noetherian wording is the equivalent descending-chain formulation, and [def-weil-irreducible-components] identifies Z with a member of irreducibleComponents.",
+  "line": 203
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-model-stratum-filtration",
+  "date": "2026-10-17",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Finite sheaf dévissage: refining the finite constructible stratification on a Noetherian space before the coefficient-localization argument.",
+   "via": [
+    "lem-sfb-finite-model-stratum-filtration",
+    "lem-sfb-constructible-internal-hom-continuity"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

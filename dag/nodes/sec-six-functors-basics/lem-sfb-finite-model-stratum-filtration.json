@@ -23,55 +23,181 @@
   "def-pc-reduced-scheme",
   "def-weil-quasi-separated-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-sfb-noetherian-space-compact-subsets], every subset of the underlying space of $X$ is quasi-compact. In particular every open subscheme is quasi-compact. For any such scheme $W$, the inverse image of each affine open under its diagonal is a subset of $|X|$ and hence quasi-compact; this proves quasi-separatedness directly from [def-weil-quasi-separated-morphism]. For an open immersion between these schemes its diagonal has the same property, and inverse images of affine opens are subsets of $|X|$, proving that all the open immersions below are qcqs. Now unpack [sk-def-sfb-constructible] on the resulting qcqs scheme $X$: choose a finite partition by constructible locally closed strata $X_a$ with their immersion maps, on which $F$ has finite constant local models over $B_{X_a}$.",
+   "uses": [
+    "lem-sfb-noetherian-space-compact-subsets",
+    "sk-def-sfb-constructible",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/_section.md",
+    "place": "Part (2), definition of constructible sheaves; qcqs consequence from the Noetherian topology"
+   }
+  },
+  {
+   "text": "Refine this finite partition by the construction in Stacks Tag 09Y5. At each recursion, give the current closed remainder its reduced induced closed scheme structure by [lem-weil-pbc-reduced-induced-closed-subscheme]; closed subspaces inherit the descending-chain condition, since their relatively closed subsets are closed in the original space. If this remainder is nonempty, work relative to it (denoting it temporarily by $X$) and choose a point of it and an irreducible component $Z$ containing that point using [lem-sc-irreducible-components-cover]. The Mathlib leaf [lem-sfb-noetherian-component-open] gives a nonempty open $O$ of $X$ contained in $Z$. Since the finite partition has $Z\\subseteq\\bigcup_a\\overline{X_a}$, irreducibility of $Z$ applied successively to this finite closed cover gives an $i$ with $Z\\subseteq\\overline{X_i}$. Because $O$ is open in $X$, contained in $Z$, and $Z\\subseteq\\overline{X_i}$, the set $O\\cap X_i$ is dense in $O$. Local closedness makes it open in $O$ (it is open in its closure). It is therefore a nonempty open $U$ of $X$ contained in $X_i$. Write\n$$X_i=U\\amalg X_i^1\\amalg X_i^2,\\qquad X_i^1=(X_i\\setminus U)\\cap\\overline U,\\quad X_i^2=(X_i\\setminus U)\\cap\\overline U^{c},$$\nand, for $i'\\ne i$, write $X_{i'}^1=X_{i'}\\cap\\overline U$ and $X_{i'}^2=X_{i'}\\cap\\overline U^{c}$. These pieces are locally closed, being intersections of locally closed subsets with open or closed subsets. Then $X\\setminus U$ is a finite partition by these pieces and $\\overline U\\setminus U$ is the union of the pieces with superscript $1$. Apply the same construction recursively to the strictly smaller closed remainder $X\\setminus U$. A strictly descending infinite sequence of closed remainders would contradict the assumed descending-chain condition, so the recursion terminates. The nonempty open $U\\subseteq Z$ is dense in the irreducible closed set $Z$, so $\\overline U=Z$. The inductive partition separates $\\overline U\\setminus U$ from its complement, hence $\\overline U$ is a union of the final strata. Each inductive stratum has closure in the closed set $X\\setminus U$, where its closure is already a union of inductive strata by induction. Thus all final stratum closures are unions of strata, which is exactly goodness; the empty space is handled by the empty partition.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-sfb-noetherian-component-open",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y5 (lemma-noetherian-partition-refined-by-stratification), proof; component-open input is Tag 0052(3)"
+   }
+  },
+  {
+   "text": "A finite good stratification has the partial order $S_i\\le S_j$ when $S_i\\subseteq\\overline{S_j}$, and $\\overline{S_j}=\\bigcup_{S_i\\le S_j}S_i$. Choose a linear extension with maximal strata first. Let $V_k$ be the union of the first $k$ strata and put $V_0=\\varnothing$. The first $k$ strata form an upward-closed set for this order, so the complement is a finite union of strata containing the closure of each of its members; hence the complement is closed and $V_k$ is open. Therefore $S_k=V_k\\setminus V_{k-1}$ is closed in $V_k$. Give this closed subset its reduced induced closed subscheme structure $t_k:S_k\\hookrightarrow V_k$ using [lem-weil-pbc-reduced-induced-closed-subscheme]. By [lem-sfb-noetherian-space-compact-subsets], every $V_k$ and every open complement of $t_k$ is quasi-compact; the diagonal-preimage argument in step 1 also proves quasi-separatedness for these schemes and immersions.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y5 together with Definition 5.10.1 (good stratification); reduced structure from Schemes Tag 01J3"
+   }
+  },
+  {
+   "text": "Write the original stratum immersion as $X_a\\hookrightarrow W_a\\hookrightarrow X$, closed followed by open. Since $S_k$ is reduced and its image is contained in $|X_a|$, its map to $X$ factors first through $W_a$ and then through the closed subscheme $X_a$ by [lem-weil-pbc-reduced-source-factors-through-closed-subscheme]. Denote the resulting map by $g:S_k\\to X_a$. By [def-sfb-module-upper-star-comp], $L_k$ identifies with $g^*(F|_{X_a})$. For a trivializing cover $U_i\\to X_a$ in [sk-def-sfb-constructible], base change gives a pro-étale cover $U_i\\times_{X_a}S_k\\to S_k$ by [det-pe-topos-functoriality-inverse-image](1). On this cover a scalar presentation $B_{U_i}^{m}\\xrightarrow{A_i}B_{U_i}^{n}\\to F|_{U_i}\\to0$ pulls back to the same finite matrix $A_i$ with entries in $\\Lambda(*)$. Indeed inverse image preserves cokernels and tensor products by [det-pe-topos-functoriality-inverse-image](3)--(4) and [def-sfb-finite-upper-star-monoidal], and [lem-sfb-alpha-iso] identifies the inverse image coefficient with the coefficient on the base change. The cokernel is therefore $B_{U_i\\times_{X_a}S_k}\\otimes_{\\underline{\\Lambda(*)}}\\underline P_i$ for the same finitely presented scalar module $P_i$. This proves the finite constant local-model condition for $L_k$, including torsion modules.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-sfb-alpha-iso",
+    "def-sfb-module-upper-star",
+    "def-sfb-module-upper-star-comp",
+    "def-sfb-finite-upper-star-monoidal",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "det-pe-topos-functoriality-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/_section.md",
+    "place": "Part (1)--(2), pullback of the finite constant local-model condition"
+   }
+  },
+  {
+   "text": "For each $k$, let $Z_k\\hookrightarrow X$ be the reduced induced closed subscheme on the closed complement $X\\setminus V_k$, supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. Apply [lem-weil-pbc-proetale-ringed-open-closed] to the complementary quasi-compact open immersion $v_k:V_k\\hookrightarrow X$ and this closed immersion, with coefficient ring $B_X$. Use [def-weil-pbc-internal-abelian-sheaf-module-equivalence] to identify internal modules with sectionwise module sheaves over $B_X$; the equivalence preserves underlying abelian sheaves and their linear maps. By [lem-sfb-alpha-iso] the inverse-image module functor in that sequence is the module pullback $v_k^*$, and [def-sfb-module-open-lower-shriek] identifies its extension by zero with $v_{k!}$: both lift the abelian extension by zero with the action induced by pulling back $B_X$; equivalently, [def-sfb-module-linear-open-lower-shriek] gives the same left adjoint to the lifted restriction functor, so the unique adjunction comparison identifies their counits. The sequence gives $0\\to v_{k!}v_k^*F\\to F$, so the counit defining $F_k$ is monic. For $k=r$, $V_r=X$ and this map is an isomorphism, while $V_0=\\varnothing$ gives $F_0=0$.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sfb-alpha-iso",
+    "def-sfb-module-open-lower-shriek",
+    "def-sfb-module-upper-star",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-module-linear-open-lower-shriek"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "literature/stacks-project/proetale.tex Tags 09AA (lemma-closed-immersion), 09AH (lemma-ses-associated-to-open) and 09BN (lemma-open-immersion), open--closed exact sequence; literature/stacks-project/sites-modules.tex Tags 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact) for extension by zero of modules"
+   }
+  },
+  {
+   "text": "Let $a:V_{k-1}\\hookrightarrow V_k$. The immersions $a$ and $t_k$ are complementary. By the module comparisons of step 5, [lem-weil-pbc-proetale-ringed-open-closed] applied to $F|_{V_k}$ gives the natural short exact sequence\n$$0\\to a_!a^*(F|_{V_k})\\to F|_{V_k}\\to(t_k)_*L_k\\to0.$$\nThe functor $v_{k!}$ is exact by [def-sfb-module-open-lower-shriek]. To compare its first term with $F_{k-1}$, [def-sfb-module-linear-open-lower-shriek] and [lem-sfb-alpha-iso] give the adjunctions $a_!\\dashv a^*$ and $v_{k!}\\dashv v_k^*$. Consequently for every module $M$ on $V_{k-1}$ and $N$ on $X$,\n$$\\operatorname{Hom}_X(v_{k!}a_!M,N)\\cong\\operatorname{Hom}_{V_{k-1}}(M,a^*v_k^*N)\\cong\\operatorname{Hom}_{V_{k-1}}(M,v_{k-1}^*N),$$\nwhere the last comparison is [def-sfb-module-upper-star-comp]. This identifies $v_{k!}a_!$ with $v_{k-1!}$ as left adjoints. For $M=v_{k-1}^*F$, the composite of the two counits corresponds to the identity of $v_{k-1}^*F$, hence equals the counit into $F$ under this identification. Applying $v_{k!}$ to the short exact sequence therefore gives\n$$0\\to F_{k-1}\\to F_k\\to v_{k!}(t_k)_*L_k\\to0,$$\nwith the first map compatible with the embeddings into $F$. This proves the inclusions and quotient isomorphism. The closed direct image is the ordinary module pushforward of [def-sfb-module-lower-star].",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-sfb-module-open-lower-shriek",
+    "def-sfb-module-linear-open-lower-shriek",
+    "lem-sfb-alpha-iso",
+    "def-sfb-module-upper-star-comp",
+    "def-sfb-module-upper-star",
+    "def-sfb-module-lower-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "literature/stacks-project/proetale.tex Tag 09AH (lemma-ses-associated-to-open), with literature/stacks-project/sites-modules.tex Tags 03DI--03DJ (lemma-extension-by-zero, lemma-extension-by-zero-exact) for exact extension by zero"
+   }
+  },
+  {
+   "text": "All maps in the two localization sequences are counits, units, restrictions, or the canonical extension-by-zero comparison just described. Each is natural under a morphism of $F$ while the chosen good stratification is held fixed. The diagram of short exact sequences therefore induces natural quotient isomorphisms $F_k/F_{k-1}\\cong v_{k!}(t_k)_*L_k$.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-sfb-module-open-lower-shriek",
+    "def-sfb-module-lower-star"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "literature/stacks-project/proetale.tex Tag 09AH (lemma-ses-associated-to-open) and literature/stacks-project/sites-modules.tex Tags 03DI--03DJ, naturality of the localization sequence and extension by zero"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-module-linear-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-upper-star",
+  "def-sfb-module-upper-star-comp",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-quasi-separated-morphism",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-sc-irreducible-components-cover",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-noetherian-component-open",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "sk-def-sfb-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 09Y5, combined with proetale.tex Tags 09AA, 09AH, 09BN and sites-modules.tex Tags 03DI--03DJ for the sheaf-theoretic extraction"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A module sheaf on a topologically Noetherian scheme with a finite locally closed constructible stratification admits a finite filtration whose quotients are extensions by zero of its restrictions to refined strata",
-   "results": "Returned 8 hits: SheafOfModules.IsFiniteType, Ideal.Filtration.submodule_fg_iff_stable, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType, Ideal.Filtration.Stable.of_le, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.GeneratingSections.IsFiniteType.finite. ",
-   "date": "2026-10-16",
-   "verdict": "no match: the returned algebra filtrations and finite-generation definitions do not provide a sheaf filtration from a constructible stratification."
+   "query": "A constructible module sheaf on a Noetherian scheme admits a finite filtration by open extensions of closed-stratum finite constant local models",
+   "results": "8 hits: SheafOfModules.IsFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.GeneratingSections.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.GeneratingSections.IsFiniteType.finite; AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top.",
+   "date": "2026-10-17",
+   "verdict": "no match: these are finite-generation predicates and Noetherian affine criteria, not constructible-stratification filtrations."
   },
   {
    "tool": "loogle",
-   "query": "\"Sheaf\", \"filtration\"",
-   "results": "Returned 0 hits: . ",
-   "date": "2026-10-16",
-   "verdict": "no match: the returned algebra filtrations and finite-generation definitions do not provide a sheaf filtration from a constructible stratification."
+   "query": "Sheaf filtration extension by zero constructible",
+   "results": "0 hits; parser error: expected end of input",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query rejected by the recorded parser or identifier error; not evidence of absence."
   },
   {
    "tool": "grep",
-   "query": "(Constructible|constructible).*(filtration|Filtration|stratification)|(filtration|Filtration).*([Ss]heaf|[Mm]odule)",
-   "results": "Returned 6 hits: Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/FilteredAlgebra/Basic.lean. ",
-   "date": "2026-10-16",
-   "verdict": "no match: the returned algebra filtrations and finite-generation definitions do not provide a sheaf filtration from a constructible stratification."
+   "query": "Noetherian.*stratification|extension.*zero.*short exact (Mathlib)",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match."
   },
   {
    "tool": "leansearch",
-   "query": "Finite constructible stratification of a module sheaf yields a filtration with locally closed extension by zero subquotients",
-   "results": "Returned 8 hits: IsModuleFiltration.toIsFiltration, IsModuleFiltration, SheafOfModules.IsFiniteType, Ideal.Filtration.Stable, Ideal.stableFiltration, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.IsFiniteType.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation. ",
-   "date": "2026-10-16",
-   "verdict": "no match: the returned algebra filtrations and finite-generation definitions do not provide a sheaf filtration from a constructible stratification."
+   "query": "Finite good stratification of a Noetherian space and a sheaf filtration with extension by zero quotients",
+   "results": "8 hits: Ideal.Filtration.Stable.of_le; AlgebraicGeometry.IsNoetherian.noetherianSpace; NoetherianSpace.to_quasiSeparatedSpace; TopologicalSpace.Finite.to_noetherianSpace; IsModuleFiltration; MeasureTheory.Filtration.piFinset; SheafOfModules.IsFinitePresentation.mk; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation.",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern algebraic filtrations, Noetherian instances, or finite presentation, not this sheaf statement."
   },
   {
-   "tool": "leanfinder",
-   "query": "Constructible sheaves for any condensed coefficient ring on a scheme with Noetherian underlying space are generated under finite extensions by locally closed extension by zero of finite constant local models",
-   "results": "Returned 8 hits: PrimeSpectrum.ConstructibleSetData, SheafOfModules.LocalGeneratorsData.IsFiniteType, PrimeSpectrum.BasicConstructibleSetData, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, AlgebraicGeometry.Scheme.Hom.isConstructible_image, Topology.IsLocallyConstructible.isConstructible, SheafOfModules.GeneratingSections.IsFiniteType. ",
-   "date": "2026-10-16",
-   "verdict": "no match: the returned algebra filtrations and finite-generation definitions do not provide a sheaf filtration from a constructible stratification."
+   "tool": "loogle",
+   "query": "NoetherianSpace, Filtration",
+   "results": "0 hits; unknown identifier 'NoetherianSpace'",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query rejected by the recorded parser or identifier error; not evidence of absence."
   },
   {
    "tool": "grep",
-   "query": "(stratification|Stratification|Constructible|constructible).*(extensionByZero|lowerShriek|filtration)",
-   "results": "Returned 0 hits: . Mathlib/AlgebraicGeometry searched. ",
-   "date": "2026-10-16",
-   "verdict": "no match: the returned algebra filtrations and finite-generation definitions do not provide a sheaf filtration from a constructible stratification."
+   "query": "NoetherianSpace|Noetherian.*stratification|extensionByZero (Mathlib/AlgebraicGeometry)",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-constructible-internal-hom-continuity",
@@ -83,12 +209,27 @@
  "blueprint": {
   "from": {
    "node": "lem-sfb-dc-hom-preserves",
-   "place": "lem-sfb-dc-hom-preserves.proof.md, last sentence 'The cases $\\underline E$ and $\\underline{\\Qlb}$ follow by inverting $\\ell$ and by descending to a finite extension $E$ ... see Bhatt–Scholze, §6.8': compatibility of internal Hom with inverting $\\ell$ and with the filtered coefficient colimit (parent steps 5 and 8). Finite sheaf devissage underlying the last sentence: reducing constructible sources to locally constant scalar models before coefficient localization.",
+   "place": "Finite sheaf dévissage underlying the parent proof's invocation of the characterization of bounded constructible complexes: reducing constructible sources to locally constant scalar models before coefficient localization.",
    "via": [
     "lem-sfb-constructible-internal-hom-continuity"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-finite-model-stratum-filtration",
+  "worker": "stage1",
+  "summary": "Corrected the Noetherian-topology hypotheses, replaced the inapplicable scheme-level minimality citation with exact topological Mathlib leaves, repaired the Tag 09Y5 partition recursion, supplied the closed complement for localization, and fixed malformed LaTeX escapes. The arbitrary-condensed-coefficient comparison now cites lem-sfb-alpha-iso, and reduced-source factorization and module-category comparisons are explicit.",
+  "blueprint": "Finite sheaf dévissage needed before coefficient localization: the steps realize the parent proof invocation by refining constructible strata and extracting the open--closed filtration."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NB-3ac9aa671",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-3ac9aa671 (reviewer sub-agent of L); spot-checked: Read the item, both new leaves, the statement of every cited node, the unit and the blueprint parent lem-sfb-dc-hom-preserves (main-20261015), and the citing step of lem-sfb-constructible-internal-hom-continuity. Sources read: Stacks Tag 09Y5 and its proof, the good-stratification definition, 0052(1)-(3), 04ZA and proetale 09AH, plus NoetherianSpace.lean lines 55-95 and 195-210. Steps 1-7 hold. Step 1: qcqs follows from the compactness of every subset. Step 2 follows 09Y5 faithfully: O∩X_i is open and dense in O, the piece decomposition is correct, the recursion stops by DCC, and goodness holds because every closure is a union of strata. Step 3: the order puts maximal strata first, so each prefix is open. Step 4 makes the reduced stratum factor through X_a via the reduced-source lemma (this avoids E3), and the matrix presentation pulls back by lem-sfb-alpha-iso. Steps 5-6: the localization sequence applies because v_k and a are quasi-compact. j_!⊣j^* holds because α is an iso, and the counit of the composite adjunction gives F_{k-1}⊆F_k with the stated quotient. Small cases tested: X=∅, Spec k[ε] (F≅t_*t^*F), a DVR with two strata, and Λ=0. Coefficients stay B_X-modules for any Λ, no SGA is cited, and the DAG has no cycle. Both new leaves are exact Mathlib matches, verified at lines 65 and 203. Neither restates part of the item, and neither duplicates an existing node. det-lem-coefficient-heart-filtration is a special case (only E or Q̄_ℓ) that existed before this delivery; noted for a later merge. Repaired in fixes/: (1) B9: both new nodes now have blueprint.from.via=[item, lem-sfb-constructible-internal-hom-continuity]; it was []. (2) B5: steps 5-7 and proof_origin wrongly placed Tags 03DI-03DJ in proetale.tex; they are in sites-modules.tex, now named with their labels. No mathematical text was changed. Accepted tool_uses: lem-weil-pbc-proetale-ringed-open-closed, lem-weil-pbc-reduced-source-factors-through-closed-subscheme and lem-sfb-alpha-iso, each a generic black box that no node on the unit's route gives.; 3 file(s) fixed by the reviewer"
  }
 }

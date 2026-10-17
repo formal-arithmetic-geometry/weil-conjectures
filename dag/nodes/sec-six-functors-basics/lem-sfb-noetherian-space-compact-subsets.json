@@ -1,0 +1,66 @@
+{
+ "id": "lem-sfb-noetherian-space-compact-subsets",
+ "kind": "statement",
+ "title": "Every subset of a Noetherian topological space is compact",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] whose underlying topological space has the descending-chain condition on closed subsets (so it is Noetherian). Then every subset $A\\subseteq |X|$ is quasi-compact: every open cover of $A$ has a finite subcover.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 04ZA (lemma-Noetherian-quasi-compact), parts (1)--(2); Noetherian definition: Tag 0051 (definition-noetherian)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every subset of a Noetherian topological space is compact",
+   "results": "TopologicalSpace.NoetherianSpace.isCompact; TopologicalSpace.NoetherianSpace.compactSpace; noetherianSpace_TFAE; noetherianSpace_iff_isCompact; noetherianSpace_iff_opens; NoetherianSpace.set.",
+   "date": "2026-10-17",
+   "verdict": "match: TopologicalSpace.NoetherianSpace.isCompact gives compactness of every subset."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopologicalSpace.NoetherianSpace.isCompact",
+   "results": "TopologicalSpace.NoetherianSpace.isCompact (Mathlib.Topology.NoetherianSpace), with type (s : Set α) → IsCompact s.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "NoetherianSpace.isCompact",
+   "results": "Mathlib/Topology/NoetherianSpace.lean:65 protected theorem NoetherianSpace.isCompact [NoetherianSpace α] (s : Set α) : IsCompact s; related uses at lines 73, 90, 112 and Mathlib/Topology/QuasiSeparated.lean:115.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopologicalSpace.NoetherianSpace.isCompact; TopologicalSpace.noetherianSpace_TFAE",
+  "file": "Mathlib/Topology/NoetherianSpace.lean",
+  "how": "Apply the exact declaration TopologicalSpace.NoetherianSpace.isCompact at lines 64--69 to the underlying topological space of X. TopologicalSpace.noetherianSpace_TFAE at lines 81--92 identifies the item’s descending-chain condition on closed subsets with the NoetherianSpace hypothesis and with compactness of every subset.",
+  "line": 65
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-model-stratum-filtration",
+  "date": "2026-10-17",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Finite sheaf dévissage: the parent proof first reduces constructible sheaves to a finite stratification on a qcqs Noetherian space.",
+   "via": [
+    "lem-sfb-finite-model-stratum-filtration",
+    "lem-sfb-constructible-internal-hom-continuity"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
