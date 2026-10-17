@@ -170,6 +170,7 @@ public import WeilConjectures.Algebra.Module.QuotientPrimaryComponentNoTorsion
 public import WeilConjectures.Algebra.Module.RationalPerfectPairing
 public import WeilConjectures.Algebra.Module.ReesKernelGenerators
 public import WeilConjectures.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
+public import WeilConjectures.Algebra.Module.ZModSelfInjective
 public import WeilConjectures.Algebra.PopescuLiftNilpotent
 public import WeilConjectures.Algebra.Schanuel
 public import WeilConjectures.Algebra.TorDimensionShiftFree
