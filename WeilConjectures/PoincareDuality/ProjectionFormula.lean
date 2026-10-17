@@ -149,7 +149,7 @@ the restriction (`CategoryTheory.MonoidalCategory.restrictTensor`) of
 `exceptionalProjectionOfCompactification` for the compactification `compactificationOverField f`
 defining `boundedConstructibleLowerShriek`, along the fully faithful monoidal inclusions
 `Dᵇc ⥤ D`. This is the form in which `PF^!` enters `CategoryTheory.Verdier`. -/
-noncomputable def boundedConstructibleExceptionalProjection [IsFinitenessCoefficient ℓ Λ] :
+noncomputable def boundedConstructibleExceptionalProjection :
     curriedTensorInsertFunctor₁ (boundedConstructibleLowerShriek Λ ℓ f) ⟶
       curriedTensorPost (boundedConstructibleLowerShriek Λ ℓ f) ⋙
         (Functor.whiskeringLeft _ _ _).obj (boundedConstructibleUpperStar Λ ℓ f) :=
@@ -163,7 +163,7 @@ noncomputable def boundedConstructibleExceptionalProjection [IsFinitenessCoeffic
 exceptional projection morphism `PF^!_{f,K,B} : Rf_! K ⊗ᴸ B ⟶ Rf_! (K ⊗ᴸ Lf^* B)` is an
 isomorphism for bounded constructible `ℚ̄_ℓ`-sheaves `K` and `B`, which are of finite Tor
 dimension, `ℚ̄_ℓ` being a field. See the module docstring. -/
-instance isIso_boundedConstructibleExceptionalProjection_app_app [IsFinitenessCoefficient ℓ Λ]
+instance isIso_boundedConstructibleExceptionalProjection_app_app
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (((boundedConstructibleExceptionalProjection _ ℓ f).app K).app B) :=

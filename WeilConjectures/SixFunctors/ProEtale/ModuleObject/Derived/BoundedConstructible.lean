@@ -345,14 +345,14 @@ constructible complexes attached to a compactification `c = (X.left ⟶[i] Z ⟶
 `f.left`: the extension by zero along the open immersion `i` followed by the derived pushforward
 along the proper morphism `p`, both on bounded constructible complexes, for `i` and `p` the
 morphisms `c.overI` and `c.overG` of `Over (Spec (.of k))`. -/
-noncomputable def boundedConstructibleLowerShriekOfCompactification [IsFinitenessCoefficient ℓ Λ] :
+noncomputable def boundedConstructibleLowerShriekOfCompactification :
     Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(Y.left)⟦Λ⟧ :=
   boundedConstructibleOpenImmersionLowerShriek Λ ℓ c.overI ⋙
     boundedConstructibleLowerStar Λ ℓ c.overG
 
 /-- `Rf_!^c` on bounded constructible complexes is the restriction of the derived lower shriek
 `Rf_!(c)⟦Λ⟧` on the ambient derived categories. -/
-noncomputable def boundedConstructibleLowerShriekOfCompactificationCompatibility [IsFinitenessCoefficient ℓ Λ] :
+noncomputable def boundedConstructibleLowerShriekOfCompactificationCompatibility :
     boundedConstructibleLowerShriekOfCompactification Λ ℓ c ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ Rf_!(c)⟦Λ⟧ :=
   Functor.associator _ _ _ ≪≫
@@ -369,17 +369,17 @@ variable (f : X ⟶ Y)
 /-- The derived lower shriek `Rf_! : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` on bounded constructible complexes:
 the functor `boundedConstructibleLowerShriekOfCompactification` attached to the compactification
 `compactificationOverField f` chosen by Nagata's theorem. -/
-noncomputable def boundedConstructibleLowerShriek [IsFinitenessCoefficient ℓ Λ] : Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(Y.left)⟦Λ⟧ :=
+noncomputable def boundedConstructibleLowerShriek : Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(Y.left)⟦Λ⟧ :=
   boundedConstructibleLowerShriekOfCompactification Λ ℓ (compactificationOverField f)
 
-lemma boundedConstructibleLowerShriek_eq [IsFinitenessCoefficient ℓ Λ] :
+lemma boundedConstructibleLowerShriek_eq :
     boundedConstructibleLowerShriek Λ ℓ f =
       boundedConstructibleLowerShriekOfCompactification Λ ℓ (compactificationOverField f) :=
   rfl
 
 /-- The derived lower shriek on bounded constructible complexes is the restriction of the
 derived lower shriek `R(f)_!⟦Λ⟧` on the ambient derived categories. -/
-noncomputable def boundedConstructibleLowerShriekCompatibility [IsFinitenessCoefficient ℓ Λ] :
+noncomputable def boundedConstructibleLowerShriekCompatibility :
     haveI := HasCompactification.of_over f
     boundedConstructibleLowerShriek Λ ℓ f ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ R(f.left)_!⟦Λ⟧ :=
