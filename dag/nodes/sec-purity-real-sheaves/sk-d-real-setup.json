@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sk-d-real-setup",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "d-real-setup"
+  ]
  },
  "kind": "definition",
  "title": "Fields, curves and Frobenius",
@@ -12,13 +14,60 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-setup/_section.md",
   "place": "node sk-d-real-setup, order 2919"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-q-elements",
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-numbers",
+  "def-pc-scheme",
+  "def-weil-scheme-over-base",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-pure-dimension",
+  "def-pc-base-change",
+  "def-weil-connected-scheme",
+  "def-weil-closed-points",
+  "def-weil-residue-field",
+  "def-weil-closed-point-degree",
+  "def-weil-frobenius-substitution",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite field q=p^a algebraic closure ell-adic embedding smooth separated geometrically connected curve geometric Frobenius affine open",
+   "results": "WeierstrassCurve.Affine.FunctionField; FunctionField; WeierstrassCurve.Affine.Point.map_some; WeierstrassCurve.Affine.Point.map; WeierstrassCurve.IsGoodReduction; Algebra.FormallySmooth.of_perfectField; WittVector.isocrystal_classification; WittVector.exists_frobenius_solution_fractionRing",
+   "date": "2026-10-17",
+   "verdict": "no match for the combined setup; hits concern elliptic curves, function fields, formal smoothness, or Witt vectors."
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteField.frobeniusAlgEquivOfAlgebraic, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSeparated, AlgebraicGeometry.IsAffine",
+   "results": "0 hits; loogle reported unknown identifier AlgebraicGeometry.IsSmooth",
+   "date": "2026-10-17",
+   "verdict": "no match for the combined setup; the query names were not a single Mathlib declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusAlgEquivOfAlgebraic|IsSmooth|IsAffine [Mathlib/]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match for the combined setup."
+  },
+  {
+   "tool": "leansearch",
+   "query": "definition of a smooth geometrically connected curve over a finite field with geometric Frobenius and an ell-adic embedding",
+   "results": "AlgebraicGeometry.IsSmooth.casesOn; FiniteField.Extension.frob; FiniteField.frobeniusAlgEquivOfAlgebraic; AlgebraicGeometry.IsSmooth.recOn; AlgebraicGeometry.IsSmooth; WeierstrassCurve.IsIntegral; AlgebraicGeometry.IsSmoothOfRelativeDimension; WeierstrassCurve.isIntegral_iff",
+   "date": "2026-10-17",
+   "verdict": "no match; only separate smoothness or Frobenius declarations appeared."
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -43,5 +92,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-d-real-setup",
+  "worker": "stage1",
+  "summary": "Read the current sketch definition, its unit and chapter, and the expanded sibling d-real-setup. The sketch has no proof obligations; all notions in its statement are supplied by the existing definition nodes already used by d-real-setup, so no new nodes are needed. The expanded sibling is recorded as the same blueprint statement; the sketch shorthand is retained verbatim.",
+  "blueprint": "Realizes every clause of literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-setup/_section.md: the finite-field and coefficient choices, curve hypotheses, closed-point degree and q_x, geometric/local Frobenius convention, and affine-open convention.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-75c99ed23",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-75c99ed23 (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, current and master blueprint sources, all 17 dependency nodes and cited source locations, packet/report, and delivery-errors A–F. The sketch matches its source; dependencies cover every convention; edge cases, Frobenius/local q_x, base change, coefficient notation, duplicate sibling d-real-setup, searches, acyclicity, and route were checked. No new nodes, proof steps, repairs, SGA use, or tool_uses are present."
  }
 }

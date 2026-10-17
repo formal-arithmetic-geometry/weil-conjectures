@@ -1,0 +1,75 @@
+{
+ "id": "lem-pod-frobenius-cup-transport",
+ "kind": "statement",
+ "title": "Finite-coefficient Frobenius transport commutes with mixed-support cup product",
+ "statement": "Fix distinct primes $p,\\ell$, integers $a,n\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $A=\\mathcal O_E/\\varpi_E^n$. Let $X_0$ be a smooth separated finite-type geometrically connected $k_0$-scheme of pure dimension $d\\geq0$, let $X=X_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$, and use the small pro-etale derived constant-$A$ module categories of [def-pod-conventions]. Put $g=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$, where $\\gamma(z^q)=z$, and $T=Lg^*$. For arbitrary $K,L\\in D^b_{ctf}(X,A)$, use the mixed-support cup product $\\mu_{K,L}$ of [def-pod-mixed-support-cup-product] and the transports $\\tau_L:R\\Gamma(X,L)\\to R\\Gamma(X,TL)$ and $\\tau_{c,K}:R\\Gamma_c(X,K)\\to R\\Gamma_c(X,TK)$ of [def-weil-frobenius-cohomology-transport]. Let $b_{K,L}:T(K\\otimes_A^L L)\\xrightarrow{\\sim}TK\\otimes_A^L TL$ be the canonical pullback-tensor comparison [def-weil-derived-pullback-tensor-hom]. Then the following equality holds in $D(A)$:\n$$\n R\\Gamma_c(X,b_{K,L})\\circ\\tau_{c,K\\otimes^L L}\\circ\\mu_{K,L}\n =\\mu_{TK,TL}\\circ(\\tau_{c,K}\\otimes_A^L\\tau_L).\n$$\nThe same equality holds after shifting either input by any integer, through the canonical tensor and cohomology shift comparisons: in these comparisons $\\tau_{L[r]}=\\tau_L[r]$ and $\\tau_{c,K[r]}=\\tau_{c,K}[r]$ for every $r\\in\\mathbf Z$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/thm-pod-equivariance-of-the-twisted-pairing.proof.md",
+  "place": "Step 1, equivariance of mixed-support cup product, with the finite-coefficient and shift compatibility made explicit; comparison formula also in WeilConjectures/SixFunctors/Etale/Derived/WeilFrobenius.lean, isWeilPairing_mixedSupportCupProduct, lines 382-398 (etale version)."
+ },
+ "stmt_deps": [
+  "def-pod-conventions",
+  "def-pod-mixed-support-cup-product",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mixedSupportCupProduct|cupProduct.*(exchange|frobenius)|frobenius.*cupProduct",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"tensor\"",
+   "results": "CategoryTheory.Sheaf.tensorProd_isSheaf",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mixed support cup product is natural under pullback along scheme automorphisms on compactly supported and ordinary derived cohomology",
+   "results": "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.instAdditivePullback; SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl; AlgebraicGeometry.Scheme.comp_appLE; SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport of compactly supported and ordinary cohomology along a scheme automorphism commutes with the mixed support cup product and the pullback tensor comparison",
+   "results": "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pullbackComp; groupCohomology.cochainsMap_f_1_comp_cochainsIso₁; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change by an automorphism preserves the projection formula followed by the adjunction counit defining a compact support cup product",
+   "results": "IsBaseChange.dual; LinearMap.baseChange_comp; LinearEquiv.baseChange_trans; IsBaseChange.toDual_apply; IsBaseChange.transvection; IsBaseChange.toDual; IsBaseChange; Module.Dual.baseChange",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "thm-pod-equivariance-of-the-twisted-pairing",
+  "date": "2026-10-17",
+  "group": "Q103"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "thm-pod-equivariance-of-the-twisted-pairing",
+   "place": "Proof, Step 1: the mixed-support cup product is equivariant under the geometric-Frobenius data; the finite-coefficient case not covered by lem-fix-weil-operations. Shifted form used in Step 2.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

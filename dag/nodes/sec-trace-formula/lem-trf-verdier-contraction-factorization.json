@@ -16,9 +16,82 @@
   "def-trf-supported-pairing",
   "thm-trf-dualizing-complex-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Expand the left side using the definitions of the contraction in [def-trf-supported-pairing], the signed swap s_P, and the monoidal pullback along the factor exchange. The pullback of gamma contracts the four factors in the order (K_2,D_1,K_1,D_2) by first applying the signed permutation r to (D_1,K_1,D_2,K_2), then applying the two evaluations D_1 tensor K_1 to omega and D_2 tensor K_2 to omega, and finally applying the exceptional product map alpha_{a_X,a_X}: omega boxtimes omega -> omega_Z. The comparison L tau^* omega_Z with omega_Z is the one specified in the statement. Thus the left side is the canonical two-evaluation composite with the permutation r, including precisely its Koszul sign. The exchange of the two output dualizing factors agrees with factor exchange of the exceptional product: expand its defining counit transpose in [def-sf-kv-maps](ii) and use the exchange and signed tensor coherence of [prop-functor-package].",
+   "uses": [
+    "def-trf-supported-pairing",
+    "def-trf-dualizing-complex",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-sf-kv-maps",
+    "thm-trf-dualizing-complex-composition",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+    "place": "Step 3(c): definition of gamma^tau and the signed permutation r"
+   }
+  },
+  {
+   "text": "Specialize the evaluation formula for the Kunneth--Verdier map [lem-trf-kv-evaluation-formula] to M=N=K, Y=X, and the product X times_s X. It says that the tensor--Hom transpose of kappa is the composite which reassociates P tensor Lp_2^*K, applies 1 tensor Lp_2^*ev, and then applies the exceptional Kunneth map alpha_{id_X,a_X}: K boxtimes omega -> Rp_1^!K. This is exactly kappa^T with the signed tensor constraints of [def-sf-kv-maps], so no unrecorded sign or choice of inverse is introduced.",
+   "uses": [
+    "lem-trf-kv-evaluation-formula",
+    "def-sf-kv-maps",
+    "def-trf-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+    "place": "Step 3(b): the transpose of kappa"
+   }
+  },
+  {
+   "text": "Write $a=a_X$, $p=p_1$, $H=D\\otimes K$, $h=\\operatorname{ev}:H\\to\\omega$, and $t=\\varepsilon_a\\circ Ra_!(h):Ra_!H\\to A_s$. After the permutation $r$, the common source is $H\\boxtimes H$, with the second evaluation still to be applied. Compare global exceptional adjuncts under $Ra_{Z!}\\dashv Ra_Z^!$, using $a_Z=ap$ and the specified composition identification of [thm-trf-dualizing-complex-composition] and [def-trf-admissibility]. The counit formula [lem-trf-exceptional-kunneth-counit] with $f_1=f_2=a$, $L_1=L_2=A_s$, and precomposition $h\\boxtimes h$ identifies the adjunct of the double-evaluation contraction with $Ra_{Z!}(H\\boxtimes H)\\xrightarrow{\\mathrm{Ku}_{!,a,a}}Ra_!H\\otimes Ra_!H\\xrightarrow{t\\otimes t}A_s$.\n\nFor the other side, use the same counit formula with $f_1=\\operatorname{id}_X$, $f_2=a$, $L_1=K$, $L_2=A_s$, and precompose by $1_K\\boxtimes h$. Together with Step 2 this says that the $p$-adjunct of the second-factor evaluation followed by $\\alpha_{\\operatorname{id},a}$ is $Rp_!(K\\boxtimes H)\\xrightarrow{\\mathrm{Ku}_{!,\\operatorname{id},a}}K\\otimes La^*Ra_!H\\xrightarrow{1_K\\otimes La^*t}K$. Tensoring on the left by $Lp^*D$ and taking the adjunct defining $\\varpi$ gives, by naturality of the projection formula, $Rp_!(H\\boxtimes H)\\xrightarrow{\\mathrm{Ku}_{!,\\operatorname{id},a}}H\\otimes La^*Ra_!H\\xrightarrow{1_H\\otimes La^*t}H\\xrightarrow h\\omega$. Here compatibility with the left tensor factor is exactly projection coherence: expand $\\mathrm{Ku}_!$ by [def-sf-kv-maps](i) into exchange and projection maps and use their tensor and exchange coherence in [prop-functor-package]. Applying $Ra_!$ and then $\\varepsilon_a$ makes this the global adjunct. Compact-support composition and projection coherence, [prop-functor-package](3), (5) and its final clause, identify $Ra_!\\mathrm{Ku}_{!,\\operatorname{id},a}$ followed by the projection comparison with $\\mathrm{Ku}_{!,a,a}$. Naturality of that projection comparison with respect to $t:Ra_!H\\to A_s$ therefore identifies the global adjunct with the same $(t\\otimes t)\\circ\\mathrm{Ku}_{!,a,a}$ displayed above. This is a comparison under the global adjunction, not an identification of the $a_Z$-adjunct with a $p_1$-adjunct. Injectivity of the global adjunction bijection proves the required equality after $r$. All inputs are in the finite-Tor constructible domains by [def-sf-kv-maps] and [prop-functor-package].",
+   "uses": [
+    "lem-trf-exceptional-kunneth-counit",
+    "lem-trf-kv-evaluation-formula",
+    "def-sf-kv-maps",
+    "prop-functor-package",
+    "thm-trf-dualizing-complex-composition",
+    "def-trf-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+    "place": "Step 3(c): exceptional-product factorization through varpi"
+   }
+  },
+  {
+   "text": "Combining Steps 1--3 gives Ltau^*gamma composed with (1 tensor Ltau^*s_P) equal to varpi composed with (1 tensor kappa^T) composed with r. All reassociations and exchanges are the canonical coherent constraints of the specified derived tensor and pullback operations; [def-weil-derived-pullback-tensor-hom] supplies their signed symmetry, and [prop-functor-package] supplies compatibility of the projection, composition and exchange maps. Therefore the equality includes exactly the Koszul signs of the displayed permutations and holds in the prescribed geometric exceptional-adjunction data.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "prop-functor-package",
+    "def-trf-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+    "place": "Step 3(c): coherence and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-supported-pairing",
+  "def-trf-dualizing-complex",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-kv-maps",
+  "thm-trf-dualizing-complex-composition",
+  "lem-trf-kv-evaluation-formula",
+  "lem-trf-exceptional-kunneth-counit",
+  "prop-functor-package",
+  "def-trf-admissibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+  "place": "Step 3(c): factorization of gamma^tau through varpi and the tensor--Hom transpose of kappa"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,7 +137,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-class-diagonal-pairing",
@@ -81,5 +154,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-verdier-contraction-factorization",
+  "worker": "stage1",
+  "summary": "Split the imported Step 3(c) comparison into the signed expansion of gamma under factor exchange, the existing Kunneth--Verdier tensor--Hom evaluation formula, the existing exceptional Kunneth counit calculation identifying the product map with varpi, and the final adjunction/coherence argument. No new DAG nodes were needed; all non-elementary inputs are existing nodes. Maintainer reader: expanded Step 3 using the global exceptional adjunct and its explicit common Ku_!–trace composite; made the factor-exchange coherence input explicit; corrected blueprint-only proof provenance to agent.",
+  "blueprint": "Realizes Step 3(c) of lem-trf-trace-class-diagonal-pairing.proof.md: definition of gamma^tau and r; transpose of kappa; exceptional-product factorization through varpi; and signed coherence conclusion.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "The comparison uses the generic projection-formula, compact-support composition, exchange, and coherence clauses for the specified geometric operations; the trace-class unit route does not restate these package axioms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q66-dd3372bc9",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q66-dd3372bc9 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements and source locations; no new nodes. Corrected the adjunction calculation in Step 3, made factor-exchange coherence explicit, and marked blueprint-only proof provenance as agent-written. Statement unchanged. Signed edge cases and dependency acyclicity checked. Review and corrected whole-node JSON written under the review directory; accepted tool use: prop-functor-package.; 1 file(s) fixed by the reviewer"
  }
 }

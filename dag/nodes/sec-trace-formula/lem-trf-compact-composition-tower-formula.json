@@ -24,9 +24,199 @@
   "prop-weil-open-closed-recollement-adjunctions",
   "prop-compactification-coherence-detailed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the hypotheses of the site-comparison tools. A field is Noetherian since its only ideals are $0,k$. By [lem-weil-pbc-finite-type-over-noetherian], $X,Y,S$ are Noetherian. Proper morphisms are of finite type by [def-weil-proper-morphism], so the same lemma applied successively to $q,p$ gives this for $\\overline Y,\\overline X$. Since $b$ is an open immersion, [lem-weil-pbc-noetherian-open-subscheme-noetherian] gives it for $V$. These schemes are quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated], hence qcqs; [lem-weil-pbc-qcqs-morphism-permanence](1) makes every arrow here qcqs. The base change $r$ of $p$ is proper by [lem-weil-pbc-proper-base-change], and $qp$ is proper by [lem-weil-pbc-proper-composition]. Thus all three displayed pairs really are compactifications; the supplied factorizations $bc=a$, $rc=f$ fix their open and proper factors.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), compatible-tower diagram; checking its qcqs specialization"
+   }
+  },
+  {
+   "text": "Fix a witnessed input $K\\simeq\\nu_X^*L$, $L\\in D^+(X_{\\mathrm{et}},A)$ [def-sf-etale-origin-subcategory]. The comparison [lem-cbc-proetale-extension-zero-comparison] and exactness on the two sites [lem-sf-comparison-pullback-exact, lem-weil-extension-by-zero-exact, lem-weil-pbc-extension-by-zero-exact] give, termwise, $c_!K\\simeq\\nu_V^*(c_!^eL)$, a bounded-below etale-origin witness for $N=c_!K$. The three candidate functors of [def-compact-support-direct-image-detailed] are, literally, $Rr_*c_!$, $Rq_*i_!$, $R(qp)_*a_!$. In particular their composite source is $Rq_*i_!Rr_*c_!$. We will compute maps on these functors, retaining the supplied witness whenever site transport is used.",
+   "uses": [
+    "def-sf-etale-origin-subcategory",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-extension-by-zero-exact",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "def-compact-support-direct-image-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, first and fourth equalities; proetale.tex Tag 09AF (lemma-jshriek-comparison), finite-level passage to complexes"
+   }
+  },
+  {
+   "text": "For the last open-extension arrow put $J=b_!$, $K_b=b^*$, $I=i_!$, $K_i=i^*$. The ordinary derived open adjunctions and their invertible units are [prop-weil-open-closed-recollement-adjunctions]. For any $M$ on $X$ and $H$ on $\\overline X$, their Hom bijections give $\\operatorname{Hom}(b_!c_!M,H)=\\operatorname{Hom}(M,c^*b^*H)=\\operatorname{Hom}(M,a^*H)$. The middle comparison restricts to the same open $X$ since $bc=a$. The unit-preserving uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] therefore gives $\\kappa:b_!c_!\\xrightarrow{\\sim}a_!$ whose conjugate is exactly that restriction comparison. This fixes the final open compositor without choosing an automorphism of $a_!$.",
+   "uses": [
+    "prop-weil-open-closed-recollement-adjunctions",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, second equality: open composition, specified by its adjunction"
+   }
+  },
+  {
+   "text": "Write $P=Lp^*$, $R=Rp_*$, $Q=Lr^*$, $T=Rr_*$. The other final arrow is $d_{q,p}^{-1}:Rq_*Rp_*\\to R(qp)_*$ from [lem-weil-derived-direct-image-composition](1). Its ordinary adjunction normalization can be checked before any compactification calculation: inverse images for constant $A$ are exact and the derived adjunctions are induced by the sheaf adjunctions [def-weil-pbc-proetale-operations]. The canonical pullback compositor is the termwise sheaf compositor [lem-weil-pbc-proetale-derived-pullback-composition]. The constant-module sheaf categories are Grothendieck abelian by [lem-cbc-sieve-module-sheaves-grothendieck], applied to these small sites. At the sheaf level, the Hom bijection for composite inverse image is the composite of the two adjunction bijections, so the corresponding direct-image comparison sends a section on the iterated fibre product to itself. Apply [lem-sfb-derived-composition-adjunction-normalization] to these exact inverse images: the derived direct-image compositor is the conjugate of the inverse-oriented pullback compositor, as in [def-weil-pbc-adjunction-conjugate]. Its K-injective representative is the canonical sheaf direct-image composition, so it is the same ordinary compositor $d_{q,p}$, with the direction just specified. Thus the final map will be $d_{q,p}^{-1}\\circ Rq_*Rp_*(\\kappa)$.",
+   "uses": [
+    "lem-weil-derived-direct-image-composition",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-cbc-sieve-module-sheaves-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, second equality; sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition); derived.tex Tag 09T5 (lemma-derived-adjoint-functors)"
+   }
+  },
+  {
+   "text": "Specify the interchange used in the etale-origin construction. Let $C_H=\\nu_H^*$, let $e_j:Cj_!^e\\xrightarrow{\\sim}j_!C$ be the canonical open comparison and $b_u:CRu_*^e\\xrightarrow{\\sim}Ru_*C$ its counit-normalized direct-image comparison. Apply the site clause of [lem-sp-proper-open-coefficient-mate] with $k=b$, bottom open $i$, and proper verticals $r,p$, and with its finite ring $R$ equal to our $A$. It identifies the transported etale proper/open map with $C_Q:i_!T\\to RJ$ whose open transpose is $\\lambda^{-1}$, where\n$$E:K_iR\\longrightarrow TK_b,\\qquad \\lambda=T(u_b^{-1})\\circ E_J:K_iRJ\\longrightarrow T.$$\nHere $u_b:1\\to K_bJ$ is the open unit. The exchange transported in that clause is the actual ordinary unit--counit exchange $E$, by [lem-weil-pbc-transport-identifies-exchange]. The transported open unit is $u_b$: the unit equation of [lem-sf-open-comparison-unit-normalization] descends termwise by [lem-sf-comparison-pullback-exact, lem-weil-extension-by-zero-exact]. Thus\n$$C_Q=\\varepsilon_i\\circ I(\\lambda^{-1})$$\non witnessed bounded-below inputs, as an equality of named maps. In particular $\\lambda$ and $C_Q$ are invertible there.",
+   "uses": [
+    "lem-sp-proper-open-coefficient-mate",
+    "lem-weil-pbc-transport-identifies-exchange",
+    "lem-sf-open-comparison-unit-normalization",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "more-etale.tex Tag 0F7B (lemma-shriek-proper-and-open); proetale.tex Tags 099R (section-comparison) and 09AF (lemma-jshriek-comparison): canonical site transport and open-unit normalization."
+   }
+  },
+  {
+   "text": "We now identify this open-normalized map with the proper mate in the question. Let $u_i:1\\to K_iI$ be the other open unit and let $s:K_bP\\xrightarrow{\\sim}QK_i$ be the canonical pullback square comparison. The normalization of $\\delta:PI\\to JQ$ from [lem-trf-open-square-exchange] means\n$$K_b(\\delta_M)=u_{b,QM}\\circ Q(u_{i,M}^{-1})\\circ s_{IM}.$$\nConsequently $K_b(\\delta^{-1}_M)u_{b,QM}=s_{IM}^{-1}Q(u_{i,M})$. Using the explicit mate formula [def-weil-pbc-adjunction-mate], the mate of $\\delta^{-1}:JQ\\to PI$ under the two open adjunctions is\n$$K_bP(\\varepsilon_{i,H})\\circ K_b(\\delta^{-1}_{K_iH})\\circ u_{b,QK_iH}.$$\nSubstitute the preceding identity at $K_iH$, and use naturality of $s^{-1}$. This becomes $s_H^{-1}\\circ QK_i(\\varepsilon_{i,H})\\circ Q(u_{i,K_iH})=s_H^{-1}$ by the open triangle identity [prop-weil-open-closed-recollement-adjunctions]. This calculation fixes which inverse of the pullback square occurs.",
+   "uses": [
+    "lem-trf-open-square-exchange",
+    "def-weil-pbc-adjunction-mate",
+    "prop-weil-open-closed-recollement-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6 (lemma-shriek-base-change), open normalization; the pro-etale normalization is the main-20261015 lem-trf-open-square-exchange.proof.md. Explicit mate computation for the proper/open map of more-etale.tex Tag 0F7B."
+   }
+  },
+  {
+   "text": "Take a further mate of $s^{-1}:QK_i\\to K_bP$ under $P\\dashv R$, $Q\\dashv T$. It is exactly $E:K_iR\\to TK_b$ by [def-weil-pbc-adjunction-mate], since $s^{-1}$ is the canonical square pullback identification. The iterated-mate equality [lem-trf-iterated-square-mates] says that $E$ is the conjugate of $\\delta^{-1}$ for the composite adjunctions $PI\\dashv K_iR$ and $JQ\\dashv TK_b$. By [def-weil-pbc-adjunction-conjugate], the conjugate of $\\delta$ is therefore $E^{-1}$. This uses invertibility of a conjugate between composite adjoints, not invertibility of an arbitrary square mate.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-trf-iterated-square-mates",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Mathlib/CategoryTheory/Adjunction/Mates.lean, iterated_mateEquiv_conjugateEquiv, lines 438--467"
+   }
+  },
+  {
+   "text": "Take the mates in the opposite order. Under $Q\\dashv T$, $P\\dashv R$, the proper mate of $\\delta$ is, by [def-weil-pbc-adjunction-mate],\n$$G=(RJ\\varepsilon_r)\\circ(R\\delta_T)\\circ\\eta_{p,IT}:IT\\longrightarrow RJ,$$\nwhich is exactly the specified $\\Gamma_Q$. Under the two open adjunctions its further mate is the conjugate of $\\delta$, hence $E^{-1}:TK_b\\to K_iR$, by [lem-trf-iterated-square-mates] and Step 7. Apply [lem-pur-mate-unit-compatibility] to this second mate. For every $N$ on $V$ it gives\n$$K_i(G_N)\\circ u_{i,TN}=E^{-1}_{JN}\\circ T(u_{b,N}).$$\nThe left side is the $I\\dashv K_i$ transpose of $G_N$. The right side is $\\lambda_N^{-1}$ by the definition in Step 5. Therefore $G$ and $C_Q$ have the same open transpose.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-trf-iterated-square-mates",
+    "lem-pur-mate-unit-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65 (lemma-transformation-between-functors-and-adjoints); Mathlib/CategoryTheory/Adjunction/Mates.lean, unit_mateEquiv (lines 136–138) and iterated_mateEquiv_conjugateEquiv (lines 438–467), for the unit equation and the two iterated mate orders."
+   }
+  },
+  {
+   "text": "Injectivity of the open-adjunction Hom bijection [prop-weil-open-closed-recollement-adjunctions] now gives $\\Gamma_Q=C_Q$ on the witnessed bounded-below category. Every formula used in Steps 5--8 is natural in $N$, so this is equality of natural transformations. In particular the transported canonical etale proper/open arrow, whose normalization Step 5 fixes, is precisely the proper mate of $\\delta$ appearing in the statement.",
+   "uses": [
+    "prop-weil-open-closed-recollement-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, canonical proper/open arrow: comparison of its two adjunct descriptions"
+   }
+  },
+  {
+   "text": "Compute the named compact-support composition on the supplied tower by expanding its construction, rather than invoking an unspecified isomorphism. The four-line computation in Tag 0F7J runs, in the forward direction, from $Rq_*i_!Rr_*c_!$ first by $Rq_*C_Qc_!$ to $Rq_*Rp_*b_!c_!$, then by the open compositor $\\kappa$ of Step 3 and the ordinary direct-image compositor of Step 4 to $R(qp)_*a_!$. The etale arrow used here is the one of [lem-cbc-proper-open-interchange-coherence]: on a K-injective representative $H$ and a resolution $b_!^eH\\to I_H$ it is $i_!^er_*^eH\\cong p_*^eb_!^eH\\to p_*^eI_H$. This is the identical representative specifying [lem-amb-unbounded-proper-open-interchange], so its transport is exactly the $C_Q$ of Step 5. This spells out the defining construction of the named $\\alpha$ of [thm-sf-comp-composition]; that theorem supplies its preservation of the witnessed class and choice independence, not a new tower-formula assertion. Substituting $C_Q=\\Gamma_Q$ from Step 9 gives the displayed two-arrow map, with every factor specified.",
+   "uses": [
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-amb-unbounded-proper-open-interchange",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), first four-line computation, together with Tag 0F7B, K-injective representative of its interchange; thm-sf-comp-composition.proof.md, Construction"
+   }
+  },
+  {
+   "text": "For arbitrary chosen compactifications let $t_f:F_f\\xrightarrow{\\sim}Rr_*c_!$, $t_g:F_g\\xrightarrow{\\sim}Rq_*i_!$, $t_{gf}:F_{gf}\\xrightarrow{\\sim}R(qp)_*a_!$ be the specified comparisons [prop-compactification-coherence-detailed]. If $M_Q$ is the map computed in Step 10, the construction and independence clause of [thm-sf-comp-composition] gives\n$$\\alpha_{g,f}=t_{gf}^{-1}\\circ M_Q\\circ(t_g\\star t_f).$$\nHere $\\star$ is horizontal composition of natural transformations. The cocycle clause of the coherence proposition cancels comparisons through a common refinement, so this equation uses those comparisons for every choice. Finally, when viewing the proper factor $r$ as compact support, its model is $(\\mathrm{id}_V,r)$: the candidate definition [def-compact-support-direct-image-detailed] gives $Rr_*\\mathrm{id}_!\\simeq Rr_*$. The isomorphism $\\mathrm{id}_!\\simeq\\mathrm{id}$ is the unique adjunction comparison of Step 3 for an identity open. Hence the occurrence of $Rr_*$ above is the specified proper identification, with no free choice of a proper-coincidence automorphism.",
+   "uses": [
+    "prop-compactification-coherence-detailed",
+    "thm-sf-comp-composition",
+    "def-compact-support-direct-image-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, independence from compactifications; identity-open proper models"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "def-sf-etale-origin-subcategory",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-compact-support-direct-image-detailed",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-derived-direct-image-composition",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-cbc-sieve-module-sheaves-grothendieck",
+  "lem-sp-proper-open-coefficient-mate",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-trf-open-square-exchange",
+  "def-weil-pbc-adjunction-mate",
+  "lem-trf-iterated-square-mates",
+  "lem-pur-mate-unit-compatibility",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-amb-unbounded-proper-open-interchange",
+  "thm-sf-comp-composition",
+  "prop-compactification-coherence-detailed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J (lemma-shriek-composition), first computation; explicit pro-etale mate normalization supplied by the agent using the existing site-transport and categorical mate nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -83,10 +273,59 @@
    "results": "{\"t\": \"2026-10-17T11:33:25Z\", \"tool\": \"leanfinder\", \"query\": \"derived sheaf direct image with compact support computed by a triangle of compactifications and proper open interchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforward\", \"TopCat.Sheaf.pushforward\", \"CategoryTheory.Functor.sheafPushforwardContinuous\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'\", \"SheafOfModules.pushforwardNatIso\"], \"digest\": \"124ae8142233b012\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits concern ordinary sheaf pushforward, abstract mates, or compactly supported functions, not the normalized derived compact-support tower formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image with compact support composition on a compatible compactification tower, with proper open exchange normalized as the mate of open pullback extension by zero",
+   "results": "{\"t\": \"2026-10-17T14:12:19Z\", \"tool\": \"leanfinder\", \"query\": \"Derived direct image with compact support composition on a compatible compactification tower, with proper open exchange normalized as the mate of open pullback extension by zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompactlySupportedContinuousMap.compLinearMap\", \"CompactlySupportedContinuousMap.comp\", \"CompactlySupportedContinuousMap.compLeft\", \"CompactlySupportedContinuousMap.compAddMonoidHom\", \"OnePoint.map_comp\", \"TopCat.Presheaf.Pushforward.comp_eq\", \"TopCat.Presheaf.Pushforward.comp\", \"CategoryTheory.ExponentiableMorphism.comp_pushforward\"], \"digest\": \"15583071ad29e5f9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary pushforward, abstract mates, or compactly supported functions; none states this pro-etale compactification-tower equality"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactSupport|proper.*open",
+   "results": "{\"t\": \"2026-10-17T14:12:21Z\", \"tool\": \"grep\", \"query\": \"lowerShriek|compactSupport|proper.*open\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary pushforward, abstract mates, or compactly supported functions; none states this pro-etale compactification-tower equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of derived sheaf direct image with compact support computed using compatible compactifications",
+   "results": "{\"t\": \"2026-10-17T14:12:21Z\", \"tool\": \"leansearch\", \"query\": \"composition of derived sheaf direct image with compact support computed using compatible compactifications\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactSupport.comp_isClosedEmbedding\", \"SheafOfModules.pushforwardComp\", \"HasCompactSupport.comp_homeomorph\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp\", \"AlgebraicGeometry.SheafedSpace.comp_hom_c_app'\", \"AlgebraicGeometry.SheafedSpace.comp_hom_c_app\", \"CategoryTheory.Sheaf.comp_val\"], \"digest\": \"66687f60bd424583\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary pushforward, abstract mates, or compactly supported functions; none states this pro-etale compactification-tower equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.TwoSquare",
+   "results": "{\"t\": \"2026-10-17T14:12:22Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.TwoSquare\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary pushforward, abstract mates, or compactly supported functions; none states this pro-etale compactification-tower equality"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactSupport|compact_support|proper.*open",
+   "results": "{\"t\": \"2026-10-17T14:13:04Z\", \"tool\": \"grep\", \"query\": \"shriek|compactSupport|compact_support|proper.*open\", \"sub\": \"Mathlib/AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary pushforward, abstract mates, or compactly supported functions; none states this pro-etale compactification-tower equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a canonical natural transformation for composition of sheaf pushforward with proper support via open extension and proper pushforward",
+   "results": "{\"t\": \"2026-10-17T14:13:05Z\", \"tool\": \"leansearch\", \"query\": \"a canonical natural transformation for composition of sheaf pushforward with proper support via open extension and proper pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExponentiableMorphism.pushforwardComp\", \"SheafOfModules.pushforwardNatTrans\", \"PresheafOfModules.pushforwardComp\", \"TopCat.Presheaf.Pushforward.comp\", \"TopCat.Presheaf.toSheafify\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforwardNatTrans_app_val_app\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'\"], \"digest\": \"8f662b23e1f8efe1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary pushforward, abstract mates, or compactly supported functions; none states this pro-etale compactification-tower equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition comparison for derived functors Rp_* j_! from a triangle of scheme compactifications and Beck Chevalley exchange",
+   "results": "{\"t\": \"2026-10-17T14:13:15Z\", \"tool\": \"leanfinder\", \"query\": \"composition comparison for derived functors Rp_* j_! from a triangle of scheme compactifications and Beck Chevalley exchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val\"], \"digest\": \"3ec49533e9bec393\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary pushforward, abstract mates, or compactly supported functions; none states this pro-etale compactification-tower equality"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-compact-composition-proper-square-normalization",
@@ -106,5 +345,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-compact-composition-tower-formula",
+  "worker": "stage1",
+  "summary": "Expanded the supplied compactification tower and calculated its proper/open map through both iterated mate orders. Reused existing site-transport, unit-normalization, derived-composition and mate lemmas; no new nodes. Kept the statement unchanged and proved equality of the specified natural transformations, on the bounded-below etale-origin domain.",
+  "blueprint": "Serves Step 6, final paragraph, of prop-trf-trace-additivity-open-closed via the two existing normalization ancestors. Implements the compactification-tower computation in thm-sf-comp-composition, Construction, with the open-square exchange normalization of the current main-20261015 blueprint. Does not replace the filtered-origin additivity route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic input to the compactification-tower calculation: Comparison of extension by zero with the site morphism. No statement in sk-i-global-additivity supplies this tool; the filtered-origin trace route is unchanged."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic input to the compactification-tower calculation: The comparison pullback is exact on sheaves of modules and commutes with cohomology sheaves. No statement in sk-i-global-additivity supplies this tool; the filtered-origin trace route is unchanged."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-exact",
+    "why": "Generic input to the compactification-tower calculation: Exactness of extension by zero. No statement in sk-i-global-additivity supplies this tool; the filtered-origin trace route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic input to the compactification-tower calculation: Extension by zero is exact (étale site). No statement in sk-i-global-additivity supplies this tool; the filtered-origin trace route is unchanged."
+   },
+   {
+    "node": "prop-weil-open-closed-recollement-adjunctions",
+    "why": "Generic input to the compactification-tower calculation: Adjunctions of the open-closed recollement. No statement in sk-i-global-additivity supplies this tool; the filtered-origin trace route is unchanged."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Generic input to the compactification-tower calculation: Composition of derived direct images. No statement in sk-i-global-additivity supplies this tool; the filtered-origin trace route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic input to the compactification-tower calculation: Composition of derived pro-etale module pullbacks. No statement in sk-i-global-additivity supplies this tool; the filtered-origin trace route is unchanged."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic input to the compactification-tower calculation: Derived composition preserves the specified adjunction normalization. No statement in sk-i-global-additivity supplies this tool; the filtered-origin trace route is unchanged."
+   },
+   {
+    "node": "lem-sp-proper-open-coefficient-mate",
+    "why": "Generic input to the compactification-tower calculation: Coefficient and site squares for cartesian proper/open interchange. No statement in sk-i-global-additivity supplies this tool; the filtered-origin trace route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-transport-identifies-exchange",
+    "why": "Generic input to the compactification-tower calculation: Transport identifies the exchange map. No statement in sk-i-global-additivity supplies this tool; the filtered-origin trace route is unchanged."
+   },
+   {
+    "node": "lem-sf-open-comparison-unit-normalization",
+    "why": "Generic input to the compactification-tower calculation: Unit normalization of the etale/pro-etale open-extension comparison. No statement in sk-i-global-additivity supplies this tool; the filtered-origin trace route is unchanged."
+   },
+   {
+    "node": "lem-trf-open-square-exchange",
+    "why": "Generic input to the compactification-tower calculation: Open-square exchange from restriction of direct image. No statement in sk-i-global-additivity supplies this tool; the filtered-origin trace route is unchanged."
+   },
+   {
+    "node": "lem-cbc-proper-open-interchange-coherence",
+    "why": "Generic input to the compactification-tower calculation: Proper/open interchange and its base-change and composition equations. No statement in sk-i-global-additivity supplies this tool; the filtered-origin trace route is unchanged."
+   },
+   {
+    "node": "lem-amb-unbounded-proper-open-interchange",
+    "why": "Generic input to the compactification-tower calculation: Unbounded torsion-coefficient proper/open interchange with its canonical maps. No statement in sk-i-global-additivity supplies this tool; the filtered-origin trace route is unchanged."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic input to the compactification-tower calculation: The composition law for $Rf_!$. No statement in sk-i-global-additivity supplies this tool; the filtered-origin trace route is unchanged."
+   },
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "Generic input to the compactification-tower calculation: Compactification coherence. No statement in sk-i-global-additivity supplies this tool; the filtered-origin trace route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-sp-proper-open-coefficient-mate",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-trf-open-square-exchange",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-amb-unbounded-proper-open-interchange",
+  "thm-sf-comp-composition",
+  "prop-compactification-coherence-detailed"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q49-ababa4c93",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q49-ababa4c93 (reviewer sub-agent of L); spot-checked: Read the full item, all 36 cited-node statements, report, route, and source passages. All 11 mathematical steps pass, including mate directions, finite constant coefficients, witnessed domain, and edge cases. Corrected three source-location records in Steps 5, 6, and 8. Whole corrected JSON is under fixes/dag/nodes; concrete checks and accepted tool_uses are in review.md. No statement changes or new nodes.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -3,48 +3,158 @@
  "blueprint": {
   "is": "lem-zl-affine-curve-hc2-purity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Purity of the top affine-curve factor",
- "statement": "Let $C_0$ be a smooth affine curve and let $\\mathcal E$ be lisse and\npunctually $\\iota$-pure of weight zero. Every nonzero Frobenius\neigenvalue on $H_c^2(C,\\mathcal E)$ has weight two.",
+ "statement": "Let $C_0$ be a smooth affine curve over $k_0=\\mathbf F_q$ (an affine\n$k_0$-scheme, smooth of relative dimension one) and let $\\mathcal E$ be\na lisse Weil sheaf on $C_0$, punctually $\\iota$-pure of weight zero.\nThen $H_c^2(C,\\mathcal E)$ is $\\iota$-pure of weight two over $k_0$:\nevery Frobenius eigenvalue on it has $\\iota$-modulus $q$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-affine-curve-hc2-purity.md",
   "place": "node lem-zl-affine-curve-hc2-purity, order 2840"
  },
  "stmt_deps": [
-  "def-weil-ordinary-compact-cohomology"
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-frobenius-module-weights",
+  "def-weil-punctual-weights",
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-finite-field-fiber",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms"
  ],
  "proof": [
   {
-   "text": "First assume that $C_0$ is geometrically connected. Then\n[lem-a1-affine-hc2-pure], applied with $w=0$, shows that\n$H_c^2(C,\\mathcal E)$ is $\\iota$-pure of weight two in\n[def-weil-frobenius-module-weights]: every Frobenius eigenvalue on it\nhas $\\iota$-modulus $q$.",
+   "text": "If $C_0$ is geometrically connected, apply [lem-a1-affine-hc2-pure] with $w=0$. Its hypotheses are precisely smoothness, affineness, geometric connectedness, lissity and punctual purity of weight zero. It gives purity of $H_c^2$ of weight $0+2=2$; [def-weil-frobenius-module-weights] says exactly that every Frobenius eigenvalue has $\\iota$-modulus $q$.",
    "uses": [
     "lem-a1-affine-hc2-pure",
     "def-weil-frobenius-module-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-affine-curve-hc2-purity.proof.md",
+    "place": "First paragraph: the connected case"
+   }
   },
   {
-   "text": "For a general smooth affine curve, choose a finite extension\n$\\mathbf F_{q^e}/\\mathbf F_q$ over which all its finitely many\ngeometric connected components are defined. This is possible because\neach open and closed component is specified by an idempotent in its\naffine coordinate ring after base change to $\\overline{\\mathbf F}_q$,\nand the finitely many coefficients of these idempotents lie in a\nfinite extension. Over $\\mathbf F_{q^e}$ the curve is a finite\ndisjoint union of geometrically connected smooth affine curves.\nThe restricted sheaves remain punctually pure of weight zero:\nif a closed point $z$ of the base change maps to $x\\in C_0$,\nthe Frobenius on its stalk is $F_x^{[\\kappa(z):\\kappa(x)]}$.\nEvery eigenvalue is therefore a positive integral power of an\neigenvalue of $F_x$, and still has modulus one, as required by\n[def-weil-punctual-weights]. Apply the preceding argument to\neach component and take the direct sum of their compactly supported\ncohomology. Every eigenvalue of $F^e$ on this sum has modulus\n$q^e$. If $\\lambda$ is an eigenvalue of $F$, then\n$\\lambda^e$ is an eigenvalue of $F^e$, so\n$\\lvert\\iota(\\lambda)\\rvert^e=q^e$, and\n$\\lvert\\iota(\\lambda)\\rvert=q$. The empty curve has zero\ncohomology, so its assertion is vacuous.",
+   "text": "Apply [lem-zl-affine-geometric-components-finite-extension] to $C_0$. Choose $e\\geq1$ and write $C_{0,e}=C_0\\times_{k_0}\\mathbf F_{q^e}=\\coprod_{i\\in I}C_{i,e}$. Each $C_{i,e}$ is nonempty, smooth of relative dimension one, affine and geometrically connected over $\\mathbf F_{q^e}$. Put $C_i=C_{i,e}\\times_{\\mathbf F_{q^e}}k$. Thus $C=\\coprod_iC_i$, and $q^e$-Frobenius preserves every $C_i$.",
    "uses": [
+    "lem-zl-affine-geometric-components-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-affine-curve-hc2-purity.proof.md",
+    "place": "Second paragraph, first four sentences: descent of the geometric components"
+   }
+  },
+  {
+   "text": "Use [lem-zl-weil-constant-extension-frobenius] with $X_0=C_0$ and $\\mathcal F=\\mathcal E$. The resulting $\\mathcal E^{(e)}$ is lisse and punctually pure of weight zero over $\\mathbf F_{q^e}$, and its cohomological Frobenius is $F^e$ on the original coefficient space. Restrict it to $C_{i,e}$, obtaining $\\mathcal E_i$. Lissity is local, as in [def-pod-lisse-l-adic-sheaves]. Each closed point of the open and closed subscheme $C_{i,e}$ is the same closed point of $C_{0,e}$ with the same residue field and stalk operator, so [def-weil-punctual-weights] gives punctual purity of $\\mathcal E_i$ with the unchanged weight zero.",
+   "uses": [
+    "lem-zl-weil-constant-extension-frobenius",
+    "def-pod-lisse-l-adic-sheaves",
     "def-weil-punctual-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-affine-curve-hc2-purity.proof.md",
+    "place": "Second paragraph: preservation of punctual weight zero under the extension and restriction"
+   }
+  },
+  {
+   "text": "For each $i$, apply [lem-a1-affine-hc2-pure] over the finite base field $\\mathbf F_{q^e}$, with $w=0$ and with the smooth geometrically connected affine curve $C_{i,e}$ and sheaf $\\mathcal E_i$ from steps 2 and 3. It gives purity of $H_c^2(C_i,\\mathcal E_i)$ of weight two. Thus every eigenvalue of its $q^e$-Frobenius has modulus $(q^e)^{2/2}=q^e$ by [def-weil-frobenius-module-weights].",
+   "uses": [
+    "lem-a1-affine-hc2-pure",
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-affine-curve-hc2-purity.proof.md",
+    "place": "Second paragraph: apply the connected argument to each component"
+   }
+  },
+  {
+   "text": "Here is the direct-sum identification used in the blueprint. Write $a:C\\to s=\\operatorname{Spec}k$, $j_i:C_i\\hookrightarrow C$, and $a_i=aj_i$. The coefficient-category equivalence in [lem-pur-finite-clopen-derived-decomposition] and the exceptional restriction comparisons in [lem-pur-finite-clopen-exceptional-restriction], together with the constructible exceptional adjunction in [prop-functor-package], give, naturally in $L$,\n$$\\operatorname{Hom}(Ra_!\\mathcal E^{(e)},L)=\\operatorname{Hom}(\\mathcal E^{(e)},Ra^!L)=\\prod_i\\operatorname{Hom}(\\mathcal E_i,Ra_i^!L)=\\prod_i\\operatorname{Hom}(Ra_{i!}\\mathcal E_i,L).$$\nThe final expression is the universal property of $\\bigoplus_iRa_{i!}\\mathcal E_i$, so these objects are canonically isomorphic. Evaluate at $s$ and take degree-two cohomology as in [def-weil-ordinary-compact-cohomology]:\n$$H_c^2(C,\\mathcal E^{(e)})\\simeq\\bigoplus_iH_c^2(C_i,\\mathcal E_i).$$\nAll component inclusions are defined over $\\mathbf F_{q^e}$. Equivariance of adjunction and composition comparisons in [lem-fix-weil-operations] makes this isomorphism $q^e$-Frobenius equivariant. The empty-family clause of the clopen equivalence gives zero cohomology for $C=\\varnothing$. All exceptional adjunctions here are on the stated bounded constructible field-coefficient categories; no unrestricted ambient adjoint is used.",
+   "uses": [
+    "lem-pur-finite-clopen-derived-decomposition",
+    "lem-pur-finite-clopen-exceptional-restriction",
+    "prop-functor-package",
+    "def-weil-ordinary-compact-cohomology",
+    "lem-fix-weil-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-affine-curve-hc2-purity.proof.md",
+    "place": "Second paragraph: take the direct sum of compactly supported cohomology; empty curve"
+   }
+  },
+  {
+   "text": "Let $v\\ne0$ be an eigenvector of $F$ on $H_c^2(C,\\mathcal E)$ with eigenvalue $\\lambda$. Iterating $Fv=\\lambda v$ gives $F^ev=\\lambda^ev$. Under the Frobenius-equivariant direct sum of step 5, at least one component $v_i$ is nonzero and satisfies $F_i v_i=\\lambda^ev_i$. Step 4 gives $|\\iota(\\lambda^e)|=q^e$. Multiplicativity yields $|\\iota(\\lambda)|^e=q^e$; since $e\\geq1$, $q>0$ and $|\\iota(\\lambda)|\\geq0$, strict increase of the positive integral power implies $|\\iota(\\lambda)|=q$. This is exactly weight two by [def-weil-frobenius-module-weights]. If the coefficient space is zero there is no nonzero eigenvector and the assertion is vacuous. This calculation needs neither diagonalizability nor any assertion that $F$ itself fixes each component.",
+   "uses": [
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-affine-curve-hc2-purity.proof.md",
+    "place": "Second paragraph, final four sentences: descent of the equality of weights"
+   }
   }
  ],
  "proof_deps": [
   "lem-a1-affine-hc2-pure",
   "def-weil-frobenius-module-weights",
-  "def-weil-punctual-weights"
+  "lem-zl-affine-geometric-components-finite-extension",
+  "lem-zl-weil-constant-extension-frobenius",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-punctual-weights",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-pur-finite-clopen-exceptional-restriction",
+  "prop-functor-package",
+  "def-weil-ordinary-compact-cohomology",
+  "lem-fix-weil-operations"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-affine-curve-hc2-purity.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-affine-curve-hc2-purity.proof.md",
+  "place": "First paragraph and second paragraph, with the finite-clopen direct sum expanded by constructible adjunction"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactlySupportedCohomology|IsPunctuallyPureOfWeight|IsPureOfWeightOver",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"cohomology\"",
+   "results": "AlgebraicGeometry.Scheme.EllAdicCohomology; AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology; AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The top compactly supported cohomology of a smooth affine curve with a lisse punctually pure weight zero Weil sheaf is pure of weight two",
+   "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; CategoryTheory.Sheaf.H; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.Sheaf.instAddCommGroupH; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; groupCohomology.H1ofAutOnUnitsUnique",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The top compactly supported cohomology of a smooth affine curve with a lisse pure Weil sheaf is pure of weight two",
+   "results": "AlgebraicGeometry.Scheme.compactSpace_of_isAffine; AlgebraicGeometry.instQuasiCompactOfIsAffineHom; WeierstrassCurve.Affine.degree_polynomial; WeierstrassCurve.leadingCoeff_preΨ₄; WeierstrassCurve.b₄_of_isCharTwoJEqZeroNF_of_char_two; WeierstrassCurve.c₄_of_isCharTwoJEqZeroNF_of_char_two; LightProfinite.hasSheafify_type; WeierstrassCurve.Affine.CoordinateRing.basis",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weights of Frobenius eigenvalues on degree two compact support etale cohomology of affine curves",
+   "results": "FunctionField.classNumber; arithFrobAt; WittVector.StandardOneDimIsocrystal; IsArithFrobAt.arithFrobAt; WittVector.frobeniusRotationCoeff; WittVector.isocrystal_classification; IsArithFrobAt.exists_of_isInvariant; WittVector.instIsocrystalStandardOneDimIsocrystal",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -205,5 +315,44 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-zl-affine-curve-hc2-purity",
+  "worker": "stage1",
+  "summary": "Followed the main-20261015 statement and two-paragraph proof. Retained the connected endpoint lemma and isolated geometric component descent and finite-constant-extension Frobenius comparison. Derived the clopen cohomology sum from existing constructible-category statements; expanded the final eigenvector argument, including empty and zero cases. The current Lean theorem has sorry; the older audit is stale.",
+  "blueprint": "Proof paragraph 1 is step 1. Paragraph 2: component descent is step 2, restriction and local purity step 3, endpoint application step 4, direct sum and empty curve step 5, weight descent step 6.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-finite-clopen-derived-decomposition",
+    "why": "Finite-clopen coefficient decomposition at the Qbar_l stage, needed to justify the componentwise cohomology argument; the unit has no such general tool."
+   },
+   {
+    "node": "lem-pur-finite-clopen-exceptional-restriction",
+    "why": "Componentwise exceptional restriction at field coefficients makes the compact-support direct sum follow from adjunction."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Only the constructible exceptional adjunction and its coherence are used to represent the finite direct sum."
+   },
+   {
+    "node": "lem-fix-weil-operations",
+    "why": "Equivariance of the adjunction and composition maps proves the clopen comparison is Frobenius equivariant."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-pur-finite-clopen-exceptional-restriction",
+  "prop-functor-package",
+  "lem-fix-weil-operations"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q130-2bdec0613",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q130-2bdec0613 (reviewer sub-agent of L); spot-checked: Mathematics and route are correct. The item has stale metadata `uses_not_cited: [\"def-weil-ordinary-compact-cohomology\"]` despite explicitly citing it in step 5. Corrected whole-node JSON is in fixes/dag/nodes/sec-deligne-laumon-general/lem-zl-affine-curve-hc2-purity.json; review.md records all checks.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -19,9 +19,105 @@
   "lem-trf-absolute-frobenius-site",
   "def-weil-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $b=am$, $F=\\operatorname{Fr}_Y^{(q^m)}=F_Y^b$, $P=\\Phi_Y^m$ and $G=g_Y^m$. By [prop-trf-frobenius-factorization], $F=g_\\sigma^mP$; composing with the inverse $G$ gives $P=GF$. Use the normalization in the statement of [lem-pur-frobenius-trivialization-pullback]: on sheaves the absolute-Frobenius comparison $\\tau:F^*\\xrightarrow{\\sim}\\mathrm{id}$ is adjoint to the direct-image identification induced by the relative Frobenius isomorphisms $r_V=(F_V^b,v):V\\xrightarrow{\\sim}V\\times_{Y,F}Y$. Thus the ordinary module pullback comparison is $\\theta_M=\\tau_{G^*M}\\circ c^{\\mathrm{sh}}_{F,G,M}:P^*M\\to G^*M$, where $c^{\\mathrm{sh}}$ is canonical module pullback composition. All these module pullbacks are exact by [def-weil-pbc-proetale-operations].",
+   "uses": [
+    "prop-trf-frobenius-factorization",
+    "lem-pur-frobenius-trivialization-pullback",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+    "place": "Step 1: identification of the functors and of the units"
+   }
+  },
+  {
+   "text": "The termwise comparison induced by $\\theta$ is precisely the specified $\\kappa_{m,Y}$. Indeed, choose a K-flat representative with flat terms using [lem-pc-kflat-resolution]. On that representative [lem-weil-pbc-proetale-derived-pullback-composition] identifies the specified derived composition map with the termwise ordinary module comparison. The statement of [lem-pur-frobenius-trivialization-pullback] specifies that its derived trivialization is induced termwise by the same relative-Frobenius sheaf trivialization, including the $b$-fold iterate. Therefore the two comparisons agree on every K-flat representative. Naturality along its quasi-isomorphism to the original complex, followed by [lem-weil-pbc-localization-universal-property](3), gives equality on the derived category.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pur-frobenius-trivialization-pullback",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+    "place": "Step 1: identification of the functors and of the units"
+   }
+  },
+  {
+   "text": "Write $d_H^{\\mathrm{sh}}:H^*A_Y\\to A_Y$ for the canonical module coefficient identification, for $H=F,G,P$. The right-adjoint identification used to define $\\tau$ sends a section on $V\\times_{Y,F}Y$ to its restriction along $r_V$. Its inverse therefore sends every constant section $a\\in A$ to the same constant section $a$. On $A_Y$ this inverse equals the structure map $A_Y\\to F_*A_Y$ of [prop-weil-pbc-proetale-constant-ring-map]: the two agree on the constant presheaf, hence agree after sheafification by [def-weil-pbc-sheafification]. Taking adjuncts, using the characterization of the canonical adjoint comparison in [lem-weil-pbc-conjugate-iso-unit-equation], gives $\\tau_{A_Y}=d_F^{\\mathrm{sh}}$. In particular the comparison fixes $1$; it is not chosen only up to a scalar.",
+   "uses": [
+    "lem-pur-frobenius-trivialization-pullback",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F6W (lemma-relative-frobenius-weakly-etale), with the adjoint normalization specified in lem-pur-frobenius-trivialization-pullback"
+   }
+  },
+  {
+   "text": "The coefficient identification for $P=GF$ is $d_P^{\\mathrm{sh}}=d_F^{\\mathrm{sh}}\\circ F^*(d_G^{\\mathrm{sh}})\\circ c^{\\mathrm{sh}}_{F,G,A_Y}$. To check the normalization of this formula, the adjunct of either side sends $a\\in A$ to the constant section $a$ after the two base changes: this is exactly the definition of the coefficient structure map in [prop-weil-pbc-proetale-constant-ring-map], and sheafification uniqueness gives equality. Naturality of $\\tau$ for $d_G^{\\mathrm{sh}}$ now gives\n$$d_G^{\\mathrm{sh}}\\circ\\theta_{A_Y}=\\tau_{A_Y}\\circ F^*(d_G^{\\mathrm{sh}})\\circ c^{\\mathrm{sh}}_{F,G,A_Y}=d_P^{\\mathrm{sh}}.$$\nApply this equality termwise to the coefficient complex in degree zero. Step 2 identifies the resulting comparison with $\\kappa$, proving $d_g\\circ\\kappa_{m,Y,A_Y}=d_\\Phi$.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+    "place": "Step 1: identification of the functors and of the units"
+   }
+  },
+  {
+   "text": "For an $A_Y$-module sheaf $N$, write $e_{H,N}:\\Gamma(Y,N)\\to\\Gamma(Y,H^*N)$ for the adjunction section map. A global section $s$ is the module map $\\widetilde s:A_Y\\to N$ sending $1$ to $s$ (its inverse sends a module map to the image of $1$). The module adjunction of [def-weil-pbc-proetale-operations], with the coefficient map normalized as in [prop-weil-pbc-proetale-constant-ring-map], identifies $e_{H,N}(s)$ with $H^*(\\widetilde s)\\circ(d_H^{\\mathrm{sh}})^{-1}$. Explicitly this is the adjoint of the unit applied to $\\widetilde s$, evaluated on the constant section $1$ of the terminal base change. Naturality of $\\theta$ and step 4 therefore give\n$$\\theta_N\\circ P^*(\\widetilde s)\\circ(d_P^{\\mathrm{sh}})^{-1}=G^*(\\widetilde s)\\circ\\theta_{A_Y}\\circ(d_P^{\\mathrm{sh}})^{-1}=G^*(\\widetilde s)\\circ(d_G^{\\mathrm{sh}})^{-1}.$$\nHence $\\Gamma(Y,\\theta_N)\\circ e_{P,N}=e_{G,N}$ as $A$-linear maps, not just on constant coefficients.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+    "place": "Step 1: identification of the functors and of the units"
+   }
+  },
+  {
+   "text": "Represent $M$ by a K-injective complex $I$ of $A_Y$-modules, and choose a K-injective resolution $j_G:G^*I\\to J$ using [prop-pur-kinjective-resolutions-exist] on the small pro-etale site. Put $j_P=j_G\\circ\\theta_I:P^*I\\to J$. Exact pullback in [def-weil-pbc-proetale-operations] means these termwise complexes represent $LP^*M$ and $LG^*M$; $j_P$ is a quasi-isomorphism because both factors are. Step 5 in every degree gives an equality of chain maps\n$$\\Gamma(Y,j_P)\\circ e_{P,I}=\\Gamma(Y,j_G)\\circ e_{G,I}:\\Gamma(Y,I)\\to\\Gamma(Y,J).$$\nApply [lem-trf-proetale-unit-leray-chain-formula] to $(P,I,J,j_P)$ and $(G,I,J,j_G)$. Its left side uses the identical source and target comparisons for both maps; its right side is the derived-unit definition of $\\rho$ followed respectively by $R\\Gamma(j_P)$ and $R\\Gamma(j_G)$. Since $j_P=j_G\\theta_I$, cancel the common isomorphism $R\\Gamma(j_G)$ to obtain $R\\Gamma(Y,\\kappa_{m,Y,M})\\circ\\rho_{P,M}=\\rho_{G,M}$ in $D(A)$, using step 2. These maps are natural in $M$ by naturality of the derived adjunction unit, the canonical section identification and $\\kappa$. Step 4 gives the required preservation of $1$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-pbc-proetale-operations",
+    "lem-trf-proetale-unit-leray-chain-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+    "place": "Step 1: identification of the functors and of the units"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-sheafification",
+  "lem-pc-kflat-resolution",
+  "lem-pur-frobenius-trivialization-pullback",
+  "lem-trf-proetale-unit-leray-chain-formula",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-trf-frobenius-factorization",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+  "place": "Step 1, reconstructed with the normalized relative-Frobenius trivialization and a chain-level computation of ordinary cohomology; the blueprint mate argument alone does not supply the constant-section normalization"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,10 +174,24 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullbackComparison\", \"LocallyConstant.comapₗ_apply_apply\", \"CategoryTheory.frobeniusMorphism_mate\", \"LocallyConstant.comapₗ\", \"SheafOfModules.pullback\", \"CategoryTheory.Limits.instIsIsoPullbackComparison\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"LocallyConstant.comapₐ\"], \"digest\": \"760e34cd3b52b61d\", \"sub\": \"\"}",
    "date": "2026-10-17",
    "verdict": "no match: generic adjunction, module-sheaf pullback or field Frobenius facts do not state the canonical derived pro-etale cohomology comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(frobenius|Frobenius).*(globalSections|cohomology)|(globalSections|cohomology).*(frobenius|Frobenius)",
+   "results": "{\"t\": \"2026-10-17T14:13:22Z\", \"tool\": \"grep\", \"query\": \"(frobenius|Frobenius).*(globalSections|cohomology)|(globalSections|cohomology).*(frobenius|Frobenius)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: field Frobenius and ordinary scheme module pullback results do not compare the canonical pro-etale derived cohomology maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical comparison from scheme Frobenius pullback to geometric Galois Frobenius pullback preserves constants and identifies ordinary derived cohomology pullback maps",
+   "results": "{\"t\": \"2026-10-17T14:13:32Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical comparison from scheme Frobenius pullback to geometric Galois Frobenius pullback preserves constants and identifies ordinary derived cohomology pullback maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"frobeniusEquiv_apply\", \"coe_frobeniusEquiv\", \"AlgebraicGeometry.Scheme.Modules.pullbackCongr\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\"], \"digest\": \"035456760525f26e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: field Frobenius and ordinary scheme module pullback results do not compare the canonical pro-etale derived cohomology maps"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-trf-graph-frobenius-operator",
@@ -98,5 +208,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-graph-frobenius-unit-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Specified the underived relative-Frobenius comparison, checked its constant-section normalization by its adjoint, proved the ordinary section-map equality by naturality on maps from A_Y, then passed through a common K-injective target to obtain the equality in D(A). One statement-only child records the general pro-etale module unit/Leray chain formula; the existing abelian-etale formula is not silently identified with it.",
+  "blueprint": "Realizes prop-trf-graph-frobenius-operator proof Step 1: identification of the functors and of the units, with explicit normalization on A_Y and ordinary derived section maps.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-frobenius-trivialization-pullback",
+    "why": "Specifies the relative-Frobenius normalization and termwise realization of the same absolute-Frobenius trivialization already required by the item; no trace-unit node specifies this underlying site construction."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic ringed-pro-etale comparison on K-flat representatives fixes the exact composition isomorphism in the statement."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic resolution existence checks equality with the prescribed derived composition comparison on K-flat representatives."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic localization uniqueness promotes agreement on representatives to equality of natural transformations."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic constant-ring structure map identifies the normalized module unit; the trace unit has no replacement for this coefficient construction."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic uniqueness of adjoint comparisons identifies the inverse-image trivialization on constants from its right-adjoint normalization."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic module-sheaf resolution theorem supplies a common target complex for the derived comparison."
+   },
+   {
+    "node": "prop-trf-frobenius-factorization",
+    "why": "The elementary scheme identity already specified in the item fixes the order of the two pullbacks; this follows the given Frobenius comparison route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-frobenius-trivialization-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-localization-universal-property",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-trf-frobenius-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q27-236bf22b9",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-236bf22b9 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, new node, DAG route, cited node statements, exact Stacks sources, hypotheses, edge cases, searches, duplicate candidates, coefficient normalization, and derived chain comparison. No repairs are needed; review.md records the checks."
  }
 }

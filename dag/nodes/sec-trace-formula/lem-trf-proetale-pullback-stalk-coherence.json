@@ -11,13 +11,94 @@
   "def-weil-pbc-proetale-operations",
   "def-weil-proetale-geometric-stalk",
   "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-proetale-derived-pullback-composition"
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-localization-universal-property"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the underlying abelian sheaf of an $A_S$-module $M$, [lem-pur-proetale-inverse-image-stalk] supplies the natural additive comparison $(t^{-1}M)_u\\cong M_{tu}$ with no extra hypothesis on $t$. To check its normalization, write $P=u_{t,p}M$ for the presheaf colimit in [def-weil-proetale-inverse-image]. By [lem-cbc-proetale-sheafification-geometric-stalk], $P_u\\to(P^\\#)_u=(t^{-1}M)_u$ is an isomorphism, so representatives may be computed before sheafification. The double-colimit calculation of Tag 0F4F sends $(U,u',V,\\theta,a)$ to $(V,\\operatorname{pr}_V\\theta u',a)$. It respects both restriction relations: restriction in $U$ precomposes $u'$, and restriction along $b:V\\to V'$ replaces the section by $M(b)(a')$ and the lift by $bw$. The reverse sends $(V,w,a)$ to $(T\\times_SV,(u,w),V,\\mathrm{id},a)$. The first composite is the identity; for the other composite, $\\theta:(U,u')\\to(T\\times_SV,(u,\\operatorname{pr}_V\\theta u'))$ is a pointed morphism and gives exactly the required colimit relation. These are the maps of the canonical comparison in Tag 05V1. Applying the same formulas to the module action preserves constant scalar sections. By [prop-weil-pbc-proetale-constant-ring-map] extension along the coefficient identification transports the action without changing the underlying sheaf, so the comparison for $t^*M$ is $A$-linear.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk",
+    "def-weil-proetale-inverse-image",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-pur-proetale-inverse-image-stalk",
+    "lem-cbc-proetale-sheafification-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 05V1 (lemma-point-morphism-sites) and 0F4F (lemma-point-functor), applied to the pro-etale base-change functor"
+   }
+  },
+  {
+   "text": "The representative formulas are natural in $M$: a sheaf map applies to the section $a$ and commutes with both displayed restrictions, while the pointed morphisms and their composites are unchanged. For the identity morphism the base-change functor, its pointed-neighbourhood category, and its unit section are the identity, so the same formula gives $c_{\\mathrm{id},u,M}=\\mathrm{id}_{M_u}$. The module and complex versions inherit this naturality term by term from the module stalk construction in [def-weil-proetale-geometric-stalk].",
+   "uses": [
+    "def-weil-proetale-geometric-stalk",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 05V1, naturality of the point-functor identification"
+   }
+  },
+  {
+   "text": "Let $h:Z\\to Y$ and $f:Y\\to X$ be composable. The direct constant-section identification for $fh$ agrees with the composite identifications: both send every constant $a$ to $a$, and maps out of the sheafification of the constant presheaf are determined by those sections, as in [def-weil-proetale-inverse-image]. Apply the representative formula of Step 1 first to the comparison for $h$ and then to the comparison for $f$. The two successive base-change objects are canonically identified with the single object $Z\\times_XV$ by the associativity and universal property of fibre products; under this identification both composites send a representative to the same germ $[V,\\operatorname{pr}_V\\theta u',a]$ at $fhv$. The comparison $\\chi_{h,f}$ of [lem-weil-pbc-proetale-derived-pullback-composition] is, on a K-flat complex with flat terms, the termwise canonical module-pullback map, so its stalk is precisely the reassociation used here. Therefore the displayed composition identity holds on representatives and is natural in $M$.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 05V1 and 0F4F, with the composition comparison of sites-cohomology Tag 0D6D"
+   }
+  },
+  {
+   "text": "For $\\alpha\\in\\operatorname{Aut}(\\Omega)$, precomposition by $\\operatorname{Spec}(\\alpha)$ sends a pointed neighbourhood $(V,w)$ of $u$ to $(V,w\\operatorname{Spec}(\\alpha))$ of $u\\operatorname{Spec}(\\alpha)$ and leaves the section unchanged. It preserves the pointed-morphism relation in the colimit, hence induces $r_{u,\\alpha,M}([V,w,a])=[V,w\\operatorname{Spec}(\\alpha),a]$. Precomposition by $\\alpha^{-1}$ is its inverse, and the same representative calculation proves $A$-linearity and naturality. Applying this reparametrization to the two sides of the Step 1 comparison gives the stated equality for $r$.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 05V1, point functor and its functoriality"
+   }
+  },
+  {
+   "text": "The inverse-image functors for the identified constant coefficient sheaves are exact and their derived pullbacks are the termwise functors by [def-weil-pbc-proetale-operations]. The abelian stalk functors are exact by [lem-cbc-proetale-classical-stalk]; hence their termwise functors preserve quasi-isomorphisms (their cohomology is the stalk of the cohomology sheaf). The same holds for fixed-$A$ module sheaves on forgetting the action. Apply Steps 1--4 in every degree of a representative complex: all maps commute with differentials by naturality, so the formulas are equalities of chain maps. The comparison in Step 3 is the normalized derived comparison of [lem-weil-pbc-proetale-derived-pullback-composition]. Since quasi-isomorphisms are inverted in the ordinary derived category, the localization universal property [lem-weil-pbc-localization-universal-property] carries these natural chain-map equalities to the asserted equalities for bounded derived complexes, with no choice of representative affecting them.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-cbc-proetale-classical-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, derived comparison on representatives and passage to the derived category"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-proetale-inverse-image",
+  "lem-cbc-proetale-classical-stalk",
+  "lem-cbc-proetale-sheafification-geometric-stalk",
+  "lem-pur-proetale-inverse-image-stalk",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 05V1 and 0F4F, with proetale.tex Tag 0993 for the classical point description"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-frobenius-conjugacy",
@@ -62,10 +143,54 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-frobenius-conjugacy",
-   "place": "Proof (2): canonical identification of the pro-etale stalk of a pullback with the stalk at the translated point, and transporting the iterated-Weil cocycle through those identifications; extracted from returned proof step 4.",
+   "place": "Proof (2): the standard colimit description of the pro-etale stalk functor composed with the stalk at the translated point, and the resulting canonical pullback-stalk identification and coherence",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-proetale-pullback-stalk-coherence",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against the Stacks point/stalk lemmas and the pro-etale inverse-image and derived-pullback definitions. Kept the statement, supplied the colimit representative proof of the canonical comparison, its identity and composition coherence, field-automorphism reparametrization, and the termwise derived passage. No new nodes were needed: every argument is directly from the cited definitions, the existing normalized composition comparison, and the localization universal property.",
+  "blueprint": "Realizes Proof (2) of lem-trf-local-frobenius-conjugacy: the canonical pro-etale stalk comparison at a translated point and its coherence with iterated pullbacks and reparametrizations.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Provides the normalized derived pullback comparison used to reassociate the two stalk computations."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Provides the generic passage from equal termwise chain maps to equal natural transformations after derived localization."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-stalk",
+    "why": "Generic underlying-sheaf pullback-stalk comparison in Step 1; the Frobenius unit does not supply this general sites theorem."
+   },
+   {
+    "node": "lem-cbc-proetale-sheafification-geometric-stalk",
+    "why": "Generic invariance of a presheaf stalk under sheafification in Step 1, needed for the prescribed representatives."
+   },
+   {
+    "node": "lem-cbc-proetale-classical-stalk",
+    "why": "Exactness of geometric stalks in Step 5, needed to descend their termwise functors through quasi-isomorphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pur-proetale-inverse-image-stalk",
+  "lem-cbc-proetale-sheafification-geometric-stalk",
+  "lem-cbc-proetale-classical-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q30-e069cbd8e",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-e069cbd8e (reviewer sub-agent of L); spot-checked: Read the item and cited mathematics in full. Repaired missing citations for stalk comparison/sheafification and stalk exactness, and removed the incorrect parent-equivalence reference. Checked Stacks 05V1, 0F4F, 00Y8, 0993 and 0D6D, coefficients, coherence and edge cases. Statement unchanged; corrected dependency closure is acyclic. Review and corrected JSON written.; 1 file(s) fixed by the reviewer"
  }
 }

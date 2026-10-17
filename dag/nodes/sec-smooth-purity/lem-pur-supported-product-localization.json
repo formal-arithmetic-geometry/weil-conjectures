@@ -73,7 +73,7 @@
    }
   },
   {
-   "text": "For $j:U\\hookrightarrow X$, set $E_0=S_{B\\cap C}$, $E_1=S_B$, and $E_2=j_!S_{B\\cap U}$, where the last support sheaf is formed on $U$. There is a coefficient sequence $0\\to E_2\\to E_1\\to E_0\\to0$: apply [lem-weil-pbc-open-closed-short-exact] to $E_1$ and the pair $(C,U)$. Its closed term is $S_{B\\cap C}$ and its open term is $j_!S_{B\\cap U}$. To check these identifications, a closed immersion is finite by [lem-weil-pbc-closed-immersion-finite], so [lemma-weil-pbc-finite-stalk-formula] and [lem-weil-pbc-constant-sheaf-geometric-stalk] identify $(S_Z)_{\\bar t}$ with $A$ on $Z$ and $0$ off $Z$. Pullback of these stalks is given by [lem-weil-pbc-global-sections-stalk-comparison]. The maps are restriction of constant sections, hence are the identity on the nonzero stalks. Stalk conservativity [lemma-weil-pbc-geometric-stalk-conservative] identifies the closed and open terms, the latter also by the counit and the defining extension-by-zero presheaf [def-weil-pbc-extension-by-zero]. Every $S_Z$ is flat: by [lem-pod-etale-stalk-tensor-scalar], tensoring has stalk either tensor with $A$ or tensor with $0$, and [prop-weil-pbc-geometric-stalks-exact] and stalk conservativity detect exactness. The open term $E_2$ is flat as well: at a point on $C$ the stalk of $E_1\\to E_0$ is the identity, and off $C$ its target is zero, so its kernel has stalk either $0$ or $A$. Consequently the $E_i$ and their bounded mapping cones are K-flat by [lem-kun-kflat-criteria]. On $P=X\\times_kY$ the sequence $p_X^*E_2\\otimes_Ap_Y^*S_D\\to p_X^*E_1\\otimes_Ap_Y^*S_D\\to p_X^*E_0\\otimes_Ap_Y^*S_D$ is short exact, using exact inverse image [prop-weil-pbc-inverse-image-modules-exact] and flatness. Multiplication of pulled-back constant sections identifies its terms with $j_{P!}S_{(B\\cap U)\\times_kD}$, $S_{B\\times_kD}$ and $S_{(B\\cap C)\\times_kD}$: on each geometric stalk this is $A\\otimes_A A\\to A$ on the indicated product support and the map between zero modules elsewhere. Thus this is the product coefficient sequence, including its specified maps.",
+   "text": "For $j:U\\hookrightarrow X$, set $E_0=S_{B\\cap C}$, $E_1=S_B$, $E_2=j_!S_{B\\cap U}$, where $S_Z=i_*A_Z$ for its closed immersion into its ambient scheme. Apply [lem-weil-pbc-open-closed-short-exact] to $S_B$ and $(C,U)$. This identifies its open and closed terms with $E_2$ and $E_0$. Here is the check of the identifications: a closed immersion is finite [lem-weil-pbc-closed-immersion-finite], so [lemma-weil-pbc-finite-stalk-formula] and [lem-weil-pbc-constant-sheaf-geometric-stalk] give stalk $A$ on the closed support and zero off it. Inverse-image stalks are [lem-weil-pbc-global-sections-stalk-comparison]. The restriction maps on nonzero constant stalks are the identity. The induced comparison maps are therefore isomorphisms by [lemma-weil-pbc-geometric-stalk-conservative]; for the open term use the presheaf construction [def-weil-pbc-extension-by-zero] and the counit specified by [lem-weil-pbc-extension-by-zero-adjunction]. Thus we have the specified short exact coefficient sequence $0\\to E_2\\to E_1\\to E_0\\to0$.",
    "uses": [
     "lem-weil-pbc-open-closed-short-exact",
     "lem-weil-pbc-closed-immersion-finite",
@@ -82,10 +82,7 @@
     "lem-weil-pbc-global-sections-stalk-comparison",
     "lemma-weil-pbc-geometric-stalk-conservative",
     "def-weil-pbc-extension-by-zero",
-    "lem-pod-etale-stalk-tensor-scalar",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-kun-kflat-criteria",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-weil-pbc-extension-by-zero-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -94,27 +91,47 @@
    }
   },
   {
-   "text": "The derived pairing may now be evaluated on this coefficient sequence, rather than on an unspecified completion of two squares. Write $\\mathsf H_T(E,H)=R\\operatorname{Hom}_T(E,H)$ for the global Hom complex defined in step 3. For a coefficient complex $E$ on $X$, pull back the evaluation maps $E\\otimes_A^L\\mathsf H_X(E,K)\\to K$ and $S_D\\otimes_A^L\\mathsf H_Y(S_D,L)\\to L$, and tensor them. Using [lem-kun-inverse-image-monoidal] and the exact module inverse image of [prop-weil-pbc-inverse-image-modules-exact], their adjoint is a pairing\n$$\\lambda_E:\\mathsf H_X(E,K)\\otimes_A^L\\mathsf H_Y(S_D,L)\\longrightarrow\\mathsf H_P(p_X^*E\\otimes_A^Lp_Y^*S_D,F).$$\nThe adjunction used here is the elementary Hom–tensor bijection on complexes: a map from an $A$-complex $Q$ to $\\operatorname{Hom}^{\\bullet}_X(E,I)$ is the same as a map $\\underline Q\\otimes_A E\\to I$, obtained by evaluation on each homogeneous tensor with the Koszul sign; its inverse curries that map. Taking a K-flat model of $Q$ and a K-injective model of $K$ gives this bijection after localization. For the flat bounded coefficient complexes and cones of step 4, [lem-pur-hom-kflat-into-kinjective] ensures that their sheaf Hom into a K-injective complex is itself K-injective, so its global sections represent the global derived Hom used here. This is the derived evaluation construction: on Hom complexes homogeneous maps $f,g$ act by $(e\\otimes d)\\mapsto(-1)^{\\deg(g)\\deg(e)}f(e)\\otimes g(d)$. Its compatibility with the Hom differential follows from $d(f)=d_Kf-(-1)^{\\deg f}f d_E$ [def-pur-hom-complex] and the tensor differential [def-kun-derived-tensor]. It is compatible with cones in the contravariant coefficient argument, including the last map: a cone has the two summands $E'\\oplus E[1]$ and differential with off-diagonal entry the coefficient map [def-weil-abstract-derived-category]; evaluation on either summand is the displayed formula, and its commutation with that off-diagonal entry is precisely precomposition naturality of $f$. Projection to the shifted summand gives the boundary square. This calculation descends to the derived pairing using the K-flat resolutions of [lem-pc-kflat-resolution], the model independence in [lem-pc-derived-tensor-second-factor-functor], and the K-injective Hom convention [def-pur-derived-internal-hom]; cone identifications are made before localization, so the third component is the specified derived evaluation map. Under step 3 and the coefficient identifications of step 4, $\\lambda_{E_0},\\lambda_{E_1},\\lambda_{E_2}$ are the three maps of [def-pur-supported-exterior-product]: evaluation at $1$ in each constant support sheaf sends the two supported sections to their pulled-back tensor. This identifies the maps themselves, not just their compositions after forgetting support.",
+   "text": "Every constant rank-one coefficient sheaf is flat, because tensoring with it is the identity. The closed-direct-image and open-extension clauses of [lem-sfb-open-closed-flatness], applied with the finite ring $A$ on the small etale sites, make $S_D,E_0,E_1,E_2$ flat. Their bounded complexes and cones are K-flat by [lem-kun-kflat-criteria]. On $P=X\\times_kY$ its terms identify with $j_{P!}S_{(B\\cap U)\\times_kD}$, $S_{B\\times_kD}$, and $S_{(B\\cap C)\\times_kD}$. To verify the maps as well as the objects, take the inverse of the coefficient comparison $\\theta$ specified in [def-pur-supported-exterior-product] with both module inputs $A$; for the open term extend its restriction by the open counit. By [lem-pod-etale-stalk-tensor-scalar] these comparisons on each geometric stalk are the multiplication $A\\otimes_A A\\to A$ when both support conditions hold and the map between zero modules otherwise. They are isomorphisms by [lemma-weil-pbc-geometric-stalk-conservative]. The coefficient sequence arrows restrict constants identically where nonzero, so the same comparisons identify the arrows with the product coefficient sequence arrows. Taking $B=X$ in this coefficient comparison identifies $p_Y^{-1}S_D$ with $S_{X\\times_kD}$, hence it too is flat by [lem-sfb-open-closed-flatness]. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact], followed by tensoring with this flat sheaf, therefore preserves the short exact sequence of step 4.",
    "uses": [
-    "lem-kun-inverse-image-monoidal",
+    "lem-sfb-open-closed-flatness",
+    "lem-kun-kflat-criteria",
     "prop-weil-pbc-inverse-image-modules-exact",
-    "def-pur-hom-complex",
-    "def-kun-derived-tensor",
-    "def-weil-abstract-derived-category",
-    "lem-pc-kflat-resolution",
-    "lem-pc-derived-tensor-second-factor-functor",
-    "def-pur-derived-internal-hom",
     "def-pur-supported-exterior-product",
-    "lem-pur-hom-kflat-into-kinjective"
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095L (lemma-ses-associated-to-open); Tag 04FX (lemma-stalk-pushforward-closed-immersion); coefficient support sequence and its external tensor product"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-external-rhom-cone-pairing] with $a=p_X$, $b=p_Y$, the bounded flat coefficient complexes $E_i$ of steps 4–5, and $H=S_D$. Its hypotheses hold: $K,L$ are bounded below by assumption, $F$ is bounded below by the explicit hypothesis of the item, and all coefficient complexes and their cones are bounded flat. Writing $\\mathsf H_T(E,H)=R\\operatorname{Hom}_T(E,H)$, its specified maps are\n$$\\lambda_{E_i,S_D}:\\mathsf H_X(E_i,K)\\otimes_A^L\\mathsf H_Y(S_D,L)\\to\\mathsf H_P(p_X^{-1}E_i\\otimes_A^Lp_Y^{-1}S_D,F).$$\nThe cited lemma states that all three evaluation maps form a morphism of the contravariant coefficient-Hom triangles, with their connecting maps; it supplies the resolution-independent cone comparison rather than merely a completion of two squares. The degreewise convention is $(f\\otimes g)(e\\otimes d)=(-1)^{\\deg(g)\\deg(e)}f(e)\\otimes g(d)$.",
+   "uses": [
+    "lem-pur-external-rhom-cone-pairing"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J7 (section-internal-hom), Tag 0A8X (section-hom-complexes), Tag 07A4 (lemma-pullback-tensor-product); derived evaluation and the explicit cone calculation"
+    "place": "Tag 08JC (lemma-RHom-triangulated); external evaluation cone refinement"
    }
   },
   {
-   "text": "Applying $\\operatorname{Hom}^{\\bullet}_X(-,I)$ to the coefficient sequence in step 4 gives the degreewise short exact sequence $0\\to\\Gamma_{B\\cap C}(X,I)\\to\\Gamma_B(X,I)\\to\\Gamma_{B\\cap U}(U,I|_U)\\to0$: step 3 identifies its first two complexes, and [lem-weil-pbc-extension-by-zero-adjunction] identifies the third. Restriction of $I$ to $U$ is injective by [lem-weil-pbc-etale-restriction-injectives], with $j$ etale by [lem-weil-pbc-open-immersion-etale]. Therefore [lem-weil-pbc-right-derived-plus-injective] identifies its third complex with the required derived sections. The product coefficient sequence gives exactly the corresponding product sequence by the same Hom-kernel identification of step 3, applied on $P$; its terms are those listed in step 4, with open ambient scheme $U\\times_kY$. By [lem-weil-pbc-complex-ses-triangle], these coefficient-Hom triangles have the actual connecting maps of [lem-pur-support-restriction-triangle]. Step 5 gives a morphism between these triangles after exact derived tensoring, so it proves the boundary square for the specified three exterior products. No claim that tensoring an arbitrary injective section complex is exact is needed: on complexes of ordinary $A$-modules one may resolve the fixed tensor factor by a K-flat complex with flat terms [lem-pc-kflat-resolution], and the direct-sum total tensor then preserves the degreewise short exact sequence, because every summand is tensor with a flat module.",
+   "text": "For $E_0,E_1$, step 3 identifies the Hom objects with supported sections, and step 5 identifies the product coefficient objects. These comparisons identify $\\lambda_{E_i,S_D}$ with the specified supported exterior product [def-pur-supported-exterior-product]. Indeed $S_Z\\otimes_A\\underline M=C_i(M)$: multiplication of constant sections is an isomorphism on the stalks computed in step 4 and commutes with the quotient maps $e_i$. The Hom adjunction of step 3 is normalized by precomposition with $e_i$, exactly as in the cited definition. Thus its evaluation counit is the definition's $\\epsilon_i$. Under these comparisons, the transpose defining $\\lambda$ is the composite $\\theta^L$ followed by the pulled-back $\\epsilon_i\\otimes\\epsilon_d$ defining $\\kappa$, since their precompositions with the coefficient quotient send $s\\otimes t$ to $p_X^*s\\otimes p_Y^*t$. Uniqueness of the quotient factorization and of the adjoint proves equality of these morphisms, and K-flat descent in the cited definition preserves that equality. For $E_2=j_!S_{B\\cap U}$ the same identification is made on $U$ and then transported by [lem-weil-pbc-extension-by-zero-adjunction]. Its product ambient is $U\\times_kY$, with precisely the comparison of [def-pur-supported-localization-comparisons]. This identifies the third specified map as well.",
+   "uses": [
+    "def-pur-supported-exterior-product",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "def-pur-supported-localization-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1E (remark-define-kunneth-map); comparison of the two evaluation normalizations"
+   }
+  },
+  {
+   "text": "Applying $\\operatorname{Hom}^{\\bullet}_X(-,I)$ to the coefficient sequence in steps 4–5 gives the degreewise short exact sequence $0\\to\\Gamma_{B\\cap C}(X,I)\\to\\Gamma_B(X,I)\\to\\Gamma_{B\\cap U}(U,I|_U)\\to0$: step 3 identifies its first two complexes, and [lem-weil-pbc-extension-by-zero-adjunction] identifies the third. Restriction of $I$ to $U$ is injective by [lem-weil-pbc-etale-restriction-injectives], with $j$ etale by [lem-weil-pbc-open-immersion-etale]. Therefore [lem-weil-pbc-right-derived-plus-injective] identifies its third complex with the required derived sections. The product coefficient sequence gives exactly the corresponding product sequence by the same Hom-kernel identification of step 3, applied on $P$; its terms are those listed in step 5, with open ambient scheme $U\\times_kY$. By [lem-weil-pbc-complex-ses-triangle], these coefficient-Hom triangles have the actual connecting maps of [lem-pur-support-restriction-triangle]. Step 6 gives a morphism between these triangles after exact derived tensoring, so it proves the boundary square for the specified three exterior products. No claim that tensoring an arbitrary injective section complex is exact is needed: on complexes of ordinary $A$-modules one may resolve the fixed tensor factor by a K-flat complex with flat terms [lem-pc-kflat-resolution], and the direct-sum total tensor then preserves the degreewise short exact sequence, because every summand is tensor with a flat module.",
    "uses": [
     "lem-weil-pbc-extension-by-zero-adjunction",
     "lem-weil-pbc-etale-restriction-injectives",
@@ -143,8 +160,9 @@
    }
   },
   {
-   "text": "For the second-variable clause put $V=Y\\setminus C'$, $N=R\\Gamma_{D'}(X,K)$ and $E'_0=S_{B'\\cap C'}$, $E'_1=S_{B'}$, $E'_2=j_{V!}S_{B'\\cap V}$ on $Y$. The sequence $0\\to E'_2\\to E'_1\\to E'_0\\to0$ is [lem-weil-pbc-open-closed-short-exact] for $S_{B'}$ and $(C',V)$; its stalk maps are the identity on $B'\\cap C'$ and zero off that support, as verified in step 4. Tensoring its pullback to $P$ with $p_X^*S_{D'}$ gives the product coefficient sequence with terms $j_{X\\times V,!}S_{D'\\times(B'\\cap V)}$, $S_{D'\\times B'}$, and $S_{D'\\times(B'\\cap C')}$. Apply the evaluation construction of step 5 with the fixed first coefficient sheaf $S_{D'}$ and the varying second coefficient $E'$. Evaluation at constant sections gives respectively $\\kappa^{D',B'\\cap C'}_{K,L}$, $\\kappa^{D',B'}_{K,L}$ and $\\kappa^{D',B'\\cap V}_{K,L|_V}$ [def-pur-supported-exterior-product]; the off-diagonal entry of a cone is now in the second tensor factor, so the total differential contributes $(-1)^{\\deg(x)}$, exactly the second shift identification calculated in step 7. Applying Hom to the two coefficient sequences identifies the rows with [lem-pur-support-restriction-triangle] on $Y$ and on $P$ by step 6 and [lem-weil-pbc-complex-ses-triangle]. The left tensor functor is exact: the degreewise symmetry $x\\otimes y\\mapsto(-1)^{\\deg(x)\\deg(y)}y\\otimes x$ from [def-kun-derived-tensor] identifies it with the right tensor functor of [lem-pc-derived-tensor-second-factor-functor] (the sign commutes with the total differential and carries K-flat quasi-isomorphisms to quasi-isomorphisms). This is the entire second-variable morphism, including its boundary square and its third ambient scheme $X\\times_kV$.",
+   "text": "For the second-variable clause put $V=Y\\setminus C'$, $N=R\\Gamma_{D'}(X,K)$ and $E'_0=S_{B'\\cap C'}$, $E'_1=S_{B'}$, $E'_2=j_{V!}S_{B'\\cap V}$ on $Y$. The sequence $0\\to E'_2\\to E'_1\\to E'_0\\to0$ is [lem-weil-pbc-open-closed-short-exact] for $S_{B'}$ and $(C',V)$; its stalk maps are the identity on $B'\\cap C'$ and zero off that support, as verified in steps 4–5. Tensoring its pullback to $P$ with $p_X^*S_{D'}$ gives the product coefficient sequence with terms $j_{X\\times V,!}S_{D'\\times(B'\\cap V)}$, $S_{D'\\times B'}$, and $S_{D'\\times(B'\\cap C')}$. Apply the evaluation construction of steps 6–7 with the fixed first coefficient sheaf $S_{D'}$ and the varying second coefficient $E'$. Evaluation at constant sections gives respectively $\\kappa^{D',B'\\cap C'}_{K,L}$, $\\kappa^{D',B'}_{K,L}$ and $\\kappa^{D',B'\\cap V}_{K,L|_V}$ [def-pur-supported-exterior-product]; the off-diagonal entry of a cone is now in the second tensor factor, so the total differential contributes $(-1)^{\\deg(x)}$, exactly the second shift identification calculated in step 9. Applying Hom to the two coefficient sequences identifies the rows with [lem-pur-support-restriction-triangle] on $Y$ and on $P$ by step 8 and [lem-weil-pbc-complex-ses-triangle]. The left tensor functor is exact: the degreewise symmetry $x\\otimes y\\mapsto(-1)^{\\deg(x)\\deg(y)}y\\otimes x$ from [def-kun-derived-tensor] identifies it with the right tensor functor of [lem-pc-derived-tensor-second-factor-functor] (the sign commutes with the total differential and carries K-flat quasi-isomorphisms to quasi-isomorphisms). This is the entire second-variable morphism, including its boundary square and its third ambient scheme $X\\times_kV$.",
    "uses": [
+    "lem-pur-external-rhom-cone-pairing",
     "lem-weil-pbc-open-closed-short-exact",
     "def-pur-supported-exterior-product",
     "lem-pur-support-restriction-triangle",
@@ -159,8 +177,9 @@
    }
   },
   {
-   "text": "For morphisms of $K$ and $L$, the two evaluation composites both send a tensor of supported sections $s\\otimes t$ to $p_X^*\\alpha(s)\\otimes p_Y^*\\beta(t)$. For an open restriction $X_0\\hookrightarrow X$, they both send it to $p_{X_0}^*(s|_{X_0})\\otimes p_Y^*t$; restricting $Y$ gives $p_X^*s\\otimes p_{Y_0}^*(t|_{Y_0})$. These identities hold degreewise for Hom evaluation and commute with the coefficient sequence maps, hence with the cone maps of step 5. The derived Hom construction [def-pur-derived-internal-hom] and K-flat model independence [lem-pc-derived-tensor-second-factor-functor] pass these identities through localization at quasi-isomorphisms: for a roof they hold for its numerator and denominator and hence after the denominator is inverted. The diagrams and their boundaries are therefore natural for the stated restrictions and coefficient morphisms.",
+   "text": "For morphisms of $K$ and $L$, the two evaluation composites both send a tensor of supported sections $s\\otimes t$ to $p_X^*\\alpha(s)\\otimes p_Y^*\\beta(t)$. For an open restriction $X_0\\hookrightarrow X$, they both send it to $p_{X_0}^*(s|_{X_0})\\otimes p_Y^*t$; restricting $Y$ gives $p_X^*s\\otimes p_{Y_0}^*(t|_{Y_0})$. These identities hold degreewise for Hom evaluation and commute with the coefficient sequence maps, hence with the cone maps of step 6. The derived Hom construction [def-pur-derived-internal-hom] and K-flat model independence [lem-pc-derived-tensor-second-factor-functor] pass these identities through localization at quasi-isomorphisms: for a roof they hold for its numerator and denominator and hence after the denominator is inverted. The diagrams and their boundaries are therefore natural for the stated restrictions and coefficient morphisms.",
    "uses": [
+    "lem-pur-external-rhom-cone-pairing",
     "def-pur-supported-exterior-product",
     "def-pur-derived-internal-hom",
     "lem-pc-derived-tensor-second-factor-functor"
@@ -178,16 +197,17 @@
   "def-pur-derived-internal-hom",
   "def-pur-hom-complex",
   "def-pur-supported-exterior-product",
+  "def-pur-supported-localization-comparisons",
   "def-weil-abstract-derived-category",
   "def-weil-closed-immersion",
   "def-weil-pbc-extension-by-zero",
-  "lem-kun-inverse-image-monoidal",
   "lem-kun-kflat-criteria",
   "lem-pc-derived-tensor-second-factor-functor",
   "lem-pc-kflat-resolution",
   "lem-pod-etale-stalk-tensor-scalar",
-  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-external-rhom-cone-pairing",
   "lem-pur-support-restriction-triangle",
+  "lem-sfb-open-closed-flatness",
   "lem-weil-pbc-closed-immersion-finite",
   "lem-weil-pbc-complex-ses-triangle",
   "lem-weil-pbc-constant-sheaf-geometric-stalk",
@@ -200,7 +220,6 @@
   "lem-weil-pbc-right-derived-plus-injective",
   "lemma-weil-pbc-finite-stalk-formula",
   "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-geometric-stalks-exact",
   "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "proof_origin": {
@@ -337,7 +356,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-kunneth-supported",
   "by": "worker",
@@ -346,19 +365,15 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-pur-supported-product-localization",
   "worker": "stage1",
-  "summary": "Second reading repairs the unresolved simultaneous-resolution assertion by using the coefficient sheaves i_*A_Z: identify support sections with Hom into injectives, identify the localization coefficient sequence and its external tensor, and apply the derived evaluation pairing with an explicit cone-boundary calculation. The specified exterior-product maps, the two shift signs and naturality are retained. No new nodes.",
-  "blueprint": "Realizes lem-pur-kunneth-supported proof paragraphs 1 and 3: step 2 tensors the support triangle; steps 3-6 identify its comparison by supported Hom and coefficient sequences; step 7 computes the signs; steps 8-9 give the second-variable construction and naturality.",
+  "summary": "Repairs both long steps named in the dedicated Q05 return without changing the statement or Lean record. Reuses the existing open-closed flatness lemma instead of creating a duplicate coefficient-flatness node, writes the stalk comparisons and coefficient-sequence maps in two short steps, and extracts the generic external global-derived-Hom evaluation/cone comparison as one unsplit statement-only node. The parent retains the comparison with the specified supported exterior product, both variable constructions and both shift signs.",
+  "blueprint": "The current main-20261015 lem-pur-kunneth-supported proof, paragraphs 1 and 3, needs the two comparisons of support triangles. Steps 4–5 identify the coefficient sequence, step 6 invokes the extracted evaluation-cone lemma, steps 7–8 identify the actual supported products and boundaries, and steps 9–11 retain signs, second-variable comparison and naturality.",
   "tool_uses": [
    {
     "node": "lem-pc-derived-tensor-second-factor-functor",
     "why": "The exact derived functor E↦E⊗ᴸ_A RΓ_D(Y,L) is a generic one-point-site tensor result from another unit; the current unit supplies the support triangle but not this tensor-functor construction."
-   },
-   {
-    "node": "lem-kun-inverse-image-monoidal",
-    "why": "Generic resolution, sheaf-stalk or adjunction fact used in the supported-Hom model; it does not replace the unit localization route. No statement in this unit supplies this general input."
    },
    {
     "node": "lem-kun-kflat-criteria",
@@ -381,8 +396,8 @@
     "why": "Generic resolution, sheaf-stalk or adjunction fact used in the supported-Hom model; it does not replace the unit localization route. No statement in this unit supplies this general input."
    },
    {
-    "node": "lem-pur-hom-kflat-into-kinjective",
-    "why": "Generic K-flat/K-injective Hom computation used to construct evaluation on support coefficient complexes; the unit supplies no resolution-level Hom computation."
+    "node": "lem-sfb-open-closed-flatness",
+    "why": "Its etale finite-ring clauses give flatness of closed direct images and open extensions of the rank-one constant coefficient sheaves. This is a generic module-flatness tool; the unit support-triangle route supplies no such flatness theorem."
    }
   ]
  },
@@ -394,15 +409,16 @@
   "lem-pod-etale-stalk-tensor-scalar",
   "lem-weil-pbc-global-sections-stalk-comparison",
   "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-pur-hom-kflat-into-kinjective"
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-sfb-open-closed-flatness"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NR-e90ee5345",
-  "group": "NR",
+  "reviewer": "NT-Codex-Q05-a35c7ce63",
+  "group": "Q05",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-e90ee5345 (reviewer sub-agent of L); spot-checked: Read all nine steps, cited statements, source passages, and unit/chapter route. Supported-Hom construction, localization boundaries, coefficient hypotheses, and both shift signs check out; no new nodes, duplicates, or dependency cycles found. Corrected step 7’s Stacks 06YU label from section-derived-tor to definition-derived-tor. Full checks are in review.md; corrected JSON is under fixes/dag/nodes/sec-smooth-purity/.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-a35c7ce63 (reviewer sub-agent of L); spot-checked: Read both nodes in full, all cited statements, source passages and blueprint route. All eleven steps, specified exterior products, open third terms and boundary signs check out. The new Hom-cone lemma is valid and nonduplicative; no dependency cycles found. Accepted seven generic tool uses. No repairs needed; concrete checks are in review.md."
  },
  "reviewed_lean": {
   "date": "2026-10-16",

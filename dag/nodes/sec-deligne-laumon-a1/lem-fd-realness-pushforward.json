@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fd-realness-pushforward",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Reality survives the Fourier projection",
@@ -15,50 +15,211 @@
  "stmt_deps": [
   "def-fd-transform",
   "def-wf-iota-real",
-  "def-weil-constructible-heart"
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-cohomology-sheaves"
  ],
  "proof": [
   {
-   "text": "Step 1 (the traces on a fibre). Let $\\xi\\in|\\mathbf A^1_{k_0}|$ be a\nclosed point with residue field $\\kappa(\\xi)=\\mathbf F_{q^d}$, and let\n$m\\geq1$. The stalk of the higher direct image at $\\bar\\xi$ is the\ncompact-support cohomology of the fibre, by the strict-henselization\nstalk formula for the compact-support direct image\n[prop-weil-pbc-strict-henselization-stalk-formula]; by the\nhypothesis, only degree one of $R\\Gamma_c(X_{\\bar\\xi},\\mathcal K)$ is\nnonzero. The Grothendieck–Lefschetz trace formula\n[thm-trf-grothendieck-lefschetz-qbar] in its point-counting form\n[cor-trf-point-counting], applied over the residue field\n$\\kappa(\\xi)$ to the fibre, therefore gives\n\n$$\n-\\operatorname{Tr}\\bigl(F_\\xi^m\\mid(R^{1}p_{2,!}\\mathcal K)_{\\bar\\xi}\\bigr)\n=\\sum_{x\\in X_\\xi(\\mathbf F_{q^{dm}})}\\operatorname{Tr}\\bigl(F_x^m\\mid\\mathcal K_{\\bar x}\\bigr),\n$$\n\nthe right-hand side being the sum of the local traces over the\n$\\mathbf F_{q^{dm}}$-points of the fibre of the closed point $\\xi$: only\nthe surviving degree contributes, and it contributes with the sign\n$(-1)^1$.",
+   "text": "Put $G=R^1p_{2,!}\\mathcal K$. The compact-support functor of [def-weil-integral-rational-qbar-compact-support] and the bounded constructible domains of [prop-functor-package] place $Rp_{2,!}\\mathcal K$ in $D^b_c(\\mathbf A^1_k,\\Qlb)$; its degree-one cohomology is constructible. The package's Frobenius-equivariant comparisons give the induced Weil structure on $G$. Fix a closed point $\\xi$ of the target, of degree $d\\geq1$, and an embedding $\\kappa(\\xi)\\hookrightarrow k$. Write $C_0=X_0\\times_{\\mathbf A^1_{k_0}}\\operatorname{Spec}\\kappa(\\xi)$ and $C=C_0\\times_{\\kappa(\\xi)}k$. Thus $C_0\\simeq\\mathbf A^1_{\\kappa(\\xi)}$. Restrict $\\mathcal K$ to $C$ and give it the degree-$d$ iterated Weil structure, denoting this sheaf by $L$. The datum of [def-weil-weil-sheaf-complex] then makes $L$ a Weil sheaf over $\\kappa(\\xi)$, with geometric Frobenius $\\gamma^d$.",
    "uses": [
-    "prop-weil-pbc-strict-henselization-stalk-formula",
-    "thm-trf-grothendieck-lefschetz-qbar",
-    "cor-trf-point-counting"
+    "def-weil-integral-rational-qbar-compact-support",
+    "prop-functor-package",
+    "def-weil-weil-sheaf-complex"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realness-pushforward.proof.md",
+    "place": "Step 1: setting up the fibre and its residue-field Weil structure"
+   }
   },
   {
-   "text": "Step 2 (each term is real). At every closed point $x\\in|X_0|$, reality\nof $\\mathcal K$ means that the multiset $\\{s_j\\}$ of eigenvalues of $F_x$\non $\\mathcal K_{\\bar x}$ is stable under $\\iota$-conjugation. For every\n$m$ conjugation therefore permutes the multiset $\\{s_j^m\\}$ of $m$-th\npowers, because $\\overline{\\iota(s_j^m)}=\\overline{\\iota(s_j)}^m$, and\nthe sum of a conjugation-stable multiset is conjugation-fixed,\n\n$$\n\\overline{\\iota\\Bigl(\\sum_j s_j^m\\Bigr)}=\\iota\\Bigl(\\sum_j s_j^m\\Bigr):\n$$\n\nthe local trace $\\operatorname{Tr}(F_x^m\\mid\\mathcal K_{\\bar x})$ is\n$\\iota$-real. Every term on the right-hand side of Step 1 is real, and\nso is the trace on the left, the sign being immaterial.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Step 3 (real traces give a real factor). Write\n\n$$\nP_\\xi(T):=\\det\\bigl(1-TF_\\xi\\mid(R^{1}p_{2,!}\\mathcal K)_{\\bar\\xi}\\bigr)\n=\\sum_{r=0}^{\\rho}(-1)^re_r(\\xi)T^r .\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "By Newton's identities the elementary symmetric functions $e_r$ are\npolynomials with rational coefficients in the power sums\n$\\operatorname{Tr}(F_\\xi^m\\mid(R^{1}p_{2,!}\\mathcal K)_{\\bar\\xi})$,\n$1\\leq m\\leq r$; since $\\iota$ is a field isomorphism which is the\nidentity on $\\mathbf Q$, the $\\iota$-image of each $e_r(\\xi)$ is the same\npolynomial evaluated at the $\\iota$-images of those power sums, which are\nreal by Step 2. Hence $\\iota(P_\\xi)\\in\\mathbf R[T]$ for every closed\npoint $\\xi$, which is the $\\iota$-reality of\n$R^{1}p_{2,!}\\mathcal K$ in the sense of [def-wf-iota-real].",
+   "text": "Compact-support base change, clause (4) of [prop-functor-package], applied to the geometric point above $\\xi$ identifies\n$$\\bigl(Rp_{2,!}\\mathcal K\\bigr)_{\\bar\\xi}\\simeq R\\Gamma_c(C,L).$$\nThe package states coherence and equivariance of these comparisons: applying the comparison to the degree-$d$ iterated Weil map intertwines the closed-point operator $F_\\xi$ on the left with the compact Frobenius on the right. In the notation of [def-weil-local-frobenius-trace], taking degree $i$ gives\n$$G_{\\bar\\xi}\\simeq H_c^1(C,L),\\qquad H_c^i(C,L)=0\\ (i\\ne1).$$\nHere stalk cohomology is precisely the cohomology of the point-fibre complex in that definition, so the given vanishing of higher direct images gives the displayed vanishing. Functoriality then intertwines every $m$-th power as well.",
    "uses": [
+    "prop-functor-package",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realness-pushforward.proof.md",
+    "place": "Step 1: replacing the incorrect ordinary-direct-image citation by compact-support base change"
+   }
+  },
+  {
+   "text": "Choose a finite coefficient-field representative $(E,L_E)$, including the Weil map and its inverse, using [def-weil-algebraically-closed-coefficients]: the two maps and their inverse equations occur over one common finite extension. Choose an integral representative $L_{\\mathcal O}$ of its underlying object using [def-weil-rationalization-karoubi], whose scalar localization has the same objects. Its reductions $L_n$ are bounded constructible. By [lem-coef-integral-residue-tor] these reductions have finite Tor amplitude. Apply [lem-sf-proetale-constructible-origin](ii) to each $L_n$ and choose a bounded constructible etale object $B_n$ and an isomorphism $\\nu_C^*B_n\\simeq L_n$. These are the explicit etale-origin witnesses required by the trace theorem. No invertible integral Weil structure is claimed or needed.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-rationalization-karoubi",
+    "lem-coef-integral-residue-tor",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realness-pushforward.proof.md",
+    "place": "Step 1: checking the finite-level hypotheses of the coefficient trace theorem"
+   }
+  },
+  {
+   "text": "Use $C_0=\\mathbf A^1_{\\kappa(\\xi)}\\hookrightarrow\\mathbf P^1_{\\kappa(\\xi)}\\to\\operatorname{Spec}\\kappa(\\xi)$ and geometric base change. The finite-level hypotheses spelled out in [thm-trf-trace-formula-e] include the graph correspondences of every Frobenius iterate and their fixed-point base changes. These maps, as well as the compactification maps, are separated finite type between separated finite-type $k$-schemes: the iterates extend to $\\mathbf P^1$, their graphs and the diagonal are closed in $\\mathbf P^1\\times_k\\mathbf P^1$, and the fixed loci are their fibre products. For each such map at every $A_{E,n}$, [thm-sf-ambient-adjoint-class](2)-(3) gives the relative adjunction and refinement comparisons, [thm-sf-ctf-stability](iv)-(v) gives both finite-Tor restrictions, and [thm-sf-preservation-class](1)-(3) gives bounds independent of $n$. These theorems apply to all these maps, not only to the structure map of $C$. Composition and base-change exchanges are the mates specified in [def-trf-admissibility] of the coherent compact-support exchanges of [prop-functor-package]. Thus the required constructible admissibility datum exists for all the trace-formula maps. No unrestricted unbounded pro-etale adjunction is used.",
+   "uses": [
+    "thm-sf-ambient-adjoint-class",
+    "thm-sf-ctf-stability",
+    "thm-sf-preservation-class",
+    "prop-functor-package",
+    "def-trf-admissibility",
+    "thm-trf-trace-formula-e"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realness-pushforward.proof.md",
+    "place": "Step 1: discharging compactification admissibility on the constructible finite-Tor domains"
+   }
+  },
+  {
+   "text": "Apply [thm-trf-grothendieck-lefschetz-qbar] over the finite field $\\kappa(\\xi)=\\mathbf F_{q^d}$ to $L$, with the witnesses and admissibility verified in Steps 3-4. For every $m\\geq1$ it gives\n$$-\\operatorname{Tr}(F_\\xi^m\\mid G_{\\bar\\xi})=\\sum_{z\\in C_0(\\mathbf F_{q^{dm}})}\\operatorname{Tr}(F^{L}_{z,m}\\mid L_{\\bar z}).$$\nStep 2 identifies the global operator and removes every cohomological degree except degree one, whose sign is $-1$. The local alternating traces have just degree zero since $L$ is a sheaf. All coefficient spaces are finite-dimensional by the trace theorem, and the point set is finite by [lem-weil-point-counts-finite](1), applied with base field $\\kappa(\\xi)$.",
+   "uses": [
+    "thm-trf-grothendieck-lefschetz-qbar",
+    "lem-weil-point-counts-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realness-pushforward.proof.md",
+    "place": "Step 1: the actual coefficient trace formula, rather than constant-coefficient point counting"
+   }
+  },
+  {
+   "text": "To apply the orbit formula on $X=X_0\\times_{k_0}k$, choose a finite-field representative of $\\mathcal K$ with its invertible Weil map by [def-weil-algebraically-closed-coefficients], and an integral representative by [def-weil-rationalization-karoubi]. Its reductions have finite Tor amplitude by [lem-coef-integral-residue-tor]. These verify the lattice hypothesis of [lem-trf-rational-local-frobenius-powers] on $X$, separately from the fibre lattice in Step 3. For a summand $z$ in Step 5 let $x\\in|X_0|$ be its image and $e=[\\kappa(x):k_0]$. The embedding $\\kappa(x)\\hookrightarrow\\mathbf F_{q^{dm}}$ gives $e\\mid dm$. The local operator for $L$ is the degree-$dm$ operator for $\\mathcal K$: grouping the $dm$ factors of the iterated Weil map into $m$ groups of $d$ factors, and the corresponding point transports in [def-weil-local-frobenius-trace], gives the same composite. By [lem-trf-rational-local-frobenius-powers] this is conjugate to $F_x^{dm/e}$, first over a finite coefficient field and then over $\\Qlb$. By [prop-trf-trace-formal-laws](1),(4), its trace is therefore $\\operatorname{Tr}(F_x^{dm/e}\\mid\\mathcal K_{\\bar x})$. No invertible integral Weil map is required.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "lem-trf-rational-local-frobenius-powers",
+    "prop-trf-trace-formal-laws",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-rationalization-karoubi",
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realness-pushforward.proof.md",
+    "place": "Steps 1-2: correcting the local closed-point exponent"
+   }
+  },
+  {
+   "text": "Fix such a closed point $x$. By [def-wf-iota-real], the polynomial $P_x(T)=\\iota\\det(1-TF_x)$ has real coefficients and constant coefficient $1$. By [lem-weil-exp-trace-determinant] and the finite coefficient formulas of [def-weil-power-series-exponential], put\n$$S_x=\\sum_{r\\geq1}s_rT^r,\\quad s_r=\\iota\\operatorname{Tr}(F_x^r)/r,\\qquad E_x=\\exp(S_x)=P_x^{-1}.$$\nAll coefficients $b_n$ of $E_x$ are real: writing $P_x=1+\\sum_{j\\geq1}a_jT^j$, the inverse identity gives $b_0=1$ and $b_n=-\\sum_{j=1}^na_jb_{n-j}$. The displayed exponential coefficient formula gives $b_n=s_n+Q_n(s_1,\\ldots,s_{n-1})$, where $Q_n$ is the finite sum with $2\\leq r\\leq n$ from that formula and has rational coefficients. Induction on $n\\geq1$ therefore makes each $s_n$ real, and multiplying by $n$ makes every $\\iota\\operatorname{Tr}(F_x^n)$ real. The case of a zero-dimensional stalk has $P_x=E_x=1$ and the same recursion gives zero traces.",
+   "uses": [
+    "def-wf-iota-real",
+    "lem-weil-exp-trace-determinant",
+    "def-weil-power-series-exponential"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realness-pushforward.proof.md",
+    "place": "Step 2: real local factors imply real power traces, expanding Newton recovery by coefficient recursions"
+   }
+  },
+  {
+   "text": "Apply Step 7 with exponent $dm/e$ to each summand identified in Step 6. The point set in Step 5 is finite, so its sum is real after $\\iota$; its negative is real too. Thus $t_m=\\iota\\operatorname{Tr}(F_\\xi^m\\mid G_{\\bar\\xi})$ is real for every $m\\geq1$. This includes an empty sum and includes a zero stalk.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realness-pushforward.proof.md",
+    "place": "Step 2: summing real local traces"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-exp-trace-determinant] to the finite-dimensional stalk $G_{\\bar\\xi}$ and its operator $F_\\xi$. With $P=\\iota\\det(1-TF_\\xi)$ it gives\n$$P\\exp\\Bigl(\\sum_{m\\geq1}t_mT^m/m\\Bigr)=1.$$\nEvery coefficient $b_n$ of this exponential is real, since the formula in [def-weil-power-series-exponential] expresses it as a finite sum of products of the real numbers $t_m/m$ divided by factorials. If $P=\\sum a_nT^n$, the product identity gives $a_0=b_0=1$ and $a_n=-\\sum_{j=1}^nb_ja_{n-j}$; induction makes each $a_n$ real. Hence $\\iota\\det(1-TF_\\xi)\\in\\mathbf R[T]$. Since $\\xi$ was arbitrary, [def-wf-iota-real] gives the asserted reality of $G$. The recursions need no semisimplicity or nonzero rank.",
+   "uses": [
+    "lem-weil-exp-trace-determinant",
+    "def-weil-power-series-exponential",
     "def-wf-iota-real"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realness-pushforward.proof.md",
+    "place": "Step 3: real power traces imply real characteristic factor; the coefficient form of Newton identities"
+   }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "def-weil-integral-rational-qbar-compact-support",
+  "prop-functor-package",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-local-frobenius-trace",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "lem-coef-integral-residue-tor",
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-ctf-stability",
+  "thm-sf-preservation-class",
+  "def-trf-admissibility",
+  "thm-trf-trace-formula-e",
   "thm-trf-grothendieck-lefschetz-qbar",
-  "cor-trf-point-counting",
-  "def-wf-iota-real"
+  "lem-weil-point-counts-finite",
+  "lem-trf-rational-local-frobenius-powers",
+  "prop-trf-trace-formal-laws",
+  "def-wf-iota-real",
+  "lem-weil-exp-trace-determinant",
+  "def-weil-power-series-exponential"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realness-pushforward.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realness-pushforward.proof.md",
+  "place": "Steps 1-3, with corrected citations, verified trace hypotheses and elementary coefficient recursions"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|higherLowerShriek|compactlySupportedCohomology",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no hit states preservation of reality for compact-support direct image of a constructible Weil sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reality of Frobenius characteristic polynomials is preserved by compact support pushforward concentrated in degree one",
+   "results": "LinearMap.charpoly_def, Matrix.charpoly.univ_map_map, LinearMap.charpoly, MvQPF.SuppPreservation, LinearMap.polyCharpoly, LinearMap.charpoly_monic, QPF.SuppPreservation, HasCompactMulSupport",
+   "date": "2026-10-17",
+   "verdict": "no match: no hit states preservation of reality for compact-support direct image of a constructible Weil sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilSheaf\", \"IsReal\"",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no hit states preservation of reality for compact-support direct image of a constructible Weil sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible real Weil sheaf with compactly supported pushforward concentrated in one degree has real higher direct image",
+   "results": "TopCat.Sheaf.pushforward_sheaf_of_sheaf, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, Condensed.lanSheafProfinite, CategoryTheory.Functor.sheafPushforwardCocontinuous, CompHausLike.LocallyConstantModule.functor, LightCondensed.lanLightCondSet, topCatToSheafCompHausLike, CondensedMod.ofSheafCompHaus",
+   "date": "2026-10-17",
+   "verdict": "no match: no hit states preservation of reality for compact-support direct image of a constructible Weil sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*trace|trace.*Frobenius|iota.real",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no hit states preservation of reality for compact-support direct image of a constructible Weil sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\"",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no hit states preservation of reality for compact-support direct image of a constructible Weil sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If all power traces of geometric Frobenius on a real sheaf are real then a single nonzero compact cohomology sheaf is real",
+   "results": "groupCohomology.Hilbert90.aux_ne_zero, groupCohomology.H1ofAutOnUnitsUnique, Rep.FiniteCyclicGroup.groupCohomologyπEven_eq_zero_iff, Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_zero_iff, ContinuousCohomology.homogeneousCochains, continuousCohomology, ContinuousCohomology.continuousCohomologyZeroIso, CompHausLike.LocallyConstantModule.functor",
+   "date": "2026-10-17",
+   "verdict": "no match: no hit states preservation of reality for compact-support direct image of a constructible Weil sheaf"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -183,5 +344,74 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-p-dl-a1-some-weight"
+ "unit": "sk-p-dl-a1-some-weight",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-fd-realness-pushforward",
+  "worker": "stage1",
+  "summary": "Preserved the statement and residue-field trace route. Replaced two incorrect citations, discharged finite-level hypotheses, corrected the local Frobenius exponent, and expanded Newton recovery using the existing determinant-trace identity. No new nodes.",
+  "blueprint": "Current main-20261015 proof Step 1 is realized by split Steps 1-6; its Step 2 by Steps 6-8; its Step 3 by Step 9. The unit sk-p-dl-a1-some-weight trace-then-real-factor route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "Generic constructible compact-support preservation, base change and Frobenius-equivariant coherence identify the fibre operators; no Fourier weight estimate is replaced."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Uniform finite-level Tor bounds for an integral lattice allow the stated trace-theorem domain."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic finite-coefficient etale-origin theorem supplies the explicit witnesses required by the trace formula."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Constructible relative adjunction and compactification compatibility discharge the trace admissibility hypothesis."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Finite-Tor constructible restrictions of the compact-support and exceptional functors are needed for trace admissibility."
+   },
+   {
+    "node": "thm-sf-preservation-class",
+    "why": "Uniform finite-level bounds for the constructible exceptional functor discharge admissibility without an ambient adjoint assumption."
+   },
+   {
+    "node": "lem-weil-point-counts-finite",
+    "why": "Generic finiteness of rational points makes the local sum finite."
+   },
+   {
+    "node": "lem-trf-rational-local-frobenius-powers",
+    "why": "Generic rational Frobenius orbit formula identifies a degree-dm local operator with the dm/e power at its image closed point."
+   },
+   {
+    "node": "prop-trf-trace-formal-laws",
+    "why": "Generic invariance under conjugacy and field supertrace compare the local operators."
+   },
+   {
+    "node": "lem-weil-exp-trace-determinant",
+    "why": "Existing linear algebra identity supplies the Newton coefficient argument in the unit; it contains no weight or Fourier theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package",
+  "lem-coef-integral-residue-tor",
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-ctf-stability",
+  "thm-sf-preservation-class",
+  "lem-weil-point-counts-finite",
+  "lem-trf-rational-local-frobenius-powers",
+  "prop-trf-trace-formal-laws",
+  "lem-weil-exp-trace-determinant"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-f02e55b98",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-f02e55b98 (reviewer sub-agent of L); spot-checked: Read the full mathematics, cited statements, sources and unit route. Repaired two hypothesis checks: trace admissibility for Frobenius graphs/fixed-point base changes, and the original surface’s finite-Tor lattice for the orbit formula. Statement unchanged; exact arithmetic and dependency checks passed. Wrote review.md and the corrected whole DAG JSON under fixes/.; 1 file(s) fixed by the reviewer"
+ }
 }

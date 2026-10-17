@@ -1,0 +1,80 @@
+{
+ "id": "lem-zl-affine-geometric-components-finite-extension",
+ "kind": "statement",
+ "title": "Geometric components of an affine scheme descend to a finite constant extension",
+ "statement": "Fix a prime power $q$, $k_0=\\mathbf F_q$, and an algebraic closure $k$ of $k_0$ [def-weil-finite-field-fiber]. Let $X_0=\\operatorname{Spec}B$ be an affine scheme [def-weil-affine-spectrum] of finite type over $k_0$ [def-weil-finite-type-morphism], and put $X=X_0\\times_{k_0}k$ [def-pc-base-change]. There exist an integer $e\\geq1$ and a finite set $I$ such that, with $k_e=\\mathbf F_{q^e}\\subset k$, there is a decomposition into nonempty open and closed affine subschemes\n$$X_0\\times_{k_0}k_e=\\coprod_{i\\in I}X_{i,e}.$$\nEach $X_{i,e}$ is geometrically connected over $k_e$ [def-pc-geometrically-irreducible], and their base changes to $k$ are exactly the connected components of $X$ [def-weil-connected-scheme]. If $X_0\\to\\operatorname{Spec}k_0$ is smooth of relative dimension $d\\geq0$ [def-sbc-smooth-morphisms], each $X_{i,e}\\to\\operatorname{Spec}k_e$ is smooth of relative dimension $d$. The empty scheme is allowed, with $I=\\varnothing$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 038E, lemma-galois-action-connected-components-continuous, statement and proof (components descend to finite subextensions); Tag 0387, lemma-characterize-geometrically-connected; morphisms.tex Tags 01VB (lemma-base-change-smooth), 02NK (lemma-base-change-relative-dimension-d)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-pc-geometrically-irreducible",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "geometricallyConnected.*(finite|extension)|finite.*geometricallyConnected|geometric.*components",
+   "results": "Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric connected components of a finite type scheme descend to a finite field extension",
+   "results": "AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian; Algebra.IsGeometricallyReduced.casesOn; AlgebraicGeometry.IsFinite.recOn; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; Algebra.IsGeometricallyReduced; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; AlgebraicGeometry.IsFinite.toIsAffineHom; AlgebraicGeometry.IsFinite.of_comp",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected, AlgebraicGeometry.Scheme",
+   "results": "AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyConnected; AlgebraicGeometry.GeometricallyConnected; AlgebraicGeometry.instSurjectiveOfGeometricallyConnected; AlgebraicGeometry.GeometricallyConnected.eq_geometrically; AlgebraicGeometry.GeometricallyConnected.geometrically_connectedSpace; AlgebraicGeometry.GeometricallyConnected.mk; AlgebraicGeometry.geometricallyConnected_iff; AlgebraicGeometry.instGeometricallyConnectedFiberToSpecResidueField",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of a finite field splits a smooth affine scheme into finitely many geometrically connected smooth affine components of the same relative dimension",
+   "results": "Algebra.Smooth.exists_finiteType; Algebra.IsStandardSmoothOfRelativeDimension.out; AlgebraicGeometry.AffineSpace.not_isIntegralHom; Algebra.Smooth.exists_subalgebra_finiteType; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; Algebra.Etale.iff_exists_algEquiv_prod; Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg; AlgebraicGeometry.finite_appTop_of_universallyClosed",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every affine scheme of finite type over a finite field becomes a finite disjoint union of geometrically connected affine schemes after finite extension of the base field",
+   "results": "AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop; AlgebraicGeometry.IsFinite.SpecMap_iff; AlgebraicGeometry.IsFinite.toIsAffineHom; AlgebraicGeometry.isFinite_iff; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-affine-curve-hc2-purity",
+  "date": "2026-10-17",
+  "group": "Q130"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-p-dl-general-relative-line",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-affine-curve-hc2-purity",
+   "place": "Proof, second paragraph: choose a finite extension over which all geometric connected components are defined; the resulting components are smooth affine curves",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

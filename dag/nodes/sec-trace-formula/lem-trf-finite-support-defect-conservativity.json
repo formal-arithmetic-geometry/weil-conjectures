@@ -2,11 +2,75 @@
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $j:W\\setminus i(V)\\hookrightarrow W$ be the complementary open immersion. For every cohomology sheaf $\\mathcal H^q(K)$, the hypothesis on geometric stalks gives $j^{-1}\\mathcal H^q(K)=0$: all its geometric stalks are zero outside $i(V)$, and [lemma-weil-pbc-geometric-stalk-conservative] makes the stalk test conservative. Exactness of inverse image identifies $\\mathcal H^q(j^{-1}K)$ with $j^{-1}\\mathcal H^q(K)$, so $j^{-1}K=0$. The open--closed triangle of [lem-cbc-open-closed-recollement] therefore reduces to a canonical isomorphism $K\\simeq i_*i^{-1}K$ in the bounded derived category; the cited recollement also states that $i_*$ is exact, so this is the termwise closed direct image.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-cbc-open-closed-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§3.2.2(I), reduction to a complex with zero restriction to the closed support"
+   }
+  },
+  {
+   "text": "Apply $Rh_*$ to this isomorphism. The composition comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identifies $Rh_*Ri_*$ with $R(h\\circ i)_*=Rf_*$. Since $f$ is finite, [lemma-weil-pbc-finite-direct-image-exact] gives exactness of the underlying abelian direct image. The forgetful functor from $A$-module sheaves to abelian sheaves is faithful and exact by [lem-weil-pbc-module-sheaves-colimits-forgetful], while direct image is computed by the same section formula, so $f_*$ is exact on $A$-module sheaves as well. Consequently [lem-weil-pbc-exact-functor-derived-functor] computes $Rf_*$ termwise and yields natural isomorphisms\n$$\\mathcal H^q(Rh_*K)\\cong f_*\\mathcal H^q(i^{-1}K).$$",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-cbc-open-closed-recollement",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§3.2.4, finite projection of the supported defect"
+   }
+  },
+  {
+   "text": "If $Rh_*K=0$, then every sheaf $f_*\\mathcal H^q(i^{-1}K)$ in the preceding display is zero. For a geometric point $\\bar s$ of $S$, the finite-fibre stalk formula [lemma-weil-pbc-finite-stalk-formula] identifies this stalk with the finite product of the stalks of $\\mathcal H^q(i^{-1}K)$ over geometric points of $V_{\\bar s}$. A zero finite product has every factor zero, so all geometric stalks of $\\mathcal H^q(i^{-1}K)$ vanish; [lemma-weil-pbc-geometric-stalk-conservative] then gives $\\mathcal H^q(i^{-1}K)=0$. Thus $i^{-1}K=0$ and the isomorphism from Step 1 gives $K=0$. The converse is functorial. This proves the displayed equivalence, including empty fibres and the zero complex.",
+   "uses": [
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§3.2.4, support on a closed subset finite over the projection base"
+   }
+  },
+  {
+   "text": "For a morphism $u:K\\to L$ between bounded complexes whose cohomology is supported on $i(V)$, the long exact cohomology sequence of its cone shows that every cohomology sheaf of $C=\\operatorname{Cone}(u)$ is supported on $i(V)$. Derived direct image is triangulated (and the termwise finite direct image in Step 2 is triangulated by [lem-sf-exact-functor-derived-triangulated]), hence $Rh_*u$ is an isomorphism exactly when $Rh_*C=0$. Applying the vanishing equivalence to $C$ gives $Rh_*C=0$ exactly when $C=0$, which is equivalent to $u$ being an isomorphism. Thus $Rh_*$ reflects isomorphisms on the stated supported subcategory.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§3.2.4, final passage from vanishing to the comparison statement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-open-closed-recollement",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§3.2.2(I) and §3.2.4, with finite-direct-image and stalk details expanded from the cited Stacks lemmas"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-specialization-zero-section",
@@ -81,5 +145,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-finite-support-defect-conservativity",
+  "worker": "stage1",
+  "summary": "Expanded the imported finite-support assertion into four steps: recollement identifies a supported complex with the closed direct image of its restriction; derived pushforward factors through the finite composite and is computed termwise; finite geometric stalks make the finite direct image conservative; and the cone argument gives reflection of isomorphisms. No new nodes were needed because all auxiliary facts are already stated by existing DAG nodes.",
+  "blueprint": "Realizes the finite-support direct-image argument in the proof paragraph of lem-trf-local-term-locality, corresponding to the support/finite-projection passage in §3.2.4.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "Generic open--closed derived recollement and exact closed direct image; the sk-i-curve-zero route does not restate this sheaf-theoretic tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic conservativity of geometric stalks used to turn the support and vanishing stalk tests into sheaf equalities."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Finite direct-image exactness needed for the finite composite; this is supplied by the curve-estimates route rather than this unit."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-stalk-formula",
+    "why": "Finite geometric-fibre stalk formula needed to prove conservativity of finite direct image."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Canonical composition comparison for derived direct images along h and i."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Transfers abelian exactness of finite direct image to A-module sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Identifies the derived functor of the exact finite direct image with termwise application."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-open-closed-recollement",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q38-703af19f5",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-703af19f5 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, source passages, and unit/chapter route. All four proof steps are valid for the stated étale module coefficients; finite-support and cone edge cases check out. No new nodes, duplicates, cycles, or repairs found. Detailed checks and accepted tool uses are recorded in review.md."
  }
 }

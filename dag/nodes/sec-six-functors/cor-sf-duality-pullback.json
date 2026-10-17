@@ -3,48 +3,150 @@
  "blueprint": {
   "is": "cor-sf-duality-pullback",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Duality against pullback",
- "statement": "In the setting of [def-sf-datum], let $f:X\\to Y$ be separated of finite\ntype. Then\n\n$$\nD_XLf^*\\xrightarrow{\\ \\sim\\ }Rf^!D_Y\n$$\n\nas functors $D^b_{ctf}(Y,\\Lambda)\\to D^b_{ctf}(X,\\Lambda)$, naturally in $f$.\nIf an orientation datum is fixed and $f$ is smooth of pure relative\ndimension $d$, this reads $D_XLf^*\\cong Lf^*D_Y(d)[2d]$.",
+ "statement": "Fix a six-functor datum [def-sf-datum], over $k=\\overline{\\mathbf F}_q$ of characteristic $p$, with $\\ell\\ne p$ and $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$ as there. Let $X,Y$ be separated finite-type $k$-schemes (the domain of the absolute dualizing objects in [def-sf-pf]), and let $f:X\\to Y$ be a separated finite-type $k$-morphism. Write $\\mathcal C_T=D^b_{ctf}(T,\\Lambda)$ and $D_T=R\\mathcal H om_T(-,Ra_T^!\\Lambda)$ for $T=X,Y$, using the completed integral and common-stage field conventions of the datum. There is a canonical natural isomorphism\n$$\n\\chi_f:D_XLf^*\\xrightarrow{\\ \\sim\\ }Rf^!D_Y\n$$\nof contravariant functors, that is, of functors $\\mathcal C_Y^{\\mathrm{op}}\\to\\mathcal C_X$. It is natural in $f$: it is the identity for $f=\\mathrm{id}$ under the unit identifications, and for composable separated finite-type morphisms $X\\xrightarrow fY\\xrightarrow gZ$ it obeys\n$$\n\\chi_{gf,B}=Rf^!(\\chi_{g,B})\\circ\\chi_{f,Lg^*B}\n$$\nunder the pullback and exceptional-composition identifications. If an orientation datum [def-sf-orientation] is fixed and $f$ is smooth of pure relative dimension $d$, the isomorphism reads\n$$D_XLf^*\\cong Lf^*D_Y(d)[2d].$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-kv-formal/cor-sf-duality-pullback.md",
   "place": "node cor-sf-duality-pullback, order 2230"
  },
  "stmt_deps": [
-  "def-sf-datum"
+  "def-sf-datum",
+  "def-sf-pf",
+  "def-sf-orientation"
  ],
  "proof": [
   {
-   "text": "The Verdier exchange $D_YRf_!\\cong Rf_*D_X$ is [thm-sf-verdier-exchange],\nproved in this chapter from the tensor–Hom exchange and the projection\nformula; biduality, axiom (A6), is [def-sf-datum] of this chapter,\nwhere its geometric input is [thm-fix-general-biduality]; and the adjunctions $Lf^*\\dashv Rf_*$ and\n$Rf_!\\dashv Rf^!$ are those of [fix-prop-adjunctions]. Since $D_Y$ is\nan anti-equivalence with inverse $D_Y$ by biduality, its right adjoint is\n$D_Y$ itself, so the right adjoint of $D_YRf_!$ is $Rf^!D_Y$ and that of\n$Rf_*D_X$ is $D_XLf^*$; passing to right adjoints, which is again the mate\ncalculus of [lem-sf-mate], gives the displayed isomorphism. The second\nassertion substitutes the orientation $Rf^!\\cong Lf^*(-)(d)[2d]$, which is\nthe content of [def-sf-orientation] as constructed in the purity\nchapter.",
+   "text": "Put $\\mathcal C_T=D^b_{ctf}(T,\\Lambda)$. Axiom (A1) of [def-sf-datum] supplies both adjunctions on these categories, and (A6) supplies $D_T:\\mathcal C_T^{\\mathrm{op}}\\simeq\\mathcal C_T$ and the natural isomorphisms $\\delta_U:U\\xrightarrow{\\sim}D_TD_TU$. Thus all expressions below remain in the displayed categories. For $U,V\\in\\mathcal C_T$ use the natural bijection\n$$t_T:\\operatorname{Hom}_T(U,D_TV)\\longrightarrow\\operatorname{Hom}_T(V,D_TU),\\qquad h\\longmapsto D_T(h)\\circ\\delta_V.$$\nIt is a bijection because full faithfulness of the anti-equivalence first identifies the source with $\\operatorname{Hom}_T(D_TD_TV,D_TU)$, and precomposition by the isomorphism $\\delta_V$ identifies this with the target. Both identifications are natural by functoriality and naturality of $\\delta$. This is a direct use of (A6), not a theorem asserting an ordinary covariant adjunction for $D_T$.",
    "uses": [
-    "thm-sf-verdier-exchange",
-    "def-sf-datum",
-    "thm-fix-general-biduality",
-    "fix-prop-adjunctions",
-    "lem-sf-mate",
-    "def-sf-orientation"
+    "def-sf-datum"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-kv-formal/cor-sf-duality-pullback.proof.md",
+    "place": "First sentence: biduality (A6), with variance made explicit"
+   }
+  },
+  {
+   "text": "For $A\\in\\mathcal C_X$ and $B\\in\\mathcal C_Y$, form the following chain of bijections, natural in both variables:\n$$\\begin{aligned}\n\\operatorname{Hom}_X(A,D_XLf^*B)\n&\\xrightarrow{t_X}\\operatorname{Hom}_X(Lf^*B,D_XA)\\\\\n&\\cong\\operatorname{Hom}_Y(B,Rf_*D_XA)\\\\\n&\\cong\\operatorname{Hom}_Y(B,D_YRf_!A)\\\\\n&\\xrightarrow{t_Y}\\operatorname{Hom}_Y(Rf_!A,D_YB)\\\\\n&\\cong\\operatorname{Hom}_X(A,Rf^!D_YB).\n\\end{aligned}$$\nThe second and last arrows are precisely the (A1) adjunctions of [def-sf-datum]. The middle arrow is postcomposition with the inverse of the isomorphism $D_YRf_!A\\xrightarrow{\\sim}Rf_*D_XA$ in [thm-sf-verdier-exchange], applicable because $A\\in\\mathcal C_X$ and the schemes and morphism have its separated finite-type hypotheses. The first and fourth arrows are Step 1. Denote the composite by $\\Phi_{A,B}$.",
+   "uses": [
+    "def-sf-datum",
+    "thm-sf-verdier-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-kv-formal/cor-sf-duality-pullback.proof.md",
+    "place": "First sentence through passing to adjoints: explicit Hom-adjunction chain"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] to $\\mathcal C_X^{\\mathrm{op}}$: with $U=D_XLf^*B$ and $V=Rf^!D_YB$, Step 2 is a natural bijection $\\operatorname{Hom}_X(A,U)\\cong\\operatorname{Hom}_X(A,V)$. It gives a unique isomorphism $\\chi_{f,B}:U\\xrightarrow{\\sim}V$ characterized by $\\Phi_{A,B}(h)=\\chi_{f,B}\\circ h$. Explicitly, $\\chi_{f,B}=\\Phi_{U,B}(1_U)$, and its inverse is $\\Phi_{V,B}^{-1}(1_V)$. Naturality in $A$ shows that both composites are identities. Naturality of $\\Phi$ in $B$ shows, for $b:B\\to B'$, that\n$$Rf^!D_Y(b)\\circ\\chi_{f,B'}=\\chi_{f,B}\\circ D_XLf^*(b),$$\nwhich is exactly naturality as functors $\\mathcal C_Y^{\\mathrm{op}}\\to\\mathcal C_X$.",
+   "uses": [
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-kv-formal/cor-sf-duality-pullback.proof.md",
+    "place": "Passing to adjoints: representability and the contravariant natural isomorphism"
+   }
+  },
+  {
+   "text": "The isomorphism just constructed is the adjoint transform of Verdier exchange: its action on Hom sets is exactly the five-arrow chain of Step 2. Use the identity and composition compatibility of Verdier exchange in clause (6) of [sk-thm-sf-package], with the pasted (A1) units and counits of [def-sf-datum]. The mate-pasting and identity formulas of [lem-weil-pbc-mate-pasting] identify the adjoint transform of the composite exchange for $gf$ with the composite of the transforms for $f$ and $g$; here the dualities are interpreted as equivalences to opposite categories as in Step 1. In components this says that the Hom transformation for $gf$, after the pullback and exceptional composition comparisons, sends $h:A\\to D_XLf^*Lg^*B$ to\n$$Rf^!(\\chi_{g,B})\\circ\\chi_{f,Lg^*B}\\circ h.$$\nThe uniqueness characterization in Step 3 therefore gives the asserted formula for $\\chi_{gf,B}$. For the identity morphism the identity mate formula gives $h\\mapsto h$, so $\\chi_{\\mathrm{id},B}=1_{D_YB}$. These are compatibility with composition and identities, not an assertion that duality commutes with arbitrary base change.",
+   "uses": [
+    "sk-thm-sf-package",
+    "def-sf-datum",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-kv-formal/cor-sf-duality-pullback.proof.md",
+    "place": "Naturally in f: identity and composition of the adjoint transform"
+   }
+  },
+  {
+   "text": "Now assume $f$ smooth of pure relative dimension $d$ and fix the orientation of [def-sf-orientation]. Use the proved smooth purity isomorphism of functors in [sk-thm-purity-transport], rather than inferring purity for arbitrary inputs from the orientation of the coefficient unit. Its hypotheses hold at each of the four coefficient stages in the statement, and (A6) of [def-sf-datum] gives $D_YB\\in\\mathcal C_Y$. Evaluate that functor isomorphism at $D_YB$ and invert it to obtain\n$$Rf^!D_YB\\xrightarrow{\\gamma_{f,\\Lambda}(D_YB)^{-1}}Lf^*D_YB(d)[2d].$$\nComposing with $\\chi_{f,B}$ gives the second displayed isomorphism. It is natural in $B$ because both factors are natural. The integral operation is completed and the field operations are the rationalized/common-stage ones already specified by the cited purity theorem; no reduction of field coefficients to finite coefficients is used.",
+   "uses": [
+    "def-sf-orientation",
+    "sk-thm-purity-transport",
+    "def-sf-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-kv-formal/cor-sf-duality-pullback.proof.md",
+    "place": "Last sentence: substitute the proved functorial smooth-purity isomorphism"
+   }
   }
  ],
  "proof_deps": [
-  "thm-sf-verdier-exchange",
   "def-sf-datum",
-  "thm-fix-general-biduality",
-  "fix-prop-adjunctions",
-  "lem-sf-mate",
-  "def-sf-orientation"
+  "thm-sf-verdier-exchange",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+  "sk-thm-sf-package",
+  "lem-weil-pbc-mate-pasting",
+  "def-sf-orientation",
+  "sk-thm-purity-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-kv-formal/cor-sf-duality-pullback.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-kv-formal/cor-sf-duality-pullback.proof.md",
+  "place": "Proof, expanded as a variance-correct Hom-adjunction argument; smooth clause uses the existing purity transport theorem"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Verdier|verdierDual|dualityPullback",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/SpectralObject.lean. Generic adjunction, sheaf, order-duality or compact-support results; none states the geometric item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier dual of pullback is exceptional inverse image of Verdier dual",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackId_hom, SheafOfModules.pullback, TopCat.Presheaf.pushforwardPullbackAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction, TopCat.Presheaf.pullbackHomIsoPushforwardInv, SheafOfModules.pullbackIso. Generic adjunction, sheaf, order-duality or compact-support results; none states the geometric item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Equivalence",
+   "results": "6 hits: CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Equivalence.toAdjunction', CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Equivalence.transportSheafificationAdjunction, CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv. Generic adjunction, sheaf, order-duality or compact-support results; none states the geometric item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality exchanges derived pullback with exceptional inverse image of the dual",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pullback_comp_id, TopCat.Sheaf.pullbackIso. Generic adjunction, sheaf, order-duality or compact-support results; none states the geometric item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An involutive contravariant duality transforms inverse image into exceptional inverse image by adjunction with compact support",
+   "results": "8 hits: CompactlySupportedContinuousMap.continuousMapEquiv_symm_apply, HasCompactMulSupport.inv', HasCompactMulSupport.inv, TopologicalSpace.Compacts.coe_equiv_apply_eq_preimage, HasCompactSupport.isCompact_preimage, TopologicalSpace.Opens.op_map_comp_obj, hasCompactMulSupport_comp_left, tsupport_comp_eq_preimage. Generic adjunction, sheaf, order-duality or compact-support results; none states the geometric item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Involutive duality and adjunction imply D_X f^* is isomorphic to f^! D_Y",
+   "results": "8 hits: Lat.dualEquiv_inverse, CategoryTheory.Functor.adjunction, Lat.dualEquiv_functor, Lat.dualEquiv, BoolAlg.dualEquiv, CategoryTheory.conjugateIsoEquiv, FinBddDistLat.dualEquiv_inverse, CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso. Generic adjunction, sheaf, order-duality or compact-support results; none states the geometric item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "verdierDual|dualityPullback|dualizingComplex",
+   "results": "0 hits: . Generic adjunction, sheaf, order-duality or compact-support results; none states the geometric item.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -74,5 +176,39 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-rem-sf-kv-formal"
+ "unit": "sk-rem-sf-kv-formal",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "cor-sf-duality-pullback",
+  "worker": "stage1",
+  "summary": "Repaired contravariant typing and made the implicit domain of absolute duality explicit. Expanded the imported adjoint claim into natural Hom bijections and Yoneda, proved identity/composition using the existing exchange coherence and mate-pasting statements, and used actual functorial smooth purity instead of the unit-orientation definition. A6 is invoked as an axiom of the given datum, so no finite-only geometric biduality theorem is applied at higher coefficient stages. No new nodes.",
+  "blueprint": "The current corollary proof first sentence is Step 1; its adjunction/passing-to-adjoints argument is Steps 2–3; naturally in f is Step 4; its final smooth sentence is Step 5. This is the adjoint Verdier-exchange route of sk-rem-sf-kv-formal, not an external-product or Kunneth argument.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-verdier-exchange",
+    "why": "The unit explicitly invokes Verdier exchange; its natural isomorphism is the middle arrow of the Hom chain."
+   },
+   {
+    "node": "sk-thm-sf-package",
+    "why": "Only the identity/composition coherence of Verdier exchange in clause (6) is used, to justify naturally in f; no node of this unit states that coherence."
+   },
+   {
+    "node": "sk-thm-purity-transport",
+    "why": "Only its functorial smooth-purity isomorphism is used for the final substitution, at all four stages; the orientation definition of this unit supplies only a unit component."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sf-verdier-exchange",
+  "sk-thm-sf-package",
+  "sk-thm-purity-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N2-6403da54b",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-6403da54b (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, all cited DAG statements, current/master blueprint sources, Stacks Lemma 001P, and Mathlib mate declarations. Verified variance, hypotheses, coefficient stages, exchange direction, mate composition, smooth purity transport, edge cases, route compliance, acyclicity, and no duplicate/new-node faults. Wrote review.md; no fixes needed."
+ }
 }
