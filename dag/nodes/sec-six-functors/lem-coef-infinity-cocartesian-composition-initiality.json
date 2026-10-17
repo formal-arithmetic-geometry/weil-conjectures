@@ -200,5 +200,33 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-70c965916 (reviewer sub-agent of L); spot-checked: Read the whole item, the new node, every cited statement, the parent's citing steps, the unit and the blueprint ancestor. HTT 2.4.1.7/2.4.1.6/2.4.1.9 and Kerodon 0110 are online only (WANTED is recorded), so every claim was checked mathematically. The item statement is unchanged and correct: it needs only an inner fibration, it has 13 existing citers, and it is not a target node, so the base-change and coefficient checks do not apply. Step 1: the RIGHT square is u's, so the pasting node applies in the correct direction (left v ⇔ rectangle w), and the p-compatibility via theta, ell and j is written out. Step 3: the face count of Δ^0⋆Λ^n_i gives the inner horn Λ^{n+1}_{i+1}; checked n=2. Step 4: Δ^0⋆∂Δ^n is Λ^{n+1}_0 with edge 01 = ell over the base Δ^{n+1}→Δ^1→B, and relative-initial-boundary is applied to L→Δ^0; checked n=1. Step 5: checked the Λ^3_0 faces (h,g,1_a), s0h, s1h, which give the missing face (g,h,1_b). The new node lem-coef-infinity-homotopy-pullback-pasting is true (Kerodon 3.4.1.11, right-square hypothesis correct; counterexample to dropping it: pt→S→pt over points). It is statement-only, self-contained, searched with all three kinds, not a duplicate after an rg search of the whole DAG, and does not restate an item clause. No cycle. FIX (C2): Step 2 was marked elementary but relied on unstated homotopy invariance of path pullbacks and on compatibility of the unit homotopies under p. I rewrote it to use the existing reviewed node lem-cbc-inner-fibration-equivalence-outer-horn-lift (a degenerate edge is an equivalence, so every Λ^n_0 horn fills over B, which is the cocartesian definition), updated proof_deps and declared it in tool_uses. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-inner-fibration-equivalence-outer-horn-lift, both generic tools from sk-prop-sf-cbc. The new node has no lean_audit; that is a maintainer field, as on other landed nodes, and not a fault.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad39be612",
+  "group": "Q45",
+  "result": "fix",
+  "note": "Read the node, both statement dependencies (IsCocartesianEdge, fiber, IsEquivalenceEdge, IsInitial, mappingSpace), the HTT 2.4.1.6/2.4.1.7/2.4.1.9 place and the module. Hypotheses (two quasicategories plus InnerFibration p), cancellation orientation (δ2σ=u, δ0σ=v, δ1σ=w), degenerate edges σ0 x, the coslice/prependFirst/cosliceMap/pullback construction of L(x,f), quasicategory, initiality and equivalence in L all match the node; no hollow definitions, theorem proof only sorry, docstrings present, no duplicate. Finding (H3, conclusion weaker than the node): the final clause asserted IsEquivalenceEdge E of the target map, but the node requires an equivalence in E_b, and b was unused. Fixed module: ∃ e : (fiber p b) _⦋1⦌ with pullback.snd e = E.δ 0 (cocartesianLiftSimplex p x f h m) ∧ IsEquivalenceEdge (fiber p b) e; the projection is injective, so e is unique and the existential is not a weakening. Docstring updated; report replaced with the original plus a maintainer-fix section. nt_compile: delivered and fixed files both compile cleanly; an injected error was reported, so the compile ran."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityCocartesianCompositionInitiality",
+  "declaration": "SSet.Enhanced.cocartesian_composition_initiality",
+  "declarations": [
+   "SSet.Enhanced.prependFirst",
+   "SSet.Enhanced.coslice",
+   "SSet.Enhanced.cosliceMap",
+   "SSet.Enhanced.cocartesianBaseVertex",
+   "SSet.Enhanced.cocartesianLiftCategory",
+   "SSet.Enhanced.cocartesianLiftSimplex",
+   "SSet.Enhanced.cocartesian_composition_initiality"
+  ],
+  "statement": "theorem cocartesian_composition_initiality {E B : SSet.{u}} (p : E ⟶ B) [Quasicategory E] [Quasicategory B] (h_inner : InnerFibration p) : (∀ (σ : E _⦋2⦌) (u v w : E _⦋1⦌), E.δ 2 σ = u → E.δ 0 σ = v → E.δ 1 σ = w → IsCocartesianEdge p (SSet.yonedaEquiv.symm u) → (IsCocartesianEdge p (SSet.yonedaEquiv.symm v) ↔ IsCocartesianEdge p (SSet.yonedaEquiv.symm w))) ∧ (∀ x : E _⦋0⦌, IsCocartesianEdge p (SSet.yonedaEquiv.symm (E.σ 0 x))) ∧ (∀ (x : E _⦋0⦌) (b : B _⦋0⦌) (f : B _⦋1⦌) (h : B.δ 1 f = p.app (op ⦋0⦌) x), B.δ 0 f = b → Quasicategory (cocartesianLiftCategory p x f h) ∧ ∀ (t : (cocartesianLiftCategory p x f h) _⦋0⦌), IsCocartesianEdge p (SSet.yonedaEquiv.symm (cocartesianLiftSimplex p x f h t)) → IsInitial (cocartesianLiftCategory p x f h) t ∧ ∀ (t' : (cocartesianLiftCategory p x f h) _⦋0⦌) (m : (cocartesianLiftCategory p x f h) _⦋1⦌), (cocartesianLiftCategory p x f h).δ 1 m = t → (cocartesianLiftCategory p x f h).δ 0 m = t' → IsCocartesianEdge p (SSet.yonedaEquiv.symm (cocartesianLiftSimplex p x f h t')) → IsEquivalenceEdge (cocartesianLiftCategory p x f h) m ∧ ∃ e : (fiber p b) _⦋1⦌, (pullback.snd (SSet.const (X := Δ[0]) b) p).app (op ⦋1⦌) e = E.δ 0 (cocartesianLiftSimplex p x f h m) ∧ IsEquivalenceEdge (fiber p b) e)",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/InfinityCocartesianCompositionInitiality.lean",
+  "fixed_by": "NT-stage2-cc-ad39be612"
  }
 }
