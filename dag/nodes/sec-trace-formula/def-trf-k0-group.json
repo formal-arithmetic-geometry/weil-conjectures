@@ -116,5 +116,37 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-9087c4a05 (reviewer sub-agent of L); spot-checked: I read the delivery in full: def-trf-k0-group (the item, still a split definition) and its one new node, def-trf-abelian-group-presentation (a definition, as a Mathlib leaf). I made no changes and wrote no fixes. Sources: the item's statement matches Stacks more-algebra.tex:36458-36461, the recall just before Tag 0AFX (lemma-det, line 36464): the free group on isomorphism classes of finite projective modules modulo [M']+[M'']=[M'⊕M'']. The new explicit construction takes I_S to be the projective quotients S^n/N up to isomorphism. This is the set-theoretic remedy of Tag 00JC (section-K-groups, algebra.tex:12995-13059). Tag 00JC writes the relations with short exact sequences rather than direct sums; for finite projectives the two give the same group, because such sequences split. No hypothesis is added or dropped. Checks on the item: I_S is a set; every finitely generated projective module has exactly one class in it; the direct sum of two classes does not depend on the chosen quotients; the relations generate a subgroup, not just a monoid congruence. Small cases for K_0: zero ring gives 0, a field gives Z, k×k gives Z^2, and [0]=0 because n=0 is allowed. The three cited definitions (finitely generated module, projective module, free module) define exactly what the statements use. The two citing lemmas, lem-trf-invertible-module-k0-class and lem-trf-k0-class-trivial-invertible, use only the classes [Q] and these relations. The leaf: Mathlib/Algebra/Module/Presentation/Basic.lean defines Relations at line 55, Quotient = (G→₀A)⧸span(range relation) at line 70, its AddCommGroup at line 71 and toQuotient at line 74; every recorded line number is correct. Taking A=ℤ is a one-line specialization, and the ℤ-span is by definition the subgroup of finite integer combinations, so no comparison theorem is hidden. Small cases for the presented group: no generators gives 0, no relations gives Z^(I), relation 2e gives Z/2, and repeated relations change nothing. The new node is a generic construction with no ring or modules, so it does not restate a clause of the item (D1). I searched the whole DAG with rg (generators and relations, Grothendieck group, free abelian group, group completion, Module.Relations, FreeAbelianGroup, GrothendieckAddGroup, 00JC); the hits, such as def-trf-fs-log-blowup and def-sc-divisor, are not duplicates. The blueprint main-20261015 has no K_0 or presentation node, so same_as=[] is right. The blueprint ancestor and via chain (lem-trf-local-term-locality, via lem-trf-regular-local-pic-zero) are correct. Unit sk-i-curve-zero needs no realized-field change, tool_uses is empty, no target is touched and no SGA source is cited. Delivery-errors A–F all pass."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1801f0797",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Read node, source (more-algebra.tex 36458-36461, algebra.tex 00JC 12996-13050), 3 stmt deps, module, report (Worker report + Second reading by Q112 present). Every clause rendered exactly: Presentation (n, N <= Fin n -> S, projective quotient; n=0 allowed); Classes = Quot by linear iso (an equivalence, checked); direct sum via finSumFinEquiv coordinates, quotient by ker(sumMap) = preimage of N x N'; Module.Relations Z with G = I_S, R = I_S x I_S, r = e_a+e_b-e_(a+b); K0 = Quotient deriving AddCommGroup; mk for any universe-v finite projective M. Scratch Lean proof that sumClass is independent of the Quot.out representatives (not an arbitrary map); relation identity holds; axioms only propext/choice/Quot.sound; mk S S, ULift and PUnit.{v+1} elaborate. No sorry, no hollow definition, no extra hypotheses or universe restriction; lean.statement matches file verbatim; 11 helpers listed with source/blueprint docstrings; no duplicate K0 in Mathlib/side/live; the 3 citers need only [Q], n[S] and the relations. nt_compile.py (--json, same text): clean, 2.2 s. Remark: leaf def-trf-abelian-group-presentation has no lean record (separate bookkeeping, not this delivery)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteProjectiveK0",
+  "declaration": "Module.FiniteProjectiveK0",
+  "declarations": [
+   "Module.FiniteProjectiveK0.Presentation",
+   "Module.FiniteProjectiveK0.Presentation.Carrier",
+   "Module.FiniteProjectiveK0.Classes",
+   "Module.FiniteProjectiveK0.coordinates",
+   "Module.FiniteProjectiveK0.sumMap",
+   "Module.FiniteProjectiveK0.sumEquiv",
+   "Module.FiniteProjectiveK0.sumPresentation",
+   "Module.FiniteProjectiveK0.sumClass",
+   "Module.FiniteProjectiveK0.relations",
+   "Module.FiniteProjectiveK0.presentationOf",
+   "Module.FiniteProjectiveK0.mk"
+  ],
+  "file": "lean/Sheaf/RingTheory/FiniteProjectiveK0.lean",
+  "statement": "def FiniteProjectiveK0 (S : Type u) [CommRing S] : Type u",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper declarations construct the specified set of projective finite-free quotients, its isomorphism classes and direct sums, the integer relation presentation, and the class of an arbitrary-universe finite projective module. All data and structural proofs use actual Mathlib constructions; there are no postponed proofs."
  }
 }

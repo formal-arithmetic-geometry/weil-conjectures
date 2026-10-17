@@ -162,5 +162,23 @@
   "group": "Q64",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-a88c41893 (reviewer sub-agent of L); spot-checked: I read Stacks curves.tex Tag 0C48 (lemma-reduced-quotient-regular-ring-dim-2) part (2) and its full proof. The item states it exactly: regular local, Krull dimension 2, I in n, depth(A/I)=1, giving I=(f) with f nonzero and in n. Nothing is weakened. Step 1: n has 2 generators, which form a regular sequence (lem-weil-pbc-regular-local-generators-regular-sequence), so depth A>=2 and I=0 is ruled out. Step 2: the UFD node gives the gcd extraction I=fJ in a few lines. Step 3: the case J=A gives I=(f). Step 4: J kills the class z of f. If z were nonzero, Supp(Az)={n}, so n is in Ass(Az) by the minimal-support Mathlib leaf and in Ass(A/I) by the exact-sequence node. Then every element of n is a zerodivisor on A/I, which contradicts depth 1. So f is in I. All hypotheses were checked where used. Item tested on F[[u,v]] with I=0, n, (u^2,uv), (u), (uv), (u^2-v^3). New node lem-trf-coprime-generators-mprimary-or-unit (J=A or sqrt J=n for generators with no common nonunit divisor) is true: a height-one prime over J would be principal (lem-trf-ufd-height-one) and its generator would divide every g_i. It is vacuous in the edge cases where the list is empty or all zero, and was tested on (u,v), (u^2,v^3) and (u,uv). It is the source's intermediate sentence, strictly smaller than the item, statement-only, with blueprint from/via correct. An rg search of dag/nodes found no duplicate. The route is fine: sk-thm-p1 is in the transitive uses of sk-i-curve-zero. No tool_uses, no SGA. The parent's use of the item matches its hypotheses. The recorded Mathlib searches are summaries I could not check against the search log. FIX: I removed lem-trf-regular-local-ufd-boundary-factorization from the item's stmt_deps because the statement does not use it; it stays in step 2 and proof_deps. The whole corrected file is in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b64410f7",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Checked against Stacks curves.tex Tag 0C48(2) (lines 3817-3850) and the node: IsRegularLocalRing A, ringKrullDim A = 2, I ≤ maximalIdeal, depth of the local ring A⧸I (project IsLocalRing.depth, quotient local structure derived from hI) = 1 ⇒ ∃ f ≠ 0, f ∈ 𝔫, I = span {f}; all clauses exact, no extra assumptions, universe u bound. Edge cases I=0, I=𝔫 (depth 0), (u²,uv), (u),(uv),(u²−v³) consistent. Node diff vs the side clone: only the lean field; lean.statement equals the file signature exactly; stmt_deps correct. Docstrings carry the source place, blueprint tag and proof steps; proof only sorry (axioms include sorryAx). nt_compile.py --json clean (1.9-3.2 s); a probe confirmed errors are reported and the project depth is the one resolved. The Second reading section is the post-2026-10-17 notice; this review supplies the reading. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.RegularSurfaceDepthOnePrincipal",
+  "declaration": "RingTheory.regularSurfaceDepthOnePrincipal",
+  "statement": "theorem regularSurfaceDepthOnePrincipal (A : Type u) [CommRing A] [IsRegularLocalRing A] (hdim : ringKrullDim A = (2 : WithBot ℕ∞)) (I : Ideal A) (hI : I ≤ IsLocalRing.maximalIdeal A) (hdepth : letI : Nontrivial (A ⧸ I) := Ideal.Quotient.nontrivial_iff.mpr (ne_top_of_le_ne_top (IsLocalRing.maximalIdeal.isMaximal A).ne_top hI) letI : IsLocalRing (A ⧸ I) := IsLocalRing.of_surjective' (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective IsLocalRing.depth (R := A ⧸ I) (A ⧸ I) = (1 : ℕ∞)) : ∃ f : A, f ≠ 0 ∧ f ∈ IsLocalRing.maximalIdeal A ∧ I = Ideal.span {f}",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/RegularSurfaceDepthOnePrincipal.lean"
  }
 }

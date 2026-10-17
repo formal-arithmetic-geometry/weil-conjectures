@@ -133,5 +133,23 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-8fa62d8a9 (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks sites.tex lines 3240-3366: Definition 090H, and Lemma 0D06 with its whole proof. I also read the statements of all six cited nodes. The statement matches 090H and 0D06 exactly and was not changed. The delivery creates no new nodes. Off-unit uses are a Mathlib leaf (epi = locally surjective) and the Lean-closed node lem-weil-pbc-site-sheafification-sections-local, so tool_uses [] is correct. No duplicate exists: I searched dag/nodes for 0D06, 090H, 00WI and 00WT. Step 1, (i)=>(ii), is correct. The coproduct as sheafification of the objectwise union follows from the left-adjoint definition in a few lines, and the 00WT joint-epimorphy argument is proved inline. Step 2, (ii)=>(i), has one repairable gap. It took the local lift of id_U as a section of a single H_{U_i}, but the criterion only gives a section of the sheaf coproduct, so a refinement through the presheaf coproduct is needed. It also credited the equality clause alone with producing actual arrows over U, when the first clause of sections-local and then the equality clause are both needed. I rewrote the step 2 text, and expanded the step 1 epimorphy argument, in fixes/dag/nodes/sec-trace-formula/lem-trf-site-quasicompact-sheafification-criterion.json. The uses lists, proof_deps and all other fields are unchanged. Edge cases checked: an empty covering, a singleton covering, finite I, and Stacks' [0,1] example showing (i) is weaker than finite subcovers.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a196cf138",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Read the node, its 4 statement dependencies and their Lean (IsSiteForCoverings, presheafToSheaf, IsQuasiCompactObject, size convention), Stacks sites.tex 090H and 0D06, the module, report and node diff. Every clause matches: covering families indexed in Type (max u v) reach all covering presieves; the refinement must cover, has a finite-image index map and commutes over U; (ii) is IsQuasiCompactObject.{max u v} of the sheafified uliftYoneda.{u}.obj U; no extra hypotheses or universe restrictions; condition (i) does not depend on the family presentation. Edge cases (empty, singleton or finite I, empty K, infinite K with finite image) are kept. Node changed only in its lean record, statement verbatim, stmt_deps and proof imports correct, docstrings give source and blueprint, sorry only, no definitions, no duplicate found. Report has a Worker report and a Second reading by Q42 (a self-audit, accepted). nt_compile.py: clean in 3.6 s, no warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SiteQuasicompactSheafificationCriterion",
+  "declaration": "CategoryTheory.site_quasiCompact_iff_sheafifiedYoneda_quasiCompact",
+  "file": "lean/Sheaf/TraceFormula/SiteQuasicompactSheafificationCriterion.lean",
+  "statement": "theorem site_quasiCompact_iff_sheafifiedYoneda_quasiCompact {C : Type u} [Category.{v} C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) (U : C) : (∀ (I : Type (max u v)) (U_i : I → C) (a : ∀ i, U_i i ⟶ U), Presieve.ofArrows U_i a ∈ J U → ∃ (K : Type (max u v)) (V : K → C) (b : ∀ k, V k ⟶ U) (α : K → I) (c : ∀ k, V k ⟶ U_i (α k)), Set.Finite (Set.range α) ∧ (∀ k, c k ≫ a (α k) = b k) ∧ Presieve.ofArrows V b ∈ J U) ↔ IsQuasiCompactObject.{max u v} ((presheafToSheaf J.toGrothendieck (Type (max u v))).obj (uliftYoneda.{u}.obj U))",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

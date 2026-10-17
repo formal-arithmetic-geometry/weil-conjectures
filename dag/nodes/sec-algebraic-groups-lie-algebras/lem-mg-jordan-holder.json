@@ -116,5 +116,23 @@
   "group": "Q49",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-835c1a366 (reviewer sub-agent of L); spot-checked: I read the whole item. It has two proof steps and no new nodes. Its statement and proof are word-for-word the same as main-20261015 lem-mg-jordan-holder.md and .proof.md (order 2886) and the master copy (order 2542). The statement is not weakened, and V is now introduced with def-mg-weil-composition-series in stmt_deps. Step 1: S=V_1 is simple; the least j exists and is at least 1; S∩V'_{j-1} is a proper stable subspace of the simple S, so it is 0; the nonzero map S→V'_j/V'_{j-1} is therefore an isomorphism. Step 2: by the modular law, V'_i∩(V'_{i-1}+S)=V'_{i-1} for i<j, the third isomorphism theorem covers i>j, and the single repeated term at (j-1,j) is deleted. The inclusions stay strict and induction on dim V applies to V/S; the dim-0 base case is trivial. All of this is checked. Small cases: V=0, a simple V, chi1+chi2 with distinct characters (j=2 case worked through), trivial+trivial with infinitely many series, and a nonsplit unipotent extension; all agree. The citation of lem-mg-composition-series-exists is not logically needed but follows the blueprint's uses list and is within the same unit. No duplicate: rg over dag/nodes finds only users and a module-existence lemma (lem-weil-pbc-finite-length-module-simple-filtration). Mathlib CompositionSeries.jordan_holder (Order/JordanHolder.lean:458) together with JordanHolderLattice.Iso.linearEquiv (RingTheory/SimpleModule/Basic.lean:548) is a generalization that takes more than one line to specialize, so the node is correctly not a leaf. slopmaster2 has no jordanHolder declaration and no RepresentationTheory/CompositionSeries.lean, so the worker was right not to attach it. Cosmetic: source.document still names the master copy although the report says it was repointed; the texts are identical. Maintainer remark, not a fault of this delivery: the imported def-mg-weil-composition-series scopes V to the monodromy data of a lisse Weil sheaf, while the lemma family applies it to arbitrary Weil representations such as V/S. No fixes and no tool_uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd1b281dc",
+  "group": "Q128",
+  "result": "pass",
+  "note": "The delivery adds only lean existing=true, bound to Representation.CompositionSeries.jordanHolder (WeilConjectures.RepresentationTheory.CompositionSeries:193), plus a report with real Worker report and Second reading by Q128 sections. The statement field matches the source verbatim and the docstring names lem-mg-jordan-holder. Both series use the dependency's recorded CompositionSeries/.factor binding. The Fin length equivalence keeps multiplicities. Representation.Equiv intertwines the actions, so factors are isomorphic as Weil representations. The theorem assumes no finite dimensionality and k/W/V universes are independent, so it is more general and specializes to the node. Edge cases checked: V=0, simple V, repeated factors, non-split extensions, permuted factors. No duplicate in the project; the Mathlib lattice theorem is a generalization. nt_compile probe compiled clean in 2.4 s: the theorem applies to a finite-dimensional rep in independent universes u,v,w; axioms propext, Classical.choice, Quot.sound with no sorryAx. Gates pass: no hollow defs, no new proofs, no build or live writes. Only finding is cosmetic and inherited: source.document names the master copy."
+ },
+ "lean": {
+  "module": "WeilConjectures.RepresentationTheory.CompositionSeries",
+  "declaration": "Representation.CompositionSeries.jordanHolder",
+  "statement": "theorem jordanHolder (s₁ s₂ : ρ.CompositionSeries) :\n    ∃ e : Fin s₁.length ≃ Fin s₂.length, ∀ i, Nonempty ((s₁.factor i).Equiv (s₂.factor (e i))) :=",
+  "branch": "slopmaster2",
+  "by": "Q128",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "The published declaration has the exact factor-matching conclusion on the dependency’s Representation.CompositionSeries and factor: a bijection of the finite index types and an equivalence of representations for every matched pair, retaining multiplicity. It applies to any group representation admitting the supplied series, hence in particular to the node’s finite-dimensional Weil representation; finite dimensionality is needed for existence, not uniqueness. Its docstring explicitly names lem-mg-jordan-holder. Source read through scompile.py --source because the older local checkout lacks this module."
  }
 }

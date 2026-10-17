@@ -257,5 +257,24 @@
   "group": "Q58",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-42dfeebaa (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks 080Q (more-morphisms.tex, lemma-flat-and-free-at-point-fibre: the statement, the preceding remark and the whole proof). The statement is unchanged from the side/live unsplit node and agrees with 080Q hypothesis by hypothesis; r=0 covers the zero case. The delivery has no new nodes, and the only DAG nodes stating 080Q are the item and its citer lem-trf-generic-free-blowup. I checked each of the seven steps against the statement of the node it cites. Step 1 (00DV, empty family; then 01B8 on 0->F): correct. Step 2 (00R7 with S=S'=O_{X,x}, beta=id): every hypothesis holds (alpha local, essentially of finite presentation from locally of finite presentation, M finitely presented and nonzero). However, the identification of (F_s)_x with M/m_sM over O_{X_s,x}=O_{X,x}/m_sO_{X,x} was justified only as 'by definition'. It is Schemes 0HA1 plus Sheaves 0098 (C1). Fixed by citing the existing nodes lem-sbc-scheme-fibre-stalk-quotient and lem-weil-pbc-module-stalk-pullback and writing out the compatible isomorphisms and the essential-finite-presentation argument (def-sbc-locally-finite-presentation). Steps 3-7 (00NZ, 01B8, 01BP, 01B8, elementary isomorphism): correct, including K_x=0 from exactness of stalks. Small cases: k[t]/(t) over A^1 and over Spec k each fail one flatness hypothesis and are not free; O^n is free; so both hypotheses are needed. The five off-unit non-leaf lemma uses (00R7, 01B8, 01BP, 0HA1, 0098) were undeclared (C8). I added them to split_report.tool_uses and accept them. proof_deps now equals the union of the uses. No cycle (I checked transitive deps), no SGA source, not a target node. The corrected item is in fixes/dag/nodes/sec-trace-formula/lem-trf-flat-fibre-free-neighbourhood.json; no nodes added or dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34746d392",
+  "group": "N4",
+  "result": "fix",
+  "note": "The Lean hypothesis hflat : F.IsFlatOver f is global flatness over S on all affine opens, stronger than the node's and Stacks 080Q's flatness of F_x over O_{S,f x} at x only; it also could not serve the citer lem-trf-generic-free-blowup. Fixed by hflat : moduleFlatAt f F x, the already-landed stalkwise predicate from Sheaf.TraceFormula.FlatAssociatedEquidimensional; that module replaces the unused DirectImage.Basic import; module docstring and step-by-step proof docstring added; report gets a correction section. Other clauses match: fp = lfp+qc+qs per conventions (Stacks 01TP), F.IsFinitePresentation, canonical fibre f.fiber (f x) with point f.asFiber x, tensorPullback, fibre stalk flatness, exists W containing x and r with F|_W iso free on ULift (Fin r), r=0 covered, single universe u. Only sorry, no definitions, nothing pro-etale, statement field verbatim, no existing 080Q declaration found. nt_compile: delivered file clean (5.3 s), fixed file clean (4.1 s); the tool was checked to report errors. Not confirmed: whether FlatAssociatedEquidimensional is in the delivery's base commit (git merge-base was blocked); it is on the side clone, landed in batch 05b876bbde."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FlatFibreFreeNeighbourhood",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_free_neighbourhood",
+  "file": "lean/Sheaf/TraceFormula/FlatFibreFreeNeighbourhood.lean",
+  "statement": "theorem exists_free_neighbourhood {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (F : X.Modules) [F.IsFinitePresentation] (x : X) (hflat : moduleFlatAt f F x) (hfibre : Module.Flat ((f.fiber (f x)).toRingedSpace.presheaf.stalk (f.asFiber x)) ((AlgebraicGeometry.RingedSpace.moduleStalkFunctor (f.fiber (f x)).toRingedSpace (f.asFiber x)).obj ((AlgebraicGeometry.Scheme.Modules.tensorPullback (f.fiberι (f x))).obj F))) : ∃ (W : X.Opens) (r : ℕ), x ∈ W ∧ Nonempty (((restrictFunctor W.ι).obj F) ≅ (restrictFunctor W.ι).obj (SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin r))))",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-34746d392"
  }
 }

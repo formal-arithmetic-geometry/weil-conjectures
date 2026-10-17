@@ -16,7 +16,8 @@
   "def-weil-proper-morphism",
   "def-weil-surjective-morphism",
   "def-trf-proper-hypercover",
-  "def-sp-spectral-sequence"
+  "def-sp-spectral-sequence",
+  "def-trf-oriented-hypercover-descent-datum"
  ],
  "proof": [
   {
@@ -325,5 +326,26 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-3687bfc61 (reviewer sub-agent of L); spot-checked: Read the item's statement, all 7 steps and every field, the new node lem-trf-total-site-augmentation-spectral-sequence in full, the statements of all cited nodes, and the parent's uses of the item. Read at the cited places in local Stacks spaces-simplicial.tex: 0D99, 0DH1 with lemma-morphism-simplicial-sites-modules, 0D7F with its double-complex proof and lemma-augmentation-cech-complex-modules, 0DHL; also homology lemma-first-quadrant-ss and 0E46/0E47. The Orgogozo PDF is WANTED and proof_origin is honestly by: agent. The item statement is unchanged and keeps every hypothesis. Its coefficients are constant-Λ modules on the small étale and vanishing topoi, matching the descent lemma.\n\nThe route is correct. Ordinary proper hyperdescent gives K≅Rε_*ε^*K. Applying Rψ_{f,*} and derived composition along ε̄ψ_•≅ψ_fε gives RΨ_fK≅Rε̄_*L with L=Rψ_{•,*}ε^*K. The components of L are r_iL≅RΨ_{f_i}K_i, and the lower bound c holds by left t-exactness and conservativity of the restrictions. The general-site spectral sequence then gives E1^{i,j}=H^j(Rε̄_{i,*}RΨ_{f_i}K_i), with i≥0, j≥c, and graded pieces for 0≤i≤n−c. Tested on the identity hypercover (E2 concentrated in column 0), on K=0, on negative c, and on n<c.\n\nThe new node is true for geometric transition morphisms with constant Λ: g_{p!} is exact, components of direct images are componentwise, the 0D7F argument shifts by c, and functoriality comes from a map of double complexes built from base-change maps. It is a needed generalization of lem-trf-simplicial-derived-image-spectral-sequence, which covers only étale sites of simplicial schemes, and vanishing topoi are not such sites. Its module component clauses overlap the abelian-sheaf nodes lem-trf-total-site-component-restriction and lem-trf-total-site-derived-components; I accepted the overlap and noted it for the future split.\n\nTwo fixes. (1) In the new node, the component identification is now stated as the canonical base-change map r_pRh_*J→Rh_{p,*}r'_pJ, the mate of h_p^*r_p≃r'_ph^*, which is an isomorphism, exactly as in 0DH1. The node also states r'_ph^*≃h_p^*r_p and cites def-weil-pbc-simplicial-object. (2) In item step 7, I added the justification that the component of the total comparison w^*L→L' is β for Y_i, by mate pasting (clauses 1–2) with those base-change squares.\n\nAccepted tool uses: lem-sfb-derived-composition-adjunction-normalization, lem-weil-pbc-derived-functor-negative-vanishing, lem-weil-pbc-ring-sheaves-grothendieck, lem-weil-pbc-ringed-topoi-derived-pushforward-composition. lem-weil-pbc-mate-pasting is a Mathlib leaf. No SGA source is used.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0af8180e7",
+  "group": "Q63",
+  "result": "fix",
+  "note": "Statement matches node and source clause by clause: Noetherian S, f of finite presentation (3 binders), finite Λ in Type (u+1) (forced by recorded nearbyCycles/Coeff interface, no loss for finite rings), m with (m:Λ)=0 and IsUnit on Γ(S,⊤), IsProperHypercover (degree-0 matching = augmentation), hfp per degree, recorded isBoundedConstructible via canonical exact readModules transport, bound c; conclusion Descent (E1 = H^j(term_i), support i≥0, j≥c on all pages, finite filtration with gr at stable page max(1,n−c+2), augmented edge) plus Comparison/Between for arbitrary Cartesian base changes. Statement field verbatim; only stmt_deps and lean added. New def node fields per H12 ok; no hollow data (rectangle/pullComposition from ∃!). Sorry-only, docstrings ok. FIX: DescentDatum publicly imported Sheaf.Paper.PsiGoodOrientedCohomologyStrata, a node downstream of this item (strata → psi-proper-surjective → item), which closes an import cycle once proof-dep imports are added; used only for upContinuous. Replaced by owning-module imports (ConstantRingModuleSheaves, CommutativeSiteDerivedConstantModuleFunctor) and a local inferInstanceAs from Mathlib's AsSmall.equiv dense-subsite instance; no new declaration or sorry. Report updated accordingly. nt_compile --json: delivered and fixed modules both clean (13.0 s / 3.1 s); error reporting confirmed with a deliberate error."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrientedNearbyHypercoverSpectralSequence",
+  "declaration": "AlgebraicGeometry.OrientedNearbyCycles.Hypercover.exists_descent",
+  "declarations": [
+   "AlgebraicGeometry.OrientedNearbyCycles.Hypercover.exists_descent"
+  ],
+  "file": "lean/Sheaf/Paper/OrientedNearbyHypercoverSpectralSequence.lean",
+  "statement": "theorem exists_descent {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (m : ℤ) (hmΛ : (m : Λ) = 0) (hmS : IsUnit (m : Γ(S, ⊤))) (Y : SimplicialObject (Over X)) (hY : IsProperHypercover Y) (hfp : ∀ i : ℕ, LocallyOfFinitePresentation (epsilon Y i ≫ f) ∧ QuasiCompact (epsilon Y i ≫ f) ∧ QuasiSeparated (epsilon Y i ≫ f)) (K : EtaleDerived X Λ) (hK : Etale.DerivedCategory.isBoundedConstructible (Coeff.{u, u + 1} Λ) X ((readModules X Λ).mapDerivedCategory.obj K)) (c : ℤ) (hc : ∀ j : ℤ, j < c → IsZero ((DerivedCategory.homologyFunctor _ j).obj K)) : ∃ D : Descent f Y Λ K c, ∃ Db : ∀ b : Change f Y, Descent b.f' b.Y' Λ (((etaleModules.{u, u + 1} b.h).pull (Coeff.{u, u + 1} Λ)).obj K) c, (∀ b : Change f Y, Nonempty (Comparison D b (𝟙 _) (Db b))) ∧ (∀ (b₁ b₂ : Change f Y) (q : Between b₁ b₂), Nonempty (Comparison (Db b₁) q.change (q.coefficients Λ K) (Db b₂)))",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

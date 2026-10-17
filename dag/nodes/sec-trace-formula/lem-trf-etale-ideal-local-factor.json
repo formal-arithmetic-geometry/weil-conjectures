@@ -198,5 +198,24 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-5e342c554 (reviewer sub-agent of L); spot-checked: Read Stacks flat.tex 0812/0813 (lines 8848-8901) with their proofs, all cited node statements, the item, the new node and the unit record. The item matches 0813 hypothesis by hypothesis and is unchanged. Step 1 (a^m in J) follows from the radical node. Step 2: the standard-etale node gives g not in q, monic f and B_g ≅ (A[t]/(f))_h; the Yh=1 identification is written out; etaleness comes from the open-immersion and composition nodes; the basis comes from the monic-quotient node. Step 3 clears denominators explicitly, giving KC_h = θ(JB_g) with K f.g. and containing a^m. Step 4: all hypotheses of the new node are checked, and J' = θ^{-1}(L). Step 5: the rows a^m e_i lie in ker π, det = a^{md}, so V(I) ⊂ V(a), with d=0 handled. The new node lem-trf-etale-fitting-trick is 0812 specialized to finite free C. It is statement-only and self-contained, with Fit_0 taken from the existing kernel-minor node, and strictly smaller than the item (no boundary element, no support clause), so not a restatement. Small cases found no counterexample: C=A, C=A×A, K=0, K=C, h nilpotent, d=0. rg over the DAG for 0812/0813/Fitting and a search of blueprint main-20261015 found no duplicate. The cited lem-weil-pbc nodes are mathlib leaves and the Fitting node is in the same unit sk-i-curve-zero, so there are no tool_uses. The item is not a target, so the base-change morphism and coefficient category checks do not apply. No SGA. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67e0d7044",
+  "group": "Q94",
+  "result": "fix",
+  "note": "Statement matches Stacks 0813 and the node clause by clause (etale Spec.map, injective mult by a, J.FG, V(J)⊆V(aB); ∃ I.FG, g∉q, J'.FG with V(I)⊆V(a) and IB_g=(JB_g)J'); no extra assumptions; shared universe u forced by Spec.map; edge cases zero ring, d=0, J=⊤/⊥, nilpotent g covered; only lean field changed, record verbatim; dependency declarations Etale/Spec used; no duplicate found; sorry only. Fault H8: theorem docstring lacked node proof steps 1, 3, 5. Fixed in fixes/EtaleIdealLocalFactor.lean (docstring only; signature, imports, module docstring identical). nt_compile --json: delivered and fixed both clean (2.4 s / 2.1 s); broken-copy check confirms real compile."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleIdealLocalFactor",
+  "declaration": "AlgebraicGeometry.exists_fg_ideal_local_factor",
+  "statement": "theorem exists_fg_ideal_local_factor (A B : Type u) [CommRing A] [CommRing B] (φ : A →+* B) [AlgebraicGeometry.Etale (Spec.map (CommRingCat.ofHom φ))] (a : A) (ha : Function.Injective (fun x : A => a * x)) (J : Ideal B) (hJ : J.FG) (hV : PrimeSpectrum.zeroLocus (J : Set B) ⊆ PrimeSpectrum.zeroLocus (Ideal.map φ (Ideal.span ({a} : Set A)) : Set B)) (q : PrimeSpectrum B) : ∃ (I : Ideal A) (g : B), I.FG ∧ g ∉ q.asIdeal ∧ ∃ (J' : Ideal (Localization.Away g)), J'.FG ∧ PrimeSpectrum.zeroLocus (I : Set A) ⊆ PrimeSpectrum.zeroLocus (Ideal.span ({a} : Set A) : Set A) ∧ Ideal.map ((algebraMap B (Localization.Away g)).comp φ) I = Ideal.map (algebraMap B (Localization.Away g)) J * J'",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/RingTheory/EtaleIdealLocalFactor.lean",
+  "fixed_by": "NT-stage2-cc-67e0d7044"
  }
 }
