@@ -31,7 +31,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-kan-quillen-right-proper",
-  "lem-coef-reedy-model-structure"
+  "lem-coef-reedy-model-structure",
+  "lem-coef-segal-cartesian-exponent",
+  "def-coef-segal-space"
  ],
  "proof": [
   {
@@ -191,5 +193,35 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-cf19ad26f (reviewer sub-agent of L); spot-checked: Rezk's paper is not archived under literature/, so I read the online PDF named in the node as text: section 6 (Theorem 6.2, p.14) and all of section 11 (pp.24-28: Prop 11.1, Lemmas 11.6/11.10/11.11, the pushouts (11.8) and (11.9), and the proof of 11.1). The item statement matches Theorem 6.2: same E=discnerve I[1], restriction along x->y, Reedy-fibrant Segal space, no completeness. V_eq equals W_hoequiv by 5.5 and 5.8. The endpoint and collapse clauses are elementary. The statement is unchanged and not weakened. Step 1: the triangles 010 and 101 give both inverse equations, and the endpoint order is right. Step 2: I checked that H(k) contains every edge for k>=3, and that for k=2 the missing edge is [12]=[02][01]^{-1}. So T_V(F(k)) is a pullback of the Kan fibration given by the exponent node, and with the new node it is a trivial fibration by the Kan node. Step 3: Rezk states the pushout without proof, so I checked it degreewise myself. sigma_k is injective outside H(k), because a map onto {1..k} is recovered from its word and starting letter, and its words avoid E(k-1) by reduced length. Steps 4-7 are correctly elementary and match Rezk's proof of 11.1 and the tower argument. New node lem-coef-segal-equivalence-outer-horn: it is exactly Rezk Lemma 11.10 (H(k) is the largest subobject not containing d0 iota, T_V is Map_hoequiv), with the same hypotheses. Tested on k=2 (Lemma 11.6 plus pi_0), empty V, terminal V and nerves of categories. B1-B7 are met, it is strictly smaller than the item, and it is non-elementary. My DAG search found no duplicate: segal-inverse-evaluation is the infinity-categorical analogue, cbc-equivalence-outer-horn-filling is about quasicategories, cotensor-evaluation-dk is Rezk 13.9. The blueprint has no Segal node. No cycle, no off-unit tool, no SGA. No fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SegalEquivalenceClassifier",
+  "file": "lean/Sheaf/AlgebraicTopology/SegalEquivalenceClassifier.lean",
+  "declaration": "SSet.SegalSpace.segal_equivalence_classifier",
+  "declarations": [
+   "SSet.SegalSpace.walkingIsomorphism",
+   "SSet.SegalSpace.walkingArrow",
+   "SSet.SegalSpace.walkingEndpoint",
+   "SSet.SegalSpace.representableEvaluation",
+   "SSet.SegalSpace.edgeRestriction",
+   "SSet.SegalSpace.endpointRestriction",
+   "SSet.SegalSpace.collapse",
+   "SSet.SegalSpace.segal_equivalence_classifier"
+  ],
+  "statement": "theorem segal_equivalence_classifier : ∃ ε : ∀ (V : CategoryTheory.SegalSpace.Space.{u}), CategoryTheory.SegalSpace.IsSegal V → (mappingSpace walkingIsomorphism (Functor.curry.obj V) ⟶ (CategoryTheory.SegalSpace.equivalenceArrows V).toSSet), (∀ (V : CategoryTheory.SegalSpace.Space.{u}) (hV : CategoryTheory.SegalSpace.IsSegal V), Enhanced.IsWeakHomotopyEquivalence (ε V hV) ∧ ε V hV ≫ (CategoryTheory.SegalSpace.equivalenceArrows V).ι = edgeRestriction (Functor.curry.obj V) ∧ ε V hV ≫ (CategoryTheory.SegalSpace.equivalenceArrows V).ι ≫ (Functor.curry.obj V).map (SimplexCategory.δ 1).op = endpointRestriction (Functor.curry.obj V) false ∧ ε V hV ≫ (CategoryTheory.SegalSpace.equivalenceArrows V).ι ≫ (Functor.curry.obj V).map (SimplexCategory.δ 0).op = endpointRestriction (Functor.curry.obj V) true ∧ collapse (Functor.curry.obj V) ≫ ε V hV ≫ (CategoryTheory.SegalSpace.equivalenceArrows V).ι = (Functor.curry.obj V).map (SimplexCategory.σ 0).op) ∧ ∀ (V W : CategoryTheory.SegalSpace.Space.{u}) (hV : CategoryTheory.SegalSpace.IsSegal V) (hW : CategoryTheory.SegalSpace.IsSegal W) (f : V ⟶ W), ∃ φ : (CategoryTheory.SegalSpace.equivalenceArrows V).toSSet ⟶ (CategoryTheory.SegalSpace.equivalenceArrows W).toSSet, φ ≫ (CategoryTheory.SegalSpace.equivalenceArrows W).ι = (CategoryTheory.SegalSpace.equivalenceArrows V).ι ≫ (Functor.curry.map f).app (op ⦋1⦌) ∧ ε V hV ≫ φ = mappingSpacePost walkingIsomorphism (Functor.curry.map f) ≫ ε W hW",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded def-coef-segal-space predicate, strict mapping fibres, and equivalence-arrow subspace without duplicating them. Functor.curry gives the equivalent simplicial-object encoding for the published SegalCartesianExponent cartesian internal hom. Mapping spaces, restriction and postcomposition are the recorded SSet.SegalSpace.mappingSpace, mappingSpacePre and mappingSpacePost of lem-coef-simplicial-space-reedy-cartesian (Sheaf.AlgebraicTopology.SimplicialSpaceReedyCartesian), not redefined (second-reader fix: the delivered mappingObject/mappingObjectMap/mappingRestriction were definitional copies). Helpers construct only the walking-isomorphism source, its arrow and endpoints, the Yoneda evaluation, the edge/endpoint restrictions, and the collapse map introduced by this node. The theorem includes factorization, weak equivalence, both endpoint equations, collapse normalization, and naturality under every map of Segal spaces.",
+  "fixed_by": "NT-stage2-cc-c7447b979"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c7447b979",
+  "group": "Q19",
+  "result": "fix",
+  "note": "Statement matches node and Rezk Thm 6.2 clause by clause: factorization through the equivalenceArrows inclusion (unique since the inclusion is mono), weak homotopy equivalence, endpoints delta1->e0 and delta0->e1, collapse = sigma0, naturality for all maps of Segal spaces; outer/inner orientation of curry and row consistent; no extra hypotheses; one universe u; statement field verbatim; added stmt_deps are landed nodes with no cycle; docstrings and 7-step proof present; only sorry. H4: mappingObject/mappingObjectMap/mappingRestriction duplicated the landed SSet.SegalSpace.mappingSpace/mappingSpacePost/mappingSpacePre (lem-coef-simplicial-space-reedy-cartesian, already in the delivery's history). fixes/ has the complete replacement SegalEquivalenceClassifier.lean using them plus the lean-record and report; it compiles clean via nt_compile.py (rc 0, no diagnostics), as did the original. The parallel SSet.Segal.E/intervalArrow/endpoint of lem-coef-segal-categorical-equivalence-dk cannot be reused here (that node's proof depends on this item, so importing it would make a stage-3 import cycle); noted for later consolidation. Lead may add lem-coef-simplicial-space-reedy-cartesian to stmt_deps."
  }
 }
