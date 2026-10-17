@@ -16,40 +16,38 @@
  ],
  "proof": [
   {
-   "text": "Use the proved normalized restriction-composition identity.",
+   "text": "Use ordinary composition coherence of the specified sheaf comparison. Apply the proved mapDerivedCategorySquareIso_hom_app_comp theorem to the inverse comparisons and cancel their inverses to obtain exact-derived composition coherence.",
    "uses": [
-    "lem-weil-pbc-finite-discrete-restriction-composition"
+    "lem-weil-pbc-finite-discrete-sheaf-pullback-composition"
    ],
    "elementary": false
   },
   {
-   "text": "Conjugate this restriction identity through the adjunctions and equivalences defining the canonical pullback family. The mate composition laws give ordinary pullback composition coherence, also for the etale/pro-etale comparison.",
+   "text": "Normalize the canonical derived coefficient comparison as realization_combine at the source, the exact-derived ordinary square, the inverse realization_combine at the target, and the exact-versus-left-derived inverse. Normalize leftDerivedUpperStarComp by its defining composition. Apply the elementary transport_comp calculation to naturality and exact-derived composition coherence; the intermediate realization and derived replacement isomorphisms cancel. The D+ composition map is the restriction of its full-derived counterpart.",
    "uses": [
-    "def-weil-pbc-canonical-finite-discrete-pullback"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the composition and whiskering laws for mapDerivedCategoryNatIso and mapDerivedCategoryCompIso. Restrict along D+ inclusion, then cancel the exact-versus-left-derived comparisons. Transport the two composites along sq.w to obtain coefficientAmbientSquare.",
-   "uses": [
-    "def-weil-pbc-coefficient-derived-functor-api",
     "def-weil-pbc-canonical-finite-discrete-pullback",
-    "lem-weil-pbc-derived-square-pasting"
+    "def-weil-pbc-coefficient-derived-functor-api"
    ],
    "elementary": false
+  },
+  {
+   "text": "For an arbitrary realization functor family and comparison family satisfying composition, compare the two composition equations. Equality elimination along the commutativity of the square identifies the canonical comparisons for the two composite scheme morphisms. Apply a generic categorical cancellation lemma, keeping both square comparison isomorphisms as parameters and identifying them with their specified three-factor compositions at the isomorphism level. This gives exactly the square equation, avoiding expansion of concrete derived-functor components.",
+   "uses": [
+    "def-weil-pbc-coefficient-derived-functor-api"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-discrete-restriction-composition",
+  "lem-weil-pbc-finite-discrete-sheaf-pullback-composition",
   "def-weil-pbc-canonical-finite-discrete-pullback",
-  "def-weil-pbc-coefficient-derived-functor-api",
-  "lem-weil-pbc-derived-square-pasting"
+  "def-weil-pbc-coefficient-derived-functor-api"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Proposition 5.3.2 and Lemma 5.4.1; sectionwise coefficient encoding",
-  "note": "A4: explicit coefficient transport; remaining proof obligations are separate named statements."
+  "note": "B3: ordinary composition is fully proved in the new sheaf-composition module. The assigned module proves exact derivation, D+ compatibility, left-derived replacement and square transport; no new hole remains."
  },
  "mathlib_searches": [
   {
@@ -106,7 +104,8 @@
   "statement": "theorem finiteDiscreteCoefficientPullbackIso_square\n    : CoefficientPullbackSquare B (Profinite.continuousMapRingObj B)\n      (fun T ↦ finiteDiscreteRealization B T\n        (finiteDiscreteCoefficientEquivalence B eR G hG T))\n      (finiteDiscreteCoefficientPullbackIso B eR G hG)",
   "branch": "sheaf-dag",
   "by": "A4",
-  "date": "2026-10-16"
+  "date": "2026-10-16",
+  "declarations": []
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -119,14 +118,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "X-62b33",
-  "group": "A4",
+  "reviewer": "COMPILER",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261016T155153-L-839662",
+  "landing": "20261017T021559-L-693446",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean constructions, remaining obligations, signatures and proof dependencies match their DAG nodes; compilation, importer and axiom checks pass."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {
