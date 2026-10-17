@@ -53,7 +53,6 @@ private theorem normalization_iso_of_iso_over {X Y T : Scheme.{u}}
     · simp
   exact ⟨⟨a, b, hab, hba⟩, by simp [a]⟩
 
--- The retained normality and generic-open hypotheses are unnecessary for this comparison.
 /-- The concrete stalk pullback is the normalization of a generic Galois cover of the
 smooth local total space, with the comparison commuting with the maps to that space.
 
