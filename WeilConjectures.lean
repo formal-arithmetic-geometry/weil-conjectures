@@ -4811,3 +4811,7 @@ public import WeilConjectures.ZetaLinearAlgebra.Weights
 public import WeilConjectures.ZetaLinearAlgebra.WeilFactorization
 public import WeilConjectures.ZetaLinearAlgebra.WeilNumbers
 public import WeilConjectures.ZetaSeries
+public import WeilConjectures.CategoryTheory.Adjunction.ClopenIdempotent
+public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCounit
+public import WeilConjectures.TraceFormula.LocalTerm
+public import WeilConjectures.TraceFormula.OpenCover

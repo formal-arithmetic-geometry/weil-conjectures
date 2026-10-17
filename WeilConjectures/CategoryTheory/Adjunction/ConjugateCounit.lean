@@ -171,3 +171,32 @@ lemma conjugateIsoEquiv_assoc_aux {M : Type*} (L : M → C₁ ⥤ C₄) (R : M �
   simpa using e
 
 end CategoryTheory
+
+namespace CategoryTheory
+
+variable {C₁ C₂ C₃ : Type*} [Category C₁] [Category C₂] [Category C₃]
+
+/-- Let `c : F_! ≅ f_! ⋙ g_!` be a composition isomorphism of left adjoints, with conjugate
+`F^! ≅ g^! ⋙ f^!`, and let `f^! ω₂ ≅ ω₁`, `g^! ω₃ ≅ ω₂`, `F^! ω₃ ≅ ω₁` be isomorphisms
+compatible with the conjugate. Then the counits `F_! ω₁ ≅ F_! F^! ω₃ ⟶ ω₃` and
+`g_! f_! ω₁ ≅ g_! f_! f^! ω₂ ⟶ g_! ω₂ ≅ g_! g^! ω₃ ⟶ ω₃` agree through `c`. -/
+lemma lowerShriekComp_dualizingComplexComp_counit_aux {fS : C₁ ⥤ C₂} {fR : C₂ ⥤ C₁}
+    (bf : fS ⊣ fR) {gS : C₂ ⥤ C₃} {gR : C₃ ⥤ C₂} (bg : gS ⊣ gR) {FS : C₁ ⥤ C₃}
+    {FR : C₃ ⥤ C₁} (bF : FS ⊣ FR) (cL : FS ≅ fS ⋙ gS) {ω₁ : C₁} {ω₂ : C₂} {ω₃ : C₃}
+    (df : fR.obj ω₂ ≅ ω₁) (dg : gR.obj ω₃ ≅ ω₂) (dF : FR.obj ω₃ ≅ ω₁)
+    (hA : df.inv ≫ fR.map dg.inv =
+      dF.inv ≫ (conjugateIsoEquiv bF (bf.comp bg) cL.symm).hom.app ω₃) :
+    cL.hom.app ω₁ ≫ gS.map (fS.map df.inv ≫ bf.counit.app ω₂) ≫ gS.map dg.inv ≫
+      bg.counit.app ω₃ = FS.map dF.inv ≫ bF.counit.app ω₃ := by
+  have hc := conjugateEquiv_counit bF (bf.comp bg) cL.inv ω₃
+  simp only [Functor.comp_map, Adjunction.comp_counit_app] at hc
+  rw [conjugateIsoEquiv_apply_hom, Iso.symm_hom] at hA
+  have hn := bf.counit.naturality dg.inv
+  simp only [Functor.comp_map, Functor.id_map] at hn
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← gS.map_comp_assoc (bf.counit.app ω₂) dg.inv, ← hn, Functor.map_comp_assoc,
+    ← gS.map_comp_assoc (fS.map df.inv), ← fS.map_comp, hA, fS.map_comp, gS.map_comp_assoc, hc,
+    ← Functor.comp_map fS gS dF.inv, ← cL.hom.naturality_assoc,
+    Iso.hom_inv_id_app_assoc]
+
+end CategoryTheory
