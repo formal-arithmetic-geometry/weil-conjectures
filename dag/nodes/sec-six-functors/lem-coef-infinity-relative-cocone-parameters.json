@@ -307,5 +307,23 @@
   "group": "Q86",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-c66b29457 (reviewer sub-agent of L); spot-checked: Read the item in full: 10 steps, 11 existing dependencies, no new nodes. I also read every cited statement, the parent lem-coef-cocartesian-section-colimits step 2, and the possible duplicates relative-cone-initial-corner (needs an isofibration) and parameter-cone-extension (absolute target). The statement keeps the clauses of Kerodon 02XG and 02XK (A empty): inner fibration only, arbitrary small B and K, h fixed, c_b fixed exactly. Kerodon is online only and marked WANTED, so I checked the statement and every step against the cited node statements rather than an archival copy. Steps 1-5 prove 'U-colimit iff r-initial' for any inner U, in order: (1) T is a quasicategory, using the isofibration property only on the restriction H->J; (2) r is inner, by the pushout product of the inner horn with K->L; (3) arrow spaces of T are a strict pullback, with Kan fibration U_H->U_J from the last clause of isofibration-exponentiation, then kan-pullback-path-comparison; (4) the pinch square P(j)c_M=c_U j_T commutes simplexwise, with homotopy-pullback invariance and cancellation; (5) the U-colimit comparison factors as c_M after r_*. Steps 6-7: lift sk_0 B -> B through r by cell filtration; every attached cell has dimension > 0 and its first vertex goes to an r-initial c_b. Steps 8-10: r_B and U_B are inner (pushout product with the empty set into B); boundary cells of Delta^n x B have surjective first coordinate, so the first vertex value is r-initial c-hat; the corner s is identified with Fun(B,r). Edge cases checked: B empty, K empty, B a point, B=Delta^1, identity U, an inner fibration that is not an isofibration. One minor convention point: 'homotopy equivalence implies weak homotopy equivalence' in step 4 is used the same way by existing nodes, so I accepted it. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, for quasicategory closure only. No SGA, no cycle, no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c15401715",
+  "group": "NI",
+  "result": "pass",
+  "note": "Every clause of lem-coef-infinity-relative-cocone-parameters matches the Lean theorem SSet.Enhanced.relative_cocone_parameters, per Kerodon 02XG and 02XK with A empty: inner fibration U between quasicategories only; arbitrary B and K; strict base equation; specified c_b fixed exactly; independent moreover clause for (ihom B).map U. Checked curry/evaluation conventions and the Mathlib instances for Fun(B,-) quasicategories and inner fibrations; no added hypotheses; single universe u. Edge cases B empty, K empty, B a point handled. One theorem with sorry, no definitions; source and blueprint docstrings with the 10 proof steps; lean.statement verbatim; node unchanged except the lean field; imports match the proof deps. nt_compile.py on the snapshot file compiles cleanly, no warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeCoconeParameters",
+  "declaration": "SSet.Enhanced.relative_cocone_parameters",
+  "file": "lean/Sheaf/CategoryTheory/RelativeCoconeParameters.lean",
+  "statement": "theorem relative_cocone_parameters {C D B K : SSet.{u}} [Quasicategory C] [Quasicategory D] (U : C ⟶ D) [InnerFibration U] : (∀ (a : B ⊗ K ⟶ C) (h : B ⊗ rightJoinCone K ⟶ D), a ≫ U = (𝟙 B ⊗ₘ rightJoinConeInclusion K) ≫ h → ∀ cb : B _⦋0⦌ → (rightJoinCone K ⟶ C), (∀ b : B _⦋0⦌, IsRelativeColimitDiagram U (cb b) ∧ rightJoinConeInclusion K ≫ cb b = MonoidalClosed.curry a ≫ evaluation B C b ∧ cb b ≫ U = MonoidalClosed.curry h ≫ evaluation B D b) → ∃ c : B ⊗ rightJoinCone K ⟶ C, (𝟙 B ⊗ₘ rightJoinConeInclusion K) ≫ c = a ∧ (∀ b : B _⦋0⦌, MonoidalClosed.curry c ≫ evaluation B C b = cb b) ∧ c ≫ U = h) ∧ (∀ c : B ⊗ rightJoinCone K ⟶ C, (∀ b : B _⦋0⦌, IsRelativeColimitDiagram U (MonoidalClosed.curry c ≫ evaluation B C b)) → IsRelativeColimitDiagram ((ihom B).map U) (MonoidalClosed.curry c))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
