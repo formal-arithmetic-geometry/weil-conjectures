@@ -2005,6 +2005,8 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSeque
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.ResolutionNaturality
 public import WeilConjectures.CategoryTheory.AbutmentFinitePageComparison
 public import WeilConjectures.CategoryTheory.AbutmentImageFiltration
+public import WeilConjectures.CategoryTheory.Adjunction.ClopenIdempotent
+public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCounit
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
@@ -4610,7 +4612,9 @@ public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.Frobenius
 public import WeilConjectures.TraceFormula.KunnethVerdier
+public import WeilConjectures.TraceFormula.LocalTerm
 public import WeilConjectures.TraceFormula.Main
+public import WeilConjectures.TraceFormula.OpenCover
 public import WeilConjectures.TraceFormula.Product
 public import WeilConjectures.TraceFormula.ProperPushforward
 public import WeilConjectures.TraceFormula.ProperPushforwardKernel
@@ -4815,7 +4819,3 @@ public import WeilConjectures.ZetaLinearAlgebra.Weights
 public import WeilConjectures.ZetaLinearAlgebra.WeilFactorization
 public import WeilConjectures.ZetaLinearAlgebra.WeilNumbers
 public import WeilConjectures.ZetaSeries
-public import WeilConjectures.CategoryTheory.Adjunction.ClopenIdempotent
-public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCounit
-public import WeilConjectures.TraceFormula.LocalTerm
-public import WeilConjectures.TraceFormula.OpenCover
