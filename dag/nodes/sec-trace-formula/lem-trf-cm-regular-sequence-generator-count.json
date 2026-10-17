@@ -13,9 +13,41 @@
   "def-weil-pbc-depth",
   "def-weil-pbc-regular-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume first that $x_1,\\ldots,x_r$ is regular. Apply the Mathlib equality in [lem-trf-regular-sequence-dimension-formula] to the list $[x_1,\\ldots,x_r]$. The finite-dimension hypothesis means that $\\operatorname{ringKrullDim}(R)=(d:\\operatorname{WithBot}\\,\\mathbb N_\\infty)$, so, writing $a=\\operatorname{ringKrullDim}(R/(x_1,\\ldots,x_r))$ and identifying the list length with $r$, we have $a+(r:\\operatorname{WithBot}\\,\\mathbb N_\\infty)=(d:\\operatorname{WithBot}\\,\\mathbb N_\\infty)$. This equality also supplies the finiteness and nonzero checks that are needed before using ordinary natural-number arithmetic: if $a=\\bot$ (the zero quotient), then the left side is $\\bot$, and if $a=\\top$ (infinite dimension), then the left side is $\\top$; neither can equal the finite natural on the right. Hence $a=(q:\\operatorname{WithBot}\\,\\mathbb N_\\infty)$ for a unique $q\\in\\mathbb N$, so the quotient is nonzero and has finite Krull dimension $q$. Injectivity of the natural embedding into $\\operatorname{WithBot}\\,\\mathbb N_\\infty$ now turns the displayed equality into $q+r=d$ in $\\mathbb N$. Therefore $r\\le d$ and $q=d-r$; if $r>d$, the equation $q+r=d$ is impossible, so this case yields no regular sequence and the implication is vacuous. For $r=0$, the same calculation gives $q=d$ and the quotient is $R$. Thus in every regular case $\\dim(R/(x_1,\\ldots,x_r))=d-r$.",
+   "uses": [
+    "lem-trf-regular-sequence-dimension-formula",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/RingTheory/KrullDimension/Regular.lean",
+    "place": "ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, lines 210–214"
+   }
+  },
+  {
+   "text": "Conversely, the existing Cohen–Macaulay dimension-drop lemma applies with $c=r$ and $g_i=x_i$: its hypotheses are exactly that $R$ is Noetherian local of finite dimension $d$, depth$(R)\\ge d$, each $x_i$ lies in $\\mathfrak m$, and the quotient has dimension $d-r$. It concludes that $x_1,\\ldots,x_r$ is an $R$-regular sequence.",
+   "uses": [
+    "lem-weil-pbc-cm-local-dimension-drop-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JN (lemma-reformulate-CM), displayed equivalence and its Cohen–Macaulay hypothesis"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-regular-sequence-dimension-formula",
+  "lem-weil-pbc-cm-local-dimension-drop-regular-sequence",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JN (lemma-reformulate-CM), with the forward implication supplied by Mathlib KrullDimension/Regular.lean"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,7 +79,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-regular-local-surjection-kernel-comparison",
@@ -68,5 +100,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-cm-regular-sequence-generator-count",
+  "worker": "stage1",
+  "summary": "Repaired returned E1/C3 by writing the full conversion of the Mathlib equality in WithBot ℕ∞ to natural dimension arithmetic: a bottom quotient dimension or a top quotient dimension cannot sum with finite r to the finite value d; the remaining value is a finite natural q, and injectivity gives q+r=d, hence r≤d and q=d−r. The regular r>d case is impossible, and r=0 gives the identity quotient. The leaf statement now explicitly records the extended dimension type. The unchanged converse uses the existing Cohen–Macaulay dimension-drop node with all its hypotheses matched. Item statement, ancestry, citations, searches and generic tool use are retained. The forward step now cites def-weil-pbc-krull-dimension-ring for the identification of Mathlib’s extended supremum with the source Krull dimension.",
+  "blueprint": "Realizes the fixed-tuple criterion used in the immediate parent’s Steps 3, 4, 6 and 8: the forward dimension formula and the converse Cohen–Macaulay dimension-drop implication.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cm-local-dimension-drop-regular-sequence",
+    "why": "The converse direction takes exactly the statement of this existing generic Cohen–Macaulay local criterion; no node in the trace-formula unit restates that commutative-algebra theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cm-local-dimension-drop-regular-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q91-493888e22",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q91-493888e22 (reviewer sub-agent of L); spot-checked: Two repairable faults: Step 1 implicitly identifies Mathlib’s WithBot ℕ∞ supremum with the source Krull dimension without citing or explaining the existing Krull-dimension node; corrected item JSON adds that dependency and explanation. The new leaf’s created.item incorrectly names lem-trf-regular-local-surjection-kernel-comparison; corrected JSON sets it to this delivery’s item. Repairs are under fixes/dag/nodes/sec-trace-formula/; full checks are in review.md.; 2 file(s) fixed by the reviewer"
  }
 }

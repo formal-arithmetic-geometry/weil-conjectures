@@ -4,7 +4,7 @@
  "unit": "sk-i-curve-zero",
  "kind": "statement",
  "title": "Compatible isomorphisms of adic quotients induce an isomorphism of completions",
- "statement": "Let (A,I) and (B,J) be rings with ideals, and let e_n:A/I^n \\to B/J^n be ring isomorphisms for n\\geq1 that commute with all quotient transition maps. Then the induced map on inverse limits lim_n A/I^n \\to lim_n B/J^n is a ring isomorphism. It is the unique map whose composite with every quotient projection is e_n. Completion means the adic completion of [def-weil-pbc-adic-completion].",
+ "statement": "Let $(A,I)$ and $(B,J)$ be commutative rings with ideals, and let $e_n:A/I^n\\xrightarrow{\\sim}B/J^n$ be ring isomorphisms for $n\\geq1$ that commute with all quotient transition maps. Then the induced map $E:\\varprojlim_{n\\geq1}A/I^n\\to\\varprojlim_{n\\geq1}B/J^n$ is a ring isomorphism. Writing $p_n^A$ and $p_n^B$ for the quotient projections from the respective inverse limits, it is the unique map satisfying $p_n^B\\circ E=e_n\\circ p_n^A$ for every $n\\geq1$. Completion means the adic completion of [def-weil-pbc-adic-completion].",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 00MA(3), inverse-limit description of completion and the compatible finite-level maps"
@@ -12,38 +12,102 @@
  "stmt_deps": [
   "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Use [def-weil-pbc-adic-completion] to write the two limits as compatible tuples with componentwise ring operations. For $1\\leq m\\leq n$ denote the quotient transitions by $a_{nm}:A/I^n\\to A/I^m$ and $b_{nm}:B/J^n\\to B/J^m$; the hypothesis is $b_{nm}e_n=e_ma_{nm}$. Define $E((x_n)_n)=(e_n(x_n))_n$. This tuple is compatible because $b_{nm}(e_n(x_n))=e_m(a_{nm}(x_n))=e_m(x_m)$. Since each $e_n$ preserves $0,1,+,\\cdot$, the componentwise operations show that $E$ is a ring homomorphism and $p_n^B E=e_n p_n^A$.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M9 (section-completion), definition of completion as compatible sequences; coordinatewise inverse-limit argument"
+   }
+  },
+  {
+   "text": "The inverse ring isomorphisms satisfy $a_{nm}e_n^{-1}=e_m^{-1}b_{nm}$: compose $b_{nm}e_n=e_ma_{nm}$ on the left with $e_m^{-1}$ and on the right with $e_n^{-1}$. Hence $H((y_n)_n)=(e_n^{-1}(y_n))_n$ is a compatible tuple whenever $(y_n)_n$ is, and defines a ring homomorphism in the reverse direction by the same componentwise operation identities. At coordinate $n$, $HE(x)$ equals $e_n^{-1}e_n(x_n)=x_n$, and $EH(y)$ equals $e_ne_n^{-1}(y_n)=y_n$. Equality of tuples gives $HE=1$ and $EH=1$, so $E$ is a ring isomorphism.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M9 (section-completion), definition of completion as compatible sequences; coordinatewise inverse-limit argument"
+   }
+  },
+  {
+   "text": "If $F:\\varprojlim A/I^n\\to\\varprojlim B/J^n$ is any map with $p_n^BF=e_np_n^A$ for every $n\\geq1$, then for each tuple $x$ its $n$th output coordinate is $p_n^B(F(x))=e_n(x_n)=p_n^B(E(x))$. Thus $F(x)=E(x)$ as tuples for every $x$, and $F=E$. This proves the stated uniqueness, even among maps of sets.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M9 (section-completion), definition of completion as compatible sequences; coordinatewise inverse-limit argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00MA(3), with the inverse-limit construction written explicitly"
+  "place": "Tag 00M9 (section-completion), definition of completion as compatible sequences; coordinatewise inverse-limit argument"
  },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "liftRingHom|inverse.*limit|AdicCompletion.*equiv",
-   "results": "",
+   "query": "def congr|def ofAlgEquiv|def map|def liftRingHom",
+   "results": "Mathlib/RingTheory/AdicCompletion/Functoriality.lean; Mathlib/RingTheory/AdicCompletion/Functoriality.lean; Mathlib/RingTheory/AdicCompletion/Functoriality.lean; Mathlib/RingTheory/AdicCompletion/Algebra.lean; Mathlib/RingTheory/AdicCompletion/Algebra.lean; Mathlib/RingTheory/AdicCompletion/Exactness.lean; Mathlib/RingTheory/AdicCompletion/Exactness.lean; Mathlib/RingTheory/AdicCompletion/Exactness.lean",
+   "date": "2026-10-17",
+   "verdict": "no direct match: completion map, congr and universal-property APIs support the construction but do not take a family of quotient isomorphisms; general categorical APIs require explicit diagram and completion-cone identifications"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compatible family of ring isomorphisms induces a ring isomorphism of inverse limits",
+   "results": "Ring.DirectLimit.map; Ring.DirectLimit.congr; Ring.DirectLimit.ringEquiv_symm_mk; Ring.DirectLimit.of_f; Ring.DirectLimit.ringEquiv_of; Ring.DirectLimit; Ring.DirectLimit.ringEquiv.congr_simp; Ring.DirectLimit.map_id",
+   "date": "2026-10-17",
+   "verdict": "no match: Ring.DirectLimit results concern colimits, not the inverse limits in the statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, RingEquiv",
+   "results": "none",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
-   "tool": "loogle",
-   "query": "AdicCompletion, liftRingHom, IsIso",
-   "results": "loogle: unknown identifier 'liftRingHom'",
+   "tool": "leanfinder",
+   "query": "compatible isomorphisms of quotient rings induce isomorphism of adic completions",
+   "results": "AdicCompletion.congr; AdicCompletion.congr_apply; AdicCompletion.ofAlgEquiv_apply; AdicCompletion.mk_ofAlgEquiv_symm; IsAdicComplete.ofAlgEquiv_comp_liftRingHom; AdicCompletion.ofAlgEquiv; AdicCompletion.congr_symm_apply; AdicCompletion.mk_smul_top_ofAlgEquiv_symm",
    "date": "2026-10-17",
-   "verdict": "no match: parser error or no exact theorem"
+   "verdict": "no match: AdicCompletion.congr requires a linear equivalence of original modules over one fixed ring and ideal; ofAlgEquiv assumes completeness of one ring; InverseSystem.invLimEquiv concerns compatible product presentations, not arbitrary ring towers"
+  },
+  {
+   "tool": "grep",
+   "query": "limit.*[Ee]quiv|[Ee]quiv.*[Ll]imit|mapIso|map_isIso",
+   "results": "Mathlib/CategoryTheory/Limits/ConeCategory.lean; Mathlib/CategoryTheory/Limits/ConeCategory.lean; Mathlib/CategoryTheory/Limits/ConeCategory.lean; Mathlib/CategoryTheory/Limits/ConeCategory.lean; Mathlib/CategoryTheory/Limits/ConeCategory.lean; Mathlib/CategoryTheory/Limits/FintypeCat.lean; Mathlib/CategoryTheory/Limits/FintypeCat.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/AbelianImages.lean",
+   "date": "2026-10-17",
+   "verdict": "no direct match: completion map, congr and universal-property APIs support the construction but do not take a family of quotient isomorphisms; general categorical APIs require explicit diagram and completion-cone identifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.lim.mapIso",
+   "results": "loogle: unknown identifier 'CategoryTheory.Limits.lim.mapIso'",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query parser rejected the identifier; not evidence of absence"
   },
   {
    "tool": "leanfinder",
-   "query": "compatible isomorphisms of quotient rings induce isomorphism of adic completions",
-   "results": "AdicCompletion.congr, AdicCompletion.congr_apply, AdicCompletion.ofAlgEquiv_apply, AdicCompletion.mk_ofAlgEquiv_symm, IsAdicComplete.ofAlgEquiv_comp_liftRingHom, AdicCompletion.ofAlgEquiv, AdicCompletion.congr_symm_apply, AdicCompletion.mk_smul_top_ofAlgEquiv_symm",
+   "query": "An isomorphism of inverse systems of commutative rings induces an isomorphism of their limits uniquely determined by the projections",
+   "results": "InverseSystem.invLimEquiv; InverseSystem.invLimEquiv_apply_coe; InverseSystem.invLimEquiv_symm_apply_coe; InverseSystem.isNatEquiv_piEquivLim; InverseSystem.piEquivLim; Ring.DirectLimit.congr_symm_apply_of; InverseSystem.pEquivOnLim; Ring.DirectLimit.congr",
    "date": "2026-10-17",
-   "verdict": "no match: supporting completion APIs only"
+   "verdict": "no match: AdicCompletion.congr requires a linear equivalence of original modules over one fixed ring and ideal; ofAlgEquiv assumes completeness of one ring; InverseSystem.invLimEquiv concerns compatible product presentations, not arbitrary ring towers"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-completed-local-base-change",
@@ -69,5 +133,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-adic-inverse-limit-iso",
+  "worker": "stage1",
+  "summary": "Wrote the coordinatewise map, checked transition compatibility and ring operations, constructed the compatible coordinatewise inverse explicitly, and proved uniqueness by tuple equality. No new nodes. Corrected the ill-typed uniqueness clause to p_n^B E = e_n p_n^A and the source pointer from 00MA(3) to 00M9; the original theorem and all its hypotheses are retained.",
+  "blueprint": "Realizes the compatible finite-quotient to completed-local identification in the ancestry of lem-trf-local-term-locality, at the existing blueprint.from.place, by an elementary inverse-limit argument. The item is not the key statement of sk-i-curve-zero, so no unit realization fields change.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-9f0588118",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-9f0588118 (reviewer sub-agent of L); spot-checked: The coordinatewise inverse-limit proof is correct and fully checked. Repair the delivery metadata (`created.item`/group), replace the incorrect Stacks 00MA(3) citation with exact Tag 00M9, and state commutative rings to match the completion dependency. Corrected JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-adic-inverse-limit-iso.json; review.md records all checks.; 1 file(s) fixed by the reviewer"
  }
 }

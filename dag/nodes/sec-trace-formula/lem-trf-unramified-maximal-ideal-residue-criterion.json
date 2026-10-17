@@ -14,9 +14,44 @@
   "def-weil-residue-field",
   "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume (i), and choose an open neighbourhood V of x on which f|_V is unramified. By the existing implication from unramified to formally unramified, the restricted morphism is formally unramified. Its actual stalk map at x is therefore formally unramified, and the stalk maximal-ideal/residue criterion above gives m_A B = m_B and that kappa(x)/kappa(s) is finite separable algebraic. This is exactly (ii), with the equality interpreted through the actual stalk homomorphism.",
+   "uses": [
+    "lem-weil-pbc-unramified-formally-unramified",
+    "lem-trf-stalk-formally-unramified-maximal-residue-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GF, (1) implies (6), together with Mathlib stalkMap and local criterion"
+   }
+  },
+  {
+   "text": "Assume (ii). Apply the stalk criterion above to the actual local ring map f_x^sharp to obtain formal unramifiedness of that map. Since f is locally of finite type, the existing stalk-to-neighbourhood theorem supplies an open V containing x such that V to X to S is formally unramified. Local finite type is inherited by the restriction V to S, so the locally-finite-type/formally-unramified criterion makes V to S unramified. Hence (i) holds.",
+   "uses": [
+    "lem-trf-stalk-formally-unramified-maximal-residue-criterion",
+    "lem-sbc-formally-unramified-stalk-neighbourhood",
+    "lem-weil-pbc-lft-formally-unramified-unramified"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GF, (6) implies (1), using the stalk criterion and the open unramified locus argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-unramified-formally-unramified",
+  "lem-trf-stalk-formally-unramified-maximal-residue-criterion",
+  "lem-sbc-formally-unramified-stalk-neighbourhood",
+  "lem-weil-pbc-lft-formally-unramified-unramified"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02GF, equivalence (1) with (6), with Algebra Lemma 00UW and the Mathlib local/stalk criteria"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -75,7 +110,7 @@
   "line": 117,
   "why": "Read LocalRing.lean:117–144. These give the local-ring/prime algebra criterion; neither states existence of a scheme open neighbourhood. Passing from a stalk to a neighbourhood requires the separate spreading theorem (existing lem-sbc-formally-unramified-stalk-neighbourhood), and an essentially finite type stalk comparison. Thus the complete scheme statement is not a one-line specialization of either declaration. FormallyUnramified.lean:151–178 was also read; it supplies the forward stalk/residue implication only."
  },
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-completed-stalk-isomorphism-etale",
@@ -87,7 +122,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Tag 0CAV, first proof paragraph: the assertion that the actual morphism is unramified at the point once its completed stalk homomorphism is an isomorphism; the local maximal-ideal and residue-field criterion used to justify that assertion.",
+   "place": "The local maximal-ideal and residue-field criterion used in the pointwise unramifiedness assertion in the proof of lem-trf-local-term-locality.",
    "via": [
     "lem-trf-completed-stalk-isomorphism-etale",
     "lem-trf-isomorphism-completion-approximation",
@@ -104,5 +139,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-unramified-maximal-ideal-residue-criterion",
+  "worker": "stage1",
+  "summary": "Audited Tag 02GF against the actual stalk map and split the item into two complete steps. The only new dependency is a Mathlib leaf for the stalk formal-unramified iff maximal-ideal/residue-field criterion; the neighbourhood and locally-finite-type implications reuse existing DAG nodes. The statement and all hypotheses are unchanged.",
+  "blueprint": "Realizes the local maximal-ideal and residue-field criterion used in the pointwise unramifiedness assertion in the proof of lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-formally-unramified-stalk-neighbourhood",
+    "why": "Generic stalk-to-neighbourhood spreading for formal unramifiedness is outside this trace-formula unit and is used only after the local criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-formally-unramified-stalk-neighbourhood"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N8-317285193",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-317285193 (reviewer sub-agent of L); spot-checked: Reviewed the item, added node, cited nodes, unit/chapter route, coordination/error documents, Stacks Tag 02GF, and Mathlib local-ring/stalk sources. The statement preserves every hypothesis and clause; both proof steps are valid, short, and fully cited. Edge cases and duplicate candidates were checked. No SGA 4/4½, route-pivot, circularity, or hidden long-step lemma issue found. Review written to review.md."
  }
 }

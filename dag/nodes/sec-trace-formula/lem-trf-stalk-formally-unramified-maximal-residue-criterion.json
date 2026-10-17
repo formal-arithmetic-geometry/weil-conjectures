@@ -1,0 +1,120 @@
+{
+ "id": "lem-trf-stalk-formally-unramified-maximal-residue-criterion",
+ "kind": "statement",
+ "title": "Formal unramifiedness of a scheme stalk from maximal ideals and residue fields",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] locally of finite type [def-weil-finite-type-morphism], let $x\\in X$ and $s=f(x)$. Write $A=\\mathcal O_{S,s}$ and $B=\\mathcal O_{X,x}$, with the actual local ring homomorphism $f_x^\\sharp:A\\to B$, and let $\\mathfrak m_A,\\mathfrak m_B$ be their maximal ideals. The ring map $f_x^\\sharp$ is formally unramified (for every $A$-algebra and square-zero ideal, two lifts agreeing modulo the ideal are equal) if and only if $\\mathfrak m_A B=\\mathfrak m_B$ and the induced residue-field extension $\\kappa(x)/\\kappa(s)$ [def-weil-residue-field] is finite separable algebraic [def-weil-pbc-separable-algebraic-extension].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02GF, equivalence (1) with (6), via the local stalk criterion and Algebra Lemma 00UW; Mathlib local-ring criterion read at Mathlib/RingTheory/Unramified/LocalRing.lean:117–144"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-affine-formally-unramified-iff-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "local rings formally unramified iff maximal ideal map equality and separable residue field",
+   "results": "Algebra.FormallyUnramified.iff_map_maximalIdeal_eq; Algebra.isUnramifiedAt_iff_map_eq; Algebra.instIsSeparableResidueFieldOfFormallyUnramified. Read Mathlib/RingTheory/Unramified/LocalRing.lean:117–144.",
+   "date": "2026-10-18",
+   "verdict": "match: local-ring criterion, with finite residue extension from the accompanying Module.Finite instance"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyUnramified.iff_map_maximalIdeal_eq",
+   "results": "Algebra.FormallyUnramified.iff_map_maximalIdeal_eq in Mathlib.RingTheory.Unramified.LocalRing.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "iff_map_maximalIdeal_eq",
+   "results": "Mathlib/RingTheory/Unramified/LocalRing.lean:117 declaration and :142 use.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "formally unramified local algebra iff residue field separable and maximal ideal generated",
+   "results": "Algebra.FormallyUnramified.iff_map_maximalIdeal_eq; Algebra.instIsSeparableResidueFieldOfFormallyUnramified; Algebra.isUnramifiedAt_iff_map_eq.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk map of a formally unramified scheme morphism is formally unramified",
+   "results": "AlgebraicGeometry.FormallyUnramified.stalkMap and formallyUnramified_appLE in Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified.stalkMap",
+   "results": "AlgebraicGeometry.FormallyUnramified.stalkMap in Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma stalkMap|stalkMap.*FormallyUnramified",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:151–152, lemma stalkMap.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "formally unramified morphism stalk map formal unramified",
+   "results": "AlgebraicGeometry.FormallyUnramified.stalkMap and AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.FormallyUnramified.stalkMap; Algebra.FormallyUnramified.iff_map_maximalIdeal_eq; Algebra.instFiniteResidueFieldOfFormallyUnramified",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:151–152; Mathlib/RingTheory/Unramified/LocalRing.lean:117–144",
+  "how": "exact composition: stalkMap transfers scheme formal unramifiedness to the actual local ring map; iff_map_maximalIdeal_eq gives separability and maximal-ideal equality; the same file provides Module.Finite for the residue-field extension, whose finite plus separable specialization is the stated finite separable algebraic extension",
+  "lines": [
+   151,
+   117,
+   142
+  ],
+  "line": 117
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-unramified-maximal-ideal-residue-criterion",
+  "date": "2026-10-18",
+  "group": "N8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The local maximal-ideal and residue-field criterion used in the pointwise unramifiedness assertion in the proof of lem-trf-local-term-locality.",
+   "via": [
+    "lem-trf-unramified-maximal-ideal-residue-criterion",
+    "lem-trf-completed-stalk-isomorphism-etale",
+    "lem-trf-isomorphism-completion-approximation",
+    "lem-trf-relative-completion-etale-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
