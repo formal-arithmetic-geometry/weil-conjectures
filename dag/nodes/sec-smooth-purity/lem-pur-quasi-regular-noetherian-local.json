@@ -12,7 +12,8 @@
   "def-weil-pbc-associated-graded-ring",
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-regular-sequence"
+  "def-weil-pbc-regular-sequence",
+  "lem-pur-regular-sequence-graded-polynomial"
  ],
  "proof": [
   {
@@ -213,5 +214,27 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-041caf600 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks algebra.tex lines 16855-17085 (061N, 061P, 061R, 061S); no fixes were written. Item: it is 061S with M=A, and the quasi-regular hypothesis is correctly expanded as the canonical isomorphism A/J[T] -> gr_J(A). The statement is unchanged and not weakened, and b=0 is handled through 1!=0. New node lem-pur-quasi-regular-prefix-quotient: it is 061R with M=A over an arbitrary ring, and it is true (the source proof needs no extra hypothesis). B_i/Jbar_i = C holds because I_i is inside J. It is statement-only, introduces all its objects, cites the defining nodes, has five recorded searches, blueprint.from is lem-pur-divisor-class and same_as is [] (blueprint grep for quasi-regular/061R/061S found nothing). It is strictly smaller than the item, which still needs Krull intersection and the initial-form argument. Duplicate search: grep for 061R found only the two delivery files. The nearby nodes are different statements: regular-sequence-graded-polynomial is the converse, quasi-regular-flat-quotient-base-change needs flatness that fails for R'=A/I_i, and the two conormal-basis nodes give only degree one. Step 1: J inside m gives C!=0, B_i is cyclic hence finite, J^nB_i = Jbar_i^n. Step 2: the new node gives a graded isomorphism Phi_i with no prefix regularity assumed, so nothing is circular. Step 3: the Mathlib Krull leaf is applied over A (Noetherian, J inside the Jacobson radical m, B_i finite); the least n with x not in Jbar^n has n>=1, so [x]_r!=0. Step 4: T_{i+1} acts injectively on coefficients over any C, and the product formula (clause 2 of lem-weil-pbc-associated-graded-ring-structure) gives [f x]_{r+1}!=0. Step 5: both clauses of the regular-sequence definition hold, with the indices right. Small cases: k[[x]] passes; k[x,y]_(x,y)/(xy) with f=x, the repeated generator (x,x), and k[eps]/(eps^2) all fail the hypothesis, as they must. For the new node, i=0, i=b, the zero ring and k[[x,y]] with i=1 all check out. The parent's citing step meets exactly the item's hypotheses. Route: everything is in unit sk-prop-a1-kummer, with no SGA. I accept the tool use of lem-weil-pbc-associated-graded-ring-structure (from sk-thm-p1) as a generic commutative-algebra black box."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7c08cf09",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Matches Stacks 061S with M=A (algebra.tex 17060-17080) and 061P (16878-16892): IsLocalRing (nontrivial), IsNoetherianRing, hf f j ∈ maximalIdeal, hiso = bijectivity of the existing canonical AlgHom Ideal.regularSequenceGradedPolynomialMap (aeval at degree-1 classes, no regularity assumed, degree-preserving so bijective = graded iso), conclusion IsRegular A (List.ofFn f) with both clauses. No extra assumptions; only universe u. Edge cases b=0, zero ring, field, zero/repeated generators checked. Its codomain Ideal.associatedGraded is the recorded dependency's (in the live library Sheaf.RingTheory.AssociatedGradedRing re-exports the WeilConjectures module, one declaration). Item node changed only in lean and stmt_deps, which gained only the landed lem-pur-regular-sequence-graded-polynomial (allowed, acyclic). lean.statement verbatim, all record fields present. Docstrings carry source place, blueprint id and the 5-step proof; proof is by sorry; no new definitions. The second reader correctly removed the duplicate helper (H4). nt_compile.py on the snapshot module at its library path: clean (1.8 s), no errors or warnings. Only cosmetic: the worker report still describes the removed helper, and the second reading documents its removal."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuasiRegularNoetherianLocal",
+  "declaration": "RingTheory.Sequence.quasiRegularNoetherianLocal",
+  "declarations": [
+   "RingTheory.Sequence.quasiRegularNoetherianLocal"
+  ],
+  "file": "lean/Sheaf/RingTheory/QuasiRegularNoetherianLocal.lean",
+  "statement": "theorem quasiRegularNoetherianLocal (b : ℕ) (f : Fin b → A) [IsLocalRing A] [IsNoetherianRing A] (hf : ∀ j : Fin b, f j ∈ IsLocalRing.maximalIdeal A) (hiso : Function.Bijective (Ideal.regularSequenceGradedPolynomialMap f)) : RingTheory.Sequence.IsRegular A (List.ofFn f)",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses Ideal.regularSequenceGradedPolynomialMap, the existing canonical A/J-algebra map defined without regularity assumptions. Bijectivity expresses its being a graded isomorphism. IsLocalRing includes nontriviality."
  }
 }

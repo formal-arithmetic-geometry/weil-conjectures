@@ -238,5 +238,34 @@
   "group": "Q75",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-1f777f4d0 (reviewer sub-agent of L); spot-checked: I read the item and all seven steps in full, and the full statements of all nine cited nodes. None of the cited nodes' dependencies reach back to the item (226 nodes checked), and every cited statement is in unit sk-prop-sf-biduality-general (def-cbc is a definition). The delivery has no new nodes and needs no tool_uses or fixes. Step 1: I checked that P=D∪_H(H⋆Δ^0)=Λ_i^{n+1}, so 0<i≤n gives an inner horn, including n=1, i=1. The inner-anodyne node gives the Dwyer–Kan equivalence that the last clause of cone-presheaf-adjunction requires. Step 2: transformations L_S(σ)→F are the same as cone functors into the collage E_F, and they match for σ=uτ (elementary unwinding, accepted). Step 3: the vertex fiber reduces to C[J^m] and Q^m. Step 4: boundary-collapse-test applies because L_mQ→Q^m is injective and Q^m is contractible. Step 5 (2443 chars): it is one skeletal induction, so it may stay. It uses the gluing lemma with monomorphisms on the right legs, then the colimit over ℕ. Its two inline facts (the realization of Δ^m is contractible; coproducts of weak equivalences are weak equivalences) are two-line consequences of the realization definition. rg found no existing node for either fact or for the cellular-induction lemma. Step 6: the counit criterion applies, and ε_K V(τ_K)=p_K holds exactly with p_{RK}V(τ_K)=τ_K p_K, so the specified map z↦z∘p_m is a weak equivalence. Step 7: naturality and edge cases (empty S, T and K; m=0) hold. The statement is unchanged and not weakened, and Kan is assumed only where needed. HTT is not in the local literature: it is recorded as WANTED with proof_origin.by=agent, and I checked the statement against HTT 2.2.1.1/§2.2.2 from my knowledge only. No SGA is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ffdd758d",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Read node, 3 statement deps, HTT 2.2.1.1/2.2.1.2/2.2.2.7-2.2.2.11, module, report and node record. All clauses match: right-horn objectwise w.h.e. for 0<i≤n via Fin(n+1)+positivity; base-change iso in Over T with identity/composite HEq coherence, F-naturality and a label clause pinning the canonical cone-pushout map; natural vertex-fiber iso to existing singQ; Kan ⇒ singQ Kan and K→singQ K (precomposition by π, uniquely determined since quotientMap is surjective) a w.h.e.; naturality for Kan maps. Edge cases n=0/n=1,i=1/empty S,T,K/non-Kan F covered. Single universe u, no extra hypothesis. Laws are named theorems, no hollow def, proofs are sorry, docstrings complete, record verbatim and only lean changed. nt_compile per-file run under module path: clean, rc 0; a control error is reported. Observation, not blocking: singQ and Enhanced.fiberMap come from modules of DAG-descendant nodes (UnmarkedStraighteningQuillen → ContravariantSliceModel), which will close an import cycle with the future §3(7) proof imports via homotopy-descent. List it and relocate these constructions at stage 3, as for the existing Straightening.* reuse in ConePresheafAdjunction."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.UnstraighteningSimplexPointwise",
+  "declaration": "SSet.ConePresheaf.unstraightening_simplex_pointwise",
+  "declarations": [
+   "SSet.ConePresheaf.restriction_laws",
+   "SSet.ConePresheaf.restrict",
+   "SSet.ConePresheaf.restrictHom_naturality",
+   "SSet.ConePresheaf.restrictHom",
+   "SSet.ConePresheaf.baseChangeProjection",
+   "SSet.ConePresheaf.pinchedProjection",
+   "SSet.ConePresheaf.singularComparison",
+   "SSet.ConePresheaf.unstraightening_simplex_pointwise"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/UnstraighteningSimplexPointwise.lean",
+  "statement": "theorem unstraightening_simplex_pointwise : (∀ (S : SSet.{u}) (n : ℕ) (i : Fin (n + 1)), 0 < i.val → ∀ σ : Δ[n] ⟶ S, weakEquivalences S ((left S).map (Over.homMk (horn n i).ι rfl : Over.mk ((horn n i).ι ≫ σ) ⟶ Over.mk σ))) ∧ (∃ β : ∀ {T S : SSet.{u}} (u : T ⟶ S) (F : Presheaf S), rightObj (restrict u F) ≅ (Over.pullback u).obj (rightObj F), (∀ (S : SSet.{u}) (F : Presheaf S), HEq (baseChangeProjection (𝟙 S) F (β (𝟙 S) F)) (𝟙 (rightSet F))) ∧ (∀ (R T S : SSet.{u}) (v : R ⟶ T) (u : T ⟶ S) (F : Presheaf S), HEq (baseChangeProjection (v ≫ u) F (β (v ≫ u) F)) (baseChangeProjection v (restrict u F) (β v (restrict u F)) ≫ baseChangeProjection u F (β u F))) ∧ (∀ (T S : SSet.{u}) (u : T ⟶ S) (F G : Presheaf S) (f : F ⟶ G), rightSetMap (restrictHom u f) ≫ baseChangeProjection u G (β u G) = baseChangeProjection u F (β u F) ≫ rightSetMap f) ∧ (∀ (T S : SSet.{u}) (u : T ⟶ S) (F : Presheaf S) (n : SimplexCategory) (σ : SSet.stdSimplex.obj n ⟶ T) (a : (left T).obj (Over.mk σ) ⟶ restrict u F), ∃ b : (left S).obj (Over.mk (σ ≫ u)) ⟶ F, (baseChangeProjection u F (β u F)).app (op n) ⟨σ, a⟩ = ⟨σ ≫ u, b⟩ ∧ ∀ c : T _⦋0⦌, HEq (Straightening.valueMap σ (σ ≫ u) (𝟙 _) u (by simp) c ≫ component b (Straightening.vertex (u.app _ c))) (component a (Straightening.vertex c)))) ∧ (∃ e : ∀ (S : SSet.{u}) (F : Presheaf S) (s : S _⦋0⦌), Enhanced.fiber (rightProjection F) s ≅ UnmarkedStraightening.singQ (obj F (Straightening.vertex s)), ∀ (S : SSet.{u}) (F G : Presheaf S) (f : F ⟶ G) (s : S _⦋0⦌), Enhanced.fiberMap ((right S).map f) s ≫ (e S G s).hom = (e S F s).hom ≫ UnmarkedStraightening.singQMap (component f (Straightening.vertex s))) ∧ (∀ K : SSet.{u}, KanComplex K → KanComplex (UnmarkedStraightening.singQ K) ∧ Enhanced.IsWeakHomotopyEquivalence (singularComparison K)) ∧ (∀ (K K' : SSet.{u}) (h : K ⟶ K'), KanComplex K → KanComplex K' → h ≫ singularComparison K' = singularComparison K ≫ UnmarkedStraightening.singQMap h)",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded cone-presheaf adjunction and pinched cubes. Restriction retains the entire enriched action. The base-change isomorphism is normalized on simplex labels by the canonical cone-pushout map and is coherent for identities and composites. Reuses UnmarkedStraightening.singQ and singQMap as constructions only; no downstream unmarked-straightening theorem is used. The projection selected from pinched_cube_latching is uniquely determined by its quotient normalization. All universes and variables are explicit."
  }
 }

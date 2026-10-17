@@ -1,0 +1,147 @@
+{
+ "id": "def-coef-colored-operator-systems",
+ "kind": "definition",
+ "title": "Colored operator presentations and explicit coherent operation systems",
+ "status": "split",
+ "statement": "Use the simplicial sets, coherent functor categories, equivalences and mapping spaces of [def-cbc-enhanced-diagrams-cones], the degreewise fibers and cocartesian edges of [def-coef-infinity-fibrations], the symmetric infinity-operad and relative-algebra definitions of [def-coef-relative-symmetric-operadic-algebras], and coherent fiber transport characterized by IsCocartesianTransport in [lem-coef-cocartesian-section-colimits]. Fix a sufficiently large universe and a color set C. A colored operator presentation is a category on finite labeled tuples (including the empty tuple), with its arity functor to Fin_*, symmetric infinity-operad nerve, and specified inert projections to the singleton labels. An operation is an active arrow from an input tuple to one output color. A rooted leveled tree is an active chain of operators ending at a singleton; tree shapes also include inert diagrams. A tree face is a simplicial restriction of such a shape. A coherent inert pruning is a diagram Delta[m] times Delta[r] in the operator nerve whose rows are tree faces and whose vertical edges are inert. A forest decomposition is a family of rooted output trees with the indicated output colors and inert pruning diagrams from a given forest, omitting external wires outside each output's ancestors; this is an index for reconstruction, not a primitive value of the data.\n\nFor q:E to N(O^tensor), the inert fiber Segal condition says that actual cocartesian projection transports give an equivalence from each tuple fiber to the product of its singleton fibers, including the empty product. A transport frame specifies active-operation transports, inert projection transports, their coherent cocartesian lifts with the stated sources, targets and base edges, and these Segal equivalences. Given a frame T and any simplicial parameter K, a coherent colored-operation system has a diagram x_c:K to E_c for each color; a tuple-fiber realization for each input tuple with equivalences from its inert projections to the color diagrams; a coherent arrow T_theta(tuple) to x_d in the target singleton fiber for every active single-output operation; comparison diagrams over rooted trees and inert shapes; and coherent diagrams over inert prunings of their faces. Tree faces and pruning faces agree on every common simplicial restriction over the same base diagram. Tree vertices are the tuple realizations, and total edges over inert operators and vertical pruning edges are q-cocartesian. For each operation, a triangle over (theta,id) has the specified tree edge as its long edge, the fixed transport lift as its first edge, and the specified target-fiber arrow as its second edge. Analogous triangles for inert projections identify the Segal equivalences with the actual inert tree edges. Thus the fiber arrows are tied to their total arrows and coherences; there is no independent total-space value indexed by every general multi-output forest.\n\nPrecomposition in K gives real reindexing maps. The simplicial set coloredOperationData has these systems with K=Delta[n] as its n-simplices. Its literal coordinate map retains the color, tree, and pruning diagrams and forgets their transport-factorization choices. Literal restriction of an inert-preserving relative section is evaluation at colors and precomposition by exactly these tree and pruning base diagrams. The canonical restriction correspondence is the pullback of these two coordinate maps; a representative restriction functor must induce exactly the literal coordinate restriction. General forest values and outputwise arrows are reconstructed from the tree data using the Segal comparisons, rather than supplied as extra independent coordinates. No limit, colimit, presentability, or nonempty-color hypothesis is made.",
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-relative-symmetric-operadic-algebras",
+  "lem-coef-cocartesian-section-colimits"
+ ],
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Higher Algebra (2017), Construction 2.1.1.7 and the paragraphs following it, Definition 2.1.1.10, Remark 2.1.1.17, Example 2.1.1.21, Definition 2.1.3.1 and Remark 2.1.3.4. Rooted leveled-tree, inert-pruning and target-fiber coordinates expand the coherent colored-operation data in the reconstruction node."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Category of operators of a colored operad",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.MonoidalOpposite.monoidalOppositeCategory\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Opposite\", \"type\": \"[Category.{v₁} C] : Category Cᴹᵒᵖ\", \"doc\": \"The opposite monoidal category $\\\\mathcal{C}^\\\\mathrm{op}$ is equipped with a canonical category structure where: \\n1. The hom-set $\\\\mathrm{Hom}_{\\\\mathcal{C}^\\\\mathrm{op}}(X,Y)$ is defined as the opposite\"}\n  {\"name\": \"CategoryTheory.CosimplicialObject.instCategory\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \": Category (CosimplicialObject C)\", \"doc\": \"For any category $\\\\mathcal{C}$, the cosimplicial objects in $\\\\mathcal{C}$ (i.e., functors from the simplex category $\\\\Delta$ to $\\\\mathcal{C}$) form a category where: (1) morphisms are natural transfor\"}\n  {\"name\": \"CategoryTheory.CatEnrichedOrdinary\", \"module\": \"Mathlib.CategoryTheory.Bicategory.CatEnriched\", \"type\": \"(C : Type*)\", \"doc\": \"The type of ordinary categories, which are categories enriched over the category of sets, where hom-objects are sets and composition is given by functions between these sets.\"}\n  {\"name\": \"CategoryTheory.MonoidalCategory.term_◁_\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Category\", \"type\": \": Lean.TrailingParserDescr✝\", \"doc\": \"The operator ◁ representing a left action in the context of monoidal categories, used to combine objects according to the monoidal structure.\"}\n  {\"name\": \"CategoryTheory.SimplicialObject\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max v u)\", \"doc\": \"A simplicial object in a category $\\\\mathcal{C}$ is a functor from the opposite of the simplex category $\\\\Delta^\\\\text{op}$ to $\\\\mathcal{C}$. The simplex category $\\\\Delta$ has objects given by finite or\"}\n  {\"name\": \"CategoryTheory.CategoryStruct.mk\", \"module\": \"Mathlib.CategoryTheory.Category.Basic\", \"type\": \"{obj : Type u} →\\n  [toQuiver : Quiver obj] →\\n    ((X : obj) → X ⟶ X) → ({X Y Z : obj} → (X ⟶ Y) → (Y ⟶ Z) → (X ⟶ Z)) → CategoryTheory.CategoryStruct.{v, u} obj\", \"doc\": \"Given a type of objects $\\\\mathrm{obj}$, a quiver structure on $\\\\mathrm{obj}$ providing hom-sets between objects, a function assigning identity morphisms $\\\\mathrm{id}_X : X \\\\to X$ for each object $X$, \"}\n  {\"name\": \"Mathlib.Tactic.Monoidal.Context.instCat\", \"module\": \"Mathlib.Tactic.CategoryTheory.Monoidal.Datatypes\", \"type\": \"(self : Mathlib.Tactic.Monoidal.Context) → Q(CategoryTheory.Category.{udummy._uniq.155, udummy._uniq.156} unknown_1)\", \"doc\": \"The function that equips a monoidal context with the structure of a category, enabling categorical operations and reasoning within the monoidal category theory framework used in tactic development.\"}\n  {\"name\": \"CategoryTheory.Core.of\", \"module\": \"Mathlib.CategoryTheory.Core\", \"type\": \"{C : Type u₁} → CategoryTheory.Core C → C\", \"doc\": \"The core data of a category consists of a type of objects, hom-sets between objects, identity morphisms for each object, and a composition operation on morphisms that satisfies associativity and unita\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categories, monoidal structures, or simplicial operators/splittings; none defines a colored operator presentation or coherent colored-operation system. The grep result is a bibliography entry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent operations of a symmetric colored operad with forest substitution simplices",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SimplicialObject.σ_def\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (X : CategoryTheory.SimplicialObject C) {n : ℕ}\\n  (i : Fin (n + 1)), X.σ i = X.map (SimplexCategory.σ i).op\", \"doc\": \"For a simplicial object $X$ in a category $\\\\mathcal{C}$ and an index $i \\\\in \\\\{0, 1, \\\\dots, n\\\\}$, the degeneracy map $\\\\sigma_i: X_n \\\\to X_{n+1}$ is defined as the image of the opposite of the degenerac\"}\n  {\"name\": \"SSet.stdSimplex.objEquiv_symm_comp\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex\", \"type\": \"∀ {n n' : SimplexCategory} {m : SimplexCategoryᵒᵖ} (f : Opposite.unop m ⟶ n) (g : n ⟶ n'),\\n  SSet.stdSimplex.objEquiv.symm (CategoryTheory.CategoryStruct.comp f g) =\\n    (SSet.stdSimplex.map g).app m (SSet.stdSimplex.objEquiv.symm f)\", \"doc\": \"For objects $n,n'\\\\in \\\\Delta$ and $m\\\\in \\\\Delta^\\\\text{op}$, the inverse equivalence $\\\\text{objEquiv}^{-1}$ satisfies $\\\\text{objEquiv}^{-1}(f \\\\circ g) = (\\\\Delta^\\\\text{std}(g))_\\\\text{app}(\\\\text{objEquiv}^\"}\n  {\"name\": \"SimplicialObject.opFunctor_obj_σ\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Op\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v, u_1} C] (X : CategoryTheory.SimplicialObject C) {n : ℕ}\\n  (i : Fin (n + 1)),\\n  (SimplicialObject.opFunctor.obj X).σ i =\\n    CategoryTheory.CategoryStruct.comp SimplicialObject.opObjIso.hom\\n      (CategoryTheory.CategoryStruct.comp (X.σ i.rev) Simp\", \"doc\": \"For any simplicial object $X$ in a category $\\\\mathcal{C}$ and natural number $n$, the degeneracy map $\\\\sigma_i$ of the opposite functor applied to $X$ at index $i$ is equal to the composition of the i\"}\n  {\"name\": \"SimplexCategoryGenRel.P_σ\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/EpiMono\", \"type\": \"CategoryTheory.MorphismProperty SimplexCategoryGenRel\", \"doc\": \"The morphism property $ P_\\\\sigma $ in the simplex category presented by generators and relations, defined as the multiplicative closure of the degeneracy morphisms. This includes all morphisms that ca\"}\n  {\"name\": \"SimplexCategoryGenRel.standardσ_comp_standardσ_assoc\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms\", \"type\": \"∀ (L₁ L₂ : List ℕ) {m₁ m₂ m₃ : ℕ} (h : m₂ + L₁.length = m₁) (h' : m₃ + L₂.length = m₂) {Z : SimplexCategoryGenRel}\\n  (h_1 : SimplexCategoryGenRel.mk m₃ ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (SimplexCategoryGenRel.standardσ L₁ h)\\n      (CategoryTheory.CategoryStruct.comp (SimplexCategoryGenRel.s\", \"doc\": \"For any lists $L_1, L_2$ of natural numbers and natural numbers $m_1, m_2, m_3$ satisfying $m_2 + |L_1| = m_1$ and $m_3 + |L_2| = m_2$, the composition of the standard σ morphism for $L_1$ with the st\"}\n  {\"name\": \"SimplicialObject.Splitting.summand\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Split\", \"type\": \"{C : Type u_1} → (ℕ → C) → (Δ : SimplexCategoryᵒᵖ) → SimplicialObject.Splitting.IndexSet Δ → C\", \"doc\": \"The function that maps each index pair $(\\\\Delta', \\\\alpha)$ in the simplicial splitting index set to the object $N$ evaluated at the length of $\\\\Delta'$, where $\\\\Delta'$ is considered in the original s\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.σ\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (X : CategoryTheory.SimplicialObject C) →\\n      {n : ℕ} →\\n        Fin (n + 1) → (X.obj (Opposite.op (SimplexCategory.mk n)) ⟶ X.obj (Opposite.op (SimplexCategory.mk (n + 1))))\", \"doc\": \"For a simplicial object $X$ in a category $\\\\mathcal{C}$ and index $i \\\\in \\\\{0, 1, \\\\dots, n\\\\}$, the degeneracy map $\\\\sigma_i: X_n \\\\to X_{n+1}$ is defined as the image of the opposite category morphism $\"}\n  {\"name\": \"SimplexCategoryGenRel.standardσ\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms\", \"type\": \"(L : List ℕ) → {m₁ m₂ : ℕ} → m₂ + L.length = m₁ → (SimplexCategoryGenRel.mk m₁ ⟶ SimplexCategoryGenRel.mk m₂)\", \"doc\": \"Given a list $L$ of natural numbers and natural numbers $m_1, m_2$ satisfying $m_2 + |L| = m_1$, this function constructs a morphism $\\\\text{SimplexCategoryGenRel.mk}(m_1) \\\\to \\\\text{SimplexCategoryGenR\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categories, monoidal structures, or simplicial operators/splittings; none defines a colored operator presentation or coherent colored-operation system. The grep result is a bibliography entry."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|multicategory|colored.*operation [Mathlib/CategoryTheory]",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"line\": \"55\", \"text\": \"  monoids in monoidal categories, in: Operads: Proceedings of Renaissance\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categories, monoidal structures, or simplicial operators/splittings; none defines a colored operator presentation or coherent colored-operation system. The grep result is a bibliography entry."
+  },
+  {
+   "tool": "grep",
+   "query": "ColoredOperatorPresentation|ColoredOperationSimplex|coloredOperationData|colored_operation_section_reconstruction; symmetric.*[Oo]perad|colored.*[Oo]perad; category of operators [DAG, WeilConjectures, lean/Sheaf]",
+   "results": "Exact new declaration names: no hits in Mathlib, WeilConjectures or lean/Sheaf. Concept search in lean/Sheaf finds RelativeSymmetricOperadicAlgebras (reused), LeftModuleOperadicEncoding (the specific LM operad), and ComposableBimoduleOperadSegal (a specific nonsymmetric operad). DAG concept hits are the item and lem-coef-module-operad-encoding, neither has the general definition. tools/blueprint_refs.py search colored operation: 0 blueprint nodes match. tools/blueprint_refs.py search category of operators: 0 blueprint nodes match.",
+   "date": "2026-10-17",
+   "verdict": "no existing general definition; reuse the symmetric operad, relative algebra, fiber, and generic cocartesian transport declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent colored operation systems indexed by rooted substitution trees and target fibre arrows",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MvPFunctor.wpMk\", \"module\": \"Mathlib/Data/PFunctor/Multivariate/W\", \"type\": \"{n : ℕ} →\\n  (P : MvPFunctor.{u} (n + 1)) →\\n    {α : TypeVec.{u} n} → (a : P.A) → (f : P.last.B a → P.last.W) → TypeVec.Arrow (P.WPath (WType.mk a f)) α → P.W α\", \"doc\": \"For a type vector $\\\\alpha$ of length $n$, this constructor takes a position $a$ in the position type $P.A$, a function $f$ mapping elements of $P.\\\\text{last}.B(a)$ to the W-type $P.\\\\text{last}.W$, and\"}\n  {\"name\": \"MvPFunctor.wMk\", \"module\": \"Mathlib/Data/PFunctor/Multivariate/W\", \"type\": \"{n : ℕ} →\\n  (P : MvPFunctor.{u} (n + 1)) → {α : TypeVec.{u} n} → (a : P.A) → (P.drop.B a).Arrow α → (P.last.B a → P.W α) → P.W α\", \"doc\": \"Given a position $a$ in the multivariate polynomial functor $P$, a function $f'$ mapping the truncated input types $P.\\text{drop}.B(a)$ to a type vector $\\\\alpha$, and a function $f$ mapping the last in\"}\n  {\"name\": \"MvPFunctor.W\", \"module\": \"Mathlib/Data/PFunctor/Multivariate/W\", \"type\": \"{n : ℕ} → MvPFunctor.{u} (n + 1) → TypeVec.{u} n → Type u\", \"doc\": \"For a type vector $\\\\alpha$ of length $n$, the type $\\\\mathrm{MvPFunctor}.W\\\\ \\\\alpha$ represents the well-founded multivariate polynomial functor constructed using $W$-types and path-dependent type assig\"}\n  {\"name\": \"MvPFunctor.wMk'\", \"module\": \"Mathlib/Data/PFunctor/Multivariate/W\", \"type\": \"{n : ℕ} → (P : MvPFunctor.{u} (n + 1)) → {α : TypeVec.{u} n} → ↑P (α ::: P.W α) → P.W α\", \"doc\": \"The function maps from $ P $ applied to a type vector $ \\\\alpha $ extended by $ P.W\\\\, \\\\alpha $ to $ P.W\\\\, \\\\alpha $, by decomposing the input into a position $ a $ and a function $ f $, then constructin\"}\n  {\"name\": \"MvPFunctor.wMap\", \"module\": \"Mathlib/Data/PFunctor/Multivariate/W\", \"type\": \"{n : ℕ} → (P : MvPFunctor.{u} (n + 1)) → {α β : TypeVec.{u} n} → α.Arrow β → P.W α → P.W β\", \"doc\": \"For type vectors $\\\\alpha$ and $\\\\beta$ of length $n$, and a component-wise function $g : \\\\alpha \\\\to \\\\beta$, this defines the canonical map from $P.W\\\\ \\\\alpha$ to $P.W\\\\ \\\\beta$ induced by the multivariate\"}\n  {\"name\": \"MvPFunctor.wPathDestRight\", \"module\": \"Mathlib/Data/PFunctor/Multivariate/W\", \"type\": \"{n : ℕ} →\\n  (P : MvPFunctor.{u} (n + 1)) →\\n    {α : TypeVec.{u_1} n} →\\n      {a : P.A} →\\n        {f : P.last.B a → P.last.W} →\\n          TypeVec.Arrow (P.WPath (WType.mk a f)) α → (j : P.last.B a) → TypeVec.Arrow (P.WPath (f j)) α\", \"doc\": \"Given a path $ h $ from the W-type element $ \\\\langle a, f \\\\rangle $ to $ \\\\alpha $, this function returns for each $ j \\\\in P.\\\\text{last}.B(a) $ the corresponding path from $ f(j) $ to $ \\\\alpha $ obtain\"}\n  {\"name\": \"MvPFunctor.WPath\", \"module\": \"Mathlib/Data/PFunctor/Multivariate/W\", \"type\": \"{n : ℕ} → (P : MvPFunctor.{u} (n + 1)) → P.last.W → Fin2 n → Type u\", \"doc\": \"A function assigning to each element of the W-type of the last input polynomial functor and each index in the finite set $\\\\{0, 1, \\\\dots, n-1\\\\}$ a type in universe $\\\\mathsf{Type}^u$\"}\n  {\"name\": \"PFunctor.W\", \"module\": \"Mathlib/Data/PFunctor/Univariate/Basic\", \"type\": \"PFunctor.{uA, uB} → Type (max uA uB)\", \"doc\": \"The W-type associated with a polynomial functor $ P $ is the inductive type generated by a constructor that takes an element $ a $ from the underlying type $ P.A $ and a function assigning to each ele\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No match. Results concern W-type constructors and do not define operadic tree systems or restriction of operadic sections."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-colored-operation-section-reconstruction",
+  "date": "2026-10-17",
+  "group": "NU"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: coherent monadic bar foundation, conditional free-module criterion; Higher Algebra (2017), Definition 4.2.1.1, Notation 4.2.1.6, Definitions 4.2.1.7, 4.2.1.13 and 4.2.1.19, Remark 4.2.1.21; Corollary 4.2.3.2; proof of Proposition 4.2.4.2, the operad LM_0 and its algebra category. Supporting the reconstruction of sections from individual ordered operations, before computing LM_0 restriction and scalar-restriction lifts. Definition of the general colored operator category and its fully coherent operation data for the reconstruction step.",
+   "via": [
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-coef-module-operad-encoding",
+    "lem-coef-module-universal-arrow-criterion",
+    "lem-coef-infinity-free-module-bar",
+    "lem-coef-infinity-monadic-bar",
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ColoredOperatorSystems",
+  "declaration": "SSet.Enhanced.coloredOperationData",
+  "declarations": [
+   "SSet.Enhanced.ColoredTuple",
+   "SSet.Enhanced.coloredSingleton",
+   "SSet.Enhanced.ColoredOperatorPresentation",
+   "SSet.Enhanced.coloredTupleVertex",
+   "SSet.Enhanced.ColoredOperation",
+   "SSet.Enhanced.HasColoredSegalFibers",
+   "SSet.Enhanced.IsColoredRootedTree",
+   "SSet.Enhanced.IsColoredTreeShape",
+   "SSet.Enhanced.ColoredTreeFace",
+   "SSet.Enhanced.ColoredTreeFace.base",
+   "SSet.Enhanced.ColoredTreePruning",
+   "SSet.Enhanced.ColoredForestDecomposition",
+   "SSet.Enhanced.coloredFiberInclusion",
+   "SSet.Enhanced.ColoredTransportFrame",
+   "SSet.Enhanced.ColoredOperationSystem",
+   "SSet.Enhanced.ColoredOperationSystem.reindex",
+   "SSet.Enhanced.coloredOperationData",
+   "SSet.Enhanced.ColoredTreeIndex",
+   "SSet.Enhanced.ColoredPruningIndex",
+   "SSet.Enhanced.coloredDataColor",
+   "SSet.Enhanced.coloredDataTree",
+   "SSet.Enhanced.coloredDataPruning",
+   "SSet.Enhanced.coloredRestrictionCoordinates",
+   "SSet.Enhanced.coloredDataCoordinates",
+   "SSet.Enhanced.coloredSectionCoordinates",
+   "SSet.Enhanced.coloredOperationRestriction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ColoredOperatorSystems.lean",
+  "statement": "def coloredOperationData {Color : Type u} [Category.{u} (ColoredTuple Color)] (O : ColoredOperatorPresentation Color) {E : SSet.{u}} (q : E ⟶ nerve.{u, u} (ColoredTuple Color)) (T : ColoredTransportFrame O q) : SSet.{u}",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Color-indexed fiber objects, target-fiber operation arrows against fixed cocartesian lifts, rooted-tree and inert-pruning coherences, and Segal tuple realizations. The literal restriction maps define a canonical pullback correspondence; general forests are reconstructed outputwise, not stored independently."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0286148f1",
+  "group": "NU",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0286148f1",
+  "group": "NU",
+  "result": "fix",
+  "note": "Read the node, its 4 stmt deps, the new def node and module ColoredOperatorSystems, the item module, both citers (module-operad-encoding, monoidal-block-projection-coherence), HA 2.1.1.7/2.1.1.10/2.1.1.21/2.1.3.1/2.1.3.4 places, and the earlier RETURN (now answered: data indexed by colours, operations, trees and prunings, with fibre structure arrows factored against fixed cocartesian lifts). Every hypothesis and clause matches; edge cases covered; no hollow definitions; docstrings carry source and blueprint; duplicate rg/msearch found nothing; single universe u acceptable. Identity-normalization clause checked consistent (factorization forces color d = tuple(singleton d)). Fault (H3, conclusion weaker than node): the theorem was `∃ T : ColoredTransportFrame`, proving reconstruction only for some transport choice, while the node and both citers need it for the given T_θ. Fix: fixes/ColoredOperationSectionReconstruction.lean changes the conclusion to `Nonempty (ColoredTransportFrame O q) ∧ ∀ T, <same clauses>` and updates the docstring; no other change. nt_compile.py --json with both siblings: delivered and fixed versions exit 0 with no diagnostics; a broken-variant check confirms errors are reported."
+ }
+}

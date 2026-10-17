@@ -136,28 +136,27 @@
   }
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ClassicalDerivedDefinitions",
-  "declaration": "AlgebraicGeometry.ProEtale.IsClassicalModuleFor",
+  "module": "Sheaf.SixFunctors.ClassicalDefinition",
+  "declaration": "AlgebraicGeometry.ProEtale.IsClassicalModuleSheaf",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.IsClassicalModuleFor",
-   "AlgebraicGeometry.ProEtale.IsClassicalCochainComplexFor",
-   "AlgebraicGeometry.ProEtale.IsClassicalComplexFor",
-   "AlgebraicGeometry.ProEtale.ClassicalPlus"
+   "AlgebraicGeometry.ProEtale.IsClassicalModuleSheaf",
+   "AlgebraicGeometry.ProEtale.IsClassicalModuleCochainComplex",
+   "AlgebraicGeometry.ProEtale.IsClassicalModuleComplex"
   ],
+  "statement": "def IsClassicalModuleSheaf {X : Scheme.{u}} {R : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}} (F : SheafOfModules.{u + 1} R) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q116",
+  "by": "Q73",
   "date": "2026-10-17",
-  "note": "§1(B) interface repair: the recorded ClassicalContinuityMap.IsClassicalModule consumes intrinsic constant-ring sheaf modules for a lifted ring, not the fixed-ring Sheaf ... (ModuleCat Λ) objects used by the recorded sk-prop-sf-comparison. This module imports that existing interface and reuses its AffinePresentation and continuityMap, stating the same module continuity condition and cochain/derived cohomology classicality in the comparison coefficient category, with the bounded-below full subcategory ClassicalPlus. The existing set-sheaf and intrinsic cochain predicates are reexported, not duplicated.",
-  "file": "lean/Sheaf/AlgebraicGeometry/ClassicalDerivedDefinitions.lean",
-  "statement": "def IsClassicalModuleFor (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) : Prop",
-  "existing": false
+  "existing": false,
+  "note": "The current recorded module Sheaf.AlgebraicGeometry.ClassicalDerivedDefinitions supplies IsClassicalModuleFor, IsClassicalCochainComplexFor and IsClassicalComplexFor for fixed commutative coefficients and sheaves valued in ModuleCat. Its imported ClassicalContinuityMap predicates likewise require CommRing coefficients and a particular constant CommRingCat sheaf. The item allows noncommutative finite rings and uses intrinsic SheafOfModules. This dependency module reuses the same existing set-sheaf IsClassical predicate on the underlying set sheaf for arbitrary ring sheaves, and applies it to every cochain and derived homology sheaf. On the recorded commutative specialization these are exactly the dependency node's module and complex clauses. Its public import retains the existing set-sheaf predicate and affine-presentation continuity map without duplication.",
+  "file": "lean/Sheaf/SixFunctors/ClassicalDefinition.lean"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-d214bae35",
-  "group": "Q116",
+  "reviewer": "NT-stage2-cc-89ac7959e",
+  "group": "Q73",
   "result": "pass",
-  "note": "Read the item node, the source (sk-cor-pe-classical-derived-equivalence.md, _section.md, sk-def-pe-classical-definition/_section.md), the six stmt_deps records, both delivered modules and the upstream comparisonAdjunction / derivedPlus / HasDerivedCategory declarations. The hunit hypothesis, clause 1 (classical image, plus the typed D+ codomain of rightDerivedFunctorPlus), clause 2 (counit iso on ClassicalPlus) and the equivalence with both functors identified all match the node. No extra assumptions; universes match the recorded boundedBelowComparison (Λ : Type (u+1)). The §1(B) module ClassicalDerivedDefinitions has real predicates (IsIso of continuityMap on every AffinePresentation, all integer degrees) that follow the source's module clause. Statements match the files exactly, node copies differ only in lean, only one sorry, docstrings and both report sections present. nt_compile --json on both files: exit 0, no warnings. Non-blocking: IsClassicalModuleFor runs parallel to the IsClassical-of-underlying-set encoding in det-pe-classical-sheaves-modules, so stage 3 needs a bridging lemma; the replaced sk-def record no longer lists IsClassical, but the module re-exports it."
+  "note": "Item node and Lean match clause by clause: X : Scheme.{u}, any finite Ring A (no commutativity), W : X.ProEt; site objects in u+1, morphisms in u; constant RingCat sheaf of ULift A (recorded mathlib_match), SheafOfModules, unbounded DerivedCategory; evaluationAb = forget, evaluate, forget₂ to AddCommGrpCat; derivedSections = upstream unbounded rightDerivedFunctor (HasKInjectiveResolutions is a true Prop binder, project convention); sectionCohomology = H^q of RΓ(H[0]); hbound over all classical H and q>e; clause 1 bound b+e+1<m with L,b inside the conjunct; clause 2 IsIso of H^m RΓ of (truncGEπ t N).app K for N<m-e-1, Mathlib t-structure convention checked. Edge cases: zero ring, noncommutative rings, e=0, negative b and N, unbounded-below complexes, empty X or W. §1(B) module ClassicalDefinition reuses set-sheaf IsClassical for arbitrary ring sheaves; recorded IsClassicalModuleFor and IsClassicalModule are commutative only; each predicate has a single owner; both node files differ from base only in lean; both lean.statement strings verbatim. No duplicate found. No hollow definitions; only sorry; docstrings with source, blueprint tag and all 7 proof steps; both report sections present. nt_compile.py exit 0 on both files (2.3 s, 5.2 s), no errors. No findings."
  }
 }

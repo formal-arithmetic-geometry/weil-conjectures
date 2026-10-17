@@ -334,5 +334,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-89ac7959e",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Item node and Lean match clause by clause: X : Scheme.{u}, any finite Ring A (no commutativity), W : X.ProEt; site objects in u+1, morphisms in u; constant RingCat sheaf of ULift A (recorded mathlib_match), SheafOfModules, unbounded DerivedCategory; evaluationAb = forget, evaluate, forget₂ to AddCommGrpCat; derivedSections = upstream unbounded rightDerivedFunctor (HasKInjectiveResolutions is a true Prop binder, project convention); sectionCohomology = H^q of RΓ(H[0]); hbound over all classical H and q>e; clause 1 bound b+e+1<m with L,b inside the conjunct; clause 2 IsIso of H^m RΓ of (truncGEπ t N).app K for N<m-e-1, Mathlib t-structure convention checked. Edge cases: zero ring, noncommutative rings, e=0, negative b and N, unbounded-below complexes, empty X or W. §1(B) module ClassicalDefinition reuses set-sheaf IsClassical for arbitrary ring sheaves; recorded IsClassicalModuleFor and IsClassicalModule are commutative only; each predicate has a single owner; both node files differ from base only in lean; both lean.statement strings verbatim. No duplicate found. No hollow definitions; only sorry; docstrings with source, blueprint tag and all 7 proof steps; both report sections present. nt_compile.py exit 0 on both files (2.3 s, 5.2 s), no errors. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.UnboundedClassicalTruncation",
+  "declaration": "AlgebraicGeometry.ProEtale.unbounded_classical_truncation",
+  "statement": "theorem unbounded_classical_truncation (X : Scheme.{u}) (A : Type u) [Ring A] [Finite A] (W : X.ProEt) [HasDerivedCategory (coefficientModules X A)] [Abelian.HasKInjectiveResolutions (coefficientModules X A)] [HasDerivedCategory AddCommGrpCat.{u + 1}] (e : ℕ) (hbound : ∀ (q : ℤ) (H : coefficientModules X A), IsClassicalModuleSheaf H → q > e → IsZero (sectionCohomology X A W q H)) : (∀ (L : DerivedCategory (coefficientModules X A)) (_hL : IsClassicalModuleComplex L) (b : ℤ), (∀ (q : ℤ), b < q → IsZero ((DerivedCategory.homologyFunctor (coefficientModules X A) q).obj L)) → ∀ (m : ℤ), b + e + 1 < m → IsZero ((DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} m).obj ((derivedSections X A W).obj L))) ∧ (∀ (K : DerivedCategory (coefficientModules X A)) (_hK : IsClassicalModuleComplex K) (m N : ℤ), N < m - e - 1 → IsIso ((DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} m).map ((derivedSections X A W).map ((CategoryTheory.Triangulated.TStructure.truncGEπ DerivedCategory.TStructure.t N).app K))))",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/SixFunctors/UnboundedClassicalTruncation.lean",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.coefficientRingSheaf",
+   "AlgebraicGeometry.ProEtale.coefficientModules",
+   "AlgebraicGeometry.ProEtale.evaluationAb",
+   "AlgebraicGeometry.ProEtale.derivedSections",
+   "AlgebraicGeometry.ProEtale.sectionCohomology",
+   "AlgebraicGeometry.ProEtale.unbounded_classical_truncation"
+  ]
  }
 }
