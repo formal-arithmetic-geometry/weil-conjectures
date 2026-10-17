@@ -53,6 +53,7 @@ public import WeilConjectures.Algebra.Homology.BifunctorLinear
 public import WeilConjectures.Algebra.Homology.BifunctorMappingConeNaturality
 public import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.ChgUniv
+public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimit
 public import WeilConjectures.Algebra.Homology.DerivedCategory.HomologyDevissage
 public import WeilConjectures.Algebra.Homology.DerivedCategory.MappingConeCoimage
 public import WeilConjectures.Algebra.Homology.DerivedCategory.PerfectTower
@@ -1569,8 +1570,11 @@ public import WeilConjectures.AlgebraicGeometry.PrincipalLocalizationNaiveCotang
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedCoverExtension
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Affine
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Etale
+public import WeilConjectures.AlgebraicGeometry.ProEtale.CohomologyFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ContinuousSheaf
 public import WeilConjectures.AlgebraicGeometry.ProEtale.DenseOpen
+public import WeilConjectures.AlgebraicGeometry.ProEtale.FiniteCoefficientCohomology
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Flat.QuasiCompactCover
 public import WeilConjectures.AlgebraicGeometry.ProEtale.FromPi1
 public import WeilConjectures.AlgebraicGeometry.ProEtale.LocalProperties
@@ -1741,6 +1745,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.ConnectedConstant
+public import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafModule
 public import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
 public import WeilConjectures.AlgebraicGeometry.Sites.DerivedStalk
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorLocal
@@ -2114,6 +2119,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.AdicTower
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTower
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Principal
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.QuotPowTriangle
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
@@ -2149,6 +2155,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Associator
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedTriangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableCriterion
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableShortExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Equivalence
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.LeftUnitorShift
@@ -2188,6 +2196,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjectiveResolution
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Linear
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic
@@ -2209,6 +2218,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeResidue
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeResidueIdeal
 public import WeilConjectures.CategoryTheory.DerivedCategory.TraceLaws
 public import WeilConjectures.CategoryTheory.DerivedCategory.TraceScalarExtension
+public import WeilConjectures.CategoryTheory.DerivedCategory.UniversalCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCoupleBoundaryVanishes
 public import WeilConjectures.CategoryTheory.DerivedCoupleExact
 public import WeilConjectures.CategoryTheory.DerivedCoupleKernelIdentities
@@ -2431,6 +2441,7 @@ public import WeilConjectures.CategoryTheory.Sites.CechInjective
 public import WeilConjectures.CategoryTheory.Sites.CechSheaf
 public import WeilConjectures.CategoryTheory.Sites.CechSpectralSequence
 public import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
+public import WeilConjectures.CategoryTheory.Sites.CohomologyFilteredColimit
 public import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
 public import WeilConjectures.CategoryTheory.Sites.CoinduceZMod
 public import WeilConjectures.CategoryTheory.Sites.ConstantForget
@@ -2725,15 +2736,23 @@ public import WeilConjectures.DeligneLaumon.Reduction.TraceReality
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.CompositionPairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.DualTateData
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Equivariance
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Pairings
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Perfectness
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.PointPairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Reciprocity
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.TracePairing
+public import WeilConjectures.EtaleCohomology.PoincareDuality.IntegralDegreewise
+public import WeilConjectures.EtaleCohomology.PoincareDuality.InvertibleTwist
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Pairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceIsomorphism
+public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceIsomorphism.Point
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Transport
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Transport.AdicReconstruction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryConstruction
@@ -2799,6 +2818,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionIso
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionPoint
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionProduct
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionReduction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ShiftTateObjectAssoc
@@ -3035,6 +3055,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.SmulCokernel
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
@@ -3067,6 +3088,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStru
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.InjectiveHom
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
@@ -3317,6 +3339,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Comparison
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.UnitIsoBijective
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Comma
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.CommaSites
@@ -3397,6 +3420,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.HomologicalFunctor
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.HomologySequenceShortExact
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.SpectralObject
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Subcategory
@@ -3455,6 +3479,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.ToLin
+public import WeilConjectures.Mathlib.LinearAlgebra.PerfectPairing.BaseChange
 public import WeilConjectures.Mathlib.LinearAlgebra.PiTensorProduct.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Associator
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
@@ -3481,6 +3506,7 @@ public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 public import WeilConjectures.Mathlib.RepresentationTheory.Semisimple
 public import WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation
 public import WeilConjectures.Mathlib.RingTheory.AdicCompletion.Basic
+public import WeilConjectures.Mathlib.RingTheory.AdicCompletion.Divisible
 public import WeilConjectures.Mathlib.RingTheory.Adjoin.FG
 public import WeilConjectures.Mathlib.RingTheory.Algebraic.Basic
 public import WeilConjectures.Mathlib.RingTheory.Artinian.Ring
@@ -3972,6 +3998,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Concentrated
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductWeil
+public import WeilConjectures.SixFunctors.Etale.Derived.CupProductWeilExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageTorAmplitude
@@ -3988,6 +4015,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstr
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportTorsion
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.ChangeOfBase
@@ -4094,6 +4122,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionRef
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStarShift
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
@@ -4118,6 +4147,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.TateTwist
 public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
 public import WeilConjectures.SixFunctors.Etale.Derived.Point
 public import WeilConjectures.SixFunctors.Etale.Derived.PointBiduality
+public import WeilConjectures.SixFunctors.Etale.Derived.PointUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational
@@ -4326,6 +4356,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafTransport
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenFunctions
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenUnit
+public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedForget
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExchangeMate
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
@@ -4497,6 +4528,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Restriction
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.SectionsMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.TopInvariance
+public import WeilConjectures.SixFunctors.ProEtale.ForgetModuleCohomology
 public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.GenericPoint
@@ -4620,12 +4652,19 @@ public import WeilConjectures.WeilSheaf.ArtinSchreierInertia
 public import WeilConjectures.WeilSheaf.ArtinSchreierPurity
 public import WeilConjectures.WeilSheaf.ArtinSchreierTrace
 public import WeilConjectures.WeilSheaf.ArtinSchreierTrivialization
+public import WeilConjectures.WeilSheaf.BaseChangeField.Coherence
+public import WeilConjectures.WeilSheaf.BaseChangeField.Comparison
+public import WeilConjectures.WeilSheaf.BaseChangeField.Derived
+public import WeilConjectures.WeilSheaf.BaseChangeField.Geometric
+public import WeilConjectures.WeilSheaf.BaseChangeField.Transport
 public import WeilConjectures.WeilSheaf.BoundaryStalk
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.CohomologicalRange
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.CohomologyDegreeZero
 public import WeilConjectures.WeilSheaf.CohomologyExact
+public import WeilConjectures.WeilSheaf.CohomologyNonneg
+public import WeilConjectures.WeilSheaf.CohomologyProEtale
 public import WeilConjectures.WeilSheaf.CohomologySequence
 public import WeilConjectures.WeilSheaf.CohomologyShift
 public import WeilConjectures.WeilSheaf.ComplexWeights
@@ -4725,6 +4764,7 @@ public import WeilConjectures.WeilSheaf.SupportUpperStar
 public import WeilConjectures.WeilSheaf.TateTwist
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
 public import WeilConjectures.WeilSheaf.Tensor
+public import WeilConjectures.WeilSheaf.TensorHomAdjunction
 public import WeilConjectures.WeilSheaf.TensorObjPairing
 public import WeilConjectures.WeilSheaf.TensorPower
 public import WeilConjectures.WeilSheaf.TraceFunction
