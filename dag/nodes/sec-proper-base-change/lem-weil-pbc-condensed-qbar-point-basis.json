@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-condensed-qbar-point-basis",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof paragraph 1: finite-to-Qbar coefficient comparisons on bounded constructible complexes; the ordinary coefficient decomposition by an algebraic basis.",
+   "via": [
+    "lem-weil-pbc-condensed-qbar-derived-scalar-basis-sections",
+    "lem-weil-pbc-condensed-qbar-derived-scalar-basis-unit",
+    "lem-weil-pbc-condensed-qbar-derived-scalar-basis",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The condensed algebraic closure is a coproduct of regular finite-field modules",
+ "statement": "Fix a prime ell and a finite intermediate field E of Omega, the algebraic closure of Q_ell. On the coherent site of profinite sets, let Ebar be the ring sheaf U |-> C(U,E), and let Omegabar be the finite-subextension-valued continuous-function ring sheaf: a section on U is a continuous U -> Omega whose image lies in one finite intermediate field. Use the internal module categories and regular modules of [def-weil-pbc-condensed-e-module-category], with the canonical pointwise coefficient inclusion Ebar -> Omegabar. For any chosen coproducts indexed in Type (u+1) in Ebar-modules, there is an index type I in Type (u+1) and an isomorphism from the I-coproduct of regular Ebar to the restriction of regular Omegabar.",
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+  "place": "continuousBasisIso (sectionwise basis equations), continuousBasisSheafIso (monoidal sheafification transport), lines 267-367; adapted from finite bases using the actual finite-subextension section model in lean/WeilConjectures/CategoryTheory/RingObjects/Condensed/FiniteSubextension.lean."
+ },
+ "proof": [
+  {
+   "text": "Choose an algebraic E-basis of Omega. For a finite intermediate field F, expand a finite Q_ell-basis of F; the union of the supports of its basis vectors bounds the supports of all elements of F, since each coordinate is Q_ell-linear. The restriction of each coordinate to F is continuous by LinearMap.continuous_of_finiteDimensional, applied directly over Q_ell. Thus every finite-field-valued continuous section has uniformly finite support and continuous E-valued coordinates.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+    "place": "continuousBasisIso (sectionwise basis equations), continuousBasisSheafIso (monoidal sheafification transport), lines 267-367; adapted from finite bases using the actual finite-subextension section model in lean/WeilConjectures/CategoryTheory/RingObjects/Condensed/FiniteSubextension.lean."
+   }
+  },
+  {
+   "text": "For each basis vector x, multiply an E-valued continuous function by x. Its values lie in the finite compositum E with Q_ell(x), and the resulting function is continuous. The basis equations show that summing these scalar sections is inverse to the coordinate map. The construction is natural under precomposition, and multiplication is E-linear by associativity. Hence the resulting presheaf module cofan is a coproduct: forget the module structure, evaluate on U, and identify it with the standard Finsupp coproduct of abelian groups. Reflection by evaluation and the module forgetful functor proves the universal property.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+    "place": "continuousBasisIso (sectionwise basis equations), continuousBasisSheafIso (monoidal sheafification transport), lines 267-367; adapted from finite bases using the actual finite-subextension section model in lean/WeilConjectures/CategoryTheory/RingObjects/Condensed/FiniteSubextension.lean."
+   }
+  },
+  {
+   "text": "The sheafification functor is monoidal and preserves colimits. Its module functor preserves coproducts, as is checked after the conservative module forgetful functor. Map the presheaf coproduct isomorphism through sheafification, and use the canonical isomorphisms from the sheafifications of the two presheaves to their ring sheaves. Restriction along the inverse finite-field ring isomorphism preserves coproducts and transports the regular modules and coefficient inclusion, giving precisely the claimed isomorphism for the chosen coproducts.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+    "place": "continuousBasisIso (sectionwise basis equations), continuousBasisSheafIso (monoidal sheafification transport), lines 267-367; adapted from finite bases using the actual finite-subextension section model in lean/WeilConjectures/CategoryTheory/RingObjects/Condensed/FiniteSubextension.lean."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/CondensedQbarPointBasis.lean",
+  "place": "Uniform-support coordinate construction, the presheaf coproduct universal property, and transport through monoidal sheafification.",
+  "group": "B4",
+  "date": "2026-10-17"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteIntermediateFieldValued|condensed.*(basis|coproduct)|continuous_of_finiteDimensional",
+   "results": "Mathlib/Topology/Algebra/Module/FiniteDimension.lean, Mathlib/Topology/Algebra/Module/FiniteDimension.lean, Mathlib/Topology/Algebra/Module/FiniteDimension.lean, Mathlib/Topology/Algebra/Module/FiniteDimension.lean, Mathlib/Topology/Algebra/Module/FiniteDimension.lean, Mathlib/Analysis/Analytic/Polynomial.lean, Mathlib/Topology/Category/CompHausLike/SigmaComparison.lean, Mathlib/Analysis/Normed/Affine/AddTorsorBases.lean",
+   "date": "2026-10-17",
+   "verdict": "No exact match. The finite-dimensional continuity API supplies the coordinate-continuity step; the coproduct and sheafification argument is proved here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The condensed algebraic closure of a p-adic field, defined by continuous functions valued in finite subextensions, is a coproduct of regular condensed modules over a finite subfield indexed by a vector space basis",
+   "results": "PadicAlgCl, PadicAlgCl.isAlgebraic, PadicComplex, PadicAlgCl.instCoePadic, Condensed.instAB4CondensedMod, CondensedMod, Padic.field, PadicAlgCl.valuation_def",
+   "date": "2026-10-17",
+   "verdict": "No exact match. The finite-dimensional continuity API supplies the coordinate-continuity step; the coproduct and sheafification argument is proved here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous function into a finite dimensional p-adic subfield has uniformly finite support in any algebraic basis and continuous basis coordinates",
+   "results": "Padic.instProperSpace, PadicInt.continuous_choose, continuous_equivFun_basis, PadicInt.mahlerTerm, PadicInt.mahlerEquiv, PadicAlgCl.instUniformContinuousConstSMulPadic, mahler, PadicInt.continuous_multichoose",
+   "date": "2026-10-17",
+   "verdict": "No exact match. The finite-dimensional continuity API supplies the coordinate-continuity step; the coproduct and sheafification argument is proved here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedQbarScalarBasisSections",
+  "date": "2026-10-17",
+  "group": "B4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedQbarPointBasis",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedQbarPointBasis.lean",
+  "declaration": "Profinite.exists_padicAlgCl_point_basis",
+  "statement": "theorem exists_padicAlgCl_point_basis\n    [HasCoproducts.{u + 1} (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n      (continuousMapRingObj E))] :\n    ∃ I : Type (u + 1), Nonempty\n      ((∐ fun _ : I ↦ Mod.regular (continuousMapRingObj.{u} E)) ≅\n        (Mod.comap (padicSubfieldRingObjToPadicAlgCl ℓ E)).obj\n          (Mod.regular (padicAlgClRingObj ℓ)))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-17"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261017T021559-L-693603",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261017T021559-L-693603",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

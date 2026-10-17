@@ -9,28 +9,35 @@
  ],
  "proof": [
   {
-   "text": "Choose a small algebraic E-basis of Omega. Every finite-field-valued continuous section lies in the E-span of a finite subextension composited with E; hence it has uniformly finite basis support, and each coordinate is continuous by finite-dimensional linear topology over Q_ell. Conversely a finite tuple of continuous coordinates gives a continuous function into a finite subextension. These natural inverse maps exhibit the restricted regular module on the profinite point as the basis coproduct.",
+   "text": "Apply exists_padicAlgCl_point_basis: the uniform finite-support coordinate construction gives a small-indexed coproduct of regular finite coefficient modules isomorphic to the restricted regular algebraic closure module on the profinite point. This construction is proved, including its sheafification transport.",
    "uses": [
-    "lem-weil-pbc-finite-dimensional-linear-homeomorphism"
+    "lem-weil-pbc-condensed-qbar-point-basis"
    ],
    "elementary": false
   },
   {
-   "text": "Pull the coproduct and its basis vectors to every scheme using the colimit-preserving monoidal point inverse image. Its monoidal composition comparison gives the displayed section coherence. Tensor the regular-module coproduct with N and compute its legs by the extension-unit/scalar-action formula. Finally the regular unit module is flat, coproducts of flat modules are flat, and the tensor comparison plus reflection by the exact forgetful functor gives finite-limit preservation of extension. These steps involve ordinary internal modules only.",
+   "text": "For arbitrary commutative ring objects R -> S on the profinite point with this coproduct decomposition, map the regular modules and the coproduct through the point inverse image to every scheme. The module functor preserves coproducts: after its conservative forgetful functor this is the colimit preservation of the left-adjoint geometric inverse image. Define each basis section by pulling back the corresponding point section. The monoidal composition comparison in profinite_point_pullback proves coherence. Keeping this construction generic in R and S avoids expensive conversion through the concrete finite-subextension coefficient objects.",
    "uses": [
     "lem-weil-pbc-profinite-point-pullback"
    ],
    "elementary": false
+  },
+  {
+   "text": "Tensor the pulled-back regular-module coproduct with an arbitrary module N. The left unitor, tensor coproduct comparison, and scalar-extension tensor comparison give an isomorphism from the chosen coproduct of N to the restriction of its scalar extension. The extension-unit/scalar-action calculation identifies every coproduct leg with exactly the displayed adjunction unit followed by restricted qbar_scalarEndo. The proof specifies the constant N diagram explicitly, so works for every chosen HasCoproduct instance. Finally the regular module is the tensor unit and is flat; coproducts preserve flatness. Transport flatness along the decomposition, use extendForgetTensorIso, and reflect finite-limit preservation along the exact conservative forgetful functor.",
+   "uses": [],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
+  "lem-weil-pbc-condensed-qbar-point-basis",
   "lem-weil-pbc-profinite-point-pullback"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "lean/Sheaf/AlgebraicGeometry/CondensedQbarScalarBasisSections.lean",
-  "place": "Ordinary finite-support coefficient construction, basis unit calculation and flatness; unresolved after second reading"
+  "place": "The proved generic scheme_basis_from_point construction, its scalar-unit leg computation and flatness argument, instantiated with the proved point basis.",
+  "group": "B4",
+  "date": "2026-10-17"
  },
  "lean": {
   "existing": false,
@@ -118,9 +125,9 @@
   "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261017T003416-L-3313128",
+  "landing": "20261017T021559-L-693603",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
