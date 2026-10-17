@@ -22,13 +22,16 @@ class RepairOrder(unittest.TestCase):
             for module in modules:
                 (root/module).write_text(('def data := Classical.choose exists_data\n' if module=='Sheaf.Data' else 'theorem t : True := by sorry\n')+
                                         ('-- STATEMENT-DISPUTED\n' if module=='Sheaf.Disputed' else ''))
-            with patch.object(queue,'WORK',root),patch.object(queue.li,'file_of',lambda m:root/m):
+            import sorry_route  # the live route (local/sorry-route.json) knows none of these modules
+            with patch.object(queue,'WORK',root),patch.object(queue.li,'file_of',lambda m:root/m),\
+                 patch.object(sorry_route,'load',lambda:None):
                 items,held=queue.stage3({},modules,{'Sheaf.Waiting','Sheaf.Small'})
+            # 2026-10-17: a waiting module is not an item, also a repair with sorry (Sheaf.Small); a repair without sorry is
             self.assertEqual([item[2] for item in items],
-                             ['Sheaf.Small','Sheaf.Medium','Sheaf.Data','Sheaf.Disputed','Sheaf.Near','Sheaf.Far'])
-            self.assertEqual([item[4] for item in items],['repair','repair','repair','disputed','proof','proof'])
-            self.assertEqual(items[2][3],0)
-            self.assertEqual(held,[(2,'Sheaf.Waiting',1)])
+                             ['Sheaf.Medium','Sheaf.Data','Sheaf.Disputed','Sheaf.Near','Sheaf.Far'])
+            self.assertEqual([item[4] for item in items],['repair','repair','disputed','proof','proof'])
+            self.assertEqual(items[1][3],0)
+            self.assertEqual(held,[(2,'Sheaf.Waiting',1),(8,'Sheaf.Small',1)])
 
 
 if __name__=='__main__': unittest.main()

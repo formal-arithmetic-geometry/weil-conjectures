@@ -14,8 +14,12 @@ the active modules that still contain `sorry` or `admit` and are on the sorry ro
   1. modules listed in coord/repairs.txt, in file order (proof or definition repairs),
   2. modules containing `STATEMENT-DISPUTED`,
   3. the rest, nearest to a target first (distance = fewest import steps from a target module).
-A module whose proof would use a node that has no Lean declaration yet is not an item: it is listed as waiting
-until stage 2 has stated that node. A module in the closure may still contain declarations nothing uses: the
+A module is an item only when every node in the proof dependencies (proof_deps and the `uses` of the proof steps) of
+the node(s) it realizes has its Lean statement: a declaration of the library, a Mathlib leaf, a finished node or a
+node assumed by its batches (coord/assumed.tsv); dag_queue.Dag.waiting/stated (the human, 2026-10-17: the prover must
+see what is available before proving). Otherwise it is listed as "waiting for statements of proof dependencies"
+until stage 2 has stated those nodes. Exempt: a repair of a module without `sorry` (already proved, broken by an
+upstream change) and an item already claimed (coord/claims; nothing is released here). A module in the closure may still contain declarations nothing uses: the
 closure is an upper bound of what the targets need.
 
 coord/queue.tsv lists stage 1 first, then 2, then 3. Within stages 1 and 3 the items nearest to a target come
@@ -51,6 +55,11 @@ def analyse():
     return imports, dist
 
 
+def claimed(m: str) -> bool:
+    """an item some group holds (coord/claims/<module>.lock, tools/claim.py): it stays an item whatever its dependencies"""
+    return (WORK / "claims" / (m.replace("/", "__") + ".lock")).is_file()
+
+
 def stage3(imports, dist, waiting: set[str]):
     repairs = {}
     rp = WORK / "repairs.txt"
@@ -80,11 +89,11 @@ def stage3(imports, dist, waiting: set[str]):
         if n == 0 and m not in repairs:
             continue
         kind = "repair" if m in repairs else "disputed" if "STATEMENT-DISPUTED" in text else "proof"
-        if m in waiting and kind == "proof":
-            # 2026-10-14 (launcher, under the human's mandate to remove stalls): a module with a Lean statement is worked
-            # even when its node's proof cites a node without a declaration (the worker states what is missing); holding
-            # them kept 14 closure modules out of the queue for the whole day. Still counted, as before, under `held`.
-            held.append((dist[m], m, n))
+        if m in waiting and not (kind == "repair" and n == 0) and not claimed(m):
+            # the human, 2026-10-17 (supersedes the launcher's 2026-10-14 rule that worked such modules anyway): a stage-3
+            # item opens only when every node of its proof dependencies has a Lean statement, so that the prover sees what
+            # is available. Exempt: a repair of a proved module (no sorry) and an item already claimed.
+            held.append((dist[m], m, n)); continue
         items.append((("repair", "disputed", "proof").index(kind), dist[m], m, n, kind))
     items.sort(key=lambda x: (x[0], repairs[x[2]] if x[4] == "repair" else x[1],
                               x[1], x[2])); held.sort()
@@ -102,6 +111,9 @@ def main() -> int:
         g = dag_queue.Dag(dag_queue.load())
         s1 = g.stage1(); s2, why = g.stage2(); waiting = g.waiting()
     items3, held = stage3(imports, dist, {m for m, _ in waiting})
+    wfor = {}
+    for m, c in waiting:
+        wfor.setdefault(m, c)
     if cmd == "summary":
         print(f"stage 1: {len(s1)} nodes to split")
         print(f"stage 2: {len(s2)} nodes to state" + (f"; not open: " + ", ".join(f"{v} {k}" for k, v in why.items()) if why else ""))
@@ -109,10 +121,9 @@ def main() -> int:
             print(f"stage 3: library modules {len(lib)}; needed by the targets {len(dist)}; outside {len(lib - set(dist))}")
             print(f"stage 3: items from the {STATE.get('route', 'import closure')}"
                   + (f"; {len(STATE['off_route'])} sorried modules in the closure are on no target's route (not items)" if STATE.get("off_route") else ""))
-            print(f"stage 3: {len(items3)} items (" + ", ".join(f"{k} {sum(1 for x in items3 if x[4] == k)}" for k in ("repair", "disputed", "proof")) + f"); {len(held)} modules waiting for a statement")
-            # 2026-10-15 (launcher): held modules are also items since 2026-10-14; adding them again counted them twice.
-            ns = sum(x[3] for x in items3)
-            print(f"stage 3: sorries left in the targets' closure {ns}, in {len(items3)} modules (text count; "
+            print(f"stage 3: {len(items3)} items (" + ", ".join(f"{k} {sum(1 for x in items3 if x[4] == k)}" for k in ("repair", "disputed", "proof")) + f"); {len(held)} modules waiting for statements of proof dependencies (not items)")
+            ns = sum(x[3] for x in items3) + sum(x[2] for x in held)   # held modules are not items again since 2026-10-17
+            print(f"stage 3: sorries left on the route {ns}, in {len(items3) + len(held)} modules (text count; "
                   "tools/target_types.sh check prints each target's axioms: a target is closed when sorryAx is not among them)")
         else:
             print("stage 3: not open (lean/TargetsCheck.lean imports no target module yet)")
@@ -148,10 +159,11 @@ def main() -> int:
             for _, d, m, n, k in items3:
                 f.write(f"| `{m}` | {d} | {n} | {k} |\n")
         if held:
-            f.write(f"\nAlso listed above and claimable: {len(held)} modules whose proof uses a node that has no Lean declaration yet.\n\n")
-            f.write("| module | distance to a target | sorry |\n|---|---|---|\n")
+            f.write(f"\n## Stage 3: waiting for statements of proof dependencies ({len(held)})\n\n"
+                    "Not items: a node in the proof dependencies has no Lean statement yet (the human, 2026-10-17).\n\n")
+            f.write("| module | distance to a target | sorry | waits for (first unstated node) |\n|---|---|---|---|\n")
             for d, m, n in held:
-                f.write(f"| `{m}` | {d} | {n} |\n")
+                f.write(f"| `{m}` | {d} | {n} | `{wfor.get(m, '')}` |\n")
     print(f"wrote {len(rows)} items to coord/queue.tsv and coord/queue.md (stage 3: {len(items3)}, waiting {len(held)}; stage 2: {len(s2)}; stage 1: {len(s1)})")
     if dag_queue.nodes_dir().is_dir():  # the reverse index of the blueprint references is regenerated with the queue
         import blueprint_refs
