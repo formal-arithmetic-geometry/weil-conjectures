@@ -33,7 +33,7 @@ local instance (priority := 2000) chainCoordinatesCategory (Y : Scheme.{u}) :
 local instance (priority := 2000) chainCoordinatesPreadditive (Y : Scheme.{u}) :
     Preadditive Y.Modules := SheafOfModules.instPreadditive Y.ringCatSheaf
 local instance (priority := 2000) chainCoordinatesAbelian (Y : Scheme.{u}) :
-    Abelian Y.Modules := SheafOfModules.instAbelian Y.ringCatSheaf
+    Abelian Y.Modules := inferInstanceAs (Abelian (SheafOfModules.{u} Y.ringCatSheaf))
 
 
 private theorem tilde_map_toOpen {R : CommRingCat.{u}} {M N : ModuleCat.{u} R}

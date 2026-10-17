@@ -32,7 +32,7 @@ local instance (priority := 2000) ordinaryCoordinatesCategory (Y : Scheme.{u}) :
 local instance (priority := 2000) ordinaryCoordinatesPreadditive (Y : Scheme.{u}) :
     Preadditive Y.Modules := SheafOfModules.instPreadditive Y.ringCatSheaf
 local instance (priority := 2000) ordinaryCoordinatesAbelian (Y : Scheme.{u}) :
-    Abelian Y.Modules := SheafOfModules.instAbelian Y.ringCatSheaf
+    Abelian Y.Modules := inferInstanceAs (Abelian (SheafOfModules.{u} Y.ringCatSheaf))
 
 
 local instance ordinaryExchangeTildeAdditive (C : Type u) [CommRing C] :
