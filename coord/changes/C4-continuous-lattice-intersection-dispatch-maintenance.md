@@ -58,3 +58,11 @@ delivery. The next worker should retain and diagnose the existing proof,
 repair the expensive definition/conversion with its API and forced callers,
 then pass the normal 60-second single-file check and dry run before a fresh
 second reading. Rebase the node from sheaf-dag before updating its proof fields.
+
+A further server-side check used `SHEAF_FILE_TIMEOUT=60 tools/lean_file.sh` on
+an isolated snapshot of the retained full proof, SHA-256
+`29fb61fe072982c39a4a04b50b7f17ca9e7b23ad5712491527941b8f9932f4c2`.
+It returned `Timeout after 60 s: the cause is a definition the file uses; find
+it and change it.` No Lean file was modified or landed by maintenance. The
+node keeps its original one-space JSON indentation; only its two provenance
+notes differ from the pre-maintenance record.
