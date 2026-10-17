@@ -19,7 +19,7 @@ open CategoryTheory CategoryTheory.Limits
 noncomputable section
 namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
-  HasDerivedCategory.{w} (SheafOfModules (moduleRings Y.toRingedSpace))]
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -43,13 +43,13 @@ theorem exists_affinePushforwardCohomologyEdge_identity
     (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙
       schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙
       DerivedCategory.homologyFunctor
-        (SheafOfModules (moduleRings (Spec (.of B)).toRingedSpace)) i,
+        (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i,
     ∀ (C : CochainComplex (ModuleCat A) ℤ)
       (hK : schemeDerivedQCohProperty (Spec (.of A))
         (DerivedCategory.Q.obj (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C))),
       affinePushforwardCohomologyMapOfComparison A B φ σ C i ≫
         (DerivedCategory.homologyFunctor
-          (SheafOfModules (moduleRings (Spec (.of B)).toRingedSpace)) i).map
+          (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map
           ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ))).map
             (𝟙 _)) =
         (affinePushforwardTilde B).map ((ModuleCat.restrictScalars φ).map
@@ -64,7 +64,7 @@ theorem exists_affinePushforwardCohomologyEdge_identity
     exact σ
   let J := (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙
     DerivedCategory.homologyFunctor
-      (SheafOfModules (moduleRings (Spec (.of A)).toRingedSpace)) i
+      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i
   let G := moduleSpecΓFunctor (R := .of A)
   obtain ⟨ε, hε⟩ := exists_affineDerivedPushforwardSheafEdge A B φ i
   let α := Functor.whiskerLeft (J ⋙ G) σ'.hom ≫
@@ -88,7 +88,7 @@ theorem exists_affinePushforwardCohomologyEdge_identity
     infer_instance) C hK
   let K := DerivedCategory.Q.obj ((T.mapHomologicalComplex (.up ℤ)).obj C)
   let HA := DerivedCategory.homologyFunctor
-    (SheafOfModules (moduleRings (Spec (.of A)).toRingedSpace)) i
+    (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i
   let k : T.obj (C.homology i) ⟶ HA.obj K :=
     ((C.sc i).mapHomologyIso T).inv ≫
       ((DerivedCategory.homologyFunctorFactors _ i).app
@@ -105,7 +105,7 @@ theorem exists_affinePushforwardCohomologyEdge_identity
     erw [← Category.assoc, (tilde.adjunction (R := .of A)).left_triangle_components]
     exact Category.id_comp k
   let HB := DerivedCategory.homologyFunctor
-    (SheafOfModules (moduleRings (Spec (.of B)).toRingedSpace)) i
+    (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i
   let R := schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ))
   change affinePushforwardCohomologyMapOfComparison A B φ σ C i ≫ HB.map (R.map (𝟙 K)) =
     F.map b ≫ σ'.hom.app (G.obj (HA.obj K)) ≫
