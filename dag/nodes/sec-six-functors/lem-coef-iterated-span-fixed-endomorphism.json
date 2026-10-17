@@ -1,0 +1,88 @@
+{
+ "id": "lem-coef-iterated-span-fixed-endomorphism",
+ "kind": "statement",
+ "title": "Fixed-anchor endomorphisms extend along iterated functorial span completions",
+ "statement": "Let $\\mathcal C$ be a category [def-nagata-category], let $W$ be a wide subcategory (it contains every object and identity and is closed under composition) satisfying two-out-of-three: if two of $f,g,gf$ lie in $W$, so does the third. Let $U\\subseteq W$ be a wide subcategory. Fix a functorial square-completion rule $S$: for each span $D\\xleftarrow{q}B\\xrightarrow{h}B'$ with $q\\in U$, it chooses $D\\xrightarrow{k}D'\\xleftarrow{q'}B'$ with $q'\\in U$ and $kq=q'h$. On every commuting triple of maps of input spans it chooses a map of output vertices commuting with $k,q'$, and these choices preserve identities and composition. Fix $n\\geq0$, a chain $B_0\\xrightarrow{h_1}\\cdots\\xrightarrow{h_n}B_n$, and $q_0:B_0\\to D_0$ in $U$. Recursively let $(D_j,k_j:D_{j-1}\\to D_j,q_j:B_j\\to D_j)$ be the output of $S$ on $(D_{j-1}\\xleftarrow{q_{j-1}}B_{j-1}\\xrightarrow{h_j}B_j)$ for $1\\leq j\\leq n$. For every endomorphism $e_0:D_0\\to D_0$ with $e_0q_0=q_0$, there is a specified sequence $e_j:D_j\\to D_j$, $1\\leq j\\leq n$, whose $j$th term is the output-vertex map of $S$ on the input-span endomorphism $(e_{j-1},1_{B_{j-1}},1_{B_j})$. Every one of these input-span endomorphisms is well-defined, and\n$$e_jq_j=q_j,\\qquad e_jk_j=k_je_{j-1}\\quad(1\\leq j\\leq n).$$\nMoreover $e_j\\in W$ for every $0\\leq j\\leq n$.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Dwyer–Kan, Calculating simplicial localizations, Proposition 8.2(i), printed p. 29 (PDF p. 13), following Proofs paragraph; explicit auxiliary assertion extracted from the square-criterion proof step 5. No Stacks tag is claimed."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "span.*endomorph|endomorph.*span|completion.*endomorph|endomorph.*completion",
+   "results": "{\"t\": \"2026-10-17T08:11:17Z\", \"tool\": \"grep\", \"query\": \"span.*endomorph|endomorph.*span|completion.*endomorph|endomorph.*completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Pi.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\"], \"digest\": \"fae941ca44700867\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: spanHomMk_app and spanCompIso concern individual span diagrams, not recursive completion rules with a fixed-anchor endomorphism and W-membership at every stage. SqStruct.map restricts a chosen lift along a transfinite diagram and has no such completion endomorphisms. WithInitial/Initial hits concern initial objects. Read Cospan.lean:412-420,297ff and TransfiniteCompositionLifting.lean:94-138."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated functorial span completion carries natural endomorphisms fixing the input leg to natural endomorphisms fixing the output leg",
+   "results": "{\"t\": \"2026-10-17T08:11:18Z\", \"tool\": \"leansearch\", \"query\": \"Iterated functorial span completion carries natural endomorphisms fixing the input leg to natural endomorphisms fixing the output leg\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.spanHomMk_app\", \"CategoryTheory.Limits.spanCompIso\", \"CategoryTheory.Limits.spanCompIso_hom_app_right\", \"CategoryTheory.Over.iteratedSliceForwardNaturalityIso\", \"CategoryTheory.Limits.cospanCompIso\", \"CategoryTheory.Limits.span_map_id\", \"CategoryTheory.Limits.WalkingMultispan.functorExt_hom_app\", \"CategoryTheory.Limits.spanCompIso_app_zero\"], \"digest\": \"9125a5c0a8fcaad3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: spanHomMk_app and spanCompIso concern individual span diagrams, not recursive completion rules with a fixed-anchor endomorphism and W-membership at every stage. SqStruct.map restricts a chosen lift along a transfinite diagram and has no such completion endomorphisms. WithInitial/Initial hits concern initial objects. Read Cospan.lean:412-420,297ff and TransfiniteCompositionLifting.lean:94-138."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"endomorphism\"",
+   "results": "{\"t\": \"2026-10-17T08:11:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"Functor\\\", \\\"endomorphism\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: spanHomMk_app and spanCompIso concern individual span diagrams, not recursive completion rules with a fixed-anchor endomorphism and W-membership at every stage. SqStruct.map restricts a chosen lift along a transfinite diagram and has no such completion endomorphisms. WithInitial/Initial hits concern initial objects. Read Cospan.lean:412-420,297ff and TransfiniteCompositionLifting.lean:94-138."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An endomorphism fixing the common leg of a span propagates naturally through a finite sequence of functorial commutative square completions, with weak equivalences from two out of three",
+   "results": "{\"t\": \"2026-10-17T08:11:29Z\", \"tool\": \"leanfinder\", \"query\": \"An endomorphism fixing the common leg of a span propagates naturally through a finite sequence of functorial commutative square completions, with weak equivalences from two out of three\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasLiftingProperty.transfiniteComposition.SqStruct.map\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.SqStruct.map_f'\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.SqStruct.sq\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.SqStruct.w₁\", \"CategoryTheory.SmallObject.ιFunctorObj_extension\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.SqStruct.w₂\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.SqStruct.f'\", \"CategoryTheory.SmallObject.FunctorObjIndex.w\"], \"digest\": \"a6686d1e2c0cb302\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: spanHomMk_app and spanCompIso concern individual span diagrams, not recursive completion rules with a fixed-anchor endomorphism and W-membership at every stage. SqStruct.map restricts a chosen lift along a transfinite diagram and has no such completion endomorphisms. WithInitial/Initial hits concern initial objects. Read Cospan.lean:412-420,297ff and TransfiniteCompositionLifting.lean:94-138."
+  },
+  {
+   "tool": "grep",
+   "query": "spanHomMk|spanCompIso|transfiniteComposition.SqStruct|map_endomorph",
+   "results": "{\"t\": \"2026-10-17T08:16:00Z\", \"tool\": \"grep\", \"query\": \"spanHomMk|spanCompIso|transfiniteComposition.SqStruct|map_endomorph\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adhesive/Basic.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Shapes/Pullbacks.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Creates/Pullbacks.lean\"], \"digest\": \"bdb14d91a7db4db7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: spanHomMk_app and spanCompIso concern individual span diagrams, not recursive completion rules with a fixed-anchor endomorphism and W-membership at every stage. SqStruct.map restricts a chosen lift along a transfinite diagram and has no such completion endomorphisms. WithInitial/Initial hits concern initial objects. Read Cospan.lean:412-420,297ff and TransfiniteCompositionLifting.lean:94-138."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural endomorphism of the initial replacement object fixing its anchor extends by induction along functorial cobase change squares, commuting with all transition maps",
+   "results": "{\"t\": \"2026-10-17T08:16:09Z\", \"tool\": \"leanfinder\", \"query\": \"A natural endomorphism of the initial replacement object fixing its anchor extends by induction along functorial cobase change squares, commuting with all transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Initial.induction\", \"CategoryTheory.WithInitial.liftStar_lift_map\", \"CategoryTheory.WithInitial.lift_map\", \"CategoryTheory.WithInitial.map₂\", \"CategoryTheory.WithInitial.lift\", \"CategoryTheory.SmallObject.SuccStruct.ιIterationFunctor\", \"CategoryTheory.SmallObject.SuccStruct.ιIteration\", \"CategoryTheory.Functor.Initial.exists_eq\"], \"digest\": \"89b238790cba87bd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: spanHomMk_app and spanCompIso concern individual span diagrams, not recursive completion rules with a fixed-anchor endomorphism and W-membership at every stage. SqStruct.map restricts a chosen lift along a transfinite diagram and has no such completion endomorphisms. WithInitial/Initial hits concern initial objects. Read Cospan.lean:412-420,297ff and TransfiniteCompositionLifting.lean:94-138."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-homotopy-fractions-square-criterion",
+  "date": "2026-10-17",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: derived coefficient adjunction in the displayed R Hom / R lim calculation; flat-model stable enhancement foundation. Cosimplicial frames supply localization mapping spaces for the finite-diagram induction. Technical input: Definitions 3.1-3.2, Lemma 3.4 and Proposition 3.5, pp. 11-13; Dwyer-Kan, Calculating simplicial localizations, Propositions 6.2(i) and 8.2 for the special-hammock reduction; Proposition 8.2, printed p. 29 (PDF p. 13), with U = W_1 and V = W_2; square-criterion proof step 5: the induction producing e_j with e_j q_j=q_j and e_j h'_j=h'_j e_{j-1}",
+   "via": [
+    "lem-coef-homotopy-fractions-square-criterion",
+    "lem-coef-special-hammock-reduction",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,75 @@
+{
+ "id": "lem-coef-iterated-span-endomorphism-naturality",
+ "kind": "statement",
+ "title": "Naturality of endomorphisms propagated along span completions",
+ "statement": "Let $\\mathcal C$ be a category [def-nagata-category], let $W$ be a wide subcategory (it contains every object and identity and is closed under composition) satisfying two-out-of-three: if two of $f,g,gf$ lie in $W$, so does the third. Let $U\\subseteq W$ be a wide subcategory. Fix a functorial square-completion rule $S$: for each span $D\\xleftarrow{q}B\\xrightarrow{h}B'$ with $q\\in U$, it chooses $D\\xrightarrow{k}D'\\xleftarrow{q'}B'$ with $q'\\in U$ and $kq=q'h$. On every commuting triple of maps of input spans it chooses a map of output vertices commuting with $k,q'$, and these choices preserve identities and composition. Fix $n\\geq0$, a chain $B_0\\xrightarrow{h_1}\\cdots\\xrightarrow{h_n}B_n$, and $q_0:B_0\\to D_0$ in $U$. Recursively let $(D_j,k_j:D_{j-1}\\to D_j,q_j:B_j\\to D_j)$ be the output of $S$ on $(D_{j-1}\\xleftarrow{q_{j-1}}B_{j-1}\\xrightarrow{h_j}B_j)$ for $1\\leq j\\leq n$. Choose $e_0:D_0\\to D_0$ fixing $q_0$, i.e. $e_0q_0=q_0$, and let $e_j$, $1\\leq j\\leq n$, be the specified endomorphisms of [lem-coef-iterated-span-fixed-endomorphism]: $e_j$ is the output-vertex map of $S$ on the input-span endomorphism $(e_{j-1},1_{B_{j-1}},1_{B_j})$. Take a second chain $\\widetilde B_0\\xrightarrow{\\widetilde h_1}\\cdots\\xrightarrow{\\widetilde h_n}\\widetilde B_n$, an arrow $\\widetilde q_0:\\widetilde B_0\\to\\widetilde D_0$ in $U$, and an endomorphism $\\widetilde e_0$ with $\\widetilde e_0\\widetilde q_0=\\widetilde q_0$; let $\\widetilde D_j,\\widetilde k_j,\\widetilde q_j,\\widetilde e_j$ be obtained by the same rule $S$. Suppose maps $a_j:B_j\\to\\widetilde B_j$ and $t_0:D_0\\to\\widetilde D_0$ satisfy\n$$a_jh_j=\\widetilde h_ja_{j-1},\\qquad t_0q_0=\\widetilde q_0a_0,\\qquad t_0e_0=\\widetilde e_0t_0.$$\nLet $t_j:D_j\\to\\widetilde D_j$ be the output-vertex map of $S$ on the input-span map $(t_{j-1},a_{j-1},a_j)$. Then these input-span maps are well-defined and\n$$t_jq_j=\\widetilde q_ja_j,\\qquad t_jk_j=\\widetilde k_jt_{j-1},\\qquad t_je_j=\\widetilde e_jt_j\\quad(1\\leq j\\leq n).$$\nThus the specified endomorphisms commute with every map of initial chains and anchors intertwining the initial endomorphisms; in particular they form natural endomorphisms for any category of such input data.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Dwyer–Kan, Calculating simplicial localizations, Proposition 8.2(i), printed p. 29 (PDF p. 13), following Proofs paragraph; explicit auxiliary assertion extracted from the square-criterion proof step 5. No Stacks tag is claimed."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "lem-coef-iterated-span-fixed-endomorphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "span.*[Nn]atural|[Nn]atural.*span|map.*[Ee]ndomorph|[Ee]ndomorph.*map",
+   "results": "{\"t\": \"2026-10-17T08:41:48Z\", \"tool\": \"grep\", \"query\": \"span.*[Nn]atural|[Nn]atural.*span|map.*[Ee]ndomorph|[Ee]ndomorph.*map\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Endomorphism.lean\", \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Multiequalizer.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Multiequalizer.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/WidePullbacks.lean\"], \"digest\": \"37ea52fc8dd50a64\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: spanHomMk_app is a constructor for a map between individual spans; Functor.mapEnd (Endomorphism.lean:172-178) maps a single endomorphism monoid. ComposableArrows.naturality' (Basic.lean:112ff) assumes a natural transformation is already given. DoldKan.P/Q naturality is about preadditive simplicial objects. None states the intertwining assertion for recursively propagated span-completion endomorphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An endomorphism fixing the anchor of a span extends through iterated functorial commutative square completions naturally in maps of chains",
+   "results": "{\"t\": \"2026-10-17T08:41:48Z\", \"tool\": \"leansearch\", \"query\": \"An endomorphism fixing the anchor of a span extends through iterated functorial commutative square completions naturally in maps of chains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.spanExt_hom_app_right\", \"CategoryTheory.Limits.spanHomMk_app\", \"CategoryTheory.Limits.spanExt_hom_app_zero\", \"CategoryTheory.Limits.WalkingMultispan.functorExt_hom_app\", \"CategoryTheory.Limits.spanExt_app_right\", \"CategoryTheory.Limits.WalkingMultispan.functorExt\", \"CategoryTheory.Limits.spanExt_app_one\", \"CategoryTheory.CatCommSq.rec\"], \"digest\": \"878878f13301b2a7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: spanHomMk_app is a constructor for a map between individual spans; Functor.mapEnd (Endomorphism.lean:172-178) maps a single endomorphism monoid. ComposableArrows.naturality' (Basic.lean:112ff) assumes a natural transformation is already given. DoldKan.P/Q naturality is about preadditive simplicial objects. None states the intertwining assertion for recursively propagated span-completion endomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.map\", \"commute\"",
+   "results": "{\"t\": \"2026-10-17T08:41:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"Functor.map\\\", \\\"commute\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: spanHomMk_app is a constructor for a map between individual spans; Functor.mapEnd (Endomorphism.lean:172-178) maps a single endomorphism monoid. ComposableArrows.naturality' (Basic.lean:112ff) assumes a natural transformation is already given. DoldKan.P/Q naturality is about preadditive simplicial objects. None states the intertwining assertion for recursively propagated span-completion endomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of recursively induced endomorphisms along a finite tower of functorial span completions: a commuting map of input chains intertwines every propagated endomorphism",
+   "results": "{\"t\": \"2026-10-17T08:41:58Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of recursively induced endomorphisms along a finite tower of functorial span completions: a commuting map of input chains intertwines every propagated endomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.P_f_naturality\", \"AlgebraicTopology.DoldKan.QInfty_f_naturality\", \"AlgebraicTopology.DoldKan.PInfty_f_naturality\", \"AlgebraicTopology.DoldKan.Q_f_naturality\", \"CategoryTheory.ComposableArrows.naturality'\", \"AlgebraicTopology.DoldKan.P_f_naturality_assoc\", \"AlgebraicTopology.DoldKan.natTransP\", \"CategoryTheory.ComposableArrows.naturality'_assoc\"], \"digest\": \"7a7175eca8eabffb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: spanHomMk_app is a constructor for a map between individual spans; Functor.mapEnd (Endomorphism.lean:172-178) maps a single endomorphism monoid. ComposableArrows.naturality' (Basic.lean:112ff) assumes a natural transformation is already given. DoldKan.P/Q naturality is about preadditive simplicial objects. None states the intertwining assertion for recursively propagated span-completion endomorphisms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-homotopy-fractions-square-criterion",
+  "date": "2026-10-17",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: derived coefficient adjunction in the displayed R Hom / R lim calculation; flat-model stable enhancement foundation. Cosimplicial frames supply localization mapping spaces for the finite-diagram induction. Technical input: Definitions 3.1-3.2, Lemma 3.4 and Proposition 3.5, pp. 11-13; Dwyer-Kan, Calculating simplicial localizations, Propositions 6.2(i) and 8.2 for the special-hammock reduction; Proposition 8.2, printed p. 29 (PDF p. 13), with U = W_1 and V = W_2; square-criterion proof step 5: the subsequent induction proving t_j e_j=tilde e_j t_j for morphisms of input diagrams",
+   "via": [
+    "lem-coef-homotopy-fractions-square-criterion",
+    "lem-coef-special-hammock-reduction",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

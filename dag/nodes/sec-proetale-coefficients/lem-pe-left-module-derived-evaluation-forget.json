@@ -18,9 +18,91 @@
   "lem-pe-constant-left-module-inverse-image",
   "def-sp-enough-injectives"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\operatorname{Mod}(\\Lambda_{\\mathcal C})$, $A_0=\\operatorname{Ab}(\\mathcal C)$, and denote their evaluation functors by $G_W:A\\to\\Lambda\\text{-}\\operatorname{Mod}$ and $G_{0,W}:A_0\\to\\operatorname{Ab}$. The functor $V$ is exact by [lem-weil-pbc-module-sheaves-colimits-forgetful](1); its hypothesis on sheafification holds on a small site in the common universe. The ordinary module forgetful functor $v$ is exact: kernels and quotient groups carry the induced left action, so forgetting preserves both. Hence $V$ and $v$ act termwise on derived categories, preserve boundedness below and commute with cohomology. There is the literal natural equality $vG_W=G_{0,W}V$, including differentials and restriction maps: both evaluate the same underlying abelian sheaf at $W$. This does not require commutativity or flatness of $\\Lambda$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "03FD, first paragraph of proof; Modules on Sites 03DA/03DB"
+   }
+  },
+  {
+   "text": "Let $J$ be an injective left-module sheaf. Apply [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] with $\\mathcal O=\\Lambda_{\\mathcal C}$ and $M=J$. Its module evaluation takes values in abelian groups, so its higher derived values vanish: the complex consisting of $J$ in degree zero is an injective resolution by [def-sp-injective-resolutions]. The comparison therefore gives $H^q(W,VJ)=0$ for every $q>0$ and every $W$. This is exactly $G_{0,W}$-acyclicity of $VJ$. All size and enough-injectives assumptions of the comparison are among the hypotheses here. We have used acyclicity, not injectivity of $VJ$.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "03FD, second paragraph of proof and objectwise cohomology equality"
+   }
+  },
+  {
+   "text": "Choose $L$ as in the statement; such a bounded-below injective representative exists by [lem-weil-pbc-dplus-injective-representative]. By step 1, $VL$ represents $VK$, and by step 2 it is termwise $G_{0,W}$-acyclic. The category $A_0$ is Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck] applied to the constant integer ring sheaf: abelian sheaves are exactly its module sheaves, since the integer action is forced by addition. Thus clause (3) of [lemma-weil-pbc-leray-acyclicity] applies to the identity quasi-isomorphism $VL\\to VL$. It says that the canonical derived-evaluation unit $Q(G_{0,W}VL)\\to RG_{0,W}(QVL)$ induces isomorphisms in every cohomological degree, hence is an isomorphism. On the module side $G_WL=L(W)$ computes $RG_WK$ by the specified injective-resolution convention. After $v$, these two complexes are literally equal by step 1. Composing with the abelian evaluation unit produces the required isomorphism $a_W:vRG_WK\\xrightarrow{\\sim}RG_{0,W}(VK)$ for every such $L$.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "03FD together with Derived Categories 015E (lemma-leray-acyclicity), 05TA (proposition-enough-acyclics (1))"
+   }
+  },
+  {
+   "text": "Identify $a_W$ with the canonical right-derived square comparison $R(a)$ attached to $a:G_W\\,;v\\cong V\\,;G_{0,W}$ (the identity in step 1), in the notation of [lem-weil-pbc-right-derived-plus-cube]. On an injective complex its defining comparison is precisely the abelian evaluation unit used in step 3, because the module evaluation unit already computes $RG_W$. Consequently it is independent of the representative and natural in $K$. To verify objectwise restriction, apply that cube lemma with $B=B'=A$, $B_0=B'_0=A_0$, $G=G_W$, $H=G_{W'}$, $G_0=G_{0,W}$, $H_0=G_{0,W'}$, $P=P_0=\\mathrm{id}$, $Q=Q_0=\\mathrm{id}$, $U=U'=V$, and output forgetful functors both $v$. Let $e,e_0$ be evaluation restriction along $W'\\to W$, and $c,d$ identities. The underived cube equality is equality of the same restriction homomorphism after forgetting scalars, from step 1. The lemma yields exactly $a_{W'}\\circ vR(e)=R(e_0)\\circ a_W$. Its $R(e),R(e_0)$ are the derived evaluation restriction maps, which proves the stated naturality in $W$.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-cube"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "03FD, canonical evaluation comparison; formal derived square lifting as in 0736"
+   }
+  },
+  {
+   "text": "For a geometric morphism $f:\\operatorname{Sh}(\\mathcal D)\\to\\operatorname{Sh}(\\mathcal C)$, let $P=f^*_{\\Lambda}$ and $P_0=f^{-1}_{\\operatorname{Ab}}$. By [lem-pe-constant-left-module-inverse-image], both are exact and $V_{\\mathcal D}P\\cong P_0V_{\\mathcal C}$ carries the module adjunction unit to the abelian unit. Assume terminal objects and take $G,G_0$ to be global evaluation on $\\mathcal C$, and $H,H_0$ global evaluation on $\\mathcal D$, with module and abelian outputs respectively. The underived maps $e:G\\to H P$ and $e_0:G_0\\to H_0P_0$ send a global section to its inverse-image section, via those units. After forgetting, they are the same map. Apply [lem-weil-pbc-right-derived-plus-cube] with $B=\\operatorname{Mod}(\\Lambda_{\\mathcal C})$, $B'=\\operatorname{Mod}(\\Lambda_{\\mathcal D})$, $B_0=\\operatorname{Ab}(\\mathcal C)$, $B'_0=\\operatorname{Ab}(\\mathcal D)$, $U=V_{\\mathcal C}$, $U'=V_{\\mathcal D}$, output forgetful functors $v$, $Q=Q_0=\\mathrm{id}$, $c=\\mathrm{id}$, $a,b$ the evaluation identities, and $d$ the preceding inverse-image isomorphism in the direction required by the cube. The unit agreement verifies its underived equality. Its derived equality states precisely that $a_{\\mathcal C}$ and $a_{\\mathcal D}$ commute with global-cohomology pullback, including the specified exact inverse-image identification. Enough injectives holds for both small sites as assumed; no claim that $P$ preserves injectives is used.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-right-derived-plus-cube"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "03FD and 0736 (lemma-base-change-map-flat-case), derived comparison from adjunction units"
+   }
+  },
+  {
+   "text": "Finally take $H^n$ of $a_W$ for any integer $n$. Exactness of $v$ proved in step 1 gives $H^n(vL(W))=vH^n(L(W))$: kernels and images are unchanged after forgetting the left action. Step 3 identifies these with the two derived evaluations. Thus the induced isomorphism is exactly the asserted identification of underlying abelian cohomology groups, with all compatibilities already proved in steps 4–5.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Conclusion from the common evaluation complex"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-right-derived-plus-cube",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "03FD and derived.tex 015E/05TA for the resolution argument; formal square/cube specialization for naturality and geometric pullback"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +152,73 @@
    "results": "; hits: ",
    "date": "2026-10-17",
    "verdict": "no match: candidates do not assert the stated site-level coefficient or compatible complex comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of left modules over a constant ring on any site, bounded below derived evaluation agrees with derived evaluation of the underlying abelian sheaves, naturally in objects and geometric pullback",
+   "results": "; hits: CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.H, SheafOfModules.evaluation, SheafOfModules.instAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Sheaf.cohomologyPresheaf, instAbelianLightCondMod, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern underived sheaf evaluation, abstract resolution functors, or abelian Ext cohomology; none states the arbitrary-ring site comparison with its compatibility clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "(forget.*(rightDerived|acyclic)|(rightDerived|acyclic).*forget|toSheaf.*[Ee]xact)",
+   "results": "; hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern underived sheaf evaluation, abstract resolution functors, or abelian Ext cohomology; none states the arbitrary-ring site comparison with its compatibility clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"rightDerived\"",
+   "results": "; hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern underived sheaf evaluation, abstract resolution functors, or abelian Ext cohomology; none states the arbitrary-ring site comparison with its compatibility clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injective resolution of module sheaves computes the derived sections of its underlying abelian sheaf on any site",
+   "results": "; hits: CategoryTheory.InjectiveResolution.of, CategoryTheory.injectiveResolution, CategoryTheory.InjectiveResolution, CategoryTheory.InjectiveResolution.instHasInjectiveResolutions, CategoryTheory.InjectiveResolution.self, CategoryTheory.InjectiveResolution.instHasInjectiveResolution, CategoryTheory.injectiveResolutions, CategoryTheory.InjectiveResolution.of_def",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern underived sheaf evaluation, abstract resolution functors, or abelian Ext cohomology; none states the arbitrary-ring site comparison with its compatibility clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded below complexes of acyclic objects compute a right derived functor and natural transformations between derived functors are determined on injective complexes",
+   "results": "; hits: CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.NatTrans.rightDerived, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.rightDerived, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern underived sheaf evaluation, abstract resolution functors, or abelian Ext cohomology; none states the arbitrary-ring site comparison with its compatibility clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|acyclic|evaluation",
+   "results": "; hits: Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Presheaf.lean, Mathlib/CategoryTheory/Sites/Point/Presheaf.lean, Mathlib/CategoryTheory/Sites/Limits.lean, Mathlib/CategoryTheory/Sites/Limits.lean, Mathlib/CategoryTheory/Sites/Limits.lean, Mathlib/CategoryTheory/Sites/Limits.lean; Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern underived sheaf evaluation, abstract resolution functors, or abelian Ext cohomology; none states the arbitrary-ring site comparison with its compatibility clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived evaluation of sheaves of left modules agrees with evaluation of underlying abelian sheaves on bounded-below complexes",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; hits: ",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Functor.rightDerived",
+   "results": "; hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern underived sheaf evaluation, abstract resolution functors, or abelian Ext cohomology; none states the arbitrary-ring site comparison with its compatibility clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of modules on a site, forgetting scalars commutes with derived evaluation",
+   "results": "; hits: SheafOfModules.evaluation, SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.forgetToSheafModuleCat_obj_val, SheafOfModules.forgetToSheafModuleCat_map_val, SheafOfModules.forgetToSheafModuleCat, SheafOfModules.toSheaf_map_val, LightCondensed.forget_map_val_app, LightCondensed.forget_obj_val_map",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern underived sheaf evaluation, abstract resolution functors, or abelian Ext cohomology; none states the arbitrary-ring site comparison with its compatibility clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sf-comparison-affine-continuity",
@@ -90,5 +235,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pe-left-module-derived-evaluation-forget",
+  "worker": "stage1",
+  "summary": "Retained the arbitrary unital ring statement and existing searches. Proved underlying injective evaluation-acyclicity from the existing ringed-site 03FD comparison, used the existing bounded-below acyclicity criterion for the canonical derived unit, and instantiated the general derived cube twice for restrictions and geometric pullback. No new nodes or claim of underlying injectivity.",
+  "blueprint": "Realizes the coefficient-forgetting part of det-sf-comparison-affine-continuity proof Steps 2–3, exposed as existing split Step 1; the affine comparison/continuity route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Exactness of forgetting module sheaves on an arbitrary small ringed site; needed to form the exact derived lift, not a geometric comparison theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Objectwise 03FD for a single sheaf gives vanishing of underlying abelian cohomology of injective module sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic enough-injectives theorem supplies bounded-below representatives."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Applied to the integer sheaf, supplies the Grothendieck hypothesis required by the existing complex acyclicity criterion."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Its complex clause computes evaluation on a bounded-below acyclic complex; the unit has no more specific replacement for this homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-cube",
+    "why": "General exact-square cube compatibility lifts the evaluation restriction and inverse-image unit squares; no geometric route step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-right-derived-plus-cube"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-21cb3010a",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-21cb3010a (reviewer sub-agent of L); spot-checked: I read the whole item and every cited node statement. I checked Stacks 03FD (sites-cohomology.tex l.1862, no commutativity used) and 015E (derived.tex l.5717); tags 05TA and 0736 are present. Step 1: forgetful(1) gives V exact; v exact and vG_W=G_{0,W}V are elementary. Step 2: the ringed-site 03FD comparison node (I checked its proof, nothing commutative) plus the one-term injective resolution give H^q(W,VJ)=0, so VJ is acyclic and nowhere claimed injective. Step 3: the dplus representative, Grothendieck at Z_C and leray-acyclicity(3) applied to id_VL give the iso unit; bounded-below injectives are K-injective, so the conventions agree. Step 4: the cube lemma's fac property identifies R(a) with a_W; with P=Q=id, U=U'=V, a..d=id and e,e0 the restrictions, it yields naturality in W. Step 5: the cube with f^*_Λ, f^{-1} and d from lem-pe-constant-left-module-inverse-image; the unit agreement is the underived hypothesis and no claim that P preserves injectives is used. Step 6 is elementary. Small cases: zero ring; point site with F_p (forgotten injective is not injective in Ab but is evaluation-acyclic); M_2(F_p); negative degrees. The étale/commutative nodes etale-module-cohomology-forget, derived-module-underlying-comparison and sbc-injective-module-forget-evaluation-acyclic are special cases, not duplicates. There are no new nodes. I accept the six declared generic tool_uses. Minor, no change: the sheafification-existence hypothesis in step 1 is justified in words with no node cited, as in the reviewed comparison node. The unit binding mismatch for sk-prop-sf-comparison was already there and is left for maintenance."
  }
 }

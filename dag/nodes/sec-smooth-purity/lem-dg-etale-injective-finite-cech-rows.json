@@ -16,9 +16,89 @@
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each open $U\\subseteq X$ with inclusion $u:U\\hookrightarrow X$, $u$ is etale [lem-weil-pbc-open-immersion-etale], so [lem-weil-pbc-etale-site-localization-open] identifies $U_{\\mathrm{et}}$ with $X_{\\mathrm{et}}/U$, covering families included. By [lem-weil-pbc-etale-inverse-image-restriction] (clause 1), the inverse image $u^{-1}G$ of [def-weil-pbc-inverse-image] is naturally isomorphic to the restriction $G|_U(V\\to U)=G(V\\to X)$, which under this equivalence is the localized restriction $j_U^*G$. The coefficients match: applying [lem-pur-ring-presheaf-sheafification-localization] to the constant ring presheaf with value $A$ (the etale site being essentially small in the universe of the statement) gives a unit-compatible ring isomorphism $A_U\\cong A_X|_U$. Hence the equivalence keeps section groups, ring sections, actions and restrictions, and $u^{-1}$ on $A_X$-modules is $j_U^*$ on $A_X|_U$-modules; module morphisms are unchanged. By [lem-pur-site-restriction-module-adjunction-exact], restriction $u^*=j_U^*$ and its left adjoint $u_!$ are exact. By [lem-sp-right-adjoint-preserves-injectives] applied to $u_!\\dashv u^*$, $J|_U$ is injective. The adjunction $u^*\\dashv u_*$ on the same constant-coefficient module categories is [def-weil-pbc-inverse-image]. Apply the same injective-preservation theorem to the exact $u^*$: $u_*(J|_U)$ is injective on $X$. This includes the empty open; sheaves of modules on the empty scheme are zero because their value on its sole object is zero by the empty-cover sheaf axiom.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-pur-ring-presheaf-sheafification-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03DH (definition-localize-ringed-site), Lemmas 03DI and 03DJ; Sites Cohomology 08FI (lemma-restrict-K-injective-to-open), exact-adjoint argument"
+   }
+  },
+  {
+   "text": "There are finitely many subsets of each cardinality. In an abelian category their direct sum is their product, so [lem-weil-pbc-product-injectives] and step 1 make every displayed $C^p(J)$ injective. The zero terms are injective directly: every map into zero extends by the zero map. Products here are computed sectionwise: a compatible family of tuples glues uniquely by gluing each coordinate, and coordinatewise module operations and projections give the product universal property. For a finite family, summing the coordinate inclusions gives the coproduct universal property too. By the definition of module morphisms in [def-weil-sheaf-of-modules-category], these maps are module-linear. Hence on an etale $W\\to X$ the term is $\\prod_{|I|=p+1}J(W\\times_X U_I)$ by [def-weil-pbc-direct-image] and the identification $J|_{U_I}(V)=J(V\\to X)$ of step 1. All restriction maps used in the differential are module-linear and commute with further restriction. Thus the displayed formulas define morphisms of sheaves. In $d^{p+1}d^p$, each pair of deleted indices $a<b$ occurs with signs $(-1)^{a+b-1}$ and $(-1)^{a+b}$, and identical restriction maps, so cancels. The augmentation followed by $d^0$ is zero by the same restriction identity.",
+   "uses": [
+    "lem-weil-pbc-product-injectives",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 02FU (lemma-covering-resolution), construction of the sheaf complex; Homology Tag 0137 (lemma-product-injectives)"
+   }
+  },
+  {
+   "text": "Write $C^{-1}=J$ and $d^{-1}$ for the augmentation. Fix $k$ and an etale $W\\to X$ factoring through $U_k$. For $p\\geq0$ and $c\\in C^p(W)$ define $h^pc\\in C^{p-1}(W)$ by\n$$(h^pc)_T=\\begin{cases}0&k\\in T,\\\\(-1)^{b(T)}c_{T\\cup\\{k\\}}&k\\notin T,\\end{cases}\\qquad b(T)=|\\{t\\in T:t<k\\}|,$$\nwhere $|T|=p$; for $p=0$ this is $h^0c=c_{\\{k\\}}\\in J(W)$. The domains agree since $W\\times_XU_T=W\\times_XU_{T\\cup\\{k\\}}$. Put the out-of-range $h$ equal to zero. On a component indexed by $S$ with $k\\in S$, $h^{p+1}d^pc$ is zero and the only nonzero term in $d^{p-1}h^pc$ deletes $k$; its sign is $(-1)^{2b(S\\setminus\\{k\\})}=1$. If $k\\notin S$, the term deleting $k$ in $h^{p+1}d^pc$ is $c_S$. For every other deleted index $s\\in S$, its position shifts by one exactly when it lies after $k$, whereas $b(S\\setminus\\{s\\})$ drops by one exactly when $s<k$. Consequently its signs in $dh$ and $hd$ are opposite and the restrictions coincide. Thus $dh+hd=1$ in every nonnegative degree, including the top degree; also $h^0d^{-1}=1$ on $J(W)$. These formulas commute with restrictions of $W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 02FU (lemma-covering-resolution), proof by insertion of a fixed covering index; explicit signed version for strictly increasing subsets"
+   }
+  },
+  {
+   "text": "For any etale $W\\to X$, the opens $W_k=W\\times_XU_k$ cover $W$. If a section $c\\in C^p(W)$ satisfies $d^pc=0$, step 3 gives $c|_{W_k}=d^{p-1}(h^p(c|_{W_k}))$, also for $p=0$ with the augmentation as $d^{-1}$. Thus every kernel section is locally an image section. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels [def-weil-sheaf-of-modules-category], so these local lifts say precisely that the homology sheaves vanish. At $J$, a section whose augmentation is zero restricts to zero on every $W_k$, so is zero by the sheaf axiom. This proves exactness at every term and surjectivity onto the final term. When $r=0$, $X$ is empty by hypothesis and $J=0$ by the empty-cover sheaf axiom as in step 1; all conclusions follow. Assume henceforth $r>0$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 02FU (lemma-covering-resolution), checking exactness locally; empty-cover endpoint"
+   }
+  },
+  {
+   "text": "Put $Z^0=J$, identified with $\\ker d^0$ by the augmentation, and for $1\\leq p<r$ put $Z^p=\\ker d^p$, with $d^{r-1}=0$; put $Z^r=0$. Exactness gives $0\\to Z^p\\xrightarrow{i_p}C^p\\xrightarrow{q_p}Z^{p+1}\\to0$ for $0\\leq p<r$. Inductively $Z^p$ is injective, starting from $J$. Apply [lem-weil-pbc-ses-injective-kernel-splits] to obtain a retraction $\\pi_p$ and section $s_p$ with $q_ps_p=1$. The quotient $Z^{p+1}$ is injective because it is a retract of the injective $C^p$ from step 2: for a monomorphism $M\\hookrightarrow N$ and $a:M\\to Z^{p+1}$, extend $s_pa:M\\to C^p$ across $N$ using injectivity and compose the extension with $q_p$. This proves the induction and supplies every required cycle retraction. The left endpoint is an isomorphism onto its image and the right endpoint has zero quotient, so the same reasoning includes both endpoints and $r=1$.",
+   "uses": [
+    "lem-weil-pbc-ses-injective-kernel-splits",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0136 (lemma-characterize-injectives), splitting of short exact sequences with injective kernel and induction on the cycles"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-pur-ring-presheaf-sheafification-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-product-injectives",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-ses-injective-kernel-splits",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 02FU (lemma-covering-resolution), adapted explicitly from ringed spaces and all tuples to the small etale site and strictly increasing finite subsets; exact-adjoint and cycle-splitting arguments from Tags 03DJ, 015Z, 0136, 0137 and 08FI"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -117,10 +197,45 @@
    "results": "205",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite ordered Cech resolution injective etale module sheaves split exact",
+   "results": "CategoryTheory.ShortComplex.ShortExact.splittingOfInjective; CategoryTheory.InjectiveResolution.of; CategoryTheory.InjectiveResolution.instHasInjectiveResolution; CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ; CategoryTheory.ShortComplex.Splitting.exact; CategoryTheory.InjectiveResolution.self; CategoryTheory.InjectiveResolution.instHasInjectiveResolutions; CategoryTheory.InjectiveResolution.of_def;  Read the Cech construction and splittingOfInjective sources: no theorem gives the finite ordered etale module-sheaf resolution.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech|cech|Čech|splittingOfInjective",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean; Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean; Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean; Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean;  Read the Cech construction and splittingOfInjective sources: no theorem gives the finite ordered etale module-sheaf resolution.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "augmented alternating complex open covering module sheaf injective terms split resolution",
+   "results": "CategoryTheory.InjectiveResolution.self; CategoryTheory.InjectiveResolution.instHasInjectiveResolution; CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex; CategoryTheory.InjectiveResolution.of; CategoryTheory.InjectiveResolution.instHasInjectiveResolutions; CategoryTheory.InjectiveResolution.ofCocomplex; CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective; CategoryTheory.InjectiveResolution.self_cocomplex;  Read the Cech construction and splittingOfInjective sources: no theorem gives the finite ordered etale module-sheaf resolution.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Injective",
+   "results": "CategoryTheory.Sheaf.instSubsingletonHHAddNatOfNat;  Read the Cech construction and splittingOfInjective sources: no theorem gives the finite ordered etale module-sheaf resolution.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite ordered Cech resolution injective etale module sheaves split exact",
+   "results": "PresheafOfModules.instIsLocallyInjectiveToSheafify; CochainComplex.cm5b.instInjectiveXIntI; CochainComplex.cm5b.I_X; CategoryTheory.Sheaf.isLocallyInjective_iff_injective; CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex; CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective; CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex; CochainComplex.isKInjective_of_injective_aux;  Read the Cech construction and splittingOfInjective sources: no theorem gives the finite ordered etale module-sheaf resolution.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-dg-finite-type-constructibility",
@@ -132,10 +247,44 @@
  "blueprint": {
   "from": {
    "node": "thm-dg-finite-type-constructibility",
-   "place": "Proof, second paragraph: finite alternating Cech resolution of an open cover, exact augmented rows and preservation of injectives under open restriction",
+   "place": "Proof, paragraph 2 of thm-dg-finite-type-constructibility.proof.md: augmented finite alternating Cech rows are exact by insertion of a covering index; open restriction preserves injectives; rows remain exact after direct image",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-dg-etale-injective-finite-cech-rows",
+  "worker": "stage1",
+  "summary": "Kept the statement and coefficient hypotheses. Proved injective terms via both open adjunctions, gave the signed ordered insertion calculation and local exactness, and split the cycle sequences by induction. Reused existing DAG nodes throughout; no new nodes. No Lean attachment states the full item.",
+  "blueprint": "Realizes the second paragraph of the current thm-dg-finite-type-constructibility proof: finite strictly increasing Cech rows, local insertion exactness, and injectivity under open restriction; the cycle induction supplies the splitting needed before applying f_*.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic localized ringed-site restriction and exact extension-by-zero adjunction; supplies the precise module-coefficient input to the blueprint open-restriction argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic identification of a small etale localized site with the small etale site of its object; ensures the localized module adjunction applies to the opens of this item."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic identification of etale inverse image with restriction along the composite functor; needed to match the statement's u^{-1} with the localized restriction to which the exact extension-by-zero adjunction applies. Added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-2f5730e25",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-2f5730e25 (reviewer sub-agent of L); spot-checked: I read the item, every cited node statement, the parent thm-dg-finite-type-constructibility and blueprint main-20261015 paragraph 2 (the finite strictly increasing Cech rows exact by index insertion, injectives kept under open restriction because extension by zero is exact), and Stacks 02FU (cohomology.tex lemma-covering-resolution), 08FI, 015Z, 03DJ, 0136 and 0137. The statement is true and is not weakened, and it matches the parent's coefficients: commutative A, A_X-modules on X_et. Small cases tested: r=0 (X empty, J=0), r=1, an empty U_I, a repeated open and two disjoint opens. It is not a duplicate: lem-sc-etale-open-cech-injective-augmentation, lem-pc-s3-alternating-cech-sheaf-insertion-homotopy and lem-sc-injective-terms-alternating-cech-augmentation are section-level or Zariski statements. It does not restate a clause of its parent. I checked the signs by hand: d^2=0, and the insertion homotopy gives dh+hd=1 for k in S and k not in S, for s<k and s>k, in degree -1 and in the top degree. Steps 4 and 5 are correct: sheaf exactness from local lifts, and a cycle induction that is properly set up and splits because a retract of an injective is injective. One repairable fault, fixed: step 1 used three facts without citing a node. These are that the open inclusion is etale, that the inverse image u^{-1} equals the localized restriction, and that A_U is isomorphic to A_X|_U. I added lem-weil-pbc-open-immersion-etale, lem-weil-pbc-etale-inverse-image-restriction and lem-pur-ring-presheaf-sheafification-localization, made step 2 refer to the step-1 identification, and recomputed proof_deps. Tool uses accepted: lem-pur-site-restriction-module-adjunction-exact, lem-weil-pbc-etale-site-localization-open, and the added lem-weil-pbc-etale-inverse-image-restriction. No SGA, and no cycle (checked by a depth-first search over the snapshot). The delivery has no new nodes and the statement is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

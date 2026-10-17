@@ -62,16 +62,10 @@
    }
   },
   {
-   "text": "Write $C=\\mathcal M_{\\mathrm{triv}}$, $A=\\mathcal M_{[1]}$, and $s:C\\to\\Delta^{\\mathrm{op}}$. The inclusion $A\\subset C$ is full, since the only inert endomorphism of $[1]$ is the identity. For $x\\in C_{[n]}$, choose inert lifts $\\alpha_i:x\\to c_i$ over $\\rho_i$. Its local coslice $J_x=A\\times_C C_{x/}$ decomposes as the disjoint union of the categories of arrows over $\\rho_i$, $1\\leq i\\leq n$: every inert map $[n]\\to[1]$ is one of these, and every simplex of $A$ projects to the identity of $[1]$, so the index cannot change along a simplex. Regard $C\\to\\Delta^{\\mathrm{op}}_{\\mathrm{inert}}$ as an inner fibration. Each component is precisely the lift category $L(x,\\rho_i)$ of [lem-coef-infinity-cocartesian-composition-initiality]; that node makes $\\alpha_i$ initial in it, including all higher triangles. Therefore [lem-coef-relative-limit-initial-components] applies to the inclusion $\\{\\alpha_1,\\ldots,\\alpha_n\\}\\to J_x$. Now fix any $h:A\\to\\mathcal V$. For $p:\\mathcal V^\\otimes\\to\\Delta^{\\mathrm{op}}$, the local boundary is $h$ after target projection, and the prescribed base cone is $sl_x$. Over the selected initial objects its values are $h(c_i)$ and its base edges are $\\rho_i$. The Segal equivalence in [def-coef-monoidal-infinity-category] gives a tuple $v_x\\in\\mathcal V^\\otimes_{[n]}$ with these components; choosing the fiber equivalences and the cocartesian projections gives a cone with exactly these targets and base edges. Its relative-limit clause makes this a $p$-limit cone. Here and below, the relative-limit clause of [def-coef-monoidal-infinity-category] is stated by mapping spaces from single objects $D$ over each base arrow $\\phi$. By [lem-coef-infinity-relative-cone-constant-test] (its limit dual) this is the same as being a $p$-limit diagram in the sense of [def-coef-infinity-relative-cone] for the cone on the discrete set of projections: for discrete $K=I_{\\mathrm{disc}}$, $\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal V^\\otimes)}(\\Delta_KD,f)$ is the product of the $\\operatorname{Map}(D,f_i)$. The lower row of the test square lies in the discrete mapping sets of $\\Delta^{\\mathrm{op}}$, so the square is a homotopy pullback exactly when its fiber maps over every $\\phi$ are equivalences. That fiberwise condition is the displayed product condition. The case $n=0$ is the empty cone. (If the chosen targets are merely equivalent, compose the projections with those fiber equivalences; the dual of clause (1) of [lem-coef-infinity-relative-cone-equivalence] preserves the relative-limit condition.) The initial-components theorem supplies a local $p$-limit lift on the entire $J_x$. For $n=0$, $J_x$ is empty and the monoidal empty-product clause supplies its required relative limit over $[0]$. The map $p$ is an isofibration: it is inner by its monoidal fibration hypothesis, and every equivalence in $N(\\Delta^{\\mathrm{op}})$ is an identity, lifted to an equivalence by a degenerate edge. The right-hand clause of [lem-coef-infinity-relative-kan-existence], with this full inclusion and these local lifts, gives an exact extension $H:C\\to\\mathcal V^\\otimes$ of $h$, over $s$, right Kan extended relative to $p$. Thus every color diagram satisfies the existence hypothesis of [lem-coef-relative-right-kan-restriction].",
+   "text": "Write $C=\\mathcal M_{\\mathrm{triv}}$, $A=\\mathcal M_{[1]}$, $B=\\Delta^{\\mathrm{op}}_{\\mathrm{inert}}$, and $s:C\\to\\Delta^{\\mathrm{op}}$. By steps 1–2, $C\\to B$ is an inner fibration with cocartesian lifts of every base arrow. Apply [lem-coef-inert-color-coslice-components]: $A\\subset C$ is full and $J_x=A\\times_C C_{x/}$ is the disjoint union of $L(x,\\rho_i)$, with the chosen inert projections $\\alpha_i:x\\to c_i$ initial. All categories are small, and at arity zero $J_x$ is empty. Thus [lem-coef-relative-limit-initial-components] reduces local relative-limit lifting over $J_x$ to the discrete diagram on these projections, including the prescribed base cone and exact boundary.",
    "uses": [
-    "lem-coef-infinity-cocartesian-composition-initiality",
-    "lem-coef-relative-limit-initial-components",
-    "def-coef-monoidal-infinity-category",
-    "lem-coef-infinity-relative-cone-constant-test",
-    "def-coef-infinity-relative-cone",
-    "lem-coef-infinity-relative-cone-equivalence",
-    "lem-coef-infinity-relative-kan-existence",
-    "lem-coef-relative-right-kan-restriction"
+    "lem-coef-inert-color-coslice-components",
+    "lem-coef-relative-limit-initial-components"
    ],
    "elementary": false,
    "source": {
@@ -80,15 +74,69 @@
    }
   },
   {
-   "text": "We identify the full subcategory of relative right Kan extensions in step 3 with $\\operatorname{Alg}_C(\\mathcal V)$. If $H$ preserves inert edges, its cone on the $\\alpha_i$ consists of $p$-cocartesian projections; [def-coef-monoidal-infinity-category] says that this is a relative $p$-limit cone, in the diagram sense by [lem-coef-infinity-relative-cone-constant-test]: for the discrete color diagram the upper-right test mapping space is the product of its component mapping spaces, and the fiber of the test square over each base arrow $\\phi$ is exactly the product equivalence in the monoidal axiom. This also verifies the relative-limit property of the comparison tuple cone used below. The particular-cone clause of [lem-coef-relative-limit-initial-components] makes the full cone $Hl_x$ a $p$-limit. Conversely, suppose $H$ is relatively right Kan extended. The same clause says that the cone $H(x)\\to H(c_i)$ is a $p$-limit. Compare it to the monoidal tuple with components $H(c_i)$ and its cocartesian projections. The relative universal property in [def-coef-infinity-relative-cone] supplies comparison maps over the identity of $[n]$ fixing the targets and their cone data in both directions. Their composites equal the identities up to coherent homotopy, since that same mapping-space universal property makes the space of comparisons over fixed identity data contractible. Hence the comparison of apices is an equivalence in the fiber, and every $H(\\alpha_i)$ is $p$-cocartesian by the mapping criterion of [lem-coef-infinity-cocartesian-mapping-criterion]. This holds for every chosen inert lift to a color; a different lift over the same $\\rho_i$ differs by an equivalence of targets, by [lem-coef-infinity-cocartesian-composition-initiality], so its image is cocartesian as well. To check an arbitrary inert edge $a:x\\to y$ over $\\rho:[n]\\to[m]$, compose with the color projections $b_j:y\\to d_j$. Each $b_ja$ is a cocartesian lift of the corresponding selected color projection from $x$, by the composition clause of that node, so $H(b_ja)$ and $H(b_j)$ are cocartesian. Choose a $p$-cocartesian lift $H(x)\\to z$ over $\\rho$. The object case of [lem-coef-infinity-pointwise-cocartesian-transport] factors $H(a)$ through a map $t:z\\to H(y)$ in the fiber over $[m]$, with its coherent triangle. Write $v:H(x)\\to z$ for the chosen lift and choose cocartesian projections $\\delta_j:z\\to z_j$. Their composites $\\delta_jv$ are cocartesian over $\\rho_j\\rho$. The object transport formula factors $H(b_j)t:z\\to H(d_j)$ through $\\delta_j$ as a fiber map $\\theta_j:z_j\\to H(d_j)$, with its coherent triangle. Composing with $v$ identifies $\\theta_j\\delta_jv$ with $H(b_ja)$. Both $\\delta_jv$ and $H(b_ja)$ are cocartesian lifts from $H(x)$ over the same map $\\rho_j\\rho$, so both are initial in $L(H(x),\\rho_j\\rho)$ by [lem-coef-infinity-cocartesian-composition-initiality]. Its comparison clause makes $\\theta_j$ an equivalence of targets. Under the Segal identifications determined by $\\delta_j$ and $H(b_j)$, these $\\theta_j$ are precisely the components of $t$. The Segal equivalence $\\mathcal V^\\otimes_{[m]}\\simeq\\mathcal V^m$ then makes $t$ an equivalence. Thus $H(a)$ is cocartesian, by the mapping criterion, as required. For $m=0$ this is the empty tuple and every map in its point fiber is an equivalence. The two full subcategories therefore coincide, on all transformations as well as objects. Apply [lem-coef-relative-right-kan-restriction]: restriction from this algebra category to color functors is a trivial Kan fibration, hence fully faithful and essentially surjective with its complete coherent simplicial data. The degree-one target fiber is $\\mathcal V$, so this is the asserted equivalence. It is natural in $\\mathcal M$: restriction to colors commutes with precomposition by every operad map, and these are the actual restriction functors on both sides. An empty color category gives only degree zero and the same empty-cone argument applies.",
+   "text": "Fix $h:A\\to\\mathcal V$. For $x\\in C_{[n]}$, the selected boundary values in the preceding reduction are precisely $h(c_i)$, over the base projections $\\rho_i$. By [lem-coef-inert-relative-tuple-cone] they have a $p$-limit cone over $[n]$ with exactly these targets and base edges. The existence clause of [lem-coef-relative-limit-initial-components] extends this to a local $p$-limit on all of $J_x$, with the specified boundary $h$ after target projection and prescribed base cone $sl_x$. At $n=0$ the tuple lemma supplies the empty relative cone.",
+   "uses": [
+    "lem-coef-inert-relative-tuple-cone",
+    "lem-coef-relative-limit-initial-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting operadic foundation for paragraph 2; Gepner–Haugseng Definition 3.4.1, Remark 3.4.3, Lemma 3.4.4 and Proposition 3.4.5, printed pp.615–616. General relative-Kan inputs: Kerodon 02XT, 0302; HTT 4.3.2.15, 4.3.2.18. These are not Stacks results."
+   }
+  },
+  {
+   "text": "The map $p:\\mathcal V^\\otimes\\to\\Delta^{\\mathrm{op}}$ is an isofibration: it is inner by [def-coef-monoidal-infinity-category], and every equivalence in the ordinary base is an identity and lifts by a degenerate edge. For the full inclusion $A\\subset C$, the local lifts just constructed meet the right-hand hypotheses of [lem-coef-infinity-relative-kan-existence]. It gives an exact extension $H$ of $h$, over $s$, for which each $Hl_x$ is a $p$-limit. Thus every color diagram has a relative right Kan extension, with no further limits assumed.",
    "uses": [
     "def-coef-monoidal-infinity-category",
-    "lem-coef-infinity-relative-cone-constant-test",
+    "lem-coef-infinity-relative-kan-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting operadic foundation for paragraph 2; Gepner–Haugseng Definition 3.4.1, Remark 3.4.3, Lemma 3.4.4 and Proposition 3.4.5, printed pp.615–616. General relative-Kan inputs: Kerodon 02XT, 0302; HTT 4.3.2.15, 4.3.2.18. These are not Stacks results."
+   }
+  },
+  {
+   "text": "Let $H:C\\to\\mathcal V^\\otimes$ be a functor over $\\Delta^{\\mathrm{op}}$ preserving inert edges. For every $x$, its cone on the chosen $\\alpha_i$ has cocartesian edges. By [lem-coef-inert-relative-tuple-cone] this selected cone is a $p$-limit. The particular-cone clause of [lem-coef-relative-limit-initial-components], applied to the coslice decomposition above, makes $Hl_x$ a $p$-limit on all of $J_x$. Hence $H$ is relatively right Kan extended.",
+   "uses": [
+    "lem-coef-inert-relative-tuple-cone",
+    "lem-coef-relative-limit-initial-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting operadic foundation for paragraph 2; Gepner–Haugseng Definition 3.4.1, Remark 3.4.3, Lemma 3.4.4 and Proposition 3.4.5, printed pp.615–616. General relative-Kan inputs: Kerodon 02XT, 0302; HTT 4.3.2.15, 4.3.2.18. These are not Stacks results."
+   }
+  },
+  {
+   "text": "Conversely, let $H$ be relatively right Kan extended. The particular-cone clause of [lem-coef-relative-limit-initial-components] makes its cone on the selected $\\alpha_i$ a $p$-limit. By the converse in [lem-coef-inert-relative-tuple-cone], all $H(\\alpha_i)$ are cocartesian. The same argument applies to every choice of inert color lifts, since each choice consists of initial objects in the coslice summands. In particular $H$ carries every inert edge to a color to a cocartesian edge.",
+   "uses": [
     "lem-coef-relative-limit-initial-components",
-    "def-coef-infinity-relative-cone",
-    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-inert-relative-tuple-cone",
+    "lem-coef-inert-color-coslice-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting operadic foundation for paragraph 2; Gepner–Haugseng Definition 3.4.1, Remark 3.4.3, Lemma 3.4.4 and Proposition 3.4.5, printed pp.615–616. General relative-Kan inputs: Kerodon 02XT, 0302; HTT 4.3.2.15, 4.3.2.18. These are not Stacks results."
+   }
+  },
+  {
+   "text": "For any inert $a:x\\to y$ over $\\rho:[n]\\to[m]$, choose inert color projections $b_j:y\\to d_j$. By [lem-coef-infinity-cocartesian-composition-initiality], each composite $b_ja$ is cocartesian over the color projection $\\rho_j\\rho$, so the preceding step makes both $H(b_j)$ and $H(b_ja)$ cocartesian. Apply [lem-coef-operadic-inert-factor-equivalence] in $\\mathcal V^\\otimes$ to $u=H(a)$ over the inert $\\rho$, the $p$-cocartesian projections $t_j=H(b_j)$, and the images under $H$ of the composition triangles, whose long edges $H(b_ja)$ are cocartesian. It follows that $H(a)$ is cocartesian. That lemma includes $m=0$, where every edge over the inert map to $[0]$ is cocartesian. Therefore the full subcategory of relative right Kan extensions is exactly $\\operatorname{Alg}_C(\\mathcal V)$, on all transformations and higher simplices.",
+   "uses": [
     "lem-coef-infinity-cocartesian-composition-initiality",
-    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-operadic-inert-factor-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting operadic foundation for paragraph 2; Gepner–Haugseng Definition 3.4.1, Remark 3.4.3, Lemma 3.4.4 and Proposition 3.4.5, printed pp.615–616. General relative-Kan inputs: Kerodon 02XT, 0302; HTT 4.3.2.15, 4.3.2.18. These are not Stacks results."
+   }
+  },
+  {
+   "text": "The existence result above verifies the hypothesis of [lem-coef-relative-right-kan-restriction]. Apply that theorem to $A\\subset C$, $p$ and $s$. On the full subcategory just identified with the algebra category, actual restriction to $A$ is a trivial Kan fibration, hence an equivalence of infinity categories, including coherent transformations and all higher parameter simplices. Since the degree-one target fiber is $\\mathcal V$, its target is $\\operatorname{Fun}(A,\\mathcal V)$. Naturality in $\\mathcal M$ follows because restriction to colors commutes with operadic precomposition.",
+   "uses": [
     "lem-coef-relative-right-kan-restriction"
    ],
    "elementary": false,
@@ -115,14 +163,13 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-cocartesian-mapping-criterion",
   "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-inert-color-coslice-components",
   "lem-coef-relative-limit-initial-components",
+  "lem-coef-inert-relative-tuple-cone",
   "def-coef-monoidal-infinity-category",
-  "lem-coef-infinity-relative-cone-constant-test",
-  "def-coef-infinity-relative-cone",
-  "lem-coef-infinity-relative-cone-equivalence",
   "lem-coef-infinity-relative-kan-existence",
-  "lem-coef-relative-right-kan-restriction",
-  "lem-coef-infinity-pointwise-cocartesian-transport"
+  "lem-coef-operadic-inert-factor-equivalence",
+  "lem-coef-relative-right-kan-restriction"
  ],
  "proof_origin": {
   "by": "agent",
@@ -195,7 +242,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-generalized-operadic-monadicity",
@@ -220,7 +267,7 @@
   "date": "2026-10-17",
   "item": "lem-coef-inert-operad-color-reconstruction",
   "worker": "stage1",
-  "summary": "Proved the inert-truncation axioms directly, then constructed and classified inert algebra extensions by existing local relative-limit, relative-Kan existence, and coherent restriction results. Spelled out the inverse, transformations and empty arity. No statement change or new nodes. The nearby inert-operadic-algebra-classification cannot be cited here because its statement dependency on operadic-algebra-presentability would create a cycle; its definitions are already inline in this item.",
+  "summary": "Repair of the human re-split return: kept the statement, Lean record, proof route and original steps 1, 2 and 5 unchanged; extracted the color coslice and relative tuple-cone recognition arguments of original steps 3 and 4 into two new statement-only unsplit nodes, and cite the existing lem-coef-operadic-inert-factor-equivalence for target-color cocartesian detection (maintainer review: the third new node duplicated it and was dropped). Replaced the two long steps by seven short cited steps; preserved their underlying arguments in report.md for the queued nodes.",
   "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint.proof.md paragraph 2 needs a coherent finite-coefficient adjunction; this supporting operadic foundation realizes GH Definition 3.4.1 and Proposition 3.4.5 without assuming presentability.",
   "tool_uses": [
    {
@@ -233,11 +280,11 @@
   "def-cbc-enhanced-diagrams-cones"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NU-252581125",
-  "group": "NU",
+  "reviewer": "NT-cc-Q86-0583c07cb",
+  "group": "Q86",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-252581125 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps, all 13 cited statements, the unit sk-prop-sf-biduality-general and the main-20261015 ancestor proof. The delivery is one commit with the item and its report, no new nodes, an unchanged statement, proof_deps equal to the union of the uses, and all three search kinds recorded. Cycle check: the item is not reachable from its dependencies (DFS over 287 nodes). Route: every proof dependency is in the item's own unit except the definition def-cbc-enhanced-diagrams-cones, which is a notion; I accept the declared tool_use. No SGA source is used. Gepner–Haugseng is WANTED and proof_origin is agent. Checks: Step 1, inner horns contain the spine (for n=2 the edge 02 is the composite in the nerve), and right-pinched mapping simplices lie over a degeneracy of one arrow. Step 2, (psi rho)^op(j) = a + psi^op(j), so psi rho is inert iff psi is; for a non-inert phi some rho_i phi is non-inert, so the incidence limit has an empty term; maps to [0] are always inert. Step 3, J_x is the disjoint union of L(x,rho_i), since the inert maps [n]->[1] are exactly rho_1..rho_n. The Segal tuple's cocartesian projections composed with fiber equivalences give an exact discrete p-limit cone via constant-test (fiberwise over discrete Delta^op mapping sets). p is an isofibration because Delta has no non-identity isomorphisms. The hypotheses of the right dual of relative-kan-existence and of right-kan-restriction hold. Step 4, uniqueness of relative limits over fixed base data, and for an arbitrary inert edge the theta_j compare initial lifts, so they are equivalences and the Segal equivalence makes t an equivalence, including m=0. That an equivalence is cocartesian is implicit but follows at once from the cited mapping criterion. Step 5 is correct up to coherent comparison, with the n=0 case included. Small cases n=0, n=1, empty M and M=Delta^op all hold. Maintainer note: the existing unsplit lem-coef-inert-operadic-algebra-classification (Q107) duplicates this item and adds explicit naturality. It was rightly not cited, because that would create a cycle through operadic-algebra-presentability and monadicity. The two should be merged by the maintainer. No fixes were written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-0583c07cb (reviewer sub-agent of L); spot-checked: I read the item, all 10 steps, all 3 new nodes and every cited statement in full. The item statement is unchanged and is the Gepner–Haugseng §3.4 (Def 3.4.1/Prop 3.4.5) trivial-operad classification. GH is WANTED and proof_origin=agent. Every dependency is in unit sk-prop-sf-biduality-general, apart from the def-cbc notion (tool_use accepted). No SGA is cited. Steps 1-2 and 10 are unchanged: (psi rho)^op(j)=a+psi^op(j), and for a noninert phi some rho_i phi is noninert, so the incidence limit is empty. Steps 3-9 check out. Step 3: the coslice node's hypotheses come from steps 1-2. Step 4: tuple-cone existence gives a cone with exact boundary h(c_i) and base rho_i, and initial-components extends it to J_x. Step 5: p is an isofibration because Delta^op has only identity isomorphisms, and the right dual of relative-kan-existence applies. Steps 6-7: the particular-cone clause and both directions of the tuple criterion. Step 9: the right-kan-restriction hypotheses hold and Fun_{sj}(A,V^otimes)=Fun(A,V). Coslice node is true: the only inert endomorphism of [1] is the identity, so the [1]-fiber is full; simplices of J_x lie over one rho_i; for n=0 J_x is empty. Tuple-cone node is true: the forward direction is the monoidal axiom fiberwise over discrete base sets via the constant test, and the converse is uniqueness of relative limits; n=0 (every apex over [0] works) and n=1 checked. Neither of these two duplicates an existing node (rg search; typec-incidence-cone and symmetric-family-inert-cone-initiality are different). Fault (C5/D): lem-coef-inert-color-projection-detection duplicates the existing base node lem-coef-operadic-inert-factor-equivalence (Q114, same unit, unsplit, depends only on definitions) clause for clause, including choice independence and the r=0 case. FIX: dropped it, and step 8 plus proof_deps now cite the existing node; the corrected item is in fixes/dag/nodes/sec-six-functors/. One repairable fault. Maintainer note: lem-coef-inert-operadic-algebra-classification still duplicates the item.; 1 file(s) fixed by the reviewer"
  }
 }
