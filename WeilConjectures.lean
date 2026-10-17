@@ -2727,6 +2727,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafCoinvarian
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresentation
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSections
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafWeightOperations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentation
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationData
