@@ -1,0 +1,86 @@
+{
+ "id": "lem-coef-ordinary-directed-cover-colimit",
+ "kind": "statement",
+ "title": "Ordinary colimits assembled over a directed cover of the index category",
+ "statement": "Fix a universe $\\mathcal U$, and call sets and categories small when they belong to it. Let $I$ be a small nonempty poset such that every finite subset has an upper bound. Let $C$ be a small ordinary category and $(C_i)_{i\\in I}$ full subcategories, with literal inclusions $C_i\\subseteq C_j$ for $i\\leq j$, such that every object of $C$ belongs to some $C_i$. A full subcategory contains every morphism of $C$ between its objects. Let $\\mathcal A$ be an ordinary category with small Hom sets and all small colimits [def-weil-pbc-category-colimit], and let $F:C\\to\\mathcal A$ be a functor. Choose colimit cocones $(L_i,(\\lambda_{i,c})_{c\\in C_i})$ for $F|_{C_i}$ and $(L,(\\lambda_c)_{c\\in C})$ for $F$. For $i\\leq j$, let $u_{ij}:L_i\\to L_j$ be the unique map satisfying $u_{ij}\\lambda_{i,c}=\\lambda_{j,c}$ for every $c\\in C_i$, and let $v_i:L_i\\to L$ be the unique map satisfying $v_i\\lambda_{i,c}=\\lambda_c$. Then the maps $u_{ij}$ define an $I$-diagram, and $(L,(v_i))$ is a colimit cocone on it. More precisely, for every $H\\in\\mathcal A$, taking the composites with $\\lambda_{i,c}$ gives a bijection between families $f_i:L_i\\to H$ satisfying $f_j u_{ij}=f_i$ and cocones $(g_c:F(c)\\to H)_{c\\in C}$ on $F$; it sends $g_c$ to the unique $f_i$ with $f_i\\lambda_{i,c}=g_c$ on $C_i$. The comparison $\\operatorname{colim}_{i\\in I}L_i\\to L$ induced by the $v_i$ is therefore an isomorphism with these specified legs. Empty $C$ and empty members $C_i$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Agent-formulated directed-cover assembly lemma from Categories Definition 002F (definition-colimit, lines 1310-1329). Tag 002F supplies the universal property, not a separately numbered directed-cover assertion; directedness is explicitly defined in the statement. The argument extracted from former Step 12 of lem-coef-cellular-tree-presentable-approximations is recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A functor on a small ordinary category covered by a directed increasing family of full subcategories has colimit equal to the colimit of the restriction colimits",
+   "results": "{\"t\": \"2026-10-17T09:11:25Z\", \"tool\": \"leanfinder\", \"query\": \"A functor on a small ordinary category covered by a directed increasing family of full subcategories has colimit equal to the colimit of the restriction colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone\", \"CategoryTheory.SmallObject.SuccStruct.Iteration.isColimit\", \"CategoryTheory.SmallObject.SuccStruct.isColimitIterationCocone\", \"CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone\", \"CategoryTheory.Limits.isIndObject_colimit\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit\", \"CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone.surjective\", \"PartOrdEmb.Limits.isColimitCocone\"], \"digest\": \"d572c96c28f0c80b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the linear-order extension cocone lemma is about adding a terminal index, not assembling varying full subcategories; the Type/set colimit lemmas are restricted to sets, not arbitrary ordinary targets; full-subcategory inclusion creates colimits in the target, not a cover of the indexing category. Read the returned types and the relevant source definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible cocones on a directed increasing cover of a small category by full subcategories glue uniquely to a cocone on the whole category, hence restriction colimits assemble to its colimit",
+   "results": "{\"t\": \"2026-10-17T09:21:37Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible cocones on a directed increasing cover of a small category by full subcategories glue uniquely to a cocone on the whole category, hence restriction colimits assemble to its colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf\", \"CategoryTheory.Limits.Types.isColimitOfMulticoequalizerDiagram'\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.isColimitCocone\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'\", \"AlgebraicGeometry.Scheme.OpenCover.isColimitCoconeOfLocallyDirected\", \"CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone\", \"CategoryTheory.Limits.IndObjectPresentation.coconeIsColimit\"], \"digest\": \"d70ccfc10070af3c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the linear-order extension cocone lemma is about adding a terminal index, not assembling varying full subcategories; the Type/set colimit lemmas are restricted to sets, not arbitrary ordinary targets; full-subcategory inclusion creates colimits in the target, not a cover of the indexing category. Read the returned types and the relevant source definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a filtered increasing cover of an ordinary category by full subcategories, colimits assemble from the colimits of the restricted diagrams",
+   "results": "{\"t\": \"2026-10-17T09:11:23Z\", \"tool\": \"leansearch\", \"query\": \"For a filtered increasing cover of an ordinary category by full subcategories, colimits assemble from the colimits of the restricted diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.HasFilteredColimitsOfSize.HasColimitsOfShape\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.hasColimitsOfShape_of_has_filtered_colimits\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf\", \"CategoryTheory.Limits.createsColimitFullSubcategoryInclusion\", \"CategoryTheory.Limits.createsColimitFullSubcategoryInclusion'\", \"MonCat.FilteredColimits.colimit\", \"CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup\"], \"digest\": \"4edead60ded63334\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the linear-order extension cocone lemma is about adding a terminal index, not assembling varying full subcategories; the Type/set colimit lemmas are restricted to sets, not arbitrary ordinary targets; full-subcategory inclusion creates colimits in the target, not a cover of the indexing category. Read the returned types and the relevant source definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsColimit\", \"FullSubcategory\"",
+   "results": "{\"t\": \"2026-10-17T09:11:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsColimit\\\", \\\"FullSubcategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the linear-order extension cocone lemma is about adding a terminal index, not assembling varying full subcategories; the Type/set colimit lemmas are restricted to sets, not arbitrary ordinary targets; full-subcategory inclusion creates colimits in the target, not a cover of the indexing category. Read the returned types and the relevant source definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "iUnion|[Dd]irected.*[Uu]nion|[Uu]nion.*[Cc]olimit",
+   "results": "{\"t\": \"2026-10-17T09:11:23Z\", \"tool\": \"grep\", \"query\": \"iUnion|[Dd]irected.*[Uu]nion|[Uu]nion.*[Cc]olimit\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Set.lean\", \"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean\", \"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean\", \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\"], \"digest\": \"86fa9be182a74aee\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the linear-order extension cocone lemma is about adding a terminal index, not assembling varying full subcategories; the Type/set colimit lemmas are restricted to sets, not arbitrary ordinary targets; full-subcategory inclusion creates colimits in the target, not a cover of the indexing category. Read the returned types and the relevant source definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cellular-tree-presentable-approximations",
+  "date": "2026-10-17",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph beginning For K in D^b_c(X,R), derived coefficient adjunction before the first displayed derived-limit comparison: small good blocks and good intersections used in the generic weak-saturation generation input. This auxiliary compact-root approximation supplies the small-good-block input; it has no weak-equivalence hypothesis. In the auxiliary presentable-approximation proof, former Step 12: the colimit of the original restrictions on increasing supports is the original restricted colimit on their union, with the specified cocone legs.",
+   "via": [
+    "lem-coef-cellular-tree-presentable-approximations",
+    "lem-coef-good-subset-enlargement",
+    "lem-coef-accessible-intersection-generators",
+    "lem-coef-perfect-weak-equivalence-model-recognition",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-infinity-functor-pushout",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

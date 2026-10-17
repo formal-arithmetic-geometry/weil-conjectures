@@ -171,27 +171,68 @@
    }
   },
   {
-   "text": "Push the union tree of Steps 10-11 out along $M\\to X$. By Step 2 it is the colimit of the base-changed descended trees. At each stage these are the given restrictions on $S_q$. Their union colimit is the original restriction on $S$: a cocone under $X$ on that restriction is exactly compatible cocones on those restrictions, since each vertex and each order relation occurs in some $S_q$, and common upper bounds impose precisely their agreements. More explicitly, a map from $(\\operatorname{colim}_qN_q)\\amalg_M X$ to $H$ consists of a map $X\\to H$ and maps $N_q\\to H$ whose root restrictions are its composites $M_q\\to X\\to H$; the stagewise pushout identifications turn this into such compatible restricted cocones. Thus $N_Q\\amalg_{M_Q}X\\cong Y_S$ with the asserted legs, with its comparison to $Y_S$ induced by the specified stage maps. For an objectwise identification, fix $t\\in S$ and restrict to the nonempty filtered subposet $J_t$. For every $q\\in J_t$, the specified comparison is a pushout identification $V^q_t\\amalg_{M_q}X\\cong Y_t$, compatible with the transitions and fixed cell legs. A map $Z_t\\amalg_M X\\to H$ is a map $X\\to H$ together with compatible maps $V^q_t\\to H$ whose root restrictions are $M_q\\to X\\to H$. The stage identifications identify these with compatible maps from the constant object $Y_t$ to $H$. Since $J_t$ is nonempty filtered, these maps are one map $Y_t\\to H$. Thus $Z_t\\amalg_M X\\cong Y_t$ with the specified legs. For the predecessor colimit use its augmented diagram: maps from its pushout are a map $X\\to H$ and compatible maps from all $Y_s$, $s<t$, so its pushout is $Y_{<t}$. These identifications respect each order arrow, attaching map and $Q_t$ leg because their restrictions at every stage are the specified original legs, and the colimit universal property detects equality on those restrictions. Apply the weak-saturation conclusion of [lem-coef-weak-saturation-tree-presentation] to this actual $L$-tree, with $\\varnothing\\subseteq S$, to put $h_Q$ in the weakly saturated closure of $L$. This does not assume closure of that class under arbitrary filtered colimits. Finally take $Q=P$. Step 8 gives $S=T$ and Step 9 gives $M_P\\cong X$, with the isomorphism induced by the root maps. The pushout comparison now gives $N_P\\cong Y_T$. Together with Step 11's arrow-colimit calculation, this proves that the stated cocone to $X\\to Y_T$ is colimiting. For $T=\\varnothing$ every tree is empty and every $h_p$ and $h_Q$ is an identity, so all these arguments still apply.",
+   "text": "Keep $Q,S,M,Z_t,N_Q$ from Steps 10-11. Apply [lem-coef-ordinary-directed-cover-colimit] to the augmented ordinary poset $S^\\lhd$ (one new root vertex preceding every cell), covered by its full subposets $S_q^\\lhd$, and to the original diagram with root $X$. The index $Q$ is small, nonempty and filtered. Its supports increase, cover $S$, and contain the root at every stage, including when $S$ is empty. The ambient category has all small colimits by hypothesis. By Step 2 the restricted colimit cocones have apices $Y_{S_q}$, and the total cocone has apex $Y_S$. The lemma identifies $\\operatorname{colim}_{q\\in Q}Y_{S_q}$ with $Y_S$, respecting precisely the transition maps and every restricted cocone leg. No comparison with enhanced categories is needed.",
    "uses": [
-    "def-weil-pbc-category-colimit",
-    "lem-coef-weak-saturation-tree-presentation"
+    "lem-coef-ordinary-directed-cover-colimit",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Agent-formulated directed-cover assembly lemma from Categories Definition 002F (definition-colimit, lines 1310-1329). Tag 002F supplies the universal property, not a separately numbered directed-cover assertion; directedness is explicitly defined in the statement. The argument extracted from former Step 12 of lem-coef-cellular-tree-presentable-approximations is recorded in report.md."
+   }
+  },
+  {
+   "text": "At each $q$, the descent data and Step 2 give the specified pushout square with top $M_q\\to N_q$ and bottom $X\\to Y_{S_q}$. The squares form a $Q$-diagram because the descent maps respect the comparisons. Apply [lem-coef-colimits-of-pushout-squares]. The lower left corner is the colimit of the constant $X$ diagram, canonically $X$ by [lem-weil-pbc-colimit-constant-connected-diagram], since $Q$ is nonempty filtered and hence connected. Step 12 identifies the lower right corner with $Y_S$. The resulting square has top $h_Q:M\\to N_Q$ and the required canonical legs, and is a pushout. Thus $N_Q\\amalg_M X\\cong Y_S$ by the displayed comparison, rather than by an unspecified isomorphism.",
+   "uses": [
+    "lem-coef-colimits-of-pushout-squares",
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "A.1.5.6 and A.1.5.3, printed pp. 800-801; agent filtered-union and pushout calculation supplying A.2.6.9 observation (ii)."
+    "place": "A.1.5.6 and A.1.5.3, printed pp. 800-801; agent filtered-union and pushout calculation supplying A.2.6.9 observation (ii). Repair: extract colimit comparisons into cited general statements."
+   }
+  },
+  {
+   "text": "For the objectwise comparison fix $t\\in S$ and use the nonempty filtered tail $J_t$ from Step 10. At each of its indices the specified square has corners $M_q,V^q_t,X,Y_t$ and is a pushout. Apply [lem-coef-colimits-of-pushout-squares] over $J_t$. Step 10 gives the upper corners $M,Z_t$, and [lem-weil-pbc-colimit-constant-connected-diagram] gives the lower corners $X,Y_t$, with their specified legs. Hence the comparison $Z_t\\amalg_M X\\to Y_t$ is an isomorphism. These comparisons respect every order arrow, attaching map and $Q_t$ leg: after precomposing with each stage cocone leg both composites are the specified original maps, and uniqueness in the colimit property makes them equal. For predecessor objects take the diagram on the augmented predecessor poset $\\{s:s<t\\}^\\lhd$, including its root. The squares just obtained, with the identity root square, form a diagram of pushouts. This index is nonempty connected because it has an initial root. The same two cited lemmas identify its colimit square with the square on $M,Z_{<t},X,Y_{<t}$, by Step 2. It is therefore a pushout even when $t$ has no predecessors.",
+   "uses": [
+    "lem-coef-colimits-of-pushout-squares",
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.6 and A.1.5.3, printed pp. 800-801; agent filtered-union and pushout calculation supplying A.2.6.9 observation (ii). Repair: extract colimit comparisons into cited general statements."
+   }
+  },
+  {
+   "text": "Steps 10-11 already give an actual $L$-tree on $S$ whose root arrow is $h_Q$. Apply the weak-saturation conclusion of [lem-coef-weak-saturation-tree-presentation] with $\\varnothing\\subseteq S$. It puts $h_Q$ in the weakly saturated closure of $L$; no closure under arbitrary filtered colimits is used. Now take $Q=P$. Step 8 gives $S=T$ and Step 9 identifies $M_P\\to X$ as an isomorphism induced by the root cocone. The pushout square of Step 13 then identifies $N_P\\to Y_T$ as an isomorphism. With Step 11's arrow-colimit calculation, this proves that the specified cocone to $X\\to Y_T$ is colimiting. For $T=\\varnothing$, all supports are empty and all root arrows are identities, so the same argument applies.",
+   "uses": [
+    "lem-coef-weak-saturation-tree-presentation",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.5.6 and A.1.5.3, printed pp. 800-801; agent filtered-union and pushout calculation supplying A.2.6.9 observation (ii). Repair: extract colimit comparisons into cited general statements."
    }
   }
  ],
  "proof_deps": [
-  "lem-coef-cardinal-filtered-poset-reindex",
   "def-weil-pbc-category-colimit",
-  "lem-coef-weak-saturation-tree-presentation",
+  "lem-coef-cardinal-filtered-poset-reindex",
+  "lem-coef-colimits-of-pushout-squares",
+  "lem-coef-ordinary-directed-cover-colimit",
   "lem-coef-ordinary-small-colimit-presentable",
   "lem-coef-presentable-canonical-density",
-  "lem-weil-pbc-well-ordering-theorem",
+  "lem-coef-weak-saturation-tree-presentation",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
   "lem-weil-pbc-transfinite-recursion",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+  "lem-weil-pbc-well-ordering-theorem"
  ],
  "proof_origin": {
   "by": "agent",
@@ -313,7 +354,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-good-subset-enlargement",
@@ -326,16 +367,22 @@
   "date": "2026-10-17",
   "item": "lem-coef-cellular-tree-presentable-approximations",
   "worker": "stage1",
-  "summary": "Replaced the empty proof by a construction over a fixed small filtered presentation of the root. The small preorder of labelled descents has common upper bounds by simultaneous factorization and equality of attaching maps; its quotient is the requested poset. Cocone calculations prove arbitrary filtered-union cellularity and pushout compatibility. No statement change, new node, or Lean attachment. Second reading made the short enumeration bound and objectwise pushout comparisons explicit; independent searches and citation verification recorded in the report.",
-  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint proof paragraph beginning For K in D^b_c(X,R), before the first derived-limit comparison: this is the already-seeded generic small-good-block input below coefficient adjunction. Steps 1-9 construct its compatible compact-root approximations; Steps 10-12 provide the filtered small blocks needed by lem-coef-good-subset-enlargement. No replacement of a unit step or SGA source is used."
+  "summary": "NY repair of human return on former Step 12: statement, Lean record, route, and Steps 1-11 unchanged. The former 2523-character step is replaced by four short steps. A new statement-only ordinary directed-cover lemma supplies the support-union comparison, and a new Mathlib leaf supplies colimits of pushout squares. Existing connected-constant-colimit and weak-saturation statements supply the remaining inputs. All comparisons retain the specified cocone and cell legs. The preserved retry was also repaired to remove its uncited ordinary/enhanced comparison and to add the Mathlib line field.",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint proof paragraph beginning For K in D^b_c(X,R), before the first derived-limit comparison: this is the already-seeded generic small-good-block input below coefficient adjunction. Steps 1-9 construct its compatible compact-root approximations; Steps 10-12 provide the filtered small blocks needed by lem-coef-good-subset-enlargement. No replacement of a unit step or SGA source is used. NY repair: Steps 12-15 retain the same filtered-union route and separate total support assembly, total pushout, objectwise/predecessor pushouts, and the final weak-saturation/full-colimit application.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-colimit-constant-connected-diagram",
+    "why": "Generic colimit calculation for the constant lower corners of the pushout squares; it is independent of the cellular approximation construction."
+   }
+  ]
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q11-eaabf10f5",
-  "group": "Q11",
+  "reviewer": "NT-cc-NY-2a5ec39ae",
+  "group": "NY",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-eaabf10f5 (reviewer sub-agent of L); spot-checked: Read in full: the item and all 12 steps, the statements of all 8 cited nodes, Stacks 002V and 04AX in categories.tex, and the Mathlib lines behind the leaves (Presentable/Limits.lean:185-195 with its arrow-count bound, Directed.lean:527-539, CardinalFilteredPresentation.lean:174-178, Types/Filtered.lean:153), plus the citer good-subset-enlargement. The statement and stmt_deps are byte-identical to the side-DAG base, and the citer uses exactly the clauses stated. There are no new nodes and no cycle. The only non-leaf dependency, weak-saturation-tree-presentation, is in the same unit, so no tool_uses are needed. No SGA. small-cellular-tree-descent (a single descent for |T|<tau) is strictly weaker, not a duplicate. Mathematics checked: the tail is tau-filtered; presentability is proved by induction using the arrow-count bound; descent maps are unique by the colimit, the pushout and the fixed Q_t leg, which gives a small preorder via essential smallness; the predecessor-closed enumeration stops below tau; in the successor step, presentability of P_t and clauses (1) and (3) at a common stage equalize fewer than tau attaching maps, and attaching at stage l gives the labelled comparison maps and base change Y_t; the limit step glues by uniqueness; the poset quotient and root colimit are correct; the filtered-union tree over J_t uses only ordinary filteredness; and the pushout identification and weak saturation follow from the L-tree clause with E empty. The standing hypothesis on C in the weak-saturation node is satisfiable with C = isomorphisms, so that clause is usable. Edge cases checked: T empty, one cell, incomparable cells, a chain, a singleton Q, Q filtered but not tau-filtered, non-monic cells. HTT could not be opened (not in literature/, network blocked); the proof is marked agent-written with a WANTED line and does not depend on HTT statements. No fixes; review.md written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-2a5ec39ae (reviewer sub-agent of L); spot-checked: I read the item in full (15 steps), both new nodes, the statements of all 9 distinct cited nodes, Stacks categories.tex:1309-1330 (002F), and Mathlib IsPullback/Basic.lean:814-822 and 931-939 plus Adjunction/Limits.lean:101-103. HTT is not archived, so I could not check it at the cited pages; the proof is marked agent-written and the report carries a WANTED line. The statement, stmt_deps, source and Lean record are unchanged, and Steps 1-11 are unchanged; I rechecked them. The returned Step 12 is now Steps 12-15. Step 12 applies the new ordinary directed-cover lemma to S^◁ covered by the S_q^◁. Every hypothesis holds: the S_q^◁ are full subposets, they increase in q, they cover S^◁ because S is the union of the S_q and each contains the root, and Q is nonempty, filtered and small. Step 13 uses the pushout leaf, and the constant corner is X because Q is nonempty filtered and so connected. Step 14 does the same over J_t; for predecessors the index B^◁ has an initial root, so it is connected even when B is empty, and the identity root square is a pushout. Step 15 takes the weak-saturation tree clause with E empty; the node's standing class C can be the isomorphisms. At Q=P, S_P=T and M_P→X is an isomorphism, so N_P→Y_T is one too. New node lem-coef-colimits-of-pushout-squares is a correct Mathlib leaf: colim.map_isPushout applied to IsPushout.of_forall_isPushout_app h, line 814. New node lem-coef-ordinary-directed-cover-colimit is unsplit and statement-only. It is true; I tested empty C, empty stages, singleton I, incomparable indices and parallel arrows. It is not a duplicate of the ∞-categorical lem-coef-directed-cover-colimit-assembly, since the ordinary specialization would need a nerve comparison the DAG lacks. Neither new node restates a clause of the item, and there is no cycle. proof_deps equals the union of the uses. All off-unit citations are Mathlib leaves, and the declared tool_use is accepted. No SGA is cited. The stale `reviewed` record from the 12-step version should be replaced at the merge. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -359,5 +406,8 @@
   "by": "Q33",
   "date": "2026-10-17",
   "existing": false
- }
+ },
+ "tool_uses": [
+  "lem-weil-pbc-colimit-constant-connected-diagram"
+ ]
 }
