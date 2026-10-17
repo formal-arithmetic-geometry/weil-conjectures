@@ -46,7 +46,10 @@ def IsStrictlyPerfect (X : Scheme.{u}) (U : X.Opens)
 
 /-- An object `E` of `D(𝒪_X)` is perfect if every point has an open neighbourhood `U` (that
 is, there is an open covering of `X`) on which the restriction of `E` is isomorphic in
-`D(𝒪_U)` to a strictly perfect complex of `𝒪_U`-modules.
+`D(𝒪_U)` to a strictly perfect complex of `𝒪_U`-modules. Along
+`AlgebraicGeometry.schemeDerivedCategoryEquiv X` this is
+`AlgebraicGeometry.Scheme.Modules.IsPerfectComplex`
+(`AlgebraicGeometry.Scheme.isPerfect_iff_isPerfectComplex`).
 Source: Stacks Project, Cohomology of Sheaves, Definition 08CM
 (blueprint: def-pc-perfect-complex). -/
 def IsPerfect (X : Scheme.{u})
