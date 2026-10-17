@@ -12,9 +12,144 @@
   "def-coef-categorical-pattern-fibrancy",
   "lem-coef-categorical-pattern-model-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathfrak Q=\\pi^*\\mathfrak P$. The inner-fibration clause for $\\pi$ implies that $Y$ is a quasicategory: project an inner horn to $C$, fill it in $C$, and lift that chosen simplex through $\\pi$. The marking $T$ contains the degenerate edges. The index set of cones of $\\mathfrak Q$ is the disjoint union, over the small set of $\\alpha$, of the subsets of $\\operatorname{Hom}(K_\\alpha^{\\triangleleft},Y)$ satisfying the two stated conditions. These are sets in the same universe as the input. Each cone has all its edges marked by construction, and its indexing quasicategory is the original $K_\\alpha$. Thus $\\mathfrak Q$ is a small fully scaled pattern, including when the family or any $K_\\alpha$ is empty.",
+   "uses": [
+    "def-coef-categorical-pattern-fibrancy",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark B.0.27, induced pattern; direct size and inner-horn checks."
+   }
+  },
+  {
+   "text": "We will use the following elementary consequences of the mapping criterion. For any inner fibration $r:E\\to B$ of quasicategories, an equivalence edge $u:x\\to y$ is $r$-cocartesian: precomposition by $u$ and $r(u)$ has homotopy inverses given by their inverse edges, so both horizontal maps in the criterion's square are equivalences and the square is a homotopy pullback. Conversely, if $u$ is $r$-cocartesian and $r(u)$ is an equivalence, that square implies that $\\operatorname{Map}_E(y,z)\\to\\operatorname{Map}_E(x,z)$ is an equivalence for every $z$. On components, take $z=x$ to obtain $v:y\\to x$ with $[v][u]=1_x$; injectivity for $z=y$ gives $[u][v]=1_y$, since their composites with $[u]$ agree. The mapping-composition lemma supplies the two inverse-triangle witnesses, so $u$ is an equivalence. In the square argument write $a:\\operatorname{Map}_E(y,z)\\to\\operatorname{Map}_E(x,z)$ and $b:\\operatorname{Map}_B(r(y),r(z))\\to\\operatorname{Map}_B(r(x),r(z))$ for the horizontal maps, $\\rho:\\operatorname{Map}_E(x,z)\\to\\operatorname{Map}_B(r(x),r(z))$ for the right vertical map, and $P(\\rho,b)$ for the path-space fiber product. If $b$ is a weak homotopy equivalence, the homotopy-pullback invariance lemma applied to $(\\mathrm{id},b,\\mathrm{id})$ makes $P(\\rho,b)\\to P(\\rho,\\mathrm{id})$ a weak homotopy equivalence, and the path-comparison lemma, for the Kan fibration $\\mathrm{id}$, makes the constant-path inclusion $\\operatorname{Map}_E(x,z)\\to P(\\rho,\\mathrm{id})$ one. The composite of the canonical map $\\operatorname{Map}_E(y,z)\\to P(\\rho,b)$ with the first of these equals the constant-path inclusion composed with $a$, by commutativity of the square. By two-out-of-three, the square is a homotopy pullback if and only if $a$ is a weak homotopy equivalence. This gives both directions used above.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition B.2.7, equivalence and marking arguments (printed pp.1490-1492); elementary mapping-space proof of the equivalence-edge calculus, usually HTT 2.4.1.5."
+   }
+  },
+  {
+   "text": "Assume first that $f$ is a fibration in $\\mathsf M_{\\mathfrak P}$. Every generator of $J_{\\mathfrak Q}$ becomes a generator of $J_{\\mathfrak P}$ after composing its base map with $\\pi$. For (A0), (A1), (B0), and (C0), the required edges of the base map lie in $T$, hence map into $S$; (C1) has no marking restriction. A cone of $\\mathfrak Q$ used by (B1) or (C2) projects to its specified $p_\\alpha$, so these are also generators of the indicated type for $\\mathfrak P$. All triangle conditions are automatic because both patterns are fully scaled. By [lem-coef-pattern-anodyne-generators], these images are trivial cofibrations of $\\mathsf M_{\\mathfrak P}$. A square for a generator of $J_{\\mathfrak Q}$ against the terminal arrow $(X,U)\\to(Y,T)$ is precisely the resulting square against $f$ over $C$. The model weak factorization system fills it. The generator recognition theorem for $\\mathfrak Q$ therefore says that $f$ is $\\mathfrak Q$-fibered.",
+   "uses": [
+    "lem-coef-pattern-anodyne-generators",
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition B.2.7, (a) implies (c), printed p.1491; the special case of B.2.9 is checked generator by generator instead of invoked as a new lemma."
+   }
+  },
+  {
+   "text": "For the converse assume $f:(X,U)\\to(Y,T)$ is $\\mathfrak Q$-fibered, and put $q=\\pi f$. First prove that $(X,U)\\to(C,S)$ is $\\mathfrak P$-fibered. Given a generator $j:D\\to E$ of $J_{\\mathfrak P}$ and a marked map $D\\to X$ over its fixed base map $E\\to C$, compose to $Y$. Since $Y$ is $\\mathfrak P$-fibered, fill this square to a marked map $v:E\\to Y$. Now $j$, with base map $v$, belongs to $J_{\\mathfrak Q}$: the sharp edges in the target of (A0), (A1), and (B0) ensure the requisite base edges lie in $T$; the distinguished edge $01$ in (C0) does the same; (C1) has no restriction. In (B1) the whole cone maps into $T$, and its projection is $p_\\alpha$, so $v$ is a specified cone of $\\mathfrak Q$. In (C2) the distinguished last-vertex cone $\\{n\\}\\star K_\\alpha$ is sharp in $E$, so its restriction under $v$ is such a specified cone. All 2-simplices are scaled. Fill the resulting generator square through $f$. This gives $E\\to X$ over $C$ for every $j$, hence the generator recognition theorem makes $X$ $\\mathfrak P$-fibered. In particular it gives exactly the marking $U$ of $q$-cocartesian edges over $S$, and both cone conditions of the definition; neither condition for an empty cone has been discarded.",
+   "uses": [
+    "lem-coef-pattern-anodyne-generators",
+    "def-coef-categorical-pattern-fibrancy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition B.2.7, (c) implies (b), printed pp.1491-1493; express the composition argument through the seven generators of B.1.1 and B.1.6."
+   }
+  },
+  {
+   "text": "The underlying $f:X\\to Y$ is an isofibration. It is an inner fibration by $\\mathfrak Q$-fibrancy. Since $Y$ is a quasicategory, the inner-horn argument of step 1 also makes $X$ a quasicategory. For an equivalence $e:f(x)\\to y$ in $Y$, its image $\\pi(e)$ is an equivalence (apply the simplicial map to the inverse witnesses), hence belongs to $S$. Step 2 makes $e$ $\\pi$-cocartesian, so the exact-marking clause for the $\\mathfrak P$-fibered object $Y$ puts $e$ in $T$. The lifting clause for the $\\mathfrak Q$-fibered map $f$ gives an $f$-cocartesian lift $\\widetilde e$ with source $x$. Step 2 makes $\\widetilde e$ an equivalence because $f(\\widetilde e)=e$ is one. This is exactly equivalence-edge lifting with prescribed source, without requiring any lift of an edge outside $T$.",
+   "uses": [
+    "def-coef-categorical-pattern-fibrancy",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition B.2.7, (c) implies (b), equivalence lifting; fully scaled case and S containing equivalences."
+   }
+  },
+  {
+   "text": "Let $i:(A,M_A)\\hookrightarrow(B,M_B)$ be an arbitrary trivial cofibration of $\\mathsf M_{\\mathfrak P}$, and take a square with top map $a:A\\to X$ and bottom map $g:B\\to Y$ against $f$. Step 4 and the model's fibrant-object identification imply that $X\\to(C,S)$ lifts $i$, giving a marked $h':B\\to X$ over $C$ with $h'i=a$. The maps $fh'$ and $g$ agree on $A$. Set\n$$D=(A\\times(\\Delta^1)^\\sharp)\\amalg_{A\\times(\\partial\\Delta^1)^\\sharp}(B\\times(\\partial\\Delta^1)^\\sharp).$$\nMap $D$ to $Y$ by the constant $fa$ on the first summand, by $fh'$ at endpoint $0$, and by $g$ at endpoint $1$. These agree on the intersection. Its inclusion into $B\\times(\\Delta^1)^\\sharp$ is the pushout product of $i$ with the point-model cofibration $(\\partial\\Delta^1)^\\sharp\\hookrightarrow(\\Delta^1)^\\sharp$, hence is a trivial pattern cofibration by the marked enriched axiom. Since $Y$ is fibrant, extend to a marked map $G:B\\times(\\Delta^1)^\\sharp\\to Y$ over $C$. Thus $G$ runs from $fh'$ to $g$ and is constant $fa$ on $A$.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition B.2.7, (b) implies (a), printed pp.1490-1491: first extension and the relative marked cylinder; use the stated full pushout-product axiom."
+   }
+  },
+  {
+   "text": "We check the equivalence needed to lift this homotopy with the boundary fixed. By [lem-coef-pattern-anodyne-lifting-products], restriction\n$$\\operatorname{Map}^{\\sharp}_C(B,Y)\\longrightarrow\\operatorname{Map}^{\\sharp}_C(A,Y)$$\nis a Kan fibration between Kan complexes. Its degreewise fiber $V$ at the vertex $fa$ is Kan: a horn in the fiber is filled by that fibration over the constant simplex at $fa$. The maps $fh',g$ are vertices of $V$, and $G$ is an edge of $V$. Every edge in the Kan complex $V$ is an equivalence by [lem-coef-infinity-core-kan-fibration], so it has the two inverse-triangle witnesses in the stated definition of equivalence. These witnesses remain in $V$, so remain constant on $A$. Put\n$$Q=\\operatorname{Fun}(A,X)\\times_{\\operatorname{Fun}(A,Y)}\\operatorname{Fun}(B,Y).$$\nThe map $V\\to Q$ sends a simplex $H$ to the pair consisting of the constant simplex at $a$ and the underlying $H$. Consequently the pair $(1_a,G)$ is an equivalence edge in $Q$, with source $(a,fh')$ and target $(a,g)$; its inverse witnesses are the images of those in $V$.",
+   "uses": [
+    "lem-coef-pattern-anodyne-lifting-products",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-core-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition B.2.7, relative equivalence between the two extensions, printed p.1491; explicit fixed-boundary inverse witnesses using B.1.14."
+   }
+  },
+  {
+   "text": "Apply the exponential-corner theorem to the isofibration $f$ of step 5 and the underlying monomorphism $A\\hookrightarrow B$. It says that $Q$ and $\\operatorname{Fun}(B,X)$ are quasicategories and that\n$$R:\\operatorname{Fun}(B,X)\\longrightarrow Q,\\qquad h\\longmapsto(h|_A,fh)$$\nis an isofibration. Since $R(h')=(a,fh')$, lift the equivalence edge $(1_a,G)$ of step 7 to an equivalence edge $H:h'\\to h$. Its target satisfies $hi=a$ and $fh=g$ exactly, and $H|_A$ is the constant edge at $a$. Moreover $qH=\\pi G$ is the constant transformation at the prescribed base map $B\\to C$. The pointwise equivalence criterion of [lem-coef-infinity-pointwise-equivalences] implies that every vertex component $H_b$ is an equivalence in $X$.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition B.2.7, homotopy lifting in the proof of (b) implies (a), printed p.1491; use the existing exponential-corner theorem to impose the boundary exactly."
+   }
+  },
+  {
+   "text": "It remains to check that $h$ preserves all marked edges of $B$, not merely those of $A$. For a marked edge $e:b\\to b'$ of $B$, the map $H$ on $e\\times\\Delta^1$ gives two triangles with common diagonal $d$, expressing $d$ as $H_{b'}h'(e)$ and as $h(e)H_b$. By step 2 the equivalences $H_b,H_{b'}$ are $q$-cocartesian. The edge $h'(e)$ is marked, hence $q$-cocartesian by step 4. Apply the composition-and-cancellation assertion twice: first $d$ is $q$-cocartesian because both $h'(e)$ and $H_{b'}$ are; then $h(e)$ is $q$-cocartesian because $H_b$ and $d$ are. Finally $q h(e)=\\pi g(e)$ belongs to $S$, since $g$ preserves markings and $\\pi(T)\\subseteq S$. The exact-marking clause for $X$ now gives $h(e)\\in U$. Thus $h$ is the required marked diagonal. Since $i$ was any trivial cofibration, the model weak factorization system makes $f$ a fibration of $\\mathsf M_{\\mathfrak P}$. Together with step 3 this proves the equivalence. The argument has imposed cocartesian lifting only over $T$, as required.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "def-coef-categorical-pattern-fibrancy",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition B.2.7, last marking check for (b) implies (a), printed p.1491; two triangles spell out the check for marked edges of B (the printed proof says A here)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-categorical-pattern-fibrancy",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-pattern-anodyne-generators",
+  "lem-coef-categorical-pattern-model-calculus",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-pattern-anodyne-lifting-products",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-cocartesian-composition-initiality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Auxiliary marked-operadic foundation for proof paragraph 2, finite-coefficient mapping-complex comparison. Complete argument adapted from Higher Algebra, Remark B.0.27 and Proposition B.2.7, read online; the literature archive lacks HA. Generator-wise composition replaces the longer cocartesian-cone composition check, without changing the route."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +192,52 @@
    "results": "{\"t\": \"2026-10-17T02:07:51Z\", \"tool\": \"leanfinder\", \"query\": \"Marked simplicial sets fibrant over a categorical pattern: induced categorical pattern on a fibrant target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObj\\u03b9\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingProperty\\u03b9HornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.FibrantObject.homMk_surjective\", \"HomotopicalAlgebra.IsFibrant\"], \"digest\": \"46af6529a7a66883\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected results concern Kan-Quillen horns and generic fibrant objects, not categorical-pattern fibrations or an induced pattern."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map to a fibrant marked simplicial object over a categorical pattern is a fibration exactly when fibered for its induced pattern",
+   "results": "{\"t\": \"2026-10-17T02:36:46Z\", \"tool\": \"leanfinder\", \"query\": \"A map to a fibrant marked simplicial object over a categorical pattern is a fibration exactly when fibered for its induced pattern\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"HomotopicalAlgebra.isFibrant_of_fibration\", \"HomotopicalAlgebra.BifibrantObject.instIsFibrantObjι\", \"HomotopicalAlgebra.FibrantObject.mk_surjective\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.FibrantObject.homMk\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.FibrantObject.homMk_surjective\"], \"digest\": \"476e450c3d140778\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned hits. ModelCategory/Over.lean:63-79 only equips an ordinary over-category with the inherited fibration class, without identifying it with the induced-pattern model. CategoryWithCofibrations.lean:60 defines the generic Fibration predicate; IsCofibrant.lean:96 only gives fibrant source from a fibration. SimplicialSet/CategoryWithFibrations.lean:38-97 concerns unmarked Kan horns, and FiberedCategory/Cocartesian.lean:48-80 concerns ordinary categories, not marked quasicategories with cone constraints."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.Fibration",
+   "results": "{\"t\": \"2026-10-17T02:37:16Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.Fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Fibration\", \"HomotopicalAlgebra.mem_fibrations\", \"HomotopicalAlgebra.Fibration.mem\", \"HomotopicalAlgebra.Fibration.mk\", \"HomotopicalAlgebra.fibration_iff\", \"HomotopicalAlgebra.mem_trivialFibrations\", \"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"HomotopicalAlgebra.instCofibrationOppositeOpOfFibration\"], \"digest\": \"cee830c0a93b39d8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned hits. ModelCategory/Over.lean:63-79 only equips an ordinary over-category with the inherited fibration class, without identifying it with the induced-pattern model. CategoryWithCofibrations.lean:60 defines the generic Fibration predicate; IsCofibrant.lean:96 only gives fibrant source from a fibration. SimplicialSet/CategoryWithFibrations.lean:38-97 concerns unmarked Kan horns, and FiberedCategory/Cocartesian.lean:48-80 concerns ordinary categories, not marked quasicategories with cone constraints."
+  },
+  {
+   "tool": "grep",
+   "query": "CategoricalPattern|pattern.fibered|induced.pattern",
+   "results": "{\"t\": \"2026-10-17T02:37:16Z\", \"tool\": \"grep\", \"query\": \"CategoricalPattern|pattern.fibered|induced.pattern\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned hits. ModelCategory/Over.lean:63-79 only equips an ordinary over-category with the inherited fibration class, without identifying it with the induced-pattern model. CategoryWithCofibrations.lean:60 defines the generic Fibration predicate; IsCofibrant.lean:96 only gives fibrant source from a fibration. SimplicialSet/CategoryWithFibrations.lean:38-97 concerns unmarked Kan horns, and FiberedCategory/Cocartesian.lean:48-80 concerns ordinary categories, not marked quasicategories with cone constraints."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An edge of an inner fibration of quasicategories is an equivalence if and only if it is cocartesian and its image is an equivalence",
+   "results": "{\"t\": \"2026-10-17T02:37:30Z\", \"tool\": \"leanfinder\", \"query\": \"An edge of an inner fibration of quasicategories is an equivalence if and only if it is cocartesian and its image is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_iso\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso\", \"SSet.modelCategoryQuillen.fibration_iff\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\"], \"digest\": \"f6db7046a58457ea\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned hits. ModelCategory/Over.lean:63-79 only equips an ordinary over-category with the inherited fibration class, without identifying it with the induced-pattern model. CategoryWithCofibrations.lean:60 defines the generic Fibration predicate; IsCofibrant.lean:96 only gives fibrant source from a fibration. SimplicialSet/CategoryWithFibrations.lean:38-97 concerns unmarked Kan horns, and FiberedCategory/Cocartesian.lean:48-80 concerns ordinary categories, not marked quasicategories with cone constraints."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative fibrations in the marked categorical pattern model structure and cocartesian edges over the induced target marking",
+   "results": "{\"t\": \"2026-10-17T02:38:07Z\", \"tool\": \"leanfinder\", \"query\": \"Relative fibrations in the marked categorical pattern model structure and cocartesian edges over the induced target marking\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.fibrations_over_def\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.fibrations_over_iff\", \"HomotopicalAlgebra.instFibrationLeftDiscretePUnitOfOver\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"CategoryTheory.Functor.IsCocartesian\"], \"digest\": \"b4e8094e3dab8630\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned hits. ModelCategory/Over.lean:63-79 only equips an ordinary over-category with the inherited fibration class, without identifying it with the induced-pattern model. CategoryWithCofibrations.lean:60 defines the generic Fibration predicate; IsCofibrant.lean:96 only gives fibrant source from a fibration. SimplicialSet/CategoryWithFibrations.lean:38-97 concerns unmarked Kan horns, and FiberedCategory/Cocartesian.lean:48-80 concerns ordinary categories, not marked quasicategories with cone constraints."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Marked simplicial categorical pattern induced fibrant target fibration criterion",
+   "results": "{\"t\": \"2026-10-17T02:38:08Z\", \"tool\": \"leansearch\", \"query\": \"Marked simplicial categorical pattern induced fibrant target fibration criterion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.isFibrant_of_fibration\", \"HomotopicalAlgebra.IsFibrant\", \"HomotopicalAlgebra.FibrantObject\", \"HomotopicalAlgebra.fibrantObjects\", \"HomotopicalAlgebra.isFibrant_iff_of_isTerminal\", \"HomotopicalAlgebra.isFibrant_iff\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\"], \"digest\": \"674068ea58298bc3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned hits. ModelCategory/Over.lean:63-79 only equips an ordinary over-category with the inherited fibration class, without identifying it with the induced-pattern model. CategoryWithCofibrations.lean:60 defines the generic Fibration predicate; IsCofibrant.lean:96 only gives fibrant source from a fibration. SimplicialSet/CategoryWithFibrations.lean:38-97 concerns unmarked Kan horns, and FiberedCategory/Cocartesian.lean:48-80 concerns ordinary categories, not marked quasicategories with cone constraints."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-operadic-fibration-recognition",
@@ -87,5 +264,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-pattern-induced-fibration-test",
+  "worker": "stage1",
+  "summary": "Q46 checked HA B.0.27 and B.2.7 online and all cited node statements. The statement is unchanged. The nine-step proof gives the induced small pattern, both implications through the seven generators and fixed-boundary homotopy strictification, and checks every marked edge of B with two triangles. No new nodes, no Lean changes or builds. Maintainer reader (FIX): step 2 now cites the Kan homotopy-pullback invariance and path-comparison lemmas for its homotopy-pullback argument; step 8 cites the in-unit pointwise-equivalence lemma instead of the off-unit tool lem-cbc-enhanced-functor-cone-calculus, so no tool use remains.",
+  "blueprint": "Proof paragraph 2, middle finite-coefficient derived mapping-complex comparison: operadic restriction theorem used to recover coherent fixed-algebra modules from the explicit simplicial prism, in the monadic-bar foundation. Supporting input: recognize the relative operadic target as fibrant before the marked-section mapping-complex comparison; Fibrations over a fibered pattern object via its induced pattern"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-8a90719eb",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-8a90719eb (reviewer sub-agent of L); spot-checked: Read the item, all 9 steps, every cited statement (13), the unit/ancestor route and the brief/errors files. Statement unchanged and true: it matches HA B.0.27/B.2.7 in the fully scaled case. HA is not in literature/; it was read online by the worker and I could not reopen it read-only, so I checked the proof independently, step by step. Checks: step1 pattern clauses ok; step3 J_Q to J_P images ok; step4 lifts generator by generator, including the sharp {n}*K cone in C2, ok; step5 isofibration uses 'S contains equivalences', ok; steps6-7 pushout product, fixed-boundary Kan fiber V and core-Kan, ok; step8 exponential-corner lift with exact boundary, ok; step9 two-triangle cocartesian cancellation over every marked edge of B, ok. Edge cases checked: empty Y, empty A, empty K_alpha, point base. No new nodes, no duplicate (rg over dag/nodes), no cycle. Two repairs in fixes/: (1) step 2's homotopy-pullback hand-wave (E5) is now written out and cites the in-unit lem-coef-kan-homotopy-pullback-invariance and lem-coef-kan-pullback-path-comparison; (2) step 8 replaces the off-unit tool lem-cbc-enhanced-functor-cone-calculus with the in-unit lem-coef-infinity-pointwise-equivalences (C7), and split_report.tool_uses is removed. proof_deps recomputed. No tool use to accept.; 1 file(s) fixed by the reviewer"
  }
 }
