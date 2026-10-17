@@ -8,11 +8,103 @@
   "place": "Dwyer–Kan, Calculating simplicial localizations, Definition 2.1, printed p.19, reductions (iv)′ and (v)′; local overlap lemma implicit in Proposition 5.5, printed p.24. Agent formulation and overlap verification; no Stacks tag states this diagram-specific lemma."
  },
  "stmt_deps": [
-  "def-coef-zigzag-homotopy-calculus"
+  "def-coef-zigzag-homotopy-calculus",
+  "def-nagata-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Number the horizontal columns $1,\\ldots,l$ and the vertex columns $0,\\ldots,l$. Write $X_i^r$ for the object in row $r$ and vertex column $i$, and $v_i^r:X_i^r\\to X_i^{r+1}$ for a vertical arrow. The fixed-word convention of [def-coef-zigzag-homotopy-calculus] identifies an unreduced hammock with its signed word and these objects and arrows satisfying the stated square equations. Use the identity and associative composition laws of [def-nagata-category]. The support of a deletion is its single horizontal column; the support of a composition is its two adjacent horizontal columns. Thus each reduction has a support of size one or two. At length zero neither operation is available; at length one only identity deletion is available.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus",
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 2.1, printed p.19, operations (iv)′ and (v)′; explicit elementary verification of their local overlaps, written by Q02, for Proposition 5.5, printed p.24"
+   }
+  },
+  {
+   "text": "Check that identity deletion is defined on all the data. If column $i$ consists of identities, then $X_{i-1}^r=X_i^r$ for every row. Its square equation, for either sign, simplifies by the identity laws of [def-nagata-category] to $v_{i-1}^r=v_i^r$. Hence identifying these vertex columns is independent of which copy is retained, including every vertical arrow. The neighbouring squares are unchanged after this equality substitution. Every retained leftward or vertical arrow remains in $T$. Endpoints are preserved; if an endpoint column is identified with its neighbour, the retained vertical arrow equals the original endpoint identity. If deleting the only column gives length zero, all row endpoints coincide, so $x=y$, and all remaining vertical arrows are endpoint identities.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 2.1, printed p.19, operations (iv)′ and (v)′; explicit elementary verification of their local overlaps, written by Q02, for Proposition 5.5, printed p.24"
+   }
+  },
+  {
+   "text": "Check the other operation using [def-nagata-category]. For two rightward columns let their row arrows be $a_r:X_{i-1}^r\\to X_i^r$ and $b_r:X_i^r\\to X_{i+1}^r$. Their square equations give\n$$v_{i+1}^r\\circ(b_r\\circ a_r)=(b_{r+1}\\circ v_i^r)\\circ a_r=(b_{r+1}\\circ a_{r+1})\\circ v_{i-1}^r.$$\nFor two leftward columns write $a_r:X_i^r\\to X_{i-1}^r$ and $b_r:X_{i+1}^r\\to X_i^r$. Then\n$$v_{i-1}^r\\circ(a_r\\circ b_r)=(a_{r+1}\\circ v_i^r)\\circ b_r=(a_{r+1}\\circ b_{r+1})\\circ v_{i+1}^r.$$\nThus the composite squares commute. The leftward composites lie in $T$ by its assumed closure under composition. All retained objects and vertical arrows, including endpoint identities, are unchanged. There is no requirement to remove a composite that happens to be an identity. These equations verify admissibility in every adjacent pair of rows; for $q=0$ there are no such equations to check.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 2.1, printed p.19, operations (iv)′ and (v)′; explicit elementary verification of their local overlaps, written by Q02, for Proposition 5.5, printed p.24"
+   }
+  },
+  {
+   "text": "Suppose the two reductions have exactly the same support and type. They either delete the same identity column or compose the same adjacent pair. The signed words then agree, and the surviving data agree: deletion is unambiguous by step 2, and composition uses the same row composites and retains the same outer vertex columns by step 3. Consequently $D_1=D_2$. No commutativity of morphism composition is being asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 2.1, printed p.19, operations (iv)′ and (v)′; explicit elementary verification of their local overlaps, written by Q02, for Proposition 5.5, printed p.24"
+   }
+  },
+  {
+   "text": "Suppose the supports are disjoint, and order them from left to right. Perform both prescribed operations, shifting the position of the right-hand operation down by one after performing the left-hand operation. Each remains available after the other: the other support's horizontal arrows and signs are unchanged. If the supports touch at a vertex, a composition retains that boundary vertex, and a deletion replaces it only by its equal copy with equal vertical arrows as checked in step 2. Two distinct identity deletions therefore remain possible even when adjacent and oppositely signed. In either order the final word replaces each of the two original support blocks by its same shortened word. Objects and vertical arrows outside those blocks are untouched; at a deleted identity boundary they agree by step 2; each composite horizontal arrow is the same row composite on its original block. Hence both orders give literally the same hammock $E$. Each branch reaches it by exactly one permitted reduction. If no horizontal column remains, step 2 verifies the length-zero convention.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 2.1, printed p.19, operations (iv)′ and (v)′; explicit elementary verification of their local overlaps, written by Q02, for Proposition 5.5, printed p.24"
+   }
+  },
+  {
+   "text": "Suppose a deletion and a composition have overlapping supports. The identity column being deleted is one of the two columns being composed, and the two signs agree. In every row the composite is the other arrow, since the identity laws of [def-nagata-category] give $a\\circ1=a$ and $1\\circ a=a$; these are the two possible placements for either sign. Both operations replace that two-column block by the sign and row arrows of the other column. Deletion retains the other column's two vertex columns, whereas composition retains the two outer vertex columns. The only possible difference is one vertex column across the identity column; step 2 identifies its objects and vertical arrows exactly. All data outside the block are unchanged. Therefore $D_1=D_2$, also when both columns consist of identities.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 2.1, printed p.19, operations (iv)′ and (v)′; explicit elementary verification of their local overlaps, written by Q02, for Proposition 5.5, printed p.24"
+   }
+  },
+  {
+   "text": "It remains to consider distinct overlapping compositions. Their supports must be $\\{i,i+1\\}$ and $\\{i+1,i+2\\}$. Both pairs being composable in the reduction sense forces all three signs to agree. After either first composition, compose the resulting column with the remaining column of this triple, one further permitted reduction. For rightward row arrows $a,b,c$ the two resulting arrows are $c\\circ(b\\circ a)$ and $(c\\circ b)\\circ a$. For leftward row arrows $a,b,c$, listed in spatial order, they are $(a\\circ b)\\circ c$ and $a\\circ(b\\circ c)$. Each pair is equal by associativity in [def-nagata-category]. In both branches the final word has one column of the common sign in place of the triple. Both delete the same two internal vertex columns, retain the same two outer vertex columns with all their vertical arrows, and leave every other column unchanged. Thus the results are the same full diagram $E$. Step 3 ensures both further reductions are admissible, even if an intermediate or final composite is entirely identities.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 2.1, printed p.19, operations (iv)′ and (v)′; explicit elementary verification of their local overlaps, written by Q02, for Proposition 5.5, printed p.24"
+   }
+  },
+  {
+   "text": "These cases exhaust the two operations: two deletions have equal or disjoint singleton supports; a deletion and a composition have disjoint supports or the singleton lies in the pair; two compositions have equal pairs, disjoint pairs, or share exactly one column, the triple case. In the equal-result cases steps 4 and 6 give $D_1=D_2$. Otherwise steps 5 and 7 construct $E$ with exactly one further reduction from each branch. All comparisons included the signs, vertex objects and both kinds of arrows. This proves the stated strong diamond property.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 2.1, printed p.19, operations (iv)′ and (v)′; explicit elementary verification of their local overlaps, written by Q02, for Proposition 5.5, printed p.24"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-zigzag-homotopy-calculus",
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Q02 explicit local-overlap proof for Definition 2.1 (iv)′ and (v)′, printed p.19; the paper gives the operations, not this case analysis"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -109,10 +201,58 @@
    "results": "{\"t\": \"2026-10-17T08:42:39Z\", \"tool\": \"leanfinder\", \"query\": \"A strong diamond property for deleting identity columns and composing adjacent same-direction columns in commutative hammock diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib.Tactic.Widget.commSquareM?\", \"Mathlib.Tactic.Widget.commTriangleM?\", \"CategoryTheory.CommSq.horiz_comp\", \"CategoryTheory.Square.fac\", \"CategoryTheory.CommSq.vert_comp\", \"CategoryTheory.CommSq.w_assoc\", \"CategoryTheory.CommSq.w\", \"CategoryTheory.Square.commSq\"], \"digest\": \"7f0d43c0afa4d16e\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned FreeGroup/FreeAddGroup diamonds concern inverse-generator cancellation; commutative-square declarations concern pasting individual squares; generic Relation confluence assumes the fork condition. None states the hammock strong diamond with identity deletion, same-sign composition, and all vertex/vertical data. Read FreeGroup/Basic.lean:164-205, Logic/Relation.lean:896-948 and CategoryTheory/CommSq.lean. Reuse lem-coef-rewrite-common-reduct for generic confluence."
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|diamond_aux|church_rosser",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T10:14:45Z\", \"tool\": \"grep\", \"query\": \"hammock|diamond_aux|church_rosser\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Logic/Relation.lean\", \"Mathlib/Logic/Relation.lean\", \"Mathlib/Logic/Relation.lean\", \"Mathlib/GroupTheory/FreeGroup/Reduce.lean\", \"Mathlib/GroupTheory/FreeGroup/Reduce.lean\", \"Mathlib/GroupTheory/FreeGroup/Reduce.lean\", \"Mathlib/GroupTheory/FreeGroup/Reduce.lean\", \"Mathlib/GroupTheory/FreeGroup/Basic.lean\"], \"digest\": \"fa811f6b0da25d1a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FreeGroup/Basic.lean:164-205 and Logic/Relation.lean:896-906. Free-group diamonds cancel inverse pairs; Relation.church_rosser assumes local joinability. CommSq.horiz_comp (CommSq.lean:114-119) pastes squares, not hammock reductions. None states this full-diagram strong diamond. Existing inherited searches and results retained."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strong local confluence for identity deletion and same-direction composition in finite diagrams in a category",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T10:14:45Z\", \"tool\": \"leansearch\", \"query\": \"Strong local confluence for identity deletion and same-direction composition in finite diagrams in a category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Square.category\", \"CategoryTheory.Square.Hom.comp\", \"CategoryTheory.ComposableArrows.twoδ₁Toδ₀\", \"CategoryTheory.Square.Hom.noConfusion\", \"CategoryTheory.ComposableArrows.threeδ₂Toδ₁\", \"CategoryTheory.Square.Hom.mk.congr_simp\", \"CategoryTheory.Limits.WalkingParallelPairHom.comp\", \"CategoryTheory.TwoSquare.hId\"], \"digest\": \"6c8fd0688a4ce567\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FreeGroup/Basic.lean:164-205 and Logic/Relation.lean:896-906. Free-group diamonds cancel inverse pairs; Relation.church_rosser assumes local joinability. CommSq.horiz_comp (CommSq.lean:114-119) pastes squares, not hammock reductions. None states this full-diagram strong diamond. Existing inherited searches and results retained."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hammock\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T10:14:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"hammock\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FreeGroup/Basic.lean:164-205 and Logic/Relation.lean:896-906. Free-group diamonds cancel inverse pairs; Relation.church_rosser assumes local joinability. CommSq.horiz_comp (CommSq.lean:114-119) pastes squares, not hammock reductions. None states this full-diagram strong diamond. Existing inherited searches and results retained."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deleting identity columns and composing adjacent equally directed columns of a commutative rectangular zigzag diagram satisfies the strong diamond property",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T10:14:49Z\", \"tool\": \"leanfinder\", \"query\": \"Deleting identity columns and composing adjacent equally directed columns of a commutative rectangular zigzag diagram satisfies the strong diamond property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CommSq.vert_comp\", \"CategoryTheory.CommSq.horiz_comp\", \"CategoryTheory.CommSq.w\", \"CategoryTheory.CommSq.w_assoc\", \"Mathlib.Tactic.Widget.commSquareM?\", \"CategoryTheory.CommSq\", \"CategoryTheory.mateEquiv_square\", \"CategoryTheory.Square.fac\"], \"digest\": \"0f183e204c343053\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FreeGroup/Basic.lean:164-205 and Logic/Relation.lean:896-906. Free-group diamonds cancel inverse pairs; Relation.church_rosser assumes local joinability. CommSq.horiz_comp (CommSq.lean:114-119) pastes squares, not hammock reductions. None states this full-diagram strong diamond. Existing inherited searches and results retained."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"diamond\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T10:15:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"diamond\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"FreeAddGroup.Red.Step.diamond\", \"FreeGroup.Red.Step.diamond\", \"FreeAddGroup.Red.Step.diamond_aux\", \"FreeGroup.Red.Step.diamond_aux\"], \"digest\": \"24fee0a4c6912c19\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FreeGroup/Basic.lean:164-205 and Logic/Relation.lean:896-906. Free-group diamonds cancel inverse pairs; Relation.church_rosser assumes local joinability. CommSq.horiz_comp (CommSq.lean:114-119) pastes squares, not hammock reductions. None states this full-diagram strong diamond. Existing inherited searches and results retained."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two one-step simplifications of a finite signed chain by deleting units or multiplying adjacent same-sign arrows either coincide or have a common one-step simplification",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T10:15:53Z\", \"tool\": \"leanfinder\", \"query\": \"Two one-step simplifications of a finite signed chain by deleting units or multiplying adjacent same-sign arrows either coincide or have a common one-step simplification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeAddGroup.Red.Step.diamond_aux\", \"FreeAddGroup.Red.Step.diamond\", \"FreeGroup.Red.Step.diamond_aux\", \"FreeAddGroup.Red.Step\", \"FreeAddGroup.Red.Step.cons_cons_iff\", \"FreeAddGroup.join_red_of_step\", \"FreeAddGroup.Red.Step.not_rev\", \"FreeAddGroup.Red.Step.to_red\"], \"digest\": \"7cab053bc0d47c2d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FreeGroup/Basic.lean:164-205 and Logic/Relation.lean:896-906. Free-group diamonds cancel inverse pairs; Relation.church_rosser assumes local joinability. CommSq.horiz_comp (CommSq.lean:114-119) pastes squares, not hammock reductions. None states this full-diagram strong diamond. Existing inherited searches and results retained."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-hammock-graph-colimit-presentation",
@@ -140,5 +280,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-hammock-reduction-diamond",
+  "worker": "stage1",
+  "summary": "Q02 checked the current statement, searched the project Lean and entire blueprint, retained all inherited searches and added logged searches, and wrote the complete elementary overlap analysis. No new nodes, statement correction, or Lean attachment. Identity deletion includes equality of vertical data and the length-zero convention; composition validity is checked for both signs; disjoint and overlapping supports are exhaustive.",
+  "blueprint": "Preserves the recorded ancestor prop-coef-integral-exceptional-adjoint and via chain. This supplies the elementary local-overlap input extracted from the derived coefficient-adjunction enhancement route, specifically the graph-colimit presentation step invoking Definition 2.1 reductions in Proposition 5.5; it does not replace the ancestor adjunction route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-f72b11ab4",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-f72b11ab4 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, all 8 steps, the sources, the 18 recorded searches and the blueprint/split_report. I also read the statements of def-coef-zigzag-homotopy-calculus and def-nagata-category, the step of the parent lem-coef-hammock-graph-colimit-presentation that uses this item, and lem-coef-rewrite-common-reduct. Shape: one commit; the delivery holds only the item and its report, adds no new nodes and edits no unit. proof_deps equals the union of the step uses, and nothing cites SGA. Statement: it is self-contained, restricted to the letters +,-, and correctly adds def-nagata-category to stmt_deps. Its conclusion (D1=D2, or a common one-step reduct) is exactly the fork hypothesis r^=/r^* of lem-coef-rewrite-common-reduct as the parent uses it. It does not restate a clause of the parent. Steps: in step 2 the identity-column square gives v_{i-1}=v_i by the unit laws for both signs, the endpoint identities are kept, and deleting the last column forces x=y. I re-derived both pasting equations of step 3 and checked closure of T. Step 4 (same support) is trivial. Step 5 (disjoint or touching supports) holds, including two adjacent identity columns of opposite sign. Step 6 (deletion inside a composed pair) gives equality by the unit laws plus step 2. Step 7 (overlapping compositions) gives a common reduct by associativity in both directions. Step 8 covers every way two supports can sit. All steps are rightly marked elementary. Edge cases tested: length 0 and 1, q=0, composites equal to identities, and nonidentity vertical arrows across an identity column. Route: the item cites only definitions (def-nagata-category, from another unit, is a notion and Mathlib leaf), so tool_uses is empty and nothing needed accepting. There is no cycle. Duplicates: grep over the DAG found nothing that states this; free-factor-category-normal-form, rewrite-common-reduct and the hammock-pair nodes are different statements. No blueprint text mentions hammock, so same_as=[] is correct. Source: Dwyer–Kan dwyer-kan-2.pdf (the usual URL convention) is not in literature/, so the worker filed WANTED and set proof_origin to agent. I could not open it locally and did not check the Def. 2.1 (iv)′/(v)′ place, but the proof is fully elementary and self-contained. No fixes written."
  }
 }
