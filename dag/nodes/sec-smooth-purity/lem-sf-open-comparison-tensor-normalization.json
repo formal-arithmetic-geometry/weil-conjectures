@@ -267,5 +267,34 @@
   "group": "Q65",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-d3668d4f6 (reviewer sub-agent of L); spot-checked: I read the whole item, all six steps and every cited node statement, and re-derived each step: it is a correct agent-written proof with no new nodes and no fixes. The statement is unchanged and well typed; both sides go from C_X e(F⊗rB) to dC_UF⊗C_XB. Coefficients are ordinary constant-A modules with A finite, so no base-change morphism or other coefficient category is involved. Step 1: the unit normalization at N gives Ψ(h)=s(h c_N^{-1})η^d, and d⊣s comes from lem-pur-site-restriction-module-adjunction-exact once lem-weil-proetale-weakly-etale-localization identifies the site; def-weil-extension-by-zero defines d by exactly that presheaf. So Ψ is injective without faithfulness of s. Step 2: I checked the tensor square (*) from product naturality of a, the pure-tensor values in lem-weil-pbc-algebraic-inverse-image-tensor-comparison (applied to the transported projections, with lem-sf-comparison-pullback-exact clause 1), and the rule in def-weil-pbc-ringed-tensor-section-calculus that pure pairings determine linear maps. Marking it elementary is acceptable. Steps 3-4: both sides reduce to ρ^dΨ = (η^d_{C_UF}⊗a_B)t^U, using the transpose equations for κ^e and κ^d and the unit normalization at F and at N; the orientations are correct. Steps 5-6 (cancellation and naturality) are fine, and proof_deps equals the union of the step uses. Sources: Stacks proetale.tex Tag 09AF (lemma-jshriek-comparison, l.5076) is only the adjoint argument, so proof_origin=agent is right; sites-modules Tag 03EL (l.3649) gives the bilinear-pairing route; the blueprint main-20261015 final pro-etale paragraph of lem-weil-finite-compact-projection-formula is the recorded place. Small cases checked: j=id, U empty, F=0, B=0, A=0. Duplicate search: lem-pur-open-projection-site-transport is a derived statement for locally free shifted F only, and lem-sf-open-tensor-normalization is pro-etale-only base change; neither is a duplicate. There is no cycle and no SGA. I accept the seven declared tool uses: lem-weil-pbc-extension-by-zero-adjunction, lem-weil-proetale-weakly-etale-localization, lem-pur-site-restriction-module-adjunction-exact, lem-weil-pbc-ringed-topoi-module-pullback-tensor, lem-sf-comparison-pullback-exact clause 1 only, lem-weil-pbc-algebraic-inverse-image-tensor-comparison and lem-weil-pbc-comparison-pullback. Details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenComparisonTensorNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.openComparison_tensor_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.comparisonTensorIso",
+   "AlgebraicGeometry.ProEtale.etaleRestrictionTensorIso",
+   "AlgebraicGeometry.ProEtale.proEtaleRestrictionTensorIso",
+   "AlgebraicGeometry.ProEtale.openComparisonEtaleKappa",
+   "AlgebraicGeometry.ProEtale.openComparisonProEtaleKappa",
+   "AlgebraicGeometry.ProEtale.openComparisonTensorLeft",
+   "AlgebraicGeometry.ProEtale.openComparisonTensorRight",
+   "AlgebraicGeometry.ProEtale.openComparison_tensor_normalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenComparisonTensorNormalization.lean",
+  "statement": "theorem openComparison_tensor_normalization (A : Type (u + 1)) [CommRing A] [Finite A] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : (∀ (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (B : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)), openComparisonTensorLeft A j F B = openComparisonTensorRight A j F B) ∧ (∀ {F F' : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)} {B B' : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)} (f : F ⟶ F') (b : B ⟶ B'), (comparisonUpperStar (ModuleCat.{u + 1} A) X).map ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).map (f ⊗ₘ (Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).map b)) ≫ openComparisonTensorLeft A j F' B' = openComparisonTensorLeft A j F B ≫ ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j).map ((comparisonUpperStar (ModuleCat.{u + 1} A) U).map f) ⊗ₘ (comparisonUpperStar (ModuleCat.{u + 1} A) X).map b))",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-1b3ac72bc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1b3ac72bc",
+  "group": "Q115",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacements under fixes/. Mathematics and verbatim signature match the node; repaired H8 documentation and H9 imports/local instance activation. Original and final modules compile cleanly through scompile.py. Branch unchanged."
  }
 }
