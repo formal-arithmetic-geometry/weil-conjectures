@@ -13,7 +13,8 @@
   "def-weil-pbc-etale-cohomology",
   "def-sc-divisor",
   "def-wf-finite-coefficient-cup",
-  "def-wf-degree-normalized-curve-trace"
+  "def-wf-degree-normalized-curve-trace",
+  "def-wf-finite-etale-cup"
  ],
  "proof": [
   {
@@ -273,29 +274,26 @@
   "module": "Sheaf.AlgebraicGeometry.Curve.TraceCupNaturality",
   "declaration": "AlgebraicGeometry.curve_trace_cup_naturality",
   "declarations": [
-   "AlgebraicGeometry.Scheme.traceCupConstantReduction",
-   "AlgebraicGeometry.Scheme.traceCupRootsReduction_condition",
-   "AlgebraicGeometry.Scheme.traceCupRootsReduction",
-   "AlgebraicGeometry.Scheme.traceCupRootsPullback_condition",
-   "AlgebraicGeometry.Scheme.traceCupRootsPullback",
-   "AlgebraicGeometry.Scheme.traceCupConstantCohomologyPullback",
-   "AlgebraicGeometry.Scheme.traceCupRootsCohomologyPullback",
-   "AlgebraicGeometry.Scheme.curveTraceCupPairing",
-   "AlgebraicGeometry.curve_trace_cup_naturality"
+   "AlgebraicGeometry.curve_trace_cup_naturality",
+   "AlgebraicGeometry.curvePointKummerClass",
+   "AlgebraicGeometry.curveConstantReduction",
+   "AlgebraicGeometry.curveRootsReduction",
+   "AlgebraicGeometry.curveRootsPullback",
+   "AlgebraicGeometry.curveTraceCup"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/Curve/TraceCupNaturality.lean",
-  "statement": "theorem curve_trace_cup_naturality (k : Type u) [Field k] [IsAlgClosed k] (C D : Scheme.{u}) (fC : C ⟶ Spec (.of k)) [IsConnectedCurve fC] [Smooth fC] [IsProper fC] (fD : D ⟶ Spec (.of k)) [IsConnectedCurve fD] [Smooth fD] [IsProper fD] (ell c : ℕ) [Fact ell.Prime] [CharP k c] (hell : ell ≠ c) (f : D ≅ C) (σ : Spec (.of k) ≅ Spec (.of k)) (hσ : f.hom ≫ fC = fD ≫ σ.hom) : (∀ (n m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ n) (i : Fin 3) (x : Sheaf.H (C.constantZMod (ell ^ n)) i) (y : Sheaf.H (C.rootsOfUnitySheaf (ell ^ n)) (2 - i)), curveTraceCupPairing k C fC ell c hell m hm i (Sheaf.H.map (traceCupConstantReduction C ell n m hmn) i x) (Sheaf.H.map (traceCupRootsReduction C ell n m hmn) (2 - i) y) = ZMod.castHom (pow_dvd_pow ell hmn) (ZMod (ell ^ m)) (curveTraceCupPairing k C fC ell c hell n (hm.trans hmn) i x y)) ∧ (∀ (n : ℕ) (hn : 1 ≤ n) (i : Fin 3) (x : Sheaf.H (C.constantZMod (ell ^ n)) i) (y : Sheaf.H (C.rootsOfUnitySheaf (ell ^ n)) (2 - i)), curveTraceCupPairing k D fD ell c hell n hn i (traceCupConstantCohomologyPullback f.hom (ell ^ n) i x) (traceCupRootsCohomologyPullback f.hom (ell ^ n) (2 - i) y) = curveTraceCupPairing k C fC ell c hell n hn i x y)",
+  "statement": "theorem curve_trace_cup_naturality (k : Type u) [Field k] [IsAlgClosed k] (C D : Scheme.{u}) (fC : C ⟶ Spec (.of k)) [IsConnectedCurve fC] [Smooth fC] [IsProper fC] (fD : D ⟶ Spec (.of k)) [IsConnectedCurve fD] [Smooth fD] [IsProper fD] (ell c : ℕ) [Fact ell.Prime] [CharP k c] (hell : ell ≠ c) (trC : ∀ n : ℕ, Sheaf.H (C.rootsOfUnitySheaf (ell ^ n)) 2 →+ ZMod (ell ^ n)) (trD : ∀ n : ℕ, Sheaf.H (D.rootsOfUnitySheaf (ell ^ n)) 2 →+ ZMod (ell ^ n)) (htrC : ∀ n : ℕ, 1 ≤ n → ∀ (hn : IsUnit ((ell ^ n : ℕ) : Γ(C, ⊤))) (P : closedPoints C), trC n (curvePointKummerClass k C fC (ell ^ n) hn P) = 1) (htrD : ∀ n : ℕ, 1 ≤ n → ∀ (hn : IsUnit ((ell ^ n : ℕ) : Γ(D, ⊤))) (P : closedPoints D), trD n (curvePointKummerClass k D fD (ell ^ n) hn P) = 1) (cupC : ∀ n i j : ℕ, Sheaf.H (C.constantZMod (ell ^ n)) i → Sheaf.H (C.rootsOfUnitySheaf (ell ^ n)) j → Sheaf.H (C.rootsOfUnitySheaf (ell ^ n)) (i + j)) (cupD : ∀ n i j : ℕ, Sheaf.H (D.constantZMod (ell ^ n)) i → Sheaf.H (D.rootsOfUnitySheaf (ell ^ n)) j → Sheaf.H (D.rootsOfUnitySheaf (ell ^ n)) (i + j)) (hcupC : ∀ n : ℕ, 1 ≤ n → IsFiniteEtaleCup C (ell ^ n) (C.rootsOfUnitySheaf (ell ^ n)) (cupC n)) (hcupD : ∀ n : ℕ, 1 ≤ n → IsFiniteEtaleCup D (ell ^ n) (D.rootsOfUnitySheaf (ell ^ n)) (cupD n)) (σ : k ≃+* k) (f : D ⟶ C) [IsIso f] (hσ : f ≫ fC = fD ≫ Spec.map (CommRingCat.ofHom σ)) : (∀ n m : ℕ, 1 ≤ m → (hmn : m ≤ n) → ∀ i j : ℕ, (hij : i + j = 2) → ∀ (x : Sheaf.H (C.constantZMod (ell ^ n)) i) (y : Sheaf.H (C.rootsOfUnitySheaf (ell ^ n)) j), curveTraceCup C (ell ^ m) (trC m) (cupC m) i j hij (Sheaf.H.map (curveConstantReduction C ell n m hmn) i x) (Sheaf.H.map (curveRootsReduction C ell n m hmn) j y) = ZMod.castHom (pow_dvd_pow ell hmn) (ZMod (ell ^ m)) (curveTraceCup C (ell ^ n) (trC n) (cupC n) i j hij x y)) ∧ (∀ n : ℕ, 1 ≤ n → ∀ i j : ℕ, (hij : i + j = 2) → ∀ (x : Sheaf.H (C.constantZMod (ell ^ n)) i) (y : Sheaf.H (C.rootsOfUnitySheaf (ell ^ n)) j), curveTraceCup D (ell ^ n) (trD n) (cupD n) i j hij (Sheaf.H.map ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} f).hom.app (AddCommGrpCat.of (ULift.{u + 1} (ZMod (ell ^ n))))) i (Etale.cohomologyMap f (C.constantZMod (ell ^ n)) i x)) (Sheaf.H.map (curveRootsPullback f (ell ^ n)) j (Etale.cohomologyMap f (C.rootsOfUnitySheaf (ell ^ n)) j y)) = curveTraceCup C (ell ^ n) (trC n) (cupC n) i j hij x y)",
   "branch": "newtargets-dag",
-  "by": "Q136",
+  "by": "Q18",
   "date": "2026-10-17",
   "existing": false
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-d70209aff",
-  "group": "Q136",
+  "reviewer": "NT-stage2-Codex-ac0fe311d",
+  "group": "Q18",
   "result": "fix",
-  "note": "Mathematics and all three Lean modules accepted; scompile.py passed without errors or warnings. Repaired H11 with a complete independent-reading report in fixes/lem-wf-curve-trace-cup-naturality.report.md. Full checks and evidence are in review.md; branch head unchanged."
+  "note": "Wrote review.md and complete replacements under fixes/. Reused existing coefficient helpers, removed duplicate definitions and local exactness proofs, and updated dependency records/report. Both repaired modules compiled cleanly through scompile.py with server confirmation. Target statement, canonical maps, universes, sources, and edge cases verified."
  }
 }

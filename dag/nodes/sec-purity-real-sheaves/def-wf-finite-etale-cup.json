@@ -1,0 +1,121 @@
+{
+ "id": "def-wf-finite-etale-cup",
+ "kind": "definition",
+ "title": "Finite constant coefficient action cup in ordinary etale cohomology",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $N\\in\\mathbf N$, and work on its small etale site [def-weil-pbc-etale-site]. Put $R=\\mathbf Z/N\\mathbf Z$, with the common universe lift, use the constant-module and ordinary class comparison of [def-asd-ordinary-finite-p1-kummer-class], and let $U$ be the exact functor forgetting sheaves of $R$-modules to abelian sheaves [def-weil-pbc-abelian-etale-sheaves], as in [def-sbc-raw-module-scalar-pullback-comparison]. Let $A$ be the constant free rank-one $R$-module sheaf [def-kun-constant-sheaf], let $a:R_X\\to U(A)$ be the canonical constant-section map obtained by sheafifying the constant-presheaf unit, and put $z:\\mathbf Z_X\\to U(A)$ equal to reduction followed by $a$. For every $R$-module sheaf $M$, define $c_M^i:\\operatorname{Ext}^i_R(A,M)\\to H^i(X,U(M))$ [def-weil-pbc-etale-cohomology] by applying the exact functor $U$ to an extension and Yoneda-precomposing with $z$. For an abelian sheaf $F$, define the predicate $\\operatorname{IsFiniteEtaleCup}(X,N,F,\\beta)$ on families $\\beta^{i,j}:H^i(X,R_X)\\times H^j(X,F)\\to H^{i+j}(X,F)$ by the following explicit representative condition: for every $R$-module sheaf $M$, every isomorphism $e:U(M)\\simeq F$, every $i,j\\geq0$, every $x_0\\in H^i(X,R_X)$, and extensions $x\\in\\operatorname{Ext}^i_R(A,A)$ and $y\\in\\operatorname{Ext}^j_R(A,M)$ with $H^i(a)x_0=c_A^i(x)$, require $\\beta^{i,j}(x_0,H^j(e)c_M^j(y))=H^{i+j}(e)c_M^{i+j}(x\\mathbin{\\circ_Y}y)$, where $x\\mathbin{\\circ_Y}y$ is the Yoneda composite in the order $A\\xrightarrow{x}A[i]\\xrightarrow{y[i]}M[i+j]$ in the derived category [def-weil-pbc-derived-categories].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-kun-constant-sheaf",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-derived-categories",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-sbc-raw-module-scalar-pullback-comparison"
+ ],
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Milne §22, Cup-products, p.135; Stacks Tag 0FPJ, section-cup-product: specialization to a constant finite coefficient ring and its rank-one unit; Ext/Yoneda model of the same unit action. Milne §14, pp.102–103: module-sheaf cohomology comparison and Yoneda/iterated-boundary pairing."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cup product on sheaf cohomology with constant finite ring coefficients equals Yoneda composition of extensions of the constant rank one module",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.instAddCommGroupH\", \"CategoryTheory.Sheaf.freeYoneda\", \"SheafOfModules.IsFiniteType\", \"ChainComplex.linearYonedaObj\", \"PresheafOfModules.ι_fromFreeYonedaCoproduct\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "Existing generic Ext operations are used; no finite-etale action-cup characterization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.comp, CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_comp\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_natTransApp\", \"CategoryTheory.Adjunction.extEquiv_apply\", \"CategoryTheory.Adjunction.extEquiv_symm_apply\", \"CategoryTheory.Adjunction.extEquiv_naturality_left\", \"CategoryTheory.Adjunction.extEquiv_naturality_right\", \"CategoryTheory.Adjunction.extEquiv_symm_naturality_left\", \"CategoryTheory.Adjunction.extEquiv_symm_naturality_right\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "Existing generic Ext operations are used; no finite-etale action-cup characterization."
+  },
+  {
+   "tool": "grep",
+   "query": "Yoneda.*cup|cup.*Yoneda|IsFiniteEtaleCup",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "Existing generic Ext operations are used; no finite-etale action-cup characterization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteEtaleCup|finiteEtaleClass|finiteEtaleModuleUnit in Mathlib, WeilConjectures and lean/Sheaf; Yoneda.*cup|cup.*Yoneda in dag/nodes; blueprint_refs.py search constant rank-one module",
+   "results": "No matching declaration. DAG results include field-linear O_X-module cups, general bilinear functoriality and the finite-field Poincare trace-cup convention; none defines this small-etale finite constant coefficient Yoneda comparison. Source shiftProduct_eq identifies the unit cup with Yoneda composition and is reused conceptually, not redefined.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ordinaryFiniteConstant|ordinaryFiniteClass|RawModuleScalarComparison in lean/Sheaf/AlgebraicGeometry",
+   "results": "OrdinaryFiniteP1Kummer.lean:46,54,69 gives the constant module, integral generator and ordinary class comparison for arbitrary coefficient rings; RawModuleScalarPullbackComparison.lean:32,55 gives exact forgetting. Reused these rather than duplicate the specialization to ULift ZMod. Neither module supplies the action-cup predicate.",
+   "date": "2026-10-18",
+   "verdict": "existing helper constructions reused; action-cup characterization still new"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-curve-trace-cup-naturality",
+  "date": "2026-10-17",
+  "group": "Q18"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-wf-curve-h1-dual-tate-module",
+   "place": "Proof, first paragraph: the assertion that finite-level cup-trace adjoints are Galois equivariant and compatible under reduction (equations (4.2)-(4.3)).",
+   "via": [
+    "lem-wf-curve-trace-cup-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankone",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.FiniteEtaleCup",
+  "declaration": "AlgebraicGeometry.IsFiniteEtaleCup",
+  "declarations": [
+   "AlgebraicGeometry.IsFiniteEtaleCup",
+   "AlgebraicGeometry.finiteEtaleUnitMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/FiniteEtaleCup.lean",
+  "statement": "def IsFiniteEtaleCup (X : Scheme.{u}) (N : ℕ) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (cup : ∀ i j : ℕ, Sheaf.H (X.constantZMod N) i → Sheaf.H F j → Sheaf.H F (i + j)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Maintainer second reading: reuse Etale.ordinaryFiniteConstant, RawModuleScalarComparison.forget with its existing exactness instances, and ordinaryFiniteClass applied to the Ext.hom representative. Removed duplicate constant module, forgetful functor, integral reduction and Ext comparison, together with the locally proved exactness instances. The representative characterization, canonical maps, coefficient universes and mathematical statement are unchanged.",
+  "fixed_by": "NT-stage2-Codex-ac0fe311d"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ac0fe311d",
+  "group": "Q18",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ac0fe311d",
+  "group": "Q18",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacements under fixes/. Reused existing coefficient helpers, removed duplicate definitions and local exactness proofs, and updated dependency records/report. Both repaired modules compiled cleanly through scompile.py with server confirmation. Target statement, canonical maps, universes, sources, and edge cases verified."
+ }
+}
