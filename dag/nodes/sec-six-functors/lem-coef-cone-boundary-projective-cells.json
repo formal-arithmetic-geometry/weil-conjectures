@@ -10,9 +10,89 @@
  "stmt_deps": [
   "lem-coef-pinched-cube-latching"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The category of small simplicial categories has the small colimits used here by [lem-coef-simplicial-interval-lifting]. The construction of [lem-coef-pinched-cube-latching] preserves simplicial-set colimits, as follows directly from its defining universal property. For a simplicial category $E$, let $N_E$ have $n$-simplices the simplicial functors $\\mathfrak C[\\Delta^n]\\to E$, with operators given by precomposition. A functor $\\mathfrak C[T]\\to E$ is, by the defining simplex colimit, a compatible such functor for every simplex of $T$, hence exactly a simplicial map $T\\to N_E$. A map from a colimit of simplicial sets to $N_E$ is a compatible family of maps. The same is therefore true of functors from its $\\mathfrak C$-image to $E$, proving the colimit claim. In particular this applies to every pinch pushout used below. No preservation assertion about individual mapping spaces of arbitrary simplicial-category colimits is made.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.1, correspondence definition; Example 2.2.2.5; expanded mapping-out argument"
+   }
+  },
+  {
+   "text": "Compute the cone category $B=\\mathfrak C[X\\star\\Delta^0]$ from its presentation as a simplex colimit. Concretely, in each simplicial degree a colimit of enriched categories is formed by words of arrows from the input categories, identifying objects along the diagram and quotienting by the input identities, compositions and diagram maps. This is a direct construction: concatenation gives composition, simplex operators act on every letter, the relations are stable under those operators, and maps out are precisely compatible enriched functors out of the inputs. Every simplex of the cone is either an old $X$-simplex, the constant simplex at $v$, or a mixed simplex. A mixed simplex with an initial $X$-segment of dimension $j$ is a degeneracy, repeating only $v$, of the cone on that $j$-simplex. The subset-poset formula of [lem-coef-pinched-cube-latching] says that its restriction to the initial face is exactly the corresponding $\\mathfrak C[\\Delta^n]$, that there are no arrows from its last vertex to an earlier vertex, and that the last-vertex endomorphism space is a point. Thus a word ending at an old object cannot pass through $v$. All relations with old endpoints are exactly the simplex-colimit relations for $X$: restriction of a cone-simplex operator with old endpoints is the operator of its initial face. A word starting at $v$ is an identity word. It follows that $B$ has the full old subcategory $\\mathfrak C[X]$, no arrows from $v$ to old objects, and only the identity of $v$ as endomorphism. This includes $X=\\varnothing$, where $B$ is the one-object identity category.",
+   "uses": [
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.1, cone correspondence; direct degreewise word presentation"
+   }
+  },
+  {
+   "text": "Apply the same word construction to $A\\amalg_{\\mathfrak C[X]}B$. Its object set can be chosen to be $\\operatorname{Ob}(A)\\amalg\\{v\\}$: each old vertex of $B$ is identified with its prescribed image in $A$, and $v$ is not identified with an old vertex. A word between objects of $A$ cannot pass through $v$, and all its $B$-letters are old letters, so the amalgamation relations replace them by their images in $A$. Conversely every relation on such words is an identity, a composition, or a diagram relation already valid in $A$. Therefore the old mapping simplicial sets and compositions are exactly those of $A$. The same no-return argument gives empty $M_p(v,c)$ and $M_p(v,v)=\\Delta^0$. Composition induces the action $M_p(c,v)\\times A(c',c)\\to M_p(c',v)$. Associativity and identities in $M_p$ are the enriched functor axioms for $L_a$. This argument allows $a\\mathfrak C[p]$ to identify vertices or arrows; it does not assume it is an inclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.1, the amalgamated correspondence; explicit no-return word computation"
+   }
+  },
+  {
+   "text": "First compute the constant simplex $K=\\Delta^n$ over $s$. Write $b=a(s)$. Its base functor factors through the one-object identity category $\\{x\\}$, so every old mapping simplex is sent to the identity simplex of $b$. By Step 1, collapsing this base face in $\\mathfrak C[\\Delta^{n+1}]$ gives $\\mathfrak C[J^n]$, where $J^n=(\\Delta^n\\star\\{v\\})\\amalg_{\\Delta^n}\\{x\\}$. By [lem-coef-pinched-cube-latching] its forward mapping set is $Q^n$; Step 3, applied with base category $\\{x\\}$ to the cone on $\\Delta^n$, gives identity endomorphisms at $x$ and $v$ and the empty reverse mapping set. Thus this application is to the pinched pushout, not to a claim that $J^n$ itself is an ordered cone. Attach this two-object category to $A$ at $x=b$. Every new word from $c$ to $v$ is now an $A$-arrow from $c$ to $b$ followed by exactly one $Q^n$-arrow. Consecutive $A$-arrows compose, and the only further relations are their associative and identity relations. Hence the map $(f,q)\\mapsto q\\circ f$ is a bijection in every simplicial degree from $A(c,b)\\times Q^n$ to the new mapping set. Its inverse reads the composed old prefix and the last forward letter; it is unaffected by any relation. Simplex operators act on both factors, so these bijections are a simplicial isomorphism. For a monotone map $\\alpha:[m]\\to[n]$, its map is $(f,q)\\mapsto(f,Q(\\alpha)q)$, because the base remains the same constant vertex.",
+   "uses": [
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.2, definition of J and Q, printed p. 76; expanded attachment to an arbitrary A"
+   }
+  },
+  {
+   "text": "For general $K\\to\\{s\\}$, retain one common copy of $A$ and one common vertex $v$, even if $K$ is empty. A functor out of its amalgamated cone is a functor on $A$, the image of $v$, and compatible extensions on $\\mathfrak C[\\Delta^n\\star\\{v\\}]$ for all simplices $z\\in K_n$, whose old faces are the fixed constant-base functor. Indeed every mixed cone simplex has an initial $K$-simplex followed by repeated $v$; restriction and degeneracy of these simplices impose precisely this compatibility, while constant cone simplices only specify the already chosen $v$. Applying Step 4 to these pieces, their new mapping simplices are represented by triples $(f,z,q)$ with $f\\in A(c,b)_r$, $z\\in K_n$ and $q\\in(Q^n)_r$. The compatibility relations are exactly\n$$(f,K(\\alpha)z,q)\\sim(f,z,Q(\\alpha)q),\\qquad \\alpha:[m]\\to[n],\\ z\\in K_n,\\ q\\in(Q^m)_r.$$\nThere are no additional mixed compositions, since no arrow leaves $v$ for $A$. This quotient, with old category $A$, precomposition on $f$, and identity at $v$, has the preceding mapping-out property: a functor on $A$ and the image $w$ of $v$ being fixed, an action-compatible map from a simplex piece is determined by its value $t(q)$ on $(\\mathrm{id}_b,q)$; its value on $(f,q)$ must be $t(q)\\circ F(f)$. Conversely this formula defines an action-compatible map for every simplicial map $t:Q^n\\to E(F(b),w)$. The coend relations say precisely that these maps agree under every simplex operator. Hence maps out are exactly the compatible functors on the simplex pieces, with their common $A$-action. It therefore computes the desired amalgamated cone. This proves the quotient formula directly, rather than assuming that taking a mapping set commutes with arbitrary enriched colimits.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.2, Remark 2.2.2.1 and the point construction; direct compatible-family quotient"
+   }
+  },
+  {
+   "text": "Every generating relation of Step 5 fixes $f$. Consequently its equivalence classes are exactly pairs $(f,[z,q])$: surjectivity chooses any representative of $[z,q]$, and injectivity follows because a chain of generating relations preserves $f$ and is precisely a chain defining the second-factor coend. The resulting degreewise inverse maps are $[f,z,q]\\mapsto(f,[z,q])$ and $(f,[z,q])\\mapsto[f,z,q]$. Both commute with simplex operators. Thus\n$$L_a(K\\to\\{s\\}\\to S)(c)\\cong A(c,b)\\times\\int^{[n]}K_n\\times Q^n.$$\nPrecomposition sends $(f,[z,q])$ to $(f\\circ h,[z,q])$, so this is also an isomorphism of enriched presheaves, not just of their values. For $K=\\varnothing$ the new mapping sets are empty, as is the coend, while $A$ and $v$ still exist.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.2, Remark 2.2.2.1; explicit inverse maps on the coend quotient"
+   }
+  },
+  {
+   "text": "For $K=\\Delta^0$, all its simplices are the degeneracies of its unique vertex. The coend relation for the unique $[n]\\to[0]$ sends every $[z,q]$ to its image in $Q^0=\\Delta^0$ by [lem-coef-pinched-cube-latching]. This identifies the coend with $\\Delta^0$ and Step 6 becomes $A(-,a(s))$. For $u:K\\to K'$ the formula is $(f,[z,q])\\mapsto(f,[u(z),q])$. For a simplicial map $h:S\\to S'$ and an enriched functor $F:A\\to A'$ satisfying $Fa=a'\\mathfrak C[h]$, the pushout-induced map sends $[f,z,q]$ to $[F(f),z,q]$, over the vertex $h(s)$; it preserves the defining relations and composition. These formulas agree before and after the displayed isomorphism, proving the claimed naturality in all parameters. Finally the simplex indices, generators, finite words and relations are small sets: they are indexed by the small sets of simplices and objects, countably many degrees and finite lengths. Their products, disjoint unions and quotients therefore stay in the chosen universe. No Kan, cofibrancy, quasicategory or model-structure hypothesis is used.",
+   "uses": [
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.1, functoriality; §2.2.2, degree-zero point computation; explicit parameter maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-simplicial-interval-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT §§2.2.1–2.2.2 read online 2026-10-17; expanded degreewise word and coend calculations; archive WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +135,87 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ (n : ℕ), SSet.modelCategoryQuillen.I (SSet.boundary n).ι\", \"doc\": \"For each natural number $n$, the canonical inclusion morphism $\\\\iota: \\\\partial\\\\Delta[n] \\\\to \\\\Delta[n]$ from the boundary of the standard $n$-simplex to the standard $n$-simplex is an element of the ge\"}\n  {\"name\": \"SSet.horn.isColimit\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits\", \"type\": \"{n : ℕ} →\\n  (i : Fin (n + 1)) →\\n    CategoryTheory.Limits.IsColimit\\n      ((CompleteLattice.MulticoequalizerDiagram.multicofork ⋯).toLinearOrder.map SSet.Subcomplex.toSSetFunctor)\", \"doc\": \"The colimit property of the multicoequalizer diagram constructing the n-dimensional horn Λ[n, i] is preserved under transformation to a linear order context via the subcomplex-to-simplicial-set functo\"}\n  {\"name\": \"SSet.horn.multicoequalizerDiagram\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits\", \"type\": \"∀ {n : ℕ} (i : Fin (n + 1)),\\n  (SSet.horn n i).MulticoequalizerDiagram (fun j => SSet.stdSimplex.face {↑j}ᶜ) fun j k =>\\n    SSet.stdSimplex.face {↑j, ↑k}ᶜ\", \"doc\": \"The n-dimensional horn Λ[n, i] is presented as a multicoequalizer diagram constructed from the standard simplex Δ[n] by removing the i-th face. Specifically, it is formed by taking the colimit over th\"}\n  {\"name\": \"SSet.modelCategoryQuillen.I\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property defined by the family of inclusions of the boundary of the standard $n$-simplex $\\\\partial\\\\Delta[n]$ into the standard $n$-simplex $\\\\Delta[n]$ for each natural number $n$. This co\"}\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"{X : SSet} →\\n  X.StrictSegal →\\n    {n : ℕ} →\\n      (s :\\n          CategoryTheory.Limits.Cone\\n            ((CategoryTheory.StructuredArrow.proj (Opposite.op (SimplexCategory.mk n))\\n                  (SimplexCategory.Truncated.inclusion 2).op).comp\\n              ((SimplexCategory.Truncated.inclusion 2\", \"doc\": \"Given a strict Segal space $ X $, a natural number $ n $, and a cone $ s $ over a diagram involving the truncated simplex category $ \\\\Delta_{\\\\leq 2} $, this function constructs an $ n $-simplex in $ X\"}\n  {\"name\": \"SSet.modelCategoryQuillen.J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property in the category of simplicial sets generated by all horn inclusions, defined as the supremum over all dimensions $n$ of the inclusions of the $i$-th horn $\\\\Lambda[n+1, i]$ into t\"}\n  {\"name\": \"SSet.Subcomplex.MulticoequalizerDiagram\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits\", \"type\": \"{X : SSet} → X.Subcomplex → {ι : Type u_1} → (ι → X.Subcomplex) → (ι → ι → X.Subcomplex) → Prop\", \"doc\": \"For a simplicial set $X$, a subcomplex $U$ of $X$, an index type $\\\\iota$, a family of subcomplexes $V : \\\\iota \\\\to X.\\\\mathrm{Subcomplex}$, and a family of relations $R : \\\\iota \\\\times \\\\iota \\\\to X.\\\\mathr\"}\n  {\"name\": \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ (n : ℕ) (i : Fin (n + 2)), SSet.modelCategoryQuillen.J (SSet.horn (n + 1) i).ι\", \"doc\": \"For any natural number $ n $ and index $ 0 \\\\leq i \\\\leq n+1 $, the inclusion morphism $ \\\\Lambda^{i}[n+1] \\\\to \\\\Delta[n+1] $ of the $ i $-th horn into the standard $ (n+1) $-simplex is a generating acycl\"}\n",
    "date": "2026-10-17",
    "verdict": "no exact match or one-line specialization; returned declarations concern generic simplicial-set boundary/horn/model-category infrastructure and do not state the requested theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "straighten|pinched|collage|coherent[Nn]erve",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: read signatures; generic enriched, simplicial, pushout or cone infrastructure does not state this coherent realization calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pushout of a simplicial category with a coherent right cone preserves the base full subcategory and computes straightening over a point",
+   "results": "OK 8 hits: CategoryTheory.Limits.pushoutObjIso, CategoryTheory.Limits.PushoutCocone.mk_inr, CategoryTheory.Limits.pushoutIsPushout, CategoryTheory.Limits.IsLimit.pushoutOfHasExactLimitsOfShape, CategoryTheory.Limits.PushoutCocone.mk, CategoryTheory.Limits.PushoutCocone.isColimitAux, CategoryTheory.Limits.Types.Pushout.cocone, CategoryTheory.Square.IsPushout.isColimit",
+   "date": "2026-10-17",
+   "verdict": "no match: read signatures; generic enriched, simplicial, pushout or cone infrastructure does not state this coherent realization calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, CategoryTheory.EnrichedCategory",
+   "results": "OK 1 hits: CategoryTheory.SimplicialObject.instEnrichedCategorySSet",
+   "date": "2026-10-17",
+   "verdict": "no match: read signatures; generic enriched, simplicial, pushout or cone infrastructure does not state this coherent realization calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent straightening of a constant simplicial set over a vertex is the representable presheaf times its pinched cosimplicial realization",
+   "results": "OK 8 hits: SSet.unitHomEquiv, SSet.const_app, SSet.const, SSet.rightUnitor_hom_app_apply, SSet.stdSimplex.isoNerve_hom_app_apply, SSet.ι₁, SSet.toTopSimplex, SSet.leftUnitor_hom_app_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: read signatures; generic enriched, simplicial, pushout or cone infrastructure does not state this coherent realization calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "rigidif|[Pp]inched|[Cc]ollage|[Ss]traightening|[Cc]oherent.{0,15}[Cc]one",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: read signatures; generic enriched, simplicial, pushout or cone infrastructure does not state this coherent realization calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free coherent cone simplicial correspondence has unchanged base category and mapping presheaf represented by the pinched Q realization over a constant vertex",
+   "results": "OK 8 hits: LightProfinite.Extend.functorOp_obj, Profinite.Extend.functorOp_obj, FundamentalGroupoidFunctor.coneDiscreteComp_obj_mapCone, LightProfinite.Extend.functor_obj, CategoryTheory.Presheaf.conesEquivSieveCompatibleFamily, LightProfinite.Extend.functorOp_map, FundamentalGroupoidFunctor.coneDiscreteComp, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivFunctor_map_hom",
+   "date": "2026-10-17",
+   "verdict": "no match: read signatures; generic enriched, simplicial, pushout or cone infrastructure does not state this coherent realization calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EnrichedCategory, CategoryTheory.Limits.pushout",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: read signatures; generic enriched, simplicial, pushout or cone infrastructure does not state this coherent realization calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial category formed by freely adjoining a terminal cone has hom presheaf equal to the tensor of a representable with a cosimplicial realization",
+   "results": "{\"t\": \"2026-10-17T04:09:30Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial category formed by freely adjoining a terminal cone has hom presheaf equal to the tensor of a representable with a cosimplicial realization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"CategoryTheory.SimplicialNerve\", \"AugmentedSimplexCategory.tensorObjOf\", \"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.cechNerveTerminalFrom\", \"SSet.Augmented.stdSimplex_obj_hom_app\", \"SSet.Augmented.stdSimplex\"], \"digest\": \"52d00149a3692718\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the actual returned declarations concern the simplicial enrichment, nerve, hom bifunctor, ordinal join or augmented simplices; none states the free cone collage and pinched-coend formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedCategory\" \"colimit\"",
+   "results": "{\"t\": \"2026-10-17T04:09:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\" \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  \\\"EnrichedCategory\\\"\\nbut this term has type\\n  String\\n\\nNote: Expected a function because this term is being applied to the argument\\n  \\\"colimit\\\"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable as a mathematical search: Loogle rejected this malformed query; rerun with the comma-separated constants below."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EnrichedCategory, CategoryTheory.Limits.HasColimits",
+   "results": "{\"t\": \"2026-10-17T04:09:44Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.EnrichedCategory, CategoryTheory.Limits.HasColimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits for the stated query."
+  },
+  {
+   "tool": "grep",
+   "query": "rigidification|pinched|collage|straightening",
+   "results": "{\"t\": \"2026-10-17T04:09:25Z\", \"tool\": \"grep\", \"query\": \"rigidification|pinched|collage|straightening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits for the stated query."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-right-fibration-presentation",
@@ -85,5 +242,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cone-boundary-projective-cells",
+  "worker": "stage1",
+  "summary": "Preserved the reviewed trimmed statement. Proved triangular collage structure by degreewise word relations, computed a constant simplex via the existing pinched-cube input, and computed arbitrary K by a compatible-family coend quotient. Empty K retains the common base and cone vertex. No new nodes; no model-category claims. Searched the project, all blueprint nodes and Mathlib with two phrasings.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: foundational simplicial presentation for the coherent derived coefficient mapping comparison; the retained collage and point-formula input of lem-coef-simplicial-right-fibration-presentation. Current main-20261015 location is sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md, same displayed mapping-limit paragraph.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-8dce10c0c",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-8dce10c0c (reviewer sub-agent of L); spot-checked: I read HTT §§2.2.1–2.2.2 at the cited place (printed pp. 73–76, fetched copy). The item's M_p and L_a(X) are the source's correspondence M = C[X^▷] ⊔_{C[X]} C^op and St_φX = Map_M(-,v) with A = C^op, so the variance is correct. J^n and Q^n match p. 76 and lem-coef-pinched-cube-latching word for word. The coend is Remark 2.2.2.1, C ⊣ N is Example 2.2.2.5, and naturality is Prop. 2.2.1.1. The statement is byte-identical to the live and side DAG copies, so nothing is weakened. Both cited statements were read in full: pinched-cube gives C[Δ^m], the colimit C[S], J^n, Q^n and Q^0 = Δ^0; interval-lifting gives cocompleteness of sCat. Both are in the same unit, so the route holds and no tool uses are needed. Step checks: (1) C is the left adjoint of N, so it preserves the pinch pushout. (2) Degreewise word construction for the cone: mixed simplices are v-degeneracies, there is no path back from v, and the old part is full. (3) The pushout with A gives full A, M(v,c) = ∅ and M(v,v) = pt, with no injectivity needed. (4) Pushout pasting gives A ⊔_x C[J^n], so M(c,v) = A(c,b) × Q^n. (5) The collage universal property via t(q) gives the coend relations, and the empty K keeps A and v. (6) The relations fix f, which gives the product. (7) Co-Yoneda with Q^0 = Δ^0, naturality under Fa = a'C[h], and the size clause. Steps 3, 5 and 6 are marked elementary because they cite nothing, which is the only form the tools accept; their arguments are fully written. Small cases I checked: K = Δ^1 gives Q^1 ≅ Δ^1; K = ∅; A a one-object monoid; A empty; a non-injective. No new nodes. The existing clauses in marked-cone-generator-calculations, right-straightening-fiber-comparison and unmarked-straightening-quillen are special cases inside larger, different nodes, not duplicates. No SGA is cited. No fixes made."
  }
 }
