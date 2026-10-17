@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleEssentiallySmall
 public import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.ShiftedHomPresheaf
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.ShiftHomPresheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.StageTransition
 
 /-!

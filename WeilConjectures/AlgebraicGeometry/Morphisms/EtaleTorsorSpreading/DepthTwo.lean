@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.GaloisCoverRank
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Normalization
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Purity
-public import WeilConjectures.Mathlib.AlgebraicGeometry.NormalizationBasicOpen
+public import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationBasicOpen
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Global
 
 /-!

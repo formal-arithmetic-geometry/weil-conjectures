@@ -1474,6 +1474,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FiniteApproxi
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.GeometricFiber
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.PointedCover
+public import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationBasicOpen
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 public import WeilConjectures.AlgebraicGeometry.Morphisms.PuritySmooth
@@ -3018,7 +3019,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Enoug
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapComp
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
@@ -3143,7 +3143,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
-public import WeilConjectures.Mathlib.AlgebraicGeometry.NormalizationBasicOpen
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OrderOfVanishing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
@@ -4191,7 +4190,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectIma
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Limit
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.LocalVanishing
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.ShiftedHomPresheaf
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.ShiftHomPresheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.StageCohomology
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.StageTransition
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
