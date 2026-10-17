@@ -1,6 +1,6 @@
 # Work queue
 
-47 items; claim with `tools/claim.py next <group> [--stage N]`.
+45 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (47)
+## Stage 3: modules to prove (45)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -41,7 +41,6 @@
 | `Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence` | 10 | 1 | proof |
 | `Sheaf.Paper.GeometricFieldProfiniteDenseSubsite` | 10 | 6 | proof |
 | `Sheaf.Paper.ContinuousLatticeIntersectionSplitData` | 11 | 1 | proof |
-| `Sheaf.Paper.ContinuousModuleEncodingSliceFreeness` | 11 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientSections` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientRestriction` | 12 | 1 | proof |
@@ -53,7 +52,6 @@
 | `Sheaf.RingTheory.LciConormalFreeRankCodimension` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalFunctionsAffinePushforwardSections` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentStalkMapExtends` | 19 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.CompatibleQuotientFormalComparisons` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IdealPowerEvaluationAffineEventuallyZero` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IdealPowerQuotientLocalLifting` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TorsionLocalModelRestriction` | 21 | 2 | proof |
