@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-zl-wme-deligne-estimate",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "General $Rf_!$ weight theorem",
@@ -23,7 +23,11 @@
     "cor-zl-rfshriek-sheaf",
     "lem-zl-sheaves-to-complexes"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-cor-dl-general-complex/thm-zl-wme-deligne-estimate.proof.md",
+    "place": "proof paragraph"
+   }
   }
  ],
  "proof_deps": [
@@ -32,12 +36,12 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-cor-dl-general-complex/thm-zl-wme-deligne-estimate.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-cor-dl-general-complex/thm-zl-wme-deligne-estimate.proof.md",
+  "place": "proof paragraph"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -646,5 +650,20 @@
   }
  },
  "chapter": "sec-deligne-laumon-general",
- "unit": "sk-cor-dl-general-complex"
+ "unit": "sk-cor-dl-general-complex",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "thm-zl-wme-deligne-estimate",
+  "worker": "stage1",
+  "summary": "Rebased the retained split onto the current main-20261015 blueprint after the landing was rejected for touching the unit file. The item keeps its single proof step: the sheaf-level direct-image weight bound supplies the hypothesis of the sheaf-to-complexes lemma, which yields the derived Rf_! bound. No new nodes are created and the unit file is untouched.",
+  "blueprint": "The single proof step realizes the proof paragraph of thm-zl-wme-deligne-estimate.proof.md."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-814e91ee1",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-814e91ee1 (reviewer sub-agent of L); spot-checked: I read the delivery in full and made no repairs. The item statement is the same in blueprint master and main-20261015, hypothesis by hypothesis (f separated finite type, X_0 and Y_0 separated finite type, coefficient category def-weil-pbc-qbar-category, D_{<=w} => D_{<=w}), and the proof paragraph is the same in both. 'Bounded' and 'iota-mixed' from the unit statement are built into def-weil-complex-weights (defined on D^b_{c,W}), so nothing is weakened. The only step: the statement of cor-zl-rfshriek-sheaf (constructible iota-mixed F of weights <= w gives R^i f_! F of weights <= w+i; its hypotheses on f and Y_0 match the item) is exactly the hypothesis of lem-zl-sheaves-to-complexes, whose conclusion is the item's. Only statements are used, the step is correctly not elementary, and proof_deps equals the union of uses. Route: both cited nodes are in sk-thm-dl-general-sheaf, which unit sk-cor-dl-general-complex cites in both the DAG record and main-20261015, so no tool_uses. A DFS over the dependency closure finds no cycle. The DAG scan found no duplicate: the D_{<=w} hits (relative-line-step, finite-pushforward, sheaves-to-complexes, morphism-open-closed-reduction) are special or conditional cases below the item. Small cases checked: A^1 with Qlb and Qlb[1], G_m, a closed immersion, empty X_0. There are no new nodes. This is not a target node, so there is no base-change morphism to check. The slopmaster2 Lean rests on sorry and cannot be attached. Maintainer note: unit sk-cor-dl-general-complex realized/realized_by are still empty. I did not add a unit fix, because the previous landing was rejected for touching the unit file. Suggested binding: statement [item], steps[0] [item, lem-zl-sheaves-to-complexes]."
+ }
 }
