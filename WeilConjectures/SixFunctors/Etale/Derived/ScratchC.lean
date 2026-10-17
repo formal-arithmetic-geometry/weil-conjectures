@@ -20,3 +20,11 @@ local instance (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
 set_option profiler true in
 example (X : Scheme.{u}) (Λ Λ' : Type (u + 1)) [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ') :
     Prop := (Sheaf.extendScalars X.smallEtaleTopology φ).PreservesKFlatQuasiIso
+
+example (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] : True := by
+  let i : MonoidalCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := inferInstance
+  trace_state
+  have : i = inferInstance := by unfold i; trace_state; rfl
+  trivial
+#synth MonoidalCategory (Sheaf (Scheme.smallEtaleTopology (Scheme.Spec (CommRingCat.of ℤ)))
+  (ModuleCat.{1} (ULift ℤ)))
