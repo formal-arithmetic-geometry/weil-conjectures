@@ -14,9 +14,97 @@
   "lem-coef-twisted-arrow-left-fibration",
   "lem-coef-space-transport-classification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each small quasicategory $C$, put $K_C=C^{\\mathrm{op}}\\times C$ and use the twisted-arrow simplicial set and map $\\lambda_C:\\operatorname{Tw}(C)\\to K_C$ of [lem-coef-twisted-arrow-left-fibration]. That node says that $\\lambda_C$ is a left fibration. By [lem-coef-twisted-arrow-graph-cofinality] applied to $f=\\mathrm{id}_C$, where $W_{\\mathrm{id}}=\\operatorname{Tw}(C)$ over $K_C$, this left fibration is classified by the coherent mapping-space functor $(x,y)\\mapsto\\operatorname{Map}_C(x,y)$, naturally in commutative squares of functors. Apply the space-valued transport classification of [lem-coef-space-transport-classification] and choose the representative of the classified functor to be this particular left fibration. The resulting functor is the normalized $H_C$, a Hom bifunctor in the sense of that node's mapping-bifunctor clause; its fiber over $(x,y)$ is identified with the right-pinched $\\operatorname{Map}_C(x,y)$ in Step 2. The same choice is made for every object of the strict diagram.",
+   "uses": [
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-coef-twisted-arrow-graph-cofinality",
+    "lem-coef-space-transport-classification",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/046J",
+    "place": "Corollary 8.3.5.8 (046J), with twisted-arrow classification refinement from Construction 8.3.6.1 (03N6)."
+   }
+  },
+  {
+   "text": "For a coherent functor $T:C\\to D$, postcomposition on the defining maps $N([n]^{\\mathrm{op}}\\star[n])\\to C$ gives a simplicial map $\\operatorname{Tw}(T):\\operatorname{Tw}(C)\\to\\operatorname{Tw}(D)$ over $K_T=T^{\\mathrm{op}}\\times T$, since restriction to the two blocks gives $\\lambda_D\\operatorname{Tw}(T)=K_T\\lambda_C$ degree by degree. Thus it is a map $\\operatorname{Tw}(C)\\to K_C\\times_{K_D}\\operatorname{Tw}(D)$ over $K_C$; by the pullback compatibility in [lem-coef-space-transport-classification] the target represents $H_DK_T$, and under the transport mapping-space equivalence this map represents a coherent transformation $t_T:H_C\\to H_DK_T$. On fibers: the second-block collapse $(C_{/y})^{\\mathrm{op}}\\to\\operatorname{Tw}(C)\\times_C\\{y\\}$ of [lem-coef-twisted-arrow-left-fibration], restricted over $x$, is an equivalence from the opposite of the right-pinched $\\operatorname{Map}_C(x,y)$ (maps $\\Delta^n\\star\\Delta^0\\to C$ constant at $x$ on $\\Delta^n$, last vertex $y$) to the fiber of $\\lambda_C$ over $(x,y)$. That node says these collapse maps commute with simplicial functors, so $\\operatorname{Tw}(T)$ restricted to fibers corresponds strictly to $T_{x,y}$, which applies $T$ to every right-pinched simplex; this agrees with the induced transformation of [lem-coef-infinity-hom-bifunctor-functoriality].",
+   "uses": [
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/046J",
+    "place": "Corollary 8.3.5.8 (046J) and Proposition 8.3.5.6 (03N3), with the explicit twisted-arrow representative."
+   }
+  },
+  {
+   "text": "The constructions are strictly normalized on identities and composites: from the degreewise definition, $\\operatorname{Tw}(1_C)=1_{\\operatorname{Tw}(C)}$ and $\\operatorname{Tw}(UT)=\\operatorname{Tw}(U)\\operatorname{Tw}(T)$, and the same equalities hold for the base maps $K_T$. The transport comparison is coherent in both functors and compatible with composition and pullback, so these strict maps supply the unit comparison, the comparison from $t_{UT}$ to the composite of $t_T$ and the restriction of $t_U$, and all unit, associativity, and higher simplices in the relevant functor infinity categories. When two composites in the strict diagram are equal as simplicial maps, their classifying maps are literally equal; the comparison is therefore the degenerate (constant) homotopy on that equality.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/046J",
+    "place": "Remark 8.3.5.9 (03PD), together with the composition-normalized transport classification."
+   }
+  },
+  {
+   "text": "Let $h:y\\to z$ be an edge of $C$ and $x$ a vertex. The second-variable action in [lem-coef-infinity-hom-bifunctor-functoriality] is postcomposition, and the induced $t_T$ preserves the canonical composition and identity classes. Restricting its coherent naturality to the identity point at $(x,h)$ gives the specified homotopy $h_T:T_{x,z}c_C(h)\\simeq c_D(Th)T_{x,y}$ in the right-pinched models. Because all data came from the classified map $\\operatorname{Tw}(T)$, this is the normalized naturality homotopy rather than an independently chosen representative.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/046J",
+    "place": "Corollary 8.3.5.8 (046J) and Remark 8.3.5.9 (03PD), naturality at an identity and an edge."
+   }
+  },
+  {
+   "text": "For composable $C\\xrightarrow{T}D\\xrightarrow{U}F$, let $\\Theta$ be the $2$-simplex of $\\operatorname{Fun}(K_C,\\mathcal S)$ from Step 3 with edges $t_T$, $K_T^*t_U$ and $t_{UT}$; its components at every vertex are the degenerate $2$-simplices on $(UT)_{x,y}=U_{Tx,Ty}T_{x,y}$, because $\\operatorname{Tw}(UT)=\\operatorname{Tw}(U)\\operatorname{Tw}(T)$ strictly and the fiber identifications of Step 2 commute with $T$, $U$ and $UT$. Restrict $\\Theta$ along the edge $(\\mathrm{id}_x,h)$ of $K_C$, $h:y\\to z$, to get a prism $\\Delta^1\\times\\Delta^2\\to\\mathcal S$. Its three square faces are the naturality squares of $t_T$, of $K_T^*t_U$ (that of $t_U$ at $(\\mathrm{id}_{Tx},Th)$ whiskered by $T_{x,y}$) and of $t_{UT}$ at this edge, whose homotopies are, by Step 4, $h_T$, $h_UT$ and $h_{UT}$; the actions on the horizontal edges are $c_C(h)$, $c_D(Th)$, $c_F(UTh)$ by [lem-coef-infinity-hom-bifunctor-functoriality]. Decomposing the prism into three $3$-simplices of the coherent nerve $\\mathcal S$ and composing their square homotopies in the Kan complex $\\operatorname{Fun}(H_C(x,y),H_F(UTx,UTz))$ gives a homotopy between $h_{UT}$ and the pasted path $U_{Tx,Tz}h_T$ followed by $h_UT_{x,y}$. The triangular faces are degenerate, so its endpoints are fixed: it is the required relative-endpoint homotopy.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-twisted-arrow-left-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/046J",
+    "place": "Composition-normalized refinement of Corollary 8.3.5.8 (046J), using Proposition 8.3.5.6 (03N3)."
+   }
+  },
+  {
+   "text": "Finally, for a small strict ordinary diagram of quasicategories, perform Steps 1--5 simultaneously on its object and arrow simplices. The strict equalities of composites make the corresponding twisted-arrow maps equal before classification, while the coherent functor simplicial set of [def-cbc-enhanced-diagrams-cones] retains the higher compatibility simplices. The composition- and pullback-compatible comparison of [lem-coef-space-transport-classification] then supplies all higher simplices coherently, so the choices satisfy the asserted simultaneous normalization for the whole diagram.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/046J",
+    "place": "Corollary 8.3.5.8 (046J), Remark 8.3.5.9 (03PD), and the strict-diagram refinement stated in this item."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-space-transport-classification",
+  "lem-coef-twisted-arrow-graph-cofinality",
+  "lem-coef-twisted-arrow-left-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+  "place": "Auxiliary Hom-functor composition compatibility supporting the finite-level pro-etale transport; explicit twisted-arrow classification and normalization refinement."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,10 +154,38 @@
    "results": "{\"t\": \"2026-10-17T18:19:04Z\", \"tool\": \"leanfinder\", \"query\": \"Twisted arrow left fibrations classify Hom bifunctors compatibly with identity and composition of functors of quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.Truncated.liftOfStrictSegal\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.BifibrantObject.homMk_homMk\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"CategoryTheory.Grothendieck.ιCompMap_hom_app_fiber\", \"HomotopicalAlgebra.instFibrationLeftDiscretePUnitOfOver\"], \"digest\": \"284c10d60eea982d\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits concern ordinary functors, component homotopy categories, or the definition of the simplicial nerve; none asserts coherent Hom functoriality under composition of quasicategory functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent Hom bifunctor transformations of quasicategories are compatible with composition of functors",
+   "results": "SSet.comp_app_assoc; SSet.Truncated.HomotopyCategory.homToNerveMk_comp_assoc; SSet.Truncated.Edge.CompStruct.homotopyCategory₂_fac; SSet.comp_app; SSet.Truncated.Edge.CompStruct.ofHomotopyCategory₂Fac; SSet.Truncated.comp_app_assoc; SSet.Truncated.comp_app; SSet.Truncated.HomotopyCategory.homToNerveMk_comp. These concern ordinary simplicial-set composition or truncated homotopy categories, not coherent Hom bifunctors.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp, CategoryTheory.nerve_map, SSet.comp_app_assoc",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "twisted.?arrow|hom.?bifunctor|coherent.?hom [AlgebraicTopology]",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The maps on mapping spaces induced by two composable simplicial functors form a coherent natural transformation with composition homotopy",
+   "results": "CategoryTheory.NatTrans.mapHomotopyCategory_comp; CategoryTheory.SimplicialObject.δ_naturality_assoc; SSet.Truncated.HomotopyCategory.homToNerveMk_comp; SSet.Truncated.HomotopyCategory.mkNatTrans; Homotopy.comp; SSet.Truncated.HomotopyCategory.homToNerveMk_comp_assoc; CategoryTheory.Functor.HomObj.map; CategoryTheory.SimplicialCategory.sHomComp. These are ordinary/homotopy-category composition results, not the quasicategorical statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-coherent-square-comparison-data",
@@ -94,5 +210,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-cbc-hom-functor-composition-coherence",
+  "worker": "stage1",
+  "summary": "Replaced the empty proof by six steps: classify each Hom bifunctor by the twisted-arrow left fibration, represent functoriality by the strict twisted-arrow map, derive identity/composition and constant comparisons from strict equalities, identify normalized postcomposition homotopies, prove the relative-endpoint composition homotopy, and assemble the data over a strict ordinary diagram. No new nodes or Mathlib leaves were needed.",
+  "blueprint": "Auxiliary Hom-functor composition compatibility supporting the finite-level pro-etale transport; the ancestor blueprint has no explicit categorical comparison proof.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-infinity-hom-bifunctor-functoriality",
+    "why": "Generic coherent Hom actions and their higher naturality supply postcomposition and preservation of composition; the compact-support unit has no such interface."
+   },
+   {
+    "node": "lem-coef-twisted-arrow-left-fibration",
+    "why": "Generic twisted-arrow left-fibration construction supplies the classifier and its strict functoriality; the compact-support unit has no such interface."
+   },
+   {
+    "node": "lem-coef-space-transport-classification",
+    "why": "Generic space-valued transport identifies classifier maps with coherent transformations and supplies composition/pullback coherence; the compact-support unit has no such interface."
+   },
+   {
+    "node": "lem-coef-twisted-arrow-graph-cofinality",
+    "why": "Generic statement (case f = identity) that the twisted-arrow left fibration is classified by the coherent mapping-space functor; no node of the compact-support unit states this classification."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-twisted-arrow-left-fibration",
+  "lem-coef-space-transport-classification",
+  "lem-coef-twisted-arrow-graph-cofinality"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NA-7b14b9eff",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-7b14b9eff (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged and true; I tested it on C empty, C=Δ^0, discrete C, [1] with identity functors, and equal composites. It creates no new nodes and duplicates no existing one. It is not a target, so no base-change morphism or coefficient category is involved. The only citer, lem-cbc-coherent-square-comparison-data, uses exactly its clauses. The Kerodon source is online only and correctly listed as WANTED, and the proof is marked as agent-written. No SGA is cited. I repaired three faults in fixes/dag/nodes/sec-smooth-purity/lem-cbc-hom-functor-composition-coherence.json. (1) C4, Step 1: the transport node's mapping-bifunctor clause does not say that Tw(C) classifies the two-variable Hom functor. Step 1 now cites lem-coef-twisted-arrow-graph-cofinality with f=id, where W_id=Tw(C) is classified by Map(x,y). That node is reviewed and acyclic here, and I added it to proof_deps and declared it in tool_uses. (2) C3/E5, Step 2: the fibers of Tw are not right-pinched simplices. Step 2 now identifies them through the second-block collapse (C_{/y})^op→Tw×_C{y}, whose source over x is (Map^R(x,y))^op, and uses that collapse commuting with simplicial functors to get the strict match with T_{x,y}. (3) Step 5 claimed U(Th∘Tσ)=U(Th)∘UTσ as an equality of chosen composites, which is false in general. It is replaced by restricting the composition 2-simplex Θ from Step 3 along (id_x,h): the resulting prism Δ^1×Δ^2→S has square faces h_T, h_U T and h_{UT} and degenerate triangles, which gives the relative-endpoint homotopy. The rest is accepted. Steps 3, 4 and 6 are correct; all steps are under 2000 characters, proof_deps equals the union of the uses, and four searches are recorded. Accepted tool_uses: lem-coef-infinity-hom-bifunctor-functoriality, lem-coef-twisted-arrow-left-fibration, lem-coef-space-transport-classification and lem-coef-twisted-arrow-graph-cofinality, all generic tools of unit sk-prop-sf-biduality-general.; 1 file(s) fixed by the reviewer"
  }
 }
