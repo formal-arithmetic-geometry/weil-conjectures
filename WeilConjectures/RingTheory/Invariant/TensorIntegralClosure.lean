@@ -69,6 +69,45 @@ lemma tensorAction_smul_algebraMap (g : Γ) (a : R') :
     g • algebraMap R' (R' ⊗[R] M) a = algebraMap R' (R' ⊗[R] M) (g • a) :=
   rfl
 
+variable (Γ) in
+/-- The action of `Γ` on the integral closure of `R'` in `R' ⊗[R] M`. -/
+@[instance_reducible]
+noncomputable def integralClosureAction :
+    MulSemiringAction Γ (integralClosure R' (R' ⊗[R] M)) :=
+  letI := tensorAction (R := R) (R' := R') (M := M) Γ
+  have hmem (g : Γ) (x : integralClosure R' (R' ⊗[R] M)) :
+      g • (x : R' ⊗[R] M) ∈ integralClosure R' (R' ⊗[R] M) :=
+    IsIntegral.map_of_comp_eq (MulSemiringAction.toRingHom Γ R' g)
+      (MulSemiringAction.toRingHom Γ (R' ⊗[R] M) g)
+      (RingHom.ext fun a ↦ (tensorAction_smul_algebraMap g a).symm) x.2
+  { smul g x := ⟨g • (x : R' ⊗[R] M), hmem g x⟩
+    one_smul x := Subtype.ext (one_smul Γ (x : R' ⊗[R] M))
+    mul_smul g h x := Subtype.ext (mul_smul g h (x : R' ⊗[R] M))
+    smul_zero g := Subtype.ext (smul_zero (A := R' ⊗[R] M) g)
+    smul_add g x y := Subtype.ext (smul_add (A := R' ⊗[R] M) g x y)
+    smul_one g := Subtype.ext (smul_one g : g • (1 : R' ⊗[R] M) = 1)
+    smul_mul g x y := Subtype.ext
+      (smul_mul' g (x : R' ⊗[R] M) (y : R' ⊗[R] M) :
+        g • ((x : R' ⊗[R] M) * y) = g • (x : R' ⊗[R] M) * g • (y : R' ⊗[R] M)) }
+
+lemma coe_integralClosureAction_smul (g : Γ) (x : integralClosure R' (R' ⊗[R] M)) :
+    letI := integralClosureAction (R := R) (R' := R') (M := M) Γ
+    letI := tensorAction (R := R) (R' := R') (M := M) Γ
+    ((g • x : integralClosure R' (R' ⊗[R] M)) : R' ⊗[R] M) = g • (x : R' ⊗[R] M) :=
+  rfl
+
+variable (Γ) in
+/-- The action of `g ∈ Γ` on the integral closure of `R'` in `R' ⊗[R] M`, as a function. -/
+noncomputable def integralClosureMap (g : Γ) (x : integralClosure R' (R' ⊗[R] M)) :
+    integralClosure R' (R' ⊗[R] M) :=
+  letI := integralClosureAction (R := R) (R' := R') (M := M) Γ
+  g • x
+
+lemma integralClosureMap_eq_smul (g : Γ) (x : integralClosure R' (R' ⊗[R] M)) :
+    letI := integralClosureAction (R := R) (R' := R') (M := M) Γ
+    integralClosureMap Γ g x = g • x :=
+  rfl
+
 variable [Fintype Γ] [Algebra.IsInvariant R R' Γ]
 
 /-- **Invariants of a base change.** If `R'^Γ = R` and `|Γ|` is invertible, the `Γ`-invariant
@@ -98,33 +137,6 @@ theorem mem_range_includeRight_of_forall_smul_eq (hΓ : IsUnit (Fintype.card Γ 
     rw [hsum, smul_smul, IsUnit.val_inv_mul, one_smul]
   obtain ⟨m, hm⟩ := N.smul_mem (↑hΓ.unit⁻¹ : R) (key x)
   exact ⟨m, hm.trans this.symm⟩
-
-variable (Γ) in
-/-- The action of `Γ` on the integral closure of `R'` in `R' ⊗[R] M`. -/
-@[instance_reducible]
-noncomputable def integralClosureAction :
-    MulSemiringAction Γ (integralClosure R' (R' ⊗[R] M)) :=
-  letI := tensorAction (R := R) (R' := R') (M := M) Γ
-  have hmem (g : Γ) (x : integralClosure R' (R' ⊗[R] M)) :
-      g • (x : R' ⊗[R] M) ∈ integralClosure R' (R' ⊗[R] M) :=
-    IsIntegral.map_of_comp_eq (MulSemiringAction.toRingHom Γ R' g)
-      (MulSemiringAction.toRingHom Γ (R' ⊗[R] M) g)
-      (RingHom.ext fun a ↦ (tensorAction_smul_algebraMap g a).symm) x.2
-  { smul g x := ⟨g • (x : R' ⊗[R] M), hmem g x⟩
-    one_smul x := Subtype.ext (one_smul Γ (x : R' ⊗[R] M))
-    mul_smul g h x := Subtype.ext (mul_smul g h (x : R' ⊗[R] M))
-    smul_zero g := Subtype.ext (smul_zero (A := R' ⊗[R] M) g)
-    smul_add g x y := Subtype.ext (smul_add (A := R' ⊗[R] M) g x y)
-    smul_one g := Subtype.ext (smul_one g : g • (1 : R' ⊗[R] M) = 1)
-    smul_mul g x y := Subtype.ext
-      (smul_mul' g (x : R' ⊗[R] M) (y : R' ⊗[R] M) :
-        g • ((x : R' ⊗[R] M) * y) = g • (x : R' ⊗[R] M) * g • (y : R' ⊗[R] M)) }
-
-lemma coe_integralClosureAction_smul (g : Γ) (x : integralClosure R' (R' ⊗[R] M)) :
-    letI := integralClosureAction (R := R) (R' := R') (M := M) Γ
-    letI := tensorAction (R := R) (R' := R') (M := M) Γ
-    ((g • x : integralClosure R' (R' ⊗[R] M)) : R' ⊗[R] M) = g • (x : R' ⊗[R] M) :=
-  rfl
 
 /-- **Invariants of the integral closure of a base change.** If `R'^Γ = R`, `|Γ|` is invertible
 and `M → R' ⊗[R] M` is injective, the `Γ`-invariant elements of the integral closure of `R'` in
