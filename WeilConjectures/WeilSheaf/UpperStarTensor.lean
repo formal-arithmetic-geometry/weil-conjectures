@@ -171,6 +171,126 @@ theorem upperStar_pairing_frobeniusStr (P Q R : ProEtaleWeilSheaf k₀ l Y)
 
 end UpperStar
 
+section Tensor
+
+variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+  (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
+
+set_option hygiene false in
+local notation "φ̄" => Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀)))
+
+set_option hygiene false in
+local notation "FrX" =>
+  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+
+attribute [local instance] Sheaf.symmetricCategory
+
+/-- **Pullbacks of compatible pairings are compatible**, in pushforward form. -/
+theorem upperStar_pairing_str (P Q R : ProEtaleWeilSheaf k₀ l Y)
+    (e : P.carrier.X ⊗ Q.carrier.X ⟶ R.carrier.X)
+    (h : (P.str.hom.hom ⊗ₘ Q.str.hom.hom) ≫ e =
+      μ ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+        _ _ ≫ ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map e ≫
+        R.str.hom.hom) :
+    (((ProEtaleWeilSheaf.upperStar k₀ l φ).obj P).str.hom.hom ⊗ₘ
+        ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj Q).str.hom.hom) ≫
+        (μ (φ̄)^*[WeilCoefficients.{u} l] P.carrier.X Q.carrier.X ≫ (φ̄)^*[_].map e) =
+      μ FrX _ _ ≫ (FrX).map (μ (φ̄)^*[WeilCoefficients.{u} l] P.carrier.X Q.carrier.X ≫
+          (φ̄)^*[_].map e) ≫ ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj R).str.hom.hom :=
+  (pairing_str_iff ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj P)
+    ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj Q) ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj R)
+    _).2 (upperStar_pairing_frobeniusStr φ P Q R e ((pairing_str_iff P Q R e).1 h))
+
+/-- The isomorphism `φ^*(P ⊗ M) ≅ φ^* P ⊗ φ^* M` is compatible with the Weil structures. -/
+lemma upperStarTensorLeftIso_str (M P : ProEtaleWeilSheaf k₀ l Y) :
+    (WeilSheaf.frobeniusPullback k₀ l X).map
+        ((adicUpperStarTensorLeftIso l φ̄ M.carrier).hom.app P.carrier) ≫
+        (ProEtaleWeilSheaf.tensor k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj M)
+          ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj P)).str.hom =
+      ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj
+        ((ProEtaleWeilSheaf.tensorFunctor k₀ l Y M).obj P)).str.hom ≫
+        (adicUpperStarTensorLeftIso l φ̄ M.carrier).hom.app P.carrier := by
+  set T := (adicUpperStarTensorLeftIso l φ̄ M.carrier).app P.carrier
+  have : PreservesColimitsOfShape WalkingParallelPair
+      (Mod.mapModComap (G := (φ̄)^*[WeilCoefficients.{u} l]) (adicUpperStarRingHom l φ̄)) :=
+    inferInstanceAs (PreservesColimitsOfShape WalkingParallelPair (φ̄)^*ᵃ[l])
+  have h₁ := Mod.map_tensorπ_comp_tensorLeftCompMapModComapIso_hom (adicUpperStarRingHom l φ̄)
+    (fun _ _ ↦ Adjunction.μ_comp_map_braiding (ProEtale.upperStarLowerStarAdjunction _ φ̄) _ _)
+    P.carrier M.carrier
+  have hT : Mod.tensorπ ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj P).carrier
+      ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj M).carrier ≫ T.inv.hom =
+      μ (φ̄)^*[WeilCoefficients.{u} l] P.carrier.X M.carrier.X ≫
+        (φ̄)^*[_].map (Mod.tensorπ P.carrier M.carrier) := by
+    rw [← cancel_mono T.hom.hom, Category.assoc, ← Mod.comp_hom', T.inv_hom_id]
+    erw [Mod.id_hom', Category.comp_id]
+    rw [Category.assoc]
+    erw [h₁]
+    simp only [IsIso.hom_inv_id_assoc]
+    rfl
+  rw [← cancel_epi ((WeilSheaf.frobeniusPullback k₀ l X).map T.inv), ← Functor.map_comp_assoc]
+  simp only [T, Iso.app_inv, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  refine frobeniusPullback_tensor_hom_ext (P := (ProEtaleWeilSheaf.upperStar k₀ l φ).obj P)
+    (M := (ProEtaleWeilSheaf.upperStar k₀ l φ).obj M) ?_
+  have hp := upperStar_pairing_str φ P M ((ProEtaleWeilSheaf.tensorFunctor k₀ l Y M).obj P)
+    (Mod.tensorπ P.carrier M.carrier) (tensorπ_str P M)
+  rw [Mod.comp_hom', Mod.comp_hom']
+  refine (tensorπ_str _ _).symm.trans ?_
+  erw [adicLowerStar_map_hom]
+  rw [← (FrX).map_comp_assoc]
+  erw [hT]
+  refine Eq.trans ?_ ((reassoc_of% hp) _)
+  refine congrArg (_ ≫ ·) (Eq.trans ?_ ((reassoc_of% hT) _))
+  erw [← Mod.comp_hom', T.inv_hom_id, Mod.id_hom', Category.comp_id]
+
+/-- The component of `tensorFunctorCompUpperStarIso`. -/
+noncomputable def tensorFunctorCompUpperStarIsoApp (M P : ProEtaleWeilSheaf k₀ l Y) :
+    (ProEtaleWeilSheaf.tensorFunctor k₀ l Y M ⋙ ProEtaleWeilSheaf.upperStar k₀ l φ).obj P ≅
+      (ProEtaleWeilSheaf.upperStar k₀ l φ ⋙ ProEtaleWeilSheaf.tensorFunctor k₀ l X
+          ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj M)).obj P :=
+  ObjectProperty.isoMk _
+    (Algebra.isoMk ((adicUpperStarTensorLeftIso l φ̄ M.carrier).app P.carrier)
+      (upperStarTensorLeftIso_str φ M P))
+
+lemma tensorFunctorCompUpperStarIsoApp_hom_hom_f (M P : ProEtaleWeilSheaf k₀ l Y) :
+    (tensorFunctorCompUpperStarIsoApp φ M P).hom.hom.f =
+      (adicUpperStarTensorLeftIso l φ̄ M.carrier).hom.app P.carrier :=
+  rfl
+
+lemma upperStar_map_hom_f {P Q : ProEtaleWeilSheaf k₀ l Y} (f : P ⟶ Q) :
+    ((ProEtaleWeilSheaf.upperStar k₀ l φ).map f).hom.f = (φ̄)^*ᵃ[l].map f.hom.f :=
+  rfl
+
+variable (k₀ l) in
+/-- **Pullback commutes with tensor products of pro-étale Weil sheaves**:
+`φ^*(P ⊗ M) ≅ φ^* P ⊗ φ^* M`, naturally in `P`. -/
+noncomputable def tensorFunctorCompUpperStarIso (M : ProEtaleWeilSheaf k₀ l Y) :
+    ProEtaleWeilSheaf.tensorFunctor k₀ l Y M ⋙ ProEtaleWeilSheaf.upperStar k₀ l φ ≅
+      ProEtaleWeilSheaf.upperStar k₀ l φ ⋙
+        ProEtaleWeilSheaf.tensorFunctor k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj M) :=
+  NatIso.ofComponents (fun P ↦ tensorFunctorCompUpperStarIsoApp φ M P)
+    fun f ↦ ObjectProperty.hom_ext _ (Algebra.Hom.ext (by
+      simp only [IsoAlgebra.comp_hom_f, Functor.comp_map, upperStar_map_hom_f,
+        tensorFunctorCompUpperStarIsoApp_hom_hom_f]
+      exact (adicUpperStarTensorLeftIso l φ̄ M.carrier).hom.naturality f.hom.f))
+
+variable (k₀ l) in
+/-- **The projection formula for the internal hom of pro-étale Weil sheaves**:
+`φ_*[φ^* A, N] ≅ [A, φ_* N]`, naturally in `N`. It is the conjugate, under the adjunctions
+`φ^* ⊣ φ_*` and `- ⊗ A ⊣ [A, -]`, of the isomorphism `φ^*(P ⊗ A) ≅ φ^* P ⊗ φ^* A`
+(`AlgebraicGeometry.ProEtaleWeilSheaf.tensorFunctorCompUpperStarIso`). -/
+noncomputable def lowerStarCompIhomFunctorIso (A : ProEtaleWeilSheaf k₀ l Y) :
+    ProEtaleWeilSheaf.lowerStar k₀ l φ ⋙ ProEtaleWeilSheaf.ihomFunctor k₀ l Y A ≅
+      ProEtaleWeilSheaf.ihomFunctor k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj A) ⋙
+        ProEtaleWeilSheaf.lowerStar k₀ l φ :=
+  conjugateIsoEquiv
+    ((tensorIhomAdjunction k₀ l Y A).comp (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l φ))
+    ((ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l φ).comp
+      (tensorIhomAdjunction k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj A)))
+    (tensorFunctorCompUpperStarIso k₀ l φ A).symm
+
+end Tensor
+
 end ProEtaleWeilSheaf
 
 end AlgebraicGeometry
