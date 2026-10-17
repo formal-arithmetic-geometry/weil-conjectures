@@ -16,9 +16,66 @@
   "def-weil-pbc-torsion-etale-sheaf",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $p:P\\to B$ is projective and $B$ is affine, the projective presentation supplies an affine morphism from $P$ to a relative projective space over $B$. The finite-set affine-neighbourhood lemma [lem-pd-projective-finite-affine-neighbourhood] therefore gives an affine open subscheme $V\\subset P$ containing the images of $x$ and $u$. Write $V=\\operatorname{Spec}R$.",
+   "uses": [
+    "def-pc-projective-morphism",
+    "lem-pd-projective-finite-affine-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tags 01KP, 01ZY and 00JS; finite-set affine-neighbourhood argument for separated/projective schemes"
+   }
+  },
+  {
+   "text": "The images of $x$ and $u$ lie in the open $V$, and so do all their generizations, hence the whole images of the canonical maps $P_{(x)}\\to P$ and $P_{(u)}\\to P$; so both factor through $V$, and $x,u$ are geometric points of $V$. The open immersion $V\\hookrightarrow P$ is etale, so ind-etale invariance [lem-trf-ind-etale-strict-local-invariance] identifies $V_{(x)}\\cong P_{(x)}$ and $V_{(u)}\\cong P_{(u)}$ over $P$. Write $P_{(x)}=\\operatorname{Spec}B_x$ and $P_{(u)}=\\operatorname{Spec}B_u$ with the $R$-algebra structures given by these factorizations through $V=\\operatorname{Spec}R$; they are ind-etale $R$-algebras by [lem-weil-pbc-strict-henselization-affine-chart-ind-etale]. By clause (1) of [lem-weil-pbc-strict-henselization-functoriality], each of $B_x,B_u$ is a strictly henselian local ring [def-weil-pbc-henselian-terminology]. A local ring has connected spectrum, so $\\operatorname{Spec}B_x$ (resp. $\\operatorname{Spec}B_u$) is its own unique connected component and that component is strictly henselian: this is the second, equivalent form of the etale-acyclicity hypothesis of [lem-trf-artin-tensor-etale-acyclic].",
+   "uses": [
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-pbc-henselian-terminology",
+    "lem-trf-artin-tensor-etale-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tags 03Q9, 03PS and 04HX; Hübner–Schmidt, The tame site of a scheme, Proposition 7.9 (étale case), printed p. 15"
+   }
+  },
+  {
+   "text": "The fibre product over $P$ equals the fibre product over $V$, since both strict-localization maps factor through the open immersion $V\\hookrightarrow P$. Thus $W\\cong\\operatorname{Spec}(B_x\\otimes_R B_u)$. Apply the Artin tensor-acyclicity node [lem-trf-artin-tensor-etale-acyclic] to obtain vanishing of $H^q(W_{\\mathrm{Et}},A)$ for every torsion abelian sheaf $A$ and every $q>0$. This remains valid when the tensor product is zero (so $W$ is empty) or has infinitely many components, because the cited theorem has no finiteness or component-count restriction.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-trf-artin-tensor-etale-acyclic",
+    "def-weil-pbc-torsion-etale-sheaf",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.mathi.uni-heidelberg.de/~schmidt/papers/algebraic_tame_site.pdf",
+    "place": "Theorem 7.10 and Proposition 7.9, pp. 14–15; Stacks Tag 03QO"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-projective-morphism",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "lem-pd-projective-finite-affine-neighbourhood",
+  "lem-trf-artin-tensor-etale-acyclic",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://www.mathi.uni-heidelberg.de/~schmidt/papers/algebraic_tame_site.pdf",
+  "place": "Hübner–Schmidt Proposition 7.14 (i), Definition 7.8, Proposition 7.9, Theorem 7.10; common-affine specialization following Orgogozo Proposition 2.3"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -78,7 +135,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-gabber-nearby-cycle-dimension-bound",
@@ -102,5 +159,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-projective-strict-local-intersection-acyclic",
+  "worker": "stage1",
+  "summary": "No sorry-free declaration states the item. I split its common-affine specialization: choose an affine neighbourhood of the two points in the projective scheme, identify the two strict localizations with ind-etale strictly henselian algebras over its coordinate ring, apply the Artin tensor-acyclicity theorem, and identify the resulting affine tensor product with the fibre product. The empty and infinitely disconnected cases are retained.",
+  "blueprint": "Realizes the parent blueprint proof's Artin-joins input for higher direct images of the strict-localization projection on the closed geometric fibre.",
+  "tool_uses": [
+   {
+    "node": "lem-pd-projective-finite-affine-neighbourhood",
+    "why": "The item route needs the generic geometric fact that a finite set of points in a projective scheme over an affine base lies in one affine open; the trace-formula unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pd-projective-finite-affine-neighbourhood"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-50e03f514",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-50e03f514 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-trf-artin-tensor-etale-acyclic, every cited node statement, the parent's step 3, unit sk-i-curve-zero (sk-thm-p1 is reached transitively) and the source. The source is Hübner–Schmidt, The tame site of a scheme, author PDF (not in literature/, already WANTED), pp. 14–16: Def 7.8 (étale acyclic = every étale covering splits), Prop 7.9 (iff every component strictly henselian, from Artin 71 Prop 3.2), Thm 7.10 (a tensor product of étale-acyclic ind-étale A-algebras is étale acyclic) and Prop 7.14(i), which is exactly the item's geometric form. The new node matches Thm 7.10 with n=2 plus Prop 7.9. It is the algebraic theorem the item specializes, not a restatement: the item's affine-neighbourhood, ind-étale and fibre-product reduction is real, and the source splits it the same way. Small cases checked: B1=B2=R, the zero tensor product, k[t]^sh ⊗ k(t)^sep, and k[t]^sh ⊗ k[t]^sh (residue fields separably closed by F. K. Schmidt). rg found no duplicate in dag/nodes. Fixes: (C4) step 2 derived the covering-splitting form of étale acyclicity from lem-weil-pbc-strictly-henselian-etale-acyclic, which only gives exactness of Γ. Step 2 now uses the local, hence connected, strictly henselian Spec B_x as the node's equivalent component form, states why both strict localizations factor through V, drops that citation and recomputes proof_deps. The item's source and proof_origin now cite HS Prop 7.14(i). The new node's source place now says vanishing comes from Γ being exact because every covering splits, with 03QO cited only for that argument. Accepted tool_use: lem-pd-projective-finite-affine-neighbourhood, a generic black box with no replacement on the route. Orgogozo Prop 2.3 was not checked; it is not needed. Not a target node, so no base-change or coefficient comparison applies.; 2 file(s) fixed by the reviewer"
  }
 }
