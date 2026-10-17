@@ -182,7 +182,7 @@ lemma tensorObjComparison_naturality {F F' G G' : Sheaf J (ModuleCat.{max u v} R
   · exact ((sheafificationAdjunction J _).counit.naturality g).symm
 
 /-- The inverse of the left unitor of sheaves, on underlying presheaves. -/
-lemma leftUnitor_inv_hom (F : Sheaf J (ModuleCat.{max u v} R)) :
+lemma leftUnitor_inv_hom_eq_tensorObjComparison (F : Sheaf J (ModuleCat.{max u v} R)) :
     (λ_ F).inv.hom = (λ_ F.obj).inv ≫ unitHom J ▷ F.obj ≫ tensorObjComparison J (𝟙_ _) F := by
   have hθ : ((sheafificationAdjunction J _).homEquiv _ _).symm (tensorObjComparison J (𝟙_ _) F) =
       Functor.OplaxMonoidal.δ (presheafToSheaf J (ModuleCat.{max u v} R)) _ _ ≫
@@ -231,7 +231,7 @@ lemma homEquiv_η_comp {F : Sheaf J (ModuleCat.{max u v} R)}
 include hW in
 /-- Morphisms out of the unit of sheaves of modules are determined by the image of the unit
 section over the terminal object. -/
-lemma unit_hom_ext {F : Sheaf J (ModuleCat.{max u v} R)}
+lemma hom_ext_of_unitSection {F : Sheaf J (ModuleCat.{max u v} R)}
     {x y : 𝟙_ (Sheaf J (ModuleCat.{max u v} R)) ⟶ F}
     (h : x.hom.app (op W) (unitSection J W) = y.hom.app (op W) (unitSection J W)) : x = y := by
   rw [← cancel_epi (Functor.OplaxMonoidal.η (presheafToSheaf J (ModuleCat.{max u v} R)))]
@@ -279,7 +279,7 @@ lemma leftUnitor_inv_comp_tensorHom_app {F G : Sheaf J (ModuleCat.{max u v} R)}
         (s.hom.app (op W) (unitSection J W) ⊗ₜ t.hom.app (op W) (unitSection J W)) := by
   have hl : (λ_ (𝟙_ (Sheaf J (ModuleCat.{max u v} R)))).inv.hom.app (op W) (unitSection J W) =
       (tensorObjComparison J _ _).app (op W) (unitSection J W ⊗ₜ[R] unitSection J W) := by
-    rw [leftUnitor_inv_hom]
+    rw [leftUnitor_inv_hom_eq_tensorObjComparison]
     rfl
   have hn := congr_arg (fun φ ↦ φ.app (op W) (unitSection J W ⊗ₜ[R] unitSection J W))
     (tensorObjComparison_naturality s t)
@@ -306,7 +306,7 @@ theorem projective_unit (hfd : J.HasFiniteDisjointRefinements W) :
       (Sheaf.isSeparated G) hfd (fun _ _ _ hf t ↦ hf.exists_map_eq E t)
       (f.hom.app (op W) (unitSection J W))
     obtain ⟨x, hx⟩ := exists_unitHom_eq hW E t
-    refine ⟨x, unit_hom_ext hW ?_⟩
+    refine ⟨x, hom_ext_of_unitSection hW ?_⟩
     rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ConcreteCategory.comp_apply, hx, ht]
 
 omit [HasSheafify J (ModuleCat.{max u v} R)] [J.WEqualsLocallyBijective (ModuleCat.{max u v} R)]
@@ -357,12 +357,12 @@ theorem unitTensorFinite (hfd : J.HasFiniteDisjointRefinements W) :
   clear hθ hiso
   induction p using TensorProduct.induction_on generalizing x with
   | zero =>
-    refine ⟨0, Fin.elim0, Fin.elim0, unit_hom_ext hW ?_⟩
+    refine ⟨0, Fin.elim0, Fin.elim0, hom_ext_of_unitSection hW ?_⟩
     rw [sum_hom_app_unitSection, ← hp, map_zero, Finset.univ_eq_empty, Finset.sum_empty]
   | tmul a b =>
     obtain ⟨s, hs⟩ := exists_unitHom_eq hW F a
     obtain ⟨t, ht⟩ := exists_unitHom_eq hW G b
-    refine ⟨1, fun _ ↦ s, fun _ ↦ t, unit_hom_ext hW ?_⟩
+    refine ⟨1, fun _ ↦ s, fun _ ↦ t, hom_ext_of_unitSection hW ?_⟩
     rw [Fin.sum_univ_one, leftUnitor_inv_comp_tensorHom_app hW, hs, ht, ← hp]
   | add p₁ p₂ h₁ h₂ =>
     obtain ⟨x₁, hx₁⟩ := exists_unitHom_eq hW (F ⊗ G) ((tensorObjComparison J F G).app (op W) p₁)
@@ -419,7 +419,7 @@ theorem unitFactorsThroughFiniteCoproducts (hfd : J.HasFiniteDisjointRefinements
   obtain ⟨μ, hμ⟩ := (Submodule.mem_iSup_finset_iff_exists_sum _ _).1 hS
   choose b hb using fun d ↦ (μ d).2
   choose y hy using fun k ↦ exists_unitHom_eq hW (X k) (b ⟨k⟩)
-  refine ⟨S.image Discrete.as, y, unit_hom_ext hW ?_⟩
+  refine ⟨S.image Discrete.as, y, hom_ext_of_unitSection hW ?_⟩
   rw [sum_hom_app_unitSection, ← hp, ← hμ, map_sum,
     Finset.sum_image (fun _ _ _ _ h ↦ Discrete.ext h)]
   refine Finset.sum_congr rfl fun d _ ↦ ?_

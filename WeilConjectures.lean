@@ -1583,6 +1583,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Proetale.Sheafification
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SequentialLimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SigmaCover
+public import WeilConjectures.AlgebraicGeometry.ProEtale.WContractibleDisjointCover
 public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 public import WeilConjectures.AlgebraicGeometry.ProductComparisonDistributivity
 public import WeilConjectures.AlgebraicGeometry.ProjPolynomialTwistChart
@@ -4580,6 +4581,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.U
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.WContractibleUnit
 public import WeilConjectures.SixFunctors.ProEtale.WeaklyContractibleCohomology
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal

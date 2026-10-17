@@ -21,6 +21,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Upp
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Detection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.DualizableLocal
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnitPerfect
+public import WeilConjectures.SixFunctors.ProEtale.WContractibleUnit
 
 /-!
 
@@ -443,8 +444,14 @@ omit [Finite Λ] in
 bounded complex of finite projective `Λ_X`-modules (`sk-def-perfect`, Stacks, Tag 0FPV). -/
 theorem isLocallyPerfect_of_isDualizable
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
-    (hK : IsDualizable K) : IsLocallyPerfect Λ K :=
-  sorry
+    (hK : IsDualizable K) : IsLocallyPerfect Λ K := by
+  obtain ⟨ι, R, hR, g, hg⟩ := Scheme.exists_isWContractibleRing_cover X
+  have (i : ι) : WeaklyEtale (g i) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hg (.mk i)
+  refine ⟨ι, _, g, hg, fun i ↦ ?_⟩
+  obtain ⟨_, hC, hT⟩ := projective_unit_and_finite_of_isWContractibleRing Λ (R i)
+  exact _root_.DerivedCategory.exists_iso_Q_obj_of_isDualizable hC hT
+    (isDualizable_leftDerivedUpperStar_obj (g i) hK)
 
 omit [Finite Λ] in
 /-- An object of `D(X_proét, Λ)` which is locally quasi-isomorphic to a bounded complex of
