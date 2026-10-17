@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.WeilSheaf.OpenImmersionRestriction
 public import WeilConjectures.WeilSheaf.UpperStarComp
 public import WeilConjectures.WeilSheaf.UpperStarDual
 public import WeilConjectures.WeilSheaf.UpperStarTensor
@@ -101,16 +102,48 @@ variable {X Z Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (i : X ⟶ Z) [IsOpenImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
   (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
 
-theorem nonempty_extensionByZeroCompIhomFunctorIso (B : ProEtaleWeilSheaf k₀ l Z)
+theorem nonempty_extensionByZeroCompIhomFunctorIso [QuasiCompact i] (B : ProEtaleWeilSheaf k₀ l Z)
     (hB : IsAdicLisseSheaf B.carrier) :
     Nonempty (ProEtaleWeilSheaf.extensionByZero k₀ l i ⋙ ProEtaleWeilSheaf.ihomFunctor k₀ l Z B ≅
       ProEtaleWeilSheaf.ihomFunctor k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l i).obj B) ⋙
-        ProEtaleWeilSheaf.extensionByZero k₀ l i) :=
+        ProEtaleWeilSheaf.extensionByZero k₀ l i) := by
+  set ib := Scheme.Hom.geometricFiberMap i (comp_over i (Spec (CommRingCat.of k₀)))
+  set ρ := ProEtaleWeilSheaf.extensionByZeroToLowerStar k₀ l i
+  set β := (lowerStarCompIhomFunctorIso k₀ l i B).inv
+  set Fg := IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z)
+  let m (F : ProEtaleWeilSheaf k₀ l X) := (ProEtaleWeilSheaf.ihomFunctor k₀ l Z B).map (ρ.app F)
+  let a (F : ProEtaleWeilSheaf k₀ l X) :=
+    ρ.app ((ProEtaleWeilSheaf.ihomFunctor k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l i).obj B)).obj
+      F) ≫ β.app F
+  have hρ (F : ProEtaleWeilSheaf k₀ l X) : Mono (ρ.app F) :=
+    Fg.mono_of_mono_map (inferInstanceAs (Mono ((adicOpenImmersionLowerShriekToLowerStar l ib).app
+      F.carrier)))
+  have hm (F : ProEtaleWeilSheaf k₀ l X) : Mono (m F) := by
+    have := hρ F
+    exact (ProEtaleWeilSheaf.ihomFunctor k₀ l Z B).map_mono _
+  have ha (F : ProEtaleWeilSheaf k₀ l X) : Mono (a F) := by
+    have := hρ ((ProEtaleWeilSheaf.ihomFunctor k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l i).obj
+      B)).obj F)
+    exact mono_comp _ _
+  -- the restriction along `i` of `m F` and of `a F` are isomorphisms
+  have hum (F : ProEtaleWeilSheaf k₀ l X) :
+      IsIso ((ProEtaleWeilSheaf.upperStar k₀ l i).map (m F)) := sorry
+  have hua (F : ProEtaleWeilSheaf k₀ l X) :
+      IsIso ((ProEtaleWeilSheaf.upperStar k₀ l i).map (a F)) := by
+    simp only [a, Functor.map_comp]
+    infer_instance
+  have hz (F : ProEtaleWeilSheaf k₀ l X) : a F ≫ cokernel.π (m F) = 0 := sorry
+  let κ (F : ProEtaleWeilSheaf k₀ l X) := Abelian.monoLift (m F) (a F) (hz F)
+  have hκ (F : ProEtaleWeilSheaf k₀ l X) : κ F ≫ m F = a F := Abelian.monoLift_comp _ _ _
+  have hiso (F : ProEtaleWeilSheaf k₀ l X) : IsIso (κ F) := sorry
+  refine ⟨(NatIso.ofComponents (fun F ↦ asIso (κ F)) fun {F F'} f ↦ ?_).symm⟩
+  rw [← cancel_mono (m F')]
+  simp only [asIso_hom, Category.assoc, hκ]
   sorry
 
 /-- The projection formula for `Rg_* ∘ i_!`, on the derived categories of pro-étale Weil
 sheaves. -/
-theorem nonempty_rightDerived_projection (A : ProEtaleWeilSheaf k₀ l Y)
+theorem nonempty_rightDerived_projection [QuasiCompact i] (A : ProEtaleWeilSheaf k₀ l Y)
     (hA : IsAdicLisseSheaf A.carrier) (B : ProEtaleWeilSheaf k₀ l X)
     (hB : IsAdicLisseSheaf B.carrier)
     (e : (ProEtaleWeilSheaf.upperStar k₀ l i).obj ((ProEtaleWeilSheaf.upperStar k₀ l g).obj A) ≅
@@ -201,6 +234,14 @@ theorem WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse {X Y : Scheme.{u
   let c := HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)
   have : LocallyOfFiniteType (c.Z ↘ Spec (CommRingCat.of k₀)) :=
     inferInstanceAs (LocallyOfFiniteType (c.g ≫ Y ↘ Spec (CommRingCat.of k₀)))
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (CommRingCat.of k₀))
+  have : CompactSpace Y :=
+    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (CommRingCat.of k₀))
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  have : IsNoetherian c.Z := ⟨⟩
+  have : QuasiCompact c.i := inferInstance
   set G' := (WeilSheaf.upperStar f).obj G
   have hG' : G'.IsLisse := ProEtale.IsAdicLisseSheaf.upperStar _ hG
   obtain ⟨e₁⟩ := WeilSheaf.nonempty_upperStar_dual_iso f G hG
