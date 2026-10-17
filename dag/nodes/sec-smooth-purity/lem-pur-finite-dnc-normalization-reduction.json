@@ -15,9 +15,115 @@
   "lem-coef-finite-exceptional",
   "def-pur-normal-bundle"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a common initial coefficient ring $R=\\mathbf Z/\\ell^n$. Indeed [def-weil-l-adic-coefficient-extension] gives $|\\ell|_E=|\\ell|_\\ell=\\ell^{-1}<1$ and $\\mathfrak m_E=(\\varpi_E)$, so $\\ell=\\varpi_E a$ for some $a\\in\\mathcal O_E$. Thus $\\ell^n=\\varpi_E^na^n$ annihilates $A$ and also its quotient $B$. These rings are finite by [lem-weil-valued-dvr-finite-quotients]; its hypotheses for $\\mathcal O_E$ follow from the DVR and finite residue field assertions of [lem-weil-l-adic-extension-integers-dvr]. Consequently the canonical unital maps factor as $R\\to A\\to B$. For $D=A,B$ write $T_D=(-)\\otimes_R^LD$, and retain $Q=(-)\\otimes_A^LB$. By [det-sp-scalar-extension-functor](1),(2),(4), these are functors on the stated bounded constructible finite-Tor domains, preserve isomorphisms, and have natural associators $QT_A\\simeq T_B$. No flatness of any coefficient map is asserted.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "det-sp-scalar-extension-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+    "place": "Proof (1): use a common finite initial ring; explicit annihilator calculation"
+   }
+  },
+  {
+   "text": "For either pair $H=(g,s)$ or $H=(\\pi_N,0_N)$ write $t_D^H:T_DC_R(H)\\xrightarrow{\\sim}C_D(H)$ for the comparison in [lem-pur-dnc-coefficient-transport], applied separately to $R\\to A$ and $R\\to B$. Its normal-bundle clause supplies the second pair as well as the first; the smooth closed-section hypotheses, separated finite-type schemes and finite rings are exactly those of this item and Step 1. We identify the exceptional comparison for $A\\to B$ in that notation with the one in our statement. First, $Rg^!$ of [def-weil-exceptional-inverse-image] (statement) and $g_D^!$ of [sk-prop-sf-rf-shriek-preservation] (tool) are right adjoints of the same $R\\bar g_*j_!$ on the same $\\Dctf$ objects, so Yoneda identifies them uniquely compatibly with counits; the two $C_D$ and all transposes below are identified along it. By [lem-coef-finite-exceptional], its counit equation, after composing with the inverse compact-support coefficient comparison, says that it is the adjunction transpose of $Q\\epsilon_A$ followed by that inverse. This is precisely the defining transpose in [det-sp-reduction-exceptional]. Both use the canonical compact-support tensor comparison: [lem-fix-compact-support-coefficient-change] specifies that map for the quotient rings, and [det-sp-reduction-direct-image] specifies the same proper-counit mate followed by the open-extension tensor comparison at a compactification. Fix the same compactification in these descriptions. Injectivity of the adjunction Hom bijection identifies the exceptional maps. Their pullbacks along the section, with the canonical pullback/tensor comparisons of [lem-fix-operation-reduction], therefore give exactly $q_H$ of the item.",
+   "uses": [
+    "lem-pur-dnc-coefficient-transport",
+    "lem-coef-finite-exceptional",
+    "det-sp-reduction-exceptional",
+    "lem-fix-compact-support-coefficient-change",
+    "det-sp-reduction-direct-image",
+    "lem-fix-operation-reduction",
+    "def-weil-exceptional-inverse-image",
+    "sk-prop-sf-rf-shriek-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 2: identify the specified coefficient maps by their counit transposes"
+   }
+  },
+  {
+   "text": "Apply only clause (2), the coefficient-composition assertion, of [det-sp-reduction-compatibilities] to $R\\to A\\to B$, first for $g$ and then for $\\pi_N$, at the coefficient unit. Their smoothness, relative dimension and separated finite-type hypotheses hold; the normal-bundle application is also one of the smooth maps in [lem-pur-dnc-coefficient-transport]. Pull this composition identity back along the respective section. For the coefficient maps $R\\to A$ and $R\\to B$, which are not finite reductions $A_{E,n}\\to A_{E,m}$, the pullback/tensor comparison is the canonical one of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] (the one used to define $t_D^H$ in the tool); on flat K-flat representatives it is the balancing isomorphism $s^{-1}P\\otimes_RD\\cong s^{-1}(P\\otimes_RD)$, so it commutes with the scalar associators termwise. For $A\\to B$, compatibility of pullback and tensor, including tensor associativity, is [lem-fix-operation-reduction]; the natural scalar associator is [det-sp-scalar-extension-functor](4). Under these identifications the identity becomes, for each $H$,\n$$t_B^H=q_H\\circ Q(t_A^H).$$\nThis is an equality of the specified maps, not a choice of an isomorphism between their sources and targets. All subsequent equations suppress these same natural associators. The purity clause (3) of the coefficient-composition node is not used.",
+   "uses": [
+    "det-sp-reduction-compatibilities",
+    "lem-pur-dnc-coefficient-transport",
+    "lem-fix-operation-reduction",
+    "det-sp-scalar-extension-functor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 2; coefficient cocycle from sk-lem-sp-reduction-compatibilities.proof.md (2)"
+   }
+  },
+  {
+   "text": "Apply the final DNC identity of [lem-pur-dnc-coefficient-transport] to each of $R\\to D$, $D=A,B$:\n$$\\delta_D\\circ t_D^{g,s}=t_D^N\\circ T_D(\\delta_R).$$\nHere $R$ is the purity coefficient ring at $E=\\mathbf Q_\\ell$, level $n$. The node's directly constructed comparison over $D$ is identity-normalized in the same etale coordinate charts, by its constant-family chart clause. It is therefore the $\\delta_D$ of this item by the uniqueness assertion of [thm-pur-dnc-invariance], applied at the eligible coefficient rings $A_{E,n}$ and $A_{E,m}$. This identifies actual normalized maps; no assertion that arbitrary isomorphisms between the section invariants agree is needed.",
+   "uses": [
+    "lem-pur-dnc-coefficient-transport",
+    "thm-pur-dnc-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+    "place": "Proof (2): coefficient-independent DNC normalization; thm-pur-dnc-invariance.proof.md uniqueness"
+   }
+  },
+  {
+   "text": "Put $G=(g,s)$ and $N=(\\pi_N,0_N)$. The two identities of Step 4 and the cocycle of Step 3 give\n$$\\begin{aligned}\n\\delta_Bq_GQ(t_A^G)&=\\delta_Bt_B^G\n=t_B^NT_B(\\delta_R)\\\\\n&=q_NQ(t_A^N)T_B(\\delta_R)\n=q_NQ\\bigl(t_A^NT_A(\\delta_R)\\bigr)\\\\\n&=q_NQ(\\delta_At_A^G)\n=q_NQ(\\delta_A)Q(t_A^G).\n\\end{aligned}$$\nNaturality of the scalar associator in [det-sp-scalar-extension-functor](4) justifies the middle equality. Its functoriality clause justifies applying $Q$ to the equality in Step 4. The map $Q(t_A^G)$ is invertible, so cancel it on the right. This proves exactly $q_NQ(\\delta_A)=\\delta_Bq_G$.",
+   "uses": [
+    "det-sp-scalar-extension-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 3: deduce the quotient DNC square by coefficient composition and cancellation"
+   }
+  },
+  {
+   "text": "For the additional local assertion fix any of the etale coordinate localizations of the pair in the statement, with base $S'$. Let $P=(p_d,0)$ over $S'$ and let $\\lambda_D^H$ denote its specified identification from the localized invariant of $H$ to $C_D(P)$, for $H=G,N$ and $D=R,A,B$. The etale-localization and standard-coordinate clauses of [lem-pur-dnc-coefficient-transport], for $R\\to D$, say precisely\n$$\\lambda_D^H t_D^H=t_D^P T_D(\\lambda_R^H).$$\nHere $t_D^H$ denotes its restriction to $S'$ when necessary. The pullback/tensor comparisons of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] (for $R\\to D$) and of [lem-fix-operation-reduction] (for $A\\to B$) identify that restriction with the localized scalar extension. Step 3 also applies to $P$, and restriction of its equations for $H$ gives $t_B^H=q_HQ(t_A^H)$. Thus\n$$\\begin{aligned}\n\\lambda_B^Hq_HQ(t_A^H)&=\\lambda_B^Ht_B^H\n=t_B^PT_B(\\lambda_R^H)\\\\\n&=q_PQ(t_A^P)T_B(\\lambda_R^H)\n=q_PQ(\\lambda_A^H)Q(t_A^H).\n\\end{aligned}$$\nCancel $Q(t_A^H)$ to obtain $\\lambda_B^Hq_H=q_PQ(\\lambda_A^H)$ for both $H=G,N$. The coefficient-composition identity for $P$ is [det-sp-reduction-compatibilities](2), and rebracketing and functoriality are [det-sp-scalar-extension-functor](4). This is exactly the claimed identification of both comparisons with $q_{p_d,0}$; it proves commutativity with the actual localization identifications. The argument uses only invertible comparisons and functorial identities, so includes $d=0$, $m=n$ and empty schemes.",
+   "uses": [
+    "lem-pur-dnc-coefficient-transport",
+    "lem-fix-operation-reduction",
+    "det-sp-reduction-compatibilities",
+    "det-sp-scalar-extension-functor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 3: normalized local gluing; common-initial-ring derivation of the two localization squares"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "det-sp-scalar-extension-functor",
+  "lem-pur-dnc-coefficient-transport",
+  "lem-coef-finite-exceptional",
+  "det-sp-reduction-exceptional",
+  "lem-fix-compact-support-coefficient-change",
+  "det-sp-reduction-direct-image",
+  "lem-fix-operation-reduction",
+  "def-weil-exceptional-inverse-image",
+  "sk-prop-sf-rf-shriek-preservation",
+  "det-sp-reduction-compatibilities",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "thm-pur-dnc-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 3; reuse lem-pur-dnc-coefficient-transport via a common initial ring and the coefficient cocycle; explicit cancellation argument"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +159,45 @@
    "results": "Hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.Scheme.Hom.normalizationDesc. These are normalization/smoothness or manifold coordinate formulas, not DNC coefficient comparisons.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "deformationToNormalCone|sectionInvariant|dncInvariance",
+   "results": "{\"t\": \"2026-10-17T11:24:31Z\", \"tool\": \"grep\", \"query\": \"deformationToNormalCone|sectionInvariant|dncInvariance\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficient reduction commutes with the normalized isomorphism from a smooth section dualizing invariant to its normal bundle invariant",
+   "results": "{\"t\": \"2026-10-17T11:24:31Z\", \"tool\": \"leansearch\", \"query\": \"Coefficient reduction commutes with the normalized isomorphism from a smooth section dualizing invariant to its normal bundle invariant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib.Tactic.Module.reduceCoefficientwise\", \"Polynomial.map_normalize\", \"Polynomial.leadingCoeff_normalize\", \"ContMDiffSection.coe_smul\", \"ContMDiffSection.coeFn_mk\", \"ContMDiffSection.coe_injective\", \"ContMDiffSection.coe_nsmul\", \"IsLocalFrameOn.coeff\"], \"digest\": \"6bb35f823182b034\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"deformation\"",
+   "results": "{\"t\": \"2026-10-17T11:24:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"deformation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of finite coefficient sheaves commutes with the normalized deformation to the normal cone comparison of a smooth section and its normal bundle",
+   "results": "{\"t\": \"2026-10-17T11:24:38Z\", \"tool\": \"leanfinder\", \"query\": \"Derived scalar extension of finite coefficient sheaves commutes with the normalized deformation to the normal cone comparison of a smooth section and its normal bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv_assoc\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\"], \"digest\": \"afab6b4f19c01b4c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficient rings preserves the identity normalized isomorphism between exceptional inverse image pulled back along a smooth section and its normal bundle section",
+   "results": "{\"t\": \"2026-10-17T11:25:17Z\", \"tool\": \"leanfinder\", \"query\": \"Change of coefficient rings preserves the identity normalized isomorphism between exceptional inverse image pulled back along a smooth section and its normal bundle section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\"], \"digest\": \"e1f110d5096b1e82\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-finite-reduction-of-purity",
@@ -68,10 +209,84 @@
  "blueprint": {
   "from": {
    "node": "thm-pur-finite-reduction-of-purity",
-   "place": "Proof Step 4: the reduction of the normalized deformation-to-the-normal-cone section-invariant comparison used to identify the diagonal orientation.",
+   "place": "Proof Step 3: finite reduction of the identity-normalized DNC comparison and its etale coordinate identifications.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-finite-dnc-normalization-reduction",
+  "worker": "stage1",
+  "summary": "Preserved the complete statement. Reused existing cyclic-initial-ring DNC transport and derived coefficient composition to prove the quotient square and both actual coordinate-localization squares, with explicit cancellation. No new nodes or attachments. Maintainer reader (2026-10-17): Step 2 now identifies the two exceptional adjoints explicitly; Steps 3 and 6 cite the generic pullback/tensor comparison for the non-reduction maps R->A, R->B.",
+  "blueprint": "Realizes thm-pur-finite-reduction-of-purity.proof.md Step 3, DNC gluing only, using the same normalized family construction as thm-pur-dnc-invariance.proof.md. The cyclic-initial-ring tool is sourced in sk-thm-smooth-purity-general-ring.proof.md (2).",
+  "tool_uses": [
+   {
+    "node": "lem-pur-dnc-coefficient-transport",
+    "why": "Existing DNC transport from a cyclic initial coefficient ring to arbitrary finite rings is used twice; it supplies the same lecture-notes DNC construction, not a replacement purity route."
+   },
+   {
+    "node": "det-sp-reduction-compatibilities",
+    "why": "Only clause (2), the coefficient-composition identity for the counit-normalized comparison, is used; the purity clause is not used."
+   },
+   {
+    "node": "det-sp-reduction-exceptional",
+    "why": "Identifies the smooth exceptional coefficient comparison by its counit transpose, without invoking the purity compatibility conclusion."
+   },
+   {
+    "node": "det-sp-scalar-extension-functor",
+    "why": "Derived scalar extension, finite-Tor preservation and the natural associator are generic coefficient tools."
+   },
+   {
+    "node": "lem-coef-finite-exceptional",
+    "why": "The specified quotient exceptional comparison and its counit equation fix the map used in the item."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic coherence of pullback/tensor with coefficient comparisons is needed for section pullbacks and localized equations."
+   },
+   {
+    "node": "lem-fix-compact-support-coefficient-change",
+    "why": "Identifies the canonical quotient compact-support tensor comparison used to define the mate."
+   },
+   {
+    "node": "det-sp-reduction-direct-image",
+    "why": "Pins the same compact-support comparison as the proper-counit mate followed by extension by zero."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "DVR and finite residue field properties verify the hypotheses for finiteness of the coefficient rings."
+   },
+   {
+    "node": "sk-prop-sf-rf-shriek-preservation",
+    "why": "Its restricted adjunction on D_ctf identifies the tool's exceptional functor with the statement's Rg^! by uniqueness of right adjoints; no node of the unit states this identification."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Canonical derived pullback/tensor comparison along R=Z/ell^n -> A_{E,r}, which is not a finite reduction covered by lem-fix-operation-reduction; it is the comparison the transport tool uses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-dnc-coefficient-transport",
+  "det-sp-reduction-compatibilities",
+  "det-sp-reduction-exceptional",
+  "det-sp-scalar-extension-functor",
+  "lem-coef-finite-exceptional",
+  "lem-fix-operation-reduction",
+  "lem-fix-compact-support-coefficient-change",
+  "det-sp-reduction-direct-image",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "sk-prop-sf-rf-shriek-preservation",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-738f905d2",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-738f905d2 (reviewer sub-agent of L); spot-checked: I read the whole split. The statement is unchanged against the side-project base and is not weakened; it matches the use in Step 4 of the parent thm-pur-finite-reduction-of-purity. The route is blueprint main-20261015 thm-pur-finite-reduction-of-purity.proof.md Step 3 (the local DNC normalizations reduce), with no SGA. Step 1 is correct: ell lies in (varpi_E), so Z/ell^n -> A_{E,n} -> A_{E,m}, including ramified E with n < e. Steps 5 and 6: I recomputed both cancellation chains and they are correct; the transport tool applies to the normal-bundle pair and the standard pair, and det-sp-reduction-compatibilities clause (2) holds for any ell-primary chain. Step 4: by the transport node's chart clause, delta_D is identity-normalized, and the uniqueness in thm-pur-dnc-invariance applies at A_{E,n} and A_{E,m}. Edge cases checked: m=n, d=0, empty S. No new nodes, no duplicate (only det-sp-field-extension-towers came up, and it is different), no cycle. Two repairable faults, fixed in the item file. (1) Step 2 silently identified two exceptional functors: Rg^! of def-weil-exceptional-inverse-image, used by the statement and thm-pur-dnc-invariance, and the right adjoint g^! of sk-prop-sf-existence/sk-prop-sf-rf-shriek-preservation, used by the transport tool and det-sp-reduction-exceptional. Both are right adjoints of the same R\\bar g_* j_! on the same D_ctf objects, so Yoneda identifies them compatibly with the counits; I added that sentence and its citations. (2) Steps 3 and 6 cited lem-fix-operation-reduction for the pullback/tensor coherence along Z/ell^n -> A_{E,r}, but that node covers only O_E -> A_{E,n}, finite reductions A_{E,n} -> A_{E,m} and common-stage extension. They now cite lem-weil-pbc-ringed-topoi-derived-tensor-pullback, the comparison the transport tool itself uses. proof_deps is recomputed; two tool_uses are added (sk-prop-sf-rf-shriek-preservation, lem-weil-pbc-ringed-topoi-derived-tensor-pullback); the nine declared tool uses are accepted as generic coefficient tools. Non-elementary step lengths are now at most 1687 characters.; 1 file(s) fixed by the reviewer"
  }
 }

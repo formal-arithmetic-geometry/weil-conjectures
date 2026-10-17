@@ -30,7 +30,7 @@
  ],
  "proof": [
   {
-   "text": "If $X$ is empty both sides are zero, and if $Y$ is empty then $X$ is empty. Hence assume both are nonempty and put $e_X=2\\dim X+1\\ge0$ and $e_Y=2\\dim Y+1\\ge0$. Cover $Y$ by affine opens and, over each affine open, use the affine ind-etale basis of [def-weil-pbc-ind-etale-basis, lem-weil-pbc-ind-etale-basis]. If the affine open is $Y_0=\\operatorname{Spec}B$ and $V=\\operatorname{Spec}C$ is a basis object, [def-weil-pbc-ind-etale-algebra] writes $C=\\varinjlim_i C_i$ with $C_i$ finitely presented etale $B$-algebras. Hence $V=\\varprojlim_i\\operatorname{Spec}C_i$ with affine transition maps; composing each etale map to $Y_0$ with the open immersion into $Y$ gives the presentations required by [det-pe-unbounded-classical-bounds]. We will prove that $H^mR\\Gamma(V,\\alpha_K)$ is invertible for every such object $V$ and every integer $m$; Step 8 proves directly that this suffices. Derived sections here mean evaluation of a K-injective representative, by the right-derived-functor clause of [sk-def-sfb-derived-categories], with existence of the required resolutions checked in Step 2.",
+   "text": "If $X$ is empty both sides are zero, and if $Y$ is empty then $X$ is empty. Hence assume both are nonempty and put $e_X=2\\dim X+1\\ge0$ and $e_Y=2\\dim Y+1\\ge0$. Cover $Y$ by affine opens and, over each affine open, use the affine ind-etale basis of [def-weil-pbc-ind-etale-basis, lem-weil-pbc-ind-etale-basis]. If the affine open is $Y_0=\\operatorname{Spec}B$ and $V=\\operatorname{Spec}C$ is a basis object, [def-weil-pbc-ind-etale-algebra] writes $C=\\varinjlim_i C_i$ with $C_i$ finitely presented etale $B$-algebras. Hence $V=\\varprojlim_i\\operatorname{Spec}C_i$ with affine transition maps; composing each etale map to $Y_0$ with the open immersion into $Y$ gives the presentations required by [det-pe-unbounded-classical-bounds]. We will prove that $H^mR\\Gamma(V,\\alpha_K)$ is invertible for every such object $V$ and every integer $m$; Steps 11–12 prove directly that this suffices. Derived sections here mean evaluation of a K-injective representative, by the right-derived-functor clause of [sk-def-sfb-derived-categories], with existence of the required resolutions checked in Step 2.",
    "uses": [
     "def-weil-pbc-ind-etale-basis",
     "def-weil-pbc-ind-etale-algebra",
@@ -63,33 +63,66 @@
    }
   },
   {
-   "text": "Since $\\ell^rA=0$ for some $r$, every $A$-module sheaf is torsion. Apply part (3) of [det-pe-unbounded-classical-bounds] to the underlying torsion abelian sheaf of each $A$-module sheaf $G$. Clause (3) of [det-pbc-conventions-module-cohomology] identifies its abelian higher direct images with the underlying sheaves of the module higher direct images. Since a module sheaf is zero when its underlying abelian sheaf is zero, $R^qg_{\\mathrm{et},*}G=0$ for $q>e_X$ in the module category. The functor is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact], and its source has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. Hence [lem-sf-finite-cd-derived-upper-bound], with $t=N-1$ and bound $e_X$, gives $\\mathcal H^q(Rg_{\\mathrm{et},*}E)=0$ for $q>N-1+e_X$. Exactness of $\\nu_Y^*$ [sk-thm-pe-direct-image-comparison] and [sk-thm-pe-classical-sheaves] imply that $L=\\nu_Y^*Rg_{\\mathrm{et},*}E$ has classical cohomology in these same degrees. Every classical $A$-module sheaf $H$ on $Y_{\\mathrm{proet}}$ is $\\nu_Y^*G$ for an $A$-module sheaf $G$ on $Y_{\\mathrm{et}}$ [sk-thm-pe-classical-sheaves], and $G$ is torsion. Part (1) of [det-pe-unbounded-classical-bounds], applied with $Y$ in place of $X$, gives $H^q(V_{\\mathrm{proet}},H|_V)=0$ for $q>e_Y$, abelian cohomology on the site $V_{\\mathrm{proet}}$. The comparison [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] on $V_{\\mathrm{proet}}$ with ring $A_V$ (identified with $A_Y|_V$ and with the localized site $Y_{\\mathrm{proet}}/V$ by [lem-weil-proetale-weakly-etale-localization]; enough injectives by Step 2) turns this into vanishing of the module derived evaluation of $H|_V$ at $V$. Finally, a K-injective resolution $H\\to I$ in $\\mathrm{Mod}(A_Y)$ restricts to a K-injective resolution $H|_V\\to I|_V$ [lem-pur-kinjective-restrict-localized] (restriction is exact, being computed sectionwise), and $I|_V(V)=I(V)$; so $H^qR\\Gamma(V,H)=0$ for $q>e_Y$ in the sense of [det-pe-unbounded-classical-truncation], i.e. $V$ satisfies its hypothesis with $e=e_Y$. Apply part (1) of [det-pe-unbounded-classical-truncation] with $b=N-1+e_X$ to obtain $H^qR\\Gamma(V,L)=0$ for $q>N+e_X+e_Y$. Our choice of $N$ makes both $m$ and $m+1$ satisfy this inequality.",
+   "text": "Since $\\ell^rA=0$, every $A$-module sheaf $G$ has torsion underlying abelian sheaf. Part (3) of [det-pe-unbounded-classical-bounds] kills its abelian higher direct images above $e_X$. Clause (3) of [det-pbc-conventions-module-cohomology] identifies these with the underlying sheaves of $R^qg_{\\mathrm{et},*}G$. A module sheaf whose underlying abelian sheaf is zero is zero. Therefore $R^qg_{\\mathrm{et},*}G=0$ for $q>e_X$.",
    "uses": [
     "det-pe-unbounded-classical-bounds",
+    "det-pbc-conventions-module-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-direct-image.proof.md",
+    "place": "Source paragraph: transfer the sheaf bound to module higher direct images"
+   }
+  },
+  {
+   "text": "The module direct image is additive and left exact [lem-weil-pbc-module-direct-image-left-exact], and its source has enough injectives [lem-weil-pbc-module-sheaves-enough-injectives]. Apply [lem-sf-finite-cd-derived-upper-bound] with the bound of Step 3 and $t=N-1$ to obtain $\\mathcal H^q(Rg_{\\mathrm{et},*}E)=0$ for $q>N-1+e_X$. Exact inverse image [sk-thm-pe-direct-image-comparison] commutes with the kernel/image quotient defining cohomology. Thus $L=\\nu_Y^*Rg_{\\mathrm{et},*}E$ has the same upper bound, and each cohomology sheaf is classical by [sk-thm-pe-classical-sheaves].",
+   "uses": [
     "lem-weil-pbc-module-direct-image-left-exact",
     "lem-weil-pbc-module-sheaves-enough-injectives",
     "lem-sf-finite-cd-derived-upper-bound",
     "sk-thm-pe-direct-image-comparison",
-    "sk-thm-pe-classical-sheaves",
-    "det-pe-unbounded-classical-truncation",
-    "det-pbc-conventions-module-cohomology",
-    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-kinjective-restrict-localized"
+    "sk-thm-pe-classical-sheaves"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-direct-image.proof.md",
-    "place": "Source tail; finite-cohomological-dimension derived bound (Stacks Tag 07K7) and fixed-degree truncation"
+    "place": "Source paragraph: finite-cd bound followed by exact classical pullback"
    }
   },
   {
-   "text": "For any $M\\in D(X_{\\mathrm{proet}},A)$ choose a K-injective representative $I$. The exact adjoint pair $g^*\\dashv g_*$ in [def-weil-pbc-proetale-operations] and [lem-weil-pbc-right-adjoint-preserves-kinjective] show that $g_*I$ is K-injective (Stacks Tag 08BJ). Thus both $R\\Gamma(V,Rg_*M)$ and $R\\Gamma(X\\times_YV,M)$ are computed by the same complex: the degreewise equality $(g_*I)(V)=I(X\\times_YV)$ is the displayed direct-image formula of [def-weil-pbc-proetale-operations]. The identifications are natural because the equality holds for every degree and every chain map. To read the latter as derived sections on $(X\\times_YV)_{\\mathrm{proet}}$, use the site and coefficient identifications in [lem-weil-proetale-weakly-etale-localization] and preservation of K-injectives under localization [lem-pur-kinjective-restrict-localized].",
+   "text": "For every classical $A$-module sheaf $H$ on $Y_{\\mathrm{proet}}$, [sk-thm-pe-classical-sheaves] supplies an etale $A$-module sheaf $G$ with $H\\cong\\nu_Y^*G$. The underlying abelian sheaf of $G$ is killed by $\\ell^r$. Part (1) of [det-pe-unbounded-classical-bounds], with $Y$ as source, gives $H^q(V_{\\mathrm{proet}},H|_V)=0$ for $q>e_Y$. By [lem-weil-proetale-weakly-etale-localization], this site and its ring $A_V$ are $Y_{\\mathrm{proet}}/V$ and $A_Y|_V$. The module/abelian evaluation comparison [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] on this localized ringed site converts the vanishing into vanishing of the module derived functors of evaluation at $\\mathrm{id}_V$, computed by injective resolutions; its enough-injectives hypothesis is Step 2. An injective resolution is a bounded-below complex of injectives, hence K-injective by part (2) of [lem-weil-pbc-dplus-injective-representative], so these groups are $H^qR\\Gamma(Y_{\\mathrm{proet}}/V,H|_V)$. Apply [lem-sfb-unbounded-sections-localization] to $H[0]$ to identify these groups with $H^qR\\Gamma(V,H)$. This proves the classical-sheaf evaluation bound required by the truncation lemma.",
+   "uses": [
+    "sk-thm-pe-classical-sheaves",
+    "det-pe-unbounded-classical-bounds",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-sfb-unbounded-sections-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-direct-image.proof.md",
+    "place": "Source paragraph: classical-sheaf bound on V and localized derived evaluation"
+   }
+  },
+  {
+   "text": "Apply part (1) of [det-pe-unbounded-classical-truncation] to $L$ from Step 4, using $b=N-1+e_X$ and the evaluation bound $e=e_Y$ of Step 5. It gives $H^qR\\Gamma(V,L)=0$ for $q>N+e_X+e_Y$. Since $N<m-e_X-e_Y-1$, both $m$ and $m+1$ satisfy this inequality. These are the source-tail vanishings.",
+   "uses": [
+    "det-pe-unbounded-classical-truncation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-direct-image.proof.md",
+    "place": "Source paragraph: apply the truncation estimate"
+   }
+  },
+  {
+   "text": "For any $M\\in D(X_{\\mathrm{proet}},A)$ choose a K-injective representative $I$. The exact adjoint pair $g^*\\dashv g_*$ in [def-weil-pbc-proetale-operations] and [lem-weil-pbc-right-adjoint-preserves-kinjective] show that $g_*I$ is K-injective (Stacks Tag 08BJ). Thus both $R\\Gamma(V,Rg_*M)$ and $R\\Gamma(X\\times_YV,M)$ are computed by the same complex: the degreewise equality $(g_*I)(V)=I(X\\times_YV)$ is the displayed direct-image formula of [def-weil-pbc-proetale-operations]. The identifications are natural because the equality holds for every degree and every chain map. To read the latter as derived sections on $(X\\times_YV)_{\\mathrm{proet}}$, use the site and coefficient identifications in [lem-weil-proetale-weakly-etale-localization] and the derived-section comparison [lem-sfb-unbounded-sections-localization].",
    "uses": [
     "def-weil-pbc-proetale-operations",
     "lem-weil-pbc-right-adjoint-preserves-kinjective",
     "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-kinjective-restrict-localized"
+    "lem-sfb-unbounded-sections-localization"
    ],
    "elementary": true,
    "source": {
@@ -98,7 +131,7 @@
    }
   },
   {
-   "text": "Put $M=\\nu_X^*E$. By exactness [sk-thm-pe-direct-image-comparison] and the classical-sheaf equivalence [sk-thm-pe-classical-sheaves], $M$ has classical cohomology vanishing above $N-1$. Put $W=X\\times_YV$, an object of $X_{\\mathrm{proet}}$; no affineness of $W$ is needed. Part (2) of [det-pe-unbounded-classical-bounds] gives the bound $e_X$ on $W$ for all classical sheaves, since all of their etale antecedents are killed by $\\ell^r$. By [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] on $W_{\\mathrm{proet}}$, using enough injectives from Step 2, and the identification of $W_{\\mathrm{proet}}$ and its coefficients with $X_{\\mathrm{proet}}/W$ and the restriction of K-injective resolutions exactly as in Steps 3 and 4 [lem-weil-proetale-weakly-etale-localization, lem-pur-kinjective-restrict-localized], this is the same bound for the derived module evaluation at $W$, so $W$ satisfies the hypothesis of [det-pe-unbounded-classical-truncation] with $e=e_X$. Part (1) of [det-pe-unbounded-classical-truncation], now with $b=N-1$, gives $H^qR\\Gamma(W,M)=0$ for $q>N+e_X$. By Step 4 these are the groups $H^qR\\Gamma(V,Rg_{\\mathrm{proet},*}\\nu_X^*E)$, so they vanish for $q=m,m+1$.",
+   "text": "Put $M=\\nu_X^*E$. By exactness [sk-thm-pe-direct-image-comparison] and the classical-sheaf equivalence [sk-thm-pe-classical-sheaves], $M$ has classical cohomology vanishing above $N-1$. Put $W=X\\times_YV$, an object of $X_{\\mathrm{proet}}$; no affineness of $W$ is needed. Part (2) of [det-pe-unbounded-classical-bounds] gives the bound $e_X$ on $W$ for all classical sheaves, since all of their etale antecedents are killed by $\\ell^r$. By [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] on $W_{\\mathrm{proet}}$, using enough injectives from Step 2, and the identification of $W_{\\mathrm{proet}}$ and its coefficients with $X_{\\mathrm{proet}}/W$ and the restriction of K-injective resolutions exactly as in Steps 5 and 7 [lem-weil-proetale-weakly-etale-localization, lem-sfb-unbounded-sections-localization], with bounded-below injective resolutions K-injective by part (2) of [lem-weil-pbc-dplus-injective-representative], this is the same bound for the derived module evaluation at $W$, so $W$ satisfies the hypothesis of [det-pe-unbounded-classical-truncation] with $e=e_X$. Part (1) of [det-pe-unbounded-classical-truncation], now with $b=N-1$, gives $H^qR\\Gamma(W,M)=0$ for $q>N+e_X$. By Step 7 these are the groups $H^qR\\Gamma(V,Rg_{\\mathrm{proet},*}\\nu_X^*E)$, so they vanish for $q=m,m+1$.",
    "uses": [
     "sk-thm-pe-direct-image-comparison",
     "sk-thm-pe-classical-sheaves",
@@ -106,7 +139,8 @@
     "det-pe-unbounded-classical-truncation",
     "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
     "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-kinjective-restrict-localized"
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-sfb-unbounded-sections-localization"
    ],
    "elementary": false,
    "source": {
@@ -130,7 +164,7 @@
    }
   },
   {
-   "text": "For $S(K)=\\nu_Y^*Rg_{\\mathrm{et},*}K$ and $T(K)=Rg_{\\mathrm{proet},*}\\nu_X^*K$, the exact segments supplied by [lem-sf-derived-homology-long-exact] are $H^mR\\Gamma(V,S(E))\\to H^mR\\Gamma(V,S(K))\\to H^mR\\Gamma(V,S(\\tau_{\\ge N}K))\\to H^{m+1}R\\Gamma(V,S(E))$, and the identical segment with $T$. Steps 3 and 5 kill both end groups, so each middle horizontal arrow is invertible. Naturality of the mate gives $T(t)\\alpha_K=\\alpha_{\\tau_{\\ge N}K}S(t)$. After applying $H^mR\\Gamma(V,-)$ this expresses the map for $K$ as the inverse target horizontal arrow, followed by the invertible map of Step 6 and the source horizontal arrow. Hence $H^mR\\Gamma(V,\\alpha_K)$ is invertible for every $m,V$.",
+   "text": "For $S(K)=\\nu_Y^*Rg_{\\mathrm{et},*}K$ and $T(K)=Rg_{\\mathrm{proet},*}\\nu_X^*K$, the exact segments supplied by [lem-sf-derived-homology-long-exact] are $H^mR\\Gamma(V,S(E))\\to H^mR\\Gamma(V,S(K))\\to H^mR\\Gamma(V,S(\\tau_{\\ge N}K))\\to H^{m+1}R\\Gamma(V,S(E))$, and the identical segment with $T$. Steps 6 and 8 kill both end groups, so each middle horizontal arrow is invertible. Naturality of the mate gives $T(t)\\alpha_K=\\alpha_{\\tau_{\\ge N}K}S(t)$. After applying $H^mR\\Gamma(V,-)$ this expresses the map for $K$ as the inverse target horizontal arrow, followed by the invertible map of Step 9 and the source horizontal arrow. Hence $H^mR\\Gamma(V,\\alpha_K)$ is invertible for every $m,V$.",
    "uses": [
     "lem-sf-derived-homology-long-exact"
    ],
@@ -141,13 +175,24 @@
    }
   },
   {
-   "text": "Finally choose K-injective representatives of the source and target of $\\alpha_K$ and represent its morphism by a chain map, using the Hom bijection in [lem-weil-pbc-kinjective-hom-derived]. By the right-derived-functor clause of [sk-def-sfb-derived-categories], with the Grothendieck hypotheses checked in Step 2, and preservation of K-injectives under restriction to a localized basis site [lem-pur-kinjective-restrict-localized], their evaluations compute the derived sections in Step 7. Regard either representative $I$ as a complex of module presheaves. Its degree-$m$ cohomology presheaf is $V\\mapsto\\ker d^m(V)/\\operatorname{im}d^{m-1}(V)=H^mR\\Gamma(V,QI)$. Exact module sheafification [lem-weil-pbc-ringed-site-module-sheafification-exact] identifies its sheafification with $\\ker d^m/\\operatorname{im}d^{m-1}=\\mathcal H^m(QI)$; this is precisely the calculation of Stacks Tag 0BKV and does not assert that evaluation of a cohomology sheaf equals cohomology of evaluation. The identification is functorial, because kernels, images and their quotient maps are functorial. The map $\\varphi$ of these presheaves is an isomorphism at every basis object $V$ of Step 1 by Step 7. Every object $W$ of $Y_{\\mathrm{proet}}$ is covered by the $W\\times_YY_0$ for affine opens $Y_0\\subset Y$, and each of these by basis objects of $Y_0$ [lem-weil-pbc-ind-etale-basis]. Hence the presheaf kernel and cokernel of $\\varphi$, computed sectionwise, vanish on basis objects, so every section of them restricts to zero on a covering; their sheafifications are therefore zero (a section of the sheafification is locally the image of a section of the presheaf, and that image is locally zero, hence zero in the separated sheaf). Since sheafification is exact [lem-weil-pbc-ringed-site-module-sheafification-exact], the kernel and cokernel of $\\varphi^\\#$ are zero, so $\\varphi^\\#$ is an isomorphism. Thus $\\mathcal H^m(\\alpha_K)$ is invertible for all $m$. Apply [lem-weil-pbc-unbounded-derived-iso-cohomology] to conclude that $\\alpha_K$ is invertible. This proves the unbounded detector needed in Step 1 within the proof, without introducing a separate elementary node.",
+   "text": "Finally choose K-injective representatives of the source and target of $\\alpha_K$ and represent its morphism by a chain map, using the Hom bijection in [lem-weil-pbc-kinjective-hom-derived]. By the right-derived-functor clause of [sk-def-sfb-derived-categories], with the Grothendieck hypotheses checked in Step 2, and preservation of K-injectives under restriction to a localized basis site [lem-pur-kinjective-restrict-localized], their evaluations compute the derived sections in Step 10. Regard either representative $I$ as a complex of module presheaves. Its degree-$m$ cohomology presheaf is $V\\mapsto\\ker d^m(V)/\\operatorname{im}d^{m-1}(V)=H^mR\\Gamma(V,QI)$. Exact module sheafification [lem-weil-pbc-ringed-site-module-sheafification-exact] identifies its sheafification with $\\ker d^m/\\operatorname{im}d^{m-1}=\\mathcal H^m(QI)$; this is precisely the calculation of Stacks Tag 0BKV and does not assert that evaluation of a cohomology sheaf equals cohomology of evaluation. The identification is functorial, because kernels, images and their quotient maps are functorial.",
    "uses": [
     "lem-weil-pbc-kinjective-hom-derived",
     "sk-def-sfb-derived-categories",
     "lem-pur-kinjective-restrict-localized",
-    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKV, lemma-sheafification-cohomology; explicit kernel/image proof and affine-basis sheaf detection"
+   }
+  },
+  {
+   "text": "Let $\\varphi$ be the map between the cohomology presheaves in Step 11 induced by the chosen chain map. The map $\\varphi$ is an isomorphism at every basis object $V$ of Step 1 by Step 10. Every object $W$ of $Y_{\\mathrm{proet}}$ is covered by the $W\\times_YY_0$ for affine opens $Y_0\\subset Y$, and each of these by basis objects of $Y_0$ [lem-weil-pbc-ind-etale-basis]. Hence the presheaf kernel and cokernel of $\\varphi$, computed sectionwise, vanish on basis objects, so every section of them restricts to zero on a covering; their sheafifications are therefore zero (a section of the sheafification is locally the image of a section of the presheaf, and that image is locally zero, hence zero in the separated sheaf). Since sheafification is exact [lem-weil-pbc-ringed-site-module-sheafification-exact], the kernel and cokernel of $\\varphi^\\#$ are zero, so $\\varphi^\\#$ is an isomorphism. Thus $\\mathcal H^m(\\alpha_K)$ is invertible for all $m$. Apply [lem-weil-pbc-unbounded-derived-iso-cohomology] to conclude that $\\alpha_K$ is invertible. This proves the detector promised in Step 1.",
+   "uses": [
     "lem-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
     "lem-weil-pbc-unbounded-derived-iso-cohomology"
    ],
    "elementary": true,
@@ -173,7 +218,9 @@
   "lem-sf-derived-homology-long-exact",
   "lem-sf-exact-functor-derived-triangulated",
   "lem-sf-finite-cd-derived-upper-bound",
+  "lem-sfb-unbounded-sections-localization",
   "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
   "lem-weil-pbc-ind-etale-basis",
   "lem-weil-pbc-kinjective-hom-derived",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
@@ -195,7 +242,7 @@
   "place": "Opening basis argument, source and target tail bounds, and conclusion; expanded using Stacks Tags 0BKV and 08BJ and existing DAG tools"
  },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-ctf-finite-comparison-localizing",
@@ -314,7 +361,7 @@
   "date": "2026-10-17",
   "item": "lem-sfb-unbounded-direct-image-comparison",
   "worker": "stage1",
-  "summary": "Rechecked the prior sandbox against current source and all cited statements. Removed the elementary proposed detector node and proved its sheafification argument inside the item. Added the existing exact-left-adjoint K-injective tool to justify the derived evaluation formula, corrected the unjustified affineness claim for the fiber product, checked enough-injectives and qcqs hypotheses, and used the canonical bounded-below transformation. Statement unchanged; no new nodes or Mathlib leaves. Returned landing repair: revalidated sk-def-sfb-derived-categories against the current DAG and refreshed its three citation certificates to the right-derived clause actually used. The revised flat-resolution and constructibility clauses are not used here; all other citation statements match the retained certificates. On this repair retry, made the use of the right-derived clause and its Grothendieck existence hypothesis explicit in Steps 1, 2 and 8; revalidated all 38 step/node citations against the current DAG. Fresh second reading: supplied the ind-etale affine presentation citation in Step 1, the enough-injectives consequence in Step 2, and the module/abelian cohomology comparisons in Steps 3 and 5. The item statement and eight-step route are unchanged. Maintainer review: made the localized-site identification explicit in Steps 3 and 5 (V and X×_YV), and replaced the basis-detection sentence in Step 8 by the explicit kernel/cokernel local-vanishing argument; no new dependencies, statement unchanged.",
+  "summary": "Rechecked the prior sandbox against current source and all cited statements. Removed the elementary proposed detector node and proved its sheafification argument inside the item. Added the existing exact-left-adjoint K-injective tool to justify the derived evaluation formula, corrected the unjustified affineness claim for the fiber product, checked enough-injectives and qcqs hypotheses, and used the canonical bounded-below transformation. Statement unchanged; no new nodes or Mathlib leaves. Returned landing repair: revalidated sk-def-sfb-derived-categories against the current DAG and refreshed its three citation certificates to the right-derived clause actually used. The revised flat-resolution and constructibility clauses are not used here; all other citation statements match the retained certificates. On this repair retry, made the use of the right-derived clause and its Grothendieck existence hypothesis explicit in Steps 1, 2 and 8; revalidated all 38 step/node citations against the current DAG. Fresh second reading: supplied the ind-etale affine presentation citation in Step 1, the enough-injectives consequence in Step 2, and the module/abelian cohomology comparisons in Steps 3 and 5. The item statement and eight-step route are unchanged. Maintainer review: made the localized-site identification explicit in Steps 3 and 5 (V and X×_YV), and replaced the basis-detection sentence in Step 8 by the explicit kernel/cokernel local-vanishing argument; no new dependencies, statement unchanged. Q130 returned-delivery repair: replaced the 2262-character Step 3 by four short steps citing existing bound, coefficient-forgetting, exact comparison, classicality and truncation statements, plus a new statement-only Tag 0D6F node for unbounded localized derived sections. Kept the original route and all other arguments; separated the final routine sheafification argument into two short steps. The statement and Lean record are unchanged.",
   "blueprint": "Realizes det-ctf-finite-comparison-localizing Step 4 via the current sk-prop-pe-unbounded-classical-direct-image proof: basis evaluation, both truncation tails, and canonical bounded-below comparison. The chapter and unit route are preserved.",
   "tool_uses": [
    {
@@ -372,12 +419,12 @@
   "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q54-9d6155e2a",
-  "group": "Q54",
+  "reviewer": "NT-cc-Q130-ef0af7021",
+  "group": "Q130",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-9d6155e2a (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 8 steps, the split_report and tool_uses, and the 5 recorded searches covering all three kinds. I also read the full statements of all 30 dependencies, the unit sk-prop-ctf-finite-comparison and its route, the main-20261015 source and proof of det-pe-unbounded-classical-direct-image, the parent det-ctf-finite-comparison-localizing Step 4, and Stacks 0BKV (sites-cohomology l.4349) and 08BJ (derived l.9857). Statement: unchanged and matches the blueprint hypothesis by hypothesis. It uses ordinary constant discrete A on both sites, not condensed or completed coefficients. The comparison map is the canonical mate in the source's direction. It is not a duplicate: prop-weil-pbc-comparison-direct-image and sk-thm-pe-direct-image-comparison are D^+ only, and lem-sfb-finite-classical-unbounded-comparison is the nu_X unit/counit. Using sk-thm-pe-direct-image-comparison where the blueprint cites prop-weil-pbc-comparison-direct-image is acceptable: it is in the route and states the canonical D^+ transformation. I checked the degree bounds: both tails vanish in degrees m and m+1 because N<m-e_X-e_Y-1. All finite-cd, enough-injectives and left-exactness hypotheses hold. Quasi-separatedness follows via locally Noetherian X and the relative diagonal. The nonaffine fibre product is handled through bounds part (2). The diagram chase in Step 7 is correct. Two small faults, both repaired in fixes/: (1) Steps 3 and 5 did not justify identifying bounds (1)/(2), which are abelian cohomology on V_proet and (X x_Y V)_proet, with module derived evaluation on Y_proet and X_proet. The fix adds the localization identification (lem-weil-proetale-weakly-etale-localization), restriction of K-injective resolutions (lem-pur-kinjective-restrict-localized) and the module/abelian comparison. (2) Step 8 applied the basis lemma's sheaf-isomorphism detection to a map of presheaves known to be an isomorphism only on the basis. The fix writes the argument out: the presheaf kernel and cokernel are locally zero, so their sheafifications vanish, and exact sheafification makes the map an isomorphism. proof_deps, the statement and the route are unchanged, and there are no new nodes. I accept all 10 declared tool_uses as generic black-box uses. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-ef0af7021 (reviewer sub-agent of L); spot-checked: I read the item, all 12 steps, the new node and the statement of every cited node. Sources checked: blueprint main-20261015 det-pe-unbounded-classical-direct-image (Source, Target and Conclusion paragraphs) and Stacks sites-cohomology.tex 08FI/0D6F/0BKV (l.4313-4366). The statement is byte-identical to the base, the mate direction matches the blueprint, and the coefficients are unchanged. Old Step 3 (2262 chars) is now Steps 3-6, each short and citing nodes; Steps 3, 7, 11 and 12 are correctly marked elementary. Degree checks: N<m-e_X-e_Y-1 kills m and m+1 in both tails (b=N-1+e_X with e=e_Y; b=N-1 with e=e_X). Hypotheses checked: enough injectives and left exactness for the finite-cd lemma, bounds part (1) with Y as source, part (2) for the non-affine X x_Y V, qcqs via locally Noetherian, and the canonical D^+ comparison being this mate. New node lem-sfb-unbounded-sections-localization: it states Stacks 0D6F (lemma-unbounded-cohomology-of-open) correctly for any ringed site and unbounded K. It holds on small cases (K=0, H[0], W final or empty, complexes unbounded both ways) and passes B1-B9. It is not a restatement of the item. It is not a duplicate of lem-pe-injective-complex-slice-section-model (D^+), lem-weil-pbc-cohomology-over-object-localization (abelian, q>=0), lem-weil-pbc-proetale-restriction-injectives (pro-etale only, preserves injectives but not K-injectives) or lem-pur-kinjective-restrict-localized (08FI only). I kept the node although it is short, because the human's return asked for hidden arguments to become nodes. One fault, fixed in fixes/: Steps 5 and 8 passed from injective-resolution derived functors (the module/abelian comparison) to the K-injective H^qRGamma(-,H[0]) of the truncation node without citing that a bounded-below complex of injectives is K-injective. I added the Mathlib leaf lem-weil-pbc-dplus-injective-representative (2) to both steps and to proof_deps. All 10 existing tool_uses are accepted unchanged; the new node is in the item's unit; no SGA source is cited.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

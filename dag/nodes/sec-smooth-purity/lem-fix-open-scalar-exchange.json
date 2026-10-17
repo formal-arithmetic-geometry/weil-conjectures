@@ -1,0 +1,80 @@
+{
+ "id": "lem-fix-open-scalar-exchange",
+ "kind": "statement",
+ "title": "Scalar extension respects the open base-change comparison",
+ "statement": "Let $A\\to B$ be a homomorphism of finite commutative rings. Let\n$$\\begin{array}{ccc}U'&\\xrightarrow h&U\\\\\nj'\\downarrow&&\\downarrow j\\\\\nX'&\\xrightarrow g&X\\end{array}$$\nbe an open-immersion square [def-cbc-open-immersion-square], with arbitrary $g$. Use ordinary unbounded constant-ring module derived categories on the small pro-etale sites [def-weil-pbc-proetale-modules] and their exact inverse images [def-weil-pbc-proetale-operations]. Put $S_T=-\\otimes^L_{A_T}B_T$ [lem-pur-derived-change-of-rings] and let $\\lambda_u:u_B^{-1}S_V\\xrightarrow{\\sim}S_Tu_A^{-1}$ be the canonical K-flat tensor inverse-image comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Use the exact open extensions $j_!^R\\dashv j_R^{-1}$, with unit $\\eta_j^R$, for $R=A,B$ [lem-cbc-proetale-extension-zero]. Let $\\beta_j:S_Xj_!^A\\xrightarrow{\\sim}j_!^BS_U$ be the isomorphism of left adjoints obtained from the identity between their right adjoints $j_A^{-1}\\operatorname{Res}_X=\\operatorname{Res}_Uj_B^{-1}$, with scalar restriction as in [lem-weil-pbc-ring-sheaf-change-adjunction]. Equivalently $\\beta_{j,K}^{-1}$ is the $j_!^B\\dashv j_B^{-1}$ adjunct of\n$$S_UK\\xrightarrow{S_U\\eta_{j,K}^A}S_Uj_A^{-1}j_!^AK\\xrightarrow{\\lambda_{j,j_!^AK}^{-1}}j_B^{-1}S_Xj_!^AK.$$\nDefine $\\beta_{j'}$ in the same way. Write $e_j^R:g_R^{-1}j_!^R\\xrightarrow{\\sim}j'_!{}^Rh_R^{-1}$ for the actual base-change map of [lem-cbc-proetale-extension-zero-base-change]. Its inverse is the $j'_!{}^R\\dashv j_R'{}^{-1}$ adjunct of $h_R^{-1}\\eta_j^R$, followed by the cartesian inverse-image identification. Then for every $K\\in D(U_{\\mathrm{proet}},A)$,\n$$j'_!{}^B(\\lambda_{h,K})\\circ e_{j,S_UK}^B\\circ g_B^{-1}(\\beta_{j,K})\n=\\beta_{j',h_A^{-1}K}\\circ S_{X'}(e_{j,K}^A)\\circ\\lambda_{g,j_!^AK}.$$\nThis is an equality in $D(X'_{\\mathrm{proet}},B)$ from $g_B^{-1}S_Xj_!^AK$ to $j'_!{}^BS_{U'}h_A^{-1}K$, natural in $K$. No flatness or finite projective-dimension hypothesis on $B$ over $A$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S6, label lemma-shriek-base-change, proof by comparison of right adjoints; the specified unit-normalized compatibility is the agent elaboration extracted from returned proof step 8."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-adjunction-mate",
+  "def-cbc-open-immersion-square",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-cbc-proetale-extension-zero",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-cbc-proetale-extension-zero-base-change"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for open immersions has a scalar extension comparison compatible with base change",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_apply, AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq, AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
+   "date": "2026-10-17",
+   "verdict": "no match: general mate composition is already cited through lem-weil-pbc-mate-pasting; the remaining hits are underived sheaf/module or algebraic constructions and do not state this normalized derived exchange equality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change for extension by zero commutes with derived tensor change of rings",
+   "results": "8 hits: IsBaseChange.finsuppPow, isBaseChange_tensorProduct_map, IsBaseChange.directSumPow, LinearEquiv.baseChange_tmul, TensorProduct.isBaseChange, LinearMap.rTensor_baseChange, IsBaseChange.of_equiv, IsBaseChange.finitePow",
+   "date": "2026-10-17",
+   "verdict": "no match: general mate composition is already cited through lem-weil-pbc-mate-pasting; the remaining hits are underived sheaf/module or algebraic constructions and do not state this normalized derived exchange equality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor extension of coefficient rings commutes with open immersion shriek base change on sheaf derived categories",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"map\"",
+   "results": "12 hits: LinearMap.extendScalarsOfSurjective, LinearMap.extendScalarsOfSurjective_apply, LinearMap.extendScalarsOfSurjectiveEquiv, ModuleCat.CoextendScalars.map', ModuleCat.ExtendScalars.map', ModuleCat.ExtendScalars.map'_id, ModuleCat.ExtendScalars.map'_comp, ModuleCat.ExtendScalars.map_tmul",
+   "date": "2026-10-17",
+   "verdict": "no match: general mate composition is already cited through lem-weil-pbc-mate-pasting; the remaining hits are underived sheaf/module or algebraic constructions and do not state this normalized derived exchange equality."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]xtension[Bb]y[Zz]ero|lowerShriek|[Ss]calar.*[Ee]xchange|[Ee]xchange.*[Ss]calar",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: general mate composition is already cited through lem-weil-pbc-mate-pasting; the remaining hits are underived sheaf/module or algebraic constructions and do not state this normalized derived exchange equality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-fix-compact-support-coefficient-change",
+  "date": "2026-10-17",
+  "group": "Q130"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "blueprint": {
+  "from": {
+   "node": "lem-fix-compact-support-coefficient-change",
+   "place": "Final proof paragraph: pullback compatibility, open-factor coefficient/base-change unit square (returned step 8, second paragraph).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

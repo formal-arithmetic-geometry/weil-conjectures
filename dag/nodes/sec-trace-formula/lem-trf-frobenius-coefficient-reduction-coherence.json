@@ -18,9 +18,98 @@
   "lem-trf-absolute-frobenius-site",
   "prop-trf-frobenius-factorization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=\\widehat{\\mathcal O}_{E,X}$ and $B_n=(A_n)_X$. Choose one K-flat representative $P\\to K$ with flat terms by [lem-pc-kflat-resolution]. By [lem-pur-kflat-change-of-rings], $P_n=P\\otimes_R B_n$ is K-flat with flat terms over $B_n$. The quotient tower of [def-weil-pbc-adic-coefficient-datum] is represented by these simultaneous reductions, with transitions $1\\otimes q_{b,a}$. Its normalization $\\eta_{b,a}:P_b\\otimes_{B_b}B_a\\to P_a$ sends $(x\\otimes u)\\otimes v$ to $x\\otimes q_{b,a}(u)v$. The cited tower definition gives its inverse, naturality and quotient cocycle. Thus this computes $K_b\\otimes^L_{B_b}B_a\\simeq K_a$, even though $A_a$ need not be flat over $A_b$. All integral tensors here are over the completed coefficient sheaf $R$, not the constant sheaf associated with $\\mathcal O_E$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), applied to coefficient change; quotient balancing as in clause (2) of the blueprint source"
+   }
+  },
+  {
+   "text": "For $r\\geq1$ set $h_r=g_\\gamma^r$ and $G_{r,n}=L(h_r)_n^*$. The morphism $h_r$ is an isomorphism by [def-trf-scheme-frobenius]. The site formula in [lem-weil-proetale-isomorphism-inverse-image] makes $h_r^{-1}$ relabelling of site objects, exact, with coefficient identifications commuting with every $q_{b,a}$. Its tensor comparison in [lem-pur-isomorphism-inverse-image-tensor-hom] therefore gives\n$$\\nu^r_{b,a}:(G_{r,b}P_b)\\otimes_{B_b}B_a\\xrightarrow{\\sim}G_{r,a}P_a.$$\nHere first move the tensor through $h_r^{-1}$ and then apply $h_r^{-1}\\eta_{b,a}$. The representatives $G_{r,b}P_b$ remain K-flat with flat terms by [lem-weil-pbc-ringed-pullback-preserves-kflat], so this computes the derived comparison. On the relabelled local tensor $(x\\otimes u)\\otimes v$ it is exactly $x\\otimes q_{b,a}(u)v$. For three indices both composites multiply the same coefficient factors; equal indices give the identity. These maps also intertwine $h_r^{-1}(1\\otimes q_{b,a})$ with the quotient transitions. Hence $N^r_\\bullet=(G_{r,n}P_n)_n$, restricted levelwise to $R$, is a strict normalized DVR tower of [def-coef-normalized-dvr-tower].",
+   "uses": [
+    "def-trf-scheme-frobenius",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback); sites-cohomology.tex Tag 0G7E; explicit normalization calculation for clause (2) of the blueprint source"
+   }
+  },
+  {
+   "text": "The integral construction of [def-pur-integral-derived-operations] identifies $Lh_r^*K$ with the specified functorial derived limit of $N^r_\\bullet$. Apply [lem-coef-normalized-dvr-effectivity] to the normalized tower of step 2: the canonical counit maps give coherent isomorphisms\n$$\\alpha_{r,n}:(Lh_r^*K)\\otimes_R^LB_n\\xrightarrow{\\sim}G_{r,n}K_n.$$\nThese are the canonical pullback-reduction comparisons specified in [lem-pur-integral-operations-preserve-constructible]: both are the scalar-extension adjoints of the projections of the defining limit, hence are the same maps by the adjunction bijection. Coherence of the cited effectivity counits gives, under tensor associativity,\n$$\\nu^r_{b,a}\\circ(\\alpha_{r,b}\\otimes^L_{B_b}B_a)=\\alpha_{r,a}.$$\nThus reduction from level $b$ to level $a$ gives exactly the comparison at $a$. In particular $r=1$ proves the first assertion. The functorial quotient tower, the natural tensor maps of step 2, and counit naturality make this a natural family in $K$; the functorial construction and canonical resolution comparisons of [lem-pur-integral-operations-well-defined] ensure that this argument does not require a functorial choice of the representative $P$.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause *(2)*: compatibility of pullback and the scheme–Galois comparison with coefficient quotients"
+   }
+  },
+  {
+   "text": "For $r,s\\geq1$ apply [lem-pod-integral-pullback-composition] on $X$ (where $\\ell$ is invertible, as $\\ell\\ne p$) with $h=h_r$ and $k=h_s$, so that $k\\circ h=g_\\gamma^{r+s}=h_{r+s}$. It gives the integral composition isomorphism $c^{\\mathcal O_E}_{h_r,h_s}(K):Lh_{r+s}^*K\\xrightarrow{\\sim}Lh_r^*Lh_s^*K$, natural in $K\\in D^b_c(X,\\mathcal O_E)$ and associative for three powers, whose reduction modulo $\\varpi^n$, transported along the reduction isomorphisms $\\rho_{h_{r+s},K,n}$ on the source and $L(h_r)_n^*(\\rho_{h_s,K,n})\\circ\\rho_{h_r,Lh_s^*K,n}$ on the target, is the finite composition isomorphism $d_{r,s,n}:G_{r+s,n}\\xrightarrow{\\sim}G_{r,n}G_{s,n}$ of [lem-weil-pbc-proetale-derived-pullback-composition] at $K_n$. These $\\rho$ are the canonical comparisons of [lem-pur-integral-operations-preserve-constructible] (1), which step 3 identified with $\\alpha_{r,n}$; step 3 used no finite-Tor hypothesis, so it applies equally to $Lh_s^*K$, which lies in $D^b_c(X,\\mathcal O_E)$ by that lemma. Hence the $\\alpha_{\\bullet,n}$ intertwine $c^{\\mathcal O_E}_{h_r,h_s}$ with $d_{r,s,n}$: this is the compatibility with composition along powers of $g_\\gamma$. It is also compatible with the quotient transitions: $d_{r,s,n}$ is the class of the termwise isomorphism on K-flat representatives with flat terms, and by the site formula of [lem-weil-proetale-isomorphism-inverse-image] it identifies a section over the object relabelled by $g_\\gamma^{r+s}$ with the same section after the successive relabellings by $g_\\gamma^r,g_\\gamma^s$. Thus, on the simultaneous representatives $P_n$ of step 1, both paths of the square formed by $d_{r,s,b}\\otimes B_a$, $d_{r,s,a}$ and the normalizations $\\nu$ of step 2 send the relabelled $(x\\otimes u)\\otimes v$ to the relabelled $x\\otimes q_{b,a}(u)v$. With step 3 this gives the asserted coherence of the comparisons with both reduction and composition.",
+   "uses": [
+    "lem-pod-integral-pullback-composition",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause *(2)*: compatibility of pullback and the scheme–Galois comparison with coefficient quotients"
+   }
+  },
+  {
+   "text": "Fix $b\\geq a\\geq1$ and $m\\geq1$. Apply [lem-trf-scheme-galois-coefficient-change] with its coefficient rings $A=A_b$, $B=A_a$, quotient homomorphism, and object $K_b$. These are finite commutative rings killed by powers of $\\ell$, hence by integers prime to $p$. The finite-type finite-field scheme and the specified canonical $\\kappa^{(m)}$ are exactly those of its statement. Its theorem applies on the ordinary unbounded constant-coefficient derived categories, without a flatness assumption on $A_a/A_b$. Write $T=-\\otimes^L_{B_b}B_a$ and $c_h:Lh_{A_a}^*T\\simeq T Lh_{A_b}^*$ for the comparison specified there. It gives\n$$T(\\kappa^{(m)}_{A_b,K_b})\\circ c_{\\Phi^m,K_b}=c_{g_\\gamma^m,K_b}\\circ\\kappa^{(m)}_{A_a,TK_b}.$$\nUse the natural normalization $\\eta_{b,a}:TK_b\\simeq K_a$ from step 1. For $h=\\Phi^m,g_\\gamma^m$ put $\\beta_h=Lh_{A_a}^*(\\eta_{b,a})\\circ c_{h,K_b}^{-1}$. Postcompose the displayed equality with $L(g_\\gamma^m)_{A_a}^*(\\eta_{b,a})$ and use naturality of $\\kappa^{(m)}$ at $\\eta_{b,a}$; this yields\n$$\\beta_{g_\\gamma^m}\\circ T(\\kappa^{(m)}_{A_b,K_b})=\\kappa^{(m)}_{A_a,K_a}\\circ\\beta_{\\Phi^m}.$$\nThis is the requested reduction square. The cited theorem concerns the comparison built from absolute-Frobenius trivialization and Frobenius factorization, so it identifies the actual $\\kappa^{(m)}$ in the item. Since $a,b,m$ were arbitrary, every derived coefficient quotient and every stated power are covered.",
+   "uses": [
+    "lem-trf-scheme-galois-coefficient-change",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause *(2)*: compatibility of pullback and the scheme–Galois comparison with coefficient quotients"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-pur-integral-derived-operations",
+  "def-trf-scheme-frobenius",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pc-kflat-resolution",
+  "lem-pod-integral-pullback-composition",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-pur-kflat-change-of-rings",
+  "lem-trf-scheme-galois-coefficient-change",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (2), expanded using the existing normalized-tower effectivity and scheme–Galois coefficient-change interfaces"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +145,52 @@
    "results": "8 hits; recorded top names: Perfection.coeff_frobenius, CategoryTheory.Limits.pullbackComparison, PreTilt.coeff_frobenius, PreTilt.coeff_frobeniusEquiv_symm, Perfection.coeff_iterate_frobeniusEquiv_symm, Perfection.coeff_iterate_frobenius', Perfection.coeff_frobeniusEquiv_symm, CategoryTheory.Limits.instIsIsoPullbackComparison.  None states coherence of the specified Frobenius site comparison with derived coefficient quotients. Scheme module pullback composition is for structure sheaves; generic naturality assumes the very transformation across coefficient categories that this lemma must construct.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*reduc|reduc.*pullback",
+   "results": "18 hits; top results: Mathlib/CategoryTheory/Adhesive/Basic.lean, Mathlib/CategoryTheory/Adhesive/Basic.lean, Mathlib/CategoryTheory/Adhesive/Basic.lean, Mathlib/Topology/FiberBundle/Constructions.lean, Mathlib/Topology/FiberBundle/Constructions.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean. Scheme fiber-product, geometric reducedness, topology, or underived module-sheaf results; no declaration states this derived coefficient and Frobenius coherence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived inverse image commutes with change of coefficients and tensor associativity",
+   "results": "8 hits; top results: LinearMap.baseChange_baseChange, TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul, SheafOfModules.ιFree_mapFree_inv_assoc, TensorProduct.directLimitLeft_symm_of_tmul, TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange, TensorProduct.AlgebraTensorModule.distribBaseChange, Algebra.TensorProduct.tensorTensorTensorComm_symm_tmul, Algebra.IsPushout.cancelBaseChange_symm_tmul. Ordinary module tensor base-change formulas and free-sheaf maps; these do not state the derived pro-etale Frobenius or completed-coefficient comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits; top results: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map. Naturality for an already supplied transformation does not construct or prove scalar compatibility of the specified Frobenius transformation.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius site pullback comparison is natural under derived extension of finite coefficient rings",
+   "results": "8 hits; top results: SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, PresheafOfModules.pullbackComp, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso. Read SheafOfModules.pullbackComp in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167–173: underived module-sheaf pullback composition, without the Frobenius transformation, derived reductions or integral limit.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "completed pullback along a scheme automorphism commutes coherently with successive derived reductions modulo powers of a uniformizer",
+   "results": "8 hits; top results: AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd, AlgebraicGeometry.pullbackSpecIso_inv_fst'_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.pullbackSpecIso_inv_snd_assoc, AlgebraicGeometry.pullbackSpecIso_inv_fst_assoc, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc. Scheme fiber-product, geometric reducedness, topology, or underived module-sheaf results; no declaration states this derived coefficient and Frobenius coherence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def pullbackComp",
+   "results": "1 hits; top results: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean. Scheme fiber-product, geometric reducedness, topology, or underived module-sheaf results; no declaration states this derived coefficient and Frobenius coherence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-trf-rational-frobenius-integral-model",
@@ -76,5 +207,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-frobenius-coefficient-reduction-coherence",
+  "worker": "stage1",
+  "summary": "Q93 kept the statement, expanded clause (2) of the integral-model source into five steps, reused existing normalized DVR effectivity and canonical scheme–Galois coefficient-change nodes, and checked all citations against their statements. The proof explicitly computes quotient normalizations and the composition square on simultaneous K-flat representatives. No new nodes or Mathlib leaves; no Lean writing or builds.",
+  "blueprint": "prop-trf-rational-frobenius-integral-model.proof.md clause (2): first pullback-reduction/transition sentence is realized by steps 1–4; the sentence on compatibility of the canonical kappa with monoidal reductions is realized by step 5. The later iterate induction of the ancestor is not part of this item.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Chooses a simultaneous flat-term K-flat representative over the completed coefficient sheaf. No statement of sk-d-weil supplies this general tool."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Justifies derived reductions on that representative without quotient flatness. No statement of sk-d-weil supplies this general tool."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Provides the explicit site relabelling and compatible constant-ring maps for powers of geometric Frobenius. No statement of sk-d-weil supplies this general tool."
+   },
+   {
+    "node": "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "why": "Provides the section-normalized tensor comparison for a scheme isomorphism. No statement of sk-d-weil supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Ensures finite pullbacks compute derived quotient tensors on the same complexes. No statement of sk-d-weil supplies this general tool."
+   },
+   {
+    "node": "lem-coef-normalized-dvr-effectivity",
+    "why": "Supplies canonical coherent reduction counits for the already constructed strict normalized tower. No statement of sk-d-weil supplies this general tool."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Identifies the canonical comparison and its constructible domain used in the statement. No statement of sk-d-weil supplies this general tool."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Allows the representative computations to descend naturally and independently of resolutions. No statement of sk-d-weil supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Specifies the actual termwise-normalized finite pullback-composition maps. No statement of sk-d-weil supplies this general tool."
+   },
+   {
+    "node": "lem-trf-scheme-galois-coefficient-change",
+    "why": "Supplies scalar compatibility of the specified scheme–Galois transformation for arbitrary finite ring maps; the item specializes it to quotient coefficients and identifies their normalized tower. No statement of sk-d-weil supplies this general tool."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Supplies the existing integral pullback-composition isomorphism with finite-level reductions; step 4 specializes it to powers of geometric Frobenius instead of constructing a second integral comparison. No statement of sk-d-weil supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-scheme-galois-coefficient-change",
+  "lem-pod-integral-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-c752d6446",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-c752d6446 (reviewer sub-agent of L); spot-checked: I read the whole item, the blueprint source (main-20261015 prop-trf-rational-frobenius-integral-model clause (2)), the parent DAG steps that cite the item, every stmt_dep and proof_dep statement, the proofs of lem-coef-normalized-dvr-effectivity, lem-pur-integral-operations-preserve-constructible and lem-trf-scheme-galois-coefficient-change, and Stacks 06YS, 0G7E and 03EL. The statement is unchanged; its hypotheses and coefficient categories are correct (completed sheaf at the integral level, constant (A_n)_X at finite levels; the adic datum with O_E, I=(varpi) is admissible). Steps 1-3 and 5 are correct. Step 1 uses the normalization formula exactly as stated in def-weil-pbc-adic-coefficient-datum. Step 2 gives a strict normalized DVR tower through the relabelling site formula. Step 3 gets coherence of alpha from the effectivity counits, whose last proof step proves exactly nu∘(alpha_b⊗B_a)=alpha_a. Step 5 specializes lem-trf-scheme-galois-coefficient-change to A_b->A_a with no flatness assumption, and I checked the conjugation by eta through naturality of kappa. One fault, repaired: step 4 built its own integral pullback-composition comparison and identified towers only levelwise, with no lift to D(Tow); the Roos-cone projections commute with transitions only up to homotopy (E5, C5). It now cites the existing lem-pod-integral-pullback-composition, specialized to h=g^r, k=g^s, which states exactly the integral composition isomorphism whose reductions along rho=alpha are the finite comparisons. It keeps the strict section square with nu. That node is added to proof_deps and declared as a tool use, and there is no cycle. All ten declared tool uses are accepted as generic. Residual note for the parent, not this item: identifying beta_{g^m} with nu rests on the termwise form of theta_h in the proof of det-prop-scalar-six-pullback. Small cases checked: K=0, X empty, b=a, m=1, r=s=1, the non-flat A_2->A_1, ramified E. There are no new nodes.; 1 file(s) fixed by the reviewer"
  }
 }
