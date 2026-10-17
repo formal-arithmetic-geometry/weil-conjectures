@@ -164,6 +164,8 @@ theorem localizedPullback_perfectModel_iso {T X : Scheme.{u}} (g : T ⟶ X)
     Functor.preservesZeroMorphisms_of_isLeftAdjoint B
   have : B.PreservesZeroMorphisms :=
     Functor.preservesZeroMorphisms_of_isLeftAdjoint B
+  have : B.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_isLeftAdjoint B
   have : B.Additive := Functor.additive_of_preserves_binary_products _
   have : C.Additive := Functor.additive_of_preserves_binary_products _
   have : (Scheme.Modules.pullback f).Additive := Scheme.Modules.instAdditivePullback f
