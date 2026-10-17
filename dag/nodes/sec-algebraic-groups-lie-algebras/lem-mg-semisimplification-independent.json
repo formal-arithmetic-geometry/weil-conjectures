@@ -74,5 +74,23 @@
   }
  },
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-r-linear-library"
+ "unit": "sk-r-linear-library",
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35b542c12",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Lean-only existing record: the node gains only lean→Representation.CompositionSeries.nonempty_semisimplification_equiv (CompositionSeries.lean:292-293), statement field verbatim; report has real Worker report and Second reading by Q137. Clauses: ρ is a generic Representation (more general, no FiniteDimensional, which is needed only for existence of a series); s₁ s₂ use the recorded def-mg-weil-composition-series structure; semisimplification is the recorded def-mg-weil-semisimplification; Nonempty Representation.Equiv means isomorphic as Weil representations. Edge cases V=0, simple V, repeated and permuted factors are covered; no characteristic restriction; universes k,W,V independent. No duplicate in the project or Mathlib; docstrings name the blueprint node; the proof matches the node (jordanHolder + Equiv.directSumCongr). nt_compile probe (--json, Sheaf/Stage2/Q137SsProbe.lean) is clean in 2.4 s with a finite-dimensional rep in universes u,v,w; axioms propext/Classical.choice/Quot.sound, no sorryAx. Gates pass. Only a cosmetic inherited finding: source.document names the master copy."
+ },
+ "lean": {
+  "module": "WeilConjectures.RepresentationTheory.CompositionSeries",
+  "declaration": "Representation.CompositionSeries.nonempty_semisimplification_equiv",
+  "statement": "theorem nonempty_semisimplification_equiv (s₁ s₂ : ρ.CompositionSeries) :\n    Nonempty (s₁.semisimplification.Equiv s₂.semisimplification) :=",
+  "branch": "slopmaster2",
+  "by": "Q137",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "The published declaration in WeilConjectures.RepresentationTheory.CompositionSeries states exactly that the semisimplifications of any two CompositionSeries of the same representation are Nonempty-equivalent. Its semisimplification is the direct sum of the successive quotient representations (the recorded def-mg-weil-semisimplification), and its proof uses jordanHolder (the recorded lem-mg-jordan-holder) to match factors with multiplicity and construct an equivariant direct-sum equivalence. The theorem is generic in the representation and therefore specializes to the finite-dimensional Weil representation in the node; it introduces no extra hypothesis and includes the zero and repeated-factor cases."
+ }
 }
