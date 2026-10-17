@@ -16,9 +16,129 @@
   "def-pc-base-change",
   "def-weil-pbc-regular-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $y\\in Y$ and put $x=i(y)$, $s$ its image in $S$. Choose an affine neighbourhood $W=\\operatorname{Spec}R$ of $s$ and an affine open $X_0=\\operatorname{Spec}A$ of $x$ in the inverse image of $W$. By the affine clause of [def-weil-closed-immersion], $Y_0=Y\\times_XX_0=\\operatorname{Spec}C$, with $C=A/I$ for an ideal $I\\subset A$. Let $\\mathfrak q\\supset I$ correspond to $x$ and $\\mathfrak p=\\mathfrak q\\cap R$. Both restricted structure morphisms are smooth: a lift against a first-order thickening given by [def-sbc-smooth-morphisms] lands in the chosen open because the thickening has the same underlying space; local finite presentation also restricts to opens. Apply [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] to get smooth ring maps $R\\to A$ and $R\\to C$. In particular $A$ and $C$ are finitely presented over $R$ by [def-weil-pbc-smooth-ring-map], and both are $R$-flat by [lem-weil-pbc-smooth-ring-map-flat].",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-smooth-ring-map-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 067U, lemma-immersion-smooth-into-smooth-regular-immersion, expanded through Tag 067T, lemma-immersion-lci-into-smooth-regular-immersion, first paragraph; affine reduction in Tag 063W, lemma-fibre-quasi-regular"
+   }
+  },
+  {
+   "text": "The $R$-algebra $A$ is of finite type, so [lem-weil-pbc-finite-presentation-over-finite-type-algebra], applied to $R\\to A\\to C$, makes $C$ finitely presented over $A$. Apply [lem-weil-pbc-finite-presentation-surjection-kernel-fg] over $A$ with zero polynomial variables and the quotient surjection $A\\to C$. Thus $I=(a_1,\\ldots,a_N)$ is finitely generated. This uses no Noetherian hypothesis on $R$ or $A$.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+    "lem-weil-pbc-finite-presentation-surjection-kernel-fg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00F4, lemma-compose-finite-type, part (4); Tag 00R2, lemma-finite-presentation-independent, n=0; finiteness input to divisors.tex Tag 063W(2)"
+   }
+  },
+  {
+   "text": "Set $k=\\kappa(\\mathfrak p)$, $\\bar A=A\\otimes_Rk$, $\\bar C=C\\otimes_Rk=\\bar A/I\\bar A$, and let $\\bar{\\mathfrak q}$ be the point of $\\operatorname{Spec}\\bar A$ corresponding to $y$ on the fibre. The two local rings $L=\\bar A_{\\bar{\\mathfrak q}}$ and $L/J=(\\bar C)_{\\bar{\\mathfrak q}/I\\bar A}$, where $J=I\\bar A_{\\bar{\\mathfrak q}}$, are regular local by [lem-weil-pbc-smooth-fibre-regular-local], applied separately to $R\\to A$ and $R\\to C$. In particular $J$ is proper. By [lem-weil-pbc-regular-local-quotient-kernel-parameters], choose a minimal generating tuple $z_1,\\ldots,z_d$ of the maximal ideal of $L$ such that $J=(z_1,\\ldots,z_b)$ for $0\\le b\\le d$. By [lem-weil-pbc-regular-local-generators-regular-sequence] this full tuple is regular, hence its first $b$ elements are regular: each multiplication is one of the original injections and every prefix quotient surjects onto the nonzero final quotient.",
+   "uses": [
+    "lem-weil-pbc-smooth-fibre-regular-local",
+    "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "lem-weil-pbc-regular-local-generators-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TT, lemma-characterize-smooth-over-field; Tag 00NR, lemma-regular-quotient-regular; Tag 00NQ, lemma-regular-ring-CM; smooth-fibre specialization of the local argument in divisors.tex Tag 067T"
+   }
+  },
+  {
+   "text": "Choose $f_j\\in I$ whose image in $L$ is a unit multiple of $z_j$. Indeed $L=A_{\\mathfrak q}/\\mathfrak pA_{\\mathfrak q}$, and $J$ is the image of $I_{\\mathfrak q}$, so lift $z_j$ to a fraction $f_j/t_j\\in I_{\\mathfrak q}$ with $t_j\\notin\\mathfrak q$. Multiplying each successive generator by the unit $t_j$ preserves its regularity and all prefix ideals. Apply [lem-weil-pbc-flat-quotient-tensor-injective] to $0\\to I\\to A\\to C\\to0$ over $R$, with $N=k$ and flat quotient $C$. It identifies $I\\otimes_Rk$ with the fibre ideal $I\\bar A$. Localizing this exact sequence using [lem-weil-pbc-localization-module-exact] identifies $(I\\otimes_Rk)_{\\bar{\\mathfrak q}}$ with $I_{\\mathfrak q}/\\mathfrak p I_{\\mathfrak q}$. The images of the $f_j$ generate this module. Therefore for the finite $A_{\\mathfrak q}$-module $M=I_{\\mathfrak q}/(f_1,\\ldots,f_b)A_{\\mathfrak q}$ one has $M=\\mathfrak pM$, hence $M=\\mathfrak qA_{\\mathfrak q}M$. Apply [lem-weil-pbc-nakayama-local-generators] with the empty generating family to obtain $M=0$. The finite module $I/(f_1,\\ldots,f_b)$ consequently vanishes after localizing at $\\mathfrak q$. For each generator $a_l$ choose $h_l\\notin\\mathfrak q$ killing its class in that quotient, and invert $h=\\prod_lh_l$. Thus after replacing $A$ by $A_h$ one has $I=(f_1,\\ldots,f_b)$ on the entire affine open. The new $A$ remains flat and finitely presented over $R$: localization is exact by the cited lemma, and a presentation for $A_h$ is obtained from one for $A$ by adjoining a variable $u$ and the relation $hu-1$.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HL, lemma-flat-tor-zero; Tag 00CS, proposition-localization-exact; Tag 00DV, lemma-NAK; supplies the equality-of-ideals step of divisors.tex Tag 063W(2) without its D/Z notation slip"
+   }
+  },
+  {
+   "text": "The fibre algebra $\\bar A$ is a finitely generated $k$-algebra: tensor a finite polynomial presentation of $A$ with $k$ and reduce its coefficients. It is therefore Noetherian by [lem-wf-affine-noetherian-components]. The images of $f_1,\\ldots,f_b$ form a regular sequence in $L$. Apply [lem-exc-regular-sequence-principal-neighbourhood] to the ring $\\bar A$, the prime $\\bar{\\mathfrak q}$ and these elements. It gives $\\gamma\\in\\bar A\\setminus\\bar{\\mathfrak q}$ on whose principal open the whole tuple is regular. Write $\\gamma=a/r$ with $a\\in A$ and $r\\in R\\setminus\\mathfrak p$: this is possible since $\\bar A=(R\\setminus\\mathfrak p)^{-1}(A/\\mathfrak pA)$. Then $a\\notin\\mathfrak q$, and replacing $A$ by $A_a$ has precisely the same effect on the fibre. The ideal equality from step 4 persists. Thus the fibre tuple is regular on the whole new fibre, and all $f_j$ vanish at the retained point $y$.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "lem-exc-regular-sequence-principal-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061L, lemma-regular-sequence-in-neighbourhood; Noetherianity of finite-type field algebras; spreading step in divisors.tex Tag 063W, lemma-fibre-quasi-regular, first proof paragraph"
+   }
+  },
+  {
+   "text": "Lift regularity from the fibre by induction on the length of a prefix. The inductive assertion is that, on an affine open $U=\\operatorname{Spec}A'$ of $x$ in our current ambient scheme, multiplication by $f_j$ on $A'/(f_1,\\ldots,f_{j-1})$ is injective for $j\\le e$, and $Z_e=\\operatorname{Spec}(A'/(f_1,\\ldots,f_e))$ is flat and locally of finite presentation over $W$. For $e=0$ finite presentation follows from step 1 and the localization presentation in step 4, using [def-sbc-locally-finite-presentation]. Flatness holds in the stalkwise sense of [def-weil-flat-morphism]: at a prime $\\mathfrak r\\subset A'$ over $\\mathfrak t\\subset R$, tensoring an injection of $R_{\\mathfrak t}$-modules with $A'_{\\mathfrak r}$ is the localization of its tensor with the flat $R$-algebra $A'$, so remains injective by [lem-weil-pbc-localization-module-exact]. Suppose $e<b$. In $Z_e$ take the principal closed subscheme $Z_{e+1}=V(f_{e+1})$. Its fibre over $s$ is an effective Cartier divisor near $y$, since the fibre multiplication by $\\bar f_{e+1}$ is injective by step 5. Apply [lem-pc-recd-fibre-cartier-local] to $Z_e\\to W$, $Z_{e+1}\\subset Z_e$ and $y$: the ambient morphism is flat and locally of finite presentation by induction, the closed subscheme is principal, and the stated fibre hypothesis holds. On an open neighbourhood of $y$ in $Z_e$, it makes $Z_{e+1}$ a relative effective Cartier divisor. By [def-pc-relative-effective-cartier], $Z_{e+1}$ is flat over $W$, and its ideal has local nonzerodivisor generators as in [def-nagata-effective-cartier-ideal]. Choose an ambient principal neighbourhood of $x$ whose intersection with $Z_e$ lies inside that open; this is possible because a closed immersion has the subspace topology and principal opens form a basis in an affine scheme. On this smaller neighbourhood $f_{e+1}$ itself is a nonzerodivisor on $Z_e$: in a stalk write $(f_{e+1})=(v)$ with $v$ a nonzerodivisor, so $f_{e+1}=uv$, $v=w f_{e+1}$; cancellation of $v$ gives $wu=1$, making $u$ a unit. Injectivity on stalks implies injectivity on sections, since a section whose germs all vanish is zero. All earlier injections survive the restriction: if a fraction is killed, multiplying by a power of its denominator reduces to the earlier injection. Finally $Z_{e+1}\\to W$ is locally of finite presentation, because its affine presentation is that of $A'$ with the $e+1$ equations $f_j$ adjoined, and every further principal restriction adjoins just a relation $tu-1$. This completes the induction without a Noetherian assumption on the base or ambient ring.",
+   "uses": [
+    "lem-pc-recd-fibre-cartier-local",
+    "def-pc-relative-effective-cartier",
+    "def-nagata-effective-cartier-ideal",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063W, lemma-fibre-quasi-regular, first proof paragraph: iterative application of Tag 062Y, lemma-fibre-Cartier, part (3); Tag 062T, definition-relative-effective-Cartier-divisor"
+   }
+  },
+  {
+   "text": "At $e=b$ let the resulting affine open be $U=\\operatorname{Spec}A'$. The ideal identity $I A'=(f_1,\\ldots,f_b)$ still holds, so the affine closed-immersion description [def-weil-closed-immersion] identifies $Y\\times_XU$ with $\\operatorname{Spec}(A'/(f_1,\\ldots,f_b))$ as a closed subscheme of $U$. Step 6 gives every successive multiplication injection. Its final quotient has the point $y$ and therefore is nonzero, giving precisely the regular-sequence condition of [def-weil-pbc-regular-sequence]. For $b=0$ step 4 already says that the ideal vanishes on a neighbourhood of $x$; the induction has no steps, and the empty sequence is regular because this neighbourhood contains $y$. Renaming $A'$ as $A$ proves every assertion.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, lemma-etale-local-structure, first proof paragraph; divisors.tex Tag 063J, definition-regular-immersion, affine regular-equation interpretation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+  "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+  "lem-weil-pbc-smooth-fibre-regular-local",
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-wf-affine-noetherian-components",
+  "lem-exc-regular-sequence-principal-neighbourhood",
+  "lem-pc-recd-fibre-cartier-local",
+  "def-pc-relative-effective-cartier",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 067U through Tag 067T; the smooth-fibre case of Tag 063W, lemma-fibre-quasi-regular, proved by Tag 062Y(3). The flat-quotient/Nakayama argument spells out equality of ideals."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -75,10 +195,66 @@
    "results": "{\"t\": \"2026-10-17T02:30:53Z\", \"tool\": \"leansearch\", \"query\": \"A closed subscheme smooth over the base of a smooth scheme is locally defined on an affine open by a regular sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\"], \"digest\": \"e02f74c89d904138\"}",
    "date": "2026-10-17",
    "verdict": "no exact match: standard-smooth presentations and conormal maps do not give regular equations for a prescribed smooth quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of a regular local ring which is regular local has kernel generated by part of a regular system of parameters",
+   "results": "{\"t\": \"2026-10-17T03:06:18Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient of a regular local ring which is regular local has kernel generated by part of a regular system of parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"RingTheory.Sequence.isRegular_cons_iff'\", \"RingTheory.Sequence.IsRegular.cons'\", \"IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"RingTheory.Sequence.isWeaklyRegular_iff_Fin\"], \"digest\": \"cfee6ddbe8b5f2c8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: the hits give constituent notions or algebra facts, not local regular equations for the prescribed smooth closed pair"
+  },
+  {
+   "tool": "grep",
+   "query": "regular_quotient_regular|exists.*[Pp]arameter|quotient.*[Rr]egular|[Rr]egular.*quotient",
+   "results": "{\"t\": \"2026-10-17T03:06:34Z\", \"tool\": \"grep\", \"query\": \"regular_quotient_regular|exists.*[Pp]arameter|quotient.*[Rr]egular|[Rr]egular.*quotient\", \"sub\": \"RingTheory/Regular\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\"], \"digest\": \"80cde644177b530f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: the hits give constituent notions or algebra facts, not local regular equations for the prescribed smooth closed pair"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper ideal in a regular local ring with regular local quotient is generated by an initial segment of a minimal generating set for the maximal ideal",
+   "results": "{\"t\": \"2026-10-17T03:06:34Z\", \"tool\": \"leansearch\", \"query\": \"A proper ideal in a regular local ring with regular local quotient is generated by an initial segment of a minimal generating set for the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.le_maximalIdeal\", \"IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing\", \"Ideal.fg_of_isNoetherianRing\", \"IsLocalRing.le_maximalIdeal_of_isPrime\", \"Ideal.FG.of_isNoetherianRing\", \"IsLocalRing.exists_maximalIdeal_pow_le_of_finite_quotient\", \"Ideal.span\", \"Ring.KrullDimLE.radical_eq_maximalIdeal\"], \"digest\": \"b0683d10ff90ee92\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: the hits give constituent notions or algebra facts, not local regular equations for the prescribed smooth closed pair"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, Ideal.Quotient",
+   "results": "{\"t\": \"2026-10-17T03:06:35Z\", \"tool\": \"loogle\", \"query\": \"IsRegularLocalRing, Ideal.Quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.Quotient'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: unknown identifier 'Ideal.Quotient'; no absence conclusion drawn"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularImmersion|[Ss]mooth.*regular.*[Ii]mmersion|regular.*[Ii]mmersion.*[Ss]mooth",
+   "results": "{\"t\": \"2026-10-17T03:06:55Z\", \"tool\": \"grep\", \"query\": \"IsRegularImmersion|[Ss]mooth.*regular.*[Ii]mmersion|regular.*[Ii]mmersion.*[Ss]mooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: the hits give constituent notions or algebra facts, not local regular equations for the prescribed smooth closed pair"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of a surjective homomorphism between smooth algebras over the same base is locally generated by a regular sequence",
+   "results": "{\"t\": \"2026-10-17T03:07:15Z\", \"tool\": \"leansearch\", \"query\": \"The kernel of a surjective homomorphism between smooth algebras over the same base is locally generated by a regular sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.kerRepr\", \"Algebra.FinitePresentation.ker_fG_of_surjective\", \"KaehlerDifferential.ker_map_of_surjective\", \"RingHom.ker\", \"Ideal.fg_ker_comp\", \"Algebra.FinitePresentation.ker_fg_of_mvPolynomial\", \"Algebra.Generators.ker_ofAlgHom\", \"AlgHom.FinitePresentation.of_surjective\"], \"digest\": \"5cca3d664b3cf05a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: the hits give constituent notions or algebra facts, not local regular equations for the prescribed smooth closed pair"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularImmersion\"",
+   "results": "{\"t\": \"2026-10-17T03:07:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegularImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: the hits give constituent notions or algebra facts, not local regular equations for the prescribed smooth closed pair"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion between two smooth schemes over an arbitrary base is locally cut out by a regular sequence",
+   "results": "{\"t\": \"2026-10-17T03:07:16Z\", \"tool\": \"leanfinder\", \"query\": \"A closed immersion between two smooth schemes over an arbitrary base is locally cut out by a regular sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.instIsClosedImmersionInclusion\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\"], \"digest\": \"fd19bed620abb4eb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: the hits give constituent notions or algebra facts, not local regular equations for the prescribed smooth closed pair"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-smooth-pair-local-coordinates",
@@ -90,12 +266,56 @@
  "blueprint": {
   "from": {
    "node": "lem-pur-divisor-class",
-   "place": "Proof, first sentence: the smooth closed subfamily is a regular immersion by Stacks Tag 067U, providing regular equations locally.",
+   "place": "Proof of lem-pur-divisor-class: existence of local one-function frames for the smooth closed divisor, via the regular-equation input (Tag 067U) to Tag 0FUE used in the parent lem-pur-smooth-pair-local-coordinates, step 1.",
    "via": [
     "lem-pur-smooth-pair-local-coordinates"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-smooth-pair-regular-immersion",
+  "worker": "stage1",
+  "summary": "Proved local regular equations over an arbitrary base using existing nodes only: affine smooth algebras, finite generation of the quotient ideal, regular-local fibre parameters, flat-quotient base change plus Nakayama, Noetherian spreading on the fibre alone, and a prefix induction applying the principal fibre-Cartier criterion. Preserved the statement, b=0, nonzero final quotient and all maintainer metadata. No new nodes or Mathlib leaves.",
+  "blueprint": "Supplies the regular-equation prerequisite of lem-pur-smooth-pair-local-coordinates step 1, which serves the local Cartier/frame argument in lem-pur-divisor-class. The current blueprint first sentence presupposes the frame; this split provides its geometric input and does not invoke purity, the coordinate parent, or any SGA source.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic affine comparison; turns the two given smooth structure maps into smooth algebras. This unit has no affine comparison theorem."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-fibre-regular-local",
+    "why": "Generic regularity of smooth fibres, used separately for ambient and quotient local rings; no purity theorem or simultaneous coordinate theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "why": "Generic regular-local quotient ideal calculation (00NR), producing fibre equations; this unit has no such commutative-algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic parameter regularity (00NQ), applied only to the Noetherian local ring on the fibre."
+   },
+   {
+    "node": "lem-pc-recd-fibre-cartier-local",
+    "why": "Generic one-equation fibre-Cartier lifting (062Y(3)), iterated with a stated induction as in 063W; this unit has no fibre-Cartier lifting input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-fibre-regular-local",
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-pc-recd-fibre-cartier-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-d97044da0",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-d97044da0 (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing: no fixes, no nodes dropped. It is the item only, with no new nodes, and its statement and stmt_deps are unchanged. The statement is the closed-immersion, affine-local form of Stacks divisors.tex Tag 067U (lemma-immersion-smooth-into-smooth-regular-immersion, l.5720), with regular immersion as in 063J; the hypotheses match (arbitrary base, both smooth, b=0 allowed). I read 062Y (lemma-fibre-Cartier), statement and proof: part (3) needs a flat, locally finitely presented ambient, a locally principal Z and a Cartier fibre, which is exactly what step 6 checks at every stage of the induction. Steps 1-7 each use exactly what the cited statements say. Step 1: 01V6, the smooth-ring-map definition and 00TA, and smoothness restricts to opens. Step 2: 00F4(4) and 00R2 with n=0, so I is finitely generated with no Noetherian hypothesis. Step 3: fibre regularity for R->A and R->C, then 00NR and 00NQ, with prefixes and the cases d=0 and b=0 handled. Step 4: L=A_q/pA_q is correct; 00HL uses flat C, then localization and Nakayama with r=0 give equality of ideals after inverting finitely many denominators. Step 5: 061L is applied on the Noetherian fibre only, and gamma=a/r lifts to an ambient principal open. Step 6: the induction is stated with its claim, base and step. The cancellation argument does make f_{e+1} itself a nonzerodivisor, and the ambient principal open, flatness and finite presentation are all carried through. Step 7: correctly marked elementary, including b=0. Small cases checked: Y empty, Y=X, an open-and-closed component, and the zero section of A^1 over a non-Noetherian or nonreduced base. No cycle: a script check shows the item is not in its own dependency closure, and its only citer is the parent coordinate lemma. No duplicate: rg for 067U/067T/063W and 'regular immersion' finds only diagonal results, results over a field going the other way, and a kernel criterion. No SGA source is cited. blueprint.from (lem-pur-divisor-class, via the parent) is correct and same_as=[] holds. I accept all five declared tool_uses as generic black boxes: 01V6, 00T4/00TT, 00NR, 00NQ and 062Y(3). One issue outside this delivery: lem-pc-recd-fibre-cartier-local cites the curve-only def-sc-effective-cartier-divisor for a general fibre. That should get a maintenance note; it does not affect the correctness of this item."
  }
 }
