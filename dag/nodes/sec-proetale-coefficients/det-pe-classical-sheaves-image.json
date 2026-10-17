@@ -206,5 +206,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d55a8342",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Statement matches node and Bhatt-Scholze 5.1.2 clause by clause: arbitrary X:Scheme.{u}; G : Sheaf (ProEt.topology X) (Type (u+1)); (1) exists F etale and Nonempty (G ≅ sheafPullback(toProEt X).obj F), which is the left adjoint of proEtaleSiteComparison; (2) the recorded IsClassical (colimit.desc of the restriction cocone over all affine presentations); (3) IsIso of the proEtaleSiteComparison counit at G, right direction; (1↔2)∧(2↔3). No added hypotheses, universes bound and consistent, edge cases (empty X, initial/terminal sheaves) covered. Single theorem with whole proof sorry, no definitions, docstrings with source, blueprint tag and three proof steps, lean.statement verbatim, both report sections present, no duplicate in Mathlib or the project. Dependency §1(B) rebind of def-weil-pbc-site-comparison-morphism to the existing original-site proEtaleSiteComparison/preservesFiniteLimits/Modules is justified (the AsSmall small model has a different site object type); only lean changed, statement verbatim, unchanged on newtargets-dag since base. Observation only: the record no longer lists the small-model declarations used by the landed lem-sfb-adic-residue-lisse-perfect-lift (module remains and compiles). nt_compile.py --json on the item: rc 0, clean; #check of the four recorded declarations: rc 0."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesImage",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleClassicalSheavesImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClassicalSheavesImage.lean",
+  "statement": "theorem proEtaleClassicalSheavesImage (X : Scheme.{u}) (G : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))) : ((∃ F : Sheaf X.smallEtaleTopology (Type (u + 1)), Nonempty (G ≅ (Functor.sheafPullbackConstruction.sheafPullback (toProEt X) (Type (u + 1)) X.smallEtaleTopology (ProEt.topology X)).obj F)) ↔ AlgebraicGeometry.ProEtale.IsClassical G) ∧ (AlgebraicGeometry.ProEtale.IsClassical G ↔ IsIso ((proEtaleSiteComparison X).counit.app G))",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

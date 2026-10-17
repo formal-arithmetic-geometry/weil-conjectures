@@ -256,5 +256,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b627ef7b4",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Read node, both stmt deps (model conventions incl. functorial WFS, combinatorial = locally presentable + small generating sets), Dugger Prop 2.3/Rem 2.5/Prop 3.2 pp.179-183, module, report (Worker report + Second reading by Q47 present), and Mathlib defs IsCardinalAccessible/IsLocallyPresentable/ObjectProperty.Small/colimitsOfShape/IsRegular. All hypotheses exact (HasLimits/ColimitsOfSize.{w,w} and functorial factorizations are the inherited convention; generator families with correct lifting direction; Quillen conditions hL/hLT; no extra properness/enrichment/accessibility of R); universes u,u',v,v' independent of w with no equality imposed. All five conclusion clauses present, neither weaker nor stronger, with a single infinite regular kappa first. Edge cases: empty generators, nonempty filtered J, trivial model category. lean.statement verbatim; no defs, only sorry; docstrings carry source place, blueprint tag and 7 proof steps; imports cover all 9 proof deps. nt_compile.py --json on the snapshot file exits 0 with no error or warning lines. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DuggerCardinalChoice",
+  "declaration": "CategoryTheory.dugger_cardinal_choice",
+  "file": "lean/Sheaf/CategoryTheory/DuggerCardinalChoice.lean",
+  "statement": "theorem dugger_cardinal_choice {M : Type u} {N : Type u'} [Category.{v} M] [Category.{v'} N] [ModelCategory M] [ModelCategory N] [HasLimitsOfSize.{w, w} M] [HasColimitsOfSize.{w, w} M] [HasLimitsOfSize.{w, w} N] [HasColimitsOfSize.{w, w} N] [IsLocallyPresentable.{w} M] [IsLocallyPresentable.{w} N] [(cofibrations M).HasFunctorialFactorization (trivialFibrations M)] [(trivialCofibrations M).HasFunctorialFactorization (fibrations M)] [(cofibrations N).HasFunctorialFactorization (trivialFibrations N)] [(trivialCofibrations N).HasFunctorialFactorization (fibrations N)] (hM : (∃ (I : Type w) (i : I → Arrow M), ∀ {X Y : M} (f : X ⟶ Y), trivialFibrations M f ↔ ∀ j, HasLiftingProperty (i j).hom f) ∧ (∃ (J : Type w) (k : J → Arrow M), ∀ {X Y : M} (f : X ⟶ Y), fibrations M f ↔ ∀ j, HasLiftingProperty (k j).hom f)) (hN : (∃ (I : Type w) (i : I → Arrow N), ∀ {X Y : N} (f : X ⟶ Y), trivialFibrations N f ↔ ∀ j, HasLiftingProperty (i j).hom f) ∧ (∃ (J : Type w) (k : J → Arrow N), ∀ {X Y : N} (f : X ⟶ Y), fibrations N f ↔ ∀ j, HasLiftingProperty (k j).hom f)) (L : M ⥤ N) (R : N ⥤ M) (adj : L ⊣ R) (hL : ∀ {X Y : M} (f : X ⟶ Y), Cofibration f → Cofibration (L.map f)) (hLT : ∀ {X Y : M} (f : X ⟶ Y), Cofibration f → WeakEquivalence f → Cofibration (L.map f) ∧ WeakEquivalence (L.map f)) : ∃ (κ : Cardinal.{w}) (_ : Fact κ.IsRegular), ∃ (P : ObjectProperty M), ObjectProperty.Small.{w} P ∧ P ≤ isCardinalPresentable M κ ∧ (∀ (X : M), ∃ (J : Type w) (_ : SmallCategory J) (_ : IsCardinalFiltered J κ), P.colimitsOfShape J X) ∧ (∀ (J : Type w) (_ : SmallCategory J) (_ : IsCardinalFiltered J κ) (D : J ⥤ Arrow M), (∀ j, weakEquivalences M (D.obj j).hom) → ∀ c : Cocone D, Nonempty (IsColimit c) → weakEquivalences M c.pt.hom) ∧ (∃ (Q₀ : M ⥤ M) (e : Q₀ ⟶ 𝟭 M), Functor.IsCardinalAccessible Q₀ κ ∧ (∀ X : M, IsCofibrant (Q₀.obj X) ∧ trivialFibrations M (e.app X))) ∧ (∃ (T : N ⥤ N) (b : 𝟭 N ⟶ T), Functor.IsCardinalAccessible T κ ∧ (∀ Y : N, IsFibrant (T.obj Y) ∧ trivialCofibrations N (b.app Y))) ∧ Functor.IsCardinalAccessible R κ",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second reading uses completeness and cocompleteness at the fixed small universe w, independently of both Hom universes. Local w-smallness is already entailed by IsLocallyPresentable.{w}, via its cardinal filtered generator. All recorded proof dependencies are imported."
  }
 }

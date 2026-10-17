@@ -27,7 +27,9 @@
  },
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-colimit-gluing",
+  "def-coef-left-module-operadic-encoding"
  ],
  "proof": [
   {
@@ -270,5 +272,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-695185bf4",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Read node, 4 stmt_dep records, module, report and exact decls (comma/false orientation = arrows j->f(i), coconeCategory, mappingSpace(Map), IsColimiting=initial, gluingCoconeApex/Restrict, IsLMEquivalenceOver strictly over base with vertical homotopies). Every clause matches node and HTT 4.1.3.1/4.1.1.7-4.1.1.8; no extra hypotheses; E in SSet.{max u v} via uliftFunctor, all binders bound. Edge cases (J empty, I empty, Delta1 vertex inclusions, E empty) OK. lean.statement verbatim equal to signature; node diff vs side only lean + two landed stmt_deps owning used decls; no cycle. No defs, only sorry, docstrings with source/blueprint/proof plan, real Worker report and Second reading sections. nt_compile.py rc=0, no errors/warnings. Minor: report.md has HTT numbers redacted to 'the project server' (cosmetic)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityCofinalCommaCriterion",
+  "declaration": "SSet.Enhanced.infinity_cofinal_comma_criterion",
+  "file": "lean/Sheaf/CategoryTheory/InfinityCofinalCommaCriterion.lean",
+  "statement": "theorem infinity_cofinal_comma_criterion {I J : SSet.{u}} [Quasicategory I] [Quasicategory J] (f : I ⟶ J) (hf : ∀ j : J _⦋0⦌, IsContractible (comma I J f j false)) : ∀ (E : SSet.{max u v}) [Quasicategory E], (∀ (H : SSet.uliftFunctor.{v}.obj J ⟶ E) (T : E _⦋0⦌), IsWeakHomotopyEquivalence (mappingSpaceMap ((MonoidalClosed.pre (SSet.uliftFunctor.{v}.map f)).app E) (diagramVertex H) (diagramVertex (SSet.const T)))) ∧ constantDiagrams (SSet.uliftFunctor.{v}.obj J) E ≫ (MonoidalClosed.pre (SSet.uliftFunctor.{v}.map f)).app E = constantDiagrams (SSet.uliftFunctor.{v}.obj I) E ∧ (∀ (A : SSet.{max u v}) (H : A ⟶ (ihom (SSet.uliftFunctor.{v}.obj J)).obj E), MonoidalClosed.uncurry (H ≫ (MonoidalClosed.pre (SSet.uliftFunctor.{v}.map f)).app E) = (SSet.uliftFunctor.{v}.map f ▷ A) ≫ MonoidalClosed.uncurry H) ∧ (∀ (E' : SSet.{max u v}) [Quasicategory E'] (P : E ⟶ E'), ((ihom (SSet.uliftFunctor.{v}.obj J)).map P) ≫ (MonoidalClosed.pre (SSet.uliftFunctor.{v}.map f)).app E' = (MonoidalClosed.pre (SSet.uliftFunctor.{v}.map f)).app E ≫ ((ihom (SSet.uliftFunctor.{v}.obj I)).map P)) ∧ (∀ H : SSet.uliftFunctor.{v}.obj J ⟶ E, IsLMEquivalenceOver (gluingCoconeApex H) (gluingCoconeApex (SSet.uliftFunctor.{v}.map f ≫ H)) (gluingCoconeRestrict (SSet.uliftFunctor.{v}.map f) H) ∧ ∀ c : (coconeCategory H) _⦋0⦌, (IsColimiting H c ↔ IsColimiting (SSet.uliftFunctor.{v}.map f ≫ H) ((gluingCoconeRestrict (SSet.uliftFunctor.{v}.map f) H).app _ c)) ∧ ((gluingCoconeRestrict (SSet.uliftFunctor.{v}.map f) H).app _ c).1.1 = c.1.1)",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the published coherent comma and mapping-space models, canonical gluingCoconeRestrict, and the existing general IsLMEquivalenceOver predicate. Adds the landed owners of these two helper notions to stmt_deps. All clauses are stated; the sole proof is sorry. No natural-language statement correction."
  }
 }

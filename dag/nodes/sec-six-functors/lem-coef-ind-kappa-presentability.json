@@ -29,7 +29,8 @@
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-category-of-spaces"
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-infinity-presheaf-yoneda"
  ],
  "proof": [
   {
@@ -407,5 +408,34 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-8d38b343c (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-ind-finite-poset-realization, all 20 cited lemma statements and 3 definitions, the unit record and the blueprint ancestor paragraph. I checked the sources against the public HTT PDF (Lurie 2017), reading Def 5.3.5.1, Props 5.3.5.3, 5.3.5.5, 5.3.5.14, 5.3.5.15 with its proof, Warning 5.3.5.16 and Thm 5.5.1.1. The item's statement is unchanged and every clause matches HTT: preservation covers only the colimits that exist in C, and presentability is claimed only when C admits all κ-small colimits (5.5.1.1(4)). Steps 3-5 prove that the filtered-representable definition agrees with HTT's right-fibration definition (Cor 5.3.5.4), so the two are not silently identified. The new node is exactly the essential-surjectivity part of 5.3.5.15: it assumes no colimits in C and keeps the finite-poset restriction that Warning 5.3.5.16 requires. It is statement-only and self-contained, has three kinds of Mathlib search (no match: the candidates are ordinary Type-valued categories), correct blueprint fields, and does not restate any clause of the item. I checked each step against the cited statements. The compact-relative-cocone-factorization hypotheses hold: K'=∅, the representable vertices are κ-compact, and the index is a cofinal κ-poset in the cocomplete P. Step 7 checks preservation inside D, not P, and handles empty K. Step 8 assembles the stage pushouts via the left-adjoint form of parametric-universal-arrows and exchanges two limits. Step 9's product poset is κ-filtered by regularity, and its comma posets are weakly contractible. Step 10 meets the finite-upper-bound hypothesis of directed-union-local-colimits. Step 11 uses small-colimit-generation. Step 2 is elementary and Step 6 is acceptable as elementary. Small cases checked: C empty or terminal, κ=ω with finite-dimensional vector spaces, and for the new node A empty, a point, an arrow, a span. There are no duplicates in the DAG (rg for 5.3.5.15, Ind, finite poset; lem-sfb-ind-arrow-presentation, lem-coef-infinity-finite-poset-kan-extension and lem-coef-accessible-diagram-presentations read). The dependency closure has 370 nodes and no cycle. I accept the declared tool_use lem-cbc-enhanced-functor-cone-calculus as a generic tool; it is already an accepted tool_use on 102 nodes of this unit. No SGA is used. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63838c430",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Read node, the 4 stmt_deps (PresentableInfinityCategory predicates, EnhancedDiagramsCones, InfinityCategoryOfSpaces, InfinityPresheafYoneda), the module, the report (has Worker report and Second reading by Q32). Every clause matches the node and HTT 5.3.5.3-5.3.5.5/5.3.5.14/5.5.1.1(4): Ind object is a replete small kappa-filtered colimit of representables in presheaves; fully faithful; j(c) kappa-compact in Ind; locally small; small kappa-filtered colimits preserved by inclusion; generation in Ind; kappa-accessible; j preserves existing kappa-small colimits; all small colimits and presentable only when C has all kappa-small colimits. Universes u/u+1/u+2, no extra hypotheses. Defs have real data (fullSubcomplex, Subcomplex.lift). The two postponed helpers (quasicategory of Ind; Yoneda lands in Ind) belong to this node's notion and match lem-cbc-enhanced-functor-cone-calculus and the node's proof step 1. All theorems are sorry; docstrings and 11-step proof plan present. Node delta is only lean plus the landed stmt_dep def-coef-infinity-presheaf-yoneda; lean.statement is verbatim. No duplicate Ind_kappa found. nt_compile clean (rc 0, 1.8 s; an injected error was reported). Cosmetic only: the report text has HTT numbers replaced by 'the project server'; hκ not needed in the range lemma."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.IndKappaPresentability",
+  "declaration": "SSet.Presentability.indKappa_presentability",
+  "declarations": [
+   "SSet.Presentability.IsIndKappaObject",
+   "SSet.Presentability.indKappaSubcomplex",
+   "SSet.Presentability.indKappa",
+   "SSet.Presentability.indKappaInclusion",
+   "SSet.Presentability.indKappa_quasicategory",
+   "SSet.Presentability.infinityYoneda_range_le_indKappa",
+   "SSet.Presentability.indKappaYoneda",
+   "SSet.Presentability.indKappa_presentability"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/IndKappaPresentability.lean",
+  "statement": "theorem indKappa_presentability (C : SSet.{u}) [SSet.Quasicategory C] (κ : Cardinal.{u}) (hκ : κ.IsRegular) : SSet.Enhanced.IsFullyFaithful (indKappaYoneda C κ hκ) ∧ (∀ (c : C _⦋0⦌), IsKappaCompact (indKappa C κ) κ ((indKappaYoneda C κ hκ).app _ (ULift.up c))) ∧ IsLocallySmall.{u, u + 1} (indKappa C κ) ∧ HasSmallKappaFilteredColimits (indKappa C κ) κ ∧ PreservesColimitsIn (indKappaInclusion C κ) (fun I _ _ ↦ ∃ (hI : SSet.Quasicategory I), IsSmall.{u, u + 1} I ∧ @IsKappaFiltered.{u, u + 1} κ I hI) ∧ (∀ (X : indKappa C κ _⦋0⦌), ∃ (I : SSet.{u + 1}), ∃ (hI : SSet.Quasicategory I), IsSmall.{u, u + 1} I ∧ @IsKappaFiltered.{u, u + 1} κ I hI ∧ ∃ (F : I ⟶ SSet.uliftFunctor.{u + 1, u}.obj C), ∃ (t : (SSet.Enhanced.coconeCategory (F ≫ indKappaYoneda C κ hκ)) _⦋0⦌), SSet.Enhanced.IsColimiting (F ≫ indKappaYoneda C κ hκ) t ∧ ∃ (e : indKappa C κ _⦋1⦌), SSet.Enhanced.IsEquivalenceEdge (indKappa C κ) e ∧ (indKappa C κ).δ 1 e = X ∧ (indKappa C κ).δ 0 e = t.1.1) ∧ IsKappaAccessible (indKappa C κ) κ ∧ PreservesColimitsIn (indKappaYoneda C κ hκ) (fun I _ _ ↦ IsKappaSmall κ I) ∧ ((∀ (K : SSet.{u + 1}), IsKappaSmall κ K → ∀ (F : K ⟶ SSet.uliftFunctor.{u + 1, u}.obj C), ∃ (t : (SSet.Enhanced.coconeCategory F) _⦋0⦌), SSet.Enhanced.IsColimiting F t) → HasSmallColimits.{u, u + 1} (indKappa C κ) ∧ IsPresentable.{u, u + 1} (indKappa C κ))",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the published presentability predicates and constructed coherent presheaf/Yoneda functor. The full replete Ind subcomplex, inclusion and restricted Yoneda have actual data; named postponed proofs provide the quasicategory and range obligations and the complete presentability statement."
  }
 }

@@ -176,5 +176,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f4f6c7282",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Statement matches node and HTT Cor. 5.3.4.15 clause by clause: regular κ : Cardinal.{u}, locally small quasicategory C : SSet.{max (u+1) v}, HasSmallKappaFilteredColimits kept (needed for empty K), κ-small K with no extra conditions, p : K ⟶ C, vertexwise IsKappaCompact, supplied cocone t with IsColimiting and apex t.1.1 (same projection as hocolim), conclusion IsKappaCompact C κ t.1.1. Empty K (initial object), point, binary, κ=ℵ₀, infinite non-κ-small K and empty C checked. Universes agree with the presentability definitions and the citers CommonCompactnessRank and CompactGeneratedFilteredHull. Commit touches only report, node and module; only lean field changed; lean.statement verbatim in file. No definitions; sorry only; source and blueprint docstrings with the node's proof steps; imports correct (proof-only nodes have no Lean record yet). No duplicate in project or Mathlib (Mathlib analogues are for ordinary categories). nt_compile.py rc=0, module 2.0 s, no errors or warnings. Cosmetic: report says 'Corollary the project server' (redaction artifact) where it should say 5.3.4.15; Lean and node are correct."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CompactSmallColimits",
+  "declaration": "SSet.Presentability.isKappaCompact_of_isColimiting",
+  "file": "lean/Sheaf/CategoryTheory/CompactSmallColimits.lean",
+  "statement": "theorem isKappaCompact_of_isColimiting (κ : Cardinal.{u}) (hκ : κ.IsRegular) (C : SSet.{max (u + 1) v}) [Quasicategory C] (hC : IsLocallySmall.{u, max (u + 1) v} C) (hcolim : HasSmallKappaFilteredColimits C κ) (K : SSet.{max (u + 1) v}) (hK : IsKappaSmall κ K) (p : K ⟶ C) (hp : ∀ k : K _⦋0⦌, IsKappaCompact C κ (p.app (op ⦋0⦌) k)) (t : (SSet.Enhanced.coconeCategory p) _⦋0⦌) (ht : SSet.Enhanced.IsColimiting p t) : IsKappaCompact C κ t.1.1",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

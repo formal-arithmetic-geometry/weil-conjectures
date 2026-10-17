@@ -245,5 +245,30 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-7b3c836af (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full, plus the full statements of the three cited nodes (lem-coef-simplicial-space-reedy-cartesian, lem-coef-kan-quillen-right-proper, lem-coef-reedy-model-structure), the citing parent lem-coef-segal-spine-interval-test step 2, and the generalization candidate lem-coef-segal-finite-cover-descent. Source: fetched the recorded Rezk PDF and ran pdftotext to /tmp. The Segal space definition (4.1) is on printed p.11 and Lemma 10.1 with its cover definition on p.23, so the cited places are correct. Rezk's all-vertices cover condition is not enough: for F([0,1]) and F([2,3]) in F(3) with the discrete nerve of BC2, the restriction goes from C2^3 to C2^2 and is not a weak equivalence. The item's inherited hypothesis G(m) ⊆ H is the correct statement, and it is unchanged here. All steps check out. Step 1 uses the cartesian Map-fibration clause with p = V→*, where Map(A,*) = * by definition. Step 2's boundary-lifting closure of trivial fibrations under pullback and composition, and its subobject-union gluing, are checked. Step 3 is Yoneda on the representable F(r)×cΔ^q, with the chain of edges meeting in single vertices. Step 4: F([a,b])∩F([c,d]) is the face on [max,min] or empty, and G(m)∩F([a,b]) is the local spine because a<b. If H≠F(m), then [0,m] is not in the collection, so every length is below m, and the strong induction is properly quantified. Step 5 applies the induction hypothesis only at strictly smaller length and gets triviality by pullback. Step 6 is two-out-of-three. Edge cases m=1, m=2, overlapping {[0,2],[1,3]}, touching, repeated or contained intervals, and empty or terminal V all pass. No new nodes. proof_deps equals the union of step uses. All citations are in the same unit, so no tool_uses are needed, and there is no cycle. There is no duplicate. lem-coef-segal-finite-cover-descent is an unsplit, more general sibling (its specialization to the family {[0..m]}), not the same statement, so this direct proof is legitimate. Searches cover all three kinds, with no Mathlib leaf (only StrictSegal). No SGA is used. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b142cbf8f",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read the item node, its statement dependency lem-coef-simplicial-space-reedy-cartesian and the exact side declarations (discreteRepresentable, IsReedyFibrant, pathSpace, segalMap, IsSegal, mappingSpace, mappingSpacePre), the module, the report and the citer spine_interval_test. All node clauses match: m>=1; spine G pinned bidegreewise via spineEdge; F([a,b]) via SimplexCategory.subinterval a (b-a), which is j->a+j; Finset of intervals with a<b<=m; H pinned by interval_image; G subset of H via a factorization unique by monicity; V Reedy fibrant with segalMap weak for r>=2, which is verbatim the body of IsSegal; conclusion mappingSpacePre C.H.arrow V : Map(F(m),V)->Map(H,V), correct variance. The node's spine-containment correction of Rezk Lemma 10.1 p.23 is the right version (the all-vertices cover [0,1] u [2,3] in F(3) into the discrete nerve of BC2 fails). Edge cases m=0/1, H=F(m), empty, overlapping and repeated intervals, empty or terminal V, and universe u all pass. lean.statement equals the file signature verbatim; helpers have real data; docstrings carry the source place, blueprint tag and six proof steps; only sorry; the non-public imports follow the proof-dependency import rule; the report has Worker report and Second reading by NB. nt_compile.py --json: rc 0, clean, 1.6 s. Optional style remark only: hV could be written IsSegal V. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SegalIntervalCover",
+  "declaration": "SSet.SegalSpace.segal_interval_cover",
+  "declarations": [
+   "SSet.SegalSpace.intervalFace",
+   "SSet.SegalSpace.spineEdge",
+   "SSet.SegalSpace.SegalIntervalCover",
+   "SSet.SegalSpace.segal_interval_cover"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SegalIntervalCover.lean",
+  "statement": "theorem segal_interval_cover (C : SegalIntervalCover.{u}) (V : SimplicialSpace.{u}) (hV : IsReedyFibrant V ∧ ∀ r : ℕ, 2 ≤ r → Enhanced.IsWeakHomotopyEquivalence (segalMap V r)) : Enhanced.IsWeakHomotopyEquivalence (mappingSpacePre (Subobject.arrow C.H) V)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "SegalIntervalCover records the canonical representable interval maps, the spine and interval-union image clauses, and the factorization G ⊆ H ⊆ F(m)."
  }
 }

@@ -192,33 +192,27 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-f86972310 (reviewer sub-agent of L); spot-checked: Read all six steps, all seventeen cited statements, sources, and unit/chapter route. Inclusion, continuity, comma indexing, scalar actions and module adjunction check out; no new nodes or repairs. Verified the exact master condensed coefficients and base-change direction without treating this supporting definition as a derived comparison theorem. Existing dependency cycles are documented in review.md."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-20c8774e6",
-  "group": "Q17",
+  "reviewer": "NT-stage2-cc-8d55a8342",
+  "group": "Q67",
   "result": "pass",
-  "note": "Read node, Stacks 09C6, report (Worker report + Second reading by Q17 present), both delivered modules, and the exact declarations used (ConstantCompletion completed/projection/IsComplete/extend/derivedPull/constantMap, ringedKoszulTensor, IsKFlatIndependentCoefficients, IsLocallyConstantFiniteTypeModules, strictPerfectConstantSheaf, ringedDerivedRestriction, IsPerfectRingComplex). All 13 hypothesis/conclusion clauses match. B_X is the genuine limit; completeness is for the kernel ideal = JB_X; C is bounded etale A/J with lisse f.g. cohomology; Tor test over K-flat reps and all N; residue iso via universal derived extension and derived pullback (no arbitrary maps); covering sieve with bounded finite-projective P and termwise B_X tensor P on each member. Edge cases (empty X, J=0, J=A, a=b, universes u,v independent with A in max v (u+1)) fine. The dependency repair of def-weil-pbc-site-comparison-morphism is a real AsSmall transport, only lean changed, and its two sorry instances (continuity, finite limits) are in the node statement. 8 added stmt_deps are landed nodes. lean.statement verbatim in both nodes. No hollow defs; docstrings with all 8 steps. nt_compile.py --json on both files: rc 0, no errors. Observations only: stale Worker report text; the old proEtaleSiteComparison declarations are no longer listed in the node record."
+  "note": "Statement matches node and Bhatt-Scholze 5.1.2 clause by clause: arbitrary X:Scheme.{u}; G : Sheaf (ProEt.topology X) (Type (u+1)); (1) exists F etale and Nonempty (G ≅ sheafPullback(toProEt X).obj F), which is the left adjoint of proEtaleSiteComparison; (2) the recorded IsClassical (colimit.desc of the restriction cocone over all affine presentations); (3) IsIso of the proEtaleSiteComparison counit at G, right direction; (1↔2)∧(2↔3). No added hypotheses, universes bound and consistent, edge cases (empty X, initial/terminal sheaves) covered. Single theorem with whole proof sorry, no definitions, docstrings with source, blueprint tag and three proof steps, lean.statement verbatim, both report sections present, no duplicate in Mathlib or the project. Dependency §1(B) rebind of def-weil-pbc-site-comparison-morphism to the existing original-site proEtaleSiteComparison/preservesFiniteLimits/Modules is justified (the AsSmall small model has a different site object type); only lean changed, statement verbatim, unchanged on newtargets-dag since base. Observation only: the record no longer lists the small-model declarations used by the landed lem-sfb-adic-residue-lisse-perfect-lift (module remains and compiles). nt_compile.py --json on the item: rc 0, clean; #check of the four recorded declarations: rc 0."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleSmallModelComparison",
-  "declaration": "AlgebraicGeometry.Scheme.smallModelProEtaleComparison",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleSiteComparison",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleSiteComparison",
   "declarations": [
-   "AlgebraicGeometry.Scheme.smallModelComparisonEtaleSite",
-   "AlgebraicGeometry.Scheme.smallModelComparisonEtaleTopology",
-   "AlgebraicGeometry.Scheme.smallModelComparisonInclusion",
-   "AlgebraicGeometry.Scheme.smallModelComparisonInclusion_isContinuous",
-   "AlgebraicGeometry.Scheme.smallModelComparisonPullback",
-   "AlgebraicGeometry.Scheme.smallModelComparisonPushforward",
-   "AlgebraicGeometry.Scheme.smallModelProEtaleComparison",
-   "AlgebraicGeometry.Scheme.smallModelComparisonPullback_preservesFiniteLimits"
+   "AlgebraicGeometry.Scheme.proEtaleSiteComparison",
+   "AlgebraicGeometry.Scheme.preservesFiniteLimits_proEtaleSiteComparison",
+   "AlgebraicGeometry.Scheme.proEtaleSiteComparisonModules"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSmallModelComparison.lean",
-  "statement": "abbrev smallModelProEtaleComparison (X : Scheme.{u})",
   "branch": "newtargets-dag",
-  "by": "Q17",
+  "by": "Q67",
   "date": "2026-10-17",
-  "existing": false,
-  "note": "§1(B): the recorded geometric adjunction is on the original sites, and its module specialization assumes finite coefficients. ConstantCompletion requires small models in the coefficient universe. This module supplies the identical inclusion, continuous geometric adjunction and left exactness on coefficient-sized AsSmall models, using the published coefficientProEtaleSiteModel. All objects, sections and covering sieves are retained by the canonical equivalences. The original comparison stays publicly imported; coefficients and scheme size have independent parameters."
+  "existing": true,
+  "note": "§1(B) repair: the recorded smallModelProEtaleComparison is an AsSmall transport with a different site object type, so it cannot state this node for G : Sheaf (Scheme.ProEt.topology X) (Type (u + 1)). The existing canonical proEtaleSiteComparison and its finite-limit and module declarations state the original-site geometric morphism and its coefficient specialization exactly.",
+  "statement": "noncomputable def proEtaleSiteComparison (T : Scheme.{u}) :\n    Functor.sheafPullbackConstruction.sheafPullback (toProEt T)\n      (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T) ⊣\n    (toProEt T).sheafPushforwardContinuous\n      (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T)"
  },
  "reviewed_proof": {
   "date": "2026-10-16",
