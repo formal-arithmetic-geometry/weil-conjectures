@@ -15,9 +15,53 @@
   "def-weil-pbc-etale-site",
   "def-weil-pbc-constant-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The construction of the complementary closed topos and its universal property is exactly [lem-trf-topos-complement-factorization]. Applying that statement with $\\mathcal E=\\mathcal T$ and $u=U$ gives the topos $\\mathcal Z$, the geometric embedding $i$, and the identification of geometric morphisms $\\mathcal E\to\\mathcal Z$ with those $a:\\mathcal E\to\\mathcal T$ for which $a^{-1}U$ is initial. The cited universal property includes the corresponding 2-morphisms, so the factorization is unique up to unique compatible isomorphism. It also identifies the inverse image of the closed subtopos under any $a$ with the closed complement of $a^{-1}U$.",
+   "uses": [
+    "lem-trf-topos-complement-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 08LY, 08LZ and 08M0: construction and universal property of the closed complementary subtopos."
+   }
+  },
+  {
+   "text": "The module assertion is obtained by applying the constant-ring module inverse-image/direct-image construction of [lem-pe-constant-left-module-inverse-image] to the closed embedding in [lem-trf-topos-complement-factorization]. Its direct image has the underlying sheaf-of-abelian-groups direct image, and its counit is an isomorphism because the underlying geometric embedding is fully faithful. A module $M$ satisfies $j^*M=0$ exactly when its underlying sheaf satisfies $U\\times M\\to U$ is an isomorphism, since the inverse-image comparison of [lem-pe-constant-left-module-inverse-image] forgets to the ordinary inverse image and the zero module has terminal underlying sheaf. Hence the underlying object of such an $M$ is in the essential image of the closed direct image. Choose an underlying preimage $N$ and an isomorphism $i_*N\\cong M$. Full faithfulness descends the addition and zero maps of $M$ uniquely to $N$; the canonical constant-ring comparison descends the scalar action uniquely as well, and the module axioms descend because $i_*$ is faithful. Thus $N$ is a constant-$\\Lambda$ module and $M\\cong i_*N$, proving the supported essential-image characterization and the unit isomorphism for supported modules. For a short exact sequence in the closed module category, $i_*$ preserves kernels as a right adjoint. If $Q$ is the ambient cokernel of the resulting map, exactness of $j^*$ and $j^*i_*=0$ give $j^*Q=0$, so the characterization puts $Q$ in the essential image; applying exact $i^*$ and the counit identifies $i^*Q$ with the closed cokernel. Thus $i_*$ preserves cokernels and is exact.",
+   "uses": [
+    "lem-trf-topos-complement-factorization",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08M3, lemma-i-star-equivalence, together with Tags 03DI, 0710 and 04EQ for the module adjunction and support description."
+   }
+  },
+  {
+   "text": "Let $k:F\\hookrightarrow S$ be a closed immersion and let $U=S\\setminus F$. Apply the current statement of [lem-trf-etale-closed-complement-sets] to this closed immersion, on sheaves of sets and with the scheme-induced geometric-morphism adjunction specified there. Its direct image is fully faithful, its counit is invertible, and its essential image consists exactly of sheaves whose restriction to $U_{\\mathrm{Et}}$ is terminal. For the subterminal sheaf $u$ represented by $U$, this last condition is precisely that $u\\times H\\to u$ is an isomorphism: open restriction is pullback to the slice over $u$, whose terminal object is $u\\to u$. Thus this essential image is exactly the full subcategory defining the closed complement in [lem-trf-topos-complement-factorization]. Full faithfulness and equality of essential images give an equivalence over $S_{\\mathrm{Et}}$ between $F_{\\mathrm{Et}}$ and that closed complement, as claimed. This uses the set-valued assertion, with no passage from an abelian-sheaf result.",
+   "uses": [
+    "lem-trf-etale-closed-complement-sets",
+    "lem-trf-topos-complement-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04CA(1), proposition-closed-immersion-pushforward, combined with sites.tex Tags 08LY and 08M1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-trf-etale-closed-complement-sets",
+  "lem-trf-topos-complement-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 08LY, 08LZ, 08M0, 08M1 and sites-modules.tex Tag 08M3; etale-cohomology.tex Tag 04CA(1)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,7 +129,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-closed-base-extension",
@@ -108,5 +152,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-oriented-closed-base-localization",
+  "worker": "stage1",
+  "summary": "Repaired the returned dependency cycle and made the module step self-contained: the underlying supported object is lifted to a module by descending addition and the constant scalar action along the fully faithful direct image, using the constant-ring comparison node; the cokernel argument then proves exactness and the unit. Steps 1 and 3 and the statement are unchanged. No new node or statement clause was added.",
+  "blueprint": "Realizes the ancestor proof's generic closed-complement factorization and supported-module input used in the closed-image nearby-cycle reduction."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-c78a26225",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-c78a26225 (reviewer sub-agent of L); spot-checked: Step 2 omitted the essential descent of module addition and constant scalar action along the underlying fully faithful direct image. The corrected whole-node JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-oriented-closed-base-localization.json; review.md records source, hypothesis, edge-case, route, cycle, and search checks.; 1 file(s) fixed by the reviewer"
  }
 }

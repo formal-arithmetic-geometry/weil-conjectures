@@ -12,9 +12,109 @@
   "def-weil-connected-scheme",
   "def-pc-geometrically-irreducible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $E/k$ be an arbitrary finite separable extension. Apply [lem-weil-pbc-finite-galois-receiving-separable-extensions] to the singleton family $E/k$ to obtain a finite Galois extension $L/k$ and a $k$-embedding $E\\hookrightarrow L$. Thus $L$ is also a field extension of $E$. Write $f:T\\to X$ for the given $k$-morphism and $f_L:T_L\\to X_L$ for its base change. We will first prove $X_L$ connected, then $X_E$ connected.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038C, lemma-tricky, finite Galois case; finite reduction through Tag 0389, lemma-characterize-geometrically-disconnected; Fields Tags 09DT and 0EXM (normal closure)."
+   }
+  },
+  {
+   "text": "By [def-pc-geometrically-irreducible], $T_L$ is connected and nonempty. In particular $X_L$ is nonempty since $f_L$ maps $T_L$ to it. The morphisms $p:X_L\\to X$ and $q:X_L\\to X_E$ are surjective: [lem-pc-field-extension-surjective] applies to $L/k$ and $L/E$, respectively, and [lem-weil-pbc-surjective-base-change] applies after base change by $X\\to\\operatorname{Spec}k$ and $X_E\\to\\operatorname{Spec}E$. For $q$ use the iterated base-change identification $X_L\\simeq X_E\\times_{\\operatorname{Spec}E}\\operatorname{Spec}L$ supplied by [def-pc-base-change].",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038C, lemma-tricky, connectedness of the source after extension; Morphisms Tag 01S1, lemma-base-change-surjective."
+   }
+  },
+  {
+   "text": "Suppose $X_L=A\\amalg B$ with $A,B$ nonempty and clopen. Their inverse images under $f_L$ form a clopen partition of the connected nonempty $T_L$, so, after interchanging $A,B$, its nonempty image $S=f_L(T_L)$ lies in $A$. For each $\\sigma\\in G=\\operatorname{Aut}(L/k)$, let $\\sigma_T=\\mathrm{id}_T\\times\\operatorname{Spec}(\\sigma)$ and $\\sigma_X=\\mathrm{id}_X\\times\\operatorname{Spec}(\\sigma)$. Functoriality in [def-weil-affine-spectrum] and [def-pc-base-change] gives inverse automorphisms using $\\sigma^{-1}$ and $f_L\\circ\\sigma_T=\\sigma_X\\circ f_L$: both composites have $X$-projection $f$ times the $T$-projection, and $\\operatorname{Spec}L$-projection $\\operatorname{Spec}(\\sigma)$ times the other projection. Hence $\\sigma_X(S)=S$, and $S\\subseteq\\sigma_X(A)$ for every $\\sigma$.",
+   "uses": [
+    "def-weil-connected-scheme",
+    "def-weil-affine-spectrum",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038C, lemma-tricky, first paragraph; base-change action in equation-galois-action-base-change-kbar."
+   }
+  },
+  {
+   "text": "The group $G$ is finite by [lem-weil-pbc-finite-galois-fixed-field]. Set $P=\\bigcap_{\\sigma\\in G}\\sigma_X(A)$ and $Q=X_L\\setminus P$. These are clopen because the intersection is finite and each $\\sigma_X$ is a homeomorphism. The set $P$ is nonempty because it contains $S$; $Q$ is nonempty because the identity belongs to $G$, giving $P\\subseteq A$ and $B\\subseteq Q$. For $\\tau\\in G$, applying $\\tau_X$ to $P$ just permutes its factors: the contravariance of $\\operatorname{Spec}$ makes the resulting indices $\\sigma\\circ\\tau$, which still run over all $G$. Thus both $P$ and $Q$ are $G$-invariant.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038C, lemma-tricky, finite intersection and union construction; Fields Tag 09I1, lemma-finite-Galois, for finiteness of G."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-galois-invariant-closed-subset-descends] twice, to the $G$-invariant closed subsets $P,Q$ of $X_L$. Its hypotheses hold because $L/k$ is Galois, $X$ is a $k$-scheme, and its action is precisely $\\sigma_X$. Obtain closed subsets $P_0,Q_0\\subseteq X$ with $p^{-1}(P_0)=P$ and $p^{-1}(Q_0)=Q$. Surjectivity of $p$ from step 2 implies $P_0\\cap Q_0=\\varnothing$ and $P_0\\cup Q_0=X$: lift a putative point in the intersection or outside the union to contradict the partition upstairs. Each is nonempty, since an element of $P$ or $Q$ projects into it. They are complements of closed subsets, hence also open. This contradicts connectedness of $X$ as defined in [def-weil-connected-scheme]. Thus $X_L$ is connected.",
+   "uses": [
+    "lem-weil-pbc-galois-invariant-closed-subset-descends",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038C, lemma-tricky, descent of the invariant partition using Tag 038B, lemma-closed-fixed-by-Galois; the final contradiction."
+   }
+  },
+  {
+   "text": "The surjection $q:X_L\\to X_E$ from step 2 makes $X_E$ nonempty. If $X_E$ had a partition into two nonempty clopen subsets, their inverse images under the continuous map $q$ would be clopen, disjoint and covering, and each would be nonempty by surjectivity. This would contradict connectedness of $X_L$. Therefore $X_E$ is connected, using exactly the definition [def-weil-connected-scheme].",
+   "uses": [
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038C, lemma-tricky, finite Galois argument; elementary descent of connectedness along the projection from a Galois closure."
+   }
+  },
+  {
+   "text": "Since $E/k$ was arbitrary among finite separable extensions, apply [lem-weil-pbc-geometrically-connected-finite-separable-test] with $Y=X$. Every base change required by its right-hand condition is connected by step 6, so $X$ is geometrically connected over $k$.",
+   "uses": [
+    "lem-weil-pbc-geometrically-connected-finite-separable-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056R, lemma-geometrically-connected-criterion, via Tag 038C, lemma-tricky, and Tag 0389, lemma-characterize-geometrically-disconnected."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "def-pc-base-change",
+  "def-pc-geometrically-irreducible",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "def-weil-connected-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-weil-pbc-galois-invariant-closed-subset-descends",
+  "lem-weil-pbc-geometrically-connected-finite-separable-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 056R (lemma-geometrically-connected-criterion), 038C (lemma-tricky), 038B (lemma-closed-fixed-by-Galois), and 0389 (lemma-characterize-geometrically-disconnected): the source Galois-intersection argument written in the finite Galois case, then the existing finite separable test."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +143,45 @@
    "results": "8 hits: IsIntegralHom, Surjective.surj, Scheme.Hom.surjective, IsIntegralHom.instUniversallyClosed, Surjective.of_universallyClosed_of_isDominant, IsProper, isClosedMap_isZariskiLocalAtTarget, IsSeparated.hasAffineProperty; no exact criterion.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected scheme receiving a morphism from a geometrically connected scheme over a field is geometrically connected",
+   "results": "8 hits: AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsSeparated.instMorphismRestrict, AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme, AlgebraicGeometry.Scheme.isSeparated_iff, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom.instMorphismRestrict; read the geometric-connectedness file: no criterion for an arbitrary morphism from a geometrically connected source to a connected target.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a geometrically connected scheme T maps over a field k to a connected scheme X then X is geometrically connected",
+   "results": "8 hits: AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.compactSpace_of_universallyClosed, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsIntegral, CategoryTheory.PreGaloisCategory.PreservesIsConnected.preserves; read the geometric-connectedness file: no criterion for an arbitrary morphism from a geometrically connected source to a connected target.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected",
+   "results": "12 hits: AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyConnected, AlgebraicGeometry.GeometricallyConnected, AlgebraicGeometry.instSurjectiveOfGeometricallyConnected, AlgebraicGeometry.GeometricallyConnected.eq_geometrically, AlgebraicGeometry.GeometricallyConnected.geometrically_connectedSpace, AlgebraicGeometry.GeometricallyConnected.mk, AlgebraicGeometry.geometricallyConnected_iff, AlgebraicGeometry.instGeometricallyConnectedFiberToSpecResidueField; read the geometric-connectedness file: no criterion for an arbitrary morphism from a geometrically connected source to a connected target.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyConnected|of_connectedSpace",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean; read the geometric-connectedness file: no criterion for an arbitrary morphism from a geometrically connected source to a connected target.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric connectedness descends from a nonempty geometrically connected source along any morphism to a connected target scheme",
+   "results": "8 hits: AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant, AlgebraicGeometry.IsDominant, AlgebraicGeometry.Scheme.isJointlySurjectivePreserving, AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.IsIntegralHom; read the geometric-connectedness file: no criterion for an arbitrary morphism from a geometrically connected source to a connected target.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-connected-point-geometrically-connected",
@@ -85,5 +220,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-geometrically-connected-image-criterion",
+  "worker": "stage1",
+  "summary": "Verified Tag 056R and expanded its reference to 038C. Reused the finite separable test, finite Galois closure, finite Galois automorphism group and invariant closed-set descent. The proof writes the invariant finite intersection, both nonemptiness arguments, the descended partition, and connectedness descent explicitly. No new nodes or changed hypotheses.",
+  "blueprint": "The inherited ancestry points to lem-trf-local-term-locality through the alteration/component chain; this item realizes the connected-point criterion used in lem-trf-connected-point-geometrically-connected (Tag 04KV), specifically its application of Tag 056R. The existing from.place is retained. No change to unit sk-i-curve-zero or its realization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "why": "Generic field-theory normal-closure tool for one finite separable extension; the local-term unit has no such field lemma."
+   },
+   {
+    "node": "lem-weil-pbc-galois-invariant-closed-subset-descends",
+    "why": "Generic Galois closed-set descent (Tag 038B) explicitly used by the item source Tag 038C; no node of the local-term unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-geometrically-connected-finite-separable-test",
+    "why": "Generic finite separable test (Tag 0389) reduces the source Galois argument to finite extensions without any quasi-compactness hypothesis; no node of the local-term unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-weil-pbc-galois-invariant-closed-subset-descends",
+  "lem-weil-pbc-geometrically-connected-finite-separable-test"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q96-10190f145",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-10190f145 (reviewer sub-agent of L); spot-checked: Read the item, cited nodes, blueprint route, unit, and cited Stacks sources. All seven proof steps are valid with the stated hypotheses; finite Galois reduction, base-change projections, invariant clopen descent, and finite-separable testing are correctly applied. Edge cases and non-quasi-compact, non-surjective, nonreduced, imperfect-characteristic cases checked. No new nodes, duplicates, circularity, route-pivot violations, hidden long steps, or missing hypotheses found. Review written to review.md."
  }
 }

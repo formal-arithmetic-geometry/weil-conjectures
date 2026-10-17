@@ -2,7 +2,7 @@
  "id": "lem-trf-space-fibre-products-etale-covers",
  "kind": "statement",
  "title": "Fibre products of algebraic spaces and pullback of etale coverings",
- "statement": "Let $S$ be a scheme [def-pc-scheme], let $F,G,H$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $F\\to H$, $G\\to H$ be morphisms. The sheaf fibre product $F\\times_HG$ is an algebraic space and is a fibre product in the category of algebraic spaces over $S$. If $\\{H_i\\to H\\}_{i\\in I}$ is a jointly surjective etale family of algebraic spaces and $G\\to H$ is any morphism, then $\\{G\\times_HH_i\\to G\\}_{i\\in I}$ is again a jointly surjective etale family. Here scheme fibre products are [def-pc-fibre-product], and etale maps of algebraic spaces are representable as in [def-trf-algebraic-space]; in particular $G\\times_HH_i$ is a scheme if $G$ is a scheme and $H_i\\to H$ is etale.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $F,G,H$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $F\\to H$, $G\\to H$ be morphisms. The sheaf fibre product $F\\times_HG$ is an algebraic space and is a fibre product in the category of algebraic spaces over $S$. If $\\{H_i\\to H\\}_{i\\in I}$ is a jointly surjective etale family of algebraic spaces and $G\\to H$ is any morphism, then $\\{G\\times_HH_i\\to G\\}_{i\\in I}$ is again a jointly surjective etale family. Here scheme fibre products are [def-pc-fibre-product], and etale maps of algebraic spaces are representable as in [def-trf-algebraic-space]; in particular $G\\times_HH_i$ is a scheme if $G$ is a scheme and $H_i\\to H$ is etale. In the joint-surjectivity clause, $|X|$ denotes the set of equivalence classes of maps $\\operatorname{Spec}K\\to X$, with $K$ a field [def-weil-field]; two maps represent the same point if their pullbacks to some common field extension agree. A family is jointly surjective if the union of its images on these sets is all of the target point set.",
  "source": {
   "document": "literature/stacks-project/spaces.tex",
   "place": "Tag 02X2 (lemma-fibre-product-spaces), using Tag 04T9 (lemma-fibre-product-spaces-over-sheaf-with-representable-diagonal); spaces-topologies.tex Tag 041F (lemma-etale), part (3)."
@@ -10,43 +10,172 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-trf-algebraic-space",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-weil-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P(T)=\\{(x,y)\\in F(T)\\times G(T):f(x)=g(y)\\text{ in }H(T)\\}$, with componentwise restrictions. This is a sheaf: a matching family of pairs glues uniquely in $F$ and $G$; the images of the two glued sections in $H(T)$ agree because their restrictions agree on the covering and $H$ is a sheaf. This uses the sheaf equalizer condition in [def-weil-pbc-sites-and-cohomology] and the sheaf part of [def-trf-algebraic-space]. Thus $P$ is the sheaf fibre product.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 04T9, first paragraph of proof: the sheaf condition, expanded using the sheaf equalizer definition"
+   }
+  },
+  {
+   "text": "To test the diagonal of $P$, take a scheme $T$ and two sections $(x_1,y_1),(x_2,y_2)\\in P(T)$. The equality locus $A=T\\times_{(x_1,x_2),F\\times F,\\Delta_F}F$ is a scheme, and likewise $B=T\\times_{(y_1,y_2),G\\times G,\\Delta_G}G$, by representability of the two diagonals. For every scheme $Z\\to T$, a section of $A\\times_TB$ is precisely simultaneous equality of the two $F$ sections and the two $G$ sections, hence equality of the two $P$ sections. Consequently $A\\times_TB$ represents the pullback of $\\Delta_P$ to $T$. This scheme exists by [def-pc-fibre-product], so $\\Delta_P$ is representable.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 04T9, diagonal cartesian square, with representability checked directly on a scheme test"
+   }
+  },
+  {
+   "text": "Choose the representable surjective etale atlases $U\\to F$ and $V\\to G$ supplied by [def-trf-algebraic-space]. The sheaf $W=U\\times_HV$ is a scheme: it is the pullback of $\\Delta_H:H\\to H\\times H$ along the map $U\\times_SV\\to H\\times H$ induced by $U\\to H$ and $V\\to H$. The source of this test is a scheme by [def-pc-fibre-product], and the diagonal of the algebraic space $H$ is representable. The maps to $F$ and $G$ induce $W\\to P$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 04T9, last paragraph: the scheme atlas U times_H V"
+   }
+  },
+  {
+   "text": "For a scheme $T\\to P$ with components $x:T\\to F$, $y:T\\to G$, form the schemes $A=T\\times_FU$ and $B=T\\times_GV$. Their maps to $T$ are surjective etale by the atlas definition. The pullback $T\\times_PW$ is represented by $A\\times_TB$: on every test scheme its data are exactly the two lifts of $x,y$, whose images in $H$ already agree. The projection $A\\times_TB\\to B$ is surjective and etale by [lem-weil-pbc-surjective-base-change] and [lem-weil-pbc-etale-scheme-base-change]. Composing with $B\\to T$ preserves surjectivity by [lem-trf-surjective-morphism-composition] and etaleness by [lem-weil-pbc-etale-composition-cancellation](2). Thus $W\\to P$ is representable surjective etale. Together with steps 1 and 2 this verifies all three algebraic-space conditions and proves that $P$ is an algebraic space.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-trf-surjective-morphism-composition",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 04T9, last paragraph; the atlas tested on schemes, with scheme permanence from Tags 01S1, 02GO and 02GN"
+   }
+  },
+  {
+   "text": "For any algebraic space $Q$, a morphism $Q\\to P$ sends a section $q$ to a compatible pair of sections in $F$ and $G$. Conversely a pair of natural transformations $Q\\to F$, $Q\\to G$ whose composites to $H$ agree defines $q\\mapsto(a(q),b(q))$ in $P$, naturally in the test scheme. These constructions are inverse. Since morphisms of algebraic spaces are natural transformations [def-trf-algebraic-space], this is exactly the required categorical universal property.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02X2, universal property in the full subcategory, written on sections"
+   }
+  },
+  {
+   "text": "Apply the fibre-product construction just proved to $G\\to H$ and $H_i\\to H$, so $P_i=G\\times_HH_i$ is an algebraic space. For every scheme $T\\to G$, the pullback $T\\times_GP_i$ is $T\\times_HH_i$: both functors consist of a section of $T$ and a compatible section of $H_i$. Since $H_i\\to H$ is representable etale in the convention of the statement, this is a scheme etale over $T$. Thus each $P_i\\to G$ is representable etale by [def-trf-algebraic-space]. In particular, taking $T=G$ when $G$ is a scheme shows that $P_i$ is a scheme, as required.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 041F(3), etaleness and scheme special case proved directly by the scheme-test definition"
+   }
+  },
+  {
+   "text": "It remains to prove joint surjectivity, without invoking the omitted proof of Tag 041F(3). Let $z\\in|G|$ be represented by $a:\\operatorname{Spec}K\\to G$. Joint surjectivity of the given family gives $i$ and a representative $b:\\operatorname{Spec}L\\to H_i$ whose image in $|H|$ is the image of $z$. By the point equivalence relation stated above, there is a common extension $M$ of $K$ and $L$ on which the two maps to $H$ agree. The pair $(a|_M,b|_M)$ is therefore a section of the sheaf $G\\times_HH_i$ over $\\operatorname{Spec}M$, and its point maps to $z$ because $a|_M$ is equivalent to $a$. This proves that every point is covered. If $I$ is empty, the hypothesis gives $|H|=\\varnothing$ and any point of $G$ would map to a point of $H$, so $|G|=\\varnothing$ and the conclusion still holds.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BU (definition-points) and Tag 03H4 (lemma-points-cartesian), common-field-extension argument; supplies the joint-surjectivity detail omitted at spaces-topologies.tex Tag 041F(3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-weil-field",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-surjective-morphism-composition",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 04T9, the explicit diagonal and atlas construction; Tag 02X2, universal property. For Tag 041F(3), the omitted joint-surjectivity proof is supplied by the common-extension argument of spaces-properties.tex, Tag 03BU and Tag 03H4 (lemma-points-cartesian)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Fibre products of algebraic spaces exist and etale covering families are preserved by base change",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Over\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    [inst : P.IsStableUnderBaseChange] →\\n      [inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        {X W : AlgebraicGeometry.Scheme} →\\n          (𝒰 : AlgebraicGeometry.Scheme.\", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, a scheme $ X $ over $ S $ with a $ P $-precoverage cover $ \\\\mathcal{U} $, and \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp'\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Over\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    [inst : P.IsStableUnderBaseChange] →\\n      [inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        {X W : AlgebraicGeometry.Scheme} →\\n          (𝒰 : AlgebraicGeometry.Scheme.\", \"doc\": \"For any scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, every morphism $ f_j $ associated to an element\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOver\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Over\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    [inst : P.IsStableUnderBaseChange] →\\n      [inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        {X W : AlgebraicGeometry.Scheme} →\\n          (𝒰 : AlgebraicGeometry.Scheme.\", \"doc\": \"For any scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, every morphism $ f_j $ associated to an element\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOver'\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Over\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    [inst : P.IsStableUnderBaseChange] →\\n      [inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        {X W : AlgebraicGeometry.Scheme} →\\n          (𝒰 : AlgebraicGeometry.Scheme.\", \"doc\": \"For any scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, every morphism $ f_j $ associated to an element\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverPullbackCoverOver\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Over\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    [inst : P.IsStableUnderBaseChange] →\\n      [inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        {X W : AlgebraicGeometry.Scheme} →\\n          (𝒰 : AlgebraicGeometry.Scheme.\", \"doc\": \"Given a base scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, a scheme $ X $ over $ S $ with a $ P $-precoverage cover $ \\\\mathcal{U} $,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverPullbackCoverOver'\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Over\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    [inst : P.IsStableUnderBaseChange] →\\n      [inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        {X W : AlgebraicGeometry.Scheme} →\\n          (𝒰 : AlgebraicGeometry.Scheme.\", \"doc\": \"Given a base scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, schemes $ X $ and $ W $ over $ S $, and a $ P $-precoverage cover $ \\\\math\"}",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Algebraic spaces are closed under fibre products and etale covers pull back to etale covers",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsEtale @IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksPrecoverageOfHasPullbacks\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.MorphismProperty\", \"type\": \"[P.HasPullbacks] : (precoverage P).HasPullbacks\", \"doc\": \"If a morphism property $ P $ on the category of schemes is closed under pullbacks (i.e., whenever two morphisms satisfy $ P $, their pullback exists and also satisfies $ P $), then the precoverage on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y S : Scheme} (f : X ⟶ S) (g : Y ⟶ S) [IsAffineHom f] [IsAffine Y] : IsAffine (pullback f g)\", \"doc\": \"Given schemes $X, Y, S$ with morphisms $f : X \\to S$ and $g : Y \\to S$, if $f$ is an affine morphism and $Y$ is an affine scheme, then the fiber product $X \\times_S Y$ is also an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_f\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme)\\n  [inst : P.IsStableUnderBaseChange] [inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P]\\n  {X W : AlgebraicGeometry.Scheme} (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.pr\", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, schemes $ X $ and $ W $ over $ S $, and a $ P $-precoverage cover $ \\\\mathcal{U\"}\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[Etale R A] : Etale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}",
-   "date": "2026-10-18",
-   "verdict": "no match"
+   "query": "A fibre product of algebraic spaces over a sheaf with representable diagonal is an algebraic space",
+   "results": "Logged 8 hits: AlgebraicGeometry.Scheme.Pullback.instHasPullback, AlgebraicGeometry.Scheme.Pullback.instHasPullbacks, AlgebraicGeometry.IsSeparated.instFstScheme, AlgebraicGeometry.IsFinite.instFstScheme, AlgebraicGeometry.IsSeparated.instSndScheme, AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback, AlgebraicGeometry.UniversallyOpen.fst, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme-level or generic functor results do not state algebraic-space closure or algebraic-space covering pullback"
   },
   {
    "tool": "loogle",
-   "query": "\"AlgebraicSpace\", \"pullback\"",
-   "results": "[loogle] OK 0 hit(s)",
-   "date": "2026-10-18",
-   "verdict": "no match"
+   "query": "\"AlgebraicSpace\", \"fibre product\"",
+   "results": "Logged 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme-level or generic functor results do not state algebraic-space closure or algebraic-space covering pullback"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|fibre.product.spaces",
+   "results": "Logged 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme-level or generic functor results do not state algebraic-space closure or algebraic-space covering pullback"
+  },
+  {
+   "tool": "leansearch",
+   "query": "fibre product of algebraic spaces over representable diagonal",
+   "results": "Logged 8 hits: CategoryTheory.Functor.relativelyRepresentable.diag_iff, CategoryTheory.Functor.relativelyRepresentable.diag_of_map_from_obj, CategoryTheory.Functor.relativelyRepresentable.of_diag, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal, AlgebraicGeometry.quasiSeparated_iff, AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme-level or generic functor results do not state algebraic-space closure or algebraic-space covering pullback"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a jointly surjective etale family of algebraic spaces is jointly surjective etale",
+   "results": "Logged 8 hits: AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, Algebra.IsStandardEtale.of_surjective, AlgebraicGeometry.isSmooth_isStableUnderBaseChange",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme-level or generic functor results do not state algebraic-space closure or algebraic-space covering pullback"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsEtale\"",
+   "results": "Logged 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme-level or generic functor results do not state algebraic-space closure or algebraic-space covering pullback"
   },
   {
    "tool": "grep",
    "query": "AlgebraicSpace|algebraic.space",
-   "results": "[grep] OK 0 hit(s)",
-   "date": "2026-10-18",
-   "verdict": "no match"
+   "results": "Logged 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme-level or generic functor results do not state algebraic-space closure or algebraic-space covering pullback"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale covering family of algebraic spaces stable under pullback",
+   "results": "Logged 8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage, CategoryTheory.MorphismProperty.coverage, AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_f, CategoryTheory.GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage, CategoryTheory.Precoverage.mem_coverings_of_isPullback, AlgebraicGeometry.Scheme.instOverPullbackCoverOver, CategoryTheory.GrothendieckTopology.Cover.pullback",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme-level or generic functor results do not state algebraic-space closure or algebraic-space covering pullback"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-algebraic-space-ample-local",
@@ -75,5 +204,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-space-fibre-products-etale-covers",
+  "worker": "stage1",
+  "summary": "Repair of the return at 2544e89fce: withdrew the unsplit 04T9 restatement and replaced its application by scheme-test proofs of the diagonal and an explicit atlas U times_H V. Four existing Mathlib leaves supply exactly scheme etale/surjective base change and composition. The 041F(3) covering assertion is proved using common field extensions in the definition of points, rather than invoked with its omitted proof. Expanded the meaning of jointly surjective inline without changing hypotheses or conclusions. No new nodes. Retained current-base metadata and complete historical blueprint ancestry; reconciled searches with the retained actual command log.",
+  "blueprint": "Historical polarized-descent input below lem-trf-local-term-locality, through the full existing via chain beginning lem-trf-algebraic-space-ample-local: steps 1-5 construct the fibre products needed for scheme tests, and steps 6-7 pull back the etale covering family. This is a helper of that chain, not a replacement for the unit contracting-correspondence argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-3e0a27c25",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-3e0a27c25 (reviewer sub-agent of L); spot-checked: Read the required instructions, packet, report, item, unit/chapter route, all cited DAG statements, and Stacks Tags 025Y, 02X2, 04T9, 041F, 03BU, and 03H4. Verified every proof step, hypotheses, scheme base-change/composition citations, universal property, common-field joint-surjectivity argument, edge cases, searches, route restrictions, and long-step rule. No new nodes or duplicate/restated children remain. Wrote review.md with detailed checks; no repairs required."
  }
 }
