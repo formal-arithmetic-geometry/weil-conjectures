@@ -78,13 +78,30 @@ instance preservesFiniteColimits_sheafForget₂ : PreservesFiniteColimits (sheaf
   exact preservesFiniteColimits_of_natIso
     (sheafToPresheafCompWhiskeringRightCompPresheafToSheafIso _ _)
 
+omit [CommRing Λ] in
+/-- Base change of an injective `ℤ`-linear map to a ring which is torsion free as an abelian
+group is injective, for any `ℤ`-algebra structure on it (there is only one). -/
+lemma _root_.LinearMap.baseChange_injective_of_isAddTorsionFree {A : Type*} [CommRing A]
+    [IsAddTorsionFree A] (inst : Algebra ℤ A) {M N : Type*} [AddCommGroup M] [AddCommGroup N]
+    [Module ℤ M] [Module ℤ N] (f : M →ₗ[ℤ] N) (hf : Function.Injective f) :
+    Function.Injective (@LinearMap.baseChange ℤ A M N _ _ inst _ _ _ _ f) := by
+  obtain rfl : inst = Ring.toIntAlgebra A := Subsingleton.elim _ _
+  rw [LinearMap.baseChange_eq_ltensor]
+  exact Module.Flat.lTensor_preserves_injective_linearMap f hf
+
 /-- Extension of scalars from abelian groups to modules over a ring which is torsion free as an
 abelian group preserves monomorphisms, `Λ` being flat over `ℤ`. -/
 lemma preservesMonomorphisms_extendScalarsAddCommGrp [IsAddTorsionFree Λ] :
     (ModuleCat.extendScalarsAddCommGrp Λ).PreservesMonomorphisms := by
-  -- TODO(qbar): `Λ ⊗_ℤ -` is exact (Λ torsion free, hence flat over `ℤ`); the obstacle is the
-  -- `Module ℤ` instance diamond (`Algebra.toModule` vs `AddCommGroup.toIntModule`).
-  sorry
+  have : (ModuleCat.extendScalars.{0, u + 1, u + 1}
+      (Int.castRingHom Λ)).PreservesMonomorphisms := by
+    refine ⟨fun {M N} f hf ↦ ?_⟩
+    rw [ModuleCat.mono_iff_injective] at hf ⊢
+    change Function.Injective (ModuleCat.ExtendScalars.map' (Int.castRingHom Λ) f).hom
+    simp only [ModuleCat.ExtendScalars.map', ModuleCat.hom_ofHom]
+    exact LinearMap.baseChange_injective_of_isAddTorsionFree _ _ hf
+  unfold ModuleCat.extendScalarsAddCommGrp
+  infer_instance
 
 /-- Extension of scalars `Λ ⊗_ℤ -` from abelian pro-étale sheaves to sheaves of `Λ`-modules. -/
 noncomputable abbrev sheafExtendScalarsAddCommGrp :
