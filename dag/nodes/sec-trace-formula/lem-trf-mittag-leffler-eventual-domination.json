@@ -12,9 +12,105 @@
   "def-weil-pbc-category-colimit",
   "def-sc-finitely-presented-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume that $M$ is Mittag-Leffler in the tensor-product sense. Fix $i$ and put $N=\\prod_{s\\in I}M_s$. Applying [lem-trf-mittag-leffler-hom-systems] to the given finitely presented directed colimit with this single target module $N$ gives an index $j\\ge i$ such that, for every $k\\ge j$, the images of $\\operatorname{Hom}_R(M_j,N)\\to\\operatorname{Hom}_R(M_i,N)$ and $\\operatorname{Hom}_R(M_k,N)\\to\\operatorname{Hom}_R(M_i,N)$ agree. The target is therefore chosen before any component $M_j$ is used; this uses precisely the tensor-product Mittag-Leffler hypothesis [def-trf-mittag-leffler-module] required by that node.",
+   "uses": [
+    "lem-trf-mittag-leffler-hom-systems",
+    "def-trf-mittag-leffler-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M, proposition-ML-tensor, (2) implies (1), followed by Tag 059E, condition (4)"
+   }
+  },
+  {
+   "text": "For each $k\\ge j$, identify maps into the product $N$ with their component maps. Projecting the equality of image sets from Step 1 along $N\\to M_j$ gives equality of the images of $\\operatorname{Hom}_R(M_j,M_j)\\to\\operatorname{Hom}_R(M_i,M_j)$ and $\\operatorname{Hom}_R(M_k,M_j)\\to\\operatorname{Hom}_R(M_i,M_j)$. The identity of $M_j$ maps by precomposition with $f_{ij}$ to $f_{ij}$, so it is the precomposition image of some $h_k:M_k\\to M_j$, and hence $h_k\\circ f_{ik}=f_{ij}$. Thus this relation is available for every $k\\ge j$, exactly as required for the subsequent stage-kernel argument.",
+   "uses": [
+    "lem-trf-mittag-leffler-hom-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059E, proposition-ML-characterization, (4) and (5) imply (3), the identity endomorphism argument"
+   }
+  },
+  {
+   "text": "Let $L$ be any $R$-module and let $x\\in\\ker(f_i\\otimes_R\\mathrm{id}_L)$. By the elementwise description of the directed colimit after tensoring, [lem-weil-pbc-filtered-colimit-modules-elementwise] applied to the colimit of the tensor system gives an index $k\\ge i$ such that $(f_{ik}\\otimes_R\\mathrm{id}_L)(x)=0$. Choose a common upper bound $k'\\ge k,j$; functoriality of the transition maps carries the vanishing to $(f_{ik'}\\otimes_R\\mathrm{id}_L)(x)=0$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059E, proposition-ML-characterization, (3) implies (2), kernel of the colimit map as the union of stage kernels; Tags 00DD, 00D7"
+   }
+  },
+  {
+   "text": "Using the map $h_{k'}$ from Step 2 and functoriality of tensor products [def-weil-pbc-module-tensor-product], we have $(f_{ij}\\otimes\\mathrm{id}_L)=(h_{k'}\\otimes\\mathrm{id}_L)\\circ(f_{ik'}\\otimes\\mathrm{id}_L)$. Thus the element $x$ is killed by $f_{ij}\\otimes\\mathrm{id}_L$. Since $L$ and $x$ were arbitrary, $\\ker(f_i\\otimes\\mathrm{id}_L)\\subseteq\\ker(f_{ij}\\otimes\\mathrm{id}_L)$ for every $L$, so $f_{ij}$ dominates $f_i$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059E, proposition-ML-characterization, (3) implies (2), domination from factorization and stage-kernel inclusion"
+   }
+  },
+  {
+   "text": "Conversely, assume that for every $i$ there is $j\\ge i$ with $f_{ij}$ dominating $f_i$. To prove the tensor-product Mittag-Leffler condition, fix a set $A$, a family of $R$-modules $(Q_\\alpha)_{\\alpha\\in A}$, and an element $x$ in the kernel of the canonical comparison $\\theta_{M,(Q_\\alpha)}:M\\otimes_R\\prod_\\alpha Q_\\alpha\\to\\prod_\\alpha(M\\otimes_RQ_\\alpha)$. By [lem-weil-pbc-tensor-commutes-with-colimits], the tensor system $M_i\\otimes_R\\prod_\\alpha Q_\\alpha$ has colimit $M\\otimes_R\\prod_\\alpha Q_\\alpha$; the elementwise colimit criterion [lem-weil-pbc-filtered-colimit-modules-elementwise] therefore represents $x$ as $(f_i\\otimes\\mathrm{id}_{\\prod Q_\\alpha})(z)$ for some $i$ and $z\\in M_i\\otimes_R\\prod_\\alpha Q_\\alpha$.",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M, proposition-ML-tensor, (2) implies (1), representation of a kernel element at a finitely presented stage"
+   }
+  },
+  {
+   "text": "Choose $j\\ge i$ so that $f_{ij}$ dominates $f_i$. For each $\\alpha$, let $z_\\alpha$ be the image of $z$ under the canonical projection $M_i\\otimes_R\\prod_\\beta Q_\\beta\\to M_i\\otimes_RQ_\\alpha$. The $\\alpha$-component of $\\theta_{M,(Q_\\beta)}(x)=0$ says $(f_i\\otimes\\mathrm{id}_{Q_\\alpha})(z_\\alpha)=0$. Domination then gives $(f_{ij}\\otimes\\mathrm{id}_{Q_\\alpha})(z_\\alpha)=0$ for every $\\alpha$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M, proposition-ML-tensor, (2) implies (1), coordinatewise kernel argument"
+   }
+  },
+  {
+   "text": "Because $M_i$ is finitely presented, [lem-trf-finite-presentation-tensor-products] identifies $z$ with the family $(z_\\alpha)_\\alpha$ under the canonical comparison. The coordinatewise vanishing in Step 6 consequently implies $(f_{ij}\\otimes\\mathrm{id}_{\\prod Q_\\alpha})(z)=0$. Since $f_i=f_j\\circ f_{ij}$, we obtain $x=(f_i\\otimes\\mathrm{id})(z)=0$. Thus every kernel of $\\theta_{M,(Q_\\alpha)}$ is zero, for every family, so $M$ is Mittag-Leffler by [def-trf-mittag-leffler-module].",
+   "uses": [
+    "lem-trf-finite-presentation-tensor-products",
+    "def-trf-mittag-leffler-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M, proposition-ML-tensor, proof of (2) implies (1), finite-presentation tensor-product comparison and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-mittag-leffler-module",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-finite-presentation-tensor-products",
+  "lem-trf-mittag-leffler-hom-systems",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-tensor-commutes-with-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059M, proposition-ML-tensor, and Tag 059E, proposition-ML-characterization, especially (2) implies (3) implies (4) and (3) implies (2)."
+ },
  "mathlib_searches": [
   {
    "date": "2026-10-18",
@@ -46,7 +142,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-mittag-leffler-faithfully-flat-descent",
@@ -58,7 +154,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Tag 059E, proposition-ML-characterization, equivalence of conditions (2) and the tensor-product Mittag-Leffler condition",
+   "place": "Tag 059E, proposition-ML-characterization, equivalence of condition (2) (eventual domination) with the tensor-product Mittag-Leffler condition; the item realizes the full equivalence used by the downstream faithfully-flat descent proof.",
    "via": [
     "lem-trf-mittag-leffler-faithfully-flat-descent",
     "lem-trf-countable-projective-faithfully-flat-descent",
@@ -79,5 +175,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-mittag-leffler-eventual-domination",
+  "worker": "stage1",
+  "summary": "Repaired the returned split's circular forward step. The first step now applies [lem-trf-mittag-leffler-hom-systems] with the single target $N=\\prod_{s\\in I}M_s$ to obtain $j$; the next step uses the product universal property and projection to $M_j$ to obtain the factorizations $h_k\\circ f_{ik}=f_{ij}$. The remaining five steps are unchanged and follow Stacks Tags 059M and 059E, with all existing DAG dependencies cited.",
+  "blueprint": "Realizes Tag 059E proposition-ML-characterization, condition (2) versus the tensor-product Mittag-Leffler condition, with the tensor-kernel argument from Tag 059M."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q82-34b3366e0",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q82-34b3366e0 (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, cited DAG statements, Stacks Tags 059E/059M, and delivery records. Verified all seven steps, hypotheses, dependencies, edge cases, searches, repaired non-circular stabilization, and absence of route or duplicate-node faults. Review written to review.md."
  }
 }

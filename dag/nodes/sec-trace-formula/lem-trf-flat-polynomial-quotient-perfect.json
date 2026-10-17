@@ -2,21 +2,105 @@
  "id": "lem-trf-flat-polynomial-quotient-perfect",
  "kind": "statement",
  "title": "Perfectness of a flat finite-type polynomial quotient",
- "statement": "Let $R\\to A$ be a flat finite-type homomorphism of commutative Noetherian rings [def-weil-flat-morphism, def-weil-pbc-noetherian-ring], and let $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow A$ be a polynomial presentation. Then $A$, regarded as a $P$-module through the presentation, is a perfect $P$-complex [def-pc-perfect-ring-complex]: it admits a bounded resolution by finitely generated projective $P$-modules [def-weil-pbc-projective-module]. In addition, $A$ has finite Tor dimension over $R$ [def-weil-finite-tor-amplitude].",
+ "statement": "Let $R\\to A$ be a flat finite-type homomorphism of commutative Noetherian rings [def-weil-pbc-noetherian-ring, def-weil-pbc-flat-ring-map, def-weil-pbc-finite-type-algebra], and let $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow A$ be a polynomial presentation [def-weil-pbc-mv-polynomial-ring]. Then $A$, regarded as a $P$-module through the presentation, is a perfect $P$-complex [def-pc-perfect-ring-complex]: it admits a bounded resolution by finitely generated projective $P$-modules [def-weil-pbc-projective-module]. In addition, $A$ has finite Tor dimension over $R$, meaning that there are integers $a\\le b$ such that $H^i(A\\otimes_R^{\\mathbf L}M)=0$ for every $R$-module $M$ in degree zero and every $i\\notin[a,b]$ [def-weil-abstract-derived-category]. Derived tensors here are ordinary module derived tensors, computed on K-flat first complexes as in [lem-pc-source-kflat-module-tensor-model].",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tags 067J, lemma-flat-finite-presentation-perfect, and 068Y, lemma-perfect-ring-map; the Noetherian finite-type case in dualizing.tex Tag 0BZW, lemma-relative-dualizing-algebraic."
  },
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
-  "def-weil-flat-morphism",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
   "def-pc-perfect-ring-complex",
   "def-weil-pbc-projective-module",
-  "def-weil-finite-tor-amplitude"
+  "def-weil-abstract-derived-category",
+  "lem-pc-source-kflat-module-tensor-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The finite-type-algebra Noetherian theorem [lem-weil-pbc-finite-type-algebra-noetherian] applied to $R\\to P$ makes $P$ Noetherian: it is generated as an $R$-algebra by the $n$ displayed variables. The given surjection makes $A$ a cyclic $P$-module. Indeed, for $a\\in A$ choose $p\\in P$ mapping to $a$; then $a=p\\cdot1$. Thus $A[0]$ is a bounded complex of finitely generated $P$-modules.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, algebra-lemma-Noetherian-permanence; the polynomial chart in Tag 068Y."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-flat-ring-map], the degree-zero complex $A[0]$ is a bounded-above complex of flat $R$-modules (zero terms are flat since their tensor functor is zero). By [lem-pc-module-bounded-flat-kflat] it is K-flat. By [lem-pc-source-kflat-module-tensor-model], for any $R$-module $L$ the derived tensor $A\\otimes_R^{\\mathbf L}L$ is represented by $(A\\otimes_RL)[0]$, so it has cohomology only in degree zero. This proves the additional finite-Tor assertion over $R$, with interval $[0,0]$. To express the same information using nonnegative Tor, apply [lem-pc-flat-resolution-tor-comparison] to the nonnegative chain complex consisting of $A$ in degree zero and zero elsewhere, augmented by its identity to $A$. Its tensor with $L$ has zero homology in every positive degree; hence $\\operatorname{Tor}^R_j(A,L)=0$ for $j>0$.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-source-kflat-module-tensor-model",
+    "lem-pc-flat-resolution-tor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 064K (lemma-derived-tor-quasi-isomorphism), 06XY (derived tensor); algebra.tex Tags 00LY and 00M3 (flat resolutions)."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-polynomial-tor-bound] with base ring $R$, polynomial module $A$ and $d=0$. Step 2 gives its vanishing hypothesis for every base module, with exactly the first-variable Tor convention in that node. It follows that $\\operatorname{Tor}^P_j(A,N)=0$ for every $P$-module $N$ and every $j>n$. This is the polynomial-extension homological bound underlying Tag 068X; neither a regularity nor a local complete-intersection assumption on $A$ is used.",
+   "uses": [
+    "lem-pc-polynomial-tor-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068X, lemma-perfect-over-polynomial-ring: polynomial extension transfers a finite base Tor bound; quantitative ordinary-module input supplied by the cited general node."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-free-resolution-noetherian], applied to the Noetherian ring $P$ and cyclic module $A$ of Step 1, choose an augmented finite-free resolution $F_\\bullet\\to A$. Put $F_j$ in cochain degree $-j$ and zero in positive degrees, keeping the differentials. Exactness of the augmentation gives $F^\\bullet\\simeq A[0]$. Its terms are flat by [lem-sc-affine-standard-cover-finite-free-local-fp-flat], so [lem-pc-module-bounded-flat-kflat] makes $F^\\bullet$ K-flat. The tensor model [lem-pc-source-kflat-module-tensor-model] computes $A\\otimes_P^{\\mathbf L}N$ by $F^\\bullet\\otimes_PN$. By [lem-pc-flat-resolution-tor-comparison] its degree $-j$ cohomology is $\\operatorname{Tor}^P_j(A,N)$ for $j\\ge0$ (the cochain indexing is exactly the reversal of the chain indexing). Therefore Step 3 gives vanishing below $-n$; vanishing above zero holds because the representing complex has zero terms there. Hence $A[0]$ has Tor amplitude in $[-n,0]$ over $P$.",
+   "uses": [
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-source-kflat-module-tensor-model",
+    "lem-pc-flat-resolution-tor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068X and Tag 0658, bounded-above free models and transfer of the Tor interval; algebra.tex Tags 00LP and 00M3."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-bounded-finite-tor-perfect] over $P$ to $A[0]$ and the interval $[-n,0]$. Step 1 verifies Noetherianity, boundedness and finite generation, and Step 4 gives its derived-tensor vanishing for every $P$-module. Thus there is a finite-projective complex $E^\\bullet$ supported in $[-n,0]$ isomorphic to $A[0]$ in $D(P)$, which is perfectness in the sense of [def-pc-perfect-ring-complex]. The isomorphism induces $H^0(E)\\cong A$ and $H^i(E)=0$ for $i\\ne0$. Since $E^1=0$, compose $E^0\\to E^0/\\operatorname{im}d^{-1}=H^0(E)$ with this isomorphism to obtain an augmentation $E^0\\to A$. It is surjective with kernel $\\operatorname{im}d^{-1}$; in every negative degree vanishing cohomology gives exactness, by [def-weil-abstract-derived-category]. The augmented finite complex is the required bounded resolution by finitely generated projective $P$-modules. This includes $n=0$, when the model has only a degree-zero term.",
+   "uses": [
+    "lem-weil-bounded-finite-tor-perfect",
+    "def-pc-perfect-ring-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0658, lemma-perfect, and Tag 066Q, lemma-perfect-module; explicit augmentation of the model in degrees [-n,0]."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-flat-ring-map",
+  "lem-pc-flat-resolution-tor-comparison",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-polynomial-tor-bound",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+  "lem-weil-bounded-finite-tor-perfect",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Explicit ordinary-module assembly of the polynomial-chart argument of Tags 068X, 068Y and 0658, using the existing general polynomial Tor bound and flat-resolution comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +129,59 @@
    "results": "8 hits; RingHom.Flat, RingHom.FinitePresentation, Module.Flat.projective_of_finitePresentation and related declarations; no perfect ring-map/finite-Tor theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat finite type homomorphism of Noetherian rings gives a perfect polynomial quotient and finite Tor dimension",
+   "results": "{\"t\": \"2026-10-17T22:10:09Z\", \"tool\": \"leanfinder\", \"query\": \"flat finite type homomorphism of Noetherian rings gives a perfect polynomial quotient and finite Tor dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.FinitePresentation.of_finiteType\", \"Algebra.Smooth.flat\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.Smooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\"], \"digest\": \"840c995f1527056d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned smoothness and finite-presentation results do not give a bounded projective resolution over a polynomial presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.FinitePresentation, perfect polynomial quotient",
+   "results": "{\"t\": \"2026-10-17T22:10:09Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, Module.FinitePresentation, perfect polynomial quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `perfect`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned smoothness and finite-presentation results do not give a bounded projective resolution over a polynomial presentation"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect ring map|finite Tor dimension|finite.*projective.*polynomial",
+   "results": "{\"t\": \"2026-10-17T22:10:09Z\", \"tool\": \"grep\", \"query\": \"perfect ring map|finite Tor dimension|finite.*projective.*polynomial\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned smoothness and finite-presentation results do not give a bounded projective resolution over a polynomial presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented algebra over a Noetherian ring has finite Tor dimension over a polynomial algebra presentation",
+   "results": "{\"t\": \"2026-10-17T22:10:18Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finitely presented algebra over a Noetherian ring has finite Tor dimension over a polynomial algebra presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat\", \"Algebra.FinitePresentation.of_finiteType\", \"AlgHom.FinitePresentation.of_finiteType\", \"RingHom.FinitePresentation.of_finiteType\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsStandardSmooth.finitePresentation\"], \"digest\": \"54256fa6d08bbf8e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned smoothness and finite-presentation results do not give a bounded projective resolution over a polynomial presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.FinitePresentation.of_finiteType",
+   "results": "{\"t\": \"2026-10-17T22:10:19Z\", \"tool\": \"loogle\", \"query\": \"RingHom.FinitePresentation.of_finiteType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"RingHom.FinitePresentation.of_finiteType\"], \"digest\": \"6db9bf0c289e65d2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned smoothness and finite-presentation results do not give a bounded projective resolution over a polynomial presentation"
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation.of_finiteType|perfect ring map|finite Tor",
+   "results": "{\"t\": \"2026-10-17T22:10:19Z\", \"tool\": \"grep\", \"query\": \"FinitePresentation.of_finiteType|perfect ring map|finite Tor\", \"sub\": \"RingTheory/FinitePresentation.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"435\", \"549\"], \"digest\": \"fcab2ae6803bc456\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned smoothness and finite-presentation results do not give a bounded projective resolution over a polynomial presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat finite type algebra over a Noetherian ring admits a bounded resolution by finite projective modules over any polynomial presentation",
+   "results": "{\"t\": \"2026-10-17T22:18:49Z\", \"tool\": \"leansearch\", \"query\": \"A flat finite type algebra over a Noetherian ring admits a bounded resolution by finite projective modules over any polynomial presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_projective\", \"Module.Flat.projective_of_finitePresentation\", \"Module.finitePresentation_of_finite\", \"RingHom.FinitePresentation\", \"AlgHom.FinitePresentation\", \"AlgHom.FinitePresentation.of_finiteType\", \"RingHom.FiniteType.of_finitePresentation\", \"Algebra.Smooth.flat_of_isNoetherianRing\"], \"digest\": \"07619caa2074ee2f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern projective implies flat, finitely presented flat modules, and finite presentation of ring maps; none gives this finite projective polynomial resolution"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-algebraic-shriek-relative-perfect",
@@ -78,5 +211,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flat-polynomial-quotient-perfect",
+  "worker": "stage1",
+  "summary": "Corrected the imported scheme-flatness and coefficient-sheaf Tor references to ordinary ring-module notions, without changing any hypothesis or conclusion. Derived Tor vanishing over R from flatness, transferred the bound using the existing general polynomial Tor node, identified cohomological amplitude [-n,0] on a finite-free resolution, and applied the existing Noetherian perfectness criterion. No new nodes.",
+  "blueprint": "The steps realize the flat finite-type polynomial-chart perfectness calculation in the ancestor proof of lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-polynomial-tor-bound",
+    "why": "The generic polynomial extension Tor bound supplies the homological dimension step in the polynomial-chart argument; the trace-formula unit has no ring-theoretic version."
+   },
+   {
+    "node": "lem-pc-flat-resolution-tor-comparison",
+    "why": "Generic ordinary-module Tor computation on a flat augmented resolution; needed to use the first-variable Tor convention and to identify the negative cohomology of derived tensor."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic ordinary-module bounded-above flat K-flatness, for A[0] and the finite-free P-resolution; no trace-formula-unit statement supplies it."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Generic ordinary-module derived tensor computation on a K-flat first complex, used to establish the actual Tor-amplitude hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-resolution-noetherian",
+    "why": "Generic finite-free resolution theorem for finite modules over a Noetherian ring, used for the cyclic P-module A."
+   },
+   {
+    "node": "lem-weil-bounded-finite-tor-perfect",
+    "why": "Generic Noetherian bounded-complex perfectness criterion applied only after deriving the required interval [-n,0]."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-polynomial-tor-bound",
+  "lem-pc-flat-resolution-tor-comparison",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-bounded-finite-tor-perfect"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q34-30108ce96",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-30108ce96 (reviewer sub-agent of L); spot-checked: Read the complete item, report, chapter/unit route, all cited DAG statements, and Stacks Tags 067J, 068Y, 068X, 0658, 066Q, 00FN, 00LP, 00LY/00M3, and 0BZW. The five steps correctly derive R-Tor amplitude from flatness, transfer the bound over the polynomial ring, and obtain the finite projective resolution. Edge cases A=0, zero base, n=0, redundant variables, polynomial A, and a singular base were checked. No new nodes, duplicates, circularity, long-step issues, forbidden SGA citations, or route-pivot machinery were found. Corrected ordinary ring/module dependency typing is sound. Review written to review.md."
  }
 }

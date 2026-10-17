@@ -22,9 +22,138 @@
   "def-trf-modification",
   "def-trf-schematically-dense-open"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-finite-eta-flatification] to $f$. Write $b:S_1\\to S$ and $a:Z\\to X\\times_S S_1$ for its output. Properness makes $S_1$ qcqs by [lem-weil-pbc-qcqs-morphism-permanence](2): a proper map is quasi-compact and separated, hence quasi-separated. Thus $S_1$ is integral qcqs, $b$ is proper surjective with the original generic field $K=k(S)$, $a$ is finite and a generic isomorphism, and there is an open $U_1\\subset X\\times_S S_1$ whose inclusion and inverse-image inclusion are schematically dense and over which $a$ is an isomorphism; moreover $Z\\to S_1$ is flat and finitely presented. The generic fibre of $Z$ is identified with $X_\\eta$, so it is geometrically reduced. It remains to construct a reduced-fibre finite generic modification of $Z$ after a separable alteration of $S_1$; no density in the original nonflat target is used.",
+   "uses": [
+    "lem-trf-finite-eta-flatification",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5, Step 0, printed pp. 21–22."
+   }
+  },
+  {
+   "text": "Choose a finite affine cover $S_a=\\operatorname{Spec}R_a$ of $S_1$ and, for each $a$, a finite affine cover $Z_{ab}=\\operatorname{Spec}A_{ab}$ of $Z\\times_{S_1}S_a$. Each $A_{ab}$ is a flat finitely presented $R_a$-algebra, by [lem-weil-pbc-flat-morphism-affine-criterion] and finite presentation of $Z\\to S_1$; the affine restrictions remain of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](1). Fix a separable closure $L/K$. For every centred valuation ring $V\\subseteq L$ over $S_a$, pull back $Z_{ab}$ to $V$. Flatness is preserved by [lem-pc-relatively-flat-module-pullback], applied to the structure sheaf, and finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). The generic algebra is geometrically reduced by [lem-trf-geometric-reduced-fibre-locus-base-change].",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pc-relatively-flat-module-pullback",
+    "lem-trf-geometric-reduced-fibre-locus-base-change",
+    "lem-weil-pbc-flat-morphism-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5, Steps 1 and 5, printed pp. 22,24."
+   }
+  },
+  {
+   "text": "For every $(a,b,V)$ apply [lem-trf-valuation-reduced-fibre-normalization] to $A_{ab}\\otimes_{R_a}V$. The field $L$ is separably closed, and the preceding step checks flatness, finite presentation and geometric reducedness of the generic algebra. Its relative integral closure $B_{ab,V}$ is finite over $A_{ab}\\otimes V$, flat and finitely presented over $V$, agrees with the original algebra after tensoring with $L$, and has reduced geometric fibres. This invokes the precise separably closed valuation-field theorem, including its arbitrary-height limit clause; it does not assert that the same construction works over an arbitrary valuation field.",
+   "uses": [
+    "lem-trf-valuation-reduced-fibre-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5, Steps 2–4 and valuation-limit part of Step 5, printed pp. 22–24."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-eta-modification-spreading] with $R=R_a$, the extension $L/K$, the valuation ring $V$, the algebra $A=A_{ab}$ and $B=B_{ab,V}$. It gives an integral affine $L$-quasi-model $U_{ab,V}=\\operatorname{Spec}R'_{ab,V}\\to S_a\\to S_1$, a lift of $\\operatorname{Spec}V$ to it, and a finite generically isomorphic map $Y_{ab,V}\\to Z_{ab}\\times_{S_a}U_{ab,V}$. The morphism $Y_{ab,V}\\to U_{ab,V}$ is flat by [lem-weil-pbc-flat-ring-map-iff-flat-affine] and finitely presented with reduced geometric fibres. All of these are outputs of the spreading statement; no unspecified neighbourhood or finite-type assumption on $S_1$ is inserted.",
+   "uses": [
+    "lem-trf-finite-eta-modification-spreading",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5, Step 5 and §3.1, printed pp. 14–15,24."
+   }
+  },
+  {
+   "text": "Use [lem-trf-qcqs-separable-riemann-zariski-refinement]. For each fixed $(a,b)$ the opens $RZ_L(U_{ab,V})$ cover $RZ_L(S_a)$, since every valuation $V$ has the lift just constructed. Quasi-compactness gives a finite subfamily for this pair. There are finitely many pairs $(a,b)$, so one common $L$-model $T\\to S_1$ refines all chosen quasi-models, with quasi-compact open subschemes $W_{abj}\\subseteq T$ and proper maps $W_{abj}\\to U_{abj}$. For each fixed $(a,b)$ the $W_{abj}$ cover $T\\times_{S_1}S_a$ by the relative open-cover clause of the cited statement. The generic field $k(T)/K$ is finite separable. Crucially this node applies to arbitrary integral qcqs schemes, unlike the finite-type-over-$\\mathbf Z$ statement of lem-trf-riemann-zariski-finite-refinement.",
+   "uses": [
+    "lem-trf-qcqs-separable-riemann-zariski-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5, Steps 1 and 5, using Propositions 3.2.1,3.2.6 and Corollary 3.2.7, printed pp. 15–17,22,24."
+   }
+  },
+  {
+   "text": "Pull each $Y_{abj}$ back to $W_{abj}$, obtaining a finite map $Q_{abj}\\to H_{abj}:=Z_{ab}\\times_{S_a}W_{abj}$; finiteness survives by [lem-trf-finite-radicial-basechange]. The $H_{abj}$ are quasi-compact opens covering $Z_T:=Z\\times_{S_1}T$: for any point of $Z_T$, first choose its chart $Z_{ab}$ and then a $W_{abj}$ containing its base point. Flatness and finite presentation of $Q_{abj}\\to W_{abj}$ survive by [lem-pc-relatively-flat-module-pullback] and [lem-weil-pbc-qcqs-morphism-permanence](3), and reduced geometric fibres by [lem-trf-geometric-reduced-fibre-locus-base-change]. Viewed over $T$, each $Q_{abj}$ is flat because $W_{abj}\\subseteq T$ has the same local rings, and locally of finite presentation because affine charts in $W_{abj}$ are affine charts in $T$. It is qcqs by the cited permanence lemma (2), and its map to the qcqs $T$ is therefore finitely presented by (1). Fibres outside $W_{abj}$ are empty, hence reduced. Each map agrees with $H_{abj}$ on the generic fibre.",
+   "uses": [
+    "lem-trf-finite-radicial-basechange",
+    "lem-pc-relatively-flat-module-pullback",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-geometric-reduced-fibre-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5, Step 5, base change of local constructions before gluing, printed p. 24."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-eta-modification-gluing] to the flat finitely presented family $Z_T\\to T$ and its finite quasi-compact open covering by the $H_{abj}$, with the maps $Q_{abj}\\to H_{abj}$. It gives an integral finite proper surjective birational modification $S'\\to T$ after which the local finite maps have unique overlap identifications satisfying the cocycle condition. They glue to a finite map $Y'\\to Z\\times_{S_1}S'$ that is a generic isomorphism and is an isomorphism over an open whose inclusion and inverse-image inclusion are schematically dense; $Y'\\to S'$ is flat and finitely presented with reduced geometric fibres. There is no application of eta-normality to $T$ or $S'$. The additional finite base modification, supplied by the gluing lemma, replaces the unjustified immediate uniqueness claim of the returned step 5.",
+   "uses": [
+    "lem-trf-finite-eta-modification-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary 3.5.4 and Theorem 3.5.5, Steps 1 and 5, printed pp. 21–22,24."
+   }
+  },
+  {
+   "text": "Set $r$ to be the composite $S'\\to T\\to S_1\\to S$. Properness follows from [lem-weil-pbc-proper-composition]; surjectivity is preserved by composition, and the three maps are surjective (the model $T\\to S_1$ is proper dominant, so its image is closed and contains the generic point). Since the first and third maps have trivial generic field extension, $r_\\eta=\\operatorname{Spec}k(T)$ with $k(T)/K$ finite separable. The base change of $a$ is finite by [lem-trf-finite-radicial-basechange], so [lem-weil-pbc-finite-composition] makes the composite $q:Y'\\to Z\\times_{S_1}S'\\to X\\times_SS'$ finite. The dense isomorphism open from Step 7 pulls back along the finite eta-modification $a$ and is combined with the dense open from Step 1; their intersection is schematically dense on both sides, and $q$ is an isomorphism there. Both arrows induce the specified generic isomorphisms, hence so does $q$. All flatness, finite-presentation and reduced-geometric-fibre conclusions are those of step 7.",
+   "uses": [
+    "lem-weil-pbc-proper-composition",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5, assembly of Steps 0–5, printed pp. 21–24."
+   }
+  },
+  {
+   "text": "Finally the generic fibre is schematically dense in $Y'$. Over an affine open $\\operatorname{Spec}R\\subseteq S'$ with $R$ a domain, apply [lem-sc-flat-invertible-sections-torsion-free] to any open of its inverse image with the invertible module $\\mathcal O$. If a section restricts to zero on the generic fibre, then on each affine chart some nonzero $s\\in R$ annihilates it (generic restriction is localization at $R\\setminus\\{0\\}$). The cited injectivity forces the section to vanish. Covering the open by these charts proves the assertion. This argument concerns the flat source $Y'$ and requires no normality of the altered base.",
+   "uses": [
+    "lem-sc-flat-invertible-sections-torsion-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Elementary generic-density verification after Theorem 3.5.5, using flatness over an integral base."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-eta-flatification",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-pc-relatively-flat-module-pullback",
+  "lem-trf-geometric-reduced-fibre-locus-base-change",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-trf-valuation-reduced-fibre-normalization",
+  "lem-trf-finite-eta-modification-spreading",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-trf-qcqs-separable-riemann-zariski-refinement",
+  "lem-trf-finite-radicial-basechange",
+  "lem-trf-finite-eta-modification-gluing",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-finite-composition",
+  "lem-sc-flat-invertible-sections-torsion-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Theorem 3.5.5, Steps 0–5, expanded with a corrected vertical-component formulation; primary PDF read online, archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,7 +199,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-curve-finite-normalization",
@@ -82,7 +211,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Temkin §4.2, Lemmas 4.2.1--4.2.2: the finite Gamma_0 set of residual-transcendence-degree-one fibre-generic centres over closed points; Pass from a reduced modification to its finite normal modification before applying the argument of Lemma 4.2.2; reduced-fibre existence input Theorem 3.5.5 used in §4.1 to obtain finite normalization.",
+   "place": "Historical creation chain through lem-trf-valuation-curve-finite-normalization: Temkin §4.1 opening paragraph uses Theorem 3.5.5 to prove finiteness of normalization. This is a general scheme-theoretic tool of that normalization argument, not a realization of the current contracting-correspondence statement of lem-trf-local-term-locality.",
    "via": [
     "lem-trf-valuation-curve-finite-normalization",
     "lem-trf-modification-fibre-centre-finite",
@@ -101,5 +230,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-reduced-fibre-modification",
+  "worker": "stage1",
+  "summary": "Repair E7: restored the repository item statement, including target-side schematic density of the eta-isomorphism open. Propagated that clause through the flattening and gluing ingredients and the final assembly; the earlier vertical-component objection is recorded only as a source observation, not used to weaken the target.",
+  "blueprint": "Historical creation chain through lem-trf-valuation-curve-finite-normalization: Temkin §4.1 opening paragraph uses Theorem 3.5.5 to prove finiteness of normalization. This is a general scheme-theoretic tool of that normalization argument, not a realization of the current contracting-correspondence statement of lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "General scheme-theoretic preservation, affine flatness, or torsion-free-sections tool in the Temkin normalization input. It does not replace any step of the contracting-correspondence unit."
+   },
+   {
+    "node": "lem-pc-relatively-flat-module-pullback",
+    "why": "General scheme-theoretic preservation, affine flatness, or torsion-free-sections tool in the Temkin normalization input. It does not replace any step of the contracting-correspondence unit."
+   },
+   {
+    "node": "lem-trf-geometric-reduced-fibre-locus-base-change",
+    "why": "General scheme-theoretic preservation, affine flatness, or torsion-free-sections tool in the Temkin normalization input. It does not replace any step of the contracting-correspondence unit."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "General scheme-theoretic preservation, affine flatness, or torsion-free-sections tool in the Temkin normalization input. It does not replace any step of the contracting-correspondence unit."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "General scheme-theoretic preservation, affine flatness, or torsion-free-sections tool in the Temkin normalization input. It does not replace any step of the contracting-correspondence unit."
+   },
+   {
+    "node": "lem-trf-finite-radicial-basechange",
+    "why": "General scheme-theoretic preservation, affine flatness, or torsion-free-sections tool in the Temkin normalization input. It does not replace any step of the contracting-correspondence unit."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "General scheme-theoretic preservation, affine flatness, or torsion-free-sections tool in the Temkin normalization input. It does not replace any step of the contracting-correspondence unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-composition",
+    "why": "General scheme-theoretic preservation, affine flatness, or torsion-free-sections tool in the Temkin normalization input. It does not replace any step of the contracting-correspondence unit."
+   },
+   {
+    "node": "lem-sc-flat-invertible-sections-torsion-free",
+    "why": "General scheme-theoretic preservation, affine flatness, or torsion-free-sections tool in the Temkin normalization input. It does not replace any step of the contracting-correspondence unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-pc-relatively-flat-module-pullback",
+  "lem-trf-geometric-reduced-fibre-locus-base-change",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-finite-composition",
+  "lem-sc-flat-invertible-sections-torsion-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q87-1983983d6",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q87-1983983d6 (reviewer sub-agent of L); spot-checked: Read the item, all five new nodes, every cited node, unit route, DAG documents, and Temkin source locations. Checked hypotheses, proof steps, edge cases, schematic-density propagation, finite/base-change compositions, duplicate/generalization risks, Mathlib searches, and route restrictions. Review written to review.md."
  }
 }

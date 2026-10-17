@@ -13,9 +13,89 @@
   "def-weil-pbc-projective-module",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-pc-perfect-ring-complex], choose a bounded cochain complex $P$ of finitely generated projective $B$-modules, zero outside $[a,b]$, and an isomorphism $QP\\cong C$. To apply the ringed-site canonical-map statement below, use the one-object site with only its identity morphism and bottom topology, as in [def-pc-perfect-rhom-base-change-map] for $B\\xrightarrow{1}B$. A module sheaf on this site is precisely its single $B$-module of sections, and a morphism is precisely a linear map. Evaluation at that object and the constant one-object construction are inverse functors; their formulas identify kernels, tensor products and Hom with the ordinary module operations. They consequently identify complexes, quasi-isomorphisms, their localizations and the derived Hom defined using K-injectives. Write $H$ for the product total Hom complex [def-sc-module-total-hom-complex].",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "def-pc-perfect-rhom-base-change-map",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VI, lemma-dual-perfect-complex, first paragraph of proof"
+   }
+  },
+  {
+   "text": "Put $E=H(P,B[0])$. In degree $r$ the product defining $H$ has only one possibly nonzero factor, namely $E^r=\\operatorname{Hom}_B(P^{-r},B)$; projection to it and insertion of zero in all other coordinates are mutually inverse. Its differential is $d_E^r(\\phi)=(-1)^{r+1}\\phi d_P^{-r-1}$, whose square is zero since $d_P^2=0$. Thus $E$ vanishes outside $[-b,-a]$. By [lem-sf-finite-projective-dual] every $E^r$ is finitely generated projective. Applying [lem-pod-projective-hom-evaluation-model] to $P,B[0]$ identifies $QE$ with $R\\operatorname{Hom}_B(QP,B)$, and hence with $R\\operatorname{Hom}_B(C,B)$. The definition [def-pc-perfect-ring-complex] now proves the first conclusion.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "lem-sf-finite-projective-dual",
+    "lem-pod-projective-hom-evaluation-model",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VI, lemma-dual-perfect-complex, termwise dual construction; Tag 0A66, lemma-RHom-out-of-projective"
+   }
+  },
+  {
+   "text": "Check the ordinary-representative hypotheses of [lem-sfb-ringed-site-duality-maps]. Both $P$ and $E$ are bounded above and projective termwise, so [lem-pod-projective-hom-evaluation-model] applies to each, with arbitrary target. In particular the two maps\n$$H(P,B[0])\\longrightarrow H(P,I(B[0])),\\qquad H(E,B[0])\\longrightarrow H(E,I(B[0]))$$\nare quasi-isomorphisms. Indeed for either first complex $T$, naturality of the canonical comparison identifies the localization of $H(T,B[0]\\to I(B[0]))$ with $R\\operatorname{Hom}_B(QT,Q(B[0]\\to I(B[0])))$, conjugated by those comparison isomorphisms. The latter is invertible because the resolution map is a quasi-isomorphism, which localization inverts. A complex map whose localization is invertible is a quasi-isomorphism, as its induced cohomology maps are then invertible; this is the cohomology factorization in [def-weil-abstract-derived-category]. Here $I$ is the fixed K-injective resolution of [def-pur-derived-internal-hom], and its Hom complex is exactly the specified derived Hom. Thus $QH(E,B[0])$ represents the double derived dual, with the particular representative identifications required by the canonical-map node. That node's bidual clause requires no K-flatness assumption.",
+   "uses": [
+    "lem-sfb-ringed-site-duality-maps",
+    "lem-pod-projective-hom-evaluation-model",
+    "def-weil-abstract-derived-category",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A66, lemma-RHom-out-of-projective, and Tag 07VI"
+   }
+  },
+  {
+   "text": "Under Step 3's comparisons, [lem-sfb-ringed-site-duality-maps] represents the canonical bidual map by\n$$\\delta_P:P\\longrightarrow H(E,B[0]),\\qquad x\\longmapsto(\\phi\\longmapsto(-1)^{p|\\phi|}\\phi(x)),\\quad x\\in P^p.$$\nOnly $|\\phi|=-p$ contributes, so its degree-$p$ component is $(-1)^p$ times ordinary evaluation $P^p\\to(P^p)^{**}$, an isomorphism by [lem-sf-finite-projective-dual]. The sign is necessary for the chain-map equation: for $\\phi\\in E^{-p-1}$ one has $d_E\\phi=(-1)^p\\phi d_P$, and hence\n$$(d_{H(E,B)}\\delta_P(x))(\\phi)=-(-1)^p\\delta_P(x)(d_E\\phi)=(-1)^{p+1}\\phi(d_Px)=\\delta_P(d_Px)(\\phi).$$\nAll other Hom components are zero. Multiplying this chain-map equation by the degreewise inverses shows that they form an inverse chain map. Therefore $\\delta_P$ is a chain isomorphism, and its localization is invertible.",
+   "uses": [
+    "lem-sfb-ringed-site-duality-maps",
+    "lem-sf-finite-projective-dual",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A97, lemma-internal-hom-evaluate, coefficient-unit specialization; Section 0A8X, section-hom-complexes; more-algebra.tex Tags 07VI (lemma-dual-perfect-complex) and 0FNG (section-sign-rules)"
+   }
+  },
+  {
+   "text": "The canonical bidual map of [lem-sfb-ringed-site-duality-maps] is natural in its input, and the representative comparisons of [lem-pod-projective-hom-evaluation-model] are natural in both variables. For $e:QP\\xrightarrow{\\sim}C$ their naturality square is $b_C e=R\\operatorname{Hom}_B(R\\operatorname{Hom}_B(e,B),B)b_{QP}$. The right factor $b_{QP}$ is invertible by Step 4, and the other two factors are images of isomorphisms under functors. Solving this equality for $b_C$ proves that the actual canonical evaluation $C\\to R\\operatorname{Hom}_B(R\\operatorname{Hom}_B(C,B),B)$ is invertible. The zero ring, zero complex, and an odd shift of a finite projective module obey the same formulas: in odd degree the component evaluation has the unit sign $-1$, rather than the unsigned evaluation.",
+   "uses": [
+    "lem-pod-projective-hom-evaluation-model",
+    "lem-sfb-ringed-site-duality-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A97, lemma-internal-hom-evaluate, functoriality of canonical biduality; more-algebra.tex Tag 0A66 projective Hom-model naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-rhom-base-change-map",
+  "def-pc-perfect-ring-complex",
+  "def-pur-derived-internal-hom",
+  "def-sc-module-total-hom-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-sf-finite-projective-dual",
+  "lem-sfb-ringed-site-duality-maps"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07VI, lemma-dual-perfect-complex; Tag 0A66, lemma-RHom-out-of-projective; Tag 0FNG, section-sign-rules. Canonical-map normalization: sites-cohomology.tex Tag 0A97 and Section 0A8X."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +124,52 @@
    "results": "8 hits; Module.Dual.instIsReflecive, Module.evalEquiv and ordinary module dual declarations; no bounded-complex derived statement.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex over a commutative ring has perfect derived Hom dual and canonical evaluation map to the double derived dual is an isomorphism",
+   "results": "{\"t\": \"2026-10-17T22:07:16Z\", \"tool\": \"leanfinder\", \"query\": \"A perfect complex over a commutative ring has perfect derived Hom dual and canonical evaluation map to the double derived dual is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.Qh_map_bijective\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"DerivedCategory.isIso_Q_map_iff_quasiIso\", \"CategoryTheory.ProjectiveResolution.isoExt\", \"DerivedCategory.instIsIsoMapCochainComplexIntQ\"], \"digest\": \"a68bb5b7b8da48ba\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results are ordinary module duality or general categorical/K-projective infrastructure, not perfect derived-complex duality; unknown project-specific names also do not establish absence by themselves"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsPerfect.isIso_toIhomIhomUnit, IsPerfect.ihom_unit",
+   "results": "{\"t\": \"2026-10-17T22:07:17Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.IsPerfect.isIso_toIhomIhomUnit, IsPerfect.ihom_unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'DerivedCategory.IsPerfect.isIso_toIhomIhomUnit'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results are ordinary module duality or general categorical/K-projective infrastructure, not perfect derived-complex duality; unknown project-specific names also do not establish absence by themselves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dualizable object in a braided monoidal closed category has an isomorphism from the object to its double internal Hom",
+   "results": "{\"t\": \"2026-10-17T22:07:32Z\", \"tool\": \"leanfinder\", \"query\": \"A dualizable object in a braided monoidal closed category has an isomorphism from the object to its double internal Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ihom.coev_ev\", \"CategoryTheory.exp.coev_ev\", \"CategoryTheory.ihom.coev_ev_assoc\", \"CategoryTheory.ihom.ev_coev\", \"CategoryTheory.exp.ev_coev\", \"CategoryTheory.exp.coev_ev_assoc\", \"CategoryTheory.exp.coev\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj\"], \"digest\": \"939d0ec2e7050462\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results are ordinary module duality or general categorical/K-projective infrastructure, not perfect derived-complex duality; unknown project-specific names also do not establish absence by themselves"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalClosed.isIso_toIhomIhomUnit",
+   "results": "{\"t\": \"2026-10-17T22:07:32Z\", \"tool\": \"loogle\", \"query\": \"MonoidalClosed.isIso_toIhomIhomUnit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'MonoidalClosed.isIso_toIhomIhomUnit'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results are ordinary module duality or general categorical/K-projective infrastructure, not perfect derived-complex duality; unknown project-specific names also do not establish absence by themselves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of finitely generated projective modules has a perfect dual and its canonical derived double dual evaluation is invertible",
+   "results": "{\"t\": \"2026-10-17T22:16:31Z\", \"tool\": \"leansearch\", \"query\": \"A bounded complex of finitely generated projective modules has a perfect dual and its canonical derived double dual evaluation is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.bijective_dual_eval\", \"Module.dual_finite\", \"Module.IsReflexive\", \"Module.IsReflexive.of_finite_of_free\", \"LinearMap.IsPerfPair.dualEval\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.evalEquiv\", \"Module.Dual.instIsReflecive\"], \"digest\": \"1221158f24eaa907\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results are ordinary module duality or general categorical/K-projective infrastructure, not perfect derived-complex duality; unknown project-specific names also do not establish absence by themselves"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect|dual|ihom",
+   "results": "{\"t\": \"2026-10-17T22:16:41Z\", \"tool\": \"grep\", \"query\": \"perfect|dual|ihom\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean\"], \"digest\": \"e779d85926adccf9\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results are ordinary module duality or general categorical/K-projective infrastructure, not perfect derived-complex duality; unknown project-specific names also do not establish absence by themselves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-algebraic-shriek-relative-perfect",
@@ -77,5 +199,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-perfect-complex-derived-biduality",
+  "worker": "stage1",
+  "summary": "Split the generic derived biduality statement using the bounded finite-projective representative from the perfect-complex definition, the termwise finite-projective dual, the projective Hom-complex model, and the signed canonical evaluation calculation of Stacks Tag 07VI. No new nodes were created because every non-elementary ingredient already exists in the DAG.",
+  "blueprint": "Realizes the finite-projective biduality input in the existing ancestor route: lem-trf-local-term-locality proof (2), through the nearby-cycle relative-duality polynomial-chart branch recorded in blueprint.from. Steps 1–2 give the bounded finite-projective dual, Steps 3–4 identify and invert its canonical signed double evaluation, and Step 5 transports the map naturally. The enclosing unit sk-i-curve-zero is unchanged; this generic algebra tool does not replace its normal-cone route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-finite-projective-dual",
+    "why": "Generic ordinary finite-projective duality and reflexivity are used as a tool for each term; the trace-formula route does not restate this module theorem."
+   },
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "Generic projective Hom-complex computation of derived internal Hom and evaluation is used as a tool; the trace-formula route supplies no replacement."
+   },
+   {
+    "node": "lem-sfb-ringed-site-duality-maps",
+    "why": "Generic canonical derived evaluation and bidual maps on a ringed site identify the signed chain map with the canonical map; no trace-formula node supplies this interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-finite-projective-dual",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-sfb-ringed-site-duality-maps"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q63-09d289f6a",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-09d289f6a (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, all cited node statements, and Stacks sources (Tags 07VI, 0A66, 0A97 and Hom/sign sections). Verified hypotheses, coefficient category, identity base-change specialization, signed chain-map calculation, naturality, edge cases, searches, route compliance, and absence of duplicates/cycles/long hidden lemmas. Review written to review.md."
  }
 }
