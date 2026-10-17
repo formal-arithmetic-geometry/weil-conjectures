@@ -7,6 +7,10 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryInertia
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresentation
+public import WeilConjectures.WeilSheaf.DirectImageRestriction
+public import WeilConjectures.WeilSheaf.LisseExtension
+public import WeilConjectures.WeilSheaf.LowerStarId
+public import WeilConjectures.WeilSheaf.RealPurity
 
 /-!
 # Lisse Weil sheaves with trivial inertia at a boundary point
@@ -207,5 +211,147 @@ theorem BasePointData.geomAut_mem_fixingSubgroup
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, ConcreteCategory.comp_apply]
   rw [he]
   exact ConcreteCategory.congr_hom (B.path.inv_hom_id_app _) x
+
+end AlgebraicGeometry.WeilGroup
+
+namespace AlgebraicGeometry.WeilSheaf
+
+open WeilGroup Scheme.FiniteEtale ProEtale
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+
+/-- The pullback of a Weil sheaf along the identity is the sheaf itself: both `𝟙^*` and the
+identity functor are left adjoint to `𝟙_* ≅ 𝟭`. -/
+theorem nonempty_upperStar_id_iso {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l X) :
+    Nonempty ((upperStar (𝟙 X)).obj F ≅ F) :=
+  ⟨((WeilSheaf.upperStarLowerStarAdjunction (k₀ := k₀) (l := l) (𝟙 X)).leftAdjointUniq
+    (Adjunction.id.ofNatIsoRight (lowerStarIdIso k₀ l X).symm)).app F⟩
+
+end AlgebraicGeometry.WeilSheaf
+
+namespace AlgebraicGeometry.WeilGroup
+
+open Scheme.FiniteEtale ProEtale WeilSheaf
+
+variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}} [C.Over (Spec (.of K))]
+  [U.Over (Spec (.of K))] [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))]
+  [ConnectedSpace C] [IsIntegral C] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))]
+  [Smooth (C ↘ Spec (.of K))]
+  [IsCurve (U ↘ Spec (.of K))] [GeometricallyConnected (U ↘ Spec (.of K))] [ConnectedSpace U]
+  (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j] [Nonempty U] [j.IsOver (Spec (.of K))]
+  {l : ℕ} [Fact l.Prime] [Fact (ringChar K ≠ l)]
+
+omit [Finite K] [GeometricallyConnected (C ↘ Spec (.of K))] [IsIntegral C]
+  [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))] [IsCurve (U ↘ Spec (.of K))]
+  [GeometricallyConnected (U ↘ Spec (.of K))] [ConnectedSpace U] [QuasiCompact j] in
+/-- The open immersion `U₀ ⟶ U₀ ∪ {z}` is a morphism over `𝔽_q`. -/
+lemma toBoundaryOpen_comp_over (z : C) :
+    toBoundaryOpen (p := C ↘ Spec (.of K)) j z ≫
+      ((boundaryOpen (p := C ↘ Spec (.of K)) j z).ι ≫ C ↘ Spec (.of K)) = U ↘ Spec (.of K) := by
+  rw [← Category.assoc, toBoundaryOpen_eq, IsOpenImmersion.lift_fac]
+  exact comp_over j _
+
+omit [IsIntegral C] [GeometricallyConnected (U ↘ Spec (.of K))] [ConnectedSpace U] in
+/-- **Purity at a boundary point with trivial local monodromy.** Let `j : U₀ ⟶ C₀` be a nonempty
+open of a smooth geometrically connected curve, `z` a boundary point, `V₀ = U₀ ∪ {z}` and `F` a
+lisse Weil sheaf on `U₀`, punctually `ι`-pure of weight `w`. If the monodromy of `F` on `Ū` at a
+geometric point `t` (`AlgebraicGeometry.ProEtale.universalLisseMonodromy`) is trivial on the
+kernel of `π₁(Ū, t) → π₁(V̄, t)`, then the stalk `(j_* F)_z̄` is `ι`-pure of weight `w`: `F`
+extends to a lisse Weil sheaf `G` on `V₀`
+(`AlgebraicGeometry.WeilSheaf.exists_isLisse_upperStar_iso_of_rep_eq_self`), which is pure of
+weight `w` since its restriction to `U₀` is
+(`AlgebraicGeometry.WeilSheaf.IsLisse.isPunctuallyPureOfWeight_of_upperStar`), and
+`(j_* F)_z̄ = ((U₀ ⟶ V₀)_* F)_z̄ = G_z̄` (`lem-a1-lisse-middle-extension`).
+(blueprint: `cor-wf-unramified-boundary-purity`) -/
+theorem isPureOfWeight_stalk_directImage_of_rep_eq_self (z : ↥((Set.range j.base)ᶜ))
+    {F : WeilSheaf K l U} (hF : F.IsLisse)
+    (t : Spec (.of (AlgebraicClosure K)) ⟶ (U ↘ Spec (.of K)).geometricFiber)
+    [IsRegular (U ↘ Spec (.of K)).geometricFiber]
+    [ConnectedSpace (U ↘ Spec (.of K)).geometricFiber]
+    (hFt : ∀ σ : Aut (fiber t), pullbackPathIso (Scheme.Hom.geometricFiberMap
+        (toBoundaryOpen (p := C ↘ Spec (.of K)) j z.1)
+        (g := (boundaryOpen (p := C ↘ Spec (.of K)) j z.1).ι ≫ C ↘ Spec (.of K))
+        (toBoundaryOpen_comp_over j z.1)) σ = Iso.refl _ →
+      ∀ v, (universalLisseMonodromy l (U ↘ Spec (.of K)).geometricFiber K).rep t
+        ⟨F.obj.carrier, hF⟩ σ v = v)
+    {ι : PadicAlgCl l →+* ℂ} {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w)
+    (x : C.finitePoints) (hx : x.1 = z.1) :
+    (((directImage j).obj F).stalk x).IsPureOfWeight ι
+      ((C ↘ Spec (.of K)).residueCard x.1) w := by
+  classical
+  set p := C ↘ Spec (.of K)
+  set V := boundaryOpen (p := p) j z.1
+  let : V.toScheme.Over (Spec (.of K)) := ⟨V.ι ≫ p⟩
+  set k := toBoundaryOpen (p := p) j z.1
+  have hkV : k ≫ V.toScheme ↘ Spec (.of K) = U ↘ Spec (.of K) := toBoundaryOpen_comp_over j z.1
+  have hkι : k ≫ V.ι = j := by
+    simp only [k, toBoundaryOpen_eq]
+    exact IsOpenImmersion.lift_fac _ _ _
+  have : k.IsOver (Spec (.of K)) := ⟨hkV⟩
+  have : IsOpenImmersion k := inferInstanceAs (IsOpenImmersion (toComplOpens _ _ _ _ _))
+  have : V.ι.IsOver (Spec (.of K)) := ⟨rfl⟩
+  -- `V₀ = U₀ ∪ {z}` is a smooth geometrically connected curve
+  have : SmoothOfRelativeDimension 1 (V.toScheme ↘ Spec (.of K)) :=
+    (zero_add 1) ▸ (inferInstance : SmoothOfRelativeDimension (0 + 1) (V.ι ≫ p))
+  have : Smooth (V.toScheme ↘ Spec (.of K)) := SmoothOfRelativeDimension.smooth 1 _
+  have : LocallyOfFiniteType (V.toScheme ↘ Spec (.of K)) :=
+    inferInstanceAs (LocallyOfFiniteType (V.ι ≫ p))
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian p
+  have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace p
+  have : CompactSpace V.toScheme := ProEtale.compactSpace_of_isOpenImmersion V.ι
+  have : QuasiCompact (V.toScheme ↘ Spec (.of K)) :=
+    (HasAffineProperty.iff_of_isAffine (P := @QuasiCompact)).mpr inferInstance
+  have : QuasiSeparated (V.toScheme ↘ Spec (.of K)) :=
+    inferInstanceAs (QuasiSeparated (V.ι ≫ p))
+  have : Nonempty V.toScheme := ⟨k.base (Nonempty.some inferInstance)⟩
+  have : GeometricallyConnected (V.toScheme ↘ Spec (.of K)) := by
+    have := GeometricallyIrreducible.of_smooth_of_geometricallyConnected p
+    have := GeometricallyIrreducible.comp_of_isOpenImmersion V.ι p
+    exact inferInstanceAs (GeometricallyConnected (V.ι ≫ p))
+  have : QuasiCompact k := by
+    have : QuasiCompact (k ≫ V.toScheme ↘ Spec (.of K)) := by rw [hkV]; infer_instance
+    exact QuasiCompact.of_comp k (V.toScheme ↘ Spec (.of K))
+  -- `U₀` is dense in the irreducible `V₀`
+  have : IrreducibleSpace C := irreducibleSpace_of_smooth (p := p)
+  have : IrreducibleSpace V.toScheme := by
+    obtain ⟨c⟩ := (inferInstance : Nonempty V.toScheme)
+    have hirr : IsIrreducible (V : Set C) :=
+      ⟨⟨_, c.2⟩, (IrreducibleSpace.isIrreducible_univ C).isPreirreducible.open_subset V.isOpen
+        (Set.subset_univ _)⟩
+    exact Subtype.irreducibleSpace hirr
+  have hkd : Dense (Set.range k.base) :=
+    k.isOpenEmbedding.isOpen_range.dense (Set.range_nonempty _)
+  have : IsDominant k := ⟨hkd⟩
+  -- the geometric curve `Ū`
+  have : Smooth (U ↘ Spec (.of K)) := by rw [← comp_over j (Spec (.of K))]; infer_instance
+  -- `F` extends to a lisse Weil sheaf `G` on `V₀`
+  obtain ⟨G, hG, ⟨e⟩⟩ := exists_isLisse_upperStar_iso_of_rep_eq_self k hkd hF t
+    fun σ hσ v ↦ hFt σ (MonoidHom.mem_ker.1 hσ) v
+  -- `G` is pure of weight `w`
+  have hres : ((upperStar k).obj G).IsPunctuallyPureOfWeight ι w := fun y ↦
+    (hw y).of_equiv (nonempty_equiv_stalk_of_iso e y).some
+  have hGw := hG.isPunctuallyPureOfWeight_of_upperStar k hres
+  -- the stalk of `j_* F` at `z` is that of `G`
+  have hzV : z.1 ∈ V := (mem_boundaryOpen_iff j).2 (Or.inr rfl)
+  have hy : (⟨z.1, hzV⟩ : V.toScheme) ∈ V.toScheme.finitePoints := by
+    rw [← Scheme.Hom.mem_finitePoints_iff_of_isIso V.ι]
+    have hzf : z.1 ∈ C.finitePoints := hx ▸ x.2
+    exact hzf
+  let y : V.toScheme.finitePoints := ⟨_, hy⟩
+  have hyx : V.ι.base y.1 = x.1 := hx.symm
+  have hsq : IsPullback k (𝟙 U) V.ι j := IsPullback.of_vert_isIso_mono ⟨by rw [hkι]; simp⟩
+  obtain ⟨E₁⟩ := nonempty_equiv_stalk_directImage_of_isPullback hsq F y x hyx
+  obtain ⟨i₁⟩ := nonempty_upperStar_id_iso F
+  obtain ⟨i₂⟩ := hG.nonempty_iso_directImage_upperStar k hkd
+  obtain ⟨E₂⟩ := nonempty_equiv_stalk_of_iso
+    ((directImage k).mapIso (i₁ ≪≫ e.symm) ≪≫ i₂.symm) y
+  have hdeg : (V.toScheme ↘ Spec (.of K)).residueCard y.1 = p.residueCard x.1 := by
+    rw [Scheme.Hom.residueCard, Scheme.Hom.residueCard, ← hyx,
+      ← Scheme.Hom.degreeOver_comp_of_isIso V.ι p y.1]
+    rfl
+  have h := hGw y
+  rw [hdeg] at h
+  exact h.of_equiv (E₁.trans E₂)
 
 end AlgebraicGeometry.WeilGroup
