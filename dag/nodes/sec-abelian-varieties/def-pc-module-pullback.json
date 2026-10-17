@@ -259,8 +259,8 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 0095/0096/0097 for the Zariski pullback of modules; adjunction and composition as new nodes"
  },
  "lean": {
-  "module": "WeilConjectures.AlgebraicGeometry.TensorPullback",
-  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorPullback",
+  "module": "Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorPullbackSectionAdjunction",
   "declarations": [
    "AlgebraicGeometry.Scheme.Modules.tensorPullbackRingMap",
    "AlgebraicGeometry.Scheme.Modules.tensorPullbackObj",
@@ -271,23 +271,28 @@
    "AlgebraicGeometry.Scheme.Modules.tensorPullback",
    "AlgebraicGeometry.Scheme.Modules.nonempty_tensorPullbackAdjunction",
    "AlgebraicGeometry.Scheme.Modules.nonempty_tensorPullbackId",
-   "AlgebraicGeometry.Scheme.Modules.nonempty_tensorPullbackComp"
+   "AlgebraicGeometry.Scheme.Modules.nonempty_tensorPullbackComp",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackSection",
+   "AlgebraicGeometry.Scheme.Modules.existsUnique_tensorPullbackSectionAdjunction",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackSectionAdjunction",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackSectionComp",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackSectionId"
   ],
-  "file": "lean/WeilConjectures/AlgebraicGeometry/TensorPullback.lean",
-  "statement": "def tensorPullback : Y.Modules ⥤ X.Modules",
-  "branch": "sheaf-dag",
-  "by": "H1",
-  "date": "2026-10-11",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPullbackSectionAdjunction.lean",
+  "statement": "def tensorPullbackSectionAdjunction {X Y : Scheme.{u}} (g : X ⟶ Y) : tensorPullback g ⊣ pushforward g",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-17",
   "existing": false,
-  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.TensorPullback retired, the source module WeilConjectures.AlgebraicGeometry.TensorPullback declares the same names"
+  "note": "Section 1(B) interface repair. The upstream explicit tensorPullback functor is retained by public import, with no duplicate pullback definition. Its recorded adjunction/composition interface supplies only Nonempty witnesses; choosing those freely does not fix the scalar normalization required for canonical determinant base change. This module states the uniquely normalized adjunction whose unit sends m to the actual section 1 tensor m, and constructs its identity and composition comparisons by left-adjoint uniqueness. The named existence-and-uniqueness theorem postpones only this universal-property proof, which determines the chosen adjunction uniquely."
  },
  "reviewed_lean": {
-  "date": "2026-10-11",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "R-mpb0951",
-  "group": "H1",
+  "reviewer": "NT-stage2-Codex-4f462f9f2",
+  "group": "NO",
   "result": "pass",
-  "note": "schemes g:X->Y (Scheme.{w}); ring map g^-1 O_Y -> O_X = homEquiv.symm of g.c in the explicit sheafPullbackConstruction CommRingCat adjunction; M : Y.Modules (Zariski); g^-1 M = explicit Lan+sheafify abelian inverse image with 008X module structure (new node def-pc-topological-inverse-image-module, instances chosen from a named existence theorem whose restriction+unit semilinearity pin them uniquely); object = landed SheafOfModules.changeOfRings (reuse); maps = sheafified extendScalars.map of g^-1 a; functor, left adjoint to Scheme.Modules.pushforward, id/comp isos as the node states; combined compile clean"
+  "note": "Reviewed immutable packet, node/dependencies, source references, both Lean modules, docstrings, edge cases, universes, route-pivot compliance, and worker compile/preflight evidence; wrote review.md. No substantive or mechanical errors found."
  },
  "reviewed_proof": {
   "date": "2026-10-12",

@@ -23,7 +23,9 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-regular-sequence",
   "def-weil-pbc-sheaf-ext",
-  "def-weil-quasi-separated-morphism"
+  "def-weil-quasi-separated-morphism",
+  "def-sc-sheaf-exterior-power",
+  "def-sc-relative-differential-sheaf"
  ],
  "proof": [
   {
@@ -313,5 +315,54 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-48fce0051 (reviewer sub-agent of L); spot-checked: Full review written to review.md. The item and all three new nodes match their cited Stacks sources; all nine steps, hypotheses, arbitrary base change, determinant coherence, edge cases, duplicates, route-pivot restrictions, and generic tool uses were checked. No repairs are needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatLCICanonicalAdjunction",
+  "declaration": "AlgebraicGeometry.exists_flatLCICanonicalAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.FlatLCIPresentation",
+   "AlgebraicGeometry.FlatLCIPresentation.conormal",
+   "AlgebraicGeometry.FlatLCIPresentation.differentials",
+   "AlgebraicGeometry.FlatLCIPresentation.line",
+   "AlgebraicGeometry.FlatLCIBaseChange",
+   "AlgebraicGeometry.FlatLCIBaseChange.identity",
+   "AlgebraicGeometry.FlatLCIPresentation.IsConormalDifferential",
+   "AlgebraicGeometry.flatLCITwoTermLine",
+   "AlgebraicGeometry.IsFlatLCIDeterminantComparison",
+   "AlgebraicGeometry.FlatLCIPresentationRefinement",
+   "AlgebraicGeometry.FlatLCIPresentationRefinement.sourceComparison",
+   "AlgebraicGeometry.FlatLCIPresentationRefinement.conormalMap",
+   "AlgebraicGeometry.FlatLCIPresentationRefinement.differentialsMap",
+   "AlgebraicGeometry.IsFlatLCIPullbackDeterminantComparison",
+   "AlgebraicGeometry.FlatLCIPresentationPullback",
+   "AlgebraicGeometry.FlatLCIPresentationPullback.sourceComparison",
+   "AlgebraicGeometry.FlatLCIPresentationPullback.conormalMap",
+   "AlgebraicGeometry.FlatLCIPresentationPullback.differentialsMap",
+   "AlgebraicGeometry.FlatLCIAdjunctionSystem",
+   "AlgebraicGeometry.FlatLCIAdjunctionSystem.localBaseChange",
+   "AlgebraicGeometry.FlatLCIPresentation.IsSourceDifferentialMap",
+   "AlgebraicGeometry.FlatLCIAdjunctionSystem.IsNormalized",
+   "AlgebraicGeometry.flatLCIScalarAction",
+   "AlgebraicGeometry.FlatLCIPresentation.HasDualityModel",
+   "AlgebraicGeometry.FlatLCIPresentation.HasExtIdentification",
+   "AlgebraicGeometry.flatLCIGeometricFibre",
+   "AlgebraicGeometry.HasPureFlatLCIGeometricFibres",
+   "AlgebraicGeometry.FlatLCIAdjunctionSystem.IsSmoothComparison",
+   "AlgebraicGeometry.exists_flatLCICanonicalAdjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatLCICanonicalAdjunction.lean",
+  "statement": "theorem exists_flatLCICanonicalAdjunction {X S : Scheme.{u}} (p : X ⟶ S) [IsNoetherian S] [Flat p] [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p] (d : ℕ) (hpure : HasPureFlatLCIGeometricFibres p d) (hlci : ∀ x : X, ∃ (U : X.Opens), x ∈ U ∧ Nonempty (FlatLCIPresentation p d U)) : ∃ F : FlatLCIAdjunctionSystem p d, F.IsNormalized ∧ (∀ (B : FlatLCIBaseChange p) (x : B.X'), ∃ (U : B.X'.Opens), x ∈ U ∧ Nonempty (FlatLCIPresentation B.p' d U)) ∧ (∀ (B : FlatLCIBaseChange p) (U : B.X'.Opens) (C : FlatLCIPresentation B.p' d U), C.HasExtIdentification ∧ C.HasDualityModel) ∧ (∀ (B : FlatLCIBaseChange p) (U : B.X'.Opens), Smooth (U.ι ≫ B.p') → ∃ e : (Scheme.Modules.tensorPullback U.ι).obj (F.line B) ≅ Scheme.Modules.exteriorSheaf (U.ι ≫ B.p').relativeDifferentials d, F.IsSmoothComparison B U e)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4f462f9f2",
+  "group": "NO",
+  "result": "pass",
+  "note": "Reviewed immutable packet, node/dependencies, source references, both Lean modules, docstrings, edge cases, universes, route-pivot compliance, and worker compile/preflight evidence; wrote review.md. No substantive or mechanical errors found."
  }
 }
