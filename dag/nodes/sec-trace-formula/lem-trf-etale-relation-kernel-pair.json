@@ -140,5 +140,23 @@
   "group": "Q73",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q73-7a1bbe9e0 (reviewer sub-agent of L); spot-checked: Repaired Step 1’s missing sheafification local-equality citation and supplied the omitted quotient-class argument; corrected doubled TeX backslashes. Checked all three steps, cited statements, sources, edge cases, duplicate candidates, and dependency closure. No new nodes or weakened statements. Corrected JSON is under fixes/dag/nodes; full findings are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleRelationKernelPair",
+  "declaration": "AlgebraicGeometry.Scheme.etale_relation_kernel_pair",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleRelationKernelPair.lean",
+  "statement": "theorem etale_relation_kernel_pair {S : Scheme.{u}} {R U : Over S} (s t : R ⟶ U) [Mono (prod.lift s t)] (hrel : ∀ T : Over S, Equivalence (fun a b : T ⟶ U ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η : coequalizer (yoneda.map s) (yoneda.map t) ⟶ F.obj) (hη : ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun g : F.obj ⟶ G.obj ↦ η ≫ g)) : IsPullback (yoneda.map s) (yoneda.map t) (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η) (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η)",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-22e0c2280",
+  "group": "Q33",
+  "result": "fix",
+  "note": "Lean statement matches the node and sources; immutable module compiles cleanly. Fixed H11 by supplying a complete report with the independent reading in fixes/lem-trf-etale-relation-kernel-pair.report.md. Full checks and findings are in review.md; no repository or branch changes."
  }
 }

@@ -136,5 +136,32 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-986aa0b87 (reviewer sub-agent of L); spot-checked: Read the full item, report, route, parent, cited statements, ILO VIII Lemma 4.2.9, Stacks Tags 00NQ and 0BIQ, and relevant definitions. Both repaired quotient arguments are correct, retain the proper variables, satisfy all hypotheses, and handle singleton, two-parameter, full-center, and dimension-zero cases. No new nodes, duplicates, route violations, SGA citations, or hidden long-step lemmas remain. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ChartCoordinateNonzerodivisors",
+  "declaration": "traceChartCoordinateNonzerodivisors",
+  "declarations": [
+   "traceChartRelation",
+   "traceChartIdeal",
+   "traceChartRing",
+   "traceChartCoordinate",
+   "traceChartCoordinateQuotient",
+   "traceChartParameterQuotient",
+   "traceChartCoordinateNonzerodivisors"
+  ],
+  "file": "lean/Sheaf/RingTheory/ChartCoordinateNonzerodivisors.lean",
+  "statement": "theorem traceChartCoordinateNonzerodivisors {R : Type u} [CommRing R] [IsRegularLocalRing R] {d : ℕ} (t : Fin d → R) (ht : IsLocalRing.IsRegularSystemOfParameters (List.ofFn t)) (J : Finset (Fin d)) (hJ : J.Nonempty) (j : Fin d) (hj : j ∈ J) : (∀ (i : Fin d) (hi : i ∈ J.erase j), Function.Injective (fun x : traceChartCoordinateQuotient t J j i hi => Ideal.Quotient.mk _ (algebraMap R (traceChartRing t J j) (t j)) * x)) ∧ (∀ k : Fin d, k ∉ J → Function.Injective (fun x : traceChartParameterQuotient t J j k => Ideal.Quotient.mk _ (algebraMap R (traceChartRing t J j) (t j)) * x))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-19ca8a826",
+  "group": "NN",
+  "result": "pass",
+  "note": "Reviewed the immutable node, dependencies, Lean module, source/report requirements, edge cases, and route constraints. The chart presentation and theorem statement match the node; required report sections and docstrings are present. scompile.py was invoked, with server confirmation delayed by heavy queue; the immutable worker report records a clean compile. Review saved to review.md."
  }
 }

@@ -13,7 +13,8 @@
   "def-weil-pbc-adic-completion",
   "def-pc-fibre-product",
   "def-weil-etale-morphism",
-  "def-weil-residue-field"
+  "def-weil-residue-field",
+  "lem-weil-pbc-fs-adic-completion-map-local"
  ],
  "proof": [
   {
@@ -348,5 +349,29 @@
   "group": "Q75",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q75-af739b858 (reviewer sub-agent of L); spot-checked: Read the full item, all five new nodes, cited DAG statements, unit route, report, and Stacks sources 0GDX, 0CAV, 057G, 01TE/01TF, 01ZM, and 07RP. Verified hypotheses, fixed-target descent, completion/base-change maps, residue fields, Cartesian identifications, edge cases, duplicate checks, and route compliance. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.RelativeCompletionEtaleApproximation",
+  "declaration": "AlgebraicGeometry.relative_completion_etale_approximation",
+  "file": "lean/Sheaf/TraceFormula/RelativeCompletionEtaleApproximation.lean",
+  "statement": "theorem relative_completion_etale_approximation {X S Y T : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ T) [LocallyOfFiniteType f] [LocallyOfFiniteType g] (sZ : S ⟶ Spec (.of (ULift.{u} ℤ))) (tZ : T ⟶ Spec (.of (ULift.{u} ℤ))) [LocallyOfFiniteType sZ] [QuasiCompact sZ] [LocallyOfFiniteType tZ] [QuasiCompact tZ] (x : X) (y : Y) (t : T) (hyt : g y = t) (σ : T.presheaf.stalk t →+* AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))) (S.presheaf.stalk (f x))) [IsLocalHom σ] (yσ : pullback (C := Scheme.{u}) g (relativeCompletionFormalBaseMap (f x) t σ)) (hyσ : pullback.fst g (relativeCompletionFormalBaseMap (f x) t σ) yσ = y) (hb : pullback.snd g (relativeCompletionFormalBaseMap (f x) t σ) yσ = relativeCompletionClosedPoint (f x)) (hformal : ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ≃+* AdicCompletion (IsLocalRing.maximalIdeal ((pullback g (relativeCompletionFormalBaseMap (f x) t σ)).presheaf.stalk yσ)) ((pullback g (relativeCompletionFormalBaseMap (f x) t σ)).presheaf.stalk yσ), e.toRingHom.comp (Classical.choose (RingHom.exists_adicCompletion_map_of_local (f.stalkMap x).hom)) = (algebraMap ((pullback g (relativeCompletionFormalBaseMap (f x) t σ)).presheaf.stalk yσ) (AdicCompletion (IsLocalRing.maximalIdeal ((pullback g (relativeCompletionFormalBaseMap (f x) t σ)).presheaf.stalk yσ)) ((pullback g (relativeCompletionFormalBaseMap (f x) t σ)).presheaf.stalk yσ))).comp (((pullback.snd g (relativeCompletionFormalBaseMap (f x) t σ)).stalkMap yσ).hom.comp (StructureSheaf.toStalk (AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))) (S.presheaf.stalk (f x))) ((pullback.snd g (relativeCompletionFormalBaseMap (f x) t σ)) yσ)).hom)) : ∃ (V : Scheme.{u}) (v : V) (a : V ⟶ S) (τ : V ⟶ T) (U : Scheme.{u}) (u : U) (w : U ⟶ V) (e : U ⟶ X) (m : U ⟶ pullback g τ), a v = f x ∧ τ v = t ∧ e u = x ∧ w u = v ∧ w ≫ a = e ≫ f ∧ m ≫ pullback.snd g τ = w ∧ Etale a ∧ Etale e ∧ Etale m ∧ IsIso (a.residueFieldMap v) ∧ IsIso (e.residueFieldMap u)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.relative_completion_etale_approximation",
+   "AlgebraicGeometry.relativeCompletionFormalBaseMap",
+   "AlgebraicGeometry.relativeCompletionClosedPoint"
+  ],
+  "note": "The source point s is written as f x, eliminating its incidence equality. hformal uses the uniquely coordinate-characterized completion of the actual stalk map and the actual constants/projection/completion map on Y_sigma; neither scalar map is arbitrary. Two helpers construct the formal base map and canonical closed point without adding instances or assumptions. Repair after immutable stage-2 return: refreshed record and independently re-read every hypothesis and conclusion clause against the declaration."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0958400ee",
+  "group": "N0",
+  "result": "pass",
+  "note": "Review written to review.md. Checked source, all statement dependencies, canonical helpers, every hypothesis and conclusion, universes, edge cases, verbatim signature, report sections and route-pivot compliance. scompile.py reproduced sandbox and library compilation with exit code 0 and no diagnostics. No corrections needed."
  }
 }

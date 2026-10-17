@@ -16,7 +16,15 @@
   "def-sf-setting",
   "def-weil-exceptional-inverse-image",
   "def-pur-derived-internal-hom",
-  "def-kun-topological-krull-dimension"
+  "def-kun-topological-krull-dimension",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-finite-dualizing",
+  "prop-coef-integral-dualizing",
+  "lem-sfb-ringed-site-duality-maps"
  ],
  "proof": [
   {
@@ -208,5 +216,40 @@
   "group": "Q94",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-eb0e927b8 (reviewer sub-agent of L); spot-checked: Read the item in full, all 17 cited statements (and the blueprint_update texts where present), the main-20261015 and master blueprint text/proof (identical apart from order and directory), the unit sk-prop-sf-biduality-general and the chapter. There are no new nodes. Step 1: thm-fix-general-biduality gives the finite anti-equivalence and delta on either site. lem-weil-verdier-preservation-strata gives [-b-2d,-a] for d in N with dim X<=d. lem-weil-finite-duality-site-comparison and lem-sf-comparison-tor-amplitude (i)/(ii) carry this to the pro-etale reading with no ambient adjoint. Step 2: lem-coef-integral-residue-tor gives D^b_c=D^b_ctf, and thm-coef-integral-verdier states the uniform bound, the reduction comparisons, the identification of the actual delta_K and that it is an isomorphism. Step 3: Hom(A_X,I)->I is degreewise an isomorphism, so D(A_X)=omega and the bound is [-2d,0]. prop-coef-integral-dualizing is the R lim Res_n Ra_n^! A_n formula of def-weil-exceptional-inverse-image at the unit. Step 4: thm-coef-rational-verdier with lem-coef-rational-operations (D_E=RHom_E(-,Ra^!E), evaluation preserved); representative independence holds by functoriality. Step 5: thm-coef-qbar-verdier at a common finite stage. The statement change (for every integer d>=0 with dim X<=d) fixes a real defect, since dim of the empty scheme is -infinity. It equals the source bound at d=dim X for nonempty X and weakens nothing; a<=b is already implicit in the Tor-interval definitions. Small cases checked: the point, A^1, the integral R/varpi (Tor [-1,0] goes to [0,1]), the empty X and the zero object. Every statement used lies in the own unit or in sk-prop-sf-rf-shriek-preservation, so there are no tool_uses. No cycle (transitive traversal), no duplicate (checked thm-trf-verdier-biduality, def-sf-coefficient-duality, prop-functor-package), no SGA. Remark only: the report says blueprint_snapshot/update metadata was added, but the item carries neither field and source still names the master path. The two texts are identical and these fields are not split-owned, so nothing was changed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfBidualityClass",
+  "declaration": "WeilConjectures.sf_biduality_class",
+  "declarations": [
+   "WeilConjectures.SfClassEvaluationCompatible",
+   "WeilConjectures.SfClassDuality",
+   "WeilConjectures.SfClassAmbientDuality",
+   "WeilConjectures.sfClassEtaleDual",
+   "WeilConjectures.SfClassFiniteEtale",
+   "WeilConjectures.sfClassFiniteHom",
+   "WeilConjectures.sfClassFiniteDual",
+   "WeilConjectures.SfClassFinite",
+   "WeilConjectures.sfClassIntegralHom",
+   "WeilConjectures.SfClassIntegral",
+   "WeilConjectures.SfClassRational",
+   "WeilConjectures.SfClassIntegralRational",
+   "WeilConjectures.SfClassAlgebraicallyClosed",
+   "WeilConjectures.sf_biduality_class"
+  ],
+  "file": "lean/Sheaf/Paper/SfBidualityClass.lean",
+  "statement": "theorem sf_biduality_class (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] : (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E], (∀ n : ℕ, SfClassFiniteEtale D l E X n ∧ SfClassFinite D l E X n) ∧ Nonempty (SfClassIntegralRational D l hl E X)) ∧ ∀ (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω], SfClassAlgebraicallyClosed D l hl X Ω",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The four coefficient assertions are assembled with the recorded intrinsic categories and canonical evaluation maps. Integral omega is characterized by the coherent exceptional reduction tower and its derived limit. Rational and common-stage duals are specified by natural descent comparisons preserving evaluation. All auxiliary declarations package the clauses of this node; no independent coefficient category or operation is redefined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-df71fcc7c",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical duality data, edge cases, documentation, route-pivot compliance, and permitted sorry usage all check out; scompile reached overlay compilation but server session refusal prevented final confirmation."
  }
 }
