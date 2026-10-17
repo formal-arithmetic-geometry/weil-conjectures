@@ -26,9 +26,161 @@
   "lem-weil-derived-direct-image-composition",
   "lem-weil-extension-by-zero-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the compatible-triangle statement with $X=U$, $Y=V$, $Z=W$, $f=h$, $g=f$, $c=j$ and $p_Y=r$. It gives $bj=a$, $rj=h$, that $b$ is open and $r$ is proper, and that $pb=ir$ is Cartesian; the three candidates in the item are therefore compactifications. The coefficient ring $\\Lambda$ is finite by its coefficient-datum definition. All schemes needed below are Noetherian: a field is Noetherian since its only ideals are $0,k$; apply finite-type-over-Noetherian first to the supplied finite-type $k$-schemes and then to the proper arrows $q,p$ (proper includes finite type), and use the open-subscheme lemma for $H$. They are quasi-separated by the locally-Noetherian lemma. Thus the permanence lemma makes $p,r$ qcqs. This verifies the hypotheses of the general Noetherian-scheme site tools used below, over the original arbitrary field $k$.",
+   "uses": [
+    "lem-weil-pbc-compatible-compactification-triangle",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/thm-sf-comp-composition.proof.md",
+    "place": "Construction, compatible compactifications and Cartesian square"
+   }
+  },
+  {
+   "text": "Write $C_T=\\nu_T^*$. Exactness of $C$, of etale open extension, and of pro-etale open extension lets the sheaf comparison $C_Hj_!^e\\simeq J_jC_U$ descend termwise to bounded-below complexes. Consequently $N=J_jM$ has the explicit witness $K=j_!^eL\\in D^+(H_e,\\Lambda)$ and $C_HK\\simeq N$. The same argument for $b$ gives the witness $b_!^eK$ for $J_bN$. More generally, whenever $N=C_HK$ is supplied with a bounded-below etale witness, the latter construction supplies the required witness for $J_bN$. These are exactly the triples in the etale-origin category definition.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-extension-by-zero-exact",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "def-sf-etale-origin-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/thm-sf-comp-composition.proof.md",
+    "place": "Construction, etale-origin N and extension by zero of a complex on U"
+   }
+  },
+  {
+   "text": "For the square $H\\xrightarrow{b}\\overline U$, $V\\xrightarrow{i}\\overline V$, with vertical arrows $r,p$, use the site clause of the proper/open coefficient-mate lemma with $A=B=R=\\Lambda$. Its hypotheses are exactly Step 1, and its input is the witness $K$ of Step 2. Denote its specified pro-etale arrow by $T_N:J_iP_rN\\to P_pJ_bN$. If $e_v:CJ_v^e\\simeq J_vC$ and $d_t:CRt_*^e\\simeq P_tC$ are the named site comparisons, that lemma gives the actual formula\n$$T_{C_HK}=P_p(e_{b,K})\\,d_{p,b_!^eK}\\,C_{\\overline V}(\\Gamma_Q^e(K))\\,(J_i(d_{r,K})\\,e_{i,Rr_*^eK})^{-1}.$$\nHere $\\Gamma_Q^e$ is the specified etale proper/open map. Its representative is $i_!^er_*^eI\\cong p_*^eb_!^eI\\to p_*^eI'$ for a K-injective $I$ representing $K$ and a resolution $b_!^eI\\to I'$. The interchange-coherence statement supplies precisely this representative for its map $\\gamma_Q$; the map named in the coefficient-mate statement is $\\Gamma_Q$ of [lem-amb-unbounded-proper-open-interchange], whose statement specifies the same representative $i_!r_*J\\cong p_*k_!J\\to p_*I$ on a K-injective $J$, and a K-injective representative of a bounded-below complex is one in the unbounded category. Hence $\\gamma_Q=\\Gamma_Q^{\\rm et}$ on $D^+$, which is the map the composition construction transports. Thus $T$ is the named site transport of this canonical arrow, with no choice of automorphism.",
+   "uses": [
+    "lem-sp-proper-open-coefficient-mate",
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-amb-unbounded-proper-open-interchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/thm-sf-comp-composition.proof.md",
+    "place": "Construction, specified proper/open map; Stacks Tag 0F7B, lemma-shriek-proper-and-open"
+   }
+  },
+  {
+   "text": "The site clause in Step 3 prescribes $T$ as the open adjunct of the inverse of the transported open-restriction exchange followed by the inverse open unit. Identify those transported maps explicitly. Apply the exchange-transport statement with $(f,f',g,g')=(p,r,i,b)$ and the etale complex $b_!^eK$; $p,r$ are qcqs by Step 1. Its equation $T_L C(E_L)=\\operatorname{Ex}^R_{\\square,C L} S_L$ identifies the transported exchange with exactly the ambient ringed exchange in the item, for the constant ring $\\Lambda$. The open-comparison unit-normalization equation for $b$ identifies the transported etale unit with $\\eta_b$. All these equations descend termwise by the exactness in Step 2. Hence the transported open-restriction map is precisely\n$$\\lambda_N=P_r(\\eta_{b,N}^{-1})\\operatorname{Ex}^p_{J_bN}.$$\nIt is invertible: proper base change applies to $J_bN$ with the witness from Step 2, and the open unit is invertible by the derived open-adjunction statement.",
+   "uses": [
+    "lem-weil-pbc-transport-identifies-exchange",
+    "lem-sf-open-comparison-unit-normalization",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-extension-by-zero-exact",
+    "thm-weil-pbc-finite-level-proetale",
+    "prop-weil-open-closed-recollement-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/thm-sf-comp-composition.proof.md",
+    "place": "Construction, proper base change over V; identification of the named exchange and open unit"
+   }
+  },
+  {
+   "text": "The open-adjunction prescription in the site clause now says $T_N=\\varepsilon_{i,P_pJ_bN}\\circ J_i(\\lambda_N^{-1})$. Its transpose is therefore $i_p^*(T_N)\\circ\\eta_{i,P_rN}=\\lambda_N^{-1}$. The item defines $\\gamma_N$ by the same transpose. Injectivity of the Hom bijection for $J_i\\dashv i_p^*$ gives $T_N=\\gamma_N$, naturally in each witnessed $N$. This step proves equality of the specified maps; it makes no inference about invertibility of their adjuncts.",
+   "uses": [
+    "lem-sp-proper-open-coefficient-mate",
+    "prop-weil-open-closed-recollement-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/thm-sf-comp-composition.proof.md",
+    "place": "Construction, open-adjunction prescription and uniqueness of its transpose"
+   }
+  },
+  {
+   "text": "Fix the final compositors. The finite-level direct-image statement gives $D_{q,p}=c_{q,p}^{-1}:P_qP_p\\simeq P_{qp}$, with the identity normalization asserted there. For open extension, the two open Hom bijections give\n$$\\operatorname{Hom}(J_bJ_jM,F)\\cong\\operatorname{Hom}(M,j_p^*b_p^*F)\\cong\\operatorname{Hom}(M,a_p^*F).$$\nThe middle comparison is the canonical composite restriction, since $bj=a$. Apply the conjugate-isomorphism unit-equation statement to these two left adjoints of canonically identified restrictions. It gives the unique unit-preserving isomorphism $E_{b,j}:J_bJ_j\\simeq J_a$, whose conjugate is that restriction comparison. For an identity open it is the identity by the same uniqueness. This fixes the exact $E$ required in the item, rather than an arbitrary natural isomorphism of these functors.",
+   "uses": [
+    "lem-weil-derived-direct-image-composition",
+    "prop-weil-open-closed-recollement-adjunctions",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/thm-sf-comp-composition.proof.md",
+    "place": "Construction, final composition of proper direct images and of open extensions"
+   }
+  },
+  {
+   "text": "Compute the composition by carrying out its Construction paragraph on the supplied models. The candidate definition identifies its source as $P_qJ_iP_rJ_jM$ and its target as $P_{qp}J_aM$. The construction first applies its displayed proper/open arrow $A_N:J_iP_rN\\to P_pJ_bN$ to $N=J_jM$. It specifies this arrow over $V$ by proper base change: with the open units inserted, its restriction is the inverse of $i_p^*P_pJ_bN\\xrightarrow{\\operatorname{Ex}^p}P_rb_p^*J_bN\\xrightarrow{P_r(\\eta_b^{-1})}P_rN$. Thus $i_p^*(A_N)\\eta_{i,P_rN}=\\lambda_N^{-1}$, using the precise exchange and unit identified in Step 4. The open Hom bijection gives $A_N=T_N$ by Step 5. The etale representative of this map is the one in Step 3, and the coefficient-mate site's equation fixes its transport as an equality of maps. Now apply $P_q$ and then the compositors fixed in Step 6. The sequence prescribed by the construction is exactly\n$$P_qJ_iP_rJ_jM\\xrightarrow{P_qT_{J_jM}}P_qP_pJ_bJ_jM\\xrightarrow{D_{q,p}\\,E_{b,j}}P_{qp}J_aM.$$\nReplacing $T$ by $\\gamma$ proves the formula. Here the composition theorem supplies preservation of witnessed inputs and its canonical composition isomorphisms; the two-arrow formula is proved by this expansion of the construction, not read into that theorem's statement.",
+   "uses": [
+    "def-compact-support-direct-image-detailed",
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-sp-proper-open-coefficient-mate",
+    "thm-sf-comp-composition",
+    "prop-weil-open-closed-recollement-adjunctions",
+    "thm-weil-pbc-finite-level-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/thm-sf-comp-composition.proof.md",
+    "place": "Construction, apply proper/open interchange to extension by zero and push by Rq; Stacks Tag 0F7J, lemma-shriek-composition, four-line computation"
+   }
+  },
+  {
+   "text": "For invertibility, perform the same construction on the pair $r:H\\to V$, $i:V\\to\\overline V$. Compactify $i$ by $(i,\\mathrm{id})$ and $ir$ by $(b,p)$; the fibre-product open is $H$, its projection is $r$, and its source open is $\\mathrm{id}_H$. The computation in Step 7 gives $\\alpha^p_{i,r}=T$ under the identity-open proper models. The remaining identity direct-image compositor is the identity by the direct-image composition statement, and the identity open compositor is the identity by Step 6. For the pair $b,p$ choose instead $(\\mathrm{id}_{\\overline U},p)$ and $(b,\\mathrm{id}_{\\overline U})$. The square has identity vertical arrows; its exchange and open adjunct are identities by the unit--square--counit formula and open triangle identities. Equivalently its identity-square open comparison is the identity as specified by the open-square-exchange statement. Thus $\\alpha^p_{p,b}$ is the identity on the candidate $P_pJ_b$. Consequently the square comparison\n$$\\chi=(\\alpha^p_{p,b})^{-1}\\circ\\alpha^p_{i,r}:J_iP_r\\longrightarrow P_pJ_b$$\n(using $(\\mathrm{id},r)$ and $(\\mathrm{id},p)$ for proper coincidence) is $T=\\gamma$. Both $\\alpha$ factors are isomorphisms on witnessed inputs by the composition theorem, so $\\gamma$ is invertible there. This proves the last clause from composition isomorphisms, independently of any claim that taking an adjunct preserves invertibility.",
+   "uses": [
+    "def-compact-support-direct-image-detailed",
+    "lem-weil-derived-direct-image-composition",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "prop-weil-open-closed-recollement-adjunctions",
+    "lem-trf-open-square-exchange",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/thm-sf-comp-composition.proof.md",
+    "place": "Construction, the two proper/open specializations with identity opens and identity proper maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-compact-support-direct-image-detailed",
+  "def-sf-etale-origin-subcategory",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-proper-morphism",
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-sp-proper-open-coefficient-mate",
+  "lem-trf-open-square-exchange",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "thm-sf-comp-composition",
+  "thm-weil-pbc-finite-level-proetale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/thm-sf-comp-composition.proof.md",
+  "place": "Construction, with the explicit site-transport and open-adjunction normalization of the named proper/open map; Stacks Tags 0F7B and 0F7J."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -74,7 +226,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-proper-composition-site-transport",
@@ -94,5 +246,149 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-proetale-composition-tower-normalization",
+  "worker": "stage1",
+  "summary": "Repair E1/C4, C3 and E3: remove both finite-field-only tower citations; compute composition directly from its Construction paragraph using general-field site-transport tools, identify the exact exchange and open unit, prove equality by transpose uniqueness, and obtain invertibility from the two alpha composition isomorphisms. The statement and existing searches are unchanged; no new nodes.",
+  "blueprint": "Realizes the compatible-tower computation needed in the (beta) finite-horizontal mate argument of lem-trf-weil-shriek-operator-fibres via lem-trf-proper-composition-site-transport, by the Construction paragraph of main-20261015 thm-sf-comp-composition.",
+  "tool_uses": [
+   {
+    "node": "def-compact-support-direct-image-detailed",
+    "why": "Generic Compactification-independent finite-level direct image tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "def-sf-etale-origin-subcategory",
+    "why": "Generic The subcategory of pro-etale complexes with an etale origin tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "def-weil-l-adic-coefficient-extension",
+    "why": "Generic Finite extension of $\\mathbf Q_\\ell$: valuation ring, uniformizer and finite quotients tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "def-weil-pbc-ambient-ringed-exchange",
+    "why": "Generic Ambient ringed exchange tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic Separated, universally closed and proper morphisms tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic Comparison of extension by zero with the site morphism tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "lem-cbc-proper-open-interchange-coherence",
+    "why": "Supplies the canonical etale proper/open map on its K-injective representative, used in the defining construction of composition."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic The comparison pullback is exact on sheaves of modules and commutes with cohomology sheaves tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "lem-sf-open-comparison-unit-normalization",
+    "why": "Supplies the equality identifying the transported etale open unit with the named pro-etale unit."
+   },
+   {
+    "node": "lem-sp-proper-open-coefficient-mate",
+    "why": "Its general-Noetherian-scheme site clause identifies the specified pro-etale proper/open map by site transport and the open-adjunction prescription; the Weil-push unit has no such statement."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Generic Composition of derived direct images tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-exact",
+    "why": "Generic Exactness of extension by zero tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic Canonical derived direct-image comparison is the invertible counit mate tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-compatible-compactification-triangle",
+    "why": "Generic Compatible geometric compactifications of a composable pair tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic An isomorphism of right adjoints determines a unique isomorphism of left adjoints compatible with the units tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic Extension by zero is exact (étale site) tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic A locally Noetherian scheme is quasi-separated (Stacks 01OY) tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic An open subscheme of a Noetherian scheme is Noetherian tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-transport-identifies-exchange",
+    "why": "Identifies the transported etale exchange with the exact ambient ringed pro-etale exchange; it is a normalization tool, not a replacement of the unit route."
+   },
+   {
+    "node": "prop-weil-open-closed-recollement-adjunctions",
+    "why": "Generic Adjunctions of the open-closed recollement tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic The composition law for $Rf_!$ tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "thm-weil-pbc-finite-level-proetale",
+    "why": "Generic Finite-level pro-etale proper base change tool used in the displayed proof steps; the Weil-push unit does not restate this geometric, comparison, or adjunction infrastructure."
+   },
+   {
+    "node": "lem-amb-unbounded-proper-open-interchange",
+    "why": "Its statement gives the K-injective representative of the etale proper/open map named in lem-sp-proper-open-coefficient-mate, identifying it with gamma_Q of lem-cbc-proper-open-interchange-coherence; no node of the Weil-push unit states this map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-compact-support-direct-image-detailed",
+  "def-sf-etale-origin-subcategory",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-proper-morphism",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-sp-proper-open-coefficient-mate",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "thm-sf-comp-composition",
+  "thm-weil-pbc-finite-level-proetale",
+  "lem-amb-unbounded-proper-open-interchange"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N3-ad8c3d371",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-ad8c3d371 (reviewer sub-agent of L); spot-checked: Verdict FIX, after reading the whole item. I read all 8 steps and every cited statement. I read the main-20261015 thm-sf-comp-composition Construction paragraph and the DAG node's own construction steps 3-7. I read the unit sk-d-weil-push and the general-field citer. All three points of the previous return are fixed. E1/C4: the two finite-field-only tower nodes are gone, and every tool is now stated for Noetherian or arbitrary schemes with a finite ring, so the item keeps an arbitrary field k. C3: alpha is computed from its own defining construction, under both readings of it. In the blueprint reading the map is over-Y proper base change. In the DAG reading it is the site conjugate of the etale gamma_Q. Both give gamma. E3: Step 5 uses the adjunction only to prove an equality. Invertibility comes in Step 8 from chi = alpha_{p,b}^{-1} alpha_{i,r}. On the models (i,id),(b,p) and (id,p),(b,id), alpha_{i,r} = T and alpha_{p,b} = id, and both are isomorphisms by the statement of thm-sf-comp-composition. Hypotheses checked: Noetherian and qcqs for the coefficient-mate site clause and for the exchange transport with (f,f',g,g') = (p,r,i,b). Etale-origin witnesses for J_jM and J_bN. Ex^p is the ambient ringed exchange, which is the exchange used by thm-weil-pbc-finite-level-proetale. The direction of D and the uniqueness of E were checked from the conjugate-iso unit equation. Small cases checked: i=b=id, p=r=id and U empty. The coefficient category is ordinary constant-Lambda pro-etale, the same as in the composition theorem. No new nodes, no duplicate, no cycle, no SGA. One fix, a missing citation in Step 3 (C4). Step 3 identifies the etale gamma_Q of lem-cbc-proper-open-interchange-coherence with the Gamma^et named in lem-sp-proper-open-coefficient-mate. That needs the representative clause of lem-amb-unbounded-proper-open-interchange, which the step did not cite. I added that node to Step 3's uses and to proof_deps, declared it as a tool use, and made the sentence precise. The whole corrected node is in fixes/dag/nodes/sec-trace-formula/. I accept all the declared tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -15,9 +15,179 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-henselian-terminology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $f:X\\to S$ and $j:X_\\eta\\hookrightarrow X$. Let $t$ generate the maximal ideal of $R$. By [lem-weil-pbc-dvr-unit-times-uniformizer-power] every nonzero $r\\in R$ is $ut^n$ with $u$ a unit and $n\\geq0$. Hence $R[1/t]=\\operatorname{Frac}(R)$, so $j$ is the open immersion $D(t)$; and every nonzero ideal is $t^nR$ for the least such exponent $n$ among its elements, so $R$ is a local principal ideal domain of dimension one, the form of the hypothesis in the two trait nodes used in Steps 3 and 7. The affine scheme $S$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs] and is locally Noetherian because $R$ is Noetherian. By [lem-weil-pbc-finite-type-over-noetherian], $X$ is Noetherian. On affine charts of $f$, the finite-type algebra over a Noetherian coordinate ring is finitely presented by [lem-weil-pbc-finite-type-noetherian-finite-presentation]. Thus $f$ is locally of finite presentation; finite type supplies quasi-compactness; its diagonal is a closed immersion, so its inverse image over an affine open is affine and quasi-compact by the affine-scheme node, giving quasi-separatedness, so it is of finite presentation as defined in [def-weil-pbc-scheme-conventions].",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Algebra 00PD (lemma-characterize-dvr) for the unit-times-power form; 01T6 (lemma-finite-type-noetherian); finite-type Noetherian finite-presentation lemma; 01TP (definition-finite-presentation)"
+   }
+  },
+  {
+   "text": "Set $L=j_!F$ using [def-weil-pbc-extension-by-zero]. Restriction to the open $X_\\eta$ is $F$ directly from the defining presheaf and sheafification on that open. By [lem-weil-pbc-extension-by-zero-stalks], its restriction to the closed complement is zero: every geometric stalk there is zero, and [lemma-weil-pbc-geometric-stalk-conservative] detects this. Take the finite constructible stratification trivializing $F$ and append $X_k$ as a stratum with value zero. These remain locally closed constructible strata in the Noetherian scheme $X$, and show that $L$ is constructible by [def-weil-pbc-etale-constructible-sheaf]. We use this sheaf in degree zero; no resolution by finite free $\\Lambda$-modules or finite Tor hypothesis is involved.",
+   "uses": [
+    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 095E (lemma-constructible-quasi-compact-quasi-separated)"
+   }
+  },
+  {
+   "text": "Put $m=\\ell^n$. The ring $\\Lambda$ is a $\\mathbf Z/m\\mathbf Z$-algebra because $m\\Lambda=0$, and $m$ is invertible on $S$ because $\\ell$ is. Apply [lem-trf-trait-nearby-base-change] to $f$ and to the bounded total-scheme complex $L$. Its conclusion is precisely that $(f,L)$ is $\\Psi$-good. This step supplies a hypothesis of the next theorem, rather than assuming nearby-cycle constructibility.",
+   "uses": [
+    "lem-trf-trait-nearby-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/48/9291-1712.10216v7.pdf",
+    "place": "Example 4.26(2), valuation-ring case, printed p. 36"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-psi-good-oriented-cohomology-strata] to $f$ and $L$: Step 1 gives the Noetherian base and finite presentation, Step 2 gives constructibility of $L$, and Step 3 gives $\\Psi$-goodness and the coefficient condition. For each $q\\geq0$ obtain partitions $X=\\coprod X_\\alpha$, $S=\\coprod S_\\beta$ on which the oriented cohomology sheaf $G_q=\\mathcal H^q(R\\Psi_fL)$ is finite locally constant. This theorem asserts cohomological constructibility only. We obtain the independent uniform vanishing bound in Steps 9–10.",
+   "uses": [
+    "lem-trf-psi-good-oriented-cohomology-strata"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/48/9291-1712.10216v7.pdf",
+    "place": "Theorem 4.27(2), followed by the explicit finite-partition definition, printed pp. 36–37"
+   }
+  },
+  {
+   "text": "Choose an algebraic closure $k^a$ of $k$ and the corresponding closed geometric point $b$ of $S$. Here $S_{(b)}=S$. To verify this identification, take a pointed affine etale neighbourhood $\\operatorname{Spec}A\\to S$. Its chosen residue-field extension of $k$ is separable algebraic by [lem-weil-pbc-etale-residue-field-extension-separable], hence equals $k$ since $k$ is separably closed. The resulting map $A\\to k$ lifts uniquely to $A\\to R$ by [lem-sc-etale-henselian-ring-lift], with target henselian local $R$, identity base map, and quotient $R\\to k$. These unique sections are pointed and compatible with all neighbourhood maps. Consequently the identity pointed neighbourhood is initial, and the inverse limit defining $S_{(b)}$ in [def-weil-pbc-strict-henselization-limit] is $S$.",
+   "uses": [
+    "lem-weil-pbc-etale-residue-field-extension-separable",
+    "lem-sc-etale-henselian-ring-lift",
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "08HQ (lemma-map-into-henselian); 02G8 (lemma-unramified-etale-fibres); pointed-neighbourhood limit definition"
+   }
+  },
+  {
+   "text": "Let $K=\\operatorname{Frac}(R)$, $K^s$ be the chosen separable closure, and choose an algebraic closure $K^a$ containing $K^s$. The extensions $k^a/k$ and $K^a/K^s$ are purely inseparable: an algebraic element over a separably closed field has a purely inseparable minimal polynomial. Their maps of spectra are integral (all elements are algebraic), surjective (one point), and radicial (the residue extensions are purely inseparable). By [lem-pc-integral-radicial-surjective-universal-homeomorphism] they are universal homeomorphisms, as are their base changes $a:X_{k^a}\\to X_k$ and $h:X_{K^a}\\to X_{K^s}$. By [thm-weil-pbc-universal-homeomorphism-invariance], their etale inverse images are equivalences preserving and reflecting covers. These equivalences extend to constant-$\\Lambda$ modules by transporting the module operations, and termwise to derived categories; they are exact and preserve constant finite module sheaves.",
+   "uses": [
+    "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "04DZ (theorem-topological-invariance); integral, radicial, surjective criterion"
+   }
+  },
+  {
+   "text": "Put $C=i^*R\\bar j_*\\pi^*F$ on $X_k$, and let $j_a:X_{K^a}\\to X$. Apply [lem-trf-nearby-geometric-slice] to the total-scheme sheaf $L$, the closed geometric point $b$, and the generic point $\\operatorname{Spec}K^a$ with the compatible specialization. Step 5 identifies its strict base with $S$. Its conclusion is $e_f^*R\\Psi_fL\\simeq (i a)^*Rj_{a*}(L|_{X_{K^a}})$. This is $a^*C$: indeed $j_a=\\bar j h$, $L|_{X_{K^a}}=h^*\\pi^*F$, and the exact equivalence of Step 6 gives $Rh_*h^*=1$. At the derived-functor level the composition here is valid because the right adjoint $h_*$ of an exact equivalence preserves injectives; applying direct images to an injective resolution gives $Rj_{a*}=R\\bar j_*Rh_*$. Thus we have $a^*C\\simeq e_f^*R\\Psi_fL$, with the same finite ring throughout.",
+   "uses": [
+    "lem-trf-nearby-geometric-slice",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "(1.3.4) and its geometric-slice identification; 04DZ for the purely inseparable comparison"
+   }
+  },
+  {
+   "text": "Fix $q$. Refine the base partition of Step 4 by the two subsets $\\{s\\}$ and $\\{\\eta\\}$ of the trait, and put $Z_\\alpha=X_\\alpha\\times_S k$. The morphism $e_f$ of Step 7 on $Z_\\alpha\\times_k k^a$ factors through the oriented subtopos for $X_\\alpha$ and the base stratum containing $\\eta$: its two projections are the inclusion in $X_\\alpha$ and the fixed generic geometric point, with the chosen specialization. This factorization is the universal property of [lem-trf-oriented-product-universal]. Inverse image pulls each local trivialization of $G_q$ back to a cover with the same finite constant values; hence $\\mathcal H^q(a^*C)$ is finite locally constant on each $Z_\\alpha\\times_k k^a$. Inverse image on constant-module topoi is exact as specified in [def-trf-oriented-nearby-cycles]. The cover-preserving equivalence of [thm-weil-pbc-universal-homeomorphism-invariance], also on each $Z_\\alpha$, descends these local trivializations to $Z_\\alpha$. The finitely many $Z_\\alpha$ partition $X_k$ into constructible locally closed strata. By [def-weil-pbc-etale-constructible-sheaf], $\\mathcal H^q(C)$ is constructible.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "def-trf-oriented-nearby-cycles",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/48/9291-1712.10216v7.pdf",
+    "place": "Finite-partition definition after Theorem 4.27; restriction along the slice of Illusie (1.3.4); 04DZ for descent of trivializing covers"
+   }
+  },
+  {
+   "text": "Since $f$ is finite type and $S$ is quasi-compact, [lem-fin-finite-type-fibre-dimension-bound] gives $d\\geq0$ bounding the dimensions of all fibres of $f$. Apply [lem-trf-gabber-strict-local-torsion-bound] with $m=\\ell^n$, coefficient ring $\\Lambda$, $N=d$, and, for each geometric point $x$ of $X$, the sheaf $L|_{X_{(x)}}$. This gives $R^qf_{(x)*}(L|_{X_{(x)}})=0$ for every $q>2d$, uniformly in $x$. It requires neither constructibility nor finite Tor dimension of this sheaf.",
+   "uses": [
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-trf-gabber-strict-local-torsion-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "Corollary 1.15 with Theorem 1.14; Stacks 0A3V (lemma-morphism-finite-type-bounded-dimension)"
+   }
+  },
+  {
+   "text": "For each geometric point $x$, [lem-trf-oriented-nearby-strict-local-description] identifies $\\sigma_x^*R\\Psi_fL$ with $Rf_{(x)*}(L|_{X_{(x)}})$; $\\sigma_x^*$ is exact. Step 9 therefore shows $\\sigma_x^*G_q=0$ for $q>2d$. The same cited statement says that the family $\\sigma_x^*$ is jointly conservative, so $G_q=0$ on $V_f$ for $q>2d$. Its inverse image in Step 7 is zero as well. Exactness and conservativity of the equivalence $a^*$ from Step 6 give $\\mathcal H^q(C)=0$ for $q>2d$. This proves a single global bound, rather than bounds depending on a special-fibre stalk.",
+   "uses": [
+    "lem-trf-oriented-nearby-strict-local-description",
+    "def-trf-oriented-nearby-cycles",
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "(1.12.6) and Corollary 1.15; joint conservativity of the strict-local sections"
+   }
+  },
+  {
+   "text": "Finally [prop-weil-pbc-inverse-image-modules-exact] makes $i^*$ exact on constant-$\\Lambda$ modules. An exact additive functor preserves kernels and images, so it commutes with cohomology of a representative complex. The definition of higher direct image in [def-weil-pbc-direct-image] consequently gives $\\mathcal H^q(C)=i^*R^q\\bar j_*(\\pi^*F)$. Steps 8 and 10 establish respectively its constructibility for every $q\\geq0$ and its vanishing for $q>2d$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "04JC (lemma-flat-pullback-exact), and the definition of higher direct image"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-trf-trait-nearby-base-change",
+  "lem-trf-psi-good-oriented-cohomology-strata",
+  "lem-weil-pbc-etale-residue-field-extension-separable",
+  "lem-sc-etale-henselian-ring-lift",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-trf-nearby-geometric-slice",
+  "def-weil-pbc-direct-image",
+  "lem-trf-oriented-product-universal",
+  "def-trf-oriented-nearby-cycles",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-trf-gabber-strict-local-torsion-bound",
+  "lem-trf-oriented-nearby-strict-local-description",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/48/9291-1712.10216v7.pdf",
+  "place": "Combination of Theorem 4.27(2) and Example 4.26(2) with Illusie Around Thom–Sebastiani (1.3.4), (1.12.6), Corollary 1.15, and explicit extension-by-zero and inseparable-closure comparisons. Primary PDFs read online; archival copies WANTED. The original Illusie 2021 summary is not used as a stronger finiteness input."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,7 +233,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-cycle-finiteness-exchange",
@@ -83,5 +253,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-nearby-cycle-sheaf-finiteness",
+  "worker": "stage1",
+  "summary": "Repair of returned head 7951fb39bea63d33710b1051d78bd9d0acfb1e13: discard the unlanded stronger child; construct a total-scheme extension, prove Psi-goodness, use a conditional oriented cohomology-stratification input, restrict to the geometric slice, and prove boundedness independently by the existing Gabber strict-local bound. Explicitly handle separable versus algebraic closures and retain the correct exactness argument. Statement unchanged; one new statement-only input, no new full finiteness theorem.",
+  "blueprint": "Realizes the nearby-cycle finiteness input under the normal-cone specialization proof of lem-trf-local-term-locality, Proof (1) and (2), via lem-trf-specialization-zero-section and lem-trf-nearby-cycle-finiteness-exchange. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-etale-henselian-ring-lift",
+    "why": "Unique prescribed-residue section, to identify the strict base with itself. This generic tool is absent from this unit and does not replace its normal-cone route."
+   },
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Cover-preserving etale equivalence for the separable/algebraic closure conventions. This generic tool is absent from this unit and does not replace its normal-cone route."
+   },
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "One uniform fibre-dimension bound for Gabber. This generic tool is absent from this unit and does not replace its normal-cone route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-etale-henselian-ring-lift",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-fin-finite-type-fibre-dimension-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-d90660174",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-d90660174 (reviewer sub-agent of L); spot-checked: I read all of the item and the new node, the statement of every cited node, and both primary sources at the cited places. Neither source is in literature/, so I fetched them read-only into /tmp. Lu–Zheng v7 §4.5, pp. 36–37: Example 4.26(2)(a) covers valuation rings, Λ with mΛ=0 and m invertible, L in D^+. Theorem 4.27(2): if S has finitely many irreducible components, f is of finite presentation, Λ is Noetherian and m-torsion, L is in D_c and (f,L) is Ψ-good, then RΨ_f L is in D_c; constructible means finitely generated stalks and finite partitions of X and S into constructible locally closed subsets, with each restriction to an oriented product locally constant. Illusie, Thom–Sebastiani notes: (1.3.4) slices, with e_f given by (i_s, t→S, c); (1.12.6); Theorem 1.14 and Corollary 1.15 (Gabber's bound 2N). The new node lem-trf-psi-good-oriented-cohomology-strata is exactly the degree-0 sheaf case of 4.27(2) for a Noetherian base and finite Λ. It is statement-only, has three kinds of Mathlib search, and is not a duplicate: lem-trf-orgogozo-good-modification is clause (1) and has no constructibility conclusion. It does not restate its parent. Steps 1–11 are correct. Step 1 gives finite presentation. Step 2 shows j_!F is constructible. Step 3 gets Ψ-goodness from the trait node. Step 5 shows S_(b)=S: the base is its own strict localization, because the identity neighbourhood is initial. Step 6 handles the separable and algebraic closures by purely inseparable universal homeomorphisms. Step 7 uses the slice lemma, with Rj_a*=Rj̄_*Rh_* and Rh_*h^*=1. Step 8 factors e_f through the oriented product containing η and descends local constancy. Steps 9–10 prove one uniform vanishing bound q>2d through Gabber's bound and joint conservativity. Step 11 uses exactness of i^*. No excellence, finite Tor or SGA source is used. Every dependency's unit is on the sk-i-curve-zero route, and there is no cycle. The three declared tool_uses are accepted: the henselian lift, universal-homeomorphism invariance and the fibre-dimension bound. I repaired two citation faults. (1) C1, Step 1: the facts R[1/t]=Frac R and 'Noetherian local domain of dimension 1 with principal nonzero maximal ideal = local PID', which the two trait nodes need in Steps 3 and 7, had no node. Step 1 now cites the Mathlib leaf lem-weil-pbc-dvr-unit-times-uniformizer-power (Stacks 00PD). (2) B3, new node: the 'oriented subtopos' and the restriction to it were not defined by a cited node. The statement now defines them through lem-trf-oriented-product-universal (added to stmt_deps); the content is unchanged. Corrected files are in fixes/dag/nodes/sec-trace-formula/; no target or statement content was weakened. Still WANTED: local archival copies of the Lu–Zheng and Illusie PDFs.; 2 file(s) fixed by the reviewer"
  }
 }
