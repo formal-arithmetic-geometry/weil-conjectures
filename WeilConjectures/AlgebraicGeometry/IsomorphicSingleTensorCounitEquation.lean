@@ -221,6 +221,7 @@ private theorem transport_eq
   rw [Category.assoc q (a.unit.app B) (R.map r), ← ht]
   simp only [Category.assoc, t.inv_hom_id, Category.comp_id]
 
+
 private theorem single_tensor_transport_equation
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -256,6 +257,7 @@ private theorem single_tensor_transport_equation
       (DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).map
           ((tensorCompositionComparison e.hom p).hom.app M)) (t.app M) (ht M)
+
 
 /-- The canonical transported isomorphism satisfies the counit equation.
 Source: Stacks Project, Tags 0D5S and 08HY.

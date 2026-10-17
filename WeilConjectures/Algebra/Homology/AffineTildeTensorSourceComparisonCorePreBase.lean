@@ -70,9 +70,7 @@ local instance prebaseSourceComparisonPullbackAdditive {X Y : Scheme.{u}} (f : X
 
 attribute [local irreducible] tilde tilde.functor Functor.mapDerivedCategory
   affineTildePushforwardComparison Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
-  Scheme.Modules.tensorPullback derivedPullback
-  schemeDerivedBaseChangeMap
-  moduleHomotopyBaseChange
+  Scheme.Modules.tensorPullback schemeDerivedBaseChangeMap moduleHomotopyBaseChange
 
 /-- Ordinary source identification: inverse tensor/tilde comparison followed by
 pullback of the affine pushforward comparison. This is a concrete construction.
