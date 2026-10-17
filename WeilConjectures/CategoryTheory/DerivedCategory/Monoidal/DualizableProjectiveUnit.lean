@@ -373,3 +373,84 @@ theorem isDualizable_obj₃_of_distTriang (T : Triangle (DerivedCategory C))
     (fun _ u hu ↦ Triangle.coyoneda_exact₂ _ hl₂ u hu) (fun _ u hu ↦ Triangle.coyoneda_exact₂ _ hl₁ u hu)
 
 end DerivedCategory
+
+namespace CategoryTheory
+
+open Limits
+
+section FinProj
+
+variable {C : Type u} [Category.{v} C] [Preadditive C] [HasFiniteBiproducts C]
+  [HasBinaryBiproducts C]
+
+/-- The biproduct of copies of an object `X` indexed by a sum of finite types is the binary
+biproduct of the two partial biproducts. -/
+noncomputable def biprodBiproductConstIso (X : C) (ι κ : Type) [Finite ι] [Finite κ] :
+    (⨁ fun _ : ι ↦ X) ⊞ (⨁ fun _ : κ ↦ X) ≅ ⨁ fun _ : ι ⊕ κ ↦ X where
+  hom := biprod.desc (biproduct.desc fun i ↦ biproduct.ι (fun _ : ι ⊕ κ ↦ X) (Sum.inl i))
+    (biproduct.desc fun k ↦ biproduct.ι (fun _ : ι ⊕ κ ↦ X) (Sum.inr k))
+  inv := biproduct.desc fun s ↦ Sum.elim (fun i ↦ biproduct.ι (fun _ : ι ↦ X) i ≫ biprod.inl)
+    (fun k ↦ biproduct.ι (fun _ : κ ↦ X) k ≫ biprod.inr) s
+  hom_inv_id := by
+    apply biprod.hom_ext' <;> apply biproduct.hom_ext' <;> intro j <;> simp
+  inv_hom_id := by
+    apply biproduct.hom_ext'
+    rintro (i | k) <;> simp
+
+/-- The biproduct of `r + s` copies of `X` is the binary biproduct of `r` and `s` copies. -/
+noncomputable def biprodBiproductFinIso (X : C) (r s : ℕ) :
+    (⨁ fun _ : Fin r ↦ X) ⊞ (⨁ fun _ : Fin s ↦ X) ≅ ⨁ fun _ : Fin (r + s) ↦ X :=
+  biprodBiproductConstIso X (Fin r) (Fin s) ≪≫
+    biproduct.whiskerEquiv (f := fun _ : Fin r ⊕ Fin s ↦ X) (g := fun _ : Fin (r + s) ↦ X)
+      finSumFinEquiv (fun _ ↦ Iso.refl _)
+
+variable [MonoidalCategory C]
+
+variable (C) in
+/-- The objects of `C` which are retracts of a finite direct sum `𝟙ʳ` of copies of the unit, the
+*finite projective* objects of the blueprint. -/
+def finProj : ObjectProperty C :=
+  fun P ↦ ∃ r : ℕ, Nonempty (Retract P (⨁ fun _ : Fin r ↦ 𝟙_ C))
+
+lemma finProj_of_iso {P P' : C} (e : P ≅ P') (hP : finProj C P) : finProj C P' := by
+  obtain ⟨r, ⟨h⟩⟩ := hP
+  exact ⟨r, ⟨(Retract.ofIso e.symm).trans h⟩⟩
+
+lemma finProj_of_isZero {P : C} (hP : IsZero P) : finProj C P :=
+  ⟨0, ⟨{ i := 0, r := 0, retract := hP.eq_of_src _ _ }⟩⟩
+
+lemma finProj_biprod {P P' : C} (hP : finProj C P) (hP' : finProj C P') :
+    finProj C (P ⊞ P') := by
+  obtain ⟨r, ⟨h⟩⟩ := hP
+  obtain ⟨s, ⟨h'⟩⟩ := hP'
+  refine ⟨r + s, ⟨Retract.trans ?_ (Retract.ofIso (biprodBiproductFinIso _ r s))⟩⟩
+  exact { i := biprod.map h.i h'.i, r := biprod.map h.r h'.r, retract := by simp }
+
+omit [MonoidalCategory C] in
+lemma projective_biproduct_const (X : C) [Projective X] (ι : Type) [Finite ι] :
+    Projective (⨁ fun _ : ι ↦ X) where
+  factors f e _ := ⟨biproduct.desc fun b ↦ Projective.factorThru (biproduct.ι _ b ≫ f) e,
+    biproduct.hom_ext' _ _ fun b ↦ by simp⟩
+
+lemma finProj.projective [Projective (𝟙_ C)] {P : C} (hP : finProj C P) : Projective P := by
+  obtain ⟨r, ⟨h⟩⟩ := hP
+  have := projective_biproduct_const (𝟙_ C) (Fin r)
+  exact h.projective
+
+lemma isDualizable_biproduct_unit (r : ℕ) : IsDualizable (⨁ fun _ : Fin r ↦ 𝟙_ C) := by
+  induction r with
+  | zero =>
+    refine IsZero.isDualizable ((IsZero.iff_id_eq_zero _).2 (biproduct.hom_ext' _ _ ?_))
+    exact fun i ↦ i.elim0
+  | succ r ih =>
+    exact IsDualizable.of_iso (biprodBiproductFinIso _ r 1)
+      (ih.biprod (IsDualizable.of_iso (biproductUniqueIso _).symm isDualizable_unit))
+
+lemma finProj.isDualizable [IsIdempotentComplete C] {P : C} (hP : finProj C P) :
+    IsDualizable P := by
+  obtain ⟨r, ⟨h⟩⟩ := hP
+  exact (isDualizable_biproduct_unit r).of_retract h
+
+end FinProj
+
+end CategoryTheory
