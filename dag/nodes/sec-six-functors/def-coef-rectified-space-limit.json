@@ -1,0 +1,116 @@
+{
+ "id": "def-coef-rectified-space-limit",
+ "kind": "definition",
+ "title": "End model for limits of rectified diagrams of spaces",
+ "status": "split",
+ "statement": "Let $J$ be a small ordinary category and $X:J\\to\\mathrm{sSet}$ a diagram of simplicial sets [def-weil-pbc-simplicial-set]. Set $W_J(j)=N(J/j)$, with transition functors given by postcomposition in the over category. Define $\\operatorname{holim}^{\\mathrm{end}}_J X=\\int_{j\\in J}\\operatorname{Fun}(W_J(j),X(j))$, the simplicial set of enriched natural transformations from $W_J$ to $X$, with all simplicial degrees retained. For a strict cone with apex $A$ and legs $a_j:A\\to X(j)$, its canonical comparison $c:A\\to\\operatorname{holim}^{\\mathrm{end}}_JX$ is characterized by requiring that its $j$th end projection, uncurried on $N(J/j)\\times A$, equals $a_j$ after projection to $A$. For Kan-valued diagrams this is the simplicial end model for the limit of spaces in the conventions of [def-cbc-enhanced-diagrams-cones].",
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Section 4.2.4, simplicial diagram models and Proposition 4.2.4.4; the end of the over-category nerve weight is the explicit projectively cofibrant constant-point resolution model used for space limits in the mapping-space descent proof."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bousfield Kan homotopy limit of diagram of spaces enriched natural transformations nerve over category",
+   "results": "{\"t\": \"2026-10-17T04:18:23Z\", \"tool\": \"leansearch\", \"query\": \"Bousfield Kan homotopy limit of diagram of spaces enriched natural transformations nerve over category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.EnrichedNatTrans\", \"CategoryTheory.EnrichedNatTrans.mk\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerve.nerveFunctor₂_map_functorOfNerveMap\", \"CategoryTheory.nerveAdjunction.isIso_counit\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.Limits.limit.lift_map\"], \"digest\": \"37ddd35b40ede192\"}",
+   "date": "2026-10-17",
+   "verdict": "No specialized space-limit definition. Reuse the enriched Hom/end, nerve and over-category primitives."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homotopy limit as end of internal hom from nerve of over categories",
+   "results": "{\"t\": \"2026-10-17T04:18:33Z\", \"tool\": \"leanfinder\", \"query\": \"homotopy limit as end of internal hom from nerve of over categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.nerve.functorOfNerveMap_obj\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp\"], \"digest\": \"b89f47fc914d65d9\"}",
+   "date": "2026-10-17",
+   "verdict": "No specialized space-limit definition. Reuse the enriched Hom/end, nerve and over-category primitives."
+  },
+  {
+   "tool": "grep",
+   "query": "Bousfield.?Kan|homotopyLimit|homotopy.?end|enrichedHom",
+   "results": "{\"t\": \"2026-10-17T04:18:34Z\", \"tool\": \"grep\", \"query\": \"Bousfield.?Kan|homotopyLimit|homotopy.?end|enrichedHom\", \"sub\": \"CategoryTheory/Enriched\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\"], \"digest\": \"307f70a8a874a70e\"}",
+   "date": "2026-10-17",
+   "verdict": "No specialized space-limit definition. Reuse the enriched Hom/end, nerve and over-category primitives."
+  },
+  {
+   "tool": "grep",
+   "query": "rectifiedSpaceLimit|spaceLimitWeight|Bousfield.?Kan.*[Ll]imit in WeilConjectures and lean/Sheaf; blueprint_refs.py search homotopy limit; rg -l Bousfield.?Kan.*[Ll]imit|Nat\\(N\\(J|rectified.space.limit dag/nodes/sec-six-functors",
+   "results": "No existing declaration of the end model. Blueprint search: def-weil-derived-limit and det-prop-integral-criterion-constant-coefficients, neither a space limit. DAG search also found the simplicial-bar-projective-resolution and bousfield-kan-comparison-calculus nodes; inspected both: they concern bar resolutions and homotopy colimits, respectively. The existing space-tower-homotopy-limit is the sequential path model, not an arbitrary-category end.",
+   "date": "2026-10-17",
+   "verdict": "No duplicate notion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-enriched-diagram-homotopy-descent",
+  "date": "2026-10-17",
+  "group": "Q41"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Mapping-space limit in Step 5 of enriched diagram homotopy descent, using the rectified diagram model.",
+   "via": [
+    "lem-coef-enriched-diagram-homotopy-descent",
+    "lem-coef-marked-cone-straightening-quillen",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cartesian-monoidal-straightening",
+    "lem-coef-algebroid-external-product",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RectifiedSpaceLimit",
+  "declaration": "SSet.Enhanced.rectifiedSpaceLimit",
+  "declarations": [
+   "SSet.Enhanced.spaceLimitWeight",
+   "SSet.Enhanced.rectifiedSpaceLimit",
+   "SSet.Enhanced.IsSpaceLimitComparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RectifiedSpaceLimit.lean",
+  "statement": "def rectifiedSpaceLimit {J : Type u} [Category.{u} J] (X : J ⥤ SSet.{u}) : SSet.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c822d0cbb",
+  "group": "Q41",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c822d0cbb",
+  "group": "Q41",
+  "result": "fix",
+  "note": "Read the node, the 7 stmt deps and their Lean declarations (CoherentNerveComparisonStatement, SimplicialDiagramEnrichment, ProjectiveSimplicialModelStructure, FiniteReedy.IsLocalization, core/mappingSpace/IsFunctorEquivalence, simplicialHomotopyPullback, spaceTowerHomotopyLimit, strictInverseLimit/InducedTowerCone), both delivered modules, the new node def-coef-rectified-space-limit (a Bousfield-Kan end with covariant over-category nerve weight via Mathlib enrichedHom; comparison uniquely pinned; no duplicate) and the report (Worker report + Second reading by Q41 present). All clauses match the node: coproducts incl. empty, pushout with Mono i ∨ Mono j via a representable path-pullback test over all quasicategories Q, increasing unions via the tower path model, the general mapping-space formula and the αβ criterion on strict rectified models (not weaker), and the Kan tower clause. Edge cases covered; universes u,w,v independent and explicit; no hollow definitions; only the main theorem is sorry. FINDING (fixed): Presentation.restriction_localization required only a per-map AreNaturallyEquivalent square, which does not make D the coherent localization of the strict restriction functor (composite 2-cells unpinned), so ∃P descent would not imply descent for the canonical restriction; the docstring itself claimed coherence. fixes/EnrichedDiagramHomotopyDescent.lean makes the square commute strictly (satisfiable via a strictly functorial Joyal localization; restriction is strictly functorial since it is pinned); theorem signature, lean.statement and records are unchanged; all seven citers use the item only as a proof dependency. nt_compile.py --json: delivered pair rc=0 clean; fixed file with the delivered RectifiedSpaceLimit rc=0 clean, no errors or warnings."
+ }
+}

@@ -29,7 +29,11 @@
  "stmt_deps": [
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-simplicial-projective-model-calculus",
-  "lem-coef-simplicial-model-nerve-localization"
+  "lem-coef-simplicial-model-nerve-localization",
+  "def-coef-rectified-space-limit",
+  "def-coef-space-tower-homotopy-limit",
+  "lem-coef-kan-fibration-tower-limit",
+  "lem-coef-infinity-isofibration-pullback-limit"
  ],
  "proof": [
   {
@@ -254,5 +258,37 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichedDiagramHomotopyDescent",
+  "declaration": "CategoryTheory.enriched_diagram_homotopy_descent",
+  "declarations": [
+   "CategoryTheory.EnrichedDescent.Index",
+   "CategoryTheory.EnrichedDescent.liftedNerveMap",
+   "CategoryTheory.EnrichedDescent.Presentation",
+   "SSet.Enhanced.descentTest",
+   "SSet.Enhanced.descentMappingMap",
+   "SSet.Enhanced.descentMappingDiagram",
+   "SSet.Enhanced.IsDescentLimit",
+   "SSet.Enhanced.EnrichedDescentAssertions",
+   "SSet.Enhanced.DescentMappingAssertions",
+   "CategoryTheory.enriched_diagram_homotopy_descent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnrichedDiagramHomotopyDescent.lean",
+  "statement": "theorem enriched_diagram_homotopy_descent {A : Type w} [Category.{u} A] [ModelCategory A] [SimplicialCategory A] (T : SimplicialTensorCotensor A) (hA : CombinatorialModelCategory.{w, u, u} A) (hSM7 : SimplicialModelLocalization.SatisfiesSM7 A) (N : CoherentNerveComparisonStatement.{u}) : (∃ P : Presentation T N, EnrichedDescentAssertions P.D) ∧ DescentMappingAssertions.{v} ∧ (∀ (X : ℕ → SSet.{v}) (p : ∀ n : ℕ, X (n + 1) ⟶ X n) (hX : ∀ n : ℕ, SSet.KanComplex (X n)), (∀ n : ℕ, SSet.modelCategoryQuillen.J.rlp (p n)) → ∃ hL : SSet.KanComplex (strictInverseLimit X p), ∃ c : InducedTowerCone X p hX hL, IsLimiting c.F c.t)",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Full enriched diagram localizations with normalized restriction on objects, enriched actions and transformations; descent tested representably on full functor categories. Arbitrary coherent ordinary diagrams and cones are read in simultaneous rectified models, with the enriched-end limit of mapping spaces and its degreewise characterized canonical comparison.",
+  "fixed_by": "NT-stage2-cc-c822d0cbb"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c822d0cbb",
+  "group": "Q41",
+  "result": "fix",
+  "note": "Read the node, the 7 stmt deps and their Lean declarations (CoherentNerveComparisonStatement, SimplicialDiagramEnrichment, ProjectiveSimplicialModelStructure, FiniteReedy.IsLocalization, core/mappingSpace/IsFunctorEquivalence, simplicialHomotopyPullback, spaceTowerHomotopyLimit, strictInverseLimit/InducedTowerCone), both delivered modules, the new node def-coef-rectified-space-limit (a Bousfield-Kan end with covariant over-category nerve weight via Mathlib enrichedHom; comparison uniquely pinned; no duplicate) and the report (Worker report + Second reading by Q41 present). All clauses match the node: coproducts incl. empty, pushout with Mono i ∨ Mono j via a representable path-pullback test over all quasicategories Q, increasing unions via the tower path model, the general mapping-space formula and the αβ criterion on strict rectified models (not weaker), and the Kan tower clause. Edge cases covered; universes u,w,v independent and explicit; no hollow definitions; only the main theorem is sorry. FINDING (fixed): Presentation.restriction_localization required only a per-map AreNaturallyEquivalent square, which does not make D the coherent localization of the strict restriction functor (composite 2-cells unpinned), so ∃P descent would not imply descent for the canonical restriction; the docstring itself claimed coherence. fixes/EnrichedDiagramHomotopyDescent.lean makes the square commute strictly (satisfiable via a strictly functorial Joyal localization; restriction is strictly functorial since it is pinned); theorem signature, lean.statement and records are unchanged; all seven citers use the item only as a proof dependency. nt_compile.py --json: delivered pair rc=0 clean; fixed file with the delivered RectifiedSpaceLimit rc=0 clean, no errors or warnings."
  }
 }

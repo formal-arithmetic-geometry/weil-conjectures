@@ -12,7 +12,8 @@
   "def-coef-simplicial-tensor-cotensor",
   "lem-coef-reedy-model-structure",
   "def-weil-pbc-simplicial-set",
-  "lem-coef-simplicial-extra-degeneracy-prism"
+  "lem-coef-simplicial-extra-degeneracy-prism",
+  "def-coef-simplicial-realization-map"
  ],
  "proof": [
   {
@@ -208,5 +209,23 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-d74382b2b (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-reedy-realization-prism, every cited statement (simplicial-model-nerve-localization, simplicial-tensor-cotensor, reedy-model-structure, weil-pbc-simplicial-set, simplicial-extra-degeneracy-prism, model-localization-detects-weak-equivalences and its model-category definition in model-infinity-derived-adjunction), the citer simplicial-realization-extra-degeneracy, the unit record and the main-20261015 ancestor proof (paragraph 'For K'). The item statement is unchanged and true; its inline coend formula agrees with def-coef-simplicial-model-realization. Step 1 (coend functoriality) and Step 4 (identities lie in C∩W; two-out-of-three on p i_j=1 and H i_j=1) are genuinely elementary. Steps 2 and 3 apply the prism node with X=Y=A and X=Y=B, both Reedy-cofibrant, and Step 1 turns |gf| into |g||f|. Step 5: L=(GF)^-1G and R=G(FG)^-1 are equal; the detection node is an exact iff with no endpoint hypotheses and the same model axioms; no dependency path leads back to the item. Prism node: true, with a statement only and self-contained. Skeletal pushout products plus SM7 make |X| cofibrant; SM7 with the boundary of Delta^1 and with {0} gives the good cylinder with p in W. The endpoint orientation checks out against the DAG convention: d_{n+1}H_n=u is the all-0 face (i_0), d_0H_0=v is the all-1 face (i_1). Small cases checked: n=0, n=1, the initial object, a constant cofibrant object, and the excluded constant non-cofibrant object. The unused Reedy hypothesis on Y is harmless. Not a relabelled clause (D1/D2): the node handles a single homotopy with no inverse or weak-equivalence conclusion. Not a duplicate of realization-cylinder, resolution-interval-tensor, extra-degeneracy-contraction, cbc-simplicial-homotopy-equivalence-weak, boundary-collapse-test or fixed-cylinder-detection. Verified Mathlib LeftHomotopy.lean:140-145 and the Reedy/Basic.lean:22-24 TODO; recorded searches are real log entries. No SGA used, no target, coefficient category or base-change morphism touched, all citations within the unit, so no tool_uses needed. Dugger is not archived and is recorded as WANTED, with proof_origin agent. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ReedyRealizationHomotopyInvariance",
+  "declaration": "CategoryTheory.reedy_realization_homotopy_invariance",
+  "file": "lean/Sheaf/CategoryTheory/ReedyRealizationHomotopyInvariance.lean",
+  "statement": "theorem reedy_realization_homotopy_invariance {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [MorphismProperty.HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] [SimplicialCategory M] (T : SimplicialTensorCotensor M) (_hSM7 : SimplicialModelLocalization.SatisfiesSM7 M) (A B : SimplicialObject M) (_hA : HomotopicalAlgebra.Reedy.leftClass (MorphismProperty.epimorphisms SimplexCategory).op (cofibrations M) (initial.to A)) (_hB : HomotopicalAlgebra.Reedy.leftClass (MorphismProperty.epimorphisms SimplexCategory).op (cofibrations M) (initial.to B)) (f : A ⟶ B) (g : B ⟶ A) (_hgf : Nonempty (SimplicialObject.Homotopy (f ≫ g) (𝟙 A)) ∨ Nonempty (SimplicialObject.Homotopy (𝟙 A) (f ≫ g))) (_hfg : Nonempty (SimplicialObject.Homotopy (g ≫ f) (𝟙 B)) ∨ Nonempty (SimplicialObject.Homotopy (𝟙 B) (g ≫ f))) : WeakEquivalence (SimplicialModelRealization.map T f)",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-495224827",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Checked every clause against the node. The model hypotheses equal the simplicial_model_nerve_localization bundle and SatisfiesSM7, with no fibrancy, properness or universe equality added. Reedy cofibrancy is Reedy.leftClass (epimorphisms SimplexCategory).op on initial.to A/B, i.e. latching over opposite surjections (degeneracies), the cofibration class of model_structure. The realization is the existing all-operator tensor coequalizer. The new def-coef-simplicial-realization-map is canonical coequalizer.desc of the summand maps tensorMap Δⁿ fₙ (real data; the sorry'd map_condition equation is true); grep found no duplicate, and coend.map is a different presentation. SimplicialObject.Homotopy is exactly the prism node's combinatorial homotopy. Both orientations are independent disjunctions, and f≫g / g≫f are gf / fg. Edge cases checked: n=0, initial diagram, identity, non-cofibrant constant object excluded. Node diff vs side clone: only the stmt_deps addition. Both lean.statement fields are verbatim and all declarations are present. Source and blueprint docstrings and the 5-step proof docstring are present, and only theorems use sorry. nt_compile.py --json on both snapshot files: exit status 0, no errors or warnings reported (2.0 s each)."
  }
 }
