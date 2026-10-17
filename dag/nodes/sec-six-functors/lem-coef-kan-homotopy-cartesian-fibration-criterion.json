@@ -186,5 +186,24 @@
   "group": "Q143",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-81e23c721 (reviewer sub-agent of L); spot-checked: I read the item in full; it is now split into 3 steps. The delivery has no new nodes, and the statement, unit and blueprint ancestry are unchanged. Step 1: factor f=p∘i (MC5 of lem-coef-kan-quillen-model-right-proper-core); I checked degreewise that P_f×_{X_f}X=P, so d=(i,1) is the base change of i along the Kan fibration h, and right properness (last sentence of the core node) makes d a weak equivalence. Step 2: the witnesses (i,p) and (1_Y,g) are allowed by the defining clause of lem-coef-kan-fibrant-path-recognition, and the induced map is dc=(ia,b). Step 3: lem-coef-kan-pullback-fibration-invariance applies to the cospans Y→Z←X and Ŷ→Z←X̂ with α=v, β=1_Z, γ=u. Its Kan legs are g and ĝ, and its equalities are the factorization equalities. After the coordinate swaps, ec=w, and two-out-of-three gives c a weak equivalence. The weak-equivalence notions of def-cbc-enhanced-diagrams-cones and the core node agree. Edge cases checked: empty Z or Y, Z=Y=Δ^0, and arbitrary non-Kan bases. The Kan hypothesis on g is necessary: Δ^0 at vertex 0 and Δ^0 at vertex 1 over Δ^1 give an empty strict pullback but a contractible homotopy pullback, and the item keeps that hypothesis. The one citer, lem-coef-sharp-pullback-calculus, uses exactly this statement. Searches for homotopy-cartesian nodes found no duplicate: the invariance and path-recognition neighbours state different things. The 70-node dependency closure contains no cycle. All dependencies are in the same unit, so there are no tool_uses. No SGA source is cited. Rezk §2.3/Lemma 2.5 is not archived (WANTED) and I did not fetch it. The proof is agent-explicit and complete from the DAG statements I checked. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f7e20df09",
+  "group": "NV",
+  "result": "fix",
+  "note": "Report-only H11 repair supplies the independent second reading. Statements, dependencies, source, universes, edge cases, and clean per-file compilation verified; Lean and node unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanHomotopyCartesianFibrationCriterion",
+  "declaration": "SSet.Enhanced.kan_homotopy_cartesian_fibration_criterion",
+  "file": "lean/Sheaf/AlgebraicTopology/KanHomotopyCartesianFibrationCriterion.lean",
+  "statement": "theorem kan_homotopy_cartesian_fibration_criterion {Q X Y Z : SSet.{u}} (a : Q ⟶ X) (b : Q ⟶ Y) (f : X ⟶ Z) (g : Y ⟶ Z) (h : a ≫ f = b ≫ g) [Fibration g] : (∃ (Xf Yf : SSet.{u}) (i : X ⟶ Xf) (j : Y ⟶ Yf) (ff : Xf ⟶ Z) (gf : Yf ⟶ Z), i ≫ ff = f ∧ j ≫ gf = g ∧ IsWeakHomotopyEquivalence i ∧ IsWeakHomotopyEquivalence j ∧ Fibration ff ∧ Fibration gf ∧ ∃ c : Q ⟶ pullback ff gf, c ≫ pullback.fst ff gf = a ≫ i ∧ c ≫ pullback.snd ff gf = b ≫ j ∧ IsWeakHomotopyEquivalence c) ↔ IsWeakHomotopyEquivalence (pullback.lift a b h)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Expands the identical two-leg replacement condition from kan_fibrant_path_recognition; uses pullback.lift for the canonical strict comparison. No Kan or nonemptiness hypotheses on the objects. Does not import the downstream SharpPullbackCalculus module."
  }
 }

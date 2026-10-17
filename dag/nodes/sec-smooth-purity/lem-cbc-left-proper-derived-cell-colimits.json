@@ -28,7 +28,8 @@
   "def-weil-size-convention",
   "lem-coef-cosimplicial-frame-mapping",
   "lem-coef-combinatorial-localization-presentability",
-  "lem-coef-model-colimit-localization-comparison"
+  "lem-coef-model-colimit-localization-comparison",
+  "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "proof": [
   {
@@ -271,5 +272,30 @@
   "group": "Q130",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-c23bb5209 (reviewer sub-agent of L); spot-checked: I read the delivery in full: one commit containing the item and its report, with 0 new nodes and no unit change. The statement is true and not weakened. Its only citer, lem-cbc-general-bousfield-localization step 3, needs (a) for an arbitrary second leg and (b) for every small cofinality with a noncofibrant X_0, and the statement gives both. Barwick and Hovey are not archived in literature/, so proof_origin is correctly by:agent and the report has WANTED lines. Because of that, I checked each step from first principles against the full statements of the cited nodes. Step 1: colim is left adjoint to const, so it preserves cofibrations, trivial cofibrations and pushouts. Step 2: evaluation at i has the right adjoint given by products over Hom(j,i), so projective cofibrations are objectwise and M^I is left proper. Step 3: the relative Ken Brown argument is correct: (w,1) is well defined because w is under K, pi=w and ps=1 make i and s trivial cofibrations, and F(p)F(s)=1 makes F(p) weak. Step 4: t is well defined and restricts to K->D. K->T is a pushout of K'->E. The two left-properness uses are along cofibrations, one in M^I and one in M. The arbitrary-replacement lift is valid. Step 5: I checked naturality of K->D and K'->K, the three-vertex lifts, and that the colimits are X~ and X. Step 6: the transfinite lift uses only continuity of X; I checked the successor square, the restriction to X_0 and the limit stage through coprojections. Step 7: the constant diagram on QX_0 is projectively cofibrant, using the initial vertex 0. Step 8: the map of cocones is objectwise weak, then the Yoneda colimit criterion and the frame identification of Map^h apply. Small cases checked: identity A->B, initial A, theta=omega, theta=omega+omega, a constant chain; theta=0 is correctly excluded. Duplicate search with rg over dag/nodes for 'left proper' together with pushout, transfinite or homotopy colimit found no equivalent node; lem-coef-sifted-good-diagram-calculus needs cofibrant objects. I accept three tool_uses: lem-coef-model-colimit-localization-comparison, lem-coef-cosimplicial-frame-mapping and lem-coef-infinity-yoneda-presheaf-limits, all generic tools that replace no step of the unit. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c198b7499",
+  "group": "NC",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, Lean declarations, docstrings, edge cases, report sections, and delivery compile evidence. No substantive or mechanical defect found; review.md records the transient scompile server unavailability."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LeftProperDerivedCellColimits",
+  "declaration": "HomotopicalAlgebra.leftProperDerivedCellColimits",
+  "declarations": [
+   "HomotopicalAlgebra.cellColimitComparison",
+   "HomotopicalAlgebra.CellColimitComparison",
+   "HomotopicalAlgebra.CellMappingComparison",
+   "HomotopicalAlgebra.leftProperDerivedCellColimits"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LeftProperDerivedCellColimits.lean",
+  "statement": "theorem leftProperDerivedCellColimits {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] (_hM : CombinatorialModelCategory.{u, v, w} M) (_leftProper : ∀ {A B X : M} (e : A ⟶ B) (i : A ⟶ X), WeakEquivalence e → Cofibration i → WeakEquivalence (pushout.inr e i)) (C : SSet.{max u v t}) (q : FiniteReedy.largeNerve.{u, v, max u v t} M ⟶ C) (_hq : FiniteReedy.IsLocalization (weakEquivalences M) q) : (∀ (A B X : M) (i : A ⟶ B) (j : A ⟶ X), Cofibration i → ∀ s : Cocone (span i j), IsColimit s → CellColimitComparison (span i j) s ∧ CellMappingComparison.{u, v, 0, 0, max u v t} q (span i j) s) ∧ (∀ (J : Type v) [LinearOrder J] [WellFoundedLT J] [Nonempty J] [NoMaxOrder J] (D : J ⥤ M), D.IsWellOrderContinuous → (∀ (a b : J) (h : a ≤ b), Cofibration (D.map (homOfLE h))) → ∀ s : Cocone D, IsColimit s → CellColimitComparison D s ∧ CellMappingComparison.{u, v, v, v, max u v t} q D s)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The two clauses use the existing projective model, coherent localization and canonical cocone-composition span. Three real-data helpers package the actual colimit comparison and its two conclusions; no replacement or equivalence is chosen from a mere existence theorem. The already landed enhanced-functor-cone-calculus node is added to stmt_deps because its canonical transport-value map renders the derived mapping-space comparison. The well-order encoding in (b) covers exactly all small nonzero limit ordinals."
  }
 }
