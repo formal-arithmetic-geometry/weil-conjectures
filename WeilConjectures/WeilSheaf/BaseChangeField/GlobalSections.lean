@@ -49,7 +49,8 @@ variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
 @[reassoc]
 lemma globalSectionsLowerStarIso_inv_app_comp_congr {g g' : S ⟶ R} (h : g = g')
     (G : Sheaf (Scheme.ProEt.topology S) A) :
-    (globalSectionsLowerStarIso A g).inv.app G ≫ (Sheaf.Γ _ A).map ((lowerStarCongr A h).hom.app G) =
+    (globalSectionsLowerStarIso A g).inv.app G ≫
+        (Sheaf.Γ _ A).map ((lowerStarCongr A h).hom.app G) =
       (globalSectionsLowerStarIso A g').inv.app G := by
   subst h
   simp
@@ -108,8 +109,8 @@ lemma globalSectionsFrobenius_naturality {K K' : ProEtaleWeilSheaf k₀ l Y} (f 
     K.globalSectionsFrobenius ≫ (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map f.hom.f) =
       (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map f.hom.f) ≫ K'.globalSectionsFrobenius := by
   rw [globalSectionsFrobenius, globalSectionsFrobenius, Category.assoc, ← Functor.map_comp,
-    ← Functor.map_comp, Endofunctor.IsoAlgebra.str_hom, Endofunctor.IsoAlgebra.str_hom, ← f.hom.h, Functor.map_comp,
-    Functor.map_comp]
+    ← Functor.map_comp, Endofunctor.IsoAlgebra.str_hom, Endofunctor.IsoAlgebra.str_hom,
+    ← f.hom.h, Functor.map_comp, Functor.map_comp]
   exact ((globalSectionsLowerStarIso (WeilCoefficients.{u} l) _).inv.naturality_assoc _ _).symm
 
 /-- The Frobenius `Γ(Ȳ, K) ≅ Γ(Ȳ, (Frᵐ)^* K) --Γ(φ_m)--> Γ(Ȳ, K)` through the iterated Weil
@@ -153,7 +154,7 @@ lemma globalSectionsFrobeniusPow_succ (K : ProEtaleWeilSheaf k₀ l Y) (m : ℕ)
     rw [frobeniusPowIso]
     simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom, Mod.forget_map,
       Mod.comp_hom', adicLowerStarCongr_hom_app_hom, adicLowerStarComp_inv_app_hom,
-      adicLowerStar_map_hom, Category.assoc]
+      adicLowerStar_map_hom]
   have h₂ : (globalSectionsLowerStarIso (WeilCoefficients.{u} l)
         (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app
         ((((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_].obj
@@ -171,7 +172,8 @@ lemma globalSectionsFrobeniusPow_succ (K : ProEtaleWeilSheaf k₀ l Y) (m : ℕ)
 
 /-- The Frobenius through `φ_m` is the `m`-th iterate of the Frobenius, pointwise. -/
 lemma globalSectionsFrobeniusPow_apply (K : ProEtaleWeilSheaf k₀ l Y) (m : ℕ)
-    (x : (WeilCoefficients.toModuleCat l).obj ((Sheaf.Γ _ (WeilCoefficients.{u} l)).obj K.carrier.X)) :
+    (x : (WeilCoefficients.toModuleCat l).obj
+      ((Sheaf.Γ _ (WeilCoefficients.{u} l)).obj K.carrier.X)) :
     ((WeilCoefficients.toModuleCat l).map (K.globalSectionsFrobeniusPow m)).hom x =
       (fun y ↦ ((WeilCoefficients.toModuleCat l).map K.globalSectionsFrobenius).hom y)^[m] x := by
   induction m with
