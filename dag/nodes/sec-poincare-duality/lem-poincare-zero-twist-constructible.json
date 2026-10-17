@@ -1,0 +1,151 @@
+{
+ "id": "lem-poincare-zero-twist-constructible",
+ "kind": "statement",
+ "title": "zeroTwist_constructible",
+ "statement": "Let ell be prime and X any scheme. The actual signed Tate twist tateTwist X ell 0 is constructible as a module over condensedRingObj(padicAlgClRingObj ell) X. This zero-twist assertion needs no invertibility assumption on ell.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Zero twist and degree-zero realization; elementary shifted-single calculation needed for the Poincare Tate target."
+ },
+ "stmt_deps": [
+  "def-pur-condensed-tate-twists",
+  "def-sfb-constructible-module",
+  "def-sfb-finitely-presented-module",
+  "def-sfb-finite-upper-star"
+ ],
+ "proof": [
+  {
+   "text": "By definition the zero twist is the tensor unit, the regular coefficient module. Choose the one-stratum identity stratification and the identity pro-etale covering. Each of the two inverse images sends the tensor unit to the regular module through mapModUnitIso. The regular module is the cokernel of the zero morphism from the free module of rank zero to the free module of rank one, using biproductUniqueIso and cokernelZeroIsoTarget. Transport this presentation across the two unit isomorphisms.",
+   "uses": [
+    "def-pur-condensed-tate-twists",
+    "def-sfb-constructible-module",
+    "def-sfb-finitely-presented-module",
+    "def-sfb-finite-upper-star"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-condensed-tate-twists",
+  "def-sfb-constructible-module",
+  "def-sfb-finitely-presented-module",
+  "def-sfb-finite-upper-star"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/PoincareDuality/Poincare.lean",
+  "place": "The zero-twist case of boundedConstructible_tateTwistDerived."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A shifted complex concentrated in one degree with constructible coefficient module is bounded constructible",
+   "results": {
+    "t": "2026-10-17T12:06:52Z",
+    "tool": "leansearch",
+    "query": "A shifted complex concentrated in one degree with constructible coefficient module is bounded constructible",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.isGE_shift",
+     "CochainComplex.exists_iso_single",
+     "CochainComplex.instIsStrictlyGEObjHomologicalComplexIntUpSingle",
+     "CochainComplex.HomComplex.Cochain.shift",
+     "CochainComplex.isKInjective_shift_iff",
+     "CochainComplex.isStrictlyLE_shift",
+     "CochainComplex.isStrictlyGE_shift",
+     "CochainComplex.HomComplex.Cocycle.shift"
+    ],
+    "digest": "01ea44bc6279c238"
+   },
+   "date": "2026-10-17",
+   "verdict": "No direct constructibility result; standard shifted-single and homology isomorphisms used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctorCompHomologyFunctorIso\"",
+   "results": {
+    "t": "2026-10-17T11:44:18Z",
+    "tool": "loogle",
+    "query": "\"singleFunctorCompHomologyFunctorIso\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "DerivedCategory.singleFunctorCompHomologyFunctorIso"
+    ],
+    "digest": "441330a988d148dc"
+   },
+   "date": "2026-10-17",
+   "verdict": "No direct constructibility result; standard shifted-single and homology isomorphisms used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "tateTwist|IsConstructibleModuleObject",
+   "results": {
+    "t": "2026-10-17T11:44:17Z",
+    "tool": "grep",
+    "query": "tateTwist|IsConstructibleModuleObject",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "No direct constructibility result; standard shifted-single and homology isomorphisms used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.PoincareDuality.Poincare",
+  "date": "2026-10-17",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sp-tate-twist",
+   "place": "Zero twist and shifted degree-zero realization"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-sp-tate-twist",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.PoincareDuality.TateTwistLocalLine",
+  "file": "lean/Sheaf/PoincareDuality/TateTwistLocalLine.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.zeroTwist_constructible",
+  "statement": "lemma zeroTwist_constructible : IsConstructibleModuleObject\n    (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) (tateTwist X ℓ 0)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261017T131009-L-1769097",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261017T131009-L-1769097",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

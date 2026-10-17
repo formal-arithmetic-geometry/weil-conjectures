@@ -15832,3 +15832,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:11 L: merged deliver/A2/Sheaf.Paper.IntegralResiduePullFlatModelMateNormalized (stage 3; reviewer PASS; after a return; landing 20261017T121123-L-399885 (interface); batch 20261017T121120; modules 2; new nodes 2; change records: coord/changes/A2-residue-mate-local-proof-calculations.md)
 
 - 21:00 L: batch 20261017T125156 dependency take-out
+- 13:10 L: merged deliver/G3/WeilConjectures.PoincareDuality.Poincare (stage 3; reviewer PASS; first push; landing 20261017T131009-L-1769097 (interface); batch 20261017T131005; modules 3; new nodes 2; change records: coord/changes/poincare-local-elaboration.md)
