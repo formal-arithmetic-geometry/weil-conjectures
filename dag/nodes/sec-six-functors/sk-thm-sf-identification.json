@@ -3,40 +3,208 @@
  "blueprint": {
   "is": "sk-thm-sf-identification",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "thm-sf-identification"
+  ]
  },
  "kind": "statement",
  "title": "The derived Poincaré pairing is the duality isomorphism",
- "statement": "Let $X$ satisfy the hypotheses of [sk-thm-sf-global-duality],\nwith the orientation of [sk-def-sf-orientation] fixed, and let\n$K\\in\\Dctf(X,\\Lambda)$ be perfect over $\\Lambda_X$. Then the tensor–internal-Hom\nadjoint of the derived pairing\n\n$$\n\\beta_K:\\RG_c(X,K)\\otimes^L_\\Lambda\\RG\\bigl(X,K^\\vee(d)\\bigr)[2d]\\to\\Lambda\n$$\n\nis the canonical isomorphism\n$\\RG(X,K^\\vee(d))[2d]\\xrightarrow{\\sim} R\\mathrm{Hom}_\\Lambda(\\RG_c(X,K),\\Lambda)$ *in the point category*\n$\\Dbc(s,\\Lambda)$, and its inverse is the global\nduality isomorphism of [sk-thm-sf-global-duality] followed by\n$\\mathbb D_XK\\cong K^\\vee(d)[2d]$. In particular $\\beta_K$ is perfect.\nIf $X$ is proper and $\\Lambda\\in\\{A_{E,n},E,\\Qlb\\}$, its degreewise form\ngives perfect pairings\n$\\langle-,-\\rangle_i:H^i_c(X,K)\\times H^{2d-i}(X,K^\\vee(d))\\to\\Lambda$\n(over $A_{E,n}$ because this ring is self-injective, so\n$\\operatorname{Hom}(-,\\Lambda)$ is exact). At the integral stage\n$\\Lambda=\\mathcal O_E$ the degreewise form fails in general: a torsion\nclass in $H^i_c$ pairs to zero with everything, and\n$H^{-i}(\\RG_c^\\vee)$ picks up an $\\operatorname{Ext}^1$ term from the\ntorsion of $H^{i+1}_c$; only the derived statement holds there.",
+ "statement": "Let $X$ satisfy the hypotheses of [sk-thm-sf-global-duality],\nwith the orientation of [sk-def-sf-orientation] fixed, and let\n$K\\in\\Dctf(X,\\Lambda)$ be perfect over $\\Lambda_X$ [def-weil-site-perfect-complex]. Then the tensor–internal-Hom\nadjoint of the derived pairing [def-sf-pairing]\n\n$$\n\\beta_K:\\RG_c(X,K)\\otimes^L_\\Lambda\\RG\\bigl(X,K^\\vee(d)\\bigr)[2d]\\to\\Lambda\n$$\n\nis the canonical isomorphism\n$\\RG(X,K^\\vee(d))[2d]\\xrightarrow{\\sim} R\\mathrm{Hom}_\\Lambda(\\RG_c(X,K),\\Lambda)$ *in the point category*\n$\\Dbc(s,\\Lambda)$, and its inverse is the global\nduality isomorphism of [sk-thm-sf-global-duality] followed by\n$\\mathbb D_XK\\cong K^\\vee(d)[2d]$. In particular $\\beta_K$ is perfect.\nIf $X$ is proper and $\\Lambda\\in\\{A_{E,n},E,\\Qlb\\}$, its degreewise form\ngives perfect pairings\n$\\langle-,-\\rangle_i:H^i_c(X,K)\\times H^{2d-i}(X,K^\\vee(d))\\to\\Lambda$\n(over $A_{E,n}$ because this ring is self-injective, so\n$\\operatorname{Hom}(-,\\Lambda)$ is exact). At the integral stage\n$\\Lambda=\\mathcal O_E$ the degreewise form fails in general: a torsion\nclass in $H^i_c$ pairs to zero with everything, and\n$H^{-i}(\\RG_c^\\vee)$ picks up an $\\operatorname{Ext}^1$ term from the\ntorsion of $H^{i+1}_c$; only the derived statement holds there.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-identification/_section.md",
   "place": "node sk-thm-sf-identification, order 2508"
  },
  "stmt_deps": [
   "sk-thm-sf-global-duality",
-  "sk-def-sf-orientation"
+  "sk-def-sf-orientation",
+  "def-sf-pairing",
+  "def-weil-site-perfect-complex"
  ],
  "proof": [
   {
-   "text": "The pairing $\\beta_K$ is the composite of the mixed-support cup product, the\nevaluation $K\\otimes^LK^\\vee\\to\\Lambda_X$ (twisted), and the normalized trace,\ni.e. the counit of $Ra_{X!}\\dashv Ra_X^!$ read through the orientation. The\nchain of [sk-thm-sf-tensor-hom] with $M=K$, $N=\\Lambda$ and $f=a_X$ is, by\n[sk-lem-sf-mate], the transpose of exactly that composite; hence the adjoint\nof $\\beta_K$ is the composite of the duality isomorphism with the orientation\nidentification, which is an isomorphism. Degreewise this is the shift\nconvention together with $H^{-i}(C^\\vee)\\cong H^i(C)^\\vee$ for a perfect point\ncomplex, which holds when $\\operatorname{Hom}(-,\\Lambda)$ is exact, i.e. for\n$\\Lambda\\in\\{A_{E,n},E,\\Qlb\\}$.",
+   "text": "Write $a=a_X$, $s=\\operatorname{Spec}k$, $C=R\\Gamma_c(X,K)$, $T=\\Lambda_X(d)[2d]$ and $L=K^\\vee(d)[2d]=K^\\vee\\otimes^L_{\\Lambda_X}T$ (derived shift identifications). The coefficient dual of a site-perfect $K$ is site-perfect by [prop-sf-dualizable], so the pairing [def-sf-pairing] is defined with its required hypothesis on $K^\\vee$. Let $\\gamma:T\\xrightarrow{\\sim}Ra^!\\Lambda_s$ be the fixed orientation [sk-def-sf-orientation], read through $La^*\\Lambda_s\\cong\\Lambda_X$. By [prop-sf-dualizable-hom] at $M=T$, the evaluation comparison $\\tau':L=K^\\vee\\otimes^LT\\to R\\mathcal Hom_X(K,T)$, the tensor–internal-Hom transpose of $\\operatorname{ev}_K(d)[2d]:K\\otimes^LL\\to T$, is an isomorphism; its inverse is the twist identification $R\\mathcal Hom_X(K,\\Lambda_X(d)[2d])\\cong K^\\vee(d)[2d]$ of [sk-lem-sf-twist-interchange] ($m=d$, $n=2d$). Put $j=R\\mathcal Hom_X(K,\\gamma)\\circ\\tau':L\\xrightarrow{\\sim}\\mathbb D_XK=R\\mathcal Hom_X(K,Ra^!\\Lambda_s)$ and $\\theta=j^{-1}$; this is the identification $\\mathbb D_XK\\cong K^\\vee(d)[2d]$ of the statement. By naturality of the transpose in the target, $j$ is the transpose of $e=\\gamma\\circ\\operatorname{ev}_K(d)[2d]:K\\otimes^LL\\to Ra^!\\Lambda_s$, i.e. $\\operatorname{ev}_{\\mathbb D_XK}\\circ(1_K\\otimes j)=e$. The global-duality isomorphism of [sk-thm-sf-global-duality] is $G:C^\\vee\\xrightarrow{\\sim}R\\Gamma(X,\\mathbb D_XK)$; its construction is recalled and compared in Step 3. Thus $B=R\\Gamma(\\theta)\\circ G:C^\\vee\\xrightarrow{\\sim}R\\Gamma(X,L)=R\\Gamma(X,K^\\vee(d))[2d]$ is the specified inverse candidate.",
    "uses": [
-    "sk-thm-sf-tensor-hom"
+    "prop-sf-dualizable",
+    "def-sf-pairing",
+    "sk-def-sf-orientation",
+    "prop-sf-dualizable-hom",
+    "sk-lem-sf-twist-interchange",
+    "sk-thm-sf-global-duality"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-identification/sk-thm-sf-identification.proof.md",
+    "place": "proof, first two sentences"
+   }
+  },
+  {
+   "text": "Expand the tensor-Hom exchange of [sk-thm-sf-tensor-hom] at $f=a$, $M=K$, $N=\\Lambda_s$, using the adjunctions and projection formula (A1), (A3) of [def-sf-datum]. For an arbitrary test object $V$ in the constructible finite-Tor point category, a map $v:V\\to Ra_*L$ has pullback transpose $\\widetilde v=\\varepsilon^*_{L}\\circ La^*v:La^*V\\to L$. Under the chain\n$$\\operatorname{Hom}_s(V,Ra_*L)\\cong\\operatorname{Hom}_X(La^*V,L)\\cong\\operatorname{Hom}_X(K\\otimes^L La^*V,Ra^!\\Lambda_s)\\cong\\operatorname{Hom}_s(Ra_!(K\\otimes^L La^*V),\\Lambda_s)\\cong\\operatorname{Hom}_s(Ra_!K\\otimes^L V,\\Lambda_s),$$\n$v$ is sent to the explicit map\n$$\\varepsilon^!_{\\Lambda_s}\\circ Ra_!\\bigl(e\\circ(1_K\\otimes\\widetilde v)\\bigr)\\circ\\operatorname{PF}_{a,K,V}.$$\nHere the middle internal-Hom identification is $j$, the third bijection is the exceptional adjunction, and the last map precomposes with the projection isomorphism. These are precisely the unit/counit formulas for adjunction: no assertion about mates of composition is needed. All objects tested are in the finite-Tor domain of (A1), (A3); no ambient right adjoint on all pro-etale complexes is invoked.",
+   "uses": [
+    "sk-thm-sf-tensor-hom",
+    "def-sf-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-identification/sk-thm-sf-identification.proof.md",
+    "place": "proof, second sentence: expand the tensor-Hom chain at M=K, N=Lambda, f=a_X"
+   }
+  },
+  {
+   "text": "By the definition [def-sf-cup], cup product is the projection transformation followed by $Ra_!(1_K\\otimes\\varepsilon^*_{L})$. By [def-sf-pairing], the remaining maps are the twisted evaluation and $\\varepsilon^!_{\\Lambda_s}\\circ Ra_!(\\gamma)$. Consequently, naturality of the projection transformation in its second variable, $\\operatorname{PF}_{a,K,Ra_*L}\\circ(1\\otimes v)=Ra_!(1_K\\otimes La^*v)\\circ\\operatorname{PF}_{a,K,V}$, gives for the map $v$ of Step 2\n$$\\beta_K\\circ(1_{Ra_!K}\\otimes v)=\\varepsilon^!_{\\Lambda_s}\\circ Ra_!\\bigl(e\\circ(1_K\\otimes(\\varepsilon^*_{L}\\circ La^*v))\\bigr)\\circ\\operatorname{PF}_{a,K,V}.$$\nThe right side is the image of $v$ under the Step 2 chain. That chain is postcomposition with $Ra_*j$ followed by the bijection $h_V^{-1}$ of the tensor–Hom exchange of [sk-thm-sf-tensor-hom] at $f=a$, $M=K$, $N=\\Lambda_s$, whose forward map $b_1:Ra_*R\\mathcal Hom_X(K,Ra^!\\Lambda_s)\\to R\\mathcal Hom_s(C,\\Lambda_s)$ satisfies $h_V^{-1}(w)=b_1\\circ w$; followed by currying on $s$. Taking $V=Ra_*L$ and $v=1$, the curry of $\\beta_K$ in the point category is $\\Phi=b_1\\circ Ra_*j$. Testing equality on cohomology is neither needed nor valid here.\n\nNow compare $\\Phi$ with $G$. By its construction, the map of [sk-thm-sf-global-duality] is $G=\\operatorname{Fib}_s(\\eta_K)\\circ\\alpha_C^{-1}$, where $\\eta_K:R\\mathcal Hom_s(C,\\omega_s)\\to Ra_*\\mathbb D_XK$ is the exchange of [sk-thm-sf-verdier-exchange] at $f=a$, $Y=s$, $M=K$ ($a_Y=\\mathrm{id}_s$, $\\omega_s=R\\mathrm{id}_s^!\\Lambda_s$), and $\\alpha_C$ is the point comparison, the transpose of $u\\circ\\operatorname{Fib}_s(\\nu\\circ\\operatorname{ev}_{C,\\omega_s})\\circ t^{-1}$ with $t,u$ the tensor and unit comparisons of [lem-sf-point-fibre-derived-tensor] and $\\nu:\\omega_s\\to\\Lambda_s$ the point normalization of [lem-sf-point](1), which that construction takes to be the counit of $R\\mathrm{id}_{s!}\\dashv R\\mathrm{id}_s^!$ under $R\\mathrm{id}_{s!}=\\mathrm{id}$ ((A1), (A4) of [def-sf-datum]); for an adjunction $\\mathrm{id}\\dashv G'$ the two triangle identities and naturality of the unit make the counit inverse to the unit, so $\\nu$ is an isomorphism. The exchange $\\eta_K$ is $Ra_*R\\mathcal Hom_X(K,c)\\circ b_\\omega^{-1}$, with $b_\\omega$ the exchange of [sk-thm-sf-tensor-hom] at $N=\\omega_s$ and $c:Ra^!\\omega_s\\to Ra^!\\Lambda_s$ the conjugate of the composition isomorphism $R\\mathrm{id}_{s!}Ra_!\\cong Ra_!$. That isomorphism is the identity under the identity-functor identification ([thm-sf-comp-composition]; at the other stages its completed and transported forms, so again the identity). By [lem-sf-mate] the composite adjunction carries the pasted counit $\\nu\\circ\\varepsilon^!_{\\omega_s}$, so $\\varepsilon^!_{\\Lambda_s}\\circ Ra_!(c)=\\nu\\circ\\varepsilon^!_{\\omega_s}=\\varepsilon^!_{\\Lambda_s}\\circ Ra_!Ra^!(\\nu)$ by naturality of $\\varepsilon^!$; uniqueness of transposes gives $c=Ra^!(\\nu)$. Naturality of the exchange of [sk-thm-sf-tensor-hom] in $N$ along $\\nu$ gives $b_1\\circ Ra_*R\\mathcal Hom_X(K,Ra^!\\nu)=R\\mathcal Hom_s(C,\\nu)\\circ b_\\omega$, hence $\\eta_K=b_1^{-1}\\circ R\\mathcal Hom_s(C,\\nu)$. Naturality of evaluation gives $\\nu\\circ\\operatorname{ev}_{C,\\omega_s}=\\operatorname{ev}_{C,\\Lambda_s}\\circ(1_C\\otimes R\\mathcal Hom_s(C,\\nu))$, so $\\alpha_C=\\alpha^1_C\\circ\\operatorname{Fib}_s R\\mathcal Hom_s(C,\\nu)$, where $\\alpha^1_C:\\operatorname{Fib}_sR\\mathcal Hom_s(C,\\Lambda_s)\\to(\\operatorname{Fib}_sC)^\\vee$ is the transpose of $u\\circ\\operatorname{Fib}_s(\\operatorname{ev}_{C,\\Lambda_s})\\circ t^{-1}$. Therefore $G=\\operatorname{Fib}_s(b_1^{-1})\\circ(\\alpha^1_C)^{-1}$.\n\nPassing to coefficient complexes: by [lem-sf-point-fibre-derived-tensor] and the point equivalence [lem-weil-point-fibre-equivalence], $\\operatorname{Fib}_s$ is a monoidal equivalence, and composing its Hom bijections with $t$, $u$ carries the point tensor–Hom adjunction to the coefficient one with $\\alpha^1_C$ as comparison of internal Homs. The actual coefficient pairing $\\beta_K$ of [def-sf-pairing] is $u\\circ\\operatorname{Fib}_s(\\cdot)\\circ t^{-1}$ of the point composite above, so its adjoint is $\\beta_K^\\sharp=\\alpha^1_C\\circ\\operatorname{Fib}_s(\\Phi)=\\alpha^1_C\\circ\\operatorname{Fib}_s(b_1)\\circ R\\Gamma(j)=G^{-1}\\circ R\\Gamma(\\theta)^{-1}=B^{-1}$. Since $B$ is an isomorphism, its adjoint is an isomorphism and the pairing is perfect in the sense of [def-sf-pairing].",
+   "uses": [
+    "def-sf-cup",
+    "def-sf-pairing",
+    "sk-thm-sf-tensor-hom",
+    "sk-thm-sf-global-duality",
+    "sk-thm-sf-verdier-exchange",
+    "lem-sf-point",
+    "def-sf-datum",
+    "thm-sf-comp-composition",
+    "lem-sf-mate",
+    "lem-sf-point-fibre-derived-tensor",
+    "lem-weil-point-fibre-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-identification/sk-thm-sf-identification.proof.md",
+    "place": "proof, first two sentences: evaluate the adjunction chain and identify the actual pairing"
+   }
+  },
+  {
+   "text": "Assume $X$ proper and $\\Lambda\\in\\{A_{E,n},E,\\overline{\\mathbf Q}_\\ell\\}$. The point equivalence [lem-weil-point-fibre-equivalence] reads $C$ as a bounded complex with finite cohomology over $\\Lambda$ (a common finite-stage complex at $\\overline{\\mathbf Q}_\\ell$). By clause 1 of [lem-weil-coefficient-frobenius], $\\Lambda$ is injective over itself and ordinary $D=\\operatorname{Hom}_\\Lambda(-,\\Lambda)$ is exact, with finite-module biduality. The complex $\\Lambda[0]$ is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective], so the definition [def-pur-derived-internal-hom] computes $C^\\vee$ by $D(P)^j=\\operatorname{Hom}_\\Lambda(P^{-j},\\Lambda)$ for a complex representative $P$ of $C$, with differential $d^j(f)=(-1)^{j+1}f d_P^{-j-1}$. Exactness and [lem-sp-exact-functor-preserves-homology], applied to the opposite module category and with degrees reversed, give the canonical evaluation-induced isomorphism\n$$H^{-i}(C^\\vee)\\cong\\operatorname{Hom}_\\Lambda(H^i(C),\\Lambda).$$\nThis works for the finite quotient ring as well as for the two fields; it does not assume that the individual cohomology modules are projective. At $\\overline{\\mathbf Q}_\\ell$ the computation is made at a common finite field stage and interpreted in the finite-stage category of the point equivalence.",
+   "uses": [
+    "lem-weil-point-fibre-equivalence",
+    "lem-weil-coefficient-frobenius",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-pur-derived-internal-hom",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-identification/sk-thm-sf-identification.proof.md",
+    "place": "proof, last sentence: exact coefficient duality and cohomology of the dual"
+   }
+  },
+  {
+   "text": "Apply $H^{-i}$ to $\\beta_K^\\sharp$ from Step 3 and then to the canonical identification of Step 4. The shift convention gives $H^{-i}(R\\Gamma(X,K^\\vee(d))[2d])=H^{2d-i}(X,K^\\vee(d))$, hence\n$$H^{2d-i}(X,K^\\vee(d))\\xrightarrow{\\sim}\\operatorname{Hom}_\\Lambda(H_c^i(X,K),\\Lambda).$$\nThe arrow evaluates a class against a class of $H_c^i$, because both its factors are induced by the evaluation used in $\\beta_K$. Thus it is the adjoint of the stated degreewise pairing. The other adjoint is also an isomorphism: dualize this arrow and compose with the finite-module evaluation isomorphism of [lem-weil-coefficient-frobenius]. This proves perfectness, including when one or both groups vanish and when the finite-coefficient groups are not free.",
+   "uses": [
+    "lem-weil-coefficient-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-identification/sk-thm-sf-identification.proof.md",
+    "place": "proof, last sentence: apply H^{-i} and the shift convention"
+   }
+  },
+  {
+   "text": "For the integral warning put $R=\\mathcal O_E$ and $\\pi=\\varpi_E$. It is a DVR by [lem-weil-l-adic-extension-integers-dvr]. The point equivalence [lem-weil-point-fibre-equivalence] makes $C$ a bounded finite-cohomology $R$-complex, and clause 2 of [lem-weil-coefficient-frobenius] makes it perfect. Choose a bounded finite-projective representative $P$ using [def-pc-perfect-ring-complex]. Its terms are finite free: a finite generating list gives a surjection $R^r\\to P^i$, which splits by the lifting definition [def-weil-pbc-projective-module]; apply [lem-sc-dvr-saturation-line-smith-normal-form] to its image in $R^r$. The same Smith theorem makes $Z^i=\\ker(d_P^i)$ and $B^i=\\operatorname{im}(d_P^{i-1})$, submodules of $P^i$, finite free. By [lem-sc-bounded-above-projective-kprojective], $\\operatorname{Hom}^\\bullet_R(P,-)$ takes acyclic complexes to acyclic complexes. For a K-injective resolution $R[0]\\to I$, its cone is acyclic, and the cone of $\\operatorname{Hom}^\\bullet(P,R[0])\\to\\operatorname{Hom}^\\bullet(P,I)$ is $\\operatorname{Hom}^\\bullet(P,\\operatorname{Cone}(R[0]\\to I))$ with the usual cone signs. It is acyclic. Thus [def-pur-derived-internal-hom] computes $C^\\vee$ by the ordinary dual complex $D(P)$ also in this integral case; this is the explicit projective-source argument of Stacks Tag 0A66, not an assumption that $R$ is self-injective.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-point-fibre-equivalence",
+    "lem-weil-coefficient-frobenius",
+    "def-pc-perfect-ring-complex",
+    "def-weil-pbc-projective-module",
+    "lem-sc-dvr-saturation-line-smith-normal-form",
+    "lem-sc-bounded-above-projective-kprojective",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A66, lemma-RHom-out-of-projective; Tag 07VI, lemma-dual-perfect-complex; integral warning of the item statement"
+   }
+  },
+  {
+   "text": "A degree $-i$ dual cocycle is a functional $P^i\\to R$ vanishing on $B^i$. Restriction to $Z^i$ defines $H^{-i}(D(P))\\to\\operatorname{Hom}_R(H^i(P),R)$; dual boundaries restrict to zero. It is onto because $P^i/Z^i=B^{i+1}$ is free, so $Z^i\\subset P^i$ splits by [def-weil-pbc-projective-module]. Its kernel is\n$$\\operatorname{Hom}_R(B^{i+1},R)\\big/\\operatorname{im}\\bigl(\\operatorname{Hom}_R(P^{i+1},R)\\to\\operatorname{Hom}_R(B^{i+1},R)\\bigr).$$\nSince $Z^{i+1}\\subset P^{i+1}$ also splits, the image in this quotient equals the image of $\\operatorname{Hom}_R(Z^{i+1},R)$. Apply [lem-weil-pbc-ext-long-exact-first-variable] to $0\\to B^{i+1}\\to Z^{i+1}\\to H^{i+1}(P)\\to0$; [lem-weil-pbc-projective-ext-criterion] gives $\\operatorname{Ext}^1_R(Z^{i+1},R)=0$. The quotient is therefore $\\operatorname{Ext}^1_R(H^{i+1}(P),R)$, proving\n$$0\\to\\operatorname{Ext}^1_R(H_c^{i+1}(X,K),R)\\to H^{-i}(C^\\vee)\\to\\operatorname{Hom}_R(H_c^i(X,K),R)\\to0.$$\nThe Smith diagonal form of $B^{i+1}\\subset Z^{i+1}$ [lem-sc-dvr-saturation-line-smith-normal-form] identifies this Ext cokernel with the sum of $R/(a_j)$ for its nonzero diagonal scalars $a_j$; its free summands contribute zero. Thus this term comes precisely from torsion in $H_c^{i+1}$, as claimed.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-ext-long-exact-first-variable",
+    "lem-weil-pbc-projective-ext-criterion",
+    "lem-sc-dvr-saturation-line-smith-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A66 and 07VI, dual complex calculation; explicit cycles/boundaries calculation for the integral warning"
+   }
+  },
+  {
+   "text": "Every $R$-bilinear pairing into the domain $R$ kills torsion: if $0\\ne a\\in R$ annihilates $x$, then $a\\beta(x,y)=\\beta(ax,y)=0$, hence $\\beta(x,y)=0$. Failure actually occurs under the theorem's hypotheses. Take $X=s=\\operatorname{Spec}k$, $d=0$, and $K=(R/\\pi R)_s$ in degree zero. It is perfect, represented by $[R_s\\xrightarrow{\\pi}R_s]$ in degrees $-1,0$; $X$ is smooth, proper and geometrically connected. Here $H_c^0(X,K)=R/\\pi R\\ne0$, while the dual of that two-term complex has cohomology zero in degree $0$ and $R/\\pi R$ in degree $1$. Thus the degree-zero pairing has a nonzero first factor and zero second factor, and is not perfect. Equivalently the Ext term of Step 7 is nonzero for $i=-1$, whereas ordinary duality annihilates $H_c^0$. The nonzero quotient and cancellation by $\\pi$ use the DVR statement [lem-weil-l-adic-extension-integers-dvr]. The derived isomorphism of Steps 1–3 remains valid, so the integral warning concerns precisely the degreewise conclusion and does not alter the derived result.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-identification/sk-thm-sf-identification.proof.md",
+    "place": "item statement, final sentence on the integral stage; explicit test case"
+   }
   }
  ],
  "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-pur-derived-internal-hom",
+  "def-sf-cup",
+  "def-sf-datum",
+  "def-sf-pairing",
+  "def-weil-pbc-projective-module",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-sc-dvr-saturation-line-smith-normal-form",
+  "lem-sf-mate",
+  "lem-sf-point",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-coefficient-frobenius",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-ext-long-exact-first-variable",
+  "lem-weil-pbc-projective-ext-criterion",
+  "lem-weil-point-fibre-equivalence",
+  "prop-sf-dualizable",
+  "prop-sf-dualizable-hom",
+  "sk-def-sf-orientation",
+  "sk-lem-sf-twist-interchange",
+  "sk-thm-sf-global-duality",
   "sk-thm-sf-tensor-hom",
-  "sk-lem-sf-twist-interchange"
+  "sk-thm-sf-verdier-exchange",
+  "thm-sf-comp-composition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-identification/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-identification/sk-thm-sf-identification.proof.md",
+  "place": "First two sentences (adjunction identification), last sentence (degreewise exact duality), and integral warning in the statement; expanded unit/counit and cycle calculations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived Poincare pairing adjoint equals inverse global Verdier duality with orientation",
+   "results": "RootPairing.PolarizationEquiv; LinearMap.apply_toPerfPair_flip; RootPairing.Hom.weight_coweight_transpose; LinearMap.apply_symm_toPerfPair_self; RootPairing.Hom.weight_coweight_transpose_apply; RootPairing.polarizationEquiv_apply; RootPairing.CoPolarization_eq; LinearMap.toPerfPair; 8 hit(s). Hits concern ordinary algebraic pairings, not this derived geometric statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.curry",
+   "results": "CategoryTheory.MonoidalClosed.curry; CategoryTheory.MonoidalClosed.curry_injective; CategoryTheory.MonoidalClosed.uncurry_curry; CategoryTheory.MonoidalClosed.curry_uncurry; CategoryTheory.MonoidalClosed.id_eq; CategoryTheory.MonoidalClosed.curry_eq_iff; CategoryTheory.MonoidalClosed.eq_curry_iff; CategoryTheory.MonoidalClosed.comp_eq; 12 hit(s). General currying identities only; no geometric duality or coefficient-stage clauses.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "poincarePairing|coefficientDual|globalVerdier",
+   "results": "No hits.; 0 hit(s).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived Poincare pairing adjoint equals canonical global duality isomorphism",
+   "results": "LinearMap.isAdjointPair_iff_comp_eq_compl₂; LinearMap.IsPerfPair.dualEval; LinearPMap.IsFormalAdjoint; LinearMap.toPerfPair_apply; LinearMap.isAdjointPair_inner; LinearMap.BilinForm.isAdjointPair_iff_eq_of_nondegenerate; RootPairing.root_coroot'_eq_pairing; AddChar.doubleDualEquiv; 8 hit(s). Hits concern ordinary algebraic pairings, not this derived geometric statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -155,5 +323,49 @@
     }
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-thm-sf-identification",
+  "worker": "stage1",
+  "summary": "Rebuilt the earlier attempt: removed its duplicate self-injectivity node in favor of lem-weil-coefficient-frobenius; replaced invalid mate/detection equality citations by an explicit unit/counit calculation; handled all three self-injective stages together; supplied the omitted integral Ext exact sequence and point counterexample. Statement unchanged. No new nodes. Maintainer reader (2026-10-17): Step 3 now writes the comparison of the tensor-Hom curry with the global-duality map as constructed through the Verdier exchange at omega_s, the conjugate c=Ra^!(nu), and the counit normalization nu:omega_s->Lambda_s; Step 1 obtains theta from the on-route evaluation comparison prop-sf-dualizable-hom and the twist interchange instead of the off-route sk-thm-sf-dual-perfect.",
+  "blueprint": "Steps 1–3 realize the first two proof sentences (orientation, tensor-Hom chain and actual pairing adjoint); Steps 4–5 realize the last proof sentence (exact coefficient duality and degreewise perfectness); Steps 6–8 prove the integral warning of the current statement.",
+  "tool_uses": [
+   {
+    "node": "prop-sf-dualizable",
+    "why": "Only closure of site-perfect complexes under coefficient duality, needed to type the existing pairing definition."
+   },
+   {
+    "node": "lem-sf-point-fibre-derived-tensor",
+    "why": "Only the monoidal point comparison, to read the sheaf-level adjunction calculation in the coefficient point category."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Only the equivalence with bounded finite-cohomology coefficient complexes; it avoids any descent hypothesis from the Poincare unit."
+   },
+   {
+    "node": "lem-weil-coefficient-frobenius",
+    "why": "Only self-injectivity, exact ordinary coefficient duality, finite-module biduality and integral perfectness; the geometric pairing is proved in this item."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Generic bounded-below injective-complex criterion, used for the self-injective degree-zero coefficient complex."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-sf-dualizable",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-coefficient-frobenius",
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-c4a57292a",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-c4a57292a (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement agrees with main-20261015 node sk-thm-sf-identification (order 2508) clause by clause, with nothing weakened. There are no new nodes, and the dropped self-injectivity node is indeed clause 1 of lem-weil-coefficient-frobenius. I found three repairable faults and repaired all of them in fixes/. (1) Step 3 asserted, with no argument (C4/E5), that inverting the sk-thm-sf-tensor-hom exchange at N=Lambda_s gives the global-duality map. In fact the construction of sk-thm-sf-global-duality, in its proof steps 2-4, uses the sk-thm-sf-verdier-exchange map at omega_s, then RHom(K,c) for the conjugate c, then a point comparison through the counit normalization nu: omega_s->Lambda_s. I wrote out the comparison: c=Ra^!(nu) by lem-sf-mate and the identity clause of thm-sf-comp-composition; naturality of tensor-Hom in N gives eta_K=b_1^{-1} RHom(C,nu); naturality of evaluation gives alpha_C=alpha^1_C Fib RHom(C,nu); hence beta^sharp=B^{-1}. All new citations are on the route and none creates a cycle. (2) Step 1 cited sk-thm-sf-dual-perfect, which is off-route and was not declared. Theta is now built from the on-route prop-sf-dualizable-hom and sk-lem-sf-twist-interchange. (3) The unit record has 1 step but realized.steps had 8 entries; it is now [[item]]. I checked Steps 2 and 4-8 against every cited statement: the PF naturality, exact self-injective duality, the DVR projective-complex computation, the Ext sequence via Z/B splittings and Smith form, and the counterexample X=s, K=R/pi with H^0(C^vee)=0. Tool uses accepted: lem-sf-point-fibre-derived-tensor and lem-weil-coefficient-frobenius. The other declared tool uses are on the route or Mathlib leaves. For the maintainer: thm-sf-identification, in the same unit, overlaps in content but is written in the non-sk family, so it could not simply be cited; consider merging the two later. No SGA source is used. Details are in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
