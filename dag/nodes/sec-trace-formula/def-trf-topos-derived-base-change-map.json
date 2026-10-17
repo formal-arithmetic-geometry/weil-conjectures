@@ -184,5 +184,28 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q68-7beedd6d8 (reviewer sub-agent of L); spot-checked: The mathematics and route are correct, and I read the item, all cited statements, Stacks Tag 07A7, and edge cases in full. One mechanical fault: the item’s `created` record incorrectly names `lem-trf-proper-small-big-etale-derived-comparison` and group `N1`; repaired whole DAG JSON is under `fixes/dag/nodes/sec-trace-formula/def-trf-topos-derived-base-change-map.json`, with only `created` corrected to this item and group Q68.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedBaseChangeMap",
+  "declaration": "CategoryTheory.RingedDerivedComparisons.derivedBaseChangeMap",
+  "declarations": [
+   "CategoryTheory.RingedDerivedComparisons.derivedBaseChangeMap",
+   "CategoryTheory.RingedDerivedComparisons.DerivedBaseChangeSquare"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedBaseChangeMap.lean",
+  "statement": "def derivedBaseChangeMap {E E' F F' : Site.{u, w}} (S : DerivedBaseChangeSquare E E' F F') (K : E.D) : S.lg.edge.left.obj (S.lf.edge.right.obj K) ⟶ S.lf'.edge.right.obj (S.lg'.edge.left.obj K)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The square packages the dependency's normalized Lift, Composition and TwoIso data. All edge functors are tied to the geometric ringed morphisms, derived units and K-flat/K-injective representative formulas; all comparisons are fixed on representatives. Explicit inverse-image path isomorphisms and structural-ring equations retain the given compatible square. The map is the component of Mathlib mateEquiv for the three-factor canonical comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-bae20d396",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Reviewed immutable node, all dependencies, source Tag 07A7, module, docstrings, report sections, edge cases, route-pivot compliance, and declaration fidelity. Reproduced scompile.py local/server compilation successfully; no findings or fixes required."
  }
 }
