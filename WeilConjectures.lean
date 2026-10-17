@@ -2638,6 +2638,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.CurveTopBound
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.DeligneLaumon.AffineLine.DegreeOne
 public import WeilConjectures.DeligneLaumon.AffineLine.DenseOpen
+public import WeilConjectures.DeligneLaumon.AffineLine.DirectImageUnit
 public import WeilConjectures.DeligneLaumon.AffineLine.DualNonexceptional
 public import WeilConjectures.DeligneLaumon.AffineLine.Exactness
 public import WeilConjectures.DeligneLaumon.AffineLine.ExceptionalConstituents
