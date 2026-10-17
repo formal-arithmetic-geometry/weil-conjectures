@@ -61,5 +61,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-55477a805",
+  "group": "N6",
+  "result": "pass",
+  "note": "Existing binding of nt-target-weil-conjectures to AlgebraicGeometry.Scheme.weil_conjectures (WeilConjectures.Statement, branch slopmaster2); only the lean field changed vs newtargets-dag. lean.statement is verbatim the header in slopmaster2 and live Statement.lean:96; check_existing returns no failures or notes. lcompile of /tmp/n6wc/CheckWeil.lean proves type_of% Scheme.weil_conjectures.{u} = type_of% WeilConjectures.weil_conjectures.{u} by rfl (exit 0), so the type is exactly the comparator target with one universe. Live and slopmaster2 Weil.Definitions are identical; every hypothesis and conclusion clause (finite field, q=Nat.card k, SmoothOfRelativeDimension d, IsProper, GeometricallyIntegral, galoisExtension point counts, zetaSeries, the IsWeilFactorization fields, root-multiset functional equation with i.rev, RH with rpow -i/2) matches the node. All 13 stmt_dep records checked. Edge cases d=0, constant factors, multiplicity, characteristic, empty scheme, n=0 junk and universes OK. No new module, so the hollow/proof/docstring/pro-etale gates are not triggered; Worker report and Second reading by N6 present; no duplicate in lean/Sheaf. No fixes."
+ },
+ "lean": {
+  "module": "WeilConjectures.Statement",
+  "declaration": "AlgebraicGeometry.Scheme.weil_conjectures",
+  "statement": "theorem weil_conjectures (d : ℕ) [SmoothOfRelativeDimension d f] [IsProper f]\n    [GeometricallyIntegral f] :\n    ∃ P : Fin (2 * d + 1) → Polynomial ℤ,\n      IsWeilFactorization (Nat.card k) d f.zetaSeries P ∧\n      WeilFunctionalEquation (Nat.card k) d P ∧\n      WeilRiemannHypothesis (Nat.card k) d P",
+  "branch": "slopmaster2",
+  "by": "N6",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Exact existing statement, with the explicit structure morphism f and all three comparator predicates for one common integral polynomial family. Read WeilConjectures/Statement.lean and the current source returned by scompile.py --source WeilConjectures.Statement; the latter retains this exact signature. The comparator declaration WeilConjectures.weil_conjectures has the same type under a different namespace. No duplicate theorem or predicates are introduced."
  }
 }
