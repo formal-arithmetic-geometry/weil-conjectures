@@ -258,5 +258,28 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-610f36751 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the statement of the item, all 8 steps, the 4 cited node statements, and Stacks algebra.tex 16855-16884 (061N/061P) and 17026-17057 (061R). The statement is exactly 061R with M=R. The canonical map C[T]->gr_J(A), T_j->[f_j]_1 is 061N, and the coefficient ring is B_i/Jbar_i=A/J. No hypotheses are added and the statement is unchanged and not weakened. Step 1: q(J^n)=K^n and B/K=C. Step 2: shifting by T_1 is injective and Phi is a ring isomorphism, so ty is not in J^{r+2}, without cancelling t. Step 3: the least failed level m gives J^n meet tA = tJ^{n-1}, which fills the source's last sentence with no separatedness. Step 4: the kernel of rho_n is J^{n+1}+(tA meet J^n), by lifting z. Step 5: the kernel is [t]_1 G_{n-1}, which is T_1 times polynomials of degree n-1 under Phi. Step 6: splitting H=P+T_1Q gives surjectivity, and comparing first exponents gives injectivity, over any C. Step 7: polynomial uniqueness identifies the map with the canonical one, and finite support gives bijectivity. Step 8: a stated induction with base i=0. The step applies the one-generator result over B_i, uses B_i/(f_{i+1}) isomorphic to B_{i+1}, and transports the graded rings; the cases i=b and b=0 are valid. The cited nodes say what the steps take from them. The cross-unit lem-weil-pbc-associated-graded-ring-structure is Lean-closed, so it is an admissible tool and no tool_uses is needed; the second reader's removal of the self-written entry agrees with C8. proof_deps equals the union of uses. There are no new nodes. An rg over dag/nodes for 061R and quasi-regular found no duplicate: the regular-sequence and flat-base-change neighbours state different results, and the parent cites exactly this conclusion. There is no cycle, no SGA citation, and the route and blueprint ancestry are unchanged; the opening sentence of lem-pur-divisor-class in main-20261015 checked. Small cases checked: Z with 2; k[x,y] with (x,y); k[x]x k with f=(x,1); J=A. Cases correctly excluded because the hypothesis fails: (x,x), and k[eps]/eps^2 with f=eps. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuasiRegularPrefixQuotient",
+  "declaration": "Ideal.quasiRegular_prefix_quotient",
+  "declarations": [
+   "Ideal.quasiRegularPrefixIdeal",
+   "Ideal.quasiRegularQuotientTail",
+   "Ideal.quasiRegular_prefix_quotient"
+  ],
+  "file": "lean/Sheaf/RingTheory/QuasiRegularPrefixQuotient.lean",
+  "statement": "theorem quasiRegular_prefix_quotient {A : Type u} [CommRing A] {b : ℕ} (f : Fin b → A) (hpoly : Function.Bijective (MvPolynomial.aeval (R := A ⧸ Ideal.span (Set.range f)) (fun j : Fin b ↦ DirectSum.of (associatedGradedPiece (Ideal.span (Set.range f))) 1 (Submodule.Quotient.mk (⟨f j, by simpa using Ideal.subset_span (Set.mem_range_self j)⟩ : (Ideal.span (Set.range f) ^ 1 : Ideal A)))))) (i : ℕ) (hi : i ≤ b) : ∃ e : ((A ⧸ quasiRegularPrefixIdeal f i) ⧸ Ideal.span (Set.range (quasiRegularQuotientTail f i))) ≃+* (A ⧸ Ideal.span (Set.range f)), (∀ a : A, e (Ideal.Quotient.mk (Ideal.span (Set.range (quasiRegularQuotientTail f i))) (Ideal.Quotient.mk (quasiRegularPrefixIdeal f i) a)) = Ideal.Quotient.mk (Ideal.span (Set.range f)) a) ∧ Function.Bijective (MvPolynomial.aeval (R := (A ⧸ quasiRegularPrefixIdeal f i) ⧸ Ideal.span (Set.range (quasiRegularQuotientTail f i))) (fun j : {j : Fin b // i ≤ j.val} ↦ DirectSum.of (associatedGradedPiece (Ideal.span (Set.range (quasiRegularQuotientTail f i)))) 1 (Submodule.Quotient.mk (⟨quasiRegularQuotientTail f i j, by simpa using Ideal.subset_span (Set.mem_range_self j)⟩ : (Ideal.span (Set.range (quasiRegularQuotientTail f i)) ^ 1 : Ideal (A ⧸ quasiRegularPrefixIdeal f i))))))",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f591ddad",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Read node, 8-step proof, Stacks 061R/061N/061P, live AssociatedGradedRing declarations and delivered module. All clauses match: J=span(range f), C=A/J; hypothesis = bijective MvPolynomial.aeval with variables to degree-1 classes, using associatedGradedAlgebra (rfl-checked); quasiRegularPrefixIdeal = span f''{j<i} (compiled: =⊥ at i=0, =J at i=b); tail indexed by {j // i<=j} = paper i+1..b; e: B_i/Jbar_i ≃+* C with e(mk mk a)=mk a is the unique canonical identification, so aeval over B_i/Jbar_i is equivalent to the node's map over C; graded iso = bijective since degrees are forced. Edge cases b=0, i=0, i=b, J=A, zero ring covered; no extra assumptions or universe restriction. Helpers have real data and docstrings; one sorry; lean.statement verbatim; report sections present; no duplicate found. nt_compile clean (1.9-4.3 s) plus a separate compiled check file. No findings."
  }
 }

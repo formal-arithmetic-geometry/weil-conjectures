@@ -177,5 +177,27 @@
   "group": "Q120",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-bc84f77ec (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited node statement in full. The item statement is unchanged, it is not a target, and it has no base-change morphism or coefficient category to compare. Step 1: the arrow category is presheaves on (Δ×Δ)×[1]^op, and the Mathlib leaf lem-coef-presheaf-local-presentability (Set clause, then the Fun(C^op,Set) clause, with pullbacks) makes it locally presentable. The new accessibility node supplies exactly the standing hypotheses and condition (i) of lem-coef-accessible-subdiagram-criterion. Step 2: the ranks node with H=id gives rho>=lambda, its 'more generally' clause gives gamma with rho<<gamma above the criterion bound, aleph_1 and #mor(Δ×Δ), and lambda<<gamma follows. Steps 3-4: I checked every hypothesis of criterion (ii); its conclusion is the J the proof uses. Steps 5-6 are genuinely elementary: a directed union is the objectwise colimit, |D|<gamma by regularity, and repleteness finishes. New node lem-coef-simplicial-local-equivalences-accessible is true: W_f is accessible and accessibly embedded, monomorphisms are filtered-colimit closed and accessible, and the intersection of the two is accessible. It is not a restatement of the item and not a duplicate. Every existing candidate (lem-cbc-homotopy-local-equivalences-accessible, lem-coef-model-weak-equivalences-accessible, lem-coef-accessible-localization-small-generators, lem-coef-dugger-*, lem-coef-smith-model-recognition) reaches the item in the graph, which I checked by script, so citing any of them would create a cycle. New node lem-coef-simplicial-space-small-subobjects is true by the category-of-elements argument over a countable index category with gamma uncountable, plus exhaustion by countable generated subspaces; I tested it on empty, representable and identity arrows. The DAG is acyclic, proof_deps equals the union of uses, every cited statement is in unit sk-prop-sf-biduality-general, no tool_uses are needed and there is no SGA citation. Hirschhorn, Rezk, Barwick and HTT stay WANTED and could not be checked locally; the proof is correctly marked agent-written and relies only on the DAG statements I checked. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.BousfieldSmithBoundedGeneration",
+  "declaration": "SSet.SegalSpace.bousfield_smith_bounded_generation",
+  "declarations": [
+   "SSet.SegalSpace.simplicialSpaceCardinal",
+   "SSet.SegalSpace.bousfield_smith_bounded_generation"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/BousfieldSmithBoundedGeneration.lean",
+  "statement": "theorem bousfield_smith_bounded_generation {P Q : SimplicialSpace.{u}} (f : P ⟶ Q) (hf : ∀ n q : SimplexCategoryᵒᵖ, Function.Injective ((f.app n).app q)) : ∃ γ : Cardinal.{u}, Cardinal.aleph0 < γ ∧ γ.IsRegular ∧ ∀ {X Y : SimplicialSpace.{u}} (u : X ⟶ Y), (∀ n q : SimplexCategoryᵒᵖ, Function.Injective ((u.app n).app q)) → (∀ Z : SimplicialSpace.{u}, (IsReedyFibrant Z ∧ Enhanced.IsWeakHomotopyEquivalence (mappingSpacePre f Z)) → Enhanced.IsWeakHomotopyEquivalence (mappingSpacePre u Z)) → ∀ {C : SimplicialSpace.{u}} (c : C ⟶ Y), (∀ n q : SimplexCategoryᵒᵖ, Function.Injective ((c.app n).app q)) → simplicialSpaceCardinal C < γ → ∃ (D : SimplicialSpace.{u}) (d : D ⟶ Y) (i : C ⟶ D), (∀ n q : SimplexCategoryᵒᵖ, Function.Injective ((d.app n).app q)) ∧ c = i ≫ d ∧ (∀ n q : SimplexCategoryᵒᵖ, Function.Injective ((i.app n).app q)) ∧ simplicialSpaceCardinal D < γ ∧ ∀ Z : SimplicialSpace.{u}, (IsReedyFibrant Z ∧ Enhanced.IsWeakHomotopyEquivalence (mappingSpacePre f Z)) → Enhanced.IsWeakHomotopyEquivalence (mappingSpacePre (pullback.snd u d) Z)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5737e62ef",
+  "group": "N5",
+  "result": "pass",
+  "note": "Read node, both stmt-dep declarations (SimplicialSpace=SimplexCategoryᵒᵖ⥤SSet.{u}, IsReedyFibrant, mappingSpacePre Map(B,X)→Map(A,X), Enhanced.IsWeakHomotopyEquivalence), module, report (Worker report + Second reading by N5 present). All 11 clauses exact: bidegreewise-injective f/u/c/d/i, local tests literally the bodies of IsLocalFor/localWeakEquivalences, total Σ-cardinal, ∃γ:Cardinal.{u} with aleph0<γ ∧ IsRegular placed before all quantifiers, c=i≫d, |D|<γ, local equivalence on pullback.snd u d. No extra hypotheses or universe restriction; edge cases (empty, full, identity, iso f, degree 0) covered. Inlining instead of importing IsLocalFor justified: verified the DAG path interval-criterion→bounded-lifting→item (cycle); same pattern as the landed SimplicialLocalBoundedLifting. Statement byte-identical to base, lean.statement verbatim in file, only def is real data, docstrings with source/blueprint and 6 proof steps, sorry-only, proof-plan imports non-public. nt_compile.py --json on side overlay: clean, no errors. Only cosmetic nits (unused opens)."
  }
 }

@@ -265,5 +265,26 @@
   "group": "Q106",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-57c388926 (reviewer sub-agent of L); spot-checked: I read all eight steps and the one new node in full and checked them against the full statements of every cited node: def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, def-coef-infinity-right-anodyne, lem-coef-infinity-right-anodyne-product and the Mathlib leaf lem-coef-transfinite-left-lifting. Limitation: the Cisinski source (Prop 4.4.11, Lemma 4.4.10, Lemma 3.1.3, Cor 4.1.10) is not archived and is recorded as WANTED, and network access is blocked for this reviewer, so I could not re-read it at the cited places. I re-derived every step instead; the proof is self-contained and does not depend on the source. No SGA source is used. This is a simplicial-set lemma, not a target, so there is no base-change morphism or coefficient category to compare with upstream master. Step 1: the closure properties of the class C hold by universality of colimits in sSet; I checked the retract maps one by one (rbu=rsa=a, rs=1, av=rb). Step 2: right cancellation applied to E_A->E_B->E with all three maps monic. Step 3: reversing simplex order sends horn i to horn n-i and endpoint {0} to {1}, so the map D_0->Delta^1xL becomes exactly the product-node map with {1}=Lambda^1_1; left fibrations lift it by pushouts, retracts and the transfinite leaf. Step 4: the max homotopy is simplicial, the two prescribed lifts agree on {0}xK, and the endpoint lands in K. Step 5: I checked both commuting squares and kk_0=1, He_0=1; the endpoint inclusion e_T is in C, including for T empty. Step 6: D is the pushout of e_A along {1}xa, then cancellation applies. Step 7: r(0,v)=min(v,k) and r(1,v)=max(v,k) are monotone with rs=1 and r(D) inside the horn because k>0; checked by hand including n=k=1. Step 8: minimality of the right-anodyne class. proof_deps equals the union of the uses, all cited statements are in the unit sk-prop-sf-biduality-general, there is no cycle and no tool_uses are needed. New node lem-coef-right-anodyne-mono-cancellation is true: right-anodyne monos are the final monos, which cancel on the right (HTT 4.1.1.3). It is independent of the item, not a restated clause, and is a statement only. B1-B9 hold: three kinds of Mathlib search recorded, created.item is this item, blueprint from/via/same_as complete. I tested it on identities, the empty case and finite linear orders. Duplicate search: I read the statements of about 20 right-anodyne, cofinal and base-change nodes across the DAG and none states either the item or the cancellation lemma. Item statement unchanged and matches the definitions and the parent's use. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LeftFibrationRightAnodyneBaseChange",
+  "declaration": "SSet.Enhanced.leftFibration_rightAnodyne_baseChange",
+  "file": "lean/Sheaf/CategoryTheory/LeftFibrationRightAnodyneBaseChange.lean",
+  "statement": "theorem leftFibration_rightAnodyne_baseChange {X Y Z : SSet.{u}} (i : X ⟶ Y) (q : Z ⟶ Y) (hi : rightAnodyneExtensions i) (hq : leftFibration q) : rightAnodyneExtensions (pullback.snd i q)",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.leftFibration_rightAnodyne_baseChange"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9b418941a",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Statement SSet.Enhanced.leftFibration_rightAnodyne_baseChange {X Y Z : SSet.{u}} (i) (q) (hi : rightAnodyneExtensions i) (hq : leftFibration q) : rightAnodyneExtensions (pullback.snd i q) matches node and Cisinski Prop 4.4.11/4.4.4(iv) clause by clause: right-horn generators 0<i plus isos with pushout/transfinite/retract closure, left-fibration horns 1<=n, i<last n, canonical pullback projection, no quasicategory/Mono/extra universe assumptions; edge cases (empty, n=0,1) fine. Node non-lean fields identical to side clone, lean.statement verbatim, stmt_deps unchanged (3 deps), proof-only imports for cancellation (landed Q24 decl matches step 2), product and transfinite lifting. Docstrings carry source place, blueprint tag and all 8 proof steps; only sorry; no definitions; no duplicate in Mathlib/side Sheaf. Report has Worker report and Second reading by Q107. nt_compile.py --json on snapshot file: exit 0, 1.9 s, no errors/warnings."
  }
 }
