@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-pur-vector-bundle-thom",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Vector-bundle Thom isomorphism",
@@ -14,53 +14,192 @@
  },
  "stmt_deps": [
   "def-pur-conventions",
+  "def-pur-vector-bundle-zero-section",
   "def-pur-vector-bundle-thom-class",
   "def-coefficient-twists-detailed",
-  "def-weil-derived-tensor",
-  "def-weil-scheme-morphism-properties"
+  "def-compact-support-direct-image-detailed"
  ],
  "proof": [
   {
-   "text": "Trivialize the bundle as in [def-pur-vector-bundle-zero-section]; the rank-one factors are those of [thm-pur-rank-one-thom], and their supported exterior product is the comparison of [lem-pur-kunneth-supported].\nStep 1: on a geometric fiber. Let $\\bar b\\to B$ be a geometric\npoint. By [lem-pur-cfiber-stalk], the stalk of $\\tau_E$ at\n$\\bar b$ is the morphism\n\n$$\n\\Lambda\\longrightarrow\nR\\Gamma_c\\bigl(\\mathbf A^r_{\\bar b},\\Lambda(r)[2r]\\bigr),\n$$\n\nthe class of the origin being the exterior product of the $r$\nrank-one classes (the class of $0\\subset\\mathbf A^r$ is the Künneth\nproduct of the classes of the coordinates' zero divisors, which is the\ngenerator fixed by the rank-one normalization of\n[thm-pur-rank-one-local-calculation]; equivalently\n$R\\Gamma_c(\\mathbf A^r,\\Lambda)\\cong\\Lambda(-r)[-2r]$ by the Künneth\nresult of [thm-pur-projective-bundle-formula] Step 1). The map\non the cohomology sheaves is therefore the\ndef:coefficient-twists-canonical identification $\\Lambda\\to\\Lambda$,\nhence an isomorphism at every geometric point.",
+   "text": "Work at the arbitrary finite level $\\Lambda=A=A_{E,n}$, $n\\geq1$, of [def-pur-conventions], and put $Q_E=A_E(r)[2r]$. The finite twists in [def-coefficient-twists-detailed] are locally constant finite rank-one coefficient sheaves: [lem-pur-twist-sheaf-locally-free] supplies this for the prescribed pro-etale $A(1)$, and [lem-asd-etale-finite-twist-pullback] supplies all tensor powers, duals and their pullback identifications on the etale representatives. The inverse-limit reduction identity in the former identifies these representatives with the prescribed finite twists. Consequently $Q_E$ is bounded constructible, has finite Tor amplitude (locally it is a shifted free module), and has a bounded-below etale-origin witness. The construction and source identification of $\\tau_E$ are precisely [def-pur-vector-bundle-thom-class]. At $r=0$ that statement gives $E=B$, $\\pi=z=1_B$ and $\\tau_E=1_{A_B}$, proving this case. At $r=1$, (L1) of [thm-pur-localized-top-chern] identifies its supported class with the divisor class used in [thm-pur-rank-one-thom]. Thus the rank-one theorem concerns this specified map.",
    "uses": [
-    "def-pur-vector-bundle-zero-section",
-    "thm-pur-rank-one-thom",
-    "lem-pur-kunneth-supported",
-    "lem-pur-cfiber-stalk",
-    "thm-pur-rank-one-local-calculation",
-    "thm-pur-projective-bundle-formula"
+    "def-pur-conventions",
+    "def-coefficient-twists-detailed",
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-asd-etale-finite-twist-pullback",
+    "def-pur-vector-bundle-thom-class",
+    "thm-pur-localized-top-chern",
+    "thm-pur-rank-one-thom"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-vector-bundle-thom.proof.md",
+    "place": "Opening sentence and Step 1: coefficient domains, rank-zero unit, and identification of the rank-one factors"
+   }
   },
   {
-   "text": "Step 2: globally. The cone of the globally defined $\\tau_E$ is a\nbounded constructible complex with zero geometric stalks, hence zero\n(the truncation argument of [def-weil-derived-cohomology-sheaves]).\nBase change and direct sums: by (L2) and (L3) of\n[thm-pur-localized-top-chern] and the base-change compatibility\nof [def-pur-vector-bundle-thom-class]. No local morphism is\nglued here.",
+   "text": "Let $g:B'\\to B$ be a change of base in the fixed setting, with $v:E'=E\\times_BB'\\to E$ and projection $\\pi'$. The tautological section remains regular after this change of base, as stated in [def-pur-vector-bundle-thom-class]; (L2) of [thm-pur-localized-top-chern] therefore identifies the pulled-back supported morphism with $\\operatorname{thom}(E')$. The exchange $C_{\\pi,g}:g^{-1}R\\pi_!\\xrightarrow{\\sim}R\\pi'_!v^{-1}$ is invertible on $Q_E$ by [thm-cbc-finite-level-proetale]. Its naturality applied to $\\operatorname{thom}(E)$ gives a square between the compact images of the two supported maps. The square's source comparison, under $R\\pi_!z_*A_B=A_B$, is the identity: paste the squares for $z$ and $\\pi$, use $\\pi z=1_B$, and use the identity and vertical-pasting normalization of [thm-cbc-finite-torsion]. These are the etale exchanges whose transport defines the exchange in [thm-cbc-finite-level-proetale]; [thm-sf-comp-composition] supplies the canonical source compositor and its identity normalization. With the twist pullback of Step 1 this yields the actual map equality\n$$C_{\\pi,g}(Q_E)\\circ g^{-1}(\\tau_E)=\\tau_{E'}.$$\nNo flatness of $g$ is required: regularity here is the universal coordinate regularity of the tautological section, not regularity of an arbitrary pulled-back section.",
    "uses": [
-    "def-weil-derived-cohomology-sheaves",
+    "def-pur-vector-bundle-thom-class",
     "thm-pur-localized-top-chern",
-    "def-pur-vector-bundle-thom-class"
+    "thm-cbc-finite-level-proetale",
+    "thm-cbc-finite-torsion",
+    "thm-sf-comp-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-vector-bundle-thom.proof.md",
+    "place": "Step 2, base change: naturality on the supported morphism and normalization of its source"
+   }
+  },
+  {
+   "text": "Compute first for $V_j=\\mathbf A^j_k$ over the fixed algebraically closed field $k$. Set $C_j=R\\Gamma_c(V_j,A(j)[2j])$ and let $\\tau_j:A\\to C_j$ be the origin class. At the point, [lem-weil-pbc-geometric-point-cohomology] identifies the constant-section source with $A$. We prove by induction on $j$ that $\\tau_j$ is invertible. Step 1 gives $j=0$ and the specified rank-one isomorphism $\\tau_1$ from [thm-pur-rank-one-thom]. For $j\\geq1$, write $V_{j+1}=V_j\\times_kV_1$. The last clause of [def-pur-vector-bundle-thom-class] identifies the supported origin class with the cup product of the pulled-back classes. Apply [lem-pur-compact-product-proper-support-compatibility] to $X=V_j$, $Y=V_1$, $Z=W=\\operatorname{Spec}k$, and coefficient twists $A(j),A(1)$. Its even-degree cup/exterior identification and its equation $u_{Z\\times W}\\kappa^{Z,W}=\\kappa_c(u_Z\\otimes u_W)$ give, after shifting,\n$$\\tau_{j+1}=\\kappa_c\\circ(\\tau_j\\otimes_A^L\\tau_1).$$\nThe supports are points, hence proper, and the twist inputs satisfy its finite-Tor hypotheses by Step 1. The cited node says that this specified $\\kappa_c$ is invertible. The inductive hypothesis and functoriality of tensor make the right side invertible, completing the induction. This verifies the image of the supported class, rather than merely computing the object $C_j$.",
+   "uses": [
+    "lem-weil-pbc-geometric-point-cohomology",
+    "thm-pur-rank-one-thom",
+    "def-pur-vector-bundle-thom-class",
+    "lem-pur-compact-product-proper-support-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-vector-bundle-thom.proof.md",
+    "place": "Step 1: iterated rank-one compact-support calculation, with the supported-to-compact map specified"
+   }
+  },
+  {
+   "text": "Choose a Zariski open cover of $B$ trivializing its locally free module, using [def-amb-finite-locally-free-module] and the relative-Spec presentation of [def-pur-vector-bundle-zero-section]. The free symmetric-algebra isomorphism of [lem-weil-pbc-symmetric-algebra-free-module-polynomial] identifies these bundle charts, including their augmentation zero sections, with $\\mathbf A^r_U$. We may refine to principal affine opens in a finite-type affine cover of $B$; their rings are finitely generated $k$-algebras with one element inverted, still finitely generated by adjoining its inverse. Thus the charts remain in the fixed finite-type setting, and they are separated as open subschemes of $B$. On such a chart the bundle and its specified tautological class are pulled back from $V_r\\to\\operatorname{Spec}k$. Step 2 identifies $\\tau_{E|_U}$ with the pullback of the isomorphism $\\tau_r$ from Step 3. It is therefore invertible. Clause 1 of [lem-cbc-proetale-stalk-conservative], applied to this Zariski (hence pro-etale) covering, now proves that the globally defined $\\tau_E$ is invertible. This covering criterion is valid for the ordinary pro-etale derived category and does not assume geometric stalks detect all its sheaves. In particular $R\\pi_!Q_E\\cong A_B$ is concentrated in degree zero. The empty base is covered by the empty family and satisfies the same conclusion.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "def-pur-vector-bundle-zero-section",
+    "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+    "lem-cbc-proetale-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-vector-bundle-thom.proof.md",
+    "place": "Steps 1 and 2: bundle charts and local detection of invertibility"
+   }
+  },
+  {
+   "text": "Specify the direct-sum comparison. Let $\\pi_i:E_i\\to B$ have ranks $r_i$, put $Q_i=A_{E_i}(r_i)[2r_i]$, and identify $E=E_1\\oplus E_2=E_1\\times_BE_2$ and $Q_E=p_1^*Q_1\\otimes_A^Lp_2^*Q_2$. Let\n$$\\kappa_B:R\\pi_!Q_E\\xrightarrow{\\sim}R\\pi_{1!}Q_1\\otimes_A^LR\\pi_{2!}Q_2$$\nbe the concrete relative Kunneth comparison of [sk-thm-sf-kunneth-relative]. Its inputs are finite-Tor constructible by Step 1; Step 4 also identifies both individual compact images with $A_B$, so its projection-formula coefficient domains are satisfied. The same cited statement gives compatibility of this named map with base change. Its inverse is exactly the forward composite $T_{\\pi_1,\\pi_2}$ of [lem-pur-finite-product-compactification], since reversing the six displayed invertible arrows in the relative comparison gives that formula. For $B=\\operatorname{Spec}k$, the latter node identifies $T$ on proper compactifications with the ordinary exterior-product map on extension-by-zero complexes. This is precisely the defining compact exterior product $\\kappa_c$ of [lem-pur-compact-product-proper-support-compatibility], including its direction. Hence $\\kappa_k^{-1}=\\kappa_c$ with the specified coefficient and shift identifications.",
+   "uses": [
+    "sk-thm-sf-kunneth-relative",
+    "lem-pur-finite-product-compactification",
+    "lem-pur-compact-product-proper-support-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-vector-bundle-thom.proof.md",
+    "place": "Step 2, direct sums: specify the compact-support comparison rather than invoke an unnamed product"
+   }
+  },
+  {
+   "text": "For the two trivial bundles $V_r,V_s$ over $k$, the supported class of $V_{r+s}=V_r\\times_kV_s$ is the cup product of the two classes by (L3) of [thm-pur-localized-top-chern], equivalently by the last clause of [def-pur-vector-bundle-thom-class]. Transversality holds: the first $r$ and last $s$ independent coordinate equations remain regular after imposing either block, since the quotient is a polynomial ring in the remaining variables and multiplication by a remaining variable is injective by coefficient comparison. The supports in each factor are the origin points, proper over $k$. The same compatibility equation in [lem-pur-compact-product-proper-support-compatibility] used in Step 3, now for $V_r,V_s$, gives\n$$\\tau_{r+s}=\\kappa_c(\\tau_r\\otimes_A^L\\tau_s),\\qquad \\kappa_k\\tau_{r+s}=\\tau_r\\otimes_A^L\\tau_s.$$\nIts cup/exterior clause applies because the degrees $2r,2s$ are even. If a rank is zero this is the tensor-unit identity, by the empty-product convention of [def-pur-vector-bundle-thom-class].",
+   "uses": [
+    "thm-pur-localized-top-chern",
+    "def-pur-vector-bundle-thom-class",
+    "lem-pur-compact-product-proper-support-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-vector-bundle-thom.proof.md",
+    "place": "Step 2, direct sums: product of the two coordinate blocks on the universal trivial model"
+   }
+  },
+  {
+   "text": "Trivialize $E_1$ and $E_2$ simultaneously on the intersections of their bundle charts from Step 4. On every such $U$ they and their direct sum are pulled back from $V_{r_1},V_{r_2},V_{r_1+r_2}$ over $k$. By Step 2 the three $\\tau$ maps are the corresponding pullbacks; by the base-change clause of [sk-thm-sf-kunneth-relative] so is $\\kappa_U$. Thus pulling back Step 6 proves, on every $U$,\n$$\\kappa_U\\tau_{E|_U}=\\tau_{E_1|_U}\\otimes_A^L\\tau_{E_2|_U}.$$\nThe two global maps in question have source $A_B$ (using $A_B\\otimes_A^LA_B=A_B$) and target $R\\pi_{1!}Q_1\\otimes_A^LR\\pi_{2!}Q_2$. By Step 4 that target is isomorphic to $A_B$, so source and target are concentrated in degree zero. Therefore [lem-pur-degree-zero-derived-map-gluing] applies to these two actual global maps and proves\n$$\\kappa_B\\circ\\tau_{E_1\\oplus E_2}=\\tau_{E_1}\\otimes_A^L\\tau_{E_2}.$$\nThis is the direct-sum compatibility asserted in the item. The equality is checked as a sheaf-map equality in degree zero, without any gluing or local detection assertion for arbitrary derived morphisms.",
+   "uses": [
+    "sk-thm-sf-kunneth-relative",
+    "lem-pur-degree-zero-derived-map-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-vector-bundle-thom.proof.md",
+    "place": "Step 2, direct sums: simultaneous charts and valid degree-zero equality detection"
+   }
+  },
+  {
+   "text": "Define $\\operatorname{tr}_\\pi:=\\tau_E^{-1}$, which exists uniquely by Step 4. Inverting the equation of Step 2 proves its base-change compatibility. Inverting the equation of Step 7 gives\n$$\\operatorname{tr}_{\\pi_1\\oplus\\pi_2}=(\\operatorname{tr}_{\\pi_1}\\otimes_A^L\\operatorname{tr}_{\\pi_2})\\circ\\kappa_B.$$\nAt rank zero this is the identity. These are consequences of uniqueness of inverses and tensor functoriality, and give the displayed trace with its specified normalization.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-vector-bundle-thom.proof.md",
+    "place": "Statement, final display: inverse trace and inherited compatibilities"
+   }
   }
  ],
  "proof_deps": [
-  "def-pur-vector-bundle-zero-section",
-  "thm-pur-rank-one-thom",
-  "lem-pur-kunneth-supported",
-  "lem-pur-cfiber-stalk",
-  "thm-pur-rank-one-local-calculation",
-  "thm-pur-projective-bundle-formula",
-  "def-weil-derived-cohomology-sheaves",
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-pur-vector-bundle-thom-class",
   "thm-pur-localized-top-chern",
-  "def-pur-vector-bundle-thom-class"
+  "thm-pur-rank-one-thom",
+  "thm-cbc-finite-level-proetale",
+  "thm-cbc-finite-torsion",
+  "thm-sf-comp-composition",
+  "lem-weil-pbc-geometric-point-cohomology",
+  "lem-pur-compact-product-proper-support-compatibility",
+  "def-amb-finite-locally-free-module",
+  "def-pur-vector-bundle-zero-section",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-cbc-proetale-stalk-conservative",
+  "sk-thm-sf-kunneth-relative",
+  "lem-pur-finite-product-compactification",
+  "lem-pur-degree-zero-derived-map-gluing"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-vector-bundle-thom.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-vector-bundle-thom.proof.md",
+  "place": "Steps 1–2, expanded using the existing finite-coefficient compact-product and degree-zero descent lemmas"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Thom\"",
+   "results": "12 hits; instHomogeneousPowFloat, instHomogeneousPowFloat32, Std.Async.System.getHomeDir, Lean.Meta.Grind.getHomoPredTheorems, Lean.Meta.Grind.getHomoSourceTypes, Lean.Meta.Grind.getHomoTheorems, Equiv.Perm.sigmaCongrRightHom, Equiv.Perm.sigmaCongrRightHom_injective",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned names concern ordinary sheaf pullback/free modules, algebraic etale morphisms, affine-space coordinates, or unrelated substring hits; none states the specified compact-support Thom map or its compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bThom\\b|thomClass|thom_class|[Cc]hern|compactSupport",
+   "results": "0 hits; none; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned names concern ordinary sheaf pullback/free modules, algebraic etale morphisms, affine-space coordinates, or unrelated substring hits; none states the specified compact-support Thom map or its compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Thom class induces an isomorphism from the constant finite coefficient sheaf to compactly supported pushforward of a rank r algebraic vector bundle with Tate twist r and shift 2r",
+   "results": "8 hits; SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned names concern ordinary sheaf pullback/free modules, algebraic etale morphisms, affine-space coordinates, or unrelated substring hits; none states the specified compact-support Thom map or its compatibilities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology Thom isomorphism for a vector bundle with compact supports and finite coefficients",
+   "results": "8 hits; CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, Algebra.Etale.finitePresentation, RingHom.Etale, AlgebraicGeometry.IsEtale.of_comp, Algebra.Etale.formallyEtale, RingHom.Etale.propertyIsLocal, RingHom.Etale.isStableUnderBaseChange, Algebra.Etale.recOn",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned names concern ordinary sheaf pullback/free modules, algebraic etale morphisms, affine-space coordinates, or unrelated substring hits; none states the specified compact-support Thom map or its compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported etale cohomology of affine space is the coefficient ring in degree twice the dimension with a Tate twist",
+   "results": "8 hits; AlgebraicGeometry.AffineSpace.coord, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord, AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply, AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned names concern ordinary sheaf pullback/free modules, algebraic etale morphisms, affine-space coordinates, or unrelated substring hits; none states the specified compact-support Thom map or its compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate|[Cc]ompact[Ss]upport|[Tt]hom|[Cc]hern",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned names concern ordinary sheaf pullback/free modules, algebraic etale morphisms, affine-space coordinates, or unrelated substring hits; none states the specified compact-support Thom map or its compatibilities"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -99,5 +238,64 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-an"
+ "unit": "sk-prop-an",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "thm-pur-vector-bundle-thom",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Replaced the unsupported definition-based vanishing and supported-to-compact product inference with existing named theorems. Computed the specified class on the fixed-field universal model, used normalized base change and bundle charts for invertibility, and proved the precise direct-sum identity using compactification-normalized relative products and degree-zero map detection. All coefficients are finite A_{E,n}; rank zero and empty bases are explicit. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes main-20261015 thm-pur-vector-bundle-thom: opening and Step 1 in Steps 1,3,4; Step 2 base change in Step 2; Step 2 direct sums in Steps 5–7; inverse trace in Step 8. The unchanged target statement is the compact-support Thom auxiliary of sk-prop-an, not its entire exceptional-inverse-image proposition; no unit realized fields are changed. The universal-model calculation is the rank-one/product calculation already specified by this node, followed by the base-change and bundle-chart argument of sk-prop-an.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Generic finite-twist local-freeness and inverse-limit reduction, used to verify the coefficient domains only."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic finite-twist etale witnesses and pullback identifications, used to keep the two sites and coefficient categories explicit."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-cohomology",
+    "why": "Generic computation of the constant coefficient unit at the fixed algebraically closed point."
+   },
+   {
+    "node": "lem-cbc-proetale-stalk-conservative",
+    "why": "Only the covering-family locality clause is used, a general derived sheaf criterion rather than purity."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+    "why": "Generic polynomial presentation of a free symmetric algebra, to identify the bundle charts and zero sections."
+   },
+   {
+    "node": "sk-thm-sf-kunneth-relative",
+    "why": "Generic concrete compact-support product and its base-change coherence, used to name the direct-sum comparison; it supplies no Thom or purity class."
+   },
+   {
+    "node": "lem-pur-degree-zero-derived-map-gluing",
+    "why": "Generic uniqueness of maps locally concentrated in degree zero, after the Thom isomorphism has already been proved."
+   },
+   {
+    "node": "def-amb-finite-locally-free-module",
+    "why": "The local-freeness definition supplies the Zariski trivializing cover."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-geometric-point-cohomology",
+  "lem-cbc-proetale-stalk-conservative",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "sk-thm-sf-kunneth-relative",
+  "lem-pur-degree-zero-derived-map-gluing",
+  "def-amb-finite-locally-free-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-c60f5ba31",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-c60f5ba31 (reviewer sub-agent of L); spot-checked: Read the item in full: all eight steps, all 19 proof dependencies and 5 statement dependencies, the unit sk-prop-an, and the main-20261015 blueprint text, whose statement and proof match master. Statement unchanged and no target weakened. One commit, no new nodes, no cycles, no SGA source. Coefficient category: everything is at finite level A_{E,n} in D(T_proet,A) (sk-def-sf-operations, def-exchange-projection, lem-pur-finite-product-compactification). Base-change map: the pro-étale exchange of thm-cbc-finite-level-proetale, normalized by thm-cbc-finite-torsion and the identity normalization of alpha in thm-sf-comp-composition. Mathematics: r=0 comes from the Thom-class definition, and r=1 matches the rank-one theorem via (L1). Base change holds for nonflat g by (L2), which covers the tautological section. The model case is an induction tau_{j+1}=kappa_c(tau_j⊗tau_1), from the identity u_{Z×W}kappa^{Z,W}=kappa_c(u_Z⊗u_W) and the even-degree cup clause, with point supports proper. Invertibility follows from Zariski charts and clause 1 of lem-cbc-proetale-stalk-conservative. Reversing the six arrows of kappa^rel gives exactly T_{f,g}, which is Rc_*(e)∘Omega, i.e. kappa_c. The direct-sum identity is checked locally via Kunneth (iii) and degree-zero Hom-gluing. Edge cases r=0, a rank-0 summand, empty base, nonreduced base and nonflat g all hold. Zariski charts plus compact base change in place of the blueprint's geometric stalks is the mechanism of unit Step 7. Accepted tool uses: sk-thm-sf-kunneth-relative and lem-pur-degree-zero-derived-map-gluing; the other declared ones are on the route anyway. No duplicate: thm-amb-vector-bundle-purity, cor-pur-vector-bundle-purity and pur9-def-thom-class state different maps. Batch-5 check: lem-pod-etale-stalk-tensor-scalar only says stalks commute with tensor, a generic fact. Without this item it is already in the batch-5 closure via def-coefficient-twists-detailed. sk-thm-sf-kunneth-relative, fix-prop-coherence and thm-pod-finite-reduction are also already in that closure without this item, through non-trace, non-PD paths (sk-thm-sf-package, prop-functor-package). Relative Künneth is given by neither assumption and is used only to name kappa_B, so both flagged citations are outside the assumptions. Wrote review.md; no fixes."
+ }
 }

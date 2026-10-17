@@ -2,7 +2,7 @@
  "id": "lem-zl-bertini-sections",
  "kind": "statement",
  "title": "Sections vanishing on a closed subscheme",
- "statement": "Let $k$ be a field, $Y$ a proper $k$-scheme, $\\mathcal L$ an ample invertible sheaf on $Y$, and $Z\\subset Y$ a closed subscheme. For all sufficiently large $n$, the kernel $V_n$ of $\\Gamma(Y,\\mathcal L^{\\otimes n})\\to\\Gamma(Z,\\mathcal L^{\\otimes n}|_Z)$ generates $\\mathcal L^{\\otimes n}$ on $Y\\setminus Z$, and the associated morphism $Y\\setminus Z\\to\\mathbf P(V_n)$ is an immersion.\nHere properness, ampleness, invertibility, and schemes are understood in [def-weil-pbc-scheme-conventions], [def-sc-ample], [def-sc-invertible-module], with generation by sections as in [def-weil-pbc-generating-sections] and immersions as in [def-weil-scheme-morphism-properties].",
+ "statement": "Let $k$ be a field, $Y$ a proper $k$-scheme, $\\mathcal L$ an ample invertible sheaf on $Y$, and $Z\\subset Y$ a closed subscheme. For all sufficiently large $n$, the kernel $V_n$ of $\\Gamma(Y,\\mathcal L^{\\otimes n})\\to\\Gamma(Z,\\mathcal L^{\\otimes n}|_Z)$ generates $\\mathcal L^{\\otimes n}$ on $Y\\setminus Z$, and the associated morphism $Y\\setminus Z\\to\\mathbf P(V_n)$ is an immersion.\nHere properness, ampleness, invertibility, and schemes are understood in [def-weil-pbc-scheme-conventions], [def-sc-ample], [def-sc-invertible-module], with generation by sections as in [def-weil-pbc-generating-sections], the associated morphism to $\\mathbf P(V_n)$ (over $S=\\operatorname{Spec}k$, with coordinates indexed by a basis of $V_n$) as in [def-weil-pbc-morphism-to-projective-space-by-sections], and immersions as in [def-weil-scheme-morphism-properties].",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Tag 0FD5, lemma-generate-over-complement"
@@ -12,11 +12,170 @@
   "def-sc-invertible-module",
   "def-sc-ample",
   "def-weil-pbc-generating-sections",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-morphism-to-projective-space-by-sections"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U=Y\\setminus Z$. By [def-sc-ample], choose $r\\ge1$ and a closed immersion $j:Y\\hookrightarrow\\mathbf P^N_k$ with $\\mathcal L^{\\otimes r}\\cong j^*\\mathcal O(1)$. The current blueprint definition permits any such embedding. By [lem-weil-pbc-projective-ample-invertible], $\\mathcal L^{\\otimes r}$ is absolutely ample. It follows directly from [def-weil-pbc-ample-invertible-module] that $\\mathcal L$ is absolutely ample: a section of $(\\mathcal L^{\\otimes r})^{\\otimes d}$ is a section of $\\mathcal L^{\\otimes rd}$ with exactly the same affine nonvanishing open, and the quasi-compactness condition is unchanged. Tensor reassociation is checked on local rank-one bases.",
+   "uses": [
+    "def-sc-ample",
+    "lem-weil-pbc-projective-ample-invertible",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD5, lemma-generate-over-complement, proof"
+   }
+  },
+  {
+   "text": "The field $k$ is Noetherian (its only ideals are $0,k$), and $\\operatorname{Spec}k$ is the one-point affine Noetherian scheme. Properness implies finite type by [def-weil-proper-morphism], so [lem-weil-pbc-finite-type-over-noetherian] makes $Y$ Noetherian. Let $\\mathcal I$ be the quasi-coherent ideal of $Z$ given by [def-sbc-closed-immersion-ideal-sheaf]. The sheaf $\\mathcal O_Y$ and each $\\mathcal L^{\\otimes d}$, $d\\ge0$, are quasi-coherent of finite type: invertibility means locally free of rank one [def-sc-invertible-module], and powers are invertible [def-weil-pbc-ample-invertible-module]. They are coherent by [pqf-lem-coherent-ft-locnoeth]. Apply part (2) of [lem-weil-pbc-coherent-kernel-cokernel-locnoeth] to the quasi-coherent submodule $\\mathcal I\\subset\\mathcal O_Y$; thus $\\mathcal I$ is coherent and, by the same equivalence, finite type.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sc-invertible-module",
+    "def-weil-pbc-ample-invertible-module",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD5, lemma-generate-over-complement, proof"
+   }
+  },
+  {
+   "text": "For each $d\\ge0$ identify $V_d$ with $\\Gamma(Y,\\mathcal I\\otimes\\mathcal L^{\\otimes d})$. Indeed, on an open trivializing $\\mathcal L^{\\otimes d}$, a section is $a e$, and its restriction to $Z$ is zero exactly when $a$ lies in the ideal of $Z$ [def-sbc-closed-immersion-ideal-sheaf]. Thus multiplication embeds $\\mathcal I\\otimes\\mathcal L^{\\otimes d}$ into $\\mathcal L^{\\otimes d}$ with precisely the restriction kernel; these descriptions agree on overlaps, hence also on global sections. On opens disjoint from $Z$, that ideal is $\\mathcal O$ since restriction to the empty scheme is zero. Consequently $(\\mathcal I\\otimes\\mathcal L^{\\otimes d})|_U=\\mathcal L^{\\otimes d}|_U$. This uses only the local free rank-one description [def-sc-invertible-module], not exactness of tensoring with an arbitrary module.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD5, lemma-generate-over-complement, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-coherent-twist-global-generation] with the absolutely ample $\\mathcal L$ and the finite type quasi-coherent $\\mathcal I$. Choose $a\\ge0$ such that $\\mathcal I\\otimes\\mathcal L^{\\otimes d}$ is generated by finitely many global sections for every $d\\ge a$. Restricting its evaluation surjection to $U$ and using step 3 shows that $V_d$ generates $\\mathcal L^{\\otimes d}|_U$. Also [lem-pc-coherent-hi], with $f:Y\\to\\operatorname{Spec}k$, coherent $\\mathcal L^{\\otimes d}$ and $i=0$, gives finite-dimensional $\\Gamma(Y,\\mathcal L^{\\otimes d})$. Its subspace $V_d$ is finite-dimensional.",
+   "uses": [
+    "lem-weil-pbc-coherent-twist-global-generation",
+    "lem-pc-coherent-hi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD5, lemma-generate-over-complement, proof"
+   }
+  },
+  {
+   "text": "For $n\\ge a$, choose a basis of $V_n$ and restrict its sections to $U$. They still generate: every section in $V_n$ is a constant linear combination of the basis, so their stalk spans coincide. The associated $k$-morphism $\\varphi_n:U\\to\\mathbf P(V_n)$ is [def-weil-pbc-morphism-to-projective-space-by-sections], where projective coordinates are indexed by sections, as in Tag 0FD5. A basis change is justified by [lem-weil-pbc-projective-space-functor-of-points]: if $b_i=\\sum_j a_{ij}c_j$, the linear forms $\\sum_j a_{ij}T_j$ generate $\\mathcal O(1)$ because the inverse matrix expresses every $T_j$ in their span. They therefore define a projective coordinate map. The inverse matrix defines its inverse, since their composites pull back every $T_i$ to itself and uniqueness identifies the composites with identity. The same uniqueness rewrites $\\varphi_n$ in the new basis. Thus any nonzero $s\\in V_n$ may be taken as a basis coordinate. Write $D(s)$ for that standard affine chart. By [lem-weil-pbc-projective-morphism-chart-preimage], $\\varphi_n^{-1}(D(s))=Y_s$ and every ratio $v/s$, $v\\in V_n$, pulls back to the ratio of the corresponding sections. The assertion for arbitrary $v$ follows by its linear expression in that basis. If $U$ is empty, use the unique morphism from the empty scheme (including $\\mathbf P(0)=\\varnothing$); it is an immersion since it identifies the empty closed subscheme. Hence assume $U$ nonempty below, so $V_n\\ne0$.",
+   "uses": [
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "lem-weil-pbc-projective-morphism-chart-preimage",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-projective-space-functor-of-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD5, lemma-generate-over-complement, proof"
+   }
+  },
+  {
+   "text": "Put $n_0=a+r$ and fix $n\\ge n_0$. Let $t_0,\\ldots,t_N\\in\\Gamma(Y,\\mathcal L^{\\otimes r})$ be the pullbacks by $j$ of the projective coordinates. Their nonvanishing opens cover $Y$ by [lem-weil-pbc-projective-space-standard-charts]. For any $x\\in U$, choose $s_1\\in V_{n-r}$ nonzero at $x$, using step 4 and the generation criterion [lem-weil-pbc-invertible-generating-sections-fibre]; choose $j_0$ with $t_{j_0}(x)\\ne0$. For each $i$, put $v_i=s_1\\otimes t_i$. Its restriction to $Z$ is zero, so $v_i\\in V_n$. Tensor products and their restrictions are compatible by [lem-weil-pbc-invertible-pullback-tensor](2). Put $s=v_{j_0}$. The fibre formula in part (3) of that node shows $s(x)\\ne0$ and $Y_s=Y_{s_1}\\cap Y_{t_{j_0}}$: a tensor of two vectors in one-dimensional vector spaces over a field is nonzero exactly when both vectors are nonzero. In particular $Y_s\\subset U$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-invertible-generating-sections-fibre",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD5, lemma-generate-over-complement, proof"
+   }
+  },
+  {
+   "text": "Work with this pair $(s_1,t_{j_0})$. On $D(s)\\subset\\mathbf P(V_n)$, the ratios $v_i/s$ are regular functions by the standard-chart description [lem-weil-pbc-projective-space-standard-charts]: expand $v_i$ in a basis of $V_n$ containing $s$, so each ratio is a linear combination of chart coordinates and $s/s=1$. The target chart $D(T_{j_0})\\subset\\mathbf P^N_k$ has polynomial coordinate ring $k[T_i/T_{j_0}:i\\ne j_0]$ by part (c) of that same node. Send $T_i/T_{j_0}$ to $v_i/s$. The universal property of a polynomial ring extends these assignments uniquely to a $k$-algebra homomorphism. By [lem-weil-pbc-morphism-into-affine-scheme], it defines a $k$-morphism $q:D(s)\\to D(T_{j_0})$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD5, lemma-generate-over-complement, proof"
+   }
+  },
+  {
+   "text": "Let $h:Y_s\\to D(s)$ be the restriction of $\\varphi_n$. By [lem-weil-pbc-projective-morphism-chart-preimage], the pullback by $qh$ of $T_i/T_{j_0}$ equals $(s_1\\otimes t_i)/(s_1\\otimes t_{j_0})=t_i/t_{j_0}$. For the equality, trivialize both invertible factors over $Y_s$ by $s_1$ and $t_{j_0}$; the equality is then $1\\cdot c/1=c$. By [lem-weil-pbc-projective-space-standard-charts](b), these are exactly the coordinate pullbacks of $j|_{Y_s}:Y_s\\to D(T_{j_0})$. Both maps are over $k$, and the coordinates generate the polynomial $k$-algebra. The bijection [lem-weil-pbc-morphism-into-affine-scheme] therefore gives $qh=j|_{Y_s}$.",
+   "uses": [
+    "lem-weil-pbc-projective-morphism-chart-preimage",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD5, lemma-generate-over-complement, proof"
+   }
+  },
+  {
+   "text": "The map $j:Y_{t_{j_0}}\\to D(T_{j_0})$ is a closed immersion: it is the base change of the fixed closed immersion $j$ along the chart inclusion, by [lem-weil-pbc-proper-fp-permanence](b). The inclusion $Y_s\\to Y_{t_{j_0}}$ is an open immersion. Open and closed immersions are immersions by [def-weil-closed-immersion] (use an identity for the other factor); composition preserves immersions by [lem-weil-pbc-proper-fp-permanence](e). Hence $qh=j|_{Y_s}$ is an immersion. Apply [lem-zl-immersion-cancellation] to $h$ and $q$ to conclude that $h$ is an immersion. This avoids adding a separate affine-ring factorization lemma.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-closed-immersion",
+    "lem-zl-immersion-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD5, lemma-generate-over-complement, proof"
+   }
+  },
+  {
+   "text": "For every $x\\in U$ step 6 produced an $s=s_1\\otimes t_{j_0}$ with $\\varphi_n(x)\\in D(s)$. Thus the family of these target opens covers $\\varphi_n(U)$. Steps 5 and 9 say that on the full inverse image of every such open the induced map to it is an immersion. Apply [lem-zl-immersion-near-image-locality] to conclude that $\\varphi_n$ is an immersion. Step 4 already gives generation, and $n\\ge a+r$ guarantees both $n\\ge a$ and $n-r\\ge a$. This proves both assertions for every $n\\ge n_0$.",
+   "uses": [
+    "lem-zl-immersion-near-image-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD5, lemma-generate-over-complement, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ample",
+  "lem-weil-pbc-projective-ample-invertible",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sc-invertible-module",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-coherent-twist-global-generation",
+  "lem-pc-coherent-hi",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-weil-pbc-projective-morphism-chart-preimage",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-zl-immersion-cancellation",
+  "lem-zl-immersion-near-image-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD5, lemma-generate-over-complement, proof; fixed very ample power and chart cancellation version of its product-of-sections argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +204,45 @@
    "results": "No matching theorem; generic zero-locus declarations only.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ample|globally.generated|vanishing.*section",
+   "results": "10 hits; recorded top results: Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean. Searched AlgebraicGeometry. None asserts both eventual generation and the complement immersion for the prescribed closed subscheme.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of high powers of an ample invertible sheaf vanishing on a closed subscheme give an immersion of its complement",
+   "results": "8 hits; recorded top results: AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion, AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway, AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact. None asserts both eventual generation and the complement immersion for the prescribed closed subscheme.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion",
+   "results": "12 hits; recorded top results: AlgebraicGeometry.IsImmersion.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsImmersion, AlgebraicGeometry.Scheme.Hom.coborderRange, AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion, AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion. None asserts both eventual generation and the complement immersion for the prescribed closed subscheme.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear system of high powers of an ample line bundle vanishing on a closed subscheme of a proper scheme generates on the complement and defines an immersion",
+   "results": "8 hits; recorded top results: AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionSubschemeι, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal, AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap, AlgebraicGeometry.Scheme.Hom.liftCoborder, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover. None asserts both eventual generation and the complement immersion for the prescribed closed subscheme.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample linear system with prescribed base scheme eventually separates points and tangent vectors on the open complement",
+   "results": "8 hits; recorded top results: AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop, AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.Proj.affineOpenCover. None asserts both eventual generation and the complement immersion for the prescribed closed subscheme.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-bertini-finite-cover-curve",
@@ -65,5 +259,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-bertini-sections",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0FD5 using coherent ideal twists, finite section spaces, products with coordinates of one fixed very ample power, and target-chart cancellation. Reused existing global-generation/coherence/projective-coordinate tools and added only the two general Mathlib immersion leaves. Checked the source, all cited statements, duplicate tags, current blueprint, Lean source and edge cases. No statement change.",
+  "blueprint": "lem-zl-bertini-finite-cover-curve, proof first geometric-input paragraph and the following paragraph applying Tag 0FD5 on the complement of S. These steps supply precisely its cited sections-generating-and-immersion input.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-ample-invertible",
+    "why": "Generic A closed immersion into projective space supplies an ample invertible sheaf input used at the indicated proof step; this unit invokes Stacks 0FD5 and does not restate this scheme/module/projective-coordinate tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) input used at the indicated proof step; this unit invokes Stacks 0FD5 and does not restate this scheme/module/projective-coordinate tool."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic Coherence on locally Noetherian schemes input used at the indicated proof step; this unit invokes Stacks 0FD5 and does not restate this scheme/module/projective-coordinate tool."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Generic Coherent modules on a locally Noetherian scheme: kernels, cokernels, sums, quasi-coherent sub- and quotient modules input used at the indicated proof step; this unit invokes Stacks 0FD5 and does not restate this scheme/module/projective-coordinate tool."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-twist-global-generation",
+    "why": "Generic A sufficiently positive ample twist of a coherent module is globally generated input used at the indicated proof step; this unit invokes Stacks 0FD5 and does not restate this scheme/module/projective-coordinate tool."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Generic Coherence and finiteness of higher direct images input used at the indicated proof step; this unit invokes Stacks 0FD5 and does not restate this scheme/module/projective-coordinate tool."
+   },
+   {
+    "node": "lem-weil-pbc-projective-morphism-chart-preimage",
+    "why": "Generic Preimage of a standard chart under a morphism to projective space given by sections input used at the indicated proof step; this unit invokes Stacks 0FD5 and does not restate this scheme/module/projective-coordinate tool."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic Standard charts and coordinate sections of projective space over a scheme input used at the indicated proof step; this unit invokes Stacks 0FD5 and does not restate this scheme/module/projective-coordinate tool."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-generating-sections-fibre",
+    "why": "Generic Generating sections of an invertible module: the fibre criterion input used at the indicated proof step; this unit invokes Stacks 0FD5 and does not restate this scheme/module/projective-coordinate tool."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic Pullback and tensor product of invertible modules, and their fibres input used at the indicated proof step; this unit invokes Stacks 0FD5 and does not restate this scheme/module/projective-coordinate tool."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-into-affine-scheme",
+    "why": "Generic Morphisms into an affine scheme are ring maps on global sections input used at the indicated proof step; this unit invokes Stacks 0FD5 and does not restate this scheme/module/projective-coordinate tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic Permanence of proper, separated, finite type, finitely presented morphisms and of immersions input used at the indicated proof step; this unit invokes Stacks 0FD5 and does not restate this scheme/module/projective-coordinate tool."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-functor-of-points",
+    "why": "Existence and uniqueness for projective coordinate maps justify the basis change; this is a generic projective-space tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-coherent-twist-global-generation",
+  "lem-pc-coherent-hi",
+  "lem-weil-pbc-projective-morphism-chart-preimage",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-projective-space-functor-of-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-14f666eee",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-14f666eee (reviewer sub-agent of L); spot-checked: I read the delivery in full. The item restates Stacks 0FD5 (varieties.tex lemma-generate-over-complement, statement and whole proof) with every hypothesis and the full conclusion, not weakened. Steps 1-10 are correct and each one uses only what its cited nodes state. def-sc-ample (current update) gives a closed immersion j with j^*O(1)=L^r. lem-weil-pbc-projective-ample-invertible makes L^r absolutely ample, which passes to L. Y is Noetherian, and the ideal I is coherent by kernel-cokernel (2). The twist global-generation lemma gives generation on U, and lem-pc-coherent-hi gives finite dimension. s_1 in V_{n-r} with n>=a+r, and Y_s=Y_{s_1}∩Y_{t_j0}⊂U by the tensor-fibre formula. q is built from polynomial chart coordinates, and qh=j|_{Y_s} via the bijection for maps into affine schemes. Cancellation (07RK(1)) makes h an immersion, and locality over target opens (0FCZ) finishes. The worker's source-error note is a real Stacks typo (V_1 should be V_{n_1}), and the proof avoids it. Edge cases checked: Y empty, Z empty, Z=Y with V_n=0, nonreduced Z, finite or imperfect k. New node lem-zl-immersion-cancellation is an exact match for Mathlib IsImmersion.of_comp (Immersion.lean:218, no hypothesis on g). New node lem-zl-immersion-near-image-locality is a one-line specialization of IsZariskiLocalAtTarget.of_range_subset_iSup (Basic.lean:169), using the instance at Immersion.lean:111 and comp at 146; all line numbers verified. Both new nodes are statement-only and self-contained, with correct blueprint from/via. I found no duplicates: lem-cbc-qc-immersion-cancellation, lem-weil-pbc-closed-immersion-cancellation, lem-weil-pbc-closed-finite-etale-zariski-local and the immersion-gluing nodes all differ, and a blueprint grep found no statement of either fact. Neither new node restates a clause of the item. The route matches the second paragraph of the parent lem-zl-bertini-finite-cover-curve (its 0FD5 input); no SGA is used, and the target base-change check does not apply. I accept all 13 declared tool_uses as generic tools. Fix (B3): the statement now cites def-weil-pbc-morphism-to-projective-space-by-sections for the associated morphism to P(V_n), and that id is added to stmt_deps, in fixes/dag/nodes/sec-deligne-laumon-general/lem-zl-bertini-sections.json; the mathematics is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

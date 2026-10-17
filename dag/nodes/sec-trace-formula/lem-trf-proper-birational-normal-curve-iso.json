@@ -13,11 +13,42 @@
   "def-weil-proper-morphism",
   "def-pc-integral-scheme",
   "def-kun-topological-krull-dimension",
-  "def-weil-pbc-normal-ring"
+  "def-weil-pbc-normal-ring",
+  "def-sc-function-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-proper-birational-curve-finite] to the given proper dominant morphism. Its hypotheses hold because $C$ and $E$ are integral separated finite-type $k$-schemes of dimension $1$, and the stated function-field isomorphism is exactly the birational hypothesis. The proof of Tag 0AB7 applies its codimension-one finiteness criterion at every point of the one-dimensional Noetherian target $C$; finiteness is local on the target, so $p$ is finite.",
+   "uses": [
+    "lem-trf-proper-birational-curve-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB7 (lemma-finite-in-codim-1), hypotheses and proof."
+   }
+  },
+  {
+   "text": "Now [lem-trf-finite-birational-normal-iso] applies to $p$: the finiteness is Step 1, the function-field isomorphism is part of the item hypothesis, and the assumption that every local ring of $C$ is an integrally closed domain is precisely normality of the target in that node. It follows that $p$ is an isomorphism. The argument uses no normality of $E$ and no perfection assumption on $k$.",
+   "uses": [
+    "lem-trf-finite-birational-normal-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1 (lemma-finite-birational-over-normal)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-proper-birational-curve-finite",
+  "lem-trf-finite-birational-normal-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0AB7 and 0BFP, with the equivalent final application of Tag 0AB1 in morphisms.tex."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,7 +80,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-dejong-relative-marked-semistable",
@@ -73,5 +104,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-proper-birational-normal-curve-iso",
+  "worker": "stage1",
+  "summary": "Split the proof into the Stacks codimension-one finiteness result for a proper birational morphism of integral curves and the finite-birational-over-normal isomorphism lemma. The two facts were searched in the DAG and Mathlib before creating statement-only nodes; the item hypotheses and the absence of normality or perfection assumptions were checked against Tags 0AB7 and 0AB1.",
+  "blueprint": "Realizes the projective-preparation sentence in the ancestor proof: the Chow modification's generic curve map is finite by Tag 0AB7 and then an isomorphism over the normal target by Tag 0AB1."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-a4764da6d",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-a4764da6d (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes and every cited definition. Sources checked: Stacks Tag 0AB7 (varieties.tex l.3268, lemma-finite-in-codim-1), Tag 0BFP (l.3300) and Tag 0AB1 (morphisms.tex l.14630, lemma-finite-birational-over-normal). Step 1 applies lem-trf-proper-birational-curve-finite, which is true by 0AB7 condition (1): C has Noetherian local rings of dimension at most 1, dominance sends the generic point of E to the generic point of C, the function-field extension is an isomorphism, and finiteness is local on the target. Step 2 applies lem-trf-finite-birational-normal-iso, which is true by 0AB1: on affine opens the ring inclusion keeps the fraction field, the cover is integral and the target ring is integrally closed. Every hypothesis matches the item; neither step uses normality of E or a perfect field. Small cases: identity of A^1; the open immersion of A^1 minus a point (not proper, not finite); the normalization of a cusp (shows the normality hypothesis is needed); blow-up of A^2 (dimension 2, excluded). Duplicate candidates read and judged different: pqf-lem-proper-lqf-finite, lem-sbc-finite-normal-dense-open-iso, lem-sbc-normalization-dense-open, lem-sbc-normal-dense-open-integral-section, lem-sc-normalization-properties. Neither new node restates a clause of the item, and there is no cycle. All three nodes stay in unit sk-i-curve-zero, so there are no tool_uses. No SGA source is used. The item statement is unchanged from base. Fix (B9, brief section 7): in both new nodes, blueprint.from.via left out the item, which is not a blueprint node; the corrected whole files in fixes/dag/nodes/sec-trace-formula/ put lem-trf-proper-birational-normal-curve-iso first in via.; 2 file(s) fixed by the reviewer"
  }
 }
