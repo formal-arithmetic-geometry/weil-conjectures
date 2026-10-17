@@ -75,7 +75,8 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {I : Ideal Λ}
 section Integral
 
 variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ ⧸ I)]
-  {k : Type u} [Field k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))] {X Y : Scheme.{u}}
+  {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
+  {X Y : Scheme.{u}}
 
 /-- Blueprint `lem-coef-integral-compact-support`: Integral compact support.
 
@@ -105,15 +106,16 @@ theorem boundedConstructibleIntegral_rightDerivedLowerShriek {ϖ : Λ}
           ((reductionModIdeal Λ Y (I ^ (n + 1))).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)) := by
   refine ⟨sorry, fun n ↦ ?_, sorry⟩
   subst hI
-  have := isIso_rightDerivedLowerShriekReductionModIdealMap_span_pow hϖ n
-    (HasCompactification.compactification f)
+  have := isIso_rightDerivedLowerShriekReductionModIdealMap_span_pow
+    (HasCompactification.compactification f) hϖ n
   infer_instance
 
 variable [hϖI : Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})]
 
 variable (I) in
 /-- The compact-support direct image `Rf_! : Dᵇc(X, Λ) ⥤ Dᵇc(Y, Λ)` at the integral stage, the
-restriction of `Rf_!` (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerShriek`,
+restriction of `Rf_!`
+(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerShriek`,
 blueprint `lem-coef-integral-compact-support`). -/
 noncomputable abbrev boundedConstructibleIntegralRightDerivedLowerShriek (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY]
@@ -127,7 +129,8 @@ noncomputable abbrev boundedConstructibleIntegralRightDerivedLowerShriek (aX : X
 
 variable (I) in
 /-- The exceptional inverse image `Rf^! : Dᵇc(Y, Λ) ⥤ Dᵇc(X, Λ)` at the integral stage, the
-restriction of `Rf^!` (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`,
+restriction of `Rf^!`
+(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`,
 blueprint `prop-coef-integral-exceptional-adjoint`). -/
 noncomputable abbrev boundedConstructibleIntegralExceptionalInverseImage
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
@@ -152,8 +155,95 @@ noncomputable def boundedConstructibleIntegralLowerShriekUpperShriekAdjunction
       boundedConstructibleIntegralExceptionalInverseImage I aX aY f hf :=
   (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).restrictFullyFaithful
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _) (Iso.refl _) (Iso.refl _)
-
 end Integral
+
+section Rational
+
+variable (M : Submonoid Λ) [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ]
+  [Finite (Λ ⧸ I)] [hϖI : Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})]
+  {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
+  {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
+  [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
+  [HasCompactification aX] [HasCompactification aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
+  [QuasiCompact f] [HasCompactification f]
+
+/-- The exceptional inverse image `Rf^!` is triangulated, being right adjoint to the triangulated
+`Rf_!` (`AlgebraicGeometry.Etale.isTriangulated_rightDerivedUpperShriek`). -/
+local instance {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
+    (R(f)^![ModuleCat.{u + 1} Λ]).IsTriangulated :=
+  isTriangulated_rightDerivedUpperShriek f
+
+set_option hygiene false in
+/-- The rational stage `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[M⁻¹]`. -/
+local notation "𝐃ᵇc(" X ")" =>
+  Rationalization M (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory
+
+variable (I) in
+/-- The compact-support direct image `Rf_{!,E} : Dᵇc(X, E) ⥤ Dᵇc(Y, E)` at the rational stage,
+induced by the integral `Rf_!`
+(`AlgebraicGeometry.Etale.boundedConstructibleIntegralRightDerivedLowerShriek`). -/
+noncomputable abbrev boundedConstructibleRationalRightDerivedLowerShriek : 𝐃ᵇc(X) ⥤ 𝐃ᵇc(Y) :=
+  Rationalization.map M (boundedConstructibleIntegralRightDerivedLowerShriek I aX aY f hf)
+
+variable (I) in
+/-- The exceptional inverse image `Rf_E^! : Dᵇc(Y, E) ⥤ Dᵇc(X, E)` at the rational stage, induced
+by the integral `Rf^!` (`AlgebraicGeometry.Etale.boundedConstructibleIntegralExceptionalInverseImage`). -/
+noncomputable abbrev boundedConstructibleRationalExceptionalInverseImage : 𝐃ᵇc(Y) ⥤ 𝐃ᵇc(X) :=
+  Rationalization.map M (boundedConstructibleIntegralExceptionalInverseImage I aX aY f hf)
+
+/-- Blueprint `lem-coef-rational-operations`: Identification with the rational internal Hom and
+exceptional inverse image, the adjunction.
+
+On the rationalized constructible categories `Dᵇc(-, E) = Dᵇc(-, 𝒪_E)[M⁻¹]`, the exceptional
+inverse image `Rf_E^!` obtained by coefficient passage from the integral `Rf^!` is right adjoint
+to the compact-support direct image `Rf_{!,E}`, with the localized units and counits: this is the
+localization (`CategoryTheory.Rationalization.mapAdjunction`) of the integral adjunction
+`AlgebraicGeometry.Etale.boundedConstructibleIntegralLowerShriekUpperShriekAdjunction`
+(`prop-coef-integral-exceptional-adjoint`). -/
+noncomputable def boundedConstructibleRationalLowerShriekUpperShriekAdjunction :
+    boundedConstructibleRationalRightDerivedLowerShriek M I aX aY f hf ⊣
+      boundedConstructibleRationalExceptionalInverseImage M I aX aY f hf :=
+  Rationalization.mapAdjunction M
+    (boundedConstructibleIntegralLowerShriekUpperShriekAdjunction (I := I) aX aY f hf)
+
+/-- Blueprint `lem-coef-rational-operations`: Identification with the rational internal Hom and
+exceptional inverse image, the dual formula `Rf_E^! M ≅ 𝔻_{X,E} f^* 𝔻_{Y,E} M`.
+
+Let `ω_X`, `ω_Y` be the integral dualizing complexes, the homotopy limits of the towers
+`n ↦ Ra^!(Λ ⧸ Iⁿ)`, with `ω_X ∈ Dᵇc(X, 𝒪_E)`, so that the integral Verdier dual is
+`𝔻_X = RHom(-, ω_X)` and the rational one is its image `𝔻_{X,E}`. For `L ∈ Dᵇc(Y, 𝒪_E)` and a
+completed pullback `N ∈ Dᵇc(X, 𝒪_E)` of `𝔻_Y L` (a morphism `Lf^* 𝔻_Y L ⟶ N` inducing
+isomorphisms on all reductions), the rational exceptional inverse image of the image of `L` in
+`Dᵇc(Y, E)` is the image of `𝔻_X N` in `Dᵇc(X, E)`. It is the image of the integral formula of
+`prop-coef-integral-exceptional-adjoint`
+(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`) under the
+localization functor; every object of `Dᵇc(Y, E)` is the image of some `L`. -/
+theorem nonempty_iso_boundedConstructibleRationalExceptionalInverseImage
+    (L : (DerivedCategory.boundedConstructibleIntegral I Y).FullSubcategory)
+    (ωX : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
+      R(aX)^![ModuleCat.{u + 1} Λ])) (hωX : Pretriangulated.IsHomotopyLimit ωX)
+    (hωXc : DerivedCategory.boundedConstructibleIntegral I X ωX.pt)
+    (ωY : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
+      R(aY)^![ModuleCat.{u + 1} Λ])) (hωY : Pretriangulated.IsHomotopyLimit ωY)
+    (N : (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory)
+    (φ : (L((f)^*[ModuleCat.{u + 1} Λ])).obj
+      (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L.obj)).obj ωY.pt) ⟶ N.obj)
+    (hφ : ∀ n : ℕ, IsIso ((reductionModIdeal Λ X (I ^ n)).map φ)) :
+    ∃ hD : DerivedCategory.boundedConstructibleIntegral I X
+        (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op N.obj)).obj ωX.pt),
+      Nonempty ((boundedConstructibleRationalExceptionalInverseImage M I aX aY f hf).obj
+          ((Rationalization.Q M _).obj L) ≅
+        (Rationalization.Q M _).obj ⟨_, hD⟩) := by
+  obtain ⟨ϖ, hϖ, hI⟩ := hϖI.out
+  have hD := (boundedConstructibleIntegral_derivedHom I hϖ hI aX N.property hωXc).1
+  refine ⟨hD, ?_⟩
+  have hc := L.property.1.map (R(f)^![ModuleCat.{u + 1} Λ])
+  obtain ⟨e⟩ := (boundedConstructibleIntegral_exceptionalAdjoint I hϖ hI aX aY f hf L.property
+    hc).2.2.1 ωX hωX ωY hωY N.obj φ N.property.1 hφ
+  exact ⟨(Rationalization.mapFac M _).app L ≪≫
+    (Rationalization.Q M _).mapIso (ObjectProperty.isoMk _ e)⟩
+
+end Rational
 
 end Etale
 
