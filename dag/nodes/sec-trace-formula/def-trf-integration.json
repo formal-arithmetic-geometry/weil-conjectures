@@ -1,69 +1,181 @@
 {
-  "id": "def-trf-integration",
-  "blueprint": {
-    "is": "def-trf-integration",
-    "from": null,
-    "same_as": null
+ "id": "def-trf-integration",
+ "blueprint": {
+  "is": "def-trf-integration",
+  "from": null,
+  "same_as": [
+   "sk-d-integral"
+  ]
+ },
+ "kind": "definition",
+ "title": "Integration along the structure morphism",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber] and the coefficient conventions [def-trf-coefficient-conventions]: $k$ is the fixed algebraic closure of $k_0$, $\\ell\\ne\\operatorname{char}(k)$, $E/\\mathbf Q_\\ell$ is finite, $n\\geq1$, $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$, and $s=\\operatorname{Spec}k$. Let $a=a_\\beta:\\beta\\to s$ be a separated finite-type proper structure morphism [def-weil-scheme-morphism-properties], exceptionally admissible in the constructible sense of [def-trf-admissibility]. For $T\\in\\{\\beta,s\\}$, work on the small pro-etale sites with $D(T,A)=D(T_{\\mathrm{proet}},A_T)$ and constant coefficient objects $A_T$ placed in degree zero, as in the finite-level clause of [def-weil-derived-pullback-tensor-hom]. Specialize [def-trf-dualizing-complex] to $Y=\\beta$ and put $\\omega_{\\beta,A}=Ra^!A_s$, using its specified constructible exceptional inverse image on the same small pro-etale coefficient categories. Thus the $Ra^!$ defining $\\omega_{\\beta,A}$ is precisely the right adjoint in the constructible adjunction specified by [def-trf-admissibility]. The constant object is constructible [lem-weil-constant-coefficient-objects-constructible] and has Tor amplitude $[0,0]$, since $A_T\\otimes_A^L M=M$; thus it lies in $D^b_{ctf}(T,A)$ [def-weil-finite-tor-amplitude], and exceptional admissibility places $\\omega_{\\beta,A}$ in the same subcategory. This is the full subcategory specified by [def-weil-finite-tor-amplitude], so every morphism $\\tau:A_\\beta\\to\\omega_{\\beta,A}$ in $D(\\beta,A)$ is also a morphism in $D^b_{ctf}(\\beta,A)$, to which the restricted functor $Ra_!$ applies. In particular both inputs are bounded and of etale origin by [lem-sf-proetale-constructible-origin], within the domain of the compactification comparisons below.\n\nUse the ordinary derived direct image $Ra_*$ [def-weil-derived-direct-image] and the adjunction $La^*\\dashv Ra_*$ of [def-weil-pbc-proetale-operations]. The canonical identification $La^*A_s\\simeq A_\\beta$ is the finite-level constant-ring pullback identification of [def-weil-derived-pullback-tensor-hom]. Denote the resulting unit map by\n$$\n\\eta_\\beta:A_s\\longrightarrow Ra_*A_\\beta.\n$$\nLet $P_a:Ra_*\\xrightarrow{\\sim}Ra_!$ be the proper identification, oriented as displayed. Concretely, take the compactification $(\\operatorname{id}_\\beta,a)$ in [def-compact-support-direct-image-detailed]. Its candidate is $Ra_*(\\operatorname{id}_\\beta)_!=Ra_*$: the extension-by-zero construction [def-weil-extension-by-zero] is the identity when the open immersion is the identity, since every object factors through it and the presheaf being sheafified is already the given sheaf. Compare this candidate to the chosen $Ra_!$ using the natural, common-refinement-independent comparisons of [prop-compactification-coherence-detailed]. This defines $P_a$ on the bounded etale-origin domain just specified.\n\nWrite $R\\Gamma(s,-)$ for termwise sections on the derived category of $A_s$-modules, which is defined because sections are exact by [lem-weil-point-proetale-sections-exact]. On $s$, the constant coefficient sheaf has sections $A$, so $R\\Gamma(s,A_s)=A[0]$. For the proper $\\beta$, use $P_a$ to identify ordinary and compact-support coefficient complexes, and write\n$$\nR\\Gamma(\\beta,K)=R\\Gamma(s,Ra_!K)\\simeq R\\Gamma(s,Ra_*K)\n\\qquad(K=A_\\beta,\\omega_{\\beta,A}).\n$$\nThe *integration* (the trace along $a_\\beta$) is the map\n$$\n\\int_\\beta:\\operatorname{Hom}_{D(\\beta,A)}(A_\\beta,\\omega_{\\beta,A})\\longrightarrow A\n$$\nwhich sends $\\tau:A_\\beta\\to\\omega_{\\beta,A}$ to the scalar represented by the following composite in $D(A\\text{-}\\mathrm{Mod})$:\n$$\n\\begin{aligned}\nA[0]=R\\Gamma(s,A_s)\n&\\xrightarrow{R\\Gamma(s,\\eta_\\beta)}R\\Gamma(s,Ra_*A_\\beta)\n\\xrightarrow{R\\Gamma(s,P_a(A_\\beta))}R\\Gamma(s,Ra_!A_\\beta)\\\\\n&\\xrightarrow{R\\Gamma(s,Ra_!\\tau)}R\\Gamma(s,Ra_!\\omega_{\\beta,A})\n=R\\Gamma(s,Ra_!Ra^!A_s)\n\\xrightarrow{R\\Gamma(s,\\varepsilon_a(A_s))}R\\Gamma(s,A_s)=A[0].\n\\end{aligned}\n$$\nHere $\\varepsilon_a(A_s):Ra_!Ra^!A_s\\to A_s$ is the counit of the specified constructible adjunction $Ra_!\\dashv Ra^!$ in [def-trf-admissibility], evaluated at $A_s$; no unrestricted ambient exceptional adjoint is used. Explicitly, to read this derived endomorphism $v:A[0]\\to A[0]$ as a scalar, take $H^0(v)(1)\\in A$, using the cohomology functor of [def-weil-abstract-derived-category]. This is the usual identification $\\operatorname{End}_{D(A\\text{-}\\mathrm{Mod})}(A[0])=A$. In the shorter notation above the defining composite is\n$$\nA[0]\\xrightarrow{\\eta^*}R\\Gamma(\\beta,A_\\beta)\n\\xrightarrow{R\\Gamma(\\beta,\\tau)}R\\Gamma(\\beta,\\omega_{\\beta,A})\n\\xrightarrow{\\varepsilon_{a_\\beta}}A[0],\n$$\nwhere $\\eta^*=R\\Gamma(s,P_a(A_\\beta))\\circ R\\Gamma(s,\\eta_\\beta)$ and $\\varepsilon_{a_\\beta}=R\\Gamma(s,\\varepsilon_a(A_s))$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-integral/def-trf-integration.md",
+  "place": "node def-trf-integration, order 2283"
+ },
+ "stmt_deps": [
+  "def-trf-dualizing-complex",
+  "def-compact-support-direct-image-detailed",
+  "def-trf-admissibility",
+  "def-trf-coefficient-conventions",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-finite-tor-amplitude",
+  "lem-sf-proetale-constructible-origin",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-extension-by-zero",
+  "prop-compactification-coherence-detailed",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "integration along structure morphism trace map Hom dualizing complex proper scheme",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, Algebra.intTraceAux, Algebra.intTrace, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.map_injective_of_isIntegral",
+   "date": "2026-10-17",
+   "verdict": "no match: generic scheme, sheaf, module trace or adjunction infrastructure does not define the exceptional integration composite"
   },
-  "kind": "definition",
-  "title": "Integration along the structure morphism",
-  "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, $A=A_{E,n}$, $s=\\Spec k$, and let $\\beta$ be\nseparated finite type\nand proper over $s$,\nwith structure morphism\n$a_\\beta:\\beta\\to s$ is exceptionally\nadmissible and $\\omega_{\\beta,A}$ the\ndualizing complex of\n[def-trf-dualizing-complex]. The *integration* (the\n``trace along $a_\\beta$'') is the map\n\n$$\n\\int_\\beta:\n\\Hom_{D(\\beta,A)}\\bigl(A_\\beta,\\omega_{\\beta,A}\\bigr)\\longrightarrow A\n$$\n\nsending $\\tau:A_\\beta\\to\\omega_{\\beta,A}$ to the composite\n\n$$\nA\\xrightarrow{\\ \\eta^*\\ }\nR\\Gamma(\\beta,A_\\beta)\n\\xrightarrow{R\\Gamma(\\tau)}\nR\\Gamma(\\beta,\\omega_{\\beta,A})\n\\xrightarrow{\\ \\varepsilon_{a_\\beta}\\ }A,\n$$\n\nwhere the first arrow is the composite\n\n$$\nA=R\\Gamma(s,A_s)\n\\xrightarrow{\\ R\\Gamma(s,\\eta_\\beta)\\ }\nR\\Gamma(s,Ra_{\\beta*}A_\\beta)\n\\xrightarrow{\\ \\sim\\ }\nR\\Gamma(s,Ra_{\\beta!}A_\\beta)=R\\Gamma(\\beta,A_\\beta),\n$$\n\nwhose first map is $R\\Gamma(s,-)$ applied to the unit of the\nadjunction $La_\\beta^*\\dashv Ra_{\\beta*}$ of the\nderived direct image, and\nwhose second is the identification $Ra_{\\beta*}\\cong Ra_{\\beta!}$ for\nthe proper $a_\\beta$\nof [def-compact-support-direct-image-detailed] (so that\n$R\\Gamma(\\beta,-)=R\\Gamma(s,Ra_{\\beta!}-)$); and the last arrow is\nthe composite\n\n$$\nR\\Gamma(\\beta,\\omega_{\\beta,A})\n=R\\Gamma(s,Ra_{\\beta!}Ra_\\beta^!A_s)\n\\xrightarrow{\\ R\\Gamma(s,\\varepsilon_{a_\\beta})\\ }\nR\\Gamma(s,A_s)=A,\n$$\n\nwhere $\\varepsilon_{a_\\beta}$ is the counit of the adjunction\n$Ra_{\\beta!}\\dashv Ra_\\beta^!$ of\n[def-trf-admissibility], applied to\n$\\omega_{\\beta,A}=Ra_\\beta^!A_s$ of\n[def-trf-dualizing-complex].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-integral/def-trf-integration.md",
-    "place": "node def-trf-integration, order 2283"
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory Adjunction unit counit derived direct image proper integration trace",
+   "results": "No hits; loogle: Unknown identifier `CategoryTheory`",
+   "date": "2026-10-17",
+   "verdict": "no match: query parser did not recognize an identifier"
   },
-  "stmt_deps": [
-    "def-trf-dualizing-complex",
-    "def-compact-support-direct-image-detailed",
-    "def-trf-admissibility",
-    "def-trf-coefficient-conventions",
-    "def-weil-derived-direct-image",
-    "def-weil-finite-field-fiber",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2283,
-  "blueprint_uses": [
-    "def-compact-support-direct-image-detailed",
-    "def-trf-admissibility",
-    "def-trf-coefficient-conventions",
-    "def-trf-dualizing-complex",
-    "def-weil-derived-direct-image",
-    "def-weil-finite-field-fiber",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "uses_not_cited": [
-    "def-trf-coefficient-conventions",
-    "def-weil-derived-direct-image",
-    "def-weil-finite-field-fiber",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "grep",
+   "query": "borelMooreSections|GeometricOperations\\.integral|dualizingComplex",
+   "results": "No hits; source subdirectory WeilConjectures/",
+   "date": "2026-10-17",
+   "verdict": "no match: searched subdirectory is outside the Mathlib tree; superseded by subsequent AlgebraicGeometry and sheaf-module source searches"
   },
-  "chapter": "sec-trace-formula",
-  "unit": "sk-d-integral",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, $A=A_{E,n}$, $s=\\Spec k$, and let $\\beta$ be\nseparated finite type\nand proper over $s$,\nwith exceptionally\nadmissible structure morphism\n$a_\\beta:\\beta\\to s$ and $\\omega_{\\beta,A}$ the\ndualizing complex of\n[def-trf-dualizing-complex]. The *integration* (the\n\"trace along $a_\\beta$\") is the map\n\n$$\n\\int_\\beta:\n\\Hom_{D(\\beta,A)}\\bigl(A_\\beta,\\omega_{\\beta,A}\\bigr)\\longrightarrow A\n$$\n\nsending $\\tau:A_\\beta\\to\\omega_{\\beta,A}$ to the composite\n\n$$\nA\\xrightarrow{\\ \\eta^*\\ }\nR\\Gamma(\\beta,A_\\beta)\n\\xrightarrow{R\\Gamma(\\tau)}\nR\\Gamma(\\beta,\\omega_{\\beta,A})\n\\xrightarrow{\\ \\varepsilon_{a_\\beta}\\ }A,\n$$\n\nwhere the first arrow is the composite\n\n$$\nA=R\\Gamma(s,A_s)\n\\xrightarrow{\\ R\\Gamma(s,\\eta_\\beta)\\ }\nR\\Gamma(s,Ra_{\\beta*}A_\\beta)\n\\xrightarrow{\\ \\sim\\ }\nR\\Gamma(s,Ra_{\\beta!}A_\\beta)=R\\Gamma(\\beta,A_\\beta),\n$$\n\nwhose first map is $R\\Gamma(s,-)$ applied to the unit of the\nadjunction $La_\\beta^*\\dashv Ra_{\\beta*}$ of the\nderived direct image, and\nwhose second is the identification $Ra_{\\beta*}\\cong Ra_{\\beta!}$ for\nthe proper $a_\\beta$\nof [def-compact-support-direct-image-detailed] (so that\n$R\\Gamma(\\beta,-)=R\\Gamma(s,Ra_{\\beta!}-)$); and the last arrow is\nthe composite\n\n$$\nR\\Gamma(\\beta,\\omega_{\\beta,A})\n=R\\Gamma(s,Ra_{\\beta!}Ra_\\beta^!A_s)\n\\xrightarrow{\\ R\\Gamma(s,\\varepsilon_{a_\\beta})\\ }\nR\\Gamma(s,A_s)=A,\n$$\n\nwhere $\\varepsilon_{a_\\beta}$ is the counit of the adjunction\n$Ra_{\\beta!}\\dashv Ra_\\beta^!$ of\n[def-trf-admissibility], applied to\n$\\omega_{\\beta,A}=Ra_\\beta^!A_s$ of\n[def-trf-dualizing-complex].",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leansearch",
+   "query": "integration along the structure morphism as the composite of unit, map on sections, and counit",
+   "results": "Returned 8 hits: SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.unitHomEquiv_comp_apply, CategoryTheory.Over.toOverSectionsAdj_unit_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.unitToPushforwardObjUnit, PresheafOfModules.unitHomEquiv, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: generic scheme, sheaf, module trace or adjunction infrastructure does not define the exceptional integration composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper scheme dualizing complex counit global sections trace integration map",
+   "results": "Returned 8 hits: AlgebraicGeometry.ΓSpec.isIso_adjunction_counit, AlgebraicGeometry.ΓSpec.adjunction_counit_app, AlgebraicGeometry.ΓSpec.adjunction_counit_app', AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit, AlgebraicGeometry.ΓSpec.adjunction, AlgebraicGeometry.Scheme.kerAdjunction_counit_app, AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit, AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit_app",
+   "date": "2026-10-17",
+   "verdict": "no match: generic scheme, sheaf, module trace or adjunction infrastructure does not define the exceptional integration composite"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory dualizing counit exceptional inverse image global sections",
+   "results": "No hits; loogle: Unknown identifier `dualizing`",
+   "date": "2026-10-17",
+   "verdict": "no match: query parser did not recognize an identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "noncomputable def integral|borelMoorePushforward",
+   "results": "No hits; source subdirectory WeilConjectures/SixFunctors/ProEtale/TraceFormula",
+   "date": "2026-10-17",
+   "verdict": "no match: searched subdirectory is outside the Mathlib tree; superseded by subsequent AlgebraicGeometry and sheaf-module source searches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper morphism trace map from Hom of constant sheaf to dualizing complex via exceptional counit",
+   "results": "Returned 8 hits: CompHausLike.LocallyConstant.counit, LinearMap.trace_eq_contract', LinearMap.trace_eq_contract, LinearMap.trace_eq_contract_apply, Algebra.intTraceAux, CategoryTheory.ShortComplex.descOpcycles, HomologicalComplex.restrictionToTruncGE'_f_eq_iso_hom_pOpcycles_iso_inv, CategoryTheory.ShortComplex.descRightHomology",
+   "date": "2026-10-17",
+   "verdict": "no match: generic scheme, sheaf, module trace or adjunction infrastructure does not define the exceptional integration composite"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: generic scheme, sheaf, module trace or adjunction infrastructure does not define the exceptional integration composite"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"borelMoore\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: generic scheme, sheaf, module trace or adjunction infrastructure does not define the exceptional integration composite"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|borelMoore|exceptional.*[Cc]ounit",
+   "results": "No hits; source subdirectory AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: generic scheme, sheaf, module trace or adjunction infrastructure does not define the exceptional integration composite"
+  },
+  {
+   "tool": "grep",
+   "query": "def (unitToPushforwardObjUnit|pushforwardSections)|pushforwardSections_unitHomEquiv",
+   "results": "Returned 4 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; source subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: generic scheme, sheaf, module trace or adjunction infrastructure does not define the exceptional integration composite"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2283,
+ "blueprint_uses": [
+  "def-compact-support-direct-image-detailed",
+  "def-trf-admissibility",
+  "def-trf-coefficient-conventions",
+  "def-trf-dualizing-complex",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "uses_not_cited": [
+  "def-trf-coefficient-conventions",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-integral",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, $A=A_{E,n}$, $s=\\Spec k$, and let $\\beta$ be\nseparated finite type\nand proper over $s$,\nwith exceptionally\nadmissible structure morphism\n$a_\\beta:\\beta\\to s$ and $\\omega_{\\beta,A}$ the\ndualizing complex of\n[def-trf-dualizing-complex]. The *integration* (the\n\"trace along $a_\\beta$\") is the map\n\n$$\n\\int_\\beta:\n\\Hom_{D(\\beta,A)}\\bigl(A_\\beta,\\omega_{\\beta,A}\\bigr)\\longrightarrow A\n$$\n\nsending $\\tau:A_\\beta\\to\\omega_{\\beta,A}$ to the composite\n\n$$\nA\\xrightarrow{\\ \\eta^*\\ }\nR\\Gamma(\\beta,A_\\beta)\n\\xrightarrow{R\\Gamma(\\tau)}\nR\\Gamma(\\beta,\\omega_{\\beta,A})\n\\xrightarrow{\\ \\varepsilon_{a_\\beta}\\ }A,\n$$\n\nwhere the first arrow is the composite\n\n$$\nA=R\\Gamma(s,A_s)\n\\xrightarrow{\\ R\\Gamma(s,\\eta_\\beta)\\ }\nR\\Gamma(s,Ra_{\\beta*}A_\\beta)\n\\xrightarrow{\\ \\sim\\ }\nR\\Gamma(s,Ra_{\\beta!}A_\\beta)=R\\Gamma(\\beta,A_\\beta),\n$$\n\nwhose first map is $R\\Gamma(s,-)$ applied to the unit of the\nadjunction $La_\\beta^*\\dashv Ra_{\\beta*}$ of the\nderived direct image, and\nwhose second is the identification $Ra_{\\beta*}\\cong Ra_{\\beta!}$ for\nthe proper $a_\\beta$\nof [def-compact-support-direct-image-detailed] (so that\n$R\\Gamma(\\beta,-)=R\\Gamma(s,Ra_{\\beta!}-)$); and the last arrow is\nthe composite\n\n$$\nR\\Gamma(\\beta,\\omega_{\\beta,A})\n=R\\Gamma(s,Ra_{\\beta!}Ra_\\beta^!A_s)\n\\xrightarrow{\\ R\\Gamma(s,\\varepsilon_{a_\\beta})\\ }\nR\\Gamma(s,A_s)=A,\n$$\n\nwhere $\\varepsilon_{a_\\beta}$ is the counit of the adjunction\n$Ra_{\\beta!}\\dashv Ra_\\beta^!$ of\n[def-trf-admissibility], applied to\n$\\omega_{\\beta,A}=Ra_\\beta^!A_s$ of\n[def-trf-dualizing-complex].",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-trf-integration",
+  "worker": "stage1",
+  "summary": "Definition-only split with no new nodes. Followed the current main-20261015 update and retained its unit/proper-comparison/counit composite. Made every construction ingredient a statement dependency. Replaced the obsolete citation of the direct-image definition for adjunction by the existing pro-etale derived-adjunction definition; constructed the proper comparison using the identity compactification and the existing coherence theorem on its bounded etale-origin domain. Made the exact point-sections functor, scalar extraction, and counit component at A_s explicit. No additional geometric hypothesis, ambient exceptional adjoint, or theorem asserting functoriality/linearity is introduced. Repair of the returned delivery: re-read all sixteen current cited statements, including the updated def-trf-dualizing-complex; explicitly specialize its constructible exceptional inverse image to Y=beta and identify that functor with the adjunction used for the counit. Its Verdier-dual action and evaluation clauses are not used. The finite coefficient ring, bounded constructible finite-Tor input and etale-origin comparison domain remain the ones supplied by the current DAG. On continuation, verified that all sixteen current statement fingerprints agree with the retained repair review, and made fullness explicit so that every ambient morphism tau is an input to the restricted compact-support functor.",
+  "blueprint": "Realizes all of main-20261015 def-trf-integration.md (order 2627): opening finite-stage/proper/admissible setting, first arrow from ordinary unit and proper identification, middle image of tau, last exceptional counit, and scalar codomain. The abstract integral clause of sk-d-integral is recorded in same_as; its separate key node owns the unit-realization fields. This is a definition, so construction is in statement and proof/proof_deps remain empty.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NF-fe74e7f1e",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-fe74e7f1e (reviewer sub-agent of L); spot-checked: I read the whole delivery and passed it with no changes (no fixes files written, no tool_uses to accept); full checks are in review.md. One commit with two files (item and report); no new nodes; no SGA. I compared the item clause by clause with main-20261015 sk-d-integral/def-trf-integration.md (order 2627) and blueprint_update. The setting, unit, proper identification, Ra_!(tau), counit and scalar codomain all agree; nothing is added, dropped or weakened. The coefficient category is the finite discrete D(T_proet,A_T), the same one used by def-trf-dualizing-complex and def-trf-admissibility. This is not a target node, so the base-change morphism comparison does not apply. Against the current statements of all 16 cited nodes: (1) Ra^! in omega=Ra^!A_s is the specified constructible right adjoint of def-trf-admissibility. (2) A_T is in D^b_ctf (lem-weil-constant-coefficient-objects-constructible clause 1, Tor [0,0]); omega is in D^b_ctf because Ra^! lands there; def-weil-finite-tor-amplitude makes D^b_ctf a full subcategory, so every tau is a valid input. (3) lem-sf-proetale-constructible-origin (ii) is stated for the intrinsic D^b_c, which equals def-weil-finite-torsion-constructibility; so both inputs have etale-origin witnesses. (4) def-weil-derived-direct-image defines Rf_* as the derived functor of def-weil-pbc-proetale-operations, which gives Lu^* -| Ru_* with c^f_A from def-weil-derived-pullback-tensor-hom; so eta is well typed. (5) (id_beta,a) is an object of Comp(a) (def-weil-compactifications-refinements); extension by zero along id is canonically the identity; prop-compactification-coherence-detailed gives the natural map P_a: Ra_* -> Ra_! on the etale-origin domain. (6) The counit is evaluated at A_s, with source Ra_!omega. (7) lem-weil-point-proetale-sections-exact gives exact sections; Gamma(s,A_s)=A; the scalar is H^0(v)(1), with no field hypothesis needed. Edge cases beta=s, empty beta, tau=0, nonreduced beta and n>1 are all consistent. Mechanical checks: the statement's citations match stmt_deps exactly; all 16 nodes are present and unmerged; no path leads back to the item; all 16 SHA-256 fingerprints match the report. The only duplicate candidate is the imported sk-d-integral, which same_as records, so nothing is dropped. Remark: source.document still names the master snapshot; it is an import field and was left unchanged."
+ }
 }

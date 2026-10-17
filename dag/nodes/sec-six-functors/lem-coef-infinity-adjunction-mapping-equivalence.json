@@ -27,11 +27,98 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-infinity-mapping-composition"
+  "lem-coef-infinity-mapping-composition",
+  "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Enlarge the universe of spaces so that $\\mathcal C,\\mathcal D$ and their mapping spaces are small there; this uses no local-smallness hypothesis beyond fitting in the containing universe. Put $B=\\mathcal C^{\\mathrm{op}}\\times\\mathcal D$, $P(x,d)=H_{\\mathcal D}(Fx,d)$ and $Q(x,d)=H_{\\mathcal C}(x,Gd)$, using [lem-coef-infinity-hom-bifunctor-functoriality] and [def-coef-infinity-category-of-spaces]. The comparison for $G$, restricted along $(F,\\mathrm{id}_{\\mathcal D})$, gives $P\\to H_{\\mathcal C}(GF(-),G(-))$. Apply $H_{\\mathcal C}$ contravariantly to the actual transformation $\\eta:\\mathrm{id}\\to GF$, and covariantly to $Gd$, to obtain $H_{\\mathcal C}(GF(-),G(-))\\to Q$. Their composite is a coherent transformation $\\Phi:P\\to Q$ with component $v\\mapsto G(v)\\eta_x$. Similarly the comparison for $F$ gives $Q\\to H_{\\mathcal D}(F(-),FG(-))$ and covariant application of $H_{\\mathcal D}$ to $\\epsilon:FG\\to\\mathrm{id}$ gives a coherent transformation $\\Psi:Q\\to P$ with component $u\\mapsto\\epsilon_dF(u)$. Contravariance reverses the direction of $\\eta$ in the first construction. The target $\\mathcal S_{\\mathcal U}$ is a quasicategory by [lem-coef-kan-coherent-nerve-quasicategory], so $\\operatorname{Fun}(B,\\mathcal S_{\\mathcal U})$ is a quasicategory and composites of these transformations exist by inner $2$-horn filling in it, supplied by [lem-cbc-enhanced-functor-cone-calculus]; the canonical composition and identification of their component classes are [lem-coef-infinity-mapping-composition]. Thus their naturality is already on all simplices of $B$, before invertibility is proved.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "def-coef-infinity-category-of-spaces",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-kan-coherent-nerve-quasicategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02F1",
+    "place": "Proposition 6.2.1.17 (02F1), expanded unit/counit calculation"
+   }
+  },
+  {
+   "text": "Here is the mapping-space naturality homotopy used in both calculations, rather than only a calculation on edges. For an actual transformation $\\alpha:A\\to A'$ of functors $\\mathcal E\\to\\mathcal V$, view it, by [def-cbc-enhanced-diagrams-cones], as the simplicial functor $\\widetilde\\alpha:\\mathcal E\\times\\Delta^1\\to\\mathcal V$. Fix $a,b\\in\\mathcal E$. In $\\mathcal E\\times\\Delta^1$, a variable arrow $v:a\\to b$ has two factorizations from $(a,0)$ to $(b,1)$: first $v$ at endpoint $0$ and then the interval edge at $b$, or first the interval edge at $a$ and then $v$ at endpoint $1$. The right-pinched mapping space between these mixed endpoints is degreewise $\\operatorname{Map}_{\\mathcal E}(a,b)$: the interval coordinate of each defining simplex is forced to be $0$ on its initial face and $1$ at its last vertex. Both composition maps identify with the identity on this space, by the product formula and unitality. Apply [lem-cbc-simplicial-composition-spine], whose coherent face/degeneracy operations are natural in simplicial functors, to $\\widetilde\\alpha$. The images of the two factorizations are therefore homotopic as maps of the entire Kan space:\n$$\\alpha_b\\circ A(v)\\simeq A'(v)\\circ\\alpha_a.$$\nThis supplies the homotopy for arbitrary higher simplices $v$, with no invertibility assumption on $v$ or $\\alpha$. Composition on the right-pinched models and its functoriality are identified by [lem-coef-infinity-mapping-composition] and [lem-coef-infinity-hom-bifunctor-functoriality].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02F1",
+    "place": "02F1 uses functor-category adjuncts; explicit parameter-prism expansion of naturality, using 01PF spine composition"
+   }
+  },
+  {
+   "text": "For $v\\in\\operatorname{Map}_{\\mathcal D}(Fx,d)$, use functoriality and associativity of composition from [lem-coef-infinity-hom-bifunctor-functoriality] and [lem-coef-infinity-mapping-composition], and apply the naturality homotopy of step 2 to $\\alpha=\\epsilon$, $A=FG$, $A'=\\mathrm{id}_{\\mathcal D}$, $a=Fx$, $b=d$. This gives homotopies of maps of the whole mapping space\n$$\\Psi_{x,d}\\Phi_{x,d}(v)\\simeq\\epsilon_d\\circ FG(v)\\circ F(\\eta_x)\\simeq v\\circ\\epsilon_{Fx}\\circ F(\\eta_x)\\simeq v.$$\nThe last homotopy is evaluation at $x$ of the assumed triangle $\\epsilon F\\circ F\\eta\\simeq1_F$, followed by composition with the variable $v$ and the unit homotopy. Evaluation restricts the given functor-quasicategory homotopy to the selected vertex by [def-cbc-enhanced-diagrams-cones]; hence this is a homotopy of maps, not merely equality of components.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-infinity-mapping-composition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02F1",
+    "place": "Proposition 6.2.1.17 (02F1), expanded unit/counit calculation"
+   }
+  },
+  {
+   "text": "For $u\\in\\operatorname{Map}_{\\mathcal C}(x,Gd)$, use the same functoriality and associativity statements, and apply step 2 to $\\alpha=\\eta$, $A=\\mathrm{id}_{\\mathcal C}$, $A'=GF$, $a=x$, $b=Gd$. Then\n$$\\Phi_{x,d}\\Psi_{x,d}(u)\\simeq G(\\epsilon_d)\\circ GF(u)\\circ\\eta_x\\simeq G(\\epsilon_d)\\circ\\eta_{Gd}\\circ u\\simeq u.$$\nThe final homotopy is the assumed triangle $G\\epsilon\\circ\\eta G\\simeq1_G$ evaluated at $d$, followed by composition and unitality. These are again homotopies of maps of the full mapping spaces, using [lem-coef-infinity-hom-bifunctor-functoriality], [lem-coef-infinity-mapping-composition] and evaluation in [def-cbc-enhanced-diagrams-cones]. Neither triangle homotopy was inferred from the other.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-infinity-mapping-composition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02F1",
+    "place": "Proposition 6.2.1.17 (02F1), expanded unit/counit calculation"
+   }
+  },
+  {
+   "text": "The two homotopies of steps 3 and 4 exhibit $\\Psi_{x,d}$ as a simplicial homotopy inverse to $\\Phi_{x,d}$ (choose representatives of the canonical composition classes). Apply [lem-cbc-simplicial-homotopy-equivalence-weak] to conclude that each $\\Phi_{x,d}$ is a weak homotopy equivalence, hence an equivalence of spaces. This also covers empty mapping spaces: the actual maps in both directions and both inverse homotopies still exist; no vertex of a mapping space was chosen. For the application to the space quasicategory, the inverse witnesses can also be read directly in its coherent-nerve model [def-coef-infinity-category-of-spaces]. For Kan complexes $A,B$, put $f=\\Phi_{x,d}:A\\to B$ and $g=\\Psi_{x,d}:B\\to A$. The maps $gf\\simeq1_A$ and $fg\\simeq1_B$ give the two inverse triangles in $N_{\\mathrm{hc}}(\\mathbf{Kan})$: in the subset-poset nerve, $\\mathfrak C[\\Delta^2](0,2)$ is $\\Delta^1$, with its first endpoint the long edge and its second endpoint the composite of the consecutive edges. Send this interval to the homotopy between $1_A$ and $gf$, take edges $01=f$, $12=g$, $02=1_A$, and take the other mapping posets to their corresponding constant maps. This is an enriched functor $\\mathfrak C[\\Delta^2]\\to\\mathbf{Kan}$, hence the first required $2$-simplex; interchange $A,B,f,g$ for the second. The necessary orientation of each homotopy is available because [lem-cbc-kan-mapping-homotopy-invariance], applied with $u=1_A$ or $1_B$, says that $\\operatorname{Fun}(A,A)$ and $\\operatorname{Fun}(B,B)$ are Kan: reverse an edge $r\\to s$ by filling the $2$-horn with edges $01:r\\to s$ and $02=1_r$. Thus both inverse triangles are actual simplices, as required by the equivalence-edge definition. Step 1 has already constructed $\\Phi$ as an edge of $\\operatorname{Fun}(B,\\mathcal S)$. Since $\\mathcal S$ is a quasicategory by [lem-coef-kan-coherent-nerve-quasicategory], [lem-coef-infinity-pointwise-equivalences] applies with target $\\mathcal S$: this coherent transformation is an equivalence, since every component is one. Its inverse component homotopy classes are those of $\\Psi$ by the two inverse equations. This proves the stated equivalence of bifunctors with its simplicial coherence, rather than only objectwise equivalences.",
+   "uses": [
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-infinity-pointwise-equivalences",
+    "def-coef-infinity-category-of-spaces",
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "lem-coef-kan-coherent-nerve-quasicategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02F1",
+    "place": "02F1, mapping-space equivalence; final coherent upgrade by the pointwise-equivalence criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "def-coef-infinity-category-of-spaces",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-kan-coherent-nerve-quasicategory",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-cbc-kan-mapping-homotopy-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02F1",
+  "place": "02F1 and 02EK checked online; explicit two-inverse calculation and parameter-prism naturality expansion, with Hom-functor functoriality from 046J/03PD. The source proves the component equivalence by test Kan complexes; the present proof writes the inverse formula and coherent bifunctor construction explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +154,45 @@
    "results": "{\"t\": \"2026-10-16T22:31:07Z\", \"tool\": \"leanfinder\", \"query\": \"Unit and counit satisfying the triangle identities yield mutually inverse maps of mapping Kan complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.nerveAdjunction\", \"SSet.hoFunctor.unitHomEquiv_eq\", \"SSet.Truncated.nerve₂Adj\", \"SSet.hoFunctor.unitHomEquiv\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.nerveAdjunction.isIso_counit\"], \"digest\": \"3afcf6de7248ccd6\"}",
    "date": "2026-10-16",
    "verdict": "No match: nerveAdjunction, truncated nerve adjunction and hoFunctor results are adjunctions of ordinary categories, not equivalences of mapping Kan complexes natural in arbitrary quasicategorical variables."
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction|adjoint|homEquiv",
+   "results": "{\"t\": \"2026-10-16T22:58:49Z\", \"tool\": \"grep\", \"query\": \"adjunction|adjoint|homEquiv\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\"], \"digest\": \"84aa202a09283c27\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Adjunction.homEquiv is a bijection of Hom sets; TwoTruncated.lean:195-228 concerns homotopy-class sets, and StrictBicategory.lean:14-70 only constructs the homotopy bicategory. Nerve/hoFunctor adjunctions and ordinary Equivalence triangle lemmas do not imply the mapping-space result for arbitrary quasicategories. Both semantic phrasings were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unit counit triangle identities induce equivalences of mapping Kan complexes",
+   "results": "{\"t\": \"2026-10-16T22:58:50Z\", \"tool\": \"leansearch\", \"query\": \"Unit counit triangle identities induce equivalences of mapping Kan complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.inverse_counitInv_comp_assoc\", \"CategoryTheory.Equivalence.functor_unit_comp_assoc\", \"CategoryTheory.Equivalence.mk\", \"CategoryTheory.Equivalence.inv_fun_map\", \"CategoryTheory.Equivalence.unit_app_inverse\", \"CategoryTheory.Equivalence.functor_map_ε_inverse_comp_counit_app\", \"CategoryTheory.Equivalence.counit_app_functor\", \"CategoryTheory.Equivalence.mk'\"], \"digest\": \"c77d0c902f47b767\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Adjunction.homEquiv is a bijection of Hom sets; TwoTruncated.lean:195-228 concerns homotopy-class sets, and StrictBicategory.lean:14-70 only constructs the homotopy bicategory. Nerve/hoFunctor adjunctions and ordinary Equivalence triangle lemmas do not imply the mapping-space result for arbitrary quasicategories. Both semantic phrasings were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv\"",
+   "results": "{\"t\": \"2026-10-16T22:59:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Adjunction\\\", \\\"homEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.CoreHomEquiv\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit\", \"CategoryTheory.Adjunction.mkOfHomEquiv\", \"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.homEquiv'\", \"CategoryTheory.Adjunction.CoreHomEquiv.homEquiv\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit\"], \"digest\": \"5a1ad487c314f656\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Adjunction.homEquiv is a bijection of Hom sets; TwoTruncated.lean:195-228 concerns homotopy-class sets, and StrictBicategory.lean:14-70 only constructs the homotopy bicategory. Nerve/hoFunctor adjunctions and ordinary Equivalence triangle lemmas do not imply the mapping-space result for arbitrary quasicategories. Both semantic phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent unit and counit with triangle homotopies give natural equivalences of mapping spaces of quasicategories",
+   "results": "{\"t\": \"2026-10-16T22:59:17Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent unit and counit with triangle homotopies give natural equivalences of mapping spaces of quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.homotopicL_iff_homotopicR\", \"SSet.Truncated.HomotopyCategory₂.Hom\", \"SSet.Truncated.HomotopyCategory₂.homMk\", \"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.Edge.CompStruct.ofHomotopyCategory₂Fac\", \"SSet.Truncated.Edge.CompStruct.homotopyCategory₂_fac\", \"SSet.Truncated.nerve₂Adj\", \"SSet.Truncated.HomotopyCategory₂.instCategoryStruct\"], \"digest\": \"fce1240f5ad47c52\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Adjunction.homEquiv is a bijection of Hom sets; TwoTruncated.lean:195-228 concerns homotopy-class sets, and StrictBicategory.lean:14-70 only constructs the homotopy bicategory. Nerve/hoFunctor adjunctions and ordinary Equivalence triangle lemmas do not imply the mapping-space result for arbitrary quasicategories. Both semantic phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunct maps between mapping Kan complexes are homotopy inverses by naturality and triangle identities",
+   "results": "{\"t\": \"2026-10-16T23:02:59Z\", \"tool\": \"leanfinder\", \"query\": \"Adjunct maps between mapping Kan complexes are homotopy inverses by naturality and triangle identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.Truncated.HomotopyCategory.mkNatIso_hom_app_mk\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.HomotopyCategory.mkNatIso\", \"SSet.Truncated.HomotopyCategory.mkNatIso_inv_app_mk\"], \"digest\": \"18eef248b527430f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Adjunction.homEquiv is a bijection of Hom sets; TwoTruncated.lean:195-228 concerns homotopy-class sets, and StrictBicategory.lean:14-70 only constructs the homotopy bicategory. Nerve/hoFunctor adjunctions and ordinary Equivalence triangle lemmas do not imply the mapping-space result for arbitrary quasicategories. Both semantic phrasings were read."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-bicartesian-interval-adjunction",
@@ -78,5 +200,44 @@
   "group": "NB"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-adjunction-mapping-equivalence",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed both coherent adjunct transformations using generic Hom-functor functoriality; expanded naturality as a mixed-endpoint prism on whole mapping spaces; computed both inverse homotopies using the separately supplied triangles; upgraded the natural transformation to an equivalence by the existing pointwise criterion. One new statement-only generic Hom-functor lemma, no Mathlib leaves. Avoided circular use of space-transport-classification and enriched-Hom comparison.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent derived coefficient adjunction, beneath the suspension-square construction and local universal-arrow criterion; passing from a coherent unit/counit adjunction to the explicitly stated adjunct equivalences.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Functor-quasicategory inner-horn filling supplies coherent composites of the Hom-functor transformations; this generic closure result is not supplied by the coefficient-unit route."
+   },
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Generic coherent composition natural in simplicial functors supplies the parameter-prism naturality homotopy; the coefficient unit has only the homotopy-class composition statement, not its full multiarrow coherence."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic conversion of explicit simplicial inverse homotopies to realization-defined weak equivalences; no coefficient-unit statement gives this simplicial version."
+   },
+   {
+    "node": "lem-cbc-kan-mapping-homotopy-invariance",
+    "why": "Only its Kan internal mapping-object assertion is used, at identity u, to orient the two explicit inverse homotopies in the coherent nerve of Kan complexes. This generic simplicial fact is independent of the coefficient route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-cbc-kan-mapping-homotopy-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NY-8ab8303c5",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-8ab8303c5 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-coef-infinity-hom-bifunctor-functoriality, the statements of all 9 cited nodes, the unit record, and the blueprint proof of prop-coef-integral-exceptional-adjoint paragraph 2. Read Kerodon 02F1, 046J and 00LJ online. The item statement agrees with 02F1/02EK and is unchanged. The new node states the 046J Hom-functor comparison with correct variance. It is not a clause of the item (D1) and was tested on T=id, empty, ordinary nerves and T to a point. Its overlap with lem-coef-space-transport-classification (existence of H_E) is unavoidable: that node, enriched-hom-twisted-arrow-comparison and coherent-nerve-comparison all have dependency paths back to the item (I checked by closure). Step 1: the variance of both adjunct transformations and their components v->G(v)eta_x and u->eps_d F(u) are correct. Step 2: the mixed-endpoint right-pinched space of E x Delta^1 is Map_E(a,b) x pt, and functoriality of composition gives a naturality homotopy of whole spaces. Steps 3 and 4: each composite is correctly ordered, and each step uses the correct one of the two independent triangles. Step 5: the equivalence 2-simplex in N_hc(Kan) via C[Delta^2](0,2)=Delta^1 and the homotopy reversal through the Kan property of Fun(A,A) are correct. The four declared generic tool_uses (from sk-prop-sf-cbc) are accepted. Fault C1/C4: steps 1 and 5 apply functor-cone-calculus and pointwise-equivalences with target S=N_hc(Kan), which needs S to be a quasicategory (Cordier-Porter). No cited node states this, and the only DAG node that does (coherent-nerve-comparison) is cyclic. Repaired: added the statement-only unsplit node lem-coef-kan-coherent-nerve-quasicategory (Kerodon 00LJ, Thm 2.4.5.1; its stmt_deps are definitions only; acyclic; Mathlib grep shows SimplicialNerve.lean:193 with no quasicategory theorem, so no match). It is cited in steps 1 and 5 and proof_deps is updated. Nothing else changed.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
