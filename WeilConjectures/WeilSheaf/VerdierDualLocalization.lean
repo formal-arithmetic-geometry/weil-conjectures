@@ -57,6 +57,7 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  [HasVerdierDual k₀ l X] [HasVerdierDual k₀ l Y]
 
 /-- **Step 1: the dual of a direct image** (blueprint: `lem-a1-local-boundary-duality`, step 1):
 `𝔻_Y Rf_* G ≅ Rf₀! 𝔻_X G`. The Verdier exchange applied to `M = 𝔻_X G` and biduality on `X`
@@ -132,6 +133,7 @@ theorem nonempty_closedUpperShriek_derivedLowerShriek_iso
     (shiftFunctor _ (-1 : ℤ)).mapIso F₁⟩
 
 variable [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
+  [HasVerdierDual k₀ l X] [HasVerdierDual k₀ l Z]
 
 /-- **The exceptional inverse image as a conjugate of the pullback, along a closed immersion**
 (blueprint: `thm-coef-qbar-verdier`, "`Rf^! = D_X f^* D_Y`", for a closed immersion `f = i`):
@@ -158,6 +160,7 @@ theorem nonempty_closedUpperShriek_verdierDual_iso
 variable [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
+  [HasVerdierDual k₀ l U]
 
 /-- **Step 4: the dual of the boundary complex** (blueprint: `lem-a1-local-boundary-duality`,
 step 4): for complementary immersions `j` and `i` and a Weil complex `G` on `U`,
@@ -195,6 +198,7 @@ noncomputable def tensorLisseToComplexIso (L : WeilSheaf k₀ l X) (hL : L.IsLis
 
 variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [HasVerdierDual k₀ l X]
 
 /-- **The Verdier dual of a lisse sheaf on a smooth scheme** (blueprint:
 `lem-a1-local-boundary-duality`, "`𝔻_U F ≅ F^∨(1)[2]`"): if `X` is smooth of pure dimension `d`

@@ -235,6 +235,10 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
   have hc : IsCompl (Set.range j.base) (Set.range i.base) := by
     rw [hij]
     exact isCompl_compl
+  -- the Verdier duals on `U`, `C` and `Z` (`thm-coef-qbar-verdier`)
+  have := WeilComplex.hasVerdierDual k₀ l U
+  have := WeilComplex.hasVerdierDual k₀ l C
+  have := WeilComplex.hasVerdierDual k₀ l Z
   obtain ⟨z, hz⟩ : s.1 ∈ Set.range i.base := by
     rw [hij]
     exact hsU

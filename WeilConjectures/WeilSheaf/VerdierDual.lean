@@ -20,10 +20,16 @@ complexes; this is the constructible adjunction `Rf_! ⊣ Rf^!` of the six-funct
 (`thm-coef-qbar-verdier`), stated here as
 `AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek`. The exceptional inverse image
 `AlgebraicGeometry.WeilComplex.upperShriek f` is *defined* as that right adjoint, which is how
-the blueprint characterizes it (`def-weil-exceptional-inverse-image`). It gives the dualizing
-complex `ω_X = Ra_X^! ℚ̄_ℓ` (`AlgebraicGeometry.WeilComplex.dualizingComplex`) and the Verdier
-dual `𝔻_X = RHom(-, ω_X)` (`AlgebraicGeometry.WeilComplex.verdierDual`), the derived internal
-hom of pro-étale Weil sheaves into `ω_X` (`AlgebraicGeometry.ProEtaleWeilSheaf.derivedHom`).
+the blueprint characterizes it (`def-weil-exceptional-inverse-image`); the existence of the
+right adjoint is an instance argument of the definition, so that no definition depends on the
+unproved statement. It gives the dualizing complex `ω_X = Ra_X^! ℚ̄_ℓ`
+(`AlgebraicGeometry.WeilComplex.dualizingComplex`) and the Verdier dual `𝔻_X = RHom(-, ω_X)`
+(`AlgebraicGeometry.WeilComplex.verdierDual`), the derived internal hom of pro-étale Weil sheaves
+into `ω_X` (`AlgebraicGeometry.ProEtaleWeilSheaf.derivedHom`).
+The Verdier dual on `X` takes as instance argument
+`AlgebraicGeometry.WeilComplex.HasVerdierDual`, the existence of `Ra_X^!` together with the
+fact that `RHom(-, ω_X)` preserves Weil complexes; it holds by `thm-coef-qbar-verdier`
+(`AlgebraicGeometry.WeilComplex.hasVerdierDual`).
 
 The statements of the duality theory for Weil complexes that the boundary duality of
 `sec-deligne-laumon-a1` uses belong to the chapters on the six functors and on smooth purity;
@@ -75,8 +81,8 @@ theorem isLeftAdjoint_derivedLowerShriek : (derivedLowerShriek k₀ l f).IsLeftA
 type `f : X ⟶ Y` of `k₀`-schemes of finite type: the right adjoint of the direct image with
 compact support `Rf₀!` (blueprint: `def-weil-exceptional-inverse-image`, which characterizes
 `Rf^!` by the adjunction `Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)` on constructible complexes). -/
-noncomputable def upperShriek : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X :=
-  have := isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l) f
+noncomputable def upperShriek [(derivedLowerShriek k₀ l f).IsLeftAdjoint] :
+    WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X :=
   (derivedLowerShriek k₀ l f).rightAdjoint
 
 end UpperShriek
@@ -87,6 +93,10 @@ variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+
+section Dualizing
+
+variable [(derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).IsLeftAdjoint]
 
 /-- The dualizing complex `ω_X = Ra_X^! ℚ̄_ℓ` of a separated `k₀`-scheme of finite type `X`: the
 exceptional inverse image of the constant Weil sheaf `ℚ̄_ℓ` on `Spec k₀` along the structure
@@ -105,13 +115,38 @@ theorem objectProperty_derivedHom_dualizingComplex (K : WeilComplex k₀ l X) :
       ((ProEtaleWeilSheaf.derivedHom k₀ l X (dualizingComplex k₀ l X).obj).obj (op K.obj)) :=
   sorry
 
+end Dualizing
+
+/-- The input needed to define the Verdier dual of Weil complexes on `X`: the direct image with
+compact support along the structure morphism `a_X` has a right adjoint `Ra_X^!`, so that the
+dualizing complex `ω_X = Ra_X^! ℚ̄_ℓ` is defined, and the derived internal hom into `ω_X`
+preserves Weil complexes. Both are consequences of `thm-coef-qbar-verdier`
+(`AlgebraicGeometry.WeilComplex.hasVerdierDual`); they are taken as an instance argument so
+that the Verdier dual is defined without depending on the unproved statements. -/
+class HasVerdierDual : Prop where
+  isLeftAdjoint : (derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).IsLeftAdjoint
+  objectProperty_derivedHom (K : WeilComplex k₀ l X) :
+    WeilComplex.objectProperty k₀ l X
+      ((ProEtaleWeilSheaf.derivedHom k₀ l X (dualizingComplex k₀ l X).obj).obj (op K.obj))
+
+attribute [instance 100] HasVerdierDual.isLeftAdjoint
+
+/-- The Verdier dual of Weil complexes is defined on every separated `k₀`-scheme of finite type,
+by `thm-coef-qbar-verdier` (`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek` and
+`AlgebraicGeometry.WeilComplex.objectProperty_derivedHom_dualizingComplex`). -/
+theorem hasVerdierDual : HasVerdierDual k₀ l X :=
+  have := isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l) (X ↘ Spec (CommRingCat.of k₀))
+  ⟨this, objectProperty_derivedHom_dualizingComplex k₀ l⟩
+
+variable [HasVerdierDual k₀ l X]
+
 /-- The Verdier dual `𝔻_X K = RHom(K, ω_X)` of Weil complexes on a separated `k₀`-scheme of
 finite type `X`, the derived internal hom into the dualizing complex
 (blueprint: `thm-coef-qbar-verdier`, `fix-cor-verdier-exchange`). -/
 noncomputable def verdierDual : (WeilComplex k₀ l X)ᵒᵖ ⥤ WeilComplex k₀ l X :=
   ObjectProperty.lift _
     ((ObjectProperty.ι _).op ⋙ ProEtaleWeilSheaf.derivedHom k₀ l X (dualizingComplex k₀ l X).obj)
-    fun K ↦ objectProperty_derivedHom_dualizingComplex k₀ l K.unop
+    fun K ↦ HasVerdierDual.objectProperty_derivedHom K.unop
 
 @[simp]
 lemma verdierDual_obj_obj (K : (WeilComplex k₀ l X)ᵒᵖ) :
@@ -146,6 +181,7 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  [HasVerdierDual k₀ l X] [HasVerdierDual k₀ l Y]
 
 /-- **Verdier exchange** (blueprint: `fix-cor-verdier-exchange`): for a separated morphism of
 finite type `f : X ⟶ Y`, `𝔻_Y (Rf₀! M) ≅ Rf_* (𝔻_X M)`. -/
@@ -162,6 +198,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [(derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).IsLeftAdjoint]
 
 /-- **The dualizing complex of a smooth scheme** (blueprint:
 `cor-pur-adic-and-rational-smooth-dualizing-complexes`, at the coefficient stage `ℚ̄_ℓ`): if `X`
