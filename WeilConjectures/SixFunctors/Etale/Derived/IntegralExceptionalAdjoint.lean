@@ -473,6 +473,7 @@ theorem boundedConstructibleIntegral_and_torAmplitudeIn_of_isHomotopyLimit {X Y 
     ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).mapIso eN.symm) h₁
   exact h₂
 
+set_option maxHeartbeats 1000000 in
 include hϖ hI in
 /-- Blueprint `prop-coef-integral-exceptional-adjoint`: The integral exceptional adjoint on
 constructible complexes.
@@ -531,14 +532,16 @@ theorem boundedConstructibleIntegral_exceptionalAdjoint {X Y : Scheme.{u}}
           ((reductionModIdeal Λ X (I ^ (n + 1))).obj c.pt) := by
   have hBT := boundedConstructibleIntegral_and_torAmplitudeIn_of_isHomotopyLimit I hϖ hI aX aY
     f hf hL hc
-  subst hI
   have := isTriangulated_rightDerivedUpperShriek (Λ := Λ) f
   obtain ⟨e, he⟩ := exists_iso_rightDerivedUpperShriek _ f hL.1 hc
-  refine ⟨⟨hBT.1, fun n ↦ ?_⟩, ⟨e, he⟩, fun ωX hωX ωY hωY N φ _ hφ ↦
-    nonempty_iso_derivedHom_of_isHomotopyLimit (Ideal.span {ϖ}) hϖ rfl aX aY f hf hL hc ωX hωX ωY
-      hωY N φ (pow_one (Ideal.span {ϖ}) ▸ hφ 1), hBT.2⟩
-  obtain ⟨e'⟩ := nonempty_iso_map_reductionModIdeal (R(f)^![ModuleCat.{u + 1} Λ]) hϖ n L
-  exact ⟨(reductionModIdeal Λ X _).mapIso e.symm ≪≫ e'.symm⟩
+  refine ⟨⟨hBT.1, fun n ↦ ?_⟩, ⟨e, he⟩, fun ωX hωX ωY hωY N φ _ hφ ↦ ?_, hBT.2⟩
+  · subst hI
+    obtain ⟨e'⟩ := nonempty_iso_map_reductionModIdeal (R(f)^![ModuleCat.{u + 1} Λ]) hϖ n L
+    exact ⟨(reductionModIdeal Λ X _).mapIso e.symm ≪≫ e'.symm⟩
+  · have hφ₁ := hφ 1
+    rw [pow_one] at hφ₁
+    exact nonempty_iso_derivedHom_of_isHomotopyLimit I hϖ hI aX aY f hf hL hc ωX hωX ωY hωY N φ
+      hφ₁
 
 end Constructible
 
