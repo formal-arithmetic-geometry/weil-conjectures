@@ -1,0 +1,181 @@
+{
+ "id": "lem-sfb-module-open-closed-conservative",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-refinement",
+   "place": "(2) Isomorphism; open-closed detection after exact inverse images",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Open and closed derived module inverse images jointly detect isomorphisms",
+ "statement": "Let Lambda be a commutative condensed ring and Lambda_T = p_T^* Lambda. Let i : Z -> X be a closed immersion and j : U -> X a quasi-compact open immersion with range(j) equal to the complement of range(i). In the unbounded derived category of Lambda_X-module objects on X_proet, let phi : K -> Kprime be a morphism. If Lj^*(phi) and Li^*(phi), using the total left derived module inverse images, are isomorphisms, then phi is an isomorphism. No boundedness or constructibility assumption is made. The coefficient categories and functors are those of [sk-def-sfb-condensed-ring], [sk-def-sfb-module-objects], [sk-def-sfb-module-pushforward-pullback], [sk-def-sfb-module-derived-pushpull].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "(2) Isomorphism; open-closed detection after exact inverse images"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof": [
+  {
+   "text": "A module M whose open inverse image is zero has underlying abelian sheaf supported on the closed complement. Use the existing profinitePointModuleForgetPullbackIso to identify the underlying inverse image, and the abelian closed-support theorem to make its abelian adjunction unit invertible. Apply the existing private helper moduleUnitOfAbelian from Sheaf.Paper.CondensedOpenClosedRecollement (import all) to obtain invertibility of the module adjunction unit M -> i_*i^*M. If the closed inverse image is also zero then its direct image is zero, and consequently M is zero. The helper transports the abelian unit through the coefficient isomorphism; no duplicate unit-lifting theorem is introduced.",
+   "uses": [
+    "lem-weil-pbc-proetale-abelian-closed-support",
+    "lem-sfb-alpha-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism; open-closed detection on each cohomology object"
+   }
+  },
+  {
+   "text": "The two module inverse images are exact. If both images of a module morphism are isomorphisms, exactness makes both restrictions of its kernel and cokernel zero. Step 1 makes that kernel and cokernel zero; the morphism is mono and epi, hence invertible in the abelian module category.",
+   "uses": [
+    "lem-sfb-alpha-iso",
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism; exact inverse images detect kernels and cokernels"
+   }
+  },
+  {
+   "text": "The levelwise derived exact inverse images commute with every homology object. The abelian joint-isomorphism detection therefore passes to the unbounded derived categories. The canonical isomorphisms from total left derived inverse image to levelwise exact inverse image transport this criterion to Lj^* and Li^*. This applies equally when the open or closed part is empty.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism; detect the derived isomorphism on homology"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "lem-sfb-alpha-iso",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "(2) Isomorphism; open-closed detection after exact inverse images; formal proof supplies the coefficient and derived-functor identifications. Repair of returned delivery: reuse the existing module-unit lifting helper and forgetful pullback isomorphism; the mathematical route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse images along an open immersion and its closed complement jointly detect isomorphisms of derived sheaves of modules",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.instIsIsoInvApp, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply, AlgebraicGeometry.Scheme.Hom.isIso_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr",
+   "date": "2026-10-16",
+   "verdict": "no match: general categorical or scheme machinery only; no statement for these pro-etale coefficient module functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"jointlyReflectIsomorphisms\"",
+   "results": "12 hits: CategoryTheory.JointlyReflectIsomorphisms, CategoryTheory.JointlyReflectIsomorphisms.jointlyFaithful, CategoryTheory.JointlyReflectIsomorphisms.jointlyReflectEpimorphisms, CategoryTheory.JointlyReflectIsomorphisms.jointlyReflectMonomorphisms, CategoryTheory.JointlyReflectIsomorphisms.isIso, CategoryTheory.JointlyReflectIsomorphisms.mk, CategoryTheory.JointlyReflectIsomorphisms.isIso_iff, CategoryTheory.JointlyReflectIsomorphisms.epi",
+   "date": "2026-10-16",
+   "verdict": "no match: general categorical or scheme machinery only; no statement for these pro-etale coefficient module functors"
+  },
+  {
+   "tool": "grep",
+   "query": "[Oo]pen.*[Cc]losed.*(isIso|[Cc]onserv)|jointlyReflectIsomorphisms",
+   "results": "18 hits: Mathlib/CategoryTheory/Limits/Preserves/Basic.lean, Mathlib/CategoryTheory/Limits/Preserves/Basic.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Limits.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: general categorical or scheme machinery only; no statement for these pro-etale coefficient module functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse images along an open immersion and its closed complement jointly detect isomorphisms of derived sheaves of modules",
+   "date": "2026-10-16",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_isIso, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.Scheme.Hom.appIso_inv_app, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply, AlgebraicGeometry.IsOpenImmersion.ΓIsoTop, AlgebraicGeometry.IsOpenImmersion.ΓIso, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.inv_invApp",
+   "verdict": "no match: the results concern scheme open immersions, geometric empty pullbacks, or hypercovers; none states this assertion for pro-etale sheaves or condensed coefficient modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence",
+  "date": "2026-10-17",
+  "group": "H4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.ModuleObject.OpenClosedConservative",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/ModuleObject/OpenClosedConservative.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_of_isIso_module_derived_open_closed",
+  "statement": "theorem isIso_of_isIso_module_derived_open_closed\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X U Z : Scheme.{u}}\n    (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X)\n    [IsOpenImmersion j] [QuasiCompact j]\n    (hij : Set.range j = (Set.range i)ᶜ)\n    {K K' : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))}\n    (φ : K ⟶ K')\n    (hj : IsIso ((upperStar Λ j).leftDerivedFunctor.map φ))\n    (hi : IsIso ((upperStar Λ i).leftDerivedFunctor.map φ)) : IsIso φ",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-17"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence",
+  "worker": "H4",
+  "summary": "Fully proved supporting lemma; no new sorry or definition change.",
+  "blueprint": "(2) Isomorphism; open-closed detection after exact inverse images",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-abelian-closed-support",
+    "why": "Generic sheaf, coefficient or exact-derived-functor tool used for this local open/closed step; no replacement of the compactification or proper-base-change unit route."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic sheaf, coefficient or exact-derived-functor tool used for this local open/closed step; no replacement of the compactification or proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic sheaf, coefficient or exact-derived-functor tool used for this local open/closed step; no replacement of the compactification or proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic sheaf, coefficient or exact-derived-functor tool used for this local open/closed step; no replacement of the compactification or proper-base-change unit route."
+   }
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261017T021602-L-694556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261017T021602-L-694556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,162 @@
+{
+ "id": "lem-sfb-abelian-open-extension-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-refinement",
+   "place": "The restriction to X; the underived cartesian open-extension support calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cartesian base change for pro-etale extension by zero with abelian coefficients",
+ "statement": "Let A be a Grothendieck abelian category, in the fixed universe for sheaves on the small pro-etale sites. Let Uprime, U, Zprime and Z be schemes and let gprime : Uprime -> U, jprime : Uprime -> Zprime, j : U -> Z and g : Zprime -> Z form a cartesian square, with j and jprime open immersions. With the inverse images and extensions by zero on A-valued sheaves, the canonical map jprime_! gprime^* -> g^* j_! is an isomorphism. The canonical map is the conjugate of the weakly-etale direct-image base-change map under the two composite adjunctions. No finiteness of A or coefficients is assumed. The coefficient categories and functors are those of [def-sfb-finite-extension-by-zero], [def-sfb-finite-extension-by-zero-adjunction], [def-sfb-finite-upper-star].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "The restriction to X; the underived cartesian open-extension support calculation"
+ },
+ "stmt_deps": [
+  "def-sfb-finite-extension-by-zero",
+  "def-sfb-finite-extension-by-zero-adjunction",
+  "def-sfb-finite-upper-star"
+ ],
+ "proof": [
+  {
+   "text": "Restriction to an open is restriction of the small pro-etale site. In the cartesian square, the two right adjoints compute sections on canonically isomorphic fibre products: for V -> U, (V x_U Uprime) is canonically V x_Z Zprime. The identification respects restriction maps and is the weakly-etale direct-image base-change map. Thus that right-adjoint comparison is invertible.",
+   "uses": [
+    "def-sfb-finite-extension-by-zero-adjunction",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "The restriction to X; sectionwise cartesian comparison, generalized to a square of opens"
+   }
+  },
+  {
+   "text": "Compose the pullback/direct-image adjunctions with the open-extension/restriction adjunctions. Conjugation between these composite adjunctions preserves invertibility, so the canonical left-adjoint comparison is invertible. This is exactly the source-library proof of isIso_openImmersionLowerShriekBaseChangeMap, already complete before this delivery.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "The restriction to X; passage from the section calculation to the adjoint comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-finite-extension-by-zero-adjunction",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "The restriction to X; the underived cartesian open-extension support calculation; formal proof supplies the coefficient and derived-functor identifications."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with pullback in a cartesian square of open immersions",
+   "results": "8 hits: AlgebraicGeometry.IsOpenImmersion.image_preimage_eq_preimage_image_of_isPullback, AlgebraicGeometry.IsOpenImmersion.lift_app, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftLift_snd, AlgebraicGeometry.IsOpenImmersion.isPullback_lift_id, AlgebraicGeometry.Scheme.Hom.opensRange_pullbackFst, AlgebraicGeometry.morphismRestrictOpensRange, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι",
+   "date": "2026-10-16",
+   "verdict": "no match: general categorical or scheme machinery only; no statement for these pro-etale coefficient module functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"IsIso\"",
+   "results": "12 hits: CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit, CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit, CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence, CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence_1, CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence, CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence_1, CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful, CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful",
+   "date": "2026-10-16",
+   "verdict": "no match: general categorical or scheme machinery only; no statement for these pro-etale coefficient module functors"
+  },
+  {
+   "tool": "grep",
+   "query": "OpenImmersionLowerShriek.*(BaseChange|Refinement)",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: general categorical or scheme machinery only; no statement for these pro-etale coefficient module functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero commutes with pullback in a cartesian square of open immersions",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.IsPullback.zero_left, AlgebraicGeometry.IsOpenImmersion.isPullback, CategoryTheory.Precoverage.ZeroHypercover.pullback₂_toPreZeroHypercover, CategoryTheory.Precoverage.ZeroHypercover.pullback₁_toPreZeroHypercover, CategoryTheory.IsPullback.zero_right, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift, CategoryTheory.Limits.pullbackZeroZeroIso",
+   "verdict": "no match: the results concern scheme open immersions, geometric empty pullbacks, or hypercovers; none states this assertion for pro-etale sheaves or condensed coefficient modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence",
+  "date": "2026-10-17",
+  "group": "H4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.BaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_openImmersionLowerShriekBaseChangeMap",
+  "statement": "lemma isIso_openImmersionLowerShriekBaseChangeMap (hsq : IsPullback g' j' j g'') :\n    IsIso (openImmersionLowerShriekBaseChangeMap A hsq.toCommSq)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-17"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence",
+  "worker": "H4",
+  "summary": "Fully proved supporting lemma; no new sorry or definition change.",
+  "blueprint": "The restriction to X; the underived cartesian open-extension support calculation",
+  "tool_uses": [
+   {
+    "node": "def-sfb-finite-extension-by-zero-adjunction",
+    "why": "Generic sheaf, coefficient or exact-derived-functor tool used for this local open/closed step; no replacement of the compactification or proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic sheaf, coefficient or exact-derived-functor tool used for this local open/closed step; no replacement of the compactification or proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic sheaf, coefficient or exact-derived-functor tool used for this local open/closed step; no replacement of the compactification or proper-base-change unit route."
+   }
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261017T021602-L-694556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261017T021602-L-694556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
