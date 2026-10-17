@@ -6,7 +6,7 @@ Authors: SHEAF contributors
 module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselization
-public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
+import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
@@ -49,6 +49,11 @@ theorem strictHenselizationLocalStructure
     (barY : Spec (.of Ω) ⟶ Y) :
     ∃ (_ : IsLocalRing (Scheme.strictHenselizationRing barY)),
       IsStrictlyHenselianLocalRing (Scheme.strictHenselizationRing barY) := by
-  sorry
+  let e : Scheme.strictHenselization barY ≅ Scheme.strictHenselizationRing barY :=
+    (Scheme.smallStrictHenselizationColimitIso barY).symm
+  have : IsStrictlyHenselianLocalRing (Scheme.strictHenselization barY) :=
+    ⟨inferInstance⟩
+  have h := IsStrictlyHenselianLocalRing.of_ringEquiv e.commRingCatIsoToRingEquiv
+  exact ⟨h.toHenselianLocalRing.toIsLocalRing, h⟩
 
 end AlgebraicGeometry
