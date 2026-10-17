@@ -27,7 +27,8 @@
  "stmt_deps": [
   "def-coef-left-module-operadic-encoding",
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-operadic-approximation-restriction"
+  "lem-coef-operadic-approximation-restriction",
+  "def-coef-lm-pointed-projection"
  ],
  "proof": [
   {
@@ -303,5 +304,43 @@
   "group": "Q116",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-5cacd07bb (reviewer sub-agent of L); spot-checked: I read the item and all ten steps in full, together with the full statements of the five cited nodes and the parent's steps 1, 4, 5 and 6. Higher Algebra is not in literature/, so it is correctly marked WANTED with proof_origin agent; I checked the mathematics against the definitions in the DAG. The LCut and Cut blocks match inverse images of initial segments. The module input is always last, and θ is inert and natural. Colour fibres: Cut has only {[1]} and the prism has the discrete pair ([1],1), ([0],0); the cross candidate discards its module input. Markings: interval inclusion, plus α(m)=n on the bottom; the factorization is vertical-first. Step 2: ordinary nerves are inner fibrations with discrete right-pinched mapping spaces, and the cartesian case follows from the opposite category. Step 3: J→J^H is an equivalence and (1,t) lifts every isomorphism. Step 4: singleton fibres give the p-cocartesian factor and the colours match. Step 6: I recomputed every Hom set over ρ_i, including relabelling by σ^{-1}(i). Steps 7–9: the prefix-sum lifts are correct, including n=0, s=0 and empty fibres; uniqueness uses λ(0)=δ(0), and cross competitors are covered. Step 10 is exactly clauses (i) and (ii) of the approximation definition. My own brute-force check found exactly one factor in all 5600 cartesian cases (n≤3, every competitor and base map) and matched the marking predicate on every edge. The delivery has one commit, no new nodes and no cycle. proof_deps equals the union of the steps' uses. All cited statement nodes are in the same unit, and the only off-unit node is a definition, so no tool_uses are needed. The delivery's HA Remark 4.2.2.26 source-error example (α=(0,1) gives a module fibre {2,3}) is correct and does not affect the item. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b65943248",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Clause-by-clause match of lm_prism_approximation against the node. LCut/Cut objects and block formula: lmPrismWords is the 0-based form of a(j)<i+1<=a(j+1) with final suffix a(m)<i+1, and top words equal the recorded lmCutWords. theta words [j.castSucc] and its naturality square; endpoints iota0/iota1 of lmPrism on Nerve(Delta^op) ⊗ Delta[1]. IsOperadicApproximation for (lmAlgebraInclusion ≫ lmPointedProjection, lmCut) and (lmPointedProjection, lmPrism), with replacement allowed as in the node. IsFunctorEquivalence of operadicColourMap; Cut and prism colour fibres characterised in all degrees (constant [1]; constant ([1],1) or ([0],0)) with images a, a, m. Markings: top interval, bottom interval plus a(m)=n, vertical inert, cross interval, vertical-first factorization; bridge lmPointedProjection_inert_iff checked true. Python transcription of the Lean word formulas confirmed admissibility, theta, naturality, factorization, all four marking iffs and composition for l,m,n<=3. Edge cases n=0, m=0, r=0 covered, one universe u, no extra hypotheses. No hollow definitions, all theorems sorry with HA/blueprint docstrings, no duplicate notion; added stmt_dep def-coef-lm-pointed-projection is landed; lean.statement verbatim and all 17 declarations present. nt_compile.py: clean, 2.2 s, exit 0. Cosmetic only: HA numbers in report.md replaced by 'the project server' in transit; node source and module docstrings carry them correctly."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LMPrismApproximation",
+  "declaration": "SSet.Enhanced.lm_prism_approximation",
+  "declarations": [
+   "SSet.Enhanced.IsLMInterval",
+   "SSet.Enhanced.lmPrismObject",
+   "SSet.Enhanced.lmPrismWords",
+   "SSet.Enhanced.lmPrismWords_admissible",
+   "SSet.Enhanced.lmPrismArrow",
+   "SSet.Enhanced.lmPrismArrow_id",
+   "SSet.Enhanced.lmPrismArrow_comp",
+   "SSet.Enhanced.lmPrismFunctor",
+   "SSet.Enhanced.lmLeftCutFunctor",
+   "SSet.Enhanced.lmLeftCut",
+   "SSet.Enhanced.lmPrismTheta",
+   "SSet.Enhanced.lmPrismSimplex",
+   "SSet.Enhanced.lmPrismSimplex_natural",
+   "SSet.Enhanced.lmPrism",
+   "SSet.Enhanced.lmAlgebraPointedBase",
+   "SSet.Enhanced.lmPointedProjection_inert_iff",
+   "SSet.Enhanced.lm_prism_approximation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LMPrismApproximation.lean",
+  "statement": "theorem lm_prism_approximation : SSet.ι₀ ≫ lmPrism.{u} = lmLeftCut ∧ SSet.ι₁ ≫ lmPrism.{u} = lmCut ≫ lmAlgebraInclusion ∧ (∀ (n : ℕ) (j : Fin n), (lmPrismTheta n).hom j = [j.castSucc]) ∧ (∀ {m n : ℕ} (a : ⦋m⦌ ⟶ ⦋n⦌), lmLeftCutFunctor.map a.op ≫ lmPrismTheta m = lmPrismTheta n ≫ lmCutArrow a) ∧ IsOperadicApproximation lmAlgebraPointedBase.{u} lmCut ∧ IsOperadicApproximation lmPointedProjection.{u} lmPrism ∧ IsFunctorEquivalence (operadicColourMap lmAlgebraPointedBase.{u} lmCut) ∧ IsFunctorEquivalence (operadicColourMap lmPointedProjection.{u} lmPrism) ∧ (∀ (r : ℕ) (d : (monoidalSimplexBase.{u}) _⦋r⦌), (lmCut ≫ lmAlgebraPointedBase).app _ d = (finStarBase.{u}).map (SimplexCategory.const ⦋r⦌ ⦋0⦌ 0).op (finStarVertex 1) ↔ d = (monoidalSimplexBase.{u}).map (SimplexCategory.const ⦋r⦌ ⦋0⦌ 0).op (monoidalBaseVertex 1)) ∧ (∀ (r : ℕ) (d : (monoidalSimplexBase.{u}) _⦋r⦌) (t : (Δ[1] : SSet.{u}) _⦋r⦌), (lmPrism ≫ lmPointedProjection).app _ (d, t) = (finStarBase.{u}).map (SimplexCategory.const ⦋r⦌ ⦋0⦌ 0).op (finStarVertex 1) ↔ (d = (monoidalSimplexBase.{u}).map (SimplexCategory.const ⦋r⦌ ⦋0⦌ 0).op (monoidalBaseVertex 1) ∧ t = stdSimplex.const 1 1 _) ∨ (d = (monoidalSimplexBase.{u}).map (SimplexCategory.const ⦋r⦌ ⦋0⦌ 0).op (monoidalBaseVertex 0) ∧ t = stdSimplex.const 1 0 _)) ∧ lmCut.app _ (monoidalBaseVertex 1) = lmAlgebraVertex 1 ∧ lmPrism.app _ (monoidalBaseVertex 1, stdSimplex.obj₀Equiv.symm 1) = lmVertex (lmAlgebraObject 1) ∧ lmPrism.app _ (monoidalBaseVertex 0, stdSimplex.obj₀Equiv.symm 0) = lmVertex lmModuleObject ∧ (∀ {m n : ℕ} (a : ⦋m⦌ ⟶ ⦋n⦌), IsLMInert (lmCutArrow a) ↔ IsLMInterval a) ∧ (∀ {m n : ℕ} (a : ⦋m⦌ ⟶ ⦋n⦌), IsLMInert (lmLeftCutFunctor.map a.op) ↔ IsLMInterval a ∧ (a.toOrderHom (Fin.last m)).val = n) ∧ (∀ n : ℕ, IsLMInert (lmPrismTheta n)) ∧ (∀ {m n : ℕ} (a : ⦋m⦌ ⟶ ⦋n⦌), IsLMInert (lmPrismArrow a 0 1 (by decide)) ↔ IsLMInterval a) ∧ ∀ {m n : ℕ} (a : ⦋m⦌ ⟶ ⦋n⦌), lmPrismArrow a 0 1 (by decide) = lmPrismTheta n ≫ lmCutArrow a",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Constructs the canonical ordinary prism from increasing fibre words and its simplicial cylinder, reusing the newly landed canonical lmPointedProjection. The main theorem states every endpoint, quotient, approximation, colour-fibre and inert-marking clause. Auxiliary theorems postpone only admissibility, identity/composition, simplicial naturality and singleton-word inertness."
  }
 }

@@ -11,7 +11,10 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
   "lem-coef-pinched-cube-latching",
-  "lem-coef-simplicial-boundary-collapse-test"
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-cone-presheaf-adjunction",
+  "lem-coef-contravariant-slice-model",
+  "lem-coef-simplicial-projective-model-calculus"
  ],
  "proof": [
   {
@@ -374,5 +377,55 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-a822502bf (reviewer sub-agent of L); spot-checked: I read the item, its 10 steps, both new nodes and all 21 cited statements. HTT §§2.1.4, 2.2.1–2.2.3, A.3.1 and A.3.3 are not archived under literature (WANTED), so proof_origin agent is correct; I checked the steps against the HTT mathematics, not an archived copy. The item statement is byte-identical to live; no target is weakened. My own traversal of the closure found 253 nodes, acyclic, with no path to the item, to lem-coef-unmarked-straightening-quillen or to pinched-rigidification-resolution. All proof deps are in unit sk-prop-sf-biduality-general except lem-cbc-simplicial-homotopy-equivalence-weak; I accept it as a tool (generic: a simplicial homotopy equivalence is a weak equivalence). Step checks: Step 2's DK test on the collage gives both preservation and reflection, since the cone map is the identity on objects and base mapping sets. Step 3's A.3.1.7 hypotheses hold via the right-anodyne final-vertex section and filtered colimits through the cocontinuous T. Step 4's mapping-test definition matches the slice node's cone weak equivalences via R-replacement, SM7 and π0 inverses. Step 5's Q-realization cell induction and the identity e∘V(j)=p are correct, and avoid the cyclic pinched-rigidification node. Step 6: fiber = Sing_Q F(s) via the representable×Q^n formula and enriched Yoneda; the constant-factor and enrichment construction is correct. Step 7 cites the existing Q68 descent node: same D, cone module, U_S and Q→Δ enrichment. Step 8's Quillen-equivalence criterion from Ho≃π0, the derived counit and Step 2 reflection is correct. Steps 9–10: reversal transport with the usual tensor is correct. Small cases checked: K=Δ^1 point formula (Q^1=Δ^1), S=∅, S=pt, n=0. The recognition node is true and not a duplicate. Repair (B3/unused clauses): lem-coef-cone-boundary-projective-cells also asserted L_a cocontinuity, boundary projective cofibrations, and a paragraph on sCat cofibrations and homotopy pushouts 'in the model structure' of lem-coef-simplicial-interval-lifting, which defines no model structure on sCat. The item uses none of these. I trimmed them and kept every clause the item cites verbatim; stmt_deps are now [pinched-cube-latching], and title, source.place and from.place are updated (fixes/dag/nodes/sec-six-functors/lem-coef-cone-boundary-projective-cells.json). For the maintainer: the top-level tool_uses ['lem-cbc-right-fibration-space-fiber'] is inherited from the base and stale (the report says it was removed, but it is still there). Replace it with the accepted lem-cbc-simplicial-homotopy-equivalence-weak.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa2e5ce49",
+  "group": "Q27",
+  "result": "fix",
+  "note": "Read node (statement byte-identical to live; stmt_deps add three landed acyclic prerequisites), HTT 2.1.4/2.2.1-3/A.3.3 mathematics, full 782-line module, report (Worker report + Second reading by Q27 present), and dependency decls (ConePresheaf left/right/classes/mapping, Straightening cone pushout, transportOverHom, fiber/fiberMap, UnmarkedStraightening Diagram/classes, DwyerKanEquivalence, SatisfiesSM7, SimplicialTensorCotensor, Mathlib full-subcategory enrichment). Every clause matches: projective and slice simplicial models with classes and mapping complexes fixed, canonical left/right adjunction, simplicial U_S with DK restriction on D^cf to RFib, Kan fiber comparison F(s)->(U F)_s, weak preservation to over-S homotopy equivalences, coherent base change via pullbackId/Comp, constant-product map, Quillen criterion, covariant transport/reversal/opposite formula/derived/fibers/space comparison. Universes all u; no extra hypotheses; no hollow data; edge cases S empty/point, n=0, non-Kan checked. nt_compile clean (6.8 s). FIX: added the missing rule-7 private imports of the stated proof deps ConeBoundaryProjectiveCells and UnstraighteningHomotopyDescent; fixed module compiles cleanly; complete module and report (appended fix section) in fixes/. Maintainer notes: reverse imports from UnmarkedStraighteningQuillen/SpaceTransportClassification must be left out (cycle; listed in report); ConstantBaseChangeData base-naturality accepted as reading of 'natural'."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialRightFibrationPresentation",
+  "declaration": "SSet.SimplicialRightFibration.simplicial_right_fibration_presentation",
+  "declarations": [
+   "SSet.SimplicialRightFibration.enrichedOp",
+   "SSet.SimplicialRightFibration.Diagram",
+   "SSet.SimplicialRightFibration.IsKanDiagram",
+   "SSet.SimplicialRightFibration.DiagramCF",
+   "SSet.SimplicialRightFibration.RFib",
+   "SSet.SimplicialRightFibration.IsOverHomotopyEquivalence",
+   "SSet.SimplicialRightFibration.slicePrecompose",
+   "SSet.SimplicialRightFibration.SimplicialModel",
+   "SSet.SimplicialRightFibration.ProjectiveData",
+   "SSet.SimplicialRightFibration.SliceData",
+   "SSet.SimplicialRightFibration.QuillenEquivalenceData",
+   "SSet.SimplicialRightFibration.RightData",
+   "SSet.SimplicialRightFibration.RestrictionData",
+   "SSet.SimplicialRightFibration.BaseChangeData",
+   "SSet.SimplicialRightFibration.productFamily",
+   "SSet.SimplicialRightFibration.ConstantData",
+   "SSet.SimplicialRightFibration.CovDiagram",
+   "SSet.SimplicialRightFibration.covMapping",
+   "SSet.SimplicialRightFibration.CovProjectiveData",
+   "SSet.SimplicialRightFibration.CoherentReversal",
+   "SSet.SimplicialRightFibration.covKanProperty",
+   "SSet.SimplicialRightFibration.covKanWeak",
+   "SSet.SimplicialRightFibration.CovariantData",
+   "SSet.SimplicialRightFibration.CovRestrictionData",
+   "SSet.SimplicialRightFibration.CovBaseChangeData",
+   "SSet.SimplicialRightFibration.CovConstantData",
+   "SSet.SimplicialRightFibration.ConstantBaseChangeData",
+   "SSet.SimplicialRightFibration.Presentation",
+   "SSet.SimplicialRightFibration.simplicial_right_fibration_presentation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialRightFibrationPresentation.lean",
+  "statement": "theorem simplicial_right_fibration_presentation : Nonempty Presentation.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the explicit landed ConePresheaf.left/right constructions and their full enriched transformations. Helper structures package every clause, with model axioms, SM7, actual adjuncts, coherent base substitution, and the ordinary opposite-base covariant formula. SpaceTransportClassification and UnmarkedStraighteningQuillen are imported only for their concrete mapping/diagram definitions, never their downstream theorems; adding their owning theorem nodes as prerequisites would create a DAG cycle."
  }
 }
