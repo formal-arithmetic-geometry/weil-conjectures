@@ -2,7 +2,7 @@
  "id": "lem-trf-site-object-derived-sections-pullback",
  "kind": "statement",
  "title": "Derived sections after inverse image along a continuous cocontinuous site morphism",
- "statement": "Let $u:\\mathcal C\\to\\mathcal D$ be a continuous and cocontinuous functor of sites in the common size universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], and let $g:\\mathrm{Sh}(\\mathcal C)\\to\\mathrm{Sh}(\\mathcal D)$ be the induced geometric morphism [def-trf-geometric-morphism]. For every object $U\\in\\mathcal C$ and every $M\\in D^+(\\mathrm{Ab}(\\mathcal D))$ [def-weil-abstract-derived-category, def-weil-pbc-bounded-derived-subcategories], the canonical comparison\n$$R\\Gamma(U,g^{-1}M)\\xrightarrow{\\sim}R\\Gamma(u(U),M)$$\nis an isomorphism, natural in $M$.",
+ "statement": "Let $u:\\mathcal C\\to\\mathcal D$ be a continuous and cocontinuous functor of sites in the common size universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention, def-weil-pbc-special-cocontinuous-functor](1), and let $g:\\mathrm{Sh}(\\mathcal C)\\to\\mathrm{Sh}(\\mathcal D)$ be the induced geometric morphism [def-trf-geometric-morphism]. For every object $U\\in\\mathcal C$ and every $M\\in D^+(\\mathrm{Ab}(\\mathcal D))$ [def-weil-abstract-derived-category, def-weil-pbc-bounded-derived-subcategories], the canonical comparison\n$$R\\Gamma(U,g^{-1}M)\\xrightarrow{\\sim}R\\Gamma(u(U),M)$$\nis an isomorphism, natural in $M$.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0DD8, lemma-pullback-same-cohomology, part (1), bounded-below case"
@@ -12,11 +12,76 @@
   "def-weil-size-convention",
   "def-trf-geometric-morphism",
   "def-weil-abstract-derived-category",
-  "def-weil-pbc-bounded-derived-subcategories"
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-special-cocontinuous-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $L=g^{-1}$. The continuous-cocontinuous adjunction theorem identifies its underlying set sheaf with precomposition: $(LF)(V)=F(u(V))$. Applying this identity to addition, zero and negation identifies the same formula on abelian sheaves, on morphisms and on restriction maps. Thus there is a natural additive isomorphism $e_F:\\Gamma(U,LF)\\xrightarrow{\\sim}\\Gamma(u(U),F)$, given by the identity on these sections. The constant-left-module inverse-image theorem with $\\Lambda=\\mathbf Z$ says that $L$ is exact and its termwise application induces inverse image on $D^+$. An abelian sheaf has a unique $\\mathbf Z$-action, by repeated addition, so this specialization changes neither the sheaf nor the morphisms.",
+   "uses": [
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DD8, bounded-below proof; inverse-image formula Tag 00XR, lemma-when-shriek; exactness on algebraic structures Tag 00YV."
+   }
+  },
+  {
+   "text": "Both abelian sheaf categories have enough injectives by the site-sheaf theorem; the sites are small in the stated universe. Choose an integer $a$ below the cohomology of $M$. The bounded-below injective-representative theorem gives a complex $I^\\bullet$ of injectives with $I^n=0$ for $n<a$ and $QI^\\bullet\\cong M$. By step 1, $LI^\\bullet$ is bounded below with the same lower bound and represents $LM$. The right-derived injective-computation theorem, applied to the additive evaluation functors on both sites, supplies the ordinary derived sections and their natural comparison units. In particular its injective-complex clause gives $Q\\Gamma(u(U),I^\\bullet)\\xrightarrow{\\sim}R\\Gamma(u(U),M)$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DD8, first proof sentence; injective representative 013K and right-derived computation 05TI."
+   }
+  },
+  {
+   "text": "For each $n$, apply the pulled-back-injective acyclicity theorem to $I^n$: its hypotheses are precisely continuity and cocontinuity of $u$ and injectivity of $I^n$, so $H^p(U,LI^n)=0$ for all $p>0$. Evaluation $\\Gamma(U,-)$ is additive and left exact by the site-cohomology definition. Hence the acyclic-complex unit theorem (Leray) applied to the bounded-below complex $LI^\\bullet$ gives a canonical isomorphism $Q\\Gamma(U,LI^\\bullet)\\xrightarrow{\\sim}R\\Gamma(U,LM)$. The maps $e_{I^n}$ of step 1 form an isomorphism of complexes, since naturality applied to $d_I^n$ gives $e_{I^{n+1}}\\Gamma(U,Ld_I^n)=\\Gamma(u(U),d_I^n)e_{I^n}$. Combining its localization with the two computation isomorphisms gives the asserted isomorphism from $R\\Gamma(U,LM)$ to $R\\Gamma(u(U),M)$.",
+   "uses": [
+    "lem-trf-site-pullback-injective-evaluation-acyclic",
+    "def-weil-pbc-sites-and-cohomology",
+    "src-right-derived-functor-plus-acyclic-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DD8, first proof sentence, using 0D6X and Leray acyclicity Tag 015E."
+   }
+  },
+  {
+   "text": "To specify the arrow, let $r:LI^\\bullet\\to J^\\bullet$ be a bounded-below injective replacement. The usual derived pullback of sections is represented by $\\Gamma(u(U),I^\\bullet)\\xrightarrow{e_{I^\\bullet}^{-1}}\\Gamma(U,LI^\\bullet)\\xrightarrow{\\Gamma(U,r)}\\Gamma(U,J^\\bullet)$. The second arrow is exactly the acyclic-complex comparison used in step 3, by naturality of the derived comparison unit with respect to $r$ and its injective-complex normalization. Thus the isomorphism of step 3 is the inverse of this canonical pullback, in the direction written in the statement. The same naturality and the naturality of $e$ give naturality in $M$: comparison units commute with coefficient maps, and their inverses do so as well. The uniqueness clause for right derived functors identifies these constructions after any change of injective representatives, so the conclusion concerns the ordinary derived-section functors, with no choice of a new cohomology theory.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "src-right-derived-functor-plus-acyclic-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DD8, bounded-below comparison; Tag 015E canonical map, and Tag 05TI injective computation and uniqueness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-trf-site-pullback-injective-evaluation-acyclic",
+  "def-weil-pbc-sites-and-cohomology",
+  "src-right-derived-functor-plus-acyclic-unit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DD8, lemma-pullback-same-cohomology, bounded-below part (1): injective representative, 0D6X acyclicity, and Leray 015E; canonical-map and naturality details expanded using the natural right-derived comparison unit."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +110,52 @@
    "results": "CategoryTheory.Functor.sheafPullback; CategoryTheory.Functor.sheafPushforwardContinuous_obj_val_map; CategoryTheory.Functor.sheafPushforwardContinuous; CategoryTheory.Functor.sheafAdjunctionContinuous; CategoryTheory.Functor.sheafPushforwardContinuous_obj_val_obj; no derived-sections comparison.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(cocontinuous|Cocontinuous).*(acyclic|rightDerived|cohomology)|sameCohomology",
+   "results": "{\"t\": \"2026-10-17T21:01:06Z\", \"tool\": \"grep\", \"query\": \"(cocontinuous|Cocontinuous).*(acyclic|rightDerived|cohomology)|sameCohomology\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: sheaf adjunction and restriction formulas do not give the objectwise derived-section isomorphism; cover-density equivalences require extra hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPushforwardContinuous\", \"rightDerived\"",
+   "results": "{\"t\": \"2026-10-17T21:01:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafPushforwardContinuous\\\", \\\"rightDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: sheaf adjunction and restriction formulas do not give the objectwise derived-section isomorphism; cover-density equivalences require extra hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sections of inverse image for a continuous and cocontinuous functor of sites",
+   "results": "{\"t\": \"2026-10-17T21:01:07Z\", \"tool\": \"leansearch\", \"query\": \"Derived sections of inverse image for a continuous and cocontinuous functor of sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullback\", \"CategoryTheory.Functor.sheafPushforwardContinuous_obj_val_map\", \"CategoryTheory.Functor.IsCocontinuous\", \"CategoryTheory.Functor.IsCocontinuous.mk\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafPushforwardContinuous\", \"SheafOfModules.pushforwardSections\"], \"digest\": \"e24759aec3bdcac3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: sheaf adjunction and restriction formulas do not give the objectwise derived-section isomorphism; cover-density equivalences require extra hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous cocontinuous functor of sites: derived sections of the inverse image over U equal derived sections over u(U)",
+   "results": "{\"t\": \"2026-10-17T21:01:09Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous cocontinuous functor of sites: derived sections of the inverse image over U equal derived sections over u(U)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\"], \"digest\": \"9e9177798d72b8c8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: sheaf adjunction and restriction formulas do not give the objectwise derived-section isomorphism; cover-density equivalences require extra hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafAdjunctionCocontinuous|isLocallyInjective_whisker",
+   "results": "{\"t\": \"2026-10-17T21:01:30Z\", \"tool\": \"grep\", \"query\": \"sheafAdjunctionCocontinuous|isLocallyInjective_whisker\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\"], \"digest\": \"3abe711bff7a9799\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: sheaf adjunction and restriction formulas do not give the objectwise derived-section isomorphism; cover-density equivalences require extra hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves along a site functor which preserves and lifts covers preserves sheaf cohomology evaluated at corresponding objects",
+   "results": "{\"t\": \"2026-10-17T21:01:33Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of sheaves along a site functor which preserves and lifts covers preserves sheaf cohomology evaluated at corresponding objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map\", \"CategoryTheory.CompatiblePreserving.compatible\", \"CategoryTheory.CompatiblePreserving.apply_map\", \"CategoryTheory.Equivalence.hasSheafCompose\", \"CategoryTheory.Presheaf.isSheaf_iff_isSheaf_comp\", \"CategoryTheory.hasSheafCompose_of_preservesMulticospan\"], \"digest\": \"5f0dac33e0ae3f01\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: sheaf adjunction and restriction formulas do not give the objectwise derived-section isomorphism; cover-density equivalences require extra hypotheses."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-proper-small-big-etale-derived-comparison",
@@ -76,5 +183,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-site-object-derived-sections-pullback",
+  "worker": "stage1",
+  "summary": "Kept the mathematical statement and supplied the missing cocontinuity definition citation. Proved the bounded-below comparison by the precomposition formula, an injective representative, pulled-back-injective evaluation acyclicity (one new statement-only 0D6X node), and Leray. Identified the canonical arrow as the inverse of the usual derived pullback of sections and checked naturality through comparison units. No SGA route and no finite-connected-limit or total-acyclicity assumption.",
+  "blueprint": "Realizes the inherited normal-cone/Orgogozo first-descent ph/etale comparison, through the proper small/big etale comparison, at the objectwise 0DD8 derived-section input. The current main-20261015 sk-i-curve-zero unit and historical ancestry are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "why": "Generic site-theoretic precomposition formula for this same continuous-cocontinuous geometric inverse image; the trace-formula unit has no general formula node."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic geometric inverse-image exactness specialized to integer modules, equivalently abelian sheaves; it supplies termwise derived inverse image, not a replacement of a unit proof step."
+   },
+   {
+    "node": "src-right-derived-functor-plus-acyclic-unit",
+    "why": "Generic Leray comparison unit for any bounded-below complex of evaluation-acyclic objects; this is the homological tool expressly used in the 0DD8 proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "lem-pe-constant-left-module-inverse-image",
+  "src-right-derived-functor-plus-acyclic-unit"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q71-1776876ba",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q71-1776876ba (reviewer sub-agent of L); spot-checked: Read the item, new node, unit/chapter route, cited DAG statements, Stacks Tags 0D6X/0DD8, Sites 00XR/00YV, and Derived Categories 015E/05TI. Verified hypotheses, coefficient category, variance, canonical comparison direction, edge cases, Mathlib searches, duplicate/cycle absence, and ordinary derived route compliance. All proof steps are under 2000 characters and contain no hidden lemma requiring extraction. Review written to review.md."
  }
 }

@@ -14,9 +14,58 @@
   "def-weil-residue-field",
   "def-pc-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put T=X_s and let ξ be the point of T induced by x. By stability of locally finite type under base change, the second projection T→Spec κ(s) is locally of finite type. To prove that ξ is closed, let y be any specialization of ξ in T and choose an affine open U⊂T containing y. Opens are stable under generalization, so U also contains ξ.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-lft-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TE and 01TF: the affine-local proof that algebraic (hence finite) residue extensions make a point closed in the fibre, with the locally-finite-type converse."
+   }
+  },
+  {
+   "text": "The restriction U→Spec κ(s) is of finite type: the affine-pair criterion gives a finitely generated κ(s)-algebra for its coordinate ring, and the affine source is quasi-compact. The fibre stalk quotient identifies the local ring of ξ in T with the quotient of the local ring of x by the maximal ideal of κ(s), hence identifies κ_T(ξ) with κ_X(x) and its κ(s)-map. The open immersion U→T preserves this residue field by residue-field naturality. Therefore κ_U(ξ) is finite over κ(s), and the finite-type-over-a-field closed-point criterion makes ξ closed in U.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-finite-type-morphism",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TE and 01TF: the affine-local proof that algebraic (hence finite) residue extensions make a point closed in the fibre, with the locally-finite-type converse."
+   }
+  },
+  {
+   "text": "Since y lies in U and in the closure of {ξ} in T, while ξ is closed in U, we get y=ξ. Thus ξ has no proper specialization. For a scheme this is equivalent to the singleton {ξ} being closed, so the point induced by x is closed in X_s.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TE and 01TF: the affine-local proof that algebraic (hence finite) residue extensions make a point closed in the fibre, with the locally-finite-type converse."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-finite-type-morphism",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-kun-closed-point-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01TE and 01TF, especially the reduction to an affine neighbourhood and the maximal-ideal argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,7 +111,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-relative-completion-etale-approximation",
@@ -89,5 +138,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-residue-point-closed-in-fibre",
+  "worker": "stage1",
+  "summary": "No exact sorry-free Lean declaration states this relative-fibre conclusion. I split the Stacks affine-local argument: base-change local finite type, an affine neighbourhood of an arbitrary specialization, identification of the fibre residue field, and the finite-type-over-a-field closed-point criterion. No new node was needed; all non-elementary ingredients are existing DAG statements.",
+  "blueprint": "Realizes the blueprint.from clause inherited from lem-trf-local-term-locality: the final smooth-slicing paragraph records that finite residue extension makes the point closed in its fibre, using Stacks Tags 01TE and 01TF.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Step 2 uses its finite-type-over-a-field criterion that finite residue field extension is equivalent to being a closed point; no node in the trace-formula unit supplies this generic field-theoretic lemma."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Step 2 uses its stalk quotient for a scheme-theoretic fibre to identify the fibre point's residue field with the original residue field; this is a generic base-change tool outside the trace-formula route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-closed-point-field",
+  "lem-sbc-scheme-fibre-stalk-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-e21189705",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-e21189705 (reviewer sub-agent of L); spot-checked: Mathematics and citations check out against Stacks Tags 01TE/01TF and all cited DAG statements. Repair required: the node’s created.item incorrectly names lem-trf-relative-completion-etale-approximation instead of the delivered item, violating delivery-errors A.4. Corrected full JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-finite-residue-point-closed-in-fibre.json.; 1 file(s) fixed by the reviewer"
  }
 }

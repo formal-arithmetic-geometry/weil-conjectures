@@ -12,9 +12,142 @@
   "def-weil-pbc-topos",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-trf-sieve-set-sheafification-exists] to obtain $a\\dashv i$ on $(\\mathcal D,J)$; write $\\eta_P:P\\to P^\\#$ for its unit. Its sheafification $a(\\eta_P)$ is an isomorphism: the universal property identifies $a(i(aP))$ with $aP$, and the two composites restrict along the universal maps to identities. Apply [lem-cbc-set-presheaf-sheafification-local-bijection] to $\\eta_P$. Thus every section of $P^\\#$ locally comes from $P$, and two sections of $P$ with equal images in $P^\\#$ agree on a covering sieve. These are statements about sieve covers; neither application assumes fibre products in $\\mathcal D$.",
+   "uses": [
+    "lem-trf-sieve-set-sheafification-exists",
+    "lem-cbc-set-presheaf-sheafification-local-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00ZM (proposition-sheafification-adjoint-topology); local representation and equality of the two-plus construction in Section 00ZG (section-sheafification-topology)."
+   }
+  },
+  {
+   "text": "Let $\\mathcal T=\\operatorname{Sh}(\\mathcal D,J;\\operatorname{Sets}_{\\mathcal V})$. Its terminal sheaf and pullbacks are computed sectionwise: a matching family in a pointwise limit glues in each component, and uniqueness of gluing forces all diagram equations; the pointwise universal maps then give the universal property in $\\mathcal T$. Start $\\mathcal C_0$ with the terminal sheaf and $H_d=a(h_d)$ for every $d\\in\\mathcal D$, and let $\\mathcal C_{n+1}$ contain $\\mathcal C_n$ and one sectionwise pullback for every cospan in it. Natural transformations between two sheaves form a subset of $\\prod_d\\operatorname{Map}(F(d),G(d))$, a $\\mathcal V$-set. Hence each stage has a $\\mathcal V$-set of cospans and objects, and the countable union is $\\mathcal V$-small by [def-weil-size-convention]. Let $\\mathcal C$ be the full category on this union. Every cospan occurs at some stage and has its pullback in the next, with the same universal property by fullness. This constructs all pullbacks in $\\mathcal C$ without asserting any in $\\mathcal D$.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CI (lemma-topos-good-site), iterative closure; sectionwise limit verification adapted directly to the sieve sheaf condition."
+   }
+  },
+  {
+   "text": "For an indexed family $p_i:A_i\\to A$ in $\\mathcal C$ and $x\\in A(d)$ put $L_p(x)=\\{f:e\\to d:\\exists i,\\ y\\in A_i(e),\\ p_i(y)=x|_e\\}$. This is a sieve. Declare the family covering when $L_p(x)\\in J(d)$ for every $d,x$. An isomorphism singleton has maximal lifting sieve. For $B\\to A$ and $b\\in B(d)$, the lifting sieve for the section $b$ in the pulled-back family equals $L_p(x)$ for its image $x$: a lift $y$ pairs with $b|_e$ to give a section of $A_i\\times_A B$. These pullbacks exist by step 2. For composites $A_{ij}\\to A_i\\to A$, first choose local lifts $y_i$ of $x$ along $p_i$ and then local lifts of each $y_i$ along its covering family; transitivity of $J$ makes their composite sieve covering. This verifies exactly the three covering axioms of [def-weil-pbc-sites-and-cohomology](1), for a class of families. The argument also handles empty families and repeated arrows.",
+   "uses": [
+    "def-weil-pbc-topos",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A1 (lemma-special-equivalence), omitted site-axiom verification, proved here using lifting sieves rather than an epi characterization for an unavailable original family site."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-small-set-of-covering-families] in universe $\\mathcal V$ to the class in step 3. It gives an axiom-closed representative set $\\operatorname{Cov}'$, with every locally lifting family having the same arrow support as one in $\\operatorname{Cov}'$. Let $\\mathcal S=(\\mathcal C,\\operatorname{Cov}')$. A sieve $T$ on $A$ is called $K$-covering when it contains such a family. This is a Grothendieck topology: the identity family proves maximality, pulled-back covering families prove pullback stability, and composites prove transitivity. Moreover $T$ is $K$-covering exactly when the family of all its arrows locally lifts every section of $A$. Indeed the forward implication follows from its contained covering family, and the reverse follows by choosing a representative of that all-arrows family. All indexing sets in this argument belong to $\\mathcal V$.",
+   "uses": [
+    "lem-weil-pbc-small-set-of-covering-families",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000X (sets-lemma-coverings-site); Tag 00ZC (lemma-site-gives-topology), topology associated to a covering-family site."
+   }
+  },
+  {
+   "text": "The adjunction of [lem-trf-sieve-set-sheafification-exists] and [lem-galois-yoneda-hom-bijection] give natural bijections $\\operatorname{Hom}_{\\mathcal T}(H_d,F)\\simeq\\operatorname{Hom}(h_d,iF)\\simeq F(d)$. Thus sheafification of the representable functor defines $v:\\mathcal D\\to\\mathcal C$, $d\\mapsto H_d$. For $f:e\\to d$, the map $v(f)$ corresponds to $\\eta_{h_d,e}(f)\\in H_d(e)$. A map $H_d\\to F$ corresponding to $s\\in F(d)$ sends $\\eta_{h_d,e}(f)$ to $F(f)(s)$, by naturality of the unit and of the Yoneda bijection. These formulas fix the functor and every subsequent identification; they do not require a representable on $\\mathcal D$ to be a sheaf.",
+   "uses": [
+    "lem-trf-sieve-set-sheafification-exists",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00ZM and 03A1 (lemma-special-equivalence), equation identifying maps from a sheafified representable with sections."
+   }
+  },
+  {
+   "text": "For a $J$-covering sieve $R$ on $d$, show that $v_*R$ is $K$-covering. Given $x\\in H_d(t)$, step 1 locally represents $x$ as $\\eta(f)$ for $f:e\\to d$, where $e\\to t$ ranges through a covering sieve. The pulled-back sieve $f^*R$ covers $e$ by [def-weil-pbc-topos]. For $g:w\\to e$ in it, $fg\\in R$ and $x|_w=\\eta(fg)$, which is the image of $\\eta(\\mathrm{id}_w)\\in H_w(w)$ under $v(fg):H_w\\to H_d$. Transitivity shows that every section of $H_d$ locally lifts along the family $\\{v(r)\\}_{r\\in R}$. Step 4 therefore makes its generated sieve $v_*R$ $K$-covering. The local-representative fact used here is precisely [lem-cbc-set-presheaf-sheafification-local-bijection] applied as in step 1.",
+   "uses": [
+    "def-weil-pbc-topos",
+    "lem-cbc-set-presheaf-sheafification-local-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03A1 (lemma-special-equivalence) and 00ZO (lemma-sieve-sheafification), forward covering-sieve test via local representatives."
+   }
+  },
+  {
+   "text": "Conversely suppose $v_*R$ is $K$-covering. Step 4 locally lifts $\\eta(\\mathrm{id}_d)\\in H_d(d)$ along arrows of $v_*R$. Each such arrow factors through $v(r):H_e\\to H_d$ for some $r:e\\to d$ in $R$, so on a $J$-covering sieve of arrows $k:t\\to d$ we have $\\eta(k)=v(r)(y)$ with $y\\in H_e(t)$. Represent $y$ locally as $\\eta(g)$ for $g:w\\to e$, by step 1. Naturality then gives $\\eta(k\\ell)=\\eta(rg)$, where $\\ell:w\\to t$ is the refinement arrow. Local injectivity from [lem-cbc-set-presheaf-sheafification-local-bijection] refines again until $k\\ell m=rgm$ as arrows to $d$. The right side belongs to $R$ since $R$ is a sieve. Transitivity of $J$ now says $R$ covers $d$. We have proved the exact preservation-and-reflection hypothesis $R\\in J\\iff v_*R\\in K$, without confusing equality of sheafified arrows with equality in $\\mathcal D$.",
+   "uses": [
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00ZO (lemma-sieve-sheafification), converse covering-sieve test using local representation followed by local equality."
+   }
+  },
+  {
+   "text": "Check the other comparison hypotheses. For $A\\in\\mathcal C$, the family of all maps $H_d\\to A$ covers: for $x\\in A(t)$ the map corresponding to $x$ in step 5 sends $\\eta(\\mathrm{id}_t)$ to $x$, so its lifting sieve contains the identity. Hence $v$ is cover dense. For $g:H_d\\to H_e$, its corresponding section $s\\in H_e(d)$ locally equals $\\eta(h)$ for arrows $h:t\\to e$. On that covering sieve of $f:t\\to d$ the step-5 formula yields $g\\circ v(f)=v(h)$; step 6 makes its image sieve $K$-covering, proving local fullness. Finally $v(f)=v(f')$ implies $\\eta(f)=\\eta(f')$ by step 5, so step 1 makes the sieve of $h$ with $fh=f'h$ $J$-covering. Step 6 makes its image $K$-covering, proving local faithfulness. This uses exactly the local representative and equality clauses of [lem-cbc-set-presheaf-sheafification-local-bijection] and the natural Yoneda formula of [lem-galois-yoneda-hom-bijection].",
+   "uses": [
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A1 (lemma-special-equivalence), verification of local fullness, local faithfulness and cover density; comparison conditions of Tag 03A0 (lemma-equivalence)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-sieve-dense-subsite-comparison] to $v:(\\mathcal D,J)\\to(\\mathcal C,K)$. Both categories are $\\mathcal V$-small by the hypothesis and step 2. Step 8 proves hypotheses (1)-(3) of the comparison, and steps 6-7 prove hypothesis (4). Its coefficient category is exactly $\\operatorname{Sets}_{\\mathcal V}$, which has limits over the $\\mathcal V$-small structured-arrow index categories. It therefore gives $\\operatorname{Sh}(\\mathcal D,J;\\operatorname{Sets}_{\\mathcal V})\\simeq\\operatorname{Sh}(\\mathcal C,K;\\operatorname{Sets}_{\\mathcal V})$. No instance requiring pullbacks on $\\mathcal D$ has been used.",
+   "uses": [
+    "lem-trf-sieve-dense-subsite-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sieve-topology form of Tag 03A0 (lemma-equivalence), implemented directly by Mathlib dense-subsite comparison."
+   }
+  },
+  {
+   "text": "Finally the $K$-sheaves are exactly the covering-family sheaves on $\\mathcal S$ of [def-weil-pbc-sites-and-cohomology](1). For a covering family $p_i:A_i\\to A$, compatible sections $s_i$ determine a matching family on its generated sieve: if $f:T\\to A$ factors as $p_i g$, set $s_f=g^*s_i$. Two factorizations agree by the pairwise pullback matching equation, so the family is well-defined and natural. Conversely restrict a sieve matching family to the $p_i$. If a sieve contains a covering family, glue there; to check that the glued section agrees on any other arrow $f$ of the sieve, pull that covering family back along $f$ and use uniqueness of gluing on its domains. Thus the two sheaf conditions agree, with identical natural transformations. Substituting this identification in step 9 yields the required equivalence with $\\operatorname{Sh}(\\mathcal S)$. All pullbacks in $\\mathcal C$ exist by step 2, so in particular the covering-member pullbacks required in the statement exist.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00ZC (lemma-site-gives-topology), proof of equivalence of family and sieve sheaf conditions, using the constructed pullbacks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-topos",
+  "def-weil-size-convention",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-trf-sieve-dense-subsite-comparison",
+  "lem-trf-sieve-set-sheafification-exists",
+  "lem-weil-pbc-small-set-of-covering-families"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sieve-site generalization of Tags 03CI and 03A1. The replacement category and covering-family axioms are constructed here; sheafification is 00ZM, representative coverings are Sets 000X, and the comparison is the Mathlib sieve formulation of 03A0."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +183,45 @@
    "results": "{\"t\": \"2026-10-17T20:35:37Z\", \"tool\": \"leanfinder\", \"query\": \"Replace a small sieve site by a small covering family site with the same Grothendieck topos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pretopology.toGrothendieck_toCoverage\", \"CategoryTheory.Precoverage.toGrothendieck_toCoverage\", \"CategoryTheory.Coverage.toGrothendieck_toPrecoverage\", \"CategoryTheory.Precoverage.toGrothendieck_toPretopology_eq_toGrothendieck\", \"CategoryTheory.GrothendieckTopology.copy\", \"CategoryTheory.GrothendieckTopology.copy_eq\", \"AlgebraicGeometry.Scheme.smallGrothendieckTopology_eq_toGrothendieck_smallPretopology\", \"CategoryTheory.Coverage.ofGrothendieck\"], \"digest\": \"4792ad9b22822b1e\"}",
    "date": "2026-10-18",
    "verdict": "no match: topology-to-pretopology conversion requires pullbacks on the original category; dense-subsite equivalences require an already constructed comparison functor and topologies. None constructs the asserted replacement for an arbitrary small sieve site."
+  },
+  {
+   "tool": "grep",
+   "query": "toGrothendieck|IsSiteForCoverings|sheafSubcategory_comparison",
+   "results": "{\"t\": \"2026-10-17T20:50:58Z\", \"tool\": \"grep\", \"query\": \"toGrothendieck|IsSiteForCoverings|sheafSubcategory_comparison\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Continuous.lean\", \"Mathlib/CategoryTheory/Sites/Continuous.lean\", \"Mathlib/CategoryTheory/Sites/Continuous.lean\", \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\"], \"digest\": \"dde2f8509400a8b1\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: toPretopology requires HasPullbacks on the original category, absent here. Coverage.ofGrothendieck does not supply covering-member pullbacks; dense-subsite comparison requires the constructed functor and four hypotheses, proved in the split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A small sieve site has an equivalent small site of covering families satisfying pullback axioms",
+   "results": "{\"t\": \"2026-10-17T20:50:58Z\", \"tool\": \"leansearch\", \"query\": \"A small sieve site has an equivalent small site of covering families satisfying pullback axioms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Cover\", \"CategoryTheory.typesGrothendieckTopology\", \"CategoryTheory.Precoverage.HasPullbacks.mk\", \"CategoryTheory.GrothendieckTopology.Cover.pullback\", \"CategoryTheory.GrothendieckTopology.covers_iff\", \"CategoryTheory.MorphismProperty.coverage\", \"CategoryTheory.GrothendieckTopology.Covers\", \"CategoryTheory.Pretopology.ofGrothendieck\"], \"digest\": \"78519e34da264a32\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: toPretopology requires HasPullbacks on the original category, absent here. Coverage.ofGrothendieck does not supply covering-member pullbacks; dense-subsite comparison requires the constructed functor and four hypotheses, proved in the split."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Precoverage, CategoryTheory.GrothendieckTopology, sheaf equivalence",
+   "results": "{\"t\": \"2026-10-17T20:50:58Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Precoverage, CategoryTheory.GrothendieckTopology, sheaf equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `sheaf`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: toPretopology requires HasPullbacks on the original category, absent here. Coverage.ofGrothendieck does not supply covering-member pullbacks; dense-subsite comparison requires the constructed functor and four hypotheses, proved in the split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a small category with a Grothendieck topology, construct a small covering-family site with equivalent sheaf category without assuming pullbacks",
+   "results": "{\"t\": \"2026-10-17T20:51:00Z\", \"tool\": \"leanfinder\", \"query\": \"Given a small category with a Grothendieck topology, construct a small covering-family site with equivalent sheaf category without assuming pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Coverage.ofGrothendieck\", \"CategoryTheory.GrothendieckTopology.toCoverage\", \"CategoryTheory.Pretopology.ofGrothendieck\", \"CategoryTheory.GrothendieckTopology.toPretopology\", \"CategoryTheory.GrothendieckTopology.toPrecoverage\", \"CategoryTheory.Sheaf.canonicalTopology\", \"CategoryTheory.coherentTopology\", \"CategoryTheory.Pretopology.toGrothendieck\"], \"digest\": \"57577f8c887b5ccf\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: toPretopology requires HasPullbacks on the original category, absent here. Coverage.ofGrothendieck does not supply covering-member pullbacks; dense-subsite comparison requires the constructed functor and four hypotheses, proved in the split."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology, CategoryTheory.Pretopology",
+   "results": "{\"t\": \"2026-10-17T20:55:26Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.GrothendieckTopology, CategoryTheory.Pretopology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.toPretopology\", \"CategoryTheory.Pretopology.toGrothendieck\", \"CategoryTheory.Pretopology.gi\", \"CategoryTheory.Pretopology.toGrothendieck_mono\", \"CategoryTheory.Pretopology.sInf_ofGrothendieck\", \"CategoryTheory.Pretopology.toGrothendieck_bot\", \"CategoryTheory.Pretopology.mem_toGrothendieck\", \"CategoryTheory.Pretopology.toGrothendieck_toCoverage\"], \"digest\": \"f19e04fd301f3d27\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: toPretopology requires HasPullbacks on the original category, absent here. Coverage.ofGrothendieck does not supply covering-member pullbacks; dense-subsite comparison requires the constructed functor and four hypotheses, proved in the split."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-topos-localization-site-presentation",
@@ -79,5 +247,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-sieve-sheaves-covering-site",
+  "worker": "stage1",
+  "summary": "Kept the statement. Constructed a small pullback-closed category of sheaves, verified local-lifting covering axioms and selected representative families. Proved cover preservation, cover reflection, cover density and local full faithfulness for sheafified Yoneda, then applied a general Mathlib dense-subsite leaf. Added only arbitrary-sieve sheafification existence and generic dense-subsite comparison as Mathlib leaves; reused the existing local-bijection and Yoneda nodes. The covering-family comparison node cannot be applied to the original sieve site and is not cited.",
+  "blueprint": "Generic source-localization input in the normal-cone specialization branch: replace the arbitrary small sieve-site presentation of a Grothendieck topos by a covering-family site before applying the good-site construction (Stacks 03CI).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-small-set-of-covering-families",
+    "why": "Generic set-theoretic selection of an axiom-closed set of indexed covering families from the local-lifting class; no trace-formula-unit node supplies this size tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-small-set-of-covering-families"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q19-4a357933f",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-4a357933f (reviewer sub-agent of L); spot-checked: Read the required instructions, packet/report, item, both new nodes, route, cited Stacks and Mathlib sources. Checked every proof step, hypotheses, small cases, citations, duplicates, coefficient category, and route-pivot compliance. No mathematical or mechanical faults found; review written to review.md."
  }
 }

@@ -12,11 +12,153 @@
   "def-kun-separably-closed",
   "def-weil-pbc-henselization-at-prime",
   "lem-trf-affine-etale-cover-component-criterion",
-  "def-weil-pbc-ind-etale-algebra"
+  "def-weil-pbc-ind-etale-algebra",
+  "def-pd-separable-closure",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-henselization-prime-ind-etale] to $(P,\\mathfrak q_i)$: each structural map $P\\to H_i$ is ind-etale. Base change in [lem-weil-pbc-ind-etale-stability] makes $H_1\\to T$ and $H_2\\to T$ ind-etale, and composition makes $P\\to T$ ind-etale. These are the specified tensor-factor maps, using the algebra tensor construction of [lem-weil-pbc-algebra-tensor-pushout-universal-property].",
+   "uses": [
+    "lem-trf-henselization-prime-ind-etale",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GN; proetale.tex Tags 097J (base change) and 097K (composition)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-component-ind-etale-local-henselian] to the chosen component $Z$: the actual quotient $T\\to U$ is ind-etale. Compose with the maps of Step 1 using [lem-weil-pbc-ind-etale-stability]. Thus $P\\to U$ and both $H_i\\to U$ are ind-etale, proving the final assertion already. The component-ring clause of [lem-trf-affine-etale-cover-component-criterion] identifies the underlying space of $\\operatorname{Spec}U$ with $Z$. In particular $U\\ne0$ and its spectrum is connected. No assertion about henselianity of $U$ has been used.",
+   "uses": [
+    "lem-trf-component-ind-etale-local-henselian",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-trf-affine-etale-cover-component-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EG (lemma-connected-component); proetale.tex Tag 097K."
+   }
+  },
+  {
+   "text": "Choose a small filtered presentation $U=\\varinjlim B_\\lambda$ by etale $P$-algebras, which exists by [def-weil-pbc-ind-etale-algebra]. Each $B_\\lambda$ is a normal ring by [lem-weil-pbc-etale-over-normal-ring-normal]. The underlying ring diagram also has colimit $U$ by [lem-weil-pbc-filtered-colimit-algebras-elementwise]. Apply [lem-weil-pbc-filtered-colimit-normal-ring] to conclude that $U$ is a normal ring. This asserts normality at prime localizations, and does not yet assert that $U$ is a domain.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 033C (lemma-normal-goes-up) and 037D (lemma-colimit-normal-ring)."
+   }
+  },
+  {
+   "text": "In the same presentation, suppose $a,b\\in U$ satisfy $ab=0$. The elementwise colimit statement [lem-pc-filtered-colimit-commrings-elementwise] and filteredness give representatives $a_\\lambda,b_\\lambda$ in one stage; its equality clause lets us pass to a later stage at which $a_\\lambda b_\\lambda=0$. Apply [lem-trf-etale-normal-domain-finite-factors] to that stage to write it as a finite product of normal domains $C_j$. By [lem-weil-pbc-spec-clopen-idempotent], the only idempotents of $U$ are $0,1$: its spectrum is nonempty and connected, and these correspond to the empty and whole clopens. The images of the coordinate idempotents of the finite product are orthogonal and sum to $1$, so exactly one is $1$ and all others are $0$. If it is the $j$th one, the ring map from that stage to $U$ factors through $C_j$: every element of the other factors is its own product with an idempotent mapping to zero. In the domain $C_j$ the projected relation gives $a_{\\lambda,j}=0$ or $b_{\\lambda,j}=0$; hence $a=0$ or $b=0$. Together with $U\\ne0$ this proves that $U$ is an integral domain.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-trf-etale-normal-domain-finite-factors",
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030C (lemma-characterize-reduced-ring-normal), finite-stage decomposition; Tag 00EE, idempotents and clopens; filtered-colimit element and relation argument."
+   }
+  },
+  {
+   "text": "Step 3 and the last sentence of [lem-weil-pbc-normal-domain-of-local-normal] show that the domain $U$ is integrally closed in $\\operatorname{Frac}(U)$. Also each $H_i$ is a local ring by its henselization structure [def-weil-pbc-henselization-at-prime], and is an ind-etale $P$-algebra by Step 1. The local colimit theorem [lem-weil-pbc-etale-colimit-normal-local-domain], applied to its etale $P$-algebra presentation, therefore makes each $H_i$ a normal integral domain. Its hypothesis is a local colimit, not necessarily a strict henselization.",
+   "uses": [
+    "lem-weil-pbc-normal-domain-of-local-normal",
+    "def-weil-pbc-henselization-at-prime",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030B (lemma-normality-is-local); more-algebra.tex Tag 06DI, local filtered etale colimits."
+   }
+  },
+  {
+   "text": "The maps $P\\to U$ and $H_i\\to U$ of Step 2 are weakly etale by [lem-weil-pbc-ind-etale-stability], hence flat by [def-weil-pbc-ind-etale-algebra]. For any one of their source domains $R$ and $0\\ne r\\in R$, multiplication $R\\xrightarrow{r}R$ is injective. The definition [def-weil-pbc-flat-ring-map], with the identifications $R\\otimes_RU=U$, says that multiplication by the image of $r$ on $U$ is injective. If that image were zero, it would kill $1\\ne0$ in $U$. Therefore each of the three ring maps is injective. In particular the structural map extends to $K\\hookrightarrow L=\\operatorname{Frac}(U)$.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-ind-etale-algebra",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "proetale.tex Tag 097N (ind-etale implies weakly etale); flatness applied to multiplication by a nonzero element."
+   }
+  },
+  {
+   "text": "Put $S=P\\setminus\\{0\\}$ and $V=K\\otimes_PU=S^{-1}U$. This identification sends $(p/s)\\otimes u$ to $pu/s$, and the inverse sends $u/s$ to $(1/s)\\otimes u$; the tensor relations and the localization fraction relation show these are inverse maps. By [lem-weil-pbc-ind-etale-stability], base change makes $K\\to V$ weakly etale. The map $V\\to L$ is a localization: inverting all nonzero images $u/1$ of $u\\in U$ gives fractions $(a/s)/(b/t)=at/(sb)$, precisely all fractions of the domain $U$, and the usual cross-multiplication equality is the same. Thus [lem-weil-pbc-localization-ring-weakly-etale] and composition in [lem-weil-pbc-ind-etale-stability] make $K\\to L$ weakly etale. Apply [lem-weil-pbc-weakly-etale-field-separable] to these fields to conclude that $L/K$ is separable algebraic.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-localization-ring-weakly-etale",
+    "lem-weil-pbc-weakly-etale-field-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "proetale.tex weak-etale base change/composition; more-algebra.tex Tag 092R (weakly etale residue field extensions)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-separable-extension-embeds-separably-closed] to the separable algebraic field extension $L/K$ and the fixed separable closure $K^{\\mathrm{sep}}$, which is separably closed. It supplies a $K$-algebra embedding $L\\hookrightarrow K^{\\mathrm{sep}}$. Restrict it along the canonical inclusion $U\\hookrightarrow L$ to get the required $P$-embedding. Composing with the injective maps of Step 6 gives the two stated embedded copies of $H_i$.",
+   "uses": [
+    "lem-weil-pbc-separable-extension-embeds-separably-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "fields.tex Tag 09GU, separable version; Mathlib IsSepClosed.lift (FieldTheory/IsSepClosed.lean:294)."
+   }
+  },
+  {
+   "text": "Let $\\jmath:U\\hookrightarrow K^{\\mathrm{sep}}$ be this embedding and let $J$ be the subring generated by the images of $H_1,H_2$ in it. The algebra tensor multiplication of [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives $a\\otimes b=(a\\otimes1)(1\\otimes b)$. Every element of $T$ is a finite sum of pure tensors, so its image under $T\\twoheadrightarrow U\\xrightarrow{\\jmath}K^{\\mathrm{sep}}$ lies in $J$. Surjectivity of the first map gives $\\jmath(U)\\subseteq J$. Conversely both images of $H_i$ lie in $\\jmath(U)$, which is a subring, so $J\\subseteq\\jmath(U)$. This proves the claimed equality of subrings for the actual quotient maps.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Huebner-Schmidt Theorem 6.3, printed p. 13: component quotient of the tensor product; elementary pure-tensor calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-henselization-at-prime",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-trf-affine-etale-cover-component-criterion",
+  "lem-trf-component-ind-etale-local-henselian",
+  "lem-trf-etale-normal-domain-finite-factors",
+  "lem-trf-henselization-prime-ind-etale",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-normal-ring",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-localization-ring-weakly-etale",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "lem-weil-pbc-separable-extension-embeds-separably-closed",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-weakly-etale-field-separable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Expansion of the normal-component argument in Huebner-Schmidt Theorem 6.3 (printed p. 13), using Tags 00EG, 030C, 033C, 037D, 04GN and the cited ind-etale/weakly-etale tools. The combined argument is written by the worker."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +194,42 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"separableClosure\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \": IntermediateField F E\", \"doc\": \"The separable closure of a field $ F $ in an extension field $ E $ is the intermediate field consisting of all elements of $ E $ that are separable over $ F $. An element is separable over $ F $ if it\"}\n  {\"name\": \"separableClosure.isSeparable\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \": Algebra.IsSeparable F (separableClosure F E)\", \"doc\": \"The separable closure of a field $ F $ in an extension field $ E $ is a separable algebra over $ F $.\"}\n  {\"name\": \"separableClosure.isGalois\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \"[Normal F E] : IsGalois F (separableClosure F E)\", \"doc\": \"If $ E $ is a normal extension of $ F $, then the separable closure of $ F $ in $ E $ is a Galois extension of $ F $. This means that the maximal subfield of $ E $ consisting of elements separable ove\"}\n  {\"name\": \"TensorProduct.toIntegralClosure\", \"module\": \"Mathlib.RingTheory.Smooth.IntegralClosure\", \"type\": \"(B : Type*) [CommRing B] [Algebra R B] : S ⊗[R] integralClosure R B →ₐ[S] integralClosure S (S ⊗[R] B)\", \"doc\": \"The algebra homomorphism from $ S \\\\otimes_R \\\\overline{B}^R $ to $ \\\\overline{S \\\\otimes_R B}^S $, where $ \\\\overline{B}^R $ denotes the integral closure of $ R $ in $ B $, and $ \\\\overline{S \\\\otimes_R B}^\"}\n  {\"name\": \"separableClosure.isAlgebraic\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \": Algebra.IsAlgebraic F (separableClosure F E)\", \"doc\": \"The separable closure of a field $ F $ in an extension field $ E $ is an algebraic extension of $ F $. This means every element of the separable closure satisfies a non-zero polynomial equation with c\"}\n  {\"name\": \"Ring.NormalClosure\", \"module\": \"Mathlib.RingTheory.NormalClosure\", \"type\": \": Type _\", \"doc\": \"The subalgebra of $ E $ consisting of all elements integral over the subring $ S $, i.e., elements satisfying a monic polynomial equation with coefficients in $ S $. This subalgebra is closed under ad\"}\n  {\"name\": \"SeparableClosure\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \": Type _\", \"doc\": \"The separable closure of a field $ F $ in its algebraic closure, consisting of all elements of the algebraic closure that are separable over $ F $. This is the maximal intermediate field between $ F $\"}\n  {\"name\": \"IntermediateField.normalClosure\", \"module\": \"Mathlib.FieldTheory.Normal.Closure\", \"type\": \": IntermediateField F L\", \"doc\": \"The normal closure is the supremum (join) in the lattice of intermediate fields of the images of all $F$-algebra homomorphisms from $K$ to $L$. It forms the smallest intermediate field between $F$ and\"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every connected component of the tensor product of henselizations of a normal domain is a normal domain embedded in a separable closure",
+   "results": "{\"t\": \"2026-10-17T21:01:54Z\", \"tool\": \"leanfinder\", \"query\": \"Every connected component of the tensor product of henselizations of a normal domain is a normal domain embedded in a separable closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.instIsSeparableFractionRingSubtypeAlgebraicClosureMemIntermediateFieldNormalClosure\", \"Ring.instIsGaloisFractionRingNormalClosure\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Ring.instIsFractionRingNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure\", \"Ring.instIsIntegralClosureNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"TensorProduct.toIntegralClosure\", \"Algebra.isGeometricallyReduced_iff\"], \"digest\": \"b483202324523be0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: only general etale or separability ingredients",
+   "digest": "b483202324523be0"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, IsIntegrallyClosed, HenselianLocalRing",
+   "results": "{\"t\": \"2026-10-17T21:01:49Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, IsIntegrallyClosed, HenselianLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: only general etale or separability ingredients",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "connectedComponent.*[Nn]ormal|[Nn]ormal.*connectedComponent|hensel.*tensor",
+   "results": "{\"t\": \"2026-10-17T21:01:48Z\", \"tool\": \"grep\", \"query\": \"connectedComponent.*[Nn]ormal|[Nn]ormal.*connectedComponent|hensel.*tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: only general etale or separability ingredients",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ind etale connected component over a normal integral domain is a domain with separable fraction field",
+   "results": "{\"t\": \"2026-10-17T21:01:48Z\", \"tool\": \"leansearch\", \"query\": \"Ind etale connected component over a normal integral domain is a domain with separable fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.IsSeparable.isAlgebraic\", \"Algebra.FormallyUnramified.isSeparable\", \"Algebra.FormallyEtale.iff_isSeparable\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.IsSeparable.of_integral\", \"Algebra.FormallyEtale.of_isSeparable_aux\"], \"digest\": \"ad9e84df159d740d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: only general etale or separability ingredients",
+   "digest": "ad9e84df159d740d"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-artin-join-theorem-6-3",
@@ -82,5 +256,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-normal-tensor-component-join-model",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and supplied the normal-domain component argument without a Noetherian or open-component assumption. Reused the existing component-quotient, colimit, normality, flatness, weak-etale field and embedding lemmas; created only ordinary henselization ind-etaleness and finite normal-domain factors of etale stages.",
+  "blueprint": "Historical auxiliary chain below lem-trf-local-term-locality: specialization/nearby-cycle argument, Artin tensor theorem; Theorem 6.3 normal-domain component realization, before applying the embedded join theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "why": "Generic commutative-algebra tool: A local filtered colimit of etale algebras over a normal domain is a normal domain. The trace unit has no separate statement supplying this algebraic fact; the normal-component route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-etale-over-normal-ring-normal",
+    "why": "Generic commutative-algebra tool: An etale algebra over a normal ring is a normal ring. The trace unit has no separate statement supplying this algebraic fact; the normal-component route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-normal-ring",
+    "why": "Generic commutative-algebra tool: A filtered colimit of normal rings is normal. The trace unit has no separate statement supplying this algebraic fact; the normal-component route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic commutative-algebra tool: Stability and diagonal of an ind-etale algebra. The trace unit has no separate statement supplying this algebraic fact; the normal-component route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-localization-ring-weakly-etale",
+    "why": "Generic commutative-algebra tool: Localizations are weakly etale ring maps. The trace unit has no separate statement supplying this algebraic fact; the normal-component route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-field-separable",
+    "why": "Generic commutative-algebra tool: Weakly etale extensions of fields are separable algebraic. The trace unit has no separate statement supplying this algebraic fact; the normal-component route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-filtered-colimit-normal-ring",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-localization-ring-weakly-etale",
+  "lem-weil-pbc-weakly-etale-field-separable"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q67-c924d70bc",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q67-c924d70bc (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, packet/report, DAG route, cited statements, and Stacks/Hübner–Schmidt sources. Checked all nine proof steps, hypotheses, edge cases, component quotient, injectivity, fraction-field separability, embedding, generated-subring claim, duplicates, Mathlib searches, and long-step rule. No circularity, route violation, weakened target, or repair is needed; review.md records the checks."
  }
 }
