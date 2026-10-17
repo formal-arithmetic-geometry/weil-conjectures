@@ -213,5 +213,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialPresheafProjectiveModel",
+  "declaration": "SSet.ProjectivePresheaf.simplicial_presheaf_projective_model",
+  "declarations": [
+   "SSet.ProjectivePresheaf.tensor",
+   "SSet.ProjectivePresheaf.cotensor",
+   "SSet.ProjectivePresheaf.mapping",
+   "SSet.ProjectivePresheaf.representable",
+   "SSet.ProjectivePresheaf.generatingCofibrations",
+   "SSet.ProjectivePresheaf.generatingTrivialCofibrations",
+   "SSet.ProjectivePresheaf.IsUsualEnrichment",
+   "SSet.ProjectivePresheaf.simplicial_presheaf_projective_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialPresheafProjectiveModel.lean",
+  "statement": "theorem simplicial_presheaf_projective_model : (∃ m : ModelCategory SSet.{u}, m.categoryWithFibrations = (inferInstance : CategoryWithFibrations SSet.{u}) ∧ m.categoryWithCofibrations = (inferInstance : CategoryWithCofibrations SSet.{u}) ∧ m.categoryWithWeakEquivalences = KanQuillen.weakEquivalenceStructure ∧ @CombinatorialModelCategory.{u + 1, u, u} _ _ m ∧ @SatisfiesSM7 _ _ m inferInstance ∧ (∀ (A B A' : SSet.{u}) (i : A ⟶ B) (w : A ⟶ A'), Mono i → Enhanced.IsWeakHomotopyEquivalence w → Enhanced.IsWeakHomotopyEquivalence (pushout.inl i w)) ∧ ∃ T : SimplicialTensorCotensor SSet.{u}, (∀ (K X : SSet.{u}), T.tensor K X = X ⊗ K) ∧ (∀ (K Y : SSet.{u}), T.cotensor K Y = (ihom K).obj Y)) ∧ ∀ (D : Type u) [SmallCategory D], ∃ m : ModelCategory (Dᵒᵖ ⥤ SSet.{u}), m.categoryWithWeakEquivalences.weakEquivalences = (KanQuillen.weakEquivalenceStructure.weakEquivalences).functorCategory Dᵒᵖ ∧ m.categoryWithFibrations.fibrations = (modelCategoryQuillen.J.rlp).functorCategory Dᵒᵖ ∧ @CombinatorialModelCategory.{u + 1, u, u} _ _ m ∧ HasLimitsOfSize.{u, u} (Dᵒᵖ ⥤ SSet.{u}) ∧ HasColimitsOfSize.{u, u} (Dᵒᵖ ⥤ SSet.{u}) ∧ m.categoryWithCofibrations.cofibrations = ((modelCategoryQuillen.I.rlp).functorCategory Dᵒᵖ).llp ∧ m.categoryWithCofibrations.cofibrations ≤ (monomorphisms SSet.{u}).functorCategory Dᵒᵖ ∧ (generatingCofibrations D).rlp = (modelCategoryQuillen.I.rlp).functorCategory Dᵒᵖ ∧ (generatingTrivialCofibrations D).rlp = (modelCategoryQuillen.J.rlp).functorCategory Dᵒᵖ ∧ (∀ (A B A' : Dᵒᵖ ⥤ SSet.{u}) (i : A ⟶ B) (w : A ⟶ A'), m.categoryWithCofibrations.cofibrations i → m.categoryWithWeakEquivalences.weakEquivalences w → m.categoryWithWeakEquivalences.weakEquivalences (pushout.inl i w)) ∧ (∀ F : Dᵒᵖ ⥤ SSet.{u}, m.categoryWithFibrations.fibrations (terminal.from F) ↔ ∀ d : Dᵒᵖ, KanComplex (F.obj d)) ∧ ∃ E : SimplicialCategory (Dᵒᵖ ⥤ SSet.{u}), IsUsualEnrichment E ∧ @SatisfiesSM7 _ _ m E ∧ ∃ T : @SimplicialTensorCotensor _ _ E, (∀ (K : SSet.{u}) (F : Dᵒᵖ ⥤ SSet.{u}), T.tensor K F = tensor K F) ∧ (∀ (K : SSet.{u}) (G : Dᵒᵖ ⥤ SSet.{u}), T.cotensor K G = cotensor K G)",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing CombinatorialModelCategory, SatisfiesSM7 and cornerMap declarations from the project source modules imported for the proof plan. Their theorems are not assumptions of this statement. All helper definitions specify the actual presheaf constructions of this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ea1fedca7",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Compared node clauses to Lean: Kan model (Mathlib classes, KanQuillen.weakEquivalenceStructure, left proper via Mono i and pushout.inl, CombinatorialModelCategory.{u+1,u,u}, SatisfiesSM7 for the Mathlib enrichment, tensor X⊗K and cotensor ihom). For all small D (no extra hypotheses): objectwise w.e. and fibrations, cofibrations = llp of objectwise I.rlp and ≤ objectwise monos, generators with exact ranges (D×ℕ boundaries, D×Σn,Fin(n+2) horns), left proper, fibrant iff objectwise Kan, objectwise tensor/cotensor, mapping = Nat(F⊗Δ[n],G) pinned by IsUsualEnrichment (iso, underlying arrows, composition), SM7 and T for the same E. Checked universe order of CombinatorialModelCategory (u v w). Edge cases: empty/terminal D, n=0, empty simplicial sets. Delivery is 3 files; node only gains lean; statement verbatim. No hollow defs, only sorry, docstrings with 7 proof steps, lines ≤100. HTT not archived locally; source places checked from knowledge of the book. nt_compile --json on the local overlay: rc=0, module 1.5 s, no errors or warnings. Not a fault: reused SatisfiesSM7/CombinatorialModelCategory owner nodes are not stmt_deps (that edge would be a cycle; the TeX defines both inline); the import closure reaches nodes that depend on this item, the same pattern as the recorded dependency SimplicialBoundaryCollapseTest, which may complicate stage 3."
  }
 }
