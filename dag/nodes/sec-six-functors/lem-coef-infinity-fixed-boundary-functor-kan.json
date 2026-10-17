@@ -10,9 +10,87 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a horn $a:\\Lambda_k^n\\to V_f(B,X)$, with $n\\geq1$. By the degreewise definition of the internal functor object in [def-cbc-enhanced-diagrams-cones], this amounts to a map $u:B\\times\\Lambda_k^n\\to X$ equal to $f\\operatorname{pr}_A$ on $A\\times\\Lambda_k^n$. Explicitly, if $t\\in(\\Lambda_k^n)_m$, evaluate the map $a_m(t):B\\times\\Delta^m\\to X$ at $(b,\\mathrm{id}_{[m]})$ to define $u_m(b,t)$. Naturality of $a$ makes these formulas simplicial; conversely restrict $u$ along $\\mathrm{id}_B\\times t:B\\times\\Delta^m\\to B\\times\\Lambda_k^n$. These two formulas are inverse. Define $h$ on $(A\\times\\Delta^n)\\cup(B\\times\\Lambda_k^n)$ to be $f\\operatorname{pr}_A$ on the first subset and $u$ on the second. They agree on their intersection, so this is a simplicial map degree by degree. An extension $H:B\\times\\Delta^n\\to X$ of $h$ gives, by the same formulas, the desired simplex of $V_f(B,X)$ extending $a$. Thus it suffices to construct this exact extension of $h$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01P1",
+    "place": "Proposition 4.6.1.11, explicit fixed-boundary horn adjunction; agent expansion of the internal functor definition."
+   }
+  },
+  {
+   "text": "If $n=1$, the horn is one vertex, so $a$ specifies one vertex $v$ of $V_f(B,X)$. Its degenerate edge $s_0v$ restricts to $v$ at both ends and is the required filler, for either $k=0$ or $k=1$. Equivalently, the corresponding extension is the diagram $v:B\\to X$ composed with $B\\times\\Delta^1\\to B$, and it is constant at $f$ on $A\\times\\Delta^1$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01P1",
+    "place": "Proposition 4.6.1.11, dimension-one horn check, written out."
+   }
+  },
+  {
+   "text": "Let $n\\geq2$ and $0<k<n$. The map $p:X\\to\\Delta^0$ is an inner fibration because $X$ is a quasicategory. Apply [lem-coef-infinity-inner-fibration-corner] with $i:A\\hookrightarrow B$ and this $p$. Its corner target identifies degreewise with $\\operatorname{Fun}(A,X)$, since the internal functor objects into $\\Delta^0$ are points. Hence restriction $r:\\operatorname{Fun}(B,X)\\to\\operatorname{Fun}(A,X)$ is an inner fibration. The horn $a$, composed with $V_f(B,X)\\to\\operatorname{Fun}(B,X)$, lies over the constant simplex $f:\\Delta^n\\to\\operatorname{Fun}(A,X)$. Lift this inner-horn square through $r$. The filler restricts exactly to $f$ in every simplicial degree, hence belongs to the strict fiber $V_f(B,X)$ and extends $a$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-inner-fibration-corner"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01BT",
+    "place": "Proposition 4.1.4.1, specialized to X to a point; fixed-boundary lifting square."
+   }
+  },
+  {
+   "text": "Let $n\\geq2$ and $k=0$, and use $h$ from Step 1. Every vertex $b$ of $B$ belongs to $A$. Thus $h$ on $\\{b\\}\\times\\Delta^n$ is the constant simplex at $f(b)$, and its edge $\\{b\\}\\times[0,1]$ is the degenerate identity edge. Such an edge is an equivalence: its inverse is itself and its two inverse triangles are constant degenerate 2-simplices. The edge $[0,1]$ is contained in $\\Lambda_0^n$ even when $n=2$, since its image omits vertex $n\\neq0$. Apply [lem-cbc-invertible-prism-extension] with $Q=X$, the given $A\\subseteq B$, and this $h$. Its hypotheses are now verified, and it supplies $H:B\\times\\Delta^n\\to X$ extending all of $h$. By Step 1 this is the required fixed-boundary filler. No invertibility of edges of $B$ is required.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-invertible-prism-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DP",
+    "place": "Lemma 4.4.4.8 at the terminal base: all prescribed vertex edges are identities."
+   }
+  },
+  {
+   "text": "Let $n\\geq2$ and $k=n$. Reverse simplex orders explicitly: for $\\alpha:[r]\\to[s]$ put $\\alpha^{\\mathrm{rev}}(j)=s-\\alpha(r-j)$. This is monotone, preserves composition and identities, and applying it twice is the identity. For a simplicial set $K$ define $K^{\\mathrm{op}}_m=K_m$ with operators $K(\\alpha^{\\mathrm{rev}})$. This operation preserves products and unions degreewise. The identification $(\\Delta^n)^{\\mathrm{op}}\\cong\\Delta^n$ sends $\\beta:[m]\\to[n]$ to $\\beta^{\\mathrm{rev}}$; omitting vertex $i$ becomes omitting vertex $n-i$. It therefore sends $(\\Lambda_n^n)^{\\mathrm{op}}$ to $\\Lambda_0^n$ and sends every inner horn to an inner horn. Consequently $X^{\\mathrm{op}}$ is a quasicategory: reverse any inner-horn problem, fill it in $X$, and reverse the filler. Reversing $h$ gives a map on $(A^{\\mathrm{op}}\\times\\Delta^n)\\cup(B^{\\mathrm{op}}\\times\\Lambda_0^n)$ to $X^{\\mathrm{op}}$, with its $A^{\\mathrm{op}}$ part equal to $f^{\\mathrm{op}}\\operatorname{pr}_{A^{\\mathrm{op}}}$. Every vertex of $B^{\\mathrm{op}}$ belongs to $A^{\\mathrm{op}}$, so its vertical edge $[0,1]$ is again a degenerate identity. Apply [lem-cbc-invertible-prism-extension] to this map. Reverse the resulting filler once more. Involutivity restores the original $h$, including its constant $A$ part, and yields the required $H:B\\times\\Delta^n\\to X$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-invertible-prism-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DP",
+    "place": "Lemma 4.4.4.8, final outer-horn case by the explicit order-reversal involution; agent argument."
+   }
+  },
+  {
+   "text": "The preceding cases fill every horn in each dimension $n\\geq1$, so $V_f(B,X)$ is a Kan complex by [def-cbc-enhanced-diagrams-cones]. No vertex of $V_f(B,X)$ was chosen without a horn as input. If the strict fiber is empty, there are no such horn maps, since every positive-dimensional horn has a vertex, and the same conclusion is vacuous. Thus no extension of $f$ to $B$ or nonemptiness hypothesis has been introduced.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01P1",
+    "place": "Proposition 4.6.1.11, conclusion and empty-fiber check."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-inner-fibration-corner",
+  "lem-cbc-invertible-prism-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01P1",
+  "place": "Acyclic direct horn proof of Proposition 4.6.1.11, using 01BT and absolute 01DP instead of the isofibration theorem whose DAG split depends on this item; final horns treated by explicit simplex reversal. Sources read online; archival copies WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,10 +140,45 @@
    "results": "{\"t\": \"2026-10-17T08:25:33Z\", \"tool\": \"leanfinder\", \"query\": \"The simplicial set of extensions of a fixed diagram on a vertex-surjective simplicial subset into a quasicategory is a Kan complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.KanComplex\", \"SSet.Quasicategory.hornFilling\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.quasicategory_of_filler\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.Quasicategory\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.J\"], \"digest\": \"51f00abc27cbd095\"}",
    "date": "2026-10-17",
    "verdict": "no match: Basic.lean:54 only gives Kan implies quasicategory, the reverse implication is false. The ordinary Functor.Fiber hits concern ordinary categories. StrictBicategory.lean:25-63 gives enriched homotopy categories, not a strict fixed-boundary Kan fiber. SimplicialSet/AnodyneExtensions/PushoutProduct.lean:144-156 requires X already Kan, whereas X here is only a quasicategory. The second natural-language phrasing again returns only Kan/quasicategory definitions and horn-filling properties, not this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "fixed.*(vert|bound)|fiber.*[Kk]an|[Kk]an.*fiber|[Kk]anComplex",
+   "results": "{\"t\": \"2026-10-17T11:57:43Z\", \"tool\": \"grep\", \"query\": \"fixed.*(vert|bound)|fiber.*[Kk]an|[Kk]an.*fiber|[Kk]anComplex\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"024b631e07e05925\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Basic.lean:35-55 (only Kan implies quasicategory), StrictBicategory.lean:14-67 (homotopy categories of internal Homs), Coskeletal.lean:53-80 (StrictSegal right Kan extensions). None asserts Kan fibrancy of the strict fixed-boundary fiber. Inner/PushoutProduct.lean:70-90 gives only the inner-fibration corner and is reused via the existing Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simplicial maps from B to a quasicategory that extend a fixed diagram on a subset A containing all vertices form a Kan complex",
+   "results": "{\"t\": \"2026-10-17T11:57:44Z\", \"tool\": \"leansearch\", \"query\": \"Simplicial maps from B to a quasicategory that extend a fixed diagram on a subset A containing all vertices form a Kan complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.KanComplex\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.Quasicategory\", \"SSet.RelativeMorphism.map\", \"SSet.Quasicategory.mk\", \"SSet.quasicategory_of_filler\", \"SSet.RelativeMorphism.homotopyClass\", \"SSet.RelativeMorphism\"], \"digest\": \"be1f0579e7c97850\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Basic.lean:35-55 (only Kan implies quasicategory), StrictBicategory.lean:14-67 (homotopy categories of internal Homs), Coskeletal.lean:53-80 (StrictSegal right Kan extensions). None asserts Kan fibrancy of the strict fixed-boundary fiber. Inner/PushoutProduct.lean:70-90 gives only the inner-fibration corner and is reused via the existing Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"KanComplex\"",
+   "results": "{\"t\": \"2026-10-17T11:57:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"KanComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryOfKanComplex\"], \"digest\": \"4db31d34df5faaa8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Basic.lean:35-55 (only Kan implies quasicategory), StrictBicategory.lean:14-67 (homotopy categories of internal Homs), Coskeletal.lean:53-80 (StrictSegal right Kan extensions). None asserts Kan fibrancy of the strict fixed-boundary fiber. Inner/PushoutProduct.lean:70-90 gives only the inner-fibration corner and is reused via the existing Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The strict fiber of restriction Fun(B,X) to Fun(A,X) over a diagram is Kan when X is a quasicategory and A contains every vertex of B",
+   "results": "{\"t\": \"2026-10-17T11:57:45Z\", \"tool\": \"leanfinder\", \"query\": \"The strict fiber of restriction Fun(B,X) to Fun(A,X) over a diagram is Kan when X is a quasicategory and A contains every vertex of B\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.quasicategory'\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.quasicategory\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.QCat.strictBicategory\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.Nerve.isStrictSegal\"], \"digest\": \"d3096f7a252664b1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Basic.lean:35-55 (only Kan implies quasicategory), StrictBicategory.lean:14-67 (homotopy categories of internal Homs), Coskeletal.lean:53-80 (StrictSegal right Kan extensions). None asserts Kan fibrancy of the strict fixed-boundary fiber. Inner/PushoutProduct.lean:70-90 gives only the inner-fibration corner and is reused via the existing Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A vertex-bijective inclusion of simplicial sets has Kan complexes as fibers of the induced restriction of quasicategory-valued diagrams",
+   "results": "{\"t\": \"2026-10-17T11:58:40Z\", \"tool\": \"leanfinder\", \"query\": \"A vertex-bijective inclusion of simplicial sets has Kan complexes as fibers of the induced restriction of quasicategory-valued diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryOfKanComplex\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.KanComplex\", \"SSet.Quasicategory\", \"SSet.quasicategory_of_filler\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.QCat\", \"SSet.StrictSegal.quasicategory\"], \"digest\": \"a0f5905c9083ec62\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Basic.lean:35-55 (only Kan implies quasicategory), StrictBicategory.lean:14-67 (homotopy categories of internal Homs), Coskeletal.lean:53-80 (StrictSegal right Kan extensions). None asserts Kan fibrancy of the strict fixed-boundary fiber. Inner/PushoutProduct.lean:70-90 gives only the inner-fibration corner and is reused via the existing Mathlib leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-isofibration-exponentiation",
@@ -91,5 +204,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-fixed-boundary-functor-kan",
+  "worker": "stage1",
+  "summary": "Retained the exact strict fixed-boundary statement. Gave six steps covering transposition/gluing, dimension one, inner horns, initial outer horns by the existing absolute prism lemma, final outer horns by explicit reversal, and empty fibers. Reused two existing theorem nodes, created no nodes, and avoided the circular parent isofibration theorem. Rechecked Mathlib searches and all cited statements.",
+  "blueprint": "Proof paragraph 2, displayed derived R Hom / R lim calculation: coherent diagram realization through finite-Reedy localization, at the source-attachment join/cone comparison. The joint endpoint restriction is an isofibration; its action on unpinched morphism spaces is a Kan fibration. Repair extraction of the fixed-boundary inner/outer horn argument in Step 4; apply to the interval and its boundary. Steps 1-6 realize the fixed-boundary horn argument required by parent lem-coef-infinity-isofibration-exponentiation Step 4, below the derived mapping-limit calculation in paragraph 2 of the blueprint ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-invertible-prism-extension",
+    "why": "Generic absolute outer-horn prism extension into a quasicategory, used for the initial horn and its order-reversal dual. The unit has no competing prism lemma; this supports coherent-diagram realization without replacing its coefficient-adjunction route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-invertible-prism-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NS-25e0d93f1",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-25e0d93f1 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement matches Kerodon 01P1 (Prop. 4.6.1.11), which is not archived locally; the report has WANTED lines for it and the proof is marked agent-written. The statement is unchanged and not weakened. I tested B=A, B=Δ^1 with A=∂Δ^1 and X=N(C) (empty Hom included), and A=∅ with B=Δ^0, which shows the all-vertices hypothesis is needed. Step 1: the transposition formulas are mutually inverse, and gluing agrees on A×Λ. Step 2: for n=1 the degenerate edge fills. Step 3 uses the Mathlib leaf SSet.innerFibration_pullbackObjObjπ, which I read at Inner/PushoutProduct.lean:70-90. With p:X→Δ^0 the corner is restriction, and the lift over the constant simplex at f stays in the strict fiber. Step 4 uses lem-cbc-invertible-prism-extension (01DP). All vertices lie in A, so each vertex edge is s_0 f(b), an equivalence, and the extension restricts to f∘pr on A×Δ^n. Step 5: I checked that the reversal α^rev is functorial and involutive, that (Λ^n_n)^op ≅ Λ^n_0, that X^op is a quasicategory, and that degenerate edges are preserved. Step 6 covers every case and handles the empty fiber vacuously. There is no cycle: the dependency closures of the definition, corner and prism (3, 4 and 10 nodes) do not contain the item, and the item avoids the parent's isofibration theorem. A DAG search with rg found no duplicate. There are no new nodes and no SGA source, and this is not a target node. I accept the tool_use of lem-cbc-invertible-prism-extension, a generic simplicial lemma from sk-prop-sf-cbc. No changes."
  }
 }

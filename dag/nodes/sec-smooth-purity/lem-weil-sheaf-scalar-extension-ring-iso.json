@@ -13,9 +13,89 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $s\\in S(U)$ define $s\\cdot m=c_U^{-1}(s)m$. Additivity, the unit axiom and associativity follow by applying the ring-homomorphism identities for $c_U^{-1}$ and the $R(U)$-module axioms. For $v:V\\to U$, naturality of $c^{-1}$ gives $(c_U^{-1}(s)m)|_V=c_V^{-1}(s|_V)(m|_V)$. Thus the unchanged abelian sheaf is an $S$-module sheaf by [def-weil-sheaf-of-modules-category]. If $h:M\\to N$ is $R$-linear, then $h_U(c_U^{-1}(s)m)=c_U^{-1}(s)h_U(m)$, so the unchanged underlying map is $S$-linear. Identities and compositions are unchanged, proving the asserted functoriality.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, sites-modules-lemma-adjointness-tensor-restrict, and its preceding change-of-rings construction; the explicit invertible-map specialization. Tensor construction: Tag 03EK, sites-modules-section-tensor-product. Module sheafification: Tag 03CY, sites-modules-lemma-sheafification-presheaf-modules."
+   }
+  },
+  {
+   "text": "Write $P(U)=M(U)\\otimes_{R(U)}S(U)$, where $R(U)$ acts on $S(U)$ through $c_U$. Give $P(U)$ its $S(U)$-action on the second tensor factor. Put $\\beta_U(m,s)=c_U^{-1}(s)m$, with codomain $M(U)$ as an $R(U)$-module. This map is additive in both variables and satisfies $\\beta_U(rm,s)=r\\beta_U(m,s)=\\beta_U(m,c_U(r)s)$. The ordinary tensor universal property [def-weil-pbc-module-tensor-product] therefore defines an $R(U)$-linear map $a_U:P(U)\\to M(U)$ taking $m\\otimes s$ to $c_U^{-1}(s)m$. For $t\\in S(U)$, $a_U(m\\otimes ts)=c_U^{-1}(t)c_U^{-1}(s)m=t\\cdot a_U(m\\otimes s)$. Since pure tensors generate, $a_U$ is $S(U)$-linear into $M^{(c)}(U)$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, sites-modules-lemma-adjointness-tensor-restrict, and its preceding change-of-rings construction; the explicit invertible-map specialization. Tensor construction: Tag 03EK, sites-modules-section-tensor-product. Module sheafification: Tag 03CY, sites-modules-lemma-sheafification-presheaf-modules."
+   }
+  },
+  {
+   "text": "The restrictions of the presheaf tensor $P$ are those of [def-pur-sheaf-tensor-product]. For $v:V\\to U$, the two composites from $P(U)$ to $M(V)$ have on $m\\otimes s$ the equal values $(c_U^{-1}(s)m)|_V=c_V^{-1}(s|_V)(m|_V)$. Both are additive and semilinear over $R(U)\\to R(V)$, so generation by pure tensors [def-weil-pbc-module-tensor-product] gives equality on every tensor. Consequently the $a_U$ form a morphism of presheaves of $S$-modules $a:P\\to M^{(c)}$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, sites-modules-lemma-adjointness-tensor-restrict, and its preceding change-of-rings construction; the explicit invertible-map specialization. Tensor construction: Tag 03EK, sites-modules-section-tensor-product. Module sheafification: Tag 03CY, sites-modules-lemma-sheafification-presheaf-modules."
+   }
+  },
+  {
+   "text": "Define $b_U:M^{(c)}(U)\\to P(U)$ by $b_U(m)=m\\otimes1$. This is additive and $S(U)$-linear, since $b_U(t\\cdot m)=(c_U^{-1}(t)m)\\otimes1=m\\otimes c_U(c_U^{-1}(t))=m\\otimes t=t\\cdot b_U(m)$. It commutes with restrictions because restrictions preserve $1$. Thus $b$ is a presheaf module morphism. Moreover $a_Ub_U(m)=m$, and $b_Ua_U(m\\otimes s)=(c_U^{-1}(s)m)\\otimes1=m\\otimes s$. The second identity extends to all tensors by their generation property [def-weil-pbc-module-tensor-product]. Hence $ab=1$ and $ba=1$ as presheaf morphisms.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, sites-modules-lemma-adjointness-tensor-restrict, and its preceding change-of-rings construction; the explicit invertible-map specialization. Tensor construction: Tag 03EK, sites-modules-section-tensor-product. Module sheafification: Tag 03CY, sites-modules-lemma-sheafification-presheaf-modules."
+   }
+  },
+  {
+   "text": "By [def-pur-sheaf-tensor-product], $P^\\#=M\\otimes_R S$ and its unit is the stated $\\eta:P\\to P^\\#$. Apply the module-sheafification universal property of [def-weil-presheaf-modules-sheafification] with ring sheaf $S$ and target sheaf $M^{(c)}$. It gives a unique $S$-linear sheaf morphism $\\theta:P^\\#\\to M^{(c)}$ with $\\theta\\eta=a$. Define $\\psi=\\eta b:M^{(c)}\\to P^\\#$. Then $\\theta\\psi=ab=1$. Also $(\\psi\\theta)\\eta=\\eta ba=\\eta$; the uniqueness part of that same universal property implies $\\psi\\theta=1$. Thus $\\theta$ is an isomorphism. The equations $\\theta\\eta=a$ and $\\psi=\\eta b$ give exactly the two section formulas in the statement. No claim that an arbitrary section of a sheafified tensor is globally a pure tensor is used.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, sites-modules-lemma-adjointness-tensor-restrict, and its preceding change-of-rings construction; the explicit invertible-map specialization. Tensor construction: Tag 03EK, sites-modules-section-tensor-product. Module sheafification: Tag 03CY, sites-modules-lemma-sheafification-presheaf-modules."
+   }
+  },
+  {
+   "text": "For an $R$-module sheaf map $h:M\\to N$, let $P(h)_U(m\\otimes s)=h_U(m)\\otimes s$; the tensor universal property [def-weil-pbc-module-tensor-product] defines this map, and its restrictions agree on generators. On those generators, $a_{N,U}P(h)_U(m\\otimes s)=c_U^{-1}(s)h_U(m)=h_U(c_U^{-1}(s)m)=h_Ua_{M,U}(m\\otimes s)$. Hence $a_NP(h)=h^{(c)}a_M$. The sheafified map is characterized by $P(h)^\\#\\eta_M=\\eta_NP(h)$. Precomposing $\\theta_NP(h)^\\#$ and $h^{(c)}\\theta_M$ with $\\eta_M$ now gives the same map. Uniqueness in [def-weil-presheaf-modules-sheafification] gives their equality. This proves the required naturality in $M$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, sites-modules-lemma-adjointness-tensor-restrict, and its preceding change-of-rings construction; the explicit invertible-map specialization. Tensor construction: Tag 03EK, sites-modules-section-tensor-product. Module sheafification: Tag 03CY, sites-modules-lemma-sheafification-presheaf-modules."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-tensor-product",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CZ, sites-modules-lemma-adjointness-tensor-restrict, and its preceding change-of-rings construction; the explicit invertible-map specialization. Tensor construction: Tag 03EK, sites-modules-section-tensor-product. Module sheafification: Tag 03CY, sites-modules-lemma-sheafification-presheaf-modules.",
+  "note": "Explicit sectionwise calculation supplying the invertible-ring-map specialization and the normalization; follows the tensor and sheafification constructions read in Stacks."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +131,59 @@
    "results": "11 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
    "date": "2026-10-17",
    "verdict": "no match for the normalized sheaf tensor comparison: SheafOfModules.restrictScalars (Sheaf/ChangeOfRings.lean:36) defines restriction; ModuleCat.restrictScalars_isEquivalence_of_ringEquiv is for modules over single rings; neither states the sheaf tensor comparison and its normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|restrictScalars|tensor.*[Ii]so",
+   "results": "10 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern single-ring tensor constructions, free sheaves or restriction/sheafification ingredients; no full normalized comparison for arbitrary ring sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product extension of scalars along a ring sheaf isomorphism equals restriction along its inverse",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendScalars.obj', ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, LinearEquiv.restrictScalars, TensorProduct.AlgebraTensorModule.congr, ModuleCat.extendScalarsId_inv_app_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern single-ring tensor constructions, free sheaves or restriction/sheafification ingredients; no full normalized comparison for arbitrary ring sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars along an isomorphism of sheaves of commutative rings is naturally isomorphic to restriction along the inverse, sending m tensor s to inverse(s) times m",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pushforwardCongr, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.restrictScalars, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern single-ring tensor constructions, free sheaves or restriction/sheafification ingredients; no full normalized comparison for arbitrary ring sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficient ring sheaf by an isomorphism identifies sheafified extension of scalars with the original abelian sheaf endowed with transported scalar action",
+   "results": "8 hits: PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.Sheafify.map_smul_eq, PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.Sheafify.smul, PresheafOfModules.Sheafify.map_smul, PresheafOfModules.Sheafify.one_smul, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.Sheafify.module",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern single-ring tensor constructions, free sheaves or restriction/sheafification ingredients; no full normalized comparison for arbitrary ring sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "TensorProduct.*RingEquiv|extendScalars.*ringEquiv|restrictScalars_isEquivalence",
+   "results": "2 hits: Mathlib/Algebra/Category/Ring/Constructions.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern single-ring tensor constructions, free sheaves or restriction/sheafification ingredients; no full normalized comparison for arbitrary ring sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, RingEquiv, ModuleCat.ExtendScalars, LinearEquiv",
+   "results": "0 hits: ; loogle: unknown identifier 'ModuleCat.ExtendScalars'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: Loogle reports unknown identifier ModuleCat.ExtendScalars; no absence conclusion drawn from this query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ring isomorphism R ≃+* S, tensoring an R-module with S is isomorphic to the transported S-module",
+   "results": "8 hits: LinearEquiv.baseChange, TensorProduct.AlgebraTensorModule.congr, IsBaseChange.tensorEquiv, TensorProduct.AlgebraTensorModule.congr_tmul, IsBaseChange.ofEquiv, LinearEquiv.rTensor, LinearEquiv.lTensor, TensorProduct.AlgebraTensorModule.congr_eq",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern single-ring tensor constructions, free sheaves or restriction/sheafification ingredients; no full normalized comparison for arbitrary ring sheaves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-proetale-isomorphism-inverse-image",
@@ -74,5 +203,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-sheaf-scalar-extension-ring-iso",
+  "worker": "stage1",
+  "group": "Q17",
+  "summary": "Kept the statement and its arbitrary small site. Constructed the transported action, the balanced section maps and their explicit inverse, then used the existing module-sheafification universal property to obtain the normalized natural sheaf isomorphism. No new nodes. Checked related etale-site comparison is not a general-site attachment. Reused the earlier sandbox searches and added the sectionwise ring-isomorphism search question.",
+  "blueprint": "Supports def-weil-ordinary-compact-cohomology (main-20261015), statement coefficient-object paragraph, canonical Weil structure for E and Qbar_l; via def-weil-constant-weil-structure and lem-weil-proetale-isomorphism-inverse-image. Steps 1-4 supply the underlying scalar transport; steps 5-6 supply its normalized sheaf tensor comparison and naturality."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-54507cfd9",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-54507cfd9 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is true as written (small site, commutative ring sheaves R and S, an isomorphism c, the transported module M^(c), and a natural isomorphism theta: M⊗_R S -> M^(c) with theta(eta(m⊗s)) = c^{-1}(s)m and inverse m -> eta(m⊗1)). I checked it on S=0, on c=id, on the swap automorphism of A×A (the inverse action is needed and the formula has the right direction) and on empty sites. Steps 1-6 check out against the statements of def-weil-sheaf-of-modules-category, def-weil-pbc-module-tensor-product, def-pur-sheaf-tensor-product and def-weil-presheaf-modules-sheafification. The last one covers an arbitrary site and gives the linear universal property, so the proof uses its statement, not its proof. Step 2 checks the balancing beta(m,c(r)s) = r·beta(m,s). Step 4 verifies both composites ab=1 and ba=1. Step 5 proves psi∘theta=1 by uniqueness after precomposing with eta, with no use of stalks. Step 6 gets naturality from the same uniqueness. Calling the steps elementary is justified. proof_deps equals the union of the steps' uses. Stacks sites-modules.tex matches: 03CZ (line 933) with the change-of-rings construction before it, 03EK (line 3551), 03CY (line 815), with labels checked against tags/tags. The delivery creates no new nodes. The nearest existing node, lem-weil-pbc-etale-module-ring-iso-tensor, only covers small étale sites of schemes with supplied functors, so it is not a duplicate or a generalization. The citer lem-weil-proetale-isomorphism-inverse-image needs exactly this arbitrary-site lemma and its normalization. No route statements or tool_uses are involved because only definitions are cited. The delivery cites no SGA and has no A-F faults. No changes were made."
  }
 }
