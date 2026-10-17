@@ -9,7 +9,9 @@
  },
  "stmt_deps": [
   "lem-coef-hammock-infinity-localization",
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-special-resolution-zigzag-nerve",
+  "lem-coef-hammock-graph-colimit-presentation"
  ],
  "proof": [
   {
@@ -236,5 +238,30 @@
   "group": "Q79",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-57fd9e7f7 (reviewer sub-agent of L); spot-checked: I read all seven steps in full and found no faults; no fixes were written. The statement is unchanged and not weakened: the weak-augmentation scope is kept, with no Reedy or model hypotheses and no claim that gamma is a weak equivalence. The delivery creates no new nodes. Step 1: two-out-of-three gives P(alpha), Q(beta) in W. Step 2: the squares hold by the defining equation of I and by augmentation naturality; faces and degeneracies match those of G(-+-) in lem-coef-hammock-graph-colimit-presentation, and reducing into its colimit gives the map into L^H(x,y) of lem-coef-hammock-infinity-localization. Step 3: strict naturality for a functor follows from the naturality stated in the graph-colimit node. Step 4: c and d lie in W by two-out-of-three, and T is a functor (I redid the calculation). Steps 5 and 6: I checked every square of the padded rows (+-+- and -+-+) at the 0-to-1 change, including that the internal vertical maps lie in W; skipped segments commute by naturality of a and b. The word category has the injection -+- to +-+-, so the inserted identity column reduces away in the colimit. Step 7: the min-homotopy is simplicial, the cited lem-cbc lemma applies as stated with no Kan or nonemptiness assumption, so the interval projection is a weak equivalence and j0 and j1 agree in the homotopy category; this gives [gamma_{P',Q'} NT] = [d_* c^* gamma_{P,Q}]. Edge cases checked: W equal to identities, c or d equal to 1, empty I, coinciding endpoints, degenerate chains. The citer lem-coef-cosimplicial-frame-mapping step 16 uses the arrows in the item's directions (c=1, d=r). The dependency closure has no cycle. lem-coef-special-resolution-zigzag-nerve defines the same I(P,Q) but maps into T(x,y) under Reedy hypotheses, so the item is not a duplicate; no blueprint node mentions hammocks, so same_as [] is correct. I accept the declared tool use of lem-cbc-simplicial-homotopy-equivalence-weak: it is used only for the interval projection and replaces no unit step. Low and Hinich are recorded as WANTED and the proof is marked agent-written. Mathlib searches cover all three kinds."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b326cd3b7",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: I(P,Q) arrow directions (comm unfolds to h≫Q(β)=P(α)≫h'), the map h↦a≫h≫b, the covering equations _hc/_hd, strict functor naturality via IsHammockMap with HEq used only to transport endpoint objects, and equality after localization at weak homotopy equivalences for the a,b,c,d clause; c,d are not assumed in W; no model hypotheses; no weak-equivalence claim about gamma. FrameHammockComparison and FrameHammockEndpointAction fix every simplex: grid fixes rows and all j≤l vertical arrows, normal forms are unique (reduction-diamond) and H.simplices is an Equiv, so both are subsingletons and the ∃G / ∀G' form is sound; neither is hollow. Common universes for D are forced by IsHammockMap and allowed by the node's enlargement clause. lean.statement matches the file verbatim; all 4 declarations exist; the 2 added stmt_deps are landed, used and acyclic; only the item node differs from the side clone, with statement, source and proof unchanged. Docstrings give source and blueprint tags; 7 proof steps in the docstring; the only proof is sorry. frameHammockHomFunctorMap is a legitimate same-universe helper. nt_compile.py per-file: exit 0, 28.3 s, no errors or warnings, reproduced twice."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FrameHammockActionNaturality",
+  "declaration": "CategoryTheory.frameHammockActionNaturality",
+  "declarations": [
+   "CategoryTheory.frameHammockHomFunctorMap",
+   "CategoryTheory.FrameHammockComparison",
+   "CategoryTheory.FrameHammockEndpointAction",
+   "CategoryTheory.frameHammockActionNaturality"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FrameHammockActionNaturality.lean",
+  "statement": "theorem frameHammockActionNaturality {C : Type u} [Category.{v} C] (W : MorphismProperty C) [W.IsMultiplicative] [W.HasTwoOutOfThreeProperty] (H : HammockLocalization W) {x y : C} (P : SimplexCategory ⥤ C) (Q : SimplexCategoryᵒᵖ ⥤ C) (p : P ⟶ (Functor.const SimplexCategory).obj x) (i : (Functor.const SimplexCategoryᵒᵖ).obj y ⟶ Q) (hp : ∀ m : ℕ, W (p.app ⦋m⦌)) (hi : ∀ n : ℕ, W (i.app (op ⦋n⦌))) : ∃ G : FrameHammockComparison H p i hp hi, (∀ (D : Type u) [Category.{v} D] (V : MorphismProperty D) [V.IsMultiplicative] [V.HasTwoOutOfThreeProperty] (K : HammockLocalization V) (F : C ⥤ D) (hF : ∀ {a b : C} (f : a ⟶ b), W f → V (F.map f)) (pD : P ⋙ F ⟶ (Functor.const SimplexCategory).obj (F.obj x)) (iD : (Functor.const SimplexCategoryᵒᵖ).obj (F.obj y) ⟶ Q ⋙ F) (hpD : ∀ m : ℕ, V (pD.app ⦋m⦌)) (hiD : ∀ n : ℕ, V (iD.app (op ⦋n⦌))) (_ep : ∀ m : ℕ, pD.app ⦋m⦌ = F.map (p.app ⦋m⦌)) (_ei : ∀ n : ℕ, iD.app (op ⦋n⦌) = F.map (i.app (op ⦋n⦌))) (G' : FrameHammockComparison K pD iD hpD hiD) (E : EnrichedFunctor SSet (HammockObjects C H.enrichment) (HammockObjects D K.enrichment)) (_hE : IsHammockMap H K F hF E), HEq (G.map ≫ E.map x y) (resolutionLargeNerveMap.{v, 0, v, 0, max u v} (resolutionIndexMap (frameHammockHomFunctorMap F P Q)) ≫ G'.map)) ∧ (∀ {x' y' : C} (c : x' ⟶ x) (d : y ⟶ y') (P' : SimplexCategory ⥤ C) (Q' : SimplexCategoryᵒᵖ ⥤ C) (p' : P' ⟶ (Functor.const SimplexCategory).obj x') (i' : (Functor.const SimplexCategoryᵒᵖ).obj y' ⟶ Q') (hp' : ∀ m : ℕ, W (p'.app ⦋m⦌)) (hi' : ∀ n : ℕ, W (i'.app (op ⦋n⦌))) (G' : FrameHammockComparison H p' i' hp' hi') (a : P' ⟶ P) (b : Q ⟶ Q') (_ha : ∀ m : ℕ, W (a.app ⦋m⦌)) (_hb : ∀ n : ℕ, W (b.app (op ⦋n⦌))) (_hc : a ≫ p = p' ≫ (Functor.const SimplexCategory).map c) (_hd : i ≫ b = (Functor.const SimplexCategoryᵒᵖ).map d ≫ i'), ∃ A : FrameHammockEndpointAction H c d, SSet.KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.map (resolutionLargeNerveMap.{v, 0, v, 0, max u v} (resolutionIndexMap (specialResolutionHomMap a b))) ≫ SSet.KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.map G'.map = SSet.KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.map G.map ≫ SSet.KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.map A.map)",
+  "branch": "newtargets-dag",
+  "by": "Q150",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the landed model-free ResolutionIndex and Hom-diagram maps. FrameHammockComparison specifies the canonical map on every grid, and FrameHammockEndpointAction specifies actual endpoint concatenation on every simplex. The theorem asserts existence and both naturality clauses. Two landed nodes are added to statement dependencies for these reused interfaces; no natural-language statement changes."
  }
 }

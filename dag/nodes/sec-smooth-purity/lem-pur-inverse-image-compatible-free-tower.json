@@ -171,5 +171,40 @@
   "group": "Q140",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-53ebf52e4 (reviewer sub-agent of L); spot-checked: The lemma is true and its five-step proof is complete. Read: the item, the parent det-prop-sfb-cartesian-coefficients-twists (only user, step 5), the blueprint integral-twist paragraph (main-20261015), Stacks 03CF (sites.tex:6265) and every cited statement. Steps: (1) compatible bases form a tower isomorphism, so the sectionwise limit gives R|V_i≅M|V_i; (2) the localization comparison of lem-weil-pbc-slice-site-localization applies because u is continuous and f^{-1} is left exact; (3) restriction commutes with lim, so θ restricted to D/u(V_i) is conjugate to κ restricted there; (4) u(1_C)=1_D, base-changed covers and lem-galois-set-sheaf-local-bijection-isomorphism globalize; (5) naturality is elementary. Small cases checked: singleton, empty and constant towers. The κ hypothesis is needed because f^{-1} does not commute with countable limits in general; the parent supplies it via α_f. All off-chapter citations are on the sk-prop-an route, so no tool_uses are needed. No cycle and no SGA source. Duplicate candidates read and rejected. All three search kinds are recorded. The blueprint field is correct. No target is touched or weakened. Fixes: (a) rewrote the garbled size clause in the statement as the standard two-universe convention; (b) step 2 now checks continuity and morphism-of-sites explicitly and cites def-weil-pbc-sites-and-cohomology; (c) step 3 states that restriction to a slice commutes with lim and cites def-pur-localized-ringed-site. proof_deps recomputed. No new or dropped nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f9036052",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Matched every node hypothesis and conclusion to the Lean: sites and the single universe u with sheaves at u+1, U left exact and covering-preserving, f^-1 = Mathlib sheafPullbackConstruction.sheafPullback as in the recorded siteInverseImage_tensor, CommRingCat tower with index n for level n+1, module sheaves via ringedSiteModules, additive semilinear t_n, limits via the recorded Mathlib limit, hκ as IsIso of limit.post, cover Presieve.ofArrows V a of the terminal object, linear bases via SheafOfModules.over, CompatibleBases in the right direction. Conclusions: IsIso of limit.post; ScalarComparison (linearity over κ, all witnesses pinned by projections and prodComparison); LocalComparison (B, B', b', B'' pinned by projections or the actual Kan/sheafification unit, then the square B'≫θ| = κ|≫B''); NaturalComparison; uniqueness of θ, which gives choice independence. Nothing stronger or weaker; empty and singleton covers, constant towers and zero modules allowed; no unbound universes. No hollow definitions; source and blueprint docstrings present; proof steps in the theorem docstring; only sorry; lean.statement verbatim; all 15 declarations listed; report has the Worker report and Second reading by NZ sections. Compile: nt_compile succeeded in 52.9 s with no messages; later runs timed out at load average about 285; a direct lean run against the live build with no limit showed only 'declaration uses sorry' (10 s CPU). No findings beyond the remarks that purTowerInverseImage is a def alias and the compile is near the 60 s limit only under heavy load."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurInverseImageCompatibleFreeTower",
+  "declaration": "CategoryTheory.pur_inverse_image_compatible_free_tower",
+  "declarations": [
+   "CategoryTheory.PurCompatibleFreeTowerData",
+   "CategoryTheory.PurCompatibleFreeTowerData.ring",
+   "CategoryTheory.PurCompatibleFreeTowerData.rings",
+   "CategoryTheory.PurCompatibleFreeTowerData.abelian",
+   "CategoryTheory.PurCompatibleFreeTowerData.modules",
+   "CategoryTheory.PurCompatibleFreeTowerData.scalar",
+   "CategoryTheory.PurCompatibleFreeTowerData.basisIso",
+   "CategoryTheory.PurCompatibleFreeTowerData.CompatibleBases",
+   "CategoryTheory.purTowerInverseImage",
+   "CategoryTheory.purTowerInverseImageUnit",
+   "CategoryTheory.PurTowerLocalInverseImage",
+   "CategoryTheory.PurCompatibleFreeTowerData.ScalarComparison",
+   "CategoryTheory.PurCompatibleFreeTowerData.LocalComparison",
+   "CategoryTheory.PurCompatibleFreeTowerData.NaturalComparison",
+   "CategoryTheory.pur_inverse_image_compatible_free_tower"
+  ],
+  "file": "lean/Sheaf/Paper/PurInverseImageCompatibleFreeTower.lean",
+  "statement": "theorem pur_inverse_image_compatible_free_tower {D : Type u} [SmallCategory D] [HasFiniteLimits C] [HasFiniteLimits D] (J₀ : Precoverage C) (K₀ : Precoverage D) (hJ : J₀.IsSiteForCoverings) (hK : K₀.IsSiteForCoverings) (U : C ⥤ D) [PreservesFiniteLimits U] (hUcover : ∀ (X : C) (S : Presieve X), S ∈ J₀ X → S.map U ∈ K₀ (U.obj X)) (T : PurCompatibleFreeTowerData J₀.toGrothendieck) (hκ : IsIso (limit.post T.rings (purTowerInverseImage K₀.toGrothendieck U))) (I : Type (u + 1)) (V : I → C) (a : ∀ i : I, V i ⟶ ⊤_ C) (hcover : Presieve.ofArrows V a ∈ J₀ (⊤_ C)) (b : ∀ (i : I) (n : ℕ), (SheafOfModules.unit (T.ring n)).over (V i) ≅ (T.M n).over (V i)) (hb : ∀ i : I, T.CompatibleBases (V i) (b i)) : IsIso (limit.post T.modules (purTowerInverseImage K₀.toGrothendieck U)) ∧ T.ScalarComparison (purTowerInverseImage K₀.toGrothendieck U) ∧ (∀ i : I, T.LocalComparison K₀.toGrothendieck U (V i) (b i)) ∧ T.NaturalComparison (purTowerInverseImage K₀.toGrothendieck U) ∧ ∀ θ : (purTowerInverseImage K₀.toGrothendieck U).obj (limit T.modules) ⟶ limit (T.modules ⋙ purTowerInverseImage K₀.toGrothendieck U), (∀ n : ℕ, θ ≫ limit.π (T.modules ⋙ purTowerInverseImage K₀.toGrothendieck U) (op n) = (purTowerInverseImage K₀.toGrothendieck U).map (limit.π T.modules (op n))) → θ = limit.post T.modules (purTowerInverseImage K₀.toGrothendieck U)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

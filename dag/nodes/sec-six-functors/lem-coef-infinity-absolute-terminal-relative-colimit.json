@@ -80,7 +80,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-relative-cone",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-local-fiber-relative-colimit-test",
+  "lem-coef-infinity-parameter-cone-extension"
  ],
  "mathlib_searches": [
   {
@@ -183,5 +185,24 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-36cd37e0d (reviewer sub-agent of L); spot-checked: I read in full the item, the statements of all 5 cited nodes, the parent intermediate-presheaf-kan (step 4 uses exactly this statement), the unit record, and paragraph 2 of the main-20261015 ancestor prop-coef-integral-exceptional-adjoint. The delivery has no new nodes and does not change the statement. Step 1: inner horns over Delta^0 are filled because C is a quasicategory, and any filler lies over the unique simplex; this is elementary and correct. Step 2: lem-coef-infinity-relative-cone-constant-test needs only a functor of quasicategories, a small K and any q, with no fibration or colimit-existence hypothesis. Its cocone K x Delta^1 -> K^triangleright is the same as the item's, and the apex-form square is quoted exactly. Step 3: Fun(L,Delta^0), Map_{Delta^0} and Fun(Delta^1,Delta^0) are a single simplex in every degree, including for L empty. So the path-pullback model of def-coef-infinity-relative-cone is degreewise the upper-right corner, the comparison map is the top map, and the square commutes strictly. Homotopy pullback is therefore equivalent to the top map being a weak equivalence; elementary. Step 4: the cocone dual of lem-cbc-enhanced-functor-cone-calculus (any shape, initial objects of the cocone category) gives exactly that map. Small cases: K empty gives initiality of x on both sides; K a point; a two-object discrete C (both sides fail); C = Delta^0. No cycle: none of the dependencies reaches the item. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, from unit sk-prop-sf-cbc, which the unit does not cite; it is a generic black box and is already used by the in-unit constant-test node. No duplicate: fiber-relative-colimit-criterion would need a cocartesian-fibration argument for C -> Delta^0, and relative-cone-initial-corner states something different. The Mathlib searches find only ordinary-category results, so no match. No SGA is used and no fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a409a99e",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Read the node, all 5 stmt_deps and the exact declarations (coconeCategory, IsColimiting/IsInitial, IsRelativeColimitDiagram, IsRightJoinInducedCocone with apex and full cylinder, parameterPointQuasicategory, which is a real proof). Every clause matches: C quasicategory, arbitrary K and q, p = isTerminalObj0.from C, InnerFibration as a conclusion, iff with initiality of the uniquely determined induced cocone, which always exists. Edge cases: K empty (apex retained), K a point, C a point, C empty, C discrete with two objects; only universe u, explicitly bound. lean.statement matches the file verbatim. The node diff changes only lean and adds stmt_deps on the two landed helper owners; no cycle (BFS); dependency nodes unchanged. No hollow definition, sorry only, docstrings carry source and blueprint tag and the four proof steps. nt_compile.py --json with the side overlay: rc 0, item file 6.3 s, no errors or warnings in the output. The Second reading section is the worker's self-reread but present and consistent."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AbsoluteTerminalRelativeColimit",
+  "declaration": "SSet.Enhanced.absolute_terminal_relative_colimit",
+  "file": "lean/Sheaf/CategoryTheory/AbsoluteTerminalRelativeColimit.lean",
+  "statement": "theorem absolute_terminal_relative_colimit (C K : SSet.{u}) [Quasicategory C] (q : rightJoinCone K ⟶ C) : InnerFibration (stdSimplex.isTerminalObj₀.from C) ∧ (IsRelativeColimitDiagram (stdSimplex.isTerminalObj₀.from C) q ↔ ∃ d : (coconeCategory (rightJoinConeInclusion K ≫ q)) _⦋0⦌, IsRightJoinInducedCocone q d ∧ IsColimiting (rightJoinConeInclusion K ≫ q) d)",
+  "branch": "newtargets-dag",
+  "by": "Q127",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The induced cocone is the unique one prescribed by the existing IsRightJoinInducedCocone full cylinder and apex formula, reused without a second definition. The two added landed statement dependencies own this formula and the existing point-quasicategory instance. The theorem assumes only the given quasicategory and diagram, and includes the inner-fibration assertion. No statement correction or dependency repair."
  }
 }
