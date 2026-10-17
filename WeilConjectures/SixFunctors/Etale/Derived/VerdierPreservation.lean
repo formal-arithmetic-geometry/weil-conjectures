@@ -87,7 +87,7 @@ lemma isZero_derivedHom_obj_of_isZero {X : Scheme.{u}}
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsZero K)
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     IsZero (((RHom(X)[A]).obj (op K)).obj M) :=
-  letI := _root_.DerivedCategory.braidedCategory (Sheaf X.smallEtaleTopology A)
+  letI := _root_.DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology A)
   MonoidalCategory.isZero_ihom_obj_of_isZero hK M
 
 end TorAmplitude
