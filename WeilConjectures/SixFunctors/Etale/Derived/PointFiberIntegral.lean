@@ -13,6 +13,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleProjective
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologyHom
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.ReductionTriangle
+public import WeilConjectures.SixFunctors.Etale.Derived.RationalStage
 
 /-!
 # Integral constructible complexes over a geometric point
@@ -59,7 +60,7 @@ is finitely generated (`Module.finite_of_isHausdorff_of_ker_le`).
 
 @[expose] public section
 
-universe u
+universe w u
 
 open CategoryTheory Limits Opposite Pretriangulated
 
@@ -201,14 +202,16 @@ end Point
 
 /-! ### The reduction triangles -/
 
-section Reduction
-
 /-- The small étale site of a scheme is essentially small. Instance search does not find this
-in the presence of the imports of this file. -/
-local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+in the presence of the imports of this file. This single instance is used throughout the file, so
+that all statements about derived completeness below use the same instance. -/
+local instance essentiallySmall_etale_pointFiberIntegral (X : Scheme.{u}) :
+    EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _
+
+section Reduction
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {I : Ideal Λ} {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
   (hI : I = Ideal.span {ϖ}) {X : Scheme.{u}}
@@ -259,13 +262,6 @@ end Reduction
 /-! ### The integral stage over a geometric point -/
 
 section IntegralPoint
-
-/-- The small étale site of a scheme is essentially small. Instance search does not find this
-in the presence of the imports of this file. -/
-local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
-  have : LocallySmall.{u + 1} X.Etale :=
-    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
-  essentiallySmall_of_small_of_locallySmall _
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {I : Ideal Λ} {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
   (hI : I = Ideal.span {ϖ}) {k : Type u} [Field k] [IsSepClosed k]
@@ -377,6 +373,7 @@ lemma finite_hom_unitSingle_derivedCompletionDiagram
     have := subsingleton_hom_unitSingle hz
     exact ((Iso.refl _).homCongr e.symm).subsingleton_congr.1 this
 
+omit [IsSepClosed k] [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] in
 /-- For a derived complete `K` whose reductions have finite morphism groups out of `Λ[-j]`, the
 Milnor map `Hom(Λ[-j], K) ⟶ limₙ Hom(Λ[-j], Kₙ)` is bijective. -/
 lemma bijective_milnorMap_unitSingle
@@ -395,7 +392,8 @@ lemma bijective_milnorMap_unitSingle
       (by lia)).app (unitSheaf Λ k)).homCongr (Iso.refl _)).symm
   exact IsHomotopyLimit.bijective_milnorMap hc _
 
-include hϖ hI in
+omit [IsSepClosed k] [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] in
+include hI in
 /-- For a derived complete `K` whose Milnor maps are injective, `Hom(Λ[-j], K)` is
 `ϖ`-adically separated: an element divisible by every `ϖⁿ` maps to zero in every
 `Hom(Λ[-j], Kₙ)`, which is killed by `ϖⁿ`. -/
@@ -415,6 +413,7 @@ lemma isHausdorff_hom_unitSingle
     ← Category.assoc, ← Linear.comp_smul,
     _root_.DerivedCategory.smul_id_derivedCompletionDiagram_obj _ hϖI K n, Limits.comp_zero]
 
+omit [IsSepClosed k] [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] in
 include hϖ hI in
 /-- The kernel of the reduction `Hom(Λ[-j], K) ⟶ Hom(Λ[-j], K ⊗ᴸ Λ/I)` is `ϖ Hom(Λ[-j], K)`. -/
 lemma exists_eq_smul_of_comp_derivedCompletionCone_eq_zero
@@ -457,7 +456,7 @@ theorem boundedConstructible_of_boundedConstructibleIntegral [IsPrecomplete I Λ
   rw [isConstructibleSheaf_iff_moduleFinite_pointSections]
   suffices Module.Finite Λ (unitSingle Λ k j ⟶ K) from
     Module.Finite.equiv (homSingleLinearEquiv K j)
-  have := isHausdorff_hom_unitSingle hϖ hI (hM j).1
+  have := isHausdorff_hom_unitSingle hI (hM j).1
   have := (hF 1 j).1
   exact Module.finite_of_isHausdorff_of_ker_le hI
     (Preadditive.rightComp _ ((_root_.DerivedCategory.derivedCompletionCone
@@ -466,16 +465,19 @@ theorem boundedConstructible_of_boundedConstructibleIntegral [IsPrecomplete I Λ
 
 /-! ### Bounded constructible complexes lie in the integral stage -/
 
+omit [IsNoetherianRing Λ] in
 /-- A constant sheaf on a finitely generated module is constructible on `Spec k`. -/
 lemma isConstructibleSheaf_constantSheaf (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :
     IsConstructibleSheaf
       ((constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) := by
   rw [isConstructibleSheaf_iff_moduleFinite_pointSections]
+  have : Module.Finite Λ ((𝟭 (ModuleCat.{u + 1} Λ)).obj M) := inferInstanceAs (Module.Finite Λ M)
   exact Module.Finite.equiv
     ((constantSheafEquivalenceOfIsSepClosed Λ (k := k)).unitIso.app M).toLinearEquiv
 
 variable [IsAdicComplete I Λ]
 
+omit [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] in
 include hϖ hI in
 /-- The constant sheaf `Λ` on `Spec k`, placed in degree `0`, is derived complete: it is the
 homotopy limit of the constant sheaves `Λ/Iⁿ`, as `Λ` is for `Λ`-modules
@@ -499,7 +501,7 @@ lemma derivedComplete_unitSingle :
       rw [HomologicalComplex.single_map_f_self]
       have : Epi ((Ideal.quotPowFunctor I).map (homOfLE n.le_succ).op) := by
         rw [ModuleCat.epi_iff_surjective]
-        exact Submodule.factor_surjective _
+        exact Submodule.factor_surjective (Ideal.pow_le_pow_right n.le_succ)
       infer_instance
     · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi).epi _
   have hQ := DerivedCategory.isHomotopyLimit_mapCone_Q_of_epi hT hc
@@ -527,7 +529,316 @@ lemma derivedComplete_unitSingle :
     (f ≫ (eG _).inv)
   rwa [← cancel_mono (eG _).inv, Limits.zero_comp]
 
+omit [IsSepClosed k] [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] [IsAdicComplete I Λ] in
+include hϖ hI in
+/-- The reductions `Λ ⊗ᴸ Λ/Iⁿ` of the constant sheaf `Λ` are the constant sheaves `Λ/Iⁿ`. -/
+lemma nonempty_iso_reductionModIdeal_unitSingle (n : ℕ) :
+    Nonempty ((reductionModIdeal Λ (Spec (.of k)) (I ^ n)).obj (unitSingle Λ k 0) ≅
+      (DerivedCategory.singleFunctor _ 0).obj
+        ((constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+          (ModuleCat.of Λ (Λ ⧸ I ^ n)))) := by
+  obtain ⟨g, h, hT⟩ := exists_distTriang_reductionModIdeal hϖ hI (unitSingle Λ k 0) n
+  have hT' :=
+    _root_.DerivedCategory.quotPowTriangle_distinguished (Spec (.of k)).smallEtaleTopology hϖ hI n
+  obtain ⟨e, -⟩ := Pretriangulated.exists_iso_of_arrow_iso _ _ hT hT'
+    (Arrow.isoMk (Iso.refl _) (Iso.refl _) (by
+      rw [_root_.DerivedCategory.quotPowTriangle_mor₁]
+      simp only [Iso.refl_hom, Category.comp_id, Category.id_comp, Arrow.mk_hom]
+      rfl))
+  exact ⟨Triangle.π₃.mapIso e⟩
+
+omit [Finite (Λ ⧸ I)] [IsAdicComplete I Λ] in
+include hϖ hI in
+/-- The constant sheaf `Λ/Iⁿ` on `Spec k`, placed in degree `0`, is bounded constructible of
+Tor amplitude in `[-1, 0]`: it is the cone of `ϖⁿ : Λ ⟶ Λ`, and `Λ` is flat. -/
+lemma boundedConstructible_torAmplitudeIn_single_quot (n : ℕ) :
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k))
+        ((DerivedCategory.singleFunctor _ 0).obj
+          ((constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+            (ModuleCat.of Λ (Λ ⧸ I ^ n)))) ∧
+      DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) (Spec (.of k)) (-1) 0
+        ((DerivedCategory.singleFunctor _ 0).obj
+          ((constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+            (ModuleCat.of Λ (Λ ⧸ I ^ n)))) := by
+  have := isConstructibleSheaf_constantSheaf (k := k) (ModuleCat.of Λ (Λ ⧸ I ^ n))
+  refine ⟨DerivedCategory.boundedConstructible_singleFunctor_obj _ 0, ?_⟩
+  have hT :=
+    _root_.DerivedCategory.quotPowTriangle_distinguished (Spec (.of k)).smallEtaleTopology hϖ hI n
+  have hU : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) (Spec (.of k)) 0 0
+      ((DerivedCategory.singleFunctor _ 0).obj
+        (MonoidalCategory.tensorUnit
+          (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)))) :=
+    _root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat
+      (ObjectProperty.flat_of_isDualizable isDualizable_unit)
+  have h := DerivedCategory.torAmplitudeIn_obj₂ (ModuleCat.{u + 1} Λ) (rot_of_distTriang _ hT)
+    hU (DerivedCategory.torAmplitudeIn.shift hU 1)
+  exact h.mono (by simp) (by simp)
+
+include hϖ hI in
+/-- The constant sheaf `Λ` on `Spec k`, placed in degree `0`, lies in the integral stage. -/
+lemma boundedConstructibleIntegral_unitSingle :
+    DerivedCategory.boundedConstructibleIntegral I (Spec (.of k)) (unitSingle Λ k 0) := by
+  refine ⟨derivedComplete_unitSingle hϖ hI, -1, 0, fun n ↦ ?_⟩
+  obtain ⟨e⟩ := nonempty_iso_reductionModIdeal_unitSingle (k := k) hϖ hI (n + 1)
+  obtain ⟨h₁, h₂⟩ := boundedConstructible_torAmplitudeIn_single_quot (k := k) hϖ hI (n + 1)
+  exact ⟨(DerivedCategory.boundedConstructible _ _).prop_of_iso e.symm h₁,
+    (DerivedCategory.torAmplitudeIn _ _ _ _).prop_of_iso e.symm h₂⟩
+
+omit [IsAdicComplete I Λ] in
+include hϖ hI in
+/-- The constant sheaves `M` on `Spec k` placed in degree `0` which lie in the integral stage
+satisfy the two-out-of-three property along short exact sequences of `Λ`-modules. -/
+lemma boundedConstructibleIntegral_single_of_shortExact {S : ShortComplex (ModuleCat.{u + 1} Λ)}
+    (hS : S.ShortExact) :
+    let P : ModuleCat.{u + 1} Λ → Prop := fun M ↦
+      DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))
+        ((DerivedCategory.singleFunctor _ 0).obj
+          ((constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))
+    (P S.X₁ → P S.X₂ → P S.X₃) ∧ (P S.X₁ → P S.X₃ → P S.X₂) := by
+  intro P
+  have : Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ}) := ⟨⟨ϖ, hϖ, hI⟩⟩
+  have := DerivedCategory.isClosedUnderIsomorphisms_boundedConstructibleIntegral
+    (X := Spec (.of k)) hϖ hI
+  have hS' := hS.map_of_exact (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).functor
+  have hT := hS'.singleTriangle_distinguished
+  refine ⟨fun h₁ h₂ ↦ ?_, fun h₁ h₃ ↦ ?_⟩
+  · exact (DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))).ext_of_isTriangulatedClosed₂
+      _ (rot_of_distTriang _ hT) h₂
+      ((DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))).le_shift 1 _ h₁)
+  · exact (DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))).ext_of_isTriangulatedClosed₂
+      _ hT h₁ h₃
+
+variable (k) in
+/-- The constant sheaf on a `Λ`-module `M` on `Spec k`, placed in degree `0`. -/
+noncomputable abbrev constSingle (M : ModuleCat.{u + 1} Λ) :
+    DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+  (DerivedCategory.singleFunctor _ 0).obj
+    ((constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)
+
+omit [IsSepClosed k] [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] [IsAdicComplete I Λ] in
+include hϖ hI in
+lemma boundedConstructibleIntegral_constSingle_of_iso {M N : ModuleCat.{u + 1} Λ} (e : M ≅ N)
+    (h : DerivedCategory.boundedConstructibleIntegral I (Spec (.of k)) (constSingle k M)) :
+    DerivedCategory.boundedConstructibleIntegral I (Spec (.of k)) (constSingle k N) :=
+  have := DerivedCategory.isClosedUnderIsomorphisms_boundedConstructibleIntegral
+    (X := Spec (.of k)) hϖ hI
+  (DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))).prop_of_iso
+    ((DerivedCategory.singleFunctor _ 0).mapIso ((constantSheaf _ _).mapIso e)) h
+
+include hϖ hI in
+/-- The constant sheaf `Λⁿ` on `Spec k`, placed in degree `0`, lies in the integral stage. -/
+lemma boundedConstructibleIntegral_constSingle_free (n : ℕ) :
+    DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))
+      (constSingle k (ModuleCat.of Λ (Fin n → Λ))) := by
+  induction n with
+  | zero =>
+    have := DerivedCategory.containsZero_boundedConstructibleIntegral (X := Spec (.of k)) hϖ hI
+    have := DerivedCategory.isClosedUnderIsomorphisms_boundedConstructibleIntegral
+      (X := Spec (.of k)) hϖ hI
+    have := additive_constantSheaf Λ (Spec (.of k))
+    exact ObjectProperty.prop_of_isZero _ (Functor.map_isZero _
+      (Functor.map_isZero _ (ModuleCat.isZero_of_subsingleton _)))
+  | succ n ih =>
+    let e : ModuleCat.of Λ (Fin (n + 1) → Λ) ≅ ModuleCat.of Λ Λ ⊞ ModuleCat.of Λ (Fin n → Λ) :=
+      (Fin.consLinearEquiv Λ (fun _ : Fin (n + 1) ↦ Λ)).symm.toModuleIso ≪≫
+        (ModuleCat.biprodIsoProd (ModuleCat.of Λ Λ) (ModuleCat.of Λ (Fin n → Λ))).symm
+    refine boundedConstructibleIntegral_constSingle_of_iso hϖ hI e.symm ?_
+    exact (boundedConstructibleIntegral_single_of_shortExact hϖ hI
+      (ShortComplex.Splitting.ofHasBinaryBiproduct _ _).shortExact).2
+      (boundedConstructibleIntegral_unitSingle hϖ hI) ih
+
+variable [IsDomain Λ] [IsPrincipalIdealRing Λ]
+
+include hϖ hI in
+/-- The constant sheaf on a finitely generated `Λ`-module `M`, placed in degree `0`, lies in the
+integral stage: `M` is the cokernel of an injective map of finite free modules. -/
+lemma boundedConstructibleIntegral_constSingle (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :
+    DerivedCategory.boundedConstructibleIntegral I (Spec (.of k)) (constSingle k M) := by
+  obtain ⟨s, π, hπ⟩ := Module.Finite.exists_fin' Λ M
+  have : Module.Free Λ (LinearMap.ker π) := Module.free_of_finite_type_torsion_free'
+  let b := Module.finBasis Λ (LinearMap.ker π)
+  let S := ModuleCat.shortComplexOfCompEqZero (LinearMap.ker π).subtype π (by ext; simp)
+  have hS : S.ShortExact := ModuleCat.shortComplex_shortExact S
+    (LinearMap.exact_subtype_ker_map π) Subtype.val_injective hπ
+  exact (boundedConstructibleIntegral_single_of_shortExact hϖ hI hS).1
+    (boundedConstructibleIntegral_constSingle_of_iso hϖ hI b.equivFun.toModuleIso.symm
+      (boundedConstructibleIntegral_constSingle_free hϖ hI _))
+    (boundedConstructibleIntegral_constSingle_free hϖ hI s)
+
+include hϖ hI in
+/-- Over a separably closed field `k`, a bounded constructible object of `D((Spec k)_ét, Λ)` lies
+in the integral stage `Dᵇc(Spec k, Λ)`, by dévissage to constant sheaves on finitely generated
+modules. -/
+theorem boundedConstructibleIntegral_of_boundedConstructible
+    {K : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) K) :
+    DerivedCategory.boundedConstructibleIntegral I (Spec (.of k)) K := by
+  have : Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ}) := ⟨⟨ϖ, hϖ, hI⟩⟩
+  have := DerivedCategory.isClosedUnderIsomorphisms_boundedConstructibleIntegral
+    (X := Spec (.of k)) hϖ hI
+  refine _root_.DerivedCategory.prop_of_bounded _
+    (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) (Spec (.of k))) (fun F hF ↦ ?_) K hK.1 hK.2
+  have := (isConstructibleSheaf_iff_moduleFinite_pointSections F).1 hF
+  exact (DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))).prop_of_iso
+    ((DerivedCategory.singleFunctor _ 0).mapIso
+      ((constantSheafEquivalenceOfIsSepClosed Λ (k := k)).counitIso.app F))
+    (boundedConstructibleIntegral_constSingle hϖ hI ((pointSections Λ k).obj F))
+
+include hϖ hI in
+/-- Over a separably closed field `k`, the integral stage `Dᵇc(Spec k, Λ)` consists exactly of the
+bounded constructible objects of `D((Spec k)_ét, Λ)`. -/
+theorem boundedConstructibleIntegral_iff_boundedConstructible
+    (K : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    DerivedCategory.boundedConstructibleIntegral I (Spec (.of k)) K ↔
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) K :=
+  ⟨boundedConstructible_of_boundedConstructibleIntegral hϖ hI,
+    boundedConstructibleIntegral_of_boundedConstructible hϖ hI⟩
+
+variable (I k) [Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})]
+
+/-- The evaluation at the geometric point of `s = Spec k`, `Fib_s : Dᵇc(s, Λ) ⥤ Dᵇ_fg(Λ)` at the
+integral stage: the restriction of `D(Γ)` to the integral stage, with values in the bounded
+complexes of `Λ`-modules with finitely generated cohomology. -/
+noncomputable def pointFiberIntegral :
+    (DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))).FullSubcategory ⥤
+      _root_.DerivedCategory.BoundedFiniteCohomology Λ :=
+  (_root_.DerivedCategory.boundedFiniteCohomology Λ).lift
+    ((DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))).ι ⋙
+      (pointSections Λ k).mapDerivedCategory)
+    (fun K ↦ (boundedConstructible_iff_boundedFiniteCohomology K.obj).1
+      (boundedConstructible_of_boundedConstructibleIntegral
+        (Fact.out : ∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ}).choose_spec.1
+        (Fact.out : ∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ}).choose_spec.2 K.property))
+
+/-- Blueprint `def-weil-finite-coefficient-point`: Finite coefficient categories over a point
+(integral stage `𝒪_E`).
+
+Let `Λ` be a complete discrete valuation ring with finite residue field and maximal ideal
+`I = (ϖ)` (in the blueprint `Λ = 𝒪_E`, see
+`AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence`) and `k` a separably closed field. The
+evaluation at the geometric point of `s = Spec k`,
+`Fib_s : Dᵇc(s, Λ) ⥤ Dᵇ_fg(Λ)` (`AlgebraicGeometry.Etale.pointFiberIntegral`), is an equivalence
+from the integral stage `Dᵇc(s, Λ)` (derived complete objects of `D(s_ét, Λ)` whose reductions
+modulo `Iⁿ⁺¹` are bounded constructible of uniformly bounded Tor amplitude,
+`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral`) onto the bounded
+complexes of `Λ`-modules with finitely generated cohomology modules. These complexes are derived
+complete (`DerivedCategory.boundedFiniteCohomology_rightOrthogonal`), so that the target is the
+category `Dᵇ_fg(𝒪_E)` of bounded derived-complete complexes with finitely generated cohomology of
+the blueprint. It is the restriction of the equivalence `D(Γ) : D(s_ét, Λ) ≌ D(Λ)`, the integral
+stage over `s` being the bounded constructible objects
+(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_iff_boundedConstructible`). -/
+noncomputable def pointFiberIntegralEquivalence :
+    (DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))).FullSubcategory ≌
+      _root_.DerivedCategory.BoundedFiniteCohomology Λ :=
+  letI : (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).symm.functor.Additive :=
+    additive_sheafSections_obj Λ _
+  letI : (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).symm.inverse.Additive :=
+    additive_constantSheaf Λ _
+  (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).symm.mapDerivedCategory.congrFullSubcategory
+    (by
+      ext K
+      obtain ⟨ϖ, hϖ, hI⟩ := (Fact.out : ∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})
+      exact ((boundedConstructibleIntegral_iff_boundedConstructible hϖ hI K).trans
+        (boundedConstructible_iff_boundedFiniteCohomology K)).symm)
+
+lemma pointFiberIntegralEquivalence_functor :
+    (pointFiberIntegralEquivalence I k).functor = pointFiberIntegral I k :=
+  rfl
+
+instance : (pointFiberIntegral I k).IsEquivalence :=
+  inferInstanceAs (pointFiberIntegralEquivalence I k).functor.IsEquivalence
+
 end IntegralPoint
+
+/-! ### The objects of `Dᵇ_fg(Λ)` are derived complete -/
+
+section DerivedComplete
+
+variable {Λ : Type (u + 1)} [CommRing Λ] {I : Ideal Λ} {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
+  (hI : I = Ideal.span {ϖ}) [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] [IsAdicComplete I Λ]
+  [IsDomain Λ] [IsPrincipalIdealRing Λ]
+
+include hϖ hI in
+/-- The bounded complexes of modules with finitely generated cohomology over a complete discrete
+valuation ring `Λ` with finite residue field and maximal ideal `I = (ϖ)` are derived complete:
+they receive no nonzero morphism from an object on which `ϖ` acts invertibly. They are the
+images under `D(Γ)` of integral objects over a separably closed point, which are derived
+complete. -/
+theorem _root_.DerivedCategory.boundedFiniteCohomology_rightOrthogonal
+    {L : _root_.DerivedCategory (ModuleCat.{u + 1} Λ)}
+    (hL : _root_.DerivedCategory.boundedFiniteCohomology Λ L)
+    {Y : _root_.DerivedCategory (ModuleCat.{u + 1} Λ)} (hY : IsIso (ϖ • 𝟙 Y)) (f : Y ⟶ L) :
+    f = 0 := by
+  -- any separably closed field will do
+  let k : Type u := AlgebraicClosure (ULift.{u} (ZMod 2))
+  have hϖI : ϖ ∈ I := hI ▸ Ideal.mem_span_singleton_self ϖ
+  have : (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).symm.functor.Additive :=
+    additive_sheafSections_obj Λ _
+  have : (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).symm.inverse.Additive :=
+    additive_constantSheaf Λ _
+  let E := (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).symm.mapDerivedCategory
+  have : E.functor.Linear Λ := inferInstanceAs ((pointSections Λ k).mapDerivedCategory.Linear Λ)
+  let eL : E.functor.obj (E.inverse.obj L) ≅ L := E.counitIso.app L
+  let eY : E.functor.obj (E.inverse.obj Y) ≅ Y := E.counitIso.app Y
+  have hL' : DerivedCategory.boundedConstructibleIntegral I (Spec (.of k)) (E.inverse.obj L) :=
+    (boundedConstructibleIntegral_iff_boundedConstructible hϖ hI _).2
+      ((boundedConstructible_iff_boundedFiniteCohomology _).2
+        ((_root_.DerivedCategory.boundedFiniteCohomology Λ).prop_of_iso eL.symm hL))
+  have hY' : IsIso (ϖ • 𝟙 (E.inverse.obj Y)) := by
+    have : IsIso (E.functor.map (ϖ • 𝟙 (E.inverse.obj Y))) := by
+      rw [Functor.map_smul, CategoryTheory.Functor.map_id]
+      have : ϖ • 𝟙 (E.functor.obj (E.inverse.obj Y)) = eY.hom ≫ (ϖ • 𝟙 Y) ≫ eY.inv := by
+        rw [Linear.smul_comp, Linear.comp_smul, Category.id_comp, Iso.hom_inv_id]
+      rw [this]
+      infer_instance
+    exact isIso_of_fully_faithful E.functor _
+  have h0 := _root_.DerivedCategory.rightOrthogonal_of_derivedComplete hϖI hL'.1
+    (E.functor.preimage (eY.hom ≫ f ≫ eL.inv)) hY'
+  have : eY.hom ≫ f ≫ eL.inv = 0 := by
+    rw [← E.functor.map_preimage (eY.hom ≫ f ≫ eL.inv), h0, Functor.map_zero]
+  rwa [← cancel_epi eY.hom, ← cancel_mono eL.inv, Limits.comp_zero, Limits.zero_comp,
+    Category.assoc]
+
+end DerivedComplete
+
+/-! ### The ring of integers of a finite extension of `ℚ_ℓ` -/
+
+section IntegerRing
+
+variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl l)]
+  [Small.{u + 1} E] [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
+  [FiniteDimensional ℚ_[l] E] (k : Type u) [Field k] [IsSepClosed k]
+
+/-- The residue field `𝒪_E/𝔪_E` of the universe `u + 1` copy of the ring of integers of a finite
+extension `E` of `ℚ_ℓ` is finite. -/
+instance _root_.PadicAlgCl.finite_quotient_maximalIdealShrink :
+    Finite (Shrink.{u + 1} (PadicAlgCl.integers l E) ⧸ PadicAlgCl.maximalIdealShrink l E) :=
+  have : Finite (PadicAlgCl.integers l E ⧸ IsLocalRing.maximalIdeal (PadicAlgCl.integers l E)) :=
+    inferInstanceAs (Finite (IsLocalRing.ResidueField (PadicAlgCl.integers l E)))
+  Finite.of_equiv _ (Ideal.quotientEquiv _ _ (PadicAlgCl.shrinkRingEquiv l E) rfl).toEquiv
+
+/-- Blueprint `def-weil-finite-coefficient-point`: Finite coefficient categories over a point
+(integral stage `𝒪_E`).
+
+For a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ` and a separably closed field `k`, evaluation at
+the geometric point of `s = Spec k` is an equivalence
+`Fib_s : Dᵇc(s, 𝒪_E) ≌ Dᵇ_fg(𝒪_E)` between the integral stage
+`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral 𝔪_E s` and the bounded
+complexes of `𝒪_E`-modules with finitely generated cohomology modules (which are derived
+complete, `DerivedCategory.boundedFiniteCohomology_rightOrthogonal`). This is
+`AlgebraicGeometry.Etale.pointFiberIntegralEquivalence` for `Λ = 𝒪_E`, whose maximal ideal is
+generated by a nonzerodivisor (`PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span`).
+The finite stage is `AlgebraicGeometry.Etale.pointFiberEquivalence`. -/
+noncomputable def pointFiberIntegerRingEquivalence :
+    (DerivedCategory.boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l E)
+      (Spec (.of k))).FullSubcategory ≌
+      _root_.DerivedCategory.BoundedFiniteCohomology (Shrink.{u + 1} (PadicAlgCl.integers l E)) :=
+  haveI : Fact (∃ ϖ ∈ nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E)),
+      PadicAlgCl.maximalIdealShrink l E = Ideal.span {ϖ}) :=
+    ⟨PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E⟩
+  pointFiberIntegralEquivalence _ k
+
+end IntegerRing
 
 end Etale
 

@@ -1,0 +1,92 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Biproducts
+public import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.LinearAlgebra.FreeModule.PID
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.SixFunctors.Etale.Derived.PointFiber
+
+/-!
+# Dévissage of `Dᵇ_fg(R)` over a principal ideal domain
+
+Let `R` be a principal ideal domain (for instance a discrete valuation ring or a field). A
+triangulated subcategory of `D(R)`, closed under isomorphisms, which contains `R` placed in
+degree `0` contains every bounded complex with finitely generated cohomology modules
+(`DerivedCategory.prop_of_boundedFiniteCohomology`): it contains the free modules of finite
+rank (direct sums of copies of `R`), hence every finitely generated module `M`, which is the
+cokernel of an injective map of free modules of finite rank (submodules of free modules of
+finite rank are free of finite rank), and one concludes by the dévissage of bounded complexes
+along their truncations (`DerivedCategory.prop_of_bounded`).
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits Pretriangulated
+
+namespace DerivedCategory
+
+variable {R : Type (u + 1)} [CommRing R]
+  (P : ObjectProperty (DerivedCategory (ModuleCat.{u + 1} R))) [P.IsTriangulated]
+  [P.IsClosedUnderIsomorphisms]
+
+/-- Modules whose image in degree `0` satisfy `P`. -/
+private abbrev singleProp : ObjectProperty (ModuleCat.{u + 1} R) :=
+  fun M ↦ P ((singleFunctor (ModuleCat.{u + 1} R) 0).obj M)
+
+omit [P.IsTriangulated] in
+private lemma singleProp_of_iso {M N : ModuleCat.{u + 1} R} (e : M ≅ N) (h : singleProp P M) :
+    singleProp P N :=
+  P.prop_of_iso ((singleFunctor _ 0).mapIso e) h
+
+private lemma singleProp_biprod {M N : ModuleCat.{u + 1} R} (hM : singleProp P M)
+    (hN : singleProp P N) : singleProp P (M ⊞ N) := by
+  have := preservesBinaryBiproducts_of_preservesBiproducts (singleFunctor (ModuleCat.{u + 1} R) 0)
+  exact P.prop_of_iso ((singleFunctor _ 0).mapBiprod M N).symm
+    (P.ext_of_isTriangulatedClosed₂ _ (binaryBiproductTriangle_distinguished _ _) hM hN)
+
+private lemma singleProp_pi (hR : singleProp P (ModuleCat.of R R)) (n : ℕ) :
+    singleProp P (ModuleCat.of R (Fin n → R)) := by
+  induction n with
+  | zero =>
+    refine P.prop_of_isZero (Functor.map_isZero _ ?_)
+    rw [ModuleCat.isZero_iff_subsingleton]
+    infer_instance
+  | succ n ih =>
+    refine singleProp_of_iso P ?_ (singleProp_biprod P hR ih)
+    exact ModuleCat.biprodIsoProd _ _ ≪≫
+      (Fin.consLinearEquiv R (fun _ : Fin (n + 1) ↦ R)).toModuleIso
+
+variable [IsDomain R] [IsPrincipalIdealRing R]
+
+private lemma singleProp_of_finite (hR : singleProp P (ModuleCat.of R R)) (M : ModuleCat.{u + 1} R)
+    [Module.Finite R M] : singleProp P M := by
+  obtain ⟨n, f, hf⟩ := Module.Finite.exists_fin' R M
+  have hS := LinearMap.shortExact_shortComplexKer hf
+  have : Module.Finite R (LinearMap.ker f) := Module.IsNoetherian.finite R _
+  have hK : singleProp P (ModuleCat.of R (LinearMap.ker f)) :=
+    singleProp_of_iso P (Module.finBasis R (LinearMap.ker f)).equivFun.toModuleIso.symm
+      (singleProp_pi P hR _)
+  exact P.ext_of_isTriangulatedClosed₃ _ hS.singleTriangle_distinguished hK
+    (singleProp_pi P hR n)
+
+/-- Over a principal ideal domain `R`, a triangulated subcategory of `D(R)`, closed under
+isomorphisms, which contains `R` placed in degree `0` contains `Dᵇ_fg(R)`, the bounded complexes
+with finitely generated cohomology modules. -/
+theorem prop_of_boundedFiniteCohomology
+    (hR : P ((singleFunctor (ModuleCat.{u + 1} R) 0).obj (ModuleCat.of R R)))
+    {K : DerivedCategory (ModuleCat.{u + 1} R)} (hK : boundedFiniteCohomology R K) : P K := by
+  let Q : ObjectProperty (ModuleCat.{u + 1} R) := fun M ↦ Module.Finite R M
+  have : Q.IsClosedUnderIsomorphisms := ⟨fun e (h : Module.Finite R _) ↦
+    Module.Finite.equiv e.toLinearEquiv⟩
+  exact prop_of_bounded P Q (fun M (_ : Module.Finite R M) ↦ singleProp_of_finite P hR M) K
+    hK.1 hK.2
+
+end DerivedCategory
