@@ -15,7 +15,6 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.SingleComplexBaseChange
-
 attribute [local irreducible] Scheme.Modules.tensorPullbackCompositionIso
   Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
 
