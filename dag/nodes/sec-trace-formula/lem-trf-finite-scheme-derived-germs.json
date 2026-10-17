@@ -18,9 +18,134 @@
   "def-weil-derived-direct-image",
   "lem-pur-proetale-inverse-image-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=\\operatorname{Spec}k$ and let $a:S\\to P$ be the finite structure map. Apply [lem-weil-pbc-finite-stalk-formula-restriction] with $f=a$ and $\\bar y=\\mathrm{id}_P$. Its indexing set $P(\\bar y)$ is exactly $S(k)$, so this set is finite. For an etale $A$-module sheaf $F$, apply [lem-weil-pbc-strictly-henselian-sections-stalk] to the underlying abelian sheaf $a_*F$ on $P$: the field $k$ is strictly henselian because it is algebraically closed. Thus $(a_*F)(P)\\to(a_*F)_{\\mathrm{id}_P}$ is the germ isomorphism. By [def-weil-pbc-direct-image], $(a_*F)(P)=F(S)$. Composing with the finite-stalk restriction isomorphism gives $g_F:F(S)\\xrightarrow{\\sim}\\prod_{s\\in S(k)}F_s$. The restriction formula in the cited node sends the germ represented at $(P,\\mathrm{id})$ by $u\\in F(S)$ to the germ represented at $(S,s)$ by the same $u$. Hence $g_F(u)=(u_s)_s$, the specified germ map. These maps commute with sheaf maps because restriction and the stalk coprojections do. Each commutes with every constant scalar action, hence $g_F$ is $A$-linear.",
+   "uses": [
+    "lem-weil-pbc-finite-stalk-formula-restriction",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP, proposition-finite-higher-direct-image-zero (1), and Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian"
+   }
+  },
+  {
+   "text": "The stalk functors on abelian etale sheaves are exact by [prop-weil-pbc-geometric-stalks-exact]. For constant-$A$ module sheaves, their kernels and cokernels have the corresponding underlying abelian kernels and cokernels by [def-weil-sheaf-of-modules-category]; scalar actions on stalks are induced on germs. Thus module stalks are exact too. A finite product of exact sequences of modules is exact: its kernel is the product of the coordinate kernels, and a tuple in the product of the coordinate images has a preimage by choosing one preimage in each of the finitely many coordinates. Step 1 therefore makes $\\Gamma(S_{\\mathrm{et}},-)$ exact. By [lem-weil-pbc-exact-functor-derived-functor], every complex computes its derived functor. Applying $g$ degreewise gives a natural isomorphism $R\\Gamma(S_{\\mathrm{et}},L)\\cong\\prod_s L_s$ for every $L\\in D^+(S_{\\mathrm{et}},A)$. Its components are the derived germ maps. The finite product equals the finite direct sum: the inverse to the coordinate map from the sum sends a tuple to the sum of its coordinate inclusions.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP and its proof, exactness of stalks and finite sums; derived exact-functor calculation"
+   }
+  },
+  {
+   "text": "Retain the given witness $(L,\\alpha:\\nu_S^*L\\xrightarrow{\\sim}K)$ of [def-weil-pbc-etale-origin-witness]. The canonical derived-sections comparison of [sk-prop-sf-comparison] and the $A$-linear comparison-stalk isomorphisms of [lem-cbc-proetale-comparison-stalk] identify the source and target of the pro-etale germ map with those of Step 2. We check that the maps agree. The scheme $S$ is affine by [lem-weil-pbc-finite-over-field-affine-finite-dim]. The sections formula of [lem-weil-pbc-comparison-sections], at the constant presentation $S=S$, sends an etale global section $u$ to its comparison inverse-image section. Taking its germ at $s$ and applying the comparison-stalk map returns $[S,s,u]$, since the comparison morphism is inclusion of etale neighbourhoods [def-weil-pbc-site-comparison-morphism]. This is precisely the etale germ of $u$. For complexes choose a bounded-below injective representative $I$ of $L$ by [lem-sc-bounded-below-injective-resolution]. The pro-etale module-sheaf category is Grothendieck by [lem-pur-ringed-site-grothendieck-abelian]. Its terms have exact etale sections by Step 2, and their comparison inverse images are pro-etale-sections-acyclic by the derived-sections comparison applied to $I^r[0]$. The complexes clause of [lemma-weil-pbc-leray-acyclicity] consequently computes pro-etale derived sections on $\\nu_S^*I$ by termwise sections. Stalks compute termwise by [lem-cbc-proetale-classical-stalk]. The preceding germ equation is now an equality of chain maps, so it remains an equality after localization. Transport through $\\alpha$ proves that the canonical $\\gamma_K$ is the $A$-linear isomorphism of Step 2; it is natural in $K$, since full faithfulness in [sk-prop-sf-comparison] lifts every morphism between witness realizations. Here [def-weil-finite-coefficient-point] and [def-weil-ordinary-compact-cohomology] interpret ordinary sections as the same module-valued derived sections, since point evaluation is exact.",
+   "uses": [
+    "def-weil-pbc-etale-origin-witness",
+    "sk-prop-sf-comparison",
+    "lem-cbc-proetale-comparison-stalk",
+    "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "lem-weil-pbc-comparison-sections",
+    "def-weil-pbc-site-comparison-morphism",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-cbc-proetale-classical-stalk",
+    "def-weil-finite-coefficient-point",
+    "def-weil-ordinary-compact-cohomology",
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099V, 099W (lemma-relative-comparison, lemma-compare-cohomology), 0993 (lemma-classical-point); comparison on section representatives"
+   }
+  },
+  {
+   "text": "The argument so far applies to every bounded-below etale-origin $A$-complex, without any constructibility or Tor-amplitude assumption. In particular it applies to $Lh^*K$. Indeed [lem-weil-pbc-comparison-pullback] identifies $h^{-1}\\nu_S^*L$ with $\\nu_S^*h_{\\mathrm{et}}^{-1}L$. Finite-level pullback is termwise exact inverse image by [def-weil-derived-pullback-tensor-hom]; the etale inverse image is also exact by [lem-weil-pbc-site-pullback-abelian-exact], with its constant coefficient action. Applying these functors to the witness gives the required bounded-below etale-origin witness for $Lh^*K$. Thus both germ decompositions occurring in the claimed equation exist. The inverse-image stalk isomorphism of [lem-pur-proetale-inverse-image-stalk] is $A$-linear, since its germ construction commutes with each constant scalar operation. Exactness of the stalk from [lem-cbc-proetale-classical-stalk] gives its termwise derived version $c_{h,s,K}$.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-pur-proetale-inverse-image-stalk",
+    "lem-cbc-proetale-classical-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, morphisms of pro-etale sites; comparison pullback and Tag 0993"
+   }
+  },
+  {
+   "text": "We calculate the unit on an arbitrary pro-etale $A$-module sheaf $M$. Write $v_M:\\Gamma(S,M)\\to\\Gamma(S,h^{-1}M)$ for its sections map. In the inverse-image colimit of [def-weil-proetale-inverse-image], its value at a section $u$ is the coprojection indexed by the final target object $V=S$ and the identity $S\\to S\\times_{S,h}S\\cong S$, followed by sheafification. To normalize the canonical $c_{h,s,M}$ of [lem-pur-proetale-inverse-image-stalk], use [lem-cbc-proetale-sheafification-geometric-stalk] to calculate before sheafification. A representative is $b\\in M(V)$, a pointed neighbourhood $(U,t)$ of $s$ and a map $\\theta:U\\to S\\times_{S,h}V$. Send it to $[V,\\operatorname{pr}_V\\theta t,b]\\in M_{hs}$. Restriction along an arrow gives the same colimit class, so this defines the comparison. Its inverse sends $[V,w,b]$ to the inverse-image coprojection on $S\\times_{S,h}V$ at the lift $(s,w)$. One composite fixes $[V,w,b]$; the other fixes the original class because restriction of that coprojection along $\\theta$ is exactly the original representative. This is the canonical inverse-image stalk identification, with both maps retaining the represented section. For the representative of $v_M(u)$ just described its value is $[S,hs,u]$. Consequently $c_{h,s,M}\\,\\operatorname{germ}_s\\,v_M=\\operatorname{germ}_{hs}$. All maps here are $A$-linear and natural in $M$.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-pur-proetale-inverse-image-stalk",
+    "lem-cbc-proetale-sheafification-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism; Tag 0993, lemma-classical-point; explicit inverse-image and stalk colimits"
+   }
+  },
+  {
+   "text": "By [lem-sc-bounded-below-injective-resolution], choose a bounded-below injective K-injective representative $I$ of $K$ and such a resolution $q:h^*I\\to J$. Use the constant-ring identification to write $h^*I=h^{-1}I$. In the derived adjunction of [def-weil-pbc-proetale-operations], the unit at $I$ is represented by $I\\xrightarrow{\\eta_I}h_*h^*I\\xrightarrow{h_*q}h_*J$: its adjunct is $q$, which represents the identity of $Lh^*K$. Ordinary derived sections [def-weil-derived-direct-image, def-weil-finite-coefficient-point] and the direct-image formula of [def-weil-proetale-module-direct-image] therefore represent $h^\\sharp_K$ by $\\Gamma(I)\\xrightarrow{v_I}\\Gamma(h^*I)\\xrightarrow{\\Gamma(q)}\\Gamma(J)$. Indeed $h_*J$ is K-injective, as follows directly from the adjunction: homotopies of maps from an acyclic $B$ into $h_*J$ are homotopies of maps from the acyclic $h^*B$ into $J$, since $h^*$ is exact. The derived germ maps are represented by the termwise germs of $I$ and $J$, since stalks are exact [lem-cbc-proetale-classical-stalk]. Naturality of germs gives $\\operatorname{germ}_s\\Gamma(q)=q_s\\operatorname{germ}_s$, and $q_s$ is a quasi-isomorphism. The stalk comparison on the target represented by $J_s$ is $c_{h,s,I}q_s^{-1}$. Substitution gives, in $D(A)$,\n$$c_{h,s,I}q_s^{-1}\\operatorname{germ}_s\\Gamma(q)v_I=c_{h,s,I}\\operatorname{germ}_s v_I=\\operatorname{germ}_{hs},$$\nthe last equality being Step 5 degreewise. In the decompositions of Steps 1-4 this is exactly the asserted equation with $\\operatorname{pr}_s$ and $\\operatorname{pr}_{hs}$. It holds for every $s$, with no use of injectivity or surjectivity of $s\\mapsto hs$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-derived-direct-image",
+    "def-weil-finite-coefficient-point",
+    "def-weil-proetale-module-direct-image",
+    "lem-cbc-proetale-classical-stalk",
+    "lem-sc-bounded-below-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, lemma-adjoint-push-pull-modules; the exact-pullback derived adjunction, evaluated by resolutions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "def-weil-pbc-direct-image",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-weil-pbc-etale-origin-witness",
+  "sk-prop-sf-comparison",
+  "lem-cbc-proetale-comparison-stalk",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-comparison-sections",
+  "def-weil-pbc-site-comparison-morphism",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-cbc-proetale-classical-stalk",
+  "def-weil-finite-coefficient-point",
+  "def-weil-ordinary-compact-cohomology",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-comparison-pullback",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-pur-proetale-inverse-image-stalk",
+  "def-weil-proetale-inverse-image",
+  "lem-cbc-proetale-sheafification-geometric-stalk",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-derived-direct-image",
+  "def-weil-proetale-module-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/thm-trf-coefficient-morphism-trace-formula.proof.md",
+  "place": "Step 1, finite schemes: normalized germ decomposition and adjunction-unit reindexing; expanded using Stacks 03QP, 03QO, 099V, 099W, 0993 and 03D3"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -70,10 +195,52 @@
    "results": "; Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean (3 hits)",
    "date": "2026-10-17",
    "verdict": "no match: hits concern structure-sheaf or topological-presheaf stalks, not derived etale-origin module sections and their unit compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology of a finite scheme over an algebraically closed field is the product of its geometric stalks and pullback is evaluation at image points",
+   "results": "{\"t\": \"2026-10-17T09:21:11Z\", \"tool\": \"leansearch\", \"query\": \"Etale cohomology of a finite scheme over an algebraically closed field is the product of its geometric stalks and pullback is evaluation at image points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"AlgebraicGeometry.Scheme.evaluation\", \"AlgebraicGeometry.Scheme.Γevaluation_naturality_apply\", \"AlgebraicGeometry.Scheme.evaluation_naturality\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo\", \"AlgebraicGeometry.Scheme.Hom.stalkMap\"], \"digest\": \"21c36616874d901f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern Zariski/topological presheaves or structure-sheaf stalks, not the finite-coefficient pro-etale derived statement and its unit normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(stalk|germ)|zero.?dimensional.*cohomolog|sections.*stalk",
+   "results": "{\"t\": \"2026-10-17T09:21:14Z\", \"tool\": \"grep\", \"query\": \"finite.*(stalk|germ)|zero.?dimensional.*cohomolog|sections.*stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/EtaleSpace.lean\", \"Mathlib/Topology/Sheaves/EtaleSpace.lean\", \"Mathlib/Topology/Sheaves/Abelian.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/Stalks.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\"], \"digest\": \"0185cf5faa2dfba1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern Zariski/topological presheaves or structure-sheaf stalks, not the finite-coefficient pro-etale derived statement and its unit normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-17T09:21:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"stalk\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TopCat.Presheaf.stalkPullbackIso\", \"TopCat.Presheaf.stalkPullbackHom\", \"TopCat.Presheaf.stalkPullbackInv\", \"TopCat.Presheaf.germToPullbackStalk\", \"TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom\", \"TopCat.Presheaf.germ_stalkPullbackInv\", \"TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom_assoc\", \"TopCat.Presheaf.germ_stalkPullbackInv_assoc\"], \"digest\": \"105a69b17f330c83\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern Zariski/topological presheaves or structure-sheaf stalks, not the finite-coefficient pro-etale derived statement and its unit normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of an etale origin complex on a finite scheme over an algebraically closed field are the finite sum of geometric stalks, with pullback unit reindexing germs",
+   "results": "{\"t\": \"2026-10-17T09:21:24Z\", \"tool\": \"leanfinder\", \"query\": \"Derived global sections of an etale origin complex on a finite scheme over an algebraically closed field are the finite sum of geometric stalks, with pullback unit reindexing germs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"Algebra.etaleLocus\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"9d8fea2150082766\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern Zariski/topological presheaves or structure-sheaf stalks, not the finite-coefficient pro-etale derived statement and its unit normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkPullbackIso|pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk|finite.*cohomology",
+   "results": "{\"t\": \"2026-10-17T09:23:31Z\", \"tool\": \"grep\", \"query\": \"stalkPullbackIso|pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk|finite.*cohomology\", \"sub\": \"Topology/Sheaves\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/Stalks.lean\", \"Mathlib/Topology/Sheaves/Stalks.lean\", \"Mathlib/Topology/Sheaves/Stalks.lean\"], \"digest\": \"d2644bf017bd35e4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern Zariski/topological presheaves or structure-sheaf stalks, not the finite-coefficient pro-etale derived statement and its unit normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of inverse image direct image for sheaves sends a global section to its pullback, whose germ at x is the original germ at f x; finite etale cohomology is a finite product of fibres",
+   "results": "{\"t\": \"2026-10-17T09:23:39Z\", \"tool\": \"leanfinder\", \"query\": \"The unit of inverse image direct image for sheaves sends a global section to its pullback, whose germ at x is the original germ at f x; finite etale cohomology is a finite product of fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk\", \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk\", \"TopCat.Presheaf.germ_stalkPullbackHom\", \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk_assoc\", \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk_assoc\", \"TopCat.Presheaf.germ_stalkPullbackInv\", \"TopCat.Presheaf.germToPullbackStalk\", \"TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom\"], \"digest\": \"abef46ed0f6581d4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern Zariski/topological presheaves or structure-sheaf stalks, not the finite-coefficient pro-etale derived statement and its unit normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-trf-coefficient-morphism-trace-formula",
@@ -90,5 +257,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-finite-scheme-derived-germs",
+  "worker": "stage1",
+  "summary": "Six-step proof using the existing finite-stalk restriction formula, exact etale sections, etale-origin derived comparison, and an explicit inverse-image-colimit/unit calculation. No new nodes and no statement change. The derived equality is checked on chain maps through K-injective resolutions, not inferred from cohomology maps.",
+  "blueprint": "thm-trf-coefficient-morphism-trace-formula.proof.md Step 1: the finite-scheme derived germ decomposition and the assertion that Phi-sharp reindexes the stalk summands; the item retains its generalization to any k-endomorphism.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-stalk-formula-restriction",
+    "why": "Generic The finite stalk formula is given by the restrictions of germs: used only in the cited form to construct or normalize the finite-scheme germ decomposition; the trace-formula unit has no replacement for this sheaf-theoretic or derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "why": "Generic Global sections over a strictly henselian local scheme are the stalk at the closed point: used only in the cited form to construct or normalize the finite-scheme germ decomposition; the trace-formula unit has no replacement for this sheaf-theoretic or derived-category tool."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic Exactness of geometric stalks: used only in the cited form to construct or normalize the finite-scheme germ decomposition; the trace-formula unit has no replacement for this sheaf-theoretic or derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic The functor induced by an exact functor is its own right and left derived functor: used only in the cited form to construct or normalize the finite-scheme germ decomposition; the trace-formula unit has no replacement for this sheaf-theoretic or derived-category tool."
+   },
+   {
+    "node": "sk-prop-sf-comparison",
+    "why": "Generic Bounded-below cohomology comparison: used only in the cited form to construct or normalize the finite-scheme germ decomposition; the trace-formula unit has no replacement for this sheaf-theoretic or derived-category tool."
+   },
+   {
+    "node": "lem-cbc-proetale-comparison-stalk",
+    "why": "Generic Geometric stalks commute with etale-to-pro-etale inverse image: used only in the cited form to construct or normalize the finite-scheme germ decomposition; the trace-formula unit has no replacement for this sheaf-theoretic or derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "why": "Generic A scheme finite over a field is affine, the spectrum of a finite-dimensional algebra: used only in the cited form to construct or normalize the finite-scheme germ decomposition; the trace-formula unit has no replacement for this sheaf-theoretic or derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-sections",
+    "why": "Generic Sections of the comparison inverse image: used only in the cited form to construct or normalize the finite-scheme germ decomposition; the trace-formula unit has no replacement for this sheaf-theoretic or derived-category tool."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Generic Leray acyclicity criterion: used only in the cited form to construct or normalize the finite-scheme germ decomposition; the trace-formula unit has no replacement for this sheaf-theoretic or derived-category tool."
+   },
+   {
+    "node": "lem-cbc-proetale-classical-stalk",
+    "why": "Generic Classical pro-etale stalks: strict localization and exactness: used only in the cited form to construct or normalize the finite-scheme germ decomposition; the trace-formula unit has no replacement for this sheaf-theoretic or derived-category tool."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Generic Bounded-below complexes admit bounded-below K-injective resolutions: used only in the cited form to construct or normalize the finite-scheme germ decomposition; the trace-formula unit has no replacement for this sheaf-theoretic or derived-category tool."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic Sheaves of modules on a small ringed site are Grothendieck abelian: used only in the cited form to construct or normalize the finite-scheme germ decomposition; the trace-formula unit has no replacement for this sheaf-theoretic or derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic Comparison inverse image commutes with scheme pullback: used only in the cited form to construct or normalize the finite-scheme germ decomposition; the trace-formula unit has no replacement for this sheaf-theoretic or derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Generic The inverse image of abelian sheaves along a morphism of sites is exact: used only in the cited form to construct or normalize the finite-scheme germ decomposition; the trace-formula unit has no replacement for this sheaf-theoretic or derived-category tool."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-stalk",
+    "why": "Generic Geometric stalks commute with pro-etale inverse image: used only in the cited form to construct or normalize the finite-scheme germ decomposition; the trace-formula unit has no replacement for this sheaf-theoretic or derived-category tool."
+   },
+   {
+    "node": "lem-cbc-proetale-sheafification-geometric-stalk",
+    "why": "Generic Sheafification preserves ordinary pro-etale geometric stalks: used only in the cited form to construct or normalize the finite-scheme germ decomposition; the trace-formula unit has no replacement for this sheaf-theoretic or derived-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "sk-prop-sf-comparison",
+  "lem-cbc-proetale-comparison-stalk",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-comparison-sections",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-cbc-proetale-classical-stalk",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-pur-proetale-inverse-image-stalk",
+  "lem-cbc-proetale-sheafification-geometric-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-ca8f5f1a3",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-ca8f5f1a3 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, the full statements of all 27 cited nodes, the proof of lem-pur-proetale-inverse-image-stalk, the parent's Step 1a, unit step 1, main-20261015 Step 1, and Stacks 03QP/03QO, 0993 and its warning, 099V/099W, 09A5 and 03D3 (labels match tags). There are no new nodes and the statement is unchanged; the coefficients are finite-level A_{E,n} on S_proet, and the étale-origin witness is required, which is needed because of the 0993 warning. Step 1: the finite stalk formula with f=a, ybar=id gives P(ybar)=S(k); k is strictly henselian, so sections equal the stalk; the composite is u -> (u_s). Step 2: Γ(S_et,-) is a finite product of exact stalk functors, so every complex computes RΓ. Step 3: through the witness, comparison-sections at the constant presentation and comparison-stalk make the pro-étale germ map on ν*I a termwise isomorphism; Leray clause 3 hypotheses hold. Step 4: comparison-pullback gives Lh*K a bounded-below witness, without needing constructibility. Step 5: the explicit map and its inverse are exactly a_F t_F^{-1} of the inverse-image-stalk lemma's proof (checked line by line); pr_V φ(s) = h∘s. Step 6: by the characterization on representatives in lem-pc-pre-derived-adjoint-functors-general, the unit is (h_*q)η_I; h_*J is K-injective, and cancelling q_s gives equality in D(A). Small cases checked: S empty, Spec k, k[e]/e^2 with e->0, two points with swap, two points with constant h, K=0. No duplicate among zero-dimensional-sections-stalks, the derived global germ nodes, or the étale inverse-image-stalk-germ node. No cycle and no SGA. All declared tool uses lie on the transitive route of sk-thm-trace-formula; I accept them. No changes."
  }
 }

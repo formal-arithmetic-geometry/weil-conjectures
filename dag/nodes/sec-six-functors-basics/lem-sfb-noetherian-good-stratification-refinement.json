@@ -10,9 +10,84 @@
  "stmt_deps": [
   "def-weil-locally-closed-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Prove simultaneously for every closed subset $F\\subseteq T$ and every finite locally closed partition of $F$ that the asserted finite good refinement exists in $F$. The descending-chain condition gives induction on strict inclusion of closed subsets: a nonempty family with no minimal member would, by choosing a strictly smaller member repeatedly, produce a strictly descending infinite chain. Closed subsets of a closed $F$ are closed in $T$, so the same condition holds in $F$. The empty space has the empty refinement. At a nonempty $F$, assume the assertion for all proper closed subsets of $F$; for the remaining steps rename $F$ as $T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y5, lemma-noetherian-partition-refined-by-stratification, proof; Tag 09Y0, definition-good-stratification"
+   }
+  },
+  {
+   "text": "By [lem-sc-noetherian-finite-irreducible-components] and [lem-sc-irreducible-components-cover], write $T=Z_1\\cup\\cdots\\cup Z_r$ as the finite union of its distinct irreducible components, with $r\\geq1$. These are nonempty, irreducible, closed and maximal by [def-weil-irreducible-components]. The Noetherian hypothesis in the finite-components statement is satisfied by the minimal-element argument of step 1.",
+   "uses": [
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-sc-irreducible-components-cover",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y5, lemma-noetherian-partition-refined-by-stratification, proof; Tag 09Y0, definition-good-stratification"
+   }
+  },
+  {
+   "text": "Fix $Z=Z_1$ and put $O=T\\setminus\\bigcup_{j\\ne1}Z_j$. This is open and contained in $Z$. It is nonempty: otherwise irreducibility would imply that $Z$ is contained in one of the other finitely many components (apply the closed two-set condition repeatedly), contrary to maximality and distinctness. Since $T=\\bigcup_a\\overline{P_a}$, the same finite closed-cover argument gives an $a$ with $Z\\subseteq\\overline{P_a}$. By [def-weil-locally-closed-subset], write $P_a=V\\cap D$ with $V$ open and $D$ closed; then $Z\\subseteq D$. The nonempty open $O$ meets $P_a$, because it contains a point of $Z\\subseteq\\overline{P_a}$. Consequently $U=O\\cap V=O\\cap P_a$ is a nonempty open subset of $T$ contained in $P_a$. This derives precisely the open subset used in Tag 09Y5 without assuming that $T$ is a scheme.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "def-weil-locally-closed-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y5, lemma-noetherian-partition-refined-by-stratification, proof; Tag 09Y0, definition-good-stratification"
+   }
+  },
+  {
+   "text": "Set $C=T\\setminus U$ and $H=\\overline U\\setminus U=C\\cap\\overline U$. For every original part form $R_a^1=P_a\\cap C\\cap\\overline U$ and $R_a^2=P_a\\cap C\\cap(T\\setminus\\overline U)$, deleting empty sets. These form a finite disjoint partition of $C$, refining the original parts, and $H=\\bigcup_aR_a^1$. They are locally closed by [def-weil-locally-closed-subset]: if $P_a=V_a\\cap D_a$, the first is $V_a\\cap(D_a\\cap C\\cap\\overline U)$ and the second is $(V_a\\cap(T\\setminus\\overline U))\\cap(D_a\\cap C)$. Thus this is a partition to which the induction hypothesis applies on the proper closed subset $C\\subsetneq T$.",
+   "uses": [
+    "def-weil-locally-closed-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y5, lemma-noetherian-partition-refined-by-stratification, proof; Tag 09Y0, definition-good-stratification"
+   }
+  },
+  {
+   "text": "Obtain by induction a finite good partition $C=\\coprod_b Q_b$ refining the $R_a^k$, with all $Q_b$ nonempty. Each $Q_b$ is locally closed in $T$ as well: an open of $C$ is $C\\cap V_b$ with $V_b$ open in $T$, and a closed subset of the closed subspace $C$ is closed in $T$, so the expression open intersect closed from [def-weil-locally-closed-subset] gives the claim. For any $Q_b\\subseteq C$, its closure in $T$ is contained in $C$ and equals its closure in $C$, by the defining minimality of closure. The induction hypothesis therefore gives goodness for every pair of these strata with closures taken in $T$.",
+   "uses": [
+    "def-weil-locally-closed-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y5, lemma-noetherian-partition-refined-by-stratification, proof; Tag 09Y0, definition-good-stratification"
+   }
+  },
+  {
+   "text": "Adjoin $U$ to the $Q_b$. This is a finite partition of $T$ into nonempty locally closed parts refining the $P_a$. For a pair with source part $U$ and target part $Q_b$, the intersection $U\\cap\\overline{Q_b}$ is empty since $\\overline{Q_b}\\subseteq C$. For a pair with source $Q_b$ and target $U$, refinement in step 4 places $Q_b$ either inside $H\\subseteq\\overline U$ or inside $T\\setminus\\overline U$; hence intersection with $\\overline U$ implies containment. The pair $(U,U)$ satisfies containment automatically. Together with step 5 these are all pairs, proving goodness. Finally, every point of $\\overline Q$ lies in a unique part of the partition, and goodness puts that whole part inside $\\overline Q$. Thus each stratum closure is a union of parts, as asserted. This completes the induction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y5, lemma-noetherian-partition-refined-by-stratification, proof; Tag 09Y0, definition-good-stratification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-irreducible-components",
+  "def-weil-locally-closed-subset",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-noetherian-finite-irreducible-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 09Y5 (lemma-noetherian-partition-refined-by-stratification), proof, with the component-open argument of Tag 0052 written out from the finite component list"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +130,38 @@
    "results": "0 hits: . Subdirectory: Topology",
    "date": "2026-10-17",
    "verdict": "no match: the hits give irreducible closed decompositions or cover refinements, not a finite locally closed refinement with closure-union frontier condition."
+  },
+  {
+   "tool": "grep",
+   "query": "goodStratification|good_stratification|stratification.*refin|refin.*stratification",
+   "results": "0 hits: . Subdirectory: Topology",
+   "date": "2026-10-17",
+   "verdict": "no match: component decompositions and local-closedness characterizations do not state the finite good-refinement theorem; the cover-refinement hits have different hypotheses and conclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyClosed\", \"closure\"",
+   "results": "11 hits: isLocallyClosedAt_iff_closure_eventuallyLE, isLocallyClosedAt_iff_closure_eventuallySubset, isLocallyClosedAt_iff_eventuallyEqSet_closure, isLocallyClosedAt_iff_eventuallyEq_closure, IsLocallyClosedAt.of_notMem_closure, isLocallyClosedAt_iff_exists_inter_closure_subset, isLocallyClosedAt_iff_exists_eq_inter_closure, isLocallyClosedAt_iff_exists_inter_closure_subset_of_hasBasis",
+   "date": "2026-10-17",
+   "verdict": "no match: component decompositions and local-closedness characterizations do not state the finite good-refinement theorem; the cover-refinement hits have different hypotheses and conclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally closed partition refinement satisfying the frontier condition in a Noetherian topological space",
+   "results": "8 hits: ParacompactSpace.locallyFinite_refinement, TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible, precise_refinement_set, exists_clopen_partition_of_clopen_cover, TopologicalSpace.NoetherianSpace.exists_finset_irreducible, TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible, TopologicalSpace.NoetherianSpace.finite_irreducibleComponents, refinement_of_locallyCompact_sigmaCompact_of_nhds_basis_set",
+   "date": "2026-10-17",
+   "verdict": "no match: component decompositions and local-closedness characterizations do not state the finite good-refinement theorem; the cover-refinement hits have different hypotheses and conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite locally closed partition of a Noetherian topological space admits a finite good stratification with closures unions of strata",
+   "results": "8 hits: TopologicalSpace.NoetherianSpace.exists_finset_irreducible, TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible, TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible, TopologicalSpace.NoetherianSpace.finite_irreducibleComponents, AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, exists_clopen_partition_of_clopen_cover, exists_iUnion_eq_closed_subset",
+   "date": "2026-10-17",
+   "verdict": "no match: component decompositions and local-closedness characterizations do not state the finite good-refinement theorem; the cover-refinement hits have different hypotheses and conclusions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-finite-model-stratum-filtration",
@@ -78,5 +181,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-noetherian-good-stratification-refinement",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Stacks Tag 09Y5 into six steps: closed-subset induction, existing finite component and covering leaves, elementary construction of a nonempty open in a partition part, boundary-adapted partition on its closed complement, induction and verification of every frontier pair. No new nodes or Lean work. In particular the scheme-only component-open leaf is not applied to an arbitrary space.",
+  "blueprint": "Realizes the good-refinement input of lem-sfb-finite-model-stratum-filtration step 2, below the finite constructible-source devissage supporting the last sentence of ancestor lem-sfb-dc-hom-preserves, as recorded in blueprint.from; unit sk-def-sfb-dc-restricted-functors preservation step 1 is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-6990f64a3",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-6990f64a3 (reviewer sub-agent of L); spot-checked: I read the item (no new nodes) in full against Stacks topology.tex: definition-good-stratification (09Y0, l.5525) and lemma-noetherian-partition-refined-by-stratification (09Y5, l.5631), with the partition/refinement definition at l.5507. The statement matches 09Y5 with DCC as the Noetherian hypothesis, locally closed parts, refinement and goodness; the only additions are nonempty strata and the closure-union remark, and nothing is weakened. Step 1 sets up a correct strong induction over closed subspaces, which inherit DCC, and handles the empty base case. Step 2 cites two Mathlib-leaf nodes, lem-sc-noetherian-finite-irreducible-components and lem-sc-irreducible-components-cover, and each says exactly what is used. Step 3 writes out Stacks' appeal to 0052 for a bare topological space, correctly: O is nonempty by irreducibility and maximality, there is an a with Z inside the closure of P_a, and O∩V = O∩P_a is nonempty because O ⊆ Z ⊆ D. This avoids the scheme-only lem-sfb-noetherian-component-open. Step 4's pieces R^1/R^2 partition C, refine the original parts, give the boundary of U, and the step writes them as open-intersect-closed. Step 5 correctly transfers local closedness and closures from C to T. Step 6 checks every pair of strata involving U. I tested the empty space, a point, the Sierpinski space with both partitions, the cofinite topology on N and a finite discrete space. No duplicate exists: det-lem-coefficient-heart-common-stratification and lem-weil-pbc-affine-basic-sets-disjoint-refinement state different things. No Lean exists in slopmaster2 or Mathlib. The citer lem-sfb-finite-model-stratum-filtration uses exactly the stated content. All cited nodes are definitions or Mathlib leaves, so there is no route issue and no tool_uses. No fixes."
  }
 }

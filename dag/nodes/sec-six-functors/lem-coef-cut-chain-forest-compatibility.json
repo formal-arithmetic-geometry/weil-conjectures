@@ -1,0 +1,96 @@
+{
+ "id": "lem-coef-cut-chain-forest-compatibility",
+ "kind": "statement",
+ "title": "Simplicial and grafting compatibility of ordered Cut-chain forests",
+ "statement": "Use the simplex category $\\Delta$ of [def-weil-pbc-simplicial-set], with $[n]=\\{0,\\ldots,n\\}$. Write $\\langle n\\rangle=\\{*,1,\\ldots,n\\}$. For $\\alpha:[n]\\to[m]$ in $\\Delta^{\\mathrm{op}}$, with opposite monotone map $a:[m]\\to[n]$, define the ordered pointed map $c_\\alpha:\\langle n\\rangle\\to\\langle m\\rangle$ by sending $j$ to $i$ when $a(i-1)<j\\leq a(i)$, and to $*$ otherwise; each non-basepoint fibre has the increasing order. Composition of ordered pointed maps replaces each ordered fibre by the concatenation, in its order, of the preceding fibres, omitting inputs sent to $*$. Thus these maps are operators for the ordinary one-color associative operad, whose operations are ordered finite input lists, including the empty list.\n\nFor a finite chain $\\sigma=([n_0]\\xrightarrow{\\alpha_1}\\cdots\\xrightarrow{\\alpha_q}[n_q])$, form its full leveled forest record as follows. At level $k$, put one corolla at each output $i=1,\\ldots,n_k$, with ordered input slots the fibre $c_{\\alpha_k}^{-1}(i)$, and join slots to the matching output wires at level $k-1$. The initial wires are labeled $1,\\ldots,n_0$. Keep corollas with no input slots as nullary vertices. A wire sent to $*$ at the next level terminates there as a discarded wire. Keep these discarded components in the full record. A chosen output tree is obtained by retaining just the ancestors of one selected final output; when $q=0$ it is the selected single wire.\n\nThe following compatibility holds for all such chains and all their subchains, including repeated stages and zero ordinals. The external initial wires of the chosen output tree $j$ form, in increasing order, the interval\n$$L_j=\\{a( j-1)+1,\\ldots,a(j)\\},\\qquad a=a_1\\circ\\cdots\\circ a_q,$$\nwhere $a_k=\\alpha_k^{\\mathrm{op}}$ and for $q=0$ take $a=\\mathrm{id}_{[n_0]}$. This interval may be empty, while its tree retains any nullary vertices. Splitting a chain at a stage reconstructs its chosen output trees by ordered grafting of the earlier output trees into the later ones; branches discarded in the later chain are omitted. The initial-wire lists concatenate in precisely this grafting order.\n\nFor every weakly increasing $\\theta:[p]\\to[q]$, the forest of the restricted chain with stages $[n_{\\theta(0)}],\\ldots,[n_{\\theta(p)}]$ is canonically identified with the following operation on the full record. Restrict to these endpoints, substitute all intervening layers between each pair of consecutive retained stages, and discard intermediate corollas whose outputs are unused in that substitution; mark the corresponding unused retained-stage wires as discarded. A repeated retained stage inserts singleton identity corollas. In particular an inner face contracts the intervening layers by substitution, an outer face removes the endpoint layer, and a degeneracy inserts unary identities. Endpoint removal is performed on the full record before taking ancestors of the new final output; it need not be recoverable from a single previously pruned tree. These identifications preserve the ordered wire labels, commute with successive simplicial restrictions, and commute with splitting and grafting at every retained stage. Consequently every intersection of face, degeneracy and grafting operations agrees after the canonical order-preserving identifications, including the empty-output and empty-input cases. This is a statement about finite ordered forests only; it does not construct a coherent diagram in a target category.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Higher Algebra (2017), Construction 4.1.2.9 (Cut), printed pp. 462-463, and Definition 4.1.1.3 / Remark 4.1.1.4 (ordered associative operators). Agent-written finite-forest compatibility expansion of these formulas, extracted from returned step 5; not quoted as a theorem of HA. HA was inspected online and is not archived in literature; archive WANTED in report.md. No Stacks tag states this specific operadic indexing lemma."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Cut|planar.*forest|forest.*graft|levelled|leveled",
+   "results": "{\"t\": \"2026-10-17T08:29:24Z\", \"tool\": \"grep\", \"query\": \"Cut|planar.*forest|forest.*graft|levelled|leveled\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"5aba7e6f0e2cc06d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary simplex morphisms and simplicial identities, degeneracy normal forms, nonempty integer compositions or W-types; none states the ordered Cut-chain forest, discarded-branch, endpoint-restriction and grafting identification. Candidate source files and lines are discussed in report.md."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cut functor from the opposite simplex category to the associative operad category of operators sends chains to planar forests compatibly with faces degeneracies and grafting",
+   "results": "{\"t\": \"2026-10-17T08:29:25Z\", \"tool\": \"leanfinder\", \"query\": \"The cut functor from the opposite simplex category to the associative operad category of operators sends chains to planar forests compatibly with faces degeneracies and grafting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.toSimplexCategory\", \"SimplexCategory.II\", \"SimplexCategory.II_obj\", \"SSet.stdSimplex.objMk\", \"CategoryTheory.nerve_obj\", \"SimplexCategory.toCat\", \"SimplicialObject.Splitting.IndexSet.e\", \"SimplicialObject.Splitting.summand\"], \"digest\": \"87b2709c4c92ac2f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary simplex morphisms and simplicial identities, degeneracy normal forms, nonempty integer compositions or W-types; none states the ordered Cut-chain forest, discarded-branch, endpoint-restriction and grafting identification. Candidate source files and lines are discussed in report.md."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The forests of consecutive ordered fibres of maps of finite ordinals respect composition simplicial faces degeneracies and grafting including empty fibres",
+   "results": "{\"t\": \"2026-10-17T08:35:04Z\", \"tool\": \"leansearch\", \"query\": \"The forests of consecutive ordered fibres of maps of finite ordinals respect composition simplicial faces degeneracies and grafting including empty fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.δ_comp_σ_self'_assoc\", \"CategoryTheory.SimplicialObject.δ_comp_σ_of_le_assoc\", \"SimplexCategory.δ_comp_σ_succ\", \"SimplexCategoryGenRel.δ_comp_σ_of_le_assoc\", \"SimplexCategory.σ_comp_σ\", \"SSet.δ_comp_δ_apply\", \"CategoryTheory.SimplicialObject.δ_comp_δ\", \"CategoryTheory.CosimplicialObject.σ\"], \"digest\": \"587a29aa3be04a3b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary simplex morphisms and simplicial identities, degeneracy normal forms, nonempty integer compositions or W-types; none states the ordered Cut-chain forest, discarded-branch, endpoint-restriction and grafting identification. Candidate source files and lines are discussed in report.md."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplexCategory.Hom, SimplexCategory.Hom",
+   "results": "{\"t\": \"2026-10-17T08:35:05Z\", \"tool\": \"loogle\", \"query\": \"SimplexCategory.Hom, SimplexCategory.Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"SimplexCategory.Hom\", \"SimplexCategory.Hom.id\", \"SimplexCategory.Hom.comp\", \"SimplexCategory.Hom.mk_toOrderHom\", \"SimplexCategory.Hom.mk\", \"SimplexCategory.Hom.toOrderHom\", \"SimplexCategory.Hom.ext'\", \"SimplexCategory.rev_map\"], \"digest\": \"78c568987450eb22\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary simplex morphisms and simplicial identities, degeneracy normal forms, nonempty integer compositions or W-types; none states the ordered Cut-chain forest, discarded-branch, endpoint-restriction and grafting identification. Candidate source files and lines are discussed in report.md."
+  },
+  {
+   "tool": "grep",
+   "query": "planar|rooted|operad|forest",
+   "results": "{\"t\": \"2026-10-17T08:36:47Z\", \"tool\": \"grep\", \"query\": \"planar|rooted|operad|forest\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\"], \"digest\": \"3241a586fc8da8c3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary simplex morphisms and simplicial identities, degeneracy normal forms, nonempty integer compositions or W-types; none states the ordered Cut-chain forest, discarded-branch, endpoint-restriction and grafting identification. Candidate source files and lines are discussed in report.md."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated substitution of ordered input blocks is represented by leveled rooted planar forests; contracting levels and inserting identities gives the simplicial identities, also for nullary vertices and discarded inputs",
+   "results": "{\"t\": \"2026-10-17T08:36:53Z\", \"tool\": \"leanfinder\", \"query\": \"Iterated substitution of ordered input blocks is represented by leveled rooted planar forests; contracting levels and inserting identities gives the simplicial identities, also for nullary vertices and discarded inputs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.simplicialEvalσ\", \"MvQPF.wrepr\", \"SimplexCategoryGenRel.standardσ_comp_standardσ\", \"SimplexCategoryGenRel.standardσ\", \"Composition.gather\", \"SimplexCategoryGenRel.standardσ_simplicialInsert\", \"Composition.sigmaCompositionAux\", \"MvPFunctor.wMk'\"], \"digest\": \"e3badff079878349\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary simplex morphisms and simplicial identities, degeneracy normal forms, nonempty integer compositions or W-types; none states the ordered Cut-chain forest, discarded-branch, endpoint-restriction and grafting identification. Candidate source files and lines are discussed in report.md."
+  },
+  {
+   "tool": "grep",
+   "query": "def gather|standardσ_comp_standardσ|def simplicialEvalσ|def wrepr",
+   "results": "{\"t\": \"2026-10-17T08:38:07Z\", \"tool\": \"grep\", \"query\": \"def gather|standardσ_comp_standardσ|def simplicialEvalσ|def wrepr\", \"sub\": \"Analysis/Analytic/Composition.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"1068\"], \"digest\": \"0c5baccc44819eb1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary simplex morphisms and simplicial identities, degeneracy normal forms, nonempty integer compositions or W-types; none states the ordered Cut-chain forest, discarded-branch, endpoint-restriction and grafting identification. Candidate source files and lines are discussed in report.md."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-monoidal-block-projection-coherence",
+  "date": "2026-10-17",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, coherent finite-adjunction realization before derived inverse limit, through the monoidal-Yoneda chain; the returned block-projection lemma step 5, sentences drawing the retained output forest and identifying its faces, degeneracies, endpoint restrictions and further block substitutions.",
+   "via": [
+    "lem-coef-monoidal-block-projection-coherence",
+    "lem-coef-monoidal-yoneda-embedding",
+    "lem-coef-algebroid-object-space-fibration",
+    "lem-coef-enriched-completion-localization",
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -13,9 +13,80 @@
   "lem-weil-pbc-inverse-image-composition-module-linear",
   "lem-weil-pbc-extension-by-zero-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All functors in this proof act on sheaves of modules over the fixed constant ring $\\Lambda$. Put $G=g^{-1}$, $H=h^{-1}$, $A=g_U^{-1}$, $B=h_U^{-1}$, $J=j^{-1}$, $J'=j'^{-1}$ and $J''=j''^{-1}$. The square for $g\\circ h$ is cartesian: maps to $U$ and $X''$ agreeing over $X$ first give a unique map to $U'$ by the first square and then a unique map to $U''$ by the second. Write $c_{u,v}:v^{-1}u^{-1}\\xrightarrow{\\sim}(u\\circ v)^{-1}$ for the module-linear composition comparison. For the first square its restriction comparison is\n$$s_g=c_{g,j'}^{-1}\\circ c_{j,g_U}:AJ\\longrightarrow J'G,$$\nusing $j\\circ g_U=g\\circ j'$. Likewise $s_h=c_{h,j''}^{-1}\\circ c_{j',h_U}:BJ'\\to J''H$. Let $s_{gh}:(g_U\\circ h_U)^{-1}J\\to J''(g\\circ h)^{-1}$ be the identical construction for the composite square. These are the canonical comparisons appearing in the adjunction characterization of $b$, by [lem-cbc-derived-extension-zero-base-change-underived-compatibility].",
+   "uses": [
+    "def-cbc-open-immersion-square",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "lem-cbc-derived-extension-zero-base-change-underived-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8 (lemma-push-pull-composition-modules); etale-cohomology.tex Tag 03S6 (lemma-shriek-base-change), canonical square comparison"
+   }
+  },
+  {
+   "text": "The square comparisons obey\n$$s_hG\\circ B(s_g)=(J''c_{g,h})^{-1}\\circ s_{gh}\\circ(c_{g_U,h_U}J):BAJ\\longrightarrow J''HG.\\tag{*}$$\nTo verify all the identifications, put $a=g_U$, $b=h_U$ and expand the left side as\n$$c_{h,j''}^{-1}G\\circ c_{j',b}G\\circ B(c_{g,j'}^{-1})\\circ B(c_{j,a}).$$\nAssociativity of $c$ for $(g,j',b)$ gives\n$$c_{j',b}G\\circ B(c_{g,j'}^{-1})=c_{g,j'\\circ b}^{-1}\\circ c_{g\\circ j',b}.$$\nFor $(j,a,b)$ it gives\n$$c_{j\\circ a,b}\\circ B(c_{j,a})=c_{j,a\\circ b}\\circ(c_{a,b}J).$$\nUse $g\\circ j'=j\\circ a$ to substitute the second equality into the expanded product after the first substitution. It becomes\n$$c_{h,j''}^{-1}G\\circ c_{g,j'\\circ b}^{-1}\\circ c_{j,a\\circ b}\\circ(c_{a,b}J).$$\nFinally $j'\\circ b=h\\circ j''$ and associativity for $(g,h,j'')$ give\n$$c_{h,j''}^{-1}G\\circ c_{g,h\\circ j''}^{-1}=(J''c_{g,h})^{-1}\\circ c_{g\\circ h,j''}^{-1}.$$\nThe resulting expression is the right side of (*). The associativity law used here is clause (1) of [lem-weil-pbc-derived-inverse-image-composition]. By [lem-weil-pbc-inverse-image-composition-module-linear] each module comparison has precisely that abelian comparison as its underlying map. Thus these equations also hold for module sheaves (the forgetful functor is faithful).",
+   "uses": [
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "lem-weil-pbc-inverse-image-composition-module-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8 (lemma-push-pull-composition-modules); explicit associativity calculation for the three triples (g,j',h_U), (j,g_U,h_U), (g,h,j'')"
+   }
+  },
+  {
+   "text": "Set $\\alpha_{g,F}=b_{g,F}^{-1}:j'_!AF\\to Gj_!F$ and $\\alpha_{h,AF}=b_{h,AF}^{-1}:j''_!BAF\\to Hj'_!AF$. Write $\\eta_j,\\eta_{j'},\\eta_{j''}$ for the units of the extension-by-zero adjunctions. By [lem-cbc-derived-extension-zero-base-change-underived-compatibility] and [lem-weil-pbc-extension-by-zero-adjunction],\n$$J'(\\alpha_{g,F})\\circ\\eta_{j',AF}=s_{g,j_!F}\\circ A(\\eta_{j,F}),$$\n$$J''(\\alpha_{h,AF})\\circ\\eta_{j'',BAF}=s_{h,j'_!AF}\\circ B(\\eta_{j',AF}).$$\nThe same characterization applies to $\\alpha_{gh,F}$ because the composite square is cartesian by step 1. Each $\\alpha$ is invertible by [lem-cbc-extension-zero-base-change]. No derived category or resolution is involved.",
+   "uses": [
+    "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-cbc-extension-zero-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6 (lemma-shriek-base-change), adjunction description of the inverse canonical map"
+   }
+  },
+  {
+   "text": "Consider $P=H(\\alpha_{g,F})\\circ\\alpha_{h,AF}:j''_!BAF\\to HGj_!F$. Its transpose under $j''_!\\dashv J''$ is\n$$\\begin{aligned}\nJ''(P)\\circ\\eta_{j'',BAF}\n&=J''H(\\alpha_{g,F})\\circ s_{h,j'_!AF}\\circ B(\\eta_{j',AF})\\\\\n&=s_{h,Gj_!F}\\circ BJ'(\\alpha_{g,F})\\circ B(\\eta_{j',AF})\\\\\n&=s_{h,Gj_!F}\\circ B(s_{g,j_!F})\\circ BA(\\eta_{j,F}).\n\\end{aligned}$$\nThe first equality substitutes step 3 for $\\alpha_h$. The second is naturality of $s_h$ at $\\alpha_{g,F}$, and the third substitutes step 3 for $\\alpha_g$. Substitute (*) and use naturality of $c_{g_U,h_U}$ at $\\eta_{j,F}$. This gives\n$$(J''c_{g,h,j_!F})^{-1}\\circ s_{gh,j_!F}\\circ(g_U\\circ h_U)^{-1}(\\eta_{j,F})\\circ c_{g_U,h_U,F}.$$\nBy step 3 this is precisely the transpose of the composite-map inverse $\\alpha_{gh,F}$, transported to source $j''_!BAF$ and target $HGj_!F$. Naturality of the adjunction bijection with respect to these source and target identifications proves that assertion; the displayed formula includes both of them. Injectivity of that bijection therefore identifies $P$ with the transported $\\alpha_{gh,F}$.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-inverse-image-composition-module-linear"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6 (lemma-shriek-base-change); categories.tex Tag 0DV0 (lemma-compose-counits), written-out transpose computation"
+   }
+  },
+  {
+   "text": "Invert the equality in step 4. Since a functor preserves an inverse, $P^{-1}=b_{h,AF}\\circ H(b_{g,F})$. The inverse of the transported $\\alpha_{gh,F}$ is the transported $b_{g\\circ h,F}$. These are exactly the two maps in the statement, with $A=g_U^{-1}$ and $H=h^{-1}$ and with the source and target comparisons $c_{g,h}$ and $c_{g_U,h_U}$ already specified in (*). This proves the required equality for every $F$ and the given finite commutative ring $\\Lambda$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6 (lemma-shriek-base-change), inversion of the equality of adjunction mates"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-open-immersion-square",
+  "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
+  "lem-cbc-extension-zero-base-change",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-inverse-image-composition-module-linear"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S6 (lemma-shriek-base-change), adjunction proof; expanded pasting calculation for the blueprint cor-cbc-derived-extension-zero-base-change proof, final sentence"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +115,52 @@
    "results": "Mathlib/AlgebraicGeometry/Restrict.lean; Mathlib/AlgebraicGeometry/AffineSpace.lean; Mathlib/AlgebraicGeometry/OpenImmersion.lean; Mathlib/AlgebraicGeometry/OpenImmersion.lean; Mathlib/AlgebraicGeometry/Fiber.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean",
    "date": "2026-10-17",
    "verdict": "no match for the etale sheaf statement"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek.*(paste|comp)|baseChange.*paste",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the etale module-sheaf pasting statement; general mate and pullback comparisons require identification of the canonical maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero open immersion etale sheaves base change transitive composition",
+   "results": "AlgebraicGeometry.IsOpenImmersion.comp; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.comp; AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange; AlgebraicGeometry.SheafedSpace.IsOpenImmersion; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.isOpenImmersion_isMultiplicative",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the etale module-sheaf pasting statement; general mate and pullback comparisons require identification of the canonical maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv_comp",
+   "results": "CategoryTheory.conjugateEquiv_comp",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the etale module-sheaf pasting statement; general mate and pullback comparisons require identification of the canonical maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of etale module sheaves extension by zero base change compatibility with two successive pullback squares",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; SheafOfModules.pullback_assoc; SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the etale module-sheaf pasting statement; general mate and pullback comparisons require identification of the canonical maps"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_comp|mateEquiv.*comp",
+   "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the etale module-sheaf pasting statement; general mate and pullback comparisons require identification of the canonical maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley transformation for sheaves extension by zero satisfies composition of cartesian squares",
+   "results": "CategoryTheory.Presieve.IsSheafFor.functorInclusion_comp_extend_assoc; CategoryTheory.Presieve.IsSheafFor.functorInclusion_comp_extend; CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'; CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map; CategoryTheory.Functor.IsCoverDense.Types.appHom_valid_glue; CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc; TopCat.Sheaf.interUnionPullbackConeLift_right; CategoryTheory.Presieve.isSheafFor_over_map_op_comp_ofArrows_iff",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the etale module-sheaf pasting statement; general mate and pullback comparisons require identification of the canonical maps"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "cor-cbc-derived-extension-zero-base-change",
@@ -64,5 +177,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-derived-extension-zero-base-change-vertical-pasting",
+  "worker": "stage1",
+  "summary": "Proved the underived vertical-pasting equation by an explicit associativity calculation for the module inverse-image square comparisons, followed by a calculation of the two adjunction transposes and inversion. Uses existing nodes only; no statement change or Lean attachment. Checked all cited statements and the module/abelian distinction.",
+  "blueprint": "Realizes the successive-base-change part of the final sentence, “pasting properties of the construction”, of cor-cbc-derived-extension-zero-base-change.proof.md, current main-20261015 blueprint; retains the original blueprint ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Generic module-linearity and unit characterization of canonical inverse-image composition; no cbc-unit node supplies these composition comparisons."
+   },
+   {
+    "node": "lem-weil-pbc-derived-inverse-image-composition",
+    "why": "Only sheaf-level clause (1), the associativity of canonical inverse-image comparisons, is used as a generic tool; no derived assertion or replacement of the compact-support route is used."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic module extension-by-zero Hom adjunction, naturality and injectivity; the cbc-unit base-change result does not state the full Hom bijection."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-94b20c0fd",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-94b20c0fd (reviewer sub-agent of L); spot-checked: Read the item in full: all 5 steps, the deps and the split_report. Read the full statements of all six cited nodes, the parent cor-cbc-derived-extension-zero-base-change (its steps and tool_uses), the blueprint main-20261015 cor-cbc-derived-extension-zero-base-change.proof.md (final sentence on pasting) and Stacks etale-cohomology.tex l.11493 (Tag 03S6, lemma-shriek-base-change). The statement is byte-identical to the live copy; only split-owned fields changed; there are no new nodes. Step 2: I re-derived the three uses of the associativity clause (1) of lem-weil-pbc-derived-inverse-image-composition, for (g,j',b), (j,a,b) and (g,h,j''), using gj'=ja and j'b=hj''. They give (*) with matching sources and targets. Module validity follows from the module-linear node's matching underlying maps and the faithful forgetful functor. Step 3: the transpose equations follow from underived-compatibility plus the adjunction; I checked the hypotheses (open-immersion squares, finite Lambda, module sheaves F and AF) and the composite square's cartesian datum from step 1. Step 4: I recomputed J''(P)eta, and independently the transpose of the transported alpha_gh using naturality of eta_j''. They agree, so P equals the transported alpha_gh by injectivity. Step 5's inversion matches the statement. Edge cases: identity g or h reduces to the unit laws; empty U, F=0 and Lambda=0 are trivial; j=id reduces to associativity of c. No duplicate: lem-trf-open-square-exchange is pro-etale derived, and the open-pasting node is the other direction. Accepted tool_uses, already recorded on the parent: lem-weil-pbc-inverse-image-composition-module-linear, lem-weil-pbc-derived-inverse-image-composition (clause 1 only) and lem-weil-pbc-extension-by-zero-adjunction. No SGA is used and no fixes were needed."
  }
 }

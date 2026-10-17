@@ -17,9 +17,99 @@
   "def-weil-pbc-bounded-derived-subcategories",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S_W(F)=F|_W$. By [def-pur-localized-ringed-site], $S_W(F)(V\\to W)=F(V)$, with the original restriction maps, and $\\operatorname{id}_W$ is terminal. The localization inverse image on sheaves of sets is this sectionwise restriction; [lem-pe-constant-left-module-inverse-image] identifies its pullback of $\\Lambda_{\\mathcal C}$ with $\\Lambda_{\\mathcal C/W}$ and says that the resulting left-module inverse image is exact, including for noncommutative $\\Lambda$. It is precisely $S_W$: the addition and scalar action at $V\\to W$ are those of $F(V)$. In particular it sends a zero map to zero, preserves quasi-isomorphisms termwise and induces the stated restriction of derived objects. Applying [def-pur-localized-ringed-site] inside $\\mathcal C/W$ gives $S_a S_W=S_{W'}$ sectionwise for $a:W'\\to W$.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IX, definition-localize-ringed-site; Tag 03DH, section-localize; relocalization and constant coefficients"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-kinjective-restrict-localized-adjunction] to the ring sheaf $\\Lambda_{\\mathcal C}$ and $W$; the zero-map hypothesis holds by step 1. It supplies $G_W\\dashv S_W$ with $G_W$ preserving finite limits and finite colimits, hence exact. The module-sheaf categories are abelian by [def-weil-sheaf-of-modules-category]. Therefore [lem-sp-right-adjoint-preserves-injectives], with exact left adjoint $G_W$ and right adjoint $S_W$, proves that $S_W$ preserves injective objects. This also applies on every slice, so $S_a$ preserves injectives. For the given $L$, every $S_WL$ is thus a bounded-below complex of injectives with the same lower bound: if $L^n=0$, then $(S_WL)^n(V\\to W)=0$ for every test object.",
+   "uses": [
+    "lem-pur-kinjective-restrict-localized-adjunction",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F3, lemma-cohomology-of-open (1), proof using exact extension by zero (03DI–03DJ) and Homology 015Z"
+   }
+  },
+  {
+   "text": "All sites and coefficients lie in the fixed universe, and each slice of the small site is small. By [lem-weil-pbc-ring-sheaves-grothendieck] and [lem-sp-grothendieck-enough-injectives], their left-module-sheaf categories have enough injectives. The target $\\Lambda\\text{-}\\operatorname{Mod}$ is abelian by [lem-weil-pbc-ring-modules-enough-injectives]. For a slice let $E_W(F)=F(\\operatorname{id}_W)$, regarded as a left $\\Lambda$-module by constant scalars. It is additive since evaluation preserves addition of morphisms. It is left exact since kernels are sectionwise [def-weil-sheaf-of-modules-category]. Apply [lem-weil-pbc-right-derived-plus-injective] to $E_W$. Denote its derived functor by $RE_W=R\\Gamma(\\mathcal C/W,-)$ and its natural unit by $\\eta^W_M:Q(E_WM)\\to RE_W(QM)$. The unit is invertible on bounded-below complexes of injectives. Step 2 and the sectionwise definition give $E_W(S_WL)=L(W)$ as complexes: the differential in degree $n$ is exactly $(d_L^n)_W$. Define\n$$\\alpha_W=RE_W(S_We)\\circ\\eta^W_{S_WL}.$$\nBoth factors are isomorphisms, with target $RE_W(S_WK)$, as required.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-ring-modules-enough-injectives",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TI (lemma-enough-injectives-right-derived) and 05TH (lemma-injective-acyclic); Tag 05TA (proposition-enough-acyclics), bounded-below computation"
+   }
+  },
+  {
+   "text": "Fix $a:W'\\to W$ and work on $\\mathcal C/W$. For a module sheaf $F$ there is the natural section restriction $t_a(F):E_WF\\to E_{W'}S_aF$, evaluated on the arrow $(W'\\xrightarrow a W)\\to\\operatorname{id}_W$. It is $\\Lambda$-linear, and for complexes it commutes with the differential by naturality of $d$. By the universal property (1) of [lem-weil-pbc-right-derived-plus-injective], the transformation on bounded-below complexes\n$$Q(E_WM)\\xrightarrow{Q(t_a(M))}Q(E_{W'}S_aM)\\xrightarrow{\\eta^{W'}_{S_aM}}RE_{W'}(Q(S_aM))$$\nextends uniquely across the unit $\\eta^W$ to a transformation $\\rho_a:RE_W\\to RE_{W'}S_a^D$, where $S_a^D$ is induced by exact restriction. This is canonical derived section pullback: it derives the ordinary section pullback along localization, and uniqueness specifies its normalization. Its defining equality is\n$$\\rho_{a,QM}\\circ\\eta^W_M=\\eta^{W'}_{S_aM}\\circ Q(t_a(M)).$$\nFor $M=S_WL$, relocalization [def-pur-localized-ringed-site] identifies $S_aM=S_{W'}L$ sectionwise, while $t_a(M)$ is literally $r_a$. Thus the equality uses the actual evaluation differential and actual restriction map, rather than a chosen map between isomorphic cohomology objects.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F3 and equation-restriction-mapping immediately following it; derived.tex Tags 05S9–05SA, derived-functor unit universal property"
+   }
+  },
+  {
+   "text": "Naturality of $\\rho_a$ at $S_We:Q(S_WL)\\cong S_WK$ gives\n$$\\rho_{a,S_WK}\\,RE_W(S_We)=RE_{W'}(S_{W'}e)\\,\\rho_{a,Q(S_WL)}.$$\nCompose this with $\\eta^W_{S_WL}$ and substitute step 4. The result is exactly $\\rho_a\\alpha_W=\\alpha_{W'}Q(r_a)$. For a chain map $f:L\\to L'$ and a derived map $u:K\\to K'$ satisfying $u e=e'Q(f)$, naturality of the unit from [lem-weil-pbc-right-derived-plus-injective] gives\n$$RE_W(S_Wu)\\alpha_W=\\alpha'_W Q(f(W)).$$\nThis proves naturality for the specified representatives and identifications, including changes of $e$. The only identities used are naturality and composition of the displayed functors.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05SA, lemma-derived-functor, naturality of the derived-functor unit; sites-cohomology.tex equation-restriction-mapping"
+   }
+  },
+  {
+   "text": "For $D:I\\to\\mathcal C$, evaluation of the presheaves underlying $L^n$ [def-weil-sheaf-of-modules-category] gives $L^n(D(\\operatorname{id}_i))=\\operatorname{id}$ and $L^n(D(b\\circ a))=L^n(D(a))\\circ L^n(D(b))$. These equalities hold in each degree; naturality of $d_L$ makes every restriction a chain map. Hence the literal complexes form a strict $I^{\\mathrm{op}}$-diagram. If $L^n=0$ for $n<N$, every complex in that diagram is zero below $N$. Steps 3–5 identify its objects and arrows with the specified derived section objects and canonical transitions. Finally take an injective sheaf $J$ in degree zero. Step 2 makes $S_WJ[0]$ a bounded-below injective complex. By [lem-weil-pbc-right-derived-plus-injective] its module derived sections are $Q(J(W)[0])$, whose cohomology in every positive degree is zero. This is the last assertion, without any assertion that the underlying abelian sheaf of $J$ is injective.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F3 and equation-restriction-mapping; derived.tex Tag 05TH, degree-zero injective computation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pur-kinjective-restrict-localized-adjunction",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-ring-modules-enough-injectives",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03F3 and equation-restriction-mapping, with bounded-below comparisons and pullback normalization expanded using derived.tex Tags 05TI, 05TH and 05SA"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +159,59 @@
    "results": "; hits: Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean",
    "date": "2026-10-17",
    "verdict": "no match: candidates do not assert the stated site-level coefficient or compatible complex comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "([Ii]njective.*(overPullback|restrict)|overPullback.*[Ii]njective|slice.*[Ss]ection)",
+   "results": "; hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned infrastructure does not state the complete compatible slice-complex model"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Injective",
+   "results": "; hits: CategoryTheory.Sheaf.instSubsingletonHHAddNatOfNat",
+   "date": "2026-10-17",
+   "verdict": "no match: returned infrastructure does not state the complete compatible slice-complex model"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections of a bounded below injective complex restricted to the localized site over an object",
+   "results": "; hits: CategoryTheory.Sheaf.Γ, CategoryTheory.Sheaf.ΓRes, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.LocallyRingedSpace.Γ, TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective, CategoryTheory.Sheaf.coneΓ_π_app, CategoryTheory.Sheaf.natTransΓRes_app, AlgebraicGeometry.LocallyRingedSpace.Γ_def",
+   "date": "2026-10-17",
+   "verdict": "no match: returned infrastructure does not state the complete compatible slice-complex model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below injective complex of module sheaves computes derived sections on every slice site naturally in restriction maps",
+   "results": "; hits: PresheafOfModules.IsLocallyInjective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, PresheafOfModules.instIsLocallyInjectiveToSheafify, CochainComplex.isKInjective_of_injective, CochainComplex.cm5b.I_X, CategoryTheory.Sheaf.H, CochainComplex.cm5b.instInjectiveXIntI, CochainComplex.cm5b.instIsStrictlyGEI",
+   "date": "2026-10-17",
+   "verdict": "no match: returned infrastructure does not state the complete compatible slice-complex model"
+  },
+  {
+   "tool": "grep",
+   "query": "overPullback|rightDerived|cohomologyPresheaf",
+   "results": "; hits: Mathlib/CategoryTheory/Sites/SheafHom.lean, Mathlib/CategoryTheory/Sites/SheafHom.lean, Mathlib/CategoryTheory/Sites/LocalProperties.lean, Mathlib/CategoryTheory/Sites/LocalProperties.lean, Mathlib/CategoryTheory/Sites/LocalProperties.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: returned infrastructure does not state the complete compatible slice-complex model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf evaluation of injective cochain complexes models derived evaluation and is natural in the site object",
+   "results": "; hits: CochainComplex.cm5b.I_X, CochainComplex.cm5b.I, CochainComplex.cm5b.instInjectiveXIntI, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex",
+   "date": "2026-10-17",
+   "verdict": "no match: returned infrastructure does not state the complete compatible slice-complex model"
+  },
+  {
+   "tool": "grep",
+   "query": "overPullback|rightDerived|cohomologyPresheaf",
+   "results": "; hits: Mathlib/CategoryTheory/Sites/SheafHom.lean, Mathlib/CategoryTheory/Sites/SheafHom.lean, Mathlib/CategoryTheory/Sites/LocalProperties.lean, Mathlib/CategoryTheory/Sites/LocalProperties.lean, Mathlib/CategoryTheory/Sites/LocalProperties.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: returned infrastructure does not state the complete compatible slice-complex model"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sf-comparison-affine-continuity",
@@ -89,5 +228,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pe-injective-complex-slice-section-model",
+  "worker": "stage1",
+  "summary": "Kept every clause and hypothesis. Derived injective preservation from the existing exact extension-by-zero adjunction; defined each comparison by the natural right-derived unit, derived section restriction by its universal property, and proved the restriction square, naturality, strict diagram and injective acyclicity. Reused existing nodes only.",
+  "blueprint": "Ancestor det-sf-comparison-affine-continuity, proof Steps 3–4: compatible complexes underlying the filtered derived colimit; existing split Step 5. Steps 1–3 construct the common literal models, Steps 4–5 verify canonical transition maps, and Step 6 supplies the strict diagram and acyclic terms.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-kinjective-restrict-localized-adjunction",
+    "why": "Generic exact extension-by-zero adjunction for arbitrary ringed sites, used to prove injective preservation; the comparison unit does not supply this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic enough-injectives input for arbitrary noncommutative ring sheaves on small sites; the unit concerns comparison, not the ambient module categories."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-kinjective-restrict-localized-adjunction",
+  "lem-weil-pbc-ring-sheaves-grothendieck"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-0c0f078d4",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-0c0f078d4 (reviewer sub-agent of L); spot-checked: Read the item's six steps in full, the statements of all 15 cited nodes, the parent det-sf-comparison-affine-continuity (its Step 5 is the only citer), unit sk-prop-sf-comparison (uses []), Stacks 03F3 and its proof in sites-cohomology.tex, and Mathlib RightDerivedFunctorPlus.lean:36-55 and DerivabilityStructureInjectives.lean:376. Statement unchanged and no new nodes. Step 1: def-pur-localized-ringed-site gives sectionwise restriction and relocalization; lem-pe-constant-left-module-inverse-image covers noncommutative Λ and gives exactness. Step 2 follows Stacks' own proof of 03F3(1): the extension-by-zero adjunction (zero-map hypothesis checked) plus right-adjoint-preserves-injectives in the right orientation. Step 3: enough injectives from the Grothendieck-abelian node on small slices; the right-derived-plus-injective hypotheses (abelian categories, enough injectives, additive evaluation through Λ→Λ_{C/W}(id_W)) hold; α_W = RE_W(S_W e)∘η is an isomorphism. Step 4: ρ_a comes from one application of the leaf's universal property (the transformation is natural on K^+, and t_a = r_a on S_W L), so marking it elementary is fair. Step 5: I recomputed the square ρ_aα_W = α_{W'}Q(r_a) and the naturality in (L,e); both are correct. Step 6: strict I^op diagram with one lower bound, and injective acyclicity via clause (2) without assuming that forgetting scalars preserves injectives. Edge cases: identity and terminal W, composable arrows, L=0, empty I, a lower bound N≠0, the zero ring, M_2(k). Coefficients are left modules over the constant ring sheaf, as in the parent; no SGA. Accepted tool_uses: lem-pur-kinjective-restrict-localized-adjunction (generic extension by zero) and lem-weil-pbc-ring-sheaves-grothendieck (generic, Lean-closed in slopmaster2). Checked the DAG nodes citing 03F3: none duplicates the item. No fixes written."
  }
 }

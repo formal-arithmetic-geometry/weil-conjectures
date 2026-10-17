@@ -22,9 +22,111 @@
   "def-sp-left-exact-additive",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $X\\in\\mathcal C$. Choose a monomorphism $s:X\\hookrightarrow I^0$ into an injective object. Inductively, after constructing $I^n$, embed the cokernel of the preceding map into an injective $I^{n+1}$, and define $d^n$ as the cokernel projection followed by this embedding. Its kernel is the image of the preceding map, so $0\\to X\\to I^0\\to I^1\\to\\cdots$ is exact. Put $I^n=0$ for $n<0$. This gives an injective resolution using precisely enough injectives and the kernels and cokernels of an abelian category.",
+   "uses": [
+    "def-sp-enough-injectives",
+    "def-sp-injective-resolutions",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013K, lemma-injective-resolutions-exist, proof of (1): successive embeddings of cokernels"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-equivalence-injective-resolutions] to the given additive equivalence $E$. It is exact, preserves injective objects, and sends $s:X\\to I^\\bullet$ to the injective resolution $E(s):E(X)\\to E(I^\\bullet)$. Thus $E(I^\\bullet)$, without any further replacement, is a permitted resolution for computing $R^qT(E(X))$. The same lemma sends every augmented resolution map $u$ to the augmented resolution map $E(u)$.",
+   "uses": [
+    "lem-weil-pbc-equivalence-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015M, lemma-compose-derived-functors, proof with F=E and G=T; preservation of injectives from homology.tex Tag 015Z, lemma-adjoint-preserve-injectives"
+   }
+  },
+  {
+   "text": "For every differential $d^n:I^n\\to I^{n+1}$, naturality of $\\alpha$ gives $T(E(d^n))\\circ\\alpha_{I^n}=\\alpha_{I^{n+1}}\\circ S(d^n)$. Hence the components $\\alpha_{I^n}$ form an isomorphism of complexes $a_I:S(I^\\bullet)\\xrightarrow{\\sim}T(E(I^\\bullet))$; the inverse is termwise $\\alpha_{I^n}^{-1}$ and satisfies the chain equation by multiplying the displayed equality by the inverses. The complexes are defined because additivity preserves zero maps, so the consecutive differentials still compose to zero. Taking the kernel modulo the image in degree $q$ gives inverse maps $H^q(a_I)$ and $H^q(a_I^{-1})$.",
+   "uses": [
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015M, proof, displayed calculation on G(F(I)); the supplied natural isomorphism identifies the two termwise functors"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-derived-functor-map-via-lift] for $S$ on the resolution $I$, and for $T$ on the resolution $E(I)$ from step 2. Write their resolution isomorphisms as $i_I:R^qS(X)\\xrightarrow{\\sim}H^q(S(I))$ and $j_I:R^qT(E(X))\\xrightarrow{\\sim}H^q(T(E(I)))$. Define $c_X^I=j_I^{-1}\\circ H^q(a_I)\\circ i_I$. Every factor is an isomorphism, so $c_X^I$ is an isomorphism. Its expression under these resolution identifications is exactly $H^q(\\alpha_{I^\\bullet})$, as required by the component clause.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015M, lemma-compose-derived-functors, proof on an injective resolution; right-derived resolution computations as in Tag 05TD, lemma-left-exact-higher-derived"
+   }
+  },
+  {
+   "text": "Let $f:X\\to Y$ and choose an injective resolution $J$ of $Y$. By [lem-weil-pbc-injective-resolution-lift-exists] there is a chain map $u:I\\to J$ with $u^0s_X=s_Yf$. Step 2 gives the lift $E(u)$ of $E(f)$. Naturality of $\\alpha$ on every $u^n$ gives $T(E(u))\\circ a_I=a_J\\circ S(u)$ and hence the same square on degree-$q$ cohomology. The map formula of [lem-weil-pbc-derived-functor-map-via-lift], applied once to $S,f,u$ and once to $T,E(f),E(u)$, says\n$$i_J\\circ R^qS(f)=H^q(S(u))\\circ i_I,\\qquad j_J\\circ R^qT(E(f))=H^q(T(E(u)))\\circ j_I.$$\nSubstitution into the preceding square and cancellation of the isomorphisms gives $R^qT(E(f))\\circ c_X^I=c_Y^J\\circ R^qS(f)$. No functorial choice of chain lifts is needed: the cited map formula identifies their cohomology maps with the fixed derived-functor maps.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013P, lemma-morphisms-lift, (2), and Tag 015M, lemma-compose-derived-functors, natural comparison computed on resolutions"
+   }
+  },
+  {
+   "text": "For any other injective resolution $J$ of the same $X$, take $f=\\mathrm{id}_X$ in step 5. The lift exists by [lem-weil-pbc-injective-resolution-lift-exists], its image under $E$ is again an augmented lift by [lem-weil-pbc-equivalence-injective-resolutions], and both derived-functor maps are identities by [lem-weil-pbc-derived-functor-map-via-lift]. The equation proved there is therefore $c_X^I=c_X^J$. Thus $c_X$ is independent of the resolution. Choosing a resolution for each object gives a family independent of all those choices; the equation of step 5 makes it a natural transformation $R^qS\\to(R^qT)\\circ E$. Since every component is invertible, their inverses also satisfy naturality (multiply that equation on both sides by the inverse components), giving the asserted natural isomorphism.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015M, lemma-compose-derived-functors; independence and functoriality of resolution computations, Tag 013P"
+   }
+  },
+  {
+   "text": "For $q=0$ and a resolution $s:X\\to I^\\bullet$ as in step 1, [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (2), applied to $S$ on $s$ and to $T$ on $E(s)$ (an injective resolution vanishing in negative degrees by step 2), gives isomorphisms $\\sigma_I:S(X)\\xrightarrow{\\sim}H^0(S(I^\\bullet))=\\ker S(d^0)$ and $\\tau_I:T(E(X))\\xrightarrow{\\sim}H^0(T(E(I^\\bullet)))=\\ker T(E(d^0))$, induced by $S(s)$ and $T(E(s))$. Put $\\theta^S_X=i_I^{-1}\\circ\\sigma_I:S(X)\\xrightarrow{\\sim}R^0S(X)$ and $\\theta^T_{E(X)}=j_I^{-1}\\circ\\tau_I$. These do not depend on $I$: for another resolution $J$ and the lift $u$ of $\\mathrm{id}_X$ of [lem-weil-pbc-injective-resolution-lift-exists], $u^0s_I=s_J$ gives $H^0(S(u))\\circ\\sigma_I=\\sigma_J$ (maps into a kernel are determined after composing with its inclusion), and $i_J=H^0(S(u))\\circ i_I$ by [lem-weil-pbc-derived-functor-map-via-lift] with $h=\\mathrm{id}_X$; likewise for $T$ with $E(u)$. The same two facts for an arbitrary $f$ with its lift $u$ show $\\theta^S$ natural; these are the natural identifications $R^0S\\cong S$, $R^0T\\cong T$ of [lem-sp-derived-well-defined], made explicit. Naturality of $\\alpha$ at $s$ reads $\\alpha_{I^0}\\circ S(s)=T(E(s))\\circ\\alpha_X$; composing with the kernel inclusions gives $H^0(a_I)\\circ\\sigma_I=\\tau_I\\circ\\alpha_X$ (no degree-zero boundaries, since the resolutions vanish in negative degrees; left exactness of $S,T$ is used through the cited isomorphisms). Hence $c^0_X\\circ\\theta^S_X=j_I^{-1}H^0(a_I)\\sigma_I=j_I^{-1}\\tau_I\\alpha_X=\\theta^T_{E(X)}\\circ\\alpha_X$: in degree zero the comparison is $\\alpha$.",
+   "uses": [
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-sp-derived-well-defined",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TD, lemma-left-exact-higher-derived, degree-zero identification; Tag 015B, lemma-higher-derived-functors, (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-enough-injectives",
+  "def-sp-injective-resolutions",
+  "def-sp-abelian",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-sp-derived-well-defined"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015M (lemma-compose-derived-functors), its injective-resolution proof specialized to an additive equivalence; Tags 013K, 013P and 05TD for the explicit construction, maps and degree zero"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,10 +155,52 @@
    "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
    "date": "2026-10-17",
    "verdict": "no match: rightDerivedNatIso compares functors on the same source; it does not identify right derived functors across an equivalence of abelian source categories. The resolution and precomposition comparison is additional."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition with an additive equivalence of abelian categories commutes with right derived functors of left exact functors, computed on injective resolutions",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.NatTrans.rightDerived_comp_assoc; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.NatTrans.rightDerived_comp; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc; CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole item: these give same-source natural-transformation or specified-resolution computations, not the comparison across the source equivalence with its normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Ee]quiv|[Ee]quiv.*rightDerived|rightDerivedNatIso|isoRightDerivedObj_hom_naturality",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:133,140 rightDerivedNatIso; Mathlib/CategoryTheory/Abelian/RightDerived.lean:126,149,172 isoRightDerivedObj_hom_naturality and its uses. Subdirectory: CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole item: these give same-source natural-transformation or specified-resolution computations, not the comparison across the source equivalence with its normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "results": "CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole item: these give same-source natural-transformation or specified-resolution computations, not the comparison across the source equivalence with its normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived functors commute with precomposition by an exact equivalence of abelian categories",
+   "results": "CategoryTheory.Functor.rightDerived; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp; CategoryTheory.Functor.rightDerivedNatIso; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.Functor.IsRightDerivedFunctor; CategoryTheory.ExactFunctor.whiskeringRight; CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole item: these give same-source natural-transformation or specified-resolution computations, not the comparison across the source equivalence with its normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"equivalence\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole item: these give same-source natural-transformation or specified-resolution computations, not the comparison across the source equivalence with its normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between section cohomology functors under an equivalence preserving injective resolutions",
+   "results": "CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj; CategoryTheory.InjectiveResolution.iso_inv_naturality_assoc; CategoryTheory.InjectiveResolution.iso_hom_naturality; CategoryTheory.InjectiveResolution.iso_inv_naturality; CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc; DerivedCategory.singleFunctorIsoCompQ; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality",
+   "date": "2026-10-17",
+   "verdict": "No match for the whole item: these give same-source natural-transformation or specified-resolution computations, not the comparison across the source equivalence with its normalization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-exc-curve-open-dimension-general",
@@ -76,5 +220,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-equivalence-derived-sections",
+  "worker": "Q02-stage1",
+  "summary": "Kept the statement and its coefficient-independent generality. Expanded the 015M resolution argument into seven steps: construct a resolution, transport it by the existing equivalence lemma, use the supplied natural isomorphism termwise, form the comparison, prove naturality, prove resolution independence, and check the exact degree-zero normalization. All non-elementary inputs are existing Mathlib leaves; no new node is needed. Repeated semantic searches in two phrasings and inspected the derived-functor candidates, which do not state the whole equivalence comparison.",
+  "blueprint": "Realizes proof paragraph 3, first sentence of thm-exc-curve-open-dimension-general in the main-20261015 snapshot: the identification of etale cohomology with continuous Galois cohomology, and the intermediate change of module-sheaf encoding. This is the general resolution-comparison tool used at those two changes; no chapter or unit route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-a8e7d40c9",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-a8e7d40c9 (reviewer sub-agent of L); spot-checked: I read the item, the parent thm-exc-curve-open-dimension-general (steps 7-8, which use only the degree-q agreement), unit sk-prop-a1-kummer and all cited nodes, which are Mathlib leaves. I also read Stacks derived.tex 015M (l.7293), 013P (l.6386) and 05TD (l.5565). The statement is true and not weakened. Edge cases checked: E=id with α=id gives the identity, a nontrivial α is kept in degree 0, D=0 is trivial, and an injective X gives zero for q>0. There are no new nodes. My DAG search found no duplicate: the site-equivalence node and the iso-pullback nodes are different statements. Step 1 is the successive-cokernel construction and is correct. Step 2 uses equivalence-injective-resolutions (3), whose hypotheses hold. Step 3 makes a_I a chain isomorphism by naturality of α. Step 4 uses map-via-lift for S and T; T is fine because B has enough injectives. I checked the cancellation algebra in steps 5-6; they use lift-exists, E(u) and the two map formulas in the right direction. Fault in step 7 (C4): lem-sp-derived-well-defined gives only an unspecified natural iso R^0v≅v, not one induced by v(s). The degree-zero clause depends on that identification. Fix in fixes/dag/nodes/sec-smooth-purity/lem-exc-equivalence-derived-sections.json: step 7 now cites lem-weil-pbc-left-exact-injective-resolution-degree-zero (2), a Mathlib leaf, for σ_I: v(X)≅ker v(d^0) induced by v(s). It defines θ = i_I^{-1}σ_I and shows θ is independent of I and natural, using lift-exists and map-via-lift. Naturality of α at s then gives c^0θ^S = θ^Tα. The step is marked non-elementary and proof_deps is updated. All other fields are unchanged. No tool_uses are needed and no SGA is used.; 1 file(s) fixed by the reviewer"
  }
 }

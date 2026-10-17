@@ -86,17 +86,18 @@
    }
   },
   {
-   "text": "Let $\\pi$ be the coherent product-evaluation functor of [lem-coef-cartesian-envelope-product-diagram-recognition] and define $G=\\pi sN(\\operatorname{Cut})$. This is a coherent diagram by composition of the specified coherent functors. Its value at $[n]$ is $A^n$ under the section's specified Segal identifications. The reconstruction theorem states that the whole composition data of $s$ are the supplied tree data, output by output, and that forest coherences are their products pulled back along the corresponding input projections. Apply this clause to a chain $[n_0]\\to\\cdots\\to[n_q]$: draw the consecutive-block corolla for each output at each stage and join its inputs to the preceding outputs. For a chosen final output retain the branches feeding it and retain nullary vertices even when there is no external input. By step 4 its ordered external leaves are precisely its composite input interval. The reconstruction assigns the given contraction diagram of this rooted planar tree; $\\pi$ evaluates each of its entire parameter simplices after precomposition with $\\operatorname{pr}_{L_j}:A^{n_0}\\to A^{|L_j|}$, where $L_j$ is that ordered interval, and then forms the tuple of outputs. This uses the stated forest clause on the simplices themselves, not a factorization of their endpoints.\n\nFor a face composing adjacent stages, consecutive input intervals concatenate by step 4 and the corresponding tree edges contract. For a face separating the chain into two subchains, substitution grafts the two trees, and the supplied grafting compatibility identifies the resulting diagrams. A repeated stage inserts unary identities, with the specified identity coherences. Removing an endpoint restricts the forest to the remaining stages; precomposition by a removed initial stage is the same substitution of its input trees. On intersections of these faces, the iterated contractions and graftings are exactly the higher compatibilities already included in the given tree datum and in the reconstruction theorem. Further block substitutions graft the same ordered lists. Thus the assigned full simplices have all required faces, degeneracies and substitution compatibilities, including empty lists. The theorem's arbitrary-parameter and restriction clauses ensure these are the complete coherent diagram data of $G$.",
+   "text": "Let $\\pi$ be the coherent product-evaluation functor of [lem-coef-cartesian-envelope-product-diagram-recognition] and define $G=\\pi sN(\\operatorname{Cut})$, using the Cut functor of [lem-coef-cartesian-associative-segal-comparison]. This is a coherent diagram by composition, with $G([n])=A^n$ under the specified product cones. Apply [lem-coef-cut-chain-forest-compatibility] to a chain and a chosen final output $j$. It identifies the retained planar tree, its ordered external interval $L_j$, and all contractions, endpoint restrictions, unary insertions and graftings, including empty lists. For endpoint faces use its full forest record before pruning.\n\nBy the forest clause of [lem-coef-colored-operation-section-reconstruction], the complete section-coherence simplex is the product of the supplied output-tree simplices pulled back along their external-input projections. By the evaluation and simplicial-operator formulas of [lem-coef-cartesian-envelope-product-diagram-recognition], applying $\\pi$ evaluates this product as the tuple of the tree simplices precomposed with $\\operatorname{pr}_{L_j}:A^{n_0}\\to A^{|L_j|}$. This applies to entire parameter simplices. The arbitrary-parameter and restriction clauses of reconstruction, together with the cited forest compatibility, identify their faces, degeneracies and further substitutions with those of $G$. Hence these are its full specified projection-pullback coherences.",
    "uses": [
     "lem-coef-colored-operation-section-reconstruction",
     "lem-coef-cartesian-envelope-product-diagram-recognition",
     "lem-coef-cartesian-associative-segal-comparison",
-    "def-cbc-enhanced-diagrams-cones"
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-cut-chain-forest-compatibility"
    ],
    "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
-    "place": "HA 2.4.1 product-evaluation model and 4.1.2.9 Cut; use the existing reconstruction theorem on complete forest coherences and arbitrary parameters. The block/face calculation is explicit here."
+    "place": "HA Construction 4.1.2.9 and sections 2.4.1-2.4.2; finite-forest indexing extracted as lem-coef-cut-chain-forest-compatibility, and complete parameter-simplex evaluation supplied by the existing reconstruction and product-diagram recognition statements."
    }
   },
   {
@@ -158,8 +159,9 @@
   "lem-coef-colored-operation-section-reconstruction",
   "def-cbc-enhanced-cartesian-fibration",
   "lem-coef-coherent-nerve-comparison",
+  "lem-coef-cartesian-envelope-product-diagram-recognition",
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-cartesian-envelope-product-diagram-recognition"
+  "lem-coef-cut-chain-forest-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
@@ -260,7 +262,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-monoidal-yoneda-embedding",
@@ -285,15 +287,15 @@
   "date": "2026-10-17",
   "item": "lem-coef-monoidal-block-projection-coherence",
   "worker": "stage1",
-  "summary": "Statement unchanged. Nine steps: straighten; compare with associative algebra sections; extend/recover planar data through the existing colored-operation-section reconstruction; calculate consecutive blocks and all forest projection pullbacks; compare the complete diagrams; unstraighten and handle morphisms and boundary cases. One new statement-only standard cartesian associative/Segal comparison. Second reading removes the two duplicate tree lemmas and the bespoke W-operad operator-category comparison, replacing them with the existing reviewed reconstruction theorem. No Mathlib leaf or finished project declaration found.",
+  "summary": "Q104 direct repair of the human return: preserve the statement, Lean fields, original route and all steps other than step 5. Replace its 2322-character inline argument by explicit applications of the new statement-only finite Cut-chain forest compatibility lemma and the existing forest/parameter reconstruction, product-evaluation and Cut comparison statements. The new lemma retains discarded intermediate components for endpoint faces. One new unsplit node, zero Mathlib leaves.",
   "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent realization of the finite adjunction diagram before derived inverse limit, through the inherited enriched-localization and monoidal-Yoneda chain. The item is a general foundational tool for that chain, not a new geometric route."
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q23-8438a08d9",
-  "group": "Q23",
+  "reviewer": "NT-cc-Q104-4d172aea0",
+  "group": "Q104",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-8438a08d9 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, steps 1-9), the new node lem-coef-cartesian-associative-segal-comparison, all nine cited statements, the unit, the chapter, and the main-20261015 prop-coef-integral-exceptional-adjoint statement and proof. HA is not archived (WANTED), so I checked against my knowledge of HA: 2.4.2.5, 4.1.1.3, 4.1.2.5, 4.1.2.9-11 and 4.1.3.19. The steps are correct. Step 1's fibre-over-phi argument gives exactly the relative p-limit clause, including n=0. Step 3's reindexing extension works because Ass is Sigma-free. I recomputed step 4's block telescoping under the a∘b variance, with cases for inert maps, maps to [0], constant opposite maps and discarded ends. In step 5, G = pi s N(Cut): recognition's evaluation formula plus the reconstruction's forest clause give genuine projection-pullback simplices. Step 6 gets G=H by definition and G≃F from the reconstruction equivalence, not from bare operations. Step 8 uses a transformation of sections of one q with components f^n and no endomorphism-operad maps. The new node is true, standard, assumes only finite products, is statement-only and self-contained, and is not a clause of the item. I tested it on terminal C, n=0 and a noncommutative word monoid. The dependency closure has no cycle, every citation is in the item's unit, and no tool_uses are needed. One C4 fault, fixed: the new node fixes the product-diagram model P of lem-coef-cartesian-envelope-product-diagram-recognition, but step 2 attributed P's fibres, transports and block mapping formula to lem-coef-cartesian-operadic-envelope, a different model. Step 2 now cites recognition for these facts and keeps the envelope as the same formulas; the id is added to step 2's uses and proof_deps is unchanged. Note for the next splitter: the new node's first equivalence (restriction along Cut) follows from the existing lem-coef-lm-prism-approximation plus lem-coef-operadic-approximation-restriction. The node's composite with pi is not stated anywhere else, so it is not a duplicate. The report's 'Files written' list is stale: it still names the two tree nodes that were removed, which are not on the branch and are not cited.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-4d172aea0 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-cut-chain-forest-compatibility, every cited statement, the unit sk-prop-sf-biduality-general and the HA Cut place (4.1.2.9; HA is not archived, WANTED is already in the report). This delivery repairs the human return on step 5: the statement and steps 1-4 and 6-9 are unchanged, and step 5 is now 1434 characters with five citations. Step 5 uses only what the cited statements say. G = pi s N(Cut) uses Cut from the associative-Segal comparison and the evaluation formula 'block maps precomposed with input projections' from product-diagram recognition. The reconstruction node supplies 'forest coherences = products of output-tree coherences pulled back along external input projections' and the arbitrary-K and restriction clauses. The new node supplies the tree for each output, its leaves L_j and the face/degeneracy/grafting identifications; endpoint faces use the full record, checked on [2]->[1]->[0]. The new node is self-contained, statement-only, cites only def-weil-pbc-simplicial-set, has all three search kinds recorded, correct blueprint from/via and same_as []. It is not a clause of the parent (pure combinatorics, no target category) and duplicates nothing: I compared it with def-coef-colored-operator-systems, lem-coef-lm-prism-approximation, def-coef-left-module-operadic-encoding, the comparison and reconstruction nodes. I tested it by script over all n<=3: in 11745 cases the composite ordered fibres equal Cut of the composite and the interval {a(k-1)+1..a(k)}, including zero ordinals, constant maps and discarded ends. Route: all cited statements are in the item's unit, and no tool_uses are needed. proof_deps equals the union of uses. No SGA. Minor point, left unchanged: the new node has no lean_audit field (tool-owned). No fixes written."
  }
 }

@@ -113,15 +113,50 @@
    }
   },
   {
-   "text": "Use the transported functors meant in the original statement. Explicitly, on etale-origin objects one may take $F_f=A_YH_fR\\nu_{X,*}$ and $F_{f'}=A_{Y'}H_{f'}R\\nu_{X',*}$. The unit isomorphism $\\eta_T:\\operatorname{id}\\simeq R\\nu_{T,*}A_T$ of [thm-weil-pbc-site-comparison] gives natural comparison isomorphisms $C_{f,L}=A_YH_f(\\eta_{X,L}):A_YH_fL\\simeq F_fA_XL$, and similarly for $f'$. Pullback preserves etale origin by [lem-weil-pbc-comparison-pullback], so all these formulas are defined. On an affine compactification chart, let $q^f_c:H_f\\xrightarrow{\\sim}Rf_!^{c,e}$ be the comparison from step 1 and define $D_{c,L}=C_{c,L}\\circ A_Y(q^f_{c,L})\\circ C_{f,L}^{-1}:F_fA_XL\\xrightarrow{\\sim}Rf_!^{c,p}A_XL$. Define $D_{c′,M}$ by the displayed formula of step 4 with $M=g_e′{}^{-1}L$. For a restriction of a global object, insert $r^f_V$ and the pullback comparison $a$ first; their compatibility with $q$ is part of the extension node. The equation $D_{c,L}C_{f,L}=C_{c,L}A_Y(q^f_{c,L})$, and its primed equation, show that conjugating the formula below by these endpoint identifications cancels $C_f$ and $C_{f′}$ and gives exactly the compactification formula of step 5: the middle arrow becomes $E^c_L$ by the normalization in step 3, and naturality of $a_{g′}$ moves it past the target comparison. Thus this is also the transported map of the source on every compactification chart. With $a_u$ the pullback comparison set\n$$S_L=g_p^{-1}(C_{f,L})\\circ a_{g,H_fL},\\qquad T_L=F_{f'}(a_{g',L})\\circ C_{f',g_e'{}^{-1}L}.$$\nTheir sources are $A_{Y'}g_e^{-1}H_fL$ and $A_{Y'}H_{f'}g_e'{}^{-1}L$, respectively, and their targets are $g_p^{-1}F_fA_XL$ and $F_{f'}g_p'{}^{-1}A_XL$. The global transported arrow on $A_XL$ is therefore\n$$F_L=T_L\\circ A_{Y'}(E_L)\\circ S_L^{-1}.$$\nAll its factors are invertible by step 6 and the displayed comparisons. Put $P=g_p^{-1}F_f$, $Q=F_{f'}g_p'{}^{-1}$; the actual map on $K$ is $Q(\\alpha)\\circ F_L\\circ P(\\alpha)^{-1}$ and is invertible. For another witness $(L',\\alpha')$, full faithfulness in [thm-weil-pbc-site-comparison] lifts $\\alpha'^{-1}\\alpha:A_XL\\to A_XL'$ uniquely to $u:L\\to L'$. Lifting the inverse and using faithfulness shows that $u$ is invertible. Naturality gives $F_{L'}P(A_Xu)=Q(A_Xu)F_L$. Substitution of $\\alpha'A_Xu=\\alpha$ into the two witness formulas and cancellation proves equality of the actual arrows on $K$. No global compactification, qcqs base, residue-characteristic restriction, or constructibility hypothesis was used.",
+   "text": "Return to the original global square. Apply [lem-cbc-global-transport-chart-normalization] to the extension data from step 1 and the comparison data of steps 4--5. It supplies the functors $F_f=A_YH_fR\\nu_{X,*}$ and $F_{f'}=A_{Y'}H_{f'}R\\nu_{X',*}$ on etale-origin objects and the natural isomorphisms $C_f,S_L,T_L$. Its normalization equation $J_L\\Phi_Lp_g(D_{c,L})^{-1}=\\Phi^c_L$, with the specified restriction comparisons inserted, identifies the global arrow $\\Phi_L=T_LA_{Y'}(E_L)S_L^{-1}$ with exactly the compactification-chart transport in step 5. Thus it supplies the transported map meant in the unchanged statement. This is an identification of specified maps and uses no claim of invertibility from the new lemma.",
    "uses": [
-    "thm-weil-pbc-site-comparison",
-    "lem-weil-pbc-comparison-pullback"
+    "lem-cbc-global-transport-chart-normalization"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
-    "place": "Proof, global transport and witness-independence calculation"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Global-to-chart normalization, formerly the first part of step 7"
+   }
+  },
+  {
+   "text": "By step 6, $E_L$ is invertible; a functor sends its inverse to an inverse. Since $S_L,T_L$ are isomorphisms supplied by [lem-cbc-global-transport-chart-normalization], $\\Phi_L$ is invertible, with inverse $S_LA_{Y'}(E_L^{-1})T_L^{-1}$. Put $P=p_gF_f$ and $Q=F_{f'}p_{g'}$. The witness [def-weil-pbc-etale-origin-witness] provides $\\alpha:A_XL\\xrightarrow{\\sim}K$, so the transported map on $K$ is\n$$\\Psi_{L,\\alpha}=Q(\\alpha)\\Phi_LP(\\alpha)^{-1}.$$\nIts inverse is $P(\\alpha)\\Phi_L^{-1}Q(\\alpha)^{-1}$, by cancellation. Hence the required exchange on $K$ is an isomorphism.",
+   "uses": [
+    "lem-cbc-global-transport-chart-normalization",
+    "def-weil-pbc-etale-origin-witness"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Transporting the isomorphism and conjugating by the retained witness"
+   }
+  },
+  {
+   "text": "Let $(L',\\alpha')$ be another witness for the same $K$. The functor $A_X$ is fully faithful on all of $D^+$ by [thm-weil-pbc-site-comparison]; no constructibility is needed. Apply [lem-cbc-fully-faithful-isomorphism-lift] to $\\alpha'^{-1}\\alpha:A_XL\\xrightarrow{\\sim}A_XL'$. It gives the unique isomorphism $u:L\\xrightarrow{\\sim}L'$ with $A_Xu=\\alpha'^{-1}\\alpha$, equivalently $\\alpha'A_Xu=\\alpha$. Naturality of $\\Phi$ is supplied by [lem-cbc-global-transport-chart-normalization].",
+   "uses": [
+    "thm-weil-pbc-site-comparison",
+    "lem-cbc-fully-faithful-isomorphism-lift",
+    "lem-cbc-global-transport-chart-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "The unique lifted comparison of two etale-origin witnesses"
+   }
+  },
+  {
+   "text": "With the notation of steps 8--9, naturality of the transformation in [lem-cbc-global-transport-chart-normalization] says\n$$\\Phi_{L'}P(A_Xu)=Q(A_Xu)\\Phi_L.$$\nSince $\\alpha'A_Xu=\\alpha$, functoriality and this equality give\n$$\\begin{aligned}Q(\\alpha')\\Phi_{L'}P(\\alpha')^{-1}\n&=Q(\\alpha')\\Phi_{L'}P(A_Xu)P(\\alpha)^{-1}\\\\\n&=Q(\\alpha')Q(A_Xu)\\Phi_LP(\\alpha)^{-1}\\\\\n&=Q(\\alpha)\\Phi_LP(\\alpha)^{-1}.\\end{aligned}$$\nThe left side is $\\Psi_{L',\\alpha'}$ and the right side is $\\Psi_{L,\\alpha}$. This proves equality of the actual arrows on $K$, in particular independence under replacing the witness by an isomorphic one.",
+   "uses": [
+    "lem-cbc-global-transport-chart-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Witness independence: the explicit naturality and cancellation equation"
    }
   }
  ],
@@ -132,6 +167,8 @@
   "def-weil-pbc-etale-origin-witness",
   "def-weil-pbc-scheme-conventions",
   "lem-cbc-etale-local-compact-support-extension",
+  "lem-cbc-fully-faithful-isomorphism-lift",
+  "lem-cbc-global-transport-chart-normalization",
   "lem-cbc-proetale-extension-zero",
   "lem-cbc-proetale-extension-zero-base-change",
   "lem-cbc-proetale-extension-zero-comparison",
@@ -153,8 +190,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
-  "place": "Proof; opening global compactification inference repaired by local extension; source available at /home/ubuntu/weil-launcher-nt/literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Existing proof steps 1-6 retained verbatim; the returned step 7 is replaced by a statement-only normalization interface, the exact Mathlib isomorphism-lifting leaf, and explicit short inverse/cancellation arguments."
  },
  "mathlib_searches": [
   {
@@ -226,10 +263,42 @@
    "results": "25 hits; returned first names/files: Mathlib/Topology/UrysohnsLemma.lean, Mathlib/Topology/Algebra/Order/Support.lean, Mathlib/Topology/Algebra/Order/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean",
    "date": "2026-10-15",
    "verdict": "no match: these are ordinary scheme morphism, affine-limit, sheaf equivalence, or topological compact-support results; no derived etale compact-support construction or pro-etale compact-support exchange theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite coefficients etale origin proetale complexes satisfy compactly supported base change along arbitrary maps of schemes",
+   "subdirectory": "",
+   "results": "8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, RingHom.Etale.isStableUnderBaseChange, RingHom.Etale.stableUnderComposition, Algebra.Etale.comp, Algebra.IsEtaleAt.comp",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary scheme base-change and site definitions, not this finite-coefficient derived compact-support exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "subdirectory": "",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary scheme base-change and site definitions, not this finite-coefficient derived compact-support exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|compactSupport.*baseChange",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "10 hits; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary scheme base-change and site definitions, not this finite-coefficient derived compact-support exchange"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported base change for bounded below etale origin complexes of finite coefficient modules on the proetale site",
+   "subdirectory": "",
+   "results": "8 hits; Algebra.Etale.baseChange, IsBaseChange.finsuppPow, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, KaehlerDifferential.isBaseChange_of_formallyEtale, RingHom.Etale.isStableUnderBaseChange, IsBaseChange.finitePow, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, Subbimodule.coe_baseChange",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary scheme base-change and site definitions, not this finite-coefficient derived compact-support exchange"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -265,11 +334,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "thm-cbc-finite-level-proetale",
   "worker": "stage1",
-  "summary": "Repair of E1 and 7b: restored the exact upstream assertion with unrestricted f and g; removed the supplied-compactification and quasi-compact-open hypotheses. Read the actual blueprint and Stacks/SGA sources in the launcher literature directory. Added one statement-only construction/localization interface for the etale compact-support functor and arrow over arbitrary bases. Apply Nagata and finite-torsion base change only on affine target charts, derive quasi-compactness of each open part, detect the global etale isomorphism by cohomology stalks, and transport with explicit conjugation and witness cancellation. The new node asserts existence/local formulas, not base-change invertibility. Second reading replaces undefined enhancement/uniqueness language by explicit ordinary-category interface equations, cites base-change stability for both vertical maps, and uses the existing cohomology-isomorphism criterion directly.",
-  "blueprint": "Opening sentence 'Choose a compactification': repaired at proof steps 1--2 by Zariski-local construction plus local Nagata. Finite-torsion comparison: step 3. Proper and open site comparisons: steps 4--5. Globalization absent from the source: step 6. Transport and independence of witness: step 7. The unit's coefficient-stage route is retained; no unit/chapter file is changed.",
+  "summary": "Dedicated repair of the 2026-10-17 long-step return. Kept the statement, statement dependencies, Lean record and steps 1-6 verbatim. Extracted the global-to-chart transport and naturality into one statement-only comparison lemma, and the unique isomorphism lift into an exact Mathlib leaf. Steps 7-10 cite these interfaces and carry the remaining explicit invertibility and witness-cancellation argument. No proof step exceeds 2000 characters. No SGA source is used.",
+  "blueprint": "The source opening compactification choice and finite-torsion comparison remain realized by steps 1-3; proper/open comparisons by steps 4-5; globalization by step 6. The transport sentence is now step 7 with lem-cbc-global-transport-chart-normalization; invertibility is step 8; the final witness-independence sentence is steps 9-10 with the Mathlib isomorphism-lifting leaf. The unit/chapter route and the exact statement are unchanged.",
   "statement_dispute": "STATEMENT-DISPUTED (construction/type defect, not a counterexample to base change): def-cbc-exchange-map only supplies compactification-dependent formulas, while the exact source allows arbitrary bases and its proof invokes a global compactification without justification. Correct the construction by its explicit Zariski-local extension; do not add hypotheses. The upstream assertion is retained verbatim before this clarification.",
   "tool_uses": [
    {
@@ -327,12 +396,12 @@
   "thm-weil-pbc-site-comparison"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-N3-fb6da747a",
-  "group": "N3",
+  "reviewer": "NT-cc-NZ-1565b93c9",
+  "group": "NZ",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-fb6da747a (reviewer sub-agent of L); spot-checked: The mathematics and source checks pass, but the new node's `created` record omits required `by`, `date`, and `group` fields. Corrected full JSON is in fixes/dag/nodes/sec-smooth-purity/lem-cbc-etale-local-compact-support-extension.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-1565b93c9 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the statements of all 27 cited nodes, the master and main-20261015 blueprint statement and proof (main-20261017 proof identical), the unit sk-prop-sf-cbc (it has no steps) and the Mathlib FullyFaithful.lean lines 195-222. Steps 1-6 are kept as reviewed; I re-checked their hypotheses: Nagata on an affine V, the open part j quasi-compact via the separated proper p, finite-torsion base change on each chart, b_p for qcqs p and p', and stalkwise detection of an already-built global E_L. Steps 7-10 are correct: the inverse of Phi_L is S A(E^-1) T^-1; the lift u of alpha'^-1 alpha comes from full faithfulness on D+; the naturality and cancellation chain re-derives, and the endpoints P(K), Q(K) do not depend on the witness. New node lem-cbc-global-transport-chart-normalization: every arrow type-checks, and I proved J Phi p_g(D)^-1 = Phi^c from three equalities: naturality of a gives S^c A(l_g q) = p_g(D) S, substitution gives J T = T^c A(q'), and the extension lemma gives q' E = E^c l_g q. It claims no invertibility and no witness independence, so it does not restate the item (D1 ok). It is self-contained, its stmt_deps match its citations exactly, and no duplicate exists (checked the nearest DAG hits: transport-identifies-exchange, sf-class-compact-support-comparison, pur-compact-support-transport, fix-lem-exchanges). New node lem-cbc-fully-faithful-isomorphism-lift is an exact match for FullyFaithful.isoEquiv at line 217 (inverse preimageIso at line 205). Coefficients stay the constant Lambda pro-etale D+ categories; no hypothesis is added and nothing is weakened. No SGA source is used, no new tool_uses are needed, and I made no fixes."
  },
  "lean": {
   "module": "Sheaf.Paper.FiniteLevelProEtaleCompactSupportBaseChange",
