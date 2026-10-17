@@ -149,10 +149,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-706e54856",
-  "group": "Q32",
+  "reviewer": "NT-stage2-Codex-2178e349d",
+  "group": "NZ",
   "result": "fix",
-  "note": "Mathematics, all statement clauses, dependencies, universes, docstrings, edge cases and verbatim signature checked. Complete fixes replace three local arithmetic tactic proofs with existing lemmas and append the independent reading. Original and corrected modules pass scompile.py without diagnostics; branch head unchanged."
+  "note": "Mathematics, dependencies, signs, universes, docstrings and signature pass; per-file scompile.py exits 0 without diagnostics. review.md records all checks. Complete replacement report in fixes/ repairs the placeholder NZ second-reading section (H1/H11). No Lean or node changes required; branch unchanged."
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.InterleavedTensorSuspension",
@@ -181,10 +181,10 @@
   "file": "lean/Sheaf/Algebra/Homology/InterleavedTensorSuspension.lean",
   "statement": "theorem interleavedTensorSuspension (n : ℕ) : ∃ Φ : ∀ K : Fin (n + 2) → CoefficientComplex.{u}, (ordinaryTensor n K)⟦(n + 1 : ℤ)⟧ ≅ interleavedTensor n K, (∀ (K : Fin (n + 2) → CoefficientComplex.{u}) (a : Fin (n + 2) → ℤ) (x : ∀ j, (K j).X (a j)), ((Φ K).hom.f (tensorDegree (n + 1) a - (n + 1 : ℤ))) (shiftedOrdinaryTensorPure n K a x) = (signExponent n a).negOnePow • interleavedTensorPure n K a x) ∧ (∀ (K : Fin (n + 2) → CoefficientComplex.{u}) (a : Fin (n + 2) → ℤ) (x : ∀ j, (K j).X (a j)), ((Φ K).inv.f (tensorDegree (n + 1) a - (n + 1 : ℤ))) (interleavedTensorPure n K a x) = (signExponent n a).negOnePow • shiftedOrdinaryTensorPure n K a x) ∧ (∀ (K L : Fin (n + 2) → CoefficientComplex.{u}) (f : ∀ j, K j ⟶ L j), (shiftFunctor (CoefficientComplex.{u}) (n + 1 : ℤ)).map (ordinaryTensorMap n f) ≫ (Φ L).hom = (Φ K).hom ≫ interleavedTensorMap n K L f) ∧ (∀ (K : Fin (n + 2) → CoefficientComplex.{u}) (i j : ℤ), (Φ K).hom.f i ≫ (interleavedTensor n K).d i j = ((ordinaryTensor n K).shiftFunctorObjXIso (n + 1 : ℤ) i (i + (n + 1 : ℤ)) rfl).hom ≫ ((n + 1 : ℤ).negOnePow • (ordinaryTensor n K).d (i + (n + 1 : ℤ)) (j + (n + 1 : ℤ))) ≫ ((ordinaryTensor n K).shiftFunctorObjXIso (n + 1 : ℤ) j (j + (n + 1 : ℤ)) rfl).inv ≫ (Φ K).hom.f j)",
   "branch": "newtargets-dag",
-  "by": "Q32",
+  "by": "NZ",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Repairs H3/H8 at returned head 51322f4b6b56: the statement prescribes both sign formulas on actual homogeneous pure tensors, quantifies one comparison family before all naturality maps, and displays the shifted differential sign. Every helper is documented and has real data; only the main theorem is postponed.",
+  "note": "Repairs H3/H8 at returned head 51322f4b6b56: the statement prescribes both sign formulas on actual homogeneous pure tensors, quantifies one comparison family before all naturality maps, and displays the shifted differential sign. Every helper is documented and has real data; only the main theorem is postponed. Repackaged by NZ after live-base synchronization; declaration and theorem signature are unchanged.",
   "fixed_by": "NT-stage2-Codex-706e54856"
  }
 }

@@ -16,7 +16,8 @@
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules",
   "def-pur-sheaf-tensor-product",
-  "def-weil-derived-cohomology-sheaves"
+  "def-weil-derived-cohomology-sheaves",
+  "def-pur-change-of-rings-complex"
  ],
  "proof": [
   {
@@ -270,5 +271,30 @@
   "group": "Q124",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-33fa09041 (reviewer sub-agent of L); spot-checked: Read the full item and the statement of every cited node, the unit sk-def-sp-scalar-extension, blueprint main-20261015 sk-def-sp-scalar-extension-functor.proof.md paragraph (2), and the parent det-sp-scalar-extension-functor step that cites the item. The delivery creates no new nodes, leaves the statement unchanged and cites no SGA. A walk of the dependencies finds no cycle, and every cited id exists. Step 1: the base-change morphism and structure map c_A are the ones in def-weil-proetale-inverse-image. prop-weil-pbc-proetale-constant-ring-map states that c_A is invertible and equal to the def's map, including when the scheme is empty. Its coefficient sheaf Lambda_Proet is identified with the constant sheaf A_T through that prop's map, which preserves constants, so the exactness from prop-weil-pbc-proetale-constant-exact carries over; coefficients are not silently changed. Step 2: the Hom chain through the constant-sheaf/global-sections adjunction (needs a final object, which exists even for an empty scheme) and the conjugate-adjoint uniqueness lemma is correct. Step 3 is genuinely elementary: naturality at the module operations, finite-product preservation, and gamma_A = c_A because both have the same adjunct. Step 4 uses Stacks 03EL (sites-modules.tex line 3649) degreewise; B_S-linearity is checked on locally constant sections, and no flatness of A->B is used. Step 5 uses Stacks 0G7E (sites-cohomology.tex line 3508), which needs both K-flatness and flat terms, exactly as the item assumes. Step 6 uses Stacks 010N with the exact functor from step 1; the finite-local-constancy hypothesis goes unused, so the item is not weakened. Edge cases checked: empty S or T, M=0, A=B, B=0, the non-flat map Z/4->Z/2, and unbounded P. Duplicate candidate: lem-sfb-geometric-inverse-image-constant-module (unsplit, another unit) states the general constant-module clause. The item proves that clause directly, so this is a note, not a fault. Accepted tool_uses: prop-weil-pbc-proetale-constant-ring-map, prop-weil-pbc-proetale-constant-exact, lem-weil-pbc-ringed-topoi-module-pullback-tensor and lem-weil-pbc-ringed-topos-kflat-pullback, used as generic infrastructure that the unit does not provide. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StratumScalarExtension",
+  "declaration": "AlgebraicGeometry.Scheme.stratumScalarExtension",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingMap",
+   "AlgebraicGeometry.Scheme.stratumConstantModuleSection",
+   "AlgebraicGeometry.Scheme.stratumScalarExtensionUnitSection",
+   "AlgebraicGeometry.Scheme.stratumScalarExtension"
+  ],
+  "file": "lean/Sheaf/Paper/StratumScalarExtension.lean",
+  "statement": "theorem stratumScalarExtension {T S : Scheme.{u}} (i : S ⟶ T) [IsImmersion i] (hi : Topology.IsConstructible (Set.range i)) (A B : Type u) [CommRing A] [CommRing B] [Finite A] [Finite B] (α : A →+* B) (M : ModuleCat.{u + 1} (ULift.{u + 1, u} A)) [Finite M] (P : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ) (hP : CochainComplex.IsKFlat P) (hflat : ∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (J := ProEt.topology T) (R := proEtaleConstantRing T A) (P.X n)) (K : DerivedCategory (proEtaleRingModules T (proEtaleConstantRing T A))) (hK : ∀ q : ℤ, IsLocallyConstantProEtaleModuleSheaf S A (proEtaleConstantModulePullback i A ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T A)) q).obj K)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ S), Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing S A) (proEtaleConstantModulePullback i A ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T A)) q).obj K))))) : IsIso (proEtaleCoefficientInverseImageMap i A) ∧ (∃ e : proEtaleConstantModulePullback i A (proEtaleConstantModuleSheaf T A M) ≅ proEtaleConstantModuleSheaf S A M, ∀ (U : T.ProEtᵒᵖ) (m : M), (((proEtaleConstantRingAdjunction A i).homEquiv _ _ e.hom).val.app U) (stratumConstantModuleSection T A M U m) = stratumConstantModuleSection S A M ((proEtaleBaseChange i).op.obj U) m) ∧ CochainComplex.IsKFlat (((proEtaleConstantRingPullback A i).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ∧ (∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (J := ProEt.topology S) (R := proEtaleConstantRing S A) (HomologicalComplex.X (((proEtaleConstantRingPullback A i).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) n)) ∧ (∃ β : ∀ N : proEtaleRingModules T (proEtaleConstantRing T A), proEtaleConstantModulePullback i B (SheafOfModules.changeOfRings.{u, u + 1, u + 1} (proEtaleConstantRingMap (T := T) α) N) ≅ SheafOfModules.changeOfRings.{u, u + 1, u + 1} (proEtaleConstantRingMap (T := S) α) (proEtaleConstantModulePullback i A N), (∀ (N N' : proEtaleRingModules T (proEtaleConstantRing T A)) (f : N ⟶ N'), proEtaleConstantModulePullbackMap i B (SheafOfModules.changeOfRingsHom.{u, u + 1, u + 1} (proEtaleConstantRingMap (T := T) α) N f) ≫ (β N').hom = (β N).hom ≫ SheafOfModules.changeOfRingsHom.{u, u + 1, u + 1} (proEtaleConstantRingMap (T := S) α) _ (proEtaleConstantModulePullbackMap i A f)) ∧ (∀ (N : proEtaleRingModules T (proEtaleConstantRing T A)) (U : T.ProEtᵒᵖ) (m : N.val.obj U), (((proEtaleConstantRingAdjunction B i).homEquiv _ _ (β N).hom).val.app U) (stratumScalarExtensionUnitSection α N U m) = stratumScalarExtensionUnitSection α (proEtaleConstantModulePullback i A N) ((proEtaleBaseChange i).op.obj U) (((proEtaleConstantRingAdjunction A i).unit.app N).val.app U m)) ∧ (∃ e : ∀ Q : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ, ((proEtaleConstantRingPullback B i).mapHomologicalComplex (ComplexShape.up ℤ)).obj (SheafOfModules.changeOfRingsComplex.{u + 1, u} (proEtaleConstantRingMap (T := T) α) Q) ≅ SheafOfModules.changeOfRingsComplex.{u + 1, u} (proEtaleConstantRingMap (T := S) α) (((proEtaleConstantRingPullback A i).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q), ∀ (Q : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ) (n : ℤ), (e Q).hom.f n = (β (Q.X n)).hom)) ∧ (∀ q : ℤ, Nonempty ( (DerivedCategory.homologyFunctor (proEtaleRingModules S (proEtaleConstantRing S A)) q).obj ((proEtaleConstantRingDerivedPullback A i).obj K) ≅ (proEtaleConstantRingPullback A i).obj ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T A)) q).obj K)))",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of immutable head 82d513216c7f: constant-module isomorphism normalized on constant sections by the canonical module adjunction; tensor isomorphisms normalized on tensor units, natural in every module map, and assembled into a family of actual complex isomorphisms with those components. Uses the existing termwise change-of-rings complex, added as a landed statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-90b4e7aaa",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Statement, dependencies, constructions, docstrings, edge cases, report sections, and compiler evidence checked; no findings."
  }
 }

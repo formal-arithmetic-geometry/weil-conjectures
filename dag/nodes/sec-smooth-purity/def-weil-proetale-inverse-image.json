@@ -277,27 +277,46 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-fc19d59f8",
-  "group": "NP",
-  "result": "fix",
-  "note": "Wrote review.md and four complete fixes. Repaired H6 local proofs and H11 placeholder second reading; mathematical statements unchanged. Both immutable and corrected modules compiled cleanly through scompile.py. No repository or branch changes."
+  "reviewer": "NT-stage2-Codex-73362cd73",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Reviewed immutable node, dependencies, source alignment, module declarations/docstrings, report sections, edge cases, universe assumptions, and pro-etale interface. Reproduced per-file scompile successfully (6.8s sandbox, 7.8s library); no fixes required."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleAdjunction",
-  "declaration": "AlgebraicGeometry.ProEtale.finiteModuleAdjunction",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleInverseImage",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleSheafInverseImage",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.finiteModulePushforward",
-   "AlgebraicGeometry.ProEtale.finiteModuleAdjunction_existsUnique",
-   "AlgebraicGeometry.ProEtale.finiteModuleAdjunction",
-   "AlgebraicGeometry.ProEtale.finiteModulePushforward_additive"
+   "AlgebraicGeometry.Scheme.proEtaleBaseChange",
+   "AlgebraicGeometry.Scheme.proEtaleBaseChange_isContinuous",
+   "AlgebraicGeometry.Scheme.proEtaleBaseChange_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.proEtaleBaseChangeCoverPreserving",
+   "AlgebraicGeometry.Scheme.proEtaleSheafDirectImage",
+   "AlgebraicGeometry.Scheme.proEtaleSheafInverseImage",
+   "AlgebraicGeometry.Scheme.proEtaleSheafAdjunction",
+   "AlgebraicGeometry.Scheme.proEtaleConstantDirectImageMap",
+   "AlgebraicGeometry.Scheme.proEtaleConstantInverseImageMap",
+   "AlgebraicGeometry.Scheme.proEtaleSiteModel",
+   "AlgebraicGeometry.Scheme.proEtaleModelTopology",
+   "AlgebraicGeometry.Scheme.proEtaleModelUp_isContinuous",
+   "AlgebraicGeometry.Scheme.proEtaleModelBaseChange",
+   "AlgebraicGeometry.Scheme.proEtaleModelBaseChange_isContinuous",
+   "AlgebraicGeometry.Scheme.proEtaleModuleToModel",
+   "AlgebraicGeometry.Scheme.proEtaleModuleFromModel",
+   "AlgebraicGeometry.Scheme.proEtaleModelRingUnit",
+   "AlgebraicGeometry.Scheme.proEtaleModuleInverseImage",
+   "AlgebraicGeometry.Scheme.proEtaleInverseImageIndex",
+   "AlgebraicGeometry.Scheme.proEtaleConstantRing",
+   "AlgebraicGeometry.Scheme.proEtaleCoefficientDirectImageMap",
+   "AlgebraicGeometry.Scheme.proEtaleCoefficientInverseImageMap",
+   "AlgebraicGeometry.Scheme.proEtaleConstantModuleDirectImage",
+   "AlgebraicGeometry.Scheme.proEtaleConstantModulePullback",
+   "AlgebraicGeometry.Scheme.proEtaleConstantModulePullbackMap"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteModuleAdjunction.lean",
-  "statement": "def finiteModuleAdjunction : finiteCoefficientModulePullback f A ⊣ finiteModulePushforward f A",
+  "statement": "noncomputable abbrev proEtaleSheafInverseImage {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]\n    [HasWeakSheafify (ProEt.topology X) D] :\n    Sheaf (ProEt.topology Y) D ⥤ Sheaf (ProEt.topology X) D",
   "branch": "newtargets-dag",
-  "by": "NP",
+  "by": "Q25",
   "date": "2026-10-17",
-  "existing": false,
-  "note": "Section 1(B): the recorded sfIntrinsicConstantModuleAdjunction requires commutative coefficients in Type u and cannot supply the actual adjunction for the Ring-valued finite coefficient sheaves in Type (u+1). This extension reexports the entire previous inverse-image module and supplies the noncommutative finite-coefficient pullback/direct-image adjunction. Its Hom equivalence is uniquely normalized by the actual small-model pullback adjunction after undoing scalar transport. The direct image uses the canonical finiteCoefficientDirectImageMap, and the left adjoint is precisely the recorded finiteCoefficientModulePullback; neither is replaced. The existence theorem determines every Hom transpose uniquely, so the adjunction definition chooses no unspecified data.",
-  "fixed_by": "NT-stage2-Codex-fc19d59f8"
+  "existing": true,
+  "note": "Section 1(B), repair of return H13: the current finiteModuleAdjunction record requires [Finite A] (as well as a discrete topology) and cannot give the arbitrary commutative-ring inverse image required by this node and by lem-sfb-adic-finite-stratification-pullback. Rebind to the already published ProEtaleInverseImage interface, not a new copy. The declarations listed here give scheme base change, continuity, covering preservation, finite limits, the comma index, direct image, sheafified left Kan inverse image and its adjunction for general values, the constant-section rho and its adjoint c, inverse image of modules over the inverse-image ring, and constant-coefficient module direct image and tensor pullback on objects and maps for every commutative ring A. None assumes Finite A or a topology on A. The original site has object universe u+1 and morphism universe u; its AsSmall model only transports the module construction. This is the existing general interface already imported by the consumer. The return calls this dependency def-weil-pbc-proetale-inverse-image; its current DAG id is def-weil-proetale-inverse-image."
  }
 }
