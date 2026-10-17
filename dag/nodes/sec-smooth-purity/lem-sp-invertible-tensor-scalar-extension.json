@@ -227,5 +227,33 @@
   "group": "Q118",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-74ffe6848 (reviewer sub-agent of L); spot-checked: I read the item statement, all 8 steps, and the full statements of the 8 cited nodes. Sources checked: Stacks 03EK section-tensor-product (Bilin universal property and the formula (F⊗G)⊗O2=(F⊗O2)⊗(G⊗O2)), 03EL, 04TT/03EM internal Hom, 04IX, and paragraph (3) of the main-20261015 blueprint proof of det-sp-scalar-extension-functor. The statement is unweakened and is a strictly smaller lemma than its parent: the parent's step 7 uses it for the positive powers, the unit, and the duals of the rank-one positive powers. The coefficient setting is general ring sheaves R→S with the underived tensor, which specializes to A_T→B_T in one line. Checks: the power maps and their inverses are balanced and both composites are identities (checked against Stacks at r=2); the evaluation map δ is well defined through the slice-tensor comparison of lem-sfb (its hypotheses hold) and is the identity in a local basis; gluing over covering sieves is correct; naturality (contravariant for duals), associator, unitor and the ring tower R→S→A were checked by composing the formulas. Edge cases r=0, r=1, M=R and zero S all hold, and no flatness is used. No cycle: the dependency closure of 127 nodes excludes the item and its parent. No duplicate in the DAG: the nearest candidates are lem-pod-lisse-tensor-and-scalar-extension and lem-pod-etale-stalk-tensor-scalar (étale stalks) and lem-pc-tensor-restrict-extend-module-natural (modules over rings). No new nodes. I accept the three declared tool uses: lem-pc-sites-sheaf-tensor-bilinear-universal, lem-pc-sites-module-sheafification-bilinear-extension and lem-sfb-localized-site-tensor-restriction. No changes made; details are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5742ba96c",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Statement, dependencies, source proof, universes, coherence, dual evaluation, edge cases, docstrings, report sections, and compiler evidence all checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.InvertibleTensorScalarExtension",
+  "declaration": "SheafOfModules.exists_unique_invertibleTensorScalarExtensionData",
+  "declarations": [
+   "SheafOfModules.scalarTensorPower",
+   "SheafOfModules.scalarTensorPowerMap",
+   "SheafOfModules.scalarExtensionSection",
+   "SheafOfModules.ScalarTensorCoherence",
+   "SheafOfModules.ScalarExtensionTensorComparison",
+   "SheafOfModules.InvertibleTensorScalarExtensionData",
+   "SheafOfModules.exists_unique_invertibleTensorScalarExtensionData"
+  ],
+  "file": "lean/Sheaf/Paper/InvertibleTensorScalarExtension.lean",
+  "statement": "theorem exists_unique_invertibleTensorScalarExtensionData [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC u}] [HasWeakSheafify J AddCommGrpCat.{max uC vC u}] (R S : Sheaf J CommRingCat.{u}) (α : R ⟶ S) (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) [∀ X, HasSheafify (J.over X) AddCommGrpCat.{u}] [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}] [M.IsInvertible] : Nonempty (InvertibleTensorScalarExtensionData R S α M)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of independent stage-2 return H3 at 8bfe32025431: site-object uC, site-morphism vC and coefficient u are independent. Internal Hom remains in max uC vC u, using the existing changeOfRingsOfUniverses API. ScalarExtensionTensorComparison explicitly includes associator_compat, leftUnitor_compat, rightUnitor_compat, power_zero, power_one and power_succ, with normalized canonical tensor, associator and unitor isomorphisms; the extension data also includes normalized tower maps and power/dual tower equations. No dependency construction or node statement changed."
  }
 }

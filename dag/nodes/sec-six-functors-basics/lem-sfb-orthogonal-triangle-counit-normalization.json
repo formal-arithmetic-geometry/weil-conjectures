@@ -325,5 +325,23 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-5417a143e (reviewer sub-agent of L); spot-checked: Read the full item, report, route, dependency statements and cited Stacks/Mathlib passages. All four steps are valid, including shifted injectivity and the connecting-map direction. Checked small cases, duplicate candidates and dependency cycles. No new nodes, repairs or tool_uses. Detailed findings are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c3a7d51ab",
+  "group": "NL",
+  "result": "pass",
+  "note": "Full independent review completed; statement and dependencies match, required report sections exist, and scompile.py compiled sandbox and library forms successfully."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OrthogonalTriangleCounitNormalization",
+  "declaration": "CategoryTheory.orthogonalTriangle_counit_normalization",
+  "file": "lean/Sheaf/CategoryTheory/OrthogonalTriangleCounitNormalization.lean",
+  "statement": "theorem orthogonalTriangle_counit_normalization {C : Type uC} {T : Type uT} [Category.{vC} C] [Category.{vT} T] [Preadditive T] [HasZeroObject T] [HasShift T ℤ] [∀ n : ℤ, (shiftFunctor T n).Additive] [Pretriangulated T] (F : C ⥤ T) [F.Full] [F.Faithful] (G : T ⥤ C) (Ψ : Adjunction.CoreHomEquiv F G) (K B : T) (a : F.obj (G.obj K) ⟶ K) (b : K ⟶ B) (d : B ⟶ (F.obj (G.obj K))⟦(1 : ℤ)⟧) (htriangle : Triangle.mk a b d ∈ distTriang T) (horthogonal : ∀ (A : C) (f : F.obj A ⟶ B), f = 0) (horthogonal_shift : ∀ (A : C) (f : F.obj A ⟶ B⟦(-1 : ℤ)⟧), f = 0) (u : G.obj K ⟶ G.obj K) (hu : u = Ψ.homEquiv (G.obj K) K a) : IsIso u ∧ a = F.map u ≫ (Adjunction.mkOfHomEquiv Ψ).counit.app K ∧ Triangle.mk ((Adjunction.mkOfHomEquiv Ψ).counit.app K) b (d ≫ (F.map u)⟦(1 : ℤ)⟧') ∈ distTriang T ∧ ∃ e : Triangle.mk a b d ≅ Triangle.mk ((Adjunction.mkOfHomEquiv Ψ).counit.app K) b (d ≫ (F.map u)⟦(1 : ℤ)⟧'), e.hom.hom₁ = F.map u ∧ e.hom.hom₂ = 𝟙 K ∧ e.hom.hom₃ = 𝟙 B",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
