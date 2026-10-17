@@ -14,6 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineRelative
 
 /-!
 # The affine line, `𝔾ₘ`, and the model purity
@@ -202,6 +203,50 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero [HasTateTwist.IsNorm
       ((shiftFunctor _ (2 * 1 : ℤ)).mapIso (derivedTensorLeftUnitor _ _ _) ≪≫
         eqToIso (by rw [mul_one])) ≪≫ (@asIso _ _ _ _ _ hφ).symm) ≪≫
     leftDerivedUpperStarConstantComplexIso Λ e.hom⟩
+
+include aY in
+/-- The degree-one part of `sk-prop-a1-kummer` for a normalized twist, from the localization
+triangle: in the direct image along `p : 𝔸¹_Y ⟶ Y` of the triangle
+`Rs_* Rs^! Λ(1) ⟶ Λ(1) ⟶ Rj_* Λ_G(1) ⟶` of the zero section `s` and its complement
+`j : G ⟶ 𝔸¹_Y`, if `H¹(Rp_* Λ(1))` and `H²(Rp_* Λ(1))` vanish, the boundary identifies
+`R¹π_* Λ(1)` with `H²(Rs^! Λ(1)) = H⁰(Rs^! Λ(1)[2]) ≅ H⁰(Λ_Y)`. -/
+theorem nonempty_iso_homology_one_multiplicativeGroup_of_isZero [HasTateTwist.IsNormalized Λ]
+    (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ)
+    (h₁ : IsZero ((_root_.DerivedCategory.homologyFunctor _ 1).obj
+      ((R((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
+        ((tateTwist Λ 𝔸(ULift.{u} (Fin 1); Y) 1).obj (constantComplex Λ _)))))
+    (h₂ : IsZero ((_root_.DerivedCategory.homologyFunctor _ (1 + 1)).obj
+      ((R((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
+        ((tateTwist Λ 𝔸(ULift.{u} (Fin 1); Y) 1).obj (constantComplex Λ _))))) :
+    Nonempty ((_root_.DerivedCategory.homologyFunctor _ 1).obj
+        ((R((j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
+          ((tateTwist Λ G 1).obj (constantComplex Λ G))) ≅
+      (_root_.DerivedCategory.homologyFunctor _ 0).obj (constantComplex Λ Y)) := by
+  have : HasInvertibleExponent Λ G := .of_hom (j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)
+  let s := AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y
+  let p := 𝔸(ULift.{u} (Fin 1); Y) ↘ Y
+  let L := (tateTwist Λ 𝔸(ULift.{u} (Fin 1); Y) 1).obj (constantComplex Λ 𝔸(ULift.{u} (Fin 1); Y))
+  have hsj : Set.range s.base = (Set.range j.base)ᶜ := by rw [hj, compl_compl]
+  obtain ⟨e⟩ := nonempty_iso_homology_of_localizationTriangleLowerStar Λ p s j hsj L 1 h₁ h₂
+  obtain ⟨π₀⟩ := nonempty_iso_rightDerivedUpperShriek_affineLineZero Λ aY
+  -- `Lj^* Λ(1) ≅ Λ_G(1)`
+  let eJ : (L((j)^*[ModuleCat.{u + 1} Λ])).obj L ≅ (tateTwist Λ G 1).obj (constantComplex Λ G) :=
+    leftDerivedUpperStarTensorIso _ j _ _ ≪≫
+      ((derivedTensor _ G).mapIso (leftDerivedUpperStarConstantComplexIso Λ j)).app _ ≪≫
+        ((derivedTensor _ G).obj _).mapIso (leftDerivedUpperStarTateObjectIso j 1)
+  -- `R(s ≫ p)_* = R(𝟙)_*` is the identity
+  let eS : (R((s ≫ p)_*[ModuleCat.{u + 1} Λ])).obj ((R(s)^![ModuleCat.{u + 1} Λ]).obj L) ≅
+      (R(s)^![ModuleCat.{u + 1} Λ]).obj L :=
+    (rightDerivedLowerStarCongr _ (AffineSpace.zeroSection_comp_over _ Y)).app _ ≪≫
+      (rightDerivedLowerStarIdIso Λ Y).app _
+  exact ⟨(_root_.DerivedCategory.homologyFunctor _ 1).mapIso
+      ((R((j ≫ p)_*[ModuleCat.{u + 1} Λ])).mapIso eJ.symm) ≪≫ e ≪≫
+    (_root_.DerivedCategory.homologyFunctor _ (1 + 1)).mapIso eS ≪≫
+    (((_root_.DerivedCategory.homologyFunctor _ 0).shiftIso (2 * 1 : ℤ) 0 (1 + 1)
+      (by norm_num)).app _).symm ≪≫
+    (_root_.DerivedCategory.homologyFunctor _ 0).mapIso
+      (((R(s)^![ModuleCat.{u + 1} Λ]).commShiftIso (2 * 1 : ℤ)).app L).symm ≪≫
+    (_root_.DerivedCategory.homologyFunctor _ 0).mapIso π₀⟩
 
 set_option linter.unusedSectionVars false in
 /-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
