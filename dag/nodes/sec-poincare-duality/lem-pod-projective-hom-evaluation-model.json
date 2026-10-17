@@ -230,24 +230,19 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-d27cb0214",
-  "group": "Q80",
+  "reviewer": "NT-stage2-Codex-83807babc",
+  "group": "Q133",
   "result": "pass",
-  "note": "Statement matches node clause by clause: CommRing R; P bounded above and termwise Module.Projective with no finiteness; N arbitrary; moduleHomComplex sign d_N z-(-1)^n z d_P via Mathlib δ; comparison Q(D) ≅ ihom(QP)(QN) uniquely fixed by counit_eq together with IsIso μ; homMap pinned componentwise; naturality uses pre(Q a) then ihom.map(Q b) with correct variances; evaluation pinned as (p*q).negOnePow • z.v on ιTensorObj summands, chain-map signs and naturality checked by hand. HasDerivedCategory.{u} is the dep node's convention and an instance exists (ofIsGrothendieckAbelian), so not vacuous. Not hollow; only main theorem sorry; docstrings carry source place, blueprint tag and proof steps; lean.statement verbatim; node otherwise unchanged; no duplicate in side Lean. nt_compile --json clean (8.0 s/8.3 s, exit 0); error reporting confirmed with a deliberately broken copy. Report has Worker report and Second reading by Q80 sections."
+  "note": "Audited node, dependencies, source tags, Lean signature/docstrings, edge cases, report headings, and exact declarations. scompile.py passed sandbox and library compilation with no diagnostics; no substantive findings. Source: https://stacks.math.columbia.edu/tag/0A66"
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.ProjectiveHomEvaluationModel",
   "declaration": "CochainComplex.projective_hom_evaluation_model",
-  "declarations": [
-   "CochainComplex.ProjectiveHomEvaluationModel",
-   "CochainComplex.projective_hom_evaluation_model"
-  ],
   "file": "lean/Sheaf/Algebra/Homology/ProjectiveHomEvaluationModel.lean",
-  "statement": "theorem projective_hom_evaluation_model : Nonempty (ProjectiveHomEvaluationModel R)",
+  "statement": "theorem projective_hom_evaluation_model (R : Type u) [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)] : ∃ H : ∀ {P P' N N' : CochainComplex (ModuleCat.{u} R) ℤ}, (P' ⟶ P) → (N ⟶ N') → (moduleHomComplex P N ⟶ moduleHomComplex P' N'), ∃ ev : ∀ (P N : CochainComplex (ModuleCat.{u} R) ℤ), P ⊗ moduleHomComplex P N ⟶ N, (∀ (P P' N N' : CochainComplex (ModuleCat.{u} R) ℤ) (a : P' ⟶ P) (b : N ⟶ N') (q p s : ℤ) (h : p + q = s) (f : (moduleHomComplex P N).X q), ((H a b).f q f).v p s h = a.f p ≫ f.v p s h ≫ b.f s) ∧ (∀ (P N : CochainComplex (ModuleCat.{u} R) ℤ) (p q : ℤ) (x : P.X p) (f : (moduleHomComplex P N).X q), (ev P N).f (p + q) ((HomologicalComplex.ιTensorObj P (moduleHomComplex P N) p q (p + q) rfl) (x ⊗ₜ[R] f)) = (p * q).negOnePow • (f.v p (p + q) rfl) x) ∧ ∃ e : ∀ (P : CochainComplex (ModuleCat.{u} R) ℤ) (_hb : ∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P.X i)) (_hp : ∀ i : ℤ, Module.Projective R (P.X i)) (N : CochainComplex (ModuleCat.{u} R) ℤ), DerivedCategory.Q.obj (moduleHomComplex P N) ≅ (ihom (DerivedCategory.Q.obj P)).obj (DerivedCategory.Q.obj N), (∀ (P : CochainComplex (ModuleCat.{u} R) ℤ) (hb : ∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P.X i)) (hp : ∀ i : ℤ, Module.Projective R (P.X i)) (N : CochainComplex (ModuleCat.{u} R) ℤ), IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q P (moduleHomComplex P N)) ∧ Functor.LaxMonoidal.μ DerivedCategory.Q P (moduleHomComplex P N) ≫ DerivedCategory.Q.map (ev P N) = DerivedCategory.Q.obj P ◁ (e P hb hp N).hom ≫ (ihom.ev (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj N)) ∧ (∀ (P P' N N' : CochainComplex (ModuleCat.{u} R) ℤ) (hb : ∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P.X i)) (hp : ∀ i : ℤ, Module.Projective R (P.X i)) (hb' : ∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P'.X i)) (hp' : ∀ i : ℤ, Module.Projective R (P'.X i)) (a : P' ⟶ P) (b : N ⟶ N'), DerivedCategory.Q.map (H a b) ≫ (e P' hb' hp' N').hom = (e P hb hp N).hom ≫ (MonoidalClosed.pre (DerivedCategory.Q.map a)).app (DerivedCategory.Q.obj N) ≫ (ihom (DerivedCategory.Q.obj P')).map (DerivedCategory.Q.map b))",
   "branch": "newtargets-dag",
-  "by": "Q80",
+  "by": "Q133",
   "date": "2026-10-17",
-  "existing": false,
-  "note": "The structure packages the entire comparison, naturality, tensor model and signed counit clauses. Every map is characterized by its homogeneous components or its counit equation; no data is chosen from the postponed theorem."
+  "existing": false
  }
 }

@@ -295,5 +295,28 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-e12146430 (reviewer sub-agent of L); spot-checked: I read the delivery in full and made no changes; review.md has the details. Statement: it is the completed-coefficient form of Stacks 099N(5) plus 0D6D. The coefficients are the completed sheaf (hat O_E), not the constant (O_E)_T, and Lf^* is the R lim of Res_n f^*(P_n) on a flat-term K-flat P, as in def-pur-integral-derived-operations; BS 3.5.7 backs this. I checked that the transport through rho and the direction of the finite c_{h,k} type-check, that the associativity identity is the standard cocycle, and that ell != p is inherited from the stmt_deps. Nothing is weakened. Small cases (K=0, K=hat O, identity maps, n=1, ramified E) behave correctly. Step 1: the integral functor F_f agrees naturally with L_X U_f R_Y; it uses the evaluation calculus, exact finite pullback, normalization from kflat-change-of-rings and tensor-pullback, exact products with the natural Roos triangle, and well-definedness (2); no identification with a constant sheaf is made. Step 2: the counit beta is invertible by normalized-dvr-effectivity (any scheme, unbounded) and the evaluation criterion. The triangle identity makes the unit invertible on every F-value, and the Hom bijection is correct: the adjunct of R(g) is eta_B g, which is BS 3.5.7(2). Step 3: I checked the types of B, delta and c = eta^{-1}L(delta)eta, and that R(c)=delta via adjuncts. Step 4: level n gives exactly rho_{kh}, h^*(rho_k) after rho_h, and the finite c_{h,k}. Step 5: I recomputed both chains using naturality of beta_j, Step 4 for (h,k), (j,kh), (j,h) and (hj,k), and the naturality square of a_{j,h}. The two finite composites are equal as strict maps on the K-flat representative, and cancelling B with the Step-2 bijection gives C_L=C_R. Sources read: proetale.tex 099N(2),(5) with its proof; sites-cohomology 0D6D with its proof; tags 0G7E, 07A4 and 0941 exist under the cited labels; BS pp. 24-25, Def. 3.5.2-3.5.3 and Lemmas 3.5.5-3.5.7. Duplicate search of the whole DAG: the hits are finite-level (pbc derived-pullback-composition, sfb finite upper-star-comp), the projection formula (prop-sf-pf-coherence) and finite Weil iterates (trf iterated weil); none states this integral comparison. No new nodes, proof_deps equals the union of the uses, and the delivery sets no top-level tool_uses. Unit sk-lem-finite; chapter untouched. Accepted tool_uses (all 11 declared): evaluation-calculus, constant-exact, semilinear-derived-sections, kflat-change-of-rings, ringed-topoi-derived-tensor-pullback, integral-operations-well-defined, normalized-dvr-effectivity, integral-operations-preserve-constructible, proetale-derived-pullback-composition, strict-tower-homotopy-limit, countable-products-exact. No SGA source is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-cbc8ded89",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Wrote review.md. Checked both immutable modules, all eight statement dependencies, sources, canonical reductions, associativity, universes, edge cases, docstrings, and verbatim signatures. Both modules passed scompile.py with no diagnostics. No fixes needed; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralPullbackComposition",
+  "declaration": "WeilConjectures.integralPullbackComposition",
+  "declarations": [
+   "WeilConjectures.integralPullbackReductionIso",
+   "WeilConjectures.IntegralPullbackCompositionFamily",
+   "WeilConjectures.integralPullbackComposition"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralPullbackComposition.lean",
+  "statement": "theorem integralPullbackComposition : ∃ c : IntegralPullbackCompositionFamily l E, (∀ {V W Z : Scheme.{u}} [∀ v : V, Invertible (l : V.residueField v)] [∀ w : W, Invertible (l : W.residueField w)] [∀ z : Z, Invertible (l : Z.residueField z)] (h : Z ⟶ W) (k : W ⟶ V) (K : sfIntegralConstructibleCategory l E V) (P : (integralOperationsGoodComplex l E V).FullSubcategory) (e : DerivedCategory.Q.obj P.obj ≅ K.obj) (Q : (integralOperationsGoodComplex l E W).FullSubcategory) (d : DerivedCategory.Q.obj Q.obj ≅ ((constructibleIntegralPullback l E k).obj K).obj) (n : ℕ), (scalarReductionDerivedExtension l E Z n).map ((c h k).hom.app K).hom ≫ (integralPullbackReductionIso l E h ((constructibleIntegralPullback l E k).obj K) Q d n).hom ≫ (proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E (n + 1)) h).map (integralPullbackReductionIso l E k K P e n).hom = (integralPullbackReductionIso l E (h ≫ k) K P e n).hom ≫ (integralFiniteCanonicalPullbackComposition l E h k n).hom.app ((scalarReductionDerivedExtension l E V n).obj K.obj)) ∧ (∀ {V W Z Y : Scheme.{u}} [∀ v : V, Invertible (l : V.residueField v)] [∀ w : W, Invertible (l : W.residueField w)] [∀ z : Z, Invertible (l : Z.residueField z)] [∀ y : Y, Invertible (l : Y.residueField y)] (j : Y ⟶ Z) (h : Z ⟶ W) (k : W ⟶ V) (K : sfIntegralConstructibleCategory l E V), (c j (h ≫ k)).hom.app K ≫ (constructibleIntegralPullback l E j).map ((c h k).hom.app K) = eqToHom (congrArg (fun f : Y ⟶ V ↦ (constructibleIntegralPullback l E f).obj K) (Category.assoc j h k).symm) ≫ (c (j ≫ h) k).hom.app K ≫ (c j h).hom.app ((constructibleIntegralPullback l E k).obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q143",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

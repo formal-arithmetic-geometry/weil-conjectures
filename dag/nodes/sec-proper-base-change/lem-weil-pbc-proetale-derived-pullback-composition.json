@@ -176,26 +176,28 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-25a93f1ca (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. All three steps agree with Stacks 03D8, 06YY, 06YS, 0G7E and 0D6D; coefficient compatibility, localization naturality and K-flat normalization check out. Repaired missing search kinds in the corrected item JSON; LeanSearch unavailability is recorded honestly. No new nodes or target weakening. Master condensed categories remain distinct; no comparison theorem is certified. Detailed checks and accepted resolution tool use are in review.md.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition",
-  "declaration": "AlgebraicGeometry.Scheme.proEtaleCanonicalPullbackComposition",
+  "module": "Sheaf.Paper.IntegralFinitePullbackComposition",
+  "declaration": "WeilConjectures.integralTowerGeneralPullbackComposition",
   "declarations": [
-   "AlgebraicGeometry.Scheme.proEtaleCanonicalPullbackComposition_existsUnique",
-   "AlgebraicGeometry.Scheme.proEtaleCanonicalPullbackComposition"
+   "WeilConjectures.integralTowerGeneralPullbackComposition",
+   "WeilConjectures.integralFinitePullbackModel_existsUnique",
+   "WeilConjectures.integralFinitePullbackModel",
+   "WeilConjectures.integralFiniteCanonicalPullbackComposition"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleCanonicalPullbackComposition.lean",
-  "statement": "def proEtaleCanonicalPullbackComposition {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) (RV : Sheaf (ProEt.topology V) CommRingCat.{u + 1}) (RW : Sheaf (ProEt.topology W) CommRingCat.{u + 1}) (RZ : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}) (ck : (proEtaleSheafInverseImage k CommRingCat.{u + 1}).obj RV ≅ RW) (ch : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj RW ≅ RZ) : proEtaleRingDerivedPullback (h ≫ k) RV RZ (proEtaleRingCompositeCoefficients h k RV RW RZ ck ch) ≅ proEtaleRingDerivedPullback k RV RW ck ⋙ proEtaleRingDerivedPullback h RW RZ ch",
+  "file": "lean/Sheaf/Paper/IntegralFinitePullbackComposition.lean",
+  "statement": "abbrev integralTowerGeneralPullbackComposition {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) (RV : Sheaf (ProEt.topology V) CommRingCat.{u + 1}) (RW : Sheaf (ProEt.topology W) CommRingCat.{u + 1}) (RZ : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}) (ck : (proEtaleSheafInverseImage k CommRingCat.{u + 1}).obj RV ≅ RW) (ch : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj RW ≅ RZ) : proEtaleRingDerivedPullback (h ≫ k) RV RZ (proEtaleRingCompositeCoefficients h k RV RW RZ ck ch) ≅ proEtaleRingDerivedPullback k RV RW ck ⋙ proEtaleRingDerivedPullback h RW RZ ch",
   "branch": "newtargets-dag",
-  "by": "Q19",
-  "date": "2026-10-16",
+  "by": "Q143",
+  "date": "2026-10-17",
   "existing": false,
-  "note": "The existing theorem characterizes the canonical comparison as nested existential witnesses and does not expose a selected term usable in theta. Reexport that exact theorem and select its fully characterized witness, including ordinary normalized adjunctions, direct-image fibre-product pasting, termwise and K-flat representative normalizations. No unnormalized comparison is selected."
+  "note": "§1(B): retain the general published proEtaleCanonicalPullbackComposition by public import. Its pullback is the explicit ring-sheaf tensor construction, whereas the integral operation uses coefficientProEtaleModulePullback, a chosen left adjoint. The new unit-normalized unique comparison identifies those actual presentations on all modules; the finite composition is exactly the published canonical comparison specialized to the constant quotient rings, with the composite coefficient identification transported by the published equality. No arbitrary isomorphism or additional mathematical hypothesis is supplied. The primary declaration is a direct alias of the full general canonical comparison, with precisely its original arbitrary ring-sheaf signature; the constant finite specialization is only a helper."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-c674583d0",
-  "group": "Q19",
+  "reviewer": "NT-stage2-Codex-cbc8ded89",
+  "group": "Q143",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable modules, all eight dependencies, sources, canonical maps, universes, edge cases, verbatim signatures, and report sections. All four sibling modules passed scompile.py with exit 0 and no diagnostics. No fixes needed; branch unchanged."
+  "note": "Wrote review.md. Checked both immutable modules, all eight statement dependencies, sources, canonical reductions, associativity, universes, edge cases, docstrings, and verbatim signatures. Both modules passed scompile.py with no diagnostics. No fixes needed; branch unchanged."
  }
 }
