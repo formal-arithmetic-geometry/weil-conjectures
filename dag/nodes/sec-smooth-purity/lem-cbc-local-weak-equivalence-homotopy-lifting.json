@@ -12,9 +12,132 @@
   "def-weil-pbc-simplicial-set",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-cbc-set-presheaf-sheafification-local-bijection] to $\\pi_0F\\to\\pi_0G$ on $\\mathcal C$ and to every based homotopy-presheaf map on its slice. Thus a class in the target locally has a preimage, and two source classes with equal images locally agree. Use the pointed simplex model in [def-cbc-local-simplicial-presheaf-maps]: for $r\\geq1$, $S^r=\\Delta^r/\\partial\\Delta^r$ and $\\pi_r(Z,x)$ consists of maps $(S^r,*)\\to(Z,x)$ modulo based simplicial homotopy. All restrictions preserve the chosen vertex, since $f(u^*x)=u^*f(x)$. The local bijectivity criterion is applied on the relevant slice itself, not by assuming the site has enough points.",
+   "uses": [
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "def-cbc-local-simplicial-presheaf-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Lemma 6.8 and Proposition 6.9; Section 2, pointed simplex convention."
+   }
+  },
+  {
+   "text": "Here is the objectwise Kan calculus used below. For a monomorphism $K\\hookrightarrow L$ and Kan $Z$, [lem-cbc-internal-hom-fibration-corner-map], with $Z\\to *$, says that restriction $\\operatorname{Fun}(L,Z)\\to\\operatorname{Fun}(K,Z)$ is a Kan fibration. Consequently a homotopy on $K$ extends to $L$ whenever its starting map on $L$ is supplied: lift its edge through this fibration. The same theorem with empty $K$ says the mapping spaces are Kan, and their fixed-restriction fibres are Kan by pulling back the horn-lifting property. In such a fibre an edge can be reversed by filling the $2$-horn consisting of that edge and an identity, and two edges can be composed by filling the corresponding $2$-horn. Thus a finite chain of homotopies with a fixed restriction is a single homotopy, in either orientation. In particular a simplicially nullhomotopic map $K\\to Z$ extends over any monomorphism $K\\hookrightarrow L$: lift a homotopy from the constant map (which extends) to that map.\n\nWe also need nullhomotopies with a chosen vertex fixed. If $M$ is weakly contractible and $t:*\\hookrightarrow M$ is a vertex, [lem-cbc-kan-mapping-homotopy-invariance] makes restriction $t^*:\\operatorname{Fun}(M,Z)\\to Z$ a simplicial homotopy equivalence. It is therefore a weak equivalence by [lem-cbc-simplicial-homotopy-equivalence-weak], and it is a fibration by the corner-map theorem. The model axioms of [lem-coef-kan-quillen-model-right-proper-core] make it a trivial fibration. Its fibre over $x$ lifts every boundary, including $\\partial\\Delta^1$, so any pointed map $(M,t)\\to(Z,x)$ is homotopic to the constant map through maps fixing $t$. These facts apply to horns, simplices, and the contractible quotients used below; no presheaf map is being assumed a fibration.",
+   "uses": [
+    "lem-cbc-internal-hom-fibration-corner-map",
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Lemma 2.1 and Proposition 3.6: explicit objectwise prism and nullhomotopy arguments, using existing Kan model tools."
+   }
+  },
+  {
+   "text": "We spell out invariance under a homotopy of the entire square. Suppose $i:K\\hookrightarrow L$ and maps $A:K\\times\\Delta^1\\to X$, $B:L\\times\\Delta^1\\to Y$ satisfy $fA=B|_{K\\times\\Delta^1}$, with $X,Y$ Kan. Given a relative homotopy lift $c_0:L\\to X$ of the time-zero square, extend $(c_0,A)$ to $C:L\\times\\Delta^1\\to X$ by the restriction fibration of [lem-cbc-internal-hom-fibration-corner-map]. Put $R=(L\\times\\Delta^1)\\amalg_{K\\times\\Delta^1}K$ and $T=L\\amalg_K L\\subseteq R$. The homotopy $fC$ on one copy of $L$ and $B$ on the other give a homotopy $T\\times\\Delta^1\\to Y$, compatible on $K$. At its time-zero end the given relative homotopy is a map $R\\to Y$. Extend this map and that homotopy across $R\\times\\Delta^1$ by the restriction fibration for $T\\hookrightarrow R$. At time one its restriction is a homotopy $fc_1\\simeq B_1$ relative to $K$, where $c_1=C_1$ and $c_1|_K=A_1$. For the reverse implication, the simplicial set of commutative squares is $\\operatorname{Fun}(K,X)\\times_{\\operatorname{Fun}(K,Y)}\\operatorname{Fun}(L,Y)$. It is Kan: its projection to $\\operatorname{Fun}(K,X)$ is the pullback of the restriction fibration for $K\\hookrightarrow L$, and its base is Kan. Invert the edge $(A,B)$ in this Kan complex and apply the same construction. This proves the reverse implication with compatible homotopies in both rows. This construction is objectwise and survives restriction to any covering arrow.",
+   "uses": [
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Proposition 3.6, including the relative cylinder R and the second prism extension."
+   }
+  },
+  {
+   "text": "For $n=0$, step 1 gives a covering sieve on which the component of the vertex $b$ is represented by a vertex $c$ of $F$. The equality here is already equality in the ordinary component set of $G(W)$: the image of $[c]$ equals $[b|_W]$. A component is generated by edges, and the Kan horn compositions and inverses of step 2 turn such a finite chain into one edge from $f(c)$ to $b|_W$. This is the required $H:\\Delta^0\\times\\Delta^1\\to G(W)$. No based positive-dimensional group and no boundary condition is used.",
+   "uses": [
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Theorem 5.2, first sentence, localized by Lemma 6.8; Theorem 6.15(a)."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$, put $D=\\Delta^n$, $K=\\partial\\Delta^n$, and $A=\\Lambda_n^n\\subseteq K$. Choose its vertex $n$ (the cone vertex of this horn, also when $n=1$). The horn inclusion $A\\hookrightarrow D$ is a trivial cofibration in [lem-coef-kan-quillen-model-right-proper-core], and $D$ contracts to its vertex $n$ by the simplicial homotopy induced by $[n]\\times[1]\\to[n]$, $(i,0)\\mapsto i$, $(i,1)\\mapsto n$, so $\\Delta^0\\to D$ at that vertex is a weak homotopy equivalence by [lem-cbc-simplicial-homotopy-equivalence-weak]; by two-out-of-three $A$ is weakly contractible. Step 2 gives a homotopy of $a|_A$ to the constant vertex $x=a(n)$, fixed at that vertex. Extend it to $K$ in $F(V)$ by [lem-cbc-internal-hom-fibration-corner-map], starting with $a$. Extend its image under $f$ to $D$ in $G(V)$ by that same theorem, starting with $b$. We obtain a homotopy of squares from $(a,b)$ to $(a',b')$, where $a'|_A=x$. Thus $a'$ and $b'$ factor through $B=K/A$ and $Q=D/A$. Directly from the face identifications, $B$ is $S^{n-1}=\\Delta^{n-1}/\\partial\\Delta^{n-1}$ for $n\\geq2$; for $n=1$ it is the pointed two-vertex set $S^0$. The inclusion $*\\hookrightarrow Q$ is the cobase change of the horn inclusion $A\\hookrightarrow D$, hence a trivial cofibration by the model axioms, so $Q$ is weakly contractible. By step 3 it suffices to lift this normalized square; we will then undo the homotopy of squares.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Theorem 5.2, first reduction; Lemma 5.1, horn collapse. The quotient B is checked separately when n=1."
+   }
+  },
+  {
+   "text": "For $n\\geq2$, write $g:B\\to F(V)$ and $h:Q\\to G(V)$ for the normalized maps. The based map $h$ is homotopic to the constant map at $f(x)$ with the vertex of $Q$ fixed, by step 2, since $Q$ is weakly contractible. Hence $[fg]=0$ in $\\pi_{n-1}(G(V),f(x))$. Local injectivity from [lem-cbc-set-presheaf-sheafification-local-bijection] gives, on a covering sieve, $[g]=0$ in $\\pi_{n-1}(F(W),x|_W)$. The pointed simplex convention [def-cbc-local-simplicial-presheaf-maps] and the fixed-restriction Kan fibre in step 2 turn this equality into a based simplicial nullhomotopy. Lift its reverse through $\\operatorname{Fun}(Q,F(W))\\to\\operatorname{Fun}(B,F(W))$, starting with the constant map. Its endpoint is a map $l:Q\\to F(W)$ with $l|_B=g$ exactly. For $n=1$, the images under $f$ of the two vertices of $B=S^0$ lie in the same component because $h:Q=\\Delta^1\\to G(V)$ joins them. Local injectivity on $\\pi_0$ makes their components in $F$ agree locally. Kan horn composition gives an edge $l:\\Delta^1\\to F(W)$ between those prescribed vertices, again with $l|_B=g$. This treats n=1 without introducing a nonexistent based group in degree zero.",
+   "uses": [
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "def-cbc-local-simplicial-presheaf-maps",
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Theorem 5.2, extension over the contractible quotient; Lemmas 2.1 and 6.8. Separate pi_0 argument in degree one."
+   }
+  },
+  {
+   "text": "We need the following auxiliary construction, for $r\\geq2$. Consider a square $j:\\Lambda_r^r\\to F(W)$, $k:\\partial\\Delta^r\\to G(W)$ with $fj=k|_{\\Lambda_r^r}$. It has a local homotopy lift relative to the horn using only surjectivity on $\\pi_{r-1}$. Indeed the horn is weakly contractible by the model argument of step 5. Contract $j$ to its value $z$ at vertex $r$ using step 2; extend its image to a homotopy on $\\partial\\Delta^r$ by [lem-cbc-internal-hom-fibration-corner-map]. At the endpoint $k'$ factors as a pointed map $\\partial\\Delta^r/\\Lambda_r^r=S^{r-1}\\to G(W)$. Apply local surjectivity from [lem-cbc-set-presheaf-sheafification-local-bijection] to its class in $\\pi_{r-1}(G(W),f(z))$. On a covering sieve, choose a representative $d:S^{r-1}\\to F$ and a based simplicial homotopy $fd\\simeq k'$, using [def-cbc-local-simplicial-presheaf-maps] and the fixed-restriction Kan fibre of step 2. Precompose with the quotient to obtain the normalized lift of $\\partial\\Delta^r$ and a homotopy fixed on the horn. Undo the homotopy of this square by the explicit construction in step 3. This gives a map $m:\\partial\\Delta^r\\to F$ with $m|_{\\Lambda_r^r}=j$ and a homotopy $fm\\simeq k$ fixed on $\\Lambda_r^r$. This is an argument inside the present proof, not an appeal to the local acyclic-fibration child.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "lem-cbc-internal-hom-fibration-corner-map",
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "def-cbc-local-simplicial-presheaf-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Lemma 5.1, with its homotopy-of-squares reduction written out; localized by Lemma 6.8."
+   }
+  },
+  {
+   "text": "On each object where step 6 supplied $l$, regard $l$ and $h$ as maps on $\\Delta^n$ constant on $\\Lambda_n^n$. Define $k:\\partial\\Delta^{n+1}\\to G$ by taking face $n+1$ to be $h$, face $n$ to be $fl$, and every face $i<n$ to be the constant map at $f(x)$. Define $j:\\Lambda_{n+1}^{n+1}\\to F$ by face $n$ equal to $l$ and faces $i<n$ constant at $x$. All intersections involving a face $i<n$ are constant, and the intersection of faces $n,n+1$ agrees because $fl$ and $h$ agree on $B$. Thus these are well-defined maps with $fj=k|_{\\Lambda_{n+1}^{n+1}}$. Apply step 7 with $r=n+1\\geq2$ and obtain, after another covering refinement, $m:\\partial\\Delta^{n+1}\\to F$ and $fm\\simeq k$ fixed on that horn. Its face $n+1$ is a simplex $c'$. For $i<n$, the simplicial identity gives $d_i c'=d_n d_i m=x$; for $i=n$ it gives $d_n c'=d_n d_n m=d_n l$. These are exactly the faces of $a'$. The restriction of the homotopy to face $n+1$ joins $fc'$ to $h$ and is constant on the entire boundary of that face, since that boundary belongs to the horn. Hence $(c',H')$ solves the normalized square. Undo its homotopy of squares using step 3 to get $c$ with boundary $a$ and $H$ from $fc$ to $b$, fixed at $fa$ on the boundary.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Theorem 5.2, final face construction, including the boundary face identities; Proposition 3.6; Theorem 6.15(a)."
+   }
+  },
+  {
+   "text": "For the fixed value of $n$, the preceding construction uses one local surjectivity of $\\pi_0$ when $n=0$, or one local injectivity in degree $n-1$ (degree zero if $n=1$) followed by one local surjectivity in degree $n$. A covering sieve on a slice object is a covering sieve on its underlying domain by the induced topology. If $R$ is the first covering sieve and $R_u$ is a covering sieve on the domain of each $u\\in R$, the sieve generated by composites $uv$ with $v\\in R_u$ covers by transitivity. Every arrow in it has a factorization through such a composite; restrict the constructed maps along the remaining factor. Naturality preserves all four identities, so the sieve of arrows admitting a solution is itself covering. This proves exactly the asserted existence separately for every arrow in one covering sieve. It takes no common refinement over all integers n and makes no compatibility claim for the chosen solutions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205025",
+    "place": "Convention 6.4 and Theorem 6.15(a), finite localizations; covering-sieve axioms in the statement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-local-simplicial-presheaf-maps",
+  "def-weil-pbc-simplicial-set",
+  "lem-cbc-internal-hom-fibration-corner-map",
+  "lem-cbc-kan-mapping-homotopy-invariance",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-kan-quillen-model-right-proper-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/math/0205025",
+  "place": "Theorem 6.15(a), forward implication, expanded from its cited Section 5 proof: Lemmas 2.1, 5.1 and Theorem 5.2; homotopy of squares Proposition 3.6; local representatives Lemma 6.8. Read printed pp. 4, 6, 9-10, 12-14 online on 2026-10-17; archival copy WANTED. Objectwise prism arguments use existing generic DAG Kan results."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +180,24 @@
    "results": "{\"t\": \"2026-10-17T03:57:53Z\", \"tool\": \"grep\", \"query\": \"homotopy.*sheaf|local.*weak.*equivalence|[Rr]elative[Hh]omotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\"], \"digest\": \"045b4af96a71b9bc\"}",
    "date": "2026-10-17",
    "verdict": "no match: the semantic hits concern abstract model-category homotopies, ordinary simplicial-set horn lifting, or homotopies of one-hypercover refinements, not homotopy sheaves of simplicial presheaves. Read CategoryWithFibrations.lean:35-100, Sites/Hypercover/Homotopy.lean:43-65 and ModelCategory/{Left,Right}Homotopy.lean:200-220; none gives this local relative homotopy-lifting theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For presheaves of Kan complexes a map invertible on associated homotopy group sheaves admits local lifts up to relative simplicial homotopy",
+   "results": "{\"t\": \"2026-10-17T05:08:33Z\", \"tool\": \"leanfinder\", \"query\": \"For presheaves of Kan complexes a map invertible on associated homotopy group sheaves admits local lifts up to relative simplicial homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.lift\", \"CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.mk'\", \"CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber\", \"SSet.Truncated.HomotopyCategory.lift_map_homMk\", \"SSet.Truncated.HomotopyCategory.lift_obj_mk\", \"CategoryTheory.GrothendieckTopology.OneHypercover.exists_nonempty_homotopy\", \"CategoryTheory.GrothendieckTopology.W_of_isLocallyBijective\", \"CategoryTheory.GrothendieckTopology.W.isLocallyInjective\"], \"digest\": \"278cbcadb0220431\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match for the local relative boundary-homotopy lifting theorem. Hits concern ordinary Kan/model-category or sheafification tools. The relevant existing DAG results are explicitly cited; the set-presheaf criterion has a separate new Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*sheaf|local.*weak.*equivalence|local.*relative.*homotopy",
+   "results": "{\"t\": \"2026-10-17T05:09:47Z\", \"tool\": \"grep\", \"query\": \"homotopy.*sheaf|local.*weak.*equivalence|local.*relative.*homotopy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\"], \"digest\": \"821037a7fc1ea6fb\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match for the local relative boundary-homotopy lifting theorem. Hits concern ordinary Kan/model-category or sheafification tools. The relevant existing DAG results are explicitly cited; the set-presheaf criterion has a separate new Mathlib leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-local-acyclic-matching-generalized-cover",
@@ -86,5 +223,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-local-weak-equivalence-homotopy-lifting",
+  "worker": "Q40",
+  "summary": "Independent second reading replaces the uncited relative-obstruction sketch by the full DI Section 5 horn-collapse and face-gluing proof. Nine steps, existing Kan tools, one new Mathlib leaf for set-presheaf local bijectivity. Statement unchanged; n=0 and n=1 explicit; only finitely many nested covering refinements for each n.",
+  "blueprint": "Realizes the descendant boundary-lifting input in the proof opening of thm-cbc-finite-level-proetale, where the local acyclic-fibration square is solved after local homotopy-sheaf refinement (DHI Proposition 3.1 / DI Theorem 6.15(a)).",
+  "tool_uses": [
+   {
+    "node": "lem-coef-kan-quillen-model-right-proper-core",
+    "why": "Generic objectwise Kan model axioms identify horns and their quotient cobase changes as trivial cofibrations and provide the weak-fibration lifting axiom. This does not replace the unit route or assume a presheaf model structure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-kan-quillen-model-right-proper-core"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-7d07b66c4",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-7d07b66c4 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new leaf, every cited statement, unit sk-prop-sf-cbc, and Dugger–Isaksen arXiv:math/0205025 (fetched; Lemma 2.1, Def 3.1/RH, Prop 3.6, Lemma 5.1, Thm 5.2, Lemma 6.8, Prop 6.9, Def 6.11, Thm 6.15). Statement: it is exactly the forward direction of DI Thm 6.15(a) for objectwise Kan F and G, with the hypothesis in DI Prop 6.9 form. The four equations are the universal property of RH(Δⁿ,∂Δⁿ), no fibration hypothesis is imposed, and choices need not be compatible. Small cases checked: n=0, n=1, trivial site, empty sieve, empty F. Steps 1–9 match DI Lemma 6.8, Prop 3.6, Lemma 5.1, Thm 5.2 and the 6.15 proof. The face compatibilities in step 8, including n=1, the horn cone vertex, the quotients K/A and D/A, and the finite sieve assembly were all verified by hand. New leaf lem-cbc-set-presheaf-sheafification-local-bijection: confirmed against Mathlib LocallyBijective.lean:114-116 and 160-161, Localization.lean:80-82, LocallyInjective.lean:71-73, LocallySurjective.lean:94-100 and LeftExact.lean:313-314. It passes B1-B9. The nearest existing node, lem-weil-pbc-large-set-sheafification, is a universe generalization in another unit with no explicit clauses; it is noted, not a duplicate, and the leaf is kept. No cycle: the item's 64-node closure excludes it, and the local-acyclic parent is not cited. No duplicate of the item exists in the DAG. Accepted tool_use: lem-coef-kan-quillen-model-right-proper-core, the generic Kan-Quillen model axioms. FIX: step 5 inferred weak contractibility of the horn from a contraction of Δⁿ without citing the needed fact (C1/C2). The step now writes the contraction [n]x[1]->[n] and cites lem-cbc-simplicial-homotopy-equivalence-weak. proof_deps is unchanged and still equals the union of the uses. The corrected item file is in fixes/dag/nodes/sec-smooth-purity/. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

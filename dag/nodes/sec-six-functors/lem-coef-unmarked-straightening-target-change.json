@@ -29,9 +29,93 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-unmarked-straightening-quillen"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\mathfrak C[X\\star\\Delta^0]$, $B=\\mathfrak C[X]$, $M=M_{a,\\phi}$ and $M'=M_{a,\\phi'}$. Apply [lem-coef-cone-boundary-projective-cells] with target category $D^{\\mathrm{op}}$ and attaching functor $\\phi$, and then with target $D'{}^{\\mathrm{op}}$ and attaching functor $\\phi'$. Its structural clause says that the old full subcategories of $M,M'$ are exactly these targets, there are no mapping simplices from $v$ to an old object, and the endomorphism simplicial set of $v$ is $\\Delta^0$. Their remaining mapping sets and precomposition actions are precisely $L_\\phi(X)$ and $L_{\\phi'}(X)$ by [lem-coef-unmarked-straightening-quillen]. The pushout gives $q:M\\to M'$ which is $\\pi^{\\mathrm{op}}$ on the old part and the identity on $A$. Thus $q$ gives the stated enriched natural map $u:L_\\phi(X)\\to\\pi^*L_{\\phi'}(X)$.",
+   "uses": [
+    "lem-coef-cone-boundary-projective-cells",
+    "lem-coef-unmarked-straightening-quillen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.1, correspondence description of M (printed p.73); Proposition 2.2.1.1(2)."
+   }
+  },
+  {
+   "text": "Fix any simplicial functor $G:D'\\to\\mathsf{sSet}$. Form a simplicial category $E_G$ on the objects of $D'{}^{\\mathrm{op}}$ and one new object $w$: its old mapping sets are unchanged, $E_G(e,w)=G(e)$, $E_G(w,e)=\\varnothing$, and $E_G(w,w)=\\Delta^0$. Composition into $w$ is the $G$-action; its associativity and unit equations are exactly the functor axioms of $G$. By Step 1, a functor $F':M'\\to E_G$ which is the identity on the old part and sends $v$ to $w$ consists precisely of simplicial maps $L_{\\phi'}(X)(e)\\to G(e)$ commuting with the action. Such functors are therefore exactly enriched natural transformations $L_{\\phi'}(X)\\to G$. Likewise functors $F:M\\to E_G$ whose old restriction is $\\pi^{\\mathrm{op}}$ and which send $v$ to $w$ correspond exactly to enriched natural transformations $L_\\phi(X)\\to\\pi^*G$. There are no further composition equations: all nonidentity mixed composites end at $w$.",
+   "uses": [
+    "lem-coef-unmarked-straightening-quillen"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.1, correspondence description; explicit construction of a correspondence with prescribed outgoing mapping sets."
+   }
+  },
+  {
+   "text": "Precomposition by $q$ gives a bijection between these two sets of functors. Here is its inverse. Given $F:M\\to E_G$, restrict it to $A$ and pair this restriction with the inclusion $D'{}^{\\mathrm{op}}\\to E_G$. The two functors agree on $B$: on that subcategory $F$ is $\\pi^{\\mathrm{op}}\\phi\\mathfrak C[a]=\\phi'\\mathfrak C[a]$. The defining pushout of $M'$ therefore supplies a unique $F':M'\\to E_G$. It fixes the old part and takes $v$ to $w$. The equality $F' q=F$ holds on both factors of the pushout defining $M$, hence everywhere. Conversely reconstructing from $F' q$ recovers $F'$, since both its $A$-restriction and its old restriction agree. Under Step 2 this is the bijection $\\beta_G:\\operatorname{Nat}(L_{\\phi'}(X),G)\\xrightarrow{\\sim}\\operatorname{Nat}(L_\\phi(X),\\pi^*G)$, $b\\mapsto(\\pi^*b)u$. Postcomposing by a transformation $G\\to G'$ commutes with this formula, so the bijection is natural in $G$.",
+   "uses": [
+    "lem-coef-unmarked-straightening-quillen"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.1.1(2): expansion using the two categorical pushout universal properties."
+   }
+  },
+  {
+   "text": "Set $H=L_\\phi(X)$, $K=L_{\\phi'}(X)$ and $P=\\pi_!H$, and let $\\eta:H\\to\\pi^*P$ be the Kan-adjunction unit. The map in the statement is its adjunct $h:P\\to K$ characterized by $(\\pi^*h)\\eta=u$. Define $t:K\\to P$ to be the unique transformation with $\\beta_P(t)=\\eta$. Then $(\\pi^*(th))\\eta=(\\pi^*t)u=\\eta$, so injectivity of the Kan-adjunction bijection gives $th=1_P$. Also $\\beta_K(ht)=(\\pi^*h)\\beta_P(t)=(\\pi^*h)\\eta=u=\\beta_K(1_K)$, so injectivity of $\\beta_K$ gives $ht=1_K$. Thus the specified adjunct $h$ is an isomorphism. This uses only the defining bijection for $\\pi_!$ in the statement and Step 3; it requires neither a pointwise Kan-extension formula nor an enriched Yoneda theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.1.1(2): explicit inverse from the two natural bijections."
+   }
+  },
+  {
+   "text": "For a map $f:X\\to Y$ over $S$, the induced cone maps and identity target maps give maps $M_X\\to M_Y$ and $M'_X\\to M'_Y$. Their square with $q_X,q_Y$ commutes because its two composites agree on $D^{\\mathrm{op}}$ and on $\\mathfrak C[X\\star\\Delta^0]$. Consequently $u_Y L_\\phi(f)=(\\pi^*L_{\\phi'}(f))u_X$. Taking adjuncts gives $h_Y\\pi_!L_\\phi(f)=L_{\\phi'}(f)h_X$, proving naturality of the specified isomorphism in $X$.",
+   "uses": [
+    "lem-coef-unmarked-straightening-quillen"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.1, cone-pushout functoriality in the input; Proposition 2.2.1.1(2)."
+   }
+  },
+  {
+   "text": "For each $\\sigma:\\Delta^n\\to S$, Step 3 gives a bijection $\\beta_{G,\\sigma}:\\operatorname{Nat}(L_{\\phi'}(\\Delta^n\\xrightarrow{\\sigma}S),G)\\to\\operatorname{Nat}(L_\\phi(\\Delta^n\\xrightarrow{\\sigma}S),\\pi^*G)$. If $\\theta:[m]\\to[n]$ is monotone, Step 5 says $u_\\sigma L_\\phi(\\theta)=(\\pi^*L_{\\phi'}(\\theta))u_{\\sigma\\theta}$; substituting this into the formula for $\\beta$ shows that its bijections commute with restriction along $\\theta$. The stated simplex definition of $U$ in [lem-coef-unmarked-straightening-quillen] therefore assembles them to the isomorphism $U_{\\phi'}(G)\\cong U_\\phi(\\pi^*G)$ over $S$. Naturality in $G$ is Step 3.",
+   "uses": [
+    "lem-coef-unmarked-straightening-quillen"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.1, direct right-adjoint construction; right-adjoint form of Proposition 2.2.1.1(2)."
+   }
+  },
+  {
+   "text": "For an identity target functor, the pushout map $q$ is the identity, so $u$ and $\\beta$ are identities; the Kan-extension map is the identity under the canonical identification $\\operatorname{id}_!H\\cong H$ supplied by its defining adjunction. For $D\\xrightarrow{\\pi}D'\\xrightarrow{\\rho}D''$, the direct pushout map equals the composite of the two maps, since they agree on the cone factor and on $D^{\\mathrm{op}}$. Hence $u_{\\rho\\pi}=(\\pi^*u_\\rho)u_\\pi$, with the input $\\phi'$ understood for $u_\\rho$. The formula for $\\beta$ now gives $\\beta_{\\rho\\pi}=\\beta_\\pi\\beta_\\rho$ on every transformation. The composite $h_\\rho\\rho_!(h_\\pi)$ has adjunct $u_{\\rho\\pi}$, so uniqueness of adjuncts identifies it with $h_{\\rho\\pi}$ under $(\\rho\\pi)_!\\cong\\rho_!\\pi_!$. These are the canonical identifications from the composed adjunction bijections. Step 6 gives the same composite law for $U$ degreewise. All categories and mapping sets are small in the stated universes; no argument has used Kan or model-category hypotheses.",
+   "uses": [
+    "lem-coef-unmarked-straightening-quillen"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.1.1(2): identity and composite target substitutions, checked on the two pushout factors."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cone-boundary-projective-cells",
+  "lem-coef-unmarked-straightening-quillen"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Section 2.2.1, printed pp.73-74, correspondence construction and Proposition 2.2.1.1(2), read online in the IAS PDF. HTT states the target-change functoriality without proof; the explicit collage and pushout proof here supplies the details. WANTED: archival HTT copy."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -48,15 +132,64 @@
    "verdict": "no match: neither enriched left Kan extension nor the cone pushout exists in Mathlib"
   },
   {
-   "tool": "leansearch",
-   "query": "not run",
-   "results": "not run",
+   "tool": "leanfinder",
+   "query": "enriched left Kan extension of cone straightening after changing target simplicial category",
+   "results": "{\"t\": \"2026-10-17T04:41:42Z\", \"tool\": \"leanfinder\", \"query\": \"enriched left Kan extension of cone straightening after changing target simplicial category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"CategoryTheory.Functor.RightExtension.coneAtWhiskerRightIso\", \"CategoryTheory.Functor.RightExtension.coneAtFunctor\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.Truncated.rightExtensionInclusion\"], \"digest\": \"539ce456c231a6c4\"}",
    "date": "2026-10-17",
-   "verdict": "unavailable: the maintainer-review sandbox has no LeanSearch, Loogle or LeanFinder access; the semantic searches remain to be recorded"
+   "verdict": "no match: read returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-115, CategoryTheory/Enriched/Basic.lean (EnrichedFunctor), and CategoryTheory/Functor/KanExtension/Basic.lean:166-180. Ordinary Kan extensions, strict-Segal/coskeleton extensions and enriched functor definitions do not identify cone-pushout mapping diagrams under a target change."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LeftKanExtension, CategoryTheory.EnrichedCategory",
+   "results": "{\"t\": \"2026-10-17T04:41:42Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.LeftKanExtension, CategoryTheory.EnrichedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Functor.LeftKanExtension'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-115, CategoryTheory/Enriched/Basic.lean (EnrichedFunctor), and CategoryTheory/Functor/KanExtension/Basic.lean:166-180. Ordinary Kan extensions, strict-Segal/coskeleton extensions and enriched functor definitions do not identify cone-pushout mapping diagrams under a target change."
+  },
+  {
+   "tool": "grep",
+   "query": "leftKan|LeftKan|enriched.*Kan",
+   "results": "{\"t\": \"2026-10-17T04:41:42Z\", \"tool\": \"grep\", \"query\": \"leftKan|LeftKan|enriched.*Kan\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-115, CategoryTheory/Enriched/Basic.lean (EnrichedFunctor), and CategoryTheory/Functor/KanExtension/Basic.lean:166-180. Ordinary Kan extensions, strict-Segal/coskeleton extensions and enriched functor definitions do not identify cone-pushout mapping diagrams under a target change."
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural isomorphism between enriched left Kan extension of cone diagrams and cone diagram after target change",
+   "results": "{\"t\": \"2026-10-17T04:41:43Z\", \"tool\": \"leansearch\", \"query\": \"natural isomorphism between enriched left Kan extension of cone diagrams and cone diagram after target change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.conesIso\", \"CategoryTheory.Functor.LeftExtension.postcompose₂ObjMkIso\", \"CategoryTheory.Adjunction.conesIsoComponentHom\", \"CategoryTheory.Functor.hasPointwiseLeftKanExtensionAt_iff_of_natIso\", \"CategoryTheory.Functor.LeftExtension.coconeAtWhiskerRightIso\", \"CategoryTheory.Functor.LeftExtension.isPointwiseLeftKanExtensionAtOfIso'\", \"CategoryTheory.Functor.leftExtensionEquivalenceOfIso₂\", \"CategoryTheory.Functor.LeftExtension.isUniversalEquivOfIso₂\"], \"digest\": \"ebc4a35a1d64ebc0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-115, CategoryTheory/Enriched/Basic.lean (EnrichedFunctor), and CategoryTheory/Functor/KanExtension/Basic.lean:166-180. Ordinary Kan extensions, strict-Segal/coskeleton extensions and enriched functor definitions do not identify cone-pushout mapping diagrams under a target change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing the coefficient simplicial category in straightening is left adjoint to restriction of enriched diagrams",
+   "results": "{\"t\": \"2026-10-17T05:09:24Z\", \"tool\": \"leanfinder\", \"query\": \"Changing the coefficient simplicial category in straightening is left adjoint to restriction of enriched diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.SimplicialThickening.functor\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerveAdjunction.isIso_counit\", \"sSetTopAdj\", \"CategoryTheory.SimplicialThickening.functor_id\"], \"digest\": \"2125f83ed96732a7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-115, CategoryTheory/Enriched/Basic.lean (EnrichedFunctor), and CategoryTheory/Functor/KanExtension/Basic.lean:166-180. Ordinary Kan extensions, strict-Segal/coskeleton extensions and enriched functor definitions do not identify cone-pushout mapping diagrams under a target change."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedFunctor\"",
+   "results": "{\"t\": \"2026-10-17T05:09:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedFunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.EnrichedFunctor\", \"CategoryTheory.EnrichedFunctor.id\", \"CategoryTheory.EnrichedFunctor.instInhabited\", \"CategoryTheory.EnrichedFunctor.category\", \"CategoryTheory.EnrichedFunctor.obj\", \"CategoryTheory.EnrichedFunctor.id_obj\", \"CategoryTheory.enrichedFunctorTypeEquivFunctor\", \"CategoryTheory.EnrichedFunctor.comp\"], \"digest\": \"15a24ee1f26a48dc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-115, CategoryTheory/Enriched/Basic.lean (EnrichedFunctor), and CategoryTheory/Functor/KanExtension/Basic.lean:166-180. Ordinary Kan extensions, strict-Segal/coskeleton extensions and enriched functor definitions do not identify cone-pushout mapping diagrams under a target change."
+  },
+  {
+   "tool": "grep",
+   "query": "straighten|unstraighten|leftKan|LeftKan|coend",
+   "results": "{\"t\": \"2026-10-17T05:09:24Z\", \"tool\": \"grep\", \"query\": \"straighten|unstraighten|leftKan|LeftKan|coend\", \"sub\": \"CategoryTheory/Enriched\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-115, CategoryTheory/Enriched/Basic.lean (EnrichedFunctor), and CategoryTheory/Functor/KanExtension/Basic.lean:166-180. Ordinary Kan extensions, strict-Segal/coskeleton extensions and enriched functor definitions do not identify cone-pushout mapping diagrams under a target change."
+  },
+  {
+   "tool": "grep",
+   "query": "leftKanExtension|IsLeftKanExtension",
+   "results": "{\"t\": \"2026-10-17T05:09:25Z\", \"tool\": \"grep\", \"query\": \"leftKanExtension|IsLeftKanExtension\", \"sub\": \"CategoryTheory/Functor/KanExtension\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean\"], \"digest\": \"5bf258bf02256883\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-115, CategoryTheory/Enriched/Basic.lean (EnrichedFunctor), and CategoryTheory/Functor/KanExtension/Basic.lean:166-180. Ordinary Kan extensions, strict-Segal/coskeleton extensions and enriched functor definitions do not identify cone-pushout mapping diagrams under a target change."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "maintainer-reader",
   "item": "lem-coef-space-valued-straightening",
@@ -64,5 +197,20 @@
   "group": "Q60"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-unmarked-straightening-target-change",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven steps prove the target-change map by collages and categorical pushout universal properties, construct the inverse of the specified Kan-adjunction mate, verify input naturality, and derive the U-description and identity/composite laws. Reused the existing cone-boundary-projective-cells structural statement instead of assuming an unproved mapping-word normal form; removed the draft coend/Yoneda calculation. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the target-change foundational input to step 8 of lem-coef-space-valued-straightening, through the existing ancestry to prop-coef-integral-exceptional-adjoint: main-20261015 proof paragraph 2, finite-coefficient mapping-complex adjunction before derived inverse limit."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-11444c62d",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-11444c62d (reviewer sub-agent of L); spot-checked: I read all seven steps and they are correct; review.md has the full checks and I made no fixes. The statement matches HTT §2.2.1 (St_φ X(C)=Map_M(C,v), with φ: C[S]→C^op) and Prop. 2.2.1.1(2), St_{π∘φ} ≅ π_! St_φ. HTT is not archived in literature/ (WANTED recorded, proof_origin agent), so I checked against the standard text from memory. The item adds no hypothesis and is not weakened. It is not a target node, so the base-change and coefficient-category check does not apply. Step 1 uses only the structural clause of lem-coef-cone-boundary-projective-cells (old full subcategory exactly A, M(v,c) empty, M(v,v)=Δ^0), applied with A=D^op,φ and A=D'^op,φ'. q exists because π^op φ C[a] = φ' C[a]. Step 2: the collage E_G's composition is the covariant G action; with M'(v,c) empty and M'(v,v)=Δ^0, the only composites are the action and unit composites. Step 3: the inverse comes from the pushout universal property; F'q=F holds on both factors, and β(b)=(π^*b)u. Step 4: I recomputed (π^*(th))η=η and β_K(ht)=u=β_K(1), so the specified mate is invertible. Steps 5–7: the adjunct equations, the simplex-operator direction u_σ L(θ)=π^*L'(θ) u_{σθ}, and the composite law u_{ρπ}=(π^*u_ρ)u_π all check. Small cases tested: X empty, X=Δ^0 (representables), π=id, π not injective on objects, D empty. Both proof dependencies are in unit sk-prop-sf-biduality-general, and neither one's transitive closure contains the item. lem-coef-marked-cone-straightening-quillen (marked, locally Kan target only), lem-coef-cone-presheaf-adjunction (identity target only) and lem-coef-simplicial-projective-model-calculus are not duplicates. The citer, lem-coef-space-valued-straightening step 8, instantiates exactly the stated hypotheses. Mathlib searches cover grep, leanfinder, loogle and leansearch. No SGA is used and there are no tool_uses."
+ }
 }

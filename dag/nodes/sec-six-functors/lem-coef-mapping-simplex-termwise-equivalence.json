@@ -11,9 +11,75 @@
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For composable monotone maps $\\theta:[s]\\to[r]$ and $\\psi:[t]\\to[s]$, applying the two displayed operators gives the transition $t^Z_{\\alpha\\theta(s),\\alpha\\theta\\psi(t)}t^Z_{\\alpha(r),\\alpha\\theta(s)}=t^Z_{\\alpha(r),\\alpha\\theta\\psi(t)}$, followed by $(\\theta\\psi)^*$; simplicial transition maps commute with pullback. This is the operator for $\\theta\\psi$, and identity maps give identity operators. The ladder identities $f_i t^A_{j,i}=t^B_{j,i}f_j$ then show on each summand that $(\\alpha,a)\\mapsto(\\alpha,f_{\\alpha(r)}a)$ commutes with these operators. Thus the construction and its induced map are well-defined.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.2.2, mapping-simplex definition, printed p.179; Remark 3.2.2.5, functoriality."
+   }
+  },
+  {
+   "text": "Induct on $n$, with the assertion for all commuting ladders of chains of length $n$. At $n=0$ there is exactly one map $[r]\\to[0]$, and its last value is $0$. Hence $M(A)=A_0$, $M(B)=B_0$, and the induced map is the assumed categorical equivalence $f_0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.2.2.5, induction on n, base case."
+   }
+  },
+  {
+   "text": "For $n>0$ write $Z^-=(Z_0\\leftarrow\\cdots\\leftarrow Z_{n-1})$, $K_Z=Z_n\\times\\Delta^{n-1}$, and $P_Z=Z_n\\times\\Delta^n$, for $Z=A,B$. Map $P_Z$ to $M(Z)$ by $(z,\\alpha)\\mapsto(\\alpha,t^Z_{n,\\alpha(r)}z)$ in degree $r$. Its restriction to $K_Z$ lands in $M(Z^-)$. In the degreewise pushout $M(Z^-)\\amalg_{K_Z}P_Z$, a pair with $\\alpha(r)<n$ is identified with precisely this element of $M(Z^-)$, whereas the pairs with $\\alpha(r)=n$ have no identifications and map identically to their summands in $M(Z)_r$. This gives a bijection in every degree. The operator formula in Step 1 shows that these bijections commute with pullback, including when a face changes the last value from $n$ to a smaller index. Thus $M(Z)=M(Z^-)\\amalg_{K_Z}P_Z$ as simplicial sets. The ladder gives a commuting map of these spans with components $M(A^-)\\to M(B^-)$, $f_n\\times1_{\\Delta^{n-1}}$, and $f_n\\times1_{\\Delta^n}$. The cofibration leg is $K_Z\\to P_Z$, not the transition-induced leg into $M(Z^-)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.2.2 definition and Remark 3.2.2.5, explicit degreewise pushout calculation for the induction."
+   }
+  },
+  {
+   "text": "The induction hypothesis makes $M(A^-)\\to M(B^-)$ a categorical equivalence. By [lem-coef-joyal-homotopy-exponentials], the localized degreewise product, with its projections, is a product in the Joyal homotopy category. The two projection equations for $f_n\\times1_T$ identify its localization with the product of the isomorphism represented by $f_n$ and the identity of $T$. Its inverse is the product of the inverse isomorphism and that identity, for $T=\\Delta^{n-1},\\Delta^n$. Apply [lem-coef-model-localization-detects-weak-equivalences] to the Joyal model category to conclude that these actual maps are categorical equivalences. By [lem-coef-joyal-model-structure], cofibrations are degreewise injections, so every simplicial set is cofibrant (its initial map is injective), and $K_Z\\to P_Z$ is a cofibration (a product with the injective face inclusion). All six objects of the two spans are thus cofibrant, both displayed legs are cofibrations, and all three component maps are weak equivalences. Clause (b) of [lem-coef-model-cofibrant-colimit-comparison] applies and proves that their pushout comparison, which Step 3 identifies with the specified map $M(A)\\to M(B)$, is a categorical equivalence. This completes the induction without assuming any transition map injective.",
+   "uses": [
+    "lem-coef-joyal-homotopy-exponentials",
+    "lem-coef-model-localization-detects-weak-equivalences",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-model-cofibrant-colimit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.2.2.5, induction using the one-cofibration pushout comparison; Corollary 2.2.5.4 for products."
+   }
+  },
+  {
+   "text": "By [lem-coef-coherent-nerve-comparison], coherent realization $\\mathfrak C$ is the left adjoint in the Joyal--Bergner Quillen equivalence, hence preserves cofibrations and trivial cofibrations. The weak-equivalence preservation clause of [lem-coef-model-infinity-derived-adjunction] says that such a left adjoint preserves weak equivalences between cofibrant objects. Both mapping simplices are cofibrant because their maps from the empty simplicial set are degreewise injective, by [lem-coef-joyal-model-structure]. Apply this clause to the actual map proved weakly equivalent in Step 4. Its actual coherent realization is a Bergner weak equivalence, which is exactly a Dwyer--Kan equivalence by [lem-coef-coherent-nerve-comparison].",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Coherent-realization consequence from Theorem 2.2.5.1 and the ordinary left Quillen preservation theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-joyal-homotopy-exponentials",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-model-cofibrant-colimit-comparison",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-model-localization-detects-weak-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit expansion of the induction in HTT Remark 3.2.2.5, printed pp.179-180, read online; archive WANTED. Product and model-category inputs are cited as nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +115,59 @@
    "results": "{\"t\": \"2026-10-17T04:01:59Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy invariance of a finite simplicial mapping cylinder diagram under objectwise categorical weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder\", \"HomotopicalAlgebra.Cylinder.weakEquivalence_π\", \"HomotopicalAlgebra.Cylinder.instWeakEquivalenceI₁\", \"HomotopicalAlgebra.Cylinder.LeftHomotopy\", \"HomotopicalAlgebra.Cylinder.instWeakEquivalenceI₀\", \"HomotopicalAlgebra.Cylinder.IsGood\", \"HomotopicalAlgebra.Cylinder.toPrecylinder\", \"HomotopicalAlgebra.Cylinder.trans\"], \"digest\": \"857a6f1f3edd8f17\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader query returns generic model-category cylinder objects and their homotopies; Cylinder.lean:20-105 defines precylinders, not the finite mapping-simplex construction or its categorical equivalence invariance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Termwise categorical equivalences of chains of simplicial sets induce a categorical equivalence of mapping simplices",
+   "results": "{\"t\": \"2026-10-17T04:28:11Z\", \"tool\": \"leanfinder\", \"query\": \"Termwise categorical equivalences of chains of simplicial sets induce a categorical equivalence of mapping simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.objEquiv_symm_comp\", \"CategoryTheory.nerve.homEquiv\", \"SimplexCategory.SkeletalFunctor.isEquivalence\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"CategoryTheory.nerveEquiv\"], \"digest\": \"7c6397de6c45274d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned simplex-category, representable-simplex or quasicategory primitives, not mapping-simplex invariance."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, categorical equivalence, simplicial mapping simplex",
+   "results": "{\"t\": \"2026-10-17T04:28:12Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, categorical equivalence, simplicial mapping simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `categorical`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "query error: loogle: Unknown identifier `categorical`"
+  },
+  {
+   "tool": "grep",
+   "query": "categorical.?equivalence|mapping.?simplex",
+   "results": "{\"t\": \"2026-10-17T04:28:12Z\", \"tool\": \"grep\", \"query\": \"categorical.?equivalence|mapping.?simplex\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\"], \"digest\": \"3248c3b169be6d8c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned simplex-category, representable-simplex or quasicategory primitives, not mapping-simplex invariance."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A termwise categorical equivalence of a finite chain of simplicial sets induces a categorical equivalence of its mapping simplex",
+   "results": "{\"t\": \"2026-10-17T04:28:12Z\", \"tool\": \"leansearch\", \"query\": \"A termwise categorical equivalence of a finite chain of simplicial sets induces a categorical equivalence of its mapping simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.yonedaEquiv_map\", \"SimplexCategory.toCat_map\", \"SSet.yonedaEquiv\", \"SimplexCategory.skeletalEquivalence\", \"SSet.unitHomEquiv\", \"SimplexCategory.homEquivFunctor\", \"SimplexCategory.SkeletalFunctor.isEquivalence\", \"CategoryTheory.simplicialCosimplicialEquiv_functor_map_app\"], \"digest\": \"1f0ca712898e2643\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned simplex-category, representable-simplex or quasicategory primitives, not mapping-simplex invariance."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory",
+   "results": "{\"t\": \"2026-10-17T04:28:28Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.quasicategory_of_hasLiftingProperty\", \"SSet.Quasicategory.hasLiftingProperty\", \"SSet.quasicategory_iff_hasLiftingProperty\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.mk\"], \"digest\": \"9c4099b45a4b423f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned simplex-category, representable-simplex or quasicategory primitives, not mapping-simplex invariance."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingSimplex|mapping.?simplex|categorical equivalence",
+   "results": "{\"t\": \"2026-10-17T04:28:29Z\", \"tool\": \"grep\", \"query\": \"mappingSimplex|mapping.?simplex|categorical equivalence\", \"sub\": \"Mathlib/AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned simplex-category, representable-simplex or quasicategory primitives, not mapping-simplex invariance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Objectwise weak equivalences preserve the simplicial Grothendieck mapping cylinder over a finite ordinal in the Joyal model category",
+   "results": "{\"t\": \"2026-10-17T05:22:51Z\", \"tool\": \"leanfinder\", \"query\": \"Objectwise weak equivalences preserve the simplicial Grothendieck mapping cylinder over a finite ordinal in the Joyal model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.instWeakEquivalenceI₁\", \"HomotopicalAlgebra.Cylinder.instWeakEquivalenceI₀\", \"HomotopicalAlgebra.Cylinder.weakEquivalence_π\", \"HomotopicalAlgebra.Cylinder.instIsCofibrantI\", \"HomotopicalAlgebra.Cylinder.trans\", \"HomotopicalAlgebra.Cylinder.IsGood\", \"HomotopicalAlgebra.Cylinder.IsVeryGood\", \"HomotopicalAlgebra.Cylinder\"], \"digest\": \"e3a658e9cb12f3af\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic cylinder objects only. Read Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean:20-160; these have a weak-equivalence retraction with two sections, not mapping simplices of chains or categorical-equivalence invariance."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-mapping-simplex-final-edge",
@@ -64,7 +179,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, mapping-complex adjunction; descendant mapping-simplex input HTT Lemma 3.2.2.9, first paragraph invoking Remark 3.2.2.5.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, middle finite mapping-complex comparison; descendant lem-coef-mapping-simplex-final-edge invokes HTT Lemma 3.2.2.9, whose first proof paragraph uses Remark 3.2.2.5.",
    "via": [
     "lem-coef-mapping-simplex-final-edge",
     "lem-coef-cartesian-mapping-simplex-presentation",
@@ -81,5 +196,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-mapping-simplex-termwise-equivalence",
+  "worker": "stage1",
+  "summary": "Retained the statement and five-step induction, expanded the degreewise pushout and its face compatibility, and replaced the redundant one-cofibration gluing child by the existing lem-coef-model-cofibrant-colimit-comparison clause (b). Added the precise model-localization detection and left Quillen preservation citations. No new nodes or Mathlib leaves.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, finite mapping-complex comparison, through the recorded descendant chain to lem-coef-mapping-simplex-final-edge. Steps 1--4 supply HTT Remark 3.2.2.5 used in the first proof paragraph of HTT Lemma 3.2.2.9; Step 5 supplies its coherent-realization consequence."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-9fb92d51c",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-9fb92d51c (reviewer sub-agent of L); spot-checked: I read the mathematics in full. The delivery is one commit containing only the item and its report, with no new nodes. Source check: HTT is not archived under literature/, so I fetched the primary PDF into /tmp. Its §3.2.2 definition on printed p.179 (simplex = monotone f:J→[n] with σ:Δ^J→A_{f(max J)}, operators (f∘p, e∘σ)) and Remark 3.2.2.5 on p.180 (ladder functoriality; termwise categorical equivalences give a categorical equivalence) match the item's statement exactly, with no hypothesis added or dropped. The coherent-realization clause is proved in Step 5. Steps: Step 1 checks operator composition and ladder naturality. Step 2 sets up the induction uniformly over all ladders, with n=0 giving f_0. Step 3: I recomputed the degreewise pushout M(Z^-)⊔_{Z_n×Δ^{n-1}} Z_n×Δ^n, where the complement of K in P is exactly the α with α(r)=n; it is a simplicial bijection and the map of spans commutes; no transition map needs to be injective. Step 4 combines four cited statements: the product in hsSet_J (joyal-homotopy-exponentials) plus localization detecting weak equivalences gives f_n×1 as an equivalence; all objects are Joyal-cofibrant and K→P is a cofibration (joyal-model-structure); clause (b) of model-cofibrant-colimit-comparison then applies, with every hypothesis checked and no properness needed. Step 5: coherent realization is left Quillen (coherent-nerve-comparison), so by the derived-adjunction preservation clause it preserves weak equivalences between cofibrant objects, and Bergner weak equivalences are Dwyer–Kan equivalences. Edge cases checked: n=0, n=1 (mapping cylinder), empty chains, an empty last fiber, constant chains, and non-injective transitions. Graph: proof_deps equals the union of the step uses; all six cited nodes are split, reviewed and in the same unit (sk-prop-sf-biduality-general), so no tool_uses are needed; the dependency closure is acyclic (435 nodes); there is no SGA. Duplicates: I read every mapping-simplex node in the DAG, including lem-cbc-mapping-simplex-universal-equivalence and the cartesian-presentation, final-edge and cone-fibers nodes; none restates this theorem. No base-change morphism or coefficient category is involved (not a target node). No fixes made."
  }
 }
