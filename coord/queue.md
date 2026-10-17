@@ -1,6 +1,6 @@
 # Work queue
 
-24 items; claim with `tools/claim.py next <group> [--stage N]`.
+26 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (24)
+## Stage 3: modules to prove (26)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -29,6 +29,8 @@
 | `WeilConjectures.WeilSheaf.AffineLineCohomology` | 8 | 1 | proof |
 | `WeilConjectures.WeilSheaf.ArtinSchreierDual` | 8 | 1 | proof |
 | `WeilConjectures.WeilSheaf.TraceIsomorphism` | 9 | 1 | proof |
+| `Sheaf.CategoryTheory.AlphaCompactClassSmallClosed` | 10 | 1 | proof |
+| `Sheaf.CategoryTheory.GrothendieckDerivedPerfectWellGenerators` | 10 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy` | 10 | 1 | proof |
 | `WeilConjectures.WeilSheaf.FourierInversion.Composite` | 11 | 1 | proof |
 | `WeilConjectures.WeilSheaf.FourierInversion.Delta` | 11 | 1 | proof |
