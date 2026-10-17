@@ -12,9 +12,76 @@
   "lem-coef-brown-split-factorizations",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $L=\\operatorname{colim}_J$ and $R=\\operatorname{const}_J$. If $\\iota_j:X_j\\to LX$ are the chosen colimit legs, a map $a:LX\\to A$ gives the natural transformation $X\\to RA$ with components $a\\iota_j$. Conversely a natural transformation $X\\to RA$ is a cocone and therefore determines a unique such $a$. These operations are inverse by the uniqueness in [def-weil-pbc-category-colimit]. They commute with precomposition by diagram maps and postcomposition by maps of $A$, by checking on the legs. Thus $L\\dashv R$. For $J=\\varnothing$ the cocone has no legs and there is exactly one map from $LX$ to every object, so $LX$ is initial.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Stacks Tag 002F, categories-definition-colimit; cocones are exactly natural transformations to constants."
+   }
+  },
+  {
+   "text": "Let $a:X\\to Y$ be a Reedy cofibration and $q:U\\to V$ a trivial fibration in $\\mathcal M$. A square with left side $La$ and right side $q$ corresponds, by step 1, to a square with left side $a$ and right side $Rq$: restrict each horizontal map to its colimit legs. The hypothesis makes $Rq$ a Reedy trivial fibration, so the Reedy weak factorization system of [lem-coef-reedy-model-structure] gives a natural filler $Y\\to RU$. Its corresponding map $LY\\to U$ is a filler for the original square, because the two triangle equations hold on every colimit leg. Hence $La$ lifts against all trivial fibrations and is a cofibration by the ground weak factorization system. Repeat this same argument with $a$ a Reedy trivial cofibration and $q$ any fibration; now $Rq$ is a Reedy fibration, so $La$ lifts against all fibrations and is a trivial cofibration. This proves both preservation statements directly from the lifting-class definitions, without taking the adjunction criterion as a further lemma.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Lemma 1.3.4, printed p. 14 (adjunction and lifting); proof of Lemma 5.2.6, printed p. 127 (colimit–constant instance)."
+   }
+  },
+  {
+   "text": "The initial diagram $0_J$ is constant at an initial object $0$ of $\\mathcal M$: each component of a transformation from it is unique. A cocone from $0_J$ to any $A$ is likewise unique, so [def-weil-pbc-category-colimit] makes $L0_J$ initial, also when $J$ is empty. For a Reedy-cofibrant diagram $X$, the map $0_J\\to X$ is a Reedy cofibration by [lem-coef-reedy-model-structure]. Step 2 makes $L0_J\\to LX$ a cofibration. This is an initial map of $LX$, proving $LX$ cofibrant. The identification with any other chosen initial object is harmless: an isomorphism lifts against every map using its inverse, hence is a cofibration, and composing a lift for one left map with a lift for a second proves closure under composition.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Stacks Tag 002F, categories-definition-colimit, for the initial-diagram calculation; the cofibrant-object and lifting-class definitions in the cited Reedy node."
+   }
+  },
+  {
+   "text": "Let $f:X\\to Y$ be an objectwise weak equivalence between Reedy-cofibrant diagrams. By [lem-coef-reedy-model-structure] it is a weak equivalence in the Reedy model category. This category is complete and cocomplete: form any small limit or colimit at each object of $J$ and induce its structure maps by the ground universal properties; the functor laws and the universal property follow on each component. Its two weak factorization systems imply retract closure of the left and right classes: compose a lifting square with the retraction maps, lift for the larger arrow, and restrict the filler back. Thus it satisfies the model-category hypotheses of [lem-coef-brown-split-factorizations]. Applying its cofibrant clause gives maps $i:X\\to Z$, $p:Z\\to Y$, $s:Y\\to Z$ with $pi=f$, $ps=1_Y$, $p$ a trivial fibration, and $i,s$ cofibrations. Identity maps have the diagonal-lifting property against all maps (take the forced horizontal edge as filler), so are in the trivial classes and hence weak equivalences. Two-out-of-three for $pi=f$ and $ps=1_Y$ now gives that both $i$ and $s$ are weak equivalences. They are therefore Reedy trivial cofibrations.",
+   "uses": [
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Lemma 1.1.12 (Ken Brown), printed pp. 6–7; the split factorization is supplied by the cited Brown node and the Reedy model structure by its cited node."
+   }
+  },
+  {
+   "text": "Step 2 makes $Li$ and $Ls$ trivial cofibrations, hence weak equivalences. Since $(Lp)(Ls)=L(ps)=1_{LY}$, two-out-of-three in $\\mathcal M$ from [lem-coef-reedy-model-structure] gives that $Lp$ is a weak equivalence. Since $Lf=(Lp)(Li)$, another application of two-out-of-three gives that $Lf$ is a weak equivalence. Together with step 3 this proves both assertions; the argument imposes no fibrancy condition on the diagrams or their values.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Lemma 1.1.12, printed pp. 6–7: apply the functor to the two split-factorization identities."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-reedy-model-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, derived coefficient adjunction: additional foundational Reedy-colimit argument expanded here; checked against Hovey online, Lemmas 1.1.12, 1.3.4 and the proof of 5.2.6, on 2026-10-17. The Hovey PDF is not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +137,58 @@
    "results": "[loogle] OK 0 hit(s)",
    "date": "2026-10-17",
    "verdict": "no match: valid name-fragment query returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy.*colimit|colimit.*Reedy|weakEquivalence.*colimit|BrownLemma",
+   "sub": "AlgebraicTopology",
+   "results": "{\"t\": \"2026-10-17T05:31:15Z\", \"tool\": \"grep\", \"query\": \"Reedy.*colimit|colimit.*Reedy|weakEquivalence.*colimit|BrownLemma\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\"], \"digest\": \"7286dc2a7f2a5a8f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. The cofibrant-subcategory inclusion and its derivability structure do not state preservation by an arbitrary colimit functor; Brown factorization is already the separate cited Mathlib leaf. Reedy/Basic.lean:21–24 explicitly leaves Reedy diagram model structures as TODO; the source grep hits are references, finite colimit assumptions, cylinder coprojection calculations, or Brown factorizations, not this theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reedy colimit preserves weak equivalences of cofibrant diagrams if constant diagrams preserve fibrations",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T05:31:15Z\", \"tool\": \"leansearch\", \"query\": \"Reedy colimit preserves weak equivalences of cofibrant diagrams if constant diagrams preserve fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.preservesColimit\", \"CategoryTheory.Limits.isColimitCofanMkObjOfIsColimit\", \"CategoryTheory.Limits.IsColimit.whiskerEquivalence\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"CategoryTheory.Limits.isColimitMapCoconeCofanMkEquiv\", \"CategoryTheory.Limits.preservesColimits_const\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"CategoryTheory.Limits.isColimitOfPreserves\"], \"digest\": \"99d9e3ee1951b632\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. The cofibrant-subcategory inclusion and its derivability structure do not state preservation by an arbitrary colimit functor; Brown factorization is already the separate cited Mathlib leaf. Reedy/Basic.lean:21–24 explicitly leaves Reedy diagram model structures as TODO; the source grep hits are references, finite colimit assumptions, cylinder coprojection calculations, or Brown factorizations, not this theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"Cofibrant\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T05:31:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"colimit\\\", \\\"Cofibrant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. The cofibrant-subcategory inclusion and its derivability structure do not state preservation by an arbitrary colimit functor; Brown factorization is already the separate cited Mathlib leaf. Reedy/Basic.lean:21–24 explicitly leaves Reedy diagram model structures as TODO; the source grep hits are references, finite colimit assumptions, cylinder coprojection calculations, or Brown factorizations, not this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint whose right adjoint preserves fibrations and trivial fibrations preserves weak equivalences between cofibrant objects",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T05:31:17Z\", \"tool\": \"leanfinder\", \"query\": \"A left adjoint whose right adjoint preserves fibrations and trivial fibrations preserves weak equivalences between cofibrant objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantBrownFactorization.instWeakEquivalenceICofibrationsTrivialFibrations\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\"], \"digest\": \"45c48e36548c249f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. The cofibrant-subcategory inclusion and its derivability structure do not state preservation by an arbitrary colimit functor; Brown factorization is already the separate cited Mathlib leaf. Reedy/Basic.lean:21–24 explicitly leaves Reedy diagram model structures as TODO; the source grep hits are references, finite colimit assumptions, cylinder coprojection calculations, or Brown factorizations, not this theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Quillen|colimit|CofibrantBrownFactorization",
+   "sub": "AlgebraicTopology/ModelCategory",
+   "results": "{\"t\": \"2026-10-17T05:32:02Z\", \"tool\": \"grep\", \"query\": \"Quillen|colimit|CofibrantBrownFactorization\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\"], \"digest\": \"e6dce7bf516ccb2d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. The cofibrant-subcategory inclusion and its derivability structure do not state preservation by an arbitrary colimit functor; Brown factorization is already the separate cited Mathlib leaf. Reedy/Basic.lean:21–24 explicitly leaves Reedy diagram model structures as TODO; the source grep hits are references, finite colimit assumptions, cylinder coprojection calculations, or Brown factorizations, not this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The colimit functor is left Quillen and preserves cofibrant objects and weak equivalences between cofibrant Reedy diagrams",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T05:32:05Z\", \"tool\": \"leanfinder\", \"query\": \"The colimit functor is left Quillen and preserves cofibrant objects and weak equivalences between cofibrant Reedy diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\"], \"digest\": \"26025a3a3a0d7e90\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. The cofibrant-subcategory inclusion and its derivability structure do not state preservation by an arbitrary colimit functor; Brown factorization is already the separate cited Mathlib leaf. Reedy/Basic.lean:21–24 explicitly leaves Reedy diagram model structures as TODO; the source grep hits are references, finite colimit assumptions, cylinder coprojection calculations, or Brown factorizations, not this theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-all-cofibrant-simplicial-recognition",
@@ -101,5 +216,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-reedy-colimit-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Wrote the colimit–constant adjunction directly from the universal property, transported lifting squares explicitly to prove cofibration and trivial-cofibration preservation, checked the initial-diagram colimit, and applied the existing Brown split-factorization node in the existing Reedy model category. No new nodes. Read the current and master blueprint ancestor, Stacks 002F and Hovey online; the source is requested for archival. Reused prior searches and recorded six further actual Mathlib searches with two semantic phrasings and inspected results.",
+  "blueprint": "The nearest blueprint ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 (current snapshot sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md): the derived coefficient adjunction and displayed R Hom / inverse-limit calculation. This technical descendant supplies the colimit argument for the simplicial presentation reached through the preserved blueprint.from.via ancestry; no unit or chapter route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-f83803679",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-f83803679 (reviewer sub-agent of L); spot-checked: I read the item in full: its unchanged statement, five steps, dependencies, blueprint fields and 13 search records. I also read the full statements of the three cited nodes: lem-coef-reedy-model-structure, lem-coef-brown-split-factorizations (also checked against the pinned Mathlib BrownLemma.lean:48-64) and def-weil-pbc-category-colimit (Stacks 002F, label categories-definition-colimit, confirmed in tags/tags). The statement is true and not weakened: it is Hovey 5.2.6 (colim is left adjoint to const, so colim is left Quillen) followed by Ken Brown 1.1.12. Small cases checked: the empty category, the one-object category, discrete J, and the walking span used by the parent. Step 1 derives the adjunction from the colimit universal property. Step 2 moves lifting squares across the adjunction and uses the lifting-class description of both factorization systems; this is Hovey 1.3.4 written out. Step 3 shows the colimit of the initial diagram is initial and adds that isomorphisms are cofibrations and cofibrations compose. Step 4 checks the hypotheses of the Brown node in M^J and applies its statement, not its proof. Step 5 finishes by two-out-of-three. proof_deps equals the union of the step uses, and there is no cycle. The general candidate lem-coef-model-infinity-derived-adjunction cannot be cited here, because its dependencies already reach this item, so citing it would close a cycle. No other duplicate was found. The delivery creates no new nodes. Both cited statements are in the item's unit (sk-prop-sf-biduality-general), so no tool_uses are needed. No SGA source is used. Hovey is not archived, so the report rightly files a WANTED line and sets proof_origin.by to agent. One harmless report inaccuracy: it lists citations.json and searches.jsonl, which are not in the delivered commit. No fixes."
  }
 }

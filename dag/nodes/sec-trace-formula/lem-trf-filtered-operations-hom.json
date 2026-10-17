@@ -13,9 +13,220 @@
   "prop-functor-package",
   "lem-sf-proetale-constructible-origin"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first in finite filtered complexes of an abelian category. In an enclosing universe the dg category of such complexes has Hom complex consisting of filtration-preserving graded maps, with differential $d(h)=d_Nh-(-1)^{|h|}hd_M$. It satisfies (A),(B),(C) of [lem-coef-dg-abc-homotopy-category-triangulated]: direct sums and shifts carry the termwise filtrations; the cone of $u$ has terms $N^i\\oplus M^{i+1}$, filtration $F^pN^i\\oplus F^pM^{i+1}$, and differential $(d_N,u;0,-d_M)$. The admissible sequence $N\\to C(u)\\to M[1]$ has the displayed degreewise inclusions/projections and boundary $u[1]$. Hence the filtered homotopy category is triangulated, also with bounded cochain degrees. The objects whose every grade is acyclic form a full replete triangulated subcategory: graded cones and shifts are ordinary cones and shifts, so [lem-sf-derived-homology-long-exact] applied to a graded cone gives closure under triangles. Apply [lem-trf-triangulated-subcategory-cone-system] and [lem-pur-localization-triangles-05r6]. The cone class is exactly the graded quasi-isomorphisms. Thus the localization of [def-trf-bounded-filtered-derived-category] is triangulated with cone triangles. Passing from chain maps to filtered homotopy classes makes no difference to the localization: the filtered cylinder of $M$ is the direct sum of $M$ and its contractible identity cone; its projection to $M$ is a graded quasi-isomorphism, so homotopic maps become equal. All constructions preserve a common finite filtration interval. The same argument without a cochain bound gives $DF(\\mathbf{Ab})$.",
+   "uses": [
+    "def-trf-bounded-filtered-derived-category",
+    "lem-coef-dg-abc-homotopy-category-triangulated",
+    "lem-trf-triangulated-subcategory-cone-system",
+    "lem-pur-localization-triangles-05r6",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Filtered derived categories, construction by cones; Varshavsky §§5.1.1–5.1.2. General cone triangulation and localization supplied by the cited nodes."
+   }
+  },
+  {
+   "text": "The module-sheaf category is Grothendieck by [lem-pur-ringed-site-grothendieck-abelian], hence has enough injectives by [lem-sp-grothendieck-enough-injectives]. Apply [lem-trf-filtered-derived-hom-calculus] for the bounded filtration-truncation functors and their natural distinguished triangles. Graded functors are exact since they commute with shifts and cones. For the unbounded finite-filtered $DF(\\mathbf{Ab})$, the same representative calculation works: truncations retain a grade or replace it by zero, and the cone projection $C(F^pM\\to M)\\to M/F^pM$ is the identity below $p$ and the projection of a contractible identity cone to zero at or above $p$. Thus it is a graded quasi-isomorphism and identifies the cone triangle with the truncation triangle. Forgetting filtration preserves graded quasi-isomorphisms: apply [lem-weil-pbc-complex-ses-homology-long-exact] successively to $0\\to F^{i+1}M\\to F^iM\\to\\operatorname{gr}^iM\\to0$, over the finite filtration interval. Forgetting also commutes with cones and shifts, so is exact. In both bounded and unbounded categories, if every grade of $M$ is zero then $0\\to M$ is a graded quasi-isomorphism and becomes invertible. Applying this to a cone also proves detection of isomorphisms.",
+   "uses": [
+    "def-trf-bounded-filtered-derived-category",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-trf-filtered-derived-hom-calculus",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.2(b,c)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-filtered-derived-hom-calculus] to $\\mathcal A=\\operatorname{Mod}(A_X)$, which has enough injectives by step 2. Its bounded finite-filtered localization is exactly the category of [def-trf-bounded-filtered-derived-category]. It supplies the filtered global Hom $H\\in DF^+(\\mathbf{Ab})$, the identification $\\omega H\\simeq R\\operatorname{Hom}_X(\\omega M,\\omega N)$, and $\\operatorname{gr}^rH\\simeq\\bigoplus_p R\\operatorname{Hom}_X(\\operatorname{gr}^pM,\\operatorname{gr}^{p+r}N)$. View $H$ in $DF(\\mathbf{Ab})$ through the fully faithful bounded-below inclusion of [lem-trf-filtered-bounded-localization-comparison]. This inclusion is induced by the same complexes and graded quasi-isomorphisms, so it preserves forgetting, grades and filtration truncations. The formula is the requested one with $q=p+r$.",
+   "uses": [
+    "lem-trf-filtered-derived-hom-calculus",
+    "def-trf-bounded-filtered-derived-category",
+    "lem-trf-filtered-bounded-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.5 and Lemma 5.1.4, global Hom model"
+   }
+  },
+  {
+   "text": "The morphism-computation clause of [lem-trf-filtered-derived-hom-calculus] gives $\\operatorname{Hom}_{D^bF}(M,N)\\simeq H^0(\\omega t^{\\ge0}H)$. Its next two clauses identify the actual maps: forgetting is induced by $\\omega t^{\\ge0}H\\to\\omega H$, and projection to $H^0(\\operatorname{gr}^0H)$ has components $\\operatorname{gr}^pu$. Under the fully faithful embeddings of [lem-trf-filtered-bounded-localization-comparison], this is the bounded filtered Hom group of the statement and the same inclusion/projection for the object $H$ in $DF(\\mathbf{Ab})$. Thus no further global-Hom construction or comparison is needed.",
+   "uses": [
+    "lem-trf-filtered-derived-hom-calculus",
+    "lem-trf-filtered-bounded-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.5, last two sentences"
+   }
+  },
+  {
+   "text": "Choose $N\\to I$ from [lem-trf-filtered-localization-injective-model] and define the sheaf Hom complex with $F^r\\mathcal Hom^\\bullet(M,I)$ consisting of maps sending $F^pM$ into $F^{p+r}I$. On every slice site, restriction of an injective module sheaf is injective: by [lem-pur-site-restriction-module-adjunction-exact] it has the left adjoint extension by zero, which is exact (also [lem-weil-pbc-ringed-slice-extension-preserves-exact]), so Hom into the restriction is Hom into an injective composed with an exact functor. Split each finite filtered injective target term by splitting its top injective subobject and repeating on the quotient. A map to its grade-$q$ summand $J_q$ in filtration degree $r$ is a map $M/F^{q-r+1}M\\to J_q$. Restriction to $F^{q-r}M/F^{q-r+1}M$ is surjective by injectivity; its kernel is the condition for degree $r+1$. Consequently restriction gives the canonical, splitting-independent graded sheaf-complex isomorphism $\\operatorname{gr}^r\\mathcal Hom^\\bullet(M,I)\\simeq\\bigoplus_p\\mathcal Hom^\\bullet(\\operatorname{gr}^pM,\\operatorname{gr}^{p+r}I)$. The ordinary internal-Hom model [lem-sfb-derived-internal-hom-sections-model] applies to these bounded-below injective complexes by [lem-weil-pbc-bounded-below-injectives-kinjective]. It proves descent on grades under changes of source or injective resolution, hence descent in the finite filtered localization. This defines $R\\mathcal Hom^F$ with the stated grades and underlying internal Hom. Chain Hom takes cones to the signed Hom cones in both variables, proving exactness after resolution. The package [prop-functor-package] supplies bounded ctf outputs for each grade; the finite number of grades and the bounded-representative clause of [lem-trf-filtered-bounded-localization-comparison] give a bounded filtered ctf output.",
+   "uses": [
+    "lem-trf-filtered-localization-injective-model",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-slice-extension-preserves-exact",
+    "lem-sfb-derived-internal-hom-sections-model",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "prop-functor-package",
+    "lem-trf-filtered-bounded-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.2.1(b), filtered internal Hom"
+   }
+  },
+  {
+   "text": "Take split-flat resolving models $P\\to M$ and $Q\\to N$ from [lem-trf-finite-filtered-flat-resolution]. Form their ordinary total tensor with $F^r=\\sum_{p+q=r}\\operatorname{im}(F^pP\\otimes F^qQ)$. In every pair of cochain degrees the chosen splittings identify this filtration with the sum of the components whose grade sum is at least $r$. Projection modulo $F^{r+1}$ consequently gives a canonical, splitting-independent map from $\\bigoplus_{p+q=r}\\operatorname{gr}^pP\\otimes\\operatorname{gr}^qQ$ to grade $r$, and the split calculation proves it is an isomorphism. It commutes with the tensor differential, including its Koszul sign, so holds after totalization. The resolution node gives K-flatness of each grade and of the underlying complex, acyclicity preservation, and equivalence of the resolving localization. Thus total tensor descends in both variables, its forgetting is ordinary derived tensor, and its grade is the finite derived-tensor sum in the statement. Cones commute with total tensor, proving exactness in both variables. Apply the ctf tensor stability in [prop-functor-package] and the finite-grade bounded-representative assertion of [lem-trf-filtered-bounded-localization-comparison] to restrict to the stated bounded domains.",
+   "uses": [
+    "lem-trf-finite-filtered-flat-resolution",
+    "prop-functor-package",
+    "lem-trf-filtered-bounded-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.2.1(b), filtered tensor"
+   }
+  },
+  {
+   "text": "Use [lem-pc-sheaf-modules-tensor-closed] and the exact-tensor definition [def-pc-flat-sheaf-modules]. The ordinary chain tensor--Hom adjunction restricts to filtered maps: a map $P\\otimes Q\\to I$ preserves filtration exactly when its adjoint sends $F^pP$ into $F^p\\mathcal Hom^\\bullet(Q,I)$. It respects differentials and filtered homotopies. Choose $P,Q$ split-flat and bounded above by [lem-trf-finite-filtered-flat-resolution], and $I$ split-injective and bounded below by [lem-trf-filtered-localization-injective-model]. Terms of the shifting sheaf Hom from $Q$ to $I$ are finite sums of internal Homs from flat to injective modules. Such an internal Hom is injective, since its Hom functor is Hom into an injective composed with exact flat tensor. The cochain-index products are finite by the two opposite bounds. Thus this Hom is bounded below and filtered injective. To compute maps from a possibly unbounded-below resolving source, choose $c$ below its graded cohomological lower bound and below the target's first nonzero degree minus two. The good truncation of [lem-trf-filtered-bounded-localization-comparison] gives a bounded source and changes no Hom terms in degrees $-1,0,1$. Its $H^0$ is therefore unchanged, and the bounded-source injective comparison applies. This applies also to the tensor source. Descending the chain bijection proves the filtered tensor--Hom adjunction. Evaluation, units and associativity/composition use these chain formulas, so forget to the ordinary maps. Apply [lem-trf-filtered-bifunctor-graded-comparison] to the lifts just constructed: their support intervals add for tensor and subtract for internal Hom, by steps 5–6. Its transformation clause gives the canonical ordinary graded maps for supplied lifted transformations.",
+   "uses": [
+    "lem-trf-finite-filtered-flat-resolution",
+    "lem-trf-filtered-localization-injective-model",
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-trf-filtered-bounded-localization-comparison",
+    "lem-trf-filtered-bifunctor-graded-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.2.2, filtered tensor--Hom adjunction; Lemma 5.1.4(i)–(iii) applied through the cited bifunctor comparison node."
+   }
+  },
+  {
+   "text": "For $f^*$, $Rf_*$, $j_!$, and the supplied compactification composite $Rf_!$, apply [lem-trf-filtered-derived-operation-lifts]. Its statement supplies the filtered adjunction $f^*\\dashv Rf_*$ and the identity, composition, proper, compactification and unit--square--counit exchange maps, with exactly the asserted forgetful and graded maps. Apply [prop-functor-package] to their stated ctf domains; it supplies the ordinary bounded constructible landing, finite Tor conditions, compactification comparisons, and base-change isomorphisms. Because only finitely many grades occur, the common-bound argument in [lem-trf-filtered-bounded-localization-comparison] gives bounded filtered outputs. Every comparison declared invertible by the package is invertible after filtering: its grade is that ordinary comparison by the lift theorem, and its cone has zero grades by step 2. This uses no exceptional adjunction outside the admissible package domain.",
+   "uses": [
+    "lem-trf-filtered-derived-operation-lifts",
+    "prop-functor-package",
+    "lem-trf-filtered-bounded-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.2.1(b)–5.2.2, unary operations"
+   }
+  },
+  {
+   "text": "Place $\\omega_X$ in filtration degree zero and put $D_X^FM=R\\mathcal Hom^F(M,\\omega_X)$. Step 5 and [lem-trf-filtered-bifunctor-graded-comparison] give $\\operatorname{gr}^rD_X^FM=D_X\\operatorname{gr}^{-r}M$ and a filtered biduality map defined by evaluation. Its grades are the usual biduality maps, isomorphisms by [thm-fix-general-biduality], so step 2 makes this a filtered anti-equivalence on the ctf category. Following §5.2.1(b), define the filtered exceptional pair by $Rf_!^F=D_Y^FRf_*^FD_X^F$ and $Rf^{!F}=D_X^Ff^{*F}D_Y^F$ on the domains of [prop-functor-package]. Their underlying functors are the named ordinary functors by its Verdier exchange and exceptional-dual formulas. Their adjunction follows from the three bijections\n$\\operatorname{Hom}(D_YRf_*D_XM,N)\\cong\\operatorname{Hom}(D_YN,Rf_*D_XM)\\cong\\operatorname{Hom}(f^*D_YN,D_XM)\\cong\\operatorname{Hom}(M,D_Xf^*D_YN)$.\nAll are now filtered bijections, using the ordinary filtered adjunction of step 8 and filtered biduality. Both contravariant reversals cancel, giving the same grade index for $Rf_!$ and $Rf^!$. This defines the exceptional unit and counit with their ordinary graded maps. We use these duality-defined filtered exceptional operations for the six-operation system, as in the source; step 8 separately constructed a compactification model. Step 10 constructs transformations for this duality-defined system. There is no use here of an exceptional adjunction for the compactification model before it has been constructed.",
+   "uses": [
+    "def-trf-bounded-filtered-derived-category",
+    "prop-functor-package",
+    "thm-fix-general-biduality",
+    "lem-trf-filtered-derived-operation-lifts",
+    "lem-trf-filtered-bifunctor-graded-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.2.1(b), definition via filtered Verdier duality"
+   }
+  },
+  {
+   "text": "Apply the recursive construction of §5.2.2 to the duality-defined exceptional system of step 9. Its generators are the ordinary filtered adjunction of step 8, the exceptional adjunction of step 9, tensor--Hom adjunction and evaluation of step 7, pullback-composition identifications, and inverses of their specified comparison isomorphisms. For example an exchange mate is the composite inserting the unit, the commuting-square pullback identification and the counit. Composition of right adjoints is the mate of the pullback-composition identification; the corresponding exceptional composition is its dual. Projection/evaluation maps are the tensor--Hom adjoints of the associated evaluation composites. These prescriptions are precisely the canonical ordinary prescriptions, now applied to filtered adjunctions. The compactification, proper and exchange data supplied by [lem-trf-filtered-derived-operation-lifts] are the unary initial maps, and [prop-functor-package] supplies the ordinary domains and comparisons. Forgetting each recursively constructed map yields that ordinary map; [lem-trf-filtered-bifunctor-graded-comparison] and the unary lift theorem identify its grades with the ordinary prescriptions too. Whenever the ordinary prescription is an isomorphism, its filtered cone has zero grades, so the map has an inverse by step 2. Compositions, whiskering and inverses preserve all of these comparisons. Thus the adjunction, base-change, evaluation and trace-construction transformations asserted in the item have the required lifts; the argument uses their defining adjunction formulas, not an assertion about arbitrary natural transformations of triangulated functors.",
+   "uses": [
+    "lem-trf-filtered-derived-operation-lifts",
+    "prop-functor-package",
+    "lem-trf-filtered-bifunctor-graded-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.2.2"
+   }
+  },
+  {
+   "text": "Exactness of $\\nu_X^*$ from [lem-sf-comparison-pullback-exact] makes its termwise application preserve subquotients, cones and graded quasi-isomorphisms. It therefore defines a filtered comparison commuting with $\\omega$, $t$ and all grades. Restrict to finite ctf graded pieces by [lem-sf-proetale-constructible-origin] and both directions of [lem-sf-comparison-tor-amplitude]. For pure objects supported in grades $p,q$, filtered Hom into a pure injective resolution is ordinary derived Hom if $p\\le q$, and zero if $p>q$; this follows directly from the filtration-preserving-map condition and [lem-trf-filtered-localization-injective-model]. The bounded-localization comparison [lem-trf-filtered-bounded-localization-comparison] identifies these computations with bounded filtered Hom. The ordinary constructible derived equivalence thus gives bijections on these Hom groups, in every cochain shift. Apply the finite truncation triangles successively in the source and target, and [lem-weil-pbc-hom-into-triangle-exact] (also in the opposite triangulated category) to their exact Hom sequences. The diagram chase proves bijectivity for every pair: lift a desired map using the two neighboring bijections, correct its lift by the preceding boundary, and use the following bijection to test its obstruction; the same chase with a zero image proves injectivity. This proves full faithfulness of filtered comparison. For essential surjectivity induct on the finite number of grades: lift a pure graded piece by the ordinary equivalence and the remaining filtration by induction, lift their connecting morphism by full faithfulness, and take its cone shifted to realize the required extension triangle. Tor-amplitude reflection ensures the lifted grades are in the étale ctf domain. This is an equivalence of the actual bounded finite-filtered localizations specified in the statement, not a replacement category of arbitrary diagrams in the derived category.",
+   "uses": [
+    "def-trf-bounded-filtered-derived-category",
+    "lem-sf-comparison-pullback-exact",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-trf-filtered-localization-injective-model",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-trf-filtered-bounded-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.2, finite-filtration induction; comparison assembled from the cited finite-coefficient results"
+   }
+  },
+  {
+   "text": "To obtain one compatible system, choose the preceding filtered six-operation constructions on the étale side and transport them through the filtered equivalences of step 11. The underlying ordinary system is the pro-étale system in the statement: [det-ctf-finite-comparison-localizing] compares $f^*,Rf_*,j_!$ and the compactification definition of $Rf_!$ on these ctf inputs, and [prop-functor-package] identifies that definition with the duality-defined $Rf_!$. Exact inverse image [lem-sf-comparison-pullback-exact] is module pullback along the flat ringed comparison morphism; by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] it carries flat K-flat representatives to flat K-flat representatives and commutes with derived tensor product, so the tensor comparison has on each grade exactly the summands computed in step 6 and is invertible by step 2. For internal Hom, use the adjunction mate of this tensor comparison. Both ordinary internal Homs are ctf by [prop-functor-package]. Test this mate against any ctf object: ordinary full faithfulness from [lem-sf-proetale-constructible-origin] and the tensor--Hom adjunction identify the two Hom groups and their mate bijectively, so Yoneda identifies the transported internal Hom with the ordinary one. Uniqueness of right adjoints similarly identifies transported $Rf^!$ with its package adjoint, only where admitted. Apply this to the structure morphism and the constant $A$ to identify transported $\\omega_X$ and hence Verdier duality. The unit, counit and evaluation correspond under the defining adjunction bijections; [lem-trf-filtered-bifunctor-graded-comparison] identifies their graded bifunctor maps, so every recursive transformation of step 10 corresponds too. This gives the required ordinary and graded comparisons. For global filtered Hom, the ordinary comparison unit $K\\to R\\nu_*\\nu^*K$ and derived adjunction induce the filtered comparison using injective models; [sk-prop-sf-comparison] identifies its ordinary graded global-Hom maps, so step 2 makes it invertible. This also compares the Hom projections.",
+   "uses": [
+    "det-ctf-finite-comparison-localizing",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "prop-functor-package",
+    "lem-sf-proetale-constructible-origin",
+    "sk-prop-sf-comparison",
+    "lem-trf-filtered-bifunctor-graded-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.2.1–5.2.2, finite-coefficient comparison via adjunction mates"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-trf-bounded-filtered-derived-category",
+  "det-ctf-finite-comparison-localizing",
+  "lem-coef-dg-abc-homotopy-category-triangulated",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-localization-triangles-05r6",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-trf-filtered-bifunctor-graded-comparison",
+  "lem-trf-filtered-bounded-localization-comparison",
+  "lem-trf-filtered-derived-hom-calculus",
+  "lem-trf-filtered-derived-operation-lifts",
+  "lem-trf-filtered-localization-injective-model",
+  "lem-trf-finite-filtered-flat-resolution",
+  "lem-trf-triangulated-subcategory-cone-system",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-ringed-slice-extension-preserves-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-functor-package",
+  "sk-prop-sf-comparison",
+  "thm-fix-general-biduality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§§5.1.1–5.2.2, including the proof of Lemma 5.1.4; resolution-model and finite-filtered comparison details expanded by N7 using the cited Stacks and existing comparison nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -75,7 +286,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-triangle-compatibility",
@@ -92,5 +303,144 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-filtered-operations-hom",
+  "worker": "stage1",
+  "summary": "Repair of the structural return: steps 2–4 now cite the existing filtered derived-Hom calculus as a declared tool from sk-i-curve-zero. Added the statement-only bifunctor graded-comparison lemma (Varshavsky Lemma 5.1.4(i)–(iii)), cited in steps 7, 9, 10 and 12. Kept the explicit tensor–Hom adjunction/injectivity/cutoff argument in step 7 and the sheaf internal-Hom calculation in step 5. Deleted the unnecessary compactification/duality identification sentence from step 10. Statement and imported provenance are retained.",
+  "blueprint": "Realizes the Additivity proof paragraph of lem-trf-trace-triangle-compatibility: supplies filtered bifunctors, their natural transformations and Hom projections used to make the two-step filtered c-morphism.",
+  "tool_uses": [
+   {
+    "node": "def-pc-flat-sheaf-modules",
+    "why": "Steps 7 use the statement of Flat sheaf of modules on a ringed site as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "det-ctf-finite-comparison-localizing",
+    "why": "Steps 12 use the statement of $\\nu_X^*$ identifies the localizing closures as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-coef-dg-abc-homotopy-category-triangulated",
+    "why": "Steps 1 use the statement of Triangulation from the abstract dg-category axioms A, B and C as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Steps 7 use the statement of Sheaves of modules on a site form a symmetric monoidal closed category as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-pur-localization-triangles-05r6",
+    "why": "Steps 1 use the statement of Distinguished triangles in a triangulated localization come from the source as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Steps 2 use the statement of Sheaves of modules on a small ringed site are Grothendieck abelian as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Step 5 takes from its statement the adjunction j_{U!} ⊣ j_U^* with exact j_{U!} for module sheaves on a slice, so that restriction preserves injectives; generic sheaf tool, the trace-additivity unit has no replacement (added by the maintainer reader)."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Steps 11, 12 use the statement of The comparison pullback is exact on sheaves of modules and commutes with cohomology sheaves as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Steps 11 use the statement of Finite Tor amplitude under the site comparison as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Steps 1 use the statement of Long exact cohomology sequence of a distinguished triangle in the derived category as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Steps 11, 12 use the statement of Constructible pro-étale coefficients are of étale origin as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-sfb-derived-internal-hom-sections-model",
+    "why": "Steps 5 use the statement of Derived internal Hom into a K-injective and its derived global sections as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Steps 2 use the statement of Grothendieck abelian categories have enough injectives as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-trf-filtered-derived-hom-calculus",
+    "why": "Steps 2–4 use the generic truncation triangles and filtered global Hom calculus (including its forgetful map and graded projection) from unit sk-i-curve-zero; sk-i-additivity requires this tool without replacing its proof route."
+   },
+   {
+    "node": "lem-trf-filtered-derived-operation-lifts",
+    "why": "Steps 8, 9, 10 use the statement of Filtered lifts of sheaf-derived operations and their canonical adjunction maps as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-trf-filtered-localization-injective-model",
+    "why": "Steps 5, 7, 11 use the statement of Filtered-injective representatives and Hom computation in the filtered localization as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Steps 5 use the statement of Bounded-below complexes of injectives are K-injective as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "Steps 2 use the statement of Long exact cohomology sequence of a short exact sequence of cochain complexes as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-hom-into-triangle-exact",
+    "why": "Steps 11 use the statement of Hom(W,-) applied to a distinguished triangle: zero composite and exactness at the middle and at X[1] as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-preserves-exact",
+    "why": "Steps 5 use the statement of Ringed-slice extension preserves exactness as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Step 12 takes from its statement that module pullback along a morphism of ringed topoi preserves flat K-flat complexes and commutes with derived tensor product, applied to the site comparison ν; generic tool, the trace-additivity unit has no replacement (added by the maintainer reader)."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Steps 5, 6, 8, 9, 10, 12 use the statement of Coefficient and functor package on the proved domains as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "sk-prop-sf-comparison",
+    "why": "Steps 12 use the statement of Bounded-below cohomology comparison as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   },
+   {
+    "node": "thm-fix-general-biduality",
+    "why": "Steps 9 use the statement of Finite-stage Verdier biduality as a generic construction, exactness, adjunction or coefficient-comparison tool; the trace-additivity unit has no replacement for this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-flat-sheaf-modules",
+  "det-ctf-finite-comparison-localizing",
+  "lem-coef-dg-abc-homotopy-category-triangulated",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-localization-triangles-05r6",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-trf-filtered-derived-hom-calculus",
+  "lem-trf-filtered-derived-operation-lifts",
+  "lem-trf-filtered-localization-injective-model",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-ringed-slice-extension-preserves-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-functor-package",
+  "sk-prop-sf-comparison",
+  "thm-fix-general-biduality"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-2a7ca2011",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-2a7ca2011 (reviewer sub-agent of L); spot-checked: Read the item (unchanged statement, 12 steps), all four new nodes and every cited statement, plus Varshavsky pp. 38–43 (§§5.1.1–5.2.3, including the proof of Lemma 5.1.4), Stacks 05RG/05S5/05S6/077J/06YS/06YQ and Mathlib Triangulated/Subcategory.lean:462–469,520,546,551,603,623,644. The statement matches Varshavsky. Grade formulas checked: covariant [a+c,b+d] gives p+q=r; contravariant [−b+c,−a+d] reindexes to q−p=r; gr^r D^F M = D gr^{−r} M; the two reversals cancel for f^!. Coefficients are A_{E,n} on the pro-étale site, with an explicit filtered étale comparison (step 11): pure-grade Hom is the ordinary Hom for p≤q and 0 for p>q, then a five-lemma induction, with Tor-amplitude reflection for essential surjectivity. Rf^! is used only on the package's admitted domain. New nodes: the bifunctor lemma is a faithful Lemma 5.1.4, distinct from the unary lem-trf-filtered-functor-graded-comparison. The bounded-localization node is true: the cutoff differential is strict when the gr pieces are acyclic below c. It generalizes the existing bounded→plus embedding node; that is not a duplicate fault. The flat-resolution node is true and declared agent-formulated, with Illusie WANTED. The trW node is an exact Mathlib leaf, one instance per clause. Fixes (C1, citing existing nodes): step 5 now cites lem-pur-site-restriction-module-adjunction-exact for j_! ⊣ j^*, so restriction preserves injectives. Step 12 now cites lem-weil-pbc-ringed-topoi-derived-tensor-pullback, so ν^* preserves flat K-flat representatives and commutes with ⊗^L. proof_deps and split_report.tool_uses are updated for both. No cycle; no SGA. All other declared tool uses are accepted.; 1 file(s) fixed by the reviewer"
  }
 }

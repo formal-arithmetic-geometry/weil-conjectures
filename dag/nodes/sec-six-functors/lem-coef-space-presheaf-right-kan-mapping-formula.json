@@ -11,10 +11,100 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "Put $K=N(J)^{\\mathrm{op}}$ and $L=N(A)^{\\mathrm{op}}$. The discrete functor $W:N(J)\\times L\\to\\mathcal S_{\\mathcal V}$ is $W(j,a)=\\operatorname{Hom}_J(u(a),j)$, with postcomposition in $j$ and precomposition in $a$. These actions commute by associativity in $J$. Write $W_j=W(j,-)=u^*h_j$. Construct $RQ(j)=\\operatorname{Map}_{\\mathcal P_A}(W_j,Q)$. The local-smallness clause of [lem-coef-spatial-mapping-interchange] gives $\\mathcal V$-small Kan models for these values; coherent precomposition and postcomposition from [lem-coef-infinity-hom-bifunctor-functoriality] assemble them into $R:\\mathcal P_A\\to\\mathcal P_J$. Functor categories are formed in a containing universe throughout.",
+   "uses": [
+    "lem-coef-spatial-mapping-interchange",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 6.3.10, pp.291-292; explicit agent end/Yoneda proof of its ordinary-nerve specialization."
+   }
+  },
+  {
+   "text": "Set $T(j,a)=\\operatorname{Map}_{\\mathcal S_{\\mathcal V}}(P(j),Q(a))$, a coherent functor on $N(J)\\times L$. Apply [lem-coef-spatial-mapping-interchange] to $F=P:K\\to\\mathcal S_{\\mathcal V}$, $Q:L\\to\\mathcal S_{\\mathcal V}$ and $W:K^{\\mathrm{op}}\\times L\\to\\mathcal S_{\\mathcal V}$. It yields\n$$\\operatorname{Map}_{\\mathcal P_J}(P,RQ)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(J)\\times L,\\mathcal S_{\\mathcal V})}(W,T).$$\nThe map is coherent evaluation/transposition: $\\alpha$ gives $\\tau$ with $\\tau_{j,a}(f)(x)=\\alpha_j(x)_a(f)$, on all mapping-space parameters.",
+   "uses": [
+    "lem-coef-spatial-mapping-interchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 6.3.10, pp.291-292; explicit agent end/Yoneda proof of its ordinary-nerve specialization."
+   }
+  },
+  {
+   "text": "Write $\\widetilde W(j,a)=\\operatorname{Map}_{N(J)}(u(a),j)$ for the coherent corepresentable weight obtained from the concrete Hom pairing. The joint comparison of [lem-coef-ordinary-nerve-discrete-hom-comparison], restricted in its first variable along $u^{\\mathrm{op}}:A^{\\mathrm{op}}\\to J^{\\mathrm{op}}$, gives $\\widetilde W\\simeq W$ as functors on $N(J)\\times L$ and matches the identity points. Coherent Hom precomposition of [lem-coef-infinity-hom-bifunctor-functoriality] therefore identifies $\\operatorname{Map}(W,T)$ with $\\operatorname{Map}(\\widetilde W,T)$, on the whole spaces. In particular this comparison holds coherently as $a$ varies; discreteness of individual right-pinched mapping spaces alone would not suffice.",
+   "uses": [
+    "lem-coef-ordinary-nerve-discrete-hom-comparison",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 6.3.10, pp.291-292; explicit agent end/Yoneda proof of its ordinary-nerve specialization."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-parametric-discrete-yoneda] with $C=N(J)$, $L=N(A)^{\\mathrm{op}}$, $c=N(u):L^{\\mathrm{op}}=N(A)\\to N(J)$ and the arbitrary-bifunctor input $T(j,a)=\\operatorname{Map}(P(j),Q(a))$. Its weight is precisely $\\widetilde W$, so Steps 2 and 3 identify the original mapping space with\n$$\\lim_{(a\\to b)\\in\\operatorname{Tw}(L)} T(u(a),b)=\\lim_{(a\\to b)\\in\\operatorname{Tw}(L)}\\operatorname{Map}(P(u(a)),Q(b)).$$\nHere $a$ varies contravariantly and $b$ covariantly. For $r:a\\to a'$ in $A$, $W(-,a')\\to W(-,a)$ is precomposition by $u(r)$; precomposing transformations agrees under Yoneda with precomposing maps out of $P(u(a))$ by $P(u(r)):P(u(a'))\\to P(u(a))$. The cited end-Yoneda theorem includes the whole twisted-arrow diagram and inverse homotopies, rather than fixed-object evaluation only. The indexing category is $\\mathcal V$-small, since its simplices are finite strings in the small nerve $L$.",
+   "uses": [
+    "lem-coef-parametric-discrete-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 6.3.10, pp.291-292; explicit agent end/Yoneda proof of its ordinary-nerve specialization."
+   }
+  },
+  {
+   "text": "The mapping-space formula of [lem-coef-coherent-end-twisted-arrow-formula], applied to $u^*P,Q:L\\to\\mathcal S_{\\mathcal V}$, identifies the end in Step 4 with $\\operatorname{Map}_{\\mathcal P_A}(u^*P,Q)$. Combining it with Steps 2-4 gives the required equivalence of whole mapping spaces, coherently in $P,Q$. Its projection at $1_a$, followed by the identity-point comparison in Step 3 and end-Yoneda evaluation in Step 4, is $\\beta_a=\\tau_{u(a),a}(1_{u(a)})$. The inverse formula of [lem-coef-parametric-discrete-yoneda] becomes $\\tau_{j,a}(f)=\\beta_a\\circ P(f)$ for $f:u(a)\\to j$, because $T(f,1_a)$ is Hom precomposition by $P(f)$. The end-Yoneda inverse homotopies and the coherent-end evaluation compatibility ensure that these are inverse maps of entire spaces, including all higher parameter simplices.",
+   "uses": [
+    "lem-coef-coherent-end-twisted-arrow-formula",
+    "lem-coef-parametric-discrete-yoneda",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 6.3.10, pp.291-292; explicit agent end/Yoneda proof of its ordinary-nerve specialization."
+   }
+  },
+  {
+   "text": "Let $\\epsilon_Q:u^*RQ\\to Q$ be the image of $1_{RQ}$ under the mapping-space equivalence just constructed. The evaluation formulas in Steps 2 and 5 give its component $RQ(u(a))\\to Q(a)$ as evaluation at $1_{u(a)}$ of a transformation $W_{u(a)}\\to Q$. Naturality in $P$ gives, for every $\\alpha:P\\to RQ$, exactly $\\alpha\\mapsto\\epsilon_Q\\circ u^*\\alpha$, including all mapping-space parameters. Thus this $R$ is a coherent right adjoint to $u^*$, with the stated counit; set $u_*=R$. Its value $RQ(j)=\\operatorname{Map}_{\\mathcal P_A}(u^*h_j,Q)$ is the construction in Step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 6.3.10, pp.291-292; explicit agent end/Yoneda proof of its ordinary-nerve specialization."
+   }
+  },
+  {
+   "text": "For $f:j\\to j'$, the map $W_j\\to W_{j'}$ sends $t:u(a)\\to j$ to $f\\circ t$. Therefore the contravariant action defining $RQ$ in Step 1 sends $RQ(j')\\to RQ(j)$ by precomposition with precisely $u^*h_j\\to u^*h_{j'}$. Identities and composition follow from those in the discrete weight and coherent Hom precomposition. The equivalences in Steps 2-5 are natural in all their inputs, giving the claimed coherent dependence on $P,Q,j$. If $A$ is empty, both mapping spaces reduce to a point and $RQ$ is terminal; if $J$ is empty then $A$ is empty and all assertions hold in terminal functor categories. The end formulas allow empty shapes and values, so no extra nonemptiness assumption was used.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 6.3.10, pp.291-292; explicit agent end/Yoneda proof of its ordinary-nerve specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-spatial-mapping-interchange",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-ordinary-nerve-discrete-hom-comparison",
+  "lem-coef-parametric-discrete-yoneda",
+  "lem-coef-coherent-end-twisted-arrow-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Corollary 6.3.10; explicit coherent-end and natural Yoneda argument, using Kerodon 03P7."
+ },
+ "status": "split",
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "created": {
@@ -43,6 +133,55 @@
    "results": "{\"t\": \"2026-10-17T03:07:06Z\", \"tool\": \"grep\", \"query\": \"rightKanExtension|RightKanExtension\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\"], \"digest\": \"68805537fc9aea6a\"}",
    "date": "2026-10-17",
    "verdict": "No exact match. The returned Kan-extension, presheaf and Coyoneda declarations require ordinary Category instances and Type-valued Hom sets. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:33-103 and Mathlib/CategoryTheory/Yoneda.lean:39-90. They do not assert equivalences of spaces of coherent transformations into arbitrary quasicategories. The AlgebraicTopology grep hits are ordinary simplicial-object/coskeletal Kan extensions, or no hits as recorded; no quasicategorical declaration matches."
+  },
+  {
+   "tool": "grep",
+   "query": "ranAdjunction|rightKanExtensionObjIsoLimit",
+   "results": "{\"t\": \"2026-10-17T03:51:47Z\", \"tool\": \"grep\", \"query\": \"ranAdjunction|rightKanExtensionObjIsoLimit\", \"sub\": \"CategoryTheory/Functor/KanExtension\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\"], \"digest\": \"75b030b387219348\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:320-374. CategoryTheory.Functor.ranAdjunction and ranObjObjIsoLimit assume ordinary Category instances and give ordinary natural-transformation Hom-set adjunctions; the StrictSegal/Coskeletal hits are ordinary simplicial-object Kan extensions. They do not give the coherent space-valued presheaf mapping-space adjunction. The second semantic phrasing and the Quasicategory-source grep also give no match. The unqualified Loogle query Functor.ranAdjunction was inconclusive (unknown identifier), repaired by the fully qualified query."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.ranAdjunction",
+   "results": "{\"t\": \"2026-10-17T03:51:47Z\", \"tool\": \"loogle\", \"query\": \"Functor.ranAdjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.ranAdjunction'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:320-374. CategoryTheory.Functor.ranAdjunction and ranObjObjIsoLimit assume ordinary Category instances and give ordinary natural-transformation Hom-set adjunctions; the StrictSegal/Coskeletal hits are ordinary simplicial-object Kan extensions. They do not give the coherent space-valued presheaf mapping-space adjunction. The second semantic phrasing and the Quasicategory-source grep also give no match. The unqualified Loogle query Functor.ranAdjunction was inconclusive (unknown identifier), repaired by the fully qualified query."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint to restriction of homotopy coherent space-valued presheaves computed by mapping spaces from restricted representables",
+   "results": "{\"t\": \"2026-10-17T03:51:47Z\", \"tool\": \"leanfinder\", \"query\": \"Right adjoint to restriction of homotopy coherent space-valued presheaves computed by mapping spaces from restricted representables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"sSetTopAdj\", \"instIsRightAdjointPresheafSkyscraperPresheafFunctorOfHasColimits\", \"CategoryTheory.Presheaf.yonedaAdjunction\", \"CategoryTheory.Presheaf.uliftYonedaAdjunction\", \"LightCondSet.topCatAdjunctionUnit\", \"instIsRightAdjointSheafSkyscraperSheafFunctorOfHasColimits\", \"instIsLeftAdjointPresheafStalkFunctor\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\"], \"digest\": \"adf3623126fffad4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:320-374. CategoryTheory.Functor.ranAdjunction and ranObjObjIsoLimit assume ordinary Category instances and give ordinary natural-transformation Hom-set adjunctions; the StrictSegal/Coskeletal hits are ordinary simplicial-object Kan extensions. They do not give the coherent space-valued presheaf mapping-space adjunction. The second semantic phrasing and the Quasicategory-source grep also give no match. The unqualified Loogle query Functor.ranAdjunction was inconclusive (unknown identifier), repaired by the fully qualified query."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy coherent presheaf right Kan extension and right adjoint to precomposition",
+   "results": "{\"t\": \"2026-10-17T03:51:47Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy coherent presheaf right Kan extension and right adjoint to precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.RightExtension.precomp\", \"CategoryTheory.Functor.ran\", \"CategoryTheory.Functor.rightKanExtension\", \"CategoryTheory.Functor.RightExtension\", \"CategoryTheory.Functor.RightExtension.precomp_obj_right\", \"CategoryTheory.Functor.isPointwiseRightKanExtensionOfIsRightKanExtension\", \"CategoryTheory.Functor.LeftExtension.precomp_obj_right\", \"CategoryTheory.Functor.pointwiseRightKanExtension\"], \"digest\": \"15789aea64bb9656\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:320-374. CategoryTheory.Functor.ranAdjunction and ranObjObjIsoLimit assume ordinary Category instances and give ordinary natural-transformation Hom-set adjunctions; the StrictSegal/Coskeletal hits are ordinary simplicial-object Kan extensions. They do not give the coherent space-valued presheaf mapping-space adjunction. The second semantic phrasing and the Quasicategory-source grep also give no match. The unqualified Loogle query Functor.ranAdjunction was inconclusive (unknown identifier), repaired by the fully qualified query."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ranAdjunction",
+   "results": "{\"t\": \"2026-10-17T03:52:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.ranAdjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.ranAdjunction\", \"CategoryTheory.Functor.ranAdjunction_counit\", \"CategoryTheory.Functor.reflective'\", \"CategoryTheory.Functor.instIsIsoAppCounitRanAdjunctionOfHasPointwiseRightKanExtension\", \"CategoryTheory.Functor.isIso_ranAdjunction_unit_app_iff\", \"CategoryTheory.Functor.ranAdjunction_unit_app\", \"CategoryTheory.Functor.ranCounit_app_whiskerLeft_ranAdjunction_unit_app_assoc\", \"CategoryTheory.Functor.ranCounit_app_whiskerLeft_ranAdjunction_unit_app\"], \"digest\": \"7da7bd9f4cc3fca0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:320-374. CategoryTheory.Functor.ranAdjunction and ranObjObjIsoLimit assume ordinary Category instances and give ordinary natural-transformation Hom-set adjunctions; the StrictSegal/Coskeletal hits are ordinary simplicial-object Kan extensions. They do not give the coherent space-valued presheaf mapping-space adjunction. The second semantic phrasing and the Quasicategory-source grep also give no match. The unqualified Loogle query Functor.ranAdjunction was inconclusive (unknown identifier), repaired by the fully qualified query."
+  },
+  {
+   "tool": "grep",
+   "query": "right.*Kan|RightKan|ranAdjunction",
+   "results": "{\"t\": \"2026-10-17T03:54:31Z\", \"tool\": \"grep\", \"query\": \"right.*Kan|RightKan|ranAdjunction\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:320-374. CategoryTheory.Functor.ranAdjunction and ranObjObjIsoLimit assume ordinary Category instances and give ordinary natural-transformation Hom-set adjunctions; the StrictSegal/Coskeletal hits are ordinary simplicial-object Kan extensions. They do not give the coherent space-valued presheaf mapping-space adjunction. The second semantic phrasing and the Quasicategory-source grep also give no match. The unqualified Loogle query Functor.ranAdjunction was inconclusive (unknown identifier), repaired by the fully qualified query."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy right Kan extension between quasicategories of space valued presheaves with counit evaluation at the identity",
+   "results": "{\"t\": \"2026-10-17T03:54:33Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy right Kan extension between quasicategories of space valued presheaves with counit evaluation at the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.Truncated.rightExtensionInclusion\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.Truncated.rightExtensionInclusion_right_as\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"SSet.Truncated.rightExtensionInclusion_hom_app\"], \"digest\": \"62dc415aee37132c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:320-374. CategoryTheory.Functor.ranAdjunction and ranObjObjIsoLimit assume ordinary Category instances and give ordinary natural-transformation Hom-set adjunctions; the StrictSegal/Coskeletal hits are ordinary simplicial-object Kan extensions. They do not give the coherent space-valued presheaf mapping-space adjunction. The second semantic phrasing and the Quasicategory-source grep also give no match. The unqualified Loogle query Functor.ranAdjunction was inconclusive (unknown identifier), repaired by the fully qualified query."
   }
  ],
  "mathlib_match": null,
@@ -67,5 +206,20 @@
    ]
   },
   "same_as": []
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-space-presheaf-right-kan-mapping-formula",
+  "worker": "stage1",
+  "summary": "Repair: replace invalid product-simplex recipes with spatial transposition, a joint discrete-to-concrete-corepresentable comparison, parametrized end-Yoneda for an arbitrary bifunctor, and the coherent-end mapping-space formula. The item carries the specialization, variance check, remaining end identification, inverse, counit and transitions. The statement is unchanged; the old broad natural-Yoneda draft has been replaced rather than duplicating the cyclic existing Yoneda theorems.",
+  "blueprint": "Scalar presheaf mapping-space argument below proof paragraph 2 of the historical prop-coef-integral-exceptional-adjoint, through the recorded ancestry; current main-20261015 lists that proposition in sk-thm-sf-package. This foundational repair changes no unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-887f35e85",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-887f35e85 (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps and the 4 new nodes in full, plus the cited statements (def-cbc-enhanced-diagrams-cones, def-coef-infinity-category-of-spaces, def-coef-infinity-presheaf-yoneda, lem-coef-infinity-hom-bifunctor-functoriality, lem-coef-twisted-arrow-left-fibration), the parent's uses (steps 3 and 5-8 of lem-coef-infinity-ordinary-pointwise-kan-extension), the unit record and the blueprint ancestor. Statement unchanged and correct: Yoneda gives (u_*Q)(j)=Map(u^*h_j,Q), the counit evaluates at 1_{u(a)}, and transitions are precomposition by u^*h_j->u^*h_{j'}. Steps 1-7 check, including variance: W on N(J)xN(A)^op; interchange with K=N(J)^op; parametric Yoneda with c=N(u):N(A)->N(J); D(a,b)=Map(P u a,Q b) on L^op x L; inverse tau=beta_a∘P(f). Step 6 really is elementary. Sources: Kerodon 03P7 (twisted-arrow end, source contravariant and target covariant, matching the Tw convention) and 03N7 (Hom-functor for a locally Kan simplicial category, applied to discrete C) were read online. Cisinski 6.3.10/5.7.3/5.8.13 are online-only, recorded WANTED and not reopened; I re-derived the needed facts independently, and proof_origin is agent. New-node statements tested on small cases: interchange on K=L=pt; end formula with empty C; Yoneda with C=pt and with L empty; nerve counit comparison with empty Hom sets. All four are true and statement-only, none restates the item, and the support graph is acyclic (the 296-node walk never reaches the item). Duplicate candidates were either cyclic (infinity-yoneda-evaluation, space-yoneda-density, enriched-hom-twisted-arrow-comparison, grothendieck-coherent-end) or different statements (pointwise fixed-object Yoneda, Kan extension along a right fibration). All cited statements are in the item's unit, so no tool_uses are needed. Not a target node, so the base-change and coefficient check does not apply. FIX (B3): in lem-coef-coherent-end-twisted-arrow-formula I replaced the gloss 'or equivalently the space of coherent sections of the left fibration classified by the displayed diagram', which uses straightening with no definition dependency (lem-coef-space-valued-straightening reaches the item), with the defining coherent-limit meaning from def-cbc-enhanced-diagrams-cones. Whole file at fixes/dag/nodes/sec-six-functors/lem-coef-coherent-end-twisted-arrow-formula.json.; 1 file(s) fixed by the reviewer"
  }
 }
