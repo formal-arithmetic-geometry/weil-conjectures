@@ -67,7 +67,8 @@ lemma isRightDerivedFunctor_rightDerivedFunctor_comp_mapOfNatIso_of_iso :
     CochainComplex.isKInjective_of_iso
       (HomologicalComplex.Hom.isoOfComponents
         (C₁ := (L.mapHomologicalComplex (ComplexShape.up ℤ)).obj
-          (((forget F).mapHomologicalComplex (ComplexShape.up ℤ)).obj K)) (fun n ↦ (ε.app (K.X n)).symm)
+          (((forget F).mapHomologicalComplex (ComplexShape.up ℤ)).obj K))
+        (fun n ↦ (ε.app (K.X n)).symm)
         (fun i j _ ↦ (ε.inv.naturality (K.d i j)).symm))
   have h₂ := isIso_rightDerivedFunctorUnit_app_mapOfNatIso e₂
     ((Φ.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)
