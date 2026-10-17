@@ -32,7 +32,18 @@ In the torsor model of `H¹`:
 * a torsor on `U` extends to `C` if and only if all its residues vanish
   (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_isIsomorphic_pullback_iff_residue_eq_zero`), and
   torsors on `C` with isomorphic restrictions to `U` are isomorphic
-  (`AlgebraicGeometry.Scheme.EtaleTorsor.isIsomorphic_of_isIsomorphic_pullback_of_isCurve`).
+  (`AlgebraicGeometry.Scheme.EtaleTorsor.isIsomorphic_of_isIsomorphic_pullback_of_isRegular`).
+
+In `H¹ = Sheaf.H` of the constant sheaves, with the restriction map
+`AlgebraicGeometry.Scheme.EtaleTorsor.restrictH1` and the residue map
+`AlgebraicGeometry.Scheme.EtaleTorsor.residueH1`, this is the exactness of (5.1)
+(`AlgebraicGeometry.Scheme.EtaleTorsor.injective_restrictH1`,
+`AlgebraicGeometry.Scheme.EtaleTorsor.range_restrictH1_eq_ker_residueH1`). Both maps are
+compatible with the reduction of coefficients
+(`AlgebraicGeometry.Scheme.EtaleTorsor.restrictH1_map`,
+`AlgebraicGeometry.Scheme.EtaleTorsor.residueH1_map_castHom`). The Frobenius equivariance and
+the boundary module are in
+`WeilConjectures.AlgebraicGeometry.FundamentalGroup.ResidueSequenceFrobenius`.
 -/
 
 @[expose] public section
