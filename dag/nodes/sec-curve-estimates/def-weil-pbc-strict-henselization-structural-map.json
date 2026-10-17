@@ -40,6 +40,11 @@
     "def-weil-pbc-strict-henselization-limit"
    ],
    "elementary": true
+  },
+  {
+   "text": "Reuse the proved upstream existence theorem and structural map with these identical signatures. In the Sheaf compatibility wrapper, Classical.choose_spec gives strictHenselizationStructuralMap_eq. No identification of the separate strictLocalization scheme is required.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -48,7 +53,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03Q9 proof, strict henselization structural map; Lean implementation by K2 on 2026-10-12 using cone naturality, ΓSpecIso_inv_naturality and cofiltered common predecessors."
+  "place": "Tag 03Q9 proof, strict henselization structural map; Lean implementation by K2 on 2026-10-12 using cone naturality, ΓSpecIso_inv_naturality and cofiltered common predecessors. A3 on 2026-10-17 reuses the now-existing upstream implementation in WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap and proves the Sheaf leg equation by choose_spec."
  },
  "mathlib_searches": [
   {
@@ -141,18 +146,18 @@
   }
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap",
+  "module": "WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap",
   "declaration": "AlgebraicGeometry.Scheme.strictHenselizationStructuralMap",
   "declarations": [
    "AlgebraicGeometry.Scheme.strictHenselizationStructuralMap",
    "AlgebraicGeometry.Scheme.exists_strictHenselizationStructuralMap"
   ],
   "statement": "def strictHenselizationStructuralMap {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) : strictHenselizationScheme s ⟶ S",
-  "branch": "newtargets-dag",
-  "by": "NA",
-  "date": "2026-10-15",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-17",
   "existing": true,
-  "note": "The recorded upstream strictLocalizationToBase has source Scheme.strictLocalization, whereas the limit dependency records Scheme.strictHenselizationScheme. These are separate colimit constructions, not definitionally equal. Reuse the existing project structural map on the recorded strictHenselizationScheme: it is characterized by exactly the composites of the small affine representative limit legs in this node. No new definition or module is introduced."
+  "note": "The current source already owns the identical existence theorem and common-composite structural map in WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap. The Sheaf wrapper reexports that module instead of redeclaring either notion, and proves its compatibility equation by choose_spec. Unlike strictLocalizationToBase, this existing upstream map has exactly the recorded strictHenselizationScheme source."
  },
  "reviewed": {
   "date": "2026-10-11",
@@ -171,12 +176,12 @@
   "note": "Checked source clauses, all dependencies, canonical maps, edge cases, signatures, records and pilot gates. Immutable module compiled cleanly through server-only scompile.py in 3.6 seconds. No repository or branch changes."
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T042412-L-1817318",
+  "landing": "20261017T003413-L-3312155",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },

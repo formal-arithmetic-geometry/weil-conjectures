@@ -38,6 +38,6 @@ theorem strictHenselizationStructuralMap_eq
           (((equivSmallModel.{u}
             (strictHenselizationNeighbourhoods s)).inverse.obj j).1)).hom =
       strictHenselizationStructuralMap s := by
-  sorry
+  exact (exists_strictHenselizationStructuralMap s).choose_spec j
 
 end AlgebraicGeometry.Scheme
