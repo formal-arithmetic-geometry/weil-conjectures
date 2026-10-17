@@ -41,61 +41,34 @@ lemma tensorRestrictScalarsHom_tmul (M : ModuleCat.{u} R) (P : ModuleCat.{u} S) 
   rfl
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The inverse of `ModuleCat.tensorRestrictScalarsHom`: `(s ⊗ m) ⊗ p ↦ m ⊗ s • p`. -/
-noncomputable def tensorRestrictScalarsInv (M : ModuleCat.{u} R) (P : ModuleCat.{u} S) :
-    (restrictScalars f).obj ((extendScalars f).obj M ⊗ P) ⟶ M ⊗ (restrictScalars f).obj P :=
+/-- `ModuleCat.tensorRestrictScalarsHom` is bijective: it is the composite of the symmetries and
+the inverse of the cancellation `P ⊗_S (S ⊗_R M) ≃ P ⊗_R M`. -/
+lemma bijective_tensorRestrictScalarsHom (M : ModuleCat.{u} R) (P : ModuleCat.{u} S) :
+    Function.Bijective (tensorRestrictScalarsHom f M P) := by
   letI := f.toAlgebra
   letI : Module R P := Module.compHom P f
   haveI : IsScalarTower R S P := IsScalarTower.of_algebraMap_smul fun _ _ ↦ rfl
-  ofHom (X := ((restrictScalars f).obj ((extendScalars f).obj M ⊗ P) : Type u))
-    (Y := (M ⊗ (restrictScalars f).obj P : ModuleCat.{u} R))
-    { toFun := fun x ↦ TensorProduct.comm R P M
-        (AlgebraTensorModule.cancelBaseChange R S S P M (TensorProduct.comm S _ P x))
-      map_add' := by intros; simp only [map_add]
-      map_smul' := fun r x ↦ by
-        have h : ∀ y : P ⊗[R] M, TensorProduct.comm R P M (f r • y) =
-            r • TensorProduct.comm R P M y := fun y ↦ by
-          induction y using TensorProduct.induction_on with
-          | zero => simp
-          | tmul p m =>
-            rw [TensorProduct.smul_tmul', TensorProduct.comm_tmul, TensorProduct.comm_tmul,
-              TensorProduct.tmul_smul]
-            rfl
-          | add y₁ y₂ h₁ h₂ => simp only [smul_add, map_add, h₁, h₂]
-        dsimp
-        rw [← h, ← map_smul, ← map_smul]
-        rfl }
-
-set_option backward.isDefEq.respectTransparency.types false in
-lemma tensorRestrictScalarsInv_tmul_tmul (M : ModuleCat.{u} R) (P : ModuleCat.{u} S) (s : S)
-    (m : M) (p : P) :
-    tensorRestrictScalarsInv f M P ((s ⊗ₜ[R, f] m) ⊗ₜ p) =
-      (m ⊗ₜ[R] ((s • p : P) : (restrictScalars f).obj P) : M ⊗ (restrictScalars f).obj P) :=
-  rfl
-
-set_option backward.isDefEq.respectTransparency false in
-/-- `M ⊗_R P ≅ (S ⊗_R M) ⊗_S P` as `R`-modules, for an `R`-module `M` and an `S`-module `P`. -/
-noncomputable def tensorRestrictScalarsIso (M : ModuleCat.{u} R) (P : ModuleCat.{u} S) :
-    M ⊗ (restrictScalars f).obj P ≅ (restrictScalars f).obj ((extendScalars f).obj M ⊗ P) where
-  hom := tensorRestrictScalarsHom f M P
-  inv := tensorRestrictScalarsInv f M P
-  hom_inv_id := by
-    refine MonoidalCategory.tensor_ext fun m p ↦ ?_
-    simp only [hom_comp, LinearMap.comp_apply, hom_id, LinearMap.id_apply]
-    rw [tensorRestrictScalarsHom_tmul, tensorRestrictScalarsInv_tmul_tmul, one_smul]
-  inv_hom_id := by
-    ext x
-    simp only [hom_comp, LinearMap.comp_apply, hom_id, LinearMap.id_apply]
+  let e : M ⊗[R] P ≃+ (S ⊗[R] M) ⊗[S] P :=
+    ((TensorProduct.comm R M P).toAddEquiv.trans
+      (AlgebraTensorModule.cancelBaseChange R S S P M).symm.toAddEquiv).trans
+      (TensorProduct.comm S P (S ⊗[R] M)).toAddEquiv
+  have key : ∀ x : M ⊗[R] P, tensorRestrictScalarsHom f M P x = e x := fun x ↦ by
     induction x using TensorProduct.induction_on with
-    | zero => simp
-    | tmul y p =>
-      induction y using TensorProduct.induction_on with
-      | zero => simp
-      | tmul s m =>
-        rw [tensorRestrictScalarsInv_tmul_tmul, tensorRestrictScalarsHom_tmul,
-          TensorProduct.tmul_smul, TensorProduct.smul_tmul', TensorProduct.smul_tmul', smul_eq_mul,
-          mul_one]
-      | add y₁ y₂ h₁ h₂ => simp only [TensorProduct.add_tmul, map_add, h₁, h₂]
-    | add x₁ x₂ h₁ h₂ => simp only [map_add, h₁, h₂]
+    | zero => exact (map_zero _).trans (map_zero e).symm
+    | tmul m p =>
+      rw [tensorRestrictScalarsHom_tmul]
+      rfl
+    | add x y hx hy =>
+      exact (map_add _ x y).trans ((congrArg₂ _ hx hy).trans (map_add e x y).symm)
+  exact ⟨fun a b hab ↦ e.injective ((key a).symm.trans (hab.trans (key b))),
+    fun y ↦ ⟨e.symm y, (key _).trans (e.apply_symm_apply y)⟩⟩
+
+/-- `M ⊗_R P ≅ (S ⊗_R M) ⊗_S P` as `R`-modules, for an `R`-module `M` and an `S`-module `P`,
+`m ⊗ p ↦ (1 ⊗ m) ⊗ p`. -/
+noncomputable def tensorRestrictScalarsIso (M : ModuleCat.{u} R) (P : ModuleCat.{u} S) :
+    M ⊗ (restrictScalars f).obj P ≅ (restrictScalars f).obj ((extendScalars f).obj M ⊗ P) :=
+  have : IsIso (tensorRestrictScalarsHom f M P) :=
+    (ConcreteCategory.isIso_iff_bijective _).2 (bijective_tensorRestrictScalarsHom f M P)
+  asIso (tensorRestrictScalarsHom f M P)
 
 end ModuleCat

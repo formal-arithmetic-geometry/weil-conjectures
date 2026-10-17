@@ -237,8 +237,8 @@ end SupportedSections
 
 section GlobalGeneration
 
-variable {K : Type u} [Field K] [IsSepClosed K] {X : Scheme.{u}} (p : X ⟶ Spec (.of K))
-  [LocallyOfFiniteType p] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+variable {K : Type u} [Field K] [IsSepClosed K] {X : Scheme.{u}}
+  (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
 
 /-- The open complement of a finite set of closed points. -/
 def openComplOfFinite {S : Set X} (hS : S.Finite) (hS' : S ⊆ closedPoints X) : X.Opens :=
@@ -260,7 +260,7 @@ an affine étale `X`-scheme lies in some `F_S`
 (`AlgebraicGeometry.Etale.exists_finite_forall_mem_sectionVanishingLocus`), so the `F_S` cover
 `F` and `F` is globally generated (`AlgebraicGeometry.Etale.isGloballyGenerated_of_epi_sigmaDesc`).
 The blueprint argues with the finitely generated subsheaves of `F` instead of the `F_S`. -/
-theorem isGloballyGenerated_of_isZero_sheafFiber
+theorem isGloballyGenerated_of_isZero_sheafFiber (p : X ⟶ Spec (.of K)) [LocallyOfFiniteType p]
     (hF : ∀ x ∉ closedPoints X,
       IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj F)) :
     IsGloballyGenerated Λ X F := by
@@ -302,7 +302,7 @@ theorem isGloballyGenerated_of_isZero_sheafFiber
 /-- An étale sheaf of `Λ`-modules on a scheme locally of finite type over a separably closed
 field, with vanishing stalks at the non-closed points and without nonzero global sections, is
 zero: it is globally generated (`lem-kun-0f1f-gen`). -/
-theorem isZero_of_isZero_sheafFiber_of_subsingleton
+theorem isZero_of_isZero_sheafFiber_of_subsingleton (p : X ⟶ Spec (.of K)) [LocallyOfFiniteType p]
     (hF : ∀ x ∉ closedPoints X,
       IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj F))
     (h : Subsingleton (F.obj.obj (op (etaleTerminal X)))) : IsZero F :=

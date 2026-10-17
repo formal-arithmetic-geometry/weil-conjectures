@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperFactor.ExchangeCompat
-public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.Detection
+public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Basic
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality
 
 /-!
@@ -104,11 +104,32 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isProper_of_isSepClosed {K : Type u
   have : LocallyOfFiniteType (q₁ ≫ aX) := by
     have : LocallyOfFiniteType q₁ := MorphismProperty.of_isPullback hW.flip inferInstance
     infer_instance
-  refine (Etale.isZero_iff_forall_isZero_homology_rightDerivedGlobalSections_of_isGE (q₁ ≫ aX)
-    (DerivedCategory.Plus.ι.obj Q) m ?_).2 ?_
-  · intro k z hz
+  have h0f1g : (∀ k : ℤ, ∀ z ∉ closedPoints W,
+      IsZero ((pointSmallEtale (W.algClosurePoint z)).sheafFiber.obj
+        ((DerivedCategory.homologyFunctor _ k).obj (DerivedCategory.Plus.ι.obj Q)))) →
+      (∀ k : ℤ, IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) k).obj
+        ((Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) W).obj
+          (DerivedCategory.Plus.ι.obj Q)))) → IsZero (DerivedCategory.Plus.ι.obj Q) := by
     sorry
-  · intro k
-    sorry
+  refine h0f1g (fun k z hz ↦ ?_) (fun k ↦ ?_)
+  · have : LocallySmall.{u + 1} W.Etale := locallySmall_max.{u + 1, u}
+    have hiso (k' : ℤ) : IsIso ((W.uliftPointSmallEtale z).sheafFiber.map
+        ((DerivedCategory.homologyFunctor _ k').map (DerivedCategory.Plus.ι.map β))) :=
+      hF z hz k'
+    refine (DerivedCategory.isZero_map_homology_obj₃_of_isIso
+      (W.uliftPointSmallEtale z).sheafFiber _ hT' k (hiso k) (hiso (k + 1))).of_iso ?_
+    exact (((pointSmallEtale (W.algClosurePoint z)).uliftSheafFiberIso
+      (ModuleCat.{u + 1} Λ)).app _).symm
+  · have hRΓ : IsIso ((Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) W).map
+        (DerivedCategory.Plus.ι.map β)) :=
+      (Arrow.isIso_iff_isIso_of_isIso
+        ((Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) W).mapArrow.mapIso
+          (Etale.baseChangeArrowIsoUnboundedExchange _ sq.toCommSq
+            ((DerivedCategory.Plus.singleFunctor _ 0).obj F))).hom).2
+        (Etale.isIso_rightDerivedGlobalSections_map_unboundedExchange_of_isProper Λ aX aY j q₁
+          q₂ hW e h sq n hn₀ hΛ _)
+    have := (Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) W).map_distinguished _ hT'
+    exact (DerivedCategory.homologyFunctor _ k).map_isZero
+      ((Triangle.isZero₃_iff_isIso₁ _ this).2 hRΓ)
 
 end AlgebraicGeometry

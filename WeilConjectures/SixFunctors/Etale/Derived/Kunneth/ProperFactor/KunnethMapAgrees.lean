@@ -114,6 +114,7 @@ lemma leftDerivedUpperStarTensorComparison_comp_derivedTensor {T S R : Scheme.{u
 
 /-- The composite `L(a ≫ b)^* ≅ ... ≅ L(a' ≫ b')^*` of two composition isomorphisms through a
 common composite `c = a ≫ b = a' ≫ b'` does not depend on the choice of the morphism `c`. -/
+@[reassoc]
 lemma leftDerivedUpperStarComp_inv_app_comp_hom_app_congr {T S S' R : Scheme.{u}} (a : T ⟶ S)
     (b : S ⟶ R) (a' : T ⟶ S') (b' : S' ⟶ R) (c₁ c₂ : T ⟶ R) (h₁ : c₁ = a ≫ b)
     (h₁' : c₁ = a' ≫ b') (h₂ : c₂ = a ≫ b) (h₂' : c₂ = a' ≫ b')
@@ -171,7 +172,7 @@ lemma tensorBaseChangeMap_eq_projectionMap (q : W ⟶ X) (r : W ⟶ Y) (aX : X �
   congr 1
   rw [derivedUpperStar_map_derivedBaseChangeMap_app_counit, derivedSquareUpperStarIso,
     Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
-    ← leftDerivedUpperStarComp_inv_app_comp_hom_app_congr_assoc A q aX r aY (q ≫ aX) (r ≫ aY)
+    leftDerivedUpperStarComp_inv_app_comp_hom_app_congr_assoc A q aX r aY (q ≫ aX) (r ≫ aY)
       rfl w w.symm rfl]
 
 /-- Blueprint `lem-kun-kunneth-map-agrees`: the Künneth map is the composite of the canonical

@@ -39,7 +39,9 @@ open CategoryTheory Limits
 
 namespace CategoryTheory
 
-variable {J : Type*} [Category J] {C : Type*} [Category C]
+universe v₁ v₂ u₁ u₂
+
+variable {J : Type u₁} [Category.{v₁} J] {C : Type u₂} [Category.{v₂} C]
 
 /-- Converse of `CategoryTheory.IsPullback.isPullback_map_of_isLimit`: given a system of
 cartesian squares `Pⱼ → Xⱼ, Pⱼ → Yⱼ, Xⱼ → Sⱼ, Yⱼ → Sⱼ`, limit cones of the diagrams `X`, `Y`,
@@ -52,7 +54,9 @@ noncomputable def IsPullback.isLimitOfIsPullbackLimMap {P X Y S : J ⥤ C} {fst 
     (hY : IsLimit cY) (hS : IsLimit cS)
     (hP : IsPullback (hX.map cP fst) (hY.map cP snd) (hS.map cX f) (hS.map cY g)) :
     IsLimit cP where
-  lift s := hP.lift (hX.map s fst) (hY.map s snd) (hS.hom_ext fun j ↦ by simp [(h j).w])
+  lift s := hP.lift (hX.map s fst) (hY.map s snd) (hS.hom_ext fun j ↦ by
+    simp only [Category.assoc, IsLimit.map_π, IsLimit.map_π_assoc]
+    exact s.π.app j ≫= (h j).w)
   fac s j := (h j).hom_ext
     (by rw [Category.assoc, ← IsLimit.map_π, ← Category.assoc, hP.lift_fst, IsLimit.map_π])
     (by rw [Category.assoc, ← IsLimit.map_π, ← Category.assoc, hP.lift_snd, IsLimit.map_π])
@@ -74,7 +78,7 @@ lemma isPullback_map_pullback_const {D : J ⥤ C} {W X : C} (a : X ⟶ W)
     IsPullback ((pullback ((Functor.const J).map a) w).map u)
       ((pullback.snd ((Functor.const J).map a) w).app j)
       ((pullback.snd ((Functor.const J).map a) w).app k) (D.map u) := by
-  refine IsPullback.of_right ?_ ((pullback.snd ((Functor.const J).map a) w).naturality u).symm
+  refine IsPullback.of_right ?_ ((pullback.snd ((Functor.const J).map a) w).naturality u)
     (isPullback_pullback_evaluation _ w k)
   have h₁ : (pullback ((Functor.const J).map a) w).map u ≫
       (pullback.fst ((Functor.const J).map a) w).app k =
@@ -124,18 +128,21 @@ noncomputable def isLimitConstPullbackCone [IsConnected J] {D : J ⥤ C} {W X : 
     (isLimitConstCone J X) hD (isLimitConstCone J W) ?_
   have e₁ : (isLimitConstCone J X).map (constPullbackCone a w cD b p' hw₀ hpb.w)
       (pullback.fst ((Functor.const J).map a) w) = b :=
-    (isLimitConstCone J X).hom_ext fun j ↦ by simp
+    (isLimitConstCone J X).hom_ext fun j ↦ by
+      rw [IsLimit.map_π, constPullbackCone_π_app_fst]
+      exact (Category.comp_id _).symm
   have e₂ : hD.map (constPullbackCone a w cD b p' hw₀ hpb.w)
       (pullback.snd ((Functor.const J).map a) w) = p' :=
-    hD.hom_ext fun j ↦ by simp
+    hD.hom_ext fun j ↦ by rw [IsLimit.map_π, constPullbackCone_π_app_snd]
   have e₃ : (isLimitConstCone J W).map (constCone J X) ((Functor.const J).map a) = a :=
     (isLimitConstCone J W).hom_ext fun j ↦ by
       rw [IsLimit.map_π]
-      simp
+      exact (Category.id_comp _).trans (Category.comp_id _).symm
   have e₄ : (isLimitConstCone J W).map cD w = w₀ :=
     (isLimitConstCone J W).hom_ext fun j ↦ by
       rw [IsLimit.map_π]
-      simp [hw₀]
+      rw [hw₀]
+      exact (Category.comp_id _).symm
   rw [e₁, e₂, e₃, e₄]
   exact hpb
 
@@ -179,6 +186,11 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_snd {L : Type u} [Field L]
   have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_field aX
   have : QuasiSeparated aX := QuasiSeparated.of_quasiSeparatedSpace aX
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have : QuasiCompact (show (constCone I U).pt ⟶ (constCone I X).pt from j) :=
+    inferInstanceAs (QuasiCompact j)
+  have : QuasiSeparated (show (constCone I U).pt ⟶ (constCone I X).pt from j) :=
+    inferInstanceAs (QuasiSeparated j)
   let a' := (Functor.const I).map aX
   let XD := pullback a' qD
   let pD : XD ⟶ (Functor.const I).obj X := pullback.fst _ _
@@ -223,10 +235,12 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_snd {L : Type u} [Field L]
   refine Etale.isIso_baseChangeHomologyMap_of_isLimit_of_forall Λ pD j' eD hD hsq
     (isLimitConstCone I X) hXl (isLimitConstCone I U) hYl (p₀ := p) (g₀ := j) (e₀ := e)
     (h₀ := h) (fun i ↦ ?_) (fun i ↦ ?_) (fun i ↦ ?_) (fun i ↦ ?_) sq q (fun i G ↦ ?_) F
-  · simp [cX]
-  · simp
-  · simp [cY]
-  · simp [cY]
+  · rw [constPullbackCone_π_app_fst aX qD c p r hℓ hW.w i]
+    exact Category.comp_id _
+  · exact (Category.comp_id _).trans (Category.id_comp _).symm
+  · rw [constPullbackCone_π_app_fst j pD cX e h hpX sq.w i]
+    exact Category.comp_id _
+  · exact (constPullbackCone_π_app_snd j pD cX e h hpX sq.w i).symm
   · have : QuasiCompact (qD.app i) := inferInstance
     exact IH aX (qD.app i) j (pD.app i) ((pullback.snd a' qD).app i) (hX i) (eD.app i)
       (hD.app i) (hsq i) n hn hΛ (hdim i) q G
@@ -261,9 +275,9 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_fst {L : Type u} [Field L]
   have : CompactSpace U₀ := isCompact_iff_compactSpace.mp hU₀c
   have hrange : Set.range (j ≫ c.π.app i₀).base ⊆ Set.range U₀.ι.base := by
     rintro _ ⟨x, rfl⟩
-    have hx : j.base x ∈ (c.π.app i₀ ⁻¹ᵁ U₀ : Set c.pt) := by
+    have hx : j.base x ∈ c.π.app i₀ ⁻¹ᵁ U₀ := by
       rw [hU₀]
-      exact ⟨x, rfl⟩
+      simp
     simpa using hx
   let uU : U' ⟶ U₀ := IsOpenImmersion.lift U₀.ι (j ≫ c.π.app i₀) hrange
   have huU : uU ≫ U₀.ι = j ≫ c.π.app i₀ := IsOpenImmersion.lift_fac _ _ _
@@ -276,7 +290,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_fst {L : Type u} [Field L]
   have : IsConnected (Over i₀) := IsCofiltered.isConnected _
   let qD' : D' ⟶ (Functor.const (Over i₀)).obj (Spec (.of L)) :=
     { app k := qD.app k.left
-      naturality k k' f := by simpa using qD.naturality f.left }
+      naturality k k' f := qD.naturality f.left }
   let w' : D' ⟶ (Functor.const (Over i₀)).obj (D.obj i₀) :=
     { app k := D.map k.hom
       naturality k k' f := by
@@ -285,29 +299,27 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_fst {L : Type u} [Field L]
           Over.w f] }
   have hℓ' (k : Over i₀) : (c.whisker Φ).π.app k ≫ qD'.app k = ℓ := hℓ k.left
   have hw' (k : Over i₀) : (c.whisker Φ).π.app k ≫ w'.app k = c.π.app i₀ := by
-    simpa using c.w k.hom
+    exact c.w k.hom
   -- the systems of schemes and the cartesian squares
-  let aY' := (Functor.const (Over i₀)).map aY
-  let ι' := (Functor.const (Over i₀)).map U₀.ι
-  let XD := pullback aY' qD'
+  let XD := pullback ((Functor.const (Over i₀)).map aY) qD'
   let pD : XD ⟶ D' := pullback.snd _ _
-  let TD := pullback ι' w'
+  let TD := pullback ((Functor.const (Over i₀)).map U₀.ι) w'
   let gD : TD ⟶ D' := pullback.snd _ _
-  let YD := pullback ι' (pD ≫ w')
+  let YD := pullback ((Functor.const (Over i₀)).map U₀.ι) (pD ≫ w')
   let hD : YD ⟶ XD := pullback.snd _ _
   let eD : YD ⟶ TD := pullback.lift (pullback.fst _ _) (pullback.snd _ _ ≫ pD)
     (by rw [pullback.condition, Category.assoc])
-  have hX (k : Over i₀) := isPullback_pullback_evaluation aY' qD' k
-  have hT (k : Over i₀) := isPullback_pullback_evaluation ι' w' k
-  have heD₁ (k : Over i₀) : eD.app k ≫ (pullback.fst ι' w').app k =
-      (pullback.fst ι' (pD ≫ w')).app k := by
+  have hX (k : Over i₀) := isPullback_pullback_evaluation ((Functor.const (Over i₀)).map aY) qD' k
+  have hT (k : Over i₀) := isPullback_pullback_evaluation ((Functor.const (Over i₀)).map U₀.ι) w' k
+  have heD₁ (k : Over i₀) : eD.app k ≫ (pullback.fst ((Functor.const (Over i₀)).map U₀.ι) w').app k =
+      (pullback.fst ((Functor.const (Over i₀)).map U₀.ι) (pD ≫ w')).app k := by
     rw [← NatTrans.comp_app, pullback.lift_fst]
   have heD₂ (k : Over i₀) : eD.app k ≫ gD.app k = hD.app k ≫ pD.app k := by
     rw [← NatTrans.comp_app, pullback.lift_snd, NatTrans.comp_app]
   have hsq (k : Over i₀) : IsPullback (eD.app k) (hD.app k) (gD.app k) (pD.app k) := by
     refine IsPullback.of_right ?_ (heD₂ k) (hT k)
     rw [heD₁ k]
-    simpa using isPullback_pullback_evaluation ι' (pD ≫ w') k
+    simpa using isPullback_pullback_evaluation ((Functor.const (Over i₀)).map U₀.ι) (pD ≫ w') k
   -- the limit cones
   let cX := constPullbackCone aY qD' (c.whisker Φ) r p hℓ' hW.flip.w
   have hXl : IsLimit cX := isLimitConstPullbackCone aY qD' hc' r p hℓ' hW.flip
@@ -353,21 +365,24 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_fst {L : Type u} [Field L]
   refine Etale.isIso_baseChangeHomologyMap_of_isLimit_of_forall Λ pD gD eD hD hsq
     hc' hXl hTl hYl (p₀ := p) (g₀ := j) (e₀ := e) (h₀ := h) (fun k ↦ ?_) (fun k ↦ ?_)
     (fun k ↦ ?_) (fun k ↦ ?_) sq q (fun k G ↦ ?_) F
-  · simp [cX, pD]
-  · simp [cT, gD]
+  · exact (constPullbackCone_π_app_snd aY qD' (c.whisker Φ) r p hℓ' hW.flip.w k).symm
+  · exact (constPullbackCone_π_app_snd U₀.ι w' (c.whisker Φ) uU j hw' hUpb.w k).symm
   · refine (hT k).hom_ext ?_ ?_
-    · rw [Category.assoc, Category.assoc, heD₁ k]
-      simp [cT, cY]
-    · rw [Category.assoc, Category.assoc, heD₂ k]
-      simp only [cT, cY, cX, pD, hD, constPullbackCone_π_app_snd,
-        constPullbackCone_π_app_snd_assoc, sq.w_assoc]
+    · rw [Category.assoc, Category.assoc, heD₁ k,
+        constPullbackCone_π_app_fst U₀.ι w' (c.whisker Φ) uU j hw' hUpb.w k,
+        constPullbackCone_π_app_fst U₀.ι (pD ≫ w') cX (e ≫ uU) h hwX hYpb.w k]
+    · rw [Category.assoc, Category.assoc, heD₂ k,
+        constPullbackCone_π_app_snd U₀.ι w' (c.whisker Φ) uU j hw' hUpb.w k,
+        constPullbackCone_π_app_snd_assoc U₀.ι (pD ≫ w') cX (e ≫ uU) h hwX hYpb.w k]
+      exact (sq.w_assoc _).trans (congrArg (h ≫ ·)
+        (constPullbackCone_π_app_snd aY qD' (c.whisker Φ) r p hℓ' hW.flip.w k).symm)
   · exact (constPullbackCone_π_app_snd U₀.ι (pD ≫ w') cX (e ≫ uU) h hwX hYpb.w k).symm
   · have : LocallyOfFiniteType (qD'.app k) :=
       inferInstanceAs (LocallyOfFiniteType (qD.app k.left))
     have : QuasiSeparatedSpace (((Functor.const (Over i₀)).obj (Spec (.of L))).obj k) :=
       inferInstanceAs (QuasiSeparatedSpace (Spec (.of L)))
     have : QuasiCompact (qD'.app k) := quasiCompact_of_compactSpace _
-    exact IH (qD'.app k) aY (gD.app k) (pD.app k) ((pullback.fst aY' qD').app k) (hX k).flip
+    exact IH (qD'.app k) aY (gD.app k) (pD.app k) ((pullback.fst ((Functor.const (Over i₀)).map aY) qD').app k) (hX k).flip
       (eD.app k) (hD.app k) (hsq k) n hn hΛ (hdim k.left) q G
 
 end AlgebraicGeometry
