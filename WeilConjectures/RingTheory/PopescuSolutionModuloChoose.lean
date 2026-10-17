@@ -18,7 +18,7 @@ import Mathlib.RingTheory.LocalRing.Module
 # Choosing elements in an admissible Popescu subalgebra
 
 Source: Stacks Project, proofs of Tags 07FH and 07FI; the enlargement argument recorded
-in the DAG (blueprint: lem-weil-pbc-popescu-solution-modulo-choose).
+in the blueprint (blueprint: lem-weil-pbc-popescu-solution-modulo-choose).
 -/
 
 @[expose] public section
@@ -33,9 +33,9 @@ namespace Algebra
 differentials forming a basis, and elements of `q` mapping into it generate `q L`.
 The residue field is embedded into `κ(q)` compatibly with the quotient map.
 Source: Stacks Project, proofs of Tags 07FH and 07FI, with the enlargement argument
-recorded in the DAG (blueprint: lem-weil-pbc-popescu-solution-modulo-choose).
+recorded in the blueprint (blueprint: lem-weil-pbc-popescu-solution-modulo-choose).
 
-Proof (the fifteen steps recorded in the DAG):
+Proof (the fifteen steps recorded in the blueprint):
 
 1. *Setup.* $\Lambda_{\mathfrak q}$ is a local ring with maximal ideal $\mathfrak
 q\Lambda_{\mathfrak q}$ and residue field $K$, and $\mathfrak q\Lambda_{\mathfrak
