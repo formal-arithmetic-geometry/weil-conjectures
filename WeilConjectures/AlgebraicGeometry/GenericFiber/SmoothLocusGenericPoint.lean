@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.PullbackCarrier
 public import Mathlib.Topology.NoetherianSpace
-public import Mathlib.Topology.Sober
+public import WeilConjectures.Mathlib.Topology.Sober
 
 /-!
 # Generic points, residue fields of fibre products and the smooth locus
@@ -19,8 +19,6 @@ This file collects auxiliary results used for the generic radicial smoothing lem
 
 ## Main statements
 
-- `mem_genericPoints_iff_forall_specializes`: in a quasi-sober `T₀` space, the generic points of
-  the irreducible components are the points without proper generizations.
 - `genericPoints_subset_of_isOpen_of_dense`: in a noetherian quasi-sober `T₀` space, a dense open
   subset contains the generic points of all irreducible components.
 - `AlgebraicGeometry.Scheme.Pullback.closure_range_residueFieldMap`: the residue field of a point
@@ -40,25 +38,6 @@ open CategoryTheory Limits Topology
 section Topology
 
 variable {α : Type*} [TopologicalSpace α]
-
-/-- In a quasi-sober `T₀` space, the generic points of the irreducible components are exactly the
-points without proper generizations. -/
-lemma mem_genericPoints_iff_forall_specializes [T0Space α] [QuasiSober α] {x : α} :
-    x ∈ genericPoints α ↔ ∀ y, y ⤳ x → y = x := by
-  refine ⟨fun hx y hyx ↦ ?_, fun H ↦ ?_⟩
-  · have h : closure {y} = closure {x} :=
-      (hx.2 isIrreducible_singleton.closure
-        (specializes_iff_closure_subset.1 hyx)).antisymm (specializes_iff_closure_subset.1 hyx)
-    exact (hyx.antisymm (specializes_iff_closure_subset.2 h.le)).eq
-  · obtain ⟨Z, hZ, hxZ⟩ := exists_mem_irreducibleComponents_subset_of_isIrreducible _
-      (isIrreducible_singleton (x := x)).closure
-    obtain ⟨z, hz⟩ := QuasiSober.sober hZ.1 (isClosed_of_mem_irreducibleComponents Z hZ)
-    have hzx : z ⤳ x := by
-      rw [specializes_iff_mem_closure, hz.def]
-      exact hxZ (subset_closure rfl)
-    change closure {x} ∈ irreducibleComponents α
-    rw [← H z hzx, hz.def]
-    exact hZ
 
 /-- A homeomorphism maps generic points of irreducible components to generic points of irreducible
 components. -/
