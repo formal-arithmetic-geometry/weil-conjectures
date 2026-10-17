@@ -1,0 +1,90 @@
+{
+ "id": "lem-trf-derived-colimit-bar",
+ "kind": "statement",
+ "title": "Category bar complex and functorial derived colimits",
+ "statement": "Let $\\mathcal E$ be a small category in the universe of [def-weil-size-convention], endowed with the topology whose covering families are identities, so all presheaves are sheaves [def-weil-pbc-sites-and-cohomology]. For a commutative ring $R$, let $\\underline R$ be the constant ring presheaf and $\\operatorname{Mod}(\\underline R)=\\operatorname{Fun}(\\mathcal E^{op},\\operatorname{Mod}(R))$ [def-weil-sheaf-of-modules-category]. The morphism $\\pi_{\\mathcal E}^R:(\\operatorname{Sh}(\\mathcal E),\\underline R)\\to(*,R)$ [def-weil-pbc-ringed-topos-morphism] has inverse image the constant-presheaf functor, identity structural map, and left adjoint $\\pi_{\\mathcal E,!}^R(F)=\\operatorname{colim}_{\\mathcal E^{op}}F$ [def-weil-pbc-category-colimit]. Its total left derived functor $L\\pi_{\\mathcal E,!}^R:D(\\underline R)\\to D(R)$ [def-weil-abstract-derived-category] exists, is triangulated, and is left adjoint to the exact constant-presheaf functor. For a module presheaf $F$ in degree zero it is canonically represented by the cochain complex $K_{\\mathcal E}(F)$ with\n$$K_{\\mathcal E}(F)^{-n}=\\bigoplus_{U_n\\to\\cdots\\to U_0}F(U_0)\\quad(n\\geq0),\\qquad K_{\\mathcal E}(F)^r=0\\quad(r>0).$$\nIts differential is $\\sum_{j=0}^n(-1)^j d_j$: face $d_j$ deletes $U_{n-j}$, composing the adjacent arrows at an internal vertex; if $j<n$ it retains the element of $F(U_0)$, and the last face $d_n$ applies the restriction $F(U_1\\to U_0)$. Thus for $n=2$ the differential is $(U_1\\to U_0,x)-(U_2\\to U_0,x)+(U_2\\to U_1,x|_{U_1})$. The functor $K_{\\mathcal E}$ takes every objectwise short exact sequence of module presheaves to a degreewise short exact sequence of complexes. For a functor $u:\\mathcal E\\to\\mathcal F$, a ring map $R\\to S$, a module presheaf $F$ over $R$ on $\\mathcal E$, a module presheaf $G$ over $S$ on $\\mathcal F$, and a semilinear natural map $t:F\\to u^{-1}G$, the canonical derived-colimit map is represented, after restriction of scalars to $R$, by\n$$(U_n\\to\\cdots\\to U_0,x)\\longmapsto(uU_n\\to\\cdots\\to uU_0,t_{U_0}(x)).$$\nHere $u^{-1}$ is precomposition. These maps preserve identities and composition and commute with the connecting morphisms of short exact sequences. For parallel functors $v,w:\\mathcal E\\to\\mathcal F$, a natural transformation $\\eta:v\\Rightarrow w$, and $t:F\\to w^{-1}G$, the two maps $K(v,G(\\eta)t)$ and $K(w,t)$ are chain homotopic and hence equal in $D(R)$. Here $(G(\\eta)t)_U=G(\\eta_U)t_U$. In particular a natural isomorphism of indexing functors induces the same derived map after the corresponding coefficient identifications.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08PF (example-category-to-point), 08PG (example-left-derived-colimits), 08PH (example-morphism-categories), 08PD (remark-morphism-fibred-categories), 07AC (lemma-existence-derived-lower-shriek); natural-transformation clause is the bar prism homotopy extending the displayed chain formula."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"leftDerived\"",
+   "results": "12 hits: CategoryTheory.Functor.HasLeftDerivedFunctor, CategoryTheory.Functor.HasLeftDerivedFunctor.hasRightKanExtension', CategoryTheory.Functor.HasLeftDerivedFunctor.mk, CategoryTheory.Functor.totalLeftDerived, CategoryTheory.Functor.HasLeftDerivedFunctor.hasRightKanExtension, CategoryTheory.Functor.hasLeftDerivedFunctor_iff, CategoryTheory.Functor.hasLeftDerivedFunctor_iff_of_iso, CategoryTheory.Functor.IsLeftDerivedFunctor.  Mathlib subdirectory: all. Full returned types retained in search-bar-*.txt; candidates were read and are not the stated assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left derived colimit of presheaves of modules computed by the alternating category bar complex natural in functors",
+   "results": "8 hits: PresheafOfModules.colimitPresheafOfModules, PresheafOfModules.colimitCocone, PresheafOfModules.hasColimit, PresheafOfModules.colimitPresheafOfModules_obj, PresheafOfModules.isColimitColimitCocone, PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap, PresheafOfModules.colimitPresheafOfModules_map, PresheafOfModules.hasColimitsOfShape.  Mathlib subdirectory: all. Full returned types retained in search-bar-*.txt; candidates were read and are not the stated assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "category homology of a presheaf computed by chains of composable morphisms with module coefficients",
+   "results": "8 hits: PresheafOfModules.presheaf, groupHomology.chainsFunctor, CategoryTheory.categoryWithHomology_of_abelian, PresheafOfModules.comp_app, groupHomology.chainsMap₁, groupHomology.inhomogeneousChains, CategoryTheory.Sheaf.cohomologyPresheaf, HomologicalComplex.instCategory.  Mathlib subdirectory: all. Full returned types retained in search-bar-*.txt; candidates were read and are not the stated assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology of a small category with coefficients in a contravariant module functor using sums over chains",
+   "results": "8 hits: groupHomology.chainsFunctor_obj, groupHomology.inhomogeneousChains, Rep.standardComplex.forget₂ToModuleCat, groupHomology.chainsFunctor, groupHomology, groupHomology.cycles, groupCohomology, groupHomology.functor.  Mathlib subdirectory: all. Full returned types retained in search-bar-*.txt; candidates were read and are not the stated assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.?[Cc]olimit|[Bb]ar.*[Cc]omplex|[Cc]omplex.*[Bb]ar",
+   "results": "0 hits: none.  Mathlib subdirectory: CategoryTheory. Full returned types retained in search-bar-*.txt; candidates were read and are not the stated assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-transitivity-triangle",
+  "date": "2026-10-18",
+  "group": "NW"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps.",
+   "via": [
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

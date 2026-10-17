@@ -7,10 +7,128 @@
   "date": "2026-10-18",
   "group": "Q86"
  },
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "Relabel the statement's rings as $A\\to B\\to C$. Use the four small identity-cover sites, the functors $u_i$, the variable rings $\\mathcal O^{(i)},\\mathcal O_i$, and the augmentations of [lem-trf-cotangent-lower-shriek]. Put $F_1=F_{B/A}$, $F_2=F_{C/A}$, $F_3=F_{C/B}$ as in [lem-trf-cotangent-sheaf-model]; these are modules over the constant rings $B,C,C$, respectively. On $\\mathcal E$ put $M_1=g_1^{-1}F_1\\otimes_{\\underline B}\\underline C$, $M_2=g_2^{-1}F_2$, $M_3=g_3^{-1}F_3$. At $U=(P\\to B,Q\\to C)$ their values are $\\Omega_{P/A}\\otimes_P C$, $\\Omega_{Q/A}\\otimes_Q C$, and $\\Omega_{Q\\otimes_P B/B}\\otimes_{Q\\otimes_P B}C$. The base-change isomorphism identifies the last with $\\Omega_{Q/P}\\otimes_Q C$ and sends $\\mathrm d(q\\otimes1)\\otimes c$ to $\\mathrm dq\\otimes c$. Tensor products and exactness on these sites are sectionwise since every presheaf is a sheaf.",
+   "uses": [
+    "lem-trf-cotangent-lower-shriek",
+    "lem-trf-cotangent-sheaf-model",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QU (lemma-triangle-ses), definition of the three differential sheaves and objectwise identifications"
+   }
+  },
+  {
+   "text": "Choose polynomial coordinates $P=A[x_s]$, $Q=P[y_t]$. The polynomial differential-basis lemma identifies $Q\\otimes_P\\Omega_{P/A}$ with $\\bigoplus_s Q\\,\\mathrm dx_s$, $\\Omega_{Q/A}$ with $(\\bigoplus_s Q\\,\\mathrm dx_s)\\oplus(\\bigoplus_t Q\\,\\mathrm dy_t)$, and $\\Omega_{Q/P}$ with $\\bigoplus_t Q\\,\\mathrm dy_t$. The differential maps are inclusion of the first summand and projection to the second, hence the sequence is split exact. After tensoring over $Q$ with $C$ it is still the same inclusion/projection sequence over $C$, without any flatness of $C$ over $Q$. Although these coordinate splittings are not natural, the two maps are natural: for compatible algebra maps $p\\mapsto p'$, $q\\mapsto q'$, both composites take $\\mathrm dp\\otimes c$ to $\\mathrm dp'\\otimes c$, and $\\mathrm dq\\otimes c$ to $\\mathrm dq'\\otimes c$ modulo base differentials. These formulas respect the differential relations and every restriction map. Thus $0\\to M_1\\xrightarrow{a}M_2\\xrightarrow{b}M_3\\to0$ is a canonical short exact sequence of $\\underline C$-modules on $\\mathcal E$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QU (lemma-triangle-ses), objectwise polynomial argument; Algebra Tag 00RX"
+   }
+  },
+  {
+   "text": "The category bar lemma gives a degreewise short exact sequence $0\\to K_{\\mathcal E}(M_1)\\xrightarrow{K(a)}K_{\\mathcal E}(M_2)\\xrightarrow{K(b)}K_{\\mathcal E}(M_3)\\to0$ representing the result of $L\\pi_!^C$. Apply the short-exact-complex triangle lemma in $\\operatorname{Mod}(C)$: its boundary $\\delta$ makes this a distinguished triangle in $D(C)$, natural in maps of these three complexes. Thus the boundary is fixed by this short exact sequence construction, rather than chosen by a triangle-existence axiom.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QX (proposition-triangle), applying derived lower shriek; sites-cohomology Tag 08PG"
+   }
+  },
+  {
+   "text": "Use the specific maps $c_i$ of the lower-shriek lemma with coefficient ring $C$. They identify $L\\pi_!^C M_2$ and $L\\pi_!^C M_3$ with $L\\pi_{2,!}^C F_2$ and $L\\pi_{3,!}^C F_3$; the maps $\\theta$ of the sheaf-model lemma identify these with $L_{C/A}$ and $L_{C/B}$. Precomposition commutes sectionwise with tensor, so $M_1=g_1^{-1}(F_1\\otimes_B C)$. Accordingly $c_1$ identifies its derived colimit with $L\\pi_{1,!}^C(F_1\\otimes_B C)$. For each polynomial $P=A[x_s]$, $F_1(P)=\\bigoplus_s B\\,\\mathrm dx_s$ by the basis lemma. Tensoring any short exact sequence of $B$-modules with this module is a direct sum of that sequence and remains exact, so every value is flat. The flat-presheaf clause of the derived-colimit change-of-rings lemma now applies: its canonical bar-tensor identification gives $L\\pi_{1,!}^C(F_1\\otimes_B C)\\simeq(L\\pi_{1,!}^B F_1)\\otimes_B^{\\mathbf L}C$. Finally $\\theta_{B/A}\\otimes1$ identifies this with $L_{B/A}\\otimes_B^{\\mathbf L}C$. No flatness of $B\\to C$ was used.",
+   "uses": [
+    "lem-trf-cotangent-lower-shriek",
+    "lem-trf-cotangent-sheaf-model",
+    "lem-trf-derived-colimit-change-rings",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QX (proposition-triangle), identification of all three terms; sites-cohomology Tag 08Q8"
+   }
+  },
+  {
+   "text": "Identify the first arrow. Let $h_1:\\mathcal C_{B/A}\\to\\mathcal C_{C/A}$ send $(P\\to B)$ to $(P\\to C)$. The maps $P\\to Q$ define a natural transformation $\\eta_1:u_2\\Rightarrow h_1u_1$ in the opposite categories. Under restriction of $F_2$ along $\\eta_1$, the identity identification $M_1(U)=F_2(h_1u_1U)$ is sent to $a_U:\\mathrm dp\\otimes c\\mapsto\\mathrm dp\\otimes c$ in $\\Omega_{Q/A}\\otimes_Q C$. The natural-transformation clause of the bar lemma therefore gives the equality $c_2 K(a)=K(h_1,t_1)c_1$ in $D(C)$, where $t_1:F_1\\otimes_B C\\to h_1^{-1}F_2$ is the identity on the displayed differential values. The change-of-rings comparison identifies $K(h_1,t_1)$ with the scalar-extended canonical sheaf-model map for the square $(A\\to B)\\to(A\\to C)$: its generator formula is $\\mathrm dp\\otimes r\\otimes c\\mapsto\\mathrm dp\\otimes rc$. By the sheaf-model comparison identity this becomes the standard map $L_{B/A}\\otimes_B^{\\mathbf L}C\\to L_{C/A}$. Thus the first arrow agrees with the required functoriality map, with the equality established by a bar homotopy rather than presumed from object isomorphisms.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-sheaf-model",
+    "lem-trf-derived-colimit-change-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), agreement of standard and sheaf maps; Tag 08QU, first differential map"
+   }
+  },
+  {
+   "text": "Identify the second arrow. Let $h_2:\\mathcal C_{C/A}\\to\\mathcal C_{C/B}$ send $(Q\\to C)$ to $(Q\\otimes_A B\\to C)$. The algebra quotient $Q\\otimes_A B\\to Q\\otimes_P B$ defines a natural transformation $\\eta_2:u_3\\Rightarrow h_2u_2$. The sheaf-model transformation $t_2:F_2\\to h_2^{-1}F_3$ sends $\\mathrm dq\\otimes c$ to $\\mathrm d(q\\otimes1)\\otimes c$. Restricting along $\\eta_2$ sends this to $b_U(\\mathrm dq\\otimes c)$ in the value of $M_3$. The bar natural-transformation identity gives $c_3 K(b)=K(h_2,t_2)c_2$ in $D(C)$. The sheaf-model lemma identifies $K(h_2,t_2)$ with the standard functoriality map for the square $(A\\to C)\\to(B\\to C)$, namely $L_{C/A}\\to L_{C/B}$. This construction uses a tensor-product quotient, which exists for every $B\\to C$; it does not require the injective-case resolution of Remark explicit-map.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-sheaf-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), square changing the base from A to B; Tag 08QU, second differential map"
+   }
+  },
+  {
+   "text": "For an arbitrary commutative diagram $(A\\to B\\to C)\\to(A'\\to B'\\to C')$, write its ring maps as $a_0,b_0,c_0$. Define $v:\\mathcal E\\to\\mathcal E'$ by $P'=P\\otimes_A A'$, $Q'=Q\\otimes_A A'$, with augmentations $P'\\to B'$ and $Q'\\to C'$ induced by the diagram; $Q'$ is polynomial over $P'$. Define $v_1(P)=P\\otimes_A A'$, $v_2(Q)=Q\\otimes_A A'$, $v_3(S)=S\\otimes_B B'$. Then $u'_1v=v_1u_1$, $u'_2v=v_2u_2$, and $u'_3v\\cong v_3u_3$ via $(Q\\otimes_A A')\\otimes_{P\\otimes_A A'}B'\\cong Q\\otimes_P B'\\cong(Q\\otimes_P B)\\otimes_B B'$. At each $U$ the three semilinear coefficient maps send $\\mathrm dp\\otimes c$, $\\mathrm dq\\otimes c$, and $\\mathrm d(q\\otimes1)\\otimes c$ to their primed differentials tensored with $c_0(c)$. Their two squares with $a_U,b_U$ commute by these formulas. They therefore define a map of the three bar complexes (target restricted to $C$) and a morphism of their short exact sequences. Applying the short-exact-complex triangle lemma gives $T_1[1]\\delta=\\delta'T_3$, where $T_i$ are these explicit bar maps.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality) and sites-cohomology Tag 08PH; arbitrary-diagram construction for Tag 08QX"
+   }
+  },
+  {
+   "text": "Let $\\alpha_1,\\alpha_2,\\alpha_3$ denote the term isomorphisms of step 4 and use primes for the target diagram. The bar formulas give $c'_iT_i=K(v_i,t_i)c_i$: both sides send the summand on $U_n\\to\\cdots\\to U_0$ to that on $u'_ivU_n\\to\\cdots\\to u'_ivU_0$, with the same primed differential coefficient. For $i=3$ insert the displayed tensor-associativity identification; the last clause of the bar lemma gives the same derived map. The sheaf-model identities then give $\\alpha'_jT_j=f_j\\alpha_j$ for $j=2,3$, where $f_2,f_3$ are the standard maps for $(A,C)\\to(A',C')$ and $(B,C)\\to(B',C')$. For $j=1$ use also the change-of-rings compatibility: on a bar tensor generator it sends $x\\otimes c$ to $t_1(x)\\otimes c_0(c)$ on both sides, so $f_1$ is the map $L_{B/A}\\otimes_B^{\\mathbf L}C\\to L_{B'/A'}\\otimes_{B'}^{\\mathbf L}C'$ induced by the standard cotangent map and the coefficient maps. Transport the boundary as $\\partial=\\alpha_1[1]\\delta\\alpha_3^{-1}$. The preceding identities and step 7 give $f_1[1]\\partial=\\partial'f_3$ explicitly. The first two squares follow from their identified functoriality maps. Identities and composition follow from the same bar generator rule and the standard-resolution identities. This proves naturality of the whole canonical distinguished triangle, including its boundary, for arbitrary diagrams. Relabel $B,C$ back to $P,B$ to obtain the triangle for $A\\to P\\to B$.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-derived-colimit-change-rings",
+    "lem-trf-cotangent-sheaf-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08QL and 08QX, canonical functoriality and boundary; sites-cohomology Tags 08PG, 08PH, 08Q8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-cotangent-lower-shriek",
+  "lem-trf-cotangent-sheaf-model",
+  "lem-trf-derived-colimit-bar",
+  "lem-trf-derived-colimit-change-rings",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08QU/08QW/08QX with the sheaf proof; explicit bar-chain comparison arguments supply the omitted functoriality and boundary verifications of Tag 08QL."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -81,5 +199,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-cotangent-transitivity-triangle",
+  "worker": "stage1",
+  "summary": "Repair of ae8b2d971a: specified structural rings and constant module categories; replaced the invalid change-of-rings citation by the actual derived-colimit comparison with verified flatness; replaced the naturality assertion by two explicit index-functor prism comparisons and arbitrary-diagram bar maps, including the boundary identity. Removed the unlanded elementary polynomial helper and its false natural-splitting claim; reused the existing arbitrary-variable basis and differential base-change nodes.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "why": "Generic ring differential basis supplies the objectwise split sequence and flat values; the cotangent unit has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-kahler-differentials-base-change",
+    "why": "Generic canonical differential base-change identifies the third sheaf and its generator map."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic short exact complex triangle theorem and its explicit boundary naturality are needed after the bar construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-703e894a5",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-703e894a5 (reviewer sub-agent of L); spot-checked: Read the full item, all four new nodes, cited nodes, unit/chapter route, report, required instructions, and Stacks sources at 08PQ/08PS/08PT/08PU, 08QI, 08QL, 08QR/08QU/08QW/08QX, 07AC, 08PC–08PH, and 08Q8. The repaired typed coefficient/structural setup, derived-colimit bar and change-of-rings interfaces, explicit differential maps, boundary naturality, hypotheses, edge cases, Mathlib searches, blueprint metadata, and tool uses check out. No duplicate, route-pivot machinery, SGA 4 citation, false assumption, or hidden long step found. Review written to review.md."
  }
 }
