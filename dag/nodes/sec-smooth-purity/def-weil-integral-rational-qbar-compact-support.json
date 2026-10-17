@@ -31,7 +31,8 @@
   "lem-weil-proetale-countable-products-exact",
   "lem-weil-derived-limit-existence",
   "lem-sf-integral-compact-support-constructible",
-  "def-weil-finite-subextension-directed-set"
+  "def-weil-finite-subextension-directed-set",
+  "lem-pur-integral-operations-well-defined"
  ],
  "proof": [],
  "proof_deps": [],
@@ -97,5 +98,29 @@
   "result": "pass"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralRationalQbarCompactSupport",
+  "declaration": "WeilConjectures.sfQbarCompactSupportValue",
+  "declarations": [
+   "WeilConjectures.sfIntegralCompactSupportValue",
+   "WeilConjectures.sfRationalCompactSupportValue",
+   "WeilConjectures.sfQbarCompactSupportValue"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralRationalQbarCompactSupport.lean",
+  "statement": "def sfQbarCompactSupportValue (K₀ : Type u) [Field K₀] (_hl : IsUnit (l : K₀)) [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))] [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))] [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))] [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (c : Compactification f) (E₀ : Padic.FiniteCoefficientFields l Ω) (K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E₀) X) : generalAlgebraicallyClosedConstructibleCategory l Ω Y",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The three definitions choose a derived-limit object using the complete existence theorem, retain the integral constructibility witness, localize unchanged integral objects, and return the literal finite-stage pair. The compact-support tower and canonical transitions are the published datum-free interfaces. Second reading removes all HasProduct binders: the published integralOperationsDerivedCountableProducts theorem supplies countable products internally on the identical completed-coefficient derived category. Its already landed owning node is cited in stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30407d6a2",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Read the node, the snapshot module, the report (real Worker report and Second reading by Q32 sections) and the dependency declarations (sfCompactSupportTerm/Transition, sfIntegralCompactSupport_constructible, integralOperationsDerivedCountableProducts, exists_isDerivedLimit_and_iso, sfRationalConstructibleLocalization, generalAlgebraicallyClosedConstructibleCategory=Pair, Coefficient=Shrink). Every hypothesis matches the node exactly: field K0, finite-type X and Y, separated finite-type f, l prime and invertible, finite E, one fixed compactification c. Terms and transitions match the specified tower (exponent n+1). The derived limit is chosen via the landed countable-products theorem plus exists_isDerivedLimit_and_iso, with no extra HasProduct binder. Integral membership comes from the constructibility theorem, the rational value is the unchanged-object localization, and the Qbar value is the literal pair (E0, Rf_!K_E) with the closure universe v independent. No independence claims are folded in. Edge cases (n=0, empty schemes, zero complex, char l, universes) are fine. No hollow data, no sorry or proof in the file, and source/blueprint docstrings are present. lean.statement matches the signature apart from the noncomputable modifier. Only the item's lean and stmt_deps changed; the added stmt_dep lem-pur-integral-operations-well-defined is a landed node and creates no cycle. nt_compile.py ran twice: rc=0, 3.5 s and 3.9 s, no errors or warnings. Non-blocking: two upstream definitions, sfAmbientCompactSupportCandidate and sfIntrinsicCompactSupport, are duplicates."
+ }
 }

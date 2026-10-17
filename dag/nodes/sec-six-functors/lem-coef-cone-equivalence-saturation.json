@@ -252,5 +252,29 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-4f30d5d27 (reviewer sub-agent of L); spot-checked: I read all of the item, the new node, the 16 cited statements and the parent contravariant-slice-model (Steps 4, 5, 11). The item statement is unchanged and correct for the right-cone (contravariant) version of HTT Prop 2.1.4.7(1)-(2) and A.2.6.12. The 8 steps check out: Step 1 presheaf/sketch local presentability; Step 2 the degreewise summand formula, which gives connected-colimit preservation and a common vertex set O=S_0+{v}; Step 3 identity-on-objects reduces DK equivalence to objectwise weak equivalence; Step 4 filtered colimits are computed mappingwise, with arbitrary filtered I; Steps 5-6 use the O x O-sorted Bergner model, small-object factorization with an accessible E, the I_O-injective accessible R, W_S=H^-1R by two-out-of-three, and accessible-full-inverse-image; Step 7 C_S(i) is injective and bijective on vertices; Step 8 fixed-object left properness, with the orientation checked. New node lem-coef-coherent-fixed-vertex-cofibrations is true: vertex-bijective cells have n>=1; C[dDelta^n]->C[Delta^n] is the free attachment of L_xy(d cube^{n-1})->L_xy(cube^{n-1}), also when x=y; the n=1 cell is a generator. Tested on the empty case, K=L, dDelta^1 and dDelta^2. It is statement-only and self-contained, not a restatement of an item clause, and not a duplicate (scanned every DAG statement mentioning coherent realization, cofibration and mono). All cited statements are in unit sk-prop-sf-biduality-general, so no tool_uses; no cycle among the 220 reachable nodes; no SGA source. The blueprint.from.place matches main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph 2. HTT is not archived; it is recorded as WANTED and the item is marked agent-origin. Minor: lean_audit is absent on both files, as on about 10% of side-project nodes created since 2026-10-16; not treated as a fault. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.ConeEquivalenceSaturation",
+  "declaration": "SSet.ConeEquivalence.cone_equivalence_saturation",
+  "declarations": [
+   "SSet.ConeEquivalence.coneEquivalences",
+   "SSet.ConeEquivalence.HasSmallFilteredGenerators",
+   "SSet.ConeEquivalence.cone_equivalence_saturation"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/ConeEquivalenceSaturation.lean",
+  "statement": "theorem cone_equivalence_saturation (S : SSet.{u}) : MorphismProperty.isomorphisms (Over S) ≤ coneEquivalences S ∧ (coneEquivalences S).HasTwoOutOfThreeProperty ∧ IsStableUnderFilteredColimits.{u, u} (coneEquivalences S) ∧ HasSmallFilteredGenerators S ∧ (∀ {X Y X' Y' : Over S} (f : X ⟶ Y) (i : X ⟶ X') (j : Y ⟶ Y') (f' : X' ⟶ Y'), IsPushout i f f' j → Mono i.left → coneEquivalences S f → coneEquivalences S f')",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second reading: require Small.{u} W₀, fix filtered-index universes, reuse Enhanced.coneExtension/Map and IsCategoricalEquivalence from ContravariantSliceModel, and supply all eight proof steps and available proof-dependency imports. The parent module cannot import this module back without an import cycle; omit that backlink under stages/2-statements.md §3(7). No informal statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ea5807f1",
+  "group": "N5",
+  "result": "pass",
+  "note": "Read node, both stmt_deps, the module, report and the reused ContravariantSliceModel decls (coneExtension = pushout a (rightJoinConeInclusion X), X⋆Δ⁰ with apex last; coneExtensionMap canonical; IsCategoricalEquivalence = Bergner DK equivalence of rigidification = mapping WHE + π₀ bijection/ess. surj.). All clauses exact: isomorphisms ≤ W_S, HasTwoOutOfThreeProperty, IsStableUnderFilteredColimits.{u,u} (arrow-category colimit, IsFiltered incl. nonempty), HasSmallFilteredGenerators with Small.{u} W₀ ⊆ W_S chosen before f, filtered J:Type u, D.obj j ∈ W₀, f ≅ colimit D; IsPushout i f f' j orientation correct, Mono i.left, no extra hypotheses, universe-polymorphic. Edge cases empty X/S, degree 0 fine. Gates: no hollow defs, single sorry, source/blueprint docstrings with 8 proof steps, imports = stated proof-dep modules/mathlib_match, lines ≤100, statement verbatim, 3-file shape. nt_compile --json rc=0, no warnings. Non-blocking: F1 parent ContravariantSliceModel cannot import this module back (omission recorded in lean.note per §3(7)); stage-3 proof of parent must be placed accordingly. F2 cosmetic 'the project server' text substitutions in report."
  }
 }

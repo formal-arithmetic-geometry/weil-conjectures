@@ -127,5 +127,35 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-0142a5f31 (reviewer sub-agent of L); spot-checked: I read the master source pur713-def-base-changed-compactification.md (main-20261015, order 2355), the sk-prop-sp-purity-bc unit, the chapter, and the statements of all seven cited nodes, including the current blueprint_update texts of def-weil-pbc-cartesian-square, def-nagata-compactification, def-nagata-compactification-base-change and lemma-nagata-compactification-base-change. The source cites pur456-pbc-chosen-compactification, which exists in neither the blueprint nor the DAG, so repointing it to def-nagata-compactification is correct; the open-immersion-plus-proper convention of its update is used. j' is now defined by the projection equations ḡj'=jg' and p'j'=f'. That pair is compatible because pjg'=fg'=gf', and the universal property of def-pc-fibre-product gives j'. The source's 'induced by j and id_{Y'}' is ill-typed for an arbitrary Cartesian square, and its literal equality X'=X×_{X̄}X̄' is false, so the second reader's canonical-identification reading is right. I re-derived that identification by hand. Open immersion and properness follow from the leaves lem-weil-pbc-open-immersion-base-change (Stacks 01JY) and lem-weil-pbc-proper-base-change (Stacks 01W4), with no finiteness hypothesis. Edge cases checked: identity base change, empty Y', empty X with a nonempty compactification, j an isomorphism. The three close blueprint nodes (def-nagata-compactification-base-change, def-cbc-compact-support-square, det-def-sfb-shriek-base-change-morphism-compactification) are restricted versions or the generic construction; they are listed in same_as, not duplicated. There are no new nodes, no cycle, and no coefficient category or sheaf base-change morphism in this definition. The citers (open, shriek and chosen exchanges, pur9-cs-def-bc) get the jg'=ḡj', c' and □_p they use. FIX (C1/B3): the identification X'≅X×_{X̄}X̄', on which the open-immersion clause depends, had no node cited. I added the existing Mathlib leaf lem-weil-pbc-cartesian-square-pasting (IsPullback.paste_vert_iff): the lower square □_p and the outer rectangle □ are Cartesian, so the upper square is Cartesian. This matches slopmaster2 BaseChange.lean:82/100/117. The corrected item is in fixes/dag/nodes/sec-smooth-purity/; the only changes are that statement sentence and the added stmt_dep. Nothing is weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.Compactification.BaseChange",
+  "declaration": "AlgebraicGeometry.Compactification.ofIsPullback",
+  "declarations": [
+   "AlgebraicGeometry.Compactification.ofIsPullback",
+   "AlgebraicGeometry.Compactification.isPullback_i_ofIsPullback",
+   "AlgebraicGeometry.Compactification.isPullback_g_ofIsPullback",
+   "AlgebraicGeometry.Compactification.ofIsPullback_i_fst",
+   "AlgebraicGeometry.Compactification.ofIsPullback_i_snd",
+   "AlgebraicGeometry.Compactification.baseChange",
+   "AlgebraicGeometry.Compactification.baseChange_Z",
+   "AlgebraicGeometry.Compactification.baseChange_g",
+   "AlgebraicGeometry.Compactification.baseChange_i_fst",
+   "AlgebraicGeometry.Compactification.baseChange_i_snd"
+  ],
+  "statement": "noncomputable def ofIsPullback (hsq : IsPullback h u p t) (c : Compactification p) :\n    Compactification u",
+  "branch": "slopmaster2",
+  "by": "Q102",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "The corrected generic Cartesian-square statement is exactly the published construction `Compactification.ofIsPullback`: it builds the ambient pullback, the induced open immersion and proper projection. The declarations `isPullback_i_ofIsPullback`, `isPullback_g_ofIsPullback`, and `ofIsPullback_i_fst`/`ofIsPullback_i_snd` supply the upper/lower Cartesian squares and projection equation; the baseChange declarations cover the literal pullback notation. The same notion is already recorded by def-cbc-compact-support-square, def-nagata-compactification-base-change, and det-def-sfb-shriek-base-change-morphism-compactification."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-228a5b43f",
+  "group": "Q102",
+  "result": "pass",
+  "note": "The delivery adds only an existing lean binding to upstream AlgebraicGeometry.Compactification.ofIsPullback (WeilConjectures.Compactification.BaseChange), plus the report with Worker report and Second reading sections. Each node clause matches: hsq : IsPullback h u p t gives the square (g',f',f,g); c : Compactification p is open immersion plus proper, no quasi-compactness; Z = pullback c.g t; j' = pullback.lift with the ofIsPullback_i_fst/_snd equations; the upper square is Cartesian (isPullback_i_ofIsPullback, via of_bot pasting); the lower square is Cartesian (isPullback_g_ofIsPullback, flip verified). The open immersion and proper fields are real. ChosenCartesianSquare and IsPullback are equivalent, and the data do not depend on the chosen iso. Edge cases checked: empty, identity, non-flat base change, single universe u. H4: the same construction is already bound by def-nagata-compactification-base-change and def-cbc-compact-support-square. Not hollow: axioms are propext, Classical.choice, Quot.sound. The statement is verbatim. A probe of all 10 declarations compiled with lcompile against the live build, exit 0 and no warnings; ofIsPullback_i_snd is present in the live source. Minor: lean.note overstates that det-def-sfb-shriek-base-change-morphism-compactification has a Lean record; no repair needed."
  }
 }

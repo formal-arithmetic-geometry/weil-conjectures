@@ -21,7 +21,9 @@
   "def-weil-sheaf-of-modules-category",
   "def-sc-finitely-presented-module",
   "def-pur-sheaf-hom",
-  "sk-def-pe-classical-definition"
+  "sk-def-pe-classical-definition",
+  "def-sf-site-constant-module-functor",
+  "lem-pur-site-constant-module-hom"
  ],
  "proof": [
   {
@@ -279,5 +281,42 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteConstantHom",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteConstantHom_presentation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteConstantHomGrpFilteredColimits",
+   "AlgebraicGeometry.ProEtale.finiteConstantHomGrpFilteredColimitsSite",
+   "AlgebraicGeometry.ProEtale.finiteConstantHomComparisonFiltered",
+   "AlgebraicGeometry.ProEtale.finiteConstantHomGrpPointwiseKan",
+   "AlgebraicGeometry.ProEtale.finiteConstantHomRing",
+   "AlgebraicGeometry.ProEtale.FiniteConstantHomModules",
+   "AlgebraicGeometry.ProEtale.finiteConstantHomFunctor",
+   "AlgebraicGeometry.ProEtale.finiteConstantHomScalar",
+   "AlgebraicGeometry.ProEtale.finiteConstantHomTranspose",
+   "AlgebraicGeometry.ProEtale.finiteConstantHomUnderlying",
+   "AlgebraicGeometry.ProEtale.finiteConstantSetComposition",
+   "AlgebraicGeometry.ProEtale.finiteConstantHomPair",
+   "AlgebraicGeometry.ProEtale.finiteConstantModuleComposition",
+   "AlgebraicGeometry.ProEtale.finiteConstantHom_presentation",
+   "AlgebraicGeometry.ProEtale.finiteConstantHom_constant",
+   "AlgebraicGeometry.ProEtale.finiteConstantHom_automorphisms"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteConstantHom.lean",
+  "statement": "theorem finiteConstantHom_presentation {m n : ℕ} (M : ModuleCat.{u + 1} Λ) (a : (Fin m → Λ) →ₗ[Λ] (Fin n → Λ)) (b : (Fin n → Λ) →ₗ[Λ] M) (hexact : Function.Exact a b) (hsurjective : Function.Surjective b) : ∃ e : ∀ (N : FiniteConstantHomModules X Λ) (U : X.ProEtᵒᵖ), (SheafOfModules.homObj (R := finiteConstantHomRing X Λ) ((finiteConstantHomFunctor X Λ).obj M) N).val.obj U ≃ₗ[ (finiteConstantHomRing X Λ).obj.obj U] LinearMap.ker (finiteConstantHomTranspose X Λ a N U), (∀ (N : FiniteConstantHomModules X Λ) (U : X.ProEtᵒᵖ) (φ : (SheafOfModules.homObj (R := finiteConstantHomRing X Λ) ((finiteConstantHomFunctor X Λ).obj M) N).val.obj U) (i : Fin n), (e N U φ).1 i = (φ.app (op (Over.mk (𝟙 U.unop)))) ((constantModuleHomUnit (Scheme.ProEt.topology X) Λ M).app U (b (Pi.single i 1)))) ∧ (∀ (N : FiniteConstantHomModules X Λ) (U V : X.ProEtᵒᵖ) (f : U ⟶ V) (φ : (SheafOfModules.homObj (R := finiteConstantHomRing X Λ) ((finiteConstantHomFunctor X Λ).obj M) N).val.obj U) (i : Fin n), (e N V ((SheafOfModules.homObj (R := finiteConstantHomRing X Λ) ((finiteConstantHomFunctor X Λ).obj M) N).val.map f φ)).1 i = N.val.map f ((e N U φ).1 i)) ∧ (∀ (N N' : FiniteConstantHomModules X Λ) (g : N ⟶ N') (U : X.ProEtᵒᵖ) (φ : (SheafOfModules.homObj (R := finiteConstantHomRing X Λ) ((finiteConstantHomFunctor X Λ).obj M) N).val.obj U) (i : Fin n), (e N' U ((SheafOfModules.homObjMap (R := finiteConstantHomRing X Λ) (𝟙 ((finiteConstantHomFunctor X Λ).obj M)) g).val.app U φ)).1 i = g.val.app U ((e N U φ).1 i))",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "All three clauses: finiteConstantHom_presentation gives the sectionwise linear kernel isomorphism, with the basis-value normalization and naturality under restriction and arbitrary target maps; finiteConstantHom_constant gives the canonical Hom comparison with finite-presentation invertibility and composition on arbitrary local sections; finiteConstantHom_automorphisms gives the actual local automorphism groups, their natural restrictions, the constant group comparison, the group-valued etale inverse-image comparison, and continuity classicality. Helpers reuse the existing constant module functor, coefficient ring and internal Hom. Group filtered-colimit support is assembled from existing Mathlib constructions; no extra mathematical axiom, arbitrary scalar map, coefficient finiteness, or equality of site universes is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ff8a6056",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Read node (verbatim blueprint source), all 11 stmt_deps and their Lean (constantModuleHomFunctor/Unit, siteConstantModule_hom, homObj, ringedSiteModules, IsClassical, proEtaleSiteComparison/sheafPullback, constantSheaf), module, report (Worker report + Second reading by Q70) and delivery diff (3 files; node only adds 2 landed used stmt_deps + lean record). Clause 1: sectionwise R(U)-linear equiv homObj(C M,N) to ker of transpose sum_i eta(a(e_k)_i)x_i, normalized by basis values phi(b e_i), natural in restriction and in every target map g. Clause 2: sigma and c unit-normalized (hence canonical), IsIso exactly for FP P,Q, composition on arbitrary sections (g comp f matches f then g) and identity. Clause 3: GrpCat sheaf A with A(U) mul-equiv to actual slice Aut, restriction formula, alpha to constant Aut M normalized via C.mapIso, Nonempty iso to group-valued sheafPullback(toProEt) of constant etale group sheaf, IsClassical on underlying sets; no finiteness/commutativity. Lambda : Type (u+1) not a restriction (ULift convention defeq to proEtaleDerivedCategory A_Y); site universes not identified. Edge cases X empty, zero ring, m=0, n=0, M=0, non-injective a, arbitrary N OK. No hollow defs; 4 Prop-valued support instances from Mathlib constructions; only 3 whole-proof sorries; docstrings with source and blueprint tag and proof steps; lean.statement verbatim; no lines >100. nt_compile.py --json at library path: clean, 7.2 s, rc=0 (negative control rc=1). Minor non-faults: Nonempty for the nu^* iso, constant proetale module used for nu^*M_Et as accepted at stage 1, redundant identity conjunct."
  }
 }

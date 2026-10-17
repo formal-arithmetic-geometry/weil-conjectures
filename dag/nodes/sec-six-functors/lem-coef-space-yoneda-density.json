@@ -26,7 +26,9 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-presentable-infinity-category"
+  "def-coef-presentable-infinity-category",
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-coef-space-transport-classification"
  ],
  "proof": [
   {
@@ -266,5 +268,57 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpaceYonedaDensity",
+  "declaration": "CategoryTheory.Spaces.space_yoneda_density",
+  "declarations": [
+   "CategoryTheory.Spaces.densitySpaceValue",
+   "CategoryTheory.Spaces.densitySpaceEdgeMap",
+   "CategoryTheory.Spaces.densityRepresentable",
+   "CategoryTheory.Spaces.densityEvaluation",
+   "CategoryTheory.Spaces.densityValue",
+   "CategoryTheory.Spaces.density_value_representable",
+   "CategoryTheory.Spaces.densityIdentity",
+   "CategoryTheory.Spaces.densityEvaluationElements",
+   "CategoryTheory.Spaces.density_lift_kan",
+   "CategoryTheory.Spaces.densityLowerVertex",
+   "CategoryTheory.Spaces.densityLowerPaths",
+   "CategoryTheory.Spaces.densityLiftHomSimplex",
+   "CategoryTheory.Spaces.densityLiftObject",
+   "CategoryTheory.Spaces.densityLiftAction",
+   "CategoryTheory.Spaces.density_lift_laws",
+   "CategoryTheory.Spaces.densityLiftSimplex",
+   "CategoryTheory.Spaces.density_lift_naturality",
+   "CategoryTheory.Spaces.densityParameters",
+   "CategoryTheory.Spaces.densityMappingTarget",
+   "CategoryTheory.Spaces.densityMappingInputApp",
+   "CategoryTheory.Spaces.density_mapping_input_naturality",
+   "CategoryTheory.Spaces.densityMappingInput",
+   "CategoryTheory.Spaces.densityMappingPairing",
+   "CategoryTheory.Spaces.densitySmallEvaluation",
+   "CategoryTheory.Spaces.densityLiftEvaluation",
+   "CategoryTheory.Spaces.densitySpaceLift",
+   "CategoryTheory.Spaces.densityEvaluationPairing",
+   "CategoryTheory.Spaces.densityHomIdentity",
+   "CategoryTheory.Spaces.densityEvaluationComponent",
+   "CategoryTheory.Spaces.DensityCoherentEvaluation",
+   "CategoryTheory.Spaces.space_yoneda_density"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SpaceYonedaDensity.lean",
+  "statement": "theorem space_yoneda_density (C : SSet.{u}) [SSet.Quasicategory C] : (∃ point : infinityCategory.{u} _⦋0⦌, SSet.Enhanced.IsContractible (densitySpaceValue point) ∧ ∀ c : C _⦋0⦌, ∃ t : densityEvaluationElements C c point _⦋0⦌, t.1.1 = densityRepresentable C c ∧ SSet.Enhanced.IsInitial (densityEvaluationElements C c point) t ∧ ∃ e : infinityCategory.{u} _⦋1⦌, t.1.2 = SSet.Enhanced.diagramVertex (SSet.yonedaEquiv.symm e) ∧ HEq (densitySpaceEdgeMap e) (SSet.const (X := densitySpaceValue point) (densityIdentity C c))) ∧ (SSet.Enhanced.AreNaturallyEquivalent (densityMappingPairing C) (densityEvaluationPairing C) ∧ DensityCoherentEvaluation C) ∧ (∀ F : infinityPresheaves C _⦋0⦌, ∃ (E : SSet.{u}) (p : E ⟶ C), ∃ t : SSet.Enhanced.coconeCategory (SSet.uliftFunctor.{u + 1, u}.map p ≫ infinityYoneda C) _⦋0⦌, t.1.1 = F ∧ SSet.Enhanced.IsColimiting (SSet.uliftFunctor.{u + 1, u}.map p ≫ infinityYoneda C) t)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Retains the accepted normalized corepresentability and small coherent colimiting cocone. Adds an explicit AreNaturallyEquivalent clause for the actual mapping and evaluation bifunctors on C-op times P(C). The normalized equivalence edge sends the actual identity of h_c to densityIdentity C c; coherent naturality in F therefore specifies evaluation at that element, and the full parameter category retains c-morphisms and all higher mixed coherences. The universe inclusion has real degreewise ULift data, including its enriched action; no small and ambient universes are equated. Helper laws are named postponed theorems with source and proof docstrings. The source statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c211aabc3",
+  "group": "Q22",
+  "result": "fix",
+  "note": "Read node, report (Worker report + fresh Second reading by Q22), module, dependency declarations (InfinityPresheafYoneda, EnhancedDiagramsCones comma/cocone/IsInitial/AreNaturallyEquivalent) and the prior return. The H3 repair is correct: DensityCoherentEvaluation is one equivalence edge between the actual Hom-pairing bifunctor (reindexed by op-Yoneda) and the actual ihom.ev bifunctor (degreewise universe lift with real data), normalized id_{h_c} to id_c; not stronger than the node. The first and density conjuncts are unchanged and correct (orientations checked; small possibly-empty E; apex exactly F; IsColimiting). A /tmp probe shows the HEq normalization types agree (source by rfl, target up to the standard closed-monoidal evaluation identity), so the theorem is not made false. Postponed helper theorems are true; no hollow definitions; docstrings ok; lean.statement verbatim; all 31 declarations listed; stmt_deps landed and used; only the lean and stmt_deps node fields changed. nt_compile.py exit 0, no diagnostics. FIX: the report still had the 'the project server' placeholders replacing HTT Lemmas 5.1.5.2-5.1.5.3 (lines 19 and 216), which the prior return asked to fix; fixes/lem-coef-space-yoneda-density.report.md is the complete corrected report."
  }
 }
