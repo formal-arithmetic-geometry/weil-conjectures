@@ -10,9 +10,78 @@
  "stmt_deps": [
   "def-weil-pbc-direct-sum-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $j\\in J$, choose a generating sequence $(g_{j,n})_{n\\in\\mathbf N}$ of $N_j$. This is possible from the given at most countable generating subset by listing it and inserting zero in unused positions; for the zero module the constant zero sequence suffices. Write $\\iota_j:N_j\\to M$ for the canonical inclusion of [def-weil-pbc-direct-sum-modules]. Thus each $x\\in N_j$ is a finite sum $\\sum_{n\\in E}r_n g_{j,n}$, with $E\\subseteq\\mathbf N$ finite and $r_n\\in R$. The choice is of generators, not an enumeration of all elements of $N_j$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof: the generator matrix and finite-support enlargement, lines 20511–20552; adapted to one endomorphism."
+   }
+  },
+  {
+   "text": "For each $j,n$, put $S_{j,n}=\\operatorname{supp}(f(\\iota_j(g_{j,n})))\\subseteq J$. Each $S_{j,n}$ is finite because its defining vector belongs to the direct sum [def-weil-pbc-direct-sum-modules]. Put $F_j=\\bigcup_{n\\in\\mathbf N}S_{j,n}$. This set is at most countable: choose a finite listing of each $S_{j,n}$, and assign an element of $F_j$ the pair $(n,r)$ of its first occurrence (least $n$, then least position $r$ in that listing). This is an injection into $\\mathbf N^2$, which is enumerated by successive finite diagonals. Empty supports contribute no entries.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof: the generator matrix and finite-support enlargement, lines 20511–20552; adapted to one endomorphism."
+   }
+  },
+  {
+   "text": "Define subsets of $J$ by ordinary recursion on $\\mathbf N$: $A_0=C$ and $A_{k+1}=A_k\\cup\\bigcup_{j\\in A_k}F_j$. They are increasing and at most countable. For the countability induction, the base is the hypothesis on $C$. Given an injection $a:A_k\\to\\mathbf N$ and the injections $b_j:F_j\\to\\mathbf N$ of Step 2, an element $t\\in\\bigcup_{j\\in A_k}F_j$ is coded by $(a(j),b_j(t))$, choosing among its possible $j$ the one with least $a(j)$. Distinct elements have distinct codes. Adjoining $A_k$ uses one additional binary label. Diagonal enumeration of pairs, and then the binary label, puts this set into $\\mathbf N$. This proves the successor claim even if $A_k$ is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof: the generator matrix and finite-support enlargement, lines 20511–20552; adapted to one endomorphism."
+   }
+  },
+  {
+   "text": "For every $k$, $f(M_{A_k})\\subseteq M_{A_{k+1}}$. Indeed, for $j\\in A_k$ and $x=\\sum_{n\\in E}r_n g_{j,n}\\in N_j$, linearity gives $f(\\iota_j(x))=\\sum_{n\\in E}r_n f(\\iota_j(g_{j,n}))$. Outside $F_j$ every coordinate of every vector on the right is zero. Hence this vector is supported in $F_j\\subseteq A_{k+1}$. Every $y\\in M_{A_k}$ is the finite sum $\\sum_{j\\in\\operatorname{supp}(y)}\\iota_j(y_j)$ by [def-weil-pbc-direct-sum-modules]. Applying $f$ and the preceding calculation to each term proves that $f(y)$ is supported in $A_{k+1}$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof: the generator matrix and finite-support enlargement, lines 20511–20552; adapted to one endomorphism."
+   }
+  },
+  {
+   "text": "Set $D=\\bigcup_{k\\in\\mathbf N}A_k$. Then $C=A_0\\subseteq D$. To verify countability explicitly, choose injections $a_k:A_k\\to\\mathbf N$ supplied by Step 3. Send $j\\in D$ to $(k,a_k(j))$, where $k$ is its least membership stage. This is injective, and enumeration of $\\mathbf N^2$ by finite diagonals proves that $D$ is at most countable. These choices and the recursion are all over sets: $J$ is a set and the stage set is $\\mathbf N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof: the generator matrix and finite-support enlargement, lines 20511–20552; adapted to one endomorphism."
+   }
+  },
+  {
+   "text": "Let $y\\in M_D$. If $y=0$, then $f(y)=0\\in M_D$. Otherwise its support is finite by [def-weil-pbc-direct-sum-modules]. For each index of that support choose its least membership stage in $A_k$, and let $k$ be the maximum of these finitely many natural numbers. Since the $A_k$ are increasing, $y\\in M_{A_k}$. Step 4 gives $f(y)\\in M_{A_{k+1}}\\subseteq M_D$. This proves the required invariance. Every countability bound used only generators and finite coordinate supports; none counted the possible coefficients in $R$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof: the generator matrix and finite-support enlargement, lines 20511–20552; adapted to one endomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 058X, theorem-kaplansky-direct-sum, proof: the generator matrix and finite-support enlargement, lines 20511–20552; adapted to one endomorphism."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -48,10 +117,45 @@
    "results": "{\"t\": \"2026-10-17T21:08:02Z\", \"tool\": \"leanfinder\", \"query\": \"Given an endomorphism of a direct sum with countably generated summands there exists a countable subset of indices containing a specified index whose coordinate direct sum is invariant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.diag_toMatrix_directSum_collectedBasis_eq_zero_of_mapsTo_ne\", \"LinearMap.trace_eq_zero_of_mapsTo_ne\", \"DirectSum.IsInternal.ofBijective_coeLinearMap_of_ne\", \"DirectSum.IsInternal.ofBijective_coeLinearMap_of_mem_ne\", \"LinearMap.trace_eq_sum_trace_restrict'\", \"LinearMap.trace_eq_sum_trace_restrict\", \"iSupIndep.ringEquiv\", \"DirectSum.isInternal_ne_bot_iff\"], \"digest\": \"ce7ad9d907244039\"}",
    "date": "2026-10-18",
    "verdict": "no match: returned direct-sum maps and trace formulas assume invariance rather than constructing a countable invariant coordinate set. Countable.lean:25–29 bounds the underlying set only when R is countable, which is not assumed. Read Algebra/DirectSum/LinearMap.lean:25–149 and LinearAlgebra/Countable.lean:25–38."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An endomorphism of a direct sum of countably generated modules has a countable invariant coordinate subset containing any given countable subset",
+   "results": "{\"t\": \"2026-10-17T21:21:29Z\", \"tool\": \"leanfinder\", \"query\": \"An endomorphism of a direct sum of countably generated modules has a countable invariant coordinate subset containing any given countable subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"jacobson_density\", \"LinearMap.diag_toMatrix_directSum_collectedBasis_eq_zero_of_mapsTo_ne\", \"LinearMap.trace_eq_zero_of_mapsTo_ne\", \"Module.End.genEigenspace_directed\", \"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"Module.End.genEigenspace_eq_iSup_genEigenspace_nat\", \"Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_forall_mapsTo\", \"Finsupp.instCountableSubtypeMemSubmoduleSpanRange\"], \"digest\": \"1882b759705c6d15\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: direct-sum matrix/trace lemmas assume component mapping conditions; eigenspace lemmas do not construct countable coordinate subsets. Countable.lean:25–38 has an extra Countable R hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "(countable|countably).*(support|span|invariant)|(support|invariant).*(countable|countably)",
+   "results": "{\"t\": \"2026-10-17T21:21:43Z\", \"tool\": \"grep\", \"query\": \"(countable|countably).*(support|span|invariant)|(support|invariant).*(countable|countably)\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Countable.lean\", \"Mathlib/LinearAlgebra/Countable.lean\", \"Mathlib/LinearAlgebra/Countable.lean\"], \"digest\": \"15becc0410953bce\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Countable.lean:25–38 assumes Countable R and bounds underlying sets, unlike this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A countable set of summands of a direct sum of countably generated modules is contained in a countable invariant set of summands under any linear endomorphism",
+   "results": "{\"t\": \"2026-10-17T21:21:44Z\", \"tool\": \"leansearch\", \"query\": \"A countable set of summands of a direct sum of countably generated modules is contained in a countable invariant set of summands under any linear endomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.instDirectSum\", \"Module.End.invtSubmodule\", \"Module.End.IsFinitelySemisimple.restrict\", \"Submodule.IsFullyInvariant\", \"Module.End.invtSubmodule.sup_mem\", \"Module.End.isFinitelySemisimple_iff\", \"Module.Finite.instDFinsupp\", \"LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup\"], \"digest\": \"364b15312a535c80\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: invtSubmodule defines invariance and sup_mem preserves already invariant submodules; no countable coordinate enlargement. Read Invariant.lean:30–100 and DirectSum/LinearMap.lean:25–100."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap, Set.Countable",
+   "results": "{\"t\": \"2026-10-17T21:21:44Z\", \"tool\": \"loogle\", \"query\": \"LinearMap, Set.Countable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Countable closure under finite supports of images of a countable sequence of module generators in a direct sum",
+   "results": "{\"t\": \"2026-10-17T21:21:57Z\", \"tool\": \"leanfinder\", \"query\": \"Countable closure under finite supports of images of a countable sequence of module generators in a direct sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Finsupp.instCountableSubtypeMemSubmoduleSpanRange\", \"DirectSum.finite_support\", \"DFinsupp.iSup_range_lsingle\", \"Finsupp.iSup_lsingle_range\", \"Submodule.iSup_eq_range_dfinsupp_lsum\", \"instCountableFreeAbelianGroup\", \"Finsupp.linearCombinationOn_range\", \"Submodule.mem_biSup_iff_exists_dfinsupp\"], \"digest\": \"7ecac28651d0643e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: finite_support and span/range identities give pieces already contained in the cited direct-sum definition, not invariant countable coordinate closure; Countable.lean requires Countable R."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-projective-kaplansky-direct-summand",
@@ -84,5 +188,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-countable-coordinate-closure",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Wrote the generator-support closure proof in six elementary steps, with explicit natural-number encodings at every countability argument and the finite-support maximum-stage argument for invariance. Reused the direct-sum Mathlib definition; no new nodes or exact project attachment.",
+  "blueprint": "Realizes the countable support-enlargement input to Tag 058X in the existing ancestry through lem-trf-projective-kaplansky-direct-summand to lem-trf-local-term-locality; preserves blueprint.from and its existing exact place and via list. The support closure follows the generator-matrix paragraph of 058X rather than replacing the enclosing unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q93-1eddac2ef",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q93-1eddac2ef (reviewer sub-agent of L); spot-checked: Read the item, cited direct-sum definition, unit/chapter route, Stacks Tag 058X source, searches, and edge cases in full. The six-step countable invariant-coordinate construction is correct, self-contained, non-duplicative, and respects all route locks; no repairs are needed."
  }
 }

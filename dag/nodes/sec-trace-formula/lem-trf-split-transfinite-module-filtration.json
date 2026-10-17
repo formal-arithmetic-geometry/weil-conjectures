@@ -11,9 +11,74 @@
   "def-weil-pbc-direct-sum-modules",
   "def-weil-pbc-quotient-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $\\alpha<\\kappa$ choose a retraction $r_\\alpha:X_{\\alpha+1}\\to X_\\alpha$ of the inclusion $j_\\alpha:X_\\alpha\\hookrightarrow X_{\\alpha+1}$; this is a set-indexed choice. Put $Q_\\alpha=X_{\\alpha+1}/X_\\alpha$, with quotient map $q_\\alpha$ from [def-weil-pbc-quotient-module]. Define\n$$s_\\alpha:Q_\\alpha\\longrightarrow X_{\\alpha+1},\\qquad s_\\alpha(q_\\alpha(x))=x-j_\\alpha r_\\alpha(x).$$\nThis is independent of the representative: replacing $x$ by $x+j_\\alpha(a)$ changes the right side by $j_\\alpha(a)-j_\\alpha r_\\alpha j_\\alpha(a)=0$. The formula is additive and $R$-linear. Moreover $q_\\alpha s_\\alpha=\\mathrm{id}$, since the subtracted term belongs to $X_\\alpha$. Thus every $x\\in X_{\\alpha+1}$ satisfies $x=j_\\alpha r_\\alpha(x)+s_\\alpha q_\\alpha(x)$, and $s_\\alpha(z)\\in X_\\alpha$ implies $z=q_\\alpha s_\\alpha(z)=0$.",
+   "uses": [
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058V, lemma-direct-sum-devissage, first sentence of the proof: constructing the inclusions of the successive quotients from condition (3); Tag 058U, definition-devissage, condition (3)."
+   }
+  },
+  {
+   "text": "Using the finitely supported families of [def-weil-pbc-direct-sum-modules], set $D=\\bigoplus_{\\alpha<\\kappa}Q_\\alpha$ and define\n$$f:D\\longrightarrow X,\\qquad f((z_\\alpha))=\\sum_{\\alpha\\in\\operatorname{supp}(z)}s_\\alpha(z_\\alpha),$$\nwhere each $X_{\\alpha+1}$ is included in $X$. This is a finite sum. On the union of the finite supports of two families the formula gives $f(z+w)=f(z)+f(w)$, and likewise $f(az)=af(z)$, so $f$ is $R$-linear. For $\\beta\\leq\\kappa$, let $D_\\beta$ be the submodule of $D$ consisting of the families whose components vanish for $\\alpha\\geq\\beta$. For $\\alpha<\\beta$ we have $\\alpha+1\\leq\\beta$, hence $s_\\alpha(z_\\alpha)\\in X_\\beta$. It follows term by term that $f(D_\\beta)\\subseteq X_\\beta$, and $D_\\kappa=D$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058V, lemma-direct-sum-devissage, proof: the map f and its restrictions f_beta (lines 20417–20427)."
+   }
+  },
+  {
+   "text": "We prove $X_\\beta=f(D_\\beta)$ for every $\\beta\\leq\\kappa$. If equality failed, choose the least failing ordinal $\\beta$; such a least element exists because these ordinals are well-ordered. The case $\\beta=0$ cannot fail: $X_0=0$ and $D_0=0$. If $\\beta=\\gamma+1$, take $x\\in X_{\\gamma+1}$. By step 1,\n$$x=r_\\gamma(x)+s_\\gamma(q_\\gamma(x)),$$\nwith $X_\\gamma$ viewed as a submodule of $X$. By minimality, $r_\\gamma(x)=f(z)$ for some $z\\in D_\\gamma$. Adding to $z$ the family supported only at $\\gamma$ with component $q_\\gamma(x)$ gives an element of $D_{\\gamma+1}$ mapping to $x$, by [def-weil-pbc-direct-sum-modules] and [def-weil-pbc-quotient-module]. If $\\beta$ is a nonzero limit ordinal, continuity gives, for every $x\\in X_\\beta$, an ordinal $\\gamma<\\beta$ with $x\\in X_\\gamma$. Minimality gives a preimage in $D_\\gamma\\subseteq D_\\beta$. Each case contradicts failure, since step 2 already gives the reverse inclusion. At $\\beta=\\kappa$ we obtain $f(D)=X_\\kappa=X$, so $f$ is surjective.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058V, lemma-direct-sum-devissage, proof: transfinite induction on the images of f_beta (lines 20427–20433); conditions (0)–(2) of Tag 058U."
+   }
+  },
+  {
+   "text": "To prove injectivity, suppose $z\\in D$ is nonzero and $f(z)=0$. By [def-weil-pbc-direct-sum-modules], its nonzero support $S$ is finite and nonempty. It has a largest ordinal $\\gamma$: enumerate its finitely many elements and at each addition retain the larger one. For every $\\alpha\\in S$ with $\\alpha<\\gamma$, we have $s_\\alpha(z_\\alpha)\\in X_{\\alpha+1}\\subseteq X_\\gamma$. The equation\n$$s_\\gamma(z_\\gamma)=-\\sum_{\\alpha\\in S,\\ \\alpha<\\gamma}s_\\alpha(z_\\alpha)$$\ntherefore puts $s_\\gamma(z_\\gamma)$ in $X_\\gamma$. Apply the quotient map $q_\\gamma:X_{\\gamma+1}\\to X_{\\gamma+1}/X_\\gamma$ of [def-weil-pbc-quotient-module]. Step 1 gives $z_\\gamma=q_\\gamma s_\\gamma(z_\\gamma)=0$, contradicting $\\gamma\\in S$. Thus $\\ker f=0$. This finite-support argument covers a limit endpoint as well: it never assumes that an element has infinitely many nonzero components.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058V, lemma-direct-sum-devissage, proof: injectivity of the restrictions and the finite-support argument at limit stages (lines 20435–20453), written as a maximal-support argument."
+   }
+  },
+  {
+   "text": "Steps 3–4 show that $f:D\\to X$ is bijective. For each $x\\in X$ let $g(x)$ be its unique preimage. If $x,y\\in X$ and $a\\in R$, then $f(g(x)+g(y))=x+y$ and $f(ag(x))=ax$; uniqueness gives $g(x+y)=g(x)+g(y)$ and $g(ax)=ag(x)$. Hence $g$ is an $R$-linear inverse and provides the required isomorphism $X\\cong D=\\bigoplus_{\\alpha<\\kappa}(X_{\\alpha+1}/X_\\alpha)$, with [def-weil-pbc-direct-sum-modules]. If $\\kappa=0$, the assumptions give $X=0$, $D$ is the empty direct sum, and this same construction is the unique isomorphism between zero modules.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058V, lemma-direct-sum-devissage, conclusion of the proof (line 20453)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-quotient-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 058V, lemma-direct-sum-devissage, proof lines 20417–20453, with Tag 058U, definition-devissage. The section formula and the maximal-support version of the injectivity argument are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +114,66 @@
    "results": "{\"t\": \"2026-10-17T21:08:00Z\", \"tool\": \"leanfinder\", \"query\": \"An ordinal filtration with split successor embeddings and unions at limit stages decomposes a module as a coproduct of its successor factor modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsModuleFiltration\", \"HahnEmbedding.ArchimedeanStrata.instDecompositionFiniteArchimedeanClassSubtypeMemSubmoduleBaseDomainStratum'\", \"Field.Emb.Cardinal.iSup_filtration\", \"IsModuleFiltration.toIsFiltration\", \"HahnEmbedding.ArchimedeanStrata.isInternal_stratum'\", \"Ideal.Filtration\", \"IsModuleFiltration.mk_int\", \"Module.DirectLimit\"], \"digest\": \"00deadf056ee9524\"}",
    "date": "2026-10-18",
    "verdict": "no match: direct-limit descriptions and filtration predicates do not split a transfinite filtration into its factors. quotientEquivDirectSum assumes finite free modules over a PID; Decomposition.ofLinearMap requires an already constructed inverse map. Read LinearAlgebra/FreeModule/Finite/Quotient.lean:25–55,104–124 and Algebra/DirectSum/Decomposition.lean:242–255."
+  },
+  {
+   "tool": "grep",
+   "query": "transfinite|devissage|dévissage",
+   "results": "{\"t\": \"2026-10-17T21:22:02Z\", \"tool\": \"grep\", \"query\": \"transfinite|devissage|dévissage\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no transfinite or devissage splitting result in LinearAlgebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum, Ordinal",
+   "results": "{\"t\": \"2026-10-17T21:22:02Z\", \"tool\": \"loogle\", \"query\": \"DirectSum, Ordinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: quotientEquivDirectSum requires a finite-rank free module over a PID (FreeModule/Finite/Quotient.lean:25–55,104–124); DirectLimit.linearEquiv compares two direct-limit constructions (Algebra/Colimit/Module.lean:238–257); Decomposition.ofLinearMap requires the inverse map already supplied (Algebra/DirectSum/Decomposition.lean:242–255); iSupIndep.linearEquiv assumes independence and generation (LinearAlgebra/DFinsupp.lean:629–635), which are the substance to prove here. HahnEmbedding.lean:149–174 concerns strata of an ordered module over an Archimedean ordered division ring, not arbitrary split filtrations. Other hits are filtration predicates, recursors, or unrelated linear-map constructors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split continuous transfinite filtration of a module decomposes as the direct sum of its successive quotient modules",
+   "results": "{\"t\": \"2026-10-17T21:22:02Z\", \"tool\": \"leansearch\", \"query\": \"Split continuous transfinite filtration of a module decomposes as the direct sum of its successive quotient modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsModuleFiltration.toIsFiltration\", \"DirectSum.Decomposition.ofLinearMap\", \"IsModuleFiltration\", \"Ideal.Filtration.recOn\", \"Ideal.Filtration\", \"Ideal.Filtration.casesOn\", \"Ideal.Filtration.ext_iff\", \"Ideal.Filtration.mk.injEq\"], \"digest\": \"4e517e9e1bb51e49\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: quotientEquivDirectSum requires a finite-rank free module over a PID (FreeModule/Finite/Quotient.lean:25–55,104–124); DirectLimit.linearEquiv compares two direct-limit constructions (Algebra/Colimit/Module.lean:238–257); Decomposition.ofLinearMap requires the inverse map already supplied (Algebra/DirectSum/Decomposition.lean:242–255); iSupIndep.linearEquiv assumes independence and generation (LinearAlgebra/DFinsupp.lean:629–635), which are the substance to prove here. HahnEmbedding.lean:149–174 concerns strata of an ordered module over an Archimedean ordered division ring, not arbitrary split filtrations. Other hits are filtration predicates, recursors, or unrelated linear-map constructors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous ordinal indexed filtration of a module with zero first term and split successor inclusions is isomorphic to the direct sum of the successive quotients",
+   "results": "{\"t\": \"2026-10-17T21:22:04Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous ordinal indexed filtration of a module with zero first term and split successor inclusions is isomorphic to the direct sum of the successive quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.quotientEquivDirectSum\", \"Module.DirectLimit.linearEquiv\", \"HahnEmbedding.ArchimedeanStrata.instDecompositionFiniteArchimedeanClassSubtypeMemSubmoduleBaseDomainStratum'\", \"IsModuleFiltration.mk_int\", \"Submodule.FG.directLimit\", \"Module.DirectLimit.linearEquiv_of\", \"Module.DirectLimit.quotMk_of\", \"Module.DirectLimit\"], \"digest\": \"6bb153ad7bc96387\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: quotientEquivDirectSum requires a finite-rank free module over a PID (FreeModule/Finite/Quotient.lean:25–55,104–124); DirectLimit.linearEquiv compares two direct-limit constructions (Algebra/Colimit/Module.lean:238–257); Decomposition.ofLinearMap requires the inverse map already supplied (Algebra/DirectSum/Decomposition.lean:242–255); iSupIndep.linearEquiv assumes independence and generation (LinearAlgebra/DFinsupp.lean:629–635), which are the substance to prove here. HahnEmbedding.lean:149–174 concerns strata of an ordered module over an Archimedean ordered division ring, not arbitrary split filtrations. Other hits are filtration predicates, recursors, or unrelated linear-map constructors."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientEquivDirectSum|ofLinearMap|split.*[Ff]iltration|[Ff]iltration.*split",
+   "results": "{\"t\": \"2026-10-17T21:22:11Z\", \"tool\": \"grep\", \"query\": \"quotientEquivDirectSum|ofLinearMap|split.*[Ff]iltration|[Ff]iltration.*split\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupHomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/FiniteIndex.lean\", \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"Mathlib/RepresentationTheory/Tannaka.lean\", \"Mathlib/Algebra/Algebra/Equiv.lean\", \"Mathlib/Algebra/Algebra/Hom.lean\"], \"digest\": \"95c77f3f2eeac661\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: quotientEquivDirectSum requires a finite-rank free module over a PID (FreeModule/Finite/Quotient.lean:25–55,104–124); DirectLimit.linearEquiv compares two direct-limit constructions (Algebra/Colimit/Module.lean:238–257); Decomposition.ofLinearMap requires the inverse map already supplied (Algebra/DirectSum/Decomposition.lean:242–255); iSupIndep.linearEquiv assumes independence and generation (LinearAlgebra/DFinsupp.lean:629–635), which are the substance to prove here. HahnEmbedding.lean:149–174 concerns strata of an ordered module over an Archimedean ordered division ring, not arbitrary split filtrations. Other hits are filtration predicates, recursors, or unrelated linear-map constructors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module with a well ordered exhaustive chain of submodules, continuous at limits and each a direct summand in its successor, is a coproduct of successor factors",
+   "results": "{\"t\": \"2026-10-17T21:22:13Z\", \"tool\": \"leanfinder\", \"query\": \"A module with a well ordered exhaustive chain of submodules, continuous at limits and each a direct summand in its successor, is a coproduct of successor factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HahnEmbedding.ArchimedeanStrata.instDecompositionFiniteArchimedeanClassSubtypeMemSubmoduleBaseDomainStratum'\", \"SubmodulesBasis\", \"iSupIndep.linearEquiv\", \"iSupIndep.linearEquiv_apply\", \"HahnEmbedding.ArchimedeanStrata.isInternal_stratum'\", \"Submodule.FG.directLimit\", \"Module.DirectLimit\", \"DirectSum.IsInternal.submodule_iSup_eq_top\"], \"digest\": \"ad576e207a6b06be\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: quotientEquivDirectSum requires a finite-rank free module over a PID (FreeModule/Finite/Quotient.lean:25–55,104–124); DirectLimit.linearEquiv compares two direct-limit constructions (Algebra/Colimit/Module.lean:238–257); Decomposition.ofLinearMap requires the inverse map already supplied (Algebra/DirectSum/Decomposition.lean:242–255); iSupIndep.linearEquiv assumes independence and generation (LinearAlgebra/DFinsupp.lean:629–635), which are the substance to prove here. HahnEmbedding.lean:149–174 concerns strata of an ordered module over an Archimedean ordered division ring, not arbitrary split filtrations. Other hits are filtration predicates, recursors, or unrelated linear-map constructors."
+  },
+  {
+   "tool": "grep",
+   "query": "isInternal_stratum|instDecompositionFiniteArchimedeanClass|transfinite|[Ff]iltration",
+   "results": "{\"t\": \"2026-10-17T21:22:33Z\", \"tool\": \"grep\", \"query\": \"isInternal_stratum|instDecompositionFiniteArchimedeanClass|transfinite|[Ff]iltration\", \"sub\": \"Algebra/Order/Module\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Order/Module/HahnEmbedding.lean\", \"Mathlib/Algebra/Order/Module/HahnEmbedding.lean\"], \"digest\": \"ed921205285a63ff\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: quotientEquivDirectSum requires a finite-rank free module over a PID (FreeModule/Finite/Quotient.lean:25–55,104–124); DirectLimit.linearEquiv compares two direct-limit constructions (Algebra/Colimit/Module.lean:238–257); Decomposition.ofLinearMap requires the inverse map already supplied (Algebra/DirectSum/Decomposition.lean:242–255); iSupIndep.linearEquiv assumes independence and generation (LinearAlgebra/DFinsupp.lean:629–635), which are the substance to prove here. HahnEmbedding.lean:149–174 concerns strata of an ordered module over an Archimedean ordered division ring, not arbitrary split filtrations. Other hits are filtration predicates, recursors, or unrelated linear-map constructors."
+  },
+  {
+   "tool": "grep",
+   "query": "iSupIndep.linearEquiv|isInternal_stratum|instDecompositionFiniteArchimedeanClass",
+   "results": "{\"t\": \"2026-10-17T21:22:33Z\", \"tool\": \"grep\", \"query\": \"iSupIndep.linearEquiv|isInternal_stratum|instDecompositionFiniteArchimedeanClass\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/DFinsupp.lean\", \"Mathlib/LinearAlgebra/DFinsupp.lean\", \"Mathlib/LinearAlgebra/DFinsupp.lean\"], \"digest\": \"bd4a16200cc2ad38\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: quotientEquivDirectSum requires a finite-rank free module over a PID (FreeModule/Finite/Quotient.lean:25–55,104–124); DirectLimit.linearEquiv compares two direct-limit constructions (Algebra/Colimit/Module.lean:238–257); Decomposition.ofLinearMap requires the inverse map already supplied (Algebra/DirectSum/Decomposition.lean:242–255); iSupIndep.linearEquiv assumes independence and generation (LinearAlgebra/DFinsupp.lean:629–635), which are the substance to prove here. HahnEmbedding.lean:149–174 concerns strata of an ordered module over an Archimedean ordered division ring, not arbitrary split filtrations. Other hits are filtration predicates, recursors, or unrelated linear-map constructors."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-projective-kaplansky-direct-summand",
@@ -85,5 +206,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-split-transfinite-module-filtration",
+  "worker": "stage1",
+  "summary": "Checked the statement and complete proof against Stacks Tags 058U/058V and retained the endpoint-inclusive ordinal indexing and all hypotheses. Constructed quotient sections explicitly from the successor retractions, constructed the sum map on finite supports, proved surjectivity by a least-failing-ordinal argument with base/successor/limit cases, and proved injectivity by the largest nonzero support index. Only the two existing Mathlib definition leaves are used; no new nodes, no Lean editing or compilation. Retained all inherited searches and added the actual Q96 searches with source-checked verdicts.",
+  "blueprint": "Expands Tag 058V in the inherited algebraic ancestry: the proof of Tag 058Y invokes 058X, whose induced split filtration uses 058V. The nearest imported ancestor is lem-trf-local-term-locality. This helper is not the unit key node, and does not replace or alter the current main-20261015 contracting-correspondence route or the chapter/unit metadata."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q96-cf3cff23f",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-cf3cff23f (reviewer sub-agent of L); spot-checked: Read the item, report, governing documents, unit route, both cited DAG nodes, and Stacks Tags 058U/058V in full. The statement preserves every hypothesis and endpoint case; the section construction, transfinite surjectivity induction, finite-support injectivity argument, and linear inverse are correct. Mathlib matches and searches were checked; no duplicates, hidden lemmas, route violations, SGA citations, or repairs were found. Review written to review.md."
  }
 }
