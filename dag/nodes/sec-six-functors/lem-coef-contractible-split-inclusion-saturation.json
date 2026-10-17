@@ -256,5 +256,29 @@
   "group": "Q151",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-f113bd667 (reviewer sub-agent of L); spot-checked: Read the item, the base version, the cited def-weil-abstract-derived-category, parent lem-coef-enriched-projective-diagram-model step 10, the unit and blueprint paragraph 2 of prop-coef-integral-exceptional-adjoint (main-20261015). Statement, stmt_deps, source and blueprint fields are unchanged from the base. There are no new nodes, no tool_uses and no SGA. I checked all 11 steps by hand. (1) s([y])=y-ir(y) is well-defined and a chain map; qs=1, rs=0, sq=1-ir, and phi/psi are inverse chain maps. (2) H=shq gives dH+Hd=1-ir. (3) For a cocycle y, y-ir(y)=dHy, so i is a quasi-isomorphism. (4) Coproducts work coordinatewise, including the empty one. (5) Pushout P=X'+E: c(x',e)=a(x')+b(s e) composed with Y->P gives b. (6) Retracts: r_i=a r_j v with r_i i=1; the quotient maps are well-defined from the two square equations, and b-bar h v-bar is a contraction. (7-9) T_beta=X_0+sum E_alpha: successor isomorphisms come from step 1, the limit case from continuity and uniqueness, and at theta the composite is a summand inclusion with quotient sum E_alpha. The induction is set up properly. (10-11) Tensor distributes over the splitting; the signed contraction (-1)^a k(x)h(e) cancels the dk terms and needs no flatness. Small cases: 0->D^0 tensored with Z/2 still contracts; S^1->D^0 has no chain retraction and is rightly excluded; isomorphisms, theta=0, the empty coproduct and characteristic 2 all pass. The item gives the parent exactly the closure, tensor and quasi-isomorphism clauses its step 10 uses. rg over the DAG found no duplicate; projective-cochain-monoidal-model states something different. Mathlib searches cover all three kinds, with Loogle failures honestly marked unusable. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ContractibleSplitInclusionSaturation",
+  "declaration": "CategoryTheory.contractible_split_inclusion_saturation",
+  "declarations": [
+   "CategoryTheory.ContractibleSplitMap",
+   "CategoryTheory.contractible_split_inclusion_saturation"
+  ],
+  "statement": "theorem contractible_split_inclusion_saturation (R : Type u) [CommRing R] : (MorphismProperty.isomorphisms (CochainComplex (ModuleCat.{u, u} R) ℤ) ≤ ContractibleSplitMap R) ∧ (ContractibleSplitMap R).IsStableUnderCoproducts.{u} ∧ (ContractibleSplitMap R).IsStableUnderCobaseChange ∧ (ContractibleSplitMap R).IsStableUnderRetracts ∧ (ContractibleSplitMap R).IsStableUnderTransfiniteComposition.{u} ∧ ContractibleSplitMap R ≤ HomologicalComplex.homotopyEquivalences (ModuleCat.{u, u} R) (ComplexShape.up ℤ) ∧ ContractibleSplitMap R ≤ HomologicalComplex.quasiIso (ModuleCat.{u, u} R) (ComplexShape.up ℤ) ∧ (∀ (K X Y : CochainComplex (ModuleCat.{u, u} R) ℤ) (f : X ⟶ Y), ContractibleSplitMap R f → ContractibleSplitMap R (HomologicalComplex.tensorHom (𝟙 K) f))",
+  "by": "Q56",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/Algebra/Homology/ContractibleSplitInclusionSaturation.lean",
+  "branch": "newtargets-dag",
+  "note": "Maintainer review fix (H4): the hand-written CategoryTheory.ContractibleComplex was a second definition of Mathlib's contraction Homotopy (𝟙 E) 0 (for ComplexShape.up ℤ its comm field is exactly h(n)≫d(n-1,n) + d(n,n+1)≫h(n+1) = 𝟙); it is removed and ContractibleSplitMap uses Nonempty (Homotopy (𝟙 E) 0). The theorem statement is unchanged.",
+  "fixed_by": "NT-stage2-cc-9b3f59fbc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9b3f59fbc",
+  "group": "Q56",
+  "result": "fix",
+  "note": "Statement matches node lem-coef-contractible-split-inclusion-saturation clause by clause: R : Type u CommRing, unbounded ModuleCat.{u,u} R cochain complexes; S_R = chain retraction + degreewise categorical cokernel q (true quotient, induced differential) + contraction; extra splitting equations follow from retraction+cokernel (node step 1), not stronger. Clauses: isomorphisms ≤, IsStableUnderCoproducts.{u} (empty index included), IsStableUnderCobaseChange, IsStableUnderRetracts, IsStableUnderTransfiniteComposition.{u} (Mathlib bot→colimit form equivalent to node's X_0→X_θ, θ=0 included), ≤ homotopyEquivalences, ≤ quasiIso (dependency's notion), tensorHom (𝟙 K) f for all K (up ℤ sign (-1)^p matches node, no flatness). Node differs from base only in lean; statement verbatim; docstrings with source/blueprint and 11 proof steps; only sorry; lines ≤100; Mathlib imports. Finding F1 (H4): CategoryTheory.ContractibleComplex hand-restated Mathlib's contraction Homotopy (𝟙 E) 0; fixed: removed, ContractibleSplitMap uses Nonempty (Homotopy (𝟙 E) 0), record declarations updated with note, report gets '## Maintainer review fix'; theorem signature unchanged. nt_compile.py: delivered module clean, fixed module clean, fixed module plus a Lean test deriving the old contraction equation from Homotopy (𝟙 E) 0 clean."
  }
 }

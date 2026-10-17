@@ -232,5 +232,31 @@
   "group": "Q102",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-c48ba812d (reviewer sub-agent of L); spot-checked: I read the full split. The item restates Stacks more-etale.tex 0GKK (lemma-mayer-vietoris-shriek) unchanged: an arbitrary scheme, a commutative ring Λ, X=U∪V, explicit sheafified maps with the sign on the second component, and naturality. Step 1: both composites into F sheafify the same presheaf map, so the sequence is a complex. Step 2: computes the maps on stalks using the statement of extension-by-zero-stalks. It also writes out the cofinal fibre-product comparison, using clause 2 of etale-base-change-finite-limits and open-immersion-etale. Step 3: I checked the three stalk cases and characteristic 2. Step 4: stalk exactness plus geometric-stalk-conservative gives the hypotheses of the new leaf. The conservative node's blueprint_update takes one geometric point per point of X, so the index family is a set. Step 5: handles the change of coefficient category explicitly, through constant-ring-module-equivalence, forgetful clauses (1) and (3), and a written proof that forgetting reflects isomorphisms, then applies the leaf with one functor. Step 6: naturality is checked on presheaves. I also tested U empty, U=V=X, W empty, X empty, F=0 and Λ=0. The new leaf lem-weil-pbc-jointly-reflect-short-exact matches Mathlib CategoryTheory.JointlyReflectIsomorphisms.shortExact_iff, which I read at Exact.lean:81 with its hypotheses at lines 37–42 and 78–79. The node's extra zero-morphism hypothesis follows from the others. The leaf does not restate the item, and no existing DAG node states it. The only other open-cover sequence in the DAG is lem-sc-derived-open-mayer-vietoris-ses, for O_X-modules on ringed spaces, so it is not a duplicate. Tool use accepted: lemma-weil-pbc-geometric-stalk-conservative (unit sk-prop-cd), used as a black box. The other declared tool uses are on the route (sk-thm-p1, sk-thm-reduction) or are Mathlib leaves. No SGA source is used. Fixes made: (B3) added def-weil-pbc-exact-sequence to the item's stmt_deps and cited it inline after 'is exact'; (B6) corrected the leaf's hypothesis lines from 38–43 to 37–42 in source.place and mathlib_match.how, and the how text now says zero-morphism preservation is implied, not a hypothesis of the lemma.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleOpenCoverShriekSES",
+  "file": "lean/Sheaf/Paper/EtaleOpenCoverShriekSES.lean",
+  "declaration": "AlgebraicGeometry.etale_openCover_lowerShriek_shortExact",
+  "declarations": [
+   "AlgebraicGeometry.etaleOpenCoverIotaU",
+   "AlgebraicGeometry.etaleOpenCoverIotaV",
+   "AlgebraicGeometry.etaleOpenCoverEpsilonU",
+   "AlgebraicGeometry.etaleOpenCoverEpsilonV",
+   "AlgebraicGeometry.etale_openCover_lowerShriek_shortExact"
+  ],
+  "statement": "theorem etale_openCover_lowerShriek_shortExact {Λ : Type (u + 1)} [CommRing Λ] (X U V W : Scheme.{u}) (jU : U ⟶ X) (jV : V ⟶ X) (jW : W ⟶ X) (a : W ⟶ U) (b : W ⟶ V) [IsOpenImmersion jU] [IsOpenImmersion jV] [IsOpenImmersion jW] [IsOpenImmersion a] [IsOpenImmersion b] (hUa : a ≫ jU = jW) (hVb : b ≫ jV = jW) (hsq : IsPullback a b jU jV) (hcover : ∀ x : X, (∃ y : U, jU.base y = x) ∨ ∃ y : V, jV.base y = x) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : ∃ hcomplex : biprod.lift (etaleOpenCoverIotaU jU a jW hUa F) (-(etaleOpenCoverIotaV jV b jW hVb F)) ≫ biprod.desc (etaleOpenCoverEpsilonU jU F) (etaleOpenCoverEpsilonV jV F) = 0, (ShortComplex.mk (biprod.lift (etaleOpenCoverIotaU jU a jW hUa F) (-(etaleOpenCoverIotaV jV b jW hVb F))) (biprod.desc (etaleOpenCoverEpsilonU jU F) (etaleOpenCoverEpsilonV jV F)) hcomplex).ShortExact ∧ ∀ (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (α : F ⟶ G), etaleOpenCoverIotaU jU a jW hUa F ≫ (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) jU).map ((Etale.upperStar (ModuleCat.{u + 1} Λ) jU).map α) = (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) jW).map ((Etale.upperStar (ModuleCat.{u + 1} Λ) jW).map α) ≫ etaleOpenCoverIotaU jU a jW hUa G ∧ etaleOpenCoverIotaV jV b jW hVb F ≫ (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) jV).map ((Etale.upperStar (ModuleCat.{u + 1} Λ) jV).map α) = (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) jW).map ((Etale.upperStar (ModuleCat.{u + 1} Λ) jW).map α) ≫ etaleOpenCoverIotaV jV b jW hVb G ∧ (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) jU).map ((Etale.upperStar (ModuleCat.{u + 1} Λ) jU).map α) ≫ etaleOpenCoverEpsilonU jU G = etaleOpenCoverEpsilonU jU F ≫ α ∧ (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) jV).map ((Etale.upperStar (ModuleCat.{u + 1} Λ) jV).map α) ≫ etaleOpenCoverEpsilonV jV G = etaleOpenCoverEpsilonV jV F ≫ α",
+  "by": "NO",
+  "date": "2026-10-17",
+  "branch": "newtargets-dag",
+  "fixed_by": "NT-stage2-cc-4293ba971"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4293ba971",
+  "group": "NO",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 0GKK clause by clause: open immersions, W=U∩V via IsPullback, cover via hcover, the four maps built canonically from recorded upstream declarations (non-hollow), sign and sum, ShortComplex.ShortExact and four naturality squares. Λ : Type (u+1) follows project convention. Edge cases (empty U/V/W/X, U=V=X, F=0, Λ=0, char 2) covered; no duplicate (Mathlib MayerVietorisSquare is free-abelian only). nt_compile --json: delivered and fixed files compile with no errors. H8 fixed in fixes/EtaleOpenCoverShriekSES.lean (docstrings only, signature byte-identical, lean.statement still verbatim): added source place and blueprint tag to the four helper defs, and replaced the summary proof docstring with the node's six steps."
  }
 }
