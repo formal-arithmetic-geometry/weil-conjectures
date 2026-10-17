@@ -40,7 +40,7 @@ private theorem pseudoCoherent_of_iso (S : Scheme.{u})
   intro x
   obtain ⟨U, hx, P, hb, hf, ⟨eP⟩⟩ := hE x
   exact ⟨U, hx, P, hb, hf,
-    ⟨((SheafOfModules.overFunctor (moduleRings S.toRingedSpace) U).mapDerivedCategory.mapIso
+    ⟨((SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U).mapDerivedCategory.mapIso
       e.symm) ≪≫ eP⟩⟩
 
 private theorem pseudoCoherent_shift (S : Scheme.{u})
@@ -54,7 +54,7 @@ private theorem pseudoCoherent_shift (S : Scheme.{u})
   refine ⟨U, hx, P⟦n⟧, ⟨b - n, fun i hi ↦ ?_⟩, ?_, ?_⟩
   · exact hb (i + n) (by omega)
   · exact fun i ↦ hf (i + n)
-  · let F := (SheafOfModules.overFunctor (moduleRings S.toRingedSpace) U).mapDerivedCategory
+  · let F := (SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U).mapDerivedCategory
     exact ⟨(F.commShiftIso n).app E ≪≫ (shiftFunctor _ n).mapIso eP ≪≫
       ((DerivedCategory.Q.commShiftIso n).app P).symm⟩
 
@@ -77,7 +77,7 @@ private theorem pseudoCoherent_of_isZero (S : Scheme.{u})
   refine ⟨U, by trivial, P, ⟨0, fun i _ ↦ ?_⟩, fun i ↦ ?_, ?_⟩
   · exact (HomologicalComplex.eval _ _ i).map_isZero hP
   · exact ⟨0, ⟨((HomologicalComplex.eval _ _ i).map_isZero hP).iso hfree⟩⟩
-  · let F := (SheafOfModules.overFunctor (moduleRings S.toRingedSpace) U).mapDerivedCategory
+  · let F := (SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U).mapDerivedCategory
     exact ⟨(F.map_isZero hE).iso (DerivedCategory.Q.map_isZero hP)⟩
 
 /-- On a Noetherian scheme `S`, an object `E` of `D(𝒪_S)` whose cohomology sheaves vanish

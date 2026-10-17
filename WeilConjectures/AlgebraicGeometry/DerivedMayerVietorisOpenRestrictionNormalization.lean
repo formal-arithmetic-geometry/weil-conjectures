@@ -176,7 +176,7 @@ theorem schemeMVOpenRestriction_unit_normalization
       := by
   classical
   let LX := schemeOpenRestriction X (h ⁻¹ᵁ U)
-  let rX := SheafOfModules.overFunctor (moduleRings X.toRingedSpace) (h ⁻¹ᵁ U)
+  let rX := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) (h ⁻¹ᵁ U)
   let eX := (Scheme.Modules.overEquiv (h ⁻¹ᵁ U)).functor
   have : rX.Additive := Functor.additive_of_preserves_binary_products _
   have : eX.Additive := Functor.additive_of_preserves_binary_products _

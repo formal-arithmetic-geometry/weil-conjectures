@@ -164,10 +164,12 @@ theorem relativeTensorPullback_homology_comparison
   let N := (HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj F
   let V := SheafOfModules.toSheaf B
   let := SheafOfModules.monoidalCategory R
-  have hV := CategoryTheory.moduleSheaves_colimits_forgetful B
+  have hV := CategoryTheory.moduleSheaves_colimits_forgetful.{u, u, u, u}
+    B
   have : PreservesFiniteLimits V := hV.2.1
   have : PreservesFiniteColimits V := hV.2.2.1
-  have hW := CategoryTheory.moduleSheaves_colimits_forgetful (moduleRings X.toRingedSpace)
+  have hW := CategoryTheory.moduleSheaves_colimits_forgetful.{u, u, u, u}
+    (moduleRings X.toRingedSpace)
   have : PreservesFiniteLimits (U ⋙ V) := hW.2.1
   have : PreservesFiniteColimits (U ⋙ V) := hW.2.2.1
   have : PreservesFiniteLimits U := preservesFiniteLimits_of_reflects_of_preserves U V

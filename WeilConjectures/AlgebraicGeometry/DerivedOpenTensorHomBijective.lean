@@ -80,7 +80,7 @@ private theorem sheaf_counit_support
   · intro h x hx
     let := h
     have hz : IsZero ((T x).obj (J.obj
-        ((SheafOfModules.overFunctor (moduleRings X) U).obj F))) := (hs x).2 hx
+        ((SheafOfModules.overFunctor.{uX} (moduleRings X) U).obj F))) := (hs x).2 hx
     exact AddCommGrpCat.isZero_iff_subsingleton.mp
       (hz.of_iso (asIso ((T x).map (a.counit.app F))).symm)
   · intro h
