@@ -16,83 +16,211 @@
   "def-weil-open-immersion",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=V_f$, and let $u\\hookrightarrow1$ be the sheaf represented by $U\\hookrightarrow X$ on $X_{\\mathrm{Et}}$. Its inverse image $v=p_1^{-1}u$ is subterminal, since inverse image preserves finite limits [def-trf-geometric-morphism]. The projection formula in [lem-trf-oriented-product-universal] identifies $v$ with the associated sheaf of the triple $(U\\to S\\leftarrow S)$. Apply [lem-trf-oriented-slice-localization] to this actual site object: it gives $P/v\\simeq U_{\\mathrm{Et}}\\overleftarrow\\times_{S_{\\mathrm{Et}}}S_{\\mathrm{Et}}=V_{f_U}$ over $P$. Thus [lem-trf-topos-complement-factorization] identifies the induced $\\bar j$ with the open embedding of $v$.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "lem-trf-oriented-product-universal",
+    "lem-trf-oriented-slice-localization",
+    "lem-trf-topos-complement-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI 1.3, 1.4, 1.10(b); sites.tex 08LW."
+   }
+  },
+  {
+   "text": "By [lem-trf-etale-closed-complement-sets], $Z_{\\mathrm{Et}}$ is the closed complement of $U_{\\mathrm{Et}}$ in $X_{\\mathrm{Et}}$: its sheaves of sets are precisely those terminal on $U$. Apply the factorization statement of [lem-trf-topos-complement-factorization] there and on $P$. For any Grothendieck topos $\\mathcal H$, a morphism $h:\\mathcal H\\to P$ factors through the closed complement of $v$ exactly when $(p_1h)^{-1}u=0$. The same condition says that $a=p_1h$ factors through $i:Z_{\\mathrm{Et}}\\to X_{\\mathrm{Et}}$, say $a\\simeq ia_Z$. The oriented-product universal property [lem-trf-oriented-product-universal] describes $h$ by $(a,b,t:b\\Rightarrow fa)$. After this factorization it is exactly $(a_Z,b,t:b\\Rightarrow fi a_Z)$, the datum for a morphism $\\mathcal H\\to V_{f_Z}$. The factorization includes all compatible $2$-morphisms and is natural in $\\mathcal H$; applying these correspondences to the two universal triples gives mutually inverse maps, since their composites have the same projections and orientation as the identities. Hence $V_{f_Z}$ is the complementary closed subtopos, and its map is the induced $\\bar i$. No closed subscheme is used as an object of $X_{\\mathrm{Et}}$.",
+   "uses": [
+    "lem-trf-etale-closed-complement-sets",
+    "lem-trf-topos-complement-factorization",
+    "lem-trf-oriented-product-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "08LY and its classifying property; etale-cohomology.tex 04CA(1); ILO XI 1.4."
+   }
+  },
+  {
+   "text": "Use [lem-trf-topos-complement-module-stalks] for $v\\hookrightarrow1_P$ and the complementary embeddings of steps 1--2. This supplies $\\bar j_!\\dashv\\bar j^*$ and $\\bar i^*\\dashv\\bar i_*$, exactness of the inverse images, the restriction identities, and the actual stalk formulas for both extension functors. At $z=(x,t,c)$ the subterminal $z^{-1}v=x^{-1}u$ is $1$ exactly when $x$ factors through $U$, and is $0$ otherwise; the latter condition is factorization through $Z_{\\mathrm{Et}}$ by step 2. The factor point is the same triple with its first point in $U$ or $Z$, since its projections and orientation are unchanged. For a short exact sequence on $V_{f_U}$, the stalks of its $\\bar j_!$ image are therefore either the original exact sequence of stalks or the zero sequence. For a short exact sequence on $V_{f_Z}$ the same assertion holds for $\\bar i_*$. Exactness of point inverse images and their conservativity [lem-trf-oriented-product-points-conservative] imply exactness of these image sequences: kernels and cokernels pull back to the computed kernels and cokernels, and an object with all zero stalks is zero. Thus all four functors are exact.",
+   "uses": [
+    "lem-trf-topos-complement-module-stalks",
+    "lem-trf-oriented-product-points-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "03DI, 0710, 04EQ; sites.tex 08LY, 08M1; ILO XI 1.8 for point triples."
+   }
+  },
+  {
+   "text": "For a module sheaf $F$ on $P$, take the counit $\\varepsilon:\\bar j_!\\bar j^*F\\to F$ and unit $\\eta:F\\to\\bar i_*\\bar i^*F$ supplied by [lem-trf-topos-complement-module-stalks]. At an open point their two-term sequence is $F_z\\xrightarrow{1}F_z\\to0$, and at a closed point it is $0\\to F_z\\xrightarrow{1}F_z$, including the specified adjunction maps. Their composite has zero stalks and is zero by conservativity [lem-trf-oriented-product-points-conservative] (apply it to the image sheaf); its kernel, image quotient and cokernel are also tested by exact stalks. This proves $0\\to\\bar j_!\\bar j^*F\\xrightarrow{\\varepsilon}F\\xrightarrow{\\eta}\\bar i_*\\bar i^*F\\to0$ is a natural short exact sequence.",
+   "uses": [
+    "lem-trf-topos-complement-module-stalks",
+    "lem-trf-oriented-product-points-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "0710, 04EQ; the two stalk cases are the argument of etale-cohomology.tex 095L, now justified for P by the cited topos statements."
+   }
+  },
+  {
+   "text": "We record explicitly the comparison needed for strata. The universal-property argument of steps 1--2 works with any second scheme $Y\\to S$ in place of $S\\to S$; none of that argument uses $Y=S$. For any morphism $q:P'\\to P$ of such oriented products, let $j',i'$ be the inverse-image open/closed pair (defined by $q^{-1}v$), with induced $q_o,q_c$ on its two parts. The support description in [lem-trf-topos-complement-module-stalks] gives $q^*\\bar i_*H\\simeq i'_*q_c^*H$: the left hand side restricts to zero on the open, hence lies in the essential image of $i'_*$, and its closed restriction is $q_c^*\\bar i^*\\bar i_*H\\simeq q_c^*H$. For the open extension, the adjunction map $j'_!q_o^*G\\to q^*\\bar j_!G$ is the identity on the open and has both closed restrictions zero, by the restriction identities. Its kernel and cokernel have both restrictions zero, because inverse images are exact. Such a sheaf is a closed direct image by the support description and is zero because its closed restriction is zero. Thus $q^*\\bar j_!G\\simeq j'_!q_o^*G$. These are canonical comparisons from the adjunctions. In particular on a stratum contained in $U$ either extension restricts as $G$ or zero, and on a stratum contained in $Z$ it restricts as zero or $H$, respectively.",
+   "uses": [
+    "lem-trf-topos-complement-factorization",
+    "lem-trf-topos-complement-module-stalks",
+    "lem-trf-oriented-product-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "08LY closed support characterization; ILO XI 1.4 and 1.10(b). The comparisons are derived here from the support and restriction statements, not assumed base change theorems."
+   }
+  },
+  {
+   "text": "The scheme $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since $f$ is of finite presentation and therefore of finite type. In particular $U,Z$ are constructible locally closed subsets of $X$. For a constructible $F$ on $P$, choose the finite partitions $X=\\coprod X_\\alpha$, $S=\\coprod S_\\beta$ in [def-trf-oriented-constructible-sheaf]. Use the actual scheme pullbacks $X_\\alpha\\times_XU$ and $X_\\alpha\\times_XZ$ as source strata, omitting empty ones, with the same $S_\\beta$. Their composites are immersions, their images are disjoint locally closed sets, and they are constructible by the Boolean and Noetherian criteria of [def-weil-constructible-subset]. The restriction of $\\bar j^*F$ or $\\bar i^*F$ to each of these oriented strata is the inverse image of the original restriction to $(X_\\alpha)_{\\mathrm{Et}}\\overleftarrow\\times_{S_{\\mathrm{Et}}}(S_\\beta)_{\\mathrm{Et}}$; equality of the composite morphisms follows from [lem-trf-oriented-product-universal]. Inverse image preserves a trivializing covering and constant finite module sheaves: it preserves terminal objects, epimorphic covers and the constant-sheaf functor by composition of geometric morphisms. Hence the new restrictions are locally constant with the same finite values, proving constructibility for both inverse images.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-constructible-subset",
+    "def-trf-oriented-constructible-sheaf",
+    "lem-trf-oriented-product-universal",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI 1.4 for the stratum maps; finite-partition constructibility as in def-trf-oriented-constructible-sheaf; elementary refinement by U and Z."
+   }
+  },
+  {
+   "text": "For a constructible $G$ on $V_{f_U}$ choose its source strata $U_\\alpha$ and base strata $S_\\beta$ from [def-trf-oriented-constructible-sheaf]. Regard the same immersions $U_\\alpha\\to U\\to X$, together with $Z\\to X$, as a partition of $X$. For a constructible $H$ on $V_{f_Z}$, use its source strata $Z_\\gamma\\to Z\\to X$ together with $U\\to X$, and its given base partition. These are finite constructible locally closed partitions: $X$ is Noetherian as in step 6, and locally closed immersions into an open or closed subscheme are locally closed in $X$ [def-weil-constructible-subset]. By the comparisons proved in step 5, the restrictions of $\\bar j_!G$ to $U_\\alpha\\overleftarrow\\times_SS_\\beta$ are exactly the given locally constant finite restrictions of $G$, and its restrictions to $Z\\overleftarrow\\times_SS_\\beta$ are zero. Likewise $\\bar i_*H$ restricts as $H$ on $Z_\\gamma\\overleftarrow\\times_SS_\\beta$ and as zero on $U\\overleftarrow\\times_SS_\\beta$. Zero is constant with finite value the zero module. This proves preservation of constructibility for both extension functors.",
+   "uses": [
+    "def-trf-oriented-constructible-sheaf",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI 1.4 for the stratum maps; constructibility follows by the explicit compatible partitions and step 5."
+   }
+  },
+  {
+   "text": "Apply the natural short exact sequence of step 4 degreewise to a cochain complex $K$ of module sheaves. By [lem-weil-pbc-exact-functor-derived-factorization], the four exact functors of step 3 act termwise on derived categories, and their termwise maps descend to them. Then [lem-weil-pbc-complex-ses-triangle] gives the natural distinguished triangle $\\bar j_!\\bar j^*K\\to K\\to\\bar i_*\\bar i^*K\\to(\\bar j_!\\bar j^*K)[1]$, with the counit and unit maps already specified. It holds without a boundedness assumption, and in particular restricts to any bounded constructible categories using steps 6--7 and exactness.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor; exact-functor factorization gives the termwise derived operations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-geometric-morphism",
+  "def-trf-oriented-constructible-sheaf",
+  "def-weil-constructible-subset",
+  "lem-trf-etale-closed-complement-sets",
+  "lem-trf-oriented-product-points-conservative",
+  "lem-trf-oriented-product-universal",
+  "lem-trf-oriented-slice-localization",
+  "lem-trf-topos-complement-factorization",
+  "lem-trf-topos-complement-module-stalks",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XI 1.4 and 1.10(b) for open slices and universal triples; closed complement proved by factorization using Stacks 08LY and 04CA(1); module stalk argument and constructibility refinement written here; derived triangle 0152."
+ },
  "mathlib_searches": [
   {
-   "tool": "loogle",
-   "query": "\"Sheaf\", \"extensionByZero\"",
-   "results": "{\"t\": \"2026-10-17T18:19:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"extensionByZero\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "tool": "leanfinder",
+   "query": "Open and closed source recollement on the oriented vanishing topos induced by complementary immersions",
+   "results": "{\"t\": \"2026-10-17T18:42:27Z\", \"tool\": \"leanfinder\", \"query\": \"Open and closed source recollement on the oriented vanishing topos induced by complementary immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.nonempty_isColimit_binaryCofanMk_of_isCompl\", \"AlgebraicGeometry.SheafedSpace.GlueData.ιIsOpenImmersion\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_isOpenImmersion\", \"AlgebraicGeometry.PresheafedSpace.GlueData.ιIsOpenImmersion\", \"Opens.mayerVietorisSquare\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.image_preimage_is_empty\", \"Opens.mayerVietorisSquare'\", \"TopCat.GlueData.ι_isOpenEmbedding\"], \"digest\": \"9563ce06a2fb393d\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read the returned signatures; ordinary scheme morphisms, ordinary module sheaves, condensed modules and chain complexes do not state this assertion about vanishing topoi."
+   "verdict": "no match: the returned declarations do not assert this geometric-morphism/sheaf statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf, CategoryTheory.GrothendieckTopology, IsOpenImmersion",
+   "results": "{\"t\": \"2026-10-17T18:42:28Z\", \"tool\": \"loogle\", \"query\": \"TopCat.Sheaf, CategoryTheory.GrothendieckTopology, IsOpenImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsOpenImmersion'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not assert this geometric-morphism/sheaf statement."
   },
   {
    "tool": "grep",
    "query": "oriented|vanishingTopos|recollement",
-   "results": "{\"t\": \"2026-10-17T18:19:03Z\", \"tool\": \"grep\", \"query\": \"oriented|vanishingTopos|recollement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Order/ULift.lean\", \"Mathlib/Order/Circular.lean\", \"Mathlib/LinearAlgebra/Orientation.lean\", \"Mathlib/LinearAlgebra/Orientation.lean\", \"Mathlib/LinearAlgebra/Orientation.lean\", \"Mathlib/LinearAlgebra/Orientation.lean\", \"Mathlib/LinearAlgebra/Orientation.lean\", \"Mathlib/Combinatorics/Digraph/Orientation.lean\"], \"digest\": \"047b231b494a29a2\"}",
+   "results": "{\"t\": \"2026-10-17T18:42:28Z\", \"tool\": \"grep\", \"query\": \"oriented|vanishingTopos|recollement\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read the returned signatures; ordinary scheme morphisms, ordinary module sheaves, condensed modules and chain complexes do not state this assertion about vanishing topoi."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Open closed recollement for vanishing topoi has exact extension by zero and constructible source and base restriction",
-   "results": "{\"t\": \"2026-10-17T18:19:07Z\", \"tool\": \"leanfinder\", \"query\": \"Open closed recollement for vanishing topoi has exact extension by zero and constructible source and base restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.hasExactColimitsOfShape\", \"Profinite.NobelingProof.succ_exact\", \"Condensed.hasExactLimitsOfShape\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"LightCondensed.lanLightCondSet\", \"Condensed.lanSheafProfinite\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"Opens.mayerVietorisSquare'\"], \"digest\": \"1ed5f2c5ad5b6c8a\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read the returned signatures; ordinary scheme morphisms, ordinary module sheaves, condensed modules and chain complexes do not state this assertion about vanishing topoi."
-  },
-  {
-   "tool": "grep",
-   "query": "nearby.?cycle|vanishing.?topos|oriented.?product",
-   "results": "{\"t\": \"2026-10-17T18:20:06Z\", \"tool\": \"grep\", \"query\": \"nearby.?cycle|vanishing.?topos|oriented.?product\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read the returned signatures; ordinary scheme morphisms, ordinary module sheaves, condensed modules and chain complexes do not state this assertion about vanishing topoi."
-  },
-  {
-   "tool": "grep",
-   "query": "nearby.?cycle|vanishing.?topos|oriented.?product",
-   "results": "{\"t\": \"2026-10-17T18:20:07Z\", \"tool\": \"grep\", \"query\": \"nearby.?cycle|vanishing.?topos|oriented.?product\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read the returned signatures; ordinary scheme morphisms, ordinary module sheaves, condensed modules and chain complexes do not state this assertion about vanishing topoi."
-  },
-  {
-   "tool": "grep",
-   "query": "nearby.?cycle|vanishing.?topos|oriented.?product",
-   "results": "{\"t\": \"2026-10-17T18:20:07Z\", \"tool\": \"grep\", \"query\": \"nearby.?cycle|vanishing.?topos|oriented.?product\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read the returned signatures; ordinary scheme morphisms, ordinary module sheaves, condensed modules and chain complexes do not state this assertion about vanishing topoi."
+   "verdict": "no match: the returned declarations do not assert this geometric-morphism/sheaf statement."
   },
   {
    "tool": "leansearch",
-   "query": "Recollement of the oriented vanishing topos by an open subscheme of the source and its closed complement",
-   "results": "{\"t\": \"2026-10-17T18:20:07Z\", \"tool\": \"leansearch\", \"query\": \"Recollement of the oriented vanishing topos by an open subscheme of the source and its closed complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isCompl_opensRange_inl_inr\", \"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"AlgebraicGeometry.nonempty_isColimit_binaryCofanMk_of_isCompl\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\", \"Opens.mayerVietorisSquare\", \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_vanishingIdeal\", \"AlgebraicGeometry.Scheme.basicOpen_res\", \"AlgebraicGeometry.Scheme.ofRestrict_app\"], \"digest\": \"54e829d23d4737f9\"}",
+   "query": "Open and closed recollement of the oriented vanishing topos induced by an open immersion and closed complement",
+   "results": "{\"t\": \"2026-10-17T18:42:32Z\", \"tool\": \"leansearch\", \"query\": \"Open and closed recollement of the oriented vanishing topos induced by an open immersion and closed complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Opens.mayerVietorisSquare\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instOfRestrict\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeftIsLimit\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict\", \"Opens.mayerVietorisSquare'\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.IsClosedImmersion.recOn\"], \"digest\": \"7dcafa8c1926552a\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read the returned signatures; ordinary scheme morphisms, ordinary module sheaves, condensed modules and chain complexes do not state this assertion about vanishing topoi."
+   "verdict": "no match: the returned declarations do not assert this geometric-morphism/sheaf statement."
   },
   {
    "tool": "grep",
    "query": "nearby.?cycle|vanishing.?topos|oriented.?product",
-   "results": "{\"t\": \"2026-10-17T18:20:07Z\", \"tool\": \"grep\", \"query\": \"nearby.?cycle|vanishing.?topos|oriented.?product\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-17T18:42:32Z\", \"tool\": \"grep\", \"query\": \"nearby.?cycle|vanishing.?topos|oriented.?product\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read the returned signatures; ordinary scheme morphisms, ordinary module sheaves, condensed modules and chain complexes do not state this assertion about vanishing topoi."
+   "verdict": "no match: the returned declarations do not assert this geometric-morphism/sheaf statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complementary open and closed immersions induce an open and closed complementary pair of subtopoi in the oriented vanishing topos",
+   "results": "{\"t\": \"2026-10-17T18:43:52Z\", \"tool\": \"leanfinder\", \"query\": \"Complementary open and closed immersions induce an open and closed complementary pair of subtopoi in the oriented vanishing topos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isCompl_opensRange_inl_inr\", \"AlgebraicGeometry.isCompl_range_inl_inr\", \"AlgebraicGeometry.Scheme.Hom.coborderRange\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.image_preimage_is_empty\", \"ComplexShape.Embedding.AreComplementary\", \"AlgebraicGeometry.nonempty_isColimit_binaryCofanMk_of_isCompl\", \"Opens.mayerVietorisSquare\", \"ComplexShape.Embedding.AreComplementary.isStrictlySupportedOutside₁_iff\"], \"digest\": \"e74e3d945bb2d9be\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not assert this geometric-morphism/sheaf statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf, CategoryTheory.Sheaf.over, IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-17T18:43:53Z\", \"tool\": \"loogle\", \"query\": \"TopCat.Sheaf, CategoryTheory.Sheaf.over, IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsClosedImmersion'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not assert this geometric-morphism/sheaf statement."
   },
   {
    "tool": "grep",
-   "query": "nearby.?cycle|vanishing.?topos|oriented.?product",
-   "results": "{\"t\": \"2026-10-17T18:20:07Z\", \"tool\": \"grep\", \"query\": \"nearby.?cycle|vanishing.?topos|oriented.?product\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "oriented.?product|vanishing.?topos|open.?closed",
+   "results": "{\"t\": \"2026-10-17T18:43:53Z\", \"tool\": \"grep\", \"query\": \"oriented.?product|vanishing.?topos|open.?closed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read the returned signatures; ordinary scheme morphisms, ordinary module sheaves, condensed modules and chain complexes do not state this assertion about vanishing topoi."
+   "verdict": "no match: the returned declarations do not assert this geometric-morphism/sheaf statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image extension by zero and closed direct image on the oriented product preserve finite stratification constructibility",
+   "results": "{\"t\": \"2026-10-17T18:44:05Z\", \"tool\": \"leanfinder\", \"query\": \"Exact inverse image extension by zero and closed direct image on the oriented product preserve finite stratification constructibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.IsConstructible.preimage\", \"chevalley_mvPolynomial_mvPolynomial\", \"Profinite.NobelingProof.CC_exact\", \"Topology.IsConstructible.preimage_of_isClosedEmbedding\", \"Topology.IsConstructible.image_of_isClosedEmbedding\", \"Topology.IsConstructible.preimage_of_isOpenEmbedding\", \"Topology.IsConstructible.image_of_isOpenEmbedding\", \"Topology.isConstructible_preimage_iff_of_isOpenEmbedding\"], \"digest\": \"ada6804fb0a77631\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not assert this geometric-morphism/sheaf statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-17T18:44:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not assert this geometric-morphism/sheaf statement."
   },
   {
    "tool": "grep",
-   "query": "nearby.?cycle|vanishing.?topos|oriented.?product",
-   "results": "{\"t\": \"2026-10-17T18:20:07Z\", \"tool\": \"grep\", \"query\": \"nearby.?cycle|vanishing.?topos|oriented.?product\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "constructible|extension.?by.?zero|oriented.?product",
+   "results": "{\"t\": \"2026-10-17T18:44:06Z\", \"tool\": \"grep\", \"query\": \"constructible|extension.?by.?zero|oriented.?product\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read the returned signatures; ordinary scheme morphisms, ordinary module sheaves, condensed modules and chain complexes do not state this assertion about vanishing topoi."
+   "verdict": "no match: the returned declarations do not assert this geometric-morphism/sheaf statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-psi-proper-surjective-constructibility",
@@ -115,5 +243,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-oriented-source-localization",
+  "worker": "stage1",
+  "summary": "Repaired all return points: replaced the two rejected clause-restatements with three general topos/etale-set inputs, proved the closed-source identification by the universal property, corrected the adjunction direction, cited actual module stalk formulas and conservative points, and wrote explicit compatible constructibility strata and their restriction comparisons. Item statement and current-base ancestry are unchanged.",
+  "blueprint": "Source open/closed reduction of the nearby-cycle finiteness input below lem-trf-local-term-locality, before cohomology strata in the normal-cone specialization argument. No unit route changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-8593d1a44",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-8593d1a44 (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes, every cited node's statement and the sources. Stacks etale-cohomology 04CA(1) is the sheaves-of-sets clause with left inverse, and it matches lem-trf-etale-closed-complement-sets exactly. Stacks sites.tex 08LW, 08LY, 08LZ, 08M0 and 08M1 support the open/closed factorization node. ILO XI 1.10(b) (slice at the object X'->S'<-Y') is the source of lem-trf-oriented-slice-localization, which step 1 uses with U->S<-S. Orgogozo is not in literature/: it is recorded as WANTED and proof_origin is agent. The factorization node is true: a morphism factors through the closed complement iff a^{-1}u=0, and through the open slice iff a^{-1}u=1; edge cases u=0, u=1 and a degenerate H all hold. The module-stalks node: I checked exact inverse images, j_! left adjoint to j^*, closed essential image {j^*F=0}, k^*j_!=0 (through free modules and strict initial objects), points with p^{-1}u equal to 1 or 0, the four point formulas, and that the unit and counit are identities; u=0, u=1 and Lambda=0 hold. Step 2's closed-source identification by 2-Yoneda on the universal triple is sound and never uses Z as an etale object. Steps 3-4 (exactness and the short exact sequence through exact points and conservativity) are correct. Step 5, marked elementary, is a correct few-line consequence of the support and restriction identities. In steps 6-7 the refined partitions are admissible, since def-constructible-stratification has no closure condition and X is Noetherian. Step 8 matches the hypotheses of the Mathlib leaves. There are no duplicates: lem-kun-04ca has the abelian clause only, lem-trf-oriented-closed-base-restriction is a base-factor statement, and lem-sp-ringed-topos-binary-descent is Mayer-Vietoris. No new node restates a clause of the item. No SGA is cited, the statement is unchanged, no target or unit is touched, and tool_uses is empty with only Mathlib leaves off-unit. One minor imprecision, not fixed: step 7 attributes 'locally closed in an open or closed subscheme is locally closed in X' to def-weil-constructible-subset, but this is elementary topology. No fixes."
  }
 }

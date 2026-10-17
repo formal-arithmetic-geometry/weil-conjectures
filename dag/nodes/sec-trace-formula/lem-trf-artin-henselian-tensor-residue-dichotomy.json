@@ -1,11 +1,94 @@
 {
  "id": "lem-trf-artin-henselian-tensor-residue-dichotomy",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the component-ring convention in [lem-trf-affine-etale-cover-component-criterion]: $T_Z=T/I_Z$ and $\\operatorname{Spec}T_Z$ has underlying space $Z$. Thus the hypothesis says precisely that the factor algebras are quasi-acyclic, where this term means that all component rings are henselian local.",
+   "uses": [
+    "lem-trf-affine-etale-cover-component-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.mathi.uni-heidelberg.de/~schmidt/papers/algebraic_tame_site.pdf",
+    "place": "Component convention and quasi-acyclic definition, printed p. 12"
+   }
+  },
+  {
+   "text": "Fix a component ring $C$ of $B=B_1\\otimes_R B_2$. By [lem-trf-tensor-component-from-factor-components], choose component quotients $q_j:B_j\\twoheadrightarrow D_j$ and $E=D_1\\otimes_R D_2\\twoheadrightarrow C$, with the composite from $B$ equal to its component quotient. Each $D_j$ is henselian local by the factor hypothesis and ind-etale over $R$ by [lem-trf-component-ind-etale-local-henselian]. Write $\\mathfrak p_j$ for the contraction of its maximal ideal to $R$. By [lem-trf-ind-etale-local-henselian-integral], $D_j$ is a local integral $R^h_{\\mathfrak p_j}$-algebra. These are exactly the hypotheses of [lem-trf-artin-join-theorem-6-3]. Its quasi-acyclicity conclusion for $E$ makes its component ring $C$ henselian local. This proves the first conclusion for every component of $B$.",
+   "uses": [
+    "lem-trf-tensor-component-from-factor-components",
+    "lem-trf-component-ind-etale-local-henselian",
+    "lem-trf-ind-etale-local-henselian-integral",
+    "lem-trf-artin-join-theorem-6-3"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.mathi.uni-heidelberg.de/~schmidt/papers/algebraic_tame_site.pdf",
+    "place": "Theorem 6.3 and the local ind-etale reduction preceding Theorem 6.4, printed p. 13"
+   }
+  },
+  {
+   "text": "Given a maximal ideal $\\mathfrak m\\subset B$, let $Z$ be the connected component containing its point. By the component convention, $I_Z\\subseteq\\mathfrak m$, so for $C=B/I_Z$ the ideal $\\mathfrak m_C=\\mathfrak m/I_Z$ is maximal and $C/\\mathfrak m_C=B/\\mathfrak m$. Step 2 makes $C$ local, hence this is its unique maximal ideal. Apply the residue alternatives of [lem-trf-artin-join-theorem-6-3] to the factor component rings $D_1,D_2$ chosen for this $C$. If both $D_j\\to C$ are nonlocal, it gives that $B/\\mathfrak m=C/\\mathfrak m_C$ is separably closed.",
+   "uses": [
+    "lem-trf-affine-etale-cover-component-criterion",
+    "lem-trf-artin-join-theorem-6-3"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.mathi.uni-heidelberg.de/~schmidt/papers/algebraic_tame_site.pdf",
+    "place": "Theorem 6.3 case (1) and passage to maximal ideals in Theorem 6.4, printed p. 13"
+   }
+  },
+  {
+   "text": "Otherwise, one map $D_i\\to C$ is local. By [lem-trf-artin-join-theorem-6-3] it is integral and the induced field extension $D_i/\\mathfrak m_{D_i}\\to C/\\mathfrak m_C$ is algebraic.",
+   "uses": [
+    "lem-trf-artin-join-theorem-6-3"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.mathi.uni-heidelberg.de/~schmidt/papers/algebraic_tame_site.pdf",
+    "place": "Theorem 6.3 case (2), printed p. 13"
+   }
+  },
+  {
+   "text": "Set $\\mathfrak n=q_i^{-1}(\\mathfrak m_{D_i})\\subset B_i$. Surjectivity of $q_i$ gives $B_i/\\mathfrak n\\cong D_i/\\mathfrak m_{D_i}$, a field, so $\\mathfrak n$ is maximal. Locality of $D_i\\to C$ and the commuting quotient maps from Step 2 give, for $b\\in B_i$, $b\\in\\mathfrak n$ iff $q_i(b)\\in\\mathfrak m_{D_i}$ iff its image in $C$ is in $\\mathfrak m_C$ iff its tensor image is in $\\mathfrak m$. Thus $\\mathfrak n=\\mathfrak m\\cap B_i$. The quotient isomorphisms identify the field map in Step 4 with the canonical map $B_i/\\mathfrak n\\to B/\\mathfrak m$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.mathi.uni-heidelberg.de/~schmidt/papers/algebraic_tame_site.pdf",
+    "place": "Theorem 6.4, elementary contraction and quotient identifications, printed p. 13"
+   }
+  },
+  {
+   "text": "Finally, $B_i\\to B$ is ind-etale by base change of the other factor map $R\\to B_j$, $j\\ne i$. The component quotient $B\\to C$ is ind-etale by [lem-trf-component-ind-etale-local-henselian], so its composite $B_i\\to C$ is ind-etale by [lem-weil-pbc-ind-etale-stability]. Its maximal ideal contracts to $\\mathfrak n$ by Step 5. Apply [lem-trf-ind-etale-residue-separable] to these two maximal ideals: $B_i/\\mathfrak n\\to C/\\mathfrak m_C=B/\\mathfrak m$ is separable algebraic. This supplies the additional separability absent from Theorem 6.3. Steps 3 and 6 cover all residue alternatives. If $B=0$, there are no components or maximal ideals, so both conclusions are vacuous.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-trf-component-ind-etale-local-henselian",
+    "lem-trf-ind-etale-residue-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.mathi.uni-heidelberg.de/~schmidt/papers/algebraic_tame_site.pdf",
+    "place": "proetale.tex Tags 097J, 097K; more-algebra.tex Tag 092R; Hübner–Schmidt Theorem 6.4, printed p. 13"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affine-etale-cover-component-criterion",
+  "lem-trf-artin-join-theorem-6-3",
+  "lem-trf-component-ind-etale-local-henselian",
+  "lem-trf-ind-etale-local-henselian-integral",
+  "lem-trf-ind-etale-residue-separable",
+  "lem-trf-tensor-component-from-factor-components",
+  "lem-weil-pbc-ind-etale-stability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.mathi.uni-heidelberg.de/~schmidt/papers/algebraic_tame_site.pdf",
+  "place": "Explicit deduction of the two-factor Theorem 6.4 from Theorem 6.3, the intervening local-henselian ind-etale integrality sentence, component quotients and ind-etale stability. Online PDF §6, printed pp. 12–13; local PDF WANTED. Separability: local Stacks 092R and project attachment."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-artin-tensor-etale-acyclic",
@@ -58,7 +141,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Normal-cone specialization argument of lem-trf-local-term-locality, via the Artin joins input to the Gabber strict-local cohomological bound: the henselian tensor theorem underlying the Artin acyclicity step.",
+   "place": "Normal-cone specialization argument of lem-trf-local-term-locality: the Artin joins input, expanded through Theorem 6.3 and the ind-etale component/residue reductions underlying Theorem 6.4.",
    "via": [
     "lem-trf-artin-tensor-etale-acyclic",
     "lem-trf-gabber-nearby-cycle-dimension-bound",
@@ -71,5 +154,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-artin-henselian-tensor-residue-dichotomy",
+  "worker": "stage1",
+  "summary": "Replaced the returned black-box Theorem 6.4 citation by the two-factor Theorem 6.3 and its local-henselian integrality and component reductions. Wrote the passage to maximal ideals and contraction/quotient identifications explicitly, and obtained separability from ind-etale base change and composition. Five new statement-only inputs, one already closed in the project; no Mathlib leaves. Statement preserved. No Lean writing or compilation.",
+  "blueprint": "Realizes the Artin joins input in the normal-cone specialization argument of lem-trf-local-term-locality, with the five child statements expanding the source's “immediate consequence of Theorem 6.3” sentence.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-7d79c115b",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-7d79c115b (reviewer sub-agent of L); spot-checked: FIX: one citation repair; the mathematics is correct. Read: the governing docs, delivery-errors A–H, the report, the item, all five new nodes, every cited statement, Stacks 00EG, 092R (more-algebra l.30556), 097K and 097N, and the Lean declaration Algebra.IndEtale.isSeparable_residueField (IndEtale.lean:141–161, no sorry; correctly recorded in lean_candidates). Hübner–Schmidt §6 has no local copy and network access is blocked here, so I could not open the PDF (WANTED is recorded). I checked the 6.3 node against Artin's join theorem (Thm 2.5): arbitrary A, two primes, local integral algebras over the ordinary henselizations, tensor product over A; quasi-acyclic; separably closed if both maps are nonlocal; integral with algebraic residue extension if one is local. I tested it on k̄⊗k̄, Z_(p)^h with Q or Q̄, two distinct primes (consistent with F. K. Schmidt's theorem) and E=0. Independent checks: (1) the tensor-component node: factor components exist by connectedness, B→C factors through E because idempotents vanishing on Z_j vanish on Z, and E_Z≅C because an idempotent of E vanishing on Z becomes a nilpotent idempotent in C. (2) Component quotient ind-étale as a colimit of localizations T_e (the tautological henselian clause is harmless). (3) Integrality over A^h_p via étale-local algebras over a henselian ring being finite. (4) Residue node = 097N+092R. Steps 2–6 of the item check out: 6.3 hypotheses are met exactly; m∩B_i = n via locality and the compatible quotients; separability comes from base change+composition (lem-weil-pbc-ind-etale-stability) and the residue node. Step 4 is redundant but correct. Route: sk-thm-properbasechange is reached from sk-i-curve-zero, so tool_uses=[] is right. No duplicates found (checked restriction/component/w-local/weakly-étale field nodes and the blueprint). No circular or restated split, no SGA. Fix (B3): lem-trf-artin-join-theorem-6-3 used 'separably closed' and 'algebraic' without citations; I added [def-kun-separably-closed] and [def-weil-algebraic-element] inline and to stmt_deps in fixes/dag/nodes/sec-trace-formula/lem-trf-artin-join-theorem-6-3.json, meaning unchanged. The item statement was left unchanged: it is the base statement, and editing it would be an unrecorded statement change.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -18,9 +18,145 @@
   "def-weil-etale-morphism",
   "lem-pur-finite-etale-dualizing-normalization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F_h=Rh_!$, $G_h=Rh^!$, $P_h=Lh^*$ and suppress canonical tensor associators. All adjunctions used below are the constructible/etale-origin adjunctions, not ambient pro-etale adjunctions. The preservation assertion in [def-weil-exceptional-inverse-image], [lem-sf-pullback-tor-amplitude] and [lem-sf-tensor-ctf](ii) put $G_hK$, $P_hN$, $G_hK\\otimes P_hN$ and $K\\otimes N$ in $D^b_{ctf}$. The same definition says the schemes are Noetherian in this finite-type field-base setting. By [lem-sf-proetale-constructible-origin](ii), choose bounded constructible etale origins for these inputs and for $K,N$. Their finite Tor amplitudes are reflected by [lem-sf-comparison-tor-amplitude](ii). The comparison is fully faithful on these bounded-below objects by [thm-weil-pbc-site-comparison]. Thus [lem-weil-finite-compact-projection-formula] applies to the specified projection map at $(G_hK,N)$, on both sites, and makes it invertible.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-finite-compact-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 4(ii): domain checks for the normalized etale/co-projection comparisons"
+   }
+  },
+  {
+   "text": "Let $A=G_hK$, and denote by $T:F_h(A\\otimes P_hN)\\to F_hA\\otimes N$ the three arrows preceding $\\varepsilon_{h,K}\\otimes1$ in the definition of $\\kappa$. By [lem-pur-finite-projection-action-laws](3), under the evaluation $N\\otimes N'\\simeq A_T$ and its pullback,\n$$\\operatorname{PF}_{h,A\\otimes P_hN,N'}\\circ(\\operatorname{PF}_{h,A,N}\\otimes1_{N'})=1_{F_hA}.$$\nHere the unit identifications are inserted: projection with the coefficient unit is the identity, since its proper factor is the identity by [lem-weil-pbc-ringed-projection-mate-exact] and its open factor in [def-exchange-projection] is the unit constraint. Tensor this displayed equality with $N$ and insert the unit of $(-)\\otimes N'\\dashv(-)\\otimes N$, the tensor-adjunction normalization specified in the statement. Its triangle identity contracts the inserted inverse twist. The resulting equality is exactly $T\\operatorname{PF}_{h,A,N}=1$. Step 1 makes the projection invertible, so $T=\\operatorname{PF}_{h,A,N}^{-1}$. Consequently the defining transpose is\n$$q_{h,K,N}=(\\varepsilon_{h,K}\\otimes1_N)\\operatorname{PF}_{h,G_hK,N}^{-1}.$$\nThis expression contains neither $N'$ nor its evaluation; injectivity of the adjunction bijection proves the claimed independence of inverse data.",
+   "uses": [
+    "lem-pur-finite-projection-action-laws",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 4(ii): cancellation of the inverse twist in the explicitly specified projection mate"
+   }
+  },
+  {
+   "text": "For completeness, the description as a conjugate and the closed-immersion normalization use the same arrows, not an arbitrary endpoint isomorphism. For a bounded constructible finite-Tor test object $P\\in D^b_{ctf}(S,A)$, the invertible data [pur9-cs-def-invertible], the adjunction of [pur9-def-upper-shriek-composition], and the projection map give the natural Hom chain\n$$\\operatorname{Hom}(P,G_hK\\otimes P_hN)\\cong\\operatorname{Hom}(P\\otimes P_hN',G_hK)\\cong\\operatorname{Hom}(F_h(P\\otimes P_hN'),K)\\cong\\operatorname{Hom}(F_hP\\otimes N',K)\\cong\\operatorname{Hom}(F_hP,K\\otimes N)\\cong\\operatorname{Hom}(P,G_h(K\\otimes N)).$$\nThe projection arrow in this chain acts by precomposition with $\\operatorname{PF}_{h,P,N'}$. Apply the chain to $P=G_hK\\otimes P_hN$ and its identity. Expanding the two tensor adjunctions inserts $N'\\otimes N$ and its evaluation and gives precisely the defining transpose of $\\kappa$. This is the stated conjugate. When $h=i$ is closed, [lem-pur-coprojection] specifies coProj as the right-adjoint comparison induced by that same projection isomorphism with the inverse twist. Its Hom chain is the displayed chain in reverse, so its inverse is exactly $\\kappa_i$.",
+   "uses": [
+    "pur9-cs-def-invertible",
+    "pur9-def-upper-shriek-composition",
+    "lem-pur-coprojection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
+    "place": "Hom calculation and final Yoneda paragraph; identifies the normalization used in Step 4(ii)"
+   }
+  },
+  {
+   "text": "We now prove the equality for etale $e$. It suffices to compute on the ordinary etale origins of Step 1. Indeed [lem-weil-pbc-comparison-pullback] and [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identify $P_e$, tensor and evaluation through $\\nu^*$. The exact equality in [lem-pur-projection-comparison-etale-origin] identifies the specified compactification projection maps. The exceptional functor and its adjunction are the transported ones of [def-weil-exceptional-inverse-image], and [lem-pur-finite-etale-dualizing-normalization] characterizes $\\rho_e$ by preservation of the transported sum/evaluation counit. The composite comparison $\\nu_U^*e^{-1}\\cong e^{-1}\\nu_X^*$ is monoidal for these tensor comparisons, and the unit comparisons agree, by the composition and 2-isomorphism clauses of [lem-sfb-ringed-derived-monoidal-comparisons]. Substitute these identifications in $q$ from Step 2 and in the two claimed maps. They become the corresponding etale maps. Full faithfulness from Step 1 then transfers the equality back; naturality handles arbitrary choices of origin isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-projection-comparison-etale-origin",
+    "def-weil-exceptional-inverse-image",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 4(ii): specified projection and counit comparisons through the finite-level etale realization"
+   }
+  },
+  {
+   "text": "On the etale sites write $F=Re_!$, $G=e^\\times$, $P=e^*$, $S=D(e_{\\Sigma!})$, $\\epsilon:SP\\to1$ for the fold counit, and $d:F\\xrightarrow{\\sim}S$ for the proper-support/sum comparison. These are available for the separated finite-type etale map between Noetherian schemes by [lem-sfb-quasifinite-compact-support-exact] and [lem-amb-etale-adjoint-locality]. Put $p_{M,N}:SM\\otimes N\\xrightarrow{\\sim}S(M\\otimes PN)$ for the derived sum projection. By [lem-pur-etale-support-map-compatibility](2),\n$$d_{M\\otimes PN}\\operatorname{PF}_{e,M,N}=p_{M,N}(d_M\\otimes1).$$\nBy the counit-preserving characterization of $\\rho$ in [lem-pur-finite-etale-dualizing-normalization],\n$$\\epsilon_K S(\\rho_K)d_{GK}=\\varepsilon_K.$$\nIn particular these formulas identify the actual maps used in the item, including their counits.",
+   "uses": [
+    "lem-sfb-quasifinite-compact-support-exact",
+    "lem-amb-etale-adjoint-locality",
+    "lem-pur-etale-support-map-compatibility",
+    "lem-pur-finite-etale-dualizing-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 4(ii): normalized etale exceptional comparison via proper-support sum extension"
+   }
+  },
+  {
+   "text": "Let $r_{M,N}=p_{M,N}^{-1}$. The fold-counit compatibility of [lem-asd-etale-sum-extension-tensor], applied with $(B,C)=(N,K)$ and moving $N$ to the right by the canonical symmetries, is the equality\n$$\\epsilon_{K\\otimes N}S(\\mu_{K,N}^{-1})=(\\epsilon_K\\otimes1_N)r_{PK,N}:S(PK\\otimes PN)\\longrightarrow K\\otimes N.$$\nThe comparison called $P_{B,M}$ there becomes $r_{M,N}$ under these symmetries: the sum projection in [lem-pur-etale-support-map-compatibility](2) sends $(s,m)\\otimes n$ to $(s,m\\otimes s^*n)$ on each lift, and the reverse termwise sum comparison sends that same tensor back. The cited fold-counit identity is an equality on unbounded derived categories, so this step does not infer equality of derived morphisms merely from stalk calculations. All tensor symmetries are the canonical signed symmetries, on both sides of that identity; the tensor-pullback comparison commutes with them because $e^*$ is symmetric strong monoidal [lem-sfb-ringed-derived-monoidal-comparisons].",
+   "uses": [
+    "lem-asd-etale-sum-extension-tensor",
+    "lem-pur-etale-support-map-compatibility",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 4(ii): right-tensor form of the sum/evaluation counit identity"
+   }
+  },
+  {
+   "text": "Put $B=GK\\otimes PN$ and $Q=\\mu_{K,N}^{-1}(\\rho_K\\otimes1):B\\to P(K\\otimes N)$. Its transpose under the normalized $F\\dashv P$ adjunction is $\\epsilon_{K\\otimes N}S(Q)d_B$. By Step 6 and naturality of $r$ in its first variable this equals\n$$\\begin{aligned}\n(\\epsilon_K\\otimes1)r_{PK,N}S(\\rho_K\\otimes1)d_B\n&=(\\epsilon_K S(\\rho_K)\\otimes1)r_{GK,N}d_B\\\\\n&=(\\epsilon_K S(\\rho_K)d_{GK}\\otimes1)\\operatorname{PF}_{e,GK,N}^{-1}\\\\\n&=(\\varepsilon_K\\otimes1)\\operatorname{PF}_{e,GK,N}^{-1}=q_{e,K,N}.\n\\end{aligned}$$\nThe second equality is exactly the inverted projection-comparison equality of Step 5; the third is its counit-normalization equality [lem-pur-etale-support-map-compatibility, lem-pur-finite-etale-dualizing-normalization]. The map $\\rho_{K\\otimes N}\\kappa_{e,K,N}$ has this same transpose, since $\\kappa$ has transpose $q$ by Step 2 and $\\rho$ preserves the counit. Injectivity of the adjunction bijection [lem-amb-etale-adjoint-locality] gives $\\rho_{K\\otimes N}\\kappa_{e,K,N}=Q$. Step 4 returns precisely the asserted pro-etale identity.",
+   "uses": [
+    "lem-pur-etale-support-map-compatibility",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 4(ii): explicit equality of the two projection-mate transposes"
+   }
+  },
+  {
+   "text": "The proved equality gives $\\kappa_{e,K,N}=\\rho_{e,K\\otimes N}^{-1}\\mu_{e;K,N}^{-1}(\\rho_{e,K}\\otimes1)$. Each factor is invertible, hence so is $\\kappa_e$. Define $\\operatorname{coProj}_e=\\kappa_e^{-1}$; multiplying the proved equality on the left by $\\mu_e$ and on the right by $\\kappa_e^{-1}$ yields $\\mu_e\\rho_{e,K\\otimes N}=(\\rho_{e,K}\\otimes1)\\operatorname{coProj}_e$, with exactly the domains in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 4(ii): invertibility and the equivalent co-projection form"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-weil-exceptional-inverse-image",
+  "lem-amb-etale-adjoint-locality",
+  "lem-asd-etale-sum-extension-tensor",
+  "lem-pur-coprojection",
+  "lem-pur-etale-support-map-compatibility",
+  "lem-pur-finite-etale-dualizing-normalization",
+  "lem-pur-finite-projection-action-laws",
+  "lem-pur-projection-comparison-etale-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "pur9-cs-def-invertible",
+  "pur9-def-upper-shriek-composition",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+  "place": "Step 4(ii): fills the normalized etale co-projection mate calculation using the cited Stacks-based projection/sum/counit interfaces; the blueprint does not write this calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +185,66 @@
    "results": "CategoryTheory.Over pullback monoidal coherence and AlgebraicGeometry.Scheme.Modules conjugate pullback comparisons; no specialized etale exceptional mate result.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*projection.*mate|rho.*monoidal|projection.*counit",
+   "results": "25 hits; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean; Mathlib/CategoryTheory/GradedObject/Braiding.lean. Searched Mathlib/CategoryTheory. Generic category/module comparisons only; no normalized etale exceptional projection-mate identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "normalized etale exceptional pullback comparison preserves monoidal projection mates",
+   "results": "8 hits; CategoryTheory.Over.μ_pullback_left_fst_fst'; CategoryTheory.Over.μ_pullback_left_snd'; CategoryTheory.Over.μ_pullback_left_fst_snd'; CategoryTheory.expComparison; CategoryTheory.Over.μ_pullback_left_fst_snd; CategoryTheory.Over.isMonHom_pullbackFst_id_right; CategoryTheory.Over.η_pullback_left; AlgebraicGeometry.Scheme.monObjAsOverPullback_one Generic category/module comparisons only; no normalized etale exceptional projection-mate identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.Monoidal",
+   "results": "12 hits; CategoryTheory.Adjunction.map_η_comp_η; CategoryTheory.Adjunction.ε_comp_map_ε; CategoryTheory.Adjunction.map_η_comp_η_assoc; CategoryTheory.Adjunction.ε_comp_map_ε_assoc; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit; CategoryTheory.Adjunction.mapAddMon; CategoryTheory.Adjunction.mapMon Generic category/module comparisons only; no normalized etale exceptional projection-mate identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized etale exceptional pullback comparison preserves monoidal projection mates",
+   "results": "8 hits; AlgebraicGeometry.Scheme.monObjAsOverPullback_one; CategoryTheory.Over.prodComparisonIso_pullback_Spec_inv_left_fst_fst'; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc Generic category/module comparisons only; no normalized etale exceptional projection-mate identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|rightAdjointMate",
+   "results": "10 hits; Mathlib/CategoryTheory/Monoidal/Rigid/Functor.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Functor.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean. Searched Mathlib/CategoryTheory. Generic category/module comparisons only; no normalized etale exceptional projection-mate identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.rightAdjointMate",
+   "results": "0 hits;  Generic category/module comparisons only; no normalized etale exceptional projection-mate identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale extension by zero tensor projection formula adjunction counit compatibility",
+   "results": "8 hits; CategoryTheory.Adjunction.Localization.ε; CategoryTheory.Adjunction.CommShift.CompatibilityCounit; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.RestrictionCoextensionAdj.counit'; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; CategoryTheory.forgetAdjToOver_counit_app; TensorProduct.counit_def; CategoryTheory.Adjunction.CommShift.compatibilityUnit_isoZero Generic category/module comparisons only; no normalized etale exceptional projection-mate identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint comparison preserving counits intertwines the tensor projection mate for an etale sum extension",
+   "results": "8 hits; CategoryTheory.mateEquiv_counit; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε Generic category/module comparisons only; no normalized etale exceptional projection-mate identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-etale-coprojection-rho-compatibility",
@@ -72,5 +264,114 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-etale-rho-monoidal-mate",
+  "worker": "stage1",
+  "summary": "Expanded the inverse-twist transpose, its independence and closed-immersion normalization, then proved the etale rho identity by the explicit sum/evaluation counit calculation and the existing projection site-comparison theorem. Retained the statement and every existing metadata field. Reused all auxiliary facts; no new nodes.",
+  "blueprint": "sk-thm-regular Step 4(ii), etale-local comparison of the co-projection maps with normalized ordinary etale pullback; Step 2 fixes the same co-projection normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic exact sum-extension adjunction and its Hom bijection."
+   },
+   {
+    "node": "lem-asd-etale-sum-extension-tensor",
+    "why": "Generic sum-extension tensor/fold-counit identity on ordinary etale categories; no smooth-purity conclusion is used."
+   },
+   {
+    "node": "lem-pur-coprojection",
+    "why": "Specifies the closed-immersion right-adjoint projection comparison, needed only to identify the parenthetical normalization of kappa."
+   },
+   {
+    "node": "lem-pur-etale-support-map-compatibility",
+    "why": "Generic equality of the compactification projection with the sum projection; does not replace a purity step."
+   },
+   {
+    "node": "lem-pur-finite-etale-dualizing-normalization",
+    "why": "The normalized etale comparison and its counit characterization specified by the item; no orientation or smooth-purity theorem is used."
+   },
+   {
+    "node": "lem-pur-finite-projection-action-laws",
+    "why": "Generic finite-level tensor-action identity for the specified proper/open compactification projection, used only to cancel an inverse twist."
+   },
+   {
+    "node": "lem-pur-projection-comparison-etale-origin",
+    "why": "Generic equality carrying the specified compactification projection between the two sites."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Generic reflection of finite Tor amplitude for those etale origins."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic existence of bounded constructible etale origins."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Generic finite-Tor pullback domain check."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Generic bounded constructible finite-Tor tensor domain check."
+   },
+   {
+    "node": "lem-sfb-quasifinite-compact-support-exact",
+    "why": "Generic compact-support/proper-support sum identification for the etale map."
+   },
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Finite-level projection isomorphism needed for cancellation; the unit gives no separate proof of this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic comparison tool explicitly stated by this node, used to identify the actual tensor/pullback maps in the etale-origin calculation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic unit normalization of the proper projection mate; no step of smooth purity is used."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic comparison tool explicitly stated by this node, used to identify the actual tensor/pullback maps in the etale-origin calculation."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic full faithfulness of comparison on bounded-below finite-coefficient complexes."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic symmetric strong monoidality of derived pullback and monoidality of pullback-composition/2-isomorphism comparisons, used to move N by symmetries and to carry mu through the site comparison; no smooth-purity step is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-etale-adjoint-locality",
+  "lem-asd-etale-sum-extension-tensor",
+  "lem-pur-coprojection",
+  "lem-pur-etale-support-map-compatibility",
+  "lem-pur-finite-etale-dualizing-normalization",
+  "lem-pur-finite-projection-action-laws",
+  "lem-pur-projection-comparison-etale-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "thm-weil-pbc-site-comparison",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-4f9faa11d",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-4f9faa11d (reviewer sub-agent of L); spot-checked: I read all of the item's mathematics, every cited statement, the parent node and the blueprint sk-thm-regular Step 2 and Step 4(i)-(iii) with the sk-lem-coprojection Hom chain. The statement is true when kappa uses the adjunction unit of (-)⊗N' ⊣ (-)⊗N, which the statement's 'conjugate' clause and Step 2 both specify. With e∘sym as the unit it would be off by the sign ε(N); I checked N=A[1]. For the only use, N=Λ(c)[2c], the two choices agree. Small cases checked: e=id, an open immersion, a fold X⊔X→X, empty U, N=A, N=A[1]. Step 2: I recomputed T∘PF=1 from the tensor-action law (action-laws(3)), the unit normalization (mate-exact α=1, open unitor) and the triangle identity. Step 3 is the blueprint coprojection chain reversed. Steps 5-7: I recomputed the transpose chain ε^S S(Q) d_B = (ε_K⊗1)PF^{-1} = q. The étale P^c of support-map-compatibility(2) is the same composite as the PF^e of projection-comparison-etale-origin. FIX, one missing citation: Step 4 needs ν_U^*e^{-1}≅e^{-1}ν_X^* to be monoidal, and Step 6 needs μ to commute with the signed symmetries. The cited lem-weil-pbc-ringed-topoi-derived-tensor-pullback gives only the existence of μ. I added lem-sfb-ringed-derived-monoidal-comparisons (reviewed pass) to the uses of steps 4 and 6, to proof_deps and to tool_uses. Batch-5 check: with every PD/trace-chapter node removed, the item is still reached via thm-weil-deligne-purity → … → thm-pur-regular-immersion-purity → sk-thm-regular. Each of the six listed citations reaches sec-poincare-duality only through generic lemmas: lem-pod-etale-stalk-tensor-scalar (stalks commute with ⊗) and lem-pod-lisse-module-sheaves-as-module-objects (lisse sheaves as module objects in FLC). Neither assumption gives these and neither is a step of the PD or trace-formula proofs, so all six are kept. The added node reaches no PD or trace node. No new nodes, no duplicates (rg on ρ_e/projection/coProj), no cycle, no SGA. I accept all 17 declared tool_uses plus the added one.; 1 file(s) fixed by the reviewer"
  }
 }
