@@ -69,32 +69,9 @@ private theorem isGE_cone_of_homology_map
       inferInstance)
     ((DerivedCategory.HomologySequence.mono_homologyMap_mor₁_iff U hU i (i + 1)).1 hm)
 
-/-- A left exact additive functor between Grothendieck abelian categories preserves
-cohomology isomorphisms through degree `n` under its right derived functor, provided the
-original map is also monic on cohomology in degree `n + 1`.
-Source: Stacks, Derived Categories, Lemma 05TC (2), applied to the cone of the morphism
-(blueprint: lem-weil-pbc-derived-functor-truncation-iso).
-
-Proof:
-1. Complete `c` to a distinguished triangle `L → M → C → L[1]`. The bounded-below
-subcategory is triangulated (`def-weil-pbc-bounded-derived-subcategories`). The long exact
-cohomology sequence (`lem-sf-derived-homology-long-exact`) shows `H^j(C) = 0` for `j ≤ n`:
-`H^j(c)` is surjective, so the map `H^j(M) → H^j(C)` is zero and the connecting map
-`H^j(C) → H^(j+1)(L)` is monic. Its image is the kernel of `H^(j+1)(c)`, which is zero
-by the isomorphism hypothesis when `j < n`, and by the monomorphism hypothesis when `j = n`.
-2. The right derived functor is triangulated
-(`lem-weil-pbc-derived-direct-image-triangulated`), so applying it gives a distinguished
-triangle with first arrow `Rv(c)`.
-3. Negative vanishing (`lem-weil-pbc-derived-functor-negative-vanishing`) at the lower bound
-`n + 1` shows `H^j(Rv C) = 0` for all `j ≤ n`.
-4. In the resulting long exact sequence, the outer terms `H^(j-1)(Rv C)` and `H^j(Rv C)`
-vanish for `j ≤ n`. Thus `H^j(Rv(c))` is both monic and epic, hence an isomorphism.
-5. For the canonical truncation, `lem-weil-pbc-truncation-cohomology` gives the isomorphism
-hypotheses and zero source in degree `n + 1`, hence the monomorphism hypothesis. Applying
-steps 1-4 gives the truncation corollary below.
-
-This helper is the monomorphism half. (blueprint: lem-weil-pbc-derived-functor-truncation-iso-mono)
-Proof: use the long exact cohomology sequence after applying the right derived functor. -/
+/-- The monomorphism half of `isIso_homologyFunctor_rightDerivedFunctorPlus_map`
+(blueprint `lem-weil-pbc-derived-functor-truncation-iso`): use the long exact cohomology sequence
+after applying the right derived functor. -/
 theorem mono_homologyFunctor_rightDerivedFunctorPlus_map
     {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
     {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B]
@@ -156,6 +133,31 @@ theorem epi_homologyFunctor_rightDerivedFunctorPlus_map
       C (n + 1) (q := j) (by lia)).eq_of_tgt _ _)
 
 set_option linter.style.haveILetI false in
+/-- A left exact additive functor between Grothendieck abelian categories preserves
+cohomology isomorphisms through degree `n` under its right derived functor, provided the
+original map is also monic on cohomology in degree `n + 1`.
+Source: Stacks, Derived Categories, Lemma 05TC (2), applied to the cone of the morphism
+(blueprint: lem-weil-pbc-derived-functor-truncation-iso).
+
+Proof:
+1. Complete `c` to a distinguished triangle `L → M → C → L[1]`. The bounded-below
+subcategory is triangulated (`def-weil-pbc-bounded-derived-subcategories`). The long exact
+cohomology sequence (`lem-sf-derived-homology-long-exact`) shows `H^j(C) = 0` for `j ≤ n`:
+`H^j(c)` is surjective, so the map `H^j(M) → H^j(C)` is zero and the connecting map
+`H^j(C) → H^(j+1)(L)` is monic. Its image is the kernel of `H^(j+1)(c)`, which is zero
+by the isomorphism hypothesis when `j < n`, and by the monomorphism hypothesis when `j = n`.
+2. The right derived functor is triangulated
+(`lem-weil-pbc-derived-direct-image-triangulated`), so applying it gives a distinguished
+triangle with first arrow `Rv(c)`.
+3. Negative vanishing (`lem-weil-pbc-derived-functor-negative-vanishing`) at the lower bound
+`n + 1` shows `H^j(Rv C) = 0` for all `j ≤ n`.
+4. In the resulting long exact sequence, the outer terms `H^(j-1)(Rv C)` and `H^j(Rv C)`
+vanish for `j ≤ n`. Thus `H^j(Rv(c))` is both monic and epic, hence an isomorphism.
+5. For the canonical truncation, `lem-weil-pbc-truncation-cohomology` gives the isomorphism
+hypotheses and zero source in degree `n + 1`, hence the monomorphism hypothesis. Applying
+steps 1-4 gives the truncation corollary below. This is the main statement of
+blueprint `lem-weil-pbc-derived-functor-truncation-iso`; its truncation case is
+`isIso_homologyFunctor_rightDerivedFunctorPlus_truncLEι`. -/
 theorem isIso_homologyFunctor_rightDerivedFunctorPlus_map
     {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
     {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B]

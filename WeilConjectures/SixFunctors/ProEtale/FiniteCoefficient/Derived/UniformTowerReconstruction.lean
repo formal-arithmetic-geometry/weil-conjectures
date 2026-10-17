@@ -50,59 +50,6 @@ universe v u' u
 
 open CategoryTheory Category Limits Opposite Pretriangulated
 
-namespace CochainComplex.IsNormalizedAdicTower
-
-variable {R : Type*} [CommRing R] {𝒜 : Type u'} [Category.{v} 𝒜] [Abelian 𝒜] [Linear R 𝒜]
-  {ϖ : R} {T : ℕᵒᵖ ⥤ CochainComplex 𝒜 ℤ}
-
-/-- In a normalized `ϖ`-adic tower `T`, the transition `T_{1+n} ⟶ Tₙ` is surjective on the
-homology in degree `b` as soon as `H^{b+1}(T₁) = 0`. Indeed `T_{1+n}` is an extension of
-`T_{1+n}/ϖⁿ`, which is quasi-isomorphic to `Tₙ`, by `T_{1+n}/ϖ`, which is quasi-isomorphic to
-`T₁`: the multiplication by `ϖⁿ` induces a monomorphism `T_{1+n}/ϖ ⟶ T_{1+n}` with cokernel
-`T_{1+n}/ϖⁿ` by flatness. -/
-lemma epi_homologyMap_map (hT : IsNormalizedAdicTower ϖ T) {n m : ℕ} (h : n ≤ m)
-    (hm : 1 + n = m) (b : ℤ) (hb : IsZero ((T.obj (op 1)).homology (b + 1))) :
-    Epi (HomologicalComplex.homologyMap (T.map (homOfLE h).op) b) := by
-  subst hm
-  set X := T.obj (op (1 + n))
-  have hzero : (ϖ ^ 1 • 𝟙 X) ≫ (ϖ ^ n • 𝟙 X) = 0 := by
-    rw [Linear.smul_comp, id_comp, smul_smul, ← pow_add]
-    exact hT.smul_eq_zero (1 + n)
-  have hzero' : cokernel.desc (ϖ ^ 1 • 𝟙 X) (ϖ ^ n • 𝟙 X) hzero ≫ cokernel.π (ϖ ^ n • 𝟙 X) = 0 :=
-    by rw [← cancel_epi (cokernel.π _), cokernel.π_desc_assoc, cokernel.condition, comp_zero]
-  let S : ShortComplex (CochainComplex 𝒜 ℤ) := ShortComplex.mk _ _ hzero'
-  let S' : ShortComplex (CochainComplex 𝒜 ℤ) :=
-    ShortComplex.mk (ϖ ^ n • 𝟙 X) (cokernel.π (ϖ ^ n • 𝟙 X)) (cokernel.condition _)
-  let φ : S' ⟶ S :=
-    { τ₁ := cokernel.π (ϖ ^ 1 • 𝟙 X)
-      τ₂ := 𝟙 X
-      τ₃ := 𝟙 _
-      comm₁₂ := by simp [S, S']
-      comm₂₃ := by simp [S, S'] }
-  have hS' : S'.Exact := S'.exact_of_g_is_cokernel (cokernelIsCokernel _)
-  have : Epi φ.τ₁ := inferInstanceAs (Epi (cokernel.π _))
-  have : IsIso φ.τ₂ := inferInstanceAs (IsIso (𝟙 X))
-  have : Mono φ.τ₃ := inferInstanceAs (Mono (𝟙 _))
-  have hS : S.ShortExact :=
-    { exact := (ShortComplex.exact_iff_of_epi_of_isIso_of_mono φ).1 hS'
-      mono_f := (hT.exact_smul 1 n).mono_cokernelDesc
-      epi_g := inferInstanceAs (Epi (cokernel.π _)) }
-  -- the homology of `T_{1+n}/ϖ` in degree `b + 1` vanishes
-  have q₁ := hT.quasiIso_cokernelDesc (n := 1) (m := 1 + n) (by lia)
-  have h₁ : IsZero (S.X₁.homology (b + 1)) :=
-    hb.of_iso (asIso (HomologicalComplex.homologyMap (cokernel.desc (ϖ ^ 1 • 𝟙 X)
-      (T.map (homOfLE (show 1 ≤ 1 + n by lia)).op) _) (b + 1)))
-  have hg : Epi (HomologicalComplex.homologyMap S.g b) :=
-    (hS.homology_exact₃ b (b + 1) (by simp)).epi_f (h₁.eq_of_tgt _ _)
-  have q := hT.quasiIso_cokernelDesc (n := n) (m := 1 + n) h
-  have hfac : T.map (homOfLE h).op = S.g ≫ cokernel.desc (ϖ ^ n • 𝟙 X) (T.map (homOfLE h).op)
-      (by rw [Linear.smul_comp, id_comp, ← comp_id (T.map (homOfLE h).op), ← Linear.comp_smul,
-        hT.smul_eq_zero n, comp_zero]) := (cokernel.π_desc _ _ _).symm
-  rw [hfac, HomologicalComplex.homologyMap_comp]
-  exact epi_comp _ _
-
-end CochainComplex.IsNormalizedAdicTower
-
 namespace CategoryTheory.Sheaf.NormalizedTower
 
 variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
@@ -127,6 +74,7 @@ lemma exists_isNormalizedAdicTower_iso (hϖ : ϖ ∈ nonZeroDivisors R) (hI : I 
     NatTrans.ofOpSequence (fun n ↦ (e n).hom) fun n ↦ by
       rw [M.restrict_map_succ]
       exact he n
+  have : ∀ n, IsIso (φ.app n) := fun n ↦ inferInstanceAs (IsIso (e n.unop).hom)
   have : IsIso φ := NatIso.isIso_of_isIso_app _
   exact ⟨T, hT, ⟨asIso φ⟩⟩
 
@@ -207,23 +155,33 @@ theorem reconstruction_uniformTower (hϖ : ϖ ∈ nonZeroDivisors R) (hI : I = I
   let c₂ : Cone (T' ⋙ DerivedCategory.Q) := { pt := c.pt, π := c.π ≫ eT.inv }
   have hc₂ : IsHomotopyLimit c₂ := hc.of_iso eT.symm c₂ (Iso.refl _) fun n ↦ by simp [c₂]
   have hF₂ (n : ℕ) : ((T' ⋙ DerivedCategory.Q).obj (op n)).IsGE a ∧
-      ((T' ⋙ DerivedCategory.Q).obj (op n)).IsLE b :=
-    ⟨DerivedCategory.TStructure.t.isGE_of_iso (eT.app (op n)).symm a (hX := (hF n).1),
-      DerivedCategory.TStructure.t.isLE_of_iso (eT.app (op n)).symm b (hX := (hF n).2)⟩
+      ((T' ⋙ DerivedCategory.Q).obj (op n)).IsLE b := by
+    have := (hF n).1
+    have := (hF n).2
+    exact ⟨DerivedCategory.TStructure.t.isGE_of_iso (eT.app (op n)).symm a,
+      DerivedCategory.TStructure.t.isLE_of_iso (eT.app (op n)).symm b⟩
   -- the transitions are surjective on `H^b`
-  have hb₁ : IsZero ((T'.obj (op 1)).homology (b + 1)) := by
-    have := (hF₂ 1).2
+  have hb₁ : (T'.obj (op 1)).ExactAt (b + 1) := by
+    rw [HomologicalComplex.exactAt_iff_isZero_homology]
+    have : (DerivedCategory.Q.obj (T'.obj (op 1))).IsLE b := (hF₂ 1).2
     exact (DerivedCategory.isZero_of_isLE _ b (b + 1) (by lia)).of_iso
       ((DerivedCategory.homologyFunctorFactors _ (b + 1)).app (T'.obj (op 1))).symm
   have hb (n : ℕ) : Epi ((DerivedCategory.homologyFunctor _ b).map
       ((T' ⋙ DerivedCategory.Q).map (homOfLE n.le_succ).op)) := by
-    have := hT.epi_homologyMap_map n.le_succ (Nat.add_comm 1 n) b hb₁
-    have e := (DerivedCategory.homologyFunctorFactors (Sheaf (Scheme.ProEt.topology T)
-      (ModuleCat.{u + 1} R)) b).hom.naturality (T'.map (homOfLE n.le_succ).op)
-    simp only [Functor.comp_map, HomologicalComplex.homologyFunctor_map] at e
-    rw [← cancel_mono (((DerivedCategory.homologyFunctorFactors _ b).hom.app _)) |>.not.mpr
-      (by simp) |>.elim] at e
-    sorry
+    have := hT.epi_homologyMap_map b hb₁ n
+    let φ := DerivedCategory.homologyFunctorFactors (Sheaf (Scheme.ProEt.topology T)
+      (ModuleCat.{u + 1} R)) b
+    have h := φ.hom.naturality (T'.map (homOfLE n.le_succ).op)
+    have h' : (DerivedCategory.homologyFunctor _ b).map
+        ((T' ⋙ DerivedCategory.Q).map (homOfLE n.le_succ).op) =
+        φ.hom.app _ ≫ HomologicalComplex.homologyMap (T'.map (homOfLE n.le_succ).op) b ≫
+          φ.inv.app _ := by
+      rw [← Category.assoc]
+      erw [← h]
+      rw [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+      rfl
+    rw [h']
+    infer_instance
   exact DerivedCategory.isGE_and_isLE_of_isHomotopyLimit hc₂ a b hF₂ hb
     fun _ _ hP t ht hG ↦ epi_one_sub_of_epi hP t ht hG
 

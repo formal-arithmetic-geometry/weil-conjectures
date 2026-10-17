@@ -35,7 +35,7 @@ of `I = (f₁, …, f_r)`, and the Artin–Rees lemma compares `Iᵏ K ∩ Z` wi
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Opposite
 
 namespace ExteriorAlgebra
 
@@ -330,8 +330,8 @@ end DegreeZero
 
 lemma koszulMap_zero (c : Fin r → R) : koszulMap c 0 = LinearMap.id := by
   refine LinearMap.ext fun x ↦ Subtype.ext ?_
-  rw [koszulMap_coe, coe_eq_algebraMap_zeroEquiv x, AlgHom.commutes]
-  rfl
+  rw [koszulMap_coe, coe_eq_algebraMap_zeroEquiv x, AlgHom.commutes, LinearMap.id_apply]
+  exact (coe_eq_algebraMap_zeroEquiv x).symm
 
 /-- In degree one, the Koszul differential is `eᵢ ↦ gᵢ`, read through `⋀⁰ R^r ≅ R` and
 `⋀¹ R^r ≅ R^r`. -/
@@ -340,12 +340,11 @@ lemma zeroEquiv_koszulBoundary_zero (g : Fin r → R) (x : ⋀[R]^1 (Fin r →�
       Finsupp.linearCombination R g (exteriorPower.oneEquiv R _ x) := by
   obtain ⟨v, rfl⟩ := (exteriorPower.oneEquiv R (Fin r →₀ R)).symm.surjective x
   rw [LinearEquiv.apply_symm_apply]
-  apply (algebraMap R (ExteriorAlgebra R (Fin r →₀ R))).injective
-  · rw [← coe_eq_algebraMap_zeroEquiv]
-    change CliffordAlgebra.contractLeft (Finsupp.linearCombination R g)
-      ((exteriorPower.oneEquiv R _).symm v : ExteriorAlgebra R (Fin r →₀ R)) = _
-    rw [coe_oneEquiv_symm, CliffordAlgebra.contractLeft_ι]
-    rfl
+  apply (algebraMap_leftInverse (R := R) (Fin r →₀ R)).injective
+  rw [← coe_eq_algebraMap_zeroEquiv]
+  change CliffordAlgebra.contractLeft (Finsupp.linearCombination R g)
+    ((exteriorPower.oneEquiv R _).symm v : ExteriorAlgebra R (Fin r →₀ R)) = _
+  rw [coe_oneEquiv_symm, CliffordAlgebra.contractLeft_ι]
 
 /-- The augmentation `⋀⁰ R^r ≅ R ⟶ R ⧸ J` of the Koszul complex. -/
 noncomputable def koszulAug (J : Ideal R) : ⋀[R]^0 (Fin r →₀ R) →ₗ[R] R ⧸ J :=
@@ -399,7 +398,7 @@ instance subsingleton_exteriorPower_of_lt {n : ℕ} [Fact (r < n)] :
     simp only [Fintype.card_fin] at h
     rw [Set.powersetCard.mem_iff] at this
     omega
-  exact ((Finsupp.basisSingleOne (R := R) (ι := Fin r)).exteriorPower R n).repr.toEquiv
+  exact ((Finsupp.basisSingleOne (R := R) (ι := Fin r)).exteriorPower n).repr.toEquiv
     |>.subsingleton
 
 /-! ### Homology of the Koszul tower -/

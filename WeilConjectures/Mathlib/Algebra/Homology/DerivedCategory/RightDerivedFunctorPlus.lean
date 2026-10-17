@@ -111,7 +111,10 @@ theorem CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_si
 /-- For an additive functor `F` out of an abelian category with enough injectives, the right
 derived functor `R⁺F` preserves the property of being cohomologically `≥ n`: if `K` has no
 homology in degrees `< n`, neither has `R⁺F(K)`, since `K` is represented by a complex of
-injective objects concentrated in degrees `≥ n`. -/
+injective objects concentrated in degrees `≥ n`.
+This is blueprint `lem-weil-pbc-derived-functor-negative-vanishing`; its special case for an
+object placed in degree `0` is
+`CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_singleFunctor_obj`. -/
 theorem CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE
     {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives C]

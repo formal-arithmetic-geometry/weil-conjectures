@@ -25,6 +25,7 @@ def CommutesWithReductions' {S T : Scheme.{u}} (Φ : 𝐃(S) ⥤ 𝐃(T)) : Prop
       (_root_.DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology T) I
         (Φ.obj K)).obj (op n))
 
+set_option maxHeartbeats 2000000 in
 variable {I} in
 lemma commutesWithReductions_of_linear' {ϖ : A} (hϖ : ϖ ∈ nonZeroDivisors A)
     (hI : I = Ideal.span {ϖ}) {S T : Scheme.{u}} (Φ : 𝐃(S) ⥤ 𝐃(T)) [Φ.CommShift ℤ]
@@ -33,4 +34,3 @@ lemma commutesWithReductions_of_linear' {ϖ : A} (hϖ : ϖ ∈ nonZeroDivisors A
   have := _root_.DerivedCategory.nonempty_iso_map_derivedCompletionDiagram_obj hϖ hI Φ K n
   exact this
 
-#check @_root_.DerivedCategory.nonempty_iso_map_derivedCompletionDiagram_obj

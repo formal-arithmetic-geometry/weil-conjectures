@@ -113,7 +113,9 @@ cohomology sheaves are torsion as abelian sheaves, the derived base change map
 
 `BC_sq(K) : g^*(Rf_* K) ⟶ Rf'_*(g'^* K)`
 
-is an isomorphism in `D⁺(Y'_ét, Λ)`. No hypothesis is imposed on `g`. -/
+is an isomorphism in `D⁺(Y'_ét, Λ)`. No hypothesis is imposed on `g`.
+This is blueprint `thm-weil-pbc-bounded-below` for sheaves of `Λ`-modules (for abelian
+sheaves see `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`). -/
 theorem Etale.isIso_baseChange_of_isProper_of_torsionHomology [IsProper f]
     (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -140,7 +142,8 @@ whose cohomology sheaves are torsion, the derived base-change morphism
 is an isomorphism in `D⁺(Y'_ét, Ab)`. No hypothesis is imposed on `g`. This is
 [SGA 4, Exp. XII, Thm 5.1]. It is deduced from
 `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology` for `Λ = ULift ℤ`,
-through the equivalence between sheaves of `ULift ℤ`-modules and abelian sheaves. -/
+through the equivalence between sheaves of `ULift ℤ`-modules and abelian sheaves.
+This is blueprint `thm-weil-pbc-bounded-below`. -/
 @[stacks 0DDE]
 theorem Etale.isIso_baseChange_of_isProper [IsProper f] (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology Ab.{u + 1}))

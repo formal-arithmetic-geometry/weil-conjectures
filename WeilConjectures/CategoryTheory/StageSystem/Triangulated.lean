@@ -73,37 +73,37 @@ variable {i j : I} (h : i ≤ j) (T : Triangle (C i))
 lemma ιMapTriangleTransIso_hom_app_hom₁ :
     ((S.ιMapTriangleTransIso h).hom.app T).hom₁ = (S.transIso h).hom.app T.obj₁ := by
   simp [ιMapTriangleTransIso]
-  first | erw [Category.id_comp] | erw [Category.comp_id]
+  erw [Category.id_comp]
 
 @[simp]
 lemma ιMapTriangleTransIso_hom_app_hom₂ :
     ((S.ιMapTriangleTransIso h).hom.app T).hom₂ = (S.transIso h).hom.app T.obj₂ := by
   simp [ιMapTriangleTransIso]
-  first | erw [Category.id_comp] | erw [Category.comp_id]
+  erw [Category.id_comp]
 
 @[simp]
 lemma ιMapTriangleTransIso_hom_app_hom₃ :
     ((S.ιMapTriangleTransIso h).hom.app T).hom₃ = (S.transIso h).hom.app T.obj₃ := by
   simp [ιMapTriangleTransIso]
-  first | erw [Category.id_comp] | erw [Category.comp_id]
+  erw [Category.id_comp]
 
 @[simp]
 lemma ιMapTriangleTransIso_inv_app_hom₁ :
     ((S.ιMapTriangleTransIso h).inv.app T).hom₁ = (S.transIso h).inv.app T.obj₁ := by
   simp [ιMapTriangleTransIso]
-  first | erw [Category.id_comp] | erw [Category.comp_id]
+  erw [Category.comp_id]
 
 @[simp]
 lemma ιMapTriangleTransIso_inv_app_hom₂ :
     ((S.ιMapTriangleTransIso h).inv.app T).hom₂ = (S.transIso h).inv.app T.obj₂ := by
   simp [ιMapTriangleTransIso]
-  first | erw [Category.id_comp] | erw [Category.comp_id]
+  erw [Category.comp_id]
 
 @[simp]
 lemma ιMapTriangleTransIso_inv_app_hom₃ :
     ((S.ιMapTriangleTransIso h).inv.app T).hom₃ = (S.transIso h).inv.app T.obj₃ := by
   simp [ιMapTriangleTransIso]
-  first | erw [Category.id_comp] | erw [Category.comp_id]
+  erw [Category.comp_id]
 
 end
 
@@ -164,9 +164,9 @@ lemma exists_cocone_mem_distTriangles {X Y : S.PairCategory} (f : X ⟶ Y) :
     (S.ι n).map h ≫ ((S.ι n).commShiftIso (1 : ℤ)).hom.app _ ≫
       (S.isoToStage X hX).inv⟦(1 : ℤ)⟧', ⟨n, _, hT, ⟨?_⟩⟩⟩
   refine Triangle.isoMk _ _ (S.isoToStage X hX) (S.isoToStage Y hY) (Iso.refl _) ?_ ?_ ?_
-  · simp [mkHom_eq_isoToStage hX hY u]
-  · simp
-  · simp [← Functor.map_comp]
+  · simp [mkHom_eq_isoToStage hX hY u]; rfl
+  · simp; rfl
+  · simp [← Functor.map_comp]; rfl
 
 lemma rotate_mem_distTriangles {T : Triangle S.PairCategory} (hT : T ∈ distTriangles S) :
     T.rotate ∈ distTriangles S := by
@@ -189,12 +189,12 @@ lemma complete_morphism_of_iso {T₁ T₂ T₁' T₂' : Triangle S.PairCategory}
     (a : T₁.obj₁ ⟶ T₂.obj₁) (b : T₁.obj₂ ⟶ T₂.obj₂) (hcomm : T₁.mor₁ ≫ b = a ≫ T₂.mor₁) :
     ∃ c, T₁.mor₂ ≫ c = b ≫ T₂.mor₂ ∧ T₁.mor₃ ≫ a⟦(1 : ℤ)⟧' = c ≫ T₂.mor₃ := by
   obtain ⟨c, hc₂, hc₃⟩ := H (e₁.inv.hom₁ ≫ a ≫ e₂.hom.hom₁) (e₁.inv.hom₂ ≫ b ≫ e₂.hom.hom₂) (by
-    simp only [assoc]
+    simp only [Category.assoc]
     rw [reassoc_of% e₁.inv.comm₁, reassoc_of% hcomm, e₂.hom.comm₁])
   refine ⟨e₁.hom.hom₃ ≫ c ≫ e₂.inv.hom₃, ?_, ?_⟩
   · rw [reassoc_of% e₁.hom.comm₂, reassoc_of% hc₂]
-    simp only [assoc, e₂.inv.comm₂, Iso.hom_inv_id_triangle_hom₂_assoc]
-  · simp only [assoc]
+    simp only [Category.assoc, e₂.inv.comm₂, Iso.hom_inv_id_triangle_hom₂_assoc]
+  · simp only [Category.assoc]
     rw [← e₂.inv.comm₃, ← reassoc_of% hc₃, ← reassoc_of% e₁.hom.comm₃, ← Functor.map_comp,
       ← Functor.map_comp]
     simp
@@ -219,10 +219,12 @@ lemma complete_morphism_ι_of_stage {k m : I} (h : k ≤ m) {T₁ T₂ : Triangl
   let Φ := (S.ιMapTriangleTransIso h).inv.app T₁ ≫ (S.ι m).mapTriangle.map ψ ≫
     (S.ιMapTriangleTransIso h).hom.app T₂
   have e₁ : Φ.hom₁ = mkHom (X := (S.ι k).obj T₁.obj₁) (Y := (S.ι k).obj T₂.obj₁) m h h a := by
-    simp [Φ, ψ, mkHom_eq_isoToStage h h a, transIso_hom_app, transIso_inv_app]
+    simp [Φ, ψ, mkHom_eq_isoToStage (X := (S.ι k).obj T₁.obj₁) (Y := (S.ι k).obj T₂.obj₁) h h a,
+      transIso_hom_app, transIso_inv_app]
     rfl
   have e₂ : Φ.hom₂ = mkHom (X := (S.ι k).obj T₁.obj₂) (Y := (S.ι k).obj T₂.obj₂) m h h b := by
-    simp [Φ, ψ, mkHom_eq_isoToStage h h b, transIso_hom_app, transIso_inv_app]
+    simp [Φ, ψ, mkHom_eq_isoToStage (X := (S.ι k).obj T₁.obj₂) (Y := (S.ι k).obj T₂.obj₂) h h b,
+      transIso_hom_app, transIso_inv_app]
     rfl
   refine ⟨Φ.hom₃, ?_, ?_⟩
   · rw [← e₂]
@@ -240,7 +242,8 @@ lemma complete_morphism_ι {k : I} {T₁ T₂ : Triangle (C k)}
       ((S.ι k).mapTriangle.obj T₁).mor₃ ≫ a⟦(1 : ℤ)⟧' =
         c ≫ ((S.ι k).mapTriangle.obj T₂).mor₃ := by
   obtain ⟨m, hkm, h₁, h₁', h₂, h₂', a', b', rfl, rfl⟩ := exists_common_stage a b k
-  rw [ι_map_eq h₂ T₁.mor₁, ι_map_eq h₁' T₂.mor₁, mkHom_comp_mkHom, mkHom_comp_mkHom,
+  rw [ι_map_eq (h₂ : k ≤ m) T₁.mor₁, ι_map_eq (h₁' : k ≤ m) T₂.mor₁, mkHom_comp_mkHom,
+    mkHom_comp_mkHom,
     mkHom_eq_mkHom_iff] at hcomm
   obtain ⟨p, hp, e⟩ := hcomm
   rw [← tr_injective, tr_comp, tr_comp, tr_map, tr_map] at e
@@ -289,9 +292,9 @@ lemma cone_triangle_distinguished {X Y : S.PairCategory} {n : I} (hX : X.stage �
         (S.isoToStage X hX).inv⟦(1 : ℤ)⟧') ∈ distTriang S.PairCategory := by
   refine ⟨n, _, hT, ⟨Triangle.isoMk _ _ (S.isoToStage X hX) (S.isoToStage Y hY) (Iso.refl _)
     ?_ ?_ ?_⟩⟩
-  · simp [mkHom_eq_isoToStage hX hY u]
-  · simp
-  · simp [← Functor.map_comp]
+  · simp [mkHom_eq_isoToStage hX hY u]; rfl
+  · simp; rfl
+  · simp [← Functor.map_comp]; rfl
 
 /-- Every distinguished triangle of the pair category is isomorphic to the image of a
 distinguished triangle of a stage. -/
@@ -314,6 +317,7 @@ instance isTriangulated : IsTriangulated S.PairCategory := by
   obtain ⟨_, _, _, h₁₂'⟩ := distinguished_cocone_triangle f
   obtain ⟨_, _, _, h₂₃'⟩ := distinguished_cocone_triangle g
   obtain ⟨_, _, _, h₁₃'⟩ := distinguished_cocone_triangle (f ≫ g)
+  have : (S.ι k).IsTriangulated := ⟨fun T hT ↦ ι_mapTriangle_mem_distTriangles T hT⟩
   exact ⟨Octahedron.ofIso (e₁ := S.isoToStage X₁ h₁) (e₂ := S.isoToStage X₂ h₂)
     (e₃ := S.isoToStage X₃ h₃) (comm₁₂ := by simp [mkHom_eq_isoToStage h₁ h₂ f])
     (comm₂₃ := by simp [mkHom_eq_isoToStage h₂' h₃ g])
