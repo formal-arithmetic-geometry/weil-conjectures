@@ -144,5 +144,28 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-915d9aa32 (reviewer sub-agent of L); spot-checked: The proof is correct for nonempty Z and matches Stacks Tags 01NK/01N8, with hypotheses and route checked. Step 2 has one repairable edge-case gap: for empty Z, the finite subcover has no degrees d_i, so a common positive multiple is undefined. I added a corrected DAG JSON handling Z=∅ by taking d=1. Full review is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjCanonicalMapTwistComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjCanonicalMapTwistComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_proj_canonical_map_twist_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.gradedSectionElement",
+   "AlgebraicGeometry.Scheme.Modules.gradedSectionElement_val",
+   "AlgebraicGeometry.Scheme.Modules.exists_proj_canonical_map_twist_comparison"
+  ],
+  "statement": "theorem exists_proj_canonical_map_twist_comparison {A : Type u} [CommRing A] (𝒜 : ℕ → AddSubgroup A) [GradedRing 𝒜] (Z : Scheme.{u}) [CompactSpace Z] (M : Z.Modules) [M.IsInvertible] (ψ : 𝒜 →+*ᵍ sectionRingGrade M) (hcover : ∀ z : Z, ∃ (n : ℕ) (a : A) (ha : a ∈ 𝒜 n), 0 < n ∧ z ∈ nonvanishingLocus (M.tensorPow n) ((gradedSectionElement 𝒜 M ψ a ha).val n)) (r : Z ⟶ Proj 𝒜) (hr_preimage : ∀ (d : ℕ) (_hd : 0 < d) (a : A) (ha : a ∈ 𝒜 d), (r ⁻¹ᵁ Proj.basicOpen 𝒜 a : Set Z) = nonvanishingLocus (M.tensorPow d) ((gradedSectionElement 𝒜 M ψ a ha).val d)) (hr_formula : ∀ (d : ℕ) (_hd : 0 < d) (a : A) (ha : a ∈ 𝒜 d), ∀ (n : ℕ) (b : A) (hb : b ∈ 𝒜 (n • d)), (r.app (Proj.basicOpen 𝒜 a) (Proj.awayToSection 𝒜 a (HomogeneousLocalization.Away.mk 𝒜 ha n b hb))) • (M.tensorPow (n • d)).presheaf.map (homOfLE (le_top : r ⁻¹ᵁ Proj.basicOpen 𝒜 a ≤ ⊤)).op (((gradedSectionElement 𝒜 M ψ a ha).val ^ n) (n • d)) = (M.tensorPow (n • d)).presheaf.map (homOfLE (le_top : r ⁻¹ᵁ Proj.basicOpen 𝒜 a ≤ ⊤)).op ((gradedSectionElement 𝒜 M ψ b hb).val (n • d))) : ∃ d : ℕ, 0 < d ∧ ∀ k : ℕ, 0 < k → ∃ θ : ((tensorPullback r).obj (Proj.twist 𝒜 (0 + ((d * k : ℕ) : ℤ))) ≅ M.tensorPow (d * k)), ∀ (a : A) (ha : a ∈ 𝒜 (d * k)), θ.hom.app (r ⁻¹ᵁ ⊤) (tensorPullbackSection r (Proj.twist 𝒜 (0 + ((d * k : ℕ) : ℤ))) ⊤ ((Proj.unitToTwist (𝒜 := 𝒜) ha).app ⊤ (1 : Γ(Proj 𝒜, ⊤)))) = (M.tensorPow (d * k)).presheaf.map (homOfLE (le_top : r ⁻¹ᵁ ⊤ ≤ ⊤)).op ((gradedSectionElement 𝒜 M ψ a ha).val (d * k))",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-28e63dcfd",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Reviewed node, all dependencies, Stacks Tags 01NK/01N8, Lean declarations, edge cases, docstrings, report sections, route compliance, and scompile side-overlay evidence. No substantive or mechanical errors found."
  }
 }

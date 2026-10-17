@@ -286,5 +286,40 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-6052eb4a5 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the new node lem-pur-finite-product-compactification, every cited statement, the citer lem-pur-affine-space-trace-factorization Step 6, unit sk-prop-an, and the symmetry paragraph (i) of main-20261015 lem-sf-kunneth-coherence.proof. No SGA source is used. The item's statement is unchanged and its arrow types check. The bounded-below etale-origin tensor hypotheses are needed, since over Z/4 the product Z/2⊗^L Z/2 is unbounded below. Identity and empty cases agree on both sides. Steps 2-4 and 6-7 are correct: full faithfulness of u_! (u=v∘w) gives the open symmetry; Ex_*'s mate clause gives v̂=Lr^*ε_a⊗1; naturality and involutivity of σ give ŵ=1⊗ε_b; transport along the swap is in the statement of lem-weil-derived-direct-image-composition. Fault C4 in Step 5: transposing κ_{b,t}^{-1}∘Rb_*(v)∘w under Lc^*⊣Rc_* as two successive transposes needs κ to be the conjugate of the pullback compositor, and the statement of lem-weil-derived-direct-image-composition does not say so. Fixed: Step 5 now cites lem-weil-pbc-proetale-derived-pullback-composition, lem-cbc-sieve-module-sheaves-grothendieck (Mathlib leaf) and lem-sfb-derived-composition-adjunction-normalization, following the pattern of lem-trf-compact-composition-tower-formula. I checked that none of these reaches the item, so there is no cycle. proof_deps was rebuilt, two tool_uses entries were added, and the split_report summary, which had said the item does not use that node, was corrected. The new node is statement-only and self-contained, and T_{f,g} is exactly Ξ_{f,g}. Ω type-checks to Rc_*(Lr^*H⊗Lt^*J), and (u,c) is a compactification of h. In the proper and open special cases the claim reduces to known normalizations, and in general it is a real compactification-reduction lemma with no symmetry in it. It is not a duplicate: lem-sf-product-compactification-identity needs a six-functor datum and D^b_ctf inputs, which the item does not supply. Accepted tool uses: lem-sf-open-tensor-normalization, lem-pur-derived-pullback-tensor-iso, def-exchange-projection, def-weil-pbc-composite-adjunction, lem-weil-pbc-mate-pasting, lem-weil-derived-direct-image-composition, lem-weil-derived-tensor-functorial, lem-sfb-derived-composition-adjunction-normalization and lem-weil-pbc-proetale-derived-pullback-composition. No statement or target was changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteForwardProductSymmetry",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteForwardProduct_symmetry",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteForwardCoefficient",
+   "AlgebraicGeometry.ProEtale.finiteForwardTensorSymmetryNat",
+   "AlgebraicGeometry.ProEtale.finiteForwardTensorSymmetry",
+   "AlgebraicGeometry.ProEtale.finiteForwardProjectionSupport",
+   "AlgebraicGeometry.ProEtale.finiteForwardProjectionMap",
+   "AlgebraicGeometry.ProEtale.FiniteForwardProductDomain",
+   "AlgebraicGeometry.ProEtale.finiteForwardProductPrefix",
+   "AlgebraicGeometry.ProEtale.finiteForwardProductSwap",
+   "AlgebraicGeometry.ProEtale.finiteForwardCompactificationComparison",
+   "AlgebraicGeometry.ProEtale.finiteForwardProduct",
+   "AlgebraicGeometry.ProEtale.FiniteForwardProductEquation",
+   "AlgebraicGeometry.ProEtale.FiniteForwardPurityProductSymmetry",
+   "AlgebraicGeometry.ProEtale.finiteForwardProduct_symmetry"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteForwardProductSymmetry.lean",
+  "statement": "theorem finiteForwardProduct_symmetry (C : WeilConjectures.PurityFiniteSetting.{u}) {B X Z : Scheme.{u}} [B.Over (Spec (CommRingCat.of C.field.k))] [X.Over (Spec (CommRingCat.of C.field.k))] [Z.Over (Spec (CommRingCat.of C.field.k))] [IsSeparated (B ↘ Spec (CommRingCat.of C.field.k))] [IsSeparated (X ↘ Spec (CommRingCat.of C.field.k))] [IsSeparated (Z ↘ Spec (CommRingCat.of C.field.k))] [LocallyOfFiniteType (B ↘ Spec (CommRingCat.of C.field.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of C.field.k))] [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of C.field.k))] [QuasiCompact (B ↘ Spec (CommRingCat.of C.field.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of C.field.k))] [QuasiCompact (Z ↘ Spec (CommRingCat.of C.field.k))] (f : X ⟶ B) (g : Z ⟶ B) [f.IsOver (Spec (CommRingCat.of C.field.k))] [g.IsOver (Spec (CommRingCat.of C.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (M : _root_.DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} C.Coefficient))) (N : _root_.DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} C.Coefficient))) (wM : Scheme.FixedEtaleOriginWitness X C.Coefficient M) (wN : Scheme.FixedEtaleOriginWitness Z C.Coefficient N) : FiniteForwardPurityProductSymmetry C f g M N wM wN",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of 3e6529fad425: the retained M/N etale-origin witnesses are explicit parameters of the formal conclusion; that conclusion quantifies over both five-field ordered tensor domains. The concrete Xi, signed symmetries, canonical factor swap and normalized composition maps are retained. Imports use the current recorded supplied-domain exchange/projection module and its existing upstream finite transformations, preserving the concurrent Q14 dependency repair.",
+  "fixed_by": "NT-stage2-Codex-608a7a0e6"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-608a7a0e6",
+  "group": "Q28",
+  "result": "fix",
+  "note": "Independent review recorded in review.md. Mathematics, hypotheses, tensor domains, universes and route-pivot checks pass. Complete replacement under fixes/ adds the missing H9 tensor-functoriality proof import. Original and replacement compile cleanly through scompile.py. Branch head unchanged."
  }
 }

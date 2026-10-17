@@ -8,7 +8,8 @@
   "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20511–20552: the countable support-closure construction, stated here for one linear endomorphism; the source applies it to complementary projections."
  },
  "stmt_deps": [
-  "def-weil-pbc-direct-sum-modules"
+  "def-weil-pbc-direct-sum-modules",
+  "def-trf-coordinate-submodule"
  ],
  "proof": [
   {
@@ -203,5 +204,23 @@
   "group": "Q93",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q93-1eddac2ef (reviewer sub-agent of L); spot-checked: Read the item, cited direct-sum definition, unit/chapter route, Stacks Tag 058X source, searches, and edge cases in full. The six-step countable invariant-coordinate construction is correct, self-contained, non-duplicative, and respects all route locks; no repairs are needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CountableCoordinateClosure",
+  "declaration": "DirectSum.exists_countable_coordinateSubmodule",
+  "statement": "theorem exists_countable_coordinateSubmodule (R : Type u) [CommRing R] (J : Type v) (N : J → Type w) [∀ j, AddCommGroup (N j)] [∀ j, Module R (N j)] (hN : ∀ j : J, ∃ S : Set (N j), S.Countable ∧ Submodule.span R S = ⊤) (f : (⨁ j, N j) →ₗ[R] (⨁ j, N j)) {C : Set J} (hC : C.Countable) : ∃ D : Set J, D.Countable ∧ C ⊆ D ∧ ∀ x, x ∈ coordinateSubmodule R J N D → f x ∈ coordinateSubmodule R J N D",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/RingTheory/CountableCoordinateClosure.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-15ae22b1b",
+  "group": "N2",
+  "result": "pass",
+  "note": "Statement and helper match the node and source; required reports, docstrings, edge cases, searches, and compile evidence verified."
  }
 }
