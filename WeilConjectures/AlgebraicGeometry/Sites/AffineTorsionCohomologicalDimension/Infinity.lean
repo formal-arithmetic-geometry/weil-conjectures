@@ -144,7 +144,8 @@ theorem isZero_upperStar_infinity_rightDerived_lowerStar_affineChart_of_le {K : 
   -- the cohomological dimension bound for `R[1/x]`
   have hd : ringKrullDim P = (c + 1 : ℕ) := by
     change ringKrullDim (MvPolynomial PUnit.{u + 1} A) = _
-    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing, MvPolynomial.ringKrullDim_of_isNoetherianRing,
+    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing,
+      MvPolynomial.ringKrullDim_of_isNoetherianRing,
       ringKrullDim_eq_zero_of_field]
     simp
   have hpre (r : A) : (Spec.preimage s').hom (MvPolynomial.C r) = (Spec.preimage s).hom r := by
@@ -159,7 +160,21 @@ theorem isZero_upperStar_infinity_rightDerived_lowerStar_affineChart_of_le {K : 
     rw [← Spec.map_injective (h.trans (Spec.map_preimage s).symm)]
     rfl
   have hx : (Spec.preimage s').hom x = 0 := by
-    sorry
+    have h1 := congrArg (fun φ ↦ φ.hom ((Scheme.ΓSpecIso P).inv x))
+      (Scheme.ΓSpecIso_naturality (Spec.preimage s'))
+    simp only [CommRingCat.hom_comp, RingHom.comp_apply, Iso.inv_hom_id_apply,
+      Spec.map_preimage] at h1
+    rw [← h1]
+    have h2 : e.hom.appTop ((Scheme.ΓSpecIso P).inv x) =
+        AffineSpace.coord B PUnit.unit := by
+      have h3 : e.inv.appTop (AffineSpace.coord B PUnit.unit) = (Scheme.ΓSpecIso P).inv x :=
+        AffineSpace.SpecIso_inv_appTop_coord _ _
+      rw [← h3, ← CommRingCat.comp_apply,
+        ← Scheme.Hom.comp_appTop, Iso.hom_inv_id, Scheme.Hom.id_appTop]
+      rfl
+    simp only [s', Scheme.Hom.comp_appTop, CommRingCat.comp_apply, h2]
+    erw [AffineSpace.zeroSection_appTop_coord]
+    simp
   obtain ⟨g, hg⟩ := exists_spec_preimage_eq_comp s
   rw [residueFieldTrdeg_Spec] at ha
   obtain ⟨σ, hσ⟩ := Ideal.exists_algebraicIndependent_residueField _ a ha
@@ -177,7 +192,15 @@ theorem isZero_upperStar_infinity_rightDerived_lowerStar_affineChart_of_le {K : 
   -- the fibre product is `Spec R[1/x]`
   have hopens : (t ≫ ι) ⁻¹ᵁ (affineChart B).opensRange =
       PrimeSpectrum.basicOpen ((toStrictHenselization s').hom x) := by
-    sorry
+    have h3 : e.inv.appTop (AffineSpace.coord B PUnit.unit) = (Scheme.ΓSpecIso P).inv x :=
+      AffineSpace.SpecIso_inv_appTop_coord _ _
+    have h4 : t.appTop ((Scheme.ΓSpecIso P).inv x) =
+        (Scheme.ΓSpecIso R).inv ((toStrictHenselization s').hom x) := by
+      rw [← hφt, ← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality,
+        CommRingCat.comp_apply]
+    simp only [ι, Scheme.Hom.comp_preimage, infinityChart_preimage_opensRange_affineChart,
+      Scheme.preimage_basicOpen_top, h3]
+    rw [h4, basicOpen_eq_of_affine]
   let iso : Spec (.of (Localization.Away ((toStrictHenselization s').hom x))) ≅
       pullback (affineChart B) (t ≫ ι) :=
     (basicOpenIsoSpecAway _).symm ≪≫ IsOpenImmersion.isoOfRangeEq (Scheme.Opens.ι _)
