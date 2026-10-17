@@ -203,5 +203,23 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-05307196b (reviewer sub-agent of L); spot-checked: I read the item, its five steps, the new node, and the full statements of all eight cited nodes, including the Mathlib leaf SSet.relativeCellComplexOfMono at Skeleton.lean:428. Source: HTT Prop. 5.3.4.13 is not in literature/, so the WANTED line and proof_origin=agent stand. The statement matches the source hypothesis by hypothesis: kappa regular, kappa-filtered colimits, K kappa-small, vertexwise compact values. The added local smallness only puts mapping spaces in S_{U'}, and K empty is included. Nothing is weakened. Step 1: the objectwise colimit criterion gives vertexwise cocones and colimiting restrictions along any J->K. Step 2: the arrow square and finite interchange handle Delta^1; the spine equivalence and excision along injective vertex legs handle Delta^n. Step 3: the base case P(-1) uses the empty-shape clause. The boundary-cell leaf applied to L_{n-1} into L has its only stage with cells at k=n, and there are fewer than kappa cells; I checked n=0. Step 4: excision on L_{n-1} pushed out along A_n -> E_n; P(n-1) covers the boundaries and L_{n-1}, Step 2 covers the cells, and the spaces lemma handles the products and the pullback. Step 5: kappa=aleph_0 means K is finite; for uncountable kappa, N(N^op) is countable hence kappa-small, and the tower clause applies. All cited nodes are in the unit's route, tool_uses [] is correct, there is no cycle, and no SGA is cited. The new node lem-coef-infinity-coproduct-mapping-product is true: I checked the empty, singleton and two-point families from the degreewise formulas. It is not a duplicate of the five candidates I checked. But it is a two-to-three-line consequence of the definitions in def-cbc-enhanced-diagrams-cones, so under C1 it belongs in a step, not a node. I folded the argument into Step 4 (1456 characters, now citing def-cbc-enhanced-diagrams-cones instead), recomputed proof_deps, and updated the split_report text. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-pointwise-compact-diagrams.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3b490fecc",
+  "group": "NW",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, report sections, and universes checked; scompile sandbox and library passes exited 0 with no findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PointwiseCompactDiagrams",
+  "declaration": "SSet.Presentability.pointwise_compact_diagrams",
+  "file": "lean/Sheaf/CategoryTheory/PointwiseCompactDiagrams.lean",
+  "statement": "theorem pointwise_compact_diagrams (κ : Cardinal.{u}) (hκ : κ.IsRegular) (C : SSet.{max (u + 1) v}) [Quasicategory C] (hClocal : IsLocallySmall.{u, max (u + 1) v} C) (hCcolim : HasSmallKappaFilteredColimits C κ) (K : SSet.{max (u + 1) v}) (hK : IsKappaSmall κ K) (a : K ⟶ C) (ha : ∀ k : K _⦋0⦌, IsKappaCompact C κ (a.app (op ⦋0⦌) k)) : IsKappaCompact ((ihom K).obj C) κ (SSet.Enhanced.diagramVertex a)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

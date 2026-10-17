@@ -304,5 +304,32 @@
   "group": "Q94",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-33e5db177 (reviewer sub-agent of L); spot-checked: I read the whole item, all 18 cited statements, the parent lem-coef-infinity-yoneda-evaluation, the twisted-arrow and universal-left-fibration nodes, the unit record and the main-20261015 anchor paragraph. The statement is kept verbatim and is correct. I tested it on D empty, D a point and D=N(BG). The identity-point clause can only mean the identification through restriction along e_a, and step 7 proves exactly that. Step checks: step 1 builds A=C[D]^top and gets the weak equivalence from realization-singular-unit. In step 2, D is Joyal-cofibrant and A Bergner-fibrant, so r is an equivalence, and q comes from the h Fun argument. In step 3 the free diagram A(-,a)xK has the right variance, Y_a is cofibrant-fibrant, and mapping complexes are Kan by SM7. Step 4 is the subset reflection. In step 5 every hypothesis of HTT 4.2.4.4 holds (u Dwyer-Kan, sSet combinatorial simplicial, target S_U). In step 6 Gr=j holds formula by formula through C[K x N B] -> C[K] x C[N B]. Steps 7 and 9 give the identity point, and step 10 the universes. There is no cycle (the closure of the 17 proof_deps does not reach the item), and the parent is not cited. Accepted tool_uses: lem-cbc-realization-singular-unit-weak and lem-cbc-enhanced-functor-cone-calculus, both generic tools from the off-unit sk-prop-sf-cbc. HTT is absent from literature/, so the WANTED line and proof_origin agent are correct. Mathlib search kinds are complete. FIX (C4/E5, one fault): step 8 claimed the twisted-arrow comparison together with transport classification identifies the nerve of Map_B with H_{N_hc B}, and transported it along Theta 'on arrow families', without citing what carries the bridge. I rewrote step 8 and added two citations, lem-coef-universal-left-fibration-identity (F^*W represents F) and lem-coef-twisted-arrow-left-fibration (Tw strictly functorial, its fibers are slices). Both are in the same unit and acyclic with respect to the item. The rewritten argument: Tw represents both H_B and transport's H_E; Tw(Theta) is then a transformation by the mapping-space formula and pullback compatibility, and an equivalence by the functor calculus. proof_deps is recomputed, and the corrected file is under fixes/. For later: transport-classification is unsplit, and its split must deliver H_E as the transport of Tw coherently in e.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e2af177c4",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, declarations, docstrings, and per-file scompile verification all passed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichedPresheafRectification",
+  "declaration": "CategoryTheory.EnrichedPresheaf.enriched_presheaf_rectification",
+  "declarations": [
+   "CategoryTheory.EnrichedPresheaf.spaceLift",
+   "CategoryTheory.EnrichedPresheaf.CoherentComparison",
+   "CategoryTheory.EnrichedPresheaf.CoherentComparison.component",
+   "CategoryTheory.EnrichedPresheaf.yonedaIdentity",
+   "CategoryTheory.EnrichedPresheaf.Presentation",
+   "CategoryTheory.EnrichedPresheaf.enriched_presheaf_rectification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnrichedPresheafRectification.lean",
+  "statement": "theorem enriched_presheaf_rectification (D : SSet.{u}) [SSet.Quasicategory D] : Nonempty (Presentation D)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The only input is the small quasicategory D. Presentation is output data for the actual enriched presheaf projective model, bifibrant nerve, full coherent Yoneda and evaluation comparisons, and pointed normalization. No conclusion is assumed as an input. Reuses canonical enriched ends, space nerve, Yoneda and HomTransport. Repair of H3: the full evaluation edge is normalized to the same counit in every degree; the Hom unit is normalized to the actual rho and HomTransport identity; coherent evaluation is the restriction of the whole-presheaf natural comparison carrying the normalized identity to yonedaIdentity. The existing triangles retain their common diagonal."
  }
 }
