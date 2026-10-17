@@ -265,5 +265,46 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-d87a428a3 (reviewer sub-agent of L); spot-checked: PASS: I read the whole item, all eight steps, the full statements of the three cited nodes and the Mathlib source behind the two leaves. Leaf sources: Inner/Basic.lean:43 says innerAnodyneExtensions = innerFibrations.llp; lines 89-92 give the equality with retracts of transfinite composites of pushouts of coproducts of inner horn inclusions. Inner/PushoutProduct.lean:103-109 (innerAnodyneExtensions_pushoutObjObjι', which needs Mono j and an inner anodyne i) and InnerFibration.lean:64 match the node conventions exactly. The statement is unchanged and is exactly what step 3 of the parent lem-coef-cat-infinity-colimits-cartesian-closure uses. Step checks: (1) the degreewise pushout set presentation and injectivity hold because horn inclusions are injective, and the 𝒰-size bound holds by countable products and unions; (2) a horn map factors through a finite stage by the cover by the n-1 faces other than the i-th and injectivity on overlaps (checked for Λ²₁); (3) relabelling (n,i,a)↦(n,i,f_r a) is strictly functorial and natural; (4) cell-generation applied in each universe 𝒲 puts j_X in the LLP class, and E→Δ⁰ is an inner fibration; (5) both exponential formulas are correct against Fun(K,E)_n=Hom(K×Δ^n,E); (6) pushout-product with a horn inclusion and ∅→K shows Fun(K,E) is a quasicategory; (7) pushout-product with A=X, B=RX, C=P, D=Q gives the T→RX×Q extension and strict triangles; (8) universe stability, and the empty case gives R∅=∅ and Fun(∅,E)=Δ⁰. Small cases checked: X=∅, E=∅, X=Λ²₁, and X already a quasicategory. There are no new nodes. DAG duplicate scan: filtered-inner-horn-factorization, isofibration-exponentiation, coherent-inner-anodyne-equivalences and discrete-inner-cell-transfer are not duplicates; lem-cbc-internal-hom-quasicategory covers only step 6's clause, and reproving it from an in-unit leaf is allowed. Route: the cited statements are leaves in unit sk-prop-sf-biduality-general and the definition is a notion; no tool_uses; no SGA. Not a target node, so there is no base-change morphism to check. HTT and Kerodon are online only, with WANTED recorded and proof_origin agent. Every step was checked independently. Minor: step 8 is marked elementary although it re-applies two leaves; it is a summary, so I accept it. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SmallInnerHornCompletion",
+  "declaration": "SSet.Enhanced.small_inner_horn_completion",
+  "declarations": [
+   "SSet.Enhanced.innerHornLabel",
+   "SSet.Enhanced.innerHornLabelHorn",
+   "SSet.Enhanced.innerHornLabelSimplex",
+   "SSet.Enhanced.innerHornAttachmentMap",
+   "SSet.Enhanced.innerHornAttachmentInclusion",
+   "SSet.Enhanced.innerHornAttachment",
+   "SSet.Enhanced.innerHornAttachmentOld",
+   "SSet.Enhanced.innerHornAttachmentNew",
+   "SSet.Enhanced.innerHornStage",
+   "SSet.Enhanced.innerHornStageSucc",
+   "SSet.Enhanced.innerHornStageDiagram",
+   "SSet.Enhanced.innerHornCompletion",
+   "SSet.Enhanced.innerHornCompletionι",
+   "SSet.Enhanced.innerHornCompletionMap",
+   "SSet.Enhanced.innerHornCompletionRestriction",
+   "SSet.Enhanced.innerHornStageCell",
+   "SSet.Enhanced.innerHornRelabel",
+   "SSet.Enhanced.IsInnerHornCompletionRelabelling",
+   "SSet.Enhanced.small_inner_horn_completion"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SmallInnerHornCompletion.lean",
+  "statement": "theorem small_inner_horn_completion (X : SSet.{u}) : Quasicategory (innerHornCompletion X) ∧ Mono (innerHornCompletionMap X) ∧ MorphismProperty.transfiniteCompositionsOfShape ((MorphismProperty.coproducts.{u} innerHornInclusions.{u}).pushouts) ℕ (innerHornCompletionMap X) ∧ innerAnodyneExtensions.{max u v} ((SSet.uliftFunctor.{v, u}).map (innerHornCompletionMap X)) ∧ (∀ (E : SSet.{max u v}), Quasicategory E → Quasicategory ((ihom ((SSet.uliftFunctor.{v, u}).obj (innerHornCompletion X))).obj E) ∧ Quasicategory ((ihom ((SSet.uliftFunctor.{v, u}).obj X)).obj E) ∧ (∀ {P Q : SSet.{max u v}} (m : P ⟶ Q), Mono m → HasLiftingProperty m (innerHornCompletionRestriction X E))) ∧ (∃ (R : ∀ {Y Z : SSet.{u}}, (Y ⟶ Z) → (innerHornCompletion Y ⟶ innerHornCompletion Z)), (∀ {Y Z : SSet.{u}} (f : Y ⟶ Z), IsInnerHornCompletionRelabelling f (R f)) ∧ (∀ Y : SSet.{u}, R (𝟙 Y) = 𝟙 (innerHornCompletion Y)) ∧ (∀ {Y Z : SSet.{u}} (f : Y ⟶ Z), innerHornCompletionMap Y ≫ R f = f ≫ innerHornCompletionMap Z) ∧ (∀ {Y Z W : SSet.{u}} (f : Y ⟶ Z) (g : Z ⟶ W), R (f ≫ g) = R f ≫ R g)) ∧ (∀ n : SimplexCategoryᵒᵖ, IsEmpty ((innerHornCompletion (⊥_ SSet.{u})).obj n))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Explicit same-universe pushout/colimit construction; helper definitions belong to this node. The arbitrary test universe v occurs only in the conclusions after applying uliftFunctor, so the constructed completion and relabelling characterization do not depend on it. Only the named theorem is postponed.",
+  "fixed_by": "NT-stage2-cc-31682e194"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31682e194",
+  "group": "Q49",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: labels n>=2 and 0<i<n, degreewise pushout/colimit construction, U-small quasicategory, Mono, transfiniteCompositionsOfShape ℕ of pushouts of coproducts.{u} innerHornInclusions, innerAnodyneExtensions.{max u v} of the lifted j_X, quasicategory Fun objects, HasLiftingProperty against all Mono between SSet.{max u v} objects, relabelling R characterized cellwise and functorial, empty input stays empty. No hollow definitions, docstrings present, proof only sorry, lean.statement verbatim, deps consistent. Defect (H3/H9): innerHornCompletionRestriction used uliftFunctor.{max u v,u} while the theorem's quasicategory and inner-anodyne clauses use uliftFunctor.{v,u}; rfl probe shows the ihom objects differ, so the restriction's source and target were not the objects claimed to be quasicategories (report item 8 is wrong). Fixed in fixes/lean/Sheaf/AlgebraicTopology/SmallInnerHornCompletion.lean with uliftFunctor.{v,u} throughout and a corrected source docstring (Kerodon 1.5.7.6 / HTT 2.3.2.5); theorem text unchanged. nt_compile: delivered file EXIT 0, fixed file EXIT 0 with no warnings, and a probe confirms the fixed restriction has the theorem's exact source and target."
  }
 }

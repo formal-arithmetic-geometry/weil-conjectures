@@ -216,5 +216,27 @@
   "group": "Q77",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-8dba8e3f8 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The delivery adds no new nodes and leaves the statement unchanged; I made no fixes. Sources: the blueprint sentence in lem-fin-radicial-exchange-descent is the same in master and main-20261015, and Stacks sites-cohomology Tag 0E47 (remark-compose-base-change-horizontal, lines 4094-4123) omits its verification, so proof_origin=agent is right. The coefficient category and base-change morphism are the unbounded constant-Lambda module exchange of def-kun-unbounded-exchange: the mate of theta^D followed by the counit. The proof never uses the D^+ abelian-sheaf pasting nodes. Step 1: clause (2) of square-iso-pasting with f'=f1, f''=f2, h=k, h'=k1 matches term for term, and the step from abelian-sheaf maps to module maps is elementary. Step 2: descent degreewise through clauses (2) and (3) of the localization lemma. It is brief about the bookkeeping for the comparison isomorphisms, but nothing is missing. Step 3: mate-pasting (1) with L1=f^-1, G=g^-1, H=g1^-1, G2=k^-1, H2=k1^-1 gives gamma-flat = (Ex2 g1^-1) o (k^-1 Ex1); I checked this. Step 4: mate-whisker with sigma = c_{g,k}^-1 and tau = c_{g1,k1}; directions and domains are correct. Step 5 is cancellation of the invertible end factors. The statement's claim that c is Lambda-linear holds: c is natural and the Lambda action is pulled back. Small cases checked: identity k and k1, identity g and g1, empty schemes, K=0. Route: mate-pasting and the localization lemma are Mathlib leaves; square-iso-pasting, mate-whisker and modules-exact are closed in slopmaster2; def-kun is a definition. I accept the three declared tool_uses. Duplicate search: exchange-identity-pasting, sbc-lem-identity-and-base-change-composition, sbc-lem-base-change-composition, module-base-change-map-pasting and derived-square-pasting differ in setting or content, so none is a duplicate. The parent's step uses the item consistently."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleExchangeCompositeBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.moduleExchange_composite_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.moduleInverseImageCompIso",
+   "AlgebraicGeometry.Etale.moduleExchange_composite_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleExchangeCompositeBaseChange.lean",
+  "statement": "theorem moduleExchange_composite_baseChange (Λ : Type (u + 1)) [CommRing Λ] {X X₁ X₂ Y Y₁ Y₂ : Scheme.{u}} {f : X ⟶ Y} {f₁ : X₁ ⟶ Y₁} {f₂ : X₂ ⟶ Y₂} {g : Y₁ ⟶ Y} {g₁ : X₁ ⟶ X} {k : Y₂ ⟶ Y₁} {k₁ : X₂ ⟶ X₁} (sq₁ : ChosenCartesianSquare g₁ f₁ f g) (sq₂ : ChosenCartesianSquare k₁ f₂ f₁ k) : (exactDerivedBaseChangeMap (ModuleCat.{u + 1} Λ) (sq₂.toCommSq.horiz_comp sq₁.toCommSq) = Functor.whiskerLeft R(lowerStar (ModuleCat.{u + 1} Λ) f) (moduleInverseImageCompIso Λ g k).inv ≫ (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (exactDerivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq₁.toCommSq) D(upperStar (ModuleCat.{u + 1} Λ) k) ≫ (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft D(upperStar (ModuleCat.{u + 1} Λ) g₁) (exactDerivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq₂.toCommSq) ≫ (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (moduleInverseImageCompIso Λ g₁ k₁).hom R(lowerStar (ModuleCat.{u + 1} Λ) f₂)) ∧ ∀ K : DerivedCategoryModule Λ X, IsIso ((exactDerivedBaseChangeMap (ModuleCat.{u + 1} Λ) (sq₂.toCommSq.horiz_comp sq₁.toCommSq)).app K) ↔ IsIso (D(upperStar (ModuleCat.{u + 1} Λ) k).map ((exactDerivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq₁.toCommSq).app K) ≫ (exactDerivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq₂.toCommSq).app (D(upperStar (ModuleCat.{u + 1} Λ) g₁).obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f3aca1b4f",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Read node, all 8 stmt deps, report, module and the exact declarations (exactDerivedBaseChangeMap/exactDerivedSquareUpperStarIso, ChosenCartesianSquare, upperStarComp, CommSq.horiz_comp, DerivedCategoryModule). Squares match def-kun orientation; horiz_comp gives CommSq (k1≫g1) f2 f (k≫g) = outer rectangle; the four-factor formula is an equality of natural transformations, in node order, with c^Λ = inverse of the descended upperStarComp (direction v⁻¹u⁻¹≅(uv)⁻¹, real data, sorry-free). The iff clause tests the composite. No extra hypotheses; Λ:Type(u+1) is the recorded convention; edge cases allowed. True via the source-library squareUpperStarIso_paste_horiz_hom/baseChangeMap_paste_horiz conventions. lean.statement verbatim; only the lean field added; docstrings carry source, blueprint id and the 5 proof steps; lines ≤100. nt_compile.py --json: rc=0, no errors or warnings in its output; #print axioms: theorem sorryAx only, helper sorry-free. Observations only: the helper is the same composite as unboundedEtaleUpperStarCompIso (another node's module; reuse would add an unrelated heavy import and edge); the report misstates the node proof as empty (fields unchanged)."
  }
 }

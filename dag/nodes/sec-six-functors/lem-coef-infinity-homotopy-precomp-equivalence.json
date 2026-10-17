@@ -207,5 +207,28 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-d12e6457e (reviewer sub-agent of L); spot-checked: I read the whole item, all three cited statements, the citer lem-coef-infinity-blunt-join-comparison (all 10 steps), the unit record, Mathlib PushoutProduct.lean:153-154 and Scholze Lecture II basic facts (1)-(7) on pp.14-15. The statement is true and is exactly what the parent's step 4 uses (X=Y=P(Δ^n), a=1, b=s_n c_n). Step 1: the evaluation and currying formulas are correct, and both endpoints are precomposition with a and b on every simplex, not only on vertices. Step 2: the Mathlib leaf (universe-polymorphic) makes D, T and Fun(D,T) quasicategories. The common containing universe is stated in the item and matches the parent. Step 3: the component of α_f at x is s0 f(a(x)), which is an equivalence with itself as inverse and the constant 2-simplex as both witnesses. Steps 4-5: lem-coef-infinity-pointwise-equivalences (Kerodon 01DK) is applied with K=X, C=E and then K=D, C=T. Its hypotheses hold, it allows any small shape, and coherence comes from its statement. Small cases checked: X, Y or E empty; X=Δ^0; and the non-degenerate counterexample E=N([1]), which shows the degeneracy hypothesis is needed. There are no new nodes. The duplicate scan of all statements combining a Δ^1-homotopy, precomposition and Fun found nothing that states the item. The dependency closure (14 nodes) does not contain the item, so there is no cycle. The route stays in its own unit plus a Mathlib leaf and a definition, so no tool_uses are needed. No SGA source is used, no target is touched and no fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HomotopyPrecompositionEquivalence",
+  "declaration": "SSet.Enhanced.homotopy_precomposition_equivalence",
+  "declarations": [
+   "SSet.Enhanced.homotopyPrecomposition",
+   "SSet.Enhanced.homotopyPrecompositionEdge",
+   "SSet.Enhanced.homotopy_precomposition_equivalence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/HomotopyPrecompositionEquivalence.lean",
+  "statement": "theorem homotopy_precomposition_equivalence {X Y : SSet.{u}} (a b : X ⟶ Y) (H : X ⊗ Δ[1] ⟶ Y) (h₀ : lift (𝟙 X) (SSet.const (stdSimplex.obj₀Equiv.symm 0)) ≫ H = a) (h₁ : lift (𝟙 X) (SSet.const (stdSimplex.obj₀Equiv.symm 1)) ≫ H = b) (hvertex : ∀ x : X _⦋0⦌, ∃ y : Y _⦋0⦌, H.app _ (X.σ 0 x, yonedaEquiv (𝟙 (Δ[1] : SSet.{u}))) = Y.σ 0 y) (E : SSet.{u}) [Quasicategory E] : ((ihom ((ihom Y).obj E)).obj ((ihom X).obj E)).δ 1 (homotopyPrecompositionEdge H E) = diagramVertex ((MonoidalClosed.pre a).app E) ∧ ((ihom ((ihom Y).obj E)).obj ((ihom X).obj E)).δ 0 (homotopyPrecompositionEdge H E) = diagramVertex ((MonoidalClosed.pre b).app E) ∧ IsEquivalenceEdge ((ihom ((ihom Y).obj E)).obj ((ihom X).obj E)) (homotopyPrecompositionEdge H E)",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ec42f69b",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Checked every clause against node and dependency: X,Y:SSet.{u} with no quasicategory/Nonempty assumption; h0/h1 restrict H to X×{0},{1} as equality of whole maps; hvertex = (s0 x, id) edge in the image of σ0 (existential, no choice); E with [Quasicategory E]; D,T = ihom; homotopyPrecomposition is the explicit curry of (x,(f,t)) ↦ f(H(x,t)) through ihom.ev; edge = yonedaEquiv(curry Φ_H); δ1/δ0 = diagramVertex(pre a/pre b), the same convention as AreNaturallyEquivalent and pointwise_equivalences; IsEquivalenceEdge in Fun(D,T). One common universe as the node specifies; empty X/Y/E admitted; the vertex condition is necessary (N([1]) counterexample). Only the lean field differs from the side node and lean.statement is verbatim; real Worker report and Second reading sections; helpers are real data with source/blueprint docstrings; proof docstring gives the 5 steps; only sorry; no duplicate notion. nt_compile --json of the snapshot file against live + side overlay (deps EnhancedDiagramsCones, InvertiblePrismExtension, PointwiseEquivalences): rc 0, no errors or warnings (warn.sorry=false). No findings."
  }
 }

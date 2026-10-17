@@ -175,5 +175,31 @@
   "group": "Q112",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-d8e0d1911 (reviewer sub-agent of L); spot-checked: I read the whole item, its 4 steps, every cited statement (lem-sf-kinjective-derived-map-computation, lem-weil-pbc-exact-functor-derived-factorization, def-sfb-right-derived-functor and the definition leaves), the citer lem-sf-compact-support-restriction-of-scalars and the normalization clause of lem-weil-proetale-direct-image-restriction-of-scalars, the unit sk-def-sf-operations and the chapter, and Stacks derived.tex lemma-K-injective-defined (070Y, line 9747). Types check: c_v = eta_T^{-1} RF(Qv), and both sides of the normalization and of the conclusion run Q(FT) -> Q(F rJ) = Q(sGJ). Because c_v eta_{rJ} = Q(Fv), the explicit hypothesis that Q(Fv) is invertible is equivalent to eta^F_{rJ} being invertible, and the normalization is beta_J = s eta^G_J (eta^F_{rJ})^{-1}. With r = s = id and beta = id this holds by naturality of eta. It is exactly what the direct-image lemma supplies, so the hypothesis can be met and nothing is weakened. With u = id the conclusion reduces to the normalization. Step 1 uses the leaf (r preserves quasi-isomorphisms) and the defining formula c_a = eta^{-1} RF(Qa), giving c_w = c_v RF(a); I verified it. Step 2 is naturality of beta at q followed by cancelling RF(a); I re-derived it, and it is elementary. Step 3 applies the item's own hypothesis at (J, v) and never uses K-injectivity of rJ. Step 4 uses the transition and cocycle clause of the computation lemma, and L2 = d_G L1 d_F^{-1} follows by cancellation. Edge cases checked: zero complexes, F = G = 0, identity resolutions, rJ not K-injective. There are no new nodes, no duplicate (rg over 070Y and the comparison/resolution keywords; candidates read), no restatement of the parent, no cycle, no SGA, and the route stays in the unit with leaves and definitions as notions; tool_uses is empty and none is needed. Searches cover all three kinds. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NormalizedDerivedComparisonCommonResolution",
+  "declaration": "CategoryTheory.Functor.normalizedDerivedComparison_commonResolution",
+  "declarations": [
+   "CategoryTheory.Functor.normalizedDerivedComparisonComplexIso",
+   "CategoryTheory.Functor.normalizedDerivedComparisonTargetIso",
+   "CategoryTheory.Functor.normalizedDerivedComparisonResolutionMap",
+   "CategoryTheory.Functor.normalizedDerivedComparison_commonResolution",
+   "CategoryTheory.Functor.normalizedDerivedComparison_commonResolution_transition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/NormalizedDerivedComparisonCommonResolution.lean",
+  "statement": "theorem normalizedDerivedComparison_commonResolution {N J : CochainComplex A' ℤ} {T : CochainComplex A ℤ} [J.IsKInjective] [T.IsKInjective] (u : N ⟶ J) (v : (r.mapHomologicalComplex (.up ℤ)).obj J ⟶ T) [QuasiIso u] [QuasiIso v] : normalizedDerivedComparisonResolutionMap F G r s e enoughA enoughA' β u v = @CategoryTheory.inv _ _ _ _ _ (hFv J T v)",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Three real-data helpers insert the canonical exact-functor localization identifications and express the displayed comparison. The main theorem gives the arbitrary successive-resolution formula; the transition theorem gives compatibility with both canonical resolution transitions. The supplied normalization uses the recorded comparison for the identity resolution of J, namely the inverse derived unit with its canonical Q/Qh identifications. All category and localization universes are independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c67bf005",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Read node, 6 stmt deps, Stacks 070Y place, module, report, dependency Lean (RightDerivedFunctorOfQuasiIsoResolutionsObjIso c_s=eta^-1 RF(Qs); kInjectiveDerivedResolutionTransition hom=c_a^-1>>c_b). All clauses match: enoughA/enoughA' quasi-iso to K-injective (not monic); r,s exact via Additive+finite limits/colimits; e : r⋙F=G⋙s; beta : r_D⋙RF ≅ RG⋙s_D; hFv/hnormalized quantified exactly as the node, with c_(id J)=eta_J^-1 and canonical factorization isos; main theorem c_w^-1;beta_N;s(c_u) = Q(Fv)^-1 with w=r.map u≫v, no K-injectivity of rJ; transition theorem = L2=d_G L1 d_F^-1 with correct directions. Re-derived both. Node diff vs live: only the lean field; statement verbatim; no duplicate declarations. pp.universes probe: 12 independent universes; hnormalized in both signatures. Helpers real; the only sorryAx is from the landed dependency ObjIso (postponed Unit_isIso). Theorems sorry only; docstrings carry source and blueprint and proof steps 1-4. nt_compile --json on the snapshot file passed, no errors or warnings; no lake build. No findings."
  }
 }

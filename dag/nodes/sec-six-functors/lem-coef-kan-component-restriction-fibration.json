@@ -221,5 +221,28 @@
   "group": "Q134",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-f13672875 (reviewer sub-agent of L); spot-checked: I read the whole item and found no fault, so I made no changes. The delivery has no new nodes, and its unchanged statement is true. I tested it on small cases: empty S or R, discrete maps, the identity on the non-Kan Δ^1 (which shows the Kan hypothesis on Z is needed only for the last clause), and a fiber whose two components lie in one component of X. Step 1 builds the component subcomplexes and the restricted map directly from the operators and natural transformations of def-weil-pbc-simplicial-set. Step 2 is correct: any horn with n>=1 contains a vertex (for n=1 it is the single vertex 1-i), edges of Δ^n carry its component to every vertex of the filler, and so the filler factors through X[S]; it uses only the horn-RLP clause of lem-coef-kan-quillen-right-proper, which is in the same unit. Step 3 is correct because Y[R]->Y is injective, and it never assumes π0j is injective. Steps 4 and 5 are correct: the filler over the constant simplex at y stays in the fiber, and step 2 applied to Z->Δ^0 gives Z[S] Kan, using the fibrant-object clause. All steps are rightly marked elementary and proof_deps matches. The parent's step 6 (lem-coef-segal-cotensor-evaluation-dk) uses exactly these clauses. There is no route departure, no tool_uses and no SGA. A repo-wide rg found no duplicate: segal-homotopy-category-components, enriched-marked-realization and kan-fibration-fiber-criterion state different facts, and blueprint_refs search returned 0 nodes. PiZero.lean's TODO confirms no Mathlib leaf. Rezk §12.2 / Lemma 13.9 is not archived; the WANTED line and the agent-written mark are correct. The item is not a target, so the base-change and coefficient-category checks do not apply."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanComponentRestriction",
+  "declaration": "SSet.kan_component_restriction",
+  "declarations": [
+   "SSet.componentSubcomplex",
+   "SSet.componentRestriction",
+   "SSet.kan_component_restriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/KanComponentRestriction.lean",
+  "statement": "theorem kan_component_restriction : (∀ (X Y : SSet.{u}) (p : X ⟶ Y) (S : Set (π₀ X)) (R : Set (π₀ Y)) (h : Set.MapsTo (mapπ₀ p) S R), Fibration p → Fibration (componentRestriction p S R h) ∧ ∀ y : (componentSubcomplex Y R).toSSet _⦋0⦌, (∃ e : pullback (componentRestriction p S R h) (const (X := Δ[0]) y) ≅ ((componentSubcomplex X S).preimage (pullback.fst p (const (X := Δ[0]) y.1))).toSSet, e.hom ≫ ((componentSubcomplex X S).preimage (pullback.fst p (const (X := Δ[0]) y.1))).ι ≫ pullback.fst p (const (X := Δ[0]) y.1) = pullback.fst (componentRestriction p S R h) (const (X := Δ[0]) y) ≫ (componentSubcomplex X S).ι) ∧ (componentSubcomplex X S).preimage (pullback.fst p (const (X := Δ[0]) y.1)) = componentSubcomplex (pullback p (const (X := Δ[0]) y.1)) ((mapπ₀ (pullback.fst p (const (X := Δ[0]) y.1))) ⁻¹' S) ∧ KanComplex (pullback (componentRestriction p S R h) (const (X := Δ[0]) y)) ∧ KanComplex ((componentSubcomplex X S).preimage (pullback.fst p (const (X := Δ[0]) y.1))).toSSet) ∧ (∀ (Z : SSet.{u}) (S : Set (π₀ Z)), KanComplex Z → KanComplex (componentSubcomplex Z S).toSSet)",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ee427794f",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Read node, dep lem-coef-kan-quillen-right-proper, module, report (Worker report + Second reading by Q133 present), Enhanced.fullSubcomplex and Mathlib π₀/mapπ₀. Commit adds only module, node (only lean field changed) and report. Clause-by-clause match: arbitrary Fibration p, exact MapsTo image hypothesis, no Kan/nonempty assumptions on X,Y; canonical degreewise restriction; strict-fiber iso compatible with monic maps to X identifies X_y∩X[S]; union-of-components via (mapπ₀ j)⁻¹'S without injectivity; both fiber models Kan; separate Z Kan ⇒ Z[S] Kan; universe u free. Math checked incl. 1-dim horns and all empty cases. Helpers have real data, theorem is sorry only, docstrings carry source/blueprint and five proof steps, lean.statement verbatim, no duplicate notion found. nt_compile.py on the snapshot: rc=0, clean, 2.0 s; axioms only sorryAx plus standard. No findings."
  }
 }

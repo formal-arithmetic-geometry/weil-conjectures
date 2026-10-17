@@ -8,7 +8,9 @@
   "place": "Opening compactification transport, and its inherited dense-comparison foundation. Agent-extracted generic enhanced mate assertion from former step 12 of lem-cbc-dense-hypersheaf-comparison; the blueprint does not itself prove this general higher-coherence assertion. WANTED: an archived enhanced adjoint-equivalence mate/pasting reference."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-cbc-kan-fibration-fiber-criterion"
  ],
  "proof": [
   {
@@ -158,5 +160,56 @@
   "group": "Q146",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-0e507628f (reviewer sub-agent of L); spot-checked: I read the item, all four cited statements (def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, lem-cbc-simplicial-composition-spine, lem-cbc-kan-fibration-fiber-criterion), the parent step 13 that uses the item, the unit sk-prop-sf-cbc and the main-20261015 thm-cbc-finite-level-proetale proof opening. That proof gives only transport context and no mate theorem, so the item's agent-written origin and WANTED line are correct. Typing checks out: theta: VR->R'U and alpha''=U'alpha o alpha'V : L''V'V->U'UL. I recomputed the Step 1 homotopy (naturality of eps' twice, then the L'-|R' triangle identity whiskered by VR) and the Step 4 pasting chain (theta' compatibility whiskered by U, naturality of alpha' along theta, U' applied to theta's compatibility); both give the stated result. Step 2: postcomposition with L' is a functor equivalence, the calculus gives equivalences on mapping spaces, the spine lemma makes postcomposition with eps'U an equivalence, and the fiber criterion gives contractible homotopy fibers; this fiber matches def-cbc's homotopy fiber. Step 3 reduces to R eps o eta R ~ id_R. Step 5 is a valid relative boundary-filling argument from the trivial Kan fibrations; its higher-coherence clause is informal, which I note for stage 2 only. Small cases: identity square, nerves of ordinary categories with non-invertible U and V, and empty categories. Parent orientation (L=p*, V=v*, U=u*, alpha=id) is correct. Duplicate search: lem-coef-dg-mate-transpose and lem-coef-dg-mate-pasting are D(Z)-enriched, in another unit, general adjunctions and give no contractible fiber, so they are not duplicates. There are no new nodes, no SGA citation, the route stays inside sk-prop-sf-cbc, proof_deps equals the union of the step uses, there is no cycle, and the Mathlib searches cover three kinds with the mateEquiv hits correctly judged 1- or 2-categorical. No fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnhancedEquivalenceSquareMates",
+  "declaration": "SSet.Enhanced.SquareMates.enhanced_equivalence_square_mates",
+  "declarations": [
+   "SSet.Enhanced.SquareMates.transformations",
+   "SSet.Enhanced.SquareMates.whiskering",
+   "SSet.Enhanced.SquareMates.whisker",
+   "SSet.Enhanced.SquareMates.Composition",
+   "SSet.Enhanced.SquareMates.Composition.Valid",
+   "SSet.Enhanced.SquareMates.Composition.comp",
+   "SSet.Enhanced.SquareMates.compose",
+   "SSet.Enhanced.SquareMates.identity",
+   "SSet.Enhanced.SquareMates.AdjointEquivalence",
+   "SSet.Enhanced.SquareMates.Square",
+   "SSet.Enhanced.SquareMates.Calculus",
+   "SSet.Enhanced.SquareMates.Calculus.Valid",
+   "SSet.Enhanced.SquareMates.mate",
+   "SSet.Enhanced.SquareMates.compatibilityMap",
+   "SSet.Enhanced.SquareMates.compatibilityTarget",
+   "SSet.Enhanced.SquareMates.compatibleMates",
+   "SSet.Enhanced.SquareMates.mateProjection",
+   "SSet.Enhanced.SquareMates.Path",
+   "SSet.Enhanced.SquareMates.pastedMate",
+   "SSet.Enhanced.SquareMates.pastedComparison",
+   "SSet.Enhanced.SquareMates.paste",
+   "SSet.Enhanced.SquareMates.identitySquare",
+   "SSet.Enhanced.SquareMates.RelativeExtensions",
+   "SSet.Enhanced.SquareMates.Intervals",
+   "SSet.Enhanced.SquareMates.finiteMates",
+   "SSet.Enhanced.SquareMates.finiteTargets",
+   "SSet.Enhanced.SquareMates.finitePaths",
+   "SSet.Enhanced.SquareMates.finiteProjection",
+   "SSet.Enhanced.SquareMates.RelativeLifts",
+   "SSet.Enhanced.SquareMates.enhanced_equivalence_square_mates"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnhancedEquivalenceSquareMates.lean",
+  "statement": "theorem enhanced_equivalence_square_mates : ∃ c : Calculus.{u}, c.Valid ∧ (∀ (K C : SSet.{u}) [Quasicategory C], HasCoherentComposition ((ihom K).obj C)) ∧ (∀ (A B A' B' : SSet.{u}) [Quasicategory A] [Quasicategory B] [Quasicategory A'] [Quasicategory B'] (e : AdjointEquivalence A B) (e' : AdjointEquivalence A' B') (s : Square e e'), IsEquivalenceEdge ((ihom B).obj A') (mate c e e' s).1 ∧ KanComplex (compatibleMates c e e' s) ∧ IsContractible (compatibleMates c e e' s) ∧ ∃ p : (compatibleMates c e e' s) _⦋0⦌, (mateProjection c e e' s).app _ p = mate c e e' s) ∧ (∀ (A B : SSet.{u}) [Quasicategory A] [Quasicategory B] (e : AdjointEquivalence A B), ∃ p q : (compatibleMates c e e (identitySquare e)) _⦋0⦌, (mateProjection c e e (identitySquare e)).app _ p = mate c e e (identitySquare e) ∧ (mateProjection c e e (identitySquare e)).app _ q = identity e.right ∧ Nonempty (Path p q)) ∧ (∀ (A B A' B' A'' B'' : SSet.{u}) [Quasicategory A] [Quasicategory B] [Quasicategory A'] [Quasicategory B'] [Quasicategory A''] [Quasicategory B''] (e : AdjointEquivalence A B) (e' : AdjointEquivalence A' B') (e'' : AdjointEquivalence A'' B'') (s : Square e e') (t : Square e' e''), ∃ h : IsEquivalenceEdge ((ihom A).obj B'') (pastedComparison c e e' e'' s t).1, ∃ p q : (compatibleMates c e e'' (paste c e e' e'' s t h)) _⦋0⦌, (mateProjection c e e'' (paste c e e' e'' s t h)).app _ p = mate c e e'' (paste c e e' e'' s t h) ∧ (mateProjection c e e'' (paste c e e' e'' s t h)).app _ q = pastedMate c e e' e'' s t ∧ Nonempty (Path p q)) ∧ (∀ (n : ℕ) (A B : Fin (n + 1) → SSet.{u}) [∀ i : Fin (n + 1), Quasicategory (A i)] [∀ i : Fin (n + 1), Quasicategory (B i)] (e : ∀ i : Fin (n + 1), AdjointEquivalence (A i) (B i)) (s : ∀ p : Intervals n, Square (e p.1.1) (e p.1.2)), RelativeExtensions (finiteMates c n A B e s) ∧ RelativeLifts (finiteProjection c n A B e s))",
+  "branch": "newtargets-dag",
+  "by": "Q137",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Explicit right-pinched transformation spaces and the displayed three-factor mate. Compatibility witnesses are retained in the recorded homotopy fiber; identity and pasted comparisons are paths in that fiber. Higher finite-string coherence is expressed by relative boundary extensions and relative lifts of the actual interval mapping-path projections over varying targets. Helper constructions belong to this node; no data are chosen from a sorry theorem. Statement dependencies gain the already recorded spine and mapping-path nodes used by these interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47c6e2a92",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Read the node, the source proof.md (exists in main project; agent-extracted attribution kept), the dependency declarations (EnhancedDiagramsCones mappingSpace/homotopyFiber/IsEquivalenceEdge/IsContractible, SimplicialCompositionSpine, RightPinchComparison, KanFibrationFiberCriterion) and the module. Every clause matches: AdjointEquivalence has real unit/counit equivalence edges and both triangle 2-simplices with correct faces; Square has arbitrary U,V and an alpha equivalence; mate is exactly R'U eps . R'alpha R . eta'VR; compatibleMates is the dependency's homotopyFiber of theta -> eps'U . L'theta over U eps . alpha R; Kan+contractible; point over mate; identity and pasted (alpha''=U'alpha . alpha'V, V'theta then theta'U) comparisons are paths in the common fiber, with the pasted equivalence a conclusion; finite-string coherence given by relative extensions/lifts (acceptable rendering of the informal clause). Composition calculus is existential and pinned by Valid (spine sections, canonical pinch, homotopy inverse). Single universe, no extra hypotheses, no hollow definitions, one sorry, docstrings with blueprint tags, lean.statement verbatim, declarations list exact, stmt_deps additions justified, no duplicate notion. nt_compile --json on the snapshot: clean, rc=0, 3.6 s. No findings requiring fix."
  }
 }
