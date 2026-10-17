@@ -26,7 +26,11 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-sheafification",
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-presentable-infinity-category"
+  "def-coef-presentable-infinity-category",
+  "def-cbc-enhanced-strong-saturation",
+  "def-cbc-derived-hypersheaf-presentation",
+  "def-cbc-bounded-representable-hypercover",
+  "lem-coef-sheaf-flat-model"
  ],
  "proof": [
   {
@@ -278,5 +282,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0ebe342d",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Every node clause matches the Lean (small site, arbitrary topology, ring in max u w, IsEnhancedLocalization at objectwise qis, IsPresentable.{max u w, max u w+1}, AugmentedOver/IsHypercover/hypercoverAugmentation, local qis via module sheafification for all r, small varying-target family I : Type (max u w), all shifts k ∈ ℤ, iff with strongSaturation for all f, final clause for every hypercover). No extra hypotheses or universe restriction. New node def-cbc-enhanced-strong-saturation has the required fields and matches HTT 5.5.4.5; retract triangle, pushout row direction and colimit apex checked; no duplicate found. stmt_deps gain only the new node and landed nodes with lean records, as brief-stage2 allows. No hollow definitions; only the theorem is sorry; helper instance is Mathlib preservesFilteredColimitsOfSize_shrink. Docstrings and the nine proof steps are present; statements are verbatim; lines ≤100. nt_compile.py on both files: exit 0, no errors or warnings; axioms are sorryAx plus the standard ones. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HypercoverLocalizationGeneration",
+  "declaration": "CategoryTheory.DerivedHypersheaf.hypercover_localization_generation",
+  "declarations": [
+   "CategoryTheory.DerivedHypersheaf.moduleForget_preservesSmallFilteredColimits",
+   "CategoryTheory.DerivedHypersheaf.shiftedHypercoverEdges",
+   "CategoryTheory.DerivedHypersheaf.hypercover_localization_generation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/HypercoverLocalizationGeneration.lean",
+  "statement": "theorem hypercover_localization_generation {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Type (max u w)) [CommRing R] (L : SSet.{max u w + 1}) (q : nerve (Complex C R) ⟶ L) (hq : CoefficientFlatModel.IsEnhancedLocalization (HomologicalComplex.quasiIso (ModulePresheaf C R) (.up ℤ)) q) : @SSet.Presentability.IsPresentable.{max u w, max u w + 1} L hq.1 ∧ (∃ (I : Type (max u w)) (H : I → Σ T : C, AugmentedOver.{u, w} C T), (∀ i : I, IsHypercover J (augmentedOverToAugmented (H i).2)) ∧ (∀ (P Q : Complex C R) (f : P ⟶ Q), (∀ r : ℤ, IsIso ((presheafToSheaf J (ModuleCat.{max u w} R)).map ((HomologicalComplex.homologyFunctor (ModulePresheaf C R) (.up ℤ) r).map f))) ↔ SSet.Enhanced.strongSaturation.{max u w, max u w + 1} L (shiftedHypercoverEdges R q H) (q.app _ (ComposableArrows.mk₁ f)))) ∧ (∀ (T : C) (U : AugmentedOver.{u, w} C T), IsHypercover J (augmentedOverToAugmented U) → ∀ r : ℤ, IsIso ((presheafToSheaf J (ModuleCat.{max u w} R)).map ((HomologicalComplex.homologyFunctor (ModulePresheaf C R) (.up ℤ) r).map (hypercoverAugmentation R (augmentedOverToAugmented U)))))",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

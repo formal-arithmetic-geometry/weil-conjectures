@@ -30,7 +30,8 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-relative-cone",
   "def-coef-infinity-relative-join",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-isofibration-exponentiation"
  ],
  "proof": [
   {
@@ -333,5 +334,31 @@
   "group": "Q102",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-0e9f7775a (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and all 13 cited statements in full, plus the unit record and the main-20261015 ancestor proof. Item: the statement matches Kerodon 02ZR (Lemma 7.3.4.5) specialized to C=Delta^n, C_0=boundary, n>=1. The boundary contains every vertex, and every simplex outside it starts at 0, so condition (*) reduces to the single cone at vertex 0, and M is the source pushout. No hypothesis is added or dropped. The eight steps follow the 02ZR proof in order and I checked each one. Step 1: the new join node gives the fibers and the edge pullbacks. Step 2: I verified the opposite dual of lem-cbc-enhanced-relative-exponential by explicit ordinal reversal; it gives a cartesian H_Z(E) with fiber Fun(Z_s,E), the edge criterion and currying. Step 3: the Joyal clause (1) criterion holds in both directions; lem-coef-cocartesian-categorical-base-change needs no fibrancy; W=K_Y union L_X with intersection K_X is a pushout, a trivial cofibration under K_Y, and by two-out-of-three W->L_Y is a categorical equivalence. Step 4: the 02VV roles are right (F_1 is postcomposition, an isofibration), and R is an isofibration preserving cartesian edges. Steps 5 and 8 are elementary and exact. Step 6: the corner-initial node with K=X_0. Step 7: all hypotheses of the cartesian-initial-boundary-lift node hold. New node lem-coef-infinity-relative-join-cocartesian-projection is a correct specialization of 02RH/02RG (square U=u, V=id, then composition with Delta^1 x S -> S); I sanity-checked it over a point. New node lem-coef-infinity-cartesian-fibration-pullback matches every hypothesis of 02VV (Prop 5.1.4.21); its added claim that P is a quasicategory follows because P is inner over E_0. Neither new node restates a clause of the item, and both are statement-only. rg over dag/nodes for the Kerodon tags and the concepts, and over the blueprint, found no duplicate (about 11 candidates read). The dependency-closure check shows no cycle, no SGA source is used, and the route stays in the unit. I accept the declared tool use of lem-cbc-enhanced-relative-exponential (sk-prop-sf-cbc) as a generic relative-Hom black box. Edge cases checked: n=1, n=0 excluded, X empty, X_0 empty, u=id. The new nodes lack lean_audit, which is maintainer-owned and filled at merge, so this is not a delivery fault. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b84160c8a",
+  "group": "N3",
+  "result": "pass",
+  "note": "Read node, snapshot module, report and the declarations used (cocartesianFibration, IsIsofibration, relativeJoin/Inl/Projection/Fiber/FiberCone, rightJoinCone, IsRelativeColimitDiagram, Mathlib boundary/obj₀Equiv). Every clause matches Kerodon 02ZR with C=Δ^n, C₀=∂Δ^n, n≥1: M = range(i_X) ⊔ π⁻¹(∂Δ[n]) is real data; the vertex-0 cone is Subcomplex.lift of the canonical fiber cone (range theorem true: base coordinate constant at 0); hypotheses and the strict conclusions ã|_M=a, pã=b are exact. Edge cases n=1, n=0 excluded, empty X/X₀, u=id are covered; no extra assumptions. lean.statement verbatim; declarations match; added stmt_dep owns the only IsIsofibration (acyclic). No duplicate Δ[n] quasicategory instance in Mathlib or the project. Report has Worker report and Second reading by N3. nt_compile --json: rc 0, no errors or non-sorry warnings; negative control confirmed errors are reported. No blocking findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeJoinSimplexExtension",
+  "declaration": "SSet.Enhanced.relative_join_simplex_extension",
+  "declarations": [
+   "SSet.Enhanced.standardSimplexQuasicategory",
+   "SSet.Enhanced.relativeJoinSimplexBoundary",
+   "SSet.Enhanced.relativeJoinSimplex_firstCone_range",
+   "SSet.Enhanced.relativeJoinSimplexFirstCone",
+   "SSet.Enhanced.relative_join_simplex_extension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeJoinSimplexExtension.lean",
+  "statement": "theorem relative_join_simplex_extension {X D B : SSet.{u}} [Quasicategory X] [Quasicategory D] [Quasicategory B] (n : ℕ) (hn : 1 ≤ n) (u : X ⟶ Δ[n]) (hu : cocartesianFibration u) (p : D ⟶ B) (hp : IsIsofibration p) (a : (relativeJoinSimplexBoundary u).toSSet ⟶ D) (b : relativeJoin u (𝟙 Δ[n]) ⟶ B) (hab : a ≫ p = (relativeJoinSimplexBoundary u).ι ≫ b) (hcolim : IsRelativeColimitDiagram p (relativeJoinSimplexFirstCone u hn ≫ a)) : ∃ tildeA : relativeJoin u (𝟙 Δ[n]) ⟶ D, (relativeJoinSimplexBoundary u).ι ≫ tildeA = a ∧ tildeA ≫ p = b",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The union and its canonical restricted initial fiber-cone map use existing relative-join and Mathlib subcomplex constructions. The two named construction proof obligations and the main theorem are postponed with complete proof docstrings. Adds the landed exponentiation node only to reuse its exact IsIsofibration definition; no new notion, statement correction, or dependency repair."
  }
 }

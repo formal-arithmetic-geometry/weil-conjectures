@@ -240,5 +240,28 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-183418305 (reviewer sub-agent of L); spot-checked: Read the item, all nine steps and the full statements of the six cited nodes. Checked against Rezk (text copy already on this machine, /tmp/q34rezk): §5.1 (objects are vertices of W0, map_W is the strict fiber of (d1,d0), identity s0x), §7.4 (both DK conditions) and Lemma 7.5 (both clauses, no completeness). The statement is unchanged and matches the source exactly. Step 2: the matching object for Δ^op is Hom(∂Δ^k,V); attaching faces is a pullback of V_k→M_kV; the Segal map restricted to the spine is a trivial fibration, so the fiberwise q_n has boundary lifting, and lifting extends to all monos via the Kan node's cell-decomposition sentence. Step 3: μ(v,u)=d1 s2(u,v); checked the faces of t=s3, d1d1=d1d2, units from s0u/s1u, naturality. Step 4: conjugation inverse checked, realized via the cylinder node, weak equivalence via the homotopy-equivalence clause of the basepoint-change node; the naturality square gives invariance of the mapping-space condition along isomorphisms. Step 5: types of r, s, l=sw, t=ur checked; lv≃1, vt≃1, l≃t, so v is a homotopy equivalence and 2-of-3 gives u and w. Step 6 (elementary): P=RH, Q=FL, P≅Q, F≅QGF, H≅HGQ, all well-typed. Steps 7–9: the image pairs are exactly those of the hypotheses, then extended via essential surjectivity of ha/hb and the step-4 square. Edge cases: empty spaces, discrete nerves with isomorphic distinct objects, a Segal groupoid with nontrivial π1, the noncomplete walking isomorphism. No new nodes; no duplicate (lem-coef-segal-homotopy-category-components only overlaps the π0 part of step 3, and the parameterized homotopies are needed); no cycle (the 132-node closure does not reach the item); no Mathlib match. Accepted tool_use: lem-cbc-kan-whitehead-inverse (unit sk-prop-sf-cbc, off-route, generic black-box Whitehead inverse for Kan complexes, steps 5 and 7). Minor: the report says the second reader changed created.item, but the file keeps the creating item lem-coef-segal-categorical-equivalence-dk, which is correct. Cosmetic, pre-existing: the A0 notation clash in the statement. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84e364cb1",
+  "group": "Q125",
+  "result": "fix",
+  "note": "Statement correct against node and Rezk 7.4/Lemma 7.5: Space.{u}, IsSegal (Reedy fibrant via matchingFrom over (monomorphisms).op plus Segal maps w.e. for n>=2), strict (d1,d0) mappingFiber, homotopyCategory from hoFunctor of row 0 (hom-sets = pi0 of strict fibres, checked by hand), DK = homotopyFunctor equivalence plus w.e. on all mappingFiberMap; both clauses with a≫b = b∘a, no completeness or extra hypotheses, one universe; edge cases (empty, identities, noncomplete) covered; lean.statement verbatim; docstrings with source and blueprint plus the 9-step proof; only sorry. F1 (mechanical, fixed): proof dep lem-cbc-kan-whitehead-inverse was already stated at the base (Sheaf.AlgebraicTopology.KanWhiteheadInverse) but not imported, contrary to stage-2 §3 rule 7, and the report said it had no declaration. fixes/SegalDkTwoOutOfSix.lean adds the private import; fixes/lem-coef-segal-dk-two-out-of-six.report.md corrects the report and lists the omitted cyclic reverse import of SegalCategoricalEquivalence. nt_compile: delivered and fixed files both rc=0, no diagnostics; a negative control errors as expected. Maintainer notes: duplicate SSet.SegalSpace.IsDwyerKanEquivalence downstream should later reuse this predicate; the stage-3 proof of categorical_equivalence_dk needs the SSet.Segal base definitions split out to import this lemma."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SegalDkTwoOutOfSix",
+  "declaration": "SSet.Segal.dk_two_out_of_six",
+  "declarations": [
+   "SSet.Segal.IsDwyerKanEquivalence",
+   "SSet.Segal.dk_two_out_of_six"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SegalDkTwoOutOfSix.lean",
+  "statement": "theorem dk_two_out_of_six {A₀ A₁ A₂ A₃ : Space.{u}} (hA₀ : IsSegal A₀) (hA₁ : IsSegal A₁) (hA₂ : IsSegal A₂) (hA₃ : IsSegal A₃) (a : A₀ ⟶ A₁) (b : A₁ ⟶ A₂) (c : A₂ ⟶ A₃) : (IsDwyerKanEquivalence a → IsDwyerKanEquivalence b → IsDwyerKanEquivalence (a ≫ b)) ∧ (IsDwyerKanEquivalence (a ≫ b) ∧ IsDwyerKanEquivalence (b ≫ c) → IsDwyerKanEquivalence a ∧ IsDwyerKanEquivalence b ∧ IsDwyerKanEquivalence c)",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the project declarations for Segal spaces, strict mapping fibers, and homotopy categories; this module adds the Dwyer--Kan predicate and states Rezk Lemma 7.5."
  }
 }
