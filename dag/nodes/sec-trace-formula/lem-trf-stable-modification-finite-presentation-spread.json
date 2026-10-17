@@ -17,7 +17,8 @@
   "def-weil-finite-type-morphism",
   "def-weil-flat-morphism",
   "def-weil-proper-morphism",
-  "lem-trf-riemann-zariski-finite-refinement"
+  "lem-trf-riemann-zariski-finite-refinement",
+  "def-trf-multipointed-curve"
  ],
  "proof": [
   {
@@ -209,5 +210,23 @@
   "group": "Q58",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-bab489b5a (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the item, unit sk-i-curve-zero, the parent lem-trf-stable-modification-spreading (its Step 1 uses this item exactly), and the statements of all 12 cited nodes. I checked Stacks limits.tex directly: 01ZM (all three clauses, line 2370), plus 0A0P, 01ZP, 04AI, 081F and 0EY2, all confirmed in tags/tags. The Temkin PDF is missing, so proof_origin=agent and the WANTED line are correct. The statement is unchanged and true. Edge cases tested: V=L, empty marking, f already an isomorphism, non-separated X. Hypotheses are checked at every step: qcqs and lft for 01ZP and 081F, lfp for 04AI, and the pure-dimension node with d=1 and d=0. U_0=Spec(image of A_i in V) is integral, separated and of finite type over T, with generic point the image of Spec L, so it is an L-quasi-model. No duplicates: lem-trf-marked-curve-finite-type-model and lem-trf-stable-curve-diagram-noetherian-model state different things. There are no new nodes and no SGA citations. Accepted tool uses: 0A0P, 01ZM, 01ZP, 04AI, 081F (generic limit lemmas; no node of the unit gives them). FIX, one file: (1) Step 1 now says how S->T is descended (01ZM clause 2 with T x_Z S_i). (2) Step 2 now gives the closed-fibre reason why pure dimension survives the base change to U_0; the cited permanence lemmas do not cover it. (3) Step 3 replaces the imprecise 'cofinal subsystem' with B_i=A_i/p_i and a proof that colim K_i = L, and justifies that U_0->T is of finite type by proper-fp (f) and qcqs (1). (4) The stale split_report.summary still described the returned 'proper envelope' route and has been replaced.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StableModificationFinitePresentationSpread",
+  "declaration": "AlgebraicGeometry.exists_stable_modification_finite_presentation_spread",
+  "file": "lean/Sheaf/AlgebraicGeometry/StableModificationFinitePresentationSpread.lean",
+  "statement": "theorem exists_stable_modification_finite_presentation_spread (T : Scheme.{u}) [IsIntegral T] (t : T ⟶ Spec (.of (ULift.{u} ℤ))) [LocallyOfFiniteType t] [QuasiCompact t] (L : Type u) [Field L] [Algebra T.functionField L] [IsSepClosure T.functionField L] (v : RiemannZariski.ValuationPoint T L (Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T))) (P : MultipointedCurve T) (Y : MultipointedCurve (Spec (.of v.V))) (fX : Y.X ⟶ pullback P.x v.centre) (fD : Y.D ⟶ pullback P.d v.centre) [IsProper fX] [IsProper fD] (hX : fX ≫ pullback.snd P.x v.centre = Y.x) (hD : fD ≫ pullback.snd P.d v.centre = Y.d) (hmark : fD ≫ pullback.fst P.d v.centre ≫ P.i = Y.i ≫ fX ≫ pullback.fst P.x v.centre) (hXη : IsIso (pullback.map Y.x (Spec.map (CommRingCat.ofHom v.V.subtype)) (pullback.snd P.x v.centre) (Spec.map (CommRingCat.ofHom v.V.subtype)) fX (𝟙 _) (𝟙 _) ((Category.comp_id _).trans hX.symm) ((Category.comp_id _).trans (Category.id_comp _).symm))) (hDη : IsIso (pullback.map Y.d (Spec.map (CommRingCat.ofHom v.V.subtype)) (pullback.snd P.d v.centre) (Spec.map (CommRingCat.ofHom v.V.subtype)) fD (𝟙 _) (𝟙 _) ((Category.comp_id _).trans hD.symm) ((Category.comp_id _).trans (Category.id_comp _).symm))) : ∃ (U : RiemannZariski.QuasiModel T L (Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T))) (l : Spec (.of v.V) ⟶ U.X), l ≫ U.map = v.centre ∧ Spec.map (CommRingCat.ofHom v.V.subtype) ≫ l = U.generic ∧ ∃ (Y₀ : MultipointedCurve U.X) (gX : Y₀.X ⟶ pullback P.x U.map) (gD : Y₀.D ⟶ pullback P.d U.map), IsProper gX ∧ IsProper gD ∧ ∃ (hgX : gX ≫ pullback.snd P.x U.map = Y₀.x) (hgD : gD ≫ pullback.snd P.d U.map = Y₀.d), gD ≫ pullback.fst P.d U.map ≫ P.i = Y₀.i ≫ gX ≫ pullback.fst P.x U.map ∧ IsIso (pullback.map Y₀.x (U.X.fromSpecResidueField (genericPoint U.X)) (pullback.snd P.x U.map) (U.X.fromSpecResidueField (genericPoint U.X)) gX (𝟙 _) (𝟙 _) ((Category.comp_id _).trans hgX.symm) ((Category.comp_id _).trans (Category.id_comp _).symm)) ∧ IsIso (pullback.map Y₀.d (U.X.fromSpecResidueField (genericPoint U.X)) (pullback.snd P.d U.map) (U.X.fromSpecResidueField (genericPoint U.X)) gD (𝟙 _) (𝟙 _) ((Category.comp_id _).trans hgD.symm) ((Category.comp_id _).trans (Category.id_comp _).symm)) ∧ ∃ (eX : pullback Y₀.x l ≅ Y.X) (eD : pullback Y₀.d l ≅ Y.D), eX.hom ≫ Y.x = pullback.snd Y₀.x l ∧ eD.hom ≫ Y.d = pullback.snd Y₀.d l ∧ eD.hom ≫ Y.i ≫ eX.inv ≫ pullback.fst Y₀.x l = pullback.fst Y₀.d l ≫ Y₀.i ∧ eX.hom ≫ fX ≫ pullback.fst P.x v.centre = pullback.fst Y₀.x l ≫ gX ≫ pullback.fst P.x U.map ∧ eD.hom ≫ fD ≫ pullback.fst P.d v.centre = pullback.fst Y₀.d l ≫ gD ≫ pullback.fst P.d U.map",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0ad467735",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Wrote review.md. Statement matches verbatim; source, dependency interfaces, hypotheses, conclusions, edge cases, universes and docstrings checked. Per-file compilation passed. No fixes required; branch unchanged."
  }
 }

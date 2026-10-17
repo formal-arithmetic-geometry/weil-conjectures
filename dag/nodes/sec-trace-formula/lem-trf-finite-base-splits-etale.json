@@ -298,5 +298,28 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-e317eaa6b (reviewer sub-agent of L); spot-checked: I read the item, all 28 cited node statements, the unit sk-i-curve-zero, the parent's Step 5, and the local Stacks texts of 09Z0 and 07RZ. The statement is unchanged and true (Orgogozo 9.1.3; the splitting form of the degree induction in 09Z0). I tested it on: the empty family, empty U_i, two copies of A^1-0, S ⊔ S' with S' connected finite étale over S, and an open immersion (d=1). Step 1 sets up the induction on the geometric fibre bound over all Noetherian bases, with base case d=0; the bound comes from 03JA plus the fibre-degree and étale-over-field nodes. Step 2 checks the ZMT and Nagata-closure hypotheses; finite gives finite type and Noetherian gives quasi-separated in one line each, and the topological-density argument is correct. In Step 3 the graph is closed (pullback of the diagonal of p, i.e. 01KS proved in the step) and open (the diagonal of u inside the open U x_S U), and W is étale, separated, qc and fp. Step 4: the 07RZ universal property tested on residue fields shows that {degree <= r} is closed, so Z_{d-1} = Ubar; quasi-finiteness holds since the fibres are finite and discrete. The induction then genuinely applies to W -> Ubar without surjectivity. Step 5: T' ⊔ (S - u(U))_red is finite and surjective, U x_S T' = q^{-1}(U) ⊔ W x T' = V ⊔ ⊔A_l, and U x_S C is empty. Steps 6-9: the finite surjective fibre product over S, pullback of the splitting, and qc via affine preimages under the finite maps. No SGA is used, there are no new nodes, and the duplicate search found only the weaker 09Z0 local-factorization node. I accept the six declared tool_uses (ZMT, etale-ring-map-qf, 03JA bound, fibre-degree base change, 07RZ, reduced-induced subscheme) as generic black boxes; the other off-unit nodes are Lean-closed or Mathlib leaves. The Orgogozo PDF is still WANTED, so proof_origin=agent is correct. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FiniteBaseSplitsEtale",
+  "declaration": "AlgebraicGeometry.finite_base_splits_etale",
+  "declarations": [
+   "AlgebraicGeometry.finite_base_splits_etale"
+  ],
+  "file": "lean/Sheaf/TraceFormula/FiniteBaseSplitsEtale.lean",
+  "statement": "theorem finite_base_splits_etale {S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S] {I : Type u} [Finite I] (U : I → Scheme.{u}) (u : ∀ i, U i ⟶ S) [∀ i, IsSeparated (u i)] [∀ i, Etale (u i)] [∀ i, LocallyOfFinitePresentation (u i)] [∀ i, QuasiCompact (u i)] [∀ i, QuasiSeparated (u i)] : ∃ (T : Scheme.{u}) (r : T ⟶ S), IsFinite r ∧ Surjective r ∧ ∀ i, ∃ (J : Type u) (_ : Finite J) (W : J → Scheme.{u}) (w : ∀ j, W j ⟶ T), (∀ j, IsOpenImmersion (w j) ∧ QuasiCompact (w j)) ∧ ∃ e : pullback (u i) r ≅ ∐ W, e.hom ≫ Sigma.desc w = pullback.snd (u i) r",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "States the finite-family finite-surjective splitting assertion directly, with the finite-presentation hypotheses expanded into Mathlib classes and explicit quasi-compact open summands.",
+  "fixed_by": "NT-stage2-Codex-4be8b03eb"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4be8b03eb",
+  "group": "Q20",
+  "result": "fix",
+  "note": "Statement and dependencies match the source; original and corrected modules compile cleanly. Complete fixes add a real second reading, all nine proof-docstring steps, and recorded proof-dependency imports. Findings and compiler evidence are in review.md; replacements are under fixes/."
  }
 }

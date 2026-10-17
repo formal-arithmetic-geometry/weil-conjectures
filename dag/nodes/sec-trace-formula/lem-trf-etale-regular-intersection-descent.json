@@ -2,7 +2,7 @@
  "id": "lem-trf-etale-regular-intersection-descent",
  "kind": "statement",
  "title": "Etale descent of regular intersections and codimension",
- "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], let $D_1,\\ldots,D_n\\hookrightarrow X$ be closed subschemes [def-weil-closed-immersion], and for $J\\subseteq\\{1,\\ldots,n\\}$ write $D_J=\\mathop{\\times}_{j\\in J,X}D_j$ for the scheme-theoretic intersection (with $D_\\varnothing=X$). Suppose that for every point $x\\in X$ and every $J$ there are an étale morphism $v:W\\to X$ [def-weil-etale-morphism] and a point $w\\in W$ over $x$ such that, with $R=\\mathcal O_{W,w}$, the local scheme $D_J\\times_X\\operatorname{Spec}R$ is regular and every irreducible component of it has codimension $|J|$ in $\\operatorname{Spec}R$. Then every $D_J$ is regular and every irreducible component [def-weil-irreducible-components] of $D_J$ has codimension $|J|$ in $X$. Here the codimension of an irreducible closed subset $Z$ of a scheme $Y$ is the supremum of the lengths $n$ of chains $Z=Z_0\\subsetneq Z_1\\subsetneq\\cdots\\subsetneq Z_n$ of irreducible closed subsets of $Y$.",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], let $n\\ge 0$, and let $i_j:D_j\\hookrightarrow X$ be closed immersions [def-weil-closed-immersion] indexed by $j\\in\\{0,\\ldots,n-1\\}$. For every finite subset $J\\subseteq\\{0,\\ldots,n-1\\}$, let $D_J=\\mathop{\times}_{j\\in J,X}D_j$ be the iterated scheme-theoretic intersection, with $D_\u000barnothing=X$. Suppose that for every point $x\\in X$ and every $J$ there are an étale morphism $v:W\to X$ [def-weil-etale-morphism] and a point $w\\in W$ over $x$ such that the local scheme $D_J\times_X\\operatorname{Spec}\\mathcal O_{W,w}$ is locally Noetherian and regular (all its local rings are regular local rings), and every irreducible component has codimension $|J|$ in $\\operatorname{Spec}\\mathcal O_{W,w}$, where codimension is the supremum of lengths of strict chains of irreducible closed subsets. Then every $D_J$ is locally Noetherian and regular, and every irreducible component of $D_J$ has codimension $|J|$ in $X$ (with the same chain-supremum definition).",
  "source": {
   "document": "literature/stacks-project/etale.tex",
   "place": "Tags 025N (proposition-etale-regular) and 039S (lemma-etale-dimension), together with Tag 02GO (base change of etale morphisms)"
@@ -12,7 +12,8 @@
   "def-weil-etale-morphism",
   "def-pc-fibre-product",
   "def-weil-closed-immersion",
-  "def-weil-irreducible-components"
+  "def-weil-irreducible-components",
+  "def-weil-regular-scheme"
  ],
  "proof": [
   {
@@ -203,5 +204,57 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-2e486ee9e (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and the sources: etale.tex definition-etale-ring l.1049, 039S l.1891, 025N l.1930, lemma-strict-normal-crossings; more-algebra 07QP l.10831; algebra 00OF l.27189. The item statement is true. I tested it on x not in D_J, D_J empty, J empty, two coordinate lines in A^2, D1=D2 (the hypothesis fails too), and D1={x^2=0} (non-regular, hypothesis fails). I found three repairable faults and fixed them in fixes/dag/nodes/sec-trace-formula/lem-trf-etale-regular-intersection-descent.json. (1) The new node lem-trf-etale-regular-local-invariance (025N) is not needed: step 2 uses only the descent direction, and 025N proves that direction by Algebra 00OF, which is the existing node lem-weil-pbc-flat-under-regular. The new node also cites def-weil-etale-morphism, a definition for scheme morphisms, for Stacks' 'étale homomorphism of local rings'. I dropped it and cited 00OF. (2) Hypothesis mismatch (E1): the delivery calls the stalk maps A/I->B/IB and O_{X,eta}->O_{W,eta'} 'étale' and applies the ring-map lemma 07QP to them. They are only localizations of étale ring maps. The repaired steps get flatness of the stalk map from 02GO base change and flatness, and apply 07QP on affine charts. (3) Codimension was cited as def-weil-pbc-krull-dimension-ring, which does not define it. The statement now spells codimension out as chains of irreducible closed subsets, with the same meaning; it is not weakened. Steps 3-4 now relate codimension to local dimension through lem-sc-scheme-stalk-dimension-generalization-chains. The vague open-map step 3, marked elementary, is replaced by a precise one: dim(R/IR)=dim O_{D_J,eta}=0, so the only component is the closed point, so dim O_{W,w}=|J|. I accepted two tool_uses: lem-weil-pbc-flat-under-regular (sk-thm-p1) and lem-sc-etale-local-dimension (sk-thm-br). I checked: no cycle, all cited ids exist, no SGA, no target weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.EtaleRegularIntersectionDescent",
+  "declaration": "AlgebraicGeometry.etale_regular_intersection_descent",
+  "declarations": [
+   "AlgebraicGeometry.SchemeOver",
+   "AlgebraicGeometry.intersectionData",
+   "AlgebraicGeometry.intersectionScheme",
+   "AlgebraicGeometry.intersectionMap",
+   "AlgebraicGeometry.localIntersection",
+   "AlgebraicGeometry.localIntersectionProjection",
+   "AlgebraicGeometry.etale_regular_intersection_descent"
+  ],
+  "statement": "theorem etale_regular_intersection_descent {X : Scheme.{u}} [IsLocallyNoetherian X] {n : ℕ} (D : Fin n → Scheme.{u}) (i : (j : Fin n) → D j ⟶ X) (hclosed : ∀ j : Fin n, IsClosedImmersion (i j)) (hlocal : ∀ (x : X) (J : Finset (Fin n)), ∃ (W : Scheme.{u}) (v : W ⟶ X) (w : W), Etale v ∧ v w = x ∧ let P : Scheme.{u} := localIntersection D i J W v w IsLocallyNoetherian P ∧ (∀ z : P, IsRegularLocalRing (P.presheaf.stalk z)) ∧ (∀ z : P, closure ({z} : Set P) ∈ irreducibleComponents P → Order.coheight (localIntersectionProjection D i J W v w z) = (J.card : ℕ∞))) : ∀ J : Finset (Fin n), IsLocallyNoetherian (intersectionScheme D i J) ∧ (∀ z : intersectionScheme D i J, IsRegularLocalRing ((intersectionScheme D i J).presheaf.stalk z)) ∧ (∀ z : intersectionScheme D i J, closure ({z} : Set (intersectionScheme D i J)) ∈ irreducibleComponents (intersectionScheme D i J) → Order.coheight (intersectionMap D i J z) = (J.card : ℕ∞))",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-18",
+  "file": "lean/Sheaf/TraceFormula/EtaleRegularIntersectionDescent.lean",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-23ad5d4ff",
+  "group": "NW",
+  "result": "pass",
+  "note": "Reviewed immutable packet, item/dependencies, source route, module, report, edge cases, documentation, and exact theorem signature. scompile.py local side-overlay and server confirmation passed; no substantive or mechanical findings.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "NW stage 2",
+  "old_statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], let $D_1,\\ldots,D_n\\hookrightarrow X$ be closed subschemes [def-weil-closed-immersion], and for $J\\subseteq\\{1,\\ldots,n\\}$ write $D_J=\\mathop{\\times}_{j\\in J,X}D_j$ for the scheme-theoretic intersection (with $D_\\varnothing=X$). Suppose that for every point $x\\in X$ and every $J$ there are an étale morphism $v:W\\to X$ [def-weil-etale-morphism] and a point $w\\in W$ over $x$ such that, with $R=\\mathcal O_{W,w}$, the local scheme $D_J\\times_X\\operatorname{Spec}R$ is regular and every irreducible component of it has codimension $|J|$ in $\\operatorname{Spec}R$. Then every $D_J$ is regular and every irreducible component [def-weil-irreducible-components] of $D_J$ has codimension $|J|$ in $X$. Here the codimension of an irreducible closed subset $Z$ of a scheme $Y$ is the supremum of the lengths $n$ of chains $Z=Z_0\\subsetneq Z_1\\subsetneq\\cdots\\subsetneq Z_n$ of irreducible closed subsets of $Y$.",
+  "source": {
+   "document": "literature/stacks-project/etale.tex",
+   "place": "Tags 025N, 039S, and 02GO; the local strict-normal-crossings criterion in the blueprint unit"
+  },
+  "citers": [
+   {
+    "id": "lem-trf-permissible-boundary-preservation",
+    "holds": true,
+    "note": "It applies the result to a finite boundary family and includes the empty intersection; the explicit Fin-indexed formulation preserves that use."
+   }
+  ],
+  "what": "The original statement did not introduce the integer n and the indexed closed immersions as Lean objects, did not specify how the finite intersections are constructed, and left the regularity and codimension predicates ambiguous for the local Spec of a stalk. The correction makes the Fin-indexed family, every Finset including the empty one, the iterated pullback construction, stalkwise regularity, and chain codimension explicit.",
+  "old_stmt_deps": [
+   "pqf-def-locnoeth",
+   "def-weil-etale-morphism",
+   "def-pc-fibre-product",
+   "def-weil-closed-immersion",
+   "def-weil-irreducible-components"
+  ]
  }
 }
