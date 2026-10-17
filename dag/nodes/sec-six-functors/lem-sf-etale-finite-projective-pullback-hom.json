@@ -17,9 +17,59 @@
   "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
   "lem-pc-sheaf-modules-tensor-closed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $M$ is finite projective, choose an integer $r\\ge0$ and $A$-linear maps $i:M\\to A^{\\oplus r}$ and $p:A^{\\oplus r}\\to M$ with $p\\circ i=1_M$. Applying the constant-sheaf construction gives a split pair $\\underline M_S\\xrightarrow{\\underline i}\\underline{A^{\\oplus r}}_S\\xrightarrow{\\underline p}\\underline M_S$. The exact inverse-image theorem identifies $g^*\\underline{A^{\\oplus r}}_S$ with $\\underline{A^{\\oplus r}}_{S'}$ and carries this splitting to the corresponding one for $g^*\\underline M_S$, because it preserves compositions and identities.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM7, proof of (1), locality paragraph and final finite-projective direct-summand sentence"
+   }
+  },
+  {
+   "text": "For the free module $A^{\\oplus r}$, the sheaf tensor--Hom adjunction and the standard basis identify $\\mathcal Hom_{A_S}(\\underline{A^{\\oplus r}}_S,F)$ with $F^{\\oplus r}$: a map is determined by its values on the $r$ basis vectors, and the inverse sends $(f_1,\\ldots,f_r)$ to the map $(a_j)\\mapsto\\sum_j a_jf_j$. The same description on $S'$ identifies $\\mathcal Hom_{A_{S'}}(g^*\\underline{A^{\\oplus r}}_S,g^*F)$ with $(g^*F)^{\\oplus r}$. Additivity and exactness of $g^*$, its identification of the constant ring sheaf, and the canonical tensor comparison identify the pullback of the first $r$-fold sum with the second; in these coordinates the canonical comparison is the identity. The coordinate evaluation map is therefore carried to the coordinate evaluation map.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM7, proof of (1), final calculation for a direct summand of a finite free module"
+   }
+  },
+  {
+   "text": "Let $c_E:g^*\\mathcal Hom_{A_S}(\\underline E_S,F)\\to\\mathcal Hom_{A_{S'}}(g^*\\underline E_S,g^*F)$ denote the comparison for $E$. Its construction by pulling back evaluation and currying makes it natural in $E$ and $F$. For the splitting in Step 1, the inverse to $c_M$ is the explicit composite\n$$\\mathcal Hom_{A_{S'}}(g^*\\underline M_S,g^*F)\\xrightarrow{\\,\\mathcal Hom(g^*\\underline p,g^*F)\\,}\\mathcal Hom_{A_{S'}}(g^*\\underline{A^{\\oplus r}}_S,g^*F)\\xrightarrow{\\,c_{A^{\\oplus r}}^{-1}\\,}g^*\\mathcal Hom_{A_S}(\\underline{A^{\\oplus r}}_S,F)\\xrightarrow{\\,g^*\\mathcal Hom(\\underline i,F)\\,}g^*\\mathcal Hom_{A_S}(\\underline M_S,F).$$\nNaturality gives the two inverse identities, since both reduce to $p i=1_M$; hence $c_M$ is an isomorphism. The same naturality calculation carries the pulled-back evaluation to evaluation after pullback, and proves naturality in both $M$ and $F$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM7, proof of (1), final finite-projective identity and evaluation construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-constant-sheaf",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0GM7, lemma-pullback-internal-hom, proof of (1), strictly perfect calculation and final finite-projective identity."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,7 +101,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-etale-generic-perfect-hom",
@@ -63,14 +113,31 @@
  "blueprint": {
   "from": {
    "node": "thm-weil-etale-geometric-biduality",
-   "place": "Proof paragraph 4: on a strictly perfect chart, the finite-projective term identity $h^*\\mathcal Hom(\\mathcal E,\\mathcal F)=\\mathcal Hom(h^*\\mathcal E,h^*\\mathcal F)$ used to identify the pulled-back Hom complex and its evaluation.",
+   "place": "Proof paragraph 4, \"The induction hypothesis over $\\overline{k(t)}$, together with [lem-weil-geometric-generic-duality], says that the restriction of $\\delta_{K|_V}$ to the geometric generic fibre is an isomorphism\": the degree-zero finite-projective term identity $h^*\\mathcal Hom(\\mathcal E,\\mathcal F)=\\mathcal Hom(h^*\\mathcal E,h^*\\mathcal F)$ inside the generic internal-Hom pullback comparison used there.",
    "via": [
-    "lem-sf-etale-generic-perfect-hom"
+    "lem-sf-etale-generic-perfect-hom",
+    "lem-sf-etale-generic-exchange-algclosed"
    ]
   },
   "same_as": [
    "sk-thm-sf-internal-hom-pullback"
   ],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sf-etale-finite-projective-pullback-hom",
+  "worker": "stage1",
+  "summary": "Expanded the finite-projective pullback-Hom identity into the finite-free coordinate calculation and an explicit retract inverse. The proof uses only the existing constant-sheaf, exact inverse-image, tensor comparison, and sheaf tensor-Hom nodes; no new node is needed. Evaluation compatibility and naturality are checked through the same currying construction.",
+  "blueprint": "Realizes thm-weil-etale-geometric-biduality, proof paragraph 4, the finite-projective term identity h^* Hom(E,F) = Hom(h^*E,h^*F) used for the pulled-back Hom and evaluation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-8fe259987",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-8fe259987 (reviewer sub-agent of L); spot-checked: Read in full: the item, its parent lem-sf-etale-generic-perfect-hom (steps 2 and 5 use the item termwise), every cited node's statement, lem-sf-etale-hom-complex-pullback (its c_{E,I} is the item's map), Stacks cohomology.tex Tag 0GM7 l.13407-13455, the unit sk-prop-sf-biduality-general and the blueprint thm-weil-etale-geometric-biduality. The statement is true. It is the degree-zero finite-projective term identity of 0GM7(1), specialised to small etale sites with constant A coefficients. The base change is the exact constant inverse image of prop-weil-pbc-inverse-image-modules-exact, which by its clause (2) is the u^* of the tensor-comparison node; the coefficient category Mod(A_T) is unchanged. The worker correctly reports and fixes the Stacks typo Hom(h^*E,F). Checked cases: M=0, M=A, M=A^r, M=Ae for an idempotent e (Z/6), g=id, S' empty, F=0. Step 1: the split pair survives the constant sheaf and g^* by functoriality, prop (1) and additivity (3). Step 2: c_A is an iso because the transpose of phi is phi composed with the inverse right unitor, where phi is the unit iso, the tensor comparison and g^* of the unitor; this does not even need the 'identity in coordinates' claim. Step 3: I verified both inverse identities of the retract formula by hand. proof_deps equals the union of uses, there is no cycle, and all cited units lie on the route (no tool_uses needed or accepted). No duplicate: sk-thm-sf-internal-hom-pullback is a derived A_{E,n} generalisation, lem-sf-hom-finite-projective and lem-pod-finite-projective-tensor-hom have no base change, lem-pur-isomorphism-inverse-image-tensor-hom covers only isomorphisms on pro-etale sites, and lem-ag-pullback-dual-finite-locally-free is about Zariski O_X duals. The delivery has no new nodes and the item does not restate a clause of its parent. FIX (B9): blueprint.from.via lacked lem-sf-etale-generic-exchange-algclosed (it is the parent's via), and from.place paraphrased text that is not in the blueprint. The corrected file quotes proof paragraph 4 instead. Only these two fields changed, in fixes/dag/nodes/sec-six-functors/lem-sf-etale-finite-projective-pullback-hom.json.; 1 file(s) fixed by the reviewer"
  }
 }
