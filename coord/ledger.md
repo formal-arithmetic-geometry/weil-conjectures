@@ -15808,3 +15808,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 13:23 L: batch 20261017T051249 dependency take-out
 - 05:32 L: merged deliver/B4/Sheaf.AlgebraicGeometry.NoetherianProperBoundedCoherentImage (stage 3; reviewer PASS; first push; landing 20261017T053257-L-3672653 (proof); batch 20261017T053254; modules 1; new nodes 0)
+- 05:32 L: merged deliver/E3/Sheaf.Paper.CoefficientExchangeFromComparisons (stage 3; reviewer PASS; first push; landing 20261017T053257-L-3673023 (interface); batch 20261017T053254; modules 2; new nodes 0; change records: coord/changes/E3-coefficient-exchange-step-interface.md)

@@ -5,8 +5,7 @@ module
 
 public import Sheaf.Paper.FiniteDiscreteDerivedCoefficientData
 import Sheaf.CategoryTheory.ThreeStepAdjunctionComparison
-import Sheaf.Paper.CoefficientDerivedFunctorAPI
-import WeilConjectures.SixFunctors.BaseChange.Derived
+import Sheaf.Paper.FiniteDiscreteRealizationFunctor
 
 /-! # The specified exchange from coherent coefficient comparisons -/
 
@@ -155,7 +154,7 @@ private lemma unit_step_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
     (K : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :
-    ((boundedConstructibleBaseChangeUnitStep Λ ℓ
+    ((coefficientExchangeUnitStep Λ ℓ
       (f.asOver (Spec (.of k))) (g.asOver (Spec (.of k)))
       (f'.asOver (Spec (.of k)))).app K).hom =
       (coefficientDerivedAdjunction Λ f').unit.app
@@ -163,7 +162,7 @@ private lemma unit_step_hom
           ((coefficientDerivedLowerStar Λ f).obj K.obj)) := by
   rw [coefficientDerivedAdjunction_eq]
   unfold coefficientDerivedUpperStar coefficientDerivedLowerStar
-  simp only [boundedConstructibleBaseChangeUnitStep, NatTrans.comp_app,
+  simp only [coefficientExchangeUnitStep_def, NatTrans.comp_app,
     Functor.rightUnitor_inv_app, Functor.whiskerLeft_app, Category.id_comp]
   exact restricted_unit_hom ℓ k Λ f'
     ((boundedConstructibleUpperStar Λ ℓ (g.asOver (Spec (.of k)))).obj
@@ -173,15 +172,15 @@ private lemma square_step_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (sq : CommSq g' f' f g)
     (K : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :
-    ((boundedConstructibleBaseChangeSquareStep Λ ℓ (sq.asOver (Spec (.of k)))).hom.app K).hom =
+    ((coefficientExchangeSquareStep Λ ℓ (sq.asOver (Spec (.of k)))).hom.app K).hom =
       (coefficientDerivedLowerStar Λ f').map
         ((coefficientAmbientSquare Λ sq).hom.app
           ((coefficientDerivedLowerStar Λ f).obj K.obj)) := by
-  have hs : (boundedConstructibleBaseChangeSquareStep Λ ℓ (sq.asOver (Spec (.of k)))).app K =
+  have hs : (coefficientExchangeSquareStep Λ ℓ (sq.asOver (Spec (.of k)))).app K =
       (boundedConstructibleLowerStar Λ ℓ (f'.asOver (Spec (.of k)))).mapIso
         ((boundedConstructiblePullbackSquareComparison Λ ℓ (sq.asOver (Spec (.of k)))).app
           ((boundedConstructibleLowerStar Λ ℓ (f.asOver (Spec (.of k)))).obj K)) := by
-    simp only [boundedConstructibleBaseChangeSquareStep, Functor.squareTransport_app]
+    simp only [coefficientExchangeSquareStep_def, Functor.squareTransport_app]
   have ht := congrArg (fun z ↦ ((boundedConstructible _).ι.mapIso z).hom) hs
   exact ht.trans (congrArg ((coefficientDerivedLowerStar Λ f').map)
     (restricted_square_hom ℓ k Λ sq
@@ -191,7 +190,7 @@ private lemma counit_step_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
     (K : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :
-    ((boundedConstructibleBaseChangeCounitStep Λ ℓ
+    ((coefficientExchangeCounitStep Λ ℓ
       (f.asOver (Spec (.of k))) (f'.asOver (Spec (.of k)))
       (g'.asOver (Spec (.of k)))).app K).hom =
       (coefficientDerivedLowerStar Λ f').map
@@ -199,7 +198,7 @@ private lemma counit_step_hom
           ((coefficientDerivedAdjunction Λ f).counit.app K.obj)) := by
   rw [coefficientDerivedAdjunction_eq]
   unfold coefficientDerivedLowerStar coefficientDerivedUpperStar
-  simp only [boundedConstructibleBaseChangeCounitStep, NatTrans.comp_app,
+  simp only [coefficientExchangeCounitStep_def, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.comp_map, Functor.leftUnitor_hom_app,
     ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.id_hom]
   change (R((f')_*⟦Λ⟧)).map ((L((g')^*⟦Λ⟧)).map
@@ -246,7 +245,7 @@ has underlying coefficientAmbientSquare. The component formulas for whiskering,
 unitors and squareTransport now identify the three specified restricted factors
 with the three ambient factors, and the etale component lemmas identify the other
 three factors. Substitute these six component identities in the categorical
-comparison. Finally apply boundedConstructibleBaseChange_eq_unit_square_counit,
+comparison. Finally apply coefficientExchange_factorization,
 project to underlying morphisms, and use Etale.baseChange_app followed by map_comp
 to supply the two required total-arrow factorizations. None of these steps asserts
 that exchange is invertible, or requires a Cartesian square or properness. Empty
@@ -257,6 +256,62 @@ theorem coefficientComparisonData_exchangeSteps [DiscreteTopology B] [Finite B]
       DerivedCategory (FiniteDiscreteInternalModules B T))
     (P : CoefficientComparisonData B (Profinite.continuousMapRingObj B) F) :
     finiteDiscreteExchangeSteps B ℓ k sq (F X) (F Y') := by
-  sorry
+  have _hB := hB
+  intro L hL
+  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  let : CompactSpace X' := QuasiCompact.compactSpace_of_compactSpace (X' ↘ Spec (.of k))
+  let : QuasiSeparatedSpace Y :=
+    quasiSeparatedSpace_of_quasiSeparated (Y ↘ Spec (.of k))
+  let : QuasiSeparatedSpace Y' :=
+    quasiSeparatedSpace_of_quasiSeparated (Y' ↘ Spec (.of k))
+  let : QuasiCompact f := quasiCompact_of_compactSpace f
+  let : QuasiCompact f' := quasiCompact_of_compactSpace f'
+  let : IsSeparated (f ≫ (Y ↘ Spec (.of k))) := by
+    rw [comp_over f (Spec (.of k))]
+    infer_instance
+  let : IsSeparated (f' ≫ (Y' ↘ Spec (.of k))) := by
+    rw [comp_over f' (Spec (.of k))]
+    infer_instance
+  let : IsSeparated f := IsSeparated.of_comp f (Y ↘ Spec (.of k))
+  let : IsSeparated f' := IsSeparated.of_comp f' (Y' ↘ Spec (.of k))
+  obtain ⟨hc⟩ := (CategoryTheory.Adjunction.threeStepComparison
+      (C₁ := FiniteDiscreteEtalePlus B Y) (C₂ := FiniteDiscreteEtalePlus B X)
+      (C₃ := FiniteDiscreteEtalePlus B Y') (C₄ := FiniteDiscreteEtalePlus B X')
+      (U := D+(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) f))
+      (R := R+(Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) f))
+      (V := D+(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) f'))
+      (S := R+(Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) f'))
+      (Ue := coefficientDerivedUpperStar (Profinite.continuousMapRingObj B) f)
+      (Re := coefficientDerivedLowerStar (Profinite.continuousMapRingObj B) f)
+      (Ve := coefficientDerivedUpperStar (Profinite.continuousMapRingObj B) f')
+      (Se := coefficientDerivedLowerStar (Profinite.continuousMapRingObj B) f')
+      (G := D+(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) g))
+      (H := D+(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) g'))
+      (Ge := coefficientDerivedUpperStar (Profinite.continuousMapRingObj B) g)
+      (He := coefficientDerivedUpperStar (Profinite.continuousMapRingObj B) g')
+      (T₁ := F Y) (T₂ := F X) (T₃ := F Y') (T₄ := F X')
+      (Etale.derivedUpperStarLowerStarAdjunctionPlus
+        (ModuleCat.{u + 1} (ULift.{u + 1} B)) f)
+      (Etale.derivedUpperStarLowerStarAdjunctionPlus
+        (ModuleCat.{u + 1} (ULift.{u + 1} B)) f')
+      (coefficientDerivedAdjunction (Profinite.continuousMapRingObj B) f)
+      (coefficientDerivedAdjunction (Profinite.continuousMapRingObj B) f')
+      (Etale.pullbackSquareComparison (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq)
+      (coefficientAmbientSquare (Profinite.continuousMapRingObj B) sq)
+      (P.pullback f) (P.pullback f') (P.pullback g) (P.pullback g')
+      (P.pushforward f) (P.pushforward f')
+      (fun K ↦ P.unit f' K) (fun K ↦ P.counit f K) (fun K ↦ P.square sq K) L)
+  refine ⟨{ comparison := ?_, source_eq := ?_, target_eq := ?_ }⟩
+  · simpa only [unit_step_hom ℓ k,
+      square_step_hom (Λ := Profinite.continuousMapRingObj B) ℓ k sq
+        ⟨(F X).obj L, hL⟩,
+      counit_step_hom ℓ k, Etale.baseChangeUnitStep_app,
+      Etale.baseChangeSquareStep_hom_app, Etale.baseChangeCounitStep_app,
+      Functor.comp_obj] using reverse_comparison hc
+  · rw [coefficientExchange_factorization]
+    simp only [NatTrans.comp_app, ObjectProperty.FullSubcategory.comp_hom]
+  · exact (congrArg ((F Y').map)
+      (Etale.baseChange_app (ModuleCat.{u + 1} (ULift.{u + 1} B)) f g f' g' sq L)).trans
+        (by rw [Functor.map_comp, Functor.map_comp])
 
 end AlgebraicGeometry.ProEtale.CondensedRing

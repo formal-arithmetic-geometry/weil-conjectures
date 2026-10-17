@@ -96,6 +96,117 @@ theorem FiniteDiscreteFactoredComparison.nonemptyArrowIso
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+section ExchangeStepCache
+
+open Scheme
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+
+variable {X Y X' Y' : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
+
+include ℓ k
+
+variable (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
+
+/-- The *unit insertion* step of the base-change morphism on bounded constructible complexes:
+the natural transformation `Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lf'^* ∘ Lg^* ∘ Rf_*` obtained by inserting the
+unit of the adjunction `Lf'^* ⊣ Rf'_*`. -/
+@[no_expose]
+noncomputable def coefficientExchangeUnitStep :
+    boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ g ⟶
+      (boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ g) ⋙
+        (boundedConstructibleUpperStar Λ ℓ f' ⋙ boundedConstructibleLowerStar Λ ℓ f') :=
+  boundedConstructibleBaseChangeUnitStep Λ ℓ f g f'
+
+/-- Equation for the specified unit insertion, keeping its implementation folded in importers. -/
+theorem coefficientExchangeUnitStep_def :
+    coefficientExchangeUnitStep Λ ℓ f g f' =
+      (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft
+        (boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ g)
+        (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f').unit := by
+  unfold coefficientExchangeUnitStep boundedConstructibleBaseChangeUnitStep
+  rfl
+
+variable {f g f' g'} in
+/-- The *square transport* step of the base-change morphism on bounded constructible
+complexes: `Functor.squareTransport` applied to the pullback comparison `θ_sq`, under `Rf_*` on
+the left and `Rf'_*` on the right. -/
+@[no_expose]
+noncomputable def coefficientExchangeSquareStep (sq : CommSq g' f' f g) :
+    (boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ g) ⋙
+        (boundedConstructibleUpperStar Λ ℓ f' ⋙ boundedConstructibleLowerStar Λ ℓ f') ≅
+      (boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ f) ⋙
+        (boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ ℓ f') :=
+  boundedConstructibleBaseChangeSquareStep Λ ℓ sq
+
+variable {f g f' g'} in
+/-- Equation for the specified square transport, without exposing its concrete components. -/
+theorem coefficientExchangeSquareStep_def (sq : CommSq g' f' f g) :
+    coefficientExchangeSquareStep Λ ℓ sq =
+      Functor.squareTransport (boundedConstructibleLowerStar Λ ℓ f)
+        (boundedConstructibleLowerStar Λ ℓ f')
+        (boundedConstructiblePullbackSquareComparison Λ ℓ sq) := by
+  unfold coefficientExchangeSquareStep boundedConstructibleBaseChangeSquareStep
+  rfl
+
+/-- The *counit contraction* step of the base-change morphism on bounded constructible
+complexes: the natural transformation obtained by contracting the counit of the adjunction
+`Lf^* ⊣ Rf_*`. -/
+@[no_expose]
+noncomputable def coefficientExchangeCounitStep :
+    (boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ f) ⋙
+        (boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ ℓ f') ⟶
+      boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ ℓ f' :=
+  boundedConstructibleBaseChangeCounitStep Λ ℓ f f' g'
+
+/-- Equation for the specified counit contraction, keeping derived constructions folded. -/
+theorem coefficientExchangeCounitStep_def :
+    coefficientExchangeCounitStep Λ ℓ f f' g' =
+      Functor.whiskerRight (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f).counit
+        (boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStar Λ ℓ f') ≫
+        (Functor.leftUnitor _).hom := by
+  unfold coefficientExchangeCounitStep boundedConstructibleBaseChangeCounitStep
+  rfl
+
+/-- The cached insertion is exactly the existing specified insertion. -/
+theorem coefficientExchangeUnitStep_eq_original :
+    coefficientExchangeUnitStep Λ ℓ f g f' =
+      boundedConstructibleBaseChangeUnitStep Λ ℓ f g f' := by
+  unfold coefficientExchangeUnitStep
+  rfl
+
+variable {f g f' g'} in
+/-- The cached square is exactly the existing specified square. -/
+theorem coefficientExchangeSquareStep_eq_original (sq : CommSq g' f' f g) :
+    coefficientExchangeSquareStep Λ ℓ sq =
+      boundedConstructibleBaseChangeSquareStep Λ ℓ sq := by
+  unfold coefficientExchangeSquareStep
+  rfl
+
+/-- The cached contraction is exactly the existing specified contraction. -/
+theorem coefficientExchangeCounitStep_eq_original :
+    coefficientExchangeCounitStep Λ ℓ f f' g' =
+      boundedConstructibleBaseChangeCounitStep Λ ℓ f f' g' := by
+  unfold coefficientExchangeCounitStep
+  rfl
+
+variable {f g f' g'} in
+/-- The original specified exchange factors through the three equal cached steps. -/
+theorem coefficientExchange_factorization (sq : CommSq g' f' f g) :
+    boundedConstructibleBaseChange Λ ℓ sq =
+      coefficientExchangeUnitStep Λ ℓ f g f' ≫
+        (coefficientExchangeSquareStep Λ ℓ sq).hom ≫
+          coefficientExchangeCounitStep Λ ℓ f f' g' := by
+  rw [coefficientExchangeUnitStep_eq_original, coefficientExchangeSquareStep_eq_original,
+    coefficientExchangeCounitStep_eq_original]
+  exact boundedConstructibleBaseChange_eq_unit_square_counit Λ ℓ sq
+
+end ExchangeStepCache
+
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
 
 /-- Internal modules with the condensed continuous-function coefficient ring. -/
@@ -187,16 +298,22 @@ def finiteDiscreteExchangeSteps (sq : CommSq g' f' f g)
       let N : ProEtale.BoundedConstructible
           (condensedRingObj (Profinite.continuousMapRingObj.{u} B) X) := ⟨F0.obj L, hL⟩
       Nonempty (FiniteDiscreteFactoredComparison
-        (((boundedConstructibleBaseChangeUnitStep (Profinite.continuousMapRingObj B) ℓ (f.asOver (Spec (.of k))) (g.asOver (Spec (.of k))) (f'.asOver (Spec (.of k)))).app N).hom)
-        (((boundedConstructibleBaseChangeSquareStep (Profinite.continuousMapRingObj B) ℓ (sq.asOver (Spec (.of k)))).hom.app N).hom)
-        (((boundedConstructibleBaseChangeCounitStep (Profinite.continuousMapRingObj B) ℓ (f.asOver (Spec (.of k))) (f'.asOver (Spec (.of k))) (g'.asOver (Spec (.of k)))).app N).hom)
+        (((coefficientExchangeUnitStep (Profinite.continuousMapRingObj B) ℓ
+          (f.asOver (Spec (.of k))) (g.asOver (Spec (.of k)))
+          (f'.asOver (Spec (.of k)))).app N).hom)
+        (((coefficientExchangeSquareStep (Profinite.continuousMapRingObj B) ℓ
+          (sq.asOver (Spec (.of k)))).hom.app N).hom)
+        (((coefficientExchangeCounitStep (Profinite.continuousMapRingObj B) ℓ
+          (f.asOver (Spec (.of k))) (f'.asOver (Spec (.of k)))
+          (g'.asOver (Spec (.of k)))).app N).hom)
         (F1.map ((Etale.baseChangeUnitStep
           (ModuleCat.{u + 1} (ULift.{u + 1} B)) f g f').app L))
         (F1.map ((Etale.baseChangeSquareStep
           (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq).hom.app L))
         (F1.map ((Etale.baseChangeCounitStep
           (ModuleCat.{u + 1} (ULift.{u + 1} B)) f f' g').app L))
-        (((boundedConstructibleBaseChange (Profinite.continuousMapRingObj B) ℓ (sq.asOver (Spec (.of k)))).app N).hom)
+        (((boundedConstructibleBaseChange (Profinite.continuousMapRingObj B) ℓ
+          (sq.asOver (Spec (.of k)))).app N).hom)
         (F1.map ((Etale.baseChange
           (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq).app L)))
 
