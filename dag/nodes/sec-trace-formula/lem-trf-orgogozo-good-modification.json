@@ -483,5 +483,29 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-b01bec4e8 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged from main, not weakened; ordinary small-étale Lambda-modules; the ordinary beta comparison), all 14 steps, the 12 new statement-only nodes, the statement of every cited node, unit sk-i-curve-zero (already realized by its key node) and chapter sec-trace-formula. Sources: neither Orgogozo 2006 nor Lu-Zheng 1712.10216 is in literature/ and network access is blocked, so the source places (Lemmas 2.5, 2.6, 3.1.x, 3.2.1, 3.2.2, Props 2.3, 3.3.1, Lemma 4.2) are unverified by me. The proof is correctly marked by:agent with both papers WANTED, and I checked the mathematics directly. Induction on (delta, r+2, d): every recursive call is lex-smaller, i.e. (delta-1,.,.), (delta, r'<r, .) or (delta, r, e-1<d); the constant case does not loop back to the sheaf case at the same triple. Checked by hand: the r=-2 base, the truncation shift P_{r-q}, the cokernel degree drop to P_{r-1}, hyperdescent bookkeeping (E1 terms vanish for j<=r-i), the Step 11 argument (tau<=r Rh_*E iso tau<=r Rh_*C, finite exactness, finite-support conservativity), the Step 13 shift (r=b-a+2d kills the whole cone), and Gabber lifting on small cases. The new nodes are true as stated as far as I can check, none restates the item, and none duplicates an existing node (searched the whole DAG for flatten, plurinodal, hypercover, descent, admissible blowup, Gabber, modification, nearby-cycle dimension bound, local acyclicity). All 14 off-unit tools are declared and accepted; no SGA. FIX 1: lem-trf-nearby-dimension-bound claimed R^i Psi=0 for i>2d over any base and any finite Lambda, with no invertibility; I restricted it to a Noetherian S with Lambda killed by m invertible on S, keeping the clause for every base change T->S, which covers every use; pqf-def-locnoeth added to stmt_deps. FIX 2: item Step 8 now sends the nowhere-dense summand through Steps 6 and 7 (Step 7 alone needs integral sources). Corrected files are in fixes/dag/nodes/sec-trace-formula/; details in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46bbc1bb8",
+  "group": "Q113",
+  "result": "pass",
+  "note": "All 12 node clauses match the Lean with no extra assumptions: integral S, locally Noetherian plus CompactSpace, LocallyOfFiniteType plus QuasiCompact, finite Λ, m ≥ 1 killing Λ and a unit on S, bounded K with each cohomology sheaf constructible via a linear iso to a recorded IsConstructibleEtaleModuleSheaf sheaf, IsProper r, dense U, IsIso (pullback.snd r U.ι), dense preimage, IsPsiGood of (pullback.snd f r) for the pullback of K. IsPsiGood quantifies over every base change with no finiteness condition. The two helpers are real constructions (sections equal M.val's sections by rfl) and not duplicates: the existing helpers use a RingCat constant sheaf on the original site. The node diff touches only lean; lean.statement is verbatim; all 14 proof steps are in the docstring; source and blueprint docstrings are present; the only proof is sorry. nt_compile rc 0 with no diagnostics, and a check file compiled. Non-blocking: Λ is fixed at Type (u+1) to match the constructibility predicate, so citers with Λ : Type v need a universe transport in stage 3."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrgogozoGoodModification",
+  "declaration": "AlgebraicGeometry.OrientedNearbyCycles.exists_modification_isPsiGood",
+  "declarations": [
+   "AlgebraicGeometry.OrientedNearbyCycles.orgogozoConstantScalars",
+   "AlgebraicGeometry.OrientedNearbyCycles.orgogozoModuleSections",
+   "AlgebraicGeometry.OrientedNearbyCycles.exists_modification_isPsiGood"
+  ],
+  "file": "lean/Sheaf/Paper/OrgogozoGoodModification.lean",
+  "statement": "theorem exists_modification_isPsiGood {X S : Scheme.{u}} [IsIntegral S] [IsLocallyNoetherian S] [CompactSpace S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (m : ℕ) (hm : 1 ≤ m) (hmΛ : ∀ x : Λ, m • x = 0) (hmS : IsUnit (m : Γ(S, ⊤))) (K : EtaleDerived X Λ) (hKb : IsBounded (etaleDatum.{u, u + 1} X) (Coeff Λ) K) (hKc : ∀ q : ℤ, ∃ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Coeff.{u, u + 1} Λ)), Scheme.IsConstructibleEtaleModuleSheaf F ∧ Nonempty (orgogozoModuleSections X Λ ((DerivedCategory.homologyFunctor ((etaleDatum.{u, u + 1} X).modules (Coeff Λ)) q).obj K) ≅ (AsSmall.down : EtaleSite.{u, u + 1} X ⥤ X.Etale).op ⋙ F.obj)) : ∃ (S₁ : Scheme.{u}) (r : S₁ ⟶ S) (U : S.Opens), IsProper r ∧ Dense (U : Set S) ∧ IsIso (pullback.snd r U.ι) ∧ Dense (r ⁻¹' (U : Set S)) ∧ IsPsiGood (pullback.snd f r) Λ (((etaleModules (pullback.fst f r)).pull (Coeff Λ)).obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The two canonical helpers express intrinsic module cohomology as constant-scalar ModuleCat presheaves, so constructibility uses the recorded small-etale predicate without duplicating its notion. All helper data are actual constructions."
  }
 }
