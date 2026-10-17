@@ -11,6 +11,8 @@ public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.GrothendieckLefschetz
 public import WeilConjectures.WeilSheaf.StalkUpperStarCharpoly
 public import WeilConjectures.ZetaLinearAlgebra.CharpolyRevExpand
+public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Trace
+public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TracePow
 public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 
