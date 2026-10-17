@@ -72,14 +72,19 @@ def prismIndex {Δ : SimplexCategory} {n : ℕ} (f : Δ ⟶ ⦋n⦌) (g : Δ ⟶
   ⟨(Finset.univ.filter fun x ↦ (g.toOrderHom x).val = 0).sup fun x ↦ (f.toOrderHom x).val, by
     rw [Finset.sup_lt_iff (by simp)]
     intro x _
-    simpa using (f.toOrderHom x).isLt⟩
+    simp⟩
+
+lemma prismIndex_val {Δ : SimplexCategory} {n : ℕ} (f : Δ ⟶ ⦋n⦌) (g : Δ ⟶ ⦋1⦌) :
+    (prismIndex f g).val =
+      (Finset.univ.filter fun x ↦ (g.toOrderHom x).val = 0).sup fun x ↦ (f.toOrderHom x).val :=
+  rfl
 
 lemma isPrismIndex_prismIndex {Δ : SimplexCategory} {n : ℕ} (f : Δ ⟶ ⦋n⦌) (g : Δ ⟶ ⦋1⦌) :
     IsPrismIndex f g (prismIndex f g) := by
   intro x
   refine ⟨fun hx ↦ Finset.le_sup (f := fun x ↦ (f.toOrderHom x).val)
     (Finset.mem_filter.2 ⟨Finset.mem_univ _, hx⟩), fun hx ↦ ?_⟩
-  show (Finset.univ.filter fun x ↦ (g.toOrderHom x).val = 0).sup (fun x ↦ (f.toOrderHom x).val) ≤ _
+  rw [prismIndex_val]
   refine Finset.sup_le fun y hy ↦ ?_
   simp only [Finset.mem_filter, Finset.mem_univ, true_and] at hy
   have hyx : y ≤ x := by
@@ -137,7 +142,8 @@ def sw {n : ℕ} (s : Fin (n + 2)) : ⦋n⦌ ⟶ ⦋1⦌ :=
   Hom.mk ⟨fun x ↦ if x.val < s.val then 0 else 1, fun x y hxy ↦ by
     rw [Fin.le_def] at hxy
     dsimp only
-    split_ifs <;> simp <;> omega⟩
+    split_ifs <;> simp
+    omega⟩
 
 lemma sw_val {n : ℕ} (s : Fin (n + 2)) (x : Fin (n + 1)) :
     ((sw s).toOrderHom x).val = if x.val < s.val then 0 else 1 := by
@@ -149,7 +155,8 @@ def side {n : ℕ} (k : Fin (n + 1)) : ⦋n + 1⦌ ⟶ ⦋1⦌ :=
   Hom.mk ⟨fun x ↦ if x.val ≤ k.val then 0 else 1, fun x y hxy ↦ by
     rw [Fin.le_def] at hxy
     dsimp only
-    split_ifs <;> simp <;> omega⟩
+    split_ifs <;> simp
+    omega⟩
 
 lemma side_val {n : ℕ} (k : Fin (n + 1)) (x : Fin (n + 2)) :
     ((side k).toOrderHom x).val = if x.val ≤ k.val then 0 else 1 := by
@@ -259,7 +266,7 @@ lemma prism_comp_side {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) (k : Fin (m + 1)) :
 lemma not_epi_of_len_lt {Δ : SimplexCategory} {n : ℕ} (θ : Δ ⟶ ⦋n⦌) (h : Δ.len < n) :
     ¬ Epi θ := fun _ ↦ by
   have := len_le_of_epi θ
-  simp only [len_mk] at this
+  simp only at this
   omega
 
 lemma not_epi_comp_of_not_epi {Δ' Δ Δ'' : SimplexCategory} (θ : Δ' ⟶ Δ) (f : Δ ⟶ Δ'')

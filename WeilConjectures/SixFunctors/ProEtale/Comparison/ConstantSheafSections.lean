@@ -9,6 +9,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 /-!
 # The constant sheaf on the small pro-étale site as a sheaf of continuous maps
@@ -243,6 +244,17 @@ lemma ProEt.toSheafify_constantSheafToContinuousMapSheafModule :
   exact h
 
 instance : IsIso (ProEt.constantSheafToContinuousMapSheafModule X Λ M) := by
+  have : PreservesLimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    inferInstance
+  have : (ProEt.topology X).HasSheafCompose (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    inferInstance
+  have : (ProEt.topology X).PreservesSheafification
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) := by
+    have : PreservesFilteredColimitsOfSize.{u + 1, u + 1}
+        (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) := inferInstance
+    have (Y : X.ProEt) : PreservesColimitsOfShape ((ProEt.topology X).Cover Y)ᵒᵖ
+        (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) := inferInstance
+    exact GrothendieckTopology.instPreservesSheafification _ _
   have h := ProEt.toSheafify_constantSheafToContinuousMapSheafModule X Λ M
   refine (Sheaf.isLocallyBijective_iff_isIso
     (ProEt.constantSheafToContinuousMapSheafModule X Λ M)).1 ⟨?_, ?_⟩

@@ -36,7 +36,7 @@ lemma _root_.CategoryTheory.GrothendieckTopology.iInf_mem_of_finite {C : Type*} 
   have := Fintype.ofFinite ι
   rw [← Finset.inf_univ_eq_iInf]
   induction (Finset.univ : Finset ι) using Finset.induction_on with
-  | empty => simpa using J.top_mem T
+  | empty => simp only [Finset.inf_empty]; exact J.top_mem T
   | insert a s _ ih =>
     rw [Finset.inf_insert]
     exact J.intersection_covering (h a) ih
@@ -89,6 +89,7 @@ lemma _root_.CategoryTheory.Sieve.iInf_apply' {C : Type*} [Category* C] {X Y : C
   ⟨fun h i ↦ (Sieve.sInf_apply f).1 h _ ⟨i, rfl⟩,
     fun h ↦ (Sieve.sInf_apply f).2 (by rintro _ ⟨i, rfl⟩; exact h i)⟩
 
+omit [CompactSpace X] [QuasiSeparatedSpace X] in
 open Scheme.Etale SimplicialObject PathSpaceBoundary in
 /-- The simplicial object of homotopies between two maps of simplicial objects with local lifts
 has local lifts. -/

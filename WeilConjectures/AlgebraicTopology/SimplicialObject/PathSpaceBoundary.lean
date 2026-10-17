@@ -178,7 +178,8 @@ theorem exists_ofSimplex_eq_precomp {T' : C} (t : T' ⟶ T)
     rw [op_comp, V.map_comp, ← Category.assoc]
     erw [hface k J]
     rw [Category.assoc, hFaces, hval_map hu hτ _ _ φ' (by simpa using hφ)]
-    exact congrArg (t ≫ ·) (bval_congr p _ _ (Category.assoc _ _ _).symm (Category.assoc _ _ _).symm)
+    exact congrArg (t ≫ ·)
+      (bval_congr p _ _ (Category.assoc _ _ _).symm (Category.assoc _ _ _).symm)
   have hpath : V.IsPathFamily h := fun j ↦ by
     have e₁ : δ j.succ.castSucc ≫ σ j.succ = 𝟙 _ := SimplexCategory.δ_comp_σ_self
     have e₂ : δ j.succ.castSucc ≫ σ j.castSucc = 𝟙 _ := by
