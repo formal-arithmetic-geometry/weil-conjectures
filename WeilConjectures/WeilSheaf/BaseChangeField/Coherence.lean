@@ -90,9 +90,9 @@ lemma lowerStarFactor_exchange_comp {Z P : Scheme.{u}} (p : Z ⟶ P) (a₁ a₂ 
   all_goals simp [MorphismProperty.Over.pullback,
     MorphismProperty.Over.mk, MorphismProperty.Over.pullbackComp]
 
+set_option linter.flexible false in
 /-- The exchange isomorphism of identities, written with factorisation isomorphisms, is the
 identity. -/
-set_option linter.flexible false in
 lemma lowerStarFactor_exchange_id {Z P : Scheme.{u}} (p : Z ⟶ P) (c : Z ⟶ P)
     (h : p ≫ 𝟙 P = c) (h' : 𝟙 Z ≫ p = c) (G : Sheaf (Scheme.ProEt.topology Z) A) :
     (lowerStarFactor A h).hom.app G ≫ (lowerStarFactor A h').inv.app G ≫
@@ -143,7 +143,7 @@ lemma lowerStarFactor_exchange_cube {Z Z' P P' : Scheme.{u}} (θ : Z ⟶ Z') (ψ
   simp only [MorphismProperty.Comma.comp_left]
   repeat' apply pullback.hom_ext
   all_goals simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
-    MorphismProperty.Over.pullbackComp, e, e', reassoc_of% e, reassoc_of% e']
+    MorphismProperty.Over.pullbackComp, e, e']
 
 end Sheaf
 
