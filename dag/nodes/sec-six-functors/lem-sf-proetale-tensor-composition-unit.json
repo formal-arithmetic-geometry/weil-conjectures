@@ -1,0 +1,86 @@
+{
+ "id": "lem-sf-proetale-tensor-composition-unit",
+ "kind": "statement",
+ "title": "The explicit pro-etale tensor pullback comparison preserves composite adjunction units",
+ "statement": "Let $h:Z\\to W$ and $k:W\\to V$ be morphisms of schemes, with the small pro-etale sites, base-change functors $B_f$ and inverse images of [def-weil-proetale-inverse-image]. Use compatible small skeletons as in that definition. Let $R_V,R_W,R_Z$ be sheaves of commutative rings on the respective sites and fix ring-sheaf isomorphisms $c_k:k^{-1}R_V\\xrightarrow{\\sim}R_W$ and $c_h:h^{-1}R_W\\xrightarrow{\\sim}R_Z$. Let $a_{h,k}:h^{-1}k^{-1}\\xrightarrow{\\sim}(k\\circ h)^{-1}$ be the inverse-image composition comparison of [lem-weil-pbc-site-morphism-composition], transported along the canonical fibre-product isomorphisms $q_U:B_hB_kU\\xrightarrow{\\sim}B_{k\\circ h}U$ [def-pc-fibre-product]. Use its induced comparison on ring sheaves, and set $c_{k\\circ h}=c_h\\circ h^{-1}(c_k)\\circ(a_{h,k,R_V})^{-1}$.\n\nWrite $f^*M=f^{-1}M\\otimes_{f^{-1}R_{\\mathrm{target}},c_f}R_{\\mathrm{source}}$ for the module pullbacks of [def-weil-pbc-proetale-operations]. Form the explicit tensor comparison $t_{h,k}:h^*k^*\\to(k\\circ h)^*$ by applying $a_{h,k}$ to the inverse-image factor and multiplying the intermediate scalar into the final scalar. More precisely, on local tensor generators, after the canonical inverse-image and tensor identifications (inverse image commutes with $\\otimes_{\\mathbf Z}$ and with colimits by [lem-weil-pbc-left-exact-site-inverse-image-tensor], hence with relative tensor products, which are coequalizers of $\\otimes_{\\mathbf Z}$), it sends $(m\\otimes a)\\otimes b$ to $m\\otimes c_h(a)b$; here $m$ is a local section of $h^{-1}k^{-1}M$, $a$ a local section of $h^{-1}R_W$, and $b$ a local section of $R_Z$. Its inverse sends $m\\otimes b$ to $(m\\otimes1)\\otimes b$, using $a_{h,k}^{-1}$ on $m$.\n\nThen these local formulas give mutually inverse natural module-sheaf maps, and this explicit comparison is compatible with the specified adjunctions, not just an unspecified isomorphism of their underlying functors. Precisely, let $d_{h,k}:(k\\circ h)_*\\xrightarrow{\\sim}k_*h_*$ be restriction along $q_U$ on sections (with the module actions induced by the specified coefficient maps), and let $\\eta^f$ be the unit of $f^*\\dashv f_*$. For every $R_V$-module sheaf $M$,\n$$\n k_*h_*(t_{h,k,M})\\circ k_*(\\eta^h_{k^*M})\\circ\\eta^k_M\n =d_{h,k,(k\\circ h)^*M}\\circ\\eta^{k\\circ h}_M.\n$$\nThus $t_{h,k}$ is the unique left-adjoint comparison corresponding to $d_{h,k}$ under [lem-weil-pbc-conjugate-iso-unit-equation] and the composite adjunction of [def-weil-pbc-composite-adjunction].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D3, lemma-adjoint-push-pull-modules (module adjunction); agent deduction for the explicit composition tensor comparison, using the sheaf inverse-image composition of Stacks Sites Tag 03CB, lemma-composition-morphisms-sites."
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-site-morphism-composition",
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "module sheaf pullback tensor presentation canonical composition map is conjugate of pushforward composition",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv and Scheme.Modules.conjugateEquiv_pullbackComp_inv normalize comparisons defined by adjunction; neither identifies the explicit inverse-image/tensor comparison with them.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "explicit tensor inverse image of ringed topoi module sheaves composition inserts scalar unit agrees with adjoint comparison",
+   "results": "SheafOfModules.ιFree_mapFree_inv and unitToPushforwardObjUnit lemmas concern free modules and single pullback units, not this comparison of constructions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv_pullbackComp_inv\"",
+   "results": "Two hits: SheafOfModules.conjugateEquiv_pullbackComp_inv and AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; read the former in PullbackContinuous.lean:167-182. Pullback is chosen abstractly as the left adjoint (:53); the comparison is defined by conjugation (:167-174), so this does not identify the explicit inverse-image/tensor construction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Cc]omp|[Cc]omp.*pullback|tensor.*[Cc]omp",
+   "results": "In Algebra/Category/ModuleCat/Sheaf: PullbackContinuous.lean:53,60,103,106,118; PullbackFree.lean hits. Read PullbackContinuous.lean:43-118 and :155-182: abstract adjoint and sheafified presheaf constructions, with no explicit tensor comparison normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf of modules tensor pullback composition conjugate pushforward unit comparison",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; pullbackComp; pushforwardComp; unitToPushforwardObjUnit; Scheme.Modules.pullbackComp. The first result is a candidate for the abstract part only: it does not state agreement with the explicit tensor presentation.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+  "lines": "177-182",
+  "note": "Normalizes the comparison defined by conjugation at lines 167-174, for the chosen abstract left adjoint (line 53). Agreement with the explicit inverse-image/tensor formulas in this statement is a further theorem, not a one-line specialization."
+ },
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-frobenius-trivialization-pullback",
+  "date": "2026-10-17",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-scheme-geometric-frobenius",
+   "place": "Final paragraph: comparison isomorphisms are compatible with the pullback-composition identifications; normalization of the ordinary tensor comparison used in step 4 of lem-pur-frobenius-trivialization-pullback.",
+   "via": [
+    "lem-pur-frobenius-trivialization-pullback"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -111,22 +111,31 @@
    }
   },
   {
-   "text": "Global and stalk operators, clause (3). Put $h=\\Phi^m$ and write $b_{h,n}:P_n\\to R\\Gamma_c(X,Lh^*K_n)$ for the unit/proper-comparison arrow of [prop-trf-graph-operator]. Explicitly, $b_{h,n}$ is $R\\Gamma_c(K_n)\\xrightarrow{R\\Gamma_c(\\eta_h)}R\\Gamma_c(Rh_*Lh^*K_n)\\simeq R\\Gamma_c(Rh_!Lh^*K_n)\\simeq R\\Gamma_c(Lh^*K_n)$. This applies because the graph of each iterate is defined with proper ordinary leg in [def-trf-frobenius-coefficient-morphism]. Its formula gives $F_{c,m}(\\psi_n)=R\\Gamma_c(X,\\psi_{n,m})\\circ b_{h,n}$ without using a Weil isomorphism or $\\kappa$. The finite comparison [lem-fix-operation-reduction] preserves units and counits, and [fix-prop-coherence] preserves composition and exchange comparisons; together with [lem-fix-compact-support-coefficient-change] this identifies the reduction of $b_{h,n+1}$ with $b_{h,n}$: rewrite the proper $Rh_*$ as $Rh_!$ before applying the finite coefficient comparison, use unit compatibility for the first arrow, and compact-support composition coherence for the last. No finite-reduction theorem for a general nonproper $Rh_*$ is used. Naturality identifies the reduction of $R\\Gamma_c(X,\\psi_{n+1,m})$ with $R\\Gamma_c(X,\\psi_{n,m})$ by step 6, proving the global assertion. For $y\\in X_0(\\mathbf F_{q^m})$, use the Stalk normalization paragraph of [prop-trf-rational-frobenius-integral-model]: for every finite-level object $M$, $\\iota_M:M_{\\bar y}\\simeq(L\\Phi^{m*}M)_{\\bar y}$ is the natural pullback identification for $\\Phi^m\\bar y=\\bar y$, and the stalk operator is $(\\psi_m)_{\\bar y}\\circ\\iota_M$. The composition comparison of [lem-weil-pbc-proetale-derived-pullback-composition] is termwise pullback, and the tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the point-section reduction isomorphism of [lem-trf-point-sections-finite-reduction] are natural; the latter, for $t=s$, also carries the reduction of $R\\Gamma_c(X,-)$ of a morphism to $R\\Gamma_c(X,-)$ of its reduction in the global assertion. Reducing this pullback identification therefore gives $\\iota_{K_n}$; reducing its composite with the coefficient map gives $(\\psi_{n,m})_{\\bar y}\\circ\\iota_{K_n}$ by step 6. This proves the stalk assertion without imposing the lattice hypothesis of the numbered conclusions of the rational-integral proposition.",
+   "text": "Global operators, clause (3). Put $h=\\Phi^m$, proper by [def-trf-frobenius-coefficient-morphism]. The formula of [prop-trf-graph-operator] is $F_{c,m}(\\psi_n)=R\\Gamma_c(X,\\psi_{n,m})\\circ b_{h,A_n,K_n}$. Apply [lem-trf-proper-compact-unit-reduction] with $A=A_{n+1}$, $B=A_n$ and $K=K_{n+1}$. Its displayed identity reduces the first arrow $b_h$ to $b_h$ at $rK_{n+1}$. Naturality in $K$ then transports it along $\\nu_n:rK_{n+1}\\simeq K_n$. For the second arrow, whose source $Lh^*K_{n+1}$ lies in $D^b_{ctf}$ by clause (i) of [thm-sf-ctf-stability], naturality of the compact-support coefficient comparison [lem-fix-compact-support-coefficient-change] and its point-sections realization [lem-trf-point-sections-finite-reduction] identifies its reduction with $R\\Gamma_c$ of the reduced coefficient map. Step 6 gives exactly $\\nu_n\\,r(\\psi_{n+1,m})=\\psi_{n,m}Lh^*(\\nu_n)\\mu_{h,K_{n+1}}$. Composing these two identities gives $F_{c,m}(\\psi_n)$ under the normalization of step 1. This proves compatibility of the global family for every $m\\geq1$.",
    "uses": [
-    "prop-trf-graph-operator",
     "def-trf-frobenius-coefficient-morphism",
-    "lem-fix-operation-reduction",
-    "fix-prop-coherence",
+    "prop-trf-graph-operator",
+    "lem-trf-proper-compact-unit-reduction",
     "lem-fix-compact-support-coefficient-change",
-    "prop-trf-rational-frobenius-integral-model",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-trf-point-sections-finite-reduction"
+    "lem-trf-point-sections-finite-reduction",
+    "thm-sf-ctf-stability"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
-    "place": "Proof (3), graph operator and fixed-stalk composite"
+    "place": "Proof (3), global-operator compatibility; proper-graph unit route retained from the returned split"
+   }
+  },
+  {
+   "text": "Stalk operators, clause (3). For $y\\in X_0(\\mathbf F_{q^m})$, the Stalk normalization paragraph of [prop-trf-rational-frobenius-integral-model] supplies $\\Phi^m\\bar y=\\bar y$ and identifies the operator at each finite level as $(\\psi_{n,m})_{\\bar y}\\circ\\iota_{K_n}$, without a lattice or Weil hypothesis. Apply [lem-trf-fixed-stalk-identification-reduction] with $h=\\Phi^m$, $A=A_{n+1}$, $B=A_n$ and $K=K_{n+1}$. Its displayed identity identifies the reduction of $\\iota_{K_{n+1}}$ with $\\iota_{rK_{n+1}}$ under the stalk coefficient comparisons. Naturality transports this identification along $\\nu_n$ to $\\iota_{K_n}$. The same natural comparisons send the reduction of $(\\psi_{n+1,m})_{\\bar y}$ to $(\\psi_{n,m})_{\\bar y}$ by step 6. Reduction preserves composition, so the reduced composite is $(\\psi_{n,m})_{\\bar y}\\circ\\iota_{K_n}$ under the stalk normalization of step 1. Thus the stalk operators form a compatible family.",
+   "uses": [
+    "prop-trf-rational-frobenius-integral-model",
+    "lem-trf-fixed-stalk-identification-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+    "place": "Proof (3), last sentence, fixed-stalk identification and reduction of its composite with the coefficient map"
    }
   },
   {
@@ -161,32 +170,35 @@
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-ring-complex",
-  "def-trf-frobenius-coefficient-morphism",
-  "def-weil-derived-limit",
-  "def-weil-finite-coefficient-point",
-  "def-weil-integral-rational-qbar-compact-support",
-  "def-weil-pbc-completed-pullback",
-  "def-weil-pbc-derived-inverse-limit",
-  "fix-prop-coherence",
+  "prop-trf-compact-support-perfectness",
   "lem-fix-compact-support-coefficient-change",
-  "lem-fix-operation-reduction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-trf-point-sections-finite-reduction",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-weil-pbc-rlim-perfect-complete",
+  "def-pc-perfect-ring-complex",
+  "lem-weil-pbc-finite-projective-prime-local-free",
   "lem-pc-kflat-closure",
   "lem-pc-ring-derived-map-representative",
-  "lem-pod-adic-limit-finite-modules",
-  "lem-pur-derived-change-of-rings",
-  "lem-trf-chain-supertrace",
-  "lem-trf-point-sections-finite-reduction",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-finite-projective-prime-local-free",
+  "def-trf-frobenius-coefficient-morphism",
   "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-rlim-perfect-complete",
-  "lem-weil-point-proetale-sections-exact",
-  "prop-trf-compact-support-perfectness",
+  "lem-fix-operation-reduction",
+  "fix-prop-coherence",
   "prop-trf-graph-operator",
+  "lem-trf-proper-compact-unit-reduction",
   "prop-trf-rational-frobenius-integral-model",
-  "prop-trf-trace-formal-laws"
+  "lem-trf-fixed-stalk-identification-reduction",
+  "lem-trf-chain-supertrace",
+  "prop-trf-trace-formal-laws",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-pbc-derived-inverse-limit",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-derived-limit",
+  "thm-sf-ctf-stability"
  ],
  "proof_origin": {
   "by": "agent",
@@ -235,10 +247,45 @@
    "results": "8 hits: homotopy localization equality, projective-resolution lift homotopies, and derived-category fractions; none states the normalized coefficient-tower realization, compatible endomorphism lifting and trace theorem.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient morphism|Adic.*system|transition",
+   "results": "0 hits: . The returned declarations do not state the sheaf cohomology perfect-tower realization, lifting and trace proposition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "adic coefficient morphism systems",
+   "results": "8 hits: IsAdicComplete.liftRingHom, AdicCompletion.mkₐ, AdicCompletion.liftAlgHom, AdicCompletion.liftRingHom, AdicCompletion.pi, IsAdicComplete.lift, AdicCompletion.map, IsAdicComplete.liftAlgHom. The returned declarations do not state the sheaf cohomology perfect-tower realization, lifting and trace proposition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Frobenius coefficient morphism, inverse system, transition maps",
+   "results": "0 hits: . loogle: Unknown identifier `Frobenius`. The returned declarations do not state the sheaf cohomology perfect-tower realization, lifting and trace proposition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adic coefficient morphism systems Frobenius compatibility",
+   "results": "8 hits: PreTilt.coeff_frobenius, PreTilt.coeff_iterate_frobenius, PreTilt.coeff_iterate_frobenius', PreTilt.coeff_iterate_frobeniusEquiv_symm, PreTilt.coeff_frobeniusEquiv_symm, Perfection.coeff_frobenius, Perfection.coeff_iterate_frobenius, Perfection.coeff_iterate_frobenius'. The returned declarations do not state the sheaf cohomology perfect-tower realization, lifting and trace proposition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized tower of perfect complexes over a complete local ring admits compatible endomorphism lifts and reduction of categorical traces",
+   "results": "8 hits: IsAdicComplete.lift, IsAdicComplete.StrictMono.lift, Algebra.trace_quotient_mk, Algebra.normalizedTrace_map, Algebra.normalizedTrace_algebraMap_eq_id, Algebra.normalizedTrace.congr_simp, Algebra.normalizedTrace_algebraMap_of_lifts, Algebra.normalizedTrace_trans. The returned declarations do not state the sheaf cohomology perfect-tower realization, lifting and trace proposition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -290,9 +337,9 @@
   "date": "2026-10-17",
   "item": "prop-trf-adic-coefficient-morphism-systems",
   "worker": "stage1",
-  "group": "Q78",
-  "summary": "Re-audited and replaced the incomplete sandbox attempt. Reused the existing Stacks 09AW perfect-limit node, finite-projective local freeness, and projective-complex derived Hom bijection; wrote the homotopy corrections and projection criterion explicitly. Removed four unsubmitted duplicate/unnecessary algebra nodes. Proved coefficient compatibility directly from the scheme-Frobenius graph formula, avoiding a citation to another node's proof. No statement change or new node. Second reading resolves the finite-cohomology/perfectness ambiguity by explicitly splitting the residue-field complex; expands the iterate equation and proper graph comparison; refreshes the chain-supertrace citation. Maintainer reader (Q78): added the missing point-section finite-reduction lemma lem-trf-point-sections-finite-reduction to steps 1 and 7, a step 9 for the reduction-tower identifications of the statement, and tool-use declarations for the two sk-p-trace nodes of step 8.",
-  "blueprint": "Step 1 realizes (1); steps 2–5 realize (2), with the perfect-limit theorem explicitly named by unit sk-prop-trace-adic step (ii); steps 6–7 realize (3); step 8 realizes (4). The constructive lifting calculation follows the original Lifts paragraph. Step 9 realizes the statement's reduction-tower sentence.",
+  "group": "NW",
+  "summary": "Repair of the human return on step 7: extracted its proper compact-cohomology unit/reduction coherence and fixed-point stalk identification/reduction coherence as two independent statement-only nodes. Replaced the returned long step by two short applications. The returned head statement, Lean record and all other proof steps are unchanged. Preserved prior reports, citations and actual search log; refreshed the citation manifest for the two replacement steps.",
+  "blueprint": "Steps 1, 2–5, 6, 7–8, 9 realize source clauses (1), (2), iterate part of (3), global/stalk part of (3), and (4), respectively. Step 10 retains the reduction-tower identifications. The two extracted nodes make precise the coefficient compatibility arguments hidden in source proof (3) and the returned step 7; the proper-graph route is unchanged.",
   "tool_uses": [
    {
     "node": "lem-weil-l-adic-extension-integers-dvr",
@@ -345,6 +392,14 @@
    {
     "node": "prop-trf-trace-formal-laws",
     "why": "Step 8 takes conjugacy invariance (clause 1) of the categorical trace at A_n, as the blueprint proof (4) does; it is stated only in unit sk-p-trace."
+   },
+   {
+    "node": "lem-trf-point-sections-finite-reduction",
+    "why": "Natural finite reduction through geometric-point sections, used for both normalization and operator compatibility."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Exactness of sections at an algebraically closed point, used with its elementary preservation of products to identify the Roos triangles."
    }
   ]
  },
@@ -362,14 +417,15 @@
   "fix-prop-coherence",
   "lem-trf-chain-supertrace",
   "prop-trf-trace-formal-laws",
-  "lem-trf-point-sections-finite-reduction"
+  "lem-trf-point-sections-finite-reduction",
+  "lem-weil-point-proetale-sections-exact"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q78-f3ed10041",
-  "group": "Q78",
+  "reviewer": "NT-cc-NW-28178c3dd",
+  "group": "NW",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-f3ed10041 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item statement is identical to the main-20261015 and master statements, so no target is weakened. All eight steps check out against the cited node statements. The coefficient category is consistently pro-étale with constant (A_n)_X. The compact-support comparison is lem-fix-compact-support-coefficient-change, and the stalk part uses the ringed-topos tensor pullback (Stacks 07A4), not the finite-type pullback clause. Step 2 meets every hypothesis of Stacks 09AW, the free model comes from local freeness at the maximal ideal, and the homotopy corrections and projection criterion via 064B are correct. The iterate recursion and the graph-operator route follow unit step (ii). The trace step uses the chain supertrace over any ring plus completeness of O_E. Edge cases checked: n=1 over the residue field, odd-degree sign, zero models, and zero, identity and non-invertible coefficient maps. I fixed three faults. (1) C1/E5: steps 1 and 7 move reduction through Fib_s=Γ(s,-) and through sections at a geometric point without any stated lemma, and no existing node covers it (lem-pod-point-sections-derived-reduction is the integral case; lem-sf-point-fibre-derived-tensor needs ctf factors). I added the statement-only node lem-trf-point-sections-finite-reduction and cited it in steps 1 and 7. (2) lem-trf-chain-supertrace and prop-trf-trace-formal-laws belong to unit sk-p-trace, which the adic unit does not cite, and were not declared as tool uses; I declared both (the blueprint proof (4) cites them). (3) The statement's sentence identifying the reduction tower's limits (P_O=RΓ_c(X,K_O) and the completed stalk) was not proved; I added an elementary step 9 using exactness and product preservation of Γ. I accept all 13 tool uses. There is no cycle and no SGA source. The corrected item and the new node are in fixes/dag/nodes/sec-trace-formula/; the details are in review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-28178c3dd (reviewer sub-agent of L); spot-checked: I read the whole delivery against main-20261015 and found one small citation gap, now fixed. The item statement matches the main-20261015 source exactly after whitespace normalisation. The delivery repairs a human return by replacing the long old step 7 with steps 7 (global operator) and 8 (stalk operator) and adding two statement-only nodes; every step is now under 2,000 characters. Both new nodes are true, typed correctly, strictly smaller than the item and not clauses of it. They hold in the small cases I tested: h=id, a point X, K=0 and N=j. lem-trf-proper-compact-unit-reduction says reduction preserves the unit / Rh_*=Rh_! arrow of prop-trf-graph-operator for any proper h. lem-trf-fixed-stalk-identification-reduction says reduction preserves the fixed-point stalk identification iota. I checked that neither is a duplicate: thm-trf-finite-coefficient-map covers only strict Weil complexes, and lem-trf-global-operator-naturality, lem-sp-et-proet-coefficient-compatibility and the Zariski tensor-composition coherence nodes are other statements. I recomposed steps 7 and 8 from the two nodes, the naturality of beta/sigma and of b/iota, and step 6's typed equation; both are correct. The coefficient category is pro-étale with constant (A_n)_X throughout. The compact-support comparison is lem-fix-compact-support-coefficient-change with A_{E,N} to A_{E,j}, N>=j, and stalks use the ringed-topos tensor pullback plus lem-trf-point-sections-finite-reduction (ell is invertible in Omega). The proper-graph route for h=Phi^m, which replaces the blueprint's g_gamma form, was accepted at the earlier review and is unchanged. Steps 1-6, 9 and 10 still check against the current statements of 09AW, 064B, the finite-modules node, the chain supertrace and trace laws. No cycle, no SGA, no new tool use. Fix (C1/B3): both new nodes form beta or sigma at Lh_A^*K, and step 7 uses beta's naturality along psi_{n+1,m}, which needs Lh^*K in D^b_ctf; nothing cited this. I added clause (i) of thm-sf-ctf-stability (unit sk-thm-sf-ctf-stability, which is on the adic route) to both node statements and their stmt_deps, and to the uses and proof_deps of step 7. I also added the missing merged_into: null and lean_audit none to both new nodes. The corrected item and both nodes are in fixes/dag/nodes/sec-trace-formula/; details are in review.md.; 3 file(s) fixed by the reviewer"
  }
 }

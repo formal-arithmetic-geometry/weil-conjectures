@@ -1,0 +1,97 @@
+{
+ "id": "lem-trf-fixed-stalk-identification-reduction",
+ "kind": "statement",
+ "title": "Finite reduction of a fixed-point stalk identification",
+ "statement": "Fix primes $p\\ne\\ell$, an integer $a\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$ and an algebraic closure $k$ of $k_0$. Fix a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi$, and integers $N\\geq j\\geq1$. Put $A=\\mathcal O_E/\\varpi^N$ and $B=\\mathcal O_E/\\varpi^j$, with the quotient map $A\\to B$. Let $X_0$ be a separated finite-type $k_0$-scheme, $X=X_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$, with the constant-coefficient small pro-etale derived categories and $D^b_{ctf}$ conventions of [def-trf-coefficient-conventions]. For a complex $M$ write $rM=M\\otimes_A^{\\mathbf L}B$, using derived change of rings [lem-pur-derived-change-of-rings]. Let $h:X\\to X$ be a $k$-endomorphism and let $K\\in D^b_{ctf}(X,A)$. Write $Lh_A^*$ and $Lh_B^*$ for derived pullback at the two coefficient rings [def-weil-derived-pullback-tensor-hom], and $\\mu_{h,K}:r(Lh_A^*K)\\xrightarrow{\\sim}Lh_B^*(rK)$ for the canonical coefficient/pullback comparison of [lem-fix-operation-reduction].\n\nLet $\\bar y:t=\\operatorname{Spec}\\Omega\\to X$ be a geometric point, with $\\Omega$ algebraically closed [def-weil-geometric-point], and suppose the scheme maps satisfy $h\\circ\\bar y=\\bar y$. Set\n$$\nS_R(M)=\\Gamma\\bigl(t,L\\bar y_R^*M\\bigr)\\in D(R),\\qquad R=A,B,\n$$\nusing exact derived sections at the algebraically closed point [lem-weil-point-proetale-sections-exact]. Let\n$$\n\\iota_{h,R,M}:S_R(M)\\xrightarrow{\\sim}S_R(Lh_R^*M)\n$$\nbe sections of the pullback-composition isomorphism $L(h\\circ\\bar y)_R^*M\\xrightarrow{\\sim}L\\bar y_R^*Lh_R^*M$ of [lem-weil-pbc-proetale-derived-pullback-composition], with its source identified with $L\\bar y_R^*M$ using $h\\circ\\bar y=\\bar y$.\nFor $M\\in D^b_{ctf}(X,A)$ let $\\sigma_M:rS_A(M)\\xrightarrow{\\sim}S_B(rM)$ be the point-sections reduction isomorphism [lem-trf-point-sections-finite-reduction] followed by sections of the coefficient/pullback comparison for $\\bar y$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-pur-derived-change-of-rings]. Since $Lh_A^*K\\in D^b_{ctf}(X,A)$ by clause (i) of [thm-sf-ctf-stability], $\\sigma_{Lh_A^*K}$ is defined; set $\\widetilde\\sigma_K=S_B(\\mu_{h,K})\\circ\\sigma_{Lh_A^*K}$. Then\n$$\n\\widetilde\\sigma_K\\circ r(\\iota_{h,A,K})=\\iota_{h,B,rK}\\circ\\sigma_K\n\\quad\\text{in }D(B).\n$$\nThis identity is natural in $K$ and assumes no Weil structure, no coefficient endomorphism and no properness of $h$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+  "place": "Proof (3), last sentence: iota_K is built from composition isomorphisms for Phi^m composed with the geometric point equal to that point, and geometric-point pullback is monoidal; hence the stalk operators reduce."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-fix-operation-reduction",
+  "def-weil-geometric-point",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-point-sections-finite-reduction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "thm-sf-ctf-stability"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical identification of a stalk with the stalk of pullback at a fixed geometric point commutes with finite coefficient reduction",
+   "results": "8 hits: AlgebraicGeometry.stalkMap_toStalk_apply, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, AlgebraicGeometry.stalkMap_toStalk, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc, AlgebraicGeometry.stalkToFiberRingHom_germ, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk. No declaration gives this derived constant-coefficient comparison; module-sheaf units, ordinary stalk maps and scalar-extension associators do not include the asserted derived comparison diagram.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback composition along a point fixed by an endomorphism is compatible with tensor base change of constant coefficient rings",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc. No declaration gives this derived constant-coefficient comparison; module-sheaf units, ordinary stalk maps and scalar-extension associators do not include the asserted derived comparison diagram.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"pullback\"",
+   "results": "0 hits: . No declaration gives this derived constant-coefficient comparison; module-sheaf units, ordinary stalk maps and scalar-extension associators do not include the asserted derived comparison diagram.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(pullback|tensor)|pullback.*stalk",
+   "results": "25 hits: Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean. No declaration gives this derived constant-coefficient comparison; module-sheaf units, ordinary stalk maps and scalar-extension associators do not include the asserted derived comparison diagram.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkPullback|pullback.*[Tt]ensor.*[Cc]omp|[Cc]omp.*[Tt]ensor.*pullback",
+   "results": "0 hits: . No declaration gives this derived constant-coefficient comparison; module-sheaf units, ordinary stalk maps and scalar-extension associators do not include the asserted derived comparison diagram.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition comparison for derived inverse image at a fixed point is compatible with extension of scalar coefficients",
+   "results": "8 hits: PolynomialLaw.comp_toFun', LinearEquiv.extendScalarsOfSurjective_symm, ModuleCat.extendScalarsComp, Algebra.Generators.CotangentSpace.compEquiv_symm_zero, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, ModuleCat.restrictScalarsComp'App, ModuleCat.restrictScalarsComp'. No declaration gives this derived constant-coefficient comparison; module-sheaf units, ordinary stalk maps and scalar-extension associators do not include the asserted derived comparison diagram.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-trf-adic-coefficient-morphism-systems",
+  "date": "2026-10-17",
+  "group": "NW"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-prop-trace-adic",
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-adic-coefficient-morphism-systems",
+   "place": "Proof (3), last sentence: iota_K is built from composition isomorphisms for Phi^m composed with the geometric point equal to that point, and geometric-point pullback is monoidal; hence the stalk operators reduce.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

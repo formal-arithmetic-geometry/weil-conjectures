@@ -68,13 +68,15 @@
    }
   },
   {
-   "text": "Write $L=u^*$, $R=u_*$, $P=P_Y^{(b)}$, $Q=H_Y^{(b)}$, $S=P_X^{(b)}$, and $T=H_X^{(b)}$. The composite adjunctions of [def-weil-pbc-composite-adjunction] are $LP\\dashv QR$ and $SL\\dashv RT$. Applying [lem-weil-pbc-conjugate-iso-unit-equation] to $e:RT\\cong QR$ gives the canonical comparison $c^0:LP\\cong SL$. To check that this is the ordinary pullback-composition identification, use the inverse-image presentation in [def-weil-proetale-inverse-image]. For any scheme map $h$ and site object $V$ on its target, the unit sends $m\\in N(V)$ to the sheafified colimit class indexed by $(V,\\mathrm{id}_{B_hV})$, with value $m$. For composable $h,k$, the iterated unit sends $m$ to the nested class indexed first by $(V,\\mathrm{id}_{B_kV})$ and then by $(B_kV,\\mathrm{id}_{B_hB_kV})$. Under $B_hB_kV\\cong B_{kh}V$, flattening the two identity indices gives exactly the single class indexed by $(V,\\mathrm{id}_{B_{kh}V})$. Thus the ordinary inverse-image composition comparison carries the composite unit to the direct unit. Applying this to the two factorizations $uF_X^b=F_Y^bu$ gives on right adjoints exactly restriction along $j_V^{-1}$, namely $e$. The uniqueness assertion of [lem-weil-pbc-conjugate-iso-unit-equation] therefore identifies its left-adjoint comparison with $c^0$. In the inverse-image/tensor presentation of [def-weil-pbc-proetale-operations], the composition map inserts a unit, $m\\otimes a\\mapsto(m\\otimes1)\\otimes a$; its inverse multiplies the middle scalar into $a$. Tensor balancing proves the two composites are identities. Step 2 ensures that both routes use the same coefficient map. Thus this is the termwise canonical map specifying the derived comparison in [lem-weil-pbc-proetale-derived-pullback-composition]. To verify the required equality without assuming a mate-pasting theorem, fix $N$ on $Y$, $M$ on $X$ and $a:LN\\to M$, with adjunct $a^\\#:N\\to RM$. Write $\\eta^L,\\eta^P,\\eta^S$ for the units of $L\\dashv R$, $P\\dashv Q$, $S\\dashv T$, so $a^\\#=R(a)\\eta^L_N$. The first adjunct, under $LP\\dashv QR$, is $QR(a\\circ Ls_{Y,N}^{(b)})Q(\\eta^L_{PN})\\eta^P_N=Q(a^\\#)Q(s_{Y,N}^{(b)})\\eta^P_N=Q(a^\\#)(d_{Y,N}^{(b)})^{-1}=(d_{Y,RM}^{(b)})^{-1}a^\\#$: the first equality uses naturality of $\\eta^L$, the second the unit equation of Step 2, and the third naturality of $d_Y^{-1}$. For the second adjunct, first use $SL\\dashv RT$. The $S$-adjunct of $a\\circ s_{X,LN}^{(b)}$ is $T(a)T(s_{X,LN}^{(b)})\\eta^S_{LN}=T(a)(d_{X,LN}^{(b)})^{-1}=(d_{X,M}^{(b)})^{-1}a$. Applying the $L$-adjunction gives $R((d_{X,M}^{(b)})^{-1})a^\\#$. Finally precomposition with $c^0$ changes this adjunct by $e_M$, by the defining unit equation for $c^0$ and naturality of $e$. Thus the second adjunct is $e_M\\circ R((d_X^{(b)})^{-1}_M)\\circ a^\\#$. Step 3, inverted, says $e_M R((d_X^{(b)})^{-1}_M)=(d_Y^{(b)})^{-1}_{RM}$. These adjuncts agree. Taking $M=LN$ and $a=\\mathrm{id}$ and using injectivity of the adjunction bijection proves $(s_X^{(b)}L)c^0=Ls_Y^{(b)}$ on module sheaves.",
+   "text": "Write $L=u^*$, $R=u_*$, $P=P_Y^{(b)}$, $Q=H_Y^{(b)}$, $S=P_X^{(b)}$, $T=H_X^{(b)}$. The composite adjunctions are $LP\\dashv QR$ and $SL\\dashv RT$ [def-weil-pbc-composite-adjunction]. Their inverse-image composition comparisons preserve units by [lem-weil-pbc-site-morphism-composition](3); this applies to the small site functors of [def-weil-proetale-inverse-image]. The explicit tensor comparison preserves the module units by [lem-sf-proetale-tensor-composition-unit]. Its coefficient compatibility holds by Step 2. Apply it to $(u,F_Y^b)$ and $(F_X^b,u)$: composing one comparison with the inverse of the other has conjugate the restriction map $e:RT\\cong QR$ of Step 3. Indeed the two fibre-product associators compose to $j_V^{-1}$ there. Thus [lem-weil-pbc-conjugate-iso-unit-equation] identifies this ordinary comparison with $c^0:LP\\cong SL$, the left-adjoint comparison determined by $e$.\n\nStep 2 says the conjugates of $s_Y:P\\to\\mathrm{id}$ and $s_X:S\\to\\mathrm{id}$ are $d_Y^{-1}$ and $d_X^{-1}$. Pasting with $L\\dashv R$ by [lem-weil-pbc-mate-pasting](2) gives conjugates $(d_Y^{-1}R):R\\to QR$ for $Ls_Y:LP\\to L$, and $R(d_X^{-1}):R\\to RT$ for $s_XL:SL\\to L$. By composition of conjugates [def-weil-pbc-adjunction-conjugate], the conjugate of $(s_XL)c^0$ is $e\\circ R(d_X^{-1})$. Inverting the equality in Step 3 gives $e\\circ R(d_X^{-1})=d_Y^{-1}R$. Injectivity of the conjugation bijection therefore proves $(s_XL)c^0=Ls_Y$ on module sheaves. These are the same adjunction transposes used in the original Hom calculation, now supplied by the cited pasting theorem.",
    "uses": [
     "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-site-morphism-composition",
+    "def-weil-proetale-inverse-image",
+    "lem-sf-proetale-tensor-composition-unit",
     "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "def-weil-proetale-inverse-image"
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-conjugate"
    ],
    "elementary": false,
    "source": {
@@ -123,8 +125,12 @@
   "def-weil-pbc-proetale-site",
   "lem-weil-pbc-conjugate-iso-unit-equation",
   "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-sf-proetale-tensor-composition-unit",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-adjunction-conjugate",
   "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
   "lem-pc-kflat-resolution"
  ],
  "proof_origin": {
@@ -184,7 +190,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-pur-scheme-geometric-frobenius",
@@ -197,7 +203,7 @@
   "date": "2026-10-17",
   "item": "lem-pur-frobenius-trivialization-pullback",
   "worker": "stage1",
-  "summary": "Kept the statement and coefficient category. Reused the explicit Tag 0F6W relative-Frobenius assertion already in lem-trf-absolute-frobenius-site, and supplied the arbitrary-pullback fibre-product calculation, the adjunction Hom calculation, the normalization by colimit unit classes and tensor units, and the relative-Frobenius addition calculation. Descended the identities through exact termwise pullback and derived localization. Rechecked all cited statements and repeated the Mathlib searches. No new node and no attachment.",
+  "summary": "Repair of the 2026-10-17 long-step return: kept the statement, Lean record, route and steps 1-3,5-6 unchanged. Replaced the 2981-character step 4 with a short citation-based step: existing site-morphism-composition supplies inverse-image unit normalization; the new statement-only tensor-composition-unit lemma identifies the explicit tensor comparison with its adjoint normalization; existing mate-pasting and conjugation supply the former Hom calculation. No duplicated general composition or mate lemma was created. Reconstructed report and exact citation quotes; recorded and read real searches for the new node.",
   "blueprint": "Realizes the final pullback-composition compatibility in def-pur-scheme-geometric-frobenius (main-20261015, order 2579). Expands the last paragraph of main-20261015 lem-trf-absolute-frobenius-site.proof.md from open restriction to an arbitrary scheme map and writes out the iteration compatibility.",
   "tool_uses": [
    {
@@ -219,6 +225,14 @@
    {
     "node": "lem-weil-pbc-localization-universal-property",
     "why": "Uses descent and equality detection for natural transformations under derived localization; general categorical tool for the final passage to unbounded derived categories."
+   },
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "General site-composition tool: its clause (3) normalizes the inverse-image composition by its composite adjunction unit."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "General categorical tool: clause (2) computes the conjugates of Ls_Y and s_XL by pasting with L adjoint to R; it supplies the abstract Hom calculation without replacing the geometric Frobenius route."
    }
   ]
  },
@@ -227,15 +241,17 @@
   "prop-weil-pbc-proetale-constant-ring-map",
   "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-pbc-localization-universal-property"
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-mate-pasting"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q73-063c3b565",
-  "group": "Q73",
+  "reviewer": "NT-cc-Q02-49e2020a7",
+  "group": "Q02",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-063c3b565 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement: 12 nodes, plus lem-pc-kflat-resolution, which the fix adds. Sources read: Stacks more-morphisms.tex l.19215-19228 (0F6W: weakly etale over a char-p scheme, relative Frobenius is an isomorphism, the same as the clause in lem-trf-absolute-frobenius-site) and main-20261015 lem-trf-absolute-frobenius-site.proof.md, whose last paragraph is the route the item extends from open restriction to an arbitrary u. I also read the ancestor def-pur-scheme-geometric-frobenius: its last paragraph needs exactly this u-naturality and the iterate law. The statement is unchanged and true. Its coefficient category is the ordinary D(T_proet,A) with A finite commutative and the constant sheaf A_T, consistent with the operations nodes and the ancestor, so nothing is weakened and no condensed/adic category is identified with it. The types of c_{u,b} and of the addition law check. Small cases checked: b=0, u=id, the empty scheme, A=0, and a nonreduced base. I re-derived steps 1, 3, 4 and 5 myself: the relative-Frobenius induction by projections; the j_V projection identity giving d_Y e = R(d_X); both adjuncts in step 4 using the composite-adjunction unit and the conjugate equation (they agree after step 3 is inverted); and the step 5 adjunct H2(d1^-1)d2^-1 with the stated factor order. There are no new nodes. I searched the whole DAG for duplicates (0F6W, Frobenius trivialization): none, and the item is no restatement of lem-trf. No cycle. All five declared tool_uses are already on the route of sk-thm-sf-package (through sk-prop-sf-rf-shriek-preservation, sk-thm-properbasechange and sk-thm-p1); I accept them as harmless. One fault, C1/C3 in step 6, is repaired: derived-pullback-composition specifies c_{h,k} only on K-flat complexes with flat terms, and the step gave no argument that the descended termwise iso equals it on every complex. The fix writes out the resolution plus naturality argument and cites lem-pc-kflat-resolution, whose unit is on the route, in step 6 uses and proof_deps. No SGA source is used. I also ran one read-only git log by mistake; it wrote nothing.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-49e2020a7 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement, steps 1-6), the new node lem-sf-proetale-tensor-composition-unit, the statements of all cited nodes, and the proof of lem-weil-pbc-proetale-derived-pullback-composition. Sources read: Stacks 0F6W (more-morphisms.tex l.19215-19228), Stacks 03D3 (sites-modules.tex l.1044), the main-20261015 lem-trf-absolute-frobenius-site proof (last paragraph), and Mathlib PullbackContinuous.lean l.53 and l.167-182. The candidate conjugateEquiv_pullbackComp_inv covers only the abstract left adjoint, so the node is correctly unsplit. No SGA is used. The repaired step 4 is correct. Applying the new node to (u,F_Y^b) and (F_X^b,u) gives tensor comparisons with conjugates d1 and d2, so c0=t2^-1 t1 has conjugate d1 d2^-1, which is restriction along j_V^-1, i.e. e. Mate pasting (2), with (L1=id,L2=P,L3=L4=L) and with (L1=L2=L,L3=id,L4=S), gives the conjugates d_Y^-1 R for L s_Y and R(d_X^-1) for s_X L. The composition rule then gives e∘R(d_X^-1)=d_Y^-1 R from step 3, and injectivity proves (s_X L)c0=L s_Y in the stated direction. The coefficient compatibility comes from step 2. Unit sk-thm-p1 of lem-weil-pbc-site-morphism-composition is on the route of sk-thm-sf-package, so no new tool_use is needed. Steps 1-3, 5 and 6 are unchanged and I re-checked them; the derived c_{h,k} on K-flat complexes is the adjunction-normalized termwise map, so step 6 matches. New node: true. The unit equation reduces to site-morphism-composition (3) on generators, I checked balancing with c_{kh}=c_h∘h^-1(c_k)∘a^-1, and the cases h or k equal to id and Z empty hold. It does not restate the item and is strictly smaller. It is not a duplicate: def-sfb-module-upper-star-comp is condensed and abstract; lem-pc-module-pullback-identity-composition, def-pc-module-pullback and lem-sc-scalar-inverse-image-composition-coherence are Zariski or unnormalized; the same argument exists only inside the proof of derived-pullback-composition, which cannot be cited. Form B1-B9 is fine. FIX: the new node used the identification of inverse image with relative tensor products without a citation (B3/C1). I added [lem-weil-pbc-left-exact-site-inverse-image-tensor] (⊗_Z-monoidal and colimit-preserving, hence preserves relative tensor products as coequalizers) to the statement and stmt_deps, in fixes/dag/nodes/sec-six-functors/lem-sf-proetale-tensor-composition-unit.json. The item is unchanged and the target is not weakened.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",

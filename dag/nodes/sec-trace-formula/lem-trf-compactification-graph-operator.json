@@ -55,42 +55,64 @@
    }
   },
   {
-   "text": "*(3).* Write $M=L\\Phi^{m*}K$. The explicit witness for $K$ is a pair $(L,\\alpha)$ as in [def-weil-pbc-etale-origin-witness]. Put $L_m=(\\Phi^m_{\\mathrm{et}})^{-1}L$. The comparison of [lem-weil-pbc-comparison-pullback] and pullback of $\\alpha$ give the witness\n$$\\alpha_m:\\nu_X^*L_m\\xrightarrow{\\sim}L\\Phi^{m*}\\nu_X^*L\\xrightarrow{L\\Phi^{m*}\\alpha}M.$$\nPullback is on the stated constructible domain of [prop-functor-package], so $M$ is bounded constructible and $C_{j,M}$ is defined. For $m=0$ the maps $\\Phi^m$ and $\\bar\\Phi^m$ are identities and are proper. For $m>0$ they are finite by induction from [def-trf-scheme-frobenius] and [lem-weil-pbc-finite-composition], hence proper by [lem-weil-pbc-finite-proper]. By [prop-trf-graph-operator],\n\n$$\nT_c(v)=R\\Gamma_c(X,v)\\circ\\iota_X\\circ R\\Gamma_c(X,\\eta),\\qquad\nT_{\\bar c}(\\bar v)=R\\Gamma(\\bar X,\\bar v)\\circ\\iota_{\\bar X}\\circ\nR\\Gamma(\\bar X,\\bar\\eta),\n$$\n\nwhere $\\eta:K\\to R\\Phi^m_*M$ and\n$\\bar\\eta:j_!K\\to R\\bar\\Phi^m_*L\\bar\\Phi^{m*}j_!K$ are the units, and\n$\\iota_X$, $\\iota_{\\bar X}$ are the identifications\n$R\\Phi^m_*\\simeq R\\Phi^m_!$ followed by the composition law for\n$a_X\\Phi^m=a_X$, respectively $a_{\\bar X}\\bar\\Phi^m=a_{\\bar X}$ (the $k$-morphism and finiteness assertions are in [def-trf-scheme-frobenius]). Let\n$\\gamma:j_!R\\Phi^m_*M\\xrightarrow{\\sim}R\\bar\\Phi^m_*j_!M$ be the\ncomposition isomorphism of the compact-support direct image for\n$j\\Phi^m=\\bar\\Phi^mj$ ([prop-functor-package], item (3), with\n$R\\Phi^m_*=R\\Phi^m_!$ for the finite maps $\\Phi^m$, $\\bar\\Phi^m$). The compactification comparison and the composition isomorphism are taken in their canonical normalization of [thm-sf-comp-composition], independent of the compactification. The witness for $j_!K$ is $(j^{\\mathrm{et}}_!L,\\bar\\alpha)$, with $\\bar\\alpha$ obtained by the termwise comparison of [lem-cbc-proetale-extension-zero-comparison] followed by $j_!\\alpha$. For $j_!M$ the witness is explicitly $(j^{\\mathrm{et}}_!L_m, j_!\\alpha_m\\circ\\delta_{j,L_m})$, where $\\delta_{j,-}$ is the termwise comparison of [lem-cbc-proetale-extension-zero-comparison]. Therefore all compact-support comparisons in the remaining steps are on their witnessed domain.",
+   "text": "*(3a): witnessed domains.* Write $M=L\\Phi^{m*}K$. Apply [lem-trf-witnessed-open-pullback] with $u=\\Phi^m$, $i=j:X\\hookrightarrow\\bar X$ and the given witness $(L,\\alpha)$. It supplies $L_m=(\\Phi^m_{\\mathrm{et}})^{-1}L$, the witness $\\alpha_m$ for $M$, and the specified witnesses $(j^{\\mathrm{et}}_!L,j_!\\alpha\\circ\\delta_{j,L})$ for $j_!K$ and $(j^{\\mathrm{et}}_!L_m,j_!\\alpha_m\\circ\\delta_{j,L_m})$ for $j_!M$. Pullback preserves the stated constructible finite-Tor domain by [thm-sf-ctf-stability], clause (i). Thus $M\\in D^b_{ctf}(X,A)$ and [lem-trf-compactification-cohomology] defines $C_{j,M}$ on its displayed witness; all subsequent compact-support comparisons are on their witnessed domains.",
    "uses": [
-    "def-weil-pbc-etale-origin-witness",
-    "lem-weil-pbc-comparison-pullback",
-    "prop-trf-graph-operator",
-    "prop-functor-package",
-    "def-trf-scheme-frobenius",
-    "thm-sf-comp-composition",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-weil-pbc-finite-composition",
-    "lem-weil-pbc-finite-proper"
+    "lem-trf-witnessed-open-pullback",
+    "thm-sf-ctf-stability",
+    "lem-trf-compactification-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-graph-operator.proof.md",
-    "place": "*(3).*"
+    "place": "*(3)*, witness and domain verification"
    }
   },
   {
-   "text": "*Step A: the units.* Put $h=\\Phi^m$, $\\bar h=\\bar\\Phi^m$. We verify\n$$\\gamma\\circ j_!\\eta=R\\bar h_*b_m\\circ\\bar\\eta: j_!K\\longrightarrow R\\bar h_*j_!M.$$\nThe exact open adjunction of [lem-cbc-proetale-extension-zero] descends termwise to complexes, and its open unit is invertible by [lem-exc-proetale-open-unit]. Hence two maps out of $j_!K$ agree if their restrictions agree under $j^*j_!K\\cong K$. To identify the restricted target, use the open-restriction direct-image comparison $j^*R\\bar h_*\\cong Rh_*j^*$. Underived this is literally the section formula of [def-weil-pbc-proetale-operations]: for $V\\to X$, the two sides evaluate on $\\bar X\\times_{\\bar X,\\bar h}V=X\\times_{X,h}V$, by the Cartesian square. It remains valid on derived functors: open restriction is a right adjoint of the exact $j_!$, so it preserves K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective]. The ordinary units and their composition normalization are those of [fix-prop-adjunctions], clauses (1) and (3). Under the section identifications above, the adjunction bijection sends the restriction of the unit of $\\bar h^*\\dashv R\\bar h_*$ to the unit of $h^*\\dashv Rh_*$: both adjuncts are the identity map on the same pullback sections. In particular $j^*(R\\bar h_*b_m\\circ\\bar\\eta)=\\eta$, since $j^*b_m$ is the identity by [lem-trf-open-square-exchange]. For the left side, restrict $\\gamma$ along $j$ using the base change isomorphism $j^*R\\bar h_!\\simeq Rh_!j^*$ of [prop-functor-package], item (4), for the Cartesian square of [lem-trf-frobenius-open-square]; for the open $j$ this exchange map is the mate of the section identity above, so it is the same identification $j^*R\\bar h_*\\cong Rh_*j^*$. By the exchange and composition coherence of [fix-prop-coherence], $j^*\\gamma$ becomes the composition comparison of the restricted square $\\operatorname{id}_X\\circ h=h\\circ\\operatorname{id}_X$, in which both open immersions are identities; by the identity normalization of [thm-sf-comp-composition] this is the identity comparison of $Rh_*M$. Thus $j^*(\\gamma\\circ j_!\\eta)=\\eta$ too. The open Hom bijection proves the displayed equality. This also explains the adjoint-mate interpretation in the blueprint without taking any fact from another node's proof.",
+   "text": "*(3b): proper iterates.* Put $h=\\Phi^m$ and $\\bar h=\\bar\\Phi^m$. They are $k$-morphisms by [def-trf-scheme-frobenius]. For $m=0$ they are identities, hence finite. The base Frobenii are finite by [lem-trf-scheme-frobenius-finite-radicial], and induction using [lem-weil-pbc-finite-composition] makes every positive iterate finite. Hence both maps are proper by [lem-weil-pbc-finite-proper]. The Cartesian square is the square of [lem-trf-frobenius-open-square].",
    "uses": [
-    "lem-cbc-proetale-extension-zero",
-    "lem-exc-proetale-open-unit",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "fix-prop-adjunctions",
-    "lem-trf-open-square-exchange",
-    "fix-prop-coherence",
+    "def-trf-scheme-frobenius",
+    "lem-trf-scheme-frobenius-finite-radicial",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-finite-proper",
+    "lem-trf-frobenius-open-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-graph-operator.proof.md",
+    "place": "*(3)*, properness of the iterates"
+   }
+  },
+  {
+   "text": "*(3c): the operator formulas and comparison.* By [prop-trf-graph-operator],\n$$T_c(v)=R\\Gamma_c(X,v)\\circ\\iota_X\\circ R\\Gamma_c(X,\\eta),\\qquad\nT_{\\bar c}(\\bar v)=R\\Gamma(\\bar X,\\bar v)\\circ\\iota_{\\bar X}\\circ R\\Gamma(\\bar X,\\bar\\eta),$$\nwhere $\\eta:K\\to Rh_*M$ and $\\bar\\eta:j_!K\\to R\\bar h_*L\\bar h^*j_!K$ are the ordinary units. Here $\\iota_X$ and $\\iota_{\\bar X}$ use proper coincidence and compact-support composition for $a_Xh=a_X$ and $a_{\\bar X}\\bar h=a_{\\bar X}$; the proper target identifies its ordinary and compact cohomology by [prop-functor-package]. Define\n$$\\gamma:j_!Rh_*M\\xrightarrow{\\sim}R\\bar h_*j_!M$$\nby composing the compact-support comparisons for $jh=\\bar h j$, with proper coincidence for $h,\\bar h$ ([prop-functor-package], clause (3)). Use the canonical choice-independent composition and identity normalization of [thm-sf-comp-composition] throughout.",
+   "uses": [
+    "prop-trf-graph-operator",
     "prop-functor-package",
-    "lem-trf-frobenius-open-square",
     "thm-sf-comp-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-graph-operator.proof.md",
-    "place": "*Step A: the units.*"
+    "place": "*(3)*, graph formulas and definition of gamma"
+   }
+  },
+  {
+   "text": "*Step A: the units.* Apply [lem-trf-finite-horizontal-shriek-mate] to $f=f'=j$, $p=h=\\Phi^m$, $g=\\bar h=\\bar\\Phi^m$: the square is Cartesian by [lem-trf-frobenius-open-square], $g$ is finite by (3b), and $K\\in D^b_{ctf}$. For its $\\operatorname{Ex}_!$ use the compactification $(j,\\operatorname{id}_{\\bar X})$ [def-weil-compactifications-refinements], whose base change along $\\bar h$ is again $(j,\\operatorname{id}_{\\bar X})$. In [def-exchange-projection], $\\operatorname{Ex}_{*,\\mathrm{id}}$ is built from the identity adjunction and pullback composition, hence is the identity by [fix-prop-coherence]; so $\\operatorname{Ex}_{!,K}=\\beta_K$, the open base change of [lem-cbc-proetale-extension-zero-base-change]. By [lem-cbc-finite-open-exchange-scalars] with $a=\\operatorname{id}_A$, $\\beta_K^{-1}$ is the $j_!\\dashv j^{-1}$ adjunct of $h^{-1}u_K$ followed by the composition comparison for $\\bar hj=jh$, with $u_K$ the unit, invertible by [lem-exc-proetale-open-unit]; so $\\beta_K$ restricts to the identity on $X$ after the pullback identifications. So does $b_{m,K}$, by [lem-trf-open-square-exchange]. A map out of $j_!M$ is determined by its adjunct under the exact degreewise adjunction of [lem-cbc-proetale-extension-zero]; hence $\\beta_K=b_{m,K}=\\operatorname{Ex}_{!,K}$. The theorem's $\\chi_M$ is $\\gamma_M$: both use the same compact-support composition/proper-coincidence maps for $jh=\\bar hj$. Its unit equation gives\n$$\\gamma\\circ j_!\\eta=R\\bar h_*b_m\\circ\\bar\\eta:j_!K\\longrightarrow R\\bar h_*j_!M.$$\nThis is the unit compatibility used in Step B.",
+   "uses": [
+    "lem-trf-finite-horizontal-shriek-mate",
+    "lem-trf-frobenius-open-square",
+    "def-exchange-projection",
+    "lem-trf-open-square-exchange",
+    "def-weil-compactifications-refinements",
+    "fix-prop-coherence",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-cbc-finite-open-exchange-scalars",
+    "lem-exc-proetale-open-unit",
+    "lem-cbc-proetale-extension-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-graph-operator.proof.md",
+    "place": "*Step A: the units.*, normalized open-square mate specialization"
    }
   },
   {
@@ -114,25 +136,27 @@
   "def-trf-frobenius-coefficient-morphism",
   "lem-cbc-proetale-extension-zero",
   "lem-exc-proetale-open-unit",
-  "def-weil-pbc-etale-origin-witness",
-  "lem-weil-pbc-comparison-pullback",
-  "prop-trf-graph-operator",
-  "prop-functor-package",
+  "lem-trf-witnessed-open-pullback",
+  "thm-sf-ctf-stability",
+  "lem-trf-compactification-cohomology",
   "def-trf-scheme-frobenius",
-  "thm-sf-comp-composition",
-  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-trf-scheme-frobenius-finite-radicial",
   "lem-weil-pbc-finite-composition",
   "lem-weil-pbc-finite-proper",
-  "def-weil-pbc-proetale-operations",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "fix-prop-adjunctions",
+  "prop-trf-graph-operator",
+  "prop-functor-package",
+  "thm-sf-comp-composition",
+  "lem-trf-finite-horizontal-shriek-mate",
+  "def-exchange-projection",
+  "def-weil-compactifications-refinements",
   "fix-prop-coherence",
-  "lem-trf-compactification-cohomology"
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-finite-open-exchange-scalars"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-graph-operator.proof.md",
-  "place": "Complete five-part blueprint proof, with site-level stalk citation and explicit open-restriction unit calculation; composition compatibility cited from its actual theorem"
+  "place": "Retained blueprint steps (1), (2), (3) and Steps A/B; witness-transport subargument extracted, properness and graph formulas separated, and the unit calculation supplied by the existing finite-horizontal mate theorem specialized to the open square."
  },
  "mathlib_searches": [
   {
@@ -214,7 +238,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -254,8 +278,8 @@
   "date": "2026-10-17",
   "item": "lem-trf-compactification-graph-operator",
   "worker": "stage1",
-  "summary": "Audited and repaired the inherited five-step split against the current blueprint and the actual cited statements. Replaced the inapplicable ordinary ringed-space stalk theorem with the existing pro-etale extension theorem and open-unit theorem. Replaced the appeal to the proof of open exchange by an explicit section/restriction calculation using K-injective preservation and composite ordinary units. Replaced the inaccurate attribution of composition compatibility to refinement coherence with the actual compact-support composition theorem and proved coherence. Retained all explicit etale-origin witnesses. Added their definition and extension-by-zero to statement dependencies. No new nodes or attachments. Second reading fixes the boundary stalk typing, makes the pullback and open-extension witnesses explicit, and cites finite composition and finite-implies-proper for the graph maps.",
-  "blueprint": "Realizes the current blueprint proof file at *(1)*, *(2)*, *(3)*, *Step A: the units.*, and *Step B: transport to cohomology.*",
+  "summary": "Repair of the human long-step return: kept the statement, Lean/audit record and steps (1), (2), B unchanged. Replaced old step 3 by witnessed-domain, properness and graph-formula steps, extracting the derived witness comparison into one unsplit node. Replaced old step 4 by the existing finite-horizontal shriek-mate statement specialized to the same open Frobenius square. Also cited the actual Frobenius finiteness theorem now named by its definition. Restored root citations.json and preserved all prior Mathlib search records.",
+  "blueprint": "Original *(1)* and *(2)* are steps 1–2; *(3)* is steps 3–5, using lem-trf-witnessed-open-pullback for its derived witness subargument; Step A is step 6, using lem-trf-finite-horizontal-shriek-mate on the same open square; Step B is unchanged as step 7.",
   "tool_uses": [
    {
     "node": "lem-cbc-proetale-extension-zero",
@@ -264,22 +288,6 @@
    {
     "node": "lem-exc-proetale-open-unit",
     "why": "The generic pro-etale open unit is used to restrict maps out of j_!K; no trace-formula-unit node states this."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-pullback",
-    "why": "The generic etale/pro-etale inverse-image comparison transports the given witness, independently of the trace-formula argument."
-   },
-   {
-    "node": "lem-cbc-proetale-extension-zero-comparison",
-    "why": "The generic open-extension site comparison transports the witness to j_!K and j_!M."
-   },
-   {
-    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "why": "Generic exact-adjoint homological algebra justifies deriving the explicit open-restriction section identity."
-   },
-   {
-    "node": "fix-prop-adjunctions",
-    "why": "The ordinary composite-unit formula supplies the restriction compatibility of Frobenius units; only clauses (1) and (3) are used, with no exceptional-adjoint hypothesis."
    },
    {
     "node": "fix-prop-coherence",
@@ -296,6 +304,10 @@
    {
     "node": "lem-weil-pbc-finite-proper",
     "why": "Generic finite-implies-proper fact verifies the graph-operator hypothesis for positive Frobenius iterates; used as a scheme-theoretic tool only."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Its explicit finite-coefficient pullback clause (i) verifies the Dctf domain of the pulled-back complex; this is the generic preservation theorem of the six-functor package, not a replacement trace-formula route."
    }
   ]
  },
@@ -309,14 +321,15 @@
   "fix-prop-coherence",
   "thm-sf-comp-composition",
   "lem-weil-pbc-finite-composition",
-  "lem-weil-pbc-finite-proper"
+  "lem-weil-pbc-finite-proper",
+  "thm-sf-ctf-stability"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q48-85f7b2590",
-  "group": "Q48",
+  "reviewer": "NT-cc-NP-c31fc9e3a",
+  "group": "NP",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-85f7b2590 (reviewer sub-agent of L); spot-checked: I read all the mathematics in full: the blueprint statement and proof in both main-20261015 and master (identical text), unit sk-thm-trace-formula step 2, and the statement of every cited node. The proof follows the blueprint route and no SGA source is cited. Step checks: (1) the induction directions agree with each other: b_m=b_{1}∘LΦ̄^*b_{m-1} by pasting, and the recursion in def-trf-frobenius-coefficient-morphism peels off LΦ^* the same way; b_0=id; no invertibility is used. (2) The stalk dichotomy comes from lem-cbc-proetale-extension-zero (pro-étale geometric stalks), and j^*j_!≅id with j^*b_m=id gives v̄_ȳ=v_ȳ. The disputed-statement retyping is a correct typing repair: A^1⊂P^1 with ȳ=∞ has no stalk of K, and both conclusions are kept. (3) The witnesses for LΦ^{m*}K, j_!K and j_!M are explicit; Φ^m is proper via finite-composition and finite-proper; the graph-operator hypotheses hold. (4) Step A checks out: injectivity of restriction on maps out of j_!K, the section formula, K-injective preservation, the units from fix-prop-adjunctions (1) and (3), and the exchange normalization; it no longer uses another node's proof. (5) Step B rests on naturality of C_{j,-} plus choice-independence and associativity in thm-sf-comp-composition; this correctly replaces the refinement-only coherence node. Edge cases checked: m=0, m=1, j=id, the empty scheme, K=0, v=0 and the boundary point ∞. There are no new nodes and no duplicates. The tool_uses declared in the split report are accepted as generic black-box tools. Three repairs are in fixes/: (1, B3) the statement now cites def-weil-proetale-geometric-stalk for stalks, inline and in stmt_deps; (2, E4 wording) the step 3 pair (j_!^et L_m, …) is relabelled as the witness of j_!M, not M; (3, C4) step 4's claim j^*γ=id now cites open base change (prop-functor-package (4) on the square of lem-trf-frobenius-open-square), exchange and composition coherence (fix-prop-coherence) and the identity normalization of thm-sf-comp-composition; uses was extended and proof_deps is unchanged and equals the union of the uses.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-c31fc9e3a (reviewer sub-agent of L); spot-checked: FIX for one fault (C4/E5), repaired in fixes/; I read all the mathematics in full. Sources: main-20261015 blueprint proof (1),(2),(3), Steps A/B and unit sk-thm-trace-formula step 2. The route follows the blueprint and no SGA is used. Steps 1, 2, 3a, 3b, 3c and B check against the cited statements: pasting and naturality of b_m; stalks via lem-cbc-proetale-extension-zero and the j^*b_m normalization; witnesses via the new node; M in Dctf via thm-sf-ctf-stability(i); finite and proper iterates; prop-trf-graph-operator. Step A applies lem-trf-finite-horizontal-shriek-mate (unit sk-d-weil-push, on route, no cycle) with f=f'=j, g=Phi-bar^m finite, p=Phi^m; its chi is gamma and its equation is exactly gamma∘j_!eta = R h-bar_* b_m ∘ eta-bar. Fault: step 6 asserted without justification that the open exchange inside def-exchange-projection, i.e. beta of lem-cbc-proetale-extension-zero-base-change, equals b_m of lem-trf-open-square-exchange. Repair: Ex_{*,id}=id by fix-prop-coherence. lem-cbc-finite-open-exchange-scalars (a=id) gives beta^{-1} as the adjunct of h^{-1}u_K with u invertible (lem-exc-proetale-open-unit), so beta restricts to the identity on X; so does b_m. Maps out of j_!M are determined by their adjuncts (lem-cbc-proetale-extension-zero), so beta=b_m. The uses and proof_deps are updated, the added nodes are on the route and the step is 1563 characters. New node lem-trf-witnessed-open-pullback: statement only and self-contained; the witness types check; small cases u=id, an identity open and empty U hold; it is not a duplicate of def-weil-pbc-etale-origin-witness, lem-weil-pbc-comparison-pullback, lem-cbc-proetale-extension-zero-comparison, def-sf-etale-origin-subcategory or def-sf-comparison-derived-pullback; it is not a parent clause; three kinds of search are recorded. The declared tool_uses are accepted. The statement is unchanged and no target is weakened.; 1 file(s) fixed by the reviewer"
  }
 }
