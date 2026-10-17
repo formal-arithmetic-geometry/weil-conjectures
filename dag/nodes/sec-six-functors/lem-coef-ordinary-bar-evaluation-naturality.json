@@ -241,5 +241,48 @@
   "group": "Q132",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-f1b4c50a0 (reviewer sub-agent of L); spot-checked: PASS: I read the whole item and its 7 steps and checked each one; I made no fixes. I also read the cited statements (lem-coef-bousfield-kan-comparison-calculus for its BK formulas and diag definition, def-weil-pbc-simplicial-set, and def-coef-zigzag-homotopy-calculus as a statement dependency), the parent lem-coef-ordinary-two-sided-bar-comparison (its step 8 is the only user, and its step 4 regrouping matches V exactly), and paragraph 2 of the main-20261015 proof of prop-coef-integral-exceptional-adjoint. Every calculation holds. (1) Postcomposing the slice arrows with P(v_{0,alpha(0)}) gives a contravariant functor. (2) The q-rows are BK_{C/Px_0}(X∘dom), and the mixed operators commute. (3) Evaluation commutes in both directions: X(Pv)X(t_0) = X(Pv t_0), and X(t_b)X(h_{0b})beta* = X(t_0)beta* = beta*X(t_0). (4) V' and U' are well typed and compatible with all operators, using strict PK = HP' on morphisms and naturality of eta. (5) The square is the naturality square of eta at t'_0. (6) For composite data, lambda_d = eta_{Jd} theta_d. (7) diag U equals BK_A(XP) literally. I tested the edge cases alpha(0) = 0, the d_0 faces, degeneracies, empty A, C = [0] and non-invertible eta; all hold. No weak-equivalence content of the BK node is used. Nothing is circular, there are no new nodes, and there is no duplicate: an rg over dag/nodes found only unrelated hits, and BK functoriality does not state this result. The Mathlib searches cover all three kinds, and I agree there is no Mathlib match. The route stays in the same unit, and no tool_uses are needed. I could not open Dwyer–Kan 9.10 myself: it is not under literature/ (the report has a WANTED line) and this machine blocks network access. That does not affect the verdict, because proof_origin is 'agent' and every step is an elementary calculation I checked independently. This is not a target node, and no SGA source is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b54957509",
+  "group": "NV",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, Lean declarations, docstrings, edge cases, report sections, searches, and universes; scompile.py reproduced clean sandbox and library compilation with no errors or warnings. No substantive or mechanical defects found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.OrdinaryBarEvaluationNaturality",
+  "declaration": "SSet.OrdinaryBarEvaluation.evaluation_naturality",
+  "declarations": [
+   "SSet.OrdinaryBarEvaluation.Data",
+   "SSet.OrdinaryBarEvaluation.Change",
+   "SSet.OrdinaryBarEvaluation.identity",
+   "SSet.OrdinaryBarEvaluation.compose",
+   "SSet.OrdinaryBarEvaluation.Indices",
+   "SSet.OrdinaryBarEvaluation.VObj",
+   "SSet.OrdinaryBarEvaluation.UObj",
+   "SSet.OrdinaryBarEvaluation.VOperator",
+   "SSet.OrdinaryBarEvaluation.UOperator",
+   "SSet.OrdinaryBarEvaluation.operator_laws",
+   "SSet.OrdinaryBarEvaluation.V",
+   "SSet.OrdinaryBarEvaluation.U",
+   "SSet.OrdinaryBarEvaluation.evaluationApp",
+   "SSet.OrdinaryBarEvaluation.evaluationApp_naturality",
+   "SSet.OrdinaryBarEvaluation.evaluation",
+   "SSet.OrdinaryBarEvaluation.sliceChange",
+   "SSet.OrdinaryBarEvaluation.VChangeApp",
+   "SSet.OrdinaryBarEvaluation.UChangeApp",
+   "SSet.OrdinaryBarEvaluation.changeApp_laws",
+   "SSet.OrdinaryBarEvaluation.VChange",
+   "SSet.OrdinaryBarEvaluation.UChange",
+   "SSet.OrdinaryBarEvaluation.evaluation_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/OrdinaryBarEvaluationNaturality.lean",
+  "statement": "theorem evaluation_naturality : (∀ D : Data.{u}, BousfieldKan.diagonal (Functor.curry.obj (U D)) = BousfieldKan.BK D.A (D.P ⋙ D.X)) ∧ (∀ {D E : Data.{u}} (f : Change D E), evaluation D ≫ UChange f = VChange f ≫ evaluation E) ∧ (∀ D : Data.{u}, VChange (identity D) = 𝟙 _ ∧ UChange (identity D) = 𝟙 _) ∧ (∀ {D E F : Data.{u}} (f : Change D E) (g : Change E F), VChange (compose f g) = VChange f ≫ VChange g ∧ UChange (compose f g) = UChange f ≫ UChange g) ∧ (∀ {D E : Data.{u}} (f : Change D E), Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (evaluation D) ≫ Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (UChange f) = Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (VChange f) ≫ Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (evaluation E))",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Explicit slice-chain dependent sums reuse BKObj and BKMap. Product-index functors are the two bisimplicial sets. All induced maps use the specified functors and coefficient transformation; equality transports implement the supplied strict indexing square. The helper law theorems are precisely the well-definedness and strict-functoriality clauses of this node, with its proof steps in their docstrings."
  }
 }

@@ -221,5 +221,31 @@
   "group": "Q137",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-b1b0783fa (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, now split into 6 steps, no new nodes), every cited node's statement, the parent's use of the item, and the sources. Stacks 093V lemma-tensor-product-locally-constant (line 8610) has its proof 'Omitted', so writing the argument out is correct. Also read 0GMW lemma-sheafification-tensor (3606), 03EL lemma-tensor-product-pullback (3649), 00WJ, 010N, 00YV labels, and the last paragraph of blueprint main-20261015 def-weil-rationalization-karoubi. Base change T=F⊗_{k_Y}k'_Y from Mod(k_Y) to Mod(k'_Y) on Y_proet matches def-pur-sheaf-tensor-product. The coefficient category and constructibility are the intrinsic def-weil-proetale-constructible-sheaf with Λ=k,k'. The target is not weakened. Step 1: finite basis, and the second clause of 0GMW with O = the constant presheaf k gives T(F)=F^I naturally; checked. Step 2: exactness through the finite biproduct, with the k'-action carried by restriction of scalars; genuinely elementary. Step 3: the module pullback of def-weil-proetale-inverse-image agrees with the one in def-weil-pbc-proetale-operations through c. lem-pe-constant-left-module-inverse-image plus 03EL with N=k'_Y gives i*T(F)≅i*F⊗k'_Z, k'-linear by naturality; it also holds on localized sites; no étaleness is assumed. Step 4: 0GMW applied to constant presheaves gives the constant sheaf of V⊗k', which is finite when V is. Step 5: original strata are kept; stalks via the colimit construction are ((F|_Z)_z)^I, finite. Step 6: clause (c) of lem-sp-exact-functor-preserves-homology on three terms needs no boundedness; T(0)=0. Small cases tested: k=k', F=0, F_q→F_{q^d} with F=k_Y, empty Y or stratum, unbounded complexes, r=s. No cycles: closures of all cited nodes computed. No duplicates among lem-pod-lisse-tensor-and-scalar-extension, lem-weil-pbc-locally-constant-tensor and lem-sfb-*. The unit cites no units; accepted tool_uses: lem-pc-sites-module-sheafification-tensor, lem-pe-constant-left-module-inverse-image, lem-weil-pbc-ringed-topoi-module-pullback-tensor. No SGA. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8119c4f4a",
+  "group": "Q59",
+  "result": "fix",
+  "note": "Statement and dependencies match; immutable and corrected modules compile via scompile.py. Added required source/blueprint docstring to finiteFieldScalarExtension_additive."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFieldSheafScalarExtension",
+  "declaration": "AlgebraicGeometry.Scheme.finiteFieldSheafScalarExtension",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteFieldConstantRingMap",
+   "AlgebraicGeometry.Scheme.finiteFieldScalarExtension",
+   "AlgebraicGeometry.Scheme.finiteFieldScalarExtension_additive",
+   "AlgebraicGeometry.Scheme.finiteFieldScalarExtensionComplex",
+   "AlgebraicGeometry.Scheme.finiteFieldSheafScalarExtension"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteFieldSheafScalarExtension.lean",
+  "statement": "theorem finiteFieldSheafScalarExtension (Y : Scheme.{u}) {k k' : Type u} [Field k] [Field k'] [Finite k] [Finite k'] (f : k →+* k') : PreservesFiniteLimits (finiteFieldScalarExtension Y f) ∧ PreservesFiniteColimits (finiteFieldScalarExtension Y f) ∧ (∀ (F : pbcModules Y (adicLisseConstantRing Y (ULift.{u + 1} k))), IsConstructibleProEtaleCoefficientModuleSheaf Y (ULift.{u + 1} k) F → IsConstructibleProEtaleCoefficientModuleSheaf Y (ULift.{u + 1} k') ((finiteFieldScalarExtension Y f).obj F) ∧ (∀ (S : LocallyClosedStratification Y) (i : Fin S.n) (K : Sieve (⊤_ (S.domain i).ProEt)), K ∈ ProEt.topology (S.domain i) (⊤_ (S.domain i).ProEt) → ∀ (V : (S.domain i).ProEt) (g : V ⟶ ⊤_ (S.domain i).ProEt), K g → ∀ (M : ModuleCat.{u + 1} (ULift.{u + 1} k)), Finite M → Nonempty ((SheafOfModules.overFunctor _ V).obj ((proEtaleModuleInverseImage (S.immersion i) (adicLisseConstantRing Y (ULift.{u + 1} k))).obj F) ≅ (SheafOfModules.overFunctor _ V).obj ((proEtaleModuleInverseImage (S.immersion i) (adicLisseConstantRing Y (ULift.{u + 1} k))).obj ((adicLisseConstantModules Y (ULift.{u + 1} k)).obj M))) → Nonempty ((SheafOfModules.overFunctor _ V).obj ((proEtaleModuleInverseImage (S.immersion i) (adicLisseConstantRing Y (ULift.{u + 1} k'))).obj ((finiteFieldScalarExtension Y f).obj F)) ≅ (SheafOfModules.overFunctor _ V).obj ((proEtaleModuleInverseImage (S.immersion i) (adicLisseConstantRing Y (ULift.{u + 1} k'))).obj ((adicLisseConstantModules Y (ULift.{u + 1} k')).obj ((ModuleCat.extendScalars (RingHom.ulift.{u + 1, u + 1} f)).obj M))))) ∧ (∀ (C : CochainComplex (pbcModules Y (adicLisseConstantRing Y (ULift.{u + 1} k))) ℤ) (i : ℤ), ∃ e : (finiteFieldScalarExtensionComplex Y f C).homology i ≅ (finiteFieldScalarExtension Y f).obj (C.homology i), (∀ (r s : ℤ), r ≤ s → (∀ j : ℤ, IsConstructibleProEtaleCoefficientModuleSheaf Y (ULift.{u + 1} k) (C.homology j)) → (∀ j : ℤ, j < r ∨ s < j → IsZero (C.homology j)) → (∀ j : ℤ, (IsConstructibleProEtaleCoefficientModuleSheaf Y (ULift.{u + 1} k') ((finiteFieldScalarExtensionComplex Y f C).homology j)) ∧ (∀ j : ℤ, j < r ∨ s < j → IsZero ((finiteFieldScalarExtensionComplex Y f C).homology j))))))",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-8119c4f4a"
  }
 }
