@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-thm-existence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The exceptional inverse image",
@@ -20,43 +20,137 @@
  ],
  "proof": [
   {
-   "text": "The proof has two parts: a formal existence theorem, giving (1)–(3), and a geometric\nrestriction theorem, giving (4).",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [sk-lem-brown-hypotheses] to each of the standing schemes and the given admissible coefficient. It asserts essential smallness of $\\Dctf$, compactness of each of its objects in the ambient localizing closure, and generation by any small skeleton. This proves (1), including the size condition required by Brown representability.",
+   "uses": [
+    "sk-lem-brown-hypotheses"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+    "place": "(1), compactness and generation"
+   }
   },
   {
-   "text": "Compactness is verified using perfect local models on strata. For finite $A$,\n[sk-prop-ctf-finite-compact] works with bounded flat constructible complexes. For fields the\nExt argument of [sk-thm-constructible-compactness] applies, and the integral version is\n[sk-prop-int-compactness]. These arguments use local models, continuity and cohomological\nbounds; for $Rj_*$ they use its finite cohomological dimension and continuity. A\ncompactification $f=pj$ exists by Nagata's theorem [sk-thm-nagata-compactification]. Put\n$Rf_!=Rp_*j_!$, a functor $\\Loc(\\Dctf(X,\\Lambda))\\to\\Loc(\\Dctf(Y,\\Lambda))$. Proper finiteness,\nfinite Tor control and the finite cohomological dimension of $p$ make this a\ncoproduct-preserving functor between the localizing categories, and the comparisons between\ncompactifications are built from proper base change. [sk-prop-sf-existence] then applies\nBrown representability once, for every admissible coefficient ring, including finite rings.",
+   "text": "By [lem-weil-pbc-qcqs-over-affine], both $X$ and $Y$ are qcqs, since their structure maps to $\\operatorname{Spec}k$ are separated and finite type. The $k$-morphism $f$ is itself separated and of finite type: writing $a_X=a_Y\\circ f$ for the structure maps, $a_X$ is separated, so $f$ is separated by [lem-weil-pbc-separated-cancellation](b); $a_X$ is locally of finite type, so $f$ is locally of finite type by [lem-weil-pbc-proper-fp-permanence](f); and $X$ is quasi-compact while $Y$ is quasi-separated, so $f$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1). This is the separated finite-type hypothesis on $f$ required by every cited statement below and in steps 3 and 4. Thus [sk-thm-nagata-compactification] applies to $f$ over the qcqs base $Y$ and supplies a dense compactification $f=p\\circ j$, with $j$ a quasi-compact open immersion and $p$ proper. For this compactification, [det-sf-comp-coherence-single] states that $Rp_*j_!$ restricts to the exact, sum-preserving functor between the two localizing categories and carries $\\Dctf(X,\\Lambda)$ into $\\Dctf(Y,\\Lambda)$. Its qcqs hypothesis on $Y$ has just been checked. Moreover, [det-sf-comp-coherence-cocycle] provides the canonical comparison isomorphisms between compactifications, independent of a common refinement and satisfying the identity and cocycle relations. Use the chosen compactification of the standing setting to obtain $Rf_!$; the comparisons show that it has the asserted compactification interpretation. This proves all of (2), including preservation of $\\Dctf$.",
    "uses": [
-    "sk-thm-constructible-compactness",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
     "sk-thm-nagata-compactification",
+    "det-sf-comp-coherence-single",
+    "det-sf-comp-coherence-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+    "place": "(2), restriction, preservation and compactification comparisons"
+   }
+  },
+  {
+   "text": "For the same coefficient, morphism, and chosen compactification, [sk-prop-sf-existence] applies Brown representability to the exact coproduct-preserving functor from step 2 on the compactly generated category of step 1. Its conclusion gives the exact right adjoint $f^!$ and natural bijections $\\operatorname{Hom}(Rf_!M,N)\\simeq\\operatorname{Hom}(M,f^!N)$ on the full localizing categories. This is (3); a single application works uniformly for all the admissible coefficients, including arbitrary finite $A$.",
+   "uses": [
     "sk-prop-sf-existence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+    "place": "(3), the general Brown adjoint"
+   }
   },
   {
-   "text": "The restriction to $\\Dctf$ is geometric. For $\\mathbf P^1$ the diagonal class and trace give\nthe unit and counit of the adjunction explicitly; this computes $f^!$ for the projections of\naffine space. Closed immersions are treated by the localization triangle and finiteness of\n$Rj_*$. This constructibility of $Rj_*$ is proved after Brown, using the computed smooth\nadjunction; for finite coefficients its finite Tor bound is checked by the scalar projection\nformula. Local factorization as a closed immersion followed by a smooth projection proves\nthe general case. The finite-coefficient restriction is [sk-prop-sf-rf-shriek-preservation];\nthe integral and rational cases are [sk-thm-int-restriction] and [sk-thm-restriction].",
+   "text": "For finite $A$, [sk-prop-sf-rf-shriek-preservation] asserts precisely that the right adjoint from step 3 carries $\\Dctf(Y,A)$ into $\\Dctf(X,A)$ and that the adjunction restricts. For $\\mathcal O_E$, [det-prop-int-brown-adjoint] identifies the integral Brown right adjoint with the $\\Lambda=\\mathcal O_E$ instance of this same general right adjoint, with its adjunction. Hence [sk-thm-int-restriction] gives the required preservation and restricted adjunction for that functor. For $E$ and $\\overline{\\mathbf Q}_\\ell$, [sk-thm-restriction] explicitly refers to the right adjoint of the general existence theorem and gives the same preservation and restricted adjunction. The cases $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$ are the cases $\\mathcal O_E$ and $E$ with $E=\\mathbf Q_\\ell$. Thus (4) holds for every listed coefficient.",
    "uses": [
     "sk-prop-sf-rf-shriek-preservation",
+    "det-prop-int-brown-adjoint",
+    "sk-thm-int-restriction",
     "sk-thm-restriction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+    "place": "Finite, integral and rational restriction cases"
+   }
+  },
+  {
+   "text": "For the non-finite coefficients only, apply [det-def-localizing-closure-ctf-equals-bc](2) to $X$ and $Y$, which are qcqs by step 2. It gives $\\Dctf=\\Dbc$ as full subcategories of the same module-object derived category, and equality of their localizing closures. Consequently the functors and adjunction already obtained give exactly the asserted $\\Dbc$ version. No such equality is used for a finite nonregular $A$, so no regularity or Gorenstein hypothesis has been imposed on the finite coefficient ring.",
+   "uses": [
+    "det-def-localizing-closure-ctf-equals-bc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+    "place": "(1), the integral and field category equalities and final coefficient specializations"
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-constructible-compactness",
-  "sk-thm-nagata-compactification",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-prop-int-brown-adjoint",
+  "det-sf-comp-coherence-cocycle",
+  "det-sf-comp-coherence-single",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-separated-cancellation",
+  "sk-lem-brown-hypotheses",
   "sk-prop-sf-existence",
   "sk-prop-sf-rf-shriek-preservation",
+  "sk-thm-int-restriction",
+  "sk-thm-nagata-compactification",
   "sk-thm-restriction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/sk-thm-existence.proof.md",
+  "place": "Current unit proof, compactness/Brown and restriction paragraphs, expanded by det-existence-localizing.proof.md and det-existence-restriction.proof.md; coefficient equality from the existing proetale-coefficients lemma."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Brown|[Ee]xceptional|Dctf|constructible.*[Aa]djoint",
+   "results": "{\"t\": \"2026-10-17T23:00:59Z\", \"tool\": \"grep\", \"query\": \"Brown|[Ee]xceptional|Dctf|constructible.*[Aa]djoint\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean\"], \"digest\": \"f49cf713643c81f7\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the complete geometric theorem: the returned declarations do not assert compact generation and exceptional adjunction with constructible preservation for these coefficient categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.IsTriangulated",
+   "results": "{\"t\": \"2026-10-17T23:01:00Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.Functor.IsTriangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated\", \"CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated\", \"CategoryTheory.Adjunction.isTriangulated_leftAdjoint\", \"CategoryTheory.Adjunction.isTriangulated_rightAdjoint\", \"CategoryTheory.Adjunction.IsTriangulated.mk'\", \"CategoryTheory.Adjunction.IsTriangulated.mk''\", \"CategoryTheory.Adjunction.IsTriangulated.mk\"], \"digest\": \"43b1a649abed13ad\"}",
+   "date": "2026-10-17",
+   "verdict": "Partial categorical exactness result only: the triangulated-right-adjoint lemma assumes an existing adjunction; it does not construct this geometric functor or prove constructibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image right adjoint to compactly supported pushforward on localizing constructible pro-etale derived categories for finite and l-adic coefficients",
+   "results": "{\"t\": \"2026-10-17T23:01:01Z\", \"tool\": \"leanfinder\", \"query\": \"Exceptional inverse image right adjoint to compactly supported pushforward on localizing constructible pro-etale derived categories for finite and l-adic coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"SheafOfModules.instIsRightAdjointPushforward\", \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"LightCondMod.LocallyConstant.adjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\"], \"digest\": \"6900004f1c8429e3\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the complete geometric theorem: the returned declarations do not assert compact generation and exceptional adjunction with constructible preservation for these coefficient categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible complexes compact generators Brown representability six functors shriek finite Tor amplitude",
+   "results": "{\"t\": \"2026-10-17T23:01:08Z\", \"tool\": \"leanfinder\", \"query\": \"Constructible complexes compact generators Brown representability six functors shriek finite Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.IsLE\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.TStructure.t\", \"DerivedCategory.instIsGEObjSingleFunctor\"], \"digest\": \"d60ff5073b226b0f\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the complete geometric theorem: the returned declarations do not assert compact generation and exceptional adjunction with constructible preservation for these coefficient categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of exact exceptional inverse image preserving constructible complexes for finite and l-adic coefficient rings",
+   "results": "{\"t\": \"2026-10-17T23:01:09Z\", \"tool\": \"leansearch\", \"query\": \"Existence of exact exceptional inverse image preserving constructible complexes for finite and l-adic coefficient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ExactAt.of_iso\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"HomologicalComplex.ExactAt.unop\", \"HomologicalComplex.ExactAt.op\", \"Topology.IsConstructible.preimage_of_isClosedEmbedding\", \"HomologicalComplex.hasExactColimitsOfShape\", \"CategoryTheory.ShortComplex.Exact.op\", \"HomologicalComplex.exactAt_op_iff\"], \"digest\": \"be6aba3343e7a031\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the complete geometric theorem: the returned declarations do not assert compact generation and exceptional adjunction with constructible preservation for these coefficient categories."
+  },
+  {
+   "tool": "grep",
+   "query": "Brown|[Ee]xceptional|Dctf|[Cc]onstructible.*[Aa]djoint",
+   "results": "{\"t\": \"2026-10-17T23:01:14Z\", \"tool\": \"grep\", \"query\": \"Brown|[Ee]xceptional|Dctf|[Cc]onstructible.*[Aa]djoint\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\"], \"digest\": \"32a93714b8abd40f\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the complete geometric theorem: the returned declarations do not assert compact generation and exceptional adjunction with constructible preservation for these coefficient categories."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -92,5 +186,69 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "sk-thm-existence",
+  "worker": "stage1",
+  "summary": "Repair of the reader-approved delivery returned at landing: omit any unit-record edit and deliver only the item and report. Rechecked the current DAG statements and expanded the retained proof to cite compact-support preservation and comparisons, identify the integral Brown adjoint, and cite the actual Dctf=Dbc theorem with its qcqs hypothesis verified. Statement unchanged; no new nodes. Maintainer-reader fix 2026-10-18: step 2 now verifies that f is separated and of finite type (Mathlib leaves lem-weil-pbc-separated-cancellation, lem-weil-pbc-proper-fp-permanence, lem-weil-pbc-qcqs-morphism-permanence) before Nagata and the cited comparison/existence/restriction statements, which all assume it; the blueprint-cited off-unit statements are declared in tool_uses.",
+  "blueprint": "Step 1 realizes compactness/generation; step 2 realizes the compactification paragraph and det-existence-localizing (2); step 3 realizes its Brown application (3); step 4 realizes the finite/integral/field restriction paragraph; step 5 supplies the final Dbc and coefficient-specialization assertions.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-brown-hypotheses",
+    "why": "step 1: compactness, essential smallness and generation; cited by det-existence-localizing.proof.md (1),(3) of this unit's blueprint proof (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+   },
+   {
+    "node": "sk-thm-nagata-compactification",
+    "why": "step 2: existence of a compactification of f; cited in sk-thm-existence.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+   },
+   {
+    "node": "det-sf-comp-coherence-single",
+    "why": "step 2: Rp_*j_! exact, sum-preserving, Dctf-preserving; the statement of sk-prop-sf-comp-coherence cited by det-existence-localizing.proof.md (2) (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+   },
+   {
+    "node": "det-sf-comp-coherence-cocycle",
+    "why": "step 2: independence of the compactification; sk-prop-sf-comp-coherence, cited by det-existence-localizing.proof.md (2) (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+   },
+   {
+    "node": "sk-prop-sf-existence",
+    "why": "step 3: the single Brown application; cited in sk-thm-existence.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+   },
+   {
+    "node": "sk-prop-sf-rf-shriek-preservation",
+    "why": "step 4: finite-coefficient restriction; cited in sk-thm-existence.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+   },
+   {
+    "node": "det-prop-int-brown-adjoint",
+    "why": "step 4: identification of the integral Brown adjoint with the general one; sk-prop-int-brown, cited by det-existence-restriction.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+   },
+   {
+    "node": "sk-thm-int-restriction",
+    "why": "step 4: integral restriction; cited in sk-thm-existence.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+   },
+   {
+    "node": "sk-thm-restriction",
+    "why": "step 4: field restriction; cited in sk-thm-existence.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-lem-brown-hypotheses",
+  "sk-thm-nagata-compactification",
+  "det-sf-comp-coherence-single",
+  "det-sf-comp-coherence-cocycle",
+  "sk-prop-sf-existence",
+  "sk-prop-sf-rf-shriek-preservation",
+  "det-prop-int-brown-adjoint",
+  "sk-thm-int-restriction",
+  "sk-thm-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NC-4815d2397",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-4815d2397 (reviewer sub-agent of L); spot-checked: I read the item and all eleven cited node statements in full, along with the main-20261015 unit proof files (_section, sk-thm-existence.proof, det-existence-localizing.proof, det-existence-restriction.proof). The statement is byte-identical to the unit statement and is not weakened. The coefficient category is the same module-object D(Mod_{Λ_X}) everywhere, with Loc taken using ambient sums. The delivery creates no new nodes and introduces no cycle or SGA citation. Steps 1, 3, 4 and 5 are correct as cited: brown-hypotheses gives (1); sk-prop-sf-existence gives the single Brown application for (3); in step 4, rf-shriek-preservation covers finite A, det-prop-int-brown-adjoint identifies the integral adjoint so that sk-thm-int-restriction applies, and sk-thm-restriction covers E and Q̄_ℓ; in step 5, ctf-equals-bc(2) applies to the non-finite coefficients only, with its qcqs hypothesis checked. One fault (C1/E1): step 2 applied Nagata, comp-coherence-single/-cocycle and later sk-prop-sf-existence/restriction, all of which assume f is separated and of finite type, but it checked only that X and Y are qcqs. I repaired it with the existing Mathlib leaves lem-weil-pbc-separated-cancellation(b), lem-weil-pbc-proper-fp-permanence(f) and lem-weil-pbc-qcqs-morphism-permanence(1). I also declared the off-unit statements cited by the unit's own blueprint proof files in split_report.tool_uses and accepted them. I left the unit's realized fields to maintenance, because the previous landing refused a unit-file edit. Batch 5: the five flagged citations (int-brown-adjoint, comp-coherence-single/-cocycle, brown-hypotheses, int-restriction) are the construction of Rf_!/f^! and Dctf preservation. The Poincaré-duality assumption leaf takes that adjunction as a given notion, and the construction is not a step of the duality or trace-formula proofs. The closure reaches those chapters only through generic tools: the étale stalk tensor lemma, a Mathlib localization leaf, the lisse/π₁ correspondence and the module-object comparison. So the citations are genuinely outside the assumptions.; 1 file(s) fixed by the reviewer"
  }
 }
