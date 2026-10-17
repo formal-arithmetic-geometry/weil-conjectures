@@ -265,5 +265,30 @@
   "group": "Q75",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-b24a2b032 (reviewer sub-agent of L); spot-checked: PASS. I read all eight steps in full and they are correct. Unchecked: Dwyer–Kan, Calculating simplicial localizations §5.8(ii) is not in literature/ and the service blocks network access, so I could not read it. The proof is correctly marked agent-written (WANTED recorded) and the statement is unchanged; I verified it independently. Steps 1–3 (reduced signed words, the tree of reduced walks from v0, graph covering with unique lifting for a given source or target, surjectivity from connectedness, q reflects identities): correct. Cases checked: one vertex, one edge, one loop (integer-line cover), two parallel edges, infinite connected graph. Step 4: lem-coef-free-category-groupoid-nerve gives NC~ -> NG a weak equivalence. G is indiscrete on a tree, and lem-coef-nerve-natural-homotopy-equivalence with id => const_r contracts |NG|. Under the def-cbc 'contractible = weakly contractible' convention that already proves the clause. Step 5 (CW structure plus Whitehead) is correct but more than needed. I accept its two declared tool_uses, lem-cbc-realization-cw-subcomplex and lem-cbc-whitehead-cw-homotopy-inverse: sec-six-functors uses sec-smooth-purity and four other six-functors nodes already cite them. Steps 6–8: rightward ad=bc and leftward ab=dc rectangle lifting, preservation of reducedness, compatibility with faces and degeneracies, and the length-0 case: correct. proof_deps equals the union of uses; no cycle (the item is not in the 248-node dependency closure). The parent comparison's step 3 uses the statement exactly. No new nodes, no fixes, and no DAG node duplicates the item. One cosmetic point: the report says created.item was changed to this item, but the file correctly keeps the parent item."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f6616fef",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Item lem-coef-free-factor-hammock-universal-cover-reduction (Q52 @ 6f6616fe): the node copy changes only lean, and lean.statement matches the theorem signature verbatim. Each clause checked against the node, Dwyer-Kan 5.8(ii) and the dependency declarations. Hypotheses: Quiver.{v} Q with Paths Q; Nonempty Q; undirected connectivity via Symmetrify. Cover: IsCovering projection, surjective on vertices, nonempty tree via unique walks without an edge followed by its reverse (excludes loops and parallel edges, no root orientation), actual ContractibleSpace of the nerve realization, V.functor.IsCovering stated explicitly. Isomorphism: simplicial iso from the coproduct over the full fibre of y to the reduced-hammock PresentationData H, pinned by projection_formula; projections of reduced hammocks are reduced and the endpoint types are provably equal, so the HEq is satisfiable. Map of pairs with top on both sides. Universes: both sides land in SSet.{max u v}. mapColumns is an exact copy of hammockMapColumns, needed because that helper forces equal universes; no restriction added. Edge cases checked: point, single edge, loop (integer-line cover), parallel edges, infinite graphs, x=y and x!=y, empty or disconnected graphs excluded by hypotheses. Gates: no hollow definitions, only one sorry, source and blueprint docstrings present, no stronger assumptions, real Worker report and Second reading by Q52 sections. nt_compile.py --json on the snapshot file: exit 0, no errors or warnings, 3.9 s. Minor notes only (generated blueprint-index.tsv differs from the side clone; the coherent-nerve dependency is a conventions-only import). No fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FreeFactorHammockUniversalCoverReduction",
+  "declaration": "SSet.Hammock.free_factor_hammock_universal_cover_reduction",
+  "declarations": [
+   "CategoryTheory.FreeCategoryUniversalCover",
+   "CategoryTheory.FreeCategoryUniversalCover.functor",
+   "CategoryTheory.FreeCategoryUniversalCover.mapColumns",
+   "SSet.Hammock.UniversalCoverDecomposition",
+   "SSet.Hammock.free_factor_hammock_universal_cover_reduction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FreeFactorHammockUniversalCoverReduction.lean",
+  "statement": "theorem free_factor_hammock_universal_cover_reduction (Q : Type u) [Quiver.{v} Q] (hne : Nonempty Q) (hconnected : ∀ a b : Quiver.Symmetrify Q, Nonempty (Quiver.Path a b)) : ∃ V : FreeCategoryUniversalCover Q, V.functor.toPrefunctor.IsCovering ∧ ∀ (x : Paths V.vertices) (y : Paths Q), Nonempty (UniversalCoverDecomposition V x y)",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

@@ -26,7 +26,9 @@
  },
  "stmt_deps": [
   "def-weil-pbc-simplicial-set",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-simplicial-tensor-cotensor",
+  "def-coef-coherent-localization-interface"
  ],
  "proof": [
   {
@@ -279,5 +281,40 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c986a97b3",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Statement field unchanged from live; stmt_deps gains two landed definition nodes the statement actually uses; lean.statement verbatim; declarations list complete. All 12 node clauses match: added HasLimits/HasColimits/functorial factorizations are node hypotheses (Mathlib ModelCategory has only finite ones); SM7 via actual cornerMap, J.rlp plus weak equivalence when either input is trivial; Cof/Bif with inherited Mathlib enrichment (probe-confirmed); Quasicategory of SimplicialNerve(Bif); FiniteReedy.IsLocalization on full functor categories; H.bifibrant then e are coherent equivalences with simplexwise-pinned maps and j normalized to inclusion then q; InclusionComparisons for the three predicates; mapping/composition/Q-R formulas via natural spans and a degreewise enriched comparison (existential H checked satisfiable, tied to q); SpacesClause for Kan complexes. No hollow definitions, docstrings and 8-step proof present, single sorry, imports per rule 7, lines at most 100. nt_compile.py clean in 2.3 s; axioms propext/sorryAx/choice/Quot.sound. Preflight not run (needs the delivery checkout). Minor: no Main definitions list in the module docstring."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialModelNerveLocalization",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialModelNerveLocalization.lean",
+  "declaration": "CategoryTheory.simplicial_model_nerve_localization",
+  "statement": "theorem simplicial_model_nerve_localization (M : Type u) [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [MorphismProperty.HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] [SimplicialCategory M] (_T : SimplicialTensorCotensor M) (_hSM7 : SatisfiesSM7 M) : SSet.Quasicategory (SSet.uliftFunctor.{t}.obj (SimplicialNerve (Bif M))) ∧ (∃ (C : SSet.{max u v t}) (q : largeNerve.{u, v, t} M ⟶ C), IsLocalization (weakEquivalences M) q ∧ InclusionComparisons q ∧ ∃ H : MappingPresentation.{u, v, t} M, IsLocalization ((weakEquivalences M).inverseImage (ObjectProperty.ι (fun X : M ↦ IsCofibrant X))) H.ordinary ∧ SSet.Enhanced.IsFunctorEquivalence H.bifibrant ∧ MappingFormulas H ∧ ∃ e : SimplicialNerve (MappingObjects.{u, v, t} M H.enrichment) ⟶ C, SSet.Enhanced.IsFunctorEquivalence e ∧ SSet.Enhanced.AreNaturallyEquivalent (H.ordinary ≫ e) (inclusionNerve.{u, v, t} (fun X : M ↦ IsCofibrant X) ≫ q) ∧ ∃ j : largeNerve.{u, v, t} (Bif M) ⟶ SSet.uliftFunctor.{t}.obj (SimplicialNerve (Bif M)), IsOrdinaryNerveMap j ∧ SSet.Enhanced.AreNaturallyEquivalent (j ≫ H.bifibrant ≫ e) (inclusionNerve.{u, v, t} (fun X : M ↦ IsCofibrant X ∧ IsFibrant X) ≫ q)) ∧ SpacesClause.{v}",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.SimplicialModelLocalization.cornerMap",
+   "CategoryTheory.SimplicialModelLocalization.SatisfiesSM7",
+   "CategoryTheory.SimplicialModelLocalization.Cof",
+   "CategoryTheory.SimplicialModelLocalization.Bif",
+   "CategoryTheory.SimplicialModelLocalization.inclusionNerve",
+   "CategoryTheory.SimplicialModelLocalization.IsOrdinaryNerveMap",
+   "CategoryTheory.SimplicialModelLocalization.resizePath",
+   "CategoryTheory.SimplicialModelLocalization.resizePaths",
+   "CategoryTheory.SimplicialModelLocalization.MappingObjects",
+   "CategoryTheory.SimplicialModelLocalization.MappingPresentation",
+   "CategoryTheory.SimplicialModelLocalization.InclusionComparisons",
+   "CategoryTheory.SimplicialModelLocalization.SpacesClause",
+   "CategoryTheory.SimplicialModelLocalization.MappingFormulas",
+   "CategoryTheory.simplicial_model_nerve_localization"
+  ],
+  "note": "Second reading replaced the assumed conclusion record by the localization theorem: actual bifibrant nerve, full coherent localization predicate, SM7, functorial factorizations, degreewise enriched mapping comparison, replacement spans, coherent normalization, and the separate Kan-complex spaces clause. The additional statement dependencies are existing landed definitions, not new theorem prerequisites."
  }
 }
