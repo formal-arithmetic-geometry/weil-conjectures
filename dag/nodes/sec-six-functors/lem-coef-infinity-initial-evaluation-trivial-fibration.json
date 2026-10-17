@@ -12,9 +12,70 @@
   "def-coef-infinity-fibrations",
   "def-weil-pbc-trivial-kan-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the opposite simplicial set defined in clause (4) of [lem-coef-infinity-relative-cone-equivalence]: an operator $\\alpha:[m]\\to[n]$ is replaced by $\\alpha^r(a)=n-\\alpha(m-a)$. That clause makes $D^{\\mathrm{op}}$ a quasicategory and gives $\\operatorname{Map}_{D^{\\mathrm{op}}}(x,d)\\simeq\\operatorname{Map}_D(d,x)$. The latter spaces are weakly contractible because $d$ is initial, in the sense of [def-cbc-enhanced-diagrams-cones]. Hence [lem-coef-infinity-terminal-anodyne], with $J=D^{\\mathrm{op}}$ and $t=d$, makes $j:\\{d\\}\\hookrightarrow D^{\\mathrm{op}}$ right anodyne.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-equivalence",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-terminal-anodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02J5",
+    "place": "Corollary 4.7.3.22, final-object implication (1) => (3), applied to the opposite quasicategory; the cited opposite-mapping-space comparison supplies its hypothesis."
+   }
+  },
+  {
+   "text": "Order reversal takes $\\Lambda_i^n\\hookrightarrow\\Delta^n$ to $\\Lambda_{n-i}^n\\hookrightarrow\\Delta^n$. Since $0<k\\leq n$ implies $0\\leq n-k<n$, any right-horn lifting square for $q^{\\mathrm{op}}:T^{\\mathrm{op}}\\to B^{\\mathrm{op}}$ becomes a left-horn lifting square for $q$; [def-coef-infinity-fibrations] supplies a filler, whose opposite fills the original square. Thus $q^{\\mathrm{op}}$ is a right fibration. Apply [lem-coef-infinity-right-fibration-exponentiation] to $q^{\\mathrm{op}}$ and the right-anodyne $j$ of step 1. It gives a trivial Kan fibration $\\rho^r:\\operatorname{Fun}(D^{\\mathrm{op}},T^{\\mathrm{op}})\\to\\operatorname{Fun}(D^{\\mathrm{op}},B^{\\mathrm{op}})\\times_{\\operatorname{Fun}(\\{d\\},B^{\\mathrm{op}})}\\operatorname{Fun}(\\{d\\},T^{\\mathrm{op}})$. All these simplicial sets lie in the fixed universe.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-right-fibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0154",
+    "place": "Proposition 4.2.5.4, right-fibration/right-anodyne clause; explicit reversal of the left-fibration horn condition."
+   }
+  },
+  {
+   "text": "For any $H:K\\times\\Delta^n\\to X$, take its opposite and precompose in the second factor with $r_n:\\Delta^n\\cong(\\Delta^n)^{\\mathrm{op}}$, which sends a monotone $\\beta:[m]\\to[n]$ to $a\\mapsto n-\\beta(m-a)$. This gives the degree-$n$ bijection $\\operatorname{Fun}(K,X)^{\\mathrm{op}}\\cong\\operatorname{Fun}(K^{\\mathrm{op}},X^{\\mathrm{op}})$: reversing twice is the inverse, and the formula for $\\alpha^r$ in step 1 verifies the simplicial operators from [def-cbc-enhanced-diagrams-cones]. The formula commutes with composition in $X$ and restriction in $K$, so the map $\\rho^r$ of step 2 is the opposite of $\\rho:\\operatorname{Fun}(D,T)\\to Y=\\operatorname{Fun}(D,B)\\times_{\\operatorname{Fun}(\\{d\\},B)}\\operatorname{Fun}(\\{d\\},T)$. Reversal preserves the boundary, since it permutes vertices and thus preserves non-surjectivity of simplex maps. Consequently a boundary lifting square for $\\rho$ reverses to one for $\\rho^r$; reverse its filler to obtain a filler for the original square. The degree-zero bijections also give vertex surjectivity of $\\rho$. By [def-weil-pbc-trivial-kan-fibration], $\\rho$ is a trivial Kan fibration.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0154",
+    "place": "Proposition 4.2.5.4, elementary passage from the right-fibration result to the left-fibration result using explicit order reversal and the internal-functor definition."
+   }
+  },
+  {
+   "text": "Define $\\iota:T_b\\to Y$ in degree $n$ by $t:\\Delta^n\\to T_b\\mapsto(p\\operatorname{pr}_D,t)$, viewing $t$ as a map $\\{d\\}\\times\\Delta^n\\to T$. This pair belongs to $Y_n$ because $qt$ is constant at $b=p(d)$. The degreewise pullback of $\\rho$ along $\\iota$ consists of pairs $(H,t)$ with $qH=p\\operatorname{pr}_D$ and $H|_{\\{d\\}\\times\\Delta^n}=t$; eliminating the uniquely determined $t$ identifies it with the stated $\\operatorname{Fun}_{/B}(D,T)$ and its projection with $\\operatorname{ev}_d$. For a boundary square for this projection, compose its bottom map with $\\iota$ and lift against $\\rho$ using step 3. The equality of its image with $\\iota(t)$ forces $qH=p\\operatorname{pr}_D$ and the prescribed evaluation, so the filler lies in this pullback. For $n=0$, vertex surjectivity of $\\rho$ lifts $\\iota(t)$ and the same equalities put its lift in the pullback. These are exactly the surjectivity and boundary clauses of [def-weil-pbc-trivial-kan-fibration].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/038R",
+    "place": "Proposition 5.6.6.19, (2) => (3), with the pullback along the fixed base map and the boundary and vertex lifts written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-relative-cone-equivalence",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-terminal-anodyne",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-right-fibration-exponentiation",
+  "def-weil-pbc-trivial-kan-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/038R",
+  "place": "Proposition 5.6.6.19, (2) => (3), expanded via the existing DAG versions of Kerodon 02J5 and 0154, with explicit opposite and strict-fiber calculations. Online sources read; local archival copies WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,10 +146,38 @@
    "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"line\": \"160\", \"text\": \"/-- The map that picks up the initial vertex of a 2-simplex, as a morphism in the 2-truncated\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"line\": \"172\", \"text\": \"/-- The initial vertex of a 2-simplex in a 2-truncated simplicial set. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Pairing\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/IsUniquelyCodimOneFace.lean\", \"line\": \"18\", \"text\": \"file `Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing.lean` for the\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/IsUniquelyCodimOneFace.lean\", \"line\": \"19\", \"text\": \"study of strong (inner) anodyne extensions.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Rank.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.PairingCore\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RankNat.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Rank\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Inner.Basic\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.UnionProd\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"line\": \"16\", \"text\": \"# Inner anodyne extensions and pushout-products, inner fibrations and pullbacks\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"line\": \"18\", \"text\": \"This file is mirrored from `SSet/AnodyneExtensions/PushoutProduct`.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"line\": \"21\", \"text\": \"and `j : X₂ ⟶ Y₂` is an inner anodyne extension, then the pushout-product\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Basic\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"line\": \"14\", \"text\": \"# Inner anodyne extensions\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"line\": \"17\", \"text\": \"`Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Basic`.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"line\": \"19\", \"text\": \"*Inner* anodyne extensions form a property of morphisms in the category of simplicial\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"line\": \"22\", \"text\": \"object argument, inner anodyne extensions can be defined (and are defined here)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/UnionProd.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Op\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/UnionProd.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Rank\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/UnionProd.lean\", \"line\": \"19\", \"text\": \"`Δ[m + 1] ⊗ ∂Δ[n]` in `Δ[m + 1] ⊗ Δ[n]` is a (strong) anodyne extension\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.IsUniquelyCodimOneFace\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing.lean\", \"line\": \"17\", \"text\": \"complete combinatorial characterization of strong (inner) anodyne extensions.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing.lean\", \"line\": \"18\", \"text\": \"Strong (inner) anodyne extensions are transfinite compositions of pushouts of coproducts\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing.lean\", \"line\": \"19\", \"text\": \"of (inner) horn inclusions, i.e. this is similar to (inner) anodyne extensions but\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing.lean\", \"line\": \"36\", \"text\": \"a strong anodyne extension (TODO @joelriou), and the converse is also true\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search. Returned boundary/horn generators and Kan-Quillen lifting declarations do not give restriction at an initial vertex into a left fibration. The Loogle hits concern the empty simplicial set as an initial object of SSet. The grep hits concern ordinary or inner anodyne extensions, not initial-vertex left anodyneness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial sets one sided anodyne extensions and restriction of internal hom along an initial vertex",
+   "results": "{\"t\": \"2026-10-17T03:15:16Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial sets one sided anodyne extensions and restriction of internal hom along an initial vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.RelativeMorphism.ofSimplex₀\", \"SSet.stdSimplex.faceRepresentableBy\", \"SSet.S.mk_map_le\", \"SSet.horn.ι\", \"SSet.PtSimplex.RelStruct.map\", \"SSet.horn\"], \"digest\": \"1e3500dd50754149\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading; returned all-horn Kan-Quillen generators, ordinary anodyne extension closure, or unrelated initial-vertex facts, not initial-object evaluation into a one-sided fibration. Both proposed helper nodes are instead removed using existing DAG statements."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAnodyne|rightAnodyne|initial.*[Vv]ertex|[Vv]ertex.*initial",
+   "results": "{\"t\": \"2026-10-17T03:15:43Z\", \"tool\": \"grep\", \"query\": \"leftAnodyne|rightAnodyne|initial.*[Vv]ertex|[Vv]ertex.*initial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/SimpleGraph/Paths.lean\", \"Mathlib/Combinatorics/Graph/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\"], \"digest\": \"bc67845aa183b298\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading; returned all-horn Kan-Quillen generators, ordinary anodyne extension closure, or unrelated initial-vertex facts, not initial-object evaluation into a one-sided fibration. Both proposed helper nodes are instead removed using existing DAG statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"anodyne\"",
+   "results": "{\"t\": \"2026-10-17T03:15:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"anodyne\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsAnodyneExtensions\", \"SSet.instIsStableUnderRetractsAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionAnodyneExtensions\", \"SSet.instRespectsIsoAnodyneExtensions\", \"SSet.instRespectsIsoStrongAnodyneExtensions\", \"SSet.anodyneExtensions\"], \"digest\": \"e628c2cf94db43d8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading; returned all-horn Kan-Quillen generators, ordinary anodyne extension closure, or unrelated initial-vertex facts, not initial-object evaluation into a one-sided fibration. Both proposed helper nodes are instead removed using existing DAG statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative internal hom of simplicial sets has boundary lifting against a one sided horn fibration and an anodyne cofibration",
+   "results": "{\"t\": \"2026-10-17T03:15:44Z\", \"tool\": \"leanfinder\", \"query\": \"Relative internal hom of simplicial sets has boundary lifting against a one sided horn fibration and an anodyne cofibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.KanComplex.hornFilling\"], \"digest\": \"e86de6284182dd73\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading; returned all-horn Kan-Quillen generators, ordinary anodyne extension closure, or unrelated initial-vertex facts, not initial-object evaluation into a one-sided fibration. Both proposed helper nodes are instead removed using existing DAG statements."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-left-fibration-initial-equivalence",
@@ -100,7 +189,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, first and last derived Hom / inverse-limit comparisons: coherent mapping functors and universal arrows; evaluation at an initial vertex supplies the maps and coherent inverse witnesses needed for the left-fibration comparison.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: evaluation at an initial object supplies the coherent mapping-functor restriction used in the derived Hom comparison.",
    "via": [
     "lem-coef-infinity-left-fibration-initial-equivalence",
     "lem-coef-twisted-arrow-left-fibration",
@@ -116,5 +205,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-initial-evaluation-trivial-fibration",
+  "worker": "stage1",
+  "summary": "Second reading removed both proposed helper nodes as consequences of existing opposite-mapping-space, terminal-anodyne and right-fibration-exponentiation statements. Wrote out order reversal, horn orientation, internal-functor comparison, boundary fillers and the strict pullback over p. Item statement and historical created provenance unchanged; zero new nodes.",
+  "blueprint": "Realizes proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the coherent mapping-functor restriction at an initial object used in the derived Hom comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NY-3b77e0bc1",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-3b77e0bc1 (reviewer sub-agent of L); spot-checked: I read the whole split. The item statement, source, created, unit and stmt_deps are byte-identical to the pre-split side-DAG copy. The statement matches Kerodon 038R Prop 5.6.6.19 (2)=>(3), read online: left fibrations over a quasicategory, initial d, strict Fun_{/B} and strict fiber T_b, trivial Kan including n=0. There are 0 new nodes, because the worker's two helper duals were dropped in the second reading. Step 1: clause (4) of relative-cone-equivalence gives D^op as a quasicategory and Map_{D^op}(x,d)~Map_D(d,x), which is contractible by def-cbc's definition of initial; terminal-anodyne (<= direction) then makes {d}->D^op right anodyne. Step 2: reversal sends Lambda^n_k to Lambda^n_{n-k} (n=1 checked), so q^op is a right fibration; right-fibration-exponentiation, which has no quasicategory hypothesis, gives rho^r. Step 3: I checked that r_n(beta)(a)=n-beta(m-a) respects operators and is an involution, so Fun(K,X)^op~Fun(K^op,X^op) naturally; r_n preserves the boundary, so rho is a trivial Kan fibration; correctly marked elementary. Step 4: iota(t)=(p pr_D,t) lands in Y, and the pullback is exactly Fun_{/B}(D,T) with ev_d; correctly marked elementary. proof_deps equals the union of the step uses. The DAG traversal (170 nodes) finds no cycle. All statement dependencies are in sk-prop-sf-biduality-general and the rest are definitions, so no tool_uses are needed and no SGA source is cited. Edge cases checked: Delta^0, Delta^1 with T=Delta^1, the cosieve {1}->Delta^1 giving an empty->empty map, empty T, and an empty base (impossible). Six candidate duplicates were read and none duplicates the item. One cosmetic change: blueprint.from.place was rephrased but still names paragraph 2 of prop-coef-integral-exceptional-adjoint; I left it. No fixes written."
  }
 }
