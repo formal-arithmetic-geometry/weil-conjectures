@@ -407,5 +407,27 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q24-0a299d71e (reviewer sub-agent of L); spot-checked: Full mathematical review completed; all item steps, new nodes, cited statements, Stacks/Temkin sources, edge cases, route constraints, searches, and tool uses checked. Review written to review.md; no repairs required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalNormalizationAdjunction",
+  "declaration": "AlgebraicGeometry.nodal_normalization_adjunction",
+  "declarations": [
+   "AlgebraicGeometry.IsNodalNormalizationAdjunctionComparison",
+   "AlgebraicGeometry.nodal_normalization_adjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalNormalizationAdjunction.lean",
+  "statement": "theorem nodal_normalization_adjunction (k : Type u) [Field k] [IsAlgClosed k] {C : Scheme.{u}} (p : C ⟶ Spec (.of k)) [LocallyOfFiniteType p] [QuasiCompact p] (hpure : ∀ T : Set C, T ∈ irreducibleComponents C → topologicalKrullDim T = 1) (hnodal : ∀ x : C, x ∉ p.smoothLocus → IsClosed ({x} : Set C) ∧ ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) (C.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}), ∀ a : k, e (AdicCompletion.of (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) (C.presheaf.stalk x) (C.presheaf.germ ⊤ x (Set.mem_univ x) (p.appTop ((Scheme.ΓSpecIso (.of k)).inv a)))) = Ideal.Quotient.mk _ (MvPowerSeries.C a)) : (∀ x : C, x ∉ p.smoothLocus → Nat.card {T : irreducibleComponents C // x ∈ T.1} = 1 ∨ Nat.card {T : irreducibleComponents C // x ∈ T.1} = 2) ∧ (∀ (Z : Scheme.{u}) [IsIntegral Z] (i : Z ⟶ C) [IsClosedImmersion i], Set.range i ∈ irreducibleComponents C → ∀ x : C, x ∉ p.smoothLocus → Nat.card {z : Z.normalization // (Z.fromNormalization ≫ i) z = x} = if x ∈ Set.range i then if ∃ T ∈ irreducibleComponents C, x ∈ T ∧ T ≠ Set.range i then 1 else 2 else 0) ∧ ∃ F : FlatLCIAdjunctionSystem p 1, F.IsNormalized ∧ (∀ U : C.Opens, Smooth (U.ι ≫ p) → ∃ eU : (Scheme.Modules.tensorPullback U.ι).obj (F.line (FlatLCIBaseChange.identity p)) ≅ Scheme.Modules.exteriorSheaf (U.ι ≫ p).relativeDifferentials 1, F.IsSmoothComparison (FlatLCIBaseChange.identity p) U eU) ∧ ∀ (Z : Scheme.{u}) [IsIntegral Z] (i : Z ⟶ C) [IsClosedImmersion i], Set.range i ∈ irreducibleComponents C → IsProper (i ≫ p) → IsFinite Z.fromNormalization ∧ IsProper (Z.fromNormalization ≫ i ≫ p) ∧ Smooth (Z.fromNormalization ≫ i ≫ p) ∧ IsConnectedCurve (Z.fromNormalization ≫ i ≫ p) ∧ (∀ z : Z, z ∉ (i ≫ p).smoothLocus ↔ i z ∉ p.smoothLocus ∧ ¬ ∃ T ∈ irreducibleComponents C, i z ∈ T ∧ T ≠ Set.range i) ∧ (∀ z : Z, z ∉ (i ≫ p).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (Z.presheaf.stalk z)) (Z.presheaf.stalk z) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}))) ∧ IsIso (pullback.snd Z.fromNormalization (i ≫ p).smoothLocus.ι) ∧ ∃ B : Z.normalization.IdealSheafData, B.radical = B ∧ B.IsInvertible ∧ (B.support : Set Z.normalization) = {z | (Z.fromNormalization ≫ i) z ∉ p.smoothLocus} ∧ ∃! e : (Scheme.Modules.tensorPullback (Z.fromNormalization ≫ i)).obj (F.line (FlatLCIBaseChange.identity p)) ≅ ((Z.fromNormalization ≫ i) ≫ p).relativeDifferentials ⊗ Scheme.Modules.dual B.toModules, IsNodalNormalizationAdjunctionComparison p F (Z.fromNormalization ≫ i) B e",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-306021e94",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Statement, dependencies, source correspondence, edge cases, docstrings, universes, route-pivot compliance, and recorded compilation checked; no substantive findings."
  }
 }

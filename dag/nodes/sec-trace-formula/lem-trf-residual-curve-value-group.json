@@ -13,7 +13,8 @@
   "def-kun-transcendence-degree",
   "def-pc-field-extension",
   "def-weil-field",
-  "def-weil-residue-field"
+  "def-weil-residue-field",
+  "def-trf-valuation-comap-residue"
  ],
  "proof": [
   {
@@ -152,5 +153,23 @@
   "group": "N4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-63706e036 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. I repaired the item’s incorrect created metadata (it named another item/group) in fixes/dag/nodes/sec-trace-formula/lem-trf-residual-curve-value-group.json; the residue-field statement dependency is retained. No nodes were dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ResidualCurveValueGroup",
+  "declaration": "residual_curve_value_group",
+  "file": "lean/Sheaf/TraceFormula/ResidualCurveValueGroup.lean",
+  "statement": "theorem residual_curve_value_group (K : Type u) (L : Type v) [Field K] [Field L] [Algebra K L] [IsSepClosed K] (hfg : (⊤ : IntermediateField K L).FG) (htrdeg : Algebra.trdeg K L = 1) (O : ValuationSubring L) (hres : @Algebra.trdeg (IsLocalRing.ResidueField (O.comap (algebraMap K L))) (IsLocalRing.ResidueField O) _ _ (O.comapResidueAlgebra (algebraMap K L)) = 1) : (∀ z : Lˣ, ∃ c : Kˣ, ∃ a : Oˣ, ((a : O) : L) = (z : L) / algebraMap K L (c : K)) ∧ (∀ z : O, z ≠ 0 → ∃ c : O.comap (algebraMap K L), c ≠ 0 ∧ ∃ a : Oˣ, ((a : O) : L) = (z : L) / algebraMap K L (c : K)) ∧ (∀ z : O, z ∈ IsLocalRing.maximalIdeal O → z ≠ 0 → ∃ c : O.comap (algebraMap K L), c ∈ IsLocalRing.maximalIdeal (O.comap (algebraMap K L)) ∧ c ≠ 0 ∧ ∃ a : Oˣ, ((a : O) : L) = (z : L) / algebraMap K L (c : K))",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8c34c6289",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Reviewed immutable delivery, dependencies, source, declarations, docstrings, edge cases, route-pivot compliance, and report sections. Worker compile passed; retry was blocked by server SSH refusal. Review written to review.md."
  }
 }

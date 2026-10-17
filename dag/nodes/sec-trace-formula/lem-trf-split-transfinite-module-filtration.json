@@ -221,5 +221,23 @@
   "group": "Q96",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-cf3cff23f (reviewer sub-agent of L); spot-checked: Read the item, report, governing documents, unit route, both cited DAG nodes, and Stacks Tags 058U/058V in full. The statement preserves every hypothesis and endpoint case; the section construction, transfinite surjectivity induction, finite-support injectivity argument, and linear inverse are correct. Mathlib matches and searches were checked; no duplicates, hidden lemmas, route violations, SGA citations, or repairs were found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.SplitTransfiniteModuleFiltration",
+  "declaration": "Module.nonempty_linearEquiv_directSum_of_split_transfinite_filtration",
+  "file": "lean/Sheaf/LinearAlgebra/SplitTransfiniteModuleFiltration.lean",
+  "statement": "theorem nonempty_linearEquiv_directSum_of_split_transfinite_filtration (R : Type u) [CommRing R] (X : Type v) [AddCommGroup X] [Module R X] (κ : Ordinal.{w}) (F : Set.Iic κ → Submodule R X) (hmono : Monotone F) (hzero : F ⟨0, bot_le (a := κ)⟩ = ⊥) (htop : F ⟨κ, le_refl κ⟩ = ⊤) (hcont : ∀ l : Set.Iic κ, Order.IsSuccLimit l.val → ∀ x : X, x ∈ F l ↔ ∃ β : Set.Iic κ, β < l ∧ x ∈ F β) (hsplit : ∀ (α : Set.Iic κ) (hα : α.val < κ), ∃ r : F ⟨Order.succ α.val, Order.succ_le_of_lt hα⟩ →ₗ[R] F α, ∀ x : F α, r (Submodule.inclusion (hmono (a := α) (b := ⟨Order.succ α.val, Order.succ_le_of_lt hα⟩) (Order.le_succ α.val)) x) = x) : Nonempty (X ≃ₗ[R] (⨁ α : Set.Iio κ, (F ⟨Order.succ α.val, Order.succ_le_of_lt (a := α.val) (b := κ) α.property⟩ ⧸ (F ⟨α.val, le_of_lt (a := α.val) (b := κ) α.property⟩).comap (F ⟨Order.succ α.val, Order.succ_le_of_lt (a := α.val) (b := κ) α.property⟩).subtype)))",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0000576a0",
+  "group": "Q91",
+  "result": "fix",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, and scompile evidence pass; fixed the missing substantive Second reading by Q91 report section."
  }
 }

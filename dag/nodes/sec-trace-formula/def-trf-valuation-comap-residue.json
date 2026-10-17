@@ -1,0 +1,118 @@
+{
+ "id": "def-trf-valuation-comap-residue",
+ "kind": "definition",
+ "title": "Canonical residue extension of a restricted valuation ring",
+ "status": "split",
+ "statement": "Let $K,L$ be fields [def-weil-field], let $f:K\\to L$ be a field embedding, and let $O\\subseteq L$ be a valuation subring (a subring containing $x$ or $x^{-1}$ for every nonzero $x\\in L$). Define $R=f^{-1}(O)$. The restriction $i:R\\to O$, $r\\mapsto f(r)$, is local: it reflects units. Define the canonical residue-field embedding $\\bar i:\\kappa(R)\\to\\kappa(O)$ by $\\bar i([r])=[f(r)]$, where the residue fields [def-weil-residue-field] are the quotients by the maximal ideals (equivalently, the residue fields at the closed points of their spectra). The residue extension algebra structure on $\\kappa(O)$ over $\\kappa(R)$ is the one induced by $\\bar i$.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-residue-field"
+ ],
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "§2.1, extension of valued fields and residue fields; Proposition 4.3.1 proof, first stage, p. 28. Canonical restriction and induced residue extension.",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical residue field map for a valuation subring pulled back along a field embedding",
+   "results": "{\"t\": \"2026-10-17T20:43:05Z\", \"tool\": \"leansearch\", \"query\": \"canonical residue field map for a valuation subring pulled back along a field embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.residue\", \"ValuationSubring.coe_subtype\", \"ValuationSubring.subtype\", \"IsLocalRing.ResidueField.map\", \"Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap\", \"ValuationSubring.coe_comap\", \"AlgebraicGeometry.Scheme.Hom.residueFieldMap\", \"ValuationSubring.valuation\"], \"digest\": \"2b7aa04e6c5ece02\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationSubring.comap",
+   "results": "{\"t\": \"2026-10-17T20:43:06Z\", \"tool\": \"loogle\", \"query\": \"ValuationSubring.comap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"ValuationSubring.comap\", \"ValuationSubring.coe_comap\", \"ValuationSubring.comap_comap\", \"ValuationSubring.mem_comap\"], \"digest\": \"f2bad8595488bfce\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "comap.*[Rr]esidue|[Rr]esidue.*comap|comap.*[Ii]nclusion",
+   "results": "{\"t\": \"2026-10-17T20:43:06Z\", \"tool\": \"grep\", \"query\": \"comap.*[Rr]esidue|[Rr]esidue.*comap|comap.*[Ii]nclusion\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\"], \"digest\": \"e069af0de3397f94\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg comap.*[Rr]esidue|[Rr]esidue.*comap|comap.*[Ii]nclusion in WeilConjectures and lean/Sheaf; tools/blueprint_refs.py search valuation residue extension; rg valuation.*residue|residue.*valuation|valuation subring in DAG definitions",
+   "results": "No DAG definition gives restriction-induced residue extensions. Upstream ValuationSubring.comapResidue constructs a composite valuation from a residue valuation and is a different notion. Mathlib ResidueField.map requires locality of the specified restriction inclusion, for which there is no recorded interface. No matching helper in lean/Sheaf.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-residual-curve-value-group",
+  "date": "2026-10-17",
+  "group": "Q75"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The residue transcendence degree in the valued-curve argument of Temkin Proposition 4.3.1, used in the first step of the residual-curve value-group lemma.",
+   "via": [
+    "lem-trf-residual-curve-value-group",
+    "lem-trf-single-valuation-semistable-extraction",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.ValuationComapResidue",
+  "declaration": "ValuationSubring.comapResidueAlgebra",
+  "declarations": [
+   "ValuationSubring.comapResidueAlgebra"
+  ],
+  "file": "lean/Sheaf/RingTheory/ValuationComapResidue.lean",
+  "statement": "def comapResidueAlgebra {K : Type u} {L : Type v} [Field K] [Field L] (O : ValuationSubring L) (f : K →+* L) : Algebra (IsLocalRing.ResidueField (O.comap f)) (IsLocalRing.ResidueField O)",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses ValuationSubring.comapInclusion, comapInclusion_isLocalHom and comapResidueFieldMap from Sheaf.FieldTheory.AbhyankarInequality. Only the canonical residue algebra structure is declared here."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8c34c6289",
+  "group": "Q75",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8c34c6289",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Reviewed immutable delivery, dependencies, source, declarations, docstrings, edge cases, route-pivot compliance, and report sections. Worker compile passed; retry was blocked by server SSH refusal. Review written to review.md."
+ }
+}
