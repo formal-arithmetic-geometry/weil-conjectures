@@ -190,7 +190,7 @@ theorem torAmplitudeGE_iff_exists_kFlat [Etale.UpperStarPreservesFlat A] {X : Sc
           (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
             ((((g)^*[A]).mapHomologicalComplex (.up ℤ)).obj P)) ∧
         Nonempty (_root_.DerivedCategory.Q.obj P ≅ E) := by
-  refine ⟨fun hE ↦ ?_, fun ⟨P, _, -, hPk, -, ⟨e⟩⟩ ↦
+  refine ⟨fun hE ↦ ?_, fun ⟨P, _, _, hPk, _, ⟨e⟩⟩ ↦
     (torAmplitudeGE A X a).prop_of_iso e
       (_root_.DerivedCategory.torAmplitudeGE_Q_obj_of_kFlat P a hPk)⟩
   have := _root_.DerivedCategory.isGE_of_torAmplitudeGE hE

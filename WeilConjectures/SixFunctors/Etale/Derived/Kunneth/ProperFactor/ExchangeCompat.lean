@@ -92,6 +92,21 @@ lemma leftDerivedUpperStarTensorComparison_naturality_right {T R : Scheme.{u}} (
         ((-⊗ᴸ-(T)[A]).obj _).map (L((g)^*[A]).map ψ) :=
   ((leftDerivedUpperStarTensorComparison A g).app K).naturality ψ
 
+omit [HasSmallSiteSheafify A] in
+/-- `AlgebraicGeometry.Etale.map_rightDerivedLowerStarProjectionMap_comp_counit`, with the object
+of the counit written with the derived tensor product. -/
+@[reassoc]
+lemma map_rightDerivedLowerStarProjectionMap_comp_counit' {T R : Scheme.{u}} (g : T ⟶ R)
+    (M : DerivedCategory (Sheaf T.smallEtaleTopology A))
+    (L : DerivedCategory (Sheaf R.smallEtaleTopology A)) :
+    L((g)^*[A]).map (((rightDerivedLowerStarProjectionMap A g).app M).app L) ≫
+        (derivedUpperStarLowerStarAdjunction A g).counit.app
+          (((-⊗ᴸ-(T)[A]).obj M).obj (L((g)^*[A]).obj L)) =
+      ((leftDerivedUpperStarTensorComparison A g).app (R((g)_*[A]).obj M)).app L ≫
+        ((-⊗ᴸ-(T)[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app M)).app
+          (L((g)^*[A]).obj L) :=
+  map_rightDerivedLowerStarProjectionMap_comp_counit A g M L
+
 /-- The transpose of the Künneth map `κ_{E,K}` along `Lc^* ⊣ Rc_*`, written with the tensor
 comparison of `Lc^*`: it is
 `Lc^*(Rf_* E ⊗ᴸ Rg_* K) ⟶ Lc^* Rf_* E ⊗ᴸ Lc^* Rg_* K ⟶ Lp^* E ⊗ᴸ Lq^* K`, the second map being
@@ -206,18 +221,28 @@ lemma kunnethMap_derivedBaseChangeMap (aX : X ⟶ S) (aY : Y ⟶ S) (aU : U ⟶ 
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc,
     map_kunnethMap_comp_counit, Adjunction.counit_naturality,
     map_rightDerivedLowerStarCompIsoOfComp_hom_app_comp_counit_assoc]
+  dsimp only [Functor.comp_obj, Functor.whiskeringLeft₂_obj_obj_obj_obj_obj, Functor.id_obj]
   conv_rhs => rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
   erw [(leftDerivedUpperStarComp A h c c' hc'.symm).hom.naturality_assoc]
   rw [Functor.comp_map, ← Functor.map_comp_assoc]
   rw [Functor.map_comp L((c)^*[A]), Category.assoc, Adjunction.counit_naturality,
     Functor.map_comp L((c)^*[A]), Category.assoc, Adjunction.counit_naturality_assoc,
     map_kunnethMap_comp_counit_assoc]
-  simp only [Functor.map_comp, Category.assoc, map_rightDerivedLowerStarProjectionMap_comp_counit,
+  simp only [Functor.map_comp, Category.assoc, NatTrans.comp_app,
+    map_rightDerivedLowerStarProjectionMap_comp_counit'_assoc,
     leftDerivedUpperStarTensorComparison_naturality_left_assoc,
     leftDerivedUpperStarTensorComparison_naturality_right_assoc]
   rw [← leftDerivedUpperStarTensorComparison_comp_derivedTensor_assoc A h c c' hc'.symm]
   congr 1
-  done
+  simp only [derivedTensor, curriedTensor_map_app, curriedTensor_obj_map,
+    whisker_exchange_assoc, whisker_exchange]
+  simp only [← comp_whiskerRight_assoc, ← MonoidalCategory.whiskerLeft_comp]
+  congr 2
+  · rw [leftDerivedUpperStarComp_hom_app_map_counit_comp_derivedSquareUpperStarIso A j aX aU hj q c
+      hq p h sq c' hc' hp F, derivedUpperStar_map_derivedBaseChangeMap_app_counit,
+      Functor.map_comp, Category.assoc]
+  · rw [leftDerivedUpperStarComp_hom_app_map_counit_comp A h r aY c r' c' hr hr' hc' hr'c K,
+      Functor.map_comp, Category.assoc, Category.assoc]
 
 end General
 

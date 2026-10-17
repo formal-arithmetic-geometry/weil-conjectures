@@ -10,6 +10,8 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 public import WeilConjectures.Compactification.NagataCompactification
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OpenImmersion.NonClosedPoints
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OpenImmersion.ClosedPoints
 
 /-!
 # Base change for open immersions of schemes of finite type over a field
@@ -59,8 +61,18 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isOpenImmersion_of_field {K : Type 
     (j : U ⟶ X) [IsOpenImmersion j] (q₁ : W ⟶ X) (q₂ : W ⟶ Y) (hW : IsPullback q₁ q₂ aX aY)
     (e : V ⟶ U) (h : V ⟶ W) (sq : IsPullback e h j q₁) (n : ℕ) (hn : IsUnit (n : K))
     (hΛ : (n : Λ) = 0) (i : ℤ) (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsIso (Etale.baseChangeHomologyMap Λ sq i F) :=
-  sorry
+    IsIso (Etale.baseChangeHomologyMap Λ sq i F) := by
+  have key : ∀ N : WithBot ℕ∞, Etale.OpenImmersionBaseChangeBelow Λ N := by
+    intro N
+    induction N using WellFoundedLT.induction with
+    | _ N IH =>
+      intro K _ X U Y W V aX aY _ _ _ _ j _ q₁ q₂ hW e h sq n hn hΛ hdim
+      exact Etale.openImmersionBaseChangeAtMost_of_atNonClosed
+        (Etale.openImmersionBaseChangeAtNonClosed_of_below (IH _ hdim))
+        aX aY j q₁ q₂ hW e h sq n hn hΛ le_rfl
+  exact Etale.openImmersionBaseChangeAtMost_of_atNonClosed
+    (Etale.openImmersionBaseChangeAtNonClosed_of_below (key _))
+    aX aY j q₁ q₂ hW e h sq n hn hΛ le_rfl i F
 
 /-- Whether the degree-`q` base-change map of a cartesian square is an isomorphism does not depend
 on how the pushed-forward side `g` and its base change `h` are written. -/

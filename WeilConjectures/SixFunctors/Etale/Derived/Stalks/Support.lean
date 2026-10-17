@@ -44,9 +44,10 @@ instance preservesFilteredColimitsOfSize_forget_moduleCat :
 
 /-- A morphism of étale `X`-schemes is étale. -/
 lemma etale_left {X : Scheme.{u}} {W V : X.Etale} (a : W ⟶ V) : Etale a.left :=
+  have : Etale W.hom := W.prop
   have : Etale (a.left ≫ V.hom) := by
-    rw [Over.w a]
-    exact W.prop
+    rw [MorphismProperty.Over.w a]
+    infer_instance
   Etale.of_comp a.left V.hom
 
 /-- **Vanishing of germs.** Let `t` be a geometric point, over the geometric point `s` of `X`,
@@ -57,20 +58,20 @@ lemma toPresheafFiber_eq_zero_iff {X : Scheme.{u}} {Ω : Type u} [Field Ω] [IsS
     {s : Spec (.of Ω) ⟶ X} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     {V : X.Etale} (t : (pointSmallEtale s).fiber.obj V) (z : F.obj.obj (op V)) :
     (pointSmallEtale s).toPresheafFiber V t F.obj z = 0 ↔
-      ∃ (W : X.Etale) (a : W ⟶ V), t.left default ∈ Set.range a.left ∧
+      ∃ (W : X.Etale) (a : W ⟶ V), t.left (default : Spec (.of Ω)) ∈ Set.range a.left ∧
         F.obj.map a.op z = 0 := by
   constructor
   · intro h
     rw [← map_zero ((pointSmallEtale s).toPresheafFiber V t F.obj).hom] at h
     obtain ⟨W, a, w, hw, hz⟩ := ((pointSmallEtale s).toPresheafFiber_eq_iff' V t z 0).1 h
-    refine ⟨W, a, ⟨w.left default, ?_⟩, by simpa using hz⟩
+    refine ⟨W, a, ⟨w.left (default : Spec (.of Ω)), ?_⟩, by simpa using hz⟩
     rw [← hw]
     rfl
   · rintro ⟨W, a, ⟨w, hw⟩, hz⟩
     have := etale_left a
     obtain ⟨l, hl, -⟩ := exists_fac_of_etale_of_isSepClosed a.left t.left w hw
     have hls : l ≫ W.hom = s := by
-      rw [← Over.w a, ← Category.assoc, hl]
+      rw [← MorphismProperty.Over.w a, ← Category.assoc, hl]
       exact Over.w t
     have ht : (pointSmallEtale s).fiber.map a (Over.homMk l hls) = t := by
       apply Over.OverMorphism.ext
@@ -94,17 +95,19 @@ theorem isZero_sheafFiber_iff_of_apply_eq {X : Scheme.{u}}
         IsZero ((pointSmallEtale s₁).sheafFiber.obj F) →
           IsZero ((pointSmallEtale s₂).sheafFiber.obj F) from ⟨H s₁ s₂ h, H s₂ s₁ h.symm⟩
   intro Ω₁ Ω₂ _ _ _ _ s₁ s₂ h h₁
-  refine ModuleCat.isZero_of_subsingleton _ |>.mpr ⟨fun p q ↦ ?_⟩
-  suffices hp : ∀ p : ↥((pointSmallEtale s₂).sheafFiber.obj F), p = 0 by rw [hp p, hp q]
+  suffices hp : ∀ p : ↥((pointSmallEtale s₂).sheafFiber.obj F), p = 0 by
+    have : Subsingleton ↥((pointSmallEtale s₂).sheafFiber.obj F) :=
+      ⟨fun p q ↦ by rw [hp p, hp q]⟩
+    exact ModuleCat.isZero_of_subsingleton _
   intro p
   obtain ⟨V, t, z, rfl⟩ := (pointSmallEtale s₂).toPresheafFiber_jointly_surjective
     (P := F.obj) p
-  have hV : V.hom (t.left default) = s₁ default := by
-    rw [h, ← Over.w t]
-    rfl
+  have hV : V.hom (t.left (default : Spec (.of Ω₂))) = s₁ default := by
+    rw [h]
+    exact congrArg (fun f : Spec (.of Ω₂) ⟶ X ↦ f default) (Over.w t)
   obtain ⟨l, hl, hl'⟩ := exists_fac_of_etale_of_isSepClosed V.hom s₁ _ hV
   have h0 : (pointSmallEtale s₁).toPresheafFiber V (Over.homMk l hl) F.obj z = 0 :=
-    h₁.eq_of_src (𝟙 _) 0 ▸ (by simp) |>.trans rfl
+    (ModuleCat.isZero_iff_subsingleton.1 h₁).elim _ _
   obtain ⟨W, a, ⟨w, hw⟩, hz⟩ := (toPresheafFiber_eq_zero_iff F _ z).1 h0
   refine (toPresheafFiber_eq_zero_iff F t z).2 ⟨W, a, ⟨w, ?_⟩, hz⟩
   rw [hw, ← hl']

@@ -41,7 +41,15 @@ section Germs
 variable {X Y : Scheme.{u}} (q : X ⟶ Y) {Ω : Type u} [Field Ω] [IsSepClosed Ω]
   (x : Spec (.of Ω) ⟶ X)
 
-/-- The point `(v, x̄)` of `V ×_Y X` attached to a point `v` of `V` over `q x̄` by
+omit [IsSepClosed Ω] in
+@[simp]
+lemma pointSmallEtale_fiber_map_left [IsSepClosed Ω] {U U' : X.Etale} (φ : U ⟶ U')
+    (y : (pointSmallEtale x).fiber.obj U) :
+    ((pointSmallEtale x).fiber.map φ y).left = y.left ≫ φ.left :=
+  rfl
+
+/-- The point `(v, x̄)`
+ of `V ×_Y X` attached to a point `v` of `V` over `q x̄` by
 `AlgebraicGeometry.Scheme.pointSmallEtaleFiberEtaleIso` is the morphism `pullback.lift v x̄`. -/
 lemma pointSmallEtaleFiberEtaleIso_inv_app_left (V : Y.Etale)
     (v : (pointSmallEtale (x ≫ q)).fiber.obj V) :
@@ -146,8 +154,48 @@ lemma toPresheafFiber_comp_sheafFiber_map_descentTransition {Z : Scheme.{u}} (g 
   rw [toPresheafFiber_upperStarCompSheafFiberIso_inv]
   simp only [descentTransitionAux, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
     Category.assoc]
-  trace_state
-  sorry
+  have hpt : (pointSmallEtale x).fiber.map
+      ((MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) q g r hr).hom.app V)
+      ((pointSmallEtaleFiberEtaleIso r x).inv.app V v) =
+      (pointSmallEtaleFiberEtaleIso q x).inv.app (g.Etale.obj V) v' := by
+    subst hr
+    apply CategoryTheory.Over.OverMorphism.ext
+    erw [pointSmallEtale_fiber_map_left]
+    have h₁ := MorphismProperty.Over.w
+      ((MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) q g).hom.app V)
+    apply pullback.hom_ext
+    · apply pullback.hom_ext
+      · calc _ = ((pointSmallEtaleFiberEtaleIso (q ≫ g) x).inv.app V v).left ≫
+              pullback.fst V.hom (q ≫ g) := by
+                simp only [Category.assoc]
+                exact congrArg (_ ≫ ·) (MorphismProperty.Over.pullbackComp_left_fst_fst q g V)
+          _ = v.left := pointSmallEtaleFiberEtaleIso_inv_app_left_fst _ _ _ _
+          _ = _ := by
+                rw [← hv', Category.assoc]
+                exact congrArg (· ≫ pullback.fst V.hom g)
+                  (pointSmallEtaleFiberEtaleIso_inv_app_left_fst q x _ v').symm
+      · calc _ = ((pointSmallEtaleFiberEtaleIso (q ≫ g) x).inv.app V v).left ≫
+              pullback.snd V.hom (q ≫ g) ≫ q := by
+                simp only [Category.assoc]
+                refine congrArg (_ ≫ ·) ?_
+                refine (congrArg (_ ≫ ·) pullback.condition).trans ?_
+                rw [← Category.assoc]
+                exact congrArg (· ≫ q) h₁
+          _ = x ≫ q := by
+                rw [← Category.assoc]
+                exact congrArg (· ≫ q) (pointSmallEtaleFiberEtaleIso_inv_app_left_snd _ _ _ _)
+          _ = _ := by
+                exact ((congrArg (fun t ↦ t ≫ pullback.snd V.hom g)
+                  (pointSmallEtaleFiberEtaleIso_inv_app_left_fst q x _ v')).trans
+                    (CategoryTheory.Over.w v')).symm
+    · calc _ = ((pointSmallEtaleFiberEtaleIso (q ≫ g) x).inv.app V v).left ≫
+            pullback.snd V.hom (q ≫ g) := by
+              simp only [Category.assoc]
+              exact congrArg (_ ≫ ·) h₁
+        _ = x := pointSmallEtaleFiberEtaleIso_inv_app_left_snd _ _ _ _
+        _ = _ := (pointSmallEtaleFiberEtaleIso_inv_app_left_snd q x _ v').symm
+  erw [lowerStarComp_hom_app_hom_app, GrothendieckTopology.Point.toPresheafFiber_w, hpt]
+  rfl
 
 end Germs
 

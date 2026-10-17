@@ -76,7 +76,7 @@ structure Hom (α β : LimitStage B W) where
 
 /-- The composite of two morphisms of stages. -/
 @[simps]
-def Hom.comp {α β γ : LimitStage B W} (φ : Hom α β) (ψ : Hom β γ) : Hom α γ where
+abbrev Hom.comp {α β γ : LimitStage B W} (φ : Hom α β) (ψ : Hom β γ) : Hom α γ where
   t := φ.t ≫ ψ.t
   s := φ.s ≫ ψ.s
   wg := by rw [Category.assoc, ψ.wg, reassoc_of% φ.wg]
@@ -86,7 +86,7 @@ def Hom.comp {α β γ : LimitStage B W} (φ : Hom α β) (ψ : Hom β γ) : Hom
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- The functor `K ↦ π^* Rg_* (w^* K)` attached to a stage. -/
-noncomputable def functor (α : LimitStage B W) :
+noncomputable abbrev functor (α : LimitStage B W) :
     DerivedCategory.Plus (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory.Plus (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   D+((α.w)^*[ModuleCat.{u + 1} Λ]) ⋙ R+((α.g)_*[ModuleCat.{u + 1} Λ]) ⋙
@@ -97,32 +97,74 @@ lemma functor_obj (α : LimitStage B W)
     (functor Λ α).obj K = D+((α.π)^*[ModuleCat.{u + 1} Λ]).obj
       (R+((α.g)_*[ModuleCat.{u + 1} Λ]).obj (D+((α.w)^*[ModuleCat.{u + 1} Λ]).obj K)) := rfl
 
-/-- The components of the transition map of a morphism of stages `φ : α ⟶ β`:
+/-- The transition map of a morphism of stages `φ : α ⟶ β`, as a natural transformation:
 `π_β^* Rg_{β*} w_β^* K ≅ π_α^* s^* Rg_{β*} w_β^* K ⟶ π_α^* Rg_{α*} t^* w_β^* K ≅
 π_α^* Rg_{α*} w_α^* K`, the middle map being the pullback along `π_α` of the derived base-change
 map of the square `(t, s)`. -/
-noncomputable def transitionApp {α β : LimitStage B W} (φ : Hom α β)
-    (K : DerivedCategory.Plus (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (functor Λ β).obj K ⟶ (functor Λ α).obj K :=
-  (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) α.π φ.s β.π φ.wπ.symm).hom.app
-      (R+((β.g)_*[ModuleCat.{u + 1} Λ]).obj (D+((β.w)^*[ModuleCat.{u + 1} Λ]).obj K)) ≫
-    D+((α.π)^*[ModuleCat.{u + 1} Λ]).map
-      ((Etale.baseChange (ModuleCat.{u + 1} Λ) ⟨φ.wg⟩).app
-          (D+((β.w)^*[ModuleCat.{u + 1} Λ]).obj K) ≫
-        R+((α.g)_*[ModuleCat.{u + 1} Λ]).map
-          ((upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) φ.t β.w α.w φ.ww.symm).inv.app K))
-
-/-- The transition map of a morphism of stages, as a natural transformation. -/
 noncomputable def transition {α β : LimitStage B W} (φ : Hom α β) :
-    functor Λ β ⟶ functor Λ α where
-  app K := transitionApp Λ φ K
-  naturality {K K'} f := by
-    simp only [transitionApp, functor, Functor.comp_obj, Functor.comp_map, Category.assoc]
-    rw [← NatTrans.naturality_assoc]
-    simp only [Functor.comp_obj, Functor.comp_map, ← Functor.map_comp]
-    congr 2
-    rw [← Etale.baseChange_naturality_assoc]
-    sorry
+    functor Λ β ⟶ functor Λ α :=
+  Functor.whiskerLeft (D+((β.w)^*[ModuleCat.{u + 1} Λ]) ⋙ R+((β.g)_*[ModuleCat.{u + 1} Λ]))
+      (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) α.π φ.s β.π φ.wπ.symm).hom ≫
+    Functor.whiskerRight (Functor.whiskerLeft D+((β.w)^*[ModuleCat.{u + 1} Λ])
+      (Etale.baseChange (ModuleCat.{u + 1} Λ) ⟨φ.wg⟩)) D+((α.π)^*[ModuleCat.{u + 1} Λ]) ≫
+    Functor.whiskerRight (Functor.whiskerRight
+      (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) φ.t β.w α.w φ.ww.symm).inv
+        R+((α.g)_*[ModuleCat.{u + 1} Λ])) D+((α.π)^*[ModuleCat.{u + 1} Λ])
+
+lemma transition_app {α β : LimitStage B W} (φ : Hom α β)
+    (K : DerivedCategory.Plus (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (transition Λ φ).app K =
+      (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) α.π φ.s β.π φ.wπ.symm).hom.app
+          (R+((β.g)_*[ModuleCat.{u + 1} Λ]).obj (D+((β.w)^*[ModuleCat.{u + 1} Λ]).obj K)) ≫
+        D+((α.π)^*[ModuleCat.{u + 1} Λ]).map
+          ((Etale.baseChange (ModuleCat.{u + 1} Λ) ⟨φ.wg⟩).app
+              (D+((β.w)^*[ModuleCat.{u + 1} Λ]).obj K) ≫
+            R+((α.g)_*[ModuleCat.{u + 1} Λ]).map
+              ((upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) φ.t β.w α.w
+                φ.ww.symm).inv.app K)) := by
+  simp [transition]
+
+/-- The transition maps compose: the transition map of a composite of morphisms of stages is
+the composite of the transition maps. -/
+lemma transition_comp {α β γ : LimitStage B W} (φ : Hom α β) (ψ : Hom β γ) :
+    transition Λ ψ ≫ transition Λ φ = transition Λ (φ.comp ψ) := by
+  refine NatTrans.ext (funext fun K ↦ ?_)
+  simp only [NatTrans.comp_app, transition_app]
+  have hp := Etale.baseChange_app_paste_horiz_of_eq Λ (⟨ψ.wg⟩ : CommSq ψ.t β.g γ.g ψ.s)
+    (⟨φ.wg⟩ : CommSq φ.t α.g β.g φ.s) (⟨(φ.comp ψ).wg⟩ : CommSq (φ.t ≫ ψ.t) α.g γ.g (φ.s ≫ ψ.s))
+    rfl rfl (D+((γ.w)^*[ModuleCat.{u + 1} Λ]).obj K)
+  -- associativity of the composition isomorphisms on the side of the bases
+  have hS := NatTrans.congr_app (Etale.upperStarCompDerivedPlus_assoc (ModuleCat.{u + 1} Λ)
+    α.π φ.s ψ.s β.π (φ.s ≫ ψ.s) γ.π φ.wπ.symm rfl ψ.wπ.symm)
+    (R+((γ.g)_*[ModuleCat.{u + 1} Λ]).obj (D+((γ.w)^*[ModuleCat.{u + 1} Λ]).obj K))
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at hS
+  -- associativity of the composition isomorphisms on the side of the coefficients
+  have hW := NatTrans.congr_app (Etale.upperStarCompDerivedPlus_assoc (ModuleCat.{u + 1} Λ)
+    φ.t ψ.t γ.w (φ.t ≫ ψ.t) β.w α.w rfl ψ.ww.symm (φ.comp ψ).ww.symm) K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at hW
+  have hW' := congrArg Iso.inv (Iso.ext hW :
+    (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) φ.t β.w α.w φ.ww.symm).app K ≪≫
+      D+((φ.t)^*[ModuleCat.{u + 1} Λ]).mapIso
+        ((upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) ψ.t γ.w β.w ψ.ww.symm).app K) =
+    (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) (φ.t ≫ ψ.t) γ.w α.w
+        (φ.comp ψ).ww.symm).app K ≪≫
+      (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) φ.t ψ.t (φ.t ≫ ψ.t) rfl).app
+        (D+((γ.w)^*[ModuleCat.{u + 1} Λ]).obj K))
+  simp only [Iso.trans_inv, Iso.app_inv, Functor.mapIso_inv] at hW'
+  rw [hp]
+  have n1 := (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) α.π φ.s β.π φ.wπ.symm).hom.naturality
+    ((Etale.baseChange (ModuleCat.{u + 1} Λ) ⟨ψ.wg⟩).app (D+((γ.w)^*[ModuleCat.{u + 1} Λ]).obj K) ≫
+      R+((β.g)_*[ModuleCat.{u + 1} Λ]).map
+        ((upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) ψ.t γ.w β.w ψ.ww.symm).inv.app K))
+  have n2 := congrArg D+((α.π)^*[ModuleCat.{u + 1} Λ]).map
+    ((Etale.baseChange (ModuleCat.{u + 1} Λ) ⟨φ.wg⟩).naturality
+      ((upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) ψ.t γ.w β.w ψ.ww.symm).inv.app K))
+  have n3 := congrArg (fun x ↦ D+((α.π)^*[ModuleCat.{u + 1} Λ]).map
+    (R+((α.g)_*[ModuleCat.{u + 1} Λ]).map x)) hW'
+  simp only [Functor.comp_map, Functor.map_comp] at n1 n2 n3
+  rw [reassoc_of% n1, ← reassoc_of% hS]
+  simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
+  rw [reassoc_of% n2, reassoc_of% n3]
 
 end LimitStage
 
