@@ -13,11 +13,229 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-sp-spectral-sequence",
-  "def-trf-geometric-morphism"
+  "def-trf-geometric-morphism",
+  "def-trf-total-simplicial-etale-site",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the actual total site of [def-trf-total-simplicial-etale-site]. Base change preserves etale coverings by [lem-weil-pbc-etale-base-change-continuous]. Its generating coverings form a pretopology: the pullback of a covering of $(m,Z)$ along $(\\alpha,f):(n,W)\\to(m,Z)$ is the etale covering $\\{W\\times_{U_n\\times_{U_m}Z}(U_n\\times_{U_m}Z_i)\\to W\\}_i$ in degree $n$; composition and identities are those of etale coverings. A presheaf on this category is exactly a family of component presheaves with transition maps $F_m\\to u_{\\alpha,*}F_n$ satisfying identities and composition. The sheaf condition is tested on the displayed fixed-degree coverings, so it is exactly the component sheaf condition. The same statement with linear maps gives the claimed module families, by the constant-module adjunction $u_\\alpha^*\\dashv u_{\\alpha,*}$ in each component: the scheme maps induce geometric morphisms of small etale topoi [lem-weil-pbc-sets-etale-inverse-image-exact], and their constant-$\\Lambda$ module inverse images with the forgotten units are those of [lem-pe-constant-left-module-inverse-image]. Kernels restrict componentwise, and cokernels do also: their sheafification only uses coverings in the degree of the object. Thus the restrictions $e_n$ are exact and jointly detect exactness.",
+   "uses": [
+    "def-trf-total-simplicial-etale-site",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 09WC (lemma-simplicial-site-site), 09WF (lemma-describe-sheaves-simplicial-site-site), 0D72 (lemma-restriction-module-to-components-site)."
+   }
+  },
+  {
+   "text": "All component and transition scheme morphisms induce geometric morphisms of small etale topoi by [lem-weil-pbc-sets-etale-inverse-image-exact]. For $h:V_\\bullet\\to U_\\bullet$ define $h^{-1}F$ by the families $h_n^{-1}F_n$. The identity $h_m v_\\alpha=u_\\alpha h_n$ supplies their transition maps. Define $h_*G$ by $(h_*G)_n=h_{n,*}G_n$: its transition is adjoint to $h_n^{-1}u_\\alpha^{-1}h_{m,*}G_m\\cong v_\\alpha^{-1}h_m^{-1}h_{m,*}G_m\\to v_\\alpha^{-1}G_m\\to G_n$, where the middle map is the component counit. Taking component adjoints gives mutually inverse bijections between compatible family maps $h^{-1}F\\to G$ and $F\\to h_*G$; compatibility follows by substituting this transition formula and the triangle identities. The units and counits are the component ones. On sheaves of sets this gives a geometric morphism, since finite limits of families are computed componentwise. For constant-$\\Lambda$ modules its inverse image is exact by [lem-pe-constant-left-module-inverse-image] and step 1. In particular $e_n h_*=h_{n,*}e_n$, as an identity of the specified right adjoints.",
+   "uses": [
+    "def-trf-total-simplicial-etale-site",
+    "def-trf-geometric-morphism",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-sets-etale-inverse-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DH0 (lemma-morphism-simplicial-sites-modules), the explicit component adjunction; compare Tag 0DH1."
+   }
+  },
+  {
+   "text": "The augmentation inverse image is the family $(a^{-1}G)_n=a_n^{-1}G$, with the composition identifications as transitions. Its right adjoint is the equalizer $a_*F=\\operatorname{Eq}(a_{0,*}F_0\\rightrightarrows a_{1,*}F_1)$, the two arrows coming from the two vertices of $[1]$. Indeed a map to this equalizer gives a map $a_0^{-1}G\\to F_0$ whose two degree-one continuations agree. In degree $n$, continue along any vertex $[0]\\to[n]$; any two vertices are the endpoints of an order-preserving $[1]\\to[n]$, so the continuations agree. They are compatible with every order map, and restriction to degree zero recovers the original map. This proves the adjunction. It works on sets and on modules. The set inverse image preserves finite limits componentwise, and its constant-module inverse image is exact by [lem-pe-constant-left-module-inverse-image]. For a map of augmented diagrams, composition of these inverse images agrees componentwise; hence its right-adjoint comparison is the one for the composite adjunction of [def-trf-geometric-morphism].",
+   "uses": [
+    "def-trf-total-simplicial-etale-site",
+    "def-trf-geometric-morphism",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D70 (lemma-augmentation-site) and Tag 0D99 (lemma-morphism-augmentation-simplicial-sites), their inverse-image constructions."
+   }
+  },
+  {
+   "text": "For a module sheaf $M$ on $U_n$ define $(\\ell_nM)_m=\\bigoplus_{\\alpha:[n]\\to[m]}u_\\alpha^{-1}M$, with transition maps sending the summand indexed by $\\alpha$ to the one indexed by $\\beta\\alpha$ under $u_\\beta^{-1}u_\\alpha^{-1}\\cong u_{\\beta\\alpha}^{-1}$. A map $\\ell_nM\\to F$ is determined by its identity-indexed summand $M\\to F_n$; conversely extend that map to each summand using the transition of $F$. These are inverse constructions, so $\\ell_n\\dashv e_n$. Each index set $\\operatorname{Hom}_\\Delta([n],[m])$ is finite. The summand inverse images are exact by [lem-pe-constant-left-module-inverse-image]; finite direct sums preserve kernels and cokernels by the biproduct identities. Hence $\\ell_n$ is exact by step 1. Applying [lem-exc-rg-right-adjoint-preserves-injectives] shows that $e_n$ sends injective total modules to injective component modules.",
+   "uses": [
+    "def-trf-total-simplicial-etale-site",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-exc-rg-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D72 (lemma-restriction-module-to-components-site), Tag 0D74 (lemma-exactness-g-shriek-modules), and lemma-restriction-injective-to-component-site-module; constant coefficients make the ring transitions isomorphisms."
+   }
+  },
+  {
+   "text": "The total site and every component site are small in the common containing universe, and their constant ring sheaves are commutative. Thus [prop-pur-kinjective-resolutions-exist] gives Grothendieck abelian module categories and K-injective resolutions for all of them. The enough-injectives consequence [lem-sp-grothendieck-enough-injectives] and [lem-weil-pbc-dplus-injective-representative] give, for any bounded-below $L$ with $H^q(L)=0$ for $q<c$, a representative $I^\\bullet$ of injectives with $I^q=0$ for $q<c$. It is K-injective. By steps 1 and 4, $I_n^\\bullet$ represents $L_n$ and is again a bounded-below complex of injectives, hence K-injective by the same representative lemma.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F (lemma-augmentation-spectral-sequence-modules), first sentence and column calculation; the general ringed-site resolution input is Stacks 07A5 and 079P."
+   }
+  },
+  {
+   "text": "Compute $Rh_*L$ on $I^\\bullet$. Restricting its representative gives $e_n(h_*I^\\bullet)=h_{n,*}I_n^\\bullet$, by step 2. By step 5 the right side computes $Rh_{n,*}L_n$, and the exactness of $e_n$ permits passage to derived categories. This is the canonical restriction comparison: before deriving it is the identity $e_nh_*=h_{n,*}e_n$, with units and counits fixed in step 2, and on the injective representative no replacement map is needed. The resolution comparison uniqueness and functoriality in [lem-sp-kinjective-computes] therefore make it independent of the chosen representative and natural in $L$.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DH1 (lemma-direct-image-morphism-simplicial-sites-modules), with injective component restriction for the constant-coefficient bounded-below case."
+   }
+  },
+  {
+   "text": "The unbounded derived direct images for the adjoints in steps 2 and 3 carry distinguished triangles to distinguished triangles and commute with shifts by [lem-pc-right-derived-functor-triangulated]; restrict them to $D^+$. Apply [lem-sfb-derived-composition-adjunction-normalization] to the exact constant-module inverse images. It gives $R(gf)_*\\cong Rg_*Rf_*$, represented on a K-injective by the underived right-adjoint comparison, and identifies it with the conjugate of the inverse-image composition. Its statement identifies the derived units and counits with the composite ones. This also proves naturality for maps of augmented diagrams: their inverse-image identifications are the component composition identifications of step 3, and the direct-image arrows are their adjoints. Computing the adjunct of either composite replaces each right-adjoint arrow by its defining left-adjoint arrow; the results agree by associativity of inverse-image composition and the two triangle identities. Hence the comparison squares, including their unit and counit squares, commute. Applying $e_n$ gives exactly the same calculation with the component adjunctions, so the restriction comparison of step 6 has these compatibilities as well.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D99 (lemma-morphism-augmentation-simplicial-sites); normalization supplied by the existing general exact-adjoint derived-composition lemma, with Stacks 09T5 and 08BJ."
+   }
+  },
+  {
+   "text": "For a module sheaf $G$ on $X$, form $P_n(G)=\\ell_n(a_n^{-1}G)$. The $i$-th face $P_n(G)\\to P_{n-1}(G)$ is adjoint to inclusion into the summand indexed by $\\delta_i:[n-1]\\to[n]$ of $e_nP_{n-1}(G)$, using $u_{\\delta_i}^{-1}a_{n-1}^{-1}G\\cong a_n^{-1}G$. Augment $P_0(G)\\to a^{-1}G$ by the identity under $\\ell_0\\dashv e_0$. The alternating faces give an augmented chain complex: in the composite differential each order map omitting two vertices occurs twice with opposite signs, by $\\delta_j\\delta_i=\\delta_i\\delta_{j-1}$ for $i<j$. The augmentation kills the first differential because both vertex maps continue to the same augmentation map.",
+   "uses": [
+    "def-trf-total-simplicial-etale-site",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7C (lemma-simplicial-resolution-augmentation-modules) and the explicit face construction in lemma-simplicial-resolution-augmentation."
+   }
+  },
+  {
+   "text": "At component $m$ this augmented complex is $\\cdots\\to\\bigoplus_{\\alpha:[1]\\to[m]}a_m^{-1}G\\to\\bigoplus_{\\alpha:[0]\\to[m]}a_m^{-1}G\\to a_m^{-1}G\\to0$, with differential deleting one entry of the nondecreasing tuple $(\\alpha(0),\\ldots,\\alpha(n))$ with alternating signs. Define $s_{-1}$ by inclusion into the vertex $0$ summand, and define $s_n$ on the $\\alpha$ summand by inclusion into the summand $(0,\\alpha(0),\\ldots,\\alpha(n))$, with coefficient identity. Deleting the new initial zero contributes the original tuple; every other deletion has the negative of the corresponding term of $s_{n-1}d_n$. Thus $ds+sd=1$, also in augmented degree $-1$. Consequently the complex is exact in each component, and therefore exact on the total site by step 1. This contraction need not commute with changes of $m$; component exactness is all that is used.",
+   "uses": [
+    "def-trf-total-simplicial-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7C (lemma-simplicial-resolution-augmentation-modules), proof reducing to lemma-simplicial-resolution-augmentation and lemma-simplicial-resolution-Z-site; explicit vertex-zero contraction."
+   }
+  },
+  {
+   "text": "For an injective total module $J$, apply $\\operatorname{Hom}(-,J)$ to the exact augmented complex of steps 8 and 9. Injectivity [def-sp-injective-resolutions] makes the resulting complex exact: at each degree factor through the image and extend from that subobject of the preceding term. The adjunctions give $\\operatorname{Hom}(P_n(G),J)=\\operatorname{Hom}(G,a_{n,*}J_n)$ and $\\operatorname{Hom}(a^{-1}G,J)=\\operatorname{Hom}(G,a_*J)$. These identifications turn the differential into the alternating coface maps. Hence $0\\to a_*J\\to a_{0,*}J_0\\to a_{1,*}J_1\\to\\cdots$ is an exact augmented cochain complex. To see exactness as module sheaves from the Hom tests, take $G$ to be the kernel in the degree being tested: its inclusion is a Hom-cycle, hence lifts to the preceding term, which therefore surjects onto that kernel. The construction is natural in $J$.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Lemma augmentation-cech-complex-modules immediately before Tag 0D7F; its Hom-of-free-resolution argument."
+   }
+  },
+  {
+   "text": "Choose $I^\\bullet$ as in step 5 and set $A^{p,q}=a_{p,*}I_p^q$ for $p\\ge0$, extending by zero for $p<0$. Use the alternating cofaces from step 10 horizontally and the differential of $I$ vertically. Naturality of the cofaces in the module $I^q$ makes these two differentials commute. Thus [def-sp-double-complex-total] gives the total differential $d_{\\mathrm{face}}+(-1)^p d_I$. Reindex the second coordinate by $r=q-c$: $B^{p,r}=A^{p,c+r}$ is first-quadrant, and its total complex in degree $n-c$ is the total of $A$ in degree $n$, with precisely the same differential. This is a degree reindexing, without introducing any shift-sign convention.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F (lemma-augmentation-spectral-sequence-modules), construction of its double complex; Homology Tag 012X (total differential)."
+   }
+  },
+  {
+   "text": "Let $T^r=a_*I^{c+r}$. The augmentations of step 10 give a chain map $T\\to B^{0,\\bullet}$, killed by the horizontal differential. In each fixed $r$ the augmented horizontal complex is exact and identifies its degree-zero kernel with $T^r$. Apply [lem-sc-first-quadrant-column-augmentation] to $B$ and $T$, using its row/resolution-column convention $B.\\mathrm{flip}.X(r)$. Its hypotheses are exactly these fixed-$r$ exact augmentations; the induced map has components $a_*I^{c+r}\\to B^{0,r}\\to\\operatorname{Tot}(B)^r$, with horizontal degree zero and sign $+1$. It is a quasi-isomorphism. Undoing the degree reindexing identifies $\\operatorname{Tot}(A)$ with $a_*I^\\bullet$ in the derived category, hence with $Ra_*L$ by [lem-sp-kinjective-computes].",
+   "uses": [
+    "lem-sc-first-quadrant-column-augmentation",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F, row exactness and total comparison; Homology Tag 0133 (lemma-double-complex-gives-resolution), second-variable variant."
+   }
+  },
+  {
+   "text": "Apply the first double-complex spectral sequence of [thm-sp-double-complex-spectral-sequences] to $B$. Its column $p$ is $a_{p,*}I_p^{c+\\bullet}$, whose degree $r$ cohomology is $H^{c+r}(Ra_{p,*}L_p)$ by steps 5 and 6 and [lem-sp-kinjective-computes]. Relabel $q=c+r$. The resulting $E_1^{p,q}$ is exactly $H^q(Ra_{p,*}L_p)$ for $p\\ge0$, $q\\ge c$. Its first differential is induced by the horizontal differential of $A$, hence is the alternating sum of the face-induced maps. By step 12 the abutment in degree $p+q$ is $H^{p+q}(Ra_*L)$.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F, column calculation and first-quadrant spectral sequence; Homology Tags 0130 (lemma-ss-double-complex) and 0132 (lemma-first-quadrant-ss)."
+   }
+  },
+  {
+   "text": "Use the first filtration of the same double-complex theorem. In original total degree $n$ the only summands have $0\\le p\\le n-c$. For $n\\ge c$ its image filtration on cohomology therefore satisfies $F^0H^n=H^n$ and $F^{n-c+1}H^n=0$, and the theorem identifies $\\operatorname{gr}^p_FH^n$ with $E_\\infty^{p,n-p}$. For $n<c$ the entire total complex has zero term in degree $n$, so $H^n=0$ and the stated bound is $F^0=0$. This proves exactly $F^{\\max(n-c+1,0)}H^n=0$. In every degree the argument uses only a finite diagonal; no common upper bound on $q$ or $n$ is imposed.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Homology Tag 0132 (lemma-first-quadrant-ss) and Tag 0D7F; explicit translation of the degreewise finite first filtration."
+   }
+  },
+  {
+   "text": "A derived morphism $L\\to L'$ is represented between bounded-below injective representatives by a chain map, uniquely up to homotopy, by the Hom bijection in [lem-weil-pbc-kinjective-hom-derived]. Applying $a_{p,*}e_p$ columnwise gives a double-complex map. The double-complex theorem makes its pages and abutment functorial. If representative maps differ by $d_Is+sd_I$, their total maps differ by $dH+Hd$, where $H$ on $A^{p,q}$ is $(-1)^p a_{p,*}e_p(s^q)$. The vertical terms give $d_Is+sd_I$; the horizontal terms cancel since cofaces commute with $s$ and the sign changes from $p$ to $p+1$. This homotopy preserves the first filtration. The maps therefore agree on filtered cohomology and on $E_1$ (column cohomology), hence on every later page. By [lem-sp-kinjective-computes], resolution comparisons are homotopy equivalences unique up to homotopy, so this also proves independence of resolution. The constructions and augmentations in steps 8--12 commute with representative maps, giving the functorial abutment $H^n(Ra_*L)$ with its image filtration. For two different lower bounds use their minimum and insert zero terms below the previous bounds; the original bicomplexes, first filtrations and pages are unchanged. Thus functoriality holds throughout $D^+$.",
+   "uses": [
+    "lem-sp-kinjective-computes",
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F, functoriality; double-complex functoriality and uniqueness of injective-resolution comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-total-simplicial-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "def-trf-geometric-morphism",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-sets-etale-inverse-image-exact",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-sp-kinjective-computes",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "def-sp-injective-resolutions",
+  "def-sp-double-complex-total",
+  "lem-sc-first-quadrant-column-augmentation",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tags 09WC, 09WF, 0D72, 0D7C, 0D7F, 0DH0, 0DH1, 0D70, 0D99; constant-coefficient specialization with explicit vertex-zero contraction, and Homology 0132/0133. Derived composition normalized by the existing generic adjunction lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +271,59 @@
    "results": "{\"t\": \"2026-10-17T16:20:38Z\", \"tool\": \"leanfinder\", \"query\": \"Compute derived pushforward from a total simplicial site by a bounded below alternating face double complex with component derived images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.DoldKan.N\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.rightDerived\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map\", \"CategoryTheory.Functor.mapDerivedCategory\", \"AlgebraicTopology.alternatingFaceMapComplex\", \"AlgebraicTopology.map_alternatingFaceMapComplex\"], \"digest\": \"d796a16dd3d87832\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits provide spectral-object, Dold-Kan and derived-functor infrastructure, not the derived image of a total simplicial site or its augmentation spectral sequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of modules on the total site of a simplicial scheme are families of sheaves with transition maps",
+   "results": "{\"t\": \"2026-10-17T17:55:31Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves of modules on the total site of a simplicial scheme are families of sheaves with transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isSheaf\", \"SheafOfModules\", \"SheafOfModules.Presentation\", \"SheafOfModules.instCategory\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.over\", \"SheafOfModules.QuasicoherentData\", \"AlgebraicGeometry.Scheme.Modules.isSheaf\"], \"digest\": \"f5c05ce559846b2e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary sheaves, small etale sites or pullbacks on a single site; none constructs the total site of a varying simplicial scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "simplicial.*site|site.*simplicial|simplicial.*topos|total.*topos",
+   "results": "{\"t\": \"2026-10-17T17:55:47Z\", \"tool\": \"grep\", \"query\": \"simplicial.*site|site.*simplicial|simplicial.*topos|total.*topos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean\", \"Mathlib/AlgebraicTopology/DoldKan/PInfty.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/PiZero.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\", \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\"], \"digest\": \"09bdc7e3b347069e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the broad regex returns occurrences of Opposite and simplicial homological algebra; these are not total simplicial sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total site of a simplicial scheme has objects etale objects on its components and coverings in one component",
+   "results": "{\"t\": \"2026-10-17T17:55:47Z\", \"tool\": \"leansearch\", \"query\": \"The total site of a simplicial scheme has objects etale objects on its components and coverings in one component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.zariskiPretopology\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.grothendieckTopology\", \"AlgebraicGeometry.Scheme.AffineZariskiSite\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.jointlySurjectiveTopology\"], \"digest\": \"6b8e8aa00b30997b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary sheaves, small etale sites or pullbacks on a single site; none constructs the total site of a varying simplicial scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-17T17:55:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary sheaves, small etale sites or pullbacks on a single site; none constructs the total site of a varying simplicial scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck construction of a diagram of etale sites total topos sheaves as systems with pullback transition maps",
+   "results": "{\"t\": \"2026-10-17T17:55:52Z\", \"tool\": \"leanfinder\", \"query\": \"Grothendieck construction of a diagram of etale sites total topos sheaves as systems with pullback transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.diagramPullback\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"CategoryTheory.GrothendieckTopology.overPullback\", \"CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_obj_α\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj\", \"CategoryTheory.Meq.pullback\", \"CategoryTheory.GrothendieckTopology.diagramPullback_app\", \"AlgebraicGeometry.PresheafedSpace.GlueData.diagramOverOpen\"], \"digest\": \"6e33bc8a4341cd27\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary sheaves, small etale sites or pullbacks on a single site; none constructs the total site of a varying simplicial scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "simplicialSite|totalSite|simplicial.*\\\\btopos\\\\b|simplicial.*\\\\bsite\\\\b",
+   "results": "{\"t\": \"2026-10-17T17:55:57Z\", \"tool\": \"grep\", \"query\": \"simplicialSite|totalSite|simplicial.*\\\\\\\\btopos\\\\\\\\b|simplicial.*\\\\\\\\bsite\\\\\\\\b\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unhelpful over-escaped regex; not used as absence evidence; corrected search follows."
+  },
+  {
+   "tool": "grep",
+   "query": "simplicialSite|totalSite|simplicial.{0,40}topos|simplicial.{0,40} site",
+   "results": "{\"t\": \"2026-10-17T17:57:12Z\", \"tool\": \"grep\", \"query\": \"simplicialSite|totalSite|simplicial.{0,40}topos|simplicial.{0,40} site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no matching declaration in Mathlib."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-proper-hyperdescent",
@@ -79,5 +346,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-simplicial-derived-image-spectral-sequence",
+  "worker": "stage1",
+  "summary": "Q56 gives an explicit total-site model and a 15-step proof following Stacks. Component injectivity is proved from an explicitly constructed exact left adjoint; free simplicial augmentation exactness is proved by a vertex-zero contraction, not moved into a new theorem. Existing generic nodes supply injective representatives, derived normalization, total comparison and spectral sequences. All arbitrary-ring and lower-bound hypotheses checked; statement unchanged; one new definition, no new statement nodes or Mathlib leaves.",
+  "blueprint": "Proof of (1) and (2), normal-cone specialization: the Orgogozo modification input used in the trait nearby-cycle comparison; expanded via lem-trf-orgogozo-good-modification, proof of Lemma 3.1.1. The augmentation spectral sequence in Orgogozo Lemma 3.1.2 and derived-image composition in the proof of 3.1.1.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Exactness and coherent composition of inverse image for arbitrary constant rings on any geometric morphism, needed for component and augmentation adjoints."
+   },
+   {
+    "node": "lem-exc-rg-right-adjoint-preserves-injectives",
+    "why": "The generic exact-left-adjoint criterion applied to L_n -| e_n; the unit has no category-theoretic injectivity lemma."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Grothendieck and K-injective properties of modules on an arbitrary small ringed site; applies to the actual total site, which is not a scheme site."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "The generic enough-injectives theorem, needed to use the existing bounded-below representative lemma."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Injective representatives starting at any cohomological lower bound c, with K-injectivity."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Resolution independence, functoriality and computation of ordinary right-derived functors on bounded-below injectives."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "The generic K-injective construction preserves triangles; the trace unit gives no replacement for this tool."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "The generic derived-composition comparison normalized by specified exact inverse-image adjunctions, including units and counits."
+   },
+   {
+    "node": "lem-sc-first-quadrant-column-augmentation",
+    "why": "The generic total quasi-isomorphism for rowwise exact augmented bicomplexes; used after translating q by c."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "The first-quadrant double-complex spectral sequences and degreewise finite abutment filtration; the simplicial row argument is proved here."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "The Hom bijection from the homotopy category to the derived category supplies chain-map representatives and homotopy uniqueness for arbitrary derived morphisms."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-continuous",
+    "why": "Base change carries etale coverings to etale coverings, so the displayed fixed-component families on the total category form a pretopology."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "why": "Every scheme morphism induces the small-etale geometric morphism whose component adjunctions are used in the explicit total-family constructions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-sp-kinjective-computes",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-sc-first-quadrant-column-augmentation",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-sets-etale-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-395bcb6aa",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-395bcb6aa (reviewer sub-agent of L); spot-checked: Read in full: the item, its 15 steps, the new def-trf-total-simplicial-etale-site, every cited statement, the two citers, and Stacks spaces-simplicial 09WC, 0D72, 0D74/0D75, 0D70, 0DH0/0DH1, 0D7C/0D7D/0D7F at their labels; the tags were checked against tags/tags. The mathematics is correct for constant commutative Λ on arbitrary schemes. The total site matches 09WC Case A, and the omitted fibre-product details are written in step 1. Step 4's ℓ_n is 0D72's g_{n!}, exact because the coefficients are constant (so 0D75's flatness holds); hence e_n preserves injectives. The equalizer adjunction (0D70) is proved by the vertex/edge argument. The contraction s(α)=(0,α) gives ds+sd=1, checked including degree -1. For the Hom-exactness of step 10 I checked the test G=kernel. I checked the orientation of lem-sc-first-quadrant-column-augmentation (K.X 0 is the column, K.flip.X r is the row, Mathlib's up/up sign d1+(-1)^p d2 agrees with def-sp-double-complex-total). The filtration bound max(n-c+1,0) is right, tested at n<c, n=c and n=0 with c=-2. I recomputed the filtered homotopy (-1)^p s. The new definition is not a duplicate (rg over the DAG and the hypercover nodes) and does not restate the item; its searches are real. Small case: a constant one-point simplicial scheme gives cosimplicial modules and the expected E2. All 13 declared tool uses are generic and accepted, and no SGA source is used. Repair, under C1/C4: step 1 used the component module adjunction without a citation. It now cites lem-weil-pbc-sets-etale-inverse-image-exact and lem-pe-constant-left-module-inverse-image in its text and uses; both were already in proof_deps. The corrected item file is in fixes/dag/nodes/sec-trace-formula/. Nothing is dropped.; 1 file(s) fixed by the reviewer"
  }
 }
