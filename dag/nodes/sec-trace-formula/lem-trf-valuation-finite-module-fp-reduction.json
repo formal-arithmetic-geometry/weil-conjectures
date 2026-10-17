@@ -163,5 +163,23 @@
   "group": "Q107",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q107-7f3f881d0 (reviewer sub-agent of L); spot-checked: Mathematics and sources pass. Corrected item metadata: created.item and created.group incorrectly named lem-trf-valuation-finite-module-injectivity/Q147; fixed JSON written under fixes/dag/nodes/sec-trace-formula/lem-trf-valuation-finite-module-fp-reduction.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-931c46e5f",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Reviewed node, source, dependencies, Lean declaration, docstrings, edge cases, route-pivot status, and report sections. scompile.py passed with local overlay and server confirmation. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.SecTraceFormula.ValuationFiniteModuleFpReduction",
+  "declaration": "WeilConjectures.valuationFiniteModuleFpReduction",
+  "file": "lean/Sheaf/SecTraceFormula/ValuationFiniteModuleFpReduction.lean",
+  "statement": "theorem valuationFiniteModuleFpReduction (K : Type u) [Field K] (A : ValuationSubring K) [IsFractionRing A K] (B : Type u) [CommRing B] [IsLocalRing B] (f : A →+* B) [IsLocalHom f] (hf : RingHom.EssFiniteType f) (N : Type u) [AddCommGroup N] [Module B N] [Module.Finite B N] : ∃ (I : Type u) (c : Category.{u + 1} I) (d : @IsFilteredOrEmpty I c) (hI : Nonempty I) (F : @Functor I c (ModuleCat.{u} B) inferInstance) (t : @Cocone I c (ModuleCat.{u} B) inferInstance F) (ht : @IsColimit I c (ModuleCat.{u} B) inferInstance F t) (e : t.pt ≅ ModuleCat.of B N), (∀ (i : I), Module.FinitePresentation B (F.obj i)) ∧ (∀ {i j : I} (g : i ⟶ j), Function.Surjective (F.map g).hom) ∧ (∃ (i₀ : I), ∀ (i : I) (g : i₀ ⟶ i), ∃ (h : Submodule.span B (Set.range (fun p : (Ideal.map f (IsLocalRing.maximalIdeal A)) × (F.obj i) => (p.1 : B) • p.2)) ≤ (Submodule.span B (Set.range (fun p : (Ideal.map f (IsLocalRing.maximalIdeal A)) × N => (p.1 : B) • p.2))).comap ((e.hom.hom).comp (t.ι.app i).hom)) (q : (F.obj i ⧸ Submodule.span B (Set.range (fun p : (Ideal.map f (IsLocalRing.maximalIdeal A)) × (F.obj i) => (p.1 : B) • p.2))) ≃ₗ[B] (N ⧸ Submodule.span B (Set.range (fun p : (Ideal.map f (IsLocalRing.maximalIdeal A)) × N => (p.1 : B) • p.2)))) , q.toLinearMap = (Submodule.span B (Set.range (fun p : (Ideal.map f (IsLocalRing.maximalIdeal A)) × (F.obj i) => (p.1 : B) • p.2))).mapQ (Submodule.span B (Set.range (fun p : (Ideal.map f (IsLocalRing.maximalIdeal A)) × N => (p.1 : B) • p.2))) ((e.hom.hom).comp (t.ι.app i).hom) h)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
