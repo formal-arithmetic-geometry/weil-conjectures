@@ -85,6 +85,59 @@ theorem IsAdicLisseSheaf.isZero_of_forall_subsingleton {Y : Scheme.{u}} {H : Adi
     infer_instance
   exact (isZero_zero _).of_iso (asIso (0 : H ⟶ 0))
 
+/-- The geometric point `Spec κ(y)^alg ⟶ Y` over a point `y`. -/
+lemma exists_spec_isAlgClosed_hom_apply {Y : Scheme.{u}} (y : Y) :
+    ∃ (K : Type u) (_ : Field K) (_ : IsAlgClosed K) (s : Spec (.of K) ⟶ Y),
+      s.base (IsLocalRing.closedPoint K) = y :=
+  ⟨AlgebraicClosure (Y.residueField y), inferInstance, inferInstance,
+    Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y)
+      (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y, by
+      rw [Scheme.Hom.comp_apply]
+      exact Y.fromSpecResidueField_apply y _⟩
+
+/-- **A morphism of lisse sheaves on a locally noetherian scheme is an isomorphism as soon as it
+is bijective on all stalks at geometric points**: its kernel and cokernel are lisse and have
+vanishing stalks. -/
+theorem IsAdicLisseSheaf.isIso_of_bijective_stalkFunctor_map {Y : Scheme.{u}}
+    [IsLocallyNoetherian Y] {F G : AdicSheaf l Y} (hF : IsAdicLisseSheaf F)
+    (hG : IsAdicLisseSheaf G) (f : F ⟶ G)
+    (h : ∀ (K : Type u) [Field K] [IsAlgClosed K] (s : Spec (.of K) ⟶ Y),
+      Function.Bijective ((stalkFunctor l s).map f.hom).hom) : IsIso f := by
+  obtain ⟨hk, hc⟩ := hF.kernel_cokernel hG f
+  have : Mono f := by
+    refine Preadditive.mono_of_isZero_kernel f (hk.isZero_of_forall_subsingleton fun y ↦ ?_)
+    obtain ⟨K, _, _, s, hs⟩ := exists_spec_isAlgClosed_hom_apply y
+    refine ⟨K, inferInstance, inferInstance, s, hs, ⟨fun a b ↦ ?_⟩⟩
+    have hι : Function.Injective ((stalkFunctor l s).map (kernel.ι f).hom).hom :=
+      have : Mono (kernel.ι f).hom := (AdicSheaf.forget Y).map_mono (kernel.ι f)
+      (ModuleCat.mono_iff_injective _).1 ((stalkFunctor l s).map_mono _)
+    have h0 (x : (stalkFunctor l s).obj (kernel f).X) :
+        ((stalkFunctor l s).map f.hom).hom (((stalkFunctor l s).map (kernel.ι f).hom).hom x) =
+          0 := by
+      rw [← ModuleCat.comp_apply, ← Functor.map_comp, ← Mod.comp_hom', kernel.condition]
+      erw [Mod.zero_hom, Functor.map_zero]
+      rfl
+    exact hι ((h K s).1 ((h0 a).trans (h0 b).symm))
+  have : Epi f := by
+    refine Preadditive.epi_of_isZero_cokernel f (hc.isZero_of_forall_subsingleton fun y ↦ ?_)
+    obtain ⟨K, _, _, s, hs⟩ := exists_spec_isAlgClosed_hom_apply y
+    refine ⟨K, inferInstance, inferInstance, s, hs, ⟨fun a b ↦ ?_⟩⟩
+    have hπ : Function.Surjective ((stalkFunctor l s).map (cokernel.π f).hom).hom :=
+      have : Epi (cokernel.π f).hom := (AdicSheaf.forget Y).map_epi (cokernel.π f)
+      (ModuleCat.epi_iff_surjective _).1 ((stalkFunctor l s).map_epi _)
+    have h0 (x : (stalkFunctor l s).obj F.X) :
+        ((stalkFunctor l s).map (cokernel.π f).hom).hom (((stalkFunctor l s).map f.hom).hom x) =
+          0 := by
+      rw [← ModuleCat.comp_apply, ← Functor.map_comp, ← Mod.comp_hom', cokernel.condition]
+      erw [Mod.zero_hom, Functor.map_zero]
+      rfl
+    obtain ⟨a', rfl⟩ := hπ a
+    obtain ⟨b', rfl⟩ := hπ b
+    obtain ⟨a'', rfl⟩ := (h K s).2 a'
+    obtain ⟨b'', rfl⟩ := (h K s).2 b'
+    exact (h0 a'').trans (h0 b'').symm
+  exact isIso_of_mono_of_epi f
+
 end ProEtale
 
 namespace ProEtaleWeilSheaf
