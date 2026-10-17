@@ -81,7 +81,6 @@ lemma mapOfRingHomCompIso_hom_app (e : F₁ ⋙ F₂ ≅ F) (X : C₁) :
         (Localization.Lifting.iso (Q M₁ C₁) (W M₁ C₁) (F ⋙ Q M₃ C₃)
           (mapOfRingHom ψ hM F hF)).inv.app X := by
   simp [mapOfRingHomCompIso, Localization.liftNatIso, Localization.liftNatTrans_app]
-  rfl
 
 end Comp
 
@@ -102,7 +101,6 @@ lemma mapOfRingHomIdIso_hom_app (e : F ≅ 𝟭 C₁) (X : C₁) :
       (Localization.Lifting.iso (Q M₁ C₁) (W M₁ C₁) (F ⋙ Q M₁ C₁)
         (mapOfRingHom ψ hM F hF)).hom.app X ≫ (Q M₁ C₁).map (e.hom.app X) := by
   simp [mapOfRingHomIdIso, Localization.liftNatIso, Localization.liftNatTrans_app]
-  rfl
 
 end Id
 

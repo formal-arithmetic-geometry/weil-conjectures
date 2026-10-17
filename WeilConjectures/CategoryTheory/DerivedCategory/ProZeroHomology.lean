@@ -57,8 +57,9 @@ lemma isProZero_of_homology_aux (α : ℤ) (k : ℕ) :
       · have := hGE m
         dsimp [G]
         infer_instance
-      · have : ((t.truncLT β).obj (F.obj m)).IsLE (β - 1) := inferInstance
-        exact t.isLE_of_le _ _ _ (by simp [β]; lia)
+      · have h : t.IsLE ((t.truncLT β).obj (F.obj m)) (β - 1) := inferInstance
+        have : t.IsLE (G.obj m) (β - 1) := h
+        exact t.isLE_of_le (G.obj m) (β - 1) _ (by simp only [β]; push_cast; lia)
       · obtain ⟨b, hab, hb⟩ := hF p a
         refine ⟨b, hab, ?_⟩
         by_cases hp : p < β
@@ -67,8 +68,9 @@ lemma isProZero_of_homology_aux (α : ℤ) (k : ℕ) :
             zero_comp, ← Functor.map_comp]
           change (homologyFunctor C p).map ((t.truncLT β).map _ ≫ _) = 0
           rw [(t.truncLTι β).naturality, Functor.map_comp, Functor.id_map, hb, comp_zero]
-        · have : ((t.truncLT β).obj (F.obj (op a))).IsLE (β - 1) := inferInstance
-          exact (isZero_of_isLE _ (β - 1) p (by lia)).eq_of_tgt _ _
+        · have h : t.IsLE ((t.truncLT β).obj (F.obj (op a))) (β - 1) := inferInstance
+          have : (G.obj (op a)).IsLE (β - 1) := h
+          exact (isZero_of_isLE (G.obj (op a)) (β - 1) p (by lia)).eq_of_tgt _ _
     obtain ⟨a₁, ha₁, h₁⟩ := hG a
     obtain ⟨b, hb, h₂⟩ := hF β a₁
     refine ⟨b, ha₁.trans hb, ?_⟩
@@ -82,11 +84,13 @@ lemma isProZero_of_homology_aux (α : ℤ) (k : ℕ) :
     obtain ⟨g, hg⟩ := Triangle.coyoneda_exact₂ _ (t.triangleLTGE_distinguished β (F.obj (op a₁)))
       (F.map (homOfLE hb).op) hπ
     have hcomp : (homOfLE (ha₁.trans hb)).op = (homOfLE hb).op ≫ (homOfLE ha₁).op := rfl
-    rw [hcomp, F.map_comp, hg]
-    change g ≫ (t.truncLTι β).app (F.obj (op a₁)) ≫ F.map (homOfLE ha₁).op = 0
-    rw [← (t.truncLTι β).naturality]
-    change g ≫ G.map (homOfLE ha₁).op ≫ _ = 0
-    rw [h₁, zero_comp, comp_zero]
+    have h0 : ((t.triangleLTGE β).obj (F.obj (op a₁))).mor₁ ≫ F.map (homOfLE ha₁).op = 0 := by
+      have := (t.truncLTι β).naturality (F.map (homOfLE ha₁).op)
+      simp only [Functor.id_map] at this
+      simp only [Triangulated.TStructure.triangleLTGE_obj_mor₁, ← this]
+      change G.map (homOfLE ha₁).op ≫ _ = 0
+      rw [h₁, zero_comp]
+    rw [hcomp, F.map_comp, hg, Category.assoc, h0, comp_zero]
 
 /-- **A tower of bounded objects with pro-zero homology is pro-zero.** If the terms of a tower
 `F : ℕᵒᵖ ⥤ D(C)` all have homology in `[α, β]` and the homology towers `Hᵖ(F)` are pro-zero,

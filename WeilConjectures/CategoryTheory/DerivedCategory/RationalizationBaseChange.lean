@@ -73,15 +73,17 @@ its rationalization is the factorization of `G`: the "projection map"
 lemma mateEquiv_mapFac_hom (adj : F ⊣ G) :
     mateEquiv adj (mapAdjunction M adj) (mapFac M F).hom = (mapFac M G).inv := by
   ext Y
+  have h := (mapFac M G).inv.naturality (adj.counit.app Y)
+  dsimp at h
   rw [mateEquiv_apply]
-  dsimp
-  rw [mapAdjunction_unit_app]
-  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
-  erw [Functor.map_id, Category.comp_id]
-  have := (mapFac M G).inv.naturality (adj.counit.app Y)
-  dsimp at this
-  rw [← this, ← Functor.map_comp_assoc, adj.right_triangle_components, Functor.map_id,
-    Category.id_comp]
+  dsimp only [TwoSquare.natTrans]
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Functor.comp_obj, Functor.comp_map,
+    Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app, Category.id_comp,
+    Category.comp_id, mapAdjunction_unit_app, Category.assoc]
+  erw [Functor.map_id, Category.id_comp]
+  rw [← h,
+    ← Functor.map_comp_assoc, adj.right_triangle_components, Functor.map_id, Category.id_comp]
 
 end Rationalization
 
@@ -136,10 +138,12 @@ noncomputable def rationalization :
 
 lemma rationalizationIso_hom_app (Y : 𝒴) :
     (𝔇.rationalizationIso M).hom.app ((Q M 𝒴).obj Y) =
-      (mapFac M 𝔇.upperF').hom.app _ ≫ (Q M 𝒳').map (𝔇.iso.hom.app Y) ≫
-        (mapFac M 𝔇.upperG').inv.app _ ≫ (map M 𝔇.upperG').map ((mapFac M 𝔇.upperF).inv.app Y) ≫
-        (map M 𝔇.upperG').map ((map M 𝔇.upperF).map (𝟙 _)) := by
-  sorry
+      (map M 𝔇.upperF').map ((mapFac M 𝔇.upperG).hom.app Y) ≫
+        (mapFac M 𝔇.upperF').hom.app (𝔇.upperG.obj Y) ≫ (Q M 𝒳').map (𝔇.iso.hom.app Y) ≫
+        (mapFac M 𝔇.upperG').inv.app (𝔇.upperF.obj Y) ≫
+        (map M 𝔇.upperG').map ((mapFac M 𝔇.upperF).inv.app Y) := by
+  simp [rationalizationIso, Localization.liftNatIso, Localization.liftNatTrans_app,
+    liftingMapComp]
 
 /-- The localization functors form a reduction of a base change square into its
 rationalization, the comparisons being the factorizations `Q ⋙ map F ≅ F ⋙ Q`. -/
@@ -154,7 +158,7 @@ noncomputable def rationalizationReduction : Reduction 𝔇 (𝔇.rationalizatio
   δG' := mapFac M 𝔇.upperG'
   cube := by
     ext Y
-    sorry
+    simp [rationalizationIso_hom_app]
 
 lemma rationalizationReduction_projF :
     (𝔇.rationalizationReduction M).projF = (mapFac M 𝔇.lowerF).inv :=

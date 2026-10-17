@@ -302,6 +302,7 @@ lemma comp_β_hom_app (F : Morphism S S') (G : Morphism S' S'') {i j : I} (h : i
     ((F.comp G).β h).hom.app x =
       (G.β h).hom.app ((F.Φ i).obj x) ≫ (G.Φ j).map ((F.β h).hom.app x) := by
   simp
+  exact Category.id_comp _
 
 variable [IsDirectedOrder I]
 

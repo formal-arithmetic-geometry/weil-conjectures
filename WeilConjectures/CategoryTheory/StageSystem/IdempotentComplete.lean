@@ -54,8 +54,8 @@ instance isIdempotentComplete [∀ i, IsIdempotentComplete (C i)] :
   obtain ⟨Y, i, r, h₁, h₂⟩ := IsIdempotentComplete.idempotents_split _ _ e
   refine ⟨(S.ι k).obj Y, (S.ι k).map i ≫ (S.isoToStage X (hX.trans h)).inv,
     (S.isoToStage X (hX.trans h)).hom ≫ (S.ι k).map r, ?_, ?_⟩
-  · rw [assoc, Iso.inv_hom_id_assoc, ← Functor.map_comp, h₁, Functor.map_id]
-  · rw [assoc, ← Functor.map_comp_assoc, h₂, mkHom_eq_isoToStage]
+  · rw [Category.assoc, Iso.inv_hom_id_assoc, ← Functor.map_comp, h₁, Functor.map_id]
+  · rw [Category.assoc, ← Functor.map_comp_assoc, h₂, mkHom_eq_isoToStage]
 
 /-- Blueprint `def-weil-karoubi-envelope` (with `def-weil-pbc-qbar-category`): the inclusion
 `K ↦ (K, 𝟙)` of the pair category of a stage system of idempotent complete categories into its

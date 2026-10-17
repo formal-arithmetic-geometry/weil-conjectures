@@ -109,7 +109,7 @@ sequence (`def-weil-pbc-hypercohomology-filtrations`), using the exactness of `g
 noncomputable def Etale.hypercohomologyCouple'E₂Iso (p : ℕ) (q : ℤ) :
     (Etale.hypercohomologyCouple' A g' f' K).E (p, p + q) ≅
       ((f')_*[A].rightDerived p).obj (((g')^*[A]).obj ((homologyFunctor _ q).obj K)) :=
-  functorTruncationCoupleEIso _ K p (p + q) ≪≫ eqToIso (by rw [add_sub_cancel_left]) ≪≫
+  functorTruncationCoupleEIso _ K p (p + q) ≪≫ eqToIso (by rw [add_sub_cancel_left]; rfl) ≪≫
     (homologyFunctor _ (p : ℤ)).mapIso ((f')_*[A].rightDerivedFunctorPlus.mapIso
       ((((g')^*[A]).mapDerivedCategoryPlusSingleFunctor 0).app _)) ≪≫
     (f')_*[A].homologyRightDerivedFunctorPlusObjSingleFunctorIso _ p
@@ -142,15 +142,18 @@ filtrations. -/
 theorem Etale.hypercohomology_convergence (a : ℤ) [K.IsGE a] :
     (Etale.hypercohomologyCouple A f K).IsHalfPlane a ∧
       (Etale.hypercohomologyCouple' A g' f' K).IsHalfPlane a ∧
-      (∀ n, (functorTruncationCoupleFiltration (f)_*[A].rightDerivedFunctorPlus K n).IsFiniteSeparated) ∧
+      (∀ n, (functorTruncationCoupleFiltration (f)_*[A].rightDerivedFunctorPlus K
+        n).IsFiniteSeparated) ∧
       (∀ n, (functorTruncationCoupleFiltration
-        (((g')^*[A]).mapDerivedCategoryPlus ⋙ (f')_*[A].rightDerivedFunctorPlus) K n).IsFiniteSeparated) ∧
+        (((g')^*[A]).mapDerivedCategoryPlus ⋙ (f')_*[A].rightDerivedFunctorPlus) K
+          n).IsFiniteSeparated) ∧
       (Etale.hypercohomologyCouple A f K).ConvergesTo (functorTruncationCoupleι _ K)
         (functorTruncationCoupleFiltration _ K) ∧
       (Etale.hypercohomologyCouple' A g' f' K).ConvergesTo (functorTruncationCoupleι _ K)
         (functorTruncationCoupleFiltration _ K) := by
   have hF₁ : ∀ (X₀ : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) (n : ℤ) [X₀.IsGE n]
-      (q : ℤ), q < n → IsZero ((homologyFunctor _ q).obj ((f)_*[A].rightDerivedFunctorPlus.obj X₀)) :=
+      (q : ℤ), q < n →
+        IsZero ((homologyFunctor _ q).obj ((f)_*[A].rightDerivedFunctorPlus.obj X₀)) :=
     fun X₀ n _ _ hq ↦ (f)_*[A].isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE X₀ n hq
   have hF₂ := fun (X₀ : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) (n : ℤ) [X₀.IsGE n]
       (q : ℤ) (hq : q < n) ↦

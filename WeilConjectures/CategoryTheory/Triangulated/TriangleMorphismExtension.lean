@@ -14,7 +14,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 
 Source: Beilinson–Bernstein–Deligne, *Faisceaux pervers*, Proposition 1.1.9
 and Corollaire 1.1.10 (ii), pp. 23–24
-(blueprint: lem-weil-pbc-triangle-morphism-extension).
+(blueprint `lem-weil-pbc-triangle-morphism-extension`).
 
 ## Main statements
 
@@ -44,7 +44,7 @@ namespace CategoryTheory.Pretriangulated
 /--
 Source: Beilinson–Bernstein–Deligne, *Faisceaux pervers*, Proposition 1.1.9
 and Corollaire 1.1.10 (ii), pp. 23–24
-(blueprint: lem-weil-pbc-triangle-morphism-extension).
+(blueprint `lem-weil-pbc-triangle-morphism-extension`).
 
 Proof:
 1. If `T.mor₁ ≫ g ≫ T'.mor₂ = 0`, exactness of Hom into `T'` gives `f`

@@ -101,6 +101,34 @@ def DerivedCategory.boundedConstructibleComplete :
   _root_.DerivedCategory.completeWithUniformReductions (Scheme.ProEt.topology T) I
     (DerivedCategory.constructibleIn (ModuleCat.{u + 1} R) T)
 
+/-- Bounded constructible complete objects with reduction amplitude `[a, b]`: derived
+`I`-complete objects of `D(T_proét, R)` all of whose reductions `K ⊗ᴸ R/Iⁿ` lie in
+`D_c^[a, b]_proét(T, R)`. These are the objects of `Dᵇc(T_proét, A)`
+(`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleComplete`) whose reductions
+have the common cohomological interval `[a, b]`. -/
+def DerivedCategory.boundedConstructibleCompleteIn (a b : ℤ) :
+    ObjectProperty
+      (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} R))) :=
+  fun K ↦ _root_.DerivedCategory.derivedComplete (Scheme.ProEt.topology T) I K ∧
+    ∀ n : ℕ, DerivedCategory.constructibleIn (ModuleCat.{u + 1} R) T a b
+      ((_root_.DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology T) I K).obj
+        (Opposite.op n))
+
+variable {I T} in
+lemma DerivedCategory.boundedConstructibleCompleteIn.boundedConstructibleComplete {a b : ℤ}
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} R))}
+    (hK : DerivedCategory.boundedConstructibleCompleteIn I T a b K) :
+    DerivedCategory.boundedConstructibleComplete I T K :=
+  ⟨hK.1, a, b, hK.2⟩
+
+variable {I T} in
+lemma DerivedCategory.boundedConstructibleComplete.exists_boundedConstructibleCompleteIn
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} R))}
+    (hK : DerivedCategory.boundedConstructibleComplete I T K) :
+    ∃ a b : ℤ, DerivedCategory.boundedConstructibleCompleteIn I T a b K := by
+  obtain ⟨h₁, a, b, h₂⟩ := hK
+  exact ⟨a, b, h₁, h₂⟩
+
 /-- Blueprint `def-weil-pbc-bounded-constructible-complete`: the bounded constructible complete
 category `Dᵇc(T_proét, A)`, the full subcategory of `D(T_proét, R)` of bounded constructible
 complete objects (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleComplete`). -/

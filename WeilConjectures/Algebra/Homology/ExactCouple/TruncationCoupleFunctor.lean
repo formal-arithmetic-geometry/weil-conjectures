@@ -35,7 +35,42 @@ The abutment maps `ι : D^{p, n} = Hⁿ(F(τ_{≤ n - p} M)) ⟶ Hⁿ(F M)`
 induced by `τ`. If `F` does not lower the cohomological degree and `M` is `≥ a`, they are
 isomorphisms for `p ≤ 0`, the couple is a half-plane couple, and its spectral sequence converges
 to the image filtration of the maps `Hⁿ(F(τ_{≤ q} M)) ⟶ Hⁿ(F M)`
-(`DerivedCategory.Plus.functorTruncationCouple_convergesTo`).
+(`DerivedCategory.Plus.functorTruncationCouple_convergesTo`). For `F = R⁺v` this is the
+truncation hypercohomology spectral sequence `E₂^{p, q} = Rᵖv(Hᵠ(M)) ⇒ H^{p+q}(R⁺v M)`
+(`CategoryTheory.Functor.truncationCouple_convergesTo_imageFiltration`, blueprint
+`thm-sp-truncation-e2`).
+
+## Blueprint pointers
+
+- `lem-sp-truncation-couple-exact`: the truncation couple
+  `CategoryTheory.Functor.truncationCouple`
+  (an `ExactCouple`, built by `TriangleTower.exactCoupleTotal`), equal to
+  `DerivedCategory.Plus.functorTruncationCouple` of `R⁺v`;
+- `lem-sp-derived-couple-exact`: `CategoryTheory.ExactCouple.derived`;
+- `lem-sp-derived-cohomology-shift`: the shift isomorphisms
+  `(DerivedCategory.Plus.homologyFunctor B 0).shiftIso` (`CategoryTheory.Functor.shiftIso` of
+  Mathlib's `Functor.ShiftSequence`);
+- `lem-sp-shift-identification`:
+  `CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleIso`
+  and `DerivedCategory.Plus.functorTruncationCoupleEIso`;
+- `lem-sp-derived-functor-single-identification`:
+  `CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso`, natural in the
+  object (`CategoryTheory.Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso`);
+- `lem-weil-pbc-derived-functor-negative-vanishing`:
+  `CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE`;
+- `lem-weil-pbc-derived-functor-truncation-iso`:
+  `CategoryTheory.Functor.isIso_homologyFunctor_map_rightDerivedFunctorPlus_map_truncLTι` and
+  `DerivedCategory.Plus.isIso_functorTruncationCoupleι`;
+- `lem-weil-pbc-truncation-cohomology`: Mathlib's `CochainComplex.quasiIsoAt_ιTruncLE`;
+- `lem-weil-pbc-truncation-descends`: the truncation functors of the canonical t-structure
+  `DerivedCategory.Plus.TStructure.t` (`truncLE`, `truncLEι`) and
+  `DerivedCategory.Plus.truncLETower`;
+- `lem-weil-pbc-truncation-step-ses`: `CochainComplex.exists_upperTruncationStepSES`;
+- `lem-weil-pbc-complex-ses-triangle`: Mathlib's `DerivedCategory.triangleOfSES_distinguished`;
+- `lem-weil-pbc-short-five-lemma`: Mathlib's
+  `CategoryTheory.ShortComplex.isIso₂_of_shortExact_of_isIso₁₃`;
+- `lem-sp-finite-filtration-induction`:
+  `CategoryTheory.PBCFilteredObject.finite_filtration_induction`.
 -/
 
 @[expose] public section
@@ -276,3 +311,37 @@ lemma imageSubobject_functorTruncationCoupleFiltration_le (n p : ℤ) :
 end Hom
 
 end DerivedCategory.Plus
+
+namespace CategoryTheory.Functor
+
+open DerivedCategory.Plus
+
+variable {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
+  [HasDerivedCategory A] [HasDerivedCategory B] [EnoughInjectives A]
+  (v : A ⥤ B) [v.Additive] (M : DerivedCategory.Plus A)
+
+/-- The truncation couple of `v` is the truncation couple of the triangulated functor `R⁺v`
+(blueprint `lem-sp-truncation-couple-exact`: it is an exact couple). -/
+lemma truncationCouple_eq_functorTruncationCouple :
+    v.truncationCouple M = functorTruncationCouple v.rightDerivedFunctorPlus M :=
+  rfl
+
+/-- Blueprint `thm-sp-truncation-e2`: **the truncation hypercohomology spectral sequence**. Let
+`M ∈ D⁺(A)` with `Hᵠ(M) = 0` for `q < a`. The truncation couple of `v` at `M`, whose `E₂`-page
+is `E₂^{p, q} ≅ Rᵖv(Hᵠ(M))` (`CategoryTheory.Functor.truncationCoupleEIsoRightDerived`), is a
+half-plane couple (in total degree `n` only `a ≤ q ≤ n` occurs), the image filtration of the
+abutment `Hⁿ(R⁺v M)` by the images of `Hⁿ(R⁺v(τ_{≤ q} M)) ⟶ Hⁿ(R⁺v M)` is finite and separated,
+and the spectral sequence converges to `Hⁿ(R⁺v M)` with this filtration. -/
+theorem truncationCouple_convergesTo_imageFiltration (a : ℤ) [M.IsGE a] :
+    (v.truncationCouple M).IsHalfPlane a ∧
+      (∀ n, (functorTruncationCoupleFiltration v.rightDerivedFunctorPlus M n).IsFiniteSeparated) ∧
+      (v.truncationCouple M).ConvergesTo (functorTruncationCoupleι v.rightDerivedFunctorPlus M)
+        (functorTruncationCoupleFiltration v.rightDerivedFunctorPlus M) := by
+  have hF : ∀ (X : DerivedCategory.Plus A) (n : ℤ) [X.IsGE n] (q : ℤ), q < n →
+      IsZero ((homologyFunctor B q).obj (v.rightDerivedFunctorPlus.obj X)) :=
+    fun X n _ _ hq ↦ v.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE X n hq
+  exact ⟨functorTruncationCouple_isHalfPlane _ M hF a,
+    isFiniteSeparated_functorTruncationCoupleFiltration _ M hF a,
+    functorTruncationCouple_convergesTo _ M hF a⟩
+
+end CategoryTheory.Functor

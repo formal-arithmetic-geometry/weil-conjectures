@@ -134,6 +134,8 @@ section OfIsProper
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
 
+attribute [local instance] Abelian.hasFiniteBiproducts
+
 /-- For the identity compactification `X ⟶[𝟙] X ⟶[f] Y` of a proper morphism `f`, the
 isomorphism `L(𝟙 X)^* Lf^* ≅ Lf^*` of
 `AlgebraicGeometry.ProEtale.leftDerivedUpperStarCompactificationIso` is the identity
@@ -186,6 +188,75 @@ lemma derivedOpenImmersionLowerShriekProjectionIso_inv_ofIsProper
     ← derivedOpenImmersionLowerShriekProjectionMap_id_comp, ← NatTrans.comp_app_assoc,
     ← NatTrans.comp_app, ← derivedOpenImmersionLowerShriekProjectionIso_hom, Iso.inv_hom_id_app,
     Category.id_comp]
+
+/-- **The identity compactification recovers the projection map** (blueprint
+`lemma-weil-pbc-projection-formula-identity-compactification`). For a proper morphism `f`, under
+`Rf_!^{(1,f)} ≅ Rf_*`
+(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationOfIsProperIso`) the
+compactified projection map `PF_c` of the identity compactification is the projection map
+`π_{f,E,Q}`. -/
+lemma projectionMapOfCompactification_ofIsProper
+    (E : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    (Q : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
+    ((projectionMapOfCompactification A (Compactification.ofIsProper f)).app E).app Q ≫
+        (rightDerivedLowerShriekOfCompactificationOfIsProperIso A f).hom.app
+          (((-⊗ᴸ-(X)[A]).obj E).obj (L((f)^*[A]).obj Q)) =
+      ((-⊗ᴸ-(Y)[A]).map ((rightDerivedLowerShriekOfCompactificationOfIsProperIso A f).hom.app
+          E)).app Q ≫
+        ((rightDerivedLowerStarProjectionMap A f).app E).app Q := by
+  have h2 : ((rightDerivedLowerStarProjectionMap A f).app (D((𝟙 X)_!open[A]).obj E)).app Q ≫
+      R((f)_*[A]).map (((-⊗ᴸ-(X)[A]).map
+        ((derivedOpenImmersionLowerShriekIdIso A X).hom.app E)).app (L((f)^*[A]).obj Q)) =
+      ((-⊗ᴸ-(Y)[A]).map (R((f)_*[A]).map
+        ((derivedOpenImmersionLowerShriekIdIso A X).hom.app E))).app Q ≫
+        ((rightDerivedLowerStarProjectionMap A f).app E).app Q :=
+    (congr_app ((rightDerivedLowerStarProjectionMap A f).naturality
+      ((derivedOpenImmersionLowerShriekIdIso A X).hom.app E)) Q).symm
+  have key : ((projectionMapOfCompactification A (Compactification.ofIsProper f)).app E).app Q ≫
+        (rightDerivedLowerShriekOfCompactificationOfIsProperIso A f).hom.app
+          (((-⊗ᴸ-(X)[A]).obj E).obj (L((f)^*[A]).obj Q)) =
+      ((rightDerivedLowerStarProjectionMap A f).app (D((𝟙 X)_!open[A]).obj E)).app Q ≫
+        R((f)_*[A]).map (((derivedOpenImmersionLowerShriekProjectionIso A (𝟙 X)).inv.app E).app
+          (L((f)^*[A]).obj Q)) ≫
+        R((f)_*[A]).map (D((𝟙 X)_!open[A]).map (((-⊗ᴸ-(X)[A]).obj E).map
+          ((leftDerivedUpperStarCompactificationIso A (Compactification.ofIsProper f)).hom.app
+            Q))) ≫
+        R((f)_*[A]).map ((derivedOpenImmersionLowerShriekIdIso A X).hom.app
+          (((-⊗ᴸ-(X)[A]).obj E).obj (L((f)^*[A]).obj Q))) := by
+    rw [projectionMapOfCompactification_app_app,
+      rightDerivedLowerShriekOfCompactificationOfIsProperIso_hom_app, Category.assoc,
+      Category.assoc]
+    rfl
+  rw [key, ← Functor.map_comp, ← Functor.map_comp,
+    derivedOpenImmersionLowerShriekProjectionIso_inv_ofIsProper A f E Q, h2,
+    rightDerivedLowerShriekOfCompactificationOfIsProperIso_hom_app]
+
+/-- **The identity compactification recovers `ρ`** (blueprint
+`lemma-weil-pbc-projection-formula-identity-compactification`). For a proper morphism `f` and a
+complex `F` with a strict-perfect package, under `Rf_!^{(1,f)} ≅ Rf_*`
+(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationOfIsProperIso`) the
+inverse of the compactified projection map of the identity compactification
+(`AlgebraicGeometry.ProEtale.projectionMapOfCompactificationInv`) is
+`ρ_{f,E,F} = AlgebraicGeometry.ProEtale.rightDerivedLowerStarProjectionInv`. -/
+lemma projectionMapOfCompactificationInv_ofIsProper
+    (E : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    {F : CochainComplex (Sheaf (Scheme.ProEt.topology Y) A) ℤ}
+    (P : F.StrictPerfectPackage (𝟙_ (Sheaf (Scheme.ProEt.topology Y) A))) :
+    projectionMapOfCompactificationInv A (Compactification.ofIsProper f) E P ≫
+        ((-⊗ᴸ-(Y)[A]).map ((rightDerivedLowerShriekOfCompactificationOfIsProperIso A f).hom.app
+          E)).app (DerivedCategory.Q.obj F) =
+      (rightDerivedLowerShriekOfCompactificationOfIsProperIso A f).hom.app
+          (((-⊗ᴸ-(X)[A]).obj E).obj (L((f)^*[A]).obj (DerivedCategory.Q.obj F))) ≫
+        rightDerivedLowerStarProjectionInv A f E P := by
+  have := isIso_projectionMapOfCompactification_app_app_of_strictPerfectPackage A
+    (Compactification.ofIsProper f) E P
+  have := isIso_rightDerivedLowerStarProjectionMap_of_strictPerfectPackage A f E P
+  rw [← cancel_epi (((projectionMapOfCompactification A (Compactification.ofIsProper f)).app
+      E).app (DerivedCategory.Q.obj F)), projectionMapOfCompactification_comp_inv_assoc,
+    ← cancel_mono (((rightDerivedLowerStarProjectionMap A f).app E).app
+      (DerivedCategory.Q.obj F)), Category.assoc, Category.assoc,
+    rightDerivedLowerStarProjectionInv_comp, Category.comp_id,
+    reassoc_of% projectionMapOfCompactification_ofIsProper]
 
 end OfIsProper
 

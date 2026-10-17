@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.ReductionTower
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.Amplification
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.BoundedConstructibleTower
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalarsConstructible
 
 /-!
 # Witness compatibility and tower preservation for a cartesian square
@@ -187,5 +188,144 @@ theorem witnessCompatibility_of_isPullback {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y
       ((Etale.upperStar _ g').mapDerivedCategoryPlusCompatibility.app ⟨K, hK⟩)⟩
 
 end Witness
+
+section Preservation
+
+variable {ϖ : A} (hϖ : ϖ ∈ nonZeroDivisors A) (hI : I = Ideal.span {ϖ}) [∀ n, Finite (A ⧸ I ^ n)]
+
+include hϖ hI in
+/-- The reductions `K ⊗ᴸ A/Iⁿ` of an object `K` whose reductions lie in `D_c^[a, b](T, A)` are
+the restrictions of scalars `Res M_n` of the levels of a normalized tower `M` whose levels lie
+in `D_c^[a, b](T, A ⧸ Iⁿ)`: the tower of derived base changes
+(`DerivedCategory.exists_normalizedTower_restrict_iso`), whose levels are constructible since
+restriction of scalars reflects constructibility
+(`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleIn_of_derivedRestrictScalars_obj`). -/
+lemma exists_isConstructibleInTower_restrict_iso {T : Scheme.{u}} {K : 𝐃(T)} {a b : ℤ}
+    (hK : ∀ n : ℕ, DerivedCategory.constructibleIn (ModuleCat.{u + 1} A) T a b
+      ((_root_.DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology T) I K).obj
+        (op n))) :
+    ∃ M : Sheaf.NormalizedTower (Scheme.ProEt.topology T) I, IsConstructibleInTower a b M ∧
+      ∀ n : ℕ, Nonempty (M.restrict.obj (op n) ≅
+        (_root_.DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology T) I K).obj
+          (op n)) := by
+  obtain ⟨M, hM⟩ := _root_.DerivedCategory.exists_normalizedTower_restrict_iso hϖ hI K
+  refine ⟨M, fun n ↦ ?_, hM⟩
+  obtain ⟨e⟩ := hM n
+  exact DerivedCategory.constructibleIn_of_derivedRestrictScalars_obj (I ^ n)
+    ((DerivedCategory.constructibleIn _ T a b).prop_of_iso e.symm (hK n))
+
+include hϖ hI in
+/-- A triangulated `A`-linear functor `Φ` preserves constructible towers with shift `c` as soon
+as it carries the restrictions of scalars `Res M_n` of the levels of every tower with levels in
+`D_c^[a, b]` into `D_c^[a, b + c](T, A)`. The output tower is the tower of reductions of
+`Φ K`, where `K` is the derived limit of the tower
+(`CategoryTheory.Sheaf.NormalizedTower.exists_derivedComplete_iso`): `Φ` commutes with the
+reductions, so `Φ (Res M_n) ≅ Φ (K ⊗ᴸ A/Iⁿ) ≅ Φ K ⊗ᴸ A/Iⁿ`. -/
+theorem preservesConstructibleTowers_of_linear {S T : Scheme.{u}} (Φ : 𝐃(S) ⥤ 𝐃(T))
+    [Φ.CommShift ℤ] [Φ.IsTriangulated] [Φ.Linear A] (c : ℕ)
+    (hΦ : ∀ (M : Sheaf.NormalizedTower (Scheme.ProEt.topology S) I) (a b : ℤ),
+      IsConstructibleInTower a b M → ∀ n : ℕ,
+        DerivedCategory.constructibleIn (ModuleCat.{u + 1} A) T a (b + c)
+          (Φ.obj (M.restrict.obj (op n)))) :
+    PreservesConstructibleTowers I Φ c := by
+  intro M a b hM
+  obtain ⟨K, -, hK⟩ := Sheaf.NormalizedTower.exists_derivedComplete_iso hϖ hI M
+  have hK' : ∀ n : ℕ, DerivedCategory.constructibleIn (ModuleCat.{u + 1} A) T a (b + c)
+      ((_root_.DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology T) I
+        (Φ.obj K)).obj (op n)) := fun n ↦ by
+    obtain ⟨e₁⟩ := hK n
+    obtain ⟨e₂⟩ := commutesWithReductions_of_linear hϖ hI Φ K n
+    exact (DerivedCategory.constructibleIn _ T a (b + c)).prop_of_iso
+      (Φ.mapIso e₁.symm ≪≫ e₂) (hΦ M a b hM n)
+  obtain ⟨N, hN, hN'⟩ := exists_isConstructibleInTower_restrict_iso hϖ hI hK'
+  refine ⟨N, hN, fun n ↦ ?_⟩
+  obtain ⟨e₁⟩ := hK n
+  obtain ⟨e₂⟩ := commutesWithReductions_of_linear hϖ hI Φ K n
+  obtain ⟨e₃⟩ := hN' n
+  exact ⟨Φ.mapIso e₁.symm ≪≫ e₂ ≪≫ e₃.symm⟩
+
+include hϖ hI in
+/-- A functor `Φ` which commutes with the reductions and preserves constructible towers with
+shift `c` carries objects whose reductions lie in `D_c^[a, b]` to objects whose reductions lie
+in `D_c^[a, b + c]`: the reductions `K ⊗ᴸ A/Iⁿ` are the levels `Res M_n` of a constructible
+tower (`AlgebraicGeometry.ProEtale.exists_isConstructibleInTower_restrict_iso`), so
+`Φ K ⊗ᴸ A/Iⁿ ≅ Φ (Res M_n) ≅ Res N_n` for a constructible tower `N`. -/
+lemma PreservesConstructibleTowers.constructibleIn_derivedCompletionDiagram_obj
+    {S T : Scheme.{u}} {Φ : 𝐃(S) ⥤ 𝐃(T)} {c : ℕ} (hΦ : PreservesConstructibleTowers I Φ c)
+    (hΦ' : CommutesWithReductions I Φ) {K : 𝐃(S)} {a b : ℤ}
+    (hK : ∀ n : ℕ, DerivedCategory.constructibleIn (ModuleCat.{u + 1} A) S a b
+      ((_root_.DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology S) I K).obj
+        (op n))) (n : ℕ) :
+    DerivedCategory.constructibleIn (ModuleCat.{u + 1} A) T a (b + c)
+      ((_root_.DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology T) I
+        (Φ.obj K)).obj (op n)) := by
+  obtain ⟨M, hM, hM'⟩ := exists_isConstructibleInTower_restrict_iso hϖ hI hK
+  obtain ⟨N, hN, hN'⟩ := hΦ M a b hM
+  obtain ⟨e₁⟩ := hM' n
+  obtain ⟨e₂⟩ := hΦ' K n
+  obtain ⟨e₃⟩ := hN' n
+  exact (DerivedCategory.constructibleIn _ T a (b + c)).prop_of_iso
+    (e₃.symm ≪≫ Φ.mapIso e₁ ≪≫ e₂)
+    (DerivedCategory.constructibleIn_derivedRestrictScalars_obj (I ^ n) (hN n))
+
+include hϖ hI in
+/-- The derived completion of an object whose reductions lie in `D_c^[a, b]` (a homotopy limit
+of its reductions) is bounded constructible complete with reduction amplitude `[a, b]`: it is
+derived complete and has the same reductions
+(`DerivedCategory.derivedComplete_and_iso_of_isHomotopyLimit`). -/
+lemma boundedConstructibleCompleteIn_of_isHomotopyLimit {T : Scheme.{u}} {K : 𝐃(T)} {a b : ℤ}
+    (hK : ∀ n : ℕ, DerivedCategory.constructibleIn (ModuleCat.{u + 1} A) T a b
+      ((_root_.DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology T) I K).obj
+        (op n)))
+    {c : Cone (_root_.DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology T) I K)}
+    (hc : IsHomotopyLimit c) : DerivedCategory.boundedConstructibleCompleteIn I T a b c.pt := by
+  obtain ⟨h₁, h₂⟩ := _root_.DerivedCategory.derivedComplete_and_iso_of_isHomotopyLimit hϖ hI K hc
+  refine ⟨h₁, fun n ↦ ?_⟩
+  obtain ⟨e⟩ := h₂ n
+  exact (DerivedCategory.constructibleIn _ T a b).prop_of_iso e.symm (hK n)
+
+include hϖ hI in
+/-- Blueprint `prop-weil-pbc-preservation-constructible`, the formal argument: under the
+witness compatibility `WIT(□)` and the tower preservation `TOW(□; c)`, for every
+`K ∈ Dᵇc(X_proét, A)` whose reductions have the common interval `[a, b]`,
+* `Rf_* K ∈ Dᵇc(Y_proét, A)` with reduction amplitude `[a, b + c]`;
+* the completed pullback `Lg^*_comp Rf_* K` (a homotopy limit of the reductions of
+  `Lg^* Rf_* K`) lies in `Dᵇc(Y'_proét, A)` with reduction amplitude `[a, b + c]`;
+* the completed pullback `Lg'^*_comp K` lies in `Dᵇc(X'_proét, A)` with reduction amplitude
+  `[a, b]`, and `Rf'_* Lg'^*_comp K ∈ Dᵇc(Y'_proét, A)` with reduction amplitude `[a, b + c]`.
+
+The levelwise functors carry the constructible tower of reductions of `K` to constructible
+towers (`TOW`), compatibly with the reductions (`WIT`); derived completeness of the direct
+images holds since `Rf_*` is a right adjoint of the `A`-linear functor `Lf^*`
+(`DerivedCategory.derivedComplete_obj_of_adjunction`, the completeness clause of
+`prop-weil-pbc-direct-image-limits`). -/
+theorem boundedConstructibleCompleteIn_of_witnessCompatibility {X Y X' Y' : Scheme.{u}}
+    {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} {sq : IsPullback g' f' f g} {c : ℕ}
+    (hW : WitnessCompatibility A I sq) (hT : TowerPreservation A I sq c) {K : 𝐃(X)} {a b : ℤ}
+    (hK : DerivedCategory.boundedConstructibleCompleteIn I X a b K) :
+    DerivedCategory.boundedConstructibleCompleteIn I Y a (b + c)
+        ((R(ProEtale.lowerStar (ModuleCat.{u + 1} A) f)).obj K) ∧
+      (∀ {cY : Cone (_root_.DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology Y') I
+          ((L(ProEtale.upperStar (ModuleCat.{u + 1} A) g)).obj
+            ((R(ProEtale.lowerStar (ModuleCat.{u + 1} A) f)).obj K)))},
+        IsHomotopyLimit cY → DerivedCategory.boundedConstructibleCompleteIn I Y' a (b + c) cY.pt) ∧
+      ∀ {cX : Cone (_root_.DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X') I
+          ((L(ProEtale.upperStar (ModuleCat.{u + 1} A) g')).obj K))},
+        IsHomotopyLimit cX → DerivedCategory.boundedConstructibleCompleteIn I X' a b cX.pt ∧
+          DerivedCategory.boundedConstructibleCompleteIn I Y' a (b + c)
+            ((R(ProEtale.lowerStar (ModuleCat.{u + 1} A) f')).obj cX.pt) := by
+  have hf := hT.lowerStar.constructibleIn_derivedCompletionDiagram_obj hϖ hI hW.lowerStar hK.2
+  have hg := hT.upperStar.constructibleIn_derivedCompletionDiagram_obj hϖ hI hW.upperStar hf
+  have hg' := hT.upperStar'.constructibleIn_derivedCompletionDiagram_obj hϖ hI hW.upperStar' hK.2
+  simp only [Nat.cast_zero, add_zero] at hg hg'
+  refine ⟨⟨_root_.DerivedCategory.derivedComplete_obj_of_adjunction hϖ hI
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f) hK.1, hf⟩,
+    fun hcY ↦ boundedConstructibleCompleteIn_of_isHomotopyLimit hϖ hI hg hcY, fun hcX ↦ ?_⟩
+  have hX := boundedConstructibleCompleteIn_of_isHomotopyLimit hϖ hI hg' hcX
+  exact ⟨hX, _root_.DerivedCategory.derivedComplete_obj_of_adjunction hϖ hI
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f') hX.1,
+    hT.lowerStar'.constructibleIn_derivedCompletionDiagram_obj hϖ hI hW.lowerStar' hX.2⟩
+
+end Preservation
 
 end AlgebraicGeometry.ProEtale

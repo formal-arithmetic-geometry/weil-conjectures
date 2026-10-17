@@ -238,11 +238,14 @@ lemma koszulMap_mem_smul_top (c : Fin r → R) (n : ℕ) (x : ⋀[R]^(n + 1) (Fi
 
 /-- Left multiplication by `eᵢ`, the null-homotopy of multiplication by `gᵢ`:
 `d (eᵢ ∧ z) = gᵢ z - eᵢ ∧ d z`. -/
-lemma koszulBoundary_ι_mul (g : Fin r → R) (n : ℕ) (i : Fin r) (z : ⋀[R]^(n + 1) (Fin r →₀ R)) :
-    (koszulBoundary R r g (n + 1) ⟨ι R (Finsupp.single i (1 : R)) * (z : ExteriorAlgebra R (Fin r →₀ R)),
-        ι_mul_mem_exteriorPower _ _ z.2⟩ : ExteriorAlgebra R (Fin r →₀ R)) =
+lemma koszulBoundary_ι_mul (g : Fin r → R) (n : ℕ) (i : Fin r)
+    (z : ⋀[R]^(n + 1) (Fin r →₀ R)) :
+    (koszulBoundary R r g (n + 1)
+        ⟨ι R (Finsupp.single i (1 : R)) * (z : ExteriorAlgebra R (Fin r →₀ R)),
+          ι_mul_mem_exteriorPower _ _ z.2⟩ : ExteriorAlgebra R (Fin r →₀ R)) =
       g i • (z : ExteriorAlgebra R (Fin r →₀ R)) -
-        ι R (Finsupp.single i (1 : R)) * (koszulBoundary R r g n z : ExteriorAlgebra R (Fin r →₀ R)) :=
+        ι R (Finsupp.single i (1 : R)) *
+          (koszulBoundary R r g n z : ExteriorAlgebra R (Fin r →₀ R)) :=
   (CliffordAlgebra.contractLeft_ι_mul (Q := (0 : QuadraticForm R (Fin r →₀ R)))
     (Finsupp.linearCombination R g) _ _).trans (by
     simp
@@ -291,7 +294,7 @@ theorem exists_koszulMap_mem_range [IsNoetherianRing R] (f : Fin r → R) (a n :
     refine Submodule.smul_mono_left ?_ (koszulMap_mem_smul_top _ n z)
     rw [Ideal.span_le]
     rintro _ ⟨i, rfl⟩
-    exact Ideal.pow_mem_pow (Ideal.subset_span ⟨i, rfl⟩) _
+    exact Ideal.pow_mem_pow (Ideal.subset_span (Set.mem_range_self i) : f i ∈ I) _
   have hmem : koszulMap (f ^ (c + N)) (n + 1) z ∈ I ^ N • Z := by
     have h := hc (c + N) (Nat.le_add_right c N)
     rw [Nat.add_sub_cancel_left] at h

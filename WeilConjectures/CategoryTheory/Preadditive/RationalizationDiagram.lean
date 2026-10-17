@@ -39,10 +39,10 @@ def rationalizationDiagram (X : C) : ℕ ⥤ C where
   map_comp {k n p} f g := by
     have hkn := leOfHom f
     have hnp := leOfHom g
-    rw [Preadditive.smul_comp, Preadditive.comp_smul, Category.comp_id, smul_smul,
-      ← Nat.ascFactorial_mul_ascFactorial, Nat.mul_comm]
-    congr 3
-    omega
+    change _ = ((k + 1).ascFactorial (n - k) • 𝟙 X) ≫ ((n + 1).ascFactorial (p - n) • 𝟙 X)
+    rw [Preadditive.nsmul_comp, Preadditive.comp_nsmul, Category.comp_id, smul_smul,
+      show n + 1 = k + 1 + (n - k) by omega, Nat.ascFactorial_mul_ascFactorial,
+      show n - k + (p - n) = p - k by omega]
 
 lemma rationalizationDiagram_map (X : C) {k n : ℕ} (f : k ⟶ n) :
     (rationalizationDiagram X).map f = (k + 1).ascFactorial (n - k) • 𝟙 X :=
@@ -55,7 +55,9 @@ lemma colimit_ι_rationalizationDiagram (X : C) [HasColimit (rationalizationDiag
     colimit.ι (rationalizationDiagram X) k =
       (k + 1).ascFactorial N • colimit.ι (rationalizationDiagram X) (k + N) := by
   rw [← colimit.w (rationalizationDiagram X) (homOfLE (Nat.le_add_right k N)),
-    rationalizationDiagram_map, Preadditive.smul_comp, Category.id_comp, Nat.add_sub_cancel_left]
+    rationalizationDiagram_map, Preadditive.nsmul_comp, Nat.add_sub_cancel_left]
+  congr 1
+  exact Category.id_comp _
 
 /-- The colimit of the rationalization diagram is zero if and only if all its coprojections
 vanish. -/
@@ -80,7 +82,10 @@ variable {D : Type u'} [Category.{v'} D] [Preadditive D]
 def mapRationalizationDiagramIso (G : C ⥤ D) [G.Additive] (X : C) :
     rationalizationDiagram X ⋙ G ≅ rationalizationDiagram (G.obj X) :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) fun f ↦ by
-    simp [rationalizationDiagram_map, Functor.map_nsmul]
+    simp only [Functor.comp_map, rationalizationDiagram_map, Functor.map_nsmul,
+      Iso.refl_hom, Category.comp_id, Category.id_comp]
+    congr 1
+    exact G.map_id X
 
 end CategoryTheory.Functor
 
@@ -92,6 +97,9 @@ variable {C : Type u} [Category.{v} C] [Preadditive C]
 @[simps!]
 def rationalizationDiagramIsoOfIso {X Y : C} (e : X ≅ Y) :
     rationalizationDiagram X ≅ rationalizationDiagram Y :=
-  NatIso.ofComponents (fun _ ↦ e) fun f ↦ by simp [rationalizationDiagram_map]
+  NatIso.ofComponents (fun _ ↦ e) fun f ↦ by
+    simp only [rationalizationDiagram_map, Preadditive.nsmul_comp, Preadditive.comp_nsmul]
+    congr 1
+    exact (Category.id_comp _).trans (Category.comp_id _).symm
 
 end CategoryTheory.Preadditive

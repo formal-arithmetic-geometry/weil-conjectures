@@ -9,6 +9,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.NormalizedTower
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.AdicTower
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTower
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.ConstructibleReduction
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Milnor
 
 /-!
 # Reduction towers and normalized towers
@@ -200,8 +201,8 @@ lemma shortExact_quotPowReduction (n : ℕ)
   have := mono_smul_of_flat hϖ (hP i) n
   have := (quotPowReductionDatum J hI n).epi_r (P.X i)
   exact { exact := (quotPowReductionDatum J hI n).exact (P.X i)
-          mono_f := by dsimp; infer_instance
-          epi_g := by dsimp; infer_instance }
+          mono_f := by assumption
+          epi_g := by assumption }
 
 include hϖ in
 /-- For a complex `P` of flat sheaves, the restriction of scalars of `P / ϖⁿ P` is the reduction
@@ -231,7 +232,7 @@ lemma nonempty_iso_restrict_quotPowReduction (n : ℕ)
 
 end Reduction
 
-include hϖ in
+include hϖ hI in
 /-- **The reduction tower of an object is the restriction of a normalized tower.** For every
 `K ∈ D(J, R)` there is a normalized tower `M` (the derived base changes `K ⊗ᴸ_R R ⧸ Iⁿ`) whose
 levels `Res M_n` are the reductions `K ⊗ᴸ R/Iⁿ`. -/

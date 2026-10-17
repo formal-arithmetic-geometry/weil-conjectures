@@ -10,7 +10,6 @@ public import WeilConjectures.ConstructibleSheaf.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleSerre
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
-public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
 
 /-!
 # Restriction of scalars of pro-étale complexes: direct images and constructibility
@@ -154,7 +153,9 @@ noncomputable def rightDerivedPlusLowerStarRestrictScalars :
         (Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ).mapDerivedCategoryPlus ⟶
       (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).mapDerivedCategoryPlus ⋙
         (ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctorPlus :=
-  Functor.rightDerivedFunctorPlusBaseChange (lowerStarCompSheafComposeRestrictScalarsIso φ f).hom
+  Functor.rightDerivedFunctorPlusBaseChange 
+    (γ := Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ)
+    (β := Sheaf.restrictScalars (Scheme.ProEt.topology X) φ) (𝟙 _)
 
 /-- **Restriction of scalars commutes with the derived direct image on `D⁺`**, since it sends
 injective pro-étale sheaves of `Λ'`-modules to `f_*`-acyclic sheaves of `Λ`-modules. -/
