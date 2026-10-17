@@ -162,6 +162,32 @@ lemma adicUpperStarUnitIso_str :
   rw [reassoc_of% h3]
   exact h4.symm
 
+attribute [local instance] Sheaf.symmetricCategory in
+/-- The comparison `φ^* [G, ℚ̄_ℓ] ⟶ [φ^* G, ℚ̄_ℓ]` is compatible with the Weil structures. -/
+lemma adicUpperStarDualComparison_str (G : ProEtaleWeilSheaf k₀ l Y) :
+    ((σX).inv)_*[W].map (adicUpperStarDualComparison l φ̄ G.carrier).hom ≫
+        (ProEtaleWeilSheaf.ihom k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj G)
+          (ProEtaleWeilSheaf.adicConstant k₀ l X)).str.hom.hom =
+      ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj (ProEtaleWeilSheaf.ihom k₀ l Y G
+          (ProEtaleWeilSheaf.adicConstant k₀ l Y))).str.hom.hom ≫
+        (adicUpperStarDualComparison l φ̄ G.carrier).hom := by
+  refine map_comp_ihom_str_of_uncurryHom (P := (ProEtaleWeilSheaf.upperStar k₀ l φ).obj
+    (ProEtaleWeilSheaf.ihom k₀ l Y G (ProEtaleWeilSheaf.adicConstant k₀ l Y)))
+    (M := (ProEtaleWeilSheaf.upperStar k₀ l φ).obj G) (N := ProEtaleWeilSheaf.adicConstant k₀ l X)
+    (adicUpperStarDualComparison l φ̄ G.carrier) ?_
+  have hp := upperStar_pairing_str φ (ProEtaleWeilSheaf.ihom k₀ l Y G
+    (ProEtaleWeilSheaf.adicConstant k₀ l Y)) G (ProEtaleWeilSheaf.adicConstant k₀ l Y)
+    (Mod.evaluation G.carrier (ProEtaleWeilSheaf.adicConstant k₀ l Y).carrier)
+    (ihom_evaluation_str G (ProEtaleWeilSheaf.adicConstant k₀ l Y))
+  have hu := congrArg Mod.Hom.hom (adicUpperStarUnitIso_str (k₀ := k₀) (l := l) φ)
+  rw [Mod.comp_hom', Mod.comp_hom'] at hu
+  erw [adicLowerStar_map_hom] at hu
+  rw [uncurryHom_adicUpperStarDualComparison]
+  erw [reassoc_of% hp]
+  erw [← hu]
+  simp only [Functor.map_comp, Category.assoc]
+  rfl
+
 end ProEtaleWeilSheaf
 
 end AlgebraicGeometry
