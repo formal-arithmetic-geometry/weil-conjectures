@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleProjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedTriangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableCriterion
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
+public import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 
 /-!
 # Dualizable objects of `D(C)` when the unit is a finite projective generator of sections
@@ -424,12 +425,12 @@ lemma finProj_biprod {P P' : C} (hP : finProj C P) (hP' : finProj C P') :
   obtain ⟨r, ⟨h⟩⟩ := hP
   obtain ⟨s, ⟨h'⟩⟩ := hP'
   refine ⟨r + s, ⟨Retract.trans ?_ (Retract.ofIso (biprodBiproductFinIso _ r s))⟩⟩
-  exact { i := biprod.map h.i h'.i, r := biprod.map h.r h'.r, retract := by simp }
+  exact { i := biprod.map h.i h'.i, r := biprod.map h.r h'.r, retract := by apply biprod.hom_ext' <;> simp [h.retract_assoc, h'.retract_assoc] }
 
 omit [MonoidalCategory C] in
 lemma projective_biproduct_const (X : C) [Projective X] (ι : Type) [Finite ι] :
     Projective (⨁ fun _ : ι ↦ X) where
-  factors f e _ := ⟨biproduct.desc fun b ↦ Projective.factorThru (biproduct.ι _ b ≫ f) e,
+  factors f e _ := ⟨biproduct.desc fun b ↦ Projective.factorThru (biproduct.ι (fun _ : ι ↦ X) b ≫ f) e,
     biproduct.hom_ext' _ _ fun b ↦ by simp⟩
 
 lemma finProj.projective [Projective (𝟙_ C)] {P : C} (hP : finProj C P) : Projective P := by
@@ -437,19 +438,19 @@ lemma finProj.projective [Projective (𝟙_ C)] {P : C} (hP : finProj C P) : Pro
   have := projective_biproduct_const (𝟙_ C) (Fin r)
   exact h.projective
 
-lemma isDualizable_biproduct_unit (r : ℕ) : IsDualizable (⨁ fun _ : Fin r ↦ 𝟙_ C) := by
+lemma isDualizable_biproduct_unit [MonoidalPreadditive C] (r : ℕ) : IsDualizable (⨁ fun _ : Fin r ↦ 𝟙_ C) := by
   induction r with
   | zero =>
-    refine IsZero.isDualizable ((IsZero.iff_id_eq_zero _).2 (biproduct.hom_ext' _ _ ?_))
+    refine CategoryTheory.IsZero.isDualizable ((IsZero.iff_id_eq_zero _).2 (biproduct.hom_ext' _ _ ?_))
     exact fun i ↦ i.elim0
   | succ r ih =>
     exact IsDualizable.of_iso (biprodBiproductFinIso _ r 1)
-      (ih.biprod (IsDualizable.of_iso (biproductUniqueIso _).symm isDualizable_unit))
+      (IsDualizable.biprod ih (IsDualizable.of_iso (biproductUniqueIso _).symm isDualizable_unit))
 
-lemma finProj.isDualizable [IsIdempotentComplete C] {P : C} (hP : finProj C P) :
+lemma finProj.isDualizable [MonoidalPreadditive C] [IsIdempotentComplete C] {P : C} (hP : finProj C P) :
     IsDualizable P := by
   obtain ⟨r, ⟨h⟩⟩ := hP
-  exact (isDualizable_biproduct_unit r).of_retract h
+  exact IsDualizable.of_retract h (isDualizable_biproduct_unit r)
 
 end FinProj
 
