@@ -15,9 +15,134 @@
   "def-weil-derived-direct-image",
   "lem-sf-proetale-constructible-origin"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on the small etale site, as required by the statement's definition of the filtered construction. The constructible-origin equivalence of [lem-sf-proetale-constructible-origin] identifies the ordinary bounded constructible coefficient objects, and [sk-prop-sf-comparison] gives fully faithful comparison on their bounded-below derived categories. The filtered objects and operations on the pro-etale side in this statement are their stipulated transports. For a bounded complex $B$ representing $K$, apply [lem-weil-pbc-open-closed-short-exact] in every degree: the natural counit and unit give $0\\to j_!j^*B\\to B\\to i_*i^*B\\to0$. By [prop-weil-pbc-inverse-image-modules-exact] and [lem-weil-pbc-extension-by-zero-exact], a quasi-isomorphism of representatives induces quasi-isomorphisms on the subcomplexes. The exactness of $i_*$ in [lem-cbc-open-closed-recollement] gives the same for the quotients. Thus $B\\mapsto(B,F^1B=j_!j^*B)$ descends to a section of forgetting the filtration, independent of the representative up to its canonical derived isomorphism. Its grades are $K_Z=i_*i^*K$ in filtration degree $0$ and $K_U=j_!j^*K$ in degree $1$. The finite-stage preservation statements of [prop-functor-package] put the two grades and the underlying object in $D^b_{ctf}$. The unfiltered statement is about the pro-etale operations of [def-trf-coefficient-conventions], so the etale realization must be compared with them: by [det-ctf-finite-comparison-localizing], $\\nu^*$ commutes, through its canonical comparisons, with inverse images, direct images, extension by zero along open immersions and the compactification composite $Rf_!=Rp_*j_!$, on bounded constructible finite-Tor etale complexes (which lie in the localizing closure there). Hence for $T_{\\mathrm{et}}=Rc_{1!}c_2^{-1}$ on the etale side, $\\nu_X^*T_{\\mathrm{et}}M\\simeq Rc_{1!}c_2^*\\nu_X^*M$ naturally in $M$; together with the full faithfulness of [sk-prop-sf-comparison] this identifies, for bounded constructible etale $M,N$ and every $q$, $\\operatorname{Hom}_{D(X_{\\mathrm{et}},A)}(T_{\\mathrm{et}}M,N[q])$ with $\\operatorname{Hom}_{D(X,A)}(Rc_{1!}c_2^*\\nu^*M,\\nu^*N[q])$, compatibly with the maps induced by morphisms in $M$ and $N$. All unfiltered Hom groups and maps below are read through this identification; in particular the target of the forgetful map in the statement is the etale Hom group of $T_{\\mathrm{et}}K$ and $K$. Denote the localization arrows by $a:K_U\\to K$ and $b:K\\to K_Z$.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "sk-prop-sf-comparison",
+    "lem-weil-pbc-open-closed-short-exact",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-cbc-open-closed-recollement",
+    "prop-functor-package",
+    "det-ctf-finite-comparison-localizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Example 5.2.3, finite-coefficient construction; etale/pro-etale reading as stipulated in the item"
+   }
+  },
+  {
+   "text": "Put $T=Rc_{1!}c_2^*$. Let $V=c_2^{-1}(U)$ with open inclusion $h:V\\hookrightarrow C$. If $v\\in V$ lay in $c_1^{-1}(Z)$, invariance would imply $c_2(v)\\in Z$, a contradiction. Thus $V\\subseteq c_1^{-1}(U)$, $V=c^{-1}(U\\times U)$, and $c_1h=jp_1$, $c_2h=jp_2$ define the legs $p_1,p_2:V\\to U$ of $c|_U$. Base change for extension by zero [sbc-prop-extension-by-zero-and-arbitrary-base-change] gives $c_2^*K_U\\simeq h_!p_2^*j^*K$. Compact-support composition [prop-functor-package] therefore gives\n$$TK_U\\simeq Rc_{1!}h_!p_2^*j^*K\\simeq j_!M_U,\\qquad M_U=Rp_{1!}p_2^*j^*K.$$\nApplying the same extension-by-zero base change to the disjoint square $Z\\times_XU=\\varnothing$ gives $i^*j_!=0$, hence $i^*TK_U=0$. The open self-base-change square gives $j^*j_!\\simeq\\mathrm{id}$. These comparisons use the actual units and counits of the compact-support functors, not just an assertion about support.",
+   "uses": [
+    "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.3.3, equation (5.2), after interchanging the two legs; §1.5.9"
+   }
+  },
+  {
+   "text": "For every cochain shift $q\\in\\mathbf Z$, ordinary derived adjunction [fix-prop-adjunctions] gives\n$$\\operatorname{Hom}_{D(X,A)}(TK_U,K_Z[q])\\simeq\\operatorname{Hom}_{D(Z,A)}(i^*TK_U,i^*K[q])=0.$$\nThe etale module-sheaf category has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. By the ordinary global-Hom interpretation in [lem-trf-filtered-derived-hom-calculus], all cohomology groups of $R\\operatorname{Hom}_X(TK_U,K_Z)$ vanish, so that complex is zero in $D(\\mathbf{Ab})$ (the Hom groups being compared between the etale and pro-etale sides by the identification of Step 1). This is vanishing in every cochain degree, rather than just vanishing of the degree-zero Hom group.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "lem-trf-filtered-derived-hom-calculus",
+    "lem-weil-pbc-module-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.3.3, equation (5.2) and its adjunction argument"
+   }
+  },
+  {
+   "text": "For the separated finite-type legs choose compactifications by [thm-nagata-compactification]: their targets are quasi-compact (finite type over a field) and quasi-separated (separated over a field). These are supplied compactifications in the sense of the filtered-operation lemma. The filtered lifts of [lem-trf-filtered-derived-operation-lifts] commute with forgetting the filtration and with each graded functor; this applies to $T$ by its compactification-derived realization and to the localization arrows. Hence $P=T\\widetilde K$ and $Q=\\widetilde K$ have grades $P^0=TK_Z$, $P^1=TK_U$, $Q^0=K_Z$, $Q^1=K_U$, and no other grades. The etale module-sheaf category has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives], so apply [lem-trf-filtered-derived-hom-calculus] to $H=R\\operatorname{Hom}_F(P,Q)$. For negative filtration degrees its graded formula reads $\\operatorname{gr}^{-1}H=R\\operatorname{Hom}_X(TK_U,K_Z)=0$ and $\\operatorname{gr}^rH=0$ for $r<-1$. Since the filtration is finite, successively applying its truncation triangles shows $t_{<0}H=0$: the successive cones are exactly these zero graded complexes, starting with the zero tail. The truncation triangle then makes $\\omega t_{\\ge0}H\\to\\omega H$ an isomorphism. Its $H^0$ is precisely the forgetful map on Hom sets, so that map is bijective; by the identification of Step 1 this is the forgetful map of the statement. (The filtered lifts used here are those of the general first clause of [lem-trf-filtered-derived-operation-lifts], applied to the etale module-sheaf categories.) In particular $\\widehat u$ has a unique filtered lift $\\widetilde u$.",
+   "uses": [
+    "lem-trf-filtered-derived-operation-lifts",
+    "lem-trf-filtered-derived-hom-calculus",
+    "thm-nagata-compactification",
+    "lem-weil-pbc-module-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§5.1.5, 5.2.1–5.2.2 and §5.3.3, first assertion"
+   }
+  },
+  {
+   "text": "Write $v_U=\\operatorname{gr}^1\\widetilde u:TK_U\\to K_U$ and $v_Z=\\operatorname{gr}^0\\widetilde u:TK_Z\\to K_Z$. Functoriality of the filtration truncation triangles in [lem-trf-filtered-derived-hom-calculus], and the graded operation comparisons of [lem-trf-filtered-derived-operation-lifts], identify the image under $T$ of the localization triangle with the filtration truncation triangle of $T\\widetilde K$: its first and third terms have respectively only grade $1$ and only grade $0$, so the uniqueness clause of the truncation theorem applies. They therefore give the two equations\n$$a v_U=\\widehat u\\,T(a),\\qquad v_ZT(b)=b\\widehat u.$$\nEach equation determines its graded map uniquely. For the open equation use Step 2 and $j_!\\dashv j^*$ in [lem-cbc-open-closed-recollement]: after identifying $TK_U=j_!M_U$, composition with $a$ identifies both Hom sets with $\\operatorname{Hom}_U(M_U,j^*K)$ because $j^*a$ is the identity. For the closed equation, compact-support base change [prop-functor-package] identifies $i^*T(a)$ with zero and $i^*T(b)$ with an isomorphism: on $W=C\\times_{c_1,X}Z$, the sheaf $c_2^*a$ is zero and $c_2^*b$ is an isomorphism, since the image of $c_2|_W$ lies in $Z$. To justify the latter assertion scheme-theoretically, replace $W$ by $W_{\\mathrm{red}}$; this does not change the coefficient category by [i-topology]. On each affine chart the pullback of the ideal of the reduced closed subscheme $Z$ lies in every prime, hence is zero in the reduced ring. Thus $c_2|_{W_{\\mathrm{red}}}$ factors through $Z$. The closed immersion $i$ is proper by [lem-weil-pbc-closed-immersion-proper]. The counit $i^*i_*\\to\\mathrm{id}$ is an isomorphism by proper base change for the self-Cartesian square of the closed immersion $i$ (both other legs are identities). Consequently $c_2^*b$ is an isomorphism there. Ordinary adjunction [fix-prop-adjunctions] now identifies precomposition with $T(b)$ on maps into $K_Z=i_*i^*K$ with precomposition with the isomorphism $i^*T(b)$, proving the claimed uniqueness.",
+   "uses": [
+    "lem-trf-filtered-derived-hom-calculus",
+    "lem-trf-filtered-derived-operation-lifts",
+    "lem-cbc-open-closed-recollement",
+    "prop-functor-package",
+    "i-topology",
+    "fix-prop-adjunctions",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.3.3, last paragraph; §1.5.6, with reduction invariance and ordinary adjunction made explicit"
+   }
+  },
+  {
+   "text": "Let $\\kappa:TK_U\\xrightarrow{\\sim}j_!M_U$ be Step 2's comparison and let $\\lambda:M_U\\to j^*TK$ be $j^*T(a)$ after $j^*\\kappa^{-1}$. The exceptional adjoint of $u|_U$ is\n$$r_U=j^*\\widehat u\\circ\\lambda:M_U\\to j^*K.$$\nThis is exactly restriction of the exceptional adjoint followed by compact-support base change, as prescribed in the statement. Extension by zero gives $w_U=j_!r_U\\circ\\kappa:TK_U\\to K_U$. The equation $a w_U=\\widehat uT(a)$ follows under $j_!\\dashv j^*$: the restriction of its left side is $r_U$, and that of its right side is $j^*\\widehat u\\circ\\lambda=r_U$, since $j^*a=\\mathrm{id}$. The adjunction is a bijection on these Hom sets, so equality after this restriction is equality of the original maps. The unit, composition and extension-by-zero comparisons used here are those of [lem-trf-filtered-derived-operation-lifts] and [prop-functor-package]. Step 5 therefore gives $v_U=w_U$, the exceptional adjoint of $[j]_!(u|_U)$.",
+   "uses": [
+    "lem-cbc-open-closed-recollement",
+    "prop-functor-package",
+    "lem-trf-filtered-derived-operation-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§1.5.9 and 5.3.3, identification of the open graded map"
+   }
+  },
+  {
+   "text": "Set $Y=W_{\\mathrm{red}}$, with closed inclusion $h_Z:Y\\hookrightarrow C$, and let $d_1,d_2:Y\\to Z$ be the factorizations of the legs obtained in Step 5. Put $T_Z=Rd_{1!}d_2^*$ and $N=i^*K$. Compact-support base change, reduction invariance and the adjunction-coherent comparisons of [prop-functor-package], [i-topology] and [fix-prop-adjunctions] give $\\theta:i^*TK\\xrightarrow{\\sim}T_ZN$. By definition the exceptional adjoint of the restricted coefficient map is $r_Z=i^*\\widehat u\\circ\\theta^{-1}:T_ZN\\to N$. Unfold the proper coefficient pushforward [def-trf-coefficient-pushforward] for $(i,h_Z)$: its ordinary half is the unit for $h_Z$ followed by $d_2^*$ of the counit $i^*i_*N\\to N$, and its exceptional half is adjoint to the compact-support composition followed by the exceptional counit. Thus its exceptional adjoint on $K_Z=i_*N$ is $w_Z=i_*r_Z\\circ\\beta$, where\n$$\\beta:TK_Z=Rc_{1!}c_2^*i_*N\\xrightarrow{Rc_{1!}\\eta_{h_Z}}Rc_{1!}h_{Z*}h_Z^*c_2^*i_*N\\simeq i_*Rd_{1!}d_2^*i^*i_*N\\xrightarrow{i_*Rd_{1!}d_2^*\\varepsilon_i}i_*T_ZN.$$\nThe closed immersions $i,h_Z$ are proper by [lem-weil-pbc-closed-immersion-proper], as required by that definition. The base-change mate formula and the ordinary triangle identity of [fix-prop-adjunctions] identify\n$$\\beta\\,T(b)=i_*\\theta\\circ\\eta_{i,TK}.$$\nIndeed $h_Z^*c_2^*b=d_2^*i^*b$; composing with $d_2^*\\varepsilon_{i,N}$ is the identity by the triangle identity for $i^*\\dashv i_*$, and the remaining unit for $h_Z$ and composition comparison are exactly the base-change mate defining $\\theta$. Therefore\n$$w_ZT(b)=i_*r_Z\\,i_*\\theta\\,\\eta_{i,TK}=i_*i^*\\widehat u\\,\\eta_{i,TK}=\\eta_{i,K}\\widehat u=b\\widehat u,$$\nwhere the last equality is naturality of the ordinary unit. Step 5 gives $v_Z=w_Z$. This proves the claimed identification with the exceptional adjoint of $[i]_!(u|_Z)$.",
+   "uses": [
+    "prop-functor-package",
+    "i-topology",
+    "fix-prop-adjunctions",
+    "def-trf-coefficient-pushforward",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§1.5.6(a), 1.5.9 and 5.3.3, identification of the closed graded map; ordinary unit--square--counit base-change recipe"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proetale-constructible-origin",
+  "sk-prop-sf-comparison",
+  "lem-weil-pbc-open-closed-short-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-open-closed-recollement",
+  "prop-functor-package",
+  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+  "fix-prop-adjunctions",
+  "lem-trf-filtered-derived-hom-calculus",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-trf-filtered-derived-operation-lifts",
+  "thm-nagata-compactification",
+  "i-topology",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-trf-coefficient-pushforward",
+  "det-ctf-finite-comparison-localizing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Example 5.2.3 and §5.3.3, with Varshavsky’s legs 1 and 2 interchanged throughout; restriction recipe §§1.5.6 and 1.5.9."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +171,24 @@
    "results": "8 hits: CategoryTheory.Localization.instLiftingFunctorUniq, CategoryTheory.Localization.lift, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_uniq, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso, CategoryTheory.Localization.liftingLift, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Localization.liftingConstructionLift",
    "date": "2026-10-17",
    "verdict": "no match: ordinary localization universal properties and fractions for derived morphisms do not give the filtered lift of an invariant cohomological correspondence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique lift of a cohomological correspondence to the two step filtration of an invariant open closed decomposition",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_uniq, AlgebraicGeometry.IsOpenImmersion.lift_uniq, Filter.lift_lift_same_le_lift, Filter.lift'_cong, Representation.Coinvariants.lift.congr_simp, AlgebraicGeometry.Scheme.Hom.liftCoborder, CochainComplex.mappingCone.liftCochain, Filter.lift_lift'_same_le_lift'",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary derived fractions and geometric open-immersion lifts do not state the invariant filtered correspondence assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invariant closed subset of a cohomological correspondence makes every coefficient map lift uniquely to the filtered derived open closed localization",
+   "results": "8 hits: DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.cm5b, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary derived fractions and geometric open-immersion lifts do not state the invariant filtered correspondence assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-term-locality",
@@ -66,5 +205,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-invariant-localization-filtered-lift",
+  "worker": "stage1",
+  "summary": "Expanded the invariant-localization filtered lift into seven sourced steps. Reused the existing filtered operation lifts; added only the general filtered derived Hom/truncation calculus. Proved support vanishing in every cochain degree and negative-filtration vanishing before taking H^0; identified both graded maps by explicit ordinary adjunction and unit formulas, including reduced closed source. No statement change.",
+  "blueprint": "Realizes the open--closed reduction in proof paragraphs (1) and (2) of lem-trf-local-term-locality, namely the filtered lifting needed before trace additivity. The detailed source is Varshavsky §5.3.3 after swapping the legs.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-filtered-derived-operation-lifts",
+    "why": "Generic sheaf-derived filtered lifts and graded/unit comparisons; this new general interface is not a theorem on contracting correspondences and the current unit has no other filtered-operation node."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Degreewise open--closed short exact sequence on etale module sheaves needed to construct the filtration; a generic sheaf tool absent from the unit."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exactness of constant-coefficient etale module inverse image needed for descent of the canonical filtration; no specialized contracting theorem supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exactness of etale extension by zero needed for descent of the canonical filtration; no specialized contracting theorem supplies it."
+   },
+   {
+    "node": "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "why": "Generic etale extension-by-zero base change, used to compute the actual open-support compact-support functor and the empty/self squares; no on-unit node states that etale formula."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "The general filtered derived Hom theorem requires enough injectives; this generic etale module-sheaf existence theorem checks that hypothesis without replacing the unit route."
+   },
+   {
+    "node": "i-topology",
+    "why": "Generic reduction equivalence is needed to replace the closed inverse image by its reduction before factoring the second leg through Z; this supplies topological invariance, not a replacement contracting-correspondence route."
+   },
+   {
+    "node": "det-ctf-finite-comparison-localizing",
+    "why": "Comparison of the etale realization of Rc_{1!}c_2^* (inverse image, extension by zero, proper direct image) with the pro-etale operations of the coefficient conventions; needed to identify the etale filtered Hom bijection with the stated pro-etale one. Reviewer addition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-filtered-derived-operation-lifts",
+  "lem-weil-pbc-open-closed-short-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "i-topology",
+  "det-ctf-finite-comparison-localizing"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-2f200f806",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-2f200f806 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-trf-filtered-derived-hom-calculus and every cited statement in full. Checked them against Varshavsky Def. 1.5.1, §§1.5.6, 1.5.9, Prop. 1.5.10, §§5.1.2–5.1.5 (Lemma 5.1.4(i)), 5.2.3, 5.3.2 and 5.3.3 (equation (5.2)). The item statement is correct once Varshavsky's legs are swapped to this project's convention: invariance c_2(c_1^{-1}Z)⊂Z, closed source c_1^{-1}(Z)_red, open inclusion c_2^{-1}(U)⊂c_1^{-1}(U). Nothing is weakened. The new node is a true, self-contained general statement with no proof content: the graded vanishing in the uniqueness clause is equivalent to Varshavsky's DF^{≥r}/DF^{≤r-1} condition, and gr^rH=⊕_a RHom(gr^aP,gr^{a+r}Q) matches 5.1.4(i). Tested on pure grades and on the crossed case P in grade 1, Q in grade 0 (filtered Hom is 0). It is not a duplicate: rg found only operation-lift, tensor and trace nodes. All seven steps check: the only negative grade is gr^{-1}=RHom(TK_U,K_Z), which vanishes in every degree. The Step 7 mate formula agrees with the unfolded def-trf-coefficient-pushforward for (i,h_Z). The reduced-source factorization goes through i-topology. I accept the declared tool uses (sbc extension-by-zero base change, operation-lifts, i-topology and the generic étale sheaf facts). No SGA source is cited. One fault (E1/C1), repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-invariant-localization-filtered-lift.json: the filtered construction lives on the étale site, but the stated Hom target uses pro-étale Rc_{1!}c_2^*. No step cited the theorem that ν^* commutes with these operations. Step 1 now cites det-ctf-finite-comparison-localizing (ν^* commutes with g^*, Rg_*, j_!, Rp_*j_! over F̄_q at finite A) and, with sk-prop-sf-comparison, identifies the Hom groups. Steps 3 and 4 refer to that identification, and Step 4 names the general first clause of operation-lifts. proof_deps is updated and a tool_uses entry is added for the off-route node. The statement and the new node are unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

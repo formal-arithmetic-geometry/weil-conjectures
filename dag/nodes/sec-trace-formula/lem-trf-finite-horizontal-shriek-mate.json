@@ -19,9 +19,174 @@
   "def-weil-pbc-adjunction-mate",
   "fix-lem-exchanges"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write the chosen compactification as $X\\xrightarrow{j}Z\\xrightarrow{b}Y$, so that the original horizontal map is still denoted $p$. Write its base change as $X'\\xrightarrow{j'}Z'\\xrightarrow{b'}Y'$ and $q:Z'\\to Z$. Both the open square $(j,j',q,p)$ and the proper square $(b,b',g,q)$ are Cartesian by the fibre-product construction. Apply finite-morphism permanence to $g$: both $p$ and $q$ are finite, hence proper. The original schemes and $Z,Z'$ are Noetherian: a field is Noetherian, the original schemes are finite type over it, and the proper ambient schemes are finite type over the original bases. They are quasi-separated, and all arrows used here, including the open inclusions, are qcqs by the cited permanence statement. Thus the proper/open and site-comparison lemmas below meet their scheme hypotheses.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 01WL (morphisms-lemma-base-change-finite), 01WN (morphisms-lemma-finite-proper); Tag 0F7L (lemma-base-change-shriek), compactification diagram"
+   }
+  },
+  {
+   "text": "First prove the identity on $D^+(X_{\\mathrm{et}},A)$, writing $u^*$ for exact constant-module inverse image. The proper/open comparison for the Cartesian square $X'\\xrightarrow{j'}Z'$, $X\\xrightarrow{j}Z$, with proper verticals $p,q$, is\n$$\\gamma:j_!Rp_*\\xrightarrow{\\sim}Rq_*j'_!.$$\nUse the specified map, not an arbitrary isomorphism: on a K-injective representative $J$ its defining map is $j_!p_*J\\cong q_*j'_!J\\to q_*I$, for $j'_!J\\to I$ a K-injective resolution. This is precisely the normalized proper/open map in the cited theorem. On sheaves its first arrow is the identity identification of the two proper-support subsheaves of $(jp)_*=(qj')_*$.",
+   "uses": [
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-cbc-proper-support-sheaf-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open, first paragraph of proof and canonical proper-support identification"
+   }
+  },
+  {
+   "text": "Finite direct image is exact on abelian étale sheaves. It is also exact on constant-$A$ modules: forgetting the action commutes with direct image by evaluation, and kernels and sheafified cokernels have their underlying abelian kernels and cokernels. Therefore $Rp_*=p_*$ and $Rq_*=q_*$ on $D^+$, computed termwise, with their canonical units. The cited unit-compatible module/abelian derived comparison fixes this identification. The maps $j_!,j'_!$ and the constant-module inverse images are exact as well. Consequently the sheaf proper-support identification in Step 2 computes $\\gamma$ on complexes degreewise: the last map $q_*j'_!J\\to q_*I$ in its defining representative is the image under an exact functor of a quasi-isomorphism and becomes the canonical resolution identification.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "def-cbc-exchange-map",
+    "lem-cbc-extension-zero-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, defining resolution map; finite direct-image exactness, and degreewise open-extension base change"
+   }
+  },
+  {
+   "text": "Put $\\beta:q^*j_!\\xrightarrow{\\sim}j'_!p^*$, the canonical open base-change map. On a module sheaf $F$ the following equation is an equality of sheaf maps:\n$$Rq_*(\\beta_F)\\circ\\eta_{q,j_!F}=\\gamma_{p^*F}\\circ j_!(\\eta_{p,F}).\\tag{O}$$\nIndeed, evaluate on an étale $V\\to Z$. By the proper-support description a section of $j_!F$ is a section $s$ of $F$ over $V\\times_ZX$ with support proper over $V$. The left composite pulls $s$ to $(V\\times_ZZ')\\times_{Z'}X'=V\\times_ZX'$ and regards it as a section extended by zero on $V\\times_ZZ'$. The right composite first pulls the same $s$ along $V\\times_ZX'\\to V\\times_ZX$, using the unit for $p$, and then uses the identity proper-support identification defining $\\gamma$. Both give exactly this pulled-back section. The supports are admissible by the base-change and composition clauses of the support theorem; the pullback/open comparison is its canonical comparison. Equality is sectionwise and $A$-linear. Apply this identity to each term of a complex. Step 3 identifies all these termwise maps with the stated derived maps, giving (O) on $D^+$.",
+   "uses": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-cbc-extension-zero-base-change",
+    "lem-cbc-proper-open-interchange-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, normalized proper/open map; support base change and composition; explicit sectionwise unit calculation"
+   }
+  },
+  {
+   "text": "For the proper square set $E:g^*Rb_*\\to Rb'_*q^*$ and let $\\sigma:Rb_*Rq_*\\xrightarrow{\\sim}Rg_*Rb'_*$ be ordinary direct-image composition for $bq=gb'$. The ordinary exchange formula and mate-pasting give\n$$E_M=\\varepsilon_{g,Rb'_*q^*M}\\circ g^*(\\sigma_{q^*M})\\circ g^*Rb_*(\\eta_{q,M}).$$\nHere is the normalization behind this use of pasting: the pullback square is $b'^*g^*\\cong q^*b^*$; its vertical mate is exactly $E$ by the definition of unbounded exchange. Its conjugate under the two composite adjunctions is the direct-image square $Rb_*Rq_*\\cong Rg_*Rb'_*$. Pasting along these adjunctions and then cancelling each adjacent unit--counit pair gives the displayed inverse-horizontal-mate formula. Equivalently one can transpose the displayed formula first under $b'^*\\dashv Rb'_*$ and then under $g^*\\dashv Rg_*$: naturality moves the units next to their counits, and both triangles leave $q^*(\\varepsilon_{b,M})$ after $b'^*g^*Rb_*M\\cong q^*b^*Rb_*M$, the defining transpose of $E$. These are the canonical composition comparisons, characterized by the composite adjunction, not newly chosen ones. Taking the $g$-adjoint of the displayed formula gives\n$$Rg_*(E_M)\\circ\\eta_{g,Rb_*M}=\\sigma_{q^*M}\\circ Rb_*(\\eta_{q,M}).\\tag{P}$$\nThis last equality is the hom-bijection formula and the $g$ triangle identity.",
+   "uses": [
+    "def-kun-unbounded-exchange",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (sites-cohomology-remark-base-change), 0D6E (sites-cohomology-lemma-derived-pushforward-composition), 0E46/0E47 (remark-compose-base-change / remark-compose-base-change-horizontal); explicit iterated-mate calculation"
+   }
+  },
+  {
+   "text": "On these compactifications $Rf_!=Rb_*j_!$, $Rf'_!=Rb'_*j'_!$, and $\\operatorname{Ex}_!^c=Rb'_*(\\beta)\\circ E j_!$. The canonical composition/proper-coincidence map in the statement, evaluated at $N\\in D^+(X'_{\\mathrm{et}},A)$, is\n$$\\chi_N=\\sigma_{j'_!N}\\circ Rb_*(\\gamma_N):Rb_*j_!Rp_*N\\longrightarrow Rg_*Rb'_*j'_!N.\\tag{C}$$\nTo see which compactifications compute it, for $fp$ use $(j',bq)$, for $f$ use $(j,b)$, and for the proper $p$ use $(1,p)$. The proper-input compact-support composition comparison is by definition the interchange $j_!Rp_*\\xrightarrow{\\gamma}Rq_*j'_!$ followed by $Rb_*Rq_*\\cong R(bq)_*$. For $gf'$ use the same $(j',gb')=(j',bq)$, and the proper outer map $g$ gives only $R(gb')_*\\cong Rg_*Rb'_*$. Thus their composite is exactly (C). This uses the proper-input composition theorem's explicit interchange normalization and the proper identification normalized by the identity-open compactification.",
+   "uses": [
+    "def-cbc-exchange-map",
+    "lem-sf-unbounded-compact-support-proper-composition",
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-weil-derived-direct-image-composition",
+    "cor-cbc-proper-coincidence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, displayed four-line model calculation; proper-input specialization and identity-open compactification"
+   }
+  },
+  {
+   "text": "Apply (P) to $M=j_!K$, postcompose with $Rg_*Rb'_*(\\beta_K)$, and use naturality of $\\sigma$ at $\\beta_K$. Equations (O) and (C) then give the full calculation, with composition read right to left:\n$$\\begin{aligned}\nRg_*(\\operatorname{Ex}_!^c(K))\\circ\\eta_{g,Rb_*j_!K}\n&=Rg_*Rb'_*(\\beta_K)\\circ\\sigma_{q^*j_!K}\\circ Rb_*(\\eta_{q,j_!K})\\\\\n&=\\sigma_{j'_!p^*K}\\circ Rb_*\\bigl(Rq_*(\\beta_K)\\circ\\eta_{q,j_!K}\\bigr)\\\\\n&=\\sigma_{j'_!p^*K}\\circ Rb_*(\\gamma_{p^*K})\\circ Rb_*j_!(\\eta_{p,K})\\\\\n&=\\chi_{p^*K}\\circ Rf_!(\\eta_{p,K}).\n\\end{aligned}$$\nThis is the required identity at finite étale coefficients; no invertibility of an arbitrary exchange or faithfulness of arbitrary geometric pro-étale stalks is used in this calculation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, compatibility omitted in the source; explicit substitution of the normalized equations (O), (P), and (C)"
+   }
+  },
+  {
+   "text": "Now let $K$ be the pro-étale $D^b_{ctf}$ object in the statement. The constructible-origin theorem supplies $L\\in D^b_c(X_{\\mathrm{et}},A)$ and an isomorphism $a:\\nu_X^*L\\cong K$. For each qcqs $u$, let $a_u:\\nu_U^*u_e^*\\cong u_p^*\\nu_V^*$ and $b_u:\\nu_V^*Ru_{e,*}\\cong Ru_{p,*}\\nu_U^*$ be the canonical comparisons. Their counit-mate normalization implies the unit identity\n$$Ru_{p,*}(a_{u,M})\\circ b_{u,u_e^*M}\\circ\\nu_V^*(\\eta^e_{u,M})=\\eta^p_{u,\\nu_V^*M}.$$\nTo verify it, transpose under $u_p^*\\dashv Ru_{p,*}$; substitute the stated counit equation for $b_u$, use naturality of $a_u$, and cancel $u_e^*(\\eta^e_u)$ with $\\varepsilon^e_u$ by the triangle identity. Thus the comparison carries each horizontal unit in Step 7 to the actual pro-étale unit. Direct-image comparisons commute with composition; open-extension comparisons commute with open composition, and are the canonical open-adjunction comparisons. The normalized constant-coefficient transport definition fixes the inverse-image, direct-image and open-extension comparisons as mates, so they carry the proper/open interchange defining (C), and the canonical open base change in (O), to their specified pro-étale transports. For the ordinary exchange this named-map identification is precisely the transport-identifies-exchange theorem. For compact supports it is the transported formula in the finite-level pro-étale theorem, and composition is the canonical witnessed-domain law of the compact-support composition theorem. Apply $\\nu_Y^*$ to Step 7 and conjugate by these source and target comparisons: the intervening comparison and inverse comparison cancel, leaving exactly the pro-étale equation of the statement for $\\nu_X^*L$. Naturality conjugates it by $a$ to the equation for $K$. Independence of $c$ and compatibility with composition are clause (4) of the exchange-coherence theorem. All uses remain on bounded-below étale-origin objects supplied above; the package supplies the indicated bounded constructible finite-Tor domains.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "def-cbc-finite-constant-coefficient-transport",
+    "lem-weil-pbc-transport-identifies-exchange",
+    "thm-cbc-finite-level-proetale",
+    "thm-sf-comp-composition",
+    "fix-lem-exchanges",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099R, proetale section-comparison; Tag 09AF, lemma-jshriek-comparison; canonical mate-normalized finite coefficient transport; blueprint finite-horizontal assertion on the witnessed domain"
+   }
+  },
+  {
+   "text": "Finally, put $G=Rf_!$, $H=Rf'_!$, $L_1=Lp^*$, $R_1=Rp_*$, $L_2=Lg^*$, $R_2=Rg_*$. The inverse square mate of $\\chi:GR_1\\to R_2H$ is\n$$\\widetilde E_K=\\varepsilon_{g,H Lp^*K}\\circ Lg^*\\bigl(\\chi_{Lp^*K}\\circ Rf_!(\\eta_{p,K})\\bigr).$$\nThe proved equality says that $\\operatorname{Ex}_{!,K}$ has exactly this $Lg^*\\dashv Rg_*$ transpose. The adjunction bijection therefore gives $\\operatorname{Ex}_!=\\widetilde E$, which is the asserted equivalence with the inverse-square-mate formulation.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-operator-fibres.proof.md",
+    "place": "Blueprint proof (β), final mate formulation; explicit inverse-mate formula and adjunction hom-bijection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "def-cbc-exchange-map",
+  "lem-cbc-extension-zero-base-change",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sf-unbounded-compact-support-proper-composition",
+  "lem-weil-derived-direct-image-composition",
+  "cor-cbc-proper-coincidence",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "def-cbc-finite-constant-coefficient-transport",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "thm-cbc-finite-level-proetale",
+  "thm-sf-comp-composition",
+  "fix-lem-exchanges",
+  "prop-functor-package"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-operator-fibres.proof.md",
+  "place": "Proof (β), finite-horizontal mate assertion: explicit compactification, proper/open support calculation, and mate-normalized site transport; Stacks Tags 0F7B, 0F7J, 0F7L, 07A7, 0D6E"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +236,52 @@
    "results": "{\"t\": \"2026-10-17T00:09:36Z\", \"tool\": \"grep\", \"query\": \"conjugateEquiv_pullbackComp_inv|unit_pushforwardComp_hom|pushforwardComp_hom_counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\"], \"digest\": \"2ed72420283dd9dc\"}",
    "date": "2026-10-17",
    "verdict": "no match: these declarations concern ordinary over-category pushforward composition or structure-sheaf module pullbacks, not the actual compactification-defined shriek exchange."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.?[Ss]upport|shriek|[Ll]ower[Ss]hriek",
+   "results": "{\"t\": \"2026-10-17T03:11:49Z\", \"tool\": \"grep\", \"query\": \"compact.?[Ss]upport|shriek|[Ll]ower[Ss]hriek\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no compact-support or shriek declarations in CategoryTheory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support base change commutes with pullback adjunction units for finite morphisms",
+   "results": "{\"t\": \"2026-10-17T03:11:49Z\", \"tool\": \"leansearch\", \"query\": \"Compact support base change commutes with pullback adjunction units for finite morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\"], \"digest\": \"bcdd38bdc027089f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary adjunctions, over-category pushforward composition, or structure-sheaf modules, not the compactification-defined derived finite-coefficient shriek exchange."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-17T03:11:50Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are the generic mate bijection and its formal identities; they do not identify the compactification-defined compact-support exchange."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite horizontal morphisms in a cartesian square compact support exchange is the mate of composition of pushforwards",
+   "results": "{\"t\": \"2026-10-17T03:11:50Z\", \"tool\": \"leanfinder\", \"query\": \"For finite horizontal morphisms in a cartesian square compact support exchange is the mate of composition of pushforwards\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"CategoryTheory.ExponentiableMorphism.comp_pushforward\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom\", \"CategoryTheory.ExponentiableMorphism.coev_ev\"], \"digest\": \"387ed0c0c754f9ea\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary adjunctions, over-category pushforward composition, or structure-sheaf modules, not the compactification-defined derived finite-coefficient shriek exchange."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero and derived compactly supported pushforward base change along finite maps, compatibility with the units of inverse image direct image adjunctions",
+   "results": "{\"t\": \"2026-10-17T03:12:48Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero and derived compactly supported pushforward base change along finite maps, compatibility with the units of inverse image direct image adjunctions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"PresheafOfModules.pushforward₀CompToPresheaf\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"PresheafOfModules.pushforwardCompToPresheaf\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"cd74c5e910b6342e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary adjunctions, over-category pushforward composition, or structure-sheaf modules, not the compactification-defined derived finite-coefficient shriek exchange."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_pullbackComp_inv|unit_pushforwardComp_hom|pushforwardComp_hom_counit",
+   "results": "{\"t\": \"2026-10-17T03:14:30Z\", \"tool\": \"grep\", \"query\": \"conjugateEquiv_pullbackComp_inv|unit_pushforwardComp_hom|pushforwardComp_hom_counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\"], \"digest\": \"c83d2a19dcc18144\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary adjunctions, over-category pushforward composition, or structure-sheaf modules, not the compactification-defined derived finite-coefficient shriek exchange."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-weil-shriek-operator-fibres",
@@ -91,5 +298,144 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-finite-horizontal-shriek-mate",
+  "worker": "stage1",
+  "summary": "Retained the statement and all inherited searches. Proved the finite-horizontal assertion by explicit proper/open unit normalization and ordinary exchange mates on a chosen compactification, then checked the specified pro-etale transport. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "Nearest ancestor lem-trf-weil-shriek-operator-fibres, Proof (β), the sentence identifying compact-support exchange with the finite-horizontal mate: steps 1–7 supply the missing compactification calculation, step 8 checks finite pro-etale coefficient conventions, and step 9 identifies the inverse mate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Finite base change makes the two horizontal projections finite; no geometry theorem of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Finite horizontal maps must be proper for the proper/open comparison."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Verifies the Noetherian hypotheses of the proper/open and comparison tools."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Verifies quasi-separatedness for finite-type scheme corners."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Verifies qcqs for every direct-image comparison and quasi-compactness of the open inclusions."
+   },
+   {
+    "node": "lem-cbc-proper-open-interchange-coherence",
+    "why": "Supplies the actual proper/open map and its K-injective normalization, needed to identify the composition map chi."
+   },
+   {
+    "node": "lem-cbc-proper-support-sheaf-composition",
+    "why": "Supplies equality of proper-support subsheaves and canonical support base change, used in the sectionwise unit check."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Makes the finite horizontal direct images termwise on bounded-below etale complexes, so the sheaf unit calculation computes the derived maps."
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "why": "Fixes the unit-compatible comparison with underlying abelian derived direct image, used for finite constant-module exactness."
+   },
+   {
+    "node": "lem-cbc-extension-zero-base-change",
+    "why": "Identifies the canonical open base-change map on sheaves and complexes."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Converts the vertical ordinary exchange mate into the horizontal mate of the direct-image composition square."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Supplies the normalized ordinary module derived compositor for the proper square."
+   },
+   {
+    "node": "lem-sf-unbounded-compact-support-proper-composition",
+    "why": "Specifies the proper-input compact-support composition map by proper/open interchange, fixing chi rather than an unspecified isomorphism."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Supplies identity and associative direct-image compositors for the two models of the composite morphism."
+   },
+   {
+    "node": "cor-cbc-proper-coincidence",
+    "why": "Fixes the proper comparison by the compactification with identity open arrow."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Provides an actual bounded etale origin for each finite pro-etale constructible input."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Supplies the named counit-normalized comparison; transposition gives the horizontal unit equation in Step 8."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "Supplies qcqs etale/pro-etale direct-image comparisons compatible with composition."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Supplies the canonical open-extension comparison between the two sites."
+   },
+   {
+    "node": "lem-weil-pbc-transport-identifies-exchange",
+    "why": "Identifies the transported ordinary exchange with the named ambient pro-etale exchange."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Identifies the compact-support exchange on witnessed finite pro-etale inputs with its transported compactification formula."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Identifies the canonical compact-support composition law on the witnessed pro-etale domain."
+   },
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Provides compactification independence and compatibility with composition on the stated coefficient domains."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Supplies the declared bounded constructible finite-Tor operation domains and proper/composition identifications of the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-cbc-extension-zero-base-change",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sf-unbounded-compact-support-proper-composition",
+  "lem-weil-derived-direct-image-composition",
+  "cor-cbc-proper-coincidence",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "thm-cbc-finite-level-proetale",
+  "thm-sf-comp-composition",
+  "fix-lem-exchanges",
+  "prop-functor-package"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NC-93f0c8098",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-93f0c8098 (reviewer sub-agent of L); spot-checked: I read all of it: the item, its 9 steps, the full statements of all 32 cited nodes, the blueprint main-20261015 lem-trf-weil-shriek-operator-fibres Proof (β), the unit sk-d-weil-push, and Stacks more-etale 0F7L (lemma-base-change-shriek) and sites-cohomology 07A7, with tags 0F7B/0F7J/0F7L/07A7/0D6E checked against tags/tags. The statement is the β sentence generalized to a finite bottom arrow g, not weakened. The orientation (p = g') and Ex_!^c are those of def-exchange-projection; the source/target types of both sides of the unit equation match; and the inverse-mate form agrees with def-weil-pbc-adjunction-mate by g-transposition. Small cases are consistent: g = id, empty X, j = id (the 07A7 case), and a disjoint union Y'. Step 2 uses lem-cbc-proper-open-interchange-coherence for the square (j', p, q, j) in the right direction and normalization. In Step 4 I checked the sectionwise identity (O) and the agreement of the two open base-change maps. I re-derived (P) by transposition and the triangle identities. The formula (C) for chi matches both the proper-input interchange law and how thm-sf-comp-composition constructs its law (d = (j,b), e = (j',q), V = X', c = id). I verified the four-line substitution in Step 7, and re-derived Step 8's unit-transport identity from the counit normalization of lem-weil-pbc-comparison-direct-image-canonical-mate. No duplicate exists: def-weil-frobenius-square-exchange, lem-trf-adjoint-mate and fix-lem-exchanges (4) do not state this. There is no cycle, the parent is the only citer, and no SGA is used. Searches cover all three kinds. All cited nodes are on the sk-d-weil-push route, so the declared tool_uses are unnecessary and none needs accepting. One cosmetic point, not fixed: Step 1's source.document names more-etale.tex, but 01WL/01WN are in morphisms.tex."
  }
 }

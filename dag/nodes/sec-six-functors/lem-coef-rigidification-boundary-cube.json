@@ -11,9 +11,84 @@
   "lem-coef-simplicial-interval-lifting",
   "lem-coef-pinched-cube-latching"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $V=\\{0,\\ldots,n\\}$ and initially suppose $n\\geq1$. By [lem-coef-pinched-cube-latching], a degree-$q$ simplex of $\\mathfrak C[\\Delta^n](i,j)$, for $i\\leq j$, is a chain $S_0\\subseteq\\cdots\\subseteq S_q\\subseteq\\{i,\\ldots,j\\}$ containing $i,j$ in every term; composition takes termwise unions. For $i=j$ there is just the identity chain, and for $i>j$ the mapping set is empty. For $i<j$, record membership of each interior vertex in each $S_r$. This gives a bijection, commuting with every simplicial operator, to the degree-$q$ simplices of $(\\Delta^1)^{j-i-1}$: each coordinate is a nondecreasing $0$-$1$ sequence of length $q+1$, and the inverse inserts the two endpoints. In particular $(i,j)=(0,n)$ gives the asserted characteristic-function isomorphism with $B_{n-1}$.",
+   "uses": [
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §2.2.5, proof of Theorem 2.2.5.1, printed p. 90; explicit subset-chain coordinates from the realization definition"
+   }
+  },
+  {
+   "text": "Define a simplicial category $A$ with objects $V$ by taking the same mapping sets as $\\mathfrak C[\\Delta^n]$, except that $A(0,n)$ consists of the chains for which $S_q\\ne V$ or $S_0\\ne\\{0,n\\}$. Under Step 1 this is exactly $\\partial B_{n-1}$: a coordinate is constantly $0$ precisely when its vertex is absent from $S_q$, and constantly $1$ precisely when its vertex belongs to $S_0$. This condition is closed under all simplicial operators. Composition is inherited union. The only closure to check is a composite from $0$ through $k$ to $n$, with $0<k<n$; its initial subset contains $k$, so lies in $A(0,n)$. For a composition with output $(0,n)$ through $k=0$ or $k=n$, one factor is an identity, so the unit law keeps the composite in $A(0,n)$. Thus $A$ is indeed a simplicial subcategory. Every proper nonempty subset $F\\subsetneq V$ defines an ordered face $\\Delta^F$ and an enriched functor $\\mathfrak C[\\Delta^F]\\to A$ by inclusions of subsets; if it has endpoints $0,n$, its chains have $S_q\\subseteq F\\ne V$. These functors agree on inclusions of faces. Here we use exactly the mapping sets, union composition and monotone-image maps stated in [lem-coef-pinched-cube-latching].",
+   "uses": [
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §2.2.5, proof of Theorem 2.2.5.1, boundary-description bullets; agent construction of the candidate boundary category"
+   }
+  },
+  {
+   "text": "We now verify the colimit, rather than assume that taking a colimit of enriched categories preserves mapping-set injections. A compatible cocone from the coherent realizations of proper nonempty faces to any simplicial category $D$ consists of functors $f_F:\\mathfrak C[\\Delta^F]\\to D$ agreeing under inclusions. Such a cocone is equivalent to one over all simplices of $\\partial\\Delta^n$: each simplex factors uniquely as a surjection onto its image face followed by that face inclusion; apply the monotone-image functor of [lem-coef-pinched-cube-latching] to define its cocone map. For a morphism of simplices, the corresponding image faces are nested and the factorizations compose, so these maps are compatible. Conversely restriction to the nondegenerate faces recovers the cocone. We construct its unique extension $f:A\\to D$. Its object at $i$ is forced by the vertex face. For a chain $S_0\\subseteq\\cdots\\subseteq S_q$ from $i<j$, list $S_0=\\{a_0=i<a_1<\\cdots<a_r=j\\}$, and set $T_b=S_q\\cap[a_{b-1},a_b]$ for $1\\leq b\\leq r$. Each $T_b$ is a proper subset of $V$: if $r\\geq2$ its interval misses an endpoint of $V$, whereas for $r=1$ the interval is proper unless $(i,j)=(0,n)$, in which case the definition of $A$ forces $S_q\\ne V$. The restricted chains $S_t\\cap[a_{b-1},a_b]$ therefore belong to $\\mathfrak C[\\Delta^{T_b}]$. Define $f$ on the original chain as the composite, in increasing $b$, of their images under $f_{T_b}$. On diagonal chains take the identities. This constructs a value on every mapping simplex without choosing an unrecorded lift.",
+   "uses": [
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §2.2.5, proof of Theorem 2.2.5.1, boundary-description bullets; agent expansion of the colimit universal property"
+   }
+  },
+  {
+   "text": "Check the extension in Step 3. More generally one may split a chain at any set of vertices contained in $S_0$ and containing its endpoints, provided every resulting support is a proper face. Adding another splitting vertex $k\\in S_0$ leaves its value unchanged: within the existing proper support $T$, termwise union of the two chains restricted at $k$ is the original chain; functoriality of $f_T$ and compatibility with its two subfaces give exactly the same composite. Repeating this proves equality with the formula split at every vertex of $S_0$. For a simplicial operator $\\alpha:[p]\\to[q]$, first apply $\\alpha$ to each restricted chain using the original splitting set $S_0$. The transformed chain on $[a_{b-1},a_b]$ has support $T_b^\\alpha=S_{\\alpha(p)}\\cap[a_{b-1},a_b]\\subseteq T_b$, still proper. Compatibility of the cocone with the inclusion $T_b^\\alpha\\subseteq T_b$ identifies evaluation under $f_{T_b^\\alpha}$ with evaluation under $f_{T_b}$. Since $f_{T_b}$ is simplicial, these evaluations are the operator applied to the old factor; simplicial composition in $D$ gives the operator applied to the old composite. The new first subset $S_{\\alpha(0)}$ may be larger than $S_0$; inserting its extra vertices as just described yields precisely the canonical formula for the resulting chain. Thus $f$ commutes with all simplicial operators, including the first face. For composable chains, the initial subset of their union is the union of the two initial subsets, and its canonical splitting is their concatenation at the common endpoint; the formula therefore preserves composition. It preserves identities by construction. On a chain supported in a proper face $F$, its canonical splitting evaluates to $f_F$ of that chain, again by union composition inside $F$. Hence $f$ extends the given face cocone. Finally, in $A$ every chain is the union composite of precisely the restricted chains in Step 3, so any extension must have the given value; it is unique. The candidate $A$ is consequently the colimit defining $\\mathfrak C[\\partial\\Delta^n]$ in [lem-coef-pinched-cube-latching]. The comparison with $\\mathfrak C[\\Delta^n]$ is its displayed subcategory inclusion. All vertices and all nonexceptional mapping sets agree, and the exceptional map is exactly $\\partial B_{n-1}\\hookrightarrow B_{n-1}$; in particular every mapping map and the object map are injective.",
+   "uses": [
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §2.2.5, proof of Theorem 2.2.5.1, boundary-description bullets; agent proof of simplicial compatibility, composition and uniqueness"
+   }
+  },
+  {
+   "text": "Use $U(K)$ as explicitly defined in [lem-coef-simplicial-interval-lifting]. For any target $D$, a compatible pair consisting of a functor $g:A\\to D$ and a functor $U(B_{n-1})\\to D$ agreeing on $U(\\partial B_{n-1})$ gives the same object choices at $0,n$, together with a simplicial map $h:B_{n-1}\\to D(g0,gn)$ extending $g$ on the boundary. Define a functor $\\mathfrak C[\\Delta^n]\\to D$ to be $g$ on objects and on all nonexceptional mapping sets, and $h$ on $(0,n)$. The only nonidentity composition whose output is exceptional factors through some $0<k<n$; by union composition in [lem-coef-pinched-cube-latching], its image has the $k$-coordinate constantly $1$, and therefore lies in $\\partial B_{n-1}$, where $h=g$ and the composition equation holds. A composition having an exceptional input has only an identity as its other input, so the unit equation suffices. These checks hold in every simplicial degree and also when the object choices in $D$ coincide. The extension is unique on each mapping set. Conversely any functor out of $\\mathfrak C[\\Delta^n]$ restricts to just this compatible pair. This is the pushout universal property of the displayed square; the horizontal maps send the labels to $0,n$ and the forward mapping sets by Step 1's identifications.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §2.2.5, proof of Theorem 2.2.5.1, sentence after the two bullets; agent verification against arbitrary target categories"
+   }
+  },
+  {
+   "text": "For $n=0$, the boundary has no simplices, so the colimit of [lem-coef-pinched-cube-latching] is the empty simplicial category: it has exactly one functor to every target. Its formula for $\\mathfrak C[\\Delta^0]$ gives one object with the identity mapping set $\\Delta^0$. The boundary functor is thus $\\varnothing\\to\\{0\\}$. For $n=1$, the condition in Step 2 excludes the only chain from $0$ to $1$, so $A(0,1)=\\varnothing=\\partial B_0$, and Step 5 freely adds the unique vertex of $B_0$ as the single arrow. All constructions and universal properties above used arbitrary simplicial targets, so no local Kan or model-structure assumption was required.",
+   "uses": [
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §2.2.5, proof of Theorem 2.2.5.1, n=0 case and first paragraph; explicit n=1 convention check"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-simplicial-interval-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT §2.2.5, proof of Theorem 2.2.5.1, printed p. 90 (PDF p. 107, zero indexed); subset-chain colimit and mapping-out arguments supplied here"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -70,10 +145,87 @@
    "results": "{\"t\": \"2026-10-17T02:08:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialThickening\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening\", \"CategoryTheory.SimplicialThickening.Path\", \"CategoryTheory.SimplicialThickening.as\", \"CategoryTheory.SimplicialThickening.instCategory\", \"CategoryTheory.SimplicialThickening.instCategoryStruct\", \"CategoryTheory.SimplicialThickening.mk\", \"CategoryTheory.SimplicialThickening.instSimplicialCategory\", \"CategoryTheory.SimplicialThickening.instCategoryPath\"], \"digest\": \"6b81c4012784104f\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-208. SimplicialThickening and SimplicialNerve define coherent simplices and their nerve, but no declaration computes the realization of a boundary as an enriched pushout or supplies the cone-presheaf adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "coherentRealization|rigidification|homotopyCoherent",
+   "results": "{\"t\": \"2026-10-17T02:47:58Z\", \"tool\": \"grep\", \"query\": \"coherentRealization|rigidification|homotopyCoherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-208 and SimplicialSet/Boundary.lean:35-75. Coherent simplices, the coherent nerve, ordinary boundaries and Kan generators do not supply this enriched colimit or pushout calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The boundary of a simplex under homotopy coherent realization is the free enriched category attachment of the boundary of a cube",
+   "results": "{\"t\": \"2026-10-17T02:47:58Z\", \"tool\": \"leansearch\", \"query\": \"The boundary of a simplex under homotopy coherent realization is the free enriched category attachment of the boundary of a cube\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Cube.boundary\", \"Simplicial.term∂Δ[_]\", \"SSet.boundary\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SimplexCategory.toTopObj\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.toTop\"], \"digest\": \"8dc5887e5f820b21\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-208 and SimplicialSet/Boundary.lean:35-75. Coherent simplices, the coherent nerve, ordinary boundaries and Kan generators do not supply this enriched colimit or pushout calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"boundary\"",
+   "results": "{\"t\": \"2026-10-17T02:47:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"boundary\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CompositionAsSet.boundary\", \"CompositionAsSet.boundary_length\", \"CompositionAsSet.boundary_zero\", \"SSet.boundary\", \"SSet.instHasDimensionLTToSSetBoundary\", \"SSet.boundary.instMonoδStdSimplex\", \"SSet.boundary.instMonoι\", \"SSet.boundary.ι\"], \"digest\": \"b66bc50cb2ab026c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-208 and SimplicialSet/Boundary.lean:35-75. Coherent simplices, the coherent nerve, ordinary boundaries and Kan generators do not supply this enriched colimit or pushout calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The simplicial categorification of a simplex boundary attaches one enriched arrow parametrized by a cube boundary",
+   "results": "{\"t\": \"2026-10-17T02:47:59Z\", \"tool\": \"leanfinder\", \"query\": \"The simplicial categorification of a simplex boundary attaches one enriched arrow parametrized by a cube boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.spine_arrow\", \"SSet.S1\", \"SSet.stdSimplex.edge\", \"SSet.PtSimplex.MulStruct.map\", \"FreeSimplexQuiver.δ\", \"SSet.PtSimplex.RelStruct.δ_map_of_lt\", \"SimplexCategoryGenRel.faces\", \"SSet.PtSimplex.RelStruct.map\"], \"digest\": \"7cdfa9c390b5389a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-208 and SimplicialSet/Boundary.lean:35-75. Coherent simplices, the coherent nerve, ordinary boundaries and Kan generators do not supply this enriched colimit or pushout calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent realization of the boundary of an n simplex is obtained from its realization by replacing the mapping cube from first vertex to last vertex by the boundary cube",
+   "results": "{\"t\": \"2026-10-17T02:48:00Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent realization of the boundary of an n simplex is obtained from its realization by replacing the mapping cube from first vertex to last vertex by the boundary cube\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.boundary_eq_iSup\", \"SSet.boundary\", \"Simplicial.term∂Δ[_]\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.stdSimplex.range_δ\", \"SSet.stdSimplex.face\", \"Cube.insertAt_boundary\", \"SSet.horn\"], \"digest\": \"e1bf36e760b682e9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-208 and SimplicialSet/Boundary.lean:35-75. Coherent simplices, the coherent nerve, ordinary boundaries and Kan generators do not supply this enriched colimit or pushout calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For simplicial enriched categories, homotopy coherent categorification sends a simplex boundary to attachment of a cubical mapping space",
+   "results": "{\"t\": \"2026-10-17T02:48:00Z\", \"tool\": \"leanfinder\", \"query\": \"For simplicial enriched categories, homotopy coherent categorification sends a simplex boundary to attachment of a cubical mapping space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.ι₁\", \"SSet.ι₀\", \"CategoryTheory.SimplicialNerve\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"CategoryTheory.nerve\", \"SSet.S1\", \"SSet.modelCategoryQuillen.I\", \"CategoryTheory.SimplicialCategory.sHom\"], \"digest\": \"98baba5f98d5cc9b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-208 and SimplicialSet/Boundary.lean:35-75. Coherent simplices, the coherent nerve, ordinary boundaries and Kan generators do not supply this enriched colimit or pushout calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialThickening|simplicialNerve|coherent.*(realization|boundary)",
+   "results": "{\"t\": \"2026-10-17T02:48:01Z\", \"tool\": \"grep\", \"query\": \"SimplicialThickening|simplicialNerve|coherent.*(realization|boundary)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"3358c6b085bd02b6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-208 and SimplicialSet/Boundary.lean:35-75. Coherent simplices, the coherent nerve, ordinary boundaries and Kan generators do not supply this enriched colimit or pushout calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialThickening\"",
+   "results": "{\"t\": \"2026-10-17T02:48:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialThickening\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening\", \"CategoryTheory.SimplicialThickening.Path\", \"CategoryTheory.SimplicialThickening.as\", \"CategoryTheory.SimplicialThickening.instCategory\", \"CategoryTheory.SimplicialThickening.instCategoryStruct\", \"CategoryTheory.SimplicialThickening.mk\", \"CategoryTheory.SimplicialThickening.instSimplicialCategory\", \"CategoryTheory.SimplicialThickening.instCategoryPath\"], \"digest\": \"6b81c4012784104f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-208 and SimplicialSet/Boundary.lean:35-75. Coherent simplices, the coherent nerve, ordinary boundaries and Kan generators do not supply this enriched colimit or pushout calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The simplicial thickening functor on simplicial sets computes the hom from 0 to n of the boundary simplex as a cubical boundary",
+   "results": "{\"t\": \"2026-10-17T03:41:12Z\", \"tool\": \"leanfinder\", \"query\": \"The simplicial thickening functor on simplicial sets computes the hom from 0 to n of the boundary simplex as a cubical boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"SSet.stdSimplex.objMk\", \"SSet.ι₀\", \"SSet.ι₁\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.S1\", \"SSet.modelCategoryQuillen.I\", \"SSet.boundary_eq_iSup\"], \"digest\": \"328ce128de589a34\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader query; inspected the returned types and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-208. SimplicialThickening defines the mapping nerve and union composition, not the boundary colimit or cubical pushout."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialThickening\", \"boundary\"",
+   "results": "{\"t\": \"2026-10-17T03:41:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialThickening\\\", \\\"boundary\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader query; inspected the returned types and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-208. SimplicialThickening defines the mapping nerve and union composition, not the boundary colimit or cubical pushout."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialThickening.*boundary|boundary.*SimplicialThickening|coherentRealization",
+   "results": "{\"t\": \"2026-10-17T03:41:25Z\", \"tool\": \"grep\", \"query\": \"SimplicialThickening.*boundary|boundary.*SimplicialThickening|coherentRealization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader query; inspected the returned types and Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-208. SimplicialThickening defines the mapping nerve and union composition, not the boundary colimit or cubical pushout."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cone-presheaf-adjunction",
@@ -103,5 +255,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-rigidification-boundary-cube",
+  "worker": "stage1",
+  "summary": "Kept the imported statement unchanged. Proved the cube identification by subset chains, constructed the boundary subcategory, and verified its simplex-colimit universal property by a canonical splitting at the initial subset. Proved all face/degeneracy and composition compatibilities and the enriched pushout property directly for arbitrary targets, including repeated endpoint images; checked n=0 and n=1. The two existing definition-bearing statements suffice, with no new node or Mathlib leaf. Corrected an early draft that incorrectly assigned the coordinate-one faces to degeneracies: these faces come from composition through an interior vertex.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint, the derived coefficient-adjunction and inverse-limit comparison: independent coherent foundations below the contravariant slice construction; specifically the rigidification boundary-cell computation used in the first proof paragraph of HTT Theorem 2.2.5.1."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N0-90584a84b",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-90584a84b (reviewer sub-agent of L); spot-checked: PASS: I read the statement and all six steps in full, with no changes and no tool_uses. The statement matches HTT §2.2.5, proof of Theorem 2.2.5.1 (printed p.90, PDF p.107 counting from 0), read from a local copy of the official PDF: same objects, Hom(0,n) is the cube boundary, it is a pushout of [1]∂(Δ¹)^{n-1} ⊆ [1](Δ¹)^{n-1} (HTT's [1]K is U(K)), and n=0 gives ∅→∗. Steps 1-2 use only the stated subset-chain/union/image definitions of lem-coef-pinched-cube-latching. The predicate S_q≠V or S_0≠{0,n} is exactly 'some coordinate constantly 0 or 1'. It is preserved by simplicial operators and by composites through 0<k<n; composites through k=0 or n have an identity factor. Steps 3-4: I checked that every canonical-splitting support T_b is proper in all three cases. Refinement at extra vertices of S_0, the simplicial-operator argument (shrinking supports plus cocone compatibility), concatenation under composition, agreement with the face cocone and uniqueness by the union decomposition are all correct, so A is the colimit and the comparison is the inclusion. Step 5 uses U(K) as stated in lem-coef-simplicial-interval-lifting. Composites with output (0,n) through an interior k land in ∂B where h=g, and exceptional inputs pair only with identities; the argument holds for arbitrary targets, including coincident images. Step 6 (n=0, n=1) is correct. Independent script for n≤5, degree q≤2: A(0,n) equals the coordinatewise cube boundary and equals proper-face chains plus composites through interior k, and all supports are proper. Duplicate search: coherent-nerve-relative-cube-comparison (locally Kan target, homotopy classes) is a different statement; fixed-vertex-cofibrations and cone-presheaf-adjunction only cite this item. No new nodes, no cycle, both dependencies are in unit sk-prop-sf-biduality-general, no SGA. The node is not a target, so there is no base-change morphism or coefficient category to compare."
  }
 }

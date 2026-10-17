@@ -11,9 +11,116 @@
   "def-coef-symmetric-operadic-family",
   "def-coef-infinity-relative-cone"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=E^\\otimes_{\\mathrm{act}}$, $D=O^\\otimes_{\\mathrm{act}}$, $f=a|_K$, and $c=a|_{K\\star\\{0\\}}$. The active subcategories are pullbacks of the operads along $N(\\mathrm{Fin}_*^{\\mathrm{act}})\\subseteq N(\\mathrm{Fin}_*)$, so they are quasicategories by the operads' inner-horn axiom. The restriction $q_C:C\\to D$ is an inner fibration: fill a horn using $q$, and the resulting simplex is active because its image in $D$ is active and $q$ preserves the pointed-set coordinate. Write $R=C_{f/}$ and $S=D_{qf/}$ for the sharp join coslices. Their simplices and the join adjunction are those of [lem-coef-infinity-join-cocone-associativity]. The relative coslice lemma [lem-cbc-relative-coslice-left-fibration], applied to $\\varnothing\\hookrightarrow K$, factors $Q:R\\to S$ as the left fibration $R\\to C\\times_D S$ followed by the pullback of $q_C$. Pullbacks and composites of inner fibrations lift inner horns successively, so $Q$ is an inner fibration between quasicategories. The given maps correspond exactly to $u:\\partial\\Delta^r\\to R$ and $v:\\Delta^r\\to S$, with $Qu=v|_{\\partial\\Delta^r}$ and $u(0)=c$.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-operadic-approximation-restriction",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-relative-coslice-left-fibration",
+    "lem-coef-infinity-join-cocone-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.7 proof, pp.319–320: active coslices and the inner fibration q-prime; HTT Proposition 2.1.2.1 as exposed by the relative coslice lemma."
+   }
+  },
+  {
+   "text": "Let $C_1\\subseteq C$ be the full subcategory of color objects. Form the relative restriction map\n$$\\psi:C_1\\times_C C_{c/}\\longrightarrow C_1\\times_C\\bigl(C_{f/}\\times_{D_{qf/}}D_{qc/}\\bigr).$$\nIt is a left fibration by [lem-cbc-relative-coslice-left-fibration] for $K\\hookrightarrow K\\star\\{0\\}$. We check its fibers, without claiming that $c$ is relatively initial against tuple apexes. For a diagram $d:T\\to C$ and a color $W$, denote the strict apex fiber of $C_{d/}$ by $U_d(W)$; use the same notation in $D$. By [lem-coef-join-slice-cocone-comparison] these are Kan spaces of coherent cocones. The inclusion of the apex $\\{0\\}\\hookrightarrow K\\star\\{0\\}$ is right anodyne by [lem-coef-infinity-cone-mono-right-anodyne], applied to $\\varnothing\\hookrightarrow K$. Thus [lem-coef-infinity-anodyne-cocones] identifies $U_c(W)$ with $\\operatorname{Map}_C(c(0),W)$, and $U_{qc}(qW)$ with $\\operatorname{Map}_D(qc(0),qW)$, naturally under restriction to $K$ and under $q$. Under these identifications the upper restriction is $\\alpha\\mapsto\\Delta_K(\\alpha)c$, including the cocone composition homotopy; the lower restriction is the same formula for $qc$. Taking the empty tuple $Z$ in the operadic hypothesis, and using the coherent unit of concatenation in [lem-coef-active-operad-cocartesian-concatenation], now says that the square with rows $U_c(W)\\to U_f(W)$ and $U_{qc}(qW)\\to U_{qf}(qW)$ is a homotopy pullback; [lem-coef-kan-homotopy-pullback-invariance] justifies these changes of models. The lower restriction map is a left fibration by the relative coslice lemma applied to the map $D\\to\\Delta^0$, and hence is a Kan fibration between these Kan spaces. Here the left-fibration version follows by reversing simplicial order in [lem-cbc-right-fibration-space-fiber]. Consequently [lem-coef-kan-pullback-path-comparison] identifies its strict pullback with the path pullback. For each $W$, the induced map $\\psi_W:U_c(W)\\to U_f(W)\\times_{U_{qf}(qW)}U_{qc}(qW)$ is therefore a weak equivalence and a Kan fibration. Its strict vertex fibers are contractible by [lem-cbc-kan-fibration-fiber-criterion]. These are exactly the vertex fibers of $\\psi$. The opposite of a left fibration is a right fibration (order reversal exchanges the horn indices), so [lem-coef-right-fibration-contractible-fibers] applied to $\\psi^{\\mathrm{op}}$ shows that $\\psi$ lifts every boundary, including dimension zero. By the sharp-join associator, $C_{c/}=R_{c/}$ and $D_{qc/}=S_{Qc/}$; hence this is an exact relative coslice lift whenever the remaining apex vertices are colors.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-cbc-relative-coslice-left-fibration",
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-coef-infinity-cone-mono-right-anodyne",
+    "lem-coef-infinity-anodyne-cocones",
+    "lem-coef-active-operad-cocartesian-concatenation",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-cbc-right-fibration-space-fiber",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "lem-coef-right-fibration-contractible-fibers",
+    "lem-coef-infinity-join-cocone-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 3.1.1.2 and Remark 3.1.1.5, pp.318–319: weak operadic restriction is a trivial Kan fibration; mapping-space translation of the empty-concatenation case."
+   }
+  },
+  {
+   "text": "Define $t:\\Delta^r\\times\\Delta^1\\to\\Delta^r$ by $t(i,0)=i$ and $t(i,1)=r$. This is monotone on the product poset. Set\n$$X=(\\partial\\Delta^r\\times\\{0\\})\\cup(\\Lambda_r^r\\times\\Delta^1)\\cup(\\Delta^r\\times\\{1\\}).$$\nOn the middle part every simplex omits a vertex different from $r$, so its image under $t$ is in $\\partial\\Delta^r$; the top part maps to $r$. Thus $g_0=u\\circ t|_X$ is defined and lies over $v\\circ t$. In particular the top face is constant at $z=u(r)$, whose apex is the prescribed color $a(r)$, and the vertical edge at $r$ is degenerate at $z$. On the bottom boundary $g_0=u$. We extend this particular map, leaving $X$ fixed throughout.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.7 proof, pp.319–320: the collapse r and the initial subset X of the prism."
+   }
+  },
+  {
+   "text": "For $1\\leq i\\leq r$, adjoin to the current subset the $r$-simplex $\\sigma_i$ with vertices\n$$\\sigma_i(j)=\\begin{cases}(j,0)&j\\leq r-i,\\\\(j-1,1)&j>r-i.\\end{cases}$$\nFor $i<r$ its intersection with the preceding subset is precisely $\\Lambda_{r-i}^r$: deleting any vertex other than $r-i$ leaves a face in $X$ or in an earlier $\\sigma_j$, while deletion of $r-i$ is the new face. The index satisfies $0<r-i<r$, so the inner fibration $Q$ of Step 1 extends the map over this simplex, over the fixed map $v\\circ t$. At $i=r$ the intersection is instead the full $\\partial\\Delta^r$. Indeed the zeroth face lies in the top face, the first face was adjoined at $i=r-1$ when $r>1$, and each other face lies in $\\Lambda_r^r\\times\\Delta^1$ because its first-coordinate support omits a vertex different from $r$. For $r=1$ both endpoints are already in $X$. This corrects the printed zeroth-horn pushout at $i=r$ in HA 3.1.1.7(i). The initial vertex of $\\sigma_r$ is $c$ and all its remaining vertices lie in the top face, with color apex $a(r)$. The entire prescribed boundary, together with the base simplex, is therefore a boundary lifting problem $\\partial\\Delta^{r-1}\\hookrightarrow\\Delta^{r-1}$ for $\\psi$ of Step 2: the top face gives the target simplex, and its remaining faces give the source boundary, by the sharp-join associator. The trivial Kan fibration $\\psi$ fills it, including dimension zero when $r=1$. Thus the full $\\sigma_r$ can be attached with every already prescribed face unchanged.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-join-cocone-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.7 proof, p.320, part (i): the r-dimensional simplices; corrected final attachment is a full boundary, as detailed in report.md under Source error."
+   }
+  },
+  {
+   "text": "Next, for $1\\leq j\\leq r+1$, adjoin the $(r+1)$-simplex $\\tau_j$ with vertices\n$$\\tau_j(k)=\\begin{cases}(k,0)&k<j,\\\\(k-1,1)&k\\geq j.\\end{cases}$$\nIts intersection with what is already attached is $\\Lambda_j^{r+1}$: all faces except deletion of vertex $j$ are in the initial subset or in earlier listed simplices. The $\\tau_j$ are the maximal simplices of $\\Delta^r\\times\\Delta^1$, so the resulting subset is the whole prism. For $j\\leq r$ the horn is inner and is filled using $Q$. For $j=r+1$ the final edge is the vertical edge at $r$, which $g_0$ already sent to the degenerate edge at $z$. It is an equivalence. Apply the final-horn clause of [lem-cbc-inner-fibration-equivalence-outer-horn-lift] to $Q$ to fill this last simplex over $v\\circ t$. We obtain $g:\\Delta^r\\times\\Delta^1\\to R$ extending $g_0$ exactly and satisfying $Qg=v\\circ t$ exactly.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.7 proof, pp.320–321, part (ii): the maximal prism simplices and final equivalence edge."
+   }
+  },
+  {
+   "text": "Restrict $g$ to $\\Delta^r\\times\\{0\\}$. Because $t|_{\\Delta^r\\times\\{0\\}}$ is the identity and the bottom boundary belongs to $X$, this gives $\\widetilde u:\\Delta^r\\to R$ with $Q\\widetilde u=v$ and $\\widetilde u|_{\\partial\\Delta^r}=u$. The natural bijection of [lem-coef-infinity-join-cocone-associativity] turns it into $h:K\\star\\Delta^r\\to C$; its naturality in the indexing simplicial set and in $q_C$ gives the two required equalities exactly. No equivalence of cocone models is being used to turn a homotopy into an equality at this step. If $K=\\varnothing$, the sharp coslices are $C,D$ themselves and every construction remains defined. For $r=1$ the two horn phases are respectively a color-target edge lift and a $2$-simplex lift with degenerate final edge. The initial apex arity was unrestricted throughout: only $z$ was required to have color apex in Step 4. The argument used only the empty-concatenation consequence of the specified operadic cocone, and no other colimits.",
+   "uses": [
+    "lem-coef-infinity-join-cocone-associativity",
+    "def-coef-symmetric-operadic-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.7 proof, pp.320–321: restriction to the bottom prism face; Definition 3.1.1.2 includes arbitrary initial arity and empty K."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-relative-cone",
+  "def-coef-symmetric-operadic-family",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-coef-active-operad-cocartesian-concatenation",
+  "lem-coef-infinity-anodyne-cocones",
+  "lem-coef-infinity-cone-mono-right-anodyne",
+  "lem-coef-infinity-join-cocone-associativity",
+  "lem-coef-join-slice-cocone-comparison",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-operadic-approximation-restriction",
+  "lem-coef-right-fibration-contractible-fibers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, middle derived mapping-complex comparison: foundational symmetric operadic active join-boundary ingredient, expanded from HA Proposition 3.1.1.7 by the exact prism filtration; the colorwise mapping-square definition is converted to weak operadic coslice restriction using existing foundational tools."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +156,24 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property in the category of simplicial sets generated by all horn inclusions, defined as the supremum over all dimensions $n$ of the inclusions of the $i$-th horn $\\\\Lambda[n+1, i]$ into t\"}\n  {\"name\": \"SSet.modelCategoryQuillen.I\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property defined by the family of inclusions of the boundary of the standard $n$-simplex $\\\\partial\\\\Delta[n]$ into the standard $n$-simplex $\\\\Delta[n]$ for each natural number $n$. This co\"}\n  {\"name\": \"SSet.horn.isColimit\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits\", \"type\": \"{n : ℕ} →\\n  (i : Fin (n + 1)) →\\n    CategoryTheory.Limits.IsColimit\\n      ((CompleteLattice.MulticoequalizerDiagram.multicofork ⋯).toLinearOrder.map SSet.Subcomplex.toSSetFunctor)\", \"doc\": \"The colimit property of the multicoequalizer diagram constructing the n-dimensional horn Λ[n, i] is preserved under transformation to a linear order context via the subcomplex-to-simplicial-set functo\"}\n  {\"name\": \"SSet.hasColimits\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"CategoryTheory.Limits.HasColimits SSet\", \"doc\": \"The category of simplicial sets admits all colimits, meaning that every diagram in this category has a colimit object.\"}\n  {\"name\": \"SSet.Subcomplex.MulticoequalizerDiagram\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits\", \"type\": \"{X : SSet} → X.Subcomplex → {ι : Type u_1} → (ι → X.Subcomplex) → (ι → ι → X.Subcomplex) → Prop\", \"doc\": \"For a simplicial set $X$, a subcomplex $U$ of $X$, an index type $\\\\iota$, a family of subcomplexes $V : \\\\iota \\\\to X.\\\\mathrm{Subcomplex}$, and a family of relations $R : \\\\iota \\\\times \\\\iota \\\\to X.\\\\mathr\"}\n  {\"name\": \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ (n : ℕ) (i : Fin (n + 2)), SSet.modelCategoryQuillen.J (SSet.horn (n + 1) i).ι\", \"doc\": \"For any natural number $ n $ and index $ 0 \\\\leq i \\\\leq n+1 $, the inclusion morphism $ \\\\Lambda^{i}[n+1] \\\\to \\\\Delta[n+1] $ of the $ i $-th horn into the standard $ (n+1) $-simplex is a generating acycl\"}\n  {\"name\": \"SimplicialObject.Splitting.isColimit\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Split\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {X : CategoryTheory.SimplicialObject C} →\\n      (s : SimplicialObject.Splitting X) → (Δ : SimplexCategoryᵒᵖ) → CategoryTheory.Limits.IsColimit (s.cofan Δ)\", \"doc\": \"For each object $\\\\Delta$ in the opposite simplex category, the cocone (cofan) constructed from the splitting components of the simplicial object $X$ satisfies the universal property of a colimit. This\"}\n  {\"name\": \"SimplicialObject.Splitting.isColimit'\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Split\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {X : CategoryTheory.SimplicialObject C} →\\n      (self : SimplicialObject.Splitting X) →\\n        (Δ : SimplexCategoryᵒᵖ) → CategoryTheory.Limits.IsColimit (SimplicialObject.Splitting.cofan' self.N X self.ι Δ)\", \"doc\": \"For each object $\\\\Delta$ in the opposite simplex category, the cocone (cofan) constructed from the splitting components of the simplicial object $X$ satisfies the universal property of a colimit. This\"}",
    "date": "2026-10-17",
    "verdict": "No match: Quasicategory/Basic.lean:39-50 requires a positive inner-horn index, and SimplicialSet/CategoryWithFibrations.lean:45-115 requires all-horn Kan fibrations. Ordinary cocone-opposite lemmas do not give the active relative operadic join-boundary property."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|Operad|coslice.*fibration|prism.*horn",
+   "results": "{\"t\": \"2026-10-17T03:25:53Z\", \"tool\": \"grep\", \"query\": \"operad|Operad|coslice.*fibration|prism.*horn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"digest\": \"fd86d48dbea6a9e4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading. LeanFinder returned pointed-simplex face relations and ordinary horn colimits; grep found only two bibliographic operad references. Neither search supplies relative operadic colimits or active coslice boundary lifting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative universal cocone tested only at selected target objects gives simplex boundary lifts when the last target is selected",
+   "results": "{\"t\": \"2026-10-17T03:25:55Z\", \"tool\": \"leanfinder\", \"query\": \"A relative universal cocone tested only at selected target objects gives simplex boundary lifts when the last target is selected\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.PtSimplex.RelStruct.δ_map_of_lt\", \"SSet.PtSimplex.RelStruct.δ_map_of_gt\", \"SSet.horn₃₁.desc.multicofork\", \"SSet.horn₃₂.desc.multicofork\", \"SSet.horn.multicoequalizerDiagram\", \"SSet.horn₃₂.desc.multicofork_pt\", \"SSet.horn₃₁.desc.multicofork_pt\", \"SSet.horn\"], \"digest\": \"f421e1c97d222263\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading. LeanFinder returned pointed-simplex face relations and ordinary horn colimits; grep found only two bibliographic operad references. Neither search supplies relative operadic colimits or active coslice boundary lifting."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-operadic-left-horn-filling",
@@ -64,7 +185,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit, through the coherent free-module criterion: the symmetric operadic zeroth-horn argument, HA Theorem 3.1.2.3(B). Proposition 3.1.1.7, printed pp.319-320, direction (1) to (2); operadic colimiting implies weak operadic colimiting by Definition 3.1.1.2.",
+   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: the symmetric operadic zeroth-horn argument, using HA Proposition 3.1.1.7 to pass from the relative operadic colimit mapping squares to active join-boundary fillers.",
    "via": [
     "lem-coef-symmetric-operadic-left-horn-filling",
     "lem-coef-symmetric-operadic-extension-boundaries",
@@ -79,5 +200,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-colimit-active-join-boundary",
+  "worker": "stage1",
+  "summary": "Second reading replaced the unsupported relative-initiality claim at arbitrary tuple apexes with HA Proposition 3.1.1.7’s explicit two-phase prism filtration. First obtain the weak operadic coslice restriction over color targets from the given empty-concatenation mapping square, then fill the r-dimensional attachments (correcting the printed horn to a full boundary at the last such attachment), the maximal prism simplices, and restrict to the bottom face using a strict sharp-join adjunction. No new nodes, Mathlib leaves, statement changes or Lean attachments. The HA archive is still WANTED.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: the middle operadic mapping-complex comparison before the inverse limit, specifically the symmetric operadic zeroth-horn/active join-boundary argument from HA Proposition 3.1.1.7.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-relative-coslice-left-fibration",
+    "why": "Steps 1-2 take the general relative join-coslice left-fibration theorem (HTT 2.1.2.1, the fact HA 3.1.1.5 invokes) for Q, psi and the lower restriction; no node of sk-prop-sf-biduality-general or its cited units states it."
+   },
+   {
+    "node": "lem-cbc-right-fibration-space-fiber",
+    "why": "Step 2 uses (in opposite form) that a left fibration over a Kan complex is a Kan fibration with Kan source; generic simplicial-homotopy tool absent from the unit's route."
+   },
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "Step 2 uses that a Kan fibration which is a weak equivalence has contractible vertex fibers; generic Kan-complex tool absent from the unit's route."
+   },
+   {
+    "node": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "why": "Step 5 fills the final horn Lambda^{r+1}_{r+1} of the prism with degenerate last edge (HA 3.1.1.7(ii), i0=n+1, via HTT 2.4.1.5-type lifting); generic quasicategory tool absent from the unit's route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-0cb23a3c2",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-0cb23a3c2 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item statement, all six steps, the 16 cited statements, the unit record, and Higher Algebra (Sept 2017) Def 3.1.1.2, Rem 3.1.1.5 and Prop 3.1.1.7 with its full proof (pp.318-321). The statement matches HA 3.1.1.7 (1)=>(2) and keeps every hypothesis: q cocartesian and an operadic colimit, which implies the weak one via the empty tuple Z. K may be empty, every r>0, the equalities are exact and a(r) is a color. Nothing is weakened. Step 1: Q is an inner fibration by the relative coslice lemma with K_0 empty. Step 2: psi is HA's psi restricted to color targets. The Z-empty homotopy-pullback square, the Kan-fibration argument, strict vs path pullback, contractible fibres and the opposite of right-fibration-contractible-fibers give a trivial Kan fibration, including dimension 0. I checked each citation against what the step takes from it. Steps 3-6 follow HA's prism argument. I enumerated all chains of [r]x[1] for r=1..5: sigma_i meets the earlier part in the inner horn Lambda^r_{r-i} for i<r and in the full boundary at i=r. tau_j meets it in Lambda^{r+1}_j, and the pieces cover the prism. So the reported HA source error is confirmed: p.320 prints Lambda^n_0 at i=n, where the full boundary is correct and is filled by the trivial fibration; p.321 has i0=n+1 misprinted. The final horn is filled by the equivalence outer-horn lemma because its last edge is degenerate. Edge cases r=1, K empty, nullary apex and q=id all work. There are no new nodes and no cycle; the only citer is lem-coef-symmetric-operadic-left-horn-filling. Duplicate search: rg over dag/nodes for 3.1.1.7, join boundary, weak operadic and active join. The five related nodes (active-cone-boundary, relative-limit-join-boundary, relative-initial-boundary, correspondence-kan-filling, concatenation-colimits) do not state this symmetric relative result. One fault: four cited statements come from unit sk-prop-sf-cbc, which is outside this unit's route, and they were not declared. Accepted tool_uses: lem-cbc-relative-coslice-left-fibration, lem-cbc-right-fibration-space-fiber, lem-cbc-kan-fibration-fiber-criterion, lem-cbc-inner-fibration-equivalence-outer-horn-lift. All four are generic tools already used this way across the chapter. Fix: fixes/dag/nodes/sec-six-functors/lem-coef-operadic-colimit-active-join-boundary.json is the delivered file with only split_report.tool_uses added. Also noted: HA is still WANTED in literature/, the item has no lean_audit field (inherited from its creating split), and the HA source error should go to HUMAN.md.; 1 file(s) fixed by the reviewer"
  }
 }

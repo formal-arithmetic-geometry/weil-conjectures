@@ -1,0 +1,78 @@
+{
+ "id": "def-cbc-generalized-cover",
+ "kind": "definition",
+ "title": "Generalized covers of presheaves",
+ "statement": "Let $\\mathcal C$ be a small category, in the universes of [def-weil-size-convention], with a Grothendieck topology $J$: a sieve on $A$ is a collection of arrows into $A$ closed under precomposition; the maximal sieve covers, and covering sieves satisfy pullback stability and transitivity. Let $P,Q:\\mathcal C^{\\mathrm{op}}\\to\\mathsf{Sets}$ be presheaves and $p:P\\to Q$ a natural transformation. For $q\\in Q(A)$ define its lifting sieve\n$$R(p,q)=\\{u:B\\to A\\mid\\exists x\\in P(B),\\ p_B(x)=Q(u)(q)\\}.$$\nCall $p$ a generalized cover, or locally surjective, if $R(p,q)\\in J(A)$ for every $A$ and $q$. Equivalently, writing $h_A(B)=\\operatorname{Hom}_{\\mathcal C}(B,A)$, every map $h_A\\to Q$ lifts to $P$ after restriction along each arrow of a covering sieve; the lifts are not required to be compatible.",
+ "source": {
+  "document": "https://arxiv.org/pdf/math/0205027v2",
+  "place": "Dugger--Hollander--Isaksen, Section 3, definition of generalized cover immediately after Proposition 3.3, before equation (3.4). Mathlib CategoryTheory/Sites/LocallySurjective.lean, imageSieve and IsLocallySurjective."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "generalized cover local epimorphism presheaf covering sieve definition",
+   "results": "{\"t\": \"2026-10-17T03:23:54Z\", \"tool\": \"leanfinder\", \"query\": \"generalized cover local epimorphism presheaf covering sieve definition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.epi_of_isLocallySurjective'\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi'\", \"CategoryTheory.PresheafIsGeneratedBy.of_epi\", \"CategoryTheory.Presheaf.IsLocallySurjective\", \"CategoryTheory.Sheaf.instEpiAppArrowILocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization\", \"CategoryTheory.regularTopology.isLocallySurjective_iff\", \"CategoryTheory.Sheaf.epi_of_isLocallySurjective\", \"TopCat.Presheaf.IsLocallySurjective\"], \"digest\": \"1b4bd6e052c24098\"}",
+   "date": "2026-10-17",
+   "verdict": "match: IsLocallySurjective is the definition; the other hits concern sheaf epimorphisms or unrelated topologies"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.IsLocallySurjective",
+   "results": "{\"t\": \"2026-10-17T03:24:24Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Presheaf.IsLocallySurjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.IsLocallySurjective\", \"CategoryTheory.Presheaf.instIsLocallySurjectiveFunToRangeSheafify\", \"CategoryTheory.Presheaf.isLocallySurjective_toSheafify'\", \"CategoryTheory.Presheaf.isLocallySurjective_of_iso\", \"CategoryTheory.Presheaf.isLocallySurjective_of_le\", \"CategoryTheory.Presheaf.IsLocallySurjective.imageSieve_mem\", \"CategoryTheory.Presheaf.IsLocallySurjective.mk\", \"CategoryTheory.Presheaf.instIsLocallySurjectiveFunWhiskerRightOppositeForget\"], \"digest\": \"9f2f878d0417448f\"}",
+   "date": "2026-10-17",
+   "verdict": "match: IsLocallySurjective is the definition; the other hits concern sheaf epimorphisms or unrelated topologies"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsLocallySurjective|def imageSieve",
+   "results": "{\"t\": \"2026-10-17T03:25:15Z\", \"tool\": \"grep\", \"query\": \"class IsLocallySurjective|def imageSieve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/LocallySurjective.lean\", \"Mathlib/CategoryTheory/Sites/LocallySurjective.lean\"], \"digest\": \"a86f6ae4fba166b8\"}",
+   "date": "2026-10-17",
+   "verdict": "match: IsLocallySurjective is the definition; the other hits concern sheaf epimorphisms or unrelated topologies"
+  },
+  {
+   "tool": "leansearch",
+   "query": "definition of generalized cover for presheaves on a Grothendieck site",
+   "results": "{\"t\": \"2026-10-17T03:23:56Z\", \"tool\": \"leansearch\", \"query\": \"definition of generalized cover for presheaves on a Grothendieck site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.IsSheafOpensLeCover\", \"CategoryTheory.GrothendieckTopology.toCoverage\", \"AlgebraicGeometry.Scheme.Cover.Over\", \"CategoryTheory.Coverage.ofGrothendieck\", \"CategoryTheory.GrothendieckTopology.OneHypercover\", \"CategoryTheory.GrothendieckTopology.mem_toPrecoverage_iff\", \"CategoryTheory.Pretopology.toGrothendieck\", \"CategoryTheory.GrothendieckTopology.OneHypercover.toPreOneHypercover\"], \"digest\": \"731e2f056db2d44b\"}",
+   "date": "2026-10-17",
+   "verdict": "match: IsLocallySurjective is the definition; the other hits concern sheaf epimorphisms or unrelated topologies"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Presheaf.IsLocallySurjective",
+  "file": "Mathlib/CategoryTheory/Sites/LocallySurjective.lean",
+  "how": "Read lines 35-53 and 92-96 of the pinned Mathlib. Specialize A to Type: imageSieve (line 49) is exactly R(p,q), and IsLocallySurjective (line 94) requires that sieve to cover for every q. Evaluating a map h_A -> Q at id_A identifies it with q, so the representable formulation is the same definition.",
+  "line": 94
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-hypercover-relative-lifting",
+  "date": "2026-10-17",
+  "group": "NL"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-finite-level-proetale",
+   "place": "Proof opening 'Choose a compactification c=(j,p)' of thm-cbc-finite-level-proetale: arbitrary-site descent foundation for the affine-local compactification repair; in the descendant boundary-lifting proof, the local acyclic fibration square is solved after hypercover refinement before the mapping-space descent argument (DHI Proposition 5.1). Local lifting terminology in the descendant hypercover induction (DHI Section 3).",
+   "via": [
+    "lem-cbc-hypercover-relative-lifting",
+    "lem-cbc-simplicial-hypercover-fibration-test",
+    "lem-cbc-hypercover-localization-generation",
+    "lem-cbc-hyperdescent-local-orthogonality",
+    "lem-cbc-bounded-below-hypersheaf-model",
+    "lem-cbc-zariski-enhanced-derived-descent",
+    "lem-cbc-etale-local-compact-support-extension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

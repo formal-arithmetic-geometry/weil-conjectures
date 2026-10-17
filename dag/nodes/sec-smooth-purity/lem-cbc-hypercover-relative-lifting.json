@@ -12,9 +12,115 @@
   "def-weil-pbc-sheafification",
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H=F^L$ and $B=F^K\\times_{G^K}G^L$. At $V\\in\\mathcal C$, currying a simplicial map $K\\times U(V)\\to F(V)$ gives the map $U(V)\\to F(V)^K$, whose value on a $q$-simplex is its restriction to $K\\times\\Delta^q$. This is natural in $V$ and in simplicial operators, so $a,b$ define $c:U\\to B$; the equation $fa=b(i\\times1)$ is exactly the pullback condition. An $H$-valued lift of $c$ on a refinement is therefore the required $L$-valued tensor lift.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205027v2",
+    "place": "Proposition 5.1, proof: tensor-cotensor reformulation; objectwise tensor and cotensor formulas in Section 2."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-hypercover-cotensor-local-acyclic-fibration] to $f$ and the finite inclusion $i$. It gives a local Kan fibration and local weak equivalence $p:H\\to B$ with objectwise Kan $H,B$. Apply [lem-cbc-local-acyclic-matching-generalized-cover] to $p$: for every $m\\ge0$, the relative boundary map $H_m\\to\\widetilde M_mH\\times_{\\widetilde M_mB}B_m$ is a generalized cover [def-cbc-generalized-cover]. Thus prescribed compatible faces in $H$, together with a compatible simplex in $B$, admit a strict simplex lift on a covering sieve.",
+   "uses": [
+    "lem-cbc-hypercover-cotensor-local-acyclic-fibration",
+    "lem-cbc-local-acyclic-matching-generalized-cover",
+    "def-cbc-generalized-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205027v2",
+    "place": "Propositions 3.2 and 3.3, equation (3.4), and proof of Proposition 5.1."
+   }
+  },
+  {
+   "text": "Use formal families [def-weil-pbc-formal-coproduct] and realize $\\{A_j\\}$ as $\\coprod_j h_{A_j}$. A map from $h_A$ to such a coproduct is determined by its value at $\\operatorname{id}_A$, a unique pair $(j,A\\to A_j)$; restriction determines every other value. Hence formal-family maps are exactly maps between the realized presheaves. We construct split truncations: their degree-$q$ indices have unique labels $(\\sigma,j)$, with $\\sigma:[q]\\twoheadrightarrow[r]$ and $j$ a chosen nondegenerate index in degree $r$, and the component object is that at $j$.",
+   "uses": [
+    "def-weil-pbc-formal-coproduct"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205027v2",
+    "place": "Proposition 5.5, construction with new summands and degenerate summands; Section 4.12, split objects."
+   }
+  },
+  {
+   "text": "Initialize in degree zero. For every $A\\in\\mathcal C$ and $t\\in h_T(A)$, the hypercover condition and [lem-cbc-presheaf-sheafification-epi-local-lifts] give a covering sieve $R_t$ on $A$ and sections $u_r\\in U_0(D)$ above $t|_D$ for $r:D\\to A$ in $R_t$. The degree-zero case of the relative boundary covers in Step 2 gives a covering sieve $S_{t,r}$ on $D$ and vertices $y_{r,s}\\in H_0(E)$ with $p(y_{r,s})=c(u_r)|_E$ for $s:E\\to D$ in $S_{t,r}$. Let $V_0$ be the coproduct of $h_E$ indexed by all these choices, with maps $v_0=u_r|_E$, $d_0=y_{r,s}$, and augmentation $t|_E$. The sieve of arrows along which $t$ lifts to $V_0$ covers: its pullback along each $r$ contains $S_{t,r}$, so transitivity applies to $R_t$. The reverse direction of the cited criterion makes $V_0^\\#\\to h_T^\\#$ epic. Taking all these summands nondegenerate gives a split zero-truncation, and $pd_0=cv_0$ by its defining equation.",
+   "uses": [
+    "lem-cbc-presheaf-sheafification-epi-local-lifts",
+    "def-cbc-generalized-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205027v2",
+    "place": "Lemma 5.4 and the initialization of the induction proving Proposition 5.1; the two covering sieves are composed using transitivity."
+   }
+  },
+  {
+   "text": "Inductively assume a split $n$-truncated hypercover $V\\to h_T$, a refinement $v:V\\to U$ and a map $d:V\\to H$ with $pd=cv$ through degree $n$. Put $m=n+1$ and let $M=M_m(V/h_T)$ be the presheaf of compatible proper faces over $h_T$ (for $m=1$, $M=V_0\\times_{h_T}V_0$). Applying $v$ to each face gives $M\\to M_m(U/h_T)$. For each $b\\in M(A)$, [lem-cbc-presheaf-sheafification-epi-local-lifts] applied to the matching map of $U$ supplies a covering sieve $R_b$ and simplices $u_r\\in U_m(D)$ with boundary $v(b|_D)$ for $r:D\\to A$ in it. The faces $d(b|_D)$ and the simplex $c(u_r)$ give a section of $\\widetilde M_mH\\times_{\\widetilde M_mB}B_m$, since $pd=cv$ on every face. By Step 2, on a covering sieve $S_{b,r}$ of $D$ choose $y_{r,s}\\in H_m(E)$ with boundary $d(b|_E)$ and $p(y_{r,s})=c(u_r)|_E$. Define $Z=\\coprod_{A,b,r,s}h_E$, with boundary $b|_E$, map to $U_m$ given by $u_r|_E$, and map to $H_m$ given by $y_{r,s}$. All indices form a small set. For each $b$, the lifting sieve for $Z\\to M$ pulls back along each $r$ to a sieve containing $S_{b,r}$; transitivity makes it covering. Thus $Z\\to M$ is a generalized cover [def-cbc-generalized-cover], hence epic after sheafification by the cited criterion.",
+   "uses": [
+    "lem-cbc-presheaf-sheafification-epi-local-lifts",
+    "def-cbc-generalized-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205027v2",
+    "place": "Proposition 5.5 and Lemma 5.4: relative matching pullback, with choices explicitly indexed by sections and composite sieve arrows."
+   }
+  },
+  {
+   "text": "The boundary maps of $Z$ to the lower $V_q$ form a compatible formal-family cone, by Step 3 and the definition of $M$. Apply [lem-weil-pbc-site-split-attachment-operators] to this cone and the split truncation. It extends $V$ strictly with top degree\n$$V_m=Z\\amalg\\coprod_{r\\le n,\\,\\sigma:[m]\\twoheadrightarrow[r]}N_r,$$\nwhere $N_r$ is the nondegenerate family in degree $r$. Its normalized proper-epi formulas and invertible components are exactly the hypotheses of [lem-weil-pbc-site-split-attachment-split], so the new truncation is split. On $Z$ define the maps to $U_m,H_m$ by Step 5; on $(\\sigma,j)$ define them by $U(\\sigma)v_r$ and $H(\\sigma)d_r$ restricted to $N_{r,j}$. For a lower operator $\\alpha:[q]\\to[m]$, the new-summand equations are the chosen boundary equations. On an old summand, functoriality gives $U(\\alpha)U(\\sigma)v_r=U(\\sigma\\alpha)v_r=v_qV(\\sigma\\alpha)$, and the identical equation with $H,d$ gives its compatibility. For a proper epi from top degree to an old degree, both composites use the concatenated normalized label; its old component isomorphism cancels the inverse normalization. Factoring any ordinal map into an epi followed by a face inclusion verifies every remaining naturality equation, including nonidentity top endomorphisms. The augmentations agree because every boundary is over $h_T$. The equality $pd=cv$ holds on $Z$ by construction and on old summands by its lower-degree equality and naturality of $p,c$. Finally the matching map contains $Z\\to M$ as a summand, so each section of $M$ lifts on the same covering sieve; [lem-cbc-presheaf-sheafification-epi-local-lifts] makes the new matching map epic after sheafification. This proves the successor case of the inductive claim.",
+   "uses": [
+    "lem-weil-pbc-site-split-attachment-operators",
+    "lem-weil-pbc-site-split-attachment-split",
+    "lem-cbc-presheaf-sheafification-epi-local-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205027v2",
+    "place": "Proposition 5.5, final construction; explicit split attachment supplies degeneracies, and boundary equations verify both maps."
+   }
+  },
+  {
+   "text": "Choose the stages successively. Define each term $V_q$ and every operator between degrees $q,r$ using a stage at least $\\max(q,r)$; strict agreement with each preceding truncation makes these definitions independent of the stage. Every identity, composition, augmentation, and naturality equation occurs in a finite stage, where it has already been checked. Each matching map also occurs in a finite stage and is epic after sheafification. The resulting $V\\to h_T$ is consequently a hypercover, with refinement $v:V\\to U$ and map $d:V\\to H$ satisfying $pd=cv$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205027v2",
+    "place": "Proof of Proposition 5.1, induction using Proposition 5.5; explicit assembly of the compatible truncations."
+   }
+  },
+  {
+   "text": "Uncurry $d:V\\to F^L$ objectwise to obtain $\\ell:L\\times V\\to F$. Its projections under $p$ are precisely the restrictions of $a$ and $b$ along $v$, so $\\ell(i\\times1)=a(1\\times v)$ and $f\\ell=b(1\\times v)$ as equalities of maps. Empty $K$ and degree-zero boundary cause no change to these formulas: $F^{\\varnothing}$ is terminal, and Step 4 uses the empty boundary.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205027v2",
+    "place": "Proposition 5.1, conclusion (5.3); objectwise tensor-cotensor adjunction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-generalized-cover",
+  "def-weil-pbc-formal-coproduct",
+  "def-weil-pbc-simplicial-set",
+  "lem-cbc-hypercover-cotensor-local-acyclic-fibration",
+  "lem-cbc-local-acyclic-matching-generalized-cover",
+  "lem-cbc-presheaf-sheafification-epi-local-lifts",
+  "lem-weil-pbc-site-split-attachment-operators",
+  "lem-weil-pbc-site-split-attachment-split"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://arxiv.org/pdf/math/0205027v2",
+  "place": "Dugger--Hollander--Isaksen Proposition 5.1 and proof via Proposition 5.5, with Proposition 3.3 and Lemma 5.4."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,7 +180,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-simplicial-hypercover-fibration-test",
@@ -98,5 +204,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-hypercover-relative-lifting",
+  "worker": "stage1",
+  "summary": "Second reading: retain two local simplicial-presheaf input theorems and one Mathlib definition leaf. Replace the elementary generalized-cover refinement node and the extension node by an explicit split hypercover induction with two covering sieves, compatible boundary choices, existing attachment operators and splitness, naturality equations, and stagewise assembly. The item statement is unchanged.",
+  "blueprint": "Realizes the descendant boundary-lifting paragraph in the proof opening 'Choose a compactification c=(j,p)' of thm-cbc-finite-level-proetale, where the local acyclic fibration square is solved after hypercover refinement (DHI Proposition 5.1), including the matching-map induction from Proposition 3.2, Lemma 5.4 and Proposition 5.5. Steps 1-2 give the finite cotensor reduction, steps 3-7 write the hypercover induction in full, and step 8 gives the strict tensor lift. The two generic split-attachment tools are the same ones used by the unit's existing dense-hypercover construction."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NL-bdcd92e66",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-bdcd92e66 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, every cited statement, and DHI arXiv:math/0205027v2 (fetched read-only to /tmp/rv-dhi-nl, not added to the project). Places read: section 2 objectwise cotensor; section 3 local liftings; Prop 3.2 and 3.3, generalized cover and (3.4) on pp. 7-8; Def 4.2/4.8 and Lemma 4.9; Prop 5.1, Lemma 5.4 and Prop 5.5 with proofs on pp. 13-14. The item statement is unchanged and is Prop 5.1 specialized to objectwise-Kan F,G, so the homotopy-sheaf definition of local weak equivalence applies; nothing is added or weakened. Its only citer (fibration-test, with h_T->h_T and the boundary inclusion of the n-simplex) stays within it. Step 1: currying and the pullback condition are correct. Step 2: the cotensor node's hypotheses are exactly the item's, and its conclusion supplies the matching node's hypotheses, including the degree-0 case. Steps 4-5: Lemma 5.4 written out with two covering sieves and the transitivity argument. The augmented matching object is used, including V0 x_{h_T} V0 when m=1, and the boundary compatibility pd=cv is checked. Step 6: the hypotheses of the attachment-operators and attachment-split lemmas are satisfied. I recomputed naturality on new summands, old summands, degeneracies and the epi-mono factorization. The new matching map has Z->M as a summand. Steps 7-8: stagewise assembly and strict uncurrying, including K empty. New nodes: def-cbc-generalized-cover is an exact Mathlib leaf (Presheaf.imageSieve l.49, IsLocallySurjective l.94, verified in the pinned Mathlib). The cotensor node is Prop 3.3; its extra claim that both sides are objectwise Kan is true by SM7 plus pullback. The matching node is the only-if half of 3.2/(3.4). All were tested on the trivial site, K=L, K empty, n=0 and empty presheaves. An rg search of the whole DAG found no duplicates. The two dropped nodes were correctly folded into the steps, so there is no D1/D2 problem. Route: I accept tool_uses for lem-weil-pbc-site-split-attachment-operators and lem-weil-pbc-site-split-attachment-split as generic attachment tools from sk-thm-properbasechange, the same acceptance already made on lem-cbc-dense-hypercover-set. No SGA source, no cycle. Minor and not changed: the matching node's source place cites v2 HTML line numbers rather than pages."
  }
 }

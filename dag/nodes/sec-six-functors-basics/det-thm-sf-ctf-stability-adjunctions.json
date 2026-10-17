@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-thm-sf-ctf-stability-adjunctions",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Restricted adjunctions on $\\Dctf$",
@@ -13,21 +13,33 @@
   "place": "node det-thm-sf-ctf-stability-adjunctions, order None"
  },
  "stmt_deps": [
-  "sk-prop-sf-existence"
+  "def-sfb-module-derived-pushpull-adjunction",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-prop-sf-existence",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull"
  ],
  "proof": [
   {
-   "text": "If $F:\\mathcal C\\rightleftarrows\\mathcal D:G$ is an adjunction and\n$\\mathcal C'\\subset\\mathcal C$, $\\mathcal D'\\subset\\mathcal D$ are full\nsubcategories with $F(\\mathcal C')\\subset\\mathcal D'$ and\n$G(\\mathcal D')\\subset\\mathcal C'$, then the natural bijections\n$\\Hom_{\\mathcal D}(FC,D)\\simeq\\Hom_{\\mathcal C}(C,GD)$ for $C\\in\\mathcal C'$,\n$D\\in\\mathcal D'$ are bijections of Hom sets of $\\mathcal D'$ and $\\mathcal C'$\nby fullness, so $F|_{\\mathcal C'}\\dashv G|_{\\mathcal D'}$, with the same unit and\ncounit. By [det-thm-sf-ctf-stability-direct-images] and\n[det-thm-sf-ctf-stability-internal-hom], $f^*$, $Rf_*$, $Rf_!$, $f^!$,\n$-\\otimes^{\\mathbf L}K$ and $\\cHom(K,-)$ preserve $\\Dctf$. Apply this to the\nambient adjunctions $f^*\\dashv Rf_*$ and $-\\otimes^{\\mathbf L}K\\dashv\\cHom(K,-)$\non $D(-_{\\mathrm{proét}},\\Lambda)$, and to $Rf_!\\dashv f^!$ on the localizing\ncategories $\\Loc(\\Dctf(-,\\Lambda))$, which contain $\\Dctf(-,\\Lambda)$ as a full\nsubcategory.",
+   "text": "If $F:\\mathcal C\\rightleftarrows\\mathcal D:G$ is an adjunction and\n$\\mathcal C'\\subset\\mathcal C$, $\\mathcal D'\\subset\\mathcal D$ are full\nsubcategories with $F(\\mathcal C')\\subset\\mathcal D'$ and\n$G(\\mathcal D')\\subset\\mathcal C'$, then the natural bijections\n$\\Hom_{\\mathcal D}(FC,D)\\simeq\\Hom_{\\mathcal C}(C,GD)$ for $C\\in\\mathcal C'$,\n$D\\in\\mathcal D'$ are bijections of Hom sets of $\\mathcal D'$ and $\\mathcal C'$\nby fullness, so $F|_{\\mathcal C'}\\dashv G|_{\\mathcal D'}$, with the same unit and\ncounit. By [det-thm-sf-ctf-stability-direct-images] and\n[det-thm-sf-ctf-stability-internal-hom], $f^*$, $Rf_*$, $Rf_!$, $f^!$,\n$-\\otimes^{\\mathbf L}K$ and $\\cHom(K,-)$ preserve $\\Dctf$. The ambient derived pullback–pushforward adjunction is supplied by\n[def-sfb-module-derived-pushpull-adjunction] (its $Lf^*$ is the $f^*$ notation used here), and the ambient tensor–Hom adjunction is\nsupplied by [sk-def-sfb-derived-tensor-hom], as $K\\otimes^{\\mathbf L}_{\\Lambda_X}-\\dashv\\RHom_{\\Lambda_X}(K,-)$ with $\\cHom(K,-)=\\RHom_{\\Lambda_X}(K,-)$; since $\\Lambda_X$ is commutative, the termwise symmetry of $\\otimes_{\\Lambda_X}$ (with the Koszul sign) on a K-flat resolution of $K$ gives a natural isomorphism $M\\otimes^{\\mathbf L}K\\simeq K\\otimes^{\\mathbf L}M$, and composing the Hom bijections with it gives $-\\otimes^{\\mathbf L}K\\dashv\\cHom(K,-)$ on $D(X_{\\mathrm{proét}},\\Lambda)=D(\\Mod_{\\Lambda_X})$. Apply this to the\nambient adjunctions $f^*\\dashv Rf_*$ and $-\\otimes^{\\mathbf L}K\\dashv\\cHom(K,-)$\non $D(-_{\\mathrm{proét}},\\Lambda)$, and to $Rf_!\\dashv f^!$ on the localizing\ncategories $\\Loc(\\Dctf(-,\\Lambda))$, which contain $\\Dctf(-,\\Lambda)$ as a full\nsubcategory.",
    "uses": [
     "det-thm-sf-ctf-stability-direct-images",
-    "det-thm-sf-ctf-stability-internal-hom"
+    "det-thm-sf-ctf-stability-internal-hom",
+    "def-sfb-module-derived-pushpull-adjunction",
+    "sk-def-sfb-derived-tensor-hom",
+    "sk-prop-sf-existence"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "det-thm-sf-ctf-stability-direct-images",
-  "det-thm-sf-ctf-stability-internal-hom"
+  "det-thm-sf-ctf-stability-internal-hom",
+  "def-sfb-module-derived-pushpull-adjunction",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-prop-sf-existence"
  ],
  "proof_origin": {
   "by": "agent",
@@ -36,7 +48,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -63,5 +75,40 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-thm-sf-ctf-stability-adjunctions",
+  "worker": "stage1",
+  "group": "Q90",
+  "summary": "Checked that the item has no finished Lean declaration. Expanded the formal full-subcategory restriction step to cite the existing preservation lemmas, the ambient derived pullback–pushforward and tensor–Hom adjunction definitions, and the localizing exceptional adjunction. No new DAG nodes were needed.",
+  "blueprint": "The sole paragraph of det-thm-sf-ctf-stability-adjunctions.proof.md is realized by the single proof step: the categorical restriction argument, with preservation supplied by the two det-thm-sf-ctf-stability nodes and ambient adjunctions supplied by the three cited interface nodes.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-module-derived-pushpull-adjunction",
+    "why": "The step uses its ambient derived pullback–pushforward adjunction $Lf^*\\dashv Rf_*$ before restricting to the finite-Tor constructible full subcategories."
+   },
+   {
+    "node": "sk-def-sfb-derived-tensor-hom",
+    "why": "The step uses its ambient derived tensor–internal-Hom adjunction before restricting to the finite-Tor constructible full subcategory."
+   },
+   {
+    "node": "sk-prop-sf-existence",
+    "why": "The step uses its exact adjunction $Rf_!\\dashv f^!$ on the localizing closures before restricting to $\\Dctf$."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-module-derived-pushpull-adjunction",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-prop-sf-existence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-bd9f09beb",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-bd9f09beb (reviewer sub-agent of L); spot-checked: Read the item, its single proof step and every cited node in full, plus the main-20261015 statement and proof files. The statement matches the source exactly; no hypothesis is added, dropped or weakened. Coefficient category: D(X_proét,Λ)=D(Mod_{Λ_X}) (sk-def-localizing-closure). Dctf sits inside it as a full subcategory (sk-def-sfb-constructible), and Loc(Dctf) is a full subcategory of the same category that contains Dctf, so all three clauses are restrictions along full inclusions. The full-subcategory restriction lemma is correct. Clause checks: (1) the ambient adjunction Lf^*⊣Rf_* is def-sfb-module-derived-pushpull-adjunction, and preservation is direct-images (1),(3). (2) The ambient adjunction is sk-def-sfb-derived-tensor-hom layer B; preservation is direct-images (1) for ⊗ and det-thm-sf-ctf-stability-internal-hom for cHom. (3) The ambient adjunction is sk-prop-sf-existence on Loc(Dctf) with Rf_!=Rp_*D(j_!) over the standing schemes of sk-def-sfb-dc-setting; preservation is direct-images (3),(4), whose (4) uses explicit preservation statements, not existence alone. A reachability check shows the DAG is acyclic. Edge cases checked: empty X, K=0, f=id, field coefficients, proper f (consistent with det-cor-existence-ii-restriction). There are no new nodes. There are no duplicates: def-sfb-dc-upper-lower-adjunction and def-sfb-dc-tensor-hom-adjunction are about D_cons, not Dctf. I accept the tool use of sk-prop-sf-existence, which the blueprint node itself cites; the two definition entries are notions and harmless. Fixes: (a) added the missing stmt_deps sk-def-sfb-dc-setting, sk-def-sfb-constructible, sk-def-localizing-closure and sk-def-sfb-module-derived-pushpull; (b) wrote out in the step the swap from the ambient K⊗−⊣RHom(K,−) to the stated −⊗K⊣cHom(K,−), via the commutative Koszul-signed symmetry of ⊗_{Λ_X} on a K-flat resolution. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
