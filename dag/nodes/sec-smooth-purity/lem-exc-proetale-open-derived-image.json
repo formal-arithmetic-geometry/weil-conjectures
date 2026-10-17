@@ -131,7 +131,8 @@
   "def-weil-proetale-inverse-image",
   "prop-weil-pbc-proetale-constant-exact",
   "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-kinjective-total-derived"
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-pur-proetale-open-unit-evaluation"
  ],
  "mathlib_searches": [
   {
@@ -269,5 +270,29 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-aa98150d1 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement. Statement: unchanged and true. It matches the master ancestor Proof sentence (exactness of j_! makes j^*I K-injective, so Rj_*j^*K = j_*j^*I) and the same argument at main-20261015 sk-lem-formal-closed-support.proof.md line 27. Coefficients: left modules over (Cont(pi0,A))^# from def-weil-pbc-proetale-modules, never silently identified with commutative constant sheaves. Route: same as the source. For noncommutative A the delivery cites lem-pur-kinjective-restrict-localized (Stacks 08FI, sites-cohomology.tex l.4314, via exact j_! and 08BJ; RingCat interface) instead of the commutative-only prop-exc-open-adjoint. Steps 1-3: the site equivalence and coefficient-free initial-pair clause (taken with Z), the slice-sheafification leaf with ring values, and the unit via the coprojection at (V,id) all check out. I confirmed c_u equals the slice comparison using constants on clopen fibres. Steps 4-7: the K-injective transport along the equivalence, Q_T o j_* being exact, beta_J an isomorphism on K-injective J, the explicit 09T5-style adjunction using hom-derived and right-adjoint preservation, and the unit substitution are all correct. Edge cases: U=T, U empty, A=0, A=M_2(F_2), unbounded complexes, disconnected V. No new nodes. Duplicate candidates are all commutative-only and rejected: open-unit-evaluation, prop-exc-open-adjoint, derived-open-restriction, ringed-slice-evaluation-transpose. Accepted tool uses: object-inverse-image-restriction (clause 1 only), constant-ring-map, constant-exact, kinjective-total-derived. The weakly-etale-localization and kinjective-restrict-localized entries are on the route, so declaring them was unnecessary but harmless. Minor, not a fault: def-pur-kinjective-complex is phrased for commutative O, but the lemma's own statement and its interface cover noncommutative rings. No fixes were written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-13eacde97",
+  "group": "Q35",
+  "result": "fix",
+  "note": "Complete replacement report supplies the required substantive second-reading section; no Lean or JSON changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenDerivedImage",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientOpenDerivedImage",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteCoefficientOpenDirectImage",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientOpenUnitSection",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientOpenDerivedImage"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenDerivedImage.lean",
+  "statement": "theorem finiteCoefficientOpenDerivedImage {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] (A : Type (u + 1)) [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] : ∃ d : (finiteCoefficientRingSheaf U A).obj ≅ (Scheme.proEtaleOpenComposition j).op ⋙ (finiteCoefficientRingSheaf T A).obj, (∀ (W : U.ProEt) (a : A), (d.hom.app (op W)) ((finiteCoefficientScalarMap U A).app (op W) a) = (finiteCoefficientScalarMap T A).app (op ((Scheme.proEtaleOpenComposition j).obj W)) a) ∧ ∃ rho : ∀ (N : FiniteCoefficientModules T A) (W : U.ProEt), ((finiteCoefficientModulePullback j A).obj N).val.obj (op W) ≃+ N.val.obj (op ((Scheme.proEtaleOpenComposition j).obj W)), (∀ (N : FiniteCoefficientModules T A) (W : U.ProEt) (r : (finiteCoefficientRingSheaf U A).obj.obj (op W)) (m : ((finiteCoefficientModulePullback j A).obj N).val.obj (op W)), rho N W (r • m) = (d.hom.app (op W) r) • rho N W m) ∧ (∀ (N : FiniteCoefficientModules T A) (W W' : U.ProEt) (b : W' ⟶ W) (m : ((finiteCoefficientModulePullback j A).obj N).val.obj (op W)), rho N W' (((finiteCoefficientModulePullback j A).obj N).val.map b.op m) = N.val.map ((Scheme.proEtaleOpenComposition j).map b).op (rho N W m)) ∧ (∀ (N N' : FiniteCoefficientModules T A) (h : N ⟶ N') (W : U.ProEt) (m : ((finiteCoefficientModulePullback j A).obj N).val.obj (op W)), rho N' W (((finiteCoefficientModulePullback j A).map h).val.app (op W) m) = h.val.app (op ((Scheme.proEtaleOpenComposition j).obj W)) (rho N W m)) ∧ ∃ (_ : (finiteCoefficientOpenDirectImage j A).Additive) (adj : finiteCoefficientModulePullback j A ⊣ finiteCoefficientOpenDirectImage j A), (∀ (N : FiniteCoefficientModules T A) (V : T.ProEt) (m : N.val.obj (op V)), (adj.unit.app N).val.app (op V) m = finiteCoefficientOpenUnitSection j A N V m) ∧ (∀ (N : FiniteCoefficientModules T A) (V : T.ProEt) (m : N.val.obj (op V)), rho N ((Scheme.proEtaleBaseChange j).obj V) ((adj.unit.app N).val.app (op V) m) = N.val.map (Scheme.proEtaleOpenSectionProjection j V).op m) ∧ ∃ (L : FiniteCoefficientDerivedCategory T A ⥤ FiniteCoefficientDerivedCategory U A) (alpha : DerivedCategory.Q ⋙ L ≅ (finiteCoefficientModulePullback j A).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (R : FiniteCoefficientDerivedCategory U A ⥤ FiniteCoefficientDerivedCategory T A) (beta : (finiteCoefficientOpenDirectImage j A).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ R), R.IsRightDerivedFunctor beta (HomologicalComplex.quasiIso (FiniteCoefficientModules U A) (.up ℤ)) ∧ ∃ derivedAdj : L ⊣ R, ∀ (I : CochainComplex (FiniteCoefficientModules T A) ℤ) [I.IsKInjective], CochainComplex.IsKInjective (((finiteCoefficientModulePullback j A).mapHomologicalComplex (.up ℤ)).obj I) ∧ IsIso (beta.app (((finiteCoefficientModulePullback j A).mapHomologicalComplex (.up ℤ)).obj I)) ∧ derivedAdj.unit.app (DerivedCategory.Q.obj I) ≫ R.map (alpha.hom.app I) = DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).unit.app I) ≫ beta.app (((finiteCoefficientModulePullback j A).mapHomologicalComplex (.up ℤ)).obj I)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "States every clause for arbitrary finite Ring coefficients in the published continuous-function coefficient categories. The direct-image abbreviation specializes Mathlib pushforward along finiteCoefficientDirectImageMap, and the section helper is the actual small-model Kan unit. The theorem fixes the ordinary adjunction to that unit, gives the natural coefficient-linear restriction comparison, preserves K-injectivity and identifies the total right-derived comparison and unit. Uses only the two coefficient-independent site helper definitions from lem-pur-proetale-open-unit-evaluation; its commutative module theorem is not applied."
  }
 }

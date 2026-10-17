@@ -21,14 +21,16 @@
  },
  "kind": "statement",
  "title": "Mapping spaces in an iterated coherent slice",
- "statement": "Use quasicategories, coherent slices, mapping spaces and homotopy fibers of spaces from [def-cbc-enhanced-diagrams-cones]. Fix a containing universe and a locally small quasicategory $\\mathcal E$. Let $f:A\\to B$, $q:X\\to A$ and $p:Y\\to A$ be arrows, and choose coherent composites $fq$ and $fp$. In $\\mathcal E_{/B}$ put $a=(A,f)$, $x=(X,fq)$, $y=(Y,fp)$ and regard the chosen composition triangles as arrows $\\widetilde q:x\\to a$ and $\\widetilde p:y\\to a$. There are equivalences of full mapping spaces\n$$\\operatorname{Map}_{(\\mathcal E_{/B})_{/a}}(\\widetilde q,\\widetilde p)\\simeq\\operatorname{hofib}_{\\widetilde q}\\bigl(\\operatorname{Map}_{\\mathcal E_{/B}}(x,y)\\xrightarrow{\\widetilde p\\circ-}\\operatorname{Map}_{\\mathcal E_{/B}}(x,a)\\bigr)\\simeq\\operatorname{Map}_{\\mathcal E_{/A}}((X,q),(Y,p)).$$\nThe latter comparison forgets the redundant compatibility over $B$, retaining the underlying arrow $X\\to Y$ and its specified homotopy over $A$. It is coherently natural in $(X,q)$ and $(Y,p)$, compatible with changes of the chosen composites, and with all simplicial parameters. No limits or colimits in $\\mathcal E$ are assumed.",
+ "statement": "Use quasicategories, coherent slices, mapping spaces and homotopy fibers of spaces from [def-cbc-enhanced-diagrams-cones]. Fix a containing universe and a locally small quasicategory $\\mathcal E$. Let $f:A\\to B$, $q:X\\to A$ and $p:Y\\to A$ be arrows, and choose coherent composites $fq$ and $fp$. In $\\mathcal E_{/B}$ put $a=(A,f)$, $x=(X,fq)$, $y=(Y,fp)$ and regard the chosen composition triangles as arrows $\\widetilde q:x\\to a$ and $\\widetilde p:y\\to a$. There are equivalences of full mapping spaces\n$$\\operatorname{Map}_{(\\mathcal E_{/B})_{/a}}(\\widetilde q,\\widetilde p)\\simeq\\operatorname{hofib}_{\\widetilde q}\\bigl(\\operatorname{Map}_{\\mathcal E_{/B}}(x,y)\\xrightarrow{\\widetilde p\\circ-}\\operatorname{Map}_{\\mathcal E_{/B}}(x,a)\\bigr)\\simeq\\operatorname{Map}_{\\mathcal E_{/A}}((X,q),(Y,p)).$$\nThe latter comparison forgets the redundant compatibility over $B$, retaining the underlying arrow $X\\to Y$ and its specified homotopy over $A$. It is coherently natural in $(X,q)$ and $(Y,p)$, compatible with changes of the chosen composites, and with all simplicial parameters. No limits or colimits in $\\mathcal E$ are assumed. For precision, use the fixed-target arrow model of the slices from [lem-coef-infinity-slice-arrow-equivalence] and the natural pinch comparison of [lem-coef-infinity-pinch-comparison]. The displayed postcomposition map is understood via the canonical transport span of [lem-cbc-enhanced-functor-cone-calculus]: for the source projection $\\pi:\\mathcal D_{/t}\\to\\mathcal D$, a vertex $u\\in\\mathcal D$ and $s:v\\to t$, its transport space consists of coherent arrows $z\\to s$ with $\\pi(z)=u$ on the entire simplex. Its left leg forgets to the arrow $u\\to v$ and is a weak equivalence to $\\operatorname{Map}_{\\mathcal D}(u,v)$; its right leg takes $z$ in the strict fiber of $\\pi$ at $u$, canonically the arrow model of $\\operatorname{Map}_{\\mathcal D}(u,t)$. Thus the indicated homotopy fiber is modeled by the homotopy fiber of that right leg at the specified source arrow. The first comparison is the canonical constant-path comparison from fixed-endpoint arrows, transported by the natural pinch equivalences. The latter comparison is the mapping-space action of the simplicial functor which applies $\\mathcal E_{/B}\\to\\mathcal E$ to each arrow to $a$. These conventions specify the comparisons in every simplicial degree, without imposing a strictly associative composition law on right-pinched mapping spaces.",
  "source": {
   "document": "https://kerodon.net/tag/05V1",
   "place": "Proposition 7.7.3.19, slice pullback-adjoint context. Agent-extracted auxiliary lemma from former step 3 of lem-coef-space-universal-colimits: the iterated-slice homotopy-fiber comparison, including the contraction of the redundant B-compatibility. This is an explicit auxiliary comparison, not a claim that 05V1 states this formula verbatim. Read 05V1 online; archival copy WANTED. Kerodon tag, not Stacks tag."
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-infinity-slice-arrow-equivalence"
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "proof": [
   {
@@ -56,7 +58,7 @@
    }
   },
   {
-   "text": "Set $U=\\operatorname{Map}_{\\mathcal E}(X,Y)$, $V=\\operatorname{Map}_{\\mathcal E}(X,A)$ and $W=\\operatorname{Map}_{\\mathcal E}(X,B)$, and write $g=p\\circ-:U\\to V$ and $h=f\\circ-:V\\to W$. Let $b$ be the chosen edge $fq$ in $W$. The chosen triangle for $fq$ specifies a path $\\alpha:h(q)\\simeq b$. Put $V_b=\\operatorname{hofib}_b(h)$ and $\\eta=(q,\\alpha)\\in V_b$. The comma formula of [lem-coef-infinity-comma-mapping-pullback], applied to $\\mathcal C=\\mathcal D=\\mathcal E$, $F=\\mathrm{id}$, $\\mathcal B=\\Delta^0$ and $G(*)=B$, first identifies $\\operatorname{Map}_{\\mathcal E_{/B}}(x,y)$ with $\\operatorname{hofib}_{b'}(fp\\circ-)$ and $\\operatorname{Map}_{\\mathcal E_{/B}}(x,a)$ with $\\operatorname{hofib}_{b'}(h)$, where $b'$ represents the composite of the degenerate edge at $B$ with $b$. These are replaced by fibers of $hg$ over $b$ as follows. By [lem-coef-infinity-mapping-composition], composition is associative and unital up to simplicial homotopy, the chosen triangle gives $[f][p]=[fp]$, and postcomposition by an edge depends only on its component class; hence there are simplicial homotopies $K:U\\times\\Delta^1\\to W$ from $hg$ to $fp\\circ-$ and $\\Delta^1\\to W$ from $b'$ to $b$. For any simplicial homotopy $\\Theta:U\\times\\Delta^1\\to W$ from $r$ to $s$, the endpoint inclusions $i_0,i_1:U\\to U\\times\\Delta^1$ are weak homotopy equivalences (the projection is a simplicial homotopy inverse), and $\\Theta i_0=r$, $\\Theta i_1=s$ hold strictly; so [lem-coef-kan-homotopy-pullback-invariance], applied with $c=\\mathrm{id}_W$, the identity of the point leg, and $a=i_0$ or $a=i_1$, gives equivalences $\\operatorname{hofib}_b(r)\\simeq P(\\Theta,b)\\simeq\\operatorname{hofib}_b(s)$ over $U$. The same argument in the point variable moves $b'$ to $b$. Therefore it identifies\n$$\\operatorname{Map}_{\\mathcal E_{/B}}(x,y)\\simeq U_b:=\\operatorname{hofib}_b(hg),\\qquad \\operatorname{Map}_{\\mathcal E_{/B}}(x,a)\\simeq V_b.$$\nIts compatibility with endpoint projections and with composition by pasting squares identifies the postcomposition map with $g_b:U_b\\to V_b$, and $\\widetilde q$ with $\\eta$. Thus $H\\simeq\\operatorname{hofib}_{\\eta}(g_b)$. Applying Step 1 over $A$ also gives $\\operatorname{Map}_{\\mathcal E_{/A}}(q,p)\\simeq\\operatorname{hofib}_q(g)$. All identifications keep the chosen triangles; no strictly associative composition law on the right-pinched model is assumed.",
+   "text": "Set $U=\\operatorname{Map}_{\\mathcal E}(X,Y)$, $V=\\operatorname{Map}_{\\mathcal E}(X,A)$ and $W=\\operatorname{Map}_{\\mathcal E}(X,B)$, and write $g=p\\circ-:U\\to V$ and $h=f\\circ-:V\\to W$. Let $b$ be the chosen edge $fq$ in $W$. The chosen triangle for $fq$ specifies a path $\\alpha:h(q)\\simeq b$. Put $V_b=\\operatorname{hofib}_b(h)$ and $\\eta=(q,\\alpha)\\in V_b$. The comma formula of [lem-coef-infinity-comma-mapping-pullback], applied to $\\mathcal C=\\mathcal D=\\mathcal E$, $F=\\mathrm{id}$, $\\mathcal B=\\Delta^0$ and $G(*)=B$, first identifies $\\operatorname{Map}_{\\mathcal E_{/B}}(x,y)$ with $\\operatorname{hofib}_{b'}(fp\\circ-)$ and $\\operatorname{Map}_{\\mathcal E_{/B}}(x,a)$ with $\\operatorname{hofib}_{b'}(h)$, where $b'$ represents the composite of the degenerate edge at $B$ with $b$. These are replaced by fibers of $hg$ over $b$ as follows. By [lem-coef-infinity-mapping-composition], composition is associative and unital up to simplicial homotopy, the chosen triangle gives $[f][p]=[fp]$, and postcomposition by an edge depends only on its component class; hence there are simplicial homotopies $K:U\\times\\Delta^1\\to W$ from $hg$ to $fp\\circ-$ and $\\Delta^1\\to W$ from $b'$ to $b$. ",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-coef-infinity-comma-mapping-pullback",
@@ -71,7 +73,37 @@
    }
   },
   {
-   "text": "Consider the diagram with top row $U_b\\xrightarrow{g_b}V_b\\to\\Delta^0$ and bottom row $U\\xrightarrow g V\\xrightarrow h W$. The rightmost vertical map selects $b$, and the other vertical maps forget the fiber path. Supply the right square with its universal path from $h(v)$ to $b$. Supply the outer rectangle with the universal path from $hg(u)$ to $b$. The commutation homotopy of the left square is the one induced by the triangles in Step 3, so its paste with the right square is this outer homotopy. By the path-space definition of the fibers, both the right square and outer rectangle are homotopy pullbacks. Right-square cancellation in [lem-coef-infinity-homotopy-pullback-pasting] therefore proves that the left square\n$$\\begin{array}{ccc}U_b&\\longrightarrow&V_b\\\\\n\\downarrow&&\\downarrow\\\\\nU&\\xrightarrow g&V\\end{array}$$\nis a homotopy pullback, with the specified commutation homotopy. This applies equally if some of these spaces or fibers are empty.",
+   "text": "For any simplicial homotopy $\\Theta:U\\times\\Delta^1\\to W$ from $r$ to $s$, use the Kan mapping-path object $Z=U\\times_{r,W,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,W)$, with $e:Z\\to W$ given by $\\operatorname{ev}_1$. Endpoint evaluation $\\operatorname{Fun}(\\Delta^1,W)\\to W$ is a trivial Kan fibration (the endpoint inclusion is anodyne, by the endpoint lifting argument of [lem-coef-kan-homotopy-pullback-invariance]). Hence $Z\\to U$ is a trivial Kan fibration and $Z$ is Kan. Its sections $j_0(u)=(u,\\mathrm{const}_{r(u)})$ and $j_1(u)=(u,\\Theta(u,-))$ are weak equivalences by two-out-of-three, and $ej_0=r$, $ej_1=s$ strictly. Apply [lem-coef-kan-homotopy-pullback-invariance] to $j_0$ and $j_1$, with the identity maps on $W$ and on the point leg. All six cospan objects are now Kan, giving $\\operatorname{hofib}_b(r)\\simeq\\operatorname{hofib}_b(e)\\simeq\\operatorname{hofib}_b(s)$ over $U$. No Kan condition is asserted for $U\\times\\Delta^1$. The same argument in the point variable moves $b'$ to $b$. ",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-comma-mapping-pullback",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary expansion: identify the two mapping spaces over B and their map with a map between homotopy fibers; comma naturality retains the chosen triangles."
+   }
+  },
+  {
+   "text": "Therefore it identifies\n$$\\operatorname{Map}_{\\mathcal E_{/B}}(x,y)\\simeq U_b:=\\operatorname{hofib}_b(hg),\\qquad \\operatorname{Map}_{\\mathcal E_{/B}}(x,a)\\simeq V_b.$$\nIts compatibility with endpoint projections and with composition by pasting squares identifies the postcomposition map with $g_b:U_b\\to V_b$, and $\\widetilde q$ with $\\eta$. Thus $H\\simeq\\operatorname{hofib}_{\\eta}(g_b)$. Applying Step 1 over $A$ also gives $\\operatorname{Map}_{\\mathcal E_{/A}}(q,p)\\simeq\\operatorname{hofib}_q(g)$. All identifications keep the chosen triangles; no strictly associative composition law on the right-pinched model is assumed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-comma-mapping-pullback",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary expansion: identify the two mapping spaces over B and their map with a map between homotopy fibers; comma naturality retains the chosen triangles."
+   }
+  },
+  {
+   "text": "Consider the diagram with top row $U_b\\xrightarrow{g_b}V_b\\to\\Delta^0$ and bottom row $U\\xrightarrow g V\\xrightarrow h W$. The rightmost vertical map selects $b$, and the other vertical maps forget the fiber path. Supply the right square with its universal path from $h(v)$ to $b$. Supply the outer rectangle with the universal path from $hg(u)$ to $b$. The commutation homotopy of the left square is the one induced by the triangles in Steps 3–5, so its paste with the right square is this outer homotopy. By the path-space definition of the fibers, both the right square and outer rectangle are homotopy pullbacks. Right-square cancellation in [lem-coef-infinity-homotopy-pullback-pasting] therefore proves that the left square\n$$\\begin{array}{ccc}U_b&\\longrightarrow&V_b\\\\\n\\downarrow&&\\downarrow\\\\\nU&\\xrightarrow g&V\\end{array}$$\nis a homotopy pullback, with the specified commutation homotopy. This applies equally if some of these spaces or fibers are empty.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-coef-infinity-homotopy-pullback-pasting"
@@ -83,7 +115,7 @@
    }
   },
   {
-   "text": "Now form the diagram with top row $H\\to U_b\\to U$ and bottom row $\\Delta^0\\xrightarrow{\\eta}V_b\\to V$. Its left square is a homotopy pullback by the definition $H=\\operatorname{hofib}_{\\eta}(g_b)$. Its right square is the square proved to be a homotopy pullback in Step 4. The pasting assertion of [lem-coef-infinity-homotopy-pullback-pasting] makes the outer rectangle a homotopy pullback. The bottom composite selects $q\\in V$. Consequently its comparison is an equivalence\n$$H\\longrightarrow\\operatorname{hofib}_q(g).$$\nIt sends a morphism and its path over $A$ to that same pair, forgetting the additional path over $B$ and the homotopy that compares it to the image of the $A$-path. Combine with Steps 2 and 3 to get the second equivalence required in the item. The pasting argument proves that all the discarded data, including higher compatibilities, have the required homotopy type; no assertion about only connected components is used.",
+   "text": "Now form the diagram with top row $H\\to U_b\\to U$ and bottom row $\\Delta^0\\xrightarrow{\\eta}V_b\\to V$. Its left square is a homotopy pullback by the definition $H=\\operatorname{hofib}_{\\eta}(g_b)$. Its right square is the square proved to be a homotopy pullback in Step 6. The pasting assertion of [lem-coef-infinity-homotopy-pullback-pasting] makes the outer rectangle a homotopy pullback. The bottom composite selects $q\\in V$. Consequently its comparison is an equivalence\n$$H\\longrightarrow\\operatorname{hofib}_q(g).$$\nIt sends a morphism and its path over $A$ to that same pair, forgetting the additional path over $B$ and the homotopy that compares it to the image of the $A$-path. Combine with Steps 2–5 to get the second equivalence required in the item. The pasting argument proves that all the discarded data, including higher compatibilities, have the required homotopy type; no assertion about only connected components is used.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-coef-infinity-homotopy-pullback-pasting"
@@ -95,7 +127,7 @@
    }
   },
   {
-   "text": "Finally check the compatibility clauses on the comparison just constructed. In the comma presentation, a simplex of the iterated slice mapping space consists of the underlying morphism, the compatibility over $A$, and its additional coherent compatibility over $B$. The comparison retains the first two coordinates. Restriction along every map $\\Delta^m\\to\\Delta^n$ restricts each coordinate, so it commutes with this comparison. More generally the identity $\\operatorname{Fun}(K,T_t)=\\operatorname{Fun}(K,\\operatorname{Fun}(\\Delta^1,\\mathcal D))\\times_{\\operatorname{Fun}(K,\\mathcal D)}\\{\\Delta_Kt\\}$ follows degreewise by transposing maps out of $K\\times\\Delta^n$. It commutes with restriction in $K$. The naturality and composition-by-pasting clauses of [lem-coef-infinity-comma-mapping-pullback] therefore apply to coherent families as well: precomposition in $q$, postcomposition in $p$, and higher simplices of either family commute with forgetting those coordinates. A coherent change of a chosen composition triangle is another such family, and is sent to its underlying $A$-data by the same formula. The comparisons in Steps 4 and 5 use exactly the pasted homotopies, so are this forgetful comparison. Their equivalence property does not require choosing an inverse or a preferred triangle filler. This proves coherent naturality, compatibility with changes of composites, and all simplicial parameters. The only pullbacks formed in the argument are pullbacks of spaces or simplicial sets, so no limits in $\\mathcal E$ were assumed.",
+   "text": "Finally check the compatibility clauses on the comparison just constructed. In the comma presentation, a simplex of the iterated slice mapping space consists of the underlying morphism, the compatibility over $A$, and its additional coherent compatibility over $B$. The comparison retains the first two coordinates. Restriction along every map $\\Delta^m\\to\\Delta^n$ restricts each coordinate, so it commutes with this comparison. More generally the identity $\\operatorname{Fun}(K,T_t)=\\operatorname{Fun}(K,\\operatorname{Fun}(\\Delta^1,\\mathcal D))\\times_{\\operatorname{Fun}(K,\\mathcal D)}\\{\\Delta_Kt\\}$ follows degreewise by transposing maps out of $K\\times\\Delta^n$. It commutes with restriction in $K$. The naturality and composition-by-pasting clauses of [lem-coef-infinity-comma-mapping-pullback] therefore apply to coherent families as well: precomposition in $q$, postcomposition in $p$, and higher simplices of either family commute with forgetting those coordinates. A coherent change of a chosen composition triangle is another such family, and is sent to its underlying $A$-data by the same formula. The comparisons in Steps 6 and 7 use exactly the pasted homotopies, so are this forgetful comparison. Their equivalence property does not require choosing an inverse or a preferred triangle filler. This proves coherent naturality, compatibility with changes of composites, and all simplicial parameters. The only pullbacks formed in the argument are pullbacks of spaces or simplicial sets, so no limits in $\\mathcal E$ were assumed.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-coef-infinity-comma-mapping-pullback"
@@ -304,5 +336,127 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-0dc39937a (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, with no new nodes in the delivery. I read the full statements of def-cbc-enhanced-diagrams-cones, lem-coef-infinity-slice-arrow-equivalence, lem-cbc-enhanced-functor-cone-calculus, lem-coef-infinity-comma-mapping-pullback and lem-coef-infinity-homotopy-pullback-pasting, plus the unit record, ancestor paragraph 2 (main-20261015) and the citer lem-coef-space-universal-colimits step 5. The statement is true and was tested on ordinary nerves, the fork poset (empty case) and spaces with X=Y=A=pt (U_b=V_b=ΩB, g_b=id, fiber a point). Step 1 checked: the K=Δ^0 cone category equals T_t because Fun(Δ^0,C)=C degreewise, and transfer to the join slice goes through δ_y. Steps 2, 4, 5 and 6 checked: in Step 4 the left square commutes strictly once U_b=hofib_b(hg), and the cancellation and pasting are used as stated. Fault C1/E5 in Step 3: the comma formula gives hofib_{b'}((fp)∘−), and the step replaced it by hofib_b(hg) with the uncited sentence 'the triangle for fp identifies postcomposition by fp with hg'. That passage needs associativity and unitality of composition and homotopy invariance of homotopy fibers. Repaired in fixes/: Step 3 now cites lem-coef-infinity-mapping-composition and lem-coef-kan-homotopy-pullback-invariance (applied to endpoint inclusions U→U×Δ^1), and both are added to uses and proof_deps. Both are in the same unit and neither depends on the item, so no cycle. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (sk-prop-sf-cbc), a generic black-box mapping-space formula. The Mathlib no-match is correct (iteratedSliceEquiv covers ordinary categories only). No SGA used; statement unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "statement_change": {
+  "date": "2026-10-17",
+  "by": "NP stage 2",
+  "old_statement": "Use quasicategories, coherent slices, mapping spaces and homotopy fibers of spaces from [def-cbc-enhanced-diagrams-cones]. Fix a containing universe and a locally small quasicategory $\\mathcal E$. Let $f:A\\to B$, $q:X\\to A$ and $p:Y\\to A$ be arrows, and choose coherent composites $fq$ and $fp$. In $\\mathcal E_{/B}$ put $a=(A,f)$, $x=(X,fq)$, $y=(Y,fp)$ and regard the chosen composition triangles as arrows $\\widetilde q:x\\to a$ and $\\widetilde p:y\\to a$. There are equivalences of full mapping spaces\n$$\\operatorname{Map}_{(\\mathcal E_{/B})_{/a}}(\\widetilde q,\\widetilde p)\\simeq\\operatorname{hofib}_{\\widetilde q}\\bigl(\\operatorname{Map}_{\\mathcal E_{/B}}(x,y)\\xrightarrow{\\widetilde p\\circ-}\\operatorname{Map}_{\\mathcal E_{/B}}(x,a)\\bigr)\\simeq\\operatorname{Map}_{\\mathcal E_{/A}}((X,q),(Y,p)).$$\nThe latter comparison forgets the redundant compatibility over $B$, retaining the underlying arrow $X\\to Y$ and its specified homotopy over $A$. It is coherently natural in $(X,q)$ and $(Y,p)$, compatible with changes of the chosen composites, and with all simplicial parameters. No limits or colimits in $\\mathcal E$ are assumed.",
+  "what": "The displayed postcomposition map was not specified as a simplicial map on the stipulated right-pinched mapping spaces: their composition is a canonical homotopy class, not a given strict map. Specify the existing canonical transport-span model and the actual simplicial forgetful comparison, preserving the same mapping-space equivalences and all coherence clauses. This type-level precision also permits repairing proof step 3: U times Delta^1 need not be Kan, so the cited Kan-only invariance theorem cannot be applied to that cylinder. Replace it by the Kan mapping-path object Z, whose two sections are weak equivalences and whose endpoint map agrees strictly with r and s.",
+  "source": {
+   "document": "https://kerodon.net/tag/02VT",
+   "place": "Fixed-target arrow presentation of the slice, together with the point-indexed cone mapping formula in lem-cbc-enhanced-functor-cone-calculus; Kerodon 0110 for the unchanged homotopy-pullback cancellation route. The auxiliary comparison is extracted in the slice-adjoint context of 05V1, not quoted verbatim there."
+  },
+  "citers": [
+   {
+    "id": "lem-coef-space-universal-colimits",
+    "holds": true,
+    "note": "Its use of the coherent iterated-slice comparison in step 5 is unchanged; the transport-span convention computes the same homotopy fiber and retains the actual map and homotopy over A."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-cbc-enhanced-diagrams-cones",
+   "lem-coef-infinity-slice-arrow-equivalence"
+  ],
+  "old_proof": [
+   {
+    "text": "First fix the slice model. For a quasicategory $\\mathcal D$ and $t\\in\\mathcal D$, use the arrow slice $T_t=\\operatorname{Fun}(\\Delta^1,\\mathcal D)\\times_{\\mathrm{ev}_1,\\mathcal D}\\{t\\}$. The slice diagonal of [lem-coef-infinity-slice-arrow-equivalence] is an equivalence over $\\mathcal D$, and [lem-cbc-enhanced-functor-cone-calculus] says that an equivalence induces equivalences on full mapping spaces. Thus this calculation also computes the join-slice convention. Specialize the cone formula of the latter node to $K=\\Delta^0$ and the diagram with value $t$. Since $\\operatorname{Fun}(\\Delta^0,\\mathcal D)=\\mathcal D$ degreewise, its cone category is exactly $T_t$. For $r:u\\to t$ and $s:v\\to t$ it gives\n$$\\operatorname{Map}_{\\mathcal D_{/t}}(r,s)\\simeq\\operatorname{hofib}_{r}\\bigl(\\operatorname{Map}_{\\mathcal D}(u,v)\\xrightarrow{s\\circ-}\\operatorname{Map}_{\\mathcal D}(u,t)\\bigr).$$\nThis uses full Kan mapping spaces and the specified compatibility path, rather than equality of morphisms in the homotopy category. Enlarge the containing universe if necessary so that each quasicategory used here is small there.",
+    "uses": [
+     "def-cbc-enhanced-diagrams-cones",
+     "lem-coef-infinity-slice-arrow-equivalence",
+     "lem-cbc-enhanced-functor-cone-calculus"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+     "place": "Auxiliary slice mapping formula for paragraph 2; Kerodon 02VT for slice/arrow presentation, and the K=point case of the existing cone-mapping lemma."
+    }
+   },
+   {
+    "text": "Apply Step 1 with $\\mathcal D=\\mathcal E_{/B}$, $t=a$, $r=\\widetilde q$ and $s=\\widetilde p$. The arrow slice is a quasicategory by the cone-category assertion of [lem-cbc-enhanced-functor-cone-calculus]. We obtain precisely the first displayed equivalence in the item. In particular its right-hand side is the homotopy fiber of the actual postcomposition map by $\\widetilde p$, with base point the specified triangle $\\widetilde q$. Denote this homotopy fiber by $H$.",
+    "uses": [
+     "lem-cbc-enhanced-functor-cone-calculus"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+     "place": "Auxiliary expansion: the first equivalence is the cone-mapping formula applied once more in the slice."
+    }
+   },
+   {
+    "text": "Set $U=\\operatorname{Map}_{\\mathcal E}(X,Y)$, $V=\\operatorname{Map}_{\\mathcal E}(X,A)$ and $W=\\operatorname{Map}_{\\mathcal E}(X,B)$, and write $g=p\\circ-:U\\to V$ and $h=f\\circ-:V\\to W$. Let $b$ be the chosen edge $fq$ in $W$. The chosen triangle for $fq$ specifies a path $\\alpha:h(q)\\simeq b$. Put $V_b=\\operatorname{hofib}_b(h)$ and $\\eta=(q,\\alpha)\\in V_b$. The comma formula of [lem-coef-infinity-comma-mapping-pullback], applied to $\\mathcal C=\\mathcal D=\\mathcal E$, $F=\\mathrm{id}$, $\\mathcal B=\\Delta^0$ and $G(*)=B$, first identifies $\\operatorname{Map}_{\\mathcal E_{/B}}(x,y)$ with $\\operatorname{hofib}_{b'}(fp\\circ-)$ and $\\operatorname{Map}_{\\mathcal E_{/B}}(x,a)$ with $\\operatorname{hofib}_{b'}(h)$, where $b'$ represents the composite of the degenerate edge at $B$ with $b$. These are replaced by fibers of $hg$ over $b$ as follows. By [lem-coef-infinity-mapping-composition], composition is associative and unital up to simplicial homotopy, the chosen triangle gives $[f][p]=[fp]$, and postcomposition by an edge depends only on its component class; hence there are simplicial homotopies $K:U\\times\\Delta^1\\to W$ from $hg$ to $fp\\circ-$ and $\\Delta^1\\to W$ from $b'$ to $b$. For any simplicial homotopy $\\Theta:U\\times\\Delta^1\\to W$ from $r$ to $s$, the endpoint inclusions $i_0,i_1:U\\to U\\times\\Delta^1$ are weak homotopy equivalences (the projection is a simplicial homotopy inverse), and $\\Theta i_0=r$, $\\Theta i_1=s$ hold strictly; so [lem-coef-kan-homotopy-pullback-invariance], applied with $c=\\mathrm{id}_W$, the identity of the point leg, and $a=i_0$ or $a=i_1$, gives equivalences $\\operatorname{hofib}_b(r)\\simeq P(\\Theta,b)\\simeq\\operatorname{hofib}_b(s)$ over $U$. The same argument in the point variable moves $b'$ to $b$. Therefore it identifies\n$$\\operatorname{Map}_{\\mathcal E_{/B}}(x,y)\\simeq U_b:=\\operatorname{hofib}_b(hg),\\qquad \\operatorname{Map}_{\\mathcal E_{/B}}(x,a)\\simeq V_b.$$\nIts compatibility with endpoint projections and with composition by pasting squares identifies the postcomposition map with $g_b:U_b\\to V_b$, and $\\widetilde q$ with $\\eta$. Thus $H\\simeq\\operatorname{hofib}_{\\eta}(g_b)$. Applying Step 1 over $A$ also gives $\\operatorname{Map}_{\\mathcal E_{/A}}(q,p)\\simeq\\operatorname{hofib}_q(g)$. All identifications keep the chosen triangles; no strictly associative composition law on the right-pinched model is assumed.",
+    "uses": [
+     "def-cbc-enhanced-diagrams-cones",
+     "lem-coef-infinity-comma-mapping-pullback",
+     "lem-cbc-enhanced-functor-cone-calculus",
+     "lem-coef-infinity-mapping-composition",
+     "lem-coef-kan-homotopy-pullback-invariance"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+     "place": "Auxiliary expansion: identify the two mapping spaces over B and their map with a map between homotopy fibers; comma naturality retains the chosen triangles."
+    }
+   },
+   {
+    "text": "Consider the diagram with top row $U_b\\xrightarrow{g_b}V_b\\to\\Delta^0$ and bottom row $U\\xrightarrow g V\\xrightarrow h W$. The rightmost vertical map selects $b$, and the other vertical maps forget the fiber path. Supply the right square with its universal path from $h(v)$ to $b$. Supply the outer rectangle with the universal path from $hg(u)$ to $b$. The commutation homotopy of the left square is the one induced by the triangles in Step 3, so its paste with the right square is this outer homotopy. By the path-space definition of the fibers, both the right square and outer rectangle are homotopy pullbacks. Right-square cancellation in [lem-coef-infinity-homotopy-pullback-pasting] therefore proves that the left square\n$$\\begin{array}{ccc}U_b&\\longrightarrow&V_b\\\\\n\\downarrow&&\\downarrow\\\\\nU&\\xrightarrow g&V\\end{array}$$\nis a homotopy pullback, with the specified commutation homotopy. This applies equally if some of these spaces or fibers are empty.",
+    "uses": [
+     "def-cbc-enhanced-diagrams-cones",
+     "lem-coef-infinity-homotopy-pullback-pasting"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+     "place": "Auxiliary expansion: first application of Kerodon 0110, cancel the right square; the statement includes specified commutation homotopies."
+    }
+   },
+   {
+    "text": "Now form the diagram with top row $H\\to U_b\\to U$ and bottom row $\\Delta^0\\xrightarrow{\\eta}V_b\\to V$. Its left square is a homotopy pullback by the definition $H=\\operatorname{hofib}_{\\eta}(g_b)$. Its right square is the square proved to be a homotopy pullback in Step 4. The pasting assertion of [lem-coef-infinity-homotopy-pullback-pasting] makes the outer rectangle a homotopy pullback. The bottom composite selects $q\\in V$. Consequently its comparison is an equivalence\n$$H\\longrightarrow\\operatorname{hofib}_q(g).$$\nIt sends a morphism and its path over $A$ to that same pair, forgetting the additional path over $B$ and the homotopy that compares it to the image of the $A$-path. Combine with Steps 2 and 3 to get the second equivalence required in the item. The pasting argument proves that all the discarded data, including higher compatibilities, have the required homotopy type; no assertion about only connected components is used.",
+    "uses": [
+     "def-cbc-enhanced-diagrams-cones",
+     "lem-coef-infinity-homotopy-pullback-pasting"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+     "place": "Auxiliary expansion: second application of Kerodon 0110, paste the fiber square with the square of Step 4."
+    }
+   },
+   {
+    "text": "Finally check the compatibility clauses on the comparison just constructed. In the comma presentation, a simplex of the iterated slice mapping space consists of the underlying morphism, the compatibility over $A$, and its additional coherent compatibility over $B$. The comparison retains the first two coordinates. Restriction along every map $\\Delta^m\\to\\Delta^n$ restricts each coordinate, so it commutes with this comparison. More generally the identity $\\operatorname{Fun}(K,T_t)=\\operatorname{Fun}(K,\\operatorname{Fun}(\\Delta^1,\\mathcal D))\\times_{\\operatorname{Fun}(K,\\mathcal D)}\\{\\Delta_Kt\\}$ follows degreewise by transposing maps out of $K\\times\\Delta^n$. It commutes with restriction in $K$. The naturality and composition-by-pasting clauses of [lem-coef-infinity-comma-mapping-pullback] therefore apply to coherent families as well: precomposition in $q$, postcomposition in $p$, and higher simplices of either family commute with forgetting those coordinates. A coherent change of a chosen composition triangle is another such family, and is sent to its underlying $A$-data by the same formula. The comparisons in Steps 4 and 5 use exactly the pasted homotopies, so are this forgetful comparison. Their equivalence property does not require choosing an inverse or a preferred triangle filler. This proves coherent naturality, compatibility with changes of composites, and all simplicial parameters. The only pullbacks formed in the argument are pullbacks of spaces or simplicial sets, so no limits in $\\mathcal E$ were assumed.",
+    "uses": [
+     "def-cbc-enhanced-diagrams-cones",
+     "lem-coef-infinity-comma-mapping-pullback"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+     "place": "Auxiliary expansion: degreewise parameter restriction and the existing natural comma comparison verify all coherence clauses."
+    }
+   }
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2a1653924",
+  "group": "NP",
+  "result": "pass",
+  "note": "Statement, canonical slice functor, dependencies, edge cases, docstrings, report sections, and scompile evidence checked; no substantive or mechanical defects found.",
+  "statement_corrected": true
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityIteratedSliceMapping",
+  "declaration": "SSet.Enhanced.iterated_slice_mapping",
+  "declarations": [
+   "SSet.Enhanced.SliceMappingSpaceFormula",
+   "SSet.Enhanced.iterated_slice_mapping"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityIteratedSliceMapping.lean",
+  "statement": "theorem iterated_slice_mapping (E : SSet.{u}) [Quasicategory E] (B : E _⦋0⦌) (a : (fixedTargetArrows E B) _⦋0⦌) : ∃ F : fixedTargetArrows (fixedTargetArrows E B) a ⟶ fixedTargetArrows E ((fixedTargetSource E B).app _ a), F ≫ pullback.fst (evaluation Δ[1] E (stdSimplex.obj₀Equiv.symm 1)) (SSet.const (X := Δ[0]) ((fixedTargetSource E B).app _ a)) = pullback.fst (evaluation Δ[1] (fixedTargetArrows E B) (stdSimplex.obj₀Equiv.symm 1)) (SSet.const (X := Δ[0]) a) ≫ (ihom Δ[1]).map (fixedTargetSource E B) ∧ IsFullyFaithful F ∧ SliceMappingSpaceFormula (fixedTargetArrows E B) a",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical transport span and constant-path comparison reuse CalculusTransportFormula, including its naturality, with the strict slice fiber identified with the actual arrow mapping space. The fully faithful comparison functor is specified after its monomorphic arrow inclusion, so it forgets precisely the redundant B-data in every degree. The theorem existentially supplies this uniquely characterized functor, rather than choosing an arbitrary map or inverse."
  }
 }
