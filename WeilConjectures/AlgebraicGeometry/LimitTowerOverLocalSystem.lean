@@ -33,7 +33,7 @@ universe u v p q
 open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 
-namespace WeilConjectures
+namespace RingHom
 
 private theorem tail_directed {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (i₀ : I) : IsDirected {i : I // i₀ ≤ i} (· ≤ ·) := by
@@ -291,4 +291,4 @@ theorem limit_tower_over_local_system
   · intro i
     exact (hClimit i).2
 
-end WeilConjectures
+end RingHom

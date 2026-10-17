@@ -12,9 +12,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import WeilConjectures.AlgebraicGeometry.PullbackFiniteLocallyConstant
 import WeilConjectures.AlgebraicGeometry.DisjointUniversalHomeomorphismsLisseImage
-import WeilConjectures.AlgebraicGeometry.FiniteLocalAbelianForget
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import WeilConjectures.SixFunctors.Finite.BaseChange
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # Lissity of a finite direct image on a splitting cover
@@ -38,13 +38,13 @@ private theorem isLisse_of_iso {X : Scheme.{u}}
     {F G : Sheaf X.smallEtaleTopology (Type (u + 1))} (e : F ≅ G)
     (hF : IsLisseEtaleSheafOfSets F) : IsLisseEtaleSheafOfSets G := by
   obtain ⟨𝒰, h𝒰⟩ := hF.1
-  refine isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber ⟨𝒰, fun i ↦ ?_⟩
-    fun Ω _ _ t ↦ ?_
+  refine ⟨⟨𝒰, fun i ↦ ?_⟩, ?_⟩
   · have := h𝒰 i
     exact Sheaf.isConstant_congr _
       ((X.smallEtaleTopology.overPullback (Type (u + 1))
         (𝒰.etalePrecoverageToEtale i)).mapIso e)
-  · have := hF.finite_sheafFiber Ω t
+  · refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ t ↦ ?_
+    have := hF.finite_sheafFiber Ω t
     exact Finite.of_surjective
       (((pointSmallEtale t).sheafFiber.mapIso e).hom)
       (ConcreteCategory.bijective_of_isIso
@@ -153,9 +153,9 @@ theorem isLisse_pullback_finite_directImage_of_split_cover
         (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
           ((Etale.lowerStar AddCommGrpCat.{u + 1} b).obj
             ((Etale.upperStar AddCommGrpCat.{u + 1} a).obj E))) :=
-    isFiniteLocallyConstantSheafOfTypes_forget_of_finite_algClosed _ hlocal
-      fun Ω _ _ y ↦ finiteStalks_finite_directImage b
-        ((Etale.upperStar AddCommGrpCat.{u + 1} a).obj E) hA Ω y
+    ⟨hlocal, isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ y ↦
+      finiteStalks_finite_directImage b
+      ((Etale.upperStar AddCommGrpCat.{u + 1} a).obj E) hA Ω y⟩
   obtain ⟨eV, _, _, _, _, _, _⟩ :=
     (AlgebraicGeometry.etaleInverseImageAlgebraicStructures V.toScheme S V.ι).2
   obtain ⟨ep, _, _, _, _, _, _⟩ :=

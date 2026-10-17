@@ -30,7 +30,7 @@ ring map. Integrality and incomparability make the contracted inclusions strict,
 chain length is bounded by the Krull dimension of the source. For a maximal ideal in the
 target, the integral-extension maximal-contraction theorem makes its contraction maximal.
 -/
-theorem integralExtensionDimension
+theorem IsIntegral.ringKrullDim_le_and_isMaximal_comap
     {R : Type u} {S : Type v} [CommRing R] [CommRing S]
     (f : R →+* S) (hf : f.IsIntegral) :
     ringKrullDim S ≤ ringKrullDim R ∧

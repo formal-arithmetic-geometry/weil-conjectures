@@ -11,6 +11,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAbelianLift
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # Pullback of finite locally constant abelian etale sheaves
@@ -108,12 +109,13 @@ private theorem finiteLocallyConstant_of_iso {X : Scheme.{u}}
     {G H : Sheaf X.smallEtaleTopology (Type (u + 1))} (e : G ≅ H)
     (hG : IsFiniteLocallyConstantSheafOfTypes G) :
     IsFiniteLocallyConstantSheafOfTypes H := by
-  obtain ⟨𝒰, h𝒰⟩ := hG.1
-  refine isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber ⟨𝒰, fun j ↦ ?_⟩
-    fun Ω _ _ s ↦ ?_
+  obtain ⟨⟨𝒰, h𝒰⟩, hf⟩ := hG
+  refine ⟨⟨𝒰, fun j ↦ ?_⟩, ?_⟩
   · have := h𝒰 j
     exact Sheaf.isConstant_congr _ ((X.smallEtaleTopology.overPullback _ _).mapIso e)
-  · have := hG.finite_sheafFiber Ω s
+  · refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
+    have := (ConcreteCategory.isFinitelyGenerated_iff_finite _).mp
+      (hf.isFinitelyGenerated_sheafFiber Ω s)
     exact Finite.of_equiv _ (((pointSmallEtale s).sheafFiber.mapIso e).toEquiv)
 
 /-- Pullback along a composite agrees with iterated pullback, and preserves finite local
@@ -157,8 +159,8 @@ theorem pullback_finite_locally_constant {T Y Y' : Scheme.{u}}
   let c := (Etale.upperStarComp AddCommGrpCat.{u + 1} g f).app F
   refine ⟨⟨c⟩, finiteLocallyConstant_of_iso
     ((sheafCompose _ (CategoryTheory.forget AddCommGrpCat.{u + 1})).mapIso c.symm) ?_⟩
-  refine isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber
-    (underlying_locallyConstant_upperStar g G hF.1) fun Ω _ _ s ↦ ?_
+  refine ⟨underlying_locallyConstant_upperStar g G hF.1, ?_⟩
+  refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
   have hfinite : Finite (((pointSmallEtale (s ≫ g)).sheafFiber
       (A := Type (u + 1))).obj
         ((sheafCompose _ (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G)) :=

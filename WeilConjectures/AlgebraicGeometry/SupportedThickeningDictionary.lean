@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 import WeilConjectures.AlgebraicGeometry.ThickeningSystemsDictionary
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import WeilConjectures.AlgebraicGeometry.IdealPowerProductZeroAffineCover
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Mathlib.CategoryTheory.Whiskering
@@ -30,39 +29,14 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-private theorem extend_pullback_automorphism
-    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
-    (adj : L ⊣ R) (hε : ∀ H : D, IsIso (adj.counit.app H)) (t : L ≅ L) :
-    ∃ s : 𝟭 D ≅ 𝟭 D, ∀ (G : C) (H : D) (ψ : L.obj G ≅ H),
-      ψ.hom ≫ s.inv.app H = t.inv.app G ≫ ψ.hom := by
-  let := hε
-  have : IsIso adj.counit := NatIso.isIso_of_isIso_app _
-  let ε := asIso adj.counit
-  let s : 𝟭 D ≅ 𝟭 D := ε.symm ≪≫ Functor.isoWhiskerLeft R t ≪≫ ε
-  have hs (G : C) : s.inv.app (L.obj G) = t.inv.app G := by
-    have htri := adj.left_triangle_components G
-    have hunit : L.map (adj.unit.app G) = inv (adj.counit.app (L.obj G)) :=
-      (asIso (adj.counit.app (L.obj G))).comp_hom_eq_id.mp htri
-    simp only [s, ε, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
-      Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, asIso_hom, asIso_inv,
-      NatIso.isIso_inv_app]
-    change (inv (adj.counit.app (L.obj G)) ≫ t.inv.app (R.obj (L.obj G))) ≫
-      adj.counit.app (L.obj G) = _
-    have hn := t.inv.naturality (adj.unit.app G)
-    dsimp only [Functor.comp_obj, Functor.id_obj] at hn
-    rw [← hunit, hn, Category.assoc, htri, Category.comp_id]
-  refine ⟨s, fun G H ψ ↦ ?_⟩
-  simpa only [Functor.id_map, hs G] using s.inv.naturality ψ.hom
-
 private theorem restriction_iso_equation
     {C D : Type*} [Category C] [Category D] (P : C ⥤ D)
     {G₁ L₁ F₁ : C} {G₀ L₀ F₀ : D}
     (a : G₁ ≅ L₁) (b : G₀ ≅ L₀) (e₁ : G₁ ⟶ F₁) (e₀ : G₀ ⟶ F₀)
-    (q : P.obj G₁ ≅ G₀) (φ : P.obj F₁ ≅ F₀) (σ : F₀ ≅ F₀)
-    (d : P.obj L₁ ≅ L₀)
+    (q : P.obj G₁ ≅ G₀) (φ : P.obj F₁ ≅ F₀) (d : P.obj L₁ ≅ L₀)
     (hr : q.hom ≫ b.hom = P.map a.hom ≫ d.hom)
-    (he : q.hom ≫ e₀ = P.map e₁ ≫ φ.hom ≫ σ.inv) :
-    P.map (a.inv ≫ e₁) ≫ φ.hom ≫ σ.inv = d.hom ≫ b.inv ≫ e₀ := by
+    (he : q.hom ≫ e₀ = P.map e₁ ≫ φ.hom) :
+    P.map (a.inv ≫ e₁) ≫ φ.hom = d.hom ≫ b.inv ≫ e₀ := by
   apply (cancel_epi (P.map a.hom)).1
   simp only [P.map_comp, Category.assoc]
   rw [← P.map_comp_assoc, a.hom_inv_id, P.map_id, Category.id_comp]
@@ -72,29 +46,21 @@ private theorem restriction_iso_equation
       simpa only [Category.assoc, b.hom_inv_id_assoc] using
         congrArg (fun z ↦ z ≫ b.inv ≫ e₀) hr
 
-private theorem remove_normalization
-    {C : Type*} [Category C] {L G H : C}
-    (d c : L ≅ G) (σ : H ≅ H) (ψ : G ⟶ H) (q : L ⟶ H)
-    (hq : q ≫ σ.inv = d.hom ≫ ψ)
-    (hψ : ψ ≫ σ.inv = c.inv ≫ d.hom ≫ ψ) : q = c.hom ≫ ψ := by
-  apply (cancel_mono σ.inv).1
-  rw [Category.assoc, hψ, ← Category.assoc, ← Category.assoc,
-    c.hom_inv_id, Category.id_comp]
-  exact hq
-
-/-- The annihilation and isomorphism portions of the thickening dictionary.
+/-- The annihilation and isomorphism portions of the thickening dictionary: a coherent system
+`(F n, φ n)` on the thickenings whose terms are killed by the ideal of `Z` is, termwise and
+compatibly with the transition maps, the system of a coherent formal module `M` supported on
+`Z`; any algebraisation `G` of `M` restricts to the given system.
 Source: Stacks Project, Remark 088F, Lemma 087T, and equation 0880.
 (blueprint: lem-weil-pbc-supported-thickening-dictionary).
-Proof: Apply the thickening-systems dictionary using the canonical tensor-pullback adjunction
-choices. At level zero, its kernel formula and the closed-immersion kernel identity identify the
- displayed ideal with the kernel used by the dictionary. For each level, normalize the dictionary
-comparison by transporting the automorphism d⁻¹ ≫ c along the invertible counit of the closed
-immersion pushforward; the triangle identity proves the required naturality. Apply the dictionary
-to the normalized coherent system. Evaluation isomorphisms transport the given sectionwise
-annihilation to the formal terms. The affine-cover product-zero criterion at exponent one then
-proves SupportedOn. Finally, invert the dictionary's completion comparison and use its evaluation
-compatibility; categorical cancellation removes the normalization and yields the requested
-transition equation with the original comparison c. -/
+Proof: Apply the thickening-systems dictionary with the given adjunctions to the coherent system
+`(F, φ)`. Its evaluation isomorphisms `β n` give the termwise isomorphisms and their transition
+compatibility. At level zero, its kernel formula and the closed-immersion kernel identity
+identify the displayed ideal with the kernel used by the dictionary. Evaluation isomorphisms
+transport the given sectionwise annihilation to the formal terms. The affine-cover product-zero
+criterion at exponent one then proves SupportedOn. Finally, invert the dictionary's completion
+comparison and compose with the evaluation comparisons `r n`; their transition compatibility
+gives the requested equation with the dictionary's comparison `c`, which is characterised by its
+compatibility with the adjunction units. -/
 theorem supportedThickening_dictionary
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A)
@@ -109,13 +75,11 @@ theorem supportedThickening_dictionary
       + 1 + 1))))) = pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n +
       1))))) ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I :=
       I) (Nat.le_succ (n + 1))))))
-    (c : ∀ n : ℕ, Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
-      (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) ⋙ Scheme.Modules.tensorPullback (i n) ≅
-      Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
-      (Ideal.Quotient.mk (I ^ (n + 1)))))))
-    (hc : ∀ n : ℕ, c n = (Classical.choice (Scheme.Modules.nonempty_tensorPullbackComp (i n)
-      (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 +
-      1)))))))).symm ≪≫ eqToIso (congrArg Scheme.Modules.tensorPullback (hi n)))
+    (ai : ∀ n : ℕ, Scheme.Modules.tensorPullback (i n) ⊣ Scheme.Modules.pushforward (i n))
+    (aj : ∀ n : ℕ, Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
+        (Ideal.Quotient.mk (I ^ (n + 1)))))) ⊣
+      Scheme.Modules.pushforward (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk
+          (I ^ (n + 1)))))))
     (F : ∀ n : ℕ, (pullback f (Spec.map (CommRingCat.ofHom
       (Ideal.Quotient.mk (I ^ (n + 1)))))).Modules)
     (φ : ∀ n : ℕ, (Scheme.Modules.tensorPullback (i n)).obj (F (n + 1)) ≅ F n)
@@ -132,23 +96,54 @@ theorem supportedThickening_dictionary
           ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap f),
         @SupportedOn X Z hX
           ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap f) M j _ ∧
-        ∀ G : CoherentModules X,
-          Nonempty ((@completion X hX
-            ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap f)).obj G ≅ M) →
-          ∃ ψ : ∀ n : ℕ, (Scheme.Modules.tensorPullback (pullback.fst f
-            (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).obj G.obj ≅ F n,
-            ∀ n : ℕ, (Scheme.Modules.tensorPullback (i n)).map (ψ (n + 1)).hom ≫
-              (φ n).hom = (c n).hom.app G.obj ≫ (ψ n).hom := by
+        (∃ e : ∀ n : ℕ, M.obj.obj (Opposite.op n) ≅
+            (Scheme.Modules.pushforward (pullback.fst f (Spec.map (CommRingCat.ofHom
+              (Ideal.Quotient.mk (I ^ (n + 1))))))).obj (F n),
+          ∀ n : ℕ, M.obj.map (homOfLE (Nat.le_succ n)).op ≫ (e n).hom =
+            (e (n + 1)).hom ≫
+              (Scheme.Modules.pushforward (pullback.fst f (Spec.map (CommRingCat.ofHom
+                (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))).map
+                ((ai n).homEquiv _ _ (φ n).hom) ≫
+              (Scheme.Modules.pushforwardComp (i n) (pullback.fst f (Spec.map (CommRingCat.ofHom
+                (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))).hom.app (F n) ≫
+              (Scheme.Modules.pushforwardCongr (hi n)).hom.app (F n)) ∧
+        ∃ c : ∀ n : ℕ, Scheme.Modules.tensorPullback (pullback.fst f (Spec.map
+            (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) ⋙
+            Scheme.Modules.tensorPullback (i n) ≅
+          Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
+            (Ideal.Quotient.mk (I ^ (n + 1)))))),
+          (∀ (G : X.Modules) (n : ℕ),
+            (aj (n + 1)).unit.app G ≫
+              (Scheme.Modules.pushforward (pullback.fst f (Spec.map (CommRingCat.ofHom
+                  (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))).map
+                ((ai n).unit.app
+                  ((Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
+                      (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))).obj G)) ≫
+              (Scheme.Modules.pushforwardComp (i n) (pullback.fst f (Spec.map (CommRingCat.ofHom
+                  (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))).hom.app
+                ((Scheme.Modules.tensorPullback (i n)).obj
+                  ((Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
+                      (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))).obj G)) ≫
+              (Scheme.Modules.pushforwardCongr (hi n)).hom.app
+                ((Scheme.Modules.tensorPullback (i n)).obj
+                  ((Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
+                      (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))).obj G)) ≫
+              (Scheme.Modules.pushforward (pullback.fst f (Spec.map (CommRingCat.ofHom
+                  (Ideal.Quotient.mk (I ^ (n + 1))))))).map ((c n).hom.app G) =
+            (aj n).unit.app G) ∧
+          ∀ G : CoherentModules X,
+            Nonempty ((@completion X hX
+              ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap f)).obj G ≅ M) →
+            ∃ ψ : ∀ n : ℕ, (Scheme.Modules.tensorPullback (pullback.fst f
+              (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).obj G.obj ≅ F n,
+              ∀ n : ℕ, (Scheme.Modules.tensorPullback (i n)).map (ψ (n + 1)).hom ≫
+                (φ n).hom = (c n).hom.app G.obj ≫ (ψ n).hom := by
   classical
-  -- The normalization works for every comparison c, including the specified one.
-  have _canonicalComparison := hc
   let T (n : ℕ) := pullback f
     (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))
   let jn (n : ℕ) : T n ⟶ X := pullback.fst f
     (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))
-  let ai n := Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction (i n))
-  let aj n := Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction (jn n))
-  obtain ⟨hX, hclosed, Φ, β, _, _, d, R, r, _, _, hr, _, _, _, hiso, _, _⟩ :=
+  obtain ⟨hX, hclosed, Φ, β, _, ht, c, R, r, _, hu, hr, _, _, _, hiso, _, _⟩ :=
     thickeningSystems_dictionary f I i hi hp ai aj
   let : IsNoetherian X := hX
   have hJ : ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap f) =
@@ -164,17 +159,8 @@ theorem supportedThickening_dictionary
     rw [show I ^ 1 = I from _root_.pow_one I] at hh
     exact hh
   rw [hJ]
-  have hnormalize (n : ℕ) : ∃ s : 𝟭 (T n).Modules ≅ 𝟭 (T n).Modules,
-      ∀ (G : X.Modules) (H : (T n).Modules)
-        (ψ : (Scheme.Modules.tensorPullback (jn n)).obj G ≅ H),
-        ψ.hom ≫ s.inv.app H = ((d n).symm ≪≫ c n).inv.app G ≫ ψ.hom := by
-    have : IsClosedImmersion (jn n) := (hclosed n).1
-    exact extend_pullback_automorphism (aj n)
-      (closedImmersion_pushforward_fullyFaithful (jn n)).1 ((d n).symm ≪≫ c n)
-  choose s hs using hnormalize
-  let S : CoherentThickeningSystem T i :=
-    ⟨F, hF, fun n ↦ φ n ≪≫ ((s n).app (F n)).symm⟩
-  refine ⟨hX, Φ.obj S, ?_, ?_⟩
+  let S : CoherentThickeningSystem T i := ⟨F, hF, φ⟩
+  refine ⟨hX, Φ.obj S, ?_, ⟨fun n ↦ (β n).app S, ht S⟩, c, hu, ?_⟩
   · change ∀ n : ℕ, IsZero (Scheme.idealModuleProduct j.ker.toModulesι
       ((Φ.obj S).obj.obj (Opposite.op n)))
     intro n
@@ -211,18 +197,10 @@ theorem supportedThickening_dictionary
     refine ⟨ψ, fun n ↦ ?_⟩
     have heq := e.hom.compatibility n
     have hres := hr G n
-    have hnorm := hs n G.obj (F n) (ψ n)
     change (Scheme.Modules.tensorPullback (i n)).map (ψ (n + 1)).hom ≫
       (φ n).hom = (c n).hom.app G.obj ≫ (ψ n).hom
-    have hbase : (Scheme.Modules.tensorPullback (i n)).map (ψ (n + 1)).hom ≫
-        (φ n).hom ≫ (s n).inv.app (F n) = (d n).hom.app G.obj ≫ (ψ n).hom :=
-      restriction_iso_equation (Scheme.Modules.tensorPullback (i n))
-        ((r (n + 1)).app G) ((r n).app G) (e.hom.app (n + 1)) (e.hom.app n)
-        ((R.obj G).comparison n) (φ n) ((s n).app (F n)) ((d n).app G.obj)
-        hres heq
-    exact remove_normalization ((d n).app G.obj) ((c n).app G.obj)
-      ((s n).app (F n)) (ψ n).hom
-      ((Scheme.Modules.tensorPullback (i n)).map (ψ (n + 1)).hom ≫ (φ n).hom)
-      hbase hnorm
+    exact restriction_iso_equation (Scheme.Modules.tensorPullback (i n))
+      ((r (n + 1)).app G) ((r n).app G) (e.hom.app (n + 1)) (e.hom.app n)
+      ((R.obj G).comparison n) (φ n) ((c n).app G.obj) hres heq
 
 end AlgebraicGeometry

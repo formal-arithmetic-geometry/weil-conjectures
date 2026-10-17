@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.EtaleLocallyConstantOpenPullback
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # The reducible step for finite lisse partitions
@@ -33,8 +34,8 @@ private lemma lisse_open_comp {X Y : Scheme.{u}}
     IsLisseEtaleSheafOfSets ((etaleSetPullback (U.ι ≫ g)).obj F) := by
   have hopen : IsLisseEtaleSheafOfSets
       ((etaleSetPullback U.ι).obj ((etaleSetPullback g).obj F)) := by
-    refine isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber
-      (isLocallyConstantEtaleSheafOfSets_open_pullback _ U hF.1) fun Ω _ _ s ↦ ?_
+    refine ⟨isLocallyConstantEtaleSheafOfSets_open_pullback _ U hF.1, ?_⟩
+    refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
     obtain ⟨c, hc, _⟩ := etaleSetInverseImageStalkGerm Y U U.ι
       ((etaleSetPullback g).obj F) Ω s
     have := hF.finite_sheafFiber Ω (s ≫ U.ι)
@@ -44,14 +45,15 @@ private lemma lisse_open_comp {X Y : Scheme.{u}}
       {G H : Sheaf V.smallEtaleTopology (Type (u + 1))}, (G ≅ H) →
       IsLisseEtaleSheafOfSets G → IsLisseEtaleSheafOfSets H := by
     intro V G H e hG
-    obtain ⟨𝒰, h𝒰⟩ := hG.1
-    refine isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber ⟨𝒰, fun i ↦ ?_⟩
-      fun Ω _ _ s ↦ ?_
+    obtain ⟨⟨𝒰, h𝒰⟩, hfin⟩ := hG
+    refine ⟨⟨𝒰, fun i ↦ ?_⟩, ?_⟩
     · have := h𝒰 i
       exact Sheaf.isConstant_congr _
         ((V.smallEtaleTopology.overPullback (Type (u + 1))
           (𝒰.etalePrecoverageToEtale i)).mapIso e)
-    · have := hG.finite_sheafFiber Ω s
+    · refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
+      have := (ConcreteCategory.isFinitelyGenerated_iff_finite _).mp
+        (hfin.isFinitelyGenerated_sheafFiber Ω s)
       exact Finite.of_equiv _
         (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).mapIso e).toEquiv
   exact transport ((c X Y U g U.ι).app F) hopen

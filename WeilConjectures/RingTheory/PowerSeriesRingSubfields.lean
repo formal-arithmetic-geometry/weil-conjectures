@@ -81,7 +81,7 @@ Proof (the eight steps of the node):
 8. The generators of kJ for J union J' lie in both smaller fields. The coefficient
    conditions imply the same inclusions for AJ, and taking quotients gives the
    required inclusion for KJ. -/
-theorem powerSeriesRingSubfields
+theorem iInter_frobenius_subfields_mvPolynomial_mvPowerSeries
     (p : ℕ) [Fact p.Prime]
     (k : Type u) [Field k] [CharP k p]
     (I : Type w) (t : I → k)

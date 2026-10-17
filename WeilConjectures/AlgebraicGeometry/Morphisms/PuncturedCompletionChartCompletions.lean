@@ -180,7 +180,6 @@ private theorem exists_chart_completed_localization
   let e := IsLocalizedModule.linearEquiv (Submonoid.powers f)
     (LocalizedModule.mkLinearMap (Submonoid.powers f)
       (FormalGlueing.restrict φ (completedSectionModule s))) r
-  -- Use this same d in alpha, retaining the two generator normalizations.
   let K := FL.trans d.symm
   let KA : FormalGlueing.restrict φ (ModuleCat.of C Γ(E, W)) ≃ₗ[A]
       FormalGlueing.restrict φ (FormalGlueing.extend φ

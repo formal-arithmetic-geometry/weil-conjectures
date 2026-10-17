@@ -11,6 +11,7 @@ public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 import WeilConjectures.AlgebraicGeometry.FiniteLocalAbelianForget
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import WeilConjectures.AlgebraicGeometry.PullbackFiniteLocallyConstant
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-! Lissity on the union of the interiors of lisse strata. -/
 
@@ -27,12 +28,13 @@ private theorem finiteLisse_of_iso {X : Scheme.{u}}
     {F G : Sheaf X.smallEtaleTopology (Type (u + 1))} (e : F ≅ G)
     (hF : IsFiniteLocallyConstantSheafOfTypes F) :
     IsFiniteLocallyConstantSheafOfTypes G := by
-  obtain ⟨𝒰, h𝒰⟩ := hF.1
-  refine isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber ⟨𝒰, fun i ↦ ?_⟩
-    fun Ω _ _ s ↦ ?_
+  obtain ⟨⟨𝒰, h𝒰⟩, hf⟩ := hF
+  refine ⟨⟨𝒰, fun i ↦ ?_⟩, ?_⟩
   · have := h𝒰 i
     exact Sheaf.isConstant_congr _ ((X.smallEtaleTopology.overPullback _ _).mapIso e)
-  · have := hF.finite_sheafFiber Ω s
+  · refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
+    have := (ConcreteCategory.isFinitelyGenerated_iff_finite _).mp
+      (hf.isFinitelyGenerated_sheafFiber Ω s)
     exact Finite.of_equiv _ (((pointSmallEtale s).sheafFiber.mapIso e).toEquiv)
 
 /-- Lissity of an abelian restriction depends only on containment in an immersed image. -/

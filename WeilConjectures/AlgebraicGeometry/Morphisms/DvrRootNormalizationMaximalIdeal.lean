@@ -25,7 +25,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
--- The legacy statement contains an unused let-binding N; retain its signature verbatim.
 set_option linter.unusedVariables false in
 /-- Adjoining a group-order root of a DVR uniformizer kills the ramification of a torsor.
 

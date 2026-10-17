@@ -26,7 +26,6 @@ namespace Algebra
 
 -- Previous interface: STATEMENT-DISPUTED because zero parameters satisfy hparam without
 -- cutting the target localization to dimension zero. The power bound below repairs it.
--- The original interface retains hypotheses used in the preceding preparation step.
 set_option linter.unusedVariables false in
 /-- Descend the auxiliary thickening factorization to the eighth-power quotient and derive
 the dimension and minimal-prime alternative.

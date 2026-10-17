@@ -51,7 +51,8 @@ Proof:
    principal quotient detecting nonmembership has height at most one, and the
    local denominator witness contradicts containment of its annihilator there.
    This is the S2-only associated-prime argument underlying Tag 031T. -/
-theorem serreCriterionNormal (R : Type u) [CommRing R] [IsNoetherianRing R] :
+theorem forall_isIntegrallyClosed_localization_iff_isSerreR_and_isSerreS (R : Type u) [CommRing R]
+    [IsNoetherianRing R] :
     (∀ (p : Ideal R) [p.IsPrime],
       IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) ↔
     IsSerreR R 1 ∧ IsSerreS R 2 := by

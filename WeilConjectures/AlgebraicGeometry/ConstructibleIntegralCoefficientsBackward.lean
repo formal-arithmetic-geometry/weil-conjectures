@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.AlgebraicGeometry.FiniteLocalAbelianForget
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 @[expose] public section
 
@@ -76,19 +77,72 @@ private theorem finiteLocalSets_of_iso {Y : Scheme.{u}}
     {G H : Sheaf Y.smallEtaleTopology (Type (u + 1))} (e : G ≅ H)
     (hG : IsFiniteLocallyConstantSheafOfTypes G) :
     IsFiniteLocallyConstantSheafOfTypes H := by
-  obtain ⟨𝒰, h𝒰⟩ := hG.1
-  refine isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber ⟨𝒰, fun i ↦ ?_⟩
-    fun Ω _ _ s ↦ ?_
+  obtain ⟨⟨𝒰, h𝒰⟩, hf⟩ := hG
+  refine ⟨⟨𝒰, fun i ↦ ?_⟩, ?_⟩
   · have := h𝒰 i
     exact Sheaf.isConstant_congr _
       ((Y.smallEtaleTopology.overPullback (Type (u + 1)) _).mapIso e)
-  · have := hG.finite_sheafFiber Ω s
+  · refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
+    have := (ConcreteCategory.isFinitelyGenerated_iff_finite _).mp
+      (hf.isFinitelyGenerated_sheafFiber Ω s)
     exact Finite.of_equiv _ (((pointSmallEtale s).sheafFiber.mapIso e).toEquiv)
+
+private noncomputable def abelianConstantStalkIso {Y : Scheme.{u}}
+    (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (U : Y.Etale)
+    (A : AddCommGrpCat.{u + 1})
+    (e : G.over U ≅ (constantSheaf (Y.smallEtaleTopology.over U)
+      AddCommGrpCat.{u + 1}).obj A)
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ U.left) :
+    ((pointSmallEtale (s ≫ U.hom)).sheafFiber
+      (A := AddCommGrpCat.{u + 1})).obj G ≅ A := by
+  let ePullback : (Etale.upperStar AddCommGrpCat.{u + 1} U.hom).obj G ≅
+      (constantSheaf U.left.smallEtaleTopology AddCommGrpCat.{u + 1}).obj A :=
+    (overSheafEquivFunctorObjOverIso AddCommGrpCat.{u + 1} U G).symm ≪≫
+      (Etale.overSheafEquiv U AddCommGrpCat.{u + 1}).functor.mapIso e ≪≫
+      ((Etale.overEquiv U).constantSheafSheafCongrIso
+        (Y.smallEtaleTopology.over U) U.left.smallEtaleTopology
+        AddCommGrpCat.{u + 1} CategoryTheory.Over.mkIdTerminal).app A
+  have : Limits.PreservesFilteredColimitsOfSize.{u, u}
+      (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+    Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  exact ((Etale.upperStarCompSheafFiberIso AddCommGrpCat.{u + 1} U.hom s).app G).symm ≪≫
+    (pointSmallEtale s).sheafFiber.mapIso ePullback ≪≫
+    (pointSmallEtale s).sheafFiberConstantSheafIso A
+
+private theorem finiteAbelianStalks {Y : Scheme.{u}}
+    (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (hlc : IsLocallyConstantSheaf G)
+    (hfinite : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y),
+      Finite (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj G))
+    (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y) :
+    Finite (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj G) := by
+  classical
+  have : JointlySurjective etalePrecoverage.{u} :=
+    inferInstanceAs (JointlySurjective (precoverage @Etale))
+  obtain ⟨d⟩ := hlc.nonempty_locallyConstantDatum
+  obtain ⟨i, x, hx⟩ := d.cover.exists_eq (s default)
+  have : Etale (d.cover.f i) := d.cover.map_prop i
+  obtain ⟨t, ht, -⟩ := exists_fac_of_etale_of_isSepClosed (d.cover.f i) s x hx
+  let U := d.cover.etalePrecoverageToEtale i
+  have := d.isConstant i
+  obtain ⟨A, ⟨e⟩⟩ := (G.over U).mem_essImage_of_isConstant
+  let s₀ := U.left.algClosurePoint x
+  have : Finite (((pointSmallEtale (s₀ ≫ U.hom)).sheafFiber
+      (A := AddCommGrpCat.{u + 1})).obj G) := hfinite _ (s₀ ≫ U.hom)
+  have : Finite A := Finite.of_equiv _
+    (abelianConstantStalkIso G U A e.symm s₀).addCommGroupIsoToAddEquiv.toEquiv
+  have hfin : Finite (((pointSmallEtale (t ≫ U.hom)).sheafFiber
+      (A := AddCommGrpCat.{u + 1})).obj G) :=
+    Finite.of_equiv A
+      (abelianConstantStalkIso G U A e.symm t).addCommGroupIsoToAddEquiv.toEquiv.symm
+  change Finite (((pointSmallEtale (t ≫ d.cover.f i)).sheafFiber
+    (A := AddCommGrpCat.{u + 1})).obj G) at hfin
+  simpa only [ht] using hfin
 
 private theorem integralFiniteLocal {Y : Scheme.{u}}
     (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
     (hG : IsLocallyConstantSheaf G ∧
-      ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
+      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y),
         Finite (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj G)) :
     IsFiniteLocallyConstantSheaf
       ((sheafCompose Y.smallEtaleTopology integralCoefficients).obj G) := by
@@ -106,7 +160,7 @@ private theorem integralFiniteLocal {Y : Scheme.{u}}
   intro Ω _ _ s
   have hfinite : Finite (((pointSmallEtale s).sheafFiber
       (A := AddCommGrpCat.{u + 1})).obj G) :=
-    hG.2 Ω s
+    finiteAbelianStalks G hG.1 hG.2 Ω s
   let V := forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}
   let e₀ := V.asEquivalence.counitIso.app
     (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj G)

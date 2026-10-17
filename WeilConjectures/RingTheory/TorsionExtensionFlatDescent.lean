@@ -67,13 +67,13 @@ Proof:
    equation of `T` gives `π θ = q_S`, as required. -/
 theorem exists_torsion_extension_flat_descent
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
-    (_hflat : (algebraMap R S).Flat) (I : Ideal R) (_hI : I.FG)
-    (_hquot : Function.Bijective
+    (hflat : (algebraMap R S).Flat) (I : Ideal R) (hI : I.FG)
+    (hquot : Function.Bijective
       (Ideal.quotientMap (I.map (algebraMap R S)) (algebraMap R S)
         Ideal.le_comap_map))
     {N : Type w} [AddCommGroup N] [Module R N]
     {Q : Type x} [AddCommGroup Q] [Module R Q]
-    (_hQ : ∀ x : Q, ∃ n : ℕ, 1 ≤ n ∧ ∀ r ∈ I ^ n, r • x = 0)
+    (hQ : ∀ x : Q, ∃ n : ℕ, 1 ≤ n ∧ ∀ r ∈ I ^ n, r • x = 0)
     {M' : Type y} [AddCommGroup M'] [Module S M']
     (ι : S ⊗[R] N →ₗ[S] M')
     (π : M' →ₗ[S] S ⊗[R] Q)
@@ -86,13 +86,13 @@ theorem exists_torsion_extension_flat_descent
         θ.toLinearMap.comp (j.baseChange S) = ι ∧
         π.comp θ.toLinearMap = q.baseChange S := by
   classical
-  have : Module.Flat R S := RingHom.flat_algebraMap_iff.mp _hflat
+  have : Module.Flat R S := RingHom.flat_algebraMap_iff.mp hflat
   -- Step 1: lift only the presentation universe, preserving the requested universe of E.
   let eQ : ULift.{u} Q ≃ₗ[R] Q := ULift.moduleEquiv
   obtain ⟨J, n, hn, p₀, hp₀, hK₀, _⟩ :=
     I.exists_torsion_cyclic_presentation (ULift.{u} Q) (by
       intro z
-      obtain ⟨m, hm, hz⟩ := _hQ z.down
+      obtain ⟨m, hm, hz⟩ := hQ z.down
       exact ⟨m, hm, fun r hr => ULift.down_injective (hz r hr)⟩)
   let P := DirectSum J (fun j => R ⧸ I ^ n j)
   let p : P →ₗ[R] Q := eQ.toLinearMap.comp p₀
@@ -146,9 +146,9 @@ theorem exists_torsion_extension_flat_descent
     obtain ⟨m, hm⟩ := _hπ (p.baseChange S x)
     exact ⟨⟨(m, x), hm⟩, rfl⟩
   obtain ⟨E₀, _, _, j₀, q₀, hj₀, hjq₀, hq₀, α, hαj, hqα⟩ :=
-    extension_descends_of_summands _hflat (fun j : J => R ⧸ I ^ n j)
+    extension_descends_of_summands hflat (fun j : J => R ⧸ I ^ n j)
       (fun j T _ _ a b ha hab hb =>
-        exists_cyclic_extension_flat_descent _hflat I _hI _hquot (n j) (hn j)
+        exists_cyclic_extension_flat_descent hflat I hI hquot (n j) (hn j)
           a b ha hab hb) a b ha hab hb
   -- Step 3: descend the canonical kernel lift and reflect its projection identity.
   let t : S ⊗[R] ker p →ₗ[S] T :=
@@ -158,10 +158,10 @@ theorem exists_torsion_extension_flat_descent
       map_add' := by intro z z'; apply Subtype.ext; simp
       map_smul' := by intro r z; apply Subtype.ext; simp }
   obtain ⟨s, hs⟩ :=
-    (baseChange_bijective_of_ideal_power_torsion _hflat I _hI _hquot hK).surjective
+    (baseChange_bijective_of_ideal_power_torsion hflat I hI hquot hK).surjective
       (α.symm.toLinearMap.comp t)
   have hqs : q₀.comp s = k := by
-    apply (baseChange_bijective_of_ideal_power_torsion _hflat I _hI _hquot hK).injective
+    apply (baseChange_bijective_of_ideal_power_torsion hflat I hI hquot hK).injective
     rw [baseChange_comp, hs]
     apply LinearMap.ext
     intro z
