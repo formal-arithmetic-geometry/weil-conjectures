@@ -28,6 +28,12 @@ universe u
 
 open CategoryTheory Limits
 
+-- As in `WeilConjectures.WeilSheaf.CurvePullback`: elaborating through these instances produces
+-- terms which the kernel compares slowly with the imported ones.
+attribute [-instance] ModuleCat.instIsRightAdjointForgetLinearMapIdCarrier
+  ModuleCat.isGrothendieckAbelian_of_commRing
+  CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape
+
 namespace FrobeniusModule
 
 variable {K : Type*} [Field K] {ι : K →+* ℂ} {q : ℕ} {w w' : ℝ}
@@ -68,6 +74,22 @@ theorem IsPureOfWeightOn.of_map {M N : FrobeniusModule.{u} K} {U : Submodule K M
   intro α x hx hx0 hα
   refine h α (e x) ⟨x, hx, rfl⟩ (fun h0 ↦ hx0 (e.injective (h0.trans (map_zero e).symm))) ?_
   rw [← he, hα, map_smul]
+
+/-- Purity on a subspace is transported along an isomorphism of Frobenius modules, to a subspace
+known to be the image. -/
+theorem IsPureOfWeightOn.map_eq {M N : FrobeniusModule.{u} K} {U : Submodule K M.carrier}
+    {U' : Submodule K N.carrier} (h : M.IsPureOfWeightOn ι q U w) (e : M.carrier ≃ₗ[K] N.carrier)
+    (he : ∀ x, e (M.frobenius x) = N.frobenius (e x)) (hU : U.map e.toLinearMap = U') :
+    N.IsPureOfWeightOn ι q U' w :=
+  hU ▸ h.map e he
+
+/-- Purity on a subspace descends along an isomorphism of Frobenius modules, from a subspace
+known to be the image. -/
+theorem IsPureOfWeightOn.of_map_eq {M N : FrobeniusModule.{u} K} {U : Submodule K M.carrier}
+    {U' : Submodule K N.carrier} (e : M.carrier ≃ₗ[K] N.carrier)
+    (he : ∀ x, e (M.frobenius x) = N.frobenius (e x)) (hU : U.map e.toLinearMap = U')
+    (h : N.IsPureOfWeightOn ι q U' w) : M.IsPureOfWeightOn ι q U w :=
+  of_map e he (hU ▸ h)
 
 /-- The weight of a module pure on a nonzero Frobenius-stable subspace is unique. -/
 theorem IsPureOfWeightOn.weight_eq [IsAlgClosed K] {M : FrobeniusModule.{u} K}
@@ -154,6 +176,34 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_of_mono_cokernel {𝒢 : WeilShea
     (kernel.ι (pullback.snd (cokernel.π i) u)) (pullback.fst (cokernel.π i) u ≫ j) hK hP hirr
   exact ⟨w, hw.of_epi e.hom⟩
 
+/-- **Purity of real lisse sheaves on curves**, subobject form for any cokernel cofork: every
+irreducible lisse subsheaf of a cokernel `c` of `𝒢₁ ⟶ 𝒢₂`, for lisse `𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢` with `𝒢`
+real, is punctually pure
+(`AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_of_mono_cokernel`). -/
+theorem IsReal.exists_isPunctuallyPureOfWeight_of_mono_of_isColimit {𝒢 : WeilSheaf k₀ l C}
+    (h𝒢 : 𝒢.IsLisse) (hreal : 𝒢.IsReal ι) {𝒢₁ 𝒢₂ : WeilSheaf k₀ l C} (i : 𝒢₁ ⟶ 𝒢₂)
+    (j : 𝒢₂ ⟶ 𝒢) [Mono i] [Mono j] (h₁ : 𝒢₁.IsLisse) (h₂ : 𝒢₂.IsLisse)
+    {c : CokernelCofork i} (hc : IsColimit c) {W : WeilSheaf k₀ l C} (u : W ⟶ c.pt) [Mono u]
+    (hW : W.IsIrreducibleLisse) :
+    ∃ w : ℝ, W.IsPunctuallyPureOfWeight ι w := by
+  have e := hc.coconePointUniqueUpToIso (cokernelIsCokernel i)
+  have : Mono (u ≫ e.hom) := mono_comp _ _
+  exact hreal.exists_isPunctuallyPureOfWeight_of_mono_cokernel h𝒢 i j h₁ h₂ (u ≫ e.hom) hW
+
+/-- **Purity of real lisse sheaves on curves**, for the image of a subquotient under an exact
+functor `G` to Weil sheaves on the curve: every irreducible lisse subsheaf of `G V`, where
+`V = 𝒢₂ / 𝒢₁` and `G` preserves this cokernel, is punctually pure as soon as `G 𝒢₁ ⊆ G 𝒢₂ ⊆ G 𝒢`
+are lisse and `G 𝒢` is real. -/
+theorem IsReal.exists_isPunctuallyPureOfWeight_of_mono_obj {D : Type*} [Category D]
+    [HasZeroMorphisms D] (G : D ⥤ WeilSheaf k₀ l C) [G.PreservesZeroMorphisms]
+    {𝒢 𝒢₁ 𝒢₂ V : D} (i : 𝒢₁ ⟶ 𝒢₂) (j : 𝒢₂ ⟶ 𝒢) (π : 𝒢₂ ⟶ V) (hπ : i ≫ π = 0)
+    (hV : IsColimit (CokernelCofork.ofπ π hπ)) [PreservesColimit (parallelPair i 0) G]
+    [Mono (G.map i)] [Mono (G.map j)] (h𝒢 : (G.obj 𝒢).IsLisse) (hreal : (G.obj 𝒢).IsReal ι)
+    (h₁ : (G.obj 𝒢₁).IsLisse) (h₂ : (G.obj 𝒢₂).IsLisse) {W : WeilSheaf k₀ l C}
+    (u : W ⟶ G.obj V) [Mono u] (hW : W.IsIrreducibleLisse) :
+    ∃ w : ℝ, W.IsPunctuallyPureOfWeight ι w :=
+  hreal.exists_isPunctuallyPureOfWeight_of_mono_of_isColimit h𝒢 (G.map i) (G.map j) h₁ h₂
+    (CokernelCofork.mapIsColimit _ hV G) u hW
 end Curve
 
 section CurvePoint

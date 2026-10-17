@@ -476,7 +476,10 @@ lemma stalkObjFrobeniusPowIso_hom_eq_globalSectionsTransport (a : ℕ)
     ProEtale.upperStarCompIso_hom_app, ← Functor.map_comp]
   simp only [Category.assoc]
   rw [reassoc_of% e]
-  simp? [ProEtale.upperStarCongr, stalkObjFrobeniusPowIso, frobeniusPowStr]
+  simp only [stalkObjFrobeniusPowIso, Functor.comp_obj, Functor.mapIso_trans, Iso.trans_hom,
+    Functor.mapIso_hom, Iso.app_hom, Mod.forget_map, Functor.id_obj, ProEtale.upperStarCongr,
+    eqToIso_refl, Iso.refl_inv, NatTrans.id_app, Iso.refl_hom, frobeniusPowStr, Functor.map_comp,
+    Category.id_comp]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
 /-- The Frobenius transports at two geometric points `s` and `s'` related by a square

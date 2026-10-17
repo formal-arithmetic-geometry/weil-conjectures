@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.FiniteModel
 public import WeilConjectures.DeligneLaumon.Reduction.CurveTesting
 public import WeilConjectures.DeligneLaumon.Reduction.RealCurveConstituent
 public import WeilConjectures.WeilSheaf.EquivariantPullback
+public import WeilConjectures.WeilSheaf.FrobeniusTwistStalk
 
 /-!
 # Purity of the irreducible constituents of real lisse sheaves on smooth affine schemes
@@ -38,6 +39,12 @@ universe u
 
 open CategoryTheory Limits
 
+-- As in `WeilConjectures.WeilSheaf.CurvePullback`: elaborating through these instances produces
+-- terms which the kernel compares slowly with the imported ones.
+attribute [-instance] ModuleCat.instIsRightAdjointForgetLinearMapIdCarrier
+  ModuleCat.isGrothendieckAbelian_of_commRing
+  CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape
+
 namespace AlgebraicGeometry.WeilSheaf
 
 open ProEtale
@@ -45,64 +52,12 @@ open ProEtale
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {ι : PadicAlgCl l →+* ℂ}
 
-
 /-- Powers of an automorphism commute, in the form `g⁻ᵃ ≫ gᵇ = gᵇ ≫ g⁻ᵃ`. -/
 lemma _root_.CategoryTheory.Aut.pow_inv_comp_pow_hom {C : Type*} [Category C] {Z : C}
     (g : Aut Z) (a b : ℕ) : (g ^ a).inv ≫ (g ^ b).hom = (g ^ b).hom ≫ (g ^ a).inv := by
   rw [Iso.inv_comp_eq, ← Category.assoc, Iso.eq_comp_inv, Aut.pow_hom_comp_pow_hom,
     Aut.pow_hom_comp_pow_hom, add_comm]
 
-/-- Purity on the stalk of a subsheaf only depends on the geometric point. -/
-theorem isPureOfWeightOn_stalkSubspace_congr {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-    (F : WeilSheaf k₀ l X) {t t' : Spec (.of (AlgebraicClosure k₀)) ⟶
-      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber} (h : t = t') {m : ℕ}
-    (ht : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ t)
-    (ht' : t' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ t')
-    (P : Subobject F.obj.carrier) (q : ℕ) (w : ℝ) :
-    (F.stalkAt t m ht).IsPureOfWeightOn ι q (F.stalkSubspace t P) w ↔
-      (F.stalkAt t' m ht').IsPureOfWeightOn ι q (F.stalkSubspace t' P) w := by
-  subst h
-  rfl
-
-/-- **Purity on the Frobenius translates of a geometric point** (blueprint:
-`thm-zl-real-mixed-by-curves`, "the weight obtained on this curve is independent of the
-curve"). If the stalk of `P` at the translate `σ⁻ᵃ ≫ t ≫ Frᵃ` of a geometric point `t` is pure of
-weight `w`, so is the stalk of the `a`-th Frobenius twist `Tᵃ P` at `t`. -/
-theorem isPureOfWeightOn_stalkSubspace_frobeniusTwist_iterate {X : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l X)
-    {t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
-    {m : ℕ} (ht : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ t) (a : ℕ)
-    (ha : ((specGeometricFrobenius k₀ ^ a).inv ≫ t ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ a).hom) ≫
-          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ ((specGeometricFrobenius k₀ ^ a).inv ≫ t ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ a).hom))
-    (P : Subobject F.obj.carrier) (q : ℕ) (w : ℝ)
-    (h : (F.stalkAt _ m ha).IsPureOfWeightOn ι q (F.stalkSubspace _ P) w) :
-    (F.stalkAt t m ht).IsPureOfWeightOn ι q
-      (F.stalkSubspace t ((⇑F.frobeniusTwist)^[a] P)) w := by
-  set Fr := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
-  set σ := specGeometricFrobenius k₀
-  set s := (σ ^ a).inv ≫ t ≫ (Fr ^ a).hom
-  have hσs : (σ ^ a).hom ≫ s = t ≫ (Fr ^ a).hom := Iso.hom_inv_id_assoc _ _
-  have h₁ : ((σ ^ a).hom ≫ s) ≫ (Fr ^ m).hom = (σ ^ m).hom ≫ (σ ^ a).hom ≫ s := by
-    rw [Category.assoc, ha, ← Category.assoc, ← Category.assoc, Aut.pow_hom_comp_pow_hom,
-      Aut.pow_hom_comp_pow_hom, add_comm]
-  have h₂ : (t ≫ (Fr ^ a).hom) ≫ (Fr ^ m).hom = (σ ^ m).hom ≫ t ≫ (Fr ^ a).hom := by
-    rw [← hσs, h₁]
-  -- from `s` to `σᵃ ≫ s`
-  have h' : (F.stalkAt _ m h₁).IsPureOfWeightOn ι q (F.stalkSubspace _ P) w := by
-    refine FrobeniusModule.IsPureOfWeightOn.of_map
-      (WeilCoefficients.linearEquivOfIso (F.stalkObjSpecFrobeniusPowIso a s))
-      (F.stalkObjSpecFrobeniusPowIso_frobenius ha a h₁) ?_
-    rwa [F.stalkSubspace_specGeometricFrobenius_pow]
-  -- from `σᵃ ≫ s = t ≫ Frᵃ` to `t`
-  rw [isPureOfWeightOn_stalkSubspace_congr F hσs h₁ h₂] at h'
-  rw [F.stalkSubspace_frobeniusTwist_iterate]
-  exact h'.map _ (F.stalkObjFrobeniusPowIso_frobenius ht a h₂)
 section CurveStep
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -129,7 +84,7 @@ theorem isPureOfWeight_stalk_of_curvePullback [LocallyOfFiniteType (Y ↘ Spec (
   have he : 0 < (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 :=
     Nat.pos_of_ne_zero (Scheme.Hom.degreeOver_ne_zero _ x.2)
   have ht := comp_geometricGaloisFrobenius_pow_mul _
-    (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow _ x)
+    (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow (k := k₀) _ x)
     (Module.finrank k₀ L)
   have hs'Y := comp_geometricGaloisFrobenius_pow_of_comp_eq j hj θ hs' ht
   obtain ⟨hs, E, -⟩ := exists_equiv_stalkAt_curvePullback j hj rfl θ F hs' hs'Y
@@ -153,6 +108,7 @@ theorem exists_isPunctuallyPureOfWeight_curvePullback
     [ConnectedSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]
     [IsRegular (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]
     [IsLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]
+    [CompactSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]
     [SmoothOfRelativeDimension 1 (Y ↘ Spec (CommRingCat.of L))]
     [GeometricallyConnected (Y ↘ Spec (CommRingCat.of L))]
     [IsSeparated (Y ↘ Spec (CommRingCat.of L))]
@@ -160,14 +116,14 @@ theorem exists_isPunctuallyPureOfWeight_curvePullback
     [QuasiCompact (Y ↘ Spec (CommRingCat.of L))] [Mono j]
     {𝒢 : WeilSheaf k₀ l X} (h𝒢 : 𝒢.IsLisse) (hreal : 𝒢.IsReal ι) {𝒢₁ 𝒢₂ : WeilSheaf k₀ l X}
     (i : 𝒢₁ ⟶ 𝒢₂) (j₂ : 𝒢₂ ⟶ 𝒢) [Mono i] [Mono j₂] (h₁ : 𝒢₁.IsLisse) (h₂ : 𝒢₂.IsLisse)
-    {P : Subobject (cokernel i).obj.carrier}
+    {V : WeilSheaf k₀ l X} (π : 𝒢₂ ⟶ V) (hπ : i ≫ π = 0)
+    (hV : IsColimit (CokernelCofork.ofπ π hπ)) {P : Subobject V.obj.carrier}
     (hP : IsIrreducibleAdicLocalSystem (Subobject.underlying.obj P)) {M : ℕ} (hM : 0 < M)
-    (hPM : (⇑(cokernel i).frobeniusTwist)^[M] P = P)
-    (hspan : (Finset.univ : Finset (Fin M)).sup
-      (fun n ↦ (⇑(cokernel i).frobeniusTwist)^[n] P) = ⊤)
+    (hPM : (⇑V.frobeniusTwist)^[M] P = P)
+    (hspan : (Finset.univ : Finset (Fin M)).sup (fun n ↦ (⇑V.frobeniusTwist)^[n] P) = ⊤)
     (hMN : M ∣ Module.finrank k₀ L)
     (hjirr : ∀ n : Fin M, IsIrreducibleAdicLocalSystem
-      ((j)^*ᵃ[l].obj (Subobject.underlying.obj ((⇑(cokernel i).frobeniusTwist)^[n] P))))
+      ((j)^*ᵃ[l].obj (Subobject.underlying.obj ((⇑V.frobeniusTwist)^[n] P))))
     (x₀ : X.finitePoints)
     (hpts : ∀ a : Fin M, ∃ s' : Spec (.of (AlgebraicClosure L)) ⟶
         (Y ↘ Spec (CommRingCat.of L)).geometricFiber,
@@ -175,73 +131,78 @@ theorem exists_isPunctuallyPureOfWeight_curvePullback
         ((specGeometricFrobenius k₀ ^ (a : ℕ)).inv ≫
           (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x₀ ≫
             ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (a : ℕ)).hom)) :
-    ∃ w : ℝ, ((curvePullback j hj).obj (cokernel i)).IsPunctuallyPureOfWeight ι w := by
+    ∃ w : ℝ, ((curvePullback j hj).obj V).IsPunctuallyPureOfWeight ι w := by
   have : Module.Finite k₀ L := Module.Finite.of_finite
-  set V := cokernel i
-  set T := V.frobeniusTwist
-  set N := Module.finrank k₀ L
-  set Fr := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
-  set σ := specGeometricFrobenius k₀
-  set Φ := curvePullback (l := l) j hj
+  let Fr := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+  let σ := specGeometricFrobenius k₀
   -- the twists `Q n = Tⁿ P` are irreducible local systems defined over `L`
-  have hTM (c n : ℕ) : (⇑T)^[M * c] ((⇑T)^[n] P) = (⇑T)^[n] P := by
+  have hTM (c n : ℕ) : (⇑V.frobeniusTwist)^[M * c] ((⇑V.frobeniusTwist)^[n] P) =
+      (⇑V.frobeniusTwist)^[n] P := by
     rw [← Function.iterate_add_apply, add_comm, Function.iterate_add_apply,
       Function.iterate_mul, Function.iterate_fixed hPM]
-  have hQN (n : ℕ) : (⇑T)^[N] ((⇑T)^[n] P) = (⇑T)^[n] P := by
+  have hQN (n : ℕ) : (⇑V.frobeniusTwist)^[Module.finrank k₀ L] ((⇑V.frobeniusTwist)^[n] P) =
+      (⇑V.frobeniusTwist)^[n] P := by
     obtain ⟨c, hc⟩ := hMN
     rw [hc]
     exact hTM c n
   have hQirr (n : ℕ) := V.isIrreducibleAdicLocalSystem_frobeniusTwist_iterate hP n
-  have hQl (n : ℕ) : IsAdicLisseSheaf (Subobject.underlying.obj ((⇑T)^[n] P)) := (hQirr n).1
+  have hQl (n : ℕ) : IsAdicLisseSheaf (Subobject.underlying.obj ((⇑V.frobeniusTwist)^[n] P)) :=
+    (hQirr n).1
   -- the restriction of the chain `𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢` to the curve
-  have hreal' : (Φ.obj 𝒢).IsReal ι := hreal.curvePullback j hj rfl
-  have : Mono (Φ.map i) := inferInstance
-  have : Mono (Φ.map j₂) := inferInstance
-  let cV : Φ.obj V ≅ cokernel (Φ.map i) := PreservesCokernel.iso Φ i
+  have hreal' : ((curvePullback j hj).obj 𝒢).IsReal ι := hreal.curvePullback j hj rfl
+  have : Mono ((curvePullback j hj).map i) := inferInstance
+  have : Mono ((curvePullback j hj).map j₂) := inferInstance
   -- each `Tⁿ P|_Y` is an irreducible constituent, hence pure
-  have hpure (n : Fin M) : ∃ w : ℝ,
-      (curvePullbackSub j hj V ((⇑T)^[n] P) (hQN n) (hQl n)).IsPunctuallyPureOfWeight ι w :=
-    hreal'.exists_isPunctuallyPureOfWeight_of_mono_cokernel (h𝒢.curvePullback j hj)
-      (Φ.map i) (Φ.map j₂) (h₁.curvePullback j hj) (h₂.curvePullback j hj)
-      (curvePullbackSubι j hj V _ (hQN n) (hQl n) ≫ cV.hom)
+  have hpure (n : Fin M) : ∃ w : ℝ, (curvePullbackSub j hj V ((⇑V.frobeniusTwist)^[n] P)
+      (hQN n) (hQl n)).IsPunctuallyPureOfWeight ι w :=
+    hreal'.exists_isPunctuallyPureOfWeight_of_mono_obj (curvePullback j hj) i j₂ π hπ hV
+      (h𝒢.curvePullback j hj) (h₁.curvePullback j hj) (h₂.curvePullback j hj)
+      (curvePullbackSubι j hj V _ (hQN n) (hQl n))
       (isIrreducibleLisse_curvePullbackSub j hj V _ (hQN n) (hQl n) (hjirr n))
   choose w hw using hpure
   -- the weights at the geometric point `t₀` over `x₀`
-  set t₀ := (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x₀
-  set e₀ := (X ↘ Spec (CommRingCat.of k₀)).degreeOver x₀.1
+  let t₀ := (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x₀
+  let e₀ := (X ↘ Spec (CommRingCat.of k₀)).degreeOver x₀.1
   have he₀ : 0 < e₀ := Nat.pos_of_ne_zero (Scheme.Hom.degreeOver_ne_zero _ x₀.2)
   have ht₀ : t₀ ≫ (Fr ^ e₀).hom = (σ ^ e₀).hom ≫ t₀ :=
-    Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow _ x₀
+    Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow (k := k₀) _ x₀
   have hsa (a : ℕ) : ((σ ^ a).inv ≫ t₀ ≫ (Fr ^ a).hom) ≫ (Fr ^ e₀).hom =
       (σ ^ e₀).hom ≫ (σ ^ a).inv ≫ t₀ ≫ (Fr ^ a).hom := by
     rw [Category.assoc, Category.assoc, Aut.pow_hom_comp_pow_hom, add_comm,
       ← Aut.pow_hom_comp_pow_hom, reassoc_of% ht₀, ← Category.assoc, ← Category.assoc,
-      Aut.pow_inv_comp_pow_hom, Category.assoc]
-  have hq : 1 < Nat.card k₀ ^ (N * e₀) :=
+      Aut.pow_inv_comp_pow_hom]
+    simp only [Category.assoc]
+  have hq : 1 < Nat.card k₀ ^ (Module.finrank k₀ L * e₀) :=
     Nat.one_lt_pow (Nat.mul_pos Module.finrank_pos he₀).ne' Finite.one_lt_card
   -- purity of `Tⁿ P` on the stalk at the translate `σ⁻ᵃ ≫ t₀ ≫ Frᵃ`, with its Frobenius
-  -- relative to `𝔽_{q^{N e₀}}`
+  -- relative to `𝔽_{q^{N e₀}}`, `N = [L : k₀]`
   have hstalk (n : Fin M) (a : Fin M) :
-      (V.stalkAt _ (N * e₀) (comp_geometricGaloisFrobenius_pow_mul _ (hsa a) N)).IsPureOfWeightOn
-        ι (Nat.card k₀ ^ (N * e₀)) (V.stalkSubspace _ ((⇑T)^[n] P)) (w n) := by
+      (V.stalkAt _ (Module.finrank k₀ L * e₀)
+        (comp_geometricGaloisFrobenius_pow_mul _ (hsa a) (Module.finrank k₀ L))).IsPureOfWeightOn
+        ι (Nat.card k₀ ^ (Module.finrank k₀ L * e₀))
+          (V.stalkSubspace _ ((⇑V.frobeniusTwist)^[n] P)) (w n) := by
     obtain ⟨s', hs'⟩ := hpts a
     have hs'Y := comp_geometricGaloisFrobenius_pow_of_comp_eq j hj θ hs'
-      (comp_geometricGaloisFrobenius_pow_mul _ (hsa a) N)
+      (comp_geometricGaloisFrobenius_pow_mul _ (hsa a) (Module.finrank k₀ L))
     obtain ⟨hs, E, hE⟩ := exists_equiv_stalkAt_curvePullback j hj rfl θ V hs' hs'Y
     have h1 := ((hw n).stalkAt s' he₀ hs'Y).isPureOfWeightOn_range _
-      (stalkAtMap_frobenius s' e₀ hs'Y _) (injective_stalkAtMap s' e₀ hs'Y _)
+      (stalkAtMap_frobenius s' e₀ hs'Y (curvePullbackSubι j hj V _ (hQN n) (hQl n)))
+      (injective_stalkAtMap s' e₀ hs'Y (curvePullbackSubι j hj V _ (hQN n) (hQl n)))
     have h2 := h1.map E.toLinearEquiv E.map_frobenius
     rw [hE _ (hQN n) (hQl n), natCard_eq_natCard_pow_finrank (k₀ := k₀) (k₁ := L),
       ← pow_mul] at h2
     exact h2
   -- all the weights are equal
-  have hP0 (a : Fin M) : (V.stalkAt t₀ (N * e₀)
-      (comp_geometricGaloisFrobenius_pow_mul _ ht₀ N)).IsPureOfWeightOn ι
-        (Nat.card k₀ ^ (N * e₀)) (V.stalkSubspace t₀ ((⇑T)^[a] P)) (w ⟨0, hM⟩) :=
-    isPureOfWeightOn_stalkSubspace_frobeniusTwist_iterate V _ a _ P _ _ (hstalk ⟨0, hM⟩ a)
-  have hPa (a : Fin M) : (V.stalkAt t₀ (N * e₀)
-      (comp_geometricGaloisFrobenius_pow_mul _ ht₀ N)).IsPureOfWeightOn ι
-        (Nat.card k₀ ^ (N * e₀)) (V.stalkSubspace t₀ ((⇑T)^[a] P)) (w a) := by
+  have hP0 (a : Fin M) : (V.stalkAt t₀ (Module.finrank k₀ L * e₀)
+      (comp_geometricGaloisFrobenius_pow_mul _ ht₀ (Module.finrank k₀ L))).IsPureOfWeightOn ι
+        (Nat.card k₀ ^ (Module.finrank k₀ L * e₀))
+          (V.stalkSubspace t₀ ((⇑V.frobeniusTwist)^[a] P)) (w ⟨0, hM⟩) :=
+    isPureOfWeightOn_stalkSubspace_frobeniusTwist_iterate V _ a (Iso.hom_inv_id_assoc _ _) _ P _ _
+      (hstalk ⟨0, hM⟩ a)
+  have hPa (a : Fin M) : (V.stalkAt t₀ (Module.finrank k₀ L * e₀)
+      (comp_geometricGaloisFrobenius_pow_mul _ ht₀ (Module.finrank k₀ L))).IsPureOfWeightOn ι
+        (Nat.card k₀ ^ (Module.finrank k₀ L * e₀))
+          (V.stalkSubspace t₀ ((⇑V.frobeniusTwist)^[a] P)) (w a) := by
     have h := hstalk a ⟨0, hM⟩
     have h0 : (σ ^ ((⟨0, hM⟩ : Fin M) : ℕ)).inv ≫ t₀ ≫ (Fr ^ ((⟨0, hM⟩ : Fin M) : ℕ)).hom =
         t₀ := by
@@ -251,16 +212,19 @@ theorem exists_isPunctuallyPureOfWeight_curvePullback
     exact (isPureOfWeightOn_stalkSubspace_congr V h0 _ _ _ _ _).1 h
   have hweq (a : Fin M) : w a = w ⟨0, hM⟩ := by
     obtain ⟨c, hc⟩ := hMN
-    have hfix : (⇑T)^[N * e₀] ((⇑T)^[a] P) = (⇑T)^[a] P := by
+    have hfix : (⇑V.frobeniusTwist)^[Module.finrank k₀ L * e₀] ((⇑V.frobeniusTwist)^[a] P) =
+        (⇑V.frobeniusTwist)^[a] P := by
       rw [hc, Nat.mul_assoc]
       exact hTM _ a
     exact (hPa a).weight_eq (hP0 a) (V.stalkSubspace_ne_bot t₀ (hQirr a))
       (fun _ hv ↦ V.frobenius_mem_stalkSubspace _ hfix hv) hq
   -- so the restriction of `V`, spanned by the `Tⁿ P|_Y`, is pure
   refine ⟨w ⟨0, hM⟩, isPunctuallyPureOfWeight_curvePullback_of_iSup_eq_top j hj V
-    (fun n : Fin M ↦ (⇑T)^[n] P) hspan (fun n ↦ hQN n) (fun n ↦ hQl n) fun n ↦ ?_⟩
+    (fun n : Fin M ↦ (⇑V.frobeniusTwist)^[n] P) hspan (fun n ↦ hQN n) (fun n ↦ hQl n)
+      fun n ↦ ?_⟩
   rw [← hweq n]
   exact hw n
+
 end CurveStep
 
 /-- The pullback of an irreducible local system along `e ≫ i`, for an isomorphism `e`, is an
@@ -298,7 +262,8 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth {X₀ : Scheme
     (i : 𝒢₁ ⟶ 𝒢₂) (j : 𝒢₂ ⟶ 𝒢) [Mono i] [Mono j] (h₁ : 𝒢₁.IsLisse) (h₂ : 𝒢₂.IsLisse)
     (hirr : (cokernel i).IsIrreducibleLisse) :
     ∃ w : ℝ, (cokernel i).IsPunctuallyPureOfWeight ι w := by
-  set f := X₀ ↘ Spec (CommRingCat.of k₀)
+  classical
+  let f := X₀ ↘ Spec (CommRingCat.of k₀)
   -- the geometric fiber is connected, regular and Noetherian
   have : ConnectedSpace f.geometricFiber :=
     GeometricallyConnected.geometrically_connectedSpace (f := f)
@@ -309,20 +274,23 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth {X₀ : Scheme
   have : Smooth f.geometricFiberToAlgebraicClosure := SmoothOfRelativeDimension.smooth d _
   have := IsRegular.of_smooth f.geometricFiberToAlgebraicClosure
   have := LocallyOfFiniteType.isLocallyNoetherian f.geometricFiberToAlgebraicClosure
-  set V := cokernel i
-  set T := V.frobeniusTwist
-  set Fr := f.geometricGaloisFrobenius
-  set σ := specGeometricFrobenius k₀
+  have : IsAffineHom f.geometricFiberToAlgebraicClosure :=
+    inferInstanceAs (IsAffineHom (Limits.pullback.snd _ _))
+  have : IsAffine f.geometricFiber := isAffine_of_isAffineHom f.geometricFiberToAlgebraicClosure
+  let V := cokernel i
+  let T := V.frobeniusTwist
+  let Fr := f.geometricGaloisFrobenius
+  let σ := specGeometricFrobenius k₀
   -- a geometric constituent `P`, defined over the extension of degree `M`
   obtain ⟨P, hP, M, hM, hPM⟩ :=
     V.exists_isIrreducibleAdicLocalSystem_frobeniusTwist_iterate_eq hirr.1 hirr.2.1
   have hP0 : P ≠ ⊥ := by
     rintro rfl
-    exact hP.2.1 ((Subobject.isZero_underlying_bot _).of_iso (Iso.refl _))
+    exact hP.2.1 ((isZero_zero _).of_iso Subobject.botCoeIsoZero)
   have hspan := V.iSup_frobeniusTwist_iterate_eq_top hirr hP.1 hP0 hM hPM
   -- a closed point `x₀` with nonzero stalk
   obtain ⟨x₀, hx₀⟩ := V.exists_nontrivial_stalk_of_not_isZero hirr.2.1
-  set t₀ := f.geometricFiberPointOfFinitePoint x₀
+  let t₀ := f.geometricFiberPointOfFinitePoint x₀
   have ht₀ : t₀ ≫ f.geometricFiberToAlgebraicClosure = 𝟙 _ := by
     simp [t₀, Scheme.Hom.geometricFiberPointOfFinitePoint]
   -- for every closed point `x`, a curve through `x₀` and `x`
@@ -348,7 +316,7 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth {X₀ : Scheme
     obtain ⟨L, _, _, _, Y, g, hMN, -, hYsm, hYgc, hYsep, hYlft, hYqc, θ, e, -, he⟩ :=
       f.exists_finiteModel_of_isClosedImmersion iC hCsm cx
         (by rw [reassoc_of% hcx]; exact hS' _ (Finset.mem_insert_self _ _)) hM
-    letI : Y.Over (Spec (CommRingCat.of L)) := ⟨g⟩
+    let : Y.Over (Spec (CommRingCat.of L)) := ⟨g⟩
     have : Fact (ringChar L ≠ l) := ⟨(Algebra.ringChar_eq k₀ L) ▸ Fact.out⟩
     have : SmoothOfRelativeDimension 1 (Y ↘ Spec (CommRingCat.of L)) := hYsm
     have : GeometricallyConnected (Y ↘ Spec (CommRingCat.of L)) := hYgc
@@ -366,7 +334,8 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth {X₀ : Scheme
       exact ⟨(specAlgHomAlgebraicClosureIso θ).hom ≫ c ≫ e.inv, by
         simp only [jY, Category.assoc, Iso.inv_hom_id_assoc, hc]⟩
     obtain ⟨w, hw⟩ := exists_isPunctuallyPureOfWeight_curvePullback jY hjY θ h𝒢 hreal i j h₁ h₂
-      hP hM hPM hspan hMN (fun n ↦ (hCirr n).upperStar_iso_comp e iC) x₀
+      (cokernel.π i) (cokernel.condition i) (cokernelIsCokernel i) hP hM hPM hspan hMN
+      (fun n ↦ (hCirr n).upperStar_iso_comp e iC) x₀
       (fun a ↦ hpt (Finset.mem_insert_of_mem (Finset.mem_image_of_mem _ (Finset.mem_univ a))))
     obtain ⟨s₀, hs₀⟩ :=
       hpt (Finset.mem_insert_of_mem (Finset.mem_image_of_mem sa (Finset.mem_univ ⟨0, hM⟩)))
