@@ -21,9 +21,98 @@
   "def-weil-finitely-generated-module",
   "def-weil-pbc-projective-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a representative $K'\\subset K$ of $\\mathcal P$, and write $K''=K/K'$. By [def-pc-perfect-ring-complex], choose bounded finite-projective representatives $P',P''$ of its two graded objects, and a common upper cohomology bound $N$ for $K',K''$. The same bound holds for $K$: if $z\\in K^i$ is a cycle with $i>N$, its image in $K''$ is a boundary; lift a primitive, subtract its differential from $z$, and then write the remaining cycle in $K'$ as a boundary. Define $T^i=K^i$ for $i<N$, $T^N=\\ker(d_K^N)$ and $T^i=0$ for $i>N$, and define $T'$ in the same way from $K'$. Thus $T'\\subset T$ is bounded above as a complex. The inclusions $T'\\to K'$ and $T\\to K$ induce isomorphisms on cohomology. The quotient map $T/T'\\to K''$ is also a quasi-isomorphism: in degrees below $N-1$ its cycle and boundary formulas coincide with those of $K''$; in degree $N-1$, if a lift has differential in $K'^N$, this differential is already a cycle, so the quotient cycle condition is unchanged; in degree $N$, a cycle in $K''$ lifts to $x\\in K^N$ with $dx\\in K'^{N+1}$, and $H^{N+1}(K')=0$ lets us subtract $y\\in K'^N$ with $dy=dx$. A class in $T/T'$ mapping to a boundary has $x-dt\\in K'^N$, which is a cycle and hence vanishes in $(T/T')^N$. Above $N$ both cohomologies vanish. Therefore $(T'\\subset T)\\to(K'\\subset K)$ is a filtered quasi-isomorphism in precisely the unbounded two-step localization in the statement; no identification of cohomological boundedness with termwise boundedness is being used.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "def-weil-abstract-derived-category",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/trace.tex",
+    "place": "Tag 03TB (trace-lemma-filtered-derived-category), preceded by the explicit good-truncation cycle calculation needed to enter DF^-"
+   }
+  },
+  {
+   "text": "Apply the two-step replacement assertion of [lem-trf-filtered-projective-comparison] to the bounded-above pair $T'\\subset T$. It gives a bounded-above two-step pair $Q'\\subset Q$, with projective graded modules, and a filtered quasi-isomorphism to $T'\\subset T$. Write $Q''=Q/Q'$. In each degree, lift the identity of the projective module $(Q'')^n$ along $Q^n\\twoheadrightarrow(Q'')^n$ using [def-weil-pbc-projective-module]. These degreewise splittings identify $Q^n=(Q')^n\\oplus(Q'')^n$ and its differential with $\\begin{pmatrix}d_{Q'}&\\eta\\\\0&d_{Q''}\\end{pmatrix}$. The equation $d_Q^2=0$ says $d_{Q'}\\eta+\\eta d_{Q''}=0$, so $\\eta:Q''\\to Q'[1]$ is a chain map under the shift convention of [def-weil-abstract-derived-category]. This matrix description holds for bounded-above $Q$, with no finite-generation or lower-bound assumption. A different section, obtained by adding $s^n:(Q'')^n\\to(Q')^n$, changes the off-diagonal map to $\\eta+d_{Q'}s-sd_{Q''}$; this is the negative of the chain-homotopy boundary for maps into $Q'[1]$.",
+   "uses": [
+    "lem-trf-filtered-projective-comparison",
+    "def-weil-pbc-projective-module",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/trace.tex",
+    "place": "Tag 03TB (trace-lemma-filtered-derived-category); degreewise splitting and block calculation, with cone convention Tags 014E/014F in derived.tex"
+   }
+  },
+  {
+   "text": "The chosen isomorphisms of graded derived objects give isomorphisms $a':P'\\xrightarrow{\\sim}Q'$ and $a'':P''\\xrightarrow{\\sim}Q''$ in $D(A)$. The surjectivity in [lem-pc-ring-derived-map-representative], applied to bounded projective sources $P'$ and $P''$ and unrestricted targets $Q',Q''$, gives chain representatives $\\alpha',\\alpha''$. They are quasi-isomorphisms since their derived images are isomorphisms and cohomology factors through the localization [def-weil-abstract-derived-category]. Form $\\delta=(a'[1])^{-1}\\eta a'':P''\\to P'[1]$ in $D(A)$. The same surjectivity gives a chain map $\\xi:P''\\to P'[1]$ representing $\\delta$. The two chain maps $\\alpha'[1]\\xi$ and $\\eta\\alpha''$ from the bounded projective source $P''$ to $Q'[1]$ now have equal images in $D(A)$. The injectivity in the same representative bijection gives a chain homotopy. Taking its negative, write its degree components as $h^n:(P'')^n\\to(Q')^n$ so that\n$\\alpha'^{n+1}\\xi^n-\\eta^n\\alpha''^n=d_{Q'}^nh^n-h^{n+1}d_{P''}^n$.\nThe minus sign here is forced by $d_{Q'[1]}=-d_{Q'}$.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (derived-definition-cone) and 014F (derived-lemma-functorial-cone); ordinary derived-map bijection supplied by the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "Define $M'=P'$, $M^n=(P')^n\\oplus(P'')^n$, and $d_M^n=\\begin{pmatrix}d_{P'}^n&\\xi^n\\\\0&d_{P''}^n\\end{pmatrix}$, with $M'$ the first summand. Because $\\xi$ maps into $P'[1]$, its chain-map equation is $d_{P'}\\xi+\\xi d_{P''}=0$; multiplication of the differential matrix therefore gives $d_M^2=0$. Coordinate inclusion and projection identify $M/M'=P''$ and split $0\\to M'\\to M\\to P''\\to0$ in every degree. Finite generating sets for the two summands generate $M^n$, and two maps from projective summands lift separately along a surjection, so the terms of $M$ are finitely generated projective [def-weil-finitely-generated-module, def-weil-pbc-projective-module]; the union of the two finite degree ranges bounds $M$. Define $B^n=\\begin{pmatrix}\\alpha'^n&h^n\\\\0&\\alpha''^n\\end{pmatrix}:M^n\\to Q^n$. The top-right chain-map equality $d_{Q'}^nh^n+\\eta^n\\alpha''^n=\\alpha'^{n+1}\\xi^n+h^{n+1}d_{P''}^n$ is exactly the identity proved in step 3; the diagonal equalities hold because $\\alpha',\\alpha''$ are chain maps. Thus $B$ is filtration-preserving, and its graded maps are the quasi-isomorphisms $\\alpha',\\alpha''$ [def-sp-filtered-complex-subquotients]. It is a filtered quasi-isomorphism, so the zigzag $M\\xrightarrow{B}Q\\to T\\to K$, with all subcomplexes retained, gives the required isomorphism in $DF_2(A)$. This proves the filtered isomorphism directly, without classifying objects by their triangles.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-projective-module",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (derived-definition-cone) and 014F (derived-lemma-functorial-cone), explicit block differential and homotopy-square matrix"
+   }
+  },
+  {
+   "text": "Let $j:(M'\\subset M)\\xrightarrow{\\sim}\\mathcal P$ be the isomorphism of step 4. The two-step, unrestricted-target bijection in [lem-trf-filtered-projective-comparison] applies to $M$ because it is bounded above and its two graded modules are projective in every degree. It therefore represents $j^{-1}uj$ by a filtration-preserving chain map $\\bar u:(M'\\subset M)\\to(M'\\subset M)$. The same node also identifies this Hom set with the Hom set in the globally finite filtered localization when both pairs are embedded with $F^0=M$, $F^1=M'$ and $F^2=0$. This compatibility is additional to the comparison inside $DF_2(A)$ needed for the item. This step uses the comparison in unbounded $DF_2(A)$, not merely Tag 03TB's bounded-above localization.",
+   "uses": [
+    "lem-trf-filtered-projective-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/trace.tex",
+    "place": "Tag 03TJ (trace-section-filtrations-perfect), full faithfulness in DF; the strengthened comparison node states the two-step unrestricted-localization assertion"
+   }
+  },
+  {
+   "text": "Filtration preservation gives $\\bar u(M')\\subseteq M'$. Restricting the chain-map equation yields a chain endomorphism of $M'$, and taking its quotient yields one of $M/M'$. The subcomplex and quotient operations [def-sp-filtration, def-sp-filtered-complex-subquotients] preserve homotopies of the stipulated kind and send filtered quasi-isomorphisms to ordinary quasi-isomorphisms. They therefore factor through the localization; applied to $j^{-1}uj$, these two operations show that the restricted and quotient endomorphisms represent exactly the graded endomorphisms induced by $u$. This is filtration preservation and makes no assertion about intersection with the image.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0121 (homology-definition-filtered), filtered morphisms; Tag 012K (homology-section-filtered-complex, definition-filtered-complex), subcomplex and quotient; the factorization follows directly from the localization universal property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-weil-abstract-derived-category",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "lem-pc-ring-derived-map-representative",
+  "lem-trf-filtered-projective-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/trace.tex",
+  "place": "Tags 03TB (trace-lemma-filtered-derived-category) and 03TJ (trace-section-filtrations-perfect), blueprint main-20261015 prop-trf-trace-formal-laws clause (2); explicit good truncation and filtered quasi-isomorphism calculation with cone conventions Tags 014E/014F (derived-definition-cone, derived-lemma-functorial-cone)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -91,7 +180,7 @@
   {
    "tool": "loogle",
    "query": "\"Filtered\" \"Projective\"",
-   "results": "0 hits: ; loogle: Function expected at\n  \"Filtered\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  \"Projective\"",
+   "results": "0 hits: ; loogle: Function expected at\\n  \"Filtered\"\\nbut this term has type\\n  String\\n\\nNote: Expected a function because this term is being applied to the argument\\n  \"Projective\"",
    "date": "2026-10-17",
    "verdict": "invalid query: syntax error; no absence evidence from this query"
   },
@@ -167,7 +256,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-trf-trace-formal-laws",
@@ -184,5 +273,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-filtered-projective-model",
+  "worker": "stage1",
+  "summary": "Repair of all four return points: retained the item statement; explicitly truncated an unbounded representative to a bounded-above two-step pair, strengthened the comparison support node to state the unrestricted-target filtered Hom bijection and two-step compatibility, constructed the finite-projective model and its filtered quasi-isomorphism by the signed block homotopy matrix, omitted the elementary cone child, and corrected every cone citation to 014E/014F. One new unsplit support node and no Mathlib leaves.",
+  "blueprint": "Realizes prop-trf-trace-formal-laws clause (2), first paragraph: perfect graded pieces give a bounded finite-projective filtered model and every localized endomorphism has a filtration-preserving chain representative. The six steps supply the truncation, bounded-above resolution, derived-map homotopy, explicit block quasi-isomorphism, unbounded Hom comparison and graded functoriality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-ND-d42414cc8",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-d42414cc8 (reviewer sub-agent of L); spot-checked: I read the item, its six steps, the new node lem-trf-filtered-projective-comparison, every cited statement, the parent prop-trf-trace-formal-laws (step 3 and clause 2), unit sk-p-trace, chapter sec-trace-formula, Stacks trace.tex 03TB (lemma-filtered-derived-category, l.664) and 03TJ (section-filtrations-perfect, l.885), the tags 014E/014F/0121/012K, and main-20261015 clause (2). The item statement is a faithful version of blueprint clause (2) in the parent's two-step localization DF_2. It is not weakened, and 'strict' is read as filtration-preserving. Checks by step. Step 1 (truncation): the degree-N surjectivity uses H^{N+1}(K')=0; for injectivity, x=k'+dt makes k' a cycle; in degree N-1, dx is already in ker d. Correct and elementary. Step 2: the block d_Q^2 equation gives the chain-map condition for eta into Q'[1], since d_{Q'[1]}=-d. Step 3: the leaf Qh_map_bijective allows arbitrary targets, and the homotopy sign works out as alpha'xi-eta alpha''=dh-hd with h=-k. Step 4: d_M^2=0, and the top-right entry of d_Q B = B d_M is exactly the step 3 identity, so B is a filtered qis; finite generation and boundedness hold. Steps 5-6: the two-step unrestricted Hom bijection gives the representative; restriction and quotient factor through DF_2. New node: true. I proved filtered K-projectivity myself by descending induction, lifting into the cycles of each acyclic F^qE through the projective gr^q summands. It is not a restatement of the item or the parent, and it is in-unit, so no tool uses are needed. Small cases tested: zero ring, K'=0, K''=0, eta=0, and Ferrand's Z/4 example (xi=2, M=K, filtered map restricts to 2 on K'). One fault, repaired: the new node redefined the finitely filtered homotopy category inline although def-kun-finite-filtered-module-homotopy already defines exactly that category (finite filtrations, unbounded degrees, filtered homotopies). The fix file now names KF(A) and cites that node, which is also added to stmt_deps. Other duplicate candidates were read and are not duplicates: lem-kun-finite-filtered-kflat-replacement gives unbounded free resolutions but no Hom bijection; lem-kun-filtered-quasi-isomorphism-fractions gives fractions only; def-trf-bounded-filtered-derived-category, lem-trf-filtered-derived-operation-lifts and lem-trf-filtered-trace-additivity concern sheaves or DF^+. No cycle, no SGA, no tool_uses, no nodes dropped.; 1 file(s) fixed by the reviewer"
  }
 }

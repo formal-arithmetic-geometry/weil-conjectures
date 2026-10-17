@@ -14,11 +14,110 @@
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-inverse-image",
-  "sk-def-bc"
+  "sk-def-bc",
+  "sbc-def-base-change-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $k:Y'\\to Y$ be the unique morphism with $e\\circ k=\\pi\\circ e'$ and $h\\circ k=h'$, obtained from the universal property in [def-weil-pbc-cartesian-square]. Its square with $\\pi$, $e$, $e'$ is Cartesian: a pair of maps to $Y$ and $T'$ with the same map to $T$ gives maps to $X$ and $T'$ with the same map to $S$, hence a unique map to $Y'$; both constructions are inverse by uniqueness. Thus [lem-sbc-integral-morphism-base-change] makes $k$ integral. In particular $g'=g\\circ\\pi$ and $h'=h\\circ k$ give a vertical paste of the exchanged squares.",
+   "uses": [
+    "def-weil-pbc-cartesian-square",
+    "lem-sbc-integral-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WL, lemma-base-change-finite, second assertion; Cartesian construction in IntegralBaseChange.lean:100-104"
+   }
+  },
+  {
+   "text": "By [sbc-lem-integral-etale-direct-image-exact], $\\pi_*$ and $k_*$ are exact on abelian etale sheaves. They are also exact on $\\Lambda$-module sheaves: forgetting scalars is exact by [lem-weil-pbc-exchange-forget-coefficients], their underlying direct images are the abelian ones by [def-weil-pbc-direct-image], and kernels, images and cokernels have their induced module structures, so an underlying exact sequence is exact as a module sequence. Also every inverse image here is exact by [prop-weil-pbc-inverse-image-modules-exact](3). Apply [lem-weil-pbc-exact-functor-derived-functor](2) to these exact functors. On bounded-below complexes, $R\\pi_*$ and $Rk_*$ are the termwise functors; in particular there is a canonical natural isomorphism $\\iota_M:(\\pi_*M)[0]\\xrightarrow{\\sim}R\\pi_*(M[0])$.",
+   "uses": [
+    "sbc-lem-integral-etale-direct-image-exact",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "def-weil-pbc-direct-image",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04C2, lemma-what-integral (4); derived.tex Tag 015F, lemma-right-derived-exact-functor (2),(4); module extension by underlying exact sequences"
+   }
+  },
+  {
+   "text": "Fix $K\\in D^+(T'_{\\mathrm{et}},\\Lambda)$. For the Cartesian square of $k$ over $\\pi$, [lem-sbc-integral-underived-exchange] supplies the canonical sheaf-level isomorphism $e^{-1}\\pi_*\\xrightarrow{\\sim}k_*e'^{-1}$ for arbitrary $\\Lambda$. Its derived exchange $E:e^{-1}R\\pi_*\\to Rk_*e'^{-1}$ is also an isomorphism. To verify this for the canonical arrow rather than just its endpoints, first take $\\Lambda=\\mathbf Z$ and a bounded-below K-injective representative $I$ of $K$, followed by a K-injective resolution $j:e'^{-1}I\\to J$. The formula [lem-weil-pbc-derived-exchange-termwise](a),(b) represents the derived exchange by the termwise sheaf exchange followed by $k_*j$. The former is a degreewise isomorphism, and the latter a quasi-isomorphism: [lem-weil-pbc-exact-functor-bounded-below] identifies its cohomology maps with $k_*H^r(j)$ since $k_*$ is exact. Thus the canonical abelian derived exchange is an isomorphism. For arbitrary $\\Lambda$, clauses (1)-(3) of [lem-weil-pbc-exchange-forget-coefficients] identify the forgotten canonical derived arrow with precisely this abelian arrow and explicitly reflect its invertibility. Consequently $E_K$ is a natural isomorphism for every $K\\in D^+(T'_{\\mathrm{et}},\\Lambda)$.",
+   "uses": [
+    "lem-sbc-integral-underived-exchange",
+    "lem-weil-pbc-derived-exchange-termwise",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYP, lemma-integral-pushforward-commutes-with-base-change; sites-cohomology.tex Tag 0D6J, lemma-modules-abelian-unbounded (3), and Tag 07A7, remark-base-change; derived.tex Tag 015F"
+   }
+  },
+  {
+   "text": "Put $K=M[0]$ and $N=(\\pi_*M)[0]$. Use the canonical composition isomorphisms $d_{g,\\pi}:Rg'_*\\xrightarrow{\\sim}Rg_*R\\pi_*$ and $d_{h,k}:Rh'_*\\xrightarrow{\\sim}Rh_*Rk_*$ of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], on the constant-ring etale topoi. Define natural isomorphisms in $D^+(X_{\\mathrm{et}},\\Lambda)$ by\n$$\\alpha=(p^{-1}d_{g,\\pi,K}^{-1})\\circ p^{-1}Rg_*(\\iota_M):p^{-1}Rg_*N\\xrightarrow{\\sim}p^{-1}Rg'_*K,$$\n$$\\beta=d_{h,k,e'^{-1}K}^{-1}\\circ Rh_*(E_K)\\circ Rh_*e^{-1}(\\iota_M):Rh_*e^{-1}N\\xrightarrow{\\sim}Rh'_*e'^{-1}K.$$\nThese are well defined: all inputs are bounded below (in particular $K$ and $N$ are in degree zero), exact inverse images preserve this property, and the direct images and their composition comparisons restrict to $D^+$. The invertibility of $E_K$ is Step 3; all other factors are functors applied to isomorphisms or canonical composition isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; construction of the two endpoint isomorphisms expanding etale-cohomology.tex Tag 0F04, lemma-base-change-q-integral-top, final proof paragraph"
+   }
+  },
+  {
+   "text": "Let $b_C=\\operatorname{BC}_{p,g}(C)$ and $b'_K=\\operatorname{BC}_{p,g'}(K)$ denote the derived maps of [sbc-def-base-change-map]. Apply the vertical-pasting formula of [sk-lem-pbc-exchange-pasting] with $(f,e,h,f',e',g,g')$ in that node replaced, respectively, by $(\\pi,g,p,k,h,e,e')$. In the present notation it says\n$$d_{h,k,e'^{-1}K}\\circ b'_K=Rh_*(E_K)\\circ b_{R\\pi_*K}\\circ p^{-1}d_{g,\\pi,K}.$$\nHere each $d$ is the canonical comparison of Step 4, not an arbitrary endpoint isomorphism. Naturality of $b$ for $\\iota_M:N\\to R\\pi_*K$ says\n$$b_{R\\pi_*K}\\circ p^{-1}Rg_*(\\iota_M)=Rh_*e^{-1}(\\iota_M)\\circ b_N.$$\nSubstituting and multiplying the pasting identity on the left by $d_{h,k,e'^{-1}K}^{-1}$ and on the right by $p^{-1}d_{g,\\pi,K}^{-1}\\circ p^{-1}Rg_*(\\iota_M)$ yields $\\beta\\circ b_N=b'_K\\circ\\alpha$.",
+   "uses": [
+    "sbc-def-base-change-map",
+    "sk-lem-pbc-exchange-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E46, remark-compose-base-change (vertical composition of the base-change maps constructed in Tag 07A7, remark-base-change); current blueprint sk-lem-pbc-exchange-pasting, second displayed formula; arrow calculation in IntegralBaseChange.lean:105-123"
+   }
+  },
+  {
+   "text": "Apply $H^r$ to Step 5. By [lem-weil-pbc-exact-functor-bounded-below], exactness of $p^{-1}$ identifies $H^r(p^{-1}Rg_*N)$ with $p^{-1}R^rg_*(\\pi_*M)$, and similarly for $g'$. The target identifications are $H^r(Rh_*e^{-1}N)=R^rh_*e^{-1}(\\pi_*M)$ and $H^r(Rh'_*e'^{-1}K)=R^rh'_*e'^{-1}M$, by the higher-direct-image convention [def-weil-pbc-direct-image] and exactness of $e^{-1},e'^{-1}$. Define $A_M=H^r(\\alpha)$ and $B_M=H^r(\\beta)$ under these identifications. They are natural isomorphisms because cohomology is a functor. By [sbc-def-base-change-map], $H^r(b_N)=b_{\\pi_*M}$ and $H^r(b'_K)=b'_M$. Functoriality of $H^r$ gives exactly $B_M\\circ b_{\\pi_*M}=b'_M\\circ A_M$ for every integer $r$. No step used surjectivity, quasi-compactness of $g$, a torsion condition, or any lower-degree base-change assumption.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-pbc-direct-image",
+    "sbc-def-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F04, lemma-base-change-q-integral-top, three identifications in final proof paragraph; degreewise arrow comparison in IntegralBaseChange.lean:60-75,95-123"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-direct-image",
+  "lem-sbc-integral-morphism-base-change",
+  "lem-sbc-integral-underived-exchange",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "sbc-def-base-change-map",
+  "sbc-lem-integral-etale-direct-image-exact",
+  "sk-lem-pbc-exchange-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F04 proof, with explicit canonical-arrow verification following read-only IntegralBaseChange.lean:82-123 and the cited generic derived-composition/pasting nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,10 +153,52 @@
    "results": "{\"t\": \"2026-10-17T02:38:52Z\", \"tool\": \"leanfinder\", \"query\": \"Vertical pasting of etale derived exchange with an integral direct image gives isomorphic cohomology arrows for a sheaf and its direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_inv\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'\"], \"digest\": \"58b4df802798cbb1\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned algebraic base-change and general homological/sheaf lemmas do not state this etale higher-direct-image comparison; no one-line specialization gives it"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChangeHomologyMap|derivedBaseChangeMapPlus|arrowIso.*baseChange",
+   "results": "{\"t\": \"2026-10-17T03:34:47Z\", \"tool\": \"grep\", \"query\": \"baseChangeHomologyMap|derivedBaseChangeMapPlus|arrowIso.*baseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf pushforward, ring or scheme base change, or Kahler differentials, not the cohomological integral comparison arrow"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral pushforward and vertical pasting of etale sheaf derived base change morphisms",
+   "results": "{\"t\": \"2026-10-17T03:34:48Z\", \"tool\": \"leansearch\", \"query\": \"Integral pushforward and vertical pasting of etale sheaf derived base change morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pushforward\", \"CategoryTheory.Functor.sheafPushforwardContinuous\", \"SheafOfModules.pushforward_map_val\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"SheafOfModules.pushforwardSections\", \"SheafOfModules.pushforward\", \"TopCat.Sheaf.pushforward_map\", \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\"], \"digest\": \"e2fc22b665c35c22\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf pushforward, ring or scheme base change, or Kahler differentials, not the cohomological integral comparison arrow"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"baseChange\"",
+   "results": "{\"t\": \"2026-10-17T03:34:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf pushforward, ring or scheme base change, or Kahler differentials, not the cohomological integral comparison arrow"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral etale direct image identifies cohomological base change arrows for a composite test morphism",
+   "results": "{\"t\": \"2026-10-17T03:34:49Z\", \"tool\": \"leanfinder\", \"query\": \"Integral etale direct image identifies cohomological base change arrows for a composite test morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.of_comp\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.Etale.comp\", \"StandardEtalePair.HasMap.map\"], \"digest\": \"3f5dcaece309f65e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf pushforward, ring or scheme base change, or Kahler differentials, not the cohomological integral comparison arrow"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an integral morphism pi the map p inverse R g direct image pi direct image M equals the composite test base change arrow",
+   "results": "{\"t\": \"2026-10-17T03:34:49Z\", \"tool\": \"leanfinder\", \"query\": \"For an integral morphism pi the map p inverse R g direct image pi direct image M equals the composite test base change arrow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst'\", \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc\"], \"digest\": \"4581003e26fe145e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf pushforward, ring or scheme base change, or Kahler differentials, not the cohomological integral comparison arrow"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact right adjoint pushforward and Beck Chevalley exchange give a commutative square of derived functor comparison morphisms",
+   "results": "{\"t\": \"2026-10-17T03:42:27Z\", \"tool\": \"leanfinder\", \"query\": \"An exact right adjoint pushforward and Beck Chevalley exchange give a commutative square of derived functor comparison morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived\\u03b5_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.Adjunction.derived\\u03b5_fac_app_assoc\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived\\u03b5\", \"CategoryTheory.Adjunction.derived\\u03b7_fac_app\", \"CategoryTheory.Adjunction.derived_unit\"], \"digest\": \"22714484b452fcbb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived adjunction identities and right-derived comparison transformations do not assert integral etale exchange or the comparison of these cohomological arrows"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sbc-module-bc-integral-surjective",
@@ -87,5 +228,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sbc-integral-test-pushforward-arrow",
+  "worker": "stage1",
+  "summary": "Six steps construct the actual derived arrow isomorphism and apply cohomology. Reuses integral exchange/exactness, generic derived composition, coefficient comparison and vertical pasting; no new nodes and no statement correction. Separately checks canonical integral derived exchange through the existing abelian termwise formula, so no coefficient category is silently changed.",
+  "blueprint": "Realizes the integral-surjective field replacement in sk-lem-universal-datum, Step 2 of main-20261015: the three identifications in Stacks 0F04 now include the canonical-arrow identity. The same construction is the auxiliary target-side comparison in the inherited universal-datum unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-derived-exchange-termwise",
+    "why": "Generic The termwise construction of the derived exchange morphism used only for the canonical derived comparison/cohomology construction; the universal-datum unit provides no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Generic Exact functors preserve bounded below derived objects used only for the canonical derived comparison/cohomology construction; the universal-datum unit provides no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic The functor induced by an exact functor is its own right and left derived functor used only for the canonical derived comparison/cohomology construction; the universal-datum unit provides no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic The derived exchange morphism commutes with forgetting the coefficient ring used only for the canonical derived comparison/cohomology construction; the universal-datum unit provides no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic Canonical composition comparison for unbounded ringed-topos direct images used only for the canonical derived comparison/cohomology construction; the universal-datum unit provides no replacement for this categorical tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact used only for the canonical derived comparison/cohomology construction; the universal-datum unit provides no replacement for this categorical tool."
+   },
+   {
+    "node": "sk-lem-pbc-exchange-pasting",
+    "why": "Generic Identity and pasting used only for the canonical derived comparison/cohomology construction; the universal-datum unit provides no replacement for this categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-derived-exchange-termwise",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "sk-lem-pbc-exchange-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-60d4dd5c5",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-60d4dd5c5 (reviewer sub-agent of L); spot-checked: I read the item, all 8 stmt_deps and 13 proof_deps statements, the unit sk-lem-universal-datum, the main-20261015 sections for that unit and for sk-lem-pbc-exchange-pasting, and Stacks 0F04 (etale-cohomology.tex l.16939-16994), 0EYP (l.8350) and 04C2(4) (l.6056). I also read the reference Lean IntegralBaseChange.lean:55-123. The statement is correct for any integral pi, with no surjectivity and no qcqs condition on g. It uses arbitrary Lambda module coefficients with the module clause of sbc-def-base-change-map, so no coefficient category is silently changed. It matches the arrow-iso form of the Lean and the three identifications in the 0F04 proof. Small cases check out: pi=id, M=0, Lambda=0, T' empty, a non-surjective closed immersion, r<0 and r=0. Step 1: the universal-property argument shows that Y'->Y over pi is Cartesian, so k is integral. Step 2: module exactness of pi_* and k_* follows correctly from abelian exactness, the forgetful compatibility and exact For. iota_M comes from exact-functor-derived-functor(2). Step 3: the underived exchange matched as (f,g,f',g')=(pi,e,k,e') and the termwise formula (a),(b) make the canonical abelian derived exchange an isomorphism, because k_*(j) is a quasi-isomorphism. Clause (3) of forget-coefficients and its iff transfer this to Lambda. Step 4: I checked the kappa directions and every factor of alpha and beta. Step 5: I recomputed the pasting substitution (f,e,h,f',e',g,g')->(pi,g,p,k,h,e,e') together with naturality at iota, and it gives beta b_N = b'_K alpha exactly. E is the same mate in Steps 3 and 5 (sk-def-exchange is realized by def-weil-pbc-derived-exchange). Step 6: taking H^r with the same endpoint identifications gives B b = b' A. There are no new nodes. Nothing duplicates the item: sbc-lem-bc-integral-surjective treats the abelian n-torsion case inline, and lem-sbc-integral-pushforward-base-change-arrow is the source-side comparison. There is no cycle: the item is not reachable from its dependencies. I accept all seven declared tool_uses as generic black boxes that do not replace the unit route: derived-exchange-termwise, exact-functor-bounded-below, exact-functor-derived-functor, exchange-forget-coefficients, ringed-topoi-derived-pushforward-composition, inverse-image-modules-exact and sk-lem-pbc-exchange-pasting. I made no changes."
  }
 }

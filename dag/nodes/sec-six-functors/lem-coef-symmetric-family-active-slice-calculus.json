@@ -13,9 +13,105 @@
   "lem-coef-active-operad-cocartesian-concatenation",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=\\Delta^n\\times N(\\mathrm{Fin}_*)$. The join-slice projection is a right fibration by [lem-coef-infinity-slice-right-fibration]; its pullback to the quasicategory $M_0^\\otimes$ is again a right fibration directly from the horn-lifting definition in [def-coef-infinity-fibrations]. Hence $X$ is a quasicategory. Restriction to the first vertex of $\\sigma$ fixes the entire source simplex and is a trivial Kan fibration by [lem-coef-initial-poset-slice-restriction], applied to the least vertex of $[r]$, first in $M^\\otimes$ and then in $M^\\otimes_{\\mathrm{act}}$. In the second application use its full coordinate-zero subcategory $(M_0^\\otimes)_{\\mathrm{act}}$. The source coordinate-zero subcategories are full because the parameter simplex has only identity endomorphisms. Also a transformation between active cones has active source edge: its composite with an active edge is active, forcing the source map to send no non-basepoint input to the basepoint. Thus the second slice is exactly $X_{\\mathrm{act}}$. The asserted lifting for all monomorphisms gives contractible spaces of compatible first-vertex extensions, including prescribed source triangles and their higher simplices. Mapping spaces may therefore be computed from incoming-arrow triangles by [lem-cbc-right-fibration-morphism-space]. Let $C$ have source $x$ over $\\langle k\\rangle$, and let $\\alpha:\\langle k\\rangle\\to\\langle l\\rangle$ underlie its arrow to $\\sigma(0)$. Set $D=\\{u\\ne *:\\alpha(u)\\ne *\\}$. Factor $\\alpha$ through the inert projection $\\langle k\\rangle\\to D_+$ followed by the active restriction $D_+\\to\\langle l\\rangle$, where $D_+=D\\amalg\\{*\\}$. This is an explicit factorization of finite pointed maps, not an application of an operad theorem to the total family. By [def-coef-symmetric-operadic-family], the inert projection has a $\\pi$-cocartesian lift $i:x\\to x_D$ inside $M_0^\\otimes$. Its universal property from [lem-coef-infinity-cocartesian-mapping-criterion] factors the first incoming arrow through $x_D$ over the specified factored base arrow. Extend this active incoming arrow over $\\sigma$ and the unit triangle by the first-vertex lifting just cited. Its cross edges are active: they compose the active map $D_+\\to\\langle l\\rangle$ with the active base maps of $\\sigma$. Write $L(C)$ for this cone, with unit source edge $i$.\n\nFor an active cone $A$ with source $y$, a transformation $C\\to A$ has a source map $g:x\\to y$ whose pointed map $\\beta$ satisfies $\\alpha_A\\beta=\\alpha$. Since $\\alpha_A$ is active, $\\beta$ sends exactly the complement of $D$ to the basepoint, so it factors uniquely through $D_+$. The cocartesian mapping-space square for $i$ identifies the space of such $g$, with its cone homotopy, with the space of maps $x_D\\to y$ and the factored cone homotopy. This is an equivalence of full mapping spaces, natural in $A$, not merely a bijection of arrows: take the homotopy fibers specifying the incoming-arrow triangles in [lem-cbc-right-fibration-morphism-space] and then the contractible first-vertex extension spaces. It gives $\\operatorname{Map}_X(C,A)\\simeq\\operatorname{Map}_{X_{\\mathrm{act}}}(L(C),A)$. The dual representability criterion [lem-coef-infinity-pointwise-adjoint-criterion] assembles these representing objects into the asserted coherent left adjoint.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "def-coef-infinity-fibrations",
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-pointwise-adjoint-criterion",
+    "lem-coef-initial-poset-slice-restriction",
+    "lem-cbc-right-fibration-morphism-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, step (1), printed pp.336-337; relative factorization, block decomposition, and coherent cone identifications expanded by the second reader."
+   }
+  },
+  {
+   "text": "Construct the output comparison explicitly. Each $J_b$ is the pullback of the right slice of $M^\\otimes_{\\mathrm{act}}$ to its full coordinate-zero subcategory $(M_0^\\otimes)_{\\mathrm{act}}$, so its right-fibration base for the mapping-space calculation is this active subcategory. For an active arrow $a:x\\to b$ with pointed map $\\alpha:\\langle k\\rangle\\to\\langle s\\rangle$, put $D_j=\\alpha^{-1}(j)$ for $1\\leq j\\leq s$. Activity says that the $D_j$ partition all non-basepoint inputs, including empty blocks. Lift $\\langle k\\rangle\\to(D_j)_+$ inertly at $x$ in $M_0^\\otimes$, obtaining $p_j:x\\to x_j$. The composite $x\\to b\\to b_j$ factors through $p_j$, by [lem-coef-infinity-cocartesian-mapping-criterion], to an active $a_j:x_j\\to b_j$. For a triangle $a' h=a$ in $J_b$, its pointed source map $h$ is active and sends $D_j$ into $D'_j$, since $\\alpha' h=\\alpha$. The composite $p'_j h$ therefore factors through $p_j$ to $h_j:x_j\\to x'_j$ with its triangle $a'_j h_j=a_j$. The same cocartesian universal property applies to the mapping spaces of triangles, hence includes their paths and higher simplices. The slice formulas of [lem-coef-infinity-slice-right-fibration] and [lem-cbc-right-fibration-morphism-space] identify precisely these coherent triangles and their mapping spaces. Thus this construction gives the comparison $P:J_b\\to\\prod_jJ_{b_j}$.\n\nFor its inverse, start with active $a_j:x_j\\to b_j$. Form $x=\\bigoplus_jx_j$ in the single operad $M_0^\\otimes$, using [lem-coef-active-operad-cocartesian-concatenation]. Its inert projections $p_j$ onto the subtuples exist by [def-coef-symmetric-operadic-family]. Define the pointed map $\\alpha$ on the concatenated inputs by sending the entire $j$th block to $j$. The relative Segal homotopy-pullback square of [def-coef-symmetric-operadic-family], restricted to the base edge $(0\\to t,\\alpha)$ for the coordinate $t$ of $b$, identifies arrows $x\\to b$ over this edge with the product of arrows $x\\to b_j$ over its output composites. Take the components $a_jp_j$. This constructs $a:x\\to b$, with a contractible space of choices of the arrow together with these specified component identifications. For source transformations use $\\bigoplus_jh_j$, formed in $M_0^\\otimes$ by the same concatenation lemma; the component triangles specify the triangle $a'(\\bigoplus_jh_j)=a$ under the Segal equivalence. Applying the mapping-space equivalence with its path coordinates gives the transformations and their higher compatibilities, not only their component equations. These natural constructions give $Q:\\prod_jJ_{b_j}\\to J_b$. No concatenation of cross-parameter arrows in the total family is assumed.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-cbc-right-fibration-morphism-space",
+    "lem-coef-active-operad-cocartesian-concatenation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, step (1), printed pp.336-337; relative factorization, block decomposition, and coherent cone identifications expanded by the second reader."
+   }
+  },
+  {
+   "text": "Check the two composites, including the source and cone comparisons. For a tuple $(a_j)$, the blocks of the active pointed map used to define $Q$ are its original input blocks. The projections of $\\bigoplus_jx_j$ onto these blocks recover $x_j$ and $a_j$ by the inert cocartesian universal property in [lem-coef-infinity-cocartesian-mapping-criterion]. This gives $PQ\\simeq\\mathrm{id}$. Conversely, the blocks $\\alpha^{-1}(j)$ of an active $a:x\\to b$ exhaust its inputs. The fiber Segal axiom for the operad $M_0^\\otimes$, as stated in [lem-coef-operadic-approximation-restriction], reconstructs $x$ from those colors; the symmetric concatenation of [lem-coef-active-operad-cocartesian-concatenation] gives the equivalence $\\bigoplus_jx_j\\simeq x$, allowing the permutation which puts the blocks consecutively. Under this equivalence, $a$ and the arrow constructed by $Q$ have the same output components $a_jp_j$. The relative Segal equivalence of [def-coef-symmetric-operadic-family] identifies the arrows together with their component homotopies. Naturality of these mapping-space comparisons gives $QP\\simeq\\mathrm{id}$. The cone mapping formula in [lem-coef-infinity-join-cone-calculus], applied to the opposite quasicategory so that its left cones are the cocones used here, retains the specified composition paths, so these natural equivalences identify the whole canonical cone, as well as its source diagram. Their components are equivalences by the pointwise criterion of [lem-cbc-enhanced-functor-cone-calculus]. The quasi-inverse characterization in [lem-coef-joyal-quasicategory-characterizations] now gives the categorical equivalence asserted in the statement.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-active-operad-cocartesian-concatenation",
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, step (1), printed pp.336-337; relative factorization, block decomposition, and coherent cone identifications expanded by the second reader."
+   }
+  },
+  {
+   "text": "Let $F:M^\\otimes\\to E^\\otimes$ be an inert-preserving family map. It preserves all base pointed maps, hence the blocks $D_j$ and activity; by the family-map definition [def-coef-symmetric-operadic-family] it sends each $p_j$ and each $b\\to b_j$ to an inert edge. Consequently the image of the triangle defining $a_j$ is the factorization triangle for $F(a)$ through $F(p_j)$. Its identification with any chosen factorization in $E^\\otimes$ is the contractible comparison specified by [lem-coef-infinity-cocartesian-mapping-criterion]. The restriction $F|_{M_0^\\otimes}$ is a map of symmetric infinity-operads, so [lem-coef-active-operad-cocartesian-concatenation] identifies $F(\\bigoplus_jx_j)$ with $\\bigoplus_jF(x_j)$ and preserves the symmetry, associativity and unit coherences used in step 3. Each output component of the image cone is $F(a_j)F(p_j)$, with its actual image composition homotopy. The output mapping-space Segal axiom in $E^\\otimes$, stated in [lem-coef-operadic-approximation-restriction], then identifies this image cone with the assembled output cones. Naturality in the ambient quasicategory of the join-cone comparison [lem-coef-infinity-join-cone-calculus], applied to opposite quasicategories as in step 3, ensures that these are identifications of diagrams and coherent cones in every simplicial degree. This proves the claimed compatibility after applying $F$; it does not assert that the induced functor from $J_b$ to the active slice in $E^\\otimes$ is itself an equivalence.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-active-operad-cocartesian-concatenation",
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, step (1), printed pp.336-337; relative factorization, block decomposition, and coherent cone identifications expanded by the second reader."
+   }
+  },
+  {
+   "text": "For $s=0$, an active pointed map $\\langle k\\rangle\\to\\langle0\\rangle$ exists exactly when $k=0$. Thus every object of $J_b$ has the empty source tuple. The zero fiber of $M_0^\\otimes$ is a terminal quasicategory up to equivalence by the fiber Segal axiom of [lem-coef-operadic-approximation-restriction], and it is nonempty. The relative Segal square of [def-coef-symmetric-operadic-family] at $b$ has a point in both product positions, so its left vertical map is an equivalence. In particular, for each empty-tuple source $x$ its homotopy fiber at the unique base map $(0,\\langle0\\rangle)\\to(t,\\langle0\\rangle)$ is contractible; hence such incoming arrows exist. For any two such arrows, the space of source maps is contractible and the space of compatible triangles is contractible by [lem-cbc-right-fibration-morphism-space]. Therefore $J_b$ is equivalent to the point, as required for the empty product. The canonical cone still has its apex and the arrow from the empty source tuple; it is not an empty diagram. Its source tuple is the unit of [lem-coef-active-operad-cocartesian-concatenation]. For $s=1$ the only block is the whole input tuple, so $P$ and $Q$ are the identity up to their specified unit coherences. A nullary arrow into a color has an empty block and is retained in step 2, since no block was required nonempty. The proof of step 1 also permits $D=\\varnothing$, repeated positive coordinates of $\\sigma$, and $r=0$.",
+   "uses": [
+    "lem-coef-operadic-approximation-restriction",
+    "def-coef-symmetric-operadic-family",
+    "lem-cbc-right-fibration-morphism-space",
+    "lem-coef-active-operad-cocartesian-concatenation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, step (1), printed pp.336-337; relative factorization, block decomposition, and coherent cone identifications expanded by the second reader."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "def-coef-symmetric-operadic-family",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-right-fibration-morphism-space",
+  "lem-coef-active-operad-cocartesian-concatenation",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-pointwise-adjoint-criterion",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-initial-poset-slice-restriction",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-operadic-approximation-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Theorem 3.1.2.3, proof step (1), printed pp.336-337; relative cocartesian factorization and blockwise Segal argument expanded by the second reader."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +147,31 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property in the category of simplicial sets generated by all horn inclusions, defined as the supremum over all dimensions $n$ of the inclusions of the $i$-th horn $\\\\Lambda[n+1, i]$ into t\"}\n  {\"name\": \"SSet.modelCategoryQuillen.I\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property defined by the family of inclusions of the boundary of the standard $n$-simplex $\\\\partial\\\\Delta[n]$ into the standard $n$-simplex $\\\\Delta[n]$ for each natural number $n$. This co\"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n  {\"name\": \"SSet.IsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Prop\", \"doc\": \"A predicate on simplicial sets characterizing those that satisfy the strict Segal condition, which imposes constraints on the compatibility of simplices with composition operations in higher categoric\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [hf : HomotopicalAlgebra.Fibration f] {n : ℕ} (i : Fin (n + 2)),\\n  CategoryTheory.HasLiftingProperty (SSet.horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"{X : SSet} →\\n  X.StrictSegal →\\n    (n : ℕ) →\\n      (SSet.Truncated.rightExtensionInclusion X 2).IsPointwiseRightKanExtensionAt (Opposite.op (SimplexCategory.mk n))\", \"doc\": \"For a strict Segal space $X$ and natural number $n$, the right Kan extension of $X$ along the inclusion of the truncated simplex category $\\\\Delta_{\\\\leq 2}$ is pointwise at the object $[n]$. This means\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ (n : ℕ) (i : Fin (n + 2)), SSet.modelCategoryQuillen.J (SSet.horn (n + 1) i).ι\", \"doc\": \"For any natural number $ n $ and index $ 0 \\\\leq i \\\\leq n+1 $, the inclusion morphism $ \\\\Lambda^{i}[n+1] \\\\to \\\\Delta[n+1] $ of the $ i $-th horn into the standard $ (n+1) $-simplex is a generating acycl\"}",
    "date": "2026-10-17",
    "verdict": "No match: strict Segal spines (SimplicialSet/StrictSegal.lean:41-62), symmetry of ordinary categories and simplex generators do not define symmetric infinity-operads or their active slices."
+  },
+  {
+   "tool": "grep",
+   "query": "Operad|inert.*active|active.*inert",
+   "results": "{\"t\": \"2026-10-17T03:42:05Z\", \"tool\": \"grep\", \"query\": \"Operad|inert.*active|active.*inert\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"Mathlib/Tactic/Linter/FlexibleLinter.lean\", \"Mathlib/Tactic/Linter/FlexibleLinter.lean\"], \"digest\": \"5a4333d638360a78\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: inspected results concern ordinary categorical cones or incidental text occurrences, not symmetric infinity-operads and their active incoming slices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reflective full subcategory of incoming operadic cones is obtained by deleting inputs sent to the basepoint; active slices split by output fibers",
+   "results": "{\"t\": \"2026-10-17T03:42:05Z\", \"tool\": \"leanfinder\", \"query\": \"A reflective full subcategory of incoming operadic cones is obtained by deleting inputs sent to the basepoint; active slices split by output fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.CreatesConnected.mapCone_raiseCone\", \"Profinite.Extend.functor_obj\", \"LightProfinite.Extend.functor_obj\", \"CategoryTheory.Over.ConstructProducts.conesEquiv_functor\", \"LightProfinite.Extend.cone\", \"CategoryTheory.Limits.Cone.toCostructuredArrow\", \"CategoryTheory.Limits.Cones.reflects_cone_isomorphism\", \"Profinite.Extend.cone\"], \"digest\": \"690e58307f9f0f77\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: inspected results concern ordinary categorical cones or incidental text occurrences, not symmetric infinity-operads and their active incoming slices."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Operad\"",
+   "results": "{\"t\": \"2026-10-17T03:42:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Operad\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: inspected results concern ordinary categorical cones or incidental text occurrences, not symmetric infinity-operads and their active incoming slices."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-operadic-left-horn-filling",
@@ -81,5 +198,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-symmetric-family-active-slice-calculus",
+  "worker": "stage1",
+  "summary": "Five-step proof of the active reflector, output-product equivalence, coherent source and cone comparison, naturality, and empty product. Relative cocartesian lifts justify total-family factorizations; explicit input blocks and the relative mapping-space Segal square construct the product comparison and its inverse. All prerequisites already exist in the DAG; no new nodes or Lean attachments.",
+  "blueprint": "Realizes the ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 route through the symmetric operadic zeroth-horn argument, specifically HA Theorem 3.1.2.3(B), proof step (1), printed pp.336-337: active subslice reflector, first-vertex restriction, and output-product equivalence before Proposition 3.1.1.8.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-right-fibration-morphism-space",
+    "why": "Generic computation of mapping spaces in the total space of a right fibration as homotopy fibers, used in steps 1, 2 and 5 for the join slices; no node of the biduality unit states it, and it replaces no step of the unit's route."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic pointwise criterion that a coherent transformation is an equivalence iff its components are, used in step 3 for PQ and QP; no node of the biduality unit states it, and it replaces no step of the unit's route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-right-fibration-morphism-space",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-217b904eb",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-217b904eb (reviewer sub-agent of L); spot-checked: I read all five steps against the statement of every cited node; they are correct. HA Thm 3.1.2.3 step (1) is not archived in literature/ (WANTED; proof_origin=agent), so I checked the steps against the cited nodes and my own knowledge of the HA argument, without the printed page. Step 1: X pulls back the slice right fibration to M_0. initial-poset-slice-restriction applies with T=[r] in M and in M_act; (M_0)_act is full in M_act. Morphisms between active cones have active source edges. The inert-active factorization D_+ is explicit, and the cocartesian criterion matches components exactly (alpha_A active forces beta to kill exactly the complement of D). The dual pointwise-adjoint criterion gives the left adjoint. Step 2: the blocks D_j=alpha^{-1}(j) give P; Q uses concatenation only inside the single operad M_0 and builds the arrow to b from the relative Segal square, not by concatenating cross-parameter arrows. Step 3: PQ and QP are identified using fiber Segal, the relative Segal square, the pointwise criterion and Joyal clause (2). Step 4: family maps send inert edges to inert edges, and F restricted to M_0 preserves concatenation. Step 5: s=0 gives J_b contractible (Segal square with r=0, base map space a point); s=1, empty blocks and r=0 also checked. No new nodes. No duplicate: lem-coef-operadic-active-incidence-comparison is the nonsymmetric analogue. No cycle; proof_deps equals the union of uses. No base-change morphism, coefficient category or target is involved; no SGA is cited. Fixes, in split-owned fields only: (1) split_report.tool_uses now declares the off-route generic tools lem-cbc-right-fibration-morphism-space (steps 1, 2, 5) and lem-cbc-enhanced-functor-cone-calculus (step 3); unit sk-prop-sf-cbc is not on the route of sk-prop-sf-biduality-general, and I accept both. (2) Steps 3 and 4 now say that lem-coef-infinity-join-cone-calculus, which is stated for left cones, is applied to the opposite quasicategory for cocones. Statement unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -3,28 +3,188 @@
  "blueprint": {
   "is": "pur9-cs-def-bc",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Base-change map for the standing exceptional inverse image",
- "statement": "Assume Inputs “Finite-coefficient proper-adjoint input” (`pur713-input-proper-adjoint`, in [sk-def-sf-operations]), “Compactification comparisons on the ambient categories” (`pur9-input-ambient-comparison`), “Preservation of finite-Tor constructible objects” (`pur9-input-preservation`), “The qcqs direct-image comparison theorem” (`pur7710-input-qcqs-comparison`, in [sk-prop-sf-comp-coherence]), “Compatibility of site comparison with the specified exchange” (`pur7710-input-site-exchange`, in [sk-prop-sf-cbc]) and “Constructible sheaves across the two sites” (`pur7710-input-constructible-sheaves`, in [sk-prop-sf-comparison]). Let $f:X\\to Y$ be separated of finite type, $v:Y'\\to Y$ a morphism, $X'=X\\times_YY'$, $f':X'\\to Y'$ and $u:X'\\to X$ the projections, and $c'$ the base change of $c_f$ (Definition [pur713-def-base-changed-compactification]). For $K\\in D^b_{ctf}(Y_{\\Proet},\\mathcal O_E/\\varpi^n)$ put $M=Rf^!_{\\mathcal O_E/\\varpi^n}K$; then $M\\in D^b_c(X_{\\Proet},\\mathcal O_E/\\varpi^n)\\subseteq\\mathscr E^+(X_{\\Proet},\\mathcal O_E/\\varpi^n)$ by Input “Preservation of finite-Tor constructible objects” (`pur9-input-preservation`) and Lemma “Equivalence on bounded constructible complexes” (`pur7710-lem-constructible-equivalence`, in [sk-prop-sf-comparison]), so the exchange $\\operatorname{Ex}^\\circ_{!,\\square,\\mathcal O_E/\\varpi^n,M}$ of Definition [pur713-def-shriek-exchange-chosen] is invertible by Lemma “Compact-support base change on the étale-origin class” (`pur7710-lem-origin-cbc`, in [sk-prop-sf-cbc]). Define\n\n$$\nb_{v,K}:Lu^*_{\\mathcal O_E/\\varpi^n}Rf^!_{\\mathcal O_E/\\varpi^n}K\\longrightarrow Rf'^!_{\\mathcal O_E/\\varpi^n}Lv^*_{\\mathcal O_E/\\varpi^n}K\n$$\n\nin $D(X'_{\\Proet},\\mathcal O_E/\\varpi^n)$ as the morphism corresponding under the standing adjunction for $f'$ to\n\n$$\nRf'_{!,\\mathcal O_E/\\varpi^n}Lu^*_{\\mathcal O_E/\\varpi^n}M\\xrightarrow{(\\operatorname{Ex}^\\circ_{!,\\square,\\mathcal O_E/\\varpi^n,M})^{-1}}Lv^*_{\\mathcal O_E/\\varpi^n}Rf_{!,\\mathcal O_E/\\varpi^n}M\\xrightarrow{Lv^*_{\\mathcal O_E/\\varpi^n}\\varepsilon_{f,K}}Lv^*_{\\mathcal O_E/\\varpi^n}K,\n$$\n\nwith $\\operatorname{Ex}^\\circ$ formed with $\\theta_{c'}$ of Input “Comparison of compactifications, finite coefficients” (`pur713-input-comparison`, in [sk-def-sf-exchanges]) and $\\varepsilon_f$ the counit of the standing adjunction for $f$.",
+ "statement": "Use the global finite-field and coefficient datum of [sk-def-sf-operations]: $k$ is the fixed algebraic closure of a finite field of characteristic $p$, $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ is finite, $\\varpi_E$ is a uniformizer, $n\\geq1$, and $A=\\mathcal O_E/\\varpi_E^n$ is a finite discrete commutative ring. All schemes below are finite type over $k$ and all morphisms are $k$-morphisms. Use constant-$A$ module sheaves on the small étale and pro-étale sites. For a scheme $T$, write $\\mathscr E^+(T_{\\Proet},A)$ for the bounded-below étale-origin class of [def-sf-etale-origin-subcategory]: its objects are $N\\in D^+(T_{\\Proet},A)$ carrying a witness $(G,\\alpha)$ with $G\\in D^+(T_{\\Et},A)$ and $\\alpha:\\nu_T^*G\\xrightarrow{\\sim}N$, retained as in [def-weil-pbc-etale-origin-witness].\n\nLet $f:X\\to Y$ be separated of finite type, let $v:Y'\\to Y$ be any morphism, set $X'=X\\times_Y Y'$, and write $f':X'\\to Y'$ and $u:X'\\to X$ for the projections. Fix compactifications $c_f$ of $f$ and $c_{f'}$ of $f'$, and let $c'$ be the base change of $c_f$ as in [pur713-def-base-changed-compactification]. On étale-origin objects let $Rf_{!,A}=Rf_{!,A}^{c_f}$ and $Rf'_{!,A}=Rf'_{!,A}^{c_{f'}}$ be the compact-support functors of [def-compact-support-direct-image-detailed]. Write $Rf_A^!$ and $Rf'^!_A$ for the unconditional exceptional inverse images of [def-weil-exceptional-inverse-image], equivalently clause (vi) of [sk-def-sf-operations]: at finite level $Rf_A^!=\\nu_X^*f^\\times R\\nu_{Y,*}$, where $f^\\times$ is the ordinary étale compact-support right adjoint for $c_f$; use the corresponding right adjoint for $c_{f'}$ in $Rf'^!_A$. Use the class-restricted Hom bijections of [thm-sf-ambient-adjoint-class], with the compactifications just fixed; their finite dimension bounds exist by [lem-kun-dimension-finite-type].\n\nFor $K\\in D^b_{ctf}(Y_{\\Proet},A)$ put $M=Rf_A^!K$. The constructible preservation asserted in [def-weil-exceptional-inverse-image] gives $M\\in D^b_c(X_{\\Proet},A)$. By [lem-sf-proetale-constructible-origin] (ii), choose and retain $G\\in D^b_c(X_{\\Et},A)$ and $\\alpha:\\nu_X^*G\\xrightarrow{\\sim}M$. Thus $M\\in\\mathscr E^+(X_{\\Proet},A)$, with an explicit witness. Finite constant-coefficient pullback is exact and agrees with inverse image [def-weil-derived-pullback-tensor-hom, prop-weil-pbc-inverse-image-modules-exact]; the comparison [lem-weil-pbc-comparison-pullback] therefore supplies the witness\n$$\n\\nu_{X'}^*u_{\\Et}^{-1}G\\xrightarrow{\\sim}Lu_A^*\\nu_X^*G\\xrightarrow{Lu_A^*\\alpha}Lu_A^*M\n$$\nfor $Lu_A^*M\\in\\mathscr E^+(X'_{\\Proet},A)$. In particular $Lv_A^*K$ is bounded below, as required for the $f'$ Hom bijection.\n\nLet $\\operatorname{Ex}_{!,\\square,A}$ be the compact-support exchange into $c'$ of [pur713-def-shriek-exchange]. Its restriction to this étale-origin class is the exchange of [thm-cbc-finite-level-proetale]: write $c_f=(j,p)$ and $c'=(j',p')$. The proper-square input $j_!M$ has the witness $\\nu_{\\overline X}^*j^{\\Et}_!G\\xrightarrow{\\sim}j_!\\nu_X^*G\\xrightarrow{j_!\\alpha}j_!M$ by [lem-cbc-proetale-extension-zero-comparison]. Its sheaf comparison is applied termwise: the inverse images and extension by zero are exact, so the natural isomorphism of complexes descends to the derived categories. Both $p$ and $p'$ are proper, hence quasi-compact and quasi-separated. The proper factor $\\operatorname{Ex}_{*,\\square_p,A}$ of [pur713-def-star-exchange] is the ambient ringed exchange $\\operatorname{Ex}^R_{\\square_p}$ of [def-weil-pbc-ambient-ringed-exchange] for the constant rings $A_T$: both are the mate, under the derived adjunctions $Lp_A^*\\dashv Rp_{*,A}$ and $Lp'^*_A\\dashv Rp'_{*,A}$, of the same isomorphism $c_{\\square_p,A}=\\theta_{\\square_p}$ formed from the composition isomorphisms of derived pullbacks. [lem-weil-pbc-transport-identifies-exchange] therefore identifies their specified exchanges at this witness. On the open square the canonical extension-by-zero identifications agree under [lem-cbc-proetale-extension-zero-comparison]. For the latter agreement, both identifications restrict to the same pullback map on the open and extend it by zero, which determines the map uniquely by $j^\\prime_!\\dashv (j^\\prime)^{-1}$ of [lem-cbc-proetale-extension-zero]. Let\n$$\n\\theta_{c'}:Rf'_{!,A}^{c'}\\xrightarrow{\\sim}Rf'_{!,A}^{c_{f'}}\n$$\nbe the canonical comparison on $\\mathscr E^+$ supplied by [prop-compactification-coherence-detailed]. Using the composition formula of [pur713-def-shriek-exchange-chosen] on $\\mathscr E^+$, with the comparison just supplied on that domain, set\n$$\n\\operatorname{Ex}^{\\circ}_{!,\\square,A,M}:=\n\\theta_{c',Lu_A^*M}\\circ\\operatorname{Ex}_{!,\\square,A,M}:\nLv_A^*Rf_{!,A}M\\xrightarrow{\\sim}Rf'_{!,A}Lu_A^*M.\n$$\nIts first factor is an isomorphism by compactification coherence and its second by [thm-cbc-finite-level-proetale] applied to $(G,\\alpha)$.\n\nLet $\\varepsilon_{f,K}:Rf_{!,A}M\\to K$ be the preimage of $1_M$ under the natural bijection\n$$\n\\operatorname{Hom}(Rf_{!,A}M,K)\\cong\\operatorname{Hom}(M,Rf_A^!K)\n$$\nof [thm-sf-ambient-adjoint-class]; this is the counit at $K$. Define the base-change morphism\n$$\nb_{v,K}:Lu_A^*Rf_A^!K\\longrightarrow Rf'^!_ALv_A^*K\n$$\nin $D(X'_{\\Proet},A)$ to be the image, under that theorem's $f'$ bijection with source object $Lu_A^*M$ and target object $Lv_A^*K$, of the composite\n$$\nRf'_{!,A}Lu_A^*M\n\\xrightarrow{(\\operatorname{Ex}^{\\circ}_{!,\\square,A,M})^{-1}}\nLv_A^*Rf_{!,A}M\n\\xrightarrow{Lv_A^*\\varepsilon_{f,K}}\nLv_A^*K.\n$$\nThis construction uses the unconditional exceptional inverse image and the bounded-below étale-origin adjunction; it makes no assumption of an unrestricted ambient pro-étale exceptional right adjoint.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/pur9-cs-def-bc.md",
   "place": "node pur9-cs-def-bc, order 2360"
  },
  "stmt_deps": [
   "sk-def-sf-operations",
-  "sk-prop-sf-comparison",
+  "def-sf-etale-origin-subcategory",
+  "def-weil-pbc-etale-origin-witness",
   "pur713-def-base-changed-compactification",
-  "pur713-def-shriek-exchange-chosen",
-  "sk-def-sf-exchanges"
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image",
+  "thm-sf-ambient-adjoint-class",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-proetale-constructible-origin",
+  "def-weil-derived-pullback-tensor-hom",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-comparison-pullback",
+  "pur713-def-shriek-exchange",
+  "thm-cbc-finite-level-proetale",
+  "pur713-def-star-exchange",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-proetale-extension-zero",
+  "prop-compactification-coherence-detailed",
+  "pur713-def-shriek-exchange-chosen"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "upperShriek|exceptional.*[Bb]ase[Cc]hange|compactSupport.*[Ee]xchange|[Ss]hriek.*[Bb]ase[Cc]hange",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits for exceptional inverse image or compact-support exchange base-change names"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change for exceptional inverse image on derived categories of sheaves is the adjoint transpose of inverse compact support base change and the counit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.derivedε",
+     "TopCat.Presheaf.pushforwardToOfIso",
+     "CategoryTheory.Adjunction.derived_counit",
+     "CategoryTheory.Adjunction.derivedε.congr_simp",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.Adjunction.derived'_counit",
+     "SheafOfModules.pushforwardPushforwardAdj"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived adjunction units/counits and ordinary module-sheaf adjunctions do not specify the exceptional base-change map on the bounded-below etale-origin class"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image base change morphism for finite coefficient pro etale sheaves defined by transposing the inverse compact support exchange followed by the counit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "SheafOfModules.pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackObjFreeIso",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+     "SheafOfModules.freeFunctorCompPullbackIso",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackIso"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf/module pullback adjunctions, exponentiable morphisms, and conjugate equivalences do not define this finite-coefficient exceptional base-change map"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.Adjunction.homEquiv",
+     "CategoryTheory.Adjunction.mk'_homEquiv",
+     "CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv",
+     "CategoryTheory.Adjunction.corepresentableBy_homEquiv",
+     "CategoryTheory.Adjunction.representableBy_homEquiv",
+     "CategoryTheory.Adjunction.comp_homEquiv",
+     "CategoryTheory.Adjunction.homEquiv_apply",
+     "CategoryTheory.Adjunction.homEquiv_unit"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: Adjunction.homEquiv provides the abstract transpose only, not the exceptional inverse image, the specified compact-support exchange, or their etale-origin typing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extraordinary pullback exchange natural transformation is the mate of an invertible Beck Chevalley map for pushforward with proper support",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj",
+     "CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit",
+     "CategoryTheory.ExponentiableMorphism.ev",
+     "CategoryTheory.ExponentiableMorphism.pushforwardComp",
+     "CategoryTheory.ExponentiableMorphism.pushforwardUncurry",
+     "CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc",
+     "PresheafOfModules.pullbackComp"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf/module pullback adjunctions, exponentiable morphisms, and conjugate equivalences do not define this finite-coefficient exceptional base-change map"
+  },
+  {
+   "tool": "grep",
+   "query": "mate|conjugateEquiv|beckChevalley",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "top": [
+     "Mathlib/NumberTheory/Chebyshev.lean",
+     "Mathlib/NumberTheory/Bernoulli.lean",
+     "Mathlib/NumberTheory/Height/EllipticCurve.lean",
+     "Mathlib/NumberTheory/Height/EllipticCurve.lean",
+     "Mathlib/NumberTheory/Height/EllipticCurve.lean",
+     "Mathlib/NumberTheory/Height/EllipticCurve.lean",
+     "Mathlib/NumberTheory/Height/NumberField.lean",
+     "Mathlib/Algebra/Lie/CartanExists.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: abstract adjunction mates and ordinary sheaf pullback comparisons do not define this finite-coefficient exceptional base-change morphism with its restricted domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.conjugateEquiv",
+     "CategoryTheory.conjugateEquiv_id",
+     "CategoryTheory.conjugateEquiv_iso",
+     "CategoryTheory.conjugateEquiv_of_iso",
+     "CategoryTheory.conjugateEquiv_symm_id",
+     "CategoryTheory.conjugateEquiv_symm_iso",
+     "CategoryTheory.conjugateEquiv_symm_of_iso",
+     "CategoryTheory.conjugateEquiv_adjunction_id"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: abstract adjunction mates and ordinary sheaf pullback comparisons do not define this finite-coefficient exceptional base-change morphism with its restricted domains"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -54,5 +214,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur9-cs-def-bc",
+  "worker": "stage1",
+  "summary": "Repair of all four returned points. Restored and explicitly defined the bounded-below etale-origin class, retained its origin witness and its pulled-back witness, and replaced both phantom lemma names by the existing constructible-origin and finite-level compact-support base-change nodes. Replaced the six phantom Inputs by the unconditional exceptional inverse image of sk-def-sf-operations (vi) and def-weil-exceptional-inverse-image, canonical compactification coherence, and the bounded-below class-restricted Hom bijections of thm-sf-ambient-adjoint-class. The counit is specified as the inverse image of the identity, and the base-change map retains the original inverse-exchange/pulled-back-counit transpose formula. All defining and well-definedness dependencies are explicit. The old conditional ambient composite pur713-def-upper-shriek is deliberately bypassed by the alternative route authorized in return point (3). No new nodes; five actual Mathlib searches recorded. Second reading made the proper-square input witness explicit, fixed the chosen etale right adjoints to the named compactifications, and clarified the class-restricted use of the chosen-exchange formula; two additional actual Mathlib searches are recorded.",
+  "blueprint": "Realizes the defining paragraph and both displayed formulas of main-20261015 pur9-cs-def-bc, order 2360, and the unit description that exceptional base change is the transpose of the pulled-back counit after inverse compact-support base change. The route uses existing finite-level etale-origin comparison nodes and the unconditional clause-(vi) exceptional inverse image; no smooth-purity theorem or alternative trace route is used."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NF-e4300ac4a",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-e4300ac4a (reviewer sub-agent of L); spot-checked: Read in full: the item (a definition with zero new nodes), all 19 stmt_deps statements including their blueprint_update texts, the main-20261015 source pur9-cs-def-bc.md (order 2360), the unit sk-prop-sp-purity-bc, and Stacks proetale.tex lemma-compare-constructible(-derived) (tags 09AK/09AL). The source's six Inputs and two lemmas exist nowhere in the DAG. The source title ('standing exceptional inverse image') and its use of sk-def-sf-operations support the unconditional clause-(vi) functor (def-weil-exceptional-inverse-image) together with the class-restricted bijection of thm-sf-ambient-adjoint-class(2). With the compactification fixed to c_f, R_{c_f} is exactly that Rf^!, so the counit and the f' transpose come from one theorem. The source's formula, arrow directions, domain D^b_ctf(Y) and coefficients O_E/varpi^n over k = Fbar_p are unchanged, and the change is reported under Source error (E7). Checks: M is in D^b_c by the preservation in def-weil-exceptional-inverse-image; its witness comes from lem-sf-proetale-constructible-origin(ii); the pulled-back witness is oriented correctly by lem-weil-pbc-comparison-pullback; Lv^*K is in D^+ because pullback is exact; c' is in Comp(f') (no density condition); theta_{c'} on the étale-origin class comes from prop-compactification-coherence-detailed. thm-cbc-finite-level-proetale with the global c_f is the def-cbc-exchange-map formula into c'. For the proper part, p and p' are qcqs and the transport lemma applies; for the open part, maps out of j'_! are determined by their restriction. Edge cases v=id, empty X or Y', K=0 and n=1 all work. No cycle, every bracketed reference is in stmt_deps, no SGA, no tool_uses needed. Duplicates checked: sk-def-sfb-shriek-base-change-morphism, det-def-sfb-shriek-base-change-morphism-definition, det-sp-tower-exceptional-bc, det-sp-mixed-base-change, lem-pur-smb-extraordinary and pur713-def-upper-shriek; none duplicates this definition. FIX (one missing citation): lem-weil-pbc-transport-identifies-exchange identifies the étale exchange with Ex^R of def-weil-pbc-ambient-ringed-exchange, but pur713-def-shriek-exchange is built from pur713-def-star-exchange. I added a sentence saying both are the mate of the same isomorphism c_{square_p,A} = theta_{square_p}, and added both nodes to stmt_deps. The corrected item is in fixes/dag/nodes/sec-smooth-purity/pur9-cs-def-bc.json.; 1 file(s) fixed by the reviewer"
  }
 }

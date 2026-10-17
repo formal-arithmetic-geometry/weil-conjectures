@@ -12,9 +12,113 @@
   "def-coef-infinity-fibrations",
   "def-coef-infinity-right-anodyne"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal C$ be the class of monomorphisms $a:A\\hookrightarrow B$ whose pullback along every left fibration $E\\to B$ is right anodyne. A pullback of a left fibration is a left fibration: project a horn lifting problem to the original map, fill it there, and pair the filler with its prescribed base simplex. Pullback in simplicial sets commutes with colimits in a slice: degreewise, an element of a colimit has a representative over a fixed base element, and all identifications stay in that fiber. Thus pulling back a pushout or a continuous ordinal chain gives the pushout or chain of the pulled-back maps. For the pushout $S=B\\amalg_A A_1$ of $a:A\\hookrightarrow B$ along $A\\to A_1$, and a left fibration $E\\to S$, the pullback inclusion $A_1\\times_S E\\hookrightarrow E$ is the pushout of $A\\times_S E\\hookrightarrow B\\times_S E$ along $A\\times_S E\\to A_1\\times_S E$. The map $B\\times_S E\\to B$ is a left fibration, so the attaching inclusion is right anodyne if $a\\in\\mathcal C$. For a continuous chain $B_0\\to B_\\theta$, pull a left fibration $E\\to B_\\theta$ back to each $B_\\alpha$; each successor pullback is right anodyne by membership of the corresponding successor in $\\mathcal C$, and the pulled-back chain is continuous by the degreewise calculation. Thus $\\mathcal C$ is closed under pushouts and small transfinite compositions. For an arrow retract of $a:A\\to B$ from $b:A'\\to B'$, write the section maps as $u:A\\to A'$, $s:B\\to B'$ and the retraction maps as $v:A'\\to A$, $r:B'\\to B$, so $bu=sa$, $av=rb$, $vu=1$ and $rs=1$. Given a left fibration $p:E\\to B$, pull it back along $r$ to $E'=B'\\times_B E\\to B'$. Under the identification $A'\\times_{B'}E'=A'\\times_B E$, the pulled-back source section and retraction are $(x,e)\\mapsto(u(x),e)$ and $(x',e)\\mapsto(v(x'),e)$, and the codomain maps are $e\\mapsto(s(p(e)),e)$ and $(y',e)\\mapsto e$. Their squares commute by $bu=sa$ and $av=rb$, and their composites are identities by $vu=1$ and $rs=1$. The pullback of $a$ is therefore an arrow retract of the right-anodyne pullback of $b$. Hence $\\mathcal C$ is retract-closed and contains all isomorphisms. All these assertions are degreewise set constructions and retain the simplicial operators.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 4.4.11, first paragraph: saturation of the class C; explicit expansion by the worker, archival copy WANTED."
+   }
+  },
+  {
+   "text": "The class $\\mathcal C$ has right cancellation among monomorphisms. Indeed let $f:A\\hookrightarrow B$ and $g:B\\hookrightarrow C$ satisfy $f,gf\\in\\mathcal C$, and take any left fibration $E\\to C$. Set $E_B=B\\times_C E$ and $E_A=A\\times_C E$. The maps $E_A\\hookrightarrow E_B$ and $E_A\\hookrightarrow E$ are right anodyne by the definition of $\\mathcal C$ and Step 1. All three inclusion maps are monomorphisms. Apply [lem-coef-right-anodyne-mono-cancellation] to conclude that $E_B\\hookrightarrow E$ is right anodyne. This proves $g\\in\\mathcal C$.",
+   "uses": [
+    "lem-coef-right-anodyne-mono-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 4.4.11, first paragraph, using Corollary 4.1.10; explicit expansion by the worker, archival copy WANTED."
+   }
+  },
+  {
+   "text": "We will lift relative initial prisms against left fibrations. For a monomorphism $K\\hookrightarrow L$, put $D_0=(\\{0\\}\\times L)\\cup(\\Delta^1\\times K)$. Reverse simplex order as follows: for $\\alpha:[a]\\to[b]$, put $\\bar\\alpha(j)=b-\\alpha(a-j)$; let $S^{\\mathrm{op}}_a=S_a$ with operators induced by $\\bar\\alpha$. This involution preserves products, unions, pushouts, continuous ordinal chains and arrow retracts degreewise. It identifies the opposite of the $i$th horn of dimension $n$ with the $(n-i)$th horn, and swaps the endpoints of $\\Delta^1$. Consequently the opposite of $D_0\\hookrightarrow\\Delta^1\\times L$ is the pushout-product of the right horn $\\{1\\}=\\Lambda_1^1\\hookrightarrow\\Delta^1$ with $K^{\\mathrm{op}}\\hookrightarrow L^{\\mathrm{op}}$. By [lem-coef-infinity-right-anodyne-product] it is right anodyne. A left fibration, after this involution, lifts all right horns by its defining lifting condition. It lifts their pushouts by the attaching square, their transfinite composites by [lem-coef-transfinite-left-lifting], and their arrow retracts by composing the section, filler and retraction squares. Undoing the involution proves that every left fibration lifts $D_0\\hookrightarrow\\Delta^1\\times L$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-right-anodyne-product",
+    "lem-coef-transfinite-left-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 4.4.11, final paragraph: the relative homotopy lift, expanded using the opposite of Proposition 3.4.3; explicit expansion by the worker, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Fix any simplicial set $T$ and a left fibration $p:E\\to\\Delta^1\\times T$. Let $K=E\\times_{\\Delta^1}\\{1\\}$ and $i:K\\hookrightarrow E$. The monotone function $\\max:[1]\\times[1]\\to[1]$ defines a simplicial map and hence a base homotopy $b:\\Delta^1\\times E\\to\\Delta^1\\times T$ with $b(t,e)=(\\max(t,s(e)),y(e))$, where $p(e)=(s(e),y(e))$. On $\\{0\\}\\times E$ prescribe the lift $e\\mapsto e$, and on $\\Delta^1\\times K$ prescribe $(t,k)\\mapsto i(k)$. They agree on the intersection and lie over $b$, since $\\max(t,1)=1$. Step 3 supplies a lift $H:\\Delta^1\\times E\\to E$ extending both. Its endpoint $H(1,-)$ lands in $K$, because its first base coordinate is 1; denote the induced map by $r:E\\to K$. Then $ri=1_K$, $H(0,-)=1_E$, $H(1,-)=ir$, and $H(t,i(k))=i(k)$ exactly. No filler or homotopy is taken in a quasicategory; all lifts are horn lifts for $p$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 4.4.11, last paragraph: explicit lifted max homotopy; explicit expansion by the worker, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Put $D_1=(\\Delta^1\\times K)\\cup(\\{1\\}\\times E)\\subseteq\\Delta^1\\times E$. The inclusion $u:D_1\\hookrightarrow\\Delta^1\\times E$ is right anodyne by [lem-coef-infinity-right-anodyne-product], applied to $\\{1\\}\\hookrightarrow\\Delta^1$ and the monomorphism $i:K\\hookrightarrow E$. The homotopy $H$ of Step 4 sends $D_1$ into $i(K)$: it is $i(k)$ on the first part and $ir(e)$ on the second. Let $k:D_1\\to K$ be the induced restriction. In the arrow category, maps from $i$ to $u$ are $k_0:K\\to D_1$, $k_0(x)=(0,i(x))$, and $e_0:E\\to\\Delta^1\\times E$, $e_0(e)=(0,e)$; maps back are $k$ and $H$. The squares commute, $kk_0=1_K$, and $He_0=1_E$. Thus $i$ is an arrow retract of $u$ and is right anodyne. Since $p$ was arbitrary, the endpoint inclusion $e_T:\\{1\\}\\times T\\hookrightarrow\\Delta^1\\times T$ belongs to $\\mathcal C$ for every $T$, including the empty simplicial set.",
+   "uses": [
+    "lem-coef-infinity-right-anodyne-product",
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 4.4.10 and Proposition 4.4.11: explicit arrow retract; explicit expansion by the worker, archival copy WANTED."
+   }
+  },
+  {
+   "text": "For every monomorphism $a:A\\hookrightarrow B$, the relative final prism $P(a):D=(\\Delta^1\\times A)\\cup(\\{1\\}\\times B)\\hookrightarrow\\Delta^1\\times B$ belongs to $\\mathcal C$. In fact $j:\\{1\\}\\times B\\hookrightarrow D$ is the pushout of $e_A$ along $\\{1\\}\\times a$, so Step 1 and Step 5 give $j\\in\\mathcal C$. The composite $P(a)j=e_B$ also belongs to $\\mathcal C$. All maps are degreewise injections. Right cancellation from Step 2 now gives $P(a)\\in\\mathcal C$. This uses only the already established properties of $\\mathcal C$, not a claim that all right-anodyne pullbacks are known yet.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 4.4.11, reduction via Lemma 3.1.3: spelled-out pushout and cancellation; explicit expansion by the worker, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$ and $0<k\\leq n$, and put $A=\\Lambda_k^n$, $B=\\Delta^n$. The horn inclusion $a:A\\hookrightarrow B$ is an arrow retract of $P(a)$. On vertex posets define monotone maps $s:[n]\\to[1]\\times[n]$ by $s(v)=(0,v)$ for $v<k$ and $s(v)=(1,v)$ for $v\\geq k$, and $r:[1]\\times[n]\\to[n]$ by $r(0,v)=\\min(v,k)$, $r(1,v)=\\max(v,k)$. Both branches of $r$ are monotone in $v$, and for $v\\leq w$ across branches, $\\min(v,k)\\leq k\\leq\\max(w,k)$; $s$ is monotone since its first coordinate changes only from 0 to 1. Applying these formulas to each entry of a simplex gives simplicial maps commuting with precomposition, with $rs=1_B$. The second coordinate of $s$ is the identity, so $s(A)\\subseteq\\Delta^1\\times A\\subseteq D$. On $\\{1\\}\\times B$, the image of $r$ misses vertex 0 because $k>0$, hence is in $A$. For a simplex of $\\Delta^1\\times A$, its second-coordinate image misses some vertex $v\\ne k$. Every value of its image under $r$ is either its second-coordinate value or $k$, so it still misses $v$ and lies in $A$. Thus $r(D)\\subseteq A$, and the restrictions of $s,r$ to $A,D$ together with $s,r$ on $B,\\Delta^1\\times B$ give section and retraction squares for $a$ and $P(a)$. Step 6 and retract closure therefore put every right horn in $\\mathcal C$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 3.1.3, first half of proof: explicit horn retract, used in Proposition 4.4.11; explicit expansion by the worker, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Steps 1 and 7 show that $\\mathcal C$ contains the isomorphisms and right horn inclusions and is closed under pushouts, small transfinite compositions and retracts. The defining minimality of the right-anodyne class [def-coef-infinity-right-anodyne] implies that every right-anodyne $i:X\\hookrightarrow Y$ is in $\\mathcal C$. Applying this membership to the specified left fibration $q:Z\\to Y$ gives $X\\times_Y Z\\hookrightarrow Z$ right anodyne, as required. All objects and ordinal chains stay in the fixed containing universe; no Kan or quasicategory assumption was used.",
+   "uses": [
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 4.4.11: final saturation conclusion; explicit expansion by the worker, archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-right-anodyne",
+  "lem-coef-right-anodyne-mono-cancellation",
+  "lem-coef-infinity-right-anodyne-product",
+  "lem-coef-transfinite-left-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Proposition 4.4.11, Lemma 4.4.10, Lemma 3.1.3 and Corollary 4.1.10 read online; not archived in literature (WANTED). Expanded homotopy lift, arrow retract, and horn reduction written explicitly by the worker."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,10 +189,38 @@
    "results": "{\"t\": \"2026-10-17T02:53:04Z\", \"tool\": \"grep\", \"query\": \"rightAnodyne|RightAnodyne|leftAnodyne|LeftAnodyne|LeftFibration|leftFibration|RightFibration|rightFibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "Second reader: no match; actual targeted Mathlib grep returned zero hits for one-sided anodyne and fibration declaration names. The broader anodyne search was checked separately against the all-horn definition in AnodyneExtensions/Basic.lean:63-93."
+  },
+  {
+   "tool": "grep",
+   "query": "LeftFibration|leftFibration|rightAnodyne|RightAnodyne|left.fibration|right.anodyne",
+   "results": "{\"t\": \"2026-10-17T03:24:12Z\", \"tool\": \"grep\", \"query\": \"LeftFibration|leftFibration|rightAnodyne|RightAnodyne|left.fibration|right.anodyne\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the hits concern all-horn Kan fibrations, ordinary fibration pullback stability, or finite pullbacks. Read CategoryWithFibrations.lean:35-106 and AnodyneExtensions/Basic.lean:63-93. They do not state one-sided anodyne base change along a left fibration; the targeted grep and Loogle had zero hits. The semantic searches used both the pullback and proper-map formulations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left fibrations are proper maps of simplicial sets, preserving right anodyne inclusions by base change",
+   "results": "{\"t\": \"2026-10-17T03:24:13Z\", \"tool\": \"leansearch\", \"query\": \"Left fibrations are proper maps of simplicial sets, preserving right anodyne inclusions by base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.cofibration_iff\", \"HomotopicalAlgebra.fibration_iff\"], \"digest\": \"f995220173d0d5be\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the hits concern all-horn Kan fibrations, ordinary fibration pullback stability, or finite pullbacks. Read CategoryWithFibrations.lean:35-106 and AnodyneExtensions/Basic.lean:63-93. They do not state one-sided anodyne base change along a left fibration; the targeted grep and Loogle had zero hits. The semantic searches used both the pullback and proper-map formulations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"anodyne\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-17T03:24:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"anodyne\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the hits concern all-horn Kan fibrations, ordinary fibration pullback stability, or finite pullbacks. Read CategoryWithFibrations.lean:35-106 and AnodyneExtensions/Basic.lean:63-93. They do not state one-sided anodyne base change along a left fibration; the targeted grep and Loogle had zero hits. The semantic searches used both the pullback and proper-map formulations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a right anodyne map along a left fibration of simplicial sets is right anodyne",
+   "results": "{\"t\": \"2026-10-17T03:24:13Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of a right anodyne map along a left fibration of simplicial sets is right anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.J\", \"SSet.finite_of_isPullback\", \"SSet.instFinitePullback\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"1447ab66ec16591d\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the hits concern all-horn Kan fibrations, ordinary fibration pullback stability, or finite pullbacks. Read CategoryWithFibrations.lean:35-106 and AnodyneExtensions/Basic.lean:63-93. They do not state one-sided anodyne base change along a left fibration; the targeted grep and Loogle had zero hits. The semantic searches used both the pullback and proper-map formulations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-terminal-twisted-resolution",
@@ -118,5 +250,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-left-fibration-right-anodyne-base-change",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Expanded the Cisinski saturation proof: base-change class closure and cancellation, order-reversed pushout-product lifting, a lifted max homotopy and an explicit retract, then relative prisms and explicit horn retracts. Reused the existing right-anodyne product and transfinite lifting nodes; created only the independent right-cancellation lemma. No completed project attachment or Mathlib specialization was found.",
+  "blueprint": "Realizes Proof paragraph 2, derived coefficient adjunction and inverse-limit calculation: right-anodyne base change needed for the independent terminal-fibre twisted-resolution construction in coherent diagram rectification. through the right-anodyne pullback ingredient of lem-coef-cartesian-terminal-twisted-resolution. The independent simplicial proof does not change the coefficient unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-57c388926",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-57c388926 (reviewer sub-agent of L); spot-checked: I read all eight steps and the one new node in full and checked them against the full statements of every cited node: def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, def-coef-infinity-right-anodyne, lem-coef-infinity-right-anodyne-product and the Mathlib leaf lem-coef-transfinite-left-lifting. Limitation: the Cisinski source (Prop 4.4.11, Lemma 4.4.10, Lemma 3.1.3, Cor 4.1.10) is not archived and is recorded as WANTED, and network access is blocked for this reviewer, so I could not re-read it at the cited places. I re-derived every step instead; the proof is self-contained and does not depend on the source. No SGA source is used. This is a simplicial-set lemma, not a target, so there is no base-change morphism or coefficient category to compare with upstream master. Step 1: the closure properties of the class C hold by universality of colimits in sSet; I checked the retract maps one by one (rbu=rsa=a, rs=1, av=rb). Step 2: right cancellation applied to E_A->E_B->E with all three maps monic. Step 3: reversing simplex order sends horn i to horn n-i and endpoint {0} to {1}, so the map D_0->Delta^1xL becomes exactly the product-node map with {1}=Lambda^1_1; left fibrations lift it by pushouts, retracts and the transfinite leaf. Step 4: the max homotopy is simplicial, the two prescribed lifts agree on {0}xK, and the endpoint lands in K. Step 5: I checked both commuting squares and kk_0=1, He_0=1; the endpoint inclusion e_T is in C, including for T empty. Step 6: D is the pushout of e_A along {1}xa, then cancellation applies. Step 7: r(0,v)=min(v,k) and r(1,v)=max(v,k) are monotone with rs=1 and r(D) inside the horn because k>0; checked by hand including n=k=1. Step 8: minimality of the right-anodyne class. proof_deps equals the union of the uses, all cited statements are in the unit sk-prop-sf-biduality-general, there is no cycle and no tool_uses are needed. New node lem-coef-right-anodyne-mono-cancellation is true: right-anodyne monos are the final monos, which cancel on the right (HTT 4.1.1.3). It is independent of the item, not a restated clause, and is a statement only. B1-B9 hold: three kinds of Mathlib search recorded, created.item is this item, blueprint from/via/same_as complete. I tested it on identities, the empty case and finite linear orders. Duplicate search: I read the statements of about 20 right-anodyne, cofinal and base-change nodes across the DAG and none states either the item or the cancellation lemma. Item statement unchanged and matches the definitions and the parent's use. No fixes."
  }
 }
