@@ -276,5 +276,40 @@
   "group": "Q66",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-fd3bd2084 (reviewer sub-agent of L); spot-checked: I read the item in full, all 11 cited statements, the unit record, the blueprint ancestor (prop-coef-integral-exceptional-adjoint, paragraph 2) and the report. The statement is unchanged and true. Small cases checked: K empty (colimiting iff Y empty), K a point (Y contractible), K=Δ^1 with Y a point (colimiting), the simplicial circle with Y a point (fails), two discrete points (both components kept). Step 1: two-out-of-three and invariance under homotopy follow from the cited realization criterion. Step 2: the maximum map q^n is well defined on C[J^n], because a union with a subset of the initial face keeps the maximum, and it is natural in n. The comparison with the existing p goes through max(p,q) and pointwise homotopies, which descend through the coend. Step 3: Map_C(X,Z) equals Sing_Q Fun(X,Z) exactly. I checked ε_T|α|_Q = q_T on each summand; two-out-of-three makes α a weak equivalence, and the two-test argument gives a homotopy inverse. Step 4: currying gives U_D = Fun(K,U_C) degreewise. Step 5: I checked Φ on every layer split and face, and θΦ = b×b and ℓΦ = b∘composition, then applied the V/θ/ℓ characterization. Steps 6–8: the dual cocone clause, the forward direction by homotopy invariance plus the homotopy-equivalence-to-weak lemma, and the converse by the realization criterion are all correct. Long step 5 (2032 characters): it held two arguments, so I split it into the composition comparison (new Step 5) and its transfer to constant diagrams with the identification of the test map (new Step 6), and renumbered later references. All steps are now under 2000 characters; proof_deps are unchanged. I did not make the composition comparison a node of its own. It is the Kan case of lem-coef-coherent-nerve-comparison, and that node (with lem-coef-space-transport-classification and lem-coef-diagonal-coherent-nerve-comparison) reaches this item through model-colimit-localization → system-localization → pointwise-adjoint → pointwise-yoneda, checked by searching the dependency graph. So it cannot be cited, and a new special-case node would nearly duplicate it. The explicit computation is the intended acyclic route. There are no new nodes and no duplicates (horn-completion-point-colimit, coslice-colimit-formula, space-valued-pointwise-lan, spaces-small-colimits-universe and others checked). No proof dependency reaches back to the item. I accept the five sk-prop-sf-cbc tool uses: they are generic simplicial and cocone criteria. The searches cover all three required kinds (LeanSearch, LeanFinder/Loogle, grep), with no Mathlib match. The proof is marked agent-written; the Kerodon and HTT sources are WANTED. Minor: the report wrongly calls two of the tool nodes smooth-purity ones; they are sk-prop-sf-cbc.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c122b287",
+  "group": "NG",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading by NG), module, deps EnhancedDiagramsCones/InfinityCategoryOfSpaces/RightPinchComparison and Mathlib SimplicialThickening. Clause-by-clause match: K:SSet.{u} unrestricted, Y:Kan.{u} (empty allowed), literal Δ[0], constant enriched vertex with real data (laws in named sorry theorem, true, project pattern), right-pinched mappingSpace, zigzag Map→arrow←ULift Fun(K,Y) with Kan clauses and homotopy inverses, IsColimiting↔IsWeakHomotopyEquivalence for every π₀-representing e. b uniquely pinned by the maximum formula (Path homs ordered by inclusion so constraint non-vacuous; agrees with node's j∘(t↦t q^n) via the prism); j pinned by right_pinch_comparison's prism formula. Edge cases K=∅, Y=∅, point, two points, circle fine; no extra hypotheses or universe restriction. Docstrings with source/blueprint and 9 proof steps; imports = public statement deps + proof-dep modules; lines ≤100; lean.statement verbatim; only lean field changed; no duplicates (downstream point vertices only). nt_compile.py per-file compile of snapshot against side overlay: rc 0, no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpacePointCoconeCriterion",
+  "declaration": "CategoryTheory.Spaces.space_point_cocone_criterion",
+  "declarations": [
+   "CategoryTheory.Spaces.pointCoconePoint",
+   "CategoryTheory.Spaces.pointCoconeVertex_laws",
+   "CategoryTheory.Spaces.pointCoconeVertex",
+   "CategoryTheory.Spaces.pointCoconeIndex",
+   "CategoryTheory.Spaces.pointCoconeDiagram",
+   "CategoryTheory.Spaces.pointCoconeMappingSpace",
+   "CategoryTheory.Spaces.pointCoconeArrowSpace",
+   "CategoryTheory.Spaces.pointCoconeArrowInclusion",
+   "CategoryTheory.Spaces.pointCoconeMaximum",
+   "CategoryTheory.Spaces.PointCoconeSimplex",
+   "CategoryTheory.Spaces.PointCoconeFamilyFormula",
+   "CategoryTheory.Spaces.PointCoconePinchFormula",
+   "CategoryTheory.Spaces.PointCoconeRepresents",
+   "CategoryTheory.Spaces.space_point_cocone_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SpacePointCoconeCriterion.lean",
+  "statement": "theorem space_point_cocone_criterion : ∃ b : ∀ (K : SSet.{u}) (Y : Kan.{u}), pointCoconeIndex ((ihom K).obj Y.obj) ⟶ pointCoconeArrowSpace K Y, ∀ (K : SSet.{u}) (Y : Kan.{u}), PointCoconeFamilyFormula K Y (b K Y) ∧ SSet.KanComplex (pointCoconeMappingSpace K Y) ∧ SSet.KanComplex (pointCoconeArrowSpace K Y) ∧ SSet.KanComplex (pointCoconeIndex ((ihom K).obj Y.obj)) ∧ (∃ r : pointCoconeArrowSpace K Y ⟶ pointCoconeIndex ((ihom K).obj Y.obj), Nonempty (SSet.Homotopy (b K Y ≫ r) (𝟙 _)) ∧ Nonempty (SSet.Homotopy (r ≫ b K Y) (𝟙 _))) ∧ (∃ j : pointCoconeMappingSpace K Y ⟶ pointCoconeArrowSpace K Y, PointCoconePinchFormula K Y j ∧ ∃ r : pointCoconeArrowSpace K Y ⟶ pointCoconeMappingSpace K Y, Nonempty (SSet.Homotopy (j ≫ r) (𝟙 _)) ∧ Nonempty (SSet.Homotopy (r ≫ j) (𝟙 _))) ∧ (∀ t : SSet.Enhanced.coconeCategory (pointCoconeDiagram K pointCoconePoint) _⦋0⦌, t.1.1 = pointCoconeVertex Y → (∃ e : K ⟶ Y.obj, PointCoconeRepresents K Y (b K Y) t e) ∧ (∀ e : K ⟶ Y.obj, PointCoconeRepresents K Y (b K Y) t e → (SSet.Enhanced.IsColimiting (pointCoconeDiagram K pointCoconePoint) t ↔ SSet.Enhanced.IsWeakHomotopyEquivalence e)))",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The natural equivalence is the canonical zigzag through fixed-endpoint arrow spaces, with actual simplicial homotopy inverses for both legs. The family-of-points leg is fixed on every enriched simplex by the maximum initial-vertex formula; the pinch leg is fixed by its prism formula. The criterion applies to every representative of the given cocone up to fixed-endpoint homotopy. All helper definitions and the constant-vertex structural proof obligation belong to this node; small and containing universes remain distinct."
  }
 }

@@ -270,5 +270,34 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-90584a84b (reviewer sub-agent of L); spot-checked: PASS: I read the statement and all six steps in full, with no changes and no tool_uses. The statement matches HTT §2.2.5, proof of Theorem 2.2.5.1 (printed p.90, PDF p.107 counting from 0), read from a local copy of the official PDF: same objects, Hom(0,n) is the cube boundary, it is a pushout of [1]∂(Δ¹)^{n-1} ⊆ [1](Δ¹)^{n-1} (HTT's [1]K is U(K)), and n=0 gives ∅→∗. Steps 1-2 use only the stated subset-chain/union/image definitions of lem-coef-pinched-cube-latching. The predicate S_q≠V or S_0≠{0,n} is exactly 'some coordinate constantly 0 or 1'. It is preserved by simplicial operators and by composites through 0<k<n; composites through k=0 or n have an identity factor. Steps 3-4: I checked that every canonical-splitting support T_b is proper in all three cases. Refinement at extra vertices of S_0, the simplicial-operator argument (shrinking supports plus cocone compatibility), concatenation under composition, agreement with the face cocone and uniqueness by the union decomposition are all correct, so A is the colimit and the comparison is the inclusion. Step 5 uses U(K) as stated in lem-coef-simplicial-interval-lifting. Composites with output (0,n) through an interior k land in ∂B where h=g, and exceptional inputs pair only with identities; the argument holds for arbitrary targets, including coincident images. Step 6 (n=0, n=1) is correct. Independent script for n≤5, degree q≤2: A(0,n) equals the coordinatewise cube boundary and equals proper-face chains plus composites through interior k, and all supports are proper. Duplicate search: coherent-nerve-relative-cube-comparison (locally Kan target, homotopy classes) is a different statement; fixed-vertex-cofibrations and cone-presheaf-adjunction only cite this item. No new nodes, no cycle, both dependencies are in unit sk-prop-sf-biduality-general, no SGA. The node is not a target, so there is no base-change morphism or coefficient category to compare."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a36828fd2",
+  "group": "Q02",
+  "result": "fix",
+  "note": "Read node, both deps (PinchedCubeLatching rigidification = LKE of SimplicialThickening; SimplicialIntervalLifting U/uMap/bundle), module, report. All n>0 clauses match HTT 2.2.5.1 p.90: cube = product of Δ[1], boundary = sup of coordinate preimages of ∂Δ[1] (m=0 gives Δ0/∅); injective on objects and mapping sets; IsIso off (0,n); existential labelling forced on endpoints because the (0,n) map is not iso; ∂B↪B square; IsPushout in correct orientation, forward maps HEq-tied to ebd/efd (uHom false true reduces to K). Gap H3: n=0 clause stated only empty/one object, not that C[Δ0] has mapping set Δ0 ({0}). fixes/RigidificationBoundaryCube.lean adds ∀ a b, Nonempty (hom a b ≅ Δ[0]) and replaces ∃e,True by Nonempty(≃); record override updates lean.note only. Delivered and fixed files compile clean via nt_compile.py --json (rc 0, no errors; control error detected). Note: duplicate cube CategoryTheory.relativeCube exists downstream (its node depends on this item), so not reusable here; not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.RigidificationBoundaryCube",
+  "declaration": "SSet.PinchedCube.rigidification_boundary_cube",
+  "declarations": [
+   "SSet.PinchedCube.boundaryCube",
+   "SSet.PinchedCube.boundaryCubeSubcomplex",
+   "SSet.PinchedCube.boundaryCubeBoundary",
+   "SSet.PinchedCube.boundaryCubeInclusion",
+   "SSet.PinchedCube.boundaryRigidificationMap",
+   "SSet.PinchedCube.BoundaryCubeAttachmentData",
+   "SSet.PinchedCube.rigidification_boundary_cube"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/RigidificationBoundaryCube.lean",
+  "statement": "theorem rigidification_boundary_cube (n : ℕ) : (n = 0 → IsEmpty (rigidification.obj (SSet.boundary 0) : Type u) ∧ Nonempty ((rigidification.obj Δ[0] : Type u) ≃ ULift.{u} PUnit) ∧ ∀ a b : (rigidification.obj Δ[0] : Type u), Nonempty (CoherentNerve.hom (rigidification.obj Δ[0]) a b ≅ Δ[0])) ∧ (0 < n → BoundaryCubeAttachmentData n)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The cube is the finite product of standard 1-simplices and its boundary is the supremum of the coordinate preimages of the standard 1-simplex boundary. BoundaryCubeAttachmentData records the object bijections, object and mapping injectivity, isomorphisms on every nonexceptional mapping space, the exceptional boundary/cube comparison, and the enriched pushout with U. The theorem has the n=0 case (empty boundary realization; one-object realization of the point whose mapping simplicial set is Delta[0], i.e. the boundary functor is empty-to-{0}) and the n>0 attachment case, with no target fibrancy hypothesis. Reviewer fix: the n=0 clause now also states the mapping simplicial set of the one-object category.",
+  "fixed_by": "NT-stage2-cc-a36828fd2"
  }
 }
