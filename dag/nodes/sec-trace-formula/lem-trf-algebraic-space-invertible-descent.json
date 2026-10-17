@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-trf-algebraic-space",
-  "def-sc-invertible-module"
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
  ],
  "proof": [
   {
@@ -288,5 +290,32 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q12-578e1b348 (reviewer sub-agent of L); spot-checked: Read the mathematics in full and wrote review.md. Stacks 04W8/060X, 03DX(2)/05VG/03LC(1), and 04TR/04TQ/00W2 support the eight-step construction and new comparison. Edge cases, duplicates, dependencies and route restrictions checked. Added only missing merged_into and empty lean_audit metadata in the corrected new-node JSON under fixes/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceInvertibleDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_lineModule_of_etale_descent",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.ordinaryEtaleSectionRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.atlasTransitionOn",
+   "AlgebraicGeometry.AlgebraicSpace.atlasTransitionOver",
+   "AlgebraicGeometry.AlgebraicSpace.OrdinaryEtaleIdentification",
+   "AlgebraicGeometry.AlgebraicSpace.InvertibleAtlasDescentDatum",
+   "AlgebraicGeometry.AlgebraicSpace.exists_lineModule_of_etale_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceInvertibleDescent.lean",
+  "statement": "theorem exists_lineModule_of_etale_descent {S : Scheme.{u}} (F : AlgebraicSpace S) {I : Type u} (V : I → F.EtaleSite) (hjoint : ∀ (T : Over S) (a : yoneda.obj T ⟶ F.obj.obj) (x : T.left), ∃ (i : I) (U : Over S) (p : U ⟶ T) (r : yoneda.obj U ⟶ yoneda.obj (V i).obj.left), IsPullback r (yoneda.map p) (V i).obj.hom a ∧ ∃ y : U.left, p.left.base y = x) (R : I → I → Over S) (p₁ : ∀ i j : I, R i j ⟶ (V i).obj.left) (p₂ : ∀ i j : I, R i j ⟶ (V j).obj.left) (hR : ∀ i j : I, IsPullback (yoneda.map (p₁ i j)) (yoneda.map (p₂ i j)) (V i).obj.hom (V j).obj.hom) (M : ∀ i : I, (F.etaleForget.obj (V i)).Modules) (hM : ∀ i : I, Scheme.Modules.IsInvertible (M i)) (D : InvertibleAtlasDescentDatum (fun i ↦ (V i).obj.left) R p₁ p₂ M) : (∃ (N : F.Modules), F.IsLineModule N ∧ ∃ (e : ∀ i : I, OrdinaryEtaleIdentification F (V i) N (M i)), ∀ (i j : I) (T : F.EtaleSite) (a : T ⟶ V i) (b : T ⟶ V j) (r : T.obj.left ⟶ R i j) (h₁ : r ≫ p₁ i j = a.hom.left) (h₂ : r ≫ p₂ i j = b.hom.left) (s : ((tensorPullback (F.etaleForget.map b)).obj (M j)).val.obj (op ⊤)), (e i).app T a (((atlasTransitionOver (M i) (M j) (p₁ i j) (p₂ i j) (D.transition i j) r a.hom.left b.hom.left h₁ h₂).hom.app ⊤) s) = (e j).app T b s) ∧ (∀ (P Q : F.Modules), F.IsLineModule P → F.IsLineModule Q → ∀ (g : ∀ i : I, (F.etalePullback (V i)).obj P ⟶ (F.etalePullback (V i)).obj Q), (∀ (i j : I) (T : F.EtaleSite) (a : T ⟶ V i) (b : T ⟶ V j), (g i).val.app (op (Over.mk a)) = (g j).val.app (op (Over.mk b))) → ∃! f : P ⟶ Q, ∀ i : I, (F.etalePullback (V i)).map f = g i)",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Retains ordinary Scheme.Modules.IsInvertible local modules and the specified ordinary tensor-pullback overlap isomorphisms. OrdinaryEtaleIdentification is the sectionwise linear/natural form of the localized-site isomorphism with the ordinary associated etale module. InvertibleAtlasDescentDatum bundles exactly the overlap isomorphisms, diagonal identity and triple cocycle; its tests range over all schemes over the base. The final conjunct is full faithfulness, stated as unique gluing of compatible localized module maps. All transport helpers have explicit data from the existing canonical tensor-pullback units and composition isomorphisms; no inverse equivalence or unrelated global extensions are assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b21a5dd3b",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Statement, dependencies, helpers, docstrings, edge cases, source alignment, route-pivot compliance, report sections, and per-file compilation all checked; no findings."
  }
 }

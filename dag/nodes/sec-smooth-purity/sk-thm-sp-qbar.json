@@ -20,7 +20,10 @@
   "def-weil-algebraically-closed-coefficients",
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-integral-rational-qbar-compact-support",
-  "def-coefficient-twists-detailed"
+  "def-coefficient-twists-detailed",
+  "def-weil-compact-support-coefficient-action",
+  "lem-weil-compact-support-finite-field-independence",
+  "lem-weil-structure-direct-images-constructible"
  ],
  "proof": [
   {
@@ -251,5 +254,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityQbar",
+  "declaration": "WeilConjectures.smoothPurityQbar",
+  "declarations": [
+   "WeilConjectures.smoothQbarResidueInvertible",
+   "WeilConjectures.smoothQbarPurityRightFunctor",
+   "WeilConjectures.smoothPurityQbar"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityQbar.lean",
+  "statement": "theorem smoothPurityQbar (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ) [SmoothOfRelativeDimension d f] (c : Compactification f) : ∃ S : SfCompactSupportCoefficientAction l D.k (finiteFieldDatumPrimeUnit D l hl) Ω c, Nonempty (S.system.functor ⊣ smoothQbarPurityRightFunctor D l hl Ω f d)",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The result supplies the normalized compact-support coefficient action and its adjunction, rather than assuming a functor or a scalar-comparison package. S.system.functor has exactly the published finite action and the fixed integral tensor-unit mate comparisons; its object values are sfQbarCompactSupportValue. The right functor is intrinsic common-stage adic pullback, tensor with the published signed completed root line, and the cohomological shift 2d. Residue-field invertibility is derived from l != p. A lean-only dependency repair transports the existing coefficient twists to the intrinsic category. No mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a9508b970",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Checked immutable statements, all statement dependencies, sources, twist repair, normalized functors, universes, edge cases, docstrings, and route-pivot compliance. Both modules passed scompile.py with no diagnostics; branch head unchanged."
  }
 }
