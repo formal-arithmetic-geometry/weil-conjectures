@@ -23,9 +23,175 @@
   "lem-sf-point-fibre-derived-tensor",
   "thm-pod-global-verdier-duality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the domains of the test-object calculation. The conventions [def-pod-conventions] give separated finite-type $a$, the four coefficient stages and $K\\in D^b_{ctf}$. The unit $\\Lambda_s$ has Tor amplitude $[0,0]$. The finite-Tor exceptional adjunction [fix-prop-adjunctions](2) puts $C=Ra_!K$ and $\\omega=Ra^!\\Lambda_s$ in their finite-Tor categories. At finite coefficients [thm-sf-ctf-stability](i)–(iii) puts $L=R\\mathcal Hom_X(K,\\omega)$, $D=Ra_*L$, $H=R\\mathcal Hom_s(C,\\Lambda_s)$, $La^*T$ and $K\\otimes La^*T$ in these categories for every finite-Tor point test object $T$. Integrally, clause (vii) supplies internal-Hom preservation and $D^b_c=D^b_{ctf}$; [lem-sf-integral-direct-image-constructible] supplies the completed ordinary direct image of $L$. The exceptional adjunction already supplies $C$. Rationalization and common finite fields give the same memberships at the two field stages, using [def-weil-derived-pullback-tensor-hom] and the coefficient-passage clause of stability. For a general finite-Tor $N$ on $s$, the exceptional adjunction puts $Ra^!N$ in $D^b_{ctf}(X,\\Lambda)$; internal-Hom preservation puts $L_N=R\\mathcal Hom_X(K,Ra^!N)$ and $B_N=R\\mathcal Hom_s(C,N)$ in the finite-Tor categories. Ordinary direct-image preservation then puts $A_N=Ra_*L_N$ in $D^b_{ctf}(s,\\Lambda)$, using the integral direct-image statement and $D^b_c=D^b_{ctf}$ at the integral stage. The prescribed rationalization and common-stage constructions give these memberships at the field stages. This includes $N=\\omega_s$. Thus both represented objects and the tests used below lie in the full finite-Tor point category; no site-perfectness or proper coincidence is required.",
+   "uses": [
+    "def-pod-conventions",
+    "fix-prop-adjunctions",
+    "thm-sf-ctf-stability",
+    "lem-sf-integral-direct-image-constructible",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1: domains of the Hom chain, with the current all-stage preservation statements"
+   }
+  },
+  {
+   "text": "For $N\\in D^b_{ctf}(s,\\Lambda)$ set $L_N=R\\mathcal Hom_X(K,Ra^!N)$, $A_N=Ra_*L_N$ and $B_N=R\\mathcal Hom_s(C,N)$. The ordinary and exceptional adjunctions [fix-prop-adjunctions], the restricted tensor–Hom adjunction [det-thm-sf-ctf-stability-adjunctions](2), and the projection isomorphism [fix-prop-projection-formula] give, in the indicated direction,\n$$\\begin{aligned}\n\\Phi^N_T:\\operatorname{Hom}_s(T,A_N)&\\cong\\operatorname{Hom}_X(La^*T,L_N)\\\\\n&\\cong\\operatorname{Hom}_X(K\\otimes La^*T,Ra^!N)\\\\\n&\\cong\\operatorname{Hom}_s(Ra_!(K\\otimes La^*T),N)\\\\\n&\\cong\\operatorname{Hom}_s(C\\otimes T,N)\\\\\n&\\cong\\operatorname{Hom}_s(T,B_N).\n\\end{aligned}$$\nThe first sends $t$ to $\\varepsilon_{L_N}La^*t$, the second evaluates against $K$, the third sends $h$ to $\\mu_NRa_!h$, the fourth precomposes with $P_T$, and the last curries. These are the inverse, in order, of uncurry, precomposition with $P_T^{-1}$, exceptional transpose, curry on $X$, and ordinary transpose in each of the two source constructions [lem-sf-tensor-hom, fix-lem-tensor-adjunction]. This verifies their normalization directly, rather than treating their assertion of a canonical isomorphism as an additional map formula. All ingredients are the same specified adjunctions and projection transformation [def-exchange-projection].\n\nPut $p_N=\\mu_NRa_!(\\operatorname{ev}_{K,Ra^!N}(1_K\\otimes\\varepsilon_{L_N}))P_{A_N}$ and $\\alpha_N=\\operatorname{curry}(p_N)$. Naturality of $P$ says\n$$P_{A_N}(1_C\\otimes t)=Ra_!(1_K\\otimes La^*t)P_T.$$\nConsequently $\\Phi^N_T(t)=\\operatorname{curry}(p_N(1_C\\otimes t))=\\alpha_Nt$ by [lem-pod-closed-uncurry-laws]. To see the represented inverse without any faithfulness claim about cohomology, take $v=(\\Phi^N_{B_N})^{-1}(1_{B_N})$. Then $\\alpha_Nv=1$; injectivity of $\\Phi^N_{A_N}$ gives $v\\alpha_N=1$, because both sides map to $\\alpha_N$. Thus both source constructions give this same actual isomorphism $\\alpha_N$. At $N=\\Lambda_s$ it is exactly the displayed $\\alpha_s$ of the statement. Naturality of every bijection in $N$ also gives, for $b:N\\to N'$, $\\alpha_{N'}A(b)=B(b)\\alpha_N$, where $A(b)=Ra_*R\\mathcal Hom_X(K,Ra^!b)$ and $B(b)=R\\mathcal Hom_s(C,b)$.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "det-thm-sf-ctf-stability-adjunctions",
+    "fix-prop-projection-formula",
+    "lem-sf-tensor-hom",
+    "fix-lem-tensor-adjunction",
+    "def-exchange-projection",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, compared term by term with sk-thm-sf-tensor-hom/lem-sf-tensor-hom.proof.md Steps 1–2"
+   }
+  },
+  {
+   "text": "Write $w=\\omega_{s,\\Lambda}$ and take the identity-adjunction isomorphism $u:w\\to\\Lambda_s$ of [lem-pod-point-dualizing-complex]. We verify the structure-morphism mate entering [fix-cor-verdier-exchange]. Since $a_s=\\mathrm{id}_s$, its mate $m:Ra^!w\\to\\omega$ equals $Ra^!u$: under the exceptional adjunction of [fix-prop-adjunctions](2), the transpose of $Ra^!u$ is $u\\mu_{a,w}$. The composition law [thm-sf-comp-composition] is the identity when one factor is an identity, under the canonical identity identifications; its completed and transported forms in clause (3) of [fix-prop-adjunctions] are formed from these finite-level comparisons, so the comparison $R(\\mathrm{id}_s\\circ a)_!\\cong R\\mathrm{id}_{s!}Ra_!$ is the identity under the identity normalization of $R\\mathrm{id}_{s!}$ used in [lem-pod-point-dualizing-complex]. Under that normalization the transpose is precisely the pasted counit $\\mu_{\\mathrm{id},\\Lambda}R\\mathrm{id}_!(\\mu_{a,w})$ of clause (3), since the identity-adjunction isomorphism is the counit under that normalization. The mate $m$ has this same transpose by the composite-adjunction construction, and the adjunction bijection is injective. This proves $m=Ra^!u$ with the specified composition comparison, including the completed identity normalization; no independent choice of an isomorphism of right adjoints has been made.\n\nThe source construction of the named exchange is the inverse tensor–Hom arrow at $N=w$ followed by $Ra_*R\\mathcal Hom_X(K,m)$. We have just computed both constituents: it is $A(u)\\alpha_w^{-1}$. Step 2's naturality equation with $b=u$ reads $\\alpha_sA(u)=\\rho\\alpha_w$. Multiplying by the two inverses gives\n$$e=A(u)\\alpha_w^{-1}=\\alpha_s^{-1}\\rho.$$\nThis is a calculation of the exchange's construction from the stated adjunctions and the already named tensor–Hom comparison, not an appeal to an unstated normalization theorem about $e$. The identity morphism of $s$ satisfies the exceptional hypothesis using the identity adjunction of the point lemma, so the exchange applies to $a$, $a_X=a$, $a_Y=\\mathrm{id}_s$.",
+   "uses": [
+    "lem-pod-point-dualizing-complex",
+    "fix-prop-adjunctions",
+    "thm-sf-comp-composition",
+    "fix-cor-verdier-exchange",
+    "fix-lem-tensor-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
+    "place": "Steps 1–2: compute the structure-morphism mate when a_Y is the identity"
+   }
+  },
+  {
+   "text": "We now compute the point comparison on complexes, to fix its normalization. At finite and integral coefficients put $(R,B)=(A_{E,n},(A_{E,n})_s)$ or $(\\mathcal O_E,\\widehat{\\mathcal O}_{E,s})$. Define $L_RM=B\\otimes_{\\underline R}\\underline M$. The sheaf tensor definition [def-pur-sheaf-tensor-product] gives an explicit adjunction $L_R\\dashv\\Gamma(s,-)$: $h:L_RM\\to V$ is sent to $m\\mapsto h_s(1\\otimes m)$, with inverse $t\\mapsto(b\\otimes m\\mapsto b\\,t(m)|_U)$ on every object $U$. These formulas respect balancing and restriction and are mutually inverse. Exact sheafification [lem-weil-pbc-site-r-module-presheaf-sheafification-exact] makes the constant module functor exact; integrally, flatness in [lem-weil-pbc-completed-constant-sheaf-reduction] makes $L_R$ exact as well. Sections are exact by [lem-weil-point-proetale-sections-exact]. The continuous-functions formula [lem-weil-pbc-continuous-coefficients-immersion-restriction] at $s$ gives $\\Gamma(s,B)=R$ integrally. Its reduction formula and exact sections give the same identity at finite coefficients: apply sections to $0\\to B\\xrightarrow{\\varpi^n}B\\to(A_{E,n})_s\\to0$. Multiplication is injective since the integral $B$ is flat over the domain $\\mathcal O_E$.\n\nHere $\\mathcal O_E$ is a PID by [lem-weil-l-adic-extension-integers-dvr], so it and its quotient rings are Noetherian. For a finite module $M$, [lem-sc-noetherian-finite-module-finite-presentation] gives a finite presentation. Exactness and $\\Gamma(s,B)=R$ show that the actual adjunction unit $M\\to\\Gamma(s,L_RM)$ is an isomorphism, by applying the two functors to that presentation. It follows on cohomology that the unit is a quasi-isomorphism for every complex with bounded finite cohomology. In particular this applies to $c=FC$ by [def-weil-finite-coefficient-point]. At finite coefficients $L_Rc$ has bounded constant finite cohomology; [lem-weil-proetale-constant-sheaf-stalk] identifies its cohomology stalks with those finite modules, so it belongs to the constructible category by [def-weil-finite-torsion-constructibility]. Integrally, [lem-weil-coefficient-frobenius] makes $c$ perfect, so a bounded finite-projective model $P$ gives $L_RP$ constructible by [lem-weil-pbc-integral-stratified-perfect-characterization] on the single stratum $s$ (Noetherian of dimension zero with $\\ell$ invertible). The triangle identity makes sections of the actual counit $L_Rc\\to C$ inverse to the unit at $c$. Therefore [lem-weil-point-fibre-equivalence], applied to these two constructible objects, makes this counit an isomorphism. We may consequently use $L_Rc$ as a representative of $C$ through this specified counit, without identifying arbitrary pro-etale sheaves with modules.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "def-weil-finite-coefficient-point",
+    "def-weil-finite-torsion-constructibility",
+    "lem-weil-coefficient-frobenius",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-point-fibre-equivalence",
+    "lem-weil-proetale-constant-sheaf-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence, expanded by the sections/extension-of-scalars adjunction and the actual counit model"
+   }
+  },
+  {
+   "text": "At finite coefficients choose the representative of $c$ to be K-flat with flat terms, using [lem-pc-kflat-resolution] on the one-object ringed site with ring $R$. The exact functor $L_R$ is the module pullback for the ringed-topos morphism whose inverse image is the constant-sheaf functor and whose ring map is $\\underline R\\to B$. Hence [lem-weil-pbc-ringed-topos-kflat-pullback] makes $L_Rc$ K-flat too. Exactness of $L_R$ and the counit isomorphism of Step 4 identify this replacement with the same object $C$. Thus the ordinary tensor evaluation on these representatives computes the derived evaluation; an arbitrary nonflat complex has not been used to compute a derived tensor. Choose a K-injective resolution $B\\to I$ as in [def-pur-derived-internal-hom]. Its sections are K-injective over $R$: a map from an acyclic module complex $Q$ to $\\Gamma(s,I)$ adjoints by Step 4 to a map $L_RQ\\to I$; exactness of $L_R$ makes $L_RQ$ acyclic, and [def-pur-kinjective-complex] supplies a null homotopy. The same adjunction carries that homotopy back. Exact sections make $R\\to\\Gamma(s,I)$ a quasi-isomorphism. Thus $\\Gamma(s,I)$ computes derived coefficient Hom. The definitions of sheaf Hom and its Hom complex [def-pur-sheaf-hom, def-pur-hom-complex] give an isomorphism of complexes\n$$\\Gamma\\bigl(s,\\mathcal Hom_B^\\bullet(L_Rc,I)\\bigr)\\xrightarrow{\\sim}\\operatorname{Hom}_R^\\bullet(c,\\Gamma(s,I)),\\qquad h\\longmapsto(m\\mapsto h(1\\otimes m)).$$\nIn degree $j$, use this formula on each component $c^p\\to I^{p+j}$; both differentials are $d_Ih-(-1)^jhd_c$. It is therefore an isomorphism on the complexes themselves and hence in the derived category. With the actual counit model of Step 4, this is the coefficient-Hom identification used to construct the canonical point isomorphism of [lem-pod-point-dualizing-complex], after applying $R\\mathcal Hom_s(C,u)$. We verify its evaluation, rather than presuming a normalization from the word canonical: a homogeneous $h$ of degree $j$ evaluated on $x\\in c^p$ is $(-1)^{pj}h(1\\otimes x)$ when the tensor factors are ordered as $c\\otimes\\operatorname{Hom}$; the sheaf and module evaluation give this same sign, from the same factor interchange. At finite coefficients this is exactly the balancing map through the tensor comparison [lem-sf-point-fibre-derived-tensor]. Integrally use the bounded finite-projective $P$ of Step 4. Sheaf Hom from $B\\otimes_RP^i$ is exact, since $P^i$ is a retract of a finite free module. Filtering by the finitely many degrees of $P$ therefore shows that $\\mathcal Hom_B^\\bullet(B\\otimes_RP,B)\\to\\mathcal Hom_B^\\bullet(B\\otimes_RP,I)$ is a quasi-isomorphism. Its source is the bounded model $B\\otimes_R\\operatorname{Hom}_R^\\bullet(P,R)$. Both this model and its ordinary tensor with $B\\otimes_RP$ are constructible and derived complete by the stratified-perfect characterization already used in Step 4. The canonical completeness map, as specified for the identity extension in [lem-weil-finite-free-completed-scalar-comparison], identifies ordinary tensor on these models with completed tensor. On the strict cone models of [def-weil-derived-pullback-tensor-hom], the completion map has the quotient maps as its product component and zero as its shifted-product component. Evaluation commutes with every quotient map, by the formula $h(1\\otimes x)$ and its sign; it therefore commutes with the induced product maps and their cone differentials. Exact sections carries these same product components to the coefficient ones. Hence the completed tensor comparison carries this evaluation to the same module evaluation too. Thus the resulting map $FH\\to c^\\vee$ is the coefficient transpose of transported evaluation, namely the specified $\\kappa$. Replacing $B$ by $w$ and applying $u$ in the second Hom variable composes this map with $F\\rho$. This proves\n$$j=\\kappa F\\rho$$\nat finite and integral coefficients as equality of derived morphisms, not merely on cohomology. Since $j$ and $F\\rho$ are invertible, so is this specified $\\kappa$.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-kinjective-complex",
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex",
+    "lem-pod-point-dualizing-complex",
+    "lem-sf-point-fibre-derived-tensor",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: explicit Hom-complex comparison and evaluation normalization"
+   }
+  },
+  {
+   "text": "At rational coefficients represent $C_E$ by an integral constructible object as specified in [def-weil-derived-pullback-tensor-hom, def-weil-finite-coefficient-point]. Its evaluated integral complex is perfect by [lem-weil-coefficient-frobenius]. On a bounded finite-projective representative $P$, the coefficient scalar-Hom comparison [lem-pc-base-change-rhom-perfect] is the chain isomorphism\n$$\\operatorname{Hom}_R^\\bullet(P,R)\\otimes_RE\\longrightarrow\\operatorname{Hom}_E^\\bullet(P\\otimes_RE,E),\\qquad h\\otimes a\\longmapsto(x\\otimes b\\mapsto h(x)ab).$$\nFor free terms this is evaluation on a basis; for projective terms restrict the same formula along a splitting idempotent. It commutes with $d h=d_Rh-(-1)^{|h|}hd_P$ and with the evaluation sign of Step 5. Thus rationalizing the preceding chain comparison proves $j=\\kappa F\\rho$ at $E$, including when its integral representative has torsion. Naturality for a localized arrow $v\\otimes a$ follows by multiplying the integral naturality equation by $a$ and adding such equations.\n\nFor $\\overline{\\mathbf Q}_\\ell$ perform this calculation over a common finite field. The specified scalar comparisons are [lem-pur-integral-operations-scalar-extension] and [lem-weil-point-sections-scalar-extension]. Writing $\\theta$ for the sections-tensor map and $\\chi$ for the completion comparison, the latter is explicitly $\\varphi=(\\Gamma(s,\\chi)\\circ\\theta)^{-1}=\\theta^{-1}\\circ\\Gamma(s,\\chi)^{-1}$; [lem-weil-finite-free-completed-scalar-comparison] identifies that completion with ordinary completed-ring extension on the bounded finite-projective models $B\\otimes_RP$ and their Hom duals. To check the specified internal-Hom comparison itself, expand the extension-of-scalars adjunction used in its construction: the sectionwise map $h\\otimes a\\mapsto(m\\mapsto h(m)\\otimes a)$ adjoints to $h\\otimes a\\mapsto(m\\otimes b\\mapsto h(m)\\otimes ab)$. This follows directly by evaluating the adjunct on $1\\otimes m$ and then extending linearly, exactly as in Step 4. On the finite-projective models this is the free-term formula just written and its projective retract. Thus the source comparison is the transpose of extended evaluation and has the stated inverse; it has not been replaced by an independently chosen natural isomorphism. In a tower of fields both scalar routes send $((h\\otimes a)\\otimes b)(x\\otimes t)$ to $h(x)abt$, including the identical evaluation sign. This checks the actual comparison maps and their differentials, not just their source and target objects. The identity and tower compatibilities in the two cited comparison statements make these equal arrows define the same morphism class at any larger common field. Hence the equation $j=\\kappa F\\rho$ holds with the stipulated common-stage comparisons too.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-coefficient-point",
+    "lem-weil-coefficient-frobenius",
+    "lem-pc-base-change-rhom-perfect",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence at E and algebraically closed coefficients: rationalization and common-stage evaluation calculation"
+   }
+  },
+  {
+   "text": "Finally the global comparison of [thm-pod-global-verdier-duality] is constructed by applying the point functor [def-weil-finite-coefficient-point] to the exchange $e$ and using the specified point-dualizing identification on its source. Spelling out this source construction gives $g=F(e)j^{-1}$. Substituting the equalities of Steps 3 and 5–6 and cancelling inverse isomorphisms gives\n$$\\begin{aligned}\ng&=F(\\alpha_s)^{-1}F(\\rho)(\\kappa F(\\rho))^{-1}\\\\\n &=F(\\alpha_s)^{-1}\\kappa^{-1}=(\\kappa F(\\alpha_s))^{-1}.\n\\end{aligned}$$\nFunctoriality carries the inverse identities through $F$, and these displayed cancellations prove both inverse equations. All point identifications are the coefficient-stage ones of [lem-pod-point-dualizing-complex]; the integral operations remain completed, and the field calculations are those of Step 6. No smooth orientation, proper-support identification or Poincare pairing enters this calculation.",
+   "uses": [
+    "thm-pod-global-verdier-duality",
+    "def-weil-finite-coefficient-point",
+    "lem-pod-point-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "First paragraph: evaluate the exchange and identify its source; substitute the normalization equations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-conventions",
+  "fix-prop-adjunctions",
+  "thm-sf-ctf-stability",
+  "lem-sf-integral-direct-image-constructible",
+  "def-weil-derived-pullback-tensor-hom",
+  "det-thm-sf-ctf-stability-adjunctions",
+  "fix-prop-projection-formula",
+  "lem-sf-tensor-hom",
+  "fix-lem-tensor-adjunction",
+  "def-exchange-projection",
+  "lem-pod-closed-uncurry-laws",
+  "lem-pod-point-dualizing-complex",
+  "thm-sf-comp-composition",
+  "fix-cor-verdier-exchange",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "def-weil-finite-coefficient-point",
+  "def-weil-finite-torsion-constructibility",
+  "lem-weil-coefficient-frobenius",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "def-pur-derived-internal-hom",
+  "def-pur-kinjective-complex",
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pc-base-change-rhom-perfect",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-point-sections-scalar-extension",
+  "thm-pod-global-verdier-duality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
+  "place": "Steps 1–2, with the explicit tensor–Hom and point-evaluation calculations in the source proofs named in each step"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -89,10 +255,66 @@
    "results": "19 hits, all references to Verdier or Verdier localizing subcategories; no global Verdier map or tensor-Hom exchange declaration.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical global Verdier duality map equals inverse tensor internal Hom comparison",
+   "results": "8 returned hits: CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft. Generic adjunction, tensor-Hom or unrelated duality infrastructure; no geometric global Verdier map normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "global Verdier duality exchange is inverse tensor internal Hom comparison",
+   "results": "8 returned hits: CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, sInfHom.dual_symm_apply_toFun, BotHom.symm_dual_comp, sInfHom.symm_dual_id, CategoryTheory.expComparison, CategoryTheory.tensorRightHomEquiv, FDRep.dualTensorIsoLinHom, CategoryTheory.tensorLeftHomEquiv. Generic adjunction, tensor-Hom or unrelated duality infrastructure; no geometric global Verdier map normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "counit projection formula transpose defines Verdier duality exchange with normalized point evaluation",
+   "results": "8 returned hits: CompHausLike.LocallyConstant.counitAppApp, HomologicalComplex.dgoEquivHomologicalComplex_counitIso, LightCondensed.ihomPoints_symm_apply, LightCondensed.ihomPoints_symm_comp, Condensed.profiniteSolidCounit, HomologicalComplex.opEquivalence_counitIso, CategoryTheory.ExactPairing.coevaluation_evaluation'', CategoryTheory.coev_expComparison. Generic adjunction, tensor-Hom or unrelated duality infrastructure; no geometric global Verdier map normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|globalDuality|tensorHomExchange",
+   "results": "19 returned hits: Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/SpectralObject.lean. Generic adjunction, tensor-Hom or unrelated duality infrastructure; no geometric global Verdier map normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|tensor.*Hom|RHom",
+   "results": "25 returned hits: Mathlib/Tactic/Attr/Register.lean, Mathlib/Tactic/Attr/Register.lean, Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean, Mathlib/Tactic/CategoryTheory/Monoidal/Datatypes.lean, Mathlib/NumberTheory/Padics/Measure/Basic.lean, Mathlib/Tactic/CategoryTheory/Monoidal/Normalize.lean, Mathlib/Tactic/CategoryTheory/Monoidal/Normalize.lean. Generic adjunction, tensor-Hom or unrelated duality infrastructure; no geometric global Verdier map normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric monoidal equivalence preserves evaluation and the internal Hom adjunction counit",
+   "results": "8 actual hits; including CategoryTheory.Functor.ihom_ev_app, CategoryTheory.Functor.closedCounit_app_app, CategoryTheory.coev_expComparison, CategoryTheory.ihom.ihom_adjunction_counit, CategoryTheory.Functor.ihom_coev_app, CategoryTheory.Functor.closedCounit, CategoryTheory.MonoidalClosed.unitNatIso, CategoryTheory.frobeniusMorphism_mate. Generic closed-monoidal evaluation infrastructure or Verdier localization references; no all-stage geometric map-normalization statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"ev\"",
+   "results": "12 actual hits; including CategoryTheory.ihom.coev, CategoryTheory.ihom.ev, CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app, CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app_assoc, CategoryTheory.MonoidalClosed.whiskerLeft_curry'_ihom_ev_app, CategoryTheory.ihom.ev_coev_assoc, CategoryTheory.MonoidalClosed.whiskerLeft_curry'_ihom_ev_app_assoc, CategoryTheory.ihom.coev_naturality. Generic closed-monoidal evaluation infrastructure or Verdier localization references; no all-stage geometric map-normalization statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|dualityExchange|globalDuality|internalHomComparison [CategoryTheory]",
+   "results": "19 actual hits; including Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean. Generic closed-monoidal evaluation infrastructure or Verdier localization references; no all-stage geometric map-normalization statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pod-identification-of-the-comparison",
@@ -109,5 +331,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pod-global-duality-map-identification",
+  "worker": "stage1",
+  "summary": "Expanded the reviewed source proof retained in the creating item report into seven explicit steps: all-stage domains, the actual Hom chain, identity-adjunction mate, point counit model, Hom-complex evaluation, coefficient passages, and inverse cancellation. Reused existing nodes throughout; no new nodes or Mathlib leaves. Statement retained unchanged.",
+  "blueprint": "Realizes the third paragraph of thm-pod-identification-of-the-comparison.proof.md: the reverse global-duality map is the inverse of the specified tensor–Hom transpose, including both exchange interfaces and the point-dualizing normalization."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-5931eea08",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-5931eea08 (reviewer sub-agent of L); spot-checked: I read the whole item and its seven steps, and the statements of all 38 proof_deps. I also read the DAG proofs that construct the named maps: fix-lem-tensor-adjunction S1-9, lem-sf-tensor-hom S1-7 with its blueprint_update, fix-cor-verdier-exchange S1-3, lem-pod-point-dualizing-complex S1-6 and thm-pod-global-verdier-duality S1-5. On the blueprint side (main-20261015) I read thm-pod-identification-of-the-comparison (third paragraph) and fix-cor-verdier-exchange. Findings: (1) alpha_s is the forward map b=h_A^{-1}(1_A) of both tensor-Hom proofs, since the item's Phi is exactly h^{-1}. I recomputed Phi_T(t)=alpha_N t from naturality of PF and the uncurry laws; the two-sided inverse argument is correct. (2) Step 3 is right that e=A(u)alpha_w^{-1}=alpha_s^{-1}rho. The derivation needs the composition comparison R(id o a)_! = Rid_! Ra_! to be the identity under the identity normalization of the point lemma, and the step used this without a citation (C1). I fixed it by adding the identity clause of thm-sf-comp-composition, which is on the unit route and creates no cycle, to Step 3's text, its uses and proof_deps. (3) Steps 4-6 match the point-dualizing construction. Exactness and Gamma(s,B)=O_E come from the flat-over-domain sequence. Constructibility of L_R c is via the constant stalk at finite level and via perfectness plus the stratified characterization on T=s integrally. The K-flat pullback applies to u^*=L_R. The Hom-complex isomorphism holds at the final object, and signs and completion components were checked. At the Qlbar stage phi=(Gamma(chi) o theta)^{-1} as stated, with tower independence. (4) Step 7: g=F(e)j^{-1}=(kappa F alpha_s)^{-1}. Small cases checked: K=0, X=s, n=1, nonproper A^1, integral torsion, signs. Every statement cited is on the sk-thm-sf-package route, so no tool_uses are needed. There are no new nodes, no duplicates, no SGA, no cycle, and the statement is unchanged. The corrected item is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  }
 }
