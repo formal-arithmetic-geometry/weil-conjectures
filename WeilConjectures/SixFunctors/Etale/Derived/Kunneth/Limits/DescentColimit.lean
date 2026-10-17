@@ -27,6 +27,12 @@ namespace ModuleCat
 variable {Λ : Type (u + 1)} [CommRing Λ] {J : Type u} [Category.{u} J] [IsFiltered J]
   {K : J ⥤ ModuleCat.{u + 1} Λ}
 
+/-- The forgetful functor of `ModuleCat.{u + 1} Λ` preserves filtered colimits indexed by
+categories in `Type u`. -/
+instance preservesFilteredColimitsOfSize_forget_succ :
+    PreservesFilteredColimitsOfSize.{u, u} (forget (ModuleCat.{u + 1} Λ)) :=
+  preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u} _
+
 /-- A cocone `t` over a filtered diagram of modules is a colimit if every element of `t.pt`
 comes from some stage, and every element of a stage which maps to zero in `t.pt` maps to zero
 at a later stage. -/
@@ -34,8 +40,6 @@ noncomputable def isColimitOfFiltered (t : Cocone K)
     (hsurj : ∀ y : t.pt, ∃ (j : J) (x : K.obj j), t.ι.app j x = y)
     (hinj : ∀ (j : J) (x : K.obj j), t.ι.app j x = 0 → ∃ (k : J) (f : j ⟶ k), K.map f x = 0) :
     IsColimit t :=
-  have : PreservesFilteredColimitsOfSize.{u, u} (forget (ModuleCat.{u + 1} Λ)) :=
-    preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u} _
   have : ReflectsColimit K (forget (ModuleCat.{u + 1} Λ)) :=
     reflectsColimit_of_reflectsIsomorphisms _ _
   isColimitOfReflects (forget (ModuleCat.{u + 1} Λ))

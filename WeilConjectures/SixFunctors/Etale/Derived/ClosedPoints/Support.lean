@@ -80,7 +80,7 @@ lemma eq_zero_of_forall_mem_sectionVanishingLocus {W : X.Etale} {z : F.obj.obj (
   have hcov : ⋃ w, Set.range (b w).left = Set.univ :=
     Set.iUnion_eq_univ_iff.2 fun w ↦ ⟨w, hb w⟩
   exact (Scheme.isSheafFor_ofArrows_moduleCat F b hcov).isSeparatedFor.ext fun _ _ ⟨w⟩ ↦
-    (hz w).trans (map_zero _).symm
+    by simp [hz w]
 
 /-- A point whose image lies in the vanishing locus of `z` lies in the vanishing locus of the
 restriction of `z`. -/
@@ -190,6 +190,12 @@ noncomputable def supportedSections (U : X.Opens) :
 noncomputable def supportedSectionsι (U : X.Opens) : supportedSections F U ⟶ F :=
   kernel.ι _
 
+@[reassoc (attr := simp)]
+lemma supportedSectionsι_comp_unit (U : X.Opens) :
+    supportedSectionsι F U ≫
+      (openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} Λ) U.ι).unit.app F = 0 :=
+  kernel.condition _
+
 instance (U : X.Opens) : Mono (supportedSectionsι F U) := by
   dsimp [supportedSectionsι]
   infer_instance
@@ -205,8 +211,13 @@ lemma isZero_upperStar_supportedSections (U : X.Opens) :
       rw [adj.left_triangle_components F]
       exact IsIso.id _
     exact IsIso.of_isIso_comp_right _ (adj.counit.app (R.obj F))
-  exact ((isZero_kernel_of_mono (R.map (adj.unit.app F))).of_iso
-    (PreservesKernel.iso R _)).of_iso ((upperStarIsoOpenImmersionRestriction _ U.ι).app _)
+  let P := (U.ι)^*[ModuleCat.{u + 1} Λ]
+  have : IsIso (P.map (adj.unit.app F)) :=
+    (NatIso.isIso_map_iff (upperStarIsoOpenImmersionRestriction _ U.ι) _).2 this
+  have h0 : P.map (supportedSectionsι F U) = 0 := by
+    rw [← cancel_mono (P.map (adj.unit.app F)), zero_comp, ← P.map_comp,
+      supportedSectionsι_comp_unit, P.map_zero]
+  exact IsZero.of_mono_eq_zero _ h0
 
 /-- The unit `F ⟶ j_* j^* F` on sections over `W` is the restriction to `W ×_X U`. -/
 lemma openImmersionRestrictionLowerStarAdjunction_unit_app_hom_app (U : X.Opens)
@@ -224,14 +235,17 @@ lemma exists_supportedSectionsι_app_eq (U : X.Opens) {W : X.Etale} (z : F.obj.o
     ∃ z', (supportedSectionsι F U).hom.app (op W) z' = z := by
   refine exists_kernel_ι_hom_app_eq _ z ?_
   rw [openImmersionRestrictionLowerStarAdjunction_unit_app_hom_app]
-  refine eq_zero_of_forall_mem_sectionVanishingLocus fun v ↦
-    mem_sectionVanishingLocus_map _ (hz _ ?_)
-  have h := MorphismProperty.Over.w ((MorphismProperty.Over.mapPullbackAdj @Etale ⊤ U.ι
-    inferInstance trivial).counit.app W)
-  have h' := congrArg (fun f ↦ f v) h
-  simp only [Scheme.Hom.comp_apply] at h'
-  rw [h', ← SetLike.mem_coe, ← Scheme.Opens.range_ι]
-  exact ⟨_, rfl⟩
+  let c := (MorphismProperty.Over.mapPullbackAdj @Etale ⊤ U.ι inferInstance trivial).counit.app W
+  have key : F.obj.map c.op z = 0 := by
+    refine eq_zero_of_forall_mem_sectionVanishingLocus (F := F) fun v ↦
+      mem_sectionVanishingLocus_map c (hz _ ?_)
+    have h := MorphismProperty.Over.w c
+    have h' := congrArg (fun f ↦ f v) h
+    simp only [Scheme.Hom.comp_apply] at h'
+    have h'' : W.hom (c.left v) = _ := h'
+    rw [h'', ← SetLike.mem_coe, ← Scheme.Opens.range_ι]
+    exact ⟨_, rfl⟩
+  exact key
 
 end SupportedSections
 
@@ -242,10 +256,13 @@ variable {K : Type u} [Field K] [IsSepClosed K] {X : Scheme.{u}}
 
 /-- The open complement of a finite set of closed points. -/
 def openComplOfFinite {S : Set X} (hS : S.Finite) (hS' : S ⊆ closedPoints X) : X.Opens :=
-  ⟨Sᶜ, by
-    refine IsClosed.isOpen_compl (s := S) ?_
+  ⟨Sᶜ, isOpen_compl_iff.mpr (by
     rw [← Set.biUnion_of_singleton S]
-    exact hS.isClosed_biUnion fun x hx ↦ hS' hx⟩
+    exact hS.isClosed_biUnion fun x hx ↦ hS' hx)⟩
+
+lemma coe_openComplOfFinite {S : Set X} (hS : S.Finite) (hS' : S ⊆ closedPoints X) :
+    (openComplOfFinite hS hS' : Set X) = Sᶜ :=
+  rfl
 
 /-- Blueprint `lem-kun-0f1f-gen`: **global generation for sheaves supported on closed
 points.** Let `K` be a separably closed field, `X` a scheme locally of finite type over `K` and
@@ -274,17 +291,17 @@ theorem isGloballyGenerated_of_isZero_sheafFiber (p : X ⟶ Spec (.of K)) [Local
   have hG (S : ι) : IsGloballyGenerated Λ X (G S) := by
     refine isGloballyGenerated_of_isZero_upperStar Λ (U S) ?_ (fun x hx ↦ ?_) (fun x hx ↦ ?_)
       _ (isZero_upperStar_supportedSections F (U S))
-    · simpa [U, openComplOfFinite] using S.2.1
-    · simpa [U, openComplOfFinite] using S.2.2 (by simpa [U, openComplOfFinite] using hx)
-    · have hx' : x ∈ S.1 := by simpa [U, openComplOfFinite] using hx
+    · simpa [U, ← SetLike.mem_coe, coe_openComplOfFinite] using S.2.1
+    · simpa [U, ← SetLike.mem_coe, coe_openComplOfFinite] using S.2.2 (by simpa [U, ← SetLike.mem_coe, coe_openComplOfFinite] using hx)
+    · have hx' : x ∈ S.1 := by simpa [U, ← SetLike.mem_coe, coe_openComplOfFinite] using hx
       exact (p.residueField_of_isClosed_of_isSepClosed x (S.2.2 hx')).2.2
   let ψ (S : ι) : G S ⟶ F := supportedSectionsι F (U S)
   have : Epi (Sigma.desc ψ) := by
-    refine (Sheaf.isLocallySurjective_iff_epi' (ModuleCat.{u + 1} Λ) _).1 ⟨fun {W} s ↦ ?_⟩
+    refine (Sheaf.isLocallySurjective_iff_epi' (ModuleCat.{u + 1} Λ) (Sigma.desc ψ)).1 ⟨fun {W} s ↦ ?_⟩
     rw [mem_smallEtaleTopology_iff]
     intro w
     obtain ⟨O, hO, hwO, -⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.mp
-      W.left.isBasis_affineOpens) (Set.mem_univ w) isOpen_univ
+      W.left.isBasis_affineOpens) (show w ∈ (⊤ : W.left.Opens) from trivial)
     have : Etale W.hom := W.prop
     let V : X.Etale := Scheme.Etale.mk (O.ι ≫ W.hom)
     let g : V ⟶ W := MorphismProperty.Over.homMk O.ι rfl

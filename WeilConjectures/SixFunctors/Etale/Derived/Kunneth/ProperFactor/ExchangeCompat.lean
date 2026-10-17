@@ -76,7 +76,6 @@ lemma map_kunnethMap_comp_counit (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : 
     comp_whiskerRight, MonoidalCategory.whiskerLeft_comp]
   rw [whisker_exchange_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc, Iso.hom_inv_id_app,
     MonoidalCategory.whiskerLeft_id, Category.id_comp]
-  done
 
 /-- The counit `Lr'^* Ra_{Y*} K ≅ Lc'^* Ra_{Y*} K ⟶ ...` of a composite `r' = h ≫ r`: the map
 `Lc'^* Ra_{Y*} K ≅ Lr'^* La_Y^* Ra_{Y*} K ⟶ Lr'^* K` agrees with
@@ -180,7 +179,7 @@ lemma kunnethMap_derivedBaseChangeMap (aX : X ⟶ S) (aY : Y ⟶ S) (aU : U ⟶ 
   rw [← leftDerivedUpperStarTensorComparison_comp_derivedTensor_assoc A h c c' hc'.symm]
   congr 1
   simp only [derivedTensor, curriedTensor_map_app, curriedTensor_obj_map,
-    whisker_exchange_assoc, whisker_exchange]
+    whisker_exchange_assoc]
   simp only [← comp_whiskerRight_assoc, ← MonoidalCategory.whiskerLeft_comp]
   congr 2
   · rw [derivedUpperStar_map_derivedBaseChangeMap_app_counit]
