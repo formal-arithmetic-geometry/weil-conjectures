@@ -27,7 +27,11 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-presentable-infinity-category"
+  "def-coef-presentable-infinity-category",
+  "lem-coef-coherent-diagram-coyoneda",
+  "def-coef-coherent-adjunction-data",
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-coef-infinity-reflection-assembly"
  ],
  "proof": [
   {
@@ -338,5 +342,42 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityRelativeColimitCompletion",
+  "declaration": "SSet.Enhanced.RelativeCompletion.infinity_relative_colimit_completion",
+  "declarations": [
+   "SSet.Enhanced.RelativeCompletion.Relation",
+   "SSet.Enhanced.RelativeCompletion.Respects",
+   "SSet.Enhanced.RelativeCompletion.product",
+   "SSet.Enhanced.RelativeCompletion.productMap",
+   "SSet.Enhanced.RelativeCompletion.insert",
+   "SSet.Enhanced.RelativeCompletion.stage",
+   "SSet.Enhanced.RelativeCompletion.stageMap",
+   "SSet.Enhanced.RelativeCompletion.CoordinateCondition",
+   "SSet.Enhanced.RelativeCompletion.functors",
+   "SSet.Enhanced.RelativeCompletion.Restriction",
+   "SSet.Enhanced.RelativeCompletion.Postcomposition",
+   "SSet.Enhanced.RelativeCompletion.Universal",
+   "SSet.Enhanced.RelativeCompletion.comparison",
+   "SSet.Enhanced.RelativeCompletion.IsLocal",
+   "SSet.Enhanced.RelativeCompletion.Unary",
+   "SSet.Enhanced.RelativeCompletion.infinity_relative_colimit_completion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityRelativeColimitCompletion.lean",
+  "statement": "theorem infinity_relative_colimit_completion : (∀ (n : ℕ) (C : Fin n → SSet.{max (u + 1) v}) (hC : ∀ i, Quasicategory (C i)) (R : ∀ i, Set (Relation.{u, max (u + 1) v} (C i))), ∃ (P : Fin n → SSet.{max (u + 1) v}) (j : ∀ i, C i ⟶ P i), (∀ i, Quasicategory (P i)) ∧ (∀ i, Unary (R i) (j i)) ∧ Nonempty (Universal C P R j)) ∧ (∀ (C : SSet.{u}) [Quasicategory C] (R : Set (Relation.{u, u + 1} (SSet.uliftFunctor.{u + 1, u}.obj C))) [Small.{u} R], ∃ (hA : Quasicategory (CategoryTheory.Spaces.infinityPresheaves C)), ∃ (hP : Quasicategory (fullSubcomplex _ (@IsLocal _ _ hA (CategoryTheory.Spaces.infinityYoneda C) R)).toSSet), @SSet.Presentability.IsPresentable.{u, 0} _ hP ∧ ∃ (L : CategoryTheory.Spaces.infinityPresheaves C ⟶ (fullSubcomplex _ (@IsLocal _ _ hA (CategoryTheory.Spaces.infinityYoneda C) R)).toSSet), Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L (fullSubcomplex _ (@IsLocal _ _ hA (CategoryTheory.Spaces.infinityYoneda C) R)).ι) ∧ Unary R (CategoryTheory.Spaces.infinityYoneda C ≫ L))",
+  "branch": "newtargets-dag",
+  "by": "Q114",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Finite families and every partial-completion mask; actual precomposition equivalences with parameter formulas, full faithfulness, strict restriction composition and naturality under cocontinuous target functors. The unary clause is explicit. The small-data clause is the concrete full subcategory of local space-valued presheaves, with a coherent reflector adjunction and generator Ly. Helpers describe this theorem’s specified relations, full functor subcategories and comparison maps, with real data. Added landed statement dependencies reuse their existing cocontinuity, coherent adjunction, Yoneda and canonical mapping-precomposition declarations; all added edges were checked not to close a DAG cycle."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-880dcb6c7",
+  "group": "Q114",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, edge cases, docstrings and verbatim signature checked; scompile.py reproduced cleanly. Repaired H11’s placeholder second reading with a complete replacement report in fixes/lem-coef-infinity-relative-colimit-completion.report.md. Findings recorded in review.md; no Lean or node changes needed."
  }
 }
