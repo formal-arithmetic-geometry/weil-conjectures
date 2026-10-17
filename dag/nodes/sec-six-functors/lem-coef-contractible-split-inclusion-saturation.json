@@ -10,9 +10,119 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $E=Y/i(X)$ and let $q:Y\\to E$ be the quotient chain map. Given a chain retraction $r$ of $i$, define $s:E\\to Y$ by $s([y])=y-i r(y)$. Replacing $y$ by $y+i(x)$ leaves this expression unchanged since $ri=1$, so $s$ is well-defined and linear. The chain-map equations of $i,r$ imply the chain-map equation of $s$. We have $qs=1$, $rs=0$ and $sq=1-ir$. Thus $\\phi:X\\oplus E\\to Y$, $\\phi(x,e)=i(x)+s(e)$, and $\\psi(y)=(r(y),q(y))$ are inverse chain maps. This explicitly identifies $i$ with the first-summand inclusion. Conversely, such an identification with a contractible second summand gives a chain retraction and identifies its quotient with that summand. We use only the cochain-map convention of [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent chain-level verification of paragraph 2 tensor-cell input; argument 1 (chain splitting)"
+   }
+  },
+  {
+   "text": "If $h$ contracts $E$, the degree-$-1$ map $H=s h q:Y\\to Y[-1]$ satisfies $d_YH+Hd_Y=s(d_Eh+hd_E)q=sq=1-ir$. Together with $ri=1$ this makes $r$ a chain-homotopy inverse to $i$, with zero homotopy on $X$. For an isomorphism take its inverse as $r$; its quotient is the zero complex, contracted by zero. This proves the isomorphism clause and the homotopy-equivalence clause directly.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent chain-level verification of paragraph 2 tensor-cell input; argument 2 (homotopy and isomorphisms)"
+   }
+  },
+  {
+   "text": "For a cocycle $y\\in Y^n$, the identity from step 2 reads $y-ir(y)=d_YH(y)$; hence $[y]=H^n(i)H^n(r)[y]$. Also $H^n(r)H^n(i)=1$ because $ri=1$. These are inverse maps on the quotients $\\ker d/\\operatorname{im}d$ defined by [def-weil-abstract-derived-category]. Therefore $i$ is a quasi-isomorphism. No preservation-of-homology theorem is being assumed.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent chain-level verification of paragraph 2 tensor-cell input; argument 3 (cohomology)"
+   }
+  },
+  {
+   "text": "For a small family $i_t:X_t\\to Y_t$ choose the splittings of step 1 and contractions $h_t$ of their quotients $E_t$. Coordinatewise, $\\bigoplus_tY_t\\cong (\\bigoplus_tX_t)\\oplus(\\bigoplus_tE_t)$, carrying $\\bigoplus_t i_t$ to inclusion. The coordinate map $\\bigoplus_t h_t$ is well-defined because each element has finite support, and $d(\\bigoplus_t h_t)+(\\bigoplus_t h_t)d=1$ coordinatewise. Projection onto the first summand is a chain retraction. Thus the coproduct belongs to $\\mathscr S_R$, including the empty coproduct.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent chain-level verification of paragraph 2 tensor-cell input; argument 4 (coproducts)"
+   }
+  },
+  {
+   "text": "Given $f:X\\to X'$ and the splitting $Y=X\\oplus E$ from step 1, form $P=X'\\oplus E$. The maps $X'\\to P$, $x'\\mapsto(x',0)$, and $Y\\to P$, $(x,e)\\mapsto(f(x),e)$, agree on $X$. For chain maps $a:X'\\to Z$, $b:Y\\to Z$ with $af=bi$, the unique induced chain map is $(x',e)\\mapsto a(x')+b(s(e))$. This proves the pushout universal property. Its induced arrow $X'\\to P$ has chain retraction projection and quotient $E$, with the same contraction. Any chosen pushout is isomorphic to this one by its universal property, so its arrow is in $\\mathscr S_R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent chain-level verification of paragraph 2 tensor-cell input; argument 5 (pushouts)"
+   }
+  },
+  {
+   "text": "Let $i:X\\to Y$ be an arrow retract of $j:A\\to B\\in\\mathscr S_R$. Write the two squares as $(u:X\\to A,v:Y\\to B)$ and $(a:A\\to X,b:B\\to Y)$, with $ju=vi$, $ia=bj$, $au=1_X$, $bv=1_Y$. If $r_jj=1_A$, then $r_i=a r_jv$ satisfies $r_ii=a r_jju=au=1_X$. The maps $\\bar v:Y/i(X)\\to B/j(A)$, $[y]\\mapsto[v(y)]$, and $\\bar b:B/j(A)\\to Y/i(X)$, $[z]\\mapsto[b(z)]$, are well-defined chain maps by the two square equations; $\\bar b\\bar v=1$. If $h$ contracts $B/j(A)$, then $\\bar b h\\bar v$ contracts $Y/i(X)$, since its $dH+Hd$ is $\\bar b\\bar v=1$. This proves arrow-retract closure without assuming that the given retractions preserve chosen complements.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent chain-level verification of paragraph 2 tensor-cell input; argument 6 (arrow retracts)"
+   }
+  },
+  {
+   "text": "For the continuous ordinal chain in the statement, write $i_\\alpha:X_\\alpha\\to X_{\\alpha+1}$ and choose for every $\\alpha<\\theta$ a chain retraction, a quotient $E_\\alpha$, its contraction $h_\\alpha$, and the section $s_\\alpha:E_\\alpha\\to X_{\\alpha+1}$ of step 1. All choices are indexed by a small set. Set $T_\\beta=X_0\\oplus\\bigoplus_{\\alpha<\\beta}E_\\alpha$, with its block diagonal differential and the evident inclusions $T_\\beta\\to T_\\gamma$. Construct compatible isomorphisms $\\phi_\\beta:T_\\beta\\to X_\\beta$ by ordinal induction. Start with $\\phi_0=1$. At a successor, put $\\phi_{\\alpha+1}(t,e)=i_\\alpha\\phi_\\alpha(t)+s_\\alpha(e)$. Step 1 gives its inverse $(\\phi_\\alpha^{-1}r_\\alpha,q_\\alpha)$; its restriction to $T_\\alpha$ is $i_\\alpha\\phi_\\alpha$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent chain-level verification of paragraph 2 tensor-cell input; argument 7 (transfinite successor construction)"
+   }
+  },
+  {
+   "text": "Here is the limit part of that same induction. If $\\lambda\\leq\\theta$ is a nonzero limit, a compatible family of chain maps $T_\\beta\\to Z$ for $\\beta<\\lambda$ uniquely defines a map $T_\\lambda\\to Z$: its restriction to $X_0$ is the common one, and on $E_\\alpha$ it is the restriction of any map with $\\alpha<\\beta<\\lambda$. The restriction is independent of $\\beta$ by compatibility, and extending by finite sums defines a chain map. Thus $T_\\lambda$ is the colimit of the $T_\\beta$. The already compatible isomorphisms $\\phi_\\beta$ give a colimit map $T_\\lambda\\to X_\\lambda$ by the assumed continuity of $X$; their inverses give the reverse map. Both composites restrict to identities at every earlier stage, so uniqueness in these two universal properties makes them identities. This defines $\\phi_\\lambda$ and verifies its compatibility. The induction is complete.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent chain-level verification of paragraph 2 tensor-cell input; argument 8 (transfinite limit universal property)"
+   }
+  },
+  {
+   "text": "At $\\beta=\\theta$ the constructed $\\phi_\\theta$ identifies $X_0\\to X_\\theta$ with $X_0\\to X_0\\oplus\\bigoplus_{\\alpha<\\theta}E_\\alpha$. Projection gives a chain retraction. The quotient is $\\bigoplus_{\\alpha<\\theta}E_\\alpha$, contracted coordinatewise by $\\bigoplus_{\\alpha<\\theta}h_\\alpha$ as in step 4. Hence the transfinite composite belongs to $\\mathscr S_R$. For $\\theta=0$ this is the identity with zero quotient. The limit argument uses continuity, not an assertion that arbitrary filtered colimits of contractible complexes remain contractible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent chain-level verification of paragraph 2 tensor-cell input; argument 9 (transfinite conclusion)"
+   }
+  },
+  {
+   "text": "For an arbitrary complex $K$, use the splitting $Y\\cong X\\oplus E$ of step 1. The maps on pure tensors $k\\otimes(x,e)\\mapsto(k\\otimes x,k\\otimes e)$ and the inverse obtained by adding the two inclusions are well-defined by bilinearity, preserve the displayed total differentials, and are inverse. Extending over the direct sums in each total degree gives $K\\otimes_RY\\cong(K\\otimes_RX)\\oplus(K\\otimes_RE)$, carrying $1_K\\otimes i$ to inclusion. It has projection as a chain retraction and quotient $K\\otimes_RE$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent chain-level verification of paragraph 2 tensor-cell input; argument 10 (tensor splitting)"
+   }
+  },
+  {
+   "text": "Define the contraction of this quotient on $k\\in K^a$, $e\\in E^b$ by $\\widetilde h(k\\otimes e)=(-1)^a k\\otimes h(e)$. It is linear on each summand, has total degree $-1$, and sends finite support to finite support. Directly,\n$$d\\widetilde h(k\\otimes e)=(-1)^a dk\\otimes h(e)+k\\otimes d_Eh(e),$$\n$$\\widetilde h d(k\\otimes e)=(-1)^{a+1}dk\\otimes h(e)+k\\otimes h d_E(e).$$\nThe first terms cancel and the sum is $k\\otimes(d_Eh+hd_E)e=k\\otimes e$. Pure tensors generate each summand, so this proves the contraction identity on the total tensor complex. Thus $1_K\\otimes i\\in\\mathscr S_R$ for every $K$, without a boundedness, flatness or projectivity hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent chain-level verification of paragraph 2 tensor-cell input; argument 11 (tensor contraction)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Supporting tensor-cell input to paragraph 2; explicit chain splitting, universal-property and sign calculations, written out rather than quoted from a model-category theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +165,59 @@
    "results": "{\"t\": \"2026-10-17T07:19:59Z\", \"tool\": \"leanfinder\", \"query\": \"The class of chain maps isomorphic to X into X direct sum E for contractible E is weakly saturated under cellular constructions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RelativeCellComplex.Cells.hj\", \"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"HomotopicalAlgebra.Cylinder.IsVeryGood.toIsGood\", \"Topology.CWComplex.mkFinite_map\", \"Topology.RelCWComplex.mkFiniteType_map\", \"Topology.CWComplex.mkFinite_cell\", \"Topology.RelCWComplex.mkFinite_map\", \"TopCat.RelativeCWComplex\"], \"digest\": \"48dd4888d021070f\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean:14-58 (saturation of a supplied left lifting class), CategoryTheory/MorphismProperty/TransfiniteComposition.lean:14-38 (definitions of transfinite closure), AlgebraicTopology/RelativeCellComplex/Basic.lean:12-25,40-74 (cell data), Algebra/Homology/ModelCategory/Lifting.lean:12-25,146-171 (a lifting obstruction), and Algebra/Homology/HomotopyCategory/Pretriangulated.lean:91-95 (contractibility of an identity cone). None states saturation of chain-split inclusions with contractible cokernel or its tensor stability. SplitMono.comp is only finite composition, and the injective-single-complex result assumes a boundedness condition. Both semantic phrasings were read; no exact or one-line generalized match."
+  },
+  {
+   "tool": "grep",
+   "query": "contractible.*cokernel|cokernel.*contractible|split.*homotopy|homotopy.*split",
+   "results": "{\"t\": \"2026-10-17T08:30:08Z\", \"tool\": \"grep\", \"query\": \"contractible.*cokernel|cokernel.*contractible|split.*homotopy|homotopy.*split\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/HomologicalFunctor.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/HomologicalFunctor.lean\", \"Mathlib/Algebra/Homology/ModelCategory/Lifting.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean\"], \"digest\": \"0c223096cf8151ea\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern finite split composition, bounded injective factorization, degreewise-split triangles or quasi-isomorphism retracts, not all clauses of the unbounded chain-split contractible quotient class. Read DegreewiseSplit.lean and TransfiniteCompositionLifting.lean; the latter requires identifying a lifting class, a separate argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split inclusions of complexes with contractible quotient form a tensor stable weakly saturated class",
+   "results": "{\"t\": \"2026-10-17T08:30:09Z\", \"tool\": \"leansearch\", \"query\": \"Split inclusions of complexes with contractible quotient form a tensor stable weakly saturated class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.Splitting\", \"CategoryTheory.ShortComplex.Splitting.ofHasBinaryBiproduct\", \"HomologicalComplex.instIsStableUnderRetractsQuasiIso\", \"CategoryTheory.ShortComplex.Splitting.mono_f\", \"AlgebraicTopology.DoldKan.splitMonoInclusionOfMooreComplexMap\", \"CategoryTheory.ShortComplex.Splitting.gIsCokernel\", \"CategoryTheory.ShortComplex.Splitting.exact\", \"SimplicialObject.Split\"], \"digest\": \"a6472f7e2dc9d9e8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern finite split composition, bounded injective factorization, degreewise-split triangles or quasi-isomorphism retracts, not all clauses of the unbounded chain-split contractible quotient class. Read DegreewiseSplit.lean and TransfiniteCompositionLifting.lean; the latter requires identifying a lifting class, a separate argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.HomotopyEquiv, CategoryTheory.SplitMono",
+   "results": "{\"t\": \"2026-10-17T08:30:09Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex.HomotopyEquiv, CategoryTheory.SplitMono\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'HomologicalComplex.HomotopyEquiv'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no usable result: Loogle reports an unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chain split injections of cochain complexes with contractible cokernels are closed under coproducts pushouts retracts transfinite composition and tensor products",
+   "results": "{\"t\": \"2026-10-17T08:30:20Z\", \"tool\": \"leanfinder\", \"query\": \"Chain split injections of cochain complexes with contractible cokernels are closed under coproducts pushouts retracts transfinite composition and tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat\", \"CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"CochainComplex.mappingCone.decomp_to\"], \"digest\": \"ea48c1aeef850892\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern finite split composition, bounded injective factorization, degreewise-split triangles or quasi-isomorphism retracts, not all clauses of the unbounded chain-split contractible quotient class. Read DegreewiseSplit.lean and TransfiniteCompositionLifting.lean; the latter requires identifying a lifting class, a separate argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyEquiv, SplitMono",
+   "results": "{\"t\": \"2026-10-17T08:30:28Z\", \"tool\": \"loogle\", \"query\": \"HomotopyEquiv, SplitMono\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SplitMono'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no usable result: Loogle reports an unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps of complexes isomorphic to X into X direct sum a contractible complex form a weakly saturated class",
+   "results": "{\"t\": \"2026-10-17T08:30:36Z\", \"tool\": \"leanfinder\", \"query\": \"Maps of complexes isomorphic to X into X direct sum a contractible complex form a weakly saturated class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instHasSeparator\", \"ComplexShape.QFactorsThroughHomotopy\", \"ComplexShape.QFactorsThroughHomotopy_of_exists_prev\", \"instQFactorsThroughHomotopyIntUp\", \"instQFactorsThroughHomotopyDown\", \"HomologicalComplex.homotopyCofiber.ext_from_X'\", \"HomologicalComplex.homotopyCofiber.ext_to_X'\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\"], \"digest\": \"5252be94dea8c921\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern finite split composition, bounded injective factorization, degreewise-split triangles or quasi-isomorphism retracts, not all clauses of the unbounded chain-split contractible quotient class. Read DegreewiseSplit.lean and TransfiniteCompositionLifting.lean; the latter requires identifying a lifting class, a separate argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SplitMono.comp",
+   "results": "{\"t\": \"2026-10-17T08:31:52Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SplitMono.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.SplitMono.comp\", \"CategoryTheory.SplitMono.comp_retraction\"], \"digest\": \"9b7da34a9330d235\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern finite split composition, bounded injective factorization, degreewise-split triangles or quasi-isomorphism retracts, not all clauses of the unbounded chain-split contractible quotient class. Read DegreewiseSplit.lean and TransfiniteCompositionLifting.lean; the latter requires identifying a lifting class, a separate argument."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-projective-diagram-model",
@@ -82,5 +241,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-contractible-split-inclusion-saturation",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Wrote eleven direct chain-level steps: a chain-split arrow is inclusion into X plus its actual quotient, explicit contraction and cohomology inverses, coproduct and pushout formulas, retract-induced quotient contraction, compatible transfinite splittings with the limit universal property, and the signed tensor contraction. These are elementary calculations and the direct ordinal construction, not invocations of unstated saturation or model-structure lemmas. No new nodes. Preserved inherited Mathlib searches and metadata; no project Lean declaration states the item.",
+  "blueprint": "Supports paragraph 2 of prop-coef-integral-exceptional-adjoint, the displayed finite mapping-complex adjunction, through the inherited enriched-projective-diagram-model ancestry. More precisely realizes the tensor-cell acyclicity input used in step 10 of lem-coef-enriched-projective-diagram-model. The blueprint paragraph supplies the application, not a proof of this auxiliary chain-complex statement. Whole-blueprint searches found no equivalent blueprint node; same_as remains []."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-f113bd667",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-f113bd667 (reviewer sub-agent of L); spot-checked: Read the item, the base version, the cited def-weil-abstract-derived-category, parent lem-coef-enriched-projective-diagram-model step 10, the unit and blueprint paragraph 2 of prop-coef-integral-exceptional-adjoint (main-20261015). Statement, stmt_deps, source and blueprint fields are unchanged from the base. There are no new nodes, no tool_uses and no SGA. I checked all 11 steps by hand. (1) s([y])=y-ir(y) is well-defined and a chain map; qs=1, rs=0, sq=1-ir, and phi/psi are inverse chain maps. (2) H=shq gives dH+Hd=1-ir. (3) For a cocycle y, y-ir(y)=dHy, so i is a quasi-isomorphism. (4) Coproducts work coordinatewise, including the empty one. (5) Pushout P=X'+E: c(x',e)=a(x')+b(s e) composed with Y->P gives b. (6) Retracts: r_i=a r_j v with r_i i=1; the quotient maps are well-defined from the two square equations, and b-bar h v-bar is a contraction. (7-9) T_beta=X_0+sum E_alpha: successor isomorphisms come from step 1, the limit case from continuity and uniqueness, and at theta the composite is a summand inclusion with quotient sum E_alpha. The induction is set up properly. (10-11) Tensor distributes over the splitting; the signed contraction (-1)^a k(x)h(e) cancels the dk terms and needs no flatness. Small cases: 0->D^0 tensored with Z/2 still contracts; S^1->D^0 has no chain retraction and is rightly excluded; isomorphisms, theta=0, the empty coproduct and characteristic 2 all pass. The item gives the parent exactly the closure, tensor and quasi-isomorphism clauses its step 10 uses. rg over the DAG found no duplicate; projective-cochain-monoidal-model states something different. Mathlib searches cover all three kinds, with Loogle failures honestly marked unusable. No fixes."
  }
 }
