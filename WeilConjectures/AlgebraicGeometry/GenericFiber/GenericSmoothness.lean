@@ -82,7 +82,8 @@ theorem exists_isPurelyInseparable_dense_isClosedImmersion_smooth (K : Type u) [
   let D := (IntermediateField.subextDiagram K E).op ⋙ Scheme.Spec
   let c := subextSpecCone K E
   have hc : IsLimit c := isLimitSubextSpecCone K E
-  have : ∀ {i j : (IntermediateField.FiniteSubext K E)ᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f) := fun f ↦
+  have : ∀ {i j : (IntermediateField.FiniteSubext K E)ᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f) :=
+    fun f ↦
     isAffineHom_of_isAffine (X := Spec _) (Y := Spec _) _
   have : ∀ i : (IntermediateField.FiniteSubext K E)ᵒᵖ, IsNoetherian (D.obj i) := fun i ↦
     inferInstanceAs (IsNoetherian (Spec (.of i.unop.1)))
@@ -107,8 +108,12 @@ theorem exists_isPurelyInseparable_dense_isClosedImmersion_smooth (K : Type u) [
     ext x
     obtain ⟨y, rfl⟩ := (IntermediateField.botEquiv K E).symm.surjective x
     apply Subtype.ext
-    simp [IntermediateField.subextDiagram, IntermediateField.botEquiv_symm]
-    exact (IntermediateField.botEquiv_def K E y).symm
+    simp only [Functor.op_obj, Functor.op_map, Quiver.Hom.unop_op, IntermediateField.botEquiv_symm,
+      Iso.op_hom, RingEquiv.toCommRingCatIso_hom, AlgEquiv.toRingEquiv_toRingHom,
+      CommRingCat.hom_comp, ConcreteCategory.hom_ofHom, RingHom.coe_comp, RingHom.coe_coe,
+      Function.comp_apply, SetLike.coe_eq_coe]
+    erw [IntermediateField.botEquiv_def]
+    rfl
   have hcπ := surjective_inf_flat_inf_quasiCompact_Spec_map_algebraMap j.unop.1 E
   refine ⟨j.unop.1, inferInstance, inferInstance, j.unop.2,
     IsPurelyInseparable.tower_bot K j.unop.1 E, pullback p (D.map f), pullback.fst _ _,

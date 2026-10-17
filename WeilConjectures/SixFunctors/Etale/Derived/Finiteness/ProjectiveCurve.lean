@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BettiCardinalities
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CoefficientDevissage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteComparison
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.GeometricFibreStalk
 
 /-!
 # Constant coefficients on projective families of curves
@@ -53,6 +54,35 @@ namespace Etale
 
 variable {X S : Scheme.{u}}
 
+/-- If a function `φ : S → ℕ` has constructible fibres, then for `a ≥ 2` every level set of
+`s ↦ a ^ φ s` is constructible: it is the finite union of the fibres of `φ` over the exponents
+`m` with `a ^ m = n`. -/
+lemma isConstructible_setOf_pow_eq {T : Type*} [TopologicalSpace T] (φ : T → ℕ)
+    (hφ : ∀ m : ℕ, Topology.IsConstructible (φ ⁻¹' {m})) {a : ℕ} (ha : 2 ≤ a) (n : ℕ) :
+    Topology.IsConstructible {s | a ^ φ s = n} := by
+  have h : {s | a ^ φ s = n} = ⋃ m ∈ {m : ℕ | a ^ m = n}, φ ⁻¹' {m} := by
+    ext s
+    simp
+  rw [h]
+  refine Topology.IsConstructible.biUnion ((Set.finite_Iic n).subset fun m hm ↦ ?_)
+    fun m _ ↦ hφ m
+  rw [Set.mem_ofPred_eq] at hm
+  rw [Set.mem_Iic, ← hm]
+  exact (Nat.lt_pow_self (by lia)).le
+
+/-- A prime `ℓ` with `ℤ/ℓ` of invertible exponent on `S` is invertible on `S`. -/
+lemma isUnit_natCast_of_hasInvertibleExponent_zmod (ℓ : ℕ)
+    [HasInvertibleExponent (ULift.{u + 1} (ZMod ℓ)) S] : IsUnit (ℓ : Γ(S, ⊤)) := by
+  obtain ⟨N, -, hN, hu⟩ :=
+    HasInvertibleExponent.exists_isUnit_natCast (Λ := ULift.{u + 1} (ZMod ℓ)) (X := S)
+  have hdvd : ℓ ∣ N := by
+    rw [← ZMod.natCast_eq_zero_iff]
+    simpa using congrArg ULift.down hN
+  obtain ⟨d, rfl⟩ := hdvd
+  rw [Nat.cast_mul] at hu
+  exact isUnit_of_mul_isUnit_left hu
+
+
 /-- Blueprint `lem-fin-projective-curve-betti-cardinalities`: Betti cardinalities in a smooth
 projective curve family.
 
@@ -81,7 +111,7 @@ theorem natCard_sheafH_constantZMod_geometricFibre [IsNoetherian S] (f : X ⟶ S
       ∀ r, 2 < r → Nat.card (Sheaf.H ((Xs s).constantZMod ℓ) r) = 1) ∧
     ((Set.range c).Finite ∧ ∀ m : ℕ, Topology.IsConstructible (c ⁻¹' {m})) ∧
     ((Set.range g).Finite ∧ ∀ m : ℕ, Topology.IsConstructible (g ⁻¹' {m})) := by
-  sorry
+  exact natCard_sheafH_constantZMod_geometricFibre_of_smooth f i hi ℓ hℓ
 
 /-- Blueprint `thm-fin-projective-smooth-curve-finiteness`: Constant-coefficient finiteness for
 projective smooth curves.
@@ -97,7 +127,34 @@ theorem isConstructibleSheaf_homology_rightDerivedLowerStar_of_smooth [IsNoether
         ((_root_.DerivedCategory.singleFunctor _ 0).obj
           ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
             (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))))))) := by
-  sorry
+  subst hi
+  have hℓ := isUnit_natCast_of_hasInvertibleExponent_zmod (S := S) ℓ
+  have hℓ2 : 2 ≤ ℓ := (Fact.out : ℓ.Prime).two_le
+  obtain ⟨hcard, ⟨-, hc⟩, ⟨-, hg⟩⟩ :=
+    natCard_sheafH_constantZMod_geometricFibre (i ≫ ℙ(n; S) ↘ S) i rfl ℓ hℓ
+  -- the cardinality of `Hʳ` of the geometric fibres, as a function of the point
+  have key (r' : ℕ) : (∀ s : S, Nat.card (Sheaf.H ((Limits.pullback (i ≫ ℙ(n; S) ↘ S)
+      (S.geometricPointAt s)).constantZMod ℓ) r') ≠ 0) ∧ ∀ m : ℕ,
+      Topology.IsConstructible {s : S | Nat.card (Sheaf.H ((Limits.pullback (i ≫ ℙ(n; S) ↘ S)
+        (S.geometricPointAt s)).constantZMod ℓ) r') = m} := by
+    rcases lt_trichotomy r' 2 with hr | rfl | hr
+    · interval_cases r'
+      · refine ⟨fun s ↦ by rw [(hcard s).1]; positivity, fun m ↦ ?_⟩
+        simp only [fun s ↦ (hcard s).1]
+        exact isConstructible_setOf_pow_eq _ hc hℓ2 m
+      · refine ⟨fun s ↦ by rw [(hcard s).2.1]; positivity, fun m ↦ ?_⟩
+        simp only [fun s ↦ (hcard s).2.1, pow_mul]
+        exact isConstructible_setOf_pow_eq _ hg (by nlinarith) m
+    · refine ⟨fun s ↦ by rw [(hcard s).2.2.1]; positivity, fun m ↦ ?_⟩
+      simp only [fun s ↦ (hcard s).2.2.1]
+      exact isConstructible_setOf_pow_eq _ hc hℓ2 m
+    · refine ⟨fun s ↦ by simp [(hcard s).2.2.2 r' hr], fun m ↦ ?_⟩
+      simp only [fun s ↦ (hcard s).2.2.2 r' hr]
+      by_cases hm : 1 = m
+      · simp [hm, Topology.IsConstructible.univ]
+      · simp [hm, Topology.IsConstructible.empty]
+  exact isConstructibleSheaf_homology_rightDerivedLowerStar_of_sheafH_geometricFibre _ ℓ r
+    (fun s ↦ Nat.finite_of_card_ne_zero ((key r.toNat).1 s)) fun m _ ↦ (key r.toNat).2 m
 
 variable {k : Type u} [Field k]
 
@@ -143,7 +200,9 @@ theorem isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf
       ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj
           ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)))) := by
-  sorry
+  refine isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf_of_zmod Λ f
+    (fun ℓ _ _ q ↦ ?_) M q
+  exact isConstructibleSheaf_homology_rightDerivedLowerStar_zmod aS f i hi hf ℓ q
 
 end Etale
 

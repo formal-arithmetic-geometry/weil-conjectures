@@ -216,6 +216,64 @@ lemma mem_distTriang_iff (T : Triangle S.PairCategory) :
     T ∈ distTriang S.PairCategory ↔ ∃ (i : I) (τ : Triangle (C i)), τ ∈ distTriang (C i) ∧
       Nonempty (T ≅ (S.ι i).mapTriangle.obj τ) := Iff.rfl
 
+omit [IsDirectedOrder I] [Nonempty I]
+  [∀ (i j k : I) (h : i ≤ j) (h' : j ≤ k), NatTrans.CommShift (S.assoc h h').hom ℤ] in
+/-- The transport along `n ≤ p` of a distinguished triangle on a representative `u` at the stage
+`n` is a distinguished triangle on the transported representative `u_p` (blueprint
+`prop-weil-pbc-cone-independence`, scalar extension of cone triangles). -/
+lemma tr_triangle_mem_distTriang {X Y : S.PairCategory} {n p : I} (hX : X.stage ≤ n)
+    (hY : Y.stage ≤ n) (h : n ≤ p) (u : X.toStage hX ⟶ Y.toStage hY) {Z : C n}
+    (v : Y.toStage hY ⟶ Z) (w : Z ⟶ (X.toStage hX)⟦(1 : ℤ)⟧)
+    (hT : Triangle.mk u v w ∈ distTriang (C n)) :
+    Triangle.mk (S.tr h u) ((S.assoc hY h).inv.app Y.obj ≫ (S.T h).map v)
+      ((S.T h).map w ≫ ((S.T h).commShiftIso (1 : ℤ)).hom.app (X.toStage hX) ≫
+        ((S.assoc hX h).hom.app X.obj)⟦(1 : ℤ)⟧') ∈ distTriang (C p) := by
+  have hd : Triangle.mk ((S.T h).map u) ((S.T h).map v)
+      ((S.T h).map w ≫ ((S.T h).commShiftIso (1 : ℤ)).hom.app (X.toStage hX)) ∈
+        distTriang (C p) := (S.T h).map_distinguished _ hT
+  refine Pretriangulated.isomorphic_distinguished _ hd _
+    (Triangle.isoMk _ _ ((S.assoc hX h).app X.obj).symm ((S.assoc hY h).app Y.obj).symm
+      (Iso.refl _) ?_ ?_ ?_)
+  · simp [tr]
+  · simp
+  · simp [← Functor.map_comp]
+
+/-- Blueprint `prop-weil-pbc-cone-independence`: Compatibility and independence of common-stage
+cones. Let `T` be a triangle of the pair category whose first morphism is represented by `u` at
+a stage `n`, and let `u, v, w` be a distinguished triangle of the stage `n`. Then `T` is
+distinguished if and only if it is isomorphic to the common-stage cone triangle of `u, v, w` by an
+isomorphism whose first two components are identities. In particular distinguishedness does not
+depend on the representative, the stage or the cone chosen. -/
+theorem mem_distTriang_iff_exists_iso_coneTriangle (T : Triangle S.PairCategory) {n : I}
+    (hX : T.obj₁.stage ≤ n) (hY : T.obj₂.stage ≤ n) (u : T.obj₁.toStage hX ⟶ T.obj₂.toStage hY)
+    (hu : T.mor₁ = mkHom n hX hY u) {Z : C n} (v : T.obj₂.toStage hY ⟶ Z)
+    (w : Z ⟶ (T.obj₁.toStage hX)⟦(1 : ℤ)⟧) (hT : Triangle.mk u v w ∈ distTriang (C n)) :
+    T ∈ distTriang S.PairCategory ↔ ∃ e : T ≅ coneTriangle S hX hY u v w,
+      e.hom.hom₁ = 𝟙 _ ∧ e.hom.hom₂ = 𝟙 _ := by
+  constructor
+  · intro h
+    obtain ⟨e, h₁, h₂⟩ := exists_iso_of_arrow_iso _ _ h
+      (coneTriangle_mem_distinguishedTriangles hX hY u v w hT)
+      (Arrow.isoMk (Iso.refl _) (Iso.refl _) (by simp [coneTriangle, hu]))
+    exact ⟨e, h₁, h₂⟩
+  · rintro ⟨e, -, -⟩
+    exact isomorphic_distinguished _ (coneTriangle_mem_distinguishedTriangles hX hY u v w hT) _ e
+
+/-- Two common-stage cone triangles of representatives of the same morphism are isomorphic by an
+isomorphism whose first two components are identities (blueprint
+`prop-weil-pbc-cone-independence`). -/
+lemma exists_iso_coneTriangle {X Y : S.PairCategory} {n n' : I} {hX : X.stage ≤ n}
+    {hY : Y.stage ≤ n} {hX' : X.stage ≤ n'} {hY' : Y.stage ≤ n'}
+    (u : X.toStage hX ⟶ Y.toStage hY) (u' : X.toStage hX' ⟶ Y.toStage hY')
+    (hu : mkHom n hX hY u = mkHom n' hX' hY' u') {Z : C n} (v : Y.toStage hY ⟶ Z)
+    (w : Z ⟶ (X.toStage hX)⟦(1 : ℤ)⟧) (hT : Triangle.mk u v w ∈ distTriang (C n)) {Z' : C n'}
+    (v' : Y.toStage hY' ⟶ Z') (w' : Z' ⟶ (X.toStage hX')⟦(1 : ℤ)⟧)
+    (hT' : Triangle.mk u' v' w' ∈ distTriang (C n')) :
+    ∃ e : coneTriangle S hX hY u v w ≅ coneTriangle S hX' hY' u' v' w',
+      e.hom.hom₁ = 𝟙 _ ∧ e.hom.hom₂ = 𝟙 _ :=
+  (mem_distTriang_iff_exists_iso_coneTriangle (coneTriangle S hX hY u v w) hX' hY' u'
+    hu v' w' hT').1 (coneTriangle_mem_distinguishedTriangles hX hY u v w hT)
+
 end PairCategory
 
 open PairCategory

@@ -75,6 +75,12 @@ composition isomorphisms.
 - `AlgebraicGeometry.CompactSupportFormalism.shriekBaseChange_paste_horiz`: horizontal pasting.
 - `AlgebraicGeometry.CompactSupportFormalism.shriekBaseChange_refinementComparison`:
   compatibility with the comparisons along refinements.
+- `AlgebraicGeometry.CompactSupportFormalism.exchange_pfBaseChange_cube`: the exchange maps and
+  the base change maps on a commutative cube.
+- `AlgebraicGeometry.CompactSupportFormalism.shriekBaseChangeOfIsPullback_shriekIso`:
+  compatibility with the comparison isomorphisms.
+- `AlgebraicGeometry.CompactSupportFormalism.compIso_shriekBaseChange`: compatibility with the
+  composition isomorphisms of triangles of compactifications.
 - `AlgebraicGeometry.CompactSupportFormalism.lowerShriekBaseChange_eq`: independence of the
   compactification.
 - `AlgebraicGeometry.CompactSupportFormalism.lowerShriekBaseChange_paste_vert`: vertical pasting.
@@ -310,7 +316,7 @@ lemma exchange_pfBaseChange_cube (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b
       (F.sqIso z b' b v sb).inv.app ((F.sh r).obj ((F.pf t).obj N)) ≫
         (F.pb z).map (inv ((F.baseChange t l r b w).natTrans.app ((F.pf t).obj N))) := by
     rw [hc']
-    simp [← Functor.map_comp_assoc]
+    simp
   -- transpose along `b'^* ⊣ b'_*`
   apply ((F.adj b').homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
@@ -637,7 +643,7 @@ theorem compIso_shriekBaseChange {X Y S X' Y' S' : Scheme.{u}} {f : X ⟶ Y} {g 
       (F.pf T'.p).map (inv ((F.baseChange a T'.q T.q b hq.w).natTrans.app
         ((F.sh T.cf.i).obj K))) := by
     rw [← reassoc_of% hC]
-    simp [← Functor.map_comp]
+    simp
   -- the base change map of the pushforwards along `cfg.g = p ≫ cg.g`
   have hv := congr_app (F.pfBaseChange_paste_vert b c gS T'.p T.p T'.cg.g T.cg.g T'.cfg.g
     T.cfg.g hp hgp.w T'.p_g T.p_g hfgp.w) ((F.sh T.cfg.i).obj K)
@@ -653,7 +659,7 @@ theorem compIso_shriekBaseChange {X Y S X' Y' S' : Scheme.{u}} {f : X ⟶ Y} {g 
   simp only [Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Category.comp_id, Category.assoc, CategoryTheory.Functor.map_id]
   dsimp only [Functor.comp_obj]
-  simp only [Category.id_comp, Category.comp_id]
+  simp only [Category.id_comp]
   have hcancel : (F.pb gS).map ((F.pfComp' T.p T.cg.g T.cfg.g T.p_g).inv.app
       ((F.sh T.cfg.i).obj K)) ≫ (F.pb gS).map ((F.pfComp' T.p T.cg.g T.cfg.g T.p_g).hom.app
       ((F.sh T.cfg.i).obj K)) = 𝟙 _ := by
@@ -715,7 +721,8 @@ lemma shriekBaseChangeOfIsPullback_shriekIso [QuasiCompact f] [QuasiCompact f']
     Functor.whiskerRight (F.shriekIso c d).hom (F.pb g) ≫
         (F.shriekBaseChangeOfIsPullback sq d).natTrans =
       (F.shriekBaseChangeOfIsPullback sq c).natTrans ≫
-        Functor.whiskerLeft (F.pb g') (F.shriekIso (c.ofIsPullback sq) (d.ofIsPullback sq)).hom := by
+        Functor.whiskerLeft (F.pb g')
+          (F.shriekIso (c.ofIsPullback sq) (d.ofIsPullback sq)).hom := by
   have hr₀ := Compactification.isPullback_infFst c d
   have hr := Compactification.isPullback_infSnd c d
   have hr₀' := (Compactification.infFst c d).isPullback_ofIsPullback sq hr₀
@@ -792,7 +799,8 @@ theorem lowerShriekBaseChange_paste_vert {S S' : Scheme.{u}} {f₁ : X ⟶ Y} {f
   let T := Compactification.Triangle.ofHasCompactification f₁ f₂
   have hKey : Functor.whiskerRight (F.compIso T).hom (F.pb gS) ≫
       (F.shriekBaseChangeOfIsPullback sq T.cfg).natTrans =
-      (F.shriekBaseChangeOfIsPullback sq₁ T.cf ≫ₕ F.shriekBaseChangeOfIsPullback sq₂ T.cg).natTrans ≫
+      (F.shriekBaseChangeOfIsPullback sq₁ T.cf ≫ₕ
+        F.shriekBaseChangeOfIsPullback sq₂ T.cg).natTrans ≫
         Functor.whiskerLeft (F.pb gX) (F.compIso (T.ofIsPullback sq₁ sq₂ sq)).hom :=
     F.compIso_shriekBaseChange T (T.ofIsPullback sq₁ sq₂ sq)
       (pullback.fst T.cf.g gY) (pullback.fst T.cg.g gS) (pullback.fst T.cfg.g gS)
@@ -814,7 +822,8 @@ theorem lowerShriekBaseChange_paste_vert {S S' : Scheme.{u}} {f₁ : X ⟶ Y} {f
         (F.shriekIso (T.cf.ofIsPullback sq₁) (HasCompactification.compactification f₁')).inv
         (F.shriekIso (T.cg.ofIsPullback sq₂) (HasCompactification.compactification f₂')).inv ≫
       (F.compIso (T.ofIsPullback sq₁ sq₂ sq)).hom ≫
-      (F.shriekIso (T.cfg.ofIsPullback sq) (HasCompactification.compactification (f₁' ≫ f₂'))).hom := by
+      (F.shriekIso (T.cfg.ofIsPullback sq)
+        (HasCompactification.compactification (f₁' ≫ f₂'))).hom := by
     rw [← Iso.symm_hom, ← Iso.symm_hom, F.shriekIso_symm, F.shriekIso_symm]
     exact F.lowerShriekCompIso_hom_eq (T.ofIsPullback sq₁ sq₂ sq)
   rw [F.lowerShriekBaseChange_eq sq₁ T.cf, F.lowerShriekBaseChange_eq sq T.cfg, hE₂,
@@ -831,8 +840,34 @@ theorem lowerShriekBaseChange_paste_vert {S S' : Scheme.{u}} {f₁ : X ⟶ Y} {f
   rw [reassoc_of% hcancel, hCI, hCI']
   simp only [NatTrans.comp_app, NatTrans.hcomp_app, Functor.whiskerRight_app, Iso.symm_hom,
     Functor.map_comp, Category.assoc]
-  trace_state
-  sorry
+  have hB := (F.shriekBaseChangeOfIsPullback sq₂ T.cg).natTrans.naturality
+    ((F.shriekIso (HasCompactification.compactification f₁) T.cf).hom.app K)
+  simp only [Functor.comp_map] at hB
+  have hI : (F.shriekIso (T.cg.ofIsPullback sq₂) (HasCompactification.compactification f₂')).hom.app
+        ((F.pb gY).obj ((F.lowerShriek f₁).obj K)) ≫
+      (F.lowerShriek f₂').map
+        ((F.pb gY).map ((F.shriekIso (HasCompactification.compactification f₁) T.cf).hom.app K)) ≫
+      (F.lowerShriek f₂').map ((F.shriekBaseChangeOfIsPullback sq₁ T.cf).natTrans.app K) ≫
+      (F.lowerShriek f₂').map ((F.shriekIso (T.cf.ofIsPullback sq₁)
+        (HasCompactification.compactification f₁')).hom.app ((F.pb gX).obj K)) ≫
+      (F.shriekIso (T.cg.ofIsPullback sq₂) (HasCompactification.compactification f₂')).inv.app
+        ((F.shriek (HasCompactification.compactification f₁')).obj ((F.pb gX).obj K)) =
+      (F.shriek (T.cg.ofIsPullback sq₂)).map
+        ((F.pb gY).map ((F.shriekIso (HasCompactification.compactification f₁) T.cf).hom.app K)) ≫
+      (F.shriek (T.cg.ofIsPullback sq₂)).map
+        ((F.shriekBaseChangeOfIsPullback sq₁ T.cf).natTrans.app K) ≫
+      (F.shriek (T.cg.ofIsPullback sq₂)).map ((F.shriekIso (T.cf.ofIsPullback sq₁)
+        (HasCompactification.compactification f₁')).hom.app ((F.pb gX).obj K)) := by
+    simp only [← Functor.map_comp, ← Functor.map_comp_assoc]
+    rw [← NatTrans.naturality_assoc, Iso.hom_inv_id_app, Category.comp_id]
+  rw [← Functor.map_comp_assoc (F.pb gS)
+      ((F.shriekIso T.cfg (HasCompactification.compactification (f₁ ≫ f₂))).hom.app K),
+    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp, reassoc_of% hK,
+    reassoc_of% hB, reassoc_of% hI,
+    ← Functor.map_comp_assoc (F.shriek (T.cg.ofIsPullback sq₂))
+      ((F.shriekIso (T.cf.ofIsPullback sq₁)
+        (HasCompactification.compactification f₁')).hom.app ((F.pb gX).obj K)),
+    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
 
 end Canonical
 

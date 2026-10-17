@@ -18,7 +18,15 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 /-!
 # Geometric stalks of proper direct images
 
-Draft.
+For a proper morphism `f : X ⟶ S`, a geometric point `x : Spec Ω ⟶ S` (`Ω` separably closed)
+and a sheaf `F` of modules over a finite ring, the stalk at `x` of `Rᵠf_* F` is the étale
+cohomology `Hᵠ(X_x, F|)` of the geometric fibre
+(`nonempty_addEquiv_sheafFiber_homology_rightDerivedLowerStar_of_isProper`,
+blueprint `cor-weil-pbc-geometric-fiber-finite`): by proper base change it is the stalk of the
+direct image along `X_x ⟶ Spec Ω`, which is computed by the strict-local exchange. For constant
+coefficients `ℤ/ℓ` this gives the stalk criterion used in
+`thm-fin-projective-smooth-curve-finiteness`
+(`isConstructibleSheaf_homology_rightDerivedLowerStar_of_sheafH_geometricFibre`).
 -/
 
 @[expose] public section
@@ -41,7 +49,8 @@ section StrictLocal
 henselian local ring with separably closed residue field and `h : P ⟶ Spec A`. For an abelian
 étale sheaf `G` on `P`, the stalk of `Rᵠh_* G` at the closed geometric point of `Spec A` is the
 étale cohomology group `Hᵠ(P, G)`. This is the identity case `A = B`, `φ = id` of the
-strict-local exchange (`AlgebraicGeometry.Etale.exists_addEquiv_strictLocal_abelian_total_exchange`).
+strict-local exchange
+(`AlgebraicGeometry.Etale.exists_addEquiv_strictLocal_abelian_total_exchange`).
 -/
 theorem nonempty_addEquiv_sheafFiber_homology_rightDerivedFunctorPlus_of_henselian
     {A : Type u} [CommRing A] [HenselianLocalRing A] [IsSepClosed (IsLocalRing.ResidueField A)]
@@ -160,8 +169,10 @@ theorem nonempty_addEquiv_sheafFiber_homology_rightDerivedLowerStar_of_henselian
     (q : ℕ) :
     Nonempty (((pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))).sheafFiber
         (A := ModuleCat.{u + 1} Λ)).obj ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).obj
-          ((R((h)_*[ModuleCat.{u + 1} Λ])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) ≃+
-        Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G) q) := by
+          ((R((h)_*[ModuleCat.{u + 1} Λ])).obj
+            ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) ≃+
+        Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G)
+          q) := by
   obtain ⟨a⟩ := nonempty_addEquiv_sheafFiber_homology_rightDerivedFunctorPlus_of_henselian h
     ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G) q
   let t := pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))
@@ -193,7 +204,8 @@ theorem nonempty_addEquiv_sheafFiber_homology_rightDerivedLowerStar_of_isProper
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) :
     Nonempty (((pointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj
         ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).obj
-          ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) ≃+
+          ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
+            ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) ≃+
         Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
           ((pullback.fst f x)^*[ModuleCat.{u + 1} Λ].obj F)) q) := by
   have : PreservesFilteredColimitsOfSize.{u, u} (forget (ModuleCat.{u + 1} Λ)) :=
@@ -286,7 +298,7 @@ points `s` with `|Hʳ(X_{s̄}, ℤ/ℓ)| = n` is constructible. Then `Rʳf_*(ℤ
 (For `r < 0` the hypotheses concern `H⁰` and the conclusion holds trivially.)
 
 By proper base change the stalks of `Rʳf_*(ℤ/ℓ)` are the groups `Hʳ(X_{s̄}, ℤ/ℓ)`
-(`AlgebraicGeometry.Etale.nonempty_addEquiv_sheafFiber_homology_rightDerivedLowerStar_constantSheaf`),
+(`nonempty_addEquiv_sheafFiber_homology_rightDerivedLowerStar_constantSheaf`),
 and the stalk criterion `AlgebraicGeometry.Scheme.isConstructibleSheaf_iff_isConstructible_card`
 applies. This is the final step of the blueprint proof of
 `thm-fin-projective-smooth-curve-finiteness`. -/
@@ -303,7 +315,8 @@ theorem isConstructibleSheaf_homology_rightDerivedLowerStar_of_sheafH_geometricF
           ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
             (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))))))) := by
   rcases lt_or_ge r 0 with hr | hr
-  · have := ((f)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))]).isGE_rightDerivedFunctor_obj_singleFunctor
+  · have := ((f)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))]
+      ).isGE_rightDerivedFunctor_obj_singleFunctor
       ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
         (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))))
     exact IsConstructibleSheaf.of_isZero (_root_.DerivedCategory.isZero_of_isGE _ 0 r hr)

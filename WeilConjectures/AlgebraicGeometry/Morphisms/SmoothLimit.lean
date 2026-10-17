@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.Ring.FinitePresentation
 /-!
 # Smoothness descends to a stage of a limit
 
-Let `{Dⱼ}` be a cofiltered system of affine Noetherian schemes with affine transition maps and
+Let `{Dⱼ}` be a cofiltered system of affine schemes with affine transition maps and
 let `Y` be of finite presentation over a stage `Dᵢ`. If the base change of `Y` to `lim Dⱼ` is
 smooth, then so is the base change of `Y` to some stage `Dⱼ` (EGA IV 17.7.8).
 
@@ -26,7 +26,7 @@ smooth, then so is the base change of `Y` to some stage `Dⱼ` (EGA IV 17.7.8).
 - `AlgebraicGeometry.Scheme.exists_smooth_pullback_snd_of_isLimit`: the main result. The affine
   case compares the given model with a smooth model using
   `AlgebraicGeometry.exists_iso_of_isPullback`; the general case covers `Y` by finitely many
-  affine opens. (The Noetherian hypothesis is not used.)
+  affine opens.
 -/
 
 @[expose] public section
@@ -184,13 +184,13 @@ lemma Scheme.exists_smooth_pullback_snd_of_isLimit_of_isAffine {I : Type u} [Cat
     (by rw [pullbackLeftPullbackSndIso_hom_snd]; exact this)
 
 /-- **Smoothness descends to a stage of a limit.** Let `{Dⱼ}` be a cofiltered system of affine
-Noetherian schemes with affine transition maps, `c` a limit cone, and `p : Y ⟶ Dᵢ` of finite
+schemes with affine transition maps, `c` a limit cone, and `p : Y ⟶ Dᵢ` of finite
 presentation. If the base change `Y ×_{Dᵢ} lim Dⱼ ⟶ lim Dⱼ` is smooth, then so is
 `Y ×_{Dᵢ} Dⱼ ⟶ Dⱼ` for some `j ⟶ i`. -/
 theorem Scheme.exists_smooth_pullback_snd_of_isLimit {I : Type u} [Category.{u} I]
     [IsCofiltered I] {D : I ⥤ Scheme.{u}} {c : Cone D} (hc : IsLimit c)
     [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, IsAffine (D.obj i)]
-    [∀ i, IsNoetherian (D.obj i)] {i : I} {Y : Scheme.{u}} (p : Y ⟶ D.obj i)
+    {i : I} {Y : Scheme.{u}} (p : Y ⟶ D.obj i)
     [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p]
     [Smooth (pullback.snd p (c.π.app i))] :
     ∃ (j : I) (f : j ⟶ i), Smooth (pullback.snd p (D.map f)) := by

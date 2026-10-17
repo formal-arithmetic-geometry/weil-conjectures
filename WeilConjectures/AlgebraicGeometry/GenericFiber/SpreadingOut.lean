@@ -91,9 +91,45 @@ instance {X : Scheme.{u}} [TopologicalSpace.NoetherianSpace X] (U : X.Opens) :
   inferInstanceAs (TopologicalSpace.NoetherianSpace (U : Set X))
 
 include hc in
+include hc in
 /-- **Spreading out an open with a surjective closed immersion.** Let `{Dⱼ}` be a cofiltered
-system of Noetherian schemes with affine transition maps, `c` a limit cone, and `p : X ⟶ Dᵢ`
-locally of finite type and quasi-compact. Let `W` be a quasi-compact open of
+system of schemes with Noetherian underlying spaces and affine transition maps, `c` a limit
+cone, `W` a quasi-compact open of `lim Dⱼ` and `z : Z ⟶ W` a surjective closed immersion of
+finite presentation. Then for some stage `j` there are an open `Wⱼ ⊆ Dⱼ` with preimage `W` and
+a surjective closed immersion `zⱼ : Zⱼ ⟶ Wⱼ` whose base change along `lim Dⱼ ⟶ Dⱼ` is `z`. -/
+theorem exists_open_isClosedImmersion_of_isLimit_pt
+    [∀ i, TopologicalSpace.NoetherianSpace (D.obj i)] (W : c.pt.Opens)
+    (hW : IsCompact (SetLike.coe W)) {Z : Scheme.{u}} (z : Z ⟶ W.toScheme) [IsClosedImmersion z]
+    [Surjective z] [LocallyOfFinitePresentation z] :
+    ∃ (j : I) (Wj : (D.obj j).Opens) (Zj : Scheme.{u}) (zj : Zj ⟶ Wj.toScheme) (s : Z ⟶ Zj),
+      IsClosedImmersion zj ∧ Surjective zj ∧ c.π.app j ⁻¹ᵁ Wj = W ∧
+      IsPullback s (z ≫ W.ι) (zj ≫ Wj.ι) (c.π.app j) := by
+  obtain ⟨j₀, W₀, -, hW₀⟩ := exists_preimage_eq D c hc W hW
+  set cE := opensCone D c j₀ W₀
+  have hcE : IsLimit cE := isLimitOpensCone D c hc j₀ W₀
+  set z' : Z ⟶ cE.pt := z ≫ (c.pt.isoOfEq hW₀.symm).hom
+  have hz' : z' ≫ (c.π.app j₀ ⁻¹ᵁ W₀).ι = z ≫ W.ι := by
+    simp only [z', Category.assoc]
+    exact congrArg (z ≫ ·) (Scheme.isoOfEq_hom_ι c.pt hW₀.symm)
+  have (j : Over j₀) : TopologicalSpace.NoetherianSpace ((opensDiagram D j₀ W₀).obj j) :=
+    inferInstanceAs (TopologicalSpace.NoetherianSpace (D.map j.hom ⁻¹ᵁ W₀).toScheme)
+  obtain ⟨k, Zk, zk, s, hzk₁, hzk₂, hs⟩ :=
+    exists_isClosedImmersion_surjective_isPullback_of_isLimit hcE z'
+  have hpre : c.π.app k.left ⁻¹ᵁ (D.map k.hom ⁻¹ᵁ W₀) = W := by
+    rw [← Scheme.Hom.comp_preimage, c.w, hW₀]
+  refine ⟨k.left, D.map k.hom ⁻¹ᵁ W₀, Zk, zk, s, hzk₁, hzk₂, hpre, ?_⟩
+  have h₂ : IsPullback (cE.π.app k) (c.π.app j₀ ⁻¹ᵁ W₀).ι (D.map k.hom ⁻¹ᵁ W₀).ι
+      (c.π.app k.left) := by
+    refine IsOpenImmersion.isPullback _ _ _ _ (Scheme.Hom.resLE_comp_ι ..).symm ?_
+    rw [Scheme.Opens.opensRange_ι, Scheme.Opens.opensRange_ι, ← Scheme.Hom.comp_preimage, c.w]
+  have := hs.paste_vert h₂
+  rw [hz'] at this
+  exact this
+
+include hc in
+/-- **Spreading out an open with a surjective closed immersion, relative version.** Let `{Dⱼ}`
+be a cofiltered system of Noetherian schemes with affine transition maps, `c` a limit cone, and
+`p : X ⟶ Dᵢ` locally of finite type and quasi-compact. Let `W` be a quasi-compact open of
 `X_∞ = X ×_{Dᵢ} lim Dⱼ` and `z : Z ⟶ W` a surjective closed immersion of finite presentation.
 Then for some `f : j ⟶ i` there are an open `Wⱼ` of `Xⱼ = X ×_{Dᵢ} Dⱼ` with preimage `W` in
 `X_∞` and a surjective closed immersion `zⱼ : Zⱼ ⟶ Wⱼ` whose base change along
@@ -110,41 +146,17 @@ theorem exists_open_isClosedImmersion_of_isLimit [∀ i, IsNoetherian (D.obj i)]
         Wj = W ∧
       IsPullback s (z ≫ W.ι ≫ pullback.snd p (c.π.app i))
         (zj ≫ Wj.ι ≫ pullback.snd p (D.map f)) (c.π.app j) := by
-  set BC := baseChangeDiagram D p
-  set c' := baseChangeCone D c p
-  have hc' : IsLimit c' := isLimitBaseChangeCone D c p hc
-  have (j : Over i) : IsNoetherian (BC.obj j) := by
-    have : IsLocallyNoetherian (BC.obj j) :=
+  have (j : Over i) : IsNoetherian ((baseChangeDiagram D p).obj j) := by
+    have : IsLocallyNoetherian ((baseChangeDiagram D p).obj j) :=
       LocallyOfFiniteType.isLocallyNoetherian (pullback.snd p (D.map j.hom))
-    have : CompactSpace (BC.obj j) :=
+    have : CompactSpace ((baseChangeDiagram D p).obj j) :=
       QuasiCompact.compactSpace_of_compactSpace (pullback.snd p (D.map j.hom))
     exact {}
-  obtain ⟨j₀, W₀, -, hW₀⟩ := exists_preimage_eq BC c' hc' W hW
-  set E := opensDiagram BC j₀ W₀
-  set cE := opensCone BC c' j₀ W₀
-  have hcE : IsLimit cE := isLimitOpensCone BC c' hc' j₀ W₀
-  set z' : Z ⟶ cE.pt := z ≫ (c'.pt.isoOfEq hW₀.symm).hom
-  have hz' : z' ≫ (c'.π.app j₀ ⁻¹ᵁ W₀).ι = z ≫ W.ι := by
-    simp only [z', Category.assoc]
-    exact congrArg (z ≫ ·) (Scheme.isoOfEq_hom_ι c'.pt hW₀.symm)
-  have (j : Over j₀) : TopologicalSpace.NoetherianSpace (E.obj j) :=
-    inferInstanceAs (TopologicalSpace.NoetherianSpace (BC.map j.hom ⁻¹ᵁ W₀).toScheme)
-  obtain ⟨k, Zk, zk, s, hzk₁, hzk₂, hs⟩ :=
-    exists_isClosedImmersion_surjective_isPullback_of_isLimit hcE z'
-  have hpre : c'.π.app k.left ⁻¹ᵁ (BC.map k.hom ⁻¹ᵁ W₀) = W := by
-    rw [← Scheme.Hom.comp_preimage, c'.w, hW₀]
-  refine ⟨k.left.left, k.left.hom, BC.map k.hom ⁻¹ᵁ W₀, Zk, zk, s, hzk₁, hzk₂, hpre, ?_⟩
-  have h₂ : IsPullback (cE.π.app k) (c'.π.app j₀ ⁻¹ᵁ W₀).ι (BC.map k.hom ⁻¹ᵁ W₀).ι
-      (c'.π.app k.left) := by
-    refine IsOpenImmersion.isPullback _ _ _ _ (Scheme.Hom.resLE_comp_ι ..).symm ?_
-    rw [Scheme.Opens.opensRange_ι, Scheme.Opens.opensRange_ι, ← Scheme.Hom.comp_preimage,
-      c'.w]
-  have h₃ := isPullback_baseChangeCone_π D c p k.left
-  have := (hs.paste_vert h₂).paste_vert h₃
-  have e : (z' ≫ (c'.π.app j₀ ⁻¹ᵁ W₀).ι) ≫ pullback.snd p (c.π.app i) =
-      z ≫ W.ι ≫ pullback.snd p (c.π.app i) := by
-    rw [hz', Category.assoc]
-  rw [e] at this
+  obtain ⟨k, Wk, Zk, zk, s, hzk₁, hzk₂, hpre, hs⟩ := exists_open_isClosedImmersion_of_isLimit_pt
+    (isLimitBaseChangeCone D c p hc) W hW z
+  refine ⟨k.left, k.hom, Wk, Zk, zk, s, hzk₁, hzk₂, hpre, ?_⟩
+  have := hs.paste_vert (isPullback_baseChangeCone_π D c p k)
+  simp only [Category.assoc] at this
   exact this
 
 end

@@ -2463,6 +2463,9 @@ public import WeilConjectures.CategoryTheory.StageSystem.Basic
 public import WeilConjectures.CategoryTheory.StageSystem.Functor
 public import WeilConjectures.CategoryTheory.StageSystem.IdempotentComplete
 public import WeilConjectures.CategoryTheory.StageSystem.Preadditive
+public import WeilConjectures.CategoryTheory.StageSystem.Pretriangulated
+public import WeilConjectures.CategoryTheory.StageSystem.Shift
+public import WeilConjectures.CategoryTheory.StageSystem.Triangulated
 public import WeilConjectures.CategoryTheory.SubobjectHomologyStep
 public import WeilConjectures.CategoryTheory.TowerSplitEnvelope
 public import WeilConjectures.CategoryTheory.TransportScalarActionDiagrams
@@ -3956,6 +3959,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteCompari
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModelReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.GenericConstructibility
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.GeometricFibreStalk
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Kunneth
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective
@@ -4335,6 +4339,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.Complete.CompletedPullback
+public import WeilConjectures.SixFunctors.ProEtale.Complete.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AlgClosedField
