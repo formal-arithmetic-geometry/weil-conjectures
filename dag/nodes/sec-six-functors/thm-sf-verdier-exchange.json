@@ -1,119 +1,235 @@
 {
-  "id": "thm-sf-verdier-exchange",
-  "blueprint": {
-    "is": "thm-sf-verdier-exchange",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Verdier-duality exchange",
-  "statement": "In the setting of [def-sf-datum], let $f:X\\to Y$ be a separated\nfinite-type morphism, with $Rf^!$ and the dualizing complexes\n$\\omega_X=Ra_X^!\\Lambda$, $\\omega_Y=Ra_Y^!\\Lambda$ formed with the\nconstructible exceptional inverse image of [def-weil-exceptional-inverse-image]\n(no admissibility datum is assumed; every separated finite-type morphism is\nexceptionally admissible in the sense of [def-trf-admissibility]). Then for\n$M\\in D^b_{ctf}(X,\\Lambda)$ there is a canonical isomorphism\n\n$$\nD_Y(Rf_!M)\\xrightarrow{\\ \\sim\\ }Rf_*D_X(M),\n$$\n\nnatural in $M$, compatible with finite reduction, scalar extension, and\nshifts. ([fix-cor-verdier-exchange]; the difference from\nthe compiled chapter is that the proof below uses only\n[lem-sf-tensor-hom] and never the duality chapter, which removes the\ncycle recorded in [rem-sf-yoga].)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/thm-sf-verdier-exchange.md",
-    "place": "node thm-sf-verdier-exchange, order 2171"
-  },
-  "stmt_deps": [
+ "id": "thm-sf-verdier-exchange",
+ "blueprint": {
+  "is": "thm-sf-verdier-exchange",
+  "from": null,
+  "same_as": [
+   "fix-cor-verdier-exchange",
+   "sk-thm-sf-verdier-exchange"
+  ]
+ },
+ "kind": "statement",
+ "title": "Verdier-duality exchange",
+ "statement": "Fix the global finite-field datum $(p,a_0,q,k_0,k)$ with\n$k=\\overline{\\mathbf F}_q$ and characteristic $p$, a prime $\\ell\\ne p$, a\nfinite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and\nuniformizer $\\varpi_E$, and an integer $n\\ge1$. Put\n$A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and choose\n$\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$ as in\n[def-fix-six-functor-datum]. Let $X$ and $Y$ be separated finite-type\n$k$-schemes and let $f:X\\to Y$ be a separated finite-type morphism\n[def-weil-scheme-morphism-properties]. Equip these schemes and morphisms with\nthe six-functor datum [def-sf-datum], including the constructible exceptional\ninverse image $Rf^!$ of [def-weil-exceptional-inverse-image]; no ambient\nadmissibility datum is assumed, and every such morphism is exceptionally\nadmissible in the sense of [def-trf-admissibility]. Let\n$a_Y:Y\\to\\operatorname{Spec}k$ be the structure morphism and put\n$a_X=a_Y\\circ f$. Define\n\n$$\n\\omega_T=Ra_T^!\\Lambda_s,\\qquad\nD_T(K)=R\\mathcal H om_T(K,\\omega_T)\\quad(K\\in D^b_{ctf}(T,\\Lambda)),\n$$\n\nfor $T=X,Y$, where $s=\\operatorname{Spec}k$ and $\\Lambda_s$ is the coefficient unit [def-sf-pf]; the finite-Tor categories are those of [def-weil-finite-tor-amplitude]. Then for every $M\\in D^b_{ctf}(X,\\Lambda)$ there is a\ncanonical isomorphism\n\n$$\nD_Y(Rf_!M)\\xrightarrow{\\ \\sim\\ }Rf_*D_X(M),\n$$\n\nnatural in $M$, compatible with finite reduction, scalar extension, and\nshifts.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/thm-sf-verdier-exchange.md",
+  "place": "node thm-sf-verdier-exchange, order 2171"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-sf-datum",
+  "def-weil-exceptional-inverse-image",
+  "def-trf-admissibility",
+  "def-sf-pf",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient unit $\\Lambda_s$ belongs to $D^b_{ctf}(s,\\Lambda)$: at a finite stage it is the constant rank-one free module in degree zero, whose tensor with a degree-zero module is that module; at the integral stage its reductions are these same rank-one units, with the common Tor interval $[0,0]$; the field stages use the rationalized and common-stage units and their defining equality $D^b_{ctf}=D^b_c$ [def-weil-finite-tor-amplitude]. Axiom (A1) of [def-sf-datum] is imposed on the finite-Tor categories, so its right adjoint $Ra_T^!$ takes this unit to an object of $D^b_{ctf}(T,\\Lambda)$, for $T=X,Y$. By [def-sf-pf] this object is $\\omega_T$. The same typed axiom places $Rf_!M$ in $D^b_{ctf}(Y,\\Lambda)$. Thus every dual and every input of the tensor–Hom theorem below has its required domain. No use of Verdier biduality (A6) is made.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
     "def-sf-datum",
-    "def-weil-exceptional-inverse-image",
-    "def-trf-admissibility",
-    "fix-cor-verdier-exchange",
-    "lem-sf-tensor-hom"
-  ],
-  "proof": [
-    {
-      "text": "The operations are those of the six-functor datum of [def-sf-datum],\nits projection transformation is [def-sf-pf], and the mate calculus\nis that of [lem-sf-mate]; the formal core is\n[fix-cor-verdier-exchange].\nStep 1: $Rf^!\\omega_Y\\cong\\omega_X$. By axiom (A4) and\n[lem-sf-mate], the mate of the composition law [thm-sf-comp-composition]\n$R(a_Y\\circ f)_!\\cong Ra_{Y!}Rf_!$ is the isomorphism\n$Rf^!Ra_Y^!\\cong Ra_X^!$, i.e. $Rf^!\\omega_Y\\cong\\omega_X$. Step 2: apply\n[lem-sf-tensor-hom] with $N=\\omega_Y$ (an object of\n$D^b_{ctf}(Y,\\Lambda)$) and substitute Step 1:\n\n$$\nD_Y(Rf_!M)=R\\mathcal H om_Y(Rf_!M,\\omega_Y)\n\\cong Rf_*R\\mathcal H om_X(M,f^!\\omega_Y)\n\\cong Rf_*R\\mathcal H om_X(M,\\omega_X)=Rf_*D_X(M).\n$$",
-      "uses": [
-        "def-sf-datum",
-        "def-sf-pf",
-        "lem-sf-mate",
-        "fix-cor-verdier-exchange",
-        "thm-sf-comp-composition",
-        "lem-sf-tensor-hom"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Step 3: naturality and the compatibilities are those of\n[lem-sf-tensor-hom] and of the mate construction of\n[lem-sf-mate].",
-      "uses": [
-        "lem-sf-tensor-hom",
-        "lem-sf-mate"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-sf-datum",
-    "def-sf-pf",
-    "lem-sf-mate",
-    "fix-cor-verdier-exchange",
-    "thm-sf-comp-composition",
-    "lem-sf-tensor-hom"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/thm-sf-verdier-exchange.md",
-    "place": "## Proof"
+    "def-sf-pf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/thm-sf-verdier-exchange.proof.md",
+    "place": "Step 2: verifying the parenthetical domain of N=omega_Y"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "cites_remark"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2171,
-  "blueprint_uses": [
+  {
+   "text": "Use axiom (A4) of [def-sf-datum] at the composable pair\n$X\\xrightarrow fY\\xrightarrow {a_Y}s$ to obtain the supplied comparison\n\\(\\alpha:Ra_{X!}=R(a_Y\\circ f)_!\\xrightarrow{\\sim}Ra_{Y!}Rf_!\\).\nFor objects $K$ and $L$ in the finite-Tor categories, the three A1\nadjunctions and their pasted units and counits give the natural chain\n$$\n\\begin{aligned}\n\\operatorname{Hom}_X(K,Rf^!Ra_Y^!L)\n&\\cong\\operatorname{Hom}_Y(Rf_!K,Ra_Y^!L)\\\\\n&\\cong\\operatorname{Hom}_s(Ra_{Y!}Rf_!K,L)\\\\\n&\\xrightarrow{h\\mapsto h\\circ\\alpha_K}\n\\operatorname{Hom}_s(Ra_{X!}K,L)\\\\\n&\\cong\\operatorname{Hom}_X(K,Ra_X^!L).\n\\end{aligned}\n$$\nThus Yoneda gives the mate isomorphism $Rf^!Ra_Y^!L\\cong Ra_X^!L$;\nthis is the explicit conjugation calculation, with no appeal to the\nfinite-level composition theorem. Evaluating at $L=\\Lambda_s$ and using\n[def-sf-pf] gives\n$c_f:Rf^!\\omega_Y\\xrightarrow{\\sim}\\omega_X$.",
+   "uses": [
     "def-sf-datum",
-    "def-sf-pf",
-    "def-trf-admissibility",
-    "def-weil-exceptional-inverse-image",
-    "fix-cor-verdier-exchange",
-    "lem-sf-mate",
+    "def-sf-pf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/thm-sf-verdier-exchange.proof.md",
+    "place": "Step 1: A4 composition comparison and its mate"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-tensor-hom] with the given $M$ and with $N=\\omega_Y$, whose finite-Tor membership was checked in Step 1. Invert that canonical isomorphism, and follow it by the image of $c_f$ under the functor $Rf_*R\\mathcal H om_X(M,-)$. The resulting composite is\n$$\nD_Y(Rf_!M)=R\\mathcal H om_Y(Rf_!M,\\omega_Y)\n\\xrightarrow{\\sim}Rf_*R\\mathcal H om_X(M,Rf^!\\omega_Y)\n\\xrightarrow{\\sim}Rf_*R\\mathcal H om_X(M,\\omega_X)=Rf_*D_X(M).\n$$\nThe equalities use precisely the dualizing and Verdier-dual notation of [def-sf-pf]. Both arrows are isomorphisms, so this defines the required canonical isomorphism.",
+   "uses": [
     "lem-sf-tensor-hom",
-    "thm-sf-comp-composition"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "def-sf-pf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/thm-sf-verdier-exchange.proof.md",
+    "place": "Step 2: specialize tensor–Hom and substitute the composition mate"
+   }
   },
-  "chapter": "sec-six-functors",
-  "unit": "sk-thm-sf-verdier-exchange",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the setting of [def-sf-datum], let $f:X\\to Y$ be a separated\nfinite-type morphism, with $Rf^!$ and the dualizing complexes\n$\\omega_X=Ra_X^!\\Lambda$, $\\omega_Y=Ra_Y^!\\Lambda$ formed with the\nconstructible exceptional inverse image of [def-weil-exceptional-inverse-image]\n(no admissibility datum is assumed; every separated finite-type morphism is\nexceptionally admissible in the sense of [def-trf-admissibility]). Then for\n$M\\in D^b_{ctf}(X,\\Lambda)$ there is a canonical isomorphism\n\n$$\nD_Y(Rf_!M)\\xrightarrow{\\ \\sim\\ }Rf_*D_X(M),\n$$\n\nnatural in $M$, compatible with finite reduction, scalar extension, and\nshifts.",
-    "proof": [
-      {
-        "text": "The operations are those of the six-functor datum of [def-sf-datum],\nits projection transformation is [def-sf-pf], and the mate calculus\nis that of [lem-sf-mate]; the formal core is\n[fix-cor-verdier-exchange].\nStep 1: $Rf^!\\omega_Y\\cong\\omega_X$. By axiom (A4) and\n[lem-sf-mate], the mate of the composition law [thm-sf-comp-composition]\n$R(a_Y\\circ f)_!\\cong Ra_{Y!}Rf_!$ is the isomorphism\n$Rf^!Ra_Y^!\\cong Ra_X^!$, i.e. $Rf^!\\omega_Y\\cong\\omega_X$. Step 2: apply\n[lem-sf-tensor-hom] with $N=\\omega_Y$ (an object of\n$D^b_{ctf}(Y,\\Lambda)$) and substitute Step 1:\n\n$$\nD_Y(Rf_!M)=R\\mathcal H om_Y(Rf_!M,\\omega_Y)\n\\cong Rf_*R\\mathcal H om_X(M,f^!\\omega_Y)\n\\cong Rf_*R\\mathcal H om_X(M,\\omega_X)=Rf_*D_X(M).\n$$",
-        "uses": [
-          "def-sf-datum",
-          "def-sf-pf",
-          "lem-sf-mate",
-          "fix-cor-verdier-exchange",
-          "thm-sf-comp-composition",
-          "lem-sf-tensor-hom"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Step 3: naturality and the compatibilities are those of\n[lem-sf-tensor-hom] and of the mate construction of\n[lem-sf-mate].",
-        "uses": [
-          "lem-sf-tensor-hom",
-          "lem-sf-mate"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "The tensor–Hom arrow in Step 3 has the naturality and finite-reduction, scalar-extension and shift compatibilities asserted in [lem-sf-tensor-hom]. For the second arrow, $c_f$ is independent of $M$, so bifunctoriality of internal Hom makes it natural in $M$. For a permitted coefficient comparison, apply it to the explicit unit–composition–counit Hom-adjunction chain in Step 2. Axiom (A5) of [def-sf-datum] identifies the images of those units, composition comparisons and counits with the corresponding ones after coefficient change. Substituting these three identities in that expression gives the same mate, hence the same $c_f$, after coefficient change; applying the internal-Hom comparison gives the commuting square for the second arrow. Here finite reduction is used only at finite/integral stages and scalar passage only on the domains specified by (A5). Finally, for a shift $M[r]$, the second arrow is $Rf_*R\\mathcal H om_X(M[r],c_f)=Rf_*(R\\mathcal H om_X(M,c_f)[-r])$ under the usual derived-Hom shift identification: a degree-zero map in the second variable is unchanged by shifting the first variable. Thus it has the same shift compatibility. Pasting these squares with those of the first arrow proves all asserted compatibilities of their composite.",
+   "uses": [
+    "lem-sf-tensor-hom",
+    "def-sf-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/thm-sf-verdier-exchange.proof.md",
+    "place": "Step 3: naturality and compatibility of the two ingredients"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-finite-tor-amplitude",
+  "def-sf-datum",
+  "def-sf-pf",
+  "lem-sf-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/thm-sf-verdier-exchange.proof.md",
+  "place": "Steps 1–3; four explicit steps including the finite-Tor domain check"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality exchange for compactly supported direct image and exceptional inverse image",
+   "results": "Eight generic sheaf pushforward/pullback adjunction and composition declarations (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous, Mathlib/Topology/Sheaves/Functors, Mathlib/CategoryTheory/Sites/Continuous); none is a geometric Verdier-duality exchange.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "R f star Verdier duality R f shriek for constructible sheaves",
+   "results": "Eight generic sheaf adjunction declarations, including TopCat.Sheaf.pullbackPushforwardAdjunction and sheafAdjunctionContinuous; none has exceptional inverse image, compact support, or constructible Verdier duality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|verdierDual|dualizingComplex|rightDerivedUpperShriek",
+   "results": "0 hits in the searched Mathlib/AlgebraicGeometry subtree.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "nonempty_iso_verdierDual|dualizing.*exceptional",
+   "results": "0 hits in the searched Mathlib source.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "subdirectory": "."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality exchange Rf_! and Rf_* via tensor Hom",
+   "results": "Eight generic sheaf adjunction, linear dual, and monoidal closed Hom declarations; none states the geometric exchange.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exceptional inverse image of dualizing complex and compact support pushforward dual",
+   "results": "Eight generic sheaf pushforward composition, support, and linear-dual declarations; none states the geometric Verdier exchange.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\"",
+   "results": "10 hits, led by CategoryTheory.conjugateIsoEquiv in Mathlib.CategoryTheory.Adjunction.Mates, and bicategorical variants. Read Mates.lean:425–435: this supplies only conjugation of two given adjunctions, already carried by lem-sf-mate; it does not state geometric Verdier exchange.",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; generic ingredient already an existing Mathlib leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional pushforward intertwines internal Hom into the dualizing complex with ordinary direct image",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.comp_pushforward, pushforwardComp, pushforwardComp_hom_counit_assoc, pushforwardComp_hom_counit, pushforwardUncurry, pushforwardCurry, coev_naturality, and SheafOfModules.pushforwardPushforwardAdj. These are adjunctions in slice categories or ordinary sheaves, not exceptional sheaf functors or Verdier duality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dualizing complex exceptional inverse image composition gives Verdier duality exchange",
+   "results": "8 hits: BotHom.symm_dual_comp, LinearEquiv.dualMap_trans, sInfHom.symm_dual_comp, InfTopHom.symm_dual_comp, InfHom.symm_dual_comp, HomologicalComplex.ι_mapBifunctorFlipIso_inv_assoc, OrderHom.symm_dual_comp, sInfHom.dual_symm_apply_toFun. None states a theorem for geometric sheaf operations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "cites_remark"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2171,
+ "blueprint_uses": [
+  "def-sf-datum",
+  "def-sf-pf",
+  "def-trf-admissibility",
+  "def-weil-exceptional-inverse-image",
+  "fix-cor-verdier-exchange",
+  "lem-sf-mate",
+  "lem-sf-tensor-hom",
+  "thm-sf-comp-composition"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the setting of [def-sf-datum], let $f:X\\to Y$ be a separated\nfinite-type morphism, with $Rf^!$ and the dualizing complexes\n$\\omega_X=Ra_X^!\\Lambda$, $\\omega_Y=Ra_Y^!\\Lambda$ formed with the\nconstructible exceptional inverse image of [def-weil-exceptional-inverse-image]\n(no admissibility datum is assumed; every separated finite-type morphism is\nexceptionally admissible in the sense of [def-trf-admissibility]). Then for\n$M\\in D^b_{ctf}(X,\\Lambda)$ there is a canonical isomorphism\n\n$$\nD_Y(Rf_!M)\\xrightarrow{\\ \\sim\\ }Rf_*D_X(M),\n$$\n\nnatural in $M$, compatible with finite reduction, scalar extension, and\nshifts.",
+  "proof": [
+   {
+    "text": "The operations are those of the six-functor datum of [def-sf-datum],\nits projection transformation is [def-sf-pf], and the mate calculus\nis that of [lem-sf-mate]; the formal core is\n[fix-cor-verdier-exchange].\nStep 1: $Rf^!\\omega_Y\\cong\\omega_X$. By axiom (A4) and\n[lem-sf-mate], the mate of the composition law [thm-sf-comp-composition]\n$R(a_Y\\circ f)_!\\cong Ra_{Y!}Rf_!$ is the isomorphism\n$Rf^!Ra_Y^!\\cong Ra_X^!$, i.e. $Rf^!\\omega_Y\\cong\\omega_X$. Step 2: apply\n[lem-sf-tensor-hom] with $N=\\omega_Y$ (an object of\n$D^b_{ctf}(Y,\\Lambda)$) and substitute Step 1:\n\n$$\nD_Y(Rf_!M)=R\\mathcal H om_Y(Rf_!M,\\omega_Y)\n\\cong Rf_*R\\mathcal H om_X(M,f^!\\omega_Y)\n\\cong Rf_*R\\mathcal H om_X(M,\\omega_X)=Rf_*D_X(M).\n$$",
+    "uses": [
+     "def-sf-datum",
+     "def-sf-pf",
+     "lem-sf-mate",
+     "fix-cor-verdier-exchange",
+     "thm-sf-comp-composition",
+     "lem-sf-tensor-hom"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 3: naturality and the compatibilities are those of\n[lem-sf-tensor-hom] and of the mate construction of\n[lem-sf-mate].",
+    "uses": [
+     "lem-sf-tensor-hom",
+     "lem-sf-mate"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-sf-verdier-exchange",
+  "worker": "stage1",
+  "summary": "Made the current blueprint statement self-contained and split the same composition-mate/tensor–Hom route into four steps. Verified the unit and dualizing domains from the typed A1 adjunctions; obtained Rf^!ω_Y≅ω_X as the mate of the A4 composition comparison by an explicit A1 Hom-adjunction/Yoneda calculation valid at all four coefficient stages, instead of citing the finite-level thm-sf-comp-composition or lem-sf-mate (whose statement is tied to that finite-level comparison); specialized tensor–Hom and wrote out naturality, coefficient (A5) and shift compatibility through the explicit mate expression. A6/biduality is not used. No new nodes, Mathlib leaves, or exact project attachment. Reported for its owner: lem-sf-mate's statement (ambient-adjoint parenthetical and reference to the finite-level composition theorem) is narrower than its generic Mathlib match.",
+  "blueprint": "Current main-20261015 thm-sf-verdier-exchange.proof.md Step 1 is realized by proof Step 2; blueprint Step 2 is realized by Steps 1 and 3; blueprint Step 3 is realized by Step 4. This retains the unit route of composition, mate, then tensor–Hom.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-63a9bf5ac",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-63a9bf5ac (reviewer sub-agent of L); spot-checked: I read the full delivery: the item (statement plus 4 steps), the unit sk-thm-sf-verdier-exchange, the current main-20261015 statement and proof (Steps 1-3), and every cited statement: def-sf-datum A1-A6, def-sf-pf, def-weil-finite-tor-amplitude, lem-sf-tensor-hom, def-weil-exceptional-inverse-image, def-trf-admissibility and def-fix-six-functor-datum. For context I also read lem-sf-mate, thm-sf-comp-composition and fix-cor-verdier-exchange. The statement matches the source, and the coefficient categories are the finite-Tor categories at all four stages. Step 1 (elementary): Λ_s has Tor amplitude [0,0] at the finite and integral stages, and D^b_ctf = D^b_c at the field stages; because A1 is typed on these domains, it gives ω_T and Rf_!M in the right categories. Step 2: the A4 comparison α followed by the A1 Hom chain, then Yoneda in D^b_ctf(X), gives c_f: Rf^!ω_Y ≅ ω_X. I checked the direction. Dropping lem-sf-mate and thm-sf-comp-composition is correct: the latter is finite-level only, and the former refers to it, so citing them at O_E, E or Q̄_ℓ would be an E1 error; the source itself attributes the composition law to A4, so the unit's route is kept. Step 3: both hypotheses of tensor-Hom hold (N=ω_Y), the lemma's arrow is inverted, and c_f is applied by functoriality. Step 4: the tensor-Hom clauses, A5 applied to the explicit unit/composition/counit chain, and the shift identity RHom(M[r],-) = RHom(M,-)[-r]. Small cases f=id, X empty, M=0, n=1, integral and field stages all check. There are no new nodes, no cycle (checked by transitive closure), no SGA citation and no tool_uses. Fix: split_report.summary still said the proof used lem-sf-mate's conjugation clause; I rewrote it to describe the final proof (fixes/dag/nodes/sec-six-functors/thm-sf-verdier-exchange.json). Mathematics, statement and dependencies are unchanged. For maintenance: lem-sf-mate's statement is narrower than its generic Mathlib match.; 1 file(s) fixed by the reviewer"
+ }
 }
