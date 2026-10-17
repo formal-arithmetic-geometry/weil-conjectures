@@ -148,9 +148,8 @@ lemma pullbackLiftSection_coherence (y : S ⟶ X) (hy : y ≫ a = 𝟙 S)
     ((leftDerivedUpperStarCompSectionIso _ y a hy).hom.app W)), ← Functor.map_comp,
     Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
   simp only [Category.assoc]
-  rw [← H, ← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp, Iso.inv_hom_id_app]
-  rfl
+  rw [← H, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+  simp
 
 /-- **Restriction along `j_y` of a morphism pulled back from `X`**: for
 `φ : N ⟶ La^* Ra_* La^* Q`, the restriction along `j_y` of
@@ -179,9 +178,8 @@ lemma pullbackLiftSectionRestrict_map_comp (y : S ⟶ X) (hy : y ≫ a = 𝟙 S)
     NatTrans.comp_app, Category.assoc] at n₁ n₂
   have hc := pullbackLiftSection_coherence a Λ y hy ((R((a)_*[ModuleCat.{u + 1} Λ])).obj
     ((L((a)^*[ModuleCat.{u + 1} Λ])).obj Q))
-  simp only [Category.assoc] at hc
   simp only [pullbackLiftSectionRestrict, sectionEvaluation, Functor.map_comp, Category.assoc]
-  rw [reassoc_of% n₁, reassoc_of% n₂, reassoc_of% hc]
+  rw [← reassoc_of% n₁, reassoc_of% n₂, reassoc_of% hc]
 
 variable [Finite Λ] [IsProper a]
 

@@ -181,7 +181,8 @@ lemma injective_comp_unit_of_iso {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
         ((R((a)_*[ModuleCat.{u + 1} Λ])).map ((L((a)^*[ModuleCat.{u + 1} Λ])).map ι.inv) ≫
           g ≫ ι.hom) =
       ι.inv ≫ ((derivedUpperStarLowerStarAdjunction _ a).unit.app Q ≫ g) ≫ ι.hom := by
-    rw [reassoc_of% hn, Category.assoc]
+    rw [← reassoc_of% hn]
+    simp only [Category.assoc]
   have h₁₂ := h (a₁ := (R((a)_*[ModuleCat.{u + 1} Λ])).map
       ((L((a)^*[ModuleCat.{u + 1} Λ])).map ι.inv) ≫ g₁ ≫ ι.hom)
     (a₂ := (R((a)_*[ModuleCat.{u + 1} Λ])).map
@@ -192,6 +193,7 @@ lemma injective_comp_unit_of_iso {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
     (R((a)_*[ModuleCat.{u + 1} Λ])).map ((L((a)^*[ModuleCat.{u + 1} Λ])).map ι.hom) ≫= h₁₂ =≫
       ι.inv
 
+set_option maxRecDepth 20000 in
 omit [IsSepClosed k] in
 /-- Injectivity of precomposition with the unit `Q ⟶ Ra_* La^* Q` is invariant under shifts:
 the unit commutes with the shift functors. -/
@@ -206,16 +208,19 @@ lemma injective_comp_unit_shift {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
   intro g₁ g₂ hg
   simp only at hg
   rw [← Adjunction.unit_app_shift_commShiftIso_inv_app, Category.assoc, Category.assoc] at hg
-  obtain ⟨f₁, hf₁⟩ := (shiftFunctor (DerivedCategoryModule Λ (Spec (.of k))) n).map_surjective
-    ((((L((a)^*[ModuleCat.{u + 1} Λ])) ⋙ (R((a)_*[ModuleCat.{u + 1} Λ]))).commShiftIso n).inv.app
-      Q ≫ g₁)
-  obtain ⟨f₂, hf₂⟩ := (shiftFunctor (DerivedCategoryModule Λ (Spec (.of k))) n).map_surjective
-    ((((L((a)^*[ModuleCat.{u + 1} Λ])) ⋙ (R((a)_*[ModuleCat.{u + 1} Λ]))).commShiftIso n).inv.app
-      Q ≫ g₂)
-  rw [← hf₁, ← hf₂, ← Functor.map_comp, ← Functor.map_comp] at hg
-  have h₁₂ : f₁ = f₂ := h ((shiftFunctor _ n).map_injective hg)
-  rw [h₁₂] at hf₁
-  exact (cancel_epi _).1 (hf₁.symm.trans hf₂)
+  let F := shiftFunctor (DerivedCategoryModule Λ (Spec (.of k))) n
+  have e (g : (R((a)_*[ModuleCat.{u + 1} Λ])).obj
+      ((L((a)^*[ModuleCat.{u + 1} Λ])).obj (Q⟦n⟧)) ⟶ Q⟦n⟧) :
+      ((derivedUpperStarLowerStarAdjunction _ a).unit.app Q)⟦n⟧' ≫
+        ((((L((a)^*[ModuleCat.{u + 1} Λ])) ⋙ (R((a)_*[ModuleCat.{u + 1} Λ]))).commShiftIso
+          n).inv.app Q ≫ g) =
+      F.map ((derivedUpperStarLowerStarAdjunction _ a).unit.app Q ≫ F.preimage
+        ((((L((a)^*[ModuleCat.{u + 1} Λ])) ⋙ (R((a)_*[ModuleCat.{u + 1} Λ]))).commShiftIso
+          n).inv.app Q ≫ g)) := by
+    rw [F.map_comp, F.map_preimage]
+  have h₁₂ := congrArg F.map (h (F.map_injective ((e g₁).symm.trans (hg.trans (e g₂)))))
+  simp only [F.map_preimage] at h₁₂
+  exact (cancel_epi _).1 h₁₂
 
 /-- **Evaluation at `1`, injectivity form.** For `a : X ⟶ Spec k` with `X` connected and `Λ`
 self-injective, precomposition with the unit `Λ_s ⟶ Ra_* La^* Λ_s` is injective on
@@ -233,8 +238,9 @@ lemma injective_comp_unit_rightDerivedLowerStar_unit [Module.Injective Λ Λ] {X
   have h₁₂ := hb (a₁ := (R((a)_*[ModuleCat.{u + 1} Λ])).map e.inv ≫ g₁)
     (a₂ := (R((a)_*[ModuleCat.{u + 1} Λ])).map e.inv ≫ g₂) (by
       simp only [Category.assoc] at hg ⊢
-      rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, e.hom_inv_id,
-        CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
+      rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, e.hom_inv_id]
+      erw [CategoryTheory.Functor.map_id]
+      simp only [Category.id_comp]
       exact hg)
   simpa [← Functor.map_comp_assoc] using (R((a)_*[ModuleCat.{u + 1} Λ])).map e.hom ≫= h₁₂
 
