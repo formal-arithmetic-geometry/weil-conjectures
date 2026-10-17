@@ -15801,3 +15801,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:50 L: batch 20261017T044844 dependency take-out
 - 05:03 L: returned deliver/B2/Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine (reviewer RETURN: (the landing tools, head 28c84b472) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 05:03 L: merged deliver/B3/Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange (stage 3; reviewer PASS; first push; landing 20261017T050317-L-3204663 (interface); batch 20261017T050314; modules 3; new nodes 0; change records: coord/changes/PerfectDirectImageBaseChange-final-withdrawal.md)
+- 05:03 L: merged deliver/G2/Sheaf.AlgebraicGeometry.Sites.PolynomialGenericStrictLocalizationField (stage 3; reviewer PASS; after a return; landing 20261017T050318-L-3204888 (proof); batch 20261017T050314; modules 1; new nodes 0)

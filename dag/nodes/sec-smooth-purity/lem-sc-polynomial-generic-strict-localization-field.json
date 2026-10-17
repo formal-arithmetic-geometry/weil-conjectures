@@ -14,37 +14,34 @@
  },
  "proof": [
   {
-   "text": "Polynomial affine space is smooth and integral of dimension m. The residue transcendence degree is a finite cardinal a by [lem-kun-finite-type-residue-trdeg]; the two canonical definitions of the residue scalar map agree by germ naturality.",
+   "text": "Polynomial affine space is smooth and integral of dimension m: use the polynomial smoothness instances, HasRingHomProperty.Spec_iff, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, MvPolynomial.ringKrullDim_of_isNoetherianRing and ringKrullDim_eq_zero_of_field. By [lem-kun-finite-type-residue-trdeg], the residue transcendence degree is a finite natural number a. The existing private theorem AlgebraicGeometry.Scheme.residueFieldHomOfOver_eq from Sheaf.AlgebraicGeometry.Sites.AffineLineInfinityStrictLocalModel, reused through a proof-only import all, identifies the scalar map in residueFieldTrdeg with b.residueFieldAlgebraMap by germ naturality. Thus the hypothesis gives m <= a.",
    "uses": [
     "lem-kun-finite-type-residue-trdeg"
    ],
    "elementary": false
   },
   {
-   "text": "Apply [lem-sc-smooth-strict-local-field-model] with canonical scalar structures obtained from the scheme maps. It makes the strict-local ring a regular local domain with dimension m-a. The hypothesis m<=a makes that dimension zero.",
+   "text": "Give kappa(y) its canonical K-algebra structure and give Omega its kappa(y)-algebra structure from SpecToEquivOfField. The inverse-equivalence equation proves their geometric factorization. Construct the K-algebra map into R using Spec.preimage of the structural composite; Spec.map_preimage proves its compatibility. Apply [lem-sc-smooth-strict-local-field-model-core] to obtain a local integral domain R of dimension m-a and an equivalence from its residue field to separableClosure(kappa(y),Omega). Since m <= a, its dimension is zero. No coefficient field or function-field conclusion is used.",
    "uses": [
-    "lem-sc-smooth-strict-local-field-model"
+    "lem-sc-smooth-strict-local-field-model-core"
    ],
    "elementary": false
   },
   {
-   "text": "Mathlib Ring.KrullDimLE.isField_of_isReduced makes this ring a field. Its residue map is bijective because its maximal ideal is zero. Its residue field is separably closed by [lem-weil-pbc-strict-henselization-local-structure]. Apply Spec to this explicitly constructed residue-field ring isomorphism.",
-   "uses": [
-    "lem-weil-pbc-strict-henselization-local-structure"
-   ],
-   "elementary": false
+   "text": "Ring.KrullDimLE.isField_of_isReduced makes R a field. The residue map is injective as a map from a field and surjective by IsLocalRing.residue_surjective. RingEquiv.ofBijective therefore identifies R with its residue field; compose with the equivalence from the core to L=separableClosure(kappa(y),Omega). IsSepClosure.sep_closed supplies separable closedness of L, and Scheme.Spec.mapIso applied contravariantly to this ring equivalence gives the claimed scheme isomorphism. The same dimension computation includes m=0.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-kun-finite-type-residue-trdeg",
-  "lem-sc-smooth-strict-local-field-model",
-  "lem-weil-pbc-strict-henselization-local-structure"
+  "lem-sc-smooth-strict-local-field-model-core"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "C4",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-  "place": "Proof step 10: exceptional generic degree two"
+  "group": "G2",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.proof.md",
+  "place": "Exceptional generic degree-two case; use the smooth strict-local core and the zero-dimensional residue-field equivalence, without coefficient-field construction."
  },
  "mathlib_searches": [
   {
@@ -116,13 +113,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C4",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261016T015245-L-721167",
-  "kind": "interface",
+  "landing": "20261017T050318-L-3204888",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
