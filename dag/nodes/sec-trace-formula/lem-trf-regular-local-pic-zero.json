@@ -13,9 +13,76 @@
   "def-weil-pbc-projective-module",
   "def-weil-pbc-module-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By hypothesis $P$ is a finitely generated projective $A_f$-module whose localization at every prime ideal of $A_f$ is free of rank one. These are exactly the hypotheses imposed on the module in the lemma used in Step 5 (with $S=A_f$), and $P$ is in particular a finitely generated $A_f$-module. (In the language of the source, Tags 0B8I and 00NX, such a $P$ is an invertible $A_f$-module; this identification is not used below.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AFZ proof opening, read with Tags 0B8I and 00NX"
+   }
+  },
+  {
+   "text": "Since $P$ is a finitely generated $A_f$-module, apply [lem-trf-localized-finite-module-spread] with $R=A$, the element $f$ and $L=P$ to obtain a finitely generated $A$-module $M$ and an isomorphism of $A_f$-modules $M_f\\cong P$.",
+   "uses": [
+    "lem-trf-localized-finite-module-spread"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AFZ proof, line 36789, invoking Algebra Tag 05N5"
+   }
+  },
+  {
+   "text": "Let $d=\\dim A$. By [lem-weil-pbc-regular-local-finite-module-resolution] the finite $A$-module $M$ has a projective resolution of length at most $d$. Since a regular local ring is a Noetherian local ring [def-weil-regular-scheme], [stage3-b4-bounded-finite-free-resolution] applies to $A$, $M$ and $d$ and gives an exact sequence $0\\to F_d\\to\\cdots\\to F_0\\to M\\to 0$ with each $F_i$ finite free over $A$, say $F_i\\cong A^{r_i}$. Localization at the powers of $f$ is exact (Stacks Tag 00CS) and sends $A^{r_i}$ to $A_f^{r_i}$, so composing with $M_f\\cong P$ gives an exact sequence of $A_f$-modules $0\\to A_f^{r_d}\\to\\cdots\\to A_f^{r_0}\\to P\\to 0$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-finite-module-resolution",
+    "stage3-b4-bounded-finite-free-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AFZ proof, line 36790, invoking Proposition Tag 00O7"
+   }
+  },
+  {
+   "text": "$P$ is a finitely generated projective $A_f$-module with the finite free resolution of Step 3. Therefore [lem-trf-invertible-module-k0-class] with $S=A_f$ and $L=P$ gives $[P]=n[A_f]$ in $K_0(A_f)$ for $n=\\sum_i(-1)^ir_i$.",
+   "uses": [
+    "lem-trf-invertible-module-k0-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AFZ proof, lines 36793–36795, invoking Tag 0AFY"
+   }
+  },
+  {
+   "text": "By Step 1, $P$ satisfies the hypotheses of [lem-trf-k0-class-trivial-invertible] with $S=A_f$, and by Step 4 $[P]=n[A_f]$. That lemma gives $P\\cong A_f$ as $A_f$-modules.",
+   "uses": [
+    "lem-trf-k0-class-trivial-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AFZ proof, lines 36796–36797, invoking Tag 0AFX and Tag 0B8I"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-localized-finite-module-spread",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-local-finite-module-resolution",
+  "stage3-b4-bounded-finite-free-resolution",
+  "lem-trf-invertible-module-k0-class",
+  "lem-trf-k0-class-trivial-invertible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AFZ (lemma-regular-local-Pic-zero), lines 36780–36797, with Tags 0B8I, 00NX, 05N5, 00O7, 0AFY and 0AFX"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -40,7 +107,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-regular-local-ufd-boundary-factorization",
@@ -52,7 +119,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Tag 0AFZ (lemma-regular-local-Pic-zero), used after making the localized height-one ideal invertible",
+   "place": "Tag 0AFZ (lemma-regular-local-Pic-zero): identify the rank-one module as invertible, descend it to a finite module, resolve over the regular local ring, and apply K_0 plus determinant to trivialize it",
    "via": [
     "lem-trf-regular-local-ufd-boundary-factorization",
     "lem-trf-nodal-pair-projective-resolution",
@@ -64,5 +131,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-regular-local-pic-zero",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against Stacks Tag 0AFZ and retained its hypotheses and conclusion. Split the proof into finite-module descent (05N5), finite free resolution over a regular local ring (00O7, via existing stage3-b4-bounded-finite-free-resolution), the K_0 class of a finite free complex (0AFY), and the determinant/Picard triviality implication (0AFX and 0B8I). Searched the DAG and blueprint for duplicates; none of these supporting statements was already present in this route. Maintainer reader (2026-10-18): step 3 now cites lem-weil-pbc-regular-local-finite-module-resolution for the length bound; the new K_0 lemmas are stated with explicit hypotheses (finite projective, explicit finite free resolution, rank-one localizations) instead of the undefined notions 'invertible module', 'determinant homomorphism' and 'Pic'.",
+  "blueprint": "Realizes Tag 0AFZ proof opening, finite-module descent, Proposition 00O7 resolution, Tag 0AFY K_0 step, and Tag 0AFX/0B8I determinant conclusion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-51a95ab8f",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-51a95ab8f (reviewer sub-agent of L); spot-checked: Read the item, all 4 new nodes, every cited node's statement and the sources. Stacks more-algebra 0AFZ l.36780-36797 (proof: 05N5, then 00O7, then 0AFY, then 0AFX det), 0AFX l.36464, K_0 recalled at l.36458, 0B8I l.36118, algebra 05N5 l.31490 (1) with I=0 and S={f^n}. The item's hypotheses match 0AFZ through 0B8I/00NX; no SGA used. Route: sk-thm-p1 (unit of the cited pbc nodes) is in the transitive uses of sk-i-curve-zero, so no tool use is needed. Fixed 3 faults in fixes/: (C1) step 3 used the regular-local projective-resolution bound with no node; it now cites the existing lem-weil-pbc-regular-local-finite-module-resolution (00O7) plus def-weil-regular-scheme (Noetherian local, needed by stage3-b4). (B3) lem-trf-invertible-module-k0-class and lem-trf-k0-class-trivial-invertible used 'invertible S-module', 'determinant homomorphism' and 'Pic(S)', which no node defines; restated with explicit hypotheses: finitely generated projective with an explicit finite free resolution gives [L]=sum(-1)^i r_i [S], and finitely generated projective with rank-one localizations and [L]=n[S] gives L≅S. Both are true (split resolutions; det[L]=L, det(n[S])=S per 0AFX) and were tested on S=0, a field, a Dedekind ring and Z×Z. Item step 1 no longer relies on 0B8I. (B3) def-trf-k0-group now cites finite generation and has the correct source place (section-determinants, not perfect-K-group); localized-finite-module-spread now cites R_f and M_f in its text. Item tested on f=0, f a unit and dim 0; rank one is essential. No duplicates found by rg for the tags and key words; no cycle; not a target node; nothing weakened; no drops.; 5 file(s) fixed by the reviewer"
  }
 }

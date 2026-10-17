@@ -2,21 +2,120 @@
  "id": "lem-trf-log-chart-face-tor-comparison",
  "kind": "statement",
  "title": "Tor comparison from a chart to its sharp face localization",
- "statement": "Let $P$ be a fine saturated commutative monoid [def-trf-fs-log-blowup], let $A$ be a strictly henselian local ring [def-weil-pbc-strict-henselization-limit], and let $\\alpha:P\\to A$ be a chart of an fs log structure at its closed geometric point. Put $F=\\{p\\in P\\mid \\alpha(p)\\in A^\\times\\}$, $P_F=\\{p-f:p\\in P,f\\in F\\}\\subset P^{\\rm gp}$, and $P_x=P_F/F^{\\rm gp}$. Choose a monoid section $s:P_x\\to P_F$ of the quotient and a sharp characteristic chart [lem-trf-log-regular-sharp-chart] $b:P_x\\to A$ inducing the same characteristic identification as $\\alpha$. Then there is a monoid homomorphism $u:P_x\\to A^\\times$ with $\\alpha(s(q))=u(q)b(q)$ for every $q$. For every monoid ideal $H\\subset P$, if $H_x$ is its image in $P_x$, the face localization $\\mathbf Z[P]\\to\\mathbf Z[P_F]$, the splitting $P_F\\cong P_x\\oplus F^{\\rm gp}$, the unit twist $z^q\\mapsto u(q)z^q$, and the resulting change of rings induce a natural isomorphism of Tor groups [def-weil-pbc-tor-modules]\n$$\\operatorname{Tor}^{\\mathbf Z[P]}_1(\\mathbf Z[P]/\\mathbf Z[H],A)\\;\\cong\\;\\operatorname{Tor}^{\\mathbf Z[P_x]}_1(\\mathbf Z[P_x]/\\mathbf Z[H_x],A).$$",
+ "statement": "Let $P$ be a fine saturated commutative monoid [def-trf-fs-log-blowup], let $A$ be a strictly henselian local ring [def-weil-pbc-henselian-terminology], and let $\\alpha:P\\to A$ be the structural map of a chart of an fs log structure $M$ on $\\operatorname{Spec}A$, taken at the closed geometric point, with log stalk $M_{\\bar x}$ there. Put $F=\\{p\\in P\\mid \\alpha(p)\\in A^\\times\\}$, $P_F=\\{p-f:p\\in P,f\\in F\\}\\subset P^{\\rm gp}$, and $P_x=P_F/F^{\\rm gp}$. Choose a monoid section $s:P_x\\to P_F$ of the quotient and a sharp characteristic chart [lem-trf-log-regular-sharp-chart] $b:P_x\\to A$ of the same log structure, i.e. the structural map of a chart $b_M:P_x\\to M_{\\bar x}$ whose induced identification $P_x\\cong\\overline M_{\\bar x}$ is the one induced by $\\alpha$. Then there is a monoid homomorphism $u:P_x\\to A^\\times$ with $\\alpha(s(q))=u(q)b(q)$ for every $q$. For every monoid ideal $H\\subset P$, if $H_x$ is its image in $P_x$, the face localization $\\mathbf Z[P]\\to\\mathbf Z[P_F]$, the splitting $P_F\\cong P_x\\oplus F^{\\rm gp}$, the unit twist $z^q\\mapsto u(q)z^q$ on $A[P_x]$ (after extension of coefficients from $\\mathbf Z$ to $A$), and the resulting change of rings induce a natural isomorphism of Tor groups [def-weil-pbc-tor-modules], where $A$ is a $\\mathbf Z[P]$-algebra by $z^p\\mapsto\\alpha(p)$ on the left and a $\\mathbf Z[P_x]$-algebra by $z^q\\mapsto b(q)$ on the right:\n$$\\operatorname{Tor}^{\\mathbf Z[P]}_1(\\mathbf Z[P]/\\mathbf Z[H],A)\\;\\cong\\;\\operatorname{Tor}^{\\mathbf Z[P_x]}_1(\\mathbf Z[P_x]/\\mathbf Z[H_x],A).$$",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose VI, 3.7(a), printed p. 75 (face localization, splitting and unit pushout), together with Expose VIII, proof of Lemma 3.4.3, printed p. 110 (the induced monomial Tor comparison)."
  },
  "stmt_deps": [
   "def-trf-fs-log-blowup",
-  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-henselian-terminology",
   "lem-trf-fs-face-sharpening",
   "lem-trf-log-regular-sharp-chart",
   "def-weil-pbc-tor-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Q=P_x$, $G=F^{\\rm gp}$. Since a product in a commutative ring is a unit exactly when both factors are units, $F$ is a face. Extend $\\alpha$ to $P_F$ by $\\alpha(p-f)=\\alpha(p)\\alpha(f)^{-1}$. The face-sharpening lemma gives $P_F^\\times=G$ and the sharp fs quotient $Q$, with equality of quotient classes exactly difference by $G$. For the given section $s$, the maps $(q,g)\\mapsto s(q)+g$ and $r\\mapsto(\\bar r,r-s(\\bar r))$ are inverse monoid homomorphisms $Q\\oplus G\\simeq P_F$: the difference in the inverse belongs to $G$ by that equality criterion. Put $v(g)=\\alpha(g)\\in A^\\times$ and $c(q)=\\alpha(s(q))$.",
+   "uses": [
+    "lem-trf-fs-face-sharpening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.1--3.1.5, printed pp. 98--99; explicit splitting from the given section (agent)."
+   }
+  },
+  {
+   "text": "Let $M$ be the log stalk. The chart pushout is $M=P\\oplus_F A^\\times=P_F\\oplus_G A^\\times$: adjoining inverses to $F$ does not alter a pushout in which $F$ already maps to units. The given splitting thus identifies $M$ with $Q\\oplus A^\\times$. More particularly the sharp chart $b$, whose characteristic map is the specified identity, gives the isomorphism $(q,a)\\mapsto b_M(q)a$ from $Q\\oplus A^\\times$ to $M$; here $b_M$ denotes the lift of the chart to $M$, not merely its image in $A$. In these coordinates the image of $s(q)$ is uniquely $(q,u(q))$. Multiplication in $M$ implies $u(q+q')=u(q)u(q')$ and $u(0)=1$. Applying the structural map to $A$ gives $c(q)=u(q)b(q)$. This uses the given charts, not an existence theorem requiring log regularity.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 1.1--1.2, printed p. 69, and 3.7(a), printed p. 75; explicit comparison of the two chart pushouts (agent)."
+   }
+  },
+  {
+   "text": "For any commutative ring $T$, ideal $L$ and $T$-module $B$, first apply Tor symmetry and then part (a) of the ideal-kernel lemma with $M=B$, $R=T$, $I=L$. This identifies $\\operatorname{Tor}_1^T(T/L,B)$ with $\\ker(\\mu_{T,L,B}:L\\otimes_T B\\to B)$, where $\\mu(\\ell\\otimes a)=\\ell a$. Part (b) says precisely that the change-of-rings maps on these kernels are the restrictions of the maps on ideal tensors induced by the ring and module maps. We shall construct invertible maps of these ideal tensors commuting with $\\mu$, so their restrictions give the desired first-Tor comparison.",
+   "uses": [
+    "lem-weil-pbc-tor-symmetry",
+    "lem-weil-pbc-tor-ideal-kernel-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00M3 (Tor symmetry) and 00M6 (ideal-kernel description); the cited naturality node states the semilinear change-of-rings compatibility explicitly."
+   }
+  },
+  {
+   "text": "Put $H_F=H+P_F=\\{h-f:h\\in H,f\\in F\\}$. The map $P\\to Q$ is surjective, since $\\overline{p-f}=\\bar p$; hence the image $H_x$ is an ideal of $Q$. Moreover $H_F$ is the inverse image of $H_x$: if $\\bar r=\\bar h$ for $h\\in H$, then $r-h\\in G$, and $H_F$ is stable under addition by $G$ (both signs are units in $P_F$). The converse follows by taking quotient classes. Under step 1 this says $H_F=H_x\\oplus G$. The ideals $\\mathbf Z[H]$, $\\mathbf Z[H_F]$ and $\\mathbf Z[H_x]$ have, by definition of a monoid ring, the indicated monomials as their additive bases; these bases also describe their extension ideals.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.1--3.1.2, printed p. 98, and proof of 3.4.3, printed p. 110; explicit ideal calculation (agent)."
+   }
+  },
+  {
+   "text": "Localization induces $\\lambda:\\mathbf Z[H]\\otimes_{\\mathbf Z[P]}A\\to\\mathbf Z[H_F]\\otimes_{\\mathbf Z[P_F]}A$, $z^h\\otimes a\\mapsto z^h\\otimes a$. Its inverse is $z^{h-f}\\otimes a\\mapsto z^h\\otimes\\alpha(f)^{-1}a$, extended additively. If $h-f=h'-f'$, integrality of $P$ gives $h+f'=h'+f$; tensor balancing gives equality of the two proposed values by using the common denominator $\\alpha(f)\\alpha(f')$. Balancing a monomial $p-f'$ transfers the scalar $\\alpha(p)\\alpha(f')^{-1}$ on either side, so the inverse is well-defined over $\\mathbf Z[P_F]$. The two displayed maps are inverse on generators, are $A$-linear, and commute with multiplication to $A$, since $\\alpha(h-f)=\\alpha(h)\\alpha(f)^{-1}$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, proof of 3.4.3, printed p. 110; localization comparison expanded by tensor generators and relations (agent); tensor universal property: Stacks 00CX."
+   }
+  },
+  {
+   "text": "Using $H_F=H_x\\oplus G$, the splitting induces $\\sigma:\\mathbf Z[H_F]\\otimes_{\\mathbf Z[P_F]}A\\to\\mathbf Z[H_x]\\otimes_{\\mathbf Z[Q]}A_c$, $z^{s(q)+g}\\otimes a\\mapsto z^q\\otimes v(g)a$; $A_c$ denotes $A$ with the action $z^p\\mapsto c(p)$. The inverse sends $z^q\\otimes a$ to $z^{s(q)}\\otimes a$. Balancing by $s(p)+g'$ on the source transfers exactly $c(p)v(g')$, while on the target balancing by $p$ transfers $c(p)$ and the formula transfers $v(g')$. Thus both maps descend; their composites are identities since $z^{s(q)+g}\\otimes a=z^{s(q)}\\otimes v(g)a$. The multiplication maps commute, both giving $c(q)v(g)a$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 3.7(a), printed p. 75; explicit split group-factor elimination on ideal tensors (agent); tensor relations: Stacks 00CX."
+   }
+  },
+  {
+   "text": "The unit twist gives $\\rho:\\mathbf Z[H_x]\\otimes_{\\mathbf Z[Q]}A_c\\to\\mathbf Z[H_x]\\otimes_{\\mathbf Z[Q]}A_b$, $z^q\\otimes a\\mapsto z^q\\otimes u(q)a$. Indeed the balancing relation for $p\\in Q$ is respected because $u(q+p)b(p)=u(q)c(p)$. Replacing $u$ by $u^{-1}$ gives the inverse, and $b(q)u(q)a=c(q)a$ proves compatibility with multiplication to $A$. To interpret this as the stated ring twist, use the generator isomorphisms $\\mathbf Z[H_x]\\otimes_{\\mathbf Z[Q]}A_d\\simeq A[H_x]\\otimes_{A[Q]}A_d$ ($d=b,c$), whose inverses send $(a_0z^q)\\otimes a$ to $z^q\\otimes a_0a$. The automorphism $\\tau_u:A[Q]\\to A[Q]$, $z^q\\mapsto u(q)z^q$, preserves $A[H_x]$ and satisfies $c=b\\circ\\tau_u$. Its ideal-tensor map is exactly $\\rho$ in these presentations. The generator formulas prove these identifications without assuming $A$ flat over $\\mathbf Z$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 3.7(a), printed p. 75, and Expose VIII, proof of 3.4.3, printed p. 110; explicit coefficient extension and unit-twist calculation (agent); tensor relations: Stacks 00CX."
+   }
+  },
+  {
+   "text": "The composite $\\rho\\sigma\\lambda$ is an $A$-linear isomorphism of the two ideal tensors and gives the identity on their multiplication targets $A$. Restrict it to the kernels and apply step 3 at $T=\\mathbf Z[P]$, $L=\\mathbf Z[H]$ and at $T=\\mathbf Z[Q]$, $L=\\mathbf Z[H_x]$. This is the asserted Tor isomorphism, induced by localization, the splitting and the twist: for the splitting use the inverse of the change-of-rings map for $\\mathbf Z[Q]\\to\\mathbf Z[P_F]$, while the other maps go forward. The coefficient extensions in step 7 also give isomorphisms on kernels by their explicit generator maps. Naturality follows because every displayed map is given on pure tensors by the same formulas after a compatible coefficient-ring map, and the connecting identifications are natural as stated in the ideal-kernel lemma. The choices $s,b$ are fixed throughout; no independence of these choices is asserted.",
+   "uses": [
+    "lem-weil-pbc-tor-symmetry",
+    "lem-weil-pbc-tor-ideal-kernel-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M6 and the semilinear naturality in lem-weil-pbc-tor-ideal-kernel-naturality; assembly of the explicit maps (agent)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fs-face-sharpening",
+  "def-trf-fs-log-blowup",
+  "lem-weil-pbc-tor-symmetry",
+  "lem-weil-pbc-tor-ideal-kernel-naturality",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Algebraic expansion of Expose VI 3.7(a), printed p. 75, and Expose VIII proof of 3.4.3, printed p. 110; first Tor computed using Stacks 00M6 and 00M3."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +144,59 @@
    "results": "IsLocalization.atUnits, IsLocalization.tensor and generic localization declarations; no exact chart comparison.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor comparison under face localization and unit twist of a monoid chart",
+   "results": "CategoryTheory.Localization.Monoidal.triangle_aux₂; CategoryTheory.Localization.Monoidal.triangle_aux₃; CategoryTheory.Localization.Monoidal.triangle_aux₁; CategoryTheory.Localization.Monoidal.μ; CategoryTheory.Localization.Monoidal.tensor_comp; CategoryTheory.Localization.Monoidal.triangle; CategoryTheory.Localization.Monoidal.ε'; CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_μIso_hom",
+   "date": "2026-10-18",
+   "verdict": "no match: generic localization/tensor/Tor infrastructure does not state the chart/monomial-ideal comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor groups are invariant under a monoid algebra face localization and a unit twist",
+   "results": "Rep.Tor; IsLocalization.tensor; IsLocalization.tensorProduct_isLocalizedModule; Algebra.tensorH1CotangentOfIsLocalization; Algebra.tensorH1CotangentOfIsLocalization.congr_simp; IsLocalization.atUnits; MonoidAlgebra.scalarTensorEquiv; IsLocalization.atUnit",
+   "date": "2026-10-18",
+   "verdict": "no match: generic localization/tensor/Tor infrastructure does not state the chart/monomial-ideal comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "change of rings isomorphism induces natural isomorphisms of Tor groups",
+   "results": "IsBaseChange.tensorEquiv; IsBaseChange.ofEquiv; Algebra.TensorProduct.cancelBaseChange; IsBaseChange.of_equiv; ModuleCat.extendScalarsComp_hom_app_one_tmul; groupHomologyIsoTor; Rep.torIso; TensorProduct.AlgebraTensorModule.cancelBaseChange",
+   "date": "2026-10-18",
+   "verdict": "no match: generic localization/tensor/Tor infrastructure does not state the chart/monomial-ideal comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The first Tor group of a quotient by a monomial ideal is invariant under multiplying chart generators by units",
+   "results": "TensorProduct.tensorQuotEquivQuotSMul; Module.IsTorsionBy.mk_smul; Algebra.tensorH1CotangentOfIsLocalization; Ideal.torsionMapQuot_apply; Ideal.torsionMapQuot; Module.instQuotientIdealSpanSingletonSetSubmoduleHSMulTop; Submodule.torsionBySet.mk_smul; Module.IsTorsionBySet.hasSMul",
+   "date": "2026-10-18",
+   "verdict": "no match: generic localization/tensor/Tor infrastructure does not state the chart/monomial-ideal comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor\\b|\\bTor\\x27\\b",
+   "results": "Mathlib/CategoryTheory/Monoidal/Tor.lean; Mathlib/CategoryTheory/Monoidal/Tor.lean; Mathlib/CategoryTheory/Monoidal/Tor.lean; Mathlib/CategoryTheory/Monoidal/Tor.lean; Mathlib/CategoryTheory/Monoidal/Tor.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: generic localization/tensor/Tor infrastructure does not state the chart/monomial-ideal comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidAlgebra.*IsLocalization|IsLocalization.*MonoidAlgebra",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: generic localization/tensor/Tor infrastructure does not state the chart/monomial-ideal comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Tor\"",
+   "results": "CategoryTheory.Tor; CategoryTheory.Tor'; CategoryTheory.Tor_obj; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor_map; CategoryTheory.Tor'_obj_map; CategoryTheory.Tor'_map_app",
+   "date": "2026-10-18",
+   "verdict": "no match: generic localization/tensor/Tor infrastructure does not state the chart/monomial-ideal comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-log-regular-monomial-tor",
@@ -74,5 +222,35 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-log-chart-face-tor-comparison",
+  "worker": "stage1",
+  "group": "Q32",
+  "summary": "Expanded the chart comparison through explicit isomorphisms of monomial-ideal tensors and the existing first-Tor kernel theorem. No new nodes. Clarified that the unit twist takes place over A, corrected the strictly henselian definition reference, verified all tensor balancing and inverse formulas, and checked boundary ideals and unit monoids. The given sharp chart is used without invoking log-regular chart existence.",
+  "blueprint": "Proof (1)--(2), nearby-duality alteration reduction (through the ancestry of lem-trf-log-blowup-normalization): input Expose VIII, proof of Lemma 3.4.3, printed p. 110, where Tor_1^{Z[P]}(Z[P]/IZ[P],O_X)=0 is taken from Kato 1994, 6.1(ii); this node reduces the given chart to the sharp chart at a geometric point to which the Kato statement applies (face localization, splitting, unit twist; cf. Expose VI, 3.7(a), printed p. 75).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-tor-ideal-kernel-naturality",
+    "why": "The general ideal-kernel description and its semilinear change-of-rings naturality implement the monomial Tor comparison; the trace-formula unit has no statement providing that general homological algebra."
+   },
+   {
+    "node": "lem-weil-pbc-tor-symmetry",
+    "why": "Interchanges the ideal quotient and coefficient arguments to apply the existing ideal-kernel lemma; this generic Tor symmetry does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-tor-ideal-kernel-naturality",
+  "lem-weil-pbc-tor-symmetry"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-ee6e25c94",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-ee6e25c94 (reviewer sub-agent of L); spot-checked: I read all eight steps, the statements of every cited node, the parent and Kato nodes, unit sk-i-curve-zero, and ILO at VI 1.1-1.6 (pp. 69-70), VI 3.7(a) (p. 75), VIII 3.1.1-3.1.5 (pp. 98-99) and the proof of VIII 3.4.3 (p. 110). The proof is agent-written and honestly marked as such; ILO is used as context and the cited places are accurate. The statement is true. The section s exists because P_F is the full preimage of P_x and P_x^gp is free. A sharp chart b exists (c = alpha∘s is one). u exists and is a homomorphism because the chart bijection Q x A^x ≅ M is unique. The Tor isomorphism goes through the kernel of the multiplication map (00M3 and 00M6) and the explicit maps lambda, sigma, rho. I rechecked their balancing, inverses and compatibility with multiplication; for rho the key identity is u(q+p)b(p) = u(q)c(p). Part (b) of the naturality lemma identifies the maps with change-of-rings maps: Z[H]Z[P_F] = Z[H_F] = Z[H_x]Z[P_F]. Edge cases checked: H empty, H = P, H meeting F, P a group, and P = N with alpha(1) = it in C[[t]], which confirms that the twist needs coefficients in A. Tool uses of lem-weil-pbc-tor-ideal-kernel-naturality and lem-weil-pbc-tor-symmetry are accepted as generic Tor algebra. A duplicate search over the DAG found no node stating this comparison; there are no new nodes and no SGA citations. One fix: the item statement did not say which Z[P_x]-algebra structure A has on the right side of the Tor isomorphism. The twist and the parent's Kato vanishing need z^q -> b(q). The corrected statement names the log structure M on Spec A and its stalk, says b is the structural map of a chart b_M: P_x -> M_x with the same characteristic identification as alpha, and says A is an algebra via alpha on the left and via b on the right. This adds no hypothesis and does not weaken the statement; it is in fixes/dag/nodes/sec-trace-formula/lem-trf-log-chart-face-tor-comparison.json.; 1 file(s) fixed by the reviewer"
  }
 }
