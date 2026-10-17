@@ -103,13 +103,16 @@ lemma functor_obj (α : LimitStage B W)
 map of the square `(t, s)`. -/
 noncomputable def transition {α β : LimitStage B W} (φ : Hom α β) :
     functor Λ β ⟶ functor Λ α :=
-  Functor.whiskerLeft (D+((β.w)^*[ModuleCat.{u + 1} Λ]) ⋙ R+((β.g)_*[ModuleCat.{u + 1} Λ]))
-      (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) α.π φ.s β.π φ.wπ.symm).hom ≫
-    Functor.whiskerRight (Functor.whiskerLeft D+((β.w)^*[ModuleCat.{u + 1} Λ])
-      (Etale.baseChange (ModuleCat.{u + 1} Λ) ⟨φ.wg⟩)) D+((α.π)^*[ModuleCat.{u + 1} Λ]) ≫
-    Functor.whiskerRight (Functor.whiskerRight
-      (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) φ.t β.w α.w φ.ww.symm).inv
-        R+((α.g)_*[ModuleCat.{u + 1} Λ])) D+((α.π)^*[ModuleCat.{u + 1} Λ])
+  Functor.whiskerLeft D+((β.w)^*[ModuleCat.{u + 1} Λ])
+      (Functor.whiskerLeft R+((β.g)_*[ModuleCat.{u + 1} Λ])
+        (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) α.π φ.s β.π φ.wπ.symm).hom ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (Etale.baseChange (ModuleCat.{u + 1} Λ) ⟨φ.wg⟩)
+        D+((α.π)^*[ModuleCat.{u + 1} Λ]) ≫
+      (Functor.associator _ _ _).hom) ≫
+    (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) φ.t β.w α.w φ.ww.symm).inv
+      (R+((α.g)_*[ModuleCat.{u + 1} Λ]) ⋙ D+((α.π)^*[ModuleCat.{u + 1} Λ]))
 
 lemma transition_app {α β : LimitStage B W} (φ : Hom α β)
     (K : DerivedCategory.Plus (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

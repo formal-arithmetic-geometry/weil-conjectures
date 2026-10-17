@@ -54,9 +54,9 @@ lemma _root_.ModuleCat.eq_zero_of_isZero {R : Type*} [Ring R] {M : ModuleCat R} 
 /-- An exact sequence of sheaves is exact on geometric stalks, elementwise. -/
 lemma exists_of_exact_sheafFiber {X : Scheme.{u}}
     {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.Exact)
-    (x : X) (y : (X.uliftPointSmallEtale x).sheafFiber.obj S.X₂)
-    (hy : ((X.uliftPointSmallEtale x).sheafFiber.map S.g).hom y = 0) :
-    ∃ z, ((X.uliftPointSmallEtale x).sheafFiber.map S.f).hom z = y := by
+    (x : X) (y : ((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj S.X₂)
+    (hy : (((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)).map S.g).hom y = 0) :
+    ∃ z, (((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)).map S.f).hom z = y := by
   have : LocallySmall.{u + 1} X.Etale := locallySmall_max.{u + 1, u}
   have : PreservesFiniteLimits ((X.uliftPointSmallEtale x).sheafFiber
     (A := ModuleCat.{u + 1} Λ)) := inferInstance
@@ -70,9 +70,11 @@ namespace LimitStage
 
 variable {B W : Scheme.{u}}
 
+set_option maxHeartbeats 1000000 in
+-- the instance arguments of the whiskered transformations are large
 instance commShift_transition {α β : LimitStage B W} (φ : Hom α β) :
     NatTrans.CommShift (transition Λ φ) ℤ := by
-  dsimp only [transition]
+  unfold transition
   infer_instance
 
 /-- `H^q(π^* Rg_* w^*(G[0]))` vanishes for `q < 0`. -/
@@ -86,7 +88,8 @@ lemma isZero_homology_functor_obj_single_of_lt (α : LimitStage B W)
   refine IsZero.of_iso ?_ ((DerivedCategory.Plus.homologyFunctor _ q).mapIso
     (R+((α.g)_*[ModuleCat.{u + 1} Λ]).mapIso
       ((((α.w)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app G)))
-  exact Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE _ _ 0 hq
+  exact Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE _
+    ((DerivedCategory.Plus.singleFunctor _ 0).obj (((α.w)^*[ModuleCat.{u + 1} Λ]).obj G)) 0 hq
 
 /-- `H^q(π^* Rg_* w^*(J[0]))` vanishes for `q ≠ 0` when `w^* J` is injective. -/
 lemma isZero_homology_functor_obj_single_of_injective (α : LimitStage B W)
@@ -287,7 +290,7 @@ lemma shortExact_cokernelSequence_injectiveι
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     (ShortComplex.cokernelSequence (Injective.ι G)).ShortExact :=
   ShortComplex.ShortExact.mk' (ShortComplex.cokernelSequence_exact _)
-    (by dsimp; infer_instance) inferInstance
+    (inferInstanceAs (Mono (Injective.ι G))) inferInstance
 
 variable (hz : ∀ (J : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective J] (q : ℤ),
       q ≠ 0 → (∀ i, IsZero ((DerivedCategory.Plus.homologyFunctor _ q).obj
@@ -329,16 +332,16 @@ lemma isStalkColimit_zero (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)
   · rw [← Functor.map_comp, ← Functor.map_comp, ← (LimitStage.transition Λ (𝒮.map f)).naturality]
   · rw [← Functor.map_comp, ← Functor.map_comp, ← (LimitStage.transition Λ (𝒮.map f)).naturality]
   · rw [← Functor.map_comp, ← NatTrans.comp_app, LimitStage.transition_comp, 𝒮.w]
-  · rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← Functor.map_comp, ← Functor.map_comp,
+  · rw [← ModuleCat.comp_apply, ← Functor.map_comp, ← Functor.map_comp, ← Functor.map_comp,
       E.zero_assoc]
     simp
   · have hy' : ((stalkHomology Λ 0 x).map ((LimitStage.functor Λ (𝒮.obj i)).map
         ((DerivedCategory.Plus.singleFunctor _ 0).map E'.f))).hom
         (((stalkHomology Λ 0 x).map ((LimitStage.functor Λ (𝒮.obj i)).map
           ((DerivedCategory.Plus.singleFunctor _ 0).map E.g))).hom y) = 0 := by
-      rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← Functor.map_comp,
-        ← Functor.map_comp]
-      exact hy
+      have h' := hy
+      simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] at h'
+      exact h'
     exact LimitStage.exists_of_stalk_exact₂ δ hT _ 0 x y
       (injective_stalk_zero _ hE' x (by rw [hy', map_zero]))
 

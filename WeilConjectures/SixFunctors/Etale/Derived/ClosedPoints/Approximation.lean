@@ -92,8 +92,9 @@ lemma supportedSectionsι_comp_unit_of_le {S T : FiniteClosedPoints X} (h : S �
   let y := (supportedSectionsι F (openCompl S)).hom.app W z
   have hy : F.obj.map ((MorphismProperty.Over.mapPullbackAdj @Etale ⊤ (openCompl S).ι
       inferInstance trivial).counit.app W.unop).op y = 0 := by
-    exact (congrArg (fun φ ↦ φ.hom.app W z)
-      (supportedSectionsι_comp_unit F (openCompl S))).trans (by simp)
+    refine (congrArg (fun φ ↦ φ.hom.app W z)
+      (supportedSectionsι_comp_unit F (openCompl S))).trans ?_
+    simp
   let c := (MorphismProperty.Over.mapPullbackAdj @Etale ⊤ (openCompl T).ι inferInstance
     trivial).counit.app W.unop
   have key : F.obj.map c.op y = 0 := by
@@ -165,6 +166,7 @@ noncomputable def isColimitSupportedSectionsCocone {K : Type u} [Field K] {X : S
     IsFiltered.of_equivalence AsSmall.equiv
   have : HasColimitsOfShape (AsSmall.{u + 1} (FiniteClosedPoints X))
       (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := HasColimitsOfSize.has_colimits_of_shape _
+  have : HasColimit D := HasColimitsOfShape.has_colimit D
   let t := colimit.desc D (supportedSectionsCocone F)
   let α : D ⟶ (Functor.const _).obj F := (supportedSectionsCocone F).ι
   have (S : AsSmall.{u + 1} (FiniteClosedPoints X)) : Mono (α.app S) :=
@@ -177,12 +179,12 @@ noncomputable def isColimitSupportedSectionsCocone {K : Type u} [Field K] {X : S
     rw [mem_smallEtaleTopology_iff]
     intro w
     obtain ⟨V, g, hw, S, hSf, hSc, z, hz⟩ := exists_supportedSectionsι_app_eq_map F p hF s w
-    refine ⟨V, g, ⟨(colimit.ι D (AsSmall.up.obj ⟨S, hSf, hSc⟩)).hom.app (op V) z, ?_⟩, hw⟩
+    refine ⟨V, g, ⟨(colimit.ι D (AsSmall.up.obj (⟨S, hSf, hSc⟩ : FiniteClosedPoints X))).hom.app (op V) z, ?_⟩, hw⟩
     rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
       ← ObjectProperty.FullSubcategory.comp_hom, colimit.ι_desc]
     exact hz
   have : IsIso t := isIso_of_mono_of_epi t
-  exact IsColimit.ofPointIso (colimit.isColimit D)
+  exact IsColimit.ofPointIso (colimit.isColimit D) (i := this)
 
 end Etale
 
