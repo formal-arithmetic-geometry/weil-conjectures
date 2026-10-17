@@ -27,7 +27,8 @@
  },
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-cofinal-common-image"
  ],
  "proof": [],
  "proof_deps": [],
@@ -75,5 +76,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityCofinalCosliceCalculus",
+  "declaration": "SSet.Presentability.infinity_cofinal_coslice_calculus",
+  "declarations": [
+   "SSet.Enhanced.IsWeaklyCofinal",
+   "SSet.Enhanced.coconePostcompose",
+   "SSet.Enhanced.relativeCoconeCategory",
+   "SSet.Enhanced.relativeCoconeProjection",
+   "SSet.Presentability.infinity_cofinal_coslice_calculus"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityCofinalCosliceCalculus.lean",
+  "statement": "theorem infinity_cofinal_coslice_calculus (κ τ : Cardinal.{u}) (hκ : κ.IsRegular) (hτ : τ.IsRegular) {D E : SSet.{max (u + 1) v}} [Quasicategory D] [Quasicategory E] (f : D ⟶ E) (K : SSet.{max (u + 1) v}) (p : K ⟶ D) : (IsKappaFiltered τ D → IsKappaSmall τ K → ∃ hP : Quasicategory (SSet.Enhanced.coconeCategory p), @IsKappaFiltered τ (SSet.Enhanced.coconeCategory p) hP) ∧ (HasTauSmallKappaFilteredColimits κ τ D → ∀ (I : SSet.{max (u + 1) v}) (hI : Quasicategory I), IsKappaSmall τ I → @IsKappaFiltered κ I hI → ∀ (a : I ⟶ SSet.Enhanced.coconeCategory p), (∀ vertexCone : (SSet.Enhanced.coconeCategory (a ≫ SSet.Enhanced.calculusApex p false)) _⦋0⦌, SSet.Enhanced.IsColimiting (a ≫ SSet.Enhanced.calculusApex p false) vertexCone → ∃ t : (SSet.Enhanced.coconeCategory a) _⦋0⦌, CategoryTheory.Spaces.mappedCocone (SSet.Enhanced.calculusApex p false) a t = vertexCone ∧ SSet.Enhanced.IsColimiting a t) ∧ (∀ t : (SSet.Enhanced.coconeCategory a) _⦋0⦌, SSet.Enhanced.IsColimiting a t ↔ SSet.Enhanced.IsColimiting (a ≫ SSet.Enhanced.calculusApex p false) (CategoryTheory.Spaces.mappedCocone (SSet.Enhanced.calculusApex p false) a t))) ∧ (HasTauSmallKappaFilteredColimits κ τ D → HasTauSmallKappaFilteredColimits κ τ E → PreservesTauSmallKappaFilteredColimits κ τ f → PreservesTauSmallKappaFilteredColimits κ τ (SSet.Enhanced.coconePostcompose p f)) ∧ (IsKappaCofinal κ f → IsKappaFiltered τ D → IsKappaFiltered τ E → IsKappaSmall τ K → IsKappaCofinal κ (SSet.Enhanced.coconePostcompose p f)) ∧ (IsKappaCofinal κ f → IsKappaFiltered τ D → IsKappaFiltered τ E → IsKappaSmall κ K → IsKappaSmall τ K → ∀ q : K ⟶ E, (∃ hT : Quasicategory (SSet.Enhanced.relativeCoconeCategory f q), @IsKappaFiltered τ (SSet.Enhanced.relativeCoconeCategory f q) hT) ∧ IsKappaCofinal κ (SSet.Enhanced.relativeCoconeProjection f q))",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a60e850be",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: tau-filtered coslice (with its quasicategory instance), colimit creation as exact extension plus iff reflection, preservation by coconePostcompose, kappa-cofinality of f_p, and the relative homotopy-pullback category (Fun^≃(Δ¹,E) path model), filtered and with a kappa-cofinal projection. Cardinals independent and regular; universes Cardinal.{u}/SSet.{max (u+1) v} as in def-coef-presentable and common-image. Reused IsKappaCofinal and colimit predicates are exactly the node's notions. coconePostcompose is a real simplicial map, definitionally equal to mappedCocone in degree 0; relativeCoconeCategory duplicates nothing (simplicialHomotopyPullback uses all paths and so is a comma object). Edge cases K=∅, L=∅, tau=aleph0, both cardinal orders, D empty checked. lean.statement verbatim; node changed only in lean and in stmt_deps, which gains the landed common-image node (allowed, acyclic). Docstrings carry source, blueprint and all 8 steps; only sorry is the theorem's. nt_compile --json on the side overlay: exit 0, no diagnostics, 2.3 s; #print axioms shows only sorryAx beyond the standard axioms. Remarks: IsWeaklyCofinal is unused; the second reading is an openly declared self-review."
  }
 }
