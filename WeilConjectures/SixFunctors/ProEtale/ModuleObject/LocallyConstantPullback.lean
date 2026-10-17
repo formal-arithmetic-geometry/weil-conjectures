@@ -205,6 +205,163 @@ theorem mem_closure_comap_mul_comap [CompactSpace P] [CompactSpace X] [T2Space X
     · exact absurd ⟨q, h₁, h₂⟩ hb
     all_goals ring
 
+variable [Algebra (LocallyConstant Z R) (LocallyConstant X R)]
+  [Algebra (LocallyConstant Z R) (LocallyConstant Y R)]
+
+/-- **Injectivity.** Let `LC(Z)` act on `LC(X)` and `LC(Y)` through `f` and `g`, and assume
+that every point `(x, y)` of the fibre product `X ×_Z Y` lifts to `P`. If `∑ bᵢ(snd q) aᵢ(fst q)`
+vanishes on `P`, then `∑ bᵢ ⊗ aᵢ = 0` in `LC(Y) ⊗_{LC(Z)} LC(X)`. -/
+theorem sum_tmul_eq_zero [CompactSpace X] [CompactSpace Y] [CompactSpace Z] [T2Space Z]
+    [TotallyDisconnectedSpace Z]
+    (hf : ∀ a, algebraMap (LocallyConstant Z R) (LocallyConstant X R) a = a.comap f)
+    (hg : ∀ a, algebraMap (LocallyConstant Z R) (LocallyConstant Y R) a = a.comap g)
+    (hP : ∀ x y, f x = g y → ∃ q, fst q = x ∧ snd q = y)
+    (s : Finset (LocallyConstant Y R × LocallyConstant X R))
+    (hs : ∑ p ∈ s, p.1.comap snd * p.2.comap fst = 0) :
+    ∑ p ∈ s, p.1 ⊗ₜ[LocallyConstant Z R] p.2 = 0 := by
+  classical
+  have hsmulX (r : R) (a : LocallyConstant X R) : const Z r • a = const X r * a := by
+    rw [Algebra.smul_def, hf]
+    ext
+    simp
+  have hsmulY (r : R) (b : LocallyConstant Y R) : const Z r • b = const Y r * b := by
+    rw [Algebra.smul_def, hg]
+    ext
+    simp
+  rw [← Finset.sum_coe_sort s] at hs ⊢
+  let cX : LocallyConstant X (s → R) := unflip fun p : s ↦ p.1.2
+  let cY : LocallyConstant Y (s → R) := unflip fun p : s ↦ p.1.1
+  set z := ∑ p : s, p.1.1 ⊗ₜ[LocallyConstant Z R] p.1.2 with hz
+  have h1 : (1 : LocallyConstant Y R ⊗[LocallyConstant Z R] LocallyConstant X R) =
+      ∑ β ∈ cY.range_finite.toFinset, ∑ α ∈ cX.range_finite.toFinset,
+        fiberCharFn R cY β ⊗ₜ fiberCharFn R cX α := by
+    rw [Algebra.TensorProduct.one_def, ← sum_fiberCharFn (R := R) cY,
+      ← sum_fiberCharFn (R := R) cX, sum_tmul]
+    simp_rw [tmul_sum]
+  have hcell (β α : s → R) : (fiberCharFn R cY β ⊗ₜ[LocallyConstant Z R] fiberCharFn R cX α) * z =
+      const Z (∑ p : s, β p * α p) • (fiberCharFn R cY β ⊗ₜ fiberCharFn R cX α) := by
+    have hconst : const Z (∑ p : s, β p * α p) = ∑ p : s, const Z (β p) * const Z (α p) := by
+      ext
+      simp [sum_apply]
+    rw [hz, Finset.mul_sum, hconst, Finset.sum_smul]
+    refine Finset.sum_congr rfl fun p _ ↦ ?_
+    rw [Algebra.TensorProduct.tmul_mul_tmul,
+      fiberCharFn_mul_eq cY β p.1.1 (β p) (fun t ht ↦ by rw [← ht]; rfl),
+      fiberCharFn_mul_eq cX α p.1.2 (α p) (fun t ht ↦ by rw [← ht]; rfl),
+      ← hsmulX, ← hsmulY, smul_tmul', tmul_smul, smul_smul, mul_comm]
+  have hz1 : z = ∑ β ∈ cY.range_finite.toFinset, ∑ α ∈ cX.range_finite.toFinset,
+      (fiberCharFn R cY β ⊗ₜ[LocallyConstant Z R] fiberCharFn R cX α) * z := by
+    conv_lhs => rw [← one_mul z, h1]
+    simp only [Finset.sum_mul]
+  rw [hz1]
+  refine Finset.sum_eq_zero fun β _ ↦ Finset.sum_eq_zero fun α _ ↦ ?_
+  rw [hcell]
+  by_cases hm : ∃ x y, cX x = α ∧ cY y = β ∧ f x = g y
+  · obtain ⟨x, y, hx, hy, hxy⟩ := hm
+    obtain ⟨q, rfl, rfl⟩ := hP x y hxy
+    have h0 : ∑ p : s, β p * α p = 0 := by
+      have := congrArg (fun φ : LocallyConstant P R ↦ φ q) hs
+      simp only [sum_apply, coe_mul, coe_comap, Function.comp_apply, Pi.mul_apply, coe_zero,
+        Pi.zero_apply] at this
+      rw [← hx, ← hy]
+      exact this
+    rw [h0, const_zero, zero_smul]
+  · push_neg at hm
+    obtain ⟨W, hW, hKW, hWK⟩ := exists_clopen_of_closed_subset_open
+      ((cX.isLocallyConstant.isClopen_fiber α).isClosed.isCompact.image f.continuous).isClosed
+      ((cY.isLocallyConstant.isClopen_fiber β).isClosed.isCompact.image
+        g.continuous).isClosed.isOpen_compl
+      (by
+        rintro _ ⟨x, hx, rfl⟩ ⟨y, hy, hxy⟩
+        exact hm x y hx hy hxy.symm)
+    have hχ : charFn R hW • fiberCharFn R cX α = fiberCharFn R cX α := by
+      rw [Algebra.smul_def, hf]
+      ext x
+      simp only [coe_mul, coe_comap, Function.comp_apply, Pi.mul_apply]
+      by_cases hx : cX x = α
+      · rw [charFn_apply_of_mem hW (hKW ⟨x, hx, rfl⟩), one_mul]
+      · rw [fiberCharFn_apply_of_ne cX hx, mul_zero]
+    have hψ : charFn R hW • fiberCharFn R cY β = 0 := by
+      rw [Algebra.smul_def, hg]
+      ext y
+      simp only [coe_mul, coe_comap, Function.comp_apply, Pi.mul_apply, coe_zero, Pi.zero_apply]
+      by_cases hy : cY y = β
+      · rw [charFn_apply_of_notMem hW (fun hgy ↦ hWK hgy ⟨y, hy, rfl⟩), zero_mul]
+      · rw [fiberCharFn_apply_of_ne cY hy, mul_zero]
+    rw [← hχ, ← smul_tmul, hψ, zero_tmul, smul_zero]
+
 end FibreProduct
 
 end LocallyConstant
+
+/-! ### The pushout square of rings of locally constant functions -/
+
+namespace Profinite
+
+open LocallyConstant
+
+/-- For a fibre product `P = X ×_Z Y` of profinite sets, the square of rings of locally
+constant integer-valued functions
+```
+  LC(Z, ℤ) ───f^*───▶ LC(X, ℤ)
+     │                   │
+    g^*                fst^*
+     ▼                   ▼
+  LC(Y, ℤ) ──snd^*──▶ LC(P, ℤ)
+```
+is a pushout of commutative rings: `LC(P, ℤ) = LC(X, ℤ) ⊗_{LC(Z, ℤ)} LC(Y, ℤ)`. -/
+theorem isPushout_locallyConstant {X Y Z : Profinite.{u}} (f : X ⟶ Z) (g : Y ⟶ Z) :
+    IsPushout (CommRingCat.ofHom (comapRingHom (Z := ℤ) f.hom.hom))
+      (CommRingCat.ofHom (comapRingHom (Z := ℤ) g.hom.hom))
+      (CommRingCat.ofHom (comapRingHom (Z := ℤ) (CompHausLike.pullback.fst f g).hom.hom))
+      (CommRingCat.ofHom (comapRingHom (Z := ℤ) (CompHausLike.pullback.snd f g).hom.hom)) := by
+  let P := CompHausLike.pullback f g
+  let fst := (CompHausLike.pullback.fst f g).hom.hom
+  let snd := (CompHausLike.pullback.snd f g).hom.hom
+  letI : Algebra (LocallyConstant Z ℤ) (LocallyConstant X ℤ) :=
+    (comapRingHom f.hom.hom).toAlgebra
+  letI : Algebra (LocallyConstant Z ℤ) (LocallyConstant Y ℤ) :=
+    (comapRingHom g.hom.hom).toAlgebra
+  letI : Algebra (LocallyConstant X ℤ) (LocallyConstant P ℤ) := (comapRingHom fst).toAlgebra
+  letI : Algebra (LocallyConstant Y ℤ) (LocallyConstant P ℤ) := (comapRingHom snd).toAlgebra
+  letI : Algebra (LocallyConstant Z ℤ) (LocallyConstant P ℤ) :=
+    (comapRingHom (f.hom.hom.comp fst)).toAlgebra
+  haveI : IsScalarTower (LocallyConstant Z ℤ) (LocallyConstant X ℤ) (LocallyConstant P ℤ) :=
+    IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  haveI : IsScalarTower (LocallyConstant Z ℤ) (LocallyConstant Y ℤ) (LocallyConstant P ℤ) :=
+    IsScalarTower.of_algebraMap_eq fun a ↦ by
+      ext q
+      exact congrArg a q.2
+  refine (CommRingCat.isPushout_iff_isPushout (R := LocallyConstant Z ℤ)
+    (R' := LocallyConstant X ℤ) (S := LocallyConstant Y ℤ) (S' := LocallyConstant P ℤ)).2 ?_
+  rw [Algebra.isPushout_iff]
+  let Φ : LocallyConstant Y ℤ ⊗[LocallyConstant Z ℤ] LocallyConstant X ℤ →ₐ[LocallyConstant Y ℤ]
+      LocallyConstant P ℤ :=
+    Algebra.TensorProduct.lift (Algebra.ofId _ _)
+      (IsScalarTower.toAlgHom (LocallyConstant Z ℤ) (LocallyConstant X ℤ) (LocallyConstant P ℤ))
+      (fun _ _ ↦ Commute.all _ _)
+  have hΦ (b : LocallyConstant Y ℤ) (a : LocallyConstant X ℤ) :
+      Φ (b ⊗ₜ a) = b.comap snd * a.comap fst :=
+    Algebra.TensorProduct.lift_tmul _ _ _ _ _
+  have hinj : Function.Injective Φ := by
+    rw [injective_iff_map_eq_zero]
+    intro z hz
+    obtain ⟨s, rfl⟩ := exists_finset z
+    rw [map_sum] at hz
+    simp only [hΦ] at hz
+    exact sum_tmul_eq_zero f.hom.hom g.hom.hom fst snd (fun _ ↦ rfl) (fun _ ↦ rfl)
+      (fun x y hxy ↦ ⟨⟨(x, y), hxy⟩, rfl, rfl⟩) s hz
+  have hsurj : Function.Surjective Φ := by
+    intro h
+    have hle : AddSubmonoid.closure (Set.range fun p : LocallyConstant Y ℤ × LocallyConstant X ℤ ↦
+        p.1.comap snd * p.2.comap fst) ≤ (LinearMap.range Φ.toLinearMap).toAddSubmonoid := by
+      rw [AddSubmonoid.closure_le]
+      rintro _ ⟨p, rfl⟩
+      exact ⟨p.1 ⊗ₜ p.2, hΦ p.1 p.2⟩
+    exact hle (mem_closure_comap_mul_comap fst snd IsInducing.subtypeVal h)
+  refine IsBaseChange.of_equiv (LinearEquiv.ofBijective Φ.toLinearMap ⟨hinj, hsurj⟩) fun a ↦ ?_
+  change Φ (1 ⊗ₜ a) = _
+  rw [hΦ]
+  exact one_mul _
+
+end Profinite
