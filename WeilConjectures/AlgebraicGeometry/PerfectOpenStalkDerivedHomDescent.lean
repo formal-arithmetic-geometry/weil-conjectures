@@ -68,7 +68,8 @@ comparison is surjective by 09RE, affine proof, or 0BC7 (2). Thus the given arro
 represented in the derived category of A_f for one f. The basic open D(f) is affine,
 contains x, and lies in U. The affine derived equivalence (06Z0) carries this arrow to g
 between the restrictions of P and Q. Restriction does not change the stalk at x: the
-canonical comparison `openModuleStalkRestrictionComparison` gives cP and cQ. Naturality of scalar extension and the localization factorization identifies
+canonical comparison `openModuleStalkRestrictionComparison` gives cP and cQ.
+Naturality of scalar extension and the localization factorization identifies
 the derived stalk image of g with the transported original arrow, giving the equation.
 Only Hom surjectivity is used; neither inverse descent nor Hom injectivity is needed.
 The assumptions exclude an empty U, while zero complexes and zero ranks are allowed:

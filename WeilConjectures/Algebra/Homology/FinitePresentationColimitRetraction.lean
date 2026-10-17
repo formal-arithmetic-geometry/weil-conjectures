@@ -142,7 +142,8 @@ after extending to the colimit. Finite presentation is preserved by scalar exten
 Apply the equality clause to this composite and the identity, then extend both maps
 to the resulting later stage. Functoriality makes their composite the identity there,
 and the canonical iterated scalar-extension isomorphisms carry their extensions to the
-colimit to s and r. Lift this stage and these maps back to the original preorder. For zero models the maps are zero and
+colimit to s and r. Lift this stage and these maps back to the original preorder.
+For zero models the maps are zero and
 the identity of the zero module is zero; for a singleton diagram this is ordinary
 transport of a retraction along a ring isomorphism. -/
 theorem exists_retraction_model_of_directed_colimit
@@ -189,6 +190,8 @@ theorem exists_retraction_model_of_directed_colimit
       (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE haj))).symm
       (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE a.property))).symm
       (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE t.property))).symm X Y v⟩
+  obtain ⟨sj, hsj⟩ := lift a haj M N sa
+  obtain ⟨rj, hrj⟩ := lift b hbj N M rb
   have hs : (e t M).hom ≫ (extendScalars (colimit.ι F j).hom).map sj ≫
       (e t N).inv = s := hsj.trans hsa
   have hr : (e t N).hom ≫ (extendScalars (colimit.ι F j).hom).map rj ≫
