@@ -25,7 +25,9 @@
   "def-pur-support-cohomology",
   "def-weil-finite-tor-amplitude",
   "def-weil-exceptional-inverse-image",
-  "thm-pur-with-support-exactness"
+  "thm-pur-with-support-exactness",
+  "lem-pur-retracted-support-localization-comparison",
+  "def-weil-pbc-proetale-modules"
  ],
  "proof": [
   {
@@ -491,5 +493,40 @@
   "group": "Q116",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q116-c6038ba1e (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited statements, current blueprint and cited source passages. Verified all nine steps, shifts, finite-Tor argument, étale-origin comparison and counit equation; checked small cases and duplicate candidates. No repairs needed. Accepted the twelve declared tool uses. Detailed findings are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f11e5166e",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Audited node, source, dependencies, declarations, hypotheses, universes, edge cases, docstrings, route-pivot compliance, and report sections. Immutable module compiled cleanly in sandbox and library modes via scompile.py; no substantive or mechanical defects found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityGysinStructure",
+  "declaration": "WeilConjectures.PurityFiniteSetting.gysin_structure",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.gysinZeroClosed",
+   "WeilConjectures.PurityFiniteSetting.gysinOpen",
+   "WeilConjectures.PurityFiniteSetting.gysinEtaleInput",
+   "WeilConjectures.PurityFiniteSetting.gysinInput",
+   "WeilConjectures.PurityFiniteSetting.gysinClosed",
+   "WeilConjectures.PurityFiniteSetting.gysinValue",
+   "WeilConjectures.PurityFiniteSetting.gysinSupport",
+   "WeilConjectures.PurityFiniteSetting.gysinEvaluate",
+   "WeilConjectures.PurityFiniteSetting.gysinHomToSections",
+   "WeilConjectures.PurityFiniteSetting.gysinGlobalClass",
+   "WeilConjectures.PurityFiniteSetting.gysinOpenCoefficient",
+   "WeilConjectures.PurityFiniteSetting.gysinKummerSection",
+   "WeilConjectures.PurityFiniteSetting.GysinSupportIdentification",
+   "WeilConjectures.PurityFiniteSetting.gysin_structure"
+  ],
+  "file": "lean/Sheaf/Paper/PurityGysinStructure.lean",
+  "statement": "theorem gysin_structure (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u}) (a : Y ⟶ Spec (CommRingCat.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y ((finiteCoefficientIntrinsicRealization Y P.Ring).mapDerivedCategory.obj (P.gysinValue h Y)) ∧ (∀ q : ℤ, q ≠ 0 → IsZero ((DerivedCategory.homologyFunctor (ProSheaves P Y) q).obj (P.gysinValue h Y))) ∧ (∃ H : EtSheaves P Y, Nonempty ((comparisonUpperStar (Modules P) Y).obj H ≅ (DerivedCategory.homologyFunctor (ProSheaves P Y) 0).obj (P.gysinValue h Y)) ∧ ∃ V : Scheme.Cover.{u} Scheme.etalePrecoverage Y, ∀ i : V.I₀, Nonempty ((Etale.upperStar (Modules P) (V.f i)).obj H ≅ P.constantEtale (V.X i))) ∧ Function.Bijective (P.gysinHomToSections h Y) ∧ GysinSupportIdentification P h Y a",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Finite-level fixed-scalar presentation of the recorded exceptional functor, with intrinsic finite-Tor constructibility tested through the canonical associated-module-sheaf realization. The support isomorphism has an explicit formula using the counit- and cocycle-normalized retracted-support comparison; the actual coordinateKummer class is evaluated through derived global sections and the exact support boundary. No statement correction."
  }
 }

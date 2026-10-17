@@ -148,5 +148,30 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-98eeac97d (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks curves.tex Tag 0C4B (lemma-fitting-ideal-well-defined). The source's 'matrix (dy_j/dx_i) invertible, chain rule, details omitted' is what the item fills in. The statement is unchanged from the base; the only change is that the unused def-weil-pbc-matrix-determinant was correctly dropped from stmt_deps. The parent lem-trf-formal-jacobian-minor-invariance step 3 uses exactly clauses (1) and (3). I checked the cited definitions (multivariate power series, regular system of parameters, matrix). I tested n=0; y=x+x^2 in characteristic 0 and in characteristic 2 (x=y+y^2+y^4+..., so QP=1); and a 2-variable example. Step 1 (truncation, polynomial chain rule for a derivation, separatedness) is correct. Step 2 (cotangent matrices Q(0) and P(0)) is correct. Step 3 (h=x_j and h=y_j give PQ=QP=1) is correctly elementary. No duplicate exists in the DAG, there are no new nodes, no SGA is cited, and no tool use is needed. Three repairs are in fixes/: (1) blueprint.from.via listed the item itself first; I restored the base list starting at minor-invariance. (2) blueprint.from.place had been overwritten with a sentence the ancestor lem-trf-local-term-locality does not contain; I restored the base place. (3) Step 1 claimed congruence mod m^N, but differentiation only gives mod m^{N-1}. I corrected this, named the truncation of phi^{-1}(h), and cited regular-system for y_k generating m. Step 2 now says y_k has no constant term. proof_deps equal the union of uses.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5e565964b",
+  "group": "Q131",
+  "result": "fix",
+  "note": "Mathematics and exact signature verified; per-file compilation passed. review.md records the audit. fixes/ supplies a substantive independent-reading report and the omitted helper declaration records; no Lean changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalJacobianCoordinateChainRule",
+  "declaration": "FormalJacobian.formal_jacobian_coordinate_chain_rule",
+  "file": "lean/Sheaf/RingTheory/FormalJacobianCoordinateChainRule.lean",
+  "statement": "theorem formal_jacobian_coordinate_chain_rule {F : Type u} [Field F] (n : ℕ) (y : Fin n → MvPowerSeries (Fin n) F) (φ : MvPowerSeries (Fin n) F ≃ₐ[F] MvPowerSeries (Fin n) F) (hφ : ∀ k : Fin n, φ (MvPowerSeries.X k) = y k) (hreg : IsLocalRing.IsRegularSystemOfParameters (List.ofFn y)) : (∀ (h : MvPowerSeries (Fin n) F) (i : Fin n), MvPowerSeries.pderiv F i h = ∑ k : Fin n, coordinatePartial φ k h * jacobianQ y k i) ∧ (∀ (h : MvPowerSeries (Fin n) F) (k : Fin n), coordinatePartial φ k h = ∑ i : Fin n, MvPowerSeries.pderiv F i h * jacobianP φ i k) ∧ (∃ Q₀ : Matrix (Fin n) (Fin n) F, (∀ k i, Q₀ k i = MvPowerSeries.constantCoeff (jacobianQ y k i)) ∧ (∀ a b, ∑ j : Fin n, Q₀ a j * MvPowerSeries.constantCoeff (jacobianP φ j b) = if a = b then 1 else 0) ∧ (∀ a b, ∑ j : Fin n, MvPowerSeries.constantCoeff (jacobianP φ a j) * Q₀ j b = if a = b then 1 else 0)) ∧ (∀ a b, ∑ j : Fin n, jacobianQ y a j * jacobianP φ j b = if a = b then 1 else 0) ∧ (∀ a b, ∑ j : Fin n, jacobianP φ a j * jacobianQ y j b = if a = b then 1 else 0)",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "FormalJacobian.coordinatePartial",
+   "FormalJacobian.jacobianQ",
+   "FormalJacobian.jacobianP",
+   "FormalJacobian.formal_jacobian_coordinate_chain_rule"
+  ],
+  "fixed_by": "NT-stage2-Codex-5e565964b"
  }
 }
