@@ -249,5 +249,49 @@
   "group": "Q149",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-820d84b26 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 8 steps, the source paragraph of main-20261015 thm-cbc-finite-level-proetale.proof.md ('Transporting it to the pro-etale site' through 'the transported composite is the pro-etale map'), the unit sk-prop-sf-cbc, every cited node's statement, and parent steps 1 and 7-10. The delivery has no new nodes. Every map in the statement is well typed: C_f, S, T, Phi, C_c, D_c, J, Phi^c. Coefficients are the constant-module categories with finite commutative Lambda throughout, the same as the parent and the transport node. Step 1: eta is an isomorphism on all of D^+, so C_f is an isomorphism. Step 2: S and T are isomorphisms, and F_{f'} is only applied to objects of etale origin. Step 3: naturality of Phi is checked without inverting E. Step 4: p and p' are proper, hence qcqs, so comparison-direct-image applies; b_p is the counit mate; e_j descends to D^+ because nu^* and both j_! are exact; c' is quasi-compact as a base change of quasi-compact j. Step 5: q'_M E_L = E^c_L l_g(q_L) is exactly the extension node's chart clause, and I recomputed S^c A(l_g q) = p_g(D_c) S. Step 6: I recomputed J T = T^c A(q'_M) and the cancellation to Phi^c. Step 7: I checked p_{i'}(Phi) = K_t A(Ebar) K_s^{-1} and W p_{i'}(Phi) U^{-1} = Phi^V from the restriction law tau Ebar = E^V sigma. Step 8: I wrote out the composite endpoints; they agree with the composite restriction by the r-iteration law and the a-coherence. Small cases checked: L=0, g=id, V empty, proper f with j=id, E not invertible. rg over dag/nodes found no duplicate. Fix file: (1) step 4 now cites the Mathlib leaf lem-pc-separated-quasi-separated for separated implies quasi-separated, and proof_deps was recomputed; (2) split_report.tool_uses now declares the five off-unit tools thm-weil-pbc-site-comparison, lem-weil-pbc-comparison-pullback, prop-weil-pbc-comparison-direct-image, lem-weil-pbc-transport-identifies-exchange and lem-weil-pbc-extension-by-zero-exact. All five are already accepted tool_uses of the parent and are named by its blueprint proof; I accept them. Statement unchanged; no target weakened; no SGA source.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9141b9289",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical constructions, edge cases, docstrings, report sections, and per-file scompile evidence checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GlobalTransportChartNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.CompactSupportTransport.globalTransportChartNormalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.A",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.B",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.l",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.p",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.a",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.F",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.C",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.He",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.Hp",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.b",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.e",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.Cc",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.S",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.T",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.phi",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.globalPhi",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.D",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.J",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.chartPhi",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.pComp",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.pId",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.restriction",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.pastedPhi",
+   "AlgebraicGeometry.ProEtale.CompactSupportTransport.globalTransportChartNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/GlobalTransportChartNormalization.lean",
+  "statement": "theorem globalTransportChartNormalization (E : Etale.LocalCompactSupportExtension Λ) : (∀ {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (sq : IsPullback g' f' f g) (c : Compactification f) (hc : QuasiCompact c.i) (hc' : QuasiCompact (c.ofIsPullback sq).i), (Functor.isoWhiskerRight (D Λ E c hc) (p Λ g)).inv ≫ globalPhi Λ E sq ≫ (J Λ E sq c hc').hom = chartPhi Λ sq c) ∧ (∀ {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X} (hf : IsSeparated f) (hft : LocallyOfFiniteType f) (hqc : QuasiCompact f) (hg : IsOpenImmersion g) (sq : IsPullback g' f' f g), globalPhi Λ E sq = (restriction Λ E hf hft hqc hg sq).hom) ∧ (∀ {X₀ X₁ X₂ Y₀ Y₁ Y₂ : Scheme.{u}} {f₀ : X₀ ⟶ Y₀} {f₁ : X₁ ⟶ Y₁} {f₂ : X₂ ⟶ Y₂} (t₁ : X₀ ⟶ X₁) (t₂ : X₁ ⟶ X₂) (b₁ : Y₀ ⟶ Y₁) (b₂ : Y₁ ⟶ Y₂) (sq₁ : IsPullback t₁ f₀ f₁ b₁) (sq₂ : IsPullback t₂ f₁ f₂ b₂) (sq : IsPullback (t₁ ≫ t₂) f₀ f₂ (b₁ ≫ b₂)) (_hf : IsSeparated f₂) (_hft : LocallyOfFiniteType f₂) (_hqc : QuasiCompact f₂) (_ho : IsOpenImmersion b₁ ∨ IsOpenImmersion b₂) (L : DerivedCategory.Plus (Sheaf X₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))), (globalPhi Λ E sq).app L = pastedPhi Λ E t₁ t₂ b₁ b₂ sq₁ sq₂ L) ∧ (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (_hf : IsSeparated f) (_hft : LocallyOfFiniteType f) (_hqc : QuasiCompact f) (sq : IsPullback (𝟙 X) f f (𝟙 Y)) (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))), (globalPhi Λ E sq).app L = (pId Λ Y).hom.app _ ≫ (F Λ (E.H f)).map ((pId Λ X).inv.app _))",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

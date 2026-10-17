@@ -242,10 +242,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-b326cd3b7",
-  "group": "Q150",
+  "reviewer": "NT-stage2-Codex-80a55d414",
+  "group": "Q05",
   "result": "pass",
-  "note": "Clause-by-clause match with the node: I(P,Q) arrow directions (comm unfolds to h≫Q(β)=P(α)≫h'), the map h↦a≫h≫b, the covering equations _hc/_hd, strict functor naturality via IsHammockMap with HEq used only to transport endpoint objects, and equality after localization at weak homotopy equivalences for the a,b,c,d clause; c,d are not assumed in W; no model hypotheses; no weak-equivalence claim about gamma. FrameHammockComparison and FrameHammockEndpointAction fix every simplex: grid fixes rows and all j≤l vertical arrows, normal forms are unique (reduction-diamond) and H.simplices is an Equiv, so both are subsingletons and the ∃G / ∀G' form is sound; neither is hollow. Common universes for D are forced by IsHammockMap and allowed by the node's enlargement clause. lean.statement matches the file verbatim; all 4 declarations exist; the 2 added stmt_deps are landed, used and acyclic; only the item node differs from the side clone, with statement, source and proof unchanged. Docstrings give source and blueprint tags; 7 proof steps in the docstring; the only proof is sorry. frameHammockHomFunctorMap is a legitimate same-universe helper. nt_compile.py per-file: exit 0, 28.3 s, no errors or warnings, reproduced twice."
+  "note": "Statement, dependencies, universes, docstrings, edge cases, construction interfaces, and compiler evidence checked; no fixes needed."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.FrameHammockActionNaturality",
@@ -259,7 +259,7 @@
   "file": "lean/Sheaf/CategoryTheory/FrameHammockActionNaturality.lean",
   "statement": "theorem frameHammockActionNaturality {C : Type u} [Category.{v} C] (W : MorphismProperty C) [W.IsMultiplicative] [W.HasTwoOutOfThreeProperty] (H : HammockLocalization W) {x y : C} (P : SimplexCategory ⥤ C) (Q : SimplexCategoryᵒᵖ ⥤ C) (p : P ⟶ (Functor.const SimplexCategory).obj x) (i : (Functor.const SimplexCategoryᵒᵖ).obj y ⟶ Q) (hp : ∀ m : ℕ, W (p.app ⦋m⦌)) (hi : ∀ n : ℕ, W (i.app (op ⦋n⦌))) : ∃ G : FrameHammockComparison H p i hp hi, (∀ (D : Type u) [Category.{v} D] (V : MorphismProperty D) [V.IsMultiplicative] [V.HasTwoOutOfThreeProperty] (K : HammockLocalization V) (F : C ⥤ D) (hF : ∀ {a b : C} (f : a ⟶ b), W f → V (F.map f)) (pD : P ⋙ F ⟶ (Functor.const SimplexCategory).obj (F.obj x)) (iD : (Functor.const SimplexCategoryᵒᵖ).obj (F.obj y) ⟶ Q ⋙ F) (hpD : ∀ m : ℕ, V (pD.app ⦋m⦌)) (hiD : ∀ n : ℕ, V (iD.app (op ⦋n⦌))) (_ep : ∀ m : ℕ, pD.app ⦋m⦌ = F.map (p.app ⦋m⦌)) (_ei : ∀ n : ℕ, iD.app (op ⦋n⦌) = F.map (i.app (op ⦋n⦌))) (G' : FrameHammockComparison K pD iD hpD hiD) (E : EnrichedFunctor SSet (HammockObjects C H.enrichment) (HammockObjects D K.enrichment)) (_hE : IsHammockMap H K F hF E), HEq (G.map ≫ E.map x y) (resolutionLargeNerveMap.{v, 0, v, 0, max u v} (resolutionIndexMap (frameHammockHomFunctorMap F P Q)) ≫ G'.map)) ∧ (∀ {x' y' : C} (c : x' ⟶ x) (d : y ⟶ y') (P' : SimplexCategory ⥤ C) (Q' : SimplexCategoryᵒᵖ ⥤ C) (p' : P' ⟶ (Functor.const SimplexCategory).obj x') (i' : (Functor.const SimplexCategoryᵒᵖ).obj y' ⟶ Q') (hp' : ∀ m : ℕ, W (p'.app ⦋m⦌)) (hi' : ∀ n : ℕ, W (i'.app (op ⦋n⦌))) (G' : FrameHammockComparison H p' i' hp' hi') (a : P' ⟶ P) (b : Q ⟶ Q') (_ha : ∀ m : ℕ, W (a.app ⦋m⦌)) (_hb : ∀ n : ℕ, W (b.app (op ⦋n⦌))) (_hc : a ≫ p = p' ≫ (Functor.const SimplexCategory).map c) (_hd : i ≫ b = (Functor.const SimplexCategoryᵒᵖ).map d ≫ i'), ∃ A : FrameHammockEndpointAction H c d, SSet.KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.map (resolutionLargeNerveMap.{v, 0, v, 0, max u v} (resolutionIndexMap (specialResolutionHomMap a b))) ≫ SSet.KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.map G'.map = SSet.KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.map G.map ≫ SSet.KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.map A.map)",
   "branch": "newtargets-dag",
-  "by": "Q150",
+  "by": "Q05",
   "date": "2026-10-17",
   "existing": false,
   "note": "Reuses the landed model-free ResolutionIndex and Hom-diagram maps. FrameHammockComparison specifies the canonical map on every grid, and FrameHammockEndpointAction specifies actual endpoint concatenation on every simplex. The theorem asserts existence and both naturality clauses. Two landed nodes are added to statement dependencies for these reused interfaces; no natural-language statement changes."
