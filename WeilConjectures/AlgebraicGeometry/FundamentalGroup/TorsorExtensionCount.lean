@@ -52,13 +52,6 @@ namespace CategoryTheory.Sheaf
 variable {C : Type u'} [Category.{v} C] {J : GrothendieckTopology C}
   [HasSheafify J AddCommGrpCat.{w}] [HasExt.{w'} (Sheaf J AddCommGrpCat.{w})]
 
-/-- An isomorphism of sheaves induces a bijection on cohomology. -/
-lemma H.bijective_map_of_isIso {F G : Sheaf J AddCommGrpCat.{w}} (f : F ⟶ G) [IsIso f]
-    (n : ℕ) : Function.Bijective (H.map f n) :=
-  Function.bijective_iff_has_inverse.2 ⟨H.map (inv f) n,
-    fun x ↦ by rw [← H.map_comp_apply, IsIso.hom_inv_id, H.map_id_apply],
-    fun x ↦ by rw [← H.map_comp_apply, IsIso.inv_hom_id, H.map_id_apply]⟩
-
 /-- An epimorphism of sheaves whose kernel has vanishing `Hⁿ⁺¹` induces a surjection on `Hⁿ`. -/
 lemma H.surjective_map_of_epi {F G : Sheaf J AddCommGrpCat.{w}} (p : F ⟶ G) [Epi p] (n : ℕ)
     [Subsingleton (H (kernel p) (n + 1))] : Function.Surjective (H.map p n) := by
