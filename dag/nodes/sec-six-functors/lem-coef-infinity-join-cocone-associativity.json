@@ -220,5 +220,34 @@
   "group": "Q65",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-0b45e9c84 (reviewer sub-agent of L); spot-checked: I read the whole item: statement, all four steps, sources and blueprint field. I also read the full statements of def-cbc-enhanced-diagrams-cones, lem-cbc-relative-coslice-left-fibration, lem-cbc-left-fibration-equivalence-lift, lem-coef-infinity-isofibration-exponentiation and def-coef-infinity-fibrations, plus the parent lem-coef-infinity-cofinal-coslice-calculus (to see which clauses it uses) and the unit sk-prop-sf-biduality-general. HTT and Kerodon are not in literature/, so proof_origin=agent with a WANTED line is correct. I checked the content against HTT 1.2.8 (join associativity), HTT 1.2.9.2 / Kerodon 0189 and 017Y (the join correspondence), HTT 2.1.2.1-2.1.2.2 / Kerodon 01BZ (left fibration) and HTT 1.2.4.3 / Kerodon 019K (isofibration). Step 1: taking K0 empty and D=Delta^0, the relative-coslice lemma's E is C and rho is the vertex projection; the equivalence-lift lemma then gives the isofibration exactly as defined in the stmt dep. Step 2: I checked the face and degeneracy compatibility of both formulas and both inverse laws; elementary is justified. Step 3: the three-block reassociation is correct, and the condition v|_L=r becomes w|_{K*L}=t by naturality in L, which the step-2 formulas show directly, so there is no circularity. Step 4: naturality and the empty-K and empty-L cases are done by explicit evaluation, and C empty is handled. Small cases tested: K empty, L empty, K=L=Delta^0 ((C_{x/})_{e/} is C_{e/}), C empty, C a point; the statement holds in each. The second reader's change from = to the canonical associator is correct and weakens nothing. There are no new nodes. lem-coef-join-slice-cocone-comparison and lem-coef-infinity-slice-right-fibration are not duplicates: one is the comparison with coherent cocones, the other the dual slice. Accepted tool_uses: lem-cbc-relative-coslice-left-fibration and lem-cbc-left-fibration-equivalence-lift, both generic lifting facts used as black boxes. FIX (B3/C1), step 1 only: cite def-coef-infinity-fibrations for inner and left fibrations, adding it to step 1 uses and proof_deps (no cycle), and make the universe enlargement explicit so the small-quasicategory hypotheses of both lemmas hold. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-infinity-join-cocone-associativity.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b1c4625b",
+  "group": "Q108",
+  "result": "fix",
+  "note": "Read the node, both stmt_deps (IsIsofibration at IsofibrationExponentiation.lean:46 matches the node's isofibration clause), the reused orderedJoinFunctor/coherentJoinCoslice/projection/restriction/postcompose declarations, the module and the report. Hypotheses: only [Quasicategory C], one universe u, empty K/L/C covered. The existential Phi/A is pinned to the canonical correspondence and associator by naturality in all SSet targets (Yoneda in K/sSet), so it is not an arbitrary choice. H3: the node's clause that the correspondence preserves vertex projections was missing; the fix adds def JoinCoconeCorrespondenceOver (r ≫ coherentCosliceProjection p = orderedJoinInr K L ≫ (Φ p r).1) as a conjunct and updates lean.declarations and statement in the lean-record.json. H8 minor: 'HTT Proposition 1.2.8' corrected to 'Section 1.2.8'. The report's garbled HTT numbers were restored and a reviewer-fix section appended. nt_compile --json: delivered and fixed modules both rc=0, no errors or warnings. No importers yet. Fixes: fixes/InfinityJoinCoconeAssociativity.lean, the lean-record.json and the report.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityJoinCoconeAssociativity",
+  "declaration": "SSet.Enhanced.join_cocone_associativity",
+  "declarations": [
+   "SSet.Enhanced.JoinCoconeExtension",
+   "SSet.Enhanced.JoinCoconeCorrespondence",
+   "SSet.Enhanced.JoinCoconeCorrespondenceOver",
+   "SSet.Enhanced.JoinCoconeCorrespondenceNatural",
+   "SSet.Enhanced.JoinCoconeAssociatorFamily",
+   "SSet.Enhanced.JoinCoconeAssociatorOver",
+   "SSet.Enhanced.JoinCoconeAssociatorNatural",
+   "SSet.Enhanced.join_cocone_associativity"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityJoinCoconeAssociativity.lean",
+  "statement": "theorem join_cocone_associativity {K C : SSet.{u}} [Quasicategory C] (p : K ⟶ C) : Quasicategory (coherentJoinCoslice p) ∧ IsIsofibration (coherentCosliceProjection p) ∧ ∃ Φ : JoinCoconeCorrespondence.{u}, JoinCoconeCorrespondenceOver Φ ∧ ∃ hΦ : JoinCoconeCorrespondenceNatural Φ, ∃ A : JoinCoconeAssociatorFamily Φ, JoinCoconeAssociatorOver Φ A ∧ JoinCoconeAssociatorNatural Φ hΦ A",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-2b1c4625b"
  }
 }

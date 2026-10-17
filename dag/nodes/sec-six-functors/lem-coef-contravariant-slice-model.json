@@ -312,5 +312,36 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-4b75a02ef (reviewer sub-agent of L); spot-checked: PASS with no changes. I read the item, all five new nodes and every cited statement in full. HTT is not in literature/ (WANTED) and this reader has no network, so I checked the HTT places against my knowledge of HTT and could not open the PDF. I checked each step's mathematics directly. Mechanical: proof_deps equals the union of the step uses; there is no cycle back to the item; each new node has the right created, blueprint.from/via, the three kinds of search and a statement only. Steps: (3) cone of the right horn: (Lambda^n_i * Delta^0) together with Delta^n is the inner horn Lambda^{n+1}_i (0<i<=n<n+1), and the cone construction keeps pushouts, chains and retracts. (4) p is an arrow-retract of tp through (1,t),(1,p), and the object set S_0+{v} is fixed. (5) every recognition hypothesis is supplied. (6) the kappa-smallness holds. (7) L_S(X)(s)=C[C_S X](s,v), so Dwyer-Kan cones give objectwise equivalences, and adjunction plus projective lifting give fibrancy. (8) the prism check: h(a,1)=rea=rbj; the pushout-product of {1}->Delta^1 with j is right anodyne; restricting at 0 extends a. (9) Mathlib Homotopy.lean: RightHomotopyClass.whitehead at line 216 and RightHomotopyRel.leftHomotopy at line 76, with Cylinder/IsGood conventions read; both the endpoint order and the good product cylinders match. (10) the mapping-path q is a right fibration by the prism over sigma∘pr; its fiber at y is the homotopy fiber of f_s, Kan and contractible, so q is a trivial Kan fibration. (11) the min(t,u) homotopy goes from jr to 1_M; j is a retract of jr via (j,1),(r,1); f=qj. New nodes: saturation (true by left properness of the Bergner structure and perfectness), coherent-inner-anodyne (HTT 2.2.5.2, true), cone-presheaf-adjunction (variance and every clause true), descent (true straightening Dwyer-Kan equivalence), and the cylinder-whitehead leaf (valid). Duplicates: lem-coef-simplicial-right-fibration-presentation (unsplit) contains the descent equivalence, but it also states the item itself, so citing it would cycle. The smaller descent node is correct, and the presentation node should cite it when it is split. Advisory for the descent node's next split: get the cone model from saturation plus recognition and never cite this item or HTT 2.2.3.12/13. Advisory for the adjunction node: its projective-model clause may cite lem-coef-simplicial-projective-model-calculus. I accept the tool_uses lem-cbc-right-fibration-space-fiber and lem-cbc-simplicial-homotopy-equivalence-weak; the declared trivial-kan-lifts-monomorphisms is a Mathlib leaf and needs no tool use. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ddc4022d3",
+  "group": "N8",
+  "result": "fix",
+  "note": "Every node clause was checked: cofibrations, cone weak equivalences via Dwyer-Kan equivalence of the coherent realization, fibrations, I/J injectivity, functorial cell factorizations, right anodyne maps are trivial cofibrations, fibrant objects are right fibrations, Kan strict fibers, fiberwise detection, no extra hypotheses on S. Fixes: (F1) coneExtensionMap used the sorry'd SSet.Straightening.coneInclusion_naturality from the module of lem-coef-right-straightening-fiber-comparison, which has this item in its proof_deps (unrecorded descendant, stage-3 import cycle); the import is dropped and the naturality is proved inside the definition, now free of sorryAx. (F2, H3) the node's small sets I,J were missing: added Small.{u} I and Small.{u} J; IsCellGenerated indexed coproducts and transfinite chains in the object universe (u+1 for Over S), now the morphism universe u. (F3, H8) source/blueprint docstrings added to six helpers; the statement docstring now carries the 11 proof steps. (F4) unused HomotopyCat import removed; non-public imports of the eight stated proof-dependency modules added. The fixed module compiles clean with nt_compile.py; the merge tool's dry run was not run."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ContravariantSliceModel",
+  "declaration": "SSet.Enhanced.contravariant_slice_model",
+  "declarations": [
+   "SSet.Enhanced.coneExtension",
+   "SSet.Enhanced.coneExtensionMap",
+   "SSet.Enhanced.IsCategoricalEquivalence",
+   "SSet.Enhanced.IsInjectiveAgainst",
+   "SSet.Enhanced.IsCellGenerated",
+   "SSet.Enhanced.cellProperty",
+   "SSet.Enhanced.fiberMap",
+   "SSet.Enhanced.FiberwiseWeakEquivalence",
+   "SSet.Enhanced.contravariant_slice_model"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ContravariantSliceModel.lean",
+  "statement": "theorem contravariant_slice_model (S : SSet.{u}) : ∃ (m : ModelCategory (Over S)), letI := m ∃ (I J : Set (Arrow (Over S))), Small.{u} I ∧ Small.{u} J ∧ (∀ {X Y : Over S} (f : X ⟶ Y), Cofibration f ↔ ∀ d : SimplexCategoryᵒᵖ, Function.Injective (f.left.app d)) ∧ (∀ {X Y : Over S} (f : X ⟶ Y), WeakEquivalence f ↔ IsCategoricalEquivalence (coneExtensionMap f.left X.hom Y.hom (Over.w f))) ∧ (∀ {X Y : Over S} (f : X ⟶ Y), Fibration f ↔ (∀ (i : Arrow (Over S)), Cofibration i.hom → WeakEquivalence i.hom → HasLiftingProperty i.hom f)) ∧ (∀ {X Y : Over S} (f : X ⟶ Y), Fibration f ↔ IsInjectiveAgainst J (f := Arrow.mk f)) ∧ (∀ {X Y : Over S} (f : X ⟶ Y), trivialFibrations (Over S) f ↔ IsInjectiveAgainst I (f := Arrow.mk f)) ∧ Nonempty (MorphismProperty.FunctorialFactorizationData (cellProperty I) (trivialFibrations (Over S))) ∧ Nonempty (MorphismProperty.FunctorialFactorizationData (cellProperty J) (fibrations (Over S))) ∧ (∀ {X Y : Over S} (f : X ⟶ Y), SSet.rightAnodyneExtensions f.left → trivialCofibrations (Over S) f) ∧ (∀ (X : Over S), IsFibrant X ↔ SSet.Enhanced.rightFibration X.hom) ∧ (∀ (X : Over S), SSet.Enhanced.rightFibration X.hom → ∀ s : S _⦋0⦌, KanComplex (SSet.Enhanced.fiber X.hom s)) ∧ (∀ {X Y : Over S} (f : X ⟶ Y), SSet.Enhanced.rightFibration X.hom → SSet.Enhanced.rightFibration Y.hom → (WeakEquivalence f ↔ FiberwiseWeakEquivalence f))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper declarations give the cone-extension map, coherent-realization categorical equivalence, small-family lifting/cell predicates, and strict fiber maps used by the theorem statement.",
+  "fixed_by": "NT-stage2-cc-ddc4022d3"
  }
 }
