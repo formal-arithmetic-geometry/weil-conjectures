@@ -11,9 +11,54 @@
   "lem-coef-kan-fibrant-path-recognition",
   "lem-coef-kan-quillen-model-right-proper-core"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=X\\times_ZY$ and let $c:Q\\to P$ have coordinates $(a,b)$. The model factorization in [lem-coef-kan-quillen-model-right-proper-core] gives $X\\xrightarrow{i}X_f\\xrightarrow{p}Z$ with $i$ a weak equivalence and $p$ a Kan fibration. Set $P_f=X_f\\times_ZY$, and write $h:P_f\\to X_f$ for the first projection. This projection is a Kan fibration directly from the horn lifting definition: lift the prescribed $Z$-simplex through $g$, retaining the already prescribed $X_f$-simplex. The square with top $d:P\\to P_f$, $d(x,y)=(i(x),y)$, bottom $i:X\\to X_f$, and vertical first projections is a strict pullback. Indeed $P_f\\times_{X_f}X$ consists degreewise of $((x_f,y),x)$ with $x_f=i(x)$ and $p(x_f)=g(y)$; eliminating $x_f$ gives exactly $f(x)=g(y)$. These mutually inverse coordinate formulas commute with faces and degeneracies. Hence $d$ is the pullback of the weak equivalence $i$ along the Kan fibration $h$, and right properness in the cited core theorem makes $d$ a weak equivalence.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 2.3 and proof of Lemma 2.5, printed p.4; agent expansion of the comparison with arbitrary two-leg replacement witnesses. Read online 2026-10-17; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Suppose $c$ is a weak equivalence. The composite $dc:Q\\to P_f$ has coordinates $(ia,b)$, and is a weak equivalence by the model two-out-of-three axiom of [lem-coef-kan-quillen-model-right-proper-core]. Use the factorization of $f$ from step 1 and the factorization $Y\\xrightarrow{1_Y}Y\\xrightarrow{g}Z$ of $g$. The latter is allowed because $1_Y$ is a weak equivalence and $g$ is a Kan fibration by hypothesis. Their two-leg replacement pullback is exactly $P_f$, and their induced map is $dc$. Thus the defining existential condition for homotopy cartesianness in [lem-coef-kan-fibrant-path-recognition] holds.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "lem-coef-kan-fibrant-path-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 2.3 and proof of Lemma 2.5, printed p.4; agent expansion of the comparison with arbitrary two-leg replacement witnesses. Read online 2026-10-17; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Conversely suppose the square is homotopy cartesian. Its definition in [lem-coef-kan-fibrant-path-recognition] supplies factorizations $X\\xrightarrow{u}\\widehat X\\xrightarrow{\\widehat f}Z$ and $Y\\xrightarrow{v}\\widehat Y\\xrightarrow{\\widehat g}Z$, where $u,v$ are weak equivalences, $\\widehat f,\\widehat g$ are Kan fibrations, $\\widehat f u=f$, $\\widehat g v=g$, and $w:Q\\to\\widehat X\\times_Z\\widehat Y$, $w(q)=(ua(q),vb(q))$, is a weak equivalence. Apply [lem-coef-kan-pullback-fibration-invariance] to the cospans $Y\\xrightarrow{g}Z\\xleftarrow{f}X$ and $\\widehat Y\\xrightarrow{\\widehat g}Z\\xleftarrow{\\widehat f}\\widehat X$, with its three vertical maps $\\alpha=v$, $\\beta=1_Z$, $\\gamma=u$. They are weak equivalences and the two required equalities are precisely the factorization equalities. Its two fibration hypotheses concern $g$ and $\\widehat g$, which hold; it requires no fibrancy of any object. Its conclusion says that $e:P\\to\\widehat X\\times_Z\\widehat Y$, $e(x,y)=(u(x),v(y))$, is a weak equivalence, after swapping the two coordinates of both pullbacks. Coordinate swap is a simplicial isomorphism; its realization is a homeomorphism and hence a weak equivalence. Degreewise $ec=w$, since both coordinates are $(ua,vb)$. The model two-out-of-three axiom in [lem-coef-kan-quillen-model-right-proper-core] applied to $e$ and $ec$ therefore makes $c$ a weak equivalence, proving the converse.",
+   "uses": [
+    "lem-coef-kan-fibrant-path-recognition",
+    "lem-coef-kan-pullback-fibration-invariance",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 2.3 and proof of Lemma 2.5, printed p.4; agent expansion of the comparison with arbitrary two-leg replacement witnesses. Read online 2026-10-17; archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-quillen-model-right-proper-core",
+  "lem-coef-kan-fibrant-path-recognition",
+  "lem-coef-kan-pullback-fibration-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient adjunction: sharp-map foundation; explicit proof following Rezk Section 2.3 and Lemma 2.5 (read online, archival copy WANTED), with the converse expanded using the existing pullback invariance theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +101,45 @@
    "results": "{\"t\": \"2026-10-17T09:22:18Z\", \"tool\": \"grep\", \"query\": \"homotopy.?cartesian|homotopy.?pullback|derived.?pullback|fibrant.*cospan\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: zero hits in Mathlib/AlgebraicTopology"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.?cartesian|homotopy.?pullback|derived.?pullback",
+   "results": "{\"t\": \"2026-10-17T12:13:04Z\", \"tool\": \"grep\", \"query\": \"homotopy.?cartesian|homotopy.?pullback|derived.?pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no homotopy-cartesian or homotopy-pullback declaration in Mathlib source"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative square of simplicial sets with one Kan fibration leg is homotopy cartesian if and only if the map to its ordinary pullback is a weak equivalence",
+   "results": "{\"t\": \"2026-10-17T12:13:05Z\", \"tool\": \"leansearch\", \"query\": \"A commutative square of simplicial sets with one Kan fibration leg is homotopy cartesian if and only if the map to its ordinary pullback is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"CategoryTheory.CommSq.recOn\", \"CategoryTheory.BicartesianSq\", \"CategoryTheory.CommSq\", \"CategoryTheory.Limits.Types.isPullback_iff\", \"CategoryTheory.CatCommSq.iso\", \"CategoryTheory.Square.IsPullback\", \"CategoryTheory.BicartesianSq.toIsPullback\"], \"digest\": \"28b868184ec1f7da\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern trivial-fibration pullbacks, ordinary categorical squares, model axioms or homotopy classes; none states the arbitrary-object homotopy-cartesian criterion or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.Fibration, HomotopicalAlgebra.WeakEquivalence",
+   "results": "{\"t\": \"2026-10-17T12:13:05Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.Fibration, HomotopicalAlgebra.WeakEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.mem_trivialFibrations\", \"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.ModelCategory.cm4a\", \"HomotopicalAlgebra.ModelCategory.cm4b\", \"HomotopicalAlgebra.ModelCategory.mk\"], \"digest\": \"d52c264a6bfeda46\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern trivial-fibration pullbacks, ordinary categorical squares, model axioms or homotopy classes; none states the arbitrary-object homotopy-cartesian criterion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative square of simplicial sets with one Kan fibration leg is homotopy cartesian if and only if the map to its ordinary pullback is a weak equivalence",
+   "results": "{\"t\": \"2026-10-17T12:13:06Z\", \"tool\": \"leanfinder\", \"query\": \"A commutative square of simplicial sets with one Kan fibration leg is homotopy cartesian if and only if the map to its ordinary pullback is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\"], \"digest\": \"a30e971562c2e18a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern trivial-fibration pullbacks, ordinary categorical squares, model axioms or homotopy classes; none states the arbitrary-object homotopy-cartesian criterion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a right proper model category an ordinary pullback along a fibration computes the homotopy pullback without fibrant objects",
+   "results": "{\"t\": \"2026-10-17T12:13:07Z\", \"tool\": \"leanfinder\", \"query\": \"In a right proper model category an ordinary pullback along a fibration computes the homotopy pullback without fibrant objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.PathObject.trans_P\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instFibrationSndOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.instFibrationFstOfIsFibrant\"], \"digest\": \"c0b20aa7c741ea79\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern trivial-fibration pullbacks, ordinary categorical squares, model axioms or homotopy classes; none states the arbitrary-object homotopy-cartesian criterion or a one-line specialization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-sharp-pullback-calculus",
@@ -91,5 +171,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-homotopy-cartesian-fibration-criterion",
+  "worker": "stage1",
+  "summary": "Q143: statement unchanged; expanded the two implications using model factorization, right properness and the existing arbitrary-base strict-pullback invariance theorem. All cited node statements were read; no new nodes or Lean attachments. Checked empty objects and arbitrary non-Kan bases.",
+  "blueprint": "Paragraph 2, displayed derived coefficient adjunction in prop-coef-integral-exceptional-adjoint.proof.md: the arbitrary-base Kan-fibration comparison used by consequence (b) of the sharp-map calculus, at the inherited ancestry place."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-81e23c721",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-81e23c721 (reviewer sub-agent of L); spot-checked: I read the item in full; it is now split into 3 steps. The delivery has no new nodes, and the statement, unit and blueprint ancestry are unchanged. Step 1: factor f=p∘i (MC5 of lem-coef-kan-quillen-model-right-proper-core); I checked degreewise that P_f×_{X_f}X=P, so d=(i,1) is the base change of i along the Kan fibration h, and right properness (last sentence of the core node) makes d a weak equivalence. Step 2: the witnesses (i,p) and (1_Y,g) are allowed by the defining clause of lem-coef-kan-fibrant-path-recognition, and the induced map is dc=(ia,b). Step 3: lem-coef-kan-pullback-fibration-invariance applies to the cospans Y→Z←X and Ŷ→Z←X̂ with α=v, β=1_Z, γ=u. Its Kan legs are g and ĝ, and its equalities are the factorization equalities. After the coordinate swaps, ec=w, and two-out-of-three gives c a weak equivalence. The weak-equivalence notions of def-cbc-enhanced-diagrams-cones and the core node agree. Edge cases checked: empty Z or Y, Z=Y=Δ^0, and arbitrary non-Kan bases. The Kan hypothesis on g is necessary: Δ^0 at vertex 0 and Δ^0 at vertex 1 over Δ^1 give an empty strict pullback but a contractible homotopy pullback, and the item keeps that hypothesis. The one citer, lem-coef-sharp-pullback-calculus, uses exactly this statement. Searches for homotopy-cartesian nodes found no duplicate: the invariance and path-recognition neighbours state different things. The 70-node dependency closure contains no cycle. All dependencies are in the same unit, so there are no tool_uses. No SGA source is cited. Rezk §2.3/Lemma 2.5 is not archived (WANTED) and I did not fetch it. The proof is agent-explicit and complete from the DAG statements I checked. No fixes."
  }
 }
