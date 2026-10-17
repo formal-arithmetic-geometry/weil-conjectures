@@ -32,7 +32,7 @@ set_option backward.isDefEq.respectTransparency.types true
 
 namespace AlgebraicGeometry
 
-attribute [local irreducible] derivedPullback schemeDerivedTensorMonoidal
+attribute [local irreducible] schemeDerivedTensorMonoidal
   HasDerivedCategory.ofIsGrothendieckAbelian Functor.mapDerivedCategory
   DerivedCategory.homologyFunctor
 
