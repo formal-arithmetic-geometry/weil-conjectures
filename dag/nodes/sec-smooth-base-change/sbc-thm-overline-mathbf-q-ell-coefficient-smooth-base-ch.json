@@ -217,5 +217,38 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-1dea6fdb1 (reviewer sub-agent of L); spot-checked: The split and both new nodes were read and checked in full. One statement fault: the item adds ℓ-invertibility on X, T, and Y, while the cited finite-stage master theorem assumes it only on S; this weakens the target. A corrected complete item JSON is in fixes/dag/nodes/sec-smooth-base-change/sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QbarCoefficientSmoothBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.qbarCoefficientSmoothBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.smoothLeftStage",
+   "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.smoothRightStage",
+   "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.smoothExchangeStage",
+   "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.pushModel",
+   "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.pullModel",
+   "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.tensorModel_eq",
+   "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.tensorModel",
+   "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.IntegralComparisons",
+   "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.Presentation",
+   "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.Presentation.ambientExchange",
+   "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.Presentation.exchange",
+   "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.Presentation.atStage",
+   "AlgebraicGeometry.Scheme.qbarCoefficientSmoothBaseChange"
+  ],
+  "file": "lean/Sheaf/Paper/QbarCoefficientSmoothBaseChange.lean",
+  "statement": "theorem qbarCoefficientSmoothBaseChange [Smooth f] [QuasiCompact g] [QuasiSeparated g] (hInvS : IsUnit (l : Γ(S, ⊤))) : ∃ P : Presentation (iX := ⟨sbcPrimeUnitOnSource l f hInvS⟩) (iS := ⟨sbcPrimeUnitOnSource l (𝟙 S) hInvS⟩) (iT := ⟨sbcPrimeUnitOnSource l g hInvS⟩) (iY := ⟨sbcPrimeUnitOnSource l (e ≫ g) hInvS⟩) l Ω sq, (∀ (K : @pbcQbarCategory l _ Ω _ _ _ T _ dT ⟨sbcPrimeUnitOnSource l g hInvS⟩), (∃ (E : Padic.FiniteCoefficientFields l Ω) (J : pbcStageCategory l Ω T E) (L : IntegralLattice l (pbcFiniteField.{u} l Ω E) T dT.out (sbcPrimeUnitOnSource l g hInvS) J), L.IsFiniteLevelEtaleAdmissible l (pbcFiniteField.{u} l Ω E) T dT.out (sbcPrimeUnitOnSource l g hInvS) ∧ Nonempty ((⟨E, J⟩ : @pbcQbarCategory l _ Ω _ _ _ T _ dT ⟨sbcPrimeUnitOnSource l g hInvS⟩) ≅ K) ∧ (∀ (M : Padic.FiniteCoefficientFields l Ω) (a : E ≤ M), ∃ LM : IntegralLattice l (pbcFiniteField.{u} l Ω M) T dT.out (sbcPrimeUnitOnSource l g hInvS) (((pbcScalarSystem l Ω T dT.out (sbcPrimeUnitOnSource l g hInvS)).T a).obj J), LM.IsFiniteLevelEtaleAdmissible l (pbcFiniteField.{u} l Ω M) T dT.out (sbcPrimeUnitOnSource l g hInvS))) → IsIso ((Presentation.exchange (iX := ⟨sbcPrimeUnitOnSource l f hInvS⟩) (iS := ⟨sbcPrimeUnitOnSource l (𝟙 S) hInvS⟩) (iT := ⟨sbcPrimeUnitOnSource l g hInvS⟩) (iY := ⟨sbcPrimeUnitOnSource l (e ≫ g) hInvS⟩) l Ω sq P).app K)) ∧ (∀ (Q : (pbcAmbientCompleteSystem l Ω T (hInv := ⟨sbcPrimeUnitOnSource l g hInvS⟩)).PairCategory) (M : Padic.FiniteCoefficientFields l Ω) (a : Q.stage ≤ M), (StageSystem.Morphism.descNatTrans (Presentation.alpha (iX := ⟨sbcPrimeUnitOnSource l f hInvS⟩) (iS := ⟨sbcPrimeUnitOnSource l (𝟙 S) hInvS⟩) (iT := ⟨sbcPrimeUnitOnSource l g hInvS⟩) (iY := ⟨sbcPrimeUnitOnSource l (e ≫ g) hInvS⟩) P)).app Q = Presentation.atStage (iX := ⟨sbcPrimeUnitOnSource l f hInvS⟩) (iS := ⟨sbcPrimeUnitOnSource l (𝟙 S) hInvS⟩) (iT := ⟨sbcPrimeUnitOnSource l g hInvS⟩) (iY := ⟨sbcPrimeUnitOnSource l (e ≫ g) hInvS⟩) l Ω sq P Q M a) ∧ (∀ (E : Padic.FiniteCoefficientFields l Ω) (K : PbcRationalConstructible l (pbcFiniteField.{u} l Ω E) T) (L L' : IntegralLattice l (pbcFiniteField.{u} l Ω E) T dT.out (sbcPrimeUnitOnSource l g hInvS) K), L.IsFiniteLevelEtaleAdmissible l (pbcFiniteField.{u} l Ω E) T dT.out (sbcPrimeUnitOnSource l g hInvS) → L'.IsFiniteLevelEtaleAdmissible l (pbcFiniteField.{u} l Ω E) T dT.out (sbcPrimeUnitOnSource l g hInvS) → sbcTransportedExchange l (pbcFiniteField.{u} l Ω E) sq dT.out (sbcPrimeUnitOnSource l g hInvS) L = sbcTransportedExchange l (pbcFiniteField.{u} l Ω E) sq dT.out (sbcPrimeUnitOnSource l g hInvS) L')",
+  "branch": "newtargets-dag",
+  "by": "Q158",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac26c7c68",
+  "group": "Q158",
+  "result": "pass",
+  "note": "Read the item node, all 7 statement dependencies' declarations, the blueprint source (order 1446) and sketch32 lines 1412-1460, the module and the report. Hypotheses match the node: smooth f, qc+qs g, four noetherian and finite-dimensional schemes, l a unit on S only (other corners derived via sbcPrimeUnitOnSource), and an admissible-lattice representative whose lattices persist at every overfield including M=E. The conclusion is IsIso of the specified exchange on the raw pbcQbarCategory with values in the ambient category over X; the component equals atStage at every overfield (stage independence); the exchange uses no lattice, and a third conjunct records sbcTransportedExchange equality for any two admissible lattices; no constructible landing. Every data field of the existential Presentation is fixed by its equations (localization is identity on objects; leftBeta_eq/rightBeta_eq are the correct composites (P_M^f d^g)(p^f D_E^g) and (D_M^h p^e)(d^h P_E^e)), so it is the canonical exchange. The postponed tensorModel_eq is true (same integer/quotient maps, unique completed map). pullModel picks from an exists-unique statement. The upstream StageSystem.Morphism.functor has the same representative formula as the dependency's functor. No hollow definitions; docstrings present; only lean changed; statement verbatim; standard second-reading text. nt_compile.py on the local overlay: exit 0, no diagnostics, 49.9 s (near the 60 s limit under load). No findings requiring correction."
  }
 }

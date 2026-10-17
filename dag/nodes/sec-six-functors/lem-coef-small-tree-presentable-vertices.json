@@ -157,5 +157,23 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-95b2a4381 (reviewer sub-agent of L); spot-checked: I read the item in full and compared it with the live copy: only the proof, proof_deps, proof_origin, split_report, status and blueprint.from.place changed; the statement and hypotheses are unchanged, so the target is not weakened. There are no new nodes. I read every cited statement: def-coef-good-cellular-tree, def-weil-pbc-category-colimit, and lem-coef-ordinary-small-colimit-presentable, the last against Mathlib Presentable/Limits.lean ll. 175-195 (isCardinalPresentable_of_isColimit, which needs LocallySmall, a regular κ, HasCardinalLT (Arrow K) κ and every value presentable). Step 1 is genuinely elementary: a cocone on the diagram with the root M adjoined is exactly a cocone in M/A, which identifies Y_E with that diagram's ordinary colimit. It has at most |E|^2+|E|+1 < τ arrows, and E = ∅ gives Y_∅ = M, as the tree definition says. Step 2 is a correctly set-up well-founded induction: Y_{<t} is presentable by Step 1 plus the leaf, using the presentable root and the induction hypothesis, and D(t) is the colimit of the 5-arrow span from the definition's pushout square, with P_t and Q_t presentable by hypothesis. Step 3 applies the leaf to every downward-closed E. Each hypothesis is used where stated and none is added. I tested empty T, one cell, a chain, two incomparable cells, and countable T with τ = ℵ_1. All citations are in the unit sk-prop-sf-biduality-general, so no tool_uses are needed. A search of every node statement for presentable with tree, cell or pushout found no duplicate. No SGA source is used, and there is no base-change or coefficient-category content to check. The only citer, lem-coef-weak-saturation-tree-presentation step 4, uses exactly the stated conclusion. Minor point: HTT is checked online only and is not archived; the report's WANTED line records this. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SmallTreePresentableVertices",
+  "declaration": "CategoryTheory.CellularTree.smallTree_presentable_vertices_and_restrictions",
+  "file": "lean/Sheaf/CategoryTheory/SmallTreePresentableVertices.lean",
+  "statement": "theorem smallTree_presentable_vertices_and_restrictions {A : Type u} [Category.{v} A] [HasColimitsOfSize.{v, v} A] (τ : Cardinal.{v}) [Fact τ.IsRegular] (hτ : Cardinal.aleph0 < τ) (L : MorphismProperty A) (M : A) [IsCardinalPresentable M τ] (T : Type v) [PartialOrder T] [WellFoundedLT T] (tree : CellularTree L M T) (hT : HasCardinalLT T τ) (hcell : ∀ t : T, IsCardinalPresentable (tree.source t) τ ∧ IsCardinalPresentable (tree.target t) τ) : (∀ t : T, IsCardinalPresentable (tree.diagram.obj t).right τ) ∧ (∀ E : Set T, IsLowerSet E → IsCardinalPresentable (subsetObj tree.diagram E).right τ)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-795709338",
+  "group": "ND",
+  "result": "pass",
+  "note": "The node differs from the live copy only in its lean field, and lean.statement is verbatim the file signature. Every hypothesis and conclusion clause matches with nothing stronger: Category.{v} on Type u with no u=v restriction, HasColimitsOfSize.{v,v}, Cardinal.{v} regular with aleph0<τ, IsCardinalPresentable for the root and for the specified cell endpoints only, WellFoundedLT on T : Type v with HasCardinalLT T τ, vertices as (tree.diagram.obj t).right, and Y_E as (subsetObj tree.diagram E).right in Under M for IsLowerSet E (Iio t, univ and ∅ are instances; ∅ ≅ root). The statement is true by the adjoined-root colimit with fewer than τ arrows plus well-founded induction via isCardinalPresentable_of_isColimit and the IsPushout field. Edge cases checked: empty T, empty E, minimal vertex, branching, countable T at ℵ₁, large A. No duplicate in the project or Mathlib; the one citer uses exactly this conclusion. One sorry, no definitions, docstrings give the source place, blueprint tag and all three proof steps. nt_compile on the snapshot is clean with exit 0, and an injected-error control fails with exit 1. The second-reading section uses the standard maintainer-review line. No fixes."
  }
 }

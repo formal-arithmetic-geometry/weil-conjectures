@@ -243,5 +243,34 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-b56b3d875 (reviewer sub-agent of L); spot-checked: Read the item and all seven steps in full, every cited node's statement, the parent def-pur-dnc-section-family, and Stacks Tag 0804 (divisors.tex l.8322), Tag 080D (l.8781) and Tag 01R8 (morphisms.tex l.849). The delivery adds no new nodes. Step 1: the singleton-cover blow-up is the local model, the chart cover by t,f_i is correct, and A[J/t]=R[t,I/t] holds because (f+tg)/t=f/t+g. Step 2: A[J/f]≅C[v] is injective since 1/f^n is a unit in R_f and C⊆R_f. Step 3: the closure is computed chartwise by restrict-open (01R8(3)); the map is quasi-compact because D(J) is a finite union of basic opens. Step 4: the extended centre on U_t is (t), so T∩U_t is empty. Step 5: (C[v]/(fv))_f=R_f, so the kernel is (v). This agrees with the 080D torsion form, since f^N c_0=0 in C forces c_0=0. Step 6: the overlap is D(tz/fz)=D(v) via θ. Step 7: the cover gives P\\T=U_t over Spec R[t]. Edge cases checked: m=0, f_i nilpotent, I=R, zero-divisor generators, R=0. No duplicate: the generic Nagata strict-transform-chart nodes could have been cited but are not needed. The item does not restate the parent. No SGA is cited. I accept the four tool_uses (prop-nagata-affine-blowup-chart, prop-nagata-affine-blowup-chart-cover, prop-nagata-proj-standard-open, lemma-nagata-scheme-image-restrict-open) as generic tools. No coefficient or base-change content and no target touched. Optional, no change made: step 3 could also cite lemma-nagata-scheme-image-ideal-qc."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DncAffineBlowupComplement",
+  "declaration": "AlgebraicGeometry.DncAffineBlowup.affine_blowup_complement",
+  "declarations": [
+   "AlgebraicGeometry.DncAffineBlowup.centerIdeal",
+   "AlgebraicGeometry.DncAffineBlowup.parameter",
+   "AlgebraicGeometry.DncAffineBlowup.constant",
+   "AlgebraicGeometry.DncAffineBlowup.center",
+   "AlgebraicGeometry.DncAffineBlowup.hyperplane",
+   "AlgebraicGeometry.DncAffineBlowup.transformIdeal",
+   "AlgebraicGeometry.DncAffineBlowup.affine_blowup_complement"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DncAffineBlowupComplement.lean",
+  "statement": "theorem affine_blowup_complement (I : Ideal R) (m : ℕ) (f : Fin m → I) (hf : Ideal.span (Set.range fun i ↦ (f i : R)) = I) : ∃ e : AffineBlowup (centerIdeal I) ≅ (center I).blowup, e.hom ≫ (center I).blowupMap = AffineBlowup.toSpec (centerIdeal I) ∧ ∃ jt : Spec (.of (AffineBlowup.chartRing (centerIdeal I) Polynomial.X)) ⟶ (center I).blowup, jt = AffineBlowup.chartRingιOfEq (centerIdeal I) (parameter I).2 rfl (reesX_mem _ _ (parameter I).2) ≫ e.hom ∧ (transformIdeal I).comap jt = ⊤ ∧ (∀ i : Fin m, ∃ θ : Polynomial (AffineBlowup.chartRing I (f i : R)) ≃+* AffineBlowup.chartRing (centerIdeal I) (Polynomial.C (f i : R)), (∀ c : AffineBlowup.chartRing I (f i : R), (θ (Polynomial.C c) : Localization.Away (Polynomial.C (f i : R))) = Localization.awayMap Polynomial.C (f i : R) c.val) ∧ (θ Polynomial.X : Localization.Away (Polynomial.C (f i : R))) = AffineBlowup.chartFraction (Polynomial.C (f i : R)) 1 Polynomial.X ∧ ∃ ji : Spec (.of (Polynomial (AffineBlowup.chartRing I (f i : R)))) ⟶ (center I).blowup, ji = Spec.map (CommRingCat.ofHom θ.symm.toRingHom) ≫ AffineBlowup.chartRingιOfEq (centerIdeal I) (constant I (f i)).2 rfl (reesX_mem _ _ (constant I (f i)).2) ≫ e.hom ∧ (transformIdeal I).comap ji = (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {Polynomial.X} : Ideal (Polynomial (AffineBlowup.chartRing I (f i : R))))))).ker ∧ ji ⁻¹' Set.range jt = {p | Polynomial.X ∉ p.asIdeal} ∧ ji ⁻¹' ((transformIdeal I).support : Set (center I).blowup)ᶜ = ji ⁻¹' Set.range jt) ∧ Set.range jt = ((transformIdeal I).support : Set (center I).blowup)ᶜ ∧ (∃ c : Spec (.of (AffineBlowup.chartRing (centerIdeal I) Polynomial.X)) ≅ Scheme.Opens.toScheme ((transformIdeal I).support.compl), c.hom ≫ Scheme.Opens.ι ((transformIdeal I).support.compl) = jt ∧ c.hom ≫ Scheme.Opens.ι ((transformIdeal I).support.compl) ≫ (center I).blowupMap = Spec.map (CommRingCat.ofHom (algebraMap (Polynomial R) (AffineBlowup.chartRing (centerIdeal I) Polynomial.X)))) ∧ AffineBlowup.chartRing (centerIdeal I) Polynomial.X = Algebra.adjoin (Polynomial R) (Set.range fun a : I ↦ AffineBlowup.chartFraction (Polynomial.X : Polynomial R) 1 (Polynomial.C (a : R)))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second-reader fix: the delivered helper DncAffineBlowup.chart duplicated the recorded upstream AlgebraicGeometry.AffineBlowup.chartRingιOfEq (WeilConjectures.Compactification.StrictTransformChartModel) — definitionally equal, checked by rfl — so it is dropped and the statement uses chartRingιOfEq with e := rfl directly; no mathematical change.",
+  "fixed_by": "NT-stage2-cc-ebaa64643"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ebaa64643",
+  "group": "N9",
+  "result": "fix",
+  "note": "Every node clause and hypothesis is rendered correctly, with no extra assumptions (one universe u) and edge cases m=0, I=R, f_i zero/nilpotent, zero divisors and R=0 covered; Stacks 0804/080D agree. Finding (one definition per notion): helper DncAffineBlowup.chart duplicates the upstream AffineBlowup.chartRingιOfEq (StrictTransformChartModel.lean), definitionally equal (rfl check compiled). Fix: fixes/DncAffineBlowupComplement.lean drops the helper and uses chartRingιOfEq with e:=rfl plus the import; fixes/<item>.lean-record.json gives the updated declarations and statement. nt_compile exit 0 on the delivered file, the rfl check and the fixed file."
  }
 }

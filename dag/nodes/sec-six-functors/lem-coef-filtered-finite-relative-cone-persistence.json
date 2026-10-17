@@ -191,5 +191,35 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-ea31dcc7f (reviewer sub-agent of L); spot-checked: I read the item, all four steps, every cited node's statement, the citer (lem-coef-filtered-operadic-unstraightening step 7) and Gepner-Haugseng arXiv:1312.3178v4 section 3.3 online. In the source, Thm 3.3.1 handles the Segal/mapping condition by interchanging filtered colimits with finite limits of spaces, using limits over the finite categories G_[n]/ in the generalized case, and Prop 3.3.2 gives the mapping-space colimit argument. The item's finite simplicial shape is exactly that generalized case, and the proof is correctly marked agent-written. The statement is true; I checked K empty, K a point, K finite discrete and K=N(I_n). Step 1: the calculus's common-stage clause plus filteredness on a 2-point set give the stage a, and h_a is formed in B only, with no lift to E_a. Step 2: the calculus's homotopy-fiber colimit over I_{a/}, natural in the object y along the K-triangle-family q_a. Step 3: the hypothesis at each composite vu; marking it elementary is acceptable. Step 4: the spaces theorem with kappa=aleph_0, finite K and small filtered I_{a/}; all hypotheses checked. proof_deps equals the union of the uses. Reachability check: no cycle. All cited statements are in the item's own unit, so no tool_uses. There are no new nodes. Not a duplicate of lem-coef-filtered-cocartesian-edge-persistence, which is the cocartesian, source-side analogue. No SGA. Fix (B2/B3): the statement used the notation Map^h without defining it. I added one sentence defining it as the homotopy fiber over g of Map_{E_j}(x,y)->Map_B(p_j x,p_j y) induced by p_j, and likewise for E with p. This makes explicit the meaning the steps and the citer already use, without strengthening or weakening the statement. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-filtered-finite-relative-cone-persistence.json; only the statement field changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FilteredFiniteRelativeConePersistence",
+  "declaration": "SSet.CatInfinityCalculus.filtered_finite_relative_cone_persistence",
+  "declarations": [
+   "SSet.CatInfinityCalculus.relativeConeObject",
+   "SSet.CatInfinityCalculus.relativeConeObject_quasicategory",
+   "SSet.CatInfinityCalculus.relativeConeArrow",
+   "SSet.CatInfinityCalculus.relativeConeSlice",
+   "SSet.CatInfinityCalculus.relativeConeProjection",
+   "SSet.CatInfinityCalculus.relativeConeStructureEdge",
+   "SSet.CatInfinityCalculus.relativeConeCoconeLeg",
+   "SSet.CatInfinityCalculus.FilteredRelativeConeData",
+   "SSet.CatInfinityCalculus.filtered_finite_relative_cone_persistence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FilteredFiniteRelativeConePersistence.lean",
+  "statement": "theorem filtered_finite_relative_cone_persistence (M : Marked.CartesianModelStatement.{u}) (data : FilteredRelativeConeData M) (stageLimit : ∀ (j : data.I _⦋0⦌) (a : (Enhanced.mappingSpace data.I data.i j) _⦋0⦌), Enhanced.IsRelativeLimitDiagram (data.pStage j) (data.q ≫ data.transition j a)) : Enhanced.IsRelativeLimitDiagram data.p (data.q ≫ relativeConeCoconeLeg M (data.D ≫ relativeConeProjection M data.b) (CategoryTheory.Spaces.mappedCocone (relativeConeProjection M data.b) data.D data.cocone) data.i)",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded relative-limit universal predicate for the fibrewise mapping-cone equivalences. The actual coherent comma slice, filtered diagram, slice and total colimiting cocones, and normalized structural/transition functors are retained. Helpers are specializations of the existing comma and coherent-nerve constructions; only the final theorem proof is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ac7457db",
+  "group": "N4",
+  "result": "pass",
+  "note": "Read the node, the 4 stmt_dep interfaces, the CatInfinityFilteredFiniteCalculus helpers and Spaces.mappedCocone. Enhanced.comma with outgoing=true is the over-slice Cat_inf/B. IsRelativeLimitDiagram (Kerodon 7.1.6.19(2) homotopy-pullback square for every cone t) reduces at constant cones to the node's fibrewise Map^h equivalence, and conversely, so it is neither stronger nor weaker. D, the slice and total colimiting conditions on the same cocone, and the HEq-pinned p_j, p and D(u) are canonical, not arbitrary. The hypothesis covers every edge i->j via the mappingSpace vertices. The conclusion uses the actual coconeLeg at i. Empty K is admitted. Single universe u with I small via IsSmall.{u,u+1}. M is the recorded Cat_inf interface, used as InfinityFunctorPushout uses it. No hollow definition; only the main theorem is sorry. Docstrings carry the source, the blueprint id and the 4 proof steps. lean.statement is verbatim and declarations are complete. The node is unchanged apart from the lean record. The report has both required sections. nt_compile.py on the local side overlay: rc 0, no errors or warnings, 2.7 s and 3.4 s. No findings requiring correction."
  }
 }

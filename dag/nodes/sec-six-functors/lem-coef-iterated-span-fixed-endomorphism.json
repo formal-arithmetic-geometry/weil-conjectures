@@ -8,7 +8,8 @@
   "place": "Dwyer–Kan, Calculating simplicial localizations, Proposition 8.2(i), printed p. 29 (PDF p. 13), following Proofs paragraph; explicit auxiliary assertion extracted from the square-criterion proof step 5. No Stacks tag is claimed."
  },
  "stmt_deps": [
-  "def-nagata-category"
+  "def-nagata-category",
+  "def-coef-iterated-span-completion-rule"
  ],
  "proof": [
   {
@@ -174,5 +175,34 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-fa6f881b3 (reviewer sub-agent of L); spot-checked: I read the item, its parent lem-coef-homotopy-fractions-square-criterion (steps 6-8 use it), the sibling lem-coef-iterated-span-endomorphism-naturality, def-nagata-category, the unit sk-prop-sf-biduality-general and the chapter sec-six-functors. Compared with the side DAG, the delivery leaves the statement, stmt_deps, blueprint, unit and chapter unchanged. It only adds proof, proof_deps, proof_origin and split_report, sets status to split, and appends searches. There are no new nodes, and the delivery is one commit with the item and the report. The statement is true and self-contained: on the map (e_{j-1},1,1), the output-square conditions of S give exactly e_j k_j = k_j e_{j-1} and e_j q_j = q_j. Step 1: q_j is in U by induction and so in W, and two-out-of-three with q_0 and e_0q_0 = q_0 gives e_0 in W. Step 2: an induction with a stated invariant; the triple is an input-span endomorphism, and the rule S gives both equations. Step 3: two-out-of-three gives e_j in W; n = 0 is covered. All three steps are honestly elementary and cite only the category definition, so there is no route or tool_use issue and no cycle. Edge cases checked: n = 0; U = identities; a non-invertible retraction e_0 in Set. The parent's use (e_0 = uv, q_0 = u) matches the conclusion exactly. Searching the DAG with rg found no duplicate; the naturality node is a different two-chain assertion. Mathlib: three kinds of search recorded, no match. Dwyer-Kan Prop. 8.2 is not in literature/; the report has a WANTED line and proof_origin is agent, which is correct. No SGA source is used. Not a target node, so no base-change or coefficient check applies. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Localization.IteratedSpanFixedEndomorphism",
+  "declaration": "CategoryTheory.MorphismProperty.iteratedSpanFixedEndomorphism",
+  "declarations": [
+   "CategoryTheory.MorphismProperty.IteratedSpanState",
+   "CategoryTheory.MorphismProperty.IteratedSpanState.next",
+   "CategoryTheory.MorphismProperty.IteratedSpanState.transition",
+   "CategoryTheory.MorphismProperty.iteratedSpanStateAt",
+   "CategoryTheory.MorphismProperty.IteratedSpanFixedState",
+   "CategoryTheory.MorphismProperty.IteratedSpanFixedState.next",
+   "CategoryTheory.MorphismProperty.iteratedSpanFixedStateAt",
+   "CategoryTheory.MorphismProperty.iteratedSpanFixedEndomorphism"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Localization/IteratedSpanFixedEndomorphism.lean",
+  "statement": "theorem iteratedSpanFixedEndomorphism (W U : MorphismProperty C) [W.IsMultiplicative] [W.HasTwoOutOfThreeProperty] [U.IsMultiplicative] (hUW : U ≤ W) (rule : IteratedSpanCompletionRule U) (B : ℕ → C) (h : ∀ j : ℕ, B j ⟶ B (j + 1)) (s₀ : IteratedSpanState rule B h 0) (x₀ : IteratedSpanFixedState rule s₀) (n : ℕ) : (∀ j : ℕ, j ≤ n → W (iteratedSpanFixedStateAt x₀ j).e) ∧ (∀ j : ℕ, j ≤ n → (iteratedSpanStateAt s₀ j).q ≫ (iteratedSpanFixedStateAt x₀ j).e = (iteratedSpanStateAt s₀ j).q) ∧ (∀ j : ℕ, j < n → (IteratedSpanState.transition (iteratedSpanStateAt s₀ j)) ≫ (iteratedSpanFixedStateAt x₀ (j + 1)).e = (iteratedSpanFixedStateAt x₀ j).e ≫ (IteratedSpanState.transition (iteratedSpanStateAt s₀ j)))",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-1b444fa0d"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b444fa0d",
+  "group": "Q27",
+  "result": "fix",
+  "note": "Lean matches the node clause by clause: W IsMultiplicative + HasTwoOutOfThreeProperty, U IsMultiplicative, U ≤ W, IteratedSpanCompletionRule with real data (complete/map/map_k/map_q/map_id/map_comp), ℕ-indexed chain (equivalent, conclusions only use j≤n), s₀ with U q₀, x₀ with q₀≫e₀=q₀; conjuncts: W e_j (j≤n), q_j≫e_j=q_j (j≤n), k≫e_{j+1}=e_j≫k (j<n). Edge cases n=0, U=identities, non-invertible e₀, free universes are covered. No hollow defs, theorem is sorry, statements verbatim, item changed only in lean/stmt_deps. New node justified: FunctorialSpanCompletionData has an extra W field and belongs to the parent node, so citing it would make a DAG cycle; no duplicate. Both modules compile clean via nt_compile.py --json, and so does the fixed module. Fixes: (1) H8: source/blueprint docstrings for 6 helper declarations and the theorem docstring with the node's 3 proof steps (docstrings only); (2) new node statement typo 'qk=hq′' corrected to 'kq=q′h' (fixes/def-coef-iterated-span-completion-rule.json)."
  }
 }

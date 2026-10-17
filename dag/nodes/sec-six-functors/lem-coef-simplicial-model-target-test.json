@@ -215,5 +215,28 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-9a474c9c4 (reviewer sub-agent of L); spot-checked: I read all eight steps in full, together with the statement of each of the 7 cited nodes. All 7 are in the item's own unit sk-prop-sf-biduality-general and none is merged, so no tool_uses are needed. The statement is unchanged and there are no new nodes. A DFS over the item's 251 transitive dependencies does not reach the item, so there is no cycle. I confirmed that lem-coef-simplicial-fully-faithful-homotopy-image transitively reaches the item, so citing it would create a cycle; the worker was right to re-prove that special case inline in Steps 4-5. I grepped the chapter for duplicates and found none. Step checks: Step 1 uses the Bergner replacements and actual representatives (A cofibrant, B fibrant), and fibrant means J-inj to the terminal category, which gives Kan mapping sets. Step 2: h_t is the free diagram T^op(t,-)⊗Δ0; it is cofibrant because the free functor is left adjoint to evaluation and projective trivial fibrations are objectwise, and SM7 applied to ∅→P and Q→* gives Kan mapping sets. Step 3 is the enriched Yoneda calculation, read degreewise. Step 4: a full replete subcategory is fibrant and its inclusion is J-inj. Step 5: a cylinder's values stay in E because π0c is an equivalence. Step 6: e_T is a DK equivalence. Steps 7-8 give vu=1 and then uv=1, and detects-weak-equivalences gives the final DK claim. Edge cases checked: empty X, and essential surjectivity used only in Step 7. Fault fixed (C3): Step 7 applies π0F to objects and composes induced functors. That needs actual representatives of F and u from lem-coef-model-localization-homotopy-classes (X,Y cofibrant, P_X^cf fibrant), not only the class-invariance in the derived-pushout node. I added that sentence and citation to Step 7; proof_deps is unchanged. HTT A.3.4.6/A.3.5.14 is not archived (WANTED), and the proof stays marked agent-written.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialModelTargetTest",
+  "declaration": "CategoryTheory.SimplicialModelTargetTest.simplicial_model_target_test",
+  "declarations": [
+   "CategoryTheory.SimplicialModelTargetTest.IsEssentiallySurjective",
+   "CategoryTheory.SimplicialModelTargetTest.simplicial_model_target_test"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialModelTargetTest.lean",
+  "statement": "theorem simplicial_model_target_test (X Y : SCat.{max (u + 1) w}) [Small.{u} X] [Small.{u} Y] (_hX : ∀ (x y : X) (n : SimplexCategoryᵒᵖ), Small.{u} ((hom X x y).obj n)) (_hY : ∀ (x y : Y) (n : SimplexCategoryᵒᵖ), Small.{u} ((hom Y x y).obj n)) (f : bergnerHomotopyFunctor.obj X ⟶ bergnerHomotopyFunctor.obj Y) (_hf : IsEssentiallySurjective f) : (IsIso f ↔ ∀ (C : Type (max (u + 1) w)) [Category.{u} C] [ModelCategory C] [SimplicialCategory C] (_T : SimplicialTensorCotensor C), CombinatorialModelCategory.{max (u + 1) w, u, u} C → SimplicialModelLocalization.SatisfiesSM7 C → Function.Bijective (fun a : bergnerHomotopyFunctor.obj Y ⟶ bergnerHomotopyFunctor.obj (liftBundle (BifibrantObject C)) ↦ f ≫ a)) ∧ (IsIso f → ∀ (A B : SCat.{max (u + 1) w}) (g : A ⟶ B) (eX : bergnerHomotopyFunctor.obj A ≅ bergnerHomotopyFunctor.obj X) (eY : bergnerHomotopyFunctor.obj B ≅ bergnerHomotopyFunctor.obj Y), bergnerHomotopyFunctor.map g ≫ eY.hom = eX.hom ≫ f → DwyerKanEquivalence (A := underlying A) (B := underlying B) g)",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The ambient Bergner homotopy category is in max (u+1) w, with Small.{u} source objects and mapping degrees. Model tests are locally u-small with objects in that larger universe, including enriched simplicial presheaf models. Uses the existing degreewise liftBundle on the actual full bifibrant subcategory; essential surjectivity is tested on a three-arrow representative, with no endpoint fibrancy or cofibrancy assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7a701579b",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Module Sheaf.CategoryTheory.SimplicialModelTargetTest compiles clean via nt_compile.py on the side overlay (1.9 s, no warnings). The node diff is only the lean field; lean.statement is verbatim; the proof is a single sorry. Every clause matches: X,Y : SCat.{max(u+1) w} with Small.{u} objects and mapping degrees only; f is any morphism in the Bergner homotopy category; the IsEssentiallySurjective helper tests a three-arrow DK representative with PiZeroEssentiallySurjective, which representatives always exist for and which is independent of the choice, so it is neither weaker nor stronger than the node, and it is not a duplicate (IsInBergnerEssentialImage is a different notion); the test family uses the calculus dependency's packaging (Category.{u}, objects in max(u+1) w, Combinatorial.{_,u,u}, SM7, tensor/cotensor) and contains P_X and P_Y, so it is not vacuous; A^cf = liftBundle(BifibrantObject C) with Mathlib's restricted full-subcategory enrichment; f ≫ a is precomposition u^* and Bijective; the final DK clause over arbitrary endpoint isomorphisms is true by saturation; no Kan or cofibrancy hypotheses. Edge cases (empty X, nonempty X with empty Y, identity) checked. Non-blocking: the second reading is the author's self-check (accepted under prior practice, and this review is the independent reading); the derived-pushout-mapping proof import is deferred; HTT is not archived (WANTED)."
  }
 }

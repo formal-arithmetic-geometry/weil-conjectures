@@ -8,7 +8,8 @@
   "place": "Joyal–Tierney, Section 2, division definitions and the Reedy matching identifications underlying Theorem 2.6 and Proposition 2.10; proper-image reconstruction expanded by the agent. No Stacks tag states this precise boundary-Hom comparison; the related proper-face limit calculation is simplicial.tex, lemma-formula-limit. Archive WANTED in report.md."
  },
  "stmt_deps": [
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "lem-weil-pbc-matching-object-proper-faces"
  ],
  "proof": [
   {
@@ -279,5 +280,28 @@
   "group": "Q101",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-5c0541cb0 (reviewer sub-agent of L); spot-checked: Read the whole item: its statement and all 8 steps. The delivery has no new nodes. Also read the statements of the three cited Mathlib leaves (def-weil-pbc-simplicial-set, lem-weil-pbc-simplex-face-factorization, lem-weil-pbc-simplex-face-face-identity), the parent citer lem-coef-bisimplicial-reedy-division-calculus at step 4, and Stacks simplicial.tex Tag 0186 lemma-formula-limit (lines 2337-2420), which carries the same omitted-vertex construction, independence check and compatibility check. The statement is true and checked on small cases: n=0 (empty boundary, singleton on both sides), n=1 (T_0 x T_0), n=2 (triangle boundary) and empty T. The index category of proper injections is the Reedy matching diagram that the parent needs. Leaf hypotheses hold where they are used. Step 3 justifies n>=2 before using the face-identity leaf at parameter n-1, with indices i<j<=n, and uses compatibility only for the injective delta operators. Step 5 relies on the leaf's clause that psi is injective, and since k<n every proper injection is nonsurjective. Steps 4 and 6 are naturality arguments, and step 4 covers degeneracies too. Steps 7 and 8 work Yoneda and the set-level limit property out by hand, so no node is left uncited. No step relies on another node's proof and there is no cycle. All cited nodes are leaves, so no tool_uses entry is needed. Duplicate search with rg over dag/nodes found related nodes: lem-weil-pbc-matching-object-proper-faces (families against face tuples, not maps out of the boundary), lem-weil-pbc-simplicial-hom-object-standard-simplex (Hom object in SR(X), a different category) and the coskeleton nodes. None restates the item. A search of blueprint main-20261015 found no node stating it, so same_as=[] is correct. The blueprint ancestor and the unit route are unchanged, no SGA is cited, and no statement is weakened. The Mathlib search log is sound: invalid queries are flagged and isColimitCoconeN is correctly recorded as a candidate only. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.BoundaryProperFaceLimit",
+  "declaration": "SSet.boundary_proper_face_limit",
+  "declarations": [
+   "SSet.boundaryProperFaceEvaluation",
+   "SSet.boundary_proper_face_limit"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/BoundaryProperFaceLimit.lean",
+  "statement": "theorem boundary_proper_face_limit (n : ℕ) : ∃ E : ∀ T : SSet.{u}, ((boundary n).toSSet ⟶ T) ≃ ((Functor.const (ProperFaceCategory n)ᵒᵖ).obj PUnit.{u + 1} ⟶ properFaceDiagram T n), (∀ (T : SSet.{u}) (h : (boundary n).toSSet ⟶ T) (a : ProperFaceCategory n), (E T h).app (op a) PUnit.unit = boundaryProperFaceEvaluation h a) ∧ (∀ (T T' : SSet.{u}) (u : T ⟶ T') (h : (boundary n).toSSet ⟶ T) (a : ProperFaceCategory n), (E T' (h ≫ u)).app (op a) PUnit.unit = u.app (op a.obj.left) ((E T h).app (op a) PUnit.unit)) ∧ (∀ (T : SSet.{u}) (z : T.obj (op ⦋n⦌)) (a : ProperFaceCategory n), (E T ((boundary n).ι ≫ yonedaEquiv.symm z)).app (op a) PUnit.unit = T.map a.obj.hom.op z) ∧ (∀ T : SSet.{u}, ∃ π : (Functor.const (ProperFaceCategory n)ᵒᵖ).obj ((boundary n).toSSet ⟶ T) ⟶ properFaceDiagram T n, (∀ (a : ProperFaceCategory n) (h : (boundary n).toSSet ⟶ T), π.app (op a) h = boundaryProperFaceEvaluation h a) ∧ Nonempty (IsLimit (Cone.mk _ π))) ∧ (n = 0 → ∀ T : SSet.{u}, (∃! _h : (boundary n).toSSet ⟶ T, True) ∧ (∃! _x : (Functor.const (ProperFaceCategory n)ᵒᵖ).obj PUnit.{u + 1} ⟶ properFaceDiagram T n, True))",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the landed properFaceCategory/properFaceDiagram interface. Families are sections from the constant singleton functor. The equivalence is uniquely prescribed by its evaluation formula, with no arbitrary comparison chosen; the Hom set itself is the limiting cone apex."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96022d2b1",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Every node clause matched in SSet.boundary_proper_face_limit: bijection, naturality in T, simplex restriction (T(iota)z), limit cone with the Hom set as apex, n=0 singletons. Uses Mathlib boundary (nonsurjective maps) and the landed ProperFaceCategory/properFaceDiagram, whose arrows are exactly the injective compatibilities. Helper boundaryProperFaceEvaluation has real data. Single universe u, bound; no extra hypotheses. Edge cases n=0, n=1, empty T, degeneracies checked. Only the item node changed vs live, in lean (complete, statement verbatim) and stmt_deps (adds a landed node, allowed by brief-stage2 section 5). Docstrings carry source, blueprint and all 8 steps; proof is sorry. No Mathlib duplicate found. nt_compile --json on the snapshot: clean, 1.6 s, rc=0. Second-reading section only records the direct-delivery policy, accepted. No findings."
  }
 }
