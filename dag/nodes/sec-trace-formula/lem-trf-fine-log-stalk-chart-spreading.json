@@ -14,9 +14,123 @@
   "def-weil-pbc-geometric-stalks",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use a small skeleton of affine pointed etale neighbourhoods: affine etale objects form an essentially small category, and the possible lifts of the fixed geometric point to each object form a set. Affine neighbourhoods are cofinal for stalks, and pointed neighbourhoods are cofiltered; affine refinements of their common sources and equalizers show that the opposite of this skeleton is filtered. For any finite family of sheaves, stalks are their section colimits. Commutation with finite products and equalizers implies the following finite-data rule: finitely many germs have representatives on one common pointed neighbourhood, and finitely many equations between these representatives which hold as germs hold after a further pointed refinement. All later refinements use this rule, allowing the several sheaves to be $M$, $\\mathcal O$ or an associated log sheaf. Every such neighbourhood is locally Noetherian: an etale morphism is locally of finite presentation, whose affine polynomial quotient presentations show it is locally of finite type, and the locally-Noetherian finite-type lemma applies to its map to $X$. Neighbourhoods factoring through a fixed pointed etale neighbourhood compute the same stalk: a common refinement with any other neighbourhood exists by cofilteredness, and parallel arrows can be equalized there. Thus subsequent stalk identifications preserve the specified germs.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-essentially-small-cover",
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PQ, lemma-cofinal-etale, and geometric stalks; finite-data consequence using Tag 002W, categories-lemma-directed-commutes; Tag 01T6, morphisms-lemma-finite-type-noetherian for neighbourhoods being locally Noetherian."
+   }
+  },
+  {
+   "text": "Choose a finite generating tuple $p_1,\\ldots,p_n$ of $P$. The finite-presentation lemma supplies finitely many defining relations for this tuple. Represent each $h(p_i)$ by a section of $M$ on a common pointed neighbourhood. Each defining relation holds at the specified stalk because $h$ is a homomorphism; impose the finitely many relations by step 1. The presentation's universal property now gives a homomorphism $\\widetilde h:P\\to M(U)$ with precisely the germ $h$. By fineness of $M$, refine once more to a pointed etale neighbourhood admitting a chart $q:Q\\to M(U)$ with $Q$ finitely generated and integral. Such a refinement exists because an etale chart covering has a member through the geometric point, and that member is itself pointed by a lift of the geometric point. No saturation or freeness is assumed for either $P$ or $Q$.",
+   "uses": [
+    "lem-trf-fg-commutative-monoid-finite-presentation",
+    "def-trf-fs-log-blowup",
+    "lem-weil-pbc-etale-cover-geometric-point-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75: agent expansion of the omitted chart-extension argument."
+   }
+  },
+  {
+   "text": "Put $\\beta=\\alpha\\widetilde h$ and let $N=L_U(P,\\beta)$, with canonical generator map $\\iota:P\\to N(U)$. The associated-log universal property extends $\\widetilde h$ uniquely to a homomorphism $f:N\\to M|_U$ over the identity of $U$. By its stalk formula, $N_{\\bar u}=P\\oplus_E A^\\times$, and $f_{\\bar u}$ is exactly $[p,u]\\mapsto h(p)u$. The hypothesis of the item says this map is an isomorphism. In particular its inverse fixes $A^\\times$ and is compatible with the structure maps to $A$. This proves a stalk assertion only; an inverse on a neighbourhood will be constructed in the next steps.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75: agent expansion of the omitted chart-extension argument."
+   }
+  },
+  {
+   "text": "Choose a finite generating tuple $q_1,\\ldots,q_s$ of $Q$ and finitely many defining relations using the finite-presentation lemma. For each $q_j$ take $n_j=f_{\\bar u}^{-1}(q(q_j)_{\\bar u})\\in N_{\\bar u}$, and represent these by sections $t_j$ of $N$ on a common pointed refinement. At the stalk, these sections satisfy every defining relation of $Q$, as well as the finitely many equations $\\alpha_N(t_j)=\\alpha_M(q(q_j))$ in $\\mathcal O$ and $f(t_j)=q(q_j)$ in $M$. The relations hold because $f_{\\bar u}^{-1}$ is a monoid homomorphism compatible with the structural maps. Impose all these equations simultaneously by the finite-data rule of step 1. The resulting tuple defines a homomorphism $k:Q\\to N(V)$ with $\\alpha_N k=\\alpha_M q$ and $fk=q$. The identities on the finite generators imply the displayed identities on all of $Q$.",
+   "uses": [
+    "lem-trf-fg-commutative-monoid-finite-presentation",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75: agent expansion of the omitted chart-extension argument."
+   }
+  },
+  {
+   "text": "Since $q:Q\\to M|_V$ is a chart, the chart form of the associated-log universal property extends $k$ uniquely to a log homomorphism $g:M|_V\\to N|_V$. Both $fg$ and the identity of $M|_V$ restrict to $q$ on $Q$, since $fk=q$. Uniqueness in that same universal property gives $fg=\\mathrm{id}_{M|_V}$. This equality is on the whole neighbourhood, including its unit sheaf; no finite generation of the unit groups is asserted.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75: agent expansion of the omitted chart-extension argument."
+   }
+  },
+  {
+   "text": "At the marked stalk, $f_{\\bar v}$ is the isomorphism of step 3. Taking stalks in $fg=\\mathrm{id}$ therefore gives $g_{\\bar v}=f_{\\bar v}^{-1}$ and $(gf)_{\\bar v}=\\mathrm{id}$. Consequently, for each of the finitely many $p_i$ from step 2, the two sections $gf(\\iota(p_i))$ and $\\iota(p_i)$ of $N$ have equal germs. Refine once more so that all these equalities hold as sections, using step 1. They then hold for every $p\\in P$ by generation. Uniqueness in the universal property of $N=L(P,\\beta)$ shows $gf=\\mathrm{id}_N$. Thus $f$ and $g$ are inverse isomorphisms on this neighbourhood. The map $P\\to M$ is a chart because its induced associated-log homomorphism $f$ is an isomorphism, and its germ is still the originally specified $h$.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75: agent expansion of the omitted chart-extension argument."
+   }
+  },
+  {
+   "text": "Finally take an affine pointed etale refinement $(W,\\bar w)$ using cofinality of affine neighbourhoods. The restriction compatibility of associated log structures restricts the two inverse maps, so $P\\to M|_W$ remains a chart. Step 1 identifies its marked stalk canonically with $M_{\\bar x}$, and every generator has the original germ $h(p_i)$; hence the whole monoid homomorphism has germ $h$. This gives the affine pointed neighbourhood and the specified chart required in the statement.",
+   "uses": [
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "lem-trf-associated-log-universal-stalks",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75: agent expansion of the omitted chart-extension argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "pqf-lem-locnoeth-lft",
+  "lem-trf-fg-commutative-monoid-finite-presentation",
+  "def-trf-fs-log-blowup",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-trf-associated-log-universal-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI, 3.7(a), printed p. 75, final sentence: explicit finite-presentation and two-sided inverse argument supplied by Q23; log conventions in VI, 1.1."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +166,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $ X $ and $ Y $, a morphism $ f : X \\to Y $ is a local isomorphism if there exists an open cover $ \\\\{U_i\\\\} $ of $ X $ such that for each $ i $, the restriction $ f|_{U_i} $ is an isomorphis\"}\n  {\"name\": \"AlgebraicGeometry.stalkwise_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    (AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] => P).RespectsIso\", \"doc\": \"If a ring homomorphism property $P$ is invariant under isomorphisms, then the corresponding stalk-wise morphism property for schemes, defined by requiring $P$ on stalks, is also invariant under isomor\"}\n  {\"name\": \"AlgebraicGeometry.isIso_iff_stalk_iso\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  CategoryTheory.IsIso f ↔\\n    CategoryTheory.IsIso f.base ∧ ∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is an isomorphism if and only if the underlying continuous map on topological spaces is a homeomorphism, and for every point $x \\\\in X$, the induced map on stalks $f_\"}\n  {\"name\": \"AlgebraicGeometry.isIso_iff_isIso_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  CategoryTheory.IsIso f ↔\\n    CategoryTheory.IsIso f.base ∧ ∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is an isomorphism if and only if its underlying continuous map of topological spaces is a homeomorphism, and for every point $x \\\\in X$, the induced \"}\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso\", \"type\": \"CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme =\\n  (CategoryTheory.MorphismProperty.isomorphisms TopCat).inverseImage AlgebraicGeometry.Scheme.forgetToTop ⊓\\n    AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] f => Function.Bijective ⇑f\", \"doc\": \"A morphism of schemes is an isomorphism if and only if it induces a homeomorphism on the underlying topological spaces and the induced maps on the stalks are bijective.\"}\n  {\"name\": \"AlgebraicGeometry.stalkwiseIsLocalAtTarget_of_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] => P)\", \"doc\": \"If a ring homomorphism property $P$ is invariant under composition with isomorphisms, then the corresponding stalkwise morphism property for schemes is Zariski local at the target. Specifically, for a\"}\n  {\"name\": \"AlgebraicGeometry.stalkwise_isLocalAtSource_of_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    AlgebraicGeometry.IsZariskiLocalAtSource (AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] => P)\", \"doc\": \"If a property $ P $ of commutative ring homomorphisms is invariant under composition with ring isomorphisms, then the corresponding stalkwise property for morphisms of schemes (defined by requiring $ \"}\n  {\"name\": \"AlgebraicGeometry.stalkwise_isZariskiLocalAtSource_of_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    AlgebraicGeometry.IsZariskiLocalAtSource (AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] => P)\", \"doc\": \"If a ring homomorphism property $P$ is invariant under composition with isomorphisms, then the corresponding stalk-wise morphism property for schemes is Zariski-local at the source. Specifically, for \"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chart of a fine logarithmic structure at a geometric stalk extends to a chart on an etale neighborhood.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp φ sY = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) sX →\\n\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {U : X.Opens} {x : ↥X} (hxU : x ∈ U) (φ : A ⟶ X.presheaf.stalk x)\\n  (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryTheory.CategoryStruct.com\", \"doc\": \"Given a point $x$ in an open subset $U$ of a scheme $X$, a morphism $\\\\phi: A \\\\to \\\\mathcal{F}_x$ to the stalk of a presheaf $\\\\mathcal{F}$ at $x$, and compatible ring homomorphisms $\\\\phi_{RA}: R \\\\to A$ \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] {y : ↥Y}\\n  (e : (CategoryTheory.ConcreteCategory.hom sX.base) x = (CategoryTheory.ConcreteCategory.hom sY.base) y)\\n  (φ : Y.presheaf.stalk y ⟶ X.presheaf.stalk\", \"doc\": \"Let $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ be morphisms of schemes. Let $x \\\\in X$ and $y \\\\in Y$ be points such that $s_X(x) = s_Y(y)$. Let $\\\\phi: \\\\mathcal{O}_{Y,y} \\\\to \\\\mathcal{O}_{X,x}$ be a homomorphism \"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogScheme|log_structure|logarithmic.*chart",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For fine log structures an isomorphism at a geometric point extends to an isomorphism on a neighborhood.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.liftPropWithinAt_of_liftPropAt_of_mem_nhds\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"(h : LiftPropAt P g x) (hs : s ∈ 𝓝 x) : LiftPropWithinAt P g s x\", \"doc\": \"If a property $P$ is lifted at a point $x$ via charts (i.e., holds for the induced maps in local coordinates around $x$) and $s$ is a neighborhood of $x$, then $P$ also holds within the neighborhood $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \": (MorphismProperty.isomorphisms Scheme).IsLocalAtTarget zariskiPrecoverage\", \"doc\": \"The property of being an isomorphism for morphisms of schemes is local on the target with respect to the Zariski precoverage. Specifically, if a morphism $ f: X \\to Y $ becomes an isomorphism after pul\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.le_of_isLocalAtSource\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalIso\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P.ContainsIdentities]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P], @AlgebraicGeometry.IsLocalIso ≤ P\", \"doc\": \"If a morphism property $ P $ on schemes contains identities and is Zariski-local at the source, then every local isomorphism satisfies $ P $. This follows from the fact that local isomorphisms are def\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.instIsZariskiLocalAtSource\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalIso\", \"type\": \": IsZariskiLocalAtSource @IsLocalIso\", \"doc\": \"The property of being a local isomorphism between schemes is Zariski-local at the source, meaning it can be verified on a Zariski open cover of the source scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalIso\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $ X $ and $ Y $, a morphism $ f : X \\to Y $ is a local isomorphism if there exists an open cover $ \\\\{U_i\\\\} $ of $ X $ such that for each $ i $, the restriction $ f|_{U_i} $ is an isomorphis\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": (X.restrict h).presheaf.stalk x ≅ X.presheaf.stalk (f x)\", \"doc\": \"For a locally ringed space $ X $, an open subset $ U $ with open embedding $ f: U \\\\to X $, and a point $ x \\\\in U $, the stalk of the restricted locally ringed space at $ x $ is isomorphic to the stalk\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.liftPropAt_of_liftPropWithinAt\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"(h : LiftPropWithinAt P g s x) (hs : s ∈ 𝓝 x) : LiftPropAt P g x\", \"doc\": \"If a local invariant property $P$ holds for a function $g$ at a point $x$ within a subset $s$ that is a neighborhood of $x$ (i.e., $s \\\\in \\\\mathsf{nhds}(x)$), then $P$ also holds for $g$ at $x$ without\"}\n  {\"name\": \"AlgebraicGeometry.stalkClosedPointIso\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \": (Spec R).presheaf.stalk (closedPoint R) ≅ R\", \"doc\": \"The stalk of the structure sheaf at the closed point of the prime spectrum of a commutative ring $ R $ is isomorphic to $ R $ itself. This isomorphism is constructed by composing the canonical isomorp\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-log-regular-sharp-chart",
@@ -81,5 +223,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-fine-log-stalk-chart-spreading",
+  "worker": "stage1",
+  "summary": "Preserved the precise input homomorphism and all hypotheses. Expanded chart spreading into finite presentation, finite stalk data and a constructed two-sided inverse using an existing fine chart. Added only finite presentations of commutative monoids and the foundational associated-log construction as statement-only children. Reused existing cofiltered-neighbourhood, finite-limit/filtered-colimit and affine-cofinality nodes.",
+  "blueprint": "Fine-log chart-spreading input, through lem-trf-log-regular-sharp-chart, to the monoidal-resolution ancestry of lem-trf-local-term-locality, proof (1)--(2); Travaux de Gabber VI, 3.7(a), printed p. 75, final sentence extending the restriction of a splitting to a chart.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "why": "Generic affine-cofinality tool for geometric stalk neighbourhoods, needed for the final affine refinement and the small index category; this log-chart subargument has no same-unit version."
+   },
+   {
+    "node": "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "why": "Generic geometric-point lift to an etale covering, used only to choose an existing fine chart through the marked point; not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lem-weil-pbc-etale-cover-geometric-point-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-725b6ac08",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-725b6ac08 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, plus the statement of every cited node. Sources: Travaux de Gabber VI 1.1 (printed p.69; log structures are étale, fine/fs means étale-local charts) and VI 3.7(a) (printed p.75; 'la restriction de s à Q est, au voisinage de x, une carte'). The source gives no argument, so proof_origin agent with Kato WANTED is right. Stacks 00FN, 03PQ, 002W and 01T6 match their uses. The item statement is unchanged and not weakened; the full germ h is kept, which the parent lem-trf-log-regular-sharp-chart needs. Steps: 1 sets up the finite-data rule correctly from the cofiltered, essentially-small, affine-cofinal and filtered-colimit nodes, and gets local Noetherianity from étale => lfp => lft => 01T6. 2 spreads h using the monoid presentation, then gets a fine chart through x̄ from the étale-cover lift. 3 uses the associated-log stalk formula to show f at x̄ is the hypothesis isomorphism. 4 lifts the Q-generators with the Q-relations and f(t_j)=q(q_j); the α equation is redundant but harmless. 5 builds g from the chart form of the universal property, and uniqueness gives fg=id. 6 gets gf=id from generator germs and uniqueness for N, which is a real two-sided inverse; the chart condition then holds stalkwise. 7 makes the neighbourhood affine. New node lem-trf-fg-commutative-monoid-finite-presentation is Rédei's theorem: true, and the 00FN binomial-kernel route is sound; tested on n=0, Z/2, the idempotent monoid 2p=p and repeated generators. New node lem-trf-associated-log-universal-stalks is Kato's associated log structure: the construction, log axiom, universal property, stalk formula, restriction and chart clauses are all correct; tested on R=N with beta(1)=t at t=0 and t≠0, and on R a group. Both are statement only and self-contained. Duplicate search (rg over the DAG; the log nodes of sec-trace-formula; blueprint main-20261015) found nothing, so same_as=[] is right. Neither restates an item clause and there is no cycle. I accept both tool_uses: the affine-cofinal lemma is Lean-closed and the étale-cover lift is a Mathlib leaf. No route departure. No changes made."
  }
 }

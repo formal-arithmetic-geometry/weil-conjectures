@@ -20,14 +20,183 @@
   "def-sc-generic-point",
   "def-sc-normalization",
   "def-weil-finite-integral-morphism",
-  "def-weil-finite-type-morphism",
   "def-weil-irreducible-components",
   "def-weil-pbc-finite-purely-inseparable-extension",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $k=\\kappa(Y)$. Construct $Y_1$ as the normalization of $Y$ in $K$ [def-fin-normalization-extension]: over $U=\\operatorname{Spec}A\\subseteq Y$ its coordinate ring is the integral closure $A'$ of $A$ in $K$. Here $A$ is an excellent domain and $k=\\operatorname{Frac}(A)$ [lem-sc-integral-function-field-affine-fraction]; excellence of $A$ holds for every affine open $U$, since $Y$ is covered by affine opens with excellent rings [lem-trf-excellent-scheme-affine-cover]. By [lem-exc-quasi-excellent-nagata], $A$ is Nagata; taking the prime $(0)$ in [def-weil-pbc-nagata-ring] says it is N-2, and [def-weil-pbc-japanese-domain] therefore says $A'$ is a finite $A$-module. Thus $b:Y_1\\to Y$ is finite, directly by [def-weil-finite-integral-morphism]. The rings $A'$ are normal domains with fraction field $K$ by [lem-weil-pbc-integral-closure-finite-extension-normal]. The overlap identifications are the integral-closure localization identifications [lem-weil-pbc-integral-closure-commutes-localization]. In particular, localizing $A'$ at $A\\setminus\\{0\\}$ gives the integral closure of $k$ in $K$, which is all of $K$. Hence $b^{-1}(\\eta)=\\operatorname{Spec}K$, $Y_1$ is integral, its function field is $K$ compatibly with $k$, and $b$ is dominant.",
+   "uses": [
+    "def-fin-normalization-extension",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-trf-excellent-scheme-affine-cover",
+    "lem-exc-quasi-excellent-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032F (definition-N), 032R (definition-nagata), 034L (lemma-integral-closure-in-normal), 0307 (lemma-integral-closure-localize); excellence-to-Nagata: more-algebra.tex Tag 07QV"
+   }
+  },
+  {
+   "text": "Each $A'$ in Step 1 is a finite type algebra over the excellent ring $A$, so it and all its localizations are excellent by [lem-exc-finite-type-localization-excellent]. The opens $b^{-1}(U)=\\operatorname{Spec}A'$ cover $Y_1$, so every affine open of $Y_1$ has excellent ring [lem-trf-excellent-scheme-affine-cover]: $Y_1$ is excellent. The finite map $b$ is proper by [lem-weil-pbc-finite-proper]. The base $S$ is affine and Noetherian in both allowed cases: a field is Noetherian, and a discrete valuation ring is Noetherian by the trait hypothesis. The given $Y\\to S$ is H-projective [def-kun-projective] and proper [lem-kun-projective-implies-proper], hence of finite type and in particular quasi-compact [def-weil-proper-morphism, def-weil-finite-type-morphism]; so it is projective in the convention [def-pc-projective-morphism] that [lem-fin-finite-over-projective] requires. Apply [lem-fin-finite-over-projective] to this $Y\\to S$ and the finite $b$. Its affine-base conclusion gives a global closed immersion $i:Y_1\\hookrightarrow\\mathbf P^N_S$, with $Y_1\\to S$ equal to the projection composed with $i$, and thus $Y_1\\to S$ is projective in the required convention [def-kun-projective].",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-excellent-scheme-affine-cover",
+    "lem-weil-pbc-finite-proper",
+    "def-kun-projective",
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-pc-projective-morphism",
+    "lem-fin-finite-over-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QU (lemma-finite-type-over-excellent); morphisms.tex Tag 01WN (lemma-finite-proper); finite-cover projectivity uses Tags 01VT (lemma-finite-type-over-affine-ample-very-ample) and 01W6 (lemma-image-proper-scheme-closed); Tag 0HAB (morphisms.tex lemma-locally-excellent) for excellence from an affine cover"
+   }
+  },
+  {
+   "text": "The map $Y\\to S$ is proper by [lem-kun-projective-implies-proper]. Consequently $Y_1\\times_S Y\\to Y_1$ is proper, hence separated, by [lem-kun-proper-stability] and [def-weil-proper-morphism]. Its section $\\Gamma_b=(1,b):Y_1\\to Y_1\\times_S Y$ is a closed immersion by [lem-weil-pbc-section-separated-closed-immersion]. The product $i\\times1_Y:Y_1\\times_S Y\\to\\mathbf P^N_S\\times_S Y$ and its composite with $\\Gamma_b$ are closed immersions by [lem-weil-pbc-closed-immersion-products]. The target is $\\mathbf P^N_Y$ by [lemma-nagata-projective-space-base-change-pullback], and the composite followed by its projection is $b$. This is precisely a projective-space embedding over $Y$ [def-kun-projective], proving the projectivity of $b$ as well as the projectivity over $S$ already established.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-kun-proper-stability",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-weil-pbc-closed-immersion-products",
+    "lemma-nagata-projective-space-base-change-pullback",
+    "def-kun-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KT (lemma-section-immersion); morphisms.tex Tags 01WC (lemma-locally-projective-proper), 01W2 (lemma-base-change-proper), 01W3 (lemma-composition-proper)"
+   }
+  },
+  {
+   "text": "Let $V=X_0\\times_Y Y_1$, with projections $p:V\\to X_0$ and $q:V\\to Y_1$, and let $x_0$ be the generic point of $X_0$. Dominance of $g$ makes $F=\\kappa(X_0)$ an extension of $k$. By Step 1 the fibre $p^{-1}(x_0)$ is $\\operatorname{Spec}(F\\otimes_k K)$ [def-pc-scheme-fibre]. Apply [lem-weil-pbc-purely-inseparable-base-change-local-ring] with the Noetherian local $k$-algebra $A=F$ and maximal ideal $(0)$. It says this fibre has exactly one prime, whose residue field $E$ is finite over $F$. Write $z$ for its point. Any generization of $z$ in $V$ still maps to $x_0$ and hence lies in this one-point fibre, so equals $z$. By [lem-sc-scheme-sober], every irreducible closed subset containing $\\overline{\\{z\\}}$ has a generic point generizing $z$, and therefore equals $\\overline{\\{z\\}}$. Thus this closure is an irreducible component. Give it its reduced induced closed structure using [lem-weil-pbc-reduced-induced-closed-subscheme], and denote the resulting integral scheme by $W$ [def-pc-integral-scheme]. Its generic point is $z$ with field $E$. It dominates $X_0$, and its image in $Y_1$ contains $y_1$: indeed $z$ lies over $\\eta\\in Y$ and $b^{-1}(\\eta)=\\{y_1\\}$. Hence it dominates both factors.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-purely-inseparable-base-change-local-ring",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07E5 (proposition-characterization-geometrically-regular), proof (3) implies (1), local purely inseparable tensor extension; schemes.tex Tags 01IS (lemma-scheme-sober), 01J3 (lemma-reduced-closed-subscheme)"
+   }
+  },
+  {
+   "text": "The projection $p$ is finite by [lem-trf-finite-radicial-basechange] applied only to the finiteness of $b$; no radicial property of $b$ is asserted. The inclusion $j:W\\hookrightarrow V$ is finite by [lem-weil-pbc-closed-immersion-finite]. Hence $p_W=pj$ is finite by the composition clause of [lem-trf-finite-radicial-basechange]. On an affine inverse-image chart it is a finite type algebra over an excellent affine coordinate ring of $X_0$; [lem-exc-finite-type-localization-excellent] therefore makes these chart rings excellent, and since the charts cover $W$, every affine open of $W$ has excellent ring [lem-trf-excellent-scheme-affine-cover]: $W$ is excellent. Also $q$ is proper, being a base change of $g$, by [lem-kun-proper-stability]. Its restriction $q_W=qj$ to the closed subscheme $W$ is proper by [lem-weil-pbc-closed-immersion-proper].",
+   "uses": [
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-excellent-scheme-affine-cover",
+    "lem-kun-proper-stability",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WL (lemma-base-change-finite), 01WK (lemma-composition-finite), 035C (lemma-closed-immersion-finite), 01W2 (lemma-base-change-proper), 01W5 (lemma-closed-immersion-proper); more-algebra.tex Tag 07QU"
+   }
+  },
+  {
+   "text": "Take $n:X_1=W^\\nu\\to W$, the normalization in $E=\\kappa(W)$ [def-sc-normalization]. On every nonempty affine $\\operatorname{Spec}B\\subseteq W$, $B$ is an excellent domain. Apply [lem-exc-quasi-excellent-nagata], take the prime $(0)$ in [def-weil-pbc-nagata-ring], and use [def-weil-pbc-japanese-domain] with the degree-one extension $E/E$. The integral closure $B^\\nu$ is finite over $B$. It is a domain with fraction field $E$ by [lem-weil-pbc-integral-closure-finite-extension-normal]. Consequently $n$ is finite and dominant; $X_1$ is integral, and it is excellent: the finite $B$-algebras $B^\\nu$ are excellent by [lem-exc-finite-type-localization-excellent], and the charts $\\operatorname{Spec}B^\\nu$ cover $X_1$ [lem-trf-excellent-scheme-affine-cover]. Set $c=p_Wn$ and $f=q_Wn$. The composition theorem [lem-trf-finite-radicial-basechange] makes $c$ finite. The maps $n$ and $c$ are proper by [lem-weil-pbc-finite-proper], and $f$ is proper by [lem-kun-proper-stability]. Both maps are dominant: the generic point of $X_1$ maps to $z$, which maps to $x_0$ and $y_1$ by Step 4. The fibre-product identities give $gc=bf$. In particular $c$ is finite on all of $X_0$, and hence satisfies the stated generic-finiteness assertion.",
+   "uses": [
+    "def-sc-normalization",
+    "lem-exc-quasi-excellent-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-excellent-scheme-affine-cover",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-finite-proper",
+    "lem-kun-proper-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032F (definition-N), 032R (definition-nagata), 034L (lemma-integral-closure-in-normal); more-algebra.tex Tags 07QV and 07QU; morphisms.tex Tags 01WK, 01WN and 01W3"
+   }
+  },
+  {
+   "text": "Identify $V_{y_1}$ with $(X_0)_\\eta\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ by the fibre-product universal property [def-pc-fibre-product, def-pc-scheme-fibre]. The closed integral subscheme $W_{y_1}$ is a component of this fibre: on affine charts it is obtained from the minimal prime defining $W$ by inverting the nonzero elements of an affine coordinate ring of $Y_1$. That prime avoids these elements since $W\\to Y_1$ is dominant; its localization is minimal, because a smaller prime would contract to a smaller prime before localization. The localized domain still has fraction field $E$. More explicitly, over $\\operatorname{Spec}R\\subseteq Y_1$ put $T=R\\setminus\\{0\\}$ and take an affine chart $\\operatorname{Spec}B\\subseteq W$ mapping there. Dominance makes $T\\to B$ consist of nonzero elements. The two normalization rings are\n$$T^{-1}(\\overline B^{\\,E})\\quad\\text{and}\\quad\\overline{T^{-1}B}^{\\,E},$$\nand they agree by [lem-weil-pbc-integral-closure-commutes-localization]. These canonical identifications agree on overlaps by the same localization statement. Using the affine construction [def-sc-normalization], they identify $(X_1)_{y_1}$ over $W_{y_1}$ with its normalization. This proves the required generic-fibre clause, including the map to the corresponding component.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "def-sc-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0307 (lemma-integral-closure-localize); morphisms.tex Tag 035K (lemma-normalization-localization)"
+   }
+  },
+  {
+   "text": "Finally suppose the additional map $a:X_0\\to X$ is given. The composite $ac$ is proper by [lem-kun-proper-stability]. Since $c$ is proper and dominant, its closed image is all of $X_0$ [def-weil-proper-morphism]; hence $(ac)(X_1)=a(X_0)$ is dense in $X$, so $ac$ is dominant. Choose the dense open $U\\subseteq X$ on which $a$ is finite, as supplied by the generic-finiteness hypothesis. The map $c$ restricted over $a^{-1}(U)$ is finite by the base-change clause of [lem-trf-finite-radicial-basechange]; its composition with the finite $a^{-1}(U)\\to U$ is finite by the composition clause of the same node. Thus $ac$ is finite over the same dense open $U$.",
+   "uses": [
+    "lem-kun-proper-stability",
+    "def-weil-proper-morphism",
+    "lem-trf-finite-radicial-basechange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W3 (lemma-composition-proper), 01WL (lemma-base-change-finite), 01WK (lemma-composition-finite)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fin-normalization-extension",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-exc-quasi-excellent-nagata",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-finite-proper",
+  "def-kun-projective",
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-projective-morphism",
+  "lem-fin-finite-over-projective",
+  "lem-kun-proper-stability",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-closed-immersion-products",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-purely-inseparable-base-change-local-ring",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-integral-scheme",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-sc-normalization",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X, Theorem 3.5, Step 5, printed pp. 163–164. The source leaves extension to a projective alteration implicit; the affine normalization, graph, component and localization arguments here supply that detail with the cited Stacks results."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +225,52 @@
    "results": "AlgebraicGeometry.IsFinite; IsFinite.iff_isIntegralHom_and_locallyOfFiniteType; Scheme.Hom.normalizationDesc; no excellence normalization theorem",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize an excellent integral scheme in a finite purely inseparable extension of its function field and normalize a dominant component of a proper base change, giving a finite cover and projective model",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization",
+   "date": "2026-10-18",
+   "verdict": "no match: relative-normalization APIs do not state the excellent/Nagata finiteness and projective spreading assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization",
+   "results": "12 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization",
+   "date": "2026-10-18",
+   "verdict": "no match: relative-normalization APIs do not state the excellent/Nagata finiteness and projective spreading assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|excellent",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: relative-normalization APIs do not state the excellent/Nagata finiteness and projective spreading assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalization of an excellent scheme in a finite function field extension is finite and spreads the generic extension projectively",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization",
+   "date": "2026-10-18",
+   "verdict": "no match: relative-normalization APIs do not state the excellent/Nagata finiteness and projective spreading assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Nagata scheme has finite normalization in any finite extension of its function field, and finite covers of projective schemes over an affine base are projective",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.normalization",
+   "date": "2026-10-18",
+   "verdict": "no match: relative-normalization APIs do not state the excellent/Nagata finiteness and projective spreading assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Nagata|[Ee]xcellent|normalization.*[Ff]inite|[Ff]inite.*normalization",
+   "results": "11 hits: Mathlib/Algebra/EuclideanDomain/Defs.lean, Mathlib/Algebra/EuclideanDomain/Defs.lean, Mathlib/Algebra/Lie/InvariantForm.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: relative-normalization APIs do not state the excellent/Nagata finiteness and projective spreading assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-generic-smooth-boundary-preparation",
@@ -78,5 +289,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-projective-inseparable-spread-normalization",
+  "worker": "stage1",
+  "summary": "Expanded the implicit projective alteration in ILO X Theorem 3.5 Step 5 into normalization in K, finite-cover projectivity over affine S and a graph embedding over Y; selected the generic component of the base change and normalized it using excellent => Nagata on affine rings. Proved the stronger intermediate fact that c is finite, and wrote the generic-fibre identification as localization of integral closures. Reused existing nodes throughout; no new nodes. Kept the statement unchanged and removed its unused finite-type definition dependency.",
+  "blueprint": "Serves the inherited ancestry lem-trf-local-term-locality via lem-trf-generic-smooth-boundary-preparation: its ILO Expose X Theorem 3.5 Step 5 sentence extending K to Y prime and replacing X after base change. The current blueprint ancestor has no literal spreading sentence; the ILO place in blueprint.from records the actual secondary source used by the parent split.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Convert excellent affine domains to Nagata domains to obtain finite integral closures; the trace unit has no commutative-algebra substitute."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Preserve excellence on finite normalization and component charts; a general algebra tool, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Pass from finite normalization maps to proper maps; generic geometric tool absent from the trace unit."
+   },
+   {
+    "node": "lem-fin-finite-over-projective",
+    "why": "Obtain a projective model over the affine base S from a finite cover of Y; uses precisely its affine-base clause, not global projectivity over arbitrary bases."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Get properness and separatedness of the given projective Y/S for the graph construction."
+   },
+   {
+    "node": "lem-kun-proper-stability",
+    "why": "Take the proper base change of g and compose proper maps in the construction."
+   },
+   {
+    "node": "lem-weil-pbc-purely-inseparable-base-change-local-ring",
+    "why": "Apply the local tensor lemma to the field k(X_0) to select the generic component and its finite field extension."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Restrict the proper base change of g to the reduced closed component W."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-quasi-excellent-nagata",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-finite-proper",
+  "lem-fin-finite-over-projective",
+  "lem-kun-projective-implies-proper",
+  "lem-kun-proper-stability",
+  "lem-weil-pbc-purely-inseparable-base-change-local-ring",
+  "lem-weil-pbc-closed-immersion-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-89a76ae85",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-89a76ae85 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and every cited node's statement in full, together with the parent lem-trf-generic-smooth-boundary-preparation, unit sk-i-curve-zero and ILO Exposé X Thm 3.5 Step 5 (pp.163–164). The source says to extend K to a projective alteration Y′ and replace X by the schematic closure of X_K. The item makes this precise as the normalization of the dominant component, with generic fibre Nor(X_η×K). The statement is unchanged apart from dropping an unused stmt_dep. The steps are correct: Nagata/N-2 finiteness of the normalization in K; b⁻¹(η)=Spec K by localizing at A∖0; a graph closed immersion into P^N_Y for H-projectivity; a unique prime of F⊗_kK via the local tensor lemma with A=F, m=0, and the generization argument for the component; finite and proper permanence; and the generic fibre via T⁻¹ of integral closures. Edge cases checked: K=k(Y), characteristic 0, X0=Y, a nonreduced F⊗K, a nonnormal Y. No base-change morphism or coefficient category is involved (not a target). Tool uses accepted. Two repairs are in fixes/. (1) C3/E1: Step 2 used lem-fin-finite-over-projective without checking that Y→S is quasi-compact, which def-pc-projective-morphism requires. Step 2 now derives it from projective⇒proper⇒finite type and cites def-pc-projective-morphism and def-weil-finite-type-morphism. (2) C1: Steps 1, 2, 5 and 6 went from excellent affine charts to an excellent scheme, meaning every affine coordinate ring excellent as the parent fixes it, without a node. I added the statement-only node lem-trf-excellent-scheme-affine-cover (Stacks morphisms Tag 0HAB, lemma-locally-excellent (3)⇒(2), unsplit, created.item = this item); Steps 1, 2, 5 and 6 cite it, and proof_deps was recomputed. Mathlib has no notion of excellence (rg checked). LeanSearch and Loogle could not be reached from this machine and are recorded as unavailable.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

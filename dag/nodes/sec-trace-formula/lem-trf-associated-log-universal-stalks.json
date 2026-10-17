@@ -1,0 +1,80 @@
+{
+ "id": "lem-trf-associated-log-universal-stalks",
+ "kind": "statement",
+ "title": "Associated log structures: construction, universal property and geometric stalks",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], let $R$ be a commutative monoid, and let $\\beta:R\\to\\Gamma(X,\\mathcal O_X)$ be a homomorphism to the multiplicative monoid of global regular functions. For an etale $U\\to X$ [def-weil-etale-morphism] put $B_U=\\Gamma(U,\\mathcal O_U)$ and let $\\beta_U:R\\to B_U$ be restriction of $\\beta$. The presheaf of monoids $U\\mapsto R\\oplus_{\\beta_U^{-1}(B_U^\\times)}B_U^\\times$, where $(re,u)$ is identified with $(r,\\beta_U(e)u)$, has a sheafification as a sheaf of commutative monoids [def-weil-pbc-sheafification]. With structure map $[r,u]\\mapsto\\beta_U(r)u$, this sheaf $L_X(R,\\beta)$ is a log structure in the sense of [def-trf-fs-log-blowup], with canonical map $\\iota:R\\to L_X(R,\\beta)(X)$.\n\nFor every log structure $K$ on $X$, composition with $\\iota$ is a bijection from homomorphisms of log structures $L_X(R,\\beta)\\to K$ over the identity of $X$ to monoid homomorphisms $v:R\\to K(X)$ satisfying $\\alpha_K v=\\beta$. A homomorphism of log structures over the identity means a homomorphism of sheaves compatible with the maps to $\\mathcal O_X$; it fixes the canonical copy of $\\mathcal O_X^\\times$. For every geometric point $\\bar x$ [def-weil-geometric-point], writing $A=\\mathcal O_{X,\\bar x}$ [def-weil-pbc-geometric-stalks] and $E=\\beta_{\\bar x}^{-1}(A^\\times)$, the canonical map $R\\oplus_E A^\\times\\to L_X(R,\\beta)_{\\bar x}$ is an isomorphism, compatible with $R$ and $A^\\times$. For every etale $U\\to X$, restriction identifies $L_X(R,\\beta)|_U$ canonically with $L_U(R,\\beta_U)$. A chart $R\\to K(X)$ in the sense of [def-trf-fs-log-blowup] identifies $K$ with this associated log structure, so the same universal property applies to $K$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI, 1.1, printed p. 69: associated-log and chart conventions, referring to Kato (1988), section 1. Explicit construction, universal property and stalk formula are isolated here; the underlying Kato reference is WANTED in the report."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-sheafification",
+  "def-trf-fs-log-blowup",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A prelog sheaf of commutative monoids has an associated log structure with a universal property and stalk given by pushout with the units.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"smoothSheafCommRing.ι_forgetStalk_hom\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {EM : Type u_2} [inst_1 : NormedAddCommGroup EM]\\n  [inst_2 : NormedSpace 𝕜 EM] {HM : Type u_3} [inst_3 : TopologicalSpace HM] (IM : ModelWithCorners 𝕜 EM HM)\\n  {E : Type u_4} [inst_4 : NormedAddCommGroup E] [inst_5 : NormedSpace 𝕜 E] {H : Type u_5}\", \"doc\": \"For a smooth sheaf of commutative rings on a manifold with corners, the composition of the forgetful functor (removing ring structure) with the canonical inclusion from a neighborhood section to the s\"}\n  {\"name\": \"smoothSheafCommRing.ι_forgetStalk_hom_apply\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {EM : Type u_2} [inst_1 : NormedAddCommGroup EM]\\n  [inst_2 : NormedSpace 𝕜 EM] {HM : Type u_3} [inst_3 : TopologicalSpace HM] (IM : ModelWithCorners 𝕜 EM HM)\\n  {E : Type u_4} [inst_4 : NormedAddCommGroup E] [inst_5 : NormedSpace 𝕜 E] {H : Type u_5}\", \"doc\": \"The forgetful functor from the category of smooth sheaves of commutative rings to the category of types induces an isomorphism between the carrier of the stalk (obtained by forgetting the ring structu\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace\", \"type\": \"(X : AlgebraicGeometry.LocallyRingedSpace) → TopCat.Sheaf CommRingCat X.toTopCat\", \"doc\": \"The sheaf $\\\\mathcal{O}_X$ of commutative rings on the underlying topological space of a locally ringed space $X$, where every stalk is a local ring. This is the canonical sheaf associated to the local\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace\", \"module\": \"Mathlib/Geometry/RingedSpace/Basic\", \"type\": \"Type (max (u + 1) (v + 1))\", \"doc\": \"A ringed space is a topological space equipped with a sheaf of commutative rings, forming a sheafed space over the category of commutative rings. It combines a topological space with a sheaf of struct\"}\n  {\"name\": \"ModuleCat.Tilde.toStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) → (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) → ModuleCat.of R ↑M ⟶ M.tildeInModuleCat.stalk x\", \"doc\": \"For a point $ x $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, this defines the canonical morphism from the module $ M $ (viewed as an object in the category of $ R $-modules) to the stalk of the\"}\n  {\"name\": \"TopCat.Presheaf.SubmonoidPresheaf\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"{X : TopCat} → TopCat.Presheaf CommRingCat X → Type (max u_1 w)\", \"doc\": \"Given a topological space $X$ and a presheaf of commutative rings on $X$, this constructs the type of submonoid presheaves, which are presheaves assigning to each open subset of $X$ a submonoid of the\"}\n  {\"name\": \"TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"{X : TopCat} → {F : TopCat.Presheaf CommRingCat X} → F.SubmonoidPresheaf → TopCat.Presheaf CommRingCat X\", \"doc\": \"A presheaf on a topological space $X$ that assigns to each open set $U$ the localization of the submonoid $\\\\mathcal{G}(U)$ in the ring $F(U)$, with restriction maps induced by the compatibility of loc\"}\n  {\"name\": \"smoothSheafCommRing.forgetStalk\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {EM : Type u_2} →\\n      [inst_1 : NormedAddCommGroup EM] →\\n        [inst_2 : NormedSpace 𝕜 EM] →\\n          {HM : Type u_3} →\\n            [inst_3 : TopologicalSpace HM] →\\n              (IM : ModelWithCorners 𝕜 EM HM) →\\n                {E : T\", \"doc\": \"The forgetful functor from the category of smooth sheaves of commutative rings to the category of types induces an isomorphism between the carrier of the stalk (obtained by forgetting the ring structu\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreLog\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]re[Ll]og|[Ll]ogification|[Ll]og[Ss]tructure",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The associated logarithmic structure is the pushout of a prelog structure and invertible regular functions and commutes with geometric stalks.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(f : X ⟶ Y) (F : X.Presheaf C) {x y : X} (h : x ⤳ y) :\\n  (f _* F).stalkSpecializes (f.hom.map_specializes h) ≫ F.stalkPushforward _ f x =\\n    F.stalkPushforward _ f y ≫ F.stalkSpecializes h\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $X$ with values in a category $\\\\mathcal{C}$. Let $x, y \\\\in X$ be points such that $x$ specialize\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) (p : PrimeSpectrum ↑R) {Z : CommRingCat}\\n  (h :\\n    ((TopCat.Presheaf.pushforward CommRingCat (AlgebraicGeometry.Spec.topMap f)).obj\\n            (AlgebraicGeometry.Spec.structureSheaf ↑S).val).stalk\\n        p ⟶\\n      Z),\\n  CategoryTheory.CategoryStruct.comp f\\n      \", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $f: R \\\\to S$ be a ring homomorphism. Let $p$ be a prime ideal of $R$. This theorem establishes the commutativity of a diagram involving canonical maps to \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \": algebraMap R ((Spec.topMap f _* (structureSheaf S).1).stalk p) = (f ≫ StructureSheaf.toPushforwardStalk f p).hom\", \"doc\": \"The algebra map from $ R $ to the stalk of the pushforward structure sheaf at $ p $ is equal to the composition of the ring homomorphism $ f $ with the stalk map at $ p $.\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \":\\n  f ≫ StructureSheaf.toPushforwardStalk f p =\\n    StructureSheaf.toStalk R p ≫ (TopCat.Presheaf.stalkFunctor _ _).map (Spec.sheafedSpaceMap f).hom.c\", \"doc\": \"For a ring homomorphism $ f : R \\to S $ and a point $ p $ in $ \\\\operatorname{Spec}(R) $, the composition of $ f $ with the canonical morphism from $ R $ to the pushforward of the structure sheaf on $ \\\\\"}\n  {\"name\": \"TopCat.Presheaf.germ_stalkPullbackInv_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) (V : TopologicalSpace.Opens ↑X) (hV : x ∈ V) {Z : C}\\n  (h : F.stalk ((CategoryTheory.ConcreteCategory.hom f) x) ⟶ Z),\\n  CategoryTheo\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $Y$, a continuous map $f: X \\\\to Y$, and a point $x \\\\in X$, the composition of the germ map of the pullback presheaf $f^*\\\\mathcal{F}$ with the invers\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : X ⟶ Y) (x : X) : IsLocalHom (f.toHom.stalkMap x).hom\", \"doc\": \"For any morphism $f : X \\\\to Y$ between two locally ringed spaces, and for any point $x \\\\in X$, the ring homomorphism $\\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$ induced by $f$ at $x$ is a local rin\"}\n  {\"name\": \"TopCat.Presheaf.stalkPushforward.comp\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(ℱ : X.Presheaf C) (f : X ⟶ Y) (g : Y ⟶ Z) (x : X) :\\n  ℱ.stalkPushforward C (f ≫ g) x = (f _* ℱ).stalkPushforward C g (f x) ≫ ℱ.stalkPushforward C f x\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, and continuous maps $f : X \\\\to Y$ and $g : Y \\\\to Z$, the stalk pushforward of $\\\\mathcal{F}$ along the composition $g \\\\circ f$ at a point $x \\\\in\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.stalkMap.stalkSpecializes_stalkMap_assoc\", \"module\": \"Mathlib.Geometry.RingedSpace.Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C]\\n  {X Y : AlgebraicGeometry.PresheafedSpace C} (f : X ⟶ Y) {x y : ↑↑X} (h : x ⤳ y) {Z : C}\\n  (h_1 : X.presheaf.stalk x ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (Y.presheaf.stalkSpecializes ⋯)\\n   \", \"doc\": \"For presheafed spaces $X,Y$ over a category $\\\\mathcal{C}$ with colimits, a morphism $f:X\\\\to Y$, and points $x\\\\rightsquigarrow y$ in $X$, the composition of the specialization-induced map $\\\\mathcal{F}_\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fine-log-stalk-chart-spreading",
+  "date": "2026-10-18",
+  "group": "Q23"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Fine-log chart-spreading input, through lem-trf-log-regular-sharp-chart, to the monoidal-resolution ancestry of lem-trf-local-term-locality, proof (1)--(2); Travaux de Gabber VI, 3.7(a), printed p. 75, final sentence extending the restriction of a splitting to a chart.",
+   "via": [
+    "lem-trf-fine-log-stalk-chart-spreading",
+    "lem-trf-log-regular-sharp-chart",
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

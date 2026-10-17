@@ -14,9 +14,133 @@
   "def-kun-topological-krull-dimension",
   "def-trf-oriented-nearby-cycles"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an oriented geometric point $z=(x,t,c)$ of $V_f$, with $s=f(x)$ and $c:S_{(t)}\\to S_{(s)}$. Put $M=X_{(x)}\\times_{S_{(s)}}S_{(t)}$. The oriented-point cohomology theorem, applied with its second scheme equal to $S$ and $K=F[0]$, identifies $z^*R\\Psi_f(F[0])$ with $R\\Gamma(M,F|_M)$. Constant-coefficient inverse image is exact and commutes with forgetting scalars. The bounded-below evaluation/forget theorem therefore identifies the underlying abelian group of its degree-$q$ cohomology with $H^q(M,A)$, where $A$ is the underlying abelian sheaf of $F|_M$. Since $mF=0$, $mA=0$. It suffices to prove this group zero for $q>2N$.",
+   "uses": [
+    "lem-trf-oriented-point-cohomology",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-pe-left-module-derived-evaluation-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proposition 2.3, proof, printed p. 4 in the 28-page author version (the published IMRN version is cited as Proposition 3.1 by Illusie). Read online; local copy WANTED."
+   }
+  },
+  {
+   "text": "Apply the projective-local-model lemma to $f,x,N$. Write $B=S_{(s)}$ and obtain $p:P\\to B$, $y$ and $\\theta:X_{(x)}\\simeq P_{(y)}$. Use $\\theta$ to regard $M$ as $P_{(y)}\\times_B S_{(t)}$ and $A$ as a torsion abelian sheaf on this scheme. Set $C=S_{(t)}$, $Z=P\\times_B C$, let $p_C:Z\\to C$ be the projection, and let $\\tau:M\\to Z$ be the map induced by $P_{(y)}\\to P$. The model is proper with fibre dimension at most $N$, and is projective over the affine scheme $B$. All subsequent proper-base-change applications are to this model, not to $f$.",
+   "uses": [
+    "lem-trf-bounded-dimension-projective-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proposition 2.3, proof, printed p. 4 in the 28-page author version (the published IMRN version is cited as Proposition 3.1 by Illusie). Read online; local copy WANTED."
+   }
+  },
+  {
+   "text": "The strict localization $P_{(y)}$ is affine. The proper model $P$ is separated over affine $B$, so the separated-over-affine lemma makes $P$ separated as an absolute scheme. Thus the affine-source/separated-target lemma makes $P_{(y)}\\to P$ affine; its base change $\\tau$ is affine and therefore quasi-compact and quasi-separated. These are exactly the finiteness hypotheses needed for the strict-henselization stalk formula in the next step.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sc-separated-over-affine-scheme-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proposition 2.3, proof, printed p. 4 in the 28-page author version (the published IMRN version is cited as Proposition 3.1 by Illusie). Read online; local copy WANTED."
+   }
+  },
+  {
+   "text": "Put $Q=R\\tau_*A\\in D^+(Z_{\\mathrm{Et}},\\mathbf Z)$. Let $k$ be the separably closed residue field of $C$, put $Z_0=Z\\times_C\\operatorname{Spec}k$, and let $i:Z_0\\to Z$ be the closed geometric fibre and $u$ any geometric point of $Z_0$. The stalk formula gives $(\\mathcal H^aQ)_u\\simeq H^a(M\\times_Z Z_{(u)},A)$. The specialization supplies a geometric point $t_B$ of $B$. Ind-etale invariance for $B=S_{(s)}\\to S$ identifies $B_{(t_B)}$ with $C=S_{(t)}$, over $B$ with the chosen specialization. Thus $C\\to B$ is a strict-localization structural map. Apply the base-change clause of ind-etale invariance to $Z=P\\times_B C\\to P$: it identifies $Z_{(u)}$ with $P_{(v)}$, for $v$ the image of $u$. In $M\\times_Z Z_{(u)}$, the $C$-coordinate is forced to be that of $Z_{(u)}$, so the universal property of the fibre product identifies it with $P_{(y)}\\times_P P_{(v)}$. The strict-local-intersection acyclicity lemma applies because $P$ is projective over affine $B$, and gives zero for $a>0$. Thus $i^{-1}Q$ is concentrated in degree zero. Write it as $H[0]$; $H=i^{-1}\\tau_*A$ is annihilated by $m$.",
+   "uses": [
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-trf-projective-strict-local-intersection-acyclic",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proposition 2.3, proof, printed p. 4 in the 28-page author version (the published IMRN version is cited as Proposition 3.1 by Illusie). Read online; local copy WANTED. The acyclicity input is verified from Hübner–Schmidt, The tame site of a scheme, Theorem 7.10 (etale case), pp. 14–15."
+   }
+  },
+  {
+   "text": "For every degree $q$, the Leray identification gives $H^q(M,A)=H^q(Z,Q)$. The complex $Q$ is bounded below and its cohomology is annihilated by $m$, since multiplication by $m$ on $A[0]$, hence on its derived image, is zero. Apply bounded-below proper base change to $p_C:Z\\to C$ and the closed geometric point $\\operatorname{Spec}k\\to C$. Properness is preserved under base change. The strict-local global-exchange lemma converts the closed stalk of this exchange into the restriction map $H^q(Z,Q)\\to H^q(Z_0,i^{-1}Q)$: both the ring of $C$ and its residue field are strictly henselian and the residue homomorphism is local. Consequently\n$$H^q(M,A)\\cong H^q(Z_0,H).$$\nNo bounded-above hypothesis on $Q$ is used.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "thm-weil-pbc-bounded-below",
+    "lem-weil-pbc-strict-local-derived-global-exchange",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proposition 2.3, proof, printed p. 4 in the 28-page author version (the published IMRN version is cited as Proposition 3.1 by Illusie). Read online; local copy WANTED."
+   }
+  },
+  {
+   "text": "The morphism $p_C$ is proper, and its fibre $Z_0\\to\\operatorname{Spec}k$ is proper with dimension at most $N$; the latter is a residue-field extension of a fibre of $p$, and the fibre-dimension base-change lemma preserves all its local dimensions, hence their supremum. Apply the proper torsion cohomological-dimension theorem to this fibre morphism and the torsion sheaf $H$: its $R^q$ direct image vanishes for $q>2N$. Over the strictly henselian field $k$, the closed-stalk/global-cohomology identification of the strict-local global-exchange lemma (the identity base-change square) identifies that stalk with $H^q(Z_0,H)$. Thus the group in step 5 is zero for $q>2N$.",
+   "uses": [
+    "lem-kun-proper-torsion-cd-bound",
+    "lem-weil-pbc-strict-local-derived-global-exchange",
+    "lem-weil-pbc-proper-base-change",
+    "lem-sc-fibre-dimension-after-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proposition 2.3, proof, printed p. 4 in the 28-page author version (the published IMRN version is cited as Proposition 3.1 by Illusie). Read online; local copy WANTED."
+   }
+  },
+  {
+   "text": "For $q>2N$ every oriented point $z$ therefore has $z^*\\mathcal H^q(R\\Psi_f(F[0]))=0$, since point inverse image is exact. Joint conservativity of oriented geometric points, applied to the morphism from this cohomology sheaf to the zero sheaf, proves $\\mathcal H^q(R\\Psi_f(F[0]))=0$. The argument was pointwise in $x,t,c$ and used only local finite type of $f$ and the given uniform fibre bound; it imposes no quasi-compactness, constructibility, or invertibility condition.",
+   "uses": [
+    "lem-trf-oriented-product-points-conservative",
+    "def-trf-oriented-nearby-cycles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proposition 2.3, proof, printed p. 4 in the 28-page author version (the published IMRN version is cited as Proposition 3.1 by Illusie). Read online; local copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-oriented-nearby-cycles",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-proper-morphism",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-trf-bounded-dimension-projective-local-model",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-trf-oriented-point-cohomology",
+  "lem-trf-oriented-product-points-conservative",
+  "lem-trf-projective-strict-local-intersection-acyclic",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strict-local-derived-global-exchange",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "thm-weil-pbc-bounded-below"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+  "place": "Gabber proof of Proposition 2.3 (author version), expanded with the existing bounded-below and coefficient-forgetting interfaces; source read online, local copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -101,10 +225,45 @@
    "results": "{\"t\": \"2026-10-17T15:50:48Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct images of a sheaf on a strict localization vanish above twice the relative fibre dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\"], \"digest\": \"5a08632f8d93fcdc\"}",
    "date": "2026-10-17",
    "verdict": "no match: read current hits; these are general derived-category bounds, group cohomology, affine-limit section vanishing or bibliography entries, not nearby-cycle cohomological dimension"
+  },
+  {
+   "tool": "grep",
+   "query": "nearbyCycles|vanishingTopos|cohomologicalDimension",
+   "results": "{\"t\": \"2026-10-17T16:10:32Z\", \"tool\": \"grep\", \"query\": \"nearbyCycles|vanishingTopos|cohomologicalDimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned declarations; none states this geometric existence or etale acyclicity assertion, including as a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nearby cycle higher direct images vanish above twice relative dimension for torsion etale sheaves",
+   "results": "{\"t\": \"2026-10-17T16:10:32Z\", \"tool\": \"leansearch\", \"query\": \"Nearby cycle higher direct images vanish above twice relative dimension for torsion etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.etalePretopology\"], \"digest\": \"9a6e75d7a4920cd0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned declarations; none states this geometric existence or etale acyclicity assertion, including as a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nearby\"",
+   "results": "{\"t\": \"2026-10-17T16:10:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"nearby\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Units.ofNearby\", \"Units.val_ofNearby\"], \"digest\": \"bee6463c6c16739d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned declarations; none states this geometric existence or etale acyclicity assertion, including as a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gabber nearby cycles for locally finite type schemes and arbitrary torsion sheaves vanish above twice the maximum fibre dimension",
+   "results": "{\"t\": \"2026-10-17T16:10:34Z\", \"tool\": \"leanfinder\", \"query\": \"Gabber nearby cycles for locally finite type schemes and arbitrary torsion sheaves vanish above twice the maximum fibre dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"DerivedCategory.isZero_of_isGE\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"DerivedCategory.isZero_of_isLE\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.isGE_iff\"], \"digest\": \"1edf24a8dc67d9fd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned declarations; none states this geometric existence or etale acyclicity assertion, including as a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale nearby cycles of a torsion sheaf have cohomological amplitude bounded by two times fibre dimension",
+   "results": "{\"t\": \"2026-10-17T16:10:45Z\", \"tool\": \"leanfinder\", \"query\": \"Etale nearby cycles of a torsion sheaf have cohomological amplitude bounded by two times fibre dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"Algebra.etaleLocus_eq_compl_support\"], \"digest\": \"2cf2b5dd77a0ad67\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned declarations; none states this geometric existence or etale acyclicity assertion, including as a one-line specialization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-gabber-strict-local-torsion-bound",
@@ -127,5 +286,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-gabber-nearby-cycle-dimension-bound",
+  "worker": "stage1",
+  "summary": "Preserved the full statement of Illusie Theorem 1.14. Expanded Gabber's proof from Orgogozo Proposition 2.3: projective local model, Artin strict-local intersections, proper base change, and the proper torsion cohomological-dimension bound. Created exactly two geometric/acyclicity leaves, reused the bounded-below oriented stalk and coefficient interfaces, and avoided the circular strict-local nearby bound. Repair F1: replaced the unavailable original Artin citation for the acyclicity input by the verified etale formulation in Hübner–Schmidt, Theorem 7.10; statements and proof route are preserved.",
+  "blueprint": "Inherited ancestry to lem-trf-local-term-locality, normal-cone specialization paragraph: supplies the nearby-cycle boundedness used in the external-product comparison. Both new nodes state separate inputs in the cited Gabber proof.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-proper-torsion-cd-bound",
+    "why": "Generic bounded-below etale cohomology, coefficient, affine-geometry, or proper-cohomology tool used in Gabber's dimension-bound argument; the trace unit supplies no replacement."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic bounded-below etale cohomology, coefficient, affine-geometry, or proper-cohomology tool used in Gabber's dimension-bound argument; the trace unit supplies no replacement."
+   },
+   {
+    "node": "lem-pe-left-module-derived-evaluation-forget",
+    "why": "Generic bounded-below etale cohomology, coefficient, affine-geometry, or proper-cohomology tool used in Gabber's dimension-bound argument; the trace unit supplies no replacement."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic bounded-below etale cohomology, coefficient, affine-geometry, or proper-cohomology tool used in Gabber's dimension-bound argument; the trace unit supplies no replacement."
+   },
+   {
+    "node": "lem-sc-separated-over-affine-scheme-separated",
+    "why": "Generic bounded-below etale cohomology, coefficient, affine-geometry, or proper-cohomology tool used in Gabber's dimension-bound argument; the trace unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic bounded-below etale cohomology, coefficient, affine-geometry, or proper-cohomology tool used in Gabber's dimension-bound argument; the trace unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+    "why": "Generic bounded-below etale cohomology, coefficient, affine-geometry, or proper-cohomology tool used in Gabber's dimension-bound argument; the trace unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "why": "Generic bounded-below etale cohomology, coefficient, affine-geometry, or proper-cohomology tool used in Gabber's dimension-bound argument; the trace unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic bounded-below etale cohomology, coefficient, affine-geometry, or proper-cohomology tool used in Gabber's dimension-bound argument; the trace unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic bounded-below etale cohomology, coefficient, affine-geometry, or proper-cohomology tool used in Gabber's dimension-bound argument; the trace unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-strict-local-derived-global-exchange",
+    "why": "Generic bounded-below etale cohomology, coefficient, affine-geometry, or proper-cohomology tool used in Gabber's dimension-bound argument; the trace unit supplies no replacement."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic bounded-below etale cohomology, coefficient, affine-geometry, or proper-cohomology tool used in Gabber's dimension-bound argument; the trace unit supplies no replacement."
+   },
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "Generic bounded-below etale cohomology, coefficient, affine-geometry, or proper-cohomology tool used in Gabber's dimension-bound argument; the trace unit supplies no replacement."
+   },
+   {
+    "node": "thm-weil-pbc-bounded-below",
+    "why": "Generic bounded-below etale cohomology, coefficient, affine-geometry, or proper-cohomology tool used in Gabber's dimension-bound argument; the trace unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strict-local-derived-global-exchange",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "thm-weil-pbc-bounded-below"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-56630f980",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-56630f980 (reviewer sub-agent of L); spot-checked: PASS with no fixes. I read the item, its 7 steps, both new nodes and the statement of every cited node. Caveat: the network is blocked for reviewers, so I could not open the online sources (Illusie 1.14, Orgogozo Prop. 2.3, Hübner–Schmidt 7.10), and the local literature (ILO Gabber volume, Bhatt–Scholze) has no substitute. I checked those statements mathematically myself instead. I read Stacks 095U locally (lemma-cohomological-dimension-proper) and it matches lem-kun-proper-torsion-cd-bound with no extra hypotheses. Steps: (1) the oriented-point cohomology node with Y=S, g=id gives RΓ(X_(x)×_{S_(s)}S_(t)), and the two lem-pe lemmas handle the change of scalars. (3) τ is affine, hence qcqs, because P is separated over affine B. (4) The stalk formula and ind-étale invariance, including its base-change clause, give Z_(u)≅P_(v) and M×_Z Z_(u)=P_(y)×_P P_(v); the acyclicity node then makes i^{-1}Q=H[0]. (5) Leray and bounded-below proper base change apply because Q is in D^+ with m-torsion cohomology and p_C is proper; the strict-local exchange with C→k gives H^q(M)=H^q(Z_0,H). (6) Z_0 is the geometric fibre over the image of C's closed point, which is generally not B's closed point, so node 1 needs the bound on every fibre, and it has it; 095U then gives vanishing for q>2N. (7) Joint conservativity finishes. New node 1 is true: base change to B, a quasi-finite map to A^d_B with d≤N, ZMT (Stacks 05K0), and a finite extension to P^d_B through the integral closure. The naive closure in P^n_B would not keep the bound, so the later split must use the finite extension. New node 2 is Artin's theorem on joins; P projective over affine B gives a common affine neighbourhood, and the empty and x=u cases hold. Neither new node restates the item or duplicates an existing node; I read the candidates found by rg. There is no cycle. I accept all 14 declared tool uses as generic black boxes (proper base change, stalk formula, strict-local exchange, Leray, 095U, fibre dimension, affine/separated permanence, stalk conservativity, the lem-pe coefficient lemmas), though their shared 'why' text is boilerplate. Minor: the report mentions a citations.json that is not among the delivered files."
  }
 }
