@@ -225,6 +225,7 @@ lemma mono_id_sub_sequenceShift [HasColimitsOfShape ℕ C] [HasExactColimitsOfSh
   refine biproduct.hom_ext' _ _ fun i ↦ ?_
   simp [partialSumSubShiftNatTrans, partialSumSubShift, Preadditive.comp_sub,
     Preadditive.sub_comp]
+  exact Category.comp_id _
 
 variable {c : Cocone F} (hc : IsColimit c)
 

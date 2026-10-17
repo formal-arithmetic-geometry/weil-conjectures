@@ -79,6 +79,7 @@ lemma isGE_reductionModIdeal_obj {X : Scheme.{u}} {ϖ : Λ} (hϖ : ϖ ∈ nonZer
     exact _root_.DerivedCategory.TStructure.t.isGE_shift _ a 1 (a - 1) (by lia)
   exact _root_.DerivedCategory.TStructure.t.isGE₂ _ hT (a - 1) h₁ h₃
 
+set_option maxHeartbeats 2000000 in
 /-- **The reductions of the projection map are isomorphisms.** Let `Λ` be a principal ideal
 domain, `ϖ` a nonzerodivisor and `N ≠ 0` an integer lying in `(ϖⁿ)`. For `f` admitting a
 compactification, `K` bounded of finite Tor amplitude and `L` bounded constructible, the

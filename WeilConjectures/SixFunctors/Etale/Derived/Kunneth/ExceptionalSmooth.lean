@@ -53,6 +53,7 @@ lemma boundedConstructibleFiniteTor_of_constructibleFiniteTor {X : Scheme.{u}}
   exact ⟨hbc, a, b, h⟩
 
 -- the kernel check of the composite unfolds the twist-and-shift functors
+-- the kernel check of the composite isomorphism unfolds the derived tensor product
 set_option maxHeartbeats 1000000 in
 /-- Smooth purity in tensor form: `Rf^! K ≅ Lf^* K ⊗ᴸ Λ_X(d)[2d]`. -/
 lemma nonempty_iso_rightDerivedUpperShriek_tensor_tateObject [HasTateTwist.IsNormalized Λ]
@@ -70,6 +71,8 @@ lemma nonempty_iso_rightDerivedUpperShriek_tensor_tateObject [HasTateTwist.IsNor
     ((derivedTensor _ X).obj _).mapIso (twistShiftConstantComplexIso Λ X d)⟩
 
 -- the kernel check unfolds the derived tensor product against the monoidal structure
+set_option maxHeartbeats 4000000 in
+-- the kernel check of the composite isomorphism unfolds the derived tensor product
 set_option maxHeartbeats 4000000 in
 /-- Blueprint `prop-trf-exceptional-kunneth`: Exceptional Künneth; the `α` map, for smooth
 morphisms.
