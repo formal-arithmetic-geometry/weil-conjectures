@@ -159,7 +159,7 @@ noncomputable abbrev leftDerivedComparisonUpperStarCompUpperStarIso :
 `AlgebraicGeometry.ProEtale.leftDerivedComparisonUpperStarCompUpperStarIso`, is an isomorphism
 for a bounded below complex `M` of étale sheaves. -/
 lemma isIso_mateEquiv_leftDerivedComparisonUpperStarCompUpperStarIso_app
-    [QuasiCompact g] [QuasiSeparated g]
+    [Etale.HasCohomologyContinuity A] [QuasiCompact g] [QuasiSeparated g]
     (M : DerivedCategory (Sheaf Z.smallEtaleTopology A))
     (hM : DerivedCategory.TStructure.t.plus M) :
     IsIso ((mateEquiv (Etale.derivedUpperStarLowerStarAdjunction A g)
@@ -205,7 +205,7 @@ Let `g` be quasi-compact and quasi-separated, `M` a bounded below complex of ét
 étale projection map `Rg_* M ⊗ᴸ L ⟶ Rg_*(M ⊗ᴸ Lg^* L)` is an isomorphism, so is the pro-étale
 projection map at `(Lν^* M, Lν^* L)`. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived
-    [QuasiCompact g] [QuasiSeparated g]
+    [Etale.HasCohomologyContinuity A] [QuasiCompact g] [QuasiSeparated g]
     (M : DerivedCategory (Sheaf Z.smallEtaleTopology A))
     (L : DerivedCategory (Sheaf Y.smallEtaleTopology A))
     (hM : DerivedCategory.TStructure.t.plus M)

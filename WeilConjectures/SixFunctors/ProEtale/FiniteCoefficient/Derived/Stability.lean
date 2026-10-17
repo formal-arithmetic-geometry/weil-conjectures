@@ -81,6 +81,7 @@ namespace ProEtale
 section Comparison
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [Etale.HasCohomologyContinuity A]
   {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
 
 /-- For `f` quasi-compact and quasi-separated and a bounded below complex `K'` of étale sheaves,

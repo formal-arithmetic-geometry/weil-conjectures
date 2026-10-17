@@ -98,6 +98,7 @@ end OpenImmersion
 section LowerStar
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [QuasiCompact g] [QuasiSeparated g]
+  [Etale.HasCohomologyContinuity A]
 
 /-- Blueprint `sk-prop-sf-comparison`, the comparison direct image, on the unbounded derived
 categories restricted to bounded below complexes: for a quasi-compact quasi-separated `g`,
@@ -122,7 +123,7 @@ end LowerStar
 
 section LowerShriek
 
-variable {X Y : Scheme.{u}}
+variable {X Y : Scheme.{u}} [Etale.HasCohomologyContinuity A]
 
 /-- The compact-support comparison for a compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`:
 `Rf_!^{proét}(c) ∘ ν_X^* ≅ ν_Y^* ∘ Rf_!^{ét}(c)` as functors `D⁺(X_ét) ⥤ D(Y_proét)`. It is

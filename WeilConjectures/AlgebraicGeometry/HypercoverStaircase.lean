@@ -287,9 +287,8 @@ lemma exists_refinement_secComplex_d_eq (hL : LocallyExactPos L)
       0 y (fun _ _ _ hp ↦ absurd hp (by omega)) w hy
     refine ⟨U, 𝟙 _, v, ?_⟩
     rw [hv, secMap_f]
-    simp only [resMap, NatTrans.id_app, op_id, CategoryTheory.Functor.map_id,
-      ConcreteCategory.id_apply]
-    rfl
+    change w = ConcreteCategory.hom (F.obj.map (𝟙 (op (U.simplicial _⦋0 + 1⦌)))) w
+    rw [F.obj.map_id, ConcreteCategory.id_apply]
   | succ m =>
     have hrow : ∀ {V : FiniteSplitEtaleHypercover X} (f : V.Refinement U),
         totMapF L f (m + 2) ((U.totRow ι hι).f (m + 2) w) =

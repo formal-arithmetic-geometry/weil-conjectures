@@ -215,7 +215,8 @@ end Acyclicity
 `f : U ⟶ V` be quasi-compact and quasi-separated, `I` an injective étale sheaf on `U` and `W` an
 object of the affine pro-étale site of `V`. Then the higher derived sections of `ν_U^* I` over
 the quasi-compact quasi-separated pro-étale `U`-scheme `U ×_V W` vanish. -/
-theorem isZero_rightDerived_sectionsFunctor_comparisonUpperStar_obj {U V : Scheme.{u}}
+theorem isZero_rightDerived_sectionsFunctor_comparisonUpperStar_obj
+    [Etale.HasCohomologyContinuity A] {U V : Scheme.{u}}
     (f : U ⟶ V) [QuasiCompact f] [QuasiSeparated f] (I : Sheaf U.smallEtaleTopology A)
     [Injective I] (W : V.AffineProEt) (q : ℕ) :
     IsZero (((sectionsFunctor A ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj
@@ -246,7 +247,8 @@ theorem isZero_rightDerived_sectionsFunctor_comparisonUpperStar_obj {U V : Schem
 
 /-- For `f` quasi-compact and quasi-separated, the comparison pullback `ν_U^* I` of an injective
 étale sheaf is acyclic for the pro-étale direct image `f_*`. -/
-theorem rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective {U V : Scheme.{u}}
+theorem rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective
+    [Etale.HasCohomologyContinuity A] {U V : Scheme.{u}}
     (f : U ⟶ V) [QuasiCompact f] [QuasiSeparated f] (I : Sheaf U.smallEtaleTopology A)
     [Injective I] :
     (ProEtale.lowerStar A f).rightAcyclic ((comparisonUpperStar A U).obj I) :=

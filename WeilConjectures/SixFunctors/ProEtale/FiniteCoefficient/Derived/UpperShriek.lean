@@ -199,6 +199,7 @@ section Adjunction
 pullback via K-flat resolutions, hence the closed symmetric monoidal structure on `A`. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [Etale.HasBoundedBelowUpperShriek A f]
+  [Etale.HasCohomologyContinuity A]
 
 variable {A}
 

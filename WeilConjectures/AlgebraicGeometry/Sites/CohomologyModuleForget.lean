@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuityDefs
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyModules
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
+public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidal
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Étale cohomology of sheaves of modules and of their underlying abelian sheaves
@@ -92,18 +94,19 @@ lemma isZero_rightDerived_sectionsFunctor_iff_forget₂ {X : Scheme.{u}}
   let J := injectiveResolution M
   have hacyc (n : ℕ) : (sectionsFunctor AddCommGrpCat.{u + 1} X).rightAcyclic
       (G.obj (J.cocomplex.X n)) := fun m ↦
-    (Sheaf.subsingleton_H_iff_isZero_rightDerived _
+    (Sheaf.subsingleton_H_iff_isZero_rightDerived X.smallEtaleTopology
       (MorphismProperty.Over.mkIdTerminal _ X) (m + 1) _).1
-      (Sheaf.subsingleton_H_forget₂_of_injective Λ (J.cocomplex.X n) m)
+      (Sheaf.subsingleton_H_forget₂_of_injective.{u + 1, u + 1, u, u + 1} Λ (J.cocomplex.X n) m)
   let ι' : (CochainComplex.single₀ _).obj (G.obj M) ⟶
       (G.mapHomologicalComplex _).obj J.cocomplex :=
-    (G.singleMapHomologicalComplex (ComplexShape.up ℕ) 0).inv.app M ≫
+    (HomologicalComplex.singleMapHomologicalComplex G (ComplexShape.up ℕ) 0).inv.app M ≫
       (G.mapHomologicalComplex _).map J.ι
   have : QuasiIso ι' := by
     dsimp only [ι']
     infer_instance
   rw [(J.isoRightDerivedObj _ q).isZero_iff,
     ((sectionsFunctor AddCommGrpCat.{u + 1} X).rightDerivedObjIsoOfResolution ι' hacyc q).isZero_iff,
+    HomologicalComplex.homologyFunctor_obj,
     ← HomologicalComplex.exactAt_iff_isZero_homology,
     ← HomologicalComplex.exactAt_iff_isZero_homology]
   exact ((((sectionsFunctor (ModuleCat.{u + 1} Λ) X).mapHomologicalComplex _).obj
