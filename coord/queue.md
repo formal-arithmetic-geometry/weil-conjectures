@@ -1,6 +1,6 @@
 # Work queue
 
-25 items; claim with `tools/claim.py next <group> [--stage N]`.
+24 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (25)
+## Stage 3: modules to prove (24)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -29,16 +29,15 @@
 | `WeilConjectures.WeilSheaf.AffineLineCohomology` | 8 | 1 | proof |
 | `WeilConjectures.WeilSheaf.ArtinSchreierDual` | 8 | 1 | proof |
 | `WeilConjectures.WeilSheaf.TraceIsomorphism` | 9 | 1 | proof |
-| `Sheaf.CategoryTheory.AlphaCompactClassSmallClosed` | 10 | 1 | proof |
-| `Sheaf.CategoryTheory.GrothendieckDerivedPerfectWellGenerators` | 10 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy` | 10 | 1 | proof |
-| `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary` | 11 | 2 | proof |
 | `WeilConjectures.WeilSheaf.FourierInversion.Composite` | 11 | 1 | proof |
 | `WeilConjectures.WeilSheaf.FourierInversion.Delta` | 11 | 1 | proof |
+| `Sheaf.Paper.IntegralResidueTensorRouteDescent` | 12 | 1 | proof |
+| `Sheaf.Paper.IntegralResidueTensorRouteKFlat` | 12 | 1 | proof |
 | `WeilConjectures.WeilSheaf.FourierInversion.UpperStar` | 12 | 3 | proof |
 | `Sheaf.Paper.IntegralResidueTensorPullCounitCore` | 14 | 1 | proof |
 
-## Stage 3: waiting for statements of proof dependencies (17)
+## Stage 3: waiting for statements of proof dependencies (15)
 
 Not items: a node in the proof dependencies has no Lean statement yet (the human, 2026-10-17).
 
@@ -52,12 +51,10 @@ Not items: a node in the proof dependencies has no Lean statement yet (the human
 | `WeilConjectures.DeligneLaumon.Reduction.RealSheaves` | 4 | 2 | `def-wf-fundamental-representation` |
 | `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | 4 | 1 | `thm-sf-ctf-stability` |
 | `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound` | 5 | 1 | `det-ambient-ind-derived-sums` |
-| `WeilConjectures.AlgebraicGeometry.Bertini` | 5 | 1 | `lem-zl-bertini-finite-field-descent` |
 | `WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy` | 5 | 7 | `cor-rp-euler-product` |
 | `WeilConjectures.DeligneLaumon.AffineLine.LocalDuality` | 6 | 2 | `cor-coef-verdier-weil-equivariance` |
 | `WeilConjectures.DeligneLaumon.AffineLine.DegreeOne` | 7 | 1 | `d-real-cohom` |
 | `WeilConjectures.DeligneLaumon.AffineLine.Exactness` | 7 | 1 | `lem-dl-a1-constructible-fibres-exact` |
-| `WeilConjectures.SixFunctors.Etale.Perverse.Operations` | 7 | 6 | `cor-sf-duality-pullback` |
 | `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | `def-wf-fundamental-representation` |
 | `WeilConjectures.DeligneLaumon.AffineLine.Perverse` | 9 | 4 | `lem-a1-qbar-open-closed-cohomology` |
 | `WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension` | 9 | 3 | `prop-weil-operations` |
