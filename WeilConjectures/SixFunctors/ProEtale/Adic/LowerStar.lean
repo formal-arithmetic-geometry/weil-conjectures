@@ -70,12 +70,16 @@ constructibility for open immersions (Deligne's dévissage) and the proper case.
 
 ## Missing infrastructure
 
-The statement left with `sorry` needs, beyond this dévissage: the recollement for closed
-immersions on the pro-étale site (exactness of `i_*`, which rests on lifting weakly étale maps
-along henselian pairs), so as to reduce a constructible sheaf to lisse sheaves on strata; and,
-for the lisse case, a comparison of `ℚ̄_ℓ,X`-modules with `ℓ`-adic towers of torsion étale
-sheaves (lattices, `Rf_*` commuting with `R lim` and with `⊗ ℚ`) together with the finiteness
-theorem for torsion étale coefficients
+The reduction of the statement left with `sorry` to lisse sheaves, by noetherian induction and
+the recollement for closed immersions, is
+`AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine_of_isAdicLisseSheaf`
+(`WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarDevissage`). The lisse case needs a
+comparison of `ℚ̄_ℓ,X`-modules with `ℓ`-adic towers of torsion étale sheaves (`𝒪_E`-lattices in
+lisse sheaves, the pro-étale sheaves `𝒪_{E,X}` and `ℚ̄_ℓ,X = colim_E 𝒪_{E,X}[1/ℓ]` of
+locally finite functions, `Rf_*` commuting with `R lim` by repleteness and with `⊗ ℚ`, and the
+`ℓ`-adic constructibility of a derived limit of constructible torsion complexes), together with
+the comparison `ν^*` of étale and pro-étale direct images and the finiteness theorem for torsion
+étale coefficients
 (`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`).
 -/
 

@@ -126,6 +126,17 @@ lemma homEquiv_apply (D : Type u) [CommRing D] [Algebra A D] [Algebra.IndEtale A
     (ψ : D →ₐ[A] ClosedLift A C) : homEquiv D ψ = (toAlgHom A C).comp ψ :=
   rfl
 
+/-- The lift `H_A(φ) : H_A(C̄) ⟶ H_A(C̄')` of an `A`-algebra map `φ : C̄ ⟶ C̄'`
+(blueprint `def-exc-ind-etale-closed-lift`, maps of the construction): the unique map lifting
+`H_A(C̄) ⟶ C̄ ⟶ C̄'`. -/
+noncomputable def map {C' : Type u} [CommRing C'] [Algebra A C'] (φ : C →ₐ[A] C') :
+    ClosedLift A C →ₐ[A] ClosedLift A C' :=
+  (homEquiv (ClosedLift A C)).symm (φ.comp (toAlgHom A C))
+
+lemma toAlgHom_comp_map {C' : Type u} [CommRing C'] [Algebra A C'] (φ : C →ₐ[A] C') :
+    (toAlgHom A C').comp (map φ) = φ.comp (toAlgHom A C) :=
+  (homEquiv (ClosedLift A C)).apply_symm_apply _
+
 variable (I : Ideal A) [Algebra (A ⧸ I) C] [IsScalarTower A (A ⧸ I) C]
 
 /-- For an `A ⧸ I`-algebra `C̄`, `A`-algebra maps `D → C̄` are the `A ⧸ I`-algebra maps
@@ -164,6 +175,75 @@ lemma homEquivReduction_apply_mk (D : Type u) [CommRing D] [Algebra A D]
     [Algebra.IndEtale A D] (ψ : D →ₐ[A] ClosedLift A C) (d : D) :
     homEquivReduction I D ψ (Ideal.Quotient.mk _ d) = toAlgHom A C (ψ d) :=
   rfl
+
+/-! ### Retractions of faithfully flat ind-étale covers -/
+
+attribute [local instance] Algebra.TensorProduct.rightAlgebra in
+/-- Base change of an ind-étale algebra is ind-étale. -/
+lemma indEtale_tensorProduct (R S T : Type u) [CommRing R] [CommRing S] [CommRing T]
+    [Algebra R S] [Algebra R T] [Algebra.IndEtale R T] :
+    Algebra.IndEtale S (TensorProduct R S T) :=
+  (RingHom.IndEtale.algebraMap_iff _ _).mp (RingHom.IndEtale.isStableUnderBaseChange R T S
+    (TensorProduct R S T) ((RingHom.IndEtale.algebraMap_iff _ _).mpr inferInstance))
+
+/-- If every faithfully flat ind-étale `C̄`-algebra has a retraction (e.g. `C̄` is
+w-contractible), then every faithfully flat ind-étale `H_A(C̄)`-algebra `T` has a retraction:
+reduce `T` along `H_A(C̄) ⟶ C̄`, retract there, and lift the resulting map `T ⟶ C̄` to `H_A(C̄)`
+by the universal property `Algebra.ClosedLift.homEquiv`; it is a retraction by uniqueness. -/
+theorem exists_retraction (I : Ideal A) [Algebra (A ⧸ I) C] [IsScalarTower A (A ⧸ I) C]
+    [Algebra.IndEtale (A ⧸ I) C]
+    (hC : ∀ (T : Type u) [CommRing T] [Algebra C T] [Algebra.IndEtale C T]
+      [Module.FaithfullyFlat C T], ∃ f : T →+* C, f.comp (algebraMap C T) = RingHom.id C)
+    (T : Type u) [CommRing T] [Algebra (ClosedLift A C) T] [Algebra.IndEtale (ClosedLift A C) T]
+    [Module.FaithfullyFlat (ClosedLift A C) T] :
+    ∃ f : T →+* ClosedLift A C, f.comp (algebraMap (ClosedLift A C) T) = RingHom.id _ := by
+  let H := ClosedLift A C
+  let : Algebra H C := (toAlgHom A C).toRingHom.toAlgebra
+  have : Algebra.IndEtale C (TensorProduct H C T) := indEtale_tensorProduct H C T
+  obtain ⟨r, hr⟩ := hC (TensorProduct H C T)
+  let : Algebra A T := Algebra.compHom T (algebraMap A H)
+  have : IsScalarTower A H T := .of_algebraMap_eq' rfl
+  have : Algebra.IndEtale A T := Algebra.IndEtale.trans A H T
+  have key : ∀ h : H, r ((1 : C) ⊗ₜ[H] algebraMap H T h) = toAlgHom A C h := by
+    intro h
+    rw [Algebra.algebraMap_eq_smul_one, ← TensorProduct.smul_tmul, Algebra.smul_def, mul_one]
+    exact RingHom.congr_fun hr (toAlgHom A C h)
+  let f₀ : T →ₐ[A] C :=
+    { toRingHom := r.comp (Algebra.TensorProduct.includeRight : T →ₐ[H] TensorProduct H C T)
+      commutes' := fun a ↦ by
+        change r ((1 : C) ⊗ₜ[H] algebraMap H T (algebraMap A H a)) = _
+        rw [key, AlgHom.commutes] }
+  refine ⟨((homEquiv T).symm f₀).toRingHom, ?_⟩
+  have : ((homEquiv T).symm f₀).comp (IsScalarTower.toAlgHom A H T) = AlgHom.id A H := by
+    apply (homEquiv H).injective
+    ext h
+    simp only [homEquiv_apply, AlgHom.comp_apply, IsScalarTower.coe_toAlgHom']
+    have := DFunLike.congr_fun ((homEquiv T).apply_symm_apply f₀) (algebraMap H T h)
+    rw [homEquiv_apply, AlgHom.comp_apply] at this
+    rw [this]
+    exact key h
+  exact congrArg AlgHom.toRingHom this
+
+/-- Every nonempty clopen subset of `Spec H_A(C̄)` meets the closed fibre `Spec C̄`: a nonzero
+idempotent `e` of `H_A(C̄)` has nonzero image in `C̄`, since otherwise `1 - e` would be a unit
+(`Algebra.ClosedLift.isUnit_of_isUnit_toAlgHom`). -/
+theorem exists_comap_mem_of_isClopen {s : Set (PrimeSpectrum (ClosedLift A C))} (hs : IsClopen s)
+    (hne : s.Nonempty) :
+    ∃ q : PrimeSpectrum C, PrimeSpectrum.comap (toAlgHom A C : ClosedLift A C →+* C) q ∈ s := by
+  obtain ⟨e, he, rfl⟩ := PrimeSpectrum.isClopen_iff.1 hs
+  have hē : ¬ IsNilpotent (toAlgHom A C e) := by
+    intro hn
+    have h0 : toAlgHom A C e = 0 := (he.map (toAlgHom A C)).eq_zero_of_isNilpotent hn
+    have hu : IsUnit (1 - e) := isUnit_of_isUnit_toAlgHom (by simp [h0])
+    have : e = 0 := by
+      have h : e * (1 - e) = 0 := by rw [mul_sub, mul_one, he.eq, sub_self]
+      simpa using hu.mul_left_eq_zero.1 h
+    obtain ⟨p, hp⟩ := hne
+    simp [this] at hp
+  have : (PrimeSpectrum.basicOpen (toAlgHom A C e)) ≠ ⊥ := by
+    rwa [Ne, PrimeSpectrum.basicOpen_eq_bot_iff]
+  obtain ⟨q, hq⟩ := (TopologicalSpace.Opens.ne_bot_iff_nonempty _).1 this
+  exact ⟨q, hq⟩
 
 /-! ### The lift as an adjoint on categories of ind-étale algebras -/
 
@@ -245,10 +325,10 @@ noncomputable def reduction : IndEtaleAlgCat A ⥤ IndEtaleAlgCat (A ⧸ I) wher
     (Algebra.TensorProduct.map (AlgHom.id (A ⧸ I) (A ⧸ I)) (algHomEquiv f))
   map_id _ := by
     apply algHomEquiv.injective
-    ext <;> rfl
+    ext; rfl
   map_comp _ _ := by
     apply algHomEquiv.injective
-    ext <;> rfl
+    ext; rfl
 
 /-- The lift `H_A(C̄)` of an ind-étale `A ⧸ I`-algebra, as an ind-étale `A`-algebra. -/
 noncomputable def closedLiftObj (C : IndEtaleAlgCat (A ⧸ I)) : IndEtaleAlgCat A :=
