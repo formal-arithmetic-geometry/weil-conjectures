@@ -17,7 +17,7 @@ The target is the explicit ordinary homotopy tensor model. -/
 
 @[expose] public section
 
-universe u
+universe v u u₁ u₂
 
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
@@ -27,6 +27,27 @@ local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+
+/-- The normalized tensor-route equation for an explicit ordinary monoidal structure.
+Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
+(blueprint: new-integral-residue-tensor-route-transport)
+
+This strictly generalizes the target by taking the ordinary monoidal structure as
+an explicit parameter. Its proof is the transport of the generic tensor-route
+factorization through the residue exchange interface and the canonical tensor
+presentation. -/
+theorem integralResidue_tensorRoute_model_transport {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (m : (f)^*⟦integralCoeff ℓ E⟧.Monoidal)
+    (hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat)
+    (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ)) :
+    letI := residueExchangePullMonoidal ℓ E f m hFlat
+    (residueExchangeUpperStar (integralCoeff ℓ E) f).map
+          ((residueExchangeTensorIso ℓ E Y).hom.app (DerivedCategory.Qh.obj P)) ≫
+        Functor.OplaxMonoidal.δ (residueExchangeUpperStar (integralCoeff ℓ E) f)
+          (DerivedCategory.Qh.obj P) (residueExchangeCoefficient ℓ E Y) ≫
+        residueExchangeTensorModelTarget ℓ E f P =
+      residueExchangeTensorModelMap ℓ E f P := by sorry
 
 /-- Compute the tensor-route against the ordinary homotopy tensor model.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
@@ -53,6 +74,9 @@ theorem integralResidue_tensorRoute_model {X Y : Scheme.{u}} (f : X ⟶ Y)
         Functor.OplaxMonoidal.δ (residueExchangeUpperStar (integralCoeff ℓ E) f)
           M (residueExchangeCoefficient ℓ E Y) ≫
         residueExchangeTensorModelTarget ℓ E f P =
-      residueExchangeTensorModelMap ℓ E f P := by sorry
+      residueExchangeTensorModelMap ℓ E f P := by
+  simpa only [] using integralResidue_tensorRoute_model_transport ℓ E f
+    (residueExchangeOrdinaryPullMonoidal ℓ E f) hFlat P
+
 
 end AlgebraicGeometry.ProEtale.CondensedRing
