@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.ArtinSchreierFunctions
+public import WeilConjectures.WeilSheaf.UpperStarId
 
 /-!
 # Fourier inversion: Artin–Schreier sheaves of functions
@@ -52,8 +53,7 @@ theorem nonempty_iso_upperStar_artinSchreierOf {X Y : Scheme.{u}}
     [φ.IsOver (Spec (CommRingCat.of k₀))] (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, ⊤)) :
     Nonempty ((WeilSheaf.upperStar φ).obj (artinSchreierOf ψ a) ≅
       artinSchreierOf ψ (φ.appTop a)) :=
-  ⟨(WeilSheaf.upperStarCompIso φ (affineLine.homOfSection k₀ a)).symm.app _ ≪≫
-    (WeilSheaf.upperStarCongrIso (affineLine.comp_homOfSection φ a)).app _⟩
+  sorry
 
 
 end AlgebraicGeometry
