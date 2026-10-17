@@ -75,21 +75,15 @@
    }
   },
   {
-   "text": "We first record the sheaf calculation needed for clause (2), on both sites. For a complementary open/closed pair j,i, restriction is exact and commutes with ordinary tensor: on the etale site use the exact module inverse image, and on the pro-etale site use the identified-constant-coefficient operations; the algebraic inverse-image tensor comparison applies to both. The etale open-closed sequence is [lem-weil-pbc-open-closed-short-exact], and its pro-etale counterpart, exact i_*, and all four restriction identities are [lem-weil-pbc-proetale-ringed-open-closed]. In the etale case the open unit, closed counit, and the two vanishing lemmas give the same identities j^*j_!=1, i^*i_*=1, i^*j_!=0, j^*i_*=0; the maps are module-linear because their underlying adjunction maps are. Exactness of i_* in this case is explicitly part of [lem-cbc-open-closed-recollement]. On either site the open-closed sequence shows that a sheaf with both restrictions zero is zero. For any short exact sequence, tensor with H and form its homology objects (including the outer kernel and cokernel). If j^*H and i^*H are flat, exactness and the tensor comparison imply that each such homology object restricts to zero on both sides, hence is zero. Thus tensor with H preserves short exact sequences: flatness can be tested on this open/closed pair. In particular j_! and i_* preserve flat sheaves, using their restriction identities. This argument works for all module sheaves, including nonclassical pro-etale test sheaves. We also need to compare scheme structures, rather than identify a topologically open immersion with an open immersion of schemes. If h:T→Y is a surjective closed immersion, its open complement is empty. The same sequences give an isomorphism of the unit H→h_*h^*H, and the closed counit gives h^*h_*≅1. Thus h^* and h_* are inverse equivalences for ordinary module sheaves, and a constant A-module sheaf pulls back to the same constant model. Finite local constancy is reflected by h^*: on the etale site h is a universal homeomorphism by [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism], so [prop-weil-pbc-universal-homeomorphism-topos] identifies the topoi, constants and covering epimorphisms. On the pro-etale site, apply [new-lem-weil-pbc-proetale-surjective-closed-cover-refinement] to a trivializing cover of T. It gives a cover B of Y whose pullback B×_Y T refines that cover. On each B, the unit and counit just proved for the surjective closed immersion B×_Y T→B identify H|_B with the constant module model on B, since their pullbacks are isomorphic. This proves reflection with the same finite projective models; the empty complement is quasi-compact even when B is not Noetherian.",
+   "text": "Apply [lem-sfb-open-closed-flatness] to the complementary open/closed pairs on either site. Its hypotheses hold by step 1, and it states both the flatness criterion and preservation by $j_!$ and $i_*$. The identities $j^*j_!\\cong1$, $i^*i_*\\cong1$, $i^*j_!=0$ and $j^*i_*=0$ are supplied on the pro-étale site by [lem-weil-pbc-proetale-ringed-open-closed] and on the étale site by the open unit, closed counit and the two vanishing statements cited here. For any surjective closed immersion $h:T\\to Y$, apply [lem-sfb-surjective-closed-module-invariance]: its actual unit gives $H\\cong h_*h^*H$, its counit gives $h^*h_*N\\cong N$, and finite local constancy, including finite projective local models, is preserved and reflected. This application requires neither Noetherianity of $Y$ nor a nilpotence bound. These are ordinary module sheaves; none of these uses a stalk-conservativity assertion on the pro-étale site. The étale identities are module-linear: scalar multiplication commutes with the adjunction maps by naturality, and the vanishing objects have the unique module structure.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-    "lem-weil-pbc-open-closed-short-exact",
+    "lem-sfb-open-closed-flatness",
+    "lem-sfb-surjective-closed-module-invariance",
     "lem-weil-pbc-proetale-ringed-open-closed",
     "lem-weil-pbc-extension-by-zero-unit-iso",
     "prop-openclosed-lowerstar-fully-faithful",
     "lemma-openclosed-vanishing-lowershriek",
-    "lemma-openclosed-vanishing-lowerstar",
-    "lem-cbc-open-closed-recollement",
-    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-    "prop-weil-pbc-universal-homeomorphism-topos",
-    "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement"
+    "lemma-openclosed-vanishing-lowerstar"
    ],
    "elementary": false,
    "source": {
@@ -116,27 +110,51 @@
    }
   },
   {
-   "text": "First verify closed/open interchange on either site. In a cartesian square with closed g:Z→X, open u:W→X, open v:Z_W→Z and closed h:Z_W→W, the restriction formula for direct image gives u^*g_*v_!L≅h_*L, so open adjunction gives a map u_!h_*L→g_*v_!L. Pulling back by g, the open-extension base-change statements [lem-cbc-extension-zero-base-change] and [lem-cbc-proetale-extension-zero-base-change] identify the left side with v_!h^*h_*L≅v_!L; the right side is v_!L by the closed counit. The induced map is v_! of that counit and is invertible. On the open complement of Z, the right side is zero; base change for u_! identifies the left side with extension of the restriction of h_*L to W\\Z, which is zero by the open/closed vanishing identity. The exact open-closed sequence detects isomorphisms, so the map is an isomorphism. Every complement here is quasi-compact by step 1. This also identifies the definition g_*j_! using scheme-theoretic closure with u_!h_* in any open W where the immersion is closed: the closure restricted to W is that closed subscheme, since its affine defining kernel is the same quotient ideal.\nInduct on the number of ordered strata, allowing the given strata to have arbitrary locally closed subscheme structures. With no strata the open-closed sequence for the empty closed/open pair gives F=0 and the extension tower is empty. Otherwise let U be the actual open subscheme of X with underlying set S_1, and let i:C→X be the reduced induced closed subscheme on its complement, using [lem-weil-pbc-reduced-induced-closed-subscheme]. Write u:U→X for the open immersion. The immersion S_1→X factors as a surjective closed immersion h:S_1→U followed by u: in a closed-then-open factorization, the latter open contains U and the defining ideal restricts to U. Step 4 gives F|_U≅h_*L_1. The open-closed sequence is therefore 0→u_!h_*L_1→F→i_*i^*F→0. Here u_!h_*L_1≅a_{1!}L_1 by the closed/open calculation just proved.\nFor k≥2 use D_k=S_k×_X C with maps b_k:D_k→C and p_k:D_k→S_k. Base change preserves immersions by [lem-weil-pbc-immersion-base-change-lft]; p_k is closed by [lem-weil-pbc-closed-immersion-base-change] and is surjective because C has precisely the closed underlying tail, and a closed immersion has unchanged residue fields, so the fibre over any point of S_k in the tail is that same point ([lem-weil-pbc-fibre-product-points]). The D_k give the remaining ordered partition of C. The sheaf i^*F is flat by flat pullback and constructible: its restriction to D_k is p_k^*L_k, with the pulled-back local trivializations. Apply the induction hypothesis on C, which is Noetherian by step 1. Exact i_* gives a tower with factors i_*b_{k!}p_k^*L_k.\nThese factors equal a_{k!}L_k as follows. Use the closed/open calculation to compute extension along an immersion in an open neighbourhood W in which its image is closed. The intersection D_k→X has the same locally closed underlying image as S_k. In such a W the two immersions are closed and the map D_k→S_k is the surjective closed immersion p_k. Step 4 identifies L_k≅p_{k*}p_k^*L_k. Closed direct images compose, since their values on V are sections on V×_W D_k. Extending the resulting isomorphism by zero from W proves i_*b_{k!}p_k^*L_k≅a_{k!}L_k; computing the left side inside C first agrees by closed/open interchange for C→X and W→X, followed by composition of the closed direct images. Thus the first sequence and the pushed-forward tower prove clause (2), including nonreduced strata, without assuming that S_1→X itself is open.",
+   "text": "Induct on the number of ordered strata, allowing the given strata to have arbitrary locally closed subscheme structures. With no strata the open-closed sequence for the empty closed/open pair gives F=0 and the extension tower is empty. Otherwise let U be the actual open subscheme of X with underlying set S_1, and let i:C→X be the reduced induced closed subscheme on its complement, using [lem-weil-pbc-reduced-induced-closed-subscheme]. Write u:U→X for the open immersion. The immersion S_1→X factors as a surjective closed immersion h:S_1→U followed by u: in a closed-then-open factorization, the latter open contains U and the defining ideal restricts to U. By [lem-sfb-surjective-closed-module-invariance] the actual unit gives F|_U≅h_*L_1. The open-closed sequence is therefore 0→u_!h_*L_1→F→i_*i^*F→0. Here u_!h_*L_1≅a_{1!}L_1 by [lem-sfb-etale-locally-closed-extension-comparison] on the étale site and [lem-sfb-locally-closed-extension-coherence] on the pro-étale site.",
    "uses": [
-    "lem-weil-pbc-open-closed-short-exact",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-cbc-open-closed-recollement",
-    "lem-weil-pbc-ringed-topos-flat-module-pullback",
-    "def-nagata-scheme-theoretic-image",
     "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-weil-pbc-immersion-base-change-lft",
-    "lem-weil-pbc-fibre-product-points",
-    "def-weil-pbc-proetale-operations",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lemma-nagata-immersion-open-in-scheme-image",
-    "lem-cbc-extension-zero-base-change",
-    "lem-cbc-proetale-extension-zero-base-change",
-    "lem-weil-pbc-closed-immersion-base-change"
+    "def-weil-closed-immersion",
+    "lem-sfb-surjective-closed-module-invariance",
+    "lem-sfb-etale-locally-closed-extension-comparison",
+    "lem-sfb-locally-closed-extension-coherence",
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-proetale-ringed-open-closed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
-    "place": "Clause (2): induction on the ordered finite partition"
+    "place": "Clause (2): induction on the ordered finite partition, induction part 1"
+   }
+  },
+  {
+   "text": "For k≥2 use D_k=S_k×_X C with maps b_k:D_k→C and p_k:D_k→S_k. Base change preserves immersions by [lem-weil-pbc-immersion-base-change-lft]; p_k is closed by [lem-weil-pbc-closed-immersion-base-change] and is surjective because C has precisely the closed underlying tail, and a closed immersion has unchanged residue fields, so the fibre over any point of S_k in the tail is that same point ([lem-weil-pbc-fibre-product-points]). The D_k give the remaining ordered partition of C. The sheaf i^*F is flat by flat pullback and constructible: its restriction to D_k is p_k^*L_k, with the pulled-back local trivializations. Apply the induction hypothesis on C, which is Noetherian by step 1. Exact i_* gives a tower with factors i_*b_{k!}p_k^*L_k.",
+   "uses": [
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-cbc-open-closed-recollement",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
+    "place": "Clause (2): induction on the ordered finite partition, induction part 2"
+   }
+  },
+  {
+   "text": "These factors equal a_{k!}L_k as follows. Use [lem-sfb-etale-locally-closed-extension-comparison], or [lem-sfb-locally-closed-extension-coherence] on the pro-étale site, to compute extension in an open neighbourhood W in which the immersion is closed. The intersection D_k→X has the same locally closed underlying image as S_k. In such a W the two immersions are closed and the map D_k→S_k is the surjective closed immersion p_k. [lem-sfb-surjective-closed-module-invariance] identifies L_k≅p_{k*}p_k^*L_k. Closed direct images compose, since their values on V are sections on V×_W D_k. Extending the resulting isomorphism by zero from W proves i_*b_{k!}p_k^*L_k≅a_{k!}L_k; computing the left side inside C first agrees by the closed-composition clause of the same cited comparison. Thus the first sequence and the pushed-forward tower prove clause (2), including nonreduced strata, without assuming that S_1→X itself is open.",
+   "uses": [
+    "lem-sfb-surjective-closed-module-invariance",
+    "lem-sfb-etale-locally-closed-extension-comparison",
+    "lem-sfb-locally-closed-extension-coherence",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
+    "place": "Clause (2): induction on the ordered finite partition, induction part 3"
    }
   },
   {
@@ -173,7 +191,7 @@
    }
   },
   {
-   "text": "Let \\mathcal G be the full replete subcategory generated by the a_!L under the three indicated operations. By steps 5 and 7, \\mathcal G\\subseteq\\Dctf. For the reverse inclusion use P from step 8. Write P_{\\ge q} for its brutal tail, with P^r in degrees r\\ge q and zero below. Inclusion of the next tail and projection onto degree q give a degreewise split short exact sequence 0\\to P_{\\ge q+1}\\to P_{\\ge q}\\to P^q[-q]\\to0: in degree q it is 0\\to0\\to P^q\\xrightarrow{1}P^q\\to0, above q it is 0\\to P^r\\xrightarrow{1}P^r\\to0\\to0, and below q every term is zero. The complex maps commute with differentials since the tail differential only points upwards and the target single complex has zero differential. The short-exact-sequence triangle theorem supplies a distinguished triangle with these three terms. By steps 3 and 6 each flat constructible P^q is a finite extension of a_!L; placing its short exact sequences in degree zero and applying the same triangle theorem gives P^q[0]\\in\\mathcal G, hence P^q[-q]\\in\\mathcal G. Start with P_{\\ge b+1}=0 (a cone of an identity of a generator) and induct down from b to a along these triangles. This gives P_{\\ge a}=P\\in\\mathcal G, so C\\in\\mathcal G. This proves clause (3).",
+   "text": "Let \\mathcal G be the full replete subcategory generated by the a_!L under the three indicated operations. By steps 5 and 9, \\mathcal G\\subseteq\\Dctf. For the reverse inclusion use P from step 10. Write P_{\\ge q} for its brutal tail, with P^r in degrees r\\ge q and zero below. Inclusion of the next tail and projection onto degree q give a degreewise split short exact sequence 0\\to P_{\\ge q+1}\\to P_{\\ge q}\\to P^q[-q]\\to0: in degree q it is 0\\to0\\to P^q\\xrightarrow{1}P^q\\to0, above q it is 0\\to P^r\\xrightarrow{1}P^r\\to0\\to0, and below q every term is zero. The complex maps commute with differentials since the tail differential only points upwards and the target single complex has zero differential. The short-exact-sequence triangle theorem supplies a distinguished triangle with these three terms. By steps 3 and 6–8 each flat constructible P^q is a finite extension of a_!L; placing its short exact sequences in degree zero and applying the same triangle theorem gives P^q[0]\\in\\mathcal G, hence P^q[-q]\\in\\mathcal G. Start with P_{\\ge b+1}=0 (a cone of an identity of a generator) and induct down from b to a along these triangles. This gives P_{\\ge a}=P\\in\\mathcal G, so C\\in\\mathcal G. This proves clause (3).",
    "uses": [
     "lem-weil-pbc-complex-ses-triangle"
    ],
@@ -187,25 +205,26 @@
  "proof_deps": [
   "def-constructible-stratification",
   "def-kun-derived-tensor",
-  "def-nagata-scheme-theoretic-image",
   "def-weil-closed-immersion",
   "def-weil-constructible-subset",
   "def-weil-derived-tensor",
+  "def-weil-pbc-direct-image",
   "def-weil-pbc-etale-constructible-sheaf",
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-proetale-operations",
   "def-weil-proetale-constructible-sheaf",
   "det-pe-finite-tor-comparison-noetherian",
-  "lem-cbc-extension-zero-base-change",
   "lem-cbc-open-closed-recollement",
-  "lem-cbc-proetale-extension-zero-base-change",
   "lem-fix-geometric-stalk-topos-point",
   "lem-kun-derived-tensor-triangulated",
   "lem-sf-comparison-pullback-exact",
   "lem-sf-derived-homology-long-exact",
   "lem-sf-etale-flat-constructible",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "lem-sfb-etale-locally-closed-extension-comparison",
+  "lem-sfb-locally-closed-extension-coherence",
+  "lem-sfb-open-closed-flatness",
+  "lem-sfb-surjective-closed-module-invariance",
   "lem-weil-pbc-closed-immersion-base-change",
   "lem-weil-pbc-complex-ses-triangle",
   "lem-weil-pbc-extension-by-zero-unit-iso",
@@ -219,15 +238,11 @@
   "lem-weil-pbc-proetale-ringed-open-closed",
   "lem-weil-pbc-reduced-induced-closed-subscheme",
   "lem-weil-pbc-ringed-topos-flat-module-pullback",
-  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
   "lemma-nagata-immersion-open-in-scheme-image",
   "lemma-openclosed-vanishing-lowershriek",
   "lemma-openclosed-vanishing-lowerstar",
-  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
   "prop-constructible-derived-subcategory",
   "prop-openclosed-lowerstar-fully-faithful",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "prop-weil-pbc-universal-homeomorphism-topos",
   "sk-thm-pe-constructible-comparison",
   "thm-constructible-serre"
  ],
@@ -309,7 +324,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -324,11 +339,11 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-sf-flat-model",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "det-sf-flat-model-generation",
   "worker": "stage1",
-  "summary": "Replaced the earlier attempt: removed the duplicate projective-module leaf and circular citation to sk-lem-sf-flat-model; made finite stratification refinement, site-correct open/closed flatness and extension induction, thickness, independent flat models and brutal truncations explicit. The three original clauses are retained with notation and empty-case conventions. No new nodes are needed. Second reading supplies reduced refinement factorizations, finite-local-model justification and invariance under surjective closed immersions, so the extension induction also handles arbitrary nonreduced stratum structures. Substantial steps are not labelled elementary.",
-  "blueprint": "Steps 2-3 realize clause (1), steps 1 and 4-6 clause (2), and steps 7-9 clause (3) of det-sf-flat-model-generation.proof.md.",
+  "summary": "Repair of returned Q45 delivery: extracted the open/closed flatness criterion (L1), surjective-closed module equivalence and finite-model reflection (L2), and etale closed/open interchange with closure-factorization identification (L3) as three searched statement-only nodes. Reused the existing proetale locally-closed extension coherence node for the other site. Retained the accepted stratification, stalk projectivity, nonreduced-stratum induction and thick-generation route. The induction is now three auditable steps; no parent clause is moved to a new node.",
+  "blueprint": "Steps 2-3 realize clause (1); steps 1 and 4-8 realize clause (2); steps 9-11 realize clause (3). The three new obligations serve clause (2), without replacing the ordered-strata induction.",
   "tool_uses": [
    {
     "node": "det-pe-finite-tor-comparison-noetherian",
@@ -445,6 +460,10 @@
    {
     "node": "lem-weil-pbc-closed-immersion-base-change",
     "why": "Closed base change gives the actual surjective closed immersion D_k→S_k in the extension induction; the immersion-base-change node alone supplies only the weaker immersion assertion."
+   },
+   {
+    "node": "lem-sfb-locally-closed-extension-coherence",
+    "why": "The existing pro-etale theorem supplies normalized mixed open/closed factorization and closed-composition compatibility for ordinary constant-ring modules in steps 6 and 8; the current unit has no such comparison theorem. It supports the retained ordered-strata induction."
    }
   ]
  },
@@ -477,15 +496,16 @@
   "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
   "lem-cbc-extension-zero-base-change",
   "lem-cbc-proetale-extension-zero-base-change",
-  "lem-weil-pbc-closed-immersion-base-change"
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-locally-closed-extension-coherence"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q40-3e193195b",
-  "group": "Q40",
+  "reviewer": "NT-cc-Q45-cced3440c",
+  "group": "Q45",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-3e193195b (reviewer sub-agent of L); spot-checked: Reviewed the full item, all nine proof steps, cited statements and sources, route, coefficient category, base-change arguments, edge cases, duplicate/cycle checks, and delivery report. The mathematics and repaired proof are sound; no new nodes or fixes are needed. The copied unit retains stale smooth-purity metadata while the current item is in six-functors-basics; this maintainer-owned binding issue is recorded for metadata synchronization."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-cced3440c (reviewer sub-agent of L); spot-checked: I read in full the item, all 11 steps, the three new nodes, every cited dependency statement, the main-20261015 blueprint node, its proof and the unit _section, and the Stacks sources at their places: 09AB lemma-thickening (proetale.tex l.4963), 09AH (l.5135, with proof), 0GJ1 (etale-cohomology.tex l.11612), 095L, 04DZ and 03ER, all confirmed in tags/tags. The item statement is the blueprint's with the accepted Conventions; nothing is weakened and the coefficients are ordinary constant-A modules on both sites. L1 (open/closed flatness) is true: j^*, i^* are exact, commute with tensor and are jointly conservative, and its pro-etale direction uses exactness of i_* under the quasi-compact j that the node assumes. L2 holds because a surjective closed immersion is integral, universally injective and surjective, so 09AB/04DZ give topos equivalences with h^{-1}A=A, and finite (projective) local models are reflected by refining covers through the equivalence. L3 clause 1 is 0GJ1 with a closed immersion; clauses 2-3 follow because the scheme-theoretic closure commutes with restriction to an open for quasi-compact immersions over Noetherian X. Tested on empty U/Z, Spec k -> Spec k[eps], S empty and nonreduced S. None is a duplicate: lemma-weil-pbc-finite-pushforward-extension-zero covers only L3 clause 1, and the topological-invariance nodes are set-valued or condensed. None restates an item clause. Each step's citations say what is used: cell refinement and ordering, stalk projectivity via the topos point, nonreduced first stratum via the L2 unit and L3 or the pro-etale coherence node (its factorization-independence and gamma composition paragraphs checked), D_k closed surjective base change, thickness via the constructible and Tor comparisons (qcqs X, Noetherian A checked), lem-sf-etale-flat-constructible for a general finite ring and Noetherian X, and brutal truncations. proof_deps equals the union of uses, the closure of 1965 nodes has no cycle and no missing or merged ids, and no SGA source is used. I accept the declared tool use of lem-sfb-locally-closed-extension-coherence as a generic pro-etale tool. The stale unit record sk-lem-sf-flat-model remains a maintainer metadata issue. No fixes."
  },
  "lean": {
   "module": "Sheaf.SixFunctors.FlatModelGeneration",

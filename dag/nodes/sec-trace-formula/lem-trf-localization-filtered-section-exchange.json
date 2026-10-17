@@ -17,9 +17,131 @@
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-constant-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in constant $A$-module sheaves, without constructibility or completion. By [lem-weil-pbc-proetale-ringed-open-closed], $j_!$ and $i_*$ are exact, the closed counit $i^*i_*\\simeq\\mathrm{id}$ and open unit $\\mathrm{id}\\simeq j^*j_!$ are invertible, and every sheaf $M$ has the natural exact sequence\n$$0\\longrightarrow j_!j^*M\\xrightarrow{a_M}M\\xrightarrow{p_M}i_*i^*M\\longrightarrow0,$$\nwith $a$ the open counit and $p$ the closed unit. The quasi-compactness of $j$ is precisely the complement hypothesis needed for exactness of $i_*$ and for this sequence. All inverse images are exact by [def-weil-pbc-proetale-operations]. By [lem-weil-pbc-exact-functor-derived-factorization] and [lem-weil-pbc-exact-functor-derived-functor], their termwise functors preserve quasi-isomorphisms and compute the ordinary derived functors, in particular $Ri_*=i_*$ on complexes. Exact termwise functors also preserve bounded-below complexes. These sheaf adjunctions $j_!\\dashv j^*$ [lem-weil-pbc-proetale-ringed-open-closed] and $i^*\\dashv i_*$ [def-weil-pbc-proetale-operations] hold for every finite commutative $A$; no $A_{E,n}$ hypothesis is used. On derived categories, [lem-sfb-adjunction-localization] gives $j_!\\dashv j^*$ with unit and counit the classes of the termwise ones. The derived adjunction $Li^*\\dashv Ri_*$ of [def-weil-pbc-proetale-operations] is the bijection of [lem-pc-pre-derived-adjoint-functors-general]; its characterization with $s,t$ identities, whose cocone maps are the computation isomorphisms above, sends the class of a chain map $f:C\\to i_*N$ to that of $\\varepsilon_N\\,i^*f$. Hence its unit and counit are the classes of the termwise closed unit $p$ and counit $\\varepsilon$, under these identifications.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-sfb-adjunction-localization",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open), 09BN (lemma-open-immersion); exact derived passage: derived.tex, Tag 015F"
+   }
+  },
+  {
+   "text": "For a bounded-below sheaf complex $C$, apply the sequence of Step 1 in every cochain degree. Naturality of $a$ makes its images a subcomplex, canonically identified with $j_!j^*C$. Give $C$ the filtration $F^0=C$, $F^1=j_!j^*C$, $F^2=0$ of the statement. For a chain map $f:C\\to D$, take total map $f$ and subcomplex map $j_!j^*f$; the equality $f a_C=a_Dj_!j^*f$ makes this a filtered chain map. Identities and composites are preserved because both component functors preserve them. The graded complexes are naturally $j_!j^*C$ in degree $1$ and $i_*i^*C$ in degree $0$, the latter identified through the quotient map $p_C$. All other graded complexes vanish.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Example 5.2.3, p. 42: the section on complexes; pro-etale quotient supplied by Tag 09AH"
+   }
+  },
+  {
+   "text": "If $f$ is a quasi-isomorphism, its two graded maps in Step 2 are quasi-isomorphisms by the exact-functor assertion [lem-weil-pbc-exact-functor-derived-factorization]. Hence the complex-level section followed by filtered localization inverts quasi-isomorphisms. Apply [lem-weil-pbc-localization-universal-property](1),(2) to obtain $S_X:D^+(X,A)\\to DF^+(X,A)$ and its natural graded identifications. Forgetting a finite filtration also descends: in the degreewise short exact sequences $0\\to F^{r+1}C\\to F^rC\\to\\operatorname{gr}^rC\\to0$, induction downwards from $F^bC=0$ shows that graded quasi-isomorphisms induce quasi-isomorphisms on every $F^rC$, hence on $C$. The induction uses the long exact sequences of [lem-weil-pbc-complex-ses-homology-long-exact] and their comparison diagrams from [lem-weil-pbc-complex-ses-long-exact-naturality]: in the five consecutive terms centered at $H^n(F^rC)$ the four outer vertical maps are isomorphisms, so the middle one is an isomorphism. Thus the identity of total complexes gives $\\omega S_X\\simeq\\mathrm{id}$; the quotient and subcomplex identifications give the stated $\\operatorname{gr}^0$ and $\\operatorname{gr}^1$ functors, with $i_*=Ri_*$ as in Step 1.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-complex-ses-long-exact-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Example 5.2.3, p. 42; homology.tex Tag 0117 (lemma-long-exact-sequence-cochain), functorial cohomology exact sequences"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to $0\\to j_!j^*C\\xrightarrow{a_C}C\\xrightarrow{p_C}i_*i^*C\\to0$. It gives the distinguished localization triangle with exactly the displayed open counit and closed unit, including its connecting map; by Step 1 these classes are the derived open counit and the unit of $Li^*\\dashv Ri_*$. Its naturality for chain maps, followed by [lem-weil-pbc-localization-universal-property](2), gives the same natural triangle on $D^+(X,A)$. This is the underlying subcomplex--total--quotient triangle of the filtration constructed in Step 2.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor; applied to the sequence of proetale.tex Tag 09AH"
+   }
+  },
+  {
+   "text": "Exact $t^*$ preserves filtration subobjects, quotients and graded quasi-isomorphisms [def-weil-pbc-proetale-operations, lem-weil-pbc-exact-functor-derived-factorization], so defines $Lt^*$ on $DF^+$. The Cartesian open square and [lem-cbc-proetale-extension-zero-base-change] give the natural isomorphism $b_{t,M}:t^*j_!M\\simeq j_!t_U^*M$ for every complex $M$ and this finite ring $A$. Put $B_C=j_!(c_{j,C})b_{t,j^*C}$, where $c_j:t_U^*j^*\\simeq j^*t^*$ comes from [lem-weil-pbc-proetale-derived-pullback-composition].\nWe check its counit normalization. On open slice sites [lem-weil-proetale-weakly-etale-localization], [lem-weil-pbc-localize-ringed-site-morphism] gives $j^*t_*\\simeq t_{U*}j^*$; sectionwise this is the Cartesian identification $V\\times_XX\\simeq V\\times_UU$. Thus $t^*j_!$ and $j_!t_U^*$ have canonically identified right adjoints. The composite adjunctions of [def-weil-pbc-composite-adjunction] and the unique comparison of [lem-weil-pbc-conjugate-iso-unit-equation] specify the canonical $b_t$. Expanding their unit equation through the two Hom bijections says that $b_{t,M}^{-1}$ is the $j_!\\dashv j^*$ transpose of $c_{j,j_!M}\\,t_U^*\\eta_{j,M}$, with $\\eta_j$ the open unit. The slice theorem applies because the base-change site functor for $t$ sends $U$ to $X\\times_XU\\simeq U$, by the Cartesian hypothesis.\nUnder $j_!\\dashv j^*$, the transpose of $t^*a_C B_C^{-1}$ is the identity: naturality of $c_j$ reduces it to $j^*a_C\\eta_{j,j^*C}=1$. The sheaf adjunction $j_!\\dashv j^*$ of [lem-weil-pbc-proetale-ringed-open-closed] therefore gives $a_{t^*C}B_C=t^*a_C$. Hence $(1,B_C)$ and $(1,B_C^{-1})$ are inverse filtered chain maps. Their naturality and [lem-weil-pbc-localization-universal-property](2) descend them to $\\alpha_t$ with the prescribed total and $F^1$ maps.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0 (lemma-localize-morphism-ringed-sites), with categories.tex Tags 0B65 (lemma-transformation-between-functors-and-adjoints) and 0DV0 (lemma-compose-counits); open counit normalization; Varshavsky §5.2.2"
+   }
+  },
+  {
+   "text": "Identify the quotient comparison directly. Keep $p_C:C\\to i_*i^*C$ and write $\\varepsilon:i^*i_*\\to\\mathrm{id}$ for the counit of the sheaf adjunction $i^*\\dashv i_*$ of [def-weil-pbc-proetale-operations]. Put $\\theta=c_i^{-1}:i^*t^*\\simeq t_Z^*i^*$, using [lem-weil-pbc-proetale-derived-pullback-composition]. By [def-weil-pbc-adjunction-mate] the closed mate $e_M:t^*i_*M\\to i_*t_Z^*M$ is the transpose of $t_Z^*\\varepsilon_M\\,\\theta_{i_*M}$. Let $m_C=i_*(c_{i,C})e_{i^*C}$. The transpose of $m_Ct^*p_C$ is\n$$c_{i,C}\\,t_Z^*\\varepsilon_{i^*C}\\,\\theta_{i_*i^*C}\\,i^*t^*p_C\n=c_{i,C}\\,t_Z^*(\\varepsilon_{i^*C}i^*p_C)\\,\\theta_C=1.$$\nThe first equality is naturality of $\\theta$; the second is the closed adjunction triangle identity and $c_i\\theta=1$. The transpose of $p_{t^*C}$ is also the identity, so $m_Ct^*p_C=p_{t^*C}$. By Step 1 and exactness of $t^*$, $t^*p_C$ is degreewise epimorphic. Hence $m_C$ is exactly the quotient map induced by $(1,B_C)$ in Step 5, by uniqueness of factorization through a cokernel. By Step 1 the derived mate $e_{t,i}$ is the class of the termwise mate $e$, and on these exact termwise representatives $c_i$ is the class of the termwise comparison of [lem-weil-pbc-proetale-derived-pullback-composition] (both are natural and agree on K-flat resolutions). Descending this natural equality by [lem-weil-pbc-localization-universal-property](2) identifies $\\operatorname{gr}^0\\alpha_t$ with $Ri_*(c_i)e_{t,i}$. Only $ti=it_Z$ was used; no Cartesian property of the closed square entered the computation.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.2.2, adjunction definition of canonical comparisons; agent calculation for the ordinary pro-etale localization quotient, using the closed unit and counit"
+   }
+  },
+  {
+   "text": "For $u:Lt^*K\\to K$, functoriality gives $S_X(u)\\alpha_t$. Its total map is $u$ because $\\omega S_X$ is the identity. The natural identifications of Step 3 give $\\operatorname{gr}^1S_X(u)=j_!Lj^*u$ and $\\operatorname{gr}^0S_X(u)=Ri_*Li^*u$. Composing these with the maps from Steps 5 and 6 gives, respectively,\n$$j_!(Lj^*u\\circ c_j)\\circ b_t,\\qquad Ri_*(Li^*u\\circ c_i)\\circ e_{t,i}.$$\nThese identities hold for an arbitrary derived morphism $u$, since all the graded identifications and comparisons are natural transformations on the localized categories, by [lem-weil-pbc-localization-universal-property](2),(3); no representative of $u$ as a single chain map is assumed. There is no invertibility condition on $u$.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Example 5.2.3 and §5.2.2; functoriality of the section and the comparisons proved in Steps 5–6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-sfb-adjunction-localization",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Example 5.2.3 (p. 42), with §§5.2.1–5.2.2; ordinary pro-etale extension and explicit closed-mate computation using Stacks Tags 09AH, 09BM, 015F, 0152"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +191,52 @@
    "results": "0 hits:",
    "date": "2026-10-17",
    "verdict": "no match: candidates do not state the canonical pro-etale derived comparison and all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact open closed localization sequence defines a two step filtered derived functor commuting with inverse image",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instIsRightDerivedFunctorLiftInvFac, CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure', CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure, CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not construct the pro-etale localization section with its graded adjunction comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.ShortComplex.π₁, CategoryTheory.ShortComplex.π₂, CategoryTheory.ShortComplex.π₃, CategoryTheory.ShortComplex.fFunctor, CategoryTheory.ShortComplex.gFunctor, CategoryTheory.ShortComplex.map, CategoryTheory.ShortComplex.opFunctor, CategoryTheory.ShortComplex.unopFunctor",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not construct the pro-etale localization section with its graded adjunction comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "FilteredDerived|filteredDerived|extensionByZero|extension_by_zero",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not construct the pro-etale localization section with its graded adjunction comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "functorial two step filtered localization complex open closed immersion sheaves",
+   "results": "8 hits: AlgebraicGeometry.SheafedSpace.IsOpenImmersion.opensFunctor, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isOpenImmersion, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.opensFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.opensFunctor, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not construct the pro-etale localization section with its graded adjunction comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered complex from exact subfunctor extension by zero and quotient closed restriction descends to derived category",
+   "results": "8 hits: DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, CategoryTheory.Abelian.Ext.mapExactFunctor, DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not construct the pro-etale localization section with its graded adjunction comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*filtration|filtered.*localization|openClosed|open_closed",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not construct the pro-etale localization section with its graded adjunction comparisons"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-trf-trace-additivity-open-closed",
@@ -84,10 +248,69 @@
  "blueprint": {
   "from": {
    "node": "prop-trf-trace-additivity-open-closed",
-   "place": "Example 5.2.3 (the functorial localization section), with §§5.2.1–5.2.2 for operation comparisons; agent-formulated ordinary pro-etale version and explicit graded mate identification from blueprint prop-trf-trace-additivity-open-closed, Step 2.",
+   "place": "prop-trf-trace-additivity-open-closed, Step 2: the functorial localization section and its open and closed graded coefficient maps; Step 6 applies it to the non-Cartesian closed Frobenius square",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-localization-filtered-section-exchange",
+  "worker": "stage1",
+  "summary": "Constructed the localization section on sheaf complexes, descended it by exactness and localization, identified its triangle, and proved the filtered pullback and the closed quotient mate by explicit adjunction calculations. No new nodes; existing generic pro-etale lemmas suffice. The statement is unchanged. Maintainer reader fix: replaced the A_{E,n}-only recollement adjunction node by the general sheaf adjunctions and made the derived-versus-termwise adjunction identification explicit (Step 1).",
+  "blueprint": "Realizes the functorial section and prescribed graded maps in Step 2 of prop-trf-trace-additivity-open-closed; the mate computation also covers its Step 6, with no Cartesian closed-square assumption.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "The general constant-module specialization supplies exactness and the specified sheaf counit/unit sequence; the trace unit needs these inputs before constructing its filtered section."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Identifies termwise exact functors with the ordinary bounded-below derived operations, rather than completed operations."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-base-change",
+    "why": "Generic Cartesian open exchange for every finite commutative ring and every sheaf complex, without the special A_E,n restriction of the trace-unit exchange node."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Supplies the canonical restriction comparisons c_j and c_i for scheme maps and the exact coefficient operations."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Generic localized-ringed-site comparison identifies the right adjoints in the Cartesian open square; used only to check the canonical exchange normalization."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic uniqueness and unit equation for conjugate left adjoints; makes the canonical open exchange normalization explicit."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of the open pro-etale site with the slice site, needed to apply the localized-ringed-site comparison when checking exchange normalization."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Its characterization of the derived Hom bijection identifies the adjunction Li^* -| Ri_* defining the closed mate with the class of the termwise sheaf adjunction; no node of the unit gives this for arbitrary finite A on an arbitrary scheme."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-c0c018a7b",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-c0c018a7b (reviewer sub-agent of L); spot-checked: I read the full delivery: the item, its 7 steps and every cited statement, the parent prop-trf-trace-additivity-open-closed Steps 2/6/7, and the unit sk-i-global-additivity. Sources checked: Varshavsky Ex. 5.2.3 (F^1=j_!j^*, gr^0=i_*i^*, gr^1=j_!j^*, descended by exactness) and Stacks proetale 09AH (line 5135) and 09BM (line 5020), which need j quasi-compact, as the item assumes. The statement is unchanged and not weakened. Small cases checked: U=X, Z=X, K=0, u=0, t=id, and absolute Frobenius on A^1 with Z=V(x), where t^{-1}Z=V(x^p) is a non-Cartesian closed square with the same support, so the forced invertibility of the closed mate is consistent. I recomputed the transposes: Step 5 gives a_{t^*C}B_C=t^*a_C, and Step 6 gives m_C t^*p_C=p_{t^*C} by naturality of theta and the triangle identity. Both are correct. Two faults, both repaired in the fixed item file. (1) E1/C4: Steps 5 and 6 cited prop-weil-open-closed-recollement-adjunctions, which holds only for A=A_{E,n} with ell invertible, while the item allows any finite A on any scheme. The sheaf adjunctions now come from lem-weil-pbc-proetale-ringed-open-closed (j_! -| j^*) and def-weil-pbc-proetale-operations (i^* -| i_*). (2) E5: the statement fixes e_{t,i} and the triangle's unit through the derived adjunction Li^* -| Ri_*, but the proof computed with the termwise sheaf unit and counit without identifying the two. Step 1 now shows they agree, using lem-sfb-adjunction-localization and the characterization in lem-pc-pre-derived-adjoint-functors-general at s,t=id. Steps 4 and 6 now refer to Step 1, and Step 6 also says the termwise c_i represents the derived comparison. proof_deps is updated. I accept the 7 declared tool_uses and added lem-pc-pre-derived-adjoint-functors-general as an eighth. No new nodes, no duplicate (lem-trf-invariant-localization-filtered-lift and lem-trf-open-square-exchange state different things), no cycle, no SGA.; 1 file(s) fixed by the reviewer"
  }
 }

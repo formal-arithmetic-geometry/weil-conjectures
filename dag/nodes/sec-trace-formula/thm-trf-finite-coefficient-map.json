@@ -70,62 +70,88 @@
    }
   },
   {
-   "text": "We pass from sheaf complexes on $s$ to ordinary coefficient complexes. For an $\\ell$-primary finite ring $R$ and $M\\in D^b_{ctf}(s,R)$, [sk-lem-sf-flat-model] gives a bounded complex of flat constructible sheaves representing $M$, with finite projective local models. The equivalence [lem-weil-pbc-finite-ring-constructible-derived-origin] identifies intrinsic constructibility with the etale-origin convention [def-weil-pbc-proetale-modules] for every finite commutative ring, so its constructible terms come from the etale site. On the point the finite projective local models are locally constant sheaves; [det-pe-finite-local-systems-twist] gives an etale trivializing cover, since these local models are finitely presented. The bounded flat sheaf model is K-flat by [lem-pc-bounded-above-flat-kflat-site]; the same statement on the one-object site applies to bounded flat ordinary module complexes. Clause (2) of [det-pbc-torsion-stalk-proetale-point] identifies etale sheaves on $s$ with ordinary modules and their pro-etale sections with the same modules. Since an etale cover of the algebraically closed point is a disjoint union of copies of that point, the local finite projective models of these terms give finite projective modules of sections. Exactness of sections in clause (1) of that node makes this a bounded projective representative of $\\Gamma(s,M)$. On this representative coefficient extension is termwise: each finite projective term is a retract of $R^n$, and the canonical map $\\Gamma(s,F)\\otimes_R R'\\to\\Gamma(s,F\\otimes_R R')$ is the usual identity for $F=R_s^n$, hence for its retracts. These degreewise identities commute with the differentials and yield a natural derived comparison $\\Gamma(s,M)\\otimes_R^LR'\\simeq\\Gamma(s,M\\otimes_R^LR')$, independent of representatives because sections is exact and the tensor is derived. Reassemble primary factors. Apply this to $M=Ra_{X!}K_A$, which is finite-Tor constructible by Step 3. The K-flat pullback assertion of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] computes derived pullback by pulling back such a model. For $M=L\\bar y^*K_A$, pullback of the bounded flat constructible model of $K_A$ supplied by [sk-lem-sf-flat-model] has bounded finite projective stalks and is again finite-Tor constructible. This proves the global and local coefficient-complex comparisons and their perfectness.",
+   "text": "Apply [lem-trf-point-complex-scalar-extension] to $M=Ra_{X!}K_A\\in D^b_{ctf}(s,A)$, whose membership was proved in Step 3. It gives a perfect ordinary complex and a natural comparison $\\Gamma(s,M)\\otimes_A^LB\\simeq\\Gamma(s,T_sM)$. Compose with sections of the compact-support comparison of Step 3 to obtain $C_c(K_A):R\\Gamma_c(X,K_A)\\otimes_A^LB\\simeq R\\Gamma_c(X,K_B)$. The same point lemma applies to the coefficient ring $B$.",
    "uses": [
-    "sk-lem-sf-flat-model",
-    "def-weil-pbc-proetale-modules",
-    "det-pbc-torsion-stalk-proetale-point",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "det-pe-finite-local-systems-twist",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-trf-point-complex-scalar-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace-coeff/thm-trf-finite-coefficient-map.proof.md",
-    "place": "Final application to compact cohomology and geometric stalks; point realization and the trace domains made explicit."
+    "place": "Final sentence: all the constructions being natural in the coefficient ring; expansion of the returned proof, keeping its point-realization, specified Frobenius and compactification route."
    }
   },
   {
-   "text": "Write $c_h:Lh_B^*T\\xrightarrow{\\sim}T Lh_A^*$ for the inverse comparison in [det-prop-scalar-six-pullback] (1). Its composition identity gives\n$\\varphi_B^{[m]}=T(\\varphi_A^{[m]})\\circ c_{g_X^m}$.\nFor $m=1$ this is the definition. Inductively insert $T(\\varphi_A)\\circ c_{g_X}$ in the first factor, use naturality to move $c_{g_X}$ past the pulled-back $\\varphi_A^{[m]}$, and combine the two comparisons by the composition identity. This proves the formula for $m+1$.\nFor the local transport use the specified scheme-Frobenius definition [def-trf-frobenius-operators] (2), with $\\kappa^{(m)}$ of [prop-trf-scheme-galois-comparison]. The point $\\bar y$ is fixed by $\\Phi^m$ by [thm-trf-frobenius-fixed-points]. Let $C_y(N):\\Gamma(s,L\\bar y^*N)\\otimes_A^LB\\xrightarrow{\\sim}\\Gamma(s,L\\bar y^*TN)$ be the natural comparison of Step 4. For $h=\\Phi^m,g_X^m$ put\n$$\nD_{y,h}=\\Gamma(s,L\\bar y^*c_h^{-1})\\circ C_y(Lh_A^*K_A).\n$$\nThus $D_{y,h}$ has target $(Lh_B^*K_B)_{\\bar y}$. The fixed-point identification $b_{y,m,R}$ is obtained from the literal equality $\\Phi^m\\bar y=\\bar y$ and the pullback-composition isomorphism of [lem-weil-pbc-proetale-derived-pullback-composition]. Composition coherence in [det-prop-scalar-six-pullback] therefore gives\n$$\nD_{y,\\Phi^m}\\circ(b_{y,m,A}\\otimes1)=b_{y,m,B}\\circ C_y(K_A).\n$$\nThe new coefficient-coherence lemma [lem-trf-scheme-galois-coefficient-change] gives the actual missing square\n$$\nT(\\kappa^{(m)}_{A,K_A})\\circ c_{\\Phi^m}=c_{g_X^m}\\circ\\kappa^{(m)}_{B,TK_A}.\n$$\nApply $L\\bar y^*$ and point sections, and use naturality of $C_y$; after multiplying by the inverse $c$ comparisons this says\n$$\nD_{y,g_X^m}\\circ\\bigl(\\Gamma(s,L\\bar y^*\\kappa^{(m)}_{A,K_A})\\otimes1\\bigr)\n=\\Gamma(s,L\\bar y^*\\kappa^{(m)}_{B,K_B})\\circ D_{y,\\Phi^m}.\n$$\nCompose the last two displayed identities to obtain\n$D_{y,g_X^m}(\\tau_{y,m,A}\\otimes1)=\\tau_{y,m,B}C_y(K_A)$ for exactly the defined $\\tau$. Finally naturality of $C_y$ for $\\varphi_A^{[m]}$ and the proved iterate identity give\n$C_y(K_A)(F_{y,m,A}\\otimes1)=F_{y,m,B}C_y(K_A)$.\nNo equality with a separately defined Galois-point transport is assumed.",
+   "text": "For the local comparison, work on each primary factor of Step 1. By [sk-lem-sf-flat-model], represent $K_A$ by a bounded flat constructible complex with finite projective local models. This bounded flat model is K-flat by [lem-pc-bounded-above-flat-kflat-site]. The K-flat pullback assertion of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] computes $L\\bar y^*K_A$ by its termwise pullback. The point factors through one constructible stratum, so each pulled-back term is locally constant with finite projective model. By [det-pe-finite-local-systems-twist] these finitely presented local systems have an etale trivializing cover. On an algebraically closed point that cover is a union of copies of the point, so the terms are constant with finite projective models. Thus the bounded pulled-back complex is constructible of finite Tor amplitude. Reassemble the primary factors and apply [lem-trf-point-complex-scalar-extension]. It gives perfect stalks and their sections--tensor comparison. Composing with sections of the pullback comparison of Step 3 gives $C_y(N):N_{\\bar y}\\otimes_A^LB\\simeq(T_XN)_{\\bar y}$, natural in $N\\in D^b_{ctf}(X,A)$. The argument also applies to $B$.",
    "uses": [
-    "det-prop-scalar-six-pullback",
+    "sk-lem-sf-flat-model",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-trf-point-complex-scalar-extension",
+    "det-pe-finite-local-systems-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace-coeff/thm-trf-finite-coefficient-map.proof.md",
+    "place": "Final sentence: all the constructions being natural in the coefficient ring; expansion of the returned proof, keeping its point-realization, specified Frobenius and compactification route."
+   }
+  },
+  {
+   "text": "Write $c_h:Lh_B^*T\\xrightarrow{\\sim}T Lh_A^*$ for the inverse comparison in [det-prop-scalar-six-pullback] (1). Its composition identity gives $\\varphi_B^{[m]}=T(\\varphi_A^{[m]})\\circ c_{g_X^m}$. For $m=1$ this is the definition. For $m+1$, substitute $T(\\varphi_A)\\circ c_{g_X}$ in the first factor, use naturality to move $c_{g_X}$ past the pulled-back $\\varphi_A^{[m]}$, and combine the two comparisons by the composition identity. This proves the induction with the canonical pullback-composition identifications.",
+   "uses": [
+    "det-prop-scalar-six-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace-coeff/thm-trf-finite-coefficient-map.proof.md",
+    "place": "Final sentence: all the constructions being natural in the coefficient ring; expansion of the returned proof, keeping its point-realization, specified Frobenius and compactification route."
+   }
+  },
+  {
+   "text": "For the local transport use the specified scheme-Frobenius formula [def-trf-frobenius-operators] (2), with $\\kappa^{(m)}$ of [prop-trf-scheme-galois-comparison]. By [thm-trf-frobenius-fixed-points], $\\Phi^m\\bar y=\\bar y$. For $h=\\Phi^m,g_X^m$ put\n$$D_{y,h}=\\Gamma(s,L\\bar y^*c_h^{-1})\\circ C_y(Lh_A^*K_A).$$\nIts target is $(Lh_B^*K_B)_{\\bar y}$. It is defined: the construction of $C_y(N)$ in Step 5 uses only $L\\bar y^*N\\in D^b_{ctf}(s,A)$ and is natural among such $N$; here $L\\bar y^*Lh_A^*K_A\\simeq L(h\\bar y)^*K_A$ by [lem-weil-pbc-proetale-derived-pullback-composition], and $h\\bar y:s\\to X$ is again a morphism from the algebraically closed point ($=\\bar y$ for $h=\\Phi^m$), so the argument of Step 5 at $h\\bar y$ applies. The fixed-point identification $b_{y,m,R}$ comes from the literal equality $\\Phi^m\\bar y=\\bar y$ and the composition isomorphism [lem-weil-pbc-proetale-derived-pullback-composition]. Composition coherence in [det-prop-scalar-six-pullback] therefore gives\n$$D_{y,\\Phi^m}\\circ(b_{y,m,A}\\otimes1)=b_{y,m,B}\\circ C_y(K_A).$$\nThe reviewed [lem-trf-scheme-galois-coefficient-change] gives\n$$T(\\kappa^{(m)}_{A,K_A})\\circ c_{\\Phi^m}=c_{g_X^m}\\circ\\kappa^{(m)}_{B,TK_A}.$$\nApply $L\\bar y^*$ and sections and use naturality of $C_y$; after composing with inverse coefficient comparisons this is\n$$D_{y,g_X^m}\\circ(\\Gamma(s,L\\bar y^*\\kappa^{(m)}_{A,K_A})\\otimes1)=\\Gamma(s,L\\bar y^*\\kappa^{(m)}_{B,K_B})\\circ D_{y,\\Phi^m}.$$\nComposing the two squares gives $D_{y,g_X^m}(\\tau_{y,m,A}\\otimes1)=\\tau_{y,m,B}C_y(K_A)$ for the specified $\\tau$. Naturality of $C_y$ for $\\varphi_A^{[m]}$ and Step 6 then give $C_y(K_A)(F_{y,m,A}\\otimes1)=F_{y,m,B}C_y(K_A)$.",
+   "uses": [
     "def-trf-frobenius-operators",
     "prop-trf-scheme-galois-comparison",
     "thm-trf-frobenius-fixed-points",
     "lem-weil-pbc-proetale-derived-pullback-composition",
+    "det-prop-scalar-six-pullback",
     "lem-trf-scheme-galois-coefficient-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace-coeff/thm-trf-finite-coefficient-map.proof.md",
-    "place": "Final sentence: coefficient compatibility of the specified local Frobenius; the scheme-Frobenius fixed-point identification and coefficient square for kappa are explicit."
+    "place": "Final sentence: all the constructions being natural in the coefficient ring; expansion of the returned proof, keeping its point-realization, specified Frobenius and compactification route."
    }
   },
   {
-   "text": "Choose a compactification $X_0\\xrightarrow{j_0}\\overline X_0\\xrightarrow{p_0}\\operatorname{Spec}k_0$ over $k_0$. It exists by [thm-nagata-compactification]: the structure map is separated finite type by hypothesis and its affine target is qcqs by [lem-weil-pbc-affine-scheme-qcqs]. Base change to $k$ gives a compactification $a_X=pj$, since proper and open morphisms remain so by [lem-weil-pbc-proper-base-change, lem-weil-pbc-open-immersion-base-change]. The Frobenius square for $p_0$ is Cartesian by [lem-weil-frobenius-square-cartesian], and that for $j_0$ by [lem-trf-frobenius-open-square]; thus $g_X$ extends to the geometric Frobenius of this compactification. For global transport one must also check the exchange map. On this compactification of $a_X$, that map is the ambient direct-image exchange for the proper factor followed by open-immersion base change. The direct-image exchange is precisely the unit--pullback-composition--counit mate of [def-weil-pbc-ambient-ringed-exchange]. In the coefficient cube, the pull-comparison cube commutes by the composition assertion of [det-prop-scalar-six-pullback], and the push comparisons satisfy their mate unit/counit identities by clause (2) of [det-prop-scalar-six-direct-image]. Apply [lem-weil-pbc-coefficient-exchange-mates]: its hypotheses are exactly these equations, so the proper exchange squares commute with coefficient extension. The open part is the canonical isomorphism of [lem-cbc-proetale-extension-zero-base-change], combined with clause (2) of [det-prop-scalar-six-pullback]. Its two coefficient routes agree sectionwise: on the inverse image of the open both are the pullback tensor comparison, and off it both are zero. Their composite is therefore compatible with the compact-support coefficient comparison of Step 3. This argument permits the semilinear geometric Frobenius automorphisms: only the proper map between geometric schemes is required to be a $k$-map, while the horizontal pullbacks in the cube are arbitrary scheme morphisms. Finally point transport on sections is restriction along the automorphism of $s$ followed by inverse-image identification; it commutes with scalar extension on the constant projective representatives in Step 4. The resulting single-transport identity says $C_c(Lg_X^*N)$, after the pullback comparison $c_{g_X}$, intertwines $\\tau_{c,N}\\otimes1$ with $\\tau_{c,T_XN}$ for every $N\\in D^b_{ctf}(X,A)$. For the $m$-fold transport apply it successively to $N=K_A,Lg_X^*K_A,\\dots,(Lg_X^*)^{m-1}K_A$; at each stage naturality of $\\tau_c$ over $B$ moves the comparison $c_{g_X}$ through the next factor, and the composition identity of [det-prop-scalar-six-pullback] (1) identifies the composite of these $m$ comparisons, followed by $c_m$ over $A$ and over $B$, with $c_{g_X^m}$. Thus $C_c(L(g_X^m)^*K_A)$ intertwines $\\tau^m_{c,K_A}\\otimes1$ with $\\tau^m_{c,K_B}$ after $c_{g_X^m}$. Then naturality of the compact-support comparison for $\\varphi_A^{[m]}$ and the iterate identity $\\varphi_B^{[m]}=T(\\varphi_A^{[m]})\\circ c_{g_X^m}$ of Step 5 give $C_c(F_{c,A}^m\\otimes1)=F_{c,B}^m C_c$. Independence of the compactification in [det-prop-scalar-six-compact-support] allows the same calculation after the canonical compactification identifications. Thus both global and local operators match.",
+   "text": "Choose a compactification $X_0\\xrightarrow{j_0}\\overline X_0\\xrightarrow{r_0}\\operatorname{Spec}k_0$ over $k_0$. It exists by [thm-nagata-compactification]: the structure map is separated finite type and its affine target is qcqs by [lem-weil-pbc-affine-scheme-qcqs]. Base change gives a compactification of $a_X$, since proper and open morphisms remain so [lem-weil-pbc-proper-base-change, lem-weil-pbc-open-immersion-base-change]. The square for the proper factor is Cartesian by [lem-weil-frobenius-square-cartesian], and the square for the open factor by [lem-trf-frobenius-open-square]. Thus this compactification carries exactly the specified semilinear geometric Frobenius maps.",
    "uses": [
     "thm-nagata-compactification",
     "lem-weil-pbc-affine-scheme-qcqs",
     "lem-weil-pbc-proper-base-change",
     "lem-weil-pbc-open-immersion-base-change",
     "lem-weil-frobenius-square-cartesian",
-    "lem-trf-frobenius-open-square",
-    "def-weil-pbc-ambient-ringed-exchange",
-    "det-prop-scalar-six-pullback",
-    "det-prop-scalar-six-direct-image",
-    "lem-weil-pbc-coefficient-exchange-mates",
-    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-trf-frobenius-open-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace-coeff/thm-trf-finite-coefficient-map.proof.md",
+    "place": "Final sentence: all the constructions being natural in the coefficient ring; expansion of the returned proof, keeping its point-realization, specified Frobenius and compactification route."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-compact-support-coefficient-transport] to the compactification of Step 8 and $K_A$. Its hypotheses are the finite prime-to-$p$ ring map, the finite-Tor constructible input, and a compactification over $k_0$, all already available. It supplies the coefficient square for the specified proper/open exchange and point transport, including the exact $m$-factor composite:\n$$R\\Gamma_c(X,c_{g_X^m}^{-1})\\circ C_c(L(g_X^m)^*K_A)\\circ(\\tau^m_{c,K_A}\\otimes1)=\\tau^m_{c,K_B}\\circ C_c(K_A).$$\nThe coefficient comparison is natural by [det-prop-scalar-six-compact-support]. Compose this equation with $R\\Gamma_c(X,\\varphi_B^{[m]})$, substitute the iterate identity of Step 6, and cancel the adjacent $c_{g_X^m}^{-1}$ and $c_{g_X^m}$. Naturality for $\\varphi_A^{[m]}$ then yields $C_c(K_A)(F_{c,A}^m\\otimes1)=F_{c,B}^m C_c(K_A)$. The transport lemma includes passage through the canonical compactification comparisons.",
+   "uses": [
+    "lem-trf-compact-support-coefficient-transport",
     "det-prop-scalar-six-compact-support"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace-coeff/thm-trf-finite-coefficient-map.proof.md",
-    "place": "Final sentence: global Frobenius compatibility, expanded into the coefficient-exchange cube and open-extension square."
+    "place": "Final sentence: all the constructions being natural in the coefficient ring; expansion of the returned proof, keeping its point-realization, specified Frobenius and compactification route."
    }
   },
   {
-   "text": "For the trace assertion, regard extension along $A\\to B$ as derived pullback on the one-point ringed topos. The general tensor-pullback theorem [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] supplies its natural monoidal comparison; the unit comparison is $A\\otimes_A^LB\\simeq B$. On a bounded projective representative of $P$, scalar extension gives a bounded projective $B$-complex: a splitting $P^i\\oplus Q^i\\simeq A^{n_i}$ tensors to the corresponding splitting over $B$. The tensor comparison respects associativity, unit and Koszul symmetry, as is seen on pure homogeneous tensors, where both routes send $x\\otimes y\\otimes b$ to the same tensor with the same sign. Apply this functor to the coevaluation, $v\\otimes1$, symmetry and evaluation in the defining composite of [sk-d-trace]. The images give a duality of $P\\otimes_A^LB$, because the two triangle identities are preserved by a functor and the stated comparisons. Thus the image of the defining trace composite is the defining trace composite over $B$. On the unit, multiplication by $a$ is sent to multiplication by $\\rho(a)$, proving the scalar trace equality. The same calculation gives conjugacy invariance: for an isomorphism $w$, transport evaluation and coevaluation using $w$ and its dual; the adjacent $w^{-1}w$ cancel in the trace composite. Apply this to the intertwining isomorphisms $C_y,C_c$ and the perfect complexes of Step 4 to obtain the local and global Frobenius trace equalities.",
+   "text": "For the trace assertion, regard extension along $A\\to B$ as derived pullback on the one-point ringed topos. The general tensor-pullback theorem [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] supplies its natural monoidal comparison; the unit comparison is $A\\otimes_A^LB\\simeq B$. On a bounded projective representative of $P$, scalar extension gives a bounded projective $B$-complex: a splitting $P^i\\oplus Q^i\\simeq A^{n_i}$ tensors to the corresponding splitting over $B$. The tensor comparison respects associativity, unit and Koszul symmetry, as is seen on pure homogeneous tensors, where both routes send $x\\otimes y\\otimes b$ to the same tensor with the same sign. Apply this functor to the coevaluation, $v\\otimes1$, symmetry and evaluation in the defining composite of [sk-d-trace]. The images give a duality of $P\\otimes_A^LB$, because the two triangle identities are preserved by a functor and the stated comparisons. Thus the image of the defining trace composite is the defining trace composite over $B$. On the unit, multiplication by $a$ is sent to multiplication by $\\rho(a)$, proving the scalar trace equality. The same calculation gives conjugacy invariance: for an isomorphism $w$, transport evaluation and coevaluation using $w$ and its dual; the adjacent $w^{-1}w$ cancel in the trace composite. Apply this to the intertwining isomorphisms $C_y,C_c$ and the perfect complexes of Steps 4–5 to obtain the local and global Frobenius trace equalities.",
    "uses": [
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "sk-d-trace"
@@ -137,7 +163,7 @@
    }
   },
   {
-   "text": "If the finite-ring trace formula over $A$ holds, apply the ring homomorphism $\\rho$ to that equality. Its left side becomes the global $B$-trace by Steps 6--7. Each summand on its right becomes the corresponding local $B$-trace by Steps 5--7. A ring homomorphism commutes with finite sums, and the indexing set of rational points is the same on both sides. This is precisely the trace-formula equality over $B$. This is an implication between the two equalities; the proof does not invoke the trace-formula theorem as an input to its own coefficient-compatibility lemma.",
+   "text": "If the finite-ring trace formula over $A$ holds, apply the ring homomorphism $\\rho$ to that equality. Its left side becomes the global $B$-trace by Steps 9--10. Each summand on its right becomes the corresponding local $B$-trace by Steps 7--10. A ring homomorphism commutes with finite sums, and the indexing set of rational points is the same on both sides. This is precisely the trace-formula equality over $B$. This is an implication between the two equalities; the proof does not invoke the trace-formula theorem as an input to its own coefficient-compatibility lemma.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -148,26 +174,21 @@
  ],
  "proof_deps": [
   "def-trf-frobenius-operators",
-  "def-weil-pbc-ambient-ringed-exchange",
-  "def-weil-pbc-proetale-modules",
-  "det-pbc-torsion-stalk-proetale-point",
   "det-pe-finite-local-systems-twist",
   "det-prop-scalar-six-compact-support",
   "det-prop-scalar-six-ctf",
-  "det-prop-scalar-six-direct-image",
   "det-prop-scalar-six-pullback",
-  "lem-cbc-proetale-extension-zero-base-change",
   "lem-pc-bounded-above-flat-kflat-site",
   "lem-pur-derived-change-of-rings",
   "lem-sc-coprime-torsion-decomposition",
+  "lem-trf-compact-support-coefficient-transport",
   "lem-trf-frobenius-open-square",
+  "lem-trf-point-complex-scalar-extension",
   "lem-trf-scheme-galois-coefficient-change",
   "lem-weil-frobenius-square-cartesian",
   "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-coefficient-exchange-mates",
   "lem-weil-pbc-finite-discrete-condensed-ring-constant",
   "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-  "lem-weil-pbc-finite-ring-constructible-derived-origin",
   "lem-weil-pbc-open-immersion-base-change",
   "lem-weil-pbc-proetale-derived-pullback-composition",
   "lem-weil-pbc-proper-base-change",
@@ -229,7 +250,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -264,8 +285,8 @@
   "date": "2026-10-17",
   "item": "thm-trf-finite-coefficient-map",
   "worker": "stage1",
-  "summary": "Replaced the earlier attempt with eight steps using existing nodes only. Made the joint Dctf input domain and perfect trace input explicit, retained arbitrary finite prime-to-p coefficient rings by primary decomposition, checked ordinary/condensed finite coefficient identification, compact-support and pullback comparisons, point perfectness, and the Frobenius exchange cube. Removed the circular/unneeded appeal to the finite-ring trace formula and the unsupported assertion that a projection-map definition is an invertibility theorem. See the signed report for STATEMENT-DISPUTED and source-domain corrections. The fixed finite-stage geometric operation package sk-d-six is named in the statement, as required by the unit conventions and realization route. Repair of returned E4/E5/C4: restored the exact scheme-Frobenius local transport, added the statement-only ambient kappa coefficient-coherence lemma, and wrote its two-square composition in Step 5. The independent repair reading supersedes the earlier acceptance of Galois-point transport. Maintainer reading (FIX): the global transport tau_c^m is now written as the exact m-factor composite of def-trf-frobenius-operators (1) with its point-transport factor, Step 6 states the iteration over the m factors, and Step 7, which uses a cited non-elementary theorem, is marked non-elementary.",
-  "blueprint": "Realizes the entire current main-20261015 proof paragraph and the unit’s sole proof step: coefficient preservation (Steps 1–2), compact-support/pullback comparison (Step 3), point complexes (Step 4), Weil/Frobenius compatibility (Steps 5–6), categorical trace transport (Step 7), and finite equality transport (Step 8).",
+  "summary": "Repaired returned long Steps 4–6 while keeping the statement, Lean record, primary decomposition, coefficient route and trace argument. Extracted the point-realization argument and compact-support exchange/transport argument as two statement-only nodes. Reused the existing independently split scheme–Galois coefficient-change lemma instead of redelivering its stale local copy. Wrote the local fixed-point square and iteration explicitly in short steps. No non-elementary proof step exceeds 2000 characters.",
+  "blueprint": "Current main-20261015 proof: coefficient stability and operation comparisons (Steps 1–3); point realization for compact cohomology and stalks (Steps 4–5); coefficient-natural strict Weil iterates and local Frobenius (Steps 6–7); compactification and global Frobenius exchange (Steps 8–9); categorical trace and finite equality transport (Steps 10–11). The two new nodes extract returned Steps 4 and 6; the reviewed scheme–Galois coefficient-change node supplies the hidden argument of returned Step 5.",
   "tool_uses": [
    {
     "node": "def-weil-pbc-ambient-ringed-exchange",
@@ -404,9 +425,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q81-fa07838e2",
-  "group": "Q81",
+  "reviewer": "NT-cc-NZ-09a148fea",
+  "group": "NZ",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-fa07838e2 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the main-20261015 item, the unit sk-p-trace-coeff, the statements of all 31 cited nodes and Stacks 0F6W (more-morphisms lemma-relative-frobenius-weakly-etale). The Dctf reading of the statement is required, not a weakening: for Z/l^2 -> F_l, Tor_i(F_l,F_l)=F_l for every i. The arbitrary finite prime-to-p ring quantifier and the trace law for all perfect P are kept, and no target is weakened. Steps 1-8 check. The primary decomposition supplies the l-primary hypotheses of scalar-six. Scalar-six-ctf (3) gives Dctf preservation; thm-sf-ctf-stability cannot, since it covers only A_{E,n}, so the declared tool use is justified. Scalar-six-compact-support replaces the non-invertible def-exchange-projection (a source error I confirm), and scalar-six-pullback (1) holds for any condensed ring map. The point realization is valid via the flat model, the etale trivialization on the point, exact sections and K-flatness. I checked the Step 5 algebra square by square: the b-square, the kappa-square and their composite match the actual tau of def-trf-frobenius-operators (2). Step 6 matches the definition in def-weil-frobenius-square-exchange (2) via lem-weil-pbc-coefficient-exchange-mates and scalar-six-direct-image (2). Step 7 (symmetric monoidal transport of the trace) and Step 8 are correct, and there is no cycle. New node lem-trf-scheme-galois-coefficient-change is statement-only and self-contained, with matching domains and codomains. It is true: the relative-Frobenius trivialization and the composition isomorphisms commute with tensoring by B on flat models. It is not a clause of the item, and grep found no duplicate among the kappa / absolute-Frobenius / adic-system nodes. Its searches are honest. No SGA is cited, and I accept all 26 tool_uses. FIX applied to the item: (1) the statement now defines tau^m_c as the exact m-factor composite RGamma_c(c_m^{-1}) o tau_{c,T^{m-1}K} o ... o tau_{c,K}, each factor being point transport followed by the compact-support exchange, as in def-trf-frobenius-operators (1); before, the m-th power square was ambiguous and the point-transport factor was missing (E5); (2) Step 6 now writes out the iteration over the m factors and the matching of c_m with c_{g^m}; (3) Step 7 is set to elementary=false because it uses a cited non-elementary theorem.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-09a148fea (reviewer sub-agent of L); spot-checked: Read the full delivery against the main-20261015 item statement and proof, unit sk-p-trace-coeff and the statement of every cited node. The item statement is unchanged and keeps every domain: arbitrary finite prime-to-p rings, Dctf, the specified semilinear Galois Frobenius and transports, and the trace law for all perfect P. No target is weakened and nothing cites SGA. Steps 1-11 check, including the Step 6 induction, the Step 7 b-square, kappa-square and composite against def-trf-frobenius-operators (2), and the Step 9 cancellation against def-trf-frobenius-operators (1). The blueprint's def-exchange-projection is non-invertible for nonflat B and is correctly replaced by scalar-six-compact-support. The blueprint's prop-trf-trace-formal-laws (3) covers only A_{E,n} and lies off the unit route, so Step 10 proves the trace law directly, which is legitimate. Both new nodes are statement-only, self-contained, true on small cases and not duplicates; this includes lem-sfb-connected-etale-perfect-constant, which gives perfectness but not the scalar comparison. Neither restates an item clause. Two small domain gaps are repaired in fixes/. (1) Step 7 applied C_y to Lh^*K_A with h=Phi^m, which is not shown to be Dctf; it now notes that C_y needs only L ybar^*N in Dctf(s,A) and that L ybar^*Lh^*K = L(h ybar)^*K. (2) The transport lemma's statement now says that L(g^m)^*K is in Dctf because g^m is an automorphism, so C_c(L(g^m)^*K) is defined. Accepted tool uses: det-prop-scalar-six-ctf, det-prop-scalar-six-compact-support, det-prop-scalar-six-pullback, det-pe-finite-local-systems-twist, lem-trf-frobenius-open-square. The other split_report tool_uses entries are stale or on route.; 2 file(s) fixed by the reviewer"
  }
 }
